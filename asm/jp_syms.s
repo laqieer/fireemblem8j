@@ -1789,3 +1789,184 @@
 	.global ProcScr_PrepScreenSpriteDraw
 	.set    ProcScr_PrepScreenSpriteDraw, 0x08A943F8
 
+	.global ProcScr_ViewCounter
+	.set    ProcScr_ViewCounter, 0x08A945CC
+
+	.global CloseHelpBox
+	.type   CloseHelpBox, %function
+	.thumb_func
+	.set    CloseHelpBox, 0x0808B2A4 + 1
+
+	.global GetUiHandPrevDisplayX
+	.type   GetUiHandPrevDisplayX, %function
+	.thumb_func
+	.set    GetUiHandPrevDisplayX, 0x0804F5F8 + 1
+
+	.global GetUiHandPrevDisplayY
+	.type   GetUiHandPrevDisplayY, %function
+	.thumb_func
+	.set    GetUiHandPrevDisplayY, 0x0804F604 + 1
+
+	.global StartHelpBox
+	.type   StartHelpBox, %function
+	.thumb_func
+	.set    StartHelpBox, 0x0808B06C + 1
+
+	.global gProcScr_PrepHelpboxListener
+	.set    gProcScr_PrepHelpboxListener, 0x08A945EC
+
+	.global CanUnitUseWeapon
+	.type   CanUnitUseWeapon, %function
+	.thumb_func
+	.set    CanUnitUseWeapon, 0x0801631C + 1
+
+	.global GetItemAttributes
+	.type   GetItemAttributes, %function
+	.thumb_func
+	.set    GetItemAttributes, 0x08017314 + 1
+
+	.global PutSpriteExt
+	.type   PutSpriteExt, %function
+	.thumb_func
+	.set    PutSpriteExt, 0x08005330 + 1
+
+	.global gObject_32x16
+	.set    gObject_32x16, 0x085B8D24
+
+	.global ProcScr_TacticianNameSelection
+	.set    ProcScr_TacticianNameSelection, 0x085D351C
+
+	.global LoadLegacyUiFrameGraphics
+	.type   LoadLegacyUiFrameGraphics, %function
+	.thumb_func
+	.set    LoadLegacyUiFrameGraphics, 0x0804F8E0 + 1
+
+	.global UnsetBmStLinkArenaFlag
+	.type   UnsetBmStLinkArenaFlag, %function
+	.thumb_func
+	.set    UnsetBmStLinkArenaFlag, 0x08042E0C + 1
+
+	.global InitTextFont
+	.type   InitTextFont, %function
+	.thumb_func
+	.set    InitTextFont, 0x08003BE8 + 1
+
+	.global Font_0
+	.set    Font_0, 0x0203DB60
+
+	.global ClearSioBG
+	.type   ClearSioBG, %function
+	.thumb_func
+	.set    ClearSioBG, 0x08042FC8 + 1
+
+	.global InitSioBG
+	.type   InitSioBG, %function
+	.thumb_func
+	.set    InitSioBG, 0x0804D0DC + 1
+
+	.global InitSpriteTextFont
+	.type   InitSpriteTextFont, %function
+	.thumb_func
+	.set    InitSpriteTextFont, 0x080044A4 + 1
+
+	.global InitSpriteText
+	.type   InitSpriteText, %function
+	.thumb_func
+	.set    InitSpriteText, 0x080044E0 + 1
+
+	.global SpriteText_DrawBackgroundExt
+	.type   SpriteText_DrawBackgroundExt, %function
+	.thumb_func
+	.set    SpriteText_DrawBackgroundExt, 0x080045BC + 1
+
+	.global Sio_SortPlayersByScore
+	.type   Sio_SortPlayersByScore, %function
+	.thumb_func
+	.set    Sio_SortPlayersByScore, 0x08049694 + 1
+
+	.global SioPostBattle_DrawRankingText
+	.type   SioPostBattle_DrawRankingText, %function
+	.thumb_func
+	.set    SioPostBattle_DrawRankingText, 0x0804550C + 1
+
+	.global SioPostBattle_StartMusicProc
+	.type   SioPostBattle_StartMusicProc, %function
+	.thumb_func
+	.set    SioPostBattle_StartMusicProc, 0x080455B0 + 1
+
+	.global Img_TacticianSelObj
+	.set    Img_TacticianSelObj, 0x085D6004
+
+	.global Img_LinkArenaPlayerBanners
+	.set    Img_LinkArenaPlayerBanners, 0x085D7CD8
+
+	.global Img_LinkArenaPlacementRanks
+	.set    Img_LinkArenaPlacementRanks, 0x085D737C
+
+	.global Pal_TacticianSelObj
+	.set    Pal_TacticianSelObj, 0x085D7EE8
+
+	.global Pal_LinkArenaPlacementRanks
+	.set    Pal_LinkArenaPlacementRanks, 0x085D8068
+
+	.global Img_LinkArenaActiveBannerFx
+	.set    Img_LinkArenaActiveBannerFx, 0x085D6FD0
+
+	.global Pal_LinkArenaActiveBannerFx
+	.set    Pal_LinkArenaActiveBannerFx, 0x085D80A8
+
+	.global Img_LinkArenaPostBattleBg
+	.set    Img_LinkArenaPostBattleBg, 0x085D9350
+
+	.global Pal_LinkArenaPostBattleBg
+	.set    Pal_LinkArenaPostBattleBg, 0x085DA9FC
+
+	.global Tsa_LinkArenaPostBattleBg
+	.set    Tsa_LinkArenaPostBattleBg, 0x085DAA7C
+
+	.global Font_Sio_0
+	.set    Font_Sio_0, 0x02000C60
+
+	.global Pal_Text
+	.set    Pal_Text, 0x085C7420
+
+	.global Texts_1
+	.set    Texts_1, 0x0203DB10
+
+	.global gSioSt
+	.set    gSioSt, 0x085D31E8
+
+	.global UpdateLinkArenaActiveBannerBgGlow
+	.type   UpdateLinkArenaActiveBannerBgGlow, %function
+	.thumb_func
+	.set    UpdateLinkArenaActiveBannerBgGlow, 0x0804E468 + 1
+
+	.global SioPostBattle_DrawRankingRowBar
+	.type   SioPostBattle_DrawRankingRowBar, %function
+	.thumb_func
+	.set    SioPostBattle_DrawRankingRowBar, 0x08045484 + 1
+
+	.global StartDrawLinkArenaRankSprites
+	.type   StartDrawLinkArenaRankSprites, %function
+	.thumb_func
+	.set    StartDrawLinkArenaRankSprites, 0x08045434 + 1
+
+	.global gUnk_Sio_16
+	.set    gUnk_Sio_16, 0x0203DD8C
+
+	.global m4aMPlayFadeOut
+	.type   m4aMPlayFadeOut, %function
+	.thumb_func
+	.set    m4aMPlayFadeOut, 0x080D508C + 1
+
+	.global gMPlayTable
+	.set    gMPlayTable, 0x082140B4
+
+	.global gSongTable
+	.set    gSongTable, 0x08214120
+
+	.global StartBgmExt
+	.type   StartBgmExt, %function
+	.thumb_func
+	.set    StartBgmExt, 0x08002434 + 1
+

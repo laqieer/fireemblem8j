@@ -85,3 +85,9 @@ A9DAA4	A9DAB4	src/cursor_hand.o(.data)	cursor_hand .data
 09D800	09DA14	src/prep_itemtrade.o(.text)	prep_itemtrade(run): PrepItemTrade_ApplyItemSwap, PrepItemTrade_DpadKeyHandler
 09E37C	09E6B4	src/prep_itemuse.o(.text)	prep_itemuse(run): DrawPrepScreenItemUseStatBars, DrawPrepScreenItemUseStatValues
 098E88	098FB0	src/prep_menuproc.o(.text)	prep_menuproc(run): PrepSpriteDraw_Loop, PrepSpriteDraw_OnEnd, PrepSpriteDraw_BlinkButtonStart...
+099FB0	09A110	src/prep_utils.o(.text)	prep_utils(run): ViewCounter_Loop, StartViewCounter, TryLockProc...
+0A2040	0A2074	src/prep_wm_sell.o(.text)	prep_wm_sell(run): WmSell_DrawSupplyDialogueSpriteText
+048178	0481F8	src/sio_event.o(.text)	sio_event(run): StartTacticianNameEntry, StartTacticianNameSelect
+04E754	04E790	src/sio_multiboot.o(.text)	sio_multiboot(run): MultiBootInit
+0455E0	0458D0	src/sio_postbattle.o(.text)	sio_postbattle(run): SioPostBattle_Init, SioPostBattle_Loop_Main, SioPostBattle_AwaitAPress...
+0DEDF2	0DEE1A	src/sio_postbattle.o(.rodata)	sio_postbattle .rodata
