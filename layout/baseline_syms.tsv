@@ -13,3 +13,5 @@ gIRQHandlers	03003090	data	IWRAM IRQ handler table (irq)
 PrintDebugStringToBG	08003750	thumb	debug text printer, called by fe3_dummy
 gBuildDateTime	080DC110	data	build date/time string (fe3_dummy)
 gYearProjectCreated	080DC12C	data	project-year string (fe3_dummy)
+gPlaySt	0202BCEC	data	global play state struct (bmphase, bmgold)
+GetUnit	08019108	thumb	unit-by-id lookup (bmphase)

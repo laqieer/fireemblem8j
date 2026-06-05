@@ -44,3 +44,11 @@
 	.global gYearProjectCreated
 	.set    gYearProjectCreated, 0x080DC12C
 
+	.global gPlaySt
+	.set    gPlaySt, 0x0202BCEC
+
+	.global GetUnit
+	.type   GetUnit, %function
+	.thumb_func
+	.set    GetUnit, 0x08019108 + 1
+

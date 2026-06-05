@@ -5,4 +5,6 @@
 000AE8	000B0C	src/fe3_dummy.o(.text)	fe3_dummy: PrintDebugBuildDateAndTime
 000B0C	000B60	src/irq.o(.text)	irq: StoreIRQToIRAM, DummyIRQRoutine, SetIRQHandler
 000B60	000CD8	src/rng.o(.text)	rng: NextRN..AdvanceGetLCGRNValue
+024C9C	024D98	src/bmphase.o(.text)	bmphase: phase/turn helpers
+024D98	024DF0	src/bmgold.o(.text)	bmgold: gold get/set
 0DC134	0DC144	src/rng.o(.rodata)	rng: InitRN seed table
