@@ -238,3 +238,12 @@ gUnk_80	03005388	data	classchg-postconfirm
 MusicProc4Exists	080029BC	thumb	classchg-postconfirm
 ClassChgExecPromotionReal	080D2AEC	thumb	classchg-postconfirm
 ClassChgPostConfirmWaitBanimEnd	080D2B70	thumb	classchg-postconfirm
+__muldi3	080D6760	thumb	code_80AC6AC
+gUisupport_1	02014FE4	data	colorfade
+UpdateAllPhaseHealingAIStatus	0803E5D0	thumb	cp_phase
+SetupUnitInventoryAIFlags	0803BFF4	thumb	cp_phase
+gAiItemConfigTable	080DD214	data	cp_phase
+gProcScr_CpOrder	085D1E64	data	cp_phase
+gProcScr_BerserkCpOrder	085D1E7C	data	cp_phase
+BG_GetMapBuffer	08001BC0	thumb	cursor_hand
+PutSprite	080052F0	thumb	cursor_hand

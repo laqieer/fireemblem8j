@@ -1,0 +1,132 @@
+#include "global.h"
+
+#include "bmlib.h"
+#include "ctc.h"
+#include "hardware.h"
+
+struct Unk2C
+{
+    /* 00 */ u8 a;
+    /* 01 */ u8 b;
+    /* 02 */ u8 c;
+    /* 03 */ u8 d;
+};
+
+struct CursorHandProc
+{
+    /* 00 */ PROC_HEADER;
+    /* 29 */ STRUCT_PAD(0x29, 0x2c);
+    /* 2C */ struct Unk2C unk_2c[4];
+    /* 3C */ u8 flags[4];
+    /* 40 */ s16 x[4];
+    /* 48 */ s16 y[4];
+};
+
+// clang-format off
+
+u16 CONST_DATA gSprite_UiCursorHand_0[] =
+{
+    1,
+    OAM0_SHAPE_16x16 + OAM0_Y(2), OAM1_SIZE_16x16, 0,
+};
+
+u16 CONST_DATA gSprite_UiCursorHand_1[] =
+{
+    1,
+    OAM0_SHAPE_16x16 + OAM0_Y(2), OAM1_SIZE_16x16, OAM2_CHR(0x6),
+};
+
+// clang-format on
+
+//! FE8U = 0x080AC844
+void BlitClippedTileMapToBg(u16 * buf, int xBase, int yBase, int bgIndex, int xOffset, int yOffset, int xMax, int yMax)
+{
+    int ix;
+    int iy;
+
+    u16 * bgBuf = BG_GetMapBuffer(bgIndex & 3);
+    buf = buf + TILEMAP_INDEX(xBase, yBase);
+
+    if (xOffset < 0)
+    {
+        xMax = xMax + xOffset;
+        buf = buf - xOffset;
+        xOffset = 0;
+    }
+
+    if (yOffset < 0)
+    {
+        yMax = yMax + yOffset;
+        buf = buf - yOffset * 0x20;
+        yOffset = 0;
+    }
+
+    for (iy = 0; yOffset + iy < 0x20 && iy < yMax; iy++)
+    {
+        for (ix = 0; xOffset + ix < 0x20 && ix < xMax; ix++)
+        {
+            bgBuf[TILEMAP_INDEX((xOffset + ix) & 0x1f, (yOffset + iy) & 0x1f)] = buf[TILEMAP_INDEX(ix, iy)];
+        }
+    }
+
+    return;
+}
+
+//! FE8U = 0x080AC904
+void UiCursorHand_Init(struct CursorHandProc * proc)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+    {
+        proc->flags[i] = 0;
+
+        proc->unk_2c[i].a = 0;
+        proc->unk_2c[i].b = 0;
+        proc->unk_2c[i].c = DISPLAY_WIDTH;
+        proc->unk_2c[i].d = DISPLAY_HEIGHT;
+    }
+
+    return;
+}
+
+//! FE8U = 0x080AC930
+void UiCursorHand_Loop(struct CursorHandProc * proc)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+    {
+        int x;
+        int y;
+
+        if (!(proc->flags[i] & 1))
+        {
+            continue;
+        }
+
+        x = proc->x[i];
+        y = proc->y[i];
+
+        if (x < proc->unk_2c[i].a || x >= proc->unk_2c[i].c)
+        {
+            continue;
+        }
+
+        if (y < proc->unk_2c[i].b || y >= proc->unk_2c[i].d)
+        {
+            continue;
+        }
+
+        if (proc->flags[i] & 2)
+        {
+            PutSprite(3, proc->x[i] - 12, proc->y[i], gSprite_UiCursorHand_1, 0);
+        }
+        else
+        {
+            PutSprite(3, proc->x[i] - 12, proc->y[i], gSprite_UiCursorHand_0, 0);
+        }
+    }
+
+    return;
+}

@@ -46,3 +46,8 @@
 BAB71C	BAB754	src/classchg-handler.o(.data)	classchg-handler .data
 0D2B94	0D2C48	src/classchg-postconfirm.o(.text)	classchg-postconfirm(run): ClassChgPostConfirmGetUnit, ExecClassChgReal
 BABAB4	BABAF4	src/classchg-postconfirm.o(.data)	classchg-postconfirm .data
+0B114C	0B12E4	src/code_80AC6AC.o(.text)	code_80AC6AC(run): InterpolateCubicSpline, InterpolateCubicSplineDerivative
+0B7134	0B7344	src/colorfade.o(.text)	colorfade(run): ColFadeOut_Loop, ColFadeIn_Loop
+039724	039800	src/cp_phase.o(.text)	cp_phase(run): AiPhaseInit, AiPhaseBerserkInit, AiPhaseCleanup
+0B12E4	0B1460	src/cursor_hand.o(.text)	cursor_hand(run): BlitClippedTileMapToBg, UiCursorHand_Init, UiCursorHand_Loop
+A9DAA4	A9DAB4	src/cursor_hand.o(.data)	cursor_hand .data

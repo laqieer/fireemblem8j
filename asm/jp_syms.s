@@ -1063,3 +1063,40 @@
 	.thumb_func
 	.set    ClassChgPostConfirmWaitBanimEnd, 0x080D2B70 + 1
 
+	.global __muldi3
+	.type   __muldi3, %function
+	.thumb_func
+	.set    __muldi3, 0x080D6760 + 1
+
+	.global gUisupport_1
+	.set    gUisupport_1, 0x02014FE4
+
+	.global UpdateAllPhaseHealingAIStatus
+	.type   UpdateAllPhaseHealingAIStatus, %function
+	.thumb_func
+	.set    UpdateAllPhaseHealingAIStatus, 0x0803E5D0 + 1
+
+	.global SetupUnitInventoryAIFlags
+	.type   SetupUnitInventoryAIFlags, %function
+	.thumb_func
+	.set    SetupUnitInventoryAIFlags, 0x0803BFF4 + 1
+
+	.global gAiItemConfigTable
+	.set    gAiItemConfigTable, 0x080DD214
+
+	.global gProcScr_CpOrder
+	.set    gProcScr_CpOrder, 0x085D1E64
+
+	.global gProcScr_BerserkCpOrder
+	.set    gProcScr_BerserkCpOrder, 0x085D1E7C
+
+	.global BG_GetMapBuffer
+	.type   BG_GetMapBuffer, %function
+	.thumb_func
+	.set    BG_GetMapBuffer, 0x08001BC0 + 1
+
+	.global PutSprite
+	.type   PutSprite, %function
+	.thumb_func
+	.set    PutSprite, 0x080052F0 + 1
+
