@@ -209,6 +209,13 @@ def port(name):
         if not l.startswith("#"):
             u, j = (int(x, 16) for x in l.split("\t")[:2])
             if u != j: mm[u] = j
+    # Also remap raw-hex ADDRESS literals (hardcoded US pointers in the source —
+    # graphics/window/data tables) to their JP address via addr_map. Only entries
+    # that actually moved; msg_map wins ties. Verify-or-revert keeps bad remaps out.
+    for l in open("layout/addr_map.tsv"):
+        if not l.startswith("#"):
+            u, j = (int(x, 16) for x in l.split("\t")[:2])
+            if u != j: mm.setdefault(u, j)
     src = open(f"src/{name}.c").read()
     new = _re.sub(r"0x[0-9A-Fa-f]+",
                   lambda m: f"0x{mm[int(m.group(0),16)]:X}" if int(m.group(0), 16) in mm else m.group(0),
