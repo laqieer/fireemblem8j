@@ -2469,3 +2469,175 @@
 	.global gUnk_Banim_Ekrbattle_10
 	.set    gUnk_Banim_Ekrbattle_10, 0x0201FB28
 
+	.global AnimScr_EfxLiveOBJ2
+	.set    AnimScr_EfxLiveOBJ2, 0x086A1D7C
+
+	.global DisablePaletteSync
+	.type   DisablePaletteSync, %function
+	.thumb_func
+	.set    DisablePaletteSync, 0x08001EF0 + 1
+
+	.global ProcScr_efxArrowOBJ
+	.set    ProcScr_efxArrowOBJ, 0x085FF340
+
+	.global AnimScr_ArrowCloseLeft
+	.set    AnimScr_ArrowCloseLeft, 0x08605008
+
+	.global AnimScr_ArrowCloseRight
+	.set    AnimScr_ArrowCloseRight, 0x08604F7C
+
+	.global AnimScr_ArrowFarLeft
+	.set    AnimScr_ArrowFarLeft, 0x08605018
+
+	.global AnimScr_ArrowFarRight
+	.set    AnimScr_ArrowFarRight, 0x08604F8C
+
+	.global Pal_TeonoOBJ
+	.set    Pal_TeonoOBJ, 0x08604784
+
+	.global Img_EfxArrowOBJ
+	.set    Img_EfxArrowOBJ, 0x08604ED4
+
+	.global SpellFx_Begin
+	.type   SpellFx_Begin, %function
+	.thumb_func
+	.set    SpellFx_Begin, 0x08056108 + 1
+
+	.global SpellFx_ClearBG1Position
+	.type   SpellFx_ClearBG1Position, %function
+	.thumb_func
+	.set    SpellFx_ClearBG1Position, 0x08056120 + 1
+
+	.global GetAnimRoundTypeAnotherSide
+	.type   GetAnimRoundTypeAnotherSide, %function
+	.thumb_func
+	.set    GetAnimRoundTypeAnotherSide, 0x0805B0B4 + 1
+
+	.global CheckRoundMiss
+	.type   CheckRoundMiss, %function
+	.thumb_func
+	.set    CheckRoundMiss, 0x0805AF28 + 1
+
+	.global NewEfxTeyariOBJ
+	.type   NewEfxTeyariOBJ, %function
+	.thumb_func
+	.set    NewEfxTeyariOBJ, 0x0805D628 + 1
+
+	.global ProcScr_efxTeyari
+	.set    ProcScr_efxTeyari, 0x085FF358
+
+	.global Pal_SpellJavelin
+	.set    Pal_SpellJavelin, 0x08605258
+
+	.global Img_SpellJavelin
+	.set    Img_SpellJavelin, 0x08605028
+
+	.global Pal_SpellJavelinCavalier
+	.set    Pal_SpellJavelinCavalier, 0x08605494
+
+	.global Img_SpellJavelinCavalier
+	.set    Img_SpellJavelinCavalier, 0x08605278
+
+	.global Pal_SpellJavelinSoldier
+	.set    Pal_SpellJavelinSoldier, 0x086056CC
+
+	.global Img_SpellJavelinSoldier
+	.set    Img_SpellJavelinSoldier, 0x086054B4
+
+	.global Pal_SpellJavelinPaladin
+	.set    Pal_SpellJavelinPaladin, 0x08605908
+
+	.global Img_SpellJavelinPaladin
+	.set    Img_SpellJavelinPaladin, 0x086056EC
+
+	.global Pal_SpellJavelinPegasusKnight
+	.set    Pal_SpellJavelinPegasusKnight, 0x08605B54
+
+	.global Img_SpellJavelinPegasusKnight
+	.set    Img_SpellJavelinPegasusKnight, 0x08605928
+
+	.global Pal_SpellJavelinFalcon
+	.set    Pal_SpellJavelinFalcon, 0x08605DBC
+
+	.global Img_SpellJavelinFalcon
+	.set    Img_SpellJavelinFalcon, 0x08605B74
+
+	.global Pal_SpellJavelinWyvernRider
+	.set    Pal_SpellJavelinWyvernRider, 0x08606014
+
+	.global Img_SpellJavelinWyvernRider
+	.set    Img_SpellJavelinWyvernRider, 0x08605DDC
+
+	.global Pal_SpellJavelinWyvernLord
+	.set    Pal_SpellJavelinWyvernLord, 0x08606298
+
+	.global Img_SpellJavelinWyvernLord
+	.set    Img_SpellJavelinWyvernLord, 0x08606034
+
+	.global Pal_SpellJavelinGenerial
+	.set    Pal_SpellJavelinGenerial, 0x08606528
+
+	.global Img_SpellJavelinGenerial
+	.set    Img_SpellJavelinGenerial, 0x086062B8
+
+	.global Pal_SpellJavelinUnk
+	.set    Pal_SpellJavelinUnk, 0x08606778
+
+	.global Img_SpellJavelinUnk
+	.set    Img_SpellJavelinUnk, 0x08606548
+
+	.global NewEfxFarAttackWithDistance
+	.type   NewEfxFarAttackWithDistance, %function
+	.thumb_func
+	.set    NewEfxFarAttackWithDistance, 0x080540C0 + 1
+
+	.global GetAnimAnotherSide
+	.type   GetAnimAnotherSide, %function
+	.thumb_func
+	.set    GetAnimAnotherSide, 0x0805B058 + 1
+
+	.global StartBattleAnimHitEffectsDefault
+	.type   StartBattleAnimHitEffectsDefault, %function
+	.thumb_func
+	.set    StartBattleAnimHitEffectsDefault, 0x08056220 + 1
+
+	.global GetEfxHpChangeType
+	.type   GetEfxHpChangeType, %function
+	.thumb_func
+	.set    GetEfxHpChangeType, 0x080748E4 + 1
+
+	.global CheckRoundCrit
+	.type   CheckRoundCrit, %function
+	.thumb_func
+	.set    CheckRoundCrit, 0x0805B00C + 1
+
+	.global NewEfxPierceCritical
+	.type   NewEfxPierceCritical, %function
+	.thumb_func
+	.set    NewEfxPierceCritical, 0x0806EA40 + 1
+
+	.global NewEfxNormalEffect
+	.type   NewEfxNormalEffect, %function
+	.thumb_func
+	.set    NewEfxNormalEffect, 0x0806EBA0 + 1
+
+	.global EfxPlayHittedSFX
+	.type   EfxPlayHittedSFX, %function
+	.thumb_func
+	.set    EfxPlayHittedSFX, 0x08074934 + 1
+
+	.global SpellFx_Finish
+	.type   SpellFx_Finish, %function
+	.thumb_func
+	.set    SpellFx_Finish, 0x08056114 + 1
+
+	.global SpellFx_WriteBgMap
+	.type   SpellFx_WriteBgMap, %function
+	.thumb_func
+	.set    SpellFx_WriteBgMap, 0x0805660C + 1
+
+	.global FillBGRect
+	.type   FillBGRect, %function
+	.thumb_func
+	.set    FillBGRect, 0x080732A0 + 1
+
