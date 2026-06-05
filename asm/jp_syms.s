@@ -2216,3 +2216,19 @@
 	.thumb_func
 	.set    ShouldCallEndEvent, 0x08085588 + 1
 
+	.global gSioResultRankings
+	.set    gSioResultRankings, 0x0203DC40
+
+	.global SioStrCpy
+	.type   SioStrCpy, %function
+	.thumb_func
+	.set    SioStrCpy, 0x08042D4C + 1
+
+	.global gUnk_Sio_9
+	.type   gUnk_Sio_9, %function
+	.thumb_func
+	.set    gUnk_Sio_9, 0x0203DAC0 + 1
+
+	.global gUnk_47
+	.set    gUnk_47, 0x03001838
+

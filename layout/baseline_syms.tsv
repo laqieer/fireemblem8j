@@ -513,3 +513,7 @@ RefreshAllies	08018E1C	thumb	eventinfo
 EventScr_SkirmishCommonEnd	08A71E1C	data	eventinfo
 CheckFlag	080860D0	thumb	eventinfo
 ShouldCallEndEvent	08085588	thumb	eventinfo
+gSioResultRankings	0203DC40	data	sio_bat
+SioStrCpy	08042D4C	thumb	sio_bat
+gUnk_Sio_9	0203DAC0	thumb	sio_bat
+gUnk_47	03001838	data	sio_battlemap
