@@ -2641,3 +2641,246 @@
 	.thumb_func
 	.set    FillBGRect, 0x080732A0 + 1
 
+	.global ProcScr_efxLokmsunaOBJ
+	.set    ProcScr_efxLokmsunaOBJ, 0x086036B4
+
+	.global AnimScr_EfxLokmsunaObjLeft
+	.set    AnimScr_EfxLokmsunaObjLeft, 0x087A89EC
+
+	.global AnimScr_EfxLokmsunaObjRight
+	.set    AnimScr_EfxLokmsunaObjRight, 0x087A8B10
+
+	.global Img_EfxLokmsunaObj
+	.set    Img_EfxLokmsunaObj, 0x087A874C
+
+	.global ProcScr_efxKingPika
+	.set    ProcScr_efxKingPika, 0x086036CC
+
+	.global NewEfxFlashUnit
+	.type   NewEfxFlashUnit, %function
+	.thumb_func
+	.set    NewEfxFlashUnit, 0x080554C4 + 1
+
+	.global gAnims
+	.set    gAnims, 0x02000000
+
+	.global ProcScr_efxFlashFX
+	.set    ProcScr_efxFlashFX, 0x086036E4
+
+	.global ProcScr_efxSongOBJ2
+	.set    ProcScr_efxSongOBJ2, 0x086036FC
+
+	.global AnimScr_EfxSongObj2
+	.set    AnimScr_EfxSongObj2, 0x08607BDC
+
+	.global Pal_EfxDanceObj
+	.set    Pal_EfxDanceObj, 0x086073AC
+
+	.global Img_EfxDanceObj
+	.set    Img_EfxDanceObj, 0x08607238
+
+	.global ProcScr_efxDanceOBJ
+	.set    ProcScr_efxDanceOBJ, 0x08603714
+
+	.global AnimScr_EfxDanceObj
+	.set    AnimScr_EfxDanceObj, 0x08607BAC
+
+	.global gEfxSpecalEffectExist
+	.set    gEfxSpecalEffectExist, 0x02017768
+
+	.global gpEkrBattleUnitLeft
+	.set    gpEkrBattleUnitLeft, 0x0203E184
+
+	.global IsWeaponLegency
+	.type   IsWeaponLegency, %function
+	.thumb_func
+	.set    IsWeaponLegency, 0x080598F8 + 1
+
+	.global gpEkrBattleUnitRight
+	.set    gpEkrBattleUnitRight, 0x0203E188
+
+	.global NewEfxSRankWeaponEffect
+	.type   NewEfxSRankWeaponEffect, %function
+	.thumb_func
+	.set    NewEfxSRankWeaponEffect, 0x0806FCA8 + 1
+
+	.global ProcScr_efxSpecalEffect
+	.set    ProcScr_efxSpecalEffect, 0x0860372C
+
+	.global gpProcEfxStatusUnits
+	.set    gpProcEfxStatusUnits, 0x0201776C
+
+	.global EfxPalFlashingInOut
+	.type   EfxPalFlashingInOut, %function
+	.thumb_func
+	.set    EfxPalFlashingInOut, 0x080738A4 + 1
+
+	.global GetEkrDragonStatusUnk1
+	.type   GetEkrDragonStatusUnk1, %function
+	.thumb_func
+	.set    GetEkrDragonStatusUnk1, 0x08072048 + 1
+
+	.global BanimSetFrontPaletteForDragon
+	.type   BanimSetFrontPaletteForDragon, %function
+	.thumb_func
+	.set    BanimSetFrontPaletteForDragon, 0x0807290C + 1
+
+	.global gpEfxUnitPaletteBackup
+	.set    gpEfxUnitPaletteBackup, 0x02000054
+
+	.global ProcScr_ekrsubAnimeEmulator
+	.set    ProcScr_ekrsubAnimeEmulator, 0x087A8F64
+
+	.global AnimDisplay
+	.type   AnimDisplay, %function
+	.thumb_func
+	.set    AnimDisplay, 0x08004F3C + 1
+
+	.global gAnimSpriteRotScalePosX
+	.set    gAnimSpriteRotScalePosX, 0x080E67B4
+
+	.global gAnimSpriteRotScalePosY
+	.set    gAnimSpriteRotScalePosY, 0x080E67D4
+
+	.global EfxTmCpyExt
+	.type   EfxTmCpyExt, %function
+	.thumb_func
+	.set    EfxTmCpyExt, 0x08073418 + 1
+
+	.global gTmB_Banim
+	.set    gTmB_Banim, 0x0201D428
+
+	.global GetBattleAnimArenaFlag
+	.type   GetBattleAnimArenaFlag, %function
+	.thumb_func
+	.set    GetBattleAnimArenaFlag, 0x0805BDCC + 1
+
+	.global DoM4aSongNumStop
+	.type   DoM4aSongNumStop, %function
+	.thumb_func
+	.set    DoM4aSongNumStop, 0x08073F28 + 1
+
+	.global NewEkrBattleDeamon
+	.type   NewEkrBattleDeamon, %function
+	.thumb_func
+	.set    NewEkrBattleDeamon, 0x08050AD4 + 1
+
+	.global AnimClearAll
+	.type   AnimClearAll, %function
+	.thumb_func
+	.set    AnimClearAll, 0x08004DC0 + 1
+
+	.global GetBanimInitPosReal
+	.type   GetBanimInitPosReal, %function
+	.thumb_func
+	.set    GetBanimInitPosReal, 0x08052E7C + 1
+
+	.global gEkrInitPosReal
+	.set    gEkrInitPosReal, 0x02017744
+
+	.global SetMainUpdateRoutine
+	.type   SetMainUpdateRoutine, %function
+	.thumb_func
+	.set    SetMainUpdateRoutine, 0x080012D8 + 1
+
+	.global MainUpdate_0
+	.type   MainUpdate_0, %function
+	.thumb_func
+	.set    MainUpdate_0, 0x08056BF0 + 1
+
+	.global ProcScr_efxStatusUnit
+	.set    ProcScr_efxStatusUnit, 0x085E3C14
+
+	.global gProc_ekrTogiInit
+	.set    gProc_ekrTogiInit, 0x085E400C
+
+	.global InitOam
+	.type   InitOam, %function
+	.thumb_func
+	.set    InitOam, 0x0800204C + 1
+
+	.global EfxClearScreenFx
+	.type   EfxClearScreenFx, %function
+	.thumb_func
+	.set    EfxClearScreenFx, 0x080529BC + 1
+
+	.global UpdateBanimFrame
+	.type   UpdateBanimFrame, %function
+	.thumb_func
+	.set    UpdateBanimFrame, 0x0805A78C + 1
+
+	.global NewEkrGauge
+	.type   NewEkrGauge, %function
+	.thumb_func
+	.set    NewEkrGauge, 0x08051C2C + 1
+
+	.global NewEkrDispUP
+	.type   NewEkrDispUP, %function
+	.thumb_func
+	.set    NewEkrDispUP, 0x080527BC + 1
+
+	.global NewEkrBattle
+	.type   NewEkrBattle, %function
+	.thumb_func
+	.set    NewEkrBattle, 0x08050B48 + 1
+
+	.global gEkrInitialHitSide
+	.set    gEkrInitialHitSide, 0x0203E0FC
+
+	.global Pal_ArenaBattleBg_A
+	.set    Pal_ArenaBattleBg_A, 0x085E91C4
+
+	.global LZ77UnCompVram
+	.type   LZ77UnCompVram, %function
+	.thumb_func
+	.set    LZ77UnCompVram, 0x080D6390 + 1
+
+	.global LZ77UnCompWram
+	.type   LZ77UnCompWram, %function
+	.thumb_func
+	.set    LZ77UnCompWram, 0x080D6394 + 1
+
+	.global Img_ArenaBattleBg
+	.set    Img_ArenaBattleBg, 0x085E63B8
+
+	.global Tsa_ArenaBattleBg
+	.set    Tsa_ArenaBattleBg, 0x085E8A24
+
+	.global NewEkrTogiColor
+	.type   NewEkrTogiColor, %function
+	.thumb_func
+	.set    NewEkrTogiColor, 0x0805C0F0 + 1
+
+	.global EndEkrTogiColor
+	.type   EndEkrTogiColor, %function
+	.thumb_func
+	.set    EndEkrTogiColor, 0x0805C124 + 1
+
+	.global gProc_ekrTogiEnd
+	.set    gProc_ekrTogiEnd, 0x085E403C
+
+	.global EndEkrBattleDeamon
+	.type   EndEkrBattleDeamon, %function
+	.thumb_func
+	.set    EndEkrBattleDeamon, 0x08050B00 + 1
+
+	.global EndEkrGauge
+	.type   EndEkrGauge, %function
+	.thumb_func
+	.set    EndEkrGauge, 0x08051EA0 + 1
+
+	.global SetInterrupt_LCDVBlank
+	.type   SetInterrupt_LCDVBlank, %function
+	.thumb_func
+	.set    SetInterrupt_LCDVBlank, 0x08001208 + 1
+
+	.global OnMain
+	.type   OnMain, %function
+	.thumb_func
+	.set    OnMain, 0x08015318 + 1
+
+	.global OnVBlank
+	.type   OnVBlank, %function
+	.thumb_func
+	.set    OnVBlank, 0x080152C8 + 1
+
