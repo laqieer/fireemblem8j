@@ -34,3 +34,9 @@
 014CEC	014F78	src/bmlib-hblank.o(.text)	bmlib-hblank(run): HBlank_BgVerticalScroll, StartBgVerticalScroll, EndBgVerticalScroll...
 0B3720	0B3760	src/bonusclaim_helpbox.o(.text)	bonusclaim_helpbox(run): CopyTextChar, ClearPrimaryHBlankHandler
 08BA30	08BB14	src/chapter_title.o(.text)	chapter_title(run): DrawChapterTitleBG, DrawChapterTitleBGTsa, GetChapterTitleExtra...
+021894	021A2C	src/eventwarpfx.o(.text)	eventwarpfx(run): ProcEventWrapAnim_Init, ProcEventWrapAnim_Loop, ProcEventWrapAnim_End
+5C38C8	5C3950	src/eventwarpfx.o(.data)	eventwarpfx .data
+01DF3C	01E150	src/fogmap.o(.text)	fogmap(run): UpdateMapViewWithFog, FastUpdateMapViewWithFog, FillWarpRangeMap
+088E38	088F0C	src/mural_background.o(.text)	mural_background(run): BackgroundSlide_Loop, StartMuralBackground
+08FDCC	08FE1C	src/sioerror.o(.text)	sioerror(run): OnVBlank_SioError, OnMain_SioErrorWait
+0C8038	0C8130	src/worldmap_automu.o(.text)	worldmap_automu(run): GmapAutoMu_3, GmapAutoMu_4, GmapAutoMu_5

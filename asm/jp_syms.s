@@ -790,3 +790,144 @@
 	.global gWMMonsterSpawnLocations
 	.set    gWMMonsterSpawnLocations, 0x081F6614
 
+	.global SetBlendTargetB
+	.type   SetBlendTargetB, %function
+	.thumb_func
+	.set    SetBlendTargetB, 0x08001E5C + 1
+
+	.global Img_EventWarp
+	.set    Img_EventWarp, 0x085CF274
+
+	.global Pal_EventWarp
+	.set    Pal_EventWarp, 0x085CF9BC
+
+	.global Tsa_EventWarp
+	.set    Tsa_EventWarp, 0x085CF9DC
+
+	.global gUiTmScratchA
+	.set    gUiTmScratchA, 0x02003D2C
+
+	.global gBG0TilemapBuffer
+	.set    gBG0TilemapBuffer, 0x02022CA8
+
+	.global TileMap_CopyRect
+	.type   TileMap_CopyRect, %function
+	.thumb_func
+	.set    TileMap_CopyRect, 0x080DC0F4 + 1
+
+	.global RenderBmMapOnBg2
+	.type   RenderBmMapOnBg2, %function
+	.thumb_func
+	.set    RenderBmMapOnBg2, 0x08019994 + 1
+
+	.global NewBMXFADE
+	.type   NewBMXFADE, %function
+	.thumb_func
+	.set    NewBMXFADE, 0x0801DA28 + 1
+
+	.global BmMapFill
+	.type   BmMapFill, %function
+	.thumb_func
+	.set    BmMapFill, 0x080194BC + 1
+
+	.global SetWorkingBmMap
+	.type   SetWorkingBmMap, %function
+	.thumb_func
+	.set    SetWorkingBmMap, 0x0801B668 + 1
+
+	.global GetUnitMagBy2Range
+	.type   GetUnitMagBy2Range, %function
+	.thumb_func
+	.set    GetUnitMagBy2Range, 0x08018730 + 1
+
+	.global MapAddInBoundedRange
+	.type   MapAddInBoundedRange, %function
+	.thumb_func
+	.set    MapAddInBoundedRange, 0x0801B674 + 1
+
+	.global CanUnitCrossTerrain
+	.type   CanUnitCrossTerrain, %function
+	.thumb_func
+	.set    CanUnitCrossTerrain, 0x08019174 + 1
+
+	.global gBmMapMovement
+	.set    gBmMapMovement, 0x0202E4DC
+
+	.global gBmMapRange
+	.set    gBmMapRange, 0x0202E4E0
+
+	.global gBmMapFog
+	.set    gBmMapFog, 0x0202E4E4
+
+	.global GetBackgroundTileDataOffset
+	.type   GetBackgroundTileDataOffset, %function
+	.thumb_func
+	.set    GetBackgroundTileDataOffset, 0x08000F3C + 1
+
+	.global gBG3TilemapBuffer
+	.set    gBG3TilemapBuffer, 0x020244A8
+
+	.global Pal_CommGameBgScreenInShop
+	.set    Pal_CommGameBgScreenInShop, 0x08BB059C
+
+	.global Img_CommGameBgScreen
+	.set    Img_CommGameBgScreen, 0x08BABE04
+
+	.global ProcScr_SlidingWallBg
+	.set    ProcScr_SlidingWallBg, 0x08A7279C
+
+	.global FlushLCDControl
+	.type   FlushLCDControl, %function
+	.thumb_func
+	.set    FlushLCDControl, 0x08000E4C + 1
+
+	.global FlushBackgrounds
+	.type   FlushBackgrounds, %function
+	.thumb_func
+	.set    FlushBackgrounds, 0x080010FC + 1
+
+	.global FlushTiles
+	.type   FlushTiles, %function
+	.thumb_func
+	.set    FlushTiles, 0x08001FD8 + 1
+
+	.global m4aSoundVSync
+	.type   m4aSoundVSync, %function
+	.thumb_func
+	.set    m4aSoundVSync, 0x080D4814 + 1
+
+	.global m4aSoundMain
+	.type   m4aSoundMain, %function
+	.thumb_func
+	.set    m4aSoundMain, 0x080D4EE8 + 1
+
+	.global UpdateKeyStatus
+	.type   UpdateKeyStatus, %function
+	.thumb_func
+	.set    UpdateKeyStatus, 0x0800139C + 1
+
+	.global SoftReset
+	.type   SoftReset, %function
+	.thumb_func
+	.set    SoftReset, 0x080D63AC + 1
+
+	.global VBlankIntrWait
+	.type   VBlankIntrWait, %function
+	.thumb_func
+	.set    VBlankIntrWait, 0x080D63D8 + 1
+
+	.global GmMu_StartMoveBetweenNodes
+	.type   GmMu_StartMoveBetweenNodes, %function
+	.thumb_func
+	.set    GmMu_StartMoveBetweenNodes, 0x080C2C9C + 1
+
+	.global GmMu_StartMoveToPosition
+	.type   GmMu_StartMoveToPosition, %function
+	.thumb_func
+	.set    GmMu_StartMoveToPosition, 0x080C2D8C + 1
+
+	.global GmMu_IsMoving
+	.type   GmMu_IsMoving, %function
+	.thumb_func
+	.set    GmMu_IsMoving, 0x080C2F14 + 1
+
