@@ -2099,3 +2099,92 @@
 	.thumb_func
 	.set    Checksum16, 0x080A7740 + 1
 
+	.global GetStringTextCenteredPos
+	.type   GetStringTextCenteredPos, %function
+	.thumb_func
+	.set    GetStringTextCenteredPos, 0x08003EAC + 1
+
+	.global Text_InsertDrawString
+	.type   Text_InsertDrawString, %function
+	.thumb_func
+	.set    Text_InsertDrawString, 0x080043B8 + 1
+
+	.global gParticlesFx_7
+	.set    gParticlesFx_7, 0x085CFC50
+
+	.global gParticlesFx_6
+	.set    gParticlesFx_6, 0x085CFBA0
+
+	.global GetTextDisplaySpeed
+	.type   GetTextDisplaySpeed, %function
+	.thumb_func
+	.set    GetTextDisplaySpeed, 0x08030BE4 + 1
+
+	.global GetCgTextBoxDimensions
+	.type   GetCgTextBoxDimensions, %function
+	.thumb_func
+	.set    GetCgTextBoxDimensions, 0x080916FC + 1
+
+	.global PutTalkBubbleTm
+	.type   PutTalkBubbleTm, %function
+	.thumb_func
+	.set    PutTalkBubbleTm, 0x08008564 + 1
+
+	.global PutTalkBubbleTail
+	.type   PutTalkBubbleTail, %function
+	.thumb_func
+	.set    PutTalkBubbleTail, 0x080083DC + 1
+
+	.global CgText_AdjustBoxPosition
+	.type   CgText_AdjustBoxPosition, %function
+	.thumb_func
+	.set    CgText_AdjustBoxPosition, 0x080916AC + 1
+
+	.global StartParallelWorker
+	.type   StartParallelWorker, %function
+	.thumb_func
+	.set    StartParallelWorker, 0x080B1D98 + 1
+
+	.global CgText_ClearSpriteText
+	.type   CgText_ClearSpriteText, %function
+	.thumb_func
+	.set    CgText_ClearSpriteText, 0x08091590 + 1
+
+	.global CgText_Display
+	.type   CgText_Display, %function
+	.thumb_func
+	.set    CgText_Display, 0x0809189C + 1
+
+	.global SetSecondaryHBlankHandler
+	.type   SetSecondaryHBlankHandler, %function
+	.thumb_func
+	.set    SetSecondaryHBlankHandler, 0x08001D3C + 1
+
+	.global GetFaceDisplayBitsById
+	.type   GetFaceDisplayBitsById, %function
+	.thumb_func
+	.set    GetFaceDisplayBitsById, 0x080056B0 + 1
+
+	.global SetFaceDisplayBitsById
+	.type   SetFaceDisplayBitsById, %function
+	.thumb_func
+	.set    SetFaceDisplayBitsById, 0x08005694 + 1
+
+	.global EndCgTextInterpreter
+	.type   EndCgTextInterpreter, %function
+	.thumb_func
+	.set    EndCgTextInterpreter, 0x080922C8 + 1
+
+	.global StartFaceFadeOut
+	.type   StartFaceFadeOut, %function
+	.thumb_func
+	.set    StartFaceFadeOut, 0x08005E3C + 1
+
+	.global gProcScr_E_FACE
+	.set    gProcScr_E_FACE, 0x085B8EEC
+
+	.global SetDialogueSkipEvBit
+	.type   SetDialogueSkipEvBit, %function
+	.thumb_func
+	.set    SetDialogueSkipEvBit, 0x0800D6A8 + 1
+

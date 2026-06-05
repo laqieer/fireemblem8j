@@ -9,3 +9,4 @@
 0203A818	ewram	src/bmcontainer.o(ewram_data)	bmcontainer
 0203E788	ewram	src/chapter_title.o(ewram_data)	chapter_title
 0203AA00	ewram	src/cp_phase.o(ewram_data)	cp_phase
+0203E828	ewram	src/cgtext.o(ewram_data)	cgtext
