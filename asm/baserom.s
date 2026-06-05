@@ -3,7 +3,7 @@
 @ build stays byte-perfect. Edit layout/carved_rom.tsv, not this file.
 
 	.section .gap_0, "ax", %progbits
-	.incbin "baserom.gba", 0xC0, 0xA4C	@ 0x0000C0..0x000B0C
+	.incbin "baserom.gba", 0xC0, 0xA28	@ 0x0000C0..0x000AE8
 
 	.section .gap_1, "ax", %progbits
 	.incbin "baserom.gba", 0xCD8, 0xDB45C	@ 0x000CD8..0x0DC134

@@ -10,3 +10,6 @@ CpuFastSet	080D636C	thumb	libc CpuFastSet wrapper, called by irq StoreIRQToIRAM
 IrqMain	080000FC	data	ARM IRQ entry, address copied to IWRAM by irq
 IntrMain_Buffer	03004100	data	IWRAM copy of the IRQ dispatcher (irq)
 gIRQHandlers	03003090	data	IWRAM IRQ handler table (irq)
+PrintDebugStringToBG	08003750	thumb	debug text printer, called by fe3_dummy
+gBuildDateTime	080DC110	data	build date/time string (fe3_dummy)
+gYearProjectCreated	080DC12C	data	project-year string (fe3_dummy)

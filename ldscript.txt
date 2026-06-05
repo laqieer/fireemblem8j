@@ -25,6 +25,7 @@ SECTIONS
     {
         asm/rom_header.o(.text);
         asm/baserom.o(.gap_0);
+        src/fe3_dummy.o(.text);
         src/irq.o(.text);
         src/rng.o(.text);
         asm/baserom.o(.gap_1);

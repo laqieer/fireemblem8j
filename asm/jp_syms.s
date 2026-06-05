@@ -33,3 +33,14 @@
 	.global gIRQHandlers
 	.set    gIRQHandlers, 0x03003090
 
+	.global PrintDebugStringToBG
+	.type   PrintDebugStringToBG, %function
+	.thumb_func
+	.set    PrintDebugStringToBG, 0x08003750 + 1
+
+	.global gBuildDateTime
+	.set    gBuildDateTime, 0x080DC110
+
+	.global gYearProjectCreated
+	.set    gYearProjectCreated, 0x080DC12C
+
