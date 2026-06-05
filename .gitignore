@@ -36,3 +36,6 @@ cscope.out
 
 # Generated progress report
 /progress.txt
+
+# WIP: JP text dump (encoding not yet clean)
+/texts/jp_messages.txt
