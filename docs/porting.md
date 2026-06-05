@@ -33,7 +33,11 @@ address; `layout/us_jp_funcmap.tsv` maps function *names*.
 4. **Resolve external references.** Compile, then `arm-none-eabi-nm -u src/X.o`.
    For each undefined symbol:
    * a function → JP address from `us_jp_funcmap.tsv`
-   * a data global → JP address from `addr_map.tsv` (look up its US address)
+   * a data global → JP address from `addr_map.tsv` (look up its US address).
+     **Check the `votes`/`conflicts` columns**: a single-vote entry (often from
+     one masked match) can be wrong — sanity-check the region (an IWRAM `0x03..`
+     global should not map to an EWRAM `0x02..` or an odd address). Verify
+     low-confidence data addresses by disassembling a JP function that uses them.
    * libgcc/libc helper (`__divsi3`, `memcpy`, …) → from `us_jp_funcmap.tsv`
    Add any not-yet-present ones to `layout/baseline_syms.tsv`
    (`name  jp_addr  thumb|arm|data`). **Typed Thumb is essential** — it makes the
