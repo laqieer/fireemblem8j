@@ -118,7 +118,18 @@ def port(name):
             sym_sec[p[-1]] = (p[-3], int(p[0], 16))
     undef = set(sh(f"arm-none-eabi-nm -u {obj}").stdout.split()) - {"U"}
 
-    new_syms, ram = {}, {}
+    secsize = {}
+    for l in sh(f"arm-none-eabi-size -A {obj}").stdout.splitlines():
+        p = l.split()
+        if len(p) == 3 and p[1].isdigit():
+            secsize[p[0]] = int(p[1])
+    otext = subprocess.run(["arm-none-eabi-objcopy", "-O", "binary", "-j", ".text", obj, "/dev/stdout"],
+                           capture_output=True).stdout  # subset .text (addends live here pre-link)
+
+    def enc(v):  # exact JP pointer value -> (addr, type) for gen_layout
+        return (v & ~1, "thumb") if v & 1 else (v, "data")
+
+    new_syms, ram, romdata = {}, {}, {}
     sec = None
     for l in sh(f"arm-none-eabi-objdump -r {obj}").stdout.splitlines():
         if "RELOCATION RECORDS FOR [" in l:
@@ -127,19 +138,49 @@ def port(name):
         if sec != ".text" or len(p) < 3 or not all(ch in "0123456789abcdef" for ch in p[0]):
             continue
         off, typ, sym = int(p[0], 16), p[1], p[2]
+        # ROM data referenced via the section symbol (.rodata/.data + addend) —
+        # the addend (offset into the section) is the pre-link value in our .text.
+        if typ == "R_ARM_ABS32" and sym in (".rodata", ".data"):
+            addend = int.from_bytes(otext[off:off+4], "little")
+            romdata.setdefault(sym, int.from_bytes(jp[base+off:base+off+4], "little") - addend)
+            continue
         if sym.startswith("."):
             continue
         ss = sym_sec.get(sym)
         if ss and ss[0] in ("ewram_data", ".bss", "bss", "sbss", "*COM*"):
             ram.setdefault(ss[0], int.from_bytes(jp[base+off:base+off+4], "little") - ss[1])
+        elif typ == "R_ARM_ABS32" and ss and ss[0] in (".data", ".rodata"):
+            # a ROM data section the run references via a named symbol
+            romdata.setdefault(ss[0], int.from_bytes(jp[base+off:base+off+4], "little") - ss[1])
         elif typ == "R_ARM_ABS32" and sym in undef:
-            new_syms[sym] = (int.from_bytes(jp[base+off:base+off+4], "little"), "data")
+            new_syms[sym] = enc(int.from_bytes(jp[base+off:base+off+4], "little"))
         elif typ == "R_ARM_THM_CALL" and sym in undef:
             new_syms[sym] = (fmap.get(sym) or (bl(off) & ~1), "thumb")
+
+    # resolve internal pointer relocations of each carved ROM data section
+    data_carves = []
+    for dsec, dbase in romdata.items():
+        size = secsize.get(dsec, 0)
+        if not size:
+            continue
+        data_carves.append((dbase - 0x08000000, size, dsec))
+        cur = None
+        for l in sh(f"arm-none-eabi-objdump -r {obj}").stdout.splitlines():
+            if "RELOCATION RECORDS FOR [" in l:
+                cur = l.split("[")[1].split("]")[0]; continue
+            p = l.split()
+            if cur != dsec or len(p) < 3 or not all(ch in "0123456789abcdef" for ch in p[0]):
+                continue
+            off, typ, sym = int(p[0], 16), p[1], p[2]
+            if typ == "R_ARM_ABS32" and sym in undef:
+                new_syms.setdefault(sym, enc(int.from_bytes(
+                    jp[dbase - 0x08000000 + off:dbase - 0x08000000 + off + 4], "little")))
 
     have = have_syms()
     with open("layout/carved_rom.tsv", "a") as f:
         f.write(f"{base&0xFFFFFF:06X}\t{int(end,16)&0xFFFFFF:06X}\tsrc/{name}.o(.text)\t{name}(run): {', '.join(funcs[:3])}{'...' if len(funcs)>3 else ''}\n")
+        for dbase, size, dsec in data_carves:
+            f.write(f"{dbase:06X}\t{dbase+size:06X}\tsrc/{name}.o({dsec})\t{name} {dsec}\n")
     if ram:
         b = min(ram.values()); region = "iwram" if (b >> 24) == 3 else "ewram"
         specs = " ".join(f"src/{name}.o({s})" for s in ram)
@@ -155,6 +196,13 @@ def port(name):
         print(f"{name}: OK — run {start}..{end} ({len(funcs)} fns, {len(adds)} new syms{', +ram' if ram else ''})")
         return True
     print(f"{name}: FAILED make compare — reverting")
+    if os.environ.get("PORTRUN_DEBUG"):
+        sh("make fireemblem8.gba")
+        b = open("fireemblem8.gba", "rb").read()
+        d = [i for i in range(len(jp)) if b[i] != jp[i]]
+        if d:
+            print(f"  diff: {len(d)} bytes, first @ {d[0]:#x} (run .text {0x08000000+base:#x}..{end}; "
+                  f"romdata {[(hex(0x08000000+x),hex(s)) for x,s,_ in data_carves]})")
     for p, c in snap.items():
         open(p, "w").write(c)
     os.remove(f"src/{name}.c"); sh("make layout")
