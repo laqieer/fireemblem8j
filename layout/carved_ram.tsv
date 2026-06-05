@@ -1,0 +1,5 @@
+# RAM-resident (NOLOAD) sections of decompiled objects. Not emitted to the ROM,
+# but their symbols must resolve to the JP addresses that decompiled .text
+# literals reference. Columns: addr region sections note
+# region is one of: iwram ewram. sections may list several space-separated specs.
+03000000	iwram	src/rng.o(.bss) src/rng.o(COMMON)	rng: gRNSeeds, gLCGRNValue

@@ -69,7 +69,12 @@ all: $(ROM)
 compare: $(ROM)
 	$(SHASUM) -c checksum.sha1
 
-.PHONY: all compare clean
+# Regenerate the carve glue (asm/baserom.s, ldscript.txt, asm/jp_syms.s) from the
+# manifests in layout/ after adding a decompiled translation unit.
+layout:
+	$(PYTHON) scripts/gen_layout.py
+
+.PHONY: all compare clean layout
 
 asm/baserom.o: baserom.gba
 
