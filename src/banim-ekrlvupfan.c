@@ -1,0 +1,28 @@
+
+
+#include "global.h"
+#include "proc.h"
+#include "anime.h"
+#include "ekrbattle.h"
+#include "ekrlevelup.h"
+#include "soundwrapper.h"
+#include "constants/songs.h"
+
+void NewEkrLvlupFan(void)
+{
+    struct ProcEkrLvupFan *proc = Proc_Start(ProcScr_ekrLvupFan, PROC_TREE_3);
+    proc->timer = 0;
+    Sound_SetSEVolume(0x80);
+}
+
+void EkrLvupFanMain(struct ProcEkrLvupFan *proc)
+{
+    int timer = ++proc->timer;
+    if (timer == 0x10) {
+        EfxPlaySE(SONG_5B, 0x100);
+        M4aPlayWithPostionCtrl(SONG_5B, 0x78, 0);
+    } else if (timer == 0x74) {
+        Sound_SetSEVolume(0x100);
+        Proc_Break(proc);
+    }
+}

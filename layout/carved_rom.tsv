@@ -19,3 +19,11 @@
 028668	028720	src/bmreliance.o(.text)	bmreliance(run): GetCharacterAffinityIcon, GetSupportLevelUiChar, GetAffinityName...
 0DC948	0DC96C	src/bmreliance.o(.rodata)	bmreliance .rodata
 08C4F0	08C6D4	src/helpbox.o(.text)	helpbox(run): StartHelpBoxAtPos, StartHelpBoxExtInternal, CloseHelpBox_bug...
+07EE14	07EE48	src/mapanim_eventbattle.o(.text)	mapanim_eventbattle(run): MapEventBattle_SetUpHitData
+051B18	051B74	src/banim-ekrlvupfan.o(.text)	banim-ekrlvupfan(run): NewEkrLvlupFan, EkrLvupFanMain
+0222AC	022348	src/minefx.o(.text)	minefx(run): ProcMineFxFunc, StartMineAnim
+5C3A40	5C3A58	src/minefx.o(.data)	minefx .data
+009088	0090F0	src/sprite-animfx.o(.text)	sprite-animfx(run): EventSpriteAnim_Init
+01D9B8	01DA28	src/bmxfade.o(.text)	bmxfade(run): bmxfade_loop, Destruct6CBMXFADE
+012C54	012CEC	src/eventfx-earthquake.o(.text)	eventfx-earthquake(run): EventEarthQuakeMain
+01D838	01D8E0	src/koido.o(.text)	koido(run): GetSomeFacingDirection, Make6CMOVEUNITForUnitBeingRescued, Loop6C_KOIDO

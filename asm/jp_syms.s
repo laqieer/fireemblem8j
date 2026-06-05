@@ -553,3 +553,136 @@
 	.thumb_func
 	.set    GetHelpBoxItemInfoKind_bug, 0x0808C764 + 1
 
+	.global Proc_Goto
+	.type   Proc_Goto, %function
+	.thumb_func
+	.set    Proc_Goto, 0x08002E74 + 1
+
+	.global gManimSt
+	.set    gManimSt, 0x0203E1EC
+
+	.global MapAnim_AdvanceBattleRound
+	.type   MapAnim_AdvanceBattleRound, %function
+	.thumb_func
+	.set    MapAnim_AdvanceBattleRound, 0x0807CBF0 + 1
+
+	.global Sound_SetSEVolume
+	.type   Sound_SetSEVolume, %function
+	.thumb_func
+	.set    Sound_SetSEVolume, 0x0800223C + 1
+
+	.global ProcScr_ekrLvupFan
+	.set    ProcScr_ekrLvupFan, 0x085E3580
+
+	.global EfxPlaySE
+	.type   EfxPlaySE, %function
+	.thumb_func
+	.set    EfxPlaySE, 0x08073E74 + 1
+
+	.global M4aPlayWithPostionCtrl
+	.type   M4aPlayWithPostionCtrl, %function
+	.thumb_func
+	.set    M4aPlayWithPostionCtrl, 0x08073F94 + 1
+
+	.global StartTemporaryLock
+	.type   StartTemporaryLock, %function
+	.thumb_func
+	.set    StartTemporaryLock, 0x080142F0 + 1
+
+	.global Decompress
+	.type   Decompress, %function
+	.thumb_func
+	.set    Decompress, 0x08013008 + 1
+
+	.global CopyToPaletteBuffer
+	.type   CopyToPaletteBuffer, %function
+	.thumb_func
+	.set    CopyToPaletteBuffer, 0x08000D68 + 1
+
+	.global APProc_Create
+	.type   APProc_Create, %function
+	.thumb_func
+	.set    APProc_Create, 0x08009608 + 1
+
+	.global Img_MineFx
+	.set    Img_MineFx, 0x085D1BC8
+
+	.global Pal_MineFx
+	.set    Pal_MineFx, 0x085D1DD0
+
+	.global SpritAnim_MineFx
+	.set    SpritAnim_MineFx, 0x085D1D3C
+
+	.global StartSpriteAnimfx
+	.type   StartSpriteAnimfx, %function
+	.thumb_func
+	.set    StartSpriteAnimfx, 0x080B342C + 1
+
+	.global SetDefaultColorEffects
+	.type   SetDefaultColorEffects, %function
+	.thumb_func
+	.set    SetDefaultColorEffects, 0x08001ED0 + 1
+
+	.global SetBackgroundTileDataOffset
+	.type   SetBackgroundTileDataOffset, %function
+	.thumb_func
+	.set    SetBackgroundTileDataOffset, 0x08000F8C + 1
+
+	.global BG_Fill
+	.type   BG_Fill, %function
+	.thumb_func
+	.set    BG_Fill, 0x080011D0 + 1
+
+	.global BG_EnableSyncByMask
+	.type   BG_EnableSyncByMask, %function
+	.thumb_func
+	.set    BG_EnableSyncByMask, 0x08001EFC + 1
+
+	.global gBG2TilemapBuffer
+	.set    gBG2TilemapBuffer, 0x02023CA8
+
+	.global SetAllUnitNotBackSprite
+	.type   SetAllUnitNotBackSprite, %function
+	.thumb_func
+	.set    SetAllUnitNotBackSprite, 0x08018670 + 1
+
+	.global UnlockGame
+	.type   UnlockGame, %function
+	.thumb_func
+	.set    UnlockGame, 0x08015394 + 1
+
+	.global RenderBmMap
+	.type   RenderBmMap, %function
+	.thumb_func
+	.set    RenderBmMap, 0x08019914 + 1
+
+	.global BG_SetPosition
+	.type   BG_SetPosition, %function
+	.thumb_func
+	.set    BG_SetPosition, 0x08001448 + 1
+
+	.global StartMu
+	.type   StartMu, %function
+	.thumb_func
+	.set    StartMu, 0x0807A888 + 1
+
+	.global StartMuExt
+	.type   StartMuExt, %function
+	.thumb_func
+	.set    StartMuExt, 0x0807A84C + 1
+
+	.global MuExistsActive
+	.type   MuExistsActive, %function
+	.thumb_func
+	.set    MuExistsActive, 0x0807AB5C + 1
+
+	.global EndMu
+	.type   EndMu, %function
+	.thumb_func
+	.set    EndMu, 0x0807B4C8 + 1
+
+	.global ForceSyncUnitSpriteSheet
+	.type   ForceSyncUnitSpriteSheet, %function
+	.thumb_func
+	.set    ForceSyncUnitSpriteSheet, 0x08026F38 + 1
+
