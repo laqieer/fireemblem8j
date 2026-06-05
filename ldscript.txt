@@ -29,11 +29,15 @@ SECTIONS
         src/irq.o(.text);
         src/rng.o(.text);
         asm/baserom.o(.gap_1);
+        src/unit_facing.o(.text);
+        asm/baserom.o(.gap_2);
         src/bmphase.o(.text);
         src/bmgold.o(.text);
-        asm/baserom.o(.gap_2);
-        src/rng.o(.rodata);
         asm/baserom.o(.gap_3);
+        src/spellassoc.o(.text);
+        asm/baserom.o(.gap_4);
+        src/rng.o(.rodata);
+        asm/baserom.o(.gap_5);
     } > rom
 
     .bss_0 0x03000000 (NOLOAD) : { src/rng.o(.bss) src/rng.o(COMMON) } > iwram  /* rng: gRNSeeds, gLCGRNValue */

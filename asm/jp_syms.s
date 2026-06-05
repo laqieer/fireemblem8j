@@ -52,3 +52,27 @@
 	.thumb_func
 	.set    GetUnit, 0x08019108 + 1
 
+	.global gSpellAssocData
+	.set    gSpellAssocData, 0x08904164
+
+	.global GetItemIndex
+	.type   GetItemIndex, %function
+	.thumb_func
+	.set    GetItemIndex, 0x08017294 + 1
+
+	.global gActiveUnit
+	.set    gActiveUnit, 0x03004DF0
+
+	.global gWorkingMovementScript
+	.set    gWorkingMovementScript, 0x02033EF8
+
+	.global GetFacingDirection
+	.type   GetFacingDirection, %function
+	.thumb_func
+	.set    GetFacingDirection, 0x0807DD00 + 1
+
+	.global SetAutoMuMoveScript
+	.type   SetAutoMuMoveScript, %function
+	.thumb_func
+	.set    SetAutoMuMoveScript, 0x0807AB24 + 1
+

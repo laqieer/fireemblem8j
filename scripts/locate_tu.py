@@ -107,6 +107,14 @@ for ln in open("layout/us_jp_funcmap.tsv"):
         c = ln.rstrip("\n").split("\t")
         fmap[c[4]] = int(c[0], 16)
 
+def bl_target(off):
+    h1 = jp[base + off] | (jp[base + off + 1] << 8)
+    h2 = jp[base + off + 2] | (jp[base + off + 3] << 8)
+    v = ((h1 & 0x7ff) << 12) | ((h2 & 0x7ff) << 1)
+    if v & 0x400000:
+        v -= 0x800000
+    return 0x08000000 + base + off + 4 + v
+
 data_syms, func_syms = {}, {}
 for off, typ, sym in relocs:
     if sym.startswith("."):
@@ -114,13 +122,36 @@ for off, typ, sym in relocs:
     if typ == "R_ARM_ABS32":
         data_syms.setdefault(sym, set()).add(int.from_bytes(jp[base + off:base + off + 4], "little"))
     elif typ == "R_ARM_THM_CALL":
-        func_syms.setdefault(sym, fmap.get(sym))
-if data_syms:
-    print("  external data symbols (address read from JP literal pool):")
-    for sym, vals in data_syms.items():
-        v = ", ".join(f"{x:08X}" for x in sorted(vals))
-        print(f"    {sym:28s} -> {v}{'   (INCONSISTENT)' if len(vals) > 1 else ''}")
-if func_syms:
-    print("  called functions (from funcmap):")
-    for sym, a in func_syms.items():
-        print(f"    {sym:28s} -> {a:08X}" if a else f"    {sym:28s} -> NOT IN MAP")
+        tgt = bl_target(off)
+        mapped = fmap.get(sym)
+        # prefer the map; fall back to the decoded BL target (and flag a mismatch)
+        func_syms.setdefault(sym, (mapped if mapped else tgt, mapped is not None,
+                                   mapped is not None and mapped != tgt))
+
+undefined = set(subprocess.run(["arm-none-eabi-nm", "-u", OBJ], capture_output=True, text=True)
+                .stdout.split()) - {"U"}
+
+extra = []
+for ln in subprocess.run(["arm-none-eabi-size", "-A", OBJ], capture_output=True, text=True).stdout.splitlines():
+    p = ln.split()
+    if len(p) == 3 and p[0] in (".data", ".rodata", ".bss") and p[1].isdigit() and int(p[1]) > 0:
+        extra.append(f"{p[0]}={p[1]}")
+if extra:
+    print(f"  NOTE: this TU also has nonzero {', '.join(extra)} — those sections must be")
+    print(f"        located and carved/placed too (the .text-only rows below are incomplete).")
+
+print("  --- ready-to-paste manifest rows ---")
+print(f"  carved_rom.tsv: {base:06X}\t{base+size:06X}\tsrc/{NAME}.o(.text)\t{NAME}")
+print("  baseline_syms.tsv (only add symbols not already present):")
+for sym in sorted(data_syms):
+    if sym not in undefined:
+        continue  # defined in this TU, not a baseline ref
+    vals = sorted(data_syms[sym])
+    flag = "  # INCONSISTENT - verify!" if len(vals) > 1 else ""
+    print(f"    {sym}\t{vals[0]:08X}\tdata\t{NAME}{flag}")
+for sym in sorted(func_syms):
+    if sym not in undefined:
+        continue
+    addr, inmap, mismatch = func_syms[sym]
+    flag = "  # map!=BL, verify!" if mismatch else ("" if inmap else "  # via BL decode")
+    print(f"    {sym}\t{addr:08X}\tthumb\t{NAME}{flag}")
