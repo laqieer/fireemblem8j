@@ -142,6 +142,12 @@ def port(name):
         if sec != ".text" or len(p) < 3 or not all(ch in "0123456789abcdef" for ch in p[0]):
             continue
         off, typ, sym = int(p[0], 16), p[1], p[2]
+        # RAM section referenced via its SECTION symbol (.bss/ewram_data + addend):
+        # place the whole section at JP RAM addr (NOLOAD), like the named case.
+        if typ == "R_ARM_ABS32" and sym in (".bss", "ewram_data", "sbss", "bss"):
+            addend = int.from_bytes(otext[off:off+4], "little")
+            ram.setdefault(sym, int.from_bytes(jp[base+off:base+off+4], "little") - addend)
+            continue
         # ROM data referenced via the section symbol (.rodata/.data + addend) —
         # the addend (offset into the section) is the pre-link value in our .text.
         if typ == "R_ARM_ABS32" and sym in (".rodata", ".data"):
@@ -186,10 +192,10 @@ def port(name):
         for dbase, size, dsec in data_carves:
             f.write(f"{dbase:06X}\t{dbase+size:06X}\tsrc/{name}.o({dsec})\t{name} {dsec}\n")
     if ram:
-        b = min(ram.values()); region = "iwram" if (b >> 24) == 3 else "ewram"
-        specs = " ".join(f"src/{name}.o({s})" for s in ram)
         with open("layout/carved_ram.tsv", "a") as f:
-            f.write(f"{b:08X}\t{region}\t{specs}\t{name}\n")
+            for s, b in ram.items():  # each RAM section at its own JP base
+                region = "iwram" if (b >> 24) == 3 else "ewram"
+                f.write(f"{b:08X}\t{region}\tsrc/{name}.o({s})\t{name} {s}\n")
     adds = [f"{s}\t{a:08X}\t{t}\t{name}" for s, (a, t) in new_syms.items() if s not in have]
     if adds:
         with open("layout/baseline_syms.tsv", "a") as f:
