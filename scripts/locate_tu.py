@@ -136,9 +136,16 @@ for ln in subprocess.run(["arm-none-eabi-size", "-A", OBJ], capture_output=True,
     p = ln.split()
     if len(p) == 3 and p[0] in (".data", ".rodata", ".bss") and p[1].isdigit() and int(p[1]) > 0:
         extra.append(f"{p[0]}={p[1]}")
+# COMMON (uninitialised statics) don't show in .bss size and aren't "undefined";
+# they still need RAM placement at their JP addresses (carved_ram.tsv).
+commons = [p[2] for p in (l.split() for l in
+           subprocess.run(["arm-none-eabi-nm", OBJ], capture_output=True, text=True).stdout.splitlines())
+           if len(p) == 3 and p[1] == "C"]
+if commons:
+    extra.append("COMMON:" + ",".join(commons))
 if extra:
-    print(f"  NOTE: this TU also has nonzero {', '.join(extra)} — those sections must be")
-    print(f"        located and carved/placed too (the .text-only rows below are incomplete).")
+    print(f"  NOTE: this TU also has {', '.join(extra)} — those need separate")
+    print(f"        carve/placement (carved_ram for .bss/COMMON); .text-only rows below are incomplete.")
 
 print("  --- ready-to-paste manifest rows ---")
 print(f"  carved_rom.tsv: {base:06X}\t{base+size:06X}\tsrc/{NAME}.o(.text)\t{NAME}")

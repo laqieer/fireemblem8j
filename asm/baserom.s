@@ -15,8 +15,11 @@
 	.incbin "baserom.gba", 0x24DF0, 0x55848	@ 0x024DF0..0x07A638
 
 	.section .gap_4, "ax", %progbits
-	.incbin "baserom.gba", 0x7A6CC, 0x61A68	@ 0x07A6CC..0x0DC134
+	.incbin "baserom.gba", 0x7A6CC, 0x49BE8	@ 0x07A6CC..0x0C42B4
 
 	.section .gap_5, "ax", %progbits
+	.incbin "baserom.gba", 0xC43A4, 0x17D90	@ 0x0C43A4..0x0DC134
+
+	.section .gap_6, "ax", %progbits
 	.incbin "baserom.gba", 0xDC144	@ 0x0DC144..0x1000000
 

@@ -76,3 +76,49 @@
 	.thumb_func
 	.set    SetAutoMuMoveScript, 0x0807AB24 + 1
 
+	.global ProcScr_WorldMapMain
+	.set    ProcScr_WorldMapMain, 0x08AC1108
+
+	.global gGMData
+	.set    gGMData, 0x03005270
+
+	.global AddGmPath
+	.type   AddGmPath, %function
+	.thumb_func
+	.set    AddGmPath, 0x080C16FC + 1
+
+	.global GmHideMuUnit
+	.type   GmHideMuUnit, %function
+	.thumb_func
+	.set    GmHideMuUnit, 0x080C2C24 + 1
+
+	.global GmMu_RemoveUnit
+	.type   GmMu_RemoveUnit, %function
+	.thumb_func
+	.set    GmMu_RemoveUnit, 0x080C2B14 + 1
+
+	.global GmShowMuUnit
+	.type   GmShowMuUnit, %function
+	.thumb_func
+	.set    GmShowMuUnit, 0x080C2BAC + 1
+
+	.global MapMU_SetUnitChar
+	.type   MapMU_SetUnitChar, %function
+	.thumb_func
+	.set    MapMU_SetUnitChar, 0x080C333C + 1
+
+	.global MapMU_SetUnitClass
+	.type   MapMU_SetUnitClass, %function
+	.thumb_func
+	.set    MapMU_SetUnitClass, 0x080C3320 + 1
+
+	.global MapRoute_BeginRouteTransition
+	.type   MapRoute_BeginRouteTransition, %function
+	.thumb_func
+	.set    MapRoute_BeginRouteTransition, 0x080C10E0 + 1
+
+	.global Proc_Find
+	.type   Proc_Find, %function
+	.thumb_func
+	.set    Proc_Find, 0x08002DEC + 1
+

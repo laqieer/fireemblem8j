@@ -10,3 +10,4 @@
 0DC134	0DC144	src/rng.o(.rodata)	rng: InitRN seed table
 07A638	07A6CC	src/spellassoc.o(.text)	spellassoc: spell-item association
 01F164	01F198	src/unit_facing.o(.text)	unit_facing: facing helpers
+0C42B4	0C43A4	src/worldmap_draw.o(.text)	worldmap_draw

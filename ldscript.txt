@@ -36,8 +36,10 @@ SECTIONS
         asm/baserom.o(.gap_3);
         src/spellassoc.o(.text);
         asm/baserom.o(.gap_4);
-        src/rng.o(.rodata);
+        src/worldmap_draw.o(.text);
         asm/baserom.o(.gap_5);
+        src/rng.o(.rodata);
+        asm/baserom.o(.gap_6);
     } > rom
 
     .bss_0 0x03000000 (NOLOAD) : { src/rng.o(.bss) src/rng.o(COMMON) } > iwram  /* rng: gRNSeeds, gLCGRNValue */
