@@ -686,3 +686,58 @@
 	.thumb_func
 	.set    ForceSyncUnitSpriteSheet, 0x08026F38 + 1
 
+	.global GetBanimDragonStatusType
+	.type   GetBanimDragonStatusType, %function
+	.thumb_func
+	.set    GetBanimDragonStatusType, 0x08072060 + 1
+
+	.global ProcScr_efxSpellCast
+	.set    ProcScr_efxSpellCast, 0x085E3C64
+
+	.global gpProcEfxSpellCast
+	.set    gpProcEfxSpellCast, 0x02017778
+
+	.global gPal_Banim
+	.set    gPal_Banim, 0x0201C790
+
+	.global Interpolate
+	.type   Interpolate, %function
+	.thumb_func
+	.set    Interpolate, 0x08012E84 + 1
+
+	.global EfxPalBlackInOut
+	.type   EfxPalBlackInOut, %function
+	.thumb_func
+	.set    EfxPalBlackInOut, 0x080737A4 + 1
+
+	.global PlaySFX
+	.type   PlaySFX, %function
+	.thumb_func
+	.set    PlaySFX, 0x08074E80 + 1
+
+	.global NewEfxFlashBgWhite
+	.type   NewEfxFlashBgWhite, %function
+	.thumb_func
+	.set    NewEfxFlashBgWhite, 0x08054BF8 + 1
+
+	.global EfxPalWhiteInOut
+	.type   EfxPalWhiteInOut, %function
+	.thumb_func
+	.set    EfxPalWhiteInOut, 0x08073820 + 1
+
+	.global gEfxPal
+	.set    gEfxPal, 0x020165C8
+
+	.global SpellFx_ClearBG1
+	.type   SpellFx_ClearBG1, %function
+	.thumb_func
+	.set    SpellFx_ClearBG1, 0x08056130 + 1
+
+	.global SetDefaultColorEffects_
+	.type   SetDefaultColorEffects_, %function
+	.thumb_func
+	.set    SetDefaultColorEffects_, 0x08056214 + 1
+
+	.global gEfxBgSemaphore
+	.set    gEfxBgSemaphore, 0x0201774C
+

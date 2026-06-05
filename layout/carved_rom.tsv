@@ -27,3 +27,5 @@
 01D9B8	01DA28	src/bmxfade.o(.text)	bmxfade(run): bmxfade_loop, Destruct6CBMXFADE
 012C54	012CEC	src/eventfx-earthquake.o(.text)	eventfx-earthquake(run): EventEarthQuakeMain
 01D838	01D8E0	src/koido.o(.text)	koido(run): GetSomeFacingDirection, Make6CMOVEUNITForUnitBeingRescued, Loop6C_KOIDO
+055C78	055E2C	src/banim-efxflashobj.o(.text)	banim-efxflashobj(run): NewEfxSpellCast, RegisterEfxSpellCastEnd, EndEfxSpellCast...
+05FAB0	05FBAC	src/banim-efxmagic-bolting.o(.text)	banim-efxmagic-bolting(run): efxThunderstormColor_Loop_A, efxThunderstormColor_Loop_B, efxThunderstormColor_Loop_C

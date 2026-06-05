@@ -45,29 +45,35 @@
 	.incbin "baserom.gba", 0x316E0, 0x20438	@ 0x0316E0..0x051B18
 
 	.section .gap_14, "ax", %progbits
-	.incbin "baserom.gba", 0x51B74, 0x28AC4	@ 0x051B74..0x07A638
+	.incbin "baserom.gba", 0x51B74, 0x4104	@ 0x051B74..0x055C78
 
 	.section .gap_15, "ax", %progbits
-	.incbin "baserom.gba", 0x7A6CC, 0x4748	@ 0x07A6CC..0x07EE14
+	.incbin "baserom.gba", 0x55E2C, 0x9C84	@ 0x055E2C..0x05FAB0
 
 	.section .gap_16, "ax", %progbits
-	.incbin "baserom.gba", 0x7EE48, 0xD6A8	@ 0x07EE48..0x08C4F0
+	.incbin "baserom.gba", 0x5FBAC, 0x1AA8C	@ 0x05FBAC..0x07A638
 
 	.section .gap_17, "ax", %progbits
-	.incbin "baserom.gba", 0x8C6D4, 0x1DD44	@ 0x08C6D4..0x0AA418
+	.incbin "baserom.gba", 0x7A6CC, 0x4748	@ 0x07A6CC..0x07EE14
 
 	.section .gap_18, "ax", %progbits
-	.incbin "baserom.gba", 0xAAD88, 0x1952C	@ 0x0AAD88..0x0C42B4
+	.incbin "baserom.gba", 0x7EE48, 0xD6A8	@ 0x07EE48..0x08C4F0
 
 	.section .gap_19, "ax", %progbits
-	.incbin "baserom.gba", 0xC43A4, 0x17D90	@ 0x0C43A4..0x0DC134
+	.incbin "baserom.gba", 0x8C6D4, 0x1DD44	@ 0x08C6D4..0x0AA418
 
 	.section .gap_20, "ax", %progbits
-	.incbin "baserom.gba", 0xDC144, 0x804	@ 0x0DC144..0x0DC948
+	.incbin "baserom.gba", 0xAAD88, 0x1952C	@ 0x0AAD88..0x0C42B4
 
 	.section .gap_21, "ax", %progbits
-	.incbin "baserom.gba", 0xDC96C, 0x4E70D4	@ 0x0DC96C..0x5C3A40
+	.incbin "baserom.gba", 0xC43A4, 0x17D90	@ 0x0C43A4..0x0DC134
 
 	.section .gap_22, "ax", %progbits
+	.incbin "baserom.gba", 0xDC144, 0x804	@ 0x0DC144..0x0DC948
+
+	.section .gap_23, "ax", %progbits
+	.incbin "baserom.gba", 0xDC96C, 0x4E70D4	@ 0x0DC96C..0x5C3A40
+
+	.section .gap_24, "ax", %progbits
 	.incbin "baserom.gba", 0x5C3A58	@ 0x5C3A58..0x1000000
 

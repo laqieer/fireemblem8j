@@ -56,22 +56,26 @@ SECTIONS
         asm/baserom.o(.gap_13);
         src/banim-ekrlvupfan.o(.text);
         asm/baserom.o(.gap_14);
-        src/spellassoc.o(.text);
+        src/banim-efxflashobj.o(.text);
         asm/baserom.o(.gap_15);
-        src/mapanim_eventbattle.o(.text);
+        src/banim-efxmagic-bolting.o(.text);
         asm/baserom.o(.gap_16);
-        src/helpbox.o(.text);
+        src/spellassoc.o(.text);
         asm/baserom.o(.gap_17);
-        src/bmsave.o(.text);
+        src/mapanim_eventbattle.o(.text);
         asm/baserom.o(.gap_18);
-        src/worldmap_draw.o(.text);
+        src/helpbox.o(.text);
         asm/baserom.o(.gap_19);
-        src/rng.o(.rodata);
+        src/bmsave.o(.text);
         asm/baserom.o(.gap_20);
-        src/bmreliance.o(.rodata);
+        src/worldmap_draw.o(.text);
         asm/baserom.o(.gap_21);
-        src/minefx.o(.data);
+        src/rng.o(.rodata);
         asm/baserom.o(.gap_22);
+        src/bmreliance.o(.rodata);
+        asm/baserom.o(.gap_23);
+        src/minefx.o(.data);
+        asm/baserom.o(.gap_24);
     } > rom
 
     .bss_0 0x03000000 (NOLOAD) : { src/rng.o(.bss) src/rng.o(COMMON) } > iwram  /* rng: gRNSeeds, gLCGRNValue */

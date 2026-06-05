@@ -153,3 +153,16 @@ StartMuExt	0807A84C	thumb	koido
 MuExistsActive	0807AB5C	thumb	koido
 EndMu	0807B4C8	thumb	koido
 ForceSyncUnitSpriteSheet	08026F38	thumb	koido
+GetBanimDragonStatusType	08072060	thumb	banim-efxflashobj
+ProcScr_efxSpellCast	085E3C64	data	banim-efxflashobj
+gpProcEfxSpellCast	02017778	data	banim-efxflashobj
+gPal_Banim	0201C790	data	banim-efxflashobj
+Interpolate	08012E84	thumb	banim-efxflashobj
+EfxPalBlackInOut	080737A4	thumb	banim-efxflashobj
+PlaySFX	08074E80	thumb	banim-efxmagic-bolting
+NewEfxFlashBgWhite	08054BF8	thumb	banim-efxmagic-bolting
+EfxPalWhiteInOut	08073820	thumb	banim-efxmagic-bolting
+gEfxPal	020165C8	data	banim-efxmagic-bolting
+SpellFx_ClearBG1	08056130	thumb	banim-efxmagic-bolting
+SetDefaultColorEffects_	08056214	thumb	banim-efxmagic-bolting
+gEfxBgSemaphore	0201774C	data	banim-efxmagic-bolting
