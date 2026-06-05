@@ -723,3 +723,8 @@ BanimDefaultModeConfig	080DFF00	data	banim-ekrmainmini
 BanimScr_DefaultAnim	085E3F8C	data	banim-ekrmainmini
 AnimCreate	08004E50	thumb	banim-ekrmainmini
 character_battle_animation_palette_table	08EF8008	data	banim-ekrmainmini
+Img_DanceringFx	085D0494	data	danceringfx
+Pal_DanceringFx	085D14B4	data	danceringfx
+Tsa_DanceringFx	085D1278	data	danceringfx
+gBattleStats	0203A4D0	data	danceringfx
+ProcBmFx_CommonEnd	08021360	thumb	danceringfx

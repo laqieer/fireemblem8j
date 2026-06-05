@@ -3038,3 +3038,20 @@
 	.global character_battle_animation_palette_table
 	.set    character_battle_animation_palette_table, 0x08EF8008
 
+	.global Img_DanceringFx
+	.set    Img_DanceringFx, 0x085D0494
+
+	.global Pal_DanceringFx
+	.set    Pal_DanceringFx, 0x085D14B4
+
+	.global Tsa_DanceringFx
+	.set    Tsa_DanceringFx, 0x085D1278
+
+	.global gBattleStats
+	.set    gBattleStats, 0x0203A4D0
+
+	.global ProcBmFx_CommonEnd
+	.type   ProcBmFx_CommonEnd, %function
+	.thumb_func
+	.set    ProcBmFx_CommonEnd, 0x08021360 + 1
+
