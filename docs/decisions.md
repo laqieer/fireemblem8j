@@ -141,3 +141,26 @@ in parallel, but the bulk needs the JP data first.
 
 **Status:** JP text extraction is a large, multi-step sub-project (decode the JP
 message table from the ROM, rebuild texts/ + msg.h). Next track to open.
+
+## D4 — Message-name alignment: use code-reference correspondence, not text
+
+**Tried & insufficient:** aligning US↔JP messages by control-code skeletons.
+Control-code *vocabularies* differ (US uses code 1 ~18k times, absent in JP; JP
+uses 17/22/24/25, absent in US); only codes 3/9/12/16 are shared. Restricting
+skeletons to shared codes yields too few unique anchors (6, chain of 2) — not
+enough to align 3438↔3340 messages. The text content can't align them either
+(different languages).
+
+**Better approach (recommended):** derive US-index↔JP-index correspondence from
+the *code/data that references messages*. A region-different function/table is
+logically identical except the embedded `MSG_*` constant *values*; match it
+US↔JP by masking the message-id literals (as scripts/match_us_jp.py masks
+pointers), then read the US value and the JP value at the matched site → a direct
+correspondence pair. bmreliance's affinity `.rodata` already gave 7 such pairs
+(US 0x510..0x516 ↔ JP 0x499..0x49f). Aggregate thousands of these across the ROM,
+filter for monotonic consistency, and interpolate → US `MSG_*` → JP index map →
+regenerate `msg.h`. This is reliable (exact integer pairs) and language-agnostic.
+
+**Status:** the alignment crux now has a concrete, evidence-backed method;
+implementing the masked MSG-reference matcher is the next step. The huffman
+decode + table location remain validated and done.
