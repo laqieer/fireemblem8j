@@ -391,3 +391,27 @@
 	.thumb_func
 	.set    GetClassData, 0x0801911C + 1
 
+	.global gBmMapTerrain
+	.set    gBmMapTerrain, 0x0202E4D8
+
+	.global RefreshEntityBmMaps
+	.type   RefreshEntityBmMaps, %function
+	.thumb_func
+	.set    RefreshEntityBmMaps, 0x08019ECC + 1
+
+	.global RefreshUnitSprites
+	.type   RefreshUnitSprites, %function
+	.thumb_func
+	.set    RefreshUnitSprites, 0x08027144 + 1
+
+	.global AddTarget
+	.type   AddTarget, %function
+	.thumb_func
+	.set    AddTarget, 0x08050630 + 1
+
+	.global gBmMapUnit
+	.set    gBmMapUnit, 0x0202E4D4
+
+	.global gBmMapSize
+	.set    gBmMapSize, 0x0202E4D0
+

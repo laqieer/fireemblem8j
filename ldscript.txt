@@ -36,16 +36,18 @@ SECTIONS
         src/bmphase.o(.text);
         src/bmgold.o(.text);
         asm/baserom.o(.gap_4);
-        src/bmusort.o(.text);
+        src/bmtrick.o(.text);
         asm/baserom.o(.gap_5);
-        src/spellassoc.o(.text);
+        src/bmusort.o(.text);
         asm/baserom.o(.gap_6);
-        src/bmsave.o(.text);
+        src/spellassoc.o(.text);
         asm/baserom.o(.gap_7);
-        src/worldmap_draw.o(.text);
+        src/bmsave.o(.text);
         asm/baserom.o(.gap_8);
-        src/rng.o(.rodata);
+        src/worldmap_draw.o(.text);
         asm/baserom.o(.gap_9);
+        src/rng.o(.rodata);
+        asm/baserom.o(.gap_10);
     } > rom
 
     .bss_0 0x03000000 (NOLOAD) : { src/rng.o(.bss) src/rng.o(COMMON) } > iwram  /* rng: gRNSeeds, gLCGRNValue */

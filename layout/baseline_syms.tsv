@@ -88,3 +88,9 @@ ReadSaveBlockInfo	080A793C	thumb	bmsave
 ReadGameSavePlaySt	080A9C44	thumb	bmsave
 GetCharacterData	0801913C	thumb	bmsave
 GetClassData	0801911C	thumb	bmsave
+gBmMapTerrain	0202E4D8	data	bmtrick
+RefreshEntityBmMaps	08019ECC	thumb	bmtrick
+RefreshUnitSprites	08027144	thumb	bmtrick
+AddTarget	08050630	thumb	bmtrick
+gBmMapUnit	0202E4D4	data	bmtrick
+gBmMapSize	0202E4D0	data	bmtrick

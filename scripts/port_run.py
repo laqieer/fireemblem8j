@@ -52,6 +52,53 @@ def port(name):
     if not os.path.exists(obj):
         print(f"{name}: subset compile failed"); os.remove(f"src/{name}.c"); return False
 
+    # Drop file-scope data the run doesn't reference (the whole header is pulled
+    # in, but unreferenced globals/arrays — e.g. proc scripts — would need
+    # placement we can't resolve). A data symbol with no .text relocation is unused.
+    def data_syms_and_refs():
+        ds = {}
+        for l in sh(f"arm-none-eabi-objdump -t {obj}").stdout.splitlines():
+            p = l.split()
+            if len(p) >= 5 and p[0][0] in "0123456789abcdef" and p[-3] in (".data", ".rodata", "ewram_data") and not p[-1].startswith(".") and p[-1] != p[-3]:
+                ds[p[-1]] = p[-3]
+        refd = set()
+        sec = None
+        for l in sh(f"arm-none-eabi-objdump -r {obj}").stdout.splitlines():
+            if "RELOCATION RECORDS FOR [" in l: sec = l.split("[")[1].split("]")[0]
+            elif sec == ".text":
+                p = l.split()
+                if len(p) >= 3 and not p[2].startswith("."): refd.add(p[2])
+        return ds, refd
+
+    def remove_def(text, sym):
+        i = text.find(sym)
+        while i != -1:
+            after = text[i+len(sym):i+len(sym)+40].lstrip()
+            if after[:1] in ("[", "=", ";"):
+                cands = [text.rfind(";", 0, i), text.rfind("}", 0, i), text.rfind("\n\n", 0, i)]
+                cut = max(cands)
+                start = cut + (2 if text[cut:cut+2] == "\n\n" else 1) if cut >= 0 else 0
+                j, depth = i + len(sym), 0
+                while j < len(text):
+                    if text[j] == "{": depth += 1
+                    elif text[j] == "}": depth -= 1
+                    elif text[j] == ";" and depth == 0:
+                        return text[:start] + text[j+1:]
+                    j += 1
+            i = text.find(sym, i + 1)
+        return text
+
+    ds, refd = data_syms_and_refs()
+    unref = [s for s in ds if s not in refd]
+    if unref:
+        src = open(f"src/{name}.c").read()
+        for s in unref:
+            src = remove_def(src, s)
+        open(f"src/{name}.c", "w").write(src)
+        sh(f"rm -f {obj}"); sh(f"make src/{name}.o")
+        if not os.path.exists(obj):
+            print(f"{name}: compile failed after trimming {unref}"); os.remove(f"src/{name}.c"); return False
+
     jp = open("baserom.gba", "rb").read()
     fmap = {}
     for l in open("layout/us_jp_funcmap.tsv"):
