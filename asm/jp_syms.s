@@ -1505,3 +1505,214 @@
 	.thumb_func
 	.set    StartPromoClassSelect, 0x080D1A3C + 1
 
+	.global PutMapCursor
+	.type   PutMapCursor, %function
+	.thumb_func
+	.set    PutMapCursor, 0x08015AB4 + 1
+
+	.global StartMapSongBgm
+	.type   StartMapSongBgm, %function
+	.thumb_func
+	.set    StartMapSongBgm, 0x080160DC + 1
+
+	.global gMusicProc3Script
+	.set    gMusicProc3Script, 0x08577638
+
+	.global gAiDecision
+	.set    gAiDecision, 0x0203AA90
+
+	.global UnitBeginAction
+	.type   UnitBeginAction, %function
+	.thumb_func
+	.set    UnitBeginAction, 0x08018370 + 1
+
+	.global HideUnitSprite
+	.type   HideUnitSprite, %function
+	.thumb_func
+	.set    HideUnitSprite, 0x080280A0 + 1
+
+	.global GenerateUnitMovementMap
+	.type   GenerateUnitMovementMap, %function
+	.thumb_func
+	.set    GenerateUnitMovementMap, 0x0801A05C + 1
+
+	.global GenerateBestMovementScript
+	.type   GenerateBestMovementScript, %function
+	.thumb_func
+	.set    GenerateBestMovementScript, 0x0801A304 + 1
+
+	.global UnitApplyWorkingMovementScript
+	.type   UnitApplyWorkingMovementScript, %function
+	.thumb_func
+	.set    UnitApplyWorkingMovementScript, 0x0801A508 + 1
+
+	.global SetCursorMapPosition
+	.type   SetCursorMapPosition, %function
+	.thumb_func
+	.set    SetCursorMapPosition, 0x08015BD8 + 1
+
+	.global MoveActiveUnit
+	.type   MoveActiveUnit, %function
+	.thumb_func
+	.set    MoveActiveUnit, 0x08018454 + 1
+
+	.global ShowUnitSprite
+	.type   ShowUnitSprite, %function
+	.thumb_func
+	.set    ShowUnitSprite, 0x080280C4 + 1
+
+	.global GetTrapAt
+	.type   GetTrapAt, %function
+	.thumb_func
+	.set    GetTrapAt, 0x0802E128 + 1
+
+	.global EquipUnitItemSlot
+	.type   EquipUnitItemSlot, %function
+	.thumb_func
+	.set    EquipUnitItemSlot, 0x08016968 + 1
+
+	.global gActiveUnitId
+	.set    gActiveUnitId, 0x0202BE40
+
+	.global ApplyUnitAction
+	.type   ApplyUnitAction, %function
+	.thumb_func
+	.set    ApplyUnitAction, 0x08031F58 + 1
+
+	.global UnitAddItem
+	.type   UnitAddItem, %function
+	.thumb_func
+	.set    UnitAddItem, 0x080176F0 + 1
+
+	.global UnitRemoveItem
+	.type   UnitRemoveItem, %function
+	.thumb_func
+	.set    UnitRemoveItem, 0x0801915C + 1
+
+	.global NewPopup_ItemStealing
+	.type   NewPopup_ItemStealing, %function
+	.thumb_func
+	.set    NewPopup_ItemStealing, 0x08011780 + 1
+
+	.global ProcScr_CamMove
+	.set    ProcScr_CamMove, 0x085C29C8
+
+	.global CanUnitUseStaff
+	.type   CanUnitUseStaff, %function
+	.thumb_func
+	.set    CanUnitUseStaff, 0x0801654C + 1
+
+	.global AiStaffHealMendRecover
+	.type   AiStaffHealMendRecover, %function
+	.thumb_func
+	.set    AiStaffHealMendRecover, 0x0803FB38 + 1
+
+	.global AiStaffPhysicRescue
+	.type   AiStaffPhysicRescue, %function
+	.thumb_func
+	.set    AiStaffPhysicRescue, 0x0803FCB0 + 1
+
+	.global AiStaffFortify
+	.type   AiStaffFortify, %function
+	.thumb_func
+	.set    AiStaffFortify, 0x0803FE80 + 1
+
+	.global AiStaffWarp
+	.type   AiStaffWarp, %function
+	.thumb_func
+	.set    AiStaffWarp, 0x0803FF8C + 1
+
+	.global AiStaffRestore
+	.type   AiStaffRestore, %function
+	.thumb_func
+	.set    AiStaffRestore, 0x080400E4 + 1
+
+	.global AiStaffSilence
+	.type   AiStaffSilence, %function
+	.thumb_func
+	.set    AiStaffSilence, 0x080402D4 + 1
+
+	.global AiStaffSleepBerserk
+	.type   AiStaffSleepBerserk, %function
+	.thumb_func
+	.set    AiStaffSleepBerserk, 0x08040460 + 1
+
+	.global AiStaffBarrier
+	.type   AiStaffBarrier, %function
+	.thumb_func
+	.set    AiStaffBarrier, 0x080405E4 + 1
+
+	.global CallEvent
+	.type   CallEvent, %function
+	.thumb_func
+	.set    CallEvent, 0x0800D340 + 1
+
+	.global EventScr_DisplayBattleQuote
+	.set    EventScr_DisplayBattleQuote, 0x085B9D6C
+
+	.global gEventSlots
+	.set    gEventSlots, 0x030004B0
+
+	.global EventEngine_CreateBattle
+	.type   EventEngine_CreateBattle, %function
+	.thumb_func
+	.set    EventEngine_CreateBattle, 0x0800D404 + 1
+
+	.global EventScr_TriggerQueuedTileChanges
+	.set    EventScr_TriggerQueuedTileChanges, 0x085B9D80
+
+	.global gEventSlotQueue
+	.set    gEventSlotQueue, 0x030004E8
+
+	.global EventScr_OpenChest
+	.set    EventScr_OpenChest, 0x085B9D8C
+
+	.global EventScr_MapSupportConversation
+	.set    EventScr_MapSupportConversation, 0x085B9DD4
+
+	.global EventScr_SupportViewerConversation
+	.set    EventScr_SupportViewerConversation, 0x085B9E14
+
+	.global EventScr_SkirmishRetreat
+	.set    EventScr_SkirmishRetreat, 0x085B9E3C
+
+	.global EventScr_SuspendPrompt
+	.set    EventScr_SuspendPrompt, 0x085B9E9C
+
+	.global EventEngine_Create
+	.type   EventEngine_Create, %function
+	.thumb_func
+	.set    EventEngine_Create, 0x0800D374 + 1
+
+	.global EventScr_GameOver
+	.set    EventScr_GameOver, 0x085B9EE8
+
+	.global ProcScr_EventVerticalQuakefx
+	.set    ProcScr_EventVerticalQuakefx, 0x08A60168
+
+	.global ProcScr_EventHorizontalQuakefx
+	.set    ProcScr_EventHorizontalQuakefx, 0x08A60138
+
+	.global Sound_FadeOutSE
+	.type   Sound_FadeOutSE, %function
+	.thumb_func
+	.set    Sound_FadeOutSE, 0x08002330 + 1
+
+	.global GetBgXOffset
+	.type   GetBgXOffset, %function
+	.thumb_func
+	.set    GetBgXOffset, 0x080B34A0 + 1
+
+	.global ProcScr_EventQuakefx
+	.set    ProcScr_EventQuakefx, 0x08A60180
+
+	.global SetFlag
+	.type   SetFlag, %function
+	.thumb_func
+	.set    SetFlag, 0x080860A8 + 1
+
+	.global ClearFlag
+	.type   ClearFlag, %function
+	.thumb_func
+	.set    ClearFlag, 0x080860BC + 1
+
