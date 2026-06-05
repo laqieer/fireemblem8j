@@ -10,6 +10,7 @@
 	.global gRomBaseline
 	.align 2
 gRomBaseline:
-	.incbin "baserom.gba"
+	@ Decompiled so far: ROM header (0x00..0xBF) -> asm/rom_header.s.
+	.incbin "baserom.gba", 0xC0
 	.global gRomBaselineEnd
 gRomBaselineEnd:

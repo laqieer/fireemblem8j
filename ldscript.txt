@@ -12,12 +12,19 @@ __rom_start   = ORIGIN(rom);
 __ewram_start = ORIGIN(ewram);
 __iwram_start = ORIGIN(iwram);
 
+ENTRY(Init)
+
+/* crt0 immediately follows the 0xC0-byte ROM header; defined here so the
+   header's `b crt0` resolves while crt0 itself is still inside the baseline. */
+crt0 = 0x080000C0;
+
 SECTIONS
 {
     .rom __rom_start : ALIGN(4)
     {
         /* Decompiled .text/.data objects get inserted here, in ROM order,
            ahead of the shrinking raw-ROM baseline below. */
+        asm/rom_header.o(.text);
         asm/baserom.o(.rom);
     } > rom
 
