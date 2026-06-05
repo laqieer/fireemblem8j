@@ -2437,3 +2437,35 @@
 	.global Img_DemonLightSprites
 	.set    Img_DemonLightSprites, 0x087F98E8
 
+	.global EfxTmCpyBgHFlip
+	.type   EfxTmCpyBgHFlip, %function
+	.thumb_func
+	.set    EfxTmCpyBgHFlip, 0x080733E8 + 1
+
+	.global gEkrTsaBuffer
+	.set    gEkrTsaBuffer, 0x02019790
+
+	.global gBG1TilemapBuffer
+	.set    gBG1TilemapBuffer, 0x020234A8
+
+	.global EfxTmCpyBG
+	.type   EfxTmCpyBG, %function
+	.thumb_func
+	.set    EfxTmCpyBG, 0x080733B8 + 1
+
+	.global EfxChapterMapFadeOUT
+	.type   EfxChapterMapFadeOUT, %function
+	.thumb_func
+	.set    EfxChapterMapFadeOUT, 0x08073B80 + 1
+
+	.global gBanimBG
+	.set    gBanimBG, 0x0203E0FA
+
+	.global PutBanimBgPAL
+	.type   PutBanimBgPAL, %function
+	.thumb_func
+	.set    PutBanimBgPAL, 0x08077EE8 + 1
+
+	.global gUnk_Banim_Ekrbattle_10
+	.set    gUnk_Banim_Ekrbattle_10, 0x0201FB28
+
