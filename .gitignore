@@ -19,8 +19,11 @@ src/data/*.s
 # Locally-installed toolchain (install agbcc the same way as the US decomp)
 /tools/agbcc
 
-# Local Claude Code config
-/.claude/
+# Claude Code: share settings.json + loop_prompt.md, but keep local/transient
+# state out (per-user overrides and the ralph-loop session-state file).
+.claude/settings.local.json
+.claude/*.local.md
+.claude/*.local.json
 
 # Editor / OS cruft
 *.swp
