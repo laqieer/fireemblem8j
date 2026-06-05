@@ -485,3 +485,6 @@ unit_icon_move_table	08A13488	data	worldmap_gmapunit
 gUnk_6	0200AF00	data	worldmap_gmapunit
 AP_Delete	08009194	thumb	worldmap_gmapunit
 gObject_8x8	085B8CDC	data	worldmap_radar
+HideMoveRangeGraphics	0801D730	thumb	bmitemuse
+ReadGlobalSaveInfo	080A776C	thumb	bmsave-lib
+Checksum16	080A7740	thumb	bmsave-lib

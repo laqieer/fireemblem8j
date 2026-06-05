@@ -2084,3 +2084,18 @@
 	.global gObject_8x8
 	.set    gObject_8x8, 0x085B8CDC
 
+	.global HideMoveRangeGraphics
+	.type   HideMoveRangeGraphics, %function
+	.thumb_func
+	.set    HideMoveRangeGraphics, 0x0801D730 + 1
+
+	.global ReadGlobalSaveInfo
+	.type   ReadGlobalSaveInfo, %function
+	.thumb_func
+	.set    ReadGlobalSaveInfo, 0x080A776C + 1
+
+	.global Checksum16
+	.type   Checksum16, %function
+	.thumb_func
+	.set    Checksum16, 0x080A7740 + 1
+
