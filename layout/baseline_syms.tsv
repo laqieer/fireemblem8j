@@ -31,3 +31,7 @@ MapMU_SetUnitChar	080C333C	thumb	worldmap_draw
 MapMU_SetUnitClass	080C3320	thumb	worldmap_draw
 MapRoute_BeginRouteTransition	080C10E0	thumb	worldmap_draw
 Proc_Find	08002DEC	thumb	worldmap_draw
+gUnitArrayBlue	0202BE48	data	bmusort
+ClearUnit	0801759C	thumb	bmusort
+CopyUnit	080175C4	thumb	bmusort
+CpuSet	080D6370	thumb	bmusort

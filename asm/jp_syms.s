@@ -122,3 +122,21 @@
 	.thumb_func
 	.set    Proc_Find, 0x08002DEC + 1
 
+	.global gUnitArrayBlue
+	.set    gUnitArrayBlue, 0x0202BE48
+
+	.global ClearUnit
+	.type   ClearUnit, %function
+	.thumb_func
+	.set    ClearUnit, 0x0801759C + 1
+
+	.global CopyUnit
+	.type   CopyUnit, %function
+	.thumb_func
+	.set    CopyUnit, 0x080175C4 + 1
+
+	.global CpuSet
+	.type   CpuSet, %function
+	.thumb_func
+	.set    CpuSet, 0x080D6370 + 1
+

@@ -3,3 +3,4 @@
 # literals reference. Columns: addr region sections note
 # region is one of: iwram ewram. sections may list several space-separated specs.
 03000000	iwram	src/rng.o(.bss) src/rng.o(COMMON)	rng: gRNSeeds, gLCGRNValue
+0203A8E0	ewram	src/bmusort.o(ewram_data) src/bmusort.o(.bss) src/bmusort.o(COMMON)	bmusort: sUnitStack* (EWRAM_DATA)
