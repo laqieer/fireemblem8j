@@ -1,0 +1,120 @@
+#!/usr/bin/env python3
+"""Port the largest matching run of a US translation unit (decision D1).
+
+Pipeline: locate_funcs -> pick the largest run -> extract_run into src/<name>.c
+(subset of just that run's functions) -> compile -> resolve every external ref at
+the run's known JP base (data literals + decoded BL targets + EWRAM_DATA
+placement) -> apply manifest rows (deduped) -> make layout -> make compare.
+Reverts surgically if the build isn't byte-perfect. Region-different functions
+and other runs stay in the incbin baseline.
+
+Usage: scripts/port_run.py <name> [<name> ...]
+"""
+import subprocess, sys, os, re
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(ROOT)
+US = "/home/laqieer/fireemblem8u/src"
+
+
+def sh(c):
+    return subprocess.run(c, shell=True, capture_output=True, text=True)
+
+
+def have_syms():
+    return {l.split("\t")[0] for l in open("layout/baseline_syms.tsv")
+            if l.strip() and not l.startswith("#")}
+
+
+def carved_objs():
+    return {m.group(1) for m in (re.search(r"(src/\S+\.o)\(", l) for l in open("layout/carved_rom.tsv")) if m}
+
+
+def port(name):
+    if f"src/{name}.o" in carved_objs():
+        print(f"{name}: already has a carved run — skipping"); return False
+    out = sh(f"python3 scripts/locate_funcs.py {name}").stdout
+    runs = re.findall(r"RUN ([0-9A-F]+)\.\.([0-9A-F]+)  \((\d+) fns: ([^)]+)\)", out)
+    if not runs:
+        print(f"{name}: no runs located"); return False
+    start, end, _, fns = max(runs, key=lambda r: int(r[2]))
+    funcs = [f.strip() for f in fns.split(",")]
+    base = int(start, 16) - 0x08000000  # ROM-file offset (for indexing baserom)
+
+    MANI = ["layout/carved_rom.tsv", "layout/carved_ram.tsv", "layout/baseline_syms.tsv"]
+    snap = {p: open(p).read() for p in MANI}
+
+    sub = sh(f"python3 scripts/extract_run.py {US}/{name}.c {' '.join(funcs)}").stdout
+    open(f"src/{name}.c", "w").write(sub)
+    sh(f"make src/{name}.o")
+    obj = f"src/{name}.o"
+    if not os.path.exists(obj):
+        print(f"{name}: subset compile failed"); os.remove(f"src/{name}.c"); return False
+
+    jp = open("baserom.gba", "rb").read()
+    fmap = {}
+    for l in open("layout/us_jp_funcmap.tsv"):
+        if not l.startswith("#"):
+            c = l.split("\t"); fmap[c[4].strip()] = int(c[0], 16)
+
+    def bl(o):
+        h1 = jp[base+o] | (jp[base+o+1] << 8); h2 = jp[base+o+2] | (jp[base+o+3] << 8)
+        v = ((h1 & 0x7ff) << 12) | ((h2 & 0x7ff) << 1)
+        return 0x08000000 + base + o + 4 + (v - 0x800000 if v & 0x400000 else v)
+
+    # symbol -> section (for EWRAM_DATA/.bss placement)
+    sym_sec = {}
+    for l in sh(f"arm-none-eabi-objdump -t {obj}").stdout.splitlines():
+        p = l.split()
+        if len(p) >= 5 and p[0][0] in "0123456789abcdef":
+            sym_sec[p[-1]] = (p[-3], int(p[0], 16))
+    undef = set(sh(f"arm-none-eabi-nm -u {obj}").stdout.split()) - {"U"}
+
+    new_syms, ram = {}, {}
+    sec = None
+    for l in sh(f"arm-none-eabi-objdump -r {obj}").stdout.splitlines():
+        if "RELOCATION RECORDS FOR [" in l:
+            sec = l.split("[")[1].split("]")[0]; continue
+        p = l.split()
+        if sec != ".text" or len(p) < 3 or not all(ch in "0123456789abcdef" for ch in p[0]):
+            continue
+        off, typ, sym = int(p[0], 16), p[1], p[2]
+        if sym.startswith("."):
+            continue
+        ss = sym_sec.get(sym)
+        if ss and ss[0] in ("ewram_data", ".bss", "bss", "sbss", "*COM*"):
+            ram.setdefault(ss[0], int.from_bytes(jp[base+off:base+off+4], "little") - ss[1])
+        elif typ == "R_ARM_ABS32" and sym in undef:
+            new_syms[sym] = (int.from_bytes(jp[base+off:base+off+4], "little"), "data")
+        elif typ == "R_ARM_THM_CALL" and sym in undef:
+            new_syms[sym] = (fmap.get(sym) or (bl(off) & ~1), "thumb")
+
+    have = have_syms()
+    with open("layout/carved_rom.tsv", "a") as f:
+        f.write(f"{base&0xFFFFFF:06X}\t{int(end,16)&0xFFFFFF:06X}\tsrc/{name}.o(.text)\t{name}(run): {', '.join(funcs[:3])}{'...' if len(funcs)>3 else ''}\n")
+    if ram:
+        b = min(ram.values()); region = "iwram" if (b >> 24) == 3 else "ewram"
+        specs = " ".join(f"src/{name}.o({s})" for s in ram)
+        with open("layout/carved_ram.tsv", "a") as f:
+            f.write(f"{b:08X}\t{region}\t{specs}\t{name}\n")
+    adds = [f"{s}\t{a:08X}\t{t}\t{name}" for s, (a, t) in new_syms.items() if s not in have]
+    if adds:
+        with open("layout/baseline_syms.tsv", "a") as f:
+            f.write("\n".join(adds) + "\n")
+
+    sh("make layout"); sh("make clean")
+    if "fireemblem8.gba: OK" in sh("make compare").stdout:
+        print(f"{name}: OK — run {start}..{end} ({len(funcs)} fns, {len(adds)} new syms{', +ram' if ram else ''})")
+        return True
+    print(f"{name}: FAILED make compare — reverting")
+    for p, c in snap.items():
+        open(p, "w").write(c)
+    os.remove(f"src/{name}.c"); sh("make layout")
+    return False
+
+
+if __name__ == "__main__":
+    ok = sum(port(n) for n in sys.argv[1:])
+    sh("make clean")
+    print(f"\nported {ok}/{len(sys.argv)-1} runs; build "
+          + ("GREEN" if "OK" in sh("make compare").stdout else "RED"))

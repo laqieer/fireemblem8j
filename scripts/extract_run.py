@@ -55,8 +55,10 @@ while i < n:
             sig = src[seg_start:brace_open]
             m = list(re.finditer(r"([A-Za-z_]\w*)\s*\(", sig))
             name = m[-1].group(1) if m else None
-            # struct/enum/union/array initialisers have no call-style sig
-            if name and not re.search(r"\b(struct|enum|union)\b", sig):
+            # A function's signature ends with its parameter list ')'. Struct/enum
+            # definitions and array/struct initialisers do not (they end in a name,
+            # '=', etc.) — this correctly keeps functions that *return* a struct.
+            if name and sig.rstrip().endswith(")"):
                 spans.append((name, func_start, i + 1))
                 if header_end is None:
                     header_end = func_start
