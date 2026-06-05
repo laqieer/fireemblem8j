@@ -2232,3 +2232,55 @@
 	.global gUnk_47
 	.set    gUnk_47, 0x03001838
 
+	.global SetBackgroundScreenSize
+	.type   SetBackgroundScreenSize, %function
+	.thumb_func
+	.set    SetBackgroundScreenSize, 0x08000FFC + 1
+
+	.global BgAffineSetOpAnim
+	.type   BgAffineSetOpAnim, %function
+	.thumb_func
+	.set    BgAffineSetOpAnim, 0x080CBAFC + 1
+
+	.global gObject_32x32
+	.set    gObject_32x32, 0x085B8CEC
+
+	.global BlendPaletteToColor
+	.type   BlendPaletteToColor, %function
+	.thumb_func
+	.set    BlendPaletteToColor, 0x080CB8BC + 1
+
+	.global gPal_TitleMainBackground
+	.set    gPal_TitleMainBackground, 0x08B43988
+
+	.global gPal_Titlescreen_2
+	.set    gPal_Titlescreen_2, 0x08B48918
+
+	.global gGfx_TitleDemonKing
+	.set    gGfx_TitleDemonKing, 0x08B49B6C
+
+	.global gTsa_TitleDemonKing
+	.set    gTsa_TitleDemonKing, 0x08B4A8B8
+
+	.global gPal_TitleDemonKing
+	.set    gPal_TitleDemonKing, 0x08B4AC2C
+
+	.global Title_SetBg2AffineScale
+	.type   Title_SetBg2AffineScale, %function
+	.thumb_func
+	.set    Title_SetBg2AffineScale, 0x080CA318 + 1
+
+	.global SetBackgroundMapDataOffset
+	.type   SetBackgroundMapDataOffset, %function
+	.thumb_func
+	.set    SetBackgroundMapDataOffset, 0x08000FB4 + 1
+
+	.global gGfx_Titlescreen_3
+	.set    gGfx_Titlescreen_3, 0x08B48D58
+
+	.global gTsa_Titlescreen_3
+	.set    gTsa_Titlescreen_3, 0x08B49A20
+
+	.global gPal_Titlescreen_4
+	.set    gPal_Titlescreen_4, 0x08B49B4C
+
