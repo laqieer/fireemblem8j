@@ -50,6 +50,18 @@ Read [`docs/strategy.md`](docs/strategy.md) before doing porting work.
 - `.clang-format`: Allman braces, 4-space indent, 100 cols.
 - When in doubt, copy the US file and adjust only what the JP ROM requires.
 
+## Working autonomously
+
+This project is driven autonomously (`/ralph-loop`, `/loop`, or headless
+`agency cc`). **Never stop to ask the human for a strategic decision.** At a fork
+(approach, architecture, next phase): consult the other AI tool for review —
+`agency cp --yolo -p "<question + context>"` (Copilot CLI) — validate its advice
+yourself, decide, and **log the decision + rationale in `docs/decisions.md` and
+on project board #14**, then continue. Read `docs/decisions.md` before deciding
+so you don't re-open or contradict settled decisions. Only escalate to the human
+for matters genuinely outside your authority or irreversible. See also the loop
+playbook in `docs/porting.md` and the per-iteration prompt `.claude/loop_prompt.md`.
+
 ## Reference repo
 
 `../fireemblem8u` — complete source, `fireemblem8.map`, `fireemblem8.elf`, and
