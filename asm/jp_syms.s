@@ -2357,3 +2357,83 @@
 	.thumb_func
 	.set    EfxDecodeSplitedPalette, 0x08073AE8 + 1
 
+	.global EfxCreateFrontAnim
+	.type   EfxCreateFrontAnim, %function
+	.thumb_func
+	.set    EfxCreateFrontAnim, 0x080564F0 + 1
+
+	.global ProcScr_efxDarkbreathOBJ
+	.set    ProcScr_efxDarkbreathOBJ, 0x085FF6A8
+
+	.global AnimScr_DarkBreath_Close
+	.set    AnimScr_DarkBreath_Close, 0x08612650
+
+	.global AnimScr_DarkBreath_Far
+	.set    AnimScr_DarkBreath_Far, 0x0874FDE0
+
+	.global gEkrDistanceType
+	.set    gEkrDistanceType, 0x0203E11C
+
+	.global SpellFx_RegisterObjPal
+	.type   SpellFx_RegisterObjPal, %function
+	.thumb_func
+	.set    SpellFx_RegisterObjPal, 0x0805679C + 1
+
+	.global SpellFx_RegisterObjGfx
+	.type   SpellFx_RegisterObjGfx, %function
+	.thumb_func
+	.set    SpellFx_RegisterObjGfx, 0x08056774 + 1
+
+	.global Pal_DarkBreathSprites
+	.set    Pal_DarkBreathSprites, 0x0860C620
+
+	.global Img_BreathSprites
+	.set    Img_BreathSprites, 0x0860A83C
+
+	.global AnimDelete
+	.type   AnimDelete, %function
+	.thumb_func
+	.set    AnimDelete, 0x08004F0C + 1
+
+	.global efxCrimsonEyeOBJ_GetOffsetX
+	.type   efxCrimsonEyeOBJ_GetOffsetX, %function
+	.thumb_func
+	.set    efxCrimsonEyeOBJ_GetOffsetX, 0x0806C958 + 1
+
+	.global efxCrimsonEyeOBJ_GetOffsetY
+	.type   efxCrimsonEyeOBJ_GetOffsetY, %function
+	.thumb_func
+	.set    efxCrimsonEyeOBJ_GetOffsetY, 0x0806C970 + 1
+
+	.global Div
+	.type   Div, %function
+	.thumb_func
+	.set    Div, 0x080D6374 + 1
+
+	.global SetObjAffine
+	.type   SetObjAffine, %function
+	.thumb_func
+	.set    SetObjAffine, 0x08002100 + 1
+
+	.global gSinLookup
+	.set    gSinLookup, 0x080DC15C
+
+	.global CopyPalWithFade
+	.type   CopyPalWithFade, %function
+	.thumb_func
+	.set    CopyPalWithFade, 0x0807A3EC + 1
+
+	.global SpellFx_RegisterBgPal
+	.type   SpellFx_RegisterBgPal, %function
+	.thumb_func
+	.set    SpellFx_RegisterBgPal, 0x080567E0 + 1
+
+	.global Pal_Ekrdragonfx_2
+	.set    Pal_Ekrdragonfx_2, 0x088481AC
+
+	.global Pal_DemonLightSprites
+	.set    Pal_DemonLightSprites, 0x087F9CA4
+
+	.global Img_DemonLightSprites
+	.set    Img_DemonLightSprites, 0x087F98E8
+

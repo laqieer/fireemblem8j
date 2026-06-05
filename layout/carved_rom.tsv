@@ -108,3 +108,6 @@ A9CA20	A9CA24	src/bmsave-lib.o(.data)	bmsave-lib .data
 0B3558	0B3564	src/sysutil.o(.text)	sysutil(run): AppendCharacter
 0CA838	0CAE84	src/titlescreen.o(.text)	titlescreen(run): Title_PrepareRotatingBlueLights, Title_Loop_DrawRotatingBlueLights, Title_PrepareRedBlueOrbs...
 055160	0554C4	src/banim-efxflashunit.o(.text)	banim-efxflashunit(run): EfxFlashHPBarDelay, EfxFlashHPBarMain1, EfxFlashHPBarRestorePal...
+05E7CC	05E8D8	src/banim-efxmagic-breath.o(.text)	banim-efxmagic-breath(run): StartSubSpell_efxDarkbreathOBJ, efxDarkbreathOBJ_Loop
+06C988	06CAE8	src/banim-efxmagic-crimsoneye.o(.text)	banim-efxmagic-crimsoneye(run): efxCrimsonEyeOBJ_GetAdjustedOffsetX, efxCrimsonEyeOBJ_GetAdjustedOffsetY, efxCrimsonEyeOBJ_SetAffineScaleEx
+068FB8	069054	src/banim-efxmagic-demonlight.o(.text)	banim-efxmagic-demonlight(run): efxMaohFlashBGCOL_Loop, efxMaohFlash_GetSideXOffset, efxMaohFlash_RegisterSpritesGfx
