@@ -30,3 +30,6 @@ GTAGS
 GRTAGS
 GPATH
 cscope.out
+
+# Generated progress report
+/progress.txt
