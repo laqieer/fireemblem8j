@@ -147,8 +147,34 @@ if extra:
     print(f"  NOTE: this TU also has {', '.join(extra)} — those need separate")
     print(f"        carve/placement (carved_ram for .bss/COMMON); .text-only rows below are incomplete.")
 
+# Map each symbol to its (section, value) so we can place the TU's own RAM data
+# (EWRAM_DATA -> 'ewram_data', static uninitialised -> .bss/COMMON) at the JP
+# addresses its .text literals point to.
+sym_sec = {}
+for ln in subprocess.run(["arm-none-eabi-objdump", "-t", OBJ], capture_output=True, text=True).stdout.splitlines():
+    p = ln.split()
+    # objdump -t: <value> <flags...> <section> <size> <name>
+    if len(p) >= 5 and p[0][0] in "0123456789abcdef":
+        sym_sec[p[-1]] = (p[-3], int(p[0], 16))  # name -> (section, offset-in-section)
+RAM_SECS = ("ewram_data", ".bss", "bss", "sbss", "*COM*")
+ram_place = {}  # section -> base JP address
+for off, typ, sym in relocs:
+    if typ != "R_ARM_ABS32" or sym.startswith("."):
+        continue
+    sec_off = sym_sec.get(sym)
+    if not sec_off or sec_off[0] not in RAM_SECS:
+        continue
+    jp_addr = int.from_bytes(jp[base + off:base + off + 4], "little")
+    sec_base = jp_addr - sec_off[1]  # section base = sym JP addr - sym offset in section
+    ram_place.setdefault(sec_off[0], sec_base)
+
 print("  --- ready-to-paste manifest rows ---")
 print(f"  carved_rom.tsv: {base:06X}\t{base+size:06X}\tsrc/{NAME}.o(.text)\t{NAME}")
+if ram_place:
+    sec_base = min(ram_place.values())
+    region = "iwram" if (sec_base >> 24) == 0x03 else "ewram"
+    specs = " ".join(f"src/{NAME}.o({s})" for s in ram_place)
+    print(f"  carved_ram.tsv: {sec_base:08X}\t{region}\t{specs}\t{NAME}")
 print("  baseline_syms.tsv (only add symbols not already present):")
 for sym in sorted(data_syms):
     if sym not in undefined:
