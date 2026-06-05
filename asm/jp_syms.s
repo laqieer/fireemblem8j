@@ -1500,3 +1500,8 @@
 	.thumb_func
 	.set    GmMu_GetPosition, 0x080C318C + 1
 
+	.global StartPromoClassSelect
+	.type   StartPromoClassSelect, %function
+	.thumb_func
+	.set    StartPromoClassSelect, 0x080D1A3C + 1
+

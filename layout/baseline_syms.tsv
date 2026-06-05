@@ -349,3 +349,4 @@ gWMNodeData	081F5D7C	data	worldmap_screen2
 ProcScr_GmapTimeMons	08AC2468	data	worldmap_timemons
 GmMu_SetPosition	080C3144	thumb	worldmap_timemons
 GmMu_GetPosition	080C318C	thumb	worldmap_tm_confront
+StartPromoClassSelect	080D1A3C	thumb	classchg-sel
