@@ -75,12 +75,27 @@ for uv, c in votes.items():
     if sum(c.values()) - n == 0:  # unambiguous
         pairs[uv] = jv
 
+# Interpolate: between two adjacent observed anchors with the SAME offset, every
+# id in the gap maps with that offset (high confidence — both ends agree). Bad
+# guesses (a hidden offset change) only cause a port to revert, never corruption.
+anchors = sorted(pairs.items())
+interp = 0
+for i in range(len(anchors) - 1):
+    (u0, j0), (u1, j1) = anchors[i], anchors[i + 1]
+    if j0 - u0 == j1 - u1 and u1 - u0 <= 0x100:
+        off = j0 - u0
+        for u in range(u0 + 1, u1):
+            if u not in pairs:
+                pairs[u] = u + off
+                src_of[u] = "interp"
+                interp += 1
+
 os.makedirs("layout", exist_ok=True)
 with open("layout/msg_map.tsv", "w") as f:
     f.write("# us_id\tjp_id\tsource\n")
     for uv in sorted(pairs):
         f.write(f"{uv:04X}\t{pairs[uv]:04X}\t{src_of.get(uv,'auto')}\n")
 print(f"{ntables} candidate tables -> {len(pairs)} US->JP message-id pairs "
-      f"({100*len(pairs)//JP_COUNT}% of JP messages) -> layout/msg_map.tsv")
+      f"({100*len(pairs)//JP_COUNT}% of JP messages; {interp} interpolated) -> layout/msg_map.tsv")
 shifted = sum(1 for uv, jv in pairs.items() if uv != jv)
 print(f"  offset-0 (same id): {len(pairs)-shifted}, shifted (relinked): {shifted}")
