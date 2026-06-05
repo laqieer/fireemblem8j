@@ -1716,3 +1716,76 @@
 	.thumb_func
 	.set    ClearFlag, 0x080860BC + 1
 
+	.global UnitRemoveInvalidItems
+	.type   UnitRemoveInvalidItems, %function
+	.thumb_func
+	.set    UnitRemoveInvalidItems, 0x0801772C + 1
+
+	.global GetUnitItemCount
+	.type   GetUnitItemCount, %function
+	.thumb_func
+	.set    GetUnitItemCount, 0x08017780 + 1
+
+	.global UnpackUiBarPalette
+	.type   UnpackUiBarPalette, %function
+	.thumb_func
+	.set    UnpackUiBarPalette, 0x0804EEBC + 1
+
+	.global GetUnitPower
+	.type   GetUnitPower, %function
+	.thumb_func
+	.set    GetUnitPower, 0x08018EC4 + 1
+
+	.global GetUnitSkill
+	.type   GetUnitSkill, %function
+	.thumb_func
+	.set    GetUnitSkill, 0x08018EE4 + 1
+
+	.global GetUnitSpeed
+	.type   GetUnitSpeed, %function
+	.thumb_func
+	.set    GetUnitSpeed, 0x08018F24 + 1
+
+	.global GetUnitLuck
+	.type   GetUnitLuck, %function
+	.thumb_func
+	.set    GetUnitLuck, 0x08018FAC + 1
+
+	.global GetUnitDefense
+	.type   GetUnitDefense, %function
+	.thumb_func
+	.set    GetUnitDefense, 0x08018F64 + 1
+
+	.global GetUnitResistance
+	.type   GetUnitResistance, %function
+	.thumb_func
+	.set    GetUnitResistance, 0x08018F84 + 1
+
+	.global DrawStatBarGfx
+	.type   DrawStatBarGfx, %function
+	.thumb_func
+	.set    DrawStatBarGfx, 0x08088DE8 + 1
+
+	.global PutNumberOrBlank
+	.type   PutNumberOrBlank, %function
+	.thumb_func
+	.set    PutNumberOrBlank, 0x08004A9C + 1
+
+	.global TileMap_FillRect
+	.type   TileMap_FillRect, %function
+	.thumb_func
+	.set    TileMap_FillRect, 0x080DC0E4 + 1
+
+	.global DrawPrepScreenSprites
+	.type   DrawPrepScreenSprites, %function
+	.thumb_func
+	.set    DrawPrepScreenSprites, 0x08098C3C + 1
+
+	.global APProc_Delete
+	.type   APProc_Delete, %function
+	.thumb_func
+	.set    APProc_Delete, 0x080096A4 + 1
+
+	.global ProcScr_PrepScreenSpriteDraw
+	.set    ProcScr_PrepScreenSpriteDraw, 0x08A943F8
+
