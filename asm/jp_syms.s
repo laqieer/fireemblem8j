@@ -741,3 +741,52 @@
 	.global gEfxBgSemaphore
 	.set    gEfxBgSemaphore, 0x0201774C
 
+	.global GetConvoyItemArray
+	.type   GetConvoyItemArray, %function
+	.thumb_func
+	.set    GetConvoyItemArray, 0x0803144C + 1
+
+	.global gpBgVerticalScrollSt
+	.set    gpBgVerticalScrollSt, 0x03004930
+
+	.global SetPrimaryHBlankHandler
+	.type   SetPrimaryHBlankHandler, %function
+	.thumb_func
+	.set    SetPrimaryHBlankHandler, 0x08001D28 + 1
+
+	.global GetCharTextLen
+	.type   GetCharTextLen, %function
+	.thumb_func
+	.set    GetCharTextLen, 0x08003E6C + 1
+
+	.global CallARM_FillTileRect
+	.type   CallARM_FillTileRect, %function
+	.thumb_func
+	.set    CallARM_FillTileRect, 0x080DC0DC + 1
+
+	.global gTsa_UnkData_0
+	.set    gTsa_UnkData_0, 0x08A7DCB8
+
+	.global GetROMChapterStruct
+	.type   GetROMChapterStruct, %function
+	.thumb_func
+	.set    GetROMChapterStruct, 0x08034520 + 1
+
+	.global GetPlayChapterId
+	.type   GetPlayChapterId, %function
+	.thumb_func
+	.set    GetPlayChapterId, 0x080C1DE8 + 1
+
+	.global GetNextUnclearedNode
+	.type   GetNextUnclearedNode, %function
+	.thumb_func
+	.set    GetNextUnclearedNode, 0x080C1E20 + 1
+
+	.global gWMMonsterSpawnsSize
+	.type   gWMMonsterSpawnsSize, %function
+	.thumb_func
+	.set    gWMMonsterSpawnsSize, 0x081F661C + 1
+
+	.global gWMMonsterSpawnLocations
+	.set    gWMMonsterSpawnLocations, 0x081F6614
+

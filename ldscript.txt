@@ -37,51 +37,63 @@ SECTIONS
         asm/baserom.o(.gap_4);
         src/bmlib.o(.text);
         asm/baserom.o(.gap_5);
-        src/koido.o(.text);
+        src/bmlib-hblank.o(.text);
         asm/baserom.o(.gap_6);
-        src/bmxfade.o(.text);
+        src/koido.o(.text);
         asm/baserom.o(.gap_7);
-        src/unit_facing.o(.text);
+        src/bmxfade.o(.text);
         asm/baserom.o(.gap_8);
-        src/minefx.o(.text);
+        src/bmcamadjust.o(.text);
         asm/baserom.o(.gap_9);
+        src/unit_facing.o(.text);
+        asm/baserom.o(.gap_10);
+        src/minefx.o(.text);
+        asm/baserom.o(.gap_11);
         src/bmphase.o(.text);
         src/bmgold.o(.text);
-        asm/baserom.o(.gap_10);
-        src/bmreliance.o(.text);
-        asm/baserom.o(.gap_11);
-        src/bmtrick.o(.text);
         asm/baserom.o(.gap_12);
-        src/bmusort.o(.text);
+        src/bmreliance.o(.text);
         asm/baserom.o(.gap_13);
-        src/banim-ekrlvupfan.o(.text);
+        src/bmtrick.o(.text);
         asm/baserom.o(.gap_14);
-        src/banim-efxflashobj.o(.text);
+        src/bmcontainer.o(.text);
         asm/baserom.o(.gap_15);
-        src/banim-efxmagic-bolting.o(.text);
+        src/bmusort.o(.text);
         asm/baserom.o(.gap_16);
-        src/spellassoc.o(.text);
+        src/banim-ekrlvupfan.o(.text);
         asm/baserom.o(.gap_17);
-        src/mapanim_eventbattle.o(.text);
+        src/banim-efxflashobj.o(.text);
         asm/baserom.o(.gap_18);
-        src/helpbox.o(.text);
+        src/banim-efxmagic-bolting.o(.text);
         asm/baserom.o(.gap_19);
-        src/bmsave.o(.text);
+        src/spellassoc.o(.text);
         asm/baserom.o(.gap_20);
-        src/worldmap_draw.o(.text);
+        src/mapanim_eventbattle.o(.text);
         asm/baserom.o(.gap_21);
-        src/rng.o(.rodata);
+        src/chapter_title.o(.text);
         asm/baserom.o(.gap_22);
-        src/bmreliance.o(.rodata);
+        src/helpbox.o(.text);
         asm/baserom.o(.gap_23);
-        src/minefx.o(.data);
+        src/bmsave.o(.text);
         asm/baserom.o(.gap_24);
+        src/bonusclaim_helpbox.o(.text);
+        asm/baserom.o(.gap_25);
+        src/worldmap_draw.o(.text);
+        asm/baserom.o(.gap_26);
+        src/rng.o(.rodata);
+        asm/baserom.o(.gap_27);
+        src/bmreliance.o(.rodata);
+        asm/baserom.o(.gap_28);
+        src/minefx.o(.data);
+        asm/baserom.o(.gap_29);
     } > rom
 
     .bss_0 0x03000000 (NOLOAD) : { src/rng.o(.bss) src/rng.o(COMMON) } > iwram  /* rng: gRNSeeds, gLCGRNValue */
     .bss_1 0x0203A8E0 (NOLOAD) : { src/bmusort.o(ewram_data) src/bmusort.o(.bss) src/bmusort.o(COMMON) } > ewram  /* bmusort: sUnitStack* (EWRAM_DATA) */
     .bss_2 0x0203EDB0 (NOLOAD) : { src/bmsave.o(ewram_data) } > ewram  /* bmsave */
     .bss_3 0x0203E7C4 (NOLOAD) : { src/helpbox.o(ewram_data) } > ewram  /* helpbox */
+    .bss_4 0x0203A818 (NOLOAD) : { src/bmcontainer.o(ewram_data) } > ewram  /* bmcontainer */
+    .bss_5 0x0203E788 (NOLOAD) : { src/chapter_title.o(ewram_data) } > ewram  /* chapter_title */
 
     /DISCARD/ :
     {

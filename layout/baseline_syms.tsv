@@ -166,3 +166,14 @@ gEfxPal	020165C8	data	banim-efxmagic-bolting
 SpellFx_ClearBG1	08056130	thumb	banim-efxmagic-bolting
 SetDefaultColorEffects_	08056214	thumb	banim-efxmagic-bolting
 gEfxBgSemaphore	0201774C	data	banim-efxmagic-bolting
+GetConvoyItemArray	0803144C	thumb	bmcontainer
+gpBgVerticalScrollSt	03004930	data	bmlib-hblank
+SetPrimaryHBlankHandler	08001D28	thumb	bmlib-hblank
+GetCharTextLen	08003E6C	thumb	bonusclaim_helpbox
+CallARM_FillTileRect	080DC0DC	thumb	chapter_title
+gTsa_UnkData_0	08A7DCB8	data	chapter_title
+GetROMChapterStruct	08034520	thumb	chapter_title
+GetPlayChapterId	080C1DE8	thumb	chapter_title
+GetNextUnclearedNode	080C1E20	thumb	chapter_title
+gWMMonsterSpawnsSize	081F661C	thumb	chapter_title
+gWMMonsterSpawnLocations	081F6614	data	chapter_title

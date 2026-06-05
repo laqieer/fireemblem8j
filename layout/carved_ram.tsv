@@ -6,3 +6,5 @@
 0203A8E0	ewram	src/bmusort.o(ewram_data) src/bmusort.o(.bss) src/bmusort.o(COMMON)	bmusort: sUnitStack* (EWRAM_DATA)
 0203EDB0	ewram	src/bmsave.o(ewram_data)	bmsave
 0203E7C4	ewram	src/helpbox.o(ewram_data)	helpbox
+0203A818	ewram	src/bmcontainer.o(ewram_data)	bmcontainer
+0203E788	ewram	src/chapter_title.o(ewram_data)	chapter_title
