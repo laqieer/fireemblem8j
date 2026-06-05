@@ -1218,3 +1218,170 @@
 	.thumb_func
 	.set    ClearBg0Bg1, 0x0804F610 + 1
 
+	.global ARMCodeToCopy_End
+	.set    ARMCodeToCopy_End, 0x08000A20
+
+	.global ARMCodeToCopy_Start
+	.set    ARMCodeToCopy_Start, 0x08000228
+
+	.global gUnk_68
+	.set    gUnk_68, 0x030036F0
+
+	.global gUnk_67
+	.set    gUnk_67, 0x030036E0
+
+	.global DrawGlyph
+	.set    DrawGlyph, 0x08000564
+
+	.global DecodeStringRAMFunc
+	.set    DecodeStringRAMFunc, 0x030040F0
+
+	.global DecodeString
+	.set    DecodeString, 0x080006E4
+
+	.global gUnk_66
+	.set    gUnk_66, 0x030030D0
+
+	.global PutOamHi
+	.set    PutOamHi, 0x08000494
+
+	.global gUnk_69
+	.set    gUnk_69, 0x030040F4
+
+	.global PutOamLo
+	.set    PutOamLo, 0x08000534
+
+	.global gUnk_70
+	.set    gUnk_70, 0x03004900
+
+	.global MapFloodCoreStep
+	.set    MapFloodCoreStep, 0x08000784
+
+	.global gUnk_65
+	.set    gUnk_65, 0x030030C8
+
+	.global MapFloodCore
+	.set    MapFloodCore, 0x08000874
+
+	.global _call_via_r4
+	.type   _call_via_r4, %function
+	.thumb_func
+	.set    _call_via_r4, 0x080D65CC + 1
+
+	.global _call_via_r2
+	.type   _call_via_r2, %function
+	.thumb_func
+	.set    _call_via_r2, 0x080D65C4 + 1
+
+	.global StartPalFade
+	.type   StartPalFade, %function
+	.thumb_func
+	.set    StartPalFade, 0x080139E0 + 1
+
+	.global ProcScr_SioMu_0
+	.set    ProcScr_SioMu_0, 0x085D48E0
+
+	.global ProcScr_MuDeathFade
+	.set    ProcScr_MuDeathFade, 0x08A13308
+
+	.global ProcScr_MuRestorePalInfo
+	.set    ProcScr_MuRestorePalInfo, 0x08A13380
+
+	.global Pal_AllWhite
+	.set    Pal_AllWhite, 0x085C25C0
+
+	.global Pal_AllBlack
+	.set    Pal_AllBlack, 0x085C25A0
+
+	.global Pal_AllRed
+	.set    Pal_AllRed, 0x085C25E0
+
+	.global Pal_AllGreen
+	.set    Pal_AllGreen, 0x085C2600
+
+	.global Pal_AllBlue
+	.set    Pal_AllBlue, 0x085C2620
+
+	.global Pal_AllYellow
+	.set    Pal_AllYellow, 0x085C2640
+
+	.global gLinkArenaSt
+	.set    gLinkArenaSt, 0x0203DA20
+
+	.global ClearText
+	.type   ClearText, %function
+	.thumb_func
+	.set    ClearText, 0x08003CF8 + 1
+
+	.global gLinkArenaRuleData
+	.set    gLinkArenaRuleData, 0x080DEE28
+
+	.global gUnk_Sio_7
+	.set    gUnk_Sio_7, 0x0203DA84
+
+	.global DisplayUiHand
+	.type   DisplayUiHand, %function
+	.thumb_func
+	.set    DisplayUiHand, 0x0804F528 + 1
+
+	.global SioPlaySoundEffect
+	.type   SioPlaySoundEffect, %function
+	.thumb_func
+	.set    SioPlaySoundEffect, 0x08043190 + 1
+
+	.global ReadGameSave
+	.type   ReadGameSave, %function
+	.thumb_func
+	.set    ReadGameSave, 0x080A9B40 + 1
+
+	.global ApplyUnitSpritePalettes
+	.type   ApplyUnitSpritePalettes, %function
+	.thumb_func
+	.set    ApplyUnitSpritePalettes, 0x080265CC + 1
+
+	.global LinkArenaBattleMap_InitChapter
+	.type   LinkArenaBattleMap_InitChapter, %function
+	.thumb_func
+	.set    LinkArenaBattleMap_InitChapter, 0x0804A4A0 + 1
+
+	.global ProcScr_AtMenu
+	.set    ProcScr_AtMenu, 0x08A93FE8
+
+	.global ClearSioBGFull
+	.type   ClearSioBGFull, %function
+	.thumb_func
+	.set    ClearSioBGFull, 0x08043020 + 1
+
+	.global Nop_SioUiutils_0
+	.type   Nop_SioUiutils_0, %function
+	.thumb_func
+	.set    Nop_SioUiutils_0, 0x0804D148 + 1
+
+	.global EndLinkArenaTitleBanner
+	.type   EndLinkArenaTitleBanner, %function
+	.thumb_func
+	.set    EndLinkArenaTitleBanner, 0x0804D298 + 1
+
+	.global ResetLinkArenaUiBlend
+	.type   ResetLinkArenaUiBlend, %function
+	.thumb_func
+	.set    ResetLinkArenaUiBlend, 0x0804D330 + 1
+
+	.global EndLinkArenaButtonSpriteDraw
+	.type   EndLinkArenaButtonSpriteDraw, %function
+	.thumb_func
+	.set    EndLinkArenaButtonSpriteDraw, 0x0804D0BC + 1
+
+	.global BMapVSync_End
+	.type   BMapVSync_End, %function
+	.thumb_func
+	.set    BMapVSync_End, 0x080300C4 + 1
+
+	.global StartPrepAtMenu
+	.type   StartPrepAtMenu, %function
+	.thumb_func
+	.set    StartPrepAtMenu, 0x08098738 + 1
+
+	.global gUnk_Sio_12
+	.set    gUnk_Sio_12, 0x0203DD20
+
