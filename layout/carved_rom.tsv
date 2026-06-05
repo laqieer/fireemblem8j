@@ -55,3 +55,7 @@ A9DAA4	A9DAB4	src/cursor_hand.o(.data)	cursor_hand .data
 5C39D0	5C3A08	src/emitstarfx.o(.data)	emitstarfx .data
 010F08	010F98	src/eventscr2.o(.text)	eventscr2(run): ReputConvoBg_unused, ResetDialogueScreen
 0B5070	0B50D4	src/extramenu_unk.o(.text)	extramenu_unk(run): ExtramenuUnk_HBlank
+01E150	01E3A4	src/menuitempanel.o(.text)	menuitempanel(run): MenuItemPanelProcIdle, ForceMenuItemPanel
+5C3308	5C3320	src/menuitempanel.o(.data)	menuitempanel .data
+01F61C	01F804	src/popup2.o(.text)	popup2(run): ProcPopup2_Init, ProcPopup2_Loop, NewPopup2_PlanA...
+5C3540	5C3560	src/popup2.o(.data)	popup2 .data

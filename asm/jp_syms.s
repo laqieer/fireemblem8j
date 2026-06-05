@@ -1123,3 +1123,98 @@
 	.thumb_func
 	.set    __divsi3, 0x080D65F8 + 1
 
+	.global UpdateStatArrowSprites
+	.type   UpdateStatArrowSprites, %function
+	.thumb_func
+	.set    UpdateStatArrowSprites, 0x08015BF0 + 1
+
+	.global GetUnitEquippedWeaponSlot
+	.type   GetUnitEquippedWeaponSlot, %function
+	.thumb_func
+	.set    GetUnitEquippedWeaponSlot, 0x08016900 + 1
+
+	.global InitTextDb
+	.type   InitTextDb, %function
+	.thumb_func
+	.set    InitTextDb, 0x08003CB4 + 1
+
+	.global LoadIconPalette
+	.type   LoadIconPalette, %function
+	.thumb_func
+	.set    LoadIconPalette, 0x08003520 + 1
+
+	.global BattleGenerateUiStats
+	.type   BattleGenerateUiStats, %function
+	.thumb_func
+	.set    BattleGenerateUiStats, 0x0802A38C + 1
+
+	.global GetStringTextLen
+	.type   GetStringTextLen, %function
+	.thumb_func
+	.set    GetStringTextLen, 0x08003E0C + 1
+
+	.global DrawUiFrame2
+	.type   DrawUiFrame2, %function
+	.thumb_func
+	.set    DrawUiFrame2, 0x0804F0EC + 1
+
+	.global ResetIconGraphics_
+	.type   ResetIconGraphics_, %function
+	.thumb_func
+	.set    ResetIconGraphics_, 0x080034C4 + 1
+
+	.global LoadIconPalettes
+	.type   LoadIconPalettes, %function
+	.thumb_func
+	.set    LoadIconPalettes, 0x08003508 + 1
+
+	.global DrawIcon
+	.type   DrawIcon, %function
+	.thumb_func
+	.set    DrawIcon, 0x08003608 + 1
+
+	.global ResetTextFont
+	.type   ResetTextFont, %function
+	.thumb_func
+	.set    ResetTextFont, 0x08003C50 + 1
+
+	.global PutDrawText
+	.type   PutDrawText, %function
+	.thumb_func
+	.set    PutDrawText, 0x08004374 + 1
+
+	.global InitText
+	.type   InitText, %function
+	.thumb_func
+	.set    InitText, 0x08003C8C + 1
+
+	.global Text_Skip
+	.type   Text_Skip, %function
+	.thumb_func
+	.set    Text_Skip, 0x08003D88 + 1
+
+	.global Text_SetColor
+	.type   Text_SetColor, %function
+	.thumb_func
+	.set    Text_SetColor, 0x08003D90 + 1
+
+	.global Text_DrawString
+	.type   Text_DrawString, %function
+	.thumb_func
+	.set    Text_DrawString, 0x08003F28 + 1
+
+	.global Text_DrawNumberOrSpace
+	.type   Text_DrawNumberOrSpace, %function
+	.thumb_func
+	.set    Text_DrawNumberOrSpace, 0x08003FEC + 1
+
+	.global PutText
+	.type   PutText, %function
+	.thumb_func
+	.set    PutText, 0x08003DA0 + 1
+
+	.global ClearBg0Bg1
+	.type   ClearBg0Bg1, %function
+	.thumb_func
+	.set    ClearBg0Bg1, 0x0804F610 + 1
+
