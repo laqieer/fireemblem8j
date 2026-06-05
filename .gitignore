@@ -39,3 +39,6 @@ cscope.out
 
 # WIP: JP text dump (encoding not yet clean)
 /texts/jp_messages.txt
+
+# Harvest driver local state
+/.harvest_tried
