@@ -19,3 +19,17 @@
 	.thumb_func
 	.set    __modsi3, 0x080D6690 + 1
 
+	.global CpuFastSet
+	.type   CpuFastSet, %function
+	.thumb_func
+	.set    CpuFastSet, 0x080D636C + 1
+
+	.global IrqMain
+	.set    IrqMain, 0x080000FC
+
+	.global IntrMain_Buffer
+	.set    IntrMain_Buffer, 0x03004100
+
+	.global gIRQHandlers
+	.set    gIRQHandlers, 0x03003090
+

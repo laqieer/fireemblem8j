@@ -6,3 +6,7 @@
 crt0	080000C0	arm	boot, branched to from the ROM header
 memcpy	080D6908	thumb	libc, called by InitRN to copy the seed table
 __modsi3	080D6690	thumb	libgcc, signed modulo (InitRN: seed % 7, % 23)
+CpuFastSet	080D636C	thumb	libc CpuFastSet wrapper, called by irq StoreIRQToIRAM
+IrqMain	080000FC	data	ARM IRQ entry, address copied to IWRAM by irq
+IntrMain_Buffer	03004100	data	IWRAM copy of the IRQ dispatcher (irq)
+gIRQHandlers	03003090	data	IWRAM IRQ handler table (irq)
