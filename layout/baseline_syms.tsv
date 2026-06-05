@@ -713,3 +713,13 @@ gEkrdragonDemonkingobj_2	08856004	data	banim-ekrdragon-demonkingobj
 SetBlackPal	08013B3C	thumb	banim-ekrdragon-demonkingobj
 Tsa_Ekrdk_0	08848B28	data	banim-ekrdragon-demonkingobj
 EkrDemonkingObj_StartDissolveProc	0807A310	thumb	banim-ekrdragon-demonkingobj
+gBanimmisc_9	08856E5C	data	banim-ekrgauge
+GetAISLayerId	0805AEF8	thumb	banim-ekrmainmini
+StartClassReelSpellAnim	08071104	thumb	banim-ekrmainmini
+RegisterAISSheetGraphics	0805A6E0	thumb	banim-ekrmainmini
+NewEkrChienCHR	0805A6B0	thumb	banim-ekrmainmini
+banim_data	08C00008	data	banim-ekrmainmini
+BanimDefaultModeConfig	080DFF00	data	banim-ekrmainmini
+BanimScr_DefaultAnim	085E3F8C	data	banim-ekrmainmini
+AnimCreate	08004E50	thumb	banim-ekrmainmini
+character_battle_animation_palette_table	08EF8008	data	banim-ekrmainmini

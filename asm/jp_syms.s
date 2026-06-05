@@ -2998,3 +2998,43 @@
 	.thumb_func
 	.set    EkrDemonkingObj_StartDissolveProc, 0x0807A310 + 1
 
+	.global gBanimmisc_9
+	.set    gBanimmisc_9, 0x08856E5C
+
+	.global GetAISLayerId
+	.type   GetAISLayerId, %function
+	.thumb_func
+	.set    GetAISLayerId, 0x0805AEF8 + 1
+
+	.global StartClassReelSpellAnim
+	.type   StartClassReelSpellAnim, %function
+	.thumb_func
+	.set    StartClassReelSpellAnim, 0x08071104 + 1
+
+	.global RegisterAISSheetGraphics
+	.type   RegisterAISSheetGraphics, %function
+	.thumb_func
+	.set    RegisterAISSheetGraphics, 0x0805A6E0 + 1
+
+	.global NewEkrChienCHR
+	.type   NewEkrChienCHR, %function
+	.thumb_func
+	.set    NewEkrChienCHR, 0x0805A6B0 + 1
+
+	.global banim_data
+	.set    banim_data, 0x08C00008
+
+	.global BanimDefaultModeConfig
+	.set    BanimDefaultModeConfig, 0x080DFF00
+
+	.global BanimScr_DefaultAnim
+	.set    BanimScr_DefaultAnim, 0x085E3F8C
+
+	.global AnimCreate
+	.type   AnimCreate, %function
+	.thumb_func
+	.set    AnimCreate, 0x08004E50 + 1
+
+	.global character_battle_animation_palette_table
+	.set    character_battle_animation_palette_table, 0x08EF8008
+
