@@ -1970,3 +1970,103 @@
 	.thumb_func
 	.set    StartBgmExt, 0x08002434 + 1
 
+	.global gUnk_41
+	.set    gUnk_41, 0x03001808
+
+	.global ArenaGetResult
+	.type   ArenaGetResult, %function
+	.thumb_func
+	.set    ArenaGetResult, 0x08031E24 + 1
+
+	.global DisplayGoldBoxText
+	.type   DisplayGoldBoxText, %function
+	.thumb_func
+	.set    DisplayGoldBoxText, 0x080B9A5C + 1
+
+	.global Proc_ForEach
+	.type   Proc_ForEach, %function
+	.thumb_func
+	.set    Proc_ForEach, 0x08002EE8 + 1
+
+	.global gProcScr_GoldBox
+	.set    gProcScr_GoldBox, 0x08ABCAB8
+
+	.global ProcScr_Mu
+	.set    ProcScr_Mu, 0x08A132D0
+
+	.global ShowMu
+	.type   ShowMu, %function
+	.thumb_func
+	.set    ShowMu, 0x0807BBF0 + 1
+
+	.global SetInitTalkTextFont
+	.type   SetInitTalkTextFont, %function
+	.thumb_func
+	.set    SetInitTalkTextFont, 0x0800687C + 1
+
+	.global ClearTalkText
+	.type   ClearTalkText, %function
+	.thumb_func
+	.set    ClearTalkText, 0x0800814C + 1
+
+	.global StartTalkExt
+	.type   StartTalkExt, %function
+	.thumb_func
+	.set    StartTalkExt, 0x08006890 + 1
+
+	.global SetTalkPrintColor
+	.type   SetTalkPrintColor, %function
+	.thumb_func
+	.set    SetTalkPrintColor, 0x08006A14 + 1
+
+	.global SetTalkFlag
+	.type   SetTalkFlag, %function
+	.thumb_func
+	.set    SetTalkFlag, 0x080069AC + 1
+
+	.global SetActiveTalkFace
+	.type   SetActiveTalkFace, %function
+	.thumb_func
+	.set    SetActiveTalkFace, 0x0800773C + 1
+
+	.global SetTextFont
+	.type   SetTextFont, %function
+	.thumb_func
+	.set    SetTextFont, 0x08003C68 + 1
+
+	.global InitSystemTextFont
+	.type   InitSystemTextFont, %function
+	.thumb_func
+	.set    InitSystemTextFont, 0x080042E0 + 1
+
+	.global PutString
+	.type   PutString, %function
+	.thumb_func
+	.set    PutString, 0x08014450 + 1
+
+	.global PutNumber
+	.type   PutNumber, %function
+	.thumb_func
+	.set    PutNumber, 0x08004A90 + 1
+
+	.global GetItemName
+	.type   GetItemName, %function
+	.thumb_func
+	.set    GetItemName, 0x0801729C + 1
+
+	.global gMid_Lv
+	.set    gMid_Lv, 0x08A73210
+
+	.global gArenaState
+	.set    gArenaState, 0x0203A8EC
+
+	.global StartBgmCore
+	.type   StartBgmCore, %function
+	.thumb_func
+	.set    StartBgmCore, 0x08002398 + 1
+
+	.global EndGmapEffect
+	.type   EndGmapEffect, %function
+	.thumb_func
+	.set    EndGmapEffect, 0x080C619C + 1
+
