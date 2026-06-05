@@ -1,0 +1,31 @@
+OUTPUT_ARCH(arm)
+
+MEMORY
+{
+    rom   : ORIGIN = 0x08000000, LENGTH = 32M
+    iwram : ORIGIN = 0x03000000, LENGTH = 32K
+    ewram : ORIGIN = 0x02000000, LENGTH = 256K
+}
+
+__text_start  = ORIGIN(rom);
+__rom_start   = ORIGIN(rom);
+__ewram_start = ORIGIN(ewram);
+__iwram_start = ORIGIN(iwram);
+
+SECTIONS
+{
+    .rom __rom_start : ALIGN(4)
+    {
+        /* Decompiled .text/.data objects get inserted here, in ROM order,
+           ahead of the shrinking raw-ROM baseline below. */
+        asm/baserom.o(.rom);
+    } > rom
+
+    /DISCARD/ :
+    {
+        *(.debug*)
+        *(.comment)
+        *(.note*)
+        *(.ARM.attributes)
+    }
+}

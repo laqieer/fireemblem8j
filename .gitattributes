@@ -1,0 +1,9 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+*.bin binary
+
+# Palette files must keep CRLF on checkout to stay byte-identical.
+*.pal text eol=crlf
+
+*.sha1 text eol=lf

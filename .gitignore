@@ -1,0 +1,32 @@
+# Original ROM — provide your own local copy (sha1 in checksum.sha1)
+/baserom.gba
+
+# Build outputs
+*.gba
+*.elf
+*.map
+*.o
+*.obj
+*.d
+.dep/
+.deps/
+
+# Compiler-generated assembly (agbcc emits src/x.s next to src/x.c).
+# Hand-written assembly lives in asm/ and is tracked.
+src/*.s
+src/data/*.s
+
+# Locally-installed toolchain (install agbcc the same way as the US decomp)
+/tools/agbcc
+
+# Local Claude Code config
+/.claude/
+
+# Editor / OS cruft
+*.swp
+.DS_Store
+tags
+GTAGS
+GRTAGS
+GPATH
+cscope.out
