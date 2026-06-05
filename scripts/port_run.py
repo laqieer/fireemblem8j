@@ -33,12 +33,13 @@ def carved_objs():
 def port(name):
     if f"src/{name}.o" in carved_objs():
         print(f"{name}: already has a carved run — skipping"); return False
-    out = sh(f"python3 scripts/locate_funcs.py {name}").stdout
-    runs = re.findall(r"RUN ([0-9A-F]+)\.\.([0-9A-F]+)  \((\d+) fns: ([^)]+)\)", out)
+    # Verified runs only (D2): each block byte-matches the JP ROM at its base.
+    out = sh(f"python3 scripts/find_runs.py {name}").stdout
+    runs = [(l.split()[0], l.split()[1], l.split()[2].split(","))
+            for l in out.splitlines() if l.strip()]
     if not runs:
-        print(f"{name}: no runs located"); return False
-    start, end, _, fns = max(runs, key=lambda r: int(r[2]))
-    funcs = [f.strip() for f in fns.split(",")]
+        print(f"{name}: no verified runs"); return False
+    start, end, funcs = max(runs, key=lambda r: len(r[2]))
     base = int(start, 16) - 0x08000000  # ROM-file offset (for indexing baserom)
 
     MANI = ["layout/carved_rom.tsv", "layout/carved_ram.tsv", "layout/baseline_syms.tsv"]

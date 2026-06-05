@@ -153,3 +153,241 @@
 	.thumb_func
 	.set    __umodsi3, 0x080D6848 + 1
 
+	.global _call_via_r3
+	.type   _call_via_r3, %function
+	.thumb_func
+	.set    _call_via_r3, 0x080D65C8 + 1
+
+	.global LoadGMMonsterRnState
+	.type   LoadGMMonsterRnState, %function
+	.thumb_func
+	.set    LoadGMMonsterRnState, 0x080ABC10 + 1
+
+	.global ReadSramFast
+	.set    ReadSramFast, 0x03006790
+
+	.global WriteSaveBlockInfo
+	.type   WriteSaveBlockInfo, %function
+	.thumb_func
+	.set    WriteSaveBlockInfo, 0x080A79D8 + 1
+
+	.global IsSramWorking
+	.type   IsSramWorking, %function
+	.thumb_func
+	.set    IsSramWorking, 0x080A76F4 + 1
+
+	.global GetNextSuspendSaveId
+	.type   GetNextSuspendSaveId, %function
+	.thumb_func
+	.set    GetNextSuspendSaveId, 0x080AADE8 + 1
+
+	.global GetSaveWriteAddr
+	.type   GetSaveWriteAddr, %function
+	.thumb_func
+	.set    GetSaveWriteAddr, 0x080A7AA8 + 1
+
+	.global GetGameClock
+	.type   GetGameClock, %function
+	.thumb_func
+	.set    GetGameClock, 0x08000CD8 + 1
+
+	.global WriteAndVerifySramFast
+	.type   WriteAndVerifySramFast, %function
+	.thumb_func
+	.set    WriteAndVerifySramFast, 0x080D6548 + 1
+
+	.global StoreRNStateToActionStruct
+	.type   StoreRNStateToActionStruct, %function
+	.thumb_func
+	.set    StoreRNStateToActionStruct, 0x08031F38 + 1
+
+	.global WriteSramFast
+	.type   WriteSramFast, %function
+	.thumb_func
+	.set    WriteSramFast, 0x080D6420 + 1
+
+	.global WritePermanentFlags
+	.type   WritePermanentFlags, %function
+	.thumb_func
+	.set    WritePermanentFlags, 0x080A7B94 + 1
+
+	.global WriteChapterFlags
+	.type   WriteChapterFlags, %function
+	.thumb_func
+	.set    WriteChapterFlags, 0x080A7B74 + 1
+
+	.global WriteSupplyItems
+	.type   WriteSupplyItems, %function
+	.thumb_func
+	.set    WriteSupplyItems, 0x080A7C28 + 1
+
+	.global WritePidStats
+	.type   WritePidStats, %function
+	.thumb_func
+	.set    WritePidStats, 0x080A8CA8 + 1
+
+	.global WriteChapterStats
+	.type   WriteChapterStats, %function
+	.thumb_func
+	.set    WriteChapterStats, 0x080A8CCC + 1
+
+	.global WriteTraps
+	.type   WriteTraps, %function
+	.thumb_func
+	.set    WriteTraps, 0x080AAD88 + 1
+
+	.global GetForceDisabledMenuItems
+	.type   GetForceDisabledMenuItems, %function
+	.thumb_func
+	.set    GetForceDisabledMenuItems, 0x08050488 + 1
+
+	.global WriteWorldMapStuff
+	.type   WriteWorldMapStuff, %function
+	.thumb_func
+	.set    WriteWorldMapStuff, 0x080ABAC8 + 1
+
+	.global SaveDungeonRecords
+	.type   SaveDungeonRecords, %function
+	.thumb_func
+	.set    SaveDungeonRecords, 0x08037F78 + 1
+
+	.global SaveDungeonState
+	.type   SaveDungeonState, %function
+	.thumb_func
+	.set    SaveDungeonState, 0x08037F34 + 1
+
+	.global GetEventSlotCounter
+	.type   GetEventSlotCounter, %function
+	.thumb_func
+	.set    GetEventSlotCounter, 0x0800D850 + 1
+
+	.global WriteSwappedSuspendSaveId
+	.type   WriteSwappedSuspendSaveId, %function
+	.thumb_func
+	.set    WriteSwappedSuspendSaveId, 0x080AADF8 + 1
+
+	.global gActionData
+	.set    gActionData, 0x0203A954
+
+	.global gGenericBuffer
+	.set    gGenericBuffer, 0x02020188
+
+	.global gUnitArrayRed
+	.set    gUnitArrayRed, 0x0202CFB8
+
+	.global gUnitArrayGreen
+	.set    gUnitArrayGreen, 0x0202DDC8
+
+	.global gBmSt
+	.set    gBmSt, 0x0202BCAC
+
+	.global GetSaveReadAddr
+	.type   GetSaveReadAddr, %function
+	.thumb_func
+	.set    GetSaveReadAddr, 0x080A7B58 + 1
+
+	.global SetGameTime
+	.type   SetGameTime, %function
+	.thumb_func
+	.set    SetGameTime, 0x08000CE4 + 1
+
+	.global LoadRNStateFromActionStruct
+	.type   LoadRNStateFromActionStruct, %function
+	.thumb_func
+	.set    LoadRNStateFromActionStruct, 0x08031F48 + 1
+
+	.global InitUnits
+	.type   InitUnits, %function
+	.thumb_func
+	.set    InitUnits, 0x0801756C + 1
+
+	.global ReadPidStats
+	.type   ReadPidStats, %function
+	.thumb_func
+	.set    ReadPidStats, 0x080A8C60 + 1
+
+	.global ReadChapterStats
+	.type   ReadChapterStats, %function
+	.thumb_func
+	.set    ReadChapterStats, 0x080A8C8C + 1
+
+	.global ReadSupplyItems
+	.type   ReadSupplyItems, %function
+	.thumb_func
+	.set    ReadSupplyItems, 0x080A7CB0 + 1
+
+	.global ReadPermanentFlags
+	.type   ReadPermanentFlags, %function
+	.thumb_func
+	.set    ReadPermanentFlags, 0x080A7BDC + 1
+
+	.global ReadChapterFlags
+	.type   ReadChapterFlags, %function
+	.thumb_func
+	.set    ReadChapterFlags, 0x080A7BB4 + 1
+
+	.global ReadTraps
+	.type   ReadTraps, %function
+	.thumb_func
+	.set    ReadTraps, 0x080AADA4 + 1
+
+	.global SetForceDisabledMenuItems
+	.type   SetForceDisabledMenuItems, %function
+	.thumb_func
+	.set    SetForceDisabledMenuItems, 0x080504C8 + 1
+
+	.global ReadWorldMapStuff
+	.type   ReadWorldMapStuff, %function
+	.thumb_func
+	.set    ReadWorldMapStuff, 0x080ABB50 + 1
+
+	.global LoadDungeonRecords
+	.type   LoadDungeonRecords, %function
+	.thumb_func
+	.set    LoadDungeonRecords, 0x08037F90 + 1
+
+	.global LoadDungeonState
+	.type   LoadDungeonState, %function
+	.thumb_func
+	.set    LoadDungeonState, 0x08037F5C + 1
+
+	.global SetEventSlotCounter
+	.type   SetEventSlotCounter, %function
+	.thumb_func
+	.set    SetEventSlotCounter, 0x0800D844 + 1
+
+	.global LoadSavedBonusClaimFlags
+	.type   LoadSavedBonusClaimFlags, %function
+	.thumb_func
+	.set    LoadSavedBonusClaimFlags, 0x080A9C64 + 1
+
+	.global SetBonusContentClaimFlags
+	.type   SetBonusContentClaimFlags, %function
+	.thumb_func
+	.set    SetBonusContentClaimFlags, 0x080A9778 + 1
+
+	.global GetLastSuspendSaveId
+	.type   GetLastSuspendSaveId, %function
+	.thumb_func
+	.set    GetLastSuspendSaveId, 0x080AADC8 + 1
+
+	.global ReadSaveBlockInfo
+	.type   ReadSaveBlockInfo, %function
+	.thumb_func
+	.set    ReadSaveBlockInfo, 0x080A793C + 1
+
+	.global ReadGameSavePlaySt
+	.type   ReadGameSavePlaySt, %function
+	.thumb_func
+	.set    ReadGameSavePlaySt, 0x080A9C44 + 1
+
+	.global GetCharacterData
+	.type   GetCharacterData, %function
+	.thumb_func
+	.set    GetCharacterData, 0x0801913C + 1
+
+	.global GetClassData
+	.type   GetClassData, %function
+	.thumb_func
+	.set    GetClassData, 0x0801911C + 1
+

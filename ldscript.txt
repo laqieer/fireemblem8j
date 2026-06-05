@@ -40,14 +40,17 @@ SECTIONS
         asm/baserom.o(.gap_5);
         src/spellassoc.o(.text);
         asm/baserom.o(.gap_6);
-        src/worldmap_draw.o(.text);
+        src/bmsave.o(.text);
         asm/baserom.o(.gap_7);
-        src/rng.o(.rodata);
+        src/worldmap_draw.o(.text);
         asm/baserom.o(.gap_8);
+        src/rng.o(.rodata);
+        asm/baserom.o(.gap_9);
     } > rom
 
     .bss_0 0x03000000 (NOLOAD) : { src/rng.o(.bss) src/rng.o(COMMON) } > iwram  /* rng: gRNSeeds, gLCGRNValue */
     .bss_1 0x0203A8E0 (NOLOAD) : { src/bmusort.o(ewram_data) src/bmusort.o(.bss) src/bmusort.o(COMMON) } > ewram  /* bmusort: sUnitStack* (EWRAM_DATA) */
+    .bss_2 0x0203EDB0 (NOLOAD) : { src/bmsave.o(ewram_data) } > ewram  /* bmsave */
 
     /DISCARD/ :
     {

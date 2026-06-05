@@ -13,3 +13,4 @@
 0C42B4	0C43A4	src/worldmap_draw.o(.text)	worldmap_draw
 031610	0316E0	src/bmusort.o(.text)	bmusort: unit array sort
 000CF0	000D68	src/time.o(.text)	time(run): IncrementGameClock, FormatTime
+0AA418	0AAD88	src/bmsave.o(.text)	bmsave(run): ReadGMMonsterRnState, InvalidateSuspendSave, WriteSuspendSave...
