@@ -66,3 +66,78 @@ Rule: **never carve a run unless the compiled block has a unique masked ROM
 match.** This makes the porter self-validating; false runs auto-shrink to real
 verified runs. ROM-resident `.data`/`.rodata` placement (D1 follow-up) layers on
 top once the `.text` block is verified.
+
+## D3 — Sequence opaque JP `.rodata` before full JP text extraction
+
+**Date context:** after D1/D2, the next sequencing fork is whether to invest
+immediately in full JP text/script extraction plus `include/constants/msg.h`, or
+to keep porting verified code runs while carving region-different `.rodata` as
+raw JP bytes.
+
+**Consulted:** Copilot CLI. Recommendation: choose the hybrid path now; full text
+extraction is a large fixed-cost data project, while per-run raw JP `.rodata`
+keeps the D2 code porter moving and preserves byte-perfect validation.
+
+**Decision:** use **hybrid near-term porting**:
+1. Continue D2: only carve a compiled `.text` run after the whole block has a
+   unique masked JP ROM match.
+2. When that verified run needs region-different `.rodata`, carve only the
+   minimal owner blob as raw JP incbin bytes at its exact JP address, exposing the
+   labels required by the compiled code. Leave the data opaque for now.
+3. Do not front-load complete JP text/script extraction or a complete JP
+   `msg.h`. Add narrow message/header constants only when a current verified run
+   needs them and they can be checked cheaply.
+4. Start the full JP text/script extraction phase once text becomes the measured
+   dominant blocker, not before.
+
+**Rationale:** Option 3 maximizes unblocked code per unit effort. It has low
+fixed cost, composes with D2's unique-block validation, and keeps `make compare`
+as the authority. Option 1 risks scope expansion into text encoding, control
+codes, extractor correctness, message-id renumbering, and broad header churn
+before those pieces are proven to unlock more code than the raw-blob path.
+
+**Risks and mitigations:**
+- Opaque data debt / later redo: keep blobs minimal, named by owner/address, and
+  treat them as temporary manifests to replace with typed data later.
+- Wrong blob bounds or pointerful data: allow a raw blob only when its exact JP
+  address/range is justified by literal refs, high-confidence `addr_map.tsv`, or
+  adjacent section boundaries; place it at the original JP address with no byte
+  transformations.
+- Hybrid path stalls on text-heavy code: switch phases when evidence shows text
+  data, not code layout, is the bottleneck.
+
+**Validation criteria:**
+- Before any code carve, the compiled `.text` block has a unique masked match in
+  the JP ROM.
+- Before any raw `.rodata` carve, the blob bytes are copied from the exact JP ROM
+  range, labels resolve to the addresses used by the verified code, and internal
+  pointer bytes remain at original JP addresses.
+- After each manifest change, `make layout && make compare` must end with
+  `fireemblem8.gba: OK`.
+- Track per batch: functions/bytes carved, opaque `.rodata` blob count/bytes, and
+  reasons rejected runs failed. Revisit Option 1 if a batch shows most rejected
+  runs are blocked only by JP message/text `.rodata`, or if temporary text/message
+  blobs exceed roughly 20 blobs or 64 KiB.
+
+## D3 — Region-different DATA gates code; JP text extraction is the critical path
+
+**Finding:** much un-ported code is logically identical to US but references
+region-different *data* — most commonly `.rodata` tables of `MSG_*` text IDs that
+differ JP<->US (bmreliance affinity table: JP 0x499.. vs US 0x510..). These IDs
+come from a generated `include/constants/msg.h` (US: scripts/texttools from
+texts/*.txt).
+
+**Rejected (raw-incbin substitution):** the region-different `.rodata` is emitted
+*from the C source* (a `static const` array of `MSG_*` constants), so the `.text`
+references its own compiled `.rodata`. Substituting raw JP bytes would break that
+linkage; it only works for data that is a *separate* blob, not C-generated.
+
+**Decision (D3):** the critical path is **JP text/data extraction**. Generating a
+JP `include/constants/msg.h` with correct JP message IDs lets the US C source
+recompile to the JP `.rodata` automatically, unblocking a broad swath of code at
+once. This is the original Epic 4 (#15) and is now the highest-leverage track.
+Per-function code porting continues to harvest data-clean + identical-data runs
+in parallel, but the bulk needs the JP data first.
+
+**Status:** JP text extraction is a large, multi-step sub-project (decode the JP
+message table from the ROM, rebuild texts/ + msg.h). Next track to open.
