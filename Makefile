@@ -22,7 +22,9 @@ TOOLCHAIN ?= $(DEVKITARM)
 PREFIX    ?= arm-none-eabi-
 export PATH := $(TOOLCHAIN)/bin:$(PATH)
 
-CPP     ?= $(PREFIX)cpp$(EXE)
+# Prefer arm-none-eabi-cpp if present, else the host cpp (agbcc headers come via
+# -nostdinc -I tools/agbcc/include, so the host preprocessor is fine).
+CPP     ?= $(shell command -v $(PREFIX)cpp$(EXE) 2>/dev/null || echo cpp)
 AS      := $(PREFIX)as$(EXE)
 LD      := $(PREFIX)ld$(EXE)
 OBJCOPY := $(PREFIX)objcopy$(EXE)

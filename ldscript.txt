@@ -22,11 +22,22 @@ SECTIONS
 {
     .rom __rom_start : ALIGN(4)
     {
-        /* Decompiled .text/.data objects get inserted here, in ROM order,
-           ahead of the shrinking raw-ROM baseline below. */
-        asm/rom_header.o(.text);
-        asm/baserom.o(.rom);
+        /* Decompiled objects are spliced into the baseline gaps, in ROM order. */
+        asm/rom_header.o(.text);        /* 0x000000..0x0000BF */
+        asm/baserom.o(.rom_0);          /* 0x0000C0..0x000B60 */
+        src/rng.o(.text);               /* 0x000B60..0x000CD8 */
+        asm/baserom.o(.rom_1);          /* 0x000CD8..0x0DC134 */
+        src/rng.o(.rodata);             /* 0x0DC134..0x0DC144 */
+        asm/baserom.o(.rom_2);          /* 0x0DC144..EOF       */
     } > rom
+
+    /* RAM (NOLOAD) sections: not emitted to the ROM, but their symbols must
+       resolve to the JP addresses that decompiled .text literals reference. */
+    .bss 0x03000000 (NOLOAD) :
+    {
+        src/rng.o(.bss);                /* gRNSeeds @ 0x03000000, gLCGRNValue @ 0x03000008 */
+        src/rng.o(COMMON);
+    } > iwram
 
     /DISCARD/ :
     {
