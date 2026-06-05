@@ -18,7 +18,7 @@ sz = {}
 for ln in open('/home/laqieer/fireemblem8u/fireemblem8.map'):
     m = re.match(r'^\s*\.text\s+0x[0-9a-f]+\s+0x([0-9a-f]+)\s+src/([\w-]+)\.o', ln)
     if m: sz[m.group(2)] = int(m.group(1), 16)
-skip = ('banim', 'efx', 'anim', 'sound', 'song', 'mid', 'gfx', 'sprite', 'face', 'portrait')
+skip = ()
 out = []
 for f in sorted(sz):
     if f in carved or f in tried: continue
