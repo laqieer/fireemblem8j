@@ -71,3 +71,6 @@ A9DAA4	A9DAB4	src/cursor_hand.o(.data)	cursor_hand .data
 0C69B4	0C6BE8	src/worldmap_hb.o(.text)	worldmap_hb(run): WorldMapHblank, SetWorldMapHblank, ClearWmHblank...
 0C43A8	0C44A4	src/worldmap_palette_fade.o(.text)	worldmap_palette_fade(run): GmPalFade_Init, GmPalFade_Loop
 0C03E0	0C0414	src/worldmap_screen2.o(.text)	worldmap_screen2(run): WMLoc_GetChapterId
+0C3F6C	0C3F7C	src/worldmap_scrollmanage.o(.text)	worldmap_scrollmanage(run): GmMoveCursor_OnEnd
+0C6830	0C69B4	src/worldmap_timemons.o(.text)	worldmap_timemons(run): NewGmapTimeMons, WmRemoveRandomMonsters, WmMergeMonsters...
+0C5330	0C5390	src/worldmap_tm_confront.o(.text)	worldmap_tm_confront(run): GmTmConfront_LoadPositions

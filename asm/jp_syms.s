@@ -1487,3 +1487,16 @@
 	.global gWMNodeData
 	.set    gWMNodeData, 0x081F5D7C
 
+	.global ProcScr_GmapTimeMons
+	.set    ProcScr_GmapTimeMons, 0x08AC2468
+
+	.global GmMu_SetPosition
+	.type   GmMu_SetPosition, %function
+	.thumb_func
+	.set    GmMu_SetPosition, 0x080C3144 + 1
+
+	.global GmMu_GetPosition
+	.type   GmMu_GetPosition, %function
+	.thumb_func
+	.set    GmMu_GetPosition, 0x080C318C + 1
+
