@@ -89,9 +89,13 @@ def port(name):
         return text
 
     ds, refd = data_syms_and_refs()
-    unref = [s for s in ds if s not in refd]
+    # A static referenced via its SECTION symbol (e.g. EWRAM_DATA `Table[i]` ->
+    # ewram_data+offset) won't appear in .text relocs by name, so also keep any
+    # symbol whose name is used (>1 occurrence = definition + at least one use)
+    # in the run source. Only definition-only symbols are truly unreferenced.
+    src = open(f"src/{name}.c").read()
+    unref = [s for s in ds if s not in refd and len(re.findall(r"\b" + re.escape(s) + r"\b", src)) <= 1]
     if unref:
-        src = open(f"src/{name}.c").read()
         for s in unref:
             src = remove_def(src, s)
         open(f"src/{name}.c", "w").write(src)
