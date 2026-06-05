@@ -2188,3 +2188,31 @@
 	.thumb_func
 	.set    SetDialogueSkipEvBit, 0x0800D6A8 + 1
 
+	.global GetChapterEventDataPointer
+	.type   GetChapterEventDataPointer, %function
+	.thumb_func
+	.set    GetChapterEventDataPointer, 0x080345B8 + 1
+
+	.global GetBattleMapKind
+	.type   GetBattleMapKind, %function
+	.thumb_func
+	.set    GetBattleMapKind, 0x080C1E74 + 1
+
+	.global RefreshAllies
+	.type   RefreshAllies, %function
+	.thumb_func
+	.set    RefreshAllies, 0x08018E1C + 1
+
+	.global EventScr_SkirmishCommonEnd
+	.set    EventScr_SkirmishCommonEnd, 0x08A71E1C
+
+	.global CheckFlag
+	.type   CheckFlag, %function
+	.thumb_func
+	.set    CheckFlag, 0x080860D0 + 1
+
+	.global ShouldCallEndEvent
+	.type   ShouldCallEndEvent, %function
+	.thumb_func
+	.set    ShouldCallEndEvent, 0x08085588 + 1
+
