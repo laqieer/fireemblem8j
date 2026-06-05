@@ -1,0 +1,58 @@
+#include "global.h"
+#include "classchg.h"
+#include "proc.h"
+#include "bmbattle.h"
+#include "bm.h"
+#include "hardware.h"
+#include "bmusemind.h"
+#include "ap.h"
+#include "soundwrapper.h"
+#include "cgtext.h"
+#include "sysutil.h"
+
+CONST_DATA struct ProcCmd ProcScr_ClassChgReal[] = {
+    PROC_WHILE(MusicProc4Exists),
+    PROC_CALL(ClassChgExecPromotionReal),
+    PROC_REPEAT(ClassChgPostConfirmWaitBanimEnd),
+    PROC_SLEEP(0x8),
+    PROC_CALL(ClassChgPostConfirmGetUnit),
+    PROC_SLEEP(0x5),
+    PROC_WHILE(MusicProc4Exists),
+    PROC_END
+};
+
+void ClassChgPostConfirmGetUnit(struct ProcClassChgPostConfirm *proc)
+{
+    struct ProcPromoMain *parent = proc->proc_parent;
+    GetUnitFromCharId(parent->pid);
+}
+
+void ExecClassChgReal(struct ProcPromoMain *proc)
+{
+    int slot;
+    struct ProcPromoHandler *parent = proc->proc_parent;
+    gUnk_80 = -1;
+    EndCgText();
+
+    ResetDialogueScreen();
+    APProc_DeleteAll();
+    EndMuralBackground_();
+
+    gLCDControlBuffer.bg0cnt.priority = 0;
+    gLCDControlBuffer.bg1cnt.priority = 1;
+    gLCDControlBuffer.bg2cnt.priority = 2;
+    gLCDControlBuffer.bg3cnt.priority = 3;
+
+    SetBlendConfig(3, 0, 0, 0x10);
+    SetBlendTargetA(1, 1, 1, 1, 1);
+
+    EndAllProcChildren(proc);
+
+    Proc_StartBlocking(ProcScr_ClassChgReal, proc);
+
+    if (parent->bmtype != PROMO_HANDLER_TYPE_TRANINEE) {
+        slot = parent->item_slot;
+        if (slot != -1)
+            UnitUpdateUsedItem(parent->unit, slot);
+    }
+}

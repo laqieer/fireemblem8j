@@ -40,3 +40,9 @@
 088E38	088F0C	src/mural_background.o(.text)	mural_background(run): BackgroundSlide_Loop, StartMuralBackground
 08FDCC	08FE1C	src/sioerror.o(.text)	sioerror(run): OnVBlank_SioError, OnMain_SioErrorWait
 0C8038	0C8130	src/worldmap_automu.o(.text)	worldmap_automu(run): GmapAutoMu_3, GmapAutoMu_4, GmapAutoMu_5
+037600	0376A8	src/bmtrap.o(.text)	bmtrap(run): ApplyTrapDamageAnim, ApplyTrapDamageReal
+0D13F0	0D1780	src/classchg-handler.o(.text)	classchg-handler(run): .gcc2_compiled., PromoHandler_SetupAndStartUI, PromoHandler_SetInitStat...
+1F6CF4	1F6D00	src/classchg-handler.o(.rodata)	classchg-handler .rodata
+BAB71C	BAB754	src/classchg-handler.o(.data)	classchg-handler .data
+0D2B94	0D2C48	src/classchg-postconfirm.o(.text)	classchg-postconfirm(run): ClassChgPostConfirmGetUnit, ExecClassChgReal
+BABAB4	BABAF4	src/classchg-postconfirm.o(.data)	classchg-postconfirm .data

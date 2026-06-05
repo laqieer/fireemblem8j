@@ -931,3 +931,135 @@
 	.thumb_func
 	.set    GmMu_IsMoving, 0x080C2F14 + 1
 
+	.global EndAllMus
+	.type   EndAllMus, %function
+	.thumb_func
+	.set    EndAllMus, 0x0807B4B8 + 1
+
+	.global SetAutoMuDefaultFacing
+	.type   SetAutoMuDefaultFacing, %function
+	.thumb_func
+	.set    SetAutoMuDefaultFacing, 0x0807AB0C + 1
+
+	.global GetUnitMu
+	.type   GetUnitMu, %function
+	.thumb_func
+	.set    GetUnitMu, 0x0807BFCC + 1
+
+	.global BeginUnitCritDamageAnim
+	.type   BeginUnitCritDamageAnim, %function
+	.thumb_func
+	.set    BeginUnitCritDamageAnim, 0x08035A2C + 1
+
+	.global ApplyHazardHealing
+	.type   ApplyHazardHealing, %function
+	.thumb_func
+	.set    ApplyHazardHealing, 0x080358A8 + 1
+
+	.global GetUnitCurrentHp
+	.type   GetUnitCurrentHp, %function
+	.thumb_func
+	.set    GetUnitCurrentHp, 0x08018E64 + 1
+
+	.global PidStatsRecordDefeatInfo
+	.type   PidStatsRecordDefeatInfo, %function
+	.thumb_func
+	.set    PidStatsRecordDefeatInfo, 0x080A90C8 + 1
+
+	.global CheckForWaitEvents
+	.type   CheckForWaitEvents, %function
+	.thumb_func
+	.set    CheckForWaitEvents, 0x08086604 + 1
+
+	.global RunWaitEvents
+	.type   RunWaitEvents, %function
+	.thumb_func
+	.set    RunWaitEvents, 0x08086694 + 1
+
+	.global gPromoJidLut
+	.set    gPromoJidLut, 0x089CDD18
+
+	.global MakePromotionScreen
+	.type   MakePromotionScreen, %function
+	.thumb_func
+	.set    MakePromotionScreen, 0x080D1184 + 1
+
+	.global BMapDispResume
+	.type   BMapDispResume, %function
+	.thumb_func
+	.set    BMapDispResume, 0x08030108 + 1
+
+	.global RefreshBMapGraphics
+	.type   RefreshBMapGraphics, %function
+	.thumb_func
+	.set    RefreshBMapGraphics, 0x080310F4 + 1
+
+	.global Proc_StartBlocking
+	.type   Proc_StartBlocking, %function
+	.thumb_func
+	.set    Proc_StartBlocking, 0x08002C30 + 1
+
+	.global gBattleActor
+	.set    gBattleActor, 0x0203A4E8
+
+	.global gBattleTarget
+	.set    gBattleTarget, 0x0203A568
+
+	.global GetUnitEquippedWeapon
+	.type   GetUnitEquippedWeapon, %function
+	.thumb_func
+	.set    GetUnitEquippedWeapon, 0x080168D0 + 1
+
+	.global BMapDispSuspend
+	.type   BMapDispSuspend, %function
+	.thumb_func
+	.set    BMapDispSuspend, 0x080300D4 + 1
+
+	.global EndCgText
+	.type   EndCgText, %function
+	.thumb_func
+	.set    EndCgText, 0x08091544 + 1
+
+	.global ResetDialogueScreen
+	.type   ResetDialogueScreen, %function
+	.thumb_func
+	.set    ResetDialogueScreen, 0x08010F98 + 1
+
+	.global APProc_DeleteAll
+	.type   APProc_DeleteAll, %function
+	.thumb_func
+	.set    APProc_DeleteAll, 0x080096B0 + 1
+
+	.global EndMuralBackground_
+	.type   EndMuralBackground_, %function
+	.thumb_func
+	.set    EndMuralBackground_, 0x08097D18 + 1
+
+	.global EndAllProcChildren
+	.type   EndAllProcChildren, %function
+	.thumb_func
+	.set    EndAllProcChildren, 0x080B2874 + 1
+
+	.global UnitUpdateUsedItem
+	.type   UnitUpdateUsedItem, %function
+	.thumb_func
+	.set    UnitUpdateUsedItem, 0x080186A8 + 1
+
+	.global gUnk_80
+	.set    gUnk_80, 0x03005388
+
+	.global MusicProc4Exists
+	.type   MusicProc4Exists, %function
+	.thumb_func
+	.set    MusicProc4Exists, 0x080029BC + 1
+
+	.global ClassChgExecPromotionReal
+	.type   ClassChgExecPromotionReal, %function
+	.thumb_func
+	.set    ClassChgExecPromotionReal, 0x080D2AEC + 1
+
+	.global ClassChgPostConfirmWaitBanimEnd
+	.type   ClassChgPostConfirmWaitBanimEnd, %function
+	.thumb_func
+	.set    ClassChgPostConfirmWaitBanimEnd, 0x080D2B70 + 1
+
