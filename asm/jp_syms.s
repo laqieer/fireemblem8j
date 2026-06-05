@@ -2284,3 +2284,76 @@
 	.global gPal_Titlescreen_4
 	.set    gPal_Titlescreen_4, 0x08B49B4C
 
+	.global GetAnimPosition
+	.type   GetAnimPosition, %function
+	.thumb_func
+	.set    GetAnimPosition, 0x0805AF10 + 1
+
+	.global gEkrGaugeHp
+	.set    gEkrGaugeHp, 0x0203E1A8
+
+	.global gPalEfxHpBarGreen
+	.set    gPalEfxHpBarGreen, 0x088570DC
+
+	.global gPalEfxHpBarPurple
+	.set    gPalEfxHpBarPurple, 0x088571DC
+
+	.global gBanimFactionPal
+	.set    gBanimFactionPal, 0x0203E110
+
+	.global gBanimmisc_10
+	.set    gBanimmisc_10, 0x0885705C
+
+	.global EfxSplitColor
+	.type   EfxSplitColor, %function
+	.thumb_func
+	.set    EfxSplitColor, 0x080739D0 + 1
+
+	.global EfxCalcSplitedColorStep
+	.type   EfxCalcSplitedColorStep, %function
+	.thumb_func
+	.set    EfxCalcSplitedColorStep, 0x08073A68 + 1
+
+	.global gpProcEfxHpBarColorChange
+	.set    gpProcEfxHpBarColorChange, 0x0201777C
+
+	.global ProcScr_efxHPBarColorChange
+	.set    ProcScr_efxHPBarColorChange, 0x085E3BA4
+
+	.global gFrameLut_EfxHPBarColorChange1
+	.set    gFrameLut_EfxHPBarColorChange1, 0x080DFC44
+
+	.global gFrameLut_EfxHPBarColorChange2
+	.set    gFrameLut_EfxHPBarColorChange2, 0x080DFC6E
+
+	.global gEfxSplitedColorBufA
+	.set    gEfxSplitedColorBufA, 0x0201F948
+
+	.global gBanimmisc_11
+	.set    gBanimmisc_11, 0x0885711C
+
+	.global gEfxSplitedColorBufB
+	.set    gEfxSplitedColorBufB, 0x0201F978
+
+	.global gEfxSplitedColorBufC
+	.set    gEfxSplitedColorBufC, 0x0201F9A8
+
+	.global gEfxSplitedColorBufD
+	.set    gEfxSplitedColorBufD, 0x0201FA08
+
+	.global gEfxSplitedColorBufE
+	.set    gEfxSplitedColorBufE, 0x0201FA38
+
+	.global gEfxSplitedColorBufF
+	.set    gEfxSplitedColorBufF, 0x0201FA68
+
+	.global EfxAdvanceFrameLut
+	.type   EfxAdvanceFrameLut, %function
+	.thumb_func
+	.set    EfxAdvanceFrameLut, 0x08056890 + 1
+
+	.global EfxDecodeSplitedPalette
+	.type   EfxDecodeSplitedPalette, %function
+	.thumb_func
+	.set    EfxDecodeSplitedPalette, 0x08073AE8 + 1
+
