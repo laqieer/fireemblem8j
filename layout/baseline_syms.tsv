@@ -247,3 +247,8 @@ gProcScr_CpOrder	085D1E64	data	cp_phase
 gProcScr_BerserkCpOrder	085D1E7C	data	cp_phase
 BG_GetMapBuffer	08001BC0	thumb	cursor_hand
 PutSprite	080052F0	thumb	cursor_hand
+RegisterDataMove	08001F64	thumb	emitstarfx
+Proc_EndEach	08002FC8	thumb	emitstarfx
+LetsEmitStars	08021F08	thumb	emitstarfx
+gConvoBackgroundData	089CD958	data	eventscr2
+__divsi3	080D65F8	thumb	extramenu_unk

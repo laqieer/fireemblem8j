@@ -51,3 +51,7 @@ BABAB4	BABAF4	src/classchg-postconfirm.o(.data)	classchg-postconfirm .data
 039724	039800	src/cp_phase.o(.text)	cp_phase(run): AiPhaseInit, AiPhaseBerserkInit, AiPhaseCleanup
 0B12E4	0B1460	src/cursor_hand.o(.text)	cursor_hand(run): BlitClippedTileMapToBg, UiCursorHand_Init, UiCursorHand_Loop
 A9DAA4	A9DAB4	src/cursor_hand.o(.data)	cursor_hand .data
+022060	022140	src/emitstarfx.o(.text)	emitstarfx(run): StarsBlinking, StartEmitStarsAnim, ClearEmitedStars...
+5C39D0	5C3A08	src/emitstarfx.o(.data)	emitstarfx .data
+010F08	010F98	src/eventscr2.o(.text)	eventscr2(run): ReputConvoBg_unused, ResetDialogueScreen
+0B5070	0B50D4	src/extramenu_unk.o(.text)	extramenu_unk(run): ExtramenuUnk_HBlank

@@ -1100,3 +1100,26 @@
 	.thumb_func
 	.set    PutSprite, 0x080052F0 + 1
 
+	.global RegisterDataMove
+	.type   RegisterDataMove, %function
+	.thumb_func
+	.set    RegisterDataMove, 0x08001F64 + 1
+
+	.global Proc_EndEach
+	.type   Proc_EndEach, %function
+	.thumb_func
+	.set    Proc_EndEach, 0x08002FC8 + 1
+
+	.global LetsEmitStars
+	.type   LetsEmitStars, %function
+	.thumb_func
+	.set    LetsEmitStars, 0x08021F08 + 1
+
+	.global gConvoBackgroundData
+	.set    gConvoBackgroundData, 0x089CD958
+
+	.global __divsi3
+	.type   __divsi3, %function
+	.thumb_func
+	.set    __divsi3, 0x080D65F8 + 1
+
