@@ -46,19 +46,22 @@ SECTIONS
         asm/baserom.o(.gap_8);
         src/spellassoc.o(.text);
         asm/baserom.o(.gap_9);
-        src/bmsave.o(.text);
+        src/helpbox.o(.text);
         asm/baserom.o(.gap_10);
-        src/worldmap_draw.o(.text);
+        src/bmsave.o(.text);
         asm/baserom.o(.gap_11);
-        src/rng.o(.rodata);
+        src/worldmap_draw.o(.text);
         asm/baserom.o(.gap_12);
-        src/bmreliance.o(.rodata);
+        src/rng.o(.rodata);
         asm/baserom.o(.gap_13);
+        src/bmreliance.o(.rodata);
+        asm/baserom.o(.gap_14);
     } > rom
 
     .bss_0 0x03000000 (NOLOAD) : { src/rng.o(.bss) src/rng.o(COMMON) } > iwram  /* rng: gRNSeeds, gLCGRNValue */
     .bss_1 0x0203A8E0 (NOLOAD) : { src/bmusort.o(ewram_data) src/bmusort.o(.bss) src/bmusort.o(COMMON) } > ewram  /* bmusort: sUnitStack* (EWRAM_DATA) */
     .bss_2 0x0203EDB0 (NOLOAD) : { src/bmsave.o(ewram_data) } > ewram  /* bmsave */
+    .bss_3 0x0203E7C4 (NOLOAD) : { src/helpbox.o(ewram_data) } > ewram  /* helpbox */
 
     /DISCARD/ :
     {

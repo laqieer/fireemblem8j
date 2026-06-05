@@ -479,3 +479,77 @@
 	.thumb_func
 	.set    GetUnitSupporterNum, 0x0802833C + 1
 
+	.global Proc_Start
+	.type   Proc_Start, %function
+	.thumb_func
+	.set    Proc_Start, 0x08002BCC + 1
+
+	.global m4aSongNumStart
+	.type   m4aSongNumStart, %function
+	.thumb_func
+	.set    m4aSongNumStart, 0x080D4EF4 + 1
+
+	.global SetHelpBoxInitPosition_bug
+	.type   SetHelpBoxInitPosition_bug, %function
+	.thumb_func
+	.set    SetHelpBoxInitPosition_bug, 0x0808C74C + 1
+
+	.global SetHelpBoxDefaultRect
+	.type   SetHelpBoxDefaultRect, %function
+	.thumb_func
+	.set    SetHelpBoxDefaultRect, 0x0808C754 + 1
+
+	.global ProcScr_Helpbox_bug_0
+	.set    ProcScr_Helpbox_bug_0, 0x08A73730
+
+	.global SetTextFontGlyphs
+	.type   SetTextFontGlyphs, %function
+	.thumb_func
+	.set    SetTextFontGlyphs, 0x08003C24 + 1
+
+	.global GetStringTextBox
+	.type   GetStringTextBox, %function
+	.thumb_func
+	.set    GetStringTextBox, 0x08003EC8 + 1
+
+	.global ApplyHelpBoxPosition_bug
+	.type   ApplyHelpBoxPosition_bug, %function
+	.thumb_func
+	.set    ApplyHelpBoxPosition_bug, 0x0808C6D4 + 1
+
+	.global ClearHelpBoxText
+	.type   ClearHelpBoxText, %function
+	.thumb_func
+	.set    ClearHelpBoxText, 0x0808C428 + 1
+
+	.global StartHelpBoxTextInit
+	.type   StartHelpBoxTextInit, %function
+	.thumb_func
+	.set    StartHelpBoxTextInit, 0x0808C40C + 1
+
+	.global Proc_BreakEach
+	.type   Proc_BreakEach, %function
+	.thumb_func
+	.set    Proc_BreakEach, 0x08002FE4 + 1
+
+	.global _call_via_r1
+	.type   _call_via_r1, %function
+	.thumb_func
+	.set    _call_via_r1, 0x080D65C0 + 1
+
+	.global gKeyStatusPtr
+	.set    gKeyStatusPtr, 0x085775CC
+
+	.global Proc_End
+	.type   Proc_End, %function
+	.thumb_func
+	.set    Proc_End, 0x08002CBC + 1
+
+	.global gHelpbox_0
+	.set    gHelpbox_0, 0x08A73750
+
+	.global GetHelpBoxItemInfoKind_bug
+	.type   GetHelpBoxItemInfoKind_bug, %function
+	.thumb_func
+	.set    GetHelpBoxItemInfoKind_bug, 0x0808C764 + 1
+
