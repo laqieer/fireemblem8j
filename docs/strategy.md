@@ -67,6 +67,24 @@ incbin vs. bytes produced by real source*.
 5. **JP data extraction** — text/script (largest), fonts, graphics, tables.
 6. **Completion** — 100 % of the incbin replaced; documentation; reproducible CI.
 
+## Current state
+
+Bootstrapped and proven end-to-end:
+
+* Byte-perfect baseline build (`make compare` → OK) from a raw-ROM incbin.
+* **Layout discovery**: `scripts/match_us_jp.py` located **7739 functions** in JP
+  (`layout/us_jp_funcmap.tsv`); `scripts/data_addr_map.py` resolved **24649
+  US→JP addresses** from literal-pool correspondence (`layout/addr_map.tsv`).
+* **Carve automation**: manifests in `layout/` + `scripts/gen_layout.py`
+  (`make layout`) generate the incbin splits, ldscript, and baseline symbols.
+* **Decompiled so far**: ROM header (`asm/rom_header.s`) and `src/rng.c` — the
+  first C TU, confirming the agbcc pipeline and the veneer-free cross-boundary
+  technique (`asm/jp_syms.s`).
+
+The frontier is now grinding through translation units in ROM order
+(`docs/porting.md`) and extending data coverage. This is what the autonomous
+loop continues.
+
 ## Tooling reused from `../fireemblem8u`
 
 * `tools/agbcc` — the matching compiler (copied in; gitignored).
