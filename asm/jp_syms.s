@@ -415,3 +415,52 @@
 	.global gBmMapSize
 	.set    gBmMapSize, 0x0202E4D0
 
+	.global _call_via_r0
+	.type   _call_via_r0, %function
+	.thumb_func
+	.set    _call_via_r0, 0x080D65BC + 1
+
+	.global Proc_Break
+	.type   Proc_Break, %function
+	.thumb_func
+	.set    Proc_Break, 0x08002DE4 + 1
+
+	.global CALLARM_ColorFadeTick
+	.type   CALLARM_ColorFadeTick, %function
+	.thumb_func
+	.set    CALLARM_ColorFadeTick, 0x080DC0EC + 1
+
+	.global EnablePaletteSync
+	.type   EnablePaletteSync, %function
+	.thumb_func
+	.set    EnablePaletteSync, 0x08001EE4 + 1
+
+	.global gPaletteBuffer
+	.set    gPaletteBuffer, 0x020228A8
+
+	.global ColorFadeSetStepRange
+	.type   ColorFadeSetStepRange, %function
+	.thumb_func
+	.set    ColorFadeSetStepRange, 0x080017C8 + 1
+
+	.global ProcScr_FadeCore
+	.set    ProcScr_FadeCore, 0x085C2528
+
+	.global SetBlendConfig
+	.type   SetBlendConfig, %function
+	.thumb_func
+	.set    SetBlendConfig, 0x08001DF0 + 1
+
+	.global SetBlendTargetA
+	.type   SetBlendTargetA, %function
+	.thumb_func
+	.set    SetBlendTargetA, 0x08001E20 + 1
+
+	.global SetBlendBackdropA
+	.type   SetBlendBackdropA, %function
+	.thumb_func
+	.set    SetBlendBackdropA, 0x08001E98 + 1
+
+	.global gLCDControlBuffer
+	.set    gLCDControlBuffer, 0x03003020
+

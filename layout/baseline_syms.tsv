@@ -94,3 +94,14 @@ RefreshUnitSprites	08027144	thumb	bmtrick
 AddTarget	08050630	thumb	bmtrick
 gBmMapUnit	0202E4D4	data	bmtrick
 gBmMapSize	0202E4D0	data	bmtrick
+_call_via_r0	080D65BC	thumb	bmlib
+Proc_Break	08002DE4	thumb	bmlib
+CALLARM_ColorFadeTick	080DC0EC	thumb	bmlib
+EnablePaletteSync	08001EE4	thumb	bmlib
+gPaletteBuffer	020228A8	data	bmlib
+ColorFadeSetStepRange	080017C8	thumb	bmlib
+ProcScr_FadeCore	085C2528	data	bmlib
+SetBlendConfig	08001DF0	thumb	bmlib
+SetBlendTargetA	08001E20	thumb	bmlib
+SetBlendBackdropA	08001E98	thumb	bmlib
+gLCDControlBuffer	03003020	data	bmlib

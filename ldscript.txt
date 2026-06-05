@@ -31,23 +31,25 @@ SECTIONS
         asm/baserom.o(.gap_1);
         src/time.o(.text);
         asm/baserom.o(.gap_2);
-        src/unit_facing.o(.text);
+        src/bmlib.o(.text);
         asm/baserom.o(.gap_3);
+        src/unit_facing.o(.text);
+        asm/baserom.o(.gap_4);
         src/bmphase.o(.text);
         src/bmgold.o(.text);
-        asm/baserom.o(.gap_4);
-        src/bmtrick.o(.text);
         asm/baserom.o(.gap_5);
-        src/bmusort.o(.text);
+        src/bmtrick.o(.text);
         asm/baserom.o(.gap_6);
-        src/spellassoc.o(.text);
+        src/bmusort.o(.text);
         asm/baserom.o(.gap_7);
-        src/bmsave.o(.text);
+        src/spellassoc.o(.text);
         asm/baserom.o(.gap_8);
-        src/worldmap_draw.o(.text);
+        src/bmsave.o(.text);
         asm/baserom.o(.gap_9);
-        src/rng.o(.rodata);
+        src/worldmap_draw.o(.text);
         asm/baserom.o(.gap_10);
+        src/rng.o(.rodata);
+        asm/baserom.o(.gap_11);
     } > rom
 
     .bss_0 0x03000000 (NOLOAD) : { src/rng.o(.bss) src/rng.o(COMMON) } > iwram  /* rng: gRNSeeds, gLCGRNValue */
