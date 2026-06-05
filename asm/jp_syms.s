@@ -2884,3 +2884,117 @@
 	.thumb_func
 	.set    OnVBlank, 0x080152C8 + 1
 
+	.global NewEkrUnitKakudai
+	.type   NewEkrUnitKakudai, %function
+	.thumb_func
+	.set    NewEkrUnitKakudai, 0x08057888 + 1
+
+	.global NewEkrBaseKaiten
+	.type   NewEkrBaseKaiten, %function
+	.thumb_func
+	.set    NewEkrBaseKaiten, 0x08057424 + 1
+
+	.global NewEkrWindowAppear
+	.type   NewEkrWindowAppear, %function
+	.thumb_func
+	.set    NewEkrWindowAppear, 0x08057CAC + 1
+
+	.global NewEkrBaseAppear
+	.type   NewEkrBaseAppear, %function
+	.thumb_func
+	.set    NewEkrBaseAppear, 0x08057EA8 + 1
+
+	.global gEkrBmLocation
+	.set    gEkrBmLocation, 0x0203E11E
+
+	.global InitBmBgLayers
+	.type   InitBmBgLayers, %function
+	.thumb_func
+	.set    InitBmBgLayers, 0x08015624 + 1
+
+	.global ResetUnitSprites
+	.type   ResetUnitSprites, %function
+	.thumb_func
+	.set    ResetUnitSprites, 0x0802662C + 1
+
+	.global BMapDispResume_FromBattleDelayed
+	.type   BMapDispResume_FromBattleDelayed, %function
+	.thumb_func
+	.set    BMapDispResume_FromBattleDelayed, 0x080310A0 + 1
+
+	.global UnpackChapterMapPalette
+	.type   UnpackChapterMapPalette, %function
+	.thumb_func
+	.set    UnpackChapterMapPalette, 0x0801964C + 1
+
+	.global GetBanimLinkArenaFlag
+	.type   GetBanimLinkArenaFlag, %function
+	.thumb_func
+	.set    GetBanimLinkArenaFlag, 0x08050AC8 + 1
+
+	.global LoadLinkArenaFogPlaceholder
+	.type   LoadLinkArenaFogPlaceholder, %function
+	.thumb_func
+	.set    LoadLinkArenaFogPlaceholder, 0x0804A584 + 1
+
+	.global RefreshBMapDisplay_FromBattle
+	.type   RefreshBMapDisplay_FromBattle, %function
+	.thumb_func
+	.set    RefreshBMapDisplay_FromBattle, 0x08031044 + 1
+
+	.global GetEkrDragonPalette
+	.type   GetEkrDragonPalette, %function
+	.thumb_func
+	.set    GetEkrDragonPalette, 0x08072880 + 1
+
+	.global SetEkrDragonPaletteFront
+	.type   SetEkrDragonPaletteFront, %function
+	.thumb_func
+	.set    SetEkrDragonPaletteFront, 0x080728DC + 1
+
+	.global SetEkrDragonPaletteBack
+	.type   SetEkrDragonPaletteBack, %function
+	.thumb_func
+	.set    SetEkrDragonPaletteBack, 0x080728AC + 1
+
+	.global ProcScr_EkrDragon_0
+	.set    ProcScr_EkrDragon_0, 0x087A8C54
+
+	.global gEkrdragon_0
+	.set    gEkrdragon_0, 0x087A8C74
+
+	.global EkrDemonkingObj_SetBgPosition
+	.type   EkrDemonkingObj_SetBgPosition, %function
+	.thumb_func
+	.set    EkrDemonkingObj_SetBgPosition, 0x0807A2D0 + 1
+
+	.global EkrDragonTmCpyExt
+	.type   EkrDragonTmCpyExt, %function
+	.thumb_func
+	.set    EkrDragonTmCpyExt, 0x080720DC + 1
+
+	.global gUnk_76
+	.set    gUnk_76, 0x03004F90
+
+	.global gEkrBgPosition
+	.set    gEkrBgPosition, 0x0201FB0C
+
+	.global gUnk_77
+	.set    gUnk_77, 0x03004F94
+
+	.global gEkrdragonDemonkingobj_2
+	.set    gEkrdragonDemonkingobj_2, 0x08856004
+
+	.global SetBlackPal
+	.type   SetBlackPal, %function
+	.thumb_func
+	.set    SetBlackPal, 0x08013B3C + 1
+
+	.global Tsa_Ekrdk_0
+	.set    Tsa_Ekrdk_0, 0x08848B28
+
+	.global EkrDemonkingObj_StartDissolveProc
+	.type   EkrDemonkingObj_StartDissolveProc, %function
+	.thumb_func
+	.set    EkrDemonkingObj_StartDissolveProc, 0x0807A310 + 1
+
