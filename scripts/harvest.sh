@@ -24,7 +24,7 @@ for f in sorted(sz):
     if f in carved or f in tried: continue
     if any(s in f for s in skip): continue
     if not os.path.exists(f'/home/laqieer/fireemblem8u/src/{f}.c'): continue
-    if 0x40 <= sz[f] <= 0x1000: out.append(f)
+    if 0x40 <= sz[f] <= 0x4000: out.append(f)
 print(" ".join(out[:10]))
 PY
 )

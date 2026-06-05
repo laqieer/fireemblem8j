@@ -223,8 +223,9 @@ def port(name):
     print(f"{name}: FAILED make compare — reverting")
     if os.environ.get("PORTRUN_DEBUG"):
         sh("make fireemblem8.gba")
+    if os.environ.get("PORTRUN_DEBUG") and os.path.exists("fireemblem8.gba"):
         b = open("fireemblem8.gba", "rb").read()
-        d = [i for i in range(len(jp)) if b[i] != jp[i]]
+        d = [i for i in range(min(len(b), len(jp))) if b[i] != jp[i]]
         if d:
             print(f"  diff: {len(d)} bytes, first @ {d[0]:#x} (run .text {0x08000000+base:#x}..{end}; "
                   f"romdata {[(hex(0x08000000+x),hex(s)) for x,s,_ in data_carves]})")
