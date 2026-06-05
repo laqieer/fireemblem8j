@@ -31,6 +31,21 @@ def valid(x):
 votes = defaultdict(Counter)
 src_of = {}
 ntables = 0
+
+# Validated seed tables whose referencing function is region-different (so they
+# are NOT in addr_map): (us_addr, jp_addr, count, entry_size, source).
+SEED = [
+    (0x080D7C14 + 4, 0x080DC948 + 4, 8, 4, "seed:bmreliance-affinity"),
+]
+for ua, ja, cnt, sz, src in SEED:
+    uo, jo = ua - B, ja - B
+    for k in range(cnt):
+        uv, jv = rd(US, uo+k*sz, sz), rd(JP, jo+k*sz, sz)
+        if valid(uv) and valid(jv):
+            votes[uv][jv] += 2  # seed weighted to win ties
+            src_of[uv] = src
+    ntables += 1
+
 for ln in open("layout/addr_map.tsv"):
     if ln.startswith("#"):
         continue

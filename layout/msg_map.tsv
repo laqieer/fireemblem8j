@@ -189,9 +189,13 @@
 0507	0496	auto:shifted
 0508	0497	auto:shifted
 0509	0498	auto:shifted
-050A	049D	auto:shifted
-050B	049E	auto:shifted
-050C	049F	auto:shifted
+050A	049D	seed:bmreliance-affinity
+050B	049E	seed:bmreliance-affinity
+050C	049F	seed:bmreliance-affinity
+0510	0499	seed:bmreliance-affinity
+0511	049A	seed:bmreliance-affinity
+0512	049B	seed:bmreliance-affinity
+0513	049C	seed:bmreliance-affinity
 0514	04A3	auto:shifted
 0515	04A4	auto:shifted
 0516	04A5	auto:shifted
@@ -206,6 +210,7 @@
 0527	04B3	auto:shifted
 0529	04B5	auto:shifted
 052B	052B	auto:shifted
+0534	04C4	seed:bmreliance-affinity
 0536	04C6	auto:shifted
 056B	0500	auto:shifted
 056C	0501	auto:shifted
