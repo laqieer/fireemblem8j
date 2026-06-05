@@ -16,12 +16,25 @@ promise phrase `FE8J_FINAL_GOAL_DONE`.
    symbols, instead extend coverage with `scripts/match_us_jp.py` /
    `scripts/data_addr_map.py`.
 
-2. **Do the work** following `docs/porting.md` exactly. Copy the US `src/X.c`,
-   resolve external refs via `layout/us_jp_funcmap.tsv` + `layout/addr_map.tsv`
-   (CHECK the votes/conflicts columns — single-vote or odd-region entries can be
-   wrong; verify before trusting). Add manifest rows
-   (`layout/carved_rom.tsv`, `carved_ram.tsv`, `baseline_syms.tsv`), then
-   `make layout`.
+2. **Do the work** using **per-function-run porting** (decision D1 in
+   `docs/decisions.md`) — NOT whole-file. Whole-file porting is done for the easy
+   files; the frontier needs per-function granularity so one region-different
+   function doesn't block a whole file.
+   - **First, if the run-aware tooling doesn't exist yet, build it**: extend
+     `scripts/locate_tu.py`/`port_tu.py` to (a) locate each function of a US `.c`
+     individually (its own masked search; use `layout/us_jp_funcmap.tsv` for
+     exact/masked anchors), (b) group *consecutive matching* functions into
+     contiguous JP runs, (c) compile each run as a subset `.c` (only that run's
+     functions) and carve it at the run's JP range. Validate on an
+     already-ported file (e.g. rng) that it reproduces the same bytes.
+   - Region-different (non-matching) functions stay in the incbin baseline,
+     exposed as typed baseline syms (`layout/baseline_syms.tsv`); they become the
+     queue for behavioural JP decompilation.
+   - Resolve external refs via `layout/us_jp_funcmap.tsv` + `layout/addr_map.tsv`
+     + literal-pool/BL decoding (CHECK votes/conflicts — single-vote or
+     odd-region entries can be wrong). Add manifest rows, then `make layout`.
+   Reminder: baseline-resident calls MUST be typed-Thumb syms or the linker
+   inserts interwork veneers that break the byte match.
 
 3. **Verify (hard invariant).** `make compare` MUST end with
    `fireemblem8.gba: OK`. If it regressed, revert this iteration's changes and
