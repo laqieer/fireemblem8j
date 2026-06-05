@@ -3710,3 +3710,35 @@
 	.thumb_func
 	.set    StartMuSpeedUpAnim, 0x0807BD58 + 1
 
+	.global DeleteAllPaletteAnimator
+	.type   DeleteAllPaletteAnimator, %function
+	.thumb_func
+	.set    DeleteAllPaletteAnimator, 0x08014494 + 1
+
+	.global ProcScr_MapLatonaShiningfx
+	.set    ProcScr_MapLatonaShiningfx, 0x08A140C8
+
+	.global New6C_SummonGfx
+	.type   New6C_SummonGfx, %function
+	.thumb_func
+	.set    New6C_SummonGfx, 0x0808306C + 1
+
+	.global SetNextGameActionId
+	.type   SetNextGameActionId, %function
+	.thumb_func
+	.set    SetNextGameActionId, 0x08009EB0 + 1
+
+	.global gOpAnimSt
+	.set    gOpAnimSt, 0x02022188
+
+	.global ProcScr_OpAnimfxTerminator
+	.set    ProcScr_OpAnimfxTerminator, 0x08B3F298
+
+	.global Sqrt
+	.type   Sqrt, %function
+	.thumb_func
+	.set    Sqrt, 0x080D63D4 + 1
+
+	.global ProcScr_WorldMapFaceHolder
+	.set    ProcScr_WorldMapFaceHolder, 0x08AC10A0
+
