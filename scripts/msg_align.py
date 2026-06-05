@@ -1,41 +1,71 @@
 #!/usr/bin/env python3
-"""Extract US<->JP message-ID correspondence pairs (decision D4).
+"""Build the US<->JP message-ID map (decision D4) for a JP msg.h.
 
-A region-different .rodata table of message IDs is logically the same US and JP,
-just with different MSG values. Given the US and JP table addresses + entry count
-(found by matching the referencing function/run), read both and emit the pairs.
-Aggregated across the ROM these build the US MSG_* -> JP index map for msg.h.
+A region-different .rodata table of message IDs is logically identical US/JP, just
+with different MSG values. layout/addr_map.tsv already pairs US->JP *addresses*
+(from located functions' literal pools), so a referenced MSG table appears there.
+For each address pair, read consecutive entries from both ROMs; a run of >=5
+plausible message ids on both sides is a MSG table -> emit US-index<->JP-index
+pairs. Majority-vote per US id; keep unambiguous ones.
 
-Seed table: bmreliance affinity name lookup (validated). Extend with more tables
-(from port_run's region-different-data detections / matched MSG-referencing code).
+Offsets are piecewise-constant (large offset-0 prefix, then shifted segments from
+inserted/removed messages), so the map must be harvested, then interpolated
+within each constant-offset segment to cover gaps.
 
 Outputs layout/msg_map.tsv:  us_id  jp_id  source
 """
-import struct, os
+import os
+from collections import Counter, defaultdict
+
 US = open("/home/laqieer/fireemblem8u/fireemblem8.gba", "rb").read()
 JP = open("baserom.gba", "rb").read()
+B = 0x08000000
+JP_COUNT = 0xD0C
 
-# (us_table_addr, jp_table_addr, first_entry_idx, count, entry_size, source)
-TABLES = [
-    # bmreliance affinity-name lookup: 8 u32 entries after a 4-byte icon word.
-    (0x080D7C14 + 4, 0x080DC948 + 4, 0, 8, 4, "bmreliance:affinity"),
-]
+def rd(rom, off, sz):
+    return int.from_bytes(rom[off:off+sz], "little") if 0 <= off and off+sz <= len(rom) else -1
+
+def valid(x):
+    return 1 <= x < JP_COUNT
+
+votes = defaultdict(Counter)
+src_of = {}
+ntables = 0
+for ln in open("layout/addr_map.tsv"):
+    if ln.startswith("#"):
+        continue
+    ua, ja = (int(x, 16) for x in ln.split("\t")[:2])
+    if not (B <= ua < B + 0x1000000 and B <= ja < B + 0x1000000):
+        continue
+    for sz in (2, 4):
+        uo, jo = ua - B, ja - B
+        run = []
+        for k in range(64):
+            uv, jv = rd(US, uo+k*sz, sz), rd(JP, jo+k*sz, sz)
+            if valid(uv) and valid(jv):
+                run.append((uv, jv))
+            else:
+                break
+        if len(run) >= 5:
+            ntables += 1
+            tag = "auto:same" if ua == ja else "auto:shifted"
+            for uv, jv in run:
+                votes[uv][jv] += 1
+                src_of.setdefault(uv, tag)
+            break
 
 pairs = {}
-for us_a, jp_a, _, cnt, sz, src in TABLES:
-    uo, jo = us_a - 0x08000000, jp_a - 0x08000000
-    for k in range(cnt):
-        u = int.from_bytes(US[uo+k*sz:uo+k*sz+sz], "little")
-        j = int.from_bytes(JP[jo+k*sz:jo+k*sz+sz], "little")
-        if 0 < u < 0xE00 and 0 < j < 0xE00:  # plausible message ids
-            pairs[u] = (j, src)
+for uv, c in votes.items():
+    jv, n = c.most_common(1)[0]
+    if sum(c.values()) - n == 0:  # unambiguous
+        pairs[uv] = jv
 
 os.makedirs("layout", exist_ok=True)
 with open("layout/msg_map.tsv", "w") as f:
     f.write("# us_id\tjp_id\tsource\n")
-    for u in sorted(pairs):
-        j, src = pairs[u]
-        f.write(f"{u:04X}\t{j:04X}\t{src}\n")
-print(f"{len(pairs)} US->JP message-id pairs -> layout/msg_map.tsv")
-for u in sorted(pairs):
-    print(f"  MSG US 0x{u:X} -> JP 0x{pairs[u][0]:X}  (offset {pairs[u][0]-u:+#x})")
+    for uv in sorted(pairs):
+        f.write(f"{uv:04X}\t{pairs[uv]:04X}\t{src_of.get(uv,'auto')}\n")
+print(f"{ntables} candidate tables -> {len(pairs)} US->JP message-id pairs "
+      f"({100*len(pairs)//JP_COUNT}% of JP messages) -> layout/msg_map.tsv")
+shifted = sum(1 for uv, jv in pairs.items() if uv != jv)
+print(f"  offset-0 (same id): {len(pairs)-shifted}, shifted (relinked): {shifted}")
