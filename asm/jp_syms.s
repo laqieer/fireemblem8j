@@ -1385,3 +1385,105 @@
 	.global gUnk_Sio_12
 	.set    gUnk_Sio_12, 0x0203DD20
 
+	.global Img_GasTrapVertical
+	.set    Img_GasTrapVertical, 0x085C9A30
+
+	.global SpriteAnim_GasTrapVertical
+	.set    SpriteAnim_GasTrapVertical, 0x085C9518
+
+	.global Img_GasTrapHorizontal
+	.set    Img_GasTrapHorizontal, 0x085CA018
+
+	.global SpriteAnim_GasTrapHorizontal
+	.set    SpriteAnim_GasTrapHorizontal, 0x085C97BC
+
+	.global PlaySeSpacial
+	.type   PlaySeSpacial, %function
+	.thumb_func
+	.set    PlaySeSpacial, 0x08014B50 + 1
+
+	.global Pal_GasTrap
+	.set    Pal_GasTrap, 0x085CA58C
+
+	.global Img_FireTrap
+	.set    Img_FireTrap, 0x085CAE60
+
+	.global SpriteAnim_FireTrap
+	.set    SpriteAnim_FireTrap, 0x085CB31C
+
+	.global Pal_FireTrap
+	.set    Pal_FireTrap, 0x085CB2FC
+
+	.global Pal_FireTrap2
+	.set    Pal_FireTrap2, 0x085CB9B0
+
+	.global Obj_WallBreakAnim
+	.set    Obj_WallBreakAnim, 0x08A17660
+
+	.global Img_WallBreakAnim
+	.set    Img_WallBreakAnim, 0x08A1E108
+
+	.global Pal_WallBreakAnim
+	.set    Pal_WallBreakAnim, 0x08A1E394
+
+	.global EnsureCameraOntoPosition
+	.type   EnsureCameraOntoPosition, %function
+	.thumb_func
+	.set    EnsureCameraOntoPosition, 0x08015E18 + 1
+
+	.global Img_ArrowTrap
+	.set    Img_ArrowTrap, 0x085CA5CC
+
+	.global Pal_ArrowTrap
+	.set    Pal_ArrowTrap, 0x085CA5AC
+
+	.global SpriteAnim_ArrowTrap
+	.set    SpriteAnim_ArrowTrap, 0x085CA8A4
+
+	.global APProc_Exists
+	.type   APProc_Exists, %function
+	.thumb_func
+	.set    APProc_Exists, 0x080096C0 + 1
+
+	.global SetBlendBackdropB
+	.type   SetBlendBackdropB, %function
+	.thumb_func
+	.set    SetBlendBackdropB, 0x08001EB4 + 1
+
+	.global gUnk_32
+	.type   gUnk_32, %function
+	.thumb_func
+	.set    gUnk_32, 0x0201C5D0 + 1
+
+	.global gUnk_31
+	.set    gUnk_31, 0x0201C5D0
+
+	.global gUnk_26
+	.set    gUnk_26, 0x0201BE32
+
+	.global gUnk_28
+	.set    gUnk_28, 0x0201C5C0
+
+	.global gWmHblankStatus
+	.set    gWmHblankStatus, 0x0201BE30
+
+	.global gUnk_30
+	.type   gUnk_30, %function
+	.thumb_func
+	.set    gUnk_30, 0x0201C5CE + 1
+
+	.global gUnk_27
+	.set    gUnk_27, 0x0201C5B4
+
+	.global gManimActiveScanlineBuf
+	.set    gManimActiveScanlineBuf, 0x0203E758
+
+	.global gManimScanlineBufs
+	.set    gManimScanlineBufs, 0x0203E750
+
+	.global gUnk_29
+	.set    gUnk_29, 0x0201C5CC
+
+	.global gWMNodeData
+	.set    gWMNodeData, 0x081F5D7C
+

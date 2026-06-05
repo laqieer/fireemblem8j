@@ -65,3 +65,9 @@ A9DAA4	A9DAB4	src/cursor_hand.o(.data)	cursor_hand .data
 047590	0476A4	src/sio_rulesettings.o(.text)	sio_rulesettings(run): LoadLinkArenaRuleSettings, SaveLinkArenaRuleSettings, SioRuleSettings_DrawRuleOptions
 0DEE80	0DEE88	src/sio_rulesettings.o(.rodata)	sio_rulesettings .rodata
 046BC4	046DBC	src/sio_term.o(.text)	sio_term(run): MoveMenuCursorSkippingInvalid, LinkArenaTeamBuild_Loop, LinkArenaTeamBuild_LoadSelectedSave...
+01F198	01F4B8	src/trapfx.o(.text)	trapfx(run): GasTrapSpriteAnim_Init, StartGasTrapAnim, FireTrapSpriteAnim_Init...
+5C3448	5C34F0	src/trapfx.o(.data)	trapfx .data
+0C5D7C	0C5E84	src/worldmap_effect.o(.text)	worldmap_effect(run): GmapEffectPal_OnEnd, GmapEffectPal_Init
+0C69B4	0C6BE8	src/worldmap_hb.o(.text)	worldmap_hb(run): WorldMapHblank, SetWorldMapHblank, ClearWmHblank...
+0C43A8	0C44A4	src/worldmap_palette_fade.o(.text)	worldmap_palette_fade(run): GmPalFade_Init, GmPalFade_Loop
+0C03E0	0C0414	src/worldmap_screen2.o(.text)	worldmap_screen2(run): WMLoc_GetChapterId
