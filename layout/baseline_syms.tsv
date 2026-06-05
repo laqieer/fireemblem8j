@@ -35,3 +35,6 @@ gUnitArrayBlue	0202BE48	data	bmusort
 ClearUnit	0801759C	thumb	bmusort
 CopyUnit	080175C4	thumb	bmusort
 CpuSet	080D6370	thumb	bmusort
+gGameClock	03000010	data	time game clock (IncrementGameClock/FormatTime)
+__udivsi3	080D67D0	thumb	libgcc unsigned divide (FormatTime)
+__umodsi3	080D6848	thumb	libgcc unsigned modulo (FormatTime)

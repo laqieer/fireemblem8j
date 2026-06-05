@@ -140,3 +140,16 @@
 	.thumb_func
 	.set    CpuSet, 0x080D6370 + 1
 
+	.global gGameClock
+	.set    gGameClock, 0x03000010
+
+	.global __udivsi3
+	.type   __udivsi3, %function
+	.thumb_func
+	.set    __udivsi3, 0x080D67D0 + 1
+
+	.global __umodsi3
+	.type   __umodsi3, %function
+	.thumb_func
+	.set    __umodsi3, 0x080D6848 + 1
+
