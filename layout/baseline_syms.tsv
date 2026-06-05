@@ -105,3 +105,6 @@ SetBlendConfig	08001DF0	thumb	bmlib
 SetBlendTargetA	08001E20	thumb	bmlib
 SetBlendBackdropA	08001E98	thumb	bmlib
 gLCDControlBuffer	03003020	data	bmlib
+GetStringFromIndex	08009FA8	thumb	bmreliance
+GetUnitFromCharId	08017FB0	thumb	bmreliance
+GetUnitSupporterNum	0802833C	thumb	bmreliance

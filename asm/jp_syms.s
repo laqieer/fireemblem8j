@@ -464,3 +464,18 @@
 	.global gLCDControlBuffer
 	.set    gLCDControlBuffer, 0x03003020
 
+	.global GetStringFromIndex
+	.type   GetStringFromIndex, %function
+	.thumb_func
+	.set    GetStringFromIndex, 0x08009FA8 + 1
+
+	.global GetUnitFromCharId
+	.type   GetUnitFromCharId, %function
+	.thumb_func
+	.set    GetUnitFromCharId, 0x08017FB0 + 1
+
+	.global GetUnitSupporterNum
+	.type   GetUnitSupporterNum, %function
+	.thumb_func
+	.set    GetUnitSupporterNum, 0x0802833C + 1
+

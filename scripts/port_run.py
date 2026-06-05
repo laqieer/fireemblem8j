@@ -195,6 +195,27 @@ def port(name):
     if "fireemblem8.gba: OK" in sh("make compare").stdout:
         print(f"{name}: OK — run {start}..{end} ({len(funcs)} fns, {len(adds)} new syms{', +ram' if ram else ''})")
         return True
+
+    # Fallback: raw-hex message-id tables (US `{0x534,0x510,...}` not yet MSG_*)
+    # are region-different data. Remap in-source ids to JP per layout/msg_map.tsv
+    # and retry; the verify-or-revert net keeps any bad remap from landing.
+    import re as _re
+    mm = {}
+    for l in open("layout/msg_map.tsv"):
+        if not l.startswith("#"):
+            u, j = (int(x, 16) for x in l.split("\t")[:2])
+            if u != j: mm[u] = j
+    src = open(f"src/{name}.c").read()
+    new = _re.sub(r"0x[0-9A-Fa-f]+",
+                  lambda m: f"0x{mm[int(m.group(0),16)]:X}" if int(m.group(0), 16) in mm else m.group(0),
+                  src)
+    if new != src:
+        open(f"src/{name}.c", "w").write(new)
+        sh("make clean")
+        if "fireemblem8.gba: OK" in sh("make compare").stdout:
+            print(f"{name}: OK (msg-id remapped) — run {start}..{end} ({len(funcs)} fns)")
+            return True
+
     print(f"{name}: FAILED make compare — reverting")
     if os.environ.get("PORTRUN_DEBUG"):
         sh("make fireemblem8.gba")
