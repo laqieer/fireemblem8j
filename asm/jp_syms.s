@@ -2070,3 +2070,17 @@
 	.thumb_func
 	.set    EndGmapEffect, 0x080C619C + 1
 
+	.global unit_icon_move_table
+	.set    unit_icon_move_table, 0x08A13488
+
+	.global gUnk_6
+	.set    gUnk_6, 0x0200AF00
+
+	.global AP_Delete
+	.type   AP_Delete, %function
+	.thumb_func
+	.set    AP_Delete, 0x08009194 + 1
+
+	.global gObject_8x8
+	.set    gObject_8x8, 0x085B8CDC
+

@@ -481,3 +481,7 @@ gMid_Lv	08A73210	data	uiarena
 gArenaState	0203A8EC	data	uiarena
 StartBgmCore	08002398	thumb	uiarena
 EndGmapEffect	080C619C	thumb	worldmap_entry
+unit_icon_move_table	08A13488	data	worldmap_gmapunit
+gUnk_6	0200AF00	data	worldmap_gmapunit
+AP_Delete	08009194	thumb	worldmap_gmapunit
+gObject_8x8	085B8CDC	data	worldmap_radar
