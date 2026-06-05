@@ -39,3 +39,30 @@ to support per-function location — not as a standalone whole-file-perfection p
 
 **Status:** validated; implementation pending (extend locate_tu/port_tu to
 per-function granularity). Tracked on project board #14.
+
+## D2 — Runs must be verified as a compiled block (not trusted per-function)
+
+**Date context:** per-function-run porting (D1) worked for small runs (time: 2
+fns) but failed for bmtrick's 18-fn run — the compiled subset matched JP for ~5
+functions then shifted (871 diffs). Root cause: per-function masked search gives
+individually-unreliable matches (small functions get false-positive unique hits
+that still pass the source→JP monotonicity filter), so the grouped "run" isn't a
+true JP-contiguous block.
+
+**Consulted:** Copilot CLI. Recommendation (adopted): the unit you carve is a
+linked block, so the unit you *trust* must also be a linked block. Per-function
+matches are proposals only.
+
+**Decision (D2):** the carve primitive is **compile-and-verify-the-block**:
+1. Propose candidate functions via per-function masked search.
+2. Form a candidate run (consecutive matched functions, source order).
+3. Compile the subset `.c` and masked-search its WHOLE emitted `.text` for a
+   UNIQUE match in the JP ROM.
+4. Only carve if the block uniquely matches, at the matched JP base.
+5. On no/!unique match, find the longest matching prefix (binary search on the
+   function count), carve that, recurse on the remainder.
+
+Rule: **never carve a run unless the compiled block has a unique masked ROM
+match.** This makes the porter self-validating; false runs auto-shrink to real
+verified runs. ROM-resident `.data`/`.rodata` placement (D1 follow-up) layers on
+top once the `.text` block is verified.
