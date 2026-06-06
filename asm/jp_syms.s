@@ -4009,3 +4009,11 @@
 	.global ProcScr_PoisonAnim2
 	.set    ProcScr_PoisonAnim2, 0x08A13FEC
 
+	.global SelectFromWeightedArray
+	.type   SelectFromWeightedArray, %function
+	.thumb_func
+	.set    SelectFromWeightedArray, 0x0807A6CC + 1
+
+	.global gMonsterClassWeights
+	.set    gMonsterClassWeights, 0x089264B4
+

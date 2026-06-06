@@ -163,3 +163,5 @@ A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 012AF0	012BA4	src/eventfx-shinningstone.o(.text)	eventfx-shinningstone(run): ShinningStonefx_InitGfx, ShinningStonefx_CreateSpriteAnim, ShinningStonefx_Delay
 00BCF4	00BD98	src/eventscr_utils.o(.text)	eventscr_utils(run): BackupPalette, RestorePalette, SetSomeRealCamPos
 07EF20	07F0FC	src/mapanim_specialeffect.o(.text)	mapanim_specialeffect(run): MapAnim_BeginWallBreakAnim, WallBreakAnim_Init, NewMapPoisonEffect...
+07A748	07A774	src/monstergen.o(.text)	monstergen(run): GenerateMonsterClass
+0D0EC4	0D0F68	src/opanim-healthsafetyscreen.o(.text)	opanim-healthsafetyscreen(run): OpAnimHS_BrightenPalette
