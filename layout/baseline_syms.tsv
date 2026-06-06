@@ -944,3 +944,10 @@ ProcScr_OpAnimfxTerminator	08B3F298	data	opanimfx
 Sqrt	080D63D4	thumb	whitecircularfadefx
 ProcScr_WorldMapFaceHolder	08AC10A0	data	worldmap_face
 gGuideTable	08BB2E60	data	bmguide
+AiGetInRangeCombatPositionScoreComponent	0803E17C	thumb	cp_battle
+AiGetTerrainCombatPositionScoreComponent	0803E1CC	thumb	cp_battle
+AiGetFriendZoneCombatPositionScoreComponent	0803E20C	thumb	cp_battle
+gBmMapOther	0202E4EC	data	cp_battle
+BattleGenerateSimulation	0802A2A4	thumb	cp_battle
+BattleGenerateBallistaSimulation	0802A2F0	thumb	cp_battle
+AiComputeCombatScore	0803E108	thumb	cp_battle

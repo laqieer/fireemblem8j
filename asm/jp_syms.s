@@ -3745,3 +3745,36 @@
 	.global gGuideTable
 	.set    gGuideTable, 0x08BB2E60
 
+	.global AiGetInRangeCombatPositionScoreComponent
+	.type   AiGetInRangeCombatPositionScoreComponent, %function
+	.thumb_func
+	.set    AiGetInRangeCombatPositionScoreComponent, 0x0803E17C + 1
+
+	.global AiGetTerrainCombatPositionScoreComponent
+	.type   AiGetTerrainCombatPositionScoreComponent, %function
+	.thumb_func
+	.set    AiGetTerrainCombatPositionScoreComponent, 0x0803E1CC + 1
+
+	.global AiGetFriendZoneCombatPositionScoreComponent
+	.type   AiGetFriendZoneCombatPositionScoreComponent, %function
+	.thumb_func
+	.set    AiGetFriendZoneCombatPositionScoreComponent, 0x0803E20C + 1
+
+	.global gBmMapOther
+	.set    gBmMapOther, 0x0202E4EC
+
+	.global BattleGenerateSimulation
+	.type   BattleGenerateSimulation, %function
+	.thumb_func
+	.set    BattleGenerateSimulation, 0x0802A2A4 + 1
+
+	.global BattleGenerateBallistaSimulation
+	.type   BattleGenerateBallistaSimulation, %function
+	.thumb_func
+	.set    BattleGenerateBallistaSimulation, 0x0802A2F0 + 1
+
+	.global AiComputeCombatScore
+	.type   AiComputeCombatScore, %function
+	.thumb_func
+	.set    AiComputeCombatScore, 0x0803E108 + 1
+

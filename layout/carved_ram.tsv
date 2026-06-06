@@ -11,3 +11,4 @@
 0203AA00	ewram	src/cp_phase.o(ewram_data)	cp_phase
 0203E828	ewram	src/cgtext.o(ewram_data)	cgtext
 0203E1E4	ewram	src/banim-efxop.o(ewram_data)	banim-efxop
+030017D0	iwram	src/cp_battle.o(.bss)	cp_battle .bss
