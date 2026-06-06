@@ -155,3 +155,4 @@ A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 5C3320	5C3348	src/prep_unitswap.o(.data)	prep_unitswap .data
 053888	053990	src/banim-efxhpbar.o(.text)	banim-efxhpbar(run): NewEfxNoDamage, EfxNoDamageMain, NewEfxNoDamageYure
 067768	067834	src/banim-efxmagic-ereshkigal.o(.text)	banim-efxmagic-ereshkigal(run): efxSuperdruidBG3_Loop
+070B68	070C14	src/banim-efxskill.o(.text)	banim-efxskill(run): NewEfxSkillCommonBG, EfxSkillCommonBG_PlaySfx

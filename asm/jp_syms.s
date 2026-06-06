@@ -3865,3 +3865,23 @@
 	.thumb_func
 	.set    SpellFx_RegisterBgGfx, 0x080567B8 + 1
 
+	.global SpellFx_SetSomeColorEffect
+	.type   SpellFx_SetSomeColorEffect, %function
+	.thumb_func
+	.set    SpellFx_SetSomeColorEffect, 0x08056158 + 1
+
+	.global ProcScr_efxSkillCommonBG
+	.set    ProcScr_efxSkillCommonBG, 0x08603B18
+
+	.global FrameLut_EfxSkill
+	.set    FrameLut_EfxSkill, 0x080E49B6
+
+	.global TsaLut_EfxSkill
+	.set    TsaLut_EfxSkill, 0x08603A58
+
+	.global ImgLut_EfxSkill
+	.set    ImgLut_EfxSkill, 0x08603A98
+
+	.global PalLut_EfxSkill
+	.set    PalLut_EfxSkill, 0x08603AD8
+
