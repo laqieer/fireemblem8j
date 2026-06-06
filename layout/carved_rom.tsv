@@ -165,3 +165,4 @@ A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 07EF20	07F0FC	src/mapanim_specialeffect.o(.text)	mapanim_specialeffect(run): MapAnim_BeginWallBreakAnim, WallBreakAnim_Init, NewMapPoisonEffect...
 07A748	07A774	src/monstergen.o(.text)	monstergen(run): GenerateMonsterClass
 0D0EC4	0D0F68	src/opanim-healthsafetyscreen.o(.text)	opanim-healthsafetyscreen(run): OpAnimHS_BrightenPalette
+099B24	099CC0	src/prep_sallycir.o(.text)	prep_sallycir(run): SallyCir_OnHBlank, SallyCir_Init

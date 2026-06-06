@@ -4017,3 +4017,9 @@
 	.global gMonsterClassWeights
 	.set    gMonsterClassWeights, 0x089264B4
 
+	.global gPrepscreen_4
+	.set    gPrepscreen_4, 0x02013458
+
+	.global gPrepscreen_3
+	.set    gPrepscreen_3, 0x02012F58
+

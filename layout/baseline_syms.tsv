@@ -1010,3 +1010,5 @@ Obj_PoisonAnim	08A175C8	data	mapanim_specialeffect
 ProcScr_PoisonAnim2	08A13FEC	data	mapanim_specialeffect
 SelectFromWeightedArray	0807A6CC	thumb	monstergen
 gMonsterClassWeights	089264B4	data	monstergen
+gPrepscreen_4	02013458	data	prep_sallycir
+gPrepscreen_3	02012F58	data	prep_sallycir
