@@ -46,3 +46,6 @@ cscope.out
 # Python bytecode cache (from scripts/*.py)
 __pycache__/
 *.pyc
+
+# Diagnosis artifacts: isolated compile probes (never carved/committed)
+src/_diag_*
