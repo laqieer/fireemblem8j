@@ -90,6 +90,26 @@ for i in range(len(anchors) - 1):
                 src_of[u] = "interp"
                 interp += 1
 
+# Extrapolation: extend a consecutive same-offset run forward a bounded distance
+# into adjacent UNMAPPED ids (e.g. the tail of a weapon-/class-type table whose
+# last few ids have no anchor). Only extend from an id that sits inside a
+# same-offset run (its predecessor agrees), and stop at the next mapped id. In
+# reordered regions this is a guess, but port_run verifies every carve against
+# the ROM and reverts non-matches, so a wrong guess never lands -- it just fails
+# to port. Fills gaps like wtypeTextIdLookup's 0x50D..0x50F -> 0x4A0..0x4A2.
+extrap = 0
+for u0, j0 in sorted(pairs.items()):
+    off = j0 - u0
+    if pairs.get(u0 - 1) != j0 - 1:   # only from within a same-offset run
+        continue
+    for d in range(1, 9):
+        u = u0 + d
+        if u in pairs or not valid(u + off):
+            break
+        pairs[u] = u + off
+        src_of[u] = "extrap"
+        extrap += 1
+
 os.makedirs("layout", exist_ok=True)
 with open("layout/msg_map.tsv", "w") as f:
     f.write("# us_id\tjp_id\tsource\n")
