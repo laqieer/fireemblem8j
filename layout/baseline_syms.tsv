@@ -1043,3 +1043,11 @@ gEkrDragonPalBackup	02020068	data	banim-ekrdragon-dracozombie
 EkrDZ_PrepareBanimfx	08072454	thumb	banim-ekrdragon-dracozombie
 gEkrDracoZombiTsaSetLut	087A8B2C	data	banim-ekrdragon-dracozombie
 NewEkrDragonQuakeTree3	08072930	thumb	banim-ekrdragon-dracozombie
+GetLang	08003BC0	thumb	bmsave-xmap
+ReadExtraMapSaveHead	080AB514	thumb	bmsave-xmap
+GetExtraMapInfoReadAddr	080AB5CC	thumb	bmsave-xmap
+GetExtraMapInfoSize	080AB5EC	thumb	bmsave-xmap
+GetTrap	0802EAC4	thumb	bmsave-xmap
+GetPermanentFlagBits	080860E8	thumb	bmsave-xmap
+GetChapterFlagBits	080860F4	thumb	bmsave-xmap
+gUnitLookup	085C2A50	data	bmsave-xmap

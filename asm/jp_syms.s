@@ -4152,3 +4152,41 @@
 	.thumb_func
 	.set    NewEkrDragonQuakeTree3, 0x08072930 + 1
 
+	.global GetLang
+	.type   GetLang, %function
+	.thumb_func
+	.set    GetLang, 0x08003BC0 + 1
+
+	.global ReadExtraMapSaveHead
+	.type   ReadExtraMapSaveHead, %function
+	.thumb_func
+	.set    ReadExtraMapSaveHead, 0x080AB514 + 1
+
+	.global GetExtraMapInfoReadAddr
+	.type   GetExtraMapInfoReadAddr, %function
+	.thumb_func
+	.set    GetExtraMapInfoReadAddr, 0x080AB5CC + 1
+
+	.global GetExtraMapInfoSize
+	.type   GetExtraMapInfoSize, %function
+	.thumb_func
+	.set    GetExtraMapInfoSize, 0x080AB5EC + 1
+
+	.global GetTrap
+	.type   GetTrap, %function
+	.thumb_func
+	.set    GetTrap, 0x0802EAC4 + 1
+
+	.global GetPermanentFlagBits
+	.type   GetPermanentFlagBits, %function
+	.thumb_func
+	.set    GetPermanentFlagBits, 0x080860E8 + 1
+
+	.global GetChapterFlagBits
+	.type   GetChapterFlagBits, %function
+	.thumb_func
+	.set    GetChapterFlagBits, 0x080860F4 + 1
+
+	.global gUnitLookup
+	.set    gUnitLookup, 0x085C2A50
+
