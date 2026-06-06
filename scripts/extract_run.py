@@ -68,6 +68,14 @@ while i < n:
     i += 1
 
 header = src[:header_end] if header_end is not None else src
+# De-`static` forward declarations of functions NOT in this subset: their bodies
+# aren't included, so a `static` decl triggers agbcc's "used but never defined"
+# (-Werror). Making them extern lets the linker resolve them (port_run adds the
+# baseline sym). Functions kept in the subset keep their static decl+def.
+wantset = set(wanted)
+def _destatic(m):
+    return m.group(0) if m.group(1) in wantset else m.group(0).replace("static", "", 1)
+header = re.sub(r"static\s+[\w\s\*]+?\b(\w+)\s*\([^;{]*\)\s*;", _destatic, header)
 out = [header.rstrip("\n")]
 byname = {nm: (s, e) for nm, s, e in spans}
 missing = [w for w in wanted if w not in byname]
