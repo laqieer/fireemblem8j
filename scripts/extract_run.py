@@ -37,6 +37,19 @@ def skip_string(i, q):
 
 while i < n:
     c = src[i]
+    if c == "#" and (i == 0 or src[i-1] == "\n"):
+        # Preprocessor directive: skip the (possibly line-continued) line and,
+        # at top level, treat its end as a segment boundary. Without this the
+        # first function's segment starts at 0 when only #includes/#defines (no
+        # ';') precede it, so header_end becomes 0 and the whole include block is
+        # dropped -> undeclared externals -> agbcc -Wimplicit -Werror failure.
+        j = src.find("\n", i)
+        while j != -1 and src[j-1] == "\\":
+            j = src.find("\n", j + 1)
+        i = n if j == -1 else j + 1
+        if depth == 0:
+            seg_start = i
+        continue
     if c == "/" and i + 1 < n and src[i+1] == "/":
         i = src.find("\n", i);  i = n if i < 0 else i;  continue
     if c == "/" and i + 1 < n and src[i+1] == "*":

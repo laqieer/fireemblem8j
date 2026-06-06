@@ -965,3 +965,9 @@ GetFurthestTargetDistance	08050970	thumb	uiselecttarget
 PutUnitSprite	08027AF4	thumb	prep_unitswap
 gObject_16x16	085B8CE4	data	prep_unitswap
 PrepUnitSwapProc_Init	0801E6BC	thumb	prep_unitswap
+GetBattleAnimRoundTypeFlags	08059864	thumb	banim-efxhpbar
+NewEfxDamageMojiEffect	0806E940	thumb	banim-efxhpbar
+gEkrHpBarCount	02017728	data	banim-efxhpbar
+ProcScr_efxNoDamage	085E3894	data	banim-efxhpbar
+gEfxHpLutOff	0203E14E	data	banim-efxhpbar
+ProcScr_efxNoDamageYure	085E38BC	data	banim-efxhpbar

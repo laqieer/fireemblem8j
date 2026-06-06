@@ -3838,3 +3838,25 @@
 	.thumb_func
 	.set    PrepUnitSwapProc_Init, 0x0801E6BC + 1
 
+	.global GetBattleAnimRoundTypeFlags
+	.type   GetBattleAnimRoundTypeFlags, %function
+	.thumb_func
+	.set    GetBattleAnimRoundTypeFlags, 0x08059864 + 1
+
+	.global NewEfxDamageMojiEffect
+	.type   NewEfxDamageMojiEffect, %function
+	.thumb_func
+	.set    NewEfxDamageMojiEffect, 0x0806E940 + 1
+
+	.global gEkrHpBarCount
+	.set    gEkrHpBarCount, 0x02017728
+
+	.global ProcScr_efxNoDamage
+	.set    ProcScr_efxNoDamage, 0x085E3894
+
+	.global gEfxHpLutOff
+	.set    gEfxHpLutOff, 0x0203E14E
+
+	.global ProcScr_efxNoDamageYure
+	.set    ProcScr_efxNoDamageYure, 0x085E38BC
+
