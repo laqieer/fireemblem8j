@@ -1,0 +1,45 @@
+name: Backfill decomp progress
+
+# One-shot: replays the ENTIRE decompilation history to the frogress API
+# (https://progress.deco.mp) so the FE Decomp Portal charts the whole timeline,
+# not just HEAD. Run once after the PROGRESS_API_KEY secret is configured; the
+# regular `progress.yml` keeps the chart current on every push thereafter.
+#
+# Manual trigger only (workflow_dispatch). Reads each historical commit's carve
+# manifest via `git show` for exact code/data bytes and sums a per-object nm
+# cache built once from HEAD for functions/symbols (decision D5).
+
+on:
+  workflow_dispatch:
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    env:
+      PROGRESS_API_KEY: ${{ secrets.PROGRESS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history: backfill walks every manifest commit
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential binutils-arm-none-eabi libpng-dev
+          python -m pip install requests
+
+      - name: Install agbcc
+        run: |
+          git clone --depth 1 https://github.com/pret/agbcc.git
+          cd agbcc && ./build.sh && ./install.sh .. && cd ..
+
+      - name: Backfill the full progress timeline
+        if: ${{ env.PROGRESS_API_KEY != '' }}
+        run: |
+          python3 scripts/backfill-progress.py --build \
+            -b "https://progress.deco.mp" -a "$PROGRESS_API_KEY" \
+            -p fireemblem8j -v jp
+
+      - name: Note when skipped
+        if: ${{ env.PROGRESS_API_KEY == '' }}
+        run: echo "PROGRESS_API_KEY secret not set - nothing to backfill."

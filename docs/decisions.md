@@ -164,3 +164,33 @@ regenerate `msg.h`. This is reliable (exact integer pairs) and language-agnostic
 **Status:** the alignment crux now has a concrete, evidence-backed method;
 implementing the masked MSG-reference matcher is the next step. The huffman
 decode + table location remain validated and done.
+
+## D5 — Progress backfill: replay manifests via git-show, not per-commit rebuild
+
+**Context:** the `PROGRESS_API_KEY` secret is now configured and the frogress
+project `fireemblem8j` exists (version `jp` auto-creates on first authenticated
+POST). `progress.yml` only ever publishes HEAD; the portal needs the *whole*
+history charted. 51 commits changed `layout/carved_rom.tsv` (the carve manifest).
+
+**Decision (Copilot-reviewed, endorsed):** compute each historical point with
+method **B** — read that commit's manifest via `git show <commit>:layout/*.tsv`
+for **exact** code/data bytes, and compute functions/symbols by summing a
+per-object `nm` cache built **once at HEAD**. Rationale: carves only ever accrete
+(a committed object stays), so every historical object still exists at HEAD; the
+only inaccuracy is an object whose run was *extended* after its first carve
+(rare), slightly over-counting its functions at earlier commits. Avoids 51
+rebuilds while keeping the dominant code/data curve exact.
+
+**Guards (from Copilot review, implemented in scripts/backfill-progress.py):**
+include the first manifest commit (not just diffs); flag any historical object
+missing at HEAD (accretion-drift); detect later byte-range extensions and mark
+those symbol counts approximate; always take bytes from the commit's own
+manifest; key the nm cache by object path; monotonic sanity check; run the POST
+once (frogress entries keyed by git_hash/timestamp). The accurate-but-slow
+method A (per-commit checkout+rebuild) is reserved as a fallback for any commit
+the guards flag as suspicious.
+
+**Status:** implemented as `scripts/backfill-progress.py` +
+`.github/workflows/backfill-progress.yml` (workflow_dispatch, uses the secret).
+One run creates the `jp` version and fills the timeline; `progress.yml` keeps it
+current on every push thereafter.
