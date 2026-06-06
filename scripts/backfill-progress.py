@@ -201,15 +201,18 @@ def main():
         print(json.dumps(entries[-1], indent=2))
         return
 
-    api_key = args.api_key or os.environ.get("PROGRESS_API_KEY")
+    # Strip whitespace/newlines: a secret pasted with a trailing newline is the
+    # most common cause of a spurious "Incorrect API key provided" 400.
+    api_key = (args.api_key or os.environ.get("PROGRESS_API_KEY") or "").strip()
     if not api_key:
         sys.exit("API key required (-a or PROGRESS_API_KEY)")
     import requests
     url = f"{args.base_url.rstrip('/')}/data/{args.project}/{args.version}/"
     print(f"\nPOSTing {len(entries)} entries to {url}")
     r = requests.post(url, json={"api_key": api_key, "entries": entries})
-    r.raise_for_status()
-    print("Done:", r.status_code)
+    if not r.ok:
+        sys.exit(f"POST failed: {r.status_code} {r.reason}\nresponse body: {r.text}")
+    print("Done:", r.status_code, r.text[:200])
 
 
 if __name__ == "__main__":

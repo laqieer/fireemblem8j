@@ -43,9 +43,9 @@ if __name__ == '__main__':
     parser.add_argument("input", help="Progress text input")
 
     args = parser.parse_args()
-    api_key = args.api_key or os.environ.get("PROGRESS_API_KEY")
+    api_key = (args.api_key or os.environ.get("PROGRESS_API_KEY") or "").strip()
     if not api_key:
-        raise "API key required"
+        raise SystemExit("API key required")
     url = generate_url(args)
 
     entries = []
@@ -65,5 +65,6 @@ if __name__ == '__main__':
         "entries": entries,
     }
     r = requests.post(url, json=data)
-    r.raise_for_status()
-    print("Done!")
+    if not r.ok:
+        raise SystemExit(f"POST failed: {r.status_code} {r.reason}\nresponse body: {r.text}")
+    print("Done!", r.status_code)
