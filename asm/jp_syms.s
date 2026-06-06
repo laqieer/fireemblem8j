@@ -4023,3 +4023,12 @@
 	.global gPrepscreen_3
 	.set    gPrepscreen_3, 0x02012F58
 
+	.global gUnk_Sio_5
+	.set    gUnk_Sio_5, 0x02001188
+
+	.global gUnk_Sio_3
+	.set    gUnk_Sio_3, 0x02001180
+
+	.global gUnk_Sio_4
+	.set    gUnk_Sio_4, 0x02001184
+

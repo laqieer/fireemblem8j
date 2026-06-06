@@ -1012,3 +1012,6 @@ SelectFromWeightedArray	0807A6CC	thumb	monstergen
 gMonsterClassWeights	089264B4	data	monstergen
 gPrepscreen_4	02013458	data	prep_sallycir
 gPrepscreen_3	02012F58	data	prep_sallycir
+gUnk_Sio_5	02001188	data	sio_804B920
+gUnk_Sio_3	02001180	data	sio_804B920
+gUnk_Sio_4	02001184	data	sio_804B920
