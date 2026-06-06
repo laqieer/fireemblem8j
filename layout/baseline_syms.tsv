@@ -971,3 +971,4 @@ gEkrHpBarCount	02017728	data	banim-efxhpbar
 ProcScr_efxNoDamage	085E3894	data	banim-efxhpbar
 gEfxHpLutOff	0203E14E	data	banim-efxhpbar
 ProcScr_efxNoDamageYure	085E38BC	data	banim-efxhpbar
+SpellFx_RegisterBgGfx	080567B8	thumb	banim-efxmagic-ereshkigal

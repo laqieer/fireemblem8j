@@ -3860,3 +3860,8 @@
 	.global ProcScr_efxNoDamageYure
 	.set    ProcScr_efxNoDamageYure, 0x085E38BC
 
+	.global SpellFx_RegisterBgGfx
+	.type   SpellFx_RegisterBgGfx, %function
+	.thumb_func
+	.set    SpellFx_RegisterBgGfx, 0x080567B8 + 1
+
