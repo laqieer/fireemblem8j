@@ -4062,3 +4062,45 @@
 	.thumb_func
 	.set    DivArm, 0x080D6378 + 1
 
+	.global StartArmoryScreen
+	.type   StartArmoryScreen, %function
+	.thumb_func
+	.set    StartArmoryScreen, 0x080B8D68 + 1
+
+	.global StartVendorScreen
+	.type   StartVendorScreen, %function
+	.thumb_func
+	.set    StartVendorScreen, 0x080B8D88 + 1
+
+	.global StartSecretShopScreen
+	.type   StartSecretShopScreen, %function
+	.thumb_func
+	.set    StartSecretShopScreen, 0x080B8DA8 + 1
+
+	.global gPal_WorldmapGmap_0
+	.set    gPal_WorldmapGmap_0, 0x08B1CD60
+
+	.global GmapSugoAdvance
+	.type   GmapSugoAdvance, %function
+	.thumb_func
+	.set    GmapSugoAdvance, 0x080C61AC + 1
+
+	.global AP_Update
+	.type   AP_Update, %function
+	.thumb_func
+	.set    AP_Update, 0x080091AC + 1
+
+	.global AP_Create
+	.type   AP_Create, %function
+	.thumb_func
+	.set    AP_Create, 0x0800916C + 1
+
+	.global Img_GmapSoguSprites
+	.set    Img_GmapSoguSprites, 0x08A1E3D4
+
+	.global ApHandle_GmapSoguSprites
+	.set    ApHandle_GmapSoguSprites, 0x08A19580
+
+	.global ProcScr_GmapSogu
+	.set    ProcScr_GmapSogu, 0x08AC2430
+

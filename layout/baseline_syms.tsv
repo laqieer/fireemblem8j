@@ -1021,3 +1021,13 @@ SioMenu_GetItemHelpText	08047970	thumb	sio_menu
 PutSioText	08043084	thumb	sio_menu
 Sound_FadeOutBGM	0800226C	thumb	sio_menu
 DivArm	080D6378	thumb	spline
+StartArmoryScreen	080B8D68	thumb	worldmap_basemenu
+StartVendorScreen	080B8D88	thumb	worldmap_basemenu
+StartSecretShopScreen	080B8DA8	thumb	worldmap_basemenu
+gPal_WorldmapGmap_0	08B1CD60	data	worldmap_cursor
+GmapSugoAdvance	080C61AC	thumb	worldmap_sogu
+AP_Update	080091AC	thumb	worldmap_sogu
+AP_Create	0800916C	thumb	worldmap_sogu
+Img_GmapSoguSprites	08A1E3D4	data	worldmap_sogu
+ApHandle_GmapSoguSprites	08A19580	data	worldmap_sogu
+ProcScr_GmapSogu	08AC2430	data	worldmap_sogu

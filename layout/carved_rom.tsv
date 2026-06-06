@@ -171,3 +171,7 @@ A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 04E6D0	04E754	src/sio_menudef.o(.text)	sio_menudef(run): SioMenu_OnBPress, SioMenu_OnRPress
 00BAD0	00BC00	src/spline.o(.text)	spline(run): _DivArm1, _DivArm2
 088C1C	088CC4	src/statbar.o(.text)	statbar(run): DrawStatBarLeftBorder, DrawStatBarShadow, DrawStatBarRightBorder...
+0C5668	0C572C	src/worldmap_80C0834.o(.text)	worldmap_80C0834(run): GetWMCursorScreenQuadrant
+0C8D40	0C8DC4	src/worldmap_basemenu.o(.text)	worldmap_basemenu(run): GMapBaseMenu_StartArmory, GMapBaseMenu_StartVendor, GMapBaseMenu_StartSecretShop
+0C08C8	0C0918	src/worldmap_cursor.o(.text)	worldmap_cursor(run): GmapCursor_Init
+0C622C	0C64B0	src/worldmap_sogu.o(.text)	worldmap_sogu(run): GmapSogu_End, GmapSogu_Init, GmapSogu_Loop1...
