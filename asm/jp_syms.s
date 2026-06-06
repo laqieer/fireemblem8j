@@ -3933,3 +3933,34 @@
 	.thumb_func
 	.set    MatCopy, 0x08015154 + 1
 
+	.global ResetMenuTextCursors
+	.type   ResetMenuTextCursors, %function
+	.thumb_func
+	.set    ResetMenuTextCursors, 0x080D273C + 1
+
+	.global RedrawMenu
+	.type   RedrawMenu, %function
+	.thumb_func
+	.set    RedrawMenu, 0x0804FCFC + 1
+
+	.global SyncMenuBgs
+	.type   SyncMenuBgs, %function
+	.thumb_func
+	.set    SyncMenuBgs, 0x080505A0 + 1
+
+	.global gFontClassChg
+	.set    gFontClassChg, 0x03005370
+
+	.global EndMenu
+	.type   EndMenu, %function
+	.thumb_func
+	.set    EndMenu, 0x0804FC34 + 1
+
+	.global ClassChgLoadEfxTerrain
+	.type   ClassChgLoadEfxTerrain, %function
+	.thumb_func
+	.set    ClassChgLoadEfxTerrain, 0x080D18D0 + 1
+
+	.global ProcScr_PromoMain
+	.set    ProcScr_PromoMain, 0x08BAB664
+
