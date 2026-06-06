@@ -1072,3 +1072,14 @@ gBanimBGLut12	08861704	thumb	banim-battleparse
 gBanimBGLut13	08861746	data	banim-battleparse
 gBanimBGLut14	08861786	thumb	banim-battleparse
 gBanimBGLutDefault	08861272	thumb	banim-battleparse
+PidStatsGetTotalBattleAmt	080A9348	thumb	gamerankings
+PidStatsGetTotalWinAmt	080A936C	thumb	gamerankings
+PidStatsGetTotalExpGain	080A93E8	thumb	gamerankings
+GetNextChapterStatsSlot	080A8D00	thumb	gamerankings
+GetChapterStats	080A8CE0	thumb	gamerankings
+IsDifficultMode	0803460C	thumb	gamerankings
+gChapterDataTable	08904E1C	data	gamerankings
+GetChapterTacticsRank	080BACC8	thumb	gamerankings
+GetChapterSurvivalRank	080BAD48	thumb	gamerankings
+GetChapterFundsRank	080BAE60	thumb	gamerankings
+GetOverallRank	080BABF4	thumb	gamerankings

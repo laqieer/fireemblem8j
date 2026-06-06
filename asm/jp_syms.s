@@ -4275,3 +4275,56 @@
 	.thumb_func
 	.set    gBanimBGLutDefault, 0x08861272 + 1
 
+	.global PidStatsGetTotalBattleAmt
+	.type   PidStatsGetTotalBattleAmt, %function
+	.thumb_func
+	.set    PidStatsGetTotalBattleAmt, 0x080A9348 + 1
+
+	.global PidStatsGetTotalWinAmt
+	.type   PidStatsGetTotalWinAmt, %function
+	.thumb_func
+	.set    PidStatsGetTotalWinAmt, 0x080A936C + 1
+
+	.global PidStatsGetTotalExpGain
+	.type   PidStatsGetTotalExpGain, %function
+	.thumb_func
+	.set    PidStatsGetTotalExpGain, 0x080A93E8 + 1
+
+	.global GetNextChapterStatsSlot
+	.type   GetNextChapterStatsSlot, %function
+	.thumb_func
+	.set    GetNextChapterStatsSlot, 0x080A8D00 + 1
+
+	.global GetChapterStats
+	.type   GetChapterStats, %function
+	.thumb_func
+	.set    GetChapterStats, 0x080A8CE0 + 1
+
+	.global IsDifficultMode
+	.type   IsDifficultMode, %function
+	.thumb_func
+	.set    IsDifficultMode, 0x0803460C + 1
+
+	.global gChapterDataTable
+	.set    gChapterDataTable, 0x08904E1C
+
+	.global GetChapterTacticsRank
+	.type   GetChapterTacticsRank, %function
+	.thumb_func
+	.set    GetChapterTacticsRank, 0x080BACC8 + 1
+
+	.global GetChapterSurvivalRank
+	.type   GetChapterSurvivalRank, %function
+	.thumb_func
+	.set    GetChapterSurvivalRank, 0x080BAD48 + 1
+
+	.global GetChapterFundsRank
+	.type   GetChapterFundsRank, %function
+	.thumb_func
+	.set    GetChapterFundsRank, 0x080BAE60 + 1
+
+	.global GetOverallRank
+	.type   GetOverallRank, %function
+	.thumb_func
+	.set    GetOverallRank, 0x080BABF4 + 1
+
