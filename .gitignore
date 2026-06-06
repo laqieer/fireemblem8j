@@ -42,3 +42,7 @@ cscope.out
 
 # Harvest driver local state
 /.harvest_tried
+
+# Python bytecode cache (from scripts/*.py)
+__pycache__/
+*.pyc
