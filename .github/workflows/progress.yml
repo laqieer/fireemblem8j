@@ -40,6 +40,10 @@ jobs:
           python3 scripts/calcprogress.py | tee progress.txt
 
       - name: Publish progress
+        # Best-effort, non-blocking: portal publishing is cosmetic and runs on
+        # every push, so a transient frogress hiccup must never fail CI. The step
+        # still runs and logs the response body; a real outage shows as a warning.
+        continue-on-error: true
         if: ${{ env.PROGRESS_API_KEY != '' }}
         run: |
           python3 scripts/upload-progress.py \
