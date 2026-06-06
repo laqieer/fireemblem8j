@@ -960,3 +960,5 @@ ProcScr_EventFadefx	085BA2E4	data	eventfx-fade
 ProcScr_menu_scroll	08A9454C	data	prep_menuscroll
 Pal_MenuScrollBar	08A964FC	data	prep_menuscroll
 Img_MenuScrollBar	08A9645C	data	prep_menuscroll
+LinkTargets	08050684	thumb	uiselecttarget
+GetFurthestTargetDistance	08050970	thumb	uiselecttarget

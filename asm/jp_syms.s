@@ -3815,3 +3815,13 @@
 	.global Img_MenuScrollBar
 	.set    Img_MenuScrollBar, 0x08A9645C
 
+	.global LinkTargets
+	.type   LinkTargets, %function
+	.thumb_func
+	.set    LinkTargets, 0x08050684 + 1
+
+	.global GetFurthestTargetDistance
+	.type   GetFurthestTargetDistance, %function
+	.thumb_func
+	.set    GetFurthestTargetDistance, 0x08050970 + 1
+
