@@ -207,8 +207,22 @@ def main():
     if not api_key:
         sys.exit("API key required (-a or PROGRESS_API_KEY)")
     import requests
-    url = f"{args.base_url.rstrip('/')}/data/{args.project}/{args.version}/"
-    print(f"\nPOSTing {len(entries)} entries to {url}")
+    base = args.base_url.rstrip("/")
+
+    # This frogress deployment does not auto-create versions: ensure it exists
+    # first (idempotent). The 'default' category then auto-creates on the data
+    # POST, as in scripts/upload-progress.py.
+    vurl = f"{base}/projects/{args.project}/versions/"
+    vr = requests.post(vurl, json={"api_key": api_key, "slug": args.version, "name": args.version})
+    if vr.ok:
+        print(f"created version '{args.version}'")
+    elif "exist" in vr.text.lower():
+        print(f"version '{args.version}' already exists")
+    else:
+        sys.exit(f"version create failed: {vr.status_code} {vr.reason}\nresponse body: {vr.text}")
+
+    url = f"{base}/data/{args.project}/{args.version}/"
+    print(f"POSTing {len(entries)} entries to {url}")
     r = requests.post(url, json={"api_key": api_key, "entries": entries})
     if not r.ok:
         sys.exit(f"POST failed: {r.status_code} {r.reason}\nresponse body: {r.text}")
