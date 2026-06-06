@@ -1108,3 +1108,4 @@ DrawUnitAidText	080349AC	thumb	unitinfowindow
 PutUnitAidIconForTextAt	080349E4	thumb	unitinfowindow
 DrawUnitConText	08034964	thumb	unitinfowindow
 MoveSpriteRefresher	080053FC	thumb	unitinfowindow
+GetWeaponLevelFromExp	08016B04	thumb	bmitem

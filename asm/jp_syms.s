@@ -4445,3 +4445,8 @@
 	.thumb_func
 	.set    MoveSpriteRefresher, 0x080053FC + 1
 
+	.global GetWeaponLevelFromExp
+	.type   GetWeaponLevelFromExp, %function
+	.thumb_func
+	.set    GetWeaponLevelFromExp, 0x08016B04 + 1
+
