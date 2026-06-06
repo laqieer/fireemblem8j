@@ -998,3 +998,7 @@ ProcScr_PromoMain	08BAB664	data	classchg-menuconfirm
 Img_MapAnimUnlockObjfx	08A20D34	data	eventfx-shinningstone
 Pal_MapAnimUnlockObjfx	08A20D88	data	eventfx-shinningstone
 ApConf_MapanimTorchAnim_0	08A168DC	data	eventfx-shinningstone
+gLoadUnitBuffer	0203EFB4	data	eventscr_utils
+StoreAdjustedCameraPositions	08015D3C	thumb	eventscr_utils
+GetCameraAdjustedX	080159D4	thumb	eventscr_utils
+GetCameraAdjustedY	08015A18	thumb	eventscr_utils

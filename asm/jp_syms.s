@@ -3973,3 +3973,21 @@
 	.global ApConf_MapanimTorchAnim_0
 	.set    ApConf_MapanimTorchAnim_0, 0x08A168DC
 
+	.global gLoadUnitBuffer
+	.set    gLoadUnitBuffer, 0x0203EFB4
+
+	.global StoreAdjustedCameraPositions
+	.type   StoreAdjustedCameraPositions, %function
+	.thumb_func
+	.set    StoreAdjustedCameraPositions, 0x08015D3C + 1
+
+	.global GetCameraAdjustedX
+	.type   GetCameraAdjustedX, %function
+	.thumb_func
+	.set    GetCameraAdjustedX, 0x080159D4 + 1
+
+	.global GetCameraAdjustedY
+	.type   GetCameraAdjustedY, %function
+	.thumb_func
+	.set    GetCameraAdjustedY, 0x08015A18 + 1
+
