@@ -4104,3 +4104,51 @@
 	.global ProcScr_GmapSogu
 	.set    ProcScr_GmapSogu, 0x08AC2430
 
+	.global Tsa_EfxDracoZombieBaseRight
+	.set    Tsa_EfxDracoZombieBaseRight, 0x087E56B4
+
+	.global EkrDragonTmCpyWithDistance
+	.type   EkrDragonTmCpyWithDistance, %function
+	.thumb_func
+	.set    EkrDragonTmCpyWithDistance, 0x08072168 + 1
+
+	.global Tsa_EfxDracoZombieBaseLeft
+	.set    Tsa_EfxDracoZombieBaseLeft, 0x087E54E0
+
+	.global Fill16_EkrTsaBuffer
+	.type   Fill16_EkrTsaBuffer, %function
+	.thumb_func
+	.set    Fill16_EkrTsaBuffer, 0x080721E0 + 1
+
+	.global EfxTmFill
+	.type   EfxTmFill, %function
+	.thumb_func
+	.set    EfxTmFill, 0x08056964 + 1
+
+	.global SetEkrDragonStatusUnk1
+	.type   SetEkrDragonStatusUnk1, %function
+	.thumb_func
+	.set    SetEkrDragonStatusUnk1, 0x08072054 + 1
+
+	.global Img_EfxDracoZombie
+	.set    Img_EfxDracoZombie, 0x087E1BA0
+
+	.global Pal_EfxDracoZombie
+	.set    Pal_EfxDracoZombie, 0x087E62B4
+
+	.global gEkrDragonPalBackup
+	.set    gEkrDragonPalBackup, 0x02020068
+
+	.global EkrDZ_PrepareBanimfx
+	.type   EkrDZ_PrepareBanimfx, %function
+	.thumb_func
+	.set    EkrDZ_PrepareBanimfx, 0x08072454 + 1
+
+	.global gEkrDracoZombiTsaSetLut
+	.set    gEkrDracoZombiTsaSetLut, 0x087A8B2C
+
+	.global NewEkrDragonQuakeTree3
+	.type   NewEkrDragonQuakeTree3, %function
+	.thumb_func
+	.set    NewEkrDragonQuakeTree3, 0x08072930 + 1
+

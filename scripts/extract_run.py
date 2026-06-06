@@ -72,7 +72,7 @@ while i < n:
             # definitions and array/struct initialisers do not (they end in a name,
             # '=', etc.) — this correctly keeps functions that *return* a struct.
             if name and sig.rstrip().endswith(")"):
-                spans.append((name, func_start, i + 1))
+                spans.append((name, func_start, i + 1, sig))
                 if header_end is None:
                     header_end = func_start
             seg_start = i + 1
@@ -90,7 +90,43 @@ def _destatic(m):
     return m.group(0) if m.group(1) in wantset else m.group(0).replace("static", "", 1)
 header = re.sub(r"static\s+[\w\s\*]+?\b(\w+)\s*\([^;{]*\)\s*;", _destatic, header)
 out = [header.rstrip("\n")]
-byname = {nm: (s, e) for nm, s, e in spans}
+byname = {nm: (s, e) for nm, s, e, sg in spans}
+
+# Forward-declare same-file functions the run CALLS but that are defined outside
+# the subset with no header prototype -> otherwise agbcc -Wimplicit -Werror (e.g.
+# bmtarget's ForEachUnitInRange, cg's GetCG). ONLY functions actually called are
+# declared, so unrelated helpers (whose signatures may reference file-local
+# structs) aren't dragged in. The name is parsed from the FIRST '(' so a
+# function-pointer parameter like void(*f)(...) can't masquerade as the name.
+# De-static'd -> the linker binds each to the carved/baseline JP symbol.
+wanted_bodies = "".join(src[byname[w][0]:byname[w][1]] for w in wanted if w in byname)
+def _sig_name(sig):
+    m = re.search(r"([A-Za-z_]\w*)\s*\(", sig)
+    return m.group(1) if m else None
+def _clean_sig(sig):
+    sig = sig.lstrip()
+    while sig[:2] in ("//", "/*"):
+        if sig.startswith("//"):
+            nl = sig.find("\n");  sig = sig[nl+1:].lstrip() if nl != -1 else ""
+        else:
+            end = sig.find("*/");  sig = sig[end+2:].lstrip() if end != -1 else ""
+    if re.search(r"\binline\b", sig):
+        return None  # an inline can't be extern'd; needs its body if used (rare)
+    return " ".join(re.sub(r"\bstatic\b", "", sig).split())
+fwd, seen = [], set()
+for nm, s, e, sg in spans:
+    real = _sig_name(sg)
+    if not real or real in wantset or real in seen:
+        continue
+    if not re.search(r"\b" + re.escape(real) + r"\s*\(", wanted_bodies):
+        continue  # not called by any function in the run
+    cs = _clean_sig(sg)
+    if cs:
+        seen.add(real)
+        fwd.append(cs + ";")
+if fwd:
+    out.append("\n/* prototypes for same-file helpers called by this run */\n" + "\n".join(fwd))
+
 missing = [w for w in wanted if w not in byname]
 if missing:
     sys.stderr.write(f"WARNING: functions not found: {missing}\n")

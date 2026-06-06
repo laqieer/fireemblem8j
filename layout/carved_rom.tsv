@@ -175,3 +175,4 @@ A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 0C8D40	0C8DC4	src/worldmap_basemenu.o(.text)	worldmap_basemenu(run): GMapBaseMenu_StartArmory, GMapBaseMenu_StartVendor, GMapBaseMenu_StartSecretShop
 0C08C8	0C0918	src/worldmap_cursor.o(.text)	worldmap_cursor(run): GmapCursor_Init
 0C622C	0C64B0	src/worldmap_sogu.o(.text)	worldmap_sogu(run): GmapSogu_End, GmapSogu_Init, GmapSogu_Loop1...
+07223C	072454	src/banim-ekrdragon-dracozombie.o(.text)	banim-ekrdragon-dracozombie(run): EfxDracoZombiePrepareTSA, EfxDracoZombiePrepareImg, EkrDZ_MonsterFlyIntoScreen

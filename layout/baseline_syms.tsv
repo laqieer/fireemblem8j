@@ -1031,3 +1031,15 @@ AP_Create	0800916C	thumb	worldmap_sogu
 Img_GmapSoguSprites	08A1E3D4	data	worldmap_sogu
 ApHandle_GmapSoguSprites	08A19580	data	worldmap_sogu
 ProcScr_GmapSogu	08AC2430	data	worldmap_sogu
+Tsa_EfxDracoZombieBaseRight	087E56B4	data	banim-ekrdragon-dracozombie
+EkrDragonTmCpyWithDistance	08072168	thumb	banim-ekrdragon-dracozombie
+Tsa_EfxDracoZombieBaseLeft	087E54E0	data	banim-ekrdragon-dracozombie
+Fill16_EkrTsaBuffer	080721E0	thumb	banim-ekrdragon-dracozombie
+EfxTmFill	08056964	thumb	banim-ekrdragon-dracozombie
+SetEkrDragonStatusUnk1	08072054	thumb	banim-ekrdragon-dracozombie
+Img_EfxDracoZombie	087E1BA0	data	banim-ekrdragon-dracozombie
+Pal_EfxDracoZombie	087E62B4	data	banim-ekrdragon-dracozombie
+gEkrDragonPalBackup	02020068	data	banim-ekrdragon-dracozombie
+EkrDZ_PrepareBanimfx	08072454	thumb	banim-ekrdragon-dracozombie
+gEkrDracoZombiTsaSetLut	087A8B2C	data	banim-ekrdragon-dracozombie
+NewEkrDragonQuakeTree3	08072930	thumb	banim-ekrdragon-dracozombie
