@@ -4328,3 +4328,62 @@
 	.thumb_func
 	.set    GetOverallRank, 0x080BABF4 + 1
 
+	.global MoveUnit_
+	.type   MoveUnit_, %function
+	.thumb_func
+	.set    MoveUnit_, 0x0807C40C + 1
+
+	.global UnitFinalizeMovement
+	.type   UnitFinalizeMovement, %function
+	.thumb_func
+	.set    UnitFinalizeMovement, 0x080181B0 + 1
+
+	.global SortMus
+	.type   SortMus, %function
+	.thumb_func
+	.set    SortMus, 0x0807BFF4 + 1
+
+	.global ClearEventMoveBuffer
+	.type   ClearEventMoveBuffer, %function
+	.thumb_func
+	.set    ClearEventMoveBuffer, 0x0807C144 + 1
+
+	.global gUnk_53
+	.type   gUnk_53, %function
+	.thumb_func
+	.set    gUnk_53, 0x03001C2C + 1
+
+	.global gUnk_52
+	.set    gUnk_52, 0x03001C2C
+
+	.global ProcScr_MuCtrl
+	.set    ProcScr_MuCtrl, 0x08A13438
+
+	.global gUnk_54
+	.set    gUnk_54, 0x03001C2E
+
+	.global MuCtr_GenMoveScript
+	.type   MuCtr_GenMoveScript, %function
+	.thumb_func
+	.set    MuCtr_GenMoveScript, 0x0807CA10 + 1
+
+	.global SetMuMoveScript
+	.type   SetMuMoveScript, %function
+	.thumb_func
+	.set    SetMuMoveScript, 0x0807ABB4 + 1
+
+	.global SetMuConfig
+	.type   SetMuConfig, %function
+	.thumb_func
+	.set    SetMuConfig, 0x0807B950 + 1
+
+	.global EnableMuCamera
+	.type   EnableMuCamera, %function
+	.thumb_func
+	.set    EnableMuCamera, 0x0807A908 + 1
+
+	.global DisableMuCamera
+	.type   DisableMuCamera, %function
+	.thumb_func
+	.set    DisableMuCamera, 0x0807A910 + 1
+
