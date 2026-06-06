@@ -3806,3 +3806,12 @@
 	.global ProcScr_EventFadefx
 	.set    ProcScr_EventFadefx, 0x085BA2E4
 
+	.global ProcScr_menu_scroll
+	.set    ProcScr_menu_scroll, 0x08A9454C
+
+	.global Pal_MenuScrollBar
+	.set    Pal_MenuScrollBar, 0x08A964FC
+
+	.global Img_MenuScrollBar
+	.set    Img_MenuScrollBar, 0x08A9645C
+

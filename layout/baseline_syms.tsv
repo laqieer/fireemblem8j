@@ -957,3 +957,6 @@ GetPalFadeStClkEnd2	0801356C	thumb	eventfx-fade
 GetPalFadeStClkEnd3	0801357C	thumb	eventfx-fade
 ArchiveCurrentPalettes	0801358C	thumb	eventfx-fade
 ProcScr_EventFadefx	085BA2E4	data	eventfx-fade
+ProcScr_menu_scroll	08A9454C	data	prep_menuscroll
+Pal_MenuScrollBar	08A964FC	data	prep_menuscroll
+Img_MenuScrollBar	08A9645C	data	prep_menuscroll
