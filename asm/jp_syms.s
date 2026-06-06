@@ -4032,3 +4032,33 @@
 	.global gUnk_Sio_4
 	.set    gUnk_Sio_4, 0x02001184
 
+	.global SioMenuItem_SetArrowConfig
+	.type   SioMenuItem_SetArrowConfig, %function
+	.thumb_func
+	.set    SioMenuItem_SetArrowConfig, 0x0804D568 + 1
+
+	.global StartSioMenuBurstFx
+	.type   StartSioMenuBurstFx, %function
+	.thumb_func
+	.set    StartSioMenuBurstFx, 0x0804DD50 + 1
+
+	.global SioMenu_GetItemHelpText
+	.type   SioMenu_GetItemHelpText, %function
+	.thumb_func
+	.set    SioMenu_GetItemHelpText, 0x08047970 + 1
+
+	.global PutSioText
+	.type   PutSioText, %function
+	.thumb_func
+	.set    PutSioText, 0x08043084 + 1
+
+	.global Sound_FadeOutBGM
+	.type   Sound_FadeOutBGM, %function
+	.thumb_func
+	.set    Sound_FadeOutBGM, 0x0800226C + 1
+
+	.global DivArm
+	.type   DivArm, %function
+	.thumb_func
+	.set    DivArm, 0x080D6378 + 1
+

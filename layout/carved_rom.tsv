@@ -167,3 +167,6 @@ A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 0D0EC4	0D0F68	src/opanim-healthsafetyscreen.o(.text)	opanim-healthsafetyscreen(run): OpAnimHS_BrightenPalette
 099B24	099CC0	src/prep_sallycir.o(.text)	prep_sallycir(run): SallyCir_OnHBlank, SallyCir_Init
 04C6D8	04C784	src/sio_804B920.o(.text)	sio_804B920(run): Sio_DisableWindowAndBlend, Sio_BoxTransitionHBlankHandler, Sio_SwapBoxTransitionBuffers...
+047E10	047FCC	src/sio_menu.o(.text)	sio_menu(run): SioMenu_HandleDPadInput, SioMenu_Loop_HandleKeyInput
+04E6D0	04E754	src/sio_menudef.o(.text)	sio_menudef(run): SioMenu_OnBPress, SioMenu_OnRPress
+00BAD0	00BC00	src/spline.o(.text)	spline(run): _DivArm1, _DivArm2
