@@ -170,3 +170,4 @@ A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 047E10	047FCC	src/sio_menu.o(.text)	sio_menu(run): SioMenu_HandleDPadInput, SioMenu_Loop_HandleKeyInput
 04E6D0	04E754	src/sio_menudef.o(.text)	sio_menudef(run): SioMenu_OnBPress, SioMenu_OnRPress
 00BAD0	00BC00	src/spline.o(.text)	spline(run): _DivArm1, _DivArm2
+088C1C	088CC4	src/statbar.o(.text)	statbar(run): DrawStatBarLeftBorder, DrawStatBarShadow, DrawStatBarRightBorder...
