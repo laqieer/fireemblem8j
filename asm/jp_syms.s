@@ -3885,3 +3885,46 @@
 	.global PalLut_EfxSkill
 	.set    PalLut_EfxSkill, 0x08603AD8
 
+	.global GetEfxHp
+	.type   GetEfxHp, %function
+	.thumb_func
+	.set    GetEfxHp, 0x08059890 + 1
+
+	.global EkrPrepareBanimfx
+	.type   EkrPrepareBanimfx, %function
+	.thumb_func
+	.set    EkrPrepareBanimfx, 0x08059810 + 1
+
+	.global gEkrSpellAnimIndex
+	.set    gEkrSpellAnimIndex, 0x0203E114
+
+	.global SwitchAISFrameDataFromBARoundType
+	.type   SwitchAISFrameDataFromBARoundType, %function
+	.thumb_func
+	.set    SwitchAISFrameDataFromBARoundType, 0x0805AE20 + 1
+
+	.global AddEkrDragonStatusAttr
+	.type   AddEkrDragonStatusAttr, %function
+	.thumb_func
+	.set    AddEkrDragonStatusAttr, 0x08072004 + 1
+
+	.global SetEkrDragonStatusType
+	.type   SetEkrDragonStatusType, %function
+	.thumb_func
+	.set    SetEkrDragonStatusType, 0x08072034 + 1
+
+	.global PutBanimBG
+	.type   PutBanimBG, %function
+	.thumb_func
+	.set    PutBanimBG, 0x08077F0C + 1
+
+	.global EkrGauge_Set4C
+	.type   EkrGauge_Set4C, %function
+	.thumb_func
+	.set    EkrGauge_Set4C, 0x08051ED4 + 1
+
+	.global EkrDispUpSet4C
+	.type   EkrDispUpSet4C, %function
+	.thumb_func
+	.set    EkrDispUpSet4C, 0x08052820 + 1
+

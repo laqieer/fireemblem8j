@@ -978,3 +978,12 @@ FrameLut_EfxSkill	080E49B6	data	banim-efxskill
 TsaLut_EfxSkill	08603A58	data	banim-efxskill
 ImgLut_EfxSkill	08603A98	data	banim-efxskill
 PalLut_EfxSkill	08603AD8	data	banim-efxskill
+GetEfxHp	08059890	thumb	banim-ekrdragon-myrrh
+EkrPrepareBanimfx	08059810	thumb	banim-ekrdragon-myrrh
+gEkrSpellAnimIndex	0203E114	data	banim-ekrdragon-myrrh
+SwitchAISFrameDataFromBARoundType	0805AE20	thumb	banim-ekrdragon-myrrh
+AddEkrDragonStatusAttr	08072004	thumb	banim-ekrdragon-myrrh
+SetEkrDragonStatusType	08072034	thumb	banim-ekrdragon-myrrh
+PutBanimBG	08077F0C	thumb	banim-ekrhensei
+EkrGauge_Set4C	08051ED4	thumb	banim-ekrhensei
+EkrDispUpSet4C	08052820	thumb	banim-ekrhensei
