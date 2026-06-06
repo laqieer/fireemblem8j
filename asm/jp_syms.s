@@ -4190,3 +4190,88 @@
 	.global gUnitLookup
 	.set    gUnitLookup, 0x085C2A50
 
+	.global gBanimBGLut01
+	.set    gBanimBGLut01, 0x088612B4
+
+	.global gBanimBGLut02
+	.type   gBanimBGLut02, %function
+	.thumb_func
+	.set    gBanimBGLut02, 0x088612F4 + 1
+
+	.global gBanimBGLut03
+	.set    gBanimBGLut03, 0x08861336
+
+	.global gBanimBGLut04
+	.type   gBanimBGLut04, %function
+	.thumb_func
+	.set    gBanimBGLut04, 0x08861376 + 1
+
+	.global gBanimBGLut05
+	.set    gBanimBGLut05, 0x088613B8
+
+	.global gBanimBGLut06
+	.type   gBanimBGLut06, %function
+	.thumb_func
+	.set    gBanimBGLut06, 0x088613F8 + 1
+
+	.global gBanimBGLut07
+	.set    gBanimBGLut07, 0x0886143A
+
+	.global gBanimBGLut08
+	.type   gBanimBGLut08, %function
+	.thumb_func
+	.set    gBanimBGLut08, 0x0886147A + 1
+
+	.global gBanimBGLut09
+	.set    gBanimBGLut09, 0x088614BC
+
+	.global gBanimBGLut0A
+	.type   gBanimBGLut0A, %function
+	.thumb_func
+	.set    gBanimBGLut0A, 0x088614FC + 1
+
+	.global gBanimBGLut0B
+	.set    gBanimBGLut0B, 0x0886153E
+
+	.global gBanimBGLut0C
+	.type   gBanimBGLut0C, %function
+	.thumb_func
+	.set    gBanimBGLut0C, 0x0886157E + 1
+
+	.global gBanimBGLut0D
+	.set    gBanimBGLut0D, 0x088615C0
+
+	.global gBanimBGLut0E
+	.type   gBanimBGLut0E, %function
+	.thumb_func
+	.set    gBanimBGLut0E, 0x08861600 + 1
+
+	.global gBanimBGLut0F
+	.set    gBanimBGLut0F, 0x08861642
+
+	.global gBanimBGLut10
+	.type   gBanimBGLut10, %function
+	.thumb_func
+	.set    gBanimBGLut10, 0x08861682 + 1
+
+	.global gBanimBGLut11
+	.set    gBanimBGLut11, 0x088616C4
+
+	.global gBanimBGLut12
+	.type   gBanimBGLut12, %function
+	.thumb_func
+	.set    gBanimBGLut12, 0x08861704 + 1
+
+	.global gBanimBGLut13
+	.set    gBanimBGLut13, 0x08861746
+
+	.global gBanimBGLut14
+	.type   gBanimBGLut14, %function
+	.thumb_func
+	.set    gBanimBGLut14, 0x08861786 + 1
+
+	.global gBanimBGLutDefault
+	.type   gBanimBGLutDefault, %function
+	.thumb_func
+	.set    gBanimBGLutDefault, 0x08861272 + 1
+

@@ -178,3 +178,4 @@ A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 07223C	072454	src/banim-ekrdragon-dracozombie.o(.text)	banim-ekrdragon-dracozombie(run): EfxDracoZombiePrepareTSA, EfxDracoZombiePrepareImg, EkrDZ_MonsterFlyIntoScreen
 0AB610	0AB73C	src/bmsave-xmap.o(.text)	bmsave-xmap(run): ExtraMapChecksum, IsExtraMapAvailable, ReadExtraMapInfo...
 A9CA60	A9CA64	src/bmsave-xmap.o(.data)	bmsave-xmap .data
+058D1C	058E44	src/banim-battleparse.o(.text)	banim-battleparse(run): GetBanimBackgroundIndex
