@@ -3928,3 +3928,8 @@
 	.thumb_func
 	.set    EkrDispUpSet4C, 0x08052820 + 1
 
+	.global MatCopy
+	.type   MatCopy, %function
+	.thumb_func
+	.set    MatCopy, 0x08015154 + 1
+

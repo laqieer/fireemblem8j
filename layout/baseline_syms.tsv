@@ -987,3 +987,4 @@ SetEkrDragonStatusType	08072034	thumb	banim-ekrdragon-myrrh
 PutBanimBG	08077F0C	thumb	banim-ekrhensei
 EkrGauge_Set4C	08051ED4	thumb	banim-ekrhensei
 EkrDispUpSet4C	08052820	thumb	banim-ekrhensei
+MatCopy	08015154	thumb	bmlib-math

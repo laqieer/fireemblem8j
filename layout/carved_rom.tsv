@@ -158,3 +158,4 @@ A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 070B68	070C14	src/banim-efxskill.o(.text)	banim-efxskill(run): NewEfxSkillCommonBG, EfxSkillCommonBG_PlaySfx
 072FBC	0730E4	src/banim-ekrdragon-myrrh.o(.text)	banim-ekrdragon-myrrh(run): EkrMyr_ReturnToLoli, EkrMyr_WaitForReturnEnd
 0787A0	078884	src/banim-ekrhensei.o(.text)	banim-ekrhensei(run): EkrHenseiInit_Init, EkrHenseiInit_SetupFade, EkrHenseiInit_FadeInLoop
+014FC4	015154	src/bmlib-math.o(.text)	bmlib-math(run): MatMulMat, MatIdent
