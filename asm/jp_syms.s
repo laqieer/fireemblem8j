@@ -3964,3 +3964,12 @@
 	.global ProcScr_PromoMain
 	.set    ProcScr_PromoMain, 0x08BAB664
 
+	.global Img_MapAnimUnlockObjfx
+	.set    Img_MapAnimUnlockObjfx, 0x08A20D34
+
+	.global Pal_MapAnimUnlockObjfx
+	.set    Pal_MapAnimUnlockObjfx, 0x08A20D88
+
+	.global ApConf_MapanimTorchAnim_0
+	.set    ApConf_MapanimTorchAnim_0, 0x08A168DC
+

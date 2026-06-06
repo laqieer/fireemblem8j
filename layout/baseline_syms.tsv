@@ -995,3 +995,6 @@ gFontClassChg	03005370	data	classchg-menuconfirm
 EndMenu	0804FC34	thumb	classchg-menuconfirm
 ClassChgLoadEfxTerrain	080D18D0	thumb	classchg-menuconfirm
 ProcScr_PromoMain	08BAB664	data	classchg-menuconfirm
+Img_MapAnimUnlockObjfx	08A20D34	data	eventfx-shinningstone
+Pal_MapAnimUnlockObjfx	08A20D88	data	eventfx-shinningstone
+ApConf_MapanimTorchAnim_0	08A168DC	data	eventfx-shinningstone
