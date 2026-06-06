@@ -151,3 +151,5 @@ BABAF4	BABAF8	src/bmguide.o(.data)	bmguide .data
 A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 0509D0	050ABC	src/uiselecttarget.o(.text)	uiselecttarget(run): GetLinkedTargetsNear, GetLinkedTargetsFar, GetLinkedTargets...
 5E076C	5E07A0	src/uiselecttarget.o(.data)	uiselecttarget .data
+01E740	01E8A0	src/prep_unitswap.o(.text)	prep_unitswap(run): PrepUnitSwapProc_MainLoop, PrepUnitSwapProc_OnEnd, StartPrepUnitSwap
+5C3320	5C3348	src/prep_unitswap.o(.data)	prep_unitswap .data

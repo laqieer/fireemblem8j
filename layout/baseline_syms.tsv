@@ -962,3 +962,6 @@ Pal_MenuScrollBar	08A964FC	data	prep_menuscroll
 Img_MenuScrollBar	08A9645C	data	prep_menuscroll
 LinkTargets	08050684	thumb	uiselecttarget
 GetFurthestTargetDistance	08050970	thumb	uiselecttarget
+PutUnitSprite	08027AF4	thumb	prep_unitswap
+gObject_16x16	085B8CE4	data	prep_unitswap
+PrepUnitSwapProc_Init	0801E6BC	thumb	prep_unitswap

@@ -3825,3 +3825,16 @@
 	.thumb_func
 	.set    GetFurthestTargetDistance, 0x08050970 + 1
 
+	.global PutUnitSprite
+	.type   PutUnitSprite, %function
+	.thumb_func
+	.set    PutUnitSprite, 0x08027AF4 + 1
+
+	.global gObject_16x16
+	.set    gObject_16x16, 0x085B8CE4
+
+	.global PrepUnitSwapProc_Init
+	.type   PrepUnitSwapProc_Init, %function
+	.thumb_func
+	.set    PrepUnitSwapProc_Init, 0x0801E6BC + 1
+
