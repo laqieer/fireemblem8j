@@ -134,6 +134,7 @@ def main():
     ap.add_argument("-a", "--api_key", help="frogress API key (or env PROGRESS_API_KEY)")
     ap.add_argument("-p", "--project", default="fireemblem8j")
     ap.add_argument("-v", "--version", default="jp")
+    ap.add_argument("-c", "--category", default="default")
     ap.add_argument("--build", action="store_true",
                     help="build any unbuilt object before nm (needed in CI)")
     ap.add_argument("--dry-run", action="store_true", help="print entries, do not POST")
@@ -179,7 +180,7 @@ def main():
         entries.append({
             "timestamp": ts,
             "git_hash": c,
-            "categories": {"default": measures(code_b, data_b, funcs, syms)},
+            "categories": {args.category: measures(code_b, data_b, funcs, syms)},
         })
         flag = "!" if missing else (" " if code_b >= prev_code else "?")  # ? = non-monotonic
         prev_code = code_b
@@ -209,17 +210,30 @@ def main():
     import requests
     base = args.base_url.rstrip("/")
 
-    # This frogress deployment does not auto-create versions: ensure it exists
-    # first (idempotent). The 'default' category then auto-creates on the data
-    # POST, as in scripts/upload-progress.py.
-    vurl = f"{base}/projects/{args.project}/versions/"
-    vr = requests.post(vurl, json={"api_key": api_key, "slug": args.version, "name": args.version})
-    if vr.ok:
-        print(f"created version '{args.version}'")
-    elif "exist" in vr.text.lower():
-        print(f"version '{args.version}' already exists")
-    else:
-        sys.exit(f"version create failed: {vr.status_code} {vr.reason}\nresponse body: {vr.text}")
+    # frogress (this deployment) does NOT auto-create versions or categories, and
+    # the data POST rejects entries for a missing category. Both slugs come from
+    # the URL path; the body carries only {api_key, name}. Create version then
+    # category, idempotently (AlreadyExists -> treat as success).
+    def structure_post(url, name, what):
+        r = requests.post(url, json={"api_key": api_key, "name": name})
+        if r.ok:
+            print(f"created {what}")
+        elif "exist" in r.text.lower():
+            print(f"{what} already exists")
+        else:
+            sys.exit(f"{what} create failed: {r.status_code} {r.reason}\nresponse body: {r.text}")
+
+    # Best-effort cleanup of the stray 'versions' version a wrong-URL attempt may
+    # have created (POST /projects/<p>/versions/ matched version_slug=versions).
+    try:
+        requests.delete(f"{base}/projects/{args.project}/versions/", json={"api_key": api_key})
+    except Exception:
+        pass
+
+    structure_post(f"{base}/projects/{args.project}/{args.version}/",
+                   args.version, f"version '{args.version}'")
+    structure_post(f"{base}/projects/{args.project}/{args.version}/{args.category}/",
+                   args.category, f"category '{args.category}'")
 
     url = f"{base}/data/{args.project}/{args.version}/"
     print(f"POSTing {len(entries)} entries to {url}")
