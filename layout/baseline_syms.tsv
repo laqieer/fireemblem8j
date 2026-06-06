@@ -1096,3 +1096,15 @@ SetMuMoveScript	0807ABB4	thumb	muctrl
 SetMuConfig	0807B950	thumb	muctrl
 EnableMuCamera	0807A908	thumb	muctrl
 DisableMuCamera	0807A910	thumb	muctrl
+GetUnitInfoWindowX	080348DC	thumb	unitinfowindow
+UnitInfoWindow_DrawBase	08034744	thumb	unitinfowindow
+DrawUnitResChangeText	08034A50	thumb	unitinfowindow
+NewUnitInfoWindow	080346B0	thumb	unitinfowindow
+DrawUnitResUnkText	08034AB4	thumb	unitinfowindow
+DrawAccuracyText	08034AEC	thumb	unitinfowindow
+StartSpriteRefresher	080053B8	thumb	unitinfowindow
+gObject_16x16_VFlipped	085B8D6C	data	unitinfowindow
+DrawUnitAidText	080349AC	thumb	unitinfowindow
+PutUnitAidIconForTextAt	080349E4	thumb	unitinfowindow
+DrawUnitConText	08034964	thumb	unitinfowindow
+MoveSpriteRefresher	080053FC	thumb	unitinfowindow

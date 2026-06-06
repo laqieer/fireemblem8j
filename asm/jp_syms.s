@@ -4387,3 +4387,61 @@
 	.thumb_func
 	.set    DisableMuCamera, 0x0807A910 + 1
 
+	.global GetUnitInfoWindowX
+	.type   GetUnitInfoWindowX, %function
+	.thumb_func
+	.set    GetUnitInfoWindowX, 0x080348DC + 1
+
+	.global UnitInfoWindow_DrawBase
+	.type   UnitInfoWindow_DrawBase, %function
+	.thumb_func
+	.set    UnitInfoWindow_DrawBase, 0x08034744 + 1
+
+	.global DrawUnitResChangeText
+	.type   DrawUnitResChangeText, %function
+	.thumb_func
+	.set    DrawUnitResChangeText, 0x08034A50 + 1
+
+	.global NewUnitInfoWindow
+	.type   NewUnitInfoWindow, %function
+	.thumb_func
+	.set    NewUnitInfoWindow, 0x080346B0 + 1
+
+	.global DrawUnitResUnkText
+	.type   DrawUnitResUnkText, %function
+	.thumb_func
+	.set    DrawUnitResUnkText, 0x08034AB4 + 1
+
+	.global DrawAccuracyText
+	.type   DrawAccuracyText, %function
+	.thumb_func
+	.set    DrawAccuracyText, 0x08034AEC + 1
+
+	.global StartSpriteRefresher
+	.type   StartSpriteRefresher, %function
+	.thumb_func
+	.set    StartSpriteRefresher, 0x080053B8 + 1
+
+	.global gObject_16x16_VFlipped
+	.set    gObject_16x16_VFlipped, 0x085B8D6C
+
+	.global DrawUnitAidText
+	.type   DrawUnitAidText, %function
+	.thumb_func
+	.set    DrawUnitAidText, 0x080349AC + 1
+
+	.global PutUnitAidIconForTextAt
+	.type   PutUnitAidIconForTextAt, %function
+	.thumb_func
+	.set    PutUnitAidIconForTextAt, 0x080349E4 + 1
+
+	.global DrawUnitConText
+	.type   DrawUnitConText, %function
+	.thumb_func
+	.set    DrawUnitConText, 0x08034964 + 1
+
+	.global MoveSpriteRefresher
+	.type   MoveSpriteRefresher, %function
+	.thumb_func
+	.set    MoveSpriteRefresher, 0x080053FC + 1
+
