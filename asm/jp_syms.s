@@ -3742,3 +3742,6 @@
 	.global ProcScr_WorldMapFaceHolder
 	.set    ProcScr_WorldMapFaceHolder, 0x08AC10A0
 
+	.global gGuideTable
+	.set    gGuideTable, 0x08BB2E60
+

@@ -943,3 +943,4 @@ gOpAnimSt	02022188	data	opanimfx
 ProcScr_OpAnimfxTerminator	08B3F298	data	opanimfx
 Sqrt	080D63D4	thumb	whitecircularfadefx
 ProcScr_WorldMapFaceHolder	08AC10A0	data	worldmap_face
+gGuideTable	08BB2E60	data	bmguide
