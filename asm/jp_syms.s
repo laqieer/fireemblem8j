@@ -3991,3 +3991,21 @@
 	.thumb_func
 	.set    GetCameraAdjustedY, 0x08015A18 + 1
 
+	.global ProcScr_MapAnimWallBreak
+	.set    ProcScr_MapAnimWallBreak, 0x08A13FAC
+
+	.global ProcScr_PoisonAnimHandler
+	.set    ProcScr_PoisonAnimHandler, 0x08A13FCC
+
+	.global Img_PoisonAnim
+	.set    Img_PoisonAnim, 0x08A1E538
+
+	.global Pal_PoisonAnim
+	.set    Pal_PoisonAnim, 0x08A1E88C
+
+	.global Obj_PoisonAnim
+	.set    Obj_PoisonAnim, 0x08A175C8
+
+	.global ProcScr_PoisonAnim2
+	.set    ProcScr_PoisonAnim2, 0x08A13FEC
+

@@ -1002,3 +1002,9 @@ gLoadUnitBuffer	0203EFB4	data	eventscr_utils
 StoreAdjustedCameraPositions	08015D3C	thumb	eventscr_utils
 GetCameraAdjustedX	080159D4	thumb	eventscr_utils
 GetCameraAdjustedY	08015A18	thumb	eventscr_utils
+ProcScr_MapAnimWallBreak	08A13FAC	data	mapanim_specialeffect
+ProcScr_PoisonAnimHandler	08A13FCC	data	mapanim_specialeffect
+Img_PoisonAnim	08A1E538	data	mapanim_specialeffect
+Pal_PoisonAnim	08A1E88C	data	mapanim_specialeffect
+Obj_PoisonAnim	08A175C8	data	mapanim_specialeffect
+ProcScr_PoisonAnim2	08A13FEC	data	mapanim_specialeffect

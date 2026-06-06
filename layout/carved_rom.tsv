@@ -162,3 +162,4 @@ A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 0D2780	0D280C	src/classchg-menuconfirm.o(.text)	classchg-menuconfirm(run): PromoSubConfirm_OnEnd, PromoSubConfirmMenuOnSelect, ClassChgMenuSel_OnBPress
 012AF0	012BA4	src/eventfx-shinningstone.o(.text)	eventfx-shinningstone(run): ShinningStonefx_InitGfx, ShinningStonefx_CreateSpriteAnim, ShinningStonefx_Delay
 00BCF4	00BD98	src/eventscr_utils.o(.text)	eventscr_utils(run): BackupPalette, RestorePalette, SetSomeRealCamPos
+07EF20	07F0FC	src/mapanim_specialeffect.o(.text)	mapanim_specialeffect(run): MapAnim_BeginWallBreakAnim, WallBreakAnim_Init, NewMapPoisonEffect...
