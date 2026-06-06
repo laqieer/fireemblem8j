@@ -3778,3 +3778,31 @@
 	.thumb_func
 	.set    AiComputeCombatScore, 0x0803E108 + 1
 
+	.global WriteFadedPaletteFromArchive
+	.type   WriteFadedPaletteFromArchive, %function
+	.thumb_func
+	.set    WriteFadedPaletteFromArchive, 0x08013608 + 1
+
+	.global GetPalFadeStClkEnd1
+	.type   GetPalFadeStClkEnd1, %function
+	.thumb_func
+	.set    GetPalFadeStClkEnd1, 0x08013560 + 1
+
+	.global GetPalFadeStClkEnd2
+	.type   GetPalFadeStClkEnd2, %function
+	.thumb_func
+	.set    GetPalFadeStClkEnd2, 0x0801356C + 1
+
+	.global GetPalFadeStClkEnd3
+	.type   GetPalFadeStClkEnd3, %function
+	.thumb_func
+	.set    GetPalFadeStClkEnd3, 0x0801357C + 1
+
+	.global ArchiveCurrentPalettes
+	.type   ArchiveCurrentPalettes, %function
+	.thumb_func
+	.set    ArchiveCurrentPalettes, 0x0801358C + 1
+
+	.global ProcScr_EventFadefx
+	.set    ProcScr_EventFadefx, 0x085BA2E4
+

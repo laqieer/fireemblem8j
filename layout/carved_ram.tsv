@@ -12,3 +12,4 @@
 0203E828	ewram	src/cgtext.o(ewram_data)	cgtext
 0203E1E4	ewram	src/banim-efxop.o(ewram_data)	banim-efxop
 030017D0	iwram	src/cp_battle.o(.bss)	cp_battle .bss
+030006F8	iwram	src/eventfx-fade.o(.bss)	eventfx-fade .bss
