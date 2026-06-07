@@ -293,3 +293,4 @@ A9E23C	A9E244	src/soundroom.o(.data)	soundroom .data
 077CAC	077D0C	src/banim-ekrtriangle.o(.text)	banim-ekrtriangle(run): EkrTriArmorKnightObj2Main2, NewEfxTriangleQUAKE
 0374B0	0375B4	src/bksel.o(.text)	bksel(run): StartBattleForecastHelpBox, GetBkselHelpBoxMsg, HbPopulate_BkselWTriEffA...
 5C6AC8	5C6AD4	src/bksel.o(.data)	bksel .data
+038788	0387B8	src/bmdifficulty.o(.text)	bmdifficulty(run): DungeonRecordUi_ClearTexts
