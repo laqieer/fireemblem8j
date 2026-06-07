@@ -155,5 +155,45 @@ only the functions it can reach — a region-different function still in the inc
 may need defining (in the correct ARM/Thumb mode) before it decompiles. Use
 `ghidra` as a cross-check, `ida` as the workhorse; `make compare` is the oracle.
 
+## Byte-matching: decomp-permuter
+
+The decompilers tell you *what* a function does; **decomp-permuter** closes the
+last gap when your ported C compiles *close* but not byte-exact. It randomly
+permutes the C (reorder statements, change temporaries, etc. — all
+semantics-preserving) and keeps versions whose agbcc output scores closer to the
+JP target, often finding an exact (score 0) match.
+
+We use **upstream** [simonlindholm/decomp-permuter](https://github.com/simonlindholm/decomp-permuter)
+— it now supports ARM32 (incl. Thumb) natively and is compiler-agnostic, so
+agbcc works (the old `decomp-permuter-arm` fork is obsolete; see decisions.md).
+
+Setup (one-time; the clone + venv are gitignored):
+```bash
+scripts/permuter/setup.sh          # clone upstream into tools/, make ~/permuter-venv
+```
+
+Per-function workflow:
+```bash
+# <func>.s is the JP function's descriptive disassembly, starting with
+# `glabel <func>` (literal-pool data pointers as `.word gSymbol` so the target
+# object gets the right relocations).
+scripts/permuter/permute.sh import src/your_file.c path/to/<func>.s
+scripts/permuter/permute.sh run nonmatchings/<func>/ -j   # prints base score, then searches
+```
+
+How it's wired (tracked: `permuter_settings.toml` + `scripts/permuter/`):
+- `compiler_command` mirrors the Makefile C pipeline (cpp | iconv UTF-8→CP932 |
+  agbcc | arm-none-eabi-as), minus `-Werror`. `scripts/permuter/compile.sh` is the
+  hand-written, byte-validated standalone equivalent (its `.text` matches a
+  Makefile-built object exactly).
+- `compiler_type = "gcc"` (agbcc is GCC 2.x-era) picks the randomization weights.
+- `scripts/permuter/prelude.inc` defines `glabel` for ARM/Thumb and sets `.thumb`.
+- Don't set `objdump_command` — the scorer auto-detects ARM from the target object
+  and uses `arm-none-eabi-objdump -drz`; a bare override drops the flags.
+
+Verified end-to-end on `NextRN` (src/rng.c): `base score = 0`, 0 compile errors.
+As always, a permuter-found source must still pass `make compare` and match the
+repo's US-derived style before it's committed.
+
 See [`docs/decisions.md`](decisions.md) (D6) for the rationale and the
 alternatives considered.

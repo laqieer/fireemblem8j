@@ -65,10 +65,12 @@ hand-decompiled against the JP ROM, two decompilers are wired up **headlessly
 over MCP** so Claude Code (and the autonomous loop) can ask for pseudo-C of a JP
 address: **IDA Pro Hex-Rays** (server `ida`, the workhorse — `make ida-db`) and
 **Ghidra** (server `ghidra`, an open-source cross-check — `make ghidra-db`).
-Both are fed the project's own `fireemblem8.elf`. Setup, rationale and usage are
-in [`docs/reverse-engineering.md`](docs/reverse-engineering.md) and
-[`docs/decisions.md`](docs/decisions.md) (D6). The IDA/Ghidra installs and
-databases are local/gitignored; only the scripts are tracked.
+Both are fed the project's own `fireemblem8.elf`. To close the last gap when a
+ported function compiles *close* but not byte-exact, **decomp-permuter** (upstream,
+which now supports ARM32/Thumb + agbcc) is wired up via `scripts/permuter/`. Setup,
+rationale and usage are in [`docs/reverse-engineering.md`](docs/reverse-engineering.md)
+and [`docs/decisions.md`](docs/decisions.md) (D6). The IDA/Ghidra/permuter installs
+and databases are local/gitignored; only the scripts/config are tracked.
 
 ## License
 

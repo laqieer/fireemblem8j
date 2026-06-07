@@ -19,6 +19,11 @@ src/data/*.s
 # Locally-installed toolchain (install agbcc the same way as the US decomp)
 /tools/agbcc
 
+# decomp-permuter: upstream clone + its work dirs are local (set up via
+# scripts/permuter/setup.sh). permuter_settings.toml + scripts/permuter/ are tracked.
+/tools/decomp-permuter
+/nonmatchings/
+
 # Claude Code: share settings.json + loop_prompt.md, but keep local/transient
 # state out (per-user overrides and the ralph-loop session-state file).
 .claude/settings.local.json
