@@ -1568,3 +1568,6 @@ NormalizeWaterMinimapTerrain	080AC094	thumb	minimap
 PutClassWeaponRankIcons	080B7CEC	thumb	opinfo
 UnitHasItem	080177A0	thumb	prep_itemscreen
 PutUnitSpriteForClassId	08027BDC	thumb	prep_itemscreen
+FindGMapBaseMenu	080C8E00	thumb	prep_itemsupply
+ProcScr_PrepItemSupplyScreen	08A94F50	data	prep_itemsupply
+ProcScr_BmSupplyScreen	08A95030	data	prep_itemsupply

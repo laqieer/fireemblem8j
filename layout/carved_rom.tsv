@@ -308,3 +308,4 @@ A9E23C	A9E244	src/soundroom.o(.data)	soundroom .data
 07A830	07A84C	src/mu.o(.text)	mu(run): InitMus
 0B7DA0	0B7E4C	src/opinfo.o(.text)	opinfo(run): ClassIntroIcon_LoopFadeIn, ClassIntroIcon_LoopDisplay, ClassIntroIcon_LoopFadeOut
 09C4EC	09C544	src/prep_itemscreen.o(.text)	prep_itemscreen(run): IsCoordHiddenByMinimug, PutClassSpriteForSecretShop
+0A0D1C	0A0E18	src/prep_itemsupply.o(.text)	prep_itemsupply(run): PrepItemSupply_OnEnd, StartPrepItemSupplyProc, PrepItemSupply_ShowActiveUnitOnEnter...

@@ -6175,3 +6175,14 @@
 	.thumb_func
 	.set    PutUnitSpriteForClassId, 0x08027BDC + 1
 
+	.global FindGMapBaseMenu
+	.type   FindGMapBaseMenu, %function
+	.thumb_func
+	.set    FindGMapBaseMenu, 0x080C8E00 + 1
+
+	.global ProcScr_PrepItemSupplyScreen
+	.set    ProcScr_PrepItemSupplyScreen, 0x08A94F50
+
+	.global ProcScr_BmSupplyScreen
+	.set    ProcScr_BmSupplyScreen, 0x08A95030
+
