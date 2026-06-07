@@ -1654,3 +1654,5 @@ gEkrHitNow	02017780	data	banim-ekrdispup
 Pal_BanimUnitFlashing	0885727C	data	banim-ekrdragon-utils
 Pal_DemonKingBG	0884CB34	data	banim-ekrdragon-utils
 ProcScr_ekrDragonQuake	087A8C0C	data	banim-ekrdragon-utils
+NewEfxLvupBG2	08076D9C	thumb	banim-ekrlvup
+NewEfxlvupbg	08076CFC	thumb	banim-ekrlvup

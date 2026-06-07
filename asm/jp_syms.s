@@ -6495,3 +6495,13 @@
 	.global ProcScr_ekrDragonQuake
 	.set    ProcScr_ekrDragonQuake, 0x087A8C0C
 
+	.global NewEfxLvupBG2
+	.type   NewEfxLvupBG2, %function
+	.thumb_func
+	.set    NewEfxLvupBG2, 0x08076D9C + 1
+
+	.global NewEfxlvupbg
+	.type   NewEfxlvupbg, %function
+	.thumb_func
+	.set    NewEfxlvupbg, 0x08076CFC + 1
+
