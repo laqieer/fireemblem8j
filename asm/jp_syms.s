@@ -6005,3 +6005,12 @@
 	.global FrameLut2_EfxLvupBGCOL
 	.set    FrameLut2_EfxLvupBGCOL, 0x080E6ABC
 
+	.global ProcScr_efxBlackInOutUnit
+	.set    ProcScr_efxBlackInOutUnit, 0x087A97B8
+
+	.global ProcScr_efxWhiteInOutUnit
+	.set    ProcScr_efxWhiteInOutUnit, 0x087A97D0
+
+	.global ProcScr_efxClasschgRST
+	.set    ProcScr_efxClasschgRST, 0x087A97E8
+

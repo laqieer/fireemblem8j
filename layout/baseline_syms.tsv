@@ -1528,3 +1528,6 @@ FrameLut_EfxLvupBGCOL	080E6A7A	data	banim-efxlvup
 Pal_EfxLvupBGCOL	085F0304	data	banim-efxlvup
 EfxCyclePalette	08056828	thumb	banim-efxlvup
 FrameLut2_EfxLvupBGCOL	080E6ABC	data	banim-efxlvup
+ProcScr_efxBlackInOutUnit	087A97B8	data	banim-ekrclasschg
+ProcScr_efxWhiteInOutUnit	087A97D0	data	banim-ekrclasschg
+ProcScr_efxClasschgRST	087A97E8	data	banim-ekrclasschg
