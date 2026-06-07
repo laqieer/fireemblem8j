@@ -1313,11 +1313,6 @@
 	.thumb_func
 	.set    DisplayUiHand, 0x0804F528 + 1
 
-	.global SioPlaySoundEffect
-	.type   SioPlaySoundEffect, %function
-	.thumb_func
-	.set    SioPlaySoundEffect, 0x08043190 + 1
-
 	.global ReadGameSave
 	.type   ReadGameSave, %function
 	.thumb_func
@@ -1335,11 +1330,6 @@
 
 	.global ProcScr_AtMenu
 	.set    ProcScr_AtMenu, 0x08A93FE8
-
-	.global ClearSioBGFull
-	.type   ClearSioBGFull, %function
-	.thumb_func
-	.set    ClearSioBGFull, 0x08043020 + 1
 
 	.global Nop_SioUiutils_0
 	.type   Nop_SioUiutils_0, %function
@@ -1839,11 +1829,6 @@
 
 	.global Font_0
 	.set    Font_0, 0x0203DB60
-
-	.global ClearSioBG
-	.type   ClearSioBG, %function
-	.thumb_func
-	.set    ClearSioBG, 0x08042FC8 + 1
 
 	.global InitSioBG
 	.type   InitSioBG, %function
@@ -3983,11 +3968,6 @@
 	.type   SioMenu_GetItemHelpText, %function
 	.thumb_func
 	.set    SioMenu_GetItemHelpText, 0x08047970 + 1
-
-	.global PutSioText
-	.type   PutSioText, %function
-	.thumb_func
-	.set    PutSioText, 0x08043084 + 1
 
 	.global Sound_FadeOutBGM
 	.type   Sound_FadeOutBGM, %function
@@ -6545,4 +6525,35 @@
 
 	.global Img_ManimLevelUpStatGainDigits
 	.set    Img_ManimLevelUpStatGainDigits, 0x08A1D320
+
+	.global gSioTexts
+	.set    gSioTexts, 0x0203DD08
+
+	.global ReadMultiArenaSaveConfig
+	.type   ReadMultiArenaSaveConfig, %function
+	.thumb_func
+	.set    ReadMultiArenaSaveConfig, 0x080AB458 + 1
+
+	.global WriteMultiArenaSaveConfig
+	.type   WriteMultiArenaSaveConfig, %function
+	.thumb_func
+	.set    WriteMultiArenaSaveConfig, 0x080AB41C + 1
+
+	.global gSioSaveConfig
+	.set    gSioSaveConfig, 0x0203DB0C
+
+	.global gKeyInputSequenceTimer
+	.set    gKeyInputSequenceTimer, 0x0203DD48
+
+	.global gTargetKeyInSeqIndex
+	.set    gTargetKeyInSeqIndex, 0x03001804
+
+	.global gKeyInputSequenceBuffer
+	.set    gKeyInputSequenceBuffer, 0x0203DD28
+
+	.global gCurrentKeyInSeqIndex
+	.set    gCurrentKeyInSeqIndex, 0x03001800
+
+	.global gSioList_SioMain2_2
+	.set    gSioList_SioMain2_2, 0x085D32F8
 

@@ -300,12 +300,10 @@ ClearText	08003CF8	thumb	sio_rulesettings
 gLinkArenaRuleData	080DEE28	data	sio_rulesettings
 gUnk_Sio_7	0203DA84	data	sio_rulesettings
 DisplayUiHand	0804F528	thumb	sio_term
-SioPlaySoundEffect	08043190	thumb	sio_term
 ReadGameSave	080A9B40	thumb	sio_term
 ApplyUnitSpritePalettes	080265CC	thumb	sio_term
 LinkArenaBattleMap_InitChapter	0804A4A0	thumb	sio_term
 ProcScr_AtMenu	08A93FE8	data	sio_term
-ClearSioBGFull	08043020	thumb	sio_term
 Nop_SioUiutils_0	0804D148	thumb	sio_term
 EndLinkArenaTitleBanner	0804D298	thumb	sio_term
 ResetLinkArenaUiBlend	0804D330	thumb	sio_term
@@ -425,7 +423,6 @@ LoadLegacyUiFrameGraphics	0804F8E0	thumb	sio_event
 UnsetBmStLinkArenaFlag	08042E0C	thumb	sio_event
 InitTextFont	08003BE8	thumb	sio_event
 Font_0	0203DB60	data	sio_event
-ClearSioBG	08042FC8	thumb	sio_postbattle
 InitSioBG	0804D0DC	thumb	sio_postbattle
 InitSpriteTextFont	080044A4	thumb	sio_postbattle
 InitSpriteText	080044E0	thumb	sio_postbattle
@@ -1003,7 +1000,6 @@ gUnk_Sio_4	02001184	data	sio_804B920
 SioMenuItem_SetArrowConfig	0804D568	thumb	sio_menu
 StartSioMenuBurstFx	0804DD50	thumb	sio_menu
 SioMenu_GetItemHelpText	08047970	thumb	sio_menu
-PutSioText	08043084	thumb	sio_menu
 Sound_FadeOutBGM	0800226C	thumb	sio_menu
 DivArm	080D6378	thumb	spline
 StartArmoryScreen	080B8D68	thumb	worldmap_basemenu
@@ -1665,3 +1661,12 @@ ProcScr_ManimLevelUpLabelColor	08A145E4	data	mapanim_lvupfx
 SpriteAnim_ManimStatGain	08A1599C	data	mapanim_lvupfx
 VramCopy	080149B4	thumb	mapanim_lvupfx
 Img_ManimLevelUpStatGainDigits	08A1D320	data	mapanim_lvupfx
+gSioTexts	0203DD08	data	sio_main2
+ReadMultiArenaSaveConfig	080AB458	thumb	sio_main2
+WriteMultiArenaSaveConfig	080AB41C	thumb	sio_main2
+gSioSaveConfig	0203DB0C	data	sio_main2
+gKeyInputSequenceTimer	0203DD48	data	sio_main2
+gTargetKeyInSeqIndex	03001804	data	sio_main2
+gKeyInputSequenceBuffer	0203DD28	data	sio_main2
+gCurrentKeyInSeqIndex	03001800	data	sio_main2
+gSioList_SioMain2_2	085D32F8	data	sio_main2
