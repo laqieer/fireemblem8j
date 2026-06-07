@@ -6140,3 +6140,8 @@
 	.thumb_func
 	.set    BonusClaim_DrawMainWindowFrame, 0x080B56D8 + 1
 
+	.global InitDifficultySelectScreen
+	.type   InitDifficultySelectScreen, %function
+	.thumb_func
+	.set    InitDifficultySelectScreen, 0x080B0B38 + 1
+

@@ -302,3 +302,4 @@ A9E23C	A9E244	src/soundroom.o(.data)	soundroom .data
 5C4104	5C411C	src/bmtrade.o(.data)	bmtrade .data
 0B6208	0B628C	src/bonusclaim.o(.text)	bonusclaim(run): BonusClaim_Loop_PopupDisplayTimer, BonusClaim_ClearItemSentPopup
 01DEF0	01DF3C	src/convoymenu.o(.text)	convoymenu(run): SendToConvoyMenu_Idle
+0B0C50	0B0D30	src/difficultymenu.o(.text)	difficultymenu(run): DifficultySelect_Init, DifficultySelect_WinBoxOpen, DifficultySelect_WinBoxClose
