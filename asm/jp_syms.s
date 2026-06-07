@@ -6386,3 +6386,6 @@
 	.thumb_func
 	.set    Register2dChrMove, 0x080130AC + 1
 
+	.global ProcScr_efxDeadDragonAlpha
+	.set    ProcScr_efxDeadDragonAlpha, 0x085E398C
+
