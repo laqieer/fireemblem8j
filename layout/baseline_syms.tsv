@@ -930,7 +930,6 @@ ProcScr_MapAnimDefaultItemEffect	08A14DEC	data	mapanim_spellassoc
 StartMuActionAnim	0807BCC4	thumb	mapanim_spellassoc
 StartMuDelayedFaceDefender	0807BCFC	thumb	mapanim_spellassoc
 CallDelayed	080148F0	thumb	mapanim_spellassoc
-AP_SwitchAnimation	08009408	thumb	mapanim_spellassoc
 StartMuSpeedUpAnim	0807BD58	thumb	mapanim_spellassoc
 DeleteAllPaletteAnimator	08014494	thumb	mapanim_staffeffect
 ProcScr_MapLatonaShiningfx	08A140C8	data	mapanim_staffeffect
@@ -1615,3 +1614,6 @@ MakeTradeTargetList	08025280	thumb	bmcommanddbg
 GenerateUnitMovementMapExt	0801A09C	thumb	bmcommanddbg
 GetUnitWeaponReachBits	08016F90	thumb	bmcommanddbg
 GenerateUnitStandingReachRange	0801B13C	thumb	bmcommanddbg
+AP_ExecDummyFrame	08009588	thumb	ap
+AP_LoadDefinition	08009564	thumb	ap
+Register2dChrMove	080130AC	thumb	ap

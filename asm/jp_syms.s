@@ -3689,11 +3689,6 @@
 	.thumb_func
 	.set    CallDelayed, 0x080148F0 + 1
 
-	.global AP_SwitchAnimation
-	.type   AP_SwitchAnimation, %function
-	.thumb_func
-	.set    AP_SwitchAnimation, 0x08009408 + 1
-
 	.global StartMuSpeedUpAnim
 	.type   StartMuSpeedUpAnim, %function
 	.thumb_func
@@ -6375,4 +6370,19 @@
 	.type   GenerateUnitStandingReachRange, %function
 	.thumb_func
 	.set    GenerateUnitStandingReachRange, 0x0801B13C + 1
+
+	.global AP_ExecDummyFrame
+	.type   AP_ExecDummyFrame, %function
+	.thumb_func
+	.set    AP_ExecDummyFrame, 0x08009588 + 1
+
+	.global AP_LoadDefinition
+	.type   AP_LoadDefinition, %function
+	.thumb_func
+	.set    AP_LoadDefinition, 0x08009564 + 1
+
+	.global Register2dChrMove
+	.type   Register2dChrMove, %function
+	.thumb_func
+	.set    Register2dChrMove, 0x080130AC + 1
 
