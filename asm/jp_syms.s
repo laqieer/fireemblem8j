@@ -4450,3 +4450,9 @@
 	.thumb_func
 	.set    GetWeaponLevelFromExp, 0x08016B04 + 1
 
+	.global gpBg1ScrollOffset
+	.set    gpBg1ScrollOffset, 0x0201FDC0
+
+	.global gpBg2ScrollOffset
+	.set    gpBg2ScrollOffset, 0x0201FB34
+
