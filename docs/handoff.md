@@ -8,7 +8,7 @@
 ## Verified state (update each working stretch)
 
 - **Functions decompiled: 963 / 8,528 = 11.3%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 236.** `make compare` → OK. Build is always byte-perfect
+- **Carved objects: 237.** `make compare` → OK. Build is always byte-perfect
   (`port_run` verifies every carve and reverts non-matches).
 - ~81 uncarved candidate TUs remain (`.text` 0x40..0x8000); the automated frontier
   has **converged** — what's left is region-different.
@@ -31,9 +31,20 @@
 2. **Phase 2 — region-different DATA:** TUs that masked-verify but fail `make
    compare`. Two sub-classes (profiled): (a) **link errors** (a referenced data
    global's JP address isn't resolved — read it from the JP literal pool, like the
-   fontgrp example, add to `layout/baseline_syms.tsv`); (b) **near-misses** (e.g.
-   `animedrv`: 1 byte off — a region-different EWRAM/data layout, place the symbol
-   individually at its JP address instead of placing the whole section as a block).
+   fontgrp example, add to `layout/baseline_syms.tsv`); (b) **near-misses** — a
+   region-different RAM layout, where placing a `.bss`/IWRAM section as one block
+   lands one symbol wrong.
+   - **RESOLVED (port_run addend bug) — `animedrv` (was 1-byte miss @ 0x5231):**
+     the run did `&gOam[0x100]` → a `.word gOam` literal with an **addend of 0x400**.
+     port_run's named-undef R_ARM_ABS32 path read the *final* JP literal
+     (`0x030034e0`) and stored it as gOam's symbol value WITHOUT subtracting the
+     addend, so the linker re-added 0x400 → wrote `0x030038e0`. Fix: subtract the
+     in-section addend (`otext[off:off+4]`) just like the section-symbol paths
+     already do → gOam value = `0x030030e0`, linker re-adds 0x400 = `0x030034e0` ✓.
+     This generalizes to **every extern referenced at a non-zero offset** (indexed
+     RAM globals). `animedrv` carved (run 0x08004F48). The remaining `animedrv` run
+     (0x08004D48, AnimUpdateAll…) still fails on a region-different `ewram_data`
+     block — a genuine class (b) near-miss for the loop to take next.
 3. **Phase 3 — region-different CODE** (`no verified runs`): hand-decompile the
    functions in `ida`/`ghidra` (decompile by JP address), write `src/` C matching
    the JP behaviour, byte-match with the permuter, then carve + `make compare`.

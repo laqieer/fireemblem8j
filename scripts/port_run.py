@@ -204,7 +204,15 @@ def port(name, exclude=(), runs=None):
             # a ROM data section the run references via a named symbol
             romdata.setdefault(ss[0], int.from_bytes(jp[base+off:base+off+4], "little") - ss[1])
         elif typ == "R_ARM_ABS32" and sym in undef:
-            new_syms[sym] = enc(int.from_bytes(jp[base+off:base+off+4], "little"))
+            # Subtract the in-section addend (pre-link word in our .text): a `.word
+            # sym` references the symbol as `sym + addend` (e.g. `&gOam[0x100]` ->
+            # addend 0x400). The JP literal is sym_base + addend, so the SYMBOL's
+            # value is jp_literal - addend; the linker re-adds the addend at link
+            # time. Without this, an extern indexed at a non-zero offset (region-
+            # different RAM globals like gOam) lands `addend` bytes off. Multiple
+            # refs to the same sym all yield the same base, so last-write is safe.
+            addend = int.from_bytes(otext[off:off+4], "little")
+            new_syms[sym] = enc(int.from_bytes(jp[base+off:base+off+4], "little") - addend)
         elif typ == "R_ARM_THM_CALL" and sym in undef:
             new_syms[sym] = (fmap.get(sym) or (bl(off) & ~1), "thumb")
 
@@ -227,6 +235,11 @@ def port(name, exclude=(), runs=None):
                 new_syms.setdefault(sym, enc(int.from_bytes(
                     jp[dbase - 0x08000000 + off:dbase - 0x08000000 + off + 4], "little")))
 
+    if os.environ.get("PORTRUN_DEBUG"):
+        print(f"  [dbg {name} run {start}..{end}] new_syms=" +
+              ", ".join(f"{s}={a:08X}/{t}" for s, (a, t) in sorted(new_syms.items())))
+        print(f"  [dbg] ram={ {s: f'{b:08X}' for s, b in ram.items()} } "
+              f"romdata={ {s: f'{b:08X}' for s, b in romdata.items()} } undef={sorted(undef)}")
     have = have_syms()
     with open("layout/carved_rom.tsv", "a") as f:
         f.write(f"{base&0xFFFFFF:06X}\t{int(end,16)&0xFFFFFF:06X}\tsrc/{name}.o(.text)\t{name}(run): {', '.join(funcs[:3])}{'...' if len(funcs)>3 else ''}\n")

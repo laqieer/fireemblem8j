@@ -1511,3 +1511,7 @@ BlendWmDotPalette	080C7A38	thumb	worldmap_rm
 Pal_WmPlaceDot_Standard	08B2699C	data	worldmap_rm
 Pal_WmPlaceDot_Highlight	08B2697C	data	worldmap_rm
 ProcScr_WmDotPalAnim	08AC2670	data	worldmap_rm
+gOamAffinePutId	030030CC	data	animedrv
+gOamAffinePutIt	030040F8	data	animedrv
+gOamHiPutIt	030036E4	data	animedrv
+gOam	030030E0	data	animedrv

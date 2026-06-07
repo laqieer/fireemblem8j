@@ -5944,3 +5944,15 @@
 	.global ProcScr_WmDotPalAnim
 	.set    ProcScr_WmDotPalAnim, 0x08AC2670
 
+	.global gOamAffinePutId
+	.set    gOamAffinePutId, 0x030030CC
+
+	.global gOamAffinePutIt
+	.set    gOamAffinePutIt, 0x030040F8
+
+	.global gOamHiPutIt
+	.set    gOamHiPutIt, 0x030036E4
+
+	.global gOam
+	.set    gOam, 0x030030E0
+
