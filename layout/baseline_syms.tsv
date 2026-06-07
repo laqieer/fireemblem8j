@@ -1133,3 +1133,13 @@ DrawEventMapAnimMaskfx	08088098	thumb	events_script_utils
 Pal_Congratulations	08A12A80	data	events_script_utils
 Pal_MapClear	08A12AA0	data	events_script_utils
 ProcScr_EventMapAnim	08A60B18	data	events_script_utils
+StartBgm	08002424	thumb	gameoverbgfx
+PutScreenFogEffectOverlayed	0801FBE0	thumb	gameoverbgfx
+PutScreenFogEffect	0801FB0C	thumb	gameoverbgfx
+MaybeResetSomePal	0800169C	thumb	gameoverbgfx
+MaybeSmoothChangeSomePal	080016B8	thumb	gameoverbgfx
+Img_GameOverText	08A7DDCC	data	gameoverbgfx
+Pal_GameOverText1	08A7E124	data	gameoverbgfx
+Img_ChapterIntroFog	08A7B098	data	gameoverbgfx
+Pal_GameOverText2	08A7E104	data	gameoverbgfx
+Tsa_GameOverFx	08A7E144	data	gameoverbgfx

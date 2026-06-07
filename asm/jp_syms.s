@@ -4546,3 +4546,43 @@
 	.global ProcScr_EventMapAnim
 	.set    ProcScr_EventMapAnim, 0x08A60B18
 
+	.global StartBgm
+	.type   StartBgm, %function
+	.thumb_func
+	.set    StartBgm, 0x08002424 + 1
+
+	.global PutScreenFogEffectOverlayed
+	.type   PutScreenFogEffectOverlayed, %function
+	.thumb_func
+	.set    PutScreenFogEffectOverlayed, 0x0801FBE0 + 1
+
+	.global PutScreenFogEffect
+	.type   PutScreenFogEffect, %function
+	.thumb_func
+	.set    PutScreenFogEffect, 0x0801FB0C + 1
+
+	.global MaybeResetSomePal
+	.type   MaybeResetSomePal, %function
+	.thumb_func
+	.set    MaybeResetSomePal, 0x0800169C + 1
+
+	.global MaybeSmoothChangeSomePal
+	.type   MaybeSmoothChangeSomePal, %function
+	.thumb_func
+	.set    MaybeSmoothChangeSomePal, 0x080016B8 + 1
+
+	.global Img_GameOverText
+	.set    Img_GameOverText, 0x08A7DDCC
+
+	.global Pal_GameOverText1
+	.set    Pal_GameOverText1, 0x08A7E124
+
+	.global Img_ChapterIntroFog
+	.set    Img_ChapterIntroFog, 0x08A7B098
+
+	.global Pal_GameOverText2
+	.set    Pal_GameOverText2, 0x08A7E104
+
+	.global Tsa_GameOverFx
+	.set    Tsa_GameOverFx, 0x08A7E144
+
