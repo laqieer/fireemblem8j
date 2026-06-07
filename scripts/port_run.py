@@ -61,14 +61,15 @@ def port(name):
             p = l.split()
             if len(p) >= 5 and p[0][0] in "0123456789abcdef" and p[-3] in (".data", ".rodata", "ewram_data") and not p[-1].startswith(".") and p[-1] != p[-3]:
                 ds[p[-1]] = p[-3]
-        refd = set()
+        refd, refd_secs = set(), set()
         sec = None
         for l in sh(f"arm-none-eabi-objdump -r {obj}").stdout.splitlines():
             if "RELOCATION RECORDS FOR [" in l: sec = l.split("[")[1].split("]")[0]
             elif sec == ".text":
                 p = l.split()
-                if len(p) >= 3 and not p[2].startswith("."): refd.add(p[2])
-        return ds, refd
+                if len(p) >= 3:
+                    (refd_secs if p[2].startswith(".") else refd).add(p[2])
+        return ds, refd, refd_secs
 
     def remove_def(text, sym):
         i = text.find(sym)
@@ -88,13 +89,19 @@ def port(name):
             i = text.find(sym, i + 1)
         return text
 
-    ds, refd = data_syms_and_refs()
-    # A static referenced via its SECTION symbol (e.g. EWRAM_DATA `Table[i]` ->
-    # ewram_data+offset) won't appear in .text relocs by name, so also keep any
-    # symbol whose name is used (>1 occurrence = definition + at least one use)
-    # in the run source. Only definition-only symbols are truly unreferenced.
+    ds, refd, refd_secs = data_syms_and_refs()
+    # Drop a file-scope data symbol when its ENTIRE section is unreferenced by the
+    # run's .text -- i.e. not named in a .text reloc AND no .text reloc targets its
+    # section symbol. The section test (not the old name-occurrence heuristic) is
+    # correct: a static accessed via its SECTION symbol (EWRAM_DATA `Table[i]` ->
+    # ewram_data+off) keeps its section in refd_secs and is preserved, while a
+    # dead self-referential table the run never touches (e.g. worldmap_status_ui's
+    # 252-byte gHelpInfo help-box table, named 26x but with no .text ref) is
+    # removed -- so its unresolved function pointers can't break the link. A
+    # symbol in a referenced (carved) section is always kept, so carved data is
+    # never altered; the verify-or-revert net guards anything this misjudges.
     src = open(f"src/{name}.c").read()
-    unref = [s for s in ds if s not in refd and len(re.findall(r"\b" + re.escape(s) + r"\b", src)) <= 1]
+    unref = [s for s in ds if s not in refd and ds[s] not in refd_secs]
     if unref:
         for s in unref:
             src = remove_def(src, s)
