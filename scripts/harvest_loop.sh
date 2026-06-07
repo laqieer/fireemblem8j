@@ -12,18 +12,6 @@
 set -u
 cd /home/laqieer/fireemblem8j
 STATUS=/tmp/harvest_status.txt
-COMPARE_GIST=ce9b334941ad75419af79d218cae5ddf  # README make-compare badge (shields.io endpoint)
-
-publish_compare_badge() {
-  # Every batch the harvester commits has passed `make compare` (it reverts any
-  # carve that isn't byte-perfect), so HEAD always builds byte-identical to the
-  # JP ROM. Mirror that invariant into the README status-badge gist. Best-effort.
-  command -v gh >/dev/null 2>&1 || return 0
-  local json
-  json=$(printf '{"schemaVersion":1,"label":"make compare","message":"OK (%s objs)","color":"brightgreen"}' \
-    "$(grep -c '	src/' layout/carved_rom.tsv)")
-  gh api -X PATCH "/gists/$COMPARE_GIST" -f "files[compare.json][content]=$json" >/dev/null 2>&1 || true
-}
 
 blocker_tally() {
   grep -oE ': (no verified runs|subset compile failed|compile failed after trimming.*)' \
@@ -43,7 +31,6 @@ write_status() {  # $1 = STATE
     grep -oE '^[a-z0-9_-]+: (no verified runs|subset compile failed)' /tmp/harvest_loop.log 2>/dev/null \
       | sort -u | head -80
   } > "$STATUS"
-  publish_compare_badge
 }
 
 write_status STARTING

@@ -1,0 +1,44 @@
+name: make compare
+
+# Byte-match verification: build fireemblem8.gba from source and check its sha1
+# against the JP ROM. The build incbins the original ROM (asm/baserom.s), which is
+# copyrighted and can't live in the repo, so CI fetches it from the BASEROM_URL
+# secret (a private download link). Forks without the secret skip the compare
+# (the build still can't run without the ROM) -- add BASEROM_URL to enable it.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    env:
+      BASEROM_URL: ${{ secrets.BASEROM_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential binutils-arm-none-eabi libpng-dev
+
+      - name: Install agbcc
+        run: |
+          git clone --depth 1 https://github.com/pret/agbcc.git
+          cd agbcc && ./build.sh && ./install.sh .. && cd ..
+
+      - name: Fetch baserom (sha1-verified)
+        if: ${{ env.BASEROM_URL != '' }}
+        run: |
+          curl -fSL "$BASEROM_URL" -o baserom.gba
+          echo "7da0456035366aa18414faa79d8fe7649f03c1ed  baserom.gba" | sha1sum -c -
+
+      - name: make compare
+        if: ${{ env.BASEROM_URL != '' }}
+        run: make compare
+
+      - name: Note when ROM unavailable
+        if: ${{ env.BASEROM_URL == '' }}
+        run: echo "BASEROM_URL secret not set - skipped byte-match compare (forks: add the secret to enable)."
