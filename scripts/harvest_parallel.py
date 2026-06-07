@@ -61,17 +61,33 @@ def main():
     print(f"{len(carveable)}/{len(cands)} TUs have verified runs; carving serially "
           f"(fast — no per-carve make clean)...", flush=True)
 
+    def cleanup_stray():
+        # If interrupted mid-carve, port_run may leave an uncommitted src/<tu>.c
+        # that isn't placed in ldscript -> the build wildcards it in and fails to
+        # link. Drop any tracked-clean src/*.c whose object isn't carved.
+        carved = set(re.findall(r"src/([\w-]+)\.o", open("layout/carved_rom.tsv").read()))
+        for f in os.listdir("src"):
+            if f.endswith(".c"):
+                base = f[:-2]
+                tracked = sh(f"git ls-files --error-unmatch src/{f}").returncode == 0
+                if base not in carved and not tracked:  # stray, uncommitted, unplaced
+                    sh(f"rm -f src/{base}.c src/{base}.o src/{base}.s")
+        sh("make layout")
+
     import port_run  # carve in-process, passing pre-discovered runs (skip re-discovery)
     ported = 0
-    for name, runs in carveable:
-        # port() returns True only after `make compare` is OK at its base (verify-or-revert),
-        # so a True result is a byte-perfect carve safe to commit.
-        if port_run.port(name, runs=runs):
-            sh("git add -A")
-            sh('git commit -q -m "Harvest (parallel): %s\n\n'
-               'Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"' % name)
-            ported += 1
-            print(f"  carved {name}", flush=True)
+    try:
+        for name, runs in carveable:
+            # port() returns True only after `make compare` is OK at its base (verify-or-revert),
+            # so a True result is a byte-perfect carve safe to commit.
+            if port_run.port(name, runs=runs):
+                sh("git add -A")
+                sh('git commit -q -m "Harvest (parallel): %s\n\n'
+                   'Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>"' % name)
+                ported += 1
+                print(f"  carved {name}", flush=True)
+    finally:
+        cleanup_stray()  # never leave a broken build, even on Ctrl-C / kill
 
     sh("make clean")
     green = "fireemblem8.gba: OK" in sh("make compare").stdout
