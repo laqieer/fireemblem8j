@@ -1162,3 +1162,5 @@ AnimScr_EfxBerserk7	086BA25C	data	banim-efxmagic-effectstaves
 AnimScr_EfxBerserk8	086BA268	data	banim-efxmagic-effectstaves
 AnimScr_EfxBerserk9	086BA274	data	banim-efxmagic-effectstaves
 AnimScr_EfxBerserk10	086BA280	data	banim-efxmagic-effectstaves
+gMovMapFillState	03004E00	data	bmidoten
+gWorkingBmMap	03004940	data	bmidoten

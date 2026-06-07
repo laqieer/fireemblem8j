@@ -4649,3 +4649,9 @@
 	.global AnimScr_EfxBerserk10
 	.set    AnimScr_EfxBerserk10, 0x086BA280
 
+	.global gMovMapFillState
+	.set    gMovMapFillState, 0x03004E00
+
+	.global gWorkingBmMap
+	.set    gWorkingBmMap, 0x03004940
+
