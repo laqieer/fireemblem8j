@@ -6014,3 +6014,37 @@
 	.global ProcScr_efxClasschgRST
 	.set    ProcScr_efxClasschgRST, 0x087A97E8
 
+	.global EfxTmCpyExtHFlip
+	.type   EfxTmCpyExtHFlip, %function
+	.thumb_func
+	.set    EfxTmCpyExtHFlip, 0x080734BC + 1
+
+	.global Tsa_DemonKingBG1
+	.set    Tsa_DemonKingBG1, 0x0884BEE4
+
+	.global ProcScr_EkrdragonDemonking_0
+	.set    ProcScr_EkrdragonDemonking_0, 0x08848A70
+
+	.global ProcScr_ekrDragonTunkFace
+	.set    ProcScr_ekrDragonTunkFace, 0x08848AA0
+
+	.global EfxCreateBackAnim
+	.type   EfxCreateBackAnim, %function
+	.thumb_func
+	.set    EfxCreateBackAnim, 0x0805654C + 1
+
+	.global BanimScr_DemoKingTunkFace
+	.set    BanimScr_DemoKingTunkFace, 0x088486DC
+
+	.global Pal_DemoKingTunkFace
+	.set    Pal_DemoKingTunkFace, 0x08855D38
+
+	.global Img_DemoKingTunkFace
+	.set    Img_DemoKingTunkFace, 0x088539E0
+
+	.global BanimScr_Ekrdragonfx_3
+	.set    BanimScr_Ekrdragonfx_3, 0x0884886C
+
+	.global Img_DemoKingTunkFace2
+	.set    Img_DemoKingTunkFace2, 0x08854BA4
+

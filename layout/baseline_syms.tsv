@@ -1531,3 +1531,13 @@ FrameLut2_EfxLvupBGCOL	080E6ABC	data	banim-efxlvup
 ProcScr_efxBlackInOutUnit	087A97B8	data	banim-ekrclasschg
 ProcScr_efxWhiteInOutUnit	087A97D0	data	banim-ekrclasschg
 ProcScr_efxClasschgRST	087A97E8	data	banim-ekrclasschg
+EfxTmCpyExtHFlip	080734BC	thumb	banim-ekrdragon-demonking
+Tsa_DemonKingBG1	0884BEE4	data	banim-ekrdragon-demonking
+ProcScr_EkrdragonDemonking_0	08848A70	data	banim-ekrdragon-demonking
+ProcScr_ekrDragonTunkFace	08848AA0	data	banim-ekrdragon-demonking
+EfxCreateBackAnim	0805654C	thumb	banim-ekrdragon-demonking
+BanimScr_DemoKingTunkFace	088486DC	data	banim-ekrdragon-demonking
+Pal_DemoKingTunkFace	08855D38	data	banim-ekrdragon-demonking
+Img_DemoKingTunkFace	088539E0	data	banim-ekrdragon-demonking
+BanimScr_Ekrdragonfx_3	0884886C	data	banim-ekrdragon-demonking
+Img_DemoKingTunkFace2	08854BA4	data	banim-ekrdragon-demonking
