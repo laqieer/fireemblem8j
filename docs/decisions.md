@@ -256,3 +256,45 @@ workhorse (HEXARM is stronger and instant); Ghidra is the second opinion.
 protocol. Tooling tracked under `scripts/ida/` + `scripts/ghidra/` +
 `docs/reverse-engineering.md`; the DBs and the IDA/Ghidra installs are
 local/gitignored.
+
+## D7 — Accelerating the decomp carve loop (profile first, parallelize second)
+
+**Question:** how to make the harvester (carve the remaining ~190 TUs) faster.
+The instinct was "parallelize across the 16 cores"; the profile said otherwise.
+
+**Measured (16-core box), per carve:**
+| phase | time |
+|---|---|
+| `make clean` + full rebuild + `make compare` (what port_run did) | **13.1 s** |
+| incremental `make layout` + `make compare`, **no** `make clean` | **0.30 s** |
+| `make -j16` full rebuild | 1.77 s |
+| assemble the 16 MB incbin (`asm/baserom.o`) | 0.06 s |
+| relink only | 0.14 s |
+
+**Finding:** the dominant per-carve cost was a **redundant `make clean`** forcing a
+full recompile of all ~169 carved objects. make already rebuilds exactly what a
+carve changes (the new `src/<name>.o`, the shrunk incbin, the relink). Removing
+the clean → **~44× faster verify, byte-identical output.** A/B-verified by
+un-carving and re-carving `fontgrp` with the change: identical manifests, `make
+compare` OK. Done in **D7 commit** (`port_run` no longer cleans; verify-or-revert
+is still the safety net).
+
+**Decision — acceleration tiers, in priority order:**
+1. **Drop the per-carve `make clean`** (done): 44×, zero parallelism, zero risk.
+2. **Parallelize run discovery (`find_runs`)** — now the dominant cost: it
+   compiles the full TU + every candidate subset serially. It's read-only on the
+   repo (writes only `/tmp` scratch), so it parallelizes across TUs/cores cleanly
+   once its temp files are per-process. *Next.*
+3. **Parallel carve+verify needs ISOLATED build dirs** — concurrent `make` in one
+   working tree races (observed). Use git worktrees (one per worker) or compute
+   all manifest rows in parallel and do **one** batched `make compare`; manifest
+   rows are append-only & per-TU independent, so they merge by concatenation
+   (address conflicts are caught by the single final compare).
+4. `make -j16` for any remaining full rebuild (7×).
+
+**Rejected:** fanning the work out to ~30 isolated-worktree worker agents (the
+naive "/batch" shape). It's the wrong tool here — the carves share the `layout/*.tsv`
+manifests (textual merge conflicts) and the single whole-ROM verifier, most of the
+remaining TUs are region-different (≈0 yield, observed: an 18-TU batch carved 0),
+and each worker still pays the full rebuild. Tier 1 alone beats it; Tiers 2–3 are
+the right parallelism and live in one harvester, not 30 PRs.
