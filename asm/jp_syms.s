@@ -6247,3 +6247,6 @@
 	.thumb_func
 	.set    SaveDraw_SetCursorBox, 0x080AFFB0 + 1
 
+	.global Pal_MapBattleInfoNum
+	.set    Pal_MapBattleInfoNum, 0x08A99FA8
+

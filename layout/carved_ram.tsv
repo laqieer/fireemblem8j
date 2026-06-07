@@ -26,3 +26,4 @@
 02029D84	ewram	src/animedrv.o(ewram_data)	animedrv ewram_data
 0203A60C	ewram	src/bmtrade.o(ewram_data)	bmtrade ewram_data
 030018F8	iwram	src/mu.o(.bss)	mu .bss
+0203E780	ewram	src/statscreen.o(ewram_data)	statscreen ewram_data
