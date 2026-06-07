@@ -7,11 +7,13 @@
 
 ## Verified state (update each working stretch)
 
-- **Functions decompiled: 963 / 8,528 = 11.3%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 237.** `make compare` → OK. Build is always byte-perfect
+- **Functions decompiled: 1074 / 8,528 = 12.6%** (`python3 scripts/calcprogress.py`).
+- **Carved objects: 263.** `make compare` → OK. Build is always byte-perfect
   (`port_run` verifies every carve and reverts non-matches).
-- ~81 uncarved candidate TUs remain (`.text` 0x40..0x8000); the automated frontier
-  has **converged** — what's left is region-different.
+- ~54 uncarved candidate TUs remain (`.text` 0x40..0x8000). Two port_run
+  correctness fixes this round unblocked +27 (addend subtraction for indexed
+  externs; EWRAM_OVERLAY trim — see Phase 2). Re-run `scripts/diag_misses.py` to
+  re-classify the rest before picking the next class-fix.
 
 ## What's built (the pipeline)
 
