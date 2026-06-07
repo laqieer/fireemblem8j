@@ -1604,3 +1604,14 @@ EventEngineExists	0800D45C	thumb	mapanim_api
 ProcScr_MapAnimBattle	08A13B90	data	mapanim_api
 ProcScr_MapAnimEventBattle	08A13EFC	data	mapanim_api
 MakeBattleMOVEUNIT	0807D6B4	thumb	mapanim_api
+GetAvailableTileEventCommand	08086350	thumb	bmcommanddbg
+CanUnitSeize	08037BFC	thumb	bmcommanddbg
+InitTargets	08050618	thumb	bmcommanddbg
+GenerateUnitCompleteAttackRange	0801A998	thumb	bmcommanddbg
+ForEachUnitInRange	08024E5C	thumb	bmcommanddbg
+AddUnitToTargetListIfNotAllied	0802512C	thumb	bmcommanddbg
+MakeRescueTargetList	08025364	thumb	bmcommanddbg
+MakeTradeTargetList	08025280	thumb	bmcommanddbg
+GenerateUnitMovementMapExt	0801A09C	thumb	bmcommanddbg
+GetUnitWeaponReachBits	08016F90	thumb	bmcommanddbg
+GenerateUnitStandingReachRange	0801B13C	thumb	bmcommanddbg

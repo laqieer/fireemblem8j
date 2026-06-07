@@ -6321,3 +6321,58 @@
 	.thumb_func
 	.set    MakeBattleMOVEUNIT, 0x0807D6B4 + 1
 
+	.global GetAvailableTileEventCommand
+	.type   GetAvailableTileEventCommand, %function
+	.thumb_func
+	.set    GetAvailableTileEventCommand, 0x08086350 + 1
+
+	.global CanUnitSeize
+	.type   CanUnitSeize, %function
+	.thumb_func
+	.set    CanUnitSeize, 0x08037BFC + 1
+
+	.global InitTargets
+	.type   InitTargets, %function
+	.thumb_func
+	.set    InitTargets, 0x08050618 + 1
+
+	.global GenerateUnitCompleteAttackRange
+	.type   GenerateUnitCompleteAttackRange, %function
+	.thumb_func
+	.set    GenerateUnitCompleteAttackRange, 0x0801A998 + 1
+
+	.global ForEachUnitInRange
+	.type   ForEachUnitInRange, %function
+	.thumb_func
+	.set    ForEachUnitInRange, 0x08024E5C + 1
+
+	.global AddUnitToTargetListIfNotAllied
+	.type   AddUnitToTargetListIfNotAllied, %function
+	.thumb_func
+	.set    AddUnitToTargetListIfNotAllied, 0x0802512C + 1
+
+	.global MakeRescueTargetList
+	.type   MakeRescueTargetList, %function
+	.thumb_func
+	.set    MakeRescueTargetList, 0x08025364 + 1
+
+	.global MakeTradeTargetList
+	.type   MakeTradeTargetList, %function
+	.thumb_func
+	.set    MakeTradeTargetList, 0x08025280 + 1
+
+	.global GenerateUnitMovementMapExt
+	.type   GenerateUnitMovementMapExt, %function
+	.thumb_func
+	.set    GenerateUnitMovementMapExt, 0x0801A09C + 1
+
+	.global GetUnitWeaponReachBits
+	.type   GetUnitWeaponReachBits, %function
+	.thumb_func
+	.set    GetUnitWeaponReachBits, 0x08016F90 + 1
+
+	.global GenerateUnitStandingReachRange
+	.type   GenerateUnitStandingReachRange, %function
+	.thumb_func
+	.set    GenerateUnitStandingReachRange, 0x0801B13C + 1
+
