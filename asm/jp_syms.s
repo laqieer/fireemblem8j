@@ -4586,3 +4586,27 @@
 	.global Tsa_GameOverFx
 	.set    Tsa_GameOverFx, 0x08A7E144
 
+	.global MapAnim_GorgonHatch_Init
+	.type   MapAnim_GorgonHatch_Init, %function
+	.thumb_func
+	.set    MapAnim_GorgonHatch_Init, 0x0807F15C + 1
+
+	.global Img_LightRune
+	.set    Img_LightRune, 0x085CC560
+
+	.global Pal_LightRune
+	.set    Pal_LightRune, 0x085CDC84
+
+	.global Tsa_LightRune
+	.set    Tsa_LightRune, 0x085CDCA4
+
+	.global ProcLightRuneAnim_Init
+	.type   ProcLightRuneAnim_Init, %function
+	.thumb_func
+	.set    ProcLightRuneAnim_Init, 0x08021234 + 1
+
+	.global ProcLightRuneAnim_Loop
+	.type   ProcLightRuneAnim_Loop, %function
+	.thumb_func
+	.set    ProcLightRuneAnim_Loop, 0x080212E8 + 1
+

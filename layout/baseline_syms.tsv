@@ -1143,3 +1143,9 @@ Pal_GameOverText1	08A7E124	data	gameoverbgfx
 Img_ChapterIntroFog	08A7B098	data	gameoverbgfx
 Pal_GameOverText2	08A7E104	data	gameoverbgfx
 Tsa_GameOverFx	08A7E144	data	gameoverbgfx
+MapAnim_GorgonHatch_Init	0807F15C	thumb	eventfx-boomfog
+Img_LightRune	085CC560	data	lightrunefx
+Pal_LightRune	085CDC84	data	lightrunefx
+Tsa_LightRune	085CDCA4	data	lightrunefx
+ProcLightRuneAnim_Init	08021234	thumb	lightrunefx
+ProcLightRuneAnim_Loop	080212E8	thumb	lightrunefx

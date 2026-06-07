@@ -58,32 +58,36 @@ def matches_at(text, relocs, base):
     return True
 
 
-def search_unique(text, relocs):
-    """Masked-search the whole .text; return its unique JP file-offset base or None."""
-    n = len(text)
-    mask = [1] * n
+def search_bases(text, relocs, cap=3):
+    """Masked-search the whole .text. Return (needle_len_or_None, [matching JP bases]).
+
+    needle_len is None when the longest unmasked run is too short to search (<6);
+    otherwise the list holds up to `cap` file-offset bases where the WHOLE masked
+    .text matches. With an adequate needle: 0 bases => the code isn't in the JP ROM
+    (region-different); 1 => uniquely located; >=2 => ambiguous (extend the block)."""
+    n = len(text); mask = [1] * n
     for r in relocs:
         for k in range(4):
             if r + k < n:
                 mask[r + k] = 0
     bs = bl = 0; rs = None
-    for i in range(n + 1):
-        if i < n and mask[i]:
-            if rs is None: rs = i
+    for x in range(n + 1):
+        if x < n and mask[x]:
+            if rs is None: rs = x
         elif rs is not None:
-            if i - rs > bl: bl, bs = i - rs, rs
+            if x - rs > bl: bl, bs = x - rs, rs
             rs = None
     if bl < 6:
-        return None
+        return None, []
     needle = bytes(text[bs:bs + bl]); hits = []; start = 0
-    while len(hits) < 2:
+    while len(hits) < cap:
         j = jp.find(needle, start)
         if j < 0: break
         s = j - bs
         if matches_at(text, relocs, s):
             hits.append(s)
         start = j + 1
-    return hits[0] if len(hits) == 1 else None
+    return bl, hits
 
 
 # functions in source order (from the full-file object)
@@ -95,24 +99,32 @@ order = [l.split()[2] for l in subprocess.run("arm-none-eabi-nm -n /tmp/full.o",
          capture_output=True, text=True).stdout.splitlines()
          if len(l.split()) == 3 and l.split()[1] in "tT"]
 
+MAXK = 6  # functions to append while disambiguating an ambiguous start: a
+          # function whose masked bytes appear at several JP spots usually becomes
+          # uniquely located once a neighbour or two is added, which both resolves
+          # it AND keeps the carve safe -- we only ever emit a unique block.
 runs = []
 i = 0
 while i < len(order):
-    # grow the candidate run as far as it still verifies as a block
     best = None  # (k, base, textlen)
-    text, relocs = compile_funcs(order[i:i + 1])
-    if text:
-        base = search_unique(text, relocs)
-        if base is not None:
-            best = (1, base, len(text))
-            # extend greedily; require the block to still match at the SAME base
-            k = 2
-            while i + k <= len(order):
-                t2, r2 = compile_funcs(order[i:i + k])
+    for k0 in range(1, min(MAXK, len(order) - i) + 1):
+        text, relocs = compile_funcs(order[i:i + k0])
+        if not text:
+            break  # block won't compile -> can't grow this start
+        nl, bases = search_bases(text, relocs)
+        if nl is not None and not bases:
+            break  # adequate needle, no JP match -> region-different, stop growing
+        if len(bases) == 1:  # uniquely located -> accept, then greedy-extend further
+            base, k, tl = bases[0], k0, len(text)
+            while i + k + 1 <= len(order):
+                t2, r2 = compile_funcs(order[i:i + k + 1])
                 if t2 and matches_at(t2, r2, base):
-                    best = (k, base, len(t2)); k += 1
+                    k, tl = k + 1, len(t2)
                 else:
                     break
+            best = (k, base, tl)
+            break
+        # bases >= 2 (ambiguous) or needle too short -> append the next fn and retry
     if best:
         k, base, tl = best
         runs.append((base, base + tl, order[i:i + k]))
