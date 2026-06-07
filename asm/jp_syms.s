@@ -6145,3 +6145,13 @@
 	.thumb_func
 	.set    InitDifficultySelectScreen, 0x080B0B38 + 1
 
+	.global SetupFinScreenGfx
+	.type   SetupFinScreenGfx, %function
+	.thumb_func
+	.set    SetupFinScreenGfx, 0x080BBF18 + 1
+
+	.global StartBgmFadeIn
+	.type   StartBgmFadeIn, %function
+	.thumb_func
+	.set    StartBgmFadeIn, 0x080024C4 + 1
+
