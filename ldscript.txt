@@ -122,6 +122,7 @@ SECTIONS
         src/emitstarfx.o(.text);
         asm/baserom.o(.gap_44);
         src/minefx.o(.text);
+        src/chapterintrofx_title.o(.text);
         asm/baserom.o(.gap_45);
         src/bmmenu.o(.text);
         asm/baserom.o(.gap_46);

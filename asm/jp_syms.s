@@ -6505,3 +6505,38 @@
 	.thumb_func
 	.set    NewEfxlvupbg, 0x08076CFC + 1
 
+	.global ApplyChapterTitlePal
+	.type   ApplyChapterTitlePal, %function
+	.thumb_func
+	.set    ApplyChapterTitlePal, 0x0808B824 + 1
+
+	.global PutChapterTitleGfx
+	.type   PutChapterTitleGfx, %function
+	.thumb_func
+	.set    PutChapterTitleGfx, 0x0808B894 + 1
+
+	.global DrawChapterTitleStr
+	.type   DrawChapterTitleStr, %function
+	.thumb_func
+	.set    DrawChapterTitleStr, 0x0808B99C + 1
+
+	.global DisableMapPaletteAnimations
+	.type   DisableMapPaletteAnimations, %function
+	.thumb_func
+	.set    DisableMapPaletteAnimations, 0x08030B74 + 1
+
+	.global UnpackChapterMapGraphics
+	.type   UnpackChapterMapGraphics, %function
+	.thumb_func
+	.set    UnpackChapterMapGraphics, 0x080195E4 + 1
+
+	.global GetCameraCenteredX
+	.type   GetCameraCenteredX, %function
+	.thumb_func
+	.set    GetCameraCenteredX, 0x08015A5C + 1
+
+	.global GetCameraCenteredY
+	.type   GetCameraCenteredY, %function
+	.thumb_func
+	.set    GetCameraCenteredY, 0x08015A88 + 1
+

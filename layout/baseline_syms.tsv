@@ -1656,3 +1656,10 @@ Pal_DemonKingBG	0884CB34	data	banim-ekrdragon-utils
 ProcScr_ekrDragonQuake	087A8C0C	data	banim-ekrdragon-utils
 NewEfxLvupBG2	08076D9C	thumb	banim-ekrlvup
 NewEfxlvupbg	08076CFC	thumb	banim-ekrlvup
+ApplyChapterTitlePal	0808B824	thumb	chapterintrofx_title
+PutChapterTitleGfx	0808B894	thumb	chapterintrofx_title
+DrawChapterTitleStr	0808B99C	thumb	chapterintrofx_title
+DisableMapPaletteAnimations	08030B74	thumb	chapterintrofx_title
+UnpackChapterMapGraphics	080195E4	thumb	chapterintrofx_title
+GetCameraCenteredX	08015A5C	thumb	chapterintrofx_title
+GetCameraCenteredY	08015A88	thumb	chapterintrofx_title
