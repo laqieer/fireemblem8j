@@ -15,3 +15,4 @@
 030006F8	iwram	src/eventfx-fade.o(.bss)	eventfx-fade .bss
 0203DDE4	ewram	src/uiselecttarget.o(ewram_data)	uiselecttarget ewram_data
 0203A9F8	ewram	src/unitinfowindow.o(ewram_data)	unitinfowindow ewram_data
+03005080	iwram	src/mapanim_spellassocfx.o(.bss)	mapanim_spellassocfx .bss

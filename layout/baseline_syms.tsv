@@ -1164,3 +1164,6 @@ AnimScr_EfxBerserk9	086BA274	data	banim-efxmagic-effectstaves
 AnimScr_EfxBerserk10	086BA280	data	banim-efxmagic-effectstaves
 gMovMapFillState	03004E00	data	bmidoten
 gWorkingBmMap	03004940	data	bmidoten
+SetPalFadeStop	08013A50	thumb	mapanim_spellassocfx
+ProcScr_MapAnimSpellAssocResetPal	08A146D4	data	mapanim_spellassocfx
+ProcScr_MapAnimBgShaker	08A146EC	data	mapanim_spellassocfx

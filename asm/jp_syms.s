@@ -4655,3 +4655,14 @@
 	.global gWorkingBmMap
 	.set    gWorkingBmMap, 0x03004940
 
+	.global SetPalFadeStop
+	.type   SetPalFadeStop, %function
+	.thumb_func
+	.set    SetPalFadeStop, 0x08013A50 + 1
+
+	.global ProcScr_MapAnimSpellAssocResetPal
+	.set    ProcScr_MapAnimSpellAssocResetPal, 0x08A146D4
+
+	.global ProcScr_MapAnimBgShaker
+	.set    ProcScr_MapAnimBgShaker, 0x08A146EC
+
