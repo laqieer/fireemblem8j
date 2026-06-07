@@ -1565,3 +1565,4 @@ InitDifficultySelectScreen	080B0B38	thumb	difficultymenu
 SetupFinScreenGfx	080BBF18	thumb	ending_details
 StartBgmFadeIn	080024C4	thumb	ending_details
 NormalizeWaterMinimapTerrain	080AC094	thumb	minimap
+PutClassWeaponRankIcons	080B7CEC	thumb	opinfo

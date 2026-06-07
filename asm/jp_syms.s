@@ -6160,3 +6160,8 @@
 	.thumb_func
 	.set    NormalizeWaterMinimapTerrain, 0x080AC094 + 1
 
+	.global PutClassWeaponRankIcons
+	.type   PutClassWeaponRankIcons, %function
+	.thumb_func
+	.set    PutClassWeaponRankIcons, 0x080B7CEC + 1
+

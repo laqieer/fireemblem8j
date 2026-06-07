@@ -306,3 +306,4 @@ A9E23C	A9E244	src/soundroom.o(.data)	soundroom .data
 0BBF5C	0BC044	src/ending_details.o(.text)	ending_details(run): Fin_Init, Fin_Loop_KeyListener, Fin_InitBlend...
 0AC0B4	0AC1EC	src/minimap.o(.text)	minimap(run): GetMinimapWaterKindAt, GetMinimapRiverKindAt
 07A830	07A84C	src/mu.o(.text)	mu(run): InitMus
+0B7DA0	0B7E4C	src/opinfo.o(.text)	opinfo(run): ClassIntroIcon_LoopFadeIn, ClassIntroIcon_LoopDisplay, ClassIntroIcon_LoopFadeOut
