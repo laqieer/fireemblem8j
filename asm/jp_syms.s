@@ -3082,11 +3082,6 @@
 	.global gBattleHitArray
 	.set    gBattleHitArray, 0x0203A5E8
 
-	.global BeginBattleMapAnims
-	.type   BeginBattleMapAnims, %function
-	.thumb_func
-	.set    BeginBattleMapAnims, 0x0807DB9C + 1
-
 	.global AddAttr2dBitMap
 	.type   AddAttr2dBitMap, %function
 	.thumb_func
@@ -6275,4 +6270,54 @@
 	.type   CpOrderFunc_End, %function
 	.thumb_func
 	.set    CpOrderFunc_End, 0x08039B34 + 1
+
+	.global SetMuFacing
+	.type   SetMuFacing, %function
+	.thumb_func
+	.set    SetMuFacing, 0x0807AAB8 + 1
+
+	.global SetMuDefaultFacing
+	.type   SetMuDefaultFacing, %function
+	.thumb_func
+	.set    SetMuDefaultFacing, 0x0807AAE0 + 1
+
+	.global gMapanimApi_0
+	.set    gMapanimApi_0, 0x081F50CC
+
+	.global ProcScr_MapAnimPoisonDmg
+	.set    ProcScr_MapAnimPoisonDmg, 0x08A13880
+
+	.global ProcScr_MapAnimEggDmg
+	.set    ProcScr_MapAnimEggDmg, 0x08A138C0
+
+	.global ProcScr_MapAnimCritAtk
+	.set    ProcScr_MapAnimCritAtk, 0x08A13910
+
+	.global ProcScr_MapAnimSteal
+	.set    ProcScr_MapAnimSteal, 0x08A13950
+
+	.global ProcScr_MapAnimSummon
+	.set    ProcScr_MapAnimSummon, 0x08A13A20
+
+	.global ProcScr_MapAnimSumDK
+	.set    ProcScr_MapAnimSumDK, 0x08A13A48
+
+	.global ProcScr_MapAnimDance
+	.set    ProcScr_MapAnimDance, 0x08A13B38
+
+	.global EventEngineExists
+	.type   EventEngineExists, %function
+	.thumb_func
+	.set    EventEngineExists, 0x0800D45C + 1
+
+	.global ProcScr_MapAnimBattle
+	.set    ProcScr_MapAnimBattle, 0x08A13B90
+
+	.global ProcScr_MapAnimEventBattle
+	.set    ProcScr_MapAnimEventBattle, 0x08A13EFC
+
+	.global MakeBattleMOVEUNIT
+	.type   MakeBattleMOVEUNIT, %function
+	.thumb_func
+	.set    MakeBattleMOVEUNIT, 0x0807D6B4 + 1
 

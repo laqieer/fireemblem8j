@@ -735,7 +735,6 @@ MADebugStrings2	08A13E70	data	mapanim_debug
 gMapanimDebug_0	08A13E20	data	mapanim_debug
 ClearBattleHits	0802AE00	thumb	mapanim_debug
 gBattleHitArray	0203A5E8	data	mapanim_debug
-BeginBattleMapAnims	0807DB9C	thumb	mapanim_debug
 AddAttr2dBitMap	08001570	thumb	mapanim_eventcall
 gMapanimEventcall_0	081F523C	data	mapanim_eventcall
 gMapanimEventcall_1	081F5244	data	mapanim_eventcall
@@ -1591,3 +1590,17 @@ gProcScr_CpDecide	085D1ED4	data	cp_order
 GetItemMaxRange	0801742C	thumb	cp_order
 GetUnitLeaderCharId	08019018	thumb	cp_order
 CpOrderFunc_End	08039B34	thumb	cp_order
+SetMuFacing	0807AAB8	thumb	mapanim_api
+SetMuDefaultFacing	0807AAE0	thumb	mapanim_api
+gMapanimApi_0	081F50CC	data	mapanim_api
+ProcScr_MapAnimPoisonDmg	08A13880	data	mapanim_api
+ProcScr_MapAnimEggDmg	08A138C0	data	mapanim_api
+ProcScr_MapAnimCritAtk	08A13910	data	mapanim_api
+ProcScr_MapAnimSteal	08A13950	data	mapanim_api
+ProcScr_MapAnimSummon	08A13A20	data	mapanim_api
+ProcScr_MapAnimSumDK	08A13A48	data	mapanim_api
+ProcScr_MapAnimDance	08A13B38	data	mapanim_api
+EventEngineExists	0800D45C	thumb	mapanim_api
+ProcScr_MapAnimBattle	08A13B90	data	mapanim_api
+ProcScr_MapAnimEventBattle	08A13EFC	data	mapanim_api
+MakeBattleMOVEUNIT	0807D6B4	thumb	mapanim_api
