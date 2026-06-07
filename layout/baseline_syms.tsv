@@ -1550,3 +1550,6 @@ gProcScr_BKSEL	085C6A48	data	bksel
 StartMovingHelpBoxExt	0808B414	thumb	bksel
 gHelpInfo_MbpHp	08A730A4	data	bksel
 gHelpInfo_CbpHp	08A7314C	data	bksel
+EndTargetSelection	0805082C	thumb	bmmenu
+IsCameraNotWatchingPosition	08015EA8	thumb	bmmenu
+LockGame	08015384	thumb	bmmenu

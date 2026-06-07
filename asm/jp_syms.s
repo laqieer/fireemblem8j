@@ -6085,3 +6085,18 @@
 	.global gHelpInfo_CbpHp
 	.set    gHelpInfo_CbpHp, 0x08A7314C
 
+	.global EndTargetSelection
+	.type   EndTargetSelection, %function
+	.thumb_func
+	.set    EndTargetSelection, 0x0805082C + 1
+
+	.global IsCameraNotWatchingPosition
+	.type   IsCameraNotWatchingPosition, %function
+	.thumb_func
+	.set    IsCameraNotWatchingPosition, 0x08015EA8 + 1
+
+	.global LockGame
+	.type   LockGame, %function
+	.thumb_func
+	.set    LockGame, 0x08015384 + 1
+
