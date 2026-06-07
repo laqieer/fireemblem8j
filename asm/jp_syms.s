@@ -4488,3 +4488,39 @@
 	.global gEkrNamewinAppearExist
 	.set    gEkrNamewinAppearExist, 0x0201FAD0
 
+	.global GenerateMovementMapOnWorkingMap
+	.type   GenerateMovementMapOnWorkingMap, %function
+	.thumb_func
+	.set    GenerateMovementMapOnWorkingMap, 0x0801A168 + 1
+
+	.global CutOffPathLength
+	.type   CutOffPathLength, %function
+	.thumb_func
+	.set    CutOffPathLength, 0x08032938 + 1
+
+	.global GetPathFromMovementScript
+	.type   GetPathFromMovementScript, %function
+	.thumb_func
+	.set    GetPathFromMovementScript, 0x08032AB8 + 1
+
+	.global gPathArrowProc
+	.set    gPathArrowProc, 0x0203A98C
+
+	.global ShopSt_SetHeadLocBak
+	.type   ShopSt_SetHeadLocBak, %function
+	.thumb_func
+	.set    ShopSt_SetHeadLocBak, 0x080BA0AC + 1
+
+	.global ShopTryMoveHand
+	.type   ShopTryMoveHand, %function
+	.thumb_func
+	.set    ShopTryMoveHand, 0x080BA01C + 1
+
+	.global ShopTryScrollPage
+	.type   ShopTryScrollPage, %function
+	.thumb_func
+	.set    ShopTryScrollPage, 0x080BA0B8 + 1
+
+	.global sShopState
+	.set    sShopState, 0x0203EF94
+

@@ -1119,3 +1119,11 @@ EkrDispUP_SetPositionUnsync	08052840	thumb	banim-ekrbattleintro
 ProcScr_ekrNamewinAppear	085E3F54	data	banim-ekrbattleintro
 UnsyncEkrDispUP	08052878	thumb	banim-ekrbattleintro
 gEkrNamewinAppearExist	0201FAD0	data	banim-ekrbattleintro
+GenerateMovementMapOnWorkingMap	0801A168	thumb	bmpatharrowdisp
+CutOffPathLength	08032938	thumb	bmpatharrowdisp
+GetPathFromMovementScript	08032AB8	thumb	bmpatharrowdisp
+gPathArrowProc	0203A98C	data	bmpatharrowdisp
+ShopSt_SetHeadLocBak	080BA0AC	thumb	bmshop
+ShopTryMoveHand	080BA01C	thumb	bmshop
+ShopTryScrollPage	080BA0B8	thumb	bmshop
+sShopState	0203EF94	data	bmshop

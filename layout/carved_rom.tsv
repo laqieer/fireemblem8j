@@ -187,3 +187,7 @@ A9CA60	A9CA64	src/bmsave-xmap.o(.data)	bmsave-xmap .data
 0DC650	0DC684	src/bmitem.o(.rodata)	bmitem .rodata
 05C4D4	05C5D8	src/banim-efxmagic.o(.text)	banim-efxmagic(run): EfxMagicHBlank_0, EfxMagicHBlank_1, EfxMagicHBlank_2...
 057D18	057DE8	src/banim-ekrbattleintro.o(.text)	banim-ekrbattleintro(run): EkrWindowAppearMain, NewEkrNamewinAppear
+032C4C	032CBC	src/bmpatharrowdisp.o(.text)	bmpatharrowdisp(run): GenerateMovementMapForActiveUnit, ResetPathArrow
+5C6080	5C6084	src/bmpatharrowdisp.o(.data)	bmpatharrowdisp .data
+0BA100	0BA250	src/bmshop.o(.text)	bmshop(run): ShopUpdateBg2Offset, RegisterShopState, Shop_TryMoveHandPage...
+ABCAD0	ABCAD4	src/bmshop.o(.data)	bmshop .data
