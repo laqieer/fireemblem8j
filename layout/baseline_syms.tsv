@@ -1554,3 +1554,9 @@ EndTargetSelection	0805082C	thumb	bmmenu
 IsCameraNotWatchingPosition	08015EA8	thumb	bmmenu
 LockGame	08015384	thumb	bmmenu
 CopyString	08012F78	thumb	bmsave-misc
+SetKeyStatus_IgnoreMask	080013FC	thumb	bmtrade
+CallTradeTutEventSlectItem	0802E0A0	thumb	bmtrade
+CallTradeTutEventDone	0802E0E0	thumb	bmtrade
+CallTradeTutEventPressAtoGetItem	0802E0C0	thumb	bmtrade
+TradeMenu_TutorialWait_OnInit	0802DDEC	thumb	bmtrade
+TradeMenu_TutorialWait_OnLoop	0802DDF4	thumb	bmtrade

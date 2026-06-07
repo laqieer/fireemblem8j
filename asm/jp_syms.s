@@ -6105,3 +6105,33 @@
 	.thumb_func
 	.set    CopyString, 0x08012F78 + 1
 
+	.global SetKeyStatus_IgnoreMask
+	.type   SetKeyStatus_IgnoreMask, %function
+	.thumb_func
+	.set    SetKeyStatus_IgnoreMask, 0x080013FC + 1
+
+	.global CallTradeTutEventSlectItem
+	.type   CallTradeTutEventSlectItem, %function
+	.thumb_func
+	.set    CallTradeTutEventSlectItem, 0x0802E0A0 + 1
+
+	.global CallTradeTutEventDone
+	.type   CallTradeTutEventDone, %function
+	.thumb_func
+	.set    CallTradeTutEventDone, 0x0802E0E0 + 1
+
+	.global CallTradeTutEventPressAtoGetItem
+	.type   CallTradeTutEventPressAtoGetItem, %function
+	.thumb_func
+	.set    CallTradeTutEventPressAtoGetItem, 0x0802E0C0 + 1
+
+	.global TradeMenu_TutorialWait_OnInit
+	.type   TradeMenu_TutorialWait_OnInit, %function
+	.thumb_func
+	.set    TradeMenu_TutorialWait_OnInit, 0x0802DDEC + 1
+
+	.global TradeMenu_TutorialWait_OnLoop
+	.type   TradeMenu_TutorialWait_OnLoop, %function
+	.thumb_func
+	.set    TradeMenu_TutorialWait_OnLoop, 0x0802DDF4 + 1
+
