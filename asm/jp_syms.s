@@ -6071,3 +6071,17 @@
 	.global ProcScr_EfxTriangleQUAKE
 	.set    ProcScr_EfxTriangleQUAKE, 0x087A9BA0
 
+	.global gProcScr_BKSEL
+	.set    gProcScr_BKSEL, 0x085C6A48
+
+	.global StartMovingHelpBoxExt
+	.type   StartMovingHelpBoxExt, %function
+	.thumb_func
+	.set    StartMovingHelpBoxExt, 0x0808B414 + 1
+
+	.global gHelpInfo_MbpHp
+	.set    gHelpInfo_MbpHp, 0x08A730A4
+
+	.global gHelpInfo_CbpHp
+	.set    gHelpInfo_CbpHp, 0x08A7314C
+
