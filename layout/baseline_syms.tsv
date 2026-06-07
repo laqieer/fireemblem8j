@@ -1295,3 +1295,4 @@ cg_8_map	08B07510	data	cg
 cg_8_palette	08B08478	data	cg
 cg_9_map	08B079C4	data	cg
 cg_9_palette	08B08538	data	cg
+GetTileIndex	08000F54	thumb	fontgrp

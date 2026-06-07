@@ -207,3 +207,5 @@ A146BC	A146D4	src/mapanim_spellassocfx.o(.data)	mapanim_spellassocfx .data
 0BE738	0BE8D0	src/worldmap_main.o(.text)	worldmap_main(run): WorldMap_ResumeFromGuide, WorldMap_RestoreDisplayAfterGuide, WorldMap_StartConfigScreen...
 0BB170	0BB1F8	src/cg.o(.text)	cg(run): GetCG, CG_Null, DisplayCGfx
 AC0394	AC059C	src/cg.o(.data)	cg .data
+0036D8	003750	src/fontgrp.o(.text)	fontgrp(run): SetupDebugFontForBG
+5776F0	577EF0	src/fontgrp.o(.data)	fontgrp .data

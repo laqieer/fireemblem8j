@@ -5062,3 +5062,8 @@
 	.global cg_9_palette
 	.set    cg_9_palette, 0x08B08538
 
+	.global GetTileIndex
+	.type   GetTileIndex, %function
+	.thumb_func
+	.set    GetTileIndex, 0x08000F54 + 1
+

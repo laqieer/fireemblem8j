@@ -30,16 +30,22 @@ def carved_objs():
     return {m.group(1) for m in (re.search(r"(src/\S+\.o)\(", l) for l in open("layout/carved_rom.tsv")) if m}
 
 
-def port(name):
+def port(name, exclude=()):
     if f"src/{name}.o" in carved_objs():
         print(f"{name}: already has a carved run — skipping"); return False
     # Verified runs only (D2): each block byte-matches the JP ROM at its base.
     out = sh(f"python3 scripts/find_runs.py {name}").stdout
     runs = [(l.split()[0], l.split()[1], l.split()[2].split(","))
             for l in out.splitlines() if l.strip()]
-    if not runs:
-        print(f"{name}: no verified runs"); return False
-    start, end, funcs = max(runs, key=lambda r: len(r[2]))
+    # Try runs largest-first; if a run masked-matches but can't be made byte-perfect
+    # in the full build (e.g. it touches region-different EWRAM/data layout), fall
+    # back to the next-largest verified run instead of abandoning the whole TU.
+    # `exclude` carries the runs already tried-and-reverted this call chain.
+    cand = [r for r in runs if tuple(r[2]) not in exclude]
+    if not cand:
+        if not exclude: print(f"{name}: no verified runs")
+        return False
+    start, end, funcs = max(cand, key=lambda r: len(r[2]))
     base = int(start, 16) - 0x08000000  # ROM-file offset (for indexing baserom)
 
     MANI = ["layout/carved_rom.tsv", "layout/carved_ram.tsv", "layout/baseline_syms.tsv"]
@@ -276,7 +282,7 @@ def port(name):
     for p, c in snap.items():
         open(p, "w").write(c)
     os.remove(f"src/{name}.c"); sh("make layout")
-    return False
+    return port(name, exclude + (tuple(funcs),))  # fall back to the next-largest run
 
 
 if __name__ == "__main__":
