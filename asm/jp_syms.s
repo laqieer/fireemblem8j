@@ -1084,12 +1084,6 @@
 	.global gAiItemConfigTable
 	.set    gAiItemConfigTable, 0x080DD214
 
-	.global gProcScr_CpOrder
-	.set    gProcScr_CpOrder, 0x085D1E64
-
-	.global gProcScr_BerserkCpOrder
-	.set    gProcScr_BerserkCpOrder, 0x085D1E7C
-
 	.global BG_GetMapBuffer
 	.type   BG_GetMapBuffer, %function
 	.thumb_func
@@ -6255,4 +6249,30 @@
 
 	.global gPal_SupportMenu
 	.set    gPal_SupportMenu, 0x08A9B004
+
+	.global AiDecideMainFunc
+	.set    AiDecideMainFunc, 0x03004F00
+
+	.global AiDecideMain
+	.type   AiDecideMain, %function
+	.thumb_func
+	.set    AiDecideMain, 0x08039D24 + 1
+
+	.global gProcScr_CpDecide
+	.set    gProcScr_CpDecide, 0x085D1ED4
+
+	.global GetItemMaxRange
+	.type   GetItemMaxRange, %function
+	.thumb_func
+	.set    GetItemMaxRange, 0x0801742C + 1
+
+	.global GetUnitLeaderCharId
+	.type   GetUnitLeaderCharId, %function
+	.thumb_func
+	.set    GetUnitLeaderCharId, 0x08019018 + 1
+
+	.global CpOrderFunc_End
+	.type   CpOrderFunc_End, %function
+	.thumb_func
+	.set    CpOrderFunc_End, 0x08039B34 + 1
 

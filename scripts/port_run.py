@@ -268,9 +268,47 @@ def port(name, exclude=(), runs=None):
     # `make clean` recompile of every carved object. Verified byte-identical; the
     # make-compare verify-or-revert below is the safety net regardless.
     sh("make layout")
-    if "fireemblem8.gba: OK" in sh("make compare").stdout:
+    mc = sh("make compare")
+    if "fireemblem8.gba: OK" in mc.stdout:
         print(f"{name}: OK — run {start}..{end} ({len(funcs)} fns, {len(adds)} new syms{', +ram' if ram else ''})")
         return True
+
+    # Multiple-definition retry: a symbol this run's object DEFINES (its own
+    # functions/proc-scripts) or one it references that an ALREADY-carved object
+    # defines is also emitted in jp_syms.s from baseline_syms.tsv -> jp_syms.o and
+    # the object doubly-define it (link error). The carved object is the real
+    # provider, so drop those redundant baseline rows and rebuild. jp_syms is only
+    # an absolute alias; a wrong address from the object's own definition is still
+    # caught by the verify-or-revert net below. Loop: ld lists all dups per pass,
+    # but removing some can surface the next (bounded, stops when no progress).
+    dropped = 0
+    for _ in range(8):
+        dup = set(re.findall(r"multiple definition of [`']([\w]+)'", mc.stdout + mc.stderr))
+        if not dup:
+            break
+        rows = list(open("layout/baseline_syms.tsv"))
+        kept = [l for l in rows if l.startswith("#") or l.split("\t")[0] not in dup]
+        if len(kept) == len(rows):
+            break  # the dup isn't a baseline sym (both defs are real objects) -> can't fix here
+        dropped += len(rows) - len(kept)
+        open("layout/baseline_syms.tsv", "w").writelines(kept)
+        sh("make layout")
+        mc = sh("make compare")
+        if "fireemblem8.gba: OK" in mc.stdout:
+            print(f"{name}: OK — run {start}..{end} ({len(funcs)} fns, -{dropped} dup baseline syms)")
+            return True
+    if os.environ.get("PORTRUN_DEBUG"):
+        if os.path.exists("fireemblem8.gba"):
+            b = open("fireemblem8.gba", "rb").read()  # TRUE carve diff, before the remap fallback
+            d = [i for i in range(min(len(b), len(jp))) if b[i] != jp[i]]
+            print(f"  [pre-remap {name}] size built={len(b)} jp={len(jp)} (+{len(b)-len(jp)}); "
+                  f"content-diff={len(d)} bytes" + (f", first @ {d[0]:#x}" if d else ""))
+        errs = [l.strip() for l in (mc.stdout + mc.stderr).splitlines()
+                if re.search(r"undefined reference|in function|multiple definition|overlap|"
+                             r"relocation truncated|cannot find|No such|not in any|will not fit", l, re.I)
+                and "arm-none-eabi-ld " not in l]
+        if errs:
+            print(f"  [make-err {name}] " + " | ".join(errs[:8])[:900])
 
     # Fallback: raw-hex message-id tables (US `{0x534,0x510,...}` not yet MSG_*)
     # are region-different data. Remap in-source ids to JP per layout/msg_map.tsv

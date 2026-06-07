@@ -317,3 +317,6 @@ A72BB8	A72BF0	src/statscreen.o(.data)	statscreen .data
 0A4E94	0A4F18	src/uisupport.o(.text)	uisupport(run): SupportScreen_OnInit, DrawSupportBannerSprites_Init, DrawSupportBannerSprites_Loop
 A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 0D5E9C	0D5FE0	src/m4a.o(.text)	m4a(run): m4aMPlayVolumeControl, m4aMPlayPitchControl, m4aMPlayPanpotControl
+039800	039B34	src/cp_order.o(.text)	cp_order(run): CpOrderMain, CpOrderBerserkInit, CpOrderFunc_BeginDecide...
+5D1E60	5D1EA4	src/cp_order.o(.data)	cp_order .data
+0DCD88	0DCDAC	src/cp_order.o(.rodata)	cp_order .rodata
