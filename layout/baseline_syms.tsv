@@ -1585,3 +1585,5 @@ BitfileToIndex	080AD2D0	thumb	savedraw
 SaveMenuGetBitfile	080AD25C	thumb	savedraw
 SaveDraw_SetCursorBox	080AFFB0	thumb	savedraw
 Pal_MapBattleInfoNum	08A99FA8	data	statscreen
+gGfx_SupportMenu	08A9AC28	data	uisupport
+gPal_SupportMenu	08A9B004	data	uisupport

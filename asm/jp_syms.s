@@ -6250,3 +6250,9 @@
 	.global Pal_MapBattleInfoNum
 	.set    Pal_MapBattleInfoNum, 0x08A99FA8
 
+	.global gGfx_SupportMenu
+	.set    gGfx_SupportMenu, 0x08A9AC28
+
+	.global gPal_SupportMenu
+	.set    gPal_SupportMenu, 0x08A9B004
+

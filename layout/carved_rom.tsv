@@ -314,3 +314,5 @@ A9E23C	A9E244	src/soundroom.o(.data)	soundroom .data
 A9D448	A9D462	src/savedraw.o(.data)	savedraw .data
 08B6A0	08B824	src/statscreen.o(.text)	statscreen(run): HbLock_OnIdle, StartLockingHelpBox_Unused, HelpPrompt_OnIdle...
 A72BB8	A72BF0	src/statscreen.o(.data)	statscreen .data
+0A4E94	0A4F18	src/uisupport.o(.text)	uisupport(run): SupportScreen_OnInit, DrawSupportBannerSprites_Init, DrawSupportBannerSprites_Loop
+A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
