@@ -238,7 +238,11 @@ def port(name, exclude=()):
         with open("layout/baseline_syms.tsv", "a") as f:
             f.write("\n".join(adds) + "\n")
 
-    sh("make layout"); sh("make clean")
+    # Incremental build (no `make clean`): only the new src/<name>.o, the shrunk
+    # incbin (asm/baserom.o), and the relink rebuild — ~0.3s vs ~13s for a full
+    # `make clean` recompile of every carved object. Verified byte-identical; the
+    # make-compare verify-or-revert below is the safety net regardless.
+    sh("make layout")
     if "fireemblem8.gba: OK" in sh("make compare").stdout:
         print(f"{name}: OK — run {start}..{end} ({len(funcs)} fns, {len(adds)} new syms{', +ram' if ram else ''})")
         return True
@@ -281,7 +285,7 @@ def port(name, exclude=()):
                   f"romdata {[(hex(0x08000000+x),hex(s)) for x,s,_ in data_carves]})")
     for p, c in snap.items():
         open(p, "w").write(c)
-    os.remove(f"src/{name}.c"); sh("make layout")
+    os.remove(f"src/{name}.c"); sh(f"rm -f src/{name}.o src/{name}.s"); sh("make layout")
     return port(name, exclude + (tuple(funcs),))  # fall back to the next-largest run
 
 
