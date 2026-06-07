@@ -6186,3 +6186,33 @@
 	.global ProcScr_BmSupplyScreen
 	.set    ProcScr_BmSupplyScreen, 0x08A95030
 
+	.global IsUnitInCurrentRoster
+	.type   IsUnitInCurrentRoster, %function
+	.thumb_func
+	.set    IsUnitInCurrentRoster, 0x08097740 + 1
+
+	.global RegisterPrepUnitList
+	.type   RegisterPrepUnitList, %function
+	.thumb_func
+	.set    RegisterPrepUnitList, 0x08097644 + 1
+
+	.global PrepSetUnitAmount
+	.type   PrepSetUnitAmount, %function
+	.thumb_func
+	.set    PrepSetUnitAmount, 0x08097664 + 1
+
+	.global PrepGetUnitAmount
+	.type   PrepGetUnitAmount, %function
+	.thumb_func
+	.set    PrepGetUnitAmount, 0x08097654 + 1
+
+	.global GetUnitSMSId
+	.type   GetUnitSMSId, %function
+	.thumb_func
+	.set    GetUnitSMSId, 0x080176AC + 1
+
+	.global UseUnitSprite
+	.type   UseUnitSprite, %function
+	.thumb_func
+	.set    UseUnitSprite, 0x080267A0 + 1
+
