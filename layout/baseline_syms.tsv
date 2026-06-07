@@ -1544,3 +1544,5 @@ Img_DemoKingTunkFace2	08854BA4	data	banim-ekrdragon-demonking
 GetEkrDragonStatusAttr	08071FF8	thumb	banim-ekrdragonstatus
 DrawBattlePopup	080780DC	thumb	banim-ekrpopup
 EfxPlaySound5AVol100	08077F8C	thumb	banim-ekrpopup
+NewEfxQuakePure	08054364	thumb	banim-ekrtriangle
+ProcScr_EfxTriangleQUAKE	087A9BA0	data	banim-ekrtriangle

@@ -6063,3 +6063,11 @@
 	.thumb_func
 	.set    EfxPlaySound5AVol100, 0x08077F8C + 1
 
+	.global NewEfxQuakePure
+	.type   NewEfxQuakePure, %function
+	.thumb_func
+	.set    NewEfxQuakePure, 0x08054364 + 1
+
+	.global ProcScr_EfxTriangleQUAKE
+	.set    ProcScr_EfxTriangleQUAKE, 0x087A9BA0
+
