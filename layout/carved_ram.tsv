@@ -17,3 +17,9 @@
 0203A9F8	ewram	src/unitinfowindow.o(ewram_data)	unitinfowindow ewram_data
 03005080	iwram	src/mapanim_spellassocfx.o(.bss)	mapanim_spellassocfx .bss
 02026E30	ewram	src/fontgrp.o(ewram_data)	fontgrp ewram_data
+02033F38	ewram	src/bmtarget.o(ewram_data)	bmtarget ewram_data
+0203A4CC	ewram	src/bmudisp.o(ewram_data)	bmudisp ewram_data
+02024CB8	ewram	src/hardware.o(ewram_data)	hardware ewram_data
+02024E68	ewram	src/proc.o(ewram_data)	proc ewram_data
+02024E5C	ewram	src/soundwrapper.o(ewram_data)	soundwrapper ewram_data
+03000038	iwram	src/soundwrapper.o(.bss)	soundwrapper .bss

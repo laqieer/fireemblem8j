@@ -214,3 +214,71 @@ AC0394	AC059C	src/cg.o(.data)	cg .data
 0E45D8	0E4602	src/banim-efxhit.o(.rodata)	banim-efxhit .rodata
 05DC30	05DC60	src/banim-efxmagic-ballista.o(.text)	banim-efxmagic-ballista(run): efxShooterOBJ_Loop
 06DA60	06DACC	src/banim-efxmagic-demonsurge.o(.text)	banim-efxmagic-demonsurge(run): efxGorgonBGDirt_Loop
+061C2C	061C7C	src/banim-efxmagic-fenrir.o(.text)	banim-efxmagic-fenrir(run): efxFenrirBG_OnEnd, efxFenrirBG_Loop
+05F49C	05F530	src/banim-efxmagic-fimbulvetr.o(.text)	banim-efxmagic-fimbulvetr(run): efxFimbulvetrBG_Loop
+0681A0	0682B8	src/banim-efxmagic-ivaldi.o(.text)	banim-efxmagic-ivaldi(run): efxIvaldiOBJFall_Loop
+060B28	060BE0	src/banim-efxmagic-light.o(.text)	banim-efxmagic-light(run): efxLightningBG_Loop
+060968	0609B4	src/banim-efxmagic-nosferatu.o(.text)	banim-efxmagic-nosferatu(run): efxResireRST_Loop
+06D4B8	06D50C	src/banim-efxmagic-shadowshot.o(.text)	banim-efxmagic-shadowshot(run): efxDarkLongMonsBG02_Loop
+069990	069A14	src/banim-efxmagic-stone.o(.text)	banim-efxmagic-stone(run): efxStoneBG_Loop
+056F70	057060	src/banim-ekrbattlestarting.o(.text)	banim-ekrbattlestarting(run): ekrBaStart_0, ekrBaStart_1, ekrBaStart_2
+0599C8	0599F8	src/banim-ekrcmd.o(.text)	banim-ekrcmd(run): GetEkrHit, GetEkrDmg, GetEkrCrit
+05B0FC	05B180	src/banim-ekrmain.o(.text)	banim-ekrmain(run): SetAnimStateHidden, SetAnimStateUnHidden
+0569CC	056A08	src/banim-ekrutils.o(.text)	banim-ekrutils(run): Get0201FAC8, Set0201FAC8, NewEfxspdquake
+035848	0358A8	src/bb.o(.text)	bb(run): EndSubtitleHelp, IsSubtitleHelpActive, ChangeSubtitleHelp
+01B720	01B750	src/bmdebug.o(.text)	bmdebug(run): DummyFunction, Loop6C_WaitForSelectPress, SetNewKeyStatusWith16
+0A8D30	0A8E48	src/bmsave-bwl.o(.text)	bmsave-bwl(run): GetCurCompleteChapters, GetNextChapterStatsEntry, RegisterChapterTimeAndTurnCount...
+0AB83C	0AB8C8	src/bmsave-gmap.o(.text)	bmsave-gmap(run): ReadWorldMapNodes
+026410	0265BC	src/bmtarget.o(.text)	bmtarget(run): TryAddToMineTargetList, MakeTargetListForMine, TryAddToLightRuneTargetList...
+0279C4	027AA0	src/bmudisp.o(.text)	bmudisp(run): ResetUnitSpriteHoverCursor, ResetUnitSpriteHover, UnitSpriteHoverUpdate
+017C14	017D84	src/bmunit.o(.text)	bmunit(run): UnitLoadSupports, UnitAutolevelWExp, UnitAutolevelCore
+035DB8	035E70	src/bmusailment.o(.text)	bmusailment(run): StatusHealEffect_PalSpriteAnim_Init, StatusHealEffect_PalSpriteAnim_SetOutlineIntensity, StatusHealEffect_PalSpriteAnim_LoopIn
+02F2A0	02F4B8	src/bmusemind.o(.text)	bmusemind(run): ExecVulneraryItem, ExecElixirItem, ExecPureWaterItem...
+020500	0206D0	src/chapterintrofx.o(.text)	chapterintrofx(run): ChapterIntro_LightBurst_Loop, ChapterIntro_InitBLDCNT, ChapterIntro_InitFogGfx
+5C3600	5C3618	src/chapterintrofx.o(.data)	chapterintrofx .data
+0D1388	0D13F0	src/classchg-main.o(.text)	classchg-main(run): PromoMain_HandlePrepEndEffect, PromoMain_OnEnd
+0D2A34	0D2A74	src/classchg-menuselect.o(.text)	classchg-menuselect(run): ClassChgMenuItem_3rdUsability
+03EC54	03ECB8	src/cp_0803E2F4.o(.text)	cp_0803E2F4(run): AiTryDanceOrStealAfterMove, AiTryActionAfterMove
+03CEA8	03CF44	src/cp_script.o(.text)	cp_script(run): AiScriptCmd_14_DoNothing, AiScriptCmd_15_DoNothing, AiScriptCmd_16_RandomMovement...
+03B79C	03B7D0	src/cp_utility.o(.text)	cp_utility(run): AiGetItemStealRank
+040B34	040BDC	src/cpextra_80407F0.o(.text)	cpextra_80407F0(run): AiFindReachableUnlockPosition
+0C916C	0C941C	src/ending_credits.o(.text)	ending_credits(run): EndingCredits_UpdateScroll, EndingCredits_Init, EndingCredits_LoadCG
+00E730	00E8AC	src/eventscr.o(.text)	eventscr(run): Event1D_TalkContinue, Event1D_WaitForLockTalk, EndEventFaces
+011ED0	011FCC	src/eventscr3.o(.text)	eventscr3(run): EvtBattleGenerateRealInternal, EvtBattleGenerateReal, EvtBattleGenerateBallistaReal
+00C5B4	00C800	src/eventscr_gmap.o(.text)	eventscr_gmap(run): Event97_WmInitNextStoryNode, Event98_WmSetNextStoryNodePath, Event99_GmNodeDisplayWait...
+005A6C	005B28	src/face.o(.text)	face(run): EndFaceChibiSpr, PutFace80x72_Standard, PutFace80x72_Raised
+5B8F70	5B8F80	src/face.o(.data)	face .data
+009F38	009FA8	src/gamecontrol.o(.text)	gamecontrol(run): Nop_Gamecontrol_0, GameControl_EnableSoundEffects, GameControl_ResetPlayConfig
+0012E4	0012FC	src/hardware.o(.text)	hardware(run): ExecMainUpdate
+07CB4C	07CB90	src/mapanim.o(.text)	mapanim(run): DisplayWRankUpPopup
+07E160	07E308	src/mapanim_infobox.o(.text)	mapanim_infobox(run): DisplayBattleInfoBox, MapInfoBox_PrepareForShake, MapInfoBoxShake
+08473C	0848F0	src/mapanim_scanline.o(.text)	mapanim_scanline(run): MapAnimScanlineCore, PrepareGradientScanlineBuf
+0CD62C	0CDCCC	src/opanim-main.o(.text)	opanim-main(run): OpAnimJoshuaScrollIn, OpAnimScrollInLArachel, OpAnimScrollInSeth...
+0C97F4	0C99F4	src/opsubtitle.o(.text)	opsubtitle(run): Subtitle_LightFlareFx_Init, Subtitle_LightFlareFx_Loop, Subtitle_LightFlareFx_End...
+01E8BC	01EAF0	src/phasechangefx.o(.text)	phasechangefx(run): PhaseIntroVMatchHi, PhaseIntroVMatchMid, PhaseIntroVMatchLo...
+08FB58	08FD88	src/player_interface.o(.text)	player_interface(run): MenuButtonDisp_Init, UpdateMenuButtonPos, DrawMenuButtonAt...
+A738E0	A73900	src/player_interface.o(.data)	player_interface .data
+01D068	01D180	src/playerphase.o(.text)	playerphase(run): PlayerPhase_CommitActiveUnitMove, PlayerPhase_OpenUnitActionMenu, PlayerPhase_ApplyUnitMovement
+011B2C	011C74	src/popup.o(.text)	popup(run): BrownTextBox_FadeInInit, BrownTextBox_FadeInLoop, BrownTextBox_FadeOutInit...
+0A2AFC	0A2BC0	src/prep_80A0760.o(.text)	prep_80A0760(run): FortuneSubMenu_Unused_KeyHandler, FortuneSubMenu_OnOptionSelected
+097EE0	097F0C	src/prep_atmenu.o(.text)	prep_atmenu(run): StartPrepMenuDesc
+0A1FF4	0A2040	src/prep_itemlist.o(.text)	prep_itemlist(run): PrepItemList_StartTradeScreen, StartPrepItemListScreenProc
+09F1E0	09F224	src/prep_itemusemind.o(.text)	prep_itemusemind(run): PrepItemUseBooster_IDLE
+033368	0333CC	src/prep_sallycursor.o(.text)	prep_sallycursor(run): PrepMapMenu_OnSave, PrepMapMenu_OnDebug_Unused, PrepScreenProc_SetCameraOnSupply
+0033B8	0034C4	src/proc.o(.text)	proc(run): Proc_FindAfter, Proc_FindAfterWithParent, CountFreeProcs...
+0AECD0	0AEF3C	src/savemenu.o(.text)	savemenu(run): SaveMenu_ResetLcdFormDifficulty, SaveMenuOpenWindowBox, SaveMenuCloseWindowBox...
+042E74	042EDC	src/sio_main.o(.text)	sio_main(run): Sio_LoadingBlendPulse_Loop, Sio_ScrollBgsParallax_Loop
+048778	048798	src/sio_points.o(.text)	sio_points(run): SioPointsSprite_Loop
+5D3EA0	5D3EA8	src/sio_points.o(.data)	sio_points .data
+0432E0	043344	src/sio_teamlist.o(.text)	sio_teamlist(run): CanBuildNewLinkArenaTeam, AnyLinkArenaTeamExists
+04DB80	04DC9C	src/sio_uiutils.o(.text)	sio_uiutils(run): RuleSettingSprites_Interactive_Loop, RuleSettingSprites_Static_Loop, StartRuleSettingSpriteDrawInteractive...
+0B47D4	0B4910	src/soundroom.o(.text)	soundroom(run): SoundRoomUi_0, SoundRoomUi_Loop_MainUiSlideOut, SoundRoomUi_1...
+A9E23C	A9E244	src/soundroom.o(.data)	soundroom .data
+0026D8	0027E0	src/soundwrapper.o(.text)	soundwrapper(run): MusicVc_OnLoop, DelaySong_OnLoop, StartSongDelayed
+0B6A00	0B6E24	src/uiconfig.o(.text)	uiconfig(run): GetGameOption, SetGameOption, PutGameOptionRow
+0501BC	050214	src/uimenu.o(.text)	uimenu(run): MenuAlwaysEnabled, MenuAlwaysDisabled, MenuAlwaysNotShown...
+0C50EC	0C513C	src/worldmap_line_fade.o(.text)	worldmap_line_fade(run): GmapLineFade_OnEnd
+0C20B4	0C21F4	src/worldmap_mapmu.o(.text)	worldmap_mapmu(run): GmMuPrim_OnEnd_Null, GetCharacterClassId, MapMUPrim_MakeUnitForChar...
+0C3380	0C3448	src/worldmap_player_interface.o(.text)	worldmap_player_interface(run): GetGMapPIQuadrantFromOffsets, ApplyGMapPIMinimapUnitPalette, PutGMapPILevelDigits...
+0C7AFC	0C7C28	src/worldmap_rm.o(.text)	worldmap_rm(run): WmDotPalAnim_Loop1, WmDotPalAnim_Loop2, StartWmDotPalAnim...
+0C5830	0C5868	src/worldmap_status_ui.o(.text)	worldmap_status_ui(run): WorldmapStatus_CountAllies

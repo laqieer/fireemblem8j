@@ -5085,3 +5085,862 @@
 	.global Img_EfxPierceNormalEffectBG
 	.set    Img_EfxPierceNormalEffectBG, 0x085FB200
 
+	.global StartSubSpell_efxIvaldiOBJ1
+	.type   StartSubSpell_efxIvaldiOBJ1, %function
+	.thumb_func
+	.set    StartSubSpell_efxIvaldiOBJ1, 0x08068600 + 1
+
+	.global Pal_StoneBg_0
+	.set    Pal_StoneBg_0, 0x086F4504
+
+	.global Pal_StoneBg_1
+	.set    Pal_StoneBg_1, 0x086F4524
+
+	.global gEkrSnowWeather
+	.set    gEkrSnowWeather, 0x0203E0FE
+
+	.global gEkrbattle_8
+	.set    gEkrbattle_8, 0x0201FAD8
+
+	.global gEkrGaugeHit
+	.set    gEkrGaugeHit, 0x0203E1B4
+
+	.global gEkrGaugeDmg
+	.set    gEkrGaugeDmg, 0x0203E1B8
+
+	.global gEkrGaugeCrt
+	.set    gEkrGaugeCrt, 0x0203E1BC
+
+	.global gEkrbattle_7
+	.set    gEkrbattle_7, 0x0201FAC8
+
+	.global ProcScr_efxSPDQuake
+	.set    ProcScr_efxSPDQuake, 0x085E3CE4
+
+	.global gEfxQuakeVecs
+	.set    gEfxQuakeVecs, 0x080DF4C8
+
+	.global gProcScr_SubtitleHelp
+	.set    gProcScr_SubtitleHelp, 0x085C6698
+
+	.global InitSubtitleHelpText
+	.type   InitSubtitleHelpText, %function
+	.thumb_func
+	.set    InitSubtitleHelpText, 0x080353E8 + 1
+
+	.global AsnycKeyStatus
+	.type   AsnycKeyStatus, %function
+	.thumb_func
+	.set    AsnycKeyStatus, 0x0800142C + 1
+
+	.global IsChapterBelongCurGame
+	.type   IsChapterBelongCurGame, %function
+	.thumb_func
+	.set    IsChapterBelongCurGame, 0x080A8E48 + 1
+
+	.global ForEachAdjacentPosition
+	.type   ForEachAdjacentPosition, %function
+	.thumb_func
+	.set    ForEachAdjacentPosition, 0x08024F54 + 1
+
+	.global TerrainTable_MovCost_FlyNormal
+	.set    TerrainTable_MovCost_FlyNormal, 0x088600EE
+
+	.global ForEachAdjacentUnit
+	.type   ForEachAdjacentUnit, %function
+	.thumb_func
+	.set    ForEachAdjacentUnit, 0x08024F20 + 1
+
+	.global GetUnitSupporterCount
+	.type   GetUnitSupporterCount, %function
+	.thumb_func
+	.set    GetUnitSupporterCount, 0x0802815C + 1
+
+	.global GetUnitSupporterInitialExp
+	.type   GetUnitSupporterInitialExp, %function
+	.thumb_func
+	.set    GetUnitSupporterInitialExp, 0x08028320 + 1
+
+	.global GetItemType
+	.type   GetItemType, %function
+	.thumb_func
+	.set    GetItemType, 0x080172F0 + 1
+
+	.global GetItemRequiredExp
+	.type   GetItemRequiredExp, %function
+	.thumb_func
+	.set    GetItemRequiredExp, 0x08017460 + 1
+
+	.global GetAutoleveledStatIncrease
+	.type   GetAutoleveledStatIncrease, %function
+	.thumb_func
+	.set    GetAutoleveledStatIncrease, 0x0802B90C + 1
+
+	.global BattleInitItemEffect
+	.type   BattleInitItemEffect, %function
+	.thumb_func
+	.set    BattleInitItemEffect, 0x0802CA5C + 1
+
+	.global AddUnitHp
+	.type   AddUnitHp, %function
+	.thumb_func
+	.set    AddUnitHp, 0x0801907C + 1
+
+	.global BattleApplyItemEffect
+	.type   BattleApplyItemEffect, %function
+	.thumb_func
+	.set    BattleApplyItemEffect, 0x0802CB8C + 1
+
+	.global BeginBattleAnimations
+	.type   BeginBattleAnimations, %function
+	.thumb_func
+	.set    BeginBattleAnimations, 0x0802C94C + 1
+
+	.global gBattleHitIterator
+	.set    gBattleHitIterator, 0x0203A604
+
+	.global GetUnitMaxHp
+	.type   GetUnitMaxHp, %function
+	.thumb_func
+	.set    GetUnitMaxHp, 0x08018EA4 + 1
+
+	.global SetUnitHp
+	.type   SetUnitHp, %function
+	.thumb_func
+	.set    SetUnitHp, 0x08019040 + 1
+
+	.global SetUnitStatus
+	.type   SetUnitStatus, %function
+	.thumb_func
+	.set    SetUnitStatus, 0x08017680 + 1
+
+	.global StartAvailableDoorTileEvent
+	.type   StartAvailableDoorTileEvent, %function
+	.thumb_func
+	.set    StartAvailableDoorTileEvent, 0x08085544 + 1
+
+	.global StartAvailableChestTileEvent
+	.type   StartAvailableChestTileEvent, %function
+	.thumb_func
+	.set    StartAvailableChestTileEvent, 0x08085500 + 1
+
+	.global BgAffinRotScaling
+	.type   BgAffinRotScaling, %function
+	.thumb_func
+	.set    BgAffinRotScaling, 0x080B289C + 1
+
+	.global BgAffinScaling
+	.type   BgAffinScaling, %function
+	.thumb_func
+	.set    BgAffinScaling, 0x080B2924 + 1
+
+	.global BgAffinAnchoring
+	.type   BgAffinAnchoring, %function
+	.thumb_func
+	.set    BgAffinAnchoring, 0x080B296C + 1
+
+	.global Img_ChapterIntro_Fog
+	.set    Img_ChapterIntro_Fog, 0x08BB1F88
+
+	.global Pal_ChapterIntro_Fog
+	.set    Pal_ChapterIntro_Fog, 0x08BB28A8
+
+	.global Tsa_ChapterIntro_Fog
+	.set    Tsa_ChapterIntro_Fog, 0x08BB272C
+
+	.global ChapterIntro_LightBurst_Init
+	.type   ChapterIntro_LightBurst_Init, %function
+	.thumb_func
+	.set    ChapterIntro_LightBurst_Init, 0x080204EC + 1
+
+	.global RestoreBgm
+	.type   RestoreBgm, %function
+	.thumb_func
+	.set    RestoreBgm, 0x080025C0 + 1
+
+	.global OverrideBgm
+	.type   OverrideBgm, %function
+	.thumb_func
+	.set    OverrideBgm, 0x08002570 + 1
+
+	.global Check3rdTraineeEnabled
+	.type   Check3rdTraineeEnabled, %function
+	.thumb_func
+	.set    Check3rdTraineeEnabled, 0x080D19A0 + 1
+
+	.global ProcScr_ClassChgMenuSel
+	.set    ProcScr_ClassChgMenuSel, 0x08BABA58
+
+	.global AiTryDoDanceAdjacent
+	.type   AiTryDoDanceAdjacent, %function
+	.thumb_func
+	.set    AiTryDoDanceAdjacent, 0x0803ECB8 + 1
+
+	.global AiTryDoStealAdjacent
+	.type   AiTryDoStealAdjacent, %function
+	.thumb_func
+	.set    AiTryDoStealAdjacent, 0x0803EDDC + 1
+
+	.global AiTryDoCombatInRangeFromPosition
+	.type   AiTryDoCombatInRangeFromPosition, %function
+	.thumb_func
+	.set    AiTryDoCombatInRangeFromPosition, 0x0803EE40 + 1
+
+	.global AiRandomMove
+	.type   AiRandomMove, %function
+	.thumb_func
+	.set    AiRandomMove, 0x0803AB9C + 1
+
+	.global AiTryMoveTowardsEscape
+	.type   AiTryMoveTowardsEscape, %function
+	.thumb_func
+	.set    AiTryMoveTowardsEscape, 0x0803E760 + 1
+
+	.global gAiStealPriorityItemList
+	.set    gAiStealPriorityItemList, 0x085D22AC
+
+	.global InitAiMoveMapForUnit
+	.type   InitAiMoveMapForUnit, %function
+	.thumb_func
+	.set    InitAiMoveMapForUnit, 0x08040DE8 + 1
+
+	.global GenerateUnitExtendedMovementMapOnRangeNeglectDoor
+	.type   GenerateUnitExtendedMovementMapOnRangeNeglectDoor, %function
+	.thumb_func
+	.set    GenerateUnitExtendedMovementMapOnRangeNeglectDoor, 0x08040F08 + 1
+
+	.global AiFindClosestUnlockPosition
+	.type   AiFindClosestUnlockPosition, %function
+	.thumb_func
+	.set    AiFindClosestUnlockPosition, 0x0803AFFC + 1
+
+	.global GenerateExtendedMovementMapOnRangeNeglectDoor
+	.type   GenerateExtendedMovementMapOnRangeNeglectDoor, %function
+	.thumb_func
+	.set    GenerateExtendedMovementMapOnRangeNeglectDoor, 0x08040F3C + 1
+
+	.global IsCreditsBlendCGActive
+	.type   IsCreditsBlendCGActive, %function
+	.thumb_func
+	.set    IsCreditsBlendCGActive, 0x080C8FC8 + 1
+
+	.global StartBlendCreditsCGMaybe
+	.type   StartBlendCreditsCGMaybe, %function
+	.thumb_func
+	.set    StartBlendCreditsCGMaybe, 0x080C8FAC + 1
+
+	.global gUnk_33
+	.set    gUnk_33, 0x0201C5D4
+
+	.global SetupBackgrounds
+	.type   SetupBackgrounds, %function
+	.thumb_func
+	.set    SetupBackgrounds, 0x08001ACC + 1
+
+	.global Pal_StaffReelEnt_EndingFin
+	.set    Pal_StaffReelEnt_EndingFin, 0x08AC73E8
+
+	.global gEndingCredits_1
+	.set    gEndingCredits_1, 0x081F6C8C
+
+	.global EndTalk
+	.type   EndTalk, %function
+	.thumb_func
+	.set    EndTalk, 0x08006980 + 1
+
+	.global EndAllBoxDialogue
+	.type   EndAllBoxDialogue, %function
+	.thumb_func
+	.set    EndAllBoxDialogue, 0x0808DE84 + 1
+
+	.global ChangeUnitSpritePalette
+	.type   ChangeUnitSpritePalette, %function
+	.thumb_func
+	.set    ChangeUnitSpritePalette, 0x0800BFC8 + 1
+
+	.global ResumeTalk
+	.type   ResumeTalk, %function
+	.thumb_func
+	.set    ResumeTalk, 0x08006DF4 + 1
+
+	.global IsTalkActive
+	.type   IsTalkActive, %function
+	.thumb_func
+	.set    IsTalkActive, 0x080088CC + 1
+
+	.global IsTalkLocked
+	.type   IsTalkLocked, %function
+	.thumb_func
+	.set    IsTalkLocked, 0x08006DDC + 1
+
+	.global CgTextExists
+	.type   CgTextExists, %function
+	.thumb_func
+	.set    CgTextExists, 0x08091558 + 1
+
+	.global gProcScr_BoxDialogue
+	.set    gProcScr_BoxDialogue, 0x08A73798
+
+	.global GetTalkChoiceResult
+	.type   GetTalkChoiceResult, %function
+	.thumb_func
+	.set    GetTalkChoiceResult, 0x080088FC + 1
+
+	.global ClearTalkBubble
+	.type   ClearTalkBubble, %function
+	.thumb_func
+	.set    ClearTalkBubble, 0x080080A4 + 1
+
+	.global ResetFaces
+	.type   ResetFaces, %function
+	.thumb_func
+	.set    ResetFaces, 0x08005430 + 1
+
+	.global ClearTalkFaceRefs
+	.type   ClearTalkFaceRefs, %function
+	.thumb_func
+	.set    ClearTalkFaceRefs, 0x080066EC + 1
+
+	.global FaceExists
+	.type   FaceExists, %function
+	.thumb_func
+	.set    FaceExists, 0x080088E4 + 1
+
+	.global gEventscr_0
+	.set    gEventscr_0, 0x085B9BCC
+
+	.global InitBattleUnit
+	.type   InitBattleUnit, %function
+	.thumb_func
+	.set    InitBattleUnit, 0x0802A4F0 + 1
+
+	.global SetBattleUnitWeaponBallista
+	.type   SetBattleUnitWeaponBallista, %function
+	.thumb_func
+	.set    SetBattleUnitWeaponBallista, 0x0802A884 + 1
+
+	.global SetBattleUnitWeapon
+	.type   SetBattleUnitWeapon, %function
+	.thumb_func
+	.set    SetBattleUnitWeapon, 0x0802A69C + 1
+
+	.global BattleInitTargetCanCounter
+	.type   BattleInitTargetCanCounter, %function
+	.thumb_func
+	.set    BattleInitTargetCanCounter, 0x0802C77C + 1
+
+	.global BattleApplyWeaponTriangleEffect
+	.type   BattleApplyWeaponTriangleEffect, %function
+	.thumb_func
+	.set    BattleApplyWeaponTriangleEffect, 0x0802C6F8 + 1
+
+	.global DisableAllLightRunes
+	.type   DisableAllLightRunes, %function
+	.thumb_func
+	.set    DisableAllLightRunes, 0x0802EA48 + 1
+
+	.global SetBattleUnitTerrainBonusesAuto
+	.type   SetBattleUnitTerrainBonusesAuto, %function
+	.thumb_func
+	.set    SetBattleUnitTerrainBonusesAuto, 0x0802A648 + 1
+
+	.global BattleGenerate
+	.type   BattleGenerate, %function
+	.thumb_func
+	.set    BattleGenerate, 0x0802A324 + 1
+
+	.global EnableAllLightRunes
+	.type   EnableAllLightRunes, %function
+	.thumb_func
+	.set    EnableAllLightRunes, 0x0802EA88 + 1
+
+	.global BattleUnitTargetCheckCanCounter
+	.type   BattleUnitTargetCheckCanCounter, %function
+	.thumb_func
+	.set    BattleUnitTargetCheckCanCounter, 0x0802C678 + 1
+
+	.global BattleUnitTargetSetEquippedWeapon
+	.type   BattleUnitTargetSetEquippedWeapon, %function
+	.thumb_func
+	.set    BattleUnitTargetSetEquippedWeapon, 0x0802C624 + 1
+
+	.global WMLoc_GetNextLocId
+	.type   WMLoc_GetNextLocId, %function
+	.thumb_func
+	.set    WMLoc_GetNextLocId, 0x080C0414 + 1
+
+	.global ResetGmStoryNode
+	.type   ResetGmStoryNode, %function
+	.thumb_func
+	.set    ResetGmStoryNode, 0x080C1DC0 + 1
+
+	.global StartGmBaseEntry
+	.type   StartGmBaseEntry, %function
+	.thumb_func
+	.set    StartGmBaseEntry, 0x080C48D0 + 1
+
+	.global gWMPathData
+	.set    gWMPathData, 0x081F6340
+
+	.global GmBaseEntryExists
+	.type   GmBaseEntryExists, %function
+	.thumb_func
+	.set    GmBaseEntryExists, 0x080C4918 + 1
+
+	.global EndGmBaseEntry
+	.type   EndGmBaseEntry, %function
+	.thumb_func
+	.set    EndGmBaseEntry, 0x080C4908 + 1
+
+	.global gBattleForecast_0
+	.set    gBattleForecast_0, 0x085C8D58
+
+	.global gBattleForecast_1
+	.set    gBattleForecast_1, 0x085C8E10
+
+	.global FaceChibiSpr_OnIdle
+	.type   FaceChibiSpr_OnIdle, %function
+	.thumb_func
+	.set    FaceChibiSpr_OnIdle, 0x080059D8 + 1
+
+	.global BattleUnit_ShouldDisplayWRankUp
+	.type   BattleUnit_ShouldDisplayWRankUp, %function
+	.thumb_func
+	.set    BattleUnit_ShouldDisplayWRankUp, 0x0807CB90 + 1
+
+	.global NewPopup_WRankIncrease
+	.type   NewPopup_WRankIncrease, %function
+	.thumb_func
+	.set    NewPopup_WRankIncrease, 0x080117F0 + 1
+
+	.global GetBattleInfoPalByFaction
+	.type   GetBattleInfoPalByFaction, %function
+	.thumb_func
+	.set    GetBattleInfoPalByFaction, 0x0807E114 + 1
+
+	.global PutStringCentered
+	.type   PutStringCentered, %function
+	.thumb_func
+	.set    PutStringCentered, 0x080143EC + 1
+
+	.global MapInfoBox_DrawHp
+	.type   MapInfoBox_DrawHp, %function
+	.thumb_func
+	.set    MapInfoBox_DrawHp, 0x0807E098 + 1
+
+	.global TsaSet_MapBattleBoxGfx
+	.set    TsaSet_MapBattleBoxGfx, 0x08A13CF8
+
+	.global SetScanlineBufWinR
+	.type   SetScanlineBufWinR, %function
+	.thumb_func
+	.set    SetScanlineBufWinR, 0x0808471C + 1
+
+	.global SetScanlineBufWinL
+	.type   SetScanlineBufWinL, %function
+	.thumb_func
+	.set    SetScanlineBufWinL, 0x080846FC + 1
+
+	.global OpAnim1_UpdateScroll
+	.type   OpAnim1_UpdateScroll, %function
+	.thumb_func
+	.set    OpAnim1_UpdateScroll, 0x080CC178 + 1
+
+	.global Img_OpAnimGenericCharacterBG
+	.set    Img_OpAnimGenericCharacterBG, 0x08B52694
+
+	.global Tsa_OpAnimGenericCharacterBG
+	.set    Tsa_OpAnimGenericCharacterBG, 0x08B52DF4
+
+	.global Img_OpAnimJoshua
+	.set    Img_OpAnimJoshua, 0x08B62E64
+
+	.global Tsa_OpAnimJoshua
+	.set    Tsa_OpAnimJoshua, 0x08B65920
+
+	.global Img_OpAnimJoshua2
+	.set    Img_OpAnimJoshua2, 0x08B64938
+
+	.global Tsa_OpAnimJoshua2
+	.set    Tsa_OpAnimJoshua2, 0x08B65D08
+
+	.global Img_OpAnimShiningRing
+	.set    Img_OpAnimShiningRing, 0x08B8CF34
+
+	.global Tsa_OpAnimShiningRing
+	.set    Tsa_OpAnimShiningRing, 0x08B8DE54
+
+	.global gUnkData_98
+	.set    gUnkData_98, 0x08B3F650
+
+	.global gUnkData_99
+	.set    gUnkData_99, 0x08B3F670
+
+	.global Img_OpAnimLArachel
+	.set    Img_OpAnimLArachel, 0x08B65F08
+
+	.global Tsa_OpAnimLArachel
+	.set    Tsa_OpAnimLArachel, 0x08B68898
+
+	.global Img_OpAnimLArachel2
+	.set    Img_OpAnimLArachel2, 0x08B67A80
+
+	.global Tsa_OpAnimLArachel2
+	.set    Tsa_OpAnimLArachel2, 0x08B68BC8
+
+	.global Img_OpAnimSeth
+	.set    Img_OpAnimSeth, 0x08B68E3C
+
+	.global Tsa_OpAnimSeth
+	.set    Tsa_OpAnimSeth, 0x08B6BA34
+
+	.global Img_OpAnimSeth2
+	.set    Img_OpAnimSeth2, 0x08B6AA10
+
+	.global Tsa_OpAnimSeth2
+	.set    Tsa_OpAnimSeth2, 0x08B6BD34
+
+	.global Img_OpAnimMyrrh
+	.set    Img_OpAnimMyrrh, 0x08B6BFDC
+
+	.global Tsa_OpAnimMyrrh
+	.set    Tsa_OpAnimMyrrh, 0x08B6EA5C
+
+	.global Img_OpAnimMyrrh2
+	.set    Img_OpAnimMyrrh2, 0x08B6DC04
+
+	.global Tsa_OpAnimMyrrh2
+	.set    Tsa_OpAnimMyrrh2, 0x08B6EE04
+
+	.global Img_OpAnimSaleh
+	.set    Img_OpAnimSaleh, 0x08B6F004
+
+	.global Tsa_OpAnimSaleh
+	.set    Tsa_OpAnimSaleh, 0x08B71EE0
+
+	.global Img_OpAnimSaleh2
+	.set    Img_OpAnimSaleh2, 0x08B70CC4
+
+	.global Tsa_OpAnimSaleh2
+	.set    Tsa_OpAnimSaleh2, 0x08B7229C
+
+	.global Img_OpAnimTethys
+	.set    Img_OpAnimTethys, 0x08B724D0
+
+	.global Tsa_OpAnimTethys
+	.set    Tsa_OpAnimTethys, 0x08B751CC
+
+	.global Img_OpAnimTethys2
+	.set    Img_OpAnimTethys2, 0x08B73CE4
+
+	.global Tsa_OpAnimTethys2
+	.set    Tsa_OpAnimTethys2, 0x08B755D4
+
+	.global BlitU8TileMapData
+	.type   BlitU8TileMapData, %function
+	.thumb_func
+	.set    BlitU8TileMapData, 0x08001508 + 1
+
+	.global Tsa_UnkData_6
+	.set    Tsa_UnkData_6, 0x08BB1DBC
+
+	.global SetNextVCount
+	.type   SetNextVCount, %function
+	.thumb_func
+	.set    SetNextVCount, 0x080012B8 + 1
+
+	.global SetInterrupt_LCDVCountMatch
+	.type   SetInterrupt_LCDVCountMatch, %function
+	.thumb_func
+	.set    SetInterrupt_LCDVCountMatch, 0x0800125C + 1
+
+	.global GetCurrentBgmSong
+	.type   GetCurrentBgmSong, %function
+	.thumb_func
+	.set    GetCurrentBgmSong, 0x080021A8 + 1
+
+	.global GetCurrentMapMusicIndex
+	.type   GetCurrentMapMusicIndex, %function
+	.thumb_func
+	.set    GetCurrentMapMusicIndex, 0x08015FD4 + 1
+
+	.global CheckInLinkArena
+	.type   CheckInLinkArena, %function
+	.thumb_func
+	.set    CheckInLinkArena, 0x08042E1C + 1
+
+	.global Img_PrepHelpButtonSprites
+	.set    Img_PrepHelpButtonSprites, 0x08A95E80
+
+	.global GetCursorQuadrant
+	.type   GetCursorQuadrant, %function
+	.thumb_func
+	.set    GetCursorQuadrant, 0x0808DEDC + 1
+
+	.global StartSemiCenteredOrphanMenu
+	.type   StartSemiCenteredOrphanMenu, %function
+	.thumb_func
+	.set    StartSemiCenteredOrphanMenu, 0x080503C0 + 1
+
+	.global gUnitActionMenuDef
+	.set    gUnitActionMenuDef, 0x085C56D0
+
+	.global StartAfterUnitMovedEvent
+	.type   StartAfterUnitMovedEvent, %function
+	.thumb_func
+	.set    StartAfterUnitMovedEvent, 0x080867D8 + 1
+
+	.global BrownTextBox_SetBlendFlag
+	.type   BrownTextBox_SetBlendFlag, %function
+	.thumb_func
+	.set    BrownTextBox_SetBlendFlag, 0x08011B08 + 1
+
+	.global ProcScr_BrownTextBox
+	.set    ProcScr_BrownTextBox, 0x085BA254
+
+	.global EndFaceById
+	.type   EndFaceById, %function
+	.thumb_func
+	.set    EndFaceById, 0x08005660 + 1
+
+	.global ProcScr_PrepMenuDescHandler
+	.set    ProcScr_PrepMenuDescHandler, 0x08A93FB8
+
+	.global StartPrepItemTradeScreenProcAtSlot
+	.type   StartPrepItemTradeScreenProcAtSlot, %function
+	.thumb_func
+	.set    StartPrepItemTradeScreenProcAtSlot, 0x0809E124 + 1
+
+	.global gPrepScreenItemList
+	.set    gPrepScreenItemList, 0x020122D4
+
+	.global ProcScr_PrepItemListScreen
+	.set    ProcScr_PrepItemListScreen, 0x08A95168
+
+	.global PrepItemDrawPopupBox
+	.type   PrepItemDrawPopupBox, %function
+	.thumb_func
+	.set    PrepItemDrawPopupBox, 0x0809C5EC + 1
+
+	.global EndPrepScreenMenu_
+	.type   EndPrepScreenMenu_, %function
+	.thumb_func
+	.set    EndPrepScreenMenu_, 0x0803325C + 1
+
+	.global StartOrphanMenu
+	.type   StartOrphanMenu, %function
+	.thumb_func
+	.set    StartOrphanMenu, 0x0804F970 + 1
+
+	.global gDebugMenuDef
+	.set    gDebugMenuDef, 0x085C5520
+
+	.global LoadUiFrameGraphics
+	.type   LoadUiFrameGraphics, %function
+	.thumb_func
+	.set    LoadUiFrameGraphics, 0x0804F8F4 + 1
+
+	.global LoadObjUIGfx
+	.type   LoadObjUIGfx, %function
+	.thumb_func
+	.set    LoadObjUIGfx, 0x0801569C + 1
+
+	.global SaveMenuCopyPalette
+	.type   SaveMenuCopyPalette, %function
+	.thumb_func
+	.set    SaveMenuCopyPalette, 0x080AF270 + 1
+
+	.global SaveMenuInitSubBoxText
+	.type   SaveMenuInitSubBoxText, %function
+	.thumb_func
+	.set    SaveMenuInitSubBoxText, 0x080B0250 + 1
+
+	.global SaveMenuPutChapterTitle
+	.type   SaveMenuPutChapterTitle, %function
+	.thumb_func
+	.set    SaveMenuPutChapterTitle, 0x080AD4B4 + 1
+
+	.global SaveMenuInitSlotPalette
+	.type   SaveMenuInitSlotPalette, %function
+	.thumb_func
+	.set    SaveMenuInitSlotPalette, 0x080B083C + 1
+
+	.global Pal_SaveMenuBG
+	.set    Pal_SaveMenuBG, 0x08AA2D34
+
+	.global Img_SaveMenuBG
+	.set    Img_SaveMenuBG, 0x08A9E5C0
+
+	.global Tsa_SaveMenuBG
+	.set    Tsa_SaveMenuBG, 0x08AA2E34
+
+	.global Pal_MainMenuBgFog
+	.set    Pal_MainMenuBgFog, 0x08AA3840
+
+	.global Img_MainMenuBgFog
+	.set    Img_MainMenuBgFog, 0x08AA32E8
+
+	.global Tsa_MainMenuBgFog
+	.set    Tsa_MainMenuBgFog, 0x08AA3860
+
+	.global Img_SaveScreenSprits
+	.set    Img_SaveScreenSprits, 0x08AA39DC
+
+	.global Pal_SaveScreenSprits
+	.set    Pal_SaveScreenSprits, 0x08AA51BC
+
+	.global Pal_MenuMainObjs_0
+	.set    Pal_MenuMainObjs_0, 0x08AA7310
+
+	.global Img_GameMainMenuObjs
+	.set    Img_GameMainMenuObjs, 0x08AA59A0
+
+	.global gLinkArenaTeamList
+	.set    gLinkArenaTeamList, 0x0203DB78
+
+	.global DisplayFrozenUiHand
+	.type   DisplayFrozenUiHand, %function
+	.thumb_func
+	.set    DisplayFrozenUiHand, 0x0804F5D4 + 1
+
+	.global PutLinkArenaButtonSpriteAt
+	.type   PutLinkArenaButtonSpriteAt, %function
+	.thumb_func
+	.set    PutLinkArenaButtonSpriteAt, 0x0804D058 + 1
+
+	.global SpriteArray_RuleSettingIcons
+	.set    SpriteArray_RuleSettingIcons, 0x085D4B80
+
+	.global ProcScr_RuleSettingSpriteDraw_Interactive
+	.set    ProcScr_RuleSettingSpriteDraw_Interactive, 0x085D4B8C
+
+	.global ProcScr_RuleSettingSpriteDraw_Static
+	.set    ProcScr_RuleSettingSpriteDraw_Static, 0x085D4BA4
+
+	.global gUnkData_11
+	.set    gUnkData_11, 0x085D80C8
+
+	.global gUnk_Sio_22
+	.set    gUnk_Sio_22, 0x0203DDD8
+
+	.global SoundRoom_DrawCompletionPercent
+	.type   SoundRoom_DrawCompletionPercent, %function
+	.thumb_func
+	.set    SoundRoom_DrawCompletionPercent, 0x080B40F0 + 1
+
+	.global HideSysHandCursor
+	.type   HideSysHandCursor, %function
+	.thumb_func
+	.set    HideSysHandCursor, 0x080B2004 + 1
+
+	.global gMenuSoundroom_0
+	.set    gMenuSoundroom_0, 0x08AAA658
+
+	.global gMenuSoundroom_1
+	.set    gMenuSoundroom_1, 0x08AAA738
+
+	.global gMenuSoundroom_4
+	.set    gMenuSoundroom_4, 0x08AAAABC
+
+	.global gMenuSoundroom_2
+	.set    gMenuSoundroom_2, 0x08AAA934
+
+	.global SoundRoom_DrawSlidingUi
+	.type   SoundRoom_DrawSlidingUi, %function
+	.thumb_func
+	.set    SoundRoom_DrawSlidingUi, 0x080B46D4 + 1
+
+	.global SoundRoom_StartNextSong_Positive
+	.type   SoundRoom_StartNextSong_Positive, %function
+	.thumb_func
+	.set    SoundRoom_StartNextSong_Positive, 0x080B3D00 + 1
+
+	.global SoundRoom_StartNextSong_Negative
+	.type   SoundRoom_StartNextSong_Negative, %function
+	.thumb_func
+	.set    SoundRoom_StartNextSong_Negative, 0x080B3D60 + 1
+
+	.global TryDrawSoundRoomSongTitle
+	.type   TryDrawSoundRoomSongTitle, %function
+	.thumb_func
+	.set    TryDrawSoundRoomSongTitle, 0x080B4498 + 1
+
+	.global m4aSongNumStop
+	.type   m4aSongNumStop, %function
+	.thumb_func
+	.set    m4aSongNumStop, 0x080D4FC0 + 1
+
+	.global PlaySong
+	.type   PlaySong, %function
+	.thumb_func
+	.set    PlaySong, 0x080027E0 + 1
+
+	.global DrawGameOptionIcon
+	.type   DrawGameOptionIcon, %function
+	.thumb_func
+	.set    DrawGameOptionIcon, 0x080B6320 + 1
+
+	.global DrawGameOptionText
+	.type   DrawGameOptionText, %function
+	.thumb_func
+	.set    DrawGameOptionText, 0x080B6404 + 1
+
+	.global DrawOptionValueTexts
+	.type   DrawOptionValueTexts, %function
+	.thumb_func
+	.set    DrawOptionValueTexts, 0x080B6470 + 1
+
+	.global LoadHelpBoxGfx
+	.type   LoadHelpBoxGfx, %function
+	.thumb_func
+	.set    LoadHelpBoxGfx, 0x0808BB14 + 1
+
+	.global gCharacterData
+	.set    gCharacterData, 0x088582BC
+
+	.global MapUnitC_DeleteGmapUnit
+	.type   MapUnitC_DeleteGmapUnit, %function
+	.thumb_func
+	.set    MapUnitC_DeleteGmapUnit, 0x080BFD3C + 1
+
+	.global NewMapUnit
+	.type   NewMapUnit, %function
+	.thumb_func
+	.set    NewMapUnit, 0x080BFC20 + 1
+
+	.global MapUnitC_SetPosition
+	.type   MapUnitC_SetPosition, %function
+	.thumb_func
+	.set    MapUnitC_SetPosition, 0x080BFD64 + 1
+
+	.global MapUnitC_SetAnimId
+	.type   MapUnitC_SetAnimId, %function
+	.thumb_func
+	.set    MapUnitC_SetAnimId, 0x080BFDB4 + 1
+
+	.global gWorldmapMinimap_8
+	.set    gWorldmapMinimap_8, 0x08B1E6BC
+
+	.global gWorldmapMinimap_9
+	.set    gWorldmapMinimap_9, 0x08B1E6DC
+
+	.global gWorldmapMinimap_10
+	.set    gWorldmapMinimap_10, 0x08B1E6FC
+
+	.global gWorldmapMinimap_11
+	.set    gWorldmapMinimap_11, 0x08B1E71C
+
+	.global BlendWmDotPalette
+	.type   BlendWmDotPalette, %function
+	.thumb_func
+	.set    BlendWmDotPalette, 0x080C7A38 + 1
+
+	.global Pal_WmPlaceDot_Standard
+	.set    Pal_WmPlaceDot_Standard, 0x08B2699C
+
+	.global Pal_WmPlaceDot_Highlight
+	.set    Pal_WmPlaceDot_Highlight, 0x08B2697C
+
+	.global ProcScr_WmDotPalAnim
+	.set    ProcScr_WmDotPalAnim, 0x08AC2670
+
