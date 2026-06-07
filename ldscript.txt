@@ -94,6 +94,7 @@ SECTIONS
         asm/baserom.o(.gap_32);
         src/bmcamadjust.o(.text);
         asm/baserom.o(.gap_33);
+        src/convoymenu.o(.text);
         src/fogmap.o(.text);
         src/menuitempanel.o(.text);
         asm/baserom.o(.gap_34);

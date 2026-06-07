@@ -102,7 +102,7 @@
 	.incbin "baserom.gba", 0x1DA28, 0xBC	@ 0x01DA28..0x01DAE4
 
 	.section .gap_33, "ax", %progbits
-	.incbin "baserom.gba", 0x1DB4C, 0x3F0	@ 0x01DB4C..0x01DF3C
+	.incbin "baserom.gba", 0x1DB4C, 0x3A4	@ 0x01DB4C..0x01DEF0
 
 	.section .gap_34, "ax", %progbits
 	.incbin "baserom.gba", 0x1E3A4, 0x39C	@ 0x01E3A4..0x01E740
