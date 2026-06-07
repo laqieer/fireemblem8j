@@ -6053,3 +6053,13 @@
 	.thumb_func
 	.set    GetEkrDragonStatusAttr, 0x08071FF8 + 1
 
+	.global DrawBattlePopup
+	.type   DrawBattlePopup, %function
+	.thumb_func
+	.set    DrawBattlePopup, 0x080780DC + 1
+
+	.global EfxPlaySound5AVol100
+	.type   EfxPlaySound5AVol100, %function
+	.thumb_func
+	.set    EfxPlaySound5AVol100, 0x08077F8C + 1
+

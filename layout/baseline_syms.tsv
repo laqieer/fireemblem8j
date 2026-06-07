@@ -1542,3 +1542,5 @@ Img_DemoKingTunkFace	088539E0	data	banim-ekrdragon-demonking
 BanimScr_Ekrdragonfx_3	0884886C	data	banim-ekrdragon-demonking
 Img_DemoKingTunkFace2	08854BA4	data	banim-ekrdragon-demonking
 GetEkrDragonStatusAttr	08071FF8	thumb	banim-ekrdragonstatus
+DrawBattlePopup	080780DC	thumb	banim-ekrpopup
+EfxPlaySound5AVol100	08077F8C	thumb	banim-ekrpopup
