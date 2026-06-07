@@ -1167,3 +1167,10 @@ gWorkingBmMap	03004940	data	bmidoten
 SetPalFadeStop	08013A50	thumb	mapanim_spellassocfx
 ProcScr_MapAnimSpellAssocResetPal	08A146D4	data	mapanim_spellassocfx
 ProcScr_MapAnimBgShaker	08A146EC	data	mapanim_spellassocfx
+EndPlayerPhaseSideWindows	0808F44C	thumb	uidebug
+ExecUnitDefaultPromotionAndHide	0802F680	thumb	uidebug
+Proc_UnblockEachMarked	08002F64	thumb	worldmap_main
+MapUnitC_SetGfxNeedsUpdate	080BFED4	thumb	worldmap_main
+Proc_BlockEachMarked	08002F3C	thumb	worldmap_main
+ProcScr_Config_WorldMap	08AAFB64	data	worldmap_main
+ProcScr_WorldmapStatusUi	08AC2278	data	worldmap_main

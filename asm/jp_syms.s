@@ -4666,3 +4666,34 @@
 	.global ProcScr_MapAnimBgShaker
 	.set    ProcScr_MapAnimBgShaker, 0x08A146EC
 
+	.global EndPlayerPhaseSideWindows
+	.type   EndPlayerPhaseSideWindows, %function
+	.thumb_func
+	.set    EndPlayerPhaseSideWindows, 0x0808F44C + 1
+
+	.global ExecUnitDefaultPromotionAndHide
+	.type   ExecUnitDefaultPromotionAndHide, %function
+	.thumb_func
+	.set    ExecUnitDefaultPromotionAndHide, 0x0802F680 + 1
+
+	.global Proc_UnblockEachMarked
+	.type   Proc_UnblockEachMarked, %function
+	.thumb_func
+	.set    Proc_UnblockEachMarked, 0x08002F64 + 1
+
+	.global MapUnitC_SetGfxNeedsUpdate
+	.type   MapUnitC_SetGfxNeedsUpdate, %function
+	.thumb_func
+	.set    MapUnitC_SetGfxNeedsUpdate, 0x080BFED4 + 1
+
+	.global Proc_BlockEachMarked
+	.type   Proc_BlockEachMarked, %function
+	.thumb_func
+	.set    Proc_BlockEachMarked, 0x08002F3C + 1
+
+	.global ProcScr_Config_WorldMap
+	.set    ProcScr_Config_WorldMap, 0x08AAFB64
+
+	.global ProcScr_WorldmapStatusUi
+	.set    ProcScr_WorldmapStatusUi, 0x08AC2278
+
