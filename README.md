@@ -1,5 +1,10 @@
 # Fire Emblem: Seima no Kouseki (聖魔の光石)
 
+[![code decompiled](https://img.shields.io/endpoint?url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Ffireemblem8j%2Fjp%2Fdefault%2F%3Fmode%3Dshield%26measure%3Dcode&label=code%20decompiled)](https://laqieer.github.io/fe-decomp-portal/)
+[![functions decompiled](https://img.shields.io/endpoint?url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Ffireemblem8j%2Fjp%2Fdefault%2F%3Fmode%3Dshield%26measure%3Dfunctions&label=functions)](https://laqieer.github.io/fe-decomp-portal/)
+[![Decomp progress](https://github.com/laqieer/fireemblem8j/actions/workflows/progress.yml/badge.svg)](https://github.com/laqieer/fireemblem8j/actions/workflows/progress.yml)
+[![FE Decomp Portal](https://img.shields.io/badge/progress%20charts-FE%20Decomp%20Portal-2ea44f)](https://laqieer.github.io/fe-decomp-portal/)
+
 A decompilation / disassembly of **Fire Emblem: The Sacred Stones — Japanese version**
 (`Fire Emblem - Seima no Kouseki`, game code `BE8J`).
 
@@ -18,8 +23,10 @@ data (text, fonts, menus, save versioning).
 The project starts from a **byte-perfect raw-ROM baseline**: `asm/baserom.s`
 incbins the whole ROM, so `make compare` reports `OK` from day one. Progress is
 measured by how much of that incbin has been replaced with real decompiled C
-(`src/`) and descriptively-named data — see [`docs/strategy.md`](docs/strategy.md)
-and the [project board](https://github.com/users/laqieer/projects/3).
+(`src/`) and descriptively-named data — see [`docs/strategy.md`](docs/strategy.md),
+the [project board](https://github.com/users/laqieer/projects/3), and the live
+progress charts on the [**FE Decomp Portal**](https://laqieer.github.io/fe-decomp-portal/)
+(alongside fe8u / fe6 / fe7j).
 
 ## Building
 
