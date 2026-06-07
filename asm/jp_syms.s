@@ -4610,3 +4610,42 @@
 	.thumb_func
 	.set    ProcLightRuneAnim_Loop, 0x080212E8 + 1
 
+	.global AnimScr_EfxBerserk1
+	.set    AnimScr_EfxBerserk1, 0x086B9E8C
+
+	.global Pal_BerserkSprites
+	.set    Pal_BerserkSprites, 0x086B97E8
+
+	.global Img_BerserkSprites_A
+	.set    Img_BerserkSprites_A, 0x086B8F30
+
+	.global AnimScr_EfxBerserk2
+	.set    AnimScr_EfxBerserk2, 0x086B9EA0
+
+	.global AnimScr_EfxBerserk3
+	.set    AnimScr_EfxBerserk3, 0x086B9EB4
+
+	.global AnimScr_EfxBerserk4
+	.set    AnimScr_EfxBerserk4, 0x086B9EC8
+
+	.global AnimScr_EfxBerserk5
+	.set    AnimScr_EfxBerserk5, 0x086B9EDC
+
+	.global AnimScr_EfxBerserk6
+	.set    AnimScr_EfxBerserk6, 0x086BA250
+
+	.global Img_BerserkSprites_B
+	.set    Img_BerserkSprites_B, 0x086B93C8
+
+	.global AnimScr_EfxBerserk7
+	.set    AnimScr_EfxBerserk7, 0x086BA25C
+
+	.global AnimScr_EfxBerserk8
+	.set    AnimScr_EfxBerserk8, 0x086BA268
+
+	.global AnimScr_EfxBerserk9
+	.set    AnimScr_EfxBerserk9, 0x086BA274
+
+	.global AnimScr_EfxBerserk10
+	.set    AnimScr_EfxBerserk10, 0x086BA280
+

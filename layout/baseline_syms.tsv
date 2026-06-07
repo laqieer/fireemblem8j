@@ -1149,3 +1149,16 @@ Pal_LightRune	085CDC84	data	lightrunefx
 Tsa_LightRune	085CDCA4	data	lightrunefx
 ProcLightRuneAnim_Init	08021234	thumb	lightrunefx
 ProcLightRuneAnim_Loop	080212E8	thumb	lightrunefx
+AnimScr_EfxBerserk1	086B9E8C	data	banim-efxmagic-effectstaves
+Pal_BerserkSprites	086B97E8	data	banim-efxmagic-effectstaves
+Img_BerserkSprites_A	086B8F30	data	banim-efxmagic-effectstaves
+AnimScr_EfxBerserk2	086B9EA0	data	banim-efxmagic-effectstaves
+AnimScr_EfxBerserk3	086B9EB4	data	banim-efxmagic-effectstaves
+AnimScr_EfxBerserk4	086B9EC8	data	banim-efxmagic-effectstaves
+AnimScr_EfxBerserk5	086B9EDC	data	banim-efxmagic-effectstaves
+AnimScr_EfxBerserk6	086BA250	data	banim-efxmagic-effectstaves
+Img_BerserkSprites_B	086B93C8	data	banim-efxmagic-effectstaves
+AnimScr_EfxBerserk7	086BA25C	data	banim-efxmagic-effectstaves
+AnimScr_EfxBerserk8	086BA268	data	banim-efxmagic-effectstaves
+AnimScr_EfxBerserk9	086BA274	data	banim-efxmagic-effectstaves
+AnimScr_EfxBerserk10	086BA280	data	banim-efxmagic-effectstaves
