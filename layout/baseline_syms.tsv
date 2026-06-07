@@ -1111,3 +1111,11 @@ MoveSpriteRefresher	080053FC	thumb	unitinfowindow
 GetWeaponLevelFromExp	08016B04	thumb	bmitem
 gpBg1ScrollOffset	0201FDC0	data	banim-efxmagic
 gpBg2ScrollOffset	0201FB34	data	banim-efxmagic
+EkrGauge_SetInitFlag	08051F2C	thumb	banim-ekrbattleintro
+gEkrWindowAppearExist	0201FACC	data	banim-ekrbattleintro
+EkrGauge_Clr323A	08051F04	thumb	banim-ekrbattleintro
+gEkrBg0QuakeVec	02000038	data	banim-ekrbattleintro
+EkrDispUP_SetPositionUnsync	08052840	thumb	banim-ekrbattleintro
+ProcScr_ekrNamewinAppear	085E3F54	data	banim-ekrbattleintro
+UnsyncEkrDispUP	08052878	thumb	banim-ekrbattleintro
+gEkrNamewinAppearExist	0201FAD0	data	banim-ekrbattleintro

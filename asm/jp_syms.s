@@ -4456,3 +4456,35 @@
 	.global gpBg2ScrollOffset
 	.set    gpBg2ScrollOffset, 0x0201FB34
 
+	.global EkrGauge_SetInitFlag
+	.type   EkrGauge_SetInitFlag, %function
+	.thumb_func
+	.set    EkrGauge_SetInitFlag, 0x08051F2C + 1
+
+	.global gEkrWindowAppearExist
+	.set    gEkrWindowAppearExist, 0x0201FACC
+
+	.global EkrGauge_Clr323A
+	.type   EkrGauge_Clr323A, %function
+	.thumb_func
+	.set    EkrGauge_Clr323A, 0x08051F04 + 1
+
+	.global gEkrBg0QuakeVec
+	.set    gEkrBg0QuakeVec, 0x02000038
+
+	.global EkrDispUP_SetPositionUnsync
+	.type   EkrDispUP_SetPositionUnsync, %function
+	.thumb_func
+	.set    EkrDispUP_SetPositionUnsync, 0x08052840 + 1
+
+	.global ProcScr_ekrNamewinAppear
+	.set    ProcScr_ekrNamewinAppear, 0x085E3F54
+
+	.global UnsyncEkrDispUP
+	.type   UnsyncEkrDispUP, %function
+	.thumb_func
+	.set    UnsyncEkrDispUP, 0x08052878 + 1
+
+	.global gEkrNamewinAppearExist
+	.set    gEkrNamewinAppearExist, 0x0201FAD0
+
