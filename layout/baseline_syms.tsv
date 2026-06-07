@@ -1577,3 +1577,10 @@ PrepSetUnitAmount	08097664	thumb	prepscreen
 PrepGetUnitAmount	08097654	thumb	prepscreen
 GetUnitSMSId	080176AC	thumb	prepscreen
 UseUnitSprite	080267A0	thumb	prepscreen
+SpriteArray_SavemenuData_1	08A9D920	data	savedraw
+SpriteArray_SavemenuData_0	08A9D904	data	savedraw
+SaveDrawSetDifficultSlotPalette	080B08F0	thumb	savedraw
+SaveMenuUpdateCursorPalette	080AF28C	thumb	savedraw
+BitfileToIndex	080AD2D0	thumb	savedraw
+SaveMenuGetBitfile	080AD25C	thumb	savedraw
+SaveDraw_SetCursorBox	080AFFB0	thumb	savedraw

@@ -6216,3 +6216,34 @@
 	.thumb_func
 	.set    UseUnitSprite, 0x080267A0 + 1
 
+	.global SpriteArray_SavemenuData_1
+	.set    SpriteArray_SavemenuData_1, 0x08A9D920
+
+	.global SpriteArray_SavemenuData_0
+	.set    SpriteArray_SavemenuData_0, 0x08A9D904
+
+	.global SaveDrawSetDifficultSlotPalette
+	.type   SaveDrawSetDifficultSlotPalette, %function
+	.thumb_func
+	.set    SaveDrawSetDifficultSlotPalette, 0x080B08F0 + 1
+
+	.global SaveMenuUpdateCursorPalette
+	.type   SaveMenuUpdateCursorPalette, %function
+	.thumb_func
+	.set    SaveMenuUpdateCursorPalette, 0x080AF28C + 1
+
+	.global BitfileToIndex
+	.type   BitfileToIndex, %function
+	.thumb_func
+	.set    BitfileToIndex, 0x080AD2D0 + 1
+
+	.global SaveMenuGetBitfile
+	.type   SaveMenuGetBitfile, %function
+	.thumb_func
+	.set    SaveMenuGetBitfile, 0x080AD25C + 1
+
+	.global SaveDraw_SetCursorBox
+	.type   SaveDraw_SetCursorBox, %function
+	.thumb_func
+	.set    SaveDraw_SetCursorBox, 0x080AFFB0 + 1
+
