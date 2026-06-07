@@ -82,7 +82,13 @@ IDA_PY ?= $(HOME)/ida-mcp-venv/bin/python
 ida-db: $(ELF)
 	$(IDA_PY) scripts/ida/build_ida_db.py
 
-.PHONY: all compare clean layout ida-db
+# Build the cached Ghidra project (the open-source second-opinion decompiler).
+# One-time and slow; see docs/reverse-engineering.md. Needs JDK 21 + Ghidra
+# (installed under ~/ghidra-tools) — paths are set in scripts/ghidra/ghidra_env.sh.
+ghidra-db: $(ELF)
+	scripts/ghidra/build_ghidra_project.sh
+
+.PHONY: all compare clean layout ida-db ghidra-db
 
 asm/baserom.o: baserom.gba
 

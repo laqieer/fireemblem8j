@@ -237,12 +237,22 @@ a source of truth — `make compare` remains the only authority. Use Hex-Rays as
 (names can resolve onto the 0x09000000 ROM mirror). Rebuild the `.i64` after
 meaningful decomp progress to refresh symbols.
 
-**Rejected alternatives:** the IDA GUI-plugin MCP (needs a running GUI + the
-WSL↔Windows bridge); Ghidra headless (`pyghidra-mcp`) — kept as the documented
-fallback, but it needs a fresh JDK 21 + Ghidra + a GBA-loader rebuilt against
-current Ghidra, whereas IDA was ~90% staged on the box and HEXARM gives stronger
-ARM/Thumb output.
+**Rejected alternative:** the IDA GUI-plugin MCP (needs a running GUI + the
+WSL↔Windows bridge).
 
-**Status:** installed, registered (`claude mcp list` → `ida ✓ Connected`), and
-verified end-to-end. Tooling tracked under `scripts/ida/` + `docs/reverse-engineering.md`;
-the DB and IDA install are local/gitignored.
+**Second decompiler (added later): Ghidra via `pyghidra-mcp` (server `ghidra`).**
+A free, independent cross-check for the region-different functions — agreement
+between Hex-Rays and Ghidra makes a hand-decompilation much safer. Also fed the
+ELF (so Ghidra's loader applies the ARM `$a`/`$t` mapping for correct ARM-vs-Thumb).
+No GBA-loader extension needed. Key learning: the *interactive* full analysis
+(`open_program(analyze=True)`) is impractically slow (>25 min), but
+`analyzeHeadless` does the same full analysis in **~3.5 min** and is cached — so
+`make ghidra-db` is practical. Verified: it decompiles `DecodeString` (140 B
+Huffman decoder) and `DrawGlyph` (188 B) fully and matching IDA. IDA stays the
+workhorse (HEXARM is stronger and instant); Ghidra is the second opinion.
+
+**Status:** both decompilers installed, registered (`claude mcp list` →
+`ida ✓ Connected`, `ghidra ✓ Connected`), and verified end-to-end through the MCP
+protocol. Tooling tracked under `scripts/ida/` + `scripts/ghidra/` +
+`docs/reverse-engineering.md`; the DBs and the IDA/Ghidra installs are
+local/gitignored.

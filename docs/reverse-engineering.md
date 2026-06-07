@@ -110,13 +110,50 @@ PY
 # 4. GBA loader (only needed if you load the raw .gba; the ELF path doesn't):
 curl -sSL https://raw.githubusercontent.com/laqieer/ida_gba_stuff/master/loaders/GBA_Loader.py \
   -o ~/ida-pro-9.3/loaders/GBA_Loader.py
-#   then patch the two `idaapi.cvar.inf.startIP/beginEA` lines (None under idalib)
-#   to the guarded `ida_ida.inf_set_start_ea/ip` API — see scripts/ida/GBA_Loader.py.
+#   The upstream loader is now IDA-9.3-ready (laqieer/ida_gba_stuff#3); a local
+#   copy is kept at scripts/ida/GBA_Loader.py.
 
 # 5. Build the DB and register the MCP
 make ida-db
 claude mcp add ida -- ~/ida-mcp-venv/bin/idalib-mcp --stdio ~/fireemblem8j/tools/ida/fe8j.i64
 ```
 
-See [`docs/decisions.md`](decisions.md) (D6) for the rationale and alternatives
-considered (Ghidra headless was the documented fallback).
+## Second opinion: Ghidra (open-source cross-check)
+
+A second, independent decompiler is useful for the region-different functions —
+when Hex-Rays and Ghidra agree on a function's logic, a hand-decompilation is
+much safer. Ghidra is set up headlessly via
+[pyghidra-mcp](https://github.com/clearbluejar/pyghidra-mcp) (MCP server
+`ghidra`), Linux-native, fed the **same `fireemblem8.elf`** (so its ELF loader
+applies the ARM `$a`/`$t` mapping and gets ARM-vs-Thumb right).
+
+Installed locally (gitignored / outside the repo): JDK 21 (`~/ghidra-tools/jdk-21*`),
+Ghidra 12.x (`~/ghidra-tools/ghidra_*_PUBLIC`), and a venv with `pyghidra-mcp`
+(`~/ghidra-mcp-venv`). Env lives in `scripts/ghidra/ghidra_env.sh`.
+
+```bash
+. scripts/ghidra/ghidra_env.sh
+make ghidra-db                                  # one-time: analyzeHeadless -> cached .gpr (~3.5 min)
+claude mcp add ghidra \
+    -e JAVA_HOME="$JAVA_HOME" -e GHIDRA_INSTALL_DIR="$GHIDRA_INSTALL_DIR" \
+    -- ~/ghidra-mcp-venv/bin/pyghidra-mcp \
+       --project-path ~/ghidra-projects --project-name fe8j --wait-for-analysis
+```
+
+Verified through the MCP: `decompile_function(binary_name="fireemblem8.elf",
+name_or_address="DecodeString")` returns the full Huffman decoder, matching IDA.
+`--wait-for-analysis` is required — it runs an incremental `analyzeAll` over the
+cached project so pyghidra-mcp marks it analysis-complete (only a few seconds on
+the cache; without it, `decompile_function` refuses with "Analysis incomplete").
+The JDK/Ghidra env vars must be passed with `-e` since the MCP server inherits a
+bare environment.
+
+Caveats (why IDA stays the primary): the **interactive** full analysis
+(`open_program(analyze=True)`) is impractically slow (>25 min), so we build the
+cache with `analyzeHeadless` (~3.5 min) instead. Like IDA, Ghidra auto-creates
+only the functions it can reach — a region-different function still in the incbin
+may need defining (in the correct ARM/Thumb mode) before it decompiles. Use
+`ghidra` as a cross-check, `ida` as the workhorse; `make compare` is the oracle.
+
+See [`docs/decisions.md`](decisions.md) (D6) for the rationale and the
+alternatives considered.

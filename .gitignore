@@ -59,3 +59,10 @@ src/_diag_*
 /tools/ida/*.nam
 /tools/ida/*.til
 *.i64
+
+# Ghidra second-opinion decompiler: projects/cache (built locally via
+# `make ghidra-db`; the JDK/Ghidra install lives outside the repo).
+*.gpr
+*.rep/
+*_ghidra/
+.ghidra/
