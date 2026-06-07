@@ -101,14 +101,27 @@ def port(name):
     # symbol in a referenced (carved) section is always kept, so carved data is
     # never altered; the verify-or-revert net guards anything this misjudges.
     src = open(f"src/{name}.c").read()
-    unref = [s for s in ds if s not in refd and ds[s] not in refd_secs]
-    if unref:
-        for s in unref:
-            src = remove_def(src, s)
+    cand = [s for s in ds if s not in refd and ds[s] not in refd_secs]
+    # Remove a candidate only if cutting its definition eliminates EVERY reference
+    # to its name -- i.e. all references were inside the definition (a dead
+    # self-referential table like gHelpInfo). If the name still appears, it's used
+    # by kept code/data, so keep it; this never breaks compilation. Iterate to a
+    # fixpoint so removing one dead table can expose another it was the sole user of.
+    removed, changed = [], True
+    while changed:
+        changed = False
+        for s in cand:
+            if s in removed:
+                continue
+            trimmed = remove_def(src, s)
+            if not re.search(r"\b" + re.escape(s) + r"\b", trimmed):
+                src, changed = trimmed, True
+                removed.append(s)
+    if removed:
         open(f"src/{name}.c", "w").write(src)
         sh(f"rm -f {obj}"); sh(f"make src/{name}.o")
         if not os.path.exists(obj):
-            print(f"{name}: compile failed after trimming {unref}"); os.remove(f"src/{name}.c"); return False
+            print(f"{name}: compile failed after trimming {removed}"); os.remove(f"src/{name}.c"); return False
 
     jp = open("baserom.gba", "rb").read()
     fmap = {}
