@@ -6135,3 +6135,8 @@
 	.thumb_func
 	.set    TradeMenu_TutorialWait_OnLoop, 0x0802DDF4 + 1
 
+	.global BonusClaim_DrawMainWindowFrame
+	.type   BonusClaim_DrawMainWindowFrame, %function
+	.thumb_func
+	.set    BonusClaim_DrawMainWindowFrame, 0x080B56D8 + 1
+

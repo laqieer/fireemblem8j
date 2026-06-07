@@ -300,3 +300,4 @@ A9E23C	A9E244	src/soundroom.o(.data)	soundroom .data
 1F5784	1F578C	src/bmsave-misc.o(.rodata)	bmsave-misc .rodata
 02DE14	02E048	src/bmtrade.o(.text)	bmtrade(run): TradeMenuHandSTAL, TradeMenu_UpdateTutorial, SetTradeMenuTutStatus2...
 5C4104	5C411C	src/bmtrade.o(.data)	bmtrade .data
+0B6208	0B628C	src/bonusclaim.o(.text)	bonusclaim(run): BonusClaim_Loop_PopupDisplayTimer, BonusClaim_ClearItemSentPopup
