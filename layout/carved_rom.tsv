@@ -316,3 +316,4 @@ A9D448	A9D462	src/savedraw.o(.data)	savedraw .data
 A72BB8	A72BF0	src/statscreen.o(.data)	statscreen .data
 0A4E94	0A4F18	src/uisupport.o(.text)	uisupport(run): SupportScreen_OnInit, DrawSupportBannerSprites_Init, DrawSupportBannerSprites_Loop
 A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
+0D5E9C	0D5FE0	src/m4a.o(.text)	m4a(run): m4aMPlayVolumeControl, m4aMPlayPitchControl, m4aMPlayPanpotControl
