@@ -331,3 +331,4 @@ A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 022348	022578	src/chapterintrofx_title.o(.text)	chapterintrofx_title(run): ChapterIntroTitle_InitBgImg, ChapterIntroTitle_ResetBg, ChapterIntroTitle_End
 0053B8	00541C	src/ctc.o(.text)	ctc(run): StartSpriteRefresher, MoveSpriteRefresher
 5B8CDC	5B8D84	src/ctc.o(.data)	ctc .data
+003570	0036D8	src/icon.o(.text)	icon(run): GetIconGfxIndex, GetIconTileIndex, DrawIcon...

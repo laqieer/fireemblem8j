@@ -259,7 +259,6 @@ GetStringTextLen	08003E0C	thumb	popup2
 DrawUiFrame2	0804F0EC	thumb	popup2
 ResetIconGraphics_	080034C4	thumb	popup2
 LoadIconPalettes	08003508	thumb	popup2
-DrawIcon	08003608	thumb	popup2
 ResetTextFont	08003C50	thumb	popup2
 PutDrawText	08004374	thumb	popup2
 InitText	08003C8C	thumb	popup2
@@ -1657,3 +1656,6 @@ UnpackChapterMapGraphics	080195E4	thumb	chapterintrofx_title
 GetCameraCenteredX	08015A5C	thumb	chapterintrofx_title
 GetCameraCenteredY	08015A88	thumb	chapterintrofx_title
 SpriteRefresher_OnIdle	08005390	thumb	ctc
+GetIconGfxTileIndex	0800355C	thumb	icon
+item_icon_tiles	085BA470	data	icon
+RegisterFillTile	08001FA4	thumb	icon

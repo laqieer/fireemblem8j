@@ -1162,11 +1162,6 @@
 	.thumb_func
 	.set    LoadIconPalettes, 0x08003508 + 1
 
-	.global DrawIcon
-	.type   DrawIcon, %function
-	.thumb_func
-	.set    DrawIcon, 0x08003608 + 1
-
 	.global ResetTextFont
 	.type   ResetTextFont, %function
 	.thumb_func
@@ -6519,4 +6514,17 @@
 	.type   SpriteRefresher_OnIdle, %function
 	.thumb_func
 	.set    SpriteRefresher_OnIdle, 0x08005390 + 1
+
+	.global GetIconGfxTileIndex
+	.type   GetIconGfxTileIndex, %function
+	.thumb_func
+	.set    GetIconGfxTileIndex, 0x0800355C + 1
+
+	.global item_icon_tiles
+	.set    item_icon_tiles, 0x085BA470
+
+	.global RegisterFillTile
+	.type   RegisterFillTile, %function
+	.thumb_func
+	.set    RegisterFillTile, 0x08001FA4 + 1
 

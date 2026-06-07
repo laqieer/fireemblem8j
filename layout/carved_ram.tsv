@@ -27,3 +27,4 @@
 0203A60C	ewram	src/bmtrade.o(ewram_data)	bmtrade ewram_data
 030018F8	iwram	src/mu.o(.bss)	mu .bss
 0203E780	ewram	src/statscreen.o(ewram_data)	statscreen ewram_data
+02026A90	ewram	src/icon.o(ewram_data)	icon ewram_data

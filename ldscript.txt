@@ -39,6 +39,7 @@ SECTIONS
         asm/baserom.o(.gap_5);
         src/proc.o(.text);
         asm/baserom.o(.gap_6);
+        src/icon.o(.text);
         src/fontgrp.o(.text);
         asm/baserom.o(.gap_7);
         src/animedrv.o(.text);
@@ -682,6 +683,7 @@ SECTIONS
     .bss_22 0x0203A60C (NOLOAD) : { src/bmtrade.o(ewram_data) } > ewram  /* bmtrade ewram_data */
     .bss_23 0x030018F8 (NOLOAD) : { src/mu.o(.bss) } > iwram  /* mu .bss */
     .bss_24 0x0203E780 (NOLOAD) : { src/statscreen.o(ewram_data) } > ewram  /* statscreen ewram_data */
+    .bss_25 0x02026A90 (NOLOAD) : { src/icon.o(ewram_data) } > ewram  /* icon ewram_data */
 
     /DISCARD/ :
     {
