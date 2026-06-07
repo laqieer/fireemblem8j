@@ -6165,3 +6165,13 @@
 	.thumb_func
 	.set    PutClassWeaponRankIcons, 0x080B7CEC + 1
 
+	.global UnitHasItem
+	.type   UnitHasItem, %function
+	.thumb_func
+	.set    UnitHasItem, 0x080177A0 + 1
+
+	.global PutUnitSpriteForClassId
+	.type   PutUnitSpriteForClassId, %function
+	.thumb_func
+	.set    PutUnitSpriteForClassId, 0x08027BDC + 1
+

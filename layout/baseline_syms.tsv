@@ -1566,3 +1566,5 @@ SetupFinScreenGfx	080BBF18	thumb	ending_details
 StartBgmFadeIn	080024C4	thumb	ending_details
 NormalizeWaterMinimapTerrain	080AC094	thumb	minimap
 PutClassWeaponRankIcons	080B7CEC	thumb	opinfo
+UnitHasItem	080177A0	thumb	prep_itemscreen
+PutUnitSpriteForClassId	08027BDC	thumb	prep_itemscreen
