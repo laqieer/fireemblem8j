@@ -2714,11 +2714,6 @@
 	.thumb_func
 	.set    GetEkrDragonStatusUnk1, 0x08072048 + 1
 
-	.global BanimSetFrontPaletteForDragon
-	.type   BanimSetFrontPaletteForDragon, %function
-	.thumb_func
-	.set    BanimSetFrontPaletteForDragon, 0x0807290C + 1
-
 	.global gpEfxUnitPaletteBackup
 	.set    gpEfxUnitPaletteBackup, 0x02000054
 
@@ -2930,21 +2925,6 @@
 	.type   RefreshBMapDisplay_FromBattle, %function
 	.thumb_func
 	.set    RefreshBMapDisplay_FromBattle, 0x08031044 + 1
-
-	.global GetEkrDragonPalette
-	.type   GetEkrDragonPalette, %function
-	.thumb_func
-	.set    GetEkrDragonPalette, 0x08072880 + 1
-
-	.global SetEkrDragonPaletteFront
-	.type   SetEkrDragonPaletteFront, %function
-	.thumb_func
-	.set    SetEkrDragonPaletteFront, 0x080728DC + 1
-
-	.global SetEkrDragonPaletteBack
-	.type   SetEkrDragonPaletteBack, %function
-	.thumb_func
-	.set    SetEkrDragonPaletteBack, 0x080728AC + 1
 
 	.global ProcScr_EkrDragon_0
 	.set    ProcScr_EkrDragon_0, 0x087A8C54
@@ -4125,11 +4105,6 @@
 
 	.global gEkrDracoZombiTsaSetLut
 	.set    gEkrDracoZombiTsaSetLut, 0x087A8B2C
-
-	.global NewEkrDragonQuakeTree3
-	.type   NewEkrDragonQuakeTree3, %function
-	.thumb_func
-	.set    NewEkrDragonQuakeTree3, 0x08072930 + 1
 
 	.global GetLang
 	.type   GetLang, %function
@@ -6510,4 +6485,13 @@
 
 	.global gEkrHitNow
 	.set    gEkrHitNow, 0x02017780
+
+	.global Pal_BanimUnitFlashing
+	.set    Pal_BanimUnitFlashing, 0x0885727C
+
+	.global Pal_DemonKingBG
+	.set    Pal_DemonKingBG, 0x0884CB34
+
+	.global ProcScr_ekrDragonQuake
+	.set    ProcScr_ekrDragonQuake, 0x087A8C0C
 

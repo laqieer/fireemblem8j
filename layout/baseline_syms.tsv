@@ -647,7 +647,6 @@ ProcScr_efxSpecalEffect	0860372C	data	banim-efxmisc
 gpProcEfxStatusUnits	0201776C	data	banim-efxstatusunit
 EfxPalFlashingInOut	080738A4	thumb	banim-efxstatusunit
 GetEkrDragonStatusUnk1	08072048	thumb	banim-efxstatusunit
-BanimSetFrontPaletteForDragon	0807290C	thumb	banim-efxstatusunit
 gpEfxUnitPaletteBackup	02000054	data	banim-efxstatusunit
 ProcScr_ekrsubAnimeEmulator	087A8F64	data	banim-efxutils
 AnimDisplay	08004F3C	thumb	banim-efxutils
@@ -696,9 +695,6 @@ UnpackChapterMapPalette	0801964C	thumb	banim-ekrbattleending
 GetBanimLinkArenaFlag	08050AC8	thumb	banim-ekrbattleending
 LoadLinkArenaFogPlaceholder	0804A584	thumb	banim-ekrbattleending
 RefreshBMapDisplay_FromBattle	08031044	thumb	banim-ekrbattleending
-GetEkrDragonPalette	08072880	thumb	banim-ekrdragon-8070710
-SetEkrDragonPaletteFront	080728DC	thumb	banim-ekrdragon-8070710
-SetEkrDragonPaletteBack	080728AC	thumb	banim-ekrdragon-8070710
 ProcScr_EkrDragon_0	087A8C54	data	banim-ekrdragon-8070710
 gEkrdragon_0	087A8C74	data	banim-ekrdragon-8070710
 EkrDemonkingObj_SetBgPosition	0807A2D0	thumb	banim-ekrdragon-demonkingobj
@@ -1037,7 +1033,6 @@ Pal_EfxDracoZombie	087E62B4	data	banim-ekrdragon-dracozombie
 gEkrDragonPalBackup	02020068	data	banim-ekrdragon-dracozombie
 EkrDZ_PrepareBanimfx	08072454	thumb	banim-ekrdragon-dracozombie
 gEkrDracoZombiTsaSetLut	087A8B2C	data	banim-ekrdragon-dracozombie
-NewEkrDragonQuakeTree3	08072930	thumb	banim-ekrdragon-dracozombie
 GetLang	08003BC0	thumb	bmsave-xmap
 ReadExtraMapSaveHead	080AB514	thumb	bmsave-xmap
 GetExtraMapInfoReadAddr	080AB5CC	thumb	bmsave-xmap
@@ -1656,3 +1651,6 @@ gEfxTeonoState	02017758	data	banim-ekrdispup
 gEkrbattle_5	0201775C	data	banim-ekrdispup
 gEkrbattle_6	02017764	data	banim-ekrdispup
 gEkrHitNow	02017780	data	banim-ekrdispup
+Pal_BanimUnitFlashing	0885727C	data	banim-ekrdragon-utils
+Pal_DemonKingBG	0884CB34	data	banim-ekrdragon-utils
+ProcScr_ekrDragonQuake	087A8C0C	data	banim-ekrdragon-utils
