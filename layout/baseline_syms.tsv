@@ -1296,3 +1296,9 @@ cg_8_palette	08B08478	data	cg
 cg_9_map	08B079C4	data	cg
 cg_9_palette	08B08538	data	cg
 GetTileIndex	08000F54	thumb	fontgrp
+ProcScr_EfxHitQuakePure	085E3A64	data	banim-efxbattle
+ProcScr_efxPierceNormalEffect	086034BC	data	banim-efxhit
+ProcScr_efxPierceNormalEffectBG	086034D4	data	banim-efxhit
+TSAs_EfxPierceNormalEffectBG	086034EC	data	banim-efxhit
+Pal_EfxPierceNormalEffectBG	085FB6A0	data	banim-efxhit
+Img_EfxPierceNormalEffectBG	085FB200	data	banim-efxhit

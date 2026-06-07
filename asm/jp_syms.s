@@ -5067,3 +5067,21 @@
 	.thumb_func
 	.set    GetTileIndex, 0x08000F54 + 1
 
+	.global ProcScr_EfxHitQuakePure
+	.set    ProcScr_EfxHitQuakePure, 0x085E3A64
+
+	.global ProcScr_efxPierceNormalEffect
+	.set    ProcScr_efxPierceNormalEffect, 0x086034BC
+
+	.global ProcScr_efxPierceNormalEffectBG
+	.set    ProcScr_efxPierceNormalEffectBG, 0x086034D4
+
+	.global TSAs_EfxPierceNormalEffectBG
+	.set    TSAs_EfxPierceNormalEffectBG, 0x086034EC
+
+	.global Pal_EfxPierceNormalEffectBG
+	.set    Pal_EfxPierceNormalEffectBG, 0x085FB6A0
+
+	.global Img_EfxPierceNormalEffectBG
+	.set    Img_EfxPierceNormalEffectBG, 0x085FB200
+
