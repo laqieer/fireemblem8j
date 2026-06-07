@@ -1824,9 +1824,6 @@
 	.thumb_func
 	.set    PutSpriteExt, 0x08005330 + 1
 
-	.global gObject_32x16
-	.set    gObject_32x16, 0x085B8D24
-
 	.global ProcScr_TacticianNameSelection
 	.set    ProcScr_TacticianNameSelection, 0x085D351C
 
@@ -2075,9 +2072,6 @@
 	.thumb_func
 	.set    AP_Delete, 0x08009194 + 1
 
-	.global gObject_8x8
-	.set    gObject_8x8, 0x085B8CDC
-
 	.global HideMoveRangeGraphics
 	.type   HideMoveRangeGraphics, %function
 	.thumb_func
@@ -2235,9 +2229,6 @@
 	.type   BgAffineSetOpAnim, %function
 	.thumb_func
 	.set    BgAffineSetOpAnim, 0x080CBAFC + 1
-
-	.global gObject_32x32
-	.set    gObject_32x32, 0x085B8CEC
 
 	.global BlendPaletteToColor
 	.type   BlendPaletteToColor, %function
@@ -3789,9 +3780,6 @@
 	.thumb_func
 	.set    PutUnitSprite, 0x08027AF4 + 1
 
-	.global gObject_16x16
-	.set    gObject_16x16, 0x085B8CE4
-
 	.global PrepUnitSwapProc_Init
 	.type   PrepUnitSwapProc_Init, %function
 	.thumb_func
@@ -4371,14 +4359,6 @@
 	.thumb_func
 	.set    DrawAccuracyText, 0x08034AEC + 1
 
-	.global StartSpriteRefresher
-	.type   StartSpriteRefresher, %function
-	.thumb_func
-	.set    StartSpriteRefresher, 0x080053B8 + 1
-
-	.global gObject_16x16_VFlipped
-	.set    gObject_16x16_VFlipped, 0x085B8D6C
-
 	.global DrawUnitAidText
 	.type   DrawUnitAidText, %function
 	.thumb_func
@@ -4393,11 +4373,6 @@
 	.type   DrawUnitConText, %function
 	.thumb_func
 	.set    DrawUnitConText, 0x08034964 + 1
-
-	.global MoveSpriteRefresher
-	.type   MoveSpriteRefresher, %function
-	.thumb_func
-	.set    MoveSpriteRefresher, 0x080053FC + 1
 
 	.global GetWeaponLevelFromExp
 	.type   GetWeaponLevelFromExp, %function
@@ -6539,4 +6514,9 @@
 	.type   GetCameraCenteredY, %function
 	.thumb_func
 	.set    GetCameraCenteredY, 0x08015A88 + 1
+
+	.global SpriteRefresher_OnIdle
+	.type   SpriteRefresher_OnIdle, %function
+	.thumb_func
+	.set    SpriteRefresher_OnIdle, 0x08005390 + 1
 

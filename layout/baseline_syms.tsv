@@ -421,7 +421,6 @@ gProcScr_PrepHelpboxListener	08A945EC	data	prep_utils
 CanUnitUseWeapon	0801631C	thumb	prep_utils
 GetItemAttributes	08017314	thumb	prep_utils
 PutSpriteExt	08005330	thumb	prep_wm_sell
-gObject_32x16	085B8D24	data	prep_wm_sell
 ProcScr_TacticianNameSelection	085D351C	data	sio_event
 LoadLegacyUiFrameGraphics	0804F8E0	thumb	sio_event
 UnsetBmStLinkArenaFlag	08042E0C	thumb	sio_event
@@ -482,7 +481,6 @@ EndGmapEffect	080C619C	thumb	worldmap_entry
 unit_icon_move_table	08A13488	data	worldmap_gmapunit
 gUnk_6	0200AF00	data	worldmap_gmapunit
 AP_Delete	08009194	thumb	worldmap_gmapunit
-gObject_8x8	085B8CDC	data	worldmap_radar
 HideMoveRangeGraphics	0801D730	thumb	bmitemuse
 ReadGlobalSaveInfo	080A776C	thumb	bmsave-lib
 Checksum16	080A7740	thumb	bmsave-lib
@@ -517,7 +515,6 @@ gUnk_Sio_9	0203DAC0	thumb	sio_bat
 gUnk_47	03001838	data	sio_battlemap
 SetBackgroundScreenSize	08000FFC	thumb	titlescreen
 BgAffineSetOpAnim	080CBAFC	thumb	titlescreen
-gObject_32x32	085B8CEC	data	titlescreen
 BlendPaletteToColor	080CB8BC	thumb	titlescreen
 gPal_TitleMainBackground	08B43988	data	titlescreen
 gPal_Titlescreen_2	08B48918	data	titlescreen
@@ -954,7 +951,6 @@ Img_MenuScrollBar	08A9645C	data	prep_menuscroll
 LinkTargets	08050684	thumb	uiselecttarget
 GetFurthestTargetDistance	08050970	thumb	uiselecttarget
 PutUnitSprite	08027AF4	thumb	prep_unitswap
-gObject_16x16	085B8CE4	data	prep_unitswap
 PrepUnitSwapProc_Init	0801E6BC	thumb	prep_unitswap
 GetBattleAnimRoundTypeFlags	08059864	thumb	banim-efxhpbar
 NewEfxDamageMojiEffect	0806E940	thumb	banim-efxhpbar
@@ -1092,12 +1088,9 @@ DrawUnitResChangeText	08034A50	thumb	unitinfowindow
 NewUnitInfoWindow	080346B0	thumb	unitinfowindow
 DrawUnitResUnkText	08034AB4	thumb	unitinfowindow
 DrawAccuracyText	08034AEC	thumb	unitinfowindow
-StartSpriteRefresher	080053B8	thumb	unitinfowindow
-gObject_16x16_VFlipped	085B8D6C	data	unitinfowindow
 DrawUnitAidText	080349AC	thumb	unitinfowindow
 PutUnitAidIconForTextAt	080349E4	thumb	unitinfowindow
 DrawUnitConText	08034964	thumb	unitinfowindow
-MoveSpriteRefresher	080053FC	thumb	unitinfowindow
 GetWeaponLevelFromExp	08016B04	thumb	bmitem
 gpBg1ScrollOffset	0201FDC0	data	banim-efxmagic
 gpBg2ScrollOffset	0201FB34	data	banim-efxmagic
@@ -1663,3 +1656,4 @@ DisableMapPaletteAnimations	08030B74	thumb	chapterintrofx_title
 UnpackChapterMapGraphics	080195E4	thumb	chapterintrofx_title
 GetCameraCenteredX	08015A5C	thumb	chapterintrofx_title
 GetCameraCenteredY	08015A88	thumb	chapterintrofx_title
+SpriteRefresher_OnIdle	08005390	thumb	ctc
