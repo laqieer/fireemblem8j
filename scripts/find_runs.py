@@ -9,7 +9,7 @@ retried. This makes the carve self-validating.
 
 Prints one line per verified run:  <jp_start> <jp_end> <fn1,fn2,...>
 """
-import subprocess, sys, os
+import subprocess, sys, os, tempfile, atexit, shutil
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
@@ -18,24 +18,30 @@ US = "/home/laqieer/fireemblem8u/src"
 CPPF = "-I tools/agbcc/include -iquote include -iquote . -nostdinc -undef"
 CC1F = "-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -ffix-debug-line -g"
 jp = open("baserom.gba", "rb").read()
+# Per-process scratch dir so many find_runs can run in parallel (one per TU/core)
+# without colliding on shared /tmp files. find_runs is otherwise read-only on the
+# repo, so this is the only thing needed to parallelize discovery.
+TMP = tempfile.mkdtemp(prefix="findruns_")
+atexit.register(lambda: shutil.rmtree(TMP, ignore_errors=True))
+FR, FULL = f"{TMP}/fr", f"{TMP}/full"
 
 
 def compile_funcs(funcs):
     """Extract a subset of funcs, compile; return (text bytes, set of reloc offsets)."""
     sub = subprocess.run(f"python3 scripts/extract_run.py {US}/{NAME}.c {' '.join(funcs)}",
                          shell=True, capture_output=True, text=True).stdout
-    open("/tmp/fr.c", "w").write(sub)
-    subprocess.run(f"cpp {CPPF} /tmp/fr.c 2>/dev/null | iconv -f UTF-8 -t CP932 | "
-                   f"tools/agbcc/bin/agbcc {CC1F} -o /tmp/fr.s 2>/dev/null", shell=True)
-    if not os.path.exists("/tmp/fr.s") or os.path.getsize("/tmp/fr.s") == 0:
+    open(f"{FR}.c", "w").write(sub)
+    subprocess.run(f"cpp {CPPF} {FR}.c 2>/dev/null | iconv -f UTF-8 -t CP932 | "
+                   f"tools/agbcc/bin/agbcc {CC1F} -o {FR}.s 2>/dev/null", shell=True)
+    if not os.path.exists(f"{FR}.s") or os.path.getsize(f"{FR}.s") == 0:
         return None, None
-    subprocess.run("echo '.ALIGN 2,0' >> /tmp/fr.s; arm-none-eabi-as -mcpu=arm7tdmi "
-                   "-mthumb-interwork -I include -I . /tmp/fr.s -o /tmp/fr.o 2>/dev/null", shell=True)
-    text = subprocess.run("arm-none-eabi-objcopy -O binary -j .text /tmp/fr.o /dev/stdout",
+    subprocess.run(f"echo '.ALIGN 2,0' >> {FR}.s; arm-none-eabi-as -mcpu=arm7tdmi "
+                   f"-mthumb-interwork -I include -I . {FR}.s -o {FR}.o 2>/dev/null", shell=True)
+    text = subprocess.run(f"arm-none-eabi-objcopy -O binary -j .text {FR}.o /dev/stdout",
                           shell=True, capture_output=True).stdout
     relocs = set()
     sec = None
-    for ln in subprocess.run("arm-none-eabi-objdump -r /tmp/fr.o", shell=True,
+    for ln in subprocess.run(f"arm-none-eabi-objdump -r {FR}.o", shell=True,
                              capture_output=True, text=True).stdout.splitlines():
         if "RELOCATION RECORDS FOR [" in ln:
             sec = ln.split("[")[1].split("]")[0]
@@ -92,10 +98,10 @@ def search_bases(text, relocs, cap=3):
 
 # functions in source order (from the full-file object)
 subprocess.run(f"cpp {CPPF} {US}/{NAME}.c 2>/dev/null | iconv -f UTF-8 -t CP932 | "
-               f"tools/agbcc/bin/agbcc {CC1F} -o /tmp/full.s 2>/dev/null", shell=True)
-subprocess.run("echo '.ALIGN 2,0' >> /tmp/full.s; arm-none-eabi-as -mcpu=arm7tdmi "
-               "-mthumb-interwork -I include -I . /tmp/full.s -o /tmp/full.o 2>/dev/null", shell=True)
-order = [l.split()[2] for l in subprocess.run("arm-none-eabi-nm -n /tmp/full.o", shell=True,
+               f"tools/agbcc/bin/agbcc {CC1F} -o {FULL}.s 2>/dev/null", shell=True)
+subprocess.run(f"echo '.ALIGN 2,0' >> {FULL}.s; arm-none-eabi-as -mcpu=arm7tdmi "
+               f"-mthumb-interwork -I include -I . {FULL}.s -o {FULL}.o 2>/dev/null", shell=True)
+order = [l.split()[2] for l in subprocess.run(f"arm-none-eabi-nm -n {FULL}.o", shell=True,
          capture_output=True, text=True).stdout.splitlines()
          if len(l.split()) == 3 and l.split()[1] in "tT"]
 

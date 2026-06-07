@@ -30,13 +30,17 @@ def carved_objs():
     return {m.group(1) for m in (re.search(r"(src/\S+\.o)\(", l) for l in open("layout/carved_rom.tsv")) if m}
 
 
-def port(name, exclude=()):
+def port(name, exclude=(), runs=None):
     if f"src/{name}.o" in carved_objs():
         print(f"{name}: already has a carved run — skipping"); return False
     # Verified runs only (D2): each block byte-matches the JP ROM at its base.
-    out = sh(f"python3 scripts/find_runs.py {name}").stdout
-    runs = [(l.split()[0], l.split()[1], l.split()[2].split(","))
-            for l in out.splitlines() if l.strip()]
+    # `runs` may be pre-computed (e.g. by a parallel discovery pass — see
+    # scripts/harvest_parallel.py) to skip the expensive find_runs here; otherwise
+    # compute it once and reuse it across the largest-first fallback recursion.
+    if runs is None:
+        out = sh(f"python3 scripts/find_runs.py {name}").stdout
+        runs = [(l.split()[0], l.split()[1], l.split()[2].split(","))
+                for l in out.splitlines() if l.strip()]
     # Try runs largest-first; if a run masked-matches but can't be made byte-perfect
     # in the full build (e.g. it touches region-different EWRAM/data layout), fall
     # back to the next-largest verified run instead of abandoning the whole TU.
@@ -286,7 +290,7 @@ def port(name, exclude=()):
     for p, c in snap.items():
         open(p, "w").write(c)
     os.remove(f"src/{name}.c"); sh(f"rm -f src/{name}.o src/{name}.s"); sh("make layout")
-    return port(name, exclude + (tuple(funcs),))  # fall back to the next-largest run
+    return port(name, exclude + (tuple(funcs),), runs)  # next-largest run (reuse discovery)
 
 
 if __name__ == "__main__":
