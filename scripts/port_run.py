@@ -76,11 +76,19 @@ def port(name, exclude=(), runs=None):
     # Drop file-scope data the run doesn't reference (the whole header is pulled
     # in, but unreferenced globals/arrays — e.g. proc scripts — would need
     # placement we can't resolve). A data symbol with no .text relocation is unused.
+    # Loadable data sections whose UNREFERENCED file-scope globals must be trimmed
+    # from the subset, else they're appended to the ROM and grow it (sha1 fails even
+    # when .text is byte-perfect). EWRAM_OVERLAY sections (`ewram_overlay_N`) count:
+    # extracting a few funcs still pulls in the file's overlay tables (e.g.
+    # prep_unitselect's 0xB0 gPrepUnitTexts), and the run rarely references them.
+    def is_trim_sec(s):
+        return s in (".data", ".rodata", "ewram_data") or s.startswith("ewram_overlay")
+
     def data_syms_and_refs():
         ds = {}
         for l in sh(f"arm-none-eabi-objdump -t {obj}").stdout.splitlines():
             p = l.split()
-            if len(p) >= 5 and p[0][0] in "0123456789abcdef" and p[-3] in (".data", ".rodata", "ewram_data") and not p[-1].startswith(".") and p[-1] != p[-3]:
+            if len(p) >= 5 and p[0][0] in "0123456789abcdef" and is_trim_sec(p[-3]) and not p[-1].startswith(".") and p[-1] != p[-3]:
                 ds[p[-1]] = p[-3]
         refd, refd_secs = set(), set()
         sec = None

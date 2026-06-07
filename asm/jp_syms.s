@@ -5956,3 +5956,23 @@
 	.global gOam
 	.set    gOam, 0x030030E0
 
+	.global PrepGetLatestUnitIndex
+	.type   PrepGetLatestUnitIndex, %function
+	.thumb_func
+	.set    PrepGetLatestUnitIndex, 0x08097988 + 1
+
+	.global SetStatScreenConfig
+	.type   SetStatScreenConfig, %function
+	.thumb_func
+	.set    SetStatScreenConfig, 0x080890A0 + 1
+
+	.global GetUnitFromPrepList
+	.type   GetUnitFromPrepList, %function
+	.thumb_func
+	.set    GetUnitFromPrepList, 0x08097634 + 1
+
+	.global StartStatScreen
+	.type   StartStatScreen, %function
+	.thumb_func
+	.set    StartStatScreen, 0x0808ABD8 + 1
+
