@@ -2764,11 +2764,6 @@
 	.thumb_func
 	.set    AnimClearAll, 0x08004DC0 + 1
 
-	.global GetBanimInitPosReal
-	.type   GetBanimInitPosReal, %function
-	.thumb_func
-	.set    GetBanimInitPosReal, 0x08052E7C + 1
-
 	.global gEkrInitPosReal
 	.set    gEkrInitPosReal, 0x02017744
 
@@ -6388,4 +6383,131 @@
 
 	.global ProcScr_efxDeadDragonAlpha
 	.set    ProcScr_efxDeadDragonAlpha, 0x085E398C
+
+	.global gEkrbattle_9
+	.set    gEkrbattle_9, 0x0201FADC
+
+	.global gBanimFloorfx
+	.set    gBanimFloorfx, 0x0203E118
+
+	.global battle_terrain_table
+	.set    battle_terrain_table, 0x08EE0008
+
+	.global gUnk_Banim_Ekrbattle_0
+	.set    gUnk_Banim_Ekrbattle_0, 0x020145C8
+
+	.global gEkrbattle_1
+	.set    gEkrbattle_1, 0x0200003C
+
+	.global InitBanimTerrain
+	.type   InitBanimTerrain, %function
+	.thumb_func
+	.set    InitBanimTerrain, 0x0805B80C + 1
+
+	.global gBanimTerrainPaletteMaybe
+	.set    gBanimTerrainPaletteMaybe, 0x0200004C
+
+	.global gEkrbattle_2
+	.set    gEkrbattle_2, 0x02000044
+
+	.global TsaConfs_BanimTmA
+	.set    TsaConfs_BanimTmA, 0x085E3F9C
+
+	.global SetTextDrawNoClear
+	.type   SetTextDrawNoClear, %function
+	.thumb_func
+	.set    SetTextDrawNoClear, 0x08004360 + 1
+
+	.global gBanimFont
+	.set    gBanimFont, 0x02017648
+
+	.global Img_Banimmisc_0
+	.set    Img_Banimmisc_0, 0x0885616C
+
+	.global gBanimValid
+	.set    gBanimValid, 0x0203E100
+
+	.global gNopStr
+	.set    gNopStr, 0x085E3534
+
+	.global Text_SetCursor
+	.type   Text_SetCursor, %function
+	.thumb_func
+	.set    Text_SetCursor, 0x08003D84 + 1
+
+	.global gBanimText
+	.set    gBanimText, 0x02017660
+
+	.global Img_EfxLeftNameBox
+	.set    Img_EfxLeftNameBox, 0x088564D4
+
+	.global Img_EfxLeftItemBox
+	.set    Img_EfxLeftItemBox, 0x0885654C
+
+	.global Img_EfxRightNameBox
+	.set    Img_EfxRightNameBox, 0x0885659C
+
+	.global EfxTmReplacePal
+	.type   EfxTmReplacePal, %function
+	.thumb_func
+	.set    EfxTmReplacePal, 0x08073228 + 1
+
+	.global Img_EfxRightItemBox
+	.set    Img_EfxRightItemBox, 0x08856614
+
+	.global gBanimmisc_5
+	.set    gBanimmisc_5, 0x08856A60
+
+	.global gBanimmisc_6
+	.set    gBanimmisc_6, 0x08856AB0
+
+	.global ShouldCallBattleQuote
+	.type   ShouldCallBattleQuote, %function
+	.thumb_func
+	.set    ShouldCallBattleQuote, 0x080857E8 + 1
+
+	.global gEkrDebugModeMaybe
+	.set    gEkrDebugModeMaybe, 0x0203E0F8
+
+	.global gEkrPids
+	.set    gEkrPids, 0x0203E18C
+
+	.global gEkrBg2QuakeVec
+	.set    gEkrBg2QuakeVec, 0x02017760
+
+	.global gEfxSpellAnimExists
+	.set    gEfxSpellAnimExists, 0x0201772C
+
+	.global gEkrbattle_3
+	.set    gEkrbattle_3, 0x02017730
+
+	.global gEkrDeadEventExist
+	.set    gEkrDeadEventExist, 0x02017738
+
+	.global gEfxQuakeExist
+	.set    gEfxQuakeExist, 0x0201773C
+
+	.global gEfxHitQuakeExist
+	.set    gEfxHitQuakeExist, 0x02017740
+
+	.global gEfxFarAttackExist
+	.set    gEfxFarAttackExist, 0x02017748
+
+	.global gEfxHpBarResireFlag
+	.set    gEfxHpBarResireFlag, 0x02017750
+
+	.global gEkrbattle_4
+	.set    gEkrbattle_4, 0x02017754
+
+	.global gEfxTeonoState
+	.set    gEfxTeonoState, 0x02017758
+
+	.global gEkrbattle_5
+	.set    gEkrbattle_5, 0x0201775C
+
+	.global gEkrbattle_6
+	.set    gEkrbattle_6, 0x02017764
+
+	.global gEkrHitNow
+	.set    gEkrHitNow, 0x02017780
 
