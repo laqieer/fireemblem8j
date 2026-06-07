@@ -6155,3 +6155,8 @@
 	.thumb_func
 	.set    StartBgmFadeIn, 0x080024C4 + 1
 
+	.global NormalizeWaterMinimapTerrain
+	.type   NormalizeWaterMinimapTerrain, %function
+	.thumb_func
+	.set    NormalizeWaterMinimapTerrain, 0x080AC094 + 1
+
