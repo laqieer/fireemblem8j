@@ -1519,3 +1519,12 @@ PrepGetLatestUnitIndex	08097988	thumb	prep_unitselect
 SetStatScreenConfig	080890A0	thumb	prep_unitselect
 GetUnitFromPrepList	08097634	thumb	prep_unitselect
 StartStatScreen	0808ABD8	thumb	prep_unitselect
+ProcScr_efxLvupOBJ2	087A9A58	data	banim-efxlvup
+AnimScr_EfxLvupOBJ2	085F1414	data	banim-efxlvup
+Img_EfxLvupOBJ2	085F0960	data	banim-efxlvup
+Pal_EfxLvupBG2	085F0284	data	banim-efxlvup
+ProcScr_efxLvupBGCOL	087A9A78	data	banim-efxlvup
+FrameLut_EfxLvupBGCOL	080E6A7A	data	banim-efxlvup
+Pal_EfxLvupBGCOL	085F0304	data	banim-efxlvup
+EfxCyclePalette	08056828	thumb	banim-efxlvup
+FrameLut2_EfxLvupBGCOL	080E6ABC	data	banim-efxlvup

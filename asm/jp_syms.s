@@ -5976,3 +5976,32 @@
 	.thumb_func
 	.set    StartStatScreen, 0x0808ABD8 + 1
 
+	.global ProcScr_efxLvupOBJ2
+	.set    ProcScr_efxLvupOBJ2, 0x087A9A58
+
+	.global AnimScr_EfxLvupOBJ2
+	.set    AnimScr_EfxLvupOBJ2, 0x085F1414
+
+	.global Img_EfxLvupOBJ2
+	.set    Img_EfxLvupOBJ2, 0x085F0960
+
+	.global Pal_EfxLvupBG2
+	.set    Pal_EfxLvupBG2, 0x085F0284
+
+	.global ProcScr_efxLvupBGCOL
+	.set    ProcScr_efxLvupBGCOL, 0x087A9A78
+
+	.global FrameLut_EfxLvupBGCOL
+	.set    FrameLut_EfxLvupBGCOL, 0x080E6A7A
+
+	.global Pal_EfxLvupBGCOL
+	.set    Pal_EfxLvupBGCOL, 0x085F0304
+
+	.global EfxCyclePalette
+	.type   EfxCyclePalette, %function
+	.thumb_func
+	.set    EfxCyclePalette, 0x08056828 + 1
+
+	.global FrameLut2_EfxLvupBGCOL
+	.set    FrameLut2_EfxLvupBGCOL, 0x080E6ABC
+
