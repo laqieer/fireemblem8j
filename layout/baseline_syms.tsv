@@ -1127,3 +1127,9 @@ ShopSt_SetHeadLocBak	080BA0AC	thumb	bmshop
 ShopTryMoveHand	080BA01C	thumb	bmshop
 ShopTryScrollPage	080BA0B8	thumb	bmshop
 sShopState	0203EF94	data	bmshop
+gEventsScriptUtils_0	08A60B60	data	events_script_utils
+DrawEventMapAnimMaskfxTsa	080880D4	thumb	events_script_utils
+DrawEventMapAnimMaskfx	08088098	thumb	events_script_utils
+Pal_Congratulations	08A12A80	data	events_script_utils
+Pal_MapClear	08A12AA0	data	events_script_utils
+ProcScr_EventMapAnim	08A60B18	data	events_script_utils

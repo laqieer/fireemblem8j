@@ -4524,3 +4524,25 @@
 	.global sShopState
 	.set    sShopState, 0x0203EF94
 
+	.global gEventsScriptUtils_0
+	.set    gEventsScriptUtils_0, 0x08A60B60
+
+	.global DrawEventMapAnimMaskfxTsa
+	.type   DrawEventMapAnimMaskfxTsa, %function
+	.thumb_func
+	.set    DrawEventMapAnimMaskfxTsa, 0x080880D4 + 1
+
+	.global DrawEventMapAnimMaskfx
+	.type   DrawEventMapAnimMaskfx, %function
+	.thumb_func
+	.set    DrawEventMapAnimMaskfx, 0x08088098 + 1
+
+	.global Pal_Congratulations
+	.set    Pal_Congratulations, 0x08A12A80
+
+	.global Pal_MapClear
+	.set    Pal_MapClear, 0x08A12AA0
+
+	.global ProcScr_EventMapAnim
+	.set    ProcScr_EventMapAnim, 0x08A60B18
+
