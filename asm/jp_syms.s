@@ -3624,11 +3624,6 @@
 	.thumb_func
 	.set    StartFace, 0x08005544 + 1
 
-	.global StartManimLevelUpStatGainLabels
-	.type   StartManimLevelUpStatGainLabels, %function
-	.thumb_func
-	.set    StartManimLevelUpStatGainLabels, 0x08081138 + 1
-
 	.global gFaces
 	.set    gFaces, 0x03004920
 
@@ -6527,4 +6522,27 @@
 	.type   RegisterFillTile, %function
 	.thumb_func
 	.set    RegisterFillTile, 0x08001FA4 + 1
+
+	.global ProcScr_ManimLevelUpStatGainLabel
+	.set    ProcScr_ManimLevelUpStatGainLabel, 0x08A145D4
+
+	.global Img_ManimLevelUpStatGain
+	.set    Img_ManimLevelUpStatGain, 0x08A1D090
+
+	.global Pal_ManimLevelUp
+	.set    Pal_ManimLevelUp, 0x08A1D030
+
+	.global ProcScr_ManimLevelUpLabelColor
+	.set    ProcScr_ManimLevelUpLabelColor, 0x08A145E4
+
+	.global SpriteAnim_ManimStatGain
+	.set    SpriteAnim_ManimStatGain, 0x08A1599C
+
+	.global VramCopy
+	.type   VramCopy, %function
+	.thumb_func
+	.set    VramCopy, 0x080149B4 + 1
+
+	.global Img_ManimLevelUpStatGainDigits
+	.set    Img_ManimLevelUpStatGainDigits, 0x08A1D320
 

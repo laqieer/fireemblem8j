@@ -364,6 +364,7 @@ SECTIONS
         asm/baserom.o(.gap_159);
         src/mapanim_staffeffect.o(.text);
         asm/baserom.o(.gap_160);
+        src/mapanim_lvupfx.o(.text);
         src/mapanim_lvup.o(.text);
         asm/baserom.o(.gap_161);
         src/mapanim_spellassocfx.o(.text);

@@ -915,7 +915,6 @@ ProcScr_ManimLevelUp	08A145FC	data	mapanim_lvup
 PutManimLevelUpFrame	08080DD8	thumb	mapanim_lvup
 PutManimLevelUpStat	08080EE4	thumb	mapanim_lvup
 StartFace	08005544	thumb	mapanim_lvup
-StartManimLevelUpStatGainLabels	08081138	thumb	mapanim_lvup
 gFaces	03004920	data	mapanim_lvup
 ProcScr_MapAnimDefaultItemEffect	08A14DEC	data	mapanim_spellassoc
 StartMuActionAnim	0807BCC4	thumb	mapanim_spellassoc
@@ -1659,3 +1658,10 @@ SpriteRefresher_OnIdle	08005390	thumb	ctc
 GetIconGfxTileIndex	0800355C	thumb	icon
 item_icon_tiles	085BA470	data	icon
 RegisterFillTile	08001FA4	thumb	icon
+ProcScr_ManimLevelUpStatGainLabel	08A145D4	data	mapanim_lvupfx
+Img_ManimLevelUpStatGain	08A1D090	data	mapanim_lvupfx
+Pal_ManimLevelUp	08A1D030	data	mapanim_lvupfx
+ProcScr_ManimLevelUpLabelColor	08A145E4	data	mapanim_lvupfx
+SpriteAnim_ManimStatGain	08A1599C	data	mapanim_lvupfx
+VramCopy	080149B4	thumb	mapanim_lvupfx
+Img_ManimLevelUpStatGainDigits	08A1D320	data	mapanim_lvupfx
