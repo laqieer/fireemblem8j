@@ -47,10 +47,21 @@ def port(name):
 
     sub = sh(f"python3 scripts/extract_run.py {US}/{name}.c {' '.join(funcs)}").stdout
     open(f"src/{name}.c", "w").write(sub)
-    sh(f"make src/{name}.o")
     obj = f"src/{name}.o"
+    r = sh(f"make src/{name}.o")
     if not os.path.exists(obj):
-        print(f"{name}: subset compile failed"); os.remove(f"src/{name}.c"); return False
+        # Cross-TU callees with no prototype (defined in another TU, not in a
+        # header) trip agbcc's -Wimplicit -Werror. Add a K&R extern for each
+        # "implicit declaration of function X" and retry: the call's codegen
+        # doesn't depend on the prototype (args are pushed per the call site), so
+        # the .text bytes are unchanged; verify-or-revert guards anything wrong.
+        impl = set(re.findall(r"implicit declaration of function [`'\"]?(\w+)", r.stderr + r.stdout))
+        if impl:
+            open(f"src/{name}.c", "w").write(
+                "".join(f"extern int {f}();\n" for f in sorted(impl)) + sub)
+            sh(f"make src/{name}.o")
+        if not os.path.exists(obj):
+            print(f"{name}: subset compile failed"); os.remove(f"src/{name}.c"); return False
 
     # Drop file-scope data the run doesn't reference (the whole header is pulled
     # in, but unreferenced globals/arrays — e.g. proc scripts — would need

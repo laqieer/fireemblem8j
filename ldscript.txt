@@ -290,6 +290,7 @@ SECTIONS
         src/uiarena.o(.text);
         asm/baserom.o(.gap_125);
         src/gamerankings.o(.text);
+        src/cg.o(.text);
         asm/baserom.o(.gap_126);
         src/worldmap_face.o(.text);
         asm/baserom.o(.gap_127);
@@ -406,11 +407,13 @@ SECTIONS
         asm/baserom.o(.gap_180);
         src/bmshop.o(.data);
         asm/baserom.o(.gap_181);
-        src/classchg-handler.o(.data);
+        src/cg.o(.data);
         asm/baserom.o(.gap_182);
+        src/classchg-handler.o(.data);
+        asm/baserom.o(.gap_183);
         src/classchg-postconfirm.o(.data);
         src/bmguide.o(.data);
-        asm/baserom.o(.gap_183);
+        asm/baserom.o(.gap_184);
     } > rom
 
     .bss_0 0x03000000 (NOLOAD) : { src/rng.o(.bss) src/rng.o(COMMON) } > iwram  /* rng: gRNSeeds, gLCGRNValue */
