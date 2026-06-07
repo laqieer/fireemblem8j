@@ -49,3 +49,13 @@ __pycache__/
 
 # Diagnosis artifacts: isolated compile probes (never carved/committed)
 src/_diag_*
+
+# IDA Pro reverse-engineering DBs (built locally via `make ida-db`; see
+# docs/reverse-engineering.md). The scripts under scripts/ida/ are tracked.
+/tools/ida/*.i64
+/tools/ida/*.id0
+/tools/ida/*.id1
+/tools/ida/*.id2
+/tools/ida/*.nam
+/tools/ida/*.til
+*.i64

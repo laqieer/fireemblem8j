@@ -58,6 +58,17 @@ fireemblem8.gba: OK
 | `tools/agbcc`    | The GCC 2.95 ARM compiler (install locally; gitignored).       |
 | `docs/`          | Strategy & methodology notes.                                  |
 
+## Reverse engineering
+
+For the remaining region-different functions (text/font/menu/save) that must be
+hand-decompiled against the JP ROM, IDA Pro's Hex-Rays decompiler is wired up
+**headlessly over MCP** so Claude Code (and the autonomous loop) can ask for
+pseudo-C of any JP address. `make ida-db` builds the database from the ELF; the
+MCP server is registered as `ida`. Setup, rationale and usage are in
+[`docs/reverse-engineering.md`](docs/reverse-engineering.md) and
+[`docs/decisions.md`](docs/decisions.md) (D6). The IDA install and database are
+local/gitignored; only the scripts are tracked.
+
 ## License
 
 Decompilation infrastructure mirrors the US decomp. Game assets/data are the

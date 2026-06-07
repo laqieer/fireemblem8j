@@ -74,7 +74,15 @@ compare: $(ROM)
 layout:
 	$(PYTHON) scripts/gen_layout.py
 
-.PHONY: all compare clean layout
+# Build the IDA Pro reverse-engineering database (tools/ida/fe8j.i64) from the
+# 32-bit ARM ELF, for the headless Hex-Rays decompiler MCP. Needs the local
+# idalib venv (which has the `idapro` module). See docs/reverse-engineering.md.
+# Re-run after meaningful decomp progress to refresh symbols.
+IDA_PY ?= $(HOME)/ida-mcp-venv/bin/python
+ida-db: $(ELF)
+	$(IDA_PY) scripts/ida/build_ida_db.py
+
+.PHONY: all compare clean layout ida-db
 
 asm/baserom.o: baserom.gba
 

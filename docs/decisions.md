@@ -194,3 +194,55 @@ the guards flag as suspicious.
 `.github/workflows/backfill-progress.yml` (workflow_dispatch, uses the secret).
 One run creates the `jp` version and fills the timeline; `progress.yml` keeps it
 current on every push thereafter.
+
+## D6 — Reverse-engineering: IDA Pro Hex-Rays via headless MCP, fed the ELF
+
+**Date context:** the automatable porting has converged; what remains is the
+~16 region-different functions (text/font/menu/save) that need *hand*-decompiling
+against the JP ROM's actual behaviour. The project board's *Reverse Engineering
+tools* section lists IDA Pro 9.3 + Ghidra and says "search and install MCP to use
+them." So: stand up a decompiler the autonomous loop can query.
+
+**Consulted:** the in-repo research workflow (4-way fan-out + adversarial
+verification) and Copilot CLI (`agency cp`). Copilot endorsed the ELF-first
+approach and added the guardrails below.
+
+**Decision:** install **IDA Pro 9.3 Linux-native** and expose its Hex-Rays
+decompiler through **mrexodia/ida-pro-mcp's `idalib-mcp`** (the upstream-
+recommended *headless* server — no GUI, no WSL↔Windows bridge), registered with
+Claude Code as the MCP server `ida`. Feed IDA the project's own **`fireemblem8.elf`**
+(32-bit ARM), not the raw `.gba`.
+
+**Rationale / what was validated (empirically, end-to-end):**
+* Linux-native idalib avoids the WSL2 NAT-mode bridge and runs in the autonomous
+  loop with no display. Install + keygen-patch + named `.hexlic` (HEXARM) all work
+  headlessly. The idalib "License not yet accepted" batch gate (normally a GUI
+  click) is cleared headlessly by writing the `EULA 90` registry key via the IDA
+  registry API.
+* **ELF, not `.gba`:** loading the raw `.gba` makes IDA's ARM module default to
+  **AArch64**; the decompiler then refuses the 32-bit Thumb functions and forcing
+  the flag off trips `INTERR 50735`. The ELF loads as native **AArch32** (correct
+  `HEXARM` decompiler), carries the project's symbols + `$t`/`$d` Thumb mapping,
+  and its still-incbin region is the raw ROM bytes at real JP addresses — so the
+  region-different functions decompile there. Proven: `NextRN`, `DrawGlyph`
+  (font blitter), and `DecodeString` (the JP Huffman text decoder) all produce
+  clean C, both via direct idalib and through the MCP protocol.
+* `make ida-db` builds `tools/ida/fe8j.i64` from the ELF, importing all 7743
+  `sym_jp.txt` functions (forced Thumb) so `decompile(<addr>)` works anywhere.
+
+**Guards (from Copilot review):** treat the `.i64` as a *disposable cache*, not
+a source of truth — `make compare` remains the only authority. Use Hex-Rays as a
+*hypothesis generator*: port US C with JP-specific data/layout, then verify with
+`make compare`; never commit Hex-Rays-shaped C directly. Decompile **by address**
+(names can resolve onto the 0x09000000 ROM mirror). Rebuild the `.i64` after
+meaningful decomp progress to refresh symbols.
+
+**Rejected alternatives:** the IDA GUI-plugin MCP (needs a running GUI + the
+WSL↔Windows bridge); Ghidra headless (`pyghidra-mcp`) — kept as the documented
+fallback, but it needs a fresh JDK 21 + Ghidra + a GBA-loader rebuilt against
+current Ghidra, whereas IDA was ~90% staged on the box and HEXARM gives stronger
+ARM/Thumb output.
+
+**Status:** installed, registered (`claude mcp list` → `ida ✓ Connected`), and
+verified end-to-end. Tooling tracked under `scripts/ida/` + `docs/reverse-engineering.md`;
+the DB and IDA install are local/gitignored.
