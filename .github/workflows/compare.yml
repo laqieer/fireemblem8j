@@ -41,4 +41,5 @@ jobs:
 
       - name: Note when ROM unavailable
         if: ${{ env.BASEROM_URL == '' }}
-        run: echo "BASEROM_URL secret not set - skipped byte-match compare (forks: add the secret to enable)."
+        run: |
+          echo "BASEROM_URL secret not set - skipped byte-match compare. Add the secret to enable it."
