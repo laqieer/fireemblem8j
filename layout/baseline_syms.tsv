@@ -1541,3 +1541,4 @@ Pal_DemoKingTunkFace	08855D38	data	banim-ekrdragon-demonking
 Img_DemoKingTunkFace	088539E0	data	banim-ekrdragon-demonking
 BanimScr_Ekrdragonfx_3	0884886C	data	banim-ekrdragon-demonking
 Img_DemoKingTunkFace2	08854BA4	data	banim-ekrdragon-demonking
+GetEkrDragonStatusAttr	08071FF8	thumb	banim-ekrdragonstatus

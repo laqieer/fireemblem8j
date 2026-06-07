@@ -6048,3 +6048,8 @@
 	.global Img_DemoKingTunkFace2
 	.set    Img_DemoKingTunkFace2, 0x08854BA4
 
+	.global GetEkrDragonStatusAttr
+	.type   GetEkrDragonStatusAttr, %function
+	.thumb_func
+	.set    GetEkrDragonStatusAttr, 0x08071FF8 + 1
+
