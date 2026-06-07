@@ -1,5 +1,6 @@
 # Fire Emblem: Seima no Kouseki (聖魔の光石)
 
+[![make compare](https://img.shields.io/endpoint?url=https%3A%2F%2Fgist.githubusercontent.com%2Flaqieer%2Fce9b334941ad75419af79d218cae5ddf%2Fraw%2Fcompare.json)](#building)
 [![code decompiled](https://img.shields.io/endpoint?url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Ffireemblem8j%2Fjp%2Fdefault%2F%3Fmode%3Dshield%26measure%3Dcode&label=code%20decompiled)](https://laqieer.github.io/fe-decomp-portal/)
 [![functions decompiled](https://img.shields.io/endpoint?url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Ffireemblem8j%2Fjp%2Fdefault%2F%3Fmode%3Dshield%26measure%3Dfunctions&label=functions)](https://laqieer.github.io/fe-decomp-portal/)
 [![Decomp progress](https://github.com/laqieer/fireemblem8j/actions/workflows/progress.yml/badge.svg)](https://github.com/laqieer/fireemblem8j/actions/workflows/progress.yml)
