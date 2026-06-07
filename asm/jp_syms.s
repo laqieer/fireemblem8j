@@ -6100,3 +6100,8 @@
 	.thumb_func
 	.set    LockGame, 0x08015384 + 1
 
+	.global CopyString
+	.type   CopyString, %function
+	.thumb_func
+	.set    CopyString, 0x08012F78 + 1
+

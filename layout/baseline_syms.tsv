@@ -1553,3 +1553,4 @@ gHelpInfo_CbpHp	08A7314C	data	bksel
 EndTargetSelection	0805082C	thumb	bmmenu
 IsCameraNotWatchingPosition	08015EA8	thumb	bmmenu
 LockGame	08015384	thumb	bmmenu
+CopyString	08012F78	thumb	bmsave-misc
