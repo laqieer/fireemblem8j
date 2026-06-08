@@ -6688,3 +6688,43 @@
 	.thumb_func
 	.set    NewEfxALPHA, 0x0805C7CC + 1
 
+	.global EfxGetCamMovDuration
+	.type   EfxGetCamMovDuration, %function
+	.thumb_func
+	.set    EfxGetCamMovDuration, 0x08056920 + 1
+
+	.global StartSubSpell_efxHazymoonBG_A
+	.type   StartSubSpell_efxHazymoonBG_A, %function
+	.thumb_func
+	.set    StartSubSpell_efxHazymoonBG_A, 0x08061540 + 1
+
+	.global StartSubSpell_efxHazymoonOBJ3
+	.type   StartSubSpell_efxHazymoonOBJ3, %function
+	.thumb_func
+	.set    StartSubSpell_efxHazymoonOBJ3, 0x08061890 + 1
+
+	.global NewefxRestRST
+	.type   NewefxRestRST, %function
+	.thumb_func
+	.set    NewefxRestRST, 0x0805C1A4 + 1
+
+	.global StartSubSpell_efxResireRST
+	.type   StartSubSpell_efxResireRST, %function
+	.thumb_func
+	.set    StartSubSpell_efxResireRST, 0x08060938 + 1
+
+	.global StartSubSpell_efxHazymoonBG_B
+	.type   StartSubSpell_efxHazymoonBG_B, %function
+	.thumb_func
+	.set    StartSubSpell_efxHazymoonBG_B, 0x080615B0 + 1
+
+	.global StartSubSpell_efxHazymoonOBJ2
+	.type   StartSubSpell_efxHazymoonOBJ2, %function
+	.thumb_func
+	.set    StartSubSpell_efxHazymoonOBJ2, 0x080616E8 + 1
+
+	.global StartSubSpell_efxHazymoonBG_C
+	.type   StartSubSpell_efxHazymoonBG_C, %function
+	.thumb_func
+	.set    StartSubSpell_efxHazymoonBG_C, 0x08061614 + 1
+

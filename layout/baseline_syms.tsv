@@ -1703,3 +1703,11 @@ StartSubSpell_efxSongOBJ	0805D8DC	thumb	banim-efxmagic-dancerings
 NewEfxRestWINH_	0805C6EC	thumb	banim-efxmagic-dancerings
 NewEfxTwobaiRST	0805C28C	thumb	banim-efxmagic-dancerings
 NewEfxALPHA	0805C7CC	thumb	banim-efxmagic-dancerings
+EfxGetCamMovDuration	08056920	thumb	banim-efxmagic-eclipse
+StartSubSpell_efxHazymoonBG_A	08061540	thumb	banim-efxmagic-eclipse
+StartSubSpell_efxHazymoonOBJ3	08061890	thumb	banim-efxmagic-eclipse
+NewefxRestRST	0805C1A4	thumb	banim-efxmagic-eclipse
+StartSubSpell_efxResireRST	08060938	thumb	banim-efxmagic-eclipse
+StartSubSpell_efxHazymoonBG_B	080615B0	thumb	banim-efxmagic-eclipse
+StartSubSpell_efxHazymoonOBJ2	080616E8	thumb	banim-efxmagic-eclipse
+StartSubSpell_efxHazymoonBG_C	08061614	thumb	banim-efxmagic-eclipse

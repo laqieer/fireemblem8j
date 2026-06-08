@@ -365,3 +365,6 @@ A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 0679F4	067B94	src/banim-efxmagic-dancerings.o(.text)	banim-efxmagic-dancerings(run): StartSpellAnimFillasMight, StartSpellAnimThorsIre, StartSpellAnimNinisGrace...
 601CC0	601CD8	src/banim-efxmagic-dancerings.o(.data)	banim-efxmagic-dancerings .data
 0E37B8	0E37C5	src/banim-efxmagic-dancerings.o(.rodata)	banim-efxmagic-dancerings .rodata
+06138C	061540	src/banim-efxmagic-eclipse.o(.text)	banim-efxmagic-eclipse(run): StartSpellAnimEclipse, efxHazymoon_Loop_Main
+60073C	600754	src/banim-efxmagic-eclipse.o(.data)	banim-efxmagic-eclipse .data
+0E262C	0E2638	src/banim-efxmagic-eclipse.o(.rodata)	banim-efxmagic-eclipse .rodata
