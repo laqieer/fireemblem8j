@@ -42,20 +42,34 @@ global:
   # ---- Compilation: the full FE8J agbcc pipeline ----
   # Mizuchi hands us {{cFilePath}} (context + Claude's C, as raw UTF-8 C) and an
   # {{objFilePath}} to produce. This reproduces the Makefile C rule exactly:
-  #   cpp (agbcc headers) | iconv UTF-8 -> CP932 | agbcc -> .s | arm-none-eabi-as -> .o
+  #   cpp (agbcc headers) | iconv UTF-8 -> CP932 | agbcc -> .s | as -> .o | apply_patches.py
   # Codegen flags are byte-identical to the Makefile's CC1FLAGS/ASFLAGS so the
-  # emitted machine code matches; we additionally append the project's trailing
-  #   .text / .align 2, 0
-  # that the Makefile adds after agbcc, so section layout lines up for objdiff.
+  # emitted machine code matches:
+  #   - agbcc flags == CC1FLAGS, INCLUDING -Werror. The Makefile builds src/ with
+  #     -Werror, so a candidate that warns (implicit decl / parentheses) would fail
+  #     the real build; compiling it here without -Werror would let mizuchi report a
+  #     false success/match for C that `make compare` cannot use. We keep -Werror so
+  #     mizuchi's "compiles" gate matches the repo's acceptance gate.
+  #   - we append the project's trailing `.text` / `.align 2, 0` after agbcc, so
+  #     section layout lines up for objdiff.
+  #   - we re-run scripts/apply_patches.py on the produced .o, exactly as the Makefile
+  #     C rule does (Makefile line 103). Any object covered by layout/patches.tsv gets
+  #     section-alignment / reloc-addend fixes re-applied; without this, an object that
+  #     has patch rows would be diffed in its UNPATCHED form and mizuchi could report a
+  #     false diff even when the candidate C matches the repository build. apply_patches
+  #     is a no-op (exit 0) for objects with no rows, so it is safe to always invoke.
+  #     NOTE: it keys on the .o BASENAME, so {{objFilePath}}'s basename must equal the
+  #     real target object's (e.g. banim-efxmagic-flux.o) for patched objects to match.
   compilerScript: |
     set -euo pipefail
     ASM="$(mktemp --suffix=.s)"
     trap 'rm -f "$ASM"' EXIT
     cpp -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef "{{cFilePath}}" \
       | iconv -f UTF-8 -t CP932 \
-      | tools/agbcc/bin/agbcc -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm -ffix-debug-line -g -o "$ASM"
+      | tools/agbcc/bin/agbcc -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -ffix-debug-line -g -o "$ASM"
     printf '\t.text\n\t.align 2, 0\n' >> "$ASM"
     arm-none-eabi-as -mcpu=arm7tdmi -mthumb-interwork -I include -I . "$ASM" -o "{{objFilePath}}"
+    python3 scripts/apply_patches.py "{{objFilePath}}"
 
   # Max Claude retries per function before giving up.
   maxRetries: 25

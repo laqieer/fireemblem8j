@@ -67,14 +67,32 @@ ANTHROPIC_API_KEY=sk-ant-... \
 `scripts/tools/mizuchi/` the project root, and `fireemblem8.map` etc. would
 resolve to the wrong place. The config still *parses* either way — see below.)
 
+Running from the repo root generates transient state there: the `./mizuchi.yaml`
+copy/symlink, the codebase index `mizuchi-db.json`, the `prompts/` sets, and the
+`outputDir` writes (`run-results/`, `run-report/`, `claude-cache/`). These are all
+**already gitignored** (see `.gitignore`), so following the steps above will not
+dirty the working tree or risk committing tool state. If you point `outputDir` /
+`promptsDir` elsewhere, ignore those paths too.
+
 ### Required environment / prerequisites
 - `ANTHROPIC_API_KEY` — needed **only** for `run` (the Claude Runner). `index-codebase`
   and `atlas` work without it. A cached Claude Code login is also honored. **Never
   hardcode the key**; the config documents it as an env var only.
 - `tools/agbcc`, `baserom.gba`, `fireemblem8.map` present (same as `make compare`).
-  The compiler script in the config reproduces the Makefile pipeline exactly:
-  `cpp | iconv UTF-8→CP932 | agbcc … -O2 -fhex-asm | arm-none-eabi-as`, plus the
-  trailing `.text` / `.align 2, 0`.
+  The compiler script in the config reproduces the Makefile C rule exactly:
+  `cpp | iconv UTF-8→CP932 | agbcc … -Werror -O2 -fhex-asm | arm-none-eabi-as`,
+  plus the trailing `.text` / `.align 2, 0`, then `scripts/apply_patches.py` on the
+  produced `.o`. Two details that keep mizuchi's gate aligned with the repo's:
+  - **`-Werror`** is included (it's in the Makefile `CC1FLAGS`), so a candidate that
+    only "compiles" with warnings — which the real `src/` build would reject — is not
+    counted as a mizuchi success.
+  - **`apply_patches.py`** is re-run on the object, as the Makefile does, so objects
+    listed in `layout/patches.tsv` are diffed in their patched form (no false diffs).
+    It is a no-op for objects with no patch rows. Because it keys on the `.o`
+    *basename*, patched objects only match if mizuchi's target object path keeps the
+    real basename (e.g. `banim-efxmagic-flux.o`).
+  Even so, **`make compare` remains the only oracle** — a green mizuchi diff must still
+  pass it.
 - Embeddings (for the Atlas similarity cloud) want Python 3.10+ and download
   `torch`/`transformers` (~2–3 GB, jina-embeddings-v2). Skip with
   `index-codebase --skip-embeddings` if you only want the function list.

@@ -28,6 +28,16 @@ src/data/*.s
 # locally via scripts/tools/mizuchi/setup.sh. The setup script + FE8J config
 # (scripts/tools/mizuchi/) and docs/tools/mizuchi.md are tracked.
 /tools/mizuchi
+# Root-level state mizuchi generates when run from the repo root (the config is
+# copied/symlinked here, and outputDir/promptsDir resolve to the project root):
+# the config copy, the codebase index, the prompt sets, and the run outputs
+# (outputDir writes run-results / run-report / claude-cache). All transient.
+/mizuchi.yaml
+/mizuchi-db.json
+/prompts/
+/run-results/
+/run-report/
+/claude-cache/
 
 # Claude Code: share settings.json + loop_prompt.md, but keep local/transient
 # state out (per-user overrides and the ralph-loop session-state file).
