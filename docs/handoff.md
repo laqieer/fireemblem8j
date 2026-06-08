@@ -8,11 +8,24 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
-- **DATA FRONTIER OPENED (2026-06-08) — the biggest lever.** Data is **94% of the
-  ROM** (13.3 MB vs 858 KB code) and was ~0% carved. **26% of the ROM is byte-
-  identical US<->JP at the same offset** (shared graphics/anim/asset data). Carved the
-  **entire banim data subsystem** → **data-in-src 0.05% -> 18.67%, symbols 3.8% ->
-  7.93%, 313 carved objects**, all durable:
+- **DATA FRONTIER (2026-06-08) — data carved 0.05% -> 58.58%, symbols 3.8% -> 15.96%,
+  478 objects, ROM ~47% carved (gen_layout), all durable.** Data is 94% of the ROM
+  (13.3 MB). Three harvesters now capture region-same data mechanically:
+  - `scripts/carve_data.py` — region-same-at-same-offset named objects (banim subsystem).
+  - **`scripts/carve_data_shifted.py`** — the big one: data that is byte-identical to US
+    but RELOCATED by a constant per-object shift (localized content earlier changed
+    size). KEY: a block byte-identical at a shift is necessarily POINTER-FREE, so the
+    full-block-match-at-shift gate self-selects exactly the opaque assets (sound,
+    graphics, sprites) and never a pointer table. find_shift = majority vote over 24
+    chunks; full-object match -> one carve; PARTIAL match -> carve the matching per-symbol
+    runs, leave region-different islands in incbin. **Carved direct_sound_data (3.27 MB,
+    439 M4A samples), data_portrait (637KB), banim-ekrdragonfx (410KB), mapanim_eventcall
+    (191KB), + hundreds more.** GOTCHA: incbin sections sit at exact (often non-4-aligned)
+    JP addresses — emit NO `.align` or ld pads -> ROM growth -> sha1 fail.
+  - tier-2 region-different ASSETS with table-pinned boundaries (data_banim_pal).
+  Remaining data is genuinely region-different (text/localized tables/pointer-bearing) —
+  tier-3 (real C w/ JP values) — plus unidentified region-same blocks (incbin in US too).
+- (historical) The banim data subsystem carved first → data 18.67%:
   - region-same structured tables as real C: `banim_data[]`, `banim_pal_chara`
     (character_battle_animation_palette_table), `banim_terrain_data`
     (battle_terrain_table).
