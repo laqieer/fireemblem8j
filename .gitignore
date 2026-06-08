@@ -75,6 +75,10 @@ src/data/*.s
 .claude/*.local.md
 .claude/*.local.json
 
+# Parallel-carving local coordination state (scripts/parallel/claim.py): task
+# claims + the registry lock. Local only — must NOT travel on per-task branches.
+/layout/claims/
+
 # Editor / OS cruft
 *.swp
 .DS_Store
