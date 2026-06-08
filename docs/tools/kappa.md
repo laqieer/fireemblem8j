@@ -162,9 +162,10 @@ scripts:
 - **Do soon (high ROI):** port the AST-grep offset/size/Q-notation code-fix
   plugins (idea A) to a `scripts/codefix/` set run before `make compare` — they
   map directly onto our `/* 0C */` / struct-offset conventions and AST-grep is
-  already battle-tested here. Wire objdiff-cli as a function-scoped diff tool the
-  loop can read (idea D) — we're building objdiff-cli anyway, and a readable
-  per-function diff beats the binary `make compare` for guiding edits.
+  already battle-tested here. If/when we add objdiff-cli, wire it as a
+  function-scoped diff tool the loop can read (idea D) — a readable per-function
+  diff would beat the binary `make compare` for guiding edits. (No objdiff-cli
+  tooling exists in the repo yet; this is a future proposal.)
 - **Do if/when useful:** asm-embedding similarity retrieval against US source
   (idea B) and a CLI decomp.me scratch creator (idea C) as an escape hatch for
   stubborn region-different functions.
@@ -173,10 +174,10 @@ scripts:
   loading, RxDB, and the scatter-chart UI — all IDE-coupled with no headless win.
 
 These align with settled project direction: upstream decomp-permuter is already
-our byte-matcher (`docs/reverse-engineering.md`, `docs/decisions.md` D6/D7/D9)
-and objdiff-cli is being set up separately, so kappa mainly contributes the
-AST-grep code-fix layer and the few-shot/objdiff loop structure on top of tools
-we already run.
+our byte-matcher (`docs/reverse-engineering.md`, `docs/decisions.md` D6/D7/D9),
+and a function-scoped objdiff-cli oracle is a candidate future addition (not yet
+present in the repo), so kappa mainly contributes the AST-grep code-fix layer
+and the few-shot/objdiff loop structure on top of tools we already run.
 
 ### Key file references (in the `/tmp/kappa` clone)
 - AST-grep plugins: `example-kappa-plugins/AddOffsetCommentsPlugin.js`,
