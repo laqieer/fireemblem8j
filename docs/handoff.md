@@ -48,11 +48,24 @@
      "no diff parsed": build fails, stale-correct ROM, 0 content-diff). Fix: on a
      `multiple definition of \`X'` link error, drop X's baseline_syms row (the carved
      object is the real provider) and rebuild; verify-or-revert guards wrong addresses.
-   - **Remaining near-misses** (still failing after the 3 fixes): genuine
-     region-different RAM/data — e.g. `ctc` (`.bss_20 overlaps .bss_0`: two carved
-     `.bss` blocks collide → needs per-symbol RAM placement, not whole-section blocks),
-     `unitlistscreen`/`uiutils`/`scene` (small content diffs at romdata sites). Take
-     the biggest class from the latest `scripts/diag_misses.py` tally next.
+   - **Remaining frontier** (latest `diag_misses.py`, 277 objects; ~35 candidates):
+     - **romdata near-miss (≤4 diff, +romdata) ×8** — `uichapterstatus`,
+       `unitlistscreen`, `banim-efxflashbg/-efxmagic-dancerings/-eclipse/-evileye`,
+       `bmio`, `scene`. Compound, not one-line: e.g. `banim-efxflashbg` has both an
+       11-byte `.rodata` that's *referenced but not placed* → appended → ROM +11
+       growth, AND a region-different ProcScr function pointer (`0x080dfbe4` @
+       0x5e3ab0). Candidate fixes: (i) place referenced `.rodata`/`.data` sections via
+       their NAMED syms (extend romdata placement beyond section-symbol refs); (ii)
+       subtract the addend in the romdata internal-pointer loop too (mirror the .text
+       addend fix). Verify per-TU before generalizing.
+     - **"no diff parsed", +ram+romdata ×8** — `agb_sram`, `bm`, `bmarena`, `bmmap`,
+       `bmmind`, `bmsave-multiarena`, `cp_decide`, `sio_core`. The `ctc`-style
+       **`.bss` overlap** (two carved `.bss` blocks collide, e.g. `.bss_20` ⊂ `.bss_0`)
+       → needs per-symbol IWRAM placement, not whole-section blocks.
+     - **huge diff (~11.9M) ×3** — `banim-efxmagic-flux/-aircalibur/-thunder`,
+       all first @ 0x373c: catastrophic misplacement (likely a bad romdata base or a
+       falsely-verified run). Investigate separately; don't sweep blindly.
+     - **no-runs ×15 / compile-fail ×2** — Phase 3 (hand-decompile) / agbcc C89 fixups.
 3. **Phase 3 — region-different CODE** (`no verified runs`): hand-decompile the
    functions in `ida`/`ghidra` (decompile by JP address), write `src/` C matching
    the JP behaviour, byte-match with the permuter, then carve + `make compare`.
