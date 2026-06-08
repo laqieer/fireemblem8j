@@ -69,10 +69,12 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
     section base works; each ref needs its JP literal BAKED IN (patch the .text/.data
     word to jp[ref site] + remove the reloc). That's the next intricate fix for these 3.
     BAKE-IN ATTEMPTED (2026-06-08): rewrite each ref's in-section addend to
-    jp[ref]-base, then objcopy --update-section to patch the .o. FAILED — objcopy
-    --update-section corrupted the .text (flux 1->327 byte diff; size/flags subtlety).
-    Need ELF-level section patching (parse the ELF, patch the section's file bytes
-    directly) OR rewrite the relocations, not objcopy --update-section. flux is just
+    jp[ref]-base, then objcopy --update-section to patch the .o. PARTIAL — objcopy --update-section round-trips fine in isolation; the bug is the
+    bake-in SEQUENCING (multiple objcopy ops on the same .o reset the
+    --set-section-alignment, so the NOLOAD .rodata moves off its 2-aligned JP base ->
+    flux 1->7 bytes). Fix: do ALL objcopy edits in ONE pass (compute final section
+    bytes + final alignment, write once) or re-apply --set-section-alignment AFTER
+    --update-section. Mechanism is sound, just needs careful single-pass sequencing. flux is just
     1 byte off with NOLOAD alone (.data's addend-0 .rodata ref); aircalibur/thunder/
     fire have larger region-different .rodata content (~200-430 bytes) needing the
     same per-ref bake-in. Do this fresh with a proper ELF-patch helper.
