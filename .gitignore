@@ -24,6 +24,10 @@ src/data/*.s
 /tools/decomp-permuter
 /nonmatchings/
 
+# asm-differ: upstream clone is local (set up via scripts/tools/asm-differ/setup.sh).
+# diff_settings.py (repo root) + docs/tools/asm-differ.md are tracked; the venv
+# lives outside the repo (default $HOME/asm-differ-venv, like the permuter's).
+/tools/asm-differ
 # m2c (asm->C decompiler): upstream clone is local (set up via
 # scripts/tools/m2c/setup.sh). The wrapper scripts under scripts/tools/m2c/
 # and docs/tools/m2c.md are tracked.
