@@ -7,8 +7,8 @@
 
 ## Verified state (update each working stretch)
 
-- **Functions decompiled: 1152 / 8,528 = 13.5%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 277.** `make compare` → OK. Build is always byte-perfect
+- **Functions decompiled: 1153 / 8,528 = 13.5%** (`python3 scripts/calcprogress.py`).
+- **Carved objects: 278.** `make compare` → OK. Build is always byte-perfect
   (`port_run` verifies every carve and reverts non-matches).
 - ~35 uncarved candidate TUs remain (`.text` 0x40..0x8000). THREE generalizing
   port_run fixes this round unblocked +41 (236→277): (1) addend subtraction for
@@ -63,19 +63,23 @@
        *function pointers* (addend 0) plus referenced-but-unplaced `.rodata` growth,
        not indexed-table addends. Don't re-try the romdata-addend path; the real fix
        is (i) **place referenced `.rodata`/`.data` via named syms** at their JP address.
-     - **"no diff parsed", +ram+romdata ×8** — `agb_sram`, `bm`, `bmarena`, `bmmap`,
-       `bmmind`, `bmsave-multiarena`, `cp_decide`, `sio_core`. The `ctc`-style
-       **`.bss` overlap**. Confirmed root cause (agb_sram): the link fails with
-       `section .bss_20 VMA [03000038,0300003f] overlaps section .bss_0 VMA
-       [03000000,0300126f]`. IWRAM globals from DIFFERENT TUs are **interleaved** in
-       the 0x03000000 region, so port_run placing each object's whole `.bss` as one
-       contiguous block (carved_ram.tsv `.bss_N`) is fundamentally wrong — a new
-       carve's block lands inside an earlier carve's over-claimed block. **The
-       architectural fix: place IWRAM/.bss globals as INDIVIDUAL absolute symbols
-       (baseline_syms / jp_syms.s) at their JP addresses, shared across all carves;
-       stop emitting per-object `.bss` blocks.** This requires converting the
-       existing `.bss`-block carves too (audit carved_ram.tsv), so do it in a fresh
-       session with full context, gated by `make compare` — NOT as a tail-end patch.
+     - **"no diff parsed", +ram+romdata — `.bss` overlap. PARTLY FIXED.**
+       - **DONE:** COMMON IWRAM globals are now resolved as INDIVIDUAL absolute
+         symbols (port_run, `*COM*` → `new_syms`), since the linker's weak common
+         yields to the absolute def → no NOLOAD block, no overlap. Plus `.bss`/`*COM*`
+         added to the trimmer for unreferenced statics. **Carved `agb_sram` (277→278).**
+       - **STILL BLOCKED (`bm`, `bmarena`, `bmmap`, `bmmind`, `bmsave-multiarena`,
+         `cp_decide`, `sio_core`):** the deeper cause — the ldscript's FIRST
+         `(COMMON)`-collecting block (`rng.o(COMMON)` in `.bss_0` @ 0x03000000)
+         absorbs ALL orphan COMMON from every object. The map shows **m4a.o
+         contributes 0x1250 bytes of COMMON there** (sound work-RAM), making `.bss_0`
+         span [0x03000000,0x0300126f]. When a new carve shifts COMMON allocation it
+         collides with `soundwrapper`/`agb_sram` globals that sit INSIDE m4a's region
+         (shared sound RAM). **Next fix:** route orphan COMMON to correct JP addresses
+         (resolve m4a's work-RAM common as an absolute sym at its real JP addr) OR add
+         a dedicated non-overlapping `(COMMON)` sink in `ldscript.template.txt` placed
+         before `.bss_0`. Verify m4a's work-RAM JP address first (is 0x03000020 real
+         or bogus-but-NOLOAD-harmless?). Gated by `make compare`.
      - **huge diff (~11.9M) ×3** — `banim-efxmagic-flux/-aircalibur/-thunder`,
        all first @ 0x373c: catastrophic misplacement (likely a bad romdata base or a
        falsely-verified run). Investigate separately; don't sweep blindly.
