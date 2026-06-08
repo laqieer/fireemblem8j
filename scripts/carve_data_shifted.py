@@ -108,8 +108,10 @@ def main():
         if joff < 0 or (us_hi - shift) - 0x08000000 > len(jp):
             continue
         addrs = sorted(a for a in SYMS if us_lo <= a < us_hi)
-        if not addrs or addrs[0] != us_lo:
+        if not addrs:
             continue
+        # No anchor requirement: runs are symbol-bounded, so any lead gap before the
+        # first symbol (alignment padding) simply stays in the incbin baseline.
         bound = addrs + [us_hi]
         # Per-symbol match at the object shift: a symbol is region-same-shifted iff its
         # bytes equal the JP bytes at addr-shift. A fully-matching object yields one run;
