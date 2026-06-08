@@ -929,9 +929,6 @@
 	.thumb_func
 	.set    RunWaitEvents, 0x08086694 + 1
 
-	.global gPromoJidLut
-	.set    gPromoJidLut, 0x089CDD18
-
 	.global MakePromotionScreen
 	.type   MakePromotionScreen, %function
 	.thumb_func
@@ -1747,9 +1744,6 @@
 
 	.global Font_Sio_0
 	.set    Font_Sio_0, 0x02000C60
-
-	.global Pal_Text
-	.set    Pal_Text, 0x085C7420
 
 	.global Texts_1
 	.set    Texts_1, 0x0203DB10
@@ -4979,12 +4973,6 @@
 	.thumb_func
 	.set    BlendWmDotPalette, 0x080C7A38 + 1
 
-	.global Pal_WmPlaceDot_Standard
-	.set    Pal_WmPlaceDot_Standard, 0x08B2699C
-
-	.global Pal_WmPlaceDot_Highlight
-	.set    Pal_WmPlaceDot_Highlight, 0x08B2697C
-
 	.global ProcScr_WmDotPalAnim
 	.set    ProcScr_WmDotPalAnim, 0x08AC2670
 
@@ -5648,9 +5636,6 @@
 
 	.global gGfx_MiscUiGraphics
 	.set    gGfx_MiscUiGraphics, 0x085C6E08
-
-	.global gPal_MiscUiGraphics
-	.set    gPal_MiscUiGraphics, 0x085C7290
 
 	.global MakeNewItem
 	.type   MakeNewItem, %function

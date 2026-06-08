@@ -137,7 +137,9 @@ def main():
             if any(not (jh <= cl or jl >= ch) for cl, ch in pend):
                 continue
             nm_sec = base if len(runs) == 1 else f"{base}_{ri}"
-            body = [f'\t.section .rodata.{nm_sec}, "a", %progbits', '\t.align 2',
+            # NO .align: these incbin assets sit at exact (often non-4-aligned) JP
+            # addresses; any alignment makes ld pad before the section -> ROM growth.
+            body = [f'\t.section .rodata.{nm_sec}, "a", %progbits',
                     f'@ {o}: region-same content at JP 0x{jl:08x} (US 0x{run_lo:08x}, shift -0x{shift:X}); incbin baserom.gba']
             for k, a in enumerate(addrs):
                 if not (run_lo <= a < run_hi):

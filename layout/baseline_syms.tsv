@@ -206,7 +206,6 @@ GetUnitCurrentHp	08018E64	thumb	bmtrap
 PidStatsRecordDefeatInfo	080A90C8	thumb	bmtrap
 CheckForWaitEvents	08086604	thumb	bmtrap
 RunWaitEvents	08086694	thumb	bmtrap
-gPromoJidLut	089CDD18	data	classchg-handler
 MakePromotionScreen	080D1184	thumb	classchg-handler
 BMapDispResume	08030108	thumb	classchg-handler
 RefreshBMapGraphics	080310F4	thumb	classchg-handler
@@ -399,7 +398,6 @@ Pal_LinkArenaPlacementRanks	085D8068	data	sio_postbattle
 Img_LinkArenaActiveBannerFx	085D6FD0	data	sio_postbattle
 Pal_LinkArenaActiveBannerFx	085D80A8	data	sio_postbattle
 Font_Sio_0	02000C60	data	sio_postbattle
-Pal_Text	085C7420	data	sio_postbattle
 Texts_1	0203DB10	data	sio_postbattle
 UpdateLinkArenaActiveBannerBgGlow	0804E468	thumb	sio_postbattle
 SioPostBattle_DrawRankingRowBar	08045484	thumb	sio_postbattle
@@ -1216,8 +1214,6 @@ gWorldmapMinimap_9	08B1E6DC	data	worldmap_player_interface
 gWorldmapMinimap_10	08B1E6FC	data	worldmap_player_interface
 gWorldmapMinimap_11	08B1E71C	data	worldmap_player_interface
 BlendWmDotPalette	080C7A38	thumb	worldmap_rm
-Pal_WmPlaceDot_Standard	08B2699C	data	worldmap_rm
-Pal_WmPlaceDot_Highlight	08B2697C	data	worldmap_rm
 ProcScr_WmDotPalAnim	08AC2670	data	worldmap_rm
 gOamAffinePutId	030030CC	data	animedrv
 gOamAffinePutIt	030040F8	data	animedrv
@@ -1384,7 +1380,6 @@ VerifySramFast	03006794	data	agb_sram
 gProc_ekrBattleDeamon	085E3538	data	banim-ekrbattle
 Copy2dChr	080130D8	thumb	bm
 gGfx_MiscUiGraphics	085C6E08	data	bm
-gPal_MiscUiGraphics	085C7290	data	bm
 MakeNewItem	080162E8	thumb	bmarena
 ArenaGetPowerRanking	08031960	thumb	bmarena
 BattleApplyExpGains	0802B874	thumb	bmarena
