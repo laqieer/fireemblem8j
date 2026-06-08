@@ -337,3 +337,4 @@ A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 5D32C0	5D32D8	src/sio_main2.o(.data)	sio_main2 .data
 0DED24	0DED3A	src/sio_main2.o(.rodata)	sio_main2 .rodata
 0D6548	0D6588	src/agb_sram.o(.text)	agb_sram(run): WriteAndVerifySramFast
+050ABC	050B14	src/banim-ekrbattle.o(.text)	banim-ekrbattle(run): SetBanimLinkArenaFlag, GetBanimLinkArenaFlag, NewEkrBattleDeamon...

@@ -2715,11 +2715,6 @@
 	.thumb_func
 	.set    DoM4aSongNumStop, 0x08073F28 + 1
 
-	.global NewEkrBattleDeamon
-	.type   NewEkrBattleDeamon, %function
-	.thumb_func
-	.set    NewEkrBattleDeamon, 0x08050AD4 + 1
-
 	.global AnimClearAll
 	.type   AnimClearAll, %function
 	.thumb_func
@@ -2809,11 +2804,6 @@
 	.global gProc_ekrTogiEnd
 	.set    gProc_ekrTogiEnd, 0x085E403C
 
-	.global EndEkrBattleDeamon
-	.type   EndEkrBattleDeamon, %function
-	.thumb_func
-	.set    EndEkrBattleDeamon, 0x08050B00 + 1
-
 	.global EndEkrGauge
 	.type   EndEkrGauge, %function
 	.thumb_func
@@ -2876,11 +2866,6 @@
 	.type   UnpackChapterMapPalette, %function
 	.thumb_func
 	.set    UnpackChapterMapPalette, 0x0801964C + 1
-
-	.global GetBanimLinkArenaFlag
-	.type   GetBanimLinkArenaFlag, %function
-	.thumb_func
-	.set    GetBanimLinkArenaFlag, 0x08050AC8 + 1
 
 	.global LoadLinkArenaFogPlaceholder
 	.type   LoadLinkArenaFogPlaceholder, %function
@@ -6554,4 +6539,7 @@
 
 	.global VerifySramFast
 	.set    VerifySramFast, 0x03006794
+
+	.global gProc_ekrBattleDeamon
+	.set    gProc_ekrBattleDeamon, 0x085E3538
 

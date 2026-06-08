@@ -28,3 +28,4 @@
 030018F8	iwram	src/mu.o(.bss)	mu .bss
 0203E780	ewram	src/statscreen.o(ewram_data)	statscreen ewram_data
 02026A90	ewram	src/icon.o(ewram_data)	icon ewram_data
+0203E0EC	ewram	src/banim-ekrbattle.o(ewram_data)	banim-ekrbattle ewram_data

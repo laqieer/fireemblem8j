@@ -648,7 +648,6 @@ EfxTmCpyExt	08073418	thumb	banim-ekrarena
 gTmB_Banim	0201D428	data	banim-ekrarena
 GetBattleAnimArenaFlag	0805BDCC	thumb	banim-ekrarena
 DoM4aSongNumStop	08073F28	thumb	banim-ekrarena
-NewEkrBattleDeamon	08050AD4	thumb	banim-ekrarena
 AnimClearAll	08004DC0	thumb	banim-ekrarena
 gEkrInitPosReal	02017744	data	banim-ekrarena
 SetMainUpdateRoutine	080012D8	thumb	banim-ekrarena
@@ -670,7 +669,6 @@ Tsa_ArenaBattleBg	085E8A24	data	banim-ekrarena
 NewEkrTogiColor	0805C0F0	thumb	banim-ekrarena
 EndEkrTogiColor	0805C124	thumb	banim-ekrarena
 gProc_ekrTogiEnd	085E403C	data	banim-ekrarena
-EndEkrBattleDeamon	08050B00	thumb	banim-ekrarena
 EndEkrGauge	08051EA0	thumb	banim-ekrarena
 SetInterrupt_LCDVBlank	08001208	thumb	banim-ekrarena
 OnMain	08015318	thumb	banim-ekrarena
@@ -684,7 +682,6 @@ InitBmBgLayers	08015624	thumb	banim-ekrbattleending
 ResetUnitSprites	0802662C	thumb	banim-ekrbattleending
 BMapDispResume_FromBattleDelayed	080310A0	thumb	banim-ekrbattleending
 UnpackChapterMapPalette	0801964C	thumb	banim-ekrbattleending
-GetBanimLinkArenaFlag	08050AC8	thumb	banim-ekrbattleending
 LoadLinkArenaFogPlaceholder	0804A584	thumb	banim-ekrbattleending
 RefreshBMapDisplay_FromBattle	08031044	thumb	banim-ekrbattleending
 ProcScr_EkrDragon_0	087A8C54	data	banim-ekrdragon-8070710
@@ -1670,3 +1667,4 @@ gKeyInputSequenceBuffer	0203DD28	data	sio_main2
 gCurrentKeyInSeqIndex	03001800	data	sio_main2
 gSioList_SioMain2_2	085D32F8	data	sio_main2
 VerifySramFast	03006794	data	agb_sram
+gProc_ekrBattleDeamon	085E3538	data	banim-ekrbattle
