@@ -448,7 +448,6 @@ gMPlayTable	082140B4	data	sio_postbattle
 gSongTable	08214120	data	sio_postbattle
 StartBgmExt	08002434	thumb	sio_postbattle
 gUnk_41	03001808	data	sio_tactician
-ArenaGetResult	08031E24	thumb	uiarena
 DisplayGoldBoxText	080B9A5C	thumb	uiarena
 Proc_ForEach	08002EE8	thumb	uiarena
 gProcScr_GoldBox	08ABCAB8	data	uiarena
@@ -466,7 +465,6 @@ PutString	08014450	thumb	uiarena
 PutNumber	08004A90	thumb	uiarena
 GetItemName	0801729C	thumb	uiarena
 gMid_Lv	08A73210	data	uiarena
-gArenaState	0203A8EC	data	uiarena
 StartBgmCore	08002398	thumb	uiarena
 EndGmapEffect	080C619C	thumb	worldmap_entry
 unit_icon_move_table	08A13488	data	worldmap_gmapunit
@@ -1661,3 +1659,10 @@ gProc_ekrBattleDeamon	085E3538	data	banim-ekrbattle
 Copy2dChr	080130D8	thumb	bm
 gGfx_MiscUiGraphics	085C6E08	data	bm
 gPal_MiscUiGraphics	085C7290	data	bm
+MakeNewItem	080162E8	thumb	bmarena
+ArenaGetPowerRanking	08031960	thumb	bmarena
+BattleUnwind	0802AE40	thumb	bmarena
+BattleApplyExpGains	0802B874	thumb	bmarena
+UpdateUnitDuringBattle	0802C21C	thumb	bmarena
+PidStatsRecordBattleRes	080A94E8	thumb	bmarena
+GetUnitBestWRankType	08031800	thumb	bmarena

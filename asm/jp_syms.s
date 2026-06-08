@@ -1923,11 +1923,6 @@
 	.global gUnk_41
 	.set    gUnk_41, 0x03001808
 
-	.global ArenaGetResult
-	.type   ArenaGetResult, %function
-	.thumb_func
-	.set    ArenaGetResult, 0x08031E24 + 1
-
 	.global DisplayGoldBoxText
 	.type   DisplayGoldBoxText, %function
 	.thumb_func
@@ -2006,9 +2001,6 @@
 
 	.global gMid_Lv
 	.set    gMid_Lv, 0x08A73210
-
-	.global gArenaState
-	.set    gArenaState, 0x0203A8EC
 
 	.global StartBgmCore
 	.type   StartBgmCore, %function
@@ -6507,4 +6499,39 @@
 
 	.global gPal_MiscUiGraphics
 	.set    gPal_MiscUiGraphics, 0x085C7290
+
+	.global MakeNewItem
+	.type   MakeNewItem, %function
+	.thumb_func
+	.set    MakeNewItem, 0x080162E8 + 1
+
+	.global ArenaGetPowerRanking
+	.type   ArenaGetPowerRanking, %function
+	.thumb_func
+	.set    ArenaGetPowerRanking, 0x08031960 + 1
+
+	.global BattleUnwind
+	.type   BattleUnwind, %function
+	.thumb_func
+	.set    BattleUnwind, 0x0802AE40 + 1
+
+	.global BattleApplyExpGains
+	.type   BattleApplyExpGains, %function
+	.thumb_func
+	.set    BattleApplyExpGains, 0x0802B874 + 1
+
+	.global UpdateUnitDuringBattle
+	.type   UpdateUnitDuringBattle, %function
+	.thumb_func
+	.set    UpdateUnitDuringBattle, 0x0802C21C + 1
+
+	.global PidStatsRecordBattleRes
+	.type   PidStatsRecordBattleRes, %function
+	.thumb_func
+	.set    PidStatsRecordBattleRes, 0x080A94E8 + 1
+
+	.global GetUnitBestWRankType
+	.type   GetUnitBestWRankType, %function
+	.thumb_func
+	.set    GetUnitBestWRankType, 0x08031800 + 1
 
