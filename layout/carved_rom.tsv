@@ -368,3 +368,6 @@ A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 06138C	061540	src/banim-efxmagic-eclipse.o(.text)	banim-efxmagic-eclipse(run): StartSpellAnimEclipse, efxHazymoon_Loop_Main
 60073C	600754	src/banim-efxmagic-eclipse.o(.data)	banim-efxmagic-eclipse .data
 0E262C	0E2638	src/banim-efxmagic-eclipse.o(.rodata)	banim-efxmagic-eclipse .rodata
+069AC8	069BBC	src/banim-efxmagic-evileye.o(.text)	banim-efxmagic-evileye(run): StartSpellAnimEvilEye, efxEvilEye_Loop_Main
+602550	602568	src/banim-efxmagic-evileye.o(.data)	banim-efxmagic-evileye .data
+0E3CCC	0E3CD7	src/banim-efxmagic-evileye.o(.rodata)	banim-efxmagic-evileye .rodata

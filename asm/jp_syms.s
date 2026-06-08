@@ -6728,3 +6728,18 @@
 	.thumb_func
 	.set    StartSubSpell_efxHazymoonBG_C, 0x08061614 + 1
 
+	.global StartSubSpell_efxEvilEyeOBJ
+	.type   StartSubSpell_efxEvilEyeOBJ, %function
+	.thumb_func
+	.set    StartSubSpell_efxEvilEyeOBJ, 0x08069DD0 + 1
+
+	.global StartSubSpell_efxEvilEyeBG
+	.type   StartSubSpell_efxEvilEyeBG, %function
+	.thumb_func
+	.set    StartSubSpell_efxEvilEyeBG, 0x08069BBC + 1
+
+	.global StartSubSpell_efxEvilEyeBG2
+	.type   StartSubSpell_efxEvilEyeBG2, %function
+	.thumb_func
+	.set    StartSubSpell_efxEvilEyeBG2, 0x08069CB4 + 1
+
