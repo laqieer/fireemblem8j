@@ -438,3 +438,39 @@ coddog skips them. `compare2` from the `jp` version therefore covers only alread
 JP functions, not the full remaining backlog. Documented in `fe8.coddog.yaml` + `docs/tools/coddog.md`
 ("Coverage"); extending triage to pending functions needs a JP ELF whose pending functions carry
 real `.size`s (a later work item).
+
+## D12 — Decomp/RE tooling investigation: set up asm-differ/objdiff/m2c/coddog (2026-06-08)
+
+**Context:** Investigated 10 external decomp/RE projects for usefulness to FE8J. Full write-up:
+`docs/tooling-investigation.md` + per-tool `docs/tools/*.md`. Each useful tool was vendored to
+the gitignored `tools/<name>/` via `scripts/tools/<name>/setup.sh`, reviewed by Copilot CLI on
+its PR, merged (#17–#26), then exercised in the main tree against the real ROM/ELF.
+
+**Decision:** Set up the four genuinely useful local tools — **asm-differ** (per-function ARM
+diff), **objdiff** (per-symbol match% / progress), **m2c** (`-t gba` seed C for region-different
+functions), **coddog** (FE8J↔FE8U cross-version triage). **Pilot** mizuchi (Atlas UI), defer its
+auto-`run`. **Keep upstream** decomp-permuter (the agbcc fork trails upstream ~10 mo; only its
+`pipefail` guard is worth folding into our active `permuter_settings.toml`). **Learn-only:**
+frog-adv-temple (the AI-decomp playbook), kappa, decomp.me (hosted). **Skip:** binary-comp
+(x86/MSVC-PE only, no ARM/Thumb).
+
+**Fix in this change:** coddog's GBA-platform patch (D11) had a broken idempotency guard — a bare
+`grep -q '"gba" => Some(Platform::Gba),'` matched the arm already present in `from_decompme_name`,
+so the patch to `from_name` (the resolver the CLI actually calls) was always skipped on a fresh
+clone, leaving `compare2`/`cluster` panicking `Invalid platform: gba`. Changed the guard to require
+**two** occurrences (one per function). Only surfaced by running `compare2` in the main tree
+(D11's smoke test had used a manually-patched clone) — a reminder that per-PR worker smoke tests
+need a coordinator integrated-e2e backstop.
+
+**e2e (main tree, real ROM/ELF):** coddog `compare2` found FE8J↔FE8U 100% twins (AP_ExecFrame,
+AdvanceGetLCGRNValue, AnimSpr_*); m2c produced seed C for `AdvanceGetLCGRNValue`; asm-differ
+rendered a clean raw-binary diff; `objdiff-cli 3.7.2` runs (per-symbol report needs target objects
+carved from the baserom). `make compare` → `fireemblem8.gba: OK` (no regression from the batch).
+
+**Consulted:** Copilot CLI (`agency cp`) reviewed every tooling PR; review caught real bugs
+(asm-differ objdump arch flags, mizuchi `cpp -P` stripping FE8J macros, decomp.me `-Werror`
+parity), not just nits.
+
+**Status:** Done. This tool set is the substrate for the conflict-free parallelization plan
+(objdiff as the per-symbol pre-gate, coddog for region triage, frog's worktree + serial-integrator
+pattern).

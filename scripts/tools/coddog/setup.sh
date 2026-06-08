@@ -65,8 +65,13 @@ fi
 # (gba + the other non-decompme-only platforms: nds/nds_arm9, n3ds, irix) so the
 # yaml `platform:` string resolves. Only "gba" matters for us. Idempotent.
 # Reported upstream.
+#
+# Idempotency guard: the gba arm already exists once in `from_decompme_name`, so
+# a bare `grep -q '"gba" => ...'` always matches and would WRONGLY skip patching
+# `from_name` on a fresh clone (leaving the CLI panicking on `platform: gba`).
+# Require TWO occurrences (one per function) to consider the file already patched.
 LIB="${CODDOG_DIR}/crates/core/src/lib.rs"
-if [ -f "${LIB}" ] && ! grep -q '"gba" => Some(Platform::Gba),' "${LIB}"; then
+if [ -f "${LIB}" ] && [ "$(grep -c '"gba" => Some(Platform::Gba),' "${LIB}")" -lt 2 ]; then
     echo "==> patching coddog-core: add gba/nds/n3ds/irix to Platform::from_name"
     python3 - "${LIB}" <<'PY'
 import sys
