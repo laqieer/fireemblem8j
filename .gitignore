@@ -28,6 +28,10 @@ src/data/*.s
 # diff_settings.py (repo root) + docs/tools/asm-differ.md are tracked; the venv
 # lives outside the repo (default $HOME/asm-differ-venv, like the permuter's).
 /tools/asm-differ
+# m2c (asm->C decompiler): upstream clone is local (set up via
+# scripts/tools/m2c/setup.sh). The wrapper scripts under scripts/tools/m2c/
+# and docs/tools/m2c.md are tracked.
+/tools/m2c
 
 # Claude Code: share settings.json + loop_prompt.md, but keep local/transient
 # state out (per-user overrides and the ralph-loop session-state file).
@@ -76,3 +80,16 @@ src/_diag_*
 *.rep/
 *_ghidra/
 .ghidra/
+
+# objdiff: prebuilt CLI binary (installed locally via
+# scripts/tools/objdiff/setup.sh). objdiff.json + the setup script + docs are
+# tracked; the vendored binary is not. See docs/tools/objdiff.md.
+/tools/objdiff
+# coddog cross-binary function-matcher: vendored clone + Rust build artifacts
+# (built locally via scripts/tools/coddog/setup.sh). The setup script, configs
+# (scripts/tools/coddog/*.coddog.yaml) and docs/tools/coddog.md are tracked.
+/tools/coddog
+# Throwaway root copies of the coddog configs (the tracked originals live under
+# scripts/tools/coddog/; these are copied to the root only to run coddog).
+/decomp.yaml
+/fe8u.coddog.yaml
