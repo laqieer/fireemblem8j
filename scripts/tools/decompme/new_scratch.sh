@@ -24,7 +24,7 @@
 #       [--source path/to/initial.c] \
 #       [--compiler agbcc] \
 #       [--platform gba] \
-#       [--flags "-mthumb-interwork -O2"]
+#       [--flags "-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2"]
 #
 # On success it prints the scratch URL (https://decomp.me/scratch/<slug>).
 
@@ -47,8 +47,11 @@ usage() {
 # ---- Defaults matching this project's toolchain --------------------------
 platform="gba"
 compiler="agbcc"
-# Codegen-affecting flags only; -fhex-asm/-ffix-debug-line/-g are local-only.
-flags="-mthumb-interwork -O2"
+# Mirrors the local CC1FLAGS minus local-only debug/format flags
+# (-fhex-asm/-ffix-debug-line/-g), so a scratch that builds here also builds
+# under the repo's -Werror rule. -O2/-mthumb-interwork drive matching; the -W*
+# flags don't affect codegen but keep the warning-as-error behavior consistent.
+flags="-mthumb-interwork -Wimplicit -Wparentheses -Werror -O2"
 asm_file=""
 context_file=""
 source_file=""
