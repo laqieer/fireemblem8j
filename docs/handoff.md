@@ -143,10 +143,27 @@ generalizing fixes, all byte-perfect and durable.**
   + serial fast carve. `port_run.py` carves the largest byte-verified run of a TU,
   falls back through smaller runs, no per-carve `make clean` (D7, ~44× faster).
   `make compare` is the only oracle.
-- **RE tooling (region-different work):** MCP servers `ida` (IDA Pro 9.3 Hex-Rays)
-  and `ghidra` (Ghidra 12.x) — `make ida-db` / `make ghidra-db`, decompile by JP
-  address (from `sym_jp.txt`). Byte-match with upstream **decomp-permuter**
-  (`scripts/permuter/`). See `docs/reverse-engineering.md`, `docs/decisions.md` D6/D7.
+- **RE tooling (region-different work) — NOW HEADLESS (2026-06-08):**
+  `scripts/ida/decompile_addr.py` opens `tools/ida/fe8j.i64` (no re-analysis) and
+  does both halves with NO interactive MCP:
+  `~/ida-mcp-venv/bin/python scripts/ida/decompile_addr.py list <jp_lo> <jp_hi>`
+  (IDA-discovered fn boundaries) and `… decomp <jp_addr>` (Hex-Rays pseudo-C).
+  Proven on bindingblade. MCP servers `ida`/`ghidra` remain as a fallback
+  (`make ida-db`/`make ghidra-db`). Byte-match with upstream **decomp-permuter**
+  (`scripts/permuter/`). See `docs/reverse-engineering.md`, `docs/decisions.md` D6/D7/D9.
+  - **CAUTION (verified 2026-06-08):** these TUs are *genuinely* logic-different, not
+    pointer-only. e.g. US `efxHurtmutOBJ_Loop` is 52 bytes; the JP function in the
+    same area is 186 bytes — different sizes/structure. So they CANNOT be carved by
+    constructing a port_run run + bake-in (that only fixes pointer/offset deltas). Each
+    needs real decompile → understand → rewrite in agbcc style → `make compare`
+    (permuter to close the residual). Slow, ~per-function; `make compare` still the oracle.
+  - **Per-function recipe (region-different phase):** (1) `derive` the TU's JP region
+    from funcmap gaps — but gaps bracket *many* consecutive region-diff TUs (~50KB for
+    the banim-efxmagic block), so use IDA `list` for real boundaries. (2) Identify each
+    JP function's US counterpart by the decompiled call-graph (Hex-Rays resolves project
+    symbols, e.g. `NewEfxArrowOBJ`/`StartBattleAnimHitEffectsDefault` → it's an efxHurtmut
+    loop). (3) Adapt the US C / write fresh, compile agbcc -O2, place at the JP addr,
+    `make compare`; permute to byte-match. (4) Commit only when byte-perfect + durable.
 
 ## Next actions (priority order)
 
