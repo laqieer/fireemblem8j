@@ -1499,17 +1499,8 @@
 	.global EventScr_OpenChest
 	.set    EventScr_OpenChest, 0x085B9D8C
 
-	.global EventScr_MapSupportConversation
-	.set    EventScr_MapSupportConversation, 0x085B9DD4
-
 	.global EventScr_SupportViewerConversation
 	.set    EventScr_SupportViewerConversation, 0x085B9E14
-
-	.global EventScr_SkirmishRetreat
-	.set    EventScr_SkirmishRetreat, 0x085B9E3C
-
-	.global EventScr_SuspendPrompt
-	.set    EventScr_SuspendPrompt, 0x085B9E9C
 
 	.global EventEngine_Create
 	.type   EventEngine_Create, %function
@@ -1737,9 +1728,6 @@
 	.type   m4aMPlayFadeOut, %function
 	.thumb_func
 	.set    m4aMPlayFadeOut, 0x080D508C + 1
-
-	.global gMPlayTable
-	.set    gMPlayTable, 0x082140B4
 
 	.global gSongTable
 	.set    gSongTable, 0x08214120
@@ -2757,9 +2745,6 @@
 
 	.global gFaces
 	.set    gFaces, 0x03004920
-
-	.global ProcScr_MapAnimDefaultItemEffect
-	.set    ProcScr_MapAnimDefaultItemEffect, 0x08A14DEC
 
 	.global StartMuActionAnim
 	.type   StartMuActionAnim, %function
@@ -3971,9 +3956,6 @@
 	.thumb_func
 	.set    StartGmBaseEntry, 0x080C48D0 + 1
 
-	.global gWMPathData
-	.set    gWMPathData, 0x081F6340
-
 	.global GmBaseEntryExists
 	.type   GmBaseEntryExists, %function
 	.thumb_func
@@ -4413,9 +4395,6 @@
 	.global ProcScr_EfxTriangleQUAKE
 	.set    ProcScr_EfxTriangleQUAKE, 0x087A9BA0
 
-	.global gProcScr_BKSEL
-	.set    gProcScr_BKSEL, 0x085C6A48
-
 	.global StartMovingHelpBoxExt
 	.type   StartMovingHelpBoxExt, %function
 	.thumb_func
@@ -4662,9 +4641,6 @@
 	.type   EventEngineExists, %function
 	.thumb_func
 	.set    EventEngineExists, 0x0800D45C + 1
-
-	.global ProcScr_MapAnimBattle
-	.set    ProcScr_MapAnimBattle, 0x08A13B90
 
 	.global ProcScr_MapAnimEventBattle
 	.set    ProcScr_MapAnimEventBattle, 0x08A13EFC

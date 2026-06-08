@@ -338,10 +338,7 @@ EventEngine_CreateBattle	0800D404	thumb	event
 EventScr_TriggerQueuedTileChanges	085B9D80	data	event
 gEventSlotQueue	030004E8	data	event
 EventScr_OpenChest	085B9D8C	data	event
-EventScr_MapSupportConversation	085B9DD4	data	event
 EventScr_SupportViewerConversation	085B9E14	data	event
-EventScr_SkirmishRetreat	085B9E3C	data	event
-EventScr_SuspendPrompt	085B9E9C	data	event
 EventEngine_Create	0800D374	thumb	event
 EventScr_GameOver	085B9EE8	data	event
 ProcScr_EventVerticalQuakefx	08A60168	data	eventcall
@@ -393,7 +390,6 @@ SioPostBattle_DrawRankingRowBar	08045484	thumb	sio_postbattle
 StartDrawLinkArenaRankSprites	08045434	thumb	sio_postbattle
 gUnk_Sio_16	0203DD8C	data	sio_postbattle
 m4aMPlayFadeOut	080D508C	thumb	sio_postbattle
-gMPlayTable	082140B4	data	sio_postbattle
 gSongTable	08214120	data	sio_postbattle
 StartBgmExt	08002434	thumb	sio_postbattle
 gUnk_41	03001808	data	sio_tactician
@@ -641,7 +637,6 @@ PutManimLevelUpFrame	08080DD8	thumb	mapanim_lvup
 PutManimLevelUpStat	08080EE4	thumb	mapanim_lvup
 StartFace	08005544	thumb	mapanim_lvup
 gFaces	03004920	data	mapanim_lvup
-ProcScr_MapAnimDefaultItemEffect	08A14DEC	data	mapanim_spellassoc
 StartMuActionAnim	0807BCC4	thumb	mapanim_spellassoc
 StartMuDelayedFaceDefender	0807BCFC	thumb	mapanim_spellassoc
 CallDelayed	080148F0	thumb	mapanim_spellassoc
@@ -918,7 +913,6 @@ BattleUnitTargetSetEquippedWeapon	0802C624	thumb	eventscr3
 WMLoc_GetNextLocId	080C0414	thumb	eventscr_gmap
 ResetGmStoryNode	080C1DC0	thumb	eventscr_gmap
 StartGmBaseEntry	080C48D0	thumb	eventscr_gmap
-gWMPathData	081F6340	data	eventscr_gmap
 GmBaseEntryExists	080C4918	thumb	eventscr_gmap
 EndGmBaseEntry	080C4908	thumb	eventscr_gmap
 FaceChibiSpr_OnIdle	080059D8	thumb	face
@@ -1026,7 +1020,6 @@ DrawBattlePopup	080780DC	thumb	banim-ekrpopup
 EfxPlaySound5AVol100	08077F8C	thumb	banim-ekrpopup
 NewEfxQuakePure	08054364	thumb	banim-ekrtriangle
 ProcScr_EfxTriangleQUAKE	087A9BA0	data	banim-ekrtriangle
-gProcScr_BKSEL	085C6A48	data	bksel
 StartMovingHelpBoxExt	0808B414	thumb	bksel
 gHelpInfo_MbpHp	08A730A4	data	bksel
 gHelpInfo_CbpHp	08A7314C	data	bksel
@@ -1084,7 +1077,6 @@ ProcScr_MapAnimSummon	08A13A20	data	mapanim_api
 ProcScr_MapAnimSumDK	08A13A48	data	mapanim_api
 ProcScr_MapAnimDance	08A13B38	data	mapanim_api
 EventEngineExists	0800D45C	thumb	mapanim_api
-ProcScr_MapAnimBattle	08A13B90	data	mapanim_api
 ProcScr_MapAnimEventBattle	08A13EFC	data	mapanim_api
 MakeBattleMOVEUNIT	0807D6B4	thumb	mapanim_api
 GetAvailableTileEventCommand	08086350	thumb	bmcommanddbg
