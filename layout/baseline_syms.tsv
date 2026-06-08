@@ -1,8 +1,8 @@
-# Functions/data still inside the raw-ROM baseline but referenced from decompiled
-# code. Emitted to asm/jp_syms.s by scripts/gen_layout.py as typed symbols so the
-# linker resolves cross-boundary references (Thumb BL with no interwork veneer).
-# Columns: name  jp_addr  type     where type is thumb | arm | data.
-# Remove an entry once that symbol's own code/data is carved out into real source.
+# Functions/data still inside the raw-ROM baseline but referenced from decompiled			
+# code. Emitted to asm/jp_syms.s by scripts/gen_layout.py as typed symbols so the			
+# linker resolves cross-boundary references (Thumb BL with no interwork veneer).			
+# Columns: name  jp_addr  type     where type is thumb | arm | data.			
+# Remove an entry once that symbol's own code/data is carved out into real source.			
 crt0	080000C0	arm	boot, branched to from the ROM header
 memcpy	080D6908	thumb	libc, called by InitRN to copy the seed table
 __modsi3	080D6690	thumb	libgcc, signed modulo (InitRN: seed % 7, % 23)

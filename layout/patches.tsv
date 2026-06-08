@@ -1,4 +1,4 @@
-# Per-object byte patches re-applied after compile (scripts/apply_patches.py).
+# Per-object byte patches re-applied after compile (scripts/apply_patches.py).			
 # object_basename	section	offset_hex	value_hex
 banim-efxmagic-flux.o	.rodata	ALIGN	2
 banim-efxmagic-flux.o	.text	18C	0000000E
