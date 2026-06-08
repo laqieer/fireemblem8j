@@ -357,3 +357,4 @@ A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 0D271C	0D273C	src/classchg-event.o(.text)	classchg-event(run): PromoMain_SetupTraineeEvent_, PromoTraineeEventExists
 039C78	039D24	src/cp_decide.o(.text)	cp_decide(run): AiClearDecision, AiSetDecision, AiUpdateDecision
 0927EC	0928F8	src/unitlistscreen.o(.text)	unitlistscreen(run): UnitList_SetMuralWindow
+03458C	0345E8	src/chapterdata.o(.text)	chapterdata(run): GetChapterMapChangesPointer, GetChapterEventDataPointer

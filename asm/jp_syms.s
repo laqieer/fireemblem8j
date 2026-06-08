@@ -2069,11 +2069,6 @@
 	.thumb_func
 	.set    SetDialogueSkipEvBit, 0x0800D6A8 + 1
 
-	.global GetChapterEventDataPointer
-	.type   GetChapterEventDataPointer, %function
-	.thumb_func
-	.set    GetChapterEventDataPointer, 0x080345B8 + 1
-
 	.global GetBattleMapKind
 	.type   GetBattleMapKind, %function
 	.thumb_func
@@ -6659,4 +6654,7 @@
 	.type   PromoMain_SetupTraineeEvent, %function
 	.thumb_func
 	.set    PromoMain_SetupTraineeEvent, 0x080D2348 + 1
+
+	.global gChapterDataAssetTable
+	.set    gChapterDataAssetTable, 0x08907BC8
 

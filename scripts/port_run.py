@@ -56,6 +56,16 @@ def port(name, exclude=(), runs=None):
     snap = {p: open(p).read() for p in MANI}
 
     sub = sh(f"python3 scripts/extract_run.py {US}/{name}.c {' '.join(funcs)}").stdout
+    # Drop `#include "src/data/*.h"` for files missing in the JP project: those are
+    # auto-generated region-specific data tables (e.g. chapter_settings.h DEFINES
+    # gChapterDataTable) not yet ported. cpp silently fails on the missing file and
+    # emits an EMPTY .text. The accessor funcs only REFERENCE those tables via externs
+    # already declared in the normal headers, so dropping the include lets the
+    # function compile; port_run resolves the table's JP address from the literal and
+    # the data itself stays in the incbin baseline.
+    sub = "".join(l for l in sub.splitlines(keepends=True)
+                  if not (l.lstrip().startswith('#include "src/data/')
+                          and '"' in l and not os.path.exists(l.split('"')[1])))
     open(f"src/{name}.c", "w").write(sub)
     obj = f"src/{name}.o"
     r = sh(f"make src/{name}.o")
