@@ -384,3 +384,4 @@ BABAB4	BABAF4	src/classchg-postconfirm.o(.data)	classchg-postconfirm .data
 BABAF4	BABAF8	src/bmguide.o(.data)	bmguide .data
 C00000	C00008	src/banim_data.o(.data.banim_array_len)	banim_number
 C00008	C01928	src/banim_data.o(.data.banim_array)	banim_data
+C02000	E47180	asm/data_banim.o(.data.data_banim)	data_banim battle-anim assets (2324 KB, region-same)
