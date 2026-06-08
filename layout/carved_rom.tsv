@@ -329,6 +329,7 @@
 1F5784	1F578C	src/bmsave-misc.o(.rodata)	bmsave-misc .rodata
 1F5BEC	1F5BF0	src/gamerankings.o(.rodata)	gamerankings .rodata
 1F6CF4	1F6D00	src/classchg-handler.o(.rodata)	classchg-handler .rodata
+216064	534E80	asm/direct_sound_data.o(.rodata.direct_sound_data)	direct_sound_data M4A samples (region-same, shifted)
 5776F0	577EF0	src/fontgrp.o(.data)	fontgrp .data
 5B8CDC	5B8D84	src/ctc.o(.data)	ctc .data
 5B8F70	5B8F80	src/face.o(.data)	face .data
