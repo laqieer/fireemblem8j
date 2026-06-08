@@ -71,3 +71,12 @@ src/_diag_*
 *.rep/
 *_ghidra/
 .ghidra/
+
+# coddog cross-binary function-matcher: vendored clone + Rust build artifacts
+# (built locally via scripts/tools/coddog/setup.sh). The setup script, configs
+# (scripts/tools/coddog/*.coddog.yaml) and docs/tools/coddog.md are tracked.
+/tools/coddog
+# Throwaway root copies of the coddog configs (the tracked originals live under
+# scripts/tools/coddog/; these are copied to the root only to run coddog).
+/decomp.yaml
+/fe8u.coddog.yaml
