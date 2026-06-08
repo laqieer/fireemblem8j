@@ -68,6 +68,14 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
     base 0x080E20FA) DISAGREE by 0x12 (frames.9 at JP offset 0x20 vs US 0xe). No single
     section base works; each ref needs its JP literal BAKED IN (patch the .text/.data
     word to jp[ref site] + remove the reloc). That's the next intricate fix for these 3.
+    BAKE-IN ATTEMPTED (2026-06-08): rewrite each ref's in-section addend to
+    jp[ref]-base, then objcopy --update-section to patch the .o. FAILED — objcopy
+    --update-section corrupted the .text (flux 1->327 byte diff; size/flags subtlety).
+    Need ELF-level section patching (parse the ELF, patch the section's file bytes
+    directly) OR rewrite the relocations, not objcopy --update-section. flux is just
+    1 byte off with NOLOAD alone (.data's addend-0 .rodata ref); aircalibur/thunder/
+    fire have larger region-different .rodata content (~200-430 bytes) needing the
+    same per-ref bake-in. Do this fresh with a proper ELF-patch helper.
 
 - **NESTED ROM-DATA FIX (2026-06-08, +4):** port_run's romdata loop is now a
   WORKLIST — a carved .data/.rodata section referencing ANOTHER ROM-data section
