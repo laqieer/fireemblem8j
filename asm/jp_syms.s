@@ -188,11 +188,6 @@
 	.thumb_func
 	.set    GetGameClock, 0x08000CD8 + 1
 
-	.global StoreRNStateToActionStruct
-	.type   StoreRNStateToActionStruct, %function
-	.thumb_func
-	.set    StoreRNStateToActionStruct, 0x08031F38 + 1
-
 	.global WriteSramFast
 	.type   WriteSramFast, %function
 	.thumb_func
@@ -258,9 +253,6 @@
 	.thumb_func
 	.set    WriteSwappedSuspendSaveId, 0x080AADF8 + 1
 
-	.global gActionData
-	.set    gActionData, 0x0203A954
-
 	.global gGenericBuffer
 	.set    gGenericBuffer, 0x02020188
 
@@ -279,11 +271,6 @@
 	.type   SetGameTime, %function
 	.thumb_func
 	.set    SetGameTime, 0x08000CE4 + 1
-
-	.global LoadRNStateFromActionStruct
-	.type   LoadRNStateFromActionStruct, %function
-	.thumb_func
-	.set    LoadRNStateFromActionStruct, 0x08031F48 + 1
 
 	.global InitUnits
 	.type   InitUnits, %function
@@ -1531,11 +1518,6 @@
 
 	.global gActiveUnitId
 	.set    gActiveUnitId, 0x0202BE40
-
-	.global ApplyUnitAction
-	.type   ApplyUnitAction, %function
-	.thumb_func
-	.set    ApplyUnitAction, 0x08031F58 + 1
 
 	.global UnitAddItem
 	.type   UnitAddItem, %function
@@ -6534,4 +6516,84 @@
 	.type   GetUnitBestWRankType, %function
 	.thumb_func
 	.set    GetUnitBestWRankType, 0x08031800 + 1
+
+	.global ActionDrop
+	.type   ActionDrop, %function
+	.thumb_func
+	.set    ActionDrop, 0x0803212C + 1
+
+	.global ActionVisitAndSeize
+	.type   ActionVisitAndSeize, %function
+	.thumb_func
+	.set    ActionVisitAndSeize, 0x080321BC + 1
+
+	.global ActionCombat
+	.type   ActionCombat, %function
+	.thumb_func
+	.set    ActionCombat, 0x080321E8 + 1
+
+	.global ActionDance
+	.type   ActionDance, %function
+	.thumb_func
+	.set    ActionDance, 0x080322A4 + 1
+
+	.global ActionTalk
+	.type   ActionTalk, %function
+	.thumb_func
+	.set    ActionTalk, 0x080322F4 + 1
+
+	.global ActionSupport
+	.type   ActionSupport, %function
+	.thumb_func
+	.set    ActionSupport, 0x08032320 + 1
+
+	.global ActionSteal
+	.type   ActionSteal, %function
+	.thumb_func
+	.set    ActionSteal, 0x080323C8 + 1
+
+	.global ActionSummon
+	.type   ActionSummon, %function
+	.thumb_func
+	.set    ActionSummon, 0x080324A0 + 1
+
+	.global ActionSummonDK
+	.type   ActionSummonDK, %function
+	.thumb_func
+	.set    ActionSummonDK, 0x080324CC + 1
+
+	.global ActionArena
+	.type   ActionArena, %function
+	.thumb_func
+	.set    ActionArena, 0x08032290 + 1
+
+	.global ActionStaffDoorChestUseItem
+	.type   ActionStaffDoorChestUseItem, %function
+	.thumb_func
+	.set    ActionStaffDoorChestUseItem, 0x0802FB98 + 1
+
+	.global ActionPick
+	.type   ActionPick, %function
+	.thumb_func
+	.set    ActionPick, 0x0802FF04 + 1
+
+	.global TryRemoveUnitFromBallista
+	.type   TryRemoveUnitFromBallista, %function
+	.thumb_func
+	.set    TryRemoveUnitFromBallista, 0x08037B04 + 1
+
+	.global Make6CKOIDO
+	.type   Make6CKOIDO, %function
+	.thumb_func
+	.set    Make6CKOIDO, 0x0801D8E0 + 1
+
+	.global UnitRescue
+	.type   UnitRescue, %function
+	.thumb_func
+	.set    UnitRescue, 0x08018060 + 1
+
+	.global ExecTrapAfterDropAction
+	.type   ExecTrapAfterDropAction, %function
+	.thumb_func
+	.set    ExecTrapAfterDropAction, 0x08037888 + 1
 

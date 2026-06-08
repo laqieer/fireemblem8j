@@ -31,3 +31,4 @@
 0203E0EC	ewram	src/banim-ekrbattle.o(ewram_data)	banim-ekrbattle ewram_data
 0202BCAC	ewram	src/bm.o(ewram_data)	bm ewram_data
 0203A8EC	ewram	src/bmarena.o(ewram_data)	bmarena ewram_data
+0203A954	ewram	src/bmmind.o(ewram_data)	bmmind ewram_data
