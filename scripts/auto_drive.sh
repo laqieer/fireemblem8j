@@ -8,6 +8,11 @@
 # Tune/disable: `crontab -e`. Watch: tail -f /tmp/fe8j_autodrive.log
 set -u
 cd /home/laqieer/fireemblem8j || exit 1
+# cron runs with a minimal PATH that does NOT include the agency launcher, so the
+# `command -v agency` guard below was silently failing and the agent step was
+# SKIPPED on every cron run (only the harvester ran). Put agency on PATH so the
+# headless-agent step actually fires.
+export PATH="$HOME/.config/agency/CurrentVersion:$HOME/.local/bin:$PATH"
 LOG=/tmp/fe8j_autodrive.log
 LOCK=/tmp/fe8j_autodrive.lock
 exec 9>"$LOCK"
