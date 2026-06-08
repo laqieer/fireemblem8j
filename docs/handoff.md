@@ -143,7 +143,17 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
        tackling the residual: flux's .rodata has 13 bytes of REGION-DIFFERENT animation
        data (frames arrays). To carve: either RE the JP .rodata values, OR leave the
        region-different .rodata in the incbin baseline and reference it at its JP addr
-       (carve only the .text/.data). aircalibur/thunder are identical-shape.
+       (carve only the .text/.data).  aircalibur/thunder are identical-shape.
+       **DESIGNED next fix (substantial, ~2 files):** to carve flux's .text (real
+       code) while its .rodata stays incbin: (a) port_run compares each carved romdata
+       section's compiled bytes vs JP[base:base+size]; if they MATCH carve as now, if
+       they DIFFER (region-different data) do NOT add it to carved_rom — leave the bytes
+       in the incbin; (b) instead emit a NOLOAD symbol-only placement so the section
+       symbol = its JP base (the .text reloc resolves to incbin+addend) but the US
+       content isn't written. Needs a gen_layout NOLOAD-at-ROM-address path (it only has
+       iwram/ewram NOLOAD today). Plus the objcopy --set-section-alignment fix above.
+       This generalizes: any TU referencing region-different ROM data can then carve its
+       CODE. Best done fresh, gated by make compare.
      - **no-runs ×15 — Phase 3 (hand-decompile) is now the ONLY remaining class with a path.** compile-fail class CLEARED (worldmap_path: forward-ref prototype; bmbattle: incremental-trim fallback). Every generalizing-fixable class is resolved; the rest (15 no-runs region-different code, ~9 compound romdata near-misses, 3 huge-diff banim) needs per-function hand-decompilation via ida/ghidra+permuter — sessions per carve, not turns.
 3. **Phase 3 — region-different CODE** (`no verified runs`): hand-decompile the
    functions in `ida`/`ghidra` (decompile by JP address), write `src/` C matching
