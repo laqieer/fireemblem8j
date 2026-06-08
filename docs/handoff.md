@@ -124,7 +124,12 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
        because the referenced `.rodata` symbol is region-different (JP offset ≠ US
        `ss[1]`). BUT these are graphics-heavy region-different banim effects (many
        Img_*/Pal_*/AnimScr_* pointers) — a correct base likely still leaves
-       region-different content diffs. Lower priority than Phase-3 no-runs.
+       region-different content diffs. Lower priority. PROBED: flux's .rodata holds local static frame arrays
+       (frames.9 @0xe, frames.13 @0x40) referenced via section+addend; base computes
+       to misaligned 0x080E20FA because the JP .rodata layout differs (region-different
+       animation data) -> +4 size + 0x373c catastrophic shift. The nested ROM-data fix
+       did NOT help (these .rodata are .text-referenced, not nested). Genuinely
+       region-different graphics + a layout bug — hardest of the remaining mechanical-ish.
      - **no-runs ×15 — Phase 3 (hand-decompile) is now the ONLY remaining class with a path.** compile-fail class CLEARED (worldmap_path: forward-ref prototype; bmbattle: incremental-trim fallback). Every generalizing-fixable class is resolved; the rest (15 no-runs region-different code, ~9 compound romdata near-misses, 3 huge-diff banim) needs per-function hand-decompilation via ida/ghidra+permuter — sessions per carve, not turns.
 3. **Phase 3 — region-different CODE** (`no verified runs`): hand-decompile the
    functions in `ida`/`ghidra` (decompile by JP address), write `src/` C matching
