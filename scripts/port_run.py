@@ -282,9 +282,19 @@ def port(name, exclude=(), runs=None):
         elif typ == "R_ARM_THM_CALL" and sym in undef:
             new_syms[sym] = (fmap.get(sym) or (bl(off) & ~1), "thumb")
 
-    # resolve internal pointer relocations of each carved ROM data section
+    # Resolve internal relocations of each carved ROM data section. WORKLIST, because
+    # a carved section can REFERENCE another ROM-data section (e.g. a .data ProcScr
+    # table holds a pointer into .rodata, like banim-efxmagic-dancerings): that
+    # referenced section must itself be placed at its JP address and carved, or it's
+    # appended (ROM growth) AND the pointer is left unresolved (content diff).
     data_carves = []
-    for dsec, dbase in romdata.items():
+    work = dict(romdata)            # ROM-data sections still to place: sec -> JP base
+    placed = set()
+    while work:
+        dsec, dbase = work.popitem()
+        if dsec in placed:
+            continue
+        placed.add(dsec)
         size = secsize.get(dsec, 0)
         if not size:
             continue
@@ -299,16 +309,17 @@ def port(name, exclude=(), runs=None):
             if cur != dsec or len(p) < 3 or not all(ch in "0123456789abcdef" for ch in p[0]):
                 continue
             off, typ, sym = int(p[0], 16), p[1], p[2]
+            if typ != "R_ARM_ABS32":
+                continue
             djp = dbase - 0x08000000 + off
             jpval = int.from_bytes(jp[djp:djp+4], "little")
-            if typ == "R_ARM_ABS32" and sym in (".bss", "ewram_data", "sbss", "bss"):
-                # A pointer INTO a RAM section baked into carved ROM data (e.g. scene's
-                # .data ProcScr table holds a .bss/IWRAM pointer). The .text path places
-                # such sections; do the same here so the carved data word resolves to the
-                # JP RAM address instead of staying unrelocated.
-                addend = int.from_bytes(dbytes[off:off+4], "little")
-                ram.setdefault(sym, jpval - addend)
-            elif typ == "R_ARM_ABS32" and sym in undef:
+            addend = int.from_bytes(dbytes[off:off+4], "little")
+            if sym in (".bss", "ewram_data", "sbss", "bss"):
+                ram.setdefault(sym, jpval - addend)   # RAM pointer baked into ROM data
+            elif sym in (".rodata", ".data") and sym not in romdata:
+                romdata[sym] = jpval - addend          # nested ROM-data section -> place+carve it
+                work[sym] = jpval - addend
+            elif sym in undef:
                 new_syms.setdefault(sym, enc(jpval))
 
     if os.environ.get("PORTRUN_DEBUG"):

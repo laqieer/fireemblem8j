@@ -362,3 +362,6 @@ A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 0B15B4	0B15D4	src/spinning_arrow.o(.text)	spinning_arrow(run): UiSpinningArrows_Init
 0069CC	006A14	src/scene.o(.text)	scene(run): ClearTalkFlag, CheckTalkFlag, SetTalkPrintDelay
 5B90D4	5B90D8	src/scene.o(.data)	scene .data
+0679F4	067B94	src/banim-efxmagic-dancerings.o(.text)	banim-efxmagic-dancerings(run): StartSpellAnimFillasMight, StartSpellAnimThorsIre, StartSpellAnimNinisGrace...
+601CC0	601CD8	src/banim-efxmagic-dancerings.o(.data)	banim-efxmagic-dancerings .data
+0E37B8	0E37C5	src/banim-efxmagic-dancerings.o(.rodata)	banim-efxmagic-dancerings .rodata

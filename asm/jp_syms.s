@@ -6663,3 +6663,28 @@
 	.thumb_func
 	.set    ClearWmTextVram, 0x080C8348 + 1
 
+	.global StartSubSpell_efxSongBG
+	.type   StartSubSpell_efxSongBG, %function
+	.thumb_func
+	.set    StartSubSpell_efxSongBG, 0x0805D800 + 1
+
+	.global StartSubSpell_efxSongOBJ
+	.type   StartSubSpell_efxSongOBJ, %function
+	.thumb_func
+	.set    StartSubSpell_efxSongOBJ, 0x0805D8DC + 1
+
+	.global NewEfxRestWINH_
+	.type   NewEfxRestWINH_, %function
+	.thumb_func
+	.set    NewEfxRestWINH_, 0x0805C6EC + 1
+
+	.global NewEfxTwobaiRST
+	.type   NewEfxTwobaiRST, %function
+	.thumb_func
+	.set    NewEfxTwobaiRST, 0x0805C28C + 1
+
+	.global NewEfxALPHA
+	.type   NewEfxALPHA, %function
+	.thumb_func
+	.set    NewEfxALPHA, 0x0805C7CC + 1
+
