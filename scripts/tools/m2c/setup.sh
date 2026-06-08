@@ -73,8 +73,12 @@ Usage:
   scripts/tools/m2c/m2c.sh --context <ctx.c> -f <FuncName> <region.s>
 
 Typical FE8J workflow (region-different function -> seed C):
-  arm-none-eabi-objdump -d fireemblem8.elf \\
-    --start-address=0xADDR --stop-address=0xEND > /tmp/fn.s
+  # m2c wants clean GNU \`as\` syntax. Use --no-show-raw-insn, and trim the
+  # objdump header / leading address column to bare \`label:\` + mnemonic lines
+  # (m2c rejects raw objdump text). The asm our split workflow emits is already
+  # clean and needs no trimming -- prefer it when available.
+  arm-none-eabi-objdump -d --no-show-raw-insn fireemblem8.elf \\
+    --start-address=0xADDR --stop-address=0xEND > /tmp/fn.s   # then trim header/addr col
   scripts/tools/m2c/m2c.sh /tmp/fn.s > /tmp/fn_seed.c
 Then refine the seed with the AI / decomp-permuter loop (oracle: make compare).
 See docs/tools/m2c.md for the full workflow and examples.

@@ -109,10 +109,15 @@ just relink US source), use m2c to bootstrap the JP version:
      --start-address=0x080XXXXX --stop-address=0x080YYYYY \
      fireemblem8.elf > /tmp/fn.s
    ```
-   (For a whole `.text` section, run `arm-none-eabi-objdump -d
-   fireemblem8.elf` and let m2c pick functions with `-f`. In practice the
-   cleanest input is the same `as`-syntax asm our split workflow already
-   produces — see `asm/` and `docs/strategy.md`.)
+   m2c does **not** accept raw `objdump` text: it rejects the objdump file
+   header and the leading `address:` column, and the raw-opcode column confuses
+   it too. Always pass `--no-show-raw-insn` and strip the header / address
+   column down to clean `label:` + mnemonic lines before feeding it to m2c. For
+   a whole `.text` section, dump it the same cleaned way
+   (`arm-none-eabi-objdump -d --no-show-raw-insn fireemblem8.elf`, then trim)
+   and let m2c pick functions with `-f`. In practice the cleanest input is the
+   same `as`-syntax asm our split workflow already produces — see `asm/` and
+   `docs/strategy.md` — which needs no objdump cleanup at all.
 
 3. **Decompile to seed C:**
    ```bash
