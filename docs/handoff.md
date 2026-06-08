@@ -9,7 +9,7 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## Verified state (update each working stretch)
 
 - **Functions decompiled: 1234 / 8,528 = 14.5%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 297.** `make compare` → OK. Build is always byte-perfect
+- **Carved objects: 301.** `make compare` → OK. Build is always byte-perfect
   (`port_run` verifies every carve and reverts non-matches).
 - **NEW PATH — `scripts/carve_mapped.py` (find_runs blind spot):** find_runs only
   proposes a run it can UNIQUELY locate by masked search, so it SKIPS small/
@@ -56,6 +56,14 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
   that works: `scripts/diag_misses.py` classifies failures (run with PORTRUN_DEBUG
   it prints pre-remap content-diff + the make-err), byte-diff a representative of
   the biggest class → find the generalizing port_run bug → fix → harvest-sweep.
+
+- **NESTED ROM-DATA FIX (2026-06-08, +4):** port_run's romdata loop is now a
+  WORKLIST — a carved .data/.rodata section referencing ANOTHER ROM-data section
+  (e.g. a .data ProcScr table holding a .rodata pointer) now places+carves that
+  section too (was appended -> ROM growth AND the pointer left unresolved -> content
+  diff). Carved banim-efxmagic-dancerings/-eclipse/-evileye, banim-efxflashbg (22 fns).
+  This was the romdata near-miss 'region-different ProcScr pointer' class — MECHANICAL,
+  6th time 'region-different' was wrong. Plus the romdata .bss-section fix (scene).
 
 ## What's built (the pipeline)
 
