@@ -37,10 +37,23 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
   then fails on; (2) window the search or it scans 16 MB/symbol and times out; (3) run it
   TARGETED on big contiguous data objects (scattered code-rodata objects have huge
   union-spans -> slow); (4) no `.align` (non-4-aligned addrs -> ld pads -> ROM growth).
-- **MECHANICAL CEILING (2026-06-08): 64.15% of the ROM carved** (gen_layout), code 13.4%
-  + **data 80.14%** + symbols 27.54%, **1115 objects**, all durable. The region-same data
-  (same-offset + per-object-shift + per-symbol-shift) is exhausted. The remaining ~36% of
-  the ROM all needs genuine per-unit work that CANNOT be safely mechanized:
+- **PER-SUBSYSTEM RE WORKS — carved msg_data 395KB (2026-06-08).** The genuinely-region-
+  different data IS carvable: find the JP code that references the data's table, read the
+  table from the JP ROM, derive the boundary. For msg_data (JP message text, 3339 msgs vs
+  US 3404): `GetStringFromIndex` (JP 0x08009FA8) loads `gMsgTable` from a literal → table
+  JP 0x0814D08C; the JP table's entries end exactly where carved const_data_chapter_maps
+  begins (0x081504B8); min table pointer = block start (0x080ED7F4). Carved
+  [0x080ED7F4,0x081504B8) as named incbin. **This is the template for the remaining
+  region-different DATA — repeat per subsystem (find table ref in code → derive boundary).**
+- **PADDING (2026-06-08): 873KB of the "uncarved" is 0xFF `__end__`/inter-section padding**
+  (incl. the 611KB @ 0x08E47180 and 241KB @ 0x08BC3A00 blocks I'd called "unidentified").
+  It's NOT authored data, NOT in the US data denominator, and already byte-perfect via the
+  incbin + objcopy --gap-fill=0xff. Do NOT "carve" it as data (would inflate the metric);
+  leave it. Real remaining authored data is ~3.5 MB.
+- **CEILING for region-same mechanical (2026-06-08): data 83.62%, ROM ~67% carved, ~1130
+  objects, all durable.** Region-same (same-offset + per-object/per-symbol shift) is
+  exhausted; msg_data proved region-different DATA needs per-subsystem RE (above). Remaining
+  ~33% of the ROM:
   - **Region-different graphics (~2.5 MB):** banim OBJ sprites (0x085D9C5C, 1.53 MB),
     data_bg (0x088D2700, 557 KB), etc. Verified NOT neighbor-pinned (they sit in
     shifted-layout regions, so the US boundary is not the JP boundary) and NOT shift-
