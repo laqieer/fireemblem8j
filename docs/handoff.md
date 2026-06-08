@@ -8,8 +8,8 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
-- **Functions decompiled: 1206 / 8,528 = 14.1%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 284.** `make compare` → OK. Build is always byte-perfect
+- **Functions decompiled: 1212 / 8,528 = 14.2%** (`python3 scripts/calcprogress.py`).
+- **Carved objects: 285.** `make compare` → OK. Build is always byte-perfect
   (`port_run` verifies every carve and reverts non-matches).
 - **.bss-overlap class RESOLVED** via `--no-check-sections` (Makefile): the overlaps
   were benign NOLOAD shared-RAM collisions; ld's default check made them fatal on any
@@ -84,7 +84,7 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
        `ss[1]`). BUT these are graphics-heavy region-different banim effects (many
        Img_*/Pal_*/AnimScr_* pointers) — a correct base likely still leaves
        region-different content diffs. Lower priority than Phase-3 no-runs.
-     - **no-runs ×15 / compile-fail ×2** — Phase 3 (hand-decompile) / agbcc C89 fixups.
+     - **no-runs ×15 / compile-fail ×1 (bmbattle)** — Phase 3 (hand-decompile). compile-fail FIX SHIPPED: in-subset forward refs now get the real US prototype after the includes (carved worldmap_path); bmbattle is a different compile issue (TBD).
 3. **Phase 3 — region-different CODE** (`no verified runs`): hand-decompile the
    functions in `ida`/`ghidra` (decompile by JP address), write `src/` C matching
    the JP behaviour, byte-match with the permuter, then carve + `make compare`.
