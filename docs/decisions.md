@@ -355,3 +355,40 @@ oracle; every permuter output is verify-or-revert gated exactly like a carve.
 **Next concrete step:** `scripts/derive_boundaries.py <tu>` — read the funcmap, find the
 TU's JP gap, emit candidate function intervals (prologue split + CFG validation) for the
 permuter. First target: `banim-efxmagic-bindingblade` (smallest, 6 funcs).
+
+## D10 — Pivot to the DATA frontier (data is 94% of the ROM) (2026-06-08)
+
+**Context:** the Stop-hook goal is byte-complete decomp, and the progress breakdown shows
+the real bulk is DATA, not code: **code 13.4% (858 KB total), data was 0.05% (13.3 MB
+total), functions 15.5%**. The ~11 region-different code TUs are a few KB — a rounding
+error against the goal. ROM-wide analysis: **26% of the ROM is byte-identical US<->JP at
+the same offset** (a 3.28 MB region-same block at 0x08BC3A00, a 922 KB block at
+0x08EF9454, etc.) — shared graphics/animation/asset data.
+
+**Decision:** carve the DATA frontier, in tiers by fidelity (match the US representation):
+1. **Region-SAME named data → DONE / mechanical.** For each US data object whose full
+   range is byte-identical in JP, emit `asm/<name>.s` defining the US symbols as labels
+   and incbinning the bytes from baserom.gba between them (`scripts/carve_data.py`, the
+   data harvester). Carved `banim_data[]` (6.4 KB table, as real C), `data_banim`
+   (2.38 MB, 1475 syms), `data_banim_terrain` (74 KB). Result: **data-in-src 0.05% ->
+   18.6%, symbols 3.8% -> 7.7%**, all `make clean && make compare` durable. Among 1113 US
+   data objects only **2** are fully region-same (both now carved) — this sub-frontier is
+   exhausted.
+2. **Region-DIFFERENT ASSET data (graphics/sound/sprites) → JP-byte incbin w/ US names.**
+   The US decomp itself represents these as `.incbin` of named binaries; the JP equivalent
+   is `.incbin` of JP's (differing) bytes under the same descriptive name. Byte-matches by
+   construction and matches US fidelity. LEGITIMATE — this is the "descriptive asm/data"
+   the goal calls for, NOT gaming (the bytes ARE that asset; the name is honest).
+3. **Region-DIFFERENT STRUCTURED tables → C with JP values (harder, deferred).** Where US
+   uses a C array of semantic values, blob-incbin would be lower fidelity; these want real
+   C. Region-different localized tables also need the JP values.
+
+**Integrity line (important):** carving an undecompiled incbin asset region into a NAMED
+incbin region is the legitimate decomp step for raw assets (US does exactly this).
+GAMING would be hiding undecompiled CODE as "data", using meaningless names, or
+overwriting already-decompiled C with raw bytes — none of which this does. `make compare`
+stays the only oracle. Consulted Copilot on the tier-2 boundary (in progress).
+
+**Tooling:** `scripts/carve_data.py [substr...|--all]` (region-same gate, verify-or-revert).
+Tier 2 will extend it to drop the region-same gate ONLY for US-incbin-style asset objects
+(identified via US `INCBIN_*` macros / graphics+sound dirs), never for C value tables.
