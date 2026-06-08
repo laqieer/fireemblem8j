@@ -44,8 +44,13 @@ conventions:
   `/* 0x00 */`-style leading comments plus a `/* size: 0xNN */` trailer. This is
   *exactly* our `/* 0C */` byte-offset annotation convention (CLAUDE.md).
 - `example-kappa-plugins/AddCheckOffsetMacroPlugin.js` — same offset math, but
-  emits `CHECK_OFFSET_X86(Struct, field, 0xNN);` after the struct. We'd template
-  it to FE8U's static-assert offset macros (`STRUCT_PAD` / offset checks).
+  emits a `CHECK_OFFSET_X86(Struct, field, 0xNN);` offset-assertion line after
+  the struct. FE8U/FE8J has no equivalent offset-check macro today — the
+  convention is `/* 0C */` byte-offset comments plus `STRUCT_PAD(from, to)`
+  (`include/global.h`) for explicit padding, and `STRUCT_PAD` is padding, not an
+  assertion. So we'd retarget this plugin to our `/* 0C */` + `STRUCT_PAD`
+  convention; emitting actual compile-time offset checks would mean first
+  introducing a new offset-assert helper.
 - `example-kappa-plugins/ApplyQNotationPlugin.js` — rewrites raw literals
   assigned to `.x`/`.y` into `Q(n)` fixed-point notation. FE8 has analogous
   fixed-point/flag-constant idioms where m2c/IDA emit raw hex.
