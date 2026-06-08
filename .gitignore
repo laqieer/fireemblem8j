@@ -24,6 +24,11 @@ src/data/*.s
 /tools/decomp-permuter
 /nonmatchings/
 
+# asm-differ: upstream clone is local (set up via scripts/tools/asm-differ/setup.sh).
+# diff_settings.py (repo root) + docs/tools/asm-differ.md are tracked; the venv
+# lives outside the repo (default $HOME/asm-differ-venv, like the permuter's).
+/tools/asm-differ
+
 # Claude Code: share settings.json + loop_prompt.md, but keep local/transient
 # state out (per-user overrides and the ralph-loop session-state file).
 .claude/settings.local.json
