@@ -1340,9 +1340,6 @@
 	.global gUnk_29
 	.set    gUnk_29, 0x0201C5CC
 
-	.global gWMNodeData
-	.set    gWMNodeData, 0x081F5D7C
-
 	.global ProcScr_GmapTimeMons
 	.set    ProcScr_GmapTimeMons, 0x08AC2468
 

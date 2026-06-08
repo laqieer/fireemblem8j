@@ -325,6 +325,7 @@
 0DFBE4	0DFBEF	src/banim-efxflashbg.o(.rodata)	banim-efxflashbg .rodata
 0DFE9C	0DFF00	asm/dat_banim_battleparse.o(.rodata.dat_banim_battleparse)	dat_banim_battleparse region-same shifted (0KB)
 0DFF70	0E0008	asm/dat_const_data_DAEF0.o(.rodata.dat_const_data_DAEF0)	dat_const_data_DAEF0 region-same shifted (0KB)
+0E0044	0E1870	asm/dat_const_data_DB034_gf.o(.rodata.dat_const_data_DB034_gf)	dat_const_data_DB034_gf region-diff asset, boundary-pinned (6KB)
 0E262C	0E2638	src/banim-efxmagic-eclipse.o(.rodata)	banim-efxmagic-eclipse .rodata
 0E37B8	0E37C5	src/banim-efxmagic-dancerings.o(.rodata)	banim-efxmagic-dancerings .rodata
 0E3CCC	0E3CD7	src/banim-efxmagic-evileye.o(.rodata)	banim-efxmagic-evileye .rodata
@@ -440,6 +441,7 @@
 1F4B78	1F4F60	asm/dat_const_data_unit_icon_move_p102.o(.rodata.dat_const_data_unit_icon_move_p102)	dat_const_data_unit_icon_move_p102 region-same per-sym shifted (0KB)
 1F5784	1F578C	src/bmsave-misc.o(.rodata)	bmsave-misc .rodata
 1F5BEC	1F5BF0	src/gamerankings.o(.rodata)	gamerankings .rodata
+1F5C6C	1F611C	asm/dat_worldmap_node_data_gf.o(.rodata.dat_worldmap_node_data_gf)	dat_worldmap_node_data_gf region-diff asset, boundary-pinned (1KB)
 1F6188	1F6340	asm/dat_worldmap_gmapunit_p2.o(.rodata.dat_worldmap_gmapunit_p2)	dat_worldmap_gmapunit_p2 region-same per-sym shifted (0KB)
 1F6534	1F65C0	asm/dat_worldmap_gmapunit_p3.o(.rodata.dat_worldmap_gmapunit_p3)	dat_worldmap_gmapunit_p3 region-same per-sym shifted (0KB)
 1F6620	1F66A4	asm/dat_worldmap_gmapunit_p5.o(.rodata.dat_worldmap_gmapunit_p5)	dat_worldmap_gmapunit_p5 region-same per-sym shifted (0KB)

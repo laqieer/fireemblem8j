@@ -303,7 +303,6 @@ gUnk_27	0201C5B4	data	worldmap_hb
 gManimActiveScanlineBuf	0203E758	data	worldmap_hb
 gManimScanlineBufs	0203E750	data	worldmap_hb
 gUnk_29	0201C5CC	data	worldmap_hb
-gWMNodeData	081F5D7C	data	worldmap_screen2
 ProcScr_GmapTimeMons	08AC2468	data	worldmap_timemons
 GmMu_SetPosition	080C3144	thumb	worldmap_timemons
 GmMu_GetPosition	080C318C	thumb	worldmap_tm_confront
