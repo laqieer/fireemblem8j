@@ -102,7 +102,7 @@ $(C_OBJECTS): %.o: %.c
 	$(AS) $(ASFLAGS) $*.s -o $@
 
 $(ELF): $(ALL_OBJECTS) $(LDSCRIPT)
-	$(LD) -T $(LDSCRIPT) -Map $(MAP) -o $@ $(ALL_OBJECTS)
+	$(LD) --no-check-sections -T $(LDSCRIPT) -Map $(MAP) -o $@ $(ALL_OBJECTS)
 
 %.gba: %.elf
 	$(OBJCOPY) --strip-debug -O binary --pad-to 0x9000000 --gap-fill=0xff $< $@
