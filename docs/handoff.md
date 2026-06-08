@@ -70,33 +70,10 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
        *function pointers* (addend 0) plus referenced-but-unplaced `.rodata` growth,
        not indexed-table addends. Don't re-try the romdata-addend path; the real fix
        is (i) **place referenced `.rodata`/`.data` via named syms** at their JP address.
-     - **"no diff parsed", +ram+romdata — `.bss` overlap. PARTLY FIXED.**
-       - **DONE:** COMMON IWRAM globals are now resolved as INDIVIDUAL absolute
-         symbols (port_run, `*COM*` → `new_syms`), since the linker's weak common
-         yields to the absolute def → no NOLOAD block, no overlap. Plus `.bss`/`*COM*`
-         added to the trimmer for unreferenced statics. **Carved `agb_sram` (277→278).**
-       - **STILL BLOCKED (`bm`, `bmarena`, `bmmap`, `bmmind`, `bmsave-multiarena`,
-         `cp_decide`, `sio_core`):** the deeper cause — the ldscript's FIRST
-         `(COMMON)`-collecting block (`rng.o(COMMON)` in `.bss_0` @ 0x03000000)
-         absorbs ALL orphan COMMON from every object. The map shows **m4a.o
-         contributes 0x1250 bytes of COMMON there** (sound work-RAM), making `.bss_0`
-         span [0x03000000,0x0300126f]. When a new carve shifts COMMON allocation it
-         collides with `soundwrapper`/`agb_sram` globals that sit INSIDE m4a's region
-         (shared sound RAM). **Next fix:** route orphan COMMON to correct JP addresses
-         (resolve m4a's work-RAM common as an absolute sym at its real JP addr) OR add
-         a dedicated non-overlapping `(COMMON)` sink in `ldscript.template.txt` placed
-         before `.bss_0`. Verify m4a's work-RAM JP address first (is 0x03000020 real
-         or bogus-but-NOLOAD-harmless?). Gated by `make compare`.
-       - **KEY NUANCE (verified 2026-06-08):** the EXACT same overlap (`.bss_20`
-         soundwrapper @0x03000038, 8B ⊂ `.bss_0` [0x03000000,0x0300126f]) is present
-         AND TOLERATED in the green 278-obj build — soundwrapper's sMusicProc1/2 live
-         *inside* m4a's sound work-RAM region (shared RAM, legitimately co-located).
-         The error fires only when a NEW carve is added, even with COMMON-absolute on.
-         So it's an ld overlap-detection trigger, not just the addresses. Likely real
-         fix: make soundwrapper/agb_sram-style **defined `.bss` globals that sit inside
-         another object's region resolve as ABSOLUTE syms** (the defined-.bss-global →
-         absolute extension, one step beyond the COMMON-absolute fix already shipped),
-         so no separate `.bss_N` block is emitted to collide. Needs fresh focused work.
+     - **`.bss`-overlap class — RESOLVED** (see Verified state). Fixed via
+       `--no-check-sections` (benign NOLOAD shared-RAM overlaps) + the COMMON-absolute
+       / .bss-static-trim port_run fix. Unblocked agb_sram, bm, bmarena, bmmind,
+       sio_core, uiutils, banim-ekrbattle. No further work needed here.
      - **huge diff (~11.9M) ×3** — `banim-efxmagic-flux/-aircalibur/-thunder`,
        all first @ 0x373c: catastrophic misplacement (likely a bad romdata base or a
        falsely-verified run). Investigate separately; don't sweep blindly.
