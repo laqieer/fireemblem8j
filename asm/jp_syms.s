@@ -1449,9 +1449,6 @@
 	.global gMusicProc3Script
 	.set    gMusicProc3Script, 0x08577638
 
-	.global gAiDecision
-	.set    gAiDecision, 0x0203AA90
-
 	.global UnitBeginAction
 	.type   UnitBeginAction, %function
 	.thumb_func

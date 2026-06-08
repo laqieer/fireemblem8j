@@ -336,7 +336,6 @@ GmMu_GetPosition	080C318C	thumb	worldmap_tm_confront
 StartPromoClassSelect	080D1A3C	thumb	classchg-sel
 StartMapSongBgm	080160DC	thumb	cp_perform
 gMusicProc3Script	08577638	data	cp_perform
-gAiDecision	0203AA90	data	cp_perform
 UnitBeginAction	08018370	thumb	cp_perform
 HideUnitSprite	080280A0	thumb	cp_perform
 GenerateUnitMovementMap	0801A05C	thumb	cp_perform
