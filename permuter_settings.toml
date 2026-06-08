@@ -26,10 +26,14 @@ asm_prelude_file = "scripts/permuter/prelude.inc"
 #
 # NOTE (fork eval, 2026-06): the WhenGryphonsFly/decomp-permuter-agbcc fork was
 # evaluated; recommendation is to KEEP upstream — see docs/tools/decomp-permuter-agbcc.md.
-# Its one substantive agbcc fix ("invalid zero scores", `set -o pipefail`) is
-# already neutralized by scripts/permuter/compile.sh, which uses `set -euo
-# pipefail` AND splits agbcc and `as` into separate steps (a crashing agbcc is
-# caught before `as` runs). The fork also pins ~10 months behind upstream's
-# randomizer/scorer and swaps our `.s`-based import for a prebuilt-`.o` workflow.
+# But adopt the fork's one substantive agbcc fix ("invalid zero scores"): import.py
+# generates each nonmatchings/<func>/compile.sh from THIS compiler_command without
+# `set -o pipefail`, and the command above is a single pipe (cpp|iconv|agbcc|as), so
+# a crashing agbcc can still be masked by a succeeding `as` and yield a false 0 score.
+# scripts/permuter/compile.sh fixes this (set -euo pipefail + two-step agbcc->as) but
+# is NOT on the active import path unless compiler_command invokes it. TODO (coordinator
+# e2e, needs tools/agbcc + baserom.gba to re-validate bytes): point compiler_command at
+# scripts/permuter/compile.sh (folding in the cpp step), or add pipefail to the pipeline.
 # Do not switch the config to the fork's `agbcc | as` single-pipe template; it
-# omits the UTF-8->CP932 iconv step FE8J requires.
+# omits the UTF-8->CP932 iconv step FE8J requires. The fork also pins ~10 months behind
+# upstream's randomizer/scorer and swaps our `.s`-based import for a prebuilt-`.o` flow.

@@ -7,11 +7,12 @@ against the upstream
 that FE8J already uses (`tools/decomp-permuter`, gitignored; configured by
 `permuter_settings.toml` + `scripts/permuter/`).
 
-**TL;DR — RECOMMENDATION: keep upstream.** Cherry-pick nothing; our existing
-`scripts/permuter/compile.sh` already implements the fork's one substantive
-agbcc bugfix (and does it more robustly). The fork would *regress* us on ~10
-months of upstream randomizer/scorer work and would break our `.s`-based import
-workflow. No change to active config.
+**TL;DR — RECOMMENDATION: keep upstream**, but **adopt the fork's one
+substantive agbcc bugfix** (`set -o pipefail`, "invalid zero scores") into our
+active config, because the active `permute.sh import` flow does *not* currently
+use the pipefail-protected `scripts/permuter/compile.sh` — see §3.1. The fork
+would otherwise *regress* us on ~10 months of upstream randomizer/scorer work and
+would break our `.s`-based import workflow, so a full switch is the wrong call.
 
 ---
 
@@ -98,9 +99,32 @@ for FE8J's descriptive-`.s`-per-function model:
 | --- | --- | --- |
 | agbcc compile pipeline | `scripts/permuter/compile.sh` (iconv→agbcc→`as`), `compiler_command` in `permuter_settings.toml` | Covered, byte-validated |
 | agbcc include flags (`-I tools/agbcc/include -iquote include -nostdinc -undef`) | Same flags baked into our `compiler_command` | Covered (`permuter_settings.toml`) |
-| `set -o pipefail` zero-score guard | `scripts/permuter/compile.sh` uses **`set -euo pipefail`** *and* splits agbcc and `as` into separate steps via a temp `.s` (with `.ALIGN`), so a partial/failed agbcc output is caught by `set -e` before `as` ever runs | Covered — strictly more robust than the fork's single-pipe `set -o pipefail` |
+| `set -o pipefail` zero-score guard | `scripts/permuter/compile.sh` *would* cover it (`set -euo pipefail` + a two-step agbcc→`as` flow via a temp `.s`), **but that script is not on the active import path** — see §3.1 | **Gap** — worth adopting from the fork |
 | `compiler_type = "gcc"` weights | Same in our `permuter_settings.toml` | Covered |
 | Thumb prelude / `glabel` | `scripts/permuter/prelude.inc` | Covered |
+
+### 3.1. The pipefail gap on the active import path
+
+`scripts/permuter/compile.sh` is a hand-written, byte-validated standalone
+equivalent (`set -euo pipefail`; agbcc→temp-`.s`→`as` in two steps, so a crashing
+agbcc is caught before `as` runs). **However, our `permute.sh import` does not use
+it.** `permute.sh import` execs upstream `tools/decomp-permuter/import.py`, which
+generates each `nonmatchings/<func>/compile.sh` *itself* from the
+`compiler_command` string in `permuter_settings.toml` (upstream
+`write_compile_command`/`finalize_compile_command`). That generated script has
+only a `#!/usr/bin/env bash` shebang — **no `set -e`, no `set -o pipefail`** — and
+runs our `compiler_command` verbatim, which is a single pipe
+`cpp | iconv | agbcc | as`. So the exact false-zero-score case the fork fixes can
+still occur on our active path: a crashing agbcc mid-pipe can be masked by a
+succeeding `as`.
+
+The checked-in `compile.sh` only protects us if `compiler_command` actually
+invokes it. **Recommended minimal fix:** make `compiler_command` call
+`scripts/permuter/compile.sh` (folding the `cpp` step into it), or otherwise add
+`set -o pipefail` to the active pipeline. This adopts the fork's bugfix without
+adopting the stale fork. (This doc keeps the active config unchanged; wiring it in
+is a follow-up tracked for the coordinator e2e, since it must be re-validated
+against the real `tools/agbcc`/`baserom.gba`, absent in this worktree.)
 
 The one thing the fork does **differently** (not better) is its `.o`-based
 import. Our `permute.sh import <src/foo.c> <func.s>` relies on the upstream
@@ -113,11 +137,15 @@ procedure would be strictly more work for us with no matching benefit.
 
 **Rationale:**
 
-1. **No unique agbcc code value.** The fork's only real bugfix
-   (`set -o pipefail`, "invalid zero scores") is already neutralized in our
-   `compile.sh` — which uses `set -euo pipefail` and a two-step (not single-pipe)
-   agbcc→`as` flow, so a crashing agbcc can't masquerade as a 0 score. The agbcc
-   include flags are already in our `compiler_command`.
+1. **One bugfix worth lifting, no other unique code value.** The fork's only real
+   bugfix (`set -o pipefail`, "invalid zero scores") is *not* yet active on our
+   import path (§3.1): upstream import generates the per-candidate compile script
+   from `compiler_command` without pipefail, and our active `compiler_command` is
+   a single pipe. `scripts/permuter/compile.sh` already implements the more-robust
+   two-step form but is not wired in. **Adopt this fix** (point `compiler_command`
+   at `compile.sh`, or add `set -o pipefail`); that is a one-line config change, not
+   a reason to switch forks. The agbcc include flags are already in our
+   `compiler_command`.
 2. **Switching would regress us ~10 months.** The fork is pinned near upstream
    `082a8d9` (Aug 2024) and is missing every upstream improvement since, across
    `randomizer.py`, `scorer.py`, `permuter.py`, `objdump.py`, packaging, etc. The
@@ -126,9 +154,11 @@ procedure would be strictly more work for us with no matching benefit.
 3. **Switching would break our wrapper.** The fork removes the `.s`→assemble
    import path our `permute.sh import` and `prelude.inc` depend on and replaces
    it with a prebuilt-`.o` workflow.
-4. **Nothing to cherry-pick.** The fork's two changes are (a) the pipefail fix we
-   already exceed, and (b) a workflow swap we don't want. There are no randomizer
-   or PERM-macro improvements to lift.
+4. **Only the pipefail idea is worth cherry-picking, not the fork.** The fork's
+   two changes are (a) the pipefail fix — which we should adopt into our active
+   config (§3.1), not by taking the fork's code but by guarding our own pipeline —
+   and (b) a workflow swap we don't want. There are no randomizer or PERM-macro
+   improvements to lift.
 
 If the FE8J `.s`-based import ever proves awkward and we want the fork's
 prebuilt-`.o` ergonomics, the cheap path is to add an optional `.o`-import mode
@@ -148,7 +178,10 @@ assembler_command = "arm-none-eabi-as -mcpu=arm7tdmi"
 
 Note this template pipes `agbcc | as` directly (hence the fork needing
 `set -o pipefail`) and omits the UTF-8→CP932 `iconv` step that FE8J requires; do
-**not** copy it over our verified config.
+**not** copy it over our verified config. (Our active `compiler_command` is also a
+single pipe and likewise lacks `set -o pipefail` — that is exactly the §3.1 gap to
+close on our side, by routing through `scripts/permuter/compile.sh` or adding the
+guard.)
 
 ---
 
