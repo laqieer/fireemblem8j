@@ -65,6 +65,23 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
   This was the romdata near-miss 'region-different ProcScr pointer' class — MECHANICAL,
   6th time 'region-different' was wrong. Plus the romdata .bss-section fix (scene).
 
+
+## SYSTEMATIC CONFIRMATION (2026-06-08) — mechanical frontier exhausted
+
+Full diag_misses re-classification with all 14 fixes live: only 16 candidate TUs
+remain and EVERY one is region-different (zero clean mechanical near-misses):
+  - no-runs x11 (region-different CODE): banim-efxmagic-aura/bindingblade/gespenst/
+    refresh, banim-main, classdisplayfont, code_8086934, eventfx-stoneshatter,
+    events_script, main, msg -> need IDA/Ghidra MCP RE (decompile JP, write matching C).
+  - huge-diff x3 (flux/aircalibur/thunder): region-different .rodata frame data -> the
+    DESIGNED NOLOAD-romdata enhancement (carve .text, leave .rodata incbin) + the
+    objcopy --set-section-alignment fix.
+  - banim-efxmagic-fire (diff=59), uichapterstatus (diff=3, region-different VRAM ptrs)
+    -> NOLOAD-romdata enhancement.
+So further progress needs (1) the NOLOAD-romdata enhancement [designed above], and/or
+(2) an INTERACTIVE IDA/Ghidra-MCP session for the region-different code. Not doable
+headless. Session result: 236->301 objects (+65), 14 validated generalizing fixes.
+
 ## What's built (the pipeline)
 
 - **Carving:** `scripts/harvest_parallel.py -j16` = parallel `find_runs` discovery
