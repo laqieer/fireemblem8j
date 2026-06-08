@@ -23,3 +23,13 @@ asm_prelude_file = "scripts/permuter/prelude.inc"
 # NOTE: don't set objdump_command — the scorer auto-detects ARM from the target
 # object (ELF e_machine) and uses `arm-none-eabi-objdump -drz`. Overriding it with
 # a bare path drops the `-drz` flags and the scorer fails.
+#
+# NOTE (fork eval, 2026-06): the WhenGryphonsFly/decomp-permuter-agbcc fork was
+# evaluated; recommendation is to KEEP upstream — see docs/tools/decomp-permuter-agbcc.md.
+# Its one substantive agbcc fix ("invalid zero scores", `set -o pipefail`) is
+# already neutralized by scripts/permuter/compile.sh, which uses `set -euo
+# pipefail` AND splits agbcc and `as` into separate steps (a crashing agbcc is
+# caught before `as` runs). The fork also pins ~10 months behind upstream's
+# randomizer/scorer and swaps our `.s`-based import for a prebuilt-`.o` workflow.
+# Do not switch the config to the fork's `agbcc | as` single-pipe template; it
+# omits the UTF-8->CP932 iconv step FE8J requires.
