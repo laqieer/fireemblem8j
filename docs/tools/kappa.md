@@ -115,15 +115,17 @@ use, not in the hot loop). The platform/preset mapping table in
 `create-scratch.ts` and `platform.ts` (`/api/platform/{id}`) is a useful
 reference for the exact payload fields.
 
-### D. objdiff as an in-loop, function-level diff oracle the model can read  — MED value / LOW effort (already partly planned)
+### D. objdiff as an in-loop, function-level diff oracle the model can read  — MED value / LOW effort (future proposal)
 kappa exposes objdiff two ways: a command, and a **Language Model Tool**
 (`src/language-model-tools/objdiff.ts`) the Copilot agent calls as `#objdiff` to
 get a textual current-vs-target diff for one function and "fix the gaps." The
 prompt template (`src/prompt-builder/craft-prompt.ts`) bakes objdiff into the
 build→diff→edit→repeat loop and tells the model to stop only at byte-identical.
 
-**How we'd replicate:** we're already standing up `objdiff-cli` separately, so
-this is mostly a wiring idea: wrap `objdiff-cli diff <build.o> <expected.o>
+**How we'd replicate:** this is a future proposal — the repo has no `objdiff` /
+`objdiff-cli` setup, scripts, Makefile target, or `tools/objdiff*` vendoring
+convention today. If/when we add `objdiff-cli`, the wiring idea is small: wrap
+`objdiff-cli diff <build.o> <expected.o>
 --symbol <fn>` as an MCP tool / slash-command the Claude loop can call to get a
 *function-scoped* textual diff (vs. our current whole-ROM `make compare`
 pass/fail). That gives the model a gradient to follow instead of a binary
