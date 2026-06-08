@@ -28,16 +28,27 @@ def apply(config, args):
     # for -o, or -Dz -bbinary -EL for the raw-binary mode) itself.
     config["objdump_executable"] = "arm-none-eabi-objdump"
 
-    # objdump flags asm-differ passes in EVERY mode (it prepends arch_flags +
-    # objdump_flags before its own flags). asm-differ's "armel" arch has empty
-    # arch_flags, and the raw -bbinary path (workflow #1) gives objdump only
-    # `-Dz -bbinary -EL` — a flat binary has no ELF header, so without an
-    # explicit machine objdump exits with "can't disassemble for architecture
-    # UNKNOWN". FE8J code is Thumb (agbcc Thumb-interwork), so force the machine
-    # and Thumb decode here. (For -o/-e the machine comes from the ELF header, so
-    # these are redundant-but-harmless there.) If you ever raw-diff an ARM region
-    # drop -Mforce-thumb for that range; see docs/tools/asm-differ.md.
-    config["objdump_flags"] = ["-m", "arm", "-Mforce-thumb"]
+    # objdump flags asm-differ prepends (arch_flags + objdump_flags) in EVERY
+    # mode. asm-differ's "armel" arch has empty arch_flags, and the raw -bbinary
+    # path (workflow #1) hands objdump only `-Dz -bbinary -EL`. A flat binary has
+    # no ELF header, so without an explicit machine objdump exits with "can't
+    # disassemble for architecture UNKNOWN"; and since FE8J code is Thumb (agbcc
+    # Thumb-interwork) it must also force the Thumb decoder, else `-m arm` alone
+    # decodes the Thumb bytes as ARM.
+    #
+    # These flags must NOT leak into the -o/-e (object/ELF) modes: there objdump
+    # reads the ARM/Thumb state per-instruction from the ELF mapping symbols
+    # ($a/$t), and a global -Mforce-thumb would mis-decode ARM-state code (e.g.
+    # the ARM rom_header / Init). So set objdump_flags only for the raw-binary
+    # invocation, detected from the parsed args: raw mode is "no -o and no -e".
+    # (asm-differ calls apply(config, args) with the parsed argparse Namespace;
+    # diff_obj is the -o flag, diff_elf_symbol is the -e SYMBOL.) See
+    # docs/tools/asm-differ.md; to raw-diff a rare ARM range, drop -Mforce-thumb.
+    is_raw_binary = not getattr(args, "diff_obj", False) and not getattr(
+        args, "diff_elf_symbol", None
+    )
+    if is_raw_binary:
+        config["objdump_flags"] = ["-m", "arm", "-Mforce-thumb"]
 
     # GNU ld map from `make` (ROM -> fireemblem8.map). Used by -o to find the
     # owning .o of a symbol. NOTE: asm-differ's *raw-binary* symbol lookup
