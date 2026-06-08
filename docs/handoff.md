@@ -9,22 +9,22 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## Verified state (update each working stretch)
 
 - **Functions decompiled: 1234 / 8,528 = 14.5%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 293.** `make compare` → OK. Build is always byte-perfect
+- **Carved objects: 294.** `make compare` → OK. Build is always byte-perfect
   (`port_run` verifies every carve and reverts non-matches).
 - **NEW PATH — `scripts/carve_mapped.py` (find_runs blind spot):** find_runs only
   proposes a run it can UNIQUELY locate by masked search, so it SKIPS small/
   pointer-heavy functions even though `match_us_jp.py` already located them in JP
   (funcmap). carve_mapped groups a TU's funcmap-mapped funcs into JP-consecutive
   runs and feeds them to `port_run.port(..., runs=...)` directly (verify-or-revert
-  still guards). Carved +7 (bmarch, bmio, bmmap, bmsave-multiarena, classchg-event,
+  still guards). Carved +8 (chapterdata, bmarch, bmio, bmmap, bmsave-multiarena, classchg-event,
   cp_decide, unitlistscreen). **Re-run it each session; ~21 mapped funcs still
   uncarved (scene 15, chapterdata 4, spinning_arrow, worldmap_text) fail because the
   ISOLATED subset compile doesn't reproduce the in-context JP bytes —  next lead.**
-  - carve_mapped remainder blockers (probed): `chapterdata` 4 funcs blocked by a
-    CP932/agbcc parse quirk — its include chain (agb_sram.h then bmsave.h) makes
-    bmsave.h:543 fail with a garbled `insrc` token, though bmsave-multiarena carved
-    with bmsave.h via a different chain (try reordering/dropping the unused include).
-    `scene`/`spinning_arrow` are per-group/romdata cases. Each is 1-few carves of
+  - carve_mapped remainder: `chapterdata` RESOLVED — root cause was a MISSING
+    `src/data/chapter_settings.h` (auto-gen region-specific gChapterDataTable, not
+    yet ported); cpp failed silently → empty .text. port_run now DROPS missing
+    `src/data/*.h` includes (accessors use externs from normal headers). `scene` — its include chain (agb_sram.h then bmsave.h) makes
+/`spinning_arrow` are per-group/romdata cases. Each is 1-few carves of
     genuine long-tail per-TU work — not a single sweep.
   (Earlier "no path remains / region-different exhausted" was WRONG — this class
   was the gap; keep mining funcmap-mapped functions before declaring exhaustion.)
