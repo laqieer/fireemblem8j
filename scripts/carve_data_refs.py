@@ -64,46 +64,79 @@ def main():
             p = l.split("\t")
             carved.append((int(p[0], 16) + 0x08000000, int(p[1], 16) + 0x08000000))
 
+    # symbols already defined by existing carves (asm/*.s labels) — never redefine them
+    already = set()
+    for f in os.listdir("asm"):
+        if f.endswith(".s"):
+            for l in open(os.path.join("asm", f)):
+                m = re.match(r"\s*\.global\s+(\w+)", l)
+                if m:
+                    already.add(m.group(1))
+
     def is_carved(lo, hi):
         return any(not (hi <= cl or lo >= ch) for cl, ch in carved)
 
-    # walk each mapped function's words; a pointer literal that DIFFERS US<->JP references a
-    # relocated/region-different object: US word names it, JP word gives its JP address.
-    found = {}   # us_data_addr -> jp_data_addr (consistent)
-    for jp_fn, us_fn, size in fmap:
-        uo = us_fn - 0x08000000; jo = jp_fn - 0x08000000
-        for k in range(0, size - 3, 2):    # thumb literal pools are 4-aligned but scan 2 to be safe
-            if (uo + k) % 4:
-                continue
+    # Walk each US<->JP aligned region's words; a pointer literal that DIFFERS US<->JP names a
+    # region-different object (US word names it, JP word = JP addr). Seed = funcmap functions;
+    # RECURSE into every discovered object (a table whose pointers reach graphics).
+    found = {}   # us_data_addr -> jp_data_addr (None = inconsistent -> dropped)
+    queue = []
+
+    def scan_region(us_start, jp_start, size):
+        uo = us_start - 0x08000000; jo = jp_start - 0x08000000
+        if uo < 0 or jo < 0:
+            return
+        for k in range(0, size - 3, 4):
+            if uo + k + 4 > len(us) or jo + k + 4 > len(jp):
+                break
             uw = struct.unpack_from("<I", us, uo + k)[0]
             if not (0x08000000 <= uw < 0x09000000) or uw not in name_at:
-                continue
-            if jo + k + 4 > len(jp):
                 continue
             jw = struct.unpack_from("<I", jp, jo + k)[0]
             if not (0x08000000 <= jw < 0x09000000) or jw == uw:
                 continue
-            if found.get(uw, jw) != jw:
+            if uw not in found:
+                found[uw] = jw; queue.append(uw)
+            elif found[uw] != jw:
                 found[uw] = None
-            else:
-                found.setdefault(uw, jw)
+
+    for jp_fn, us_fn, size in fmap:
+        scan_region(us_fn, jp_fn, size)
+    seen = set()
+    while queue:
+        uw = queue.pop()
+        if uw in seen or found.get(uw) is None:
+            continue
+        seen.add(uw)
+        sz = size_at.get(uw, 0)
+        if sz:
+            scan_region(uw, found[uw], sz)
 
     refs = sorted((jw, ua) for ua, jw in found.items() if jw is not None)
     if not refs:
         print("no funcmap-aligned region-different data references found")
         return
 
-    made, new_rows, asm_pending, drop = [], [], [], set()
+    # Boundary set: each object ends at the NEXT known boundary after its jp_addr — the next
+    # discovered object OR the start/end of a carved range — so a carve never runs into an
+    # adjacent (carved or discovered) object. Cap by US size as a sanity bound.
+    bounds = sorted(set([r[0] for r in refs] + [c[0] for c in carved] + [c[1] for c in carved]))
+    import bisect
+    made, new_rows, asm_pending, drop, jpseen = [], [], [], set(), set()
     pend = list(carved)
-    jp_addrs = [r[0] for r in refs]
-    for i, (jw, ua) in enumerate(refs):
+    for jw, ua in refs:
+        if jw in jpseen:          # two US names mapping to one JP addr -> keep first only
+            continue
+        jpseen.add(jw)
         nm = name_at[ua]
+        if nm in drop or nm in already:    # never redefine a symbol an existing carve owns
+            continue
         us_sz = size_at.get(ua, 0)
-        nxt = jp_addrs[i+1] if i+1 < len(refs) else jw + (us_sz or 0)
+        bi = bisect.bisect_right(bounds, jw)
+        nxt = bounds[bi] if bi < len(bounds) else jw + (us_sz or 0)
         size = min(us_sz, nxt - jw) if us_sz else (nxt - jw)
         if size < min_b:
             continue
-        # must be region-different (else a relocation harvester already owns it)
         uo = ua - 0x08000000; jo = jw - 0x08000000
         if jo < 0 or jo + min(64, size) > len(jp) or us[uo:uo+min(64, size)] == jp[jo:jo+min(64, size)]:
             continue
