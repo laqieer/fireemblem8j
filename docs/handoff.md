@@ -8,9 +8,28 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
-- **Functions decompiled: 1234 / 8,528 = 14.5%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 302.** `make compare` → OK. Build is always byte-perfect
-  (`port_run` verifies every carve and reverts non-matches).
+- **Functions decompiled: 1323 / 8,528 = 15.51%** (`python3 scripts/calcprogress.py`).
+- **Carved objects: 306.** `make compare` → OK, **and `make clean && make compare`
+  → OK** (durability gate — see "durable bake-in" below). Build is always
+  byte-perfect (`port_run` verifies every carve and reverts non-matches).
+- **2026-06-08 — durable NOLOAD-romdata bake-in (16th fix) → +4 banim magic TUs
+  (flux, fire, aircalibur, thunder).** Region-different ROM data (banim animation
+  `.rodata`/`.data` with JP-shifted internal offsets) is placed NOLOAD at its JP
+  base (stays incbin, byte-perfect); the `.text`/`.data` refs into it have their
+  reloc addend rewritten to `jp[ref]-base`. Both edits are on the COMPILED object,
+  which `make` regenerates from `src/*.c`, so they are **persisted to
+  `layout/patches.tsv` and re-applied by `scripts/apply_patches.py` after every
+  compile** (Makefile C rule). An earlier object-only patch passed `port_run`'s
+  incremental verify but went RED on a clean rebuild — a verify-or-revert hole now
+  closed by the manifest. (`thunder` additionally needed the 17th fix below.)
+- **2026-06-08 — reloc-consistency NOLOAD decision (17th fix) → thunder.** The
+  kept-vs-NOLOAD heuristic excused every byte at a reloc site, assuming the linker
+  resolves it to the JP value. thunder's `ProcScr_efxThunder` `.data` references
+  `Tsa_EfxThuderBg1/2` *twice each* at JP offsets that don't line up with US, so no
+  single link reproduces it. Fix: a KEPT section is byte-perfect only if every
+  referenced symbol needs ONE consistent address (`jp_word - addend` equal across
+  all its relocs); otherwise NOLOAD it. **thunder was the LAST headless-mechanical
+  TU.**
 - **NEW PATH — `scripts/carve_mapped.py` (find_runs blind spot):** find_runs only
   proposes a run it can UNIQUELY locate by masked search, so it SKIPS small/
   pointer-heavy functions even though `match_us_jp.py` already located them in JP
@@ -96,21 +115,27 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
   6th time 'region-different' was wrong. Plus the romdata .bss-section fix (scene).
 
 
-## SYSTEMATIC CONFIRMATION (2026-06-08) — mechanical frontier exhausted
+## SYSTEMATIC CONFIRMATION (updated 2026-06-08) — mechanical frontier exhausted at 306
 
-Full diag_misses re-classification with all 14 fixes live: only 16 candidate TUs
-remain and EVERY one is region-different (zero clean mechanical near-misses):
-  - no-runs x11 (region-different CODE): banim-efxmagic-aura/bindingblade/gespenst/
-    refresh, banim-main, classdisplayfont, code_8086934, eventfx-stoneshatter,
-    events_script, main, msg -> need IDA/Ghidra MCP RE (decompile JP, write matching C).
-  - huge-diff x3 (flux/aircalibur/thunder): region-different .rodata frame data -> the
-    DESIGNED NOLOAD-romdata enhancement (carve .text, leave .rodata incbin) + the
-    objcopy --set-section-alignment fix.
-  - banim-efxmagic-fire (diff=59), uichapterstatus (diff=3, region-different VRAM ptrs)
-    -> NOLOAD-romdata enhancement.
-So further progress needs (1) the NOLOAD-romdata enhancement [designed above], and/or
-(2) an INTERACTIVE IDA/Ghidra-MCP session for the region-different code. Not doable
-headless. Session result: 236->301 objects (+65), 14 validated generalizing fixes.
+The NOLOAD-romdata enhancement (designed earlier) + the reloc-consistency NOLOAD
+decision were BOTH built and landed: the huge-diff banim magic TUs
+(flux/aircalibur/fire/thunder) are now carved durably. **thunder was the last
+mechanical TU.** Remaining candidates are ALL genuinely region-different CODE,
+re-confirmed data-driven (their functions are **not in the 7740-entry funcmap** —
+`match_us_jp.py`'s exact AND masked tiers both fail to locate them in JP):
+  - **no-runs ×~11 (region-different CODE):** banim-efxmagic-aura/bindingblade/
+    gespenst/refresh, banim-main, classdisplayfont, code_8086934,
+    eventfx-stoneshatter, events_script, main, msg. find_runs verifies 0/N funcs;
+    0 funcmap entries. → need per-function hand-decompilation.
+  - **region-different DATA files:** banim_data, banim_pal_chara, banim_terrain_data,
+    banim-efxsound-data (graphics/palette/terrain — differ JP-vs-US; carve as named
+    incbin chunks, mechanical but doesn't move the function metric).
+So further headless progress on CODE needs either (1) an INTERACTIVE IDA/Ghidra-MCP
+session (decompile JP, write matching C), or (2) bootstrapping the **decomp-permuter
+with funcmap-gap-derived boundaries** (the region-different funcs live between two
+mapped JP neighbors; split by thumb `push {lr}` prologues) — a tooling build-out, the
+documented next-phase lead. Session result: **236→306 objects (+70), 17 validated
+generalizing fixes, all byte-perfect and durable.**
 
 ## What's built (the pipeline)
 

@@ -321,3 +321,37 @@ won't complete in a short, unreliable cron agent). It burned API budget for no c
 **Continuation now relies on:** interactive/driven sessions + `docs/handoff.md`. Re-enable
 the cron only after the agent step is made resilient (resumable small increments that
 commit before any kill) or the frontier shifts back to harvester-automatable work.
+
+## D9 — Next-phase path for region-different CODE: permuter from funcmap-gap boundaries (2026-06-08)
+
+**Context:** mechanical carving is exhausted at **306 objects / 15.51%** (thunder, the
+last byte-matchable TU, landed via the reloc-consistency NOLOAD fix). The remaining
+~11 code TUs (banim-efxmagic-aura/bindingblade/gespenst/refresh, banim-main,
+classdisplayfont, code_8086934, eventfx-stoneshatter, events_script, main, msg) are
+genuinely region-different: confirmed data-driven that **none of their functions appear
+in the 7740-entry `us_jp_funcmap.tsv`** (both exact and masked tiers fail). No
+byte-matchable run exists, so `port_run`/`find_runs`/`carve_mapped` cannot touch them.
+
+**Decision:** the next headless-viable path is to **bootstrap the decomp-permuter from
+funcmap-gap-derived boundaries**, not to pivot to DATA carving. A region-different TU's
+functions live in the JP ROM *between* its two nearest funcmap-mapped neighbors (the
+mapped functions immediately before/after the TU's run in US order). Within that outer
+interval: split on halfword-aligned Thumb `push {..., lr}` prologue candidates, then
+**validate each candidate by CFG/refs** (BL/B targets land on a candidate start,
+returns/tail branches, literal-pool boundaries, and *no* code reference into the middle
+of a candidate). Feed one validated function at a time to the permuter (US source as the
+seed; JP bytes in the derived interval as the target). DATA carving (banim_data,
+banim_pal_chara, banim_terrain_data, banim-efxsound-data) stays **secondary** — named
+incbin chunks until a code ref forces precise structure.
+
+**Why (validated):** my own analysis + Copilot second-opinion (`agency cp`, 2026-06-08)
+agreed: region-different CODE is the blocker for any permuter-driven progress, so
+unblocking boundaries has higher leverage than DATA; and the `push {lr}` split is a
+*candidate* generator that MUST be CFG-validated (not proof) to avoid mis-split seeds.
+Interactive IDA/Ghidra MCP remains the faster route when an interactive session is
+available — the permuter path is the headless fallback. `make compare` stays the only
+oracle; every permuter output is verify-or-revert gated exactly like a carve.
+
+**Next concrete step:** `scripts/derive_boundaries.py <tu>` — read the funcmap, find the
+TU's JP gap, emit candidate function intervals (prologue split + CFG validation) for the
+permuter. First target: `banim-efxmagic-bindingblade` (smallest, 6 funcs).
