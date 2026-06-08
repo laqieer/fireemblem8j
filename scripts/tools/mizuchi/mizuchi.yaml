@@ -39,10 +39,19 @@ global:
   # `#include "global.h"` cannot be found there and EVERY candidate fails before our
   # compilerScript runs. So we preprocess global.h here (this script runs with cwd =
   # the project root, so the same -I/-iquote flags as the Makefile resolve it), and
-  # cat the fully-expanded header to stdout. The result is pure C with no remaining
-  # #include/#define, so mizuchi's flagless `cpp -P` and our compilerScript's cpp both
-  # pass cleanly. (This mirrors the m2c/m2ctx convention documented in mizuchi's
-  # get-context plugin.)
+  # cat the fully-expanded header to stdout, so mizuchi's flagless `cpp -P` and our
+  # compilerScript's cpp both resolve the include cleanly. (This mirrors the m2c/m2ctx
+  # convention documented in mizuchi's get-context plugin.)
+  #
+  # We pass -dD so the emitted context KEEPS the project's `#define`s (not just the
+  # expanded types). Plain `cpp -P` drops every macro, so a candidate that uses normal
+  # FE8J macros — ARRAY_COUNT, TRUE/FALSE, TILEREF, UNIT_*, etc. (which a real src/.c
+  # gets from `#include "global.h"`) — would hit those as UNDEFINED identifiers when
+  # mizuchi's flagless `cpp -P` reprocesses <context>+<candidate>, and fail to compile.
+  # With -dD the macros survive in the context, so mizuchi's cpp expands them in the
+  # candidate just like the real build does. (-undef already suppressed the host's own
+  # predefined macros; -dD re-emits cpp's minimal language builtins such as __STDC__,
+  # which mizuchi's later cpp pass harmlessly "redefines" — a stderr warning, exit 0.)
   #
   # Uses arm-none-eabi-cpp if present (same preference as the Makefile), else host cpp.
   # {{functionName}} and {{targetObjectPath}} are available but unused here.
@@ -52,7 +61,7 @@ global:
     SRC="$(mktemp --suffix=.c)"
     trap 'rm -f "$SRC"' EXIT
     printf '#include "global.h"\n' > "$SRC"
-    "$CPP" -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef -P "$SRC"
+    "$CPP" -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef -dD -P "$SRC"
 
   # ---- Compilation: the full FE8J agbcc pipeline ----
   # Mizuchi hands us {{cFilePath}} (its already-cpp'd context + Claude's C) and an
@@ -155,9 +164,15 @@ plugins:
     enable: true
     maxIterations: 1000
     timeoutMs: 120000
+    # Mizuchi spreads these straight into permuter.py's argv (spawn(..., [permuter.py,
+    # ...flags, workingDir])), so each token must be its OWN entry — '-j 4' as one
+    # string is a single argument "-j 4" that argparse won't split (the parallelism
+    # request is then silently dropped / errors). This matches upstream's own schema
+    # default: ['--show-errors', '-j', '4'].
     flags:
       - '--show-errors'
-      - '-j 4'
+      - '-j'
+      - '4'
     # gba -> gcc randomization weights (agbcc is GCC 2.x-era), matching our
     # permuter_settings.toml `compiler_type = "gcc"`.
     compilerType: gcc

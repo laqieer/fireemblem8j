@@ -93,7 +93,12 @@ dirty the working tree or risk committing tool state. If you point `outputDir` /
     own `cpp -P` on `context + candidate` from a temp dir with no include flags, so a
     bare `#include "global.h"` would fail there before our compiler script ever runs.
     `getContextScript` therefore preprocesses `global.h` (from the repo root, with the
-    agbcc include flags) and emits the expanded header text.
+    agbcc include flags) and emits the expanded header text. It uses `cpp -dD` so the
+    project's `#define`s survive in the context too — otherwise plain `cpp -P` strips
+    every macro and a candidate using FE8J macros (`ARRAY_COUNT`, `TRUE`/`FALSE`,
+    `TILEREF`, `UNIT_*`, …) would see them undefined when mizuchi reprocesses
+    `context + candidate`, and fail to compile even though the real `src/` build resolves
+    them via `#include "global.h"`.
   - **`apply_patches.py`** is re-run on the object, as the Makefile does — a no-op
     unless the `.o` basename matches a row in `layout/patches.tsv`. **Limitation:**
     mizuchi names the temp object `<functionName>.o` and never passes the real target
@@ -114,9 +119,10 @@ dirty the working tree or risk committing tool state. If you point `outputDir` /
 - `mapFilePath: fireemblem8.map`, `nonMatchingAsmFolders: [asm]` (FE8J carves
   descriptive `.s` flat under `asm/`, baseline in `asm/baserom.s`).
 - `getContextScript` preprocesses `global.h` (the FE8J convention) and emits the
-  *expanded* C, so mizuchi's pre-compile `cpp -P` (run with no include flags) has
-  fully-resolved types — see the prerequisites note above on why a bare `#include`
-  doesn't work here.
+  *expanded* C with `cpp -dD`, so mizuchi's pre-compile `cpp -P` (run with no include
+  flags) has fully-resolved types *and* the project's `#define`s — see the
+  prerequisites note above on why a bare `#include` doesn't work here and why the
+  macros must be preserved.
 - The **Integrator** plugin (auto-open worktree → drop C into `src/` → `make
   compare` → commit/PR) is left **disabled** on purpose: FE8J carving is
   currently script-gated and we want a human/loop to guard `make compare`
