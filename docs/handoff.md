@@ -80,6 +80,16 @@
          a dedicated non-overlapping `(COMMON)` sink in `ldscript.template.txt` placed
          before `.bss_0`. Verify m4a's work-RAM JP address first (is 0x03000020 real
          or bogus-but-NOLOAD-harmless?). Gated by `make compare`.
+       - **KEY NUANCE (verified 2026-06-08):** the EXACT same overlap (`.bss_20`
+         soundwrapper @0x03000038, 8B ⊂ `.bss_0` [0x03000000,0x0300126f]) is present
+         AND TOLERATED in the green 278-obj build — soundwrapper's sMusicProc1/2 live
+         *inside* m4a's sound work-RAM region (shared RAM, legitimately co-located).
+         The error fires only when a NEW carve is added, even with COMMON-absolute on.
+         So it's an ld overlap-detection trigger, not just the addresses. Likely real
+         fix: make soundwrapper/agb_sram-style **defined `.bss` globals that sit inside
+         another object's region resolve as ABSOLUTE syms** (the defined-.bss-global →
+         absolute extension, one step beyond the COMMON-absolute fix already shipped),
+         so no separate `.bss_N` block is emitted to collide. Needs fresh focused work.
      - **huge diff (~11.9M) ×3** — `banim-efxmagic-flux/-aircalibur/-thunder`,
        all first @ 0x373c: catastrophic misplacement (likely a bad romdata base or a
        falsely-verified run). Investigate separately; don't sweep blindly.
