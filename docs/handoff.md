@@ -50,10 +50,25 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
   It's NOT authored data, NOT in the US data denominator, and already byte-perfect via the
   incbin + objcopy --gap-fill=0xff. Do NOT "carve" it as data (would inflate the metric);
   leave it. Real remaining authored data is ~3.5 MB.
-- **CEILING for region-same mechanical (2026-06-08): data 83.62%, ROM ~67% carved, ~1130
+- **SYSTEMATIC region-different carver — `scripts/carve_data_refs.py` (2026-06-08).**
+  Generalises msg_data: for each US->JP funcmap-mapped function the bodies are byte-identical
+  except wildcarded POINTER literals, so a literal at offset k references the same object in
+  both — US word names it, JP word gives its JP address. Scan every mapped function's
+  literals; a pointer that DIFFERS US<->JP names a region-different object and reveals its JP
+  address (size = US size capped by next discovered JP addr). Carved 70+ IDENTIFIED tables:
+  **gCharacterData, gChapterDataTable, gItemData, gSupportTalkList, gSoundRoomTable,
+  TextGlyphs_System/Talk, gUnitLookup, UnitDef_*, EventScr_*, gGfx_OpSubtitle_*** ... → data
+  83.6%->84.37%, symbols ->28.32%. Identified data at code-read JP addresses (D10-legit).
+  **NEXT LEVER (high value, WIP): make it RECURSIVE** — each carved table is itself a
+  US<->JP aligned region whose pointers reach the graphics; re-scan carved regions to cascade
+  (tables -> char/item/chapter graphics). Tried it (found +33 event-scripts/unit-defs) but the
+  US-size-capped boundary caused section OVERLAPS -> link error; needs exact per-object JP
+  sizing (use the NEXT object's jp_addr as the hard end, don't also cap by US size; resolve
+  overlaps before emit). This is the path to most of the remaining ~3 MB graphics.
+- **CEILING for region-same mechanical (2026-06-08): data 84.37%, ROM ~68% carved, 1369
   objects, all durable.** Region-same (same-offset + per-object/per-symbol shift) is
-  exhausted; msg_data proved region-different DATA needs per-subsystem RE (above). Remaining
-  ~33% of the ROM:
+  exhausted; region-different DATA carved via per-subsystem RE (msg_data) + the systematic
+  code-ref carver (above). Remaining ~32% of the ROM:
   - **Region-different graphics (~2.5 MB):** banim OBJ sprites (0x085D9C5C, 1.53 MB),
     data_bg (0x088D2700, 557 KB), etc. Verified NOT neighbor-pinned (they sit in
     shifted-layout regions, so the US boundary is not the JP boundary) and NOT shift-
