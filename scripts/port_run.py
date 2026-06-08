@@ -67,8 +67,27 @@ def port(name, exclude=(), runs=None):
         # the .text bytes are unchanged; verify-or-revert guards anything wrong.
         impl = set(re.findall(r"implicit declaration of function [`'\"]?(\w+)", r.stderr + r.stdout))
         if impl:
-            open(f"src/{name}.c", "w").write(
-                "".join(f"extern int {f}();\n" for f in sorted(impl)) + sub)
+            # Two kinds of implicit-decl: (1) a callee defined in ANOTHER TU -> a K&R
+            # `extern int X()` at the top is enough (codegen is call-site only). (2) a
+            # function defined LATER in THIS subset (forward reference, e.g. GmDataInit
+            # calls GmPathsInit defined below) -> `extern int X()` would clash with the
+            # real non-int return type, so emit the REAL prototype from the US source,
+            # placed AFTER the #includes (it may reference header struct types).
+            us_src = open(f"{US}/{name}.c").read()
+            runset = set(funcs)
+            externs, protos = [], []
+            for f in sorted(impl):
+                m = re.search(r"\n([A-Za-z_][\w \t\*\n]*?\b" + re.escape(f) + r"\s*\([^;{]*\))\s*\{", us_src)
+                if f in runset and m:
+                    protos.append(re.sub(r"\s+", " ", m.group(1).strip()) + ";")
+                else:
+                    externs.append(f"extern int {f}();")
+            new = "".join(e + "\n" for e in externs) + sub
+            if protos:
+                ls = new.splitlines(keepends=True)
+                li = max((i for i, l in enumerate(ls) if l.lstrip().startswith("#include")), default=len(externs) - 1)
+                new = "".join(ls[:li+1]) + "\n" + "\n".join(protos) + "\n" + "".join(ls[li+1:])
+            open(f"src/{name}.c", "w").write(new)
             sh(f"make src/{name}.o")
         if not os.path.exists(obj):
             print(f"{name}: subset compile failed"); os.remove(f"src/{name}.c"); return False
