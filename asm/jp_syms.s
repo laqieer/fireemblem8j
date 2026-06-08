@@ -44,9 +44,6 @@
 	.global gYearProjectCreated
 	.set    gYearProjectCreated, 0x080DC12C
 
-	.global gPlaySt
-	.set    gPlaySt, 0x0202BCEC
-
 	.global GetUnit
 	.type   GetUnit, %function
 	.thumb_func
@@ -272,9 +269,6 @@
 
 	.global gUnitArrayGreen
 	.set    gUnitArrayGreen, 0x0202DDC8
-
-	.global gBmSt
-	.set    gBmSt, 0x0202BCAC
 
 	.global GetSaveReadAddr
 	.type   GetSaveReadAddr, %function
@@ -1479,11 +1473,6 @@
 	.thumb_func
 	.set    StartPromoClassSelect, 0x080D1A3C + 1
 
-	.global PutMapCursor
-	.type   PutMapCursor, %function
-	.thumb_func
-	.set    PutMapCursor, 0x08015AB4 + 1
-
 	.global StartMapSongBgm
 	.type   StartMapSongBgm, %function
 	.thumb_func
@@ -1519,11 +1508,6 @@
 	.type   UnitApplyWorkingMovementScript, %function
 	.thumb_func
 	.set    UnitApplyWorkingMovementScript, 0x0801A508 + 1
-
-	.global SetCursorMapPosition
-	.type   SetCursorMapPosition, %function
-	.thumb_func
-	.set    SetCursorMapPosition, 0x08015BD8 + 1
 
 	.global MoveActiveUnit
 	.type   MoveActiveUnit, %function
@@ -2847,11 +2831,6 @@
 	.global gEkrBmLocation
 	.set    gEkrBmLocation, 0x0203E11E
 
-	.global InitBmBgLayers
-	.type   InitBmBgLayers, %function
-	.thumb_func
-	.set    InitBmBgLayers, 0x08015624 + 1
-
 	.global ResetUnitSprites
 	.type   ResetUnitSprites, %function
 	.thumb_func
@@ -3882,16 +3861,6 @@
 	.type   StoreAdjustedCameraPositions, %function
 	.thumb_func
 	.set    StoreAdjustedCameraPositions, 0x08015D3C + 1
-
-	.global GetCameraAdjustedX
-	.type   GetCameraAdjustedX, %function
-	.thumb_func
-	.set    GetCameraAdjustedX, 0x080159D4 + 1
-
-	.global GetCameraAdjustedY
-	.type   GetCameraAdjustedY, %function
-	.thumb_func
-	.set    GetCameraAdjustedY, 0x08015A18 + 1
 
 	.global ProcScr_MapAnimWallBreak
 	.set    ProcScr_MapAnimWallBreak, 0x08A13FAC
@@ -5619,11 +5588,6 @@
 	.thumb_func
 	.set    LoadUiFrameGraphics, 0x0804F8F4 + 1
 
-	.global LoadObjUIGfx
-	.type   LoadObjUIGfx, %function
-	.thumb_func
-	.set    LoadObjUIGfx, 0x0801569C + 1
-
 	.global SaveMenuCopyPalette
 	.type   SaveMenuCopyPalette, %function
 	.thumb_func
@@ -6455,16 +6419,6 @@
 	.thumb_func
 	.set    UnpackChapterMapGraphics, 0x080195E4 + 1
 
-	.global GetCameraCenteredX
-	.type   GetCameraCenteredX, %function
-	.thumb_func
-	.set    GetCameraCenteredX, 0x08015A5C + 1
-
-	.global GetCameraCenteredY
-	.type   GetCameraCenteredY, %function
-	.thumb_func
-	.set    GetCameraCenteredY, 0x08015A88 + 1
-
 	.global SpriteRefresher_OnIdle
 	.type   SpriteRefresher_OnIdle, %function
 	.thumb_func
@@ -6542,4 +6496,15 @@
 
 	.global gProc_ekrBattleDeamon
 	.set    gProc_ekrBattleDeamon, 0x085E3538
+
+	.global Copy2dChr
+	.type   Copy2dChr, %function
+	.thumb_func
+	.set    Copy2dChr, 0x080130D8 + 1
+
+	.global gGfx_MiscUiGraphics
+	.set    gGfx_MiscUiGraphics, 0x085C6E08
+
+	.global gPal_MiscUiGraphics
+	.set    gPal_MiscUiGraphics, 0x085C7290
 

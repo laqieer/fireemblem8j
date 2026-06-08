@@ -13,7 +13,6 @@ gIRQHandlers	03003090	data	IWRAM IRQ handler table (irq)
 PrintDebugStringToBG	08003750	thumb	debug text printer, called by fe3_dummy
 gBuildDateTime	080DC110	data	build date/time string (fe3_dummy)
 gYearProjectCreated	080DC12C	data	project-year string (fe3_dummy)
-gPlaySt	0202BCEC	data	global play state struct (bmphase, bmgold)
 GetUnit	08019108	thumb	unit-by-id lookup (bmphase)
 gSpellAssocData	08904164	data	spellassoc
 GetItemIndex	08017294	thumb	spellassoc
@@ -64,7 +63,6 @@ gActionData	0203A954	data	bmsave
 gGenericBuffer	02020188	data	bmsave
 gUnitArrayRed	0202CFB8	data	bmsave
 gUnitArrayGreen	0202DDC8	data	bmsave
-gBmSt	0202BCAC	data	bmsave
 GetSaveReadAddr	080A7B58	thumb	bmsave
 SetGameTime	08000CE4	thumb	bmsave
 LoadRNStateFromActionStruct	08031F48	thumb	bmsave
@@ -344,7 +342,6 @@ ProcScr_GmapTimeMons	08AC2468	data	worldmap_timemons
 GmMu_SetPosition	080C3144	thumb	worldmap_timemons
 GmMu_GetPosition	080C318C	thumb	worldmap_tm_confront
 StartPromoClassSelect	080D1A3C	thumb	classchg-sel
-PutMapCursor	08015AB4	thumb	cp_perform
 StartMapSongBgm	080160DC	thumb	cp_perform
 gMusicProc3Script	08577638	data	cp_perform
 gAiDecision	0203AA90	data	cp_perform
@@ -353,7 +350,6 @@ HideUnitSprite	080280A0	thumb	cp_perform
 GenerateUnitMovementMap	0801A05C	thumb	cp_perform
 GenerateBestMovementScript	0801A304	thumb	cp_perform
 UnitApplyWorkingMovementScript	0801A508	thumb	cp_perform
-SetCursorMapPosition	08015BD8	thumb	cp_perform
 MoveActiveUnit	08018454	thumb	cp_perform
 ShowUnitSprite	080280C4	thumb	cp_perform
 GetTrapAt	0802E128	thumb	cp_perform
@@ -678,7 +674,6 @@ NewEkrBaseKaiten	08057424	thumb	banim-ekrbattleending
 NewEkrWindowAppear	08057CAC	thumb	banim-ekrbattleending
 NewEkrBaseAppear	08057EA8	thumb	banim-ekrbattleending
 gEkrBmLocation	0203E11E	data	banim-ekrbattleending
-InitBmBgLayers	08015624	thumb	banim-ekrbattleending
 ResetUnitSprites	0802662C	thumb	banim-ekrbattleending
 BMapDispResume_FromBattleDelayed	080310A0	thumb	banim-ekrbattleending
 UnpackChapterMapPalette	0801964C	thumb	banim-ekrbattleending
@@ -978,8 +973,6 @@ Pal_MapAnimUnlockObjfx	08A20D88	data	eventfx-shinningstone
 ApConf_MapanimTorchAnim_0	08A168DC	data	eventfx-shinningstone
 gLoadUnitBuffer	0203EFB4	data	eventscr_utils
 StoreAdjustedCameraPositions	08015D3C	thumb	eventscr_utils
-GetCameraAdjustedX	080159D4	thumb	eventscr_utils
-GetCameraAdjustedY	08015A18	thumb	eventscr_utils
 ProcScr_MapAnimWallBreak	08A13FAC	data	mapanim_specialeffect
 ProcScr_PoisonAnimHandler	08A13FCC	data	mapanim_specialeffect
 Img_PoisonAnim	08A1E538	data	mapanim_specialeffect
@@ -1432,7 +1425,6 @@ EndPrepScreenMenu_	0803325C	thumb	prep_sallycursor
 StartOrphanMenu	0804F970	thumb	prep_sallycursor
 gDebugMenuDef	085C5520	data	prep_sallycursor
 LoadUiFrameGraphics	0804F8F4	thumb	savemenu
-LoadObjUIGfx	0801569C	thumb	savemenu
 SaveMenuCopyPalette	080AF270	thumb	savemenu
 SaveMenuInitSubBoxText	080B0250	thumb	savemenu
 SaveMenuPutChapterTitle	080AD4B4	thumb	savemenu
@@ -1644,8 +1636,6 @@ PutChapterTitleGfx	0808B894	thumb	chapterintrofx_title
 DrawChapterTitleStr	0808B99C	thumb	chapterintrofx_title
 DisableMapPaletteAnimations	08030B74	thumb	chapterintrofx_title
 UnpackChapterMapGraphics	080195E4	thumb	chapterintrofx_title
-GetCameraCenteredX	08015A5C	thumb	chapterintrofx_title
-GetCameraCenteredY	08015A88	thumb	chapterintrofx_title
 SpriteRefresher_OnIdle	08005390	thumb	ctc
 GetIconGfxTileIndex	0800355C	thumb	icon
 item_icon_tiles	085BA470	data	icon
@@ -1668,3 +1658,6 @@ gCurrentKeyInSeqIndex	03001800	data	sio_main2
 gSioList_SioMain2_2	085D32F8	data	sio_main2
 VerifySramFast	03006794	data	agb_sram
 gProc_ekrBattleDeamon	085E3538	data	banim-ekrbattle
+Copy2dChr	080130D8	thumb	bm
+gGfx_MiscUiGraphics	085C6E08	data	bm
+gPal_MiscUiGraphics	085C7290	data	bm
