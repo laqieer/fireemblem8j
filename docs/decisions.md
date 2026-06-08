@@ -298,3 +298,21 @@ manifests (textual merge conflicts) and the single whole-ROM verifier, most of t
 remaining TUs are region-different (≈0 yield, observed: an 18-TU batch carved 0),
 and each worker still pays the full rebuild. Tier 1 alone beats it; Tiers 2–3 are
 the right parallelism and live in one harvester, not 30 PRs.
+
+## D8 — Disable the auto_drive cron (2026-06-08)
+
+**Decision:** removed the `41 */2 * * * scripts/auto_drive.sh` crontab entry. The
+script is kept on disk; restore = re-add that one line via `crontab -e`.
+
+**Why:** the cron's headless `agency cc` agent step (after the PATH fix that made it
+fire at all) was **killed by an external SIGTERM (exit 143/144) ~13 min in**, mid-task,
+committing nothing. Dig-in found: **no agency execution limit** (no hardcoded time/turn
+cap; only `--max-budget-usd`), **not OOM** (29 GB free, no kill in dmesg), **not** the
+script's 90-min `timeout`. Cause of the SIGTERM unidentified, but the cron agent is
+non-viable regardless: the harvester step now carves **0** (automated frontier exhausted)
+and the remaining frontier is region-different (needs IDA/Ghidra/permuter, slow per-fn —
+won't complete in a short, unreliable cron agent). It burned API budget for no commits.
+
+**Continuation now relies on:** interactive/driven sessions + `docs/handoff.md`. Re-enable
+the cron only after the agent step is made resilient (resumable small increments that
+commit before any kill) or the frontier shifts back to harvester-automatable work.

@@ -2,8 +2,9 @@
 
 **Read this first.** Living state for the autonomous drive toward the final goal
 (every byte of `asm/baserom.s` incbin replaced by real source; `make compare` →
-`fireemblem8.gba: OK` from real source). Keep it current; `scripts/auto_drive.sh`
-+ cron and any continuing session use it.
+`fireemblem8.gba: OK` from real source). Keep it current; any continuing/driven session uses it. (The `auto_drive.sh`
+cron was DISABLED 2026-06-08 — see decisions.md D8; the launched agent kept
+getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
