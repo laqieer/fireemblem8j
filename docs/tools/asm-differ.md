@@ -41,74 +41,128 @@ run `diff.py` **from the repo root**.
 
 ## Invocation (FE8J)
 
-Build the ROM first so `fireemblem8.elf` and `fireemblem8.map` exist
-(`make compare`, or at least `make fireemblem8.elf`). Then, from the repo root:
+Build first so `fireemblem8.gba`, `fireemblem8.elf` and `fireemblem8.map` exist
+(`make compare`, or at least `make fireemblem8.elf`). You also need the original
+ROM at `baserom.gba` (the diff target). Run everything **from the repo root**.
+
+There are two ways to get a real per-function *diff against the target*, plus a
+plain disassembly viewer. Pick based on whether you have an `expected/` object.
+
+### 1. Raw-binary diff vs `baserom.gba` (no `expected/` needed)
+
+This is the FE8J analogue of the US repo's `asmdiff.sh`: disassemble the *same
+byte range* out of our build and out of the original ROM and diff them. Because
+FE8J's ROM is linked and runs in place at `0x08000000`, the file offset of a
+function is `vma - 0x08000000` (e.g. a function at `0x080A1234` lives at file
+offset `0xA1234`). Pass that **file offset** (and an end offset) as a numeric
+range:
 
 ```bash
-# View a single function's current disassembly out of the linked ELF
-# (-o = per-object so symbol names show; -1 = single/CURRENT, no "expected" .o
-#  needed). This is the everyday "what does <Symbol> assemble to right now?" call.
-$HOME/asm-differ-venv/bin/python tools/asm-differ/diff.py -o1 <Symbol>
+# diff our fireemblem8.gba vs baserom.gba over one function's byte range.
+# START/END are FILE OFFSETS (= vma - 0x08000000). baseimg/myimg come from
+# diff_settings.py; -Dz -bbinary -EL is used automatically (armel).
+$HOME/asm-differ-venv/bin/python tools/asm-differ/diff.py 0x<START> 0x<END>
 
-# Same, but auto-rebuild on source change and keep watching (-m make, -w watch).
-# Iterate on src/<file>.c and the diff refreshes live.
-$HOME/asm-differ-venv/bin/python tools/asm-differ/diff.py -mwo1 <Symbol>
+# auto-rebuild + watch while you iterate on src/<file>.c
+$HOME/asm-differ-venv/bin/python tools/asm-differ/diff.py -mw 0x<START> 0x<END>
 ```
 
-`diff.py` has a `#!/usr/bin/env python3` shebang and is executable, so if the
-deps are on your system `python3` you can also write
-`tools/asm-differ/diff.py -o1 <Symbol>` directly — but the venv python above is
-the reliable path.
+> **Why a numeric range and not a symbol name here?** asm-differ *can* look a
+> symbol up in the map for raw-binary mode, but only when the map carries
+> separate "load address" (LMA) columns. FE8J's in-place ROM has VMA == LMA, so
+> the GNU map has none, and a symbol-name raw-binary diff errors out. Hence the
+> explicit `vma - 0x08000000` offsets. Get a function's VMA/size from
+> `fireemblem8.map` (or the US symbol).
 
-`<Symbol>` is a function name from the linker map (e.g. a US-derived label such as
-`StartBmFade`). asm-differ looks it up in `fireemblem8.map`, finds the owning `.o`
-and address, and disassembles with `arm-none-eabi-objdump -d -rz -j .text` (the
-project's `-drz` convention, restricted to `.text`).
+> **Note:** raw bytes carry no Thumb/ARM/data markers, so objdump guesses the
+> ISA. FE8J code is Thumb; if a range mis-decodes as ARM, double-check the range
+> bounds, or cross-check with the per-object `-o` view (#2).
+
+### 2. Per-object two-sided diff vs an "expected" object (symbol names + relocs)
+
+`-o` (without `-1`) diffs the freshly built `.o` against a reference copy under
+`expected/` (the `expected_dir` in `diff_settings.py`), keyed by symbol name —
+the decomp.me-style flow, with relocations and clean symbol labels:
+
+```bash
+$HOME/asm-differ-venv/bin/python tools/asm-differ/diff.py -o <Symbol>
+$HOME/asm-differ-venv/bin/python tools/asm-differ/diff.py -mwo <Symbol>   # watch
+```
+
+FE8J does not ship an `expected/` tree, so this needs a one-time setup: build a
+known-good object (or copy the matching `.o` from a prior `OK` build) to
+`expected/<path-to>.o`, then run the command above. Without that file, `-o`
+(non-`-1`) aborts with `Please ensure an OK .o file exists at "..."`; use `-o1`
+(#3) to view-only, or workflow #1 to diff vs `baserom.gba`.
+
+### 3. Just view one function's disassembly (not a diff)
+
+To eyeball what a symbol currently assembles to, use single mode out of the
+linked ELF (`-o` so symbol names resolve, `-1` = current-only):
+
+```bash
+$HOME/asm-differ-venv/bin/python tools/asm-differ/diff.py -o1 <Symbol>
+```
+
+Per asm-differ's own help, `-1` "view[s] the current asm only (not a diff)" — it
+just prints the current bytes. Use #1 or #2 when you want the delta vs the
+target.
+
+`diff.py` has a `#!/usr/bin/env python3` shebang and is executable, so with the
+deps on your system `python3` you can drop the `$HOME/asm-differ-venv/bin/python`
+prefix — but the venv python above is the reliable path.
 
 Useful flags (see `diff.py --help`):
 
-- `-o` — diff `.o` objects (shows symbol names). **Recommended.**
+- *(numeric range, no mode flag)* — raw-binary diff of `myimg` vs `baseimg`
+  (our ROM vs `baserom.gba`) over a file-offset range. **(#1)**
+- `-o` — diff `.o` objects (symbol names; needs `expected/` for a real diff). **(#2)**
+- `-e <Symbol>` — two-ELF mode; unused (we have no separate stripped target ELF).
 - `-m` / `-w` — run `make` on change / watch for source edits and re-diff.
-- `-1` / `-3` — single (CURRENT only) / three-way (vs base + previous) modes.
+- `-1` — single mode: **view current asm only, *not* a diff**; `-3` — three-way
+  vs the asm prior to the last `-w` rebuild (requires `-w`).
 - `-s` — stop at the first diff; `-S N` — skip the first N instructions.
 - `-c` — interleave source lines (needs `-g`, which the Makefile already passes).
-- `-j .data` — diff a different section if you ever need it.
-
-### Two-sided diffs against an "expected" object
-
-`-o` *without* `-1` does a true two-sided diff: it compares the freshly built
-`.o` against a reference copy under `expected/` (the `expected_dir` in
-`diff_settings.py`). FE8J does not maintain an `expected/` tree, so the default
-workflow is the single-/three-way modes above. If you want a hard before/after
-on one translation unit, copy the known-good object into
-`expected/<path-to>.o` first, then run `diff.py -o <Symbol>`.
+- `-j .data` — diff a different section in the `-o`/`-e` modes if you ever need it.
 
 ## Caveats for this incbin-heavy ROM
 
-- **Reference bytes live in `fireemblem8.elf` / `baserom.gba`, not a separate
-  target ELF.** Unlike split-decomp projects that ship a stripped "target" ELF
-  plus an "expected" object tree, FE8J bootstraps the whole ROM from one incbin
-  (`asm/baserom.s`) and links a single `fireemblem8.elf`. So the natural diff is
-  *against the ELF/map you just built*, via `-o1`/`-o3` or the two-sided
-  `expected/` flow above — not the two-ELF `-e` mode (which wants a separate
-  stripped baseimg we don't have).
+- **The reference is the original ROM `baserom.gba`, not a separate target
+  ELF.** Unlike split-decomp projects that ship a stripped "target" ELF plus an
+  "expected" object tree, FE8J bootstraps the whole ROM from one incbin
+  (`asm/baserom.s`). The authoritative target bytes are the original ROM, so the
+  diff that actually shows drift is *our build (`fireemblem8.gba`) vs
+  `baserom.gba`*, via raw-binary mode over a file-offset range (workflow #1;
+  `diff_settings.py` sets `baseimg = baserom.gba`, `myimg = fireemblem8.gba`), or
+  per-object `-o` against an `expected/` copy (workflow #2). The `-o1`/`-o3`
+  modes only view the *current* build, so they cannot reveal drift from the
+  target on their own. The two-ELF `-e` mode is not used (we have no separate
+  stripped baseimg ELF).
+
+- **Raw-binary mode needs file offsets, not symbol names, on FE8J.** asm-differ's
+  symbol-name lookup for `-bbinary` requires "load address" (LMA) columns in the
+  map; FE8J's ROM runs in place (VMA == LMA) so the GNU map has none. Use the
+  numeric `vma - 0x08000000` range (workflow #1) — or `-o` with an `expected/`
+  object (workflow #2), which *does* key off symbol names.
 
 - **Functions still inside the incbin won't resolve by name.** A region that
   hasn't been carved out of `asm/baserom.s` yet has no symbol in the map (it's
-  part of the big `gUnknownData`/baserom blob). asm-differ needs a map entry to
-  find the `.o` and address. To diff such a region, first carve/label it (see
-  [strategy.md](../strategy.md)) so it gets a real symbol, or pass an explicit
-  ROM address + end address instead of a name.
+  part of the big `gUnknownData`/baserom blob). The per-object `-o` flow needs a
+  map entry to find the `.o`. To `-o`-diff such a region, first carve/label it
+  (see [strategy.md](../strategy.md)) so it gets a real symbol; or just use the
+  raw-binary range (workflow #1), which needs only the ROM offsets.
 
 - **agbcc emits `-g` debug info** (Makefile `CC1FLAGS`/`ASFLAGS`), so `-c`
   source interleaving works on carved C objects. The final `.gba` is produced
   with `objcopy --strip-debug`, but the `.elf`/`.o` keep their symbols — diff
   against the `.elf`/`.o`, never the stripped `.gba`.
 
-- **Endianness:** GBA is little-endian. We use `arch = "arm32"`; endianness is
-  read from the ELF header for the `-o`/`-e` (objfile/ELF) workflows, so this is
-  correct. The `arm32`-vs-`armel` distinction in asm-differ only affects raw
-  `-bbinary` dumps, which we do not use.
+- **Endianness:** GBA is little-endian, so `diff_settings.py` uses
+  `arch = "armel"`. This matters for the raw-binary (`-bbinary`) flow (#1), where
+  asm-differ must tell objdump to read little-endian (`-EL`); `arm32` is
+  big-endian and would mis-decode the raw ROM bytes. For the `-o`/`-e`
+  (objfile/ELF) workflows endianness is taken from the ELF header regardless, so
+  `armel` is fine there too.
 
 ## Relationship to the other tools
 
@@ -118,6 +172,7 @@ on one translation unit, copy the known-good object into
 | `asm-differ` | *Where exactly* does one function's asm diverge from the target? |
 | `decomp-permuter` | Can a randomized permutation of my C *close* a known asm gap? |
 
-Typical loop: port/adjust `src/<file>.c` → `asm-differ -mwo1 <Symbol>` to see the
-remaining delta → fix it (optionally let `decomp-permuter` search) → `make
-compare` to confirm `OK`.
+Typical loop: port/adjust `src/<file>.c` → `asm-differ -mw 0x<START> 0x<END>`
+(raw-binary range vs `baserom.gba`, workflow #1) or `-mwo <Symbol>` (vs an
+`expected/` object, #2) to see the remaining delta → fix it (optionally let
+`decomp-permuter` search) → `make compare` to confirm `OK`.

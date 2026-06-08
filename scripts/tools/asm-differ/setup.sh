@@ -12,6 +12,10 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 VENV="${ASM_DIFFER_VENV:-$HOME/asm-differ-venv}"
 cd "$ROOT"
 
+# tools/ is gitignored (so untracked) and may not exist on a clean checkout;
+# create it up front so the clone/update below works from a fresh repo.
+mkdir -p tools
+
 if [ ! -d tools/asm-differ/.git ]; then
   echo "Cloning upstream asm-differ -> tools/asm-differ ..."
   git clone --depth 1 https://github.com/simonlindholm/asm-differ tools/asm-differ
