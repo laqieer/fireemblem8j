@@ -383,12 +383,23 @@ the same offset** (a 3.28 MB region-same block at 0x08BC3A00, a 922 KB block at
    uses a C array of semantic values, blob-incbin would be lower fidelity; these want real
    C. Region-different localized tables also need the JP values.
 
-**Integrity line (important):** carving an undecompiled incbin asset region into a NAMED
-incbin region is the legitimate decomp step for raw assets (US does exactly this).
-GAMING would be hiding undecompiled CODE as "data", using meaningless names, or
-overwriting already-decompiled C with raw bytes — none of which this does. `make compare`
-stays the only oracle. Consulted Copilot on the tier-2 boundary (in progress).
+**Integrity line (Copilot-validated 2026-06-08):** the test is NOT whether bytes come
+from the ROM — it is whether the object is **identified and represented at the right
+semantic level**. LEGITIMATE: "this range is the JP version of named asset X, consumed
+as format Y, with verified start/end and references → source = `INCBIN` of that JP
+asset" (exactly what the US decomp does for graphics/sound/sprites/palettes). GAMING:
+"this range is unknown/inconvenient, so split baserom and give it a plausible name while
+bytes match by construction." Corollary: raw `.incbin` is fine for **opaque authored
+assets**; structured data/tables/scripts/text/pointer-bearing data with an understood
+format want **real structured C / descriptive asm**, not a blob. So the region-same
+blocks with NO US object (922 KB @ 0x08EF9454, 247 KB @ 0x08BC3A00) must NOT be carved
+as generic `data_<addr>` blobs — they are unidentified (incbin in US too); leave them.
 
 **Tooling:** `scripts/carve_data.py [substr...|--all]` (region-same gate, verify-or-revert).
-Tier 2 will extend it to drop the region-same gate ONLY for US-incbin-style asset objects
-(identified via US `INCBIN_*` macros / graphics+sound dirs), never for C value tables.
+**Tier 2 requirement (before any region-different asset carve):** verify the JP asset's
+own boundary — for region-different assets the JP size/offset can differ from US, so use
+the JP pointer tables (e.g. the carved `banim_data[]`/reference tables that point at the
+JP asset addresses), NOT the US boundary, to bound each `.incbin`. Restrict to US
+`INCBIN_*`/graphics+sound/banim asset objects; never blob a C value table. `make compare`
+stays the only oracle (it byte-matches by construction for incbin, so correctness rests
+entirely on honest boundary+identity — hence the JP-boundary verification gate).
