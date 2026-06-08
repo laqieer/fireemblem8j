@@ -419,9 +419,22 @@ construct `Platform::Gba` directly, and `from_decompme_name` lists `gba`). So ou
 box the tool cannot read a GBA config.
 
 **Decision:** `setup.sh` applies a small **idempotent** patch to the vendored (gitignored)
-clone that adds the ARM/Thumb arms (`gba`, `nds`, `n3ds`, `irix`) to `from_name`, mirroring
-`from_decompme_name`. Rationale: the alternative (ship a non-functional tool) defeats the
-unit's purpose; the fix is one match-arm, low-risk, reversible (re-clone), and only touches
-the local clone — no project source/Makefile/ldscript changes. Verified end-to-end: after
-the patch, `coddog cluster` ingests the real US GBA ELF and emits real clusters. **Follow-up:
-file the one-line fix upstream** so we can drop the local patch later.
+clone that adds the arms already in `from_decompme_name` (`gba` — the one we need — plus
+`nds`/`nds_arm9`, `n3ds`, and `irix`; the last is MIPS/big-endian, not ARM, but included to
+keep the two resolvers in sync) to `from_name`. Rationale: the alternative (ship a
+non-functional tool) defeats the unit's purpose; the fix is a few match-arms, low-risk,
+reversible (re-clone), and only touches the local clone — no project source/Makefile/ldscript
+changes. The clone is pinned to upstream tag `0.6.3` (the revision the patch needle is
+verified against) and fetched straight from the upstream URL — an earlier `/tmp/coddog`
+seed-clone shortcut was dropped because building unverified code from a world-writable path
+is a supply-chain risk. Verified end-to-end: after the patch, `coddog cluster` ingests the
+real US GBA ELF and emits real clusters. **Follow-up: file the one-line fix upstream** so we
+can drop the local patch later.
+
+**Known limitation (logged, not a blocker):** coddog's `read_elf` keeps only ELF symbols with
+`size > 0` + a real section + `SymbolKind::Function`. The JP functions we have not yet carved
+are sizeless ABS `.set` symbols (`asm/jp_syms.s`) or live in `asm/baserom.s` incbin gaps, so
+coddog skips them. `compare2` from the `jp` version therefore covers only already-carved/sized
+JP functions, not the full remaining backlog. Documented in `fe8.coddog.yaml` + `docs/tools/coddog.md`
+("Coverage"); extending triage to pending functions needs a JP ELF whose pending functions carry
+real `.size`s (a later work item).

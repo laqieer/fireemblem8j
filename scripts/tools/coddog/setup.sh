@@ -8,7 +8,8 @@
 #
 # What it does (re-running is safe):
 #   1. Ensure a Rust toolchain (cargo) exists; install user-level via rustup if not.
-#   2. Clone ethteck/coddog into tools/coddog (gitignored); skip if already there.
+#   2. Clone ethteck/coddog (pinned tag) into tools/coddog (gitignored); skip if
+#      already cloned.
 #   3. cargo build --release the `coddog` CLI crate (coddog-cli).
 #   4. Print the resulting binary path and a usage hint.
 #
@@ -19,8 +20,9 @@ set -euo pipefail
 REPO_ROOT="$(git -C "$(dirname "${BASH_SOURCE[0]}")" rev-parse --show-toplevel)"
 CODDOG_DIR="${REPO_ROOT}/tools/coddog"
 CODDOG_REPO="https://github.com/ethteck/coddog"
-# Reuse a fresh clone the harness may have dropped in /tmp to avoid a network hit.
-SEED_CLONE="/tmp/coddog"
+# Pin to the exact upstream tag we verified the GBA patch against (the `from_name`
+# needle below matches this revision). Bump deliberately after re-checking the patch.
+CODDOG_REF="0.6.3"
 
 echo "==> coddog setup (repo root: ${REPO_ROOT})"
 
@@ -40,28 +42,32 @@ if ! command -v cargo >/dev/null 2>&1; then
 fi
 echo "==> using $(cargo --version) ($(rustc --version))"
 
-# --- 2. Clone (or reuse) ----------------------------------------------------
+# --- 2. Clone ---------------------------------------------------------------
+# Always clone the pinned tag straight from the verified upstream URL. We do NOT
+# seed from a pre-existing /tmp clone: an attacker-controlled or stale path there
+# could inject code we'd then build (the directory is world-writable on shared
+# hosts), and it would defeat the point of pinning a known-good revision.
 mkdir -p "${REPO_ROOT}/tools"
 if [ -d "${CODDOG_DIR}/.git" ]; then
     echo "==> tools/coddog already cloned; leaving as-is"
-elif [ -d "${SEED_CLONE}/.git" ]; then
-    echo "==> seeding tools/coddog from existing clone at ${SEED_CLONE}"
-    cp -a "${SEED_CLONE}" "${CODDOG_DIR}"
+    echo "    (delete tools/coddog and re-run to fetch a fresh pinned clone)"
 else
-    echo "==> cloning ${CODDOG_REPO} -> tools/coddog"
-    git clone --depth 1 "${CODDOG_REPO}" "${CODDOG_DIR}"
+    echo "==> cloning ${CODDOG_REPO}@${CODDOG_REF} -> tools/coddog"
+    git clone --depth 1 --branch "${CODDOG_REF}" "${CODDOG_REPO}" "${CODDOG_DIR}"
 fi
 
-# --- 3a. Patch: teach the CLI's config-string parser about ARM/Thumb platforms
+# --- 3a. Patch: teach the CLI's config-string parser about the extra platforms
 # Upstream's `Platform::from_name` (used by the CLI to resolve `platform:` from
 # the decomp.yaml) only lists n64/psx/ps2/gc_wii/psp and returns None for "gba",
 # so the CLI panics ("Invalid platform: gba") even though GBA/Thumb support fully
 # exists in coddog-core (objdiff + unarm V4T; cf. `from_decompme_name` and the
-# simple_gba tests). We add the ARM platforms to `from_name`, mirroring the
-# arms already present in `from_decompme_name`. Idempotent. Reported upstream.
+# simple_gba tests). We add the same arms already present in `from_decompme_name`
+# (gba + the other non-decompme-only platforms: nds/nds_arm9, n3ds, irix) so the
+# yaml `platform:` string resolves. Only "gba" matters for us. Idempotent.
+# Reported upstream.
 LIB="${CODDOG_DIR}/crates/core/src/lib.rs"
 if [ -f "${LIB}" ] && ! grep -q '"gba" => Some(Platform::Gba),' "${LIB}"; then
-    echo "==> patching coddog-core: add gba/nds/n3ds to Platform::from_name"
+    echo "==> patching coddog-core: add gba/nds/n3ds/irix to Platform::from_name"
     python3 - "${LIB}" <<'PY'
 import sys
 p = sys.argv[1]

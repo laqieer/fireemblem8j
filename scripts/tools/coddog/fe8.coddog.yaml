@@ -22,6 +22,21 @@
 #
 # NOTE: fireemblem8.elf is a build output (gitignored). Run `make` first so the
 # ELF exists before invoking coddog.
+#
+# IMPORTANT COVERAGE LIMITATION (read before triaging):
+# coddog's `read_elf` keeps only symbols with `size > 0`, a real section, and
+# `SymbolKind::Function`. On the JP side the *not-yet-decompiled* functions are
+# not real ELF function symbols: they're either inside the `asm/baserom.s` incbin
+# gaps (no per-function symbol at all) or sizeless ABS `.set name, 0x..+1` entries
+# emitted into `asm/jp_syms.s`. coddog therefore SKIPS them. So `compare2` from
+# this `jp` version sees only the JP functions we've ALREADY carved/symbolized
+# with a real size — it does NOT yet enumerate the full remaining-function
+# backlog. It still adds value (confirm a carved JP function matches its US
+# sibling; find renamed/moved twins among carved code; `match`/`submatch` on
+# known JP symbols), but to triage the *remaining* functions you must first feed
+# coddog a JP ELF/map whose pending functions carry real sizes (e.g. a symbolized
+# layout that emits `.size` for each baseline function, or run `match` from the
+# US side against the carved JP set). See docs/tools/coddog.md ("Coverage").
 
 name: Fire Emblem - The Sacred Stones
 repo: https://github.com/laqieer/fireemblem8j

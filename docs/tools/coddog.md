@@ -16,12 +16,11 @@ Our core need is **triage**: for every FE8J function, decide whether it is
 - **region-different** → we must *hand-decompile* it (IDA/Ghidra/permuter — see
   `docs/reverse-engineering.md`).
 
-`coddog compare2` does this in one shot: it matches every function in our JP ELF
-against the US ELF and prints a similarity %, **bucketed by which side is already
+`coddog compare2` does this: it matches each function in our JP ELF against the
+US ELF and prints a similarity %, **bucketed by which side is already
 decompiled**. A near-100% hit to a US function tells us the region is identical —
 a prime carve candidate. A low/no match flags a region-different function that
-needs hand work. This turns "which of the ~hundreds of remaining functions are
-free wins?" into a sorted list.
+needs hand work.
 
 It complements, not replaces, the existing flow:
 
@@ -30,6 +29,21 @@ It complements, not replaces, the existing flow:
   coddog adds *content* similarity, catching renamed/moved functions and
   confirming a region is byte-identical before you spend effort carving.
 
+> **Coverage — what coddog can and cannot see today.** coddog's `read_elf` keeps
+> only ELF symbols with `size > 0`, a real section, and `SymbolKind::Function`.
+> On the JP side the functions we have **not** decompiled yet are *not* real ELF
+> function symbols — they live inside the `asm/baserom.s` incbin gaps (no
+> per-function symbol) or as sizeless ABS `.set name, 0x..+1` entries in
+> `asm/jp_syms.s` — so coddog **skips them**. As configured, the `jp` version
+> therefore exposes only the JP functions we've **already carved/symbolized**
+> with a real size; it does **not** yet enumerate the full remaining-function
+> backlog. coddog still earns its keep on that carved set (confirm a JP function
+> matches its US sibling, find renamed/moved twins, `match`/`submatch` on known
+> JP symbols, `cluster` the JP ELF). To extend triage to the *pending* functions
+> you must first feed coddog a JP ELF/map whose pending functions carry real
+> `.size`s (e.g. a symbolized layout), or drive comparison from the US side. This
+> is a known limitation, not a bug — see the note in `fe8.coddog.yaml`.
+
 ## Setup
 
 ```bash
@@ -37,8 +51,9 @@ scripts/tools/coddog/setup.sh
 ```
 
 Idempotent. Installs a user-level Rust toolchain via `rustup` if `cargo` is
-missing, clones `ethteck/coddog` into `tools/coddog` (gitignored), and
-`cargo build --release -p coddog-cli`. Resulting binary:
+missing, clones the pinned `ethteck/coddog` tag (`0.6.3`, the revision the GBA
+patch is verified against) straight from upstream into `tools/coddog`
+(gitignored), and `cargo build --release -p coddog-cli`. Resulting binary:
 
 ```
 tools/coddog/target/release/coddog
@@ -61,9 +76,10 @@ which (as of v0.6.3) only knows `n64/psx/ps2/gc_wii/psp` and returns `None` for
 though GBA/Thumb support fully exists in `coddog-core` (objdiff + `unarm` V4T;
 see the `simple_gba` tests and `from_decompme_name`, which *does* list `gba`).
 `setup.sh` applies a small idempotent patch to the gitignored clone that adds the
-ARM/Thumb platforms (`gba`, `nds`, `n3ds`) to `from_name`, mirroring the arms
-already in `from_decompme_name`. This is a local fix to a vendored tool; it
-should also be filed upstream. See `docs/decisions.md`.
+arms already present in `from_decompme_name` (`gba`, plus `nds`/`nds_arm9`,
+`n3ds`, and `irix`) to `from_name`. Only `gba` matters for us — the others just
+keep the two functions in sync. This is a local fix to a vendored tool; it should
+also be filed upstream. See `docs/decisions.md`.
 
 ## Config
 
@@ -169,7 +185,9 @@ to see which slice diverges.
 ## How results feed the carve workflow
 
 1. Build both ELFs (`make` here and in `../fireemblem8u`).
-2. `compare2 … --sort-by similarity` → ranked JP↔US function correspondence.
+2. `compare2 … --sort-by similarity` → ranked JP↔US correspondence for the JP
+   functions coddog can see (carved/sized ones — see "Coverage" for why pending
+   functions are excluded today).
 3. For each high-% / US-decompiled hit: confirm it's region-same, then carve per
    `docs/porting.md` (split the `asm/baserom.s` incbin, add the object at the JP
    address in `ldscript.txt`).
@@ -183,6 +201,10 @@ to see which slice diverges.
 - Built and smoke-tested via `setup.sh`; see the PR for `coddog --help` output.
 - A real cross-version `compare2` needs both ELFs present (gitignored, absent in
   worktrees) — run it from the main tree after a build.
+- **JP-side coverage is limited to carved/sized functions** (see "Coverage"
+  above): coddog skips sizeless `.set`/incbin-gap symbols, so the `jp` version
+  does not yet list the full remaining-function backlog. Extending it needs a JP
+  ELF whose pending functions carry real `.size`s.
 - coddog matches **functions**, not data. FE8's ROM is ~94% data; the data
   frontier still uses `scripts/carve_data.py` (`docs/strategy.md`).
 - Similarity is on instruction streams, so an exact name match in the US map is
