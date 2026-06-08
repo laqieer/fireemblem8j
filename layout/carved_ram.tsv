@@ -40,3 +40,6 @@
 0203AA90	ewram	src/cp_decide.o(ewram_data)	cp_decide ewram_data
 03000040	iwram	src/scene.o(.bss)	scene .bss
 08A73D7C	rom	src/uichapterstatus.o(.data)	uichapterstatus .data region-diff (incbin)
+080E20FA	rom	src/banim-efxmagic-flux.o(.rodata)	banim-efxmagic-flux .rodata region-diff (incbin)
+080E208A	rom	src/banim-efxmagic-aircalibur.o(.rodata)	banim-efxmagic-aircalibur .rodata region-diff (incbin)
+080E1D9A	rom	src/banim-efxmagic-fire.o(.rodata)	banim-efxmagic-fire .rodata region-diff (incbin)

@@ -52,7 +52,7 @@ def port(name, exclude=(), runs=None):
     start, end, funcs = max(cand, key=lambda r: len(r[2]))
     base = int(start, 16) - 0x08000000  # ROM-file offset (for indexing baserom)
 
-    MANI = ["layout/carved_rom.tsv", "layout/carved_ram.tsv", "layout/baseline_syms.tsv"]
+    MANI = ["layout/carved_rom.tsv", "layout/carved_ram.tsv", "layout/baseline_syms.tsv", "layout/patches.tsv"]
     snap = {p: open(p).read() for p in MANI}
 
     sub = sh(f"python3 scripts/extract_run.py {US}/{name}.c {' '.join(funcs)}").stdout
@@ -351,17 +351,48 @@ def port(name, exclude=(), runs=None):
         p = l.split()
         if cur and len(p) >= 3 and all(c in "0123456789abcdef" for c in p[0]):
             sec_relocs.setdefault(cur, set()).add(int(p[0], 16))
-    kept, noload_rom = [], []
+    kept, noload_rom, aligns = [], [], []
     for off0, size, dsec in data_carves:
         need = (0x08000000 + off0) & -(0x08000000 + off0)
         if need < 4:
-            sh(f"arm-none-eabi-objcopy --set-section-alignment {dsec}={need} {obj} {obj}")
+            aligns.append((dsec, need))   # durable: re-applied by apply_patches on rebuild
         cb = subprocess.run(["arm-none-eabi-objcopy", "-O", "binary", "-j", dsec, obj, "/dev/stdout"],
                             capture_output=True).stdout
         rel = sec_relocs.get(dsec, set())
         match = all(cb[i] == jp[off0+i] or any(i-k in rel for k in range(4))
                     for i in range(min(size, len(cb))))
         (kept if match else noload_rom).append((off0, size, dsec))
+    # Bake JP literals into refs to NOLOAD (region-different) ROM-data sections. Such a
+    # section can be region-different INTERNALLY — its symbols sit at different JP offsets
+    # than US — so `base + US_addend` resolves wrong for some refs. For each reloc
+    # TARGETING a NOLOAD section, rewrite the ref's in-section addend to `jp[ref] - base`
+    # so the linker (which still applies the reloc) computes exactly `jp[ref]`. The patch
+    # is PERSISTED to layout/patches.tsv and re-applied by scripts/apply_patches.py after
+    # every compile (via the Makefile) — patching the .o here would be lost on rebuild.
+    want = []
+    if noload_rom:
+        nl_base = {dsec: 0x08000000 + off0 for off0, _, dsec in noload_rom}
+        sec_base = {".text": 0x08000000 + base}
+        for off0, _, dsec in kept + noload_rom:
+            sec_base[dsec] = 0x08000000 + off0
+        cur = None
+        for l in sh(f"arm-none-eabi-objdump -r {obj}").stdout.splitlines():
+            if "RELOCATION RECORDS FOR [" in l:
+                cur = l.split("[")[1].split("]")[0]; continue
+            p = l.split()
+            if cur in sec_base and len(p) >= 3 and all(c in "0123456789abcdef" for c in p[0]) and p[2] in nl_base:
+                roff = int(p[0], 16)
+                loc = sec_base[cur] - 0x08000000 + roff
+                jpval = int.from_bytes(jp[loc:loc+4], "little")
+                want.append((cur, roff, (jpval - nl_base[p[2]]) & 0xFFFFFFFF))
+    if aligns or want:
+        objbase = os.path.basename(obj)
+        keep = [r for r in open("layout/patches.tsv") if r.split("\t")[0] != objbase] \
+            if os.path.exists("layout/patches.tsv") else []
+        keep += [f"{objbase}\t{dsec}\tALIGN\t{need}\n" for dsec, need in aligns]
+        keep += [f"{objbase}\t{sec}\t{roff:X}\t{val:08X}\n" for sec, roff, val in want]
+        open("layout/patches.tsv", "w").write("".join(keep))
+        sh(f"rm -f {obj}")  # force rebuild so apply_patches re-applies align+patches durably
     with open("layout/carved_rom.tsv", "a") as f:
         f.write(f"{base&0xFFFFFF:06X}\t{text_end&0xFFFFFF:06X}\tsrc/{name}.o(.text)\t{name}(run): {', '.join(funcs[:3])}{'...' if len(funcs)>3 else ''}\n")
         for dbase, size, dsec in kept:

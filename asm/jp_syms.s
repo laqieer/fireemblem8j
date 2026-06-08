@@ -6758,3 +6758,255 @@
 	.global Pal_MenuStatus_0
 	.set    Pal_MenuStatus_0, 0x08AAF654
 
+	.global gProcScr_efxMistyrainBG
+	.set    gProcScr_efxMistyrainBG, 0x085FFBA0
+
+	.global gEfxmagicFlux_0
+	.set    gEfxmagicFlux_0, 0x085FFBB8
+
+	.global gEfxmagicFlux_1
+	.set    gEfxmagicFlux_1, 0x085FFC5C
+
+	.global Pal_Banim_1
+	.set    Pal_Banim_1, 0x08656EA8
+
+	.global Pal_Banim_2
+	.set    Pal_Banim_2, 0x08656EC8
+
+	.global ProcScr_efxMistyrainOBJ
+	.set    ProcScr_efxMistyrainOBJ, 0x085FFD00
+
+	.global FramScr_Unk5D4F90
+	.set    FramScr_Unk5D4F90, 0x085FF1C0
+
+	.global gProcScr_efxMistyrainOBJ2
+	.set    gProcScr_efxMistyrainOBJ2, 0x085FFD48
+
+	.global AnimScr_EfxMistyRainObj1
+	.set    AnimScr_EfxMistyRainObj1, 0x0865A280
+
+	.global Pal_FluxAnimSprites
+	.set    Pal_FluxAnimSprites, 0x08659FFC
+
+	.global Img_FluxAnimSprites_Orb
+	.set    Img_FluxAnimSprites_Orb, 0x08659404
+
+	.global AnimScr_EfxMistyRainObj2
+	.set    AnimScr_EfxMistyRainObj2, 0x0865A404
+
+	.global Img_FluxAnimSprites_Tendrils
+	.set    Img_FluxAnimSprites_Tendrils, 0x08659804
+
+	.global AnimScr_EfxMistyRainObj3
+	.set    AnimScr_EfxMistyRainObj3, 0x0865A8B8
+
+	.global Img_FluxAnimSprites_SigilVoid
+	.set    Img_FluxAnimSprites_SigilVoid, 0x08659C44
+
+	.global AnimSort
+	.type   AnimSort, %function
+	.thumb_func
+	.set    AnimSort, 0x08004EB4 + 1
+
+	.global AnimScr_EfxMistyRainObj4
+	.set    AnimScr_EfxMistyRainObj4, 0x0865A7FC
+
+	.global AnimScr_EfxMistyRainObj5
+	.set    AnimScr_EfxMistyRainObj5, 0x0865A830
+
+	.global gProcScr_efxAlacaliburBG
+	.set    gProcScr_efxAlacaliburBG, 0x085FFB30
+
+	.global TsaArray_AircaliburBg
+	.set    TsaArray_AircaliburBg, 0x085FFB48
+
+	.global Img_AircaliburBg
+	.set    Img_AircaliburBg, 0x0864E538
+
+	.global SpellFx_WriteBgMapExt
+	.type   SpellFx_WriteBgMapExt, %function
+	.thumb_func
+	.set    SpellFx_WriteBgMapExt, 0x08056708 + 1
+
+	.global gProcScr_efxAlacaliburBGCOL
+	.set    gProcScr_efxAlacaliburBGCOL, 0x085FFB50
+
+	.global Pal_AircaliburBg
+	.set    Pal_AircaliburBg, 0x0864FB04
+
+	.global gProcScr_efxAlacaliburOBJ
+	.set    gProcScr_efxAlacaliburOBJ, 0x085FFB70
+
+	.global AnimScr_EfxAlacaliburOBJ_LeftFront
+	.set    AnimScr_EfxAlacaliburOBJ_LeftFront, 0x086533B0
+
+	.global AnimScr_EfxAlacaliburOBJ_RightFront
+	.set    AnimScr_EfxAlacaliburOBJ_RightFront, 0x08651C6C
+
+	.global AnimScr_EfxAlacaliburOBJ_LeftBack
+	.set    AnimScr_EfxAlacaliburOBJ_LeftBack, 0x08653464
+
+	.global AnimScr_EfxAlacaliburOBJ_RightBack
+	.set    AnimScr_EfxAlacaliburOBJ_RightBack, 0x08651D20
+
+	.global Pal_AircaliburSprites
+	.set    Pal_AircaliburSprites, 0x08650674
+
+	.global Img_AircaliburSprites
+	.set    Img_AircaliburSprites, 0x086500B0
+
+	.global ProcScr_efxFire
+	.set    ProcScr_efxFire, 0x085FF738
+
+	.global ProcScr_efxFireBG
+	.set    ProcScr_efxFireBG, 0x085FF750
+
+	.global Pal_FireSpellBg
+	.set    Pal_FireSpellBg, 0x08622E08
+
+	.global Img_FireSpellBg
+	.set    Img_FireSpellBg, 0x08622210
+
+	.global ProcScr_efxFireOBJ
+	.set    ProcScr_efxFireOBJ, 0x085FF7C8
+
+	.global AnimScr_EfxFireOBJ_R_Front
+	.set    AnimScr_EfxFireOBJ_R_Front, 0x08625014
+
+	.global AnimScr_EfxFireOBJ_L_Front
+	.set    AnimScr_EfxFireOBJ_L_Front, 0x08624C8C
+
+	.global AnimScr_EfxFireOBJ_R_Back
+	.set    AnimScr_EfxFireOBJ_R_Back, 0x08625040
+
+	.global AnimScr_EfxFireOBJ_L_Back
+	.set    AnimScr_EfxFireOBJ_L_Back, 0x08624CB8
+
+	.global Pal_FireSpellSprites
+	.set    Pal_FireSpellSprites, 0x0862493C
+
+	.global Img_FireSpellSprites
+	.set    Img_FireSpellSprites, 0x08624340
+
+	.global ProcScr_efxFireHITBG
+	.set    ProcScr_efxFireHITBG, 0x085FF7E0
+
+	.global FrameConfig_AnimaHitBG
+	.set    FrameConfig_AnimaHitBG, 0x080E1DE6
+
+	.global TsaLut_AnimaHitBG
+	.set    TsaLut_AnimaHitBG, 0x085FF84C
+
+	.global ImgLut_AnimaHitBG
+	.set    ImgLut_AnimaHitBG, 0x085FF7F8
+
+	.global Pal_EfxFireHitBG
+	.set    Pal_EfxFireHitBG, 0x0862DC64
+
+	.global ProcScr_efxElfireBG
+	.set    ProcScr_efxElfireBG, 0x085FF8A0
+
+	.global Img_EkrElfireBG
+	.set    Img_EkrElfireBG, 0x0862F76C
+
+	.global Tsa_EkrElfireBG
+	.set    Tsa_EkrElfireBG, 0x08630928
+
+	.global EfxTmAddPal
+	.type   EfxTmAddPal, %function
+	.thumb_func
+	.set    EfxTmAddPal, 0x080732E0 + 1
+
+	.global ProcScr_efxElfireBGCOL
+	.set    ProcScr_efxElfireBGCOL, 0x085FF8B8
+
+	.global Pal_EkrElfireBG
+	.set    Pal_EkrElfireBG, 0x08630728
+
+	.global ProcScr_efxElfireOBJ
+	.set    ProcScr_efxElfireOBJ, 0x085FF8D8
+
+	.global AnimScr_EfxElfireObjLeft
+	.set    AnimScr_EfxElfireObjLeft, 0x086329CC
+
+	.global AnimScr_EfxElfireObjRight
+	.set    AnimScr_EfxElfireObjRight, 0x08631BAC
+
+	.global Pal_EfxElfireOBJ
+	.set    Pal_EfxElfireOBJ, 0x08630DE8
+
+	.global Img_EfxElfireOBJ
+	.set    Img_EfxElfireOBJ, 0x08630B70
+
+	.global Tsa_Banim_0
+	.set    Tsa_Banim_0, 0x08622E28
+
+	.global Tsa_Banim_1
+	.set    Tsa_Banim_1, 0x08622ED0
+
+	.global Tsa_Banim_2
+	.set    Tsa_Banim_2, 0x08622F78
+
+	.global Tsa_Banim_3
+	.set    Tsa_Banim_3, 0x08623030
+
+	.global Tsa_Banim_4
+	.set    Tsa_Banim_4, 0x086230F8
+
+	.global Tsa_Banim_5
+	.set    Tsa_Banim_5, 0x086231C8
+
+	.global Tsa_Banim_6
+	.set    Tsa_Banim_6, 0x086232C8
+
+	.global Tsa_Banim_7
+	.set    Tsa_Banim_7, 0x086233D0
+
+	.global Tsa_Banim_8
+	.set    Tsa_Banim_8, 0x086234E4
+
+	.global Tsa_Banim_9
+	.set    Tsa_Banim_9, 0x0862361C
+
+	.global Tsa_Banim_10
+	.set    Tsa_Banim_10, 0x08623720
+
+	.global Tsa_Banim_11
+	.set    Tsa_Banim_11, 0x086237F4
+
+	.global Tsa_efxFireBG_0
+	.set    Tsa_efxFireBG_0, 0x086238B4
+
+	.global Tsa_efxFireBG_1
+	.set    Tsa_efxFireBG_1, 0x0862395C
+
+	.global Tsa_efxFireBG_2
+	.set    Tsa_efxFireBG_2, 0x08623A04
+
+	.global Tsa_efxFireBG_3
+	.set    Tsa_efxFireBG_3, 0x08623ABC
+
+	.global Tsa_efxFireBG_4
+	.set    Tsa_efxFireBG_4, 0x08623B84
+
+	.global Tsa_efxFireBG_5
+	.set    Tsa_efxFireBG_5, 0x08623C54
+
+	.global Tsa_efxFireBG_6
+	.set    Tsa_efxFireBG_6, 0x08623D54
+
+	.global Tsa_efxFireBG_7
+	.set    Tsa_efxFireBG_7, 0x08623E5C
+
+	.global Tsa_efxFireBG_8
+	.set    Tsa_efxFireBG_8, 0x08623F70
+
+	.global Tsa_efxFireBG_9
+	.set    Tsa_efxFireBG_9, 0x086240A8
+
+	.global Tsa_efxFireBG_10
+	.set    Tsa_efxFireBG_10, 0x086241AC
+
+	.global Tsa_efxFireBG_11
+	.set    Tsa_efxFireBG_11, 0x08624280
+

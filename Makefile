@@ -100,6 +100,7 @@ $(C_OBJECTS): %.o: %.c
 	$(CPP) $(CPPFLAGS) $< | iconv -f UTF-8 -t CP932 | $(CC1) $(CC1FLAGS) -o $*.s
 	printf '\t.text\n\t.align 2, 0\n' >> $*.s
 	$(AS) $(ASFLAGS) $*.s -o $@
+	@$(PYTHON) scripts/apply_patches.py $@
 
 $(ELF): $(ALL_OBJECTS) $(LDSCRIPT)
 	$(LD) --no-check-sections -T $(LDSCRIPT) -Map $(MAP) -o $@ $(ALL_OBJECTS)

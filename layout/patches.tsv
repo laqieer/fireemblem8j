@@ -1,0 +1,13 @@
+# Per-object byte patches re-applied after compile (scripts/apply_patches.py).
+# object_basename	section	offset_hex	value_hex
+banim-efxmagic-flux.o	.rodata	ALIGN	2
+banim-efxmagic-flux.o	.text	18C	0000000E
+banim-efxmagic-flux.o	.text	244	00000040
+banim-efxmagic-flux.o	.data	4	FFFFFFEE
+banim-efxmagic-aircalibur.o	.rodata	ALIGN	2
+banim-efxmagic-aircalibur.o	.text	190	0000000E
+banim-efxmagic-aircalibur.o	.text	23C	0000002E
+banim-efxmagic-aircalibur.o	.data	4	FFFFFFEE
+banim-efxmagic-fire.o	.rodata	ALIGN	2
+banim-efxmagic-fire.o	.text	1DC	00000000
+banim-efxmagic-fire.o	.text	50C	000000BE
