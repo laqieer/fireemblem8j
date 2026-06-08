@@ -75,7 +75,11 @@ This is the same `cpp → agbcc → arm-none-eabi-as` pipeline as our `Makefile`
   (drop `-fhex-asm`/`-ffix-debug-line`/`-g`; those are local debug/format flags,
   not codegen — keep `-O2 -mthumb-interwork`, which are the ones that affect
   matching. Use the in-browser flag UI to tweak if a function was built at a
-  different `-O` level, e.g. `agb_sram.o` is `-O1` in our Makefile.)
+  different `-O` level: this repo's `Makefile` currently uses a single global
+  `-O2` for every C TU, but the US reference Makefile carries per-file overrides
+  — e.g. `../fireemblem8u/Makefile` builds `src/agb_sram.o` at `-O1` — so when
+  porting such a TU here, match the US optimization level rather than the JP
+  global default.)
 
 (The full list of available GBA compilers is registered in
 `backend/coreapp/compilers.py` around lines 1684–1688: `AGBCC`, `OLD_AGBCC`,
