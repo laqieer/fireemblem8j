@@ -65,9 +65,15 @@ AGBCC = GCCCompiler(
 )
 ```
 
-This is the same `cpp → agbcc → arm-none-eabi-as` pipeline as our `Makefile`
-(`CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm
--ffix-debug-line -g`). The matching preset for FE8J work is therefore:
+This is essentially the same `cpp → agbcc → arm-none-eabi-as` pipeline as our
+`Makefile` (`CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2
+-fhex-asm -ffix-debug-line -g`), **with one JP-specific difference**: our local C
+rule inserts an `iconv -f UTF-8 -t CP932` step *between* `cpp` and `agbcc`
+(`Makefile:98–100`), and decomp.me's hosted `agbcc` preset does **not** — it
+pipes `cpp` straight into `agbcc`. See the
+[CP932 caveat](#cp932-caveat--non-ascii-string-literals) below before using
+decomp.me for any function whose source or context contains non-ASCII / Japanese
+text. The matching preset for FE8J work is therefore:
 
 - **platform id**: `gba`
 - **compiler id**: `agbcc`
@@ -84,6 +90,34 @@ This is the same `cpp → agbcc → arm-none-eabi-as` pipeline as our `Makefile`
 (The full list of available GBA compilers is registered in
 `backend/coreapp/compilers.py` around lines 1684–1688: `AGBCC`, `OLD_AGBCC`,
 `AGBCC_ARM`, `AGBCCPP`.)
+
+## CP932 caveat — non-ASCII string literals
+
+This is the one place decomp.me's hosted `agbcc` preset is **not** byte-for-byte
+identical to our local build. Our C rule is:
+
+```
+cpp → iconv -f UTF-8 -t CP932 → agbcc → arm-none-eabi-as
+```
+
+(`Makefile:98–100`). The hosted `agbcc` preset's `cc` (quoted above) is
+`cpp → agbcc → arm-none-eabi-as` with **no `iconv`**. Source files in this repo
+are authored in UTF-8, but the ROM stores Japanese text in CP932 (Shift-JIS), so
+the local build transcodes the post-`cpp` stream before `agbcc` sees it. agbcc
+ingests string-literal bytes verbatim, so the same `"…日本語…"` literal yields
+**different bytes** depending on whether `iconv` ran.
+
+Practical consequences when using decomp.me:
+
+- For a function whose **source/context is pure ASCII** (the common case for the
+  region-different code TUs we care about — logic, not text), there is no
+  difference; decomp.me matches the local pipeline exactly.
+- For a function that embeds **non-ASCII / Japanese string literals**, do not
+  trust a decomp.me "100% match" as final. Either (a) paste the literals as
+  explicit CP932 byte escapes (e.g. `"\x82\xA0"`) rather than UTF-8 glyphs so the
+  bytes are pipeline-independent, or (b) develop the logic on decomp.me but treat
+  the local `make compare` in this repo — which *does* run `iconv` — as the only
+  authoritative byte check before committing.
 
 ## How to use the HOSTED site for a hard FE8J function
 

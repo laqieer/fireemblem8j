@@ -56,16 +56,24 @@ label=""
 name=""
 
 # ---- Parse args ----------------------------------------------------------
+# need_val OPTION: require that a value-taking option was given an argument.
+# Without this, `--asm` with no following value would hit `shift 2` on a
+# single remaining arg and abort with Bash's raw "shift: shift count out of
+# range" under `set -e`, before our friendly error/usage path runs.
+need_val() {
+    [ "$#" -ge 2 ] || die "option $1 requires a value (use --help)"
+}
+
 while [ "$#" -gt 0 ]; do
     case "$1" in
-        --asm)       asm_file="${2:-}"; shift 2 ;;
-        --context)   context_file="${2:-}"; shift 2 ;;
-        --source)    source_file="${2:-}"; shift 2 ;;
-        --label)     label="${2:-}"; shift 2 ;;
-        --name)      name="${2:-}"; shift 2 ;;
-        --compiler)  compiler="${2:-}"; shift 2 ;;
-        --platform)  platform="${2:-}"; shift 2 ;;
-        --flags)     flags="${2:-}"; shift 2 ;;
+        --asm)       need_val "$@"; asm_file="$2"; shift 2 ;;
+        --context)   need_val "$@"; context_file="$2"; shift 2 ;;
+        --source)    need_val "$@"; source_file="$2"; shift 2 ;;
+        --label)     need_val "$@"; label="$2"; shift 2 ;;
+        --name)      need_val "$@"; name="$2"; shift 2 ;;
+        --compiler)  need_val "$@"; compiler="$2"; shift 2 ;;
+        --platform)  need_val "$@"; platform="$2"; shift 2 ;;
+        --flags)     need_val "$@"; flags="$2"; shift 2 ;;
         -h|--help)   usage 0 ;;
         *)           die "unknown argument: $1 (use --help)" ;;
     esac
