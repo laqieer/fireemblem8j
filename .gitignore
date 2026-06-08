@@ -77,6 +77,10 @@ src/_diag_*
 *_ghidra/
 .ghidra/
 
+# objdiff: prebuilt CLI binary (installed locally via
+# scripts/tools/objdiff/setup.sh). objdiff.json + the setup script + docs are
+# tracked; the vendored binary is not. See docs/tools/objdiff.md.
+/tools/objdiff
 # coddog cross-binary function-matcher: vendored clone + Rust build artifacts
 # (built locally via scripts/tools/coddog/setup.sh). The setup script, configs
 # (scripts/tools/coddog/*.coddog.yaml) and docs/tools/coddog.md are tracked.
