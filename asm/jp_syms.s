@@ -6648,3 +6648,13 @@
 	.thumb_func
 	.set    WfxInit, 0x08030A84 + 1
 
+	.global IsMultiArenaSaveValid
+	.type   IsMultiArenaSaveValid, %function
+	.thumb_func
+	.set    IsMultiArenaSaveValid, 0x080AAF64 + 1
+
+	.global ReadMultiArenaSaveTeamName
+	.type   ReadMultiArenaSaveTeamName, %function
+	.thumb_func
+	.set    ReadMultiArenaSaveTeamName, 0x080AB10C + 1
+

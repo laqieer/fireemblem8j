@@ -1695,3 +1695,5 @@ GetBattleUnitHitCount	0802AFF0	thumb	bmbattle
 BattleGenerateHit	0802B784	thumb	bmbattle
 AllocWeatherParticles	08030144	thumb	bmio
 WfxInit	08030A84	thumb	bmio
+IsMultiArenaSaveValid	080AAF64	thumb	bmsave-multiarena
+ReadMultiArenaSaveTeamName	080AB10C	thumb	bmsave-multiarena

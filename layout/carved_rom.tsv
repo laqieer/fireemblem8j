@@ -353,3 +353,4 @@ A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 037B40	037BCC	src/bmarch.o(.text)	bmarch(run): IsBallista, GetBallistaItem, GetBallistaItemIndex...
 030BCC	030BE4	src/bmio.o(.text)	bmio(run): SetWeather
 019518	019584	src/bmmap.o(.text)	bmmap(run): BmMapFillEdges
+0AB480	0AB4B8	src/bmsave-multiarena.o(.text)	bmsave-multiarena(run): IsMultiArenaSaveReady
