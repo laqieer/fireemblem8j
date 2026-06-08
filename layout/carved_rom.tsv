@@ -360,3 +360,5 @@ A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 03458C	0345E8	src/chapterdata.o(.text)	chapterdata(run): GetChapterMapChangesPointer, GetChapterEventDataPointer
 0C837C	0C83A4	src/worldmap_text.o(.text)	worldmap_text(run): WmText_Init
 0B15B4	0B15D4	src/spinning_arrow.o(.text)	spinning_arrow(run): UiSpinningArrows_Init
+0069CC	006A14	src/scene.o(.text)	scene(run): ClearTalkFlag, CheckTalkFlag, SetTalkPrintDelay
+5B90D4	5B90D8	src/scene.o(.data)	scene .data

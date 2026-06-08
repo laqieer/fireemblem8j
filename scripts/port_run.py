@@ -289,6 +289,8 @@ def port(name, exclude=(), runs=None):
         if not size:
             continue
         data_carves.append((dbase - 0x08000000, size, dsec))
+        dbytes = subprocess.run(["arm-none-eabi-objcopy", "-O", "binary", "-j", dsec, obj, "/dev/stdout"],
+                                capture_output=True).stdout  # pre-link section bytes (addends)
         cur = None
         for l in sh(f"arm-none-eabi-objdump -r {obj}").stdout.splitlines():
             if "RELOCATION RECORDS FOR [" in l:
@@ -297,9 +299,17 @@ def port(name, exclude=(), runs=None):
             if cur != dsec or len(p) < 3 or not all(ch in "0123456789abcdef" for ch in p[0]):
                 continue
             off, typ, sym = int(p[0], 16), p[1], p[2]
-            if typ == "R_ARM_ABS32" and sym in undef:
-                new_syms.setdefault(sym, enc(int.from_bytes(
-                    jp[dbase - 0x08000000 + off:dbase - 0x08000000 + off + 4], "little")))
+            djp = dbase - 0x08000000 + off
+            jpval = int.from_bytes(jp[djp:djp+4], "little")
+            if typ == "R_ARM_ABS32" and sym in (".bss", "ewram_data", "sbss", "bss"):
+                # A pointer INTO a RAM section baked into carved ROM data (e.g. scene's
+                # .data ProcScr table holds a .bss/IWRAM pointer). The .text path places
+                # such sections; do the same here so the carved data word resolves to the
+                # JP RAM address instead of staying unrelocated.
+                addend = int.from_bytes(dbytes[off:off+4], "little")
+                ram.setdefault(sym, jpval - addend)
+            elif typ == "R_ARM_ABS32" and sym in undef:
+                new_syms.setdefault(sym, enc(jpval))
 
     if os.environ.get("PORTRUN_DEBUG"):
         print(f"  [dbg {name} run {start}..{end}] new_syms=" +

@@ -38,3 +38,4 @@
 0203A4E8	ewram	src/bmbattle.o(ewram_data)	bmbattle ewram_data
 0202E4D0	ewram	src/bmmap.o(ewram_data)	bmmap ewram_data
 0203AA90	ewram	src/cp_decide.o(ewram_data)	cp_decide ewram_data
+03000040	iwram	src/scene.o(.bss)	scene .bss
