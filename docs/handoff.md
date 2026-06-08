@@ -75,8 +75,15 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
        / .bss-static-trim port_run fix. Unblocked agb_sram, bm, bmarena, bmmind,
        sio_core, uiutils, banim-ekrbattle. No further work needed here.
      - **huge diff (~11.9M) ×3** — `banim-efxmagic-flux/-aircalibur/-thunder`,
-       all first @ 0x373c: catastrophic misplacement (likely a bad romdata base or a
-       falsely-verified run). Investigate separately; don't sweep blindly.
+       all first @ 0x373c: catastrophic misplacement. ROOT LEAD (2026-06-08):
+       port_run computes romdata `.rodata` base = **0x080E20FA — MISALIGNED** (the
+       `.data` base 0x085FFB88 is fine). A misaligned `.rodata` carved_rom entry
+       cascades through gen_layout's sorted-gap/incbin computation → everything from
+       0x373c shifts. The `.rodata` base = `jp[base+off] - ss[1]` is likely wrong
+       because the referenced `.rodata` symbol is region-different (JP offset ≠ US
+       `ss[1]`). BUT these are graphics-heavy region-different banim effects (many
+       Img_*/Pal_*/AnimScr_* pointers) — a correct base likely still leaves
+       region-different content diffs. Lower priority than Phase-3 no-runs.
      - **no-runs ×15 / compile-fail ×2** — Phase 3 (hand-decompile) / agbcc C89 fixups.
 3. **Phase 3 — region-different CODE** (`no verified runs`): hand-decompile the
    functions in `ida`/`ghidra` (decompile by JP address), write `src/` C matching
