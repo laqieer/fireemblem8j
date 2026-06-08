@@ -34,7 +34,12 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
     `.align 2, 0` so the pad is zero-filled (was nop 0x46c0 — the appended `.ALIGN`
     aligned the trailing .debug_info section, not .text, under -g). JP pads inter-func
     with 0x0000, so this matches; full clean rebuild verified byte-perfect. Only
-    `scene` remains in carve_mapped.
+    `scene` remains in carve_mapped — **scene blocked on region-different .data**:
+    its carved .data table holds a hardcoded IWRAM pointer (JP `0x03000040`) that the
+    JP RAM layout moved vs US; port_run resolves .text literals & romdata SYMBOL relocs
+    but doesn't remap hardcoded region-different addresses baked into compiled .data.
+    Real fix: apply addr_map to the carved .data BINARY (find US value, patch to JP) —
+    would also help the romdata near-misses. Genuine region-different data, not mechanical.
   (Earlier "no path remains / region-different exhausted" was WRONG — this class
   was the gap; keep mining funcmap-mapped functions before declaring exhaustion.)
 - **.bss-overlap class RESOLVED** via `--no-check-sections` (Makefile): the overlaps
