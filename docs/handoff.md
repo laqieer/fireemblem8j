@@ -128,8 +128,14 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
        (frames.9 @0xe, frames.13 @0x40) referenced via section+addend; base computes
        to misaligned 0x080E20FA because the JP .rodata layout differs (region-different
        animation data) -> +4 size + 0x373c catastrophic shift. The nested ROM-data fix
-       did NOT help (these .rodata are .text-referenced, not nested). Genuinely
-       region-different graphics + a layout bug — hardest of the remaining mechanical-ish.
+       did NOT help (these .rodata are .text-referenced, not nested). REFINED: both .rodata refs AGREE on base 0x080E20FA (frames.9@0xe -> 0x80e2108,
+       frames.13@0x40 -> 0x80e213a), so the US .rodata LAYOUT matches JP — but the base
+       is 2-ALIGNED while the .rodata section is 4-aligned (2**2). The linker can't place
+       a 4-aligned section at a 2-aligned addr -> it bumps placement -> +4 size / 0x373c
+       shift. Candidate fix: objcopy --set-section-alignment .rodata=1 (or =2) on the
+       carved .o so gen_layout's exact-address placement isn't overridden; verify the
+       content then matches (the 2-aligned base may also mean a real 2-byte JP .rodata
+       offset). Intricate but likely mechanical given the 6/6 record.
      - **no-runs ×15 — Phase 3 (hand-decompile) is now the ONLY remaining class with a path.** compile-fail class CLEARED (worldmap_path: forward-ref prototype; bmbattle: incremental-trim fallback). Every generalizing-fixable class is resolved; the rest (15 no-runs region-different code, ~9 compound romdata near-misses, 3 huge-diff banim) needs per-function hand-decompilation via ida/ghidra+permuter — sessions per carve, not turns.
 3. **Phase 3 — region-different CODE** (`no verified runs`): hand-decompile the
    functions in `ida`/`ghidra` (decompile by JP address), write `src/` C matching
