@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Atomic task-claim registry for parallel carving.
 
-A claim file ``layout/claims/<task>.json`` is created with ``O_CREAT|O_EXCL``
-(atomic on POSIX), so two agents can never claim the same task simultaneously.
-Claims carry a TTL + heartbeat; an expired claim (the agent died mid-task) is
-reclaimable, and ``reap`` clears stale ones so work is never permanently stuck.
+Every registry mutation (claim/beat/release/reap) runs under an exclusive
+``fcntl.flock`` (see ``_locked``), so two agents can never claim the same task
+simultaneously and no operation can race another. Claims carry a TTL + heartbeat;
+an expired claim (the agent died mid-task) is reclaimable, and ``reap`` clears
+stale ones so work is never permanently stuck.
 
 ``layout/claims/`` is gitignored local coordination state -- it is NOT committed
 (it must not travel on the per-task branches), so the integrator and the agents
@@ -102,13 +103,13 @@ def release(task, agent):
         return True
 
 
-def beat(task, agent):
+def beat(task, agent, ttl=DEFAULT_TTL):
     """Refresh the TTL -- only if `agent` still owns the (non-expired) claim, so a
     stale agent cannot resurrect a task another agent has taken over."""
     path = _path(task)
     with _locked():
         rec = _load(path)
-        if rec is None or rec.get("agent") != agent or _expired(rec, DEFAULT_TTL):
+        if rec is None or rec.get("agent") != agent or _expired(rec, ttl):
             return False
         rec["beat"] = time.time()
         _write(path, rec)
@@ -155,7 +156,7 @@ if __name__ == "__main__":
     elif len(a) >= 4 and a[1] == "release":
         sys.exit(0 if release(a[2], a[3]) else 3)
     elif len(a) >= 4 and a[1] == "beat":
-        sys.exit(0 if beat(a[2], a[3]) else 3)
+        sys.exit(0 if beat(a[2], a[3], _arg_ttl()) else 3)
     elif len(a) == 3 and a[1] == "status":
         rec = _load(_path(a[2]))
         print(json.dumps(rec) if rec else "(unclaimed)")

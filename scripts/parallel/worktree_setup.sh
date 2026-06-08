@@ -5,8 +5,9 @@
 # tools/agbcc, baserom.gba, fireemblem8.elf and the built *.o objects are all
 # gitignored, so a freshly-created worktree cannot run `make compare`. This
 # symlinks the read-only inputs in from the main repo (no copy: they're large and
-# read-only during a build) and hardlink-copies the warm object cache so the
-# worktree's first build is the ~0.3s incremental relink, not a ~13s clean.
+# read-only during a build) and copies the warm object cache (objects are mutable
+# build outputs — copy, never hardlink) so the worktree's first build is the ~0.3s
+# incremental relink, not a ~13s clean.
 #
 # Usage:  scripts/parallel/worktree_setup.sh <main-repo-root>
 # Intended to be wired to the Claude Code `WorktreeCreate` hook so every agent
