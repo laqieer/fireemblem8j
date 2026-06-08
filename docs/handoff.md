@@ -65,8 +65,17 @@
        is (i) **place referenced `.rodata`/`.data` via named syms** at their JP address.
      - **"no diff parsed", +ram+romdata ×8** — `agb_sram`, `bm`, `bmarena`, `bmmap`,
        `bmmind`, `bmsave-multiarena`, `cp_decide`, `sio_core`. The `ctc`-style
-       **`.bss` overlap** (two carved `.bss` blocks collide, e.g. `.bss_20` ⊂ `.bss_0`)
-       → needs per-symbol IWRAM placement, not whole-section blocks.
+       **`.bss` overlap**. Confirmed root cause (agb_sram): the link fails with
+       `section .bss_20 VMA [03000038,0300003f] overlaps section .bss_0 VMA
+       [03000000,0300126f]`. IWRAM globals from DIFFERENT TUs are **interleaved** in
+       the 0x03000000 region, so port_run placing each object's whole `.bss` as one
+       contiguous block (carved_ram.tsv `.bss_N`) is fundamentally wrong — a new
+       carve's block lands inside an earlier carve's over-claimed block. **The
+       architectural fix: place IWRAM/.bss globals as INDIVIDUAL absolute symbols
+       (baseline_syms / jp_syms.s) at their JP addresses, shared across all carves;
+       stop emitting per-object `.bss` blocks.** This requires converting the
+       existing `.bss`-block carves too (audit carved_ram.tsv), so do it in a fresh
+       session with full context, gated by `make compare` — NOT as a tail-end patch.
      - **huge diff (~11.9M) ×3** — `banim-efxmagic-flux/-aircalibur/-thunder`,
        all first @ 0x373c: catastrophic misplacement (likely a bad romdata base or a
        falsely-verified run). Investigate separately; don't sweep blindly.
