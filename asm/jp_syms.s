@@ -732,9 +732,6 @@
 	.thumb_func
 	.set    CallARM_FillTileRect, 0x080DC0DC + 1
 
-	.global gTsa_UnkData_0
-	.set    gTsa_UnkData_0, 0x08A7DCB8
-
 	.global GetROMChapterStruct
 	.type   GetROMChapterStruct, %function
 	.thumb_func
@@ -3732,20 +3729,8 @@
 	.thumb_func
 	.set    MaybeSmoothChangeSomePal, 0x080016B8 + 1
 
-	.global Img_GameOverText
-	.set    Img_GameOverText, 0x08A7DDCC
-
-	.global Pal_GameOverText1
-	.set    Pal_GameOverText1, 0x08A7E124
-
 	.global Img_ChapterIntroFog
 	.set    Img_ChapterIntroFog, 0x08A7B098
-
-	.global Pal_GameOverText2
-	.set    Pal_GameOverText2, 0x08A7E104
-
-	.global Tsa_GameOverFx
-	.set    Tsa_GameOverFx, 0x08A7E144
 
 	.global MapAnim_GorgonHatch_Init
 	.type   MapAnim_GorgonHatch_Init, %function

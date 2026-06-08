@@ -69,22 +69,25 @@ def main():
         return any(not (hi <= cl or lo >= ch) for cl, ch in carved)
 
     def find_shift(us_lo, sz):
-        # try 3 chunks; require they agree on a single shift, then full-verify
-        cand = None
-        for frac in (0.05, 0.5, 0.95):
-            c = us_lo - 0x08000000 + int(sz * frac)
+        # vote: sample many chunks; each UNIQUE chunk in JP votes for its shift; take the
+        # majority shift. (A single ambiguous/region-different chunk can't veto.) The
+        # caller full-block-verifies, so a wrong majority just fails that gate, never a
+        # bad carve. Catches assets the strict 3-chunk-agreement missed (e.g. a flat run
+        # in the middle), while pointer/partly-different blocks still fail full-verify.
+        base = us_lo - 0x08000000
+        votes = {}
+        n = 24
+        for k in range(n):
+            c = base + (sz * k) // n
             chunk = us[c:c+64]
             if len(chunk) < 64:
-                return None
+                continue
             pos = jp.find(chunk)
-            if pos < 0 or jp.find(chunk, pos+1) >= 0:   # not found or ambiguous
-                return None
-            sh_i = c - pos
-            if cand is None:
-                cand = sh_i
-            elif cand != sh_i:
-                return None
-        return cand
+            if pos >= 0 and jp.find(chunk, pos+1) < 0:   # unique hit only
+                votes[c - pos] = votes.get(c - pos, 0) + 1
+        if not votes:
+            return None
+        return max(votes, key=votes.get)
 
     made, new_rows, drop = [], [], set()
     pend = list(carved)  # accumulate JP ranges to prevent intra-run overlap

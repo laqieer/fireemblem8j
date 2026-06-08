@@ -163,7 +163,6 @@ gpBgVerticalScrollSt	03004930	data	bmlib-hblank
 SetPrimaryHBlankHandler	08001D28	thumb	bmlib-hblank
 GetCharTextLen	08003E6C	thumb	bonusclaim_helpbox
 CallARM_FillTileRect	080DC0DC	thumb	chapter_title
-gTsa_UnkData_0	08A7DCB8	data	chapter_title
 GetROMChapterStruct	08034520	thumb	chapter_title
 GetPlayChapterId	080C1DE8	thumb	chapter_title
 GetNextUnclearedNode	080C1E20	thumb	chapter_title
@@ -883,11 +882,7 @@ PutScreenFogEffectOverlayed	0801FBE0	thumb	gameoverbgfx
 PutScreenFogEffect	0801FB0C	thumb	gameoverbgfx
 MaybeResetSomePal	0800169C	thumb	gameoverbgfx
 MaybeSmoothChangeSomePal	080016B8	thumb	gameoverbgfx
-Img_GameOverText	08A7DDCC	data	gameoverbgfx
-Pal_GameOverText1	08A7E124	data	gameoverbgfx
 Img_ChapterIntroFog	08A7B098	data	gameoverbgfx
-Pal_GameOverText2	08A7E104	data	gameoverbgfx
-Tsa_GameOverFx	08A7E144	data	gameoverbgfx
 MapAnim_GorgonHatch_Init	0807F15C	thumb	eventfx-boomfog
 Img_LightRune	085CC560	data	lightrunefx
 Pal_LightRune	085CDC84	data	lightrunefx

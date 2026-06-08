@@ -381,6 +381,7 @@
 848B28	855D58	asm/dat_data_ekrdk.o(.rodata.dat_data_ekrdk)	dat_data_ekrdk region-same shifted (52KB)
 85616C	8582BC	asm/dat_data_banimmisc.o(.rodata.dat_data_banimmisc)	dat_data_banimmisc region-same shifted (8KB)
 861950	901138	asm/dat_data_portrait.o(.rodata.dat_data_portrait)	dat_data_portrait region-same shifted (637KB)
+9CFD20	A0DE50	asm/dat_data_map_anim_frames.o(.rodata.dat_data_map_anim_frames)	dat_data_map_anim_frames region-same shifted (248KB)
 A146BC	A146D4	src/mapanim_spellassocfx.o(.data)	mapanim_spellassocfx .data
 A14734	A149D4	src/mapanim_eventcall.o(.data)	mapanim_eventcall .data
 A1599C	A160F4	asm/dat_anim_mapanim_statgain.o(.rodata.dat_anim_mapanim_statgain)	dat_anim_mapanim_statgain region-same shifted (1KB)
@@ -389,12 +390,14 @@ A168DC	A175C8	asm/dat_anim_mapanim_torch.o(.rodata.dat_anim_mapanim_torch)	dat_a
 A175C8	A1CC54	asm/dat_anim_mapanim_objects.o(.rodata.dat_anim_mapanim_objects)	dat_anim_mapanim_objects region-same shifted (21KB)
 A1DB88	A22790	asm/dat_mapanim_battleinfo.o(.rodata.dat_mapanim_battleinfo)	dat_mapanim_battleinfo region-same shifted (19KB)
 A22790	A22F08	asm/dat_anim_mapanim_berserk_silence.o(.rodata.dat_anim_mapanim_berserk_silence)	dat_anim_mapanim_berserk_silence region-same shifted (1KB)
+A22F08	A27128	asm/dat_mapanim_nightmare.o(.rodata.dat_mapanim_nightmare)	dat_mapanim_nightmare region-same shifted (16KB)
 A27128	A28A48	asm/dat_mapanim_monster_gorgon.o(.rodata.dat_mapanim_monster_gorgon)	dat_mapanim_monster_gorgon region-same shifted (6KB)
 A28A48	A588C0	asm/dat_mapanim_eventcall.o(.rodata.dat_mapanim_eventcall)	dat_mapanim_eventcall region-same shifted (191KB)
 A60AD4	A60AE8	src/events_script_utils.o(.data)	events_script_utils .data
 A72BB8	A72BF0	src/statscreen.o(.data)	statscreen .data
 A738E0	A73900	src/player_interface.o(.data)	player_interface .data
 A7CDA4	A7D10C	asm/dat_anim_player_rank_fog.o(.rodata.dat_anim_player_rank_fog)	dat_anim_player_rank_fog region-same shifted (0KB)
+A7D10C	A7E188	asm/dat_data_A01CC4_2.o(.rodata.dat_data_A01CC4_2)	dat_data_A01CC4_2 region-same shifted (4KB)
 A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 A9CA20	A9CA24	src/bmsave-lib.o(.data)	bmsave-lib .data
