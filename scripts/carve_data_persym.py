@@ -63,7 +63,7 @@ def main():
 
     pend = list(carved)
 
-    new_rows, drop, made = [], set(), []
+    new_rows, drop, made, asm_pending = [], set(), [], []
     for o, spans in sorted(objs.items()):
         if subs and not any(s in o for s in subs):
             continue
@@ -76,16 +76,21 @@ def main():
         if not addrs:
             continue
         bound = addrs + [us_hi]
-        # per-symbol shift (None if not uniquely found / content differs)
+        # per-symbol shift (None if not uniquely found / content differs). Search only a
+        # bounded WINDOW around the symbol's address (relocations are bounded) so each
+        # find scans ~4 MB not 16 MB — the difference between seconds and a timeout. The
+        # full-content verify still guards against a false positive from window-locality.
+        W = 0x300000
         symshift = []
         for i, a in enumerate(addrs):
             sz = bound[i+1] - a
             uo = a - 0x08000000
             if sz < 16:
                 symshift.append(None); continue
+            lo_s = max(0, uo - W); hi_s = min(len(jp), uo + W)
             chunk = us[uo:uo+min(64, sz)]
-            pos = jp.find(chunk)
-            if pos < 0 or jp.find(chunk, pos+1) >= 0:
+            pos = jp.find(chunk, lo_s, hi_s)
+            if pos < 0 or jp.find(chunk, pos+1, hi_s) >= 0:
                 symshift.append(None); continue
             shift = uo - pos
             jo = uo - shift
@@ -123,7 +128,7 @@ def main():
                 seg = bound[k+1] - a
                 if seg:
                     body.append(f'\t.incbin "baserom.gba", 0x{(a-shift)-0x08000000:X}, 0x{seg:X}')
-            open(f"asm/{nm_sec}.s", "w").write("\n".join(body) + "\n")
+            asm_pending.append((nm_sec, "\n".join(body) + "\n"))  # write atomically at the end
             new_rows.append(f"{jl&0xFFFFFF:06X}\t{jh&0xFFFFFF:06X}\tasm/{nm_sec}.o(.rodata.{nm_sec})\t{nm_sec} region-same per-sym shifted ({(run_hi-run_lo)//1024}KB)\n")
             pend.append((jl, jh))
             emitted += run_hi - run_lo
@@ -133,6 +138,8 @@ def main():
     if not made:
         print("no per-symbol shifted data found")
         return
+    for nm_sec, txt in asm_pending:   # only now touch the filesystem (timeout-safe)
+        open(f"asm/{nm_sec}.s", "w").write(txt)
     kept = [l for l in open("layout/baseline_syms.tsv")
             if not (l.strip() and not l.startswith("#") and l.split("\t")[0] in drop)]
     open("layout/baseline_syms.tsv", "w").writelines(kept)

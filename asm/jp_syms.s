@@ -2043,18 +2043,6 @@
 	.thumb_func
 	.set    BlendPaletteToColor, 0x080CB8BC + 1
 
-	.global gPal_Titlescreen_2
-	.set    gPal_Titlescreen_2, 0x08B48918
-
-	.global gGfx_TitleDemonKing
-	.set    gGfx_TitleDemonKing, 0x08B49B6C
-
-	.global gTsa_TitleDemonKing
-	.set    gTsa_TitleDemonKing, 0x08B4A8B8
-
-	.global gPal_TitleDemonKing
-	.set    gPal_TitleDemonKing, 0x08B4AC2C
-
 	.global Title_SetBg2AffineScale
 	.type   Title_SetBg2AffineScale, %function
 	.thumb_func
