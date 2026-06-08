@@ -25,9 +25,22 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
   - tier-2 region-different ASSETS with table-pinned boundaries (data_banim_pal).
   Remaining data is genuinely region-different (text/localized tables/pointer-bearing) —
   tier-3 (real C w/ JP values) — plus unidentified region-same blocks (incbin in US too).
-- **MECHANICAL CEILING REACHED (2026-06-08): 47.07% of the ROM carved** (gen_layout),
-  code 13.4% + data 58.58% + symbols 15.96%, 478 objects, all durable. The remaining
-  ~53% of the ROM all needs genuine per-unit work that CANNOT be safely mechanized:
+- **PER-SYMBOL SHIFTED CARVER — `scripts/carve_data_persym.py` (2026-06-08):** some
+  objects (banim OBJ sprites, opening gfx, chapter maps, ending CG, ...) hold sub-assets
+  relocated in INDEPENDENT groups at different JP shifts, so the per-OBJECT shift misses
+  most. Per-symbol: find each US data symbol's OWN JP location (unique 64B chunk in a
+  +-3MB window + full-content verify), group consecutive same-shift matching symbols into
+  runs, carve each run. Carved banim sprites (1.27 MB), data_opanim_gfx (334KB), ending_cg
+  (216KB), const_data_chapter_maps (233KB), unit_icon_move (205KB), worldmap_gmapunit
+  (180KB), data_btl_bg, + more. GOTCHAS: (1) emit asm in memory, write only at the end —
+  the search can time out and mid-loop writes leave orphan .s files the Makefile wildcard
+  then fails on; (2) window the search or it scans 16 MB/symbol and times out; (3) run it
+  TARGETED on big contiguous data objects (scattered code-rodata objects have huge
+  union-spans -> slow); (4) no `.align` (non-4-aligned addrs -> ld pads -> ROM growth).
+- **MECHANICAL CEILING (2026-06-08): 64.15% of the ROM carved** (gen_layout), code 13.4%
+  + **data 80.14%** + symbols 27.54%, **1115 objects**, all durable. The region-same data
+  (same-offset + per-object-shift + per-symbol-shift) is exhausted. The remaining ~36% of
+  the ROM all needs genuine per-unit work that CANNOT be safely mechanized:
   - **Region-different graphics (~2.5 MB):** banim OBJ sprites (0x085D9C5C, 1.53 MB),
     data_bg (0x088D2700, 557 KB), etc. Verified NOT neighbor-pinned (they sit in
     shifted-layout regions, so the US boundary is not the JP boundary) and NOT shift-
