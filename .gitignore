@@ -24,6 +24,16 @@ src/data/*.s
 /asm/baserom.s
 /asm/jp_syms.s
 
+# Per-task layout fragments (layout/<name>.d/*.tsv) ARE committed -- they are the
+# parallel-carve mechanism. The generic `*.d` rule above (for make dependency
+# files) otherwise hides these directories, so re-include them explicitly.
+!/layout/carved_rom.d/
+!/layout/carved_ram.d/
+!/layout/baseline_syms.d/
+!/layout/carved_rom.d/*.tsv
+!/layout/carved_ram.d/*.tsv
+!/layout/baseline_syms.d/*.tsv
+
 # Locally-installed toolchain (install agbcc the same way as the US decomp)
 /tools/agbcc
 
