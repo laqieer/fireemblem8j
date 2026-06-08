@@ -60,7 +60,9 @@ range:
 ```bash
 # diff our fireemblem8.gba vs baserom.gba over one function's byte range.
 # START/END are FILE OFFSETS (= vma - 0x08000000). baseimg/myimg come from
-# diff_settings.py; -Dz -bbinary -EL is used automatically (armel).
+# diff_settings.py; objdump gets -Dz -bbinary -EL automatically (armel) plus
+# the `-m arm -Mforce-thumb` from diff_settings.py's objdump_flags (a flat
+# binary has no ELF header, so the machine + Thumb mode must be forced).
 $HOME/asm-differ-venv/bin/python tools/asm-differ/diff.py 0x<START> 0x<END>
 
 # auto-rebuild + watch while you iterate on src/<file>.c
@@ -74,9 +76,14 @@ $HOME/asm-differ-venv/bin/python tools/asm-differ/diff.py -mw 0x<START> 0x<END>
 > explicit `vma - 0x08000000` offsets. Get a function's VMA/size from
 > `fireemblem8.map` (or the US symbol).
 
-> **Note:** raw bytes carry no Thumb/ARM/data markers, so objdump guesses the
-> ISA. FE8J code is Thumb; if a range mis-decodes as ARM, double-check the range
-> bounds, or cross-check with the per-object `-o` view (#2).
+> **Note:** a flat binary carries no ELF header, so objdump can't infer the
+> machine or ISA. `diff_settings.py` sets `objdump_flags = ["-m", "arm",
+> "-Mforce-thumb"]` so the raw-binary path decodes as ARM/Thumb instead of
+> erroring out with `can't disassemble for architecture UNKNOWN`. FE8J code is
+> overwhelmingly Thumb, hence `-Mforce-thumb`; to raw-diff a rare ARM region,
+> temporarily drop `-Mforce-thumb` from `objdump_flags` for that range, or
+> cross-check with the per-object `-o` view (#2), which reads the ISA from the
+> ELF.
 
 ### 2. Per-object two-sided diff vs an "expected" object (symbol names + relocs)
 
@@ -157,12 +164,17 @@ Useful flags (see `diff.py --help`):
   with `objcopy --strip-debug`, but the `.elf`/`.o` keep their symbols — diff
   against the `.elf`/`.o`, never the stripped `.gba`.
 
-- **Endianness:** GBA is little-endian, so `diff_settings.py` uses
-  `arch = "armel"`. This matters for the raw-binary (`-bbinary`) flow (#1), where
-  asm-differ must tell objdump to read little-endian (`-EL`); `arm32` is
-  big-endian and would mis-decode the raw ROM bytes. For the `-o`/`-e`
-  (objfile/ELF) workflows endianness is taken from the ELF header regardless, so
-  `armel` is fine there too.
+- **Endianness + machine flag (raw-binary mode):** GBA is little-endian, so
+  `diff_settings.py` uses `arch = "armel"`, which makes asm-differ pass objdump
+  `-EL`; `arm32` is big-endian and would mis-decode the raw ROM bytes. But
+  asm-differ's `armel` arch carries *no* machine flag, and in raw `-bbinary`
+  mode (#1) objdump has no ELF header to infer one — so `diff_settings.py` also
+  sets `objdump_flags = ["-m", "arm", "-Mforce-thumb"]` (asm-differ prepends
+  these in every mode). Without `-m arm` the raw path errors with `can't
+  disassemble for architecture UNKNOWN`; `-Mforce-thumb` selects the Thumb
+  decoder FE8J needs. For the `-o`/`-e` (objfile/ELF) workflows the machine and
+  endianness come from the ELF header, so these flags are redundant but
+  harmless there.
 
 ## Relationship to the other tools
 

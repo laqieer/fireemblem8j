@@ -28,6 +28,17 @@ def apply(config, args):
     # for -o, or -Dz -bbinary -EL for the raw-binary mode) itself.
     config["objdump_executable"] = "arm-none-eabi-objdump"
 
+    # objdump flags asm-differ passes in EVERY mode (it prepends arch_flags +
+    # objdump_flags before its own flags). asm-differ's "armel" arch has empty
+    # arch_flags, and the raw -bbinary path (workflow #1) gives objdump only
+    # `-Dz -bbinary -EL` — a flat binary has no ELF header, so without an
+    # explicit machine objdump exits with "can't disassemble for architecture
+    # UNKNOWN". FE8J code is Thumb (agbcc Thumb-interwork), so force the machine
+    # and Thumb decode here. (For -o/-e the machine comes from the ELF header, so
+    # these are redundant-but-harmless there.) If you ever raw-diff an ARM region
+    # drop -Mforce-thumb for that range; see docs/tools/asm-differ.md.
+    config["objdump_flags"] = ["-m", "arm", "-Mforce-thumb"]
+
     # GNU ld map from `make` (ROM -> fireemblem8.map). Used by -o to find the
     # owning .o of a symbol. NOTE: asm-differ's *raw-binary* symbol lookup
     # additionally requires "load address" columns in the map (separate LMA), but

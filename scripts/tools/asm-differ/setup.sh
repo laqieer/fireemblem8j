@@ -50,7 +50,10 @@ fi
 
 echo
 echo "Done. asm-differ is at tools/asm-differ; deps in $VENV."
-echo "Build the ROM first (make compare) so fireemblem8.elf/.map exist, then run"
-echo "from the repo root, e.g.:"
-echo "  $VENV/bin/python tools/asm-differ/diff.py -mwo1 <SymbolName>"
+echo "Build first (make compare) so fireemblem8.gba/.elf/.map and baserom.gba"
+echo "exist, then run from the repo root. The everyday TARGET diff (our build vs"
+echo "the original ROM) is the raw-binary file-offset mode, e.g.:"
+echo "  $VENV/bin/python tools/asm-differ/diff.py -mw 0x<START> 0x<END>"
+echo "  (START/END are file offsets = vma - 0x08000000)"
+echo "To just VIEW a symbol's current asm (not a diff): diff.py -o1 <SymbolName>."
 echo "See docs/tools/asm-differ.md for the full FE8J invocation and caveats."
