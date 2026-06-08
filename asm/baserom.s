@@ -1041,5 +1041,8 @@
 	.incbin "baserom.gba", 0xBAB754, 0x360	@ 0xBAB754..0xBABAB4
 
 	.section .gap_346, "ax", %progbits
-	.incbin "baserom.gba", 0xBABAF8	@ 0xBABAF8..0x1000000
+	.incbin "baserom.gba", 0xBABAF8, 0x54508	@ 0xBABAF8..0xC00000
+
+	.section .gap_347, "ax", %progbits
+	.incbin "baserom.gba", 0xC01928	@ 0xC01928..0x1000000
 

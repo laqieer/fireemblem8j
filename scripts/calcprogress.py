@@ -39,9 +39,15 @@ objs = set()
 for r in read_rows("layout/carved_rom.tsv"):
     start, end, sec = int(r[0], 16), int(r[1], 16), r[2]
     size = end - start
-    if sec.endswith(CODE_EXTS):
+    # Match the section NAME (e.g. `.data.banim_array`) by prefix, not an exact
+    # `.data)` suffix: the US totals (scripts/calcrom.sh) count every .text/.data/
+    # .rodata section including named sub-sections (`.data.banim_array`,
+    # `.rodata.str1.4`, ...), so the JP numerator must too or it undercounts.
+    sm = re.search(r"\((\.[\w.]+)\)", sec)
+    secname = sm.group(1) if sm else ""
+    if secname == ".text" or secname.startswith(".text."):
         code_bytes += size
-    elif sec.endswith(DATA_EXTS):
+    elif secname.startswith((".rodata", ".data")):
         data_bytes += size
     m = re.match(r"(\S+\.o)\(", sec)
     if m and m.group(1) not in ("asm/baserom.o",):

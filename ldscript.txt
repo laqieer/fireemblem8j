@@ -751,6 +751,9 @@ SECTIONS
         src/classchg-postconfirm.o(.data);
         src/bmguide.o(.data);
         asm/baserom.o(.gap_346);
+        src/banim_data.o(.data.banim_array_len);
+        src/banim_data.o(.data.banim_array);
+        asm/baserom.o(.gap_347);
     } > rom
 
     .bss_0 0x03000000 (NOLOAD) : { src/rng.o(.bss) src/rng.o(COMMON) } > iwram  /* rng: gRNSeeds, gLCGRNValue */
