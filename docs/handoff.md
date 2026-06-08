@@ -9,14 +9,14 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## Verified state (update each working stretch)
 
 - **Functions decompiled: 1234 / 8,528 = 14.5%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 296.** `make compare` → OK. Build is always byte-perfect
+- **Carved objects: 297.** `make compare` → OK. Build is always byte-perfect
   (`port_run` verifies every carve and reverts non-matches).
 - **NEW PATH — `scripts/carve_mapped.py` (find_runs blind spot):** find_runs only
   proposes a run it can UNIQUELY locate by masked search, so it SKIPS small/
   pointer-heavy functions even though `match_us_jp.py` already located them in JP
   (funcmap). carve_mapped groups a TU's funcmap-mapped funcs into JP-consecutive
   runs and feeds them to `port_run.port(..., runs=...)` directly (verify-or-revert
-  still guards). Carved +10 (spinning_arrow, worldmap_text, chapterdata, bmarch, bmio, bmmap, bmsave-multiarena, classchg-event,
+  still guards). Carved +11 (scene, spinning_arrow, worldmap_text, chapterdata, bmarch, bmio, bmmap, bmsave-multiarena, classchg-event,
   cp_decide, unitlistscreen). **Re-run it each session; ~21 mapped funcs still
   uncarved (scene, spinning_arrow) fail because the
   ISOLATED subset compile doesn't reproduce the in-context JP bytes —  next lead.**
@@ -34,12 +34,14 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
     `.align 2, 0` so the pad is zero-filled (was nop 0x46c0 — the appended `.ALIGN`
     aligned the trailing .debug_info section, not .text, under -g). JP pads inter-func
     with 0x0000, so this matches; full clean rebuild verified byte-perfect. Only
-    `scene` remains in carve_mapped — **scene blocked on region-different .data**:
+    `scene` remains in carve_mapped — **scene RESOLVED (mechanical, NOT region-different)**:
     its carved .data table holds a hardcoded IWRAM pointer (JP `0x03000040`) that the
     JP RAM layout moved vs US; port_run resolves .text literals & romdata SYMBOL relocs
     but doesn't remap hardcoded region-different addresses baked into compiled .data.
-    Real fix: apply addr_map to the carved .data BINARY (find US value, patch to JP) —
-    would also help the romdata near-misses. Genuine region-different data, not mechanical.
+    FIXED: the .data ptr was an R_ARM_ABS32 reloc to the .bss SECTION; port_run's
+    romdata loop only resolved undef NAMED syms, not section syms. Added .bss/ewram_data
+    section resolution to the romdata loop (place the RAM section at its JP addr). carve_mapped
+    now fully exhausted. NOTE: this was the 5th time 'region-different' turned out mechanical.
   (Earlier "no path remains / region-different exhausted" was WRONG — this class
   was the gap; keep mining funcmap-mapped functions before declaring exhaustion.)
 - **.bss-overlap class RESOLVED** via `--no-check-sections` (Makefile): the overlaps
