@@ -25,6 +25,23 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
   - tier-2 region-different ASSETS with table-pinned boundaries (data_banim_pal).
   Remaining data is genuinely region-different (text/localized tables/pointer-bearing) —
   tier-3 (real C w/ JP values) — plus unidentified region-same blocks (incbin in US too).
+- **MECHANICAL CEILING REACHED (2026-06-08): 47.07% of the ROM carved** (gen_layout),
+  code 13.4% + data 58.58% + symbols 15.96%, 478 objects, all durable. The remaining
+  ~53% of the ROM all needs genuine per-unit work that CANNOT be safely mechanized:
+  - **Region-different graphics (~2.5 MB):** banim OBJ sprites (0x085D9C5C, 1.53 MB),
+    data_bg (0x088D2700, 557 KB), etc. Verified NOT neighbor-pinned (they sit in
+    shifted-layout regions, so the US boundary is not the JP boundary) and NOT shift-
+    matchable (JP art genuinely differs, often LZ-compressed differently → different
+    size). Carving needs the JP boundary derived per-subsystem (decompress / follow JP
+    pointer tables), then JP-byte incbin under US names. Do NOT assume US boundaries.
+  - **Region-different structured tables** (msg_data 481 KB text, etc.): real C with JP
+    values.
+  - **Region-different code (~743 KB):** headless RE per function (scripts/ida/
+    decompile_addr.py) — slow craft, uncertain convergence.
+  - Negligible: 1 neighbor-pinned 16 KB object (data_FE0000), unidentified region-same
+    blocks (922 KB @ 0x08EF9454, 247 KB @ 0x08BC3A00 — incbin in US too, left as-is).
+  These are honest multi-session frontiers; the easy mechanical carving is exhausted and
+  100% cannot be reached by relabeling without crossing the D10 integrity line.
 - (historical) The banim data subsystem carved first → data 18.67%:
   - region-same structured tables as real C: `banim_data[]`, `banim_pal_chara`
     (character_battle_animation_palette_table), `banim_terrain_data`
