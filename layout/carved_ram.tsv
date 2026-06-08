@@ -32,3 +32,5 @@
 0202BCAC	ewram	src/bm.o(ewram_data)	bm ewram_data
 0203A8EC	ewram	src/bmarena.o(ewram_data)	bmarena ewram_data
 0203A954	ewram	src/bmmind.o(ewram_data)	bmmind ewram_data
+030017D8	iwram	src/sio_core.o(.bss)	sio_core .bss
+0203AAA0	ewram	src/sio_core.o(ewram_data)	sio_core ewram_data

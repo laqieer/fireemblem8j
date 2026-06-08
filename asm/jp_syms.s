@@ -1865,9 +1865,6 @@
 	.global Texts_1
 	.set    Texts_1, 0x0203DB10
 
-	.global gSioSt
-	.set    gSioSt, 0x085D31E8
-
 	.global UpdateLinkArenaActiveBannerBgGlow
 	.type   UpdateLinkArenaActiveBannerBgGlow, %function
 	.thumb_func
@@ -6596,4 +6593,16 @@
 	.type   ExecTrapAfterDropAction, %function
 	.thumb_func
 	.set    ExecTrapAfterDropAction, 0x08037888 + 1
+
+	.global gSioStateId
+	.set    gSioStateId, 0x03004EA8
+
+	.global gUnk_72
+	.set    gUnk_72, 0x03004E18
+
+	.global gUnk_71
+	.set    gUnk_71, 0x03004E14
+
+	.global gUnk_75
+	.set    gUnk_75, 0x03004F10
 

@@ -434,7 +434,6 @@ Tsa_LinkArenaPostBattleBg	085DAA7C	data	sio_postbattle
 Font_Sio_0	02000C60	data	sio_postbattle
 Pal_Text	085C7420	data	sio_postbattle
 Texts_1	0203DB10	data	sio_postbattle
-gSioSt	085D31E8	data	sio_postbattle
 UpdateLinkArenaActiveBannerBgGlow	0804E468	thumb	sio_postbattle
 SioPostBattle_DrawRankingRowBar	08045484	thumb	sio_postbattle
 StartDrawLinkArenaRankSprites	08045434	thumb	sio_postbattle
@@ -1678,3 +1677,7 @@ TryRemoveUnitFromBallista	08037B04	thumb	bmmind
 Make6CKOIDO	0801D8E0	thumb	bmmind
 UnitRescue	08018060	thumb	bmmind
 ExecTrapAfterDropAction	08037888	thumb	bmmind
+gSioStateId	03004EA8	data	sio_core
+gUnk_72	03004E18	data	sio_core
+gUnk_71	03004E14	data	sio_core
+gUnk_75	03004F10	data	sio_core
