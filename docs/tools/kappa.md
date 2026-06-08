@@ -90,10 +90,12 @@ cases where the US name match is imperfect.
 
 ### C. One-shot decomp.me scratch creation with auto-assembled context  — MED value / LOW effort
 `src/decompme/create-scratch.ts` POSTs to `https://decomp.me/api/scratch` with
-`{target_asm, context, platform:'gba', compiler, diff_label, source_code,
-compiler_flags?, preset?}` (`diff_label` is the target function name and is
-required; `compiler_flags`/`preset` are optional) and opens the returned
-`slug`/`claim_token` URL. The nice part is `getInitialSourceCode()`:
+`{target_asm, context, platform:'gba', compiler, diff_label, source_code}`, then
+conditionally adds `preset` when configured (`diff_label` is the target function
+name). The `CreateScratchPayload` type also declares an optional
+`compiler_flags?`, but the current implementation never assigns it, so it isn't
+actually emitted. It opens the returned `slug`/`claim_token` URL. The nice part
+is `getInitialSourceCode()`:
 it auto-seeds the scratch's context with the **type definitions and called-fn
 declarations** the target needs and that aren't already in the context file
 (dedup against `context.includes(name)`), and stubs the target signature.
