@@ -19,8 +19,11 @@ REPO="$ROOT/tools/m2c"
 cd "$ROOT"
 
 # 1. Clone (or update) the upstream m2c repo into the gitignored tools/m2c.
+#    (git clone creates missing parent dirs itself, but mkdir -p makes the
+#    intent explicit and is a no-op when tools/ already exists.)
 if [ ! -d "$REPO/.git" ]; then
   echo "Cloning upstream m2c -> tools/m2c ..."
+  mkdir -p "$(dirname "$REPO")"
   git clone --depth 1 https://github.com/matt-kempster/m2c "$REPO"
 else
   echo "Updating tools/m2c ..."
@@ -29,9 +32,11 @@ fi
 
 # 2. Create the venv and install deps.
 #    m2c is mostly pure Python: pycparser is *vendored* as m2c_pycparser, so the
-#    only third-party runtime dep is graphviz (used only by --visualize). We
-#    install it so every m2c feature works. Deps are declared in
-#    tools/m2c/pyproject.toml ([project].dependencies).
+#    only third-party *Python* runtime dep is the graphviz package (used only by
+#    --visualize). The seed->C workflow needs none of this; we install graphviz
+#    so --visualize works *in Python*. Note: --visualize also needs the system
+#    Graphviz `dot` binary (e.g. apt-get install graphviz), which this script
+#    does NOT install. Deps are declared in tools/m2c/pyproject.toml.
 if [ ! -x "$VENV/bin/python" ]; then
   echo "Creating venv $VENV ..."
   if command -v uv >/dev/null 2>&1; then
@@ -46,11 +51,18 @@ else
 fi
 
 # 3. Smoke check: decompile one of m2c's own bundled agbcc/Thumb tests so a
-#    fresh setup proves the GBA target works end to end.
+#    fresh setup proves the GBA target works end to end. A failure here means a
+#    broken install, so surface it (non-zero exit) instead of swallowing it.
 SMOKE="$REPO/tests/end_to_end/store-casts/agbcc-o2.s"
 if [ -f "$SMOKE" ]; then
   echo "Smoke test (m2c --target gba on a bundled agbcc/Thumb function):"
-  "$VENV/bin/python" "$REPO/m2c.py" --target gba "$SMOKE" || true
+  if ! "$VENV/bin/python" "$REPO/m2c.py" --target gba "$SMOKE"; then
+    echo "ERROR: m2c smoke test failed -- the install is broken." >&2
+    echo "Check the venv ($VENV) and the clone ($REPO)." >&2
+    exit 1
+  fi
+else
+  echo "WARNING: smoke-test input not found ($SMOKE); skipping smoke test." >&2
 fi
 
 cat <<EOF

@@ -5,7 +5,7 @@
 **matching-oriented** C — source that recompiles to byte-identical code. That is
 exactly what we need: for FE8J functions whose machine code differs from the US
 ROM, m2c gives us a **seed C** starting point that we then refine with the AI /
-[`decomp-permuter`](reverse-engineering.md) loop until `make compare` is `OK`.
+[`decomp-permuter`](../reverse-engineering.md) loop until `make compare` is `OK`.
 
 Unlike IDA/Ghidra (which aim for *readable* C), m2c aims for *re-compilable,
 matching* C, and is designed to plug into decomp pipelines alongside
@@ -58,8 +58,15 @@ scripts/tools/m2c/setup.sh
 This clones upstream into `tools/m2c` (gitignored, like `tools/agbcc` and
 `tools/decomp-permuter`) and creates a uv venv at `$HOME/m2c-venv` (override
 with `M2C_VENV=...`). m2c is **mostly pure Python**: `pycparser` is vendored as
-`m2c_pycparser`, so the only third-party runtime dependency is `graphviz`
-(used only by `--visualize`). The setup is idempotent — re-run it to update m2c.
+`m2c_pycparser`, so the only third-party *Python* runtime dependency is the
+`graphviz` package (used only by `--visualize`). The setup is idempotent —
+re-run it to update m2c.
+
+> The seed→C workflow below needs none of this — only `--visualize` does. That
+> flag also needs the **system Graphviz** `dot` binary on `PATH` (e.g.
+> `apt-get install graphviz`); the setup script installs only the Python
+> binding, not the system package. If you don't use `--visualize` you can ignore
+> Graphviz entirely.
 
 The setup finishes by running a smoke test (m2c on a bundled agbcc/Thumb
 function) so a fresh install proves the GBA target works end to end.
