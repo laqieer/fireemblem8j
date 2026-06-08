@@ -1,8 +1,8 @@
 # Lessons from the Frogger's Adventures: Temple of the Frog decomp
 
 Research notes from a deep read of
-[JRickey/frog-adv-temple-decomp](https://github.com/JRickey/frog-adv-temple-decomp)
-(clone studied at `/tmp/frog-adv-temple-decomp`), a complete, byte-matching,
+[JRickey/frog-adv-temple-decomp](https://github.com/JRickey/frog-adv-temple-decomp),
+a complete, byte-matching,
 AI-driven **agbcc** GBA matching decomp of *Frogger's Adventures: Temple of the
 Frog* (`AFRE`, Konami). It is our closest methodological twin after
 `fireemblem8u`: same compiler (agbcc 2.x / Thumb), same oracle pattern
@@ -133,7 +133,9 @@ the fast permuter/feedback loop (`docs/tooling.md` "Phase C" +
 "`compile_and_view_assembly.py` vs the `expected/.o` pipeline";
 `tools/agent/build_expected.py`).
 **FE8J adaptation:** our MCP RE workflow leans on IDA/Ghidra; adding
-`build_expected.py` + the bundled `objdiff-cli` gives a cheap local per-symbol
+`build_expected.py` plus `objdiff-cli` (installed via a setup script into a
+gitignored `tools/objdiff-cli/`, per our tool convention — not by vendoring
+frog's bundled binary into tracked source) gives a cheap local per-symbol
 diff that doesn't need a full `make compare` round-trip — valuable for the
 permuter loop in `scripts/permuter/` and for the hand-decomp grind on the ~11
 region-different TUs.
@@ -239,7 +241,7 @@ adapting the relink-vs-peel assumptions.
 | 1 | `tools/agent/decomp_brief.py` | One-command briefing: addr range, callee peel/symbol status, **resolved** pool literals, per-base struct cross-ref, seed C, destination hint. | Med effort (swap m2c-seed for our US-source seed via `us_jp_funcmap.tsv`) / **Very high** — front-loads everything hand-decomp agents re-derive. |
 | 2 | `scripts/corpus-sync.sh` + `tools/agent/corpus_asm_search.py` (+ `corpus.py`) | Curated agbcc-corpus clone/sync; git-history pickaxe that pairs removed-asm with added-C for an idiom; current-tree grep. | Med / **High** — broader agbcc idiom coverage (fe6j/fe7j/pokeemerald/tmc) beyond US, for region-different folds. |
 | 3 | `tools/agent/refcount_pool_loads.py` | Rank ROM data addrs by code-reference count; cross-checks already-carved/named; `--pending-only` surfaces unclaimed high-yield anchors. | Low-Med / **High** — directly improves data-frontier carve ordering (94% of ROM). |
-| 4 | `tools/agent/build_expected.py` + bundled `tools/agent/bin/objdiff-cli` | Per-file `expected/.o` from baserom bytes (correct `$t`/`$d`) → per-symbol `match_percent` diff without full-ROM rebuild. | Med / **High** — fast per-symbol feedback for hand-decomp + permuter loops. |
+| 4 | `tools/agent/build_expected.py` (+ a setup script that vendors `objdiff-cli`) | Per-file `expected/.o` from baserom bytes (correct `$t`/`$d`) → per-symbol `match_percent` diff without full-ROM rebuild. | Med / **High** — fast per-symbol feedback for hand-decomp + permuter loops. Port `build_expected.py`, but per our tool convention add an install/setup script that fetches `objdiff-cli` into a gitignored `tools/objdiff-cli/` (like `scripts/permuter/setup.sh`) rather than vendoring frog's bundled binary into tracked source. |
 | 5 | `tools/agent/progress.py` (`--per-function`) | SHA1 oracle + top-N nonmatching-symbol byte-diff list = the "did this function improve / did I break a neighbour" signal. | Low-Med / **High** — augments our reporting-only `calcprogress.py` with a per-function loop signal. |
 | 6 | `tools/agent/classify_unmatchable.py` + the NAKED-gate from `tools/agent/prompts/decomp.md` | Conservative unmatchability triage + honest defer/NAKED+`NON_MATCHING` fallback that keeps the build green. | Low / **Med** — niche (we relink mostly) but valuable for the ~11 region-different TUs. |
 | 7 | `tools/agent/function_status.py` | Derived (never-drifts) per-function status index queryable by `--status`. | Low / **Med** — adapt to per-TU status from `layout/` for a never-stale worklist. |
