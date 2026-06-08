@@ -9,14 +9,14 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## Verified state (update each working stretch)
 
 - **Functions decompiled: 1234 / 8,528 = 14.5%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 295.** `make compare` → OK. Build is always byte-perfect
+- **Carved objects: 296.** `make compare` → OK. Build is always byte-perfect
   (`port_run` verifies every carve and reverts non-matches).
 - **NEW PATH — `scripts/carve_mapped.py` (find_runs blind spot):** find_runs only
   proposes a run it can UNIQUELY locate by masked search, so it SKIPS small/
   pointer-heavy functions even though `match_us_jp.py` already located them in JP
   (funcmap). carve_mapped groups a TU's funcmap-mapped funcs into JP-consecutive
   runs and feeds them to `port_run.port(..., runs=...)` directly (verify-or-revert
-  still guards). Carved +9 (worldmap_text, chapterdata, bmarch, bmio, bmmap, bmsave-multiarena, classchg-event,
+  still guards). Carved +10 (spinning_arrow, worldmap_text, chapterdata, bmarch, bmio, bmmap, bmsave-multiarena, classchg-event,
   cp_decide, unitlistscreen). **Re-run it each session; ~21 mapped funcs still
   uncarved (scene, spinning_arrow) fail because the
   ISOLATED subset compile doesn't reproduce the in-context JP bytes —  next lead.**
@@ -26,6 +26,15 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
     `src/data/*.h` includes (accessors use externs from normal headers). `scene` — its include chain (agb_sram.h then bmsave.h) makes
 /`spinning_arrow` are per-group/romdata cases. Each is 1-few carves of
     genuine long-tail per-TU work — not a single sweep.
+  - **spinning_arrow RESOLVED via two fixes (2026-06-08):** (1) port_run's
+    carved_rom .text end now = base+len(otext) (ACTUAL compiled .text size, not the
+    run's nominal end) — a non-4-aligned single func gets a trailing align pad, so the
+    .o .text is 2 bytes longer than the run; the old code left it overflowing the
+    incbin gap -> 0xc04 catastrophic shift. (2) Makefile now does `.text` then
+    `.align 2, 0` so the pad is zero-filled (was nop 0x46c0 — the appended `.ALIGN`
+    aligned the trailing .debug_info section, not .text, under -g). JP pads inter-func
+    with 0x0000, so this matches; full clean rebuild verified byte-perfect. Only
+    `scene` remains in carve_mapped.
   (Earlier "no path remains / region-different exhausted" was WRONG — this class
   was the gap; keep mining funcmap-mapped functions before declaring exhaustion.)
 - **.bss-overlap class RESOLVED** via `--no-check-sections` (Makefile): the overlaps
