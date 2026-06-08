@@ -191,11 +191,6 @@
 	.thumb_func
 	.set    GetGameClock, 0x08000CD8 + 1
 
-	.global WriteAndVerifySramFast
-	.type   WriteAndVerifySramFast, %function
-	.thumb_func
-	.set    WriteAndVerifySramFast, 0x080D6548 + 1
-
 	.global StoreRNStateToActionStruct
 	.type   StoreRNStateToActionStruct, %function
 	.thumb_func
@@ -6556,4 +6551,7 @@
 
 	.global gSioList_SioMain2_2
 	.set    gSioList_SioMain2_2, 0x085D32F8
+
+	.global VerifySramFast
+	.set    VerifySramFast, 0x03006794
 

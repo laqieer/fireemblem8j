@@ -46,7 +46,6 @@ IsSramWorking	080A76F4	thumb	bmsave
 GetNextSuspendSaveId	080AADE8	thumb	bmsave
 GetSaveWriteAddr	080A7AA8	thumb	bmsave
 GetGameClock	08000CD8	thumb	bmsave
-WriteAndVerifySramFast	080D6548	thumb	bmsave
 StoreRNStateToActionStruct	08031F38	thumb	bmsave
 WriteSramFast	080D6420	thumb	bmsave
 WritePermanentFlags	080A7B94	thumb	bmsave
@@ -1670,3 +1669,4 @@ gTargetKeyInSeqIndex	03001804	data	sio_main2
 gKeyInputSequenceBuffer	0203DD28	data	sio_main2
 gCurrentKeyInSeqIndex	03001800	data	sio_main2
 gSioList_SioMain2_2	085D32F8	data	sio_main2
+VerifySramFast	03006794	data	agb_sram

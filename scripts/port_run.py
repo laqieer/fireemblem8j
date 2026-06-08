@@ -82,7 +82,7 @@ def port(name, exclude=(), runs=None):
     # extracting a few funcs still pulls in the file's overlay tables (e.g.
     # prep_unitselect's 0xB0 gPrepUnitTexts), and the run rarely references them.
     def is_trim_sec(s):
-        return s in (".data", ".rodata", "ewram_data") or s.startswith("ewram_overlay")
+        return s in (".data", ".rodata", "ewram_data", ".bss", "bss", "sbss") or s.startswith("ewram_overlay")
 
     def data_syms_and_refs():
         ds = {}
@@ -206,7 +206,17 @@ def port(name, exclude=(), runs=None):
         if sym.startswith("."):
             continue
         ss = sym_sec.get(sym)
-        if ss and ss[0] in ("ewram_data", ".bss", "bss", "sbss", "*COM*"):
+        if typ == "R_ARM_ABS32" and ss and ss[0] == "*COM*":
+            # COMMON globals are independent (no shared section base — ss[1] is the
+            # alignment, not an offset), so block placement is wrong AND collides:
+            # different TUs' IWRAM globals are INTERLEAVED in 0x0300xxxx, so a whole
+            # .bss/COMMON block over-claims and overlaps another carved object's
+            # block. Instead place each referenced COMMON global at its exact JP
+            # address as an absolute symbol; the linker's weak common yields to the
+            # absolute definition, so no NOLOAD block is allocated and nothing overlaps.
+            addend = int.from_bytes(otext[off:off+4], "little")
+            new_syms[sym] = enc(int.from_bytes(jp[base+off:base+off+4], "little") - addend)
+        elif ss and ss[0] in ("ewram_data", ".bss", "bss", "sbss"):
             ram.setdefault(ss[0], int.from_bytes(jp[base+off:base+off+4], "little") - ss[1])
         elif typ == "R_ARM_ABS32" and ss and ss[0] in (".data", ".rodata"):
             # a ROM data section the run references via a named symbol
