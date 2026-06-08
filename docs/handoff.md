@@ -19,7 +19,13 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
   still guards). Carved +7 (bmarch, bmio, bmmap, bmsave-multiarena, classchg-event,
   cp_decide, unitlistscreen). **Re-run it each session; ~21 mapped funcs still
   uncarved (scene 15, chapterdata 4, spinning_arrow, worldmap_text) fail because the
-  ISOLATED subset compile doesn't reproduce the in-context JP bytes — next lead.**
+  ISOLATED subset compile doesn't reproduce the in-context JP bytes —  next lead.**
+  - carve_mapped remainder blockers (probed): `chapterdata` 4 funcs blocked by a
+    CP932/agbcc parse quirk — its include chain (agb_sram.h then bmsave.h) makes
+    bmsave.h:543 fail with a garbled `insrc` token, though bmsave-multiarena carved
+    with bmsave.h via a different chain (try reordering/dropping the unused include).
+    `scene`/`spinning_arrow` are per-group/romdata cases. Each is 1-few carves of
+    genuine long-tail per-TU work — not a single sweep.
   (Earlier "no path remains / region-different exhausted" was WRONG — this class
   was the gap; keep mining funcmap-mapped functions before declaring exhaustion.)
 - **.bss-overlap class RESOLVED** via `--no-check-sections` (Makefile): the overlaps
