@@ -41,7 +41,8 @@ global:
   # the project root, so the same -I/-iquote flags as the Makefile resolve it), and
   # cat the fully-expanded header to stdout. The result is pure C with no remaining
   # #include/#define, so mizuchi's flagless `cpp -P` and our compilerScript's cpp both
-  # pass cleanly. (This mirrors the m2c/m2ctx convention the get-context plugin docs.)
+  # pass cleanly. (This mirrors the m2c/m2ctx convention documented in mizuchi's
+  # get-context plugin.)
   #
   # Uses arm-none-eabi-cpp if present (same preference as the Makefile), else host cpp.
   # {{functionName}} and {{targetObjectPath}} are available but unused here.

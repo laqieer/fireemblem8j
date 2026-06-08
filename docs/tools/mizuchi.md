@@ -69,7 +69,8 @@ resolve to the wrong place. The config still *parses* either way — see below.)
 
 Running from the repo root generates transient state there: the `./mizuchi.yaml`
 copy/symlink, the codebase index `mizuchi-db.json`, the `prompts/` sets, and the
-`outputDir` writes (`run-results/`, `run-report/`, `claude-cache/`). These are all
+`outputDir` writes — timestamped files `run-report-<ts>.html` / `run-results-<ts>.json`
+(and `partial-*` variants) plus the `claude-cache.json` cache. These are all
 **already gitignored** (see `.gitignore`), so following the steps above will not
 dirty the working tree or risk committing tool state. If you point `outputDir` /
 `promptsDir` elsewhere, ignore those paths too.
