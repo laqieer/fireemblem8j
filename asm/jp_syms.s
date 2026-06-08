@@ -6658,3 +6658,8 @@
 	.thumb_func
 	.set    ReadMultiArenaSaveTeamName, 0x080AB10C + 1
 
+	.global PromoMain_SetupTraineeEvent
+	.type   PromoMain_SetupTraineeEvent, %function
+	.thumb_func
+	.set    PromoMain_SetupTraineeEvent, 0x080D2348 + 1
+
