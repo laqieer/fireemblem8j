@@ -128,8 +128,9 @@ build→diff→edit→repeat loop and tells the model to stop only at byte-ident
 
 **How we'd replicate:** objdiff-cli is already set up in the repo
 (`scripts/tools/objdiff/setup.sh`, `objdiff.json`, `docs/tools/objdiff.md`),
-so this is purely a wiring idea: wrap `objdiff-cli diff <build.o> <expected.o>
---symbol <fn>` as an MCP tool / slash-command the Claude loop can call to get a
+so this is purely a wiring idea: wrap `objdiff-cli diff -1 <target.o> -2 <base.o>
+<FunctionName>` (the syntax in `docs/tools/objdiff.md`; a bare function name
+selects one symbol) as an MCP tool / slash-command the Claude loop can call to get a
 *function-scoped* textual diff (vs. our current whole-ROM `make compare`
 pass/fail). That gives the model a gradient to follow instead of a binary
 oracle. kappa's `objdiff-wasm` route (loading `objdiff.core.wasm` in-process,
