@@ -506,3 +506,35 @@ output and a duplicate fragment row is deduped.
 
 **Status:** Phase 1 structural core done. Next: migrate the carve scripts to write per-task fragments
 (Phase 1.3); worktree build-ability + serial integrator (Phase 2); parallel pilot (Phase 3).
+
+## D14 — Parallel carving Phases 2–4: claim registry, worktree setup, serial integrator + pilot (2026-06-08)
+
+**Context:** With Phase 1 (D13) making carves conflict-free at the file level, Phases 2–4 build the
+machinery to actually run many carves in parallel and integrate them safely.
+
+**Decision (all under `scripts/parallel/`, guide in `docs/parallel-carving.md`):**
+- **`layout_frag.py`** — write/remove a task's manifest rows as per-task fragments (collision-free
+  filenames via a hash suffix).
+- **`claim.py`** — atomic task-claim registry: every mutation (claim/beat/release/reap) runs under a
+  shared `fcntl.flock`, and beat/release require the owning agent — so two agents never double-claim
+  and a stale agent can't disturb a stolen task. TTL + reap recover abandoned claims. `layout/claims/`
+  is gitignored.
+- **`worktree_setup.sh`** — make a fresh worktree buildable: symlink the gitignored read-only inputs
+  (`tools/agbcc`, `baserom.gba`), **copy** (never hardlink/symlink) the warm `.o` cache (objects and
+  the ELF are mutable outputs — hardlinking/symlinking them would corrupt the main repo).
+- **`integrate.py`** — the SERIAL integrator: the single point the whole-ROM oracle runs. Merge each
+  ready branch → `make compare` → accept (keep) or reject (`reset --hard`, save the diff). Periodic
+  `make clean && make compare` durability gate (Phase 4). Serial is the *safety* property; cheap
+  because the verify is incremental (D7). Claim release is the agent's, not the integrator's.
+
+**Verification (Phase 3 pilot, real parallel agents):** three agents concurrently carved three
+disjoint ROM gap regions (0xF2F580, 0xF63820, 0xF97AC0) into named incbin objects, each in its own
+isolated worktree writing only its own fragment + `asm/` file, self-verifying `make compare` → OK,
+and pushing a branch. The serial integrator merged all three onto an integration branch with **0
+conflicts, 3/3 accepted**, and the Phase 4 durability gate (`make clean && make compare`) → OK. The
+parallel→integrate→green flow is proven end-to-end. (Unit tests earlier confirmed accept+reject,
+claim collision-freedom/ownership, and that a worktree build never mutates the main repo's objects/ELF.)
+
+**Status:** Phases 0–4 complete. The remaining carve-script migration to fragments (Phase 1.3) is an
+incremental follow-up — gen_layout reads monolith + fragments, so existing monolith carvers and new
+fragment carves coexist; parallel work uses `layout_frag.py` today.
