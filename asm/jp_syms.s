@@ -7010,3 +7010,38 @@
 	.global Tsa_efxFireBG_11
 	.set    Tsa_efxFireBG_11, 0x08624280
 
+	.global ProcScr_efxThunderBG
+	.set    ProcScr_efxThunderBG, 0x085FF6D8
+
+	.global Img_ThunderSpellBg
+	.set    Img_ThunderSpellBg, 0x0861F998
+
+	.global ProcScr_efxThunderBGCOL
+	.set    ProcScr_efxThunderBGCOL, 0x085FF700
+
+	.global Pal_ThunderSpellBg
+	.set    Pal_ThunderSpellBg, 0x08620254
+
+	.global ProcScr_efxThunderOBJ
+	.set    ProcScr_efxThunderOBJ, 0x085FF720
+
+	.global AnimScr_EfxThunderOBJ_L
+	.set    AnimScr_EfxThunderOBJ_L, 0x08622128
+
+	.global AnimScr_EfxThunderOBJ_R
+	.set    AnimScr_EfxThunderOBJ_R, 0x086215FC
+
+	.global Pal_BoltingSprites
+	.set    Pal_BoltingSprites, 0x08620B18
+
+	.global Img_BoltingSprites
+	.set    Img_BoltingSprites, 0x08620680
+
+	.global Tsa_EfxThuderBg1
+	.type   Tsa_EfxThuderBg1, %function
+	.thumb_func
+	.set    Tsa_EfxThuderBg1, 0x00000000 + 1
+
+	.global Tsa_EfxThuderBg2
+	.set    Tsa_EfxThuderBg2, 0x080E1D0C
+

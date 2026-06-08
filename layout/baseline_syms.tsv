@@ -1801,3 +1801,14 @@ Tsa_efxFireBG_8	08623F70	data	banim-efxmagic-fire
 Tsa_efxFireBG_9	086240A8	data	banim-efxmagic-fire
 Tsa_efxFireBG_10	086241AC	data	banim-efxmagic-fire
 Tsa_efxFireBG_11	08624280	data	banim-efxmagic-fire
+ProcScr_efxThunderBG	085FF6D8	data	banim-efxmagic-thunder
+Img_ThunderSpellBg	0861F998	data	banim-efxmagic-thunder
+ProcScr_efxThunderBGCOL	085FF700	data	banim-efxmagic-thunder
+Pal_ThunderSpellBg	08620254	data	banim-efxmagic-thunder
+ProcScr_efxThunderOBJ	085FF720	data	banim-efxmagic-thunder
+AnimScr_EfxThunderOBJ_L	08622128	data	banim-efxmagic-thunder
+AnimScr_EfxThunderOBJ_R	086215FC	data	banim-efxmagic-thunder
+Pal_BoltingSprites	08620B18	data	banim-efxmagic-thunder
+Img_BoltingSprites	08620680	data	banim-efxmagic-thunder
+Tsa_EfxThuderBg1	00000000	thumb	banim-efxmagic-thunder
+Tsa_EfxThuderBg2	080E1D0C	data	banim-efxmagic-thunder

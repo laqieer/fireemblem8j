@@ -11,3 +11,9 @@ banim-efxmagic-aircalibur.o	.data	4	FFFFFFEE
 banim-efxmagic-fire.o	.rodata	ALIGN	2
 banim-efxmagic-fire.o	.text	1DC	00000000
 banim-efxmagic-fire.o	.text	50C	000000BE
+banim-efxmagic-thunder.o	.rodata	ALIGN	2
+banim-efxmagic-thunder.o	.text	13C	0000000C
+banim-efxmagic-thunder.o	.text	140	00000030
+banim-efxmagic-thunder.o	.text	144	00000038
+banim-efxmagic-thunder.o	.text	218	00000026
+banim-efxmagic-thunder.o	.data	4	FFFFFFF2

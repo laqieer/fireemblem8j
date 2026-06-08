@@ -344,13 +344,15 @@ def port(name, exclude=(), runs=None):
     # .data references resolve to incbin+addend — carving the TU's CODE while leaving
     # the region-different data in the baseline. Also force each section's alignment
     # down to its JP base so the linker places it exactly there (2-aligned bases etc.).
-    sec_relocs, cur = {}, None
+    sec_relocs, sec_reloc_tgts, cur = {}, {}, None
     for l in sh(f"arm-none-eabi-objdump -r {obj}").stdout.splitlines():
         if "RELOCATION RECORDS FOR [" in l:
             cur = l.split("[")[1].split("]")[0]; continue
         p = l.split()
         if cur and len(p) >= 3 and all(c in "0123456789abcdef" for c in p[0]):
             sec_relocs.setdefault(cur, set()).add(int(p[0], 16))
+            if p[1] == "R_ARM_ABS32":
+                sec_reloc_tgts.setdefault(cur, []).append((int(p[0], 16), p[2]))
     kept, noload_rom, aligns = [], [], []
     for off0, size, dsec in data_carves:
         need = (0x08000000 + off0) & -(0x08000000 + off0)
@@ -361,7 +363,33 @@ def port(name, exclude=(), runs=None):
         rel = sec_relocs.get(dsec, set())
         match = all(cb[i] == jp[off0+i] or any(i-k in rel for k in range(4))
                     for i in range(min(size, len(cb))))
+        # A KEPT (loaded) section is byte-perfect only if every symbol it references
+        # resolves to a SINGLE address satisfying all its uses — i.e. (jp_word - addend)
+        # is identical across all relocs to that symbol. A symbol referenced twice that
+        # would need two different addresses means the section's pointer layout is
+        # region-different (e.g. thunder's ProcScr_efxThunder .data references
+        # Tsa_EfxThuderBg1/2 at JP offsets that don't line up with the US build), so no
+        # single link can match it. Place it NOLOAD (incbin gives the JP bytes) and let
+        # the bake-in below rewrite the .text/.data refs into it. The byte heuristic
+        # alone misses this because each pointer sits at a reloc site (excused).
+        if match:
+            need_addr = {}
+            for off, sym in sec_reloc_tgts.get(dsec, []):
+                if off + 4 > len(cb):
+                    continue
+                addend = int.from_bytes(cb[off:off+4], "little")
+                jpw = int.from_bytes(jp[off0+off:off0+off+4], "little")
+                want_addr = (jpw - addend) & 0xFFFFFFFF
+                if need_addr.setdefault(sym, want_addr) != want_addr:
+                    match = False
+                    break
         (kept if match else noload_rom).append((off0, size, dsec))
+        if os.environ.get("PORTRUN_DEBUG"):
+            mism = [i for i in range(min(size, len(cb))) if cb[i] != jp[off0+i]
+                    and not any(i-k in rel for k in range(4))]
+            print(f"  [carve-decide {dsec}@{0x08000000+off0:#x} sz={size:#x}] "
+                  f"{'KEPT' if match else 'NOLOAD'} rel={sorted(hex(x) for x in rel)} "
+                  f"unexcused-mismatch={[hex(x) for x in mism[:8]]}")
     # Bake JP literals into refs to NOLOAD (region-different) ROM-data sections. Such a
     # section can be region-different INTERNALLY — its symbols sit at different JP offsets
     # than US — so `base + US_addend` resolves wrong for some refs. For each reloc
