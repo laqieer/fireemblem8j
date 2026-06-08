@@ -24,6 +24,24 @@ src/data/*.s
 /tools/decomp-permuter
 /nonmatchings/
 
+# mizuchi: matching-decomp pipeline orchestrator (macabeus/mizuchi), vendored
+# locally via scripts/tools/mizuchi/setup.sh. The setup script + FE8J config
+# (scripts/tools/mizuchi/) and docs/tools/mizuchi.md are tracked.
+/tools/mizuchi
+# Root-level state mizuchi generates when run from the repo root (the config is
+# copied/symlinked here, and outputDir/promptsDir resolve to the project root):
+# the config copy, the codebase index, the prompt sets, and the run outputs.
+# outputDir writes timestamped FILES (run-report-<ts>.html / run-results-<ts>.json
+# and their partial-* variants) plus the claude-cache.json cache file — match the
+# actual upstream filenames, not directories. All transient.
+/mizuchi.yaml
+/mizuchi-db.json
+/prompts/
+/run-report-*.html
+/run-results-*.json
+/partial-run-report-*.html
+/partial-run-results-*.json
+/claude-cache.json
 # asm-differ: upstream clone is local (set up via scripts/tools/asm-differ/setup.sh).
 # diff_settings.py (repo root) + docs/tools/asm-differ.md are tracked; the venv
 # lives outside the repo (default $HOME/asm-differ-venv, like the permuter's).
