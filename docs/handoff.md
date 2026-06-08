@@ -88,6 +88,16 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 3. **Phase 3 — region-different CODE** (`no verified runs`): hand-decompile the
    functions in `ida`/`ghidra` (decompile by JP address), write `src/` C matching
    the JP behaviour, byte-match with the permuter, then carve + `make compare`.
+   - **CONFIRMED region-different (2026-06-08):** `match_us_jp.py` runs BOTH exact AND
+     masked (pointer-word-wildcarded) matching → 7739/8528 mapped. The ~789 unmapped
+     functions (the 15 no-run TUs) failed BOTH tiers — their non-pointer instruction
+     bytes genuinely differ JP-vs-US. No generalizing fix remains; each needs real RE.
+   - **REQUIRES an interactive, MCP-connected session.** The `ida`/`ghidra` MCP
+     servers are configured (~/.claude.json) but are NOT reachable in a headless run
+     (ToolSearch returns no RE tools) — so Phase-3 carves cannot be done headless/in
+     the cron; they need a normal interactive session with the MCP servers live.
+     `fireemblem8.elf` (JP, AArch32) + `../fireemblem8u/fireemblem8.elf` are on disk
+     for `make ida-db` / `make ghidra-db`.
 
 ## Rules
 
