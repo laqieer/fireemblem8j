@@ -23,6 +23,7 @@ seg_start = 0          # start of the current top-level segment (after last ; or
 func_start = None      # where the current top-level function's text begins
 brace_open = None      # position of the function body's opening brace
 spans = []             # (name, start, end) for each top-level function
+types = []             # (start, end) for each top-level struct/union/enum/typedef def
 header_end = None
 
 def skip_string(i, q):
@@ -75,6 +76,17 @@ while i < n:
                 spans.append((name, func_start, i + 1, sig))
                 if header_end is None:
                     header_end = func_start
+            elif re.match(r"^\s*(typedef\s+)?(struct|union|enum)\b[\w\s]*$", sig) and "=" not in sig:
+                # A top-level type DEFINITION (struct/union/enum/typedef), e.g.
+                # worldmap_text's `struct GMapTextProc { ... };` defined BETWEEN
+                # functions. extract_run's header only keeps defs BEFORE the first
+                # function, so an interspersed type def is dropped -> functions using
+                # it hit "incomplete type" (-Werror). Capture it through its ';' and
+                # re-emit it (after the header) so those functions compile. (=excluded
+                # so data initialisers `struct X gY = {...};` aren't mistaken for defs.)
+                semi = src.find(";", i)
+                if semi != -1:
+                    types.append((func_start, semi + 1))
             seg_start = i + 1
     elif c == ";" and depth == 0:
         seg_start = i + 1
@@ -90,6 +102,12 @@ def _destatic(m):
     return m.group(0) if m.group(1) in wantset else m.group(0).replace("static", "", 1)
 header = re.sub(r"static\s+[\w\s\*]+?\b(\w+)\s*\([^;{]*\)\s*;", _destatic, header)
 out = [header.rstrip("\n")]
+# Re-emit top-level type definitions that fall AFTER the header (those before it are
+# already in `header`), so functions in the subset that use them have complete types.
+type_defs = "".join(src[s:e] for s, e in types
+                    if header_end is not None and s >= header_end)
+if type_defs.strip():
+    out.append("\n/* file-scope type definitions used by this run */\n" + type_defs.rstrip("\n"))
 byname = {nm: (s, e) for nm, s, e, sg in spans}
 
 # Forward-declare same-file functions the run CALLS but that are defined outside

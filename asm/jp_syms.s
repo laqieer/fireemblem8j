@@ -6658,3 +6658,8 @@
 	.global gChapterDataAssetTable
 	.set    gChapterDataAssetTable, 0x08907BC8
 
+	.global ClearWmTextVram
+	.type   ClearWmTextVram, %function
+	.thumb_func
+	.set    ClearWmTextVram, 0x080C8348 + 1
+
