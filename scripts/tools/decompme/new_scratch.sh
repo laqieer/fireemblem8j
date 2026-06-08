@@ -18,7 +18,7 @@
 # Usage:
 #   DECOMPME_PUBLISH=1 scripts/tools/decompme/new_scratch.sh \
 #       --asm path/to/func.s \
-#       --context path/to/context.h \
+#       [--context path/to/context.h] \
 #       [--label FuncName] \
 #       [--name "Scratch name"] \
 #       [--source path/to/initial.c] \

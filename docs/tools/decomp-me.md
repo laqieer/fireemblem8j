@@ -51,7 +51,7 @@ with `platform=GBA`:
 | `agbcc`     | the standard agbcc (GCC 2.95-based) — **this is the one this repo uses** |
 | `old_agbcc` | older agbcc build (`base_compiler=AGBCC`) |
 | `agbcc_arm` | agbcc emitting ARM (non-Thumb) code (`base_compiler=AGBCC`) |
-| `agbccpp`   | agbcp, the C++ front-end (`language=Language.CXX`) |
+| `agbccpp`   | the agbcc C++ front-end (`language=Language.CXX`) |
 
 The `agbcc` preset's compile command:
 
