@@ -9,16 +9,16 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## Verified state (update each working stretch)
 
 - **Functions decompiled: 1234 / 8,528 = 14.5%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 294.** `make compare` → OK. Build is always byte-perfect
+- **Carved objects: 295.** `make compare` → OK. Build is always byte-perfect
   (`port_run` verifies every carve and reverts non-matches).
 - **NEW PATH — `scripts/carve_mapped.py` (find_runs blind spot):** find_runs only
   proposes a run it can UNIQUELY locate by masked search, so it SKIPS small/
   pointer-heavy functions even though `match_us_jp.py` already located them in JP
   (funcmap). carve_mapped groups a TU's funcmap-mapped funcs into JP-consecutive
   runs and feeds them to `port_run.port(..., runs=...)` directly (verify-or-revert
-  still guards). Carved +8 (chapterdata, bmarch, bmio, bmmap, bmsave-multiarena, classchg-event,
+  still guards). Carved +9 (worldmap_text, chapterdata, bmarch, bmio, bmmap, bmsave-multiarena, classchg-event,
   cp_decide, unitlistscreen). **Re-run it each session; ~21 mapped funcs still
-  uncarved (scene 15, chapterdata 4, spinning_arrow, worldmap_text) fail because the
+  uncarved (scene, spinning_arrow) fail because the
   ISOLATED subset compile doesn't reproduce the in-context JP bytes —  next lead.**
   - carve_mapped remainder: `chapterdata` RESOLVED — root cause was a MISSING
     `src/data/chapter_settings.h` (auto-gen region-specific gChapterDataTable, not
