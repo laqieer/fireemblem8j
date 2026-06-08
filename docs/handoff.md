@@ -8,9 +8,20 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
-- **Functions decompiled: 1218 / 8,528 = 14.3%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 286.** `make compare` → OK. Build is always byte-perfect
+- **Functions decompiled: 1234 / 8,528 = 14.5%** (`python3 scripts/calcprogress.py`).
+- **Carved objects: 293.** `make compare` → OK. Build is always byte-perfect
   (`port_run` verifies every carve and reverts non-matches).
+- **NEW PATH — `scripts/carve_mapped.py` (find_runs blind spot):** find_runs only
+  proposes a run it can UNIQUELY locate by masked search, so it SKIPS small/
+  pointer-heavy functions even though `match_us_jp.py` already located them in JP
+  (funcmap). carve_mapped groups a TU's funcmap-mapped funcs into JP-consecutive
+  runs and feeds them to `port_run.port(..., runs=...)` directly (verify-or-revert
+  still guards). Carved +7 (bmarch, bmio, bmmap, bmsave-multiarena, classchg-event,
+  cp_decide, unitlistscreen). **Re-run it each session; ~21 mapped funcs still
+  uncarved (scene 15, chapterdata 4, spinning_arrow, worldmap_text) fail because the
+  ISOLATED subset compile doesn't reproduce the in-context JP bytes — next lead.**
+  (Earlier "no path remains / region-different exhausted" was WRONG — this class
+  was the gap; keep mining funcmap-mapped functions before declaring exhaustion.)
 - **.bss-overlap class RESOLVED** via `--no-check-sections` (Makefile): the overlaps
   were benign NOLOAD shared-RAM collisions; ld's default check made them fatal on any
   new carve. The flag keeps the green build byte-perfect (verified) and `make compare`
