@@ -1694,3 +1694,5 @@ gUiBarPaletteD	085E3190	data	uiutils
 GetItemWeaponEffect	080174CC	thumb	bmbattle
 GetBattleUnitHitCount	0802AFF0	thumb	bmbattle
 BattleGenerateHit	0802B784	thumb	bmbattle
+AllocWeatherParticles	08030144	thumb	bmio
+WfxInit	08030A84	thumb	bmio

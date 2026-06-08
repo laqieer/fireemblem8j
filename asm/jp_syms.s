@@ -6641,3 +6641,13 @@
 	.thumb_func
 	.set    BattleGenerateHit, 0x0802B784 + 1
 
+	.global AllocWeatherParticles
+	.type   AllocWeatherParticles, %function
+	.thumb_func
+	.set    AllocWeatherParticles, 0x08030144 + 1
+
+	.global WfxInit
+	.type   WfxInit, %function
+	.thumb_func
+	.set    WfxInit, 0x08030A84 + 1
+
