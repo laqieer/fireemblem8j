@@ -1564,7 +1564,6 @@ Register2dChrMove	080130AC	thumb	ap
 ProcScr_efxDeadDragonAlpha	085E398C	data	banim-efxdeath
 gEkrbattle_9	0201FADC	data	banim-ekrdispup
 gBanimFloorfx	0203E118	data	banim-ekrdispup
-battle_terrain_table	08EE0008	data	banim-ekrdispup
 gUnk_Banim_Ekrbattle_0	020145C8	data	banim-ekrdispup
 gEkrbattle_1	0200003C	data	banim-ekrdispup
 InitBanimTerrain	0805B80C	thumb	banim-ekrdispup

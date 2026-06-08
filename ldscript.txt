@@ -756,11 +756,14 @@ SECTIONS
         asm/baserom.o(.gap_347);
         asm/data_banim.o(.data.data_banim);
         asm/baserom.o(.gap_348);
-        asm/data_data_banim_terrain.o(.data_data_banim_terrain);
+        src/banim_terrain_data.o(.data.banim_terrain_head);
+        src/banim_terrain_data.o(.data.banim_terrain_ptr_table);
         asm/baserom.o(.gap_349);
+        asm/data_data_banim_terrain.o(.data_data_banim_terrain);
+        asm/baserom.o(.gap_350);
         src/banim_pal_chara.o(.data.banim_pal_head);
         src/banim_pal_chara.o(.data.banim_pal_ptr_table);
-        asm/baserom.o(.gap_350);
+        asm/baserom.o(.gap_351);
     } > rom
 
     .bss_0 0x03000000 (NOLOAD) : { src/rng.o(.bss) src/rng.o(COMMON) } > iwram  /* rng: gRNSeeds, gLCGRNValue */

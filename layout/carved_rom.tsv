@@ -385,6 +385,8 @@ BABAF4	BABAF8	src/bmguide.o(.data)	bmguide .data
 C00000	C00008	src/banim_data.o(.data.banim_array_len)	banim_number
 C00008	C01928	src/banim_data.o(.data.banim_array)	banim_data
 C02000	E47180	asm/data_banim.o(.data.data_banim)	data_banim battle-anim assets (2324 KB, region-same)
+EE0000	EE0008	src/banim_terrain_data.o(.data.banim_terrain_head)	banim_terrain head
+EE0008	EE0AD0	src/banim_terrain_data.o(.data.banim_terrain_ptr_table)	battle_terrain_table
 EE0C00	EF2F18	asm/data_data_banim_terrain.o(.data_data_banim_terrain)	data_data_banim_terrain region-same (72KB)
 EF8000	EF8008	src/banim_pal_chara.o(.data.banim_pal_head)	banim_pal_chara head
 EF8008	EF86C8	src/banim_pal_chara.o(.data.banim_pal_ptr_table)	character_battle_animation_palette_table

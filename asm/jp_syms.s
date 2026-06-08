@@ -6151,9 +6151,6 @@
 	.global gBanimFloorfx
 	.set    gBanimFloorfx, 0x0203E118
 
-	.global battle_terrain_table
-	.set    battle_terrain_table, 0x08EE0008
-
 	.global gUnk_Banim_Ekrbattle_0
 	.set    gUnk_Banim_Ekrbattle_0, 0x020145C8
 
