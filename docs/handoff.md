@@ -98,6 +98,13 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
      the cron; they need a normal interactive session with the MCP servers live.
      `fireemblem8.elf` (JP, AArch32) + `../fireemblem8u/fireemblem8.elf` are on disk
      for `make ida-db` / `make ghidra-db`.
+   - **Nature of the differences (probed 2026-06-08, MCP-free):** the no-run funcs
+     differ by (a) different INSTRUCTIONS (0 masked hits in JP for the smallest one)
+     and (b) hardcoded region-different IMMEDIATE constants baked into code, e.g.
+     bmarch `GetBallistaItem` is `movs r0,#19` (a JP-different item ID — NOT a reloc,
+     NOT an addr_map address). A lenient pointer-only mask gives FALSE 1-hit matches;
+     find_runs' reloc-accurate mask correctly gives 0 bases. So no automated
+     mask/remap path exists — each needs the JP value read from the disassembly (RE).
 
 ## Rules
 
