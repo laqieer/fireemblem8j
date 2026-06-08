@@ -17,7 +17,7 @@ e2e in the main tree.
 |---|---|---|---|---|
 | simonlindholm/**asm-differ** | interactive `diff.py` asm differ | ARM32 ✓ | **set up** | ✓ raw-binary diff renders TARGET (baserom) vs CURRENT (build) — clean match |
 | encounter/**objdiff** | per-symbol diff + match% report (Rust CLI) | ARM/GBA ✓ | **set up** | ✓ `objdiff-cli 3.7.2` runs; per-symbol `report` needs target objects carved from baserom (documented, partial) |
-| matt-kempster/**m2c** | asm→C decompiler | `-t gba` `ArmGbaArch` ✓ | **set up** | ✓ produced seed C for the real Thumb function `AdvanceGetLCGRNValue` |
+| matt-kempster/**m2c** | asm→C decompiler | `-t gba` `ArmGbaArch` ✓ | **set up** | ✓ seed-C draft for the real Thumb function `AdvanceGetLCGRNValue` (its PC-relative literal surfaces as `M2C_ERROR` until resolved — expected for an isolated slice) |
 | ethteck/**coddog** | cross-binary function matcher (Rust) | GBA/Thumb ✓ (after patch) | **set up** | ✓ `compare2` found FE8J↔FE8U matches (AP_ExecFrame, AdvanceGetLCGRNValue, AnimSpr_* … 100%). **Fixed a real GBA-patch bug** (below). |
 | macabeus/**mizuchi** | TS pipeline Claude→agbcc→objdiff-wasm + Atlas UI | GBA ✓ | **pilot / defer** | builds; full `run` needs `ANTHROPIC_API_KEY`; overlaps our IDA/Ghidra/permuter loop |
 | WhenGryphonsFly/**decomp-permuter-agbcc** | decomp-permuter fork w/ agbcc defaults | native | **keep upstream** | fork is ~10 mo behind upstream; its one real fix (pipefail) is the single cherry-pick worth taking into our active `compiler_command` |
@@ -36,9 +36,12 @@ e2e in the main tree.
   `make compare` lacks. Prebuilt CLI (no cargo). `objdiff.json` covers representative carved
   `src/*.c` units; full `report` needs target objects produced from the baserom range. This
   is the per-symbol fast-iteration signal the parallelization plan relies on.
-- **m2c** ([doc](tools/m2c.md)) — seed C for region-different functions. e2e:
-  `objdump … | m2c.sh` produced compilable seed C for `AdvanceGetLCGRNValue`. Feed the seed
-  to the AI/permuter loop; `make compare` remains the oracle.
+- **m2c** ([doc](tools/m2c.md)) — seed C for region-different functions. e2e: a cleaned
+  `arm-none-eabi-objdump --no-show-raw-insn` slice of `AdvanceGetLCGRNValue` (objdump banner +
+  address column stripped) → `m2c.sh` (`-t gba`) → a seed-C **draft**. It is not finished code:
+  the PC-relative pool load surfaces as `M2C_ERROR(/* Read from unset register $pc */)` until
+  the literal is resolved (a prepared `.s` slice that defines the literal as a `.word` yields a
+  cleaner seed). Feed the draft to the AI/permuter loop; `make compare` remains the oracle.
 - **coddog** ([doc](tools/coddog.md)) — FE8J↔FE8U cross-version triage (region-same → carve
   directly; region-different → hand-decompile). e2e: `compare2 … jp … us` found many 100%
   twins among the already-carved JP functions. **Coverage caveat** (documented): coddog only
