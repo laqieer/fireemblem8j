@@ -758,6 +758,9 @@ SECTIONS
         asm/baserom.o(.gap_348);
         asm/data_data_banim_terrain.o(.data_data_banim_terrain);
         asm/baserom.o(.gap_349);
+        src/banim_pal_chara.o(.data.banim_pal_head);
+        src/banim_pal_chara.o(.data.banim_pal_ptr_table);
+        asm/baserom.o(.gap_350);
     } > rom
 
     .bss_0 0x03000000 (NOLOAD) : { src/rng.o(.bss) src/rng.o(COMMON) } > iwram  /* rng: gRNSeeds, gLCGRNValue */
