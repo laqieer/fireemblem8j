@@ -1724,23 +1724,8 @@
 	.global Img_TacticianSelObj
 	.set    Img_TacticianSelObj, 0x085D6004
 
-	.global Img_LinkArenaPlayerBanners
-	.set    Img_LinkArenaPlayerBanners, 0x085D7CD8
-
 	.global Img_LinkArenaPlacementRanks
 	.set    Img_LinkArenaPlacementRanks, 0x085D737C
-
-	.global Pal_TacticianSelObj
-	.set    Pal_TacticianSelObj, 0x085D7EE8
-
-	.global Pal_LinkArenaPlacementRanks
-	.set    Pal_LinkArenaPlacementRanks, 0x085D8068
-
-	.global Img_LinkArenaActiveBannerFx
-	.set    Img_LinkArenaActiveBannerFx, 0x085D6FD0
-
-	.global Pal_LinkArenaActiveBannerFx
-	.set    Pal_LinkArenaActiveBannerFx, 0x085D80A8
 
 	.global Font_Sio_0
 	.set    Font_Sio_0, 0x02000C60
@@ -3728,366 +3713,6 @@
 	.thumb_func
 	.set    ModifySaveLinkArenaStruct2B, 0x080A8AA8 + 1
 
-	.global cg_0_part_0_tiles
-	.set    cg_0_part_0_tiles, 0x08AD247C
-
-	.global cg_0_part_1_tiles
-	.set    cg_0_part_1_tiles, 0x08AD2A4C
-
-	.global cg_0_part_2_tiles
-	.set    cg_0_part_2_tiles, 0x08AD324C
-
-	.global cg_0_part_3_tiles
-	.set    cg_0_part_3_tiles, 0x08AD3A70
-
-	.global cg_0_part_4_tiles
-	.set    cg_0_part_4_tiles, 0x08AD42D4
-
-	.global cg_0_part_5_tiles
-	.set    cg_0_part_5_tiles, 0x08AD4B2C
-
-	.global cg_0_part_6_tiles
-	.set    cg_0_part_6_tiles, 0x08AD53AC
-
-	.global cg_0_part_7_tiles
-	.set    cg_0_part_7_tiles, 0x08AD5C14
-
-	.global cg_0_part_8_tiles
-	.set    cg_0_part_8_tiles, 0x08AD6484
-
-	.global cg_0_part_9_tiles
-	.set    cg_0_part_9_tiles, 0x08AD6CE4
-
-	.global cg_1_part_0_tiles
-	.set    cg_1_part_0_tiles, 0x08AD74EC
-
-	.global cg_1_part_1_tiles
-	.set    cg_1_part_1_tiles, 0x08AD7C78
-
-	.global cg_1_part_2_tiles
-	.set    cg_1_part_2_tiles, 0x08AD8490
-
-	.global cg_1_part_3_tiles
-	.set    cg_1_part_3_tiles, 0x08AD8CA4
-
-	.global cg_1_part_4_tiles
-	.set    cg_1_part_4_tiles, 0x08AD94B0
-
-	.global cg_1_part_5_tiles
-	.set    cg_1_part_5_tiles, 0x08AD9CC4
-
-	.global cg_1_part_6_tiles
-	.set    cg_1_part_6_tiles, 0x08ADA508
-
-	.global cg_1_part_7_tiles
-	.set    cg_1_part_7_tiles, 0x08ADACB0
-
-	.global cg_1_part_8_tiles
-	.set    cg_1_part_8_tiles, 0x08ADB4A4
-
-	.global cg_1_part_9_tiles
-	.set    cg_1_part_9_tiles, 0x08ADBCB8
-
-	.global cg_2_part_0_tiles
-	.set    cg_2_part_0_tiles, 0x08ADC494
-
-	.global cg_2_part_1_tiles
-	.set    cg_2_part_1_tiles, 0x08ADCCC4
-
-	.global cg_2_part_2_tiles
-	.set    cg_2_part_2_tiles, 0x08ADD51C
-
-	.global cg_2_part_3_tiles
-	.set    cg_2_part_3_tiles, 0x08ADDD78
-
-	.global cg_2_part_4_tiles
-	.set    cg_2_part_4_tiles, 0x08ADE5EC
-
-	.global cg_2_part_5_tiles
-	.set    cg_2_part_5_tiles, 0x08ADEE6C
-
-	.global cg_2_part_6_tiles
-	.set    cg_2_part_6_tiles, 0x08ADF6C8
-
-	.global cg_2_part_7_tiles
-	.set    cg_2_part_7_tiles, 0x08ADFEC8
-
-	.global cg_2_part_8_tiles
-	.set    cg_2_part_8_tiles, 0x08AE0624
-
-	.global cg_2_part_9_tiles
-	.set    cg_2_part_9_tiles, 0x08AE0DE8
-
-	.global cg_3_part_0_tiles
-	.set    cg_3_part_0_tiles, 0x08AE15E4
-
-	.global cg_3_part_1_tiles
-	.set    cg_3_part_1_tiles, 0x08AE1DB4
-
-	.global cg_3_part_2_tiles
-	.set    cg_3_part_2_tiles, 0x08AE258C
-
-	.global cg_3_part_3_tiles
-	.set    cg_3_part_3_tiles, 0x08AE2D04
-
-	.global cg_3_part_4_tiles
-	.set    cg_3_part_4_tiles, 0x08AE3510
-
-	.global cg_3_part_5_tiles
-	.set    cg_3_part_5_tiles, 0x08AE3D30
-
-	.global cg_3_part_6_tiles
-	.set    cg_3_part_6_tiles, 0x08AE4584
-
-	.global cg_3_part_7_tiles
-	.set    cg_3_part_7_tiles, 0x08AE4DB4
-
-	.global cg_3_part_8_tiles
-	.set    cg_3_part_8_tiles, 0x08AE5580
-
-	.global cg_3_part_9_tiles
-	.set    cg_3_part_9_tiles, 0x08AE5DB8
-
-	.global cg_4_part_0_tiles
-	.set    cg_4_part_0_tiles, 0x08AE661C
-
-	.global cg_4_part_1_tiles
-	.set    cg_4_part_1_tiles, 0x08AE6E58
-
-	.global cg_4_part_2_tiles
-	.set    cg_4_part_2_tiles, 0x08AE76BC
-
-	.global cg_4_part_3_tiles
-	.set    cg_4_part_3_tiles, 0x08AE7F20
-
-	.global cg_4_part_4_tiles
-	.set    cg_4_part_4_tiles, 0x08AE8780
-
-	.global cg_4_part_5_tiles
-	.set    cg_4_part_5_tiles, 0x08AE8FF8
-
-	.global cg_4_part_6_tiles
-	.set    cg_4_part_6_tiles, 0x08AE9864
-
-	.global cg_4_part_7_tiles
-	.set    cg_4_part_7_tiles, 0x08AEA080
-
-	.global cg_4_part_8_tiles
-	.set    cg_4_part_8_tiles, 0x08AEA8B0
-
-	.global cg_4_part_9_tiles
-	.set    cg_4_part_9_tiles, 0x08AEB0C8
-
-	.global cg_5_part_0_tiles
-	.set    cg_5_part_0_tiles, 0x08AEB8C8
-
-	.global cg_5_part_1_tiles
-	.set    cg_5_part_1_tiles, 0x08AEC078
-
-	.global cg_5_part_2_tiles
-	.set    cg_5_part_2_tiles, 0x08AEC85C
-
-	.global cg_5_part_3_tiles
-	.set    cg_5_part_3_tiles, 0x08AED054
-
-	.global cg_5_part_4_tiles
-	.set    cg_5_part_4_tiles, 0x08AED890
-
-	.global cg_5_part_5_tiles
-	.set    cg_5_part_5_tiles, 0x08AEE0CC
-
-	.global cg_5_part_6_tiles
-	.set    cg_5_part_6_tiles, 0x08AEE928
-
-	.global cg_5_part_7_tiles
-	.set    cg_5_part_7_tiles, 0x08AEF158
-
-	.global cg_5_part_8_tiles
-	.set    cg_5_part_8_tiles, 0x08AEF960
-
-	.global cg_5_part_9_tiles
-	.set    cg_5_part_9_tiles, 0x08AF0118
-
-	.global cg_6_part_0_tiles
-	.set    cg_6_part_0_tiles, 0x08AF0858
-
-	.global cg_6_part_1_tiles
-	.set    cg_6_part_1_tiles, 0x08AF106C
-
-	.global cg_6_part_2_tiles
-	.set    cg_6_part_2_tiles, 0x08AF18C0
-
-	.global cg_6_part_3_tiles
-	.set    cg_6_part_3_tiles, 0x08AF2114
-
-	.global cg_6_part_4_tiles
-	.set    cg_6_part_4_tiles, 0x08AF2970
-
-	.global cg_6_part_5_tiles
-	.set    cg_6_part_5_tiles, 0x08AF31E4
-
-	.global cg_6_part_6_tiles
-	.set    cg_6_part_6_tiles, 0x08AF3A60
-
-	.global cg_6_part_7_tiles
-	.set    cg_6_part_7_tiles, 0x08AF42D4
-
-	.global cg_6_part_8_tiles
-	.set    cg_6_part_8_tiles, 0x08AF4B28
-
-	.global cg_6_part_9_tiles
-	.set    cg_6_part_9_tiles, 0x08AF5378
-
-	.global cg_7_part_0_tiles
-	.set    cg_7_part_0_tiles, 0x08AF5B88
-
-	.global cg_7_part_1_tiles
-	.set    cg_7_part_1_tiles, 0x08AF6198
-
-	.global cg_7_part_2_tiles
-	.set    cg_7_part_2_tiles, 0x08AF6974
-
-	.global cg_7_part_3_tiles
-	.set    cg_7_part_3_tiles, 0x08AF7178
-
-	.global cg_7_part_4_tiles
-	.set    cg_7_part_4_tiles, 0x08AF79AC
-
-	.global cg_7_part_5_tiles
-	.set    cg_7_part_5_tiles, 0x08AF81D8
-
-	.global cg_7_part_6_tiles
-	.set    cg_7_part_6_tiles, 0x08AF8A34
-
-	.global cg_7_part_7_tiles
-	.set    cg_7_part_7_tiles, 0x08AF9284
-
-	.global cg_7_part_8_tiles
-	.set    cg_7_part_8_tiles, 0x08AF9AA0
-
-	.global cg_7_part_9_tiles
-	.set    cg_7_part_9_tiles, 0x08AFA288
-
-	.global cg_8_part_0_tiles
-	.set    cg_8_part_0_tiles, 0x08AFAACC
-
-	.global cg_8_part_1_tiles
-	.set    cg_8_part_1_tiles, 0x08AFB244
-
-	.global cg_8_part_2_tiles
-	.set    cg_8_part_2_tiles, 0x08AFBA90
-
-	.global cg_8_part_3_tiles
-	.set    cg_8_part_3_tiles, 0x08AFC304
-
-	.global cg_8_part_4_tiles
-	.set    cg_8_part_4_tiles, 0x08AFCB6C
-
-	.global cg_8_part_5_tiles
-	.set    cg_8_part_5_tiles, 0x08AFD380
-
-	.global cg_8_part_6_tiles
-	.set    cg_8_part_6_tiles, 0x08AFDBC0
-
-	.global cg_8_part_7_tiles
-	.set    cg_8_part_7_tiles, 0x08AFE41C
-
-	.global cg_8_part_8_tiles
-	.set    cg_8_part_8_tiles, 0x08AFEC80
-
-	.global cg_8_part_9_tiles
-	.set    cg_8_part_9_tiles, 0x08AFF4AC
-
-	.global cg_9_part_0_tiles
-	.set    cg_9_part_0_tiles, 0x08AFFCA0
-
-	.global cg_9_part_1_tiles
-	.set    cg_9_part_1_tiles, 0x08B00488
-
-	.global cg_9_part_2_tiles
-	.set    cg_9_part_2_tiles, 0x08B00CC0
-
-	.global cg_9_part_3_tiles
-	.set    cg_9_part_3_tiles, 0x08B01514
-
-	.global cg_9_part_4_tiles
-	.set    cg_9_part_4_tiles, 0x08B01D64
-
-	.global cg_9_part_5_tiles
-	.set    cg_9_part_5_tiles, 0x08B025B8
-
-	.global cg_9_part_6_tiles
-	.set    cg_9_part_6_tiles, 0x08B02E04
-
-	.global cg_9_part_7_tiles
-	.set    cg_9_part_7_tiles, 0x08B03674
-
-	.global cg_9_part_8_tiles
-	.set    cg_9_part_8_tiles, 0x08B03ED0
-
-	.global cg_9_part_9_tiles
-	.set    cg_9_part_9_tiles, 0x08B04728
-
-	.global cg_0_map
-	.set    cg_0_map, 0x08B04F70
-
-	.global cg_0_palette
-	.set    cg_0_palette, 0x08B07E78
-
-	.global cg_1_map
-	.set    cg_1_map, 0x08B05424
-
-	.global cg_1_palette
-	.set    cg_1_palette, 0x08B07F38
-
-	.global cg_2_map
-	.set    cg_2_map, 0x08B058D8
-
-	.global cg_2_palette
-	.set    cg_2_palette, 0x08B07FF8
-
-	.global cg_3_map
-	.set    cg_3_map, 0x08B05D8C
-
-	.global cg_3_palette
-	.set    cg_3_palette, 0x08B080B8
-
-	.global cg_4_map
-	.set    cg_4_map, 0x08B06240
-
-	.global cg_4_palette
-	.set    cg_4_palette, 0x08B08178
-
-	.global cg_5_map
-	.set    cg_5_map, 0x08B066F4
-
-	.global cg_5_palette
-	.set    cg_5_palette, 0x08B08238
-
-	.global cg_6_map
-	.set    cg_6_map, 0x08B06BA8
-
-	.global cg_6_palette
-	.set    cg_6_palette, 0x08B082F8
-
-	.global cg_7_map
-	.set    cg_7_map, 0x08B0705C
-
-	.global cg_7_palette
-	.set    cg_7_palette, 0x08B083B8
-
-	.global cg_8_map
-	.set    cg_8_map, 0x08B07510
-
-	.global cg_8_palette
-	.set    cg_8_palette, 0x08B08478
-
-	.global cg_9_map
-	.set    cg_9_map, 0x08B079C4
-
-	.global cg_9_palette
-	.set    cg_9_palette, 0x08B08538
-
 	.global GetTileIndex
 	.type   GetTileIndex, %function
 	.thumb_func
@@ -4551,29 +4176,8 @@
 	.thumb_func
 	.set    OpAnim1_UpdateScroll, 0x080CC178 + 1
 
-	.global Img_OpAnimGenericCharacterBG
-	.set    Img_OpAnimGenericCharacterBG, 0x08B52694
-
-	.global Tsa_OpAnimGenericCharacterBG
-	.set    Tsa_OpAnimGenericCharacterBG, 0x08B52DF4
-
-	.global Img_OpAnimJoshua
-	.set    Img_OpAnimJoshua, 0x08B62E64
-
-	.global Tsa_OpAnimJoshua
-	.set    Tsa_OpAnimJoshua, 0x08B65920
-
-	.global Img_OpAnimJoshua2
-	.set    Img_OpAnimJoshua2, 0x08B64938
-
 	.global Tsa_OpAnimJoshua2
 	.set    Tsa_OpAnimJoshua2, 0x08B65D08
-
-	.global Img_OpAnimShiningRing
-	.set    Img_OpAnimShiningRing, 0x08B8CF34
-
-	.global Tsa_OpAnimShiningRing
-	.set    Tsa_OpAnimShiningRing, 0x08B8DE54
 
 	.global gUnkData_98
 	.set    gUnkData_98, 0x08B3F650
@@ -4581,62 +4185,14 @@
 	.global gUnkData_99
 	.set    gUnkData_99, 0x08B3F670
 
-	.global Img_OpAnimLArachel
-	.set    Img_OpAnimLArachel, 0x08B65F08
-
-	.global Tsa_OpAnimLArachel
-	.set    Tsa_OpAnimLArachel, 0x08B68898
-
-	.global Img_OpAnimLArachel2
-	.set    Img_OpAnimLArachel2, 0x08B67A80
-
-	.global Tsa_OpAnimLArachel2
-	.set    Tsa_OpAnimLArachel2, 0x08B68BC8
-
-	.global Img_OpAnimSeth
-	.set    Img_OpAnimSeth, 0x08B68E3C
-
-	.global Tsa_OpAnimSeth
-	.set    Tsa_OpAnimSeth, 0x08B6BA34
-
-	.global Img_OpAnimSeth2
-	.set    Img_OpAnimSeth2, 0x08B6AA10
-
 	.global Tsa_OpAnimSeth2
 	.set    Tsa_OpAnimSeth2, 0x08B6BD34
-
-	.global Img_OpAnimMyrrh
-	.set    Img_OpAnimMyrrh, 0x08B6BFDC
-
-	.global Tsa_OpAnimMyrrh
-	.set    Tsa_OpAnimMyrrh, 0x08B6EA5C
-
-	.global Img_OpAnimMyrrh2
-	.set    Img_OpAnimMyrrh2, 0x08B6DC04
 
 	.global Tsa_OpAnimMyrrh2
 	.set    Tsa_OpAnimMyrrh2, 0x08B6EE04
 
-	.global Img_OpAnimSaleh
-	.set    Img_OpAnimSaleh, 0x08B6F004
-
-	.global Tsa_OpAnimSaleh
-	.set    Tsa_OpAnimSaleh, 0x08B71EE0
-
-	.global Img_OpAnimSaleh2
-	.set    Img_OpAnimSaleh2, 0x08B70CC4
-
 	.global Tsa_OpAnimSaleh2
 	.set    Tsa_OpAnimSaleh2, 0x08B7229C
-
-	.global Img_OpAnimTethys
-	.set    Img_OpAnimTethys, 0x08B724D0
-
-	.global Tsa_OpAnimTethys
-	.set    Tsa_OpAnimTethys, 0x08B751CC
-
-	.global Img_OpAnimTethys2
-	.set    Img_OpAnimTethys2, 0x08B73CE4
 
 	.global Tsa_OpAnimTethys2
 	.set    Tsa_OpAnimTethys2, 0x08B755D4
@@ -4760,21 +4316,6 @@
 	.thumb_func
 	.set    SaveMenuInitSlotPalette, 0x080B083C + 1
 
-	.global Pal_SaveMenuBG
-	.set    Pal_SaveMenuBG, 0x08AA2D34
-
-	.global Img_SaveMenuBG
-	.set    Img_SaveMenuBG, 0x08A9E5C0
-
-	.global Tsa_SaveMenuBG
-	.set    Tsa_SaveMenuBG, 0x08AA2E34
-
-	.global Pal_MainMenuBgFog
-	.set    Pal_MainMenuBgFog, 0x08AA3840
-
-	.global Img_MainMenuBgFog
-	.set    Img_MainMenuBgFog, 0x08AA32E8
-
 	.global Tsa_MainMenuBgFog
 	.set    Tsa_MainMenuBgFog, 0x08AA3860
 
@@ -4806,9 +4347,6 @@
 
 	.global ProcScr_RuleSettingSpriteDraw_Static
 	.set    ProcScr_RuleSettingSpriteDraw_Static, 0x085D4BA4
-
-	.global gUnkData_11
-	.set    gUnkData_11, 0x085D80C8
 
 	.global gUnk_Sio_22
 	.set    gUnk_Sio_22, 0x0203DDD8
