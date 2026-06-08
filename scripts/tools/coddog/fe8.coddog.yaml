@@ -1,0 +1,65 @@
+# coddog / decomp_settings config for Fire Emblem 8 (BE8J, Japanese).
+# Schema: https://github.com/ethteck/decomp_settings  (read by coddog's CLI).
+#
+# This file describes TWO binaries as two `versions` of the same game:
+#   - jp : our in-progress JP decomp ELF (this repo)        -> fireemblem8.elf
+#   - us : the near-complete US sibling decomp ELF          -> ../fireemblem8u/fireemblem8.elf
+#
+# coddog only needs `paths.elf` (it parses the ELF's function symbols with
+# objdiff); `paths.asm` is used purely to tag a symbol "(decompiled)" when no
+# matching <name>.s exists under that dir. The other `paths.*` keys are required
+# by the decomp_settings schema, so they're filled with this project's real
+# build outputs even though coddog itself ignores them.
+#
+# PATH BASE: paths are resolved relative to the directory CONTAINING the yaml
+# coddog is handed:
+#   * `match` / `cluster` / `submatch`  -> coddog auto-discovers a `decomp.yaml`
+#     in the CURRENT working dir, so copy this file to the repo root as
+#     `decomp.yaml` and run from there. The paths below are repo-root-relative.
+#   * `compare2 <yaml> <ver> <yaml> <ver>` -> base dir is each yaml's OWN parent.
+#     Run compare2 with this file copied to the repo root too (see
+#     docs/tools/coddog.md), so `../fireemblem8u/...` resolves correctly.
+#
+# NOTE: fireemblem8.elf is a build output (gitignored). Run `make` first so the
+# ELF exists before invoking coddog.
+#
+# IMPORTANT COVERAGE LIMITATION (read before triaging):
+# coddog's `read_elf` keeps only symbols with `size > 0`, a real section, and
+# `SymbolKind::Function`. On the JP side the *not-yet-decompiled* functions are
+# not real ELF function symbols: they're either inside the `asm/baserom.s` incbin
+# gaps (no per-function symbol at all) or sizeless ABS `.set name, 0x..+1` entries
+# emitted into `asm/jp_syms.s`. coddog therefore SKIPS them. So `compare2` from
+# this `jp` version sees only the JP functions we've ALREADY carved/symbolized
+# with a real size — it does NOT yet enumerate the full remaining-function
+# backlog. It still adds value (confirm a carved JP function matches its US
+# sibling; find renamed/moved twins among carved code; `match`/`submatch` on
+# known JP symbols), but to triage the *remaining* functions you must first feed
+# coddog a JP ELF/map whose pending functions carry real sizes (e.g. a symbolized
+# layout that emits `.size` for each baseline function, or run `match` from the
+# US side against the carved JP set). See docs/tools/coddog.md ("Coverage").
+
+name: Fire Emblem - The Sacred Stones
+repo: https://github.com/laqieer/fireemblem8j
+platform: gba          # -> objdiff Thumb / unarm V4T (ARM7TDMI). Required.
+
+versions:
+  - name: jp
+    fullname: Japan (BE8J)
+    sha1: 7da0456035366aa18414faa79d8fe7649f03c1ed
+    paths:
+      target: fireemblem8.gba           # our built ROM (== baserom on a match)
+      build_dir: build
+      map: fireemblem8.map
+      compiled_target: fireemblem8.gba
+      elf: fireemblem8.elf              # <-- what coddog actually reads
+      asm: asm                          # carved .s live here; tags decompiled status
+
+  - name: us
+    fullname: USA (BE8E) — reference sibling
+    paths:
+      target: ../fireemblem8u/fireemblem8.gba
+      build_dir: ../fireemblem8u/build
+      map: ../fireemblem8u/fireemblem8.map
+      compiled_target: ../fireemblem8u/fireemblem8.gba
+      elf: ../fireemblem8u/fireemblem8.elf   # <-- US ELF coddog reads
+      asm: ../fireemblem8u/asm
