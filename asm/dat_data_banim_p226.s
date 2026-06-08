@@ -1,0 +1,23 @@
+	.section .rodata.dat_data_banim_p226, "a", %progbits
+@ src/data/banim/data_banim.o: region-same content at JP 0x0875d358 (US 0x08730780, shift -0xFFFD3428); incbin baserom.gba
+	.global Pal_ExcaliburSprites
+Pal_ExcaliburSprites:
+	.incbin "baserom.gba", 0x75D358, 0x20
+	.global AnimSprite_EfxExcalibur_1
+AnimSprite_EfxExcalibur_1:
+	.incbin "baserom.gba", 0x75D378, 0x54
+	.global AnimSprite_EfxExcalibur_2
+AnimSprite_EfxExcalibur_2:
+	.incbin "baserom.gba", 0x75D3CC, 0x54
+	.global AnimSprite_EfxExcalibur_3
+AnimSprite_EfxExcalibur_3:
+	.incbin "baserom.gba", 0x75D420, 0x54
+	.global AnimSprite_EfxExcalibur_4
+AnimSprite_EfxExcalibur_4:
+	.incbin "baserom.gba", 0x75D474, 0x54
+	.global AnimSprite_EfxExcalibur_5
+AnimSprite_EfxExcalibur_5:
+	.incbin "baserom.gba", 0x75D4C8, 0x54
+	.global AnimSprite_EfxExcalibur_6
+AnimSprite_EfxExcalibur_6:
+	.incbin "baserom.gba", 0x75D51C, 0x54
