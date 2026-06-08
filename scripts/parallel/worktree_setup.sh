@@ -29,25 +29,29 @@ fi
 cd "$HERE"
 
 # --- read-only inputs: symlink ---------------------------------------------
+# Only symlink genuinely READ-ONLY build INPUTS. Never symlink build OUTPUTS
+# (fireemblem8.elf/.gba/.map) — a relink in the worktree would follow the symlink
+# and clobber the main repo's output, breaking isolation. The worktree builds its
+# own ELF from the (copied) objects below.
 mkdir -p tools
 ln -sfn "$MAIN/tools/agbcc" tools/agbcc
 ln -sf  "$MAIN/baserom.gba" baserom.gba
-[ -f "$MAIN/fireemblem8.elf" ] && ln -sf "$MAIN/fireemblem8.elf" fireemblem8.elf || true
 # objdiff/asm-differ/m2c/coddog (per-symbol pre-gate + triage) if the agent uses them
 for t in objdiff asm-differ m2c coddog; do
     [ -e "$MAIN/tools/$t" ] && ln -sfn "$MAIN/tools/$t" "tools/$t" || true
 done
 
-# --- warm object cache: hardlink built objects, then touch so make skips them --
-# Hardlinks share inodes (near-zero disk). We touch the cached .o AFTER the
-# checkout so they are newer than the just-checked-out sources and make relinks
-# rather than recompiling everything. (A .o make does rewrite simply breaks its
-# hardlink — harmless.)
+# --- warm object cache: COPY built objects (do NOT hardlink) -----------------
+# Objects are MUTABLE build outputs: a carve that changes the layout rebuilds
+# asm/baserom.o (and the assembler truncates the output in place), so a hardlink
+# would mutate the main repo's object and break its build. Copy them instead
+# (independent inodes), then touch so they're newer than the just-checked-out
+# sources and `make compare` is the ~0.3s incremental relink, not a clean build.
 n=0
 for d in src asm; do
     if compgen -G "$MAIN/$d/*.o" >/dev/null; then
         mkdir -p "$d"
-        cp -al "$MAIN/$d/"*.o "$d/" 2>/dev/null || cp -l "$MAIN/$d/"*.o "$d/" 2>/dev/null || true
+        cp "$MAIN/$d/"*.o "$d/" 2>/dev/null || true
         n=$((n + $(ls "$MAIN/$d/"*.o 2>/dev/null | wc -l)))
     fi
 done

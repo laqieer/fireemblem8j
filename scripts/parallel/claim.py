@@ -19,6 +19,8 @@ CLI::
   claim.py list                     # list active claims
   claim.py reap   [--ttl SECONDS]   # delete expired claims, print what was reaped
 """
+import fcntl
+import hashlib
 import json
 import os
 import sys
@@ -30,8 +32,12 @@ DEFAULT_TTL = 2 * 60 * 60  # 2h — generous for reasoning-heavy carves; refresh
 
 
 def _path(task):
+    # A short stable hash of the ORIGINAL id makes the basename collision-free:
+    # distinct ids ("a/b", "a_b", ".a_b.") get distinct files even though their
+    # sanitized prefix is identical, so independent tasks never overwrite claims.
     safe = "".join(c if (c.isalnum() or c in "-_.") else "_" for c in str(task)).strip("._")
-    return os.path.join(CLAIMS_DIR, (safe or "task") + ".json")
+    h = hashlib.sha1(str(task).encode("utf-8")).hexdigest()[:8]
+    return os.path.join(CLAIMS_DIR, (safe or "task") + "-" + h + ".json")
 
 
 def _load(path):
@@ -49,21 +55,22 @@ def _expired(rec, ttl):
 def claim(task, agent, ttl=DEFAULT_TTL):
     os.makedirs(CLAIMS_DIR, exist_ok=True)
     path = _path(task)
-    now = time.time()
-    rec = {"task": task, "agent": agent, "pid": os.getpid(), "started": now, "beat": now}
-    try:
-        fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o644)
-    except FileExistsError:
-        # already exists: steal it only if expired (the previous owner died).
+    # Serialize the read-decide-write across all claimants with an exclusive flock
+    # on a registry lock file. A bare O_CREAT|O_EXCL plus an expired-claim "steal"
+    # has a TOCTOU race (two agents both see the stale record expired and both
+    # overwrite -> double claim); the lock makes claiming atomic.
+    with open(os.path.join(CLAIMS_DIR, ".lock"), "w") as lf:
+        fcntl.flock(lf, fcntl.LOCK_EX)
         prev = _load(path)
-        if _expired(prev, ttl):
-            with open(path, "w") as f:
-                json.dump(rec, f)
-            return True, rec
-        return False, prev
-    with os.fdopen(fd, "w") as f:
-        json.dump(rec, f)
-    return True, rec
+        if prev is not None and not _expired(prev, ttl):
+            return False, prev
+        now = time.time()
+        rec = {"task": task, "agent": agent, "pid": os.getpid(), "started": now, "beat": now}
+        tmp = path + ".tmp.%d" % os.getpid()
+        with open(tmp, "w") as f:
+            json.dump(rec, f)
+        os.replace(tmp, path)
+        return True, rec
 
 
 def release(task):

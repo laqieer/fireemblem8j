@@ -27,7 +27,7 @@ the **serial integrator** runs one carve at a time.
 |---|---|
 | `layout_frag.py` | Write/remove a task's manifest rows as fragments (`write`, `remove`, `read_all`). The carve primitive. |
 | `claim.py` | Atomic task-claim registry (`claim`/`release`/`beat`/`reap`), so two agents never take the same target. TTL + heartbeat; expired claims are reclaimable. `layout/claims/` is gitignored. |
-| `worktree_setup.sh` | Make a fresh git worktree build-ready: symlink the gitignored `tools/agbcc` + `baserom.gba`, hardlink a warm `.o` cache, so the first `make compare` is the ~0.3s incremental. |
+| `worktree_setup.sh` | Make a fresh git worktree build-ready: symlink the gitignored read-only inputs (`tools/agbcc`, `baserom.gba`) and **copy** a warm `.o` cache (objects are mutable build outputs, so copy — never hardlink/symlink them or a worktree rebuild would corrupt the main repo), so the first `make compare` is the ~0.3s incremental. |
 | `integrate.py` | Serial integrator: merge each ready branch onto an integration branch, `make compare`, **accept** (keep) or **reject** (`reset --hard`, save the diff to `/tmp`). Periodic `make clean && make compare` durability gate. |
 
 ## Agent workflow (per task)
@@ -42,7 +42,10 @@ the **serial integrator** runs one carve at a time.
 4. **Self-verify (fast loop):** use objdiff/asm-differ per symbol; then
    `make compare` in the worktree until `fireemblem8.gba: OK`.
 5. **Submit:** commit (fragment + src/asm only) and push a branch.
-6. **Heartbeat** the claim periodically for long tasks.
+6. **Heartbeat** the claim periodically for long tasks (`claim.py beat <task>`).
+7. **Release:** `claim.py release <task>` once the branch is pushed. (Claim
+   lifecycle is the agent's — the integrator works on branches, not task ids;
+   abandoned claims TTL-expire and are reaped.)
 
 ## Integration (serial, by the lead / a single integrator)
 

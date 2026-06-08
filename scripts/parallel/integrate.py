@@ -9,9 +9,14 @@ generated glue is no longer committed (Phase 1), the branches do not conflict.
 This integrator is the single point where the whole-ROM oracle runs. It merges
 each ready branch onto a local integration branch and runs ``make compare``:
 
-* **OK**   -> keep the merge (the carve is now integrated); release its claim.
+* **OK**   -> keep the merge (the carve is now integrated).
 * **FAIL** -> ``git reset --hard`` (roll the merge back); leave the branch for the
   agent to fix. The reject diff is saved under ``/tmp`` for triage.
+
+The claim lifecycle is the AGENT's: an agent releases its own claim
+(``claim.py release <task>``) when it finishes, and abandoned claims TTL-expire
+and are reaped. The integrator works on branches, not task ids, so it does not
+touch claims.
 
 Serial is the *safety* property (only one ``make`` runs at a time, never a racing
 build, never a half-merged manifest); it is cheap because ``make compare`` is
@@ -34,7 +39,6 @@ import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-CLAIM = os.path.join(ROOT, "scripts", "parallel", "claim.py")
 
 
 def run(cmd, check=False, capture=True):
@@ -67,8 +71,9 @@ def preflight():
     return branch
 
 
-def integrate_one(branch, task=None):
-    """Merge origin/<branch> onto the current branch and verify. Returns a dict."""
+def integrate_one(branch):
+    """Merge origin/<branch> onto the current branch and verify. Returns a dict.
+    Claim release is the agent's responsibility, not the integrator's."""
     git("fetch", "origin", branch)
     ref = "origin/" + branch
     before = git("rev-parse", "HEAD").stdout.strip()
@@ -79,8 +84,6 @@ def integrate_one(branch, task=None):
         return {"branch": branch, "status": "conflict", "detail": m.stdout + m.stderr}
     ok, out = make_compare()
     if ok:
-        if task:
-            run(["python3", CLAIM, "release", task])
         return {"branch": branch, "status": "accepted", "head": git("rev-parse", "--short", "HEAD").stdout.strip()}
     # reject: capture the diff, roll back the merge.
     diff = git("diff", before, "HEAD").stdout

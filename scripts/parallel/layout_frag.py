@@ -18,6 +18,7 @@ many carves run in parallel and be merged independently by the serial integrator
 This module is the helper carve scripts (and parallel agents) call. It can also
 be run as a small CLI for manual fragment writes / removal / inspection.
 """
+import hashlib
 import os
 import sys
 
@@ -28,9 +29,15 @@ MANIFESTS = ("carved_rom", "carved_ram", "baseline_syms")
 
 
 def safe_task(task):
-    """Filesystem-safe, collision-resistant fragment basename for a task id."""
-    s = "".join(c if (c.isalnum() or c in "-_.") else "_" for c in str(task))
-    return s.strip("._") or "task"
+    """Filesystem-safe, collision-resistant fragment basename for a task id.
+
+    A short stable hash of the ORIGINAL id is appended so distinct ids whose
+    sanitized prefix collides ("a/b", "a_b", ".a_b.") still get distinct files —
+    otherwise independent tasks could overwrite each other's fragment, defeating
+    the conflict-free guarantee."""
+    s = "".join(c if (c.isalnum() or c in "-_.") else "_" for c in str(task)).strip("._")
+    h = hashlib.sha1(str(task).encode("utf-8")).hexdigest()[:8]
+    return (s or "task") + "-" + h
 
 
 def frag_path(manifest, task):
