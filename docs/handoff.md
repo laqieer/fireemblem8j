@@ -68,16 +68,24 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
     base 0x080E20FA) DISAGREE by 0x12 (frames.9 at JP offset 0x20 vs US 0xe). No single
     section base works; each ref needs its JP literal BAKED IN (patch the .text/.data
     word to jp[ref site] + remove the reloc). That's the next intricate fix for these 3.
-    BAKE-IN ATTEMPTED (2026-06-08): rewrite each ref's in-section addend to
-    jp[ref]-base, then objcopy --update-section to patch the .o. PARTIAL — objcopy --update-section round-trips fine in isolation; the bug is the
-    bake-in SEQUENCING (multiple objcopy ops on the same .o reset the
-    --set-section-alignment, so the NOLOAD .rodata moves off its 2-aligned JP base ->
-    flux 1->7 bytes). Fix: do ALL objcopy edits in ONE pass (compute final section
-    bytes + final alignment, write once) or re-apply --set-section-alignment AFTER
-    --update-section. Mechanism is sound, just needs careful single-pass sequencing. flux is just
-    1 byte off with NOLOAD alone (.data's addend-0 .rodata ref); aircalibur/thunder/
-    fire have larger region-different .rodata content (~200-430 bytes) needing the
-    same per-ref bake-in. Do this fresh with a proper ELF-patch helper.
+    BAKE-IN — MECHANICS SOLVED, BUT NON-DURABLE (2026-06-08). Goal: rewrite each ref's
+    in-section addend to jp[ref]-base so `base + addend = jp[ref]` for region-different
+    internal offsets. Findings:
+      1. objcopy --update-section STRIPS the section's relocs (2->0) -> the addend is
+         never relocated -> wrong. (NOT an alignment/sequencing issue.)
+      2. WORKS: patch the .o's section FILE BYTES directly (objdump -h gives the section
+         file-offset; relocs live in a separate .rel section and survive a raw byte edit,
+         so they still fire). This CARVED flux in port_run's check (1->0 bytes).
+      3. *** NON-DURABLE — the showstopper ***: the patch is on the compiled OBJECT, which
+         `make` REGENERATES from src/*.c on the next build, LOSING it -> a clean rebuild
+         goes RED. port_run's INCREMENTAL make compare used the patched .o and passed —
+         a VERIFY-OR-REVERT HOLE. (Lesson: port_run verify should `make clean` first.)
+    With NOLOAD alone the residuals are tiny — flux 1, aircalibur 2, thunder 8/9, fire 2,
+    3 bytes — so the per-ref bake-in WOULD carve all four IF durable.
+    DURABLE FIX (next task): store patches in a manifest (layout/patches.tsv: TU, section,
+    offset, value) and add a Makefile post-compile step / gen_layout hook that re-applies
+    them to src/<TU>.o after every compile. Then these 4 carve durably + make compare
+    survives a clean rebuild.
 
 - **NESTED ROM-DATA FIX (2026-06-08, +4):** port_run's romdata loop is now a
   WORKLIST — a carved .data/.rodata section referencing ANOTHER ROM-data section
