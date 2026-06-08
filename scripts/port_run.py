@@ -166,10 +166,29 @@ def port(name, exclude=(), runs=None):
                 src, changed = trimmed, True
                 removed.append(s)
     if removed:
+        base_src = open(f"src/{name}.c").read()  # pre-trim source, known to compile
         open(f"src/{name}.c", "w").write(src)
         sh(f"rm -f {obj}"); sh(f"make src/{name}.o")
         if not os.path.exists(obj):
-            print(f"{name}: compile failed after trimming {removed}"); os.remove(f"src/{name}.c"); return False
+            # The batch trim corrupted the source — remove_def is a heuristic textual
+            # cut that can mishandle a complex declaration (nested braces / multi-dim
+            # arrays), e.g. bmbattle's sWeaponTriangleRules. Fall back to incremental
+            # trimming: remove one candidate at a time and KEEP a removal only if it
+            # still compiles, so a bad cut is rejected instead of killing the carve.
+            src = base_src
+            for s in removed:
+                trimmed = remove_def(src, s)
+                if re.search(r"\b" + re.escape(s) + r"\b", trimmed):
+                    continue  # still referenced after the cut -> keep the symbol
+                open(f"src/{name}.c", "w").write(trimmed)
+                sh(f"rm -f {obj}"); sh(f"make src/{name}.o")
+                if os.path.exists(obj):
+                    src = trimmed            # cut was clean -> accept
+                else:
+                    open(f"src/{name}.c", "w").write(src)  # cut corrupted -> reject
+            sh(f"rm -f {obj}"); sh(f"make src/{name}.o")
+            if not os.path.exists(obj):
+                print(f"{name}: subset compile failed"); os.remove(f"src/{name}.c"); return False
 
     jp = open("baserom.gba", "rb").read()
     fmap = {}

@@ -35,3 +35,4 @@
 030017D8	iwram	src/sio_core.o(.bss)	sio_core .bss
 0203AAA0	ewram	src/sio_core.o(ewram_data)	sio_core ewram_data
 0203DDDC	ewram	src/uiutils.o(ewram_data)	uiutils ewram_data
+0203A4E8	ewram	src/bmbattle.o(ewram_data)	bmbattle ewram_data

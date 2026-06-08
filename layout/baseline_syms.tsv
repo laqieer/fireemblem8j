@@ -218,8 +218,6 @@ MakePromotionScreen	080D1184	thumb	classchg-handler
 BMapDispResume	08030108	thumb	classchg-handler
 RefreshBMapGraphics	080310F4	thumb	classchg-handler
 Proc_StartBlocking	08002C30	thumb	classchg-handler
-gBattleActor	0203A4E8	data	classchg-handler
-gBattleTarget	0203A568	data	classchg-handler
 GetUnitEquippedWeapon	080168D0	thumb	classchg-handler
 BMapDispSuspend	080300D4	thumb	classchg-handler
 EndCgText	08091544	thumb	classchg-postconfirm
@@ -700,8 +698,6 @@ ProcScr_DebugMonitor	085C2EDC	data	mapanim_debug
 ResetText	08003BC4	thumb	mapanim_debug
 MADebugStrings2	08A13E70	data	mapanim_debug
 gMapanimDebug_0	08A13E20	data	mapanim_debug
-ClearBattleHits	0802AE00	thumb	mapanim_debug
-gBattleHitArray	0203A5E8	data	mapanim_debug
 AddAttr2dBitMap	08001570	thumb	mapanim_eventcall
 gMapanimEventcall_0	081F523C	data	mapanim_eventcall
 gMapanimEventcall_1	081F5244	data	mapanim_eventcall
@@ -1283,7 +1279,6 @@ BattleInitItemEffect	0802CA5C	thumb	bmusemind
 AddUnitHp	0801907C	thumb	bmusemind
 BattleApplyItemEffect	0802CB8C	thumb	bmusemind
 BeginBattleAnimations	0802C94C	thumb	bmusemind
-gBattleHitIterator	0203A604	data	bmusemind
 GetUnitMaxHp	08018EA4	thumb	bmusemind
 SetUnitHp	08019040	thumb	bmusemind
 SetUnitStatus	08017680	thumb	bmusemind
@@ -1649,7 +1644,6 @@ gGfx_MiscUiGraphics	085C6E08	data	bm
 gPal_MiscUiGraphics	085C7290	data	bm
 MakeNewItem	080162E8	thumb	bmarena
 ArenaGetPowerRanking	08031960	thumb	bmarena
-BattleUnwind	0802AE40	thumb	bmarena
 BattleApplyExpGains	0802B874	thumb	bmarena
 UpdateUnitDuringBattle	0802C21C	thumb	bmarena
 PidStatsRecordBattleRes	080A94E8	thumb	bmarena
@@ -1697,3 +1691,6 @@ gUiBarPaletteA	085E1760	data	uiutils
 gUiBarPaletteB	085E2054	data	uiutils
 gUiBarPaletteC	085E2914	data	uiutils
 gUiBarPaletteD	085E3190	data	uiutils
+GetItemWeaponEffect	080174CC	thumb	bmbattle
+GetBattleUnitHitCount	0802AFF0	thumb	bmbattle
+BattleGenerateHit	0802B784	thumb	bmbattle

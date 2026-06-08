@@ -975,12 +975,6 @@
 	.thumb_func
 	.set    Proc_StartBlocking, 0x08002C30 + 1
 
-	.global gBattleActor
-	.set    gBattleActor, 0x0203A4E8
-
-	.global gBattleTarget
-	.set    gBattleTarget, 0x0203A568
-
 	.global GetUnitEquippedWeapon
 	.type   GetUnitEquippedWeapon, %function
 	.thumb_func
@@ -2924,14 +2918,6 @@
 
 	.global gMapanimDebug_0
 	.set    gMapanimDebug_0, 0x08A13E20
-
-	.global ClearBattleHits
-	.type   ClearBattleHits, %function
-	.thumb_func
-	.set    ClearBattleHits, 0x0802AE00 + 1
-
-	.global gBattleHitArray
-	.set    gBattleHitArray, 0x0203A5E8
 
 	.global AddAttr2dBitMap
 	.type   AddAttr2dBitMap, %function
@@ -4990,9 +4976,6 @@
 	.thumb_func
 	.set    BeginBattleAnimations, 0x0802C94C + 1
 
-	.global gBattleHitIterator
-	.set    gBattleHitIterator, 0x0203A604
-
 	.global GetUnitMaxHp
 	.type   GetUnitMaxHp, %function
 	.thumb_func
@@ -6454,11 +6437,6 @@
 	.thumb_func
 	.set    ArenaGetPowerRanking, 0x08031960 + 1
 
-	.global BattleUnwind
-	.type   BattleUnwind, %function
-	.thumb_func
-	.set    BattleUnwind, 0x0802AE40 + 1
-
 	.global BattleApplyExpGains
 	.type   BattleApplyExpGains, %function
 	.thumb_func
@@ -6647,4 +6625,19 @@
 
 	.global gUiBarPaletteD
 	.set    gUiBarPaletteD, 0x085E3190
+
+	.global GetItemWeaponEffect
+	.type   GetItemWeaponEffect, %function
+	.thumb_func
+	.set    GetItemWeaponEffect, 0x080174CC + 1
+
+	.global GetBattleUnitHitCount
+	.type   GetBattleUnitHitCount, %function
+	.thumb_func
+	.set    GetBattleUnitHitCount, 0x0802AFF0 + 1
+
+	.global BattleGenerateHit
+	.type   BattleGenerateHit, %function
+	.thumb_func
+	.set    BattleGenerateHit, 0x0802B784 + 1
 
