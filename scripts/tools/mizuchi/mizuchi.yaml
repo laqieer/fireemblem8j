@@ -1,0 +1,137 @@
+# Mizuchi configuration for the FE8J decomp (Fire Emblem: Seima no Kouseki, BE8J).
+#
+# Mizuchi resolves all relative paths from the directory containing THIS file
+# and treats that directory as the project root (`projectRoot`). The pipeline
+# scripts (compilerScript, getContextScript) run with cwd = that project root.
+#
+# IMPORTANT: this file lives at scripts/tools/mizuchi/mizuchi.yaml (tracked), but
+# its paths below are written for use FROM THE FE8J PROJECT ROOT
+# (/home/laqieer/fireemblem8j). So before running mizuchi, either:
+#   - copy it to the project root:   cp scripts/tools/mizuchi/mizuchi.yaml ./mizuchi.yaml
+#   - or symlink it:                 ln -s scripts/tools/mizuchi/mizuchi.yaml ./mizuchi.yaml
+# and run mizuchi with --config pointing at the project-root copy. (Running with
+# --config scripts/tools/mizuchi/mizuchi.yaml would make scripts/tools/mizuchi/
+# the project root, which is wrong — the agbcc/baserom/map paths below assume the
+# repo root.)
+#
+# Required environment:
+#   ANTHROPIC_API_KEY   — needed ONLY for the `run` pipeline (Claude Runner).
+#                         NOT needed for `index-codebase` or `atlas`.
+#                         Export it; never hardcode a secret in this file:
+#                             export ANTHROPIC_API_KEY=sk-ant-...
+#   (Alternatively, a cached Claude Code login is honored by the Agent SDK.)
+#
+# Toolchain assumptions (gitignored, installed locally — same as the Makefile):
+#   tools/agbcc/bin/agbcc    GCC 2.95 ARM7TDMI compiler
+#   arm-none-eabi-as / -ld   binutils on PATH (via DEVKITARM)
+#   baserom.gba              original JP ROM (sha1 7da0456...)
+#   fireemblem8.map          linker map produced by `make` (function -> .o)
+
+global:
+  # ---- Context prepended to Claude's C during compilation ----
+  # Mizuchi compiles "<context> + <Claude's C>". The FE8J convention is that every
+  # .c starts with #include "global.h", which pulls in the project's types/structs.
+  # Emitting that include here lets the agbcc cpp step (in compilerScript) resolve
+  # everything from include/ exactly like the real build. We point Claude at the
+  # real header so it can grep structs/constants instead of guessing.
+  #
+  # {{functionName}} and {{targetObjectPath}} are available but unused here.
+  getContextScript: |
+    echo '#include "global.h"'
+
+  # ---- Compilation: the full FE8J agbcc pipeline ----
+  # Mizuchi hands us {{cFilePath}} (context + Claude's C, as raw UTF-8 C) and an
+  # {{objFilePath}} to produce. This reproduces the Makefile C rule exactly:
+  #   cpp (agbcc headers) | iconv UTF-8 -> CP932 | agbcc -> .s | arm-none-eabi-as -> .o
+  # Codegen flags are byte-identical to the Makefile's CC1FLAGS/ASFLAGS so the
+  # emitted machine code matches; we additionally append the project's trailing
+  #   .text / .align 2, 0
+  # that the Makefile adds after agbcc, so section layout lines up for objdiff.
+  compilerScript: |
+    set -euo pipefail
+    ASM="$(mktemp --suffix=.s)"
+    trap 'rm -f "$ASM"' EXIT
+    cpp -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef "{{cFilePath}}" \
+      | iconv -f UTF-8 -t CP932 \
+      | tools/agbcc/bin/agbcc -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm -ffix-debug-line -g -o "$ASM"
+    printf '\t.text\n\t.align 2, 0\n' >> "$ASM"
+    arm-none-eabi-as -mcpu=arm7tdmi -mthumb-interwork -I include -I . "$ASM" -o "{{objFilePath}}"
+
+  # Max Claude retries per function before giving up.
+  maxRetries: 25
+
+  # Where mizuchi writes run-results / run-report / claude-cache.
+  outputDir: .
+
+  # Folder of prompt sets for the `run` command. Generate prompts with the Atlas
+  # UI (mizuchi writes them under ./prompts by default).
+  promptsDir: ./prompts
+
+  # GNU ld map produced by `make` — mizuchi uses it to map a matched C function
+  # to the .o it compiles into, and to extract target assembly via objdiff.
+  mapFilePath: fireemblem8.map
+
+  # ARM7TDMI / Thumb GBA target (drives objdiff arch + permuter compiler_type).
+  target: gba
+
+  # Where the not-yet-decompiled functions live. FE8J carves descriptive .s into
+  # asm/ (flat), with the whole-ROM baseline in asm/baserom.s. The indexer parses
+  # `glabel`/function boundaries from these to populate the Atlas.
+  nonMatchingAsmFolders:
+    - asm
+
+  # Keep the indexer's C scan to real source; never descend into vendored tools.
+  excludeFromScan:
+    - tools
+
+plugins:
+  # ---- Objdiff: byte/instruction diff of compiled .o vs target ----
+  objdiff:
+    diffSettings:
+      # ARM7TDMI = ARMv4T.
+      arm.archVersion: 'v4t'
+      functionRelocDiffs: 'none'
+
+  # ---- Claude Runner (needs ANTHROPIC_API_KEY) ----
+  claude-runner:
+    timeoutMs: 600000      # 10 min hard cap per function
+    ttftTimeoutMs: 180000  # 3 min to first token
+    softTimeout:
+      softTimeoutMs: 420000
+      prompt: 'You are running out of time. Submit your best C code now in a ```c block. Do not explain, do not use tools, just output the code.'
+    kickoffMessage: 'Decompile the function described in the system prompt. Respond with only the C code in a ```c code block.'
+    # The default system prompt (see mizuchi.example.yaml) is target-agnostic and
+    # works for FE8J; override here only if we want FE8-specific style guidance.
+
+  # ---- m2c: programmatic first-pass C (optional) ----
+  # Enabled by setup.sh via scripts/setup-m2c.sh. m2c is MIPS-oriented; on ARM/
+  # Thumb its output is weak, so treat it as a best-effort seed, not a matcher.
+  m2c:
+    enable: true
+
+  # ---- decomp-permuter: brute-force mutation toward a byte match (optional) ----
+  # We ALSO run permuter standalone via scripts/permuter/ (see
+  # docs/reverse-engineering.md); this entry lets mizuchi drive it inline.
+  decomp-permuter:
+    enable: true
+    maxIterations: 1000
+    timeoutMs: 120000
+    flags:
+      - '--show-errors'
+      - '-j 4'
+    # gba -> gcc randomization weights (agbcc is GCC 2.x-era), matching our
+    # permuter_settings.toml `compiler_type = "gcc"`.
+    compilerType: gcc
+
+  # ---- Integrator (optional, post-match) ----
+  # Could auto-open a worktree, drop the matched C into src/, run `make compare`,
+  # and commit. Left disabled: FE8J carving is currently script-driven and we want
+  # a human/loop to gate `make compare` regressions. Enable deliberately later.
+  # integrator:
+  #   enable: true
+  #   integratorModule: ./mizuchi-integrator.mjs
+  #   verifyBuildScript: |
+  #     cd {{worktreePath}} && make compare
+  #   autoAction: commit
+  #   commitMessageTemplate: "match {{functionName}}"
+  #   branchTemplate: "mizuchi/{{functionName}}"

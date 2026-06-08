@@ -24,6 +24,11 @@ src/data/*.s
 /tools/decomp-permuter
 /nonmatchings/
 
+# mizuchi: matching-decomp pipeline orchestrator (macabeus/mizuchi), vendored
+# locally via scripts/tools/mizuchi/setup.sh. The setup script + FE8J config
+# (scripts/tools/mizuchi/) and docs/tools/mizuchi.md are tracked.
+/tools/mizuchi
+
 # Claude Code: share settings.json + loop_prompt.md, but keep local/transient
 # state out (per-user overrides and the ralph-loop session-state file).
 .claude/settings.local.json
