@@ -7,3 +7,13 @@
 *.pal text eol=crlf
 
 *.sha1 text eol=lf
+
+# Layout manifests are append-only sets that scripts/gen_layout.py sorts + dedups,
+# so a union merge of concurrent appends is always safe (a genuine range overlap
+# is still caught by gen_layout's validator, and the serial integrator's
+# `make compare` rejects it). This is a belt-and-suspenders net for the monolith
+# manifests while carves migrate to per-task fragments (layout/<name>.d/). NOT for
+# patches.tsv (per-object keyed) or the read-only reference TSVs.
+layout/carved_rom.tsv    merge=union
+layout/carved_ram.tsv    merge=union
+layout/baseline_syms.tsv merge=union
