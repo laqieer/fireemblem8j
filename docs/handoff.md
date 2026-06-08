@@ -8,8 +8,8 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
-- **Functions decompiled: 1212 / 8,528 = 14.2%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 285.** `make compare` → OK. Build is always byte-perfect
+- **Functions decompiled: 1218 / 8,528 = 14.3%** (`python3 scripts/calcprogress.py`).
+- **Carved objects: 286.** `make compare` → OK. Build is always byte-perfect
   (`port_run` verifies every carve and reverts non-matches).
 - **.bss-overlap class RESOLVED** via `--no-check-sections` (Makefile): the overlaps
   were benign NOLOAD shared-RAM collisions; ld's default check made them fatal on any
@@ -84,7 +84,7 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
        `ss[1]`). BUT these are graphics-heavy region-different banim effects (many
        Img_*/Pal_*/AnimScr_* pointers) — a correct base likely still leaves
        region-different content diffs. Lower priority than Phase-3 no-runs.
-     - **no-runs ×15 / compile-fail ×1 (bmbattle)** — Phase 3 (hand-decompile). compile-fail FIX SHIPPED: in-subset forward refs now get the real US prototype after the includes (carved worldmap_path); bmbattle is a different compile issue (TBD).
+     - **no-runs ×15 — Phase 3 (hand-decompile) is now the ONLY remaining class with a path.** compile-fail class CLEARED (worldmap_path: forward-ref prototype; bmbattle: incremental-trim fallback). Every generalizing-fixable class is resolved; the rest (15 no-runs region-different code, ~9 compound romdata near-misses, 3 huge-diff banim) needs per-function hand-decompilation via ida/ghidra+permuter — sessions per carve, not turns.
 3. **Phase 3 — region-different CODE** (`no verified runs`): hand-decompile the
    functions in `ida`/`ghidra` (decompile by JP address), write `src/` C matching
    the JP behaviour, byte-match with the permuter, then carve + `make compare`.
