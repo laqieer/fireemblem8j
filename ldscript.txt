@@ -659,6 +659,7 @@ SECTIONS
         asm/baserom.o(.gap_301);
         asm/dat_const_data_E162A_p2.o(.rodata.dat_const_data_E162A_p2);
         asm/baserom.o(.gap_302);
+        asm/msg_data.o(.rodata.msg_data);
         asm/dat_const_data_chapter_maps_p0.o(.rodata.dat_const_data_chapter_maps_p0);
         asm/baserom.o(.gap_303);
         asm/dat_const_data_chapter_maps_p1.o(.rodata.dat_const_data_chapter_maps_p1);
