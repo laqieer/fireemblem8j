@@ -318,6 +318,7 @@
 0DCD88	0DCDAC	src/cp_order.o(.rodata)	cp_order .rodata
 0DCDC4	0DCDD0	src/cp_perform.o(.rodata)	cp_perform .rodata
 0DD368	0DD3D0	src/cp_staff.o(.rodata)	cp_staff .rodata
+0DD41C	0DE85C	asm/dat_gTacticianTextConf_ref.o(.rodata.dat_gTacticianTextConf_ref)	gTacticianTextConf region-diff (funcmap code-ref, 5KB)
 0DED24	0DED3A	src/sio_main2.o(.rodata)	sio_main2 .rodata
 0DEDF2	0DEE1A	src/sio_postbattle.o(.rodata)	sio_postbattle .rodata
 0DEE80	0DEE88	src/sio_rulesettings.o(.rodata)	sio_rulesettings .rodata
@@ -620,6 +621,8 @@
 577480	5775A4	asm/dat_libc_a_mprec.o(.rodata.dat_libc_a_mprec)	dat_libc_a_mprec region-same shifted (0KB)
 5776F0	577EF0	src/fontgrp.o(.data)	fontgrp .data
 577F4C	57994C	asm/dat_fontgrp_data.o(.rodata.dat_fontgrp_data)	dat_fontgrp_data region-same shifted (6KB)
+57994C	579D4C	asm/dat_TextGlyphs_System_ref.o(.rodata.dat_TextGlyphs_System_ref)	TextGlyphs_System region-diff (funcmap code-ref, 1KB)
+593F74	594374	asm/dat_TextGlyphs_Talk_ref.o(.rodata.dat_TextGlyphs_Talk_ref)	TextGlyphs_Talk region-diff (funcmap code-ref, 1KB)
 5B8CDC	5B8D84	src/ctc.o(.data)	ctc .data
 5B8D84	5B8EEC	asm/dat_worldmap_gmapunit_p676.o(.rodata.dat_worldmap_gmapunit_p676)	dat_worldmap_gmapunit_p676 region-same per-sym shifted (0KB)
 5B8F70	5B8F80	src/face.o(.data)	face .data
@@ -631,6 +634,7 @@
 5BA470	5C14B0	asm/dat_data_item_icon.o(.rodata.dat_data_item_icon)	dat_data_item_icon region-same shifted (28KB)
 5C14B0	5C1D30	asm/dat_generic_icon.o(.rodata.dat_generic_icon)	dat_generic_icon region-same shifted (2KB)
 5C28B8	5C2980	src/bm.o(.data)	bm .data
+5C2A50	5C2E50	asm/dat_gUnitLookup_ref.o(.rodata.dat_gUnitLookup_ref)	gUnitLookup region-diff (funcmap code-ref, 1KB)
 5C3308	5C3320	src/menuitempanel.o(.data)	menuitempanel .data
 5C3320	5C3348	src/prep_unitswap.o(.data)	prep_unitswap .data
 5C3448	5C34F0	src/trapfx.o(.data)	trapfx .data
@@ -644,6 +648,7 @@
 5C3AE0	5C3B10	src/bmmenu.o(.data)	bmmenu .data
 5C3B4C	5C3C9C	asm/dat_worldmap_gmapunit_p702.o(.rodata.dat_worldmap_gmapunit_p702)	dat_worldmap_gmapunit_p702 region-same per-sym shifted (0KB)
 5C4104	5C411C	src/bmtrade.o(.data)	bmtrade .data
+5C4F14	5C534C	asm/dat_gUnitActionMenuItems_ref.o(.rodata.dat_gUnitActionMenuItems_ref)	gUnitActionMenuItems region-diff (funcmap code-ref, 1KB)
 5C6080	5C6084	src/bmpatharrowdisp.o(.data)	bmpatharrowdisp .data
 5C6AC8	5C6AD4	src/bksel.o(.data)	bksel .data
 5C7290	5C7540	asm/dat_ui_palettes.o(.rodata.dat_ui_palettes)	dat_ui_palettes region-same shifted (0KB)
@@ -962,6 +967,8 @@
 855F4C	856004	asm/dat_worldmap_gmapunit_p1117.o(.rodata.dat_worldmap_gmapunit_p1117)	dat_worldmap_gmapunit_p1117 region-same per-sym shifted (0KB)
 85602C	85612C	asm/dat_worldmap_gmapunit_p1118.o(.rodata.dat_worldmap_gmapunit_p1118)	dat_worldmap_gmapunit_p1118 region-same per-sym shifted (0KB)
 85616C	8582BC	asm/dat_data_banimmisc.o(.rodata.dat_data_banimmisc)	dat_data_banimmisc region-same shifted (8KB)
+8582BC	85B6BC	asm/dat_gCharacterData_ref.o(.rodata.dat_gCharacterData_ref)	gCharacterData region-diff (funcmap code-ref, 13KB)
+85E068	85FD60	asm/dat_gItemData_ref.o(.rodata.dat_gItemData_ref)	gItemData region-diff (funcmap code-ref, 7KB)
 85FDE2	85FF27	asm/dat_worldmap_gmapunit_p1125.o(.rodata.dat_worldmap_gmapunit_p1125)	dat_worldmap_gmapunit_p1125 region-same per-sym shifted (0KB)
 85FFEA	8601B1	asm/dat_worldmap_gmapunit_p1127.o(.rodata.dat_worldmap_gmapunit_p1127)	dat_worldmap_gmapunit_p1127 region-same per-sym shifted (0KB)
 8609D1	860A53	asm/dat_worldmap_gmapunit_p1128.o(.rodata.dat_worldmap_gmapunit_p1128)	dat_worldmap_gmapunit_p1128 region-same per-sym shifted (0KB)
@@ -977,6 +984,8 @@
 9036DC	90375C	asm/dat_worldmap_gmapunit_p1293.o(.rodata.dat_worldmap_gmapunit_p1293)	dat_worldmap_gmapunit_p1293 region-same per-sym shifted (0KB)
 9037AC	9038BC	asm/dat_worldmap_gmapunit_p1295.o(.rodata.dat_worldmap_gmapunit_p1295)	dat_worldmap_gmapunit_p1295 region-same per-sym shifted (0KB)
 9039C0	903A50	asm/dat_worldmap_gmapunit_p1297.o(.rodata.dat_worldmap_gmapunit_p1297)	dat_worldmap_gmapunit_p1297 region-same per-sym shifted (0KB)
+904E1C	907BC8	asm/dat_gChapterDataTable_ref.o(.rodata.dat_gChapterDataTable_ref)	gChapterDataTable region-diff (funcmap code-ref, 11KB)
+907BC8	907F78	asm/dat_gChapterDataAssetTable_ref.o(.rodata.dat_gChapterDataAssetTable_ref)	gChapterDataAssetTable region-diff (funcmap code-ref, 0KB)
 9082A0	908354	asm/dat_worldmap_gmapunit_p1311.o(.rodata.dat_worldmap_gmapunit_p1311)	dat_worldmap_gmapunit_p1311 region-same per-sym shifted (0KB)
 908E8C	908F54	asm/dat_worldmap_gmapunit_p1319.o(.rodata.dat_worldmap_gmapunit_p1319)	dat_worldmap_gmapunit_p1319 region-same per-sym shifted (0KB)
 909008	90915C	asm/dat_worldmap_gmapunit_p1320.o(.rodata.dat_worldmap_gmapunit_p1320)	dat_worldmap_gmapunit_p1320 region-same per-sym shifted (0KB)
@@ -993,8 +1002,10 @@
 90EEA8	90EFAC	asm/dat_worldmap_gmapunit_p1341.o(.rodata.dat_worldmap_gmapunit_p1341)	dat_worldmap_gmapunit_p1341 region-same per-sym shifted (0KB)
 910108	91020C	asm/dat_worldmap_gmapunit_p1347.o(.rodata.dat_worldmap_gmapunit_p1347)	dat_worldmap_gmapunit_p1347 region-same per-sym shifted (0KB)
 910928	9109A8	asm/dat_worldmap_gmapunit_p1351.o(.rodata.dat_worldmap_gmapunit_p1351)	dat_worldmap_gmapunit_p1351 region-same per-sym shifted (0KB)
+911480	9116D8	asm/dat_UnitDef_Ch16AEnemy_0_ref.o(.rodata.dat_UnitDef_Ch16AEnemy_0_ref)	UnitDef_Ch16AEnemy_0 region-diff (funcmap code-ref, 0KB)
 9116D8	911764	asm/dat_worldmap_gmapunit_p1352.o(.rodata.dat_worldmap_gmapunit_p1352)	dat_worldmap_gmapunit_p1352 region-same per-sym shifted (0KB)
 91237C	912480	asm/dat_worldmap_gmapunit_p1358.o(.rodata.dat_worldmap_gmapunit_p1358)	dat_worldmap_gmapunit_p1358 region-same per-sym shifted (0KB)
+9135E8	91382C	asm/dat_UnitDef_Ch18AEnemy_0_ref.o(.rodata.dat_UnitDef_Ch18AEnemy_0_ref)	UnitDef_Ch18AEnemy_0 region-diff (funcmap code-ref, 0KB)
 9138CC	913958	asm/dat_worldmap_gmapunit_p1359.o(.rodata.dat_worldmap_gmapunit_p1359)	dat_worldmap_gmapunit_p1359 region-same per-sym shifted (0KB)
 91478C	9148F4	asm/dat_worldmap_gmapunit_p1360.o(.rodata.dat_worldmap_gmapunit_p1360)	dat_worldmap_gmapunit_p1360 region-same per-sym shifted (0KB)
 914B24	914BD8	asm/dat_worldmap_gmapunit_p1361.o(.rodata.dat_worldmap_gmapunit_p1361)	dat_worldmap_gmapunit_p1361 region-same per-sym shifted (0KB)
@@ -1007,13 +1018,16 @@
 9199C8	919A90	asm/dat_worldmap_gmapunit_p1376.o(.rodata.dat_worldmap_gmapunit_p1376)	dat_worldmap_gmapunit_p1376 region-same per-sym shifted (0KB)
 91A47C	91A580	asm/dat_worldmap_gmapunit_p1377.o(.rodata.dat_worldmap_gmapunit_p1377)	dat_worldmap_gmapunit_p1377 region-same per-sym shifted (0KB)
 91AB48	91AC38	asm/dat_worldmap_gmapunit_p1379.o(.rodata.dat_worldmap_gmapunit_p1379)	dat_worldmap_gmapunit_p1379 region-same per-sym shifted (0KB)
+91BBDC	91BED4	asm/dat_UnitDef_Ch16BEnemy_0_ref.o(.rodata.dat_UnitDef_Ch16BEnemy_0_ref)	UnitDef_Ch16BEnemy_0 region-diff (funcmap code-ref, 0KB)
 91C03C	91C104	asm/dat_worldmap_gmapunit_p1383.o(.rodata.dat_worldmap_gmapunit_p1383)	dat_worldmap_gmapunit_p1383 region-same per-sym shifted (0KB)
 91C12C	91C230	asm/dat_worldmap_gmapunit_p1384.o(.rodata.dat_worldmap_gmapunit_p1384)	dat_worldmap_gmapunit_p1384 region-same per-sym shifted (0KB)
+91D044	91D288	asm/dat_UnitDef_Ch18BEnemy_0_ref.o(.rodata.dat_UnitDef_Ch18BEnemy_0_ref)	UnitDef_Ch18BEnemy_0 region-diff (funcmap code-ref, 0KB)
 91D288	91D314	asm/dat_worldmap_gmapunit_p1385.o(.rodata.dat_worldmap_gmapunit_p1385)	dat_worldmap_gmapunit_p1385 region-same per-sym shifted (0KB)
 91E118	91E280	asm/dat_worldmap_gmapunit_p1386.o(.rodata.dat_worldmap_gmapunit_p1386)	dat_worldmap_gmapunit_p1386 region-same per-sym shifted (0KB)
 91E71C	91E7A8	asm/dat_worldmap_gmapunit_p1387.o(.rodata.dat_worldmap_gmapunit_p1387)	dat_worldmap_gmapunit_p1387 region-same per-sym shifted (0KB)
 91E8D4	91E988	asm/dat_worldmap_gmapunit_p1388.o(.rodata.dat_worldmap_gmapunit_p1388)	dat_worldmap_gmapunit_p1388 region-same per-sym shifted (0KB)
 91F4B4	91F5B8	asm/dat_worldmap_gmapunit_p1389.o(.rodata.dat_worldmap_gmapunit_p1389)	dat_worldmap_gmapunit_p1389 region-same per-sym shifted (0KB)
+91F5B8	91F89C	asm/dat_UnitDef_Ch21BEnemy_0_ref.o(.rodata.dat_UnitDef_Ch21BEnemy_0_ref)	UnitDef_Ch21BEnemy_0 region-diff (funcmap code-ref, 0KB)
 91FB1C	91FD38	asm/dat_worldmap_gmapunit_p1390.o(.rodata.dat_worldmap_gmapunit_p1390)	dat_worldmap_gmapunit_p1390 region-same per-sym shifted (0KB)
 91FD6C	91FE20	asm/dat_worldmap_gmapunit_p1391.o(.rodata.dat_worldmap_gmapunit_p1391)	dat_worldmap_gmapunit_p1391 region-same per-sym shifted (0KB)
 92008C	920140	asm/dat_worldmap_gmapunit_p1392.o(.rodata.dat_worldmap_gmapunit_p1392)	dat_worldmap_gmapunit_p1392 region-same per-sym shifted (0KB)
@@ -1021,6 +1035,7 @@
 9205E4	920698	asm/dat_worldmap_gmapunit_p1394.o(.rodata.dat_worldmap_gmapunit_p1394)	dat_worldmap_gmapunit_p1394 region-same per-sym shifted (0KB)
 9209E0	920AD0	asm/dat_worldmap_gmapunit_p1395.o(.rodata.dat_worldmap_gmapunit_p1395)	dat_worldmap_gmapunit_p1395 region-same per-sym shifted (0KB)
 920E0C	920EC0	asm/dat_worldmap_gmapunit_p1396.o(.rodata.dat_worldmap_gmapunit_p1396)	dat_worldmap_gmapunit_p1396 region-same per-sym shifted (0KB)
+920EC0	921140	asm/dat_UnitDef_TowerEnemy_8_ref.o(.rodata.dat_UnitDef_TowerEnemy_8_ref)	UnitDef_TowerEnemy_8 region-diff (funcmap code-ref, 0KB)
 921208	9212BC	asm/dat_worldmap_gmapunit_p1397.o(.rodata.dat_worldmap_gmapunit_p1397)	dat_worldmap_gmapunit_p1397 region-same per-sym shifted (0KB)
 921514	9218FC	asm/dat_worldmap_gmapunit_p1398.o(.rodata.dat_worldmap_gmapunit_p1398)	dat_worldmap_gmapunit_p1398 region-same per-sym shifted (0KB)
 921910	921E38	asm/dat_worldmap_gmapunit_p1399.o(.rodata.dat_worldmap_gmapunit_p1399)	dat_worldmap_gmapunit_p1399 region-same per-sym shifted (1KB)
@@ -1030,8 +1045,10 @@
 922770	922B08	asm/dat_worldmap_gmapunit_p1403.o(.rodata.dat_worldmap_gmapunit_p1403)	dat_worldmap_gmapunit_p1403 region-same per-sym shifted (0KB)
 922B1C	922FCC	asm/dat_worldmap_gmapunit_p1404.o(.rodata.dat_worldmap_gmapunit_p1404)	dat_worldmap_gmapunit_p1404 region-same per-sym shifted (1KB)
 9230D8	9231C8	asm/dat_worldmap_gmapunit_p1407.o(.rodata.dat_worldmap_gmapunit_p1407)	dat_worldmap_gmapunit_p1407 region-same per-sym shifted (0KB)
+9231C8	9233F8	asm/dat_UnitDef_RuinEnemy_22_ref.o(.rodata.dat_UnitDef_RuinEnemy_22_ref)	UnitDef_RuinEnemy_22 region-diff (funcmap code-ref, 0KB)
 92340C	923510	asm/dat_worldmap_gmapunit_p1408.o(.rodata.dat_worldmap_gmapunit_p1408)	dat_worldmap_gmapunit_p1408 region-same per-sym shifted (0KB)
 923538	923628	asm/dat_worldmap_gmapunit_p1409.o(.rodata.dat_worldmap_gmapunit_p1409)	dat_worldmap_gmapunit_p1409 region-same per-sym shifted (0KB)
+923628	92395C	asm/dat_UnitDef_RuinEnemy_31_ref.o(.rodata.dat_UnitDef_RuinEnemy_31_ref)	UnitDef_RuinEnemy_31 region-diff (funcmap code-ref, 0KB)
 923970	923AD8	asm/dat_worldmap_gmapunit_p1410.o(.rodata.dat_worldmap_gmapunit_p1410)	dat_worldmap_gmapunit_p1410 region-same per-sym shifted (0KB)
 923E5C	923F38	asm/dat_worldmap_gmapunit_p1411.o(.rodata.dat_worldmap_gmapunit_p1411)	dat_worldmap_gmapunit_p1411 region-same per-sym shifted (0KB)
 9253B0	925BF8	asm/dat_worldmap_gmapunit_p1412.o(.rodata.dat_worldmap_gmapunit_p1412)	dat_worldmap_gmapunit_p1412 region-same per-sym shifted (2KB)
@@ -1041,6 +1058,7 @@
 926094	926134	asm/dat_worldmap_gmapunit_p1417.o(.rodata.dat_worldmap_gmapunit_p1417)	dat_worldmap_gmapunit_p1417 region-same per-sym shifted (0KB)
 926218	9263A8	asm/dat_worldmap_gmapunit_p1418.o(.rodata.dat_worldmap_gmapunit_p1418)	dat_worldmap_gmapunit_p1418 region-same per-sym shifted (0KB)
 9264B4	92661C	asm/dat_worldmap_gmapunit_p1419.o(.rodata.dat_worldmap_gmapunit_p1419)	dat_worldmap_gmapunit_p1419 region-same per-sym shifted (0KB)
+926854	926B14	asm/dat_gMonsterItemsByClassIndex_ref.o(.rodata.dat_gMonsterItemsByClassIndex_ref)	gMonsterItemsByClassIndex region-diff (funcmap code-ref, 0KB)
 92AA3C	92AB3C	asm/dat_data_bg_p0.o(.rodata.dat_data_bg_p0)	dat_data_bg_p0 region-same per-sym shifted (0KB)
 92EDD8	92EED8	asm/dat_data_bg_p1.o(.rodata.dat_data_bg_p1)	dat_data_bg_p1 region-same per-sym shifted (0KB)
 9323B0	932964	asm/dat_data_bg_p2.o(.rodata.dat_data_bg_p2)	dat_data_bg_p2 region-same per-sym shifted (1KB)
@@ -1087,6 +1105,7 @@
 9CFD20	A0DE50	asm/dat_data_map_anim_frames.o(.rodata.dat_data_map_anim_frames)	dat_data_map_anim_frames region-same shifted (248KB)
 A0DE50	A12AC0	asm/dat_data_99D6DC.o(.rodata.dat_data_99D6DC)	dat_data_99D6DC region-same shifted (19KB)
 A1313A	A13256	asm/dat_worldmap_gmapunit_p1471.o(.rodata.dat_worldmap_gmapunit_p1471)	dat_worldmap_gmapunit_p1471 region-same per-sym shifted (0KB)
+A13488	A13880	asm/dat_unit_icon_move_table_ref.o(.rodata.dat_unit_icon_move_table_ref)	unit_icon_move_table region-diff (funcmap code-ref, 0KB)
 A146BC	A146D4	src/mapanim_spellassocfx.o(.data)	mapanim_spellassocfx .data
 A14734	A149D4	src/mapanim_eventcall.o(.data)	mapanim_eventcall .data
 A1599C	A160F4	asm/dat_anim_mapanim_statgain.o(.rodata.dat_anim_mapanim_statgain)	dat_anim_mapanim_statgain region-same shifted (1KB)
@@ -1100,15 +1119,22 @@ A22F08	A27128	asm/dat_mapanim_nightmare.o(.rodata.dat_mapanim_nightmare)	dat_map
 A27128	A28A48	asm/dat_mapanim_monster_gorgon.o(.rodata.dat_mapanim_monster_gorgon)	dat_mapanim_monster_gorgon region-same shifted (6KB)
 A28A48	A588C0	asm/dat_mapanim_eventcall.o(.rodata.dat_mapanim_eventcall)	dat_mapanim_eventcall region-same shifted (191KB)
 A5A35C	A5A618	asm/dat_worldmap_gmapunit_p1519.o(.rodata.dat_worldmap_gmapunit_p1519)	dat_worldmap_gmapunit_p1519 region-same per-sym shifted (0KB)
+A5F230	A5F770	asm/dat_gSupportTalkList_ref.o(.rodata.dat_gSupportTalkList_ref)	gSupportTalkList region-diff (funcmap code-ref, 1KB)
 A5FEB6	A5FFAD	asm/dat_worldmap_gmapunit_p1539.o(.rodata.dat_worldmap_gmapunit_p1539)	dat_worldmap_gmapunit_p1539 region-same per-sym shifted (0KB)
 A601F8	A602D4	asm/dat_worldmap_gmapunit_p1542.o(.rodata.dat_worldmap_gmapunit_p1542)	dat_worldmap_gmapunit_p1542 region-same per-sym shifted (0KB)
 A604B4	A60754	asm/dat_worldmap_gmapunit_p1546.o(.rodata.dat_worldmap_gmapunit_p1546)	dat_worldmap_gmapunit_p1546 region-same per-sym shifted (0KB)
 A6082C	A608CC	asm/dat_worldmap_gmapunit_p1548.o(.rodata.dat_worldmap_gmapunit_p1548)	dat_worldmap_gmapunit_p1548 region-same per-sym shifted (0KB)
 A60960	A60A28	asm/dat_worldmap_gmapunit_p1549.o(.rodata.dat_worldmap_gmapunit_p1549)	dat_worldmap_gmapunit_p1549 region-same per-sym shifted (0KB)
 A60AD4	A60AE8	src/events_script_utils.o(.data)	events_script_utils .data
+A66BB0	A66F88	asm/dat_EventScr_Ch11a_EndingScene_ref.o(.rodata.dat_EventScr_Ch11a_EndingScene_ref)	EventScr_Ch11a_EndingScene region-diff (funcmap code-ref, 0KB)
+A678CC	A67B00	asm/dat_EventScr_Ch13a_EndingScene_ref.o(.rodata.dat_EventScr_Ch13a_EndingScene_ref)	EventScr_Ch13a_EndingScene region-diff (funcmap code-ref, 0KB)
+A68B78	A68F2C	asm/dat_EventScr_Ch16A_11_ref.o(.rodata.dat_EventScr_Ch16A_11_ref)	EventScr_Ch16A_11 region-diff (funcmap code-ref, 0KB)
+A68F3C	A69408	asm/dat_EventScr_Ch16A_12_ref.o(.rodata.dat_EventScr_Ch16A_12_ref)	EventScr_Ch16A_12 region-diff (funcmap code-ref, 1KB)
+A6A76C	A6AA20	asm/dat_EventScr_Ch19A_11_ref.o(.rodata.dat_EventScr_Ch19A_11_ref)	EventScr_Ch19A_11 region-diff (funcmap code-ref, 0KB)
 A70C88	A70F34	asm/dat_worldmap_gmapunit_p1558.o(.rodata.dat_worldmap_gmapunit_p1558)	dat_worldmap_gmapunit_p1558 region-same per-sym shifted (0KB)
 A71050	A710FC	asm/dat_worldmap_gmapunit_p1559.o(.rodata.dat_worldmap_gmapunit_p1559)	dat_worldmap_gmapunit_p1559 region-same per-sym shifted (0KB)
 A71194	A71268	asm/dat_worldmap_gmapunit_p1560.o(.rodata.dat_worldmap_gmapunit_p1560)	dat_worldmap_gmapunit_p1560 region-same per-sym shifted (0KB)
+A715AC	A71BF0	asm/dat_EventScr_Ruin_54_ref.o(.rodata.dat_EventScr_Ruin_54_ref)	EventScr_Ruin_54 region-diff (funcmap code-ref, 1KB)
 A72BB8	A72BF0	src/statscreen.o(.data)	statscreen .data
 A738E0	A73900	src/player_interface.o(.data)	player_interface .data
 A73F9C	A74CEC	asm/dat_worldmap_gmapunit_p1572.o(.rodata.dat_worldmap_gmapunit_p1572)	dat_worldmap_gmapunit_p1572 region-same per-sym shifted (3KB)
@@ -1138,6 +1164,7 @@ A9D448	A9D462	src/savedraw.o(.data)	savedraw .data
 A9D856	A9D904	asm/dat_worldmap_gmapunit_p1624.o(.rodata.dat_worldmap_gmapunit_p1624)	dat_worldmap_gmapunit_p1624 region-same per-sym shifted (0KB)
 A9DAA4	A9DAB4	src/cursor_hand.o(.data)	cursor_hand .data
 A9DBCC	A9DCD4	asm/dat_worldmap_gmapunit_p1628.o(.rodata.dat_worldmap_gmapunit_p1628)	dat_worldmap_gmapunit_p1628 region-same per-sym shifted (0KB)
+A9DDDC	A9E23C	asm/dat_gSoundRoomTable_ref.o(.rodata.dat_gSoundRoomTable_ref)	gSoundRoomTable region-diff (funcmap code-ref, 1KB)
 A9E23C	A9E244	src/soundroom.o(.data)	soundroom .data
 A9E5C0	AA3860	asm/dat_menu_save_main_bg_p0.o(.rodata.dat_menu_save_main_bg_p0)	dat_menu_save_main_bg_p0 region-same per-sym shifted (20KB)
 AA7094	AA71D4	asm/dat_worldmap_gmapunit_p1634.o(.rodata.dat_worldmap_gmapunit_p1634)	dat_worldmap_gmapunit_p1634 region-same per-sym shifted (0KB)
@@ -1145,6 +1172,7 @@ AA77E4	AA9F98	asm/dat_worldmap_gmapunit_p1636.o(.rodata.dat_worldmap_gmapunit_p1
 AAA3CC	AAAC4C	asm/dat_worldmap_gmapunit_p1637.o(.rodata.dat_worldmap_gmapunit_p1637)	dat_worldmap_gmapunit_p1637 region-same per-sym shifted (2KB)
 AADC58	AAEB40	asm/dat_worldmap_gmapunit_p1638.o(.rodata.dat_worldmap_gmapunit_p1638)	dat_worldmap_gmapunit_p1638 region-same per-sym shifted (3KB)
 AAF350	AAF6D8	asm/dat_worldmap_gmapunit_p1639.o(.rodata.dat_worldmap_gmapunit_p1639)	dat_worldmap_gmapunit_p1639 region-same per-sym shifted (0KB)
+AAF700	AAF9EC	asm/dat_gGameOptions_ref.o(.rodata.dat_gGameOptions_ref)	gGameOptions region-diff (funcmap code-ref, 0KB)
 AB0B56	AB0C26	asm/dat_worldmap_gmapunit_p1643.o(.rodata.dat_worldmap_gmapunit_p1643)	dat_worldmap_gmapunit_p1643 region-same per-sym shifted (0KB)
 AB0C26	AB0D18	asm/dat_worldmap_gmapunit_p1644.o(.rodata.dat_worldmap_gmapunit_p1644)	dat_worldmap_gmapunit_p1644 region-same per-sym shifted (0KB)
 AB0FDC	AB7144	asm/dat_data_A2EEF0_p0.o(.rodata.dat_data_A2EEF0_p0)	dat_data_A2EEF0_p0 region-same per-sym shifted (24KB)
@@ -1152,6 +1180,7 @@ ABCAD0	ABCAD4	src/bmshop.o(.data)	bmshop .data
 ABFFE4	AC00A8	asm/dat_worldmap_gmapunit_p1652.o(.rodata.dat_worldmap_gmapunit_p1652)	dat_worldmap_gmapunit_p1652 region-same per-sym shifted (0KB)
 AC0394	AC059C	src/cg.o(.data)	cg .data
 AC0AF8	AC0B90	asm/dat_worldmap_gmapunit_p1655.o(.rodata.dat_worldmap_gmapunit_p1655)	dat_worldmap_gmapunit_p1655 region-same per-sym shifted (0KB)
+AC1108	AC16C8	asm/dat_ProcScr_WorldMapMain_ref.o(.rodata.dat_ProcScr_WorldMapMain_ref)	ProcScr_WorldMapMain region-diff (funcmap code-ref, 1KB)
 AC2BE0	AC3AA8	asm/dat_ending_details_p0.o(.rodata.dat_ending_details_p0)	dat_ending_details_p0 region-same per-sym shifted (3KB)
 AC4C88	AC50A4	asm/dat_ending_fin_p0.o(.rodata.dat_ending_fin_p0)	dat_ending_fin_p0 region-same per-sym shifted (1KB)
 AC6C98	AC718C	asm/dat_ending_fin_p1.o(.rodata.dat_ending_fin_p1)	dat_ending_fin_p1 region-same per-sym shifted (1KB)
@@ -1170,8 +1199,15 @@ B1E9B8	B23F00	asm/dat_worldmap_minimap_p3.o(.rodata.dat_worldmap_minimap_p3)	dat
 B23F00	B24D0C	asm/dat_anim_worldmap_highlight.o(.rodata.dat_anim_worldmap_highlight)	dat_anim_worldmap_highlight region-same shifted (3KB)
 B25298	B25710	asm/dat_anim_worldmap_highlight_p5.o(.rodata.dat_anim_worldmap_highlight_p5)	dat_anim_worldmap_highlight_p5 region-same per-sym shifted (1KB)
 B2576C	B25A78	asm/dat_anim_worldmap_highlight_p7.o(.rodata.dat_anim_worldmap_highlight_p7)	dat_anim_worldmap_highlight_p7 region-same per-sym shifted (0KB)
+B25FEC	B26374	asm/dat_Img_WmHightLightMap7_ref.o(.rodata.dat_Img_WmHightLightMap7_ref)	Img_WmHightLightMap7 region-diff (funcmap code-ref, 0KB)
 B26938	B26A6C	asm/dat_worldmap_skirmish.o(.rodata.dat_worldmap_skirmish)	dat_worldmap_skirmish region-same shifted (0KB)
 B2759C	B27970	asm/dat_anim_worldmap_skirmish.o(.rodata.dat_anim_worldmap_skirmish)	dat_anim_worldmap_skirmish region-same shifted (0KB)
+B3B74C	B3C2C8	asm/dat_gGfx_OpSubtitle_00_ref.o(.rodata.dat_gGfx_OpSubtitle_00_ref)	gGfx_OpSubtitle_00 region-diff (funcmap code-ref, 2KB)
+B3C2C8	B3C998	asm/dat_gGfx_OpSubtitle_01_ref.o(.rodata.dat_gGfx_OpSubtitle_01_ref)	gGfx_OpSubtitle_01 region-diff (funcmap code-ref, 1KB)
+B3CADC	B3CFE8	asm/dat_gGfx_OpSubtitle_03_ref.o(.rodata.dat_gGfx_OpSubtitle_03_ref)	gGfx_OpSubtitle_03 region-diff (funcmap code-ref, 1KB)
+B3CFE8	B3DBB8	asm/dat_gGfx_OpSubtitle_04_ref.o(.rodata.dat_gGfx_OpSubtitle_04_ref)	gGfx_OpSubtitle_04 region-diff (funcmap code-ref, 2KB)
+B3DBB8	B3E1C8	asm/dat_gGfx_OpSubtitle_05_ref.o(.rodata.dat_gGfx_OpSubtitle_05_ref)	gGfx_OpSubtitle_05 region-diff (funcmap code-ref, 1KB)
+B3E878	B3EAB8	asm/dat_gTsa_OpSubtitle_04_ref.o(.rodata.dat_gTsa_OpSubtitle_04_ref)	gTsa_OpSubtitle_04 region-diff (funcmap code-ref, 0KB)
 B3EE00	B3F024	asm/dat_titlescreen.o(.rodata.dat_titlescreen)	dat_titlescreen region-same shifted (0KB)
 B3F690	B3F7BC	asm/dat_data_AA6BFA.o(.rodata.dat_data_AA6BFA)	dat_data_AA6BFA region-same shifted (0KB)
 B3FCF4	B44B40	asm/dat_data_titlescreen.o(.rodata.dat_data_titlescreen)	dat_data_titlescreen region-same shifted (19KB)
@@ -1197,6 +1233,7 @@ BAB71C	BAB754	src/classchg-handler.o(.data)	classchg-handler .data
 BABAB4	BABAF4	src/classchg-postconfirm.o(.data)	classchg-postconfirm .data
 BABAF4	BABAF8	src/bmguide.o(.data)	bmguide .data
 BABE04	BB08B4	asm/dat_data_B12A60.o(.rodata.dat_data_B12A60)	dat_data_B12A60 region-same shifted (18KB)
+BB8A8C	BB8E94	asm/dat___malloc_av__ref.o(.rodata.dat___malloc_av__ref)	__malloc_av_ region-diff (funcmap code-ref, 1KB)
 C00000	C00008	src/banim_data.o(.data.banim_array_len)	banim_number
 C00008	C01928	src/banim_data.o(.data.banim_array)	banim_data
 C02000	E47180	asm/data_banim.o(.data.data_banim)	data_banim battle-anim assets (2324 KB, region-same)

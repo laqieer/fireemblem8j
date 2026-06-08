@@ -20,7 +20,6 @@ gActiveUnit	03004DF0	data	unit_facing
 gWorkingMovementScript	02033EF8	data	unit_facing
 GetFacingDirection	0807DD00	thumb	unit_facing
 SetAutoMuMoveScript	0807AB24	thumb	unit_facing
-ProcScr_WorldMapMain	08AC1108	data	worldmap_draw
 gGMData	03005270	data	worldmap_draw
 AddGmPath	080C16FC	thumb	worldmap_draw
 GmHideMuUnit	080C2C24	thumb	worldmap_draw
@@ -417,7 +416,6 @@ GetItemName	0801729C	thumb	uiarena
 gMid_Lv	08A73210	data	uiarena
 StartBgmCore	08002398	thumb	uiarena
 EndGmapEffect	080C619C	thumb	worldmap_entry
-unit_icon_move_table	08A13488	data	worldmap_gmapunit
 gUnk_6	0200AF00	data	worldmap_gmapunit
 AP_Delete	08009194	thumb	worldmap_gmapunit
 HideMoveRangeGraphics	0801D730	thumb	bmitemuse
@@ -743,7 +741,6 @@ GetExtraMapInfoSize	080AB5EC	thumb	bmsave-xmap
 GetTrap	0802EAC4	thumb	bmsave-xmap
 GetPermanentFlagBits	080860E8	thumb	bmsave-xmap
 GetChapterFlagBits	080860F4	thumb	bmsave-xmap
-gUnitLookup	085C2A50	data	bmsave-xmap
 gBanimBGLut02	088612F4	thumb	banim-battleparse
 gBanimBGLut08	0886147A	thumb	banim-battleparse
 PidStatsGetTotalBattleAmt	080A9348	thumb	gamerankings
@@ -752,7 +749,6 @@ PidStatsGetTotalExpGain	080A93E8	thumb	gamerankings
 GetNextChapterStatsSlot	080A8D00	thumb	gamerankings
 GetChapterStats	080A8CE0	thumb	gamerankings
 IsDifficultMode	0803460C	thumb	gamerankings
-gChapterDataTable	08904E1C	data	gamerankings
 GetChapterTacticsRank	080BACC8	thumb	gamerankings
 GetChapterSurvivalRank	080BAD48	thumb	gamerankings
 GetChapterFundsRank	080BAE60	thumb	gamerankings
@@ -992,7 +988,6 @@ DrawGameOptionIcon	080B6320	thumb	uiconfig
 DrawGameOptionText	080B6404	thumb	uiconfig
 DrawOptionValueTexts	080B6470	thumb	uiconfig
 LoadHelpBoxGfx	0808BB14	thumb	uimenu
-gCharacterData	088582BC	data	worldmap_mapmu
 MapUnitC_DeleteGmapUnit	080BFD3C	thumb	worldmap_mapmu
 NewMapUnit	080BFC20	thumb	worldmap_mapmu
 MapUnitC_SetPosition	080BFD64	thumb	worldmap_mapmu
@@ -1213,7 +1208,6 @@ WfxInit	08030A84	thumb	bmio
 IsMultiArenaSaveValid	080AAF64	thumb	bmsave-multiarena
 ReadMultiArenaSaveTeamName	080AB10C	thumb	bmsave-multiarena
 PromoMain_SetupTraineeEvent	080D2348	thumb	classchg-event
-gChapterDataAssetTable	08907BC8	data	chapterdata
 ClearWmTextVram	080C8348	thumb	worldmap_text
 StartSubSpell_efxSongBG	0805D800	thumb	banim-efxmagic-dancerings
 StartSubSpell_efxSongOBJ	0805D8DC	thumb	banim-efxmagic-dancerings

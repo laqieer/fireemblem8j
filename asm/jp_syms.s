@@ -73,9 +73,6 @@
 	.thumb_func
 	.set    SetAutoMuMoveScript, 0x0807AB24 + 1
 
-	.global ProcScr_WorldMapMain
-	.set    ProcScr_WorldMapMain, 0x08AC1108
-
 	.global gGMData
 	.set    gGMData, 0x03005270
 
@@ -1844,9 +1841,6 @@
 	.thumb_func
 	.set    EndGmapEffect, 0x080C619C + 1
 
-	.global unit_icon_move_table
-	.set    unit_icon_move_table, 0x08A13488
-
 	.global gUnk_6
 	.set    gUnk_6, 0x0200AF00
 
@@ -3196,9 +3190,6 @@
 	.thumb_func
 	.set    GetChapterFlagBits, 0x080860F4 + 1
 
-	.global gUnitLookup
-	.set    gUnitLookup, 0x085C2A50
-
 	.global gBanimBGLut02
 	.type   gBanimBGLut02, %function
 	.thumb_func
@@ -3238,9 +3229,6 @@
 	.type   IsDifficultMode, %function
 	.thumb_func
 	.set    IsDifficultMode, 0x0803460C + 1
-
-	.global gChapterDataTable
-	.set    gChapterDataTable, 0x08904E1C
 
 	.global GetChapterTacticsRank
 	.type   GetChapterTacticsRank, %function
@@ -4279,9 +4267,6 @@
 	.thumb_func
 	.set    LoadHelpBoxGfx, 0x0808BB14 + 1
 
-	.global gCharacterData
-	.set    gCharacterData, 0x088582BC
-
 	.global MapUnitC_DeleteGmapUnit
 	.type   MapUnitC_DeleteGmapUnit, %function
 	.thumb_func
@@ -5185,9 +5170,6 @@
 	.type   PromoMain_SetupTraineeEvent, %function
 	.thumb_func
 	.set    PromoMain_SetupTraineeEvent, 0x080D2348 + 1
-
-	.global gChapterDataAssetTable
-	.set    gChapterDataAssetTable, 0x08907BC8
 
 	.global ClearWmTextVram
 	.type   ClearWmTextVram, %function
