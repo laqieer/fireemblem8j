@@ -308,7 +308,12 @@ script is kept on disk; restore = re-add that one line via `crontab -e`.
 fire at all) was **killed by an external SIGTERM (exit 143/144) ~13 min in**, mid-task,
 committing nothing. Dig-in found: **no agency execution limit** (no hardcoded time/turn
 cap; only `--max-budget-usd`), **not OOM** (29 GB free, no kill in dmesg), **not** the
-script's 90-min `timeout`. Cause of the SIGTERM unidentified, but the cron agent is
+script's 90-min `timeout`. **Cause (root-caused 2026-06-08):** agency's headless mode has a HEARTBEAT/IDLE
+**monitor watchdog** (binary strings `HEARTBEAT`, `IDLE`, `monitor did not ack within
+2s`). FE8J carves require repeated **10-15s BLOCKING `make compare`/`make clean`**
+builds; during one the claude process can't ack the 2s monitor heartbeat, so the
+watchdog SIGTERM-kills it (143/144). Structural incompatibility — a build-heavy agent
+will keep tripping it. The cron agent is
 non-viable regardless: the harvester step now carves **0** (automated frontier exhausted)
 and the remaining frontier is region-different (needs IDA/Ghidra/permuter, slow per-fn —
 won't complete in a short, unreliable cron agent). It burned API budget for no commits.
