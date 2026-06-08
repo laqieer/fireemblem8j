@@ -77,8 +77,10 @@ function) so a fresh install proves the GBA target works end to end.
 scripts/tools/m2c/m2c.sh [m2c options] <asmfile>...
 ```
 
-It just does `exec python3 tools/m2c/m2c.py --target gba "$@"` using the venv
-python, so every upstream flag is available. Useful ones:
+It just does `exec "$PY" tools/m2c/m2c.py --target gba "$@"`, where `$PY` is the
+venv python (`$M2C_VENV/bin/python`, default `$HOME/m2c-venv/bin/python`) and
+falls back to `python3` on `PATH` if the venv isn't present. So every upstream
+flag is available. Useful ones:
 
 - `--context <ctx.c>` — a C file of struct/typedef/prototype context. Caching is
   per-context (cache stored next to the file as `*.m2c`); add `--no-cache` to
