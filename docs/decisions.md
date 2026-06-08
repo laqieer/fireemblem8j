@@ -474,3 +474,35 @@ parity), not just nits.
 **Status:** Done. This tool set is the substrate for the conflict-free parallelization plan
 (objdiff as the per-symbol pre-gate, coddog for region triage, frog's worktree + serial-integrator
 pattern).
+
+## D13 — Parallelize carving (Phase 1): per-task layout fragments + stop committing generated glue (2026-06-08)
+
+**Context:** To run many decomp tasks in parallel the blocker is shared mutable state: every carve
+edits the layout monoliths **and** the *committed* generated glue (`ldscript.txt`, `asm/baserom.s`,
+`asm/jp_syms.s`), so parallel branches collide on coding and committing. Key enabling fact (verified
+byte-identical on re-run): the resulting **ROM** is a deterministic, order-invariant function of the
+manifest *set* — `gen_layout.py` address-sorts `carved_rom`, and `carved_ram`/`baseline_syms` place
+every section/symbol at its explicit address (so for those two only the generated ldscript's internal
+section numbering follows fragment order, never the ROM bytes). Approved plan: parallelization
+(Phase 1 = structural conflict removal).
+
+**Decision:**
+1. `scripts/gen_layout.py` now reads each manifest as the union of the monolith `<name>.tsv` **plus**
+   per-task fragments `<name>.d/*.tsv` (sorted glob), with byte-identical duplicate rows deduped.
+   Order-invariant, so fragments can be written concurrently with zero merge conflict.
+2. **Stop committing the generated glue** — gitignore `ldscript.txt`/`asm/baserom.s`/`asm/jp_syms.s`
+   and regenerate them at build time (Makefile grouped target `$(LDSCRIPT) $(GENERATED_S) &:`
+   depending on the manifests; `make clean` now removes them). They become per-worktree build
+   artifacts → impossible to conflict on. This removes the *worst* conflict surface.
+3. `.gitattributes` union merge for **`carved_rom.tsv` only** — the one gen_layout overlap-validates,
+   so a bad union aborts the build rather than miscompiling. NOT `carved_ram`/`baseline_syms` (not
+   validated; rely on fragments there), `patches.tsv` (per-object keyed), or the reference TSVs. The
+   `*.d/` fragment dirs are explicitly un-ignored past the generic `*.d` rule so fragments are tracked.
+
+**Verification:** `gen_layout` output byte-identical before/after (dedup is a no-op on today's
+no-duplicate manifests); `make clean && make compare` → `fireemblem8.gba: OK` (regenerates the glue
+from manifests, byte-perfect); functional test confirms a row sourced from a fragment appears in the
+output and a duplicate fragment row is deduped.
+
+**Status:** Phase 1 structural core done. Next: migrate the carve scripts to write per-task fragments
+(Phase 1.3); worktree build-ability + serial integrator (Phase 2); parallel pilot (Phase 3).

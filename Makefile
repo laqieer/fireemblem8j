@@ -55,9 +55,14 @@ MAP      := $(ROM:.gba=.map)
 LDSCRIPT := ldscript.txt
 
 CFILES      := $(wildcard src/*.c)
-ASM_S_FILES := $(wildcard asm/*.s)
+# asm/baserom.s + asm/jp_syms.s are GENERATED from the layout/ manifests by
+# scripts/gen_layout.py (gitignored, regenerated at build time). Manage them
+# explicitly rather than via the wildcard, which would miss them on a fresh
+# checkout (they don't exist until the first build regenerates them).
+GENERATED_S := asm/baserom.s asm/jp_syms.s
+ASM_S_FILES := $(filter-out $(GENERATED_S),$(wildcard asm/*.s))
 C_OBJECTS   := $(CFILES:.c=.o)
-ASM_OBJECTS := $(ASM_S_FILES:.s=.o)
+ASM_OBJECTS := $(ASM_S_FILES:.s=.o) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS)
 
 #### Targets ####
@@ -69,8 +74,28 @@ all: $(ROM)
 compare: $(ROM)
 	$(SHASUM) -c checksum.sha1
 
-# Regenerate the carve glue (asm/baserom.s, ldscript.txt, asm/jp_syms.s) from the
-# manifests in layout/ after adding a decompiled translation unit.
+# The carve glue (ldscript.txt + asm/baserom.s + asm/jp_syms.s) is GENERATED from
+# the layout/ manifests and is gitignored, so the build regenerates it whenever a
+# manifest changes -- the monolith <name>.tsv OR any per-task fragment under
+# <name>.d/. Per-task fragments are what let many carves run in parallel without
+# conflicting on these shared generated files. (Grouped target: one gen_layout
+# run produces all three; needs GNU make >= 4.3.)
+#
+# The inputs include the per-task fragment files AND their .d directories: a
+# directory's mtime changes when a fragment is added OR REMOVED, so a fragment
+# DELETION (e.g. a carve revert) also triggers a regenerate -- a plain file
+# wildcard cannot notice deletions. gen_layout.py writes each output only when its
+# content actually changes (write_if_changed), so an unchanged rebuild stays
+# incremental (no needless downstream relink).
+GEN_LAYOUT_INPUTS := scripts/gen_layout.py ldscript.template.txt baserom.gba \
+	$(wildcard layout/carved_rom.tsv    layout/carved_rom.d    layout/carved_rom.d/*.tsv) \
+	$(wildcard layout/carved_ram.tsv    layout/carved_ram.d    layout/carved_ram.d/*.tsv) \
+	$(wildcard layout/baseline_syms.tsv layout/baseline_syms.d layout/baseline_syms.d/*.tsv)
+
+$(LDSCRIPT) $(GENERATED_S) &: $(GEN_LAYOUT_INPUTS)
+	$(PYTHON) scripts/gen_layout.py
+
+# `make layout` stays as a manual force-regenerate alias (e.g. for carve scripts).
 layout:
 	$(PYTHON) scripts/gen_layout.py
 
@@ -109,4 +134,4 @@ $(ELF): $(ALL_OBJECTS) $(LDSCRIPT)
 	$(OBJCOPY) --strip-debug -O binary --pad-to 0x9000000 --gap-fill=0xff $< $@
 
 clean:
-	$(RM) $(ALL_OBJECTS) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s)
+	$(RM) $(ALL_OBJECTS) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)

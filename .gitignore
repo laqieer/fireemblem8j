@@ -16,6 +16,24 @@
 src/*.s
 src/data/*.s
 
+# Carve glue GENERATED from the layout/ manifests by scripts/gen_layout.py and
+# regenerated at build time (Makefile). NOT committed, so parallel carves never
+# conflict on them; each carve writes only its own per-task fragment under
+# layout/<name>.d/. See docs/decisions.md.
+/ldscript.txt
+/asm/baserom.s
+/asm/jp_syms.s
+
+# Per-task layout fragments (layout/<name>.d/*.tsv) ARE committed -- they are the
+# parallel-carve mechanism. The generic `*.d` rule above (for make dependency
+# files) otherwise hides these directories, so re-include them explicitly.
+!/layout/carved_rom.d/
+!/layout/carved_ram.d/
+!/layout/baseline_syms.d/
+!/layout/carved_rom.d/*.tsv
+!/layout/carved_ram.d/*.tsv
+!/layout/baseline_syms.d/*.tsv
+
 # Locally-installed toolchain (install agbcc the same way as the US decomp)
 /tools/agbcc
 
