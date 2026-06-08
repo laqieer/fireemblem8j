@@ -28,7 +28,8 @@ oracle. Almost every kappa feature is glued to the `vscode` API
 (`src/db/db.ts`, `src/decompme/create-scratch.ts`, `src/m2c/m2c.ts` all
 `import * as vscode`), so we cannot consume kappa as-is. It is also built for
 **function matching** (m2c/permuter/decomp.me all operate per-function), whereas
-our remaining frontier is ~94% **data** plus ~15 region-different code TUs — a
+our remaining frontier is ~94% **data** plus ~11 region-different code TUs
+(`docs/decisions.md` D9/D10) — a
 mismatch in problem shape. So: **learn-only**, borrow ideas, do not install.
 
 ## 2. Borrowable ideas
@@ -60,7 +61,10 @@ a standalone CLI (`ast-grep` / `sg`) and language bindings. Note the bindings ar
 language-specific: kappa uses the **Node** binding `@ast-grep/napi` (see
 `package.json`), which is *not* importable from Python; the Python binding is the
 separate PyPI package `ast-grep-py`. Add a `scripts/codefix/` dir of AST-grep
-YAML rules + a thin `apply_codefix.py` that runs `sg scan --rewrite` (shelling
+YAML rules + a thin `apply_codefix.py` that runs `sg scan -r <rule.yml> -U`
+(rewrites are defined in the rule YAML and applied in place with `-U` /
+`--update-all`; `sg scan` has no `--rewrite` flag — inline `--rewrite` belongs to
+`sg run -p <pat> -r <rewrite>`) — shelling
 out to the CLI for pure pattern rewrites, or using `ast-grep-py` for the
 offset-arithmetic ones that need computation, not pure pattern rewrite) over a
 `.c` file. (If we'd rather keep kappa's exact `@ast-grep/napi` API, the wrapper
@@ -115,17 +119,16 @@ use, not in the hot loop). The platform/preset mapping table in
 `create-scratch.ts` and `platform.ts` (`/api/platform/{id}`) is a useful
 reference for the exact payload fields.
 
-### D. objdiff as an in-loop, function-level diff oracle the model can read  — MED value / LOW effort (future proposal)
+### D. objdiff as an in-loop, function-level diff oracle the model can read  — MED value / LOW effort (objdiff-cli already set up)
 kappa exposes objdiff two ways: a command, and a **Language Model Tool**
 (`src/language-model-tools/objdiff.ts`) the Copilot agent calls as `#objdiff` to
 get a textual current-vs-target diff for one function and "fix the gaps." The
 prompt template (`src/prompt-builder/craft-prompt.ts`) bakes objdiff into the
 build→diff→edit→repeat loop and tells the model to stop only at byte-identical.
 
-**How we'd replicate:** this is a future proposal — the repo has no `objdiff` /
-`objdiff-cli` setup, scripts, Makefile target, or `tools/objdiff*` vendoring
-convention today. If/when we add `objdiff-cli`, the wiring idea is small: wrap
-`objdiff-cli diff <build.o> <expected.o>
+**How we'd replicate:** objdiff-cli is already set up in the repo
+(`scripts/tools/objdiff/setup.sh`, `objdiff.json`, `docs/tools/objdiff.md`),
+so this is purely a wiring idea: wrap `objdiff-cli diff <build.o> <expected.o>
 --symbol <fn>` as an MCP tool / slash-command the Claude loop can call to get a
 *function-scoped* textual diff (vs. our current whole-ROM `make compare`
 pass/fail). That gives the model a gradient to follow instead of a binary
@@ -162,10 +165,10 @@ scripts:
 - **Do soon (high ROI):** port the AST-grep offset/size/Q-notation code-fix
   plugins (idea A) to a `scripts/codefix/` set run before `make compare` — they
   map directly onto our `/* 0C */` / struct-offset conventions and AST-grep is
-  already battle-tested here. If/when we add objdiff-cli, wire it as a
-  function-scoped diff tool the loop can read (idea D) — a readable per-function
-  diff would beat the binary `make compare` for guiding edits. (No objdiff-cli
-  tooling exists in the repo yet; this is a future proposal.)
+  already battle-tested here. Wire the already-installed objdiff-cli
+  (`scripts/tools/objdiff/setup.sh`, `objdiff.json`) as a function-scoped diff
+  tool the loop can read (idea D) — a readable per-function diff beats the binary
+  `make compare` for guiding edits.
 - **Do if/when useful:** asm-embedding similarity retrieval against US source
   (idea B) and a CLI decomp.me scratch creator (idea C) as an escape hatch for
   stubborn region-different functions.
@@ -175,9 +178,9 @@ scripts:
 
 These align with settled project direction: upstream decomp-permuter is already
 our byte-matcher (`docs/reverse-engineering.md`, `docs/decisions.md` D6/D7/D9),
-and a function-scoped objdiff-cli oracle is a candidate future addition (not yet
-present in the repo), so kappa mainly contributes the AST-grep code-fix layer
-and the few-shot/objdiff loop structure on top of tools we already run.
+and objdiff-cli is already set up (`scripts/tools/objdiff/setup.sh`,
+`docs/tools/objdiff.md`) — so kappa mainly contributes the AST-grep code-fix
+layer and the few-shot/objdiff loop structure on top of tools we already run.
 
 ### Key file references (in the `/tmp/kappa` clone)
 - AST-grep plugins: `example-kappa-plugins/AddOffsetCommentsPlugin.js`,
