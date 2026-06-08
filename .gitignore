@@ -24,6 +24,11 @@ src/data/*.s
 /tools/decomp-permuter
 /nonmatchings/
 
+# m2c (asm->C decompiler): upstream clone is local (set up via
+# scripts/tools/m2c/setup.sh). The wrapper scripts under scripts/tools/m2c/
+# and docs/tools/m2c.md are tracked.
+/tools/m2c
+
 # Claude Code: share settings.json + loop_prompt.md, but keep local/transient
 # state out (per-user overrides and the ralph-loop session-state file).
 .claude/settings.local.json
