@@ -15,9 +15,9 @@ to matching. There is no per-symbol match% or progress view.
 objdiff fills exactly that gap:
 
 - `objdiff-cli diff` shows, for one object or one function, an instruction-level
-  diff and a fuzzy **match_percent** (great while iterating on a single `src/x.c`).
+  diff and a fuzzy **match percent** (great while iterating on a single `src/x.c`).
 - `objdiff-cli report generate` walks every unit in `objdiff.json` and emits a
-  JSON report with `match_percent` per symbol and aggregate `measures`
+  JSON report with a per-symbol `fuzzy_match_percent` and aggregate `measures`
   (`total_code`, `matched_code`, `matched_code_percent`, …) per unit and for the
   whole project. This is a real progress curve to complement the binary
   pass/fail of `make compare`.
@@ -114,8 +114,16 @@ Two workable approaches:
 
 A helper to mechanize approach (1) over all `units` is a natural follow-up; it
 is intentionally **not** committed here so this change touches no build/asm/ld
-files. Until target objects exist, `objdiff-cli report` will report the units it
-can open and error on the rest — which is fine for incremental rollout.
+files. Note that `objdiff-cli report generate` is **all-or-nothing about
+targets**: if *any* configured unit's `target_path` is missing it fails fast
+(`Failed to open …`, exit 1) and writes **no** report — it does not skip the
+missing units and emit a partial report (verified with objdiff-cli 3.7.2). So to
+run `report` you must first generate the `target_path` object for *every* unit
+listed in `objdiff.json` (or temporarily trim `units` to just the ones whose
+targets exist). For incremental rollout, keep `units` limited to TUs whose target
+objects you have actually produced. The single-object `objdiff-cli diff -1 … -2 …`
+(below) needs only the two objects you pass and works before any full `units`
+config is buildable.
 
 ## Commands
 
@@ -144,9 +152,10 @@ tools/objdiff/objdiff-cli report changes old-report.json new-report.json
 
 Reading the report JSON: each unit has `measures` with
 `matched_code` / `total_code` / `matched_code_percent` (and the data
-equivalents), and a `functions`/symbols list with per-symbol `fuzzy_match_percent`.
-The top-level `measures` is the project-wide roll-up — that is the number to
-watch climb toward 100%.
+equivalents) plus an overall `fuzzy_match_percent`, and a `sections`/symbols
+list whose items each carry a per-symbol `fuzzy_match_percent`. The top-level
+`measures` is the project-wide roll-up — that is the number to watch climb
+toward 100%.
 
 ## Relationship to the existing progress script
 

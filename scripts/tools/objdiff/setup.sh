@@ -21,7 +21,21 @@ REPO="encounter/objdiff"
 # Release asset name for the prebuilt CLI (Linux x86_64). No archive/extension.
 ASSET="objdiff-cli-linux-x86_64"
 
-# Resolve repo root (two levels up from scripts/tools/objdiff/).
+# This installer only fetches the Linux x86_64 release asset. Guard the host so
+# other platforms get a clear message instead of a confusing exec-format error
+# at the later `--version` check. (objdiff also ships macOS/Windows/aarch64
+# assets; add the mapping here if this repo ever needs them.)
+OS="$(uname -s)"
+ARCH="$(uname -m)"
+if [ "${OS}" != "Linux" ] || { [ "${ARCH}" != "x86_64" ] && [ "${ARCH}" != "amd64" ]; }; then
+    echo "!! This script only installs the ${ASSET} asset, but the host is" >&2
+    echo "   ${OS}/${ARCH}. Download the matching objdiff-cli asset from" >&2
+    echo "   https://github.com/${REPO}/releases/latest and place it at" >&2
+    echo "   tools/objdiff/objdiff-cli (chmod +x), or extend ASSET above." >&2
+    exit 1
+fi
+
+# Resolve repo root (three levels up from scripts/tools/objdiff/).
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
@@ -72,7 +86,7 @@ cat <<EOF
 
 Usage hints (run from the repo root, where objdiff.json lives):
 
-  # Whole-project per-symbol progress report (JSON with match_percent etc.):
+  # Whole-project per-symbol progress report (JSON with fuzzy_match_percent etc.):
   tools/objdiff/objdiff-cli report generate -f json-pretty -o build/objdiff-report.json
 
   # Diff a single object (interactive TUI), or one function one-shot:
