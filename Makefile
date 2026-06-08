@@ -80,10 +80,17 @@ compare: $(ROM)
 # <name>.d/. Per-task fragments are what let many carves run in parallel without
 # conflicting on these shared generated files. (Grouped target: one gen_layout
 # run produces all three; needs GNU make >= 4.3.)
+#
+# The inputs include the per-task fragment files AND their .d directories: a
+# directory's mtime changes when a fragment is added OR REMOVED, so a fragment
+# DELETION (e.g. a carve revert) also triggers a regenerate -- a plain file
+# wildcard cannot notice deletions. gen_layout.py writes each output only when its
+# content actually changes (write_if_changed), so an unchanged rebuild stays
+# incremental (no needless downstream relink).
 GEN_LAYOUT_INPUTS := scripts/gen_layout.py ldscript.template.txt baserom.gba \
-	$(wildcard layout/carved_rom.tsv    layout/carved_rom.d/*.tsv) \
-	$(wildcard layout/carved_ram.tsv    layout/carved_ram.d/*.tsv) \
-	$(wildcard layout/baseline_syms.tsv layout/baseline_syms.d/*.tsv)
+	$(wildcard layout/carved_rom.tsv    layout/carved_rom.d    layout/carved_rom.d/*.tsv) \
+	$(wildcard layout/carved_ram.tsv    layout/carved_ram.d    layout/carved_ram.d/*.tsv) \
+	$(wildcard layout/baseline_syms.tsv layout/baseline_syms.d layout/baseline_syms.d/*.tsv)
 
 $(LDSCRIPT) $(GENERATED_S) &: $(GEN_LAYOUT_INPUTS)
 	$(PYTHON) scripts/gen_layout.py

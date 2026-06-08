@@ -8,12 +8,15 @@
 
 *.sha1 text eol=lf
 
-# Layout manifests are append-only sets that scripts/gen_layout.py sorts + dedups,
-# so a union merge of concurrent appends is always safe (a genuine range overlap
-# is still caught by gen_layout's validator, and the serial integrator's
-# `make compare` rejects it). This is a belt-and-suspenders net for the monolith
-# manifests while carves migrate to per-task fragments (layout/<name>.d/). NOT for
-# patches.tsv (per-object keyed) or the read-only reference TSVs.
+# carved_rom.tsv is an address-sorted set that gen_layout.py sorts + dedups AND
+# overlap-validates, so a union merge of concurrent appends is safe: a genuine
+# range overlap aborts gen_layout (and the serial integrator's `make compare`
+# rejects the branch) rather than silently miscompiling. Transitional net while
+# carves migrate to per-task fragments (layout/carved_rom.d/).
+#
+# NOT carved_ram.tsv or baseline_syms.tsv: gen_layout does NOT overlap-validate
+# them (RAM uses NOLOAD sections linked with --no-check-sections; syms are
+# absolute .set), so a bad union there could miscompile silently with no backstop.
+# NOT patches.tsv (per-object keyed) or the read-only reference TSVs. For those,
+# rely on per-task fragments (no shared-file edit) instead of a merge driver.
 layout/carved_rom.tsv    merge=union
-layout/carved_ram.tsv    merge=union
-layout/baseline_syms.tsv merge=union
