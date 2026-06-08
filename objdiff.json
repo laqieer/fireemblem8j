@@ -1,0 +1,83 @@
+{
+  "$schema": "https://raw.githubusercontent.com/encounter/objdiff/main/config.schema.json",
+  "min_version": "3.0.0",
+  "custom_make": "make",
+  "build_base": true,
+  "build_target": false,
+  "watch_patterns": [
+    "src/*.c",
+    "src/*.h",
+    "include/**/*.h",
+    "ldscript.txt",
+    "objdiff.json"
+  ],
+  "progress_categories": [
+    {
+      "id": "code",
+      "name": "Code (.text)"
+    },
+    {
+      "id": "data",
+      "name": "Data (.data/.rodata)"
+    }
+  ],
+  "options": {
+    "arm.unifiedSyntax": true
+  },
+  "units": [
+    {
+      "name": "agb_sram",
+      "target_path": "build/objdiff/target/src/agb_sram.o",
+      "base_path": "src/agb_sram.o",
+      "metadata": {
+        "source_path": "src/agb_sram.c",
+        "progress_categories": ["code"]
+      }
+    },
+    {
+      "name": "irq",
+      "target_path": "build/objdiff/target/src/irq.o",
+      "base_path": "src/irq.o",
+      "metadata": {
+        "source_path": "src/irq.c",
+        "progress_categories": ["code"]
+      }
+    },
+    {
+      "name": "rng",
+      "target_path": "build/objdiff/target/src/rng.o",
+      "base_path": "src/rng.o",
+      "metadata": {
+        "source_path": "src/rng.c",
+        "progress_categories": ["code"]
+      }
+    },
+    {
+      "name": "proc",
+      "target_path": "build/objdiff/target/src/proc.o",
+      "base_path": "src/proc.o",
+      "metadata": {
+        "source_path": "src/proc.c",
+        "progress_categories": ["code"]
+      }
+    },
+    {
+      "name": "ap",
+      "target_path": "build/objdiff/target/src/ap.o",
+      "base_path": "src/ap.o",
+      "metadata": {
+        "source_path": "src/ap.c",
+        "progress_categories": ["code", "data"]
+      }
+    },
+    {
+      "name": "hardware",
+      "target_path": "build/objdiff/target/src/hardware.o",
+      "base_path": "src/hardware.o",
+      "metadata": {
+        "source_path": "src/hardware.c",
+        "progress_categories": ["code"]
+      }
+    }
+  ]
+}

@@ -403,3 +403,38 @@ JP asset addresses), NOT the US boundary, to bound each `.incbin`. Restrict to U
 `INCBIN_*`/graphics+sound/banim asset objects; never blob a C value table. `make compare`
 stays the only oracle (it byte-matches by construction for incbin, so correctness rests
 entirely on honest boundary+identity — hence the JP-boundary verification gate).
+
+## D11 — coddog cross-binary matcher: patch GBA platform string in the vendored clone (2026-06-08)
+
+**Context:** Set up `ethteck/coddog` (Rust cross-binary function matcher) to accelerate
+FE8J↔FE8U region-same/region-different triage (`compare2` buckets every JP function's best
+US match by similarity + decompiled-status). Setup/config/docs live under
+`scripts/tools/coddog/` + `docs/tools/coddog.md`; the build is vendored to the gitignored
+`tools/coddog`.
+
+**Fork:** coddog v0.6.3's CLI resolves the yaml `platform:` via `Platform::from_name`,
+which omits `"gba"` (returns `None`) and panics `Invalid platform: gba` — even though GBA
+Thumb support fully exists in `coddog-core` (objdiff + `unarm` V4T; the `simple_gba` tests
+construct `Platform::Gba` directly, and `from_decompme_name` lists `gba`). So out of the
+box the tool cannot read a GBA config.
+
+**Decision:** `setup.sh` applies a small **idempotent** patch to the vendored (gitignored)
+clone that adds the arms already in `from_decompme_name` (`gba` — the one we need — plus
+`nds`/`nds_arm9`, `n3ds`, and `irix`; the last is MIPS/big-endian, not ARM, but included to
+keep the two resolvers in sync) to `from_name`. Rationale: the alternative (ship a
+non-functional tool) defeats the unit's purpose; the fix is a few match-arms, low-risk,
+reversible (re-clone), and only touches the local clone — no project source/Makefile/ldscript
+changes. The clone is pinned to upstream tag `0.6.3` (the revision the patch needle is
+verified against) and fetched straight from the upstream URL — an earlier `/tmp/coddog`
+seed-clone shortcut was dropped because building unverified code from a world-writable path
+is a supply-chain risk. Verified end-to-end: after the patch, `coddog cluster` ingests the
+real US GBA ELF and emits real clusters. **Follow-up: file the one-line fix upstream** so we
+can drop the local patch later.
+
+**Known limitation (logged, not a blocker):** coddog's `read_elf` keeps only ELF symbols with
+`size > 0` + a real section + `SymbolKind::Function`. The JP functions we have not yet carved
+are sizeless ABS `.set` symbols (`asm/jp_syms.s`) or live in `asm/baserom.s` incbin gaps, so
+coddog skips them. `compare2` from the `jp` version therefore covers only already-carved/sized
+JP functions, not the full remaining backlog. Documented in `fe8.coddog.yaml` + `docs/tools/coddog.md`
+("Coverage"); extending triage to pending functions needs a JP ELF whose pending functions carry
+real `.size`s (a later work item).

@@ -1,6 +1,6 @@
-# ROM-resident decompiled sections, spliced into the raw-ROM baseline by
-# scripts/gen_layout.py. Columns (tab-separated): jp_start jp_end ld_section note
-# Addresses are ROM-file offsets (== VMA - 0x08000000). Keep sorted, no overlaps.
+# ROM-resident decompiled sections, spliced into the raw-ROM baseline by			
+# scripts/gen_layout.py. Columns (tab-separated): jp_start jp_end ld_section note			
+# Addresses are ROM-file offsets (== VMA - 0x08000000). Keep sorted, no overlaps.			
 000000	0000C0	asm/rom_header.o(.text)	ROM header (title BE8J)
 000AE8	000B0C	src/fe3_dummy.o(.text)	fe3_dummy: PrintDebugBuildDateAndTime
 000B0C	000B60	src/irq.o(.text)	irq: StoreIRQToIRAM, DummyIRQRoutine, SetIRQHandler
