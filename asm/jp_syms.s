@@ -688,11 +688,6 @@
 	.thumb_func
 	.set    PlaySFX, 0x08074E80 + 1
 
-	.global NewEfxFlashBgWhite
-	.type   NewEfxFlashBgWhite, %function
-	.thumb_func
-	.set    NewEfxFlashBgWhite, 0x08054BF8 + 1
-
 	.global EfxPalWhiteInOut
 	.type   EfxPalWhiteInOut, %function
 	.thumb_func
@@ -6742,4 +6737,16 @@
 	.type   StartSubSpell_efxEvilEyeBG2, %function
 	.thumb_func
 	.set    StartSubSpell_efxEvilEyeBG2, 0x08069CB4 + 1
+
+	.global ProcScr_efxWhiteOUT
+	.set    ProcScr_efxWhiteOUT, 0x085E3AD4
+
+	.global ProcScr_efxWhiteIN
+	.set    ProcScr_efxWhiteIN, 0x085E3AFC
+
+	.global ProcScr_efxBlackOUT
+	.set    ProcScr_efxBlackOUT, 0x085E3B24
+
+	.global ProcScr_efxBlackIN
+	.set    ProcScr_efxBlackIN, 0x085E3B4C
 

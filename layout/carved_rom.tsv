@@ -371,3 +371,6 @@ A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 069AC8	069BBC	src/banim-efxmagic-evileye.o(.text)	banim-efxmagic-evileye(run): StartSpellAnimEvilEye, efxEvilEye_Loop_Main
 602550	602568	src/banim-efxmagic-evileye.o(.data)	banim-efxmagic-evileye .data
 0E3CCC	0E3CD7	src/banim-efxmagic-evileye.o(.rodata)	banim-efxmagic-evileye .rodata
+054BF8	055128	src/banim-efxflashbg.o(.text)	banim-efxflashbg(run): NewEfxFlashBgWhite, NewEfxFlashBgRed, NewEfxFlashBgBlack...
+5E3AAC	5E3AD4	src/banim-efxflashbg.o(.data)	banim-efxflashbg .data
+0DFBE4	0DFBEF	src/banim-efxflashbg.o(.rodata)	banim-efxflashbg .rodata

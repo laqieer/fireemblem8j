@@ -153,7 +153,6 @@ gPal_Banim	0201C790	data	banim-efxflashobj
 Interpolate	08012E84	thumb	banim-efxflashobj
 EfxPalBlackInOut	080737A4	thumb	banim-efxflashobj
 PlaySFX	08074E80	thumb	banim-efxmagic-bolting
-NewEfxFlashBgWhite	08054BF8	thumb	banim-efxmagic-bolting
 EfxPalWhiteInOut	08073820	thumb	banim-efxmagic-bolting
 gEfxPal	020165C8	data	banim-efxmagic-bolting
 SpellFx_ClearBG1	08056130	thumb	banim-efxmagic-bolting
@@ -1714,3 +1713,7 @@ StartSubSpell_efxHazymoonBG_C	08061614	thumb	banim-efxmagic-eclipse
 StartSubSpell_efxEvilEyeOBJ	08069DD0	thumb	banim-efxmagic-evileye
 StartSubSpell_efxEvilEyeBG	08069BBC	thumb	banim-efxmagic-evileye
 StartSubSpell_efxEvilEyeBG2	08069CB4	thumb	banim-efxmagic-evileye
+ProcScr_efxWhiteOUT	085E3AD4	data	banim-efxflashbg
+ProcScr_efxWhiteIN	085E3AFC	data	banim-efxflashbg
+ProcScr_efxBlackOUT	085E3B24	data	banim-efxflashbg
+ProcScr_efxBlackIN	085E3B4C	data	banim-efxflashbg
