@@ -10,14 +10,24 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 - **DATA FRONTIER OPENED (2026-06-08) — the biggest lever.** Data is **94% of the
   ROM** (13.3 MB vs 858 KB code) and was ~0% carved. **26% of the ROM is byte-
-  identical US<->JP at the same offset** (shared graphics/anim/asset data). Carved
-  all region-SAME *named* data: `banim_data[]` (real C table), `data_banim` (2.38 MB,
-  1475 syms), `data_banim_terrain` (74 KB) → **data-in-src 0.05% -> 18.6%, symbols
-  3.8% -> 7.7%**, all durable. Tool: `scripts/carve_data.py [substr|--all]` (the data
-  harvester: region-same gate + US symbols as labels + incbin from baserom). Only 2 US
-  data objects are fully region-same (both carved) — that sub-frontier is exhausted.
-  **Next data tier:** region-different ASSET data as JP-byte incbin w/ US names (see
-  D10). The code metric (below) is now a small slice of the goal; DATA is the path.
+  identical US<->JP at the same offset** (shared graphics/anim/asset data). Carved the
+  **entire banim data subsystem** → **data-in-src 0.05% -> 18.67%, symbols 3.8% ->
+  7.93%, 313 carved objects**, all durable:
+  - region-same structured tables as real C: `banim_data[]`, `banim_pal_chara`
+    (character_battle_animation_palette_table), `banim_terrain_data`
+    (battle_terrain_table).
+  - region-same asset blobs (US symbols as labels + incbin from baserom):
+    `data_banim` (2.38 MB, 1475 syms), `data_banim_terrain` (74 KB).
+  - **tier-2 PROVEN:** `data_banim_pal` — region-DIFFERENT char palettes carved as
+    JP-byte incbin at boundaries pinned by the region-same `banim_pal_chara` table
+    (108 syms). Legitimate per D10 (identified named assets, verified JP boundary).
+  Tool: `scripts/carve_data.py [substr|--all]` (region-same harvester). Only 2 US data
+  objects are fully region-same (both carved) — that sub-frontier is exhausted.
+  **Next data tiers:** (2) region-different ASSET data at scale (graphics/sound/sprites)
+  via JP-boundary-verified incbin — the `data_banim_pal` pattern generalized (needs each
+  asset's JP boundary from a JP pointer table, NOT the assumed US boundary); (3)
+  region-different structured tables → real C with JP values. See D10. The code metric
+  (below) is now a small slice of the goal; DATA is the path to byte-complete.
 - **Functions decompiled: 1323 / 8,528 = 15.51%** (`python3 scripts/calcprogress.py`).
 - **Carved objects: 306.** `make compare` → OK, **and `make clean && make compare`
   → OK** (durability gate — see "durable bake-in" below). Build is always
