@@ -49,6 +49,16 @@ def main():
         elif len(p) == 3:
             name_at.setdefault(int(p[0], 16), p[2])
 
+    # sorted US symbol addresses -> a size-less symbol's extent = gap to the next symbol
+    us_addrs = sorted(name_at)
+    import bisect as _bis
+
+    def us_extent(a):
+        if a in size_at and size_at[a]:
+            return size_at[a]
+        i = _bis.bisect_right(us_addrs, a)
+        return us_addrs[i] - a if i < len(us_addrs) else 0
+
     # funcmap: (jp_addr, us_addr, size)
     fmap = []
     for l in open("layout/us_jp_funcmap.tsv"):
@@ -108,8 +118,8 @@ def main():
         if uw in seen or found.get(uw) is None:
             continue
         seen.add(uw)
-        sz = size_at.get(uw, 0)
-        if sz:
+        sz = us_extent(uw)
+        if 0 < sz <= 0x8000:          # scan tables/structs; skip huge blobs (raw graphics)
             scan_region(uw, found[uw], sz)
 
     refs = sorted((jw, ua) for ua, jw in found.items() if jw is not None)
@@ -131,7 +141,7 @@ def main():
         nm = name_at[ua]
         if nm in drop or nm in already:    # never redefine a symbol an existing carve owns
             continue
-        us_sz = size_at.get(ua, 0)
+        us_sz = us_extent(ua)
         bi = bisect.bisect_right(bounds, jw)
         nxt = bounds[bi] if bi < len(bounds) else jw + (us_sz or 0)
         size = min(us_sz, nxt - jw) if us_sz else (nxt - jw)
