@@ -79,20 +79,29 @@ dirty the working tree or risk committing tool state. If you point `outputDir` /
   and `atlas` work without it. A cached Claude Code login is also honored. **Never
   hardcode the key**; the config documents it as an env var only.
 - `tools/agbcc`, `baserom.gba`, `fireemblem8.map` present (same as `make compare`).
-  The compiler script in the config reproduces the Makefile C rule exactly:
-  `cpp | iconv UTF-8→CP932 | agbcc … -Werror -O2 -fhex-asm | arm-none-eabi-as`,
+  The compiler script in the config mirrors the Makefile C rule:
+  `cpp | iconv UTF-8→CP932 | agbcc … -O2 -fhex-asm | arm-none-eabi-as`,
   plus the trailing `.text` / `.align 2, 0`, then `scripts/apply_patches.py` on the
-  produced `.o`. Two details that keep mizuchi's gate aligned with the repo's:
-  - **`-Werror`** is included (it's in the Makefile `CC1FLAGS`), so a candidate that
-    only "compiles" with warnings — which the real `src/` build would reject — is not
-    counted as a mizuchi success.
-  - **`apply_patches.py`** is re-run on the object, as the Makefile does, so objects
-    listed in `layout/patches.tsv` are diffed in their patched form (no false diffs).
-    It is a no-op for objects with no patch rows. Because it keys on the `.o`
-    *basename*, patched objects only match if mizuchi's target object path keeps the
-    real basename (e.g. `banim-efxmagic-flux.o`).
-  Even so, **`make compare` remains the only oracle** — a green mizuchi diff must still
-  pass it.
+  produced `.o`. Three details:
+  - **`-Werror` is intentionally dropped**, exactly as the sibling
+    `scripts/permuter/compile.sh` does. `-Werror` is diagnostic-only (no codegen
+    effect); in a generate-and-search loop we want a valid-but-warning candidate to
+    still compile so it can be scored, not be killed mid-search. The real acceptance
+    gate is unchanged — see the last bullet.
+  - **The context script emits *resolved* C, not a bare `#include`.** Mizuchi runs its
+    own `cpp -P` on `context + candidate` from a temp dir with no include flags, so a
+    bare `#include "global.h"` would fail there before our compiler script ever runs.
+    `getContextScript` therefore preprocesses `global.h` (from the repo root, with the
+    agbcc include flags) and emits the expanded header text.
+  - **`apply_patches.py`** is re-run on the object, as the Makefile does — a no-op
+    unless the `.o` basename matches a row in `layout/patches.tsv`. **Limitation:**
+    mizuchi names the temp object `<functionName>.o` and never passes the real target
+    object path to the script, so for the few **patched** TUs (the `banim-efxmagic-*`
+    objects in `layout/patches.tsv`) this can't match and objdiff sees the *unpatched*
+    form. Do **not** trust mizuchi's diff %/Integrator for those functions — verify
+    them with `make compare` only.
+  - **`make compare` remains the only oracle** — a green mizuchi diff (warnings, patched
+    TUs, or otherwise) must still pass it before anything is committed.
 - Embeddings (for the Atlas similarity cloud) want Python 3.10+ and download
   `torch`/`transformers` (~2–3 GB, jina-embeddings-v2). Skip with
   `index-codebase --skip-embeddings` if you only want the function list.
@@ -103,8 +112,10 @@ dirty the working tree or risk committing tool state. If you point `outputDir` /
   `permuter_settings.toml`.
 - `mapFilePath: fireemblem8.map`, `nonMatchingAsmFolders: [asm]` (FE8J carves
   descriptive `.s` flat under `asm/`, baseline in `asm/baserom.s`).
-- `getContextScript` emits `#include "global.h"` (the FE8J convention) so the
-  agbcc `cpp` step resolves project types from `include/`.
+- `getContextScript` preprocesses `global.h` (the FE8J convention) and emits the
+  *expanded* C, so mizuchi's pre-compile `cpp -P` (run with no include flags) has
+  fully-resolved types — see the prerequisites note above on why a bare `#include`
+  doesn't work here.
 - The **Integrator** plugin (auto-open worktree → drop C into `src/` → `make
   compare` → commit/PR) is left **disabled** on purpose: FE8J carving is
   currently script-gated and we want a human/loop to guard `make compare`

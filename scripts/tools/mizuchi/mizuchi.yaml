@@ -31,42 +31,66 @@ global:
   # ---- Context prepended to Claude's C during compilation ----
   # Mizuchi compiles "<context> + <Claude's C>". The FE8J convention is that every
   # .c starts with #include "global.h", which pulls in the project's types/structs.
-  # Emitting that include here lets the agbcc cpp step (in compilerScript) resolve
-  # everything from include/ exactly like the real build. We point Claude at the
-  # real header so it can grep structs/constants instead of guessing.
   #
+  # IMPORTANT: this script must emit ALREADY-RESOLVED C (the expanded types), not a
+  # bare `#include "global.h"`. Mizuchi captures this script's STDOUT as the context,
+  # prepends it to the candidate C, and runs its own `cpp -P` on the combined temp
+  # file (CCompiler.compile) with NO include flags and cwd = the temp dir — so a bare
+  # `#include "global.h"` cannot be found there and EVERY candidate fails before our
+  # compilerScript runs. So we preprocess global.h here (this script runs with cwd =
+  # the project root, so the same -I/-iquote flags as the Makefile resolve it), and
+  # cat the fully-expanded header to stdout. The result is pure C with no remaining
+  # #include/#define, so mizuchi's flagless `cpp -P` and our compilerScript's cpp both
+  # pass cleanly. (This mirrors the m2c/m2ctx convention the get-context plugin docs.)
+  #
+  # Uses arm-none-eabi-cpp if present (same preference as the Makefile), else host cpp.
   # {{functionName}} and {{targetObjectPath}} are available but unused here.
   getContextScript: |
-    echo '#include "global.h"'
+    set -euo pipefail
+    CPP="$(command -v arm-none-eabi-cpp || echo cpp)"
+    SRC="$(mktemp --suffix=.c)"
+    trap 'rm -f "$SRC"' EXIT
+    printf '#include "global.h"\n' > "$SRC"
+    "$CPP" -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef -P "$SRC"
 
   # ---- Compilation: the full FE8J agbcc pipeline ----
-  # Mizuchi hands us {{cFilePath}} (context + Claude's C, as raw UTF-8 C) and an
-  # {{objFilePath}} to produce. This reproduces the Makefile C rule exactly:
+  # Mizuchi hands us {{cFilePath}} (its already-cpp'd context + Claude's C) and an
+  # {{objFilePath}} to produce. This mirrors the Makefile C rule:
   #   cpp (agbcc headers) | iconv UTF-8 -> CP932 | agbcc -> .s | as -> .o | apply_patches.py
-  # Codegen flags are byte-identical to the Makefile's CC1FLAGS/ASFLAGS so the
-  # emitted machine code matches:
-  #   - agbcc flags == CC1FLAGS, INCLUDING -Werror. The Makefile builds src/ with
-  #     -Werror, so a candidate that warns (implicit decl / parentheses) would fail
-  #     the real build; compiling it here without -Werror would let mizuchi report a
-  #     false success/match for C that `make compare` cannot use. We keep -Werror so
-  #     mizuchi's "compiles" gate matches the repo's acceptance gate.
-  #   - we append the project's trailing `.text` / `.align 2, 0` after agbcc, so
-  #     section layout lines up for objdiff.
-  #   - we re-run scripts/apply_patches.py on the produced .o, exactly as the Makefile
-  #     C rule does (Makefile line 103). Any object covered by layout/patches.tsv gets
-  #     section-alignment / reloc-addend fixes re-applied; without this, an object that
-  #     has patch rows would be diffed in its UNPATCHED form and mizuchi could report a
-  #     false diff even when the candidate C matches the repository build. apply_patches
-  #     is a no-op (exit 0) for objects with no rows, so it is safe to always invoke.
-  #     NOTE: it keys on the .o BASENAME, so {{objFilePath}}'s basename must equal the
-  #     real target object's (e.g. banim-efxmagic-flux.o) for patched objects to match.
+  # CODEGEN flags are kept identical to the Makefile's CC1FLAGS/ASFLAGS so the emitted
+  # bytes match, with ONE intentional difference, exactly matching the sibling
+  # scripts/permuter/compile.sh convention:
+  #   - -Werror is DROPPED. It is a diagnostic-only flag (does not change codegen), and
+  #     like decomp-permuter we want a generated-but-valid candidate that merely emits a
+  #     warning (implicit decl / parentheses) to still compile so the search loop can
+  #     score it, rather than being killed mid-search. `make compare` (sha1 of the
+  #     linked ROM) remains the only acceptance oracle, so a warning-y match is caught
+  #     there before anything is committed — this never weakens the real gate.
+  #   - we append the project's trailing `.text` / `.align 2, 0` after agbcc, so section
+  #     layout lines up for objdiff.
+  #   - we re-run scripts/apply_patches.py on the produced .o, as the Makefile C rule
+  #     does (Makefile line 103). It is a no-op (exit 0) unless the object's BASENAME
+  #     matches a row in layout/patches.tsv.
+  #
+  #     IMPORTANT LIMITATION: mizuchi compiles to a temp object named {{functionName}}.o
+  #     and only substitutes {{cFilePath}}/{{objFilePath}}/{{functionName}} into this
+  #     script (see CCompiler.compile) — it does NOT pass the real target object path.
+  #     apply_patches.py keys rows by the .o basename (e.g. banim-efxmagic-flux.o), so
+  #     for the handful of PATCHED TUs (the banim-efxmagic-* objects in
+  #     layout/patches.tsv) this call cannot match and is a no-op; objdiff would then
+  #     compare the UNPATCHED object and may show false diffs. There is no way to fix
+  #     this purely in-config because the basename isn't available here. So: DO NOT use
+  #     mizuchi's objdiff %/Integrator as the gate for any function whose object appears
+  #     in layout/patches.tsv — verify those only with `make compare`. The call is kept
+  #     (correct + harmless for the ~99% of unpatched objects, and forward-compatible if
+  #     upstream later names the temp object after the target).
   compilerScript: |
     set -euo pipefail
     ASM="$(mktemp --suffix=.s)"
     trap 'rm -f "$ASM"' EXIT
     cpp -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef "{{cFilePath}}" \
       | iconv -f UTF-8 -t CP932 \
-      | tools/agbcc/bin/agbcc -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -ffix-debug-line -g -o "$ASM"
+      | tools/agbcc/bin/agbcc -mthumb-interwork -Wimplicit -Wparentheses -O2 -fhex-asm -ffix-debug-line -g -o "$ASM"
     printf '\t.text\n\t.align 2, 0\n' >> "$ASM"
     arm-none-eabi-as -mcpu=arm7tdmi -mthumb-interwork -I include -I . "$ASM" -o "{{objFilePath}}"
     python3 scripts/apply_patches.py "{{objFilePath}}"
