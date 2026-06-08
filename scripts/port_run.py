@@ -336,15 +336,43 @@ def port(name, exclude=(), runs=None):
     # 0xc04 diff). For find_runs runs (already 4-aligned) len(otext) == run size, so
     # this is unchanged; verify-or-revert guards any pad that doesn't match JP.
     text_end = base + len(otext)
+    # Split carved ROM-data sections: a section whose compiled bytes match JP at every
+    # NON-reloc position is carved as real data; a REGION-DIFFERENT section (content
+    # differs beyond relocs — e.g. banim animation .rodata frame arrays) is instead
+    # placed NOLOAD at its JP base. Its JP bytes stay in the incbin baseline (the build
+    # is byte-perfect either way) and the section symbol still resolves, so the .text/
+    # .data references resolve to incbin+addend — carving the TU's CODE while leaving
+    # the region-different data in the baseline. Also force each section's alignment
+    # down to its JP base so the linker places it exactly there (2-aligned bases etc.).
+    sec_relocs, cur = {}, None
+    for l in sh(f"arm-none-eabi-objdump -r {obj}").stdout.splitlines():
+        if "RELOCATION RECORDS FOR [" in l:
+            cur = l.split("[")[1].split("]")[0]; continue
+        p = l.split()
+        if cur and len(p) >= 3 and all(c in "0123456789abcdef" for c in p[0]):
+            sec_relocs.setdefault(cur, set()).add(int(p[0], 16))
+    kept, noload_rom = [], []
+    for off0, size, dsec in data_carves:
+        need = (0x08000000 + off0) & -(0x08000000 + off0)
+        if need < 4:
+            sh(f"arm-none-eabi-objcopy --set-section-alignment {dsec}={need} {obj} {obj}")
+        cb = subprocess.run(["arm-none-eabi-objcopy", "-O", "binary", "-j", dsec, obj, "/dev/stdout"],
+                            capture_output=True).stdout
+        rel = sec_relocs.get(dsec, set())
+        match = all(cb[i] == jp[off0+i] or any(i-k in rel for k in range(4))
+                    for i in range(min(size, len(cb))))
+        (kept if match else noload_rom).append((off0, size, dsec))
     with open("layout/carved_rom.tsv", "a") as f:
         f.write(f"{base&0xFFFFFF:06X}\t{text_end&0xFFFFFF:06X}\tsrc/{name}.o(.text)\t{name}(run): {', '.join(funcs[:3])}{'...' if len(funcs)>3 else ''}\n")
-        for dbase, size, dsec in data_carves:
+        for dbase, size, dsec in kept:
             f.write(f"{dbase:06X}\t{dbase+size:06X}\tsrc/{name}.o({dsec})\t{name} {dsec}\n")
-    if ram:
+    if ram or noload_rom:
         with open("layout/carved_ram.tsv", "a") as f:
             for s, b in ram.items():  # each RAM section at its own JP base
                 region = "iwram" if (b >> 24) == 3 else "ewram"
                 f.write(f"{b:08X}\t{region}\tsrc/{name}.o({s})\t{name} {s}\n")
+            for off0, size, dsec in noload_rom:  # region-different ROM data -> NOLOAD, stays incbin
+                f.write(f"{0x08000000+off0:08X}\trom\tsrc/{name}.o({dsec})\t{name} {dsec} region-diff (incbin)\n")
     adds = [f"{s}\t{a:08X}\t{t}\t{name}" for s, (a, t) in new_syms.items() if s not in have]
     if adds:
         with open("layout/baseline_syms.tsv", "a") as f:

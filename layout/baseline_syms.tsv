@@ -1717,3 +1717,5 @@ ProcScr_efxWhiteOUT	085E3AD4	data	banim-efxflashbg
 ProcScr_efxWhiteIN	085E3AFC	data	banim-efxflashbg
 ProcScr_efxBlackOUT	085E3B24	data	banim-efxflashbg
 ProcScr_efxBlackIN	085E3B4C	data	banim-efxflashbg
+StartMovingHelpBox	0808B3F0	thumb	uichapterstatus
+Pal_MenuStatus_0	08AAF654	data	uichapterstatus

@@ -6750,3 +6750,11 @@
 	.global ProcScr_efxBlackIN
 	.set    ProcScr_efxBlackIN, 0x085E3B4C
 
+	.global StartMovingHelpBox
+	.type   StartMovingHelpBox, %function
+	.thumb_func
+	.set    StartMovingHelpBox, 0x0808B3F0 + 1
+
+	.global Pal_MenuStatus_0
+	.set    Pal_MenuStatus_0, 0x08AAF654
+
