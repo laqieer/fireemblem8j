@@ -42,10 +42,11 @@ the **serial integrator** runs one carve at a time.
 4. **Self-verify (fast loop):** use objdiff/asm-differ per symbol; then
    `make compare` in the worktree until `fireemblem8.gba: OK`.
 5. **Submit:** commit (fragment + src/asm only) and push a branch.
-6. **Heartbeat** the claim periodically for long tasks (`claim.py beat <task>`).
-7. **Release:** `claim.py release <task>` once the branch is pushed. (Claim
-   lifecycle is the agent's — the integrator works on branches, not task ids;
-   abandoned claims TTL-expire and are reaped.)
+6. **Heartbeat** the claim periodically for long tasks (`claim.py beat <task> <agent>` —
+   only refreshes if you still own it).
+7. **Release:** `claim.py release <task> <agent>` once the branch is pushed (only releases
+   your own claim). Claim lifecycle is the agent's — the integrator works on branches, not
+   task ids; abandoned claims TTL-expire and are reaped.
 
 ## Integration (serial, by the lead / a single integrator)
 

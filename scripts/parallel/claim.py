@@ -13,12 +13,13 @@ share it through the main working tree / a shared path, not through git.
 CLI::
 
   claim.py claim   <task> <agent>   # exit 0 claimed, 3 already-claimed
-  claim.py release <task>           # delete the claim (done/abandoned)
-  claim.py beat    <task>           # refresh the TTL (call periodically)
+  claim.py release <task> <agent>   # delete your claim (only if you own it)
+  claim.py beat    <task> <agent>   # refresh the TTL (only if you own it)
   claim.py status  <task>           # print the claim json, exit 0/3
   claim.py list                     # list active claims
   claim.py reap   [--ttl SECONDS]   # delete expired claims, print what was reaped
 """
+import contextlib
 import fcntl
 import hashlib
 import json
@@ -52,71 +53,91 @@ def _expired(rec, ttl):
     return rec is None or (time.time() - rec.get("beat", 0)) > ttl
 
 
-def claim(task, agent, ttl=DEFAULT_TTL):
+@contextlib.contextmanager
+def _locked():
+    """Hold an exclusive flock on the registry lock for the whole critical
+    section. EVERY claim-file mutation (claim/beat/release/reap) takes this lock,
+    so they are fully serialized -- e.g. reap() can never delete a claim that
+    claim() created concurrently, and beat/release never race a steal."""
     os.makedirs(CLAIMS_DIR, exist_ok=True)
-    path = _path(task)
-    # Serialize the read-decide-write across all claimants with an exclusive flock
-    # on a registry lock file. A bare O_CREAT|O_EXCL plus an expired-claim "steal"
-    # has a TOCTOU race (two agents both see the stale record expired and both
-    # overwrite -> double claim); the lock makes claiming atomic.
-    with open(os.path.join(CLAIMS_DIR, ".lock"), "w") as lf:
+    lf = open(os.path.join(CLAIMS_DIR, ".lock"), "w")
+    try:
         fcntl.flock(lf, fcntl.LOCK_EX)
+        yield
+    finally:
+        lf.close()  # closing the fd releases the flock
+
+
+def _write(path, rec):
+    tmp = path + ".tmp.%d" % os.getpid()
+    with open(tmp, "w") as f:
+        json.dump(rec, f)
+    os.replace(tmp, path)
+
+
+def claim(task, agent, ttl=DEFAULT_TTL):
+    """Claim a task. Succeeds unless a non-expired claim already exists. An
+    expired claim (the previous owner died) is stolen atomically under the lock,
+    so two claimants can never both 'steal' the same stale record."""
+    path = _path(task)
+    with _locked():
         prev = _load(path)
         if prev is not None and not _expired(prev, ttl):
             return False, prev
         now = time.time()
         rec = {"task": task, "agent": agent, "pid": os.getpid(), "started": now, "beat": now}
-        tmp = path + ".tmp.%d" % os.getpid()
-        with open(tmp, "w") as f:
-            json.dump(rec, f)
-        os.replace(tmp, path)
+        _write(path, rec)
         return True, rec
 
 
-def release(task):
+def release(task, agent):
+    """Release a claim -- only if `agent` is the current owner, so a stale agent
+    whose task was stolen cannot delete the new owner's claim."""
     path = _path(task)
-    if os.path.exists(path):
+    with _locked():
+        rec = _load(path)
+        if rec is None or rec.get("agent") != agent:
+            return False
         os.remove(path)
         return True
-    return False
 
 
-def beat(task):
+def beat(task, agent):
+    """Refresh the TTL -- only if `agent` still owns the (non-expired) claim, so a
+    stale agent cannot resurrect a task another agent has taken over."""
     path = _path(task)
-    rec = _load(path)
-    if rec is None:
-        return False
-    rec["beat"] = time.time()
-    with open(path, "w") as f:
-        json.dump(rec, f)
-    return True
+    with _locked():
+        rec = _load(path)
+        if rec is None or rec.get("agent") != agent or _expired(rec, DEFAULT_TTL):
+            return False
+        rec["beat"] = time.time()
+        _write(path, rec)
+        return True
 
 
 def active(ttl=DEFAULT_TTL):
-    out = []
-    if not os.path.isdir(CLAIMS_DIR):
+    with _locked():
+        out = []
+        for fn in sorted(os.listdir(CLAIMS_DIR)) if os.path.isdir(CLAIMS_DIR) else []:
+            if not fn.endswith(".json"):
+                continue
+            rec = _load(os.path.join(CLAIMS_DIR, fn))
+            if rec and not _expired(rec, ttl):
+                out.append(rec)
         return out
-    for fn in sorted(os.listdir(CLAIMS_DIR)):
-        if not fn.endswith(".json"):
-            continue
-        rec = _load(os.path.join(CLAIMS_DIR, fn))
-        if rec and not _expired(rec, ttl):
-            out.append(rec)
-    return out
 
 
 def reap(ttl=DEFAULT_TTL):
-    reaped = []
-    if not os.path.isdir(CLAIMS_DIR):
+    with _locked():
+        reaped = []
+        for fn in sorted(os.listdir(CLAIMS_DIR)) if os.path.isdir(CLAIMS_DIR) else []:
+            if not fn.endswith(".json"):
+                continue
+            p = os.path.join(CLAIMS_DIR, fn)
+            if _expired(_load(p), ttl):
+                os.remove(p)
+                reaped.append(fn[:-5])
         return reaped
-    for fn in sorted(os.listdir(CLAIMS_DIR)):
-        if not fn.endswith(".json"):
-            continue
-        p = os.path.join(CLAIMS_DIR, fn)
-        if _expired(_load(p), ttl):
-            os.remove(p)
-            reaped.append(fn[:-5])
-    return reaped
 
 
 def _arg_ttl():
@@ -131,10 +152,10 @@ if __name__ == "__main__":
         ok, rec = claim(a[2], a[3], _arg_ttl())
         print(("CLAIMED " if ok else "BUSY ") + json.dumps(rec))
         sys.exit(0 if ok else 3)
-    elif len(a) == 3 and a[1] == "release":
-        sys.exit(0 if release(a[2]) else 3)
-    elif len(a) == 3 and a[1] == "beat":
-        sys.exit(0 if beat(a[2]) else 3)
+    elif len(a) >= 4 and a[1] == "release":
+        sys.exit(0 if release(a[2], a[3]) else 3)
+    elif len(a) >= 4 and a[1] == "beat":
+        sys.exit(0 if beat(a[2], a[3]) else 3)
     elif len(a) == 3 and a[1] == "status":
         rec = _load(_path(a[2]))
         print(json.dumps(rec) if rec else "(unclaimed)")
