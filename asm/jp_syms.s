@@ -388,9 +388,6 @@
 	.global gBmMapUnit
 	.set    gBmMapUnit, 0x0202E4D4
 
-	.global gBmMapSize
-	.set    gBmMapSize, 0x0202E4D0
-
 	.global _call_via_r0
 	.type   _call_via_r0, %function
 	.thumb_func
