@@ -70,6 +70,12 @@ def main():
         us_lo = min(s[0] for s in spans); us_hi = max(s[1] for s in spans)
         if us_hi - us_lo < min_run:   # JP-overlap is handled per-run via pend (US!=JP addr)
             continue
+        # Skip scattered objects (code .rodata split across far addresses): their union
+        # span is huge and dominated by OTHER objects' symbols -> slow + cross-grab. A
+        # real contiguous data object has its sections packed (union ~= sum of sections).
+        secsum = sum(b - a for a, b in spans)
+        if us_hi - us_lo > 3 * secsum:
+            continue
         if us_hi - 0x08000000 > len(jp):
             continue
         addrs = sorted(a for a in SYMS if us_lo <= a < us_hi)

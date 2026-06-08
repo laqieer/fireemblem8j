@@ -807,7 +807,6 @@ PutScreenFogEffectOverlayed	0801FBE0	thumb	gameoverbgfx
 PutScreenFogEffect	0801FB0C	thumb	gameoverbgfx
 MaybeResetSomePal	0800169C	thumb	gameoverbgfx
 MaybeSmoothChangeSomePal	080016B8	thumb	gameoverbgfx
-Img_ChapterIntroFog	08A7B098	data	gameoverbgfx
 MapAnim_GorgonHatch_Init	0807F15C	thumb	eventfx-boomfog
 ProcLightRuneAnim_Init	08021234	thumb	lightrunefx
 ProcLightRuneAnim_Loop	080212E8	thumb	lightrunefx
@@ -1199,15 +1198,10 @@ UnpackUiFramePalette	0804EE2C	thumb	uiutils
 gLegacyUiFrameAPalette	085E1740	data	uiutils
 gLegacyUiFrameBPalette	085E2034	data	uiutils
 gLegacyUiFrameCPalette	085E28F4	data	uiutils
-gUiFramePaletteA	085E0D94	data	uiutils
-gUiFramePaletteB	085E0DB4	data	uiutils
-gUiFramePaletteC	085E0DD4	data	uiutils
-gUiFramePaletteD	085E0DF4	data	uiutils
 gLegacyUiFrameAImage	085E0E94	data	uiutils
 gLegacyUiFrameBImage	085E1780	data	uiutils
 gLegacyUiFrameCImage	085E2074	data	uiutils
 gLegacyUiFrameDImage	085E2934	data	uiutils
-gUiFrameImage	085E07A0	data	uiutils
 gUiBarPaletteA	085E1760	data	uiutils
 gUiBarPaletteB	085E2054	data	uiutils
 gUiBarPaletteC	085E2914	data	uiutils

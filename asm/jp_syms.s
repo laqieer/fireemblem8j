@@ -3486,9 +3486,6 @@
 	.thumb_func
 	.set    MaybeSmoothChangeSomePal, 0x080016B8 + 1
 
-	.global Img_ChapterIntroFog
-	.set    Img_ChapterIntroFog, 0x08A7B098
-
 	.global MapAnim_GorgonHatch_Init
 	.type   MapAnim_GorgonHatch_Init, %function
 	.thumb_func
@@ -5128,18 +5125,6 @@
 	.global gLegacyUiFrameCPalette
 	.set    gLegacyUiFrameCPalette, 0x085E28F4
 
-	.global gUiFramePaletteA
-	.set    gUiFramePaletteA, 0x085E0D94
-
-	.global gUiFramePaletteB
-	.set    gUiFramePaletteB, 0x085E0DB4
-
-	.global gUiFramePaletteC
-	.set    gUiFramePaletteC, 0x085E0DD4
-
-	.global gUiFramePaletteD
-	.set    gUiFramePaletteD, 0x085E0DF4
-
 	.global gLegacyUiFrameAImage
 	.set    gLegacyUiFrameAImage, 0x085E0E94
 
@@ -5151,9 +5136,6 @@
 
 	.global gLegacyUiFrameDImage
 	.set    gLegacyUiFrameDImage, 0x085E2934
-
-	.global gUiFrameImage
-	.set    gUiFrameImage, 0x085E07A0
 
 	.global gUiBarPaletteA
 	.set    gUiBarPaletteA, 0x085E1760

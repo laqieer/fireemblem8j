@@ -330,6 +330,7 @@
 0E37B8	0E37C5	src/banim-efxmagic-dancerings.o(.rodata)	banim-efxmagic-dancerings .rodata
 0E3CCC	0E3CD7	src/banim-efxmagic-evileye.o(.rodata)	banim-efxmagic-evileye .rodata
 0E45D8	0E4602	src/banim-efxhit.o(.rodata)	banim-efxhit .rodata
+0E4E0C	0E6774	asm/dat_const_data_banimekrdk_p0.o(.rodata.dat_const_data_banimekrdk_p0)	dat_const_data_banimekrdk_p0 region-same per-sym shifted (6KB)
 0E6BA0	0E7544	asm/dat_const_data_E162A_p0.o(.rodata.dat_const_data_E162A_p0)	dat_const_data_E162A_p0 region-same per-sym shifted (2KB)
 0E8934	0E8F58	asm/dat_const_data_E162A_p1.o(.rodata.dat_const_data_E162A_p1)	dat_const_data_E162A_p1 region-same per-sym shifted (1KB)
 0EAC84	0ED67C	asm/dat_const_data_E162A_p2.o(.rodata.dat_const_data_E162A_p2)	dat_const_data_E162A_p2 region-same per-sym shifted (10KB)
@@ -655,6 +656,7 @@
 5CB31C	5CB9B0	asm/dat_anim_fire_trap.o(.rodata.dat_anim_fire_trap)	dat_anim_fire_trap region-same shifted (1KB)
 5CB9B0	5CBC50	asm/dat_trap_fire_pike_2.o(.rodata.dat_trap_fire_pike_2)	dat_trap_fire_pike_2 region-same shifted (0KB)
 5CBC50	5CBE64	asm/dat_anim_pike_trap.o(.rodata.dat_anim_pike_trap)	dat_anim_pike_trap region-same shifted (0KB)
+5CBE84	5CBFA4	asm/dat_particles_fx_p0.o(.rodata.dat_particles_fx_p0)	dat_particles_fx_p0 region-same per-sym shifted (0KB)
 5CBFE4	5CDF84	asm/dat_particles_fx.o(.rodata.dat_particles_fx)	dat_particles_fx region-same shifted (7KB)
 5CF274	5D14D4	asm/dat_worldmap_gmapunit_p723.o(.rodata.dat_worldmap_gmapunit_p723)	dat_worldmap_gmapunit_p723 region-same per-sym shifted (8KB)
 5D1BC8	5D1D3C	asm/dat_worldmap_gmapunit_p724.o(.rodata.dat_worldmap_gmapunit_p724)	dat_worldmap_gmapunit_p724 region-same per-sym shifted (0KB)
@@ -675,6 +677,7 @@
 5D92D0	5E0610	asm/dat_data_5AA96C.o(.rodata.dat_data_5AA96C)	dat_data_5AA96C region-same shifted (28KB)
 5E0610	5E0698	src/uiutils.o(.data)	uiutils .data
 5E076C	5E07A0	src/uiselecttarget.o(.data)	uiselecttarget .data
+5E07A0	5E0E94	asm/dat_data_5B65C0_p0.o(.rodata.dat_data_5B65C0_p0)	dat_data_5B65C0_p0 region-same per-sym shifted (1KB)
 5E3170	5E3534	asm/dat_worldmap_gmapunit_p751.o(.rodata.dat_worldmap_gmapunit_p751)	dat_worldmap_gmapunit_p751 region-same per-sym shifted (0KB)
 5E3604	5E3724	asm/dat_worldmap_gmapunit_p753.o(.rodata.dat_worldmap_gmapunit_p753)	dat_worldmap_gmapunit_p753 region-same per-sym shifted (0KB)
 5E373C	5E37CC	asm/dat_worldmap_gmapunit_p754.o(.rodata.dat_worldmap_gmapunit_p754)	dat_worldmap_gmapunit_p754 region-same per-sym shifted (0KB)
@@ -691,6 +694,7 @@
 5F1F84	5F22B4	asm/dat_worldmap_gmapunit_p768.o(.rodata.dat_worldmap_gmapunit_p768)	dat_worldmap_gmapunit_p768 region-same per-sym shifted (0KB)
 5F24A8	5F3338	asm/dat_worldmap_gmapunit_p771.o(.rodata.dat_worldmap_gmapunit_p771)	dat_worldmap_gmapunit_p771 region-same per-sym shifted (3KB)
 5F3344	5F34A0	asm/dat_worldmap_gmapunit_p772.o(.rodata.dat_worldmap_gmapunit_p772)	dat_worldmap_gmapunit_p772 region-same per-sym shifted (0KB)
+5F358C	5F9DA0	asm/dat_banim_ekrskill_p0.o(.rodata.dat_banim_ekrskill_p0)	dat_banim_ekrskill_p0 region-same per-sym shifted (26KB)
 5F9DA0	5FC068	asm/dat_banim_efxhitobj.o(.rodata.dat_banim_efxhitobj)	dat_banim_efxhitobj region-same shifted (8KB)
 5FC08C	5FC458	asm/dat_worldmap_gmapunit_p774.o(.rodata.dat_worldmap_gmapunit_p774)	dat_worldmap_gmapunit_p774 region-same per-sym shifted (0KB)
 5FC4C4	5FC638	asm/dat_worldmap_gmapunit_p775.o(.rodata.dat_worldmap_gmapunit_p775)	dat_worldmap_gmapunit_p775 region-same per-sym shifted (0KB)
@@ -1108,6 +1112,7 @@ A72BB8	A72BF0	src/statscreen.o(.data)	statscreen .data
 A738E0	A73900	src/player_interface.o(.data)	player_interface .data
 A73F9C	A74CEC	asm/dat_worldmap_gmapunit_p1572.o(.rodata.dat_worldmap_gmapunit_p1572)	dat_worldmap_gmapunit_p1572 region-same per-sym shifted (3KB)
 A74FEC	A79E90	asm/dat_worldmap_gmapunit_p1573.o(.rodata.dat_worldmap_gmapunit_p1573)	dat_worldmap_gmapunit_p1573 region-same per-sym shifted (19KB)
+A7B098	A7CDA4	asm/dat_data_A01CC4_p2.o(.rodata.dat_data_A01CC4_p2)	dat_data_A01CC4_p2 region-same per-sym shifted (7KB)
 A7CDA4	A7D10C	asm/dat_anim_player_rank_fog.o(.rodata.dat_anim_player_rank_fog)	dat_anim_player_rank_fog region-same shifted (0KB)
 A7D10C	A7E188	asm/dat_data_A01CC4_2.o(.rodata.dat_data_A01CC4_2)	dat_data_A01CC4_2 region-same shifted (4KB)
 A84B00	A84BFC	asm/dat_worldmap_gmapunit_p1576.o(.rodata.dat_worldmap_gmapunit_p1576)	dat_worldmap_gmapunit_p1576 region-same per-sym shifted (0KB)
@@ -1146,6 +1151,9 @@ ABCAD0	ABCAD4	src/bmshop.o(.data)	bmshop .data
 ABFFE4	AC00A8	asm/dat_worldmap_gmapunit_p1652.o(.rodata.dat_worldmap_gmapunit_p1652)	dat_worldmap_gmapunit_p1652 region-same per-sym shifted (0KB)
 AC0394	AC059C	src/cg.o(.data)	cg .data
 AC0AF8	AC0B90	asm/dat_worldmap_gmapunit_p1655.o(.rodata.dat_worldmap_gmapunit_p1655)	dat_worldmap_gmapunit_p1655 region-same per-sym shifted (0KB)
+AC2BE0	AC3AA8	asm/dat_ending_details_p0.o(.rodata.dat_ending_details_p0)	dat_ending_details_p0 region-same per-sym shifted (3KB)
+AC4C88	AC50A4	asm/dat_ending_fin_p0.o(.rodata.dat_ending_fin_p0)	dat_ending_fin_p0 region-same per-sym shifted (1KB)
+AC6C98	AC718C	asm/dat_ending_fin_p1.o(.rodata.dat_ending_fin_p1)	dat_ending_fin_p1 region-same per-sym shifted (1KB)
 AC7408	ACC378	asm/dat_ending_staffreel_p0.o(.rodata.dat_ending_staffreel_p0)	dat_ending_staffreel_p0 region-same per-sym shifted (19KB)
 ACCD98	ACEB54	asm/dat_ending_staffreel_p1.o(.rodata.dat_ending_staffreel_p1)	dat_ending_staffreel_p1 region-same per-sym shifted (7KB)
 ACF418	AD02D4	asm/dat_ending_staffreel_p2.o(.rodata.dat_ending_staffreel_p2)	dat_ending_staffreel_p2 region-same per-sym shifted (3KB)
@@ -1159,6 +1167,8 @@ B1E49C	B1E5FC	asm/dat_worldmap_minimap_p0.o(.rodata.dat_worldmap_minimap_p0)	dat
 B1E894	B1E998	asm/dat_worldmap_minimap_p2.o(.rodata.dat_worldmap_minimap_p2)	dat_worldmap_minimap_p2 region-same per-sym shifted (0KB)
 B1E9B8	B23F00	asm/dat_worldmap_minimap_p3.o(.rodata.dat_worldmap_minimap_p3)	dat_worldmap_minimap_p3 region-same per-sym shifted (21KB)
 B23F00	B24D0C	asm/dat_anim_worldmap_highlight.o(.rodata.dat_anim_worldmap_highlight)	dat_anim_worldmap_highlight region-same shifted (3KB)
+B25298	B25710	asm/dat_anim_worldmap_highlight_p5.o(.rodata.dat_anim_worldmap_highlight_p5)	dat_anim_worldmap_highlight_p5 region-same per-sym shifted (1KB)
+B2576C	B25A78	asm/dat_anim_worldmap_highlight_p7.o(.rodata.dat_anim_worldmap_highlight_p7)	dat_anim_worldmap_highlight_p7 region-same per-sym shifted (0KB)
 B26938	B26A6C	asm/dat_worldmap_skirmish.o(.rodata.dat_worldmap_skirmish)	dat_worldmap_skirmish region-same shifted (0KB)
 B2759C	B27970	asm/dat_anim_worldmap_skirmish.o(.rodata.dat_anim_worldmap_skirmish)	dat_anim_worldmap_skirmish region-same shifted (0KB)
 B3EE00	B3F024	asm/dat_titlescreen.o(.rodata.dat_titlescreen)	dat_titlescreen region-same shifted (0KB)
