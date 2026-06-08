@@ -58,6 +58,11 @@
        their NAMED syms (extend romdata placement beyond section-symbol refs); (ii)
        subtract the addend in the romdata internal-pointer loop too (mirror the .text
        addend fix). Verify per-TU before generalizing.
+       **TRIED & RULED OUT (2026-06-08):** the romdata internal-pointer addend
+       subtraction alone carves 0/8 of these — the diffs are region-different ProcScr
+       *function pointers* (addend 0) plus referenced-but-unplaced `.rodata` growth,
+       not indexed-table addends. Don't re-try the romdata-addend path; the real fix
+       is (i) **place referenced `.rodata`/`.data` via named syms** at their JP address.
      - **"no diff parsed", +ram+romdata ×8** — `agb_sram`, `bm`, `bmarena`, `bmmap`,
        `bmmind`, `bmsave-multiarena`, `cp_decide`, `sio_core`. The `ctc`-style
        **`.bss` overlap** (two carved `.bss` blocks collide, e.g. `.bss_20` ⊂ `.bss_0`)
