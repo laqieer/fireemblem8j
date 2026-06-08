@@ -580,12 +580,6 @@
 	.global Img_MineFx
 	.set    Img_MineFx, 0x085D1BC8
 
-	.global Pal_MineFx
-	.set    Pal_MineFx, 0x085D1DD0
-
-	.global SpritAnim_MineFx
-	.set    SpritAnim_MineFx, 0x085D1D3C
-
 	.global StartSpriteAnimfx
 	.type   StartSpriteAnimfx, %function
 	.thumb_func
@@ -1312,12 +1306,6 @@
 
 	.global gUnk_Sio_12
 	.set    gUnk_Sio_12, 0x0203DD20
-
-	.global SpriteAnim_GasTrapVertical
-	.set    SpriteAnim_GasTrapVertical, 0x085C9518
-
-	.global SpriteAnim_GasTrapHorizontal
-	.set    SpriteAnim_GasTrapHorizontal, 0x085C97BC
 
 	.global PlaySeSpacial
 	.type   PlaySeSpacial, %function
@@ -2229,9 +2217,6 @@
 	.thumb_func
 	.set    SetObjAffine, 0x08002100 + 1
 
-	.global gSinLookup
-	.set    gSinLookup, 0x080DC15C
-
 	.global CopyPalWithFade
 	.type   CopyPalWithFade, %function
 	.thumb_func
@@ -2880,9 +2865,6 @@
 
 	.global gMapanimExpbar_0
 	.set    gMapanimExpbar_0, 0x08A13D48
-
-	.global gMapanimLevelup_0
-	.set    gMapanimLevelup_0, 0x08A1DB20
 
 	.global ProcScr_ManimLevelUp
 	.set    ProcScr_ManimLevelUp, 0x08A145FC
@@ -4629,12 +4611,6 @@
 	.thumb_func
 	.set    EndGmBaseEntry, 0x080C4908 + 1
 
-	.global gBattleForecast_0
-	.set    gBattleForecast_0, 0x085C8D58
-
-	.global gBattleForecast_1
-	.set    gBattleForecast_1, 0x085C8E10
-
 	.global FaceChibiSpr_OnIdle
 	.type   FaceChibiSpr_OnIdle, %function
 	.thumb_func
@@ -5674,12 +5650,6 @@
 	.global ProcScr_ManimLevelUpStatGainLabel
 	.set    ProcScr_ManimLevelUpStatGainLabel, 0x08A145D4
 
-	.global Img_ManimLevelUpStatGain
-	.set    Img_ManimLevelUpStatGain, 0x08A1D090
-
-	.global Pal_ManimLevelUp
-	.set    Pal_ManimLevelUp, 0x08A1D030
-
 	.global ProcScr_ManimLevelUpLabelColor
 	.set    ProcScr_ManimLevelUpLabelColor, 0x08A145E4
 
@@ -5687,9 +5657,6 @@
 	.type   VramCopy, %function
 	.thumb_func
 	.set    VramCopy, 0x080149B4 + 1
-
-	.global Img_ManimLevelUpStatGainDigits
-	.set    Img_ManimLevelUpStatGainDigits, 0x08A1D320
 
 	.global gSioTexts
 	.set    gSioTexts, 0x0203DD08

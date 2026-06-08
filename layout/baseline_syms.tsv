@@ -129,8 +129,6 @@ Decompress	08013008	thumb	minefx
 CopyToPaletteBuffer	08000D68	thumb	minefx
 APProc_Create	08009608	thumb	minefx
 Img_MineFx	085D1BC8	data	minefx
-Pal_MineFx	085D1DD0	data	minefx
-SpritAnim_MineFx	085D1D3C	data	minefx
 StartSpriteAnimfx	080B342C	thumb	sprite-animfx
 SetDefaultColorEffects	08001ED0	thumb	bmxfade
 SetBackgroundTileDataOffset	08000F8C	thumb	bmxfade
@@ -298,8 +296,6 @@ EndLinkArenaButtonSpriteDraw	0804D0BC	thumb	sio_term
 BMapVSync_End	080300C4	thumb	sio_term
 StartPrepAtMenu	08098738	thumb	sio_term
 gUnk_Sio_12	0203DD20	data	sio_term
-SpriteAnim_GasTrapVertical	085C9518	data	trapfx
-SpriteAnim_GasTrapHorizontal	085C97BC	data	trapfx
 PlaySeSpacial	08014B50	thumb	trapfx
 EnsureCameraOntoPosition	08015E18	thumb	trapfx
 APProc_Exists	080096C0	thumb	trapfx
@@ -516,7 +512,6 @@ efxCrimsonEyeOBJ_GetOffsetX	0806C958	thumb	banim-efxmagic-crimsoneye
 efxCrimsonEyeOBJ_GetOffsetY	0806C970	thumb	banim-efxmagic-crimsoneye
 Div	080D6374	thumb	banim-efxmagic-crimsoneye
 SetObjAffine	08002100	thumb	banim-efxmagic-crimsoneye
-gSinLookup	080DC15C	data	banim-efxmagic-crimsoneye
 CopyPalWithFade	0807A3EC	thumb	banim-efxmagic-demonlight
 SpellFx_RegisterBgPal	080567E0	thumb	banim-efxmagic-demonlight
 Pal_Ekrdragonfx_2	088481AC	data	banim-efxmagic-demonlight
@@ -684,7 +679,6 @@ MapEventcallFx2_HBlankWobble	08082748	thumb	mapanim_eventcall
 MapAnim_DrawNumber	0807DD70	thumb	mapanim_expbar
 MapAnim_DrawBar	0807DE88	thumb	mapanim_expbar
 gMapanimExpbar_0	08A13D48	data	mapanim_expbar
-gMapanimLevelup_0	08A1DB20	data	mapanim_expbar
 ProcScr_ManimLevelUp	08A145FC	data	mapanim_lvup
 PutManimLevelUpFrame	08080DD8	thumb	mapanim_lvup
 PutManimLevelUpStat	08080EE4	thumb	mapanim_lvup
@@ -1130,8 +1124,6 @@ StartGmBaseEntry	080C48D0	thumb	eventscr_gmap
 gWMPathData	081F6340	data	eventscr_gmap
 GmBaseEntryExists	080C4918	thumb	eventscr_gmap
 EndGmBaseEntry	080C4908	thumb	eventscr_gmap
-gBattleForecast_0	085C8D58	data	face
-gBattleForecast_1	085C8E10	data	face
 FaceChibiSpr_OnIdle	080059D8	thumb	face
 BattleUnit_ShouldDisplayWRankUp	0807CB90	thumb	mapanim
 NewPopup_WRankIncrease	080117F0	thumb	mapanim
@@ -1395,11 +1387,8 @@ SpriteRefresher_OnIdle	08005390	thumb	ctc
 GetIconGfxTileIndex	0800355C	thumb	icon
 RegisterFillTile	08001FA4	thumb	icon
 ProcScr_ManimLevelUpStatGainLabel	08A145D4	data	mapanim_lvupfx
-Img_ManimLevelUpStatGain	08A1D090	data	mapanim_lvupfx
-Pal_ManimLevelUp	08A1D030	data	mapanim_lvupfx
 ProcScr_ManimLevelUpLabelColor	08A145E4	data	mapanim_lvupfx
 VramCopy	080149B4	thumb	mapanim_lvupfx
-Img_ManimLevelUpStatGainDigits	08A1D320	data	mapanim_lvupfx
 gSioTexts	0203DD08	data	sio_main2
 ReadMultiArenaSaveConfig	080AB458	thumb	sio_main2
 WriteMultiArenaSaveConfig	080AB41C	thumb	sio_main2
