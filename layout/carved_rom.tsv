@@ -390,3 +390,4 @@ EE0008	EE0AD0	src/banim_terrain_data.o(.data.banim_terrain_ptr_table)	battle_ter
 EE0C00	EF2F18	asm/data_data_banim_terrain.o(.data_data_banim_terrain)	data_data_banim_terrain region-same (72KB)
 EF8000	EF8008	src/banim_pal_chara.o(.data.banim_pal_head)	banim_pal_chara head
 EF8008	EF86C8	src/banim_pal_chara.o(.data.banim_pal_ptr_table)	character_battle_animation_palette_table
+EF9000	EFB2E0	asm/data_banim_pal.o(.data.data_banim_pal)	data_banim_pal char palettes (tier-2)

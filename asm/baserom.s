@@ -1056,5 +1056,8 @@
 	.incbin "baserom.gba", 0xEF2F18, 0x50E8	@ 0xEF2F18..0xEF8000
 
 	.section .gap_351, "ax", %progbits
-	.incbin "baserom.gba", 0xEF86C8	@ 0xEF86C8..0x1000000
+	.incbin "baserom.gba", 0xEF86C8, 0x938	@ 0xEF86C8..0xEF9000
+
+	.section .gap_352, "ax", %progbits
+	.incbin "baserom.gba", 0xEFB2E0	@ 0xEFB2E0..0x1000000
 
