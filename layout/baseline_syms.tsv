@@ -185,8 +185,6 @@ gBmMapRange	0202E4E0	data	fogmap
 gBmMapFog	0202E4E4	data	fogmap
 GetBackgroundTileDataOffset	08000F3C	thumb	mural_background
 gBG3TilemapBuffer	020244A8	data	mural_background
-Pal_CommGameBgScreenInShop	08BB059C	data	mural_background
-Img_CommGameBgScreen	08BABE04	data	mural_background
 ProcScr_SlidingWallBg	08A7279C	data	mural_background
 FlushLCDControl	08000E4C	thumb	sioerror
 FlushBackgrounds	080010FC	thumb	sioerror
@@ -400,9 +398,6 @@ Pal_TacticianSelObj	085D7EE8	data	sio_postbattle
 Pal_LinkArenaPlacementRanks	085D8068	data	sio_postbattle
 Img_LinkArenaActiveBannerFx	085D6FD0	data	sio_postbattle
 Pal_LinkArenaActiveBannerFx	085D80A8	data	sio_postbattle
-Img_LinkArenaPostBattleBg	085D9350	data	sio_postbattle
-Pal_LinkArenaPostBattleBg	085DA9FC	data	sio_postbattle
-Tsa_LinkArenaPostBattleBg	085DAA7C	data	sio_postbattle
 Font_Sio_0	02000C60	data	sio_postbattle
 Pal_Text	085C7420	data	sio_postbattle
 Texts_1	0203DB10	data	sio_postbattle
@@ -471,7 +466,6 @@ gUnk_47	03001838	data	sio_battlemap
 SetBackgroundScreenSize	08000FFC	thumb	titlescreen
 BgAffineSetOpAnim	080CBAFC	thumb	titlescreen
 BlendPaletteToColor	080CB8BC	thumb	titlescreen
-gPal_TitleMainBackground	08B43988	data	titlescreen
 gPal_Titlescreen_2	08B48918	data	titlescreen
 gGfx_TitleDemonKing	08B49B6C	data	titlescreen
 gTsa_TitleDemonKing	08B4A8B8	data	titlescreen
@@ -514,9 +508,6 @@ Div	080D6374	thumb	banim-efxmagic-crimsoneye
 SetObjAffine	08002100	thumb	banim-efxmagic-crimsoneye
 CopyPalWithFade	0807A3EC	thumb	banim-efxmagic-demonlight
 SpellFx_RegisterBgPal	080567E0	thumb	banim-efxmagic-demonlight
-Pal_Ekrdragonfx_2	088481AC	data	banim-efxmagic-demonlight
-Pal_DemonLightSprites	087F9CA4	data	banim-efxmagic-demonlight
-Img_DemonLightSprites	087F98E8	data	banim-efxmagic-demonlight
 EfxTmCpyBgHFlip	080733E8	thumb	banim-efxmagic-excalibur
 gEkrTsaBuffer	02019790	data	banim-efxmagic-excalibur
 gBG1TilemapBuffer	020234A8	data	banim-efxmagic-excalibur
@@ -773,14 +764,10 @@ GmapSugoAdvance	080C61AC	thumb	worldmap_sogu
 AP_Update	080091AC	thumb	worldmap_sogu
 AP_Create	0800916C	thumb	worldmap_sogu
 ProcScr_GmapSogu	08AC2430	data	worldmap_sogu
-Tsa_EfxDracoZombieBaseRight	087E56B4	data	banim-ekrdragon-dracozombie
 EkrDragonTmCpyWithDistance	08072168	thumb	banim-ekrdragon-dracozombie
-Tsa_EfxDracoZombieBaseLeft	087E54E0	data	banim-ekrdragon-dracozombie
 Fill16_EkrTsaBuffer	080721E0	thumb	banim-ekrdragon-dracozombie
 EfxTmFill	08056964	thumb	banim-ekrdragon-dracozombie
 SetEkrDragonStatusUnk1	08072054	thumb	banim-ekrdragon-dracozombie
-Img_EfxDracoZombie	087E1BA0	data	banim-ekrdragon-dracozombie
-Pal_EfxDracoZombie	087E62B4	data	banim-ekrdragon-dracozombie
 gEkrDragonPalBackup	02020068	data	banim-ekrdragon-dracozombie
 EkrDZ_PrepareBanimfx	08072454	thumb	banim-ekrdragon-dracozombie
 gEkrDracoZombiTsaSetLut	087A8B2C	data	banim-ekrdragon-dracozombie
@@ -868,8 +855,6 @@ sShopState	0203EF94	data	bmshop
 gEventsScriptUtils_0	08A60B60	data	events_script_utils
 DrawEventMapAnimMaskfxTsa	080880D4	thumb	events_script_utils
 DrawEventMapAnimMaskfx	08088098	thumb	events_script_utils
-Pal_Congratulations	08A12A80	data	events_script_utils
-Pal_MapClear	08A12AA0	data	events_script_utils
 ProcScr_EventMapAnim	08A60B18	data	events_script_utils
 StartBgm	08002424	thumb	gameoverbgfx
 PutScreenFogEffectOverlayed	0801FBE0	thumb	gameoverbgfx
@@ -878,9 +863,6 @@ MaybeResetSomePal	0800169C	thumb	gameoverbgfx
 MaybeSmoothChangeSomePal	080016B8	thumb	gameoverbgfx
 Img_ChapterIntroFog	08A7B098	data	gameoverbgfx
 MapAnim_GorgonHatch_Init	0807F15C	thumb	eventfx-boomfog
-Img_LightRune	085CC560	data	lightrunefx
-Pal_LightRune	085CDC84	data	lightrunefx
-Tsa_LightRune	085CDCA4	data	lightrunefx
 ProcLightRuneAnim_Init	08021234	thumb	lightrunefx
 ProcLightRuneAnim_Loop	080212E8	thumb	lightrunefx
 AnimScr_EfxBerserk1	086B9E8C	data	banim-efxmagic-effectstaves

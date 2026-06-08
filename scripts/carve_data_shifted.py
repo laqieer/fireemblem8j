@@ -104,32 +104,55 @@ def main():
         shift = find_shift(us_lo, sz)
         if shift is None:
             continue
-        jp_lo, jp_hi = us_lo - shift, us_hi - shift
-        joff = jp_lo - 0x08000000
-        if joff < 0 or jp_hi - 0x08000000 > len(jp):
-            continue
-        if us[uoff:uoff+sz] != jp[joff:joff+sz]:   # full-block verify (also rejects pointer tables)
-            continue
-        if any(not (jp_hi <= cl or jp_lo >= ch) for cl, ch in pend):  # uncarved + no intra-run overlap
+        joff = (us_lo - shift) - 0x08000000
+        if joff < 0 or (us_hi - shift) - 0x08000000 > len(jp):
             continue
         addrs = sorted(a for a in SYMS if us_lo <= a < us_hi)
         if not addrs or addrs[0] != us_lo:
             continue
-        name = "snd_" + re.sub(r"\W", "_", o.rsplit("/", 1)[-1].rsplit(".", 1)[0]) if "sound" in o \
-            else "dat_" + re.sub(r"\W", "_", o.rsplit("/", 1)[-1].rsplit(".", 1)[0])
-        body = [f'\t.section .rodata.{name}, "a", %progbits', '\t.align 2',
-                f'@ {o}: region-same content at JP 0x{jp_lo:08x} (US 0x{us_lo:08x}, shift -0x{shift:X}); incbin baserom.gba']
-        for i, a in enumerate(addrs):
-            nexta = addrs[i+1] if i+1 < len(addrs) else us_hi
-            for nm in SYMS[a]:
-                body.append(f'\t.global {nm}'); body.append(f'{nm}:'); drop.add(nm)
-            seg = nexta - a
-            if seg:
-                body.append(f'\t.incbin "baserom.gba", 0x{(a-shift)-0x08000000:X}, 0x{seg:X}')
-        open(f"asm/{name}.s", "w").write("\n".join(body) + "\n")
-        new_rows.append(f"{jp_lo&0xFFFFFF:06X}\t{jp_hi&0xFFFFFF:06X}\tasm/{name}.o(.rodata.{name})\t{name} region-same shifted ({sz//1024}KB)\n")
-        pend.append((jp_lo, jp_hi))
-        made.append((name, jp_lo, jp_hi, sz, shift, o))
+        bound = addrs + [us_hi]
+        # Per-symbol match at the object shift: a symbol is region-same-shifted iff its
+        # bytes equal the JP bytes at addr-shift. A fully-matching object yields one run;
+        # a partial object (region-different asset islands) yields the matching runs and
+        # leaves the differing symbols in the incbin baseline. Pointer tables never match.
+        ok = [us[bound[i]-0x08000000:bound[i+1]-0x08000000] ==
+              jp[bound[i]-shift-0x08000000:bound[i+1]-shift-0x08000000] for i in range(len(addrs))]
+        # group consecutive matching symbols into runs [run_lo, run_hi)
+        runs = []
+        i = 0
+        while i < len(addrs):
+            if not ok[i]:
+                i += 1; continue
+            j = i
+            while j < len(addrs) and ok[j]:
+                j += 1
+            runs.append((addrs[i], bound[j]))
+            i = j
+        base = ("snd_" if "sound" in o else "dat_") + re.sub(r"\W", "_", o.rsplit("/", 1)[-1].rsplit(".", 1)[0])
+        emitted = 0
+        for ri, (run_lo, run_hi) in enumerate(runs):
+            if run_hi - run_lo < 256:        # skip tiny scraps
+                continue
+            jl, jh = run_lo - shift, run_hi - shift
+            if any(not (jh <= cl or jl >= ch) for cl, ch in pend):
+                continue
+            nm_sec = base if len(runs) == 1 else f"{base}_{ri}"
+            body = [f'\t.section .rodata.{nm_sec}, "a", %progbits', '\t.align 2',
+                    f'@ {o}: region-same content at JP 0x{jl:08x} (US 0x{run_lo:08x}, shift -0x{shift:X}); incbin baserom.gba']
+            for k, a in enumerate(addrs):
+                if not (run_lo <= a < run_hi):
+                    continue
+                for nm in SYMS[a]:
+                    body.append(f'\t.global {nm}'); body.append(f'{nm}:'); drop.add(nm)
+                seg = bound[k+1] - a
+                if seg:
+                    body.append(f'\t.incbin "baserom.gba", 0x{(a-shift)-0x08000000:X}, 0x{seg:X}')
+            open(f"asm/{nm_sec}.s", "w").write("\n".join(body) + "\n")
+            new_rows.append(f"{jl&0xFFFFFF:06X}\t{jh&0xFFFFFF:06X}\tasm/{nm_sec}.o(.rodata.{nm_sec})\t{nm_sec} region-same shifted ({(run_hi-run_lo)//1024}KB)\n")
+            pend.append((jl, jh))
+            emitted += run_hi - run_lo
+        if emitted:
+            made.append((base, us_lo - shift, us_hi - shift, emitted, shift, o))
 
     if not made:
         print("no shifted region-same data objects found")

@@ -338,6 +338,7 @@
 5773B4	57742E	asm/dat_libc_a_vfprintf.o(.rodata.dat_libc_a_vfprintf)	dat_libc_a_vfprintf region-same shifted (0KB)
 577480	5775A4	asm/dat_libc_a_mprec.o(.rodata.dat_libc_a_mprec)	dat_libc_a_mprec region-same shifted (0KB)
 5776F0	577EF0	src/fontgrp.o(.data)	fontgrp .data
+577F4C	57994C	asm/dat_fontgrp_data.o(.rodata.dat_fontgrp_data)	dat_fontgrp_data region-same shifted (6KB)
 5B8CDC	5B8D84	src/ctc.o(.data)	ctc .data
 5B8F70	5B8F80	src/face.o(.data)	face .data
 5B90D4	5B90D8	src/scene.o(.data)	scene .data
@@ -370,6 +371,7 @@
 5CB31C	5CB9B0	asm/dat_anim_fire_trap.o(.rodata.dat_anim_fire_trap)	dat_anim_fire_trap region-same shifted (1KB)
 5CB9B0	5CBC50	asm/dat_trap_fire_pike_2.o(.rodata.dat_trap_fire_pike_2)	dat_trap_fire_pike_2 region-same shifted (0KB)
 5CBC50	5CBE64	asm/dat_anim_pike_trap.o(.rodata.dat_anim_pike_trap)	dat_anim_pike_trap region-same shifted (0KB)
+5CBFE4	5CDF84	asm/dat_particles_fx.o(.rodata.dat_particles_fx)	dat_particles_fx region-same shifted (7KB)
 5D1D3C	5D1DD0	asm/dat_anim_mine_fx.o(.rodata.dat_anim_mine_fx)	dat_anim_mine_fx region-same shifted (0KB)
 5D1DD0	5D1E10	asm/dat_mine_pal.o(.rodata.dat_mine_pal)	dat_mine_pal region-same shifted (0KB)
 5D1E60	5D1EA4	src/cp_order.o(.data)	cp_order .data
@@ -378,6 +380,7 @@
 5D32C0	5D32D8	src/sio_main2.o(.data)	sio_main2 .data
 5D3EA0	5D3EA8	src/sio_points.o(.data)	sio_points .data
 5D48C8	5D48E0	src/sio_mu.o(.data)	sio_mu .data
+5D92D0	5E0610	asm/dat_data_5AA96C.o(.rodata.dat_data_5AA96C)	dat_data_5AA96C region-same shifted (28KB)
 5E0610	5E0698	src/uiutils.o(.data)	uiutils .data
 5E076C	5E07A0	src/uiselecttarget.o(.data)	uiselecttarget .data
 5E3AAC	5E3AD4	src/banim-efxflashbg.o(.data)	banim-efxflashbg .data
@@ -388,10 +391,23 @@
 60073C	600754	src/banim-efxmagic-eclipse.o(.data)	banim-efxmagic-eclipse .data
 601CC0	601CD8	src/banim-efxmagic-dancerings.o(.data)	banim-efxmagic-dancerings .data
 602550	602568	src/banim-efxmagic-evileye.o(.data)	banim-efxmagic-evileye .data
+7B9F98	7CD474	asm/dat_data_btl_bg.o(.rodata.dat_data_btl_bg)	dat_data_btl_bg region-same shifted (77KB)
+7E1BA0	7E6E80	asm/dat_banim_ekrdragonfx_0.o(.rodata.dat_banim_ekrdragonfx_0)	dat_banim_ekrdragonfx_0 region-same shifted (20KB)
+7E6F10	7F9798	asm/dat_banim_ekrdragonfx_1.o(.rodata.dat_banim_ekrdragonfx_1)	dat_banim_ekrdragonfx_1 region-same shifted (74KB)
+7F97BC	7F98C4	asm/dat_banim_ekrdragonfx_2.o(.rodata.dat_banim_ekrdragonfx_2)	dat_banim_ekrdragonfx_2 region-same shifted (0KB)
+7F98E8	7F9E98	asm/dat_banim_ekrdragonfx_3.o(.rodata.dat_banim_ekrdragonfx_3)	dat_banim_ekrdragonfx_3 region-same shifted (1KB)
+7F9EE0	7FA0B4	asm/dat_banim_ekrdragonfx_4.o(.rodata.dat_banim_ekrdragonfx_4)	dat_banim_ekrdragonfx_4 region-same shifted (0KB)
+7FA0FC	7FABCC	asm/dat_banim_ekrdragonfx_5.o(.rodata.dat_banim_ekrdragonfx_5)	dat_banim_ekrdragonfx_5 region-same shifted (2KB)
+7FABDC	7FB044	asm/dat_banim_ekrdragonfx_6.o(.rodata.dat_banim_ekrdragonfx_6)	dat_banim_ekrdragonfx_6 region-same shifted (1KB)
+7FB054	7FB4BC	asm/dat_banim_ekrdragonfx_7.o(.rodata.dat_banim_ekrdragonfx_7)	dat_banim_ekrdragonfx_7 region-same shifted (1KB)
+7FB4D0	7FB938	asm/dat_banim_ekrdragonfx_8.o(.rodata.dat_banim_ekrdragonfx_8)	dat_banim_ekrdragonfx_8 region-same shifted (1KB)
+7FB94C	8486DC	asm/dat_banim_ekrdragonfx_9.o(.rodata.dat_banim_ekrdragonfx_9)	dat_banim_ekrdragonfx_9 region-same shifted (307KB)
+8486EC	84886C	asm/dat_banim_ekrdragonfx_10.o(.rodata.dat_banim_ekrdragonfx_10)	dat_banim_ekrdragonfx_10 region-same shifted (0KB)
 848B28	855D58	asm/dat_data_ekrdk.o(.rodata.dat_data_ekrdk)	dat_data_ekrdk region-same shifted (52KB)
 85616C	8582BC	asm/dat_data_banimmisc.o(.rodata.dat_data_banimmisc)	dat_data_banimmisc region-same shifted (8KB)
 861950	901138	asm/dat_data_portrait.o(.rodata.dat_data_portrait)	dat_data_portrait region-same shifted (637KB)
 9CFD20	A0DE50	asm/dat_data_map_anim_frames.o(.rodata.dat_data_map_anim_frames)	dat_data_map_anim_frames region-same shifted (248KB)
+A0DE50	A12AC0	asm/dat_data_99D6DC.o(.rodata.dat_data_99D6DC)	dat_data_99D6DC region-same shifted (19KB)
 A146BC	A146D4	src/mapanim_spellassocfx.o(.data)	mapanim_spellassocfx .data
 A14734	A149D4	src/mapanim_eventcall.o(.data)	mapanim_eventcall .data
 A1599C	A160F4	asm/dat_anim_mapanim_statgain.o(.rodata.dat_anim_mapanim_statgain)	dat_anim_mapanim_statgain region-same shifted (1KB)
@@ -420,9 +436,11 @@ ABCAD0	ABCAD4	src/bmshop.o(.data)	bmshop .data
 AC0394	AC059C	src/cg.o(.data)	cg .data
 B1CD80	B1D954	asm/dat_anim_worldmap_sprite.o(.rodata.dat_anim_worldmap_sprite)	dat_anim_worldmap_sprite region-same shifted (2KB)
 B2759C	B27970	asm/dat_anim_worldmap_skirmish.o(.rodata.dat_anim_worldmap_skirmish)	dat_anim_worldmap_skirmish region-same shifted (0KB)
+B3FCF4	B44B40	asm/dat_data_titlescreen.o(.rodata.dat_data_titlescreen)	dat_data_titlescreen region-same shifted (19KB)
 BAB71C	BAB754	src/classchg-handler.o(.data)	classchg-handler .data
 BABAB4	BABAF4	src/classchg-postconfirm.o(.data)	classchg-postconfirm .data
 BABAF4	BABAF8	src/bmguide.o(.data)	bmguide .data
+BABE04	BB08B4	asm/dat_data_B12A60.o(.rodata.dat_data_B12A60)	dat_data_B12A60 region-same shifted (18KB)
 C00000	C00008	src/banim_data.o(.data.banim_array_len)	banim_number
 C00008	C01928	src/banim_data.o(.data.banim_array)	banim_data
 C02000	E47180	asm/data_banim.o(.data.data_banim)	data_banim battle-anim assets (2324 KB, region-same)

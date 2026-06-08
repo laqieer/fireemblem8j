@@ -826,12 +826,6 @@
 	.global gBG3TilemapBuffer
 	.set    gBG3TilemapBuffer, 0x020244A8
 
-	.global Pal_CommGameBgScreenInShop
-	.set    Pal_CommGameBgScreenInShop, 0x08BB059C
-
-	.global Img_CommGameBgScreen
-	.set    Img_CommGameBgScreen, 0x08BABE04
-
 	.global ProcScr_SlidingWallBg
 	.set    ProcScr_SlidingWallBg, 0x08A7279C
 
@@ -1751,15 +1745,6 @@
 	.global Pal_LinkArenaActiveBannerFx
 	.set    Pal_LinkArenaActiveBannerFx, 0x085D80A8
 
-	.global Img_LinkArenaPostBattleBg
-	.set    Img_LinkArenaPostBattleBg, 0x085D9350
-
-	.global Pal_LinkArenaPostBattleBg
-	.set    Pal_LinkArenaPostBattleBg, 0x085DA9FC
-
-	.global Tsa_LinkArenaPostBattleBg
-	.set    Tsa_LinkArenaPostBattleBg, 0x085DAA7C
-
 	.global Font_Sio_0
 	.set    Font_Sio_0, 0x02000C60
 
@@ -2064,9 +2049,6 @@
 	.thumb_func
 	.set    BlendPaletteToColor, 0x080CB8BC + 1
 
-	.global gPal_TitleMainBackground
-	.set    gPal_TitleMainBackground, 0x08B43988
-
 	.global gPal_Titlescreen_2
 	.set    gPal_Titlescreen_2, 0x08B48918
 
@@ -2226,15 +2208,6 @@
 	.type   SpellFx_RegisterBgPal, %function
 	.thumb_func
 	.set    SpellFx_RegisterBgPal, 0x080567E0 + 1
-
-	.global Pal_Ekrdragonfx_2
-	.set    Pal_Ekrdragonfx_2, 0x088481AC
-
-	.global Pal_DemonLightSprites
-	.set    Pal_DemonLightSprites, 0x087F9CA4
-
-	.global Img_DemonLightSprites
-	.set    Img_DemonLightSprites, 0x087F98E8
 
 	.global EfxTmCpyBgHFlip
 	.type   EfxTmCpyBgHFlip, %function
@@ -3262,16 +3235,10 @@
 	.global ProcScr_GmapSogu
 	.set    ProcScr_GmapSogu, 0x08AC2430
 
-	.global Tsa_EfxDracoZombieBaseRight
-	.set    Tsa_EfxDracoZombieBaseRight, 0x087E56B4
-
 	.global EkrDragonTmCpyWithDistance
 	.type   EkrDragonTmCpyWithDistance, %function
 	.thumb_func
 	.set    EkrDragonTmCpyWithDistance, 0x08072168 + 1
-
-	.global Tsa_EfxDracoZombieBaseLeft
-	.set    Tsa_EfxDracoZombieBaseLeft, 0x087E54E0
 
 	.global Fill16_EkrTsaBuffer
 	.type   Fill16_EkrTsaBuffer, %function
@@ -3287,12 +3254,6 @@
 	.type   SetEkrDragonStatusUnk1, %function
 	.thumb_func
 	.set    SetEkrDragonStatusUnk1, 0x08072054 + 1
-
-	.global Img_EfxDracoZombie
-	.set    Img_EfxDracoZombie, 0x087E1BA0
-
-	.global Pal_EfxDracoZombie
-	.set    Pal_EfxDracoZombie, 0x087E62B4
 
 	.global gEkrDragonPalBackup
 	.set    gEkrDragonPalBackup, 0x02020068
@@ -3677,12 +3638,6 @@
 	.thumb_func
 	.set    DrawEventMapAnimMaskfx, 0x08088098 + 1
 
-	.global Pal_Congratulations
-	.set    Pal_Congratulations, 0x08A12A80
-
-	.global Pal_MapClear
-	.set    Pal_MapClear, 0x08A12AA0
-
 	.global ProcScr_EventMapAnim
 	.set    ProcScr_EventMapAnim, 0x08A60B18
 
@@ -3718,15 +3673,6 @@
 	.type   MapAnim_GorgonHatch_Init, %function
 	.thumb_func
 	.set    MapAnim_GorgonHatch_Init, 0x0807F15C + 1
-
-	.global Img_LightRune
-	.set    Img_LightRune, 0x085CC560
-
-	.global Pal_LightRune
-	.set    Pal_LightRune, 0x085CDC84
-
-	.global Tsa_LightRune
-	.set    Tsa_LightRune, 0x085CDCA4
 
 	.global ProcLightRuneAnim_Init
 	.type   ProcLightRuneAnim_Init, %function
