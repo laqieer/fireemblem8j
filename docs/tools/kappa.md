@@ -1,8 +1,11 @@
 # Tool eval: kappa (macabeus/kappa)
 
 Research-only assessment for the FE8J byte-perfect decomp. No install, no build.
-Source read from a fresh clone at `/tmp/kappa` (commit-pinned shallow clone).
+Source read from a fresh shallow clone at `/tmp/kappa`.
 Upstream: https://github.com/macabeus/kappa
+Assessed against `main` HEAD `679ac389998728830d47e28658df3c8866672eed`
+(2026-02-20, "chart: add a toggle for the File Explorer panel"); line/field
+references below are pinned to that revision.
 
 ## 1. What kappa is, and why it isn't a direct fit
 
@@ -48,11 +51,15 @@ conventions:
   fixed-point/flag-constant idioms where m2c/IDA emit raw hex.
 
 **How we'd replicate (headless):** we don't need kappa's runtime. AST-grep ships
-a standalone CLI (`ast-grep` / `sg`) and a Python/Node API (`@ast-grep/napi`,
-which kappa itself depends on — see `package.json`). Add a
-`scripts/codefix/` dir of AST-grep YAML rules + a thin `apply_codefix.py` that
-runs `sg scan --rewrite` (or the napi API for the offset-arithmetic ones that
-need computation, not pure pattern rewrite) over a `.c` file. Invoke it from the
+a standalone CLI (`ast-grep` / `sg`) and language bindings. Note the bindings are
+language-specific: kappa uses the **Node** binding `@ast-grep/napi` (see
+`package.json`), which is *not* importable from Python; the Python binding is the
+separate PyPI package `ast-grep-py`. Add a `scripts/codefix/` dir of AST-grep
+YAML rules + a thin `apply_codefix.py` that runs `sg scan --rewrite` (shelling
+out to the CLI for pure pattern rewrites, or using `ast-grep-py` for the
+offset-arithmetic ones that need computation, not pure pattern rewrite) over a
+`.c` file. (If we'd rather keep kappa's exact `@ast-grep/napi` API, the wrapper
+has to be a Node script instead.) Invoke it from the
 loop right after an IDA/Ghidra/permuter draft, before `make compare`. The
 offset/size plugins port directly to our `/* 0C */` style; value is high because
 struct-offset bookkeeping is repetitive and error-prone, and we do a lot of it.
@@ -83,8 +90,10 @@ cases where the US name match is imperfect.
 
 ### C. One-shot decomp.me scratch creation with auto-assembled context  — MED value / LOW effort
 `src/decompme/create-scratch.ts` POSTs to `https://decomp.me/api/scratch` with
-`{target_asm, context, platform:'gba', compiler, preset, source_code}` and opens
-the returned `slug`/`claim_token` URL. The nice part is `getInitialSourceCode()`:
+`{target_asm, context, platform:'gba', compiler, diff_label, source_code,
+compiler_flags?, preset?}` (`diff_label` is the target function name and is
+required; `compiler_flags`/`preset` are optional) and opens the returned
+`slug`/`claim_token` URL. The nice part is `getInitialSourceCode()`:
 it auto-seeds the scratch's context with the **type definitions and called-fn
 declarations** the target needs and that aren't already in the context file
 (dedup against `context.includes(name)`), and stubs the target signature.
