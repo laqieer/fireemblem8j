@@ -577,9 +577,6 @@
 	.thumb_func
 	.set    APProc_Create, 0x08009608 + 1
 
-	.global Img_MineFx
-	.set    Img_MineFx, 0x085D1BC8
-
 	.global StartSpriteAnimfx
 	.type   StartSpriteAnimfx, %function
 	.thumb_func
@@ -753,15 +750,6 @@
 	.type   SetBlendTargetB, %function
 	.thumb_func
 	.set    SetBlendTargetB, 0x08001E5C + 1
-
-	.global Img_EventWarp
-	.set    Img_EventWarp, 0x085CF274
-
-	.global Pal_EventWarp
-	.set    Pal_EventWarp, 0x085CF9BC
-
-	.global Tsa_EventWarp
-	.set    Tsa_EventWarp, 0x085CF9DC
 
 	.global gUiTmScratchA
 	.set    gUiTmScratchA, 0x02003D2C
@@ -1895,12 +1883,6 @@
 	.thumb_func
 	.set    Text_InsertDrawString, 0x080043B8 + 1
 
-	.global gParticlesFx_7
-	.set    gParticlesFx_7, 0x085CFC50
-
-	.global gParticlesFx_6
-	.set    gParticlesFx_6, 0x085CFBA0
-
 	.global GetTextDisplaySpeed
 	.type   GetTextDisplaySpeed, %function
 	.thumb_func
@@ -2225,9 +2207,6 @@
 	.global AnimScr_ArrowFarRight
 	.set    AnimScr_ArrowFarRight, 0x08604F8C
 
-	.global Img_EfxArrowOBJ
-	.set    Img_EfxArrowOBJ, 0x08604ED4
-
 	.global SpellFx_Begin
 	.type   SpellFx_Begin, %function
 	.thumb_func
@@ -2530,9 +2509,6 @@
 	.global gEkrInitialHitSide
 	.set    gEkrInitialHitSide, 0x0203E0FC
 
-	.global Pal_ArenaBattleBg_A
-	.set    Pal_ArenaBattleBg_A, 0x085E91C4
-
 	.global LZ77UnCompVram
 	.type   LZ77UnCompVram, %function
 	.thumb_func
@@ -2542,12 +2518,6 @@
 	.type   LZ77UnCompWram, %function
 	.thumb_func
 	.set    LZ77UnCompWram, 0x080D6394 + 1
-
-	.global Img_ArenaBattleBg
-	.set    Img_ArenaBattleBg, 0x085E63B8
-
-	.global Tsa_ArenaBattleBg
-	.set    Tsa_ArenaBattleBg, 0x085E8A24
 
 	.global NewEkrTogiColor
 	.type   NewEkrTogiColor, %function
@@ -2698,15 +2668,6 @@
 	.type   AnimCreate, %function
 	.thumb_func
 	.set    AnimCreate, 0x08004E50 + 1
-
-	.global Img_DanceringFx
-	.set    Img_DanceringFx, 0x085D0494
-
-	.global Pal_DanceringFx
-	.set    Pal_DanceringFx, 0x085D14B4
-
-	.global Tsa_DanceringFx
-	.set    Tsa_DanceringFx, 0x085D1278
 
 	.global gBattleStats
 	.set    gBattleStats, 0x0203A4D0
@@ -2931,9 +2892,6 @@
 	.global Pal_MenuScrollBar
 	.set    Pal_MenuScrollBar, 0x08A964FC
 
-	.global Img_MenuScrollBar
-	.set    Img_MenuScrollBar, 0x08A9645C
-
 	.global LinkTargets
 	.type   LinkTargets, %function
 	.thumb_func
@@ -3102,9 +3060,6 @@
 	.thumb_func
 	.set    SelectFromWeightedArray, 0x0807A6CC + 1
 
-	.global gMonsterClassWeights
-	.set    gMonsterClassWeights, 0x089264B4
-
 	.global gPrepscreen_4
 	.set    gPrepscreen_4, 0x02013458
 
@@ -3159,9 +3114,6 @@
 	.type   StartSecretShopScreen, %function
 	.thumb_func
 	.set    StartSecretShopScreen, 0x080B8DA8 + 1
-
-	.global gPal_WorldmapGmap_0
-	.set    gPal_WorldmapGmap_0, 0x08B1CD60
 
 	.global GmapSugoAdvance
 	.type   GmapSugoAdvance, %function
@@ -3250,90 +3202,15 @@
 	.global gUnitLookup
 	.set    gUnitLookup, 0x085C2A50
 
-	.global gBanimBGLut01
-	.set    gBanimBGLut01, 0x088612B4
-
 	.global gBanimBGLut02
 	.type   gBanimBGLut02, %function
 	.thumb_func
 	.set    gBanimBGLut02, 0x088612F4 + 1
 
-	.global gBanimBGLut03
-	.set    gBanimBGLut03, 0x08861336
-
-	.global gBanimBGLut04
-	.type   gBanimBGLut04, %function
-	.thumb_func
-	.set    gBanimBGLut04, 0x08861376 + 1
-
-	.global gBanimBGLut05
-	.set    gBanimBGLut05, 0x088613B8
-
-	.global gBanimBGLut06
-	.type   gBanimBGLut06, %function
-	.thumb_func
-	.set    gBanimBGLut06, 0x088613F8 + 1
-
-	.global gBanimBGLut07
-	.set    gBanimBGLut07, 0x0886143A
-
 	.global gBanimBGLut08
 	.type   gBanimBGLut08, %function
 	.thumb_func
 	.set    gBanimBGLut08, 0x0886147A + 1
-
-	.global gBanimBGLut09
-	.set    gBanimBGLut09, 0x088614BC
-
-	.global gBanimBGLut0A
-	.type   gBanimBGLut0A, %function
-	.thumb_func
-	.set    gBanimBGLut0A, 0x088614FC + 1
-
-	.global gBanimBGLut0B
-	.set    gBanimBGLut0B, 0x0886153E
-
-	.global gBanimBGLut0C
-	.type   gBanimBGLut0C, %function
-	.thumb_func
-	.set    gBanimBGLut0C, 0x0886157E + 1
-
-	.global gBanimBGLut0D
-	.set    gBanimBGLut0D, 0x088615C0
-
-	.global gBanimBGLut0E
-	.type   gBanimBGLut0E, %function
-	.thumb_func
-	.set    gBanimBGLut0E, 0x08861600 + 1
-
-	.global gBanimBGLut0F
-	.set    gBanimBGLut0F, 0x08861642
-
-	.global gBanimBGLut10
-	.type   gBanimBGLut10, %function
-	.thumb_func
-	.set    gBanimBGLut10, 0x08861682 + 1
-
-	.global gBanimBGLut11
-	.set    gBanimBGLut11, 0x088616C4
-
-	.global gBanimBGLut12
-	.type   gBanimBGLut12, %function
-	.thumb_func
-	.set    gBanimBGLut12, 0x08861704 + 1
-
-	.global gBanimBGLut13
-	.set    gBanimBGLut13, 0x08861746
-
-	.global gBanimBGLut14
-	.type   gBanimBGLut14, %function
-	.thumb_func
-	.set    gBanimBGLut14, 0x08861786 + 1
-
-	.global gBanimBGLutDefault
-	.type   gBanimBGLutDefault, %function
-	.thumb_func
-	.set    gBanimBGLutDefault, 0x08861272 + 1
 
 	.global PidStatsGetTotalBattleAmt
 	.type   PidStatsGetTotalBattleAmt, %function
@@ -3781,9 +3658,6 @@
 	.type   ForEachAdjacentPosition, %function
 	.thumb_func
 	.set    ForEachAdjacentPosition, 0x08024F54 + 1
-
-	.global TerrainTable_MovCost_FlyNormal
-	.set    TerrainTable_MovCost_FlyNormal, 0x088600EE
 
 	.global ForEachAdjacentUnit
 	.type   ForEachAdjacentUnit, %function
@@ -4361,18 +4235,6 @@
 	.thumb_func
 	.set    HideSysHandCursor, 0x080B2004 + 1
 
-	.global gMenuSoundroom_0
-	.set    gMenuSoundroom_0, 0x08AAA658
-
-	.global gMenuSoundroom_1
-	.set    gMenuSoundroom_1, 0x08AAA738
-
-	.global gMenuSoundroom_4
-	.set    gMenuSoundroom_4, 0x08AAAABC
-
-	.global gMenuSoundroom_2
-	.set    gMenuSoundroom_2, 0x08AAA934
-
 	.global SoundRoom_DrawSlidingUi
 	.type   SoundRoom_DrawSlidingUi, %function
 	.thumb_func
@@ -4504,20 +4366,11 @@
 	.global AnimScr_EfxLvupOBJ2
 	.set    AnimScr_EfxLvupOBJ2, 0x085F1414
 
-	.global Img_EfxLvupOBJ2
-	.set    Img_EfxLvupOBJ2, 0x085F0960
-
-	.global Pal_EfxLvupBG2
-	.set    Pal_EfxLvupBG2, 0x085F0284
-
 	.global ProcScr_efxLvupBGCOL
 	.set    ProcScr_efxLvupBGCOL, 0x087A9A78
 
 	.global FrameLut_EfxLvupBGCOL
 	.set    FrameLut_EfxLvupBGCOL, 0x080E6A7A
-
-	.global Pal_EfxLvupBGCOL
-	.set    Pal_EfxLvupBGCOL, 0x085F0304
 
 	.global EfxCyclePalette
 	.type   EfxCyclePalette, %function
@@ -5249,12 +5102,6 @@
 	.global gUnk_75
 	.set    gUnk_75, 0x03004F10
 
-	.global gUnkUiFrameImage
-	.set    gUnkUiFrameImage, 0x085E31D0
-
-	.global gUnkUiFramePalettes
-	.set    gUnkUiFramePalettes, 0x085E3424
-
 	.global UnpackLegacyUiFrameImage
 	.type   UnpackLegacyUiFrameImage, %function
 	.thumb_func
@@ -5283,9 +5130,6 @@
 
 	.global gLegacyUiFrameCPalette
 	.set    gLegacyUiFrameCPalette, 0x085E28F4
-
-	.global gLegacyUiFrameDPalette
-	.set    gLegacyUiFrameDPalette, 0x085E3170
 
 	.global gUiFramePaletteA
 	.set    gUiFramePaletteA, 0x085E0D94
@@ -5322,9 +5166,6 @@
 
 	.global gUiBarPaletteC
 	.set    gUiBarPaletteC, 0x085E2914
-
-	.global gUiBarPaletteD
-	.set    gUiBarPaletteD, 0x085E3190
 
 	.global GetItemWeaponEffect
 	.type   GetItemWeaponEffect, %function
@@ -5470,9 +5311,6 @@
 	.type   StartMovingHelpBox, %function
 	.thumb_func
 	.set    StartMovingHelpBox, 0x0808B3F0 + 1
-
-	.global Pal_MenuStatus_0
-	.set    Pal_MenuStatus_0, 0x08AAF654
 
 	.global gProcScr_efxMistyrainBG
 	.set    gProcScr_efxMistyrainBG, 0x085FFBA0

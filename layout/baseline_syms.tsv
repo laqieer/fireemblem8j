@@ -128,7 +128,6 @@ StartTemporaryLock	080142F0	thumb	minefx
 Decompress	08013008	thumb	minefx
 CopyToPaletteBuffer	08000D68	thumb	minefx
 APProc_Create	08009608	thumb	minefx
-Img_MineFx	085D1BC8	data	minefx
 StartSpriteAnimfx	080B342C	thumb	sprite-animfx
 SetDefaultColorEffects	08001ED0	thumb	bmxfade
 SetBackgroundTileDataOffset	08000F8C	thumb	bmxfade
@@ -167,9 +166,6 @@ GetNextUnclearedNode	080C1E20	thumb	chapter_title
 gWMMonsterSpawnsSize	081F661C	thumb	chapter_title
 gWMMonsterSpawnLocations	081F6614	data	chapter_title
 SetBlendTargetB	08001E5C	thumb	eventwarpfx
-Img_EventWarp	085CF274	data	eventwarpfx
-Pal_EventWarp	085CF9BC	data	eventwarpfx
-Tsa_EventWarp	085CF9DC	data	eventwarpfx
 gUiTmScratchA	02003D2C	data	eventwarpfx
 gBG0TilemapBuffer	02022CA8	data	eventwarpfx
 TileMap_CopyRect	080DC0F4	thumb	eventwarpfx
@@ -430,8 +426,6 @@ ReadGlobalSaveInfo	080A776C	thumb	bmsave-lib
 Checksum16	080A7740	thumb	bmsave-lib
 GetStringTextCenteredPos	08003EAC	thumb	cgtext
 Text_InsertDrawString	080043B8	thumb	cgtext
-gParticlesFx_7	085CFC50	data	cgtext
-gParticlesFx_6	085CFBA0	data	cgtext
 GetTextDisplaySpeed	08030BE4	thumb	cgtext
 GetCgTextBoxDimensions	080916FC	thumb	cgtext
 PutTalkBubbleTm	08008564	thumb	cgtext
@@ -510,7 +504,6 @@ AnimScr_ArrowCloseLeft	08605008	data	banim-efxmagic-phywpn
 AnimScr_ArrowCloseRight	08604F7C	data	banim-efxmagic-phywpn
 AnimScr_ArrowFarLeft	08605018	data	banim-efxmagic-phywpn
 AnimScr_ArrowFarRight	08604F8C	data	banim-efxmagic-phywpn
-Img_EfxArrowOBJ	08604ED4	data	banim-efxmagic-phywpn
 SpellFx_Begin	08056108	thumb	banim-efxmagic-phywpn
 SpellFx_ClearBG1Position	08056120	thumb	banim-efxmagic-phywpn
 GetAnimRoundTypeAnotherSide	0805B0B4	thumb	banim-efxmagic-phywpn
@@ -589,11 +582,8 @@ NewEkrGauge	08051C2C	thumb	banim-ekrarena
 NewEkrDispUP	080527BC	thumb	banim-ekrarena
 NewEkrBattle	08050B48	thumb	banim-ekrarena
 gEkrInitialHitSide	0203E0FC	data	banim-ekrarena
-Pal_ArenaBattleBg_A	085E91C4	data	banim-ekrarena
 LZ77UnCompVram	080D6390	thumb	banim-ekrarena
 LZ77UnCompWram	080D6394	thumb	banim-ekrarena
-Img_ArenaBattleBg	085E63B8	data	banim-ekrarena
-Tsa_ArenaBattleBg	085E8A24	data	banim-ekrarena
 NewEkrTogiColor	0805C0F0	thumb	banim-ekrarena
 EndEkrTogiColor	0805C124	thumb	banim-ekrarena
 gProc_ekrTogiEnd	085E403C	data	banim-ekrarena
@@ -628,9 +618,6 @@ NewEkrChienCHR	0805A6B0	thumb	banim-ekrmainmini
 BanimDefaultModeConfig	080DFF00	data	banim-ekrmainmini
 BanimScr_DefaultAnim	085E3F8C	data	banim-ekrmainmini
 AnimCreate	08004E50	thumb	banim-ekrmainmini
-Img_DanceringFx	085D0494	data	danceringfx
-Pal_DanceringFx	085D14B4	data	danceringfx
-Tsa_DanceringFx	085D1278	data	danceringfx
 gBattleStats	0203A4D0	data	danceringfx
 ProcBmFx_CommonEnd	08021360	thumb	danceringfx
 pMADebugInfoData	08A13E98	data	mapanim_debug
@@ -686,7 +673,6 @@ ArchiveCurrentPalettes	0801358C	thumb	eventfx-fade
 ProcScr_EventFadefx	085BA2E4	data	eventfx-fade
 ProcScr_menu_scroll	08A9454C	data	prep_menuscroll
 Pal_MenuScrollBar	08A964FC	data	prep_menuscroll
-Img_MenuScrollBar	08A9645C	data	prep_menuscroll
 LinkTargets	08050684	thumb	uiselecttarget
 GetFurthestTargetDistance	08050970	thumb	uiselecttarget
 PutUnitSprite	08027AF4	thumb	prep_unitswap
@@ -727,7 +713,6 @@ ProcScr_MapAnimWallBreak	08A13FAC	data	mapanim_specialeffect
 ProcScr_PoisonAnimHandler	08A13FCC	data	mapanim_specialeffect
 ProcScr_PoisonAnim2	08A13FEC	data	mapanim_specialeffect
 SelectFromWeightedArray	0807A6CC	thumb	monstergen
-gMonsterClassWeights	089264B4	data	monstergen
 gPrepscreen_4	02013458	data	prep_sallycir
 gPrepscreen_3	02012F58	data	prep_sallycir
 gUnk_Sio_5	02001188	data	sio_804B920
@@ -741,7 +726,6 @@ DivArm	080D6378	thumb	spline
 StartArmoryScreen	080B8D68	thumb	worldmap_basemenu
 StartVendorScreen	080B8D88	thumb	worldmap_basemenu
 StartSecretShopScreen	080B8DA8	thumb	worldmap_basemenu
-gPal_WorldmapGmap_0	08B1CD60	data	worldmap_cursor
 GmapSugoAdvance	080C61AC	thumb	worldmap_sogu
 AP_Update	080091AC	thumb	worldmap_sogu
 AP_Create	0800916C	thumb	worldmap_sogu
@@ -761,27 +745,8 @@ GetTrap	0802EAC4	thumb	bmsave-xmap
 GetPermanentFlagBits	080860E8	thumb	bmsave-xmap
 GetChapterFlagBits	080860F4	thumb	bmsave-xmap
 gUnitLookup	085C2A50	data	bmsave-xmap
-gBanimBGLut01	088612B4	data	banim-battleparse
 gBanimBGLut02	088612F4	thumb	banim-battleparse
-gBanimBGLut03	08861336	data	banim-battleparse
-gBanimBGLut04	08861376	thumb	banim-battleparse
-gBanimBGLut05	088613B8	data	banim-battleparse
-gBanimBGLut06	088613F8	thumb	banim-battleparse
-gBanimBGLut07	0886143A	data	banim-battleparse
 gBanimBGLut08	0886147A	thumb	banim-battleparse
-gBanimBGLut09	088614BC	data	banim-battleparse
-gBanimBGLut0A	088614FC	thumb	banim-battleparse
-gBanimBGLut0B	0886153E	data	banim-battleparse
-gBanimBGLut0C	0886157E	thumb	banim-battleparse
-gBanimBGLut0D	088615C0	data	banim-battleparse
-gBanimBGLut0E	08861600	thumb	banim-battleparse
-gBanimBGLut0F	08861642	data	banim-battleparse
-gBanimBGLut10	08861682	thumb	banim-battleparse
-gBanimBGLut11	088616C4	data	banim-battleparse
-gBanimBGLut12	08861704	thumb	banim-battleparse
-gBanimBGLut13	08861746	data	banim-battleparse
-gBanimBGLut14	08861786	thumb	banim-battleparse
-gBanimBGLutDefault	08861272	thumb	banim-battleparse
 PidStatsGetTotalBattleAmt	080A9348	thumb	gamerankings
 PidStatsGetTotalWinAmt	080A936C	thumb	gamerankings
 PidStatsGetTotalExpGain	080A93E8	thumb	gamerankings
@@ -889,7 +854,6 @@ InitSubtitleHelpText	080353E8	thumb	bb
 AsnycKeyStatus	0800142C	thumb	bmdebug
 IsChapterBelongCurGame	080A8E48	thumb	bmsave-bwl
 ForEachAdjacentPosition	08024F54	thumb	bmtarget
-TerrainTable_MovCost_FlyNormal	088600EE	data	bmtarget
 ForEachAdjacentUnit	08024F20	thumb	bmtarget
 GetUnitSupporterCount	0802815C	thumb	bmunit
 GetUnitSupporterInitialExp	08028320	thumb	bmunit
@@ -1020,10 +984,6 @@ ProcScr_RuleSettingSpriteDraw_Static	085D4BA4	data	sio_uiutils
 gUnk_Sio_22	0203DDD8	data	sio_uiutils
 SoundRoom_DrawCompletionPercent	080B40F0	thumb	soundroom
 HideSysHandCursor	080B2004	thumb	soundroom
-gMenuSoundroom_0	08AAA658	data	soundroom
-gMenuSoundroom_1	08AAA738	data	soundroom
-gMenuSoundroom_4	08AAAABC	data	soundroom
-gMenuSoundroom_2	08AAA934	data	soundroom
 SoundRoom_DrawSlidingUi	080B46D4	thumb	soundroom
 SoundRoom_StartNextSong_Positive	080B3D00	thumb	soundroom
 SoundRoom_StartNextSong_Negative	080B3D60	thumb	soundroom
@@ -1055,11 +1015,8 @@ GetUnitFromPrepList	08097634	thumb	prep_unitselect
 StartStatScreen	0808ABD8	thumb	prep_unitselect
 ProcScr_efxLvupOBJ2	087A9A58	data	banim-efxlvup
 AnimScr_EfxLvupOBJ2	085F1414	data	banim-efxlvup
-Img_EfxLvupOBJ2	085F0960	data	banim-efxlvup
-Pal_EfxLvupBG2	085F0284	data	banim-efxlvup
 ProcScr_efxLvupBGCOL	087A9A78	data	banim-efxlvup
 FrameLut_EfxLvupBGCOL	080E6A7A	data	banim-efxlvup
-Pal_EfxLvupBGCOL	085F0304	data	banim-efxlvup
 EfxCyclePalette	08056828	thumb	banim-efxlvup
 FrameLut2_EfxLvupBGCOL	080E6ABC	data	banim-efxlvup
 ProcScr_efxBlackInOutUnit	087A97B8	data	banim-ekrclasschg
@@ -1236,8 +1193,6 @@ gSioStateId	03004EA8	data	sio_core
 gUnk_72	03004E18	data	sio_core
 gUnk_71	03004E14	data	sio_core
 gUnk_75	03004F10	data	sio_core
-gUnkUiFrameImage	085E31D0	data	uiutils
-gUnkUiFramePalettes	085E3424	data	uiutils
 UnpackLegacyUiFrameImage	0804EE5C	thumb	uiutils
 UnpackLegacyUiFramePalette	0804EDFC	thumb	uiutils
 UnpackUiFrameImage	0804EE8C	thumb	uiutils
@@ -1245,7 +1200,6 @@ UnpackUiFramePalette	0804EE2C	thumb	uiutils
 gLegacyUiFrameAPalette	085E1740	data	uiutils
 gLegacyUiFrameBPalette	085E2034	data	uiutils
 gLegacyUiFrameCPalette	085E28F4	data	uiutils
-gLegacyUiFrameDPalette	085E3170	data	uiutils
 gUiFramePaletteA	085E0D94	data	uiutils
 gUiFramePaletteB	085E0DB4	data	uiutils
 gUiFramePaletteC	085E0DD4	data	uiutils
@@ -1258,7 +1212,6 @@ gUiFrameImage	085E07A0	data	uiutils
 gUiBarPaletteA	085E1760	data	uiutils
 gUiBarPaletteB	085E2054	data	uiutils
 gUiBarPaletteC	085E2914	data	uiutils
-gUiBarPaletteD	085E3190	data	uiutils
 GetItemWeaponEffect	080174CC	thumb	bmbattle
 GetBattleUnitHitCount	0802AFF0	thumb	bmbattle
 BattleGenerateHit	0802B784	thumb	bmbattle
@@ -1290,7 +1243,6 @@ ProcScr_efxWhiteIN	085E3AFC	data	banim-efxflashbg
 ProcScr_efxBlackOUT	085E3B24	data	banim-efxflashbg
 ProcScr_efxBlackIN	085E3B4C	data	banim-efxflashbg
 StartMovingHelpBox	0808B3F0	thumb	uichapterstatus
-Pal_MenuStatus_0	08AAF654	data	uichapterstatus
 gProcScr_efxMistyrainBG	085FFBA0	data	banim-efxmagic-flux
 gEfxmagicFlux_0	085FFBB8	data	banim-efxmagic-flux
 gEfxmagicFlux_1	085FFC5C	data	banim-efxmagic-flux

@@ -1,0 +1,8 @@
+	.section .rodata.dat_worldmap_gmapunit_p1634, "a", %progbits
+@ src/worldmap_gmapunit.o: region-same content at JP 0x08aa7094 (US 0x08a29418, shift -0xFFF82384); incbin baserom.gba
+	.global Pal_DifficultyMenuObjs
+Pal_DifficultyMenuObjs:
+	.incbin "baserom.gba", 0xAA7094, 0x80
+	.global gMenuMainObjs_0
+gMenuMainObjs_0:
+	.incbin "baserom.gba", 0xAA7114, 0xC0
