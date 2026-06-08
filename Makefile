@@ -98,7 +98,7 @@ $(ASM_OBJECTS): %.o: %.s
 # C compile pipeline (agbcc): cpp -> iconv UTF-8->CP932 -> agbcc -> as.
 $(C_OBJECTS): %.o: %.c
 	$(CPP) $(CPPFLAGS) $< | iconv -f UTF-8 -t CP932 | $(CC1) $(CC1FLAGS) -o $*.s
-	echo '.ALIGN 2, 0' >> $*.s
+	printf '\t.text\n\t.align 2, 0\n' >> $*.s
 	$(AS) $(ASFLAGS) $*.s -o $@
 
 $(ELF): $(ALL_OBJECTS) $(LDSCRIPT)

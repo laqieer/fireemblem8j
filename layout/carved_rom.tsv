@@ -359,3 +359,4 @@ A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 0927EC	0928F8	src/unitlistscreen.o(.text)	unitlistscreen(run): UnitList_SetMuralWindow
 03458C	0345E8	src/chapterdata.o(.text)	chapterdata(run): GetChapterMapChangesPointer, GetChapterEventDataPointer
 0C837C	0C83A4	src/worldmap_text.o(.text)	worldmap_text(run): WmText_Init
+0B15B4	0B15D4	src/spinning_arrow.o(.text)	spinning_arrow(run): UiSpinningArrows_Init

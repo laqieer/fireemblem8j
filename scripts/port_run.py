@@ -307,8 +307,16 @@ def port(name, exclude=(), runs=None):
         print(f"  [dbg] ram={ {s: f'{b:08X}' for s, b in ram.items()} } "
               f"romdata={ {s: f'{b:08X}' for s, b in romdata.items()} } undef={sorted(undef)}")
     have = have_syms()
+    # Carved-section end = the ACTUAL compiled .text size (base + len(otext)), not the
+    # run's nominal end. A function whose size isn't 4-aligned gets a trailing 0x0000
+    # alignment pad (matching the JP inter-function padding), so the .o's .text is a
+    # couple bytes longer than the run range; using the run end would leave the pad
+    # overflowing the incbin gap -> catastrophic layout shift (e.g. spinning_arrow's
+    # 0xc04 diff). For find_runs runs (already 4-aligned) len(otext) == run size, so
+    # this is unchanged; verify-or-revert guards any pad that doesn't match JP.
+    text_end = base + len(otext)
     with open("layout/carved_rom.tsv", "a") as f:
-        f.write(f"{base&0xFFFFFF:06X}\t{int(end,16)&0xFFFFFF:06X}\tsrc/{name}.o(.text)\t{name}(run): {', '.join(funcs[:3])}{'...' if len(funcs)>3 else ''}\n")
+        f.write(f"{base&0xFFFFFF:06X}\t{text_end&0xFFFFFF:06X}\tsrc/{name}.o(.text)\t{name}(run): {', '.join(funcs[:3])}{'...' if len(funcs)>3 else ''}\n")
         for dbase, size, dsec in data_carves:
             f.write(f"{dbase:06X}\t{dbase+size:06X}\tsrc/{name}.o({dsec})\t{name} {dsec}\n")
     if ram:
