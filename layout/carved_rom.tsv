@@ -326,6 +326,8 @@
 0E37B8	0E37C5	src/banim-efxmagic-dancerings.o(.rodata)	banim-efxmagic-dancerings .rodata
 0E3CCC	0E3CD7	src/banim-efxmagic-evileye.o(.rodata)	banim-efxmagic-evileye .rodata
 0E45D8	0E4602	src/banim-efxhit.o(.rodata)	banim-efxhit .rodata
+1A71E0	1B04B4	asm/dat_const_data_unit_icon_wait.o(.rodata.dat_const_data_unit_icon_wait)	dat_const_data_unit_icon_wait region-same shifted (36KB)
+1B04B4	1B1878	asm/dat_const_data_1C0AFC.o(.rodata.dat_const_data_1C0AFC)	dat_const_data_1C0AFC region-same shifted (4KB)
 1F5784	1F578C	src/bmsave-misc.o(.rodata)	bmsave-misc .rodata
 1F5BEC	1F5BF0	src/gamerankings.o(.rodata)	gamerankings .rodata
 1F6CF4	1F6D00	src/classchg-handler.o(.rodata)	classchg-handler .rodata
@@ -336,6 +338,8 @@
 5B90D4	5B90D8	src/scene.o(.data)	scene .data
 5B943C	5B9454	src/ap.o(.data)	ap .data
 5BA34C	5BA36C	src/eventfx-boomfog.o(.data)	eventfx-boomfog .data
+5BA470	5C14B0	asm/dat_data_item_icon.o(.rodata.dat_data_item_icon)	dat_data_item_icon region-same shifted (28KB)
+5C14B0	5C1D30	asm/dat_generic_icon.o(.rodata.dat_generic_icon)	dat_generic_icon region-same shifted (2KB)
 5C28B8	5C2980	src/bm.o(.data)	bm .data
 5C3308	5C3320	src/menuitempanel.o(.data)	menuitempanel .data
 5C3320	5C3348	src/prep_unitswap.o(.data)	prep_unitswap .data
@@ -351,6 +355,13 @@
 5C4104	5C411C	src/bmtrade.o(.data)	bmtrade .data
 5C6080	5C6084	src/bmpatharrowdisp.o(.data)	bmpatharrowdisp .data
 5C6AC8	5C6AD4	src/bksel.o(.data)	bksel .data
+5C7540	5C8D58	asm/dat_phase_change.o(.rodata.dat_phase_change)	dat_phase_change region-same shifted (6KB)
+5C9A30	5CA8A4	asm/dat_trap_gas.o(.rodata.dat_trap_gas)	dat_trap_gas region-same shifted (3KB)
+5CA8A4	5CAE60	asm/dat_anim_arrow_trap.o(.rodata.dat_anim_arrow_trap)	dat_anim_arrow_trap region-same shifted (1KB)
+5CAE60	5CB31C	asm/dat_trap_fire_pike.o(.rodata.dat_trap_fire_pike)	dat_trap_fire_pike region-same shifted (1KB)
+5CB31C	5CB9B0	asm/dat_anim_fire_trap.o(.rodata.dat_anim_fire_trap)	dat_anim_fire_trap region-same shifted (1KB)
+5CB9B0	5CBC50	asm/dat_trap_fire_pike_2.o(.rodata.dat_trap_fire_pike_2)	dat_trap_fire_pike_2 region-same shifted (0KB)
+5CBC50	5CBE64	asm/dat_anim_pike_trap.o(.rodata.dat_anim_pike_trap)	dat_anim_pike_trap region-same shifted (0KB)
 5D1E60	5D1EA4	src/cp_order.o(.data)	cp_order .data
 5D1F0C	5D1F2C	src/cp_perform.o(.data)	cp_perform .data
 5D31E8	5D31EC	src/sio_core.o(.data)	sio_core .data
@@ -360,17 +371,30 @@
 5E0610	5E0698	src/uiutils.o(.data)	uiutils .data
 5E076C	5E07A0	src/uiselecttarget.o(.data)	uiselecttarget .data
 5E3AAC	5E3AD4	src/banim-efxflashbg.o(.data)	banim-efxflashbg .data
+5F9DA0	5FC068	asm/dat_banim_efxhitobj.o(.rodata.dat_banim_efxhitobj)	dat_banim_efxhitobj region-same shifted (8KB)
 5FF768	5FF7C8	src/banim-efxmagic-fire.o(.data)	banim-efxmagic-fire .data
 5FFB18	5FFB30	src/banim-efxmagic-aircalibur.o(.data)	banim-efxmagic-aircalibur .data
 5FFB88	5FFBA0	src/banim-efxmagic-flux.o(.data)	banim-efxmagic-flux .data
 60073C	600754	src/banim-efxmagic-eclipse.o(.data)	banim-efxmagic-eclipse .data
 601CC0	601CD8	src/banim-efxmagic-dancerings.o(.data)	banim-efxmagic-dancerings .data
 602550	602568	src/banim-efxmagic-evileye.o(.data)	banim-efxmagic-evileye .data
+848B28	855D58	asm/dat_data_ekrdk.o(.rodata.dat_data_ekrdk)	dat_data_ekrdk region-same shifted (52KB)
+85616C	8582BC	asm/dat_data_banimmisc.o(.rodata.dat_data_banimmisc)	dat_data_banimmisc region-same shifted (8KB)
+861950	901138	asm/dat_data_portrait.o(.rodata.dat_data_portrait)	dat_data_portrait region-same shifted (637KB)
 A146BC	A146D4	src/mapanim_spellassocfx.o(.data)	mapanim_spellassocfx .data
 A14734	A149D4	src/mapanim_eventcall.o(.data)	mapanim_eventcall .data
+A1599C	A160F4	asm/dat_anim_mapanim_statgain.o(.rodata.dat_anim_mapanim_statgain)	dat_anim_mapanim_statgain region-same shifted (1KB)
+A160F4	A168DC	asm/dat_anim_mapanim_torchfx.o(.rodata.dat_anim_mapanim_torchfx)	dat_anim_mapanim_torchfx region-same shifted (1KB)
+A168DC	A175C8	asm/dat_anim_mapanim_torch.o(.rodata.dat_anim_mapanim_torch)	dat_anim_mapanim_torch region-same shifted (3KB)
+A175C8	A1CC54	asm/dat_anim_mapanim_objects.o(.rodata.dat_anim_mapanim_objects)	dat_anim_mapanim_objects region-same shifted (21KB)
+A1DB88	A22790	asm/dat_mapanim_battleinfo.o(.rodata.dat_mapanim_battleinfo)	dat_mapanim_battleinfo region-same shifted (19KB)
+A22790	A22F08	asm/dat_anim_mapanim_berserk_silence.o(.rodata.dat_anim_mapanim_berserk_silence)	dat_anim_mapanim_berserk_silence region-same shifted (1KB)
+A27128	A28A48	asm/dat_mapanim_monster_gorgon.o(.rodata.dat_mapanim_monster_gorgon)	dat_mapanim_monster_gorgon region-same shifted (6KB)
+A28A48	A588C0	asm/dat_mapanim_eventcall.o(.rodata.dat_mapanim_eventcall)	dat_mapanim_eventcall region-same shifted (191KB)
 A60AD4	A60AE8	src/events_script_utils.o(.data)	events_script_utils .data
 A72BB8	A72BF0	src/statscreen.o(.data)	statscreen .data
 A738E0	A73900	src/player_interface.o(.data)	player_interface .data
+A7CDA4	A7D10C	asm/dat_anim_player_rank_fog.o(.rodata.dat_anim_player_rank_fog)	dat_anim_player_rank_fog region-same shifted (0KB)
 A94488	A9454C	src/prep_menuscroll.o(.data)	prep_menuscroll .data
 A95B14	A95B4E	src/uisupport.o(.data)	uisupport .data
 A9CA20	A9CA24	src/bmsave-lib.o(.data)	bmsave-lib .data
@@ -380,6 +404,7 @@ A9DAA4	A9DAB4	src/cursor_hand.o(.data)	cursor_hand .data
 A9E23C	A9E244	src/soundroom.o(.data)	soundroom .data
 ABCAD0	ABCAD4	src/bmshop.o(.data)	bmshop .data
 AC0394	AC059C	src/cg.o(.data)	cg .data
+B1CD80	B1D954	asm/dat_anim_worldmap_sprite.o(.rodata.dat_anim_worldmap_sprite)	dat_anim_worldmap_sprite region-same shifted (2KB)
 BAB71C	BAB754	src/classchg-handler.o(.data)	classchg-handler .data
 BABAB4	BABAF4	src/classchg-postconfirm.o(.data)	classchg-postconfirm .data
 BABAF4	BABAF8	src/bmguide.o(.data)	bmguide .data

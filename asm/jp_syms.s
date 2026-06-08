@@ -1316,14 +1316,8 @@
 	.global gUnk_Sio_12
 	.set    gUnk_Sio_12, 0x0203DD20
 
-	.global Img_GasTrapVertical
-	.set    Img_GasTrapVertical, 0x085C9A30
-
 	.global SpriteAnim_GasTrapVertical
 	.set    SpriteAnim_GasTrapVertical, 0x085C9518
-
-	.global Img_GasTrapHorizontal
-	.set    Img_GasTrapHorizontal, 0x085CA018
 
 	.global SpriteAnim_GasTrapHorizontal
 	.set    SpriteAnim_GasTrapHorizontal, 0x085C97BC
@@ -1333,43 +1327,10 @@
 	.thumb_func
 	.set    PlaySeSpacial, 0x08014B50 + 1
 
-	.global Pal_GasTrap
-	.set    Pal_GasTrap, 0x085CA58C
-
-	.global Img_FireTrap
-	.set    Img_FireTrap, 0x085CAE60
-
-	.global SpriteAnim_FireTrap
-	.set    SpriteAnim_FireTrap, 0x085CB31C
-
-	.global Pal_FireTrap
-	.set    Pal_FireTrap, 0x085CB2FC
-
-	.global Pal_FireTrap2
-	.set    Pal_FireTrap2, 0x085CB9B0
-
-	.global Obj_WallBreakAnim
-	.set    Obj_WallBreakAnim, 0x08A17660
-
-	.global Img_WallBreakAnim
-	.set    Img_WallBreakAnim, 0x08A1E108
-
-	.global Pal_WallBreakAnim
-	.set    Pal_WallBreakAnim, 0x08A1E394
-
 	.global EnsureCameraOntoPosition
 	.type   EnsureCameraOntoPosition, %function
 	.thumb_func
 	.set    EnsureCameraOntoPosition, 0x08015E18 + 1
-
-	.global Img_ArrowTrap
-	.set    Img_ArrowTrap, 0x085CA5CC
-
-	.global Pal_ArrowTrap
-	.set    Pal_ArrowTrap, 0x085CA5AC
-
-	.global SpriteAnim_ArrowTrap
-	.set    SpriteAnim_ArrowTrap, 0x085CA8A4
 
 	.global APProc_Exists
 	.type   APProc_Exists, %function
@@ -2160,17 +2121,8 @@
 	.global gEkrGaugeHp
 	.set    gEkrGaugeHp, 0x0203E1A8
 
-	.global gPalEfxHpBarGreen
-	.set    gPalEfxHpBarGreen, 0x088570DC
-
-	.global gPalEfxHpBarPurple
-	.set    gPalEfxHpBarPurple, 0x088571DC
-
 	.global gBanimFactionPal
 	.set    gBanimFactionPal, 0x0203E110
-
-	.global gBanimmisc_10
-	.set    gBanimmisc_10, 0x0885705C
 
 	.global EfxSplitColor
 	.type   EfxSplitColor, %function
@@ -2196,9 +2148,6 @@
 
 	.global gEfxSplitedColorBufA
 	.set    gEfxSplitedColorBufA, 0x0201F948
-
-	.global gBanimmisc_11
-	.set    gBanimmisc_11, 0x0885711C
 
 	.global gEfxSplitedColorBufB
 	.set    gEfxSplitedColorBufB, 0x0201F978
@@ -2813,16 +2762,10 @@
 	.thumb_func
 	.set    SetBlackPal, 0x08013B3C + 1
 
-	.global Tsa_Ekrdk_0
-	.set    Tsa_Ekrdk_0, 0x08848B28
-
 	.global EkrDemonkingObj_StartDissolveProc
 	.type   EkrDemonkingObj_StartDissolveProc, %function
 	.thumb_func
 	.set    EkrDemonkingObj_StartDissolveProc, 0x0807A310 + 1
-
-	.global gBanimmisc_9
-	.set    gBanimmisc_9, 0x08856E5C
 
 	.global GetAISLayerId
 	.type   GetAISLayerId, %function
@@ -2928,510 +2871,6 @@
 	.thumb_func
 	.set    MapEventcallFx2_HBlankWobble, 0x08082748 + 1
 
-	.global gMapanimEventcall_23
-	.set    gMapanimEventcall_23, 0x08A28A48
-
-	.global gMapanimEventcall_79
-	.set    gMapanimEventcall_79, 0x08A42A60
-
-	.global gMapanimEventcall_135
-	.set    gMapanimEventcall_135, 0x08A43160
-
-	.global gMapanimEventcall_24
-	.set    gMapanimEventcall_24, 0x08A2904C
-
-	.global gMapanimEventcall_80
-	.set    gMapanimEventcall_80, 0x08A42A80
-
-	.global gMapanimEventcall_136
-	.set    gMapanimEventcall_136, 0x08A432B8
-
-	.global gMapanimEventcall_25
-	.set    gMapanimEventcall_25, 0x08A29760
-
-	.global gMapanimEventcall_81
-	.set    gMapanimEventcall_81, 0x08A42AA0
-
-	.global gMapanimEventcall_137
-	.set    gMapanimEventcall_137, 0x08A43448
-
-	.global gMapanimEventcall_26
-	.set    gMapanimEventcall_26, 0x08A29F64
-
-	.global gMapanimEventcall_82
-	.set    gMapanimEventcall_82, 0x08A42AC0
-
-	.global gMapanimEventcall_138
-	.set    gMapanimEventcall_138, 0x08A43600
-
-	.global gMapanimEventcall_27
-	.set    gMapanimEventcall_27, 0x08A2A818
-
-	.global gMapanimEventcall_83
-	.set    gMapanimEventcall_83, 0x08A42AE0
-
-	.global gMapanimEventcall_139
-	.set    gMapanimEventcall_139, 0x08A437B8
-
-	.global gMapanimEventcall_28
-	.set    gMapanimEventcall_28, 0x08A2B060
-
-	.global gMapanimEventcall_84
-	.set    gMapanimEventcall_84, 0x08A42B00
-
-	.global gMapanimEventcall_140
-	.set    gMapanimEventcall_140, 0x08A43960
-
-	.global gMapanimEventcall_29
-	.set    gMapanimEventcall_29, 0x08A2B950
-
-	.global gMapanimEventcall_85
-	.set    gMapanimEventcall_85, 0x08A42B20
-
-	.global gMapanimEventcall_141
-	.set    gMapanimEventcall_141, 0x08A43B28
-
-	.global gMapanimEventcall_30
-	.set    gMapanimEventcall_30, 0x08A2C3F0
-
-	.global gMapanimEventcall_86
-	.set    gMapanimEventcall_86, 0x08A42B40
-
-	.global gMapanimEventcall_142
-	.set    gMapanimEventcall_142, 0x08A43D38
-
-	.global gMapanimEventcall_31
-	.set    gMapanimEventcall_31, 0x08A2CF0C
-
-	.global gMapanimEventcall_87
-	.set    gMapanimEventcall_87, 0x08A42B60
-
-	.global gMapanimEventcall_143
-	.set    gMapanimEventcall_143, 0x08A43F54
-
-	.global gMapanimEventcall_32
-	.set    gMapanimEventcall_32, 0x08A2DA3C
-
-	.global gMapanimEventcall_88
-	.set    gMapanimEventcall_88, 0x08A42B80
-
-	.global gMapanimEventcall_144
-	.set    gMapanimEventcall_144, 0x08A4415C
-
-	.global gMapanimEventcall_33
-	.set    gMapanimEventcall_33, 0x08A2E570
-
-	.global gMapanimEventcall_89
-	.set    gMapanimEventcall_89, 0x08A42BA0
-
-	.global gMapanimEventcall_145
-	.set    gMapanimEventcall_145, 0x08A44380
-
-	.global gMapanimEventcall_34
-	.set    gMapanimEventcall_34, 0x08A2F118
-
-	.global gMapanimEventcall_90
-	.set    gMapanimEventcall_90, 0x08A42BC0
-
-	.global gMapanimEventcall_146
-	.set    gMapanimEventcall_146, 0x08A445A8
-
-	.global gMapanimEventcall_35
-	.set    gMapanimEventcall_35, 0x08A2FC84
-
-	.global gMapanimEventcall_91
-	.set    gMapanimEventcall_91, 0x08A42BE0
-
-	.global gMapanimEventcall_147
-	.set    gMapanimEventcall_147, 0x08A447D8
-
-	.global gMapanimEventcall_36
-	.set    gMapanimEventcall_36, 0x08A305EC
-
-	.global gMapanimEventcall_92
-	.set    gMapanimEventcall_92, 0x08A42C00
-
-	.global gMapanimEventcall_148
-	.set    gMapanimEventcall_148, 0x08A449B4
-
-	.global gMapanimEventcall_37
-	.set    gMapanimEventcall_37, 0x08A30F48
-
-	.global gMapanimEventcall_93
-	.set    gMapanimEventcall_93, 0x08A42C20
-
-	.global gMapanimEventcall_149
-	.set    gMapanimEventcall_149, 0x08A44B88
-
-	.global gMapanimEventcall_38
-	.set    gMapanimEventcall_38, 0x08A31818
-
-	.global gMapanimEventcall_94
-	.set    gMapanimEventcall_94, 0x08A42C40
-
-	.global gMapanimEventcall_150
-	.set    gMapanimEventcall_150, 0x08A44D4C
-
-	.global gMapanimEventcall_39
-	.set    gMapanimEventcall_39, 0x08A32230
-
-	.global gMapanimEventcall_95
-	.set    gMapanimEventcall_95, 0x08A42C60
-
-	.global gMapanimEventcall_151
-	.set    gMapanimEventcall_151, 0x08A44F34
-
-	.global gMapanimEventcall_40
-	.set    gMapanimEventcall_40, 0x08A32B04
-
-	.global gMapanimEventcall_96
-	.set    gMapanimEventcall_96, 0x08A42C80
-
-	.global gMapanimEventcall_152
-	.set    gMapanimEventcall_152, 0x08A450E8
-
-	.global gMapanimEventcall_41
-	.set    gMapanimEventcall_41, 0x08A33278
-
-	.global gMapanimEventcall_97
-	.set    gMapanimEventcall_97, 0x08A42CA0
-
-	.global gMapanimEventcall_153
-	.set    gMapanimEventcall_153, 0x08A45284
-
-	.global gMapanimEventcall_42
-	.set    gMapanimEventcall_42, 0x08A3392C
-
-	.global gMapanimEventcall_98
-	.set    gMapanimEventcall_98, 0x08A42CC0
-
-	.global gMapanimEventcall_154
-	.set    gMapanimEventcall_154, 0x08A453FC
-
-	.global gMapanimEventcall_43
-	.set    gMapanimEventcall_43, 0x08A34030
-
-	.global gMapanimEventcall_99
-	.set    gMapanimEventcall_99, 0x08A42CE0
-
-	.global gMapanimEventcall_155
-	.set    gMapanimEventcall_155, 0x08A45554
-
-	.global gMapanimEventcall_44
-	.set    gMapanimEventcall_44, 0x08A34570
-
-	.global gMapanimEventcall_100
-	.set    gMapanimEventcall_100, 0x08A42D00
-
-	.global gMapanimEventcall_156
-	.set    gMapanimEventcall_156, 0x08A45664
-
-	.global gMapanimEventcall_45
-	.set    gMapanimEventcall_45, 0x08A34B04
-
-	.global gMapanimEventcall_101
-	.set    gMapanimEventcall_101, 0x08A42D20
-
-	.global gMapanimEventcall_157
-	.set    gMapanimEventcall_157, 0x08A45788
-
-	.global gMapanimEventcall_46
-	.set    gMapanimEventcall_46, 0x08A34EBC
-
-	.global gMapanimEventcall_102
-	.set    gMapanimEventcall_102, 0x08A42D40
-
-	.global gMapanimEventcall_158
-	.set    gMapanimEventcall_158, 0x08A4589C
-
-	.global gMapanimEventcall_47
-	.set    gMapanimEventcall_47, 0x08A34F68
-
-	.global gMapanimEventcall_103
-	.set    gMapanimEventcall_103, 0x08A42D60
-
-	.global gMapanimEventcall_159
-	.set    gMapanimEventcall_159, 0x08A45958
-
-	.global gMapanimEventcall_48
-	.set    gMapanimEventcall_48, 0x08A34FE4
-
-	.global gMapanimEventcall_104
-	.set    gMapanimEventcall_104, 0x08A42D80
-
-	.global gMapanimEventcall_160
-	.set    gMapanimEventcall_160, 0x08A45A14
-
-	.global gMapanimEventcall_49
-	.set    gMapanimEventcall_49, 0x08A35054
-
-	.global gMapanimEventcall_105
-	.set    gMapanimEventcall_105, 0x08A42DA0
-
-	.global gMapanimEventcall_161
-	.set    gMapanimEventcall_161, 0x08A45AC8
-
-	.global gMapanimEventcall_50
-	.set    gMapanimEventcall_50, 0x08A354C0
-
-	.global gMapanimEventcall_106
-	.set    gMapanimEventcall_106, 0x08A42DC0
-
-	.global gMapanimEventcall_162
-	.set    gMapanimEventcall_162, 0x08A45BC8
-
-	.global gMapanimEventcall_51
-	.set    gMapanimEventcall_51, 0x08A359B0
-
-	.global gMapanimEventcall_107
-	.set    gMapanimEventcall_107, 0x08A42DE0
-
-	.global gMapanimEventcall_163
-	.set    gMapanimEventcall_163, 0x08A45CE0
-
-	.global gMapanimEventcall_52
-	.set    gMapanimEventcall_52, 0x08A35CFC
-
-	.global gMapanimEventcall_108
-	.set    gMapanimEventcall_108, 0x08A42E00
-
-	.global gMapanimEventcall_164
-	.set    gMapanimEventcall_164, 0x08A45DEC
-
-	.global gMapanimEventcall_53
-	.set    gMapanimEventcall_53, 0x08A35DBC
-
-	.global gMapanimEventcall_109
-	.set    gMapanimEventcall_109, 0x08A42E20
-
-	.global gMapanimEventcall_165
-	.set    gMapanimEventcall_165, 0x08A45EA8
-
-	.global gMapanimEventcall_54
-	.set    gMapanimEventcall_54, 0x08A35E60
-
-	.global gMapanimEventcall_110
-	.set    gMapanimEventcall_110, 0x08A42E40
-
-	.global gMapanimEventcall_166
-	.set    gMapanimEventcall_166, 0x08A45F68
-
-	.global gMapanimEventcall_55
-	.set    gMapanimEventcall_55, 0x08A365F8
-
-	.global gMapanimEventcall_111
-	.set    gMapanimEventcall_111, 0x08A42E60
-
-	.global gMapanimEventcall_167
-	.set    gMapanimEventcall_167, 0x08A460A8
-
-	.global gMapanimEventcall_56
-	.set    gMapanimEventcall_56, 0x08A36C74
-
-	.global gMapanimEventcall_112
-	.set    gMapanimEventcall_112, 0x08A42E80
-
-	.global gMapanimEventcall_168
-	.set    gMapanimEventcall_168, 0x08A461E0
-
-	.global gMapanimEventcall_57
-	.set    gMapanimEventcall_57, 0x08A370E0
-
-	.global gMapanimEventcall_113
-	.set    gMapanimEventcall_113, 0x08A42EA0
-
-	.global gMapanimEventcall_169
-	.set    gMapanimEventcall_169, 0x08A46318
-
-	.global gMapanimEventcall_58
-	.set    gMapanimEventcall_58, 0x08A371A8
-
-	.global gMapanimEventcall_114
-	.set    gMapanimEventcall_114, 0x08A42EC0
-
-	.global gMapanimEventcall_170
-	.set    gMapanimEventcall_170, 0x08A463D4
-
-	.global gMapanimEventcall_59
-	.set    gMapanimEventcall_59, 0x08A37904
-
-	.global gMapanimEventcall_115
-	.set    gMapanimEventcall_115, 0x08A42EE0
-
-	.global gMapanimEventcall_171
-	.set    gMapanimEventcall_171, 0x08A46524
-
-	.global gMapanimEventcall_60
-	.set    gMapanimEventcall_60, 0x08A380B4
-
-	.global gMapanimEventcall_116
-	.set    gMapanimEventcall_116, 0x08A42F00
-
-	.global gMapanimEventcall_172
-	.set    gMapanimEventcall_172, 0x08A46678
-
-	.global gMapanimEventcall_61
-	.set    gMapanimEventcall_61, 0x08A38AC8
-
-	.global gMapanimEventcall_117
-	.set    gMapanimEventcall_117, 0x08A42F20
-
-	.global gMapanimEventcall_173
-	.set    gMapanimEventcall_173, 0x08A467F8
-
-	.global gMapanimEventcall_62
-	.set    gMapanimEventcall_62, 0x08A3944C
-
-	.global gMapanimEventcall_118
-	.set    gMapanimEventcall_118, 0x08A42F40
-
-	.global gMapanimEventcall_174
-	.set    gMapanimEventcall_174, 0x08A46980
-
-	.global gMapanimEventcall_63
-	.set    gMapanimEventcall_63, 0x08A3A0CC
-
-	.global gMapanimEventcall_119
-	.set    gMapanimEventcall_119, 0x08A42F60
-
-	.global gMapanimEventcall_175
-	.set    gMapanimEventcall_175, 0x08A46B74
-
-	.global gMapanimEventcall_64
-	.set    gMapanimEventcall_64, 0x08A3AACC
-
-	.global gMapanimEventcall_120
-	.set    gMapanimEventcall_120, 0x08A42F80
-
-	.global gMapanimEventcall_176
-	.set    gMapanimEventcall_176, 0x08A46D58
-
-	.global gMapanimEventcall_65
-	.set    gMapanimEventcall_65, 0x08A3B098
-
-	.global gMapanimEventcall_121
-	.set    gMapanimEventcall_121, 0x08A42FA0
-
-	.global gMapanimEventcall_177
-	.set    gMapanimEventcall_177, 0x08A46E7C
-
-	.global gMapanimEventcall_66
-	.set    gMapanimEventcall_66, 0x08A3BE38
-
-	.global gMapanimEventcall_122
-	.set    gMapanimEventcall_122, 0x08A42FC0
-
-	.global gMapanimEventcall_178
-	.set    gMapanimEventcall_178, 0x08A4712C
-
-	.global gMapanimEventcall_67
-	.set    gMapanimEventcall_67, 0x08A3D0B0
-
-	.global gMapanimEventcall_123
-	.set    gMapanimEventcall_123, 0x08A42FE0
-
-	.global gMapanimEventcall_179
-	.set    gMapanimEventcall_179, 0x08A474A4
-
-	.global gMapanimEventcall_68
-	.set    gMapanimEventcall_68, 0x08A3D514
-
-	.global gMapanimEventcall_124
-	.set    gMapanimEventcall_124, 0x08A43000
-
-	.global gMapanimEventcall_180
-	.set    gMapanimEventcall_180, 0x08A47594
-
-	.global gMapanimEventcall_69
-	.set    gMapanimEventcall_69, 0x08A3DCD8
-
-	.global gMapanimEventcall_125
-	.set    gMapanimEventcall_125, 0x08A43020
-
-	.global gMapanimEventcall_181
-	.set    gMapanimEventcall_181, 0x08A476D4
-
-	.global gMapanimEventcall_70
-	.set    gMapanimEventcall_70, 0x08A3E6C0
-
-	.global gMapanimEventcall_126
-	.set    gMapanimEventcall_126, 0x08A43040
-
-	.global gMapanimEventcall_182
-	.set    gMapanimEventcall_182, 0x08A47864
-
-	.global gMapanimEventcall_71
-	.set    gMapanimEventcall_71, 0x08A3F21C
-
-	.global gMapanimEventcall_127
-	.set    gMapanimEventcall_127, 0x08A43060
-
-	.global gMapanimEventcall_183
-	.set    gMapanimEventcall_183, 0x08A47A3C
-
-	.global gMapanimEventcall_72
-	.set    gMapanimEventcall_72, 0x08A3FE48
-
-	.global gMapanimEventcall_128
-	.set    gMapanimEventcall_128, 0x08A43080
-
-	.global gMapanimEventcall_184
-	.set    gMapanimEventcall_184, 0x08A47C44
-
-	.global gMapanimEventcall_73
-	.set    gMapanimEventcall_73, 0x08A40A14
-
-	.global gMapanimEventcall_129
-	.set    gMapanimEventcall_129, 0x08A430A0
-
-	.global gMapanimEventcall_185
-	.set    gMapanimEventcall_185, 0x08A47E54
-
-	.global gMapanimEventcall_74
-	.set    gMapanimEventcall_74, 0x08A41490
-
-	.global gMapanimEventcall_130
-	.set    gMapanimEventcall_130, 0x08A430C0
-
-	.global gMapanimEventcall_186
-	.set    gMapanimEventcall_186, 0x08A4803C
-
-	.global gMapanimEventcall_75
-	.set    gMapanimEventcall_75, 0x08A41CD0
-
-	.global gMapanimEventcall_131
-	.set    gMapanimEventcall_131, 0x08A430E0
-
-	.global gMapanimEventcall_187
-	.set    gMapanimEventcall_187, 0x08A48200
-
-	.global gMapanimEventcall_76
-	.set    gMapanimEventcall_76, 0x08A4232C
-
-	.global gMapanimEventcall_132
-	.set    gMapanimEventcall_132, 0x08A43100
-
-	.global gMapanimEventcall_188
-	.set    gMapanimEventcall_188, 0x08A4838C
-
-	.global gMapanimEventcall_77
-	.set    gMapanimEventcall_77, 0x08A42768
-
-	.global gMapanimEventcall_133
-	.set    gMapanimEventcall_133, 0x08A43120
-
-	.global gMapanimEventcall_189
-	.set    gMapanimEventcall_189, 0x08A484D0
-
-	.global gMapanimEventcall_78
-	.set    gMapanimEventcall_78, 0x08A42994
-
-	.global gMapanimEventcall_134
-	.set    gMapanimEventcall_134, 0x08A43140
-
-	.global gMapanimEventcall_190
-	.set    gMapanimEventcall_190, 0x08A485D0
-
 	.global MapAnim_DrawNumber
 	.type   MapAnim_DrawNumber, %function
 	.thumb_func
@@ -3444,18 +2883,6 @@
 
 	.global gMapanimExpbar_0
 	.set    gMapanimExpbar_0, 0x08A13D48
-
-	.global Img_EkrExpBar
-	.set    Img_EkrExpBar, 0x0885729C
-
-	.global Img_EkrExpBarChange
-	.set    Img_EkrExpBarChange, 0x0885761C
-
-	.global Img_BarNumfx
-	.set    Img_BarNumfx, 0x0885791C
-
-	.global Pal_ExpBar
-	.set    Pal_ExpBar, 0x08857AE8
 
 	.global gMapanimLevelup_0
 	.set    gMapanimLevelup_0, 0x08A1DB20
@@ -3755,15 +3182,6 @@
 	.global ProcScr_PromoMain
 	.set    ProcScr_PromoMain, 0x08BAB664
 
-	.global Img_MapAnimUnlockObjfx
-	.set    Img_MapAnimUnlockObjfx, 0x08A20D34
-
-	.global Pal_MapAnimUnlockObjfx
-	.set    Pal_MapAnimUnlockObjfx, 0x08A20D88
-
-	.global ApConf_MapanimTorchAnim_0
-	.set    ApConf_MapanimTorchAnim_0, 0x08A168DC
-
 	.global gLoadUnitBuffer
 	.set    gLoadUnitBuffer, 0x0203EFB4
 
@@ -3777,15 +3195,6 @@
 
 	.global ProcScr_PoisonAnimHandler
 	.set    ProcScr_PoisonAnimHandler, 0x08A13FCC
-
-	.global Img_PoisonAnim
-	.set    Img_PoisonAnim, 0x08A1E538
-
-	.global Pal_PoisonAnim
-	.set    Pal_PoisonAnim, 0x08A1E88C
-
-	.global Obj_PoisonAnim
-	.set    Obj_PoisonAnim, 0x08A175C8
 
 	.global ProcScr_PoisonAnim2
 	.set    ProcScr_PoisonAnim2, 0x08A13FEC
@@ -3870,12 +3279,6 @@
 	.type   AP_Create, %function
 	.thumb_func
 	.set    AP_Create, 0x0800916C + 1
-
-	.global Img_GmapSoguSprites
-	.set    Img_GmapSoguSprites, 0x08A1E3D4
-
-	.global ApHandle_GmapSoguSprites
-	.set    ApHandle_GmapSoguSprites, 0x08A19580
 
 	.global ProcScr_GmapSogu
 	.set    ProcScr_GmapSogu, 0x08AC2430
@@ -4837,12 +4240,6 @@
 	.global TSAs_EfxPierceNormalEffectBG
 	.set    TSAs_EfxPierceNormalEffectBG, 0x086034EC
 
-	.global Pal_EfxPierceNormalEffectBG
-	.set    Pal_EfxPierceNormalEffectBG, 0x085FB6A0
-
-	.global Img_EfxPierceNormalEffectBG
-	.set    Img_EfxPierceNormalEffectBG, 0x085FB200
-
 	.global StartSubSpell_efxIvaldiOBJ1
 	.type   StartSubSpell_efxIvaldiOBJ1, %function
 	.thumb_func
@@ -5759,9 +5156,6 @@
 	.thumb_func
 	.set    EfxTmCpyExtHFlip, 0x080734BC + 1
 
-	.global Tsa_DemonKingBG1
-	.set    Tsa_DemonKingBG1, 0x0884BEE4
-
 	.global ProcScr_EkrdragonDemonking_0
 	.set    ProcScr_EkrdragonDemonking_0, 0x08848A70
 
@@ -5776,17 +5170,8 @@
 	.global BanimScr_DemoKingTunkFace
 	.set    BanimScr_DemoKingTunkFace, 0x088486DC
 
-	.global Pal_DemoKingTunkFace
-	.set    Pal_DemoKingTunkFace, 0x08855D38
-
-	.global Img_DemoKingTunkFace
-	.set    Img_DemoKingTunkFace, 0x088539E0
-
 	.global BanimScr_Ekrdragonfx_3
 	.set    BanimScr_Ekrdragonfx_3, 0x0884886C
-
-	.global Img_DemoKingTunkFace2
-	.set    Img_DemoKingTunkFace2, 0x08854BA4
 
 	.global GetEkrDragonStatusAttr
 	.type   GetEkrDragonStatusAttr, %function
@@ -6179,9 +5564,6 @@
 	.global gBanimFont
 	.set    gBanimFont, 0x02017648
 
-	.global Img_Banimmisc_0
-	.set    Img_Banimmisc_0, 0x0885616C
-
 	.global gBanimValid
 	.set    gBanimValid, 0x0203E100
 
@@ -6196,28 +5578,10 @@
 	.global gBanimText
 	.set    gBanimText, 0x02017660
 
-	.global Img_EfxLeftNameBox
-	.set    Img_EfxLeftNameBox, 0x088564D4
-
-	.global Img_EfxLeftItemBox
-	.set    Img_EfxLeftItemBox, 0x0885654C
-
-	.global Img_EfxRightNameBox
-	.set    Img_EfxRightNameBox, 0x0885659C
-
 	.global EfxTmReplacePal
 	.type   EfxTmReplacePal, %function
 	.thumb_func
 	.set    EfxTmReplacePal, 0x08073228 + 1
-
-	.global Img_EfxRightItemBox
-	.set    Img_EfxRightItemBox, 0x08856614
-
-	.global gBanimmisc_5
-	.set    gBanimmisc_5, 0x08856A60
-
-	.global gBanimmisc_6
-	.set    gBanimmisc_6, 0x08856AB0
 
 	.global ShouldCallBattleQuote
 	.type   ShouldCallBattleQuote, %function
@@ -6269,12 +5633,6 @@
 	.global gEkrHitNow
 	.set    gEkrHitNow, 0x02017780
 
-	.global Pal_BanimUnitFlashing
-	.set    Pal_BanimUnitFlashing, 0x0885727C
-
-	.global Pal_DemonKingBG
-	.set    Pal_DemonKingBG, 0x0884CB34
-
 	.global ProcScr_ekrDragonQuake
 	.set    ProcScr_ekrDragonQuake, 0x087A8C0C
 
@@ -6323,9 +5681,6 @@
 	.thumb_func
 	.set    GetIconGfxTileIndex, 0x0800355C + 1
 
-	.global item_icon_tiles
-	.set    item_icon_tiles, 0x085BA470
-
 	.global RegisterFillTile
 	.type   RegisterFillTile, %function
 	.thumb_func
@@ -6342,9 +5697,6 @@
 
 	.global ProcScr_ManimLevelUpLabelColor
 	.set    ProcScr_ManimLevelUpLabelColor, 0x08A145E4
-
-	.global SpriteAnim_ManimStatGain
-	.set    SpriteAnim_ManimStatGain, 0x08A1599C
 
 	.global VramCopy
 	.type   VramCopy, %function
