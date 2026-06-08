@@ -135,7 +135,15 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
        shift. Candidate fix: objcopy --set-section-alignment .rodata=1 (or =2) on the
        carved .o so gen_layout's exact-address placement isn't overridden; verify the
        content then matches (the 2-aligned base may also mean a real 2-byte JP .rodata
-       offset). Intricate but likely mechanical given the 6/6 record.
+       offset). PARTLY MECHANICAL: a section-alignment fix ELIMINATES the catastrophic shift —
+       `arm-none-eabi-objcopy --set-section-alignment <sec>=<largest pow2 dividing the
+       JP base> <obj>` after compile lets gen_layout's sequential rom_body place the
+       section at the exact 2-aligned address (flux went from +4/11.9M-diff to +0 / a
+       clean 13-byte diff). REVERTED (unvalidated — no carve yet) but RE-ADD it when
+       tackling the residual: flux's .rodata has 13 bytes of REGION-DIFFERENT animation
+       data (frames arrays). To carve: either RE the JP .rodata values, OR leave the
+       region-different .rodata in the incbin baseline and reference it at its JP addr
+       (carve only the .text/.data). aircalibur/thunder are identical-shape.
      - **no-runs ×15 — Phase 3 (hand-decompile) is now the ONLY remaining class with a path.** compile-fail class CLEARED (worldmap_path: forward-ref prototype; bmbattle: incremental-trim fallback). Every generalizing-fixable class is resolved; the rest (15 no-runs region-different code, ~9 compound romdata near-misses, 3 huge-diff banim) needs per-function hand-decompilation via ida/ghidra+permuter — sessions per carve, not turns.
 3. **Phase 3 — region-different CODE** (`no verified runs`): hand-decompile the
    functions in `ida`/`ghidra` (decompile by JP address), write `src/` C matching
