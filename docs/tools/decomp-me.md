@@ -228,7 +228,9 @@ website UI works as described. This Cloudflare gating is also a practical reason
 - **Use the hosted site (decomp.me) as an occasional human/AI aid** for the few
   genuinely region-different FE8J functions where a live, instant diff helps more
   than the local loop — and for sharing a stuck function with a collaborator.
-  GBA + `agbcc` are first-class there, matching this project's toolchain exactly.
+  GBA + `agbcc` are first-class there and match this project's toolchain (the
+  one caveat being the missing `iconv` step — see the CP932 caveat above —
+  which is irrelevant for the ASCII-only logic TUs this is most useful for).
 - **Do NOT self-host.** decomp.me's only supported deployment is Docker
   (`docker-compose.yaml`, `docs/DOCKER.md`), and Docker is not available in this
   environment. Self-hosting buys us nothing the local `make compare` loop and the
