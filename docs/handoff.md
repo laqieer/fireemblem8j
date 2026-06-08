@@ -7,9 +7,15 @@
 
 ## Verified state (update each working stretch)
 
-- **Functions decompiled: 1153 / 8,528 = 13.5%** (`python3 scripts/calcprogress.py`).
-- **Carved objects: 278.** `make compare` → OK. Build is always byte-perfect
+- **Functions decompiled: 1206 / 8,528 = 14.1%** (`python3 scripts/calcprogress.py`).
+- **Carved objects: 284.** `make compare` → OK. Build is always byte-perfect
   (`port_run` verifies every carve and reverts non-matches).
+- **.bss-overlap class RESOLVED** via `--no-check-sections` (Makefile): the overlaps
+  were benign NOLOAD shared-RAM collisions; ld's default check made them fatal on any
+  new carve. The flag keeps the green build byte-perfect (verified) and `make compare`
+  stays the exact oracle. Unblocked +6 (bm, bmarena, bmmind, sio_core, uiutils,
+  banim-ekrbattle). The COMMON-absolute / .bss-static-trim port_run fix (agb_sram)
+  also stands.
 - ~35 uncarved candidate TUs remain (`.text` 0x40..0x8000). THREE generalizing
   port_run fixes this round unblocked +41 (236→277): (1) addend subtraction for
   indexed externs; (2) EWRAM_OVERLAY trim; (3) multiple-definition dedup. Method
