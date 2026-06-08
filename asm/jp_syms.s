@@ -1178,11 +1178,6 @@
 	.thumb_func
 	.set    PutText, 0x08003DA0 + 1
 
-	.global ClearBg0Bg1
-	.type   ClearBg0Bg1, %function
-	.thumb_func
-	.set    ClearBg0Bg1, 0x0804F610 + 1
-
 	.global ARMCodeToCopy_End
 	.set    ARMCodeToCopy_End, 0x08000A20
 
@@ -1283,11 +1278,6 @@
 
 	.global gUnk_Sio_7
 	.set    gUnk_Sio_7, 0x0203DA84
-
-	.global DisplayUiHand
-	.type   DisplayUiHand, %function
-	.thumb_func
-	.set    DisplayUiHand, 0x0804F528 + 1
 
 	.global ReadGameSave
 	.type   ReadGameSave, %function
@@ -1737,16 +1727,6 @@
 	.thumb_func
 	.set    CloseHelpBox, 0x0808B2A4 + 1
 
-	.global GetUiHandPrevDisplayX
-	.type   GetUiHandPrevDisplayX, %function
-	.thumb_func
-	.set    GetUiHandPrevDisplayX, 0x0804F5F8 + 1
-
-	.global GetUiHandPrevDisplayY
-	.type   GetUiHandPrevDisplayY, %function
-	.thumb_func
-	.set    GetUiHandPrevDisplayY, 0x0804F604 + 1
-
 	.global StartHelpBox
 	.type   StartHelpBox, %function
 	.thumb_func
@@ -1772,11 +1752,6 @@
 
 	.global ProcScr_TacticianNameSelection
 	.set    ProcScr_TacticianNameSelection, 0x085D351C
-
-	.global LoadLegacyUiFrameGraphics
-	.type   LoadLegacyUiFrameGraphics, %function
-	.thumb_func
-	.set    LoadLegacyUiFrameGraphics, 0x0804F8E0 + 1
 
 	.global UnsetBmStLinkArenaFlag
 	.type   UnsetBmStLinkArenaFlag, %function
@@ -5554,11 +5529,6 @@
 	.global gDebugMenuDef
 	.set    gDebugMenuDef, 0x085C5520
 
-	.global LoadUiFrameGraphics
-	.type   LoadUiFrameGraphics, %function
-	.thumb_func
-	.set    LoadUiFrameGraphics, 0x0804F8F4 + 1
-
 	.global SaveMenuCopyPalette
 	.type   SaveMenuCopyPalette, %function
 	.thumb_func
@@ -5611,11 +5581,6 @@
 
 	.global gLinkArenaTeamList
 	.set    gLinkArenaTeamList, 0x0203DB78
-
-	.global DisplayFrozenUiHand
-	.type   DisplayFrozenUiHand, %function
-	.thumb_func
-	.set    DisplayFrozenUiHand, 0x0804F5D4 + 1
 
 	.global PutLinkArenaButtonSpriteAt
 	.type   PutLinkArenaButtonSpriteAt, %function
@@ -6605,4 +6570,81 @@
 
 	.global gUnk_75
 	.set    gUnk_75, 0x03004F10
+
+	.global gUnkUiFrameImage
+	.set    gUnkUiFrameImage, 0x085E31D0
+
+	.global gUnkUiFramePalettes
+	.set    gUnkUiFramePalettes, 0x085E3424
+
+	.global UnpackLegacyUiFrameImage
+	.type   UnpackLegacyUiFrameImage, %function
+	.thumb_func
+	.set    UnpackLegacyUiFrameImage, 0x0804EE5C + 1
+
+	.global UnpackLegacyUiFramePalette
+	.type   UnpackLegacyUiFramePalette, %function
+	.thumb_func
+	.set    UnpackLegacyUiFramePalette, 0x0804EDFC + 1
+
+	.global UnpackUiFrameImage
+	.type   UnpackUiFrameImage, %function
+	.thumb_func
+	.set    UnpackUiFrameImage, 0x0804EE8C + 1
+
+	.global UnpackUiFramePalette
+	.type   UnpackUiFramePalette, %function
+	.thumb_func
+	.set    UnpackUiFramePalette, 0x0804EE2C + 1
+
+	.global gLegacyUiFrameAPalette
+	.set    gLegacyUiFrameAPalette, 0x085E1740
+
+	.global gLegacyUiFrameBPalette
+	.set    gLegacyUiFrameBPalette, 0x085E2034
+
+	.global gLegacyUiFrameCPalette
+	.set    gLegacyUiFrameCPalette, 0x085E28F4
+
+	.global gLegacyUiFrameDPalette
+	.set    gLegacyUiFrameDPalette, 0x085E3170
+
+	.global gUiFramePaletteA
+	.set    gUiFramePaletteA, 0x085E0D94
+
+	.global gUiFramePaletteB
+	.set    gUiFramePaletteB, 0x085E0DB4
+
+	.global gUiFramePaletteC
+	.set    gUiFramePaletteC, 0x085E0DD4
+
+	.global gUiFramePaletteD
+	.set    gUiFramePaletteD, 0x085E0DF4
+
+	.global gLegacyUiFrameAImage
+	.set    gLegacyUiFrameAImage, 0x085E0E94
+
+	.global gLegacyUiFrameBImage
+	.set    gLegacyUiFrameBImage, 0x085E1780
+
+	.global gLegacyUiFrameCImage
+	.set    gLegacyUiFrameCImage, 0x085E2074
+
+	.global gLegacyUiFrameDImage
+	.set    gLegacyUiFrameDImage, 0x085E2934
+
+	.global gUiFrameImage
+	.set    gUiFrameImage, 0x085E07A0
+
+	.global gUiBarPaletteA
+	.set    gUiBarPaletteA, 0x085E1760
+
+	.global gUiBarPaletteB
+	.set    gUiBarPaletteB, 0x085E2054
+
+	.global gUiBarPaletteC
+	.set    gUiBarPaletteC, 0x085E2914
+
+	.global gUiBarPaletteD
+	.set    gUiBarPaletteD, 0x085E3190
 
