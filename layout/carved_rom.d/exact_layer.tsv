@@ -17,3 +17,4 @@
 07356C	073644	src/exact_0807356c.o(.text)	exact_0807356c(run): EkrBuildGaugeBarTiles
 0739D0	073A10	src/exact_080739d0.o(.text)	exact_080739d0(run): EfxSplitColor
 073AE8	073B80	src/exact_08073ae8.o(.text)	exact_08073ae8(run): EfxDecodeSplitedPalette
+057CFC	057D18	src/exact_08057cfc.o(.text)	exact_08057cfc(run): CheckEkrWindowAppearUnexist
