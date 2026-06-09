@@ -228,3 +228,4 @@ AAF6D8	AAF6DC	src/masked_080b62bc.o(.data)	masked_080b62bc .data
 0C456C	0C4598	src/masked_080c456c.o(.text)	masked_080c456c(run): StartGmPalFade_
 0C14B4	0C14EC	src/masked_080c14b4.o(.text)	masked_080c14b4(run): WMMenu_IsArmoryAvailable
 0C14EC	0C1524	src/masked_080c14ec.o(.text)	masked_080c14ec(run): WMMenu_IsVendorAvailable
+0C1524	0C156C	src/masked_080c1524.o(.text)	masked_080c1524(run): WMMenu_IsSecretShopAvailable
