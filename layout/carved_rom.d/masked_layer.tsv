@@ -56,3 +56,4 @@
 02315C	023198	src/masked_0802315c.o(.text)	masked_0802315c(run): DanceCommandUsability
 02326C	0232B0	src/masked_0802326c.o(.text)	masked_0802326c(run): RefreshMapSelect_Select, ItemCommandUsability
 023CC0	023CD4	src/masked_08023cc0.o(.text)	masked_08023cc0(run): TalkSelection_OnSelect
+023D5C	023D70	src/masked_08023d5c.o(.text)	masked_08023d5c(run): SupportSelection_OnSelect
