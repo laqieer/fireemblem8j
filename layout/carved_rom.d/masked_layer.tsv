@@ -21,3 +21,4 @@
 07A3C0	07A3EC	src/masked_0807a3c0.o(.text)	masked_0807a3c0(run): EkrDemonkingObj_SetTilePixel
 07A598	07A5C0	src/masked_0807a598.o(.text)	masked_0807a598(run): EfxSelfThunderBGOnInit
 072168	0721A8	src/masked_08072168.o(.text)	masked_08072168(run): EkrDragonTmCpyWithDistance
+051F6C	051FB8	src/masked_08051f6c.o(.text)	masked_08051f6c(run): EkrGauge_SetWtaArrowSprite
