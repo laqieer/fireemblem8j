@@ -63,3 +63,4 @@ StartPaletteAnimatorExt	080144A4	thumb	exact_080144e0
 UnitActionMenu_Attack	08022AF8	thumb	exact_08022e1c
 WriteGlobalSaveInfoNoChecksum	080A7814	thumb	exact_080a97c4
 IsSaveValid	080A9C30	thumb	exact_080a9cd4
+IsSaveValid	080A9C30	thumb	exact_080a9d24
