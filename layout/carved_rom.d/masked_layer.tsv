@@ -48,3 +48,4 @@
 014108	014120	src/masked_08014108.o(.text)	masked_08014108(run): FadeOutWhiteSpeed08Locking
 014BB0	014BC8	src/masked_08014bb0.o(.text)	masked_08014bb0(run): PlaySeDelayed
 019864	019914	src/masked_08019864.o(.text)	masked_08019864(run): DisplayMovementViewTile
+02257C	02259C	src/masked_0802257c.o(.text)	masked_0802257c(run): MapMenu_IsSuspendCommandAvailable
