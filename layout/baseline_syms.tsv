@@ -1019,7 +1019,6 @@ AiDecideMainFunc	03004F00	data	cp_order
 AiDecideMain	08039D24	thumb	cp_order
 gProcScr_CpDecide	085D1ED4	data	cp_order
 GetItemMaxRange	0801742C	thumb	cp_order
-GetUnitLeaderCharId	08019018	thumb	cp_order
 CpOrderFunc_End	08039B34	thumb	cp_order
 SetMuFacing	0807AAB8	thumb	mapanim_api
 SetMuDefaultFacing	0807AAE0	thumb	mapanim_api
