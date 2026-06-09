@@ -167,3 +167,4 @@
 018804	01883C	src/exact_08018804.o(.text)	exact_08018804(run): GetUnitAidIconId
 018A1C	018A48	src/exact_08018a1c.o(.text)	exact_08018a1c(run): IsUnitMagicSealed
 019018	019038	src/exact_08019018.o(.text)	exact_08019018(run): GetUnitLeaderCharId
+035D58	035D6C	src/exact_08035d58.o(.text)	exact_08035d58(run): StatusHealEffect_BlendSpriteAnim_InitIn
