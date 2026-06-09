@@ -30,9 +30,13 @@ src/data/*.s
 !/layout/carved_rom.d/
 !/layout/carved_ram.d/
 !/layout/baseline_syms.d/
+!/layout/baseline_syms_drop.d/
+!/layout/patches.d/
 !/layout/carved_rom.d/*.tsv
 !/layout/carved_ram.d/*.tsv
 !/layout/baseline_syms.d/*.tsv
+!/layout/baseline_syms_drop.d/*.tsv
+!/layout/patches.d/*.tsv
 
 # Locally-installed toolchain (install agbcc the same way as the US decomp)
 /tools/agbcc
