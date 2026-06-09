@@ -82,7 +82,14 @@ def parse_and_convert(input_text):
     )
     if total_data_match and src_data_match:
         measures["total_data"] = str(int(total_data_match.group(1)))
-        measures["matched_data"] = str(int(src_data_match.group(1)))
+        # JP is region-different and physically carries more data than the US-decomp total
+        # (the proxy denominator), so once the data front is complete the carved bytes can
+        # exceed total_data. Clamp matched_data at total_data so decomp.dev renders a clean
+        # 100% (complete) instead of >100%; the true carved byte count stays in progress.txt
+        # and make compare (sha1) is the oracle.
+        measures["matched_data"] = str(
+            min(int(src_data_match.group(1)), int(total_data_match.group(1)))
+        )
         measures["matched_data_percent"] = float(src_data_match.group(2))
 
     # Functions decompiled into src. uint32 -> JSON numbers.
