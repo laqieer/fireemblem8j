@@ -178,3 +178,13 @@ vfprintf:
 __sfp:
 	.incbin "baserom.gba", 0xD8BE8, 0x74
 
+	.section .text.s_080D9858, "ax", %progbits
+@ memchr region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D9858..0x080D98D8
+	.thumb
+	.align 2, 0
+	.global memchr
+	.thumb_func
+memchr:
+	.incbin "baserom.gba", 0xD9858, 0x80
+
