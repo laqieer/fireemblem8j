@@ -148,3 +148,4 @@
 02D2F0	02D2F8	src/exact_0802d2f0.o(.text)	exact_0802d2f0(run): TradeMenu_HighlightUpdater_OnInit
 02D370	02D3AC	src/exact_0802d370.o(.text)	exact_0802d370(run): TradeMenu_GetAdjustedRow
 02D4C4	02D520	src/exact_0802d4c4.o(.text)	exact_0802d4c4(run): TradeMenu_RefreshSelectableCells
+02DDEC	02DDF4	src/exact_0802ddec.o(.text)	exact_0802ddec(run): TradeMenu_TutorialWait_OnInit
