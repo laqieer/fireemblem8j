@@ -134,7 +134,6 @@ UnlockGame	08015394	thumb	bmxfade
 RenderBmMap	08019914	thumb	eventfx-earthquake
 BG_SetPosition	08001448	thumb	eventfx-earthquake
 StartMu	0807A888	thumb	koido
-StartMuExt	0807A84C	thumb	koido
 MuExistsActive	0807AB5C	thumb	koido
 EndMu	0807B4C8	thumb	koido
 ForceSyncUnitSpriteSheet	08026F38	thumb	koido
