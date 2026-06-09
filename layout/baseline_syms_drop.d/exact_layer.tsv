@@ -113,3 +113,5 @@ GGM_IsAnyCharacterKnown
 IsGamePlayedThrough
 LoadAndVerfyRankData
 LoadBonusContentData
+SaveNewRankData
+SaveRankings

@@ -210,3 +210,5 @@ IsGamePlayedThrough	080A82B4	thumb	exact_080a7d70
 IsGamePlayedThrough	080A82B4	thumb	exact_080a7d8c
 LoadAndVerfyRankData	080A82DC	thumb	exact_080a7d8c
 LoadBonusContentData	080A8338	thumb	exact_080a7e60
+LoadAndVerfyRankData	080A82DC	thumb	exact_080a848c
+SaveRankings	080A83C8	thumb	exact_080a848c

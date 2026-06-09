@@ -398,3 +398,4 @@
 0A7D70	0A7D8C	src/exact_080a7d70.o(.text)	exact_080a7d70(run): IsExtraSupportViewerEnabled
 0A7D8C	0A7E08	src/exact_080a7d8c.o(.text)	exact_080a7d8c(run): GetRankDataValidBitMap
 0A7E60	0A7EAC	src/exact_080a7e60.o(.text)	exact_080a7e60(run): IsExtraBonusClaimEnabled
+0A848C	0A84CC	src/exact_080a848c.o(.text)	exact_080a848c(run): SaveNewRankData
