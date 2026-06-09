@@ -242,3 +242,4 @@
 07BDB4	07BDDC	src/exact_0807bdb4.o(.text)	exact_0807bdb4(run): MuCritFlash_Init, MuCritFlash_SetFadedPalette
 07BF24	07BF2C	src/exact_0807bf24.o(.text)	exact_0807bf24(run): MuMaxWalkSpeedFunc
 07BF80	07BFA4	src/exact_0807bf80.o(.text)	exact_0807bf80(run): SetMuPal
+07BFCC	07BFF4	src/exact_0807bfcc.o(.text)	exact_0807bfcc(run): GetUnitMu

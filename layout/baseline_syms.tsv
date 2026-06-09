@@ -189,7 +189,6 @@ GmMu_StartMoveToPosition	080C2D8C	thumb	worldmap_automu
 GmMu_IsMoving	080C2F14	thumb	worldmap_automu
 EndAllMus	0807B4B8	thumb	bmtrap
 SetAutoMuDefaultFacing	0807AB0C	thumb	bmtrap
-GetUnitMu	0807BFCC	thumb	bmtrap
 BeginUnitCritDamageAnim	08035A2C	thumb	bmtrap
 ApplyHazardHealing	080358A8	thumb	bmtrap
 GetUnitCurrentHp	08018E64	thumb	bmtrap

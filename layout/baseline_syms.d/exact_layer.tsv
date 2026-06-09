@@ -132,3 +132,4 @@ StartMuInternal	0807A964	thumb	exact_0807a84c
 PlayMuStepSe	0807ACAC	thumb	exact_0807ab94
 StartMuInternal	0807A964	thumb	exact_0807ab94
 MU_IsFogBumpFxActive	0807B010	thumb	exact_0807b028
+GetMu	0807BFA4	thumb	exact_0807bfcc
