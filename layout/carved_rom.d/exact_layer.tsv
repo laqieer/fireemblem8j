@@ -297,3 +297,4 @@
 04D07C	04D08C	src/exact_0804d07c.o(.text)	exact_0804d07c(run): LAButtonSprites_Loop
 04ECA8	04ECBC	src/exact_0804eca8.o(.text)	exact_0804eca8(run): MultiBootCheckComplete
 04EDA8	04EDFC	src/exact_0804eda8.o(.text)	exact_0804eda8(run): MultiBootWaitCycles, MultiBootWaitSendDone
+04723C	047258	src/exact_0804723c.o(.text)	exact_0804723c(run): SioResult_GetNewHSScrollTarget
