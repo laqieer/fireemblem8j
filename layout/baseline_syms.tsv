@@ -19,7 +19,6 @@ gActiveUnit	03004DF0	data	unit_facing
 gWorkingMovementScript	02033EF8	data	unit_facing
 SetAutoMuMoveScript	0807AB24	thumb	unit_facing
 gGMData	03005270	data	worldmap_draw
-AddGmPath	080C16FC	thumb	worldmap_draw
 GmHideMuUnit	080C2C24	thumb	worldmap_draw
 GmMu_RemoveUnit	080C2B14	thumb	worldmap_draw
 GmShowMuUnit	080C2BAC	thumb	worldmap_draw

@@ -176,3 +176,4 @@ UnitList_SetupDisplay	08093058	thumb	exact_08093458
 GetGmapUnitFade	080C02BC	thumb	exact_080c02cc
 WorldMap_LoopExt	080BE594	thumb	exact_080be6a0
 GmMuPrim_FinishMovement	080C2F7C	thumb	exact_080c3118
+RefreshGmNodeLinks	080C184C	thumb	exact_080c16fc
