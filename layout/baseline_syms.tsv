@@ -1134,7 +1134,6 @@ ArenaGetPowerRanking	08031960	thumb	bmarena
 BattleApplyExpGains	0802B874	thumb	bmarena
 UpdateUnitDuringBattle	0802C21C	thumb	bmarena
 PidStatsRecordBattleRes	080A94E8	thumb	bmarena
-GetUnitBestWRankType	08031800	thumb	bmarena
 ActionDrop	0803212C	thumb	bmmind
 ActionVisitAndSeize	080321BC	thumb	bmmind
 ActionCombat	080321E8	thumb	bmmind
