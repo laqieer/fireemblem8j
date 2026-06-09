@@ -100,6 +100,27 @@ SUBSYS = {
         "region_start": 0x08159850,
         "region_end": 0x081608A4,
     },
+    # AuraBg3 battle-animation effect sprites (banim-efxmagic-aura.c, NOT ported in JP).
+    #   The per-symbol-shifted data_banim carve (region-same) broke off at the AuraBg3
+    #   block because its JP art is region-different. The block [0x0876E98C, 0x0877ABF4)
+    #   sits between two carved data_banim objects (dat_data_banim_p232 ends at the
+    #   start = Img_AuraBg3_7; dat_data_banim_p234 = Pal_EfxChillEffectBG begins at the
+    #   end). Boundaries are read LIVE from the JP frame pointer arrays:
+    #     ImgArray_AuraBg3 @ 0x08601930 (12 Img frame ptrs, JP-located by scan),
+    #     TsaArray_AuraBg3 @ 0x08601900 (12 Tsa frame ptrs), plus the secondary
+    #     OBJ/TSA frame arrays at 0x08601990+ and 0x0877AB34+ (the block's own trailing
+    #   TSA pointer table). `frame_arrays` mode discovers every clean run (>=3 consecutive
+    #   4-aligned words all pointing into the window) and uses those targets as the
+    #   gapless tile boundaries. 2% 0xFF, max FF-run 4 (no padding); whole window
+    #   uncarved. Covers two gap-analysis frontier blocks (0x0876E98C-0x0877ABF4 plus
+    #   the small worldmap objects between are separately carved).
+    "banim_aurabg3": {
+        "frame_arrays": True,
+        # window the discovery to the AuraBg3 art block + the array bases that target it
+        "array_scan": (0x08600000, 0x0877B000),
+        "region_start": 0x0876E98C,
+        "region_end": 0x0877ABF4,
+    },
 }
 
 
@@ -128,23 +149,60 @@ def carved_ranges(exclude_basename):
     return out
 
 
+def frame_array_starts(rom, scan_lo, scan_hi, win_lo, win_hi):
+    """Discover asset-start boundaries from FRAME POINTER ARRAYS. Scans [scan_lo,
+    scan_hi) for every maximal run of >=3 consecutive 4-aligned words that ALL point
+    into [win_lo, win_hi) (a real frame array; isolated coincidental pointer-shaped
+    words are ignored), and returns the union of every pointer value in such runs that
+    falls in the carve window [win_lo, win_hi). Boundaries are read LIVE from the JP
+    ROM — no US addresses assumed."""
+    N = len(rom)
+    starts = set()
+    o = scan_lo - BASE
+    end = scan_hi - BASE
+    while o + 4 <= min(end, N):
+        x = struct.unpack_from("<I", rom, o)[0]
+        if win_lo <= x < win_hi:
+            run = []
+            p = o
+            while p + 4 <= N:
+                v = struct.unpack_from("<I", rom, p)[0]
+                if win_lo <= v < win_hi:
+                    run.append(v)
+                    p += 4
+                else:
+                    break
+            if len(run) >= 3:
+                starts.update(run)
+            o = p
+        else:
+            o += 4
+    return starts
+
+
 def carve(name):
     cfg = SUBSYS[name]
     rom = open(ROM, "rb").read()
 
-    # --- read every index table from the JP ROM -> asset start addresses -------
-    starts = set()
-    for tbase, nent, stride, nfld in cfg["tables"]:
-        for e in range(nent):
-            for f in range(nfld):
-                a = rd_word(rom, tbase + e * stride + f * 4)
-                if a == 0:
-                    continue
-                if not (BASE <= a < BASE + len(rom)):
-                    sys.exit(f"table {tbase:#x} entry {e} field {f} = {a:#010x} not a ROM ptr")
-                starts.add(a)
-
     region_end = cfg["region_end"]
+
+    # --- derive asset start addresses ------------------------------------------
+    starts = set()
+    if cfg.get("frame_arrays"):
+        slo, shi = cfg["array_scan"]
+        starts = frame_array_starts(rom, slo, shi, cfg["region_start"], region_end)
+    else:
+        # read every index table from the JP ROM -> asset start addresses
+        for tbase, nent, stride, nfld in cfg["tables"]:
+            for e in range(nent):
+                for f in range(nfld):
+                    a = rd_word(rom, tbase + e * stride + f * 4)
+                    if a == 0:
+                        continue
+                    if not (BASE <= a < BASE + len(rom)):
+                        sys.exit(f"table {tbase:#x} entry {e} field {f} = {a:#010x} not a ROM ptr")
+                    starts.add(a)
+
     # When region_start is set (shared/whole-ROM table), keep only the pointers
     # that fall inside the window [region_start, region_end); these are the asset
     # boundaries for THIS frontier block. When omitted (dedicated table), the
@@ -169,7 +227,15 @@ def carve(name):
         assets.append((a, end))
     if not all(assets[i][1] == assets[i + 1][0] for i in range(len(assets) - 1)):
         sys.exit("region is NOT gapless — refusing to carve (would risk padding)")
-    if any(a % 4 for a, _ in assets):
+    # The region_start must be 4-aligned (it abuts a carved object / is a real asset
+    # start, so a misalignment there would force a pad and grow the ROM). Interior
+    # boundaries in frame_arrays mode may be 2-aligned (TSA u16 data); they carry no
+    # .align directive and are emitted contiguously, so no pad is inserted — and
+    # `make compare` is the hard oracle that catches any byte drift regardless.
+    if cfg.get("frame_arrays"):
+        if region_start % 4:
+            sys.exit("region_start is not 4-aligned — would force a pad and grow the ROM")
+    elif any(a % 4 for a, _ in assets):
         sys.exit("an asset start is not 4-aligned — would force a pad and grow the ROM")
     if assets[-1][1] != region_end:
         sys.exit("last asset does not reach region_end")
@@ -223,12 +289,16 @@ def carve(name):
         print(f"{name}: nothing left to carve (region fully covered already)")
         return
 
+    if cfg.get("frame_arrays"):
+        src = (f"the JP frame pointer arrays scanned in "
+               f"[{cfg['array_scan'][0]:#010x}, {cfg['array_scan'][1]:#010x})")
+    else:
+        src = ("the JP index table(s) "
+               + ", ".join(f"{tb:#010x}[{ne}]" for tb, ne, _, _ in cfg["tables"]))
     hdr = (
         f"@ {name}: region-different data not reachable by the code-literal carver\n"
-        f"@ (leaf assets are unnamed US symbols). Boundaries read live from the JP\n"
-        f"@ index table(s) "
-        + ", ".join(f"{tb:#010x}[{ne}]" for tb, ne, _, _ in cfg["tables"])
-        + f" in baserom.\n"
+        f"@ (leaf assets are unnamed US symbols). Boundaries read live from {src}\n"
+        f"@ in baserom.\n"
         f"@ Region [{region_start:#010x}, {region_end:#010x}); already-carved region-same\n"
         f"@ sub-assets are gap-subtracted, so only the uncarved blobs are emitted here.\n\n"
     )
