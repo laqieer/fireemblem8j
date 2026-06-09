@@ -303,3 +303,4 @@
 0434B0	0434CC	src/exact_080434b0.o(.text)	exact_080434b0(run): DrawAllLinkArenaTeamNames
 044200	04421C	src/exact_08044200.o(.text)	exact_08044200(run): SioTeamList_SetTeamSpriteXOffsets
 04D568	04D57C	src/exact_0804d568.o(.text)	exact_0804d568(run): SioMenuItem_SetArrowConfig
+04DB68	04DB80	src/exact_0804db68.o(.text)	exact_0804db68(run): UpdateNameEntrySpriteDraw
