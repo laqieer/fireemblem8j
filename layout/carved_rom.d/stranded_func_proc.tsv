@@ -1,1 +1,2 @@
 002CBC	002CD4	asm/stranded_proc.o(.text.s_08002CBC)	proc:Proc_End region-same Thumb (descriptive incbin)
+002E74	002EAC	asm/stranded_proc.o(.text.s_08002E74)	proc:Proc_Goto region-same Thumb (descriptive incbin)
