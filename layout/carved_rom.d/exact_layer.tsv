@@ -45,3 +45,4 @@
 056220	056230	src/exact_08056220.o(.text)	exact_08056220(run): StartBattleAnimHitEffectsDefault
 056230	056240	src/exact_08056230.o(.text)	exact_08056230(run): StartBattleAnimHitEffectsStrong
 0567FC	056828	src/exact_080567fc.o(.text)	exact_080567fc(run): EfxCyclePaletteRaw
+056914	056920	src/exact_08056914.o(.text)	exact_08056914(run): SetEkrMiniAnimLayerFlag
