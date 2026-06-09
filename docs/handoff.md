@@ -8,8 +8,8 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
-- **SPRINT 2026-06-09 (P9 fan-out, interactive MCP session) — data 84.89% -> 94.29%
-  (+1.23MB), functions 1323 -> 1329 (+6), pushed `bf2a8f8`.** Ran as a rolling worktree-
+- **SPRINT 2026-06-09 (P9 fan-out, interactive MCP session) — data 84.89% -> 97.72%
+  (+1.68MB), functions 1323 -> 1329 (+6), pushed `16626c0`.** Ran as a rolling worktree-
   isolated P8 team, lead serial-integrated each delivery (see decisions.md D19). Landed on main:
   - **Recursive `carve_data_refs.py` (fixed) — +41.6KB / 457 region-different objects.**
     Two-pass deterministic sizing: PASS 1 accepts only 4-aligned real object starts
@@ -71,6 +71,12 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
     vs US 1], ImgArray_AuraBg3@0x08601930) / named-symbol bounds — never US addrs. **~1.43MB long-tail
     remains** (~300 mid/small blocks; in flight as data-frontier-3). The 247K 0xFF run @0x08BB8E94 is REAL
     padding — gap analysis correctly excludes it; never carve it.
+    **data-frontier-3 then blob-carved 12 subsystem windows / 164 blobs +456KB (data ->97.72%)** (fontgrp/se,
+    voicegroup, banim art, unitdef, opening gfx, eventscr, btl_bg, ending, title screen, unit icons).
+    **CRITICAL DISCIPLINE:** the remaining ~1MB raw frontier splits into ~467KB DATA (finishable, df4 in flight)
+    + ~540KB region-different CODE (thumb-prologue heads between carved `.text` objects — RE P8's `src/`
+    domain). **NEVER carve a code gap as a data blob** (inflates the metric + blocks RE). Classify each gap
+    code-vs-data (thumb-prologue head byte / IDA function-at-addr / `.text` bracket) before carving.
 - **DATA FRONTIER (2026-06-08) — data carved 0.05% -> 58.58%, symbols 3.8% -> 15.96%,
   478 objects, ROM ~47% carved (gen_layout), all durable.** Data is 94% of the ROM
   (13.3 MB). Three harvesters now capture region-same data mechanically:
