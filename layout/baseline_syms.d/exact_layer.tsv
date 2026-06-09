@@ -229,3 +229,5 @@ MultiBootInit	0804E754	thumb	exact_0804eb80
 MultiBootInit	0804E754	thumb	exact_0804ebcc
 StartMenuCore	0804FA3C	thumb	exact_0804f980
 GetPaletteIdForAllegience	080BFC04	thumb	exact_080bfe68
+RefreshGmNodeLinksExt	080C17B0	thumb	exact_080c184c
+gUnk_10	0201AFF0	data	exact_080c184c
