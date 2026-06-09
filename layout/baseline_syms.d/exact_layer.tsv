@@ -217,3 +217,4 @@ TradeMenu_GetAdjustedRow	0802D370	thumb	exact_0802d850
 TradeMenu_RefreshSelectableCells	0802D4C4	thumb	exact_0802d9e4
 TradeMenu_GetAdjustedRow	0802D370	thumb	exact_0802d9e4
 AddDamagingTrap	0802E218	thumb	exact_0802e24c
+AddDamagingTrap	0802E218	thumb	exact_0802e268
