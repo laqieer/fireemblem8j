@@ -128,3 +128,4 @@
 0AB968	0ABA4C	src/exact_080ab968.o(.text)	exact_080ab968(run): WriteWorldMapUnits, ReadWorldMapUnits
 0ABA4C	0ABA6C	src/exact_080aba4c.o(.text)	exact_080aba4c(run): WriteWorldMapSkirmishes
 0ABA6C	0ABA8C	src/exact_080aba6c.o(.text)	exact_080aba6c(run): ReadWorldMapSkirmishes
+0A7740	0A776C	src/exact_080a7740.o(.text)	exact_080a7740(run): Checksum16

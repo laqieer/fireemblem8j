@@ -410,7 +410,6 @@ EndGmapEffect	080C619C	thumb	worldmap_entry
 gUnk_6	0200AF00	data	worldmap_gmapunit
 HideMoveRangeGraphics	0801D730	thumb	bmitemuse
 ReadGlobalSaveInfo	080A776C	thumb	bmsave-lib
-Checksum16	080A7740	thumb	bmsave-lib
 GetStringTextCenteredPos	08003EAC	thumb	cgtext
 Text_InsertDrawString	080043B8	thumb	cgtext
 GetTextDisplaySpeed	08030BE4	thumb	cgtext
