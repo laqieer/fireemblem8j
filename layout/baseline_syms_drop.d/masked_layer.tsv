@@ -64,3 +64,4 @@ AiGetOpponentLowHpScoreComponent
 AiGetTargetClassCombatScoreComponent
 AiGetTurnCombatScoreComponent
 gBattleActor
+AiGetTerrainCombatPositionScoreComponent
