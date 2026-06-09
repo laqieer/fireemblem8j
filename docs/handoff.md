@@ -8,9 +8,9 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
-- **SPRINT 2026-06-09 (P9 fan-out, interactive MCP session) — data 84.89% -> 85.2038%
-  (+41.6KB, 1326 fns +3), pushed `e2e9c6e`.** Ran as a 3-P8 worktree-isolated team,
-  lead serial-integrated (see decisions.md D19). Landed on main:
+- **SPRINT 2026-06-09 (P9 fan-out, interactive MCP session) — data 84.89% -> 90.17%
+  (+685KB), functions 1323 -> 1329 (+6), pushed `cf94ce8`.** Ran as a rolling worktree-
+  isolated P8 team, lead serial-integrated each delivery (see decisions.md D19). Landed on main:
   - **Recursive `carve_data_refs.py` (fixed) — +41.6KB / 457 region-different objects.**
     Two-pass deterministic sizing: PASS 1 accepts only 4-aligned real object starts
     (rejects Thumb-pointer/spurious literal matches), PASS 2 sizes by interior-pointer
@@ -40,8 +40,30 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
     `decompile_addr.py` concurrently (exclusive .i64 lock). Reaped 16 leaked idalib workers
     (1.4GB) that held the sidecar lock and blocked `idb_open` — **reap stale idalib_server
     workers at session start** (kill by PID, not `pkill -f idalib_server` which self-matches).
-  - **Wave-2 in flight:** banim-efxmagic-bindingblade (RE, genuinely logic-different: JP 186B
-    vs US 52B), per-subsystem graphics carver (the 2MB frontier). gespenst queued.
+  - **data_bg graphics carved +644KB (data ->90.17%)** via new `scripts/carve_graphics_subsys.py`
+    (SUBSYS registry: follow the JP index table `gConvoBackgroundData`@0x089CD958 + ROM-scan for a
+    JP-only secondary table @0x089CDBE0 + gap-subtraction vs already-carved). REUSABLE for any
+    table-indexed graphics subsystem.
+  - **RE wins (all byte-perfect, durable):** code_8086934 (+3 — actually eventinfo.c's CheckFlag82/
+    GetBattleQuoteEntry/GetDefeatTalkEntry by call-graph, pointer-only once correctly located);
+    bindingblade (+2 — genuinely logic-different: JP drops NewEfxSpellCast, ballista hit-seq, SFX
+    0xCC vs US 0x10D; 2-byte residual solved deterministically by splitting a nested `if` so agbcc
+    coalesces `duration` into r4; TU = [0x805D000,0x805D0F4) = 2 fns not 5); stoneshatter
+    StoneShatterEvent_OnEnd (+1). **StartStoneShatterAnim @0x08012DB4 is TRUE region-different
+    codegen** — US's own agbcc can't reproduce JP's sign-ext scheduling (12+ variants, ~30k permuter
+    iters @ score 755); PARKED with a reusable permuter scaffold in `nonmatchings/StartStoneShatterAnim`.
+  - **BANIM MIRAGE CORRECTED (important):** the old "~2.5MB region-different graphics: banim OBJ
+    sprites 0x085D9C5C 1.53MB" is a **US-ADDRESS MIRAGE**. In JP that address holds different
+    (mostly-carved) content; the actual JP banim blob `0x08C02000-0x08E47180` (2.38MB) is **ALREADY
+    carved** region-same (`data_banim`, indexed by `banim_data`@0x08C00008, 1005 ptrs all inside).
+    **NEVER chase US addresses for JP boundaries** — derive from the JP ROM + a gap analysis.
+  - **REAL DATA FRONTIER (global FF-aware gap analysis, the SOP to find it):** ~1.9MB uncarved
+    non-padding data, **SCATTERED** across ~30+ medium regions — NOT one big block. Largest single is
+    only 105KB @ 0x0877BBB8; then 0x0817B398 (83KB), 0x08B27970 (79KB), 0x0859D4FC (109KB/59KB-real),
+    0x08A84BFC (54KB)... Carve per-region: identify via nearest `sym_jp.txt` symbol + IDA xref ->
+    derive JP boundary -> named incbin (gap-subtraction). In flight (carve_graphics_subsys/carve_frontier).
+    SOP probe: union carved_rom.tsv+carved_rom.d/* vs baserom, report gaps that are <97% 0xFF and >5%
+    non-pad, sorted by real bytes -> the largest real uncarved region each session.
 - **DATA FRONTIER (2026-06-08) — data carved 0.05% -> 58.58%, symbols 3.8% -> 15.96%,
   478 objects, ROM ~47% carved (gen_layout), all durable.** Data is 94% of the ROM
   (13.3 MB). Three harvesters now capture region-same data mechanically:
