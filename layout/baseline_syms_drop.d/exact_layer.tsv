@@ -132,3 +132,5 @@ StartSioMuFadeToColor
 StartSioMuFadeRestore
 MultiBootInit
 StartMenuAt
+GetPaletteIdForAllegience
+MapUnitC_SetGfxNeedsUpdate
