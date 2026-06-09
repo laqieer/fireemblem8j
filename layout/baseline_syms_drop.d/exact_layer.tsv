@@ -106,3 +106,4 @@ SetPalFadeStClkEnd3
 ArchiveCurrentPalettes
 SetPalFadeStClkEnd1
 SetPalFadeStClkEnd2
+FadeCore_StopObjPalFade
