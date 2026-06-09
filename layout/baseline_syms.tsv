@@ -311,7 +311,6 @@ UnitApplyWorkingMovementScript	0801A508	thumb	cp_perform
 MoveActiveUnit	08018454	thumb	cp_perform
 GetTrapAt	0802E128	thumb	cp_perform
 gActiveUnitId	0202BE40	data	cp_perform
-UnitAddItem	080176F0	thumb	cp_perform
 UnitRemoveItem	0801915C	thumb	cp_perform
 NewPopup_ItemStealing	08011780	thumb	cp_perform
 ProcScr_CamMove	085C29C8	data	cp_perform
