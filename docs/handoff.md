@@ -8,8 +8,14 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
-- **SPRINT 2026-06-09 (P9 fan-out, interactive MCP session) — data 84.89% -> 97.72%
-  (+1.68MB), functions 1323 -> 1329 (+6), pushed `16626c0`.** Ran as a rolling worktree-
+- **SPRINT 2026-06-09 (P9 fan-out, interactive MCP session) — DATA FRONTIER COMPLETE (84.89%
+  -> 100%, +1.71MB), functions 1323 -> 1329 (+6), pushed `02fc9e5`.** Ran as a rolling worktree-
+  isolated P8 team. **The data front (94% of the ROM) is byte-perfect DONE** — df2/df3/df4 cleared every
+  real data gap via `scripts/carve_frontier.py` (table/frame_arrays/blob/data_gaps modes); 0 data gaps
+  remain. JP physically carries ~463KB MORE data than the US-decomp total (region-different glyphs/tables/
+  layout), so the raw metric hit 103.49% — `calcprogress.py` now caps the data % at 100 (display-only;
+  true carved bytes 13748514 still printed; `make compare` sha1 is the oracle). **The SOLE remaining
+  frontier is region-different CODE (~693KB, ~227 thumb-head gaps between carved `.text`).** Earlier rolling-
   isolated P8 team, lead serial-integrated each delivery (see decisions.md D19). Landed on main:
   - **Recursive `carve_data_refs.py` (fixed) — +41.6KB / 457 region-different objects.**
     Two-pass deterministic sizing: PASS 1 accepts only 4-aligned real object starts
