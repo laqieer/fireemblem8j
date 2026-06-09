@@ -89,6 +89,17 @@ SUBSYS = {
         "region_start": 0x0817B398,
         "region_end": 0x08190010,
     },
+    # Ch9 (Eirika rt.) event data — gChapterDataAssetTable[Ch9Events] @ 0x08159850.
+    #   The recursive code-literal carver only reached the 80-byte head (dat_Ch9Events_ref);
+    #   the asset body runs to the next table pointer 0x081608A4 (= dat_const_data_
+    #   chapter_maps_p1 start). The 28,676-byte tail [0x081598A0, 0x081608A4) is the
+    #   uncarved frontier gap (region-different compressed event data). One table ptr
+    #   in the window; the carved head is gap-subtracted.
+    "map_ch9events": {
+        "tables": [(0x08907BC8, 236, 4, 1)],
+        "region_start": 0x08159850,
+        "region_end": 0x081608A4,
+    },
 }
 
 
