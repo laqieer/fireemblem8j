@@ -156,3 +156,4 @@ DrawLinkArenaTeamName	08043438	thumb	exact_080434b0
 gSoundRoomVolumeGraphBuffer	0201F19C	data	exact_080b3dc0
 DrawSoundRoomVolumeGraphSprites	080B4D94	thumb	exact_080b4e1c
 gSoundRoomVolumeGraphBuffer	0201F19C	data	exact_080b4e1c
+StartOrChangeBgm	080023C8	thumb	exact_08002424
