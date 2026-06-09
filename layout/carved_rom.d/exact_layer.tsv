@@ -211,3 +211,4 @@
 0099BC	0099D4	src/exact_080099bc.o(.text)	exact_080099bc(run): EndProcIfNotMarkedB
 009A0C	009A28	src/exact_08009a0c.o(.text)	exact_08009a0c(run): GameControl_StartMainTheme
 009A28	009A3C	src/exact_08009a28.o(.text)	exact_08009a28(run): GameControl_FadeBgmVolume
+009EB0	009EC4	src/exact_08009eb0.o(.text)	exact_08009eb0(run): SetNextGameActionId

@@ -112,3 +112,4 @@ FaceRefreshSprite	080056C8	thumb	exact_08005678
 FaceBlinkProc_GenBlinkInterval	08006374	thumb	exact_0800633c
 StartBgmVolumeChange	08002680	thumb	exact_08009a0c
 StartBgmVolumeChange	08002680	thumb	exact_08009a28
+GetGameControl	08009EA0	thumb	exact_08009eb0
