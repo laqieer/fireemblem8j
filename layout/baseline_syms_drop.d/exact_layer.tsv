@@ -122,3 +122,4 @@ GetUnitSpritePalette
 GetUnitItemCount
 UnitHasItem
 UnitRemoveInvalidItems
+GetUnitAid

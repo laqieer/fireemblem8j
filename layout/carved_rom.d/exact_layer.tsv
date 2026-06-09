@@ -406,3 +406,4 @@
 02E268	02E2C0	src/exact_0802e268.o(.text)	exact_0802e268(run): AddGasTrap, AddArrowTrap, AddMapChangeTrap
 02710C	027144	src/exact_0802710c.o(.text)	exact_0802710c(run): GetUnitSpritePalette
 01772C	017834	src/exact_0801772c.o(.text)	exact_0801772c(run): UnitRemoveInvalidItems, GetUnitItemCount, UnitHasItem...
+0186CC	018730	src/exact_080186cc.o(.text)	exact_080186cc(run): GetUnitAid
