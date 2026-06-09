@@ -306,3 +306,4 @@
 04DB68	04DB80	src/exact_0804db68.o(.text)	exact_0804db68(run): UpdateNameEntrySpriteDraw
 04E184	04E1BC	src/exact_0804e184.o(.text)	exact_0804e184(run): SetUnitItemUsesToMax, SetUnitAllItemsUsesToMax
 0B389C	0B38B0	src/exact_080b389c.o(.text)	exact_080b389c(run): IsSoundRoomCompleted
+0B390C	0B3930	src/exact_080b390c.o(.text)	exact_080b390c(run): IsSoundRoomSongPlayable
