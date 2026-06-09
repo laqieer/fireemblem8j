@@ -180,3 +180,5 @@ Pal_MapBattleInfoRed	08A1DCF0	data	masked_0807e114
 Pal_MapBattleInfoGreen	08A1DD10	data	masked_0807e114
 Pal_MapBattleInfoPurple	08A1DD30	data	masked_0807e114
 InitScanlineBuf	080846E0	thumb	masked_080841b8
+MapAnimMoveUnitTowardsTargetExt	0808375C	thumb	masked_08083814
+MapAnimMoveUnitAwayFromTargetExt	080837B8	thumb	masked_08083814

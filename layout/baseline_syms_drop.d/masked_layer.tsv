@@ -86,3 +86,5 @@ Pal_MapBattleInfoRed
 InitScanlineBuf
 gManimActiveScanlineBuf
 gManimScanlineBufs
+MapAnimMoveUnitAwayFromTargetExt
+MapAnimMoveUnitTowardsTargetExt

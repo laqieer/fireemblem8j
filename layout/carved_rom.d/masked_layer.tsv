@@ -148,3 +148,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 07E114	07E160	src/masked_0807e114.o(.text)	masked_0807e114(run): GetBattleInfoPalByFaction
 080F48	081070	src/masked_08080f48.o(.text)	masked_08080f48(run): GetManimLevelUpStatGain
 0841B8	0841EC	src/masked_080841b8.o(.text)	masked_080841b8(run): InitScanline
+083814	0838D4	src/masked_08083814.o(.text)	masked_08083814(run): MapAnim_MoveSubjectsTowardsTarget, MapAnim_MoveSubjectsAwayFromTarget
