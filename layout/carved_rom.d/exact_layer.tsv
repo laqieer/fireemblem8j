@@ -337,3 +337,4 @@
 087220	087238	src/exact_08087220.o(.text)	exact_08087220(run): AreAllEnemyUnitsDead
 087604	08761C	src/exact_08087604.o(.text)	exact_08087604(run): Uidebug_IsAliveEnemyCountAtLeast50
 04F924	04F964	src/exact_0804f924.o(.text)	exact_0804f924(run): StartOrphanMenuAdjusted, StartMenu
+04F964	04F980	src/exact_0804f964.o(.text)	exact_0804f964(run): StartOrphanMenuAt, StartOrphanMenu

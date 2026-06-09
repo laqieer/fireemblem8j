@@ -884,7 +884,6 @@ gPrepScreenItemList	020122D4	data	prep_itemlist
 ProcScr_PrepItemListScreen	08A95168	data	prep_itemlist
 PrepItemDrawPopupBox	0809C5EC	thumb	prep_itemusemind
 EndPrepScreenMenu_	0803325C	thumb	prep_sallycursor
-StartOrphanMenu	0804F970	thumb	prep_sallycursor
 gDebugMenuDef	085C5520	data	prep_sallycursor
 SaveMenuInitSubBoxText	080B0250	thumb	savemenu
 SaveMenuPutChapterTitle	080AD4B4	thumb	savemenu
