@@ -1,0 +1,4 @@
+GetEventTriggerState	0800D77C	thumb	eventinfo (baseline-resident), called by code_8086934
+BattleIsTriangleAttack	0802CDC0	thumb	bmbattle (baseline-resident), called by code_8086934
+gBattleTalkList	08A5E7E0	data	battle-quote table (baseline-resident), read by code_8086934
+gDefeatTalkList	08A5EE70	data	defeat-talk table (baseline-resident), read by code_8086934
