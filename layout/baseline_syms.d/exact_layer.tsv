@@ -27,3 +27,4 @@ DungeonRecordUi_IsNewRecordForLabel	080393D8	thumb	exact_080396e0
 GetCurrentDungeonValueByUiLabel	08039278	thumb	exact_080396e0
 DungeonRecordUi_SpawnUpdateValueProc	08039248	thumb	exact_080396e0
 CanUnitUseWeaponNow	080164F8	thumb	exact_080168d0
+GetItemReachBits	08016E7C	thumb	exact_08016f90

@@ -55,3 +55,4 @@
 0168D0	016934	src/exact_080168d0.o(.text)	exact_080168d0(run): GetUnitEquippedWeapon, GetUnitEquippedWeaponSlot
 016968	016994	src/exact_08016968.o(.text)	exact_08016968(run): EquipUnitItemSlot
 016B04	016B3C	src/exact_08016b04.o(.text)	exact_08016b04(run): GetWeaponLevelFromExp
+016F90	016FE4	src/exact_08016f90.o(.text)	exact_08016f90(run): GetUnitWeaponReachBits

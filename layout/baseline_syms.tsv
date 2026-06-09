@@ -1063,7 +1063,6 @@ AddUnitToTargetListIfNotAllied	0802512C	thumb	bmcommanddbg
 MakeRescueTargetList	08025364	thumb	bmcommanddbg
 MakeTradeTargetList	08025280	thumb	bmcommanddbg
 GenerateUnitMovementMapExt	0801A09C	thumb	bmcommanddbg
-GetUnitWeaponReachBits	08016F90	thumb	bmcommanddbg
 GenerateUnitStandingReachRange	0801B13C	thumb	bmcommanddbg
 AP_ExecDummyFrame	08009588	thumb	ap
 Register2dChrMove	080130AC	thumb	ap
