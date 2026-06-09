@@ -376,7 +376,6 @@ StartDrawLinkArenaRankSprites	08045434	thumb	sio_postbattle
 gUnk_Sio_16	0203DD8C	data	sio_postbattle
 m4aMPlayFadeOut	080D508C	thumb	sio_postbattle
 gSongTable	08214120	data	sio_postbattle
-StartBgmExt	08002434	thumb	sio_postbattle
 gUnk_41	03001808	data	sio_tactician
 DisplayGoldBoxText	080B9A5C	thumb	uiarena
 Proc_ForEach	08002EE8	thumb	uiarena
