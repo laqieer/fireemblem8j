@@ -669,7 +669,6 @@ gEkrSpellAnimIndex	0203E114	data	banim-ekrdragon-myrrh
 SwitchAISFrameDataFromBARoundType	0805AE20	thumb	banim-ekrdragon-myrrh
 SetEkrDragonStatusType	08072034	thumb	banim-ekrdragon-myrrh
 PutBanimBG	08077F0C	thumb	banim-ekrhensei
-MatCopy	08015154	thumb	bmlib-math
 ResetMenuTextCursors	080D273C	thumb	classchg-menuconfirm
 RedrawMenu	0804FCFC	thumb	classchg-menuconfirm
 SyncMenuBgs	080505A0	thumb	classchg-menuconfirm
