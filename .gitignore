@@ -121,6 +121,13 @@ src/_diag_*
 /tools/ida/*.til
 *.i64
 
+# gbadisasm: carve-time disassembler for region-different code (D23). The clone
+# + bundled capstone build + the IDA-generated JP config (fe8j_full.cfg) are all
+# carve-time only: scripts/carve_gbadisasm_asm.py emits committed `asm/*.s`; the
+# build/CI never need gbadisasm. The exporter (scripts/ida/export_gbadisasm_cfg.py)
+# + the carver (scripts/carve_gbadisasm_asm.py) are tracked; the tool dir is not.
+/tools/gbadisasm
+
 # Ghidra second-opinion decompiler: projects/cache (built locally via
 # `make ghidra-db`; the JDK/Ghidra install lives outside the repo).
 *.gpr

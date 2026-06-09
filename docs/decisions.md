@@ -901,3 +901,57 @@ but doesn't symbolize *data* pointers). **Must-not-miss:** `.syntax unified` pre
 **Status:** Investigation done (recommended adopt-primary, evidence-backed). Carver implementation + 20-function
 pilot in flight (P8-gbadisasm-carver). On a green pilot, scale over the incbin backlog via the parallel-carving
 system. This is the path that makes the code front mechanically completable, not a hand-RE grind.
+## D24 — gbadisasm descriptive-asm carver: engineering + pilot (implements D23) (2026-06-09)
+
+**Context:** D23 adopted gbadisasm as the primary mechanical carver for the ~6000
+region-different functions (descriptive-asm-first bootstrap). This entry records the
+carver's implementation decisions and the pilot result (P8-gbadisasm-carver).
+
+**Tooling.** `laqieer/gbadisasm` does not exist on GitHub; the upstream
+`camthesaxman/gbadisasm` already ships the FE8 configs (`fireemblem8.cfg`,
+`fireemblem8_ida.cfg` — both US-addressed) and builds clean (`make`, bundled
+capstone). The JP config is generated from `tools/ida/fe8j.i64` by
+`scripts/ida/export_gbadisasm_cfg.py` (idalib: `idautils.Functions()` +
+`get_sreg(ea,'T')` for thumb/arm mode, funcmap names preferred over `sub_*`, code
+region only `< 0x080DC134`) → `tools/gbadisasm/fe8j_full.cfg`, 8698 funcs (8682
+thumb, 16 arm). gbadisasm + that config are gitignored carve-time artifacts
+(`/tools/gbadisasm`); only the committed `asm/*.s` feed the build/CI.
+
+**Carver** `scripts/carve_gbadisasm_asm.py`: runs gbadisasm once on the full config
+(~25s, whole-ROM disasm cached in /tmp), then per function slices its lines, emits
+a flat `asm/<name>.s` (`.text.<name>`), and verifies-or-reverts via `make compare`.
+Per-task fragments only (`layout/carved_rom.d/gbadisasm_<name>.tsv` +
+`baseline_syms_drop.d/`), parallel-safe.
+
+**Decision — de-symbolize external references, two ways (the load-bearing fix).**
+gbadisasm emits symbolic `bl sub_X` / `b sub_X` / `.4byte sub_X` using IDA names the
+linker does not know. A naive standalone byte pre-gate is a FALSE NEGATIVE (it
+assembles at VMA 0, so bl/b offsets to far targets are wrong) — `make compare` is the
+real oracle (it links each section at its JP VMA). The two reference kinds need
+DIFFERENT handling:
+  * `bl`/`b SYM` (PC-relative): emit `.set SYM, JP_ADDR(+1 if thumb)` before the
+    section; the assembler computes the branch offset from the absolute value and it
+    links byte-exact at the JP VMA.
+  * `.4byte SYM` (code-pointer literal, incl. `_08xxxxxx: .4byte SYM`): REWRITE to a
+    raw `.4byte 0xADDR` (addr|1 for thumb). A `.4byte SYM` generates a link-time
+    R_ARM_ABS32 the linker can't resolve (undefined symbol → link error); a raw
+    absolute constant is byte-identical and dependency-free.
+Mandatory: `.syntax unified` prelude + `arm-none-eabi-as -mcpu=arm7tdmi
+-mthumb-interwork` (omitting either silently corrupts bytes).
+
+**Pilot result (GREEN, far exceeds the 20-fn gate).** 350 region-different functions
+carved as descriptive asm, **100% yield** across the whole ROM (lib region, ekr
+battle region @0x0805xxxx, and a 100-fn ROM-wide spread @0x08005E3C..0x080DC0D4) —
+0 failures after the de-symbolization fix. `make check` OK; `make compare` OK;
+`make clean && make compare` OK (clean-rebuild byte-perfect). calcprogress code bytes
+in src 172228 → 200712 (20.07% → 23.38%); uncarved region-different 6292 → 5942.
+
+**Scale.** `scripts/carve_gbadisasm_asm.py --batch N` carves the next N uncarved
+candidates; `ADDR..` carves specific addresses; `--list` inspects the backlog. Each
+carve is verify-or-revert so a batch can run unattended. Decompiling each carved
+function asm→C is the later incremental step (gbadisasm asm is the byte-complete
+bootstrap, not the end state).
+
+**Status:** Done 2026-06-09 (branch `carve/gbadisasm-layer`). Carver + exporter +
+JP-config-gen landed; 350-fn pilot green. Scale over the remaining 5942 via the
+parallel-carving system.
