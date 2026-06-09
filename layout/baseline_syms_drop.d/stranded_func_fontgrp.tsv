@@ -2,3 +2,4 @@ SetTextFont
 InitText
 InitTextDb
 Text_Skip
+PutText

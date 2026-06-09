@@ -148,3 +148,13 @@ Text_GetChrOffset:
 Text_Skip:
 	.incbin "baserom.gba", 0x3D88, 0x8
 
+	.section .text.s_08003DA0, "ax", %progbits
+@ PutText region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08003DA0..0x08003DEC
+	.thumb
+	.align 2, 0
+	.global PutText
+	.thumb_func
+PutText:
+	.incbin "baserom.gba", 0x3DA0, 0x4C
+
