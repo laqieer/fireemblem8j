@@ -108,6 +108,10 @@ cscope.out
 __pycache__/
 *.pyc
 
+# scripts/ingest_funclib.py clones FE_GBA_Function_Library here when it is not
+# already at /tmp. Reference-only library checkout; never committed.
+/.cache/
+
 # Diagnosis artifacts: isolated compile probes (never carved/committed)
 src/_diag_*
 

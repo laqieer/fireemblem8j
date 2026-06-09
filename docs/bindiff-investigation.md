@@ -288,3 +288,37 @@ pipeline supersedes the 2018 threshold-merge and continuously extends/refreshes 
 map. Because `make compare` is self-validating, none of this can ever produce a
 wrong byte-perfect commit; bindiff is purely a hint generator, and the oracle is
 the gate.
+
+---
+
+## Ingested map (D25, implemented)
+
+The P0 ingest is done. The library is now staged as a **reference-only** artifact:
+
+- **`reference/maps/funclib_us_jp.tsv`** — the map. Columns:
+  `jp_addr  us_addr  us_name_current  lib_name_stale  confidence  source`.
+  Leading `#` lines carry the **"HINT, NOT TRUTH"** banner. It is **NOT a build
+  input** (nothing in the build reads it; `make compare` is unaffected — verified).
+- **`scripts/ingest_funclib.py`** — the reproducible generator. Reads the library
+  from `/tmp/FE_GBA_Function_Library` if present, else clones
+  `github.com/laqieer/FE_GBA_Function_Library` into `.cache/`. Deterministic:
+  re-running over the same inputs regenerates a byte-identical TSV. Re-run it after
+  the US decomp's symbols change to refresh `us_name_current`.
+
+**Contents (8356 ROM `0x08` JP functions; the 8 RAM `0x03` entries are dropped):**
+
+| tier | rows | meaning |
+|---|---|---|
+| `new-hint` | 6572 (6371 with a US addr) | region-different — **the asm→C carve queue** |
+| `funcmap-agree` | 1774 | overlaps the byte-match funcmap *and agrees* → effectively ground truth (region-same) |
+| `funcmap-disagree` | 10 | overlaps but disagrees → **suspect; QUARANTINE/deprioritize** (the ~0.6%, e.g. bindiff off-by-one-row slips) |
+
+**How to use it.** For a region-different JP function you want to decompile, look up
+its **JP address** in `funclib_us_jp.tsv` → take `us_addr` + `us_name_current` →
+port/adapt that US C source from `../fireemblem8u` to the JP address → build →
+**`make compare` is the gate**: `OK` is the byte-perfect proof the correspondence is
+correct; a FAIL auto-reverts via the parallel-carving fragment model and never
+produces a wrong commit. Use `us_name_current` (resolved live from the US ELF/map),
+**never** `lib_name_stale` (the stale ~2018 IDA name, kept for provenance only).
+**Quarantine `funcmap-disagree`** — try it last, and double-check the US source by
+call-graph before trusting it.
