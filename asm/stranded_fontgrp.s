@@ -158,3 +158,13 @@ Text_Skip:
 PutText:
 	.incbin "baserom.gba", 0x3DA0, 0x4C
 
+	.section .text.s_08003DEC, "ax", %progbits
+@ PutBlankText region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08003DEC..0x08003E0C
+	.thumb
+	.align 2, 0
+	.global PutBlankText
+	.thumb_func
+PutBlankText:
+	.incbin "baserom.gba", 0x3DEC, 0x20
+
