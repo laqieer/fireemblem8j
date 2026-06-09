@@ -60,3 +60,4 @@
 029048	029060	src/exact_08029048.o(.text)	exact_08029048(run): CanUnitUsePureWaterItem
 02908C	0290A4	src/exact_0802908c.o(.text)	exact_0802908c(run): CanUnitUseAntitoxinItem
 029108	029150	src/exact_08029108.o(.text)	exact_08029108(run): CanUnitUseLockpickItem
+0294AC	0294C4	src/exact_080294ac.o(.text)	exact_080294ac(run): CanUnitUseFruitItem
