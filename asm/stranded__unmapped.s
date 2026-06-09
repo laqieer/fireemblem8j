@@ -48,3 +48,13 @@ FreeProcess:
 InsertRootProcess:
 	.incbin "baserom.gba", 0x2CF4, 0x24
 
+	.section .text.s_08002D18, "ax", %progbits
+@ InsertChildProcess region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08002D18..0x08002D30
+	.thumb
+	.align 2, 0
+	.global InsertChildProcess
+	.thumb_func
+InsertChildProcess:
+	.incbin "baserom.gba", 0x2D18, 0x18
+

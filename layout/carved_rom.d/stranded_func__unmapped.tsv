@@ -3,3 +3,4 @@
 002CD4	002CE4	asm/stranded__unmapped.o(.text.s_08002CD4)	_unmapped:AllocateProcess region-same Thumb (descriptive incbin)
 002CE4	002CF4	asm/stranded__unmapped.o(.text.s_08002CE4)	_unmapped:FreeProcess region-same Thumb (descriptive incbin)
 002CF4	002D18	asm/stranded__unmapped.o(.text.s_08002CF4)	_unmapped:InsertRootProcess region-same Thumb (descriptive incbin)
+002D18	002D30	asm/stranded__unmapped.o(.text.s_08002D18)	_unmapped:InsertChildProcess region-same Thumb (descriptive incbin)
