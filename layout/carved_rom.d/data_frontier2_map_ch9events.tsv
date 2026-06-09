@@ -1,0 +1,2 @@
+# carve_frontier.py table-pinned region-different data (parallel-safe fragment)
+1598A0	1608A4	asm/frontier_map_ch9events.o(.data.frontier_map_ch9events.gap0)	map_ch9events region-diff data (28676 B, table-pinned)
