@@ -121,6 +121,20 @@ SUBSYS = {
         "region_start": 0x0876E98C,
         "region_end": 0x0877ABF4,
     },
+    # EkrDracoZombie + related dragon/effect battle-animation sprites (region-different,
+    # banim, not ported in JP). Block [0x0877BBB8, 0x087961E8) sits between two carved
+    # objects (dat_worldmap_gmapunit_p1032 end / dat_data_banim_p238 start = gEkrDraco
+    # ZombiTsaSetLut region) and is fully uncarved. Boundaries are read live from the
+    # JP frame pointer arrays anywhere in the ROM that target the window (frame_arrays
+    # discovery, scanning the whole ROM); the leading header before frame 0 and any
+    # single large LZ blob become their own gapless tiles. 2.3% 0xFF, max FF-run 4
+    # (no padding). 95KB real of 105KB.
+    "banim_dracozombie": {
+        "frame_arrays": True,
+        "array_scan": (0x08000000, 0x09000000),
+        "region_start": 0x0877BBB8,
+        "region_end": 0x087961E8,
+    },
 }
 
 
@@ -210,7 +224,15 @@ def carve(name):
     region_start = cfg.get("region_start")
     if region_start is not None:
         starts = sorted(s for s in starts if region_start <= s < region_end)
-        if not starts or starts[0] != region_start:
+        # frame_arrays: the region abuts a carved object on the low side, so the bytes
+        # before the first discovered frame (a header/palette preceding frame 0) are a
+        # valid blob in their own right — inject region_start as a boundary so the whole
+        # window is tiled gaplessly. (Table mode keeps the strict "pointer AT start"
+        # invariant: there the boundary must be a real table target.)
+        if cfg.get("frame_arrays"):
+            if region_start not in starts:
+                starts = [region_start] + starts
+        elif not starts or starts[0] != region_start:
             sys.exit("table has no pointer at region_start — window/region wrong")
     else:
         starts = sorted(s for s in starts if s < region_end)
