@@ -75,3 +75,4 @@
 013918	013928	src/exact_08013918.o(.text)	exact_08013918(run): SpacialSeTest_OnInit
 013B7C	013B94	src/exact_08013b7c.o(.text)	exact_08013b7c(run): SetAllBlackPals
 013B94	013BAC	src/exact_08013b94.o(.text)	exact_08013b94(run): SetAllWhitePals
+013E20	013E78	src/exact_08013e20.o(.text)	exact_08013e20(run): StartMidFadeToBlack, StartSlowFadeToBlack, StartFastFadeToBlack...

@@ -36,3 +36,6 @@ SetPalFadeStClkEnd3	0801354C	thumb	exact_0801350c
 GetPalFadeSt	08013504	thumb	exact_0801350c
 GetPalFadeSt	08013504	thumb	exact_08013560
 GetPalFadeSt	08013504	thumb	exact_0801357c
+StartFadeToBlack	08013D88	thumb	exact_08013e20
+StartFadeFromBlack	08013DA4	thumb	exact_08013e20
+StartLockingFadeToBlack	08013DC0	thumb	exact_08013e20
