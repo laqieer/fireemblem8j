@@ -477,7 +477,6 @@ efxCrimsonEyeOBJ_GetOffsetX	0806C958	thumb	banim-efxmagic-crimsoneye
 efxCrimsonEyeOBJ_GetOffsetY	0806C970	thumb	banim-efxmagic-crimsoneye
 Div	080D6374	thumb	banim-efxmagic-crimsoneye
 SetObjAffine	08002100	thumb	banim-efxmagic-crimsoneye
-CopyPalWithFade	0807A3EC	thumb	banim-efxmagic-demonlight
 SpellFx_RegisterBgPal	080567E0	thumb	banim-efxmagic-demonlight
 EfxTmCpyBgHFlip	080733E8	thumb	banim-efxmagic-excalibur
 gEkrTsaBuffer	02019790	data	banim-efxmagic-excalibur
