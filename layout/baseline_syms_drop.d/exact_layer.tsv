@@ -100,3 +100,5 @@ SetEkrDragonStatusType
 GetAnimAnotherSide
 RestartMainMiniAnim
 EkrUnitMainMini_UpdateAnim
+DrawBattleForecastContents
+GetBattleForecastPanelSide

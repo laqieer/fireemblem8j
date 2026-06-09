@@ -387,3 +387,4 @@
 05B058	05B074	src/exact_0805b058.o(.text)	exact_0805b058(run): GetAnimAnotherSide
 05B6D4	05B6E4	src/exact_0805b6d4.o(.text)	exact_0805b6d4(run): SetMainMiniAnimId
 05B7F0	05B80C	src/exact_0805b7f0.o(.text)	exact_0805b7f0(run): EkrUnitMainMiniMain
+0371C8	03720C	src/exact_080371c8.o(.text)	exact_080371c8(run): BattleForecast_OnNewBattle

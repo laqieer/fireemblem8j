@@ -192,3 +192,6 @@ AP_ExecFrame	08009230	thumb	exact_080095a8
 GetEkrDragonStatus	08071FD8	thumb	exact_08072028
 RestartMainMiniAnim	0805B558	thumb	exact_0805b6d4
 EkrUnitMainMini_UpdateAnim	0805B180	thumb	exact_0805b7f0
+DrawBattleForecastContents	08036DD0	thumb	exact_080371c8
+GetBattleForecastPanelSide	080365D8	thumb	exact_080371c8
+InitBattleForecastFramePalettes	08036E4C	thumb	exact_080371c8
