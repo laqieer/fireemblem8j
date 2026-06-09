@@ -686,3 +686,78 @@ with both locks held at the same timestamp; (b) end-to-end `agency cp` had Copil
 
 **Status:** Done 2026-06-09. Clone + `make ghidra-cp` + docs committed; project files live under
 `~/ghidra-projects` (gitignored).
+
+## D19 — Phase-3 fan-out sprint: 3-P8 team on the two unblocked region-different fronts (2026-06-09)
+
+**Context:** Mechanical carving is exhausted (baseline this session: data 84.89% in src, code 15.51%
+= 1323/8528 fns, symbols 28.53%; `make compare` → `fireemblem8.gba: OK`). Remaining work is genuinely
+region-different on three fronts: (A) graphics data (~2 MB) reachable *mechanically* via the recursive
+code-ref carver; (B) ~11 region-different CODE TUs needing hand-decompilation; (C) region-different
+structured tables. The handoff recorded Phase-3 (B) as blocked — "REQUIRES an interactive, MCP-connected
+session … NOT reachable headless." **This interactive session HAS the live IDA + Ghidra MCP** (verified:
+IDA session `e9837643` decompiles JP code with project symbols resolved — e.g. `BattleIsTriangleAttack`;
+Ghidra `fireemblem8.elf` `analysis_complete:true`) — so (B) is unblocked here.
+
+**P9 owner decision (driven by `/pua:p9`, "you are the project owner"):** fan out a 3-P8 sprint across the
+two highest-leverage, file-domain-DISJOINT fronts; each P8 worktree-isolated with a six-element Task Prompt;
+the lead integrates serially via `make compare` (action right ⟂ scoring right):
+- **P8-data-refs** → fix recursive `scripts/carve_data_refs.py` per-object JP sizing (use the next
+  discovered/carved `jp_addr` as the hard bound, resolve overlaps deterministically *before* emit, not via
+  link error) → cascade-carve graphics tables. Domain: `scripts/carve_data_refs.py` + `asm/dat_*_ref.s` +
+  `layout/carved_rom.d/` fragment.
+- **P8-re-codeblob** → hand-decompile `code_8086934` (3 small funcs, JP 0x8086900–0x8086A14). Domain:
+  `src/code_8086934.c` + fragment.
+- **P8-re-stoneshatter** → hand-decompile `eventfx-stoneshatter` (efx region ~0x08055xxx; US funcs
+  `StoneShatterEvent_OnEnd`/`StartStoneShatterAnim`). Domain: `src/eventfx-stoneshatter.c` + fragment.
+
+**Evidence-corrected targeting (red-line 2 = fact-driven):** desk recon mapped TU `code_8086934` →
+`main`/`AgbMain`; live IDA DISPROVED it — JP 0x8086918 is a support-pair lookup (iterates a table, calls
+`BattleIsTriangleAttack`), not AgbMain. The US file `code_8086934.c`'s first function
+(`ApplySepiaToPaletteBuffer`) likewise does NOT match the JP anchor. Targets were re-pinned from the
+decompiler, and the RE Task Prompts warn the P8 to derive JP↔US correspondence from the call-graph, not the
+filename.
+
+**MCP hygiene finding (environment):** 16 orphaned `ida_pro_mcp.idalib_server` workers had leaked (1.4 GB
+RAM) from dead supervisors; one (pid, ppid 1) held the `fe8j.i64` sidecar locks, so every `idb_open`
+returned "Failed to open database". Reaped them (per `reverse-engineering.md` troubleshooting) → fresh
+`idb_open` succeeded. **Two lessons: (1)** the RE IDA MCP leaks worker processes across sessions — a reap
+(or shorter worker idle-TTL) belongs in session-start hygiene; **(2)** `pkill -f 'idalib_server'`
+self-matches its own shell cmdline (the pattern appears in the command string) and kills the script
+mid-run — kill by explicit PID or use a pattern that can't match the invoking shell.
+
+**Rationale:** two unblocked fronts × disjoint domains × worktree isolation → conflict-free parallel
+(D13/D14); the lead is the single serial integrator (the safety property). RE convergence is uncertain
+per-TU ("sessions per carve, not turns"), so a 2-pilot horse-race raises the odds one lands, and each RE
+Task Prompt carries a WIP-fallback deliverable (decompiled C + residual analysis) so even a non-converged
+run compounds. Coordination: both RE P8s share the IDA MCP worker (serializes safely); they must NOT run
+the headless `decompile_addr.py` (exclusive `fe8j.i64` lock → mutual blocking).
+
+**Verification:** in progress — lead integrates accepted branches serially (`scripts/parallel/integrate.py`)
+with the periodic `make clean && make compare` durability gate; pre-sprint baseline confirmed
+`fireemblem8.gba: OK`. Final metrics + 复盘 to be appended.
+
+**Copilot red-team consult (per CLAUDE.md fork discipline, `agency cp --yolo`):** validated + actioned
+mid-flight (relayed to the running P8s via SendMessage):
+- (corr.) `carve_data_refs.py`'s carved-range check reads only the monolith `carved_rom.tsv` and ignores
+  `*.d` fragments → make it fragment-aware (`layout_frag.py read_all`) so the cascade can't re-overlap a
+  fragment another agent wrote. → P8-data-refs.
+- (corr.) carved incbin sections need `sh_addralign==1` or ld pads a non-4-aligned JP base → ROM growth →
+  sha1 fail (even with no `.align`). → P8-data-refs.
+- (sizing) "next jp_addr as hard end" can under-carve when a pointer targets an *interior* symbol/alias;
+  treat boundaries as candidate intervals, merge/split by US symbol extents + pointer ownership. → P8-data-refs.
+- (scope) `eventfx-stoneshatter` isn't pure code (drags proc/data tables + graphics syms); carve
+  `StoneShatterEvent_OnEnd` (pure code) first, expand only if green. → P8-re-stoneshatter.
+- (coord.) IDA MCP is a shared supervisor→worker (safe concurrent); Ghidra `fe8j` is an exclusive lock — RE
+  agents must not hold Ghidra concurrently. IDA stays primary. → both RE P8s.
+- (integration, lead) `gen_layout` dedupes only byte-identical rows → run an overlap/double-def manifest
+  check before each `make compare` during serial integration. → lead's integration step.
+- Kept `code_8086934` as re1 (boundaries IDA-confirmed; counterpart-ID is inherent RE work) over Copilot's
+  bindingblade suggestion — but bindingblade is queued as a wave-2 RE pilot (docs note it "proven").
+
+**Evidence note (wave-2 targeting):** live-IDA scout disproved more desk-recon guesses — the "94 KB code
+gap" 0x080D6588–0x080ED7F4 is actually agbcc/libgcc intrinsics (`__ashldi3`, `_ulp`, `__fixsfsi`) + the
+`msg_data` DATA block ("Not a function" at 0x080E0000+), NOT `events_script`/`classdisplayfont`/`msg` code.
+`AgbMain` is unnamed in the JP DB (needs an entry-vector trace). Remaining region-different code TUs must be
+IDA-located per-TU before assignment, not taken from recon estimates.
+
+**Status:** In flight 2026-06-09.
