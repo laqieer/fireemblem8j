@@ -38,3 +38,13 @@ BG_SetColorBpp:
 SetNextVCount:
 	.incbin "baserom.gba", 0x12B8, 0x14
 
+	.section .text.s_080012D8, "ax", %progbits
+@ SetMainUpdateRoutine region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080012D8..0x080012E4
+	.thumb
+	.align 2, 0
+	.global SetMainUpdateRoutine
+	.thumb_func
+SetMainUpdateRoutine:
+	.incbin "baserom.gba", 0x12D8, 0xC
+

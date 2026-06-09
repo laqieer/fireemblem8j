@@ -1,3 +1,4 @@
 GetTileIndex
 SetBackgroundMapDataOffset
 SetNextVCount
+SetMainUpdateRoutine
