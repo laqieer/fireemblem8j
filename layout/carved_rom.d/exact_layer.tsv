@@ -232,3 +232,4 @@
 0AC094	0AC0B4	src/exact_080ac094.o(.text)	exact_080ac094(run): NormalizeWaterMinimapTerrain
 0AC610	0AC624	src/exact_080ac610.o(.text)	exact_080ac610(run): GetMinimapTerrainCellAt
 07A84C	07A888	src/exact_0807a84c.o(.text)	exact_0807a84c(run): StartMuExt
+07A908	07A948	src/exact_0807a908.o(.text)	exact_0807a908(run): EnableMuCamera, DisableMuCamera, StartUiMu
