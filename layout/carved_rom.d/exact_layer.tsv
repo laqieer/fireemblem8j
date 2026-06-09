@@ -62,3 +62,4 @@
 029108	029150	src/exact_08029108.o(.text)	exact_08029108(run): CanUnitUseLockpickItem
 0294AC	0294C4	src/exact_080294ac.o(.text)	exact_080294ac(run): CanUnitUseFruitItem
 012F50	012F78	src/exact_08012f50.o(.text)	exact_08012f50(run): StringCompare
+012F78	012F94	src/exact_08012f78.o(.text)	exact_08012f78(run): CopyString
