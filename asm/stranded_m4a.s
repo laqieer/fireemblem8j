@@ -158,3 +158,13 @@ m4aMPlayTempoControl:
 m4aMPlayModDepthSet:
 	.incbin "baserom.gba", 0xD6000, 0x74
 
+	.section .text.s_080D6074, "ax", %progbits
+@ m4aMPlayLFOSpeedSet region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D6074..0x080D60E8
+	.thumb
+	.align 2, 0
+	.global m4aMPlayLFOSpeedSet
+	.thumb_func
+m4aMPlayLFOSpeedSet:
+	.incbin "baserom.gba", 0xD6074, 0x74
+

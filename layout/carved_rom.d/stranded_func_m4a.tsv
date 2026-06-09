@@ -14,3 +14,4 @@
 0D59C0	0D5A28	asm/stranded_m4a.o(.text.s_080D59C0)	m4a:CgbModVol region-same Thumb (descriptive incbin)
 0D5E74	0D5E9C	asm/stranded_m4a.o(.text.s_080D5E74)	m4a:m4aMPlayTempoControl region-same Thumb (descriptive incbin)
 0D6000	0D6074	asm/stranded_m4a.o(.text.s_080D6000)	m4a:m4aMPlayModDepthSet region-same Thumb (descriptive incbin)
+0D6074	0D60E8	asm/stranded_m4a.o(.text.s_080D6074)	m4a:m4aMPlayLFOSpeedSet region-same Thumb (descriptive incbin)
