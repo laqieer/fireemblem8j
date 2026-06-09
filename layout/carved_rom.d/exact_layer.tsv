@@ -238,3 +238,4 @@
 07B028	07B06C	src/exact_0807b028.o(.text)	exact_0807b028(run): Mu_OnStateBump, Mu_OnStateUnk4, Mu_OnStateSleeping
 07B950	07B96C	src/exact_0807b950.o(.text)	exact_0807b950(run): SetMuConfig
 07BBE8	07BC18	src/exact_0807bbe8.o(.text)	exact_0807bbe8(run): HideMu, ShowMu, SetMuScreenPosition...
+07BCA0	07BCC4	src/exact_0807bca0.o(.text)	exact_0807bca0(run): MuRestorePalInfo_Apply
