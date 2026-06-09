@@ -198,7 +198,10 @@ def candidates():
 _BR = re.compile(
     r'^\s*(?:bl|blx|b|beq|bne|bcs|bhs|bcc|blo|bmi|bpl|bvs|bvc|bhi|bls|bge|blt|bgt|ble)\s+'
     r'([A-Za-z_]\w*)\s*$')
-_BYTE_SYM = re.compile(r'^\s*\.(?:4byte|word)\s+([A-Za-z_]\w*)\s*$')
+# a `.4byte`/`.word` line, optionally prefixed by a local label (gbadisasm emits
+# literal-pool entries as `_08xxxxxx: .4byte SYM`).
+_BYTE_SYM = re.compile(
+    r'^(\s*(?:_[0-9A-Fa-f]{8}:\s*)?)\.(?:4byte|word)\s+([A-Za-z_]\w*)\s*$')
 _LOCAL = re.compile(r'^_[0-9A-Fa-f]{8}$')
 _SUBADDR = re.compile(r'^sub_0?([0-9A-Fa-f]{6,8})$')
 
@@ -240,24 +243,50 @@ def emit_asm(addr, mode, name, body_lines, smap):
         if m:
             local.add(m.group(1))
 
-    refs, unresolved = {}, 0
+    # Two kinds of external symbol reference need different handling:
+    #  * bl/b SYM (PC-relative branch): resolved at ASSEMBLY via `.set SYM, addr`
+    #    (the absolute value lets the assembler compute the branch offset; this is
+    #    fine because make compare links the section at its real JP VMA).
+    #  * .4byte SYM (a code-pointer literal): generates a LINK-TIME R_ARM_ABS32
+    #    relocation the linker can't resolve (SYM isn't a defined global), so
+    #    instead REWRITE it to a raw `.4byte 0xADDR` absolute constant — byte-
+    #    identical, no relocation, no link dependency.
+    branch_refs, unresolved = {}, 0
+    new_body = []
     for ln in body:
-        m = _BR.match(ln) or _BYTE_SYM.match(ln)
-        if not m:
-            continue
-        sym = m.group(1)
-        if sym == name or sym in local or _LOCAL.match(sym):
-            continue
-        if sym in refs:
-            continue
-        ra = _ref_addr(sym, smap)
-        if ra is None:
-            unresolved += 1
-            continue
-        refs[sym] = ra
+        mb = _BR.match(ln)
+        m4 = _BYTE_SYM.match(ln)
+        if mb:
+            sym = mb.group(1)
+            if not (sym == name or sym in local or _LOCAL.match(sym)):
+                ra = _ref_addr(sym, smap)
+                if ra is None:
+                    unresolved += 1
+                else:
+                    branch_refs[sym] = ra
+            new_body.append(ln)
+        elif m4:
+            prefix, sym = m4.group(1), m4.group(2)
+            if sym == name or sym in local or _LOCAL.match(sym):
+                new_body.append(ln)
+            else:
+                ra = _ref_addr(sym, smap)
+                if ra is None:
+                    unresolved += 1
+                    new_body.append(ln)  # leave as-is; make compare will catch it
+                else:
+                    a, thumb = ra
+                    val = a | 1 if thumb else a
+                    # keep the `_08xxxxxx:` label prefix + name the symbol in a comment
+                    new_body.append(f'{prefix.rstrip()} .4byte 0x{val:08X}  @ {sym}'
+                                    if prefix.strip()
+                                    else f'{prefix}.4byte 0x{val:08X}  @ {sym}')
+        else:
+            new_body.append(ln)
+    body = new_body
 
     L = ['\t.syntax unified']
-    for sym, (a, thumb) in sorted(refs.items()):
+    for sym, (a, thumb) in sorted(branch_refs.items()):
         L.append(f'\t.set {sym}, 0x{a:08X}{" + 1" if thumb else ""}')
     L += [f'\t.section .text.{name}, "ax", %progbits',
           f'@ {name} @ JP 0x{addr:08X} - region-different, gbadisasm descriptive asm (D23)',
