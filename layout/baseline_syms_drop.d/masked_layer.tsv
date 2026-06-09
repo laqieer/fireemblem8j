@@ -125,3 +125,4 @@ ResetGmStoryNode
 PutGMapPIShopIcons
 ApplyGMapPIMinimapUnitPalette
 InitGMapPIInterfaceKind
+gWMNodeIconData

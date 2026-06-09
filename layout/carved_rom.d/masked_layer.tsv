@@ -236,3 +236,4 @@ AAF6D8	AAF6DC	src/masked_080b62bc.o(.data)	masked_080b62bc .data
 0C1DC0	0C1DE8	src/masked_080c1dc0.o(.text)	masked_080c1dc0(run): ResetGmStoryNode
 0C37C4	0C3864	src/masked_080c37c4.o(.text)	masked_080c37c4(run): PutGMapPIShopIcons
 0C3C88	0C3D0C	src/masked_080c3c88.o(.text)	masked_080c3c88(run): InitGMapPIInterfaceKind
+0C0458	0C052C	src/masked_080c0458.o(.text)	masked_080c0458(run): GetNodeAtPosition
