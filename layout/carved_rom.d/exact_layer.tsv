@@ -357,3 +357,4 @@
 0BFDFC	0BFE10	src/exact_080bfdfc.o(.text)	exact_080bfdfc(run): MapUnitC_IsBlendEnabled
 0BFE38	0BFE48	src/exact_080bfe38.o(.text)	exact_080bfe38(run): MapUnitC_GetLayer
 0BFE48	0BFE68	src/exact_080bfe48.o(.text)	exact_080bfe48(run): MapUnitC_SetLayer, MapUnitC_GetFaction
+0BFFB8	0BFFD0	src/exact_080bffb8.o(.text)	exact_080bffb8(run): MapUnitC_GetInitialClass, MapUnitC_GetDisplayedClass
