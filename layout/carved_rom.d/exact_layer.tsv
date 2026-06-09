@@ -122,3 +122,4 @@
 0A9334	0A9348	src/exact_080a9334.o(.text)	exact_080a9334(run): PidStatsSubFavval100
 0A95B0	0A95D4	src/exact_080a95b0.o(.text)	exact_080a95b0(run): GetNewPlaythroughId
 0A95D4	0A964C	src/exact_080a95d4.o(.text)	exact_080a95d4(run): GetGlobalCompletionCntByInfo, GetGlobalCompletionCount, RegisterCompletedPlaythrough
+0A96F8	0A971C	src/exact_080a96f8.o(.text)	exact_080a96f8(run): CheckGameEndFlag
