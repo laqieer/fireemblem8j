@@ -218,3 +218,5 @@ gBmSt	0202BCAC	data	masked_0808e614
 gBmSt	0202BCAC	data	masked_0808e63c
 gBmSt	0202BCAC	data	masked_0808f48c
 TrySetCursorOn	0801D740	thumb	masked_0801d7b0
+GetChapterDivinationTextIdHectorStory	080A2C40	thumb	masked_080a2ce8
+gPlaySt	0202BCEC	data	masked_080a2ce8

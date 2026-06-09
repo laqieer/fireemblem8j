@@ -108,3 +108,4 @@ MuExistsActive
 GetMu
 ClearEventMoveBuffer
 GetCursorQuadrant
+IsTacticianDivinationAvailable
