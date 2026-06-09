@@ -214,3 +214,4 @@
 009EB0	009EC4	src/exact_08009eb0.o(.text)	exact_08009eb0(run): SetNextGameActionId
 009EC4	009ED8	src/exact_08009ec4.o(.text)	exact_08009ec4(run): SetNextChapterId
 009ED8	009EEC	src/exact_08009ed8.o(.text)	exact_08009ed8(run): HasNextChapter
+0BAC88	0BACC8	src/exact_080bac88.o(.text)	exact_080bac88(run): GetGameOverallRank

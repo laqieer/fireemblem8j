@@ -115,3 +115,8 @@ StartBgmVolumeChange	08002680	thumb	exact_08009a28
 GetGameControl	08009EA0	thumb	exact_08009eb0
 GetGameControl	08009EA0	thumb	exact_08009ec4
 GetGameControl	08009EA0	thumb	exact_08009ed8
+GetGameTacticsRank	080BA8F8	thumb	exact_080bac88
+GetGameSurvivalRank	080BA9F0	thumb	exact_080bac88
+GetGameFundsRank	080BAB54	thumb	exact_080bac88
+GetGameExpRank	080BAA28	thumb	exact_080bac88
+GetGameCombatRank	080BAB20	thumb	exact_080bac88
