@@ -196,6 +196,19 @@ to see which slice diverges.
    (`docs/reverse-engineering.md`).
 6. `cluster` on the JP ELF → fold duplicate functions into shared sources.
 
+## Classification run (survey P0.3)
+
+A full cross-version `compare2` + region-same/different classification has been
+run; see **[`coddog-classification.md`](coddog-classification.md)** for the
+numbers, the cross-check vs `layout/us_jp_funcmap.tsv` and the gbadisasm backlog,
+the marginal-value analysis vs funcmap+funclib (D25), and the CI-gate
+recommendation. Artifacts: `reference/maps/coddog_classification.tsv` and the
+re-runnable `scripts/tools/coddog/classify.py`. Headline: of 12 050 JP functions
+coddog can read, 11 054 are region-same; it agrees with the byte-match funcmap
+91.7 % (100 % at a region-same-or-near bar) but **cannot see the 5 934-function
+region-different backlog** (the actual remaining work), so its discovery value
+over funcmap+funclib is low — its use is opt-in re-confirmation, not a CI gate.
+
 ## Status / caveats
 
 - Built and smoke-tested via `setup.sh`; see the PR for `coddog --help` output.
