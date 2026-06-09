@@ -178,3 +178,13 @@ PutBlankText:
 GetTextDrawDest:
 	.incbin "baserom.gba", 0x4120, 0x20
 
+	.section .text.s_080044E0, "ax", %progbits
+@ InitSpriteText region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080044E0..0x08004504
+	.thumb
+	.align 2, 0
+	.global InitSpriteText
+	.thumb_func
+InitSpriteText:
+	.incbin "baserom.gba", 0x44E0, 0x24
+
