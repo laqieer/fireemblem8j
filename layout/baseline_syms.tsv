@@ -15,7 +15,6 @@ gBuildDateTime	080DC110	data	build date/time string (fe3_dummy)
 gYearProjectCreated	080DC12C	data	project-year string (fe3_dummy)
 GetUnit	08019108	thumb	unit-by-id lookup (bmphase)
 gSpellAssocData	08904164	data	spellassoc
-GetItemIndex	08017294	thumb	spellassoc
 gActiveUnit	03004DF0	data	unit_facing
 gWorkingMovementScript	02033EF8	data	unit_facing
 GetFacingDirection	0807DD00	thumb	unit_facing
