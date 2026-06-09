@@ -416,3 +416,4 @@
 04CF78	04CF84	src/exact_0804cf78.o(.text)	exact_0804cf78(run): SioWarpFx_1
 04EB80	04EBCC	src/exact_0804eb80.o(.text)	exact_0804eb80(run): MultiBootSend
 04EBCC	04EBF0	src/exact_0804ebcc.o(.text)	exact_0804ebcc(run): MultiBootStartProbe
+00290C	002938	src/exact_0800290c.o(.text)	exact_0800290c(run): ChangeBgm_StartNewSong
