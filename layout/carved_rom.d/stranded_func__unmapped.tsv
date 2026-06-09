@@ -11,3 +11,4 @@
 030088	030094	asm/stranded__unmapped.o(.text.s_08030088)	_unmapped:BMapVSync_OnEnd region-same Thumb (descriptive incbin)
 030094	0300A0	asm/stranded__unmapped.o(.text.s_08030094)	_unmapped:BMapVSync_OnLoop region-same Thumb (descriptive incbin)
 030940	0309A8	asm/stranded__unmapped.o(.text.s_08030940)	_unmapped:WfxCloudsOffsetGraphicsEffect region-same Thumb (descriptive incbin)
+0D6760	0D67D0	asm/stranded__unmapped.o(.text.s_080D6760)	_unmapped:__muldi3 region-same Thumb (descriptive incbin)
