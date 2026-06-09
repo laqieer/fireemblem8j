@@ -46,3 +46,4 @@ StartLockingFadeFromBlack	08013DD8	thumb	exact_08013eb8
 StartLockingFadeToWhite	08013DF0	thumb	exact_08013ec8
 StartFadeCore	08014150	thumb	exact_08013f60
 StartFadeCore	08014150	thumb	exact_08013f74
+StartFadeCore	08014150	thumb	exact_08013f88
