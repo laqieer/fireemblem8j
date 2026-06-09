@@ -98,3 +98,13 @@ ProcCmd_SET_MARK:
 InitSupportBonuses:
 	.incbin "baserom.gba", 0x28534, 0x10
 
+	.section .text.s_08030088, "ax", %progbits
+@ BMapVSync_OnEnd region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08030088..0x08030094
+	.thumb
+	.align 2, 0
+	.global BMapVSync_OnEnd
+	.thumb_func
+BMapVSync_OnEnd:
+	.incbin "baserom.gba", 0x30088, 0xC
+
