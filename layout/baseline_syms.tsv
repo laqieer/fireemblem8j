@@ -1088,7 +1088,6 @@ GenerateUnitMovementMapExt	0801A09C	thumb	bmcommanddbg
 GetUnitWeaponReachBits	08016F90	thumb	bmcommanddbg
 GenerateUnitStandingReachRange	0801B13C	thumb	bmcommanddbg
 AP_ExecDummyFrame	08009588	thumb	ap
-AP_LoadDefinition	08009564	thumb	ap
 Register2dChrMove	080130AC	thumb	ap
 ProcScr_efxDeadDragonAlpha	085E398C	data	banim-efxdeath
 gEkrbattle_9	0201FADC	data	banim-ekrdispup
