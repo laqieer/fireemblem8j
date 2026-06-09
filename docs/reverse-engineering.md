@@ -48,18 +48,28 @@ for any address not already inside a function it forces Thumb and defines a
 function, so `decompile(<jp_addr>)` works for **any** function in the ROM,
 ported or not.
 
-## Usage (from Claude Code)
+## Usage (from MCP clients)
 
 The server is registered (machine-local) as the MCP server **`ida`**, started as
-`idalib-mcp --stdio tools/ida/fe8j.i64`. It's a *supervisor*: each database lives
-in an idalib worker process that **outlives** the server and self-exits after an
+`idalib-mcp --stdio` with `IDADIR=/home/laqieer/ida-pro-9.3`. Do **not** pass
+`tools/ida/fe8j.i64` on the MCP startup command line. Connect the MCP supervisor
+first, then open the database explicitly with `idb_open`. Each database lives in
+an idalib worker process that **outlives** the server and self-exits after an
 idle TTL (~1h), so repeated sessions are cheap. Useful tools: `decompile`,
-`disasm`, `list_funcs`, `get_function`, `xrefs_to`, `get_bytes`, `rename`,
+`disasm`, `list_funcs`, `func_query`, `xrefs_to`, `get_bytes`, `rename`,
 `set_comments`, plus session tools `idb_open`/`idb_list`.
 
 **Every worker tool needs a `database=<session_id>`.** Get one with
 `idb_open(input_path="…/tools/ida/fe8j.i64", mode="force_headless")` (or
 `idb_list` to reuse an existing session), then pass that `session_id`.
+
+Why startup does not pre-open the `.i64`: `idalib-mcp` is a supervisor, but the
+worker holding the unpacked IDA sidecars (`fe8j.id0`, `fe8j.id1`, `fe8j.nam`,
+etc.) can survive after the stdio MCP process exits. A later MCP launch with
+`idalib-mcp --stdio tools/ida/fe8j.i64` may try to open the same database again
+instead of adopting the worker, then fail with `Failed to open initial binary:
+Failed to open database`. Starting the supervisor without an input path makes MCP
+connect fast and moves database ownership to the explicit `idb_open` step.
 
 **Decompile by address, not name** — some names resolve onto the `0x09000000`
 ROM mirror. JP addresses come from `sym_jp.txt` / `layout/us_jp_funcmap.tsv`.
@@ -115,8 +125,58 @@ curl -sSL https://raw.githubusercontent.com/laqieer/ida_gba_stuff/master/loaders
 
 # 5. Build the DB and register the MCP
 make ida-db
-claude mcp add ida -- ~/ida-mcp-venv/bin/idalib-mcp --stdio ~/fireemblem8j/tools/ida/fe8j.i64
+. scripts/ida/idalib_env.sh
+claude mcp add ida -e IDADIR="$IDADIR" -- "$IDALIB_MCP" --stdio
 ```
+
+For GitHub Copilot CLI, the equivalent persistent config is
+`~/.copilot/mcp-config.json`:
+
+```json
+{
+  "mcpServers": {
+    "ida": {
+      "type": "local",
+      "command": "/home/laqieer/ida-mcp-venv/bin/idalib-mcp",
+      "args": ["--stdio"],
+      "env": {
+        "IDADIR": "/home/laqieer/ida-pro-9.3"
+      },
+      "tools": ["*"],
+      "timeout": 180000
+    }
+  }
+}
+```
+
+### Troubleshooting MCP startup
+
+If `ida` reports "taking longer than expected" or "Failed to connect", first
+check for an orphaned idalib worker holding the FE8J sidecars:
+
+```bash
+ps -eo pid,ppid,etime,stat,args | grep -Ei 'idalib|ida-pro|ida64' | grep -v grep
+fuser tools/ida/fe8j.id0 tools/ida/fe8j.id1 tools/ida/fe8j.nam 2>/dev/null
+```
+
+Terminate only the specific stale PID, then remove stale discovery entries whose
+PID no longer exists:
+
+```bash
+kill <pid>
+# if it refuses to exit:
+kill -9 <pid>
+find ~/.idapro/mcp/instances -name 'instance_*.json' -print | while read -r f; do
+  pid=$(jq -r '.pid // empty' "$f")
+  [ -n "$pid" ] && ps -p "$pid" >/dev/null || rm -f "$f"
+done
+```
+
+Do not delete `tools/ida/fe8j.i64`; it is the reusable packed database. The
+unpacked sidecars are normal while a worker is using the DB. If Ghidra alone says
+"taking longer than expected", that can be normal with `--wait-for-analysis`;
+verify it by listing the cached project binaries and checking that
+`fireemblem8.elf` is `analysis_complete`.
 
 ## Second opinion: Ghidra (open-source cross-check)
 

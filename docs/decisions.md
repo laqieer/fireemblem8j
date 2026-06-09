@@ -237,6 +237,14 @@ a source of truth — `make compare` remains the only authority. Use Hex-Rays as
 (names can resolve onto the 0x09000000 ROM mirror). Rebuild the `.i64` after
 meaningful decomp progress to refresh symbols.
 
+**Operational addendum (2026-06-09):** register `ida` as `idalib-mcp --stdio`
+only, with `IDADIR` set; do **not** pre-open `tools/ida/fe8j.i64` in the MCP
+startup command. Pre-opening made GitHub Copilot CLI time out when an orphaned
+idalib worker from an earlier session still held `fe8j.id0/.id1/.nam`: the new
+supervisor tried to open the same DB and exited with `Failed to open initial
+binary`. Start MCP first, then use `idb_open(.../tools/ida/fe8j.i64,
+mode="force_headless")` and pass the returned session id to worker tools.
+
 **Rejected alternative:** the IDA GUI-plugin MCP (needs a running GUI + the
 WSL↔Windows bridge).
 
