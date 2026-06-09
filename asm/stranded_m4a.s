@@ -68,3 +68,13 @@ m4aSoundMode:
 m4aSoundVSyncOff:
 	.incbin "baserom.gba", 0xD54F8, 0x7C
 
+	.section .text.s_080D5574, "ax", %progbits
+@ m4aSoundVSyncOn region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D5574..0x080D55B0
+	.thumb
+	.align 2, 0
+	.global m4aSoundVSyncOn
+	.thumb_func
+m4aSoundVSyncOn:
+	.incbin "baserom.gba", 0xD5574, 0x3C
+
