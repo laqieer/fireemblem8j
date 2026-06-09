@@ -208,3 +208,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0B3930	0B3984	src/masked_080b3930.o(.text)	masked_080b3930(run): CountDisplayedSoundRoomSongs
 002A08	002A18	src/masked_08002a08.o(.text)	masked_08002a08(run): DeleteAll6CWaitMusicRelated
 08B528	08B54C	src/masked_0808b528.o(.text)	masked_0808b528(run): SetHelpBoxInitPosition
+0B2A38	0B2AC0	src/masked_080b2a38.o(.text)	masked_080b2a38(run): BgAffinScalingHighPrecision, BgAffinAnchoringHighPrecision
