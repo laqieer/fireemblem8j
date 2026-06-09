@@ -144,3 +144,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 07CBF0	07CC4C	src/masked_0807cbf0.o(.text)	masked_0807cbf0(run): MapAnim_AdvanceBattleRound
 082748	0827B4	src/masked_08082748.o(.text)	masked_08082748(run): MapEventcallFx2_HBlankWobble, MapanimEventcall_VsyncWaveLoop
 082EE8	082F18	src/masked_08082ee8.o(.text)	masked_08082ee8(run): DemonKingSummonShake_Init
+07E490	07E4F0	src/masked_0807e490.o(.text)	masked_0807e490(run): ProcMAExpBar_InitDisplay

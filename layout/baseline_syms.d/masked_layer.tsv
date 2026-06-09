@@ -174,3 +174,4 @@ SetFaceEyeControl	080063D8	thumb	masked_080063e0
 gPlaySt	0202BCEC	data	masked_08009e3c
 GetDialogueBoxConfig	0808C834	thumb	masked_0808c840
 gBmSt	0202BCAC	data	masked_08082ee8
+ProcMAExpBar_FrameAdvance	0807E4F0	thumb	masked_0807e490
