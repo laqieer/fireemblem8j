@@ -82,3 +82,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 03460C	034624	src/masked_0803460c.o(.text)	masked_0803460c(run): IsDifficultMode
 0201A4	0201DC	src/masked_080201a4.o(.text)	masked_080201a4(run): ChapterIntro_LightExplosion_Init
 020818	020828	src/masked_08020818.o(.text)	masked_08020818(run): ChapterIntro_InitCameraYPos
+020AB4	020AE0	src/masked_08020ab4.o(.text)	masked_08020ab4(run): ChapterIntro_RevealDecalSprite_Init
