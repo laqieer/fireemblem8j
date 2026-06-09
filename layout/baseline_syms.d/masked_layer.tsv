@@ -250,3 +250,4 @@ StartGmPalFade	080C44A4	thumb	masked_080c456c
 gWorldmapGmap_2	08B1B278	data	masked_080c456c
 gWorldmapGmap_1	08B1B1F8	data	masked_080c456c
 gWMNodeData	081F5D7C	data	masked_080c14b4
+gWMNodeData	081F5D7C	data	masked_080c14ec
