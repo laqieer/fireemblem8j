@@ -82,3 +82,4 @@
 013EB8	013EC8	src/exact_08013eb8.o(.text)	exact_08013eb8(run): StartFastLockingFadeFromBlack
 013EC8	013ED8	src/exact_08013ec8.o(.text)	exact_08013ec8(run): StartSlowLockingFadeToWhite
 013F60	013F74	src/exact_08013f60.o(.text)	exact_08013f60(run): FadeInBlackSpeed08NonLocking
+013F74	013F88	src/exact_08013f74.o(.text)	exact_08013f74(run): FadeInBlackSpeed10NonLocking
