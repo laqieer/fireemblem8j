@@ -132,3 +132,6 @@ gpAi1Table	085D30EC	data	masked_0803c44c
 gAiScript_FallbackAi1	085D2034	data	masked_0803c44c
 gpAi2Table	085D30E0	data	masked_0803c44c
 gAiScript_FallbackAi2	085D2044	data	masked_0803c44c
+gAiState	0203AA00	data	masked_0803c6ac
+gpAi1Table	085D30EC	data	masked_0803c6ac
+gpAi2Table	085D30E0	data	masked_0803c6ac

@@ -14,3 +14,4 @@
 030017D0	iwram	src/masked_0803dff8.o(.bss)	masked_0803dff8 .bss
 030017D0	iwram	src/masked_0803e0a4.o(.bss)	masked_0803e0a4 .bss
 030017C0	iwram	src/masked_0803c44c.o(.bss)	masked_0803c44c .bss
+030017C0	iwram	src/masked_0803c6ac.o(.bss)	masked_0803c6ac .bss

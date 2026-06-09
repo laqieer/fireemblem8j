@@ -97,3 +97,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 03E0A4	03E17C	src/masked_0803e0a4.o(.text)	masked_0803e0a4(run): AiGetDangerScoreComponent, AiGetLowHpScoreComponent, AiComputeCombatScore
 03E1CC	03E20C	src/masked_0803e1cc.o(.text)	masked_0803e1cc(run): AiGetTerrainCombatPositionScoreComponent
 03C44C	03C56C	src/masked_0803c44c.o(.text)	masked_0803c44c(run): AiTryExecScriptA, AiExecFallbackScriptA, AiTryExecScriptB...
+03C6AC	03C7A8	src/masked_0803c6ac.o(.text)	masked_0803c6ac(run): AiScriptCmd_02_ChangeAi, AiScriptCmd_03_Goto
