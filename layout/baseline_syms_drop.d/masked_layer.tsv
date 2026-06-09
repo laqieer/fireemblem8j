@@ -24,3 +24,6 @@ gUiFramePaletteC
 gUiFramePaletteD
 StoreAdjustedCameraPositions
 gBmMapSize
+BattleGenerateBallistaSimulation
+BattleGenerateSimulation
+gBattleStats
