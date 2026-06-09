@@ -142,3 +142,4 @@
 0B8D88	0B8D98	src/exact_080b8d88.o(.text)	exact_080b8d88(run): StartVendorScreen
 0B8D98	0B8DA8	src/exact_080b8d98.o(.text)	exact_080b8d98(run): StartSecretShopScreenOrphaned
 0B8DA8	0B8DB8	src/exact_080b8da8.o(.text)	exact_080b8da8(run): StartSecretShopScreen
+0B8DB8	0B8DC8	src/exact_080b8db8.o(.text)	exact_080b8db8(run): StartArmoryScreen2
