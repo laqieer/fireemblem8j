@@ -26,3 +26,4 @@
 0DA0C0	0DA1A8	asm/stranded__unmapped.o(.text.s_080DA0C0)	_unmapped:_d2b region-same Thumb (descriptive incbin)
 0DA1A8	0DA1F8	asm/stranded__unmapped.o(.text.s_080DA1A8)	_unmapped:_ratio region-same Thumb (descriptive incbin)
 0DA238	0DA25C	asm/stranded__unmapped.o(.text.s_080DA238)	_unmapped:isinf region-same Thumb (descriptive incbin)
+0DA25C	0DA27C	asm/stranded__unmapped.o(.text.s_080DA25C)	_unmapped:isnan region-same Thumb (descriptive incbin)
