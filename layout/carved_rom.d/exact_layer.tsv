@@ -2,3 +2,4 @@
 004F3C	004F48	src/exact_08004f3c.o(.text)	exact_08004f3c(run): AnimDisplay
 009564	009588	src/exact_08009564.o(.text)	exact_08009564(run): AP_LoadDefinition
 054198	0541D0	src/exact_08054198.o(.text)	exact_08054198(run): EfxFarAttack_SetAnimXPositions
+055BC0	055BE0	src/exact_08055bc0.o(.text)	exact_08055bc0(run): DisableEfxWeaponIcon, EnableEfxWeaponIcon
