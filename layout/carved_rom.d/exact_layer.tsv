@@ -328,3 +328,4 @@
 0B24C4	0B24DC	src/exact_080b24c4.o(.text)	exact_080b24c4(run): SysBrownBox_Init
 0B2F54	0B2F94	src/exact_080b2f54.o(.text)	exact_080b2f54(run): BmBgfx_Init
 0B33B4	0B33E0	src/exact_080b33b4.o(.text)	exact_080b33b4(run): MixPalette_Loop
+0CA1E8	0CA1F8	src/exact_080ca1e8.o(.text)	exact_080ca1e8(run): DrawTitleSprites_Init
