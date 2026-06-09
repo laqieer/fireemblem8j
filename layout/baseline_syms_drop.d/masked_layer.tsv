@@ -74,3 +74,4 @@ gSupportTalkList
 EndFaceById
 SetFaceDisplayBits
 SetFaceDisplayBitsById
+SetFaceBlinkControl

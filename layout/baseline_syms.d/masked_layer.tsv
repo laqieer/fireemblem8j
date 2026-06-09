@@ -169,3 +169,4 @@ gPidList_SethLArachelMyrrhInnes	08A5F798	data	masked_08086acc
 gActionData	0203A954	data	masked_08010ad0
 EndFace	08005640	thumb	masked_08005660
 SetFaceDisplayBits	08005678	thumb	masked_08005694
+SetFaceBlinkControl	0800633C	thumb	masked_0800635c

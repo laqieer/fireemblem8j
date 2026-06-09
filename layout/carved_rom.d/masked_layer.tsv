@@ -135,3 +135,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 005660	005678	src/masked_08005660.o(.text)	masked_08005660(run): EndFaceById
 005694	0056AC	src/masked_08005694.o(.text)	masked_08005694(run): SetFaceDisplayBitsById
 005B28	005BA8	src/masked_08005b28.o(.text)	masked_08005b28(run): ShouldFaceBeRaised
+00635C	006374	src/masked_0800635c.o(.text)	masked_0800635c(run): SetFaceBlinkControlById
