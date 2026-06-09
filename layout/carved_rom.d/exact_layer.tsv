@@ -284,3 +284,4 @@
 0AD294	0AD2D0	src/exact_080ad294.o(.text)	exact_080ad294(run): SaveMenuGetBitfileByMask
 0AD2D0	0AD2F8	src/exact_080ad2d0.o(.text)	exact_080ad2d0(run): BitfileToIndex
 0AE0E4	0AE0F0	src/exact_080ae0e4.o(.text)	exact_080ae0e4(run): _ExecSaveMenuMiscOption
+0AE0F0	0AE100	src/exact_080ae0f0.o(.text)	exact_080ae0f0(run): SaveMenuRegisterSlotSelected
