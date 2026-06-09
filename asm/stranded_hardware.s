@@ -18,3 +18,13 @@ GetTileIndex:
 SetBackgroundMapDataOffset:
 	.incbin "baserom.gba", 0xFB4, 0x48
 
+	.section .text.s_0800101C, "ax", %progbits
+@ BG_SetColorBpp region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x0800101C..0x08001044
+	.thumb
+	.align 2, 0
+	.global BG_SetColorBpp
+	.thumb_func
+BG_SetColorBpp:
+	.incbin "baserom.gba", 0x101C, 0x28
+
