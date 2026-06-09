@@ -104,3 +104,4 @@
 0149EC	014A3C	src/exact_080149ec.o(.text)	exact_080149ec(run): VramCopyInRaw, PutTmLinear
 014A3C	014AA0	src/exact_08014a3c.o(.text)	exact_08014a3c(run): GetTmOffsetById
 014C08	014C7C	src/exact_08014c08.o(.text)	exact_08014c08(run): DarkenPalette, MemCpy
+014F78	014FC4	src/exact_08014f78.o(.text)	exact_08014f78(run): VecMulMat
