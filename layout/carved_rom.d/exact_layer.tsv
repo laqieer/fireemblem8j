@@ -209,3 +209,4 @@
 005ED8	005EE4	src/exact_08005ed8.o(.text)	exact_08005ed8(run): FaceMouth_Init
 00633C	00635C	src/exact_0800633c.o(.text)	exact_0800633c(run): SetFaceBlinkControl
 0099BC	0099D4	src/exact_080099bc.o(.text)	exact_080099bc(run): EndProcIfNotMarkedB
+009A0C	009A28	src/exact_08009a0c.o(.text)	exact_08009a0c(run): GameControl_StartMainTheme
