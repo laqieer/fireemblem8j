@@ -108,3 +108,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 041010	041044	src/masked_08041010.o(.text)	masked_08041010(run): AiUpdateNoMoveFlag
 0052AC	005360	src/masked_080052ac.o(.text)	masked_080052ac(run): ClearSprites, PutSprite, PutSpriteExt
 00D2D0	00D308	src/masked_0800d2d0.o(.text)	masked_0800d2d0(run): EnqueueEventCall
+00D308	00D340	src/masked_0800d308.o(.text)	masked_0800d308(run): CallNextQueuedEvent

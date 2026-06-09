@@ -142,3 +142,4 @@ gWorkingTerrainMoveCosts	03004B50	data	masked_08040d4c
 gAiState	0203AA00	data	masked_08041010
 gSpriteAllocIt	03004910	data	masked_080052ac
 gEventCallQueue	03000430	data	masked_0800d2d0
+gEventCallQueue	03000430	data	masked_0800d308
