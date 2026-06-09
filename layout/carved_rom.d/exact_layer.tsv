@@ -216,3 +216,4 @@
 009ED8	009EEC	src/exact_08009ed8.o(.text)	exact_08009ed8(run): HasNextChapter
 0BAC88	0BACC8	src/exact_080bac88.o(.text)	exact_080bac88(run): GetGameOverallRank
 08CAC0	08CB48	src/exact_0808cac0.o(.text)	exact_0808cac0(run): ApplyBoxDialoguePosition
+08CB48	08CB8C	src/exact_0808cb48.o(.text)	exact_0808cb48(run): SetBoxDialogueSize, BoxDialogue_OnInit
