@@ -43,3 +43,4 @@ IsChapterBelongCurGame
 PidStatsGetTotalBattleAmt
 PidStatsGetTotalWinAmt
 RegisterCompletedPlaythrough
+IsSramWorking

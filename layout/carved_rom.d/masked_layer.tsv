@@ -64,3 +64,4 @@
 0A8E48	0A8E8C	src/masked_080a8e48.o(.text)	masked_080a8e48(run): IsChapterBelongCurGame
 0A9348	0A93BC	src/masked_080a9348.o(.text)	masked_080a9348(run): PidStatsGetTotalBattleAmt, PidStatsGetTotalWinAmt, PidStatsGetTotalLossAmt
 0A9658	0A96F8	src/masked_080a9658.o(.text)	masked_080a9658(run): SavePlayThroughData
+0A76F4	0A7704	src/masked_080a76f4.o(.text)	masked_080a76f4(run): IsSramWorking
