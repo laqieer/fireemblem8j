@@ -288,3 +288,4 @@
 0AF270	0AF28C	src/exact_080af270.o(.text)	exact_080af270(run): SaveMenuCopyPalette
 04CACC	04CADC	src/exact_0804cacc.o(.text)	exact_0804cacc(run): Sio_StartBoxTransitionOpenDefault
 04CC28	04CC38	src/exact_0804cc28.o(.text)	exact_0804cc28(run): Sio_StartBoxTransitionCloseDefault
+04B87C	04B89C	src/exact_0804b87c.o(.text)	exact_0804b87c(run): LABattleMap_IsAttackOrSurrenderMsg
