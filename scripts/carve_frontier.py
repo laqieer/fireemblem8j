@@ -135,6 +135,20 @@ SUBSYS = {
         "region_start": 0x0877BBB8,
         "region_end": 0x087961E8,
     },
+    # Ending-credits CG blob (ending_credits.c; code ported, gEndingCredits_0[] data
+    # still in baseline). The region [0x08B27970, 0x08B3B3D4) holds the compressed CG
+    # images + TSA + palettes that EndingCredits_LoadCG Decompress()es; they are
+    # indexed by CreditsCG structs that live OUTSIDE the region (in the gEndingCredits_0
+    # table), so no pointer array sits in the window for per-asset tiling. It is bounded
+    # exactly by two named/carved objects: dat_anim_worldmap_skirmish ends at the start
+    # and ProcScr_EndingCredits_BlendCGMaybe (0x08B3B3D4) begins at the end. 1.1% 0xFF
+    # (max FF-run 6 = no padding) — a single byte-perfect blob under one descriptive
+    # symbol. `blob` mode: one incbin for the whole uncarved window.
+    "ending_cg": {
+        "blob": True,
+        "region_start": 0x08B27970,
+        "region_end": 0x08B3B3D4,
+    },
 }
 
 
@@ -202,7 +216,11 @@ def carve(name):
 
     # --- derive asset start addresses ------------------------------------------
     starts = set()
-    if cfg.get("frame_arrays"):
+    if cfg.get("blob"):
+        # one identified-but-not-finely-tileable region bounded by carved/named objects:
+        # the single window start is the only boundary; the body is one byte-perfect blob.
+        starts = {cfg["region_start"]}
+    elif cfg.get("frame_arrays"):
         slo, shi = cfg["array_scan"]
         starts = frame_array_starts(rom, slo, shi, cfg["region_start"], region_end)
     else:
@@ -311,7 +329,10 @@ def carve(name):
         print(f"{name}: nothing left to carve (region fully covered already)")
         return
 
-    if cfg.get("frame_arrays"):
+    if cfg.get("blob"):
+        src = ("the bracketing carved/named objects (single identified blob; per-asset\n"
+               "@ tiling N/A - the index structs live outside the window)")
+    elif cfg.get("frame_arrays"):
         src = (f"the JP frame pointer arrays scanned in "
                f"[{cfg['array_scan'][0]:#010x}, {cfg['array_scan'][1]:#010x})")
     else:
