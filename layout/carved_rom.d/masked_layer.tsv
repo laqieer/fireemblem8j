@@ -11,3 +11,4 @@
 051624	051674	src/masked_08051624.o(.text)	masked_08051624(run): ekrBattle_4
 0517EC	05183C	src/masked_080517ec.o(.text)	masked_080517ec(run): ekrBattle_6
 059748	05976C	src/masked_08059748.o(.text)	masked_08059748(run): CheckBattleHasHit
+05976C	059790	src/masked_0805976c.o(.text)	masked_0805976c(run): GetBanimSheetSelectByte
