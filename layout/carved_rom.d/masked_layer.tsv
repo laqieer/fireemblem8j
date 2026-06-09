@@ -20,3 +20,4 @@
 0797E0	079808	src/masked_080797e0.o(.text)	masked_080797e0(run): EkrdragonDemonking_Init
 07A3C0	07A3EC	src/masked_0807a3c0.o(.text)	masked_0807a3c0(run): EkrDemonkingObj_SetTilePixel
 07A598	07A5C0	src/masked_0807a598.o(.text)	masked_0807a598(run): EfxSelfThunderBGOnInit
+072168	0721A8	src/masked_08072168.o(.text)	masked_08072168(run): EkrDragonTmCpyWithDistance
