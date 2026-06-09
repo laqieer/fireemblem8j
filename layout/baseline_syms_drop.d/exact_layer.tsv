@@ -103,3 +103,6 @@ EkrUnitMainMini_UpdateAnim
 DrawBattleForecastContents
 GetBattleForecastPanelSide
 SetPalFadeStClkEnd3
+ArchiveCurrentPalettes
+SetPalFadeStClkEnd1
+SetPalFadeStClkEnd2

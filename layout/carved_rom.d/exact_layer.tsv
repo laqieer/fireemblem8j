@@ -389,3 +389,4 @@
 05B7F0	05B80C	src/exact_0805b7f0.o(.text)	exact_0805b7f0(run): EkrUnitMainMiniMain
 0371C8	03720C	src/exact_080371c8.o(.text)	exact_080371c8(run): BattleForecast_OnNewBattle
 01354C	013560	src/exact_0801354c.o(.text)	exact_0801354c(run): SetPalFadeStClkEnd3
+01358C	013608	src/exact_0801358c.o(.text)	exact_0801358c(run): ArchiveCurrentPalettes, ArchivePalette
