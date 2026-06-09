@@ -59,3 +59,4 @@
 023D5C	023D70	src/masked_08023d5c.o(.text)	masked_08023d5c(run): SupportSelection_OnSelect
 023E94	023EAC	src/masked_08023e94.o(.text)	masked_08023e94(run): PickSelection_OnSelect
 0248FC	024930	src/masked_080248fc.o(.text)	masked_080248fc(run): ExitCommandUsability
+0328EC	03290C	src/masked_080328ec.o(.text)	masked_080328ec(run): BATTLE_HandleArenaDeathsMaybe
