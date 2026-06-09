@@ -82,3 +82,4 @@ GetUnitSupporterUnit	08028188	thumb	masked_08028544
 GetUnitSupportLevel	080281D0	thumb	masked_08028544
 ApplyAffinitySupportBonuses	080284E4	thumb	masked_08028544
 gBmSt	0202BCAC	data	masked_08028544
+gPlaySt	0202BCEC	data	masked_080a8e48

@@ -61,3 +61,4 @@
 0248FC	024930	src/masked_080248fc.o(.text)	masked_080248fc(run): ExitCommandUsability
 0328EC	03290C	src/masked_080328ec.o(.text)	masked_080328ec(run): BATTLE_HandleArenaDeathsMaybe
 028544	028650	src/masked_08028544.o(.text)	masked_08028544(run): GetUnitSupportBonuses
+0A8E48	0A8E8C	src/masked_080a8e48.o(.text)	masked_080a8e48(run): IsChapterBelongCurGame

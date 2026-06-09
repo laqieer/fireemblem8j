@@ -39,3 +39,4 @@ ForceScreenToBlack
 gBmMapMovement
 gBmMapRange
 GetUnitSupportLevel
+IsChapterBelongCurGame
