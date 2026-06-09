@@ -73,3 +73,4 @@
 013560	01357C	src/exact_08013560.o(.text)	exact_08013560(run): GetPalFadeStClkEnd1, GetPalFadeStClkEnd2
 01357C	01358C	src/exact_0801357c.o(.text)	exact_0801357c(run): GetPalFadeStClkEnd3
 013918	013928	src/exact_08013918.o(.text)	exact_08013918(run): SpacialSeTest_OnInit
+013B7C	013B94	src/exact_08013b7c.o(.text)	exact_08013b7c(run): SetAllBlackPals
