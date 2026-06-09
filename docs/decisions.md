@@ -538,3 +538,30 @@ claim collision-freedom/ownership, and that a worktree build never mutates the m
 **Status:** Phases 0–4 complete. The remaining carve-script migration to fragments (Phase 1.3) is an
 incremental follow-up — gen_layout reads monolith + fragments, so existing monolith carvers and new
 fragment carves coexist; parallel work uses `layout_frag.py` today.
+
+## D15 — Curate external US↔JP maps (FEBuilderGBA ROM defs + RAM map) as reference data (2026-06-09)
+
+**Context:** `layout/addr_map.tsv` only covers addresses referenced by located functions' literal pools,
+so unreferenced table bases (esp. ROM-tail assets) are missing. Two external sources fill that gap:
+FEBuilderGBA's per-version ROM definitions (`ROMFE8{JP,U}.cs`, GPL-3.0; identical field names → join by
+name) and the US decomp's named RAM symbols.
+
+**Decision:** harvest a curated `reference/maps/` set (issue #32, PRs #33/#34/#35) — **reference data, NOT
+build inputs** (nothing reads it from the build, so `make compare` is unaffected): the FEBuilder ROM map
+(`febuilder_rom_us_jp.tsv`, 302 rows), the 9 resolved dynamic `FindROMPointer` pointers
+(`febuilder_dynamic.tsv`), and a US↔JP RAM map (`ram_us_jp.tsv`, 698 rows). See `reference/README.md`.
+
+**Correctness discipline (the plan was Copilot-reviewed; review caught real data bugs, all fixed):**
+- Strict value classifier — never blindly `+0x08000000`; skip non-address constants/counts/offsets/sentinels
+  (review caught count/offset values wrongly promoted to VMAs).
+- `region` is **byte-evidence-based**, never `us==jp`.
+- RAM is **not** identical US↔JP — use real JP/US pairs; no-evidence rows are `jp_addr=-`/`unverified`
+  (review caught fabricated `jp==us` rows + cross-region bogus relocations).
+- Crosswalk emits `exact_symbol` + `nearest_symbol+off` (data rarely has an exact symbol).
+- **No GPL text copied** — only `ROMFE8{JP,U}.cs:<line>` source refs + own descriptions; `reference/README.md`
+  attributes FEBuilderGBA (GPL-3.0). Addresses are facts (not copyrightable).
+
+**Value:** 291/302 (96%) of the FEBuilder ROM addresses are NEW vs `addr_map`.
+
+**Status:** Done (reference data on main). Wiring select entries into `baseline_syms.d/`/`addr_map` is a
+deliberate, validated, per-symbol follow-up — not done here.
