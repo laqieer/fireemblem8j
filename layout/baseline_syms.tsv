@@ -484,7 +484,6 @@ SpellFx_RegisterBgPal	080567E0	thumb	banim-efxmagic-demonlight
 EfxTmCpyBgHFlip	080733E8	thumb	banim-efxmagic-excalibur
 gEkrTsaBuffer	02019790	data	banim-efxmagic-excalibur
 gBG1TilemapBuffer	020234A8	data	banim-efxmagic-excalibur
-EfxTmCpyBG	080733B8	thumb	banim-efxmagic-excalibur
 EfxChapterMapFadeOUT	08073B80	thumb	banim-efxmagic-gleipnir
 gBanimBG	0203E0FA	data	banim-efxmagic-gleipnir
 PutBanimBgPAL	08077EE8	thumb	banim-efxmagic-gleipnir
