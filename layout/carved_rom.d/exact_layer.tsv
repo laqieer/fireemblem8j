@@ -54,3 +54,4 @@
 0D3964	0D39AC	src/exact_080d3964.o(.text)	exact_080d3964(run): SetGuidePanelTilemapPalette
 0168D0	016934	src/exact_080168d0.o(.text)	exact_080168d0(run): GetUnitEquippedWeapon, GetUnitEquippedWeaponSlot
 016968	016994	src/exact_08016968.o(.text)	exact_08016968(run): EquipUnitItemSlot
+016B04	016B3C	src/exact_08016b04.o(.text)	exact_08016b04(run): GetWeaponLevelFromExp
