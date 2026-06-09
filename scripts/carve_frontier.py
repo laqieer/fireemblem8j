@@ -149,6 +149,19 @@ SUBSYS = {
         "region_start": 0x08B27970,
         "region_end": 0x08B3B3D4,
     },
+    # JP font-group / UI graphics block (fontgrp.c region; region-different — the JP
+    # font system carries extra glyph/UI data the US color-lookup-table layout lacks).
+    #   [0x0859D4FC, 0x085B8CDC) is fully uncarved, bounded by dat_gFontgrp_233_ref (end)
+    #   and gObject_64x64 (0x085B8CF4-ish, the next named object). The data is sparse
+    #   4bpp-style graphics (45% transparent 0x00 pixels, max same-byte run 66 = NOT a
+    #   zero-fill gap; 0xFF only 4.7%, max FF-run 2). No internal pointer array sits in
+    #   the window for per-asset tiling (only a single forward header word), so it is one
+    #   byte-perfect blob under one descriptive symbol.
+    "fontgrp_ui": {
+        "blob": True,
+        "region_start": 0x0859D4FC,
+        "region_end": 0x085B8CDC,
+    },
 }
 
 
