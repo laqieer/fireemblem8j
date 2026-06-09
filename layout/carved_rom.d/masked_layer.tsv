@@ -215,3 +215,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0B62BC	0B62EC	src/masked_080b62bc.o(.text)	masked_080b62bc(run): GetConfigUnk32DifficultyAdjusted
 AAF6D8	AAF6DC	src/masked_080b62bc.o(.data)	masked_080b62bc .data
 086E0C	086E2C	src/masked_08086e0c.o(.text)	masked_08086e0c(run): Debug_CondAButtonNotPressed
+086E38	086E58	src/masked_08086e38.o(.text)	masked_08086e38(run): Debug_CondAButtonPressed
