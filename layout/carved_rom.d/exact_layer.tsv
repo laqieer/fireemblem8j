@@ -323,3 +323,4 @@
 08A438	08A450	src/exact_0808a438.o(.text)	exact_0808a438(run): PageNumCtrl_OnInit
 08AFC8	08AFF0	src/exact_0808afc8.o(.text)	exact_0808afc8(run): HelpBox_OnLoop
 0B18DC	0B18F4	src/exact_080b18dc.o(.text)	exact_080b18dc(run): SysBlackBox_Init
+0B1ED4	0B1EDC	src/exact_080b1ed4.o(.text)	exact_080b1ed4(run): SysHandCursor_Init
