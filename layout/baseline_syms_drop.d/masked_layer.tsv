@@ -69,3 +69,5 @@ AiGetClassRank
 PutSprite
 PutSpriteExt
 CheckPermanentFlag
+GetSupportTalkEntry
+gSupportTalkList

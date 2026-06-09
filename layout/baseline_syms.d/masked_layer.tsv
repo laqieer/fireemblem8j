@@ -162,3 +162,4 @@ CheckPermanentFlagFrom	0808605C	thumb	masked_08086094
 gPermanentFlagBits	03005240	data	masked_08086094
 gPlaySt	0202BCEC	data	masked_0808615c
 gActiveEventRegistry	03001C78	data	masked_08086884
+gSupportTalkList	08A5F230	data	masked_08086a14

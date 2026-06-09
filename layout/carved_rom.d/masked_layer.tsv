@@ -123,3 +123,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 086094	0860A8	src/masked_08086094.o(.text)	masked_08086094(run): CheckPermanentFlag
 08615C	08618C	src/masked_0808615c.o(.text)	masked_0808615c(run): CheckTutorialEvent
 086884	0868B0	src/masked_08086884.o(.text)	masked_08086884(run): RegisterEventActivation
+086A14	086A58	src/masked_08086a14.o(.text)	masked_08086a14(run): GetSupportTalkEntry
