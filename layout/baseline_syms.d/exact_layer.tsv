@@ -145,3 +145,4 @@ ParsePrepMenuDescTexts	08097E44	thumb	exact_08097eb8
 DrawPrepMenuDescTexts	08097E74	thumb	exact_08097eb8
 gPrepscreen_2	02012F56	data	exact_08099ad0
 PrepScreenProc_StartMapMenu	08033558	thumb	exact_080333cc
+PrepGetLatestCharId	08097674	thumb	exact_08097988

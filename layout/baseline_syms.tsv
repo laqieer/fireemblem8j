@@ -934,7 +934,6 @@ gOamAffinePutId	030030CC	data	animedrv
 gOamAffinePutIt	030040F8	data	animedrv
 gOamHiPutIt	030036E4	data	animedrv
 gOam	030030E0	data	animedrv
-PrepGetLatestUnitIndex	08097988	thumb	prep_unitselect
 SetStatScreenConfig	080890A0	thumb	prep_unitselect
 GetUnitFromPrepList	08097634	thumb	prep_unitselect
 StartStatScreen	0808ABD8	thumb	prep_unitselect
