@@ -208,3 +208,13 @@ memmove:
 _Bfree:
 	.incbin "baserom.gba", 0xD99C0, 0x18
 
+	.section .text.s_080D9AF4, "ax", %progbits
+@ _hi0bits region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D9AF4..0x080D9B4C
+	.thumb
+	.align 2, 0
+	.global _hi0bits
+	.thumb_func
+_hi0bits:
+	.incbin "baserom.gba", 0xD9AF4, 0x58
+
