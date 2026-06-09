@@ -75,6 +75,9 @@ src/nonmatching/*.s
 # scripts/tools/m2c/setup.sh). The wrapper scripts under scripts/tools/m2c/
 # and docs/tools/m2c.md are tracked.
 /tools/m2c
+# The m2c context file is GENERATED (scripts/tools/m2c/gen_ctx.py from
+# include/global.h); the generator is committed, the large flattened ctx is not.
+fe8j_ctx.c
 
 # Claude Code: share settings.json + loop_prompt.md, but keep local/transient
 # state out (per-user overrides and the ralph-loop session-state file).

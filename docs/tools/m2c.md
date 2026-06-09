@@ -137,6 +137,114 @@ just relink US source), use m2c to bootstrap the JP version:
 > Note: `fireemblem8.elf` is a build artifact (gitignored). Build it first
 > (`make`) so the objdump step has an ELF to read.
 
+## First-pass pipeline (P0.4): asm → readable NON_MATCHING C, automated
+
+The manual workflow above is now wrapped as the **default first pass** over the
+gbadisasm-carved region-different front (D24) — turning each carved `asm/<fn>.s`
+into a readable C first-draft that lands in the D26 staging tier
+`src/nonmatching/<fn>.c` (NON-oracle; compiled only by `make nonmatching`),
+named/typed from the funclib US correspondence (D25).
+
+```
+scripts/m2c_firstpass.py --list            # candidate backlog (carved asm + funclib name)
+scripts/m2c_firstpass.py --batch N         # process the next N candidates
+scripts/m2c_firstpass.py <fn> [<fn> ...]   # explicit asm function basenames
+scripts/m2c_firstpass.py --batch N --dry-run   # report the yield without writing
+```
+
+**What it does per function** (`scripts/m2c_firstpass.py`):
+
+1. **Pick the name.** Reads the carved asm's `@ JP 0x…` banner, looks the JP
+   address up in `reference/maps/funclib_us_jp.tsv`, and takes
+   `us_name_current`. Candidates are `asm/<fn>.s` that also have a funclib name;
+   `new-hint` rows (the region-different queue) come first, then
+   `funcmap-agree`; `funcmap-disagree` (the quarantined ~0.6%) is skipped.
+2. **Clean the asm for m2c.** Drops the de-symbolization `.set SYM, 0xADDR`
+   lines and the `_08xxxxxx: .4byte …` literal-pool definitions. m2c's
+   `MagicFuncPattern` rejects absolute `bl` targets, and per **D24** m2c can't
+   resolve PC-relative literal pools anyway — they degrade to `extern`
+   placeholders, which is the expected SEED behavior.
+3. **Run m2c** (`--target gba`, arch arm) **with the project ctx** and
+   `--valid-syntax --allman`. `--valid-syntax` is load-bearing: it emits the
+   `M2C_UNK` / `M2C_FIELD` macros (from `tools/m2c/m2c_macros.h`) for unknown
+   types and untyped field access, instead of `?` and `p->unkN` (which agbcc
+   `-Werror` rejects on a `void *`). A small M2C-macro prelude is prepended to
+   each file so the seed compiles.
+4. **Light auto-fixups:** rename the m2c function (asm label → funclib name);
+   if a *real* header prototype already declares that name, coerce the
+   definition's return type to the header's (else agbcc errors `conflicting
+   types`); stub any `subroutine_argN` placeholder the body references.
+5. **Prepend** `#include "global.h"` + a NON_MATCHING banner.
+6. **Verify it compiles** via the exact `make nonmatching` recipe
+   (`cpp|iconv|agbcc|as` → `.o`, compile-only, never links). **If it won't
+   compile after the auto-fixups, the function is SKIPPED and logged** — the
+   script never writes a staging `.c` that breaks `make nonmatching`.
+
+### The context file (`gen_ctx.py`)
+
+m2c needs struct/type/prototype context to emit typed args/fields. The m2ctx
+generator `scripts/tools/m2c/gen_ctx.py` preprocesses `include/global.h` (which
+aggregates the whole project's `types.h` / `variables.h` / `functions.h`) with
+the **build's** CPPFLAGS, neutralizing the agbcc/GCC attribute syntax
+(`__attribute__`, `__asm__`, …) that m2c's vendored pycparser can't parse —
+*for the ctx only*; the oracle build never sees this file. The flattened ctx
+(`tools/m2c/fe8j_ctx.c`, ~2.5 k lines) is a **gitignored build artifact**;
+the **generator is committed**, so it is always regenerable. `m2c_firstpass.py`
+regenerates it automatically if missing.
+
+### Pilot yield (calibration)
+
+Running the pilot over the first region-different candidates that have both a
+committed `asm/<fn>.s` and a funclib `new-hint` name:
+
+| metric | value |
+|---|---|
+| candidates (carved asm + funclib name) | **353** |
+| pilot attempted | **12** |
+| compiled & landed in `src/nonmatching/` | **11** |
+| **yield** | **~91%** (11/12) |
+
+Landed (funclib-named): `CallARM_FillTileRect`, `__div0`, `PrintProcessName`,
+`AgbMain`, `GetGameClock`, `SetGameTime`, `CopyToPaletteBuffer`,
+`FlushBackgrounds`, `BG_Fill`, `RegisterBlankTile`, `SetInterrupt_LCDVBlank`.
+Skipped: `SetInterrupt_LCDVCountMatch` (`sub_800125C`) — agbcc `-Werror` on a
+`cast from pointer to integer of different size` in the unresolved-literal seed.
+
+**Interpretation.** The asm→C first pass is **highly mechanical (~9 in 10
+compile with only the automated fixups)**. The residual ~10% fail on genuine
+seed-quality issues an automated pass can't safely paper over: pointer/integer
+size-cast warnings and `pointer from integer without a cast`, both rooted in the
+**D24** unresolved-literal-pool limitation (m2c types the `_08xxxxxx` literals as
+plain `s32` and the body then mixes them with pointers). Those are exactly the
+functions a human should hand-seed.
+
+### Hand-clean burden (what a SEED still needs)
+
+A landed seed **compiles and is readable**, but is **not** finished C:
+
+- `_08xxxxxx` literal-pool symbols are `extern` placeholders (D24) — the human
+  resolves each to the real global it points at.
+- `M2C_UNK` / `M2C_FIELD(...)` macros mark unknown types / offset-based field
+  access — replace with the real struct types from the headers.
+- `subroutine_argN` stubs mark call arguments m2c couldn't analyze — supply the
+  real argument.
+- Function signatures are m2c's inference (return type already reconciled with
+  the header prototype when one exists; parameter types are best-effort).
+
+The seed's purpose is to **bootstrap** the readable body and feed the permuter,
+not to be final source — see the graduation path in `docs/nonmatching.md`.
+
+### Scaling next steps
+
+- The pipeline is verify-or-skip per function, so `--batch N` runs unattended
+  over the 353-candidate backlog (and grows as more `asm/<fn>.s` are carved).
+- The dominant skip cause (literal-pool typing) is the same **D24** gap the
+  permuter/funclib-port step closes; pairing the seed with the named US source
+  (D25) is the strongest hand-clean accelerant.
+- The oracle is **never** touched: `src/nonmatching/*.o ∉ ALL_OBJECTS` and the
+  ldscript has no `*(.text)` catch-all (two structural locks, D26), so scaling
+  the staging tier can never regress `make compare`.
+
 ## Worked example (bundled agbcc/Thumb test)
 
 Input — `tools/m2c/tests/end_to_end/store-casts/agbcc-o2.s` (real Thumb from
