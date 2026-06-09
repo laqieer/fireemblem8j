@@ -26,3 +26,4 @@
 030018F8	iwram	src/masked_0807bfa4.o(.bss)	masked_0807bfa4 .bss
 0203E878	ewram	src/masked_080975cc.o(ewram_data)	masked_080975cc ewram_data
 0203EF60	ewram	src/masked_080af1e0.o(ewram_data)	masked_080af1e0 ewram_data
+030017D8	iwram	src/masked_08041ce8.o(.bss)	masked_08041ce8 .bss

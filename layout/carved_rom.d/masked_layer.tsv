@@ -195,3 +195,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 04A540	04A584	src/masked_0804a540.o(.text)	masked_0804a540(run): LinkArenaBattleMap_CountTeamUnits
 04A5C8	04A624	src/masked_0804a5c8.o(.text)	masked_0804a5c8(run): LinkArenaBattleMap_InitConfig
 04C3A4	04C3C4	src/masked_0804c3a4.o(.text)	masked_0804c3a4(run): LAUnitDeaths_Init
+041CE8	041D0C	src/masked_08041ce8.o(.text)	masked_08041ce8(run): SioHandleIrq_Timer3
