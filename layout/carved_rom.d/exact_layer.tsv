@@ -179,3 +179,4 @@
 0D2348	0D2358	src/exact_080d2348.o(.text)	exact_080d2348(run): PromoMain_SetupTraineeEvent
 0D1184	0D11B4	src/exact_080d1184.o(.text)	exact_080d1184(run): MakePromotionScreen
 03EB80	03EBA8	src/exact_0803eb80.o(.text)	exact_0803eb80(run): AiEquipBestConsideringDanger
+03EBE4	03EC28	src/exact_0803ebe4.o(.text)	exact_0803ebe4(run): AiIsWithinFlyingDistance
