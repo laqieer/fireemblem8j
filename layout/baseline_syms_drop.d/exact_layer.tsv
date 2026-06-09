@@ -116,3 +116,4 @@ LoadBonusContentData
 SaveNewRankData
 SaveRankings
 TradeMenu_RefreshSelectableCells
+TradeMenu_GetAdjustedRow
