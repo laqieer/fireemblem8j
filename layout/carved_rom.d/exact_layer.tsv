@@ -52,3 +52,4 @@
 031924	031944	src/exact_08031924.o(.text)	exact_08031924(run): IsWeaponMagic
 0396E0	039708	src/exact_080396e0.o(.text)	exact_080396e0(run): DungeonRecordUi_UpdateLabelIfNewRecord
 0D3964	0D39AC	src/exact_080d3964.o(.text)	exact_080d3964(run): SetGuidePanelTilemapPalette
+0168D0	016934	src/exact_080168d0.o(.text)	exact_080168d0(run): GetUnitEquippedWeapon, GetUnitEquippedWeaponSlot

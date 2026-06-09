@@ -205,7 +205,6 @@ MakePromotionScreen	080D1184	thumb	classchg-handler
 BMapDispResume	08030108	thumb	classchg-handler
 RefreshBMapGraphics	080310F4	thumb	classchg-handler
 Proc_StartBlocking	08002C30	thumb	classchg-handler
-GetUnitEquippedWeapon	080168D0	thumb	classchg-handler
 BMapDispSuspend	080300D4	thumb	classchg-handler
 EndCgText	08091544	thumb	classchg-postconfirm
 ResetDialogueScreen	08010F98	thumb	classchg-postconfirm
@@ -230,7 +229,6 @@ LetsEmitStars	08021F08	thumb	emitstarfx
 gConvoBackgroundData	089CD958	data	eventscr2
 __divsi3	080D65F8	thumb	extramenu_unk
 UpdateStatArrowSprites	08015BF0	thumb	menuitempanel
-GetUnitEquippedWeaponSlot	08016900	thumb	menuitempanel
 InitTextDb	08003CB4	thumb	menuitempanel
 LoadIconPalette	08003520	thumb	menuitempanel
 BattleGenerateUiStats	0802A38C	thumb	menuitempanel
