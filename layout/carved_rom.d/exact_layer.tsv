@@ -38,3 +38,4 @@
 05AEF8	05AF28	src/exact_0805aef8.o(.text)	exact_0805aef8(run): GetAISLayerId, GetAnimPosition
 05B6E4	05B710	src/exact_0805b6e4.o(.text)	exact_0805b6e4(run): SetMainMiniAnimPos, SetMainMiniAnimLayer
 05B710	05B734	src/exact_0805b710.o(.text)	exact_0805b710(run): IsMainMiniAnimRoundEnd
+05B734	05B764	src/exact_0805b734.o(.text)	exact_0805b734(run): ApplyMainMiniAnimHitEffect, IsMainMiniAnimEnd
