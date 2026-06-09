@@ -19,3 +19,4 @@
 02029D88	ewram	src/masked_080052ac.o(ewram_data)	masked_080052ac ewram_data
 0203E7E4	ewram	src/masked_0808c840.o(ewram_data)	masked_0808c840 ewram_data
 0203E1EC	ewram	src/masked_0807cbf0.o(ewram_data)	masked_0807cbf0 ewram_data
+0203E250	ewram	src/masked_080841b8.o(ewram_data)	masked_080841b8 ewram_data

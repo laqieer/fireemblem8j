@@ -83,3 +83,6 @@ Pal_MapBattleInfoBlue
 Pal_MapBattleInfoGreen
 Pal_MapBattleInfoPurple
 Pal_MapBattleInfoRed
+InitScanlineBuf
+gManimActiveScanlineBuf
+gManimScanlineBufs
