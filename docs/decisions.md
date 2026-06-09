@@ -565,3 +565,37 @@ build inputs** (nothing reads it from the build, so `make compare` is unaffected
 
 **Status:** Done (reference data on main). Wiring select entries into `baseline_syms.d/`/`addr_map` is a
 deliberate, validated, per-symbol follow-up — not done here.
+
+## D16 — Merge gate = local `make compare`; drop the per-PR review/CI gate (2026-06-09)
+
+**Context:** We were running a Copilot-CLI review loop on every PR. For a byte-perfect decomp that is
+mostly redundant: `make compare == OK` *is* the verification, so reviewing decompiled C is meaningless
+(a byte-matched function is correct by definition). Reviewing this session caught real bugs *only* in
+code/data that `make compare` cannot verify — derived reference data (no oracle), build/orchestration
+scripts (latent races/corruption), and CI — never in decomp. The project is single-user with the AI in
+the loop on every merge.
+
+**Decision:**
+1. **The merge gate is LOCAL `make compare`, run in the main tree at merge time** — by the serial
+   integrator (`scripts/parallel/integrate.py`) for parallel work, or by the assistant before an ad-hoc
+   merge. It is the same oracle but ~0.3s (incremental, D7) and works even though worker worktrees lack
+   the gitignored toolchain/ROM. master is green *at merge*. Always **confirm the merge actually landed**
+   and resolve blocks (conflicts, red compare).
+2. **Skip the Copilot PR-review loop for byte-matched decomp/carve PRs.** For non-decomp changes with no
+   `make compare` oracle (reference data, build/infra/orchestration scripts, CI), do **light
+   self-verification against ground truth** (run it, check the data vs the ROMs/ELF); pull in a Copilot
+   review only when genuinely uncertain or the change is high-blast-radius — and say so.
+3. **CI (`compare.yml` on `push`) stays a post-merge BACKSTOP + the README badge** — a clean-environment,
+   reproducible re-verification. Checked after a batch of merges; a red run signals env/determinism drift
+   (not a logic bug, since merges are locally verified) → fix or revert. **No per-PR CI, no branch
+   protection, no `BASEROM_URL`-gated auto-merge** is added — they buy little here and add latency/setup.
+
+**Exception:** if work ever goes **fully hands-off** (auto-merge with no AI/human at the merge step), then
+CI-on-`pull_request` + branch protection requiring the `make compare` check (and `BASEROM_URL` set) becomes
+the gate. Not needed while the assistant confirms every merge.
+
+**Rationale:** the byte-match oracle is cheaper/faster locally than in CI; the AI is the merge-time gate;
+review's value was confined to no-oracle artifacts, which a targeted self-check covers. Supersedes the
+earlier "Copilot-review every PR" working rule (which still applies opt-in for risky no-oracle changes).
+
+**Status:** Adopted 2026-06-09 (discussed with + chosen by the repo owner).
