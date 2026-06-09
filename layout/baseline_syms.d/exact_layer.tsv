@@ -163,3 +163,4 @@ StartBgmVolumeChange	08002680	thumb	exact_080028bc
 Spline_Eval	0800ACA8	thumb	exact_0800b1d4
 Spline_EvalIndirect	0800B2BC	thumb	exact_0800b4c4
 UpdateHelpBoxDisplay	0808AED4	thumb	exact_0808afc8
+MixPaletteCore	080B32E8	thumb	exact_080b33b4
