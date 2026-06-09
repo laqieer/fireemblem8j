@@ -57,3 +57,5 @@ StartFadeCore	08014150	thumb	masked_08013ee8
 ForceScreenToBlack	08014268	thumb	masked_08013ee8
 StartFadeCore	08014150	thumb	masked_08013fb0
 ForceScreenToBlack	08014268	thumb	masked_08013fb0
+StartFadeCore	08014150	thumb	masked_08014108
+ForceScreenToWhite	080142C4	thumb	masked_08014108
