@@ -55,3 +55,5 @@ gBmMapHidden	0202E4E8	data	masked_0801a508
 gPlaySt	0202BCEC	data	masked_08029060
 StartFadeCore	08014150	thumb	masked_08013ee8
 ForceScreenToBlack	08014268	thumb	masked_08013ee8
+StartFadeCore	08014150	thumb	masked_08013fb0
+ForceScreenToBlack	08014268	thumb	masked_08013fb0
