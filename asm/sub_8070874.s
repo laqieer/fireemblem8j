@@ -1,0 +1,41 @@
+	.syntax unified
+	.set sub_8002DE4, 0x08002DE4 + 1
+	.set sub_8012E84, 0x08012E84 + 1
+	.section .text.sub_8070874, "ax", %progbits
+@ sub_8070874 @ JP 0x08070874 - region-different, gbadisasm descriptive asm (D23)
+	.thumb
+	.global sub_8070874
+	.thumb_func
+sub_8070874:
+	push {r4, r5, lr}
+	sub sp, #4
+	adds r5, r0, #0
+	ldr r4, [r5, #0x64]
+	movs r2, #0x80
+	lsls r2, r2, #1
+	movs r0, #0x2c
+	ldrsh r3, [r5, r0]
+	ldr r0, [r5, #0x44]
+	str r0, [sp]
+	movs r0, #0
+	movs r1, #0
+	bl sub_8012E84
+	str r0, [r4, #0x48]
+	ldrh r0, [r5, #0x2c]
+	adds r0, #1
+	strh r0, [r5, #0x2c]
+	lsls r0, r0, #0x10
+	asrs r0, r0, #0x10
+	ldr r1, [r5, #0x44]
+	cmp r0, r1
+	ble _080708AC
+	movs r0, #0
+	strh r0, [r5, #0x2c]
+	adds r0, r5, #0
+	bl sub_8002DE4
+_080708AC:
+	add sp, #4
+	pop {r4, r5}
+	pop {r0}
+	bx r0
+

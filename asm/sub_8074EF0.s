@@ -1,0 +1,30 @@
+	.syntax unified
+	.set NewEfxSpellCast, 0x08055C78 + 1
+	.set sub_8002BCC, 0x08002BCC + 1
+	.section .text.sub_8074EF0, "ax", %progbits
+@ sub_8074EF0 @ JP 0x08074EF0 - region-different, gbadisasm descriptive asm (D23)
+	.thumb
+	.global sub_8074EF0
+	.thumb_func
+sub_8074EF0:
+	push {r4, r5, lr}
+	adds r5, r0, #0
+	bl NewEfxSpellCast
+	ldr r4, _08074F18 @ =0x020200B0
+	ldr r0, _08074F1C @ =0x087A94F4
+	movs r1, #3
+	bl sub_8002BCC
+	str r0, [r4]
+	str r5, [r0, #0x5c]
+	movs r2, #0
+	movs r1, #0
+	strh r1, [r0, #0x2c]
+	adds r0, #0x29
+	strb r2, [r0]
+	pop {r4, r5}
+	pop {r0}
+	bx r0
+	.align 2, 0
+_08074F18: .4byte 0x020200B0
+_08074F1C: .4byte 0x087A94F4
+
