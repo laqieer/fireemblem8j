@@ -28,3 +28,13 @@ GetEkrDragonStatusUnk1:
 SetEkrDragonStatusUnk1:
 	.incbin "baserom.gba", 0x72054, 0xC
 
+	.section .text.s_08072060, "ax", %progbits
+@ GetBanimDragonStatusType region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08072060..0x08072088
+	.thumb
+	.align 2, 0
+	.global GetBanimDragonStatusType
+	.thumb_func
+GetBanimDragonStatusType:
+	.incbin "baserom.gba", 0x72060, 0x28
+
