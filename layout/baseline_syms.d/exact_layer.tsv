@@ -67,3 +67,4 @@ IsSaveValid	080A9C30	thumb	exact_080a9d24
 PidStatsAddFavval	080A9478	thumb	exact_080a9320
 PidStatsAddFavval	080A9478	thumb	exact_080a9334
 IsPlaythroughIdUnique	080A9560	thumb	exact_080a95b0
+WriteGlobalSaveInfo	080A77EC	thumb	exact_080a971c
