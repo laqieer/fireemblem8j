@@ -7,3 +7,4 @@
 052FEC	052FFC	src/exact_08052fec.o(.text)	exact_08052fec(run): CheckEkrHitNow
 076A4C	076A58	src/exact_08076a4c.o(.text)	exact_08076a4c(run): EfxPartsofScrollMain
 05C6EC	05C6FC	src/exact_0805c6ec.o(.text)	exact_0805c6ec(run): NewEfxRestWINH_
+06C884	06C8B4	src/exact_0806c884.o(.text)	exact_0806c884(run): efxCrimsonEyeOBJ_WrapAngle, efxCrimsonEyeOBJ_SetDrawPriority
