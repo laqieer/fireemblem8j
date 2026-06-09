@@ -292,3 +292,4 @@
 04B954	04B96C	src/exact_0804b954.o(.text)	exact_0804b954(run): LABattleMap_IsSelectOrCancelMsg
 04BA4C	04BA64	src/exact_0804ba4c.o(.text)	exact_0804ba4c(run): LABattleMap_IsForecastMsg
 0420BC	0420E8	src/exact_080420bc.o(.text)	exact_080420bc(run): Sio_CountConnectedPlayers
+0420E8	042114	src/exact_080420e8.o(.text)	exact_080420e8(run): Sio_CountActivePlayers
