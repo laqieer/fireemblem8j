@@ -97,3 +97,4 @@ AP_ExecDummyFrame
 AP_Init
 GetEkrDragonStatusType_
 SetEkrDragonStatusType
+GetAnimAnotherSide
