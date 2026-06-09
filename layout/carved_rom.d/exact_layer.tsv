@@ -229,3 +229,4 @@
 0800B4	0800C0	src/exact_080800b4.o(.text)	exact_080800b4(run): MapAnimTorch_ResetHBlank
 07D2F8	07D308	src/exact_0807d2f8.o(.text)	exact_0807d2f8(run): ProcSummonDK_InitCounters
 0ABFE4	0AC000	src/exact_080abfe4.o(.text)	exact_080abfe4(run): NormalizeSeaMinimapTerrain
+0AC094	0AC0B4	src/exact_080ac094.o(.text)	exact_080ac094(run): NormalizeWaterMinimapTerrain
