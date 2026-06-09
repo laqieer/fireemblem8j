@@ -36,3 +36,4 @@
 07201C	072028	src/exact_0807201c.o(.text)	exact_0807201c(run): GetEkrDragonStatusType
 051EB4	051F6C	src/exact_08051eb4.o(.text)	exact_08051eb4(run): EkrGauge_Clr4C50, EkrGauge_Set4C50, EkrGauge_Set4C...
 05AEF8	05AF28	src/exact_0805aef8.o(.text)	exact_0805aef8(run): GetAISLayerId, GetAnimPosition
+05B6E4	05B710	src/exact_0805b6e4.o(.text)	exact_0805b6e4(run): SetMainMiniAnimPos, SetMainMiniAnimLayer
