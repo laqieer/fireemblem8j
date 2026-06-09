@@ -172,3 +172,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0CD4F0	0CD500	src/masked_080cd4f0.o(.text)	masked_080cd4f0(run): OpAnimScrollBg3Loop
 0B7AF8	0B7B1C	src/masked_080b7af8.o(.text)	masked_080b7af8(run): ClassIntro_DisableAllExceptBg1
 0B7E6C	0B7E9C	src/masked_080b7e6c.o(.text)	masked_080b7e6c(run): ClassIntroFlare_Init
+08DEDC	08DF20	src/masked_0808dedc.o(.text)	masked_0808dedc(run): GetCursorQuadrant

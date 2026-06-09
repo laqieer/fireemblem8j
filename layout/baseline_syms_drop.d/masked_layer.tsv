@@ -107,3 +107,4 @@ gMonsterItemsByClassIndex
 MuExistsActive
 GetMu
 ClearEventMoveBuffer
+GetCursorQuadrant
