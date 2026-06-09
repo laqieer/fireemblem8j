@@ -165,13 +165,17 @@ $(ELF): $(ALL_OBJECTS) $(LDSCRIPT)
 	$(OBJCOPY) --strip-debug -O binary --pad-to 0x9000000 --gap-fill=0xff $< $@
 
 clean:
-	# Remove asm/*.o + src/*.o explicitly, not just $(ALL_OBJECTS): a carve that deletes a .s
-	# leaves an ORPHAN .o that the asm/*.s wildcard can't see, so a wildcard-only clean keeps
-	# it and the local build false-greens while CI's fresh checkout fails. Remove orphans too.
-	$(RM) $(ALL_OBJECTS) asm/*.o src/*.o $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
-	# NON_MATCHING staging objects + .s intermediates live one dir deeper (src/nonmatching/),
-	# which `src/*.o` does not match -- remove them explicitly so a clean rebuild is durable.
-	$(RM) $(NONMATCH_OBJECTS) $(NONMATCH_CFILES:.c=.s) src/nonmatching/*.o
+	# Remove EVERY .o under asm/ and src/ (recursively, incl. src/data/ and the
+	# src/nonmatching/ staging objects) via `find` -- this also clears ORPHAN .o whose .s was
+	# deleted by a carve (a wildcard-only clean would keep them and the local build false-greens
+	# while CI's fresh checkout fails). `find` is COUNT-SAFE: never expand the full object list
+	# ($(ALL_OBJECTS), thousands of paths) onto a recipe OR comment line -- once the carve grows
+	# past a few thousand objects that single expanded argument overflows the shell's per-arg
+	# limit (MAX_ARG_STRLEN, 128 KiB) and `make clean` dies with "Argument list too long".
+	# NOTE: only *.o -- never `find -name '*.s'`: asm/*.s are the COMMITTED descriptive-asm sources.
+	find asm src -name '*.o' -type f -delete
+	$(RM) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
+	$(RM) $(NONMATCH_CFILES:.c=.s)
 
 # Fast repo-consistency lint (no toolchain / no ROM needed): every object the build links
 # has a git-tracked source. Catches the "layout row without a committed .s/.c" class that
