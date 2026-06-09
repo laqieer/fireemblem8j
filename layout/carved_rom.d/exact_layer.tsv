@@ -50,3 +50,4 @@
 036DD0	036E0C	src/exact_08036dd0.o(.text)	exact_08036dd0(run): DrawBattleForecastContents
 031800	031858	src/exact_08031800.o(.text)	exact_08031800(run): GetUnitBestWRankType, GetClassBestWRankType
 031924	031944	src/exact_08031924.o(.text)	exact_08031924(run): IsWeaponMagic
+0396E0	039708	src/exact_080396e0.o(.text)	exact_080396e0(run): DungeonRecordUi_UpdateLabelIfNewRecord

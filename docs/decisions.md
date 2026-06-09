@@ -807,3 +807,32 @@ addresses are ground truth when IDA's `.data` VMAs are stale.
 - **Two open tooling items:** (1) make decomp-permuter survive long runs here (single-thread / detached /
   resource-tuned) — unblocks the scheduler-artifact class across multiple TUs (Loop6C, StartStoneShatterAnim, …);
   (2) the int-widen lever should be applied across the remaining sign-ext TUs.
+
+## D21 — A1-exact layer: carve D2-stranded exact funcs into separate same-TU objects (2026-06-09)
+
+**Context:** D2 carves only consecutive .text RUNS that whole-block match the JP ROM. That
+strands the funcmap `exact`-tier functions sitting in the GAPS of an already-carved TU —
+the funcmap proves each one's JP bytes UNIQUELY match the US compile (tier `exact` = unmasked
+unique anchor, no wildcards), but they don't form a run with the TU's carved neighbours, so
+find_runs/carve_mapped skip them and `port_run`'s `carved_objs()` skip (keyed on the output
+object `src/<tu>.o`, already present) rejects the TU. ~696 such exact funcs (~38.7 KB) across
+137 partially-carved TUs.
+
+**Consulted:** Copilot CLI. Recommendation (adopted): granularity is not what D2 forbids —
+D2 forbids *trusting* a masked per-function match as authority. Carving a smaller object is
+fine **as long as `make compare` sha1 stays the per-run verify-or-revert gate** and the split
+object doesn't double-emit file-scope data / bind a static to a duplicate copy.
+
+**Decision (D21):** carve each stranded exact run into a SEPARATELY-NAMED object
+`src/exact_<jpaddr>.c` extracted from the same US TU (`scripts/carve_exact.py` +
+`port_run.port(..., src_tu=<tu>, frag="exact_layer")`). The new object name dodges the
+`carved_objs()` skip; everything else (reloc resolution, unreferenced-data trimming → refs
+resolve to the canonical JP baseline syms not a local dup, dup-baseline-sym auto-drop) is
+port_run's existing machinery, and **whole-ROM `make compare` sha1 is the gate per run** —
+strictly stronger than D2's masked-.text check. Exact-tier only (no masked tier here): an
+`exact` row's unmasked bytes already pin one JP location, so there is no false-positive window;
+a row that still can't be made byte-perfect (region-different data dep) simply reverts and is
+skipped — zero RE risk. Parallel-safe: NEW rows go only to per-task fragments
+(`layout/<base>.d/exact_layer.tsv`), never the shared monolith (port_run gained a `frag=`
+param; `apply_patches.py` now reads `patches.d/*.tsv`). This is the mechanical-existence
+収割 after the "mechanical ceiling" was disproven — function metric 1329 → ~2000+.
