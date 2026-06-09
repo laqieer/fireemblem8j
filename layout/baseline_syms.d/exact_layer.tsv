@@ -137,3 +137,5 @@ NewPopupCore	0801157C	thumb	exact_08011554
 NewPopup_ItemGot_unused	080115C8	thumb	exact_08011610
 IsTacticianDivinationAvailable	080A2CE8	thumb	exact_080a2c10
 IsAuguryDivinationAvailable	080A2D24	thumb	exact_080a2c10
+GetChapterDivinationTextIdHectorStory	080A2C40	thumb	exact_080a2ccc
+GetChapterDivinationTextIdBeginning	080A2C5C	thumb	exact_080a2ccc

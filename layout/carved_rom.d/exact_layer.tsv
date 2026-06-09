@@ -256,3 +256,4 @@
 011554	01157C	src/exact_08011554.o(.text)	exact_08011554(run): SetPopupUnit, NewPopup_Simple
 011610	011624	src/exact_08011610.o(.text)	exact_08011610(run): ItemGot_DisplayLePopup
 0A2C10	0A2C40	src/exact_080a2c10.o(.text)	exact_080a2c10(run): IsDivinationOptionAvailable
+0A2CCC	0A2CE8	src/exact_080a2ccc.o(.text)	exact_080a2ccc(run): IsDivinationBeginningAvailable
