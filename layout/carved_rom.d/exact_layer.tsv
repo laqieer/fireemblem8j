@@ -93,3 +93,4 @@
 0140A4	0140B8	src/exact_080140a4.o(.text)	exact_080140a4(run): FadeInWhiteSpeed10Locking
 0140B8	0140CC	src/exact_080140b8.o(.text)	exact_080140b8(run): FadeOutWhiteSpeed10Locking
 0140CC	0140E0	src/exact_080140cc.o(.text)	exact_080140cc(run): FadeInWhiteSpeed08Locking
+0140E0	0140F4	src/exact_080140e0.o(.text)	exact_080140e0(run): FadeInWhiteSpeed04
