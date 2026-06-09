@@ -126,3 +126,4 @@
 0A971C	0A9740	src/exact_080a971c.o(.text)	exact_080a971c(run): SetGameEndFlag
 0AB8C8	0AB924	src/exact_080ab8c8.o(.text)	exact_080ab8c8(run): WriteWorldMapPaths
 0AB968	0ABA4C	src/exact_080ab968.o(.text)	exact_080ab968(run): WriteWorldMapUnits, ReadWorldMapUnits
+0ABA4C	0ABA6C	src/exact_080aba4c.o(.text)	exact_080aba4c(run): WriteWorldMapSkirmishes
