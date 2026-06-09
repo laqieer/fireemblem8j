@@ -168,10 +168,10 @@ clean:
 	# Remove EVERY .o under asm/ and src/ (recursively, incl. src/data/ and the
 	# src/nonmatching/ staging objects) via `find` -- this also clears ORPHAN .o whose .s was
 	# deleted by a carve (a wildcard-only clean would keep them and the local build false-greens
-	# while CI's fresh checkout fails). `find` is COUNT-SAFE: never expand the full object list
-	# ($(ALL_OBJECTS), thousands of paths) onto a recipe OR comment line -- once the carve grows
-	# past a few thousand objects that single expanded argument overflows the shell's per-arg
-	# limit (MAX_ARG_STRLEN, 128 KiB) and `make clean` dies with "Argument list too long".
+	# while CI's fresh checkout fails). `find` is COUNT-SAFE. Do NOT name the full object-list
+	# variable here: make expands it even inside a recipe comment, and once the carve grows past
+	# a few thousand objects that single expanded argument overflows the shell per-arg limit
+	# (MAX_ARG_STRLEN, 128 KiB) and `make clean` dies with "Argument list too long".
 	# NOTE: only *.o -- never `find -name '*.s'`: asm/*.s are the COMMITTED descriptive-asm sources.
 	find asm src -name '*.o' -type f -delete
 	$(RM) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
