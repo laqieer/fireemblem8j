@@ -983,7 +983,6 @@ SpriteArray_SavemenuData_1	08A9D920	data	savedraw
 SpriteArray_SavemenuData_0	08A9D904	data	savedraw
 SaveDrawSetDifficultSlotPalette	080B08F0	thumb	savedraw
 SaveMenuUpdateCursorPalette	080AF28C	thumb	savedraw
-BitfileToIndex	080AD2D0	thumb	savedraw
 SaveDraw_SetCursorBox	080AFFB0	thumb	savedraw
 Pal_MapBattleInfoNum	08A99FA8	data	statscreen
 gGfx_SupportMenu	08A9AC28	data	uisupport

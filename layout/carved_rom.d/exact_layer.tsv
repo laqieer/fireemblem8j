@@ -282,3 +282,4 @@
 0B054C	0B0568	src/exact_080b054c.o(.text)	exact_080b054c(run): SaveMenuHasOptions
 0AD25C	0AD294	src/exact_080ad25c.o(.text)	exact_080ad25c(run): SaveMenuGetBitfile
 0AD294	0AD2D0	src/exact_080ad294.o(.text)	exact_080ad294(run): SaveMenuGetBitfileByMask
+0AD2D0	0AD2F8	src/exact_080ad2d0.o(.text)	exact_080ad2d0(run): BitfileToIndex
