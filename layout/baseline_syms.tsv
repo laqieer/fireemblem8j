@@ -1123,7 +1123,6 @@ ActionStaffDoorChestUseItem	0802FB98	thumb	bmmind
 ActionPick	0802FF04	thumb	bmmind
 TryRemoveUnitFromBallista	08037B04	thumb	bmmind
 Make6CKOIDO	0801D8E0	thumb	bmmind
-UnitRescue	08018060	thumb	bmmind
 ExecTrapAfterDropAction	08037888	thumb	bmmind
 gSioStateId	03004EA8	data	sio_core
 gUnk_72	03004E18	data	sio_core
