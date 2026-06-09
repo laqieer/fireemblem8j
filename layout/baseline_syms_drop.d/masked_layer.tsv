@@ -106,3 +106,4 @@ gMonsterItemWeightsTable
 gMonsterItemsByClassIndex
 MuExistsActive
 GetMu
+ClearEventMoveBuffer
