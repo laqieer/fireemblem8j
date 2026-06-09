@@ -57,3 +57,4 @@
 016B04	016B3C	src/exact_08016b04.o(.text)	exact_08016b04(run): GetWeaponLevelFromExp
 016F90	016FE4	src/exact_08016f90.o(.text)	exact_08016f90(run): GetUnitWeaponReachBits
 017294	01729C	src/exact_08017294.o(.text)	exact_08017294(run): GetItemIndex
+029048	029060	src/exact_08029048.o(.text)	exact_08029048(run): CanUnitUsePureWaterItem
