@@ -139,3 +139,4 @@ IsTacticianDivinationAvailable	080A2CE8	thumb	exact_080a2c10
 IsAuguryDivinationAvailable	080A2D24	thumb	exact_080a2c10
 GetChapterDivinationTextIdHectorStory	080A2C40	thumb	exact_080a2ccc
 GetChapterDivinationTextIdBeginning	080A2C5C	thumb	exact_080a2ccc
+GetChapterDivinationPortrait	080A2CB0	thumb	exact_080a2d10
