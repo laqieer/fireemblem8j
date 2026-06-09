@@ -28,3 +28,13 @@ PageNumCtrl_CheckSlide:
 HbRedirect_SSItem:
 	.incbin "baserom.gba", 0x8ADCC, 0x54
 
+	.section .text.s_0808AE8C, "ax", %progbits
+@ HbPopulate_SSClass region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x0808AE8C..0x0808AEA0
+	.thumb
+	.align 2, 0
+	.global HbPopulate_SSClass
+	.thumb_func
+HbPopulate_SSClass:
+	.incbin "baserom.gba", 0x8AE8C, 0x14
+
