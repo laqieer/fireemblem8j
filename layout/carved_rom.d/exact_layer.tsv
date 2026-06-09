@@ -369,3 +369,4 @@
 0C0D60	0C0DA4	src/exact_080c0d60.o(.text)	exact_080c0d60(run): MapRoute_OffsetTileIndices
 0C16FC	0C172C	src/exact_080c16fc.o(.text)	exact_080c16fc(run): AddGmPath
 0C172C	0C17B0	src/exact_080c172c.o(.text)	exact_080c172c(run): RemoveGmPath
+0C18D0	0C18F8	src/exact_080c18d0.o(.text)	exact_080c18d0(run): GmIsNodeInList
