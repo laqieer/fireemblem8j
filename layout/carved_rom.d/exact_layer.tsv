@@ -86,3 +86,4 @@
 013F88	013F9C	src/exact_08013f88.o(.text)	exact_08013f88(run): FadeInBlackSpeed20NonLocking
 013F9C	013FB0	src/exact_08013f9c.o(.text)	exact_08013f9c(run): FadeInBlackSpeed40NonLocking
 014028	01403C	src/exact_08014028.o(.text)	exact_08014028(run): FadeInBlackSpeed04
+01403C	014050	src/exact_0801403c.o(.text)	exact_0801403c(run): FadeInBlackSpeed08
