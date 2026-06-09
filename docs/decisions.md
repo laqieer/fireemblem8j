@@ -873,3 +873,31 @@ data); `gen-report.py` mirrors it. Data is now 100% JP-relative, no US dependenc
 
 **Status:** Done 2026-06-09. CI green (make compare + consistency); exact layer landed
 (functions 1329 → 1823, 21.38%); A1-masked layer (~616 fns) in flight.
+
+## D23 — Adopt gbadisasm for mechanical descriptive-asm carving of the region-different code front (2026-06-09)
+
+**Context:** DATA front 100% byte-complete. CODE front: functions(C) 2187/8528=25.6%, code BYTES in src
+20.07%; ~6000 REGION-DIFFERENT functions (~80% of code) remain. The mechanical region-SAME carving (exact/
+masked/unported/stranded layers) is exhausted, and the assumed-only path for region-different code was slow
+hand-decompilation to C.
+
+**Investigation (multi-agent workflow, user-requested):** byte-match round-trip smoke tests of gbadisasm /
+luvdis / IDA-export / prior scripts/tools pilots. RESULT — **`laqieer/gbadisasm` mechanically emits BUILD-READY
+descriptive ASM for region-different JP functions**: 3 byte-identical round-trips (incl. a code-pointer literal
+pool → `.4byte ekrBattle_2` → R_ARM_ABS32 reloc resolved correctly at link) + a full END-TO-END carve
+(BG_SetPosition @0x08001448 as real instructions, not incbin) → `make compare` = OK. The driving config is
+auto-generated from `tools/ida/fe8j.i64` via `laqieer/ida_gba_stuff` `idc/export_gbadisasm_config.idc` (or ~15
+lines of idalib: `idautils.Functions()` + `get_func_name()` + `get_sreg(ea,'T')`).
+
+**Decision — ADOPT gbadisasm as the PRIMARY mechanical carver for the region-different code front** (descriptive-
+ASM-first bootstrap, exactly how fireemblem8u was built). The ~6000 region-different functions carve as
+descriptive asm mechanically → code byte-complete; decompile to C incrementally afterward. Tool roles:
+gbadisasm = generate; `coddog` = triage; `asm-differ`/`objdiff` = per-byte/symbol verify; `make compare` =
+final oracle; `m2c` (`arch_arm.py`, `-t gba`) = seed C for the LATER asm→C step (can't resolve PC-relative
+pools, so post-carve only); IDA/Ghidra/permuter = per-function C fallback; `luvdis` = cross-check (round-trips
+but doesn't symbolize *data* pointers). **Must-not-miss:** `.syntax unified` prelude + `-mcpu=arm7tdmi
+-mthumb-interwork`. gbadisasm is a CARVE-TIME tool — it generates committed `.s`; the build/CI never need it.
+
+**Status:** Investigation done (recommended adopt-primary, evidence-backed). Carver implementation + 20-function
+pilot in flight (P8-gbadisasm-carver). On a green pilot, scale over the incbin backlog via the parallel-carving
+system. This is the path that makes the code front mechanically completable, not a hand-RE grind.
