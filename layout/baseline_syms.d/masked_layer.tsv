@@ -46,3 +46,5 @@ gPlaySt	0202BCEC	data	masked_08037bdc
 gPlaySt	0202BCEC	data	masked_08037bfc
 gDungeonState	03001798	data	masked_08037cd8
 gDungeonState	03001798	data	masked_08037f34
+gDungeonState	03001798	data	masked_080380f8
+gPlaySt	0202BCEC	data	masked_080380f8

@@ -37,3 +37,4 @@
 037BFC	037C44	src/masked_08037bfc.o(.text)	masked_08037bfc(run): CanUnitSeize
 037CD8	037D38	src/masked_08037cd8.o(.text)	masked_08037cd8(run): InitDungeon
 037F34	037FA8	src/masked_08037f34.o(.text)	masked_08037f34(run): SaveDungeonState, LoadDungeonState, SaveDungeonRecords...
+0380F8	03830C	src/masked_080380f8.o(.text)	masked_080380f8(run): UpdateDungeonRecordStats, UpdateDungeonEnemiesDefeated
