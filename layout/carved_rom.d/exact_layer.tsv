@@ -372,3 +372,4 @@
 0C18D0	0C18F8	src/exact_080c18d0.o(.text)	exact_080c18d0(run): GmIsNodeInList
 0C1E20	0C1E54	src/exact_080c1e20.o(.text)	exact_080c1e20(run): GetNextUnclearedNode
 0C2090	0C20B4	src/exact_080c2090.o(.text)	exact_080c2090(run): GetGmPathSearchResult, GetGmPathNode, GetGmPathLength
+0C3BB8	0C3BC0	src/exact_080c3bb8.o(.text)	exact_080c3bb8(run): GMapPI_RequestHide
