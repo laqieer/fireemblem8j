@@ -124,3 +124,4 @@ GetDialogueBoxConfig	0808C834	thumb	exact_0808cac0
 InitBoxDialogue	0808C8E0	thumb	exact_0808cb48
 DrawBoxDialogueText	0808CF1C	thumb	exact_0808cb48
 BoxDialogue_DrawBoxInterpolated	0808CBF4	thumb	exact_0808cc84
+StartStarRotationEffect	08081B38	thumb	exact_08081b78

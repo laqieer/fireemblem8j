@@ -224,3 +224,4 @@
 08471C	08473C	src/exact_0808471c.o(.text)	exact_0808471c(run): SetScanlineBufWinR
 08375C	0837B8	src/exact_0808375c.o(.text)	exact_0808375c(run): MapAnimMoveUnitTowardsTargetExt
 0837B8	083814	src/exact_080837b8.o(.text)	exact_080837b8(run): MapAnimMoveUnitAwayFromTargetExt
+081B78	081B98	src/exact_08081b78.o(.text)	exact_08081b78(run): StartStarExplosionEffect
