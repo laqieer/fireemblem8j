@@ -21,3 +21,4 @@
 0D99C0	0D99D8	asm/stranded__unmapped.o(.text.s_080D99C0)	_unmapped:_Bfree region-same Thumb (descriptive incbin)
 0D9AF4	0D9B4C	asm/stranded__unmapped.o(.text.s_080D9AF4)	_unmapped:_hi0bits region-same Thumb (descriptive incbin)
 0D9EC8	0D9FB8	asm/stranded__unmapped.o(.text.s_080D9EC8)	_unmapped:__mdiff region-same Thumb (descriptive incbin)
+0D9FB8	0DA004	asm/stranded__unmapped.o(.text.s_080D9FB8)	_unmapped:_ulp region-same Thumb (descriptive incbin)

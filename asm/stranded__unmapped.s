@@ -228,3 +228,13 @@ _hi0bits:
 __mdiff:
 	.incbin "baserom.gba", 0xD9EC8, 0xF0
 
+	.section .text.s_080D9FB8, "ax", %progbits
+@ _ulp region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D9FB8..0x080DA004
+	.thumb
+	.align 2, 0
+	.global _ulp
+	.thumb_func
+_ulp:
+	.incbin "baserom.gba", 0xD9FB8, 0x4C
+
