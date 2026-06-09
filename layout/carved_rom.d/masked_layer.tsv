@@ -154,3 +154,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 083F58	084014	src/masked_08083f58.o(.text)	masked_08083f58(run): MapAnimCallSpellAssocUnlock, MapAnimCallSpellAssocBerserk, MapAnimCallSpellAssocRestore...
 084080	0840C4	src/masked_08084080.o(.text)	masked_08084080(run): SpellWarpStartExplosion
 081A64	081AC8	src/masked_08081a64.o(.text)	masked_08081a64(run): PutSparkGfxRotation, MapAnimRotation_Init
+0ABF90	0ABFE4	src/masked_080abf90.o(.text)	masked_080abf90(run): GetMinimapConnectKindAt
