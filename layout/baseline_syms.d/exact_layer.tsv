@@ -179,3 +179,9 @@ GmMuPrim_FinishMovement	080C2F7C	thumb	exact_080c3118
 RefreshGmNodeLinks	080C184C	thumb	exact_080c16fc
 RefreshGmNodeLinks	080C184C	thumb	exact_080c172c
 gUnk_11	0201B0D8	data	exact_080c2090
+InitGMapPIInterfaceKind	080C3C88	thumb	exact_080c3d0c
+DrawGMapPIPanelContents	080C3918	thumb	exact_080c3d0c
+PutGMapPINodeName	080C36D4	thumb	exact_080c3d0c
+PutGMapPICharName	080C3704	thumb	exact_080c3d0c
+PutGMapPIClassName	080C378C	thumb	exact_080c3d0c
+PutGMapPIShopIcons	080C37C4	thumb	exact_080c3d0c
