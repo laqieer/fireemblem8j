@@ -11,6 +11,7 @@ and other runs stay in the incbin baseline.
 Usage: scripts/port_run.py <name> [<name> ...]
 """
 import subprocess, sys, os, re
+import glob as glob_mod
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
@@ -64,7 +65,8 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None):
         # also snapshot this task's fragment files so a revert restores them exactly
         # (deleting on revert if they didn't exist before this call).
         MANI += [f"layout/{b}.d/{frag}.tsv"
-                 for b in ("carved_rom", "carved_ram", "baseline_syms", "patches")]
+                 for b in ("carved_rom", "carved_ram", "baseline_syms",
+                           "baseline_syms_drop", "patches")]
     snap = {p: (open(p).read() if os.path.exists(p) else None) for p in MANI}
 
     sub = sh(f"python3 scripts/extract_run.py {US}/{src_tu}.c {' '.join(funcs)}").stdout
@@ -478,17 +480,39 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None):
     # an absolute alias; a wrong address from the object's own definition is still
     # caught by the verify-or-revert net below. Loop: ld lists all dups per pass,
     # but removing some can surface the next (bounded, stops when no progress).
+    # Names that ARE baseline syms (monolith + every fragment) — only these can be
+    # dropped to fix a multiple-definition; a dup where both defs are real objects
+    # can't be fixed here.
+    def baseline_names():
+        names = set()
+        for p in ["layout/baseline_syms.tsv"] + sorted(glob_mod.glob("layout/baseline_syms.d/*.tsv")):
+            if not os.path.exists(p):
+                continue
+            for l in open(p):
+                if l.strip() and not l.startswith("#"):
+                    names.add(l.split("\t")[0])
+        return names
+
     dropped = 0
     for _ in range(8):
         dup = set(re.findall(r"multiple definition of [`']([\w]+)'", mc.stdout + mc.stderr))
+        dup &= baseline_names()
         if not dup:
             break
-        rows = list(open("layout/baseline_syms.tsv"))
-        kept = [l for l in rows if l.startswith("#") or l.split("\t")[0] not in dup]
-        if len(kept) == len(rows):
-            break  # the dup isn't a baseline sym (both defs are real objects) -> can't fix here
-        dropped += len(rows) - len(kept)
-        open("layout/baseline_syms.tsv", "w").writelines(kept)
+        if frag is not None:
+            # Parallel-safe: record the now-redundant alias names in this task's
+            # additive drop-fragment; gen_layout excludes them. Never edit the
+            # shared baseline_syms monolith (would conflict with concurrent carves).
+            os.makedirs("layout/baseline_syms_drop.d", exist_ok=True)
+            with open(f"layout/baseline_syms_drop.d/{frag}.tsv", "a") as f:
+                f.write("".join(s + "\n" for s in sorted(dup)))
+        else:
+            rows = list(open("layout/baseline_syms.tsv"))
+            kept = [l for l in rows if l.startswith("#") or l.split("\t")[0] not in dup]
+            if len(kept) == len(rows):
+                break  # the dup isn't in the monolith (in a fragment we don't own) -> bail
+            open("layout/baseline_syms.tsv", "w").writelines(kept)
+        dropped += len(dup)
         sh("make layout")
         mc = sh("make compare")
         if "fireemblem8.gba: OK" in mc.stdout:
