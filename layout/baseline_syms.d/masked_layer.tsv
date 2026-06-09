@@ -190,3 +190,5 @@ MapAnimRestoreEffect	08080334	thumb	masked_08083f58
 MapAnimSleepEffect	08080414	thumb	masked_08083f58
 MapAnimMonsterStoneEffect	08080524	thumb	masked_08083f58
 MapAnimRepairEffect	08080170	thumb	masked_08083f58
+StartStarExplosionEffect	08081B78	thumb	masked_08084080
+gBmSt	0202BCAC	data	masked_08084080

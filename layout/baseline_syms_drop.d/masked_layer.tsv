@@ -88,3 +88,4 @@ gManimActiveScanlineBuf
 gManimScanlineBufs
 MapAnimMoveUnitAwayFromTargetExt
 MapAnimMoveUnitTowardsTargetExt
+StartStarExplosionEffect
