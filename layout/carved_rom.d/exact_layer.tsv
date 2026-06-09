@@ -12,3 +12,4 @@
 06D3AC	06D3D0	src/exact_0806d3ac.o(.text)	exact_0806d3ac(run): OnHBlank_0
 0748B8	0748E4	src/exact_080748b8.o(.text)	exact_080748b8(run): GetEfxSoundType2FromBaseCon
 073228	0732E0	src/exact_08073228.o(.text)	exact_08073228(run): EfxTmReplacePal, FillBGRect
+0732E0	073348	src/exact_080732e0.o(.text)	exact_080732e0(run): EfxTmAddPal

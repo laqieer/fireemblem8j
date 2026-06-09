@@ -1253,7 +1253,6 @@ FrameConfig_AnimaHitBG	080E1DE6	data	banim-efxmagic-fire
 TsaLut_AnimaHitBG	085FF84C	data	banim-efxmagic-fire
 ImgLut_AnimaHitBG	085FF7F8	data	banim-efxmagic-fire
 ProcScr_efxElfireBG	085FF8A0	data	banim-efxmagic-fire
-EfxTmAddPal	080732E0	thumb	banim-efxmagic-fire
 ProcScr_efxElfireBGCOL	085FF8B8	data	banim-efxmagic-fire
 ProcScr_efxElfireOBJ	085FF8D8	data	banim-efxmagic-fire
 AnimScr_EfxElfireObjLeft	086329CC	data	banim-efxmagic-fire
