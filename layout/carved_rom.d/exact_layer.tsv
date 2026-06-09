@@ -146,3 +146,4 @@
 0B9A3C	0B9A5C	src/exact_080b9a3c.o(.text)	exact_080b9a3c(run): ClearGoldBoxTextTm2Line
 0B9F08	0B9F40	src/exact_080b9f08.o(.text)	exact_080b9f08(run): DisplayShopUiArrows
 02D2F0	02D2F8	src/exact_0802d2f0.o(.text)	exact_0802d2f0(run): TradeMenu_HighlightUpdater_OnInit
+02D370	02D3AC	src/exact_0802d370.o(.text)	exact_0802d370(run): TradeMenu_GetAdjustedRow
