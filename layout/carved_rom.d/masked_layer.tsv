@@ -189,3 +189,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 04C9DC	04CA24	src/masked_0804c9dc.o(.text)	masked_0804c9dc(run): Sio_BoxTransitionOpen_End
 04CB78	04CB9C	src/masked_0804cb78.o(.text)	masked_0804cb78(run): Sio_BoxTransitionClose_End
 04A0E4	04A138	src/masked_0804a0e4.o(.text)	masked_0804a0e4(run): LinkArenaBattleMap_AdvancePhase
+04A138	04A14C	src/masked_0804a138.o(.text)	masked_0804a138(run): LinkArenaBattleMap_ClearCmdBuffer
