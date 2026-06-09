@@ -165,3 +165,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0ACFFC	0AD0E4	src/masked_080acffc.o(.text)	masked_080acffc(run): Minimap_HandleMoveInput, Minimap_InitProcVars
 07A774	07A830	src/masked_0807a774.o(.text)	masked_0807a774(run): GenerateMonsterItems
 07AB5C	07AB94	src/masked_0807ab5c.o(.text)	masked_0807ab5c(run): MuExistsActive
+07B50C	07B580	src/masked_0807b50c.o(.text)	masked_0807b50c(run): ApplyMoveScriptToCoordinates
