@@ -197,3 +197,4 @@
 085CC4	085D00	src/exact_08085cc4.o(.text)	exact_08085cc4(run): EvCheck07_CHES
 085E80	085F00	src/exact_08085e80.o(.text)	exact_08085e80(run): EvCheck0F_, EvCheck10_
 0860A8	0860E8	src/exact_080860a8.o(.text)	exact_080860a8(run): SetFlag, ClearFlag, CheckFlag
+086A58	086AC4	src/exact_08086a58.o(.text)	exact_08086a58(run): GetSupportTalkSong

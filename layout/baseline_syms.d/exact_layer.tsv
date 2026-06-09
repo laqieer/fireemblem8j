@@ -103,3 +103,4 @@ ClearChapterFlag	08085F34	thumb	exact_080860a8
 ClearPermanentFlag	08086000	thumb	exact_080860a8
 CheckPermanentFlag	08086094	thumb	exact_080860a8
 CheckChapterFlag	08085F88	thumb	exact_080860a8
+GetSupportTalkEntry	08086A14	thumb	exact_08086a58
