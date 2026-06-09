@@ -517,7 +517,6 @@ Img_SpellJavelinGenerial	086062B8	data	banim-efxmagic-phywpn
 Img_SpellJavelinUnk	08606548	data	banim-efxmagic-phywpn
 NewEfxFarAttackWithDistance	080540C0	thumb	banim-efxmagic-phywpn
 GetAnimAnotherSide	0805B058	thumb	banim-efxmagic-phywpn
-StartBattleAnimHitEffectsDefault	08056220	thumb	banim-efxmagic-phywpn
 GetEfxHpChangeType	080748E4	thumb	banim-efxmagic-phywpn
 CheckRoundCrit	0805B00C	thumb	banim-efxmagic-phywpn
 NewEfxPierceCritical	0806EA40	thumb	banim-efxmagic-phywpn

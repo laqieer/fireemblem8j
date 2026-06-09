@@ -18,3 +18,4 @@ EfxDKUpdateFrontAnimPostion	08078EF4	thumb	exact_08079328
 GetEkrDragonStatus	08071FD8	thumb	exact_08071ff8
 GetEkrDragonStatusType_	08072028	thumb	exact_0807201c
 gpProcEkrGauge	02000068	data	exact_08051eb4
+StartBattleAnimHitEffects	08056240	thumb	exact_08056220
