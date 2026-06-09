@@ -108,3 +108,13 @@ m4aMPlayStop:
 FadeOutBody:
 	.incbin "baserom.gba", 0xD574C, 0xC8
 
+	.section .text.s_080D5814, "ax", %progbits
+@ TrkVolPitSet region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D5814..0x080D58C8
+	.thumb
+	.align 2, 0
+	.global TrkVolPitSet
+	.thumb_func
+TrkVolPitSet:
+	.incbin "baserom.gba", 0xD5814, 0xB4
+
