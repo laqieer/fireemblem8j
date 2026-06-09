@@ -87,3 +87,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0B70F4	0B7130	src/masked_080b70f4.o(.text)	masked_080b70f4(run): ColFadeOut_Init
 03E3D8	03E400	src/masked_0803e3d8.o(.text)	masked_0803e3d8(run): AiCheckDangerAt
 03E808	03E8CC	src/masked_0803e808.o(.text)	masked_0803e808(run): GetEscapePointStructThingMaybe, AiCanEquip
+03EF70	03EFA8	src/masked_0803ef70.o(.text)	masked_0803ef70(run): AiIsUnitAtPositionDifferentAllegiance
