@@ -78,3 +78,8 @@ SetFaceBlinkControl
 MapAnim_AdvanceBattleRound
 gManimSt
 MapEventcallFx2_HBlankWobble
+GetBattleInfoPalByFaction
+Pal_MapBattleInfoBlue
+Pal_MapBattleInfoGreen
+Pal_MapBattleInfoPurple
+Pal_MapBattleInfoRed

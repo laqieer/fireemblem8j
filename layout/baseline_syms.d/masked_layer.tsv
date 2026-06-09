@@ -175,3 +175,7 @@ gPlaySt	0202BCEC	data	masked_08009e3c
 GetDialogueBoxConfig	0808C834	thumb	masked_0808c840
 gBmSt	0202BCAC	data	masked_08082ee8
 ProcMAExpBar_FrameAdvance	0807E4F0	thumb	masked_0807e490
+Pal_MapBattleInfoBlue	08A1DCD0	data	masked_0807e114
+Pal_MapBattleInfoRed	08A1DCF0	data	masked_0807e114
+Pal_MapBattleInfoGreen	08A1DD10	data	masked_0807e114
+Pal_MapBattleInfoPurple	08A1DD30	data	masked_0807e114
