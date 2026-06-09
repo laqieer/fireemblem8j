@@ -186,3 +186,4 @@
 03C1E8	03C214	src/exact_0803c1e8.o(.text)	exact_0803c1e8(run): CharStoreAI
 0B09F8	0B0A28	src/exact_080b09f8.o(.text)	exact_080b09f8(run): SaveMenuGetValidMenuAmt
 0B0B2C	0B0B38	src/exact_080b0b2c.o(.text)	exact_080b0b2c(run): DifficultySelect_OnEnd
+0B0E9C	0B0EC0	src/exact_080b0e9c.o(.text)	exact_080b0e9c(run): DrawDifficultySprite_Init
