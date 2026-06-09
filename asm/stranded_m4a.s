@@ -188,3 +188,13 @@ ply_xwave:
 ply_xiecv:
 	.incbin "baserom.gba", 0xD6320, 0xC
 
+	.section .text.s_080D632C, "ax", %progbits
+@ ply_xiecl region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D632C..0x080D6338
+	.thumb
+	.align 2, 0
+	.global ply_xiecl
+	.thumb_func
+ply_xiecl:
+	.incbin "baserom.gba", 0xD632C, 0xC
+
