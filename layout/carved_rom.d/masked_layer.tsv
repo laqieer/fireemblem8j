@@ -192,3 +192,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 04A138	04A14C	src/masked_0804a138.o(.text)	masked_0804a138(run): LinkArenaBattleMap_ClearCmdBuffer
 04A1A4	04A1CC	src/masked_0804a1a4.o(.text)	masked_0804a1a4(run): LinkArenaBattleMap_FindUnitSlot
 04A2D0	04A2EC	src/masked_0804a2d0.o(.text)	masked_0804a2d0(run): LinkArenaBattleMap_ClearUnitSlots
+04A540	04A584	src/masked_0804a540.o(.text)	masked_0804a540(run): LinkArenaBattleMap_CountTeamUnits
