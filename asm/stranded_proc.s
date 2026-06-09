@@ -18,3 +18,13 @@ Proc_End:
 Proc_Goto:
 	.incbin "baserom.gba", 0x2E74, 0x38
 
+	.section .text.s_08002EAC, "ax", %progbits
+@ Proc_GotoScript region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08002EAC..0x08002EB4
+	.thumb
+	.align 2, 0
+	.global Proc_GotoScript
+	.thumb_func
+Proc_GotoScript:
+	.incbin "baserom.gba", 0x2EAC, 0x8
+
