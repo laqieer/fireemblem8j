@@ -163,3 +163,4 @@
 017EDC	017FB0	src/exact_08017edc.o(.text)	exact_08017edc(run): UnitCheckStatCaps
 018030	018060	src/exact_08018030.o(.text)	exact_08018030(run): CanUnitRescue
 018060	018084	src/exact_08018060.o(.text)	exact_08018060(run): UnitRescue
+01876C	0187B0	src/exact_0801876c.o(.text)	exact_0801876c(run): UnitHasMagicRank, DeployUnitAtPosition
