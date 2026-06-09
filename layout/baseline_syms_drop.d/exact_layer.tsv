@@ -135,3 +135,7 @@ StartMenuAt
 GetPaletteIdForAllegience
 MapUnitC_SetGfxNeedsUpdate
 RefreshGmNodeLinks
+WmMinimap_PutCursorIcon
+WmMinimap_PutLordIcon
+WmMinimap_PutSkirmishIcons
+WmMinimap_PutStoryNodeIcon

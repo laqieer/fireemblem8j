@@ -231,3 +231,8 @@ StartMenuCore	0804FA3C	thumb	exact_0804f980
 GetPaletteIdForAllegience	080BFC04	thumb	exact_080bfe68
 RefreshGmNodeLinksExt	080C17B0	thumb	exact_080c184c
 gUnk_10	0201AFF0	data	exact_080c184c
+WmMinimap_PutStoryNodeIcon	080C8528	thumb	exact_080c881c
+WmMinimap_PutSkirmishIcons	080C8674	thumb	exact_080c881c
+WmMinimap_PutLordIcon	080C85C4	thumb	exact_080c881c
+WmMinimap_PutCursorIcon	080C84A0	thumb	exact_080c881c
+WmMinimap_BlinkPalette	080C87E0	thumb	exact_080c881c

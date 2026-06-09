@@ -420,3 +420,4 @@
 04F980	04FA3C	src/exact_0804f980.o(.text)	exact_0804f980(run): StartOrphanMenuAdjustedExt, StartMenuExt, StartOrphanMenuAtExt...
 0BFE68	0BFF10	src/exact_080bfe68.o(.text)	exact_080bfe68(run): MapUnitC_SetFaction, MapUnitC_SetPalette, MapUnitC_SetGfxNeedsUpdate
 0C184C	0C185C	src/exact_080c184c.o(.text)	exact_080c184c(run): RefreshGmNodeLinks
+0C881C	0C8844	src/exact_080c881c.o(.text)	exact_080c881c(run): PutWmMinimapSprites
