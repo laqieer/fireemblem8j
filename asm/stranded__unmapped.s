@@ -328,3 +328,13 @@ __sclose:
 error:
 	.incbin "baserom.gba", 0xDA4B8, 0x14
 
+	.section .text.s_080DA4CC, "ax", %progbits
+@ wrap region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DA4CC..0x080DA4E4
+	.thumb
+	.align 2, 0
+	.global wrap
+	.thumb_func
+wrap:
+	.incbin "baserom.gba", 0xDA4CC, 0x18
+
