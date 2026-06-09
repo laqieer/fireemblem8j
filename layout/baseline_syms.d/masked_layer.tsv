@@ -49,3 +49,4 @@ gDungeonState	03001798	data	masked_08037f34
 gDungeonState	03001798	data	masked_080380f8
 gPlaySt	0202BCEC	data	masked_080380f8
 gDungeonState	03001798	data	masked_08039314
+gWorkingTerrainMoveCosts	03004B50	data	masked_0801a198

@@ -39,3 +39,4 @@
 037F34	037FA8	src/masked_08037f34.o(.text)	masked_08037f34(run): SaveDungeonState, LoadDungeonState, SaveDungeonRecords...
 0380F8	03830C	src/masked_080380f8.o(.text)	masked_080380f8(run): UpdateDungeonRecordStats, UpdateDungeonEnemiesDefeated
 039314	0393D8	src/masked_08039314.o(.text)	masked_08039314(run): GetRecordDungeonValueByUiLabel
+01A198	01A1B8	src/masked_0801a198.o(.text)	masked_0801a198(run): SetWorkingMoveCosts
