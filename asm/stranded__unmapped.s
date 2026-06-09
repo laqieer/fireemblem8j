@@ -148,3 +148,13 @@ __muldi3:
 __udivsi3:
 	.incbin "baserom.gba", 0xD67D0, 0x78
 
+	.section .text.s_080D6848, "ax", %progbits
+@ __umodsi3 region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D6848..0x080D6908
+	.thumb
+	.align 2, 0
+	.global __umodsi3
+	.thumb_func
+__umodsi3:
+	.incbin "baserom.gba", 0xD6848, 0xC0
+

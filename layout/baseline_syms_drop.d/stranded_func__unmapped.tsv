@@ -1,3 +1,4 @@
 InitSupportBonuses
 __muldi3
 __udivsi3
+__umodsi3
