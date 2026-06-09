@@ -815,7 +815,6 @@ BattleApplyItemEffect	0802CB8C	thumb	bmusemind
 BeginBattleAnimations	0802C94C	thumb	bmusemind
 GetUnitMaxHp	08018EA4	thumb	bmusemind
 SetUnitHp	08019040	thumb	bmusemind
-SetUnitStatus	08017680	thumb	bmusemind
 StartAvailableDoorTileEvent	08085544	thumb	bmusemind
 StartAvailableChestTileEvent	08085500	thumb	bmusemind
 BgAffinRotScaling	080B289C	thumb	chapterintrofx

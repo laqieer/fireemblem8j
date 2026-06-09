@@ -156,3 +156,4 @@
 02E530	02E544	src/exact_0802e530.o(.text)	exact_0802e530(run): EnableMapChange
 0270E0	02710C	src/exact_080270e0.o(.text)	exact_080270e0(run): GetUnitDisplayedSpritePalette
 0280C4	0280F4	src/exact_080280c4.o(.text)	exact_080280c4(run): ShowUnitSprite, GetUnitSpriteHideFlag
+017680	0176AC	src/exact_08017680.o(.text)	exact_08017680(run): SetUnitStatus, SetUnitStatusExt
