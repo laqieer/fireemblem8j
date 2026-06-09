@@ -3,3 +3,4 @@
 03000100	iwram	src/masked_080095e0.o(.bss)	masked_080095e0 .bss
 0203E1DC	ewram	src/masked_080599ac.o(ewram_data)	masked_080599ac ewram_data
 0203A4D0	ewram	src/masked_0802a2a4.o(ewram_data)	masked_0802a2a4 ewram_data
+0203A608	ewram	src/masked_0802c27c.o(ewram_data)	masked_0802c27c ewram_data
