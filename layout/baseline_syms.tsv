@@ -871,7 +871,6 @@ PutStringCentered	080143EC	thumb	mapanim_infobox
 MapInfoBox_DrawHp	0807E098	thumb	mapanim_infobox
 TsaSet_MapBattleBoxGfx	08A13CF8	data	mapanim_infobox
 SetScanlineBufWinR	0808471C	thumb	mapanim_scanline
-SetScanlineBufWinL	080846FC	thumb	mapanim_scanline
 OpAnim1_UpdateScroll	080CC178	thumb	opanim-main
 Tsa_OpAnimJoshua2	08B65D08	data	opanim-main
 gUnkData_98	08B3F650	data	opanim-main
