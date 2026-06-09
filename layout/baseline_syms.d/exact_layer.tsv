@@ -170,3 +170,4 @@ IsCharAlivePlayerUnit	08086F78	thumb	exact_08087134
 DoesCharExistAsPlayerUnit	08087154	thumb	exact_08087184
 AreAnyEnemyUnitDead	080871B4	thumb	exact_08087220
 GetDeadEnemyAmount	080871E8	thumb	exact_08087604
+StartMenuAt	0804FA24	thumb	exact_0804f924
