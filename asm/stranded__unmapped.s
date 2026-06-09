@@ -258,3 +258,13 @@ _b2d:
 _d2b:
 	.incbin "baserom.gba", 0xDA0C0, 0xE8
 
+	.section .text.s_080DA1A8, "ax", %progbits
+@ _ratio region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DA1A8..0x080DA1F8
+	.thumb
+	.align 2, 0
+	.global _ratio
+	.thumb_func
+_ratio:
+	.incbin "baserom.gba", 0xDA1A8, 0x50
+
