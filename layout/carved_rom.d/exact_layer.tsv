@@ -67,3 +67,4 @@
 013110	0131F0	src/exact_08013110.o(.text)	exact_08013110(run): ApplyBitmap, ApplyBitmapLine, ApplyBitmapTile...
 0131F0	013260	src/exact_080131f0.o(.text)	exact_080131f0(run): PutDigits, PutNumberTilesRightAligned
 013268	013288	src/exact_08013268.o(.text)	exact_08013268(run): Bmlib_IncrementCounter, Bmlib_DecrementCounter
+013288	0132A8	src/exact_08013288.o(.text)	exact_08013288(run): InitWindowScanlineBounds
