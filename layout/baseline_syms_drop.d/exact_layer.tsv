@@ -128,3 +128,4 @@ GetCgTextFlags
 EvCheck05_LOCA
 MapAnimStartSpellAssocFadeExt
 MapAnimSpellAssocResetPalExt
+StartSioMuFadeToColor
