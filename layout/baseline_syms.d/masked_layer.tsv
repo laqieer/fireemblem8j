@@ -65,3 +65,4 @@ Nop_Bmmap_0	08019860	thumb	masked_08019864
 gPlaySt	0202BCEC	data	masked_0802257c
 gActionData	0203A954	data	masked_080228c4
 gActionData	0203A954	data	masked_08022930
+gActionData	0203A954	data	masked_08022fe8
