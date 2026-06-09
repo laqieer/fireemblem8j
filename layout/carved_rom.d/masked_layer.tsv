@@ -158,3 +158,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0AC000	0AC094	src/masked_080ac000.o(.text)	masked_080ac000(run): GetMinimapSeaKindAt
 0AC1EC	0AC314	src/masked_080ac1ec.o(.text)	masked_080ac1ec(run): GetMinimapCliffKindAt
 0AC314	0AC358	src/masked_080ac314.o(.text)	masked_080ac314(run): GetMinimapStairTileAt
+0AC358	0AC388	src/masked_080ac358.o(.text)	masked_080ac358(run): GetMinimapDoorTileAt
