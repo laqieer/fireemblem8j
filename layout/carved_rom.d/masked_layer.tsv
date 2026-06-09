@@ -105,3 +105,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 03BEDC	03BF14	src/masked_0803bedc.o(.text)	masked_0803bedc(run): AiGetClassRank
 03C214	03C2F4	src/masked_0803c214.o(.text)	masked_0803c214(run): GetAiBestSafeStaffTargetPosition
 040D4C	040DE8	src/masked_08040d4c.o(.text)	masked_08040d4c(run): AiSetMovCostTableWithPassableWalls, AiSetMovCostTableWithPassableTerrain, AiSetMovCostTableWithTwoPassableTerrains
+041010	041044	src/masked_08041010.o(.text)	masked_08041010(run): AiUpdateNoMoveFlag
