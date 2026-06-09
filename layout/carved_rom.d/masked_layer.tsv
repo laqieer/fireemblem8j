@@ -100,3 +100,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 03C6AC	03C7A8	src/masked_0803c6ac.o(.text)	masked_0803c6ac(run): AiScriptCmd_02_ChangeAi, AiScriptCmd_03_Goto
 03C7D8	03C7F4	src/masked_0803c7d8.o(.text)	masked_0803c7d8(run): AiIsUnitNonActive
 03D360	03D374	src/masked_0803d360.o(.text)	masked_0803d360(run): AiScriptCmd_1B_NoOp
+03A794	03A800	src/masked_0803a794.o(.text)	masked_0803a794(run): AiCompare
