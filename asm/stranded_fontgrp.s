@@ -108,3 +108,13 @@ SetTextFont:
 InitText:
 	.incbin "baserom.gba", 0x3C8C, 0x28
 
+	.section .text.s_08003CB4, "ax", %progbits
+@ InitTextDb region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08003CB4..0x08003CDC
+	.thumb
+	.align 2, 0
+	.global InitTextDb
+	.thumb_func
+InitTextDb:
+	.incbin "baserom.gba", 0x3CB4, 0x28
+
