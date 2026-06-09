@@ -360,3 +360,4 @@
 0BFFB8	0BFFD0	src/exact_080bffb8.o(.text)	exact_080bffb8(run): MapUnitC_GetInitialClass, MapUnitC_GetDisplayedClass
 0C02CC	0C02F0	src/exact_080c02cc.o(.text)	exact_080c02cc(run): GmapUnitFade_AddUnit
 0BE6A0	0BE6AC	src/exact_080be6a0.o(.text)	exact_080be6a0(run): WorldMap_Loop
+0C221C	0C2224	src/exact_080c221c.o(.text)	exact_080c221c(run): GmMuPrim_OnInit
