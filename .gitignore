@@ -74,6 +74,9 @@ src/data/*.s
 .claude/settings.local.json
 .claude/*.local.md
 .claude/*.local.json
+# Agent-tool worktrees (isolation:worktree) are planted inside the repo —
+# transient build dirs that must never be tracked or travel on branches.
+.claude/worktrees/
 
 # Parallel-carving local coordination state (scripts/parallel/claim.py): task
 # claims + the registry lock. Local only — must NOT travel on per-task branches.
