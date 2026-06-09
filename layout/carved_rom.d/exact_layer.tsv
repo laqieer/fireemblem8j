@@ -393,3 +393,4 @@
 014050	014068	src/exact_08014050.o(.text)	exact_08014050(run): FadeInBlackSpeed08Unk
 0281F8	028224	src/exact_080281f8.o(.text)	exact_080281f8(run): GetUnitTotalSupportLevel
 02833C	0283C8	src/exact_0802833c.o(.text)	exact_0802833c(run): GetUnitSupporterNum, InitUnitsupports
+0A8E8C	0A8ECC	src/exact_080a8e8c.o(.text)	exact_080a8e8c(run): GetGameTotalTime
