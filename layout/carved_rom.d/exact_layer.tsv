@@ -191,3 +191,4 @@
 0C8E68	0C8E70	src/exact_080c8e68.o(.text)	exact_080c8e68(run): CreditsBlendCG_Init
 0C8F9C	0C8FAC	src/exact_080c8f9c.o(.text)	exact_080c8f9c(run): CreditsBlendCG_OnEnd
 0C949C	0C94A8	src/exact_080c949c.o(.text)	exact_080c949c(run): EndingCredits_EndBlendCG
+085290	0852BC	src/exact_08085290.o(.text)	exact_08085290(run): EventInfoCheckTalk
