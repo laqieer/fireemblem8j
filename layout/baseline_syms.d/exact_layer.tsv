@@ -106,3 +106,5 @@ CheckChapterFlag	08085F88	thumb	exact_080860a8
 GetSupportTalkEntry	08086A14	thumb	exact_08086a58
 DisplayEventMapAnim	08087F48	thumb	exact_08087f30
 SetupFaceGfxData	0800544C	thumb	exact_08005430
+GetFaceDisplayBits	080056AC	thumb	exact_080054c4
+FindFreeFaceSlot	08005478	thumb	exact_080054c4
