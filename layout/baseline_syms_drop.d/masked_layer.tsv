@@ -71,3 +71,4 @@ PutSpriteExt
 CheckPermanentFlag
 GetSupportTalkEntry
 gSupportTalkList
+EndFaceById

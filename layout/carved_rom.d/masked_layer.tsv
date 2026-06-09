@@ -132,3 +132,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 00C4A4	00C4DC	src/masked_0800c4a4.o(.text)	masked_0800c4a4(run): Event93_WmEnableNode, Event94_WmDisableNode
 00C800	00C834	src/masked_0800c800.o(.text)	masked_0800c800(run): Event9D_
 00CEC0	00CEE8	src/masked_0800cec0.o(.text)	masked_0800cec0(run): EventC1_SKIPWM, EventC2_WmNoFade
+005660	005678	src/masked_08005660.o(.text)	masked_08005660(run): EndFaceById
