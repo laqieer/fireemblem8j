@@ -118,3 +118,13 @@ BMapVSync_OnEnd:
 BMapVSync_OnLoop:
 	.incbin "baserom.gba", 0x30094, 0xC
 
+	.section .text.s_08030940, "ax", %progbits
+@ WfxCloudsOffsetGraphicsEffect region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08030940..0x080309A8
+	.thumb
+	.align 2, 0
+	.global WfxCloudsOffsetGraphicsEffect
+	.thumb_func
+WfxCloudsOffsetGraphicsEffect:
+	.incbin "baserom.gba", 0x30940, 0x68
+
