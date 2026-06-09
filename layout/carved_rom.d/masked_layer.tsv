@@ -114,3 +114,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0852BC	0852F0	src/masked_080852bc.o(.text)	masked_080852bc(run): CheckActiveUnitArea
 085350	08537C	src/masked_08085350.o(.text)	masked_08085350(run): CheckAnyBlueUnitArea1
 08537C	0853CC	src/masked_0808537c.o(.text)	masked_0808537c(run): CheckAnyBlueUnitArea2
+0853E4	08540C	src/masked_080853e4.o(.text)	masked_080853e4(run): CheckAnyBlueUnitArea4
