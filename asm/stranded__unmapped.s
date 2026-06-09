@@ -318,3 +318,13 @@ __swrite:
 __sclose:
 	.incbin "baserom.gba", 0xDA35C, 0x10
 
+	.section .text.s_080DA4B8, "ax", %progbits
+@ error region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DA4B8..0x080DA4CC
+	.thumb
+	.align 2, 0
+	.global error
+	.thumb_func
+error:
+	.incbin "baserom.gba", 0xDA4B8, 0x14
+

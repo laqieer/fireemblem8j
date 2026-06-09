@@ -30,3 +30,4 @@
 0DA2A8	0DA2DC	asm/stranded__unmapped.o(.text.s_080DA2A8)	_unmapped:__sread region-same Thumb (descriptive incbin)
 0DA2DC	0DA31C	asm/stranded__unmapped.o(.text.s_080DA2DC)	_unmapped:__swrite region-same Thumb (descriptive incbin)
 0DA35C	0DA36C	asm/stranded__unmapped.o(.text.s_080DA35C)	_unmapped:__sclose region-same Thumb (descriptive incbin)
+0DA4B8	0DA4CC	asm/stranded__unmapped.o(.text.s_080DA4B8)	_unmapped:error region-same Thumb (descriptive incbin)
