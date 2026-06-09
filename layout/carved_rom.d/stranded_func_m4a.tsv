@@ -7,3 +7,4 @@
 0D54F8	0D5574	asm/stranded_m4a.o(.text.s_080D54F8)	m4a:m4aSoundVSyncOff region-same Thumb (descriptive incbin)
 0D5574	0D55B0	asm/stranded_m4a.o(.text.s_080D5574)	m4a:m4aSoundVSyncOn region-same Thumb (descriptive incbin)
 0D5628	0D570C	asm/stranded_m4a.o(.text.s_080D5628)	m4a:MPlayStart region-same Thumb (descriptive incbin)
+0D570C	0D574C	asm/stranded_m4a.o(.text.s_080D570C)	m4a:m4aMPlayStop region-same Thumb (descriptive incbin)
