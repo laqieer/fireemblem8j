@@ -174,3 +174,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0B7E6C	0B7E9C	src/masked_080b7e6c.o(.text)	masked_080b7e6c(run): ClassIntroFlare_Init
 08DEDC	08DF20	src/masked_0808dedc.o(.text)	masked_0808dedc(run): GetCursorQuadrant
 08E614	08E63C	src/masked_0808e614.o(.text)	masked_0808e614(run): GetCursorScreenSideX
+08E63C	08E660	src/masked_0808e63c.o(.text)	masked_0808e63c(run): GetCursorScreenSideXAlt
