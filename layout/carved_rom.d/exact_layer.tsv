@@ -243,3 +243,4 @@
 07BF24	07BF2C	src/exact_0807bf24.o(.text)	exact_0807bf24(run): MuMaxWalkSpeedFunc
 07BF80	07BFA4	src/exact_0807bf80.o(.text)	exact_0807bf80(run): SetMuPal
 07BFCC	07BFF4	src/exact_0807bfcc.o(.text)	exact_0807bfcc(run): GetUnitMu
+0CC0BC	0CC0CC	src/exact_080cc0bc.o(.text)	exact_080cc0bc(run): Proc08AA6D04Main
