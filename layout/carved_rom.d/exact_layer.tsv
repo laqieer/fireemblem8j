@@ -395,3 +395,4 @@
 02833C	0283C8	src/exact_0802833c.o(.text)	exact_0802833c(run): GetUnitSupporterNum, InitUnitsupports
 0A8E8C	0A8ECC	src/exact_080a8e8c.o(.text)	exact_080a8e8c(run): GetGameTotalTime
 0A8ECC	0A8F0C	src/exact_080a8ecc.o(.text)	exact_080a8ecc(run): GetGameTotalTurnCount2
+0A7D70	0A7D8C	src/exact_080a7d70.o(.text)	exact_080a7d70(run): IsExtraSupportViewerEnabled

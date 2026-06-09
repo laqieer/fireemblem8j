@@ -205,3 +205,5 @@ FadeCore_StopObjPalFade	08014228	thumb	exact_08014050
 GetUnitSupportLevel	080281D0	thumb	exact_080281f8
 GetUnitSupporterCharacter	08028170	thumb	exact_0802833c
 GetUnitSupporterUnit	08028188	thumb	exact_0802833c
+GGM_IsAnyCharacterKnown	080A8278	thumb	exact_080a7d70
+IsGamePlayedThrough	080A82B4	thumb	exact_080a7d70

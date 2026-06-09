@@ -109,3 +109,5 @@ SetPalFadeStClkEnd2
 FadeCore_StopObjPalFade
 GetUnitSupporterCharacter
 GetUnitSupporterNum
+GGM_IsAnyCharacterKnown
+IsGamePlayedThrough
