@@ -181,3 +181,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0A2D28	0A2D48	src/masked_080a2d28.o(.text)	masked_080a2d28(run): IsChapterIndexAbove0x61
 099DA4	099E70	src/masked_08099da4.o(.text)	masked_08099da4(run): SallyCir_RectInit
 033680	033700	src/masked_08033680.o(.text)	masked_08033680(run): PrepCameraPan_Init, PrepCameraPan_TurnDown, PrepCameraPan_TurnLeft...
+09A2B4	09A2EC	src/masked_0809a2b4.o(.text)	masked_0809a2b4(run): ApplyPrepWindowColorPalette

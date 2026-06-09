@@ -222,3 +222,6 @@ GetChapterDivinationTextIdHectorStory	080A2C40	thumb	masked_080a2ce8
 gPlaySt	0202BCEC	data	masked_080a2ce8
 gPlaySt	0202BCEC	data	masked_080a2d28
 gBmMapSize	0202E4D0	data	masked_08033680
+gPlaySt	0202BCEC	data	masked_0809a2b4
+gPrepscreen_5	02013460	data	masked_0809a2b4
+Pal_UnkData_1	08A99EE0	data	masked_0809a2b4
