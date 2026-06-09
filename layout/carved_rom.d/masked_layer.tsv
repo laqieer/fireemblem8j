@@ -138,3 +138,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 00635C	006374	src/masked_0800635c.o(.text)	masked_0800635c(run): SetFaceBlinkControlById
 0063E0	0063F8	src/masked_080063e0.o(.text)	masked_080063e0(run): SetFaceEyeControlById
 00651C	006530	src/masked_0800651c.o(.text)	masked_0800651c(run): SetFacePosition
+0096D8	009840	src/masked_080096d8.o(.text)	masked_080096d8(run): GetRealChaperIndex
