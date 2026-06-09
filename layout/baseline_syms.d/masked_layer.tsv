@@ -108,3 +108,4 @@ gPlaySt	0202BCEC	data	masked_0803e808
 gRedAiEscapePoints	085D2090	data	masked_0803e808
 gGreenAiEscapePoints	085D2194	data	masked_0803e808
 gAiDecision	0203AA90	data	masked_0803e808
+gAiState	0203AA00	data	masked_0803f2c0
