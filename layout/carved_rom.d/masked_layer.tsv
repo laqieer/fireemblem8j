@@ -80,3 +80,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 018A60	018AA4	src/masked_08018a60.o(.text)	masked_08018a60(run): GetUnitMovementCost
 034520	034548	src/masked_08034520.o(.text)	masked_08034520(run): GetROMChapterStruct
 03460C	034624	src/masked_0803460c.o(.text)	masked_0803460c(run): IsDifficultMode
+0201A4	0201DC	src/masked_080201a4.o(.text)	masked_080201a4(run): ChapterIntro_LightExplosion_Init
