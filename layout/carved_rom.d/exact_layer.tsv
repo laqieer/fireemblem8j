@@ -410,3 +410,4 @@
 0916AC	0916FC	src/exact_080916ac.o(.text)	exact_080916ac(run): CgText_AdjustBoxPosition
 085CB0	085CC4	src/exact_08085cb0.o(.text)	exact_08085cb0(run): EvCheck06_VILL
 084998	084A70	src/exact_08084998.o(.text)	exact_08084998(run): MapAnimDitheredCircleScanlineCore
+084188	084194	src/exact_08084188.o(.text)	exact_08084188(run): MapAnimStartSpellAssocFade

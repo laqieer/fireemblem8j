@@ -126,3 +126,4 @@ GetUnitAid
 CgText_AdjustBoxPosition
 GetCgTextFlags
 EvCheck05_LOCA
+MapAnimStartSpellAssocFadeExt
