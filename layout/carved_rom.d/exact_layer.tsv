@@ -49,3 +49,4 @@
 03676C	0367A0	src/exact_0803676c.o(.text)	exact_0803676c(run): BattleForecastHitCountUpdate
 036DD0	036E0C	src/exact_08036dd0.o(.text)	exact_08036dd0(run): DrawBattleForecastContents
 031800	031858	src/exact_08031800.o(.text)	exact_08031800(run): GetUnitBestWRankType, GetClassBestWRankType
+031924	031944	src/exact_08031924.o(.text)	exact_08031924(run): IsWeaponMagic
