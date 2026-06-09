@@ -133,3 +133,4 @@
 0A7F44	0A7F88	src/exact_080a7f44.o(.text)	exact_080a7f44(run): GetTotalGlobalSupportValue
 0A81EC	0A8278	src/exact_080a81ec.o(.text)	exact_080a81ec(run): SGM_SetCharacterKnown, GGM_IsCharacterKnown
 0A8278	0A82AC	src/exact_080a8278.o(.text)	exact_080a8278(run): GGM_IsAnyCharacterKnown
+0A84CC	0A858C	src/exact_080a84cc.o(.text)	exact_080a84cc(run): JudgeGameRankSaveData
