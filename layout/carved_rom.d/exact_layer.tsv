@@ -349,3 +349,4 @@
 0C8E40	0C8E68	src/exact_080c8e40.o(.text)	exact_080c8e40(run): GetGMapBaseMenuPid, SetGMapBaseMenuPid
 0C4B64	0C4B84	src/exact_080c4b64.o(.text)	exact_080c4b64(run): GmMuEntry_Init
 0BFAB4	0BFAC8	src/exact_080bfab4.o(.text)	exact_080bfab4(run): GmapUnit_Init
+0BFC04	0BFC20	src/exact_080bfc04.o(.text)	exact_080bfc04(run): GetPaletteIdForAllegience
