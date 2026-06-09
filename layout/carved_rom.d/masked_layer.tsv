@@ -230,3 +230,4 @@ AAF6D8	AAF6DC	src/masked_080b62bc.o(.data)	masked_080b62bc .data
 0C14EC	0C1524	src/masked_080c14ec.o(.text)	masked_080c14ec(run): WMMenu_IsVendorAvailable
 0C1524	0C156C	src/masked_080c1524.o(.text)	masked_080c1524(run): WMMenu_IsSecretShopAvailable
 0C156C	0C1594	src/masked_080c156c.o(.text)	masked_080c156c(run): WMMenu_IsNodeUnclearedAvailable
+0C1594	0C15BC	src/masked_080c1594.o(.text)	masked_080c1594(run): WMMenu_IsNodeClearedAvailable
