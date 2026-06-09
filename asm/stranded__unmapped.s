@@ -78,3 +78,13 @@ UnlinkProcess:
 ProcCmd_DELETE:
 	.incbin "baserom.gba", 0x3038, 0xC
 
+	.section .text.s_08003220, "ax", %progbits
+@ ProcCmd_SET_MARK region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08003220..0x08003234
+	.thumb
+	.align 2, 0
+	.global ProcCmd_SET_MARK
+	.thumb_func
+ProcCmd_SET_MARK:
+	.incbin "baserom.gba", 0x3220, 0x14
+
