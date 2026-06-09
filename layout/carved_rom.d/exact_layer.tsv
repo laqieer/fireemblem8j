@@ -275,3 +275,4 @@
 097C94	097CFC	src/exact_08097c94.o(.text)	exact_08097c94(run): PrepAutoCapDeployUnits
 002B58	002BCC	src/exact_08002b58.o(.text)	exact_08002b58(run): Proc_Init
 002DEC	002E14	src/exact_08002dec.o(.text)	exact_08002dec(run): Proc_Find
+002F3C	002FBC	src/exact_08002f3c.o(.text)	exact_08002f3c(run): Proc_BlockEachMarked, Proc_UnblockEachMarked, Proc_EndEachMarked
