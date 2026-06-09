@@ -134,3 +134,4 @@
 0A81EC	0A8278	src/exact_080a81ec.o(.text)	exact_080a81ec(run): SGM_SetCharacterKnown, GGM_IsCharacterKnown
 0A8278	0A82AC	src/exact_080a8278.o(.text)	exact_080a8278(run): GGM_IsAnyCharacterKnown
 0A84CC	0A858C	src/exact_080a84cc.o(.text)	exact_080a84cc(run): JudgeGameRankSaveData
+0A8914	0A89C8	src/exact_080a8914.o(.text)	exact_080a8914(run): IsSoundRoomSongUnlocked, UnlockSoundRoomSong
