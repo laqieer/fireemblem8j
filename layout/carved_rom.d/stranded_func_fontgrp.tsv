@@ -1,1 +1,2 @@
 003800	003814	asm/stranded_fontgrp.o(.text.s_08003800)	fontgrp:PrintEmptyStringToDBG region-same Thumb (descriptive incbin)
+003814	00382C	asm/stranded_fontgrp.o(.text.s_08003814)	fontgrp:ClearSmallStringBuffer region-same Thumb (descriptive incbin)
