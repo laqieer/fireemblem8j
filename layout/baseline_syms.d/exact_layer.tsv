@@ -93,3 +93,4 @@ GetUnitAid	080186CC	thumb	exact_08018030
 IsPositionMagicSealed	080189AC	thumb	exact_08018a1c
 StartPromoTraineeEvent	080D2358	thumb	exact_080d2348
 Make6C_PromotionMain	080D11B4	thumb	exact_080d1184
+AiEquipBestMatch	0803EB34	thumb	exact_0803eb80
