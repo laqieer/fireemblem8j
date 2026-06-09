@@ -98,3 +98,13 @@ ColorFadeSetupRange:
 ColorFadeSetStepRange:
 	.incbin "baserom.gba", 0x17C8, 0x24
 
+	.section .text.s_08001D50, "ax", %progbits
+@ GetBackgroundFromBufferPointer region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08001D50..0x08001DBC
+	.thumb
+	.align 2, 0
+	.global GetBackgroundFromBufferPointer
+	.thumb_func
+GetBackgroundFromBufferPointer:
+	.incbin "baserom.gba", 0x1D50, 0x6C
+
