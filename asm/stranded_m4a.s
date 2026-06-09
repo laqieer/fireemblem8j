@@ -38,3 +38,13 @@ m4aMPlayFadeOutTemporarily:
 m4aMPlayFadeIn:
 	.incbin "baserom.gba", 0xD50BC, 0x28
 
+	.section .text.s_080D50E4, "ax", %progbits
+@ m4aMPlayImmInit region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D50E4..0x080D512C
+	.thumb
+	.align 2, 0
+	.global m4aMPlayImmInit
+	.thumb_func
+m4aMPlayImmInit:
+	.incbin "baserom.gba", 0xD50E4, 0x48
+
