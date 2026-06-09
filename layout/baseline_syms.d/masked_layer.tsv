@@ -135,3 +135,4 @@ gAiScript_FallbackAi2	085D2044	data	masked_0803c44c
 gAiState	0203AA00	data	masked_0803c6ac
 gpAi1Table	085D30EC	data	masked_0803c6ac
 gpAi2Table	085D30E0	data	masked_0803c6ac
+gBmMapSize	0202E4D0	data	masked_0803b244
