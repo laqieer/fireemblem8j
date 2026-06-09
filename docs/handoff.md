@@ -14,8 +14,22 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
   real data gap via `scripts/carve_frontier.py` (table/frame_arrays/blob/data_gaps modes); 0 data gaps
   remain. JP physically carries ~463KB MORE data than the US-decomp total (region-different glyphs/tables/
   layout), so the raw metric hit 103.49% — `calcprogress.py` now caps the data % at 100 (display-only;
-  true carved bytes 13748514 still printed; `make compare` sha1 is the oracle). **The SOLE remaining
-  frontier is region-different CODE (~693KB, ~227 thumb-head gaps between carved `.text`).** Earlier rolling-
+  true carved bytes 13748514 still printed; `make compare` sha1 is the oracle).
+  - **CODE FRONT — recon CORRECTED its nature (overturns "mechanical exhausted at 306"):** the 767KB / 279
+    uncarved code gaps are NOT mostly region-different. Real split (funcmap ⊗ carved, offset-bug fixed):
+    **A = ~1506 region-SAME functions / 87KB mechanically carveable** + **B = ~158KB / 11 TUs genuinely
+    region-different (RE)**. The mechanical layer was HIDDEN by (i) a VRAM-vs-ROM-offset unit bug in the gap
+    script and (ii) D2's run-only carving — `find_runs` only carves contiguous whole-block runs, so exact
+    functions STRANDED between region-different neighbors get skipped (e.g. bmbattle.c: 36 mapped fns, only
+    1 run carved). **No port_run failure class remains** (addend/EWRAM/multiple-def all fixed). Priority:
+    **(1) A1-exact 727 fns / 28.6KB** — funcmap-`exact`, JP bytes uniquely match US (verified
+    GetBattleUnitHitCount JP@0x2AFF0 = US all 18B), RE risk ~0; carve PER-FUNCTION (1-fn runs via port_run,
+    bypassing D2's run limit — exact layer has no false-positive risk) for +function metric (1329 -> ~2056).
+    In flight as `carve/exact-layer` (fragment-based). **(2) A1-masked 616 fns / 40.3KB** — pointer rebind.
+    **(3) B-class 11 TUs** (RE): banim-efxmagic-aura/-gespenst/-refresh, banim-main, classdisplayfont,
+    code_8086934(done), eventfx-stoneshatter(partial), events_script, main, msg + 9 unported code TUs/8.5KB.
+    The 51 "unported US TUs" are mostly (42) 0-.text data files (data already 100% carved); only 9 have code.
+  Earlier rolling-
   isolated P8 team, lead serial-integrated each delivery (see decisions.md D19). Landed on main:
   - **Recursive `carve_data_refs.py` (fixed) — +41.6KB / 457 region-different objects.**
     Two-pass deterministic sizing: PASS 1 accepts only 4-aligned real object starts
