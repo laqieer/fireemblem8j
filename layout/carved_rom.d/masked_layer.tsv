@@ -67,3 +67,4 @@
 0A76F4	0A7704	src/masked_080a76f4.o(.text)	masked_080a76f4(run): IsSramWorking
 0A7EAC	0A7F10	src/masked_080a7eac.o(.text)	masked_080a7eac(run): GetUnitsAverageSupportValue
 A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
+0A881C	0A886C	src/masked_080a881c.o(.text)	masked_080a881c(run): SaveEndgameRankings

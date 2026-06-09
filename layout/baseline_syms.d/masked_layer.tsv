@@ -88,3 +88,9 @@ InitGlobalSaveInfodata	080A7828	thumb	masked_080a9658
 RegisterCompletedPlaythrough	080A9614	thumb	masked_080a9658
 gPlaySt	0202BCEC	data	masked_080a9658
 WriteGlobalSaveInfo	080A77EC	thumb	masked_080a9658
+GetNextChapterMode	080A841C	thumb	masked_080a881c
+GenerateGameRankSaveData	080A858C	thumb	masked_080a881c
+GetSavedRankData	080A8428	thumb	masked_080a881c
+JudgeGameRankSaveData	080A84CC	thumb	masked_080a881c
+SaveNewRankData	080A848C	thumb	masked_080a881c
+gPlaySt	0202BCEC	data	masked_080a881c

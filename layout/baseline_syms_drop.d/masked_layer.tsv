@@ -44,3 +44,6 @@ PidStatsGetTotalBattleAmt
 PidStatsGetTotalWinAmt
 RegisterCompletedPlaythrough
 IsSramWorking
+GetNextChapterMode
+GetSavedRankData
+JudgeGameRankSaveData
