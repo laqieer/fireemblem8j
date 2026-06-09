@@ -75,3 +75,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 02E4C4	02E530	src/masked_0802e4c4.o(.text)	masked_0802e4c4(run): ApplyMapChangesById
 02E990	02E9C8	src/masked_0802e990.o(.text)	masked_0802e990(run): AddLightRune
 0265BC	0265CC	src/masked_080265bc.o(.text)	masked_080265bc(run): RequestUnitSpriteSheetSync
+027310	027348	src/masked_08027310.o(.text)	masked_08027310(run): AddUnitSprite
