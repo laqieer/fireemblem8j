@@ -224,3 +224,4 @@ AAF6D8	AAF6DC	src/masked_080b62bc.o(.data)	masked_080b62bc .data
 0BDE9C	0BDEB4	src/masked_080bde9c.o(.text)	masked_080bde9c(run): WorldMap_SetInitialState
 0BDFDC	0BE01C	src/masked_080bdfdc.o(.text)	masked_080bdfdc(run): WorldMap_SetMergedNodeIcon
 0BE0E0	0BE198	src/masked_080be0e0.o(.text)	masked_080be0e0(run): WmMain_MoveCamera
+0BEBA0	0BEBB0	src/masked_080beba0.o(.text)	masked_080beba0(run): WorldMap_SetMonsterMergedState
