@@ -173,3 +173,4 @@ SetFaceBlinkControl	0800633C	thumb	masked_0800635c
 SetFaceEyeControl	080063D8	thumb	masked_080063e0
 gPlaySt	0202BCEC	data	masked_08009e3c
 GetDialogueBoxConfig	0808C834	thumb	masked_0808c840
+gBmSt	0202BCAC	data	masked_08082ee8
