@@ -379,3 +379,45 @@
 0BF578	0BF5B4	src/exact_080bf578.o(.text)	exact_080bf578(run): GMapScreenVSync_AddCopyRequest
 0C052C	0C0548	src/exact_080c052c.o(.text)	exact_080c052c(run): SkipGmNodeIconDisplay, UnskipGmNodeIconDisplay
 0C0554	0C0574	src/exact_080c0554.o(.text)	exact_080c0554(run): GmapScreen2_Init
+0091AC	0091D4	src/exact_080091ac.o(.text)	exact_080091ac(run): AP_Update
+009588	0095A8	src/exact_08009588.o(.text)	exact_08009588(run): AP_ExecDummyFrame
+0095A8	0095E0	src/exact_080095a8.o(.text)	exact_080095a8(run): AP_Init
+00967C	0096A4	src/exact_0800967c.o(.text)	exact_0800967c(run): APProc_OnEnd, APProc_SetParameters
+072028	072048	src/exact_08072028.o(.text)	exact_08072028(run): GetEkrDragonStatusType_, SetEkrDragonStatusType
+05B058	05B074	src/exact_0805b058.o(.text)	exact_0805b058(run): GetAnimAnotherSide
+05B6D4	05B6E4	src/exact_0805b6d4.o(.text)	exact_0805b6d4(run): SetMainMiniAnimId
+05B7F0	05B80C	src/exact_0805b7f0.o(.text)	exact_0805b7f0(run): EkrUnitMainMiniMain
+0371C8	03720C	src/exact_080371c8.o(.text)	exact_080371c8(run): BattleForecast_OnNewBattle
+01354C	013560	src/exact_0801354c.o(.text)	exact_0801354c(run): SetPalFadeStClkEnd3
+01358C	013608	src/exact_0801358c.o(.text)	exact_0801358c(run): ArchiveCurrentPalettes, ArchivePalette
+014050	014068	src/exact_08014050.o(.text)	exact_08014050(run): FadeInBlackSpeed08Unk
+0281F8	028224	src/exact_080281f8.o(.text)	exact_080281f8(run): GetUnitTotalSupportLevel
+02833C	0283C8	src/exact_0802833c.o(.text)	exact_0802833c(run): GetUnitSupporterNum, InitUnitsupports
+0A8E8C	0A8ECC	src/exact_080a8e8c.o(.text)	exact_080a8e8c(run): GetGameTotalTime
+0A8ECC	0A8F0C	src/exact_080a8ecc.o(.text)	exact_080a8ecc(run): GetGameTotalTurnCount2
+0A7D70	0A7D8C	src/exact_080a7d70.o(.text)	exact_080a7d70(run): IsExtraSupportViewerEnabled
+0A7D8C	0A7E08	src/exact_080a7d8c.o(.text)	exact_080a7d8c(run): GetRankDataValidBitMap
+0A7E60	0A7EAC	src/exact_080a7e60.o(.text)	exact_080a7e60(run): IsExtraBonusClaimEnabled
+0A848C	0A84CC	src/exact_080a848c.o(.text)	exact_080a848c(run): SaveNewRankData
+02D758	02D76C	src/exact_0802d758.o(.text)	exact_0802d758(run): TradeMenu_OnInitUnselected
+02D850	02D8B8	src/exact_0802d850.o(.text)	exact_0802d850(run): TradeMenu_OnInitSelected
+02D9E4	02DA34	src/exact_0802d9e4.o(.text)	exact_0802d9e4(run): TradeMenu_OnEndSelected
+02E24C	02E268	src/exact_0802e24c.o(.text)	exact_0802e24c(run): AddFireTile
+02E268	02E2C0	src/exact_0802e268.o(.text)	exact_0802e268(run): AddGasTrap, AddArrowTrap, AddMapChangeTrap
+02710C	027144	src/exact_0802710c.o(.text)	exact_0802710c(run): GetUnitSpritePalette
+01772C	017834	src/exact_0801772c.o(.text)	exact_0801772c(run): UnitRemoveInvalidItems, GetUnitItemCount, UnitHasItem...
+0186CC	018730	src/exact_080186cc.o(.text)	exact_080186cc(run): GetUnitAid
+0916AC	0916FC	src/exact_080916ac.o(.text)	exact_080916ac(run): CgText_AdjustBoxPosition
+085CB0	085CC4	src/exact_08085cb0.o(.text)	exact_08085cb0(run): EvCheck06_VILL
+084998	084A70	src/exact_08084998.o(.text)	exact_08084998(run): MapAnimDitheredCircleScanlineCore
+084188	084194	src/exact_08084188.o(.text)	exact_08084188(run): MapAnimStartSpellAssocFade
+084194	0841A0	src/exact_08084194.o(.text)	exact_08084194(run): MapAnimSpellAssocResetPal
+04CF18	04CF28	src/exact_0804cf18.o(.text)	exact_0804cf18(run): SioWarpFx_0
+04CF78	04CF84	src/exact_0804cf78.o(.text)	exact_0804cf78(run): SioWarpFx_1
+04EB80	04EBCC	src/exact_0804eb80.o(.text)	exact_0804eb80(run): MultiBootSend
+04EBCC	04EBF0	src/exact_0804ebcc.o(.text)	exact_0804ebcc(run): MultiBootStartProbe
+00290C	002938	src/exact_0800290c.o(.text)	exact_0800290c(run): ChangeBgm_StartNewSong
+04F980	04FA3C	src/exact_0804f980.o(.text)	exact_0804f980(run): StartOrphanMenuAdjustedExt, StartMenuExt, StartOrphanMenuAtExt...
+0BFE68	0BFF10	src/exact_080bfe68.o(.text)	exact_080bfe68(run): MapUnitC_SetFaction, MapUnitC_SetPalette, MapUnitC_SetGfxNeedsUpdate
+0C184C	0C185C	src/exact_080c184c.o(.text)	exact_080c184c(run): RefreshGmNodeLinks
+0C881C	0C8844	src/exact_080c881c.o(.text)	exact_080c881c(run): PutWmMinimapSprites
