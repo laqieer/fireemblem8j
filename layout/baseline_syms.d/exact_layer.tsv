@@ -7,3 +7,4 @@ EfxUpdatePartsofScroll	080769D4	thumb	exact_08076a4c
 NewEfxRestWINH	0805C5D8	thumb	exact_0805c6ec
 gProcEkrBaseAppearExist	0201FAD4	data	exact_08057ef0
 PrepareBattleGraphicsMaybe	08057F80	thumb	exact_08056b3c
+PrepareBattleGraphicsMaybe	08057F80	thumb	exact_08056b4c
