@@ -30,10 +30,10 @@ JP_CS = os.path.join(FEB_DIR, "ROMFE8JP.cs")
 US_CS = os.path.join(FEB_DIR, "ROMFE8U.cs")
 US_ELF = "/home/laqieer/fireemblem8u/fireemblem8.elf"
 US_GBA = "/home/laqieer/fireemblem8u/fireemblem8.gba"  # prebuilt US binary, if present
-JP_GBA = "/home/laqieer/fireemblem8j/baserom.gba"
 
-# Output, relative to repo root (this script lives in <root>/scripts/).
+# Paths anchored to this repo (this script lives in <root>/scripts/).
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+JP_GBA = os.path.join(REPO_ROOT, "baserom.gba")  # JP base ROM lives at repo root
 OUT_TSV = os.path.join(REPO_ROOT, "reference", "maps", "febuilder_rom_us_jp.tsv")
 
 NM = os.environ.get("NM", "arm-none-eabi-nm")
@@ -47,6 +47,18 @@ WINDOW = 32                   # bytes compared for region same/diff
 
 # Field-name tokens that mark a small (< 0x02000000) value as a ROM *file offset*.
 ADDR_TOKENS = ("pointer", "address", "base", "table", "list")
+
+# If the field name's FINAL underscore-token is one of these pure quantity words,
+# the small value is a count / struct-field offset / size, NOT a ROM file offset,
+# even if an earlier token (``pointer``, ``address``, ...) looks address-like.
+# This overrides ADDR_TOKENS. It rejects e.g. ``..._list_default_size`` (a PLIST
+# count) and ``..._address_offset`` (a proc user-var struct offset) while keeping
+# real addresses such as ``..._count_address`` / ``..._width_address`` (the ROM
+# location where a count/width is stored), which end in ``address``.
+NONADDR_SUFFIX = (
+    "size", "count", "offset", "num", "default",
+    "index", "length", "width", "height", "crc", "version",
+)
 
 # A field assignment ``name = 0xHEX [ + 0xHEX | + DEC ] ;``. The required '(' in
 # the C# override-method signatures (``name(out uint ...) = ...`` never occurs;
@@ -101,9 +113,15 @@ def classify(name, value):
       * value == 0                              -> sentinel; skip
       * RAM_LO <= value < RAM_HI                -> RAM; skip (RAM unit's job)
       * ROM_VMA_BASE <= value < ROM_VMA_END     -> already a ROM VMA; use as-is
+      * 0 < value < RAM_LO and the field name's
+        final token is a quantity word          -> count/size/struct-offset; skip
       * 0 < value < RAM_LO and the field name
         contains an address token               -> ROM file offset; +0x08000000
       * else                                    -> count/id/size/crc/etc; skip
+
+    Already-VMA values (>= ROM_VMA_BASE) are honored as-is, so a real ROM
+    address whose name ends in a quantity word (none currently) is unaffected;
+    the quantity-suffix guard only applies to small (< RAM_LO) raw offsets.
     """
     if value == 0:
         return None
@@ -113,6 +131,8 @@ def classify(name, value):
         return value
     if 0 < value < RAM_LO:
         lname = name.lower()
+        if lname.rsplit("_", 1)[-1] in NONADDR_SUFFIX:
+            return None
         if any(tok in lname for tok in ADDR_TOKENS):
             return value + ROM_VMA_BASE
         return None
@@ -120,10 +140,11 @@ def classify(name, value):
 
 
 def load_us_symbols():
-    """Return (exact: dict vma->name, sorted_addrs: list, addr_to_name: dict).
+    """Return ``(addr_to_name: dict vma->name, sorted_addrs: list)``.
 
-    exact prefers, for a given address, a global/text symbol over local/debug
-    junk and the lexicographically smallest name for determinism.
+    For a given address, prefers a global/data symbol (uppercase nm type) over
+    local/debug junk, then the lexicographically smallest name, for determinism.
+    ``sorted_addrs`` is the ascending key list used for nearest-symbol bisect.
     """
     out = subprocess.run(
         [NM, "-n", US_ELF], check=True, capture_output=True, text=True

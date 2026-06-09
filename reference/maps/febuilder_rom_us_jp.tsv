@@ -31,7 +31,6 @@ map_tileanime2_pointer	0x08030BC8	0x08030C78	diff		ResetMapPaletteAnimations+0x3
 map_map_pointer_pointer	0x08034588	0x08034680	diff		GetChapterMapPointer+0x40	ROMFE8JP.cs:61
 map_mapchange_pointer	0x080345B4	0x080346AC	diff		GetChapterMapChangesPointer+0x28	ROMFE8JP.cs:62
 map_event_pointer	0x080345E4	0x080346DC	diff		GetChapterEventDataPointer+0x2C	ROMFE8JP.cs:63
-map_map_pointer_list_default_size	0x080000EB	0x080000EC	diff		crt0+0x2C	ROMFE8JP.cs:65
 support_unit_pointer	0x088582E8	0x08803D90	diff		gCharacterData+0x2C	ROMFE8JP.cs:67
 support_talk_pointer	0x08086A50	0x08084784	diff		GetSupportTalkEntry+0x3C	ROMFE8JP.cs:68
 unit_palette_color_pointer	0x080582F4	0x08057394	diff		PrepareBattleGraphicsMaybe+0x39C	ROMFE8JP.cs:69
@@ -187,7 +186,6 @@ supply_pointer_address	0x08031470	0x08031524	diff		ClearSupplyItems+0x1C	ROMFE8J
 function_sleep_handle_address	0x080031DD	0x08003291	diff		UpdateSleep+0x1	ROMFE8JP.cs:300
 function_fe_main_return_address	0x08000AB9	0x08000AE1	diff		ARMCodeToCopy_End+0xC1	ROMFE8JP.cs:302
 function_event_engine_loop_address	0x0800D111	0x0800CE4D	diff		EventEngine_OnUpdate+0x1	ROMFE8JP.cs:305
-workmemory_reference_procs_event_address_offset	0x08000034	0x08000034	same		RomHeaderNintendoLogo+0x30	ROMFE8JP.cs:306
 procs_maptask_pointer	0x08030F24	0x08030FD8	diff		RestartBattleMap+0x90	ROMFE8JP.cs:319
 procs_soundroomUI_pointer	0x080B4B44	0x080AFF2C	diff		StartSoundRoomScreen+0x10	ROMFE8JP.cs:320
 procs_game_main_address	0x085B946C	0x085916D4	diff	gProcScr_GameControl	gProcScr_GameControl	ROMFE8JP.cs:321
