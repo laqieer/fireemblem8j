@@ -56,6 +56,51 @@ ending in `fireemblem8.gba: OK`.
   is available. `decomp-dev.yml` computes progress from manifests and built
   `src/*.o` without needing the ROM.
 
+## MCP servers
+
+Configure Copilot CLI with the local reverse-engineering MCP servers in
+`~/.copilot/mcp-config.json`:
+
+```json
+{
+  "mcpServers": {
+    "ida": {
+      "type": "local",
+      "command": "/home/laqieer/ida-mcp-venv/bin/idalib-mcp",
+      "args": ["--stdio"],
+      "env": {
+        "IDADIR": "/home/laqieer/ida-pro-9.3"
+      },
+      "tools": ["*"],
+      "timeout": 180000
+    },
+    "ghidra": {
+      "type": "local",
+      "command": "/home/laqieer/ghidra-mcp-venv/bin/pyghidra-mcp",
+      "args": [
+        "--project-path",
+        "/home/laqieer/ghidra-projects",
+        "--project-name",
+        "fe8j",
+        "--wait-for-analysis"
+      ],
+      "env": {
+        "JAVA_HOME": "/home/laqieer/ghidra-tools/jdk-21.0.11+10",
+        "GHIDRA_INSTALL_DIR": "/home/laqieer/ghidra-tools/ghidra_12.1.2_PUBLIC"
+      },
+      "tools": ["*"],
+      "timeout": 300000
+    }
+  }
+}
+```
+
+For IDA, start `idalib-mcp` without passing `tools/ida/fe8j.i64`; open the
+database later with `idb_open(input_path="tools/ida/fe8j.i64",
+mode="force_headless")` and pass the returned session id as `database` to worker
+tools. If `idb_open` fails because stale sidecar files are held, inspect the
+specific idalib worker PID before terminating it.
+
 ## Decompilation conventions
 
 - Read `docs/strategy.md`, `docs/porting.md`, `docs/decisions.md`, and
