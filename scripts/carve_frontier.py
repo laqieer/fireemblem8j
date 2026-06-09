@@ -48,8 +48,17 @@ BASE = 0x08000000
 ROM = "baserom.gba"
 
 # Each subsystem: index table(s) as (jp_base, n_entries, stride, n_ptr_fields),
-# and region_end (exclusive). The table base + region_end are DERIVED FROM THE
-# JP ROM (IDA-decompiled indexing code), never assumed from US addresses.
+# and the asset region window. The table base + region bounds are DERIVED FROM THE
+# JP ROM (IDA-decompiled indexing code / live table reads), never assumed from US
+# addresses.
+#   region_start: optional. If omitted, the lowest table pointer below region_end
+#                 is used (chap_title case: the table is dedicated and its lowest
+#                 pointer IS the region start). Set explicitly when the table is
+#                 SHARED across the whole ROM and only a windowed slice of its
+#                 pointers tiles this frontier block (gChapterDataAssetTable case).
+#   region_end:   exclusive. The next named object / next table pointer after the
+#                 asset blob. Only table pointers in [region_start, region_end) are
+#                 used as boundaries; the region is tiled gaplessly between them.
 SUBSYS = {
     # Chapter-title images (chapter_title.c / chap_title_data.c).
     #   PutChapterTitleGfx (JP, IDA sub_808B894) clamps titleId to <=0x108 then 0x54
@@ -64,6 +73,21 @@ SUBSYS = {
     "chap_title": {
         "tables": [(0x08A732C0, 88, 12, 3)],
         "region_end": 0x08A92514,
+    },
+    # Map tilesets (const_data_chapter_maps.c / data_8B363C.c::gChapterDataAssetTable).
+    #   gChapterDataAssetTable (JP base 0x08907BC8 from layout/addr_map.tsv: US
+    #   0x088B363C -> JP 0x08907BC8; the table itself is already carved as
+    #   dat_gChapterDataAssetTable_ref) is a FLAT 236-word pointer array indexing
+    #   every chapter map asset (ObjectType* tile gfx, MapPalette*, TileConfiguration*,
+    #   map layouts, events) scattered across the ROM. bmmap.c/bmio.c index it by
+    #   GetROMChapterStruct(...)->map.{obj1Id,tileConfigId,...}. The ObjectType tile-gfx
+    #   frontier block [0x0817B398, 0x08190010) is tiled by exactly 3 of its pointers
+    #   (0x0817B398, 0x08181610, 0x08188888) and ends at the next pointer
+    #   0x08190010 (= TowerOfValniTileConfiguration). region-different LZ tilesets.
+    "map_objtype": {
+        "tables": [(0x08907BC8, 236, 4, 1)],
+        "region_start": 0x0817B398,
+        "region_end": 0x08190010,
     },
 }
 
@@ -110,10 +134,20 @@ def carve(name):
                 starts.add(a)
 
     region_end = cfg["region_end"]
-    starts = sorted(s for s in starts if s < region_end)
-    if not starts:
-        sys.exit("no asset starts below region_end — table coverage wrong")
-    region_start = starts[0]
+    # When region_start is set (shared/whole-ROM table), keep only the pointers
+    # that fall inside the window [region_start, region_end); these are the asset
+    # boundaries for THIS frontier block. When omitted (dedicated table), the
+    # lowest pointer below region_end is the region start.
+    region_start = cfg.get("region_start")
+    if region_start is not None:
+        starts = sorted(s for s in starts if region_start <= s < region_end)
+        if not starts or starts[0] != region_start:
+            sys.exit("table has no pointer at region_start — window/region wrong")
+    else:
+        starts = sorted(s for s in starts if s < region_end)
+        if not starts:
+            sys.exit("no asset starts below region_end — table coverage wrong")
+        region_start = starts[0]
 
     # --- per-asset boundaries (must tile the region gaplessly) -----------------
     assets = []  # (start, end)
