@@ -88,3 +88,13 @@ MaybeSmoothChangeSomePal:
 ColorFadeSetupRange:
 	.incbin "baserom.gba", 0x1740, 0x88
 
+	.section .text.s_080017C8, "ax", %progbits
+@ ColorFadeSetStepRange region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080017C8..0x080017EC
+	.thumb
+	.align 2, 0
+	.global ColorFadeSetStepRange
+	.thumb_func
+ColorFadeSetStepRange:
+	.incbin "baserom.gba", 0x17C8, 0x24
+

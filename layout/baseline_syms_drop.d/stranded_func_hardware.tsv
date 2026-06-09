@@ -4,3 +4,4 @@ SetNextVCount
 SetMainUpdateRoutine
 MaybeResetSomePal
 MaybeSmoothChangeSomePal
+ColorFadeSetStepRange

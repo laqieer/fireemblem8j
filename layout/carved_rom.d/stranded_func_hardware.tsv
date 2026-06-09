@@ -7,3 +7,4 @@
 00169C	0016B8	asm/stranded_hardware.o(.text.s_0800169C)	hardware:MaybeResetSomePal region-same Thumb (descriptive incbin)
 0016B8	001740	asm/stranded_hardware.o(.text.s_080016B8)	hardware:MaybeSmoothChangeSomePal region-same Thumb (descriptive incbin)
 001740	0017C8	asm/stranded_hardware.o(.text.s_08001740)	hardware:ColorFadeSetupRange region-same Thumb (descriptive incbin)
+0017C8	0017EC	asm/stranded_hardware.o(.text.s_080017C8)	hardware:ColorFadeSetStepRange region-same Thumb (descriptive incbin)
