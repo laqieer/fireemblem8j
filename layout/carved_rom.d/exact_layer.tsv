@@ -364,3 +364,4 @@
 0C246C	0C24B4	src/exact_080c246c.o(.text)	exact_080c246c(run): GmMuPrim_GetFacingFromAngle
 0C2E3C	0C2E68	src/exact_080c2e3c.o(.text)	exact_080c2e3c(run): GmMu_PauseMovement, GmMu_ResumeMovement
 0C2F14	0C2F7C	src/exact_080c2f14.o(.text)	exact_080c2f14(run): GmMu_IsMoving
+0C3118	0C3144	src/exact_080c3118.o(.text)	exact_080c3118(run): GmMu_FinishMovement
