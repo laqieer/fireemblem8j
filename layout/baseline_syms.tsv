@@ -717,7 +717,6 @@ gUnk_52	03001C2C	data	muctrl
 ProcScr_MuCtrl	08A13438	data	muctrl
 gUnk_54	03001C2E	data	muctrl
 MuCtr_GenMoveScript	0807CA10	thumb	muctrl
-SetMuConfig	0807B950	thumb	muctrl
 GetUnitInfoWindowX	080348DC	thumb	unitinfowindow
 UnitInfoWindow_DrawBase	08034744	thumb	unitinfowindow
 DrawUnitResChangeText	08034A50	thumb	unitinfowindow
