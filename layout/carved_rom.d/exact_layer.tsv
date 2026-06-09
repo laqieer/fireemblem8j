@@ -244,3 +244,4 @@
 07BF80	07BFA4	src/exact_0807bf80.o(.text)	exact_0807bf80(run): SetMuPal
 07BFCC	07BFF4	src/exact_0807bfcc.o(.text)	exact_0807bfcc(run): GetUnitMu
 0CC0BC	0CC0CC	src/exact_080cc0bc.o(.text)	exact_080cc0bc(run): Proc08AA6D04Main
+0CC754	0CC810	src/exact_080cc754.o(.text)	exact_080cc754(run): OpAnimHBlank1, OpAnimHBlank2
