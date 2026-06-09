@@ -279,3 +279,4 @@
 0AFDE8	0AFE14	src/exact_080afde8.o(.text)	exact_080afde8(run): SaveDrawCursor_Init
 0AFFD0	0AFFF0	src/exact_080affd0.o(.text)	exact_080affd0(run): SaveDraw_SetCursorSlotMark
 0B032C	0B0354	src/exact_080b032c.o(.text)	exact_080b032c(run): AddMainMenuOption, AddExtraMenuOption
+0B054C	0B0568	src/exact_080b054c.o(.text)	exact_080b054c(run): SaveMenuHasOptions
