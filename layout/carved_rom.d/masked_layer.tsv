@@ -89,3 +89,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 03E808	03E8CC	src/masked_0803e808.o(.text)	masked_0803e808(run): GetEscapePointStructThingMaybe, AiCanEquip
 03EF70	03EFA8	src/masked_0803ef70.o(.text)	masked_0803ef70(run): AiIsUnitAtPositionDifferentAllegiance
 03F2C0	03F2DC	src/masked_0803f2c0.o(.text)	masked_0803f2c0(run): AiFunc_StoreAiCounter
+03F33C	03F3C4	src/masked_0803f33c.o(.text)	masked_0803f33c(run): AiTryMoveToSpecificPosition
