@@ -649,3 +649,38 @@ drift and give the slow-but-correct ghidra cold start enough startup budget. Rev
 drop the env line); no source or build impact.
 
 **Status:** Done 2026-06-09. Verified by repeated concurrent `claude mcp list`.
+
+## D18 — Isolate Copilot's Ghidra project (`fe8j-cp`) so Claude + Copilot RE concurrently (2026-06-09)
+
+**Context:** The autonomous loop has Claude Code consult Copilot CLI (`agency cp`) at decision forks, and
+both clients are configured with the same local `ida` + `ghidra` MCP servers. A **Ghidra project takes an
+exclusive lock** while open (`<project>.lock`), so two `pyghidra-mcp` processes cannot serve the *same*
+project at once — the second fails with `-32000: Connection closed`. Claude keeps its `ghidra` server
+(project `fe8j`) alive for the entire session, so a concurrent Copilot consult could not attach Ghidra.
+(`ida` does **not** have this problem: idalib is a supervisor→worker design and a second client adopts the
+existing worker via `~/.idapro/mcp/instances`, so it's shared cleanly. Verified two `idalib-mcp` clients
+coexist.)
+
+**Options considered:** (1) give Copilot its own cloned project; (2) stagger — never hold Claude's ghidra
+while Copilot needs it; (3) drop `ghidra` from Copilot's config, keep only the shared `ida`.
+
+**Decision — option 1.** Copilot opens an **isolated clone `fe8j-cp`**; Claude keeps `fe8j`. They lock
+different files, so both decompile concurrently.
+- `scripts/ghidra/clone_copilot_project.sh` (+ `make ghidra-cp`) mirrors `fe8j` → `fe8j-cp` (the Ghidra
+  `.gpr`/`.rep` **and** the pyghidra-mcp sidecar `*-pyghidra-mcp/` = ChromaDB index + `.gzf` warm cache),
+  stripping locks; it refuses to run while a `pyghidra-mcp` holds either project. Re-run after
+  `make ghidra-db` so the copy doesn't go stale.
+- Copilot's `~/.copilot/mcp-config.json` ghidra `--project-name` is `fe8j-cp` (machine-local, mirrored in
+  `.github/copilot-instructions.md`).
+
+**Rationale over (2)/(3):** staggering is fragile in an autonomous loop that holds ghidra for a whole
+session; dropping ghidra would lose Copilot's independent second-opinion decompiler (the whole point of the
+Ghidra cross-check). The clone costs ~107 MB + a `make ghidra-cp` after each rebuild — cheap.
+
+**Verification:** (a) two `pyghidra-mcp` on `fe8j` + `fe8j-cp` launched in parallel both `✔ Connected`
+with both locks held at the same timestamp; (b) end-to-end `agency cp` had Copilot call
+`decompile_function(MCP: ghidra)` and return `void DecodeString(byte*,undefined1*,uint)` from `fe8j-cp`;
+(c) Claude's `ghidra`(fe8j) + `ida` stayed `✔`. No repo build impact (`make compare` untouched).
+
+**Status:** Done 2026-06-09. Clone + `make ghidra-cp` + docs committed; project files live under
+`~/ghidra-projects` (gitignored).

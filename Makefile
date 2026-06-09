@@ -113,7 +113,14 @@ ida-db: $(ELF)
 ghidra-db: $(ELF)
 	scripts/ghidra/build_ghidra_project.sh
 
-.PHONY: all compare clean layout ida-db ghidra-db
+# Refresh Copilot CLI's isolated copy of the Ghidra project (fe8j -> fe8j-cp) so
+# Claude and Copilot can run their `ghidra` MCP servers concurrently without
+# contending on the project's exclusive lock. Run after `ghidra-db`. See
+# docs/reverse-engineering.md and docs/decisions.md (D18).
+ghidra-cp:
+	scripts/ghidra/clone_copilot_project.sh
+
+.PHONY: all compare clean layout ida-db ghidra-db ghidra-cp
 
 asm/baserom.o: baserom.gba
 

@@ -262,6 +262,25 @@ only the functions it can reach — a region-different function still in the inc
 may need defining (in the correct ARM/Thumb mode) before it decompiles. Use
 `ghidra` as a cross-check, `ida` as the workhorse; `make compare` is the oracle.
 
+**Running Ghidra in Claude *and* Copilot at once.** A Ghidra project takes an
+**exclusive lock** while open, so two `pyghidra-mcp` processes cannot serve the
+*same* project simultaneously — the second fails with `MCP error -32000:
+Connection closed`. Since Claude Code keeps its `ghidra` server (project `fe8j`)
+alive for the whole session, the autonomous-loop Copilot consults (`agency cp`)
+would otherwise be unable to attach Ghidra. Fix: Copilot opens an **isolated
+clone** `fe8j-cp` instead (its `~/.copilot/mcp-config.json` sets
+`--project-name fe8j-cp`). Build/refresh the clone with:
+
+```bash
+make ghidra-db        # rebuild the canonical fe8j project (after symbol progress)
+make ghidra-cp        # mirror it into Copilot's fe8j-cp (scripts/ghidra/clone_copilot_project.sh)
+```
+
+Verified: with Claude on `fe8j` and Copilot on `fe8j-cp`, both `pyghidra-mcp`
+connect concurrently (independent `fe8j.lock` / `fe8j-cp.lock`) and Copilot
+decompiles through its copy. IDA needs no clone — its idalib worker is shared
+across clients via `~/.idapro/mcp/instances`. See `docs/decisions.md` (D18).
+
 ## Byte-matching: decomp-permuter
 
 The decompilers tell you *what* a function does; **decomp-permuter** closes the
