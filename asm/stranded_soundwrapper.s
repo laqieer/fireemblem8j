@@ -28,3 +28,13 @@ IsBgmPlaying:
 Sound_SetDefaultMaxNumChannels:
 	.incbin "baserom.gba", 0x2820, 0x18
 
+	.section .text.s_080029D8, "ax", %progbits
+@ Sound_ForceChangeBgm region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080029D8..0x08002A08
+	.thumb
+	.align 2, 0
+	.global Sound_ForceChangeBgm
+	.thumb_func
+Sound_ForceChangeBgm:
+	.incbin "baserom.gba", 0x29D8, 0x30
+
