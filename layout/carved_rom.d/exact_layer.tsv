@@ -108,3 +108,4 @@
 015154	015188	src/exact_08015154.o(.text)	exact_08015154(run): MatCopy
 015264	015288	src/exact_08015264.o(.text)	exact_08015264(run): VecDotVec
 015288	0152C8	src/exact_08015288.o(.text)	exact_08015288(run): VecCrossVec, Vec2CrossVec2
+022E1C	022E2C	src/exact_08022e1c.o(.text)	exact_08022e1c(run): BackToAttackMenu_RestartMenu
