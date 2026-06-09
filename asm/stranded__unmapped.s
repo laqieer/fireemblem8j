@@ -408,3 +408,13 @@ __pack_d:
 __unpack_d:
 	.incbin "baserom.gba", 0xDAAE8, 0xD8
 
+	.section .text.s_080DAE2C, "ax", %progbits
+@ __adddf3 region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DAE2C..0x080DAE5C
+	.thumb
+	.align 2, 0
+	.global __adddf3
+	.thumb_func
+__adddf3:
+	.incbin "baserom.gba", 0xDAE2C, 0x30
+

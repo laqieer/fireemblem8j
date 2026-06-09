@@ -39,3 +39,4 @@
 0DA918	0DA938	asm/stranded__unmapped.o(.text.s_080DA918)	_unmapped:abort region-same Thumb (descriptive incbin)
 0DA9A0	0DAAE8	asm/stranded__unmapped.o(.text.s_080DA9A0)	_unmapped:__pack_d region-same Thumb (descriptive incbin)
 0DAAE8	0DABC0	asm/stranded__unmapped.o(.text.s_080DAAE8)	_unmapped:__unpack_d region-same Thumb (descriptive incbin)
+0DAE2C	0DAE5C	asm/stranded__unmapped.o(.text.s_080DAE2C)	_unmapped:__adddf3 region-same Thumb (descriptive incbin)
