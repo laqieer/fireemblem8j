@@ -118,3 +118,13 @@ InitText:
 InitTextDb:
 	.incbin "baserom.gba", 0x3CB4, 0x28
 
+	.section .text.s_08003CDC, "ax", %progbits
+@ InitTextInitInfo region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08003CDC..0x08003CF8
+	.thumb
+	.align 2, 0
+	.global InitTextInitInfo
+	.thumb_func
+InitTextInitInfo:
+	.incbin "baserom.gba", 0x3CDC, 0x1C
+

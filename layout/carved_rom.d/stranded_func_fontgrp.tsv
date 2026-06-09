@@ -10,3 +10,4 @@
 003C68	003C8C	asm/stranded_fontgrp.o(.text.s_08003C68)	fontgrp:SetTextFont region-same Thumb (descriptive incbin)
 003C8C	003CB4	asm/stranded_fontgrp.o(.text.s_08003C8C)	fontgrp:InitText region-same Thumb (descriptive incbin)
 003CB4	003CDC	asm/stranded_fontgrp.o(.text.s_08003CB4)	fontgrp:InitTextDb region-same Thumb (descriptive incbin)
+003CDC	003CF8	asm/stranded_fontgrp.o(.text.s_08003CDC)	fontgrp:InitTextInitInfo region-same Thumb (descriptive incbin)
