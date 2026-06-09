@@ -8,3 +8,13 @@
 GetTileIndex:
 	.incbin "baserom.gba", 0xF54, 0x20
 
+	.section .text.s_08000FB4, "ax", %progbits
+@ SetBackgroundMapDataOffset region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08000FB4..0x08000FFC
+	.thumb
+	.align 2, 0
+	.global SetBackgroundMapDataOffset
+	.thumb_func
+SetBackgroundMapDataOffset:
+	.incbin "baserom.gba", 0xFB4, 0x48
+

@@ -1,1 +1,2 @@
 000F54	000F74	asm/stranded_hardware.o(.text.s_08000F54)	hardware:GetTileIndex region-same Thumb (descriptive incbin)
+000FB4	000FFC	asm/stranded_hardware.o(.text.s_08000FB4)	hardware:SetBackgroundMapDataOffset region-same Thumb (descriptive incbin)
