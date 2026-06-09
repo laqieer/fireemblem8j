@@ -109,3 +109,4 @@ SetupFaceGfxData	0800544C	thumb	exact_08005430
 GetFaceDisplayBits	080056AC	thumb	exact_080054c4
 FindFreeFaceSlot	08005478	thumb	exact_080054c4
 FaceRefreshSprite	080056C8	thumb	exact_08005678
+FaceBlinkProc_GenBlinkInterval	08006374	thumb	exact_0800633c

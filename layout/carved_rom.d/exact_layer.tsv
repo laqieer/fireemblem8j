@@ -207,3 +207,4 @@
 005678	005694	src/exact_08005678.o(.text)	exact_08005678(run): SetFaceDisplayBits
 005C68	005C74	src/exact_08005c68.o(.text)	exact_08005c68(run): FaceBgBlink_Init
 005ED8	005EE4	src/exact_08005ed8.o(.text)	exact_08005ed8(run): FaceMouth_Init
+00633C	00635C	src/exact_0800633c.o(.text)	exact_0800633c(run): SetFaceBlinkControl
