@@ -10,3 +10,4 @@
 0D570C	0D574C	asm/stranded_m4a.o(.text.s_080D570C)	m4a:m4aMPlayStop region-same Thumb (descriptive incbin)
 0D574C	0D5814	asm/stranded_m4a.o(.text.s_080D574C)	m4a:FadeOutBody region-same Thumb (descriptive incbin)
 0D5814	0D58C8	asm/stranded_m4a.o(.text.s_080D5814)	m4a:TrkVolPitSet region-same Thumb (descriptive incbin)
+0D5970	0D59C0	asm/stranded_m4a.o(.text.s_080D5970)	m4a:CgbOscOff region-same Thumb (descriptive incbin)

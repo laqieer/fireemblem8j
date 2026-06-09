@@ -118,3 +118,13 @@ FadeOutBody:
 TrkVolPitSet:
 	.incbin "baserom.gba", 0xD5814, 0xB4
 
+	.section .text.s_080D5970, "ax", %progbits
+@ CgbOscOff region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D5970..0x080D59C0
+	.thumb
+	.align 2, 0
+	.global CgbOscOff
+	.thumb_func
+CgbOscOff:
+	.incbin "baserom.gba", 0xD5970, 0x50
+
