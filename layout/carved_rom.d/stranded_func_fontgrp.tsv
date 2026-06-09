@@ -18,3 +18,4 @@
 004120	004140	asm/stranded_fontgrp.o(.text.s_08004120)	fontgrp:GetTextDrawDest region-same Thumb (descriptive incbin)
 0044E0	004504	asm/stranded_fontgrp.o(.text.s_080044E0)	fontgrp:InitSpriteText region-same Thumb (descriptive incbin)
 0045E8	004608	asm/stranded_fontgrp.o(.text.s_080045E8)	fontgrp:GetSpriteTextDrawDest region-same Thumb (descriptive incbin)
+004874	00487C	asm/stranded_fontgrp.o(.text.s_08004874)	fontgrp:IsTextPrinting region-same Thumb (descriptive incbin)
