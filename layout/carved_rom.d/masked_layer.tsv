@@ -146,3 +146,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 082EE8	082F18	src/masked_08082ee8.o(.text)	masked_08082ee8(run): DemonKingSummonShake_Init
 07E490	07E4F0	src/masked_0807e490.o(.text)	masked_0807e490(run): ProcMAExpBar_InitDisplay
 07E114	07E160	src/masked_0807e114.o(.text)	masked_0807e114(run): GetBattleInfoPalByFaction
+080F48	081070	src/masked_08080f48.o(.text)	masked_08080f48(run): GetManimLevelUpStatGain
