@@ -116,3 +116,4 @@
 0A97C4	0A980C	src/exact_080a97c4.o(.text)	exact_080a97c4(run): WriteLastGameSaveId, ReadLastGameSaveId
 0A9CD4	0A9D24	src/exact_080a9cd4.o(.text)	exact_080a9cd4(run): IsGameNotFirstChapter, IsGameSaveNotFirstChapter
 0A9D24	0A9D54	src/exact_080a9d24.o(.text)	exact_080a9d24(run): IsGameSaveComplete
+0AADE8	0AADF8	src/exact_080aade8.o(.text)	exact_080aade8(run): GetNextSuspendSaveId

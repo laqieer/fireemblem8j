@@ -40,7 +40,6 @@ LoadGMMonsterRnState	080ABC10	thumb	bmsave
 ReadSramFast	03006790	data	bmsave
 WriteSaveBlockInfo	080A79D8	thumb	bmsave
 IsSramWorking	080A76F4	thumb	bmsave
-GetNextSuspendSaveId	080AADE8	thumb	bmsave
 GetSaveWriteAddr	080A7AA8	thumb	bmsave
 GetGameClock	08000CD8	thumb	bmsave
 WriteSramFast	080D6420	thumb	bmsave
