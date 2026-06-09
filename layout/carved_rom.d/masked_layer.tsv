@@ -4,3 +4,4 @@
 074A24	074A4C	src/masked_08074a24.o(.text)	masked_08074a24(run): EfxCheckRetaliation
 074DAC	074DE8	src/masked_08074dac.o(.text)	masked_08074dac(run): GetBanimBossBGM
 073348	0733B8	src/masked_08073348.o(.text)	masked_08073348(run): EfxTmModifyPal
+073644	0736C4	src/masked_08073644.o(.text)	masked_08073644(run): EkrModifyBarfx

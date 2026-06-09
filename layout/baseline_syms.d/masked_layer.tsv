@@ -4,3 +4,6 @@ AnimInsert	080050C8	thumb	masked_08004d48
 gBattleHitArray	0203A5E8	data	masked_08074a24
 gBanimBossBGMs	087A8F94	data	masked_08074dac
 gEfxTileRefPals_Efxutils_0	087A8F50	data	masked_08073348
+gBarfxTileConf1	080E6774	data	masked_08073644
+gBarfxTileConf2	080E6782	data	masked_08073644
+gBarfxTileConf3	080E6794	data	masked_08073644
