@@ -162,6 +162,67 @@ SUBSYS = {
         "region_start": 0x0859D4FC,
         "region_end": 0x085B8CDC,
     },
+    # ----------------------------------------------------------------------------
+    # data-frontier-3 batch: the next tier of region-different DATA long-tail blocks.
+    # Each entry is a WIDE subsystem window whose two extreme boundaries land EXACTLY
+    # on already-carved object edges (verified: lo == some carved row's end, hi ==
+    # some carved row's start). blob mode gap-subtracts every interior already-carved
+    # region-same object, so only the UNCARVED frontier sub-spans are emitted — one
+    # byte-perfect incbin per gap. Every window was screened to contain ZERO
+    # region-different CODE gaps (no thumb-prologue head bytes between carved .text
+    # objects), so nothing here steps on RE's src/*.c domain. `frag_prefix` routes the
+    # output to the isolated data_frontier3_* / frontier_df3_* namespace so this batch
+    # never collides with data-frontier-2's committed fragments. Padding red line:
+    # the whole-ROM FF/zero gap analysis already excluded any window that is >50% 0xFF
+    # or <10% real, and no .align/pad is ever emitted — `make compare` is the oracle.
+
+    # gFontgrp + sound-effect (se) region. JP font-group entries are region-different
+    # (extra glyph/UI tables) and the interleaved se/song clips differ between BE8E/BE8J;
+    # the block also holds the 56KB se617-class sample blob. 10 uncarved data gaps.
+    "df3_fontgrp_se":    {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x0857E884, "region_end": 0x085912EC},
+    # gFontgrp low region (122..77) — 4 small region-different font/UI data gaps.
+    "df3_gfontgrp_lo":   {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x0857FF94, "region_end": 0x08582A0C},
+    # m4a sound driver tables + voicegroup samples (region-different instrument banks).
+    "df3_voicegroup":    {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x081F70E8, "region_end": 0x0820FEE8},
+    # voicegroup019..031 sample bank — one large region-different blob.
+    "df3_voicegroup2":   {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x081FE320, "region_end": 0x0820189C},
+    # Opening-animation gfx (opanim_gfx p6..p22) — region-different LZ image data.
+    "df3_opanim_gfx":    {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x08B75860, "region_end": 0x08B89AF8},
+    # Battle-animation (AuraBg3 .. dragon) image/TSA region between data_banim p213..p229.
+    "df3_banim_aura":    {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x087463DC, "region_end": 0x08763B10},
+    # Battle-animation mid region (data_banim p86..p97) — 10 small region-diff gaps.
+    "df3_banim_mid":     {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x0864D2B4, "region_end": 0x08659804},
+    # Battle backgrounds (data_btl_bg p1..p13) — region-different compressed BG art.
+    "df3_btl_bg":        {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x087B40A8, "region_end": 0x087B9F98},
+    # const_data unit-icon region (region-different unit class icon data).
+    "df3_const_unit_ic": {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x081C0D80, "region_end": 0x081C4A04},
+    # data_5AA96C region (sio post-battle ProcScr + 5AA96C sprite data) — 10 small gaps.
+    "df3_data_5aa96c":   {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x085D367C, "region_end": 0x085D92D0},
+    # Title-screen gfx region (data_titlescreen p*) — region-different title art.
+    "df3_titlescreen":   {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x08B44B40, "region_end": 0x08B4BBA0},
+    # Ending details/fin gfx region — region-different ending-sequence art.
+    "df3_ending":        {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x08AC1BC0, "region_end": 0x08AC6C98},
+    # Chapter UnitDef tables + interleaved worldmap gmapunit sprites (region-different:
+    # JP chapter unit lists differ). 74 uncarved data gaps, ~62KB — the single richest
+    # window in this batch. hi snapped to dat_worldmap_gmapunit_p1412 start.
+    "df3_unitdef_b":     {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x0890F678, "region_end": 0x089253B0},
+    # EventScr chapter event data region (region-different JP event scripts) +
+    # interleaved worldmap gmapunit sprites. lo/hi snapped to EventScr/gmapunit edges.
+    "df3_eventscr_ch":   {"blob": True, "frag_prefix": "data_frontier3",
+                          "region_start": 0x08A69408, "region_end": 0x08A70C88},
 }
 
 
@@ -294,7 +355,13 @@ def carve(name):
         sys.exit("last asset does not reach region_end")
 
     # --- subtract already-carved ranges (shared monolith + other fragments) ----
-    frag_base = f"data_frontier2_{name}.tsv"
+    # Fragment prefix is per-config so a later parallel agent's batch lands in its
+    # OWN isolated fragment/asm namespace (data_frontier3_*) and never collides with
+    # data-frontier-2's already-committed fragments. carved_ranges() still UNIONS
+    # every other fragment (incl. data_frontier2) so cross-batch overlaps are
+    # gap-subtracted, not double-emitted.
+    prefix = cfg.get("frag_prefix", "data_frontier2")
+    frag_base = f"{prefix}_{name}.tsv"
     carved = sorted(
         (max(s, region_start), min(e, region_end))
         for s, e in carved_ranges(frag_base)

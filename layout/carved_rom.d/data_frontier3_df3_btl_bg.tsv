@@ -1,0 +1,4 @@
+# carve_frontier.py table-pinned region-different data (parallel-safe fragment)
+7B40A8	7B5A80	asm/frontier_df3_btl_bg.o(.data.frontier_df3_btl_bg.gap0)	df3_btl_bg region-diff data (6616 B, table-pinned)
+7B6E50	7B8100	asm/frontier_df3_btl_bg.o(.data.frontier_df3_btl_bg.gap1)	df3_btl_bg region-diff data (4784 B, table-pinned)
+7B83B8	7B9F98	asm/frontier_df3_btl_bg.o(.data.frontier_df3_btl_bg.gap2)	df3_btl_bg region-diff data (7136 B, table-pinned)
