@@ -382,3 +382,4 @@
 0091AC	0091D4	src/exact_080091ac.o(.text)	exact_080091ac(run): AP_Update
 009588	0095A8	src/exact_08009588.o(.text)	exact_08009588(run): AP_ExecDummyFrame
 0095A8	0095E0	src/exact_080095a8.o(.text)	exact_080095a8(run): AP_Init
+00967C	0096A4	src/exact_0800967c.o(.text)	exact_0800967c(run): APProc_OnEnd, APProc_SetParameters
