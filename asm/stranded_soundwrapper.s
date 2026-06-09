@@ -18,3 +18,13 @@ GetCurrentBgmSong:
 IsBgmPlaying:
 	.incbin "baserom.gba", 0x21B4, 0x10
 
+	.section .text.s_08002820, "ax", %progbits
+@ Sound_SetDefaultMaxNumChannels region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08002820..0x08002838
+	.thumb
+	.align 2, 0
+	.global Sound_SetDefaultMaxNumChannels
+	.thumb_func
+Sound_SetDefaultMaxNumChannels:
+	.incbin "baserom.gba", 0x2820, 0x18
+
