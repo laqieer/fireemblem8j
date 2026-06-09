@@ -3,3 +3,4 @@
 009564	009588	src/exact_08009564.o(.text)	exact_08009564(run): AP_LoadDefinition
 054198	0541D0	src/exact_08054198.o(.text)	exact_08054198(run): EfxFarAttack_SetAnimXPositions
 055BC0	055BE0	src/exact_08055bc0.o(.text)	exact_08055bc0(run): DisableEfxWeaponIcon, EnableEfxWeaponIcon
+052FC4	052FEC	src/exact_08052fc4.o(.text)	exact_08052fc4(run): CheckEkrHitDone
