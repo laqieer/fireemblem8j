@@ -18,3 +18,13 @@ StartTalk:
 TalkFaceMove_OnInit:
 	.incbin "baserom.gba", 0x79AC, 0x5C
 
+	.section .text.s_080088B4, "ax", %progbits
+@ SetTalkFaceMouthMove region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080088B4..0x080088C0
+	.thumb
+	.align 2, 0
+	.global SetTalkFaceMouthMove
+	.thumb_func
+SetTalkFaceMouthMove:
+	.incbin "baserom.gba", 0x88B4, 0xC
+
