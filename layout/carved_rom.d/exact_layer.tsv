@@ -29,3 +29,4 @@
 07A328	07A334	src/exact_0807a328.o(.text)	exact_0807a328(run): EkrDemonkingObj_DissolveInit
 07A3EC	07A468	src/exact_0807a3ec.o(.text)	exact_0807a3ec(run): CopyPalWithFade
 072798	0727B4	src/exact_08072798.o(.text)	exact_08072798(run): SetEkrDragonExit, SetEkrDragonDead
+0727B4	0727C4	src/exact_080727b4.o(.text)	exact_080727b4(run): SetEkrDragonSkipTransfer
