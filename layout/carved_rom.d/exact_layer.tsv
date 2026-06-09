@@ -53,3 +53,4 @@
 0396E0	039708	src/exact_080396e0.o(.text)	exact_080396e0(run): DungeonRecordUi_UpdateLabelIfNewRecord
 0D3964	0D39AC	src/exact_080d3964.o(.text)	exact_080d3964(run): SetGuidePanelTilemapPalette
 0168D0	016934	src/exact_080168d0.o(.text)	exact_080168d0(run): GetUnitEquippedWeapon, GetUnitEquippedWeaponSlot
+016968	016994	src/exact_08016968.o(.text)	exact_08016968(run): EquipUnitItemSlot
