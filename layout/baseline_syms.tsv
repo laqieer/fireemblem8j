@@ -453,7 +453,6 @@ gPal_Titlescreen_4	08B49B4C	data	titlescreen
 GetAnimPosition	0805AF10	thumb	banim-efxflashunit
 gEkrGaugeHp	0203E1A8	data	banim-efxflashunit
 gBanimFactionPal	0203E110	data	banim-efxflashunit
-EfxSplitColor	080739D0	thumb	banim-efxflashunit
 EfxCalcSplitedColorStep	08073A68	thumb	banim-efxflashunit
 gpProcEfxHpBarColorChange	0201777C	data	banim-efxflashunit
 ProcScr_efxHPBarColorChange	085E3BA4	data	banim-efxflashunit
