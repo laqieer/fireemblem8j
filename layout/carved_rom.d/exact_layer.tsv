@@ -199,3 +199,4 @@
 0860A8	0860E8	src/exact_080860a8.o(.text)	exact_080860a8(run): SetFlag, ClearFlag, CheckFlag
 086A58	086AC4	src/exact_08086a58.o(.text)	exact_08086a58(run): GetSupportTalkSong
 087F30	087F48	src/exact_08087f30.o(.text)	exact_08087f30(run): DisplayMapClearMapAnim, DisplayCongratulationsMapAnim
+00DC08	00DC40	src/exact_0800dc08.o(.text)	exact_0800dc08(run): Event09_Goto
