@@ -28,3 +28,13 @@ TalkFaceMove_OnInit:
 SetTalkFaceMouthMove:
 	.incbin "baserom.gba", 0x88B4, 0xC
 
+	.section .text.s_080088C0, "ax", %progbits
+@ SetTalkFaceNoMouthMove region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080088C0..0x080088CC
+	.thumb
+	.align 2, 0
+	.global SetTalkFaceNoMouthMove
+	.thumb_func
+SetTalkFaceNoMouthMove:
+	.incbin "baserom.gba", 0x88C0, 0xC
+
