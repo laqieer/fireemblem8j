@@ -325,3 +325,4 @@
 0B18DC	0B18F4	src/exact_080b18dc.o(.text)	exact_080b18dc(run): SysBlackBox_Init
 0B1ED4	0B1EDC	src/exact_080b1ed4.o(.text)	exact_080b1ed4(run): SysHandCursor_Init
 0B2098	0B20B0	src/exact_080b2098.o(.text)	exact_080b2098(run): SysGrayBox_Init
+0B24C4	0B24DC	src/exact_080b24c4.o(.text)	exact_080b24c4(run): SysBrownBox_Init
