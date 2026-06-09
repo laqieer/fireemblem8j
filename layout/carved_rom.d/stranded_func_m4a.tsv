@@ -3,3 +3,4 @@
 0D509C	0D50BC	asm/stranded_m4a.o(.text.s_080D509C)	m4a:m4aMPlayFadeOutTemporarily region-same Thumb (descriptive incbin)
 0D50BC	0D50E4	asm/stranded_m4a.o(.text.s_080D50BC)	m4a:m4aMPlayFadeIn region-same Thumb (descriptive incbin)
 0D50E4	0D512C	asm/stranded_m4a.o(.text.s_080D50E4)	m4a:m4aMPlayImmInit region-same Thumb (descriptive incbin)
+0D540C	0D54A4	asm/stranded_m4a.o(.text.s_080D540C)	m4a:m4aSoundMode region-same Thumb (descriptive incbin)
