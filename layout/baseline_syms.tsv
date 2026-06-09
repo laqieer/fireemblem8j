@@ -1199,7 +1199,6 @@ PromoMain_SetupTraineeEvent	080D2348	thumb	classchg-event
 ClearWmTextVram	080C8348	thumb	worldmap_text
 StartSubSpell_efxSongBG	0805D800	thumb	banim-efxmagic-dancerings
 StartSubSpell_efxSongOBJ	0805D8DC	thumb	banim-efxmagic-dancerings
-NewEfxRestWINH_	0805C6EC	thumb	banim-efxmagic-dancerings
 NewEfxTwobaiRST	0805C28C	thumb	banim-efxmagic-dancerings
 NewEfxALPHA	0805C7CC	thumb	banim-efxmagic-dancerings
 EfxGetCamMovDuration	08056920	thumb	banim-efxmagic-eclipse
