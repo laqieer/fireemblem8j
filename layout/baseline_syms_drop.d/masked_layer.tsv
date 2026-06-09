@@ -35,3 +35,4 @@ SaveDungeonRecords
 SaveDungeonState
 UnitApplyWorkingMovementScript
 gActionData
+ForceScreenToBlack
