@@ -36,3 +36,4 @@
 0DA6F0	0DA704	asm/stranded__unmapped.o(.text.s_080DA6F0)	_unmapped:_open region-same Thumb (descriptive incbin)
 0DA738	0DA744	asm/stranded__unmapped.o(.text.s_080DA738)	_unmapped:_close region-same Thumb (descriptive incbin)
 0DA7DC	0DA808	asm/stranded__unmapped.o(.text.s_080DA7DC)	_unmapped:_gettimeofday region-same Thumb (descriptive incbin)
+0DA918	0DA938	asm/stranded__unmapped.o(.text.s_080DA918)	_unmapped:abort region-same Thumb (descriptive incbin)
