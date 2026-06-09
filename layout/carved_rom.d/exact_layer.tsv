@@ -354,3 +354,4 @@
 0BFD74	0BFD88	src/exact_080bfd74.o(.text)	exact_080bfd74(run): MapUnitC_GetPosition
 0BFD88	0BFDA0	src/exact_080bfd88.o(.text)	exact_080bfd88(run): MapUnitC_AddToPosition
 0BFDA0	0BFDB4	src/exact_080bfda0.o(.text)	exact_080bfda0(run): MapUnitC_GetAnimId
+0BFDFC	0BFE10	src/exact_080bfdfc.o(.text)	exact_080bfdfc(run): MapUnitC_IsBlendEnabled
