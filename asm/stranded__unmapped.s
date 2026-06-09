@@ -198,3 +198,13 @@ memchr:
 memmove:
 	.incbin "baserom.gba", 0xD98D8, 0x88
 
+	.section .text.s_080D99C0, "ax", %progbits
+@ _Bfree region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D99C0..0x080D99D8
+	.thumb
+	.align 2, 0
+	.global _Bfree
+	.thumb_func
+_Bfree:
+	.incbin "baserom.gba", 0xD99C0, 0x18
+
