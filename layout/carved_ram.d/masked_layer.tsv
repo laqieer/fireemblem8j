@@ -23,3 +23,4 @@
 03005080	iwram	src/masked_08081a64.o(.bss)	masked_08081a64 .bss
 030018F8	iwram	src/masked_0807ab5c.o(.bss)	masked_0807ab5c .bss
 030018F8	iwram	src/masked_0807b580.o(.bss)	masked_0807b580 .bss
+030018F8	iwram	src/masked_0807bfa4.o(.bss)	masked_0807bfa4 .bss

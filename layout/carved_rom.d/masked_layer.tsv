@@ -167,3 +167,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 07AB5C	07AB94	src/masked_0807ab5c.o(.text)	masked_0807ab5c(run): MuExistsActive
 07B50C	07B580	src/masked_0807b50c.o(.text)	masked_0807b50c(run): ApplyMoveScriptToCoordinates
 07B580	07B5E0	src/masked_0807b580.o(.text)	masked_0807b580(run): CanStartMu, ResetMuAnims
+07BFA4	07BFCC	src/masked_0807bfa4.o(.text)	masked_0807bfa4(run): GetMu
