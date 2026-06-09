@@ -97,3 +97,9 @@ AiEquipBestMatch	0803EB34	thumb	exact_0803eb80
 AiGetClassRank	0803BEDC	thumb	exact_0803d3d0
 EndCreditsBlendCG	080C8FE0	thumb	exact_080c949c
 CheckAnyBlueUnitArea	080852F0	thumb	exact_080853cc
+SetChapterFlag	08085F00	thumb	exact_080860a8
+SetPermanentFlag	08085FC8	thumb	exact_080860a8
+ClearChapterFlag	08085F34	thumb	exact_080860a8
+ClearPermanentFlag	08086000	thumb	exact_080860a8
+CheckPermanentFlag	08086094	thumb	exact_080860a8
+CheckChapterFlag	08085F88	thumb	exact_080860a8
