@@ -86,6 +86,15 @@ def parse_cfg():
     return funcs
 
 
+def sym_addr_map():
+    """name -> (jp_addr, is_thumb) for every config function, so external
+    references (bl/b/.4byte) in a carved function resolve to their JP address."""
+    m = {}
+    for a, mode, n in parse_cfg():
+        m[n] = (a, mode == "thumb_func")
+    return m
+
+
 def ensure_disasm():
     """Run gbadisasm on the full config once; cache the whole-ROM output."""
     if os.path.exists(DISASM_CACHE) and os.path.getsize(DISASM_CACHE) > 0:
@@ -183,69 +192,101 @@ def candidates():
 # ---------------------------------------------------------------------------
 # emit + assemble one function
 
-def emit_asm(addr, mode, name, body_lines):
-    """Write asm/<name>.s for one function. Returns the path."""
+# symbol references gbadisasm emits that point OUTSIDE the function and so must
+# be defined (to their JP address) for the carved object to assemble+link byte-
+# exactly. Local labels (`_08xxxxxx`) and the function's own name are excluded.
+_BR = re.compile(
+    r'^\s*(?:bl|blx|b|beq|bne|bcs|bhs|bcc|blo|bmi|bpl|bvs|bvc|bhi|bls|bge|blt|bgt|ble)\s+'
+    r'([A-Za-z_]\w*)\s*$')
+_BYTE_SYM = re.compile(r'^\s*\.(?:4byte|word)\s+([A-Za-z_]\w*)\s*$')
+_LOCAL = re.compile(r'^_[0-9A-Fa-f]{8}$')
+_SUBADDR = re.compile(r'^sub_0?([0-9A-Fa-f]{6,8})$')
+
+
+def _ref_addr(sym, smap):
+    """JP (addr, is_thumb) for an external symbol ref, or None. Falls back to
+    parsing `sub_08xxxxxx`-style IDA names that encode the address directly."""
+    if sym in smap:
+        return smap[sym]
+    m = _SUBADDR.match(sym)
+    if m:
+        a = int(m.group(1), 16)
+        if a < 0x08000000:
+            a |= 0x08000000
+        # mode unknown from name alone; assume thumb (FE8 is ~99.9% thumb).
+        return (a, True)
+    return None
+
+
+def emit_asm(addr, mode, name, body_lines, smap):
+    """Write asm/<name>.s for one function. Returns (path, n_unresolved).
+
+    External symbol references (bl/b/.4byte to other functions) are resolved by
+    emitting `.set SYM, JP_ADDR(+1 if thumb)` before the section, so the object
+    assembles+links byte-exactly at the JP address regardless of whether the
+    target is carved yet. This is the de-symbolization that makes each carve
+    self-contained (no undefined-symbol link errors, no link-order coupling)."""
     is_thumb = (mode == "thumb_func")
-    # drop the leading `NAME: @ 0xADDR` line (we provide our own label) but keep
-    # everything else (instructions, local labels, literal pools, .align).
     body = list(body_lines)
     while body and not body[0].strip():
         body.pop(0)
     if body and re.match(rf"^{re.escape(name)}:\s*@", body[0]):
         body = body[1:]
-    L = ['\t.syntax unified',
-         f'\t.section .text.{name}, "ax", %progbits',
-         f'@ {name} @ JP 0x{addr:08X} - region-different, gbadisasm descriptive asm (D23)',
-         '\t.thumb' if is_thumb else '\t.arm',
-         f'\t.global {name}',
-         '\t.thumb_func' if is_thumb else '\t.align 2, 0',
-         f'{name}:']
+
+    # local labels defined in this body (don't redefine them)
+    local = set()
+    for ln in body:
+        m = re.match(r'^(_[0-9A-Fa-f]{8}):', ln)
+        if m:
+            local.add(m.group(1))
+
+    refs, unresolved = {}, 0
+    for ln in body:
+        m = _BR.match(ln) or _BYTE_SYM.match(ln)
+        if not m:
+            continue
+        sym = m.group(1)
+        if sym == name or sym in local or _LOCAL.match(sym):
+            continue
+        if sym in refs:
+            continue
+        ra = _ref_addr(sym, smap)
+        if ra is None:
+            unresolved += 1
+            continue
+        refs[sym] = ra
+
+    L = ['\t.syntax unified']
+    for sym, (a, thumb) in sorted(refs.items()):
+        L.append(f'\t.set {sym}, 0x{a:08X}{" + 1" if thumb else ""}')
+    L += [f'\t.section .text.{name}, "ax", %progbits',
+          f'@ {name} @ JP 0x{addr:08X} - region-different, gbadisasm descriptive asm (D23)',
+          '\t.thumb' if is_thumb else '\t.arm',
+          f'\t.global {name}',
+          '\t.thumb_func' if is_thumb else '\t.align 2, 0',
+          f'{name}:']
     L.extend(body)
     path = f"asm/{name}.s"
     open(path, "w").write("\n".join(L) + "\n")
-    return path
+    return path, unresolved
 
 
-def assemble_size(path):
-    """Assemble the .s standalone with the mandatory flags; return (ok, nbytes)."""
+def assemble_check(path):
+    """Assemble with the MANDATORY flags (catches syntax/flag errors fast, before
+    a full make cycle). Byte-correctness is verified by `make compare` (it links
+    at the real JP VMA; a standalone assembly is at VMA 0 so its bl/b offsets to
+    absolute `.set` targets would not match the ROM)."""
     obj = path[:-2] + ".o"
-    binf = path[:-2] + ".bin"
-    sec = ".text." + os.path.basename(path)[:-2]
     r = sh(f'arm-none-eabi-as -mcpu=arm7tdmi -mthumb-interwork -I include -I . '
            f'"{path}" -o "{obj}"')
-    if r.returncode != 0:
-        return False, 0, r.stderr
-    sh(f'arm-none-eabi-objcopy -O binary --only-section="{sec}" "{obj}" "{binf}"')
-    n = os.path.getsize(binf) if os.path.exists(binf) else 0
-    return True, n, ""
-
-
-def rom_bytes(off, n):
-    with open("baserom.gba", "rb") as f:
-        f.seek(off)
-        return f.read(n)
-
-
-def pre_gate(path, addr):
-    """Assemble standalone and byte-compare .text vs the JP ROM. Returns
-    (ok, nbytes, msg). This is the cheap per-symbol gate before the full build."""
-    ok, n, err = assemble_size(path)
-    if not ok:
-        return False, 0, f"assemble failed: {err[:300]}"
-    binf = path[:-2] + ".bin"
-    got = open(binf, "rb").read()
-    want = rom_bytes(addr - 0x08000000, n)
-    if got != want:
-        # find first diff
-        d = next((i for i in range(min(len(got), len(want))) if got[i] != want[i]), -1)
-        return False, n, f"byte mismatch at +0x{d:x} (asm 0x{n:x} bytes)"
-    return True, n, ""
+    sh(f'rm -f "{obj}"')
+    return (r.returncode == 0), r.stderr
 
 
 # ---------------------------------------------------------------------------
 # carve one function: fragment + verify-or-revert
 
-def carve_one(addr, mode, name, body_lines):
+def carve_one(addr, mode, name, body_lines, gap, smap):
     if os.path.exists(f"asm/{name}.s"):
         print(f"  {name} @ {addr:08X}: asm/{name}.s exists -> skip", flush=True)
         return None
@@ -255,15 +296,18 @@ def carve_one(addr, mode, name, body_lines):
              f"layout/baseline_syms_drop.d/{frag}.tsv"]
     snap = {p: (open(p).read() if os.path.exists(p) else None) for p in files}
 
-    path = emit_asm(addr, mode, name, body_lines)
-    ok, n, msg = pre_gate(path, addr)
+    path, unresolved = emit_asm(addr, mode, name, body_lines, smap)
+    ok, err = assemble_check(path)
     if not ok:
         os.remove(path)
-        sh(f'rm -f asm/{name}.o asm/{name}.bin')
-        print(f"  {name} @ {addr:08X}: PRE-GATE FAIL ({msg}) -> reverted", flush=True)
+        print(f"  {name} @ {addr:08X}: ASSEMBLE FAIL ({err.strip()[:200]}) -> reverted",
+              flush=True)
         return False
+    # carved range = [addr, next_func_addr): tile against the incbin baseline with
+    # no gap (the section's instructions + literal pools + 4-align pad fill exactly
+    # to the next function; gap came from the config's next-func boundary).
     romlo = addr - 0x08000000
-    romhi = romlo + n
+    romhi = romlo + gap
     os.makedirs("layout/carved_rom.d", exist_ok=True)
     open(f"layout/carved_rom.d/{frag}.tsv", "w").write(
         f"{romlo:06X}\t{romhi:06X}\tasm/{name}.o(.text.{name})\t"
@@ -276,8 +320,8 @@ def carve_one(addr, mode, name, body_lines):
     sh("make layout")
     mc = sh("make compare")
     if "fireemblem8.gba: OK" in mc.stdout:
-        sh(f'rm -f asm/{name}.bin')  # keep .o (build output), drop the pre-gate bin
-        print(f"  {name} @ {addr:08X}: OK ({n} bytes)", flush=True)
+        u = f", {unresolved} unresolved-ref" if unresolved else ""
+        print(f"  {name} @ {addr:08X}: OK ({gap} bytes{u})", flush=True)
         return True
     # revert
     for p, c in snap.items():
@@ -286,7 +330,7 @@ def carve_one(addr, mode, name, body_lines):
                 os.remove(p)
         else:
             open(p, "w").write(c)
-    sh(f'rm -f asm/{name}.o asm/{name}.bin')
+    sh(f'rm -f asm/{name}.o')
     sh("make layout")
     print(f"  {name} @ {addr:08X}: make compare FAIL -> reverted", flush=True)
     return False
@@ -330,6 +374,9 @@ def main():
         targets = [int(a, 16) for a in args]
 
     by_name = load_func_lines()
+    smap = sym_addr_map()
+    # gap (extent to next func) per candidate addr
+    gap_of = {a: g for (a, m, n, g) in candidates()}
     addr_meta = {a: (a, m, n) for (a, m, n) in parse_cfg()}
 
     ok_n = fail_n = bytes_n = 0
@@ -343,14 +390,15 @@ def main():
         if body is None:
             print(f"  {name} @ {addr:08X}: no disasm body -> skip", flush=True)
             continue
-        res = carve_one(addr, mode, name, body)
+        gap = gap_of.get(addr)
+        if gap is None:
+            print(f"  {name} @ {addr:08X}: already carved/covered -> skip", flush=True)
+            continue
+        res = carve_one(addr, mode, name, body, gap, smap)
         if res is True:
-            # recompute size from the committed fragment for the report
-            frag = f"layout/carved_rom.d/gbadisasm_{name}.tsv"
-            lo, hi = [int(x, 16) for x in open(frag).read().split("\t")[:2]]
-            commit(name, addr, hi - lo)
+            commit(name, addr, gap)
             ok_n += 1
-            bytes_n += hi - lo
+            bytes_n += gap
         elif res is False:
             fail_n += 1
 
