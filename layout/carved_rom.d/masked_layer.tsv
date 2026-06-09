@@ -15,3 +15,4 @@
 05983C	059864	src/masked_0805983c.o(.text)	masked_0805983c(run): GetBattleAnimRoundType
 059864	059890	src/masked_08059864.o(.text)	masked_08059864(run): GetBattleAnimRoundTypeFlags
 059890	0598BC	src/masked_08059890.o(.text)	masked_08059890(run): GetEfxHp, GetEfxHpModMaybe
+059954	059994	src/masked_08059954.o(.text)	masked_08059954(run): EkrCheckAttackRound
