@@ -913,7 +913,6 @@ DrawOptionValueTexts	080B6470	thumb	uiconfig
 LoadHelpBoxGfx	0808BB14	thumb	uimenu
 MapUnitC_DeleteGmapUnit	080BFD3C	thumb	worldmap_mapmu
 NewMapUnit	080BFC20	thumb	worldmap_mapmu
-MapUnitC_SetPosition	080BFD64	thumb	worldmap_mapmu
 MapUnitC_SetAnimId	080BFDB4	thumb	worldmap_mapmu
 gWorldmapMinimap_8	08B1E6BC	data	worldmap_player_interface
 gWorldmapMinimap_9	08B1E6DC	data	worldmap_player_interface
