@@ -118,3 +118,13 @@ GetBackgroundFromBufferPointer:
 ClearTileRigistry:
 	.incbin "baserom.gba", 0x1F30, 0x34
 
+	.section .text.s_08001F64, "ax", %progbits
+@ RegisterDataMove region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08001F64..0x08001FA4
+	.thumb
+	.align 2, 0
+	.global RegisterDataMove
+	.thumb_func
+RegisterDataMove:
+	.incbin "baserom.gba", 0x1F64, 0x40
+

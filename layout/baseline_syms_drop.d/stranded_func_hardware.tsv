@@ -5,3 +5,4 @@ SetMainUpdateRoutine
 MaybeResetSomePal
 MaybeSmoothChangeSomePal
 ColorFadeSetStepRange
+RegisterDataMove
