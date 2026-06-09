@@ -189,3 +189,4 @@
 0B0E9C	0B0EC0	src/exact_080b0e9c.o(.text)	exact_080b0e9c(run): DrawDifficultySprite_Init
 0B1120	0B1138	src/exact_080b1120.o(.text)	exact_080b1120(run): DifficultyMenu_StartCursorMove
 0C8E68	0C8E70	src/exact_080c8e68.o(.text)	exact_080c8e68(run): CreditsBlendCG_Init
+0C8F9C	0C8FAC	src/exact_080c8f9c.o(.text)	exact_080c8f9c(run): CreditsBlendCG_OnEnd
