@@ -1,1 +1,2 @@
 089D58	089D64	asm/stranded_statscreen.o(.text.s_08089D58)	statscreen:PageSlide_OnEnd region-same Thumb (descriptive incbin)
+08A450	08A488	asm/stranded_statscreen.o(.text.s_0808A450)	statscreen:PageNumCtrl_CheckSlide region-same Thumb (descriptive incbin)
