@@ -246,3 +246,4 @@
 0CC0BC	0CC0CC	src/exact_080cc0bc.o(.text)	exact_080cc0bc(run): Proc08AA6D04Main
 0CC754	0CC810	src/exact_080cc754.o(.text)	exact_080cc754(run): OpAnimHBlank1, OpAnimHBlank2
 0CB8BC	0CB960	src/exact_080cb8bc.o(.text)	exact_080cb8bc(run): BlendPaletteToColor
+0B7FD4	0B7FEC	src/exact_080b7fd4.o(.text)	exact_080b7fd4(run): ClassIntroBurst_Init
