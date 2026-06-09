@@ -48,3 +48,13 @@ PrintNumberToDBG:
 PrintHexNumberToDBG:
 	.incbin "baserom.gba", 0x3900, 0x1C
 
+	.section .text.s_0800391C, "ax", %progbits
+@ PrintStringToDBG region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x0800391C..0x08003988
+	.thumb
+	.align 2, 0
+	.global PrintStringToDBG
+	.thumb_func
+PrintStringToDBG:
+	.incbin "baserom.gba", 0x391C, 0x6C
+
