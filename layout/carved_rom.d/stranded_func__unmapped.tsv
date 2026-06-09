@@ -9,3 +9,4 @@
 003220	003234	asm/stranded__unmapped.o(.text.s_08003220)	_unmapped:ProcCmd_SET_MARK region-same Thumb (descriptive incbin)
 028534	028544	asm/stranded__unmapped.o(.text.s_08028534)	_unmapped:InitSupportBonuses region-same Thumb (descriptive incbin)
 030088	030094	asm/stranded__unmapped.o(.text.s_08030088)	_unmapped:BMapVSync_OnEnd region-same Thumb (descriptive incbin)
+030094	0300A0	asm/stranded__unmapped.o(.text.s_08030094)	_unmapped:BMapVSync_OnLoop region-same Thumb (descriptive incbin)

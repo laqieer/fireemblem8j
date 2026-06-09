@@ -108,3 +108,13 @@ InitSupportBonuses:
 BMapVSync_OnEnd:
 	.incbin "baserom.gba", 0x30088, 0xC
 
+	.section .text.s_08030094, "ax", %progbits
+@ BMapVSync_OnLoop region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08030094..0x080300A0
+	.thumb
+	.align 2, 0
+	.global BMapVSync_OnLoop
+	.thumb_func
+BMapVSync_OnLoop:
+	.incbin "baserom.gba", 0x30094, 0xC
+
