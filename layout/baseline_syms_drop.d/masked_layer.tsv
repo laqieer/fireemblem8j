@@ -126,3 +126,4 @@ PutGMapPIShopIcons
 ApplyGMapPIMinimapUnitPalette
 InitGMapPIInterfaceKind
 gWMNodeIconData
+GetCharacterData

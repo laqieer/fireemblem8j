@@ -259,3 +259,4 @@ GMapPI_GetGMapUnitIndexAndFaction	080C3C34	thumb	masked_080c3c88
 ApplyGMapPIMinimapUnitPalette	080C33A0	thumb	masked_080c3c88
 gWMNodeData	081F5D7C	data	masked_080c0458
 gWMNodeIconData	081F5C6C	data	masked_080c0458
+gCharacterData	-F77A7D44	data	masked_0801913c

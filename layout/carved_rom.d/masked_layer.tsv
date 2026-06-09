@@ -238,3 +238,4 @@ AAF6D8	AAF6DC	src/masked_080b62bc.o(.data)	masked_080b62bc .data
 0C3C88	0C3D0C	src/masked_080c3c88.o(.text)	masked_080c3c88(run): InitGMapPIInterfaceKind
 0C0458	0C052C	src/masked_080c0458.o(.text)	masked_080c0458(run): GetNodeAtPosition
 0C4098	0C40BC	src/masked_080c4098.o(.text)	masked_080c4098(run): GmScrollManage_OnEnd
+01913C	01915C	src/masked_0801913c.o(.text)	masked_0801913c(run): GetCharacterData
