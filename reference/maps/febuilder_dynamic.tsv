@@ -1,0 +1,13 @@
+# FEBuilderGBA dynamic (FindROMPointer) entries resolved against real ROMs.
+# Source: FEBuilderGBA (GPL-3.0) ROM defs; logic ported, no GPL text copied.
+# Resolution: read LE u32 pointer stored at a candidate ROM offset, follow it (deref); region by 256-byte window byte-compare at the resolved VMA.
+name	jp_vma	us_vma	region	exact_symbol	nearest_symbol_off	candidate_offsets	source
+unit_pointer	0x088582bc	0x08803d64	diff	gCharacterData	gCharacterData	0x10650,0x10268,0x1069c,0xa3b64,0xa3ce0,0xa4928,0xa49a0,0xa4c3c,0xa5458,0xa56a8,0xa5860,0xa595c,0xa5bb0,0xa5d28,0xa61f8	ROMFE8JP.cs:22 / ROMFE8U.cs:22 (FindROMPointer check variant; ptr-table deref)
+class_pointer	0x0885b668	0x08807110	diff	-	gCharacterData+0x33ac	0x17860,0x17adc,0x18ac0,0x19130	ROMFE8JP.cs:27 / ROMFE8U.cs:27 (FindROMPointer check variant; ptr-table deref)
+bg_pointer	0x089cd958	0x0895dd1c	diff	gConvoBackgroundData	gConvoBackgroundData	0xeaa4,0xef08,0xf00c,0x10f8c	ROMFE8JP.cs:29 / ROMFE8U.cs:29 (FindROMPointer check variant; ptr-table deref)
+unit_wait_icon_pointer	0x08903e0c	0x088af880	diff	unit_icon_wait_table	unit_icon_wait_table	0x266d4,0x26754,0x267dc,0x26c2c,0x27274,0x27b44,0x27c30,0x27ff8	ROMFE8JP.cs:37 / ROMFE8U.cs:37 (FindROMPointer check variant; ptr-table deref)
+unit_move_icon_pointer	0x08a13488	0x089a2e00	diff	unit_icon_move_table	unit_icon_move_table	0x7b998,0x7b9ac,0xbfa7c,0xbfa90	ROMFE8JP.cs:48 / ROMFE8U.cs:48 (FindROMPointer check variant; ptr-table deref)
+map_setting_pointer	0x08904e1c	0x088b0890	diff	gChapterDataTable	gChapterDataTable	0xbab1c,0x34534,0xba9ec,0xbad44,0xbaeac	ROMFE8JP.cs:50 / ROMFE8U.cs:50 (FindROMPointer func variant: predicate reads fixed ROM-header (always false), so falls through to first-candidate find_simple)
+image_battle_animelist_pointer	0x08c00008	0x08c00008	same	banim_data	banim_data	0x5a97c,0x5b3a4,0x5b438,0x5b5d0,0x71c58,0x72ee8,0x73008	ROMFE8JP.cs:66 / ROMFE8U.cs:66 (FindROMPointer check variant; ptr-table deref)
+item_pointer	0x0885e068	0x08809b10	diff	gItemData	gItemData	0x17568,0x17554,0x1753c,0x17510,0x172bc	ROMFE8JP.cs:83 / ROMFE8U.cs:83 (FindROMPointer func variant: predicate reads fixed ROM-header (always false), so falls through to first-candidate find_simple)
+menu_definiton_pointer	0x085c5490	0x0859cfb0	diff	gDebugClearMenuDef	gDebugClearMenuDef	0x1bcbc,0x1bf84,0x1bd7c,0x1bf70,0x33398,0x29940,0x242ac,0x1dc34	ROMFE8JP.cs:165 / ROMFE8U.cs:164 (FindROMPointer check variant; ptr-table deref)
