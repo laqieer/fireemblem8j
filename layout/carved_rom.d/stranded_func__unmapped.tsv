@@ -51,3 +51,4 @@
 0DBC9C	0DBD80	asm/stranded__unmapped.o(.text.s_080DBC9C)	_unmapped:__fpcmp_parts_f region-same Thumb (descriptive incbin)
 0DBE38	0DBE80	asm/stranded__unmapped.o(.text.s_080DBE38)	_unmapped:__gtsf2 region-same Thumb (descriptive incbin)
 0DBE80	0DBEC8	asm/stranded__unmapped.o(.text.s_080DBE80)	_unmapped:__gesf2 region-same Thumb (descriptive incbin)
+0DBF58	0DBFB8	asm/stranded__unmapped.o(.text.s_080DBF58)	_unmapped:__floatsisf region-same Thumb (descriptive incbin)
