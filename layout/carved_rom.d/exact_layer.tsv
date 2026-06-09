@@ -22,3 +22,4 @@
 057EF0	057F0C	src/exact_08057ef0.o(.text)	exact_08057ef0(run): CheckEkrBaseAppearUnexist
 056B3C	056B4C	src/exact_08056b3c.o(.text)	exact_08056b3c(run): EkrBattleStarting_IsBattleAnimEnabled
 056B4C	056B5C	src/exact_08056b4c.o(.text)	exact_08056b4c(run): EkrBattleStarting_CheckBattleAnimEnabled
+0597E4	059810	src/exact_080597e4.o(.text)	exact_080597e4(run): GetBanimFactionPalette
