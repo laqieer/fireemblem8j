@@ -13,24 +13,33 @@ jp_addr derivation (never assume jp==us):
   1. FEBuilder JP value when the entry is a FEBuilder field, OR when a nm symbol's
      US addr exactly equals a FEBuilder US addr (cross-reference -> use that
      FEBuilder JP addr). This is the highest-confidence link.
-  2. else layout/addr_map.tsv  us_addr -> jp_addr  (project vote map).
-  3. else "<us_addr>?" with region ASSUMED-same (UNVERIFIED).
+  2. else layout/addr_map.tsv  us_addr -> jp_addr  (project vote map), but ONLY
+     when the mapping is physically plausible: us and jp must sit in the same RAM
+     region (both EWRAM 0x02xxxxxx or both IWRAM 0x03xxxxxx). A cross-region vote
+     (e.g. IWRAM us -> EWRAM jp) is a spurious correlation, not a relocation, and
+     is rejected (falls through to step 3).
+  3. else jp_addr is left UNKNOWN: the jp_addr column is empty ("-") and the row
+     is tagged 'unverified'. We never fabricate a JP address by assuming jp==us.
 
 region:
-  same     jp_addr == us_addr (no relocation between regions).
-  diff     jp_addr != us_addr and derived from FEBuilder or addr_map (verified
-           relocation).
-  unverified  .bss with no FEBuilder/addr_map evidence (no ROM bytes to compare).
+  same        jp_addr == us_addr (no relocation between regions).
+  diff        jp_addr != us_addr and derived from FEBuilder or a same-region
+              addr_map vote (verified relocation).
+  unverified  no FEBuilder/addr_map evidence (no ROM bytes to compare); jp_addr
+              is left blank ("-") rather than guessed.
 """
 import os
 import re
 import subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-JP_CS = "/home/laqieer/FEBuilderGBA/FEBuilderGBA.Core/ROMFE8JP.cs"
-US_CS = "/home/laqieer/FEBuilderGBA/FEBuilderGBA.Core/ROMFE8U.cs"
-US_ELF = "/home/laqieer/fireemblem8u/fireemblem8.elf"
-ADDR_MAP = "/home/laqieer/fireemblem8j/layout/addr_map.tsv"
+REPO_ROOT = os.path.dirname(os.path.dirname(HERE))  # reference/maps -> repo root
+# External repos (absolute by necessity); override via env for other checkouts.
+JP_CS = os.environ.get("JP_CS", "/home/laqieer/FEBuilderGBA/FEBuilderGBA.Core/ROMFE8JP.cs")
+US_CS = os.environ.get("US_CS", "/home/laqieer/FEBuilderGBA/FEBuilderGBA.Core/ROMFE8U.cs")
+US_ELF = os.environ.get("US_ELF", "/home/laqieer/fireemblem8u/fireemblem8.elf")
+# In-repo file: derive from the repo root so the script is checkout-relocatable.
+ADDR_MAP = os.path.join(REPO_ROOT, "layout", "addr_map.tsv")
 OUT = os.path.join(HERE, "ram_us_jp.tsv")
 
 RAM_RE = re.compile(r"^0[23][0-9A-Fa-f]{6}$")
@@ -132,18 +141,25 @@ def main():
             if usym in seen:
                 continue
         # derive jp_addr by confidence cascade
+        jp_addr, region, src = None, None, None
         if addr in feb_us_to_jp:
             jp_addr = feb_us_to_jp[addr]
             region = "same" if jp_addr == addr else "diff"
             src = f"us-decomp-nm febuilder-xref kind={kind}"
         elif addr in addr_map:
-            jp_addr, conflicts = addr_map[addr]
-            region = "same" if jp_addr == addr else "diff"
-            note = f"addr_map(conflicts={conflicts})" if conflicts else "addr_map"
-            src = f"us-decomp-nm {note} kind={kind}"
-        else:
-            jp_addr = addr + "?"  # ASSUMED same; flagged unverified
-            region = "ASSUMED-same (UNVERIFIED)"
+            cand, conflicts = addr_map[addr]
+            # Reject physically-impossible relocations: a RAM symbol cannot move
+            # between EWRAM (0x02) and IWRAM (0x03). Such a vote is a spurious
+            # code-ref correlation, not a real relocation -> treat as unverified.
+            if cand[:4] == addr[:4]:  # same RAM region (0x020 vs 0x030 nibble)
+                jp_addr = cand
+                region = "same" if jp_addr == addr else "diff"
+                note = f"addr_map(conflicts={conflicts})" if conflicts else "addr_map"
+                src = f"us-decomp-nm {note} kind={kind}"
+        if jp_addr is None:
+            # No usable evidence: leave jp_addr blank, never assume jp==us.
+            jp_addr = "-"
+            region = "unverified"
             src = f"us-decomp-nm no-evidence kind={kind}"
         rows.append((usym, addr, jp_addr, region, kind, src))
         seen.add(usym)
@@ -156,19 +172,18 @@ def main():
         f.write("# Addresses sourced from FEBuilderGBA ROM defs (GPL-3.0, "
                 "factual addresses only; no GPL comment text copied) and from the\n")
         f.write("# fireemblem8u US decomp ELF symbol table (arm-none-eabi-nm).\n")
-        f.write("# jp_addr derived from FEBuilder JP value, then layout/addr_map.tsv; "
-                "'?' + UNVERIFIED where neither had evidence.\n")
+        f.write("# jp_addr derived from FEBuilder JP value, then a same-region "
+                "layout/addr_map.tsv vote; left blank ('-') where neither had evidence.\n")
         f.write("# region: same(jp==us) | diff(verified relocation) | "
-                "ASSUMED-same (UNVERIFIED).\n")
+                "unverified(jp_addr unknown, NOT assumed equal to us).\n")
         f.write("us_symbol\tus_addr\tjp_addr\tregion\tkind\tsource\n")
         for usym, us_addr, jp_addr, region, kind, src in rows:
             f.write(f"{usym}\t{us_addr}\t{jp_addr}\t{region}\t{kind}\t{src}\n")
 
-    data_rows = [r for r in rows]
-    diff_rows = [r for r in data_rows if r[3] == "diff"]
-    same_rows = [r for r in data_rows if r[3] == "same"]
-    unv_rows = [r for r in data_rows if r[3].startswith("ASSUMED")]
-    print(f"wrote {OUT}: {len(data_rows)} rows "
+    diff_rows = [r for r in rows if r[3] == "diff"]
+    same_rows = [r for r in rows if r[3] == "same"]
+    unv_rows = [r for r in rows if r[3] == "unverified"]
+    print(f"wrote {OUT}: {len(rows)} rows "
           f"(feb={len(us_fields)} same={len(same_rows)} diff={len(diff_rows)} "
           f"unverified={len(unv_rows)})")
 
