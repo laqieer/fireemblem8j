@@ -120,3 +120,4 @@ GetGameSurvivalRank	080BA9F0	thumb	exact_080bac88
 GetGameFundsRank	080BAB54	thumb	exact_080bac88
 GetGameExpRank	080BAA28	thumb	exact_080bac88
 GetGameCombatRank	080BAB20	thumb	exact_080bac88
+GetDialogueBoxConfig	0808C834	thumb	exact_0808cac0
