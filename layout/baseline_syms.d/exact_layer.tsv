@@ -140,3 +140,6 @@ IsAuguryDivinationAvailable	080A2D24	thumb	exact_080a2c10
 GetChapterDivinationTextIdHectorStory	080A2C40	thumb	exact_080a2ccc
 GetChapterDivinationTextIdBeginning	080A2C5C	thumb	exact_080a2ccc
 GetChapterDivinationPortrait	080A2CB0	thumb	exact_080a2d10
+ResetPrepMenuDescTexts	08097E10	thumb	exact_08097eb8
+ParsePrepMenuDescTexts	08097E44	thumb	exact_08097eb8
+DrawPrepMenuDescTexts	08097E74	thumb	exact_08097eb8

@@ -258,3 +258,4 @@
 0A2C10	0A2C40	src/exact_080a2c10.o(.text)	exact_080a2c10(run): IsDivinationOptionAvailable
 0A2CCC	0A2CE8	src/exact_080a2ccc.o(.text)	exact_080a2ccc(run): IsDivinationBeginningAvailable
 0A2D10	0A2D24	src/exact_080a2d10.o(.text)	exact_080a2d10(run): IsDivinationPortrait1
+097EB8	097EE0	src/exact_08097eb8.o(.text)	exact_08097eb8(run): PrepMenuDescOnInit, PrepMenuDescOnParse, PrepMenuDescOnDraw
