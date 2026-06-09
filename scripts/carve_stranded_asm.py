@@ -56,8 +56,28 @@ BASE = 0x08000000
 
 # Non-src code objects in the US map that hold region-same code stranded out of
 # any src/<tu>.o section. mode is "arm" or "thumb".
+#
+# Two flavours:
+#  - "section": derive the span + labels from the US fireemblem8.map .text line
+#    (JP == US, shift +0). Used by the arm block (asm/arm.o).
+#  - "explicit": JP addresses differ from US and the symbols are NOT in the
+#    funcmap, so give the JP span + ordered (jp_addr, name) labels directly.
+#    Used by arm_call: 5 thumb thunks at JP 0x080DC0DC..0x080DC104 (the US block
+#    has 6, but JP drops ClearOAMBuffer). Every label's JP address is verified
+#    against asm/jp_syms.s / by decoding the ARM branch target in baserom.gba.
 STRANDED_OBJS = {
     "arm": {"section": "asm/arm.o", "mode": "arm"},
+    "arm_call": {
+        "mode": "thumb",
+        "lo": 0x080DC0DC, "hi": 0x080DC104,
+        "labels": [
+            (0x080DC0DC, "CallARM_FillTileRect"),   # -> TmApplyTsa
+            (0x080DC0E4, "TileMap_FillRect"),        # -> TmFillRect
+            (0x080DC0EC, "CALLARM_ColorFadeTick"),   # -> ColorFadeTick
+            (0x080DC0F4, "TileMap_CopyRect"),        # -> TmCopyRect
+            (0x080DC0FC, "ComputeChecksum32"),       # -> Checksum32
+        ],
+    },
 }
 
 
@@ -158,6 +178,18 @@ def plan(obj):
     addresses are JP VRAM; labels are every named symbol in the span that the
     carved object should define (start marker + funcmap fns)."""
     spec = STRANDED_OBJS[obj]
+    if "labels" in spec:                          # explicit JP layout
+        lo, hi = spec["lo"], spec["hi"]
+        interior = [(a, n) for a, n in spec["labels"] if lo <= a < hi]
+        end_marker = next(((a, n) for a, n in spec["labels"] if a == hi), None)
+        romlo = lo - BASE
+        romhi = ((hi + 3) & ~3) - BASE
+        return {
+            "obj": obj, "mode": spec["mode"], "section": f"asm/{obj}.o",
+            "lo": lo, "hi": hi, "romlo": romlo, "romhi": romhi,
+            "labels": interior, "end_marker": end_marker,
+            "fm": {a: (n, 0) for a, n in interior},
+        }
     lo, hi, map_labels = map_section_span(spec["section"])
     if lo is None:
         return None
@@ -186,7 +218,7 @@ def emit_asm(p):
     thumb = mode == "thumb"
     L = [f'\t.section .text.{obj}, "ax", %progbits',
          f'@ {obj} region-same {mode} code stranded out of src/ (US {p["section"]}):',
-         f'@ JP 0x{lo:08X}..0x{hi:08X} (shift +0); descriptive incbin baserom.gba',
+         f'@ JP 0x{lo:08X}..0x{hi:08X}; descriptive incbin baserom.gba',
          ('\t.thumb' if thumb else '\t.arm'),
          '\t.align 2, 0']
     prev = lo
