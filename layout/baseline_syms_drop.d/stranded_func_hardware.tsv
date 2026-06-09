@@ -3,3 +3,4 @@ SetBackgroundMapDataOffset
 SetNextVCount
 SetMainUpdateRoutine
 MaybeResetSomePal
+MaybeSmoothChangeSomePal

@@ -5,3 +5,4 @@
 0012D8	0012E4	asm/stranded_hardware.o(.text.s_080012D8)	hardware:SetMainUpdateRoutine region-same Thumb (descriptive incbin)
 0014EC	001508	asm/stranded_hardware.o(.text.s_080014EC)	hardware:CopyTilemapScreen region-same Thumb (descriptive incbin)
 00169C	0016B8	asm/stranded_hardware.o(.text.s_0800169C)	hardware:MaybeResetSomePal region-same Thumb (descriptive incbin)
+0016B8	001740	asm/stranded_hardware.o(.text.s_080016B8)	hardware:MaybeSmoothChangeSomePal region-same Thumb (descriptive incbin)

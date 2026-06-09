@@ -68,3 +68,13 @@ CopyTilemapScreen:
 MaybeResetSomePal:
 	.incbin "baserom.gba", 0x169C, 0x1C
 
+	.section .text.s_080016B8, "ax", %progbits
+@ MaybeSmoothChangeSomePal region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080016B8..0x08001740
+	.thumb
+	.align 2, 0
+	.global MaybeSmoothChangeSomePal
+	.thumb_func
+MaybeSmoothChangeSomePal:
+	.incbin "baserom.gba", 0x16B8, 0x88
+
