@@ -31,3 +31,4 @@ GetItemReachBits	08016E7C	thumb	exact_08016f90
 CanUnitUseChestKeyItem	080290A4	thumb	exact_08029108
 CanUnitUseDoorKeyItem	080290E0	thumb	exact_08029108
 CanUnitOpenBridge	080290F4	thumb	exact_08029108
+GetDataSize	08013048	thumb	exact_08013050

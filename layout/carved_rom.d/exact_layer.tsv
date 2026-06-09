@@ -63,3 +63,4 @@
 0294AC	0294C4	src/exact_080294ac.o(.text)	exact_080294ac(run): CanUnitUseFruitItem
 012F50	012F78	src/exact_08012f50.o(.text)	exact_08012f50(run): StringCompare
 012F78	012F94	src/exact_08012f78.o(.text)	exact_08012f78(run): CopyString
+013050	0130AC	src/exact_08013050.o(.text)	exact_08013050(run): GfxLoadCursor_Init, GfxLoadCursor_Decompress, GfxLoadCursor_Skip
