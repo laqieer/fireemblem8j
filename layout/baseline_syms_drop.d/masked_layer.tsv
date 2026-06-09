@@ -116,3 +116,4 @@ Sio_SortPlayersByScore
 gSoundRoomTable
 GetBgXOffset
 gMPlayTable
+gCharacterData

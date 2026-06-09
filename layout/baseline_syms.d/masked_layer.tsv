@@ -241,3 +241,6 @@ gSoundRoomTable	08A9DDDC	data	masked_080b3930
 gMPlayTable	082140B4	data	masked_080ba2b4
 gPlaySt	0202BCEC	data	masked_080b62bc
 gPlaySt	0202BCEC	data	masked_080874ec
+gCharacterData	088582BC	data	masked_080a4d18
+GetSupportScreenPartnerSupportLevel	080A48BC	thumb	masked_080a4d18
+GetSupportScreenCharIdAt	080A492C	thumb	masked_080a4d18
