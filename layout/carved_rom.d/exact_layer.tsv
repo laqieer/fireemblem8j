@@ -295,3 +295,4 @@
 0420E8	042114	src/exact_080420e8.o(.text)	exact_080420e8(run): Sio_CountActivePlayers
 042D4C	042D6C	src/exact_08042d4c.o(.text)	exact_08042d4c(run): SioStrCpy
 04D07C	04D08C	src/exact_0804d07c.o(.text)	exact_0804d07c(run): LAButtonSprites_Loop
+04ECA8	04ECBC	src/exact_0804eca8.o(.text)	exact_0804eca8(run): MultiBootCheckComplete
