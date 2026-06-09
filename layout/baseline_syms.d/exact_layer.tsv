@@ -152,3 +152,4 @@ Sio_StartBoxTransitionClose	0804CB9C	thumb	exact_0804cc28
 Sio_IsPlayerConnected	08042114	thumb	exact_080420bc
 Sio_IsPlayerActiveThisFrame	0804213C	thumb	exact_080420e8
 GetTacticianTextConf	080444E4	thumb	exact_080444f4
+DrawLinkArenaTeamName	08043438	thumb	exact_080434b0
