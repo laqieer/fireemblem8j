@@ -110,3 +110,4 @@
 015288	0152C8	src/exact_08015288.o(.text)	exact_08015288(run): VecCrossVec, Vec2CrossVec2
 022E1C	022E2C	src/exact_08022e1c.o(.text)	exact_08022e1c(run): BackToAttackMenu_RestartMenu
 02815C	028188	src/exact_0802815c.o(.text)	exact_0802815c(run): GetUnitSupporterCount, GetUnitSupporterCharacter
+0281D0	0281F8	src/exact_080281d0.o(.text)	exact_080281d0(run): GetUnitSupportLevel
