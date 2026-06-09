@@ -46,3 +46,4 @@
 056230	056240	src/exact_08056230.o(.text)	exact_08056230(run): StartBattleAnimHitEffectsStrong
 0567FC	056828	src/exact_080567fc.o(.text)	exact_080567fc(run): EfxCyclePaletteRaw
 056914	056920	src/exact_08056914.o(.text)	exact_08056914(run): SetEkrMiniAnimLayerFlag
+03676C	0367A0	src/exact_0803676c.o(.text)	exact_0803676c(run): BattleForecastHitCountUpdate
