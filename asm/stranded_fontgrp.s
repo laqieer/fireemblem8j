@@ -208,3 +208,13 @@ GetSpriteTextDrawDest:
 IsTextPrinting:
 	.incbin "baserom.gba", 0x4874, 0x8
 
+	.section .text.s_080048E8, "ax", %progbits
+@ DrawSpecialCharGlyph_old region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080048E8..0x0800493C
+	.thumb
+	.align 2, 0
+	.global DrawSpecialCharGlyph_old
+	.thumb_func
+DrawSpecialCharGlyph_old:
+	.incbin "baserom.gba", 0x48E8, 0x54
+
