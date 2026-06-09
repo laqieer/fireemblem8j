@@ -116,3 +116,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 08537C	0853CC	src/masked_0808537c.o(.text)	masked_0808537c(run): CheckAnyBlueUnitArea2
 0853E4	08540C	src/masked_080853e4.o(.text)	masked_080853e4(run): CheckAnyBlueUnitArea4
 08540C	085434	src/masked_0808540c.o(.text)	masked_0808540c(run): CheckAnyBlueUnitArea5
+085434	08545C	src/masked_08085434.o(.text)	masked_08085434(run): CheckAnyBlueUnitArea6
