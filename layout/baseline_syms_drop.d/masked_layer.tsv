@@ -40,3 +40,5 @@ gBmMapMovement
 gBmMapRange
 GetUnitSupportLevel
 IsChapterBelongCurGame
+PidStatsGetTotalBattleAmt
+PidStatsGetTotalWinAmt
