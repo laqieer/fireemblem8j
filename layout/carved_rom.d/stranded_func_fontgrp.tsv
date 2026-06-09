@@ -15,3 +15,4 @@
 003D88	003D90	asm/stranded_fontgrp.o(.text.s_08003D88)	fontgrp:Text_Skip region-same Thumb (descriptive incbin)
 003DA0	003DEC	asm/stranded_fontgrp.o(.text.s_08003DA0)	fontgrp:PutText region-same Thumb (descriptive incbin)
 003DEC	003E0C	asm/stranded_fontgrp.o(.text.s_08003DEC)	fontgrp:PutBlankText region-same Thumb (descriptive incbin)
+004120	004140	asm/stranded_fontgrp.o(.text.s_08004120)	fontgrp:GetTextDrawDest region-same Thumb (descriptive incbin)
