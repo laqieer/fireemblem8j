@@ -330,3 +330,4 @@
 0B33B4	0B33E0	src/exact_080b33b4.o(.text)	exact_080b33b4(run): MixPalette_Loop
 0CA1E8	0CA1F8	src/exact_080ca1e8.o(.text)	exact_080ca1e8(run): DrawTitleSprites_Init
 0BA690	0BA69C	src/exact_080ba690.o(.text)	exact_080ba690(run): ArenaUi_InitWrapper
+086E98	086F04	src/exact_08086e98.o(.text)	exact_08086e98(run): Debug_DecrementUnitStats
