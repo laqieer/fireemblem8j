@@ -112,3 +112,4 @@ GetUnitSupporterNum
 GGM_IsAnyCharacterKnown
 IsGamePlayedThrough
 LoadAndVerfyRankData
+LoadBonusContentData

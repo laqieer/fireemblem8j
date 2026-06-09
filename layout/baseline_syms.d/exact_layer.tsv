@@ -209,3 +209,4 @@ GGM_IsAnyCharacterKnown	080A8278	thumb	exact_080a7d70
 IsGamePlayedThrough	080A82B4	thumb	exact_080a7d70
 IsGamePlayedThrough	080A82B4	thumb	exact_080a7d8c
 LoadAndVerfyRankData	080A82DC	thumb	exact_080a7d8c
+LoadBonusContentData	080A8338	thumb	exact_080a7e60
