@@ -253,3 +253,4 @@
 08E660	08E688	src/exact_0808e660.o(.text)	exact_0808e660(run): ClearUnitMapUiStatus
 01C590	01C5A8	src/exact_0801c590.o(.text)	exact_0801c590(run): CanShowUnitStatScreen
 011258	011288	src/exact_08011258.o(.text)	exact_08011258(run): PopupProc_Init
+011554	01157C	src/exact_08011554.o(.text)	exact_08011554(run): SetPopupUnit, NewPopup_Simple
