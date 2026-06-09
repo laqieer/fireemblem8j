@@ -26,3 +26,4 @@
 052800	0528A8	src/exact_08052800.o(.text)	exact_08052800(run): EkrDispUpClear4C50, EkrDispUpSet4C50, EkrDispUpSet4C...
 079030	079074	src/exact_08079030.o(.text)	exact_08079030(run): EkrDemoKingAtkRavager_Init, EkrDemoKingAtkRavager_OnEnd
 079328	079368	src/exact_08079328.o(.text)	exact_08079328(run): EkrDemoKingBodyShake_Init, EkrDemoKingBodyShake_OnEnd
+07A328	07A334	src/exact_0807a328.o(.text)	exact_0807a328(run): EkrDemonkingObj_DissolveInit
