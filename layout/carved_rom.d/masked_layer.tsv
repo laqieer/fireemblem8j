@@ -70,3 +70,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0A881C	0A886C	src/masked_080a881c.o(.text)	masked_080a881c(run): SaveEndgameRankings
 0AB588	0AB5A8	src/masked_080ab588.o(.text)	masked_080ab588(run): GetExtraMapMapReadAddr
 0B8CDC	0B8CF0	src/masked_080b8cdc.o(.text)	masked_080b8cdc(run): Shop_GetPortraitIndex
+02E048	02E064	src/masked_0802e048.o(.text)	masked_0802e048(run): AreKeysHeld
