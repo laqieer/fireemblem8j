@@ -102,3 +102,4 @@
 01492C	014944	src/exact_0801492c.o(.text)	exact_0801492c(run): Bzero
 014944	01496C	src/exact_08014944.o(.text)	exact_08014944(run): Memset8, Memset16
 0149EC	014A3C	src/exact_080149ec.o(.text)	exact_080149ec(run): VramCopyInRaw, PutTmLinear
+014A3C	014AA0	src/exact_08014a3c.o(.text)	exact_08014a3c(run): GetTmOffsetById
