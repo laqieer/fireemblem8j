@@ -398,3 +398,13 @@ abort:
 __pack_d:
 	.incbin "baserom.gba", 0xDA9A0, 0x148
 
+	.section .text.s_080DAAE8, "ax", %progbits
+@ __unpack_d region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DAAE8..0x080DABC0
+	.thumb
+	.align 2, 0
+	.global __unpack_d
+	.thumb_func
+__unpack_d:
+	.incbin "baserom.gba", 0xDAAE8, 0xD8
+
