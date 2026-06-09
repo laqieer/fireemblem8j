@@ -200,3 +200,4 @@
 086A58	086AC4	src/exact_08086a58.o(.text)	exact_08086a58(run): GetSupportTalkSong
 087F30	087F48	src/exact_08087f30.o(.text)	exact_08087f30(run): DisplayMapClearMapAnim, DisplayCongratulationsMapAnim
 00DC08	00DC40	src/exact_0800dc08.o(.text)	exact_0800dc08(run): Event09_Goto
+00F704	00F720	src/exact_0800f704.o(.text)	exact_0800f704(run): GetLoadUnitsAmount
