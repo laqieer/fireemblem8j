@@ -379,3 +379,4 @@
 0BF578	0BF5B4	src/exact_080bf578.o(.text)	exact_080bf578(run): GMapScreenVSync_AddCopyRequest
 0C052C	0C0548	src/exact_080c052c.o(.text)	exact_080c052c(run): SkipGmNodeIconDisplay, UnskipGmNodeIconDisplay
 0C0554	0C0574	src/exact_080c0554.o(.text)	exact_080c0554(run): GmapScreen2_Init
+0091AC	0091D4	src/exact_080091ac.o(.text)	exact_080091ac(run): AP_Update

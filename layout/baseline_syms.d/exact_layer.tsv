@@ -185,3 +185,5 @@ PutGMapPINodeName	080C36D4	thumb	exact_080c3d0c
 PutGMapPICharName	080C3704	thumb	exact_080c3d0c
 PutGMapPIClassName	080C378C	thumb	exact_080c3d0c
 PutGMapPIShopIcons	080C37C4	thumb	exact_080c3d0c
+AP_Display	080091D4	thumb	exact_080091ac
+AP_ExecFrame	08009230	thumb	exact_080091ac

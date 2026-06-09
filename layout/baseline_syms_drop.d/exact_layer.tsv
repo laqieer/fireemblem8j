@@ -91,3 +91,5 @@ TradeMenu_TutorialWait_OnInit
 UnitAddItem
 UnitRescue
 UnsyncEkrDispUP
+AP_ExecFrame
+AP_Update
