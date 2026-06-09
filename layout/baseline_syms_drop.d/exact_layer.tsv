@@ -99,3 +99,4 @@ GetEkrDragonStatusType_
 SetEkrDragonStatusType
 GetAnimAnotherSide
 RestartMainMiniAnim
+EkrUnitMainMini_UpdateAnim
