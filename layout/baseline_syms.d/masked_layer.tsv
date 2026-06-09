@@ -138,3 +138,4 @@ gpAi2Table	085D30E0	data	masked_0803c6ac
 gBmMapSize	0202E4D0	data	masked_0803b244
 gAiClassRankLists	085D2058	data	masked_0803bedc
 gBmMapSize	0202E4D0	data	masked_0803c214
+gWorkingTerrainMoveCosts	03004B50	data	masked_08040d4c
