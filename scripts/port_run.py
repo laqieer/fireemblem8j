@@ -375,6 +375,13 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None):
         cb = subprocess.run(["arm-none-eabi-objcopy", "-O", "binary", "-j", dsec, obj, "/dev/stdout"],
                             capture_output=True).stdout
         rel = sec_relocs.get(dsec, set())
+        # A section whose JP base + size overruns the ROM end can't be real ROM data
+        # there (a misresolved/region-different placement) — comparing would index
+        # past `jp`. Treat it as a non-match -> NOLOAD; the JP bytes stay in the
+        # incbin baseline and verify-or-revert guards the carve regardless.
+        if off0 + size > len(jp):
+            noload_rom.append((off0, size, dsec))
+            continue
         match = all(cb[i] == jp[off0+i] or any(i-k in rel for k in range(4))
                     for i in range(min(size, len(cb))))
         # A KEPT (loaded) section is byte-perfect only if every symbol it references
