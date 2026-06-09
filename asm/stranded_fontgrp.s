@@ -28,3 +28,13 @@ ClearSmallStringBuffer:
 StoreNumberStringOrDashesToSmallBuffer:
 	.incbin "baserom.gba", 0x3868, 0x30
 
+	.section .text.s_08003898, "ax", %progbits
+@ PrintNumberToDBG region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08003898..0x080038B4
+	.thumb
+	.align 2, 0
+	.global PrintNumberToDBG
+	.thumb_func
+PrintNumberToDBG:
+	.incbin "baserom.gba", 0x3898, 0x1C
+

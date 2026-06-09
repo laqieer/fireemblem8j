@@ -1,3 +1,4 @@
 003800	003814	asm/stranded_fontgrp.o(.text.s_08003800)	fontgrp:PrintEmptyStringToDBG region-same Thumb (descriptive incbin)
 003814	00382C	asm/stranded_fontgrp.o(.text.s_08003814)	fontgrp:ClearSmallStringBuffer region-same Thumb (descriptive incbin)
 003868	003898	asm/stranded_fontgrp.o(.text.s_08003868)	fontgrp:StoreNumberStringOrDashesToSmallBuffer region-same Thumb (descriptive incbin)
+003898	0038B4	asm/stranded_fontgrp.o(.text.s_08003898)	fontgrp:PrintNumberToDBG region-same Thumb (descriptive incbin)
