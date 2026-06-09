@@ -123,3 +123,5 @@ GetUnitItemCount
 UnitHasItem
 UnitRemoveInvalidItems
 GetUnitAid
+CgText_AdjustBoxPosition
+GetCgTextFlags

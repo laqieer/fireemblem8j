@@ -219,3 +219,4 @@ TradeMenu_GetAdjustedRow	0802D370	thumb	exact_0802d9e4
 AddDamagingTrap	0802E218	thumb	exact_0802e24c
 AddDamagingTrap	0802E218	thumb	exact_0802e268
 LoadUnit	0801786C	thumb	exact_0801772c
+GetCgTextFlags	08090D10	thumb	exact_080916ac
