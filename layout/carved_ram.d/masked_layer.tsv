@@ -9,3 +9,4 @@
 0203E88A	ewram	src/masked_080a76f4.o(ewram_data)	masked_080a76f4 ewram_data
 0203EF40	ewram	src/masked_080ab588.o(ewram_data)	masked_080ab588 ewram_data
 08ABC784	rom	src/masked_080b8cdc.o(.data)	masked_080b8cdc .data region-diff (incbin)
+0203A4C8	ewram	src/masked_080265bc.o(ewram_data)	masked_080265bc ewram_data
