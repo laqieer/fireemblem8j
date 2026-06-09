@@ -338,3 +338,13 @@ error:
 wrap:
 	.incbin "baserom.gba", 0xDA4CC, 0x18
 
+	.section .text.s_080DA5D4, "ax", %progbits
+@ _lseek region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DA5D4..0x080DA5E0
+	.thumb
+	.align 2, 0
+	.global _lseek
+	.thumb_func
+_lseek:
+	.incbin "baserom.gba", 0xDA5D4, 0xC
+
