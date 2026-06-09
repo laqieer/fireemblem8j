@@ -1,2 +1,3 @@
 001044	0010A0	asm/stranded__unmapped.o(.text.s_08001044)	_unmapped:ApplyColorAddition_ClampMax region-same Thumb (descriptive incbin)
 0010A0	0010FC	asm/stranded__unmapped.o(.text.s_080010A0)	_unmapped:ApplyColorAddition_ClampMin region-same Thumb (descriptive incbin)
+002CD4	002CE4	asm/stranded__unmapped.o(.text.s_08002CD4)	_unmapped:AllocateProcess region-same Thumb (descriptive incbin)
