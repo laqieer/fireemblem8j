@@ -401,3 +401,4 @@
 0A848C	0A84CC	src/exact_080a848c.o(.text)	exact_080a848c(run): SaveNewRankData
 02D758	02D76C	src/exact_0802d758.o(.text)	exact_0802d758(run): TradeMenu_OnInitUnselected
 02D850	02D8B8	src/exact_0802d850.o(.text)	exact_0802d850(run): TradeMenu_OnInitSelected
+02D9E4	02DA34	src/exact_0802d9e4.o(.text)	exact_0802d9e4(run): TradeMenu_OnEndSelected
