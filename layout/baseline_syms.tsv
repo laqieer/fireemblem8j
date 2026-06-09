@@ -384,7 +384,6 @@ DisplayGoldBoxText	080B9A5C	thumb	uiarena
 Proc_ForEach	08002EE8	thumb	uiarena
 gProcScr_GoldBox	08ABCAB8	data	uiarena
 ProcScr_Mu	08A132D0	data	uiarena
-ShowMu	0807BBF0	thumb	uiarena
 SetInitTalkTextFont	0800687C	thumb	uiarena
 ClearTalkText	0800814C	thumb	uiarena
 StartTalkExt	08006890	thumb	uiarena
