@@ -120,7 +120,7 @@ ghidra-db: $(ELF)
 ghidra-cp:
 	scripts/ghidra/clone_copilot_project.sh
 
-.PHONY: all compare clean layout ida-db ghidra-db ghidra-cp
+.PHONY: all compare clean check layout ida-db ghidra-db ghidra-cp
 
 asm/baserom.o: baserom.gba
 
@@ -141,4 +141,13 @@ $(ELF): $(ALL_OBJECTS) $(LDSCRIPT)
 	$(OBJCOPY) --strip-debug -O binary --pad-to 0x9000000 --gap-fill=0xff $< $@
 
 clean:
-	$(RM) $(ALL_OBJECTS) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
+	# Remove asm/*.o + src/*.o explicitly, not just $(ALL_OBJECTS): a carve that deletes a .s
+	# leaves an ORPHAN .o that the asm/*.s wildcard can't see, so a wildcard-only clean keeps
+	# it and the local build false-greens while CI's fresh checkout fails. Remove orphans too.
+	$(RM) $(ALL_OBJECTS) asm/*.o src/*.o $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
+
+# Fast repo-consistency lint (no toolchain / no ROM needed): every object the build links
+# has a git-tracked source. Catches the "layout row without a committed .s/.c" class that
+# builds locally (stale .o) but fails CI's fresh checkout. Also enforced in CI.
+check:
+	$(PYTHON) scripts/check_layout.py
