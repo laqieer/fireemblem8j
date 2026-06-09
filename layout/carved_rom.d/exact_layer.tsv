@@ -351,3 +351,4 @@
 0BFAB4	0BFAC8	src/exact_080bfab4.o(.text)	exact_080bfab4(run): GmapUnit_Init
 0BFC04	0BFC20	src/exact_080bfc04.o(.text)	exact_080bfc04(run): GetPaletteIdForAllegience
 0BFD64	0BFD74	src/exact_080bfd64.o(.text)	exact_080bfd64(run): MapUnitC_SetPosition
+0BFD74	0BFD88	src/exact_080bfd74.o(.text)	exact_080bfd74(run): MapUnitC_GetPosition
