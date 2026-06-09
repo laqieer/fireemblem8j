@@ -222,3 +222,4 @@
 07DE58	07DE88	src/exact_0807de58.o(.text)	exact_0807de58(run): MapAnim_DrawBarSegment
 0846E0	08471C	src/exact_080846e0.o(.text)	exact_080846e0(run): InitScanlineBuf, SetScanlineBufWinL
 08471C	08473C	src/exact_0808471c.o(.text)	exact_0808471c(run): SetScanlineBufWinR
+08375C	0837B8	src/exact_0808375c.o(.text)	exact_0808375c(run): MapAnimMoveUnitTowardsTargetExt
