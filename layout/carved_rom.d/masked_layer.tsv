@@ -73,3 +73,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 02E048	02E064	src/masked_0802e048.o(.text)	masked_0802e048(run): AreKeysHeld
 02E3E4	02E42C	src/masked_0802e3e4.o(.text)	masked_0802e3e4(run): GetObstacleHpAt
 02E4C4	02E530	src/masked_0802e4c4.o(.text)	masked_0802e4c4(run): ApplyMapChangesById
+02E990	02E9C8	src/masked_0802e990.o(.text)	masked_0802e990(run): AddLightRune

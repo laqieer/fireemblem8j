@@ -96,3 +96,4 @@ SaveNewRankData	080A848C	thumb	masked_080a881c
 gPlaySt	0202BCEC	data	masked_080a881c
 GetMapChange	0802E42C	thumb	masked_0802e4c4
 gBmMapBaseTiles	085C2E54	data	masked_0802e4c4
+AddTrap	0802E1F0	thumb	masked_0802e990
