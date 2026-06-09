@@ -209,3 +209,6 @@ GetMinimapObjectCellAt	080AC624	thumb	masked_080ac674
 gBmMapSize	0202E4D0	data	masked_080ac674
 gBmSt	0202BCAC	data	masked_080acffc
 gBmMapSize	0202E4D0	data	masked_080acffc
+gMonsterItemsByClassIndex	08926854	data	masked_0807a774
+gMonsterItemWeightsTable	0892671A	thumb	masked_0807a774
+gMonsterItemTable	0892661C	data	masked_0807a774

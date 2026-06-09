@@ -101,3 +101,6 @@ GetMinimapStairTileAt
 GetMinimapTileAt
 GetMinimapWaterKindAt
 GetMinimapTerrainCellAt
+gMonsterItemTable
+gMonsterItemWeightsTable
+gMonsterItemsByClassIndex

@@ -1,0 +1,41 @@
+#include "global.h"
+
+#include "rng.h"
+
+#include "monstergen.h"
+
+/* prototypes for same-file helpers called by this run */
+int SelectFromWeightedArray(const u8 *weights, u8 size);
+
+u32 GenerateMonsterItems(u8 classId) {
+    const struct MonsterItemsByClassEntry *iter = gMonsterItemsByClassIndex;
+    for (iter = gMonsterItemsByClassIndex; iter->classId != 0xff; ++iter)
+    {
+        if (iter->classId == classId) {
+            u32 item1row;
+            u32 item1weightsidx;
+            u32 item1;
+            u8 row1, col1, row2, col2;
+            row1 = SelectFromWeightedArray(iter->item1weights, 5);
+
+            item1row = iter->item1row[row1];
+            item1weightsidx = iter->item1tables[row1];
+            col1 = SelectFromWeightedArray(gMonsterItemWeightsTable[item1weightsidx], 5);
+            item1 = gMonsterItemTable[item1row][col1] << 0x10;
+
+            row2 = SelectFromWeightedArray(iter->item2weights, 5);
+            if (row2 != 0xff) {
+                u32 item2row = iter->item2row[row2];
+                if (item2row) {
+                    u32 item2;
+                    u32 item2weightsidx = iter->item2tables[row2];
+                    col2 = SelectFromWeightedArray(gMonsterItemWeightsTable[item2weightsidx], 5);
+                    item2 = gMonsterItemTable[item2row][col2];
+                    return item1 | item2;
+                }
+            }
+            return item1;
+        }
+    }
+    return 0;
+}
