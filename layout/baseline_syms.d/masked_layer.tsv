@@ -29,3 +29,4 @@ gEkrgauge_8	085E376C	data	masked_08051f6c
 gEkrgauge_9	085E3784	data	masked_08051f6c
 gEkrgauge_10	085E379C	data	masked_08051f6c
 gEkrgauge_11	085E37B4	data	masked_08051f6c
+gBanimUniquePaletteDisabled	0203E1D8	data	masked_0805a714

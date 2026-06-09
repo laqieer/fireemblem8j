@@ -23,3 +23,4 @@
 072168	0721A8	src/masked_08072168.o(.text)	masked_08072168(run): EkrDragonTmCpyWithDistance
 051F6C	051FB8	src/masked_08051f6c.o(.text)	masked_08051f6c(run): EkrGauge_SetWtaArrowSprite
 078730	078750	src/masked_08078730.o(.text)	masked_08078730(run): CheckBanimHensei
+05A714	05A78C	src/masked_0805a714.o(.text)	masked_0805a714(run): ApplyBanimUniquePalette, GetBanimPalette
