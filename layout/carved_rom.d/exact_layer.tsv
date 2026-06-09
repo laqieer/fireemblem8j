@@ -5,3 +5,4 @@
 055BC0	055BE0	src/exact_08055bc0.o(.text)	exact_08055bc0(run): DisableEfxWeaponIcon, EnableEfxWeaponIcon
 052FC4	052FEC	src/exact_08052fc4.o(.text)	exact_08052fc4(run): CheckEkrHitDone
 052FEC	052FFC	src/exact_08052fec.o(.text)	exact_08052fec(run): CheckEkrHitNow
+076A4C	076A58	src/exact_08076a4c.o(.text)	exact_08076a4c(run): EfxPartsofScrollMain
