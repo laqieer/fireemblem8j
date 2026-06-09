@@ -118,3 +118,12 @@ gBmMapSize	0202E4D0	data	masked_0803dc54
 AiGetClassRank	0803BEDC	thumb	masked_0803dff8
 gBattleTarget	0203A568	data	masked_0803dff8
 gPlaySt	0202BCEC	data	masked_0803dff8
+gBattleActor	0203A4E8	data	masked_0803e0a4
+AiGetDamageDealtCombatScoreComponent	0803DEC4	thumb	masked_0803e0a4
+AiGetOpponentLowHpScoreComponent	0803DF24	thumb	masked_0803e0a4
+AiGetFriendZoneCombatScoreComponent	0803DF4C	thumb	masked_0803e0a4
+AiGetTargetClassCombatScoreComponent	0803DFF8	thumb	masked_0803e0a4
+AiGetTurnCombatScoreComponent	0803E02C	thumb	masked_0803e0a4
+AiGetDamageTakenScoreComponent	0803E044	thumb	masked_0803e0a4
+gAiState	0203AA00	data	masked_0803e0a4
+gAiCombatScoreCoefficientTable	080DCE54	data	masked_0803e0a4

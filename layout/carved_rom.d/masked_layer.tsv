@@ -94,3 +94,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 03F948	03F958	src/masked_0803f948.o(.text)	masked_0803f948(run): AiFunc_EndDecision
 03DC54	03DD14	src/masked_0803dc54.o(.text)	masked_0803dc54(run): AiSimulateBestBattleAgainstTarget
 03DFF8	03E044	src/masked_0803dff8.o(.text)	masked_0803dff8(run): AiGetTargetClassCombatScoreComponent, AiGetTurnCombatScoreComponent
+03E0A4	03E17C	src/masked_0803e0a4.o(.text)	masked_0803e0a4(run): AiGetDangerScoreComponent, AiGetLowHpScoreComponent, AiComputeCombatScore

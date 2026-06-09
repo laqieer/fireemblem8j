@@ -58,3 +58,9 @@ gRedAiEscapePoints
 gAiState
 AiGetCombatPositionScore
 AiSimulateBattleAgainstTargetAtPosition
+AiComputeCombatScore
+AiGetDamageDealtCombatScoreComponent
+AiGetOpponentLowHpScoreComponent
+AiGetTargetClassCombatScoreComponent
+AiGetTurnCombatScoreComponent
+gBattleActor
