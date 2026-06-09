@@ -508,3 +508,13 @@ __subsf3:
 __fpcmp_parts_f:
 	.incbin "baserom.gba", 0xDBC9C, 0xE4
 
+	.section .text.s_080DBE38, "ax", %progbits
+@ __gtsf2 region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DBE38..0x080DBE80
+	.thumb
+	.align 2, 0
+	.global __gtsf2
+	.thumb_func
+__gtsf2:
+	.incbin "baserom.gba", 0xDBE38, 0x48
+
