@@ -761,3 +761,35 @@ gap" 0x080D6588–0x080ED7F4 is actually agbcc/libgcc intrinsics (`__ashldi3`, `
 IDA-located per-TU before assignment, not taken from recon estimates.
 
 **Status:** In flight 2026-06-09.
+
+## D20 — Region-different code RE: the sign-extension codegen class + cluster re-identification (2026-06-09)
+
+**Context:** Hand-decompiling the remaining region-different code TUs in the interactive MCP session. Three
+carves landed byte-perfect (code_8086934 +3, bindingblade +2, stoneshatter StoneShatterEvent_OnEnd +1); two
+further attempts then hit the SAME wall, which this entry names so future sessions attack it directly.
+
+**Finding 1 — the sign-extension codegen class (the gating code-front problem; blocks ≥2 TUs).** Some JP
+functions sign-extend an s16 value (`lsl;asr`) where a faithful US-derived port compiled by the *same* agbcc
+emits zero-extension (`lsl;lsr`). The US ROM itself uses `lsr` at these sites, so it is a genuine JP↔US
+**source-logic** difference, not a port bug — the JP source flows the s16 through a *signed* context the US
+source doesn't. Seen in StartStoneShatterAnim (parked) and banim-efxmagic.c core-tail (NewEfxRestWINH `b`,
+NewEfxCircleWIN `d`/`e`). **Solution template (verified on EfxCircleWINMain):** route the value through a
+`(s16)`-cast signed expression — `int a; a=(s16)(x - y);` reproduces the exact `lsl;asr;mov ip,r0;cmp r0,#0`.
+The hard residual is a store-only s16 param (`*buf = b`): agbcc zero-extends it under all source variants
+unless `b` flows into a signed use, so you must **decompile the JP function's ACTUAL logic (which differs),
+not port US**. P8-re-efxmagic-coretail is attacking this; permuter long-runs get SIGTERM'd in this sandbox,
+so prefer **deterministic C-structure permutation** (bindingblade's split-`if`, EfxCircleWINMain's cast).
+
+**Finding 2 — cluster re-identification (red-line 2).** The gap [0x0805C5D8, 0x0805D000) was assigned as
+aura/gespenst/refresh on a US-address coincidence. Live IDA disproved it: it is `banim-efxmagic.c` core-tail
+(10 fns, 0x805C5D8-0x805CC2C) + `banim-efxmagic-phywpn.c` head (11 fns, 0x805CC2C-0x805D000). JP fingerprints:
+SFX 0xCD = phywpn-only; ±0x48 OBJ offset = efxTeono. The real aura/gespenst/refresh live elsewhere (US
+0x8064/0x8065) — re-pin by IDA xref-from-ported-neighbor before assigning; never chase US addresses (same
+lesson as the banim-sprites mirage).
+
+**Decision:** (1) standard approach for region-different code = decompile the JP function's real logic, not
+port US; apply the `(s16)`-cast idiom for sign-ext; deterministic C-structure for codegen residuals. (2)
+Re-pin every region-different code TU by IDA before assignment, never by US address. (3) ROM-pool literal
+addresses are ground truth when IDA's `.data` VMAs are stale.
+
+**Status:** Recorded 2026-06-09. Sign-ext class is the gating code-front problem; core-tail follow-up in flight.
