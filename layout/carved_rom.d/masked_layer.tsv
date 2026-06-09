@@ -128,3 +128,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 00DA04	00DA1C	src/masked_0800da04.o(.text)	masked_0800da04(run): Event05_SetSlot
 00DEF0	00DFB0	src/masked_0800def0.o(.text)	masked_0800def0(run): Event10_ModifyEvBit
 010AD0	010B6C	src/masked_08010ad0.o(.text)	masked_08010ad0(run): GenerateScriptBattleHitFormEventQueue
+00C390	00C3A0	src/masked_0800c390.o(.text)	masked_0800c390(run): Event8A_WmShowCursor_Unsure
