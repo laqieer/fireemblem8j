@@ -381,3 +381,4 @@
 0C0554	0C0574	src/exact_080c0554.o(.text)	exact_080c0554(run): GmapScreen2_Init
 0091AC	0091D4	src/exact_080091ac.o(.text)	exact_080091ac(run): AP_Update
 009588	0095A8	src/exact_08009588.o(.text)	exact_08009588(run): AP_ExecDummyFrame
+0095A8	0095E0	src/exact_080095a8.o(.text)	exact_080095a8(run): AP_Init
