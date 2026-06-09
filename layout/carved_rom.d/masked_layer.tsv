@@ -17,3 +17,4 @@
 059890	0598BC	src/masked_08059890.o(.text)	masked_08059890(run): GetEfxHp, GetEfxHpModMaybe
 059954	059994	src/masked_08059954.o(.text)	masked_08059954(run): EkrCheckAttackRound
 0599AC	0599C8	src/masked_080599ac.o(.text)	masked_080599ac(run): CheckBattleScripted
+0797E0	079808	src/masked_080797e0.o(.text)	masked_080797e0(run): EkrdragonDemonking_Init
