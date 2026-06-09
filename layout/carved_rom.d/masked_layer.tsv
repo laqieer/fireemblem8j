@@ -220,3 +220,4 @@ AAF6D8	AAF6DC	src/masked_080b62bc.o(.data)	masked_080b62bc .data
 0A4D18	0A4D54	src/masked_080a4d18.o(.text)	masked_080a4d18(run): GetTotalSupportLevel
 0348DC	034904	src/masked_080348dc.o(.text)	masked_080348dc(run): GetUnitInfoWindowX
 092984	0929B0	src/masked_08092984.o(.text)	masked_08092984(run): UnitList_ResetFromStatScreen
+0BDA28	0BDA6C	src/masked_080bda28.o(.text)	masked_080bda28(run): WorldMap_IsMonsterAtUnclearedNode
