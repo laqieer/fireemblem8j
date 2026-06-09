@@ -310,3 +310,4 @@
 0B3DC0	0B3DF8	src/exact_080b3dc0.o(.text)	exact_080b3dc0(run): UpdateVolumeGraphBuffer
 0B3F98	0B3FE8	src/exact_080b3f98.o(.text)	exact_080b3f98(run): SoundRoom_GetScrollDirection
 0B4130	0B4144	src/exact_080b4130.o(.text)	exact_080b4130(run): TickCurrentSongTime
+0B4E1C	0B4E58	src/exact_080b4e1c.o(.text)	exact_080b4e1c(run): SoundRoom_DrawVolumeGraphSprites

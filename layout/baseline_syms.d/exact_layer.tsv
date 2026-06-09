@@ -154,3 +154,5 @@ Sio_IsPlayerActiveThisFrame	0804213C	thumb	exact_080420e8
 GetTacticianTextConf	080444E4	thumb	exact_080444f4
 DrawLinkArenaTeamName	08043438	thumb	exact_080434b0
 gSoundRoomVolumeGraphBuffer	0201F19C	data	exact_080b3dc0
+DrawSoundRoomVolumeGraphSprites	080B4D94	thumb	exact_080b4e1c
+gSoundRoomVolumeGraphBuffer	0201F19C	data	exact_080b4e1c
