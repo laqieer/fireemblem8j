@@ -66,3 +66,5 @@ gPlaySt	0202BCEC	data	masked_0802257c
 gActionData	0203A954	data	masked_080228c4
 gActionData	0203A954	data	masked_08022930
 gActionData	0203A954	data	masked_08022fe8
+PlayDanceCommandUsabilityCommon	080230B8	thumb	masked_08023120
+gBmSt	0202BCAC	data	masked_08023120

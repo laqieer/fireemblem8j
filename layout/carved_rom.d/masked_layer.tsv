@@ -52,3 +52,4 @@
 0228C4	0228D8	src/masked_080228c4.o(.text)	masked_080228c4(run): RescueSelection_OnSelect
 022930	022954	src/masked_08022930.o(.text)	masked_08022930(run): DropSelection_OnSelect
 022FE8	023008	src/masked_08022fe8.o(.text)	masked_08022fe8(run): UnitActionMenu_Seize
+023120	02315C	src/masked_08023120.o(.text)	masked_08023120(run): PlayCommandUsability
