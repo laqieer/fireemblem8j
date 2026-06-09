@@ -52,3 +52,6 @@ GetROMChapterStruct
 gChapterDataTable
 gExtraMapInfo
 IsDifficultMode
+gAiDecision
+gGreenAiEscapePoints
+gRedAiEscapePoints

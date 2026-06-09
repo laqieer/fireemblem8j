@@ -104,3 +104,7 @@ gChapterDataTable	08904E1C	data	masked_08034520
 gExtraMapInfo	08A9CA60	data	masked_08034520
 gPlaySt	0202BCEC	data	masked_0803460c
 gBmSt	0202BCAC	data	masked_08020818
+gPlaySt	0202BCEC	data	masked_0803e808
+gRedAiEscapePoints	085D2090	data	masked_0803e808
+gGreenAiEscapePoints	085D2194	data	masked_0803e808
+gAiDecision	0203AA90	data	masked_0803e808
