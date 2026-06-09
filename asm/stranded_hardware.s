@@ -48,3 +48,13 @@ SetNextVCount:
 SetMainUpdateRoutine:
 	.incbin "baserom.gba", 0x12D8, 0xC
 
+	.section .text.s_080014EC, "ax", %progbits
+@ CopyTilemapScreen region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080014EC..0x08001508
+	.thumb
+	.align 2, 0
+	.global CopyTilemapScreen
+	.thumb_func
+CopyTilemapScreen:
+	.incbin "baserom.gba", 0x14EC, 0x1C
+
