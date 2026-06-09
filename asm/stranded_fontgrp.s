@@ -68,3 +68,13 @@ PrintStringToDBG:
 UpdateDBGScroll:
 	.incbin "baserom.gba", 0x3A08, 0x68
 
+	.section .text.s_08003B48, "ax", %progbits
+@ PrintNumberAsOBJ region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08003B48..0x08003B6C
+	.thumb
+	.align 2, 0
+	.global PrintNumberAsOBJ
+	.thumb_func
+PrintNumberAsOBJ:
+	.incbin "baserom.gba", 0x3B48, 0x24
+

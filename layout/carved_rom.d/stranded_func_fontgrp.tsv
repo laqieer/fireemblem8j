@@ -5,3 +5,4 @@
 003900	00391C	asm/stranded_fontgrp.o(.text.s_08003900)	fontgrp:PrintHexNumberToDBG region-same Thumb (descriptive incbin)
 00391C	003988	asm/stranded_fontgrp.o(.text.s_0800391C)	fontgrp:PrintStringToDBG region-same Thumb (descriptive incbin)
 003A08	003A70	asm/stranded_fontgrp.o(.text.s_08003A08)	fontgrp:UpdateDBGScroll region-same Thumb (descriptive incbin)
+003B48	003B6C	asm/stranded_fontgrp.o(.text.s_08003B48)	fontgrp:PrintNumberAsOBJ region-same Thumb (descriptive incbin)
