@@ -95,3 +95,4 @@
 0140CC	0140E0	src/exact_080140cc.o(.text)	exact_080140cc(run): FadeInWhiteSpeed08Locking
 0140E0	0140F4	src/exact_080140e0.o(.text)	exact_080140e0(run): FadeInWhiteSpeed04
 0140F4	014108	src/exact_080140f4.o(.text)	exact_080140f4(run): FadeInWhiteSpeed08
+01413C	014150	src/exact_0801413c.o(.text)	exact_0801413c(run): FadeOutBlackSpeed40LockingWithCallback
