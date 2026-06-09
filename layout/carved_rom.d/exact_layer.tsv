@@ -267,3 +267,4 @@
 09A5F4	09A61C	src/exact_0809a5f4.o(.text)	exact_0809a5f4(run): CountSetBits
 09A61C	09A650	src/exact_0809a61c.o(.text)	exact_0809a61c(run): GetNthSetBitMask
 09A650	09A674	src/exact_0809a650.o(.text)	exact_0809a650(run): GetFirstSetBitIndex
+0A20BC	0A2108	src/exact_080a20bc.o(.text)	exact_080a20bc(run): WmSell_OnHBlank, WmSell_Init
