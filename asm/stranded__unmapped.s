@@ -298,3 +298,13 @@ isnan:
 __sread:
 	.incbin "baserom.gba", 0xDA2A8, 0x34
 
+	.section .text.s_080DA2DC, "ax", %progbits
+@ __swrite region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DA2DC..0x080DA31C
+	.thumb
+	.align 2, 0
+	.global __swrite
+	.thumb_func
+__swrite:
+	.incbin "baserom.gba", 0xDA2DC, 0x40
+
