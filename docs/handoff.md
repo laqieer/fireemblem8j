@@ -8,8 +8,8 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
-- **SPRINT 2026-06-09 (P9 fan-out, interactive MCP session) — data 84.89% -> 90.17%
-  (+685KB), functions 1323 -> 1329 (+6), pushed `cf94ce8`.** Ran as a rolling worktree-
+- **SPRINT 2026-06-09 (P9 fan-out, interactive MCP session) — data 84.89% -> 94.29%
+  (+1.23MB), functions 1323 -> 1329 (+6), pushed `bf2a8f8`.** Ran as a rolling worktree-
   isolated P8 team, lead serial-integrated each delivery (see decisions.md D19). Landed on main:
   - **Recursive `carve_data_refs.py` (fixed) — +41.6KB / 457 region-different objects.**
     Two-pass deterministic sizing: PASS 1 accepts only 4-aligned real object starts
@@ -64,6 +64,13 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
     derive JP boundary -> named incbin (gap-subtraction). In flight (carve_graphics_subsys/carve_frontier).
     SOP probe: union carved_rom.tsv+carved_rom.d/* vs baserom, report gaps that are <97% 0xFF and >5%
     non-pad, sorted by real bytes -> the largest real uncarved region each session.
+    **DONE so far:** data-frontier-2 carved the 7 biggest regions +547KB (data ->94.29%) via the new
+    reusable `scripts/carve_frontier.py` (3 modes: `table` = follow JP ptr table gaplessly; `frame_arrays`
+    = scan consecutive ptr arrays for frame bounds; `blob` = named blob when no in-window index). Located
+    via JP tables (gChapterDataAssetTable@0x08907BC8, chap_title_data@0x08A732C0 [JP uses all 3 ptr fields
+    vs US 1], ImgArray_AuraBg3@0x08601930) / named-symbol bounds — never US addrs. **~1.43MB long-tail
+    remains** (~300 mid/small blocks; in flight as data-frontier-3). The 247K 0xFF run @0x08BB8E94 is REAL
+    padding — gap analysis correctly excludes it; never carve it.
 - **DATA FRONTIER (2026-06-08) — data carved 0.05% -> 58.58%, symbols 3.8% -> 15.96%,
   478 objects, ROM ~47% carved (gen_layout), all durable.** Data is 94% of the ROM
   (13.3 MB). Three harvesters now capture region-same data mechanically:
