@@ -168,3 +168,13 @@ __umodsi3:
 vfprintf:
 	.incbin "baserom.gba", 0xD6B14, 0x14
 
+	.section .text.s_080D8BE8, "ax", %progbits
+@ __sfp region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D8BE8..0x080D8C5C
+	.thumb
+	.align 2, 0
+	.global __sfp
+	.thumb_func
+__sfp:
+	.incbin "baserom.gba", 0xD8BE8, 0x74
+

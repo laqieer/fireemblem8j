@@ -15,3 +15,4 @@
 0D67D0	0D6848	asm/stranded__unmapped.o(.text.s_080D67D0)	_unmapped:__udivsi3 region-same Thumb (descriptive incbin)
 0D6848	0D6908	asm/stranded__unmapped.o(.text.s_080D6848)	_unmapped:__umodsi3 region-same Thumb (descriptive incbin)
 0D6B14	0D6B28	asm/stranded__unmapped.o(.text.s_080D6B14)	_unmapped:vfprintf region-same Thumb (descriptive incbin)
+0D8BE8	0D8C5C	asm/stranded__unmapped.o(.text.s_080D8BE8)	_unmapped:__sfp region-same Thumb (descriptive incbin)
