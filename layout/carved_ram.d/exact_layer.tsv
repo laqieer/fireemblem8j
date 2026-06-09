@@ -1,0 +1,4 @@
+030005D0	iwram	src/exact_08011554.o(.bss)	exact_08011554 .bss
+02024E68	ewram	src/exact_08002b58.o(ewram_data)	exact_08002b58 ewram_data
+02024E68	ewram	src/exact_08002dec.o(ewram_data)	exact_08002dec ewram_data
+02024E68	ewram	src/exact_08002f3c.o(ewram_data)	exact_08002f3c ewram_data

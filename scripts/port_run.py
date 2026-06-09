@@ -11,6 +11,7 @@ and other runs stay in the incbin baseline.
 Usage: scripts/port_run.py <name> [<name> ...]
 """
 import subprocess, sys, os, re
+import glob as glob_mod
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
@@ -30,7 +31,14 @@ def carved_objs():
     return {m.group(1) for m in (re.search(r"(src/\S+\.o)\(", l) for l in open("layout/carved_rom.tsv")) if m}
 
 
-def port(name, exclude=(), runs=None):
+def port(name, exclude=(), runs=None, src_tu=None, frag=None):
+    # src_tu: US source TU to extract from (defaults to `name`). Lets carve_exact
+    # carve functions STRANDED inside an already-carved TU into a SEPARATELY-named
+    # object (e.g. name="exact_0800XXXX", src_tu="bmlib") so the carved_objs() skip
+    # below — which is keyed on the OUTPUT object — doesn't reject it.
+    # frag: when set, NEW manifest rows go to per-task fragment files
+    #   layout/<base>.d/<frag>.tsv (parallel-safe) instead of the shared monolith.
+    src_tu = src_tu or name
     if f"src/{name}.o" in carved_objs():
         print(f"{name}: already has a carved run — skipping"); return False
     # Verified runs only (D2): each block byte-matches the JP ROM at its base.
@@ -53,9 +61,15 @@ def port(name, exclude=(), runs=None):
     base = int(start, 16) - 0x08000000  # ROM-file offset (for indexing baserom)
 
     MANI = ["layout/carved_rom.tsv", "layout/carved_ram.tsv", "layout/baseline_syms.tsv", "layout/patches.tsv"]
-    snap = {p: open(p).read() for p in MANI}
+    if frag is not None:
+        # also snapshot this task's fragment files so a revert restores them exactly
+        # (deleting on revert if they didn't exist before this call).
+        MANI += [f"layout/{b}.d/{frag}.tsv"
+                 for b in ("carved_rom", "carved_ram", "baseline_syms",
+                           "baseline_syms_drop", "patches")]
+    snap = {p: (open(p).read() if os.path.exists(p) else None) for p in MANI}
 
-    sub = sh(f"python3 scripts/extract_run.py {US}/{name}.c {' '.join(funcs)}").stdout
+    sub = sh(f"python3 scripts/extract_run.py {US}/{src_tu}.c {' '.join(funcs)}").stdout
     # Drop `#include "src/data/*.h"` for files missing in the JP project: those are
     # auto-generated region-specific data tables (e.g. chapter_settings.h DEFINES
     # gChapterDataTable) not yet ported. cpp silently fails on the missing file and
@@ -83,7 +97,7 @@ def port(name, exclude=(), runs=None):
             # calls GmPathsInit defined below) -> `extern int X()` would clash with the
             # real non-int return type, so emit the REAL prototype from the US source,
             # placed AFTER the #includes (it may reference header struct types).
-            us_src = open(f"{US}/{name}.c").read()
+            us_src = open(f"{US}/{src_tu}.c").read()
             runset = set(funcs)
             externs, protos = [], []
             for f in sorted(impl):
@@ -413,20 +427,31 @@ def port(name, exclude=(), runs=None):
                 loc = sec_base[cur] - 0x08000000 + roff
                 jpval = int.from_bytes(jp[loc:loc+4], "little")
                 want.append((cur, roff, (jpval - nl_base[p[2]]) & 0xFFFFFFFF))
+    # Parallel-safe manifest target: with `frag` set, append NEW rows to this task's
+    # own fragment under layout/<base>.d/<frag>.tsv (gen_layout/apply_patches read
+    # monolith + every fragment), so concurrent carves never touch a shared file.
+    def mani_path(base):
+        if frag is None:
+            return f"layout/{base}.tsv"
+        d = f"layout/{base}.d"
+        os.makedirs(d, exist_ok=True)
+        return f"{d}/{frag}.tsv"
+
     if aligns or want:
         objbase = os.path.basename(obj)
-        keep = [r for r in open("layout/patches.tsv") if r.split("\t")[0] != objbase] \
-            if os.path.exists("layout/patches.tsv") else []
+        pth = mani_path("patches")
+        keep = [r for r in open(pth) if r.split("\t")[0] != objbase] \
+            if os.path.exists(pth) else []
         keep += [f"{objbase}\t{dsec}\tALIGN\t{need}\n" for dsec, need in aligns]
         keep += [f"{objbase}\t{sec}\t{roff:X}\t{val:08X}\n" for sec, roff, val in want]
-        open("layout/patches.tsv", "w").write("".join(keep))
+        open(pth, "w").write("".join(keep))
         sh(f"rm -f {obj}")  # force rebuild so apply_patches re-applies align+patches durably
-    with open("layout/carved_rom.tsv", "a") as f:
+    with open(mani_path("carved_rom"), "a") as f:
         f.write(f"{base&0xFFFFFF:06X}\t{text_end&0xFFFFFF:06X}\tsrc/{name}.o(.text)\t{name}(run): {', '.join(funcs[:3])}{'...' if len(funcs)>3 else ''}\n")
         for dbase, size, dsec in kept:
             f.write(f"{dbase:06X}\t{dbase+size:06X}\tsrc/{name}.o({dsec})\t{name} {dsec}\n")
     if ram or noload_rom:
-        with open("layout/carved_ram.tsv", "a") as f:
+        with open(mani_path("carved_ram"), "a") as f:
             for s, b in ram.items():  # each RAM section at its own JP base
                 region = "iwram" if (b >> 24) == 3 else "ewram"
                 f.write(f"{b:08X}\t{region}\tsrc/{name}.o({s})\t{name} {s}\n")
@@ -434,7 +459,7 @@ def port(name, exclude=(), runs=None):
                 f.write(f"{0x08000000+off0:08X}\trom\tsrc/{name}.o({dsec})\t{name} {dsec} region-diff (incbin)\n")
     adds = [f"{s}\t{a:08X}\t{t}\t{name}" for s, (a, t) in new_syms.items() if s not in have]
     if adds:
-        with open("layout/baseline_syms.tsv", "a") as f:
+        with open(mani_path("baseline_syms"), "a") as f:
             f.write("\n".join(adds) + "\n")
 
     # Incremental build (no `make clean`): only the new src/<name>.o, the shrunk
@@ -455,17 +480,39 @@ def port(name, exclude=(), runs=None):
     # an absolute alias; a wrong address from the object's own definition is still
     # caught by the verify-or-revert net below. Loop: ld lists all dups per pass,
     # but removing some can surface the next (bounded, stops when no progress).
+    # Names that ARE baseline syms (monolith + every fragment) — only these can be
+    # dropped to fix a multiple-definition; a dup where both defs are real objects
+    # can't be fixed here.
+    def baseline_names():
+        names = set()
+        for p in ["layout/baseline_syms.tsv"] + sorted(glob_mod.glob("layout/baseline_syms.d/*.tsv")):
+            if not os.path.exists(p):
+                continue
+            for l in open(p):
+                if l.strip() and not l.startswith("#"):
+                    names.add(l.split("\t")[0])
+        return names
+
     dropped = 0
     for _ in range(8):
         dup = set(re.findall(r"multiple definition of [`']([\w]+)'", mc.stdout + mc.stderr))
+        dup &= baseline_names()
         if not dup:
             break
-        rows = list(open("layout/baseline_syms.tsv"))
-        kept = [l for l in rows if l.startswith("#") or l.split("\t")[0] not in dup]
-        if len(kept) == len(rows):
-            break  # the dup isn't a baseline sym (both defs are real objects) -> can't fix here
-        dropped += len(rows) - len(kept)
-        open("layout/baseline_syms.tsv", "w").writelines(kept)
+        if frag is not None:
+            # Parallel-safe: record the now-redundant alias names in this task's
+            # additive drop-fragment; gen_layout excludes them. Never edit the
+            # shared baseline_syms monolith (would conflict with concurrent carves).
+            os.makedirs("layout/baseline_syms_drop.d", exist_ok=True)
+            with open(f"layout/baseline_syms_drop.d/{frag}.tsv", "a") as f:
+                f.write("".join(s + "\n" for s in sorted(dup)))
+        else:
+            rows = list(open("layout/baseline_syms.tsv"))
+            kept = [l for l in rows if l.startswith("#") or l.split("\t")[0] not in dup]
+            if len(kept) == len(rows):
+                break  # the dup isn't in the monolith (in a fragment we don't own) -> bail
+            open("layout/baseline_syms.tsv", "w").writelines(kept)
+        dropped += len(dup)
         sh("make layout")
         mc = sh("make compare")
         if "fireemblem8.gba: OK" in mc.stdout:
@@ -521,9 +568,14 @@ def port(name, exclude=(), runs=None):
             print(f"  diff: {len(d)} bytes, first @ {d[0]:#x} (run .text {0x08000000+base:#x}..{end}; "
                   f"romdata {[(hex(0x08000000+x),hex(s)) for x,s,_ in data_carves]})")
     for p, c in snap.items():
-        open(p, "w").write(c)
+        if c is None:               # file did not exist before this call -> remove it
+            if os.path.exists(p): os.remove(p)
+        else:
+            open(p, "w").write(c)
     os.remove(f"src/{name}.c"); sh(f"rm -f src/{name}.o src/{name}.s"); sh("make layout")
-    return port(name, exclude + (tuple(funcs),), runs)  # next-largest run (reuse discovery)
+    # next-largest run (reuse discovery); keep src_tu/frag so the recursion still
+    # extracts from the right US TU and writes to the same parallel-safe fragment.
+    return port(name, exclude + (tuple(funcs),), runs, src_tu=src_tu, frag=frag)
 
 
 if __name__ == "__main__":
