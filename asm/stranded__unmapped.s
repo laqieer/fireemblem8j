@@ -138,3 +138,13 @@ WfxCloudsOffsetGraphicsEffect:
 __muldi3:
 	.incbin "baserom.gba", 0xD6760, 0x70
 
+	.section .text.s_080D67D0, "ax", %progbits
+@ __udivsi3 region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D67D0..0x080D6848
+	.thumb
+	.align 2, 0
+	.global __udivsi3
+	.thumb_func
+__udivsi3:
+	.incbin "baserom.gba", 0xD67D0, 0x78
+
