@@ -36,3 +36,4 @@
 037BDC	037BFC	src/masked_08037bdc.o(.text)	masked_08037bdc(run): GetCurrentPromotedLevelBonus
 037BFC	037C44	src/masked_08037bfc.o(.text)	masked_08037bfc(run): CanUnitSeize
 037CD8	037D38	src/masked_08037cd8.o(.text)	masked_08037cd8(run): InitDungeon
+037F34	037FA8	src/masked_08037f34.o(.text)	masked_08037f34(run): SaveDungeonState, LoadDungeonState, SaveDungeonRecords...

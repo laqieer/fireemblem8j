@@ -29,3 +29,7 @@ BattleGenerateSimulation
 gBattleStats
 gPlaySt
 CanUnitSeize
+LoadDungeonRecords
+LoadDungeonState
+SaveDungeonRecords
+SaveDungeonState

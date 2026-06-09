@@ -45,3 +45,4 @@ BattleGenerateRealInternal	0802A198	thumb	masked_0802a2a4
 gPlaySt	0202BCEC	data	masked_08037bdc
 gPlaySt	0202BCEC	data	masked_08037bfc
 gDungeonState	03001798	data	masked_08037cd8
+gDungeonState	03001798	data	masked_08037f34
