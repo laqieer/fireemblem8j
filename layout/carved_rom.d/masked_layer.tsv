@@ -112,3 +112,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 00D7EC	00D808	src/masked_0800d7ec.o(.text)	masked_0800d7ec(run): SlotQueuePush
 0876B0	0876C8	src/masked_080876b0.o(.text)	masked_080876b0(run): CheckWaitAction_unused
 0852BC	0852F0	src/masked_080852bc.o(.text)	masked_080852bc(run): CheckActiveUnitArea
+085350	08537C	src/masked_08085350.o(.text)	masked_08085350(run): CheckAnyBlueUnitArea1

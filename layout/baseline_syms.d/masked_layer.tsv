@@ -144,3 +144,5 @@ gSpriteAllocIt	03004910	data	masked_080052ac
 gEventCallQueue	03000430	data	masked_0800d2d0
 gEventCallQueue	03000430	data	masked_0800d308
 gActionData	0203A954	data	masked_080876b0
+CheckAnyBlueUnitArea	080852F0	thumb	masked_08085350
+gPlaySt	0202BCEC	data	masked_08085350
