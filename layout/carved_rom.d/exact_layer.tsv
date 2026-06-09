@@ -113,3 +113,4 @@
 0281D0	0281F8	src/exact_080281d0.o(.text)	exact_080281d0(run): GetUnitSupportLevel
 028320	02833C	src/exact_08028320.o(.text)	exact_08028320(run): GetUnitSupporterInitialExp
 028650	028668	src/exact_08028650.o(.text)	exact_08028650(run): GetUnitAffinityIcon
+0A97C4	0A980C	src/exact_080a97c4.o(.text)	exact_080a97c4(run): WriteLastGameSaveId, ReadLastGameSaveId

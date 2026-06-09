@@ -61,3 +61,4 @@ StartFadeCore	08014150	thumb	exact_080140f4
 StartFadeCore	08014150	thumb	exact_0801413c
 StartPaletteAnimatorExt	080144A4	thumb	exact_080144e0
 UnitActionMenu_Attack	08022AF8	thumb	exact_08022e1c
+WriteGlobalSaveInfoNoChecksum	080A7814	thumb	exact_080a97c4
