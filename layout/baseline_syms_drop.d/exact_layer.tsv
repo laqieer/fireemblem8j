@@ -111,3 +111,4 @@ GetUnitSupporterCharacter
 GetUnitSupporterNum
 GGM_IsAnyCharacterKnown
 IsGamePlayedThrough
+LoadAndVerfyRankData

@@ -207,3 +207,5 @@ GetUnitSupporterCharacter	08028170	thumb	exact_0802833c
 GetUnitSupporterUnit	08028188	thumb	exact_0802833c
 GGM_IsAnyCharacterKnown	080A8278	thumb	exact_080a7d70
 IsGamePlayedThrough	080A82B4	thumb	exact_080a7d70
+IsGamePlayedThrough	080A82B4	thumb	exact_080a7d8c
+LoadAndVerfyRankData	080A82DC	thumb	exact_080a7d8c
