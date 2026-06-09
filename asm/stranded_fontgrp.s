@@ -58,3 +58,13 @@ PrintHexNumberToDBG:
 PrintStringToDBG:
 	.incbin "baserom.gba", 0x391C, 0x6C
 
+	.section .text.s_08003A08, "ax", %progbits
+@ UpdateDBGScroll region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08003A08..0x08003A70
+	.thumb
+	.align 2, 0
+	.global UpdateDBGScroll
+	.thumb_func
+UpdateDBGScroll:
+	.incbin "baserom.gba", 0x3A08, 0x68
+
