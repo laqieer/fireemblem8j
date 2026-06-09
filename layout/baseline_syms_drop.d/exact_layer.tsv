@@ -102,3 +102,4 @@ RestartMainMiniAnim
 EkrUnitMainMini_UpdateAnim
 DrawBattleForecastContents
 GetBattleForecastPanelSide
+SetPalFadeStClkEnd3
