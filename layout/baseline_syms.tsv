@@ -681,7 +681,6 @@ gEkrSpellAnimIndex	0203E114	data	banim-ekrdragon-myrrh
 SwitchAISFrameDataFromBARoundType	0805AE20	thumb	banim-ekrdragon-myrrh
 SetEkrDragonStatusType	08072034	thumb	banim-ekrdragon-myrrh
 PutBanimBG	08077F0C	thumb	banim-ekrhensei
-EkrGauge_Set4C	08051ED4	thumb	banim-ekrhensei
 MatCopy	08015154	thumb	bmlib-math
 ResetMenuTextCursors	080D273C	thumb	classchg-menuconfirm
 RedrawMenu	0804FCFC	thumb	classchg-menuconfirm
@@ -763,9 +762,7 @@ DrawUnitConText	08034964	thumb	unitinfowindow
 GetWeaponLevelFromExp	08016B04	thumb	bmitem
 gpBg1ScrollOffset	0201FDC0	data	banim-efxmagic
 gpBg2ScrollOffset	0201FB34	data	banim-efxmagic
-EkrGauge_SetInitFlag	08051F2C	thumb	banim-ekrbattleintro
 gEkrWindowAppearExist	0201FACC	data	banim-ekrbattleintro
-EkrGauge_Clr323A	08051F04	thumb	banim-ekrbattleintro
 gEkrBg0QuakeVec	02000038	data	banim-ekrbattleintro
 ProcScr_ekrNamewinAppear	085E3F54	data	banim-ekrbattleintro
 gEkrNamewinAppearExist	0201FAD0	data	banim-ekrbattleintro

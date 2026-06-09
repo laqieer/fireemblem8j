@@ -17,3 +17,4 @@ gEkrYPosReal	0200002C	data	exact_08079328
 EfxDKUpdateFrontAnimPostion	08078EF4	thumb	exact_08079328
 GetEkrDragonStatus	08071FD8	thumb	exact_08071ff8
 GetEkrDragonStatusType_	08072028	thumb	exact_0807201c
+gpProcEkrGauge	02000068	data	exact_08051eb4
