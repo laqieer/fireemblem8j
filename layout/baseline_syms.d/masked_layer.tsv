@@ -77,3 +77,8 @@ gActionData	0203A954	data	masked_08023e94
 gBmSt	0202BCAC	data	masked_080248fc
 KillUnitOnArenaDeathMaybe	0803269C	thumb	masked_080328ec
 DropRescueOnDeath	080325C0	thumb	masked_080328ec
+InitSupportBonuses	08028534	thumb	masked_08028544
+GetUnitSupporterUnit	08028188	thumb	masked_08028544
+GetUnitSupportLevel	080281D0	thumb	masked_08028544
+ApplyAffinitySupportBonuses	080284E4	thumb	masked_08028544
+gBmSt	0202BCAC	data	masked_08028544
