@@ -184,3 +184,4 @@
 03AD18	03AD38	src/exact_0803ad18.o(.text)	exact_0803ad18(run): AiIsInShortList
 03AD38	03AD58	src/exact_0803ad38.o(.text)	exact_0803ad38(run): AiIsInByteList
 03C1E8	03C214	src/exact_0803c1e8.o(.text)	exact_0803c1e8(run): CharStoreAI
+0B09F8	0B0A28	src/exact_080b09f8.o(.text)	exact_080b09f8(run): SaveMenuGetValidMenuAmt
