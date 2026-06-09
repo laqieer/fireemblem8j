@@ -102,3 +102,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 03D360	03D374	src/masked_0803d360.o(.text)	masked_0803d360(run): AiScriptCmd_1B_NoOp
 03A794	03A800	src/masked_0803a794.o(.text)	masked_0803a794(run): AiCompare
 03B244	03B2B8	src/masked_0803b244.o(.text)	masked_0803b244(run): AiCountUnitsInRange
+03BEDC	03BF14	src/masked_0803bedc.o(.text)	masked_0803bedc(run): AiGetClassRank
