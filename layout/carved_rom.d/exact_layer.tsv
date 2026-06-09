@@ -66,3 +66,4 @@
 013050	0130AC	src/exact_08013050.o(.text)	exact_08013050(run): GfxLoadCursor_Init, GfxLoadCursor_Decompress, GfxLoadCursor_Skip
 013110	0131F0	src/exact_08013110.o(.text)	exact_08013110(run): ApplyBitmap, ApplyBitmapLine, ApplyBitmapTile...
 0131F0	013260	src/exact_080131f0.o(.text)	exact_080131f0(run): PutDigits, PutNumberTilesRightAligned
+013268	013288	src/exact_08013268.o(.text)	exact_08013268(run): Bmlib_IncrementCounter, Bmlib_DecrementCounter
