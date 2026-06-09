@@ -25,3 +25,4 @@
 078730	078750	src/masked_08078730.o(.text)	masked_08078730(run): CheckBanimHensei
 05A714	05A78C	src/masked_0805a714.o(.text)	masked_0805a714(run): ApplyBanimUniquePalette, GetBanimPalette
 05AB5C	05ABBC	src/masked_0805ab5c.o(.text)	masked_0805ab5c(run): InitBattleAnimFrame
+05B00C	05B058	src/masked_0805b00c.o(.text)	masked_0805b00c(run): CheckRoundCrit
