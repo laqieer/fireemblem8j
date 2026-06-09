@@ -221,3 +221,4 @@ TrySetCursorOn	0801D740	thumb	masked_0801d7b0
 GetChapterDivinationTextIdHectorStory	080A2C40	thumb	masked_080a2ce8
 gPlaySt	0202BCEC	data	masked_080a2ce8
 gPlaySt	0202BCEC	data	masked_080a2d28
+gBmMapSize	0202E4D0	data	masked_08033680
