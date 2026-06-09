@@ -33,3 +33,5 @@ LoadDungeonRecords
 LoadDungeonState
 SaveDungeonRecords
 SaveDungeonState
+UnitApplyWorkingMovementScript
+gActionData
