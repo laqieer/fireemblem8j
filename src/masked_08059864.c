@@ -1,0 +1,32 @@
+#include "global.h"
+#include "ekrbattle.h"
+#include "efxbattle.h"
+#include "bmbattle.h"
+#include "anime.h"
+#include "bmitem.h"
+#include "constants/items.h"
+
+
+
+/* file-scope type definitions used by this run */
+
+
+struct UnkStruct1_sub_805893C {
+    u8 _pad_[0x23];
+    u8 unk23[5];
+    u32 unk28;
+};
+
+struct UnkStruct2_sub_805893C {
+    struct UnkStruct1_sub_805893C * unk1;
+    struct UnkStruct1_sub_805893C * unk2;
+};
+
+s16 GetBattleAnimRoundTypeFlags(int index)
+{
+    s16 * buf = (s16 *)gAnimRoundData;
+    if (buf[index] == -1)
+        return 0;
+    else
+        return buf[index] & 0xFF00;
+}

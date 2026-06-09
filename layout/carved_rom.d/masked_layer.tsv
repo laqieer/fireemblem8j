@@ -13,3 +13,4 @@
 059748	05976C	src/masked_08059748.o(.text)	masked_08059748(run): CheckBattleHasHit
 05976C	059790	src/masked_0805976c.o(.text)	masked_0805976c(run): GetBanimSheetSelectByte
 05983C	059864	src/masked_0805983c.o(.text)	masked_0805983c(run): GetBattleAnimRoundType
+059864	059890	src/masked_08059864.o(.text)	masked_08059864(run): GetBattleAnimRoundTypeFlags
