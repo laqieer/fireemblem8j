@@ -198,7 +198,6 @@ GetUnitCurrentHp	08018E64	thumb	bmtrap
 PidStatsRecordDefeatInfo	080A90C8	thumb	bmtrap
 CheckForWaitEvents	08086604	thumb	bmtrap
 RunWaitEvents	08086694	thumb	bmtrap
-MakePromotionScreen	080D1184	thumb	classchg-handler
 BMapDispResume	08030108	thumb	classchg-handler
 RefreshBMapGraphics	080310F4	thumb	classchg-handler
 Proc_StartBlocking	08002C30	thumb	classchg-handler
