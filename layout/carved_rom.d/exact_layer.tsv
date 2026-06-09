@@ -239,3 +239,4 @@
 07B950	07B96C	src/exact_0807b950.o(.text)	exact_0807b950(run): SetMuConfig
 07BBE8	07BC18	src/exact_0807bbe8.o(.text)	exact_0807bbe8(run): HideMu, ShowMu, SetMuScreenPosition...
 07BCA0	07BCC4	src/exact_0807bca0.o(.text)	exact_0807bca0(run): MuRestorePalInfo_Apply
+07BDB4	07BDDC	src/exact_0807bdb4.o(.text)	exact_0807bdb4(run): MuCritFlash_Init, MuCritFlash_SetFadedPalette
