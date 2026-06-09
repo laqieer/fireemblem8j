@@ -47,3 +47,4 @@
 0DB6F8	0DB73C	asm/stranded__unmapped.o(.text.s_080DB6F8)	_unmapped:__truncdfsf2 region-same Thumb (descriptive incbin)
 0DB73C	0DB7F4	asm/stranded__unmapped.o(.text.s_080DB73C)	_unmapped:__pack_f region-same Thumb (descriptive incbin)
 0DB9EC	0DBA18	asm/stranded__unmapped.o(.text.s_080DB9EC)	_unmapped:__addsf3 region-same Thumb (descriptive incbin)
+0DBA18	0DBA4C	asm/stranded__unmapped.o(.text.s_080DBA18)	_unmapped:__subsf3 region-same Thumb (descriptive incbin)

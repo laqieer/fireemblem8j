@@ -488,3 +488,13 @@ __pack_f:
 __addsf3:
 	.incbin "baserom.gba", 0xDB9EC, 0x2C
 
+	.section .text.s_080DBA18, "ax", %progbits
+@ __subsf3 region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DBA18..0x080DBA4C
+	.thumb
+	.align 2, 0
+	.global __subsf3
+	.thumb_func
+__subsf3:
+	.incbin "baserom.gba", 0xDBA18, 0x34
+
