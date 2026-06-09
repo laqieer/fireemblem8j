@@ -1,6 +1,6 @@
 @ chap_title: region-different data not reachable by the code-literal carver
-@ (leaf assets are unnamed US symbols). Boundaries read live from the JP
-@ index table(s) 0x08a732c0[88] in baserom.
+@ (leaf assets are unnamed US symbols). Boundaries read live from the JP index table(s) 0x08a732c0[88]
+@ in baserom.
 @ Region [0x08a7e188, 0x08a92514); already-carved region-same
 @ sub-assets are gap-subtracted, so only the uncarved blobs are emitted here.
 
