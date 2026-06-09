@@ -245,3 +245,4 @@ gCharacterData	088582BC	data	masked_080a4d18
 GetSupportScreenPartnerSupportLevel	080A48BC	thumb	masked_080a4d18
 GetSupportScreenCharIdAt	080A492C	thumb	masked_080a4d18
 gBmSt	0202BCAC	data	masked_080348dc
+UnitList_SetupDisplay	08093058	thumb	masked_08092984

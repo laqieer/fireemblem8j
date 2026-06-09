@@ -219,3 +219,4 @@ AAF6D8	AAF6DC	src/masked_080b62bc.o(.data)	masked_080b62bc .data
 0874EC	087580	src/masked_080874ec.o(.text)	masked_080874ec(run): Uidebug_IsTurnNumberOver20, Uidebug_IsTurnNumberOver25, Uidebug_IsTurnNumberOver30...
 0A4D18	0A4D54	src/masked_080a4d18.o(.text)	masked_080a4d18(run): GetTotalSupportLevel
 0348DC	034904	src/masked_080348dc.o(.text)	masked_080348dc(run): GetUnitInfoWindowX
+092984	0929B0	src/masked_08092984.o(.text)	masked_08092984(run): UnitList_ResetFromStatScreen
