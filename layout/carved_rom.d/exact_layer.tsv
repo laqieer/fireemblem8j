@@ -152,3 +152,4 @@
 02E218	02E234	src/exact_0802e218.o(.text)	exact_0802e218(run): AddDamagingTrap
 02E234	02E24C	src/exact_0802e234.o(.text)	exact_0802e234(run): RemoveTrap
 02E2C0	02E2D0	src/exact_0802e2c0.o(.text)	exact_0802e2c0(run): AddTrap8
+02E2D0	02E2E0	src/exact_0802e2d0.o(.text)	exact_0802e2d0(run): AddTrap9
