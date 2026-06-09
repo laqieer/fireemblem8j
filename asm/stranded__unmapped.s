@@ -88,3 +88,13 @@ ProcCmd_DELETE:
 ProcCmd_SET_MARK:
 	.incbin "baserom.gba", 0x3220, 0x14
 
+	.section .text.s_08028534, "ax", %progbits
+@ InitSupportBonuses region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08028534..0x08028544
+	.thumb
+	.align 2, 0
+	.global InitSupportBonuses
+	.thumb_func
+InitSupportBonuses:
+	.incbin "baserom.gba", 0x28534, 0x10
+
