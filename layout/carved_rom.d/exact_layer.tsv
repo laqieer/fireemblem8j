@@ -10,3 +10,4 @@
 06C884	06C8B4	src/exact_0806c884.o(.text)	exact_0806c884(run): efxCrimsonEyeOBJ_WrapAngle, efxCrimsonEyeOBJ_SetDrawPriority
 068C7C	068CB4	src/exact_08068c7c.o(.text)	exact_08068c7c(run): efxMaohFlashBG2_FillTilemapRightEdge
 06D3AC	06D3D0	src/exact_0806d3ac.o(.text)	exact_0806d3ac(run): OnHBlank_0
+0748B8	0748E4	src/exact_080748b8.o(.text)	exact_080748b8(run): GetEfxSoundType2FromBaseCon
