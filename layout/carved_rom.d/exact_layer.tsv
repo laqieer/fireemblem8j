@@ -413,3 +413,4 @@
 084188	084194	src/exact_08084188.o(.text)	exact_08084188(run): MapAnimStartSpellAssocFade
 084194	0841A0	src/exact_08084194.o(.text)	exact_08084194(run): MapAnimSpellAssocResetPal
 04CF18	04CF28	src/exact_0804cf18.o(.text)	exact_0804cf18(run): SioWarpFx_0
+04CF78	04CF84	src/exact_0804cf78.o(.text)	exact_0804cf78(run): SioWarpFx_1

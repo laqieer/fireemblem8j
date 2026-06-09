@@ -224,3 +224,4 @@ EvCheck05_LOCA	08085C70	thumb	exact_08085cb0
 MapAnimStartSpellAssocFadeExt	080818A8	thumb	exact_08084188
 MapAnimSpellAssocResetPalExt	08081908	thumb	exact_08084194
 StartSioMuFadeToColor	0804CD4C	thumb	exact_0804cf18
+StartSioMuFadeRestore	0804CD98	thumb	exact_0804cf78
