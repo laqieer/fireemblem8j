@@ -670,7 +670,6 @@ gPrepscreen_3	02012F58	data	prep_sallycir
 gUnk_Sio_5	02001188	data	sio_804B920
 gUnk_Sio_3	02001180	data	sio_804B920
 gUnk_Sio_4	02001184	data	sio_804B920
-SioMenuItem_SetArrowConfig	0804D568	thumb	sio_menu
 StartSioMenuBurstFx	0804DD50	thumb	sio_menu
 SioMenu_GetItemHelpText	08047970	thumb	sio_menu
 Sound_FadeOutBGM	0800226C	thumb	sio_menu
