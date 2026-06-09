@@ -227,3 +227,4 @@
 081B78	081B98	src/exact_08081b78.o(.text)	exact_08081b78(run): StartStarExplosionEffect
 081B98	081BB8	src/exact_08081b98.o(.text)	exact_08081b98(run): StartStarImplosionEffect
 0800B4	0800C0	src/exact_080800b4.o(.text)	exact_080800b4(run): MapAnimTorch_ResetHBlank
+07D2F8	07D308	src/exact_0807d2f8.o(.text)	exact_0807d2f8(run): ProcSummonDK_InitCounters
