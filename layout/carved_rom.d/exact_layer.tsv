@@ -270,3 +270,4 @@
 0A20BC	0A2108	src/exact_080a20bc.o(.text)	exact_080a20bc(run): WmSell_OnHBlank, WmSell_Init
 097374	0973A4	src/exact_08097374.o(.text)	exact_08097374(run): Prep_GetSupportItemBitIndex
 0973A4	0973C8	src/exact_080973a4.o(.text)	exact_080973a4(run): Prep_CountSupportMenuItems
+097740	097778	src/exact_08097740.o(.text)	exact_08097740(run): IsUnitInCurrentRoster
