@@ -98,3 +98,4 @@ AP_Init
 GetEkrDragonStatusType_
 SetEkrDragonStatusType
 GetAnimAnotherSide
+RestartMainMiniAnim

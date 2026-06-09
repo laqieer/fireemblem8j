@@ -385,3 +385,4 @@
 00967C	0096A4	src/exact_0800967c.o(.text)	exact_0800967c(run): APProc_OnEnd, APProc_SetParameters
 072028	072048	src/exact_08072028.o(.text)	exact_08072028(run): GetEkrDragonStatusType_, SetEkrDragonStatusType
 05B058	05B074	src/exact_0805b058.o(.text)	exact_0805b058(run): GetAnimAnotherSide
+05B6D4	05B6E4	src/exact_0805b6d4.o(.text)	exact_0805b6d4(run): SetMainMiniAnimId
