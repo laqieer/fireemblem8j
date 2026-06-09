@@ -20,3 +20,4 @@
 057CFC	057D18	src/exact_08057cfc.o(.text)	exact_08057cfc(run): CheckEkrWindowAppearUnexist
 057DE8	057E04	src/exact_08057de8.o(.text)	exact_08057de8(run): CheckEkrNamewinAppearUnexist
 057EF0	057F0C	src/exact_08057ef0.o(.text)	exact_08057ef0(run): CheckEkrBaseAppearUnexist
+056B3C	056B4C	src/exact_08056b3c.o(.text)	exact_08056b3c(run): EkrBattleStarting_IsBattleAnimEnabled
