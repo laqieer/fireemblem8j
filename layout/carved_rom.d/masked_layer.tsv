@@ -2,3 +2,4 @@
 009150	00916C	src/masked_08009150.o(.text)	masked_08009150(run): AP_ClearAll
 0095E0	009608	src/masked_080095e0.o(.text)	masked_080095e0(run): AP_Find
 074A24	074A4C	src/masked_08074a24.o(.text)	masked_08074a24(run): EfxCheckRetaliation
+074DAC	074DE8	src/masked_08074dac.o(.text)	masked_08074dac(run): GetBanimBossBGM

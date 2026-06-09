@@ -2,3 +2,4 @@ AnimInterpret	08004F48	thumb	masked_08004d48
 AnimDisplayPrivate	08005110	thumb	masked_08004d48
 AnimInsert	080050C8	thumb	masked_08004d48
 gBattleHitArray	0203A5E8	data	masked_08074a24
+gBanimBossBGMs	087A8F94	data	masked_08074dac
