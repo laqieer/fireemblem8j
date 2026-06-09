@@ -8,6 +8,21 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
+- **SPRINT 2026-06-09 (P8-gbadisasm-carver) — gbadisasm DESCRIPTIVE-ASM LAYER LIVE (D23/D24):
+  region-different code front is now mechanically carveable.** `scripts/carve_gbadisasm_asm.py`
+  emits build-ready descriptive asm (real ARM/Thumb instructions, not incbin) for the ~6000
+  region-different functions via `tools/gbadisasm` + the IDA-generated JP config
+  (`scripts/ida/export_gbadisasm_cfg.py` -> `tools/gbadisasm/fe8j_full.cfg`, 8698 funcs).
+  **350-fn pilot GREEN, 100% yield** ROM-wide (verify-or-revert per fn via make compare);
+  code bytes in src 172228 -> 200712 (20.07% -> 23.38%); uncarved region-different 6292 -> 5942.
+  `make check`/`make compare`/`make clean && make compare` all OK. The load-bearing fix:
+  de-symbolize gbadisasm's IDA-named refs — `bl/b SYM` via `.set SYM, JP_ADDR(+1 thumb)`,
+  `.4byte SYM` rewritten to raw `.4byte 0xADDR` (a `.4byte SYM` is an unresolvable link-time
+  reloc). gbadisasm binary + fe8j_full.cfg are gitignored carve-time tools; only `asm/*.s` ship.
+  **SCALE:** `scripts/carve_gbadisasm_asm.py --batch N` carves the next N uncarved fns
+  (verify-or-revert, run unattended); `--list` inspects the 5942-fn backlog; `ADDR..` targets
+  specific addrs. Branch `carve/gbadisasm-layer`. asm->C decompilation is the later increment.
+
 - **SPRINT 2026-06-09 (P9 fan-out, interactive MCP session) — DATA FRONTIER COMPLETE (84.89%
   -> 100%, +1.71MB) + CODE 1323 -> 1823 fns (+500, 21.38%).** The mechanical code "ceiling"
   was DISPROVEN (D22 recon): a VRAM-offset bug + D2's run-only design hid ~1500 carveable
