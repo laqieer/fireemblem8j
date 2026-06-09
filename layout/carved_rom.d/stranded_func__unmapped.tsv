@@ -34,3 +34,4 @@
 0DA4CC	0DA4E4	asm/stranded__unmapped.o(.text.s_080DA4CC)	_unmapped:wrap region-same Thumb (descriptive incbin)
 0DA5D4	0DA5E0	asm/stranded__unmapped.o(.text.s_080DA5D4)	_unmapped:_lseek region-same Thumb (descriptive incbin)
 0DA6F0	0DA704	asm/stranded__unmapped.o(.text.s_080DA6F0)	_unmapped:_open region-same Thumb (descriptive incbin)
+0DA738	0DA744	asm/stranded__unmapped.o(.text.s_080DA738)	_unmapped:_close region-same Thumb (descriptive incbin)

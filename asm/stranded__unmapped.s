@@ -358,3 +358,13 @@ _lseek:
 _open:
 	.incbin "baserom.gba", 0xDA6F0, 0x14
 
+	.section .text.s_080DA738, "ax", %progbits
+@ _close region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DA738..0x080DA744
+	.thumb
+	.align 2, 0
+	.global _close
+	.thumb_func
+_close:
+	.incbin "baserom.gba", 0xDA738, 0xC
+
