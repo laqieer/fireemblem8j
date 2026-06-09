@@ -836,3 +836,40 @@ skipped — zero RE risk. Parallel-safe: NEW rows go only to per-task fragments
 (`layout/<base>.d/exact_layer.tsv`), never the shared monolith (port_run gained a `frag=`
 param; `apply_patches.py` now reads `patches.d/*.tsv`). This is the mechanical-existence
 収割 after the "mechanical ceiling" was disproven — function metric 1329 → ~2000+.
+
+## D22 — CI silent failures (uncommitted build inputs) + JP-relative data metric (2026-06-09)
+
+Two issues the user surfaced mid-drive; both fixed and *prevented* (not just patched).
+
+**(A) `make compare` CI was RED on ~25 consecutive pushes, unnoticed.** Root cause: carves
+added layout rows/fragments whose sources weren't committed — (1) the recursive
+`carve_data_refs` reaper deleted 332 MONOLITH-owned `dat_*_ref.s` (its `own_asm` claimed
+*every* `dat_*_ref.s`, not just its own fragment's); (2) the exact-layer's
+`baseline_syms_drop.d` fragment was swallowed by the broad `*.d` gitignore rule, so it
+couldn't be committed → `multiple definition`. Both built LOCALLY because `make clean`
+can't remove a `.o` whose `.s` is gone (the `asm/*.s` wildcard no longer sees it), so a
+stale `.o` survived = **FALSE GREEN**; CI's fresh checkout had neither → link failed. It
+went unnoticed because the driver trusted local `make compare` (D16) and never watched CI,
+and 2 of 3 workflows (progress/decomp.dev) were green so the check list "looked fine."
+
+Prevention (defense in depth):
+- `scripts/check_layout.py` + `make check`: every layout-linked object AND every gen_layout
+  fragment is git-tracked. CI gate `.github/workflows/consistency.yml` (fast, no toolchain/
+  ROM, runs on forks). Verified it flags BOTH classes (missing source, untracked fragment).
+- `make clean` now removes `asm/*.o` + `src/*.o` (orphans too) → a local
+  `make clean && make compare` fails like CI instead of false-greening on a stale `.o`.
+- `.gitignore`: un-ignore `layout/baseline_syms_drop.d/` + `layout/patches.d/` (the broad
+  `*.d` rule was swallowing new fragment dirs; mirrors the carved_rom.d allow-list).
+- `carve_data_refs` reaper scoped to its OWN fragment's asm → never deletes monolith `.s`.
+- **Process:** the autonomous loop now WATCHES CI after each push (`gh run watch`), treating
+  a red `make compare` as a blocker — not trusting local make compare alone.
+
+**(B) Data metric read 103.49% (>100%).** The denominator was the US-decomp data total
+(13,285,090); JP region-different data physically exceeds it (~+463 KB: extra glyphs,
+JP-only tables, region-different layout). Fixed: `calcprogress.py` uses the **JP** total
+(= JP extracted, since the data front is byte-complete — gap analysis confirms 0 uncarved
+data); `gen-report.py` mirrors it. Data is now 100% JP-relative, no US dependency. The
+`make compare` sha1 oracle was untouched throughout (CI-verified byte-perfect).
+
+**Status:** Done 2026-06-09. CI green (make compare + consistency); exact layer landed
+(functions 1329 → 1823, 21.38%); A1-masked layer (~616 fns) in flight.

@@ -9,7 +9,17 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## Verified state (update each working stretch)
 
 - **SPRINT 2026-06-09 (P9 fan-out, interactive MCP session) — DATA FRONTIER COMPLETE (84.89%
-  -> 100%, +1.71MB), functions 1323 -> 1329 (+6), pushed `02fc9e5`.** Ran as a rolling worktree-
+  -> 100%, +1.71MB) + CODE 1323 -> 1823 fns (+500, 21.38%).** The mechanical code "ceiling"
+  was DISPROVEN (D22 recon): a VRAM-offset bug + D2's run-only design hid ~1500 carveable
+  region-same fns. `scripts/carve_exact.py` carved the A1-exact layer (+494 C fns into
+  `src/exact_*.c` as same-TU named objects, bypassing the run-only skip; make compare per-run
+  gates). A1-masked (~616 fns) in flight. **CI HARDENED (D22):** make compare had been silently
+  red on ~25 pushes (uncommitted .s/fragments false-greening locally via stale .o); fixed +
+  prevented — `make check`/`scripts/check_layout.py` + `consistency.yml` CI gate verify every
+  linked object + fragment is git-tracked, robust `make clean` (orphan .o), gitignore un-ignores
+  `baseline_syms_drop.d`/`patches.d`, carve_data_refs reaper scoped. **Always watch CI after push.**
+  Data metric now JP-relative (calcprogress/gen-report use the JP total, not US -> no >100%).
+  Ran as a rolling worktree-
   isolated P8 team. **The data front (94% of the ROM) is byte-perfect DONE** — df2/df3/df4 cleared every
   real data gap via `scripts/carve_frontier.py` (table/frame_arrays/blob/data_gaps modes); 0 data gaps
   remain. JP physically carries ~463KB MORE data than the US-decomp total (region-different glyphs/tables/
