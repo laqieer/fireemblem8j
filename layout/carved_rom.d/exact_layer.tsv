@@ -114,3 +114,4 @@
 028320	02833C	src/exact_08028320.o(.text)	exact_08028320(run): GetUnitSupporterInitialExp
 028650	028668	src/exact_08028650.o(.text)	exact_08028650(run): GetUnitAffinityIcon
 0A97C4	0A980C	src/exact_080a97c4.o(.text)	exact_080a97c4(run): WriteLastGameSaveId, ReadLastGameSaveId
+0A9CD4	0A9D24	src/exact_080a9cd4.o(.text)	exact_080a9cd4(run): IsGameNotFirstChapter, IsGameSaveNotFirstChapter
