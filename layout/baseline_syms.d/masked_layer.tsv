@@ -33,3 +33,5 @@ gBanimUniquePaletteDisabled	0203E1D8	data	masked_0805a714
 InitLeftAnim	0805ABBC	thumb	masked_0805ab5c
 InitRightAnim	0805AD00	thumb	masked_0805ab5c
 gBmSt	0202BCAC	data	masked_08035538
+gBattleTarget	0203A568	data	masked_080365d8
+gBmSt	0202BCAC	data	masked_080365d8
