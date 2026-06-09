@@ -890,7 +890,6 @@ PrepItemDrawPopupBox	0809C5EC	thumb	prep_itemusemind
 EndPrepScreenMenu_	0803325C	thumb	prep_sallycursor
 StartOrphanMenu	0804F970	thumb	prep_sallycursor
 gDebugMenuDef	085C5520	data	prep_sallycursor
-SaveMenuCopyPalette	080AF270	thumb	savemenu
 SaveMenuInitSubBoxText	080B0250	thumb	savemenu
 SaveMenuPutChapterTitle	080AD4B4	thumb	savemenu
 SaveMenuInitSlotPalette	080B083C	thumb	savemenu
