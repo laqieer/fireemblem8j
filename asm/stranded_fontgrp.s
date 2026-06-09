@@ -88,3 +88,13 @@ PrintNumberAsOBJ:
 PrintHexNumberAsOBJ:
 	.incbin "baserom.gba", 0x3B6C, 0x24
 
+	.section .text.s_08003C68, "ax", %progbits
+@ SetTextFont region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08003C68..0x08003C8C
+	.thumb
+	.align 2, 0
+	.global SetTextFont
+	.thumb_func
+SetTextFont:
+	.incbin "baserom.gba", 0x3C68, 0x24
+
