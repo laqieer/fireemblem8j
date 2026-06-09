@@ -14,3 +14,4 @@
 073228	0732E0	src/exact_08073228.o(.text)	exact_08073228(run): EfxTmReplacePal, FillBGRect
 0732E0	073348	src/exact_080732e0.o(.text)	exact_080732e0(run): EfxTmAddPal
 0733B8	0733E8	src/exact_080733b8.o(.text)	exact_080733b8(run): EfxTmCpyBG
+07356C	073644	src/exact_0807356c.o(.text)	exact_0807356c(run): EkrBuildGaugeBarTiles
