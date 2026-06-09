@@ -218,3 +218,13 @@ IsTextPrinting:
 DrawSpecialCharGlyph_old:
 	.incbin "baserom.gba", 0x48E8, 0x54
 
+	.section .text.s_08004A14, "ax", %progbits
+@ PutSpecialChar region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08004A14..0x08004A50
+	.thumb
+	.align 2, 0
+	.global PutSpecialChar
+	.thumb_func
+PutSpecialChar:
+	.incbin "baserom.gba", 0x4A14, 0x3C
+
