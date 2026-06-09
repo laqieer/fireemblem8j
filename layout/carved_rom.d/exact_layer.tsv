@@ -331,3 +331,4 @@
 0CA1E8	0CA1F8	src/exact_080ca1e8.o(.text)	exact_080ca1e8(run): DrawTitleSprites_Init
 0BA690	0BA69C	src/exact_080ba690.o(.text)	exact_080ba690(run): ArenaUi_InitWrapper
 086E98	086F04	src/exact_08086e98.o(.text)	exact_08086e98(run): Debug_DecrementUnitStats
+086FB4	087024	src/exact_08086fb4.o(.text)	exact_08086fb4(run): IsChar0AlivePlayerUnit, IsChar0AlivePlayerUnit_02, IsChar0AlivePlayerUnit_03...

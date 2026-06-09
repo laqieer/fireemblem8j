@@ -165,3 +165,4 @@ Spline_EvalIndirect	0800B2BC	thumb	exact_0800b4c4
 UpdateHelpBoxDisplay	0808AED4	thumb	exact_0808afc8
 MixPaletteCore	080B32E8	thumb	exact_080b33b4
 ArenaUi_Init	080BA324	thumb	exact_080ba690
+IsCharAlivePlayerUnit	08086F78	thumb	exact_08086fb4
