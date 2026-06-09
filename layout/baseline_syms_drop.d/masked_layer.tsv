@@ -6,3 +6,4 @@ AP_Find
 gBattleHitArray
 GetBattleAnimRoundTypeFlags
 GetEfxHp
+gEfxSelfThunderBGFrames

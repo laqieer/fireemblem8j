@@ -20,3 +20,5 @@ gEfxHpLut	0203E152	data	masked_08059890
 gAnimRoundData	0203E126	data	masked_08059954
 gEkrdragonDemonkingobj_0	08855DB0	data	masked_0807a3c0
 gEkrdragonDemonkingobj_1	08855DB8	data	masked_0807a3c0
+EfxSelfThunderBGUpdateAnim	0807A564	thumb	masked_0807a598
+gEfxSelfThunderBGFrames	08855DF8	data	masked_0807a598
