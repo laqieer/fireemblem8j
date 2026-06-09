@@ -17,7 +17,6 @@ GetUnit	08019108	thumb	unit-by-id lookup (bmphase)
 gSpellAssocData	08904164	data	spellassoc
 gActiveUnit	03004DF0	data	unit_facing
 gWorkingMovementScript	02033EF8	data	unit_facing
-GetFacingDirection	0807DD00	thumb	unit_facing
 SetAutoMuMoveScript	0807AB24	thumb	unit_facing
 gGMData	03005270	data	worldmap_draw
 AddGmPath	080C16FC	thumb	worldmap_draw
