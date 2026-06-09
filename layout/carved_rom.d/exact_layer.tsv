@@ -375,3 +375,4 @@
 0C3BB8	0C3BC0	src/exact_080c3bb8.o(.text)	exact_080c3bb8(run): GMapPI_RequestHide
 0C3D0C	0C3D58	src/exact_080c3d0c.o(.text)	exact_080c3d0c(run): RedrawGMapPIForNode
 0C8B54	0C8B64	src/exact_080c8b54.o(.text)	exact_080c8b54(run): GMapRadar_Init
+0BF4B4	0BF4C0	src/exact_080bf4b4.o(.text)	exact_080bf4b4(run): GMScreenVSync_Init
