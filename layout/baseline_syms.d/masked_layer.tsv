@@ -115,3 +115,6 @@ gAiState	0203AA00	data	masked_0803f948
 AiGetCombatPositionScore	0803DDEC	thumb	masked_0803dc54
 AiSimulateBattleAgainstTargetAtPosition	0803DE58	thumb	masked_0803dc54
 gBmMapSize	0202E4D0	data	masked_0803dc54
+AiGetClassRank	0803BEDC	thumb	masked_0803dff8
+gBattleTarget	0203A568	data	masked_0803dff8
+gPlaySt	0202BCEC	data	masked_0803dff8
