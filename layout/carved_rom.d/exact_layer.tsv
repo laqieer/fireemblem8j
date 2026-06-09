@@ -262,3 +262,4 @@
 09A6AC	09A6E0	src/exact_0809a6ac.o(.text)	exact_0809a6ac(run): PrepItemScreen_OnHBlank
 09F7CC	09F80C	src/exact_0809f7cc.o(.text)	exact_0809f7cc(run): PrepItemSupply_OnHBlank
 09E788	09E794	src/exact_0809e788.o(.text)	exact_0809e788(run): PrepItemUse_OnInit
+099AD0	099B24	src/exact_08099ad0.o(.text)	exact_08099ad0(run): PrepSallycir_ClampCursorScroll

@@ -143,3 +143,4 @@ GetChapterDivinationPortrait	080A2CB0	thumb	exact_080a2d10
 ResetPrepMenuDescTexts	08097E10	thumb	exact_08097eb8
 ParsePrepMenuDescTexts	08097E44	thumb	exact_08097eb8
 DrawPrepMenuDescTexts	08097E74	thumb	exact_08097eb8
+gPrepscreen_2	02012F56	data	exact_08099ad0
