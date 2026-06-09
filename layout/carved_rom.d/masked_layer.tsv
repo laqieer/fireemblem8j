@@ -78,3 +78,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 027310	027348	src/masked_08027310.o(.text)	masked_08027310(run): AddUnitSprite
 017650	017680	src/masked_08017650.o(.text)	masked_08017650(run): GetUnitFogViewRange
 018A60	018AA4	src/masked_08018a60.o(.text)	masked_08018a60(run): GetUnitMovementCost
+034520	034548	src/masked_08034520.o(.text)	masked_08034520(run): GetROMChapterStruct

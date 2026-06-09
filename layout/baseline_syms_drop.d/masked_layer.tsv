@@ -48,3 +48,6 @@ GetNextChapterMode
 GetSavedRankData
 JudgeGameRankSaveData
 Unk_TerrainTable_0
+GetROMChapterStruct
+gChapterDataTable
+gExtraMapInfo
