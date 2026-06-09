@@ -1,1 +1,2 @@
 071FAC	071FD8	asm/stranded_banim-ekrdragonstatus.o(.text.s_08071FAC)	banim-ekrdragonstatus:ResetEkrDragonStatus region-same Thumb (descriptive incbin)
+072048	072054	asm/stranded_banim-ekrdragonstatus.o(.text.s_08072048)	banim-ekrdragonstatus:GetEkrDragonStatusUnk1 region-same Thumb (descriptive incbin)
