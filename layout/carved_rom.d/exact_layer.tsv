@@ -346,3 +346,4 @@
 094EC4	094ED0	src/exact_08094ec4.o(.text)	exact_08094ec4(run): SortUnitList_GetUnitSoloAnimation
 0C8C80	0C8C94	src/exact_080c8c80.o(.text)	exact_080c8c80(run): GMapBaseMenu_Init
 0C8E28	0C8E40	src/exact_080c8e28.o(.text)	exact_080c8e28(run): GetGMapBaseMenuKind
+0C8E40	0C8E68	src/exact_080c8e40.o(.text)	exact_080c8e40(run): GetGMapBaseMenuPid, SetGMapBaseMenuPid
