@@ -205,3 +205,4 @@
 005430	00544C	src/exact_08005430.o(.text)	exact_08005430(run): ResetFaces
 0054C4	005544	src/exact_080054c4.o(.text)	exact_080054c4(run): Face_OnIdle, StartFaceAuto
 005678	005694	src/exact_08005678.o(.text)	exact_08005678(run): SetFaceDisplayBits
+005C68	005C74	src/exact_08005c68.o(.text)	exact_08005c68(run): FaceBgBlink_Init
