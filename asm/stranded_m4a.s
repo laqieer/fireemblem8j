@@ -58,3 +58,13 @@ m4aMPlayImmInit:
 m4aSoundMode:
 	.incbin "baserom.gba", 0xD540C, 0x98
 
+	.section .text.s_080D54F8, "ax", %progbits
+@ m4aSoundVSyncOff region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D54F8..0x080D5574
+	.thumb
+	.align 2, 0
+	.global m4aSoundVSyncOff
+	.thumb_func
+m4aSoundVSyncOff:
+	.incbin "baserom.gba", 0xD54F8, 0x7C
+
