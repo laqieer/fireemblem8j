@@ -362,3 +362,4 @@
 0BE6A0	0BE6AC	src/exact_080be6a0.o(.text)	exact_080be6a0(run): WorldMap_Loop
 0C221C	0C2224	src/exact_080c221c.o(.text)	exact_080c221c(run): GmMuPrim_OnInit
 0C246C	0C24B4	src/exact_080c246c.o(.text)	exact_080c246c(run): GmMuPrim_GetFacingFromAngle
+0C2E3C	0C2E68	src/exact_080c2e3c.o(.text)	exact_080c2e3c(run): GmMu_PauseMovement, GmMu_ResumeMovement
