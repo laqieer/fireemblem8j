@@ -1,7 +1,8 @@
 # FEBuilderGBA dynamic (FindROMPointer) entries resolved against real ROMs.
 # Source: FEBuilderGBA (GPL-3.0) ROM defs; logic ported, no GPL text copied.
 # Resolution: read LE u32 pointer stored at a candidate ROM offset, follow it (deref); region by 256-byte window byte-compare at the resolved VMA.
-name	jp_vma	us_vma	region	exact_symbol	nearest_symbol_off	candidate_offsets	source
+# candidate_offsets_jp lists the JP-side (ROMFE8JP.cs) candidate ROM offsets only. The US ROM (ROMFE8U.cs) defines a different candidate list at the cited line; jp_vma is the resolution of these JP offsets, us_vma the resolution of the corresponding US offsets.
+name	jp_vma	us_vma	region	exact_symbol	nearest_symbol_off	candidate_offsets_jp	source
 unit_pointer	0x088582bc	0x08803d64	diff	gCharacterData	gCharacterData	0x10650,0x10268,0x1069c,0xa3b64,0xa3ce0,0xa4928,0xa49a0,0xa4c3c,0xa5458,0xa56a8,0xa5860,0xa595c,0xa5bb0,0xa5d28,0xa61f8	ROMFE8JP.cs:22 / ROMFE8U.cs:22 (FindROMPointer check variant; ptr-table deref)
 class_pointer	0x0885b668	0x08807110	diff	-	gCharacterData+0x33ac	0x17860,0x17adc,0x18ac0,0x19130	ROMFE8JP.cs:27 / ROMFE8U.cs:27 (FindROMPointer check variant; ptr-table deref)
 bg_pointer	0x089cd958	0x0895dd1c	diff	gConvoBackgroundData	gConvoBackgroundData	0xeaa4,0xef08,0xf00c,0x10f8c	ROMFE8JP.cs:29 / ROMFE8U.cs:29 (FindROMPointer check variant; ptr-table deref)
