@@ -138,3 +138,4 @@
 0A8A70	0A8AEC	src/exact_080a8a70.o(.text)	exact_080a8a70(run): ModifySaveLinkArenaStruct2A, ModifySaveLinkArenaStruct2B
 0B8D48	0B8D68	src/exact_080b8d48.o(.text)	exact_080b8d48(run): StartDefaultArmoryScreen, StartArmoryScreenOrphaned
 0B8D68	0B8D78	src/exact_080b8d68.o(.text)	exact_080b8d68(run): StartArmoryScreen
+0B8D78	0B8D88	src/exact_080b8d78.o(.text)	exact_080b8d78(run): StartVendorScreenOrphaned
