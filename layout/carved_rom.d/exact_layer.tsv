@@ -98,3 +98,4 @@
 01413C	014150	src/exact_0801413c.o(.text)	exact_0801413c(run): FadeOutBlackSpeed40LockingWithCallback
 0141AC	0141B8	src/exact_080141ac.o(.text)	exact_080141ac(run): FadeCore_Init
 0144E0	014510	src/exact_080144e0.o(.text)	exact_080144e0(run): StartPaletteAnimatorReverse, StartPaletteAnimatorNormal
+014574	0145DC	src/exact_08014574.o(.text)	exact_08014574(run): PutTmRectSequential
