@@ -149,3 +149,4 @@ PrepGetLatestCharId	08097674	thumb	exact_08097988
 ExecSaveMenuMiscOption	080ADCA4	thumb	exact_080ae0e4
 Sio_StartBoxTransitionOpen	0804CA24	thumb	exact_0804cacc
 Sio_StartBoxTransitionClose	0804CB9C	thumb	exact_0804cc28
+Sio_IsPlayerConnected	08042114	thumb	exact_080420bc
