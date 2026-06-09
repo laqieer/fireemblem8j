@@ -458,3 +458,13 @@ __gedf2:
 __floatsidf:
 	.incbin "baserom.gba", 0xDB5B8, 0x7C
 
+	.section .text.s_080DB6F8, "ax", %progbits
+@ __truncdfsf2 region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DB6F8..0x080DB73C
+	.thumb
+	.align 2, 0
+	.global __truncdfsf2
+	.thumb_func
+__truncdfsf2:
+	.incbin "baserom.gba", 0xDB6F8, 0x44
+
