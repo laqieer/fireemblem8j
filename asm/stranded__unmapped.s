@@ -548,3 +548,13 @@ __floatsisf:
 __fixsfsi:
 	.incbin "baserom.gba", 0xDBFB8, 0x68
 
+	.section .text.s_080DC020, "ax", %progbits
+@ __negsf2 region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DC020..0x080DC044
+	.thumb
+	.align 2, 0
+	.global __negsf2
+	.thumb_func
+__negsf2:
+	.incbin "baserom.gba", 0xDC020, 0x24
+
