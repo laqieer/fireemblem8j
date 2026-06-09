@@ -55,6 +55,17 @@ def main():
         elif not any(s in tracked for s in existing):
             untracked.append(existing[0])
 
+    # gen_layout / apply_patches also read per-task FRAGMENTS (layout/<name>.d/*.tsv). An
+    # untracked .tsv in one of those dirs -- e.g. a new carve's baseline_syms_drop.d that the
+    # broad '*.d' gitignore rule swallowed -- builds LOCALLY but is absent in CI's fresh
+    # checkout, breaking the link ('multiple definition' / unresolved symbol). Flag those too.
+    frag_untracked = []
+    for d in ("layout/carved_rom.d", "layout/carved_ram.d", "layout/baseline_syms.d",
+              "layout/baseline_syms_drop.d", "layout/patches.d"):
+        for f in sorted(glob.glob(d + "/*.tsv")):
+            if f not in tracked:
+                frag_untracked.append(f)
+
     if missing:
         print(f"LAYOUT INCONSISTENT: {len(missing)} object(s) referenced by layout have NO "
               f"source on disk (CI link will fail with 'cannot find'):")
@@ -69,11 +80,19 @@ def main():
             print(f"  {s}")
         if len(untracked) > 40:
             print(f"  ... +{len(untracked) - 40} more")
+    if frag_untracked:
+        print(f"LAYOUT INCONSISTENT: {len(frag_untracked)} layout fragment(s) exist locally but are "
+              f"NOT git-tracked (gen_layout reads them; CI's fresh checkout will miss them):")
+        for f in frag_untracked[:40]:
+            print(f"  {f}   (git add it; if it's gitignored, un-ignore the dir in .gitignore)")
+        if len(frag_untracked) > 40:
+            print(f"  ... +{len(frag_untracked) - 40} more")
 
-    if missing or untracked:
-        print("\nFix: commit/regenerate the missing source(s), or remove the dangling layout rows.")
+    if missing or untracked or frag_untracked:
+        print("\nFix: commit/regenerate the missing source(s)/fragment(s), or remove the dangling rows.")
         return 1
-    print(f"layout consistency OK: all {len(refs)} layout-referenced objects have a git-tracked source")
+    print(f"layout consistency OK: all {len(refs)} layout-referenced objects + their fragments "
+          f"are git-tracked")
     return 0
 
 
