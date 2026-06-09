@@ -114,3 +114,4 @@ StartBgmVolumeChange	08002680	thumb	exact_08009a0c
 StartBgmVolumeChange	08002680	thumb	exact_08009a28
 GetGameControl	08009EA0	thumb	exact_08009eb0
 GetGameControl	08009EA0	thumb	exact_08009ec4
+GetGameControl	08009EA0	thumb	exact_08009ed8
