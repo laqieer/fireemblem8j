@@ -18,3 +18,13 @@ MPlayContinue:
 MPlayFadeOut:
 	.incbin "baserom.gba", 0xD4E50, 0x20
 
+	.section .text.s_080D509C, "ax", %progbits
+@ m4aMPlayFadeOutTemporarily region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D509C..0x080D50BC
+	.thumb
+	.align 2, 0
+	.global m4aMPlayFadeOutTemporarily
+	.thumb_func
+m4aMPlayFadeOutTemporarily:
+	.incbin "baserom.gba", 0xD509C, 0x20
+

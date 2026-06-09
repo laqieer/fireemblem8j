@@ -1,2 +1,3 @@
 0D4E34	0D4E50	asm/stranded_m4a.o(.text.s_080D4E34)	m4a:MPlayContinue region-same Thumb (descriptive incbin)
 0D4E50	0D4E70	asm/stranded_m4a.o(.text.s_080D4E50)	m4a:MPlayFadeOut region-same Thumb (descriptive incbin)
+0D509C	0D50BC	asm/stranded_m4a.o(.text.s_080D509C)	m4a:m4aMPlayFadeOutTemporarily region-same Thumb (descriptive incbin)
