@@ -161,3 +161,4 @@ StartOrChangeBgm	080023C8	thumb	exact_08002434
 IsBgmPlaying	080021B4	thumb	exact_080028bc
 StartBgmVolumeChange	08002680	thumb	exact_080028bc
 Spline_Eval	0800ACA8	thumb	exact_0800b1d4
+Spline_EvalIndirect	0800B2BC	thumb	exact_0800b4c4
