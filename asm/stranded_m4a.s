@@ -148,3 +148,13 @@ CgbModVol:
 m4aMPlayTempoControl:
 	.incbin "baserom.gba", 0xD5E74, 0x28
 
+	.section .text.s_080D6000, "ax", %progbits
+@ m4aMPlayModDepthSet region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D6000..0x080D6074
+	.thumb
+	.align 2, 0
+	.global m4aMPlayModDepthSet
+	.thumb_func
+m4aMPlayModDepthSet:
+	.incbin "baserom.gba", 0xD6000, 0x74
+
