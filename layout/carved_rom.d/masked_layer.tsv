@@ -216,3 +216,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 AAF6D8	AAF6DC	src/masked_080b62bc.o(.data)	masked_080b62bc .data
 086E0C	086E2C	src/masked_08086e0c.o(.text)	masked_08086e0c(run): Debug_CondAButtonNotPressed
 086E38	086E58	src/masked_08086e38.o(.text)	masked_08086e38(run): Debug_CondAButtonPressed
+0874EC	087580	src/masked_080874ec.o(.text)	masked_080874ec(run): Uidebug_IsTurnNumberOver20, Uidebug_IsTurnNumberOver25, Uidebug_IsTurnNumberOver30...
