@@ -42,3 +42,4 @@
 0DAE2C	0DAE5C	asm/stranded__unmapped.o(.text.s_080DAE2C)	_unmapped:__adddf3 region-same Thumb (descriptive incbin)
 0DAE5C	0DAE94	asm/stranded__unmapped.o(.text.s_080DAE5C)	_unmapped:__subdf3 region-same Thumb (descriptive incbin)
 0DB488	0DB4D4	asm/stranded__unmapped.o(.text.s_080DB488)	_unmapped:__gtdf2 region-same Thumb (descriptive incbin)
+0DB4D4	0DB520	asm/stranded__unmapped.o(.text.s_080DB4D4)	_unmapped:__gedf2 region-same Thumb (descriptive incbin)
