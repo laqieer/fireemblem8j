@@ -128,3 +128,13 @@ ClearTileRigistry:
 RegisterDataMove:
 	.incbin "baserom.gba", 0x1F64, 0x40
 
+	.section .text.s_08001FA4, "ax", %progbits
+@ RegisterFillTile region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08001FA4..0x08001FD8
+	.thumb
+	.align 2, 0
+	.global RegisterFillTile
+	.thumb_func
+RegisterFillTile:
+	.incbin "baserom.gba", 0x1FA4, 0x34
+

@@ -11,3 +11,4 @@
 001D50	001DBC	asm/stranded_hardware.o(.text.s_08001D50)	hardware:GetBackgroundFromBufferPointer region-same Thumb (descriptive incbin)
 001F30	001F64	asm/stranded_hardware.o(.text.s_08001F30)	hardware:ClearTileRigistry region-same Thumb (descriptive incbin)
 001F64	001FA4	asm/stranded_hardware.o(.text.s_08001F64)	hardware:RegisterDataMove region-same Thumb (descriptive incbin)
+001FA4	001FD8	asm/stranded_hardware.o(.text.s_08001FA4)	hardware:RegisterFillTile region-same Thumb (descriptive incbin)

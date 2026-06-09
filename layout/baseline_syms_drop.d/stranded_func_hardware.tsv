@@ -6,3 +6,4 @@ MaybeResetSomePal
 MaybeSmoothChangeSomePal
 ColorFadeSetStepRange
 RegisterDataMove
+RegisterFillTile
