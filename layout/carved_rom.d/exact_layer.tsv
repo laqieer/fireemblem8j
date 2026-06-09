@@ -107,3 +107,4 @@
 014F78	014FC4	src/exact_08014f78.o(.text)	exact_08014f78(run): VecMulMat
 015154	015188	src/exact_08015154.o(.text)	exact_08015154(run): MatCopy
 015264	015288	src/exact_08015264.o(.text)	exact_08015264(run): VecDotVec
+015288	0152C8	src/exact_08015288.o(.text)	exact_08015288(run): VecCrossVec, Vec2CrossVec2
