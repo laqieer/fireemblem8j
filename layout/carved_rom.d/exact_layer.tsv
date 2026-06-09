@@ -234,3 +234,4 @@
 07A84C	07A888	src/exact_0807a84c.o(.text)	exact_0807a84c(run): StartMuExt
 07A908	07A948	src/exact_0807a908.o(.text)	exact_0807a908(run): EnableMuCamera, DisableMuCamera, StartUiMu
 07AB94	07AC20	src/exact_0807ab94.o(.text)	exact_0807ab94(run): IsMuActive, SetMuMoveScript, StartMuScripted
+07AC20	07AC34	src/exact_0807ac20.o(.text)	exact_0807ac20(run): MuStepSe_Init
