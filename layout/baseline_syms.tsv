@@ -689,7 +689,6 @@ StartSioMenuBurstFx	0804DD50	thumb	sio_menu
 SioMenu_GetItemHelpText	08047970	thumb	sio_menu
 Sound_FadeOutBGM	0800226C	thumb	sio_menu
 DivArm	080D6378	thumb	spline
-StartVendorScreen	080B8D88	thumb	worldmap_basemenu
 StartSecretShopScreen	080B8DA8	thumb	worldmap_basemenu
 GmapSugoAdvance	080C61AC	thumb	worldmap_sogu
 AP_Update	080091AC	thumb	worldmap_sogu

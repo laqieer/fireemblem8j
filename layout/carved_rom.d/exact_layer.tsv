@@ -139,3 +139,4 @@
 0B8D48	0B8D68	src/exact_080b8d48.o(.text)	exact_080b8d48(run): StartDefaultArmoryScreen, StartArmoryScreenOrphaned
 0B8D68	0B8D78	src/exact_080b8d68.o(.text)	exact_080b8d68(run): StartArmoryScreen
 0B8D78	0B8D88	src/exact_080b8d78.o(.text)	exact_080b8d78(run): StartVendorScreenOrphaned
+0B8D88	0B8D98	src/exact_080b8d88.o(.text)	exact_080b8d88(run): StartVendorScreen
