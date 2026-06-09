@@ -75,3 +75,4 @@ WriteSoundRoomSaveData	080A88E8	thumb	exact_080a8914
 LoadAndVerfyLinkArenaStruct2	080A89EC	thumb	exact_080a8a70
 WriteLinkArenaStruct2	080A8A44	thumb	exact_080a8a70
 StartShopScreen	080B8DC8	thumb	exact_080b8d48
+StartShopScreen	080B8DC8	thumb	exact_080b8d68

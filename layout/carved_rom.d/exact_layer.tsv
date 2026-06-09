@@ -137,3 +137,4 @@
 0A8914	0A89C8	src/exact_080a8914.o(.text)	exact_080a8914(run): IsSoundRoomSongUnlocked, UnlockSoundRoomSong
 0A8A70	0A8AEC	src/exact_080a8a70.o(.text)	exact_080a8a70(run): ModifySaveLinkArenaStruct2A, ModifySaveLinkArenaStruct2B
 0B8D48	0B8D68	src/exact_080b8d48.o(.text)	exact_080b8d48(run): StartDefaultArmoryScreen, StartArmoryScreenOrphaned
+0B8D68	0B8D78	src/exact_080b8d68.o(.text)	exact_080b8d68(run): StartArmoryScreen
