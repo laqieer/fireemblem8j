@@ -165,3 +165,4 @@
 018060	018084	src/exact_08018060.o(.text)	exact_08018060(run): UnitRescue
 01876C	0187B0	src/exact_0801876c.o(.text)	exact_0801876c(run): UnitHasMagicRank, DeployUnitAtPosition
 018804	01883C	src/exact_08018804.o(.text)	exact_08018804(run): GetUnitAidIconId
+018A1C	018A48	src/exact_08018a1c.o(.text)	exact_08018a1c(run): IsUnitMagicSealed

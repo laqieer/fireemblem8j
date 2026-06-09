@@ -90,3 +90,4 @@ AddTrap	0802E1F0	thumb	exact_0802e2d0
 AddTrap	0802E1F0	thumb	exact_0802e530
 GetUnitSpritePalette	0802710C	thumb	exact_080270e0
 GetUnitAid	080186CC	thumb	exact_08018030
+IsPositionMagicSealed	080189AC	thumb	exact_08018a1c
