@@ -450,7 +450,6 @@ SetBackgroundMapDataOffset	08000FB4	thumb	titlescreen
 gGfx_Titlescreen_3	08B48D58	data	titlescreen
 gTsa_Titlescreen_3	08B49A20	data	titlescreen
 gPal_Titlescreen_4	08B49B4C	data	titlescreen
-GetAnimPosition	0805AF10	thumb	banim-efxflashunit
 gEkrGaugeHp	0203E1A8	data	banim-efxflashunit
 gBanimFactionPal	0203E110	data	banim-efxflashunit
 EfxCalcSplitedColorStep	08073A68	thumb	banim-efxflashunit
@@ -597,7 +596,6 @@ gUnk_77	03004F94	data	banim-ekrdragon-demonkingobj
 gEkrdragonDemonkingobj_2	08856004	data	banim-ekrdragon-demonkingobj
 SetBlackPal	08013B3C	thumb	banim-ekrdragon-demonkingobj
 EkrDemonkingObj_StartDissolveProc	0807A310	thumb	banim-ekrdragon-demonkingobj
-GetAISLayerId	0805AEF8	thumb	banim-ekrmainmini
 StartClassReelSpellAnim	08071104	thumb	banim-ekrmainmini
 RegisterAISSheetGraphics	0805A6E0	thumb	banim-ekrmainmini
 NewEkrChienCHR	0805A6B0	thumb	banim-ekrmainmini
