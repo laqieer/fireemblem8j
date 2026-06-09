@@ -10,7 +10,7 @@ give a meaningful 0..1 progress curve on the portal.
 
 Emits a progress.txt that scripts/progress-template.txt parses for upload.
 """
-import os, re, subprocess, sys
+import os, re, subprocess, sys, glob
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
@@ -33,10 +33,25 @@ def read_rows(path):
     return out
 
 
+def read_manifest(name):
+    """Union the monolith layout/<name>.tsv with per-task fragments
+    layout/<name>.d/*.tsv (mirrors gen_layout + the Makefile LAYOUT_INPUTS) so the
+    metric counts fragment-carved objects exactly as the build links them. Dedups
+    byte-identical rows."""
+    seen, rows = set(), []
+    for p in [f"layout/{name}.tsv"] + sorted(glob.glob(f"layout/{name}.d/*.tsv")):
+        for r in read_rows(p):
+            key = tuple(r)
+            if key not in seen:
+                seen.add(key)
+                rows.append(r)
+    return rows
+
+
 # --- code/data bytes from the carve manifest ---
 code_bytes = data_bytes = 0
 objs = set()
-for r in read_rows("layout/carved_rom.tsv"):
+for r in read_manifest("carved_rom"):
     start, end, sec = int(r[0], 16), int(r[1], 16), r[2]
     size = end - start
     # Match the section NAME (e.g. `.data.banim_array`) by prefix, not an exact
@@ -52,7 +67,7 @@ for r in read_rows("layout/carved_rom.tsv"):
     m = re.match(r"(\S+\.o)\(", sec)
     if m and m.group(1) not in ("asm/baserom.o",):
         objs.add(m.group(1))
-for r in read_rows("layout/carved_ram.tsv"):
+for r in read_manifest("carved_ram"):
     for spec in r[2].split():
         m = re.match(r"(\S+\.o)\(", spec)
         if m:
