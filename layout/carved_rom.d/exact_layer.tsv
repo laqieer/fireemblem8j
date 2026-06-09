@@ -77,3 +77,4 @@
 013B94	013BAC	src/exact_08013b94.o(.text)	exact_08013b94(run): SetAllWhitePals
 013E20	013E78	src/exact_08013e20.o(.text)	exact_08013e20(run): StartMidFadeToBlack, StartSlowFadeToBlack, StartFastFadeToBlack...
 013E78	013E88	src/exact_08013e78.o(.text)	exact_08013e78(run): StartSlowLockingFadeToBlack
+013E88	013E98	src/exact_08013e88.o(.text)	exact_08013e88(run): StartFastLockingFadeToBlack

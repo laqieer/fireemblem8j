@@ -40,3 +40,4 @@ StartFadeToBlack	08013D88	thumb	exact_08013e20
 StartFadeFromBlack	08013DA4	thumb	exact_08013e20
 StartLockingFadeToBlack	08013DC0	thumb	exact_08013e20
 StartLockingFadeToBlack	08013DC0	thumb	exact_08013e78
+StartLockingFadeToBlack	08013DC0	thumb	exact_08013e88
