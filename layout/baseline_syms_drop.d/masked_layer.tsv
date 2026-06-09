@@ -90,3 +90,4 @@ MapAnimMoveUnitAwayFromTargetExt
 MapAnimMoveUnitTowardsTargetExt
 StartStarExplosionEffect
 gSinLookup
+NormalizeSeaMinimapTerrain

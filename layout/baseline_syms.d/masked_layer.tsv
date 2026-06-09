@@ -195,3 +195,4 @@ gBmSt	0202BCAC	data	masked_08084080
 PutSparkGfx	08081A28	thumb	masked_08081a64
 gSinLookup	080DC15C	data	masked_08081a64
 LoadSparkGfx	08081A00	thumb	masked_08081a64
+NormalizeSeaMinimapTerrain	080ABFE4	thumb	masked_080ac000
