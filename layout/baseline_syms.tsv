@@ -815,7 +815,6 @@ AsnycKeyStatus	0800142C	thumb	bmdebug
 IsChapterBelongCurGame	080A8E48	thumb	bmsave-bwl
 ForEachAdjacentPosition	08024F54	thumb	bmtarget
 ForEachAdjacentUnit	08024F20	thumb	bmtarget
-GetUnitSupporterCount	0802815C	thumb	bmunit
 GetUnitSupporterInitialExp	08028320	thumb	bmunit
 GetItemType	080172F0	thumb	bmunit
 GetItemRequiredExp	08017460	thumb	bmunit
