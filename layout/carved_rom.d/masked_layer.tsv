@@ -5,3 +5,4 @@
 074DAC	074DE8	src/masked_08074dac.o(.text)	masked_08074dac(run): GetBanimBossBGM
 073348	0733B8	src/masked_08073348.o(.text)	masked_08073348(run): EfxTmModifyPal
 073644	0736C4	src/masked_08073644.o(.text)	masked_08073644(run): EkrModifyBarfx
+050ECC	050EE8	src/masked_08050ecc.o(.text)	masked_08050ecc(run): ekrBattlePrepareDragonIntro
