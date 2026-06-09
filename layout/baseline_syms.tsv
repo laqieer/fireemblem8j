@@ -642,7 +642,6 @@ BattleGenerateSimulation	0802A2A4	thumb	cp_battle
 BattleGenerateBallistaSimulation	0802A2F0	thumb	cp_battle
 AiComputeCombatScore	0803E108	thumb	cp_battle
 WriteFadedPaletteFromArchive	08013608	thumb	eventfx-fade
-GetPalFadeStClkEnd3	0801357C	thumb	eventfx-fade
 ArchiveCurrentPalettes	0801358C	thumb	eventfx-fade
 ProcScr_EventFadefx	085BA2E4	data	eventfx-fade
 ProcScr_menu_scroll	08A9454C	data	prep_menuscroll
