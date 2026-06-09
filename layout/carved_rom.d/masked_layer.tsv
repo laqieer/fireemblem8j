@@ -140,3 +140,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 00651C	006530	src/masked_0800651c.o(.text)	masked_0800651c(run): SetFacePosition
 0096D8	009840	src/masked_080096d8.o(.text)	masked_080096d8(run): GetRealChaperIndex
 009E3C	009E5C	src/masked_08009e3c.o(.text)	masked_08009e3c(run): GameControl_RememberChapterId, GameControl_RestoreChapterId
+08C840	08C8E0	src/masked_0808c840.o(.text)	masked_0808c840(run): ScrollBoxDialogueTilesUp

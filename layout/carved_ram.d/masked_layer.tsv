@@ -17,3 +17,4 @@
 030017C0	iwram	src/masked_0803c6ac.o(.bss)	masked_0803c6ac .bss
 030017C0	iwram	src/masked_0803d360.o(.bss)	masked_0803d360 .bss
 02029D88	ewram	src/masked_080052ac.o(ewram_data)	masked_080052ac ewram_data
+0203E7E4	ewram	src/masked_0808c840.o(ewram_data)	masked_0808c840 ewram_data
