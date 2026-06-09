@@ -491,7 +491,6 @@ AnimScr_ArrowCloseLeft	08605008	data	banim-efxmagic-phywpn
 AnimScr_ArrowCloseRight	08604F7C	data	banim-efxmagic-phywpn
 AnimScr_ArrowFarLeft	08605018	data	banim-efxmagic-phywpn
 AnimScr_ArrowFarRight	08604F8C	data	banim-efxmagic-phywpn
-SpellFx_Begin	08056108	thumb	banim-efxmagic-phywpn
 SpellFx_ClearBG1Position	08056120	thumb	banim-efxmagic-phywpn
 GetAnimRoundTypeAnotherSide	0805B0B4	thumb	banim-efxmagic-phywpn
 CheckRoundMiss	0805AF28	thumb	banim-efxmagic-phywpn
@@ -524,7 +523,6 @@ CheckRoundCrit	0805B00C	thumb	banim-efxmagic-phywpn
 NewEfxPierceCritical	0806EA40	thumb	banim-efxmagic-phywpn
 NewEfxNormalEffect	0806EBA0	thumb	banim-efxmagic-phywpn
 EfxPlayHittedSFX	08074934	thumb	banim-efxmagic-phywpn
-SpellFx_Finish	08056114	thumb	banim-efxmagic-phywpn
 SpellFx_WriteBgMap	0805660C	thumb	banim-efxmagic-shine
 ProcScr_efxLokmsunaOBJ	086036B4	data	banim-efxmisc
 AnimScr_EfxLokmsunaObjLeft	087A89EC	data	banim-efxmisc

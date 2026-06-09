@@ -41,3 +41,4 @@
 05B734	05B764	src/exact_0805b734.o(.text)	exact_0805b734(run): ApplyMainMiniAnimHitEffect, IsMainMiniAnimEnd
 05BBE4	05BBFC	src/exact_0805bbe4.o(.text)	exact_0805bbe4(run): SetBanimTerrainPos
 077FAC	0780DC	src/exact_08077fac.o(.text)	exact_08077fac(run): MakeBattlePopupTileMapFromTSA
+056108	056120	src/exact_08056108.o(.text)	exact_08056108(run): SpellFx_Begin, SpellFx_Finish
