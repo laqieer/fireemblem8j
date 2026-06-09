@@ -247,3 +247,4 @@
 0CC754	0CC810	src/exact_080cc754.o(.text)	exact_080cc754(run): OpAnimHBlank1, OpAnimHBlank2
 0CB8BC	0CB960	src/exact_080cb8bc.o(.text)	exact_080cb8bc(run): BlendPaletteToColor
 0B7FD4	0B7FEC	src/exact_080b7fd4.o(.text)	exact_080b7fd4(run): ClassIntroBurst_Init
+0B828C	0B82EC	src/exact_080b828c.o(.text)	exact_080b828c(run): ClassInfoDisplay_HBlankHandler
