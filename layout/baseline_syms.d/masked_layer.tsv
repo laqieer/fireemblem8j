@@ -246,3 +246,6 @@ GetSupportScreenPartnerSupportLevel	080A48BC	thumb	masked_080a4d18
 GetSupportScreenCharIdAt	080A492C	thumb	masked_080a4d18
 gBmSt	0202BCAC	data	masked_080348dc
 UnitList_SetupDisplay	08093058	thumb	masked_08092984
+StartGmPalFade	080C44A4	thumb	masked_080c456c
+gWorldmapGmap_2	08B1B278	data	masked_080c456c
+gWorldmapGmap_1	08B1B1F8	data	masked_080c456c
