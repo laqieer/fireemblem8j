@@ -238,3 +238,13 @@ PutSpecialChar:
 PutNumber:
 	.incbin "baserom.gba", 0x4A90, 0xC
 
+	.section .text.s_08004AEC, "ax", %progbits
+@ PutNumberSmall region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08004AEC..0x08004AF8
+	.thumb
+	.align 2, 0
+	.global PutNumberSmall
+	.thumb_func
+PutNumberSmall:
+	.incbin "baserom.gba", 0x4AEC, 0xC
+

@@ -22,3 +22,4 @@
 0048E8	00493C	asm/stranded_fontgrp.o(.text.s_080048E8)	fontgrp:DrawSpecialCharGlyph_old region-same Thumb (descriptive incbin)
 004A14	004A50	asm/stranded_fontgrp.o(.text.s_08004A14)	fontgrp:PutSpecialChar region-same Thumb (descriptive incbin)
 004A90	004A9C	asm/stranded_fontgrp.o(.text.s_08004A90)	fontgrp:PutNumber region-same Thumb (descriptive incbin)
+004AEC	004AF8	asm/stranded_fontgrp.o(.text.s_08004AEC)	fontgrp:PutNumberSmall region-same Thumb (descriptive incbin)
