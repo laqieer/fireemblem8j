@@ -219,3 +219,4 @@
 08CB48	08CB8C	src/exact_0808cb48.o(.text)	exact_0808cb48(run): SetBoxDialogueSize, BoxDialogue_OnInit
 08CC84	08CCAC	src/exact_0808cc84.o(.text)	exact_0808cc84(run): MergeBoxDialogue1
 07DD00	07DD40	src/exact_0807dd00.o(.text)	exact_0807dd00(run): GetFacingDirection
+07DE58	07DE88	src/exact_0807de58.o(.text)	exact_0807de58(run): MapAnim_DrawBarSegment
