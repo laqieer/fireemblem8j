@@ -197,3 +197,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 04C3A4	04C3C4	src/masked_0804c3a4.o(.text)	masked_0804c3a4(run): LAUnitDeaths_Init
 041CE8	041D0C	src/masked_08041ce8.o(.text)	masked_08041ce8(run): SioHandleIrq_Timer3
 0486B0	0486D4	src/masked_080486b0.o(.text)	masked_080486b0(run): Sio_EnableAllWOutLayers
+042DFC	042E2C	src/masked_08042dfc.o(.text)	masked_08042dfc(run): SetBmStLinkArenaFlag, UnsetBmStLinkArenaFlag, CheckInLinkArena

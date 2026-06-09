@@ -110,3 +110,5 @@ ClearEventMoveBuffer
 GetCursorQuadrant
 IsTacticianDivinationAvailable
 Pal_UnkData_1
+CheckInLinkArena
+UnsetBmStLinkArenaFlag
