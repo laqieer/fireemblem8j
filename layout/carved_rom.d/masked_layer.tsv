@@ -199,3 +199,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0486B0	0486D4	src/masked_080486b0.o(.text)	masked_080486b0(run): Sio_EnableAllWOutLayers
 042DFC	042E2C	src/masked_08042dfc.o(.text)	masked_08042dfc(run): SetBmStLinkArenaFlag, UnsetBmStLinkArenaFlag, CheckInLinkArena
 047A0C	047A4C	src/masked_08047a0c.o(.text)	masked_08047a0c(run): SioMenu_Init
+04E638	04E65C	src/masked_0804e638.o(.text)	masked_0804e638(run): SioWeaponSelectMenu_OnSelect
