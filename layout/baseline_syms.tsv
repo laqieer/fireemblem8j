@@ -846,7 +846,6 @@ CgTextExists	08091558	thumb	eventscr
 gProcScr_BoxDialogue	08A73798	data	eventscr
 GetTalkChoiceResult	080088FC	thumb	eventscr
 ClearTalkBubble	080080A4	thumb	eventscr
-ResetFaces	08005430	thumb	eventscr
 ClearTalkFaceRefs	080066EC	thumb	eventscr
 FaceExists	080088E4	thumb	eventscr
 gEventscr_0	085B9BCC	data	eventscr
