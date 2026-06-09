@@ -38,3 +38,13 @@ StoreNumberStringOrDashesToSmallBuffer:
 PrintNumberToDBG:
 	.incbin "baserom.gba", 0x3898, 0x1C
 
+	.section .text.s_08003900, "ax", %progbits
+@ PrintHexNumberToDBG region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08003900..0x0800391C
+	.thumb
+	.align 2, 0
+	.global PrintHexNumberToDBG
+	.thumb_func
+PrintHexNumberToDBG:
+	.incbin "baserom.gba", 0x3900, 0x1C
+
