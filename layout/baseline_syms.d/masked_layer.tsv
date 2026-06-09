@@ -196,3 +196,11 @@ PutSparkGfx	08081A28	thumb	masked_08081a64
 gSinLookup	080DC15C	data	masked_08081a64
 LoadSparkGfx	08081A00	thumb	masked_08081a64
 NormalizeSeaMinimapTerrain	080ABFE4	thumb	masked_080ac000
+GetMinimapConnectKindAt	080ABF90	thumb	masked_080ac424
+GetMinimapRiverKindAt	080AC148	thumb	masked_080ac424
+GetMinimapBridgeKindAt	080AC388	thumb	masked_080ac424
+GetMinimapWaterKindAt	080AC0B4	thumb	masked_080ac424
+GetMinimapSeaKindAt	080AC000	thumb	masked_080ac424
+GetMinimapDoorTileAt	080AC358	thumb	masked_080ac424
+GetMinimapCliffKindAt	080AC1EC	thumb	masked_080ac424
+GetMinimapStairTileAt	080AC314	thumb	masked_080ac424

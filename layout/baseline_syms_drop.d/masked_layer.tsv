@@ -91,3 +91,12 @@ MapAnimMoveUnitTowardsTargetExt
 StartStarExplosionEffect
 gSinLookup
 NormalizeSeaMinimapTerrain
+GetMinimapBridgeKindAt
+GetMinimapCliffKindAt
+GetMinimapConnectKindAt
+GetMinimapDoorTileAt
+GetMinimapRiverKindAt
+GetMinimapSeaKindAt
+GetMinimapStairTileAt
+GetMinimapTileAt
+GetMinimapWaterKindAt
