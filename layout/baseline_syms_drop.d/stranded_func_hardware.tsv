@@ -1,0 +1,9 @@
+GetTileIndex
+SetBackgroundMapDataOffset
+SetNextVCount
+SetMainUpdateRoutine
+MaybeResetSomePal
+MaybeSmoothChangeSomePal
+ColorFadeSetStepRange
+RegisterDataMove
+RegisterFillTile

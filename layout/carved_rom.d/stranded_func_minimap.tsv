@@ -1,0 +1,3 @@
+0AC8DC	0AC91C	asm/stranded_minimap.o(.text.s_080AC8DC)	minimap:Minimap_OnHBlank region-same Thumb (descriptive incbin)
+0AC91C	0AC934	asm/stranded_minimap.o(.text.s_080AC91C)	minimap:InitMinimapWindowBuffers region-same Thumb (descriptive incbin)
+0ACE28	0ACEB4	asm/stranded_minimap.o(.text.s_080ACE28)	minimap:InitMinimapFlashPalette region-same Thumb (descriptive incbin)

@@ -1,0 +1,3 @@
+073F70	073F7C	asm/stranded_banim-efxsound.o(.text.s_08073F70)	banim-efxsound:UnregisterEfxSoundSeExist region-same Thumb (descriptive incbin)
+073F7C	073F88	asm/stranded_banim-efxsound.o(.text.s_08073F7C)	banim-efxsound:RegisterEfxSoundSeExist region-same Thumb (descriptive incbin)
+073F88	073F94	asm/stranded_banim-efxsound.o(.text.s_08073F88)	banim-efxsound:CheckEfxSoundSeExist region-same Thumb (descriptive incbin)

@@ -1,0 +1,4 @@
+006974	006980	asm/stranded_scene.o(.text.s_08006974)	scene:StartTalk region-same Thumb (descriptive incbin)
+0079AC	007A08	asm/stranded_scene.o(.text.s_080079AC)	scene:TalkFaceMove_OnInit region-same Thumb (descriptive incbin)
+0088B4	0088C0	asm/stranded_scene.o(.text.s_080088B4)	scene:SetTalkFaceMouthMove region-same Thumb (descriptive incbin)
+0088C0	0088CC	asm/stranded_scene.o(.text.s_080088C0)	scene:SetTalkFaceNoMouthMove region-same Thumb (descriptive incbin)
