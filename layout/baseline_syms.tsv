@@ -58,7 +58,6 @@ WriteSwappedSuspendSaveId	080AADF8	thumb	bmsave
 gGenericBuffer	02020188	data	bmsave
 gUnitArrayRed	0202CFB8	data	bmsave
 gUnitArrayGreen	0202DDC8	data	bmsave
-GetSaveReadAddr	080A7B58	thumb	bmsave
 SetGameTime	08000CE4	thumb	bmsave
 InitUnits	0801756C	thumb	bmsave
 ReadPidStats	080A8C60	thumb	bmsave

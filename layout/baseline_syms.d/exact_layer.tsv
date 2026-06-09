@@ -68,3 +68,4 @@ PidStatsAddFavval	080A9478	thumb	exact_080a9320
 PidStatsAddFavval	080A9478	thumb	exact_080a9334
 IsPlaythroughIdUnique	080A9560	thumb	exact_080a95b0
 WriteGlobalSaveInfo	080A77EC	thumb	exact_080a971c
+SramOffsetToAddr	080A7918	thumb	exact_080a7b58
