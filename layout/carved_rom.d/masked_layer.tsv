@@ -184,3 +184,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 09A2B4	09A2EC	src/masked_0809a2b4.o(.text)	masked_0809a2b4(run): ApplyPrepWindowColorPalette
 0972D4	097304	src/masked_080972d4.o(.text)	masked_080972d4(run): CanPrepScreenSave
 0975CC	097634	src/masked_080975cc.o(.text)	masked_080975cc(run): RegisterSioPid, RemoveSioPid
+0977E4	097804	src/masked_080977e4.o(.text)	masked_080977e4(run): CanPrepScreenCheckMap
