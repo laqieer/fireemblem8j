@@ -408,3 +408,4 @@
 01772C	017834	src/exact_0801772c.o(.text)	exact_0801772c(run): UnitRemoveInvalidItems, GetUnitItemCount, UnitHasItem...
 0186CC	018730	src/exact_080186cc.o(.text)	exact_080186cc(run): GetUnitAid
 0916AC	0916FC	src/exact_080916ac.o(.text)	exact_080916ac(run): CgText_AdjustBoxPosition
+085CB0	085CC4	src/exact_08085cb0.o(.text)	exact_08085cb0(run): EvCheck06_VILL
