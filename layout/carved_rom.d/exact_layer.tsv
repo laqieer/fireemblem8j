@@ -131,3 +131,4 @@
 0A7740	0A776C	src/exact_080a7740.o(.text)	exact_080a7740(run): Checksum16
 0A7B58	0A7B74	src/exact_080a7b58.o(.text)	exact_080a7b58(run): GetSaveReadAddr
 0A7F44	0A7F88	src/exact_080a7f44.o(.text)	exact_080a7f44(run): GetTotalGlobalSupportValue
+0A81EC	0A8278	src/exact_080a81ec.o(.text)	exact_080a81ec(run): SGM_SetCharacterKnown, GGM_IsCharacterKnown
