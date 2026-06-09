@@ -181,3 +181,4 @@
 03EB80	03EBA8	src/exact_0803eb80.o(.text)	exact_0803eb80(run): AiEquipBestConsideringDanger
 03EBE4	03EC28	src/exact_0803ebe4.o(.text)	exact_0803ebe4(run): AiIsWithinFlyingDistance
 03D3D0	03D3E0	src/exact_0803d3d0.o(.text)	exact_0803d3d0(run): CpScript_CondTrueReadClass
+03AD18	03AD38	src/exact_0803ad18.o(.text)	exact_0803ad18(run): AiIsInShortList
