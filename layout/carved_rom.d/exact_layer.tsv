@@ -194,3 +194,4 @@
 085290	0852BC	src/exact_08085290.o(.text)	exact_08085290(run): EventInfoCheckTalk
 0853CC	0853E4	src/exact_080853cc.o(.text)	exact_080853cc(run): CheckAnyBlueUnitArea3
 085C70	085CB0	src/exact_08085c70.o(.text)	exact_08085c70(run): EvCheck05_LOCA
+085CC4	085D00	src/exact_08085cc4.o(.text)	exact_08085cc4(run): EvCheck07_CHES
