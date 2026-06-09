@@ -20,3 +20,6 @@ GetEkrDragonStatusType_	08072028	thumb	exact_0807201c
 gpProcEkrGauge	02000068	data	exact_08051eb4
 StartBattleAnimHitEffects	08056240	thumb	exact_08056220
 StartBattleAnimHitEffects	08056240	thumb	exact_08056230
+InitBattleForecastBattleStats	080367A0	thumb	exact_08036dd0
+DrawBattleForecastContentsStandard	08036918	thumb	exact_08036dd0
+DrawBattleForecastContentsExtended	08036B70	thumb	exact_08036dd0
