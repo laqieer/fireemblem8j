@@ -1,0 +1,6 @@
+	.section .rodata.dat_Ch10EphraimMapChanges_ref, "a", %progbits
+@ Ch10EphraimMapChanges: region-different data, JP 0x08a5c5cc; incbin baserom.gba
+@ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
+	.global Ch10EphraimMapChanges
+Ch10EphraimMapChanges:
+	.incbin "baserom.gba", 0xA5C5CC, 0x114

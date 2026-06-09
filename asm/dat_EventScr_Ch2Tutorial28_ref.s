@@ -1,0 +1,6 @@
+	.section .rodata.dat_EventScr_Ch2Tutorial28_ref, "a", %progbits
+@ EventScr_Ch2Tutorial28: region-different data, JP 0x08a631d8; incbin baserom.gba
+@ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
+	.global EventScr_Ch2Tutorial28
+EventScr_Ch2Tutorial28:
+	.incbin "baserom.gba", 0xA631D8, 0x60
