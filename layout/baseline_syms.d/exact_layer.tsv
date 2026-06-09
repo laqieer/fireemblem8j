@@ -158,3 +158,5 @@ DrawSoundRoomVolumeGraphSprites	080B4D94	thumb	exact_080b4e1c
 gSoundRoomVolumeGraphBuffer	0201F19C	data	exact_080b4e1c
 StartOrChangeBgm	080023C8	thumb	exact_08002424
 StartOrChangeBgm	080023C8	thumb	exact_08002434
+IsBgmPlaying	080021B4	thumb	exact_080028bc
+StartBgmVolumeChange	08002680	thumb	exact_080028bc

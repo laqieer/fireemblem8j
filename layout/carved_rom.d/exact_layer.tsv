@@ -313,3 +313,4 @@
 0B4E1C	0B4E58	src/exact_080b4e1c.o(.text)	exact_080b4e1c(run): SoundRoom_DrawVolumeGraphSprites
 002424	002434	src/exact_08002424.o(.text)	exact_08002424(run): StartBgm
 002434	002440	src/exact_08002434.o(.text)	exact_08002434(run): StartBgmExt
+0028BC	00290C	src/exact_080028bc.o(.text)	exact_080028bc(run): ChangeBgm_FadeVolume
