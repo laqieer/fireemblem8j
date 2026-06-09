@@ -368,3 +368,13 @@ _open:
 _close:
 	.incbin "baserom.gba", 0xDA738, 0xC
 
+	.section .text.s_080DA7DC, "ax", %progbits
+@ _gettimeofday region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DA7DC..0x080DA808
+	.thumb
+	.align 2, 0
+	.global _gettimeofday
+	.thumb_func
+_gettimeofday:
+	.incbin "baserom.gba", 0xDA7DC, 0x2C
+
