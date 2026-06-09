@@ -159,3 +159,4 @@
 017680	0176AC	src/exact_08017680.o(.text)	exact_08017680(run): SetUnitStatus, SetUnitStatusExt
 0176F0	017714	src/exact_080176f0.o(.text)	exact_080176f0(run): UnitAddItem
 017714	01772C	src/exact_08017714.o(.text)	exact_08017714(run): UnitClearInventory
+017B54	017BDC	src/exact_08017b54.o(.text)	exact_08017b54(run): UnitLoadStatsFromChracter
