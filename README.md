@@ -1,8 +1,9 @@
 # Fire Emblem: Seima no Kouseki (聖魔の光石)
 
 [![make compare](https://github.com/laqieer/fireemblem8j/actions/workflows/compare.yml/badge.svg)](https://github.com/laqieer/fireemblem8j/actions/workflows/compare.yml)
-[![code decompiled](https://img.shields.io/endpoint?url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Ffireemblem8j%2Fjp%2Fdefault%2F%3Fmode%3Dshield%26measure%3Dcode&label=code%20decompiled)](https://laqieer.github.io/fe-decomp-portal/)
-[![functions decompiled](https://img.shields.io/endpoint?url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Ffireemblem8j%2Fjp%2Fdefault%2F%3Fmode%3Dshield%26measure%3Dfunctions&label=functions)](https://laqieer.github.io/fe-decomp-portal/)
+[![Code](https://decomp.dev/laqieer/fireemblem8j/jp.svg?mode=shield&measure=matched_code_percent&label=Code)](https://decomp.dev/laqieer/fireemblem8j/jp)
+[![Data](https://decomp.dev/laqieer/fireemblem8j/jp.svg?mode=shield&measure=matched_data_percent&label=Data)](https://decomp.dev/laqieer/fireemblem8j/jp)
+[![Functions](https://decomp.dev/laqieer/fireemblem8j/jp.svg?mode=shield&measure=matched_functions_percent&label=Functions)](https://decomp.dev/laqieer/fireemblem8j/jp)
 [![Decomp progress](https://github.com/laqieer/fireemblem8j/actions/workflows/progress.yml/badge.svg)](https://github.com/laqieer/fireemblem8j/actions/workflows/progress.yml)
 [![FE Decomp Portal](https://img.shields.io/badge/progress%20charts-FE%20Decomp%20Portal-2ea44f)](https://laqieer.github.io/fe-decomp-portal/)
 
