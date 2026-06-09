@@ -76,7 +76,7 @@ Configure Copilot CLI with the local reverse-engineering MCP servers in
     },
     "ghidra": {
       "type": "local",
-      "command": "/home/laqieer/ghidra-mcp-venv/bin/pyghidra-mcp",
+      "command": "/home/laqieer/fireemblem8j/scripts/ghidra/pyghidra_mcp_router.sh",
       "args": [
         "--project-path",
         "/home/laqieer/ghidra-projects",
@@ -101,13 +101,15 @@ mode="force_headless")` and pass the returned session id as `database` to worker
 tools. If `idb_open` fails because stale sidecar files are held, inspect the
 specific idalib worker PID before terminating it.
 
-**Ghidra uses a separate project `fe8j-cp`, not `fe8j`.** A Ghidra project takes
-an exclusive lock while open, so Copilot and Claude Code cannot serve the *same*
-project at once (the second `pyghidra-mcp` fails with "Connection closed"). Claude
-holds `fe8j`; Copilot gets an isolated clone `fe8j-cp` so both can decompile
-concurrently. Refresh the clone whenever the canonical project is rebuilt:
-`make ghidra-db && make ghidra-cp`. IDA needs no copy — its idalib worker is
-shared via the instance registry. See `docs/decisions.md` (D18).
+**Ghidra uses a separate project `fe8j-cp`, not `fe8j`, for Copilot.** A Ghidra
+project takes an exclusive lock while open, so Copilot and Claude Code cannot
+serve the *same* project at once (the second `pyghidra-mcp` fails with
+"Connection closed"). Claude holds `fe8j`; Copilot gets an isolated clone
+`fe8j-cp` so both can decompile concurrently. The router script keeps Agency
+from accidentally giving Claude Copilot's `fe8j-cp` config. Refresh the clone
+whenever the canonical project is rebuilt: `make ghidra-db && make ghidra-cp`.
+IDA needs no copy — its idalib worker is shared via the instance registry. See
+`docs/decisions.md` (D18).
 
 ## Decompilation conventions
 

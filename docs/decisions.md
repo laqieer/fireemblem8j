@@ -671,7 +671,9 @@ different files, so both decompile concurrently.
   stripping locks; it refuses to run while a `pyghidra-mcp` holds either project. Re-run after
   `make ghidra-db` so the copy doesn't go stale.
 - Copilot's `~/.copilot/mcp-config.json` ghidra `--project-name` is `fe8j-cp` (machine-local, mirrored in
-  `.github/copilot-instructions.md`).
+  `.github/copilot-instructions.md`). Its command is `scripts/ghidra/pyghidra_mcp_router.sh`, because Agency
+  copies Copilot's MCP config into `agency cc`; the router keeps Claude on canonical `fe8j` while Copilot keeps
+  the isolated `fe8j-cp` copy.
 
 **Rationale over (2)/(3):** staggering is fragile in an autonomous loop that holds ghidra for a whole
 session; dropping ghidra would lose Copilot's independent second-opinion decompiler (the whole point of the
