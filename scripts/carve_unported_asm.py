@@ -109,9 +109,17 @@ def candidates():
 
 def emit_asm(tu, fns):
     """Write asm/<tu>.s as a descriptive-incbin .text section covering the full
-    contiguous funcmap span; return (rom_lo, rom_hi, [names])."""
+    contiguous funcmap span; return (rom_lo, rom_hi, [names]).
+
+    `hi` is rounded UP to 4-byte alignment: a thumb `.text` section is 4-aligned,
+    so the assembler pads the last function to a multiple of 4. The carved-range
+    end MUST equal the assembled object size (else the manifest under-claims the
+    gap and the incbin baseline overlaps the carved bytes -> catastrophic shift).
+    The pad bytes are incbin'd verbatim from baserom (the TU's real trailing pad,
+    e.g. m4a_1's `00 00`), so they match the ROM and the section stays byte-exact."""
     lo = min(jp for jp, _, _, _ in fns)
     hi = max(jp + size for jp, size, _, _ in fns)
+    hi = (hi + 3) & ~3                            # 4-align (thumb .text section pad)
     us0 = fns[0][2]
     addr_name = {}
     for jp, size, us, name in fns:
@@ -120,8 +128,7 @@ def emit_asm(tu, fns):
     L = [f'\t.section .text.{tu}, "ax", %progbits',
          f'@ {tu} region-same asm TU: JP 0x{lo:08X} (US 0x{us0:08X}, '
          f'shift +0x{lo-us0:X}); descriptive incbin baserom.gba',
-         '\t.thumb',
-         '\t.align 2, 0']
+         '\t.thumb']
     prev = lo
     for a in addrs:
         if a > prev:
@@ -130,7 +137,7 @@ def emit_asm(tu, fns):
         L.append('\t.thumb_func')
         L.append(f'{addr_name[a]}:')
         prev = a
-    if hi > prev:
+    if hi > prev:                                 # remaining funcs' bytes + 4-align pad
         L.append(f'\t.incbin "baserom.gba", 0x{prev-0x08000000:X}, 0x{hi-prev:X}')
     open(f"asm/{tu}.s", "w").write("\n".join(L) + "\n")
     return lo - 0x08000000, hi - 0x08000000, [addr_name[a] for a in addrs]
