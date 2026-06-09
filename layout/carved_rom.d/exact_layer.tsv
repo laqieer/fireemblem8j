@@ -318,3 +318,4 @@
 00B1D4	00B2BC	src/exact_0800b1d4.o(.text)	exact_0800b1d4(run): Spline_EvalTransformChannels
 00B4C4	00B4F0	src/exact_0800b4c4.o(.text)	exact_0800b4c4(run): Spline_EvalTwoChannels
 009140	009150	src/exact_08009140.o(.text)	exact_08009140(run): EventSpriteAnim_End
+088CC4	088CE0	src/exact_08088cc4.o(.text)	exact_08088cc4(run): DrawStatBarFilledCol
