@@ -344,3 +344,4 @@
 0A5FE8	0A6040	src/exact_080a5fe8.o(.text)	exact_080a5fe8(run): SupportSubScreen_MakeDimmedObjPalette
 093458	0934BC	src/exact_08093458.o(.text)	exact_08093458(run): UnitList_Init
 094EC4	094ED0	src/exact_08094ec4.o(.text)	exact_08094ec4(run): SortUnitList_GetUnitSoloAnimation
+0C8C80	0C8C94	src/exact_080c8c80.o(.text)	exact_080c8c80(run): GMapBaseMenu_Init
