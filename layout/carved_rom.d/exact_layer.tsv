@@ -391,3 +391,4 @@
 01354C	013560	src/exact_0801354c.o(.text)	exact_0801354c(run): SetPalFadeStClkEnd3
 01358C	013608	src/exact_0801358c.o(.text)	exact_0801358c(run): ArchiveCurrentPalettes, ArchivePalette
 014050	014068	src/exact_08014050.o(.text)	exact_08014050(run): FadeInBlackSpeed08Unk
+0281F8	028224	src/exact_080281f8.o(.text)	exact_080281f8(run): GetUnitTotalSupportLevel

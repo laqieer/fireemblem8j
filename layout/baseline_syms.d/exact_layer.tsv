@@ -202,3 +202,4 @@ SetPalFadeStClkEnd2	08013538	thumb	exact_0801358c
 SetPalFadeStClkEnd3	0801354C	thumb	exact_0801358c
 StartFadeCore	08014150	thumb	exact_08014050
 FadeCore_StopObjPalFade	08014228	thumb	exact_08014050
+GetUnitSupportLevel	080281D0	thumb	exact_080281f8
