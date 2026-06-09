@@ -96,3 +96,4 @@
 0140E0	0140F4	src/exact_080140e0.o(.text)	exact_080140e0(run): FadeInWhiteSpeed04
 0140F4	014108	src/exact_080140f4.o(.text)	exact_080140f4(run): FadeInWhiteSpeed08
 01413C	014150	src/exact_0801413c.o(.text)	exact_0801413c(run): FadeOutBlackSpeed40LockingWithCallback
+0141AC	0141B8	src/exact_080141ac.o(.text)	exact_080141ac(run): FadeCore_Init
