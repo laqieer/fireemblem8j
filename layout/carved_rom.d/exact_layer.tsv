@@ -175,3 +175,4 @@
 01FA38	01FA48	src/exact_0801fa38.o(.text)	exact_0801fa38(run): ChapterIntro_KeyListen_Init
 01FB0C	01FCC8	src/exact_0801fb0c.o(.text)	exact_0801fb0c(run): PutScreenFogEffect, PutScreenFogEffectOverlayed
 0204EC	020500	src/exact_080204ec.o(.text)	exact_080204ec(run): ChapterIntro_LightBurst_Init
+020DB8	020DC0	src/exact_08020db8.o(.text)	exact_08020db8(run): ChapterIntro_SetSkipping
