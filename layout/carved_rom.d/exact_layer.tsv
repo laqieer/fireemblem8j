@@ -172,3 +172,4 @@
 0B3824	0B3874	src/exact_080b3824.o(.text)	exact_080b3824(run): IsPointInTriangle
 091874	09189C	src/exact_08091874.o(.text)	exact_08091874(run): DoesStringContainTact
 092184	0921F0	src/exact_08092184.o(.text)	exact_08092184(run): CgText_ScrollVramUp
+01FA38	01FA48	src/exact_0801fa38.o(.text)	exact_0801fa38(run): ChapterIntro_KeyListen_Init
