@@ -128,3 +128,13 @@ TrkVolPitSet:
 CgbOscOff:
 	.incbin "baserom.gba", 0xD5970, 0x50
 
+	.section .text.s_080D59C0, "ax", %progbits
+@ CgbModVol region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D59C0..0x080D5A28
+	.thumb
+	.align 2, 0
+	.global CgbModVol
+	.thumb_func
+CgbModVol:
+	.incbin "baserom.gba", 0xD59C0, 0x68
+
