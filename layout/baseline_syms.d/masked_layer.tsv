@@ -43,3 +43,4 @@ gBmMapSize	0202E4D0	data	masked_08015d3c
 BattleGenerateSimulationInternal	0802A0C8	thumb	masked_0802a2a4
 BattleGenerateRealInternal	0802A198	thumb	masked_0802a2a4
 gPlaySt	0202BCEC	data	masked_08037bdc
+gPlaySt	0202BCEC	data	masked_08037bfc
