@@ -955,3 +955,136 @@ bootstrap, not the end state).
 **Status:** Done 2026-06-09 (branch `carve/gbadisasm-layer`). Carver + exporter +
 JP-config-gen landed; 350-fn pilot green. Scale over the remaining 5942 via the
 parallel-carving system.
+## D25 — FE_GBA_Function_Library: ingest as reference-only US↔JP hints (asm→C source map) (2026-06-09)
+
+**Context (owner constraint).** The owner's `laqieer/FE_GBA_Function_Library` is a
+years-old cross-region FE correspondence DB with an FE8J column. The owner explicitly
+warned: it was merged from several bindiff tools by a 0.8-threshold strategy, is **not
+guaranteed correct** (most high-confidence, some wrong) — "a hint, not ensured, confirm
+before use." Tasked to investigate it deeper before ingesting, survey modern bindiff
+tools, and propose improvements. Full report: `docs/bindiff-investigation.md`.
+
+**Why it matters.** Byte-matching (`layout/us_jp_funcmap.tsv`) STRUCTURALLY cannot map
+region-*different* functions (different bytes → no match). The asm→C decompilation of
+the gbadisasm-carved region-different front needs to know *which US C function* each JP
+function is, to port+adapt the US source. The library supplies exactly that.
+
+**Investigation findings (multi-agent workflow, make-compare-grounded).**
+  * **How it was built:** `function match/merge_match_results.py` merges, at a 0.8
+    similarity/confidence threshold, only TWO wired engines — **BinDiff 4.3.0** (FE8J vs
+    FE8U: sim 0.967, conf 0.987, 8513 matches) + **diaphora** — despite 7 tools' outputs
+    in the repo. Pairs are **stitched transitively** across games (a pair sharing one
+    address with an existing row is merged in) — the principal correctness risk.
+  * **Confidence (free oracle estimate):** on the 1784 JP addrs in BOTH the library and
+    the byte-match funcmap, they **agree 99.38%** (1773/1784). Of 11 disagreements: 6
+    adjacent-fn slips (≤0x40), 5 genuine misalignments (one a classic bindiff
+    off-by-one-row). The ~0.6% error is real and NON-random (transitive-stitch / row-shift).
+  * **Value:** **6371 ROM-function** US↔JP mappings the funcmap does NOT have (+7 stray
+    RAM entries, filtered out) — i.e. region-different candidates, ≈ the entire remaining
+    region-different code front (~5942). All carry a US address; ~1980 also carry a name.
+  * **Spot-check:** 10/10 NEW entries resolved to a real US function at the library's US
+    addr with matching size; 2 confirmed byte-exact by decompilation. **0 wrong addresses.**
+  * **One real defect — STALE NAMES (not addresses):** ~2018 IDA names; 6/8 spot-checked
+    names differ from current US decomp (e.g. `UpdateNextSuspendSaveId`→`WriteSwappedSuspendSaveId`).
+    The US ADDRESS was correct every time.
+
+**Decision — INGEST as `reference/maps/funclib_us_jp.tsv`, reference-only, NEVER a build
+input.** Rules: (1) key on the **US address**, resolve `us_name_current` live from
+`../fireemblem8u` ELF/map (do NOT import the stale stored name); (2) per-entry
+**confidence tier** — `funcmap-agree` (cross-checks ground truth) / `funcmap-disagree`
+(the ~0.6% — quarantine/deprioritize) / `new-hint` (region-different, the ~6371-entry
+carve queue); (3) **"HINT, NOT TRUTH" banner** at file top; (4) filter to ROM `0x08`
+functions; (5) **`make compare` is the gate** — a hint is only ever a *carve target*;
+porting the named US C to the JP addr and getting `OK` is the byte-perfect proof, a FAIL
+auto-reverts via the parallel-carving fragment model. The library can never produce a
+wrong byte-perfect commit; it is purely a hint generator. This honors the owner's
+"confirm before use" exactly: the oracle confirms every single use.
+
+**Modern bindiff survey (to improve/refresh the map).** FE8J is the *easy end* of binary
+similarity (same game, same compiler agbcc/GCC2.95, same arch ARMv4T THUMB, only region
+delta) → classic graph-isomorphism diffs win cheaply; x86-trained ML embedding models
+(jTrans/PalmTree/Asm2Vec/SAFE/DeepBinDiff) solve harder problems we don't have → SKIP.
+Adopt: **QBinDiff** (Apache, Capstone ARM/Thumb, anchor-seeding via `--pass-user-defined`)
+as primary, **Google BinDiff 8 + BinExport 12** as proven cross-check, **Diaphora** +
+**Ghidra BSim/ghidriff** as recall boosters, **VexIR2Vec** reserved for residual tail.
+
+**Improved pipeline (supersedes the 2018 merge).** Export US ELF + `fe8j.i64` → seed
+QBinDiff with all **7739 byte-matched anchors** (+350 carved) pinned at sim 1.0 → apply
+the **address-order monotonicity filter** (already in-repo for data carving — kills the
+off-by-one-row slips that caused the library's 5 genuine errors) → blended confidence
+(QBinDiff sim + call-graph-neighbor agreement + BSim P-code cosine), calibrated against
+the 7739 pairs → **`make compare` validation**. Output = the confidence-ordered asm→C
+queue; replaces the 270 carved anchors still named `sub_XXXX` with real US sources.
+
+**Consulted:** none external needed — the workflow's make-compare-grounded cross-check
+(99.38% vs funcmap) + IDA spot-checks are stronger evidence than a second AI opinion.
+
+**Status:** Investigation done; report committed (`docs/bindiff-investigation.md`). P0
+ingest (`scripts/ingest_funclib.py` → `reference/maps/funclib_us_jp.tsv`) in flight
+(P8). QBinDiff anchor-seeded pipeline = P1 follow-up. NONMATCHING infra (separate
+investigation) is the *home* for the ported C the hints produce.
+## D26 — ADOPT NON_MATCHING C as the readability tier above descriptive asm (2026-06-09)
+
+**Context.** FE decomp projects (and the wider community) ship readable C for functions
+that don't byte-match yet, without regressing the sha1 oracle. FE8J carves hard region-
+different functions as **descriptive asm** (`asm/<fn>.s`, gbadisasm, byte-perfect) — the
+FE-family INCLUDE_ASM-equivalent, but not human-readable. NON_MATCHING C is the quality
+tier *between* descriptive-asm (have) and matching-C (goal). Full design + community
+survey: `docs/nonmatching.md`. (CLAUDE.md already accepts descriptive asm as "real
+source", so this is an ENHANCEMENT, not a goal change.)
+
+**Investigation (make-compare-grounded, verified against live repos).**
+  * **fireemblem8u uses NO `INCLUDE_ASM` macro** (`grep -rn INCLUDE_ASM ../fireemblem8u`
+    = 0 hits). Non-matching is an **in-function `#if NONMATCHING` toggle**; the default
+    build takes the matching branch; the rare hard case is a whole `__attribute__((naked))`
+    fn with one `asm(".syntax unified"...)` body. Near-100% matched (29 files / 49 uses).
+  * **The oracle build NEVER defines NONMATCHING/MODERN** (0 hits in Makefile/*.mk) —
+    `calcfunc.sh` only *counts* `#if NONMATCHING`, never flips the build. This is the
+    exact "structurally can't fake a match" invariant.
+  * **StanHash/fe8 + fireemblem6j** gate it via a `MODERN` prelude block:
+    `#if defined(MODERN)&&MODERN → #define NONMATCHING 1 / #define BUGFIX 1`. FE8J's
+    `include/global.h:46` already *references* MODERN but lacks the defining block.
+  * Community convergence (SA2 `NONMATCH`+`asm/non_matching/*.inc`; pokeemerald
+    `#ifndef NONMATCHING`+incbin; N64 `GLOBAL_ASM`/`INCLUDE_ASM` + decomp.dev auto-strip
+    of `.NON_MATCHING` from the match %): **oracle on byte-perfect source + a SEPARATE,
+    non-checksummed C build; "decompiled" ≠ "matched".**
+
+**Decision — ADOPT, reusing fireemblem8u's convention, with a file/build-level split for
+the asm-backed functions.** (1) Add the `MODERN ⇒ NONMATCHING 1 + BUGFIX 1` block to
+`include/global.h` (handles the US-style in-C matching aids — leave the ~6 inherited
+`#if NONMATCHING` files alone). (2) For the ~5942 asm-backed region-different functions,
+the byte source stays the existing `asm/<fn>.s`; the readable C goes in a NEW tracked dir
+**`src/nonmatching/<fn>.c`**, deliberately OUTSIDE the oracle `$(wildcard src/*.c)` set,
+compiled only by a separate **`make nonmatching`** target that NEVER links into `$(ELF)`
+and NEVER runs sha1. **Two structural locks make a fake match impossible:** (a)
+`src/nonmatching/*.o ∉ ALL_OBJECTS` so the linker never receives it; (b) `ldscript`
+has no `*(.text)` catch-all (only `/DISCARD/`), so an unplaced section orphans at VMA
+0x0 under `--no-check-sections`, never into `.rom`. To enter the oracle a function MUST
+have a `carved_rom` row naming its object's section at its real JP addr — which only the
+byte-matching object can satisfy, or `make compare` goes RED.
+
+**Pipeline & graduation.** gbadisasm asm → m2c seed (`nonmatchings/<fn>/base.c`,
+gitignored) → hand-cleaned `src/nonmatching/<fn>.c` (tracked, `make nonmatching` proves
+it builds) → permuter (score 0 = match) → graduate: move to `src/<fn>.c`, delete
+`asm/<fn>.s`, flip the carved_rom row `asm/<fn>.o → src/<fn>.o` (JP range unchanged),
+`make compare` → OK is the graduation oracle. The funclib map (D25) names the **US C
+function** to port as the NON_MATCHING body — turning "write C from scratch" into "port
+US, re-point offsets."
+
+**Metrics (honesty mandatory).** Three DISTINCT lines: (a) byte-perfect % (unchanged —
+asm carve already counts); (b) C-matched % (oracle `src/*.o` text syms only — NON_MATCHING
+C has no carved_rom row, so cannot inflate it); (c) NEW "C-decompiled" line counting
+`src/nonmatching/*.c`. No double-count at graduation. Plus two lints: extend
+`check_layout.py` to assert no carved_rom row references `src/nonmatching/`, and
+`make check-nonmatching` to assert every staging C has an `asm/<fn>.s` byte source.
+
+**Minimal first implementation (one PR, gated by make compare staying OK):** global.h
+block; `nonmatching` make target + `.PHONY`; create `src/nonmatching/`; ONE pilot fn
+carrying both halves (promote the existing readable
+`nonmatchings/efxmagic_coretail/banim-efxmagic-coretail.c`); the two lints + the
+calcprogress (c)-line.
+
+**Status:** Investigation done; report committed (`docs/nonmatching.md`). Infra+pilot
+implementation dispatched (P8). Composes with gbadisasm scaling (asm = byte source,
+unchanged) + funclib (US↔JP names the port source) + m2c first-pass (seed). This is the
+survey's P0.2 "ship WIP C without regressing make compare", done the fireemblem8u way.

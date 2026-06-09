@@ -8,6 +8,35 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
+- **SPRINT 2026-06-09 (P9 owner) — asm→C QUALITY-LAYER PROGRAM launched (D25 funclib + D26
+  NONMATCHING) + survey action list scheduled.** Two investigations landed + committed:
+  - **D25 — FE_GBA_Function_Library ingest (`docs/bindiff-investigation.md`).** Owner's
+    cross-region FE DB: **99.38% agreement** vs the byte-match funcmap (free oracle), **6371
+    ROM-function US↔JP hints** the funcmap can't have (≈ the whole region-different front),
+    10/10 spot-check correct. Built ~2018 from BinDiff 4.3 + diaphora @0.8 threshold +
+    transitive stitch → ~0.6% non-random error + STALE NAMES. **Ingest reference-only**
+    (`reference/maps/funclib_us_jp.tsv`), key on US *address* (resolve name live from
+    fireemblem8u), confidence-tiered, "hint not truth" banner, NEVER a build input — every
+    use gated by make compare. Improve via QBinDiff anchor-seeded (7739 anchors) +
+    monotonicity filter + oracle-validation (P1).
+  - **D26 — NON_MATCHING C tier (`docs/nonmatching.md`).** Readable C between descriptive-asm
+    (have) and matching-C (goal), the fireemblem8u way: `MODERN ⇒ NONMATCHING/BUGFIX` block in
+    global.h + a NEW tracked `src/nonmatching/<fn>.c` dir compiled ONLY by a separate
+    `make nonmatching` target (never linked, never sha1'd). Byte source stays `asm/<fn>.s`.
+    **Two structural locks** (object ∉ ALL_OBJECTS; ldscript has no `*(.text)` catch-all) make
+    a fake match impossible. 3 honest metrics (byte-perfect / C-matched / C-decompiled).
+  - **CRITICAL-PATH REMINDER (揪头发):** the armed final goal accepts *descriptive asm* as real
+    source, so **gbadisasm scaling (3 agents, range A/B/C over the 5942 backlog) is THE byte-
+    perfect critical path** — the quality layer (funclib/NONMATCHING/coddog/m2c) is additive
+    and must never starve it or touch the oracle.
+  - **SURVEY ACTION SCHEDULE (`docs/gba-decomp-survey.md`, user-approved, P9-driven):**
+    P0 = funclib ingest (D25, dispatched) · NONMATCHING infra+pilot (D26, dispatched) · coddog
+    region-same/different classifier (dispatched) · m2c default first-pass on gbadisasm asm.
+    P1 = US-`.o`-as-target asm-differ/objdiff diff · agbcc near-miss playbook · mapfile_parser
+    (first_diff/bss_check) · objdiff report.json in CI + decomp.dev app. P2 = NODEP=1 ·
+    mine FireEmblem7J/fe6/fe7 JP ports · mizuchi-benchmark techniques · multi-region-from-one-
+    tree arch eval (genuine fork → consult Copilot per D16). Tracked as tasks; integrate serially.
+
 - **SPRINT 2026-06-09 (P8-gbadisasm-carver) — gbadisasm DESCRIPTIVE-ASM LAYER LIVE (D23/D24):
   region-different code front is now mechanically carveable.** `scripts/carve_gbadisasm_asm.py`
   emits build-ready descriptive asm (real ARM/Thumb instructions, not incbin) for the ~6000
