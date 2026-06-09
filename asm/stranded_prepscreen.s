@@ -28,3 +28,13 @@ RegisterPrepUnitList:
 PrepGetUnitAmount:
 	.incbin "baserom.gba", 0x97654, 0x10
 
+	.section .text.s_08097664, "ax", %progbits
+@ PrepSetUnitAmount region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08097664..0x08097674
+	.thumb
+	.align 2, 0
+	.global PrepSetUnitAmount
+	.thumb_func
+PrepSetUnitAmount:
+	.incbin "baserom.gba", 0x97664, 0x10
+
