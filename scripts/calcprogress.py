@@ -131,8 +131,15 @@ out.append(f"0 symbols partially documented (0.0000%)")
 out.append(f"{sym_t - symbols} symbols undocumented ({pct(sym_t - symbols, sym_t)}%)")
 out.append("")
 out.append(f"{data_t} total bytes of data")
-out.append(f"{data_bytes} bytes of data in src ({pct(data_bytes, data_t)}%)")
-out.append(f"{data_t - data_bytes - banim - sound} bytes of data in data ({pct(data_t - data_bytes - banim - sound, data_t)}%)")
+# JP is region-different: its physical data can EXCEED the US-decomp total (extra font glyphs,
+# JP-only pointer tables, region-different layout + inter-object alignment). Once carved data
+# reaches the US total the data front is complete, so cap the percentage at 100.0 and the
+# remaining at 0 — otherwise the metric shows a confusing >100% / negative "data in data".
+# The true carved byte count is still printed verbatim; `make compare` (sha1) is the real oracle.
+data_src_pct = min(100.0, 100.0 * data_bytes / data_t) if data_t else 0.0
+data_remaining = max(0, data_t - data_bytes - banim - sound)
+out.append(f"{data_bytes} bytes of data in src ({data_src_pct:.4f}%)")
+out.append(f"{data_remaining} bytes of data in data ({pct(data_remaining, data_t)}%)")
 out.append(f"{banim} bytes of data in banim ({pct(banim, data_t)}%)")
 out.append(f"{sound} bytes of data in sound ({pct(sound, data_t)}%)")
 out.append(f"{fn_t} functions in total, {funcs} functions ({pct(funcs, fn_t)}%) have been decompiled.")
