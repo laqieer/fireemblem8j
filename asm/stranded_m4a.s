@@ -78,3 +78,13 @@ m4aSoundVSyncOff:
 m4aSoundVSyncOn:
 	.incbin "baserom.gba", 0xD5574, 0x3C
 
+	.section .text.s_080D5628, "ax", %progbits
+@ MPlayStart region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D5628..0x080D570C
+	.thumb
+	.align 2, 0
+	.global MPlayStart
+	.thumb_func
+MPlayStart:
+	.incbin "baserom.gba", 0xD5628, 0xE4
+
