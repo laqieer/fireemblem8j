@@ -28,3 +28,13 @@ ComputeBattleUnitEffectiveHitRate:
 CheckBattleUnitStatCaps:
 	.incbin "baserom.gba", 0x2BE6C, 0x104
 
+	.section .text.s_0802C428, "ax", %progbits
+@ ModifyUnitSpecialExp region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x0802C428..0x0802C46C
+	.thumb
+	.align 2, 0
+	.global ModifyUnitSpecialExp
+	.thumb_func
+ModifyUnitSpecialExp:
+	.incbin "baserom.gba", 0x2C428, 0x44
+
