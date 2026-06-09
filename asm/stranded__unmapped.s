@@ -68,3 +68,13 @@ InsertChildProcess:
 UnlinkProcess:
 	.incbin "baserom.gba", 0x2D30, 0x48
 
+	.section .text.s_08003038, "ax", %progbits
+@ ProcCmd_DELETE region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08003038..0x08003044
+	.thumb
+	.align 2, 0
+	.global ProcCmd_DELETE
+	.thumb_func
+ProcCmd_DELETE:
+	.incbin "baserom.gba", 0x3038, 0xC
+
