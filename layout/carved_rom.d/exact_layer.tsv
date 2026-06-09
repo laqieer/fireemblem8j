@@ -260,3 +260,4 @@
 0A2D10	0A2D24	src/exact_080a2d10.o(.text)	exact_080a2d10(run): IsDivinationPortrait1
 097EB8	097EE0	src/exact_08097eb8.o(.text)	exact_08097eb8(run): PrepMenuDescOnInit, PrepMenuDescOnParse, PrepMenuDescOnDraw
 09A6AC	09A6E0	src/exact_0809a6ac.o(.text)	exact_0809a6ac(run): PrepItemScreen_OnHBlank
+09F7CC	09F80C	src/exact_0809f7cc.o(.text)	exact_0809f7cc(run): PrepItemSupply_OnHBlank
