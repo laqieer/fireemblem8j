@@ -135,3 +135,4 @@
 0A8278	0A82AC	src/exact_080a8278.o(.text)	exact_080a8278(run): GGM_IsAnyCharacterKnown
 0A84CC	0A858C	src/exact_080a84cc.o(.text)	exact_080a84cc(run): JudgeGameRankSaveData
 0A8914	0A89C8	src/exact_080a8914.o(.text)	exact_080a8914(run): IsSoundRoomSongUnlocked, UnlockSoundRoomSong
+0A8A70	0A8AEC	src/exact_080a8a70.o(.text)	exact_080a8a70(run): ModifySaveLinkArenaStruct2A, ModifySaveLinkArenaStruct2B

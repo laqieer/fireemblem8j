@@ -790,7 +790,6 @@ MapUnitC_SetGfxNeedsUpdate	080BFED4	thumb	worldmap_main
 Proc_BlockEachMarked	08002F3C	thumb	worldmap_main
 ProcScr_Config_WorldMap	08AAFB64	data	worldmap_main
 ProcScr_WorldmapStatusUi	08AC2278	data	worldmap_main
-ModifySaveLinkArenaStruct2B	080A8AA8	thumb	cg
 GetTileIndex	08000F54	thumb	fontgrp
 ProcScr_EfxHitQuakePure	085E3A64	data	banim-efxbattle
 ProcScr_efxPierceNormalEffect	086034BC	data	banim-efxhit

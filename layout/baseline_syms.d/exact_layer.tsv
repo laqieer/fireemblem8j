@@ -72,3 +72,5 @@ SramOffsetToAddr	080A7918	thumb	exact_080a7b58
 WriteGlobalSaveInfo	080A77EC	thumb	exact_080a81ec
 LoadAndVerifySoundRoomData	080A8890	thumb	exact_080a8914
 WriteSoundRoomSaveData	080A88E8	thumb	exact_080a8914
+LoadAndVerfyLinkArenaStruct2	080A89EC	thumb	exact_080a8a70
+WriteLinkArenaStruct2	080A8A44	thumb	exact_080a8a70
