@@ -64,3 +64,4 @@ PlaySeFunc	08014BC8	thumb	masked_08014bb0
 Nop_Bmmap_0	08019860	thumb	masked_08019864
 gPlaySt	0202BCEC	data	masked_0802257c
 gActionData	0203A954	data	masked_080228c4
+gActionData	0203A954	data	masked_08022930

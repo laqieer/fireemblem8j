@@ -50,3 +50,4 @@
 019864	019914	src/masked_08019864.o(.text)	masked_08019864(run): DisplayMovementViewTile
 02257C	02259C	src/masked_0802257c.o(.text)	masked_0802257c(run): MapMenu_IsSuspendCommandAvailable
 0228C4	0228D8	src/masked_080228c4.o(.text)	masked_080228c4(run): RescueSelection_OnSelect
+022930	022954	src/masked_08022930.o(.text)	masked_08022930(run): DropSelection_OnSelect
