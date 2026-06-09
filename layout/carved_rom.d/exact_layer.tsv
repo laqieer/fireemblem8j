@@ -100,3 +100,4 @@
 0144E0	014510	src/exact_080144e0.o(.text)	exact_080144e0(run): StartPaletteAnimatorReverse, StartPaletteAnimatorNormal
 014574	0145DC	src/exact_08014574.o(.text)	exact_08014574(run): PutTmRectSequential
 01492C	014944	src/exact_0801492c.o(.text)	exact_0801492c(run): Bzero
+014944	01496C	src/exact_08014944.o(.text)	exact_08014944(run): Memset8, Memset16
