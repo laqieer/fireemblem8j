@@ -4,3 +4,4 @@
 0203E1DC	ewram	src/masked_080599ac.o(ewram_data)	masked_080599ac ewram_data
 0203A4D0	ewram	src/masked_0802a2a4.o(ewram_data)	masked_0802a2a4 ewram_data
 0203A608	ewram	src/masked_0802c27c.o(ewram_data)	masked_0802c27c ewram_data
+0202E4DC	ewram	src/masked_08019864.o(ewram_data)	masked_08019864 ewram_data

@@ -36,3 +36,5 @@ SaveDungeonState
 UnitApplyWorkingMovementScript
 gActionData
 ForceScreenToBlack
+gBmMapMovement
+gBmMapRange
