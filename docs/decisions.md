@@ -549,7 +549,7 @@ name) and the US decomp's named RAM symbols.
 **Decision:** harvest a curated `reference/maps/` set (issue #32, PRs #33/#34/#35) — **reference data, NOT
 build inputs** (nothing reads it from the build, so `make compare` is unaffected): the FEBuilder ROM map
 (`febuilder_rom_us_jp.tsv`, 302 rows), the 9 resolved dynamic `FindROMPointer` pointers
-(`febuilder_dynamic.tsv`), and a US↔JP RAM map (`ram_us_jp.tsv`, 698 rows). See `reference/README.md`.
+(`febuilder_dynamic.tsv`), and a US↔JP RAM map (`ram_us_jp.tsv`, 697 data rows). See `reference/README.md`.
 
 **Correctness discipline (the plan was Copilot-reviewed; review caught real data bugs, all fixed):**
 - Strict value classifier — never blindly `+0x08000000`; skip non-address constants/counts/offsets/sentinels

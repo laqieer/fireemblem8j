@@ -12,7 +12,7 @@ better-documented US side. (Tracked in issue #32; see `docs/decisions.md` D15.)
 |---|---|---|---|
 | `febuilder_rom_us_jp.tsv` | 302 | `name  jp_vma  us_vma  region  exact_symbol  nearest_symbol_off  source` | FEBuilderGBA ROM table/struct base addresses, joined US↔JP by field name, cross-walked to US-decomp symbols. |
 | `febuilder_dynamic.tsv` | 9 | `name  jp_vma  us_vma  region  exact_symbol  nearest_symbol_off  candidate_offsets_jp  source` | The 9 FEBuilder `FindROMPointer` (dynamic) entries, resolved against the real ROMs by pointer dereference. |
-| `ram_us_jp.tsv` | 698 | `us_symbol  us_addr  jp_addr  region  kind  source` | US↔JP RAM (EWRAM/IWRAM) map: US-decomp `nm` RAM symbols + FEBuilder `workmemory_*` JP/US pairs. |
+| `ram_us_jp.tsv` | 697 | `us_symbol  us_addr  jp_addr  region  kind  source` | US↔JP RAM (EWRAM/IWRAM) map: US-decomp `nm` RAM symbols + FEBuilder `workmemory_*` JP/US pairs. (First non-`#` line is the column header.) |
 | `extract_febuilder_map.py` | — | (in `scripts/`) | Reproducible extractor for the ROM map (re-run to regenerate). `build_ram_us_jp.py` (in `reference/maps/`) builds the RAM map. |
 
 Addresses are VMAs (`0x08…`/`0x09…` ROM, `0x02…`/`0x03…` RAM). `region` is **byte-evidence-based**
