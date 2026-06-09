@@ -13,6 +13,21 @@
 #include "variables.h"
 #include "functions.h"
 
+/* Two-build separation: the ORACLE build (make compare) defines NEITHER
+ * MODERN nor NONMATCHING, so the matching/asm branch is always selected and
+ * the compared ROM is byte-exact. `make MODERN=1` is a separate, NON-oracle,
+ * NON-sha1 build that compiles the readable C for portability/equivalence. */
+#if defined(MODERN) && MODERN
+#  ifdef NONMATCHING
+#    undef NONMATCHING
+#  endif
+#  ifdef BUGFIX
+#    undef BUGFIX
+#  endif
+#  define NONMATCHING 1
+#  define BUGFIX 1
+#endif
+
 // helper macros
 
 #define EWRAM_ENTRY ((void *)__ewram_start)

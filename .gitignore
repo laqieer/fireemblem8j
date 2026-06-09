@@ -15,6 +15,9 @@
 # Hand-written assembly lives in asm/ and is tracked.
 src/*.s
 src/data/*.s
+# NON_MATCHING staging (D26): the readable C in src/nonmatching/*.c is tracked,
+# but the agbcc .s intermediate from `make nonmatching` is a build artifact.
+src/nonmatching/*.s
 
 # Carve glue GENERATED from the layout/ manifests by scripts/gen_layout.py and
 # regenerated at build time (Makefile). NOT committed, so parallel carves never

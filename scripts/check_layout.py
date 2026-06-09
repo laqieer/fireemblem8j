@@ -28,6 +28,35 @@ def tracked_files():
     return set(out.splitlines())
 
 
+def check_nonmatching_isolation():
+    """ORACLE-INTEGRITY (D26): NON_MATCHING staging C (src/nonmatching/<fn>.c)
+    must NEVER enter the make-compare oracle. The oracle links exactly the
+    objects named in carved_rom*.tsv rows, so a carved_rom row referencing an
+    object under src/nonmatching/ would place a NON_MATCHING object's bytes into
+    the compared ROM -- exactly the fake-match the design forbids. Assert no
+    carved_rom row references such an object."""
+    carved_rom = ["layout/carved_rom.tsv"] + sorted(glob.glob("layout/carved_rom.d/*.tsv"))
+    offenders = []
+    for p in carved_rom:
+        if not os.path.exists(p):
+            continue
+        for i, ln in enumerate(open(p), 1):
+            if ln.lstrip().startswith("#"):
+                continue
+            if re.search(r"src/nonmatching/\S+\.o", ln):
+                offenders.append((p, i, ln.strip()))
+    if offenders:
+        print(f"ORACLE INTEGRITY VIOLATION: {len(offenders)} carved_rom row(s) reference "
+              f"an object under src/nonmatching/ -- non-matching C must NOT be placed in "
+              f"the oracle layout (it would corrupt the make-compare ROM):")
+        for p, i, ln in offenders[:40]:
+            print(f"  {p}:{i}: {ln}")
+        print("\nFix: remove the row. NON_MATCHING C is prove-builds-only (make nonmatching); "
+              "the oracle byte source stays asm/<fn>.s.")
+        return 1
+    return 0
+
+
 def main():
     tracked = tracked_files()
     manifests = (
@@ -88,11 +117,16 @@ def main():
         if len(frag_untracked) > 40:
             print(f"  ... +{len(frag_untracked) - 40} more")
 
+    # ORACLE-INTEGRITY: never let NON_MATCHING staging C enter the oracle layout.
+    nonmatching_rc = check_nonmatching_isolation()
+
     if missing or untracked or frag_untracked:
         print("\nFix: commit/regenerate the missing source(s)/fragment(s), or remove the dangling rows.")
         return 1
+    if nonmatching_rc:
+        return nonmatching_rc
     print(f"layout consistency OK: all {len(refs)} layout-referenced objects + their fragments "
-          f"are git-tracked")
+          f"are git-tracked; no src/nonmatching/ object in the oracle layout")
     return 0
 
 

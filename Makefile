@@ -65,6 +65,15 @@ C_OBJECTS   := $(CFILES:.c=.o)
 ASM_OBJECTS := $(ASM_S_FILES:.s=.o) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS)
 
+# --- NON_MATCHING staging (D26): readable C that DOCUMENTS a region-different
+# function whose byte source is still asm/<fn>.s. PROVE-BUILDS ONLY -- NEVER
+# linked into $(ELF), NEVER checksummed by `make compare`. `$(wildcard src/*.c)`
+# above does NOT recurse into src/nonmatching/, so the oracle excludes these for
+# free; and NONMATCH_OBJECTS is deliberately kept OUT of ALL_OBJECTS so $(ELF)
+# and `compare` can never see them. See docs/nonmatching.md.
+NONMATCH_CFILES  := $(wildcard src/nonmatching/*.c)
+NONMATCH_OBJECTS := $(NONMATCH_CFILES:.c=.o)
+
 #### Targets ####
 
 all: $(ROM)
@@ -120,7 +129,7 @@ ghidra-db: $(ELF)
 ghidra-cp:
 	scripts/ghidra/clone_copilot_project.sh
 
-.PHONY: all compare clean check layout ida-db ghidra-db ghidra-cp
+.PHONY: all compare clean check check-nonmatching nonmatching layout ida-db ghidra-db ghidra-cp
 
 asm/baserom.o: baserom.gba
 
@@ -128,11 +137,26 @@ $(ASM_OBJECTS): %.o: %.s
 	$(AS) $(ASFLAGS) -g $< -o $@
 
 # C compile pipeline (agbcc): cpp -> iconv UTF-8->CP932 -> agbcc -> as.
-$(C_OBJECTS): %.o: %.c
+# NONMATCH_OBJECTS reuse this exact recipe but are NOT in $(C_OBJECTS) /
+# $(ALL_OBJECTS), so they compile under `make nonmatching` yet never link.
+$(C_OBJECTS) $(NONMATCH_OBJECTS): %.o: %.c
 	$(CPP) $(CPPFLAGS) $< | iconv -f UTF-8 -t CP932 | $(CC1) $(CC1FLAGS) -o $*.s
 	printf '\t.text\n\t.align 2, 0\n' >> $*.s
 	$(AS) $(ASFLAGS) $*.s -o $@
 	@$(PYTHON) scripts/apply_patches.py $@
+
+# --- NON_MATCHING staging target (D26) ---------------------------------------
+# Compile the readable staging C purely to PROVE IT BUILDS. This target is NOT a
+# dependency of $(ELF) or `compare`: NONMATCH_OBJECTS are absent from ALL_OBJECTS
+# and the ldscript has no `*(.text)` catch-all, so a non-matching object cannot
+# enter the oracle ROM. The byte source remains the existing asm/<fn>.s.
+nonmatching: $(NONMATCH_OBJECTS)
+	@echo "NON_MATCHING staging: PROVE-BUILDS ONLY -- compiled, NOT linked, NOT checksummed (oracle untouched)."
+
+# Lint: every src/nonmatching/<fn>.c must have a committed byte source asm/<fn>.s
+# (a readable staging body cannot exist for a function with no oracle byte source).
+check-nonmatching:
+	$(PYTHON) scripts/check_nonmatching.py
 
 $(ELF): $(ALL_OBJECTS) $(LDSCRIPT)
 	$(LD) --no-check-sections -T $(LDSCRIPT) -Map $(MAP) -o $@ $(ALL_OBJECTS)
@@ -145,6 +169,9 @@ clean:
 	# leaves an ORPHAN .o that the asm/*.s wildcard can't see, so a wildcard-only clean keeps
 	# it and the local build false-greens while CI's fresh checkout fails. Remove orphans too.
 	$(RM) $(ALL_OBJECTS) asm/*.o src/*.o $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
+	# NON_MATCHING staging objects + .s intermediates live one dir deeper (src/nonmatching/),
+	# which `src/*.o` does not match -- remove them explicitly so a clean rebuild is durable.
+	$(RM) $(NONMATCH_OBJECTS) $(NONMATCH_CFILES:.c=.s) src/nonmatching/*.o
 
 # Fast repo-consistency lint (no toolchain / no ROM needed): every object the build links
 # has a git-tracked source. Catches the "layout row without a committed .s/.c" class that

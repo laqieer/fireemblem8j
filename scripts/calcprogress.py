@@ -146,5 +146,12 @@ out.append(f"{banim} bytes of data in banim ({pct(banim, jp_data_total)}%)")
 out.append(f"{sound} bytes of data in sound ({pct(sound, jp_data_total)}%)")
 out.append(f"{fn_t} functions in total, {funcs} functions ({pct(funcs, fn_t)}%) have been decompiled.")
 out.append("0 functions are marked as unmatched.")
+# (c) C-decompiled (NON-matching): readable staging C in src/nonmatching/*.c (D26).
+# Reported on its OWN line so it does NOT inflate the byte-perfect % or the
+# C-matched % above -- these functions are DOCUMENTED, NOT byte-matched (their
+# bytes still come from asm/<fn>.s, which already counts in code-bytes/functions).
+nonmatch_c = len(glob.glob("src/nonmatching/*.c"))
+out.append(f"{nonmatch_c} functions staged as non-matching C "
+           f"({pct(nonmatch_c, fn_t)}% of {fn_t}) -- documented, NOT byte-matched.")
 
 sys.stdout.write("\n".join(out) + "\n")
