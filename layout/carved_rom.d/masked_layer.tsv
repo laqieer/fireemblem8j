@@ -41,3 +41,4 @@
 039314	0393D8	src/masked_08039314.o(.text)	masked_08039314(run): GetRecordDungeonValueByUiLabel
 01A198	01A1B8	src/masked_0801a198.o(.text)	masked_0801a198(run): SetWorkingMoveCosts
 01A508	01A5C0	src/masked_0801a508.o(.text)	masked_0801a508(run): UnitApplyWorkingMovementScript
+029060	02908C	src/masked_08029060.o(.text)	masked_08029060(run): CanUnitUseTorchItem

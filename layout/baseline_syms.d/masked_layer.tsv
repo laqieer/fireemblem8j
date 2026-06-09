@@ -52,3 +52,4 @@ gDungeonState	03001798	data	masked_08039314
 gWorkingTerrainMoveCosts	03004B50	data	masked_0801a198
 gActionData	0203A954	data	masked_0801a508
 gBmMapHidden	0202E4E8	data	masked_0801a508
+gPlaySt	0202BCEC	data	masked_08029060
