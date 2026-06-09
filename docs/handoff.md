@@ -8,6 +8,40 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
+- **SPRINT 2026-06-09 (P9 fan-out, interactive MCP session) — data 84.89% -> 85.2038%
+  (+41.6KB, 1326 fns +3), pushed `e2e9c6e`.** Ran as a 3-P8 worktree-isolated team,
+  lead serial-integrated (see decisions.md D19). Landed on main:
+  - **Recursive `carve_data_refs.py` (fixed) — +41.6KB / 457 region-different objects.**
+    Two-pass deterministic sizing: PASS 1 accepts only 4-aligned real object starts
+    (rejects Thumb-pointer/spurious literal matches), PASS 2 sizes by interior-pointer
+    ABSORPTION (a later object strictly inside [O, O+us_size) is a sub-field alias, folded
+    into O for its exact JP size) capped by the next real object — no more US-size-cap
+    overlaps. Now **fragment-safe** (rows -> `layout/carved_rom.d/data_refs_recursive.tsv`;
+    carved-set unions monolith + all OTHER task fragments via `layout_frag.read_all`),
+    idempotent, `sh_addralign==1` (no ld pad). `--min` lowered 256->64 (yield is many small
+    region-different structs: gFontgrp/voicegroup/UnitDef_*/EventScr_*/Ch*Events). **CEILING
+    of this method: ~41.6KB** — the big ~2MB graphics are UNREACHABLE (leaf graphics are
+    unnamed US symbols, so no code pointer names them; need a per-subsystem pointer-table
+    carver — wave-2 in flight as `scripts/carve_graphics_subsys.py`).
+  - **`code_8086934` hand-decompiled (+3 fns).** Region-different CODE is now carvable in an
+    interactive MCP session. The 3 JP funcs @ 0x8086900/0x8086918/0x80869B0 are US
+    `eventinfo.c`'s CheckFlag82/GetBattleQuoteEntry/GetDefeatTalkEntry (NOT the US filename
+    `code_8086934.c`'s sepia fn — **derive US<->JP by call-graph, never by filename**).
+    They are instruction-isomorphic to US, differing only in 4 pointer literals resolved by
+    baseline_syms binding at JP addrs (gBattleTalkList 0x08A5E7E0, gDefeatTalkList 0x08A5EE70,
+    GetEventTriggerState, BattleIsTriangleAttack). LESSON: a "region-different no-run" TU can
+    still be pointer-only-different once correctly LOCATED + ATTRIBUTED — check before
+    assuming logic-different.
+  - **RE toolchain confirmed live + method:** IDA MCP (`idb_open` fe8j.i64, `decompile`/
+    `disasm`/`func_query`/`xrefs_to` with project symbols resolved) + Ghidra MCP. Pin a
+    region-different fn by **xref from a ported neighbor** (e.g. bindingblade's
+    efxHurtmutOBJ_Loop = JP sub_805D038/186B, the unique caller of NewEfxArrowOBJ@0x805d0f4).
+    Use the SHARED IDA MCP worker for concurrent RE agents; do NOT run headless
+    `decompile_addr.py` concurrently (exclusive .i64 lock). Reaped 16 leaked idalib workers
+    (1.4GB) that held the sidecar lock and blocked `idb_open` — **reap stale idalib_server
+    workers at session start** (kill by PID, not `pkill -f idalib_server` which self-matches).
+  - **Wave-2 in flight:** banim-efxmagic-bindingblade (RE, genuinely logic-different: JP 186B
+    vs US 52B), per-subsystem graphics carver (the 2MB frontier). gespenst queued.
 - **DATA FRONTIER (2026-06-08) — data carved 0.05% -> 58.58%, symbols 3.8% -> 15.96%,
   478 objects, ROM ~47% carved (gen_layout), all durable.** Data is 94% of the ROM
   (13.3 MB). Three harvesters now capture region-same data mechanically:
