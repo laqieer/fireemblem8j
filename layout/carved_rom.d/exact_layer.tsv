@@ -334,3 +334,4 @@
 086FB4	087024	src/exact_08086fb4.o(.text)	exact_08086fb4(run): IsChar0AlivePlayerUnit, IsChar0AlivePlayerUnit_02, IsChar0AlivePlayerUnit_03...
 087134	087154	src/exact_08087134.o(.text)	exact_08087134(run): IsChar0AlivePlayerUnit_25, IsChar0AlivePlayerUnit_26
 087184	087194	src/exact_08087184.o(.text)	exact_08087184(run): DoesChar0ExistAsPlayerUnit
+087220	087238	src/exact_08087220.o(.text)	exact_08087220(run): AreAllEnemyUnitsDead
