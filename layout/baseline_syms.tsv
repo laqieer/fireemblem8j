@@ -427,7 +427,6 @@ gUnk_Sio_9	0203DAC0	thumb	sio_bat
 gUnk_47	03001838	data	sio_battlemap
 SetBackgroundScreenSize	08000FFC	thumb	titlescreen
 BgAffineSetOpAnim	080CBAFC	thumb	titlescreen
-BlendPaletteToColor	080CB8BC	thumb	titlescreen
 Title_SetBg2AffineScale	080CA318	thumb	titlescreen
 SetBackgroundMapDataOffset	08000FB4	thumb	titlescreen
 gGfx_Titlescreen_3	08B48D58	data	titlescreen
