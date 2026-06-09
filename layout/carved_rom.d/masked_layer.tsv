@@ -204,3 +204,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 049694	049744	src/masked_08049694.o(.text)	masked_08049694(run): Sio_SortPlayersByScore
 043CDC	043D0C	src/masked_08043cdc.o(.text)	masked_08043cdc(run): AreAllLinkArenaTeamsSelected
 0B38B4	0B38D4	src/masked_080b38b4.o(.text)	masked_080b38b4(run): CountTotalSoundRoomSongs
+0B38D4	0B390C	src/masked_080b38d4.o(.text)	masked_080b38d4(run): CountSecretSoundRoomSongs
