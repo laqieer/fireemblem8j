@@ -2,3 +2,4 @@ GetTileIndex
 SetBackgroundMapDataOffset
 SetNextVCount
 SetMainUpdateRoutine
+MaybeResetSomePal

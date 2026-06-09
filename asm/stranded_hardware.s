@@ -58,3 +58,13 @@ SetMainUpdateRoutine:
 CopyTilemapScreen:
 	.incbin "baserom.gba", 0x14EC, 0x1C
 
+	.section .text.s_0800169C, "ax", %progbits
+@ MaybeResetSomePal region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x0800169C..0x080016B8
+	.thumb
+	.align 2, 0
+	.global MaybeResetSomePal
+	.thumb_func
+MaybeResetSomePal:
+	.incbin "baserom.gba", 0x169C, 0x1C
+
