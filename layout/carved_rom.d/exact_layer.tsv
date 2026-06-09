@@ -274,3 +274,4 @@
 097988	0979B8	src/exact_08097988.o(.text)	exact_08097988(run): PrepGetLatestUnitIndex
 097C94	097CFC	src/exact_08097c94.o(.text)	exact_08097c94(run): PrepAutoCapDeployUnits
 002B58	002BCC	src/exact_08002b58.o(.text)	exact_08002b58(run): Proc_Init
+002DEC	002E14	src/exact_08002dec.o(.text)	exact_08002dec(run): Proc_Find
