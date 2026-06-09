@@ -81,3 +81,6 @@ StartShopScreen	080B8DC8	thumb	exact_080b8d88
 StartShopScreen	080B8DC8	thumb	exact_080b8d98
 StartShopScreen	080B8DC8	thumb	exact_080b8da8
 StartShopScreen	080B8DC8	thumb	exact_080b8db8
+ShouldDisplayUpArrow	080BA274	thumb	exact_080b9f08
+DisplayUiVArrow	080B9F7C	thumb	exact_080b9f08
+ShouldDisplayDownArrow	080BA290	thumb	exact_080b9f08

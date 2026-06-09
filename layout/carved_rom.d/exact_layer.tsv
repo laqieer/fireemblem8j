@@ -144,3 +144,4 @@
 0B8DA8	0B8DB8	src/exact_080b8da8.o(.text)	exact_080b8da8(run): StartSecretShopScreen
 0B8DB8	0B8DC8	src/exact_080b8db8.o(.text)	exact_080b8db8(run): StartArmoryScreen2
 0B9A3C	0B9A5C	src/exact_080b9a3c.o(.text)	exact_080b9a3c(run): ClearGoldBoxTextTm2Line
+0B9F08	0B9F40	src/exact_080b9f08.o(.text)	exact_080b9f08(run): DisplayShopUiArrows
