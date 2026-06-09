@@ -465,7 +465,6 @@ gEfxSplitedColorBufD	0201FA08	data	banim-efxflashunit
 gEfxSplitedColorBufE	0201FA38	data	banim-efxflashunit
 gEfxSplitedColorBufF	0201FA68	data	banim-efxflashunit
 EfxAdvanceFrameLut	08056890	thumb	banim-efxflashunit
-EfxDecodeSplitedPalette	08073AE8	thumb	banim-efxflashunit
 EfxCreateFrontAnim	080564F0	thumb	banim-efxmagic-breath
 ProcScr_efxDarkbreathOBJ	085FF6A8	data	banim-efxmagic-breath
 AnimScr_DarkBreath_Close	08612650	data	banim-efxmagic-breath
