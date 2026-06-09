@@ -114,3 +114,4 @@ CheckInLinkArena
 UnsetBmStLinkArenaFlag
 Sio_SortPlayersByScore
 gSoundRoomTable
+GetBgXOffset

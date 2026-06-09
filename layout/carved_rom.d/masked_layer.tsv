@@ -210,3 +210,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 08B528	08B54C	src/masked_0808b528.o(.text)	masked_0808b528(run): SetHelpBoxInitPosition
 0B2A38	0B2AC0	src/masked_080b2a38.o(.text)	masked_080b2a38(run): BgAffinScalingHighPrecision, BgAffinAnchoringHighPrecision
 0B2CC4	0B2D1C	src/masked_080b2cc4.o(.text)	masked_080b2cc4(run): FadeInOut_DisableGfx
+0B34A0	0B3538	src/masked_080b34a0.o(.text)	masked_080b34a0(run): GetBgXOffset, GetBgYOffset
