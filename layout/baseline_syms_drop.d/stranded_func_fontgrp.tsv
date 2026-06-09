@@ -4,3 +4,4 @@ InitTextDb
 Text_Skip
 PutText
 InitSpriteText
+PutNumber

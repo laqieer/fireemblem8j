@@ -228,3 +228,13 @@ DrawSpecialCharGlyph_old:
 PutSpecialChar:
 	.incbin "baserom.gba", 0x4A14, 0x3C
 
+	.section .text.s_08004A90, "ax", %progbits
+@ PutNumber region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08004A90..0x08004A9C
+	.thumb
+	.align 2, 0
+	.global PutNumber
+	.thumb_func
+PutNumber:
+	.incbin "baserom.gba", 0x4A90, 0xC
+
