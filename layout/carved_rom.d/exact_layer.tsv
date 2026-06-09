@@ -120,3 +120,4 @@
 0A8CEC	0A8D30	src/exact_080a8cec.o(.text)	exact_080a8cec(run): IsChapterStatsValid, GetNextChapterStatsSlot
 0A9320	0A9334	src/exact_080a9320.o(.text)	exact_080a9320(run): PidStatsSubFavval08
 0A9334	0A9348	src/exact_080a9334.o(.text)	exact_080a9334(run): PidStatsSubFavval100
+0A95B0	0A95D4	src/exact_080a95b0.o(.text)	exact_080a95b0(run): GetNewPlaythroughId
