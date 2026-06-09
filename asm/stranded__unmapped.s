@@ -188,3 +188,13 @@ __sfp:
 memchr:
 	.incbin "baserom.gba", 0xD9858, 0x80
 
+	.section .text.s_080D98D8, "ax", %progbits
+@ memmove region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D98D8..0x080D9960
+	.thumb
+	.align 2, 0
+	.global memmove
+	.thumb_func
+memmove:
+	.incbin "baserom.gba", 0xD98D8, 0x88
+
