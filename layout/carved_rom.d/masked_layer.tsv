@@ -30,3 +30,4 @@
 035538	035554	src/masked_08035538.o(.text)	masked_08035538(run): SubtitleHelpDarkener_FadeIn
 0365D8	03660C	src/masked_080365d8.o(.text)	masked_080365d8(run): GetBattleForecastPanelSide
 036E0C	036E4C	src/masked_08036e0c.o(.text)	masked_08036e0c(run): GetFactionBattleForecastFramePalette
+015D3C	015D90	src/masked_08015d3c.o(.text)	masked_08015d3c(run): StoreAdjustedCameraPositions
