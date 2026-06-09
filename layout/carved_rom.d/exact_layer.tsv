@@ -266,3 +266,4 @@
 0333CC	0333DC	src/exact_080333cc.o(.text)	exact_080333cc(run): PrepScreenProc_InitMapMenu
 09A5F4	09A61C	src/exact_0809a5f4.o(.text)	exact_0809a5f4(run): CountSetBits
 09A61C	09A650	src/exact_0809a61c.o(.text)	exact_0809a61c(run): GetNthSetBitMask
+09A650	09A674	src/exact_0809a650.o(.text)	exact_0809a650(run): GetFirstSetBitIndex
