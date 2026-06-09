@@ -77,3 +77,4 @@ SetFaceDisplayBitsById
 SetFaceBlinkControl
 MapAnim_AdvanceBattleRound
 gManimSt
+MapEventcallFx2_HBlankWobble
