@@ -607,3 +607,45 @@ review's value was confined to no-oracle artifacts, which a targeted self-check 
 earlier "Copilot-review every PR" working rule (which still applies opt-in for risky no-oracle changes).
 
 **Status:** Adopted 2026-06-09 (discussed with + chosen by the repo owner).
+
+## D17 — RE MCP servers: fix flaky startup (ida path-on-startup + ghidra cold-start timeout) (2026-06-09)
+
+**Context:** A session reported `ghidra: failed — MCP error -32000: Connection closed`; a fresh
+`claude mcp list` reported the *opposite* (`ida` failed, `ghidra` OK). Looked like a random race; it
+wasn't. Isolated, repeated `claude mcp get` timing made it deterministic:
+- **`ida`** failed *every* round at a fixed ~12.5s. Its registered command had drifted to
+  `idalib-mcp --stdio <…>/tools/ida/fe8j.i64` — passing the 115 MB DB on the supervisor command line,
+  which `docs/reverse-engineering.md` (§Usage) explicitly forbids: the supervisor tries to open a DB the
+  long-lived idalib worker already holds → stalls ~12s → fails.
+- **`ghidra`** connected every isolated round but at a **~16–19s cold start** (`--wait-for-analysis`).
+  That's close to the client's startup window, so at *session* launch — both servers spawned at once,
+  with `ida`'s failing 12s DB-open hogging CPU/IO, plus a leftover `fe8j.lock` from a previously
+  SIGKILL'd JVM — ghidra's cold start overran the startup timeout → "Connection closed". The two servers
+  don't contend with each other (different resources); each collided with *its own* leftover/slow start.
+
+**Decision (all verified, `make compare` untouched — env/registration only):**
+1. **Re-register `ida` WITHOUT the `.i64` path** — canonical per the install doc
+   (`claude mcp add ida -e IDADIR=… -- …/idalib-mcp --stdio`). Supervisor starts in <0.5s; the DB is
+   opened on demand by `idb_open`, which adopts the existing worker. (Was 12.5s *fail* → now <0.5s
+   *connect*.)
+2. **Set `MCP_TIMEOUT=60000` in `.claude/settings.json` `env`** so ghidra's ~16s cold analysis fits with
+   margin (after reboot / cold cache it can run longer). **Empirically proven the lever is honored from
+   settings.json**: `MCP_TIMEOUT=500` there reproduced ghidra's failure *identically* to the shell export
+   `MCP_TIMEOUT=500 claude …`; 60000 restores reliable connect. (The Claude Code docs only document the
+   shell-export form and call `MCP_TIMEOUT` the *startup* timeout in ms; the per-server `.mcp.json`
+   `timeout` field is tool-call only and does **not** help startup.)
+3. **Clear genuinely-stale Ghidra locks** (`~/ghidra-projects/fe8j.lock{,~}`) only when **no** java/pyghidra
+   process owns them — a clean open recreates the lock. Such leftovers are a *symptom* of a startup-timeout
+   SIGKILL, so fixing (1)+(2) prevents new ones. Recovery steps added to
+   `docs/reverse-engineering.md` §Troubleshooting.
+
+**Verification:** `claude mcp list` (connects to **both** concurrently = the session-startup scenario)
+returns `ida ✔ + ghidra ✔` **3/3** rounds with the 60s timeout. Don't run `claude mcp get/list` launches
+back-to-back when debugging Ghidra — a launch killed mid-analysis pollutes the *next* open (reproduced:
+two rapid launches both failed; a single isolated launch connected).
+
+**Rationale:** the failures were deterministic config/timing issues, not flakiness — fix the registration
+drift and give the slow-but-correct ghidra cold start enough startup budget. Reversible (re-add the path /
+drop the env line); no source or build impact.
+
+**Status:** Done 2026-06-09. Verified by repeated concurrent `claude mcp list`.

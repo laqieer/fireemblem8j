@@ -178,6 +178,53 @@ unpacked sidecars are normal while a worker is using the DB. If Ghidra alone say
 verify it by listing the cached project binaries and checking that
 `fireemblem8.elf` is `analysis_complete`.
 
+**If `ida` fails to connect at a fixed ~12s** (not a slow hang — a consistent
+timeout), check that its registration has *not* re-acquired the `.i64` path:
+
+```bash
+claude mcp get ida          # Args MUST be just "--stdio" — never "--stdio …/fe8j.i64"
+```
+
+If the path is present, the supervisor is trying to open a DB the worker already
+holds. Re-register the canonical (path-less) way:
+
+```bash
+. scripts/ida/idalib_env.sh
+claude mcp remove ida -s local
+claude mcp add ida -s local -e IDADIR="$IDADIR" -- "$IDALIB_MCP" --stdio
+claude mcp get ida          # → ✔ Connected, sub-second
+```
+
+**If `ghidra` fails to connect at session startup** (`MCP error -32000:
+Connection closed`), it is the ~16–19s cold `--wait-for-analysis` overrunning the
+client's startup window — especially when launched concurrently with `ida` at
+session start. The fix is a longer **MCP startup timeout** (`MCP_TIMEOUT`, in ms),
+already set in `.claude/settings.json` `env` (verified honored from there, not
+only as a shell export):
+
+```json
+{ "env": { "MCP_TIMEOUT": "60000" } }
+```
+
+For headless launches that don't load that file, export it instead:
+`MCP_TIMEOUT=60000 claude …`. Confirm both servers come up together with
+`claude mcp list` (it connects to both at once — the same condition as session
+startup); expect `ida ✔` + `ghidra ✔`.
+
+A leftover `~/ghidra-projects/fe8j.lock{,~}` is normally just a symptom of a prior
+startup-timeout SIGKILL (raising `MCP_TIMEOUT` stops it recurring). Remove it
+**only** when nothing owns it — a clean open recreates it:
+
+```bash
+ps -eo pid,args | grep -Ei 'pyghidra|ghidra|java' | grep -v grep   # must be empty
+rm -f ~/ghidra-projects/fe8j.lock ~/ghidra-projects/fe8j.lock~
+```
+
+When debugging Ghidra startup, run launches **one at a time** — a `claude mcp
+get/list` killed mid-analysis leaves the project in a state the *next* open trips
+over, so back-to-back launches can both fail while a single isolated one
+succeeds. See `docs/decisions.md` (D17).
+
 ## Second opinion: Ghidra (open-source cross-check)
 
 A second, independent decompiler is useful for the region-different functions —

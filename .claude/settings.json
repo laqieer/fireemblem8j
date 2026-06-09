@@ -1,4 +1,7 @@
 {
+  "env": {
+    "MCP_TIMEOUT": "60000"
+  },
   "enabledPlugins": {
     "ralph-loop@claude-plugins-official": true,
     "pua@pua-skills": true
