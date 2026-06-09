@@ -104,3 +104,4 @@ GetMinimapTerrainCellAt
 gMonsterItemTable
 gMonsterItemWeightsTable
 gMonsterItemsByClassIndex
+MuExistsActive
