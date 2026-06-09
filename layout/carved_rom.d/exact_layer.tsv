@@ -299,3 +299,4 @@
 04EDA8	04EDFC	src/exact_0804eda8.o(.text)	exact_0804eda8(run): MultiBootWaitCycles, MultiBootWaitSendDone
 04723C	047258	src/exact_0804723c.o(.text)	exact_0804723c(run): SioResult_GetNewHSScrollTarget
 0444F4	0445A8	src/exact_080444f4.o(.text)	exact_080444f4(run): Tactician_MapNameToConfIndices
+0432A0	0432E0	src/exact_080432a0.o(.text)	exact_080432a0(run): SioTeamList_Init
