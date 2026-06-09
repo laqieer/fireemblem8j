@@ -1,0 +1,240 @@
+004D48	004F3C	src/masked_08004d48.o(.text)	masked_08004d48(run): AnimUpdateAll, AnimClearAll, AnimCreate_unused...
+009150	00916C	src/masked_08009150.o(.text)	masked_08009150(run): AP_ClearAll
+0095E0	009608	src/masked_080095e0.o(.text)	masked_080095e0(run): AP_Find
+074A24	074A4C	src/masked_08074a24.o(.text)	masked_08074a24(run): EfxCheckRetaliation
+074DAC	074DE8	src/masked_08074dac.o(.text)	masked_08074dac(run): GetBanimBossBGM
+073348	0733B8	src/masked_08073348.o(.text)	masked_08073348(run): EfxTmModifyPal
+073644	0736C4	src/masked_08073644.o(.text)	masked_08073644(run): EkrModifyBarfx
+050ECC	050EE8	src/masked_08050ecc.o(.text)	masked_08050ecc(run): ekrBattlePrepareDragonIntro
+051004	051024	src/masked_08051004.o(.text)	masked_08051004(run): ekrBattle_1
+051320	051334	src/masked_08051320.o(.text)	masked_08051320(run): ekrBattleOnBattleEnd
+051624	051674	src/masked_08051624.o(.text)	masked_08051624(run): ekrBattle_4
+0517EC	05183C	src/masked_080517ec.o(.text)	masked_080517ec(run): ekrBattle_6
+059748	05976C	src/masked_08059748.o(.text)	masked_08059748(run): CheckBattleHasHit
+05976C	059790	src/masked_0805976c.o(.text)	masked_0805976c(run): GetBanimSheetSelectByte
+05983C	059864	src/masked_0805983c.o(.text)	masked_0805983c(run): GetBattleAnimRoundType
+059864	059890	src/masked_08059864.o(.text)	masked_08059864(run): GetBattleAnimRoundTypeFlags
+059890	0598BC	src/masked_08059890.o(.text)	masked_08059890(run): GetEfxHp, GetEfxHpModMaybe
+059954	059994	src/masked_08059954.o(.text)	masked_08059954(run): EkrCheckAttackRound
+0599AC	0599C8	src/masked_080599ac.o(.text)	masked_080599ac(run): CheckBattleScripted
+0797E0	079808	src/masked_080797e0.o(.text)	masked_080797e0(run): EkrdragonDemonking_Init
+07A3C0	07A3EC	src/masked_0807a3c0.o(.text)	masked_0807a3c0(run): EkrDemonkingObj_SetTilePixel
+07A598	07A5C0	src/masked_0807a598.o(.text)	masked_0807a598(run): EfxSelfThunderBGOnInit
+072168	0721A8	src/masked_08072168.o(.text)	masked_08072168(run): EkrDragonTmCpyWithDistance
+051F6C	051FB8	src/masked_08051f6c.o(.text)	masked_08051f6c(run): EkrGauge_SetWtaArrowSprite
+078730	078750	src/masked_08078730.o(.text)	masked_08078730(run): CheckBanimHensei
+05A714	05A78C	src/masked_0805a714.o(.text)	masked_0805a714(run): ApplyBanimUniquePalette, GetBanimPalette
+05AB5C	05ABBC	src/masked_0805ab5c.o(.text)	masked_0805ab5c(run): InitBattleAnimFrame
+05B00C	05B058	src/masked_0805b00c.o(.text)	masked_0805b00c(run): CheckRoundCrit
+056920	056944	src/masked_08056920.o(.text)	masked_08056920(run): EfxGetCamMovDuration
+035538	035554	src/masked_08035538.o(.text)	masked_08035538(run): SubtitleHelpDarkener_FadeIn
+0365D8	03660C	src/masked_080365d8.o(.text)	masked_080365d8(run): GetBattleForecastPanelSide
+036E0C	036E4C	src/masked_08036e0c.o(.text)	masked_08036e0c(run): GetFactionBattleForecastFramePalette
+015D3C	015D90	src/masked_08015d3c.o(.text)	masked_08015d3c(run): StoreAdjustedCameraPositions
+02A2A4	02A324	src/masked_0802a2a4.o(.text)	masked_0802a2a4(run): BattleGenerateSimulation, BattleGenerateReal, BattleGenerateBallistaSimulation...
+02C27C	02C28C	src/masked_0802c27c.o(.text)	masked_0802c27c(run): ClearBmbattleStruct0
+037BDC	037BFC	src/masked_08037bdc.o(.text)	masked_08037bdc(run): GetCurrentPromotedLevelBonus
+037BFC	037C44	src/masked_08037bfc.o(.text)	masked_08037bfc(run): CanUnitSeize
+037CD8	037D38	src/masked_08037cd8.o(.text)	masked_08037cd8(run): InitDungeon
+037F34	037FA8	src/masked_08037f34.o(.text)	masked_08037f34(run): SaveDungeonState, LoadDungeonState, SaveDungeonRecords...
+0380F8	03830C	src/masked_080380f8.o(.text)	masked_080380f8(run): UpdateDungeonRecordStats, UpdateDungeonEnemiesDefeated
+039314	0393D8	src/masked_08039314.o(.text)	masked_08039314(run): GetRecordDungeonValueByUiLabel
+01A198	01A1B8	src/masked_0801a198.o(.text)	masked_0801a198(run): SetWorkingMoveCosts
+01A508	01A5C0	src/masked_0801a508.o(.text)	masked_0801a508(run): UnitApplyWorkingMovementScript
+029060	02908C	src/masked_08029060.o(.text)	masked_08029060(run): CanUnitUseTorchItem
+0139A8	0139E0	src/masked_080139a8.o(.text)	masked_080139a8(run): StartPalFadeToBlack, StartPalFadeToWhite
+013EE8	013F60	src/masked_08013ee8.o(.text)	masked_08013ee8(run): FadeOutBlackSpeed04, FadeOutBlackSpeed08, FadeOutBlackSpeed10...
+013FB0	014028	src/masked_08013fb0.o(.text)	masked_08013fb0(run): FadeOutBlackSpeed04Locking, FadeOutBlackSpeed08Locking, FadeOutBlackSpeed10Locking...
+014108	014120	src/masked_08014108.o(.text)	masked_08014108(run): FadeOutWhiteSpeed08Locking
+014BB0	014BC8	src/masked_08014bb0.o(.text)	masked_08014bb0(run): PlaySeDelayed
+019864	019914	src/masked_08019864.o(.text)	masked_08019864(run): DisplayMovementViewTile
+02257C	02259C	src/masked_0802257c.o(.text)	masked_0802257c(run): MapMenu_IsSuspendCommandAvailable
+0228C4	0228D8	src/masked_080228c4.o(.text)	masked_080228c4(run): RescueSelection_OnSelect
+022930	022954	src/masked_08022930.o(.text)	masked_08022930(run): DropSelection_OnSelect
+022FE8	023008	src/masked_08022fe8.o(.text)	masked_08022fe8(run): UnitActionMenu_Seize
+023120	02315C	src/masked_08023120.o(.text)	masked_08023120(run): PlayCommandUsability
+02315C	023198	src/masked_0802315c.o(.text)	masked_0802315c(run): DanceCommandUsability
+02326C	0232B0	src/masked_0802326c.o(.text)	masked_0802326c(run): RefreshMapSelect_Select, ItemCommandUsability
+023CC0	023CD4	src/masked_08023cc0.o(.text)	masked_08023cc0(run): TalkSelection_OnSelect
+023D5C	023D70	src/masked_08023d5c.o(.text)	masked_08023d5c(run): SupportSelection_OnSelect
+023E94	023EAC	src/masked_08023e94.o(.text)	masked_08023e94(run): PickSelection_OnSelect
+0248FC	024930	src/masked_080248fc.o(.text)	masked_080248fc(run): ExitCommandUsability
+0328EC	03290C	src/masked_080328ec.o(.text)	masked_080328ec(run): BATTLE_HandleArenaDeathsMaybe
+028544	028650	src/masked_08028544.o(.text)	masked_08028544(run): GetUnitSupportBonuses
+0A8E48	0A8E8C	src/masked_080a8e48.o(.text)	masked_080a8e48(run): IsChapterBelongCurGame
+0A9348	0A93BC	src/masked_080a9348.o(.text)	masked_080a9348(run): PidStatsGetTotalBattleAmt, PidStatsGetTotalWinAmt, PidStatsGetTotalLossAmt
+0A9658	0A96F8	src/masked_080a9658.o(.text)	masked_080a9658(run): SavePlayThroughData
+0A76F4	0A7704	src/masked_080a76f4.o(.text)	masked_080a76f4(run): IsSramWorking
+0A7EAC	0A7F10	src/masked_080a7eac.o(.text)	masked_080a7eac(run): GetUnitsAverageSupportValue
+A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
+0A881C	0A886C	src/masked_080a881c.o(.text)	masked_080a881c(run): SaveEndgameRankings
+0AB588	0AB5A8	src/masked_080ab588.o(.text)	masked_080ab588(run): GetExtraMapMapReadAddr
+0B8CDC	0B8CF0	src/masked_080b8cdc.o(.text)	masked_080b8cdc(run): Shop_GetPortraitIndex
+02E048	02E064	src/masked_0802e048.o(.text)	masked_0802e048(run): AreKeysHeld
+02E3E4	02E42C	src/masked_0802e3e4.o(.text)	masked_0802e3e4(run): GetObstacleHpAt
+02E4C4	02E530	src/masked_0802e4c4.o(.text)	masked_0802e4c4(run): ApplyMapChangesById
+02E990	02E9C8	src/masked_0802e990.o(.text)	masked_0802e990(run): AddLightRune
+0265BC	0265CC	src/masked_080265bc.o(.text)	masked_080265bc(run): RequestUnitSpriteSheetSync
+027310	027348	src/masked_08027310.o(.text)	masked_08027310(run): AddUnitSprite
+017650	017680	src/masked_08017650.o(.text)	masked_08017650(run): GetUnitFogViewRange
+018A60	018AA4	src/masked_08018a60.o(.text)	masked_08018a60(run): GetUnitMovementCost
+034520	034548	src/masked_08034520.o(.text)	masked_08034520(run): GetROMChapterStruct
+03460C	034624	src/masked_0803460c.o(.text)	masked_0803460c(run): IsDifficultMode
+0201A4	0201DC	src/masked_080201a4.o(.text)	masked_080201a4(run): ChapterIntro_LightExplosion_Init
+020818	020828	src/masked_08020818.o(.text)	masked_08020818(run): ChapterIntro_InitCameraYPos
+020AB4	020AE0	src/masked_08020ab4.o(.text)	masked_08020ab4(run): ChapterIntro_RevealDecalSprite_Init
+0D236C	0D23A0	src/masked_080d236c.o(.text)	masked_080d236c(run): RemovePromoTraineeEventFace
+0B70F4	0B7130	src/masked_080b70f4.o(.text)	masked_080b70f4(run): ColFadeOut_Init
+03E3D8	03E400	src/masked_0803e3d8.o(.text)	masked_0803e3d8(run): AiCheckDangerAt
+03E808	03E8CC	src/masked_0803e808.o(.text)	masked_0803e808(run): GetEscapePointStructThingMaybe, AiCanEquip
+03EF70	03EFA8	src/masked_0803ef70.o(.text)	masked_0803ef70(run): AiIsUnitAtPositionDifferentAllegiance
+03F2C0	03F2DC	src/masked_0803f2c0.o(.text)	masked_0803f2c0(run): AiFunc_StoreAiCounter
+03F33C	03F3C4	src/masked_0803f33c.o(.text)	masked_0803f33c(run): AiTryMoveToSpecificPosition
+03F434	03F47C	src/masked_0803f434.o(.text)	masked_0803f434(run): AiFunc_CheckUnitInBoundingBox
+03F948	03F958	src/masked_0803f948.o(.text)	masked_0803f948(run): AiFunc_EndDecision
+03DC54	03DD14	src/masked_0803dc54.o(.text)	masked_0803dc54(run): AiSimulateBestBattleAgainstTarget
+03DFF8	03E044	src/masked_0803dff8.o(.text)	masked_0803dff8(run): AiGetTargetClassCombatScoreComponent, AiGetTurnCombatScoreComponent
+03E0A4	03E17C	src/masked_0803e0a4.o(.text)	masked_0803e0a4(run): AiGetDangerScoreComponent, AiGetLowHpScoreComponent, AiComputeCombatScore
+03E1CC	03E20C	src/masked_0803e1cc.o(.text)	masked_0803e1cc(run): AiGetTerrainCombatPositionScoreComponent
+03C44C	03C56C	src/masked_0803c44c.o(.text)	masked_0803c44c(run): AiTryExecScriptA, AiExecFallbackScriptA, AiTryExecScriptB...
+03C6AC	03C7A8	src/masked_0803c6ac.o(.text)	masked_0803c6ac(run): AiScriptCmd_02_ChangeAi, AiScriptCmd_03_Goto
+03C7D8	03C7F4	src/masked_0803c7d8.o(.text)	masked_0803c7d8(run): AiIsUnitNonActive
+03D360	03D374	src/masked_0803d360.o(.text)	masked_0803d360(run): AiScriptCmd_1B_NoOp
+03A794	03A800	src/masked_0803a794.o(.text)	masked_0803a794(run): AiCompare
+03B244	03B2B8	src/masked_0803b244.o(.text)	masked_0803b244(run): AiCountUnitsInRange
+03BEDC	03BF14	src/masked_0803bedc.o(.text)	masked_0803bedc(run): AiGetClassRank
+03C214	03C2F4	src/masked_0803c214.o(.text)	masked_0803c214(run): GetAiBestSafeStaffTargetPosition
+040D4C	040DE8	src/masked_08040d4c.o(.text)	masked_08040d4c(run): AiSetMovCostTableWithPassableWalls, AiSetMovCostTableWithPassableTerrain, AiSetMovCostTableWithTwoPassableTerrains
+041010	041044	src/masked_08041010.o(.text)	masked_08041010(run): AiUpdateNoMoveFlag
+0052AC	005360	src/masked_080052ac.o(.text)	masked_080052ac(run): ClearSprites, PutSprite, PutSpriteExt
+00D2D0	00D308	src/masked_0800d2d0.o(.text)	masked_0800d2d0(run): EnqueueEventCall
+00D308	00D340	src/masked_0800d308.o(.text)	masked_0800d308(run): CallNextQueuedEvent
+00D7EC	00D808	src/masked_0800d7ec.o(.text)	masked_0800d7ec(run): SlotQueuePush
+0876B0	0876C8	src/masked_080876b0.o(.text)	masked_080876b0(run): CheckWaitAction_unused
+0852BC	0852F0	src/masked_080852bc.o(.text)	masked_080852bc(run): CheckActiveUnitArea
+085350	08537C	src/masked_08085350.o(.text)	masked_08085350(run): CheckAnyBlueUnitArea1
+08537C	0853CC	src/masked_0808537c.o(.text)	masked_0808537c(run): CheckAnyBlueUnitArea2
+0853E4	08540C	src/masked_080853e4.o(.text)	masked_080853e4(run): CheckAnyBlueUnitArea4
+08540C	085434	src/masked_0808540c.o(.text)	masked_0808540c(run): CheckAnyBlueUnitArea5
+085434	08545C	src/masked_08085434.o(.text)	masked_08085434(run): CheckAnyBlueUnitArea6
+08545C	085484	src/masked_0808545c.o(.text)	masked_0808545c(run): CheckAnyBlueUnitArea7
+085B10	085B30	src/masked_08085b10.o(.text)	masked_08085b10(run): IsHardMode
+085B9C	085BE4	src/masked_08085b9c.o(.text)	masked_08085b9c(run): EvCheck02_TURN
+086094	0860A8	src/masked_08086094.o(.text)	masked_08086094(run): CheckPermanentFlag
+08615C	08618C	src/masked_0808615c.o(.text)	masked_0808615c(run): CheckTutorialEvent
+086884	0868B0	src/masked_08086884.o(.text)	masked_08086884(run): RegisterEventActivation
+086A14	086A58	src/masked_08086a14.o(.text)	masked_08086a14(run): GetSupportTalkEntry
+086ACC	086B4C	src/masked_08086acc.o(.text)	masked_08086acc(run): IsCharacterForceDeployed_, IsSethLArachelMyrrhInnes
+00DA04	00DA1C	src/masked_0800da04.o(.text)	masked_0800da04(run): Event05_SetSlot
+00DEF0	00DFB0	src/masked_0800def0.o(.text)	masked_0800def0(run): Event10_ModifyEvBit
+010AD0	010B6C	src/masked_08010ad0.o(.text)	masked_08010ad0(run): GenerateScriptBattleHitFormEventQueue
+00C390	00C3A0	src/masked_0800c390.o(.text)	masked_0800c390(run): Event8A_WmShowCursor_Unsure
+00C4A4	00C4DC	src/masked_0800c4a4.o(.text)	masked_0800c4a4(run): Event93_WmEnableNode, Event94_WmDisableNode
+00C800	00C834	src/masked_0800c800.o(.text)	masked_0800c800(run): Event9D_
+00CEC0	00CEE8	src/masked_0800cec0.o(.text)	masked_0800cec0(run): EventC1_SKIPWM, EventC2_WmNoFade
+005660	005678	src/masked_08005660.o(.text)	masked_08005660(run): EndFaceById
+005694	0056AC	src/masked_08005694.o(.text)	masked_08005694(run): SetFaceDisplayBitsById
+005B28	005BA8	src/masked_08005b28.o(.text)	masked_08005b28(run): ShouldFaceBeRaised
+00635C	006374	src/masked_0800635c.o(.text)	masked_0800635c(run): SetFaceBlinkControlById
+0063E0	0063F8	src/masked_080063e0.o(.text)	masked_080063e0(run): SetFaceEyeControlById
+00651C	006530	src/masked_0800651c.o(.text)	masked_0800651c(run): SetFacePosition
+0096D8	009840	src/masked_080096d8.o(.text)	masked_080096d8(run): GetRealChaperIndex
+009E3C	009E5C	src/masked_08009e3c.o(.text)	masked_08009e3c(run): GameControl_RememberChapterId, GameControl_RestoreChapterId
+08C840	08C8E0	src/masked_0808c840.o(.text)	masked_0808c840(run): ScrollBoxDialogueTilesUp
+07CBF0	07CC4C	src/masked_0807cbf0.o(.text)	masked_0807cbf0(run): MapAnim_AdvanceBattleRound
+082748	0827B4	src/masked_08082748.o(.text)	masked_08082748(run): MapEventcallFx2_HBlankWobble, MapanimEventcall_VsyncWaveLoop
+082EE8	082F18	src/masked_08082ee8.o(.text)	masked_08082ee8(run): DemonKingSummonShake_Init
+07E490	07E4F0	src/masked_0807e490.o(.text)	masked_0807e490(run): ProcMAExpBar_InitDisplay
+07E114	07E160	src/masked_0807e114.o(.text)	masked_0807e114(run): GetBattleInfoPalByFaction
+080F48	081070	src/masked_08080f48.o(.text)	masked_08080f48(run): GetManimLevelUpStatGain
+0841B8	0841EC	src/masked_080841b8.o(.text)	masked_080841b8(run): InitScanline
+083814	0838D4	src/masked_08083814.o(.text)	masked_08083814(run): MapAnim_MoveSubjectsTowardsTarget, MapAnim_MoveSubjectsAwayFromTarget
+083C18	083C54	src/masked_08083c18.o(.text)	masked_08083c18(run): RegisterMapHpChangeAnim
+083CE8	083D28	src/masked_08083ce8.o(.text)	masked_08083ce8(run): MapAnimCallSpellAssocSilence, MapAnimCallSpellAssocBarrier
+083F58	084014	src/masked_08083f58.o(.text)	masked_08083f58(run): MapAnimCallSpellAssocUnlock, MapAnimCallSpellAssocBerserk, MapAnimCallSpellAssocRestore...
+084080	0840C4	src/masked_08084080.o(.text)	masked_08084080(run): SpellWarpStartExplosion
+081A64	081AC8	src/masked_08081a64.o(.text)	masked_08081a64(run): PutSparkGfxRotation, MapAnimRotation_Init
+0ABF90	0ABFE4	src/masked_080abf90.o(.text)	masked_080abf90(run): GetMinimapConnectKindAt
+0AC000	0AC094	src/masked_080ac000.o(.text)	masked_080ac000(run): GetMinimapSeaKindAt
+0AC1EC	0AC314	src/masked_080ac1ec.o(.text)	masked_080ac1ec(run): GetMinimapCliffKindAt
+0AC314	0AC358	src/masked_080ac314.o(.text)	masked_080ac314(run): GetMinimapStairTileAt
+0AC358	0AC388	src/masked_080ac358.o(.text)	masked_080ac358(run): GetMinimapDoorTileAt
+0AC388	0AC424	src/masked_080ac388.o(.text)	masked_080ac388(run): GetMinimapBridgeKindAt
+0AC424	0AC610	src/masked_080ac424.o(.text)	masked_080ac424(run): GetMinimapTileAt
+0AC674	0AC89C	src/masked_080ac674.o(.text)	masked_080ac674(run): DrawMinimapInternal
+0ACFFC	0AD0E4	src/masked_080acffc.o(.text)	masked_080acffc(run): Minimap_HandleMoveInput, Minimap_InitProcVars
+07A774	07A830	src/masked_0807a774.o(.text)	masked_0807a774(run): GenerateMonsterItems
+07AB5C	07AB94	src/masked_0807ab5c.o(.text)	masked_0807ab5c(run): MuExistsActive
+07B50C	07B580	src/masked_0807b50c.o(.text)	masked_0807b50c(run): ApplyMoveScriptToCoordinates
+07B580	07B5E0	src/masked_0807b580.o(.text)	masked_0807b580(run): CanStartMu, ResetMuAnims
+07BFA4	07BFCC	src/masked_0807bfa4.o(.text)	masked_0807bfa4(run): GetMu
+07C0DC	07C178	src/masked_0807c0dc.o(.text)	masked_0807c0dc(run): CopyEventMoveREDAs, ClearEventMoveBuffer
+0CD4F0	0CD500	src/masked_080cd4f0.o(.text)	masked_080cd4f0(run): OpAnimScrollBg3Loop
+0B7AF8	0B7B1C	src/masked_080b7af8.o(.text)	masked_080b7af8(run): ClassIntro_DisableAllExceptBg1
+0B7E6C	0B7E9C	src/masked_080b7e6c.o(.text)	masked_080b7e6c(run): ClassIntroFlare_Init
+08DEDC	08DF20	src/masked_0808dedc.o(.text)	masked_0808dedc(run): GetCursorQuadrant
+08E614	08E63C	src/masked_0808e614.o(.text)	masked_0808e614(run): GetCursorScreenSideX
+08E63C	08E660	src/masked_0808e63c.o(.text)	masked_0808e63c(run): GetCursorScreenSideXAlt
+08F48C	08F4B0	src/masked_0808f48c.o(.text)	masked_0808f48c(run): IsCursorInLowerScreenHalf
+01D7B0	01D808	src/masked_0801d7b0.o(.text)	masked_0801d7b0(run): TrySwitchViewedUnit
+0A2CE8	0A2D10	src/masked_080a2ce8.o(.text)	masked_080a2ce8(run): IsTacticianDivinationAvailable
+0A2D28	0A2D48	src/masked_080a2d28.o(.text)	masked_080a2d28(run): IsChapterIndexAbove0x61
+099DA4	099E70	src/masked_08099da4.o(.text)	masked_08099da4(run): SallyCir_RectInit
+033680	033700	src/masked_08033680.o(.text)	masked_08033680(run): PrepCameraPan_Init, PrepCameraPan_TurnDown, PrepCameraPan_TurnLeft...
+09A2B4	09A2EC	src/masked_0809a2b4.o(.text)	masked_0809a2b4(run): ApplyPrepWindowColorPalette
+0972D4	097304	src/masked_080972d4.o(.text)	masked_080972d4(run): CanPrepScreenSave
+0975CC	097634	src/masked_080975cc.o(.text)	masked_080975cc(run): RegisterSioPid, RemoveSioPid
+0977E4	097804	src/masked_080977e4.o(.text)	masked_080977e4(run): CanPrepScreenCheckMap
+0AF1E0	0AF1F8	src/masked_080af1e0.o(.text)	masked_080af1e0(run): InitSaveMenuHelpTextSt
+04C9DC	04CA24	src/masked_0804c9dc.o(.text)	masked_0804c9dc(run): Sio_BoxTransitionOpen_End
+04CB78	04CB9C	src/masked_0804cb78.o(.text)	masked_0804cb78(run): Sio_BoxTransitionClose_End
+04A0E4	04A138	src/masked_0804a0e4.o(.text)	masked_0804a0e4(run): LinkArenaBattleMap_AdvancePhase
+04A138	04A14C	src/masked_0804a138.o(.text)	masked_0804a138(run): LinkArenaBattleMap_ClearCmdBuffer
+04A1A4	04A1CC	src/masked_0804a1a4.o(.text)	masked_0804a1a4(run): LinkArenaBattleMap_FindUnitSlot
+04A2D0	04A2EC	src/masked_0804a2d0.o(.text)	masked_0804a2d0(run): LinkArenaBattleMap_ClearUnitSlots
+04A540	04A584	src/masked_0804a540.o(.text)	masked_0804a540(run): LinkArenaBattleMap_CountTeamUnits
+04A5C8	04A624	src/masked_0804a5c8.o(.text)	masked_0804a5c8(run): LinkArenaBattleMap_InitConfig
+04C3A4	04C3C4	src/masked_0804c3a4.o(.text)	masked_0804c3a4(run): LAUnitDeaths_Init
+041CE8	041D0C	src/masked_08041ce8.o(.text)	masked_08041ce8(run): SioHandleIrq_Timer3
+0486B0	0486D4	src/masked_080486b0.o(.text)	masked_080486b0(run): Sio_EnableAllWOutLayers
+042DFC	042E2C	src/masked_08042dfc.o(.text)	masked_08042dfc(run): SetBmStLinkArenaFlag, UnsetBmStLinkArenaFlag, CheckInLinkArena
+047A0C	047A4C	src/masked_08047a0c.o(.text)	masked_08047a0c(run): SioMenu_Init
+04E638	04E65C	src/masked_0804e638.o(.text)	masked_0804e638(run): SioWeaponSelectMenu_OnSelect
+04E65C	04E670	src/masked_0804e65c.o(.text)	masked_0804e65c(run): SioAttackTypeMenu_OnSelect
+049694	049744	src/masked_08049694.o(.text)	masked_08049694(run): Sio_SortPlayersByScore
+043CDC	043D0C	src/masked_08043cdc.o(.text)	masked_08043cdc(run): AreAllLinkArenaTeamsSelected
+0B38B4	0B38D4	src/masked_080b38b4.o(.text)	masked_080b38b4(run): CountTotalSoundRoomSongs
+0B38D4	0B390C	src/masked_080b38d4.o(.text)	masked_080b38d4(run): CountSecretSoundRoomSongs
+0B3930	0B3984	src/masked_080b3930.o(.text)	masked_080b3930(run): CountDisplayedSoundRoomSongs
+002A08	002A18	src/masked_08002a08.o(.text)	masked_08002a08(run): DeleteAll6CWaitMusicRelated
+08B528	08B54C	src/masked_0808b528.o(.text)	masked_0808b528(run): SetHelpBoxInitPosition
+0B2A38	0B2AC0	src/masked_080b2a38.o(.text)	masked_080b2a38(run): BgAffinScalingHighPrecision, BgAffinAnchoringHighPrecision
+0B2CC4	0B2D1C	src/masked_080b2cc4.o(.text)	masked_080b2cc4(run): FadeInOut_DisableGfx
+0B34A0	0B3538	src/masked_080b34a0.o(.text)	masked_080b34a0(run): GetBgXOffset, GetBgYOffset
+0BA2B4	0BA2F0	src/masked_080ba2b4.o(.text)	masked_080ba2b4(run): ArenaUi_IsBgmActive
+0B62BC	0B62EC	src/masked_080b62bc.o(.text)	masked_080b62bc(run): GetConfigUnk32DifficultyAdjusted
+AAF6D8	AAF6DC	src/masked_080b62bc.o(.data)	masked_080b62bc .data
+086E0C	086E2C	src/masked_08086e0c.o(.text)	masked_08086e0c(run): Debug_CondAButtonNotPressed
+086E38	086E58	src/masked_08086e38.o(.text)	masked_08086e38(run): Debug_CondAButtonPressed
+0874EC	087580	src/masked_080874ec.o(.text)	masked_080874ec(run): Uidebug_IsTurnNumberOver20, Uidebug_IsTurnNumberOver25, Uidebug_IsTurnNumberOver30...
+0A4D18	0A4D54	src/masked_080a4d18.o(.text)	masked_080a4d18(run): GetTotalSupportLevel
+0348DC	034904	src/masked_080348dc.o(.text)	masked_080348dc(run): GetUnitInfoWindowX
+092984	0929B0	src/masked_08092984.o(.text)	masked_08092984(run): UnitList_ResetFromStatScreen
+0BDA28	0BDA6C	src/masked_080bda28.o(.text)	masked_080bda28(run): WorldMap_IsMonsterAtUnclearedNode
+0BDE9C	0BDEB4	src/masked_080bde9c.o(.text)	masked_080bde9c(run): WorldMap_SetInitialState
+0BDFDC	0BE01C	src/masked_080bdfdc.o(.text)	masked_080bdfdc(run): WorldMap_SetMergedNodeIcon
+0BE0E0	0BE198	src/masked_080be0e0.o(.text)	masked_080be0e0(run): WmMain_MoveCamera
+0BEBA0	0BEBB0	src/masked_080beba0.o(.text)	masked_080beba0(run): WorldMap_SetMonsterMergedState
+0C456C	0C4598	src/masked_080c456c.o(.text)	masked_080c456c(run): StartGmPalFade_
+0C14B4	0C14EC	src/masked_080c14b4.o(.text)	masked_080c14b4(run): WMMenu_IsArmoryAvailable
+0C14EC	0C1524	src/masked_080c14ec.o(.text)	masked_080c14ec(run): WMMenu_IsVendorAvailable
+0C1524	0C156C	src/masked_080c1524.o(.text)	masked_080c1524(run): WMMenu_IsSecretShopAvailable
+0C156C	0C1594	src/masked_080c156c.o(.text)	masked_080c156c(run): WMMenu_IsNodeUnclearedAvailable
+0C1594	0C15BC	src/masked_080c1594.o(.text)	masked_080c1594(run): WMMenu_IsNodeClearedAvailable
+0C185C	0C1894	src/masked_080c185c.o(.text)	masked_080c185c(run): GetGmSkirmishUnitAtNode
+0C1894	0C18D0	src/masked_080c1894.o(.text)	masked_080c1894(run): GmBuildSkirmishNodeList
+0C1DC0	0C1DE8	src/masked_080c1dc0.o(.text)	masked_080c1dc0(run): ResetGmStoryNode
+0C37C4	0C3864	src/masked_080c37c4.o(.text)	masked_080c37c4(run): PutGMapPIShopIcons
+0C3C88	0C3D0C	src/masked_080c3c88.o(.text)	masked_080c3c88(run): InitGMapPIInterfaceKind
+0C0458	0C052C	src/masked_080c0458.o(.text)	masked_080c0458(run): GetNodeAtPosition
+0C4098	0C40BC	src/masked_080c4098.o(.text)	masked_080c4098(run): GmScrollManage_OnEnd
