@@ -56,3 +56,5 @@ gAiDecision
 gGreenAiEscapePoints
 gRedAiEscapePoints
 gAiState
+AiGetCombatPositionScore
+AiSimulateBattleAgainstTargetAtPosition

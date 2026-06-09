@@ -112,3 +112,6 @@ gAiState	0203AA00	data	masked_0803f2c0
 gCpData_31	085D2308	data	masked_0803f33c
 gAiState	0203AA00	data	masked_0803f434
 gAiState	0203AA00	data	masked_0803f948
+AiGetCombatPositionScore	0803DDEC	thumb	masked_0803dc54
+AiSimulateBattleAgainstTargetAtPosition	0803DE58	thumb	masked_0803dc54
+gBmMapSize	0202E4D0	data	masked_0803dc54
