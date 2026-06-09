@@ -94,3 +94,5 @@ GetSavedRankData	080A8428	thumb	masked_080a881c
 JudgeGameRankSaveData	080A84CC	thumb	masked_080a881c
 SaveNewRankData	080A848C	thumb	masked_080a881c
 gPlaySt	0202BCEC	data	masked_080a881c
+GetMapChange	0802E42C	thumb	masked_0802e4c4
+gBmMapBaseTiles	085C2E54	data	masked_0802e4c4
