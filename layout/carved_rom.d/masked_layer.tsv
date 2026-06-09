@@ -7,3 +7,4 @@
 073644	0736C4	src/masked_08073644.o(.text)	masked_08073644(run): EkrModifyBarfx
 050ECC	050EE8	src/masked_08050ecc.o(.text)	masked_08050ecc(run): ekrBattlePrepareDragonIntro
 051004	051024	src/masked_08051004.o(.text)	masked_08051004(run): ekrBattle_1
+051320	051334	src/masked_08051320.o(.text)	masked_08051320(run): ekrBattleOnBattleEnd
