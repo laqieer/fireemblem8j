@@ -65,3 +65,5 @@
 0A9348	0A93BC	src/masked_080a9348.o(.text)	masked_080a9348(run): PidStatsGetTotalBattleAmt, PidStatsGetTotalWinAmt, PidStatsGetTotalLossAmt
 0A9658	0A96F8	src/masked_080a9658.o(.text)	masked_080a9658(run): SavePlayThroughData
 0A76F4	0A7704	src/masked_080a76f4.o(.text)	masked_080a76f4(run): IsSramWorking
+0A7EAC	0A7F10	src/masked_080a7eac.o(.text)	masked_080a7eac(run): GetUnitsAverageSupportValue
+A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
