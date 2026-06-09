@@ -202,3 +202,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 04E638	04E65C	src/masked_0804e638.o(.text)	masked_0804e638(run): SioWeaponSelectMenu_OnSelect
 04E65C	04E670	src/masked_0804e65c.o(.text)	masked_0804e65c(run): SioAttackTypeMenu_OnSelect
 049694	049744	src/masked_08049694.o(.text)	masked_08049694(run): Sio_SortPlayersByScore
+043CDC	043D0C	src/masked_08043cdc.o(.text)	masked_08043cdc(run): AreAllLinkArenaTeamsSelected
