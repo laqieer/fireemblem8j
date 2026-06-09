@@ -173,3 +173,4 @@ GetDeadEnemyAmount	080871E8	thumb	exact_08087604
 StartMenuAt	0804FA24	thumb	exact_0804f924
 StartMenuAt	0804FA24	thumb	exact_0804f964
 UnitList_SetupDisplay	08093058	thumb	exact_08093458
+GetGmapUnitFade	080C02BC	thumb	exact_080c02cc
