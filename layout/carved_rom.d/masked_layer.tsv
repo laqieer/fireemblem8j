@@ -54,3 +54,4 @@
 022FE8	023008	src/masked_08022fe8.o(.text)	masked_08022fe8(run): UnitActionMenu_Seize
 023120	02315C	src/masked_08023120.o(.text)	masked_08023120(run): PlayCommandUsability
 02315C	023198	src/masked_0802315c.o(.text)	masked_0802315c(run): DanceCommandUsability
+02326C	0232B0	src/masked_0802326c.o(.text)	masked_0802326c(run): RefreshMapSelect_Select, ItemCommandUsability
