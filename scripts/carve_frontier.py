@@ -225,6 +225,56 @@ SUBSYS = {
                           "region_start": 0x08A69408, "region_end": 0x08A70C88},
 }
 
+# ----------------------------------------------------------------------------
+# data-frontier-4 (data_gaps mode): the long-tail sweep.
+#
+# df2/df3 carved the big *named-region* blobs (one window = one subsystem, one
+# index table). What remains is a SCATTERED long tail: ~580 KB of real, region-
+# different data spread over hundreds of small uncarved gaps, each already bounded
+# on BOTH sides by a carved/named DATA object (rodata graphics, voicegroups, fonts,
+# UI sprites). These are NOT finely tileable by any one index table, so blob/table
+# mode does not apply — but every gap is, by construction, the exact span
+# [previous_carved_end, next_carved_start), so it is ALREADY snapped to carved
+# edges and can be emitted as a byte-perfect incbin with no alignment fix-up
+# (it is placed contiguously after the previous object; the linker inserts no pad,
+# and `make compare` is the hard oracle).
+#
+# CODE/DATA RED LINE: the whole game + libgcc/libc/arm_call code section ends at
+# 0x080DC134 (US: arm_call.o ComputeChecksum32 -> src/rng.o .rodata; JP: identical
+# boundary, .rodata src/rng.o at 0x080DC134 then gSinLookup). EVERY band below is
+# entirely at/above that boundary AND was verified to contain ZERO carved .text
+# objects, so no row here can be a region-different function (that is RE P8's src/
+# domain). The 226 non-padding gaps BELOW 0x080DC134 (thumb-prologue heads between
+# carved .text objects) are deliberately EXCLUDED — they are region-different CODE.
+#
+# Each band: a [region_start, region_end) window over the DATA section; the carver
+# auto-discovers every non-padding uncarved gap inside it and emits one incbin per
+# gap. Padding red line: any gap that is >50% 0xFF or <10% real is skipped, and no
+# .align/pad is ever emitted. frag_prefix routes output to the isolated
+# data_frontier4_* / frontier_df4_* namespace (no collision with df2/df3).
+DATA_GAPS = {
+    # Misc rodata / banim-efx / lightrune data right after the code+library section.
+    "df4_misc_lo":  {"region_start": 0x080DC134, "region_end": 0x081F5784},
+    # m4a voicegroup sample banks + ctc + low fontgrp (region-different instrument
+    # banks and CTC face data). Excludes the font_cc sub-band below to avoid overlap.
+    "df4_voice":    {"region_start": 0x081F5784, "region_end": 0x08530000},
+    # fontgrp + classchg compressed font/UI data (region-different JP glyph tables).
+    "df4_font_cc":  {"region_start": 0x08530000, "region_end": 0x08577000},
+    # UI / ctc / bksel sprite + TSA data.
+    "df4_uistuff":  {"region_start": 0x08577000, "region_end": 0x085D4000},
+    # banim efxflash / effect graphics (region-different battle-anim assets).
+    "df4_banim_a":  {"region_start": 0x085D4000, "region_end": 0x08602568},
+    # large banim + mapanim spell-assoc fx band (region-different animation frames/TSA).
+    "df4_banim_b":  {"region_start": 0x08602568, "region_end": 0x08A146BC},
+    # menu / worldmap / prep UI graphics (region-different JP menu art and tables).
+    "df4_menu":     {"region_start": 0x08A146BC, "region_end": 0x08AC059C},
+    # ending / cg / opening-anim graphics (region-different ending-sequence art) +
+    # the trailing classchg ProcScr gap (region-different promotion script data).
+    "df4_ending":   {"region_start": 0x08AC059C, "region_end": 0x08BABAF8},
+    # shop background + tail data (region-different shop BG img/tsa/pal).
+    "df4_tail":     {"region_start": 0x08BABAF8, "region_end": 0x08F2F580},
+}
+
 
 def rd_word(rom, addr):
     return struct.unpack_from("<I", rom, addr - BASE)[0]
@@ -445,12 +495,121 @@ def carve(name):
     print(f"  -> asm/frontier_{name}.s, {frag}")
 
 
+def data_section_gaps(rom, region_start, region_end, exclude_basename):
+    """Every UNCARVED, non-padding gap in [region_start, region_end).
+
+    A gap is the maximal run of bytes not covered by ANY already-carved range
+    (shared monolith + every other fragment, including df2/df3 and our own other
+    df4 bands). So by construction each emitted gap is exactly
+    [previous_carved_end, next_carved_start) — already snapped to carved edges,
+    never a partial split of a foreign carved object. Padding red line: a gap that
+    is <512 B, >50% 0xFF, or <10% real (non-FF, non-zero) bytes is skipped (it is
+    ROM padding / zero-fill, not real region-different data)."""
+    merged = []
+    for s, e in sorted(carved_ranges(exclude_basename)):
+        if e <= region_start or s >= region_end:
+            continue
+        s = max(s, region_start)
+        e = min(e, region_end)
+        if merged and s <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], e))
+        else:
+            merged.append((s, e))
+    gaps = []
+    prev = region_start
+    for s, e in merged:
+        if s > prev:
+            gaps.append((prev, s))
+        prev = max(prev, e)
+    if prev < region_end:
+        gaps.append((prev, region_end))
+    out = []
+    for a, b in gaps:
+        size = b - a
+        if size < 512:
+            continue
+        seg = rom[a - BASE:b - BASE]
+        ff = seg.count(0xFF)
+        z = seg.count(0)
+        if ff / size > 0.5 or (size - ff - z) < size * 0.1:
+            continue  # padding / zero-fill — NEVER carved
+        out.append((a, b))
+    return out
+
+
+def carve_data_gaps(name):
+    """data_gaps mode: emit one byte-perfect incbin per uncarved non-padding gap in
+    a pure-DATA window. Separate from carve() so the blob/table/frame paths (df2/df3)
+    and their 4-alignment guards are never touched. Gaps here may start/end at any
+    alignment — each is placed contiguously after the previous carved object, so the
+    linker inserts no pad; `make compare` is the hard oracle."""
+    cfg = DATA_GAPS[name]
+    rom = open(ROM, "rb").read()
+    region_start = cfg["region_start"]
+    region_end = cfg["region_end"]
+    frag_prefix = cfg.get("frag_prefix", "data_frontier4")
+    frag_base = f"{frag_prefix}_{name}.tsv"
+
+    gaps = data_section_gaps(rom, region_start, region_end, frag_base)
+    if not gaps:
+        print(f"{name}: nothing left to carve (window fully covered already)")
+        return
+
+    bodies = []
+    rows = []
+    for i, (lo, hi) in enumerate(gaps):
+        secname = f".data.frontier_{name}.gap{i}"
+        label = f"frontier_{name}_{i:03d}_{lo & 0xFFFFFF:06X}"
+        bodies.append(
+            f'\t.section {secname}, "a", %progbits\n'
+            f"@ {name} region-different data, JP {lo:#010x}..{hi:#010x} ({hi - lo} B); "
+            f"long-tail data gap (no .text in window), byte-perfect incbin.\n"
+            f"\t.global {label}\n{label}:\n"
+            f'\t.incbin "{ROM}", 0x{lo - BASE:X}, 0x{hi - lo:X}\n'
+        )
+        rows.append((lo, hi, secname))
+
+    hdr = (
+        f"@ {name}: data-frontier-4 long-tail sweep — region-different data not\n"
+        f"@ reachable by the code-literal carver, in the pure-DATA window\n"
+        f"@ [{region_start:#010x}, {region_end:#010x}) (verified: 0 carved .text\n"
+        f"@ objects inside; whole window is at/above the code+library boundary\n"
+        f"@ 0x080dc134). Each gap is [prev_carved_end, next_carved_start) — already\n"
+        f"@ snapped to carved edges; already-carved region-same sub-assets are\n"
+        f"@ gap-subtracted, so only the uncarved blobs are emitted here.\n\n"
+    )
+    open(f"asm/frontier_{name}.s", "w").write(hdr + "\n".join(bodies))
+
+    frag = os.path.join("layout", "carved_rom.d", frag_base)
+    os.makedirs(os.path.dirname(frag), exist_ok=True)
+    with open(frag, "w") as f:
+        f.write("# carve_frontier.py data_gaps long-tail data (parallel-safe fragment)\n")
+        for s, e, secname in sorted(rows):
+            f.write(
+                f"{s & 0xFFFFFF:06X}\t{e & 0xFFFFFF:06X}\tasm/frontier_{name}.o({secname})\t"
+                f"{name} region-diff data ({e - s} B, long-tail gap)\n"
+            )
+
+    tot = sum(e - s for s, e, _ in rows)
+    print(
+        f"carved {name}: {len(rows)} uncarved data gaps in "
+        f"[{region_start:#010x}, {region_end:#010x}), {tot} B ({tot // 1024} KB)"
+    )
+    print(f"  -> asm/frontier_{name}.s, {frag}")
+
+
 def main():
-    targets = sys.argv[1:] or sorted(SUBSYS)
+    targets = sys.argv[1:] or sorted(SUBSYS) + sorted(DATA_GAPS)
     for t in targets:
-        if t not in SUBSYS:
-            sys.exit(f"unknown subsystem {t!r}; known: {sorted(SUBSYS)}")
-        carve(t)
+        if t in SUBSYS:
+            carve(t)
+        elif t in DATA_GAPS:
+            carve_data_gaps(t)
+        else:
+            sys.exit(
+                f"unknown subsystem {t!r}; known: "
+                f"{sorted(SUBSYS) + sorted(DATA_GAPS)}"
+            )
 
 
 if __name__ == "__main__":
