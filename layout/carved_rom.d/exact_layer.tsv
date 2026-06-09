@@ -161,3 +161,4 @@
 017714	01772C	src/exact_08017714.o(.text)	exact_08017714(run): UnitClearInventory
 017B54	017BDC	src/exact_08017b54.o(.text)	exact_08017b54(run): UnitLoadStatsFromChracter
 017EDC	017FB0	src/exact_08017edc.o(.text)	exact_08017edc(run): UnitCheckStatCaps
+018030	018060	src/exact_08018030.o(.text)	exact_08018030(run): CanUnitRescue
