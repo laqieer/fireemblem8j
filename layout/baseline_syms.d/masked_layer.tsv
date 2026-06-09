@@ -127,3 +127,8 @@ AiGetTurnCombatScoreComponent	0803E02C	thumb	masked_0803e0a4
 AiGetDamageTakenScoreComponent	0803E044	thumb	masked_0803e0a4
 gAiState	0203AA00	data	masked_0803e0a4
 gAiCombatScoreCoefficientTable	080DCE54	data	masked_0803e0a4
+AiScript_Exec	0803C56C	thumb	masked_0803c44c
+gpAi1Table	085D30EC	data	masked_0803c44c
+gAiScript_FallbackAi1	085D2034	data	masked_0803c44c
+gpAi2Table	085D30E0	data	masked_0803c44c
+gAiScript_FallbackAi2	085D2044	data	masked_0803c44c
