@@ -171,3 +171,4 @@ EndFace	08005640	thumb	masked_08005660
 SetFaceDisplayBits	08005678	thumb	masked_08005694
 SetFaceBlinkControl	0800633C	thumb	masked_0800635c
 SetFaceEyeControl	080063D8	thumb	masked_080063e0
+gPlaySt	0202BCEC	data	masked_08009e3c
