@@ -150,3 +150,4 @@
 02D4C4	02D520	src/exact_0802d4c4.o(.text)	exact_0802d4c4(run): TradeMenu_RefreshSelectableCells
 02DDEC	02DDF4	src/exact_0802ddec.o(.text)	exact_0802ddec(run): TradeMenu_TutorialWait_OnInit
 02E218	02E234	src/exact_0802e218.o(.text)	exact_0802e218(run): AddDamagingTrap
+02E234	02E24C	src/exact_0802e234.o(.text)	exact_0802e234(run): RemoveTrap
