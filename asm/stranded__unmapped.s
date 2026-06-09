@@ -58,3 +58,13 @@ InsertRootProcess:
 InsertChildProcess:
 	.incbin "baserom.gba", 0x2D18, 0x18
 
+	.section .text.s_08002D30, "ax", %progbits
+@ UnlinkProcess region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x08002D30..0x08002D78
+	.thumb
+	.align 2, 0
+	.global UnlinkProcess
+	.thumb_func
+UnlinkProcess:
+	.incbin "baserom.gba", 0x2D30, 0x48
+
