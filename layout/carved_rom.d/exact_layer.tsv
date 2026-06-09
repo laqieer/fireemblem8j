@@ -278,3 +278,4 @@
 002F3C	002FBC	src/exact_08002f3c.o(.text)	exact_08002f3c(run): Proc_BlockEachMarked, Proc_UnblockEachMarked, Proc_EndEachMarked
 0AFDE8	0AFE14	src/exact_080afde8.o(.text)	exact_080afde8(run): SaveDrawCursor_Init
 0AFFD0	0AFFF0	src/exact_080affd0.o(.text)	exact_080affd0(run): SaveDraw_SetCursorSlotMark
+0B032C	0B0354	src/exact_080b032c.o(.text)	exact_080b032c(run): AddMainMenuOption, AddExtraMenuOption
