@@ -91,3 +91,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 03F2C0	03F2DC	src/masked_0803f2c0.o(.text)	masked_0803f2c0(run): AiFunc_StoreAiCounter
 03F33C	03F3C4	src/masked_0803f33c.o(.text)	masked_0803f33c(run): AiTryMoveToSpecificPosition
 03F434	03F47C	src/masked_0803f434.o(.text)	masked_0803f434(run): AiFunc_CheckUnitInBoundingBox
+03F948	03F958	src/masked_0803f948.o(.text)	masked_0803f948(run): AiFunc_EndDecision
