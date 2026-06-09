@@ -112,3 +112,4 @@
 02815C	028188	src/exact_0802815c.o(.text)	exact_0802815c(run): GetUnitSupporterCount, GetUnitSupporterCharacter
 0281D0	0281F8	src/exact_080281d0.o(.text)	exact_080281d0(run): GetUnitSupportLevel
 028320	02833C	src/exact_08028320.o(.text)	exact_08028320(run): GetUnitSupporterInitialExp
+028650	028668	src/exact_08028650.o(.text)	exact_08028650(run): GetUnitAffinityIcon
