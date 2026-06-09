@@ -119,3 +119,6 @@ TradeMenu_RefreshSelectableCells
 TradeMenu_GetAdjustedRow
 AddDamagingTrap
 GetUnitSpritePalette
+GetUnitItemCount
+UnitHasItem
+UnitRemoveInvalidItems
