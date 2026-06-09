@@ -188,3 +188,13 @@ GetTextDrawDest:
 InitSpriteText:
 	.incbin "baserom.gba", 0x44E0, 0x24
 
+	.section .text.s_080045E8, "ax", %progbits
+@ GetSpriteTextDrawDest region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080045E8..0x08004608
+	.thumb
+	.align 2, 0
+	.global GetSpriteTextDrawDest
+	.thumb_func
+GetSpriteTextDrawDest:
+	.incbin "baserom.gba", 0x45E8, 0x20
+
