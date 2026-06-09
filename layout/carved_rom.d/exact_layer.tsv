@@ -335,3 +335,4 @@
 087134	087154	src/exact_08087134.o(.text)	exact_08087134(run): IsChar0AlivePlayerUnit_25, IsChar0AlivePlayerUnit_26
 087184	087194	src/exact_08087184.o(.text)	exact_08087184(run): DoesChar0ExistAsPlayerUnit
 087220	087238	src/exact_08087220.o(.text)	exact_08087220(run): AreAllEnemyUnitsDead
+087604	08761C	src/exact_08087604.o(.text)	exact_08087604(run): Uidebug_IsAliveEnemyCountAtLeast50
