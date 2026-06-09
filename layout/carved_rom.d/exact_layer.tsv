@@ -248,3 +248,4 @@
 0CB8BC	0CB960	src/exact_080cb8bc.o(.text)	exact_080cb8bc(run): BlendPaletteToColor
 0B7FD4	0B7FEC	src/exact_080b7fd4.o(.text)	exact_080b7fd4(run): ClassIntroBurst_Init
 0B828C	0B82EC	src/exact_080b828c.o(.text)	exact_080b828c(run): ClassInfoDisplay_HBlankHandler
+01EAF0	01EB00	src/exact_0801eaf0.o(.text)	exact_0801eaf0(run): PhaseIntroUnk_Init
