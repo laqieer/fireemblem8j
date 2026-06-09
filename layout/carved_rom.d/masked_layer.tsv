@@ -182,3 +182,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 099DA4	099E70	src/masked_08099da4.o(.text)	masked_08099da4(run): SallyCir_RectInit
 033680	033700	src/masked_08033680.o(.text)	masked_08033680(run): PrepCameraPan_Init, PrepCameraPan_TurnDown, PrepCameraPan_TurnLeft...
 09A2B4	09A2EC	src/masked_0809a2b4.o(.text)	masked_0809a2b4(run): ApplyPrepWindowColorPalette
+0972D4	097304	src/masked_080972d4.o(.text)	masked_080972d4(run): CanPrepScreenSave
