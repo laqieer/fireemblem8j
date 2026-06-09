@@ -169,3 +169,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 07B580	07B5E0	src/masked_0807b580.o(.text)	masked_0807b580(run): CanStartMu, ResetMuAnims
 07BFA4	07BFCC	src/masked_0807bfa4.o(.text)	masked_0807bfa4(run): GetMu
 07C0DC	07C178	src/masked_0807c0dc.o(.text)	masked_0807c0dc(run): CopyEventMoveREDAs, ClearEventMoveBuffer
+0CD4F0	0CD500	src/masked_080cd4f0.o(.text)	masked_080cd4f0(run): OpAnimScrollBg3Loop
