@@ -212,3 +212,5 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0B2CC4	0B2D1C	src/masked_080b2cc4.o(.text)	masked_080b2cc4(run): FadeInOut_DisableGfx
 0B34A0	0B3538	src/masked_080b34a0.o(.text)	masked_080b34a0(run): GetBgXOffset, GetBgYOffset
 0BA2B4	0BA2F0	src/masked_080ba2b4.o(.text)	masked_080ba2b4(run): ArenaUi_IsBgmActive
+0B62BC	0B62EC	src/masked_080b62bc.o(.text)	masked_080b62bc(run): GetConfigUnk32DifficultyAdjusted
+AAF6D8	AAF6DC	src/masked_080b62bc.o(.data)	masked_080b62bc .data

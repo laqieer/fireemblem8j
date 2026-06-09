@@ -239,3 +239,4 @@ gSoundRoomTable	08A9DDDC	data	masked_080b38b4
 gSoundRoomTable	08A9DDDC	data	masked_080b38d4
 gSoundRoomTable	08A9DDDC	data	masked_080b3930
 gMPlayTable	082140B4	data	masked_080ba2b4
+gPlaySt	0202BCEC	data	masked_080b62bc
