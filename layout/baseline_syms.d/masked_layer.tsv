@@ -184,3 +184,9 @@ MapAnimMoveUnitTowardsTargetExt	0808375C	thumb	masked_08083814
 MapAnimMoveUnitAwayFromTargetExt	080837B8	thumb	masked_08083814
 MapAnimCallSpellAssocSilencefx	080807CC	thumb	masked_08083ce8
 MapAnimCallSpellAssocBarrierfx	08080978	thumb	masked_08083ce8
+MapAnimUnlockEffect	08080AA0	thumb	masked_08083f58
+MapAnimBerserkEffect	080800C0	thumb	masked_08083f58
+MapAnimRestoreEffect	08080334	thumb	masked_08083f58
+MapAnimSleepEffect	08080414	thumb	masked_08083f58
+MapAnimMonsterStoneEffect	08080524	thumb	masked_08083f58
+MapAnimRepairEffect	08080170	thumb	masked_08083f58

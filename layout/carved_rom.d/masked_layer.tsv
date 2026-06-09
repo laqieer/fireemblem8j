@@ -151,3 +151,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 083814	0838D4	src/masked_08083814.o(.text)	masked_08083814(run): MapAnim_MoveSubjectsTowardsTarget, MapAnim_MoveSubjectsAwayFromTarget
 083C18	083C54	src/masked_08083c18.o(.text)	masked_08083c18(run): RegisterMapHpChangeAnim
 083CE8	083D28	src/masked_08083ce8.o(.text)	masked_08083ce8(run): MapAnimCallSpellAssocSilence, MapAnimCallSpellAssocBarrier
+083F58	084014	src/masked_08083f58.o(.text)	masked_08083f58(run): MapAnimCallSpellAssocUnlock, MapAnimCallSpellAssocBerserk, MapAnimCallSpellAssocRestore...
