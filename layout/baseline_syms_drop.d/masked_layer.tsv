@@ -68,3 +68,4 @@ AiGetTerrainCombatPositionScoreComponent
 AiGetClassRank
 PutSprite
 PutSpriteExt
+CheckPermanentFlag

@@ -120,3 +120,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 08545C	085484	src/masked_0808545c.o(.text)	masked_0808545c(run): CheckAnyBlueUnitArea7
 085B10	085B30	src/masked_08085b10.o(.text)	masked_08085b10(run): IsHardMode
 085B9C	085BE4	src/masked_08085b9c.o(.text)	masked_08085b9c(run): EvCheck02_TURN
+086094	0860A8	src/masked_08086094.o(.text)	masked_08086094(run): CheckPermanentFlag

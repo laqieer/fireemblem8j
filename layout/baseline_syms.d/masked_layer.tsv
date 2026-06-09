@@ -158,3 +158,5 @@ CheckAnyBlueUnitArea	080852F0	thumb	masked_0808545c
 gPlaySt	0202BCEC	data	masked_0808545c
 gPlaySt	0202BCEC	data	masked_08085b10
 gPlaySt	0202BCEC	data	masked_08085b9c
+CheckPermanentFlagFrom	0808605C	thumb	masked_08086094
+gPermanentFlagBits	03005240	data	masked_08086094
