@@ -531,7 +531,6 @@ NewEfxNormalEffect	0806EBA0	thumb	banim-efxmagic-phywpn
 EfxPlayHittedSFX	08074934	thumb	banim-efxmagic-phywpn
 SpellFx_Finish	08056114	thumb	banim-efxmagic-phywpn
 SpellFx_WriteBgMap	0805660C	thumb	banim-efxmagic-shine
-FillBGRect	080732A0	thumb	banim-efxmagic-shine
 ProcScr_efxLokmsunaOBJ	086036B4	data	banim-efxmisc
 AnimScr_EfxLokmsunaObjLeft	087A89EC	data	banim-efxmisc
 AnimScr_EfxLokmsunaObjRight	087A8B10	data	banim-efxmisc
@@ -1104,7 +1103,6 @@ gBanimValid	0203E100	data	banim-ekrdispup
 gNopStr	085E3534	data	banim-ekrdispup
 Text_SetCursor	08003D84	thumb	banim-ekrdispup
 gBanimText	02017660	data	banim-ekrdispup
-EfxTmReplacePal	08073228	thumb	banim-ekrdispup
 ShouldCallBattleQuote	080857E8	thumb	banim-ekrdispup
 gEkrDebugModeMaybe	0203E0F8	data	banim-ekrdispup
 gEkrPids	0203E18C	data	banim-ekrdispup
