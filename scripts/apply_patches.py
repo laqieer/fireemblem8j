@@ -25,10 +25,16 @@ if len(sys.argv) < 2:
     sys.exit(0)
 obj = sys.argv[1]
 base = os.path.basename(obj)
-mani = "layout/patches.tsv"
-if not os.path.exists(mani) or not os.path.exists(obj):
+import glob
+# Read the monolith plus any per-task fragments under layout/patches.d/*.tsv, so a
+# parallel carve (carve_exact / carve_data_refs) that wrote its patch rows to its own
+# fragment is still applied. Rows are keyed by object basename, so distinct objects
+# never collide and fragment order is irrelevant.
+manifests = (["layout/patches.tsv"] if os.path.exists("layout/patches.tsv") else []) \
+    + sorted(glob.glob("layout/patches.d/*.tsv"))
+if not manifests or not os.path.exists(obj):
     sys.exit(0)
-rows = [l.rstrip("\n").split("\t") for l in open(mani)
+rows = [l.rstrip("\n").split("\t") for m in manifests for l in open(m)
         if l.strip() and not l.startswith("#")]
 mine = [r for r in rows if len(r) >= 4 and r[0] == base]
 if not mine:

@@ -413,7 +413,6 @@ gMid_Lv	08A73210	data	uiarena
 StartBgmCore	08002398	thumb	uiarena
 EndGmapEffect	080C619C	thumb	worldmap_entry
 gUnk_6	0200AF00	data	worldmap_gmapunit
-AP_Delete	08009194	thumb	worldmap_gmapunit
 HideMoveRangeGraphics	0801D730	thumb	bmitemuse
 ReadGlobalSaveInfo	080A776C	thumb	bmsave-lib
 Checksum16	080A7740	thumb	bmsave-lib
@@ -720,7 +719,6 @@ StartVendorScreen	080B8D88	thumb	worldmap_basemenu
 StartSecretShopScreen	080B8DA8	thumb	worldmap_basemenu
 GmapSugoAdvance	080C61AC	thumb	worldmap_sogu
 AP_Update	080091AC	thumb	worldmap_sogu
-AP_Create	0800916C	thumb	worldmap_sogu
 ProcScr_GmapSogu	08AC2430	data	worldmap_sogu
 EkrDragonTmCpyWithDistance	08072168	thumb	banim-ekrdragon-dracozombie
 Fill16_EkrTsaBuffer	080721E0	thumb	banim-ekrdragon-dracozombie
