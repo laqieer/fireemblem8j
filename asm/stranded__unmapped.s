@@ -388,3 +388,13 @@ _gettimeofday:
 abort:
 	.incbin "baserom.gba", 0xDA918, 0x20
 
+	.section .text.s_080DA9A0, "ax", %progbits
+@ __pack_d region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DA9A0..0x080DAAE8
+	.thumb
+	.align 2, 0
+	.global __pack_d
+	.thumb_func
+__pack_d:
+	.incbin "baserom.gba", 0xDA9A0, 0x148
+
