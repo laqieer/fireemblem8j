@@ -171,3 +171,4 @@
 035D6C	035D80	src/exact_08035d6c.o(.text)	exact_08035d6c(run): StatusHealEffect_BlendSpriteAnim_InitOut
 0B3824	0B3874	src/exact_080b3824.o(.text)	exact_080b3824(run): IsPointInTriangle
 091874	09189C	src/exact_08091874.o(.text)	exact_08091874(run): DoesStringContainTact
+092184	0921F0	src/exact_08092184.o(.text)	exact_08092184(run): CgText_ScrollVramUp
