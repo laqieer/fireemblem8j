@@ -138,3 +138,13 @@ CgbOscOff:
 CgbModVol:
 	.incbin "baserom.gba", 0xD59C0, 0x68
 
+	.section .text.s_080D5E74, "ax", %progbits
+@ m4aMPlayTempoControl region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D5E74..0x080D5E9C
+	.thumb
+	.align 2, 0
+	.global m4aMPlayTempoControl
+	.thumb_func
+m4aMPlayTempoControl:
+	.incbin "baserom.gba", 0xD5E74, 0x28
+

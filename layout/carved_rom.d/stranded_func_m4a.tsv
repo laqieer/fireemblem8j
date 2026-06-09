@@ -12,3 +12,4 @@
 0D5814	0D58C8	asm/stranded_m4a.o(.text.s_080D5814)	m4a:TrkVolPitSet region-same Thumb (descriptive incbin)
 0D5970	0D59C0	asm/stranded_m4a.o(.text.s_080D5970)	m4a:CgbOscOff region-same Thumb (descriptive incbin)
 0D59C0	0D5A28	asm/stranded_m4a.o(.text.s_080D59C0)	m4a:CgbModVol region-same Thumb (descriptive incbin)
+0D5E74	0D5E9C	asm/stranded_m4a.o(.text.s_080D5E74)	m4a:m4aMPlayTempoControl region-same Thumb (descriptive incbin)
