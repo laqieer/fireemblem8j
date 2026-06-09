@@ -12,3 +12,4 @@ ekrBattleSetFlashingEffect	08051024	thumb	masked_08051004
 ekrBattle_3	08051334	thumb	masked_08051320
 ekrBattle_5	08051674	thumb	masked_08051624
 ekrBattleLvupHanlder	0805183C	thumb	masked_080517ec
+gBattleHitArray	0203A5E8	data	masked_08059748

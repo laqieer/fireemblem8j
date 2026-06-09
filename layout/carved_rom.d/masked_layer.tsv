@@ -10,3 +10,4 @@
 051320	051334	src/masked_08051320.o(.text)	masked_08051320(run): ekrBattleOnBattleEnd
 051624	051674	src/masked_08051624.o(.text)	masked_08051624(run): ekrBattle_4
 0517EC	05183C	src/masked_080517ec.o(.text)	masked_080517ec(run): ekrBattle_6
+059748	05976C	src/masked_08059748.o(.text)	masked_08059748(run): CheckBattleHasHit
