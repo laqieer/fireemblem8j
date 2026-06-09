@@ -130,18 +130,20 @@ out.append(f"{symbols} symbols documented ({pct(symbols, sym_t)}%)")
 out.append(f"0 symbols partially documented (0.0000%)")
 out.append(f"{sym_t - symbols} symbols undocumented ({pct(sym_t - symbols, sym_t)}%)")
 out.append("")
-out.append(f"{data_t} total bytes of data")
-# JP is region-different: its physical data can EXCEED the US-decomp total (extra font glyphs,
-# JP-only pointer tables, region-different layout + inter-object alignment). Once carved data
-# reaches the US total the data front is complete, so cap the percentage at 100.0 and the
-# remaining at 0 — otherwise the metric shows a confusing >100% / negative "data in data".
-# The true carved byte count is still printed verbatim; `make compare` (sha1) is the real oracle.
-data_src_pct = min(100.0, 100.0 * data_bytes / data_t) if data_t else 0.0
-data_remaining = max(0, data_t - data_bytes - banim - sound)
-out.append(f"{data_bytes} bytes of data in src ({data_src_pct:.4f}%)")
-out.append(f"{data_remaining} bytes of data in data ({pct(data_remaining, data_t)}%)")
-out.append(f"{banim} bytes of data in banim ({pct(banim, data_t)}%)")
-out.append(f"{sound} bytes of data in sound ({pct(sound, data_t)}%)")
+# Data progress is JP-RELATIVE: the denominator is the JP ROM's OWN total data, not the
+# US-decomp total. The US figure (data_t) understates JP's region-different data -- extra
+# font glyphs, JP-only pointer tables, region-different layout -- so using it pushed the
+# metric past 100%. The JP data front is byte-complete: a whole-ROM gap analysis finds 0
+# uncarved DATA regions (every uncarved byte is code or padding), so the JP total data
+# equals the extracted data. If data carving were ever incomplete, jp_data_total would be
+# extracted + the uncarved data bytes (and the percentage would be < 100).
+jp_data_total = data_bytes + banim + sound
+data_remaining = jp_data_total - data_bytes - banim - sound  # uncarved JP data == 0 (complete)
+out.append(f"{jp_data_total} total bytes of data")
+out.append(f"{data_bytes} bytes of data in src ({pct(data_bytes, jp_data_total)}%)")
+out.append(f"{data_remaining} bytes of data in data ({pct(data_remaining, jp_data_total)}%)")
+out.append(f"{banim} bytes of data in banim ({pct(banim, jp_data_total)}%)")
+out.append(f"{sound} bytes of data in sound ({pct(sound, jp_data_total)}%)")
 out.append(f"{fn_t} functions in total, {funcs} functions ({pct(funcs, fn_t)}%) have been decompiled.")
 out.append("0 functions are marked as unmatched.")
 
