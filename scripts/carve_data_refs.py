@@ -86,11 +86,17 @@ def main():
     # ARE included, so the cascade never re-carves or overlaps an object another agent claimed.
     TASK = "data_refs_recursive"
     OUR_FRAG = os.path.join("layout", "carved_rom.d", TASK + ".tsv")
+    # own_asm = ONLY the asm THIS task previously emitted (the objects OUR fragment references),
+    # NOT every dat_*_ref.s in asm/. Listing all of them wrongly claimed the MONOLITH carve's .s
+    # (same dat_*_ref naming) as ours, so the reaper (`own_asm - emitted`, below) deleted them and
+    # left dangling layout rows -- builds locally (stale .o survives make clean) but breaks CI's
+    # fresh-checkout link with `ld: cannot find asm/X.o`.
     own_asm = set()
-    if os.path.isdir("asm"):
-        for f in os.listdir("asm"):
-            if f.startswith("dat_") and f.endswith("_ref.s"):
-                own_asm.add(f)
+    if os.path.exists(OUR_FRAG):
+        for l in open(OUR_FRAG):
+            m = re.search(r"asm/(dat_\S+?_ref)\.o\(", l)
+            if m:
+                own_asm.add(m.group(1) + ".s")
 
     # Carved set = monolith manifest + every OTHER per-task fragment (not ours).
     sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "parallel"))
