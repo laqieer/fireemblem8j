@@ -123,3 +123,5 @@ gWorldmapGmap_2
 gWMNodeData
 ResetGmStoryNode
 PutGMapPIShopIcons
+ApplyGMapPIMinimapUnitPalette
+InitGMapPIInterfaceKind

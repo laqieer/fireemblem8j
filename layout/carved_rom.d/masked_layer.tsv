@@ -235,3 +235,4 @@ AAF6D8	AAF6DC	src/masked_080b62bc.o(.data)	masked_080b62bc .data
 0C1894	0C18D0	src/masked_080c1894.o(.text)	masked_080c1894(run): GmBuildSkirmishNodeList
 0C1DC0	0C1DE8	src/masked_080c1dc0.o(.text)	masked_080c1dc0(run): ResetGmStoryNode
 0C37C4	0C3864	src/masked_080c37c4.o(.text)	masked_080c37c4(run): PutGMapPIShopIcons
+0C3C88	0C3D0C	src/masked_080c3c88.o(.text)	masked_080c3c88(run): InitGMapPIInterfaceKind

@@ -255,3 +255,5 @@ gWMNodeData	081F5D7C	data	masked_080c1524
 gPlaySt	0202BCEC	data	masked_080c1524
 gWMNodeData	081F5D7C	data	masked_080c37c4
 gUnk_16	0201B430	data	masked_080c37c4
+GMapPI_GetGMapUnitIndexAndFaction	080C3C34	thumb	masked_080c3c88
+ApplyGMapPIMinimapUnitPalette	080C33A0	thumb	masked_080c3c88
