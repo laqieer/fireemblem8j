@@ -18,3 +18,7 @@ CheckRoundCrit
 EfxGetCamMovDuration
 gBmSt
 gBattleTarget
+gUiFramePaletteA
+gUiFramePaletteB
+gUiFramePaletteC
+gUiFramePaletteD

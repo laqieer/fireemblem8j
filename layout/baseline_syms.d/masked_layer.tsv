@@ -35,3 +35,7 @@ InitRightAnim	0805AD00	thumb	masked_0805ab5c
 gBmSt	0202BCAC	data	masked_08035538
 gBattleTarget	0203A568	data	masked_080365d8
 gBmSt	0202BCAC	data	masked_080365d8
+gUiFramePaletteA	085E0D94	data	masked_08036e0c
+gUiFramePaletteB	085E0DB4	data	masked_08036e0c
+gUiFramePaletteC	085E0DD4	data	masked_08036e0c
+gUiFramePaletteD	085E0DF4	data	masked_08036e0c
