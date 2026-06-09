@@ -127,3 +127,4 @@ BoxDialogue_DrawBoxInterpolated	0808CBF4	thumb	exact_0808cc84
 StartStarRotationEffect	08081B38	thumb	exact_08081b78
 StartStarRotationEffect	08081B38	thumb	exact_08081b98
 MapAnimResetHBlank	08084298	thumb	exact_080800b4
+GetMinimapTileAt	080AC424	thumb	exact_080ac610
