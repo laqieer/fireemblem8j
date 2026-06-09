@@ -1,2 +1,3 @@
 02028F74	ewram	src/masked_08004d48.o(ewram_data)	masked_08004d48 ewram_data
 03000100	iwram	src/masked_08009150.o(.bss)	masked_08009150 .bss
+03000100	iwram	src/masked_080095e0.o(.bss)	masked_080095e0 .bss
