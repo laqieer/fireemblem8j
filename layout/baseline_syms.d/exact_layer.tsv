@@ -129,3 +129,5 @@ StartStarRotationEffect	08081B38	thumb	exact_08081b98
 MapAnimResetHBlank	08084298	thumb	exact_080800b4
 GetMinimapTileAt	080AC424	thumb	exact_080ac610
 StartMuInternal	0807A964	thumb	exact_0807a84c
+PlayMuStepSe	0807ACAC	thumb	exact_0807ab94
+StartMuInternal	0807A964	thumb	exact_0807ab94

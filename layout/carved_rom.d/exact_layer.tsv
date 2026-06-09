@@ -233,3 +233,4 @@
 0AC610	0AC624	src/exact_080ac610.o(.text)	exact_080ac610(run): GetMinimapTerrainCellAt
 07A84C	07A888	src/exact_0807a84c.o(.text)	exact_0807a84c(run): StartMuExt
 07A908	07A948	src/exact_0807a908.o(.text)	exact_0807a908(run): EnableMuCamera, DisableMuCamera, StartUiMu
+07AB94	07AC20	src/exact_0807ab94.o(.text)	exact_0807ab94(run): IsMuActive, SetMuMoveScript, StartMuScripted
