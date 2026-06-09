@@ -792,4 +792,18 @@ port US; apply the `(s16)`-cast idiom for sign-ext; deterministic C-structure fo
 Re-pin every region-different code TU by IDA before assignment, never by US address. (3) ROM-pool literal
 addresses are ground truth when IDA's `.data` VMAs are stale.
 
-**Status:** Recorded 2026-06-09. Sign-ext class is the gating code-front problem; core-tail follow-up in flight.
+**Status:** Recorded 2026-06-09. **UPDATE — sign-ext class CRACKED + a new blocker class found.**
+- **Sign-ext lever (reusable, byte-perfect on 9/10 banim-efxmagic.c core-tail fns):** widen the s16 to an
+  `int` local before first use (`int val = b;`) → agbcc emits one `asr` instead of `lsr`. A store-only s16
+  stays `lsr` even when declared `s16` — the int-widen is the lever; for signed *params* the header prototype
+  must also become `s16` (e.g. NewEfxCircleWIN `d`/`e`). Combine with the `(s16)(...)`-cast on locals. This
+  generalizes to every lsr/asr-divergent TU.
+- **NEW blocker class — agbcc instruction-scheduler artifacts:** `Loop6C_efxMagicQUAKE` (and
+  StartStoneShatterAnim) differ only in instruction SCHEDULING/ordering (arg-load order; batched-vs-inline
+  sign-ext) that NO source restructuring flips (8+ variants each) — US's own agbcc produces the same
+  "wrong" ordering. These need a decomp-permuter long run, which is **SIGTERM'd in this sandbox**
+  (multiprocessing killed at ~144). So the core-tail TU is 0-carve (Loop6C blocks the shared 10-fn .o); the
+  9/10 cracked `.c` + all deps + the `Loop6C` permuter target are preserved in `nonmatchings/efxmagic_coretail/`.
+- **Two open tooling items:** (1) make decomp-permuter survive long runs here (single-thread / detached /
+  resource-tuned) — unblocks the scheduler-artifact class across multiple TUs (Loop6C, StartStoneShatterAnim, …);
+  (2) the int-widen lever should be applied across the remaining sign-ext TUs.
