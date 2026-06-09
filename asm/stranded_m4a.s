@@ -178,3 +178,13 @@ m4aMPlayLFOSpeedSet:
 ply_xwave:
 	.incbin "baserom.gba", 0xD6274, 0x48
 
+	.section .text.s_080D6320, "ax", %progbits
+@ ply_xiecv region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080D6320..0x080D632C
+	.thumb
+	.align 2, 0
+	.global ply_xiecv
+	.thumb_func
+ply_xiecv:
+	.incbin "baserom.gba", 0xD6320, 0xC
+
