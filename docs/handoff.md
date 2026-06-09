@@ -30,12 +30,21 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
     perfect critical path** — the quality layer (funclib/NONMATCHING/coddog/m2c) is additive
     and must never starve it or touch the oracle.
   - **SURVEY ACTION SCHEDULE (`docs/gba-decomp-survey.md`, user-approved, P9-driven):**
-    P0 = funclib ingest (D25, dispatched) · NONMATCHING infra+pilot (D26, dispatched) · coddog
-    region-same/different classifier (dispatched) · m2c default first-pass on gbadisasm asm.
-    P1 = US-`.o`-as-target asm-differ/objdiff diff · agbcc near-miss playbook · mapfile_parser
-    (first_diff/bss_check) · objdiff report.json in CI + decomp.dev app. P2 = NODEP=1 ·
-    mine FireEmblem7J/fe6/fe7 JP ports · mizuchi-benchmark techniques · multi-region-from-one-
-    tree arch eval (genuine fork → consult Copilot per D16). Tracked as tasks; integrate serially.
+    **P0 ALL LANDED + CI-green on main (2026-06-09):** funclib ingest D25 (`fa8b9100`,
+    `reference/maps/funclib_us_jp.tsv`, 8377 rows / 6371 region-different US-addr hints) ·
+    NONMATCHING infra+pilot D26 (`f1eca9d9`, `make nonmatching` + `src/nonmatching/` +
+    check-nonmatching, AddSpecialChar pilot) · m2c first-pass P0.4 (`efeef5d6`,
+    `scripts/m2c_firstpass.py`, pilot 11/12 ~91% → 11 `src/nonmatching/*.c`, 353-fn backlog) ·
+    coddog classifier P0.3 (`93eb4af3`, validates funcmap 91.7% strict / 0 new targets / blind
+    to region-different → opt-in audit, NOT a CI gate). asm→C quality pipeline now wired
+    end-to-end: gbadisasm asm → m2c → NON_MATCHING C (funclib-named) → permuter → matching C.
+    **P1 (In progress):** agbcc near-miss playbook (dispatched `docs/agbcc-playbook`) · US-`.o`-
+    as-target asm-differ/objdiff diff · mapfile_parser (first_diff/bss_check) · objdiff
+    report.json in CI + decomp.dev app. **P2 (Backlog):** NODEP=1 · mine FireEmblem7J/fe6/fe7
+    JP ports · mizuchi-benchmark techniques · multi-region-from-one-tree arch eval (genuine fork
+    → consult Copilot per D16). **NEXT after gbadisasm scaling lands:** scale m2c first-pass over
+    the full region-different set (more candidates once thousands of new `asm/*.s` reach main).
+    Board: Project 3 mirrors this (P0 items Done, P1 In progress). Integrate serially per branch.
 
 - **SPRINT 2026-06-09 (P8-gbadisasm-carver) — gbadisasm DESCRIPTIVE-ASM LAYER LIVE (D23/D24):
   region-different code front is now mechanically carveable.** `scripts/carve_gbadisasm_asm.py`
