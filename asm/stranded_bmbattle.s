@@ -8,3 +8,13 @@
 InitBattleUnitWithoutBonuses:
 	.incbin "baserom.gba", 0x2A5D4, 0x38
 
+	.section .text.s_0802ABD0, "ax", %progbits
+@ ComputeBattleUnitEffectiveHitRate region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x0802ABD0..0x0802AC00
+	.thumb
+	.align 2, 0
+	.global ComputeBattleUnitEffectiveHitRate
+	.thumb_func
+ComputeBattleUnitEffectiveHitRate:
+	.incbin "baserom.gba", 0x2ABD0, 0x30
+
