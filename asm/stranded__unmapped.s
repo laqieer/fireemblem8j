@@ -448,3 +448,13 @@ __gtdf2:
 __gedf2:
 	.incbin "baserom.gba", 0xDB4D4, 0x4C
 
+	.section .text.s_080DB5B8, "ax", %progbits
+@ __floatsidf region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080DB5B8..0x080DB634
+	.thumb
+	.align 2, 0
+	.global __floatsidf
+	.thumb_func
+__floatsidf:
+	.incbin "baserom.gba", 0xDB5B8, 0x7C
+
