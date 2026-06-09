@@ -286,3 +286,4 @@
 0AE0E4	0AE0F0	src/exact_080ae0e4.o(.text)	exact_080ae0e4(run): _ExecSaveMenuMiscOption
 0AE0F0	0AE100	src/exact_080ae0f0.o(.text)	exact_080ae0f0(run): SaveMenuRegisterSlotSelected
 0AF270	0AF28C	src/exact_080af270.o(.text)	exact_080af270(run): SaveMenuCopyPalette
+04CACC	04CADC	src/exact_0804cacc.o(.text)	exact_0804cacc(run): Sio_StartBoxTransitionOpenDefault

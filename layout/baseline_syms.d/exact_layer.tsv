@@ -147,3 +147,4 @@ gPrepscreen_2	02012F56	data	exact_08099ad0
 PrepScreenProc_StartMapMenu	08033558	thumb	exact_080333cc
 PrepGetLatestCharId	08097674	thumb	exact_08097988
 ExecSaveMenuMiscOption	080ADCA4	thumb	exact_080ae0e4
+Sio_StartBoxTransitionOpen	0804CA24	thumb	exact_0804cacc
