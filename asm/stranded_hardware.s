@@ -28,3 +28,13 @@ SetBackgroundMapDataOffset:
 BG_SetColorBpp:
 	.incbin "baserom.gba", 0x101C, 0x28
 
+	.section .text.s_080012B8, "ax", %progbits
+@ SetNextVCount region-same Thumb (US shifted); descriptive incbin baserom.gba
+@ JP 0x080012B8..0x080012CC
+	.thumb
+	.align 2, 0
+	.global SetNextVCount
+	.thumb_func
+SetNextVCount:
+	.incbin "baserom.gba", 0x12B8, 0x14
+

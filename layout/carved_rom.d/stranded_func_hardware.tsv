@@ -1,3 +1,4 @@
 000F54	000F74	asm/stranded_hardware.o(.text.s_08000F54)	hardware:GetTileIndex region-same Thumb (descriptive incbin)
 000FB4	000FFC	asm/stranded_hardware.o(.text.s_08000FB4)	hardware:SetBackgroundMapDataOffset region-same Thumb (descriptive incbin)
 00101C	001044	asm/stranded_hardware.o(.text.s_0800101C)	hardware:BG_SetColorBpp region-same Thumb (descriptive incbin)
+0012B8	0012CC	asm/stranded_hardware.o(.text.s_080012B8)	hardware:SetNextVCount region-same Thumb (descriptive incbin)
