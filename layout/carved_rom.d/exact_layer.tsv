@@ -366,3 +366,4 @@
 0C2F14	0C2F7C	src/exact_080c2f14.o(.text)	exact_080c2f14(run): GmMu_IsMoving
 0C3118	0C3144	src/exact_080c3118.o(.text)	exact_080c3118(run): GmMu_FinishMovement
 0C0A38	0C0A98	src/exact_080c0a38.o(.text)	exact_080c0a38(run): MapRoute_RenderPathGfx
+0C0D60	0C0DA4	src/exact_080c0d60.o(.text)	exact_080c0d60(run): MapRoute_OffsetTileIndices
