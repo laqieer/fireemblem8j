@@ -90,3 +90,4 @@
 014068	01407C	src/exact_08014068.o(.text)	exact_08014068(run): FadeInBlackSpeed10
 01407C	014090	src/exact_0801407c.o(.text)	exact_0801407c(run): FadeInBlackSpeed20
 014090	0140A4	src/exact_08014090.o(.text)	exact_08014090(run): FadeInBlackSpeed40
+0140A4	0140B8	src/exact_080140a4.o(.text)	exact_080140a4(run): FadeInWhiteSpeed10Locking
