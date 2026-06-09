@@ -222,3 +222,4 @@ LoadUnit	0801786C	thumb	exact_0801772c
 GetCgTextFlags	08090D10	thumb	exact_080916ac
 EvCheck05_LOCA	08085C70	thumb	exact_08085cb0
 MapAnimStartSpellAssocFadeExt	080818A8	thumb	exact_08084188
+MapAnimSpellAssocResetPalExt	08081908	thumb	exact_08084194
