@@ -306,8 +306,30 @@ Per-function workflow:
 # `glabel <func>` (literal-pool data pointers as `.word gSymbol` so the target
 # object gets the right relocations).
 scripts/permuter/permute.sh import src/your_file.c path/to/<func>.s
-scripts/permuter/permute.sh run nonmatchings/<func>/ -j   # prints base score, then searches
+scripts/permuter/permute.sh run nonmatchings/<func>/ -j 8   # base score, then searches (8 workers)
 ```
+
+**Long runs in a sandbox / agent harness — use `bg`, not `run`.** A foreground
+`run` that outlives the harness's wall-clock timeout gets SIGTERM'd (exit 143/144),
+which kills the whole multiprocessing pool and *looks* like "the permuter died" —
+but it is **not** a sandbox/cgroup/OOM limit (verified: a detached run reached
+80k+ iterations / 9+ min / 0 crashes here). Run detached so the search survives
+across turns:
+```bash
+scripts/permuter/permute.sh bg nonmatchings/<func>/ -j 12 --stop-on-zero
+tail -f nonmatchings/<func>/permute.log        # \r-separated status line
+ls nonmatchings/<func>/output-*                # output-<SCORE>-<seq>/, best kept
+pkill -f 'permuter.py.*<func>'                 # stop early
+```
+`bg` is `setsid`-detached (own session/process group). `-j N` enables N-worker
+multiprocessing (~5x faster than the default `-j 1`); both are stable here.
+
+Caveat (instruction-scheduling artifacts): the scorer is an objdump *edit-distance*,
+which for a pure agbcc reorder/regalloc residual can decorrelate from real bytes —
+its lowest-heuristic candidate may be byte-*worse* than a hand-written one. When the
+target differs from a faithful port only in scheduling, validate candidates against
+`make compare` (or a byte diff of the carve range), not the heuristic, and prefer a
+manual lever (e.g. inlining call args, an `int val=(s16)x;` widen) if it wins.
 
 How it's wired (tracked: `permuter_settings.toml` + `scripts/permuter/`):
 - `compiler_command` mirrors the Makefile C pipeline (cpp | iconv UTF-8→CP932 |
