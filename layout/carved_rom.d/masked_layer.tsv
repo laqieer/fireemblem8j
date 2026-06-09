@@ -161,3 +161,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0AC358	0AC388	src/masked_080ac358.o(.text)	masked_080ac358(run): GetMinimapDoorTileAt
 0AC388	0AC424	src/masked_080ac388.o(.text)	masked_080ac388(run): GetMinimapBridgeKindAt
 0AC424	0AC610	src/masked_080ac424.o(.text)	masked_080ac424(run): GetMinimapTileAt
+0AC674	0AC89C	src/masked_080ac674.o(.text)	masked_080ac674(run): DrawMinimapInternal

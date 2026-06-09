@@ -204,3 +204,6 @@ GetMinimapSeaKindAt	080AC000	thumb	masked_080ac424
 GetMinimapDoorTileAt	080AC358	thumb	masked_080ac424
 GetMinimapCliffKindAt	080AC1EC	thumb	masked_080ac424
 GetMinimapStairTileAt	080AC314	thumb	masked_080ac424
+GetMinimapTerrainCellAt	080AC610	thumb	masked_080ac674
+GetMinimapObjectCellAt	080AC624	thumb	masked_080ac674
+gBmMapSize	0202E4D0	data	masked_080ac674
