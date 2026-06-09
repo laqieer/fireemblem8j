@@ -1,1 +1,2 @@
 00916C	0091AC	src/exact_0800916c.o(.text)	exact_0800916c(run): AP_Create, AP_Delete
+004F3C	004F48	src/exact_08004f3c.o(.text)	exact_08004f3c(run): AnimDisplay

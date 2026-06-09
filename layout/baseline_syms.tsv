@@ -554,7 +554,6 @@ EfxPalFlashingInOut	080738A4	thumb	banim-efxstatusunit
 GetEkrDragonStatusUnk1	08072048	thumb	banim-efxstatusunit
 gpEfxUnitPaletteBackup	02000054	data	banim-efxstatusunit
 ProcScr_ekrsubAnimeEmulator	087A8F64	data	banim-efxutils
-AnimDisplay	08004F3C	thumb	banim-efxutils
 gAnimSpriteRotScalePosX	080E67B4	data	banim-efxutils
 gAnimSpriteRotScalePosY	080E67D4	data	banim-efxutils
 EfxTmCpyExt	08073418	thumb	banim-ekrarena
