@@ -83,3 +83,8 @@ GetUnitSupportLevel	080281D0	thumb	masked_08028544
 ApplyAffinitySupportBonuses	080284E4	thumb	masked_08028544
 gBmSt	0202BCAC	data	masked_08028544
 gPlaySt	0202BCEC	data	masked_080a8e48
+GetCurerentGameMode	080A964C	thumb	masked_080a9658
+InitGlobalSaveInfodata	080A7828	thumb	masked_080a9658
+RegisterCompletedPlaythrough	080A9614	thumb	masked_080a9658
+gPlaySt	0202BCEC	data	masked_080a9658
+WriteGlobalSaveInfo	080A77EC	thumb	masked_080a9658
