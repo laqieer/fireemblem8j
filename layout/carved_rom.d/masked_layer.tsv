@@ -133,3 +133,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 00C800	00C834	src/masked_0800c800.o(.text)	masked_0800c800(run): Event9D_
 00CEC0	00CEE8	src/masked_0800cec0.o(.text)	masked_0800cec0(run): EventC1_SKIPWM, EventC2_WmNoFade
 005660	005678	src/masked_08005660.o(.text)	masked_08005660(run): EndFaceById
+005694	0056AC	src/masked_08005694.o(.text)	masked_08005694(run): SetFaceDisplayBitsById

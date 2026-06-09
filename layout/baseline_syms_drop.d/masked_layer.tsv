@@ -72,3 +72,5 @@ CheckPermanentFlag
 GetSupportTalkEntry
 gSupportTalkList
 EndFaceById
+SetFaceDisplayBits
+SetFaceDisplayBitsById
