@@ -241,3 +241,4 @@
 07BCA0	07BCC4	src/exact_0807bca0.o(.text)	exact_0807bca0(run): MuRestorePalInfo_Apply
 07BDB4	07BDDC	src/exact_0807bdb4.o(.text)	exact_0807bdb4(run): MuCritFlash_Init, MuCritFlash_SetFadedPalette
 07BF24	07BF2C	src/exact_0807bf24.o(.text)	exact_0807bf24(run): MuMaxWalkSpeedFunc
+07BF80	07BFA4	src/exact_0807bf80.o(.text)	exact_0807bf80(run): SetMuPal
