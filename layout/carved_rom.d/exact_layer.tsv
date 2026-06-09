@@ -32,3 +32,4 @@
 0727B4	0727C4	src/exact_080727b4.o(.text)	exact_080727b4(run): SetEkrDragonSkipTransfer
 0727C4	0727E4	src/exact_080727c4.o(.text)	exact_080727c4(run): CheckEkrDragonDead
 0727E4	072804	src/exact_080727e4.o(.text)	exact_080727e4(run): CheckEkrDragonSkipTransfer
+071FF8	07201C	src/exact_08071ff8.o(.text)	exact_08071ff8(run): GetEkrDragonStatusAttr, AddEkrDragonStatusAttr

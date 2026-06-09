@@ -15,3 +15,4 @@ EfxDKUpdateFrontAnimPostion	08078EF4	thumb	exact_08079030
 gEkrXPosReal	02000028	data	exact_08079328
 gEkrYPosReal	0200002C	data	exact_08079328
 EfxDKUpdateFrontAnimPostion	08078EF4	thumb	exact_08079328
+GetEkrDragonStatus	08071FD8	thumb	exact_08071ff8

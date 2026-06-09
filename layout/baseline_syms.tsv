@@ -679,7 +679,6 @@ GetEfxHp	08059890	thumb	banim-ekrdragon-myrrh
 EkrPrepareBanimfx	08059810	thumb	banim-ekrdragon-myrrh
 gEkrSpellAnimIndex	0203E114	data	banim-ekrdragon-myrrh
 SwitchAISFrameDataFromBARoundType	0805AE20	thumb	banim-ekrdragon-myrrh
-AddEkrDragonStatusAttr	08072004	thumb	banim-ekrdragon-myrrh
 SetEkrDragonStatusType	08072034	thumb	banim-ekrdragon-myrrh
 PutBanimBG	08077F0C	thumb	banim-ekrhensei
 EkrGauge_Set4C	08051ED4	thumb	banim-ekrhensei
@@ -1004,7 +1003,6 @@ ProcScr_ekrDragonTunkFace	08848AA0	data	banim-ekrdragon-demonking
 EfxCreateBackAnim	0805654C	thumb	banim-ekrdragon-demonking
 BanimScr_DemoKingTunkFace	088486DC	data	banim-ekrdragon-demonking
 BanimScr_Ekrdragonfx_3	0884886C	data	banim-ekrdragon-demonking
-GetEkrDragonStatusAttr	08071FF8	thumb	banim-ekrdragonstatus
 DrawBattlePopup	080780DC	thumb	banim-ekrpopup
 EfxPlaySound5AVol100	08077F8C	thumb	banim-ekrpopup
 NewEfxQuakePure	08054364	thumb	banim-ekrtriangle
