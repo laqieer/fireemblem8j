@@ -59,3 +59,5 @@ StartFadeCore	08014150	thumb	masked_08013fb0
 ForceScreenToBlack	08014268	thumb	masked_08013fb0
 StartFadeCore	08014150	thumb	masked_08014108
 ForceScreenToWhite	080142C4	thumb	masked_08014108
+CallDelayedArg	0801490C	thumb	masked_08014bb0
+PlaySeFunc	08014BC8	thumb	masked_08014bb0
