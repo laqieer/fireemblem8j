@@ -178,3 +178,4 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 08F48C	08F4B0	src/masked_0808f48c.o(.text)	masked_0808f48c(run): IsCursorInLowerScreenHalf
 01D7B0	01D808	src/masked_0801d7b0.o(.text)	masked_0801d7b0(run): TrySwitchViewedUnit
 0A2CE8	0A2D10	src/masked_080a2ce8.o(.text)	masked_080a2ce8(run): IsTacticianDivinationAvailable
+0A2D28	0A2D48	src/masked_080a2d28.o(.text)	masked_080a2d28(run): IsChapterIndexAbove0x61
