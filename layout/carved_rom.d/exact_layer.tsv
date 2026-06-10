@@ -552,3 +552,7 @@
 042538	0425A4	src/Sio_ReadMultiFrame.o(.text)	Sio_ReadMultiFrame (sio cursor; masked-tier graduated)
 042988	042A00	src/Sio_StartLinkSession.o(.text)	Sio_StartLinkSession (sio cursor; masked-tier graduated)
 042A00	042A78	src/Sio_StartLinkSessionFast.o(.text)	Sio_StartLinkSessionFast (sio cursor; masked-tier graduated)
+001F0C	001F20	src/BG_EnableSync.o(.text)	BG_EnableSync (exact-tier graduated from gbadisasm asm)
+001EFC	001F0C	src/BG_EnableSyncByMask.o(.text)	BG_EnableSyncByMask (exact-tier graduated from gbadisasm asm)
+001F20	001F30	src/ClearBgsModified.o(.text)	ClearBgsModified (exact-tier graduated from gbadisasm asm)
+00204C	002088	src/InitOam.o(.text)	InitOam (exact-tier graduated from gbadisasm asm)

@@ -1,0 +1,8 @@
+# Phase-1 data-table support: bind hardware.c BSS statics so the hardware funcs in
+# separately-graduated files can graduate to matching C. JP addresses from
+# reference/maps/ram_us_jp.tsv (us-decomp-nm + addr_map) and verified against the
+# functions' decoded literal pools. These are TU-private statics extern'd in
+# include/hardware.h; binding them is a pure address binding (no ROM bytes).
+sModifiedBGs	0300000C	data	phase1_hardware_statics
+sOamHi	03000018	data	phase1_hardware_statics
+sOamLo	03000028	data	phase1_hardware_statics
