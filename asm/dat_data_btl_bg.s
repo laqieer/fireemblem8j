@@ -3,196 +3,196 @@
 @ src/data/data_btl_bg.o: region-same content at JP 0x087b9f98 (US 0x08767e84, shift -0x-52114); incbin baserom.gba
 	.global btl_bg_10_tiles
 btl_bg_10_tiles:
-	.incbin "baserom.gba", 0x7B9F98, 0x1084
+	.incbin "graphics/btl_bg/btl_bg_10.feimg3.bin.lz"
 	.global btl_bg_10_palette
 btl_bg_10_palette:
-	.incbin "baserom.gba", 0x7BB01C, 0x104
+	.incbin "graphics/btl_bg/btl_bg_10.gbapal.lz"
 	.global btl_bg_10_map
 btl_bg_10_map:
-	.incbin "baserom.gba", 0x7BB120, 0x2CC
+	.incbin "graphics/btl_bg/btl_bg_10.fetsa3.bin.lz"
 	.global btl_bg_11_tiles
 btl_bg_11_tiles:
-	.incbin "baserom.gba", 0x7BB3EC, 0x1D88
+	.incbin "graphics/btl_bg/btl_bg_11.feimg3.bin.lz"
 	.global btl_bg_11_palette
 btl_bg_11_palette:
-	.incbin "baserom.gba", 0x7BD174, 0x6C
+	.incbin "graphics/btl_bg/btl_bg_11.gbapal.lz"
 	.global btl_bg_11_map
 btl_bg_11_map:
-	.incbin "baserom.gba", 0x7BD1E0, 0x2E0
+	.incbin "graphics/btl_bg/btl_bg_11.fetsa3.bin.lz"
 	.global btl_bg_12_tiles
 btl_bg_12_tiles:
-	.incbin "baserom.gba", 0x7BD4C0, 0x101C
+	.incbin "graphics/btl_bg/btl_bg_12.feimg3.bin.lz"
 	.global btl_bg_12_palette
 btl_bg_12_palette:
-	.incbin "baserom.gba", 0x7BE4DC, 0x8C
+	.incbin "graphics/btl_bg/btl_bg_12.gbapal.lz"
 	.global btl_bg_12_map
 btl_bg_12_map:
-	.incbin "baserom.gba", 0x7BE568, 0x1D8
+	.incbin "graphics/btl_bg/btl_bg_12.fetsa3.bin.lz"
 	.global btl_bg_13_tiles
 btl_bg_13_tiles:
-	.incbin "baserom.gba", 0x7BE740, 0xDC4
+	.incbin "graphics/btl_bg/btl_bg_13.feimg3.bin.lz"
 	.global btl_bg_13_palette
 btl_bg_13_palette:
-	.incbin "baserom.gba", 0x7BF504, 0xFC
+	.incbin "graphics/btl_bg/btl_bg_13.gbapal.lz"
 	.global btl_bg_13_map
 btl_bg_13_map:
-	.incbin "baserom.gba", 0x7BF600, 0x298
+	.incbin "graphics/btl_bg/btl_bg_13.fetsa3.bin.lz"
 	.global btl_bg_14_tiles
 btl_bg_14_tiles:
-	.incbin "baserom.gba", 0x7BF898, 0xB1C
+	.incbin "graphics/btl_bg/btl_bg_14.feimg3.bin.lz"
 	.global btl_bg_14_palette
 btl_bg_14_palette:
-	.incbin "baserom.gba", 0x7C03B4, 0xB0
+	.incbin "graphics/btl_bg/btl_bg_14.gbapal.lz"
 	.global btl_bg_14_map
 btl_bg_14_map:
-	.incbin "baserom.gba", 0x7C0464, 0x1DC
+	.incbin "graphics/btl_bg/btl_bg_14.fetsa3.bin.lz"
 	.global btl_bg_15_tiles
 btl_bg_15_tiles:
-	.incbin "baserom.gba", 0x7C0640, 0xE08
+	.incbin "graphics/btl_bg/btl_bg_15.feimg3.bin.lz"
 	.global btl_bg_15_palette
 btl_bg_15_palette:
-	.incbin "baserom.gba", 0x7C1448, 0xE8
+	.incbin "graphics/btl_bg/btl_bg_15.gbapal.lz"
 	.global btl_bg_15_map
 btl_bg_15_map:
-	.incbin "baserom.gba", 0x7C1530, 0x1E4
+	.incbin "graphics/btl_bg/btl_bg_15.fetsa3.bin.lz"
 	.global btl_bg_16_palette
 btl_bg_16_palette:
-	.incbin "baserom.gba", 0x7C1714, 0xC8
+	.incbin "graphics/btl_bg/btl_bg_16.gbapal.lz"
 	.global btl_bg_17_palette
 btl_bg_17_palette:
-	.incbin "baserom.gba", 0x7C17DC, 0xE4
+	.incbin "graphics/btl_bg/btl_bg_17.gbapal.lz"
 	.global btl_bg_18_palette
 btl_bg_18_palette:
-	.incbin "baserom.gba", 0x7C18C0, 0x118
+	.incbin "graphics/btl_bg/btl_bg_18.gbapal.lz"
 	.global btl_bg_19_palette
 btl_bg_19_palette:
-	.incbin "baserom.gba", 0x7C19D8, 0xC8
+	.incbin "graphics/btl_bg/btl_bg_19.gbapal.lz"
 	.global btl_bg_20_palette
 btl_bg_20_palette:
-	.incbin "baserom.gba", 0x7C1AA0, 0xFC
+	.incbin "graphics/btl_bg/btl_bg_20.gbapal.lz"
 	.global btl_bg_21_palette
 btl_bg_21_palette:
-	.incbin "baserom.gba", 0x7C1B9C, 0xC0
+	.incbin "graphics/btl_bg/btl_bg_21.gbapal.lz"
 	.global btl_bg_22_palette
 btl_bg_22_palette:
-	.incbin "baserom.gba", 0x7C1C5C, 0x118
+	.incbin "graphics/btl_bg/btl_bg_22.gbapal.lz"
 	.global btl_bg_23_palette
 btl_bg_23_palette:
-	.incbin "baserom.gba", 0x7C1D74, 0x6C
+	.incbin "graphics/btl_bg/btl_bg_23.gbapal.lz"
 	.global btl_bg_24_palette
 btl_bg_24_palette:
-	.incbin "baserom.gba", 0x7C1DE0, 0xC0
+	.incbin "graphics/btl_bg/btl_bg_24.gbapal.lz"
 	.global btl_bg_25_palette
 btl_bg_25_palette:
-	.incbin "baserom.gba", 0x7C1EA0, 0xF0
+	.incbin "graphics/btl_bg/btl_bg_25.gbapal.lz"
 	.global btl_bg_26_palette
 btl_bg_26_palette:
-	.incbin "baserom.gba", 0x7C1F90, 0x70
+	.incbin "graphics/btl_bg/btl_bg_26.gbapal.lz"
 	.global btl_bg_27_palette
 btl_bg_27_palette:
-	.incbin "baserom.gba", 0x7C2000, 0xA8
+	.incbin "graphics/btl_bg/btl_bg_27.gbapal.lz"
 	.global btl_bg_28_palette
 btl_bg_28_palette:
-	.incbin "baserom.gba", 0x7C20A8, 0x68
+	.incbin "graphics/btl_bg/btl_bg_28.gbapal.lz"
 	.global btl_bg_29_palette
 btl_bg_29_palette:
-	.incbin "baserom.gba", 0x7C2110, 0xA8
+	.incbin "graphics/btl_bg/btl_bg_29.gbapal.lz"
 	.global btl_bg_30_palette
 btl_bg_30_palette:
-	.incbin "baserom.gba", 0x7C21B8, 0x6C
+	.incbin "graphics/btl_bg/btl_bg_30.gbapal.lz"
 	.global btl_bg_27_tiles
 btl_bg_27_tiles:
-	.incbin "baserom.gba", 0x7C2224, 0x2794
+	.incbin "graphics/btl_bg/btl_bg_27.feimg3.bin.lz"
 	.global btl_bg_31_palette
 btl_bg_31_palette:
-	.incbin "baserom.gba", 0x7C49B8, 0xAC
+	.incbin "graphics/btl_bg/btl_bg_31.gbapal.lz"
 	.global btl_bg_27_map
 btl_bg_27_map:
-	.incbin "baserom.gba", 0x7C4A64, 0x36C
+	.incbin "graphics/btl_bg/btl_bg_27.fetsa3.bin.lz"
 	.global btl_bg_32_tiles
 btl_bg_32_tiles:
-	.incbin "baserom.gba", 0x7C4DD0, 0x1534
+	.incbin "graphics/btl_bg/btl_bg_32.feimg3.bin.lz"
 	.global btl_bg_32_palette
 btl_bg_32_palette:
-	.incbin "baserom.gba", 0x7C6304, 0x50
+	.incbin "graphics/btl_bg/btl_bg_32.gbapal.lz"
 	.global btl_bg_32_map
 btl_bg_32_map:
-	.incbin "baserom.gba", 0x7C6354, 0x348
+	.incbin "graphics/btl_bg/btl_bg_32.fetsa3.bin.lz"
 	.global btl_bg_33_tiles
 btl_bg_33_tiles:
-	.incbin "baserom.gba", 0x7C669C, 0x25C4
+	.incbin "graphics/btl_bg/btl_bg_33.feimg3.bin.lz"
 	.global btl_bg_33_palette
 btl_bg_33_palette:
-	.incbin "baserom.gba", 0x7C8C60, 0xCC
+	.incbin "graphics/btl_bg/btl_bg_33.gbapal.lz"
 	.global btl_bg_33_map
 btl_bg_33_map:
-	.incbin "baserom.gba", 0x7C8D2C, 0x338
+	.incbin "graphics/btl_bg/btl_bg_33.fetsa3.bin.lz"
 	.global btl_bg_34_palette
 btl_bg_34_palette:
-	.incbin "baserom.gba", 0x7C9064, 0xC4
+	.incbin "graphics/btl_bg/btl_bg_34.gbapal.lz"
 	.global btl_bg_35_palette
 btl_bg_35_palette:
-	.incbin "baserom.gba", 0x7C9128, 0xE8
+	.incbin "graphics/btl_bg/btl_bg_35.gbapal.lz"
 	.global btl_bg_36_palette
 btl_bg_36_palette:
-	.incbin "baserom.gba", 0x7C9210, 0x104
+	.incbin "graphics/btl_bg/btl_bg_36.gbapal.lz"
 	.global btl_bg_37_palette
 btl_bg_37_palette:
-	.incbin "baserom.gba", 0x7C9314, 0xE8
+	.incbin "graphics/btl_bg/btl_bg_37.gbapal.lz"
 	.global btl_bg_38_palette
 btl_bg_38_palette:
-	.incbin "baserom.gba", 0x7C93FC, 0xEC
+	.incbin "graphics/btl_bg/btl_bg_38.gbapal.lz"
 	.global btl_bg_39_palette
 btl_bg_39_palette:
-	.incbin "baserom.gba", 0x7C94E8, 0xC4
+	.incbin "graphics/btl_bg/btl_bg_39.gbapal.lz"
 	.global btl_bg_40_palette
 btl_bg_40_palette:
-	.incbin "baserom.gba", 0x7C95AC, 0xA8
+	.incbin "graphics/btl_bg/btl_bg_40.gbapal.lz"
 	.global btl_bg_41_palette
 btl_bg_41_palette:
-	.incbin "baserom.gba", 0x7C9654, 0xA4
+	.incbin "graphics/btl_bg/btl_bg_41.gbapal.lz"
 	.global btl_bg_42_palette
 btl_bg_42_palette:
-	.incbin "baserom.gba", 0x7C96F8, 0x108
+	.incbin "graphics/btl_bg/btl_bg_42.gbapal.lz"
 	.global btl_bg_43_palette
 btl_bg_43_palette:
-	.incbin "baserom.gba", 0x7C9800, 0xE0
+	.incbin "graphics/btl_bg/btl_bg_43.gbapal.lz"
 	.global btl_bg_44_palette
 btl_bg_44_palette:
-	.incbin "baserom.gba", 0x7C98E0, 0x8C
+	.incbin "graphics/btl_bg/btl_bg_44.gbapal.lz"
 	.global btl_bg_45_tiles
 btl_bg_45_tiles:
-	.incbin "baserom.gba", 0x7C996C, 0xC80
+	.incbin "graphics/btl_bg/btl_bg_45.feimg3.bin.lz"
 	.global btl_bg_45_palette
 btl_bg_45_palette:
-	.incbin "baserom.gba", 0x7CA5EC, 0x140
+	.incbin "graphics/btl_bg/btl_bg_45.gbapal.lz"
 	.global btl_bg_45_map
 btl_bg_45_map:
-	.incbin "baserom.gba", 0x7CA72C, 0x1B8
+	.incbin "graphics/btl_bg/btl_bg_45.fetsa3.bin.lz"
 	.global btl_bg_46_tiles
 btl_bg_46_tiles:
-	.incbin "baserom.gba", 0x7CA8E4, 0xF80
+	.incbin "graphics/btl_bg/btl_bg_46.feimg3.bin.lz"
 	.global btl_bg_46_palette
 btl_bg_46_palette:
-	.incbin "baserom.gba", 0x7CB864, 0xE8
+	.incbin "graphics/btl_bg/btl_bg_46.gbapal.lz"
 	.global btl_bg_46_map
 btl_bg_46_map:
-	.incbin "baserom.gba", 0x7CB94C, 0x1E4
+	.incbin "graphics/btl_bg/btl_bg_46.fetsa3.bin.lz"
 	.global btl_bg_47_tiles
 btl_bg_47_tiles:
-	.incbin "baserom.gba", 0x7CBB30, 0x11D4
+	.incbin "graphics/btl_bg/btl_bg_47.feimg3.bin.lz"
 	.global btl_bg_47_palette
 btl_bg_47_palette:
-	.incbin "baserom.gba", 0x7CCD04, 0x108
+	.incbin "graphics/btl_bg/btl_bg_47.gbapal.lz"
 	.global btl_bg_47_map
 btl_bg_47_map:
-	.incbin "baserom.gba", 0x7CCE0C, 0x2C0
+	.incbin "graphics/btl_bg/btl_bg_47.fetsa3.bin.lz"
 	.global btl_bg_48_palette
 btl_bg_48_palette:
-	.incbin "baserom.gba", 0x7CD0CC, 0x140
+	.incbin "graphics/btl_bg/btl_bg_48.gbapal.lz"
 	.global btl_bg_49_palette
 btl_bg_49_palette:
-	.incbin "baserom.gba", 0x7CD20C, 0x130
+	.incbin "graphics/btl_bg/btl_bg_49.gbapal.lz"
 	.global btl_bg_50_palette
 btl_bg_50_palette:
-	.incbin "baserom.gba", 0x7CD33C, 0x138
+	.incbin "graphics/btl_bg/btl_bg_50.gbapal.lz"
