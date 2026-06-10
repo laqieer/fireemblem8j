@@ -4,4 +4,7 @@
 # in the caller's asm, position-matched to the US call site.
 #   ArenaSetFallbackWeaponForUnit  bmarena  ArenaSetFallbackWeaponsMaybe
 #     -> bl sub_8031EC0  JP 0x08031EC0
+#   GetBattleUnitUpdatedWeaponExp  bmbattle  UpdateUnitDuringBattle
+#     -> bl sub_802BFFC  JP 0x0802BFFC (caller byte-diff was only the unlinked bl)
 ArenaSetFallbackWeaponForUnit	08031EC0	thumb	codegrind_intratu_callees
+GetBattleUnitUpdatedWeaponExp	0802BFFC	thumb	codegrind_intratu_callees
