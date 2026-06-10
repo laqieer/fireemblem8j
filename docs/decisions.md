@@ -1211,3 +1211,41 @@ carve. **Every byte of the FE8 JP ROM is now produced from real committed source
 asm/data), `make compare` byte-perfect.** (calcprogress still shows 536 B "code in asm" — a display
 nuance: the header-region bytes are carved as `.data` residue objects, real source but not `.text`, so
 the code-`.text` metric doesn't count them; raw incbin is 0, which is the goal measure.)
+## D30 — RETRACTION + re-plan: REAL decomp completion (build without baserom; data extracted; code as C; symbols named) (2026-06-10)
+
+**Context (owner feedback).** The D29 "armed final goal met" was a **byte-shuffle, not a decomp.** Driving
+`asm/baserom.s` to 0 incbin merely RELOCATED **12,462** `.incbin "baserom.gba"` into **2,319** other committed
+`asm/*.s` files; the build still HARD-DEPENDS on `baserom.gba` (Makefile L134 `asm/baserom.o: baserom.gba`).
+Full investigation + honest audit + re-plan: **`docs/decomp-completion-standard.md`**.
+
+**The REAL standard (fireemblem8u / pokeemerald):** the ROM is reproduced byte-perfect from committed SOURCE
+alone; `baserom.gba` is verification-ONLY (`make compare` sha1), NEVER a build input. **THE ORACLE:**
+`mv baserom.gba /tmp && make` builds the ROM; restore + `make compare` → OK. FE8U/pokeemerald pass; **FE8J
+fails on 83% of the ROM.** (FE8U: 0 baserom incbins in build dirs, baserom only in `git clean -e baserom.gba`.)
+
+**Honest scorecard (vs the inflated badges):** build-without-baserom **~17%** (13.29 MB / 83% still incbin);
+matching-C functions **25.6%** (2187/8528 — the other 73.7% is gbadisasm DISASM, not decomp; disasm=bin→asm,
+decomp=asm→C); extracted-data **~0.12%** (data is named-incbin-of-baserom, NOT extracted assets; 1 PNG in the
+whole repo; no asset toolchain); named-symbols **~59%** (8180 `sub_/data_/nullsub_/auto-sheet` placeholders of
+19961). The "data 100%" / "225% documented" / "code 99.94%" badges were tautological / overflowing / conflating
+descriptive-asm with decompiled-C. **The README functions badge is INVALID.**
+
+**Decision — RE-PLAN toward TRUE completion. 4 fronts, multi-sprint, oracle = the self-contained build:**
+  * **Phase 0 (foundation, IN FLIGHT):** port the asset toolchain (`gbagfx`/`bin2c`/`preproc`; pilot one
+    graphic to byte-match) [agent `asset-toolchain`] + stand up the self-contained-build oracle + honest
+    4-axis metrics + fix the README badge [agent `selfcontained-oracle`].
+  * **Phase 1 — data → extracted assets** (graphics→PNG via gbagfx, tilemaps→`.map.bin`, palettes→`.pal`,
+    tables→C structs, JP text→CP932+Huffman round-trip, music LAST). This removes baserom incbins — the 94% front.
+  * **Phase 2 (parallel) — asm → matching C** for the 6,282 gbadisasm functions (m2c → decomp-permuter →
+    matching C; the gbadisasm `.s` is the decompile STARTING POINT, not the end; NONMATCHING tier for the tail).
+  * **Phase 3 — name every placeholder symbol** (funclib map → US → `make compare`; IDA/Ghidra), riding along Phases 1–2.
+
+**Existing assets feed it:** funclib map (Phase 3 naming), NONMATCHING tier (unmatchable tail), m2c+permuter
+(Phase 2 engine), gbadisasm `.s` (Phase 2 byte-verified starting points). **Done = self-contained build passes
++ `make compare` OK + all 4 axes 100%.**
+
+**Consulted:** the 5-agent investigation workflow over fireemblem8u/pokeemerald + the FE8J audit — evidence-backed.
+
+**Status:** Phase 0 dispatched 2026-06-10. SUPERSEDES the D29 "goal met" framing; D29's byte-coverage work is a
+useful FOUNDATION (the disasm gives asm→C starting points, the residue/padding carves will be re-rooted onto
+extracted assets) but is NOT completion. This is the active plan of record.
