@@ -1,0 +1,38 @@
+#include "global.h"
+#include "event.h"
+#include "bmunit.h"
+#include "chapterdata.h"
+#include "soundwrapper.h"
+#include "bmsave.h"
+#include "bmitem.h"
+#include "bmcontainer.h"
+#include "bmmap.h"
+#include "rng.h"
+#include "event.h"
+#include "bmshop.h"
+#include "bmbattle.h"
+#include "worldmap.h"
+#include "bmmind.h"
+#include "eventinfo.h"
+#include "eventcall.h"
+#include "eventscript.h"
+#include "constants/characters.h"
+#include "constants/items.h"
+#include "constants/event-flags.h"
+#include "constants/songs.h"
+
+//! FE8U = 0x08083D34
+s8 CheckPermanentFlagFrom(int flag, void* list) {
+
+    if (flag < 100 || flag == 100) {
+        return 0;
+    }
+
+    flag = flag - 100 - 1;
+
+    if (( ((u8*)list)[flag / 8] & gFlagBitMaskLut[flag % 8]) != 0) {
+        return 1;
+    }
+
+    return 0;
+}

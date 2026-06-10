@@ -1,2 +1,6 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-A5A6A0	A5A720	asm/data_08A5A6A0.o(.data.residue.08A5A6A0)	descriptive raw ROM data (128 B, byte-completeness D29)
+# Phase-1 data table: gFlagBitMaskLut (eventinfo.c), JP 0x08A5A6A0, 13 B.
+# Typed C array ported from fireemblem8u (u8 CONST_DATA gFlagBitMaskLut[] = {1<<n}).
+# Region-SAME (pure bitmask LUT) -> bytes byte-match the JP ROM. COMMITTED source.
+# The remaining 115 B of the old D29 residue split off into data_08A5A6AD.
+A5A6A0	A5A6AD	src/eventinfo.o(.data)	eventinfo: gFlagBitMaskLut (typed C, region-same)
+A5A6AD	A5A720	asm/data_08A5A6AD.o(.data.residue.08A5A6AD)	descriptive raw ROM data (115 B; split off for typed gFlagBitMaskLut)

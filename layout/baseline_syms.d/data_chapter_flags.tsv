@@ -1,0 +1,5 @@
+# Phase-1 data-table support: bind the chapter-flag BSS global so the chapter-flag
+# functions (SetChapterFlag/ClearChapterFlag/...) can graduate to matching C.
+# gChapterFlagBits: BSS u8[] at JP IWRAM 0x03005260 (US 0x03005270; ram_us_jp.tsv).
+# No ROM bytes -- pure address binding (like sym_iwram.txt in fireemblem8u).
+gChapterFlagBits	03005260	data	phase1_chapter_flags
