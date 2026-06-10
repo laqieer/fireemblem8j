@@ -1,0 +1,9 @@
+02A914	02AA10	src/bmbattle_0802A914.o(.text)	bmbattle_0802A914(run): ComputeBattleUnitEffectiveStats, ComputeBattleUnitSupportBonuses, ComputeBattleUnitDefense
+02B784	02B90C	src/bmbattle_0802B784.o(.text)	bmbattle_0802B784(run): BattleGenerateHit, BattleApplyExpGains, GetStatIncrease
+02BB48	02BDE8	src/bmbattle_0802BB48.o(.text)	bmbattle_0802BB48(run): ApplyUnitDefaultPromotion, ApplyUnitPromotion
+02C2B0	02C320	src/bmbattle_0802C2B0.o(.text)	bmbattle_0802C2B0(run): GetUnitRoundExp, GetUnitPowerLevel
+02AB1C	02AB54	src/bmbattle_0802AB1C.o(.text)	bmbattle_0802AB1C(run): ComputeBattleUnitHitRate
+02AB88	02ABC4	src/bmbattle_0802AB88.o(.text)	bmbattle_0802AB88(run): ComputeBattleUnitCritRate
+02B328	02B344	src/bmbattle_0802B328.o(.text)	bmbattle_0802B328(run): BattleCheckPetrify
+02B4CC	02B554	src/bmbattle_0802B4CC.o(.text)	bmbattle_0802B4CC(run): BattleGenerateHitTriangleAttack
+02CDF4	02CE00	src/bmbattle_0802CDF4.o(.text)	bmbattle_0802CDF4(run): SetScriptedBattle

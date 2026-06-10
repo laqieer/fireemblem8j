@@ -1,0 +1,13 @@
+ComputeBattleUnitEffectiveHitRate
+ComputeBattleUnitSilencerRate
+ComputeBattleUnitSpecialWeaponStats
+GetUnitSupportBonuses
+BattleApplyExpGains
+BattleGenerateHit
+BattleUpdateBattleStats
+Roll1RN
+gBattleHitIterator
+GetUnitExpLevel
+GetItemHit
+GetItemCrit
+BattleGenerateHitTriangleAttack
