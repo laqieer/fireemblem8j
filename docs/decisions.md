@@ -1879,3 +1879,72 @@ zero risk once the data binds), but per-TU yield is bounded by run fragmentation
 cases, not by data-binding. `bind_tu_data.py` + the func_only/extern-prepend additions to `port_run.py` are the
 reusable artifacts; rerunning them on the other D41-flagged partial TUs (the bind-2 set + face/prepscreen/proc/…)
 is the obvious next pass.
+
+## D43 — bind-2 TUs: the verified-run reverts are NOT all data-binding — duplicate-global + overlapping-section + region-different-RAM classes (2026-06-10)
+
+**Context.** Branch `feat/bind-2` (sibling to bind-1's D42; ran concurrently, distinct D-number). Scope: the D41
+data-placement-blocked TUs `hardware`, `bmio`, `bmmap`, `bmidoten`, `minimap`. Tested the SAME hypothesis as D42 —
+does a per-TU data-binding pass unblock DOZENS of byte-matching verified runs? **For these 5 TUs the answer is NO,
+and the more important finding is that "the run byte-matches but the full build reverts" decomposes into SEVERAL
+distinct blocker classes, only one of which is the D41/D42 unplaced-static lever.** Each reverted run shows
+PORTRUN_DEBUG content-diff = 0 (the body is already byte-perfect) yet `make compare` fails — and the make-err tells
+which class. **+9 matching-C graduated (2521→2530 on the bind-2 baseline; 30.19% combined with bind-1 on main).**
+
+**Class A — duplicate file-scope global (the dominant hardware blocker; FIXED, generalizable).** A verified run
+extracted from a PARTIALLY-carved TU re-pulls the whole file header via `extract_run`, so it RE-DEFINES a
+file-scope global the existing `src/<tu>.o` partial already provides → `multiple definition of gMainCallback` at
+link. The body byte-matches; only the dup definition blocks it. **Fix: `port_run.port(dedup_globals=True)` demotes
+each global the existing `src/<tu>.o` ALREADY defines (objdump -t, global symbol in a data section) to an `extern`
+in the extracted subset (storage stays in the existing object; byte-neutral for the run's .text).** This is the
+lighter-touch complement to D42's `func_only` (which drops ALL file-scope data): use it when the run DOES need its
+other, not-yet-carved, region-same file-scope data emitted. EXTENDED to also demote globals already bound as a
+fixed-address `baseline_syms` data symbol (a frontier blob / `dat_*_ref` already supplies the bytes — D34 class-3),
+**skipping `static` (an `extern static` is illegal C; a TU-private static can't alias an external symbol).**
+Graduated: hardware EnterSleepMode, ExecBothHBlankHandlers, UpdateHBlankHandlerState, Set{Primary,Secondary}HBlankHandler
+(hardware_08001C00), UpdateKeyStatus (hardware_0800139C); bmmap GetTerrainHealAmount, GetTerrainHealsStatus,
+BlankTilesetConfigTiles, RevertMapChange (bmmap_08019F28) — bmmap needed the baseline-bound demotion of
+`gBmMapBaseTiles`/`gTilesetTerrainLookup`.
+
+**Class B — region-SAME, reloc-free section overlaps an existing carve (FIXED; Copilot-validated).** A run's emitted
+`.rodata` (e.g. weather/SetupBackgrounds constants) is byte-identical to the JP ROM but its JP range is ALREADY
+carved (a `frontier_*` incbin blob that swallowed the same region-same constants) → `port_run` tried to carve a
+fresh loadable row there → `overlap/order error`. **Fix: when a byte-matching section has NO relocations of its own
+AND its JP range overlaps an existing carved row, place it NOLOAD** — the existing provider supplies the identical
+bytes, the section symbol still resolves to the JP base, and `.text` refs into it are baked by the existing `want`
+pass. Reloc-free is the safety gate (a relocated NOLOAD section would never emit its relocated bytes; only safe
+when a provider supplies them — kept conservative to reloc-free, per Copilot review). This unblocked hardware
+SetupBackgrounds (`.rodata` @0x080DC144 overlapping a frontier blob).
+
+**Class C — region-DIFFERENT `.data` interleaved with a LOADABLE carved object (DEFERRED — entangled blob-split).**
+Every `bmio` verified run pulls in a file-scope region-different `.data` proc-script (`gProc_MapTask`, 324 B) that
+straddles an already-carved LOADABLE object (`dat_sProc_BMVSync_ref`, 0x50 B) + a frontier blob. Even runs that
+don't reference it fail because `port_run`'s data-trim doesn't drop the unreferenced section → ROM grows ~1.8 KB.
+NOLOAD-on-overlap can't apply (it has relocs AND overlaps a loadable object — overlaying loadable bytes double-emits
+them). Cleanly landing it needs SPLITTING the loadable carved object out so the `.data` can be NOLOAD — exactly the
+D40-deferred blob-split, which entangles the concurrent DATA agent's frontier blobs. **Deferred (high regression
+risk).** Copilot concurred: this is structural layout work, not a binding tweak.
+
+**Class D — genuinely region-different RAM layout (DEFERRED — RAM reconciliation).** `bmidoten`'s
+GenerateUnitMovementMap literal needs `gBmMapMovement = 0x0202E4E0` (matches the US map), but the whole `gBmMap*`
+EWRAM block is ALREADY bound at `US_addr − 4` (`gBmMapMovement = 0x0202E4DC`) and another carved TU (`cp_perform`)
+is byte-perfect-GREEN against that −4 binding (its `gBmMapTerrain[y][x]` access resolves to 0x0202E4DC). The two
+TUs need DIFFERENT addresses for the SAME symbol name → a real region-different RAM-layout conflict; rebinding would
+regress cp_perform. **Deferred** as a separate RAM-reconciliation task (a possible angle: a TU-local JP alias for the
+literal, but that is its own task, not this harvest).
+
+**Class E — already graduated.** `minimap`'s verified runs are already matching C (`src/masked_080abf90.o`,
+`src/minimap.o`); nothing left for the harvester.
+
+**HYPOTHESIS RESULT (bind-2).** Per-TU data-binding did NOT deliver dozens/TU here — it delivered **+9 across 5
+TUs**, because the bind-2 set's reverts are dominated by Classes C/D (entangled-blob / region-different-RAM, both
+genuinely deferred) rather than the simple unplaced-static lever. The two NEW reusable fixes (`dedup_globals` incl.
+baseline-bound demotion; reloc-free NOLOAD-on-overlap) are general and oracle-gated, and they compose with D42's
+`func_only` path — together they are the complete toolkit for the "body byte-matches, only a reference/placement
+issue" frontier. The honest takeaway: D41's "unplaced static" framing covers PART of the frontier; the rest is
+duplicate-global (now auto-fixed), overlapping-section (now auto-fixed), and the two deferred structural classes
+(blob-split, RAM-layout reconciliation) that need a dedicated, DATA-agent-coordinated pass.
+
+**Remaining bind-2 frontier.** bmio (Class C — split `dat_sProc_BMVSync_ref`/frontier blobs around `gProc_MapTask`,
+then NOLOAD the run's `.data`); bmidoten (Class D — reconcile the `gBmMap*` −4 binding without regressing cp_perform).
+Both are higher-risk structural work, explicitly deferred; minimap is exhausted. All bind-2 work `make check` +
+`make compare` + `make clean && make compare` + self-containment-100% gated, verify-or-revert, NO `git add -A`.
