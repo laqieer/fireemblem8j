@@ -11,3 +11,5 @@ gEkrTriangleInvalid	0202013C	data	codegrind_banim_ekr_overlay
 gEkrPopupEnded	02020144	data	codegrind_banim_ekr_overlay
 gpProcEkrLevelup	020200B4	data	codegrind_banim_ekr_overlay
 gpProcEkrClasschg	020200B0	data	codegrind_banim_ekr_overlay
+# gCtrlC01Blocking int 0x02000024 (asm/ekrBattle_2.s =0x02000024)
+gCtrlC01Blocking	02000024	data	codegrind_banim_ekr_overlay
