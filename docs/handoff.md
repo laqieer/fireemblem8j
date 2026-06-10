@@ -8,6 +8,19 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
+- **✅🎉 2026-06-10 — SELF-CONTAINED BUILD ACHIEVED (D36): `mv baserom.gba away && make` builds the
+  byte-identical FE8 JP ROM (sha1 `7da0456…`) from committed source ALONE.** Build self-containment
+  **16.96% → 100.00%** this session — 0 `.incbin "baserom.gba"`, baserom removed from the build graph
+  (`GEN_LAYOUT_INPUTS` + `asm/baserom.o` dep gone); `selfcontained.yml` acceptance gate flipped to BLOCKING.
+  Data→committed source: graphics→PNG/.pal (gbagfx), JP text→byte-identical Huffman (`texts/jp_texts.txt`),
+  PCM→439 `.aif` (aif2pcm), tables→typed C/`.bin`, opaque/region-diff→`data/{residual,sound,banim}/*.bin`.
+  **`baserom.gba` is now verification/re-extraction ONLY** (matches fireemblem8u). THE #1 ungameable goal DONE.
+  **REMAINING (full standard, beyond self-containment):** matching-C 27.59%→100% (asm→C grind, gated on
+  Phase-1 data naming D31/D34); readability polish (committed `.bin`→typed C/PNG/`.mid` where US has a readable
+  form — mid2agb songs PROVEN/deferred D35); named-symbols 58.78%→100%. Live metrics: `scripts/check_selfcontained.py`
+  + `scripts/calcprogress.py`. The merges this session used the grind pattern (git checkout main FIRST; per-subsystem
+  `.mk`/`data/*.bin`; verify-or-revert + `make clean && make compare` + CI on fresh checkout).
+
 - **🚧 2026-06-10 — REAL DECOMP IN PROGRESS: build self-containment 16.96% → 62.39% (D30 re-plan executing).**
   The ungameable oracle (`mv baserom.gba /tmp && make` must build; `scripts/check_selfcontained.py`) is now the
   dashboard. Honest 4 axes today: **self-containment 62.39%** / matching-C 27.01% / extracted-data axis (see

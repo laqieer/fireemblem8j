@@ -39,14 +39,16 @@ self-containment**: remove `baserom.gba` and see if `make` still builds. Run
 
 ## Status — honest scorecard
 
-FE8J is an **in-progress** decompilation. Today **~17% of the ROM builds without
-`baserom.gba`**; the self-contained build still **fails** (by design, reported
-honestly by CI). The four real axes (target: **100%** each):
+FE8J is an **in-progress** decompilation, but it has reached the foundational
+milestone: **✅ the ROM builds byte-perfect from committed source with `baserom.gba`
+removed.** `mv baserom.gba away && make` emits the byte-identical JP ROM (sha1
+`7da0456…`) — the self-contained build **PASSES** (the blocking CI gate). The four
+real axes (target: **100%** each):
 
 | Axis | Today | Meaning |
 |---|---|---|
-| **Build self-containment** | **~17%** | bytes producible from source ÷ 16,777,216 — **83% (13.29 MB) is still `.incbin "baserom.gba"`** across 12,462 directives. The only ungameable number. |
-| **Matching-C functions** | **~25.6%** (2,187 / 8,528) | functions whose bytes come from compiling `src/*.c`. The other ~74% are **gbadisasm descriptive asm** — disassembly, *not* decompilation. |
+| **Build self-containment** | **100%** ✅ | the ROM builds from committed source with `baserom.gba` absent — **0 `.incbin "baserom.gba"`** directives. The only ungameable number, and it's met. |
+| **Matching-C functions** | **~27.6%** (2,353 / 8,528) | functions whose bytes come from compiling `src/*.c`. The rest are **gbadisasm descriptive asm** (disassembly, *not* decompilation) — the ongoing asm→C grind. |
 | **Extracted data** | **~0.1%** | genuinely-extracted asset bytes (C struct tables / PNG) ÷ data bytes. Named `.incbin "baserom.gba"` is **not** extraction. |
 | **Named symbols** | **~59%** | labels with meaningful names ÷ total labels. The rest are `sub_/data_/nullsub_/sheet` placeholders. |
 
@@ -71,12 +73,12 @@ Success ends with:
 fireemblem8.gba: OK
 ```
 
-**Today, `baserom.gba` is still a build input** (83% of the ROM is incbin'd from
-it), so the build cannot run without it yet. The end state is the **self-contained
-build** — `baserom.gba` used *only* to verify:
+**`baserom.gba` is NOT a build input** — every ROM byte comes from committed source
+(matching C, descriptive asm, extracted assets, committed `data/*.bin`). It is used
+*only* to verify the result. The **self-contained build** (the achieved end state):
 
 ```bash
-mv baserom.gba /tmp/ && make           # MUST build from source alone (fails today)
+mv baserom.gba /tmp/ && make           # ✅ builds the byte-identical ROM from source ALONE
 mv /tmp/baserom.gba . && make compare   # restore ONLY to verify: sha1 -> OK
 ```
 

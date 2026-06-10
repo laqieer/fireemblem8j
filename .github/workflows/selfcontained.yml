@@ -52,29 +52,28 @@ jobs:
           scripts/tools/preproc/setup.sh
           scripts/tools/aif2pcm/setup.sh
 
-      - name: Acceptance test -- build WITHOUT baserom.gba (must fail today)
-        # The real definition of done: `make` with baserom.gba absent emits the
-        # byte-identical ROM. Today 83% of the ROM is `.incbin "baserom.gba"`, so
-        # the build cannot resolve those bytes and fails. We capture that and
-        # report it as "NOT YET" WITHOUT failing the whole CI run (informational).
+      - name: Acceptance test -- build WITHOUT baserom.gba (MUST PASS, blocking)
+        # THE definition of done, now ACHIEVED: `make` with baserom.gba absent emits the
+        # byte-identical ROM (the trailing `sha1sum -c checksum.sha1` proves byte-match).
+        # Self-containment is 100% -- 0 `.incbin "baserom.gba"`, baserom removed from the
+        # build graph -- so this MUST succeed. A failure means a regression reintroduced a
+        # baserom build dependency (or broke byte-match): FAIL CI.
         run: |
           set +e
           test -f baserom.gba && mv baserom.gba /tmp/baserom.gba.hidden
           make >selfcontained_build.log 2>&1
           rc=$?
           set -e
-          # Restore baserom immediately so later compare steps can verify.
+          # Restore baserom (verification/re-extraction only) for later steps.
           test -f /tmp/baserom.gba.hidden && mv /tmp/baserom.gba.hidden baserom.gba
-          NEED=$(python3 scripts/check_selfcontained.py | awk -F'[ ()]' '/baserom-dependent:/ {print $2}')
-          if [ "$rc" -eq 0 ]; then
-            echo "self-contained build: PASS -- ROM built from source alone (baserom.gba absent)."
-          else
-            echo "self-contained build: NOT YET ($NEED bytes still need baserom) -- expected today; non-blocking."
-            echo "----- tail of build log -----"
-            tail -n 25 selfcontained_build.log || true
+          if [ "$rc" -ne 0 ]; then
+            echo "REGRESSION: self-contained build FAILED -- a baserom.gba build dependency was reintroduced (or byte-match broke):"
+            python3 scripts/check_selfcontained.py || true
+            echo "----- tail of build log -----"; tail -n 30 selfcontained_build.log || true
+            exit 1
           fi
-          # Always succeed: this gate is informational until self-containment hits 100%.
-          exit 0
+          echo "self-contained build: PASS -- ROM built BYTE-PERFECT from committed source alone (baserom.gba absent)."
+          python3 scripts/check_selfcontained.py
 
       - name: Fetch baserom (sha1-verified, compare-only)
         if: ${{ env.BASEROM_URL != '' }}

@@ -1493,3 +1493,30 @@ decouples self-containment (have it now) from readability (`.mid`/`voice_*`, lat
 SOLVED: link the mid2agb `.o` at the JP address and the self-pointers resolve byte-exactly; the only remaining blocker to
 readable songs is the ldscript tiling, which is an integration/ownership problem, not an m4a problem. (c) Read the
 voicegroup pointer for a song straight from its JP ROM header `tone` field rather than re-deriving the JP↔US shift.
+## D36 — SELF-CONTAINED BUILD ACHIEVED: baserom.gba removed from the build graph (2026-06-10)
+
+**THE primary criterion of D30 is MET.** `mv baserom.gba away && make` builds `fireemblem8.gba`
+**BYTE-IDENTICAL** (sha1 `7da0456035366aa18414faa79d8fe7649f03c1ed`) from committed source ALONE.
+**Build self-containment = 100.00%** (0 `.incbin "baserom.gba"` directives anywhere).
+
+**How it was reached this session (self-containment 16.96% → 100%):** Phase 0 — vendored the asset
+toolchain (gbagfx/bin2c/preproc/aif2pcm/mid2agb), stood up the ungameable oracle + honest 4-axis metrics.
+Phase 1 — data → committed source: graphics → PNG/.pal via gbagfx (portraits, icons, banim, mapanim,
+opanim, bg, fonts, CG); JP text → byte-identical Huffman generated from `texts/jp_texts.txt` (3339 readable
+CP932 messages); PCM sound → 439 committed `.aif` via aif2pcm; game-data tables → named typed C / committed
+`.bin`; everything else (region-different data, OAM/AnimSprite tables, opaque blobs, the genuinely-foreign
+ARM helpers, voicegroups, song bodies) → committed `data/{residual,sound,banim}/*.bin` (fireemblem8u's
+"commit a named `.bin` for opaque data" model). The last 64-byte straggler (`sMusicProc4Script`) was
+re-rooted, then `baserom.gba` was removed from `GEN_LAYOUT_INPUTS` + the `asm/baserom.o` dependency.
+**`baserom.gba` is now VERIFICATION / re-extraction ONLY** — matching fireemblem8u (referenced only by
+`git clean -e baserom.gba`). The `selfcontained.yml` acceptance gate is flipped to **BLOCKING**.
+
+**WHAT REMAINS — toward the FULL fireemblem8u/pokeemerald standard (beyond build self-containment):**
+(1) **matching-C 27.59% → 100%** — the asm→C grind continues (region-same US-C port + m2c/permuter; gated on
+Phase-1 data naming per D31/D34; ~6175 functions still descriptive asm). (2) **Readability polish** — the
+committed `.bin` for opaque/region-different data satisfies build-without-baserom NOW; converting it to typed
+C structs / PNG / `.mid` (where the US provides a readable form, e.g. the proven-but-deferred mid2agb songs
+per D35) is the gold-standard refinement. (3) **Named symbols 58.78% → 100%**. These are the remaining
+*decomp* work; the **#1 ungameable goal — build the ROM from source with `baserom.gba` removed — is DONE.**
+
+**Status:** DONE 2026-06-10 (merge `e11b69ea`). Acceptance test passes: byte-perfect ROM from source, baserom absent.
