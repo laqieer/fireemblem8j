@@ -117,7 +117,7 @@ compare: $(ROM)
 # wildcard cannot notice deletions. gen_layout.py writes each output only when its
 # content actually changes (write_if_changed), so an unchanged rebuild stays
 # incremental (no needless downstream relink).
-GEN_LAYOUT_INPUTS := scripts/gen_layout.py ldscript.template.txt baserom.gba \
+GEN_LAYOUT_INPUTS := scripts/gen_layout.py ldscript.template.txt \
 	$(wildcard layout/carved_rom.tsv    layout/carved_rom.d    layout/carved_rom.d/*.tsv) \
 	$(wildcard layout/carved_ram.tsv    layout/carved_ram.d    layout/carved_ram.d/*.tsv) \
 	$(wildcard layout/baseline_syms.tsv layout/baseline_syms.d layout/baseline_syms.d/*.tsv)
@@ -168,7 +168,10 @@ ghidra-cp:
 
 .PHONY: all compare clean check check-nonmatching nonmatching layout ida-db ghidra-db ghidra-cp
 
-asm/baserom.o: baserom.gba
+# NOTE: baserom.gba is NO LONGER a build input. Every ROM byte is produced from committed
+# source (matching C, descriptive asm, extracted assets, committed data/*.bin). asm/baserom.s
+# is generated empty (0 incbins). baserom.gba is kept ONLY as the verification reference and
+# the source for one-time asset re-extraction (scripts/extract_*). `make` builds with it absent.
 
 $(ASM_OBJECTS): %.o: %.s
 	$(AS) $(ASFLAGS) -g $< -o $@
