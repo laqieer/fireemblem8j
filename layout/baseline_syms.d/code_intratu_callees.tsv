@@ -51,3 +51,5 @@ sBmMapUnitPool	0202E4F0	data	codegrind4_bmmap
 sBmMapTerrainPool	0202ECA8	data	codegrind4_bmmap
 UnpackChapterMap	08019584	thumb	codegrind4_bmmap
 RefreshTerrainBmMap	0801973C	thumb	codegrind4_bmmap
+sHexDigits	080DC3DC	data	codegrind4_fontgrp
+gNumberStr	02028E44	data	codegrind4_fontgrp
