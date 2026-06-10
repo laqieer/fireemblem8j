@@ -1,0 +1,11 @@
+# Phase-1 data-table support: bind the sio_core.c BSS cursor statics so the sio
+# functions that live in separately-graduated files (SioSend, ...) can graduate to
+# matching C. These addresses coincide EXACTLY with sio_core.o(.bss) (carved_ram
+# 0x030017D8): sSendCursor=.bss+0x10, sWriteCursor=+0x12, sReadCursor=+0x18,
+# sRecvCursor=+0x20 -> same RAM as the file-local statics (verified by nm), so the
+# extern refs and the in-TU statics alias the identical location. JP from
+# reference/maps/ram_us_jp.tsv (us-decomp-nm + addr_map).
+sSendCursor	030017E8	data	phase1_sio_cursors
+sWriteCursor	030017EA	data	phase1_sio_cursors
+sReadCursor	030017F0	data	phase1_sio_cursors
+sRecvCursor	030017F8	data	phase1_sio_cursors
