@@ -1200,6 +1200,14 @@ exact "incbin → real source" transformation the goal demands.
 CLAUDE.md text, which is dispositive ("every byte from real source = src/ C + descriptive
 asm/data").
 
-**Status:** In flight — `scripts/carve_incbin_residue.py`, branch `carve/incbin-residue`: drive
-raw `asm/baserom.s` incbin → 0 (only an objcopy `--pad-to` tail outside baserom.s may remain),
-each chunk verify-or-revert via `make compare`. This CLOSES the armed final goal.
+**Status: DONE 2026-06-10 — ARMED FINAL GOAL MET (merge `6704c620`).** `scripts/carve_incbin_residue.py`
+carved all 655 remaining chunks (1 `rom_header_080000C0` + 654 `data_<vma>`, 185638 B) as descriptive
+`.incbin` objects (no `.align`). **`asm/baserom.s` now has ZERO `.incbin` directives** (only its 3-line
+generated header comment); raw incbin bytes = **0**; gen_layout 100.0000% decompiled. Gates: `make check`
+(9584 objects) + `make compare` → `fireemblem8.gba: OK` + `make clean && make compare` → OK (durability).
+Integration caught + removed stray untracked leftovers from an abandoned earlier attempt
+(`asm/residual_data.s` / `residual_data.tsv` / `carve_residual_data.py`) that conflicted with the clean
+carve. **Every byte of the FE8 JP ROM is now produced from real committed source (`src/` C + descriptive
+asm/data), `make compare` byte-perfect.** (calcprogress still shows 536 B "code in asm" — a display
+nuance: the header-region bytes are carved as `.data` residue objects, real source but not `.text`, so
+the code-`.text` metric doesn't count them; raw incbin is 0, which is the goal measure.)

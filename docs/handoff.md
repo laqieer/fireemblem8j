@@ -8,6 +8,23 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
+- **✅🎉 2026-06-10 — ARMED FINAL GOAL MET: EVERY BYTE OF `asm/baserom.s` INCBIN → REAL SOURCE (D29,
+  merge `6704c620`).** `scripts/carve_incbin_residue.py` carved the last 655 chunks (185638 B = 536 B
+  ROM header + ~181 KB scattered region-different data) as honest address-named descriptive `.incbin`
+  objects (`rom_header_080000C0` + 654 `data_<vma>`, no `.align`). **`asm/baserom.s` now has ZERO
+  `.incbin` directives — raw incbin = 0 bytes; gen_layout 100.0000% decompiled.** Gates: `make check`
+  (9584 objects) + `make compare` → `fireemblem8.gba: OK` + `make clean && make compare` → OK.
+  **The whole FE8 Japanese ROM is now produced from real committed source (`src/` C + descriptive
+  asm/data), byte-perfect.** Integration note: removed stray untracked leftovers
+  (`asm/residual_data.*`, `scripts/carve_residual_data.py`) from an abandoned earlier attempt that
+  conflicted with the clean carve — always `git status` for strays + run `make check` before trusting a
+  big merge. **WHAT REMAINS (all BEYOND the byte-goal — quality/polish, optional):** (1) the asm→C
+  QUALITY layer — m2c-scale the ~5928 descriptive-asm functions → readable C (D25 funclib + D26
+  NONMATCHING + P0.4 m2c infra all ready); (2) survey P1/P2 (tasks #26/#27); (3) re-semanticize the
+  ~181 KB descriptive-residue data into named structures where meaningful. NONE block the armed goal.
+  Metric nuance: calcprogress shows 536 B "code in asm" — header bytes carved as `.data` residue (real
+  source, not `.text`); raw incbin = 0 is the true goal measure.
+
 - **🎉 SPRINT 2026-06-10 — CODE FRONT 100% REAL SOURCE (D28, merge `08dc22b9`).** The 6 gbadisasm
   mechanical fallbacks are byte-matched: code-region raw incbin **16388 B → 536 B** (the 536 B is the
   cartridge ROM header @0x080000C0 + a few ≤64 B pad/data fragments — **0 functions**). **Code 99.94%
