@@ -43,6 +43,10 @@ CC1_OLD := tools/agbcc/bin/old_agbcc$(EXE)
 GBAGFX     := tools/gbagfx/gbagfx$(EXE)
 BIN2C      := tools/bin2c/bin2c$(EXE)
 PREPROC    := tools/preproc/preproc$(EXE)
+# Sound toolchain (Phase 1 Music): aif2pcm (AIFF -> raw GBA PCM sample) and
+# mid2agb (.mid -> m4a song bytecode). Vendored via scripts/tools/<tool>/setup.sh.
+AIF2PCM    := tools/aif2pcm/aif2pcm$(EXE)
+MID2AGB    := tools/mid2agb/mid2agb$(EXE)
 # gbagfx converts both tiles and palettes; PAL2GBAPAL aliases it for the .pal rule.
 PAL2GBAPAL := $(GBAGFX)
 
@@ -169,6 +173,28 @@ asm/baserom.o: baserom.gba
 $(ASM_OBJECTS): %.o: %.s
 	$(AS) $(ASFLAGS) -g $< -o $@
 
+#### Sound asset rules (Phase 1 Music) ####
+# MINIMAL, FLAGGED addition: turn committed AIFF (.aif) sample source into the
+# raw GBA direct-sound PCM blob (.bin) the ROM contains, via the vendored
+# aif2pcm. baserom.gba is NEVER in this chain -- asm/direct_sound_data.s incbins
+# the rebuilt .bin, so the 3.27 MB m4a sample blob reproduces byte-for-byte with
+# baserom removed (the Phase-1 self-containment win). The .bin is a gitignored
+# build intermediate; the .aif is the committed source of truth.
+#
+#   foo.aif (committed) --aif2pcm--> foo.bin --.incbin--> direct_sound_data.o --> ROM
+#
+# A `.aif` with no recipe stops make from trying to "rebuild" the committed source.
+%.aif: ;
+sound/%.bin: sound/%.aif
+	$(AIF2PCM) $< $@
+
+# asm/direct_sound_data.o incbins every sound/direct_sound_samples/*.bin, so it
+# must rebuild when any sample changes. List the .bin deps explicitly (one per
+# committed .aif). (find, not `wildcard sound/**`, because GNU make does not
+# expand the `**` globstar.)
+DIRECT_SOUND_BINS := $(patsubst %.aif,%.bin,$(shell find sound/direct_sound_samples -name '*.aif' 2>/dev/null))
+asm/direct_sound_data.o: $(DIRECT_SOUND_BINS)
+
 #### Asset (graphics) rules ####
 # Generic source-asset pipeline, ported from ../fireemblem8u. These turn the
 # COMMITTED editable source (PNG / JASC .pal) into the raw GBA bytes the ROM
@@ -272,6 +298,9 @@ clean:
 		'graphics/**/*.gbapal' 'graphics/**/*.lz' 'graphics/**/*.rl' 'graphics/**/*.fk' 'graphics/**/*.4bpp.h' \
 		'graphics/*.1bpp' 'graphics/*.4bpp' 'graphics/*.8bpp' 'graphics/*.gbapal' \
 		'graphics/*.lz' 'graphics/*.rl' 'graphics/*.fk' 'graphics/*.4bpp.h' >/dev/null 2>&1 || true
+	# Sound build intermediates (committed source is .aif; .bin rebuilt by aif2pcm).
+	# Gitignored, so `git clean -Xf` removes only them and never a committed .aif.
+	@git clean -Xf -- 'sound/**/*.bin' >/dev/null 2>&1 || true
 
 # Fast repo-consistency lint (no toolchain / no ROM needed): every object the build links
 # has a git-tracked source. Catches the "layout row without a committed .s/.c" class that

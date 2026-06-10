@@ -1362,3 +1362,38 @@ it's authoritative; the ref maps are hints with known errors. (c) When graduatin
 graduate-deleted `asm/<fn>.s` + `gbadisasm_<fn>.tsv` (a prior commit this session missed them → `git ls-files` still
 tracked them; caught by re-staging). (d) Self-containment baseline this session measured **59.98%** on a clean glue
 rebuild (the quoted 50.48% was a stale generated-`asm/baserom.s` artifact present at session start).
+
+## D33 — Music Phase 1: extract the 3.12 MB direct-sound PCM samples to committed `.aif` via aif2pcm (2026-06-10)
+
+**Context.** `asm/direct_sound_data.s` (3,272,220 bytes = 3.12 MB) was the single biggest `.incbin "baserom.gba"` blob
+in the repo (~20% of build self-containment), the m4a/sappy direct-sound PCM samples. The completion standard
+(`docs/decomp-completion-standard.md`, "Music") defers music as hardest, but the SAMPLE class (aif2pcm) is separable
+from the song-body class (mid2agb) and turned out to be the easy, high-value win.
+
+**Investigation (verified, not assumed).** All **439** JP samples are byte-identical to the US decomp's `aif2pcm`
+output for the corresponding `.aif`, up to a 0–3 byte trailing zero-pad that the assembler's `.align 2` (4-byte)
+reproduces (content-addressed match: 439/439, incl. the 45 numeric-named JP samples → US address-named `.aif`). The JP
+sample *set* equals the US sample *set*; JP `.incbin` sizes just bake in inter-sample alignment. So the whole blob is
+reproducible from committed `.aif` — exactly the US model (`.incbin "....bin"` where `.bin` = aif2pcm(`.aif`)).
+
+**Decision.** Extract the samples to committed `sound/direct_sound_samples/*.aif` and rewrite `direct_sound_data.s` to
+`.incbin` the aif2pcm-built `.bin` (+ a trailing `.align 2` so the section is exactly 3,272,220 B). Vendor `tools/aif2pcm`
++ `tools/mid2agb` via `scripts/tools/<t>/setup.sh` (worktree-aware FE8U path resolution). Minimal Makefile rule
+`sound/%.bin: sound/%.aif` + an object→bin dep. `.aif` committed; `.bin` gitignored build intermediate.
+
+**Result.** Build self-containment **62.39% → 81.89%** (+19.5 pts, the single biggest lever in the repo). `make check`,
+`make compare`, `make clean && make compare` all green. PROVEN self-contained: with `baserom.gba` removed,
+`make asm/direct_sound_data.o` rebuilds the section byte-identical to ROM 0x216064..0x534E80.
+
+**Feasibility of remaining sound classes (docs/sound.md).** (a) Voicegroups/tables (~118 KB): tractable region-different
+`.s` (`voice_*` macros with JP pointer values), mechanical per-voicegroup, small self-containment number. (b) Song bodies
+(`snd_song*.s`, ~120 KB w/ gSongTable): HARD but feasible — mid2agb reproduces the structure (verified: JP song001 matches
+the US `.mid` output except at exactly the 4-byte self-pointer slots, delta = JP↔US base shift), but requires wiring the
+m4a song-object build to LINK at the JP address so relocations resolve. This is the right NEXT sound front; the songs
+stay correct named-incbin meanwhile. mid2agb is vendored so it can start.
+
+**Takeaways.** (a) Separate the sample class (aif2pcm, region-same content) from the song class (mid2agb, region-different
+by relocation) — they have totally different feasibility. (b) A trailing `.align 2` is mandatory: the section's own
+alignment pad is part of the region, and omitting it shifts every downstream byte (caught by a 1-byte-short section).
+(c) From a git worktree, `../fireemblem8u` doesn't resolve — setup scripts must find the sibling US repo via the main
+worktree's parent / `$HOME` / absolute fallback.

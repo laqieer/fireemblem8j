@@ -3,6 +3,11 @@
 
 *.bin binary
 
+# Committed AIFF sound samples (sound/direct_sound_samples/*.aif) are the source
+# of truth for the m4a direct-sound blob (built to raw PCM by tools/aif2pcm).
+# Mark binary so no line-ending normalization can corrupt them.
+*.aif binary
+
 # Palette files must keep CRLF on checkout to stay byte-identical.
 *.pal text eol=crlf
 

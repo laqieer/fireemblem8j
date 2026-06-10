@@ -24,6 +24,13 @@
 *.fk
 *.4bpp.h
 
+# Sound build intermediates (Phase 1 Music). The COMMITTED source is the editable
+# AIFF (.aif) under sound/direct_sound_samples/; the raw GBA PCM blob (.bin) is
+# REGENERATED from it by `sound/%.bin: sound/%.aif` (tools/aif2pcm) and must never
+# be committed. baserom.gba is not in this build chain. (Scoped to sound/ so the
+# graphics/map *.bin tilemaps -- which ARE committed -- are unaffected.)
+sound/**/*.bin
+
 # Compiler-generated assembly (agbcc emits src/x.s next to src/x.c).
 # Hand-written assembly lives in asm/ and is tracked.
 src/*.s
@@ -183,6 +190,13 @@ src/_diag_*
 /tools/gbagfx
 /tools/bin2c
 /tools/preproc
+
+# Sound toolchain (Phase 1 Music): aif2pcm (AIFF -> raw GBA PCM sample) and
+# mid2agb (.mid -> m4a song bytecode). Built locally into the gitignored
+# tools/<tool>/ from ../fireemblem8u via scripts/tools/<tool>/setup.sh. The setup
+# scripts + docs/tools/{aif2pcm,mid2agb}.md are tracked; the binaries are not.
+/tools/aif2pcm
+/tools/mid2agb
 
 # Scheduler lock (transient local state; was accidentally tracked)
 /.claude/scheduled_tasks.lock
