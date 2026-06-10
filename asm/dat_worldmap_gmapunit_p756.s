@@ -14,13 +14,13 @@ TsaConf_BanimTmA4:
 	.incbin "baserom.gba", 0x5E4250, 0x98
 	.global Img_NODAMGEMIS
 Img_NODAMGEMIS:
-	.incbin "baserom.gba", 0x5E42E8, 0x228
+	.incbin "graphics/gmapunit/Img_NODAMGEMIS.bin.lz"
 	.global Pal_Efxbattle_0
 Pal_Efxbattle_0:
-	.incbin "baserom.gba", 0x5E4510, 0x20
+	.incbin "graphics/gmapunit/Pal_Efxbattle_0.gbapal"
 	.global Pal_Efxbattle_1
 Pal_Efxbattle_1:
-	.incbin "baserom.gba", 0x5E4530, 0x20
+	.incbin "graphics/gmapunit/Pal_Efxbattle_1.gbapal"
 	.global Pal_Efxbattle_2
 Pal_Efxbattle_2:
-	.incbin "baserom.gba", 0x5E4550, 0x20
+	.incbin "graphics/gmapunit/Pal_Efxbattle_2.gbapal"

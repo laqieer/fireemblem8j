@@ -2,4 +2,4 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x086ac738 (US 0x0867fb60, shift -0xFFFD3428); incbin baserom.gba
 	.global Tsa_SilenceBg_2
 Tsa_SilenceBg_2:
-	.incbin "baserom.gba", 0x6AC738, 0xE8
+	.incbin "graphics/gmapunit/Tsa_SilenceBg_2.bin.lz"

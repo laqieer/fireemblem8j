@@ -14,19 +14,19 @@ gUnkData_70:
 	.incbin "baserom.gba", 0xA98260, 0xF0
 	.global Tsa_PrepItemScreen
 Tsa_PrepItemScreen:
-	.incbin "baserom.gba", 0xA98350, 0xD8
+	.incbin "graphics/gmapunit/Tsa_PrepItemScreen.bin.lz"
 	.global Tsa_UnkData_4
 Tsa_UnkData_4:
-	.incbin "baserom.gba", 0xA98428, 0x5C
+	.incbin "graphics/gmapunit/Tsa_UnkData_4.bin.lz"
 	.global gUnkData_71
 gUnkData_71:
 	.incbin "baserom.gba", 0xA98484, 0xCC
 	.global Img_PrepItemUseScreen
 Img_PrepItemUseScreen:
-	.incbin "baserom.gba", 0xA98550, 0x2C
+	.incbin "graphics/gmapunit/Img_PrepItemUseScreen.bin.lz"
 	.global Tsa_PrepItemUseScreen
 Tsa_PrepItemUseScreen:
-	.incbin "baserom.gba", 0xA9857C, 0xEC
+	.incbin "graphics/gmapunit/Tsa_PrepItemUseScreen.bin.lz"
 	.global gUnkData_72
 gUnkData_72:
 	.incbin "baserom.gba", 0xA98668, 0xF0
@@ -44,28 +44,28 @@ gUnkData_76:
 	.incbin "baserom.gba", 0xA987F8, 0x9A4
 	.global Img_SpinningArrow
 Img_SpinningArrow:
-	.incbin "baserom.gba", 0xA9919C, 0xD4
+	.incbin "graphics/gmapunit/Img_SpinningArrow.bin.lz"
 	.global gImg_UiSpinningArrow_Horizontal
 gImg_UiSpinningArrow_Horizontal:
-	.incbin "baserom.gba", 0xA99270, 0xDC
+	.incbin "graphics/gmapunit/gImg_UiSpinningArrow_Horizontal.bin.lz"
 	.global gUnkData_77
 gUnkData_77:
 	.incbin "baserom.gba", 0xA9934C, 0x4B4
 	.global Img_UnkData_1
 Img_UnkData_1:
-	.incbin "baserom.gba", 0xA99800, 0x5C
+	.incbin "graphics/gmapunit/Img_UnkData_1.bin.lz"
 	.global Img_UnitListBanners
 Img_UnitListBanners:
-	.incbin "baserom.gba", 0xA9985C, 0x4C4
+	.incbin "graphics/gmapunit/Img_UnitListBanners.bin.lz"
 	.global Img_UnitListBanner_Animation
 Img_UnitListBanner_Animation:
-	.incbin "baserom.gba", 0xA99D20, 0x1C0
+	.incbin "graphics/gmapunit/Img_UnitListBanner_Animation.bin.lz"
 	.global Pal_UnkData_1
 Pal_UnkData_1:
-	.incbin "baserom.gba", 0xA99EE0, 0x80
+	.incbin "graphics/gmapunit/Pal_UnkData_1.gbapal"
 	.global gUnkData_78
 gUnkData_78:
 	.incbin "baserom.gba", 0xA99F60, 0x20
 	.global Img_PrepTextShadow
 Img_PrepTextShadow:
-	.incbin "baserom.gba", 0xA99F80, 0x28
+	.incbin "graphics/gmapunit/Img_PrepTextShadow.bin.lz"

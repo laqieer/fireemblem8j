@@ -5,4 +5,4 @@ AP_DrawPreparationsBanner:
 	.incbin "baserom.gba", 0xA97C2C, 0x68
 	.global Img_PrepFunds
 Img_PrepFunds:
-	.incbin "baserom.gba", 0xA97C94, 0x43C
+	.incbin "graphics/gmapunit/Img_PrepFunds.bin.lz"

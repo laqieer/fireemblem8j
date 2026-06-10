@@ -14,4 +14,4 @@ gUnkUiFramePalettes:
 	.incbin "baserom.gba", 0x5E3424, 0x80
 	.global Img_SysGrayBox
 Img_SysGrayBox:
-	.incbin "baserom.gba", 0x5E34A4, 0x90
+	.incbin "graphics/gmapunit/Img_SysGrayBox.bin.lz"

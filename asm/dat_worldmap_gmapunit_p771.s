@@ -2,7 +2,7 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x085f24a8 (US 0x085c8278, shift -0xFFFD5DD0); incbin baserom.gba
 	.global Img_EkrLvupNumBig
 Img_EkrLvupNumBig:
-	.incbin "baserom.gba", 0x5F24A8, 0x800
+	.incbin "graphics/gmapunit/Img_EkrLvupNumBig.bin"
 	.global AnimSprite_LvupStatup_1
 AnimSprite_LvupStatup_1:
 	.incbin "baserom.gba", 0x5F2CA8, 0x30

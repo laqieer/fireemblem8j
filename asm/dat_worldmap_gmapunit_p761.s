@@ -11,7 +11,7 @@ Img7_EfxLvupBG:
 	.incbin "baserom.gba", 0x5EE5CC, 0x510
 	.global Pal_EfxLvupBG
 Pal_EfxLvupBG:
-	.incbin "baserom.gba", 0x5EEADC, 0x20
+	.incbin "graphics/gmapunit/Pal_EfxLvupBG.gbapal"
 	.global Tsa1_EfxLvupBG
 Tsa1_EfxLvupBG:
 	.incbin "baserom.gba", 0x5EEAFC, 0x160
@@ -47,13 +47,13 @@ Tsa11_EfxLvupBG:
 	.incbin "baserom.gba", 0x5EFB10, 0xB4
 	.global Img_EfxLvupBG2
 Img_EfxLvupBG2:
-	.incbin "baserom.gba", 0x5EFBC4, 0x6C0
+	.incbin "graphics/gmapunit/Img_EfxLvupBG2.bin.lz"
 	.global Pal_EfxLvupBG2
 Pal_EfxLvupBG2:
-	.incbin "baserom.gba", 0x5F0284, 0x80
+	.incbin "graphics/gmapunit/Pal_EfxLvupBG2.gbapal"
 	.global Pal_EfxLvupBGCOL
 Pal_EfxLvupBGCOL:
-	.incbin "baserom.gba", 0x5F0304, 0x20
+	.incbin "graphics/gmapunit/Pal_EfxLvupBGCOL.gbapal"
 	.global Tsa1_EfxLvupBG2
 Tsa1_EfxLvupBG2:
 	.incbin "baserom.gba", 0x5F0324, 0xE4
@@ -74,7 +74,7 @@ Tsa6_EfxLvupBG2:
 	.incbin "baserom.gba", 0x5F0848, 0x118
 	.global Img_EfxLvupOBJ2
 Img_EfxLvupOBJ2:
-	.incbin "baserom.gba", 0x5F0960, 0x298
+	.incbin "graphics/gmapunit/Img_EfxLvupOBJ2.bin.lz"
 	.global AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_0
 AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_0:
 	.incbin "baserom.gba", 0x5F0BF8, 0x3C

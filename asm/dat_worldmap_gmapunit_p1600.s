@@ -5,4 +5,4 @@ gUnkData_66:
 	.incbin "baserom.gba", 0xA97720, 0x450
 	.global Img_SysBrownBox
 Img_SysBrownBox:
-	.incbin "baserom.gba", 0xA97B70, 0x7C
+	.incbin "graphics/gmapunit/Img_SysBrownBox.bin.lz"

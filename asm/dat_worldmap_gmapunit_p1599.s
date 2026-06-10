@@ -5,7 +5,7 @@ gUnkData_61:
 	.incbin "baserom.gba", 0xA9651C, 0x3B8
 	.global Pal_SpinningArrow
 Pal_SpinningArrow:
-	.incbin "baserom.gba", 0xA968D4, 0x20
+	.incbin "graphics/gmapunit/Pal_SpinningArrow.gbapal"
 	.global gUnkData_62
 gUnkData_62:
 	.incbin "baserom.gba", 0xA968F4, 0x198
@@ -17,10 +17,10 @@ gUnkData_64:
 	.incbin "baserom.gba", 0xA96C4C, 0x20
 	.global Tsa_UnkData_1
 Tsa_UnkData_1:
-	.incbin "baserom.gba", 0xA96C6C, 0x18
+	.incbin "graphics/gmapunit/Tsa_UnkData_1.bin"
 	.global Tsa_UnkData_2
 Tsa_UnkData_2:
-	.incbin "baserom.gba", 0xA96C84, 0x40
+	.incbin "graphics/gmapunit/Tsa_UnkData_2.bin"
 	.global Tsa_UnkData_3
 Tsa_UnkData_3:
-	.incbin "baserom.gba", 0xA96CC4, 0x54
+	.incbin "graphics/gmapunit/Tsa_UnkData_3.bin"

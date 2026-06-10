@@ -14,10 +14,10 @@ gMenuSoundroom_2:
 	.incbin "baserom.gba", 0xAAA934, 0x94
 	.global Img_SoundRoomVolumeGraph
 Img_SoundRoomVolumeGraph:
-	.incbin "baserom.gba", 0xAAA9C8, 0x70
+	.incbin "graphics/gmapunit/Img_SoundRoomVolumeGraph.bin.lz"
 	.global Pal_SoundRoomVolumeGraph
 Pal_SoundRoomVolumeGraph:
-	.incbin "baserom.gba", 0xAAAA38, 0x60
+	.incbin "graphics/gmapunit/Pal_SoundRoomVolumeGraph.gbapal"
 	.global gMenuSoundroom_3
 gMenuSoundroom_3:
 	.incbin "baserom.gba", 0xAAAA98, 0x24

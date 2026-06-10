@@ -2,13 +2,13 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08a930d8 (US 0x08a1738c, shift -0xFFF842B4); incbin baserom.gba
 	.global gPal_PlayerInterface_Blue
 gPal_PlayerInterface_Blue:
-	.incbin "baserom.gba", 0xA930D8, 0x20
+	.incbin "graphics/gmapunit/gPal_PlayerInterface_Blue.gbapal"
 	.global gPal_PlayerInterface_Red
 gPal_PlayerInterface_Red:
-	.incbin "baserom.gba", 0xA930F8, 0x20
+	.incbin "graphics/gmapunit/gPal_PlayerInterface_Red.gbapal"
 	.global gPal_PlayerInterface_Green
 gPal_PlayerInterface_Green:
-	.incbin "baserom.gba", 0xA93118, 0x20
+	.incbin "graphics/gmapunit/gPal_PlayerInterface_Green.gbapal"
 	.global gTSA_UnitInfoWindow
 gTSA_UnitInfoWindow:
 	.incbin "baserom.gba", 0xA93138, 0x40
@@ -47,4 +47,4 @@ gUnkData_58:
 	.incbin "baserom.gba", 0xA933C4, 0x14
 	.global Tsa_TerrainMapUi_Labels
 Tsa_TerrainMapUi_Labels:
-	.incbin "baserom.gba", 0xA933D8, 0x10
+	.incbin "graphics/gmapunit/Tsa_TerrainMapUi_Labels.bin"

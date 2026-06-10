@@ -26,37 +26,37 @@ gUnkData_42:
 	.incbin "baserom.gba", 0xA7540C, 0x14
 	.global Img_StatscreenBG
 Img_StatscreenBG:
-	.incbin "baserom.gba", 0xA75420, 0x2BA8
+	.incbin "graphics/gmapunit/Img_StatscreenBG.bin.lz"
 	.global Tsa_StatscreenBG
 Tsa_StatscreenBG:
-	.incbin "baserom.gba", 0xA77FC8, 0x550
+	.incbin "graphics/gmapunit/Tsa_StatscreenBG.bin.lz"
 	.global Pal_StatscreenBG
 Pal_StatscreenBG:
-	.incbin "baserom.gba", 0xA78518, 0x80
+	.incbin "graphics/gmapunit/Pal_StatscreenBG.gbapal"
 	.global Img_StatscreenHalo
 Img_StatscreenHalo:
-	.incbin "baserom.gba", 0xA78598, 0xD1C
+	.incbin "graphics/gmapunit/Img_StatscreenHalo.bin.lz"
 	.global Tsa_StatscreenHalo
 Tsa_StatscreenHalo:
-	.incbin "baserom.gba", 0xA792B4, 0x120
+	.incbin "graphics/gmapunit/Tsa_StatscreenHalo.bin.lz"
 	.global Pal_StatscreenHalo
 Pal_StatscreenHalo:
-	.incbin "baserom.gba", 0xA793D4, 0x20
+	.incbin "graphics/gmapunit/Pal_StatscreenHalo.gbapal"
 	.global Img_ConfigUiSprites
 Img_ConfigUiSprites:
-	.incbin "baserom.gba", 0xA793F4, 0x210
+	.incbin "graphics/gmapunit/Img_ConfigUiSprites.bin.lz"
 	.global Img_ConfigUiIcons
 Img_ConfigUiIcons:
-	.incbin "baserom.gba", 0xA79604, 0x468
+	.incbin "graphics/gmapunit/Img_ConfigUiIcons.bin.lz"
 	.global Tsa_ConfigUiFrame
 Tsa_ConfigUiFrame:
-	.incbin "baserom.gba", 0xA79A6C, 0xE4
+	.incbin "graphics/gmapunit/Tsa_ConfigUiFrame.bin.lz"
 	.global Pal_ConfigUiSprites
 Pal_ConfigUiSprites:
-	.incbin "baserom.gba", 0xA79B50, 0x40
+	.incbin "graphics/gmapunit/Pal_ConfigUiSprites.gbapal"
 	.global gPal_UnkData_0
 gPal_UnkData_0:
-	.incbin "baserom.gba", 0xA79B90, 0x12
+	.incbin "graphics/gmapunit/gPal_UnkData_0.gbapal"
 	.global gUnkData_43
 gUnkData_43:
 	.incbin "baserom.gba", 0xA79BA2, 0x20
@@ -71,4 +71,4 @@ gUnkData_46:
 	.incbin "baserom.gba", 0xA79CC2, 0x4E
 	.global gPal_UnkData_1
 gPal_UnkData_1:
-	.incbin "baserom.gba", 0xA79D10, 0x180
+	.incbin "graphics/gmapunit/gPal_UnkData_1.gbapal"

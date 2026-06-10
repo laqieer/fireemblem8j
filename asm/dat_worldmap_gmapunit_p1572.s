@@ -11,49 +11,49 @@ gUnkData_32:
 	.incbin "baserom.gba", 0xA73FDC, 0x1CC
 	.global Img_StatscreenEquipmentText
 Img_StatscreenEquipmentText:
-	.incbin "baserom.gba", 0xA741A8, 0xF4
+	.incbin "graphics/gmapunit/Img_StatscreenEquipmentText.bin.lz"
 	.global Pal_StatscreenEquipmentText
 Pal_StatscreenEquipmentText:
-	.incbin "baserom.gba", 0xA7429C, 0x20
+	.incbin "graphics/gmapunit/Pal_StatscreenEquipmentText.gbapal"
 	.global Tsa_StatscreenEquipmentBG
 Tsa_StatscreenEquipmentBG:
-	.incbin "baserom.gba", 0xA742BC, 0x4C
+	.incbin "graphics/gmapunit/Tsa_StatscreenEquipmentBG.bin.lz"
 	.global Tsa_StatscreenEquipedWeaponHighlight
 Tsa_StatscreenEquipedWeaponHighlight:
-	.incbin "baserom.gba", 0xA74308, 0x24
+	.incbin "graphics/gmapunit/Tsa_StatscreenEquipedWeaponHighlight.bin"
 	.global Img_StatscreenObjs
 Img_StatscreenObjs:
-	.incbin "baserom.gba", 0xA7432C, 0x588
+	.incbin "graphics/gmapunit/Img_StatscreenObjs.bin.lz"
 	.global gUnkData_33
 gUnkData_33:
 	.incbin "baserom.gba", 0xA748B4, 0x60
 	.global gGfx_HelpTextBox
 gGfx_HelpTextBox:
-	.incbin "baserom.gba", 0xA74914, 0x28
+	.incbin "graphics/gmapunit/gGfx_HelpTextBox.bin.lz"
 	.global gGfx_HelpTextBox2
 gGfx_HelpTextBox2:
-	.incbin "baserom.gba", 0xA7493C, 0x28
+	.incbin "graphics/gmapunit/gGfx_HelpTextBox2.bin.lz"
 	.global gGfx_HelpTextBox3
 gGfx_HelpTextBox3:
-	.incbin "baserom.gba", 0xA74964, 0x68
+	.incbin "graphics/gmapunit/gGfx_HelpTextBox3.bin.lz"
 	.global gGfx_HelpTextBox4
 gGfx_HelpTextBox4:
-	.incbin "baserom.gba", 0xA749CC, 0x6C
+	.incbin "graphics/gmapunit/gGfx_HelpTextBox4.bin.lz"
 	.global gGfx_HelpTextBox5
 gGfx_HelpTextBox5:
-	.incbin "baserom.gba", 0xA74A38, 0x28
+	.incbin "graphics/gmapunit/gGfx_HelpTextBox5.bin.lz"
 	.global gGfx_YellowTextBox
 gGfx_YellowTextBox:
-	.incbin "baserom.gba", 0xA74A60, 0x74
+	.incbin "graphics/gmapunit/gGfx_YellowTextBox.bin.lz"
 	.global gGfx_YellowTextBox2
 gGfx_YellowTextBox2:
-	.incbin "baserom.gba", 0xA74AD4, 0x78
+	.incbin "graphics/gmapunit/gGfx_YellowTextBox2.bin.lz"
 	.global gGfx_YellowTextBox3
 gGfx_YellowTextBox3:
-	.incbin "baserom.gba", 0xA74B4C, 0xA8
+	.incbin "graphics/gmapunit/gGfx_YellowTextBox3.bin.lz"
 	.global gGfx_YellowTextBox4
 gGfx_YellowTextBox4:
-	.incbin "baserom.gba", 0xA74BF4, 0x70
+	.incbin "graphics/gmapunit/gGfx_YellowTextBox4.bin.lz"
 	.global gGfx_YellowTextBox5
 gGfx_YellowTextBox5:
-	.incbin "baserom.gba", 0xA74C64, 0x88
+	.incbin "graphics/gmapunit/gGfx_YellowTextBox5.bin.lz"
