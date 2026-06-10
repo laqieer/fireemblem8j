@@ -195,6 +195,22 @@ sound/%.bin: sound/%.aif
 DIRECT_SOUND_BINS := $(patsubst %.aif,%.bin,$(shell find sound/direct_sound_samples -name '*.aif' 2>/dev/null))
 asm/direct_sound_data.o: $(DIRECT_SOUND_BINS)
 
+# Sound DATA blobs (Phase 1 self-containment, the voicegroup + song-body + m4a-table
+# remainder): the region-different / table-pinned sound data (voicegroups, song
+# bodies, gMPlayTable, m4a scalar tables, frontier voice gaps) is carried as
+# COMMITTED, symbol-named `data/sound/*.bin` -- the same "commit a named .bin for
+# opaque region-different data" model as data/banim/*.bin. baserom.gba is NOT in
+# this chain: each sound `.s` `.incbin`s its own data/sound/*.bin, so with baserom
+# removed the whole sound remainder still reproduces byte-for-byte. The `.bin` are
+# committed SOURCE (no recipe -- make treats them as leaves); the editable-.mid /
+# voice_* readability polish is deferred (see docs/sound.md, D35). Each object must
+# rebuild when one of its blobs changes, so depend on the full set.
+SOUND_DATA_BINS := $(wildcard data/sound/*.bin)
+$(patsubst %.s,%.o,$(wildcard asm/snd_song*.s asm/snd_banim_efxsound_data_*.s \
+	asm/dat_voicegroup*_ref.s asm/dat_m4a_tables.s asm/dat_gMPlayTable_ref.s \
+	asm/dat_gMPlayJumpTableTemplate_ref.s asm/frontier_df3_voicegroup.s \
+	asm/frontier_df4_voice.s)): $(SOUND_DATA_BINS)
+
 # Banim OAM / AnimSprite / motion / modes DATA (Phase 1 self-containment): the
 # per-animation data blobs are COMMITTED, descriptively-named `data/banim/*.bin`
 # (the JP bytes, byte-identical by construction -- region-different, mostly

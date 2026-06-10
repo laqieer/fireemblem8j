@@ -2,25 +2,25 @@
 @ src/m4a_tables.o: region-same content at JP 0x081f6ed0 (US 0x08207220, shift -0x10350); incbin baserom.gba
 	.global gScaleTable
 gScaleTable:
-	.incbin "baserom.gba", 0x1F6ED0, 0xB4
+	.incbin "data/sound/gScaleTable.bin"
 	.global gFreqTable
 gFreqTable:
-	.incbin "baserom.gba", 0x1F6F84, 0x30
+	.incbin "data/sound/gFreqTable.bin"
 	.global gPcmSamplesPerVBlankTable
 gPcmSamplesPerVBlankTable:
-	.incbin "baserom.gba", 0x1F6FB4, 0x18
+	.incbin "data/sound/gPcmSamplesPerVBlankTable.bin"
 	.global gCgbScaleTable
 gCgbScaleTable:
-	.incbin "baserom.gba", 0x1F6FCC, 0x84
+	.incbin "data/sound/gCgbScaleTable.bin"
 	.global gCgbFreqTable
 gCgbFreqTable:
-	.incbin "baserom.gba", 0x1F7050, 0x18
+	.incbin "data/sound/gCgbFreqTable.bin"
 	.global gNoiseTable
 gNoiseTable:
-	.incbin "baserom.gba", 0x1F7068, 0x3C
+	.incbin "data/sound/gNoiseTable.bin"
 	.global gCgb3Vol
 gCgb3Vol:
-	.incbin "baserom.gba", 0x1F70A4, 0x10
+	.incbin "data/sound/gCgb3Vol.bin"
 	.global gClockTable
 gClockTable:
-	.incbin "baserom.gba", 0x1F70B4, 0x34
+	.incbin "data/sound/gClockTable.bin"

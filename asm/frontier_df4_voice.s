@@ -10,22 +10,22 @@
 @ df4_voice region-different data, JP 0x081f578c..0x081f5bec (1120 B); long-tail data gap (no .text in window), byte-perfect incbin.
 	.global frontier_df4_voice_000_1F578C
 frontier_df4_voice_000_1F578C:
-	.incbin "baserom.gba", 0x1F578C, 0x460
+	.incbin "data/sound/frontier_df4_voice_000_1F578C.bin"
 
 	.section .data.frontier_df4_voice.gap1, "a", %progbits
 @ df4_voice region-different data, JP 0x081f67bc..0x081f6cf4 (1336 B); long-tail data gap (no .text in window), byte-perfect incbin.
 	.global frontier_df4_voice_001_1F67BC
 frontier_df4_voice_001_1F67BC:
-	.incbin "baserom.gba", 0x1F67BC, 0x538
+	.incbin "data/sound/frontier_df4_voice_001_1F67BC.bin"
 
 	.section .data.frontier_df4_voice.gap2, "a", %progbits
 @ df4_voice region-different data, JP 0x08211988..0x08212360 (2520 B); long-tail data gap (no .text in window), byte-perfect incbin.
 	.global frontier_df4_voice_002_211988
 frontier_df4_voice_002_211988:
-	.incbin "baserom.gba", 0x211988, 0x9D8
+	.incbin "data/sound/frontier_df4_voice_002_211988.bin"
 
 	.section .data.frontier_df4_voice.gap3, "a", %progbits
 @ df4_voice region-different data, JP 0x08214120..0x08216064 (8004 B); long-tail data gap (no .text in window), byte-perfect incbin.
 	.global frontier_df4_voice_003_214120
 frontier_df4_voice_003_214120:
-	.incbin "baserom.gba", 0x214120, 0x1F44
+	.incbin "data/sound/frontier_df4_voice_003_214120.bin"
