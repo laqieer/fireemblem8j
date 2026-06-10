@@ -6,3 +6,6 @@
 0D2F44	0D2F88	src/PutGuideCategoryList.o(.text)	PutGuideCategoryList (region-diff: gGuideSt @ 0x8BABAF4, callee PutGuideCategoryName @ 0xD2EBC)
 01A108	01A138	src/GenerateExtendedMovementMapOnRange.o(.text)	GenerateExtendedMovementMapOnRange (region-diff: JP inlines SetWorkingBmMap; callee GenerateMovementMap @ 0x1A1B8)
 01A138	01A168	src/GenerateExtendedMovementMap.o(.text)	GenerateExtendedMovementMap (region-diff: JP inlines SetWorkingBmMap)
+004C64	004C84	src/PutTwoSpecialChar.o(.text)	PutTwoSpecialChar (region-diff: bl PutSpecialChar)
+004A9C	004ABC	src/PutNumberOrBlank.o(.text)	PutNumberOrBlank (region-diff: callees PutTwoSpecialChar/PutNumber)
+004AF8	004B24	src/PutNumberBonus.o(.text)	PutNumberBonus (region-diff: callees PutSpecialChar/PutNumberSmall)
