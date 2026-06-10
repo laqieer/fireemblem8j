@@ -1,0 +1,6 @@
+GetUnitSupporterCharacter	08028170	thumb	bmreliance_08028188
+GetUnitTotalSupportLevel	080281F8	thumb	bmreliance_080283C8
+GetUnitSupporterUnit	08028188	thumb	bmreliance_080283C8
+gPlaySt	0202BCEC	data	bmreliance_080283C8
+UnitGainSupportExp	08028224	thumb	bmreliance_080283C8
+GetUnitSupportLevel	080281D0	thumb	bmreliance_08028738
