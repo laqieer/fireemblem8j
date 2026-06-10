@@ -3,28 +3,28 @@
 @ src/data/ui/phase_change.o: region-same content at JP 0x085c7540 (US 0x0859f020, shift -0x-28520); incbin baserom.gba
 	.global Img_PhaseChangeUnk
 Img_PhaseChangeUnk:
-	.incbin "baserom.gba", 0x5C7540, 0x3D8
+	.incbin "graphics/misc_gfx/Img_PhaseChangeUnk.bin.lz"
 	.global Img_PhaseChangePlayer
 Img_PhaseChangePlayer:
-	.incbin "baserom.gba", 0x5C7918, 0x634
+	.incbin "graphics/misc_gfx/Img_PhaseChangePlayer.bin.lz"
 	.global Pal_PhaseChangePlayer
 Pal_PhaseChangePlayer:
-	.incbin "baserom.gba", 0x5C7F4C, 0x20
+	.incbin "graphics/misc_gfx/Pal_PhaseChangePlayer.gbapal"
 	.global Img_PhaseChangeEnemy
 Img_PhaseChangeEnemy:
-	.incbin "baserom.gba", 0x5C7F6C, 0x61C
+	.incbin "graphics/misc_gfx/Img_PhaseChangeEnemy.bin.lz"
 	.global Pal_PhaseChangeEnemy
 Pal_PhaseChangeEnemy:
-	.incbin "baserom.gba", 0x5C8588, 0x20
+	.incbin "graphics/misc_gfx/Pal_PhaseChangeEnemy.gbapal"
 	.global Img_PhaseChangeOther
 Img_PhaseChangeOther:
-	.incbin "baserom.gba", 0x5C85A8, 0x610
+	.incbin "graphics/misc_gfx/Img_PhaseChangeOther.bin.lz"
 	.global Pal_PhaseChangeOther
 Pal_PhaseChangeOther:
-	.incbin "baserom.gba", 0x5C8BB8, 0x20
+	.incbin "graphics/misc_gfx/Pal_PhaseChangeOther.gbapal"
 	.global Pal_PhaseChange_0
 Pal_PhaseChange_0:
-	.incbin "baserom.gba", 0x5C8BD8, 0x20
+	.incbin "graphics/misc_gfx/Pal_PhaseChange_0.gbapal"
 	.global Img_PhaseChangeSquares
 Img_PhaseChangeSquares:
-	.incbin "baserom.gba", 0x5C8BF8, 0x160
+	.incbin "graphics/misc_gfx/Img_PhaseChangeSquares.bin.lz"

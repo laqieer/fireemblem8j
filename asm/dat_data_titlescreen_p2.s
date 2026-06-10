@@ -2,22 +2,22 @@
 @ src/data/data_titlescreen.o: region-same content at JP 0x08b49b6c (US 0x08ab0b44, shift -0xFFF66FD8); incbin baserom.gba
 	.global gGfx_TitleDemonKing
 gGfx_TitleDemonKing:
-	.incbin "baserom.gba", 0xB49B6C, 0xD4C
+	.incbin "graphics/misc_gfx/gGfx_TitleDemonKing.bin.lz"
 	.global gTsa_TitleDemonKing
 gTsa_TitleDemonKing:
 	.incbin "baserom.gba", 0xB4A8B8, 0x374
 	.global gPal_TitleDemonKing
 gPal_TitleDemonKing:
-	.incbin "baserom.gba", 0xB4AC2C, 0x20
+	.incbin "graphics/misc_gfx/gPal_TitleDemonKing.gbapal"
 	.global gGfx_TitleLargeGlowingOrb
 gGfx_TitleLargeGlowingOrb:
-	.incbin "baserom.gba", 0xB4AC4C, 0x4E8
+	.incbin "graphics/misc_gfx/gGfx_TitleLargeGlowingOrb.bin.lz"
 	.global gPal_TitleLargeGlowingOrb
 gPal_TitleLargeGlowingOrb:
-	.incbin "baserom.gba", 0xB4B134, 0x60
+	.incbin "graphics/misc_gfx/gPal_TitleLargeGlowingOrb.gbapal"
 	.global gGfx_TitleSmallLightBubbles
 gGfx_TitleSmallLightBubbles:
-	.incbin "baserom.gba", 0xB4B194, 0x4C
+	.incbin "graphics/misc_gfx/gGfx_TitleSmallLightBubbles.bin.lz"
 	.global gPal_TitleSmallLightBubbles
 gPal_TitleSmallLightBubbles:
-	.incbin "baserom.gba", 0xB4B1E0, 0x20
+	.incbin "graphics/misc_gfx/gPal_TitleSmallLightBubbles.gbapal"

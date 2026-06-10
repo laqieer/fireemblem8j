@@ -5,28 +5,28 @@ Pal_OpAnimEphraimBlur:
 	.incbin "graphics/opanim/OpAnimEphraim.gbapal"
 	.global Img_OpAnimEirika
 Img_OpAnimEirika:
-	.incbin "baserom.gba", 0xB5B7B4, 0xD38
+	.incbin "graphics/misc_gfx/Pal_OpAnimEphraimBlur.bin.lz"
 	.global Tsa_OpAnimEirika
 Tsa_OpAnimEirika:
-	.incbin "baserom.gba", 0xB5C4EC, 0x190
+	.incbin "graphics/misc_gfx/Tsa_OpAnimEirika.bin.lz"
 	.global Img_OpAnimEirikaBlur1
 Img_OpAnimEirikaBlur1:
-	.incbin "baserom.gba", 0xB5C67C, 0xD78
+	.incbin "graphics/misc_gfx/Img_OpAnimEirikaBlur1.bin.lz"
 	.global Tsa_OpAnimEirikaBlur1
 Tsa_OpAnimEirikaBlur1:
-	.incbin "baserom.gba", 0xB5D3F4, 0x19C
+	.incbin "graphics/misc_gfx/Tsa_OpAnimEirikaBlur1.bin.lz"
 	.global Img_OpAnimEirikaBlur2
 Img_OpAnimEirikaBlur2:
-	.incbin "baserom.gba", 0xB5D590, 0xB98
+	.incbin "graphics/misc_gfx/Img_OpAnimEirikaBlur2.bin.lz"
 	.global Tsa_OpAnimEirikaBlur2
 Tsa_OpAnimEirikaBlur2:
-	.incbin "baserom.gba", 0xB5E128, 0x1C8
+	.incbin "graphics/misc_gfx/Tsa_OpAnimEirikaBlur2.bin.lz"
 	.global Img_OpAnimEirikaBlur3
 Img_OpAnimEirikaBlur3:
-	.incbin "baserom.gba", 0xB5E2F0, 0xAF8
+	.incbin "graphics/misc_gfx/Img_OpAnimEirikaBlur3.bin.lz"
 	.global Tsa_OpAnimEirikaBlur3
 Tsa_OpAnimEirikaBlur3:
-	.incbin "baserom.gba", 0xB5EDE8, 0x1F4
+	.incbin "graphics/misc_gfx/Tsa_OpAnimEirikaBlur3.bin.lz"
 	.global Img_OpAnimEirikaClose1
 Img_OpAnimEirikaClose1:
 	.incbin "graphics/opanim/OpAnimEirikaClose1.4bpp.lz"
