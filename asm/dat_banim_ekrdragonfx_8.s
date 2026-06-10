@@ -3,19 +3,19 @@
 @ src/data/banim-ekrdragonfx.o: region-same content at JP 0x087fb4d0 (US 0x087a6f78, shift -0x-54558); incbin baserom.gba
 	.global AnimSprite_EfxMaohFlashEyeFire2Obj1_7
 AnimSprite_EfxMaohFlashEyeFire2Obj1_7:
-	.incbin "baserom.gba", 0x7FB4D0, 0x1BC
+	.incbin "data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_7.bin"
 	.global AnimSprite_EfxMaohFlashEyeFire2Obj1_8
 AnimSprite_EfxMaohFlashEyeFire2Obj1_8:
-	.incbin "baserom.gba", 0x7FB68C, 0x12C
+	.incbin "data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_8.bin"
 	.global AnimSprite_EfxMaohFlashEyeFire2Obj1_9
 AnimSprite_EfxMaohFlashEyeFire2Obj1_9:
-	.incbin "baserom.gba", 0x7FB7B8, 0xCC
+	.incbin "data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_9.bin"
 	.global AnimSprite_EfxMaohFlashEyeFire2Obj1_10
 AnimSprite_EfxMaohFlashEyeFire2Obj1_10:
-	.incbin "baserom.gba", 0x7FB884, 0x84
+	.incbin "data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_10.bin"
 	.global AnimSprite_EfxMaohFlashEyeFire2Obj1_11
 AnimSprite_EfxMaohFlashEyeFire2Obj1_11:
-	.incbin "baserom.gba", 0x7FB908, 0x24
+	.incbin "data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_11.bin"
 	.global AnimSprite_EfxMaohFlashEyeFire2Obj1_12
 AnimSprite_EfxMaohFlashEyeFire2Obj1_12:
-	.incbin "baserom.gba", 0x7FB92C, 0xC
+	.incbin "data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_12.bin"

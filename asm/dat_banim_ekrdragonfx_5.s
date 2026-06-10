@@ -12,19 +12,19 @@ Pal_DemonLightSprites_efxMaohFlashEyeFire:
 	.incbin "graphics/banim/_us/banim/dragonfx/Pal_DemonLightSprites_087A61EC.gbapal"
 	.global AnimSprite_EfxMaohFlashEyeFire1Obj_1
 AnimSprite_EfxMaohFlashEyeFire1Obj_1:
-	.incbin "baserom.gba", 0x7FA764, 0x1BC
+	.incbin "data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_1.bin"
 	.global AnimSprite_EfxMaohFlashEyeFire1Obj_2
 AnimSprite_EfxMaohFlashEyeFire1Obj_2:
-	.incbin "baserom.gba", 0x7FA920, 0x12C
+	.incbin "data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_2.bin"
 	.global AnimSprite_EfxMaohFlashEyeFire1Obj_3
 AnimSprite_EfxMaohFlashEyeFire1Obj_3:
-	.incbin "baserom.gba", 0x7FAA4C, 0xCC
+	.incbin "data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_3.bin"
 	.global AnimSprite_EfxMaohFlashEyeFire1Obj_4
 AnimSprite_EfxMaohFlashEyeFire1Obj_4:
-	.incbin "baserom.gba", 0x7FAB18, 0x84
+	.incbin "data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_4.bin"
 	.global AnimSprite_EfxMaohFlashEyeFire1Obj_5
 AnimSprite_EfxMaohFlashEyeFire1Obj_5:
-	.incbin "baserom.gba", 0x7FAB9C, 0x24
+	.incbin "data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_5.bin"
 	.global AnimSprite_EfxMaohFlashEyeFire1Obj_6
 AnimSprite_EfxMaohFlashEyeFire1Obj_6:
-	.incbin "baserom.gba", 0x7FABC0, 0xC
+	.incbin "data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_6.bin"
