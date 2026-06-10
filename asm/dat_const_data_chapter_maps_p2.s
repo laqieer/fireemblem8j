@@ -2,58 +2,58 @@
 @ src/data/const_data_chapter_maps.o: region-same content at JP 0x08190010 (US 0x081a0514, shift -0x10504); incbin baserom.gba
 	.global TowerOfValniTileConfiguration
 TowerOfValniTileConfiguration:
-	.incbin "baserom.gba", 0x190010, 0xF2C
+	.incbin "graphics/map/TowerOfValniTileConfiguration.bin.lz"
 	.global TileConfiguration10
 TileConfiguration10:
-	.incbin "baserom.gba", 0x190F3C, 0xB80
+	.incbin "graphics/map/TileConfiguration10.bin.lz"
 	.global TileConfiguration9
 TileConfiguration9:
-	.incbin "baserom.gba", 0x191ABC, 0x16A0
+	.incbin "graphics/map/TileConfiguration9.bin.lz"
 	.global TileConfiguration8
 TileConfiguration8:
-	.incbin "baserom.gba", 0x19315C, 0xEB0
+	.incbin "graphics/map/TileConfiguration8.bin.lz"
 	.global TileConfiguration7
 TileConfiguration7:
-	.incbin "baserom.gba", 0x19400C, 0x10A4
+	.incbin "graphics/map/TileConfiguration7.bin.lz"
 	.global TileConfiguration6
 TileConfiguration6:
-	.incbin "baserom.gba", 0x1950B0, 0x1050
+	.incbin "graphics/map/TileConfiguration6.bin.lz"
 	.global TileConfiguration5
 TileConfiguration5:
-	.incbin "baserom.gba", 0x196100, 0x1070
+	.incbin "graphics/map/TileConfiguration5.bin.lz"
 	.global TileConfiguration4
 TileConfiguration4:
-	.incbin "baserom.gba", 0x197170, 0x1658
+	.incbin "graphics/map/TileConfiguration4.bin.lz"
 	.global TileConfiguration3
 TileConfiguration3:
-	.incbin "baserom.gba", 0x1987C8, 0x1474
+	.incbin "graphics/map/TileConfiguration3.bin.lz"
 	.global TileConfiguration2
 TileConfiguration2:
-	.incbin "baserom.gba", 0x199C3C, 0x155C
+	.incbin "graphics/map/TileConfiguration2.bin.lz"
 	.global TileConfiguration1
 TileConfiguration1:
-	.incbin "baserom.gba", 0x19B198, 0x1894
+	.incbin "graphics/map/TileConfiguration1.bin.lz"
 	.global Ch5TownPalettePast
 Ch5TownPalettePast:
-	.incbin "baserom.gba", 0x19CA2C, 0x140
+	.incbin "graphics/map/Ch5TownPalettePast.gbapal"
 	.global AnotherShrinePalette
 AnotherShrinePalette:
-	.incbin "baserom.gba", 0x19CB6C, 0x140
+	.incbin "graphics/map/AnotherShrinePalette.gbapal"
 	.global MapPalette19
 MapPalette19:
-	.incbin "baserom.gba", 0x19CCAC, 0x140
+	.incbin "graphics/map/MapPalette19.gbapal"
 	.global LagdouRuins8Palette
 LagdouRuins8Palette:
-	.incbin "baserom.gba", 0x19CDEC, 0x140
+	.incbin "graphics/map/LagdouRuins8Palette.gbapal"
 	.global LagdouRuinsPalette
 LagdouRuinsPalette:
-	.incbin "baserom.gba", 0x19CF2C, 0x140
+	.incbin "graphics/map/LagdouRuinsPalette.gbapal"
 	.global TowerOfValniMapPalette
 TowerOfValniMapPalette:
-	.incbin "baserom.gba", 0x19D06C, 0x140
+	.incbin "graphics/map/TowerOfValniMapPalette.gbapal"
 	.global MapPalette18
 MapPalette18:
-	.incbin "baserom.gba", 0x19D1AC, 0x140
+	.incbin "graphics/map/MapPalette18.gbapal"
 	.global MapPalette17
 MapPalette17:
-	.incbin "baserom.gba", 0x19D2EC, 0x140
+	.incbin "graphics/map/MapPalette17.gbapal"

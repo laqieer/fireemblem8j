@@ -6,16 +6,16 @@ Sprite_0:
 	.incbin "baserom.gba", 0xB1CD80, 0x1AC
 	.global gImg_WorldmapNodeRevealEffect
 gImg_WorldmapNodeRevealEffect:
-	.incbin "baserom.gba", 0xB1CF2C, 0x190
+	.incbin "graphics/worldmap/gImg_WorldmapNodeRevealEffect.4bpp.lz"
 	.global gPal_WorldmapNodeRevealEffect
 gPal_WorldmapNodeRevealEffect:
-	.incbin "baserom.gba", 0xB1D0BC, 0x20
+	.incbin "graphics/worldmap/gPal_WorldmapNodeRevealEffect.gbapal"
 	.global gWorldmapSprite_0
 gWorldmapSprite_0:
 	.incbin "baserom.gba", 0xB1D0DC, 0x90
 	.global Img_GmapPath
 Img_GmapPath:
-	.incbin "baserom.gba", 0xB1D16C, 0xCC
+	.incbin "graphics/worldmap/Img_GmapPath.4bpp.lz"
 	.global gWorldmapSprite_1
 gWorldmapSprite_1:
 	.incbin "baserom.gba", 0xB1D238, 0x20

@@ -2,55 +2,55 @@
 @ src/data/const_data_chapter_maps.o: region-same content at JP 0x0819ebdc (US 0x081af220, shift -0x10644); incbin baserom.gba
 	.global SomeBuildingMap
 SomeBuildingMap:
-	.incbin "baserom.gba", 0x19EBDC, 0x100
+	.incbin "graphics/map/SomeBuildingMap.bin.lz"
 	.global SomePathMap
 SomePathMap:
-	.incbin "baserom.gba", 0x19ECDC, 0x114
+	.incbin "graphics/map/SomePathMap.bin.lz"
 	.global RenaisShrineMap
 RenaisShrineMap:
-	.incbin "baserom.gba", 0x19EDF0, 0xE8
+	.incbin "graphics/map/RenaisShrineMap.bin.lz"
 	.global GradoShrineMapPast
 GradoShrineMapPast:
-	.incbin "baserom.gba", 0x19EED8, 0xE8
+	.incbin "graphics/map/GradoShrineMapPast.bin.lz"
 	.global GradoPrisonMap
 GradoPrisonMap:
-	.incbin "baserom.gba", 0x19EFC0, 0x1AC
+	.incbin "graphics/map/GradoPrisonMap.bin.lz"
 	.global GradoBordersMap
 GradoBordersMap:
-	.incbin "baserom.gba", 0x19F16C, 0xFC
+	.incbin "graphics/map/GradoBordersMap.bin.lz"
 	.global RenvalGateMap
 RenvalGateMap:
-	.incbin "baserom.gba", 0x19F268, 0xD4
+	.incbin "graphics/map/RenvalGateMap.bin.lz"
 	.global RenaisAudienceMap
 RenaisAudienceMap:
-	.incbin "baserom.gba", 0x19F33C, 0xAC
+	.incbin "graphics/map/RenaisAudienceMap.bin.lz"
 	.global RenaisThroneMap
 RenaisThroneMap:
-	.incbin "baserom.gba", 0x19F3E8, 0x11C
+	.incbin "graphics/map/RenaisThroneMap.bin.lz"
 	.global CaerPelynMap
 CaerPelynMap:
-	.incbin "baserom.gba", 0x19F504, 0x12C
+	.incbin "graphics/map/CaerPelynMap.bin.lz"
 	.global RenaisCastleMap
 RenaisCastleMap:
-	.incbin "baserom.gba", 0x19F630, 0x13C
+	.incbin "graphics/map/RenaisCastleMap.bin.lz"
 	.global GradoCastleMap
 GradoCastleMap:
-	.incbin "baserom.gba", 0x19F76C, 0x148
+	.incbin "graphics/map/GradoCastleMap.bin.lz"
 	.global Ch11EphraimMap
 Ch11EphraimMap:
-	.incbin "baserom.gba", 0x19F8B4, 0x114
+	.incbin "graphics/map/Ch11EphraimMap.bin.lz"
 	.global Ch11EirikaMap
 Ch11EirikaMap:
-	.incbin "baserom.gba", 0x19F9C8, 0x230
+	.incbin "graphics/map/Ch11EirikaMap.bin.lz"
 	.global DebugMap
 DebugMap:
-	.incbin "baserom.gba", 0x19FBF8, 0x34
+	.incbin "graphics/map/DebugMap.bin.lz"
 	.global AnInterestingMap
 AnInterestingMap:
-	.incbin "baserom.gba", 0x19FC2C, 0x54
+	.incbin "graphics/map/AnInterestingMap.bin.lz"
 	.global LinkArenaMap
 LinkArenaMap:
-	.incbin "baserom.gba", 0x19FC80, 0x108
+	.incbin "graphics/map/LinkArenaMap.bin.lz"
 	.global MelkaenCoastMap
 MelkaenCoastMap:
-	.incbin "baserom.gba", 0x19FD88, 0x340
+	.incbin "graphics/map/MelkaenCoastMap.bin.lz"

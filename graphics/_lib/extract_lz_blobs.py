@@ -153,12 +153,29 @@ def run_subsystem(asm, out_dir, obj, suffix_map, name_fn=None, apply=False, mk_h
             stats["skip"] += 1
             continue
         blob = rom[off : off + size]
+        stem = name_fn(sym)
+
+        # raw (uncompressed) palette: lz_ext == ".gbapal" -> commit a JASC .pal and
+        # verify .pal -> .gbapal == the verbatim ROM blob (no LZ involved).
+        if lz_ext == ".gbapal":
+            pal_bytes = gbapal_to_pal(blob)
+            if pal_to_gbapal(pal_bytes) != blob:
+                stats["fail"] += 1
+                print(f"  RAWPAL_NO_MATCH {sym} @ {off:#x} -- left as incbin")
+                continue
+            inc_rel = f"{out_dir}/{stem}{lz_ext}"  # incbin the rebuilt .gbapal
+            stats["ok"] += 1
+            if apply:
+                commits[os.path.join(REPO, f"{out_dir}/{stem}{src_ext}")] = pal_bytes
+                lines[ln] = f'{indent}.incbin "{inc_rel}"'
+                deps.append(inc_rel)
+            continue
+
         if not blob or blob[0] != 0x10:  # not LZ77
             stats["fail"] += 1
             print(f"  NOT_LZ {names[0]} @ {off:#x} ({size:#x}) -- left as incbin")
             continue
         raw = lz_decompress(blob)
-        stem = name_fn(sym)
         is_pal = lz_ext.endswith(".gbapal.lz")
 
         if is_pal:
