@@ -1,6 +1,6 @@
 	.section .rodata.dat_anim_mapanim_objects, "a", %progbits
 	.align 2
-@ src/data/mapanim/anim_mapanim_objects.o: region-same content at JP 0x08a175c8 (US 0x089a6f40, shift -0x-70688); incbin baserom.gba
+@ src/data/mapanim/anim_mapanim_objects.o: region-same content at JP 0x08a175c8 (US 0x089a6f40, shift -0x-70688); 6 graphics symbols EXTRACTED to graphics/mapanim/; remaining 159 are anim-object data structs (frame/anim lists, OAM) -- still incbin baserom.gba (not Phase-1 graphics)
 	.global Obj_PoisonAnim
 Obj_PoisonAnim:
 	.global Obj_PoisonAnim_motion
@@ -407,19 +407,19 @@ ApHandle_GmapSoguSprites_anim_0:
 	.incbin "baserom.gba", 0xA195B8, 0x44
 	.global Pal_MapAnimManaketeMu
 Pal_MapAnimManaketeMu:
-	.incbin "baserom.gba", 0xA195FC, 0x20
+	.incbin "graphics/mapanim/Pal_MapAnimManaketeMu.gbapal"
 	.global gGfx_ArenaBuildingFront
 gGfx_ArenaBuildingFront:
-	.incbin "baserom.gba", 0xA1961C, 0x2BDC
+	.incbin "graphics/mapanim/gGfx_ArenaBuildingFront.4bpp.lz"
 	.global gTsa_ArenaBuildingFront
 gTsa_ArenaBuildingFront:
-	.incbin "baserom.gba", 0xA1C1F8, 0x4B4
+	.incbin "graphics/mapanim/gTsa_ArenaBuildingFront.tsa.bin"
 	.global gPal_ArenaBuildingFront
 gPal_ArenaBuildingFront:
-	.incbin "baserom.gba", 0xA1C6AC, 0x80
+	.incbin "graphics/mapanim/gPal_ArenaBuildingFront.gbapal"
 	.global Img_MapAnimMISS
 Img_MapAnimMISS:
-	.incbin "baserom.gba", 0xA1C72C, 0xF0
+	.incbin "graphics/mapanim/Img_MapAnimMISS.4bpp.lz"
 	.global Obj_MapAnimMISS
 Obj_MapAnimMISS:
 	.global Obj_MapAnimMISS_motion
@@ -475,7 +475,7 @@ Obj_MapAnimMISS_anim_0:
 	.incbin "baserom.gba", 0xA1C946, 0x3E
 	.global Img_MapAnimNODAMAGE
 Img_MapAnimNODAMAGE:
-	.incbin "baserom.gba", 0xA1C984, 0x144
+	.incbin "graphics/mapanim/Img_MapAnimNODAMAGE.4bpp.lz"
 	.global obj_MapAnimNODAMAGE
 obj_MapAnimNODAMAGE:
 	.global obj_MapAnimNODAMAGE_motion
