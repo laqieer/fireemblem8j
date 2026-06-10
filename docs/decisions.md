@@ -1823,3 +1823,59 @@ reusable artifacts for that next pass.
 (asm removed, C carve unfinished → carved_rom overlap, build RED). Recovery is always: `git checkout` the
 removed `asm/<sym>.s` + `gbadisasm_<sym>.tsv`, `rm` the partial `src/<tu>_<addr>.*` and the harvest fragments,
 `make layout`. Run the harvester per-TU (or small batches) to bound wall-clock.
+
+## D42 — the per-TU DATA-BINDING lever validated: func_only-extract + auto-bind unblocks D41's reverted runs (2026-06-10)
+
+**Context.** Branch `feat/bind-1`. D41 identified the exact blocker for the partial-TU verified-run remainder: a
+run's code body byte-matches (isolated-compile non-reloc diff = 0) but the FULL build reverts because the run
+references an UNPLACED TU-private static / shared rodata (statscreen `gMid_*`/`sPage*TextInfo`/`sStatScreenInfo`,
+scene `sTalkState`/proc-scripts, bmbattle battle globals). This task tested the hypothesis that a per-TU
+data-binding pass unblocks DOZENS of functions per TU.
+
+**Root cause (precise).** `harvest_verified_runs.py` extracts via `extract_run.py`, which KEEPS the whole file
+header — so it RE-EMITS the TU's file-scope data definitions. For a partially-ported TU those definitions are
+region-different (JP msg IDs in `sPage*TextInfo`, region-different EWRAM layout) and/or unreferenced by the run,
+so they either GROW the ROM (+304 B seen on statscreen DisplayLeftPanel: the `sPage*TextInfo` tables it doesn't
+use) or mismatch their content → revert. The byte-matching `.text` never gets a chance to link.
+
+**The lever (validated).** Extract the run with `extract_func_only.py` instead (DROP all file-scope data; the
+run's data refs become externs declared in the project headers), then let **`port_run`'s EXISTING auto-resolver
+BIND each referenced data symbol as an ABS `baseline_syms` entry at its JP literal-pool address** — the D34
+ABS-symbol pattern, now fully automated (it decodes the JP address from `jp[base+off]` at each `R_ARM_ABS32`
+site). The byte-matching body then links and graduates. Implemented as `port_run.port(..., func_only=True)` +
+`scripts/bind_tu_data.py` (the per-TU data-binding harvest; same verify-or-revert + per-task-fragment safety as
+the D41 harvester, `make compare` the sole oracle, NO `git add -A`).
+
+**Extension for header-less TU statics (scene).** Many scene functions reference TU-PRIVATE statics NOT declared
+`extern` in any header (`sTalkState`, `sTalkText`, the `gProcScr_Talk*`/`ProcScr_*` proc-script tables), so
+`extract_func_only` emitted `` `X' undeclared `` rather than a bindable extern. Added an automated extern-prepend
+to `port_run`'s func_only path: on that error, derive `extern <type> X[];` from X's US file-scope definition
+(`_us_extern_decl`/`_try_decl` — a LINEAR depth-0 scan; an early backtracking regex was a catastrophic-backtrack
+trap, fixed), or re-emit the enclosing `enum { … };` for a file-local enum constant; prepend, retry to a fixpoint;
+the auto-resolver then binds X. This recovered 3 scene runs that first failed `subset compile failed`.
+
+**HYPOTHESIS RESULT — the lever delivers ~a-dozen-to-15 functions/TU, NOT dozens, because find_runs already
+fragments each TU into many small verified runs.** Per-TU (all `make check` + `make compare` + `make clean &&
+make compare` + self-containment 100% gated, named from US):
+  * **statscreen: 5 runs / 15 fns** (UnitSlide_* ×8, the 4 config getters incl. InitTexts, DisplayLeftPanel,
+    DrawStatWithBar, DisplaySupportList), +12 ABS data binds (`gStatScreen`, `sStatScreenInfo`,
+    `gProcScr_StatScreen`, `sPageNameSpriteLut`, `sSSMasterTextInitInfo`, `gUiTmScratchC`, …).
+  * **scene: 7 runs / 15 fns** (Talk open/wait/face/screen-flash/sprite-scroll clusters), +7 ABS data binds
+    (`sTalkState`, `ProcScr_ScreenFlashing`, the talk proc-scripts).
+  * **bmbattle: 9 runs / 15 fns** (ComputeBattleUnit{EffectiveStats,Defense,HitRate,CritRate,SupportBonuses},
+    BattleGenerateHit*, ApplyUnitPromotion, GetUnitRoundExp/PowerLevel, …) — the CLEANEST: **all 9 attempted
+    runs graduated, 0 reverts** (its globals are header-extern'd, so func_only resolved them directly).
+**Total: +45 matching-C functions** (2521 → 2566, **29.56% → 30.09%**; honest ceiling 2566/8209 = 31.3%).
+**24 unique ABS data-symbol binds** decoded from literal pools across the three TUs.
+
+**Why "dozens/TU" didn't materialize, and the remaining blockers.** Each TU has 60–75 verified-run functions, but
+`find_runs` splits them into many runs and the harvester only carves the runs covered SOLELY by per-function
+gbadisasm fragments — the bigger runs are `skip-shared-asm` (overlap a non-per-function/stranded asm row, unsafe
+to split) and the rest revert for NON-data-binding reasons: (1) `subset compile failed` from a dropped file-local
+MACRO the extern-prepend can't synthesize (statscreen `PAGENAME_SCALE_TIME` enum is handled, but scene's function
+macro `TALK_TEXT_BY_LINE` + its `sTalkText`/`sTalkChoiceResult` chain in the TalkPrepNextChar cluster is not);
+(2) genuinely region-different codegen. So the lever is REAL and high-value (the byte-matching bodies graduate at
+zero risk once the data binds), but per-TU yield is bounded by run fragmentation + the residual macro/region-diff
+cases, not by data-binding. `bind_tu_data.py` + the func_only/extern-prepend additions to `port_run.py` are the
+reusable artifacts; rerunning them on the other D41-flagged partial TUs (the bind-2 set + face/prepscreen/proc/…)
+is the obvious next pass.
