@@ -1,9 +1,7 @@
 # Fire Emblem: Seima no Kouseki (聖魔の光石)
 
 [![make compare](https://github.com/laqieer/fireemblem8j/actions/workflows/compare.yml/badge.svg)](https://github.com/laqieer/fireemblem8j/actions/workflows/compare.yml)
-[![Code](https://decomp.dev/laqieer/fireemblem8j/jp.svg?mode=shield&measure=matched_code_percent&label=Code)](https://decomp.dev/laqieer/fireemblem8j/jp)
-[![Data](https://decomp.dev/laqieer/fireemblem8j/jp.svg?mode=shield&measure=matched_data_percent&label=Data)](https://decomp.dev/laqieer/fireemblem8j/jp)
-[![Functions](https://img.shields.io/endpoint?url=https%3A%2F%2Fprogress.deco.mp%2Fdata%2Ffireemblem8j%2Fjp%2Fdefault%2F%3Fmode%3Dshield%26measure%3Dfunctions&label=Functions)](https://laqieer.github.io/fe-decomp-portal/)
+[![Self-contained build](https://github.com/laqieer/fireemblem8j/actions/workflows/selfcontained.yml/badge.svg)](https://github.com/laqieer/fireemblem8j/actions/workflows/selfcontained.yml)
 [![Decomp progress](https://github.com/laqieer/fireemblem8j/actions/workflows/progress.yml/badge.svg)](https://github.com/laqieer/fireemblem8j/actions/workflows/progress.yml)
 [![FE Decomp Portal](https://img.shields.io/badge/progress%20charts-FE%20Decomp%20Portal-2ea44f)](https://laqieer.github.io/fe-decomp-portal/)
 
@@ -20,15 +18,42 @@ bulk of the work is **re-linking the US C source against the JP ROM's data
 layout** and decompiling the comparatively small set of region-specific code and
 data (text, fonts, menus, save versioning).
 
-## Status
+## Goal
 
-The project starts from a **byte-perfect raw-ROM baseline**: `asm/baserom.s`
-incbins the whole ROM, so `make compare` reports `OK` from day one. Progress is
-measured by how much of that incbin has been replaced with real decompiled C
-(`src/`) and descriptively-named data — see [`docs/strategy.md`](docs/strategy.md),
-the [project board](https://github.com/users/laqieer/projects/3), and the live
-progress charts on the [**FE Decomp Portal**](https://laqieer.github.io/fe-decomp-portal/)
-(alongside fe8u / fe6 / fe7j).
+**Build the ROM byte-for-byte from committed source with `baserom.gba` removed.**
+A real decompilation reproduces the ROM from matching C (`src/*.c`),
+descriptive/data assembly (`asm/*.s`), and **extracted, descriptively-named
+source assets** (PNG/`.pal` graphics, charmap-encoded text, C struct tables,
+music) — compiled by an asset toolchain. The original ROM, `baserom.gba`, is
+**only** the verification target of `make compare`; it is **never a build input**.
+Delete `baserom.gba` and `make` must still emit the byte-identical ROM (this is
+what `fireemblem8u` and `pokeemerald` already do). See
+[`docs/decomp-completion-standard.md`](docs/decomp-completion-standard.md) for the
+full standard and the honest audit behind the numbers below.
+
+This is **not** "`asm/baserom.s` has zero incbins" (a cosmetic count, gameable by
+relocating incbins into other files). The single number that matters is **build
+self-containment**: remove `baserom.gba` and see if `make` still builds. Run
+`python3 scripts/check_selfcontained.py` for it, and
+`python3 scripts/calcprogress.py` for all four axes.
+
+## Status — honest scorecard
+
+FE8J is an **in-progress** decompilation. Today **~17% of the ROM builds without
+`baserom.gba`**; the self-contained build still **fails** (by design, reported
+honestly by CI). The four real axes (target: **100%** each):
+
+| Axis | Today | Meaning |
+|---|---|---|
+| **Build self-containment** | **~17%** | bytes producible from source ÷ 16,777,216 — **83% (13.29 MB) is still `.incbin "baserom.gba"`** across 12,462 directives. The only ungameable number. |
+| **Matching-C functions** | **~25.6%** (2,187 / 8,528) | functions whose bytes come from compiling `src/*.c`. The other ~74% are **gbadisasm descriptive asm** — disassembly, *not* decompilation. |
+| **Extracted data** | **~0.1%** | genuinely-extracted asset bytes (C struct tables / PNG) ÷ data bytes. Named `.incbin "baserom.gba"` is **not** extraction. |
+| **Named symbols** | **~59%** | labels with meaningful names ÷ total labels. The rest are `sub_/data_/nullsub_/sheet` placeholders. |
+
+Progress is tracked on the [project board](https://github.com/users/laqieer/projects/3)
+and charted live on the [**FE Decomp Portal**](https://laqieer.github.io/fe-decomp-portal/)
+(alongside fe8u / fe6 / fe7j). See [`docs/strategy.md`](docs/strategy.md) for the
+porting methodology.
 
 ## Building
 
@@ -46,14 +71,24 @@ Success ends with:
 fireemblem8.gba: OK
 ```
 
+**Today, `baserom.gba` is still a build input** (83% of the ROM is incbin'd from
+it), so the build cannot run without it yet. The end state is the **self-contained
+build** — `baserom.gba` used *only* to verify:
+
+```bash
+mv baserom.gba /tmp/ && make           # MUST build from source alone (fails today)
+mv /tmp/baserom.gba . && make compare   # restore ONLY to verify: sha1 -> OK
+```
+
+Check the current self-containment with `python3 scripts/check_selfcontained.py`.
+
 ## Layout
 
 | Path             | Purpose                                                        |
 |------------------|----------------------------------------------------------------|
 | `baserom.gba`    | Original JP ROM (you provide; gitignored).                     |
-| `asm/baserom.s`  | Raw-ROM incbin baseline; shrinks as decompilation progresses.  |
+| `asm/*.s`        | Carved/descriptive assembly + data. **~83% is still `.incbin "baserom.gba"`** (generated `asm/baserom.s` + per-region `.s` files) — replaced by extracted source as decompilation progresses. |
 | `src/`           | Decompiled C (ported/adapted from the US decomp).              |
-| `asm/`           | Hand-written / carved-out assembly and data.                   |
 | `include/`       | Headers (ported from the US decomp).                           |
 | `ldscript.txt`   | ROM layout; decompiled objects are placed ahead of the incbin. |
 | `tools/agbcc`    | The GCC 2.95 ARM compiler (install locally; gitignored).       |

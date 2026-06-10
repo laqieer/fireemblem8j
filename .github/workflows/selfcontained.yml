@@ -1,0 +1,81 @@
+name: Self-contained build
+
+# THE honest oracle for "decomp complete": the ROM must build from COMMITTED
+# SOURCE alone, with baserom.gba present ONLY as the `make compare` verification
+# target -- never as a build input. See docs/decomp-completion-standard.md.
+#
+# This workflow is INFORMATIONAL and NON-BLOCKING for now: FE8J is ~17%
+# self-contained, so the acceptance test (build with baserom.gba moved aside) is
+# EXPECTED to fail today. We report that honestly instead of failing CI, so the
+# metric is truthful from day one and the number only moves up as real source
+# replaces `.incbin "baserom.gba"`. When self-containment reaches 100%, the
+# acceptance test will pass and this gate can be flipped to blocking.
+#
+# baserom.gba stays strictly behind `make compare` (see compare.yml). It is
+# fetched here ONLY to run the post-build sha1 verification AFTER the
+# build-without-baserom test has already run.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  selfcontained:
+    runs-on: ubuntu-latest
+    env:
+      BASEROM_URL: ${{ secrets.BASEROM_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Self-containment metric (always runs, no ROM needed)
+        run: python3 scripts/check_selfcontained.py
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential binutils-arm-none-eabi libpng-dev
+
+      - name: Install agbcc
+        run: |
+          git clone --depth 1 https://github.com/pret/agbcc.git
+          cd agbcc && ./build.sh && ./install.sh .. && cd ..
+
+      - name: Acceptance test -- build WITHOUT baserom.gba (must fail today)
+        # The real definition of done: `make` with baserom.gba absent emits the
+        # byte-identical ROM. Today 83% of the ROM is `.incbin "baserom.gba"`, so
+        # the build cannot resolve those bytes and fails. We capture that and
+        # report it as "NOT YET" WITHOUT failing the whole CI run (informational).
+        run: |
+          set +e
+          test -f baserom.gba && mv baserom.gba /tmp/baserom.gba.hidden
+          make >selfcontained_build.log 2>&1
+          rc=$?
+          set -e
+          # Restore baserom immediately so later compare steps can verify.
+          test -f /tmp/baserom.gba.hidden && mv /tmp/baserom.gba.hidden baserom.gba
+          NEED=$(python3 scripts/check_selfcontained.py | awk -F'[ ()]' '/baserom-dependent:/ {print $2}')
+          if [ "$rc" -eq 0 ]; then
+            echo "self-contained build: PASS -- ROM built from source alone (baserom.gba absent)."
+          else
+            echo "self-contained build: NOT YET ($NEED bytes still need baserom) -- expected today; non-blocking."
+            echo "----- tail of build log -----"
+            tail -n 25 selfcontained_build.log || true
+          fi
+          # Always succeed: this gate is informational until self-containment hits 100%.
+          exit 0
+
+      - name: Fetch baserom (sha1-verified, compare-only)
+        if: ${{ env.BASEROM_URL != '' }}
+        run: |
+          curl -fSL "$BASEROM_URL" -o baserom.gba
+          echo "7da0456035366aa18414faa79d8fe7649f03c1ed  baserom.gba" | sha1sum -c -
+
+      - name: make compare (byte-match oracle, baserom is verification-only)
+        if: ${{ env.BASEROM_URL != '' }}
+        run: make compare
+
+      - name: Note when ROM unavailable
+        if: ${{ env.BASEROM_URL == '' }}
+        run: echo "BASEROM_URL secret not set - reported self-containment metric only; skipped byte-match compare."
