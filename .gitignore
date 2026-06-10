@@ -157,3 +157,6 @@ src/_diag_*
 # scripts/tools/coddog/; these are copied to the root only to run coddog).
 /decomp.yaml
 /fe8u.coddog.yaml
+
+# Scheduler lock (transient local state; was accidentally tracked)
+/.claude/scheduled_tasks.lock
