@@ -1,0 +1,8 @@
+# Huffman tie-break overrides for the JP message tree.
+# Each line: <left_sym> <right_sym> (hex). When the frequency-
+# driven builder pops this equal-frequency leaf PAIR, force the
+# first symbol to be the left (bit-0) child -- matching the
+# original ROM encoder's resolution of an otherwise-ambiguous tie.
+# See docs/text.md. Both orderings are optimal Huffman trees;
+# this picks the ROM's so the bitstream is byte-identical.
+0xDD82 0x000A

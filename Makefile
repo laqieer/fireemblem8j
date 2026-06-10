@@ -71,9 +71,15 @@ CFILES      := $(wildcard src/*.c)
 # explicitly rather than via the wildcard, which would miss them on a fresh
 # checkout (they don't exist until the first build regenerates them).
 GENERATED_S := asm/baserom.s asm/jp_syms.s
-ASM_S_FILES := $(filter-out $(GENERATED_S),$(wildcard asm/*.s))
+# asm/msg_data.s is GENERATED from the committed JP text source (texts/jp_texts.txt
+# + textdefs + huffman tiebreaks) by scripts/texttools/msg_jp.py, re-encoding the
+# Huffman-compressed message block byte-identically. Gitignored + regenerated like
+# the layout-generated .s, so a fresh checkout rebuilds it from source (NO baserom
+# dependency). See docs/text.md.
+TEXT_GENERATED_S := asm/msg_data.s
+ASM_S_FILES := $(filter-out $(GENERATED_S) $(TEXT_GENERATED_S),$(wildcard asm/*.s))
 C_OBJECTS   := $(CFILES:.c=.o)
-ASM_OBJECTS := $(ASM_S_FILES:.s=.o) $(GENERATED_S:.s=.o)
+ASM_OBJECTS := $(ASM_S_FILES:.s=.o) $(GENERATED_S:.s=.o) $(TEXT_GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(ASM_OBJECTS)
 
 # --- NON_MATCHING staging (D26): readable C that DOCUMENTS a region-different
@@ -118,6 +124,22 @@ $(LDSCRIPT) $(GENERATED_S) &: $(GEN_LAYOUT_INPUTS)
 # `make layout` stays as a manual force-regenerate alias (e.g. for carve scripts).
 layout:
 	$(PYTHON) scripts/gen_layout.py
+
+# --- JP message text (Huffman-compressed) -----------------------------------
+# Regenerate asm/msg_data.s from the committed bracket-annotated JP text whenever
+# the text source changes. msg_jp.py re-Huffman-encodes byte-identically to the
+# original block (see docs/text.md). This rule does NOT read baserom.gba, so the
+# message block becomes producible from committed source.
+TEXT_TOOLS  := scripts/texttools
+MSG_JP      := $(PYTHON) $(TEXT_TOOLS)/msg_jp.py
+MSG_SOURCES := texts/jp_texts.txt texts/jp_textdefs.txt texts/jp_huffman_tiebreaks.txt
+
+asm/msg_data.s: $(MSG_SOURCES) $(TEXT_TOOLS)/msg_jp.py
+	$(MSG_JP) build
+
+# Convenience: verify the rebuilt block is byte-identical to baserom.gba (dev only).
+text-verify:
+	$(MSG_JP) verify
 
 # Build the IDA Pro reverse-engineering database (tools/ida/fe8j.i64) from the
 # 32-bit ARM ELF, for the headless Hex-Rays decompiler MCP. Needs the local
@@ -238,7 +260,7 @@ clean:
 	# (MAX_ARG_STRLEN, 128 KiB) and `make clean` dies with "Argument list too long".
 	# NOTE: only *.o -- never `find -name '*.s'`: asm/*.s are the COMMITTED descriptive-asm sources.
 	find asm src -name '*.o' -type f -delete
-	$(RM) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
+	$(RM) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(GENERATED_S) $(TEXT_GENERATED_S) $(LDSCRIPT)
 	$(RM) $(NONMATCH_CFILES:.c=.s)
 	# Regenerated asset build intermediates (committed source is PNG/.pal; these
 	# are rebuilt by the %.4bpp/%.lz/... rules). Delete ONLY gitignored ones --
