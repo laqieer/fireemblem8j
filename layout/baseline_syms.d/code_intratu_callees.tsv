@@ -15,3 +15,4 @@ GetBattleUnitUpdatedWeaponExp	0802BFFC	thumb	codegrind_intratu_callees
 UpdateHBlankHandlerState	08001C78	thumb	codegrind_intratu_callees
 CheckRound1	0805AF74	thumb	codegrind_intratu_callees
 ekrBattle_StartPromotion	08051174	thumb	codegrind_intratu_callees
+SearchAvailableEvent	080851FC	thumb	codegrind_intratu_callees
