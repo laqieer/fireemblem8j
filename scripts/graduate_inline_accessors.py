@@ -74,12 +74,75 @@ extern inline struct Trap* GetTrap(int id) {
     return GetItemData(ITEM_INDEX(item))->pStatBonuses;
 }
 """,
+    "GetItemAttributes": """extern inline int GetItemAttributes(int item) {
+    return GetItemData(ITEM_INDEX(item))->attributes;
+}
+""",
+    "GetItemIndex": """extern inline int GetItemIndex(int item) {
+    return ITEM_INDEX(item);
+}
+""",
+    "GetItemMaxUses": """extern inline int GetItemMaxUses(int item) {
+    if (GetItemAttributes(item) & IA_UNBREAKABLE)
+        return 0xFF;
+    else
+        return GetItemData(ITEM_INDEX(item))->maxUses;
+}
+""",
+    "GetItemUses": """extern inline int GetItemUses(int item) {
+    if (GetItemAttributes(item) & IA_UNBREAKABLE)
+        return 0xFF;
+    else
+        return ITEM_USES(item);
+}
+""",
+    "GetItemType": """extern inline int GetItemType(int item) {
+    if (!item)
+        return 0xFF;
+
+    return GetItemData(ITEM_INDEX(item))->weaponType;
+}
+""",
+    "GetItemMinRange": """extern inline int GetItemMinRange(int item) {
+    return GetItemData(ITEM_INDEX(item))->encodedRange >> 4;
+}
+""",
+    "GetItemMaxRange": """extern inline int GetItemMaxRange(int item) {
+    return GetItemData(ITEM_INDEX(item))->encodedRange & 0xF;
+}
+""",
+    "GetItemEncodedRange": """extern inline int GetItemEncodedRange(int item) {
+    return GetItemData(ITEM_INDEX(item))->encodedRange;
+}
+""",
+    "GetItemEffectiveness": """extern inline const u8* GetItemEffectiveness(int item) {
+    return GetItemData(ITEM_INDEX(item))->pEffectiveness;
+}
+""",
+    "GetItemRequiredExp": """extern inline int GetItemRequiredExp(int item) {
+    return GetItemData(ITEM_INDEX(item))->weaponRank;
+}
+""",
+    "GetItemUseEffect": """extern inline int GetItemUseEffect(int item) {
+    return GetItemData(ITEM_INDEX(item))->useEffectId;
+}
+""",
 }
 
 # Transitive inline deps: if the body uses accessor K, also prepend ACCESSORS[v] for
 # v in DEPS[K] (ordered: dependency first). E.g. GetItemStatBonuses inlines GetItemData.
 DEPS = {
     "GetItemStatBonuses": ["GetItemData"],
+    "GetItemAttributes": ["GetItemData"],
+    "GetItemMaxUses": ["GetItemData", "GetItemAttributes"],
+    "GetItemUses": ["GetItemAttributes"],
+    "GetItemType": ["GetItemData"],
+    "GetItemMinRange": ["GetItemData"],
+    "GetItemMaxRange": ["GetItemData"],
+    "GetItemEncodedRange": ["GetItemData"],
+    "GetItemEffectiveness": ["GetItemData"],
+    "GetItemRequiredExp": ["GetItemData"],
+    "GetItemUseEffect": ["GetItemData"],
 }
 
 
@@ -127,15 +190,21 @@ def grad_one(tu, name, jp, size):
     referenced = [a for a in ACCESSORS if re.search(r"\b" + a + r"\(", body)]
     # GetCharacterData is reached through unit->pCharacterData, not a call; only
     # prepend accessors actually called by name in the body.
-    # Pull in transitive inline deps (dependency emitted BEFORE its user so the C is
-    # well-formed), de-duped, preserving order.
+    # Pull in transitive inline deps (each dependency emitted BEFORE its user so the C
+    # is well-formed), de-duped, preserving order. DFS over DEPS so multi-level chains
+    # resolve (GetItemMaxUses -> GetItemAttributes -> GetItemData).
     used = []
-    for a in referenced:
+
+    def add(a):
+        if a in used:
+            return
         for dep in DEPS.get(a, []):
-            if dep not in used:
-                used.append(dep)
+            add(dep)
         if a not in used:
             used.append(a)
+
+    for a in referenced:
+        add(a)
     decls = "".join(ACCESSORS[a] for a in used)
     if not decls:
         return "skip:no inline accessor referenced"

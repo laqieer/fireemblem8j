@@ -1,0 +1,4 @@
+0175E0	017618	src/GetFreeUnit.o(.text)	GetFreeUnit (masked-tier graduated; extern inline GetUnit)
+017FEC	018030	src/GetUnitFromCharIdAndFaction.o(.text)	GetUnitFromCharIdAndFaction (masked-tier graduated; extern inline GetUnit)
+0189AC	018A1C	src/IsPositionMagicSealed.o(.text)	IsPositionMagicSealed (masked-tier graduated; extern inline GetUnit)
+018C5C	018C94	src/IsUnitSlotAvailable.o(.text)	IsUnitSlotAvailable (masked-tier graduated; extern inline GetUnit)
