@@ -1249,3 +1249,45 @@ descriptive-asm with decompiled-C. **The README functions badge is INVALID.**
 **Status:** Phase 0 dispatched 2026-06-10. SUPERSEDES the D29 "goal met" framing; D29's byte-coverage work is a
 useful FOUNDATION (the disasm gives asm→C starting points, the residue/padding carves will be re-rooted onto
 extracted assets) but is NOT completion. This is the active plan of record.
+
+## D31 — Phase 2 fast path: graduate funcmap exact/masked-tier gbadisasm functions to matching C by porting US source (2026-06-10)
+
+**Context.** Phase 2 (D30) = convert the 6,282 gbadisasm descriptive-asm `asm/<fn>.s` functions into byte-MATCHING
+C. The general path is m2c → hand-refine → decomp-permuter, but a large SUBSET is region-SAME: the
+`layout/us_jp_funcmap.tsv` `exact` tier proves a function's JP bytes UNIQUELY match the US compile of that function
+(unmasked byte pin), and the `masked` tier matches with only relocatable pointer/literal operands masked. For those,
+the US C compiles to identical bytes → INSTANT byte-match, no permuter needed.
+
+**The obstacle (and the fix).** These stranded funcmap functions live in PARTIAL TUs whose data globals are ALREADY
+emitted by sibling carves (e.g. `src/bmbattle.o`, `src/exact_08002b58.o`). Porting the whole US run (extract_run.py,
+which keeps file-scope data) RE-DEFINES those globals → multiple-definition link error → every such port reverts.
+**Fix = `scripts/extract_func_only.py`:** emit ONLY the function body + the US `#include` lines, NO file-scope data.
+The function's data references then resolve to the already-placed globals via the header `extern`s; only the
+function's `.text` is added (no `.data`/`.bss`, no collision). For same-TU static helpers not in headers, prepend a
+K&R `extern int X();` (call-site codegen is prototype-independent; verify-or-revert guards it).
+
+**Decision — ADOPT `scripts/graduate_exact_asm.py` as the Phase-2 fast-path engine (verify-or-revert, no permuter):**
+per function — function-only extract → `src/<fn>.c`, add a `carved_rom.d/exact_layer.tsv` row `src/<fn>.o(.text)`,
+delete `asm/<fn>.s` + its `gbadisasm_<fn>.tsv` fragment, then `make compare` as the SOLE oracle. OK → graduated;
+FAIL → revert ALL of that function's changes (restore asm + fragment, drop the C + row) and leave it descriptive asm.
+Run `--tier exact` first (safest), then `--tier masked`. Never `git add -A`.
+
+**First-batch evidence (this session).** matching-C functions **2187 → 2303 (+116; 25.64% → 27.01%)**, `make compare`
++ `make clean && make compare` both OK, `make check` OK.
+  * exact-tier: **28/44** graduated (hardware, bmbattle, m4a ply_x*/m4aSoundMain, icon). 16 correctly reverted —
+    13 genuinely region-different bytes (e.g. `IsItemDanceRing` inlines `item & 0xFF` + a numeric range where US calls
+    `GetItemIndex` + a named switch), 3 reference unmapped region-different callees (`Proc_Run → sub_8002D78`).
+  * masked-tier: **88/290** graduated (sio_core, mapanim_scanline HBlank handlers, face, bmsave SRAM math, hardware
+    blend/BG setters, worldmap GmPath, m4a MidiKey*, …). ~210 correctly reverted — genuinely region-different (the
+    bmitem `Get*` accessors diverge because the JP item-ID layout differs from US).
+
+**Reusable takeaway.** The funcmap tier is a strong, oracle-gated PRIOR: exact ~64% yield, masked ~30% yield, the
+rest auto-classified region-different at zero risk (the make-compare oracle filters every false positive). This is the
+cheap front of Phase 2 — exhaust it across all funcmap-tier gbadisasm functions before spending m2c/permuter effort,
+which is reserved for the no-funcmap-entry (5,842) and the auto-reverted region-different remainder.
+
+**Consulted:** the agbcc-matching playbook (literal-pool relocation row 0 explains why masked-tier ports match) + the
+NONMATCHING/graduation pipeline doc (D26). Oracle-validated, not advice-only.
+
+**Status:** ACTIVE Phase-2 fast-path engine. Next: re-run after each Phase-1 data-carve advance (newly-placed data
+globals unblock more funcmap functions), then move to m2c+permuter for the region-different remainder.
