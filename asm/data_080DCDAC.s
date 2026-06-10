@@ -9,4 +9,4 @@
 	.section .data.residue.080DCDAC, "a", %progbits
 	.global data_080DCDAC
 data_080DCDAC:
-	.incbin "baserom.gba", 0x0DCDAC, 0x18
+	.incbin "data/residual/data_080DCDAC.bin"

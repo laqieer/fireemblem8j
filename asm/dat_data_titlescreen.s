@@ -9,7 +9,7 @@ gGfx_TitleMainBackground_2:
 	.incbin "graphics/misc_gfx/gGfx_TitleMainBackground_2.bin.lz"
 	.global gTsa_TitleMainBackground
 gTsa_TitleMainBackground:
-	.incbin "baserom.gba", 0xB43424, 0x564
+	.incbin "data/residual/gTsa_TitleMainBackground.bin"
 	.global gPal_TitleMainBackground
 gPal_TitleMainBackground:
 	.incbin "graphics/misc_gfx/gPal_TitleMainBackground.gbapal"
@@ -18,7 +18,7 @@ gGfx_TitleDragonForeground:
 	.incbin "graphics/misc_gfx/gGfx_TitleDragonForeground.bin.lz"
 	.global gTsa_TitleDragonForeground
 gTsa_TitleDragonForeground:
-	.incbin "baserom.gba", 0xB44838, 0x2E8
+	.incbin "data/residual/gTsa_TitleDragonForeground.bin"
 	.global gPal_TitleDragonForeground
 gPal_TitleDragonForeground:
 	.incbin "graphics/misc_gfx/gPal_TitleDragonForeground.gbapal"

@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global ProcScr_SpellAssocElixir
 ProcScr_SpellAssocElixir:
-	.incbin "baserom.gba", 0xA1502C, 0x58
+	.incbin "data/residual/ProcScr_SpellAssocElixir.bin"

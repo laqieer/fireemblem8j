@@ -9,4 +9,4 @@
 	.section .data.residue.08214004, "a", %progbits
 	.global data_08214004
 data_08214004:
-	.incbin "baserom.gba", 0x214004, 0xB0
+	.incbin "data/residual/data_08214004.bin"

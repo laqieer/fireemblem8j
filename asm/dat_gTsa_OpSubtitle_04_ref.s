@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gTsa_OpSubtitle_04
 gTsa_OpSubtitle_04:
-	.incbin "baserom.gba", 0xB3E878, 0x240
+	.incbin "data/residual/gTsa_OpSubtitle_04.bin"

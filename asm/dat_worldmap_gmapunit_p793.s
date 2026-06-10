@@ -2,4 +2,4 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08602e2c (US 0x085d87dc, shift -0xFFFD59B0); incbin baserom.gba
 	.global gEfxmagicCrimsoneye_0
 gEfxmagicCrimsoneye_0:
-	.incbin "baserom.gba", 0x602E2C, 0x80
+	.incbin "data/residual/gEfxmagicCrimsoneye_0.bin"

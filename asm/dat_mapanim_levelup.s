@@ -18,4 +18,4 @@ Img_ManimLevelUpStatGainDigits:
 	.incbin "graphics/misc_gfx2/Img_ManimLevelUpStatGainDigits.bin"
 	.global gMapanimLevelup_0
 gMapanimLevelup_0:
-	.incbin "baserom.gba", 0xA1DB20, 0x68
+	.incbin "data/residual/gMapanimLevelup_0.bin"

@@ -2,13 +2,13 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08a73f9c (US 0x08a01ee4, shift -0xFFF8DF48); incbin baserom.gba
 	.global gUnkData_30
 gUnkData_30:
-	.incbin "baserom.gba", 0xA73F9C, 0x20
+	.incbin "data/residual/gUnkData_30.bin"
 	.global gUnkData_31
 gUnkData_31:
-	.incbin "baserom.gba", 0xA73FBC, 0x20
+	.incbin "data/residual/gUnkData_31.bin"
 	.global gUnkData_32
 gUnkData_32:
-	.incbin "baserom.gba", 0xA73FDC, 0x1CC
+	.incbin "data/residual/gUnkData_32.bin"
 	.global Img_StatscreenEquipmentText
 Img_StatscreenEquipmentText:
 	.incbin "graphics/gmapunit/Img_StatscreenEquipmentText.bin.lz"
@@ -26,7 +26,7 @@ Img_StatscreenObjs:
 	.incbin "graphics/gmapunit/Img_StatscreenObjs.bin.lz"
 	.global gUnkData_33
 gUnkData_33:
-	.incbin "baserom.gba", 0xA748B4, 0x60
+	.incbin "data/residual/gUnkData_33.bin"
 	.global gGfx_HelpTextBox
 gGfx_HelpTextBox:
 	.incbin "graphics/gmapunit/gGfx_HelpTextBox.bin.lz"

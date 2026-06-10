@@ -6,5 +6,5 @@
 	.global DungeonRecordUi_InitText
 	.thumb_func
 DungeonRecordUi_InitText:
-	.incbin "baserom.gba", 0x37C44, 0x94
+	.incbin "data/residual/DungeonRecordUi_InitText.bin"
 

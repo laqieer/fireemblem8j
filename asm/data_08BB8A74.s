@@ -9,4 +9,4 @@
 	.section .data.residue.08BB8A74, "a", %progbits
 	.global data_08BB8A74
 data_08BB8A74:
-	.incbin "baserom.gba", 0xBB8A74, 0x18
+	.incbin "data/residual/data_08BB8A74.bin"

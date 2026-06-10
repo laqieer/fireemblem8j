@@ -2,37 +2,37 @@
 @ src/data/data_A2EEF0.o: region-same content at JP 0x08ab0fdc (US 0x08a301b0, shift -0xFFF7F1D4); incbin baserom.gba
 	.global gUnkData_81
 gUnkData_81:
-	.incbin "baserom.gba", 0xAB0FDC, 0x5D0
+	.incbin "data/residual/gUnkData_81.bin"
 	.global gUnkData_82
 gUnkData_82:
-	.incbin "baserom.gba", 0xAB15AC, 0x80
+	.incbin "data/residual/gUnkData_82.bin"
 	.global gUnkData_83
 gUnkData_83:
-	.incbin "baserom.gba", 0xAB162C, 0x178
+	.incbin "data/residual/gUnkData_83.bin"
 	.global gUnkData_84
 gUnkData_84:
-	.incbin "baserom.gba", 0xAB17A4, 0x4B4
+	.incbin "data/residual/gUnkData_84.bin"
 	.global gUnkData_85
 gUnkData_85:
-	.incbin "baserom.gba", 0xAB1C58, 0x465C
+	.incbin "data/residual/gUnkData_85.bin"
 	.global gUnkData_86
 gUnkData_86:
-	.incbin "baserom.gba", 0xAB62B4, 0x4B4
+	.incbin "data/residual/gUnkData_86.bin"
 	.global gUnkData_87
 gUnkData_87:
-	.incbin "baserom.gba", 0xAB6768, 0x100
+	.incbin "data/residual/gUnkData_87.bin"
 	.global gUnkData_88
 gUnkData_88:
-	.incbin "baserom.gba", 0xAB6868, 0x594
+	.incbin "data/residual/gUnkData_88.bin"
 	.global gUnkData_89
 gUnkData_89:
-	.incbin "baserom.gba", 0xAB6DFC, 0xF8
+	.incbin "data/residual/gUnkData_89.bin"
 	.global gUnkData_90
 gUnkData_90:
-	.incbin "baserom.gba", 0xAB6EF4, 0x20
+	.incbin "data/residual/gUnkData_90.bin"
 	.global gUnkData_91
 gUnkData_91:
-	.incbin "baserom.gba", 0xAB6F14, 0x19C
+	.incbin "data/residual/gUnkData_91.bin"
 	.global gUnkData_92
 gUnkData_92:
-	.incbin "baserom.gba", 0xAB70B0, 0x94
+	.incbin "data/residual/gUnkData_92.bin"

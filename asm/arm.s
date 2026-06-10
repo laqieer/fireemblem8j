@@ -5,45 +5,45 @@
 	.align 2, 0
 	.global ARMCodeToCopy_Start
 ARMCodeToCopy_Start:
-	.incbin "baserom.gba", 0x228, 0xC
+	.incbin "data/residual/ARMCodeToCopy_Start.bin"
 	.global ColorFadeTick
 ColorFadeTick:
-	.incbin "baserom.gba", 0x234, 0xD0
+	.incbin "data/residual/ColorFadeTick.bin"
 	.global ClearOam
 ClearOam:
-	.incbin "baserom.gba", 0x304, 0x5C
+	.incbin "data/residual/ClearOam.bin"
 	.global Checksum32
 Checksum32:
-	.incbin "baserom.gba", 0x360, 0x48
+	.incbin "data/residual/Checksum32.bin"
 	.global TmFillRect
 TmFillRect:
-	.incbin "baserom.gba", 0x3A8, 0x38
+	.incbin "data/residual/TmFillRect.bin"
 	.global TmCopyRect
 TmCopyRect:
-	.incbin "baserom.gba", 0x3E0, 0x5C
+	.incbin "data/residual/TmCopyRect.bin"
 	.global TmApplyTsa
 TmApplyTsa:
-	.incbin "baserom.gba", 0x43C, 0x58
+	.incbin "data/residual/TmApplyTsa.bin"
 	.global PutOamHi
 PutOamHi:
-	.incbin "baserom.gba", 0x494, 0xA0
+	.incbin "data/residual/PutOamHi.bin"
 	.global PutOamLo
 PutOamLo:
-	.incbin "baserom.gba", 0x534, 0x30
+	.incbin "data/residual/PutOamLo.bin"
 	.global DrawGlyph
 DrawGlyph:
-	.incbin "baserom.gba", 0x564, 0xBC
+	.incbin "data/residual/DrawGlyph.bin"
 	.global DrawGlyphHalfStride
 DrawGlyphHalfStride:
-	.incbin "baserom.gba", 0x620, 0xC4
+	.incbin "data/residual/DrawGlyphHalfStride.bin"
 	.global DecodeString
 DecodeString:
-	.incbin "baserom.gba", 0x6E4, 0xA0
+	.incbin "data/residual/DecodeString.bin"
 	.global MapFloodCoreStep
 MapFloodCoreStep:
-	.incbin "baserom.gba", 0x784, 0xF0
+	.incbin "data/residual/MapFloodCoreStep.bin"
 	.global MapFloodCore
 MapFloodCore:
-	.incbin "baserom.gba", 0x874, 0x1AC
+	.incbin "data/residual/MapFloodCore.bin"
 	.global ARMCodeToCopy_End
 ARMCodeToCopy_End:

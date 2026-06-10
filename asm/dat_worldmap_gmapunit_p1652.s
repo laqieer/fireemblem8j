@@ -2,4 +2,4 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08abffe4 (US 0x08a3c79c, shift -0xFFF7C7B8); incbin baserom.gba
 	.global EventScrWM_MessedEventscr_52
 EventScrWM_MessedEventscr_52:
-	.incbin "baserom.gba", 0xABFFE4, 0xC4
+	.incbin "data/residual/EventScrWM_MessedEventscr_52.bin"

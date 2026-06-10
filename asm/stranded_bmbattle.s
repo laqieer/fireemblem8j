@@ -6,7 +6,7 @@
 	.global InitBattleUnitWithoutBonuses
 	.thumb_func
 InitBattleUnitWithoutBonuses:
-	.incbin "baserom.gba", 0x2A5D4, 0x38
+	.incbin "data/residual/InitBattleUnitWithoutBonuses.bin"
 
 	.section .text.s_0802ABD0, "ax", %progbits
 @ ComputeBattleUnitEffectiveHitRate region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -16,7 +16,7 @@ InitBattleUnitWithoutBonuses:
 	.global ComputeBattleUnitEffectiveHitRate
 	.thumb_func
 ComputeBattleUnitEffectiveHitRate:
-	.incbin "baserom.gba", 0x2ABD0, 0x30
+	.incbin "data/residual/ComputeBattleUnitEffectiveHitRate.bin"
 
 	.section .text.s_0802BE6C, "ax", %progbits
 @ CheckBattleUnitStatCaps region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -26,7 +26,7 @@ ComputeBattleUnitEffectiveHitRate:
 	.global CheckBattleUnitStatCaps
 	.thumb_func
 CheckBattleUnitStatCaps:
-	.incbin "baserom.gba", 0x2BE6C, 0x104
+	.incbin "data/residual/CheckBattleUnitStatCaps.bin"
 
 	.section .text.s_0802C428, "ax", %progbits
 @ ModifyUnitSpecialExp region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -36,7 +36,7 @@ CheckBattleUnitStatCaps:
 	.global ModifyUnitSpecialExp
 	.thumb_func
 ModifyUnitSpecialExp:
-	.incbin "baserom.gba", 0x2C428, 0x44
+	.incbin "data/residual/ModifyUnitSpecialExp.bin"
 
 	.section .text.s_0802C678, "ax", %progbits
 @ BattleUnitTargetCheckCanCounter region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -46,5 +46,5 @@ ModifyUnitSpecialExp:
 	.global BattleUnitTargetCheckCanCounter
 	.thumb_func
 BattleUnitTargetCheckCanCounter:
-	.incbin "baserom.gba", 0x2C678, 0x2C
+	.incbin "data/residual/BattleUnitTargetCheckCanCounter.bin"
 

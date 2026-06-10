@@ -2,61 +2,61 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x081f6188 (US 0x082064bc, shift -0x10334); incbin baserom.gba
 	.global gWorldmapPath_0
 gWorldmapPath_0:
-	.incbin "baserom.gba", 0x1F6188, 0x18
+	.incbin "data/residual/gWorldmapPath_0.bin"
 	.global gWorldmapPath_1
 gWorldmapPath_1:
-	.incbin "baserom.gba", 0x1F61A0, 0x10
+	.incbin "data/residual/gWorldmapPath_1.bin"
 	.global gWorldmapPath_2
 gWorldmapPath_2:
-	.incbin "baserom.gba", 0x1F61B0, 0x10
+	.incbin "data/residual/gWorldmapPath_2.bin"
 	.global gWorldmapPath_3
 gWorldmapPath_3:
-	.incbin "baserom.gba", 0x1F61C0, 0x10
+	.incbin "data/residual/gWorldmapPath_3.bin"
 	.global gWorldmapPath_4
 gWorldmapPath_4:
-	.incbin "baserom.gba", 0x1F61D0, 0x18
+	.incbin "data/residual/gWorldmapPath_4.bin"
 	.global gWorldmapPath_5
 gWorldmapPath_5:
-	.incbin "baserom.gba", 0x1F61E8, 0x18
+	.incbin "data/residual/gWorldmapPath_5.bin"
 	.global gWorldmapPath_6
 gWorldmapPath_6:
-	.incbin "baserom.gba", 0x1F6200, 0x10
+	.incbin "data/residual/gWorldmapPath_6.bin"
 	.global gWorldmapPath_7
 gWorldmapPath_7:
-	.incbin "baserom.gba", 0x1F6210, 0x20
+	.incbin "data/residual/gWorldmapPath_7.bin"
 	.global gWorldmapPath_8
 gWorldmapPath_8:
-	.incbin "baserom.gba", 0x1F6230, 0x18
+	.incbin "data/residual/gWorldmapPath_8.bin"
 	.global gWorldmapPath_9
 gWorldmapPath_9:
-	.incbin "baserom.gba", 0x1F6248, 0x18
+	.incbin "data/residual/gWorldmapPath_9.bin"
 	.global gWorldmapPath_10
 gWorldmapPath_10:
-	.incbin "baserom.gba", 0x1F6260, 0x18
+	.incbin "data/residual/gWorldmapPath_10.bin"
 	.global gWorldmapPath_11
 gWorldmapPath_11:
-	.incbin "baserom.gba", 0x1F6278, 0x18
+	.incbin "data/residual/gWorldmapPath_11.bin"
 	.global gWorldmapPath_12
 gWorldmapPath_12:
-	.incbin "baserom.gba", 0x1F6290, 0x18
+	.incbin "data/residual/gWorldmapPath_12.bin"
 	.global gWorldmapPath_13
 gWorldmapPath_13:
-	.incbin "baserom.gba", 0x1F62A8, 0x18
+	.incbin "data/residual/gWorldmapPath_13.bin"
 	.global gWorldmapPath_14
 gWorldmapPath_14:
-	.incbin "baserom.gba", 0x1F62C0, 0x10
+	.incbin "data/residual/gWorldmapPath_14.bin"
 	.global gWorldmapPath_15
 gWorldmapPath_15:
-	.incbin "baserom.gba", 0x1F62D0, 0x28
+	.incbin "data/residual/gWorldmapPath_15.bin"
 	.global gWorldmapPath_16
 gWorldmapPath_16:
-	.incbin "baserom.gba", 0x1F62F8, 0x10
+	.incbin "data/residual/gWorldmapPath_16.bin"
 	.global gWorldmapPath_17
 gWorldmapPath_17:
-	.incbin "baserom.gba", 0x1F6308, 0x10
+	.incbin "data/residual/gWorldmapPath_17.bin"
 	.global gWorldmapPath_18
 gWorldmapPath_18:
-	.incbin "baserom.gba", 0x1F6318, 0x18
+	.incbin "data/residual/gWorldmapPath_18.bin"
 	.global gWorldmapPath_19
 gWorldmapPath_19:
-	.incbin "baserom.gba", 0x1F6330, 0x10
+	.incbin "data/residual/gWorldmapPath_19.bin"

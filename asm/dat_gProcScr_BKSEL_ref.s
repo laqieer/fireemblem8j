@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gProcScr_BKSEL
 gProcScr_BKSEL:
-	.incbin "baserom.gba", 0x5C6A48, 0x80
+	.incbin "data/residual/gProcScr_BKSEL.bin"

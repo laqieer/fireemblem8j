@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gWMPathData
 gWMPathData:
-	.incbin "baserom.gba", 0x1F6340, 0x180
+	.incbin "data/residual/gWMPathData.bin"

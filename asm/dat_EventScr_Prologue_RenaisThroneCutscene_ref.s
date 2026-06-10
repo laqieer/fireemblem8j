@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global EventScr_Prologue_RenaisThroneCutscene
 EventScr_Prologue_RenaisThroneCutscene:
-	.incbin "baserom.gba", 0xA60DF4, 0x3A4
+	.incbin "data/residual/EventScr_Prologue_RenaisThroneCutscene.bin"

@@ -6,5 +6,5 @@
 	.global EkrLvupHBlank
 	.thumb_func
 EkrLvupHBlank:
-	.incbin "baserom.gba", 0x76C6C, 0x40
+	.incbin "data/residual/EkrLvupHBlank.bin"
 

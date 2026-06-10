@@ -9,4 +9,4 @@
 	.section .data.residue.0890A320, "a", %progbits
 	.global data_0890A320
 data_0890A320:
-	.incbin "baserom.gba", 0x90A320, 0x14
+	.incbin "data/residual/data_0890A320.bin"

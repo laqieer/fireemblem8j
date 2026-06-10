@@ -6,7 +6,7 @@
 	.global Proc_End
 	.thumb_func
 Proc_End:
-	.incbin "baserom.gba", 0x2CBC, 0x18
+	.incbin "data/residual/Proc_End.bin"
 
 	.section .text.s_08002E74, "ax", %progbits
 @ Proc_Goto region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -16,7 +16,7 @@ Proc_End:
 	.global Proc_Goto
 	.thumb_func
 Proc_Goto:
-	.incbin "baserom.gba", 0x2E74, 0x38
+	.incbin "data/residual/Proc_Goto.bin"
 
 	.section .text.s_08002EAC, "ax", %progbits
 @ Proc_GotoScript region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -26,5 +26,5 @@ Proc_Goto:
 	.global Proc_GotoScript
 	.thumb_func
 Proc_GotoScript:
-	.incbin "baserom.gba", 0x2EAC, 0x8
+	.incbin "data/residual/Proc_GotoScript.bin"
 

@@ -8,4 +8,4 @@ Pal_LvupApfx:
 	.incbin "graphics/gmapunit/Pal_LvupApfx.gbapal"
 	.global gEfxlvupfx_0
 gEfxlvupfx_0:
-	.incbin "baserom.gba", 0x5E552C, 0xDA4
+	.incbin "data/residual/gEfxlvupfx_0.bin"

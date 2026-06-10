@@ -2,4 +2,4 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08a84b00 (US 0x08a10fe0, shift -0xFFF8C4E0); incbin baserom.gba
 	.global chap_title_blank
 chap_title_blank:
-	.incbin "baserom.gba", 0xA84B00, 0xFC
+	.incbin "data/residual/chap_title_blank.bin"

@@ -9,4 +9,4 @@
 	.section .data.residue.080000C0, "a", %progbits
 	.global rom_header_080000C0
 rom_header_080000C0:
-	.incbin "baserom.gba", 0x0000C0, 0x168
+	.incbin "data/residual/rom_header_080000C0.bin"

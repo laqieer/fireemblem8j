@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global EventScr_Ch3_Turn1Npc
 EventScr_Ch3_Turn1Npc:
-	.incbin "baserom.gba", 0xA63480, 0x68
+	.incbin "data/residual/EventScr_Ch3_Turn1Npc.bin"

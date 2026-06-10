@@ -44,16 +44,16 @@ Img_FimbulvetrSprites_Snow:
 	.incbin "graphics/banim/_us/banim/assets/img/00618BBC_Img_FimbulvetrSprites_Snow.4bpp.lz"
 	.global AnimSprite_FimbulvetrOBJ_1
 AnimSprite_FimbulvetrOBJ_1:
-	.incbin "baserom.gba", 0x645AE4, 0x78
+	.incbin "data/residual/AnimSprite_FimbulvetrOBJ_1.bin"
 	.global AnimSprite_FimbulvetrOBJ_2
 AnimSprite_FimbulvetrOBJ_2:
-	.incbin "baserom.gba", 0x645B5C, 0xFC
+	.incbin "data/residual/AnimSprite_FimbulvetrOBJ_2.bin"
 	.global AnimSprite_FimbulvetrOBJ_3
 AnimSprite_FimbulvetrOBJ_3:
-	.incbin "baserom.gba", 0x645C58, 0x114
+	.incbin "data/residual/AnimSprite_FimbulvetrOBJ_3.bin"
 	.global AnimSprite_FimbulvetrOBJ_4
 AnimSprite_FimbulvetrOBJ_4:
-	.incbin "baserom.gba", 0x645D6C, 0x12C
+	.incbin "data/residual/AnimSprite_FimbulvetrOBJ_4.bin"
 	.global AnimSprite_FimbulvetrOBJ_5
 AnimSprite_FimbulvetrOBJ_5:
-	.incbin "baserom.gba", 0x645E98, 0x12C
+	.incbin "data/residual/AnimSprite_FimbulvetrOBJ_5.bin"

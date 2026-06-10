@@ -2,7 +2,7 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08a60960 (US 0x089ee828, shift -0xFFF8DEC8); incbin baserom.gba
 	.global EventScr_ConfigHardModeLoadUnitHard
 EventScr_ConfigHardModeLoadUnitHard:
-	.incbin "baserom.gba", 0xA60960, 0x24
+	.incbin "data/residual/EventScr_ConfigHardModeLoadUnitHard.bin"
 	.global EventScr_9EE84C
 EventScr_9EE84C:
-	.incbin "baserom.gba", 0xA60984, 0xA4
+	.incbin "data/residual/EventScr_9EE84C.bin"

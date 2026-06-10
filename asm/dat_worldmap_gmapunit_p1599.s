@@ -2,19 +2,19 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08a9651c (US 0x08a19ccc, shift -0xFFF837B0); incbin baserom.gba
 	.global gUnkData_61
 gUnkData_61:
-	.incbin "baserom.gba", 0xA9651C, 0x3B8
+	.incbin "data/residual/gUnkData_61.bin"
 	.global Pal_SpinningArrow
 Pal_SpinningArrow:
 	.incbin "graphics/gmapunit/Pal_SpinningArrow.gbapal"
 	.global gUnkData_62
 gUnkData_62:
-	.incbin "baserom.gba", 0xA968F4, 0x198
+	.incbin "data/residual/gUnkData_62.bin"
 	.global gUnkData_63
 gUnkData_63:
-	.incbin "baserom.gba", 0xA96A8C, 0x1C0
+	.incbin "data/residual/gUnkData_63.bin"
 	.global gUnkData_64
 gUnkData_64:
-	.incbin "baserom.gba", 0xA96C4C, 0x20
+	.incbin "data/residual/gUnkData_64.bin"
 	.global Tsa_UnkData_1
 Tsa_UnkData_1:
 	.incbin "graphics/gmapunit/Tsa_UnkData_1.bin"

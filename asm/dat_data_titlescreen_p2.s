@@ -5,7 +5,7 @@ gGfx_TitleDemonKing:
 	.incbin "graphics/misc_gfx/gGfx_TitleDemonKing.bin.lz"
 	.global gTsa_TitleDemonKing
 gTsa_TitleDemonKing:
-	.incbin "baserom.gba", 0xB4A8B8, 0x374
+	.incbin "data/residual/gTsa_TitleDemonKing.bin"
 	.global gPal_TitleDemonKing
 gPal_TitleDemonKing:
 	.incbin "graphics/misc_gfx/gPal_TitleDemonKing.gbapal"

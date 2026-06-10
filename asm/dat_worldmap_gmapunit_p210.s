@@ -2,7 +2,7 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x0855252a (US 0x0856287a, shift -0x10350); incbin baserom.gba
 	.global song036_agbfe3_bgm_evt_advance_3
 song036_agbfe3_bgm_evt_advance_3:
-	.incbin "baserom.gba", 0x55252A, 0x19
+	.incbin "data/residual/song036_agbfe3_bgm_evt_advance_3.bin"
 	.global song036_agbfe3_bgm_evt_advance_3_B1
 song036_agbfe3_bgm_evt_advance_3_B1:
-	.incbin "baserom.gba", 0x552543, 0x6D
+	.incbin "data/residual/song036_agbfe3_bgm_evt_advance_3_B1.bin"

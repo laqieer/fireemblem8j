@@ -2,7 +2,7 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x089209e0 (US 0x088cc58c, shift -0xFFFABBAC); incbin baserom.gba
 	.global UnitDef_TowerEnemy_6
 UnitDef_TowerEnemy_6:
-	.incbin "baserom.gba", 0x9209E0, 0x3C
+	.incbin "data/residual/UnitDef_TowerEnemy_6.bin"
 	.global UnitDef_Tower6Ally
 UnitDef_Tower6Ally:
-	.incbin "baserom.gba", 0x920A1C, 0xB4
+	.incbin "data/residual/UnitDef_Tower6Ally.bin"

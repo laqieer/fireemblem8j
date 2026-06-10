@@ -11,7 +11,7 @@ gGfx_Titlescreen_0:
 	.incbin "graphics/misc_gfx/gGfx_Titlescreen_0.bin.lz"
 	.global gTsa_Titlescreen_0
 gTsa_Titlescreen_0:
-	.incbin "baserom.gba", 0xB47240, 0x2B0
+	.incbin "data/residual/gTsa_Titlescreen_0.bin"
 	.global gPal_Titlescreen_1
 gPal_Titlescreen_1:
 	.incbin "graphics/misc_gfx/gPal_Titlescreen_1.gbapal"
@@ -20,7 +20,7 @@ gGfx_Titlescreen_1:
 	.incbin "graphics/misc_gfx/gGfx_Titlescreen_1.bin.lz"
 	.global gTsa_Titlescreen_1
 gTsa_Titlescreen_1:
-	.incbin "baserom.gba", 0xB4854C, 0x3CC
+	.incbin "data/residual/gTsa_Titlescreen_1.bin"
 	.global gPal_Titlescreen_2
 gPal_Titlescreen_2:
 	.incbin "graphics/misc_gfx/gPal_Titlescreen_2.gbapal"
@@ -29,4 +29,4 @@ gGfx_Titlescreen_2:
 	.incbin "graphics/misc_gfx/gGfx_Titlescreen_2.bin.lz"
 	.global gTsa_Titlescreen_2
 gTsa_Titlescreen_2:
-	.incbin "baserom.gba", 0xB48B34, 0x204
+	.incbin "data/residual/gTsa_Titlescreen_2.bin"

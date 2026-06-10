@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global MenuItemDef_RouteSplit
 MenuItemDef_RouteSplit:
-	.incbin "baserom.gba", 0xA65768, 0x6C
+	.incbin "data/residual/MenuItemDef_RouteSplit.bin"

@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global MenuItemDef_WMGeneralMenu
 MenuItemDef_WMGeneralMenu:
-	.incbin "baserom.gba", 0xAC1A0C, 0xD8
+	.incbin "data/residual/MenuItemDef_WMGeneralMenu.bin"

@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global EventScr_Ch18A_11
 EventScr_Ch18A_11:
-	.incbin "baserom.gba", 0xA69F50, 0x11C
+	.incbin "data/residual/EventScr_Ch18A_11.bin"

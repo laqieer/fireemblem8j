@@ -21,22 +21,22 @@ Img_9A0864:
 	.incbin "graphics/misc_gfx2/Img_9A0864.bin.lz"
 	.global TileSet_9A0E84
 TileSet_9A0E84:
-	.incbin "baserom.gba", 0xA115F8, 0x1CC
+	.incbin "data/residual/TileSet_9A0E84.bin"
 	.global TileSet_9A1050
 TileSet_9A1050:
-	.incbin "baserom.gba", 0xA117C4, 0x1D8
+	.incbin "data/residual/TileSet_9A1050.bin"
 	.global TileSet_9A1228
 TileSet_9A1228:
-	.incbin "baserom.gba", 0xA1199C, 0x1C4
+	.incbin "data/residual/TileSet_9A1228.bin"
 	.global TileSet_9A13EC
 TileSet_9A13EC:
-	.incbin "baserom.gba", 0xA11B60, 0x1C8
+	.incbin "data/residual/TileSet_9A13EC.bin"
 	.global TileSet_9A15B4
 TileSet_9A15B4:
-	.incbin "baserom.gba", 0xA11D28, 0x198
+	.incbin "data/residual/TileSet_9A15B4.bin"
 	.global TileSet_9A174C
 TileSet_9A174C:
-	.incbin "baserom.gba", 0xA11EC0, 0x188
+	.incbin "data/residual/TileSet_9A174C.bin"
 	.global Pal_EventMapAnimMaskfx
 Pal_EventMapAnimMaskfx:
 	.incbin "graphics/misc_gfx2/Pal_EventMapAnimMaskfx.gbapal"

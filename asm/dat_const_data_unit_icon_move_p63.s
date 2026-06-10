@@ -5,7 +5,7 @@ unit_icon_move_Dancer_sheet:
 	.incbin "graphics/unit_icon/move/unit_icon_move_Dancer_sheet.4bpp.lz"
 	.global unit_icon_move_Dancer_motion
 unit_icon_move_Dancer_motion:
-	.incbin "baserom.gba", 0x1DCB80, 0x250
+	.incbin "data/residual/unit_icon_move_Dancer_motion.bin"
 	.global unit_icon_move_Soldier_sheet
 unit_icon_move_Soldier_sheet:
 	.incbin "graphics/unit_icon/move/unit_icon_move_Soldier_sheet.4bpp.lz"

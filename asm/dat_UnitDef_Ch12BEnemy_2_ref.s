@@ -2,4 +2,4 @@
 @ UnitDef_Ch12BEnemy_2: region-different data, JP 0x0891903c read from funcmap-aligned code literal (US 0x088c4b68); incbin baserom.gba
 	.global UnitDef_Ch12BEnemy_2
 UnitDef_Ch12BEnemy_2:
-	.incbin "baserom.gba", 0x91903C, 0x50
+	.incbin "data/residual/UnitDef_Ch12BEnemy_2.bin"

@@ -2,25 +2,25 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x0860e854 (US 0x085e1c7c, shift -0xFFFD3428); incbin baserom.gba
 	.global AnimSprite_HurtmutEff01OBJ2_1
 AnimSprite_HurtmutEff01OBJ2_1:
-	.incbin "baserom.gba", 0x60E854, 0x48
+	.incbin "data/residual/AnimSprite_HurtmutEff01OBJ2_1.bin"
 	.global AnimSprite_HurtmutEff01OBJ2_2
 AnimSprite_HurtmutEff01OBJ2_2:
-	.incbin "baserom.gba", 0x60E89C, 0x3C
+	.incbin "data/residual/AnimSprite_HurtmutEff01OBJ2_2.bin"
 	.global AnimSprite_HurtmutEff01OBJ2_3
 AnimSprite_HurtmutEff01OBJ2_3:
-	.incbin "baserom.gba", 0x60E8D8, 0x30
+	.incbin "data/residual/AnimSprite_HurtmutEff01OBJ2_3.bin"
 	.global AnimSprite_HurtmutEff01OBJ2_4
 AnimSprite_HurtmutEff01OBJ2_4:
-	.incbin "baserom.gba", 0x60E908, 0x18
+	.incbin "data/residual/AnimSprite_HurtmutEff01OBJ2_4.bin"
 	.global AnimSprite_HurtmutEff01OBJ2_5
 AnimSprite_HurtmutEff01OBJ2_5:
-	.incbin "baserom.gba", 0x60E920, 0x30
+	.incbin "data/residual/AnimSprite_HurtmutEff01OBJ2_5.bin"
 	.global AnimSprite_HurtmutEff01OBJ2_6
 AnimSprite_HurtmutEff01OBJ2_6:
-	.incbin "baserom.gba", 0x60E950, 0x84
+	.incbin "data/residual/AnimSprite_HurtmutEff01OBJ2_6.bin"
 	.global AnimSprite_HurtmutEff01OBJ2_7
 AnimSprite_HurtmutEff01OBJ2_7:
-	.incbin "baserom.gba", 0x60E9D4, 0x6C
+	.incbin "data/residual/AnimSprite_HurtmutEff01OBJ2_7.bin"
 	.global AnimSprite_HurtmutEff01OBJ2_8
 AnimSprite_HurtmutEff01OBJ2_8:
-	.incbin "baserom.gba", 0x60EA40, 0x3C
+	.incbin "data/residual/AnimSprite_HurtmutEff01OBJ2_8.bin"

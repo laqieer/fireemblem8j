@@ -3,106 +3,106 @@
 @ src/data/data-banimmisc.o: region-same content at JP 0x0885616c (US 0x08801c14, shift -0x-54558); incbin baserom.gba
 	.global Img_Banimmisc_0
 Img_Banimmisc_0:
-	.incbin "baserom.gba", 0x85616C, 0x368
+	.incbin "data/residual/Img_Banimmisc_0.bin"
 	.global Img_EfxLeftNameBox
 Img_EfxLeftNameBox:
-	.incbin "baserom.gba", 0x8564D4, 0x78
+	.incbin "data/residual/Img_EfxLeftNameBox.bin"
 	.global Img_EfxLeftItemBox
 Img_EfxLeftItemBox:
-	.incbin "baserom.gba", 0x85654C, 0x50
+	.incbin "data/residual/Img_EfxLeftItemBox.bin"
 	.global Img_EfxRightNameBox
 Img_EfxRightNameBox:
-	.incbin "baserom.gba", 0x85659C, 0x78
+	.incbin "data/residual/Img_EfxRightNameBox.bin"
 	.global Img_EfxRightItemBox
 Img_EfxRightItemBox:
-	.incbin "baserom.gba", 0x856614, 0x50
+	.incbin "data/residual/Img_EfxRightItemBox.bin"
 	.global gBanimmisc_0
 gBanimmisc_0:
-	.incbin "baserom.gba", 0x856664, 0xB4
+	.incbin "data/residual/gBanimmisc_0.bin"
 	.global gBanimmisc_1
 gBanimmisc_1:
-	.incbin "baserom.gba", 0x856718, 0xB4
+	.incbin "data/residual/gBanimmisc_1.bin"
 	.global gBanimmisc_2
 gBanimmisc_2:
-	.incbin "baserom.gba", 0x8567CC, 0xD4
+	.incbin "data/residual/gBanimmisc_2.bin"
 	.global gBanimmisc_3
 gBanimmisc_3:
-	.incbin "baserom.gba", 0x8568A0, 0xE0
+	.incbin "data/residual/gBanimmisc_3.bin"
 	.global gBanimmisc_4
 gBanimmisc_4:
-	.incbin "baserom.gba", 0x856980, 0xE0
+	.incbin "data/residual/gBanimmisc_4.bin"
 	.global gBanimmisc_5
 gBanimmisc_5:
-	.incbin "baserom.gba", 0x856A60, 0x50
+	.incbin "data/residual/gBanimmisc_5.bin"
 	.global gBanimmisc_6
 gBanimmisc_6:
-	.incbin "baserom.gba", 0x856AB0, 0x80
+	.incbin "data/residual/gBanimmisc_6.bin"
 	.global Img_EfxSideHitDmgCrit
 Img_EfxSideHitDmgCrit:
-	.incbin "baserom.gba", 0x856B30, 0x9C
+	.incbin "data/residual/Img_EfxSideHitDmgCrit.bin"
 	.global Img_EfxWTAArrow1
 Img_EfxWTAArrow1:
-	.incbin "baserom.gba", 0x856BCC, 0x24
+	.incbin "data/residual/Img_EfxWTAArrow1.bin"
 	.global Img_EfxWTAArrow2
 Img_EfxWTAArrow2:
-	.incbin "baserom.gba", 0x856BF0, 0x4C
+	.incbin "data/residual/Img_EfxWTAArrow2.bin"
 	.global gBanimmisc_7
 gBanimmisc_7:
-	.incbin "baserom.gba", 0x856C3C, 0x1A0
+	.incbin "data/residual/gBanimmisc_7.bin"
 	.global gBanimmisc_8
 gBanimmisc_8:
-	.incbin "baserom.gba", 0x856DDC, 0x80
+	.incbin "data/residual/gBanimmisc_8.bin"
 	.global gBanimmisc_9
 gBanimmisc_9:
-	.incbin "baserom.gba", 0x856E5C, 0x200
+	.incbin "data/residual/gBanimmisc_9.bin"
 	.global gBanimmisc_10
 gBanimmisc_10:
-	.incbin "baserom.gba", 0x85705C, 0x80
+	.incbin "data/residual/gBanimmisc_10.bin"
 	.global gPalEfxHpBarGreen
 gPalEfxHpBarGreen:
-	.incbin "baserom.gba", 0x8570DC, 0x40
+	.incbin "data/residual/gPalEfxHpBarGreen.bin"
 	.global gBanimmisc_11
 gBanimmisc_11:
-	.incbin "baserom.gba", 0x85711C, 0xC0
+	.incbin "data/residual/gBanimmisc_11.bin"
 	.global gPalEfxHpBarPurple
 gPalEfxHpBarPurple:
-	.incbin "baserom.gba", 0x8571DC, 0xA0
+	.incbin "data/residual/gPalEfxHpBarPurple.bin"
 	.global Pal_BanimUnitFlashing
 Pal_BanimUnitFlashing:
-	.incbin "baserom.gba", 0x85727C, 0x20
+	.incbin "data/residual/Pal_BanimUnitFlashing.bin"
 	.global Img_EkrExpBar
 Img_EkrExpBar:
-	.incbin "baserom.gba", 0x85729C, 0x380
+	.incbin "data/residual/Img_EkrExpBar.bin"
 	.global Img_EkrExpBarChange
 Img_EkrExpBarChange:
-	.incbin "baserom.gba", 0x85761C, 0x300
+	.incbin "data/residual/Img_EkrExpBarChange.bin"
 	.global Img_BarNumfx
 Img_BarNumfx:
-	.incbin "baserom.gba", 0x85791C, 0x160
+	.incbin "data/residual/Img_BarNumfx.bin"
 	.global Tsa_EkrExpBar
 Tsa_EkrExpBar:
-	.incbin "baserom.gba", 0x857A7C, 0x6C
+	.incbin "data/residual/Tsa_EkrExpBar.bin"
 	.global Pal_ExpBar
 Pal_ExpBar:
-	.incbin "baserom.gba", 0x857AE8, 0x20
+	.incbin "data/residual/Pal_ExpBar.bin"
 	.global Img_LevelUpBoxFrame
 Img_LevelUpBoxFrame:
-	.incbin "baserom.gba", 0x857B08, 0x438
+	.incbin "data/residual/Img_LevelUpBoxFrame.bin"
 	.global Tsa_LevelUpBoxFrame
 Tsa_LevelUpBoxFrame:
-	.incbin "baserom.gba", 0x857F40, 0x128
+	.incbin "data/residual/Tsa_LevelUpBoxFrame.bin"
 	.global Pal_LevelUpBoxFrame
 Pal_LevelUpBoxFrame:
-	.incbin "baserom.gba", 0x858068, 0x20
+	.incbin "data/residual/Pal_LevelUpBoxFrame.bin"
 	.global Img_EkrPopup
 Img_EkrPopup:
-	.incbin "baserom.gba", 0x858088, 0xA0
+	.incbin "data/residual/Img_EkrPopup.bin"
 	.global gBanimmisc_12
 gBanimmisc_12:
-	.incbin "baserom.gba", 0x858128, 0xE0
+	.incbin "data/residual/gBanimmisc_12.bin"
 	.global Pal_EkrPopup
 Pal_EkrPopup:
-	.incbin "baserom.gba", 0x858208, 0x20
+	.incbin "data/residual/Pal_EkrPopup.bin"
 	.global Tsa_EkrPopup
 Tsa_EkrPopup:
-	.incbin "baserom.gba", 0x858228, 0x94
+	.incbin "data/residual/Tsa_EkrPopup.bin"

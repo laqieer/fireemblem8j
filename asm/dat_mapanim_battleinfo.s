@@ -60,7 +60,7 @@ Pal_LinkArenaWarpFx:
 	.incbin "graphics/misc_gfx/Pal_LinkArenaWarpFx.bin"
 	.global gMapanimBattleinfo_0
 gMapanimBattleinfo_0:
-	.incbin "baserom.gba", 0xA1EB2C, 0x300
+	.incbin "data/residual/gMapanimBattleinfo_0.bin"
 	.global Img_MapAnimBerserkfx_1
 Img_MapAnimBerserkfx_1:
 	.incbin "graphics/misc_gfx/Img_MapAnimBerserkfx_1.bin.lz"
@@ -72,7 +72,7 @@ Img_MapAnimAntitoxinPureWater:
 	.incbin "graphics/misc_gfx/Img_MapAnimAntitoxinPureWater.bin.lz"
 	.global gMapanimBattleinfo_1
 gMapanimBattleinfo_1:
-	.incbin "baserom.gba", 0xA1F998, 0x600
+	.incbin "data/residual/gMapanimBattleinfo_1.bin"
 	.global Pal_MapAnimPureWater
 Pal_MapAnimPureWater:
 	.incbin "graphics/misc_gfx/Pal_MapAnimPureWater.bin"
@@ -81,13 +81,13 @@ Pal_MapAnimAntitoxin:
 	.incbin "graphics/misc_gfx/Pal_MapAnimAntitoxin.bin"
 	.global gMapanimBattleinfo_2
 gMapanimBattleinfo_2:
-	.incbin "baserom.gba", 0xA1FFD8, 0x174
+	.incbin "data/residual/gMapanimBattleinfo_2.bin"
 	.global gMapanimBattleinfo_3
 gMapanimBattleinfo_3:
-	.incbin "baserom.gba", 0xA2014C, 0x1F8
+	.incbin "data/residual/gMapanimBattleinfo_3.bin"
 	.global gMapanimBattleinfo_4
 gMapanimBattleinfo_4:
-	.incbin "baserom.gba", 0xA20344, 0x2BC
+	.incbin "data/residual/gMapanimBattleinfo_4.bin"
 	.global Pal_MapAnimBerserkfx_1
 Pal_MapAnimBerserkfx_1:
 	.incbin "graphics/misc_gfx/Pal_MapAnimBerserkfx_1.bin"
@@ -96,7 +96,7 @@ Pal_MapAnimBerserkfx_2:
 	.incbin "graphics/misc_gfx/Pal_MapAnimBerserkfx_2.gbapal"
 	.global gMapanimBattleinfo_5
 gMapanimBattleinfo_5:
-	.incbin "baserom.gba", 0xA20680, 0x3DC
+	.incbin "data/residual/gMapanimBattleinfo_5.bin"
 	.global Img_MapAnimTorchfx
 Img_MapAnimTorchfx:
 	.incbin "graphics/misc_gfx/Img_MapAnimTorchfx.bin.lz"
@@ -129,7 +129,7 @@ Tsa_MapAnim_1:
 	.incbin "graphics/misc_gfx/Tsa_MapAnim_1.bin"
 	.global ApConf_MapAnimSleep
 ApConf_MapAnimSleep:
-	.incbin "baserom.gba", 0xA22098, 0x400
+	.incbin "data/residual/ApConf_MapAnimSleep.bin"
 	.global Img_MapAnimBerserkfx
 Img_MapAnimBerserkfx:
 	.incbin "graphics/misc_gfx/Img_MapAnimBerserkfx.bin.lz"

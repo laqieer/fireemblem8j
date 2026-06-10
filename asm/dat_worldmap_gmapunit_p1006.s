@@ -2,4 +2,4 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x0872cd48 (US 0x08700170, shift -0xFFFD3428); incbin baserom.gba
 	.global AnimSprite_efxNaglfarOBJ2_3
 AnimSprite_efxNaglfarOBJ2_3:
-	.incbin "baserom.gba", 0x72CD48, 0x84
+	.incbin "data/residual/AnimSprite_efxNaglfarOBJ2_3.bin"

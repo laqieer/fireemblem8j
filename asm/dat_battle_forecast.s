@@ -3,22 +3,22 @@
 @ src/data/ui/battle_forecast.o: region-same content at JP 0x085c8d58 (US 0x085a0838, shift -0x-28520); incbin baserom.gba
 	.global gBattleForecast_0
 gBattleForecast_0:
-	.incbin "baserom.gba", 0x5C8D58, 0xB8
+	.incbin "data/residual/gBattleForecast_0.bin"
 	.global gBattleForecast_1
 gBattleForecast_1:
-	.incbin "baserom.gba", 0x5C8E10, 0xB8
+	.incbin "data/residual/gBattleForecast_1.bin"
 	.global gTSA_BattleForecastStandard
 gTSA_BattleForecastStandard:
-	.incbin "baserom.gba", 0x5C8EC8, 0x144
+	.incbin "data/residual/gTSA_BattleForecastStandard.bin"
 	.global gTSA_BattleForecastExtended
 gTSA_BattleForecastExtended:
-	.incbin "baserom.gba", 0x5C900C, 0x194
+	.incbin "data/residual/gTSA_BattleForecastExtended.bin"
 	.global gBattleForecast_x2x4Gfx
 gBattleForecast_x2x4Gfx:
-	.incbin "baserom.gba", 0x5C91A0, 0xAC
+	.incbin "data/residual/gBattleForecast_x2x4Gfx.bin"
 	.global gBattleForecast_x2x4Pal
 gBattleForecast_x2x4Pal:
-	.incbin "baserom.gba", 0x5C924C, 0x20
+	.incbin "data/residual/gBattleForecast_x2x4Pal.bin"
 	.global gBattleForecast_2
 gBattleForecast_2:
-	.incbin "baserom.gba", 0x5C926C, 0x154
+	.incbin "data/residual/gBattleForecast_2.bin"

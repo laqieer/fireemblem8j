@@ -17,4 +17,4 @@ gPal_WorldmapMinimap_0:
 	.incbin "graphics/misc_gfx2/gPal_WorldmapMinimap_0.gbapal"
 	.global gTsa_WorldmapMinimap_0
 gTsa_WorldmapMinimap_0:
-	.incbin "baserom.gba", 0xB23E54, 0xAC
+	.incbin "data/residual/gTsa_WorldmapMinimap_0.bin"

@@ -8,52 +8,52 @@ Pal_EfxElfireOBJ:
 	.incbin "graphics/banim/_us/banim/assets/pal/00604210_Pal_EfxElfireOBJ.agbpal"
 	.global AnimSprite_EfxElfireOBJ_1
 AnimSprite_EfxElfireOBJ_1:
-	.incbin "baserom.gba", 0x630E08, 0x24
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_1.bin"
 	.global AnimSprite_EfxElfireOBJ_2
 AnimSprite_EfxElfireOBJ_2:
-	.incbin "baserom.gba", 0x630E2C, 0x3C
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_2.bin"
 	.global AnimSprite_EfxElfireOBJ_3
 AnimSprite_EfxElfireOBJ_3:
-	.incbin "baserom.gba", 0x630E68, 0x54
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_3.bin"
 	.global AnimSprite_EfxElfireOBJ_4
 AnimSprite_EfxElfireOBJ_4:
-	.incbin "baserom.gba", 0x630EBC, 0x6C
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_4.bin"
 	.global AnimSprite_EfxElfireOBJ_5
 AnimSprite_EfxElfireOBJ_5:
-	.incbin "baserom.gba", 0x630F28, 0x84
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_5.bin"
 	.global AnimSprite_EfxElfireOBJ_6
 AnimSprite_EfxElfireOBJ_6:
-	.incbin "baserom.gba", 0x630FAC, 0x84
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_6.bin"
 	.global AnimSprite_EfxElfireOBJ_7
 AnimSprite_EfxElfireOBJ_7:
-	.incbin "baserom.gba", 0x631030, 0x84
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_7.bin"
 	.global AnimSprite_EfxElfireOBJ_8
 AnimSprite_EfxElfireOBJ_8:
-	.incbin "baserom.gba", 0x6310B4, 0x84
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_8.bin"
 	.global AnimSprite_EfxElfireOBJ_9
 AnimSprite_EfxElfireOBJ_9:
-	.incbin "baserom.gba", 0x631138, 0x84
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_9.bin"
 	.global AnimSprite_EfxElfireOBJ_10
 AnimSprite_EfxElfireOBJ_10:
-	.incbin "baserom.gba", 0x6311BC, 0x84
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_10.bin"
 	.global AnimSprite_EfxElfireOBJ_11
 AnimSprite_EfxElfireOBJ_11:
-	.incbin "baserom.gba", 0x631240, 0x84
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_11.bin"
 	.global AnimSprite_EfxElfireOBJ_12
 AnimSprite_EfxElfireOBJ_12:
-	.incbin "baserom.gba", 0x6312C4, 0x84
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_12.bin"
 	.global AnimSprite_EfxElfireOBJ_13
 AnimSprite_EfxElfireOBJ_13:
-	.incbin "baserom.gba", 0x631348, 0x84
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_13.bin"
 	.global AnimSprite_EfxElfireOBJ_14
 AnimSprite_EfxElfireOBJ_14:
-	.incbin "baserom.gba", 0x6313CC, 0x6C
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_14.bin"
 	.global AnimSprite_EfxElfireOBJ_15
 AnimSprite_EfxElfireOBJ_15:
-	.incbin "baserom.gba", 0x631438, 0x54
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_15.bin"
 	.global AnimSprite_EfxElfireOBJ_16
 AnimSprite_EfxElfireOBJ_16:
-	.incbin "baserom.gba", 0x63148C, 0x3C
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_16.bin"
 	.global AnimSprite_EfxElfireOBJ_17
 AnimSprite_EfxElfireOBJ_17:
-	.incbin "baserom.gba", 0x6314C8, 0x24
+	.incbin "data/residual/AnimSprite_EfxElfireOBJ_17.bin"

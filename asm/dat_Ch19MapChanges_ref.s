@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global Ch19MapChanges
 Ch19MapChanges:
-	.incbin "baserom.gba", 0xA5C02C, 0x124
+	.incbin "data/residual/Ch19MapChanges.bin"

@@ -131,28 +131,28 @@ Pal_Banim_6:
 	.incbin "graphics/banim/_us/banim/assets/pal/006C93FC_Pal_086C93FC.gbapal"
 	.global AnimSprite_Banim_27
 AnimSprite_Banim_27:
-	.incbin "baserom.gba", 0x6F5FF4, 0x24
+	.incbin "data/residual/AnimSprite_Banim_27.bin"
 	.global AnimSprite_Banim_28
 AnimSprite_Banim_28:
-	.incbin "baserom.gba", 0x6F6018, 0x24
+	.incbin "data/residual/AnimSprite_Banim_28.bin"
 	.global AnimSprite_Banim_29
 AnimSprite_Banim_29:
-	.incbin "baserom.gba", 0x6F603C, 0x24
+	.incbin "data/residual/AnimSprite_Banim_29.bin"
 	.global AnimSprite_Banim_30
 AnimSprite_Banim_30:
-	.incbin "baserom.gba", 0x6F6060, 0x24
+	.incbin "data/residual/AnimSprite_Banim_30.bin"
 	.global AnimSprite_Banim_31
 AnimSprite_Banim_31:
-	.incbin "baserom.gba", 0x6F6084, 0x48
+	.incbin "data/residual/AnimSprite_Banim_31.bin"
 	.global AnimSprite_Banim_32
 AnimSprite_Banim_32:
-	.incbin "baserom.gba", 0x6F60CC, 0x3C
+	.incbin "data/residual/AnimSprite_Banim_32.bin"
 	.global AnimSprite_Banim_33
 AnimSprite_Banim_33:
-	.incbin "baserom.gba", 0x6F6108, 0x24
+	.incbin "data/residual/AnimSprite_Banim_33.bin"
 	.global AnimSprite_Banim_34
 AnimSprite_Banim_34:
-	.incbin "baserom.gba", 0x6F612C, 0x3C
+	.incbin "data/residual/AnimSprite_Banim_34.bin"
 	.global AnimSprite_Banim_35
 AnimSprite_Banim_35:
-	.incbin "baserom.gba", 0x6F6168, 0x30
+	.incbin "data/residual/AnimSprite_Banim_35.bin"

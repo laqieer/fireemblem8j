@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gMPlayTable
 gMPlayTable:
-	.incbin "baserom.gba", 0x2140B4, 0x6C
+	.incbin "data/residual/gMPlayTable.bin"

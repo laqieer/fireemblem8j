@@ -5,4 +5,4 @@
 	.global SoftReset
 	.thumb_func
 SoftReset:
-	.incbin "baserom.gba", 0xD63AC, 0x18
+	.incbin "data/residual/SoftReset.bin"

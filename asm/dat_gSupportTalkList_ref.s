@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gSupportTalkList
 gSupportTalkList:
-	.incbin "baserom.gba", 0xA5F230, 0x540
+	.incbin "data/residual/gSupportTalkList.bin"

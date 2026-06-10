@@ -9,4 +9,4 @@
 	.section .data.residue.086A3E90, "a", %progbits
 	.global data_086A3E90
 data_086A3E90:
-	.incbin "baserom.gba", 0x6A3E90, 0xC
+	.incbin "data/residual/data_086A3E90.bin"

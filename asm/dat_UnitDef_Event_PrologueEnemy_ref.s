@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global UnitDef_Event_PrologueEnemy
 UnitDef_Event_PrologueEnemy:
-	.incbin "baserom.gba", 0x9081D8, 0x50
+	.incbin "data/residual/UnitDef_Event_PrologueEnemy.bin"

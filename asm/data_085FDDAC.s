@@ -9,4 +9,4 @@
 	.section .data.residue.085FDDAC, "a", %progbits
 	.global data_085FDDAC
 data_085FDDAC:
-	.incbin "baserom.gba", 0x5FDDAC, 0xA8
+	.incbin "data/residual/data_085FDDAC.bin"

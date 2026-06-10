@@ -11,10 +11,10 @@ Tsa_EventWarp:
 	.incbin "graphics/gmapunit/Tsa_EventWarp.bin.lz"
 	.global gParticlesFx_6
 gParticlesFx_6:
-	.incbin "baserom.gba", 0x5CFBA0, 0xB0
+	.incbin "data/residual/gParticlesFx_6.bin"
 	.global gParticlesFx_7
 gParticlesFx_7:
-	.incbin "baserom.gba", 0x5CFC50, 0x40
+	.incbin "data/residual/gParticlesFx_7.bin"
 	.global Tsa_PlayerRankFog
 Tsa_PlayerRankFog:
 	.incbin "graphics/gmapunit/Tsa_PlayerRankFog.bin"

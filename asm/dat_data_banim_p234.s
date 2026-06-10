@@ -14,4 +14,4 @@ Tsa3_EfxChillEffectBG:
 	.incbin "graphics/banim/_us/banim/assets/tsa/00745FD0_Tsa3_EfxChillEffectBG.map.bin.lz"
 	.global AnimSprite_EfxChill_R_1
 AnimSprite_EfxChill_R_1:
-	.incbin "baserom.gba", 0x77B864, 0x30
+	.incbin "data/residual/AnimSprite_EfxChill_R_1.bin"

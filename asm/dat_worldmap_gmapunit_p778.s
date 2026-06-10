@@ -2,28 +2,28 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x085fda40 (US 0x085d3810, shift -0xFFFD5DD0); incbin baserom.gba
 	.global AnimSprite_EkrBaseKaiten_49
 AnimSprite_EkrBaseKaiten_49:
-	.incbin "baserom.gba", 0x5FDA40, 0x24
+	.incbin "data/residual/AnimSprite_EkrBaseKaiten_49.bin"
 	.global AnimSprite_EkrBaseKaiten_50
 AnimSprite_EkrBaseKaiten_50:
-	.incbin "baserom.gba", 0x5FDA64, 0x30
+	.incbin "data/residual/AnimSprite_EkrBaseKaiten_50.bin"
 	.global AnimSprite_EkrBaseKaiten_51
 AnimSprite_EkrBaseKaiten_51:
-	.incbin "baserom.gba", 0x5FDA94, 0x60
+	.incbin "data/residual/AnimSprite_EkrBaseKaiten_51.bin"
 	.global AnimSprite_EkrBaseKaiten_52
 AnimSprite_EkrBaseKaiten_52:
-	.incbin "baserom.gba", 0x5FDAF4, 0x90
+	.incbin "data/residual/AnimSprite_EkrBaseKaiten_52.bin"
 	.global AnimSprite_EkrBaseKaiten_53
 AnimSprite_EkrBaseKaiten_53:
-	.incbin "baserom.gba", 0x5FDB84, 0xA8
+	.incbin "data/residual/AnimSprite_EkrBaseKaiten_53.bin"
 	.global AnimSprite_EkrBaseKaiten_54
 AnimSprite_EkrBaseKaiten_54:
-	.incbin "baserom.gba", 0x5FDC2C, 0xC0
+	.incbin "data/residual/AnimSprite_EkrBaseKaiten_54.bin"
 	.global AnimSprite_EkrBaseKaiten_55
 AnimSprite_EkrBaseKaiten_55:
-	.incbin "baserom.gba", 0x5FDCEC, 0x24
+	.incbin "data/residual/AnimSprite_EkrBaseKaiten_55.bin"
 	.global AnimSprite_EkrBaseKaiten_56
 AnimSprite_EkrBaseKaiten_56:
-	.incbin "baserom.gba", 0x5FDD10, 0x3C
+	.incbin "data/residual/AnimSprite_EkrBaseKaiten_56.bin"
 	.global AnimSprite_EkrBaseKaiten_57
 AnimSprite_EkrBaseKaiten_57:
-	.incbin "baserom.gba", 0x5FDD4C, 0x60
+	.incbin "data/residual/AnimSprite_EkrBaseKaiten_57.bin"

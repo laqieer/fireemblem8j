@@ -5,37 +5,37 @@
 g085A0EA0_motion:
 	.global gUnkData_2
 gUnkData_2:
-	.incbin "baserom.gba", 0x5C93C0, 0x4
+	.incbin "data/residual/gUnkData_2.bin"
 	.global g085A0EA0_frame_list
 g085A0EA0_frame_list:
-	.incbin "baserom.gba", 0x5C93C4, 0xE
+	.incbin "data/residual/g085A0EA0_frame_list.bin"
 	.global g085A0EA0_anim_list
 g085A0EA0_anim_list:
-	.incbin "baserom.gba", 0x5C93D2, 0x4
+	.incbin "data/residual/g085A0EA0_anim_list.bin"
 	.global g085A0EA0_frame_0
 g085A0EA0_frame_0:
-	.incbin "baserom.gba", 0x5C93D6, 0x28
+	.incbin "data/residual/g085A0EA0_frame_0.bin"
 	.global g085A0EA0_frame_1
 g085A0EA0_frame_1:
-	.incbin "baserom.gba", 0x5C93FE, 0x28
+	.incbin "data/residual/g085A0EA0_frame_1.bin"
 	.global g085A0EA0_frame_2
 g085A0EA0_frame_2:
-	.incbin "baserom.gba", 0x5C9426, 0x28
+	.incbin "data/residual/g085A0EA0_frame_2.bin"
 	.global g085A0EA0_frame_3
 g085A0EA0_frame_3:
-	.incbin "baserom.gba", 0x5C944E, 0x28
+	.incbin "data/residual/g085A0EA0_frame_3.bin"
 	.global g085A0EA0_frame_4
 g085A0EA0_frame_4:
-	.incbin "baserom.gba", 0x5C9476, 0x28
+	.incbin "data/residual/g085A0EA0_frame_4.bin"
 	.global g085A0EA0_frame_5
 g085A0EA0_frame_5:
-	.incbin "baserom.gba", 0x5C949E, 0x20
+	.incbin "data/residual/g085A0EA0_frame_5.bin"
 	.global g085A0EA0_frame_6
 g085A0EA0_frame_6:
-	.incbin "baserom.gba", 0x5C94BE, 0x28
+	.incbin "data/residual/g085A0EA0_frame_6.bin"
 	.global g085A0EA0_anim_0
 g085A0EA0_anim_0:
-	.incbin "baserom.gba", 0x5C94E6, 0x24
+	.incbin "data/residual/g085A0EA0_anim_0.bin"
 	.global g085A0EA0_anim_1
 g085A0EA0_anim_1:
-	.incbin "baserom.gba", 0x5C950A, 0xE
+	.incbin "data/residual/g085A0EA0_anim_1.bin"

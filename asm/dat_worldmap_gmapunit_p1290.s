@@ -2,100 +2,100 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08903138 (US 0x088aebac, shift -0xFFFABA74); incbin baserom.gba
 	.global SupportData_Eirika
 SupportData_Eirika:
-	.incbin "baserom.gba", 0x903138, 0x18
+	.incbin "data/residual/SupportData_Eirika.bin"
 	.global SupportData_Ephraim
 SupportData_Ephraim:
-	.incbin "baserom.gba", 0x903150, 0x18
+	.incbin "data/residual/SupportData_Ephraim.bin"
 	.global SupportData_Seth
 SupportData_Seth:
-	.incbin "baserom.gba", 0x903168, 0x18
+	.incbin "data/residual/SupportData_Seth.bin"
 	.global SupportData_Franz
 SupportData_Franz:
-	.incbin "baserom.gba", 0x903180, 0x18
+	.incbin "data/residual/SupportData_Franz.bin"
 	.global SupportData_Gilliam
 SupportData_Gilliam:
-	.incbin "baserom.gba", 0x903198, 0x18
+	.incbin "data/residual/SupportData_Gilliam.bin"
 	.global SupportData_Moulder
 SupportData_Moulder:
-	.incbin "baserom.gba", 0x9031B0, 0x18
+	.incbin "data/residual/SupportData_Moulder.bin"
 	.global SupportData_Vanessa
 SupportData_Vanessa:
-	.incbin "baserom.gba", 0x9031C8, 0x18
+	.incbin "data/residual/SupportData_Vanessa.bin"
 	.global SupportData_Garcia
 SupportData_Garcia:
-	.incbin "baserom.gba", 0x9031E0, 0x18
+	.incbin "data/residual/SupportData_Garcia.bin"
 	.global SupportData_Ross
 SupportData_Ross:
-	.incbin "baserom.gba", 0x9031F8, 0x18
+	.incbin "data/residual/SupportData_Ross.bin"
 	.global SupportData_Colm
 SupportData_Colm:
-	.incbin "baserom.gba", 0x903210, 0x18
+	.incbin "data/residual/SupportData_Colm.bin"
 	.global SupportData_Neimi
 SupportData_Neimi:
-	.incbin "baserom.gba", 0x903228, 0x18
+	.incbin "data/residual/SupportData_Neimi.bin"
 	.global SupportData_Artur
 SupportData_Artur:
-	.incbin "baserom.gba", 0x903240, 0x18
+	.incbin "data/residual/SupportData_Artur.bin"
 	.global SupportData_Lute
 SupportData_Lute:
-	.incbin "baserom.gba", 0x903258, 0x18
+	.incbin "data/residual/SupportData_Lute.bin"
 	.global SupportData_Natasha
 SupportData_Natasha:
-	.incbin "baserom.gba", 0x903270, 0x18
+	.incbin "data/residual/SupportData_Natasha.bin"
 	.global SupportData_Joshua
 SupportData_Joshua:
-	.incbin "baserom.gba", 0x903288, 0x18
+	.incbin "data/residual/SupportData_Joshua.bin"
 	.global SupportData_Kyle
 SupportData_Kyle:
-	.incbin "baserom.gba", 0x9032A0, 0x18
+	.incbin "data/residual/SupportData_Kyle.bin"
 	.global SupportData_Forde
 SupportData_Forde:
-	.incbin "baserom.gba", 0x9032B8, 0x18
+	.incbin "data/residual/SupportData_Forde.bin"
 	.global SupportData_Tana
 SupportData_Tana:
-	.incbin "baserom.gba", 0x9032D0, 0x18
+	.incbin "data/residual/SupportData_Tana.bin"
 	.global SupportData_Innes
 SupportData_Innes:
-	.incbin "baserom.gba", 0x9032E8, 0x18
+	.incbin "data/residual/SupportData_Innes.bin"
 	.global SupportData_Gerik
 SupportData_Gerik:
-	.incbin "baserom.gba", 0x903300, 0x18
+	.incbin "data/residual/SupportData_Gerik.bin"
 	.global SupportData_Tethys
 SupportData_Tethys:
-	.incbin "baserom.gba", 0x903318, 0x18
+	.incbin "data/residual/SupportData_Tethys.bin"
 	.global SupportData_Marisa
 SupportData_Marisa:
-	.incbin "baserom.gba", 0x903330, 0x18
+	.incbin "data/residual/SupportData_Marisa.bin"
 	.global SupportData_Saleh
 SupportData_Saleh:
-	.incbin "baserom.gba", 0x903348, 0x18
+	.incbin "data/residual/SupportData_Saleh.bin"
 	.global SupportData_Ewan
 SupportData_Ewan:
-	.incbin "baserom.gba", 0x903360, 0x18
+	.incbin "data/residual/SupportData_Ewan.bin"
 	.global SupportData_LArachel
 SupportData_LArachel:
-	.incbin "baserom.gba", 0x903378, 0x18
+	.incbin "data/residual/SupportData_LArachel.bin"
 	.global SupportData_Dozla
 SupportData_Dozla:
-	.incbin "baserom.gba", 0x903390, 0x18
+	.incbin "data/residual/SupportData_Dozla.bin"
 	.global SupportData_Cormag
 SupportData_Cormag:
-	.incbin "baserom.gba", 0x9033A8, 0x18
+	.incbin "data/residual/SupportData_Cormag.bin"
 	.global SupportData_Amelia
 SupportData_Amelia:
-	.incbin "baserom.gba", 0x9033C0, 0x18
+	.incbin "data/residual/SupportData_Amelia.bin"
 	.global SupportData_Rennac
 SupportData_Rennac:
-	.incbin "baserom.gba", 0x9033D8, 0x18
+	.incbin "data/residual/SupportData_Rennac.bin"
 	.global SupportData_Duessel
 SupportData_Duessel:
-	.incbin "baserom.gba", 0x9033F0, 0x18
+	.incbin "data/residual/SupportData_Duessel.bin"
 	.global SupportData_Myrrh
 SupportData_Myrrh:
-	.incbin "baserom.gba", 0x903408, 0x18
+	.incbin "data/residual/SupportData_Myrrh.bin"
 	.global SupportData_Knoll
 SupportData_Knoll:
-	.incbin "baserom.gba", 0x903420, 0x18
+	.incbin "data/residual/SupportData_Knoll.bin"
 	.global SupportData_Syrene
 SupportData_Syrene:
-	.incbin "baserom.gba", 0x903438, 0x18
+	.incbin "data/residual/SupportData_Syrene.bin"

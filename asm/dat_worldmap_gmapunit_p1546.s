@@ -2,31 +2,31 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08a604b4 (US 0x089ee37c, shift -0xFFF8DEC8); incbin baserom.gba
 	.global EventScr_ApplyTileChangeForFaction
 EventScr_ApplyTileChangeForFaction:
-	.incbin "baserom.gba", 0xA604B4, 0x20
+	.incbin "data/residual/EventScr_ApplyTileChangeForFaction.bin"
 	.global EventScr_FormatFlashingCursor
 EventScr_FormatFlashingCursor:
-	.incbin "baserom.gba", 0xA604D4, 0x20
+	.incbin "data/residual/EventScr_FormatFlashingCursor.bin"
 	.global EventScr_MoveUnitS2ToLeader
 EventScr_MoveUnitS2ToLeader:
-	.incbin "baserom.gba", 0xA604F4, 0x38
+	.incbin "data/residual/EventScr_MoveUnitS2ToLeader.bin"
 	.global EventScr_FormatMoveUnit
 EventScr_FormatMoveUnit:
-	.incbin "baserom.gba", 0xA6052C, 0xAC
+	.incbin "data/residual/EventScr_FormatMoveUnit.bin"
 	.global EventScr_LoadUniqueAlly
 EventScr_LoadUniqueAlly:
-	.incbin "baserom.gba", 0xA605D8, 0x58
+	.incbin "data/residual/EventScr_LoadUniqueAlly.bin"
 	.global EventScr_UnitWarpIN
 EventScr_UnitWarpIN:
-	.incbin "baserom.gba", 0xA60630, 0x24
+	.incbin "data/residual/EventScr_UnitWarpIN.bin"
 	.global EventScr_UnitWarpOUT
 EventScr_UnitWarpOUT:
-	.incbin "baserom.gba", 0xA60654, 0x20
+	.incbin "data/residual/EventScr_UnitWarpOUT.bin"
 	.global EventScr_UnitFlushingIN
 EventScr_UnitFlushingIN:
-	.incbin "baserom.gba", 0xA60674, 0x3C
+	.incbin "data/residual/EventScr_UnitFlushingIN.bin"
 	.global EventScr_UnitFlushingOUT
 EventScr_UnitFlushingOUT:
-	.incbin "baserom.gba", 0xA606B0, 0x44
+	.incbin "data/residual/EventScr_UnitFlushingOUT.bin"
 	.global EventScr_StrictLoadUniqueAlly
 EventScr_StrictLoadUniqueAlly:
-	.incbin "baserom.gba", 0xA606F4, 0x60
+	.incbin "data/residual/EventScr_StrictLoadUniqueAlly.bin"

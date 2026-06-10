@@ -6,5 +6,5 @@
 	.global GetUnitItemSlot
 	.thumb_func
 GetUnitItemSlot:
-	.incbin "baserom.gba", 0x16DD4, 0x28
+	.incbin "data/residual/GetUnitItemSlot.bin"
 

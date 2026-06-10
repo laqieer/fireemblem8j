@@ -8,10 +8,10 @@ Pal_GleipnirSprites_Comet:
 	.incbin "graphics/banim/_us/banim/assets/pal/006A2CE8_Pal_GleipnirSprites_Comet.gbapal"
 	.global AnimSprite_EfxDarkGradoOBJ02piece_R_1
 AnimSprite_EfxDarkGradoOBJ02piece_R_1:
-	.incbin "baserom.gba", 0x6CF8E0, 0x24
+	.incbin "data/residual/AnimSprite_EfxDarkGradoOBJ02piece_R_1.bin"
 	.global AnimSprite_EfxDarkGradoOBJ02piece_R_2
 AnimSprite_EfxDarkGradoOBJ02piece_R_2:
-	.incbin "baserom.gba", 0x6CF904, 0x24
+	.incbin "data/residual/AnimSprite_EfxDarkGradoOBJ02piece_R_2.bin"
 	.global AnimSprite_EfxDarkGradoOBJ02piece_R_3
 AnimSprite_EfxDarkGradoOBJ02piece_R_3:
-	.incbin "baserom.gba", 0x6CF928, 0x24
+	.incbin "data/residual/AnimSprite_EfxDarkGradoOBJ02piece_R_3.bin"

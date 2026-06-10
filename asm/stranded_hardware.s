@@ -6,7 +6,7 @@
 	.global GetTileIndex
 	.thumb_func
 GetTileIndex:
-	.incbin "baserom.gba", 0xF54, 0x20
+	.incbin "data/residual/GetTileIndex.bin"
 
 	.section .text.s_08000FB4, "ax", %progbits
 @ SetBackgroundMapDataOffset region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -16,7 +16,7 @@ GetTileIndex:
 	.global SetBackgroundMapDataOffset
 	.thumb_func
 SetBackgroundMapDataOffset:
-	.incbin "baserom.gba", 0xFB4, 0x48
+	.incbin "data/residual/SetBackgroundMapDataOffset.bin"
 
 	.section .text.s_0800101C, "ax", %progbits
 @ BG_SetColorBpp region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -26,7 +26,7 @@ SetBackgroundMapDataOffset:
 	.global BG_SetColorBpp
 	.thumb_func
 BG_SetColorBpp:
-	.incbin "baserom.gba", 0x101C, 0x28
+	.incbin "data/residual/BG_SetColorBpp.bin"
 
 	.section .text.s_080012B8, "ax", %progbits
 @ SetNextVCount region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -36,7 +36,7 @@ BG_SetColorBpp:
 	.global SetNextVCount
 	.thumb_func
 SetNextVCount:
-	.incbin "baserom.gba", 0x12B8, 0x14
+	.incbin "data/residual/SetNextVCount.bin"
 
 	.section .text.s_080012D8, "ax", %progbits
 @ SetMainUpdateRoutine region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -46,7 +46,7 @@ SetNextVCount:
 	.global SetMainUpdateRoutine
 	.thumb_func
 SetMainUpdateRoutine:
-	.incbin "baserom.gba", 0x12D8, 0xC
+	.incbin "data/residual/SetMainUpdateRoutine.bin"
 
 	.section .text.s_080014EC, "ax", %progbits
 @ CopyTilemapScreen region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -56,7 +56,7 @@ SetMainUpdateRoutine:
 	.global CopyTilemapScreen
 	.thumb_func
 CopyTilemapScreen:
-	.incbin "baserom.gba", 0x14EC, 0x1C
+	.incbin "data/residual/CopyTilemapScreen.bin"
 
 	.section .text.s_0800169C, "ax", %progbits
 @ MaybeResetSomePal region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -66,7 +66,7 @@ CopyTilemapScreen:
 	.global MaybeResetSomePal
 	.thumb_func
 MaybeResetSomePal:
-	.incbin "baserom.gba", 0x169C, 0x1C
+	.incbin "data/residual/MaybeResetSomePal.bin"
 
 	.section .text.s_080016B8, "ax", %progbits
 @ MaybeSmoothChangeSomePal region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -76,7 +76,7 @@ MaybeResetSomePal:
 	.global MaybeSmoothChangeSomePal
 	.thumb_func
 MaybeSmoothChangeSomePal:
-	.incbin "baserom.gba", 0x16B8, 0x88
+	.incbin "data/residual/MaybeSmoothChangeSomePal.bin"
 
 	.section .text.s_08001740, "ax", %progbits
 @ ColorFadeSetupRange region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -86,7 +86,7 @@ MaybeSmoothChangeSomePal:
 	.global ColorFadeSetupRange
 	.thumb_func
 ColorFadeSetupRange:
-	.incbin "baserom.gba", 0x1740, 0x88
+	.incbin "data/residual/ColorFadeSetupRange.bin"
 
 	.section .text.s_080017C8, "ax", %progbits
 @ ColorFadeSetStepRange region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -96,7 +96,7 @@ ColorFadeSetupRange:
 	.global ColorFadeSetStepRange
 	.thumb_func
 ColorFadeSetStepRange:
-	.incbin "baserom.gba", 0x17C8, 0x24
+	.incbin "data/residual/ColorFadeSetStepRange.bin"
 
 	.section .text.s_08001D50, "ax", %progbits
 @ GetBackgroundFromBufferPointer region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -106,7 +106,7 @@ ColorFadeSetStepRange:
 	.global GetBackgroundFromBufferPointer
 	.thumb_func
 GetBackgroundFromBufferPointer:
-	.incbin "baserom.gba", 0x1D50, 0x6C
+	.incbin "data/residual/GetBackgroundFromBufferPointer.bin"
 
 	.section .text.s_08001F30, "ax", %progbits
 @ ClearTileRigistry region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -116,7 +116,7 @@ GetBackgroundFromBufferPointer:
 	.global ClearTileRigistry
 	.thumb_func
 ClearTileRigistry:
-	.incbin "baserom.gba", 0x1F30, 0x34
+	.incbin "data/residual/ClearTileRigistry.bin"
 
 	.section .text.s_08001F64, "ax", %progbits
 @ RegisterDataMove region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -126,7 +126,7 @@ ClearTileRigistry:
 	.global RegisterDataMove
 	.thumb_func
 RegisterDataMove:
-	.incbin "baserom.gba", 0x1F64, 0x40
+	.incbin "data/residual/RegisterDataMove.bin"
 
 	.section .text.s_08001FA4, "ax", %progbits
 @ RegisterFillTile region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -136,5 +136,5 @@ RegisterDataMove:
 	.global RegisterFillTile
 	.thumb_func
 RegisterFillTile:
-	.incbin "baserom.gba", 0x1FA4, 0x34
+	.incbin "data/residual/RegisterFillTile.bin"
 

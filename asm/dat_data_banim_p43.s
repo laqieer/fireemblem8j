@@ -32,13 +32,13 @@ Pal_EfxSunakemuriOBJ3:
 	.incbin "graphics/banim/_us/banim/assets/img/EfxSunakemuriOBJ3.gbapal"
 	.global AnimSprite_EfxSunakemuriOBJ1_R_1
 AnimSprite_EfxSunakemuriOBJ1_R_1:
-	.incbin "baserom.gba", 0x61E258, 0x24
+	.incbin "data/residual/AnimSprite_EfxSunakemuriOBJ1_R_1.bin"
 	.global AnimSprite_EfxSunakemuriOBJ1_R_2
 AnimSprite_EfxSunakemuriOBJ1_R_2:
-	.incbin "baserom.gba", 0x61E27C, 0x24
+	.incbin "data/residual/AnimSprite_EfxSunakemuriOBJ1_R_2.bin"
 	.global AnimSprite_EfxSunakemuriOBJ1_R_3
 AnimSprite_EfxSunakemuriOBJ1_R_3:
-	.incbin "baserom.gba", 0x61E2A0, 0x24
+	.incbin "data/residual/AnimSprite_EfxSunakemuriOBJ1_R_3.bin"
 	.global AnimSprite_EfxSunakemuriOBJ1_R_4
 AnimSprite_EfxSunakemuriOBJ1_R_4:
-	.incbin "baserom.gba", 0x61E2C4, 0x24
+	.incbin "data/residual/AnimSprite_EfxSunakemuriOBJ1_R_4.bin"

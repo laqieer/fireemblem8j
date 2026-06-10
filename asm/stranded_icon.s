@@ -6,5 +6,5 @@
 	.global GetNextFreeIcon
 	.thumb_func
 GetNextFreeIcon:
-	.incbin "baserom.gba", 0x3538, 0x24
+	.incbin "data/residual/GetNextFreeIcon.bin"
 

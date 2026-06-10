@@ -8,10 +8,10 @@ Pal_efxSuperdruidOBJ:
 	.incbin "graphics/banim/_us/banim/assets/pal/00751DB4_Pal_08751DB4.gbapal"
 	.global AnimSprite_efxSuperdruidOBJ_0
 AnimSprite_efxSuperdruidOBJ_0:
-	.incbin "baserom.gba", 0x7A2308, 0x48
+	.incbin "data/residual/AnimSprite_efxSuperdruidOBJ_0.bin"
 	.global AnimSprite_efxSuperdruidOBJ_1
 AnimSprite_efxSuperdruidOBJ_1:
-	.incbin "baserom.gba", 0x7A2350, 0xFC
+	.incbin "data/residual/AnimSprite_efxSuperdruidOBJ_1.bin"
 	.global AnimSprite_efxSuperdruidOBJ_2
 AnimSprite_efxSuperdruidOBJ_2:
-	.incbin "baserom.gba", 0x7A244C, 0x48
+	.incbin "data/residual/AnimSprite_efxSuperdruidOBJ_2.bin"

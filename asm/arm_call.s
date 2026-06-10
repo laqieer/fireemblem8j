@@ -6,20 +6,20 @@
 	.global CallARM_FillTileRect
 	.thumb_func
 CallARM_FillTileRect:
-	.incbin "baserom.gba", 0xDC0DC, 0x8
+	.incbin "data/residual/CallARM_FillTileRect.bin"
 	.global TileMap_FillRect
 	.thumb_func
 TileMap_FillRect:
-	.incbin "baserom.gba", 0xDC0E4, 0x8
+	.incbin "data/residual/TileMap_FillRect.bin"
 	.global CALLARM_ColorFadeTick
 	.thumb_func
 CALLARM_ColorFadeTick:
-	.incbin "baserom.gba", 0xDC0EC, 0x8
+	.incbin "data/residual/CALLARM_ColorFadeTick.bin"
 	.global TileMap_CopyRect
 	.thumb_func
 TileMap_CopyRect:
-	.incbin "baserom.gba", 0xDC0F4, 0x8
+	.incbin "data/residual/TileMap_CopyRect.bin"
 	.global ComputeChecksum32
 	.thumb_func
 ComputeChecksum32:
-	.incbin "baserom.gba", 0xDC0FC, 0x8
+	.incbin "data/residual/ComputeChecksum32.bin"

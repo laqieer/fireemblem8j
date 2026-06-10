@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gMonsterItemTable
 gMonsterItemTable:
-	.incbin "baserom.gba", 0x92661C, 0xFF
+	.incbin "data/residual/gMonsterItemTable.bin"

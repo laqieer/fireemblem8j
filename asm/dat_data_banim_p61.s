@@ -2,7 +2,7 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x0861f998 (US 0x085f2dc0, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_ThunderSpellBg
 Img_ThunderSpellBg:
-	.incbin "baserom.gba", 0x61F998, 0x8BC
+	.incbin "data/residual/Img_ThunderSpellBg.bin"
 	.global Pal_ThunderSpellBg
 Pal_ThunderSpellBg:
 	.incbin "graphics/banim/_us/banim/assets/pal/005F367C_Pal_ThunderSpellBg.agbpal"

@@ -86,13 +86,13 @@ Pal_EclipseSprites:
 	.incbin "graphics/banim/_us/banim/assets/pal/0065163C_Pal_EclipseSprites.agbpal"
 	.global AnimSprite_EfxHazymoonOBJ2_1_1
 AnimSprite_EfxHazymoonOBJ2_1_1:
-	.incbin "baserom.gba", 0x67E234, 0x60
+	.incbin "data/residual/AnimSprite_EfxHazymoonOBJ2_1_1.bin"
 	.global AnimSprite_EfxHazymoonOBJ2_1_2
 AnimSprite_EfxHazymoonOBJ2_1_2:
-	.incbin "baserom.gba", 0x67E294, 0x60
+	.incbin "data/residual/AnimSprite_EfxHazymoonOBJ2_1_2.bin"
 	.global AnimSprite_EfxHazymoonOBJ2_1_3
 AnimSprite_EfxHazymoonOBJ2_1_3:
-	.incbin "baserom.gba", 0x67E2F4, 0x60
+	.incbin "data/residual/AnimSprite_EfxHazymoonOBJ2_1_3.bin"
 	.global AnimSprite_EfxHazymoonOBJ2_1_4
 AnimSprite_EfxHazymoonOBJ2_1_4:
-	.incbin "baserom.gba", 0x67E354, 0x60
+	.incbin "data/residual/AnimSprite_EfxHazymoonOBJ2_1_4.bin"

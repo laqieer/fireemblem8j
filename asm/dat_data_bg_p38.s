@@ -2,4 +2,4 @@
 @ src/data/data_bg.o: region-same content at JP 0x089be3a8 (US 0x0894f3ac, shift -0xFFF91004); incbin baserom.gba
 	.global bg_Darkling_Woods_palette
 bg_Darkling_Woods_palette:
-	.incbin "baserom.gba", 0x9BE3A8, 0x100
+	.incbin "data/residual/bg_Darkling_Woods_palette.bin"

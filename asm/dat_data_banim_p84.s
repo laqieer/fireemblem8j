@@ -2,7 +2,7 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x0864796c (US 0x0861ad94, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_Banim_1
 Img_Banim_1:
-	.incbin "baserom.gba", 0x64796C, 0x8C8
+	.incbin "data/residual/Img_Banim_1.bin"
 	.global Img_Banim_2
 Img_Banim_2:
 	.incbin "graphics/banim/_us/banim/assets/img/0061B65C_Img_0861B65C.4bpp.lz"

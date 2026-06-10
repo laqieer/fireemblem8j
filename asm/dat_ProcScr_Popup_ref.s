@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global ProcScr_Popup
 ProcScr_Popup:
-	.incbin "baserom.gba", 0x5B9FAC, 0x60
+	.incbin "data/residual/ProcScr_Popup.bin"

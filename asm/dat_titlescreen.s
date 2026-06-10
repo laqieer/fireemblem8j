@@ -2,7 +2,7 @@
 @ src/titlescreen.o: region-same content at JP 0x08b3ee00 (US 0x08aa682c, shift -0x-985D4); incbin baserom.gba
 	.global gTitlescreen_0
 gTitlescreen_0:
-	.incbin "baserom.gba", 0xB3EE00, 0x2C
+	.incbin "data/residual/gTitlescreen_0.bin"
 	.global gTitlescreen_1
 gTitlescreen_1:
-	.incbin "baserom.gba", 0xB3EE2C, 0x1F8
+	.incbin "data/residual/gTitlescreen_1.bin"

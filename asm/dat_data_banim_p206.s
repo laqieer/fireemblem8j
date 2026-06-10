@@ -191,19 +191,19 @@ Pal_NaglfarSprites_A:
 	.incbin "graphics/banim/_us/banim/assets/img/006FE938_Img_NaglfarSprites_A.gbapal"
 	.global AnimSprite_NaglfarSprites_A_0
 AnimSprite_NaglfarSprites_A_0:
-	.incbin "baserom.gba", 0x72BF9C, 0x48
+	.incbin "data/residual/AnimSprite_NaglfarSprites_A_0.bin"
 	.global AnimSprite_NaglfarSprites_A_1
 AnimSprite_NaglfarSprites_A_1:
-	.incbin "baserom.gba", 0x72BFE4, 0x24
+	.incbin "data/residual/AnimSprite_NaglfarSprites_A_1.bin"
 	.global AnimSprite_Banim_49
 AnimSprite_Banim_49:
-	.incbin "baserom.gba", 0x72C008, 0x24
+	.incbin "data/residual/AnimSprite_Banim_49.bin"
 	.global AnimSprite_efxNaglfarOBJ_0
 AnimSprite_efxNaglfarOBJ_0:
-	.incbin "baserom.gba", 0x72C02C, 0x18
+	.incbin "data/residual/AnimSprite_efxNaglfarOBJ_0.bin"
 	.global AnimSprite_efxNaglfarOBJ_1
 AnimSprite_efxNaglfarOBJ_1:
-	.incbin "baserom.gba", 0x72C044, 0x18
+	.incbin "data/residual/AnimSprite_efxNaglfarOBJ_1.bin"
 	.global AnimSprite_efxNaglfarOBJ_2
 AnimSprite_efxNaglfarOBJ_2:
-	.incbin "baserom.gba", 0x72C05C, 0x24
+	.incbin "data/residual/AnimSprite_efxNaglfarOBJ_2.bin"

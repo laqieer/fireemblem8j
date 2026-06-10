@@ -2,7 +2,7 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x0875ae34 (US 0x0872e25c, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_ExcaliburBg1
 Img_ExcaliburBg1:
-	.incbin "baserom.gba", 0x75AE34, 0x3F0
+	.incbin "data/residual/Img_ExcaliburBg1.bin"
 	.global Pal_ExcaliburBg1
 Pal_ExcaliburBg1:
 	.incbin "graphics/banim/_us/banim/assets/pal/0072E64C_Pal_ExcaliburBg1.gbapal"

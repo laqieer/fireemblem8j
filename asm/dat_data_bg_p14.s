@@ -2,7 +2,7 @@
 @ src/data/data_bg.o: region-same content at JP 0x0895fbdc (US 0x08901d54, shift -0xFFFA2178); incbin baserom.gba
 	.global bg_Garden_palette
 bg_Garden_palette:
-	.incbin "baserom.gba", 0x95FBDC, 0x100
+	.incbin "data/residual/bg_Garden_palette.bin"
 	.global bg_Garden_Flashback_palette
 bg_Garden_Flashback_palette:
-	.incbin "baserom.gba", 0x95FCDC, 0x100
+	.incbin "data/residual/bg_Garden_Flashback_palette.bin"

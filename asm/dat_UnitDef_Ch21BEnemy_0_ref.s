@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global UnitDef_Ch21BEnemy_0
 UnitDef_Ch21BEnemy_0:
-	.incbin "baserom.gba", 0x91F5B8, 0x2E4
+	.incbin "data/residual/UnitDef_Ch21BEnemy_0.bin"

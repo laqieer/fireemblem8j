@@ -9,4 +9,4 @@
 	.section .data.residue.0857E32C, "a", %progbits
 	.global data_0857E32C
 data_0857E32C:
-	.incbin "baserom.gba", 0x57E32C, 0x90
+	.incbin "data/residual/data_0857E32C.bin"

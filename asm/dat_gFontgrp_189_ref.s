@@ -2,4 +2,4 @@
 @ gFontgrp_189: region-different data, JP 0x08596a1c read from funcmap-aligned code literal (US 0x0858d144); incbin baserom.gba
 	.global gFontgrp_189
 gFontgrp_189:
-	.incbin "baserom.gba", 0x596A1C, 0x48
+	.incbin "data/residual/gFontgrp_189.bin"

@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gProcScr_StatusDecayDisplay
 gProcScr_StatusDecayDisplay:
-	.incbin "baserom.gba", 0x5C6960, 0x58
+	.incbin "data/residual/gProcScr_StatusDecayDisplay.bin"

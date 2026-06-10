@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gClassReelOrderedLut
 gClassReelOrderedLut:
-	.incbin "baserom.gba", 0xAB0A44, 0x104
+	.incbin "data/residual/gClassReelOrderedLut.bin"

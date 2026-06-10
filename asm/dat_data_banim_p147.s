@@ -23,19 +23,19 @@ Tsa_HammerneBg_12:
 	.incbin "graphics/banim/_us/banim/assets/tsa/00681BA4_Tsa_08681BA4.map.bin.lz"
 	.global AnimSprite_EfxHammarneOBJ_1
 AnimSprite_EfxHammarneOBJ_1:
-	.incbin "baserom.gba", 0x6AE8B8, 0x18
+	.incbin "data/residual/AnimSprite_EfxHammarneOBJ_1.bin"
 	.global AnimSprite_EfxHammarneOBJ_2
 AnimSprite_EfxHammarneOBJ_2:
-	.incbin "baserom.gba", 0x6AE8D0, 0x24
+	.incbin "data/residual/AnimSprite_EfxHammarneOBJ_2.bin"
 	.global AnimSprite_EfxHammarneOBJ_3
 AnimSprite_EfxHammarneOBJ_3:
-	.incbin "baserom.gba", 0x6AE8F4, 0x3C
+	.incbin "data/residual/AnimSprite_EfxHammarneOBJ_3.bin"
 	.global AnimSprite_EfxHammarneOBJ_4
 AnimSprite_EfxHammarneOBJ_4:
-	.incbin "baserom.gba", 0x6AE930, 0x54
+	.incbin "data/residual/AnimSprite_EfxHammarneOBJ_4.bin"
 	.global AnimSprite_EfxHammarneOBJ_5
 AnimSprite_EfxHammarneOBJ_5:
-	.incbin "baserom.gba", 0x6AE984, 0x6C
+	.incbin "data/residual/AnimSprite_EfxHammarneOBJ_5.bin"
 	.global AnimSprite_EfxHammarneOBJ_6
 AnimSprite_EfxHammarneOBJ_6:
-	.incbin "baserom.gba", 0x6AE9F0, 0x84
+	.incbin "data/residual/AnimSprite_EfxHammarneOBJ_6.bin"

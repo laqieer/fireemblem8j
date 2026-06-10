@@ -3,4 +3,4 @@
 @ src/const_data_DAEF0.o: region-same content at JP 0x080dff70 (US 0x080daf60, shift -0x-5010); incbin baserom.gba
 	.global gUnkData_1
 gUnkData_1:
-	.incbin "baserom.gba", 0xDFF70, 0x98
+	.incbin "data/residual/gUnkData_1.bin"

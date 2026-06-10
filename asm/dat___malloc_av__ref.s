@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global __malloc_av_
 __malloc_av_:
-	.incbin "baserom.gba", 0xBB8A8C, 0x408
+	.incbin "data/residual/__malloc_av_.bin"

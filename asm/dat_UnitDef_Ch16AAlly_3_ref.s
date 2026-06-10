@@ -2,4 +2,4 @@
 @ UnitDef_Ch16AAlly_3: region-different data, JP 0x08911a20 read from funcmap-aligned code literal (US 0x088bd4fc); incbin baserom.gba
 	.global UnitDef_Ch16AAlly_3
 UnitDef_Ch16AAlly_3:
-	.incbin "baserom.gba", 0x911A20, 0x50
+	.incbin "data/residual/UnitDef_Ch16AAlly_3.bin"

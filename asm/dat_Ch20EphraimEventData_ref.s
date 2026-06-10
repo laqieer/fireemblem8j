@@ -2,4 +2,4 @@
 @ Ch20EphraimEventData: region-different data, JP 0x08a5d570 read from funcmap-aligned code literal (US 0x089eb340); incbin baserom.gba
 	.global Ch20EphraimEventData
 Ch20EphraimEventData:
-	.incbin "baserom.gba", 0xA5D570, 0x50
+	.incbin "data/residual/Ch20EphraimEventData.bin"

@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gItemUseMenuItems
 gItemUseMenuItems:
-	.incbin "baserom.gba", 0x5C4680, 0xD8
+	.incbin "data/residual/gItemUseMenuItems.bin"

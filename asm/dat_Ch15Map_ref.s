@@ -2,4 +2,4 @@
 @ Ch15Map: region-different data, JP 0x08a9b78c read from funcmap-aligned code literal (US 0x081b52cc); incbin baserom.gba
 	.global Ch15Map
 Ch15Map:
-	.incbin "baserom.gba", 0xA9B78C, 0x2C0
+	.incbin "data/residual/Ch15Map.bin"

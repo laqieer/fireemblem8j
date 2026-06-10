@@ -6,5 +6,5 @@
 	.global WfxFlamesInitGradientPublic
 	.thumb_func
 WfxFlamesInitGradientPublic:
-	.incbin "baserom.gba", 0x306A8, 0x80
+	.incbin "data/residual/WfxFlamesInitGradientPublic.bin"
 

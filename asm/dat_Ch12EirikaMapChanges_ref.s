@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global Ch12EirikaMapChanges
 Ch12EirikaMapChanges:
-	.incbin "baserom.gba", 0xA5B60C, 0x100
+	.incbin "data/residual/Ch12EirikaMapChanges.bin"

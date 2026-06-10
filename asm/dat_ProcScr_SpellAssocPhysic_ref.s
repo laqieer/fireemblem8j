@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global ProcScr_SpellAssocPhysic
 ProcScr_SpellAssocPhysic:
-	.incbin "baserom.gba", 0xA15214, 0x68
+	.incbin "data/residual/ProcScr_SpellAssocPhysic.bin"

@@ -6,10 +6,10 @@ gGfx_UnkData_0:
 	.incbin "graphics/misc_gfx2/gGfx_UnkData_0.bin.lz"
 	.global gUnkData_47
 gUnkData_47:
-	.incbin "baserom.gba", 0xA7D7A8, 0x510
+	.incbin "data/residual/gUnkData_47.bin"
 	.global gTsa_UnkData_0
 gTsa_UnkData_0:
-	.incbin "baserom.gba", 0xA7DCB8, 0x114
+	.incbin "data/residual/gTsa_UnkData_0.bin"
 	.global Img_GameOverText
 Img_GameOverText:
 	.incbin "graphics/misc_gfx2/Img_GameOverText.bin.lz"

@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global sProc_BMVSync
 sProc_BMVSync:
-	.incbin "baserom.gba", 0x5C5D98, 0x50
+	.incbin "data/residual/sProc_BMVSync.bin"

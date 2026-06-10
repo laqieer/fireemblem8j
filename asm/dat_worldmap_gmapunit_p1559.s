@@ -2,4 +2,4 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08a71050 (US 0x089fef98, shift -0xFFF8DF48); incbin baserom.gba
 	.global EventScr_Ruin_45
 EventScr_Ruin_45:
-	.incbin "baserom.gba", 0xA71050, 0xAC
+	.incbin "data/residual/EventScr_Ruin_45.bin"

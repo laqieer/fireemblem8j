@@ -9,4 +9,4 @@
 	.section .data.residue.0872CDCC, "a", %progbits
 	.global data_0872CDCC
 data_0872CDCC:
-	.incbin "baserom.gba", 0x72CDCC, 0xFC
+	.incbin "data/residual/data_0872CDCC.bin"

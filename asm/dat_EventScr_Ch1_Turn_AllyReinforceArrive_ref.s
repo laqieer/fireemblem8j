@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global EventScr_Ch1_Turn_AllyReinforceArrive
 EventScr_Ch1_Turn_AllyReinforceArrive:
-	.incbin "baserom.gba", 0xA61BA0, 0x44
+	.incbin "data/residual/EventScr_Ch1_Turn_AllyReinforceArrive.bin"

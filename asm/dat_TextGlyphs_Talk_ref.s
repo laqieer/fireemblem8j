@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global TextGlyphs_Talk
 TextGlyphs_Talk:
-	.incbin "baserom.gba", 0x593F74, 0x400
+	.incbin "data/residual/TextGlyphs_Talk.bin"

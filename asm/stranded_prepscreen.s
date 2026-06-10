@@ -6,7 +6,7 @@
 	.global GetUnitFromPrepList
 	.thumb_func
 GetUnitFromPrepList:
-	.incbin "baserom.gba", 0x97634, 0x10
+	.incbin "data/residual/GetUnitFromPrepList.bin"
 
 	.section .text.s_08097644, "ax", %progbits
 @ RegisterPrepUnitList region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -16,7 +16,7 @@ GetUnitFromPrepList:
 	.global RegisterPrepUnitList
 	.thumb_func
 RegisterPrepUnitList:
-	.incbin "baserom.gba", 0x97644, 0x10
+	.incbin "data/residual/RegisterPrepUnitList.bin"
 
 	.section .text.s_08097654, "ax", %progbits
 @ PrepGetUnitAmount region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -26,7 +26,7 @@ RegisterPrepUnitList:
 	.global PrepGetUnitAmount
 	.thumb_func
 PrepGetUnitAmount:
-	.incbin "baserom.gba", 0x97654, 0x10
+	.incbin "data/residual/PrepGetUnitAmount.bin"
 
 	.section .text.s_08097664, "ax", %progbits
 @ PrepSetUnitAmount region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -36,5 +36,5 @@ PrepGetUnitAmount:
 	.global PrepSetUnitAmount
 	.thumb_func
 PrepSetUnitAmount:
-	.incbin "baserom.gba", 0x97664, 0x10
+	.incbin "data/residual/PrepSetUnitAmount.bin"
 

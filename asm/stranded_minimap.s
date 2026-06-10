@@ -6,7 +6,7 @@
 	.global Minimap_OnHBlank
 	.thumb_func
 Minimap_OnHBlank:
-	.incbin "baserom.gba", 0xAC8DC, 0x40
+	.incbin "data/residual/Minimap_OnHBlank.bin"
 
 	.section .text.s_080AC91C, "ax", %progbits
 @ InitMinimapWindowBuffers region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -16,7 +16,7 @@ Minimap_OnHBlank:
 	.global InitMinimapWindowBuffers
 	.thumb_func
 InitMinimapWindowBuffers:
-	.incbin "baserom.gba", 0xAC91C, 0x18
+	.incbin "data/residual/InitMinimapWindowBuffers.bin"
 
 	.section .text.s_080ACE28, "ax", %progbits
 @ InitMinimapFlashPalette region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -26,5 +26,5 @@ InitMinimapWindowBuffers:
 	.global InitMinimapFlashPalette
 	.thumb_func
 InitMinimapFlashPalette:
-	.incbin "baserom.gba", 0xACE28, 0x8C
+	.incbin "data/residual/InitMinimapFlashPalette.bin"
 

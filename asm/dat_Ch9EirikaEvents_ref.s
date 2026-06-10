@@ -2,4 +2,4 @@
 @ Ch9EirikaEvents: region-different data, JP 0x08a5b264 read from funcmap-aligned code literal (US 0x089e9140); incbin baserom.gba
 	.global Ch9EirikaEvents
 Ch9EirikaEvents:
-	.incbin "baserom.gba", 0xA5B264, 0x50
+	.incbin "data/residual/Ch9EirikaEvents.bin"

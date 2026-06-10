@@ -2,4 +2,4 @@
 @ EventScr_Ch1Tut_OnBeginning: region-different data, JP 0x08a61f20 read from funcmap-aligned code literal (US 0x089efde8); incbin baserom.gba
 	.global EventScr_Ch1Tut_OnBeginning
 EventScr_Ch1Tut_OnBeginning:
-	.incbin "baserom.gba", 0xA61F20, 0x40
+	.incbin "data/residual/EventScr_Ch1Tut_OnBeginning.bin"

@@ -7,10 +7,10 @@ Img_EfxArrowOBJ:
 AnimSprite_EfxArrowObj1:
 	.global Obj_EfxArrowOBJ
 Obj_EfxArrowOBJ:
-	.incbin "baserom.gba", 0x604F10, 0x24
+	.incbin "data/residual/Obj_EfxArrowOBJ.bin"
 	.global AnimSprite_EfxArrowObj2
 AnimSprite_EfxArrowObj2:
-	.incbin "baserom.gba", 0x604F34, 0x24
+	.incbin "data/residual/AnimSprite_EfxArrowObj2.bin"
 	.global AnimSprite_EfxArrowObj3
 AnimSprite_EfxArrowObj3:
-	.incbin "baserom.gba", 0x604F58, 0x24
+	.incbin "data/residual/AnimSprite_EfxArrowObj3.bin"

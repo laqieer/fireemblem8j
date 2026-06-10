@@ -2,10 +2,10 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x085e3604 (US 0x085b9424, shift -0xFFFD5E20); incbin baserom.gba
 	.global gEkrgauge_2
 gEkrgauge_2:
-	.incbin "baserom.gba", 0x5E3604, 0x78
+	.incbin "data/residual/gEkrgauge_2.bin"
 	.global gEkrgauge_3
 gEkrgauge_3:
-	.incbin "baserom.gba", 0x5E367C, 0x54
+	.incbin "data/residual/gEkrgauge_3.bin"
 	.global gEkrgauge_4
 gEkrgauge_4:
-	.incbin "baserom.gba", 0x5E36D0, 0x54
+	.incbin "data/residual/gEkrgauge_4.bin"

@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global EventScr_Ch1Tut_EirikaVisitHouseInit
 EventScr_Ch1Tut_EirikaVisitHouseInit:
-	.incbin "baserom.gba", 0xA61D7C, 0x58
+	.incbin "data/residual/EventScr_Ch1Tut_EirikaVisitHouseInit.bin"

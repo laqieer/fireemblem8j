@@ -2,16 +2,16 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x085e3170 (US 0x085b8f90, shift -0xFFFD5E20); incbin baserom.gba
 	.global gLegacyUiFrameDPalette
 gLegacyUiFrameDPalette:
-	.incbin "baserom.gba", 0x5E3170, 0x20
+	.incbin "data/residual/gLegacyUiFrameDPalette.bin"
 	.global gUiBarPaletteD
 gUiBarPaletteD:
-	.incbin "baserom.gba", 0x5E3190, 0x40
+	.incbin "data/residual/gUiBarPaletteD.bin"
 	.global gUnkUiFrameImage
 gUnkUiFrameImage:
-	.incbin "baserom.gba", 0x5E31D0, 0x254
+	.incbin "data/residual/gUnkUiFrameImage.bin"
 	.global gUnkUiFramePalettes
 gUnkUiFramePalettes:
-	.incbin "baserom.gba", 0x5E3424, 0x80
+	.incbin "data/residual/gUnkUiFramePalettes.bin"
 	.global Img_SysGrayBox
 Img_SysGrayBox:
 	.incbin "graphics/gmapunit/Img_SysGrayBox.bin.lz"

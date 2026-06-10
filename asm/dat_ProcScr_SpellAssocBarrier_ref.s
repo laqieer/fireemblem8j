@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global ProcScr_SpellAssocBarrier
 ProcScr_SpellAssocBarrier:
-	.incbin "baserom.gba", 0xA15814, 0x88
+	.incbin "data/residual/ProcScr_SpellAssocBarrier.bin"

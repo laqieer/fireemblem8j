@@ -2,7 +2,7 @@
 @ src/data/ending/ending_details.o: region-same content at JP 0x08ac2be0 (US 0x08a3f21c, shift -0xFFF7C63C); incbin baserom.gba
 	.global gEndingDetails_0
 gEndingDetails_0:
-	.incbin "baserom.gba", 0xAC2BE0, 0x4B4
+	.incbin "data/residual/gEndingDetails_0.bin"
 	.global Pal_EndingDetails_0
 Pal_EndingDetails_0:
 	.incbin "graphics/misc_gfx2/Pal_EndingDetails_0.gbapal"

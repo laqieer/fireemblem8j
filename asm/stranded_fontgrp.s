@@ -6,7 +6,7 @@
 	.global PrintEmptyStringToDBG
 	.thumb_func
 PrintEmptyStringToDBG:
-	.incbin "baserom.gba", 0x3800, 0x14
+	.incbin "data/residual/PrintEmptyStringToDBG.bin"
 
 	.section .text.s_08003814, "ax", %progbits
 @ ClearSmallStringBuffer region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -16,7 +16,7 @@ PrintEmptyStringToDBG:
 	.global ClearSmallStringBuffer
 	.thumb_func
 ClearSmallStringBuffer:
-	.incbin "baserom.gba", 0x3814, 0x18
+	.incbin "data/residual/ClearSmallStringBuffer.bin"
 
 	.section .text.s_08003868, "ax", %progbits
 @ StoreNumberStringOrDashesToSmallBuffer region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -26,7 +26,7 @@ ClearSmallStringBuffer:
 	.global StoreNumberStringOrDashesToSmallBuffer
 	.thumb_func
 StoreNumberStringOrDashesToSmallBuffer:
-	.incbin "baserom.gba", 0x3868, 0x30
+	.incbin "data/residual/StoreNumberStringOrDashesToSmallBuffer.bin"
 
 	.section .text.s_08003898, "ax", %progbits
 @ PrintNumberToDBG region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -36,7 +36,7 @@ StoreNumberStringOrDashesToSmallBuffer:
 	.global PrintNumberToDBG
 	.thumb_func
 PrintNumberToDBG:
-	.incbin "baserom.gba", 0x3898, 0x1C
+	.incbin "data/residual/PrintNumberToDBG.bin"
 
 	.section .text.s_08003900, "ax", %progbits
 @ PrintHexNumberToDBG region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -46,7 +46,7 @@ PrintNumberToDBG:
 	.global PrintHexNumberToDBG
 	.thumb_func
 PrintHexNumberToDBG:
-	.incbin "baserom.gba", 0x3900, 0x1C
+	.incbin "data/residual/PrintHexNumberToDBG.bin"
 
 	.section .text.s_0800391C, "ax", %progbits
 @ PrintStringToDBG region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -56,7 +56,7 @@ PrintHexNumberToDBG:
 	.global PrintStringToDBG
 	.thumb_func
 PrintStringToDBG:
-	.incbin "baserom.gba", 0x391C, 0x6C
+	.incbin "data/residual/PrintStringToDBG.bin"
 
 	.section .text.s_08003A08, "ax", %progbits
 @ UpdateDBGScroll region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -66,7 +66,7 @@ PrintStringToDBG:
 	.global UpdateDBGScroll
 	.thumb_func
 UpdateDBGScroll:
-	.incbin "baserom.gba", 0x3A08, 0x68
+	.incbin "data/residual/UpdateDBGScroll.bin"
 
 	.section .text.s_08003B48, "ax", %progbits
 @ PrintNumberAsOBJ region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -76,7 +76,7 @@ UpdateDBGScroll:
 	.global PrintNumberAsOBJ
 	.thumb_func
 PrintNumberAsOBJ:
-	.incbin "baserom.gba", 0x3B48, 0x24
+	.incbin "data/residual/PrintNumberAsOBJ.bin"
 
 	.section .text.s_08003B6C, "ax", %progbits
 @ PrintHexNumberAsOBJ region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -86,7 +86,7 @@ PrintNumberAsOBJ:
 	.global PrintHexNumberAsOBJ
 	.thumb_func
 PrintHexNumberAsOBJ:
-	.incbin "baserom.gba", 0x3B6C, 0x24
+	.incbin "data/residual/PrintHexNumberAsOBJ.bin"
 
 	.section .text.s_08003C68, "ax", %progbits
 @ SetTextFont region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -96,7 +96,7 @@ PrintHexNumberAsOBJ:
 	.global SetTextFont
 	.thumb_func
 SetTextFont:
-	.incbin "baserom.gba", 0x3C68, 0x24
+	.incbin "data/residual/SetTextFont.bin"
 
 	.section .text.s_08003C8C, "ax", %progbits
 @ InitText region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -106,7 +106,7 @@ SetTextFont:
 	.global InitText
 	.thumb_func
 InitText:
-	.incbin "baserom.gba", 0x3C8C, 0x28
+	.incbin "data/residual/InitText.bin"
 
 	.section .text.s_08003CB4, "ax", %progbits
 @ InitTextDb region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -116,7 +116,7 @@ InitText:
 	.global InitTextDb
 	.thumb_func
 InitTextDb:
-	.incbin "baserom.gba", 0x3CB4, 0x28
+	.incbin "data/residual/InitTextDb.bin"
 
 	.section .text.s_08003CDC, "ax", %progbits
 @ InitTextInitInfo region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -126,7 +126,7 @@ InitTextDb:
 	.global InitTextInitInfo
 	.thumb_func
 InitTextInitInfo:
-	.incbin "baserom.gba", 0x3CDC, 0x1C
+	.incbin "data/residual/InitTextInitInfo.bin"
 
 	.section .text.s_08003D70, "ax", %progbits
 @ Text_GetChrOffset region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -136,7 +136,7 @@ InitTextInitInfo:
 	.global Text_GetChrOffset
 	.thumb_func
 Text_GetChrOffset:
-	.incbin "baserom.gba", 0x3D70, 0x10
+	.incbin "data/residual/Text_GetChrOffset.bin"
 
 	.section .text.s_08003D88, "ax", %progbits
 @ Text_Skip region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -146,7 +146,7 @@ Text_GetChrOffset:
 	.global Text_Skip
 	.thumb_func
 Text_Skip:
-	.incbin "baserom.gba", 0x3D88, 0x8
+	.incbin "data/residual/Text_Skip.bin"
 
 	.section .text.s_08003DA0, "ax", %progbits
 @ PutText region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -156,7 +156,7 @@ Text_Skip:
 	.global PutText
 	.thumb_func
 PutText:
-	.incbin "baserom.gba", 0x3DA0, 0x4C
+	.incbin "data/residual/PutText.bin"
 
 	.section .text.s_08003DEC, "ax", %progbits
 @ PutBlankText region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -166,7 +166,7 @@ PutText:
 	.global PutBlankText
 	.thumb_func
 PutBlankText:
-	.incbin "baserom.gba", 0x3DEC, 0x20
+	.incbin "data/residual/PutBlankText.bin"
 
 	.section .text.s_08004120, "ax", %progbits
 @ GetTextDrawDest region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -176,7 +176,7 @@ PutBlankText:
 	.global GetTextDrawDest
 	.thumb_func
 GetTextDrawDest:
-	.incbin "baserom.gba", 0x4120, 0x20
+	.incbin "data/residual/GetTextDrawDest.bin"
 
 	.section .text.s_080044E0, "ax", %progbits
 @ InitSpriteText region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -186,7 +186,7 @@ GetTextDrawDest:
 	.global InitSpriteText
 	.thumb_func
 InitSpriteText:
-	.incbin "baserom.gba", 0x44E0, 0x24
+	.incbin "data/residual/InitSpriteText.bin"
 
 	.section .text.s_080045E8, "ax", %progbits
 @ GetSpriteTextDrawDest region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -196,7 +196,7 @@ InitSpriteText:
 	.global GetSpriteTextDrawDest
 	.thumb_func
 GetSpriteTextDrawDest:
-	.incbin "baserom.gba", 0x45E8, 0x20
+	.incbin "data/residual/GetSpriteTextDrawDest.bin"
 
 	.section .text.s_08004874, "ax", %progbits
 @ IsTextPrinting region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -206,7 +206,7 @@ GetSpriteTextDrawDest:
 	.global IsTextPrinting
 	.thumb_func
 IsTextPrinting:
-	.incbin "baserom.gba", 0x4874, 0x8
+	.incbin "data/residual/IsTextPrinting.bin"
 
 	.section .text.s_080048E8, "ax", %progbits
 @ DrawSpecialCharGlyph_old region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -216,7 +216,7 @@ IsTextPrinting:
 	.global DrawSpecialCharGlyph_old
 	.thumb_func
 DrawSpecialCharGlyph_old:
-	.incbin "baserom.gba", 0x48E8, 0x54
+	.incbin "data/residual/DrawSpecialCharGlyph_old.bin"
 
 	.section .text.s_08004A14, "ax", %progbits
 @ PutSpecialChar region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -226,7 +226,7 @@ DrawSpecialCharGlyph_old:
 	.global PutSpecialChar
 	.thumb_func
 PutSpecialChar:
-	.incbin "baserom.gba", 0x4A14, 0x3C
+	.incbin "data/residual/PutSpecialChar.bin"
 
 	.section .text.s_08004A90, "ax", %progbits
 @ PutNumber region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -236,7 +236,7 @@ PutSpecialChar:
 	.global PutNumber
 	.thumb_func
 PutNumber:
-	.incbin "baserom.gba", 0x4A90, 0xC
+	.incbin "data/residual/PutNumber.bin"
 
 	.section .text.s_08004AEC, "ax", %progbits
 @ PutNumberSmall region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -246,5 +246,5 @@ PutNumber:
 	.global PutNumberSmall
 	.thumb_func
 PutNumberSmall:
-	.incbin "baserom.gba", 0x4AEC, 0xC
+	.incbin "data/residual/PutNumberSmall.bin"
 

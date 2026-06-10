@@ -6,5 +6,5 @@
 	.global UnitList_RegisterEquippedIcon
 	.thumb_func
 UnitList_RegisterEquippedIcon:
-	.incbin "baserom.gba", 0x92604, 0x34
+	.incbin "data/residual/UnitList_RegisterEquippedIcon.bin"
 

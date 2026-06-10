@@ -2,16 +2,16 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08aaa3cc (US 0x08a2c23c, shift -0xFFF81E70); incbin baserom.gba
 	.global gMenuMainObjs_5
 gMenuMainObjs_5:
-	.incbin "baserom.gba", 0xAAA3CC, 0x28C
+	.incbin "data/residual/gMenuMainObjs_5.bin"
 	.global gMenuSoundroom_0
 gMenuSoundroom_0:
-	.incbin "baserom.gba", 0xAAA658, 0xE0
+	.incbin "data/residual/gMenuSoundroom_0.bin"
 	.global gMenuSoundroom_1
 gMenuSoundroom_1:
-	.incbin "baserom.gba", 0xAAA738, 0x1FC
+	.incbin "data/residual/gMenuSoundroom_1.bin"
 	.global gMenuSoundroom_2
 gMenuSoundroom_2:
-	.incbin "baserom.gba", 0xAAA934, 0x94
+	.incbin "data/residual/gMenuSoundroom_2.bin"
 	.global Img_SoundRoomVolumeGraph
 Img_SoundRoomVolumeGraph:
 	.incbin "graphics/gmapunit/Img_SoundRoomVolumeGraph.bin.lz"
@@ -20,7 +20,7 @@ Pal_SoundRoomVolumeGraph:
 	.incbin "graphics/gmapunit/Pal_SoundRoomVolumeGraph.gbapal"
 	.global gMenuSoundroom_3
 gMenuSoundroom_3:
-	.incbin "baserom.gba", 0xAAAA98, 0x24
+	.incbin "data/residual/gMenuSoundroom_3.bin"
 	.global gMenuSoundroom_4
 gMenuSoundroom_4:
-	.incbin "baserom.gba", 0xAAAABC, 0x190
+	.incbin "data/residual/gMenuSoundroom_4.bin"

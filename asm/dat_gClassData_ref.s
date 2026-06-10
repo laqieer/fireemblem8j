@@ -9,4 +9,4 @@
 @ funcmap functions (GetClassData/GetCharacterData inlines + their callers).
 	.global gClassData
 gClassData:
-	.incbin "baserom.gba", 0x85B6BC, 0x29AC
+	.incbin "data/residual/gClassData.bin"

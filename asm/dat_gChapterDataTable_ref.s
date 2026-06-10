@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gChapterDataTable
 gChapterDataTable:
-	.incbin "baserom.gba", 0x904E1C, 0x2DAC
+	.incbin "data/residual/gChapterDataTable.bin"

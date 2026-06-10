@@ -6,7 +6,7 @@
 	.global ApplyColorAddition_ClampMax
 	.thumb_func
 ApplyColorAddition_ClampMax:
-	.incbin "baserom.gba", 0x1044, 0x5C
+	.incbin "data/residual/ApplyColorAddition_ClampMax.bin"
 
 	.section .text.s_080010A0, "ax", %progbits
 @ ApplyColorAddition_ClampMin region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -16,7 +16,7 @@ ApplyColorAddition_ClampMax:
 	.global ApplyColorAddition_ClampMin
 	.thumb_func
 ApplyColorAddition_ClampMin:
-	.incbin "baserom.gba", 0x10A0, 0x5C
+	.incbin "data/residual/ApplyColorAddition_ClampMin.bin"
 
 	.section .text.s_08002CD4, "ax", %progbits
 @ AllocateProcess region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -26,7 +26,7 @@ ApplyColorAddition_ClampMin:
 	.global AllocateProcess
 	.thumb_func
 AllocateProcess:
-	.incbin "baserom.gba", 0x2CD4, 0x10
+	.incbin "data/residual/AllocateProcess.bin"
 
 	.section .text.s_08002CE4, "ax", %progbits
 @ FreeProcess region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -36,7 +36,7 @@ AllocateProcess:
 	.global FreeProcess
 	.thumb_func
 FreeProcess:
-	.incbin "baserom.gba", 0x2CE4, 0x10
+	.incbin "data/residual/FreeProcess.bin"
 
 	.section .text.s_08002CF4, "ax", %progbits
 @ InsertRootProcess region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -46,7 +46,7 @@ FreeProcess:
 	.global InsertRootProcess
 	.thumb_func
 InsertRootProcess:
-	.incbin "baserom.gba", 0x2CF4, 0x24
+	.incbin "data/residual/InsertRootProcess.bin"
 
 	.section .text.s_08002D18, "ax", %progbits
 @ InsertChildProcess region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -56,7 +56,7 @@ InsertRootProcess:
 	.global InsertChildProcess
 	.thumb_func
 InsertChildProcess:
-	.incbin "baserom.gba", 0x2D18, 0x18
+	.incbin "data/residual/InsertChildProcess.bin"
 
 	.section .text.s_08002D30, "ax", %progbits
 @ UnlinkProcess region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -66,7 +66,7 @@ InsertChildProcess:
 	.global UnlinkProcess
 	.thumb_func
 UnlinkProcess:
-	.incbin "baserom.gba", 0x2D30, 0x48
+	.incbin "data/residual/UnlinkProcess.bin"
 
 	.section .text.s_08003038, "ax", %progbits
 @ ProcCmd_DELETE region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -76,7 +76,7 @@ UnlinkProcess:
 	.global ProcCmd_DELETE
 	.thumb_func
 ProcCmd_DELETE:
-	.incbin "baserom.gba", 0x3038, 0xC
+	.incbin "data/residual/ProcCmd_DELETE.bin"
 
 	.section .text.s_08003220, "ax", %progbits
 @ ProcCmd_SET_MARK region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -86,7 +86,7 @@ ProcCmd_DELETE:
 	.global ProcCmd_SET_MARK
 	.thumb_func
 ProcCmd_SET_MARK:
-	.incbin "baserom.gba", 0x3220, 0x14
+	.incbin "data/residual/ProcCmd_SET_MARK.bin"
 
 	.section .text.s_08028534, "ax", %progbits
 @ InitSupportBonuses region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -96,7 +96,7 @@ ProcCmd_SET_MARK:
 	.global InitSupportBonuses
 	.thumb_func
 InitSupportBonuses:
-	.incbin "baserom.gba", 0x28534, 0x10
+	.incbin "data/residual/InitSupportBonuses.bin"
 
 	.section .text.s_08030088, "ax", %progbits
 @ BMapVSync_OnEnd region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -106,7 +106,7 @@ InitSupportBonuses:
 	.global BMapVSync_OnEnd
 	.thumb_func
 BMapVSync_OnEnd:
-	.incbin "baserom.gba", 0x30088, 0xC
+	.incbin "data/residual/BMapVSync_OnEnd.bin"
 
 	.section .text.s_08030094, "ax", %progbits
 @ BMapVSync_OnLoop region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -116,7 +116,7 @@ BMapVSync_OnEnd:
 	.global BMapVSync_OnLoop
 	.thumb_func
 BMapVSync_OnLoop:
-	.incbin "baserom.gba", 0x30094, 0xC
+	.incbin "data/residual/BMapVSync_OnLoop.bin"
 
 	.section .text.s_08030940, "ax", %progbits
 @ WfxCloudsOffsetGraphicsEffect region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -126,7 +126,7 @@ BMapVSync_OnLoop:
 	.global WfxCloudsOffsetGraphicsEffect
 	.thumb_func
 WfxCloudsOffsetGraphicsEffect:
-	.incbin "baserom.gba", 0x30940, 0x68
+	.incbin "data/residual/WfxCloudsOffsetGraphicsEffect.bin"
 
 	.section .text.s_080D6760, "ax", %progbits
 @ __muldi3 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -136,7 +136,7 @@ WfxCloudsOffsetGraphicsEffect:
 	.global __muldi3
 	.thumb_func
 __muldi3:
-	.incbin "baserom.gba", 0xD6760, 0x70
+	.incbin "data/residual/__muldi3.bin"
 
 	.section .text.s_080D67D0, "ax", %progbits
 @ __udivsi3 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -146,7 +146,7 @@ __muldi3:
 	.global __udivsi3
 	.thumb_func
 __udivsi3:
-	.incbin "baserom.gba", 0xD67D0, 0x78
+	.incbin "data/residual/__udivsi3.bin"
 
 	.section .text.s_080D6848, "ax", %progbits
 @ __umodsi3 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -156,7 +156,7 @@ __udivsi3:
 	.global __umodsi3
 	.thumb_func
 __umodsi3:
-	.incbin "baserom.gba", 0xD6848, 0xC0
+	.incbin "data/residual/__umodsi3.bin"
 
 	.section .text.s_080D6B14, "ax", %progbits
 @ vfprintf region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -166,7 +166,7 @@ __umodsi3:
 	.global vfprintf
 	.thumb_func
 vfprintf:
-	.incbin "baserom.gba", 0xD6B14, 0x14
+	.incbin "data/residual/vfprintf.bin"
 
 	.section .text.s_080D8BE8, "ax", %progbits
 @ __sfp region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -176,7 +176,7 @@ vfprintf:
 	.global __sfp
 	.thumb_func
 __sfp:
-	.incbin "baserom.gba", 0xD8BE8, 0x74
+	.incbin "data/residual/__sfp.bin"
 
 	.section .text.s_080D9858, "ax", %progbits
 @ memchr region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -186,7 +186,7 @@ __sfp:
 	.global memchr
 	.thumb_func
 memchr:
-	.incbin "baserom.gba", 0xD9858, 0x80
+	.incbin "data/residual/memchr.bin"
 
 	.section .text.s_080D98D8, "ax", %progbits
 @ memmove region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -196,7 +196,7 @@ memchr:
 	.global memmove
 	.thumb_func
 memmove:
-	.incbin "baserom.gba", 0xD98D8, 0x88
+	.incbin "data/residual/memmove.bin"
 
 	.section .text.s_080D99C0, "ax", %progbits
 @ _Bfree region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -206,7 +206,7 @@ memmove:
 	.global _Bfree
 	.thumb_func
 _Bfree:
-	.incbin "baserom.gba", 0xD99C0, 0x18
+	.incbin "data/residual/_Bfree.bin"
 
 	.section .text.s_080D9AF4, "ax", %progbits
 @ _hi0bits region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -216,7 +216,7 @@ _Bfree:
 	.global _hi0bits
 	.thumb_func
 _hi0bits:
-	.incbin "baserom.gba", 0xD9AF4, 0x58
+	.incbin "data/residual/_hi0bits.bin"
 
 	.section .text.s_080D9EC8, "ax", %progbits
 @ __mdiff region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -226,7 +226,7 @@ _hi0bits:
 	.global __mdiff
 	.thumb_func
 __mdiff:
-	.incbin "baserom.gba", 0xD9EC8, 0xF0
+	.incbin "data/residual/__mdiff.bin"
 
 	.section .text.s_080D9FB8, "ax", %progbits
 @ _ulp region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -236,7 +236,7 @@ __mdiff:
 	.global _ulp
 	.thumb_func
 _ulp:
-	.incbin "baserom.gba", 0xD9FB8, 0x4C
+	.incbin "data/residual/_ulp.bin"
 
 	.section .text.s_080DA004, "ax", %progbits
 @ _b2d region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -246,7 +246,7 @@ _ulp:
 	.global _b2d
 	.thumb_func
 _b2d:
-	.incbin "baserom.gba", 0xDA004, 0xBC
+	.incbin "data/residual/_b2d.bin"
 
 	.section .text.s_080DA0C0, "ax", %progbits
 @ _d2b region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -256,7 +256,7 @@ _b2d:
 	.global _d2b
 	.thumb_func
 _d2b:
-	.incbin "baserom.gba", 0xDA0C0, 0xE8
+	.incbin "data/residual/_d2b.bin"
 
 	.section .text.s_080DA1A8, "ax", %progbits
 @ _ratio region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -266,7 +266,7 @@ _d2b:
 	.global _ratio
 	.thumb_func
 _ratio:
-	.incbin "baserom.gba", 0xDA1A8, 0x50
+	.incbin "data/residual/_ratio.bin"
 
 	.section .text.s_080DA238, "ax", %progbits
 @ isinf region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -276,7 +276,7 @@ _ratio:
 	.global isinf
 	.thumb_func
 isinf:
-	.incbin "baserom.gba", 0xDA238, 0x24
+	.incbin "data/residual/isinf.bin"
 
 	.section .text.s_080DA25C, "ax", %progbits
 @ isnan region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -286,7 +286,7 @@ isinf:
 	.global isnan
 	.thumb_func
 isnan:
-	.incbin "baserom.gba", 0xDA25C, 0x20
+	.incbin "data/residual/isnan.bin"
 
 	.section .text.s_080DA2A8, "ax", %progbits
 @ __sread region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -296,7 +296,7 @@ isnan:
 	.global __sread
 	.thumb_func
 __sread:
-	.incbin "baserom.gba", 0xDA2A8, 0x34
+	.incbin "data/residual/__sread.bin"
 
 	.section .text.s_080DA2DC, "ax", %progbits
 @ __swrite region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -306,7 +306,7 @@ __sread:
 	.global __swrite
 	.thumb_func
 __swrite:
-	.incbin "baserom.gba", 0xDA2DC, 0x40
+	.incbin "data/residual/__swrite.bin"
 
 	.section .text.s_080DA35C, "ax", %progbits
 @ __sclose region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -316,7 +316,7 @@ __swrite:
 	.global __sclose
 	.thumb_func
 __sclose:
-	.incbin "baserom.gba", 0xDA35C, 0x10
+	.incbin "data/residual/__sclose.bin"
 
 	.section .text.s_080DA4B8, "ax", %progbits
 @ error region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -326,7 +326,7 @@ __sclose:
 	.global error
 	.thumb_func
 error:
-	.incbin "baserom.gba", 0xDA4B8, 0x14
+	.incbin "data/residual/error.bin"
 
 	.section .text.s_080DA4CC, "ax", %progbits
 @ wrap region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -336,7 +336,7 @@ error:
 	.global wrap
 	.thumb_func
 wrap:
-	.incbin "baserom.gba", 0xDA4CC, 0x18
+	.incbin "data/residual/wrap.bin"
 
 	.section .text.s_080DA5D4, "ax", %progbits
 @ _lseek region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -346,7 +346,7 @@ wrap:
 	.global _lseek
 	.thumb_func
 _lseek:
-	.incbin "baserom.gba", 0xDA5D4, 0xC
+	.incbin "data/residual/_lseek.bin"
 
 	.section .text.s_080DA6F0, "ax", %progbits
 @ _open region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -356,7 +356,7 @@ _lseek:
 	.global _open
 	.thumb_func
 _open:
-	.incbin "baserom.gba", 0xDA6F0, 0x14
+	.incbin "data/residual/_open.bin"
 
 	.section .text.s_080DA738, "ax", %progbits
 @ _close region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -366,7 +366,7 @@ _open:
 	.global _close
 	.thumb_func
 _close:
-	.incbin "baserom.gba", 0xDA738, 0xC
+	.incbin "data/residual/_close.bin"
 
 	.section .text.s_080DA7DC, "ax", %progbits
 @ _gettimeofday region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -376,7 +376,7 @@ _close:
 	.global _gettimeofday
 	.thumb_func
 _gettimeofday:
-	.incbin "baserom.gba", 0xDA7DC, 0x2C
+	.incbin "data/residual/_gettimeofday.bin"
 
 	.section .text.s_080DA918, "ax", %progbits
 @ abort region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -386,7 +386,7 @@ _gettimeofday:
 	.global abort
 	.thumb_func
 abort:
-	.incbin "baserom.gba", 0xDA918, 0x20
+	.incbin "data/residual/abort.bin"
 
 	.section .text.s_080DA9A0, "ax", %progbits
 @ __pack_d region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -396,7 +396,7 @@ abort:
 	.global __pack_d
 	.thumb_func
 __pack_d:
-	.incbin "baserom.gba", 0xDA9A0, 0x148
+	.incbin "data/residual/__pack_d.bin"
 
 	.section .text.s_080DAAE8, "ax", %progbits
 @ __unpack_d region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -406,7 +406,7 @@ __pack_d:
 	.global __unpack_d
 	.thumb_func
 __unpack_d:
-	.incbin "baserom.gba", 0xDAAE8, 0xD8
+	.incbin "data/residual/__unpack_d.bin"
 
 	.section .text.s_080DAE2C, "ax", %progbits
 @ __adddf3 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -416,7 +416,7 @@ __unpack_d:
 	.global __adddf3
 	.thumb_func
 __adddf3:
-	.incbin "baserom.gba", 0xDAE2C, 0x30
+	.incbin "data/residual/__adddf3.bin"
 
 	.section .text.s_080DAE5C, "ax", %progbits
 @ __subdf3 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -426,7 +426,7 @@ __adddf3:
 	.global __subdf3
 	.thumb_func
 __subdf3:
-	.incbin "baserom.gba", 0xDAE5C, 0x38
+	.incbin "data/residual/__subdf3.bin"
 
 	.section .text.s_080DB488, "ax", %progbits
 @ __gtdf2 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -436,7 +436,7 @@ __subdf3:
 	.global __gtdf2
 	.thumb_func
 __gtdf2:
-	.incbin "baserom.gba", 0xDB488, 0x4C
+	.incbin "data/residual/__gtdf2.bin"
 
 	.section .text.s_080DB4D4, "ax", %progbits
 @ __gedf2 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -446,7 +446,7 @@ __gtdf2:
 	.global __gedf2
 	.thumb_func
 __gedf2:
-	.incbin "baserom.gba", 0xDB4D4, 0x4C
+	.incbin "data/residual/__gedf2.bin"
 
 	.section .text.s_080DB5B8, "ax", %progbits
 @ __floatsidf region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -456,7 +456,7 @@ __gedf2:
 	.global __floatsidf
 	.thumb_func
 __floatsidf:
-	.incbin "baserom.gba", 0xDB5B8, 0x7C
+	.incbin "data/residual/__floatsidf.bin"
 
 	.section .text.s_080DB6F8, "ax", %progbits
 @ __truncdfsf2 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -466,7 +466,7 @@ __floatsidf:
 	.global __truncdfsf2
 	.thumb_func
 __truncdfsf2:
-	.incbin "baserom.gba", 0xDB6F8, 0x44
+	.incbin "data/residual/__truncdfsf2.bin"
 
 	.section .text.s_080DB73C, "ax", %progbits
 @ __pack_f region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -476,7 +476,7 @@ __truncdfsf2:
 	.global __pack_f
 	.thumb_func
 __pack_f:
-	.incbin "baserom.gba", 0xDB73C, 0xB8
+	.incbin "data/residual/__pack_f.bin"
 
 	.section .text.s_080DB9EC, "ax", %progbits
 @ __addsf3 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -486,7 +486,7 @@ __pack_f:
 	.global __addsf3
 	.thumb_func
 __addsf3:
-	.incbin "baserom.gba", 0xDB9EC, 0x2C
+	.incbin "data/residual/__addsf3.bin"
 
 	.section .text.s_080DBA18, "ax", %progbits
 @ __subsf3 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -496,7 +496,7 @@ __addsf3:
 	.global __subsf3
 	.thumb_func
 __subsf3:
-	.incbin "baserom.gba", 0xDBA18, 0x34
+	.incbin "data/residual/__subsf3.bin"
 
 	.section .text.s_080DBC9C, "ax", %progbits
 @ __fpcmp_parts_f region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -506,7 +506,7 @@ __subsf3:
 	.global __fpcmp_parts_f
 	.thumb_func
 __fpcmp_parts_f:
-	.incbin "baserom.gba", 0xDBC9C, 0xE4
+	.incbin "data/residual/__fpcmp_parts_f.bin"
 
 	.section .text.s_080DBE38, "ax", %progbits
 @ __gtsf2 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -516,7 +516,7 @@ __fpcmp_parts_f:
 	.global __gtsf2
 	.thumb_func
 __gtsf2:
-	.incbin "baserom.gba", 0xDBE38, 0x48
+	.incbin "data/residual/__gtsf2.bin"
 
 	.section .text.s_080DBE80, "ax", %progbits
 @ __gesf2 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -526,7 +526,7 @@ __gtsf2:
 	.global __gesf2
 	.thumb_func
 __gesf2:
-	.incbin "baserom.gba", 0xDBE80, 0x48
+	.incbin "data/residual/__gesf2.bin"
 
 	.section .text.s_080DBF58, "ax", %progbits
 @ __floatsisf region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -536,7 +536,7 @@ __gesf2:
 	.global __floatsisf
 	.thumb_func
 __floatsisf:
-	.incbin "baserom.gba", 0xDBF58, 0x60
+	.incbin "data/residual/__floatsisf.bin"
 
 	.section .text.s_080DBFB8, "ax", %progbits
 @ __fixsfsi region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -546,7 +546,7 @@ __floatsisf:
 	.global __fixsfsi
 	.thumb_func
 __fixsfsi:
-	.incbin "baserom.gba", 0xDBFB8, 0x68
+	.incbin "data/residual/__fixsfsi.bin"
 
 	.section .text.s_080DC020, "ax", %progbits
 @ __negsf2 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -556,7 +556,7 @@ __fixsfsi:
 	.global __negsf2
 	.thumb_func
 __negsf2:
-	.incbin "baserom.gba", 0xDC020, 0x24
+	.incbin "data/residual/__negsf2.bin"
 
 	.section .text.s_080DC05C, "ax", %progbits
 @ __extendsfdf2 region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -566,5 +566,5 @@ __negsf2:
 	.global __extendsfdf2
 	.thumb_func
 __extendsfdf2:
-	.incbin "baserom.gba", 0xDC05C, 0x2C
+	.incbin "data/residual/__extendsfdf2.bin"
 

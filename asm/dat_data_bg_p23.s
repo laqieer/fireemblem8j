@@ -2,7 +2,7 @@
 @ src/data/data_bg.o: region-same content at JP 0x08977d10 (US 0x08914cb8, shift -0xFFF9CFA8); incbin baserom.gba
 	.global bg_Stream_map
 bg_Stream_map:
-	.incbin "baserom.gba", 0x977D10, 0x4B4
+	.incbin "data/residual/bg_Stream_map.bin"
 	.global bg_Stream_palette
 bg_Stream_palette:
-	.incbin "baserom.gba", 0x9781C4, 0x100
+	.incbin "data/residual/bg_Stream_palette.bin"

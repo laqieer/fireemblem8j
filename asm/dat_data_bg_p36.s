@@ -2,4 +2,4 @@
 @ src/data/data_bg.o: region-same content at JP 0x089b6300 (US 0x0894784c, shift -0xFFF9154C); incbin baserom.gba
 	.global bg_White_Chamber_palette
 bg_White_Chamber_palette:
-	.incbin "baserom.gba", 0x9B6300, 0x100
+	.incbin "data/residual/bg_White_Chamber_palette.bin"

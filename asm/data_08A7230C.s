@@ -9,4 +9,4 @@
 	.section .data.residue.08A7230C, "a", %progbits
 	.global data_08A7230C
 data_08A7230C:
-	.incbin "baserom.gba", 0xA7230C, 0xC
+	.incbin "data/residual/data_08A7230C.bin"

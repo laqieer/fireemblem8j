@@ -9,4 +9,4 @@
 	.section .data.residue.0855F708, "a", %progbits
 	.global data_0855F708
 data_0855F708:
-	.incbin "baserom.gba", 0x55F708, 0x20
+	.incbin "data/residual/data_0855F708.bin"

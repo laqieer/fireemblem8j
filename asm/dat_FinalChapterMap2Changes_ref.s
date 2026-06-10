@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global FinalChapterMap2Changes
 FinalChapterMap2Changes:
-	.incbin "baserom.gba", 0xA5C2E4, 0x188
+	.incbin "data/residual/FinalChapterMap2Changes.bin"

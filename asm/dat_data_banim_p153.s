@@ -65,169 +65,169 @@ Pal_HammerneSprites:
 	.incbin "graphics/banim/_us/banim/assets/pal/0068718C_Pal_HammerneSprites.gbapal"
 	.global AnimSprite_EfxSleepOBJ2_1
 AnimSprite_EfxSleepOBJ2_1:
-	.incbin "baserom.gba", 0x6B3D84, 0x24
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_1.bin"
 	.global AnimSprite_EfxSleepOBJ2_2
 AnimSprite_EfxSleepOBJ2_2:
-	.incbin "baserom.gba", 0x6B3DA8, 0x3C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_2.bin"
 	.global AnimSprite_EfxSleepOBJ2_3
 AnimSprite_EfxSleepOBJ2_3:
-	.incbin "baserom.gba", 0x6B3DE4, 0x6C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_3.bin"
 	.global AnimSprite_EfxSleepOBJ2_4
 AnimSprite_EfxSleepOBJ2_4:
-	.incbin "baserom.gba", 0x6B3E50, 0x90
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_4.bin"
 	.global AnimSprite_EfxSleepOBJ2_5
 AnimSprite_EfxSleepOBJ2_5:
-	.incbin "baserom.gba", 0x6B3EE0, 0xB4
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_5.bin"
 	.global AnimSprite_EfxSleepOBJ2_6
 AnimSprite_EfxSleepOBJ2_6:
-	.incbin "baserom.gba", 0x6B3F94, 0xC0
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_6.bin"
 	.global AnimSprite_EfxSleepOBJ2_7
 AnimSprite_EfxSleepOBJ2_7:
-	.incbin "baserom.gba", 0x6B4054, 0xD8
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_7.bin"
 	.global AnimSprite_EfxSleepOBJ2_8
 AnimSprite_EfxSleepOBJ2_8:
-	.incbin "baserom.gba", 0x6B412C, 0xF0
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_8.bin"
 	.global AnimSprite_EfxSleepOBJ2_9
 AnimSprite_EfxSleepOBJ2_9:
-	.incbin "baserom.gba", 0x6B421C, 0x108
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_9.bin"
 	.global AnimSprite_EfxSleepOBJ2_10
 AnimSprite_EfxSleepOBJ2_10:
-	.incbin "baserom.gba", 0x6B4324, 0x114
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_10.bin"
 	.global AnimSprite_EfxSleepOBJ2_11
 AnimSprite_EfxSleepOBJ2_11:
-	.incbin "baserom.gba", 0x6B4438, 0x120
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_11.bin"
 	.global AnimSprite_EfxSleepOBJ2_12
 AnimSprite_EfxSleepOBJ2_12:
-	.incbin "baserom.gba", 0x6B4558, 0x12C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_12.bin"
 	.global AnimSprite_EfxSleepOBJ2_13
 AnimSprite_EfxSleepOBJ2_13:
-	.incbin "baserom.gba", 0x6B4684, 0x120
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_13.bin"
 	.global AnimSprite_EfxSleepOBJ2_14
 AnimSprite_EfxSleepOBJ2_14:
-	.incbin "baserom.gba", 0x6B47A4, 0x120
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_14.bin"
 	.global AnimSprite_EfxSleepOBJ2_15
 AnimSprite_EfxSleepOBJ2_15:
-	.incbin "baserom.gba", 0x6B48C4, 0xD8
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_15.bin"
 	.global AnimSprite_EfxSleepOBJ2_16
 AnimSprite_EfxSleepOBJ2_16:
-	.incbin "baserom.gba", 0x6B499C, 0xB4
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_16.bin"
 	.global AnimSprite_EfxSleepOBJ2_17
 AnimSprite_EfxSleepOBJ2_17:
-	.incbin "baserom.gba", 0x6B4A50, 0x18
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_17.bin"
 	.global AnimSprite_EfxSleepOBJ2_18
 AnimSprite_EfxSleepOBJ2_18:
-	.incbin "baserom.gba", 0x6B4A68, 0x9C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_18.bin"
 	.global AnimSprite_EfxSleepOBJ2_19
 AnimSprite_EfxSleepOBJ2_19:
-	.incbin "baserom.gba", 0x6B4B04, 0x9C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_19.bin"
 	.global AnimSprite_EfxSleepOBJ2_20
 AnimSprite_EfxSleepOBJ2_20:
-	.incbin "baserom.gba", 0x6B4BA0, 0x9C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_20.bin"
 	.global AnimSprite_EfxSleepOBJ2_21
 AnimSprite_EfxSleepOBJ2_21:
-	.incbin "baserom.gba", 0x6B4C3C, 0x9C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_21.bin"
 	.global AnimSprite_EfxSleepOBJ2_22
 AnimSprite_EfxSleepOBJ2_22:
-	.incbin "baserom.gba", 0x6B4CD8, 0x90
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_22.bin"
 	.global AnimSprite_EfxSleepOBJ2_23
 AnimSprite_EfxSleepOBJ2_23:
-	.incbin "baserom.gba", 0x6B4D68, 0x90
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_23.bin"
 	.global AnimSprite_EfxSleepOBJ2_24
 AnimSprite_EfxSleepOBJ2_24:
-	.incbin "baserom.gba", 0x6B4DF8, 0x24
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_24.bin"
 	.global AnimSprite_EfxSleepOBJ2_25
 AnimSprite_EfxSleepOBJ2_25:
-	.incbin "baserom.gba", 0x6B4E1C, 0x3C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_25.bin"
 	.global AnimSprite_EfxSleepOBJ2_26
 AnimSprite_EfxSleepOBJ2_26:
-	.incbin "baserom.gba", 0x6B4E58, 0x6C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_26.bin"
 	.global AnimSprite_EfxSleepOBJ2_27
 AnimSprite_EfxSleepOBJ2_27:
-	.incbin "baserom.gba", 0x6B4EC4, 0x90
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_27.bin"
 	.global AnimSprite_EfxSleepOBJ2_28
 AnimSprite_EfxSleepOBJ2_28:
-	.incbin "baserom.gba", 0x6B4F54, 0xB4
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_28.bin"
 	.global AnimSprite_EfxSleepOBJ2_29
 AnimSprite_EfxSleepOBJ2_29:
-	.incbin "baserom.gba", 0x6B5008, 0xC0
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_29.bin"
 	.global AnimSprite_EfxSleepOBJ2_30
 AnimSprite_EfxSleepOBJ2_30:
-	.incbin "baserom.gba", 0x6B50C8, 0xD8
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_30.bin"
 	.global AnimSprite_EfxSleepOBJ2_31
 AnimSprite_EfxSleepOBJ2_31:
-	.incbin "baserom.gba", 0x6B51A0, 0xE4
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_31.bin"
 	.global AnimSprite_EfxSleepOBJ2_32
 AnimSprite_EfxSleepOBJ2_32:
-	.incbin "baserom.gba", 0x6B5284, 0xFC
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_32.bin"
 	.global AnimSprite_EfxSleepOBJ2_33
 AnimSprite_EfxSleepOBJ2_33:
-	.incbin "baserom.gba", 0x6B5380, 0x108
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_33.bin"
 	.global AnimSprite_EfxSleepOBJ2_34
 AnimSprite_EfxSleepOBJ2_34:
-	.incbin "baserom.gba", 0x6B5488, 0x114
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_34.bin"
 	.global AnimSprite_EfxSleepOBJ2_35
 AnimSprite_EfxSleepOBJ2_35:
-	.incbin "baserom.gba", 0x6B559C, 0x114
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_35.bin"
 	.global AnimSprite_EfxSleepOBJ2_36
 AnimSprite_EfxSleepOBJ2_36:
-	.incbin "baserom.gba", 0x6B56B0, 0x114
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_36.bin"
 	.global AnimSprite_EfxSleepOBJ2_37
 AnimSprite_EfxSleepOBJ2_37:
-	.incbin "baserom.gba", 0x6B57C4, 0x114
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_37.bin"
 	.global AnimSprite_EfxSleepOBJ2_38
 AnimSprite_EfxSleepOBJ2_38:
-	.incbin "baserom.gba", 0x6B58D8, 0xD8
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_38.bin"
 	.global AnimSprite_EfxSleepOBJ2_39
 AnimSprite_EfxSleepOBJ2_39:
-	.incbin "baserom.gba", 0x6B59B0, 0xC0
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_39.bin"
 	.global AnimSprite_EfxSleepOBJ2_40
 AnimSprite_EfxSleepOBJ2_40:
-	.incbin "baserom.gba", 0x6B5A70, 0x9C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_40.bin"
 	.global AnimSprite_EfxSleepOBJ2_41
 AnimSprite_EfxSleepOBJ2_41:
-	.incbin "baserom.gba", 0x6B5B0C, 0x9C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_41.bin"
 	.global AnimSprite_EfxSleepOBJ2_42
 AnimSprite_EfxSleepOBJ2_42:
-	.incbin "baserom.gba", 0x6B5BA8, 0x9C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_42.bin"
 	.global AnimSprite_EfxSleepOBJ2_43
 AnimSprite_EfxSleepOBJ2_43:
-	.incbin "baserom.gba", 0x6B5C44, 0x90
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_43.bin"
 	.global AnimSprite_EfxSleepOBJ2_44
 AnimSprite_EfxSleepOBJ2_44:
-	.incbin "baserom.gba", 0x6B5CD4, 0x90
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_44.bin"
 	.global AnimSprite_EfxSleepOBJ2_45
 AnimSprite_EfxSleepOBJ2_45:
-	.incbin "baserom.gba", 0x6B5D64, 0x30
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_45.bin"
 	.global AnimSprite_EfxSleepOBJ2_46
 AnimSprite_EfxSleepOBJ2_46:
-	.incbin "baserom.gba", 0x6B5D94, 0x48
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_46.bin"
 	.global AnimSprite_EfxSleepOBJ2_47
 AnimSprite_EfxSleepOBJ2_47:
-	.incbin "baserom.gba", 0x6B5DDC, 0x60
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_47.bin"
 	.global AnimSprite_EfxSleepOBJ2_48
 AnimSprite_EfxSleepOBJ2_48:
-	.incbin "baserom.gba", 0x6B5E3C, 0x78
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_48.bin"
 	.global AnimSprite_EfxSleepOBJ2_49
 AnimSprite_EfxSleepOBJ2_49:
-	.incbin "baserom.gba", 0x6B5EB4, 0x90
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_49.bin"
 	.global AnimSprite_EfxSleepOBJ2_50
 AnimSprite_EfxSleepOBJ2_50:
-	.incbin "baserom.gba", 0x6B5F44, 0x9C
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_50.bin"
 	.global AnimSprite_EfxSleepOBJ2_51
 AnimSprite_EfxSleepOBJ2_51:
-	.incbin "baserom.gba", 0x6B5FE0, 0xB4
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_51.bin"
 	.global AnimSprite_EfxSleepOBJ2_52
 AnimSprite_EfxSleepOBJ2_52:
-	.incbin "baserom.gba", 0x6B6094, 0xC0
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_52.bin"
 	.global AnimSprite_EfxSleepOBJ2_53
 AnimSprite_EfxSleepOBJ2_53:
-	.incbin "baserom.gba", 0x6B6154, 0xCC
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_53.bin"
 	.global AnimSprite_EfxSleepOBJ2_54
 AnimSprite_EfxSleepOBJ2_54:
-	.incbin "baserom.gba", 0x6B6220, 0xD8
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_54.bin"
 	.global AnimSprite_EfxSleepOBJ2_55
 AnimSprite_EfxSleepOBJ2_55:
-	.incbin "baserom.gba", 0x6B62F8, 0xE4
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_55.bin"
 	.global AnimSprite_EfxSleepOBJ2_56
 AnimSprite_EfxSleepOBJ2_56:
-	.incbin "baserom.gba", 0x6B63DC, 0xF0
+	.incbin "data/residual/AnimSprite_EfxSleepOBJ2_56.bin"

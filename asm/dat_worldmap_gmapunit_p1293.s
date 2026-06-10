@@ -2,19 +2,19 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x089036dc (US 0x088af150, shift -0xFFFABA74); incbin baserom.gba
 	.global AnimConf_24
 AnimConf_24:
-	.incbin "baserom.gba", 0x9036DC, 0x18
+	.incbin "data/residual/AnimConf_24.bin"
 	.global AnimConf_25
 AnimConf_25:
-	.incbin "baserom.gba", 0x9036F4, 0x18
+	.incbin "data/residual/AnimConf_25.bin"
 	.global AnimConf_26
 AnimConf_26:
-	.incbin "baserom.gba", 0x90370C, 0x18
+	.incbin "data/residual/AnimConf_26.bin"
 	.global AnimConf_27
 AnimConf_27:
-	.incbin "baserom.gba", 0x903724, 0x18
+	.incbin "data/residual/AnimConf_27.bin"
 	.global AnimConf_28
 AnimConf_28:
-	.incbin "baserom.gba", 0x90373C, 0x10
+	.incbin "data/residual/AnimConf_28.bin"
 	.global AnimConf_29
 AnimConf_29:
-	.incbin "baserom.gba", 0x90374C, 0x10
+	.incbin "data/residual/AnimConf_29.bin"

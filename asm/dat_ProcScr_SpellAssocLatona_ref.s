@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global ProcScr_SpellAssocLatona
 ProcScr_SpellAssocLatona:
-	.incbin "baserom.gba", 0xA14F24, 0x78
+	.incbin "data/residual/ProcScr_SpellAssocLatona.bin"

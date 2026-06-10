@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global ProcScr_SpellAssocMonsterStone
 ProcScr_SpellAssocMonsterStone:
-	.incbin "baserom.gba", 0xA1548C, 0xA0
+	.incbin "data/residual/ProcScr_SpellAssocMonsterStone.bin"

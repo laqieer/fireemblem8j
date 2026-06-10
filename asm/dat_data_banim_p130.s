@@ -2,79 +2,79 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086a3458 (US 0x08676880, shift -0xFFFD3428); incbin baserom.gba
 	.global AnimSprite_EfxReblowOBJ_L_1
 AnimSprite_EfxReblowOBJ_L_1:
-	.incbin "baserom.gba", 0x6A3458, 0x24
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_1.bin"
 	.global AnimSprite_EfxReblowOBJ_L_2
 AnimSprite_EfxReblowOBJ_L_2:
-	.incbin "baserom.gba", 0x6A347C, 0x30
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_2.bin"
 	.global AnimSprite_EfxReblowOBJ_L_3
 AnimSprite_EfxReblowOBJ_L_3:
-	.incbin "baserom.gba", 0x6A34AC, 0x30
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_3.bin"
 	.global AnimSprite_EfxReblowOBJ_L_4
 AnimSprite_EfxReblowOBJ_L_4:
-	.incbin "baserom.gba", 0x6A34DC, 0x48
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_4.bin"
 	.global AnimSprite_EfxReblowOBJ_L_5
 AnimSprite_EfxReblowOBJ_L_5:
-	.incbin "baserom.gba", 0x6A3524, 0x48
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_5.bin"
 	.global AnimSprite_EfxReblowOBJ_L_6
 AnimSprite_EfxReblowOBJ_L_6:
-	.incbin "baserom.gba", 0x6A356C, 0x48
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_6.bin"
 	.global AnimSprite_EfxReblowOBJ_L_7
 AnimSprite_EfxReblowOBJ_L_7:
-	.incbin "baserom.gba", 0x6A35B4, 0x60
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_7.bin"
 	.global AnimSprite_EfxReblowOBJ_L_8
 AnimSprite_EfxReblowOBJ_L_8:
-	.incbin "baserom.gba", 0x6A3614, 0x60
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_8.bin"
 	.global AnimSprite_EfxReblowOBJ_L_9
 AnimSprite_EfxReblowOBJ_L_9:
-	.incbin "baserom.gba", 0x6A3674, 0x60
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_9.bin"
 	.global AnimSprite_EfxReblowOBJ_L_10
 AnimSprite_EfxReblowOBJ_L_10:
-	.incbin "baserom.gba", 0x6A36D4, 0x60
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_10.bin"
 	.global AnimSprite_EfxReblowOBJ_L_11
 AnimSprite_EfxReblowOBJ_L_11:
-	.incbin "baserom.gba", 0x6A3734, 0x78
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_11.bin"
 	.global AnimSprite_EfxReblowOBJ_L_12
 AnimSprite_EfxReblowOBJ_L_12:
-	.incbin "baserom.gba", 0x6A37AC, 0x78
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_12.bin"
 	.global AnimSprite_EfxReblowOBJ_L_13
 AnimSprite_EfxReblowOBJ_L_13:
-	.incbin "baserom.gba", 0x6A3824, 0x60
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_13.bin"
 	.global AnimSprite_EfxReblowOBJ_L_14
 AnimSprite_EfxReblowOBJ_L_14:
-	.incbin "baserom.gba", 0x6A3884, 0x78
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_14.bin"
 	.global AnimSprite_EfxReblowOBJ_L_15
 AnimSprite_EfxReblowOBJ_L_15:
-	.incbin "baserom.gba", 0x6A38FC, 0x78
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_15.bin"
 	.global AnimSprite_EfxReblowOBJ_L_16
 AnimSprite_EfxReblowOBJ_L_16:
-	.incbin "baserom.gba", 0x6A3974, 0x54
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_16.bin"
 	.global AnimSprite_EfxReblowOBJ_L_17
 AnimSprite_EfxReblowOBJ_L_17:
-	.incbin "baserom.gba", 0x6A39C8, 0x48
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_17.bin"
 	.global AnimSprite_EfxReblowOBJ_L_18
 AnimSprite_EfxReblowOBJ_L_18:
-	.incbin "baserom.gba", 0x6A3A10, 0x3C
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_18.bin"
 	.global AnimSprite_EfxReblowOBJ_L_19
 AnimSprite_EfxReblowOBJ_L_19:
-	.incbin "baserom.gba", 0x6A3A4C, 0x30
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_19.bin"
 	.global AnimSprite_EfxReblowOBJ_L_20
 AnimSprite_EfxReblowOBJ_L_20:
-	.incbin "baserom.gba", 0x6A3A7C, 0x30
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_20.bin"
 	.global AnimSprite_EfxReblowOBJ_L_21
 AnimSprite_EfxReblowOBJ_L_21:
-	.incbin "baserom.gba", 0x6A3AAC, 0x30
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_21.bin"
 	.global AnimSprite_EfxReblowOBJ_L_22
 AnimSprite_EfxReblowOBJ_L_22:
-	.incbin "baserom.gba", 0x6A3ADC, 0x30
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_22.bin"
 	.global AnimSprite_EfxReblowOBJ_L_23
 AnimSprite_EfxReblowOBJ_L_23:
-	.incbin "baserom.gba", 0x6A3B0C, 0x30
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_23.bin"
 	.global AnimSprite_EfxReblowOBJ_L_24
 AnimSprite_EfxReblowOBJ_L_24:
-	.incbin "baserom.gba", 0x6A3B3C, 0x30
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_24.bin"
 	.global AnimSprite_EfxReblowOBJ_L_25
 AnimSprite_EfxReblowOBJ_L_25:
-	.incbin "baserom.gba", 0x6A3B6C, 0x30
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_25.bin"
 	.global AnimSprite_EfxReblowOBJ_L_26
 AnimSprite_EfxReblowOBJ_L_26:
-	.incbin "baserom.gba", 0x6A3B9C, 0x30
+	.incbin "data/residual/AnimSprite_EfxReblowOBJ_L_26.bin"

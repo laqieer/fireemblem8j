@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gProcScr_SSPageNameCtrl
 gProcScr_SSPageNameCtrl:
-	.incbin "baserom.gba", 0xA729F0, 0x40
+	.incbin "data/residual/gProcScr_SSPageNameCtrl.bin"

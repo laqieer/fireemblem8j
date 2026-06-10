@@ -6,5 +6,5 @@
 	.global SaveDraw_InitParticles
 	.thumb_func
 SaveDraw_InitParticles:
-	.incbin "baserom.gba", 0xB0004, 0x24
+	.incbin "data/residual/SaveDraw_InitParticles.bin"
 

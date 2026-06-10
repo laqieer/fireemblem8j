@@ -2,4 +2,4 @@
 @ Ch5XEvents: region-different data, JP 0x08a5ae30 read from funcmap-aligned code literal (US 0x089e8d0c); incbin baserom.gba
 	.global Ch5XEvents
 Ch5XEvents:
-	.incbin "baserom.gba", 0xA5AE30, 0x50
+	.incbin "data/residual/Ch5XEvents.bin"

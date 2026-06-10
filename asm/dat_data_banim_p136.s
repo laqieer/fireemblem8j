@@ -23,19 +23,19 @@ Tsa_RestoreBg_11:
 	.incbin "graphics/banim/_us/banim/assets/tsa/0067C09C_Tsa_0867C09C.map.bin.lz"
 	.global AnimSprite_EfxRestOBJ_1
 AnimSprite_EfxRestOBJ_1:
-	.incbin "baserom.gba", 0x6A8DB4, 0x18
+	.incbin "data/residual/AnimSprite_EfxRestOBJ_1.bin"
 	.global AnimSprite_EfxRestOBJ_2
 AnimSprite_EfxRestOBJ_2:
-	.incbin "baserom.gba", 0x6A8DCC, 0x24
+	.incbin "data/residual/AnimSprite_EfxRestOBJ_2.bin"
 	.global AnimSprite_EfxRestOBJ_3
 AnimSprite_EfxRestOBJ_3:
-	.incbin "baserom.gba", 0x6A8DF0, 0x3C
+	.incbin "data/residual/AnimSprite_EfxRestOBJ_3.bin"
 	.global AnimSprite_EfxRestOBJ_4
 AnimSprite_EfxRestOBJ_4:
-	.incbin "baserom.gba", 0x6A8E2C, 0x54
+	.incbin "data/residual/AnimSprite_EfxRestOBJ_4.bin"
 	.global AnimSprite_EfxRestOBJ_5
 AnimSprite_EfxRestOBJ_5:
-	.incbin "baserom.gba", 0x6A8E80, 0x6C
+	.incbin "data/residual/AnimSprite_EfxRestOBJ_5.bin"
 	.global AnimSprite_EfxRestOBJ_6
 AnimSprite_EfxRestOBJ_6:
-	.incbin "baserom.gba", 0x6A8EEC, 0x84
+	.incbin "data/residual/AnimSprite_EfxRestOBJ_6.bin"

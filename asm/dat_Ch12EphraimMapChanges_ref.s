@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global Ch12EphraimMapChanges
 Ch12EphraimMapChanges:
-	.incbin "baserom.gba", 0xA5C7F0, 0x184
+	.incbin "data/residual/Ch12EphraimMapChanges.bin"

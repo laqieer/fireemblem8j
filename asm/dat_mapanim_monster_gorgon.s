@@ -9,34 +9,34 @@ Pal_MonsterStoneMapAnimfx:
 	.incbin "graphics/misc_gfx/Pal_MonsterStoneMapAnimfx.gbapal"
 	.global Tsa1_MonsterStoneMapAnimfx
 Tsa1_MonsterStoneMapAnimfx:
-	.incbin "baserom.gba", 0xA27A7C, 0x20
+	.incbin "data/residual/Tsa1_MonsterStoneMapAnimfx.bin"
 	.global Tsa2_MonsterStoneMapAnimfx
 Tsa2_MonsterStoneMapAnimfx:
-	.incbin "baserom.gba", 0xA27A9C, 0x28
+	.incbin "data/residual/Tsa2_MonsterStoneMapAnimfx.bin"
 	.global Tsa3_MonsterStoneMapAnimfx
 Tsa3_MonsterStoneMapAnimfx:
-	.incbin "baserom.gba", 0xA27AC4, 0x2C
+	.incbin "data/residual/Tsa3_MonsterStoneMapAnimfx.bin"
 	.global Tsa4_MonsterStoneMapAnimfx
 Tsa4_MonsterStoneMapAnimfx:
-	.incbin "baserom.gba", 0xA27AF0, 0x34
+	.incbin "data/residual/Tsa4_MonsterStoneMapAnimfx.bin"
 	.global Tsa5_MonsterStoneMapAnimfx
 Tsa5_MonsterStoneMapAnimfx:
-	.incbin "baserom.gba", 0xA27B24, 0x38
+	.incbin "data/residual/Tsa5_MonsterStoneMapAnimfx.bin"
 	.global Tsa6_MonsterStoneMapAnimfx
 Tsa6_MonsterStoneMapAnimfx:
-	.incbin "baserom.gba", 0xA27B5C, 0x40
+	.incbin "data/residual/Tsa6_MonsterStoneMapAnimfx.bin"
 	.global Tsa7_MonsterStoneMapAnimfx
 Tsa7_MonsterStoneMapAnimfx:
-	.incbin "baserom.gba", 0xA27B9C, 0x40
+	.incbin "data/residual/Tsa7_MonsterStoneMapAnimfx.bin"
 	.global Tsa8_MonsterStoneMapAnimfx
 Tsa8_MonsterStoneMapAnimfx:
-	.incbin "baserom.gba", 0xA27BDC, 0x48
+	.incbin "data/residual/Tsa8_MonsterStoneMapAnimfx.bin"
 	.global Tsa9_MonsterStoneMapAnimfx
 Tsa9_MonsterStoneMapAnimfx:
-	.incbin "baserom.gba", 0xA27C24, 0x3C
+	.incbin "data/residual/Tsa9_MonsterStoneMapAnimfx.bin"
 	.global Tsa10_MonsterStoneMapAnimfx
 Tsa10_MonsterStoneMapAnimfx:
-	.incbin "baserom.gba", 0xA27C60, 0x38
+	.incbin "data/residual/Tsa10_MonsterStoneMapAnimfx.bin"
 	.global Img_GorgonHatchCloud
 Img_GorgonHatchCloud:
 	.incbin "graphics/misc_gfx/Img_GorgonHatchCloud.bin.lz"

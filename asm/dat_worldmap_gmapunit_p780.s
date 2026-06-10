@@ -2,4 +2,4 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x085fe3e8 (US 0x085d41b8, shift -0xFFFD5DD0); incbin baserom.gba
 	.global AnimSprite_EkrBaseKaiten_71
 AnimSprite_EkrBaseKaiten_71:
-	.incbin "baserom.gba", 0x5FE3E8, 0xA8
+	.incbin "data/residual/AnimSprite_EkrBaseKaiten_71.bin"

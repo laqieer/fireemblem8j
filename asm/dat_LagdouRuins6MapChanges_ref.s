@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global LagdouRuins6MapChanges
 LagdouRuins6MapChanges:
-	.incbin "baserom.gba", 0xA5E038, 0x124
+	.incbin "data/residual/LagdouRuins6MapChanges.bin"

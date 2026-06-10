@@ -4,7 +4,7 @@
 song051_agbfe3_bgm_theme_5_003:
 	.global song051_agbfe3_bgm_theme_5_B1
 song051_agbfe3_bgm_theme_5_B1:
-	.incbin "baserom.gba", 0x55C861, 0x42
+	.incbin "data/residual/song051_agbfe3_bgm_theme_5_B1.bin"
 	.global song051_agbfe3_bgm_theme_5_004
 song051_agbfe3_bgm_theme_5_004:
-	.incbin "baserom.gba", 0x55C8A3, 0x42
+	.incbin "data/residual/song051_agbfe3_bgm_theme_5_004.bin"

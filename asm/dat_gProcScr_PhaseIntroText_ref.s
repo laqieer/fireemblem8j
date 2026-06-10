@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gProcScr_PhaseIntroText
 gProcScr_PhaseIntroText:
-	.incbin "baserom.gba", 0x5C3378, 0x48
+	.incbin "data/residual/gProcScr_PhaseIntroText.bin"

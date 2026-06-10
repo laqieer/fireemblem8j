@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global impure_data
 impure_data:
-	.incbin "baserom.gba", 0xBB8788, 0x2EC
+	.incbin "data/residual/impure_data.bin"

@@ -2,10 +2,10 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086aaa28 (US 0x0867de50, shift -0xFFFD3428); incbin baserom.gba
 	.global AnimSprite_EfxRestOBJ_25
 AnimSprite_EfxRestOBJ_25:
-	.incbin "baserom.gba", 0x6AAA28, 0x180
+	.incbin "data/residual/AnimSprite_EfxRestOBJ_25.bin"
 	.global AnimSprite_EfxRestOBJ_26
 AnimSprite_EfxRestOBJ_26:
-	.incbin "baserom.gba", 0x6AABA8, 0x168
+	.incbin "data/residual/AnimSprite_EfxRestOBJ_26.bin"
 	.global AnimSprite_EfxRestOBJ_27
 AnimSprite_EfxRestOBJ_27:
-	.incbin "baserom.gba", 0x6AAD10, 0x150
+	.incbin "data/residual/AnimSprite_EfxRestOBJ_27.bin"

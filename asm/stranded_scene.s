@@ -6,7 +6,7 @@
 	.global StartTalk
 	.thumb_func
 StartTalk:
-	.incbin "baserom.gba", 0x6974, 0xC
+	.incbin "data/residual/StartTalk.bin"
 
 	.section .text.s_080079AC, "ax", %progbits
 @ TalkFaceMove_OnInit region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -16,7 +16,7 @@ StartTalk:
 	.global TalkFaceMove_OnInit
 	.thumb_func
 TalkFaceMove_OnInit:
-	.incbin "baserom.gba", 0x79AC, 0x5C
+	.incbin "data/residual/TalkFaceMove_OnInit.bin"
 
 	.section .text.s_080088B4, "ax", %progbits
 @ SetTalkFaceMouthMove region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -26,7 +26,7 @@ TalkFaceMove_OnInit:
 	.global SetTalkFaceMouthMove
 	.thumb_func
 SetTalkFaceMouthMove:
-	.incbin "baserom.gba", 0x88B4, 0xC
+	.incbin "data/residual/SetTalkFaceMouthMove.bin"
 
 	.section .text.s_080088C0, "ax", %progbits
 @ SetTalkFaceNoMouthMove region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -36,5 +36,5 @@ SetTalkFaceMouthMove:
 	.global SetTalkFaceNoMouthMove
 	.thumb_func
 SetTalkFaceNoMouthMove:
-	.incbin "baserom.gba", 0x88C0, 0xC
+	.incbin "data/residual/SetTalkFaceNoMouthMove.bin"
 

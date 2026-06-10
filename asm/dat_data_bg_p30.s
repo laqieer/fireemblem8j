@@ -2,7 +2,7 @@
 @ src/data/data_bg.o: region-same content at JP 0x08998e80 (US 0x0892d5e4, shift -0xFFF94764); incbin baserom.gba
 	.global bg_Fort_Sunset_map
 bg_Fort_Sunset_map:
-	.incbin "baserom.gba", 0x998E80, 0x4B4
+	.incbin "data/residual/bg_Fort_Sunset_map.bin"
 	.global bg_Fort_Sunset_palette
 bg_Fort_Sunset_palette:
-	.incbin "baserom.gba", 0x999334, 0x100
+	.incbin "data/residual/bg_Fort_Sunset_palette.bin"

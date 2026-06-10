@@ -2,28 +2,28 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08a74fec (US 0x08a02f34, shift -0xFFF8DF48); incbin baserom.gba
 	.global gUnkData_35
 gUnkData_35:
-	.incbin "baserom.gba", 0xA74FEC, 0x60
+	.incbin "data/residual/gUnkData_35.bin"
 	.global gUnkData_36
 gUnkData_36:
-	.incbin "baserom.gba", 0xA7504C, 0x60
+	.incbin "data/residual/gUnkData_36.bin"
 	.global gUnkData_37
 gUnkData_37:
-	.incbin "baserom.gba", 0xA750AC, 0x60
+	.incbin "data/residual/gUnkData_37.bin"
 	.global gUnkData_38
 gUnkData_38:
-	.incbin "baserom.gba", 0xA7510C, 0x238
+	.incbin "data/residual/gUnkData_38.bin"
 	.global gUnkData_39
 gUnkData_39:
-	.incbin "baserom.gba", 0xA75344, 0x20
+	.incbin "data/residual/gUnkData_39.bin"
 	.global gUnkData_40
 gUnkData_40:
-	.incbin "baserom.gba", 0xA75364, 0x88
+	.incbin "data/residual/gUnkData_40.bin"
 	.global gUnkData_41
 gUnkData_41:
-	.incbin "baserom.gba", 0xA753EC, 0x20
+	.incbin "data/residual/gUnkData_41.bin"
 	.global gUnkData_42
 gUnkData_42:
-	.incbin "baserom.gba", 0xA7540C, 0x14
+	.incbin "data/residual/gUnkData_42.bin"
 	.global Img_StatscreenBG
 Img_StatscreenBG:
 	.incbin "graphics/gmapunit/Img_StatscreenBG.bin.lz"
@@ -59,16 +59,16 @@ gPal_UnkData_0:
 	.incbin "graphics/gmapunit/gPal_UnkData_0.gbapal"
 	.global gUnkData_43
 gUnkData_43:
-	.incbin "baserom.gba", 0xA79BA2, 0x20
+	.incbin "data/residual/gUnkData_43.bin"
 	.global gUnkData_44
 gUnkData_44:
-	.incbin "baserom.gba", 0xA79BC2, 0xE0
+	.incbin "data/residual/gUnkData_44.bin"
 	.global gUnkData_45
 gUnkData_45:
-	.incbin "baserom.gba", 0xA79CA2, 0x20
+	.incbin "data/residual/gUnkData_45.bin"
 	.global gUnkData_46
 gUnkData_46:
-	.incbin "baserom.gba", 0xA79CC2, 0x4E
+	.incbin "data/residual/gUnkData_46.bin"
 	.global gPal_UnkData_1
 gPal_UnkData_1:
 	.incbin "graphics/gmapunit/gPal_UnkData_1.gbapal"

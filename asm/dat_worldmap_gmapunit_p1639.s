@@ -5,7 +5,7 @@ Img_MenuStatus_0:
 	.incbin "graphics/gmapunit/Img_MenuStatus_0.bin.lz"
 	.global gMenuStatus_0
 gMenuStatus_0:
-	.incbin "baserom.gba", 0xAAF5F4, 0x60
+	.incbin "data/residual/gMenuStatus_0.bin"
 	.global Pal_MenuStatus_0
 Pal_MenuStatus_0:
 	.incbin "graphics/gmapunit/Pal_MenuStatus_0.gbapal"

@@ -2,7 +2,7 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x086122f0 (US 0x085e5718, shift -0xFFFD3428); incbin baserom.gba
 	.global AnimSprite_DarkBreathOBJ_Close17
 AnimSprite_DarkBreathOBJ_Close17:
-	.incbin "baserom.gba", 0x6122F0, 0x6C
+	.incbin "data/residual/AnimSprite_DarkBreathOBJ_Close17.bin"
 	.global AnimSprite_DarkBreathOBJ_Close18
 AnimSprite_DarkBreathOBJ_Close18:
-	.incbin "baserom.gba", 0x61235C, 0x78
+	.incbin "data/residual/AnimSprite_DarkBreathOBJ_Close18.bin"

@@ -10,25 +10,25 @@ Img_WmHightLightMapFrecia:
 Ap_WmHightLightMapFrecia:
 	.global Ap_WmHightLightMapFrecia_motion
 Ap_WmHightLightMapFrecia_motion:
-	.incbin "baserom.gba", 0xB2449C, 0x4
+	.incbin "data/residual/Ap_WmHightLightMapFrecia_motion.bin"
 	.global Ap_WmHightLightMapFrecia_frame_list
 Ap_WmHightLightMapFrecia_frame_list:
-	.incbin "baserom.gba", 0xB244A0, 0x4
+	.incbin "data/residual/Ap_WmHightLightMapFrecia_frame_list.bin"
 	.global Ap_WmHightLightMapFrecia_anim_list
 Ap_WmHightLightMapFrecia_anim_list:
-	.incbin "baserom.gba", 0xB244A4, 0x4
+	.incbin "data/residual/Ap_WmHightLightMapFrecia_anim_list.bin"
 	.global Ap_WmHightLightMapFrecia_frame_0
 Ap_WmHightLightMapFrecia_frame_0:
-	.incbin "baserom.gba", 0xB244A8, 0x3E
+	.incbin "data/residual/Ap_WmHightLightMapFrecia_frame_0.bin"
 	.global Ap_WmHightLightMapFrecia_frame_1
 Ap_WmHightLightMapFrecia_frame_1:
-	.incbin "baserom.gba", 0xB244E6, 0x14
+	.incbin "data/residual/Ap_WmHightLightMapFrecia_frame_1.bin"
 	.global Ap_WmHightLightMapFrecia_anim_0
 Ap_WmHightLightMapFrecia_anim_0:
-	.incbin "baserom.gba", 0xB244FA, 0x8
+	.incbin "data/residual/Ap_WmHightLightMapFrecia_anim_0.bin"
 	.global Ap_WmHightLightMapFrecia_anim_1
 Ap_WmHightLightMapFrecia_anim_1:
-	.incbin "baserom.gba", 0xB24502, 0xA
+	.incbin "data/residual/Ap_WmHightLightMapFrecia_anim_1.bin"
 	.global Img_WmHightLightMap2
 Img_WmHightLightMap2:
 	.incbin "graphics/misc_gfx3/Img_WmHightLightMap2.bin.lz"
@@ -36,22 +36,22 @@ Img_WmHightLightMap2:
 Ap_WmHightLightMap2:
 	.global Ap_WmHightLightMap2_motion
 Ap_WmHightLightMap2_motion:
-	.incbin "baserom.gba", 0xB24BD0, 0x4
+	.incbin "data/residual/Ap_WmHightLightMap2_motion.bin"
 	.global Ap_WmHightLightMap2_frame_list
 Ap_WmHightLightMap2_frame_list:
-	.incbin "baserom.gba", 0xB24BD4, 0x4
+	.incbin "data/residual/Ap_WmHightLightMap2_frame_list.bin"
 	.global Ap_WmHightLightMap2_anim_list
 Ap_WmHightLightMap2_anim_list:
-	.incbin "baserom.gba", 0xB24BD8, 0x4
+	.incbin "data/residual/Ap_WmHightLightMap2_anim_list.bin"
 	.global Ap_WmHightLightMap2_frame_0
 Ap_WmHightLightMap2_frame_0:
-	.incbin "baserom.gba", 0xB24BDC, 0xF8
+	.incbin "data/residual/Ap_WmHightLightMap2_frame_0.bin"
 	.global Ap_WmHightLightMap2_frame_1
 Ap_WmHightLightMap2_frame_1:
-	.incbin "baserom.gba", 0xB24CD4, 0x26
+	.incbin "data/residual/Ap_WmHightLightMap2_frame_1.bin"
 	.global Ap_WmHightLightMap2_anim_0
 Ap_WmHightLightMap2_anim_0:
-	.incbin "baserom.gba", 0xB24CFA, 0x8
+	.incbin "data/residual/Ap_WmHightLightMap2_anim_0.bin"
 	.global Ap_WmHightLightMap2_anim_1
 Ap_WmHightLightMap2_anim_1:
-	.incbin "baserom.gba", 0xB24D02, 0xA
+	.incbin "data/residual/Ap_WmHightLightMap2_anim_1.bin"

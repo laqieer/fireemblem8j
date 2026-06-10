@@ -17,13 +17,13 @@ Pal_ArenaBattleBg_C:
 	.incbin "graphics/gmapunit/Pal_ArenaBattleBg_C.gbapal"
 	.global gEfxlvupfx_1
 gEfxlvupfx_1:
-	.incbin "baserom.gba", 0x5E9344, 0x3E8
+	.incbin "data/residual/gEfxlvupfx_1.bin"
 	.global gEfxlvupfx_2
 gEfxlvupfx_2:
-	.incbin "baserom.gba", 0x5E972C, 0x100
+	.incbin "data/residual/gEfxlvupfx_2.bin"
 	.global gEfxlvupfx_3
 gEfxlvupfx_3:
-	.incbin "baserom.gba", 0x5E982C, 0x10C
+	.incbin "data/residual/gEfxlvupfx_3.bin"
 	.global Img1_EfxLvupBG
 Img1_EfxLvupBG:
-	.incbin "baserom.gba", 0x5E9938, 0xBD8
+	.incbin "data/residual/Img1_EfxLvupBG.bin"

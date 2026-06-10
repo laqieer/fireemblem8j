@@ -2,7 +2,7 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x0856e0d8 (US 0x0857e428, shift -0x10350); incbin baserom.gba
 	.global song184_se_bmp_area_open1_1
 song184_se_bmp_area_open1_1:
-	.incbin "baserom.gba", 0x56E0D8, 0x31
+	.incbin "data/residual/song184_se_bmp_area_open1_1.bin"
 	.global song184_se_bmp_area_open1_2
 song184_se_bmp_area_open1_2:
-	.incbin "baserom.gba", 0x56E109, 0x6B
+	.incbin "data/residual/song184_se_bmp_area_open1_2.bin"

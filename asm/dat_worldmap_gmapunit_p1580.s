@@ -11,40 +11,40 @@ gPal_PlayerInterface_Green:
 	.incbin "graphics/gmapunit/gPal_PlayerInterface_Green.gbapal"
 	.global gTSA_UnitInfoWindow
 gTSA_UnitInfoWindow:
-	.incbin "baserom.gba", 0xA93138, 0x40
+	.incbin "data/residual/gTSA_UnitInfoWindow.bin"
 	.global gTSA_TerrainBox
 gTSA_TerrainBox:
-	.incbin "baserom.gba", 0xA93178, 0x58
+	.incbin "data/residual/gTSA_TerrainBox.bin"
 	.global gTSA_MinimugBox
 gTSA_MinimugBox:
-	.incbin "baserom.gba", 0xA931D0, 0x130
+	.incbin "data/residual/gTSA_MinimugBox.bin"
 	.global gUnkData_50
 gUnkData_50:
-	.incbin "baserom.gba", 0xA93300, 0x14
+	.incbin "data/residual/gUnkData_50.bin"
 	.global gUnkData_51
 gUnkData_51:
-	.incbin "baserom.gba", 0xA93314, 0x14
+	.incbin "data/residual/gUnkData_51.bin"
 	.global gUnkData_52
 gUnkData_52:
-	.incbin "baserom.gba", 0xA93328, 0x14
+	.incbin "data/residual/gUnkData_52.bin"
 	.global gUnkData_53
 gUnkData_53:
-	.incbin "baserom.gba", 0xA9333C, 0x14
+	.incbin "data/residual/gUnkData_53.bin"
 	.global gUnkData_54
 gUnkData_54:
-	.incbin "baserom.gba", 0xA93350, 0x38
+	.incbin "data/residual/gUnkData_54.bin"
 	.global gUnkData_55
 gUnkData_55:
-	.incbin "baserom.gba", 0xA93388, 0x14
+	.incbin "data/residual/gUnkData_55.bin"
 	.global gUnkData_56
 gUnkData_56:
-	.incbin "baserom.gba", 0xA9339C, 0x14
+	.incbin "data/residual/gUnkData_56.bin"
 	.global gUnkData_57
 gUnkData_57:
-	.incbin "baserom.gba", 0xA933B0, 0x14
+	.incbin "data/residual/gUnkData_57.bin"
 	.global gUnkData_58
 gUnkData_58:
-	.incbin "baserom.gba", 0xA933C4, 0x14
+	.incbin "data/residual/gUnkData_58.bin"
 	.global Tsa_TerrainMapUi_Labels
 Tsa_TerrainMapUi_Labels:
 	.incbin "graphics/gmapunit/Tsa_TerrainMapUi_Labels.bin"

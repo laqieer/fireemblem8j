@@ -206,6 +206,20 @@ asm/direct_sound_data.o: $(DIRECT_SOUND_BINS)
 BANIM_OAM_BINS := $(wildcard data/banim/*.bin)
 asm/data_banim.o $(patsubst %.s,%.o,$(wildcard asm/dat_banim_ekrdragonfx_*.s asm/dat_banim_ekrskill_*.s)): $(BANIM_OAM_BINS)
 
+# Residual DATA (Phase 1 final self-containment sweep): every remaining
+# NON-SOUND `.incbin "baserom.gba"` was re-rooted onto a COMMITTED,
+# descriptively-named `data/residual/<symbol>.bin` (the JP bytes, byte-identical
+# by construction -- region-different game-data tables, residue blobs, opaque
+# graphics, and the genuinely-foreign ARM helpers; fireemblem8u's "commit a named
+# .bin for opaque data" model). baserom.gba is NOT in this chain. Each `.s` that
+# `.incbin`s a data/residual/*.bin must rebuild when its .bin changes; the set of
+# such objects is derived by grep at parse time (the .bin are committed leaves --
+# no recipe, so no generic %.bin rule outside sound/). See
+# scripts/extract_residual_data.py and docs/decomp-completion-standard.md.
+RESIDUAL_BINS := $(wildcard data/residual/*.bin)
+RESIDUAL_OBJS := $(patsubst %.s,%.o,$(shell grep -lr 'data/residual/' asm --include='*.s' 2>/dev/null))
+$(RESIDUAL_OBJS): $(RESIDUAL_BINS)
+
 #### Asset (graphics) rules ####
 # Generic source-asset pipeline, ported from ../fireemblem8u. These turn the
 # COMMITTED editable source (PNG / JASC .pal) into the raw GBA bytes the ROM

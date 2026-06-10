@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global ProcScr_MapAnimDefaultItemEffect
 ProcScr_MapAnimDefaultItemEffect:
-	.incbin "baserom.gba", 0xA14DEC, 0xB8
+	.incbin "data/residual/ProcScr_MapAnimDefaultItemEffect.bin"

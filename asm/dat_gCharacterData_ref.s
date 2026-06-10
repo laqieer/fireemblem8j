@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gCharacterData
 gCharacterData:
-	.incbin "baserom.gba", 0x8582BC, 0x3400
+	.incbin "data/residual/gCharacterData.bin"

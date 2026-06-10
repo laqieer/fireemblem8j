@@ -23,43 +23,43 @@ Pal_DivineSprites:
 	.incbin "graphics/banim/_us/banim/assets/pal/00645F44_Pal_DivineSprites.gbapal"
 	.global AnimSprite_EfxDevineOBJ_1
 AnimSprite_EfxDevineOBJ_1:
-	.incbin "baserom.gba", 0x672B3C, 0x84
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_1.bin"
 	.global AnimSprite_EfxDevineOBJ_2
 AnimSprite_EfxDevineOBJ_2:
-	.incbin "baserom.gba", 0x672BC0, 0x84
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_2.bin"
 	.global AnimSprite_EfxDevineOBJ_3
 AnimSprite_EfxDevineOBJ_3:
-	.incbin "baserom.gba", 0x672C44, 0x6C
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_3.bin"
 	.global AnimSprite_EfxDevineOBJ_4
 AnimSprite_EfxDevineOBJ_4:
-	.incbin "baserom.gba", 0x672CB0, 0x6C
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_4.bin"
 	.global AnimSprite_EfxDevineOBJ_5
 AnimSprite_EfxDevineOBJ_5:
-	.incbin "baserom.gba", 0x672D1C, 0x6C
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_5.bin"
 	.global AnimSprite_EfxDevineOBJ_6
 AnimSprite_EfxDevineOBJ_6:
-	.incbin "baserom.gba", 0x672D88, 0x54
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_6.bin"
 	.global AnimSprite_EfxDevineOBJ_7
 AnimSprite_EfxDevineOBJ_7:
-	.incbin "baserom.gba", 0x672DDC, 0x6C
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_7.bin"
 	.global AnimSprite_EfxDevineOBJ_8
 AnimSprite_EfxDevineOBJ_8:
-	.incbin "baserom.gba", 0x672E48, 0x6C
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_8.bin"
 	.global AnimSprite_EfxDevineOBJ_9
 AnimSprite_EfxDevineOBJ_9:
-	.incbin "baserom.gba", 0x672EB4, 0x3C
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_9.bin"
 	.global AnimSprite_EfxDevineOBJ_10
 AnimSprite_EfxDevineOBJ_10:
-	.incbin "baserom.gba", 0x672EF0, 0x84
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_10.bin"
 	.global AnimSprite_EfxDevineOBJ_11
 AnimSprite_EfxDevineOBJ_11:
-	.incbin "baserom.gba", 0x672F74, 0x90
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_11.bin"
 	.global AnimSprite_EfxDevineOBJ_12
 AnimSprite_EfxDevineOBJ_12:
-	.incbin "baserom.gba", 0x673004, 0x6C
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_12.bin"
 	.global AnimSprite_EfxDevineOBJ_13
 AnimSprite_EfxDevineOBJ_13:
-	.incbin "baserom.gba", 0x673070, 0x3C
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_13.bin"
 	.global AnimSprite_EfxDevineOBJ_14
 AnimSprite_EfxDevineOBJ_14:
-	.incbin "baserom.gba", 0x6730AC, 0x24
+	.incbin "data/residual/AnimSprite_EfxDevineOBJ_14.bin"

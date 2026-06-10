@@ -2,16 +2,16 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x085e4088 (US 0x085b9e58, shift -0xFFFD5DD0); incbin baserom.gba
 	.global TsaConf_BanimTmA1
 TsaConf_BanimTmA1:
-	.incbin "baserom.gba", 0x5E4088, 0x98
+	.incbin "data/residual/TsaConf_BanimTmA1.bin"
 	.global TsaConf_BanimTmA2
 TsaConf_BanimTmA2:
-	.incbin "baserom.gba", 0x5E4120, 0x98
+	.incbin "data/residual/TsaConf_BanimTmA2.bin"
 	.global TsaConf_BanimTmA3
 TsaConf_BanimTmA3:
-	.incbin "baserom.gba", 0x5E41B8, 0x98
+	.incbin "data/residual/TsaConf_BanimTmA3.bin"
 	.global TsaConf_BanimTmA4
 TsaConf_BanimTmA4:
-	.incbin "baserom.gba", 0x5E4250, 0x98
+	.incbin "data/residual/TsaConf_BanimTmA4.bin"
 	.global Img_NODAMGEMIS
 Img_NODAMGEMIS:
 	.incbin "graphics/gmapunit/Img_NODAMGEMIS.bin.lz"

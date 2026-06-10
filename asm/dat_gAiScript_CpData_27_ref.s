@@ -2,4 +2,4 @@
 @ gAiScript_CpData_27: region-different data, JP 0x085d2ee8 read from funcmap-aligned code literal (US 0x085a8fe0); incbin baserom.gba
 	.global gAiScript_CpData_27
 gAiScript_CpData_27:
-	.incbin "baserom.gba", 0x5D2EE8, 0x60
+	.incbin "data/residual/gAiScript_CpData_27.bin"

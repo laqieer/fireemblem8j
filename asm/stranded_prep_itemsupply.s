@@ -6,5 +6,5 @@
 	.global PrepItemSupply_DrawConvoyWeaponIconTiles
 	.thumb_func
 PrepItemSupply_DrawConvoyWeaponIconTiles:
-	.incbin "baserom.gba", 0x9FB74, 0x40
+	.incbin "data/residual/PrepItemSupply_DrawConvoyWeaponIconTiles.bin"
 

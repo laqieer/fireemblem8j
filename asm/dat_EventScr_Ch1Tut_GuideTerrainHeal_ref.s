@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global EventScr_Ch1Tut_GuideTerrainHeal
 EventScr_Ch1Tut_GuideTerrainHeal:
-	.incbin "baserom.gba", 0xA61EE0, 0x40
+	.incbin "data/residual/EventScr_Ch1Tut_GuideTerrainHeal.bin"

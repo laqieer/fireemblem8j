@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gEfxSelfThunderBGFrames
 gEfxSelfThunderBGFrames:
-	.incbin "baserom.gba", 0x855DF8, 0x154
+	.incbin "data/residual/gEfxSelfThunderBGFrames.bin"

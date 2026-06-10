@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global EventScr_Ch7_BeginningScene
 EventScr_Ch7_BeginningScene:
-	.incbin "baserom.gba", 0xA64CC0, 0x170
+	.incbin "data/residual/EventScr_Ch7_BeginningScene.bin"

@@ -2,4 +2,4 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x0891d288 (US 0x088c8e20, shift -0xFFFABB98); incbin baserom.gba
 	.global UnitDef_Ch18BAlly_1
 UnitDef_Ch18BAlly_1:
-	.incbin "baserom.gba", 0x91D288, 0x8C
+	.incbin "data/residual/UnitDef_Ch18BAlly_1.bin"

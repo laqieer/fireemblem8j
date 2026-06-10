@@ -2,4 +2,4 @@
 @ EventListScr_Ch1_Character: region-different data, JP 0x08a5a7e4 read from funcmap-aligned code literal (US 0x089e86c0); incbin baserom.gba
 	.global EventListScr_Ch1_Character
 EventListScr_Ch1_Character:
-	.incbin "baserom.gba", 0xA5A7E4, 0x44
+	.incbin "data/residual/EventListScr_Ch1_Character.bin"

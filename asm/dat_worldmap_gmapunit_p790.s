@@ -2,4 +2,4 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x086012c8 (US 0x085d7030, shift -0xFFFD5D68); incbin baserom.gba
 	.global gLunaBgScrollOffsets
 gLunaBgScrollOffsets:
-	.incbin "baserom.gba", 0x6012C8, 0xC0
+	.incbin "data/residual/gLunaBgScrollOffsets.bin"

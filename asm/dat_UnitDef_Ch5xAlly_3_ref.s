@@ -2,4 +2,4 @@
 @ UnitDef_Ch5xAlly_3: region-different data, JP 0x0890a504 read from funcmap-aligned code literal (US 0x088b5f7c); incbin baserom.gba
 	.global UnitDef_Ch5xAlly_3
 UnitDef_Ch5xAlly_3:
-	.incbin "baserom.gba", 0x90A504, 0x50
+	.incbin "data/residual/UnitDef_Ch5xAlly_3.bin"

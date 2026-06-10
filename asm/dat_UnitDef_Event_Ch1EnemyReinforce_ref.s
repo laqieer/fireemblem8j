@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global UnitDef_Event_Ch1EnemyReinforce
 UnitDef_Event_Ch1EnemyReinforce:
-	.incbin "baserom.gba", 0x908740, 0x50
+	.incbin "data/residual/UnitDef_Event_Ch1EnemyReinforce.bin"

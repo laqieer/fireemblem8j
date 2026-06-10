@@ -5,19 +5,19 @@ Pal_ExcaliburSprites:
 	.incbin "graphics/banim/_us/banim/assets/pal/00730780_Pal_ExcaliburSprites.gbapal"
 	.global AnimSprite_EfxExcalibur_1
 AnimSprite_EfxExcalibur_1:
-	.incbin "baserom.gba", 0x75D378, 0x54
+	.incbin "data/residual/AnimSprite_EfxExcalibur_1.bin"
 	.global AnimSprite_EfxExcalibur_2
 AnimSprite_EfxExcalibur_2:
-	.incbin "baserom.gba", 0x75D3CC, 0x54
+	.incbin "data/residual/AnimSprite_EfxExcalibur_2.bin"
 	.global AnimSprite_EfxExcalibur_3
 AnimSprite_EfxExcalibur_3:
-	.incbin "baserom.gba", 0x75D420, 0x54
+	.incbin "data/residual/AnimSprite_EfxExcalibur_3.bin"
 	.global AnimSprite_EfxExcalibur_4
 AnimSprite_EfxExcalibur_4:
-	.incbin "baserom.gba", 0x75D474, 0x54
+	.incbin "data/residual/AnimSprite_EfxExcalibur_4.bin"
 	.global AnimSprite_EfxExcalibur_5
 AnimSprite_EfxExcalibur_5:
-	.incbin "baserom.gba", 0x75D4C8, 0x54
+	.incbin "data/residual/AnimSprite_EfxExcalibur_5.bin"
 	.global AnimSprite_EfxExcalibur_6
 AnimSprite_EfxExcalibur_6:
-	.incbin "baserom.gba", 0x75D51C, 0x54
+	.incbin "data/residual/AnimSprite_EfxExcalibur_6.bin"

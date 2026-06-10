@@ -3,13 +3,13 @@
 @ src/data/ui/particles_fx.o: region-same content at JP 0x085cbfe4 (US 0x085a3ac0, shift -0x-28524); incbin baserom.gba
 	.global gParticlesFx_3
 gParticlesFx_3:
-	.incbin "baserom.gba", 0x5CBFE4, 0x40
+	.incbin "data/residual/gParticlesFx_3.bin"
 	.global gParticlesFx_4
 gParticlesFx_4:
-	.incbin "baserom.gba", 0x5CC024, 0x51C
+	.incbin "data/residual/gParticlesFx_4.bin"
 	.global gParticlesFx_5
 gParticlesFx_5:
-	.incbin "baserom.gba", 0x5CC540, 0x20
+	.incbin "data/residual/gParticlesFx_5.bin"
 	.global Img_LightRune
 Img_LightRune:
 	.incbin "graphics/misc_gfx2/Img_LightRune.bin.lz"

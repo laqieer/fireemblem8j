@@ -2,4 +2,4 @@
 @ src/data/data_bg.o: region-same content at JP 0x0895b51c (US 0x088fd8d8, shift -0xFFFA23BC); incbin baserom.gba
 	.global bg_Gate_palette
 bg_Gate_palette:
-	.incbin "baserom.gba", 0x95B51C, 0x100
+	.incbin "data/residual/bg_Gate_palette.bin"

@@ -8,7 +8,7 @@ Pal_HealSprites_Sparkles:
 	.incbin "graphics/banim/_us/banim/assets/pal/00670528_Pal_HealSprites_Sparkles.gbapal"
 	.global Img_EfxLiveBG_B
 Img_EfxLiveBG_B:
-	.incbin "baserom.gba", 0x69D120, 0x7F8
+	.incbin "data/residual/Img_EfxLiveBG_B.bin"
 	.global Tsa_EfxLiveBG_B_L
 Tsa_EfxLiveBG_B_L:
 	.incbin "graphics/banim/_us/banim/assets/tsa/00670D40_Tsa_EfxLiveBG_B_L.map.bin"

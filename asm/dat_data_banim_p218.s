@@ -14,7 +14,7 @@ Pal_Banim_7:
 	.incbin "graphics/banim/_us/banim/assets/pal/00725DAC_Pal_08725DAC.gbapal"
 	.global Img_ShineBg1
 Img_ShineBg1:
-	.incbin "baserom.gba", 0x7529A4, 0x1228
+	.incbin "data/residual/Img_ShineBg1.bin"
 	.global Pal_ShineBg_0
 Pal_ShineBg_0:
 	.incbin "graphics/banim/_us/banim/assets/pal/00726FF4_Pal_ShineBg_08726FF4.gbapal"
@@ -26,7 +26,7 @@ Tsa_ShineBg1_Right:
 	.incbin "graphics/banim/_us/banim/assets/tsa/00727510_Tsa_ShineBg1_Right.map.bin.lz"
 	.global Img_ShineBg2
 Img_ShineBg2:
-	.incbin "baserom.gba", 0x754544, 0x2DC
+	.incbin "data/residual/Img_ShineBg2.bin"
 	.global Pal_ShineBg2
 Pal_ShineBg2:
 	.incbin "graphics/banim/_us/banim/assets/pal/00727C48_Pal_ShineBg2.gbapal"

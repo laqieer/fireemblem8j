@@ -5,4 +5,4 @@ Pal_DifficultyMenuObjs:
 	.incbin "graphics/gmapunit/Pal_DifficultyMenuObjs.gbapal"
 	.global gMenuMainObjs_0
 gMenuMainObjs_0:
-	.incbin "baserom.gba", 0xAA7114, 0xC0
+	.incbin "data/residual/gMenuMainObjs_0.bin"

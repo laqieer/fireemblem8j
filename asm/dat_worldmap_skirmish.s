@@ -11,4 +11,4 @@ Pal_WmPlaceDot_Standard:
 	.incbin "graphics/misc_gfx2/Pal_WmPlaceDot_Standard.gbapal"
 	.global gWorldmapSkirmish_0
 gWorldmapSkirmish_0:
-	.incbin "baserom.gba", 0xB269BC, 0xB0
+	.incbin "data/residual/gWorldmapSkirmish_0.bin"

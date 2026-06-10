@@ -8,34 +8,34 @@ Pal_StoneSprites:
 	.incbin "graphics/banim/_us/banim/assets/pal/006BD76C_Pal_StoneSprites.gbapal"
 	.global AnimSprite_EfxStone_1
 AnimSprite_EfxStone_1:
-	.incbin "baserom.gba", 0x6EA364, 0x24
+	.incbin "data/residual/AnimSprite_EfxStone_1.bin"
 	.global AnimSprite_EfxStone_2
 AnimSprite_EfxStone_2:
-	.incbin "baserom.gba", 0x6EA388, 0x24
+	.incbin "data/residual/AnimSprite_EfxStone_2.bin"
 	.global AnimSprite_EfxStone_3
 AnimSprite_EfxStone_3:
-	.incbin "baserom.gba", 0x6EA3AC, 0x3C
+	.incbin "data/residual/AnimSprite_EfxStone_3.bin"
 	.global AnimSprite_EfxStone_4
 AnimSprite_EfxStone_4:
-	.incbin "baserom.gba", 0x6EA3E8, 0x3C
+	.incbin "data/residual/AnimSprite_EfxStone_4.bin"
 	.global AnimSprite_EfxStone_5
 AnimSprite_EfxStone_5:
-	.incbin "baserom.gba", 0x6EA424, 0x6C
+	.incbin "data/residual/AnimSprite_EfxStone_5.bin"
 	.global AnimSprite_EfxStone_6
 AnimSprite_EfxStone_6:
-	.incbin "baserom.gba", 0x6EA490, 0x6C
+	.incbin "data/residual/AnimSprite_EfxStone_6.bin"
 	.global AnimSprite_EfxStone_7
 AnimSprite_EfxStone_7:
-	.incbin "baserom.gba", 0x6EA4FC, 0x3C
+	.incbin "data/residual/AnimSprite_EfxStone_7.bin"
 	.global AnimSprite_EfxStone_8
 AnimSprite_EfxStone_8:
-	.incbin "baserom.gba", 0x6EA538, 0x3C
+	.incbin "data/residual/AnimSprite_EfxStone_8.bin"
 	.global AnimSprite_EfxStone_9
 AnimSprite_EfxStone_9:
-	.incbin "baserom.gba", 0x6EA574, 0x3C
+	.incbin "data/residual/AnimSprite_EfxStone_9.bin"
 	.global AnimSprite_EfxStone_10
 AnimSprite_EfxStone_10:
-	.incbin "baserom.gba", 0x6EA5B0, 0x3C
+	.incbin "data/residual/AnimSprite_EfxStone_10.bin"
 	.global AnimSprite_EfxStone_11
 AnimSprite_EfxStone_11:
-	.incbin "baserom.gba", 0x6EA5EC, 0x3C
+	.incbin "data/residual/AnimSprite_EfxStone_11.bin"

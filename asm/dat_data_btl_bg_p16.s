@@ -2,10 +2,10 @@
 @ src/data/data_btl_bg.o: region-same content at JP 0x087e1810 (US 0x0878d2b8, shift -0xFFFABAA8); incbin baserom.gba
 	.global btl_bg_66_palette
 btl_bg_66_palette:
-	.incbin "baserom.gba", 0x7E1810, 0x100
+	.incbin "data/residual/btl_bg_66_palette.bin"
 	.global btl_bg_67_palette
 btl_bg_67_palette:
-	.incbin "baserom.gba", 0x7E1910, 0xF8
+	.incbin "data/residual/btl_bg_67_palette.bin"
 	.global btl_bg_68_palette
 btl_bg_68_palette:
-	.incbin "baserom.gba", 0x7E1A08, 0x50
+	.incbin "data/residual/btl_bg_68_palette.bin"
