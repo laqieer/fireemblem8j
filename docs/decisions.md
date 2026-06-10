@@ -1628,3 +1628,57 @@ unit; `make check` (git-tracked-objects gate) catches a stranded state.
 name that must alias an already-carved data symbol at a fixed address); the whole **m4a** TU (compiler-config
 region-diff); the **C99/other NOCOMPILE** functions (need C89 conversion); and the truly region-different
 bodies. These want m2c→permuter or a dedicated placed-local-static carve helper, not this fast path.
+
+## D39 — NAMED-SYMBOLS axis (DATA side): name `data_<addr>` residue from US correspondence (2026-06-10)
+
+**Context.** Branch `feat/naming-1` (DATA-side naming agent; a sibling graduates `sub_` code
+labels concurrently — function labels untouched to avoid collision). The NAMED-SYMBOLS axis
+(scripts/calcprogress.py) counts `.global` labels; `data_<addr>`/`sub_`/`nullsub_`/`banim_`/
+`gfx_`/`snd_` are placeholders → UNNAMED. DATA side = the 655 `data_<addr>` residue objects
+(scripts/carve_incbin_residue.py: raw-ROM incbin gaps left between named objects, deliberately
+NOT semantically claimed — by construction the region-DIFFERENT long tail, since region-same
+data was already US-named by carve_data.py).
+
+**Method — byte-neutral rename/split from authoritative US correspondence.** Renaming is
+byte-neutral (the linked ROM depends on symbol ADDRESSES, not names; `make compare` proves it).
+A residue chunk's START maps to a named US data symbol either DIRECTLY (same JP addr is a US
+sym) or via the code-reference-derived `layout/addr_map.tsv` (conflicts=0, locally monotonic —
+deltas drift smoothly, not randomly). The US name describes the object's region-STABLE role
+(which chapter's EventScr / which reinforcement REDA / which UI ProcScr), so it is the honest
+descriptive name for the JP bytes too (D10 integrity line: "the JP version of named object X").
+A chunk that spans a contiguous run of several US objects is SPLIT into that many named JP
+labels — but ONLY when the interior boundaries pass an authority tier:
+
+  * **addr_map** — each interior US addr maps back to jp=us_addr−delta (conflicts=0).
+  * **EventScr** — every boundary (incl. chunk start/end) is immediately preceded by the
+    event-script ENDA terminator word 0x00000120 (EvtReturn). Structural decode of the format.
+  * **ProcScr** — every boundary preceded by a full 8-byte PROC_END {0x00,0,0} command.
+  * **REDA/UnitDef fixed-stride family** — every segment BETWEEN consecutive addr_map-confirmed
+    boundaries has identical JP/US total size (proven: 69/69 confirmed segments matched exactly
+    → no entries are redistributed across arrays; reinforcement/placement counts are region-
+    stable game design FE8 does not change region-to-region). Within a confirmed segment the
+    known-size 8B/20B objects tile the region-stable structure exactly.
+
+Validated at a fork by Copilot CLI: TIER B (size-tiling without per-boundary addr_map) is
+acceptable IFF backed by a structural boundary decode (ENDA/PROC_END) — which is exactly the
+EventScr/ProcScr validators. Names are quality-filtered (libc/compiler-internal symbols —
+leading `_`/`.`, `.N` temp suffix — rejected). The splitter slices the committed
+`data/residual/data_<addr>.bin` (NOT baserom.gba) so self-containment stays 100%.
+
+**Tooling.** scripts/rename_data_syms.py (single-label rename, refuses if target already a
+label or referenced from C), scripts/build_data_name_candidates.py (authoritative candidate
+builder), scripts/split_data_residue.py (byte-neutral multi-object split). Every batch gated:
+`make check` + `make compare` + `make clean && make compare` (all OK) + self-containment 100%.
+
+**Result.** 6 batches, **+234 named labels**: 32 single renames (EventScr/UnitDef/banim
+terrain), 44 addr_map-confirmed splits, 51 EventScr ENDA splits, 73 + 23 REDA/UnitDef family
+splits, 11 ProcScr PROC_END splits. **NAMED SYMBOLS 58.58% (11572) → 59.27% (11806)**.
+
+**Stopping point / what remains.** ~8 residue chunks (~44 names: Banim configs, gWorldmap/
+gWmSkirmish/gpAi tables, Ap animation-pointer arrays, gGameOptions, mixed ProcScr+lut blocks)
+have NO addr_map-confirmed interior boundaries AND no single clean terminator format. Naming
+them would require bespoke per-type decoders or accept mis-split risk — below the integrity bar
+("only rename with an authoritative US name"). Left as `data_<addr>` residue. The other 561
+residue chunks have no US correspondence at all (genuinely unidentified gaps — incbin in US too,
+per D10). The `banim_`/`gfx_` placeholders (1583+104) are already descriptive US asset names
+penalized only by the regex prefix — a separate axis-definition question, not addressed here.
