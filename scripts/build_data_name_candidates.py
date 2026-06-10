@@ -158,14 +158,17 @@ def main():
         all_eventscr = (all(n.startswith("EventScr") for _, n in parts)
                         and all(rom[b - BASE - 4:b - BASE] == ENDA for b in bounds)
                         and rom[j - BASE - 4:j - BASE] == ENDA)
-        # REDA: fixed 8-byte-stride reinforcement arrays. region-different bytes but
-        # region-STABLE structure (unit counts identical JP<->US). Accept when every
-        # boundary is 8-aligned AND every segment BETWEEN consecutive addr_map-confirmed
-        # boundaries has identical JP/US total size (proven: redistributing entries
-        # across arrays would be a game-design change FE8 does not make region-to-region).
+        # Fixed-stride table FAMILY (REDA reinforcement arrays = 8B stride; UnitDef
+        # unit-placement structs = 20B stride). region-different bytes but region-STABLE
+        # structure (unit/reinforcement counts identical JP<->US — placing a unit
+        # differently or adding/removing a reinforcement is a game-design change FE8
+        # does not make region-to-region). Accept when EVERY segment between consecutive
+        # addr_map-confirmed boundaries has identical JP/US total size (so no bytes are
+        # redistributed across confirmed boundaries; within a confirmed segment the
+        # known-size US objects tile the region-stable structure exactly).
+        FAMILY = ("REDA", "UnitDef")
         reda_ok = False
-        if all(n.startswith("REDA") for _, n in parts) \
-                and all((a - ua) % 8 == 0 for a in objs):
+        if all(any(n.startswith(p) for p in FAMILY) for _, n in parts):
             confjp = [j]
             confus = [ua]
             for a in objs[1:]:
