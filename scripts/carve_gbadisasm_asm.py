@@ -399,6 +399,14 @@ def main():
     elif args[0] == "--batch":
         N = int(args[1])
         targets = [a for a, m, n, g in sorted(funcs.values())][:N]
+    elif args[0] == "--range":
+        # --range LO HI [N]: carve uncarved candidates with LO <= addr < HI,
+        # optionally capped to the next N (for parallel range-partitioned carving).
+        lo, hi = int(args[1], 16), int(args[2], 16)
+        N = int(args[3]) if len(args) > 3 else None
+        targets = [a for a, m, n, g in sorted(funcs.values()) if lo <= a < hi]
+        if N is not None:
+            targets = targets[:N]
     else:
         targets = [int(a, 16) for a in args]
 
