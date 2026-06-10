@@ -35,13 +35,13 @@ ApConf_MapAnimBerserkfx_anim_0:
 	.incbin "baserom.gba", 0xA227F6, 0x6A
 	.global Img_ManimSilenceObjfx
 Img_ManimSilenceObjfx:
-	.incbin "baserom.gba", 0xA22860, 0x440
+	.incbin "graphics/misc_gfx3/Img_ManimSilenceObjfx.bin.lz"
 	.global Img_ManimSilenceBgfx
 Img_ManimSilenceBgfx:
-	.incbin "baserom.gba", 0xA22CA0, 0x110
+	.incbin "graphics/misc_gfx3/Img_ManimSilenceBgfx.bin.lz"
 	.global Pal_ManimSilencefx
 Pal_ManimSilencefx:
-	.incbin "baserom.gba", 0xA22DB0, 0x20
+	.incbin "graphics/misc_gfx3/Pal_ManimSilencefx.gbapal"
 	.global ApConf_ManimSilencefx
 ApConf_ManimSilencefx:
 	.global ApConf_ManimSilencefx_motion

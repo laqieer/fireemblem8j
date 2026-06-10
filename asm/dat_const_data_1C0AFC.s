@@ -3,10 +3,10 @@
 @ src/data/const_data_1C0AFC.o: region-same content at JP 0x081b04b4 (US 0x081c0afc, shift -0x10648); incbin baserom.gba
 	.global gPal_StoneShatterAnim
 gPal_StoneShatterAnim:
-	.incbin "baserom.gba", 0x1B04B4, 0x20
+	.incbin "graphics/misc_gfx3/gPal_StoneShatterAnim.gbapal"
 	.global gImg_StoneShatterAnim
 gImg_StoneShatterAnim:
-	.incbin "baserom.gba", 0x1B04D4, 0xDE4
+	.incbin "graphics/misc_gfx3/gImg_StoneShatterAnim.bin.lz"
 	.global gTsa_StoneShatter_0
 gTsa_StoneShatter_0:
 	.incbin "baserom.gba", 0x1B12B8, 0x4C

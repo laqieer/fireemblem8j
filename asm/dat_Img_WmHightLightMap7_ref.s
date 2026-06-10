@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global Img_WmHightLightMap7
 Img_WmHightLightMap7:
-	.incbin "baserom.gba", 0xB25FEC, 0x388
+	.incbin "graphics/misc_gfx3/Img_WmHightLightMap7.bin.lz"

@@ -2,10 +2,10 @@
 @ src/data/worldmap/anim_worldmap_highlight.o: region-same content at JP 0x08b23f00 (US 0x08a9e688, shift -0x-85878); incbin baserom.gba
 	.global Pal_WmHighLightNationMap
 Pal_WmHighLightNationMap:
-	.incbin "baserom.gba", 0xB23F00, 0x40
+	.incbin "graphics/misc_gfx3/Pal_WmHighLightNationMap.gbapal"
 	.global Img_WmHightLightMapFrecia
 Img_WmHightLightMapFrecia:
-	.incbin "baserom.gba", 0xB23F40, 0x55C
+	.incbin "graphics/misc_gfx3/Img_WmHightLightMapFrecia.bin.lz"
 	.global Ap_WmHightLightMapFrecia
 Ap_WmHightLightMapFrecia:
 	.global Ap_WmHightLightMapFrecia_motion
@@ -31,7 +31,7 @@ Ap_WmHightLightMapFrecia_anim_1:
 	.incbin "baserom.gba", 0xB24502, 0xA
 	.global Img_WmHightLightMap2
 Img_WmHightLightMap2:
-	.incbin "baserom.gba", 0xB2450C, 0x6C4
+	.incbin "graphics/misc_gfx3/Img_WmHightLightMap2.bin.lz"
 	.global Ap_WmHightLightMap2
 Ap_WmHightLightMap2:
 	.global Ap_WmHightLightMap2_motion
