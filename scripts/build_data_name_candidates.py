@@ -37,7 +37,8 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 BASE = 0x08000000
-ENDA = bytes([0x20, 0x01, 0x00, 0x00])
+ENDA = bytes([0x20, 0x01, 0x00, 0x00])   # event-script EvtReturn (EV_CMD_END,ENDA)
+PROC_END = bytes(8)                      # proc-script {0x00,0x0000,0} = 8 zero bytes
 US_SYMS = "/tmp/us_syms.tsv"
 
 
@@ -158,6 +159,13 @@ def main():
         all_eventscr = (all(n.startswith("EventScr") for _, n in parts)
                         and all(rom[b - BASE - 4:b - BASE] == ENDA for b in bounds)
                         and rom[j - BASE - 4:j - BASE] == ENDA)
+        # proc scripts (ProcScr/sProcScr/gProcScr): each script's last command is the
+        # 8-byte PROC_END {0x00,0,0}. region-different bytes (dataPtr/dataImm differ) but
+        # region-stable command count. Validate every boundary (incl. chunk start) is
+        # immediately preceded by a full PROC_END command — a real script boundary.
+        all_procscr = (all(re.match(r"[sg]?ProcScr", n) for _, n in parts)
+                       and all(rom[b - BASE - 8:b - BASE] == PROC_END for b in bounds)
+                       and rom[j - BASE - 8:j - BASE] == PROC_END)
         # Fixed-stride table FAMILY (REDA reinforcement arrays = 8B stride; UnitDef
         # unit-placement structs = 20B stride). region-different bytes but region-STABLE
         # structure (unit/reinforcement counts identical JP<->US — placing a unit
@@ -185,6 +193,9 @@ def main():
         elif all_eventscr:
             spec.append({"start": j, "end": e, "parts": parts})
             counts["eventscr"] += 1
+        elif all_procscr:
+            spec.append({"start": j, "end": e, "parts": parts})
+            counts["procscr"] = counts.get("procscr", 0) + 1
         elif reda_ok:
             spec.append({"start": j, "end": e, "parts": parts})
             counts["reda"] = counts.get("reda", 0) + 1
@@ -194,6 +205,7 @@ def main():
     print(f"candidates: {len(spec)} chunks, {total} names")
     print(f"  single-object renames        : {counts['single']}")
     print(f"  EventScr ENDA-validated splits: {counts['eventscr']}")
+    print(f"  ProcScr PROC_END-validated    : {counts.get('procscr', 0)}")
     print(f"  addr_map-confirmed splits     : {counts['addrmap_multi']}")
     print(f"  REDA stride-validated splits  : {counts.get('reda', 0)}")
     if "--show" in sys.argv:
