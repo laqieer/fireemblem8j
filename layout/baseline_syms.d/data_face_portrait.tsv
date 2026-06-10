@@ -1,0 +1,8 @@
+# code-grind: bind face portrait_data[] as an ABS baseline_syms symbol so
+# GetPortraitData graduates. JP base 0x08901138 = the function's literal pool value
+# 0x0890111C (= portrait_data - sizeof(struct FaceData)=0x1C, from the "fid-1"
+# indexing in asm/GetPortraitData.s) + 0x1C. Bytes are provided by the data-4
+# frontier blob frontier_df4_banim_b (gap70); pure ABS name binding, no bytes, no
+# conflict (D34 class-2). extern-declared in include/face.h; graduated file prepends
+# an extern.
+portrait_data	08901138	data	codegrind_face_portrait

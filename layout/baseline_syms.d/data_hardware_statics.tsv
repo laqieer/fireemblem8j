@@ -13,3 +13,8 @@ sOamLo	03000028	data	phase1_hardware_statics
 gKeyStatusIgnoredSt	0300000E	data	codegrind_hardware_statics
 gUnk_34	03000014	data	codegrind_hardware_statics
 gUnk_35	03000015	data	codegrind_hardware_statics
+# HBlank handler function-pointer statics (Set{Primary,Secondary}HBlankHandler):
+#   sHBlankHandler1 0x030030D4 (asm/SetPrimaryHBlankHandler.s)
+#   sHBlankHandler2 0x030036E8 (asm/SetSecondaryHBlankHandler.s)
+sHBlankHandler1	030030D4	data	codegrind_hardware_statics
+sHBlankHandler2	030036E8	data	codegrind_hardware_statics

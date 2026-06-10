@@ -1,0 +1,2 @@
+001D28	001D3C	src/SetPrimaryHBlankHandler.o(.text)	SetPrimaryHBlankHandler (manual graduate; extern prepend)
+001D3C	001D50	src/SetSecondaryHBlankHandler.o(.text)	SetSecondaryHBlankHandler (manual graduate; extern prepend)
