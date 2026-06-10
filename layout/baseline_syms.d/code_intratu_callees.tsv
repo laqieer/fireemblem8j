@@ -1,0 +1,7 @@
+# code-grind: name a still-asm intra-TU callee (region-different sub_<addr> in JP,
+# no funcmap match) so the US-named caller graduates to matching C. Pure thumb name
+# alias for the still-asm function (asm bytes unchanged); JP address is the bl target
+# in the caller's asm, position-matched to the US call site.
+#   ArenaSetFallbackWeaponForUnit  bmarena  ArenaSetFallbackWeaponsMaybe
+#     -> bl sub_8031EC0  JP 0x08031EC0
+ArenaSetFallbackWeaponForUnit	08031EC0	thumb	codegrind_intratu_callees
