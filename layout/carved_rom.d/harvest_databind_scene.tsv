@@ -1,0 +1,7 @@
+0086A0	008708	src/scene_080086A0.o(.text)	scene_080086A0(run): TalkOpen_OnEnd, TalkOpen_InitBlend
+00904C	009088	src/scene_0800904C.o(.text)	scene_0800904C(run): StartScreenFlashing
+007BD0	007CA0	src/scene_08007BD0.o(.text)	scene_08007BD0(run): Talk_Nop, StartTalkWaitForInput, StartTalkWaitForInputUnk...
+008E2C	008EA4	src/scene_08008E2C.o(.text)	scene_08008E2C(run): SpriteTextScroll_BlockWhileActive, SpriteTextScroll_OnEnd, StartSpriteTextScroll...
+00773C	007758	src/scene_0800773C.o(.text)	scene_0800773C(run): SetActiveTalkFace, SetupFaceGfxDataInBanim
+00783C	00785C	src/scene_0800783C.o(.text)	scene_0800783C(run): StartTalkFace
+0087A4	008808	src/scene_080087A4.o(.text)	scene_080087A4(run): StartTalkOpen

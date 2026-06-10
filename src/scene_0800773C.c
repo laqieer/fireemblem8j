@@ -1,0 +1,33 @@
+/* TU-private data externs bound at their JP addresses */
+extern struct FaceVramEntry FaceConfig_FightEvent[];
+extern struct TalkState* sTalkState;
+#include "global.h"
+#include "proc.h"
+#include "ctc.h"
+#include "hardware.h"
+#include "fontgrp.h"
+#include "bmio.h"
+#include "bm.h"
+#include "event.h"
+#include "m4a.h"
+#include "soundwrapper.h"
+#include "face.h"
+#include "bmunit.h"
+#include "uiutils.h"
+#include "ekrbattle.h"
+#include "bmlib.h"
+#include "bmshop.h"
+#include "scene.h"
+#include "constants/songs.h"
+
+//! FE8U = 0x08007838
+int SetActiveTalkFace(int slot) {
+    sTalkState->activeFaceSlot = slot;
+    return slot;
+}
+
+//! FE8U = 0x08007844
+void SetupFaceGfxDataInBanim(void) {
+    SetupFaceGfxData(FaceConfig_FightEvent);
+    return;
+}

@@ -31,6 +31,80 @@ def carved_objs():
     return {m.group(1) for m in (re.search(r"(src/\S+\.o)\(", l) for l in open("layout/carved_rom.tsv")) if m}
 
 
+def _us_extern_decl(us_src, sym):
+    """An `extern` declaration for a TU-private file-scope symbol `sym`, parsed
+    from its US definition (for the func_only data-binding path). Returns the decl
+    string (no initializer, no storage class), or None if `sym` has no plain
+    file-scope object definition (e.g. it's an enum constant -> emit the enum).
+
+    Handles `static struct Text sTalkText[3];`, `struct TalkState* CONST_DATA
+    sTalkState = &..;`, `static int sTalkChoiceResult;` etc. -> `extern struct Text
+    sTalkText[];` / `extern struct TalkState* sTalkState;` / `extern int
+    sTalkChoiceResult;`. An enum constant (PAGENAME_SCALE_TIME) is resolved by
+    re-emitting its whole `enum { ... };` block verbatim (no extern possible)."""
+    # 1) file-scope object definition. Scan top-level statements (depth-0 chunks
+    #    split on ';' and '{', skipping function bodies) for one declaring SYM as the
+    #    declarator just before its array suffix / '=' / ';'. Linear, no backtracking.
+    word = re.compile(r"\b" + re.escape(sym) + r"\b")
+    i, n, depth, seg_start = 0, len(us_src), 0, 0
+    while i < n:
+        c = us_src[i]
+        if c == "{":
+            if depth == 0:
+                # a '{' at depth 0 ends a declarator head (init-list or func body);
+                # the statement head is seg_start..i — test it before descending.
+                head = us_src[seg_start:i]
+                d = _try_decl(head, sym, word)
+                if d:
+                    return d
+            depth += 1
+        elif c == "}":
+            depth -= 1
+            if depth == 0:
+                seg_start = i + 1
+        elif c == ";" and depth == 0:
+            head = us_src[seg_start:i]
+            d = _try_decl(head, sym, word)
+            if d:
+                return d
+            seg_start = i + 1
+        i += 1
+    # 2) enum constant: re-emit the enclosing `enum { ... };` so the value resolves.
+    em = re.search(r"enum\s*\{[^{}]*\b" + re.escape(sym) + r"\b[^{}]*\}\s*;", us_src)
+    if em:
+        return em.group(0)
+    return None
+
+
+def _try_decl(head, sym, word):
+    """If top-level statement `head` declares `sym` as a file-scope OBJECT (not a
+    function/call/macro), return its bare `extern <type> sym[];` declaration, else
+    None. `head` is the text up to the statement's `=` init / `{` init-list / `;`."""
+    head = head.strip()
+    if not head or head.startswith("#"):
+        return None
+    # The declarator is everything up to the initializer.
+    decl = head.split("=", 1)[0]
+    # sym must be the LAST identifier token of the declarator (the thing declared).
+    toks = re.findall(r"[A-Za-z_]\w*", decl)
+    if not toks or toks[-1] != sym:
+        return None
+    m = word.search(decl)
+    spec = decl[:m.start()]
+    # a '(' before sym => function decl / call / macro => not an object
+    if "(" in spec:
+        return None
+    for kw in ("static", "CONST_DATA", "EWRAM_DATA", "EWRAM_BSS", "EWRAM_OVERLAY",
+               "IWRAM_DATA", "ALIGNED"):
+        spec = re.sub(r"\b" + kw + r"\b(?:\(\d+\))?", "", spec)
+    spec = " ".join(spec.split())
+    if not spec or spec == "const":
+        return None
+    arrays = re.sub(r"\[[^\]]*\]", "[]", "".join(re.findall(r"\[[^\]]*\]",
+                    decl[m.end():])))
+    return f"extern {spec} {sym}{arrays};"
+
+
 def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False):
     # src_tu: US source TU to extract from (defaults to `name`). Lets carve_exact
     # carve functions STRANDED inside an already-carved TU into a SEPARATELY-named
@@ -122,7 +196,42 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False):
                 li = max((i for i, l in enumerate(ls) if l.lstrip().startswith("#include")), default=len(externs) - 1)
                 new = "".join(ls[:li+1]) + "\n" + "\n".join(protos) + "\n" + "".join(ls[li+1:])
             open(f"src/{name}.c", "w").write(new)
-            sh(f"make src/{name}.o")
+            r = sh(f"make src/{name}.o")
+        if not os.path.exists(obj) and func_only:
+            # func_only DROPS all file-scope data, so a run that references a
+            # TU-PRIVATE static (one NOT declared `extern` in any header, e.g.
+            # scene's sTalkState/sTalkText, statscreen's PAGENAME_* enum) fails with
+            # agbcc "`X' undeclared". RESOLVE each by emitting X's US file-scope
+            # DECLARATION as an `extern` (drop the initializer + `static`/`CONST_DATA`
+            # /`EWRAM_*` storage attrs so it's a pure extern; arrays keep `[]`). The
+            # auto-resolver below then BINDS X at its JP literal-pool address. File-
+            # local ENUM constants (PAGENAME_SCALE_TIME) have no extractable extern
+            # decl -> emit the whole enum block verbatim so the constant resolves.
+            # Iterate to a fixpoint (one extern can expose the next). verify-or-revert
+            # guards any wrong decl.
+            us_src = open(f"{US}/{src_tu}.c").read()
+            cur = open(f"src/{name}.c").read()
+            prepend, seen = [], set()
+            for _ in range(40):
+                und = set(re.findall(r"[`'\"](\w+)' undeclared", r.stderr + r.stdout))
+                und -= seen
+                if not und:
+                    break
+                added = False
+                for sym in sorted(und):
+                    seen.add(sym)
+                    decl = _us_extern_decl(us_src, sym)
+                    if decl:
+                        prepend.append(decl)
+                        added = True
+                if not added:
+                    break
+                new = ("/* TU-private data externs bound at their JP addresses */\n"
+                       + "\n".join(prepend) + "\n" + cur)
+                open(f"src/{name}.c", "w").write(new)
+                r = sh(f"make src/{name}.o")
+                if os.path.exists(obj):
+                    break
         if not os.path.exists(obj):
             print(f"{name}: subset compile failed"); os.remove(f"src/{name}.c"); return False
 
