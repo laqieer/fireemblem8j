@@ -1088,3 +1088,55 @@ calcprogress (c)-line.
 implementation dispatched (P8). Composes with gbadisasm scaling (asm = byte source,
 unchanged) + funclib (US↔JP names the port source) + m2c first-pass (seed). This is the
 survey's P0.2 "ship WIP C without regressing make compare", done the fireemblem8u way.
+## D27 — Final-incbin reduction: pure-0xFF padding → `.fill` directives (2026-06-10)
+
+**Context.** With the code front 98.2% real-source, the remaining raw `asm/baserom.s`
+incbin (the FINAL-GOAL metric: every incbin byte → real source) is ~2.04 MB, of which
+**~1.94 MB is pure ROM padding (0xFF)** in a handful of large contiguous chunks:
+`0x08E47180` (626 KB), three 213 KB blocks (`0x08EFB2E0`/`0x08F2F5C0`/`0x08F63860`),
+`0x08EF2F18` (20 KB), the **296 KB FF head** of the `0x08F97B00` chunk
+(`0x08F97B00..0x08FE0000`, real data follows), and the **247 KB FF tail** of the sparse
+`0x08BB8E94` chunk (its real data is only the first ~43 KB). All verified 100% 0xFF. The
+non-padding remainder (~118 KB, mostly tiny ≤512 B gaps + a few small real blocks) is
+genuine region-different data at/above the data boundary. (Task #29 from `docs/handoff.md`.)
+
+**Reconciles the prior PADDING note (handoff 2026-06-08).** That note said "do NOT carve
+padding as DATA (inflates the data%)". It warned against faking padding as a *named
+authored-data asset* (which would dishonestly pump the **data %** metric). A `.fill
+<size>,1,0xFF` directive is the OPPOSITE: it is **honest descriptive source** declaring
+"this region is N bytes of 0xFF fill" — it advances the FINAL GOAL (raw-incbin → real
+source) and does NOT touch the data % (a `.fill` padding object is not authored data, so it
+isn't counted as carved data). Task #29 explicitly directs converting padding to
+`.fill`/`.space`.
+
+**Decision.**
+1. **Each pure-0xFF padding chunk → a committed `asm/pad_<addr>.s`** emitting `.fill
+   <size>, 1, 0xFF` under a descriptive `pad_<addr>` label, placed by a `carved_rom`
+   fragment row at its exact JP addr. Byte-identical 0xFF output (validated end-to-end:
+   `make compare` → OK on a 20 KB POC and the full set). NO `.align`/`.balign` (Copilot-
+   validated gotcha — `.fill` with stride 1 emits exactly `<size>` bytes; an alignment
+   directive is the only way to grow the ROM, so none is emitted; each chunk gets its own
+   placed section and `make compare` is the byte oracle).
+2. **Split FF-mixed chunks first** (`scripts/carve_padding.py`): a chunk that is a real-data
+   block bracketed by FF (the 0x08F97B00 head/tail and the 0x08BB8E94 tail) is split so only
+   the pure-FF sub-spans become `.fill`; the real-data sub-span stays incbin (genuine
+   region-different data, untouched).
+3. **`make compare` stays the only oracle**, verify-or-revert per the carve convention;
+   outputs are per-task fragments (`layout/carved_rom.d/pad_<addr>.tsv`) so it is parallel-
+   safe; `make check` enforces the asm+fragments are git-tracked.
+
+**Consulted:** Copilot CLI (`agency cp --yolo`, 2026-06-10) — endorsed `.fill <size>,1,0xFF`
+as the correct committed-source representation for verified pure-0xFF ROM padding ("explicit,
+byte-identical, avoids keeping meaningless raw incbin"); flagged only the alignment gotcha
+(addressed above). Independently validated by the byte-perfect `make compare` gate.
+
+**Scope honesty.** This reduces the raw incbin from ~2.04 MB toward the residual real-data
+tail. It does NOT touch the 6 code fallbacks (hand-decomp, task #28) nor the region-different
+real-data gaps. The tiny ≤512 B real-data gaps are left: each is genuine region-different
+data below the carver's useful-size threshold; carving hundreds of sub-512 B incbins as
+separate objects adds churn without representing them at a better semantic level (D10
+integrity line).
+
+**Status:** Done 2026-06-10 (branch `carve/final-incbin`). `scripts/carve_padding.py` +
+the `asm/pad_*.s` + fragments; `make check`, `make compare`, `make clean && make compare`
+all green.

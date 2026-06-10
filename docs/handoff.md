@@ -8,6 +8,22 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
+- **SPRINT 2026-06-10 — FINAL-INCBIN PADDING CARVE (task #29 padding portion DONE; branch `carve/final-incbin`, D27).**
+  Replaced **1.852 MB of pure-0xFF ROM padding** with explicit `.fill <n>,1,0xFF` directives in 8 committed
+  `asm/pad_<addr>.s` objects (`scripts/carve_padding.py`), placed by per-task `carved_rom.d/pad_*.tsv` fragments.
+  **Raw `asm/baserom.s` incbin: 2.044 MB → 0.192 MB** (gen_layout decompiled 95.3% → **98.80%**). All three gates
+  green from a full clean rebuild: `make check` OK, `make compare` → `fireemblem8.gba: OK`, `make clean && make
+  compare` → OK. Spans carved: 0x08E47180 (626KB), three 213KB blocks (0x08EFB2E0/0x08F2F5C0/0x08F63860),
+  0x08EF2F18 (20KB), the 247KB FF tail of the sparse 0x08BB8E94 chunk, the 296KB FF head of the 0x08F97B00 chunk,
+  and the 108KB interior FF pad at 0x08FE4000 (between two 0x1000-aligned data blocks). The carver splits FF
+  head/tail/interior runs >= 4096 B and leaves the real-data middles as incbin. `.fill` with stride 1 emits exactly
+  N bytes; NO `.align` (the only thing that could grow the ROM); make compare is the byte oracle. Copilot-validated
+  representation (D27). **REMAINING raw incbin = 0.192 MB:** 16KB code (the 6 hand-decomp fallbacks, task #28) +
+  ~181KB genuine region-different real data (only 2.4% FF, biggest pure-FF run is the 256B ROM-end tail that
+  objcopy `--gap-fill` supplies; small scattered alignment bytes inside real-data blocks — left, correctly). The
+  ~291KB "sparse" region of the original note was really a 43KB real-data head + a 247KB FF pad (now carved); its
+  real-data head stays incbin. **NOT pushed/merged — P9 integrator merges branch `carve/final-incbin`.**
+
 - **SPRINT 2026-06-09/10 (P9 owner) — gbadisasm SCALING COMPLETE: all 3 ranges A+B+C integrated
   (+5928 region-different fns, code real-source 23%→98.2%).** All three parallel scaling agents delivered +
   integrated serially through the full gate (make check → make clean && make compare, byte-perfect on the

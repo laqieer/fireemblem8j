@@ -1,0 +1,2 @@
+# carve_padding.py pure-0xFF padding as .fill (parallel-safe fragment)
+EFB2E0	F2F580	asm/pad_EFB2E0.o(.pad.EFB2E0)	0xFF padding (213664 B, .fill)
