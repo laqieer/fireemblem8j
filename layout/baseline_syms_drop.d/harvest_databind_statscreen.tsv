@@ -1,0 +1,11 @@
+SetMuScreenPosition
+gProcScr_StatScreen
+gUnkData_33
+InitTextInitInfo
+SetStatScreenConfig
+PutSpecialChar
+PutTwoSpecialChar
+PutNumberBonus
+DrawIcon
+GetCharacterAffinityIcon
+GetSupportLevelUiChar

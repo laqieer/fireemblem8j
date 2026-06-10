@@ -31,13 +31,22 @@ def carved_objs():
     return {m.group(1) for m in (re.search(r"(src/\S+\.o)\(", l) for l in open("layout/carved_rom.tsv")) if m}
 
 
-def port(name, exclude=(), runs=None, src_tu=None, frag=None):
+def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False):
     # src_tu: US source TU to extract from (defaults to `name`). Lets carve_exact
     # carve functions STRANDED inside an already-carved TU into a SEPARATELY-named
     # object (e.g. name="exact_0800XXXX", src_tu="bmlib") so the carved_objs() skip
     # below — which is keyed on the OUTPUT object — doesn't reject it.
     # frag: when set, NEW manifest rows go to per-task fragment files
     #   layout/<base>.d/<frag>.tsv (parallel-safe) instead of the shared monolith.
+    # func_only: extract ONLY the run's function bodies (extract_func_only.py),
+    #   DROPPING all file-scope data definitions. The run's data references then
+    #   resolve to externs declared in the project headers, which the auto-resolver
+    #   below BINDS as ABS baseline_syms at their JP literal-pool addresses (the
+    #   D34/D41 per-TU data-binding pass). This is the right mode for a partially-
+    #   ported TU whose verified runs are blocked ONLY by unplaced TU-private
+    #   statics / shared rodata (statscreen gMid_*/sPage*TextInfo/sStatScreenInfo,
+    #   etc.): extract_run re-emits those definitions and grows the ROM / mismatches
+    #   their region-different content, whereas binding them resolves the run cleanly.
     src_tu = src_tu or name
     if f"src/{name}.o" in carved_objs():
         print(f"{name}: already has a carved run — skipping"); return False
@@ -69,7 +78,8 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None):
                            "baseline_syms_drop", "patches")]
     snap = {p: (open(p).read() if os.path.exists(p) else None) for p in MANI}
 
-    sub = sh(f"python3 scripts/extract_run.py {US}/{src_tu}.c {' '.join(funcs)}").stdout
+    extractor = "extract_func_only" if func_only else "extract_run"
+    sub = sh(f"python3 scripts/{extractor}.py {US}/{src_tu}.c {' '.join(funcs)}").stdout
     # Drop `#include "src/data/*.h"` for files missing in the JP project: those are
     # auto-generated region-specific data tables (e.g. chapter_settings.h DEFINES
     # gChapterDataTable) not yet ported. cpp silently fails on the missing file and
@@ -580,9 +590,11 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None):
         else:
             open(p, "w").write(c)
     os.remove(f"src/{name}.c"); sh(f"rm -f src/{name}.o src/{name}.s"); sh("make layout")
-    # next-largest run (reuse discovery); keep src_tu/frag so the recursion still
-    # extracts from the right US TU and writes to the same parallel-safe fragment.
-    return port(name, exclude + (tuple(funcs),), runs, src_tu=src_tu, frag=frag)
+    # next-largest run (reuse discovery); keep src_tu/frag/func_only so the recursion
+    # still extracts from the right US TU, in the right mode, and writes to the same
+    # parallel-safe fragment.
+    return port(name, exclude + (tuple(funcs),), runs, src_tu=src_tu, frag=frag,
+                func_only=func_only)
 
 
 if __name__ == "__main__":
