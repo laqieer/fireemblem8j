@@ -12,3 +12,5 @@
 0D5028	0D5054	src/m4aMPlayAllStop.o(.text)	m4aMPlayAllStop (region-diff: gNumMusicPlayers=9, gMPlayTable, m4aMPlayStop)
 0D5060	0D508C	src/m4aMPlayAllContinue.o(.text)	m4aMPlayAllContinue (region-diff: gNumMusicPlayers=9, gMPlayTable, MPlayContinue)
 0D55B0	0D5628	src/MPlayOpen.o(.text)	MPlayOpen (region-diff: Clear64byte @ 0xD525C, MPlayMain @ 0xD4860)
+0769D4	076A48	src/EfxUpdatePartsofScroll.o(.text)	EfxUpdatePartsofScroll (region-diff: 7 banim-ekr scroll globals bound)
+076BDC	076C6C	src/EfxleveluphbMain.o(.text)	EfxleveluphbMain (region-diff: banim-ekr scroll globals)

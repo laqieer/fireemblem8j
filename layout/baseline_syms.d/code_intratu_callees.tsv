@@ -30,3 +30,15 @@ PutGuideCategoryName	080D2EBC	thumb	codegrind4_bmguide
 GenerateMovementMap	0801A1B8	thumb	codegrind4_bmidoten
 gNumMusicPlayers	00000009	data	codegrind4_m4a
 Clear64byte	080D525C	thumb	codegrind4_m4a
+gEkrBg1ScrollFlip	0201FDB8	data	codegrind4_banim_ekr
+gpBg2ScrollOffsetTable1	0201FB38	data	codegrind4_banim_ekr
+gpBg2ScrollOffsetTable2	0201FC78	data	codegrind4_banim_ekr
+gpBg1ScrollOffsetList1	0201FDC4	data	codegrind4_banim_ekr
+gpBg1ScrollOffsetList2	0201FF04	data	codegrind4_banim_ekr
+gEkrLvupScrollPos1	02020134	data	codegrind4_banim_ekr
+gEkrLvupScrollPos2	02020136	data	codegrind4_banim_ekr
+gEkrBg2ScrollFlip	0201FB2C	data	codegrind4_banim_ekr
+gpBg2ScrollOffsetStart	0201FB30	data	codegrind4_banim_ekr
+gpBg2ScrollOffset	0201FB34	data	codegrind4_banim_ekr
+gpBg1ScrollOffsetStart	0201FDBC	data	codegrind4_banim_ekr
+gpBg1ScrollOffset	0201FDC0	data	codegrind4_banim_ekr
