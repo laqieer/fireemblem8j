@@ -1,0 +1,7 @@
+# code-grind: bind the bmitem/data_items effectiveness list ItemEffectiveness_Monsters
+# as an ABS baseline_syms symbol so IsUnitEffectiveAgainst graduates. JP 0x089024C5
+# (from asm/IsUnitEffectiveAgainst.s =0x089024C5; a u8[] terminated effectiveness
+# list, byte-addressed). Bytes provided by the data-4 frontier blob df4_banim_b;
+# pure ABS name binding (D34 class-2). extern-declared in include/items.h; graduated
+# file prepends an extern.
+ItemEffectiveness_Monsters	089024C5	data	codegrind_bmitem_effectiveness

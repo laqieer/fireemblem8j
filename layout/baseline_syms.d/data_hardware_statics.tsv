@@ -18,3 +18,5 @@ gUnk_35	03000015	data	codegrind_hardware_statics
 #   sHBlankHandler2 0x030036E8 (asm/SetSecondaryHBlankHandler.s)
 sHBlankHandler1	030030D4	data	codegrind_hardware_statics
 sHBlankHandler2	030036E8	data	codegrind_hardware_statics
+# sModifiedPalette u8 0x0300000D (asm/CopyToPaletteBufferDimmed.s =0x0300000D)
+sModifiedPalette	0300000D	data	codegrind_hardware_statics
