@@ -1316,3 +1316,49 @@ multiple-definition / address-placement conflicts once Phase-1 names those objec
 only accept bodies whose data deps are already exported/placed; `make compare` stays the revert oracle. The fast-path
 funcmap backlog is EXHAUSTED at this commit — correct action is to gate on Phase-1 data advances and re-run, and route
 the true region-different + compiler-override remainder to m2c/permuter/NONMATCHING separately. Don't force matches.
+
+## D32 — Phase-1 data-table pattern: name the data dep, then graduate the function (2026-06-10)
+
+**Context.** D31 batch-2 identified the dominant remaining block: funcmap masked-tier functions that reference
+TU-private statics not yet named (still raw incbin or unbound RAM). This session (branch `feat/phase1-data-tables`)
+established + proved the unblock pattern and harvested the first cohort: **19 functions graduated to matching C**,
+all `make compare`-gated (+ `make clean && make compare` + `make check` green).
+
+**The pattern (3 data-dep classes, each with its committed-source representation + a header extern):**
+1. **ROM `.data`/`.rodata` table that is region-SAME in structure → typed C/`.s`, byte-matches.** The struct/array
+   compiles to the JP bytes because the symbols it references resolve to JP addresses. Carved by SPLITTING the D29
+   `data_<addr>` residue incbin around the table (residue head + typed object + residue tail). Done:
+   - `sBGControlStructPtrs` (hardware.c, JP 0x085775F8, 16 B): `struct BgCnt *[] = {&gLCDControlBuffer.bgNcnt}` —
+     pointers resolve via JP `gLCDControlBuffer=0x03003020`. Unblocked BG_Get/SetPriority.
+   - `gFlagBitMaskLut` (eventinfo.c, JP 0x08A5A6A0, 13 B): `u8 CONST_DATA[]={1<<n}` — pure bitmask LUT, region-same.
+     Unblocked 6 chapter/permanent-flag fns.
+2. **BSS/RAM global (no ROM bytes) → bind as `baseline_syms.d` at its JP address (like sym_iwram.txt).** Verify the
+   JP address against the function's DECODED LITERAL POOL (not just ram_us_jp.tsv — the reference map is a hint).
+   Done: `gChapterFlagBits`=0x03005260 (gPermanentFlagBits already 0x03005240); hardware `sModifiedBGs`=0x0300000C,
+   `sOamHi`=0x03000018, `sOamLo`=0x03000028.
+3. **TU-private BSS statics shared across separately-graduated functions → bind as baseline_syms at the addresses
+   that COINCIDE with the owning TU's carved_ram `.bss`, then prepend matching `extern`s to the function-only C.**
+   The extern ref and the in-TU static alias the identical RAM location (nm-verified offsets), so it's semantically
+   correct AND byte-matches. Done: sio_core cursors (`sSendCursor`/`sWriteCursor`/`sReadCursor`/`sRecvCursor` at
+   sio_core.o(.bss) 0x030017D8 + {0x10,0x12,0x18,0x20}). New helper `scripts/graduate_sio_cursors.py` (extends
+   `graduate_exact_asm` with the cursor-extern injection; verify-or-revert, same oracle). Unblocked 7 sio fns.
+
+The enabler in all three is a **header extern** for the named symbol (e.g. `extern struct BgCnt *sBGControlStructPtrs[]`
+in hardware.h, `gFlagBitMaskLut`/`SetChapterFlag` in eventinfo.h) so per-function graduation (which drops file-scope
+data, D31) can reference it. This is exactly Phase-3 symbol-naming riding along with the carve.
+
+**SKIPPED (parallelism boundary): `gClassData`.** JP 0x0885B6BC..0x0885E068 (10668 B = 127×84) is region-different
+(class struct starts with `.short nameTextId/descTextId` = JP-different msg IDs + pointers). It is currently swallowed
+by the graphics-4-owned `frontier_df4_banim_b.o gap68` — a generic data-gap blob MISLABELED "banim graphics data" but
+actually `gClassData`. Carving it would require editing a `frontier_*` fragment (graphics-4 domain), so per the
+data/graphics ownership split it is left for graphics-4 or the integrator to reassign. `GetClassData`/`GetCharacterData`
+stay blocked this round. (`gItemData`/`gCharacterData` are already NAMED incbin in their own `dat_*_ref.s` — converting
+those to committed `data/*.bin` is a self-containment win but does NOT unblock more fns, since they're already linkable.)
+
+**Reusable takeaways.** (a) The Phase-2 unblock payoff comes from carving the SPECIFIC data dep a blocked function
+references, not from bulk `graduate --all` (the `--all` masked run is too slow to finish one timeout window and only
+re-confirms region-different reverts). (b) Always decode the function's literal pool to get the true JP data address —
+it's authoritative; the ref maps are hints with known errors. (c) When graduating a function, ALWAYS stage the
+graduate-deleted `asm/<fn>.s` + `gbadisasm_<fn>.tsv` (a prior commit this session missed them → `git ls-files` still
+tracked them; caught by re-staging). (d) Self-containment baseline this session measured **59.98%** on a clean glue
+rebuild (the quoted 50.48% was a stale generated-`asm/baserom.s` artifact present at session start).
