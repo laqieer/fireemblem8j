@@ -78,15 +78,19 @@ def gbadisasm_fns():
     return out
 
 
-def exact_backlog():
-    """[(name, jp_start, jp_end, us_tu, us_fname)] for exact-tier gbadisasm funcs
-    with US source. The asm-label name may differ from the US funcmap name."""
+def exact_backlog(tiers=("exact",)):
+    """[(name, jp_start, jp_end, us_tu, us_fname)] for gbadisasm funcs of the given
+    funcmap tier(s) with US source. The asm-label name may differ from the US
+    funcmap name. `exact` is the safe fast path (unique unmasked byte pin); `masked`
+    mostly-matches with relocatable pointer/literal deltas the linker fixes -- still
+    fully gated by make compare (verify-or-revert), so masked false-positives just
+    revert to asm at zero risk."""
     fm = load_funcmap()
     ftu = fn_to_tu()
     rows = []
     for name, (start, end, frag) in gbadisasm_fns().items():
         jp = start | 0x08000000
-        if jp in fm and fm[jp][1] == "exact":
+        if jp in fm and fm[jp][1] in tiers:
             fname = fm[jp][2]
             tu = ftu.get(fname)
             if tu and os.path.exists(f"{US}/src/{tu}.c"):
@@ -185,7 +189,10 @@ def grad_one(name, s, e, tu, fname):
 
 def main():
     args = sys.argv[1:]
-    bl = exact_backlog()
+    tiers = ("exact",)
+    if "--tier" in args:
+        i = args.index("--tier"); tiers = tuple(args[i + 1].split(",")); del args[i:i + 2]
+    bl = exact_backlog(tiers)
     by_name = {r[0]: r for r in bl}
 
     if "--list" in args:
