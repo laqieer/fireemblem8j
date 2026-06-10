@@ -9,4 +9,4 @@
 @ ending_cg region-different data, JP 0x08b27970..0x08b3b3d4 (80484 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_ending_cg_000_B27970
 frontier_ending_cg_000_B27970:
-	.incbin "baserom.gba", 0xB27970, 0x13A64
+	.incbin "graphics/frontier_ending_cg/frontier_ending_cg_000_B27970.bin"

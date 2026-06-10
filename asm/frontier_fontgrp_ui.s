@@ -9,4 +9,4 @@
 @ fontgrp_ui region-different data, JP 0x0859d4fc..0x085b8cdc (112608 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_fontgrp_ui_000_59D4FC
 frontier_fontgrp_ui_000_59D4FC:
-	.incbin "baserom.gba", 0x59D4FC, 0x1B7E0
+	.incbin "graphics/frontier_fontgrp_ui/frontier_fontgrp_ui_000_59D4FC.bin"
