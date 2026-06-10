@@ -40,6 +40,11 @@ src/nonmatching/*.s
 /asm/baserom.s
 /asm/jp_syms.s
 
+# asm/msg_data.s is GENERATED from texts/jp_texts.txt by scripts/texttools/msg_jp.py
+# (re-Huffman-encodes the JP message block byte-identically). The committed source
+# is texts/jp_*.txt; this .s is regenerated at build time. See docs/text.md.
+/asm/msg_data.s
+
 # Per-task layout fragments (layout/<name>.d/*.tsv) ARE committed -- they are the
 # parallel-carve mechanism. The generic `*.d` rule above (for make dependency
 # files) otherwise hides these directories, so re-include them explicitly.

@@ -1,0 +1,42 @@
+# FE8 JP (Seima no Kouseki) message control tokens.
+#
+# Maps a [Token] name to one or more u16 symbol values. Single-value tokens are
+# also used by the dumper (msg_jp.py) to pretty-print the low control codes;
+# multi-value / face-control sequences are dumped as raw [$XXXX] tokens instead,
+# so the round-trip stays unambiguous. The engine codes are shared with the US
+# ROM (../fireemblem8u/texts/textdefs.txt); only the text payload is CP932.
+
+[X] = 0
+[LF] = 1
+[CR] = 2
+[A] = 3
+[....] = 4
+[.....] = 5
+[......] = 6
+[.......] = 7
+[OpenFarLeft] = 8
+[OpenMidLeft] = 9
+[OpenLeft] = 10
+[OpenRight] = 11
+[OpenMidRight] = 12
+[OpenFarRight] = 13
+[OpenFarFarLeft] = 14
+[OpenFarFarRight] = 15
+[LoadFace] = 16
+[ClearFace] = 17
+[NormalPrint] = 18
+[FastPrint] = 19
+[CloseSpeechFast] = 20
+[CloseSpeechSlow] = 21
+[ToggleMouthMove] = 22
+[ToggleSmile] = 23
+[Yes] = 24
+[No] = 25
+[BuySell] = 26
+[ShopContinue] = 27
+[SendToBack] = 28
+[FastPrint2] = 29
+[.] = 31
+[HASH] = 0x23
+[DashedLine] = 0x7F
+[AccentedE] = 0xE9

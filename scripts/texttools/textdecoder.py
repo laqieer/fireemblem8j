@@ -3,11 +3,13 @@
 import sys, os
 import textdeparser, huffman
 
+# NOTE: superseded by msg_jp.py (the byte-exact dump/build pipeline). Kept as a
+# standalone decoder; constants below are the VERIFIED JP values (see docs/text.md).
 ROM = "baserom.gba"
-TEXT_TABLE = 0x14D088   # JP gMsgTable (US: 0x15D48C)
-TEXT_COUNT = 0xD0C      # JP message count 3340 (US: 0xD6E)
+TEXT_TABLE = 0x14D08C   # JP gMsgTable (US: 0x15D48C)
+TEXT_COUNT = 0xD0B      # JP message count 3339 (US: 0xD6E)
 
-ROOT_NODE = 3961        # JP huffman root (US: 2902)
+ROOT_NODE = 0xF7A       # JP huffman root 3962 (US: 2902)
 HUFFMAN_TREE = 0x14929C # JP gMsgHuffmanTable (US: 0x15A72C)
 
 log_settings = {

@@ -28,6 +28,20 @@ def tracked_files():
     return set(out.splitlines())
 
 
+# Build-GENERATED object sources: not git-tracked themselves, but regenerated at
+# build time from committed source (so CI's fresh checkout DOES produce them).
+# asm/msg_data.s <- texts/jp_texts.txt (+ textdefs + huffman tiebreaks) via
+# scripts/texttools/msg_jp.py. Each maps to the committed inputs that MUST exist.
+GENERATED_SOURCES = {
+    "asm/msg_data.s": [
+        "texts/jp_texts.txt",
+        "texts/jp_textdefs.txt",
+        "texts/jp_huffman_tiebreaks.txt",
+        "scripts/texttools/msg_jp.py",
+    ],
+}
+
+
 def check_nonmatching_isolation():
     """ORACLE-INTEGRITY (D26): NON_MATCHING staging C (src/nonmatching/<fn>.c)
     must NEVER enter the make-compare oracle. The oracle links exactly the
@@ -78,6 +92,14 @@ def main():
     missing, untracked = [], []
     for o in sorted(refs):
         srcs = [o[:-2] + ext for ext in (".s", ".c")]  # .o -> .s / .c
+        # Build-generated sources: validate their COMMITTED inputs instead of the
+        # generated .s itself (which is gitignored / may be absent before a build).
+        gen = next((s for s in srcs if s in GENERATED_SOURCES), None)
+        if gen is not None:
+            for inp in GENERATED_SOURCES[gen]:
+                if inp not in tracked:
+                    untracked.append(inp)
+            continue
         existing = [s for s in srcs if os.path.exists(s)]
         if not existing:
             missing.append(o)
