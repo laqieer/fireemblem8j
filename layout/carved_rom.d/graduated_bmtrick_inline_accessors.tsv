@@ -1,0 +1,3 @@
+02E368	02E3A8	src/ApplyEnabledMapChanges.o(.text)	ApplyEnabledMapChanges (masked-tier graduated; extern inline GetTrap)
+02E544	02E570	src/DisableMapChange.o(.text)	DisableMapChange (masked-tier graduated; extern inline GetTrap)
+02E908	02E938	src/ResetCountedDownTraps.o(.text)	ResetCountedDownTraps (masked-tier graduated; extern inline GetTrap)
