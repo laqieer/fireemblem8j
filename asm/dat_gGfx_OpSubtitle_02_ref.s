@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gGfx_OpSubtitle_02
 gGfx_OpSubtitle_02:
-	.incbin "baserom.gba", 0xB3C998, 0x144
+	.incbin "graphics/misc_gfx2/gGfx_OpSubtitle_02.bin.lz"

@@ -12,10 +12,10 @@ gParticlesFx_5:
 	.incbin "baserom.gba", 0x5CC540, 0x20
 	.global Img_LightRune
 Img_LightRune:
-	.incbin "baserom.gba", 0x5CC560, 0x1724
+	.incbin "graphics/misc_gfx2/Img_LightRune.bin.lz"
 	.global Pal_LightRune
 Pal_LightRune:
-	.incbin "baserom.gba", 0x5CDC84, 0x20
+	.incbin "graphics/misc_gfx2/Pal_LightRune.gbapal"
 	.global Tsa_LightRune
 Tsa_LightRune:
-	.incbin "baserom.gba", 0x5CDCA4, 0x2E0
+	.incbin "graphics/misc_gfx2/Tsa_LightRune.bin.lz"

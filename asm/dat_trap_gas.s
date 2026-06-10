@@ -3,16 +3,16 @@
 @ src/data/ui/trap_gas.o: region-same content at JP 0x085c9a30 (US 0x085a1510, shift -0x-28520); incbin baserom.gba
 	.global Img_GasTrapVertical
 Img_GasTrapVertical:
-	.incbin "baserom.gba", 0x5C9A30, 0x5E8
+	.incbin "graphics/misc_gfx2/Img_GasTrapVertical.bin.lz"
 	.global Img_GasTrapHorizontal
 Img_GasTrapHorizontal:
-	.incbin "baserom.gba", 0x5CA018, 0x574
+	.incbin "graphics/misc_gfx2/Img_GasTrapHorizontal.bin.lz"
 	.global Pal_GasTrap
 Pal_GasTrap:
-	.incbin "baserom.gba", 0x5CA58C, 0x20
+	.incbin "graphics/misc_gfx2/Pal_GasTrap.gbapal"
 	.global Pal_ArrowTrap
 Pal_ArrowTrap:
-	.incbin "baserom.gba", 0x5CA5AC, 0x20
+	.incbin "graphics/misc_gfx2/Pal_ArrowTrap.gbapal"
 	.global Img_ArrowTrap
 Img_ArrowTrap:
-	.incbin "baserom.gba", 0x5CA5CC, 0x2D8
+	.incbin "graphics/misc_gfx2/Img_ArrowTrap.bin.lz"

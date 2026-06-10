@@ -3,7 +3,7 @@
 @ src/data/ui/trap_fire_pike_2.o: region-same content at JP 0x085cb9b0 (US 0x085a3490, shift -0x-28520); incbin baserom.gba
 	.global Pal_FireTrap2
 Pal_FireTrap2:
-	.incbin "baserom.gba", 0x5CB9B0, 0x20
+	.incbin "graphics/misc_gfx2/Pal_FireTrap2.gbapal"
 	.global Img_PikeTrap
 Img_PikeTrap:
-	.incbin "baserom.gba", 0x5CB9D0, 0x280
+	.incbin "graphics/misc_gfx2/Img_PikeTrap.bin.lz"

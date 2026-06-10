@@ -14,7 +14,7 @@ gWorldmapGmap_3:
 	.incbin "baserom.gba", 0xB1B2F8, 0x2A4
 	.global Img_GmapNodes
 Img_GmapNodes:
-	.incbin "baserom.gba", 0xB1B59C, 0x1108
+	.incbin "graphics/misc_gfx2/Img_GmapNodes.bin.lz"
 	.global Img_GmapCastleNodes
 Img_GmapCastleNodes:
-	.incbin "baserom.gba", 0xB1C6A4, 0x630
+	.incbin "graphics/misc_gfx2/Img_GmapCastleNodes.bin.lz"

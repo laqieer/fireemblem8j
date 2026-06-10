@@ -3,22 +3,22 @@
 @ src/data/data_99D6DC.o: region-same content at JP 0x08a0de50 (US 0x0899d6dc, shift -0x-70774); incbin baserom.gba
 	.global Img_UnkData_0
 Img_UnkData_0:
-	.incbin "baserom.gba", 0xA0DE50, 0xAC8
+	.incbin "graphics/misc_gfx2/Img_UnkData_0.bin.lz"
 	.global Img_99E1A4
 Img_99E1A4:
-	.incbin "baserom.gba", 0xA0E918, 0xBA0
+	.incbin "graphics/misc_gfx2/Img_99E1A4.bin.lz"
 	.global Img_99ED44
 Img_99ED44:
-	.incbin "baserom.gba", 0xA0F4B8, 0xA90
+	.incbin "graphics/misc_gfx2/Img_99ED44.bin.lz"
 	.global Img_99F7D4
 Img_99F7D4:
-	.incbin "baserom.gba", 0xA0FF48, 0x980
+	.incbin "graphics/misc_gfx2/Img_99F7D4.bin.lz"
 	.global Img_9A0154
 Img_9A0154:
-	.incbin "baserom.gba", 0xA108C8, 0x710
+	.incbin "graphics/misc_gfx2/Img_9A0154.bin.lz"
 	.global Img_9A0864
 Img_9A0864:
-	.incbin "baserom.gba", 0xA10FD8, 0x620
+	.incbin "graphics/misc_gfx2/Img_9A0864.bin.lz"
 	.global TileSet_9A0E84
 TileSet_9A0E84:
 	.incbin "baserom.gba", 0xA115F8, 0x1CC
@@ -39,16 +39,16 @@ TileSet_9A174C:
 	.incbin "baserom.gba", 0xA11EC0, 0x188
 	.global Pal_EventMapAnimMaskfx
 Pal_EventMapAnimMaskfx:
-	.incbin "baserom.gba", 0xA12048, 0x20
+	.incbin "graphics/misc_gfx2/Pal_EventMapAnimMaskfx.gbapal"
 	.global Img_Congratulations
 Img_Congratulations:
-	.incbin "baserom.gba", 0xA12068, 0x57C
+	.incbin "graphics/misc_gfx2/Img_Congratulations.bin.lz"
 	.global Img_MapClear
 Img_MapClear:
-	.incbin "baserom.gba", 0xA125E4, 0x49C
+	.incbin "graphics/misc_gfx2/Img_MapClear.bin.lz"
 	.global Pal_Congratulations
 Pal_Congratulations:
-	.incbin "baserom.gba", 0xA12A80, 0x20
+	.incbin "graphics/misc_gfx2/Pal_Congratulations.gbapal"
 	.global Pal_MapClear
 Pal_MapClear:
-	.incbin "baserom.gba", 0xA12AA0, 0x20
+	.incbin "graphics/misc_gfx2/Pal_MapClear.gbapal"

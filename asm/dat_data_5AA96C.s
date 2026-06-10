@@ -15,13 +15,13 @@ gUnkData_24:
 	.incbin "baserom.gba", 0x5D9330, 0x20
 	.global Img_LinkArenaPostBattleBg
 Img_LinkArenaPostBattleBg:
-	.incbin "baserom.gba", 0x5D9350, 0x16AC
+	.incbin "graphics/misc_gfx2/Img_LinkArenaPostBattleBg.bin.lz"
 	.global Pal_LinkArenaPostBattleBg
 Pal_LinkArenaPostBattleBg:
-	.incbin "baserom.gba", 0x5DA9FC, 0x80
+	.incbin "graphics/misc_gfx2/Pal_LinkArenaPostBattleBg.gbapal"
 	.global Tsa_LinkArenaPostBattleBg
 Tsa_LinkArenaPostBattleBg:
-	.incbin "baserom.gba", 0x5DAA7C, 0x54C
+	.incbin "graphics/misc_gfx2/Tsa_LinkArenaPostBattleBg.bin.lz"
 	.global gUnkData_25
 gUnkData_25:
 	.incbin "baserom.gba", 0x5DAFC8, 0x144

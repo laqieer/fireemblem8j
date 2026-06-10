@@ -2,19 +2,19 @@
 @ src/data/const_data_DB034.o: REGION-DIFFERENT asset, JP 0x080e0044..0x080e1870 (US 0x080db034, shift -0xFFFFAFF0); boundary pinned by region-same neighbours; incbin baserom.gba
 	.global Img_ConstDataDB034_0
 Img_ConstDataDB034_0:
-	.incbin "baserom.gba", 0xE0044, 0x504
+	.incbin "graphics/misc_gfx2/Img_ConstDataDB034_0.bin.lz"
 	.global Img_ConstDataDB034_1
 Img_ConstDataDB034_1:
-	.incbin "baserom.gba", 0xE0548, 0x48C
+	.incbin "graphics/misc_gfx2/Img_ConstDataDB034_1.bin.lz"
 	.global Img_ConstDataDB034_2
 Img_ConstDataDB034_2:
-	.incbin "baserom.gba", 0xE09D4, 0x458
+	.incbin "graphics/misc_gfx2/Img_ConstDataDB034_2.bin.lz"
 	.global Img_ConstDataDB034_3
 Img_ConstDataDB034_3:
-	.incbin "baserom.gba", 0xE0E2C, 0x534
+	.incbin "graphics/misc_gfx2/Img_ConstDataDB034_3.bin.lz"
 	.global Img_ConstDataDB034_4
 Img_ConstDataDB034_4:
-	.incbin "baserom.gba", 0xE1360, 0x50C
+	.incbin "graphics/misc_gfx2/Img_ConstDataDB034_4.bin.lz"
 	.global Pal_NewEkrBaseKaiten
 Pal_NewEkrBaseKaiten:
-	.incbin "baserom.gba", 0xE186C, 0x4
+	.incbin "graphics/misc_gfx2/Pal_NewEkrBaseKaiten.gbapal"

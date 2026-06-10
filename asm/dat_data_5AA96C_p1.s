@@ -5,10 +5,10 @@ gUnkData_6:
 	.incbin "baserom.gba", 0x5D68B4, 0x3D8
 	.global Img_LinkArenaRankIcons
 Img_LinkArenaRankIcons:
-	.incbin "baserom.gba", 0x5D6C8C, 0x344
+	.incbin "graphics/misc_gfx2/Img_LinkArenaRankIcons.bin.lz"
 	.global Img_LinkArenaActiveBannerFx
 Img_LinkArenaActiveBannerFx:
-	.incbin "baserom.gba", 0x5D6FD0, 0x1DC
+	.incbin "graphics/misc_gfx2/Img_LinkArenaActiveBannerFx.bin.lz"
 	.global gUnkData_7
 gUnkData_7:
 	.incbin "baserom.gba", 0x5D71AC, 0x1D0

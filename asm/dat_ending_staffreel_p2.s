@@ -2,19 +2,19 @@
 @ src/data/ending/ending_staffreel.o: region-same content at JP 0x08acf418 (US 0x08a4ae08, shift -0xFFF7B9F0); incbin baserom.gba
 	.global Tsa_StaffReelEnt_0
 Tsa_StaffReelEnt_0:
-	.incbin "baserom.gba", 0xACF418, 0x288
+	.incbin "graphics/misc_gfx2/Tsa_StaffReelEnt_0.bin.lz"
 	.global Tsa_StaffReelEnt_1
 Tsa_StaffReelEnt_1:
-	.incbin "baserom.gba", 0xACF6A0, 0x264
+	.incbin "graphics/misc_gfx2/Tsa_StaffReelEnt_1.bin.lz"
 	.global Tsa_StaffReelEnt_2
 Tsa_StaffReelEnt_2:
-	.incbin "baserom.gba", 0xACF904, 0x264
+	.incbin "graphics/misc_gfx2/Tsa_StaffReelEnt_2.bin.lz"
 	.global Tsa_StaffReelEnt_3
 Tsa_StaffReelEnt_3:
-	.incbin "baserom.gba", 0xACFB68, 0x230
+	.incbin "graphics/misc_gfx2/Tsa_StaffReelEnt_3.bin.lz"
 	.global Tsa_StaffReelEnt_4
 Tsa_StaffReelEnt_4:
-	.incbin "baserom.gba", 0xACFD98, 0x3C8
+	.incbin "graphics/misc_gfx2/Tsa_StaffReelEnt_4.bin.lz"
 	.global Tsa_StaffReelEnt_5
 Tsa_StaffReelEnt_5:
-	.incbin "baserom.gba", 0xAD0160, 0x174
+	.incbin "graphics/misc_gfx2/Tsa_StaffReelEnt_5.bin.lz"

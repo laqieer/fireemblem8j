@@ -2,10 +2,10 @@
 @ src/data/worldmap/worldmap_gmap.o: region-same content at JP 0x08b1ccf4 (US 0x08a97a60, shift -0xFFF7AD6C); incbin baserom.gba
 	.global gPal_GMapPI_ShopIcons
 gPal_GMapPI_ShopIcons:
-	.incbin "baserom.gba", 0xB1CCF4, 0x20
+	.incbin "graphics/misc_gfx2/gPal_GMapPI_ShopIcons.gbapal"
 	.global gGfx_GMapPI_ShopIcons
 gGfx_GMapPI_ShopIcons:
-	.incbin "baserom.gba", 0xB1CD14, 0x4C
+	.incbin "graphics/misc_gfx2/gGfx_GMapPI_ShopIcons.bin.lz"
 	.global gPal_WorldmapGmap_0
 gPal_WorldmapGmap_0:
-	.incbin "baserom.gba", 0xB1CD60, 0x20
+	.incbin "graphics/misc_gfx2/gPal_WorldmapGmap_0.gbapal"

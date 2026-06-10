@@ -5,16 +5,16 @@ gEndingDetails_0:
 	.incbin "baserom.gba", 0xAC2BE0, 0x4B4
 	.global Pal_EndingDetails_0
 Pal_EndingDetails_0:
-	.incbin "baserom.gba", 0xAC3094, 0x40
+	.incbin "graphics/misc_gfx2/Pal_EndingDetails_0.gbapal"
 	.global Pal_CharacterEndingMenu
 Pal_CharacterEndingMenu:
-	.incbin "baserom.gba", 0xAC30D4, 0x40
+	.incbin "graphics/misc_gfx2/Pal_CharacterEndingMenu.gbapal"
 	.global Img_CharacterEndingMenu
 Img_CharacterEndingMenu:
-	.incbin "baserom.gba", 0xAC3114, 0x89C
+	.incbin "graphics/misc_gfx2/Img_CharacterEndingMenu.bin.lz"
 	.global Tsa_CharacterEnding_TopBorder
 Tsa_CharacterEnding_TopBorder:
-	.incbin "baserom.gba", 0xAC39B0, 0x7C
+	.incbin "graphics/misc_gfx2/Tsa_CharacterEnding_TopBorder.bin"
 	.global Tsa_CharacterEnding_BottomBorder
 Tsa_CharacterEnding_BottomBorder:
-	.incbin "baserom.gba", 0xAC3A2C, 0x7C
+	.incbin "graphics/misc_gfx2/Tsa_CharacterEnding_BottomBorder.bin"

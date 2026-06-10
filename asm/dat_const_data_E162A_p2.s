@@ -2,25 +2,25 @@
 @ src/data/const_data_E162A.o: region-same content at JP 0x080eac84 (US 0x080e58a4, shift -0xFFFFAC20); incbin baserom.gba
 	.global Img_TriKnightOBJ
 Img_TriKnightOBJ:
-	.incbin "baserom.gba", 0xEAC84, 0x320
+	.incbin "graphics/misc_gfx2/Img_TriKnightOBJ.bin.lz"
 	.global Img_TriGenerialLanceOBJ
 Img_TriGenerialLanceOBJ:
-	.incbin "baserom.gba", 0xEAFA4, 0x3D4
+	.incbin "graphics/misc_gfx2/Img_TriGenerialLanceOBJ.bin.lz"
 	.global Img_TriGenerialAxeOBJ
 Img_TriGenerialAxeOBJ:
-	.incbin "baserom.gba", 0xEB378, 0x434
+	.incbin "graphics/misc_gfx2/Img_TriGenerialAxeOBJ.bin.lz"
 	.global Img_TriGenerialHandAxeOBJ
 Img_TriGenerialHandAxeOBJ:
-	.incbin "baserom.gba", 0xEB7AC, 0x3C0
+	.incbin "graphics/misc_gfx2/Img_TriGenerialHandAxeOBJ.bin.lz"
 	.global Img_TriKnightAtkOBJ
 Img_TriKnightAtkOBJ:
-	.incbin "baserom.gba", 0xEBB6C, 0x538
+	.incbin "graphics/misc_gfx2/Img_TriKnightAtkOBJ.bin.lz"
 	.global Img_TriGenerialLanceAtkOBJ
 Img_TriGenerialLanceAtkOBJ:
-	.incbin "baserom.gba", 0xEC0A4, 0x73C
+	.incbin "graphics/misc_gfx2/Img_TriGenerialLanceAtkOBJ.bin.lz"
 	.global Img_TriGenerialAxeAtkOBJ
 Img_TriGenerialAxeAtkOBJ:
-	.incbin "baserom.gba", 0xEC7E0, 0x78C
+	.incbin "graphics/misc_gfx2/Img_TriGenerialAxeAtkOBJ.bin.lz"
 	.global Img_TriGenerialHandAxeAtkOBJ
 Img_TriGenerialHandAxeAtkOBJ:
-	.incbin "baserom.gba", 0xECF6C, 0x710
+	.incbin "graphics/misc_gfx2/Img_TriGenerialHandAxeAtkOBJ.bin.lz"
