@@ -1,0 +1,4 @@
+SetPopupItem	08011548	thumb	popup set-item (region-diff asm sub_8011548, code-ref bind)
+PopupScr_WRankUp	085BA1F4	data	popup weapon-rank-up script (region-diff data, code-ref bind)
+SetPopupNumber	08011554	thumb	popup set-number (region-diff asm, code-ref bind)
+PopupScr_GoldWasStole	085BA0FC	data	popup gold-was-stolen script (region-diff data, code-ref bind)
