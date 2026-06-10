@@ -194,6 +194,40 @@ graphics/misc/Img_MenuScrollBar.4bpp.lz: LZ_FLAGS := -mindist 2
 # rule has no way to know about an .incbin'd generated file, so state it here.)
 asm/dat_worldmap_gmapunit_p1598.o: graphics/misc/Img_MenuScrollBar.4bpp.lz
 
+# --- Item icon sheet (Phase 1) -----------------------------------------------
+# asm/dat_data_item_icon.s .incbins 224 REBUILT graphics/item_icon/*.4bpp (each
+# re-encoded from a committed PNG via the generic %.4bpp:%.png rule) plus the
+# committed item_icon_palette.agbpal binary. Region-SAME with US, uncompressed 4bpp
+# (no -mindist needed). The .4bpp must be regenerated from the PNGs before the asm
+# is assembled, so derive the dep list from the committed PNGs. (Ported by
+# scripts/extract_graphics.py; see docs/tools/gbagfx.md.)
+ITEM_ICON_4BPP := $(patsubst %.png,%.4bpp,$(wildcard graphics/item_icon/*.png))
+asm/dat_data_item_icon.o: $(ITEM_ICON_4BPP)
+
+# --- Unit-icon WAIT map-sprite sheets (Phase 1) ------------------------------
+# asm/dat_const_data_unit_icon_wait.s .incbins 107 REBUILT
+# graphics/unit_icon/wait/*.4bpp.lz map-sprite sheets (each PNG -> 4bpp -> LZ77 via
+# the generic %.4bpp:%.png and %.lz:% rules). Region-SAME with US (JP 0x081a71e0 ==
+# US 0x081b7828). These are LZ-COMPRESSED, so -mindist must byte-match the original
+# FE8 compressor PER ASSET: 95 sheets use gbagfx's default (mindist 2); the 12 below
+# need mindist 1 (discovered by scripts/extract_graphics.py's 1/2/3 sweep). Ported
+# by scripts/extract_graphics.py; see docs/tools/gbagfx.md.
+UNIT_ICON_WAIT_LZ := $(patsubst %.png,%.4bpp.lz,$(wildcard graphics/unit_icon/wait/*.png))
+asm/dat_const_data_unit_icon_wait.o: $(UNIT_ICON_WAIT_LZ)
+
+graphics/unit_icon/wait/unit_icon_wait_Archer_sheet.4bpp.lz:      LZ_FLAGS := -mindist 1
+graphics/unit_icon/wait/unit_icon_wait_Archer_F_sheet.4bpp.lz:    LZ_FLAGS := -mindist 1
+graphics/unit_icon/wait/unit_icon_wait_Sage_sheet.4bpp.lz:        LZ_FLAGS := -mindist 1
+graphics/unit_icon/wait/unit_icon_wait_Pirate_sheet.4bpp.lz:      LZ_FLAGS := -mindist 1
+graphics/unit_icon/wait/unit_icon_wait_Monk_sheet.4bpp.lz:        LZ_FLAGS := -mindist 1
+graphics/unit_icon/wait/unit_icon_wait_Necromancer_sheet.4bpp.lz: LZ_FLAGS := -mindist 1
+graphics/unit_icon/wait/unit_icon_wait_Bonewalker_sheet.4bpp.lz:  LZ_FLAGS := -mindist 1
+graphics/unit_icon/wait/unit_icon_wait_Wight_sheet.4bpp.lz:       LZ_FLAGS := -mindist 1
+graphics/unit_icon/wait/unit_icon_wait_Wight_Bow_sheet.4bpp.lz:   LZ_FLAGS := -mindist 1
+graphics/unit_icon/wait/unit_icon_wait_Peer_sheet.4bpp.lz:        LZ_FLAGS := -mindist 1
+graphics/unit_icon/wait/unit_icon_wait_Prince_sheet.4bpp.lz:      LZ_FLAGS := -mindist 1
+graphics/unit_icon/wait/unit_icon_wait_Unk77_sheet.4bpp.lz:       LZ_FLAGS := -mindist 1
+
 # C compile pipeline (agbcc): cpp -> iconv UTF-8->CP932 -> agbcc -> as.
 # NONMATCH_OBJECTS reuse this exact recipe but are NOT in $(C_OBJECTS) /
 # $(ALL_OBJECTS), so they compile under `make nonmatching` yet never link.

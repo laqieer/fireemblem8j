@@ -128,3 +128,32 @@ The first FE8J region reproduced from a committed source asset instead of
 This proves the whole loop — `png → 4bpp → lz → incbin → ROM` reproduces exact
 bytes with baserom out of the loop. The same recipe scales to the ~3,400 LZ
 graphics still incbin'd from the ROM.
+
+## Phase-1 batch 1 (proven at scale): item icons + unit-icon WAIT sheets
+
+The first scaled extraction, driven by **`scripts/extract_graphics.py`** (point it
+at a `dat_*.s` graphics file + the matching US `graphics/` dir; it ports the US
+committed source by symbol name, sweeps `-mindist` 1/2/3 per LZ asset, byte-verifies
+each entry against the ROM, rewrites the incbins, and prints the per-asset pins).
+
+Both regions are **region-SAME** (JP bytes == US bytes), so the US committed PNG /
+`.agbpal` *is* the JP source — no fresh extraction needed.
+
+**`asm/dat_data_item_icon.s` — 224 item icons + 1 palette (region-same, UNCOMPRESSED).**
+- 224 × `graphics/item_icon/*.png` → `*.4bpp` (16×16, 4bpp, `0x80` B each), **no LZ,
+  no `-mindist`** (the sheet is stored uncompressed in ROM).
+- `item_icon_palette.agbpal` (`0x40` B) is a **committed binary**, incbin'd verbatim.
+- Removes **28,736 B** of baserom incbin (225 directives).
+
+**`asm/dat_const_data_unit_icon_wait.s` — 107 map-sprite sheets (region-same, LZ77).**
+- 107 × `graphics/unit_icon/wait/*.png` → `*.4bpp` → `*.4bpp.lz` (variable size).
+- **`-mindist` is per-asset:** **95 sheets use the default 2**; **12 need 1**
+  (`Archer`, `Archer_F`, `Sage`, `Pirate`, `Monk`, `Necromancer`, `Bonewalker`,
+  `Wight`, `Wight_Bow`, `Peer`, `Prince`, `Unk77` — pinned in the Makefile). The
+  default (2) is left implicit; only the 12 mindist-1 overrides are written out.
+- Removes **37,588 B** of baserom incbin (107 directives).
+
+Both pass `make check`, `make compare`, `make clean && make compare`, and the
+build-with-`baserom.gba`-moved-away spot check (the `.4bpp`/`.4bpp.lz` regenerate
+byte-identical to the ROM from the committed PNGs alone). Self-containment rose
+16.96% → 17.35% (−66,324 baserom bytes, −332 incbin directives).
