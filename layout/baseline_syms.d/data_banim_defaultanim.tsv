@@ -1,0 +1,6 @@
+# code-grind: bind BanimScr_DefaultAnim[] (banim-ekrmain.c CONST_DATA AnimScr table)
+# as an ABS baseline_syms symbol so AnimScrAdvance graduates. JP 0x085E3F8C (from
+# asm/AnimScrAdvance.s =0x085E3F8C). Bytes provided by the data-4 frontier blob
+# df4_banim_a (gap2); pure ABS name binding (D34 class-2). extern-declared in
+# include/ekrbattle.h; graduated file uses the header extern.
+BanimScr_DefaultAnim	085E3F8C	data	codegrind_banim_defaultanim

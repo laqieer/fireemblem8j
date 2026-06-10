@@ -8,6 +8,8 @@
 #     -> bl sub_802BFFC  JP 0x0802BFFC (caller byte-diff was only the unlinked bl)
 #   UpdateHBlankHandlerState  hardware  Set{Primary,Secondary}HBlankHandler
 #     -> bl sub_8001C78  JP 0x08001C78
+#   CheckRound1  banim-ekrmain  AnimScrAdvance  -> bl sub_805AF74  JP 0x0805AF74
 ArenaSetFallbackWeaponForUnit	08031EC0	thumb	codegrind_intratu_callees
 GetBattleUnitUpdatedWeaponExp	0802BFFC	thumb	codegrind_intratu_callees
 UpdateHBlankHandlerState	08001C78	thumb	codegrind_intratu_callees
+CheckRound1	0805AF74	thumb	codegrind_intratu_callees
