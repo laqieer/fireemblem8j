@@ -1,0 +1,2 @@
+# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
+EE0AD0	EE0C00	asm/data_08EE0AD0.o(.data.residue.08EE0AD0)	descriptive raw ROM data (304 B, byte-completeness D29)
