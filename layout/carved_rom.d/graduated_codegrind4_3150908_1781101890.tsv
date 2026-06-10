@@ -9,3 +9,5 @@
 004C64	004C84	src/PutTwoSpecialChar.o(.text)	PutTwoSpecialChar (region-diff: bl PutSpecialChar)
 004A9C	004ABC	src/PutNumberOrBlank.o(.text)	PutNumberOrBlank (region-diff: callees PutTwoSpecialChar/PutNumber)
 004AF8	004B24	src/PutNumberBonus.o(.text)	PutNumberBonus (region-diff: callees PutSpecialChar/PutNumberSmall)
+0D5028	0D5054	src/m4aMPlayAllStop.o(.text)	m4aMPlayAllStop (region-diff: gNumMusicPlayers=9, gMPlayTable, m4aMPlayStop)
+0D5060	0D508C	src/m4aMPlayAllContinue.o(.text)	m4aMPlayAllContinue (region-diff: gNumMusicPlayers=9, gMPlayTable, MPlayContinue)
