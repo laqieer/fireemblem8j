@@ -1,0 +1,4 @@
+077374	077390	src/CheckEkrTriangleInvalid.o(.text)	CheckEkrTriangleInvalid (exact-tier graduated from gbadisasm asm)
+077F54	077F70	src/CheckEkrPopupEnded.o(.text)	CheckEkrPopupEnded (exact-tier graduated from gbadisasm asm)
+0759D4	0759F4	src/CheckEkrLvupDone.o(.text)	CheckEkrLvupDone (exact-tier graduated from gbadisasm asm)
+074EBC	074EDC	src/EkrClasschgFinished.o(.text)	EkrClasschgFinished (exact-tier graduated from gbadisasm asm)

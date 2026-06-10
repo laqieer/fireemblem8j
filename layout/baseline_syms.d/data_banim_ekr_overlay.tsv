@@ -1,0 +1,13 @@
+# Phase-2 code-grind: bind banim EWRAM_OVERLAY(banim) globals referenced by the
+# ekr "Check*/Finished" status functions so those functions graduate to matching C.
+# Each JP RAM address is read directly from the function's literal pool (authoritative):
+#   gEkrTriangleInvalid  asm/CheckEkrTriangleInvalid.s  =0x0202013C
+#   gEkrPopupEnded       asm/CheckEkrPopupEnded.s        =0x02020144
+#   gpProcEkrLevelup     asm/CheckEkrLvupDone.s          =0x020200B4
+#   gpProcEkrClasschg    asm/EkrClasschgFinished.s       =0x020200B0
+# All four are extern-declared in the US banim-ekr* headers; the extern ref aliases
+# this exact overlay RAM location.
+gEkrTriangleInvalid	0202013C	data	codegrind_banim_ekr_overlay
+gEkrPopupEnded	02020144	data	codegrind_banim_ekr_overlay
+gpProcEkrLevelup	020200B4	data	codegrind_banim_ekr_overlay
+gpProcEkrClasschg	020200B0	data	codegrind_banim_ekr_overlay
