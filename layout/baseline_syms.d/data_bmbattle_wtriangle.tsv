@@ -1,0 +1,7 @@
+# code-grind: bind bmbattle.c TU-private ROM table sWeaponTriangleRules
+# (static CONST_DATA struct WeaponTriangleRule[]) as an ABS baseline_syms symbol so
+# BattleApplyWeaponTriangleEffect graduates. JP 0x085C3F70 (from
+# asm/BattleApplyWeaponTriangleEffect.s =0x085C3F70); bytes in the data-4 frontier
+# blob df4_uistuff (gap27); pure ABS name binding (D34 class-2). Not in a header ->
+# graduated file prepends the extern.
+sWeaponTriangleRules	085C3F70	data	codegrind_bmbattle_wtriangle
