@@ -16,12 +16,22 @@ Usage:
   scripts/graduate_inline_accessors.py <US_TU> <fn> [<fn> ...]
   scripts/graduate_inline_accessors.py --tu <US_TU>        # all masked-tier fns of the TU
 """
-import os, re, sys, subprocess, glob
+import os, re, sys, subprocess, glob, time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 US = "/home/laqieer/fireemblem8u"
-FRAG = "layout/carved_rom.d/exact_layer.tsv"
+
+# PARALLEL-SAFE FRAGMENT (see graduate_exact_asm.py): each run writes its own unique
+# `layout/carved_rom.d/graduated_<scope>.tsv` (globbed by the build) instead of all
+# runs appending to the shared exact_layer.tsv, so concurrent agents never collide.
+EXACT_LAYER = "layout/carved_rom.d/exact_layer.tsv"  # legacy shared file (read-only now)
+FRAG = EXACT_LAYER  # default; set per-run in main()
+
+
+def frag_path_for(scope):
+    tag = re.sub(r"[^\w.-]", "_", scope)
+    return f"layout/carved_rom.d/graduated_inacc_{tag}_{os.getpid()}_{int(time.time())}.tsv"
 
 # name -> `extern inline` body. Only accessors whose data globals are already
 # named/placed in the JP build. Add more as their globals get carved.
@@ -52,6 +62,24 @@ extern inline struct Trap* GetTrap(int id) {
     return sTrapPool + id;
 }
 """,
+    # bmitem.c `inline` accessors: the JP item-stat/attribute getters INLINE these at
+    # -O2 (literal pool = gItemData 0x0885E068, already named via dat_gItemData_ref.s),
+    # so extract_func_only's out-of-line call diverges. Prepend as extern inline.
+    # ITEM_INDEX(x)=(x)&0xFF; gItemData declared in bmitem.h (always included).
+    "GetItemData": """extern inline const struct ItemData* GetItemData(int itemIndex) {
+    return gItemData + itemIndex;
+}
+""",
+    "GetItemStatBonuses": """extern inline const struct ItemStatBonuses* GetItemStatBonuses(int item) {
+    return GetItemData(ITEM_INDEX(item))->pStatBonuses;
+}
+""",
+}
+
+# Transitive inline deps: if the body uses accessor K, also prepend ACCESSORS[v] for
+# v in DEPS[K] (ordered: dependency first). E.g. GetItemStatBonuses inlines GetItemData.
+DEPS = {
+    "GetItemStatBonuses": ["GetItemData"],
 }
 
 
@@ -96,9 +124,18 @@ def grad_one(tu, name, jp, size):
     # prepend `extern inline` bodies for any accessor the function references
     # (transitively: GetUnitFromCharId uses GetUnit; some use GetClassData via
     #  GetUnit->pClassData, but only literal call-syntax matters for the prepend).
-    used = [a for a in ACCESSORS if re.search(r"\b" + a + r"\(", body)]
+    referenced = [a for a in ACCESSORS if re.search(r"\b" + a + r"\(", body)]
     # GetCharacterData is reached through unit->pCharacterData, not a call; only
     # prepend accessors actually called by name in the body.
+    # Pull in transitive inline deps (dependency emitted BEFORE its user so the C is
+    # well-formed), de-duped, preserving order.
+    used = []
+    for a in referenced:
+        for dep in DEPS.get(a, []):
+            if dep not in used:
+                used.append(dep)
+        if a not in used:
+            used.append(a)
     decls = "".join(ACCESSORS[a] for a in used)
     if not decls:
         return "skip:no inline accessor referenced"
@@ -125,8 +162,14 @@ def grad_one(tu, name, jp, size):
         open(src, "w").write("".join(b[:li + 1]) + "\n" + externs + "".join(b[li + 1:]))
     sh(f"rm -f src/{name}.o src/{name}.s")
 
+    # IMPORTANT: carve over the EXACT byte range the gbadisasm fragment occupied
+    # (start..end incl. any .align padding the layout already accounts for), NOT
+    # funcmap jp+size -- the funcmap size can be 2 bytes short of the padded region,
+    # which would leave a gap and shift the ROM (make compare RED). Read the fragment.
+    grow = open(gfrag).readline().strip().split("\t")
+    fstart, fend = int(grow[0], 16), int(grow[1], 16)
     with open(FRAG, "a") as f:
-        f.write(f"{jp & 0xFFFFFF:06X}\t{(jp + size) & 0xFFFFFF:06X}\t"
+        f.write(f"{fstart:06X}\t{fend:06X}\t"
                 f"src/{name}.o(.text)\t{name} (masked-tier graduated; "
                 f"extern inline {'/'.join(used)})\n")
     for p in (asm, gfrag):
@@ -159,6 +202,7 @@ def grad_one(tu, name, jp, size):
 
 
 def main():
+    global FRAG
     args = sys.argv[1:]
     fm = funcmap()
     gb = gbadisasm_names()
@@ -180,6 +224,9 @@ def main():
         tu = args[0]
         names = args[1:]
 
+    # PARALLEL-SAFE: unique per-run fragment, scoped by TU.
+    FRAG = frag_path_for(tu)
+
     grad, skip = [], []
     for name in names:
         if name not in fm:
@@ -196,6 +243,9 @@ def main():
     print(f"\n=== graduated {len(grad)} / {len(names)} ===")
     if grad:
         print("GRADUATED: " + ", ".join(grad))
+        print(f"FRAGMENT: {FRAG} ({len(grad)} rows)")
+    elif os.path.exists(FRAG) and os.path.getsize(FRAG) == 0:
+        os.remove(FRAG)
     if skip:
         print("SKIPPED: " + "; ".join(f"{n}({r})" for n, r in skip))
 

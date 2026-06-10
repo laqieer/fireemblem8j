@@ -30,12 +30,35 @@ Usage:
   scripts/graduate_exact_asm.py --all            # every eligible exact-tier fn
   scripts/graduate_exact_asm.py --list
 """
-import os, re, sys, subprocess, glob
+import os, re, sys, subprocess, glob, time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 US = "/home/laqieer/fireemblem8u"
-FRAG = "layout/carved_rom.d/exact_layer.tsv"
+
+# PARALLEL-SAFE FRAGMENT (D14 conflict-free carving). The Makefile/gen_layout glob
+# `layout/carved_rom.d/*.tsv`, so every fragment in that dir is linked. Historically
+# all runs appended to one SHARED `exact_layer.tsv`, which collides when concurrent
+# asm->C agents graduate at once (lost-update on a single appended file, merge
+# conflicts). Instead each *run* writes its own UNIQUE fragment
+# `layout/carved_rom.d/graduated_<scope>.tsv` (scope = --tu name, or a pid+time tag
+# for --all/ad-hoc). Existing exact_layer.tsv rows keep linking unchanged (still
+# globbed). FRAG is resolved once per run in main() via frag_path_for().
+EXACT_LAYER = "layout/carved_rom.d/exact_layer.tsv"  # legacy shared file (read-only now)
+FRAG = EXACT_LAYER  # default; overridden per-run by frag_path_for() in main()
+
+
+def _sanitize(tag):
+    return re.sub(r"[^\w.-]", "_", tag)
+
+
+def frag_path_for(scope):
+    """Unique per-run fragment path so concurrent runs never collide. `scope` is a
+    short stable tag (a TU name, or 'all'/'adhoc'); we append pid+epoch so two runs
+    with the same scope still get distinct files. Rows are appended only by THIS
+    run, so there is no lost-update across processes."""
+    tag = _sanitize(scope)
+    return f"layout/carved_rom.d/graduated_{tag}_{os.getpid()}_{int(time.time())}.tsv"
 
 
 def sh(c):
@@ -188,6 +211,7 @@ def grad_one(name, s, e, tu, fname):
 
 
 def main():
+    global FRAG
     args = sys.argv[1:]
     tiers = ("exact",)
     if "--tier" in args:
@@ -205,14 +229,27 @@ def main():
             print(f"  {tu:24s} {len(bytu[tu]):2d}: {', '.join(bytu[tu])}")
         return 0
 
+    # --frag <path> lets the caller pin an exact fragment file (parallel orchestrators
+    # that pre-assign disjoint files); otherwise we pick a unique per-run path.
+    frag_override = None
+    if "--frag" in args:
+        i = args.index("--frag"); frag_override = args[i + 1]; del args[i:i + 2]
+
+    scope = "adhoc"
     if "--all" in args:
+        scope = "all-" + "_".join(tiers)
         names = [r[0] for r in bl]
     elif "--tu" in args:
         i = args.index("--tu"); tu = args[i + 1]; del args[i:i + 2]
+        scope = tu
         names = [r[0] for r in bl if r[3] == tu]
         names += [a for a in args if not a.startswith("--")]
     else:
         names = [a for a in args if not a.startswith("--")]
+
+    # PARALLEL-SAFE: this run writes its own unique fragment (never the shared
+    # exact_layer.tsv), so concurrent graduate runs cannot clobber each other.
+    FRAG = frag_override or frag_path_for(scope)
 
     # optional: skip a TU (e.g. --skip-tu m4a)
     skip_tus = set()
@@ -237,6 +274,11 @@ def main():
     print(f"\n=== graduated {len(grad)} / {len(names)} to matching C ===")
     if grad:
         print("GRADUATED: " + ", ".join(grad))
+        print(f"FRAGMENT: {FRAG} ({len(grad)} rows)")
+    elif os.path.exists(FRAG):
+        # no graduation succeeded -> drop the empty per-run fragment we created
+        if os.path.getsize(FRAG) == 0:
+            os.remove(FRAG)
     if skip:
         print("SKIPPED: " + "; ".join(f"{n}({r})" for n, r in skip))
     return 0

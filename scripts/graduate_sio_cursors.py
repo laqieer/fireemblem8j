@@ -9,12 +9,16 @@ is the sole oracle. NOT a git operation; caller stages explicitly.
 
 Usage: scripts/graduate_sio_cursors.py <fn> [<fn> ...]
 """
-import os, re, sys, subprocess
+import os, re, sys, subprocess, time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 US = "/home/laqieer/fireemblem8u"
-FRAG = "layout/carved_rom.d/exact_layer.tsv"
+
+# PARALLEL-SAFE FRAGMENT (see graduate_exact_asm.py): unique per-run fragment, globbed
+# by the build, so concurrent agents never collide on the shared exact_layer.tsv.
+EXACT_LAYER = "layout/carved_rom.d/exact_layer.tsv"  # legacy shared file (read-only now)
+FRAG = f"layout/carved_rom.d/graduated_sio_{os.getpid()}_{int(time.time())}.tsv"
 CURSORS = ("sSendCursor", "sWriteCursor", "sReadCursor", "sRecvCursor")
 
 
@@ -76,8 +80,15 @@ def grad_one(name, jp, size):
         open(src, "w").write("".join(b[:li + 1]) + "\n" + externs + "".join(b[li + 1:]))
     sh(f"rm -f src/{name}.o src/{name}.s")
 
+    # Carve the EXACT gbadisasm fragment byte range (incl. .align padding the layout
+    # accounts for), NOT funcmap jp+size which can be short -> would shift the ROM.
+    if os.path.exists(gfrag):
+        grow = open(gfrag).readline().strip().split("\t")
+        fstart, fend = int(grow[0], 16), int(grow[1], 16)
+    else:
+        fstart, fend = jp & 0xFFFFFF, (jp + size) & 0xFFFFFF
     with open(FRAG, "a") as f:
-        f.write(f"{jp & 0xFFFFFF:06X}\t{(jp + size) & 0xFFFFFF:06X}\t"
+        f.write(f"{fstart:06X}\t{fend:06X}\t"
                 f"src/{name}.o(.text)\t{name} (sio cursor; masked-tier graduated)\n")
     for p in (asm, gfrag):
         if os.path.exists(p):
@@ -126,6 +137,9 @@ def main():
     print(f"\n=== graduated {len(grad)} / {len(sys.argv[1:])} ===")
     if grad:
         print("GRADUATED: " + ", ".join(grad))
+        print(f"FRAGMENT: {FRAG} ({len(grad)} rows)")
+    elif os.path.exists(FRAG) and os.path.getsize(FRAG) == 0:
+        os.remove(FRAG)
     if skip:
         print("SKIPPED: " + "; ".join(f"{n}({r})" for n, r in skip))
 
