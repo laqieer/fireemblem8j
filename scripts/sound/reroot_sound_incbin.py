@@ -41,8 +41,16 @@ def sound_files():
         "asm/dat_m4a_tables.s",
         "asm/dat_gMPlayTable_ref.s",
         "asm/dat_gMPlayJumpTableTemplate_ref.s",
+        "asm/dat_gSoundRoomTable_ref.s",
         "asm/frontier_df3_voicegroup.s",
         "asm/frontier_df4_voice.s",
+        # m4a engine + sound-wrapper CODE (region-same shifted Thumb, descriptive
+        # incbin -- re-rooted to committed .bin for self-containment; the eventual
+        # C decompilation is later readability polish).
+        "asm/m4a_1.s",
+        "asm/stranded_m4a.s",
+        "asm/stranded_soundwrapper.s",
+        "asm/stranded_banim-efxsound.s",
     ]
     out = []
     for p in pats:

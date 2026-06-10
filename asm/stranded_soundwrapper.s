@@ -6,7 +6,7 @@
 	.global GetCurrentBgmSong
 	.thumb_func
 GetCurrentBgmSong:
-	.incbin "baserom.gba", 0x21A8, 0xC
+	.incbin "data/sound/GetCurrentBgmSong.bin"
 
 	.section .text.s_080021B4, "ax", %progbits
 @ IsBgmPlaying region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -16,7 +16,7 @@ GetCurrentBgmSong:
 	.global IsBgmPlaying
 	.thumb_func
 IsBgmPlaying:
-	.incbin "baserom.gba", 0x21B4, 0x10
+	.incbin "data/sound/IsBgmPlaying.bin"
 
 	.section .text.s_08002820, "ax", %progbits
 @ Sound_SetDefaultMaxNumChannels region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -26,7 +26,7 @@ IsBgmPlaying:
 	.global Sound_SetDefaultMaxNumChannels
 	.thumb_func
 Sound_SetDefaultMaxNumChannels:
-	.incbin "baserom.gba", 0x2820, 0x18
+	.incbin "data/sound/Sound_SetDefaultMaxNumChannels.bin"
 
 	.section .text.s_080029D8, "ax", %progbits
 @ Sound_ForceChangeBgm region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -36,5 +36,5 @@ Sound_SetDefaultMaxNumChannels:
 	.global Sound_ForceChangeBgm
 	.thumb_func
 Sound_ForceChangeBgm:
-	.incbin "baserom.gba", 0x29D8, 0x30
+	.incbin "data/sound/Sound_ForceChangeBgm.bin"
 

@@ -4,132 +4,132 @@
 	.global umul3232H32
 	.thumb_func
 umul3232H32:
-	.incbin "baserom.gba", 0xD41B0, 0x10
+	.incbin "data/sound/umul3232H32.bin"
 	.global SoundMain
 	.thumb_func
 SoundMain:
-	.incbin "baserom.gba", 0xD41C0, 0x84
+	.incbin "data/sound/SoundMain.bin"
 	.global SoundMainRAM
 	.thumb_func
 SoundMainRAM:
-	.incbin "baserom.gba", 0xD4244, 0x3A4
+	.incbin "data/sound/SoundMainRAM.bin"
 	.global SoundMainBTM
 	.thumb_func
 SoundMainBTM:
-	.incbin "baserom.gba", 0xD45E8, 0x18
+	.incbin "data/sound/SoundMainBTM.bin"
 	.global RealClearChain
 	.thumb_func
 RealClearChain:
-	.incbin "baserom.gba", 0xD4600, 0x20
+	.incbin "data/sound/RealClearChain.bin"
 	.global ply_fine
 	.thumb_func
 ply_fine:
-	.incbin "baserom.gba", 0xD4620, 0x30
+	.incbin "data/sound/ply_fine.bin"
 	.global MPlayJumpTableCopy
 	.thumb_func
 MPlayJumpTableCopy:
-	.incbin "baserom.gba", 0xD4650, 0x34
+	.incbin "data/sound/MPlayJumpTableCopy.bin"
 	.global ld_r3_tp_adr_i
 	.thumb_func
 ld_r3_tp_adr_i:
-	.incbin "baserom.gba", 0xD4684, 0xC
+	.incbin "data/sound/ld_r3_tp_adr_i.bin"
 	.global ply_goto
 	.thumb_func
 ply_goto:
-	.incbin "baserom.gba", 0xD4690, 0x20
+	.incbin "data/sound/ply_goto.bin"
 	.global ply_patt
 	.thumb_func
 ply_patt:
-	.incbin "baserom.gba", 0xD46B0, 0x1C
+	.incbin "data/sound/ply_patt.bin"
 	.global ply_pend
 	.thumb_func
 ply_pend:
-	.incbin "baserom.gba", 0xD46CC, 0x14
+	.incbin "data/sound/ply_pend.bin"
 	.global ply_rept
 	.thumb_func
 ply_rept:
-	.incbin "baserom.gba", 0xD46E0, 0x30
+	.incbin "data/sound/ply_rept.bin"
 	.global ply_prio
 	.thumb_func
 ply_prio:
-	.incbin "baserom.gba", 0xD4710, 0xC
+	.incbin "data/sound/ply_prio.bin"
 	.global ply_tempo
 	.thumb_func
 ply_tempo:
-	.incbin "baserom.gba", 0xD471C, 0x14
+	.incbin "data/sound/ply_tempo.bin"
 	.global ply_keysh
 	.thumb_func
 ply_keysh:
-	.incbin "baserom.gba", 0xD4730, 0x14
+	.incbin "data/sound/ply_keysh.bin"
 	.global ply_voice
 	.thumb_func
 ply_voice:
-	.incbin "baserom.gba", 0xD4744, 0x30
+	.incbin "data/sound/ply_voice.bin"
 	.global ply_vol
 	.thumb_func
 ply_vol:
-	.incbin "baserom.gba", 0xD4774, 0x14
+	.incbin "data/sound/ply_vol.bin"
 	.global ply_pan
 	.thumb_func
 ply_pan:
-	.incbin "baserom.gba", 0xD4788, 0x14
+	.incbin "data/sound/ply_pan.bin"
 	.global ply_bend
 	.thumb_func
 ply_bend:
-	.incbin "baserom.gba", 0xD479C, 0x14
+	.incbin "data/sound/ply_bend.bin"
 	.global ply_bendr
 	.thumb_func
 ply_bendr:
-	.incbin "baserom.gba", 0xD47B0, 0x14
+	.incbin "data/sound/ply_bendr.bin"
 	.global ply_lfodl
 	.thumb_func
 ply_lfodl:
-	.incbin "baserom.gba", 0xD47C4, 0xC
+	.incbin "data/sound/ply_lfodl.bin"
 	.global ply_modt
 	.thumb_func
 ply_modt:
-	.incbin "baserom.gba", 0xD47D0, 0x18
+	.incbin "data/sound/ply_modt.bin"
 	.global ply_tune
 	.thumb_func
 ply_tune:
-	.incbin "baserom.gba", 0xD47E8, 0x14
+	.incbin "data/sound/ply_tune.bin"
 	.global ply_port
 	.thumb_func
 ply_port:
-	.incbin "baserom.gba", 0xD47FC, 0x18
+	.incbin "data/sound/ply_port.bin"
 	.global m4aSoundVSync
 	.thumb_func
 m4aSoundVSync:
-	.incbin "baserom.gba", 0xD4814, 0x4C
+	.incbin "data/sound/m4aSoundVSync.bin"
 	.global MPlayMain
 	.thumb_func
 MPlayMain:
-	.incbin "baserom.gba", 0xD4860, 0x268
+	.incbin "data/sound/MPlayMain.bin"
 	.global TrackStop
 	.thumb_func
 TrackStop:
-	.incbin "baserom.gba", 0xD4AC8, 0x44
+	.incbin "data/sound/TrackStop.bin"
 	.global ChnVolSetAsm
 	.thumb_func
 ChnVolSetAsm:
-	.incbin "baserom.gba", 0xD4B0C, 0x30
+	.incbin "data/sound/ChnVolSetAsm.bin"
 	.global ply_note
 	.thumb_func
 ply_note:
-	.incbin "baserom.gba", 0xD4B3C, 0x200
+	.incbin "data/sound/ply_note.bin"
 	.global ply_endtie
 	.thumb_func
 ply_endtie:
-	.incbin "baserom.gba", 0xD4D3C, 0x40
+	.incbin "data/sound/ply_endtie.bin"
 	.global clear_modM
 	.thumb_func
 clear_modM:
-	.incbin "baserom.gba", 0xD4D7C, 0x28
+	.incbin "data/sound/clear_modM.bin"
 	.global ply_lfos
 	.thumb_func
 ply_lfos:
-	.incbin "baserom.gba", 0xD4DA4, 0x14
+	.incbin "data/sound/ply_lfos.bin"
 	.global ply_mod
 	.thumb_func
 ply_mod:
-	.incbin "baserom.gba", 0xD4DB8, 0x14
+	.incbin "data/sound/ply_mod.bin"

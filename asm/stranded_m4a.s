@@ -6,7 +6,7 @@
 	.global MPlayContinue
 	.thumb_func
 MPlayContinue:
-	.incbin "baserom.gba", 0xD4E34, 0x1C
+	.incbin "data/sound/MPlayContinue.bin"
 
 	.section .text.s_080D4E50, "ax", %progbits
 @ MPlayFadeOut region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -16,7 +16,7 @@ MPlayContinue:
 	.global MPlayFadeOut
 	.thumb_func
 MPlayFadeOut:
-	.incbin "baserom.gba", 0xD4E50, 0x20
+	.incbin "data/sound/MPlayFadeOut.bin"
 
 	.section .text.s_080D509C, "ax", %progbits
 @ m4aMPlayFadeOutTemporarily region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -26,7 +26,7 @@ MPlayFadeOut:
 	.global m4aMPlayFadeOutTemporarily
 	.thumb_func
 m4aMPlayFadeOutTemporarily:
-	.incbin "baserom.gba", 0xD509C, 0x20
+	.incbin "data/sound/m4aMPlayFadeOutTemporarily.bin"
 
 	.section .text.s_080D50BC, "ax", %progbits
 @ m4aMPlayFadeIn region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -36,7 +36,7 @@ m4aMPlayFadeOutTemporarily:
 	.global m4aMPlayFadeIn
 	.thumb_func
 m4aMPlayFadeIn:
-	.incbin "baserom.gba", 0xD50BC, 0x28
+	.incbin "data/sound/m4aMPlayFadeIn.bin"
 
 	.section .text.s_080D50E4, "ax", %progbits
 @ m4aMPlayImmInit region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -46,7 +46,7 @@ m4aMPlayFadeIn:
 	.global m4aMPlayImmInit
 	.thumb_func
 m4aMPlayImmInit:
-	.incbin "baserom.gba", 0xD50E4, 0x48
+	.incbin "data/sound/m4aMPlayImmInit.bin"
 
 	.section .text.s_080D540C, "ax", %progbits
 @ m4aSoundMode region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -56,7 +56,7 @@ m4aMPlayImmInit:
 	.global m4aSoundMode
 	.thumb_func
 m4aSoundMode:
-	.incbin "baserom.gba", 0xD540C, 0x98
+	.incbin "data/sound/m4aSoundMode.bin"
 
 	.section .text.s_080D54F8, "ax", %progbits
 @ m4aSoundVSyncOff region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -66,7 +66,7 @@ m4aSoundMode:
 	.global m4aSoundVSyncOff
 	.thumb_func
 m4aSoundVSyncOff:
-	.incbin "baserom.gba", 0xD54F8, 0x7C
+	.incbin "data/sound/m4aSoundVSyncOff.bin"
 
 	.section .text.s_080D5574, "ax", %progbits
 @ m4aSoundVSyncOn region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -76,7 +76,7 @@ m4aSoundVSyncOff:
 	.global m4aSoundVSyncOn
 	.thumb_func
 m4aSoundVSyncOn:
-	.incbin "baserom.gba", 0xD5574, 0x3C
+	.incbin "data/sound/m4aSoundVSyncOn.bin"
 
 	.section .text.s_080D5628, "ax", %progbits
 @ MPlayStart region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -86,7 +86,7 @@ m4aSoundVSyncOn:
 	.global MPlayStart
 	.thumb_func
 MPlayStart:
-	.incbin "baserom.gba", 0xD5628, 0xE4
+	.incbin "data/sound/MPlayStart.bin"
 
 	.section .text.s_080D570C, "ax", %progbits
 @ m4aMPlayStop region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -96,7 +96,7 @@ MPlayStart:
 	.global m4aMPlayStop
 	.thumb_func
 m4aMPlayStop:
-	.incbin "baserom.gba", 0xD570C, 0x40
+	.incbin "data/sound/m4aMPlayStop.bin"
 
 	.section .text.s_080D574C, "ax", %progbits
 @ FadeOutBody region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -106,7 +106,7 @@ m4aMPlayStop:
 	.global FadeOutBody
 	.thumb_func
 FadeOutBody:
-	.incbin "baserom.gba", 0xD574C, 0xC8
+	.incbin "data/sound/FadeOutBody.bin"
 
 	.section .text.s_080D5814, "ax", %progbits
 @ TrkVolPitSet region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -116,7 +116,7 @@ FadeOutBody:
 	.global TrkVolPitSet
 	.thumb_func
 TrkVolPitSet:
-	.incbin "baserom.gba", 0xD5814, 0xB4
+	.incbin "data/sound/TrkVolPitSet.bin"
 
 	.section .text.s_080D5970, "ax", %progbits
 @ CgbOscOff region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -126,7 +126,7 @@ TrkVolPitSet:
 	.global CgbOscOff
 	.thumb_func
 CgbOscOff:
-	.incbin "baserom.gba", 0xD5970, 0x50
+	.incbin "data/sound/CgbOscOff.bin"
 
 	.section .text.s_080D59C0, "ax", %progbits
 @ CgbModVol region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -136,7 +136,7 @@ CgbOscOff:
 	.global CgbModVol
 	.thumb_func
 CgbModVol:
-	.incbin "baserom.gba", 0xD59C0, 0x68
+	.incbin "data/sound/CgbModVol.bin"
 
 	.section .text.s_080D5E74, "ax", %progbits
 @ m4aMPlayTempoControl region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -146,7 +146,7 @@ CgbModVol:
 	.global m4aMPlayTempoControl
 	.thumb_func
 m4aMPlayTempoControl:
-	.incbin "baserom.gba", 0xD5E74, 0x28
+	.incbin "data/sound/m4aMPlayTempoControl.bin"
 
 	.section .text.s_080D6000, "ax", %progbits
 @ m4aMPlayModDepthSet region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -156,7 +156,7 @@ m4aMPlayTempoControl:
 	.global m4aMPlayModDepthSet
 	.thumb_func
 m4aMPlayModDepthSet:
-	.incbin "baserom.gba", 0xD6000, 0x74
+	.incbin "data/sound/m4aMPlayModDepthSet.bin"
 
 	.section .text.s_080D6074, "ax", %progbits
 @ m4aMPlayLFOSpeedSet region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -166,7 +166,7 @@ m4aMPlayModDepthSet:
 	.global m4aMPlayLFOSpeedSet
 	.thumb_func
 m4aMPlayLFOSpeedSet:
-	.incbin "baserom.gba", 0xD6074, 0x74
+	.incbin "data/sound/m4aMPlayLFOSpeedSet.bin"
 
 	.section .text.s_080D6274, "ax", %progbits
 @ ply_xwave region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -176,7 +176,7 @@ m4aMPlayLFOSpeedSet:
 	.global ply_xwave
 	.thumb_func
 ply_xwave:
-	.incbin "baserom.gba", 0xD6274, 0x48
+	.incbin "data/sound/ply_xwave.bin"
 
 	.section .text.s_080D6320, "ax", %progbits
 @ ply_xiecv region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -186,7 +186,7 @@ ply_xwave:
 	.global ply_xiecv
 	.thumb_func
 ply_xiecv:
-	.incbin "baserom.gba", 0xD6320, 0xC
+	.incbin "data/sound/ply_xiecv.bin"
 
 	.section .text.s_080D632C, "ax", %progbits
 @ ply_xiecl region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -196,5 +196,5 @@ ply_xiecv:
 	.global ply_xiecl
 	.thumb_func
 ply_xiecl:
-	.incbin "baserom.gba", 0xD632C, 0xC
+	.incbin "data/sound/ply_xiecl.bin"
 

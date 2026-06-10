@@ -208,8 +208,10 @@ asm/direct_sound_data.o: $(DIRECT_SOUND_BINS)
 SOUND_DATA_BINS := $(wildcard data/sound/*.bin)
 $(patsubst %.s,%.o,$(wildcard asm/snd_song*.s asm/snd_banim_efxsound_data_*.s \
 	asm/dat_voicegroup*_ref.s asm/dat_m4a_tables.s asm/dat_gMPlayTable_ref.s \
-	asm/dat_gMPlayJumpTableTemplate_ref.s asm/frontier_df3_voicegroup.s \
-	asm/frontier_df4_voice.s)): $(SOUND_DATA_BINS)
+	asm/dat_gMPlayJumpTableTemplate_ref.s asm/dat_gSoundRoomTable_ref.s \
+	asm/frontier_df3_voicegroup.s asm/frontier_df4_voice.s \
+	asm/m4a_1.s asm/stranded_m4a.s asm/stranded_soundwrapper.s \
+	asm/stranded_banim-efxsound.s)): $(SOUND_DATA_BINS)
 
 # Banim OAM / AnimSprite / motion / modes DATA (Phase 1 self-containment): the
 # per-animation data blobs are COMMITTED, descriptively-named `data/banim/*.bin`

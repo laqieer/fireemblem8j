@@ -1481,9 +1481,12 @@ with each incbin, verified) and rewrites the `.s`; the Makefile gets one flagged
 `.bin` are committed leaves, no recipe). `data/sound/*.bin` is committed source (NOT gitignored — only top-level
 `sound/**/*.bin` is, the aif2pcm intermediates).
 
-**Result.** **0 sound `.incbin "baserom.gba"` remaining.** Build self-containment **92.38% → 93.49%** (+1.11 pts, 186,135 B
-moved to committed source; sound incbin count 5666 → 5278). `make check`, `make compare`, `make clean && make compare` all
-green. PROVEN self-contained: with `baserom.gba` removed, the re-rooted sound objects assemble from `data/sound/*.bin`.
+**Result.** **0 sound `.incbin "baserom.gba"` remaining** (data classes + the m4a-engine/sound-wrapper CODE TUs `m4a_1`,
+`stranded_m4a`, `stranded_soundwrapper`, `stranded_banim-efxsound`, `dat_gSoundRoomTable_ref` — all region-same-shifted
+Thumb, re-rooted the same way; their eventual C decompilation is later readability polish). **449 incbin directives,
+192,255 bytes** moved to committed source. Build self-containment **92.38% → 93.53%** (+1.15 pts; sound incbin count
+5666 → 5217). `make check`, `make compare`, `make clean && make compare` all green. PROVEN self-contained: with
+`baserom.gba` removed, every re-rooted sound object assembles from `data/sound/*.bin`.
 
 **Takeaways.** (a) The committed-named-`.bin` model (banim, D33) generalizes to *any* region-different opaque blob — it
 decouples self-containment (have it now) from readability (`.mid`/`voice_*`, later). (b) mid2agb's relocation wiring is

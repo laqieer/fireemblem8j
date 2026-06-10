@@ -54,20 +54,25 @@ and rewrites `asm/direct_sound_data.s`.
 
 ## DONE — remaining sound classes (voicegroups + song bodies + m4a tables) now self-contained
 
-The voicegroup, song-body, gMPlayTable, m4a-scalar-table and frontier-voice-gap
-data — the entire non-sample sound remainder, **388 `.incbin "baserom.gba"`
-directives across 135 `.s` files, 186,135 bytes** — is now reproduced from
-**committed `data/sound/*.bin`** (one symbol-named blob per incbin), exactly the
-`data/banim/*.bin` model: a committed `.bin` is the self-contained source of truth
-for region-different / table-pinned opaque data. baserom.gba is no longer in the
-sound build chain. `scripts/sound/reroot_sound_incbin.py` does the extraction +
-`.s` rewrite; the Makefile adds one flagged dependency block
-(`SOUND_DATA_BINS`). **0 sound `.incbin "baserom.gba"` remain.**
+The entire sound remainder — voicegroups, song bodies, gMPlayTable, m4a scalar
+tables, frontier voice gaps, gSoundRoomTable, AND the m4a-engine / sound-wrapper
+CODE TUs (`m4a_1`, `stranded_m4a`, `stranded_soundwrapper`,
+`stranded_banim-efxsound`), **449 `.incbin "baserom.gba"` directives across 140
+`.s` files, 192,255 bytes** — is now reproduced from **committed `data/sound/*.bin`**
+(one symbol-named blob per incbin), exactly the `data/banim/*.bin` model: a
+committed `.bin` is the self-contained source of truth for region-different /
+table-pinned opaque data (and region-same-shifted code, descriptively carried).
+baserom.gba is no longer in the sound build chain.
+`scripts/sound/reroot_sound_incbin.py` does the extraction + `.s` rewrite; the
+Makefile adds one flagged dependency block (`SOUND_DATA_BINS`). **0 sound
+`.incbin "baserom.gba"` remain.**
 
-**Proven self-contained.** With `baserom.gba` removed, the re-rooted sound objects
+**Proven self-contained.** With `baserom.gba` removed, every re-rooted sound object
 (`snd_song*`, `dat_voicegroup*_ref`, `dat_m4a_tables`, `frontier_df3_voicegroup`,
-…) all assemble from `data/sound/*.bin`; `make compare` and `make clean && make
-compare` stay `OK`. Build self-containment **92.38% → 93.49%** (+1.11 pts).
+`m4a_1`, `stranded_m4a`, …) assembles from `data/sound/*.bin`; `make compare` and
+`make clean && make compare` stay `OK`. Build self-containment **92.38% → 93.53%**
+(+1.15 pts). (The m4a-engine code TUs are region-same-shifted Thumb; re-rooting
+gives self-containment now, the C decompilation is later readability polish.)
 
 **mid2agb feasibility — VERIFIED end-to-end (the D33 hypothesis, now proven).**
 song001 compiled from the US `.mid` (`song001_agbfe3_bgm_opening.mid`) with the US
