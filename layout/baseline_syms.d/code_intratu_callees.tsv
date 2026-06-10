@@ -16,3 +16,8 @@ UpdateHBlankHandlerState	08001C78	thumb	codegrind_intratu_callees
 CheckRound1	0805AF74	thumb	codegrind_intratu_callees
 ekrBattle_StartPromotion	08051174	thumb	codegrind_intratu_callees
 SearchAvailableEvent	080851FC	thumb	codegrind_intratu_callees
+#   bmmap RefreshEntityBmMaps still-asm static helpers (call order = US source order
+#   after the 3 BmMapFill calls): RefreshTorchlights/Units/MinesOnBmMap
+RefreshTorchlightsOnBmMap	08019E4C	thumb	codegrind_intratu_callees
+RefreshUnitsOnBmMap	08019C78	thumb	codegrind_intratu_callees
+RefreshMinesOnBmMap	08019E78	thumb	codegrind_intratu_callees
