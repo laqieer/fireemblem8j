@@ -47,3 +47,7 @@ gDefaultFont	02028E58	data	codegrind4_fontgrp
 BMapVSync_InitMapAnimations	08030044	thumb	codegrind4_bmio
 DrawSpecialCharGlyph	0800493C	thumb	codegrind4_fontgrp
 SetSupportLevelGained	080286D0	thumb	codegrind4_bmreliance
+sBmMapUnitPool	0202E4F0	data	codegrind4_bmmap
+sBmMapTerrainPool	0202ECA8	data	codegrind4_bmmap
+UnpackChapterMap	08019584	thumb	codegrind4_bmmap
+RefreshTerrainBmMap	0801973C	thumb	codegrind4_bmmap

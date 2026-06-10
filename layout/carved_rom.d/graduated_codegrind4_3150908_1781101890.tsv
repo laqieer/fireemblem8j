@@ -26,3 +26,4 @@
 017254	017294	src/IsItemUnsealedForUnit.o(.text)	IsItemUnsealedForUnit (region-diff: inline GetItemType/GetChapterUnk1C)
 028270	0282A4	src/UnitGainSupportLevel.o(.text)	UnitGainSupportLevel (region-diff: SetSupportLevelGained @ 0x286D0, GetUnitSupporterCharacter, gPlaySt)
 001650	00169C	src/Hardware_CopyViaDmaStruct.o(.text)	Hardware_CopyViaDmaStruct (region-diff: struct UnknownDmaStruct; byte-exact)
+019294	0192FC	src/InitMapForMinimap.o(.text)	InitMapForMinimap (region-diff: bmmap pools/callees bound)
