@@ -10,10 +10,10 @@
 @ df4_tail region-different data, JP 0x08babaf8..0x08babe04 (780 B); long-tail data gap (no .text in window), byte-perfect incbin.
 	.global frontier_df4_tail_000_BABAF8
 frontier_df4_tail_000_BABAF8:
-	.incbin "baserom.gba", 0xBABAF8, 0x30C
+	.incbin "graphics/frontier_df4_tail/frontier_df4_tail_000_BABAF8.bin"
 
 	.section .data.frontier_df4_tail.gap1, "a", %progbits
 @ df4_tail region-different data, JP 0x08bb08b4..0x08bb8788 (32468 B); long-tail data gap (no .text in window), byte-perfect incbin.
 	.global frontier_df4_tail_001_BB08B4
 frontier_df4_tail_001_BB08B4:
-	.incbin "baserom.gba", 0xBB08B4, 0x7ED4
+	.incbin "graphics/frontier_df4_tail/frontier_df4_tail_001_BB08B4.bin"

@@ -8,16 +8,16 @@
 @ map_objtype region-different data, JP 0x0817b398..0x08181610 (25208 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_map_objtype_000_17B398
 frontier_map_objtype_000_17B398:
-	.incbin "baserom.gba", 0x17B398, 0x6278
+	.incbin "graphics/frontier_map_objtype/frontier_map_objtype_000_17B398.bin.lz"
 
 	.section .data.frontier_map_objtype.gap1, "a", %progbits
 @ map_objtype region-different data, JP 0x08181610..0x08188888 (29304 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_map_objtype_001_181610
 frontier_map_objtype_001_181610:
-	.incbin "baserom.gba", 0x181610, 0x7278
+	.incbin "graphics/frontier_map_objtype/frontier_map_objtype_001_181610.bin.lz"
 
 	.section .data.frontier_map_objtype.gap2, "a", %progbits
 @ map_objtype region-different data, JP 0x08188888..0x08190010 (30600 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_map_objtype_002_188888
 frontier_map_objtype_002_188888:
-	.incbin "baserom.gba", 0x188888, 0x7788
+	.incbin "graphics/frontier_map_objtype/frontier_map_objtype_002_188888.bin.lz"

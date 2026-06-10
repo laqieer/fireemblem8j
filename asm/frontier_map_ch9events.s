@@ -8,4 +8,4 @@
 @ map_ch9events region-different data, JP 0x081598a0..0x081608a4 (28676 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_map_ch9events_000_1598A0
 frontier_map_ch9events_000_1598A0:
-	.incbin "baserom.gba", 0x1598A0, 0x7004
+	.incbin "graphics/frontier_map_ch9events/frontier_map_ch9events_000_1598A0.bin"
