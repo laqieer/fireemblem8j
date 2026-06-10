@@ -29,3 +29,4 @@ sSpecialCharStList	02028E74	data	codegrind4_fontgrp
 PutGuideCategoryName	080D2EBC	thumb	codegrind4_bmguide
 GenerateMovementMap	0801A1B8	thumb	codegrind4_bmidoten
 gNumMusicPlayers	00000009	data	codegrind4_m4a
+Clear64byte	080D525C	thumb	codegrind4_m4a
