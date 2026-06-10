@@ -1,0 +1,7 @@
+SoundBiasReset	080D63C4	thumb	hardware_08001C00
+SoundBiasSet	080D63CC	thumb	hardware_08001C00
+sHBlankHandler1	030030D4	data	hardware_08001C00
+sHBlankHandler2	030036E8	data	hardware_08001C00
+SetIRQHandler	08000B50	thumb	hardware_08001C00
+_UpdateKeyStatus	080012FC	thumb	hardware_0800139C
+gKeyStatusIgnoredSt	0300000E	data	hardware_0800139C

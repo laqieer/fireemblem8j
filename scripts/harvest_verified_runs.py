@@ -153,7 +153,7 @@ def main():
                 os.remove(p)
 
             ok = port_run.port(name, runs=[(start, end, fns)], src_tu=tu,
-                               frag=f"harvest_{tu}")
+                               frag=f"harvest_{tu}", dedup_globals=True)
             if ok:
                 total_runs += 1
                 total_fns += len(fns)

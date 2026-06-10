@@ -105,7 +105,59 @@ def _try_decl(head, sym, word):
     return f"extern {spec} {sym}{arrays};"
 
 
-def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False):
+def already_defined_globals(src_tu):
+    """File-scope globals the partially-carved `src/<src_tu>.o` ALREADY defines.
+
+    A harvest run extracted from a partially-ported TU re-pulls the whole file
+    header (includes + every file-scope EWRAM_DATA/.data/.bss/.rodata global), so a
+    global the existing `src/<src_tu>.o` already defines is doubly-defined at link
+    time (`multiple definition of gFoo`). The run's code body byte-matches; the only
+    blocker is the duplicate definition. Return the set of those global NAMES so the
+    caller can demote each to an `extern` (storage stays in the existing object)."""
+    obj = f"src/{src_tu}.o"
+    if not os.path.exists(obj):
+        r = sh(f"make {obj}")
+        if not os.path.exists(obj):
+            return set()
+    defs = set()
+    for l in sh(f"arm-none-eabi-objdump -t {obj}").stdout.splitlines():
+        p = l.split()
+        # global (`g` in field 2) symbol in a DATA section (not .text), not a section
+        # symbol — i.e. a file-scope variable the object physically provides.
+        if len(p) >= 5 and p[1] == "g" and p[-3] in (
+                "ewram_data", ".data", ".bss", "bss", "sbss", ".rodata") \
+                and not p[-1].startswith("."):
+            defs.add(p[-1])
+    return defs
+
+
+def demote_defs_to_extern(src, names):
+    """Rewrite each file-scope DEFINITION of a name in `names` to an `extern` decl
+    (drop the initializer, prepend `extern`). Byte-neutral for the run's .text — the
+    variable's storage lives in the already-carved object; this only stops the
+    subset from re-emitting it. Conservative: only touches a top-level `... name ... ;`
+    (optionally `= init`) at column 0, never a use inside a function body."""
+    for nm in names:
+        # match a top-level declaration line/group defining `nm` (col-0 start, ends
+        # at the `;` that closes it). Handles `T (* EWRAM_DATA nm)(...) = X;`,
+        # `T nm[N] = {...};`, `T nm = X;`, and bare `T nm;`.
+        pat = re.compile(
+            r"(?m)^([A-Za-z_][\w\s\*\(\)]*?\b" + re.escape(nm) + r"\b[^;{}]*?)"
+            r"(\s*=\s*[^;]*)?;",
+        )
+        def repl(m):
+            decl = m.group(1).rstrip()
+            if decl.lstrip().startswith("extern"):
+                return m.group(0)            # already extern
+            return "extern " + decl + ";"
+        src2 = pat.sub(repl, src, count=1)
+        if src2 != src:
+            src = src2
+    return src
+
+
+def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False,
+         dedup_globals=False):
     # src_tu: US source TU to extract from (defaults to `name`). Lets carve_exact
     # carve functions STRANDED inside an already-carved TU into a SEPARATELY-named
     # object (e.g. name="exact_0800XXXX", src_tu="bmlib") so the carved_objs() skip
@@ -121,6 +173,14 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False):
     #   statics / shared rodata (statscreen gMid_*/sPage*TextInfo/sStatScreenInfo,
     #   etc.): extract_run re-emits those definitions and grows the ROM / mismatches
     #   their region-different content, whereas binding them resolves the run cleanly.
+    # dedup_globals: when set, demote any file-scope global the existing
+    #   `src/<src_tu>.o` already defines (OR one already bound as a fixed-address
+    #   baseline_syms data symbol) to an `extern` in the extracted subset, so a
+    #   partially-carved TU's NEXT verified run doesn't multiple-define / double-carve
+    #   a shared global (the D41/D43 data-placement-blocked frontier: the run byte-
+    #   matches, only the dup definition / already-provided data blocks the full build).
+    #   This is the lighter-touch alternative to func_only for runs that DO need their
+    #   other (region-same, not-yet-carved) file-scope data emitted from the subset.
     src_tu = src_tu or name
     if f"src/{name}.o" in carved_objs():
         print(f"{name}: already has a carved run — skipping"); return False
@@ -164,6 +224,12 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False):
     sub = "".join(l for l in sub.splitlines(keepends=True)
                   if not (l.lstrip().startswith('#include "src/data/')
                           and '"' in l and not os.path.exists(l.split('"')[1])))
+    if dedup_globals:
+        # Demote globals the existing partial src/<src_tu>.o already defines to
+        # `extern` so this NEXT run doesn't multiple-define them (D41 unblock).
+        dups = already_defined_globals(src_tu)
+        if dups:
+            sub = demote_defs_to_extern(sub, dups)
     open(f"src/{name}.c", "w").write(sub)
     obj = f"src/{name}.o"
     r = sh(f"make src/{name}.o")
@@ -699,11 +765,11 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False):
         else:
             open(p, "w").write(c)
     os.remove(f"src/{name}.c"); sh(f"rm -f src/{name}.o src/{name}.s"); sh("make layout")
-    # next-largest run (reuse discovery); keep src_tu/frag/func_only so the recursion
-    # still extracts from the right US TU, in the right mode, and writes to the same
-    # parallel-safe fragment.
+    # next-largest run (reuse discovery); keep src_tu/frag/func_only/dedup_globals so
+    # the recursion still extracts from the right US TU, in the right mode, and writes
+    # to the same parallel-safe fragment.
     return port(name, exclude + (tuple(funcs),), runs, src_tu=src_tu, frag=frag,
-                func_only=func_only)
+                func_only=func_only, dedup_globals=dedup_globals)
 
 
 if __name__ == "__main__":
