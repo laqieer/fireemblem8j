@@ -1,8 +1,8 @@
 	.section .rodata.dat_data_opanim_gfx_p1, "a", %progbits
-@ src/data/data_opanim_gfx.o: region-same content at JP 0x08b5b654 (US 0x08ac1c8c, shift -0xFFF66638); incbin baserom.gba
+@ src/data/data_opanim_gfx.o: region-same content at JP 0x08b5b654 (US 0x08ac1c8c, shift -0xFFF66638); EXTRACTED to graphics/opanim/ except 8 FE-format (.feimg/.fetsa) symbol(s) still incbin baserom.gba (need FETSATOOL)
 	.global Pal_OpAnimEphraimBlur
 Pal_OpAnimEphraimBlur:
-	.incbin "baserom.gba", 0xB5B654, 0x160
+	.incbin "graphics/opanim/OpAnimEphraim.gbapal"
 	.global Img_OpAnimEirika
 Img_OpAnimEirika:
 	.incbin "baserom.gba", 0xB5B7B4, 0xD38
@@ -29,25 +29,25 @@ Tsa_OpAnimEirikaBlur3:
 	.incbin "baserom.gba", 0xB5EDE8, 0x1F4
 	.global Img_OpAnimEirikaClose1
 Img_OpAnimEirikaClose1:
-	.incbin "baserom.gba", 0xB5EFDC, 0x1D60
+	.incbin "graphics/opanim/OpAnimEirikaClose1.4bpp.lz"
 	.global Img_OpAnimEirikaClose2
 Img_OpAnimEirikaClose2:
-	.incbin "baserom.gba", 0xB60D3C, 0x1A68
+	.incbin "graphics/opanim/OpAnimEirikaClose2.4bpp.lz"
 	.global Tsa_OpAnimEirikaClose1
 Tsa_OpAnimEirikaClose1:
-	.incbin "baserom.gba", 0xB627A4, 0x41C
+	.incbin "graphics/opanim/OpAnimEirikaClose1.map.bin.lz"
 	.global Tsa_OpAnimEirikaClose2
 Tsa_OpAnimEirikaClose2:
-	.incbin "baserom.gba", 0xB62BC0, 0x144
+	.incbin "graphics/opanim/OpAnimEirikaClose2.map.bin.lz"
 	.global Pal_OpAnimEirikaBlur
 Pal_OpAnimEirikaBlur:
-	.incbin "baserom.gba", 0xB62D04, 0x160
+	.incbin "graphics/opanim/OpAnimEirika.gbapal"
 	.global Img_OpAnimJoshua
 Img_OpAnimJoshua:
-	.incbin "baserom.gba", 0xB62E64, 0x1AD4
+	.incbin "graphics/opanim/OpAnimJoshua.4bpp.lz"
 	.global Img_OpAnimJoshua2
 Img_OpAnimJoshua2:
-	.incbin "baserom.gba", 0xB64938, 0xFE8
+	.incbin "graphics/opanim/OpAnimJoshua2.4bpp.lz"
 	.global Tsa_OpAnimJoshua
 Tsa_OpAnimJoshua:
-	.incbin "baserom.gba", 0xB65920, 0x3E8
+	.incbin "graphics/opanim/OpAnimJoshua.map.bin.lz"

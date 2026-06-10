@@ -1,11 +1,11 @@
 	.section .rodata.dat_data_opanim_gfx_p22, "a", %progbits
-@ src/data/data_opanim_gfx.o: region-same content at JP 0x08b89af8 (US 0x08af0130, shift -0xFFF66638); incbin baserom.gba
+@ src/data/data_opanim_gfx.o: region-same content at JP 0x08b89af8 (US 0x08af0130, shift -0xFFF66638); EXTRACTED to graphics/opanim/ (committed PNG/.pal/.map.bin source)
 	.global Pal_OpAnimFaceCaellach
 Pal_OpAnimFaceCaellach:
-	.incbin "baserom.gba", 0xB89AF8, 0x20
+	.incbin "graphics/opanim/OpAnimFaceCaellach.gbapal"
 	.global Img_OpAnimFaceLyon
 Img_OpAnimFaceLyon:
-	.incbin "baserom.gba", 0xB89B18, 0x894
+	.incbin "graphics/opanim/OpAnimFaceLyon.4bpp.lz"
 	.global Img_OpAnimFaceLyonShadow
 Img_OpAnimFaceLyonShadow:
-	.incbin "baserom.gba", 0xB8A3AC, 0x404
+	.incbin "graphics/opanim/OpAnimFaceLyonShadow.4bpp.lz"

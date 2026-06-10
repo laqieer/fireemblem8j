@@ -1,5 +1,5 @@
 	.section .rodata.dat_data_opanim_gfx_p0, "a", %progbits
-@ src/data/data_opanim_gfx.o: region-same content at JP 0x08b4bba0 (US 0x08ab21d8, shift -0xFFF66638); incbin baserom.gba
+@ src/data/data_opanim_gfx.o: region-same content at JP 0x08b4bba0 (US 0x08ab21d8, shift -0xFFF66638); EXTRACTED to graphics/opanim/ except 10 FE-format (.feimg/.fetsa) symbol(s) still incbin baserom.gba (need FETSATOOL)
 	.global Img_OpAnimWorldMap
 Img_OpAnimWorldMap:
 	.incbin "baserom.gba", 0xB4BBA0, 0x3BB8
@@ -8,7 +8,7 @@ Tsa_OpAnimWorldMap:
 	.incbin "baserom.gba", 0xB4F758, 0x57C
 	.global Pal_OpAnimWorldMap
 Pal_OpAnimWorldMap:
-	.incbin "baserom.gba", 0xB4FCD4, 0x20
+	.incbin "graphics/opanim/OpAnimWorldMap.gbapal"
 	.global Img_OpAnimWorldMapFog
 Img_OpAnimWorldMapFog:
 	.incbin "baserom.gba", 0xB4FCF4, 0x1794
@@ -17,16 +17,16 @@ Tsa_OpAnimWorldMapFog:
 	.incbin "baserom.gba", 0xB51488, 0x2F0
 	.global Pal_OpAnimWorldMapFog
 Pal_OpAnimWorldMapFog:
-	.incbin "baserom.gba", 0xB51778, 0x20
+	.incbin "graphics/opanim/OpAnimWorldMapFog.gbapal"
 	.global Img_OpAnimCharacterBG
 Img_OpAnimCharacterBG:
-	.incbin "baserom.gba", 0xB51798, 0xA10
+	.incbin "graphics/opanim/OpAnimCharacterBG.4bpp.lz"
 	.global Tsa_OpAnimCharacterBG
 Tsa_OpAnimCharacterBG:
-	.incbin "baserom.gba", 0xB521A8, 0x4CC
+	.incbin "graphics/opanim/OpAnimCharacterBG.map.bin.lz"
 	.global Pal_OpAnimCharacterBG
 Pal_OpAnimCharacterBG:
-	.incbin "baserom.gba", 0xB52674, 0x20
+	.incbin "graphics/opanim/OpAnimCharacterBG.gbapal"
 	.global Img_OpAnimGenericCharacterBG
 Img_OpAnimGenericCharacterBG:
 	.incbin "baserom.gba", 0xB52694, 0x760
@@ -35,7 +35,10 @@ Tsa_OpAnimGenericCharacterBG:
 	.incbin "baserom.gba", 0xB52DF4, 0x440
 	.global gOpanimGfx_0
 gOpanimGfx_0:
-	.incbin "baserom.gba", 0xB53234, 0x18E0
+	.incbin "graphics/opanim/OpAnimGenericCharacterBGUnused.gbapal"
+	.incbin "graphics/opanim/OpAnimGenericCharacterBGUnused.4bpp.lz"
+	.incbin "graphics/opanim/OpAnimGenericCharacterBGUnused.map.bin.lz"
+	.incbin "graphics/opanim/OpAnimGenericCharacterBGUnusedPal2.gbapal"
 	.global Img_OpAnimEphraim
 Img_OpAnimEphraim:
 	.incbin "baserom.gba", 0xB54B14, 0xF28
@@ -50,22 +53,22 @@ Tsa_OpAnimEphraimBlur1:
 	.incbin "baserom.gba", 0xB56B3C, 0x1D4
 	.global Img_OpAnimEphraimBlur2
 Img_OpAnimEphraimBlur2:
-	.incbin "baserom.gba", 0xB56D10, 0xDD8
+	.incbin "graphics/opanim/OpAnimEphraimBlur2.4bpp.lz"
 	.global Tsa_OpAnimEphraimBlur2
 Tsa_OpAnimEphraimBlur2:
-	.incbin "baserom.gba", 0xB57AE8, 0x1E4
+	.incbin "graphics/opanim/OpAnimEphraimBlur2.map.bin.lz"
 	.global Img_OpAnimEphraimBlur3
 Img_OpAnimEphraimBlur3:
-	.incbin "baserom.gba", 0xB57CCC, 0xC6C
+	.incbin "graphics/opanim/OpAnimEphraimBlur3.4bpp.lz"
 	.global Tsa_OpAnimEphraimBlur3
 Tsa_OpAnimEphraimBlur3:
-	.incbin "baserom.gba", 0xB58938, 0x1F8
+	.incbin "graphics/opanim/OpAnimEphraimBlur3.map.bin.lz"
 	.global Img_OpAnimEphraimClose1
 Img_OpAnimEphraimClose1:
-	.incbin "baserom.gba", 0xB58B30, 0x1A70
+	.incbin "graphics/opanim/OpAnimEphraimClose1.4bpp.lz"
 	.global Img_OpAnimEphraimClose2
 Img_OpAnimEphraimClose2:
-	.incbin "baserom.gba", 0xB5A5A0, 0xCA0
+	.incbin "graphics/opanim/OpAnimEphraimClose2.4bpp.lz"
 	.global Tsa_OpAnimEphraimClose1
 Tsa_OpAnimEphraimClose1:
-	.incbin "baserom.gba", 0xB5B240, 0x320
+	.incbin "graphics/opanim/OpAnimEphraimClose1.map.bin.lz"
