@@ -121,9 +121,18 @@ sym_t, fn_t = US_TOTALS["symbols"], US_TOTALS["functions"]
 banim = sound = 0
 
 out = []
-out.append(f"{code_t} total bytes of code")
-out.append(f"{code_bytes} bytes of code in src ({pct(code_bytes, code_t)}%)")
-out.append(f"{code_t - code_bytes} bytes of code in asm ({pct(code_t - code_bytes, code_t)}%)")
+# Code progress is JP-RELATIVE (like the data metric below): the denominator is the JP ROM's
+# OWN code region [0x08000000, 0x080DC134), not the US-decomp .text total. The US figure
+# (code_t) UNDERSTATES JP's region-different code -- JP carries MORE code bytes than US -- so a
+# US-relative metric overshoots 100% and reports a NEGATIVE "in asm". The code region is fully
+# partitioned into carved real-source bytes + the raw baserom incbin remainder, so jp_code_total
+# is exactly the region size and "code in asm" is the genuine remaining incbin.
+CODE_REGION = (0x08000000, 0x080DC134)
+jp_code_total = CODE_REGION[1] - CODE_REGION[0]
+code_incbin = max(0, jp_code_total - code_bytes)  # raw incbin still in the code region
+out.append(f"{jp_code_total} total bytes of code (JP code region 0x08000000..0x080DC134; US .text was {code_t})")
+out.append(f"{code_bytes} bytes of code in src ({pct(code_bytes, jp_code_total)}%)")
+out.append(f"{code_incbin} bytes of code in asm ({pct(code_incbin, jp_code_total)}%)")
 out.append("")
 out.append(f"{sym_t} total symbols")
 out.append(f"{symbols} symbols documented ({pct(symbols, sym_t)}%)")
