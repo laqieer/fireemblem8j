@@ -8,6 +8,27 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
+- **SPRINT 2026-06-09/10 (P9 owner) — gbadisasm SCALING ranges B+C INTEGRATED (+3919 region-different
+  fns, code real-source 23%→77.5%).** Two of the three parallel scaling agents delivered + integrated
+  serially through the full gate (make check → make clean && make compare on the 6908-object tree, all
+  byte-perfect): **range C** [0x08093000,0x080DC134) = 1843 fns / 224KiB (merge `a1d5bd07`); **range B**
+  [0x08049000,0x08093000) = 2076 fns / 235KiB (merge `44745fdf`). Pushed through `954607af`. **Code in
+  real source 665140 B (77.5%); only 193160 B (22.5%) still raw incbin** — that remainder is **range A**
+  [0x08000000,0x08049000) (STILL CARVING, branch `carve/gbadisasm-A`, ~1900+ fns, locked worktree
+  agent-ab1f198d) + ~6 hand-decomp fallbacks. **When A lands, code front ≈ byte-complete.**
+  - **6 mechanical-carver FALLBACKS (verify-or-revert correctly excluded, build stayed green) → hand-decomp
+    queue:** sub_8094ED0, sub_8096B30, sub_080D7DF4, sub_80D89C4, _fpadd_parts (range C); sub_8059A04
+    (range B, 1186-line switch w/ 2 embedded jump-tables). These need IDA/Ghidra+permuter (jump-table /
+    embedded-data / boundary limits of the gbadisasm carver). Park until A lands.
+  - **BUILD-HEALTH FIX (`cde1cbf1`+`954607af`): `make clean` is now count-safe.** At ~4800+ objects the old
+    `$(RM) $(ALL_OBJECTS) …` clean overflowed the shell per-arg limit (MAX_ARG_STRLEN 128KiB) — and make
+    expands the var EVEN IN A RECIPE COMMENT, so naming `$(ALL_OBJECTS)` in the explanatory comment
+    reintroduced it. Now: `find asm src -name '*.o' -delete` (never `-name '*.s'` — asm/*.s are committed
+    sources), small lists via `$(RM)`, and NO object-list variable on any recipe/comment line.
+  - **INTEGRATION DISCIPLINE LESSON:** always `git branch --show-current` == `main` before merging a
+    delivered branch — a worktree agent left the main checkout on its branch once (fixed). Big carve
+    branches diverge from old main but are file-disjoint (per-name fragments) → clean 3-way merges.
+
 - **SPRINT 2026-06-09 (P9 owner) — asm→C QUALITY-LAYER PROGRAM launched (D25 funclib + D26
   NONMATCHING) + survey action list scheduled.** Two investigations landed + committed:
   - **D25 — FE_GBA_Function_Library ingest (`docs/bindiff-investigation.md`).** Owner's
