@@ -1,0 +1,2 @@
+# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
+EF86C8	EF9000	asm/data_08EF86C8.o(.data.residue.08EF86C8)	descriptive raw ROM data (2360 B, byte-completeness D29)
