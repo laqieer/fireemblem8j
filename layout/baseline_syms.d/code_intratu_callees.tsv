@@ -42,3 +42,6 @@ gpBg2ScrollOffsetStart	0201FB30	data	codegrind4_banim_ekr
 gpBg2ScrollOffset	0201FB34	data	codegrind4_banim_ekr
 gpBg1ScrollOffsetStart	0201FDBC	data	codegrind4_banim_ekr
 gpBg1ScrollOffset	0201FDC0	data	codegrind4_banim_ekr
+DrawTextGlyphNoClear	080041A0	thumb	codegrind4_fontgrp
+gDefaultFont	02028E58	data	codegrind4_fontgrp
+BMapVSync_InitMapAnimations	08030044	thumb	codegrind4_bmio
