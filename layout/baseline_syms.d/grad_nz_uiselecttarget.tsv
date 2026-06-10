@@ -1,0 +1,3 @@
+sSelectTargetRoot	0203DDE4	data	uiselecttarget root pos (ewram, code-ref bind)
+sSelectTargetList	0203DDE8	data	uiselecttarget target list (ewram, code-ref bind)
+sSelectTargetCount	0203E0E8	data	uiselecttarget target count (ewram, code-ref bind)
