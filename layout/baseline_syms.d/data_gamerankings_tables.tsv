@@ -1,0 +1,13 @@
+# code-grind: bind the gamerankings.c rank-weight/threshold tables as ABS
+# baseline_syms symbols so GetOverallRank[From2/From3] graduate. Addresses from each
+# function's decoded literal pool (authoritative). All 6 live inside the data-4
+# frontier blob frontier_df4_menu (gap39, AC00A8..AC0394); pure ABS name binding,
+# no bytes, no conflict (D34 class-2). D34 noted these tables are region-SAME in
+# value but inter-table SPACING differs JP<->US, so they are bound individually
+# (NOT a contiguous typed-C port). Not in headers -> graduated files prepend externs.
+gOverallRankWeightLookup	08AC033C	data	codegrind_gamerankings_tables
+gOverallRankLookup	08AC0356	data	codegrind_gamerankings_tables
+gGamerankings_0	08AC0362	data	codegrind_gamerankings_tables
+gGamerankings_1	08AC0372	data	codegrind_gamerankings_tables
+gGamerankings_2	08AC037E	data	codegrind_gamerankings_tables
+gGamerankings_3	08AC0388	data	codegrind_gamerankings_tables
