@@ -37,6 +37,35 @@ def sh(c):
     return subprocess.run(c, shell=True, capture_output=True, text=True)
 
 
+
+def load_func_lines_by_addr(cache=None):
+    """addr -> body lines (header line included as [0]), keyed by ADDRESS so
+    duplicate function NAMES (e.g. two _fpadd_parts) don't collide."""
+    cache = cache or cga.DISASM_CACHE
+    cga.ensure_disasm()
+    by_addr, cur_addr, lines, pending = {}, None, [], False
+    fs = re.compile(r"^\s*(?:arm|thumb)_func_start (\S+)\s*$")
+    ad = re.compile(r"^\S+:\s*@\s*0x([0-9A-Fa-f]+)")
+    for ln in open(cache):
+        if fs.match(ln):
+            if cur_addr is not None:
+                by_addr[cur_addr] = lines
+            cur_addr, lines, pending = None, [], True
+            continue
+        if pending:
+            m = ad.match(ln)
+            if m:
+                cur_addr = int(m.group(1), 16)
+                pending = False
+                lines = [ln.rstrip("\n")]
+                continue
+        if cur_addr is not None:
+            lines.append(ln.rstrip("\n"))
+    if cur_addr is not None:
+        by_addr[cur_addr] = lines
+    return by_addr
+
+
 def main():
     if len(sys.argv) < 4:
         sys.exit(__doc__)
@@ -47,7 +76,7 @@ def main():
 
     funcs = cga.parse_cfg()
     smap = cga.sym_addr_map()
-    by_name = cga.load_func_lines()
+    by_addr = load_func_lines_by_addr()
 
     run = [(a, m, n) for (a, m, n) in funcs if start <= a < end]
     run.sort()
@@ -63,7 +92,7 @@ def main():
 
     merged, local = [], set()
     for idx, (a, m, n) in enumerate(run):
-        body = list(by_name[n])
+        body = list(by_addr[a])
         while body and not body[0].strip():
             body.pop(0)
         if body and re.match(rf"^{re.escape(n)}:\s*@", body[0]):
