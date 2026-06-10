@@ -1,2 +1,3 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-5C33C0	5C3400	asm/data_085C33C0.o(.data.residue.085C33C0)	descriptive raw ROM data (64 B, byte-completeness D29)
+# carve_incbin_residue.py residue split into named US objects (D38)
+5C33C0	5C33E0	asm/data_085C33C0.o(.data.residue.085C33C0)	gProcScr_PhaseIntroSquares region-diff data (32 B, residue split D38)
+5C33E0	5C3400	asm/data_085C33C0.o(.data.residue.085C33E0)	gProcScr_PhaseIntroBlendBox region-diff data (32 B, residue split D38)

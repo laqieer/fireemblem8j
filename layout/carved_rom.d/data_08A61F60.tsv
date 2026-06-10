@@ -1,2 +1,3 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-A61F60	A62058	asm/data_08A61F60.o(.data.residue.08A61F60)	descriptive raw ROM data (248 B, byte-completeness D29)
+# carve_incbin_residue.py residue split into named US objects (D38)
+A61F60	A61F80	asm/data_08A61F60.o(.data.residue.08A61F60)	EventScr_Ch1Tut_GuideMsg944 region-diff data (32 B, residue split D38)
+A61F80	A62058	asm/data_08A61F60.o(.data.residue.08A61F80)	EventScr_Ch1Tut_GilliamBattle region-diff data (216 B, residue split D38)
