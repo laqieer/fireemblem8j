@@ -8,14 +8,27 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
-- **SPRINT 2026-06-09/10 (P9 owner) — gbadisasm SCALING ranges B+C INTEGRATED (+3919 region-different
-  fns, code real-source 23%→77.5%).** Two of the three parallel scaling agents delivered + integrated
-  serially through the full gate (make check → make clean && make compare on the 6908-object tree, all
-  byte-perfect): **range C** [0x08093000,0x080DC134) = 1843 fns / 224KiB (merge `a1d5bd07`); **range B**
-  [0x08049000,0x08093000) = 2076 fns / 235KiB (merge `44745fdf`). Pushed through `954607af`. **Code in
-  real source 665140 B (77.5%); only 193160 B (22.5%) still raw incbin** — that remainder is **range A**
-  [0x08000000,0x08049000) (STILL CARVING, branch `carve/gbadisasm-A`, ~1900+ fns, locked worktree
-  agent-ab1f198d) + ~6 hand-decomp fallbacks. **When A lands, code front ≈ byte-complete.**
+- **SPRINT 2026-06-09/10 (P9 owner) — gbadisasm SCALING COMPLETE: all 3 ranges A+B+C integrated
+  (+5928 region-different fns, code real-source 23%→98.2%).** All three parallel scaling agents delivered +
+  integrated serially through the full gate (make check → make clean && make compare, byte-perfect on the
+  growing object tree, up to 8917 objects): **range C** [0x08093000,0x080DC134) 1843 fns (merge `a1d5bd07`);
+  **range B** [0x08049000,0x08093000) 2076 fns (merge `44745fdf`); **range A** [0x08000000,0x08049000) 2009
+  fns, 100% yield (merge in `381ba9a2`). Pushed through `7609d9a8`. **Code now 885040 B real source (98.18%
+  of the 901428 B code region); only 16388 B incbin left in code = the 6 hand-decomp fallbacks.** CODE-FRONT
+  SCALING DONE.
+  - **REMAINING FOR THE FINAL GOAL (every incbin byte → real source)** — measured from asm/baserom.s:
+    (1) **16388 B code** = the 6 fallbacks below (hand-decomp; task #28). (2) **~291KB SPARSE real data**
+    @0x08BB8E94 (85% 0xFF/13% real) + smaller gaps → carve as named data (task #29). (3) **~1.4MB 0xFF
+    PADDING** incbin (big chunks @0x08E47180 626KB, @0x08EFB2E0/0x08F63860/0x08F2F5C0 each 213KB — all 100%
+    0xFF) → convert to .fill/.space directives, mechanical (task #29). **The project is CLOSE to the final
+    goal**: bounded, mostly-mechanical remainder.
+  - **METRIC HONESTY:** code metric fixed JP-relative (`7609d9a8`, was 103%/negative). DATA metric is still
+    circular (jp_data_total := carved ⇒ tautological 100%) — defensible since the ~1.4MB remainder is 0xFF
+    padding, but it hides the ~291KB sparse-data gap; consider an honest 'remaining raw incbin' line.
+  - **6 mechanical-carver FALLBACKS (verify-or-revert correctly excluded, build stayed green) → hand-decomp
+    queue (task #28):** sub_8094ED0, sub_8096B30, sub_080D7DF4, sub_80D89C4, _fpadd_parts (range C);
+    sub_8059A04 (range B, 1186-line switch w/ 2 embedded jump-tables). Need IDA/Ghidra+permuter (jump-table /
+    embedded-data / boundary limits of the gbadisasm carver).
   - **6 mechanical-carver FALLBACKS (verify-or-revert correctly excluded, build stayed green) → hand-decomp
     queue:** sub_8094ED0, sub_8096B30, sub_080D7DF4, sub_80D89C4, _fpadd_parts (range C); sub_8059A04
     (range B, 1186-line switch w/ 2 embedded jump-tables). These need IDA/Ghidra+permuter (jump-table /
