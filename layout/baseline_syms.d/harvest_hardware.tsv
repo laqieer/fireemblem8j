@@ -5,3 +5,6 @@ sHBlankHandler2	030036E8	data	hardware_08001C00
 SetIRQHandler	08000B50	thumb	hardware_08001C00
 _UpdateKeyStatus	080012FC	thumb	hardware_0800139C
 gKeyStatusIgnoredSt	0300000E	data	hardware_0800139C
+InitBmBgLayers	08015624	thumb	hardware_08001ACC
+sModifiedBGs	0300000C	data	hardware_08001ACC
+sModifiedPalette	0300000C	thumb	hardware_08001ACC

@@ -1,2 +1,3 @@
 001C00	001D28	src/hardware_08001C00.o(.text)	hardware_08001C00(run): EnterSleepMode, ExecBothHBlankHandlers, UpdateHBlankHandlerState...
 00139C	0013D0	src/hardware_0800139C.o(.text)	hardware_0800139C(run): UpdateKeyStatus
+001ACC	001BC0	src/hardware_08001ACC.o(.text)	hardware_08001ACC(run): SetupBackgrounds

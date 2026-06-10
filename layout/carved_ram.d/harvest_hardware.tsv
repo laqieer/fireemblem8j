@@ -1,0 +1,1 @@
+080DC144	rom	src/hardware_08001ACC.o(.rodata)	hardware_08001ACC .rodata region-diff (incbin)
