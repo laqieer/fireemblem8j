@@ -45,3 +45,4 @@ gpBg1ScrollOffset	0201FDC0	data	codegrind4_banim_ekr
 DrawTextGlyphNoClear	080041A0	thumb	codegrind4_fontgrp
 gDefaultFont	02028E58	data	codegrind4_fontgrp
 BMapVSync_InitMapAnimations	08030044	thumb	codegrind4_bmio
+DrawSpecialCharGlyph	0800493C	thumb	codegrind4_fontgrp

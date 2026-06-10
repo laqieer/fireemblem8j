@@ -20,3 +20,7 @@
 0300A0	0300C4	src/BMapVSync_Start.o(.text)	BMapVSync_Start (region-diff: BMapVSync_InitMapAnimations @ 0x30044, Proc_Start/WfxInit)
 0BB21C	0BB240	src/GetPidDefeatType.o(.text)	GetPidDefeatType (region-diff: gCharacterEndingDefeatLut @ 0xAC0AF8, 4-byte struct stride)
 001414	00142C	src/AsnycKeyStatusExt.o(.text)	AsnycKeyStatusExt (region-diff: gKeyStatusPtr @ 0x85775CC)
+004998	0049D4	src/AddSpecialChar.o(.text)	AddSpecialChar (region-diff: gActiveFont, DrawSpecialCharGlyph @ 0x493C, TextGlyphs_Special)
+0049D4	004A14	src/GetSpecialCharChr.o(.text)	GetSpecialCharChr (region-diff: sSpecialCharStList, AddSpecialChar)
+017220	017254	src/SetItemUnsealedForCharacter.o(.text)	SetItemUnsealedForCharacter (region-diff: inline GetItemType/SetChapterUnk1C)
+017254	017294	src/IsItemUnsealedForUnit.o(.text)	IsItemUnsealedForUnit (region-diff: inline GetItemType/GetChapterUnk1C)
