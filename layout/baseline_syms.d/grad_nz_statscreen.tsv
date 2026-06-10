@@ -1,0 +1,3 @@
+sMutableHbi	0203E764	data	statscreen mutable help-box info (ewram, code-ref bind)
+StartHelpBoxExt	0808B128	thumb	statscreen helpbox start-ext (region-diff asm sub_808B128, code-ref bind)
+HbPopulate_AutoItem	0808B5AC	thumb	statscreen helpbox auto-item populate (region-diff asm sub_808B5AC, code-ref bind)
