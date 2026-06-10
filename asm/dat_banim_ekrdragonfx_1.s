@@ -225,25 +225,25 @@ Pal_DemonLightSprites_EyeFlash:
 	.incbin "graphics/banim/_us/banim/dragonfx/Pal_DemonLightSprites_EyeFlash.gbapal"
 	.global AnimSprite_Ekrdragonfx0_0
 AnimSprite_Ekrdragonfx0_0:
-	.incbin "baserom.gba", 0x7F9690, 0x18
+	.incbin "data/banim/AnimSprite_Ekrdragonfx0_0.bin"
 	.global AnimSprite_Ekrdragonfx0_1
 AnimSprite_Ekrdragonfx0_1:
-	.incbin "baserom.gba", 0x7F96A8, 0x30
+	.incbin "data/banim/AnimSprite_Ekrdragonfx0_1.bin"
 	.global AnimSprite_Ekrdragonfx0_2
 AnimSprite_Ekrdragonfx0_2:
-	.incbin "baserom.gba", 0x7F96D8, 0x24
+	.incbin "data/banim/AnimSprite_Ekrdragonfx0_2.bin"
 	.global AnimSprite_Ekrdragonfx0_3
 AnimSprite_Ekrdragonfx0_3:
-	.incbin "baserom.gba", 0x7F96FC, 0x30
+	.incbin "data/banim/AnimSprite_Ekrdragonfx0_3.bin"
 	.global AnimSprite_Ekrdragonfx0_4
 AnimSprite_Ekrdragonfx0_4:
-	.incbin "baserom.gba", 0x7F972C, 0x24
+	.incbin "data/banim/AnimSprite_Ekrdragonfx0_4.bin"
 	.global AnimSprite_Ekrdragonfx0_5
 AnimSprite_Ekrdragonfx0_5:
-	.incbin "baserom.gba", 0x7F9750, 0x24
+	.incbin "data/banim/AnimSprite_Ekrdragonfx0_5.bin"
 	.global AnimSprite_Ekrdragonfx0_6
 AnimSprite_Ekrdragonfx0_6:
-	.incbin "baserom.gba", 0x7F9774, 0x18
+	.incbin "data/banim/AnimSprite_Ekrdragonfx0_6.bin"
 	.global AnimSprite_Ekrdragonfx0_7
 AnimSprite_Ekrdragonfx0_7:
-	.incbin "baserom.gba", 0x7F978C, 0xC
+	.incbin "data/banim/AnimSprite_Ekrdragonfx0_7.bin"

@@ -195,6 +195,17 @@ sound/%.bin: sound/%.aif
 DIRECT_SOUND_BINS := $(patsubst %.aif,%.bin,$(shell find sound/direct_sound_samples -name '*.aif' 2>/dev/null))
 asm/direct_sound_data.o: $(DIRECT_SOUND_BINS)
 
+# Banim OAM / AnimSprite / motion / modes DATA (Phase 1 self-containment): the
+# per-animation data blobs are COMMITTED, descriptively-named `data/banim/*.bin`
+# (the JP bytes, byte-identical by construction -- region-different, mostly
+# LZ-compressed opaque data; this is fireemblem8u's "commit a named .bin for
+# opaque data" model). baserom.gba is NOT in this chain. Each banim data `.s`
+# `.incbin`s its own data/banim/*.bin, so the object must rebuild when one
+# changes. The `.bin` are committed SOURCE (no recipe -- make treats them as
+# leaves), so there is no generic %.bin rule outside sound/.
+BANIM_OAM_BINS := $(wildcard data/banim/*.bin)
+asm/data_banim.o $(patsubst %.s,%.o,$(wildcard asm/dat_banim_ekrdragonfx_*.s asm/dat_banim_ekrskill_*.s)): $(BANIM_OAM_BINS)
+
 #### Asset (graphics) rules ####
 # Generic source-asset pipeline, ported from ../fireemblem8u. These turn the
 # COMMITTED editable source (PNG / JASC .pal) into the raw GBA bytes the ROM
