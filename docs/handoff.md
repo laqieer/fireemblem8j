@@ -8,6 +8,31 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
+- **🚧 2026-06-10 — REAL DECOMP IN PROGRESS: build self-containment 16.96% → 62.39% (D30 re-plan executing).**
+  The ungameable oracle (`mv baserom.gba /tmp && make` must build; `scripts/check_selfcontained.py`) is now the
+  dashboard. Honest 4 axes today: **self-containment 62.39%** / matching-C 27.01% / extracted-data axis (see
+  task #33 — undercounts; self-containment is the truth) / named-symbols 58.78%.
+  - **Phase 0 DONE (CI-green):** asset toolchain vendored (`gbagfx`/`bin2c`/`preproc` via
+    `scripts/tools/<t>/setup.sh`; CI clones laqieer/fireemblem8u for the exact gbagfx — see compare.yml +
+    selfcontained.yml). Self-contained-build oracle + honest metrics + README fixed. The Makefile builds
+    committed assets (`%.4bpp:%.png`, `%.lz:%`, per-subsystem `-include $(find graphics -name '*.mk')`).
+  - **Phase 1 (data→assets) in steady-state production** — each batch removes real `.incbin "baserom.gba"`,
+    durability-gated + CI-verified on fresh checkout: GRAPHICS done = portraits/icons/banim/mapanim/opanim/
+    ending-cg/bg/fonts/CG via `scripts/extract_graphics.py` + `graphics/_lib/` + per-subsystem `extract*.py`+`.mk`
+    (region-same → port fireemblem8u asset by symbol/addr; region-diff → gbagfx fresh / verbatim `.bin`).
+    **TEXT done** = the JP Huffman round-trips BYTE-IDENTICAL (`scripts/texttools/msg_jp.py`; `asm/msg_data.s`
+    GENERATED from `texts/jp_texts.txt` = 3339 readable CP932 messages; `make text-verify`; one auto-derived
+    content-keyed tie-break in `texts/jp_huffman_tiebreaks.txt`). DATA TABLES in flight (the Phase-2 unblocker).
+  - **Phase 2 (asm→matching-C):** +116 region-same US-C ports via `scripts/graduate_exact_asm.py` +
+    `extract_func_only.py` (27.01%). **BLOCKED on Phase-1 data naming (D31):** the 226 remaining funcmap-tier
+    functions reference data statics (sBGControlStructPtrs/gClassData/gChapterFlagBits/…) still raw incbin →
+    undefined ref. As Phase-1 data-tables NAMES those, re-run `graduate_exact_asm.py --all` to harvest them.
+  - **GRIND PATTERN:** parallel agents per disjoint subsystem (per-subsystem `.mk`/`.py` = conflict-free);
+    integrate serially: **`git checkout main` FIRST** (recurring worktree-branch-leak switches main off `main`;
+    the "MUST be main"/abort guard catches it), ff/3-way merge, `make check`+`make compare`+`make clean &&
+    make compare`, push, `gh run watch` CI, cleanup worktree, re-dispatch. Sound (`direct_sound_data.s` 3.27MB)
+    is the deferred final hard front (needs mid2agb/m4a). D30/D31 logged; Project 3 [REAL] Phase items track it.
+
 - **⛔ 2026-06-10 — CORRECTION / RETRACTION (owner feedback): the "ARMED FINAL GOAL MET" claim below is
   FALSE. The real final goal is to COMPLETE THE DECOMPILATION to the fireemblem8u/pokeemerald standard, and
   the project is FAR from it.** Driving `asm/baserom.s` to 0 incbin did NOT decompile anything — it just MOVED
