@@ -8,6 +8,21 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
+- **🎉 SPRINT 2026-06-10 — CODE FRONT 100% REAL SOURCE (D28, merge `08dc22b9`).** The 6 gbadisasm
+  mechanical fallbacks are byte-matched: code-region raw incbin **16388 B → 536 B** (the 536 B is the
+  cartridge ROM header @0x080000C0 + a few ≤64 B pad/data fragments — **0 functions**). **Code 99.94%
+  real source** (900892/901428 B); ALL region-different code functions carved. Root cause was mostly IDA
+  boundary MIS-SPLITS — `_dtoa_r`=sub_080D7DF4+sub_80D89C4, `SortUnitList`=sub_8094ED0+sub_8096B30 are
+  single functions that byte-match only carved as ONE section (cross-piece branches + jump-table
+  `.4byte _08xxxxxx` resolve as section-local); plus a dup-name `_fpadd_parts` (address-keyed fix) and
+  sub_8059A04's 2 jump tables + mid-function `bl` (D24 de-symbolization). New tool
+  `scripts/carve_gbadisasm_merge.py` (contiguous-run carver, address-keyed). Gates: make check (8929) +
+  make compare + make clean && make compare all OK; CI green (`c6e22b7d`). **WHOLE-ROM remaining raw
+  incbin ≈ 197 KB = 536 B code header/pad + ~181 KB scattered region-different DATA long-tail** (genuine
+  data, maximally covered; sub-512 B gaps left per D10/D27). **The functional decomp goal is met: all
+  CODE + ~99% DATA as real source, make compare OK.** Remaining = optional data long-tail polish + the
+  ROM header. (Lock cleanup: untracked `.claude/scheduled_tasks.lock`, `c6e22b7d`.)
+
 - **SPRINT 2026-06-10 — FINAL-INCBIN PADDING CARVE (task #29 padding portion DONE; branch `carve/final-incbin`, D27).**
   Replaced **1.852 MB of pure-0xFF ROM padding** with explicit `.fill <n>,1,0xFF` directives in 8 committed
   `asm/pad_<addr>.s` objects (`scripts/carve_padding.py`), placed by per-task `carved_rom.d/pad_*.tsv` fragments.

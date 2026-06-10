@@ -1140,3 +1140,41 @@ integrity line).
 **Status:** Done 2026-06-10 (branch `carve/final-incbin`). `scripts/carve_padding.py` +
 the `asm/pad_*.s` + fragments; `make check`, `make compare`, `make clean && make compare`
 all green.
+## D28 — CODE FRONT 100% real source: the 6 gbadisasm fallbacks byte-matched (2026-06-10)
+
+**Context.** After the A+B+C scaling the code region had 16388 B of raw incbin left = 6
+functions the MECHANICAL gbadisasm carver verify-or-reverted (jump-tables / embedded data /
+boundary issues). Hand-carved them as byte-matching descriptive asm (branch
+`carve/code-fallbacks`, merged `08dc22b9`).
+
+**Root cause (load-bearing insight) — 4 of the 6 were IDA boundary MIS-SPLITS, not hard
+functions.** IDA had split single functions in two: `_dtoa_r` = sub_080D7DF4 + sub_80D89C4
+(tail branches back into the head); `SortUnitList` = sub_8094ED0 + sub_8096B30. The mechanical
+carver carved each piece separately, so cross-piece branches + interior jump-table
+`.4byte _08xxxxxx` entries pointed outside the section and didn't resolve. They byte-match only
+when carved as ONE `.text` section over the full true extent (0x080D7DF4-0x080D8AEC,
+0x08094ED0-0x080972D4) so those refs become section-local labels. The other two: `_fpadd_parts`
+@0x080DABC0 — a DUPLICATE symbol name (JP has two; the carver's name-keyed body loader grabbed
+the wrong address) → fixed with address-keyed extraction; `sub_8059A04` — 1186-line switch w/ 2
+jump tables (136 `.4byte` entries) + `bl` into a mid-function entry of an already-carved fn →
+D24 de-symbolization of the undefined-local `_08xxxxxx` refs as external absolute addresses.
+
+**Tooling.** `scripts/carve_gbadisasm_merge.py` (committed) — carves a contiguous RUN of
+gbadisasm functions as ONE descriptive-asm section, with **address-keyed** body extraction
+(fixes the dup-name bug), D24 de-symbolization, and external-local-address resolution for
+branches into neighbouring functions. Verify-or-revert, per-task fragments.
+
+**Result.** **Code region 99.94% real source** (900892 / 901428 B); raw code incbin
+16388 → **536 B** — and that 536 B is the cartridge ROM header (0x080000C0) + a few ≤64 B
+pad/data fragments, NONE functions. **0 region-different code functions remain uncarved — the
+code front is byte-complete.** Gates: `make check` (8929 objects), `make compare` → OK,
+`make clean && make compare` → OK (durability). CI green.
+
+**Whole-ROM state now:** raw `asm/baserom.s` incbin ≈ 197 KB total = 536 B code header/pad +
+~181 KB scattered region-different DATA long-tail (genuine data, maximally covered by the data
+carvers; sub-512 B gaps left per the D10/D27 integrity line). The decomp's CODE is complete
+from real source; the residual is a small data long-tail + the header.
+
+**Status:** Done 2026-06-10. Merged `08dc22b9`, pushed. The remaining data long-tail is optional
+polish toward strict every-single-byte coverage; the functional decomp goal (all code + ~99%
+data as real source, `make compare` OK) is met.
