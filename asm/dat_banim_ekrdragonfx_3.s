@@ -3,10 +3,10 @@
 @ src/data/banim-ekrdragonfx.o: region-same content at JP 0x087f98e8 (US 0x087a5390, shift -0x-54558); incbin baserom.gba
 	.global Img_DemonLightSprites
 Img_DemonLightSprites:
-	.incbin "baserom.gba", 0x7F98E8, 0x3BC
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_DemonLightSprites.4bpp.lz"
 	.global Pal_DemonLightSprites
 Pal_DemonLightSprites:
-	.incbin "baserom.gba", 0x7F9CA4, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_DemonLightSprites.gbapal"
 	.global AnimSprite_EfxMaohFlashEye_1
 AnimSprite_EfxMaohFlashEye_1:
 	.incbin "baserom.gba", 0x7F9CC4, 0x48

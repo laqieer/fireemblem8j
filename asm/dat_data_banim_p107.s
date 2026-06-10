@@ -2,25 +2,25 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086726a0 (US 0x08645ac8, shift -0xFFFD3428); incbin baserom.gba
 	.global Tsa_DivineBg_19
 Tsa_DivineBg_19:
-	.incbin "baserom.gba", 0x6726A0, 0x9C
+	.incbin "graphics/banim/_us/banim/assets/tsa/00645AC8_Tsa_08645AC8.map.bin.lz"
 	.global Tsa_DivineBg_20
 Tsa_DivineBg_20:
-	.incbin "baserom.gba", 0x67273C, 0x9C
+	.incbin "graphics/banim/_us/banim/assets/tsa/00645B64_Tsa_08645B64.map.bin.lz"
 	.global Tsa_DivineBg2_0
 Tsa_DivineBg2_0:
-	.incbin "baserom.gba", 0x6727D8, 0x9C
+	.incbin "graphics/banim/_us/banim/assets/tsa/00645C00_Tsa_08645C00.map.bin.lz"
 	.global Tsa_DivineBg2_1
 Tsa_DivineBg2_1:
-	.incbin "baserom.gba", 0x672874, 0x9C
+	.incbin "graphics/banim/_us/banim/assets/tsa/00645C9C_Tsa_08645C9C.map.bin.lz"
 	.global Tsa_DivineBg2_2
 Tsa_DivineBg2_2:
-	.incbin "baserom.gba", 0x672910, 0xA0
+	.incbin "graphics/banim/_us/banim/assets/tsa/00645D38_Tsa_08645D38.map.bin.lz"
 	.global Img_DivineSprites
 Img_DivineSprites:
-	.incbin "baserom.gba", 0x6729B0, 0x16C
+	.incbin "graphics/banim/_us/banim/assets/img/00645DD8_Img_DivineSprites.4bpp.lz"
 	.global Pal_DivineSprites
 Pal_DivineSprites:
-	.incbin "baserom.gba", 0x672B1C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/00645F44_Pal_DivineSprites.gbapal"
 	.global AnimSprite_EfxDevineOBJ_1
 AnimSprite_EfxDevineOBJ_1:
 	.incbin "baserom.gba", 0x672B3C, 0x84

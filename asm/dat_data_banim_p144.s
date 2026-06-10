@@ -2,7 +2,7 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086ad998 (US 0x08680dc0, shift -0xFFFD3428); incbin baserom.gba
 	.global Pal_Silence
 Pal_Silence:
-	.incbin "baserom.gba", 0x6AD998, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/00680DC0_Pal_Silence.gbapal"
 	.global AnimSprite_EfxSilenceOBJ_1
 AnimSprite_EfxSilenceOBJ_1:
 	.incbin "baserom.gba", 0x6AD9B8, 0x18

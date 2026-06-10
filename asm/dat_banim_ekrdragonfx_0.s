@@ -3,40 +3,40 @@
 @ src/data/banim-ekrdragonfx.o: region-same content at JP 0x087e1ba0 (US 0x0878d648, shift -0x-54558); incbin baserom.gba
 	.global Img_EfxDracoZombie
 Img_EfxDracoZombie:
-	.incbin "baserom.gba", 0x7E1BA0, 0x3940
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_EfxDracoZombie.4bpp.lz"
 	.global Tsa_EfxDracoZombieBaseLeft
 Tsa_EfxDracoZombieBaseLeft:
-	.incbin "baserom.gba", 0x7E54E0, 0x1D4
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_EfxDracoZombieBaseLeft.4bpp.lz"
 	.global Tsa_EfxDracoZombieBaseRight
 Tsa_EfxDracoZombieBaseRight:
-	.incbin "baserom.gba", 0x7E56B4, 0x1E0
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_EfxDracoZombieBaseRight.4bpp.lz"
 	.global Tsa_EfxDracoZombie2
 Tsa_EfxDracoZombie2:
-	.incbin "baserom.gba", 0x7E5894, 0x1E4
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_EfxDracoZombie2.4bpp.lz"
 	.global Tsa_EfxDracoZombie3
 Tsa_EfxDracoZombie3:
-	.incbin "baserom.gba", 0x7E5A78, 0x218
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_EfxDracoZombie3.4bpp.lz"
 	.global Tsa_EfxDracoZombie4
 Tsa_EfxDracoZombie4:
-	.incbin "baserom.gba", 0x7E5C90, 0x210
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_EfxDracoZombie4.4bpp.lz"
 	.global Tsa_EfxDracoZombie5
 Tsa_EfxDracoZombie5:
-	.incbin "baserom.gba", 0x7E5EA0, 0x1F4
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_EfxDracoZombie5.4bpp.lz"
 	.global Tsa_EfxDracoZombie1
 Tsa_EfxDracoZombie1:
-	.incbin "baserom.gba", 0x7E6094, 0x220
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_EfxDracoZombie1.4bpp.lz"
 	.global Pal_EfxDracoZombie
 Pal_EfxDracoZombie:
-	.incbin "baserom.gba", 0x7E62B4, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_EfxDracoZombie.gbapal"
 	.global Pal_Ekrdragonfx_0
 Pal_Ekrdragonfx_0:
-	.incbin "baserom.gba", 0x7E62D4, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_08791D7C.gbapal"
 	.global Img_Ekrdragonfx
 Img_Ekrdragonfx:
-	.incbin "baserom.gba", 0x7E62F4, 0x3F8
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_08791D9C.4bpp.lz"
 	.global Pal_Ekrdragonfx_1
 Pal_Ekrdragonfx_1:
-	.incbin "baserom.gba", 0x7E66EC, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_08792194.gbapal"
 	.global AnimSprite_EfxClasschgObjDrop_1
 AnimSprite_EfxClasschgObjDrop_1:
 	.incbin "baserom.gba", 0x7E670C, 0x18

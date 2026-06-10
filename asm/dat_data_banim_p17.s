@@ -2,10 +2,10 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x08607238 (US 0x085dcb10, shift -0xFFFD58D8); incbin baserom.gba
 	.global Img_EfxDanceObj
 Img_EfxDanceObj:
-	.incbin "baserom.gba", 0x607238, 0x174
+	.incbin "graphics/banim/_us/efxmagic/Gfx_EfxDanceObj.4bpp.lz"
 	.global Pal_EfxDanceObj
 Pal_EfxDanceObj:
-	.incbin "baserom.gba", 0x6073AC, 0x20
+	.incbin "graphics/banim/_us/efxmagic/Gfx_EfxDanceObj.gbapal", 0x0, 0x20
 	.global AnimSprite_EfxDanceObj_0
 AnimSprite_EfxDanceObj_0:
 	.incbin "baserom.gba", 0x6073CC, 0x24

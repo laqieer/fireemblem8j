@@ -5,22 +5,22 @@ Img_ExcaliburBg1:
 	.incbin "baserom.gba", 0x75AE34, 0x3F0
 	.global Pal_ExcaliburBg1
 Pal_ExcaliburBg1:
-	.incbin "baserom.gba", 0x75B224, 0x1A0
+	.incbin "graphics/banim/_us/banim/assets/pal/0072E64C_Pal_ExcaliburBg1.gbapal"
 	.global Tsa_ExcaliburBg1
 Tsa_ExcaliburBg1:
-	.incbin "baserom.gba", 0x75B3C4, 0x1AC
+	.incbin "graphics/banim/_us/banim/assets/tsa/0072E7EC_Tsa_ExcaliburBg1.map.bin.lz"
 	.global Img_ExcaliburBg2
 Img_ExcaliburBg2:
-	.incbin "baserom.gba", 0x75B570, 0x106C
+	.incbin "graphics/banim/_us/banim/assets/img/0072E998_Img_ExcaliburBg2.4bpp.lz"
 	.global Pal_ExcaliburBg2
 Pal_ExcaliburBg2:
-	.incbin "baserom.gba", 0x75C5DC, 0x80
+	.incbin "graphics/banim/_us/banim/assets/pal/0072FA04_Pal_ExcaliburBg2.gbapal"
 	.global Tsa_ExcaliburBg2_Left
 Tsa_ExcaliburBg2_Left:
-	.incbin "baserom.gba", 0x75C65C, 0x434
+	.incbin "graphics/banim/_us/banim/assets/tsa/0072FA84_Tsa_ExcaliburBg2_Left.map.bin.lz"
 	.global Tsa_ExcaliburBg2_Right
 Tsa_ExcaliburBg2_Right:
-	.incbin "baserom.gba", 0x75CA90, 0x3EC
+	.incbin "graphics/banim/_us/banim/assets/tsa/0072FEB8_Tsa_ExcaliburBg2_Right.map.bin.lz"
 	.global Pal_ExcaliburBg3
 Pal_ExcaliburBg3:
-	.incbin "baserom.gba", 0x75CE7C, 0x80
+	.incbin "graphics/banim/_us/banim/assets/pal/007302A4_Pal_ExcaliburBg3.gbapal"

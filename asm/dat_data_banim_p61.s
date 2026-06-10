@@ -5,16 +5,16 @@ Img_ThunderSpellBg:
 	.incbin "baserom.gba", 0x61F998, 0x8BC
 	.global Pal_ThunderSpellBg
 Pal_ThunderSpellBg:
-	.incbin "baserom.gba", 0x620254, 0x200
+	.incbin "graphics/banim/_us/banim/assets/pal/005F367C_Pal_ThunderSpellBg.agbpal"
 	.global Tsa_EfxThuderBg1
 Tsa_EfxThuderBg1:
-	.incbin "baserom.gba", 0x620454, 0xCC
+	.incbin "graphics/banim/_us/banim/assets/tsa/005F387C_Tsa_EfxThuderBg1.map.bin.lz"
 	.global Tsa_EfxThuderBg2
 Tsa_EfxThuderBg2:
-	.incbin "baserom.gba", 0x620520, 0x160
+	.incbin "graphics/banim/_us/banim/assets/tsa/005F3948_Tsa_EfxThuderBg2.map.bin.lz"
 	.global Img_BoltingSprites
 Img_BoltingSprites:
-	.incbin "baserom.gba", 0x620680, 0x498
+	.incbin "graphics/banim/_us/banim/assets/img/005F3AA8_Img_BoltingSprites.4bpp.lz"
 	.global Pal_BoltingSprites
 Pal_BoltingSprites:
-	.incbin "baserom.gba", 0x620B18, 0xA0
+	.incbin "graphics/banim/_us/banim/assets/pal/005F3F40_Pal_BoltingSprites.gbapal"

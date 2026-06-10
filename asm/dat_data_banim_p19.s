@@ -4,10 +4,10 @@
 Tsa_BreathBgBase:
 	.global gUnk_EfxSongObj2
 gUnk_EfxSongObj2:
-	.incbin "baserom.gba", 0x607C40, 0x21C
+	.incbin "graphics/banim/_us/banim/assets/tsa/005DD518_Tsa_BreathBgBase.map.bin.lz"
 	.global Pal_BreathBgBase
 Pal_BreathBgBase:
-	.incbin "baserom.gba", 0x607E5C, 0x3C0
+	.incbin "graphics/banim/_us/banim/assets/pal/005DD734_Pal_BreathBgBase.agbpal"
 	.global Tsa_BreathBgBase_1
 Tsa_BreathBgBase_1:
-	.incbin "baserom.gba", 0x60821C, 0x170
+	.incbin "graphics/banim/_us/banim/assets/tsa/005DDAF4_Tsa_085DDAF4.map.bin.lz"

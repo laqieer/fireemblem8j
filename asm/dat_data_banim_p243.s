@@ -2,103 +2,103 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x087a2578 (US 0x08752044, shift -0xFFFAFACC); incbin baserom.gba
 	.global Img_SongBg_0
 Img_SongBg_0:
-	.incbin "baserom.gba", 0x7A2578, 0xBCC
+	.incbin "graphics/banim/_us/banim/assets/img/00752044_Img_08752044.4bpp.lz"
 	.global Img_SongBg_1
 Img_SongBg_1:
-	.incbin "baserom.gba", 0x7A3144, 0xC3C
+	.incbin "graphics/banim/_us/banim/assets/img/00752C10_Img_08752C10.4bpp.lz"
 	.global Img_SongBg_2
 Img_SongBg_2:
-	.incbin "baserom.gba", 0x7A3D80, 0xAD0
+	.incbin "graphics/banim/_us/banim/assets/img/0075384C_Img_0875384C.4bpp.lz"
 	.global Img_SongBg_3
 Img_SongBg_3:
-	.incbin "baserom.gba", 0x7A4850, 0x554
+	.incbin "graphics/banim/_us/banim/assets/img/0075431C_Img_0875431C.4bpp.lz"
 	.global Pal_SongSprites
 Pal_SongSprites:
-	.incbin "baserom.gba", 0x7A4DA4, 0xA0
+	.incbin "graphics/banim/_us/banim/assets/pal/00754870_Pal_SongSprites.gbapal"
 	.global Tsa_Song
 Tsa_Song:
-	.incbin "baserom.gba", 0x7A4E44, 0xA8
+	.incbin "graphics/banim/_us/banim/assets/tsa/00754910_Tsa_08754910.map.bin.lz"
 	.global Tsa_SongBg_0
 Tsa_SongBg_0:
-	.incbin "baserom.gba", 0x7A4EEC, 0xAC
+	.incbin "graphics/banim/_us/banim/assets/tsa/007549B8_Tsa_087549B8.map.bin.lz"
 	.global Tsa_SongBg_1
 Tsa_SongBg_1:
-	.incbin "baserom.gba", 0x7A4F98, 0xB0
+	.incbin "graphics/banim/_us/banim/assets/tsa/00754A64_Tsa_08754A64.map.bin.lz"
 	.global Tsa_SongBg_2
 Tsa_SongBg_2:
-	.incbin "baserom.gba", 0x7A5048, 0xC4
+	.incbin "graphics/banim/_us/banim/assets/tsa/00754B14_Tsa_08754B14.map.bin.lz"
 	.global Tsa_SongBg_3
 Tsa_SongBg_3:
-	.incbin "baserom.gba", 0x7A510C, 0xCC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00754BD8_Tsa_08754BD8.map.bin.lz"
 	.global Tsa_SongBg_4
 Tsa_SongBg_4:
-	.incbin "baserom.gba", 0x7A51D8, 0xD8
+	.incbin "graphics/banim/_us/banim/assets/tsa/00754CA4_Tsa_08754CA4.map.bin.lz"
 	.global Tsa_SongBg_5
 Tsa_SongBg_5:
-	.incbin "baserom.gba", 0x7A52B0, 0xE0
+	.incbin "graphics/banim/_us/banim/assets/tsa/00754D7C_Tsa_08754D7C.map.bin.lz"
 	.global Tsa_SongBg_6
 Tsa_SongBg_6:
-	.incbin "baserom.gba", 0x7A5390, 0xE0
+	.incbin "graphics/banim/_us/banim/assets/tsa/00754E5C_Tsa_08754E5C.map.bin.lz"
 	.global Tsa_SongBg_7
 Tsa_SongBg_7:
-	.incbin "baserom.gba", 0x7A5470, 0xEC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00754F3C_Tsa_08754F3C.map.bin.lz"
 	.global Tsa_SongBg_8
 Tsa_SongBg_8:
-	.incbin "baserom.gba", 0x7A555C, 0xF4
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755028_Tsa_08755028.map.bin.lz"
 	.global Tsa_SongBg_9
 Tsa_SongBg_9:
-	.incbin "baserom.gba", 0x7A5650, 0xFC
+	.incbin "graphics/banim/_us/banim/assets/tsa/0075511C_Tsa_0875511C.map.bin.lz"
 	.global Tsa_SongBg_10
 Tsa_SongBg_10:
-	.incbin "baserom.gba", 0x7A574C, 0xF8
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755218_Tsa_08755218.map.bin.lz"
 	.global Tsa_SongBg_11
 Tsa_SongBg_11:
-	.incbin "baserom.gba", 0x7A5844, 0x100
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755310_Tsa_08755310.map.bin.lz"
 	.global Tsa_SongBg_12
 Tsa_SongBg_12:
-	.incbin "baserom.gba", 0x7A5944, 0x100
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755410_Tsa_08755410.map.bin.lz"
 	.global Tsa_SongBg_13
 Tsa_SongBg_13:
-	.incbin "baserom.gba", 0x7A5A44, 0x100
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755510_Tsa_08755510.map.bin.lz"
 	.global Tsa_SongBg_14
 Tsa_SongBg_14:
-	.incbin "baserom.gba", 0x7A5B44, 0x104
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755610_Tsa_08755610.map.bin.lz"
 	.global Tsa_SongBg_15
 Tsa_SongBg_15:
-	.incbin "baserom.gba", 0x7A5C48, 0xF0
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755714_Tsa_08755714.map.bin.lz"
 	.global Tsa_SongBg_16
 Tsa_SongBg_16:
-	.incbin "baserom.gba", 0x7A5D38, 0xE8
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755804_Tsa_08755804.map.bin.lz"
 	.global Tsa_SongBg_17
 Tsa_SongBg_17:
-	.incbin "baserom.gba", 0x7A5E20, 0xE4
+	.incbin "graphics/banim/_us/banim/assets/tsa/007558EC_Tsa_087558EC.map.bin.lz"
 	.global Tsa_SongBg_18
 Tsa_SongBg_18:
-	.incbin "baserom.gba", 0x7A5F04, 0xE8
+	.incbin "graphics/banim/_us/banim/assets/tsa/007559D0_Tsa_087559D0.map.bin.lz"
 	.global Tsa_SongBg_19
 Tsa_SongBg_19:
-	.incbin "baserom.gba", 0x7A5FEC, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755AB8_Tsa_08755AB8.map.bin.lz"
 	.global Tsa_SongBg_20
 Tsa_SongBg_20:
-	.incbin "baserom.gba", 0x7A60C8, 0xD0
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755B94_Tsa_08755B94.map.bin.lz"
 	.global Tsa_SongBg_21
 Tsa_SongBg_21:
-	.incbin "baserom.gba", 0x7A6198, 0xBC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755C64_Tsa_08755C64.map.bin.lz"
 	.global Tsa_SongBg_22
 Tsa_SongBg_22:
-	.incbin "baserom.gba", 0x7A6254, 0xC0
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755D20_Tsa_08755D20.map.bin.lz"
 	.global Tsa_SongBg_23
 Tsa_SongBg_23:
-	.incbin "baserom.gba", 0x7A6314, 0xB4
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755DE0_Tsa_08755DE0.map.bin.lz"
 	.global Tsa_SongBg_24
 Tsa_SongBg_24:
-	.incbin "baserom.gba", 0x7A63C8, 0xA8
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755E94_Tsa_08755E94.map.bin.lz"
 	.global Tsa_SongBg_25
 Tsa_SongBg_25:
-	.incbin "baserom.gba", 0x7A6470, 0x98
+	.incbin "graphics/banim/_us/banim/assets/tsa/00755F3C_Tsa_08755F3C.map.bin.lz"
 	.global Img_SongSprites
 Img_SongSprites:
-	.incbin "baserom.gba", 0x7A6508, 0x210
+	.incbin "graphics/banim/_us/banim/assets/img/00755FD4_Img_SongSprites.4bpp.lz"
 	.global AnimSprite_EfxSong_1
 AnimSprite_EfxSong_1:
 	.incbin "baserom.gba", 0x7A6718, 0x18

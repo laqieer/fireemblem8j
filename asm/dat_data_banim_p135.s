@@ -2,16 +2,16 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086a66dc (US 0x08679b04, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_Banim_8
 Img_Banim_8:
-	.incbin "baserom.gba", 0x6A66DC, 0x62C
+	.incbin "graphics/banim/_us/banim/assets/img/00679B04_Img_08679B04.4bpp.lz"
 	.global Img_Banim_9
 Img_Banim_9:
-	.incbin "baserom.gba", 0x6A6D08, 0x6F8
+	.incbin "graphics/banim/_us/banim/assets/img/0067A130_Img_0867A130.4bpp.lz"
 	.global Img_Banim_10
 Img_Banim_10:
-	.incbin "baserom.gba", 0x6A7400, 0x620
+	.incbin "graphics/banim/_us/banim/assets/img/0067A828_Img_0867A828.4bpp.lz"
 	.global Img_Banim_11
 Img_Banim_11:
-	.incbin "baserom.gba", 0x6A7A20, 0x75C
+	.incbin "graphics/banim/_us/banim/assets/img/0067AE48_Img_0867AE48.4bpp.lz"
 	.global Pal_MapAnimRestore
 Pal_MapAnimRestore:
-	.incbin "baserom.gba", 0x6A817C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/0067B5A4_Pal_MapAnimRestore.gbapal"

@@ -2,223 +2,223 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086f638c (US 0x086c97b4, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_EvilEye_0
 Img_EvilEye_0:
-	.incbin "baserom.gba", 0x6F638C, 0x5F8
+	.incbin "graphics/banim/_us/banim/assets/img/006C97B4_Img_086C97B4.4bpp.lz"
 	.global Img_EvilEye_1
 Img_EvilEye_1:
-	.incbin "baserom.gba", 0x6F6984, 0x618
+	.incbin "graphics/banim/_us/banim/assets/img/006C9DAC_Img_086C9DAC.4bpp.lz"
 	.global Img_EvilEye_2
 Img_EvilEye_2:
-	.incbin "baserom.gba", 0x6F6F9C, 0x6D0
+	.incbin "graphics/banim/_us/banim/assets/img/006CA3C4_Img_086CA3C4.4bpp.lz"
 	.global Img_EvilEye_3
 Img_EvilEye_3:
-	.incbin "baserom.gba", 0x6F766C, 0x730
+	.incbin "graphics/banim/_us/banim/assets/img/006CAA94_Img_086CAA94.4bpp.lz"
 	.global Img_EvilEye_4
 Img_EvilEye_4:
-	.incbin "baserom.gba", 0x6F7D9C, 0x72C
+	.incbin "graphics/banim/_us/banim/assets/img/006CB1C4_Img_086CB1C4.4bpp.lz"
 	.global Img_EvilEye_5
 Img_EvilEye_5:
-	.incbin "baserom.gba", 0x6F84C8, 0x7F4
+	.incbin "graphics/banim/_us/banim/assets/img/006CB8F0_Img_086CB8F0.4bpp.lz"
 	.global Img_EvilEye_6
 Img_EvilEye_6:
-	.incbin "baserom.gba", 0x6F8CBC, 0x7BC
+	.incbin "graphics/banim/_us/banim/assets/img/006CC0E4_Img_086CC0E4.4bpp.lz"
 	.global Img_EvilEye_7
 Img_EvilEye_7:
-	.incbin "baserom.gba", 0x6F9478, 0x7F8
+	.incbin "graphics/banim/_us/banim/assets/img/006CC8A0_Img_086CC8A0.4bpp.lz"
 	.global Img_EvilEye_8
 Img_EvilEye_8:
-	.incbin "baserom.gba", 0x6F9C70, 0x8F0
+	.incbin "graphics/banim/_us/banim/assets/img/006CD098_Img_086CD098.4bpp.lz"
 	.global Img_EvilEye_9
 Img_EvilEye_9:
-	.incbin "baserom.gba", 0x6FA560, 0x7D4
+	.incbin "graphics/banim/_us/banim/assets/img/006CD988_Img_086CD988.4bpp.lz"
 	.global Img_EvilEye_10
 Img_EvilEye_10:
-	.incbin "baserom.gba", 0x6FAD34, 0x8A0
+	.incbin "graphics/banim/_us/banim/assets/img/006CE15C_Img_086CE15C.4bpp.lz"
 	.global Img_EvilEye_11
 Img_EvilEye_11:
-	.incbin "baserom.gba", 0x6FB5D4, 0x848
+	.incbin "graphics/banim/_us/banim/assets/img/006CE9FC_Img_086CE9FC.4bpp.lz"
 	.global Img_EvilEye_12
 Img_EvilEye_12:
-	.incbin "baserom.gba", 0x6FBE1C, 0x794
+	.incbin "graphics/banim/_us/banim/assets/img/006CF244_Img_086CF244.4bpp.lz"
 	.global Img_EvilEye_13
 Img_EvilEye_13:
-	.incbin "baserom.gba", 0x6FC5B0, 0x890
+	.incbin "graphics/banim/_us/banim/assets/img/006CF9D8_Img_086CF9D8.4bpp.lz"
 	.global Img_EvilEye_14
 Img_EvilEye_14:
-	.incbin "baserom.gba", 0x6FCE40, 0x8BC
+	.incbin "graphics/banim/_us/banim/assets/img/006D0268_Img_086D0268.4bpp.lz"
 	.global Img_EvilEye_15
 Img_EvilEye_15:
-	.incbin "baserom.gba", 0x6FD6FC, 0x828
+	.incbin "graphics/banim/_us/banim/assets/img/006D0B24_Img_086D0B24.4bpp.lz"
 	.global Img_EvilEye_16
 Img_EvilEye_16:
-	.incbin "baserom.gba", 0x6FDF24, 0x820
+	.incbin "graphics/banim/_us/banim/assets/img/006D134C_Img_086D134C.4bpp.lz"
 	.global Img_EvilEye_17
 Img_EvilEye_17:
-	.incbin "baserom.gba", 0x6FE744, 0x894
+	.incbin "graphics/banim/_us/banim/assets/img/006D1B6C_Img_086D1B6C.4bpp.lz"
 	.global Img_EvilEye_18
 Img_EvilEye_18:
-	.incbin "baserom.gba", 0x6FEFD8, 0x7E4
+	.incbin "graphics/banim/_us/banim/assets/img/006D2400_Img_086D2400.4bpp.lz"
 	.global Img_EvilEye_19
 Img_EvilEye_19:
-	.incbin "baserom.gba", 0x6FF7BC, 0x870
+	.incbin "graphics/banim/_us/banim/assets/img/006D2BE4_Img_086D2BE4.4bpp.lz"
 	.global Pal_EvilEye_0
 Pal_EvilEye_0:
-	.incbin "baserom.gba", 0x70002C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3454_Pal_086D3454.gbapal"
 	.global Pal_EvilEye_1
 Pal_EvilEye_1:
-	.incbin "baserom.gba", 0x70004C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3474_Pal_086D3474.gbapal"
 	.global Pal_EvilEye_2
 Pal_EvilEye_2:
-	.incbin "baserom.gba", 0x70006C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3494_Pal_086D3494.gbapal"
 	.global Pal_EvilEye_3
 Pal_EvilEye_3:
-	.incbin "baserom.gba", 0x70008C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D34B4_Pal_086D34B4.gbapal"
 	.global Pal_EvilEye_4
 Pal_EvilEye_4:
-	.incbin "baserom.gba", 0x7000AC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D34D4_Pal_086D34D4.gbapal"
 	.global Pal_EvilEye_5
 Pal_EvilEye_5:
-	.incbin "baserom.gba", 0x7000CC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D34F4_Pal_086D34F4.gbapal"
 	.global Pal_EvilEye_6
 Pal_EvilEye_6:
-	.incbin "baserom.gba", 0x7000EC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3514_Pal_086D3514.gbapal"
 	.global Pal_EvilEye_7
 Pal_EvilEye_7:
-	.incbin "baserom.gba", 0x70010C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3534_Pal_086D3534.gbapal"
 	.global Pal_EvilEye_8
 Pal_EvilEye_8:
-	.incbin "baserom.gba", 0x70012C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3554_Pal_086D3554.gbapal"
 	.global Pal_EvilEye_9
 Pal_EvilEye_9:
-	.incbin "baserom.gba", 0x70014C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3574_Pal_086D3574.gbapal"
 	.global Pal_EvilEye_10
 Pal_EvilEye_10:
-	.incbin "baserom.gba", 0x70016C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3594_Pal_086D3594.gbapal"
 	.global Pal_EvilEye_11
 Pal_EvilEye_11:
-	.incbin "baserom.gba", 0x70018C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D35B4_Pal_086D35B4.gbapal"
 	.global Pal_EvilEye_12
 Pal_EvilEye_12:
-	.incbin "baserom.gba", 0x7001AC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D35D4_Pal_086D35D4.gbapal"
 	.global Pal_EvilEye_13
 Pal_EvilEye_13:
-	.incbin "baserom.gba", 0x7001CC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D35F4_Pal_086D35F4.gbapal"
 	.global Pal_EvilEye_14
 Pal_EvilEye_14:
-	.incbin "baserom.gba", 0x7001EC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3614_Pal_086D3614.gbapal"
 	.global Pal_EvilEye_15
 Pal_EvilEye_15:
-	.incbin "baserom.gba", 0x70020C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3634_Pal_086D3634.gbapal"
 	.global Pal_EvilEye_16
 Pal_EvilEye_16:
-	.incbin "baserom.gba", 0x70022C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3654_Pal_086D3654.gbapal"
 	.global Pal_EvilEye_17
 Pal_EvilEye_17:
-	.incbin "baserom.gba", 0x70024C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3674_Pal_086D3674.gbapal"
 	.global Pal_EvilEye_18
 Pal_EvilEye_18:
-	.incbin "baserom.gba", 0x70026C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D3694_Pal_086D3694.gbapal"
 	.global Pal_EvilEye_19
 Pal_EvilEye_19:
-	.incbin "baserom.gba", 0x70028C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D36B4_Pal_086D36B4.gbapal"
 	.global Tsa_EvilEye_0
 Tsa_EvilEye_0:
-	.incbin "baserom.gba", 0x7002AC, 0xE0
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D36D4_Tsa_086D36D4.map.bin.lz"
 	.global Tsa_EvilEye_1
 Tsa_EvilEye_1:
-	.incbin "baserom.gba", 0x70038C, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D37B4_Tsa_086D37B4.map.bin.lz"
 	.global Tsa_EvilEye_2
 Tsa_EvilEye_2:
-	.incbin "baserom.gba", 0x700468, 0xE8
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D3890_Tsa_086D3890.map.bin.lz"
 	.global Tsa_EvilEye_3
 Tsa_EvilEye_3:
-	.incbin "baserom.gba", 0x700550, 0x104
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D3978_Tsa_086D3978.map.bin.lz"
 	.global Tsa_EvilEye_4
 Tsa_EvilEye_4:
-	.incbin "baserom.gba", 0x700654, 0xFC
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D3A7C_Tsa_086D3A7C.map.bin.lz"
 	.global Tsa_EvilEye_5
 Tsa_EvilEye_5:
-	.incbin "baserom.gba", 0x700750, 0x10C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D3B78_Tsa_086D3B78.map.bin.lz"
 	.global Tsa_EvilEye_6
 Tsa_EvilEye_6:
-	.incbin "baserom.gba", 0x70085C, 0x108
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D3C84_Tsa_086D3C84.map.bin.lz"
 	.global Tsa_EvilEye_7
 Tsa_EvilEye_7:
-	.incbin "baserom.gba", 0x700964, 0x108
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D3D8C_Tsa_086D3D8C.map.bin.lz"
 	.global Tsa_EvilEye_8
 Tsa_EvilEye_8:
-	.incbin "baserom.gba", 0x700A6C, 0x128
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D3E94_Tsa_086D3E94.map.bin.lz"
 	.global Tsa_EvilEye_9
 Tsa_EvilEye_9:
-	.incbin "baserom.gba", 0x700B94, 0x110
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D3FBC_Tsa_086D3FBC.map.bin.lz"
 	.global Tsa_EvilEye_10
 Tsa_EvilEye_10:
-	.incbin "baserom.gba", 0x700CA4, 0x128
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D40CC_Tsa_086D40CC.map.bin.lz"
 	.global Tsa_EvilEye_11
 Tsa_EvilEye_11:
-	.incbin "baserom.gba", 0x700DCC, 0x124
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D41F4_Tsa_086D41F4.map.bin.lz"
 	.global Tsa_EvilEye_12
 Tsa_EvilEye_12:
-	.incbin "baserom.gba", 0x700EF0, 0x110
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D4318_Tsa_086D4318.map.bin.lz"
 	.global Tsa_EvilEye_13
 Tsa_EvilEye_13:
-	.incbin "baserom.gba", 0x701000, 0x124
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D4428_Tsa_086D4428.map.bin.lz"
 	.global Tsa_EvilEye_14
 Tsa_EvilEye_14:
-	.incbin "baserom.gba", 0x701124, 0x120
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D454C_Tsa_086D454C.map.bin.lz"
 	.global Tsa_EvilEye_15
 Tsa_EvilEye_15:
-	.incbin "baserom.gba", 0x701244, 0x11C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D466C_Tsa_086D466C.map.bin.lz"
 	.global Tsa_EvilEye_16
 Tsa_EvilEye_16:
-	.incbin "baserom.gba", 0x701360, 0x114
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D4788_Tsa_086D4788.map.bin.lz"
 	.global Tsa_EvilEye_17
 Tsa_EvilEye_17:
-	.incbin "baserom.gba", 0x701474, 0x134
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D489C_Tsa_086D489C.map.bin.lz"
 	.global Tsa_EvilEye_18
 Tsa_EvilEye_18:
-	.incbin "baserom.gba", 0x7015A8, 0x10C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D49D0_Tsa_086D49D0.map.bin.lz"
 	.global Tsa_EvilEye_19
 Tsa_EvilEye_19:
-	.incbin "baserom.gba", 0x7016B4, 0x12C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D4ADC_Tsa_086D4ADC.map.bin.lz"
 	.global Img_EvilEye_20
 Img_EvilEye_20:
-	.incbin "baserom.gba", 0x7017E0, 0x810
+	.incbin "graphics/banim/_us/banim/assets/img/006D4C08_Img_086D4C08.4bpp.lz"
 	.global Img_EvilEye_21
 Img_EvilEye_21:
-	.incbin "baserom.gba", 0x701FF0, 0xA2C
+	.incbin "graphics/banim/_us/banim/assets/img/006D5418_Img_086D5418.4bpp.lz"
 	.global Img_EvilEye_22
 Img_EvilEye_22:
-	.incbin "baserom.gba", 0x702A1C, 0xA68
+	.incbin "graphics/banim/_us/banim/assets/img/006D5E44_Img_086D5E44.4bpp.lz"
 	.global Img_EvilEye_23
 Img_EvilEye_23:
-	.incbin "baserom.gba", 0x703484, 0xAF8
+	.incbin "graphics/banim/_us/banim/assets/img/006D68AC_Img_086D68AC.4bpp.lz"
 	.global Img_EvilEye_24
 Img_EvilEye_24:
-	.incbin "baserom.gba", 0x703F7C, 0xB7C
+	.incbin "graphics/banim/_us/banim/assets/img/006D73A4_Img_086D73A4.4bpp.lz"
 	.global Img_EvilEye_25
 Img_EvilEye_25:
-	.incbin "baserom.gba", 0x704AF8, 0xB74
+	.incbin "graphics/banim/_us/banim/assets/img/006D7F20_Img_086D7F20.4bpp.lz"
 	.global Pal_EvilEyeBg2_A
 Pal_EvilEyeBg2_A:
-	.incbin "baserom.gba", 0x70566C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/006D7F20_Img_086D7F20.gbapal"
 	.global Pal_EvilEye_20
 Pal_EvilEye_20:
-	.incbin "baserom.gba", 0x70568C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D8AB4_Pal_086D8AB4.gbapal"
 	.global Pal_EvilEye_21
 Pal_EvilEye_21:
-	.incbin "baserom.gba", 0x7056AC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D8AD4_Pal_086D8AD4.gbapal"
 	.global Pal_EvilEye_22
 Pal_EvilEye_22:
-	.incbin "baserom.gba", 0x7056CC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D8AF4_Pal_086D8AF4.gbapal"
 	.global Pal_EvilEye_23
 Pal_EvilEye_23:
-	.incbin "baserom.gba", 0x7056EC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D8B14_Pal_086D8B14.gbapal"
 	.global Pal_EvilEye_24
 Pal_EvilEye_24:
-	.incbin "baserom.gba", 0x70570C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006D8B34_Pal_086D8B34.gbapal"
 	.global Tsa_EvilEye_20
 Tsa_EvilEye_20:
-	.incbin "baserom.gba", 0x70572C, 0x110
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D8B54_Tsa_086D8B54.map.bin.lz"
 	.global Tsa_EvilEye_21
 Tsa_EvilEye_21:
-	.incbin "baserom.gba", 0x70583C, 0x188
+	.incbin "graphics/banim/_us/banim/assets/tsa/006D8C64_Tsa_086D8C64.map.bin.lz"

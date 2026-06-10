@@ -2,7 +2,7 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x0875d358 (US 0x08730780, shift -0xFFFD3428); incbin baserom.gba
 	.global Pal_ExcaliburSprites
 Pal_ExcaliburSprites:
-	.incbin "baserom.gba", 0x75D358, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/00730780_Pal_ExcaliburSprites.gbapal"
 	.global AnimSprite_EfxExcalibur_1
 AnimSprite_EfxExcalibur_1:
 	.incbin "baserom.gba", 0x75D378, 0x54

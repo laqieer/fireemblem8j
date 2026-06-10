@@ -2,10 +2,10 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086cf44c (US 0x086a2874, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_GleipnirSprites_Comet
 Img_GleipnirSprites_Comet:
-	.incbin "baserom.gba", 0x6CF44C, 0x474
+	.incbin "graphics/banim/_us/banim/assets/img/006A2874_Img_GleipnirSprites_Comet.4bpp.lz"
 	.global Pal_GleipnirSprites_Comet
 Pal_GleipnirSprites_Comet:
-	.incbin "baserom.gba", 0x6CF8C0, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006A2CE8_Pal_GleipnirSprites_Comet.gbapal"
 	.global AnimSprite_EfxDarkGradoOBJ02piece_R_1
 AnimSprite_EfxDarkGradoOBJ02piece_R_1:
 	.incbin "baserom.gba", 0x6CF8E0, 0x24

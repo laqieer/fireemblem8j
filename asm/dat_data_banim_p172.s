@@ -2,10 +2,10 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086bf2b8 (US 0x086926e0, shift -0xFFFD3428); incbin baserom.gba
 	.global Pal_IvaldiSprites
 Pal_IvaldiSprites:
-	.incbin "baserom.gba", 0x6BF2B8, 0x430
+	.incbin "graphics/banim/_us/banim/assets/img/006926E0_Img_IvaldiSprites.4bpp.lz"
 	.global Img_IvaldiSprites
 Img_IvaldiSprites:
-	.incbin "baserom.gba", 0x6BF6E8, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/00692B10_Img_IvaldiSprites.4bpp"
 	.global AnimSprite_EfxIvald1_1
 AnimSprite_EfxIvald1_1:
 	.incbin "baserom.gba", 0x6BF708, 0x18

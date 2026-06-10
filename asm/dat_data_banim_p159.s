@@ -2,16 +2,16 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086b8f10 (US 0x0868c338, shift -0xFFFD3428); incbin baserom.gba
 	.global Pal_BerserkBg
 Pal_BerserkBg:
-	.incbin "baserom.gba", 0x6B8F10, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/0068C338_Pal_BerserkBg.gbapal"
 	.global Img_BerserkSprites_A
 Img_BerserkSprites_A:
-	.incbin "baserom.gba", 0x6B8F30, 0x498
+	.incbin "graphics/banim/_us/banim/assets/img/0068C358_Img_BerserkSprites_A.4bpp.lz"
 	.global Img_BerserkSprites_B
 Img_BerserkSprites_B:
-	.incbin "baserom.gba", 0x6B93C8, 0x420
+	.incbin "graphics/banim/_us/banim/assets/img/0068C7F0_Img_BerserkSprites_B.4bpp.lz"
 	.global Pal_BerserkSprites
 Pal_BerserkSprites:
-	.incbin "baserom.gba", 0x6B97E8, 0x140
+	.incbin "graphics/banim/_us/banim/assets/pal/0068CC10_Pal_BerserkSprites.gbapal"
 	.global AnimSprite_EfxBerserk1_1
 AnimSprite_EfxBerserk1_1:
 	.incbin "baserom.gba", 0x6B9928, 0x30

@@ -2,10 +2,10 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x08630b70 (US 0x08603f98, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_EfxElfireOBJ
 Img_EfxElfireOBJ:
-	.incbin "baserom.gba", 0x630B70, 0x278
+	.incbin "graphics/banim/_us/banim/assets/img/00603F98_Img_EfxElfireOBJ.4bpp.lz"
 	.global Pal_EfxElfireOBJ
 Pal_EfxElfireOBJ:
-	.incbin "baserom.gba", 0x630DE8, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/00604210_Pal_EfxElfireOBJ.agbpal"
 	.global AnimSprite_EfxElfireOBJ_1
 AnimSprite_EfxElfireOBJ_1:
 	.incbin "baserom.gba", 0x630E08, 0x24

@@ -2,46 +2,46 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x0863dcb8 (US 0x086110e0, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_FimbulvetrBg_Tornado_A
 Img_FimbulvetrBg_Tornado_A:
-	.incbin "baserom.gba", 0x63DCB8, 0x1208
+	.incbin "graphics/banim/_us/banim/assets/img/006110E0_Img_FimbulvetrBg_Tornado_A.4bpp.lz"
 	.global Img_FimbulvetrBg_Tornado_B
 Img_FimbulvetrBg_Tornado_B:
-	.incbin "baserom.gba", 0x63EEC0, 0x115C
+	.incbin "graphics/banim/_us/banim/assets/img/006122E8_Img_FimbulvetrBg_Tornado_B.4bpp.lz"
 	.global Img_FimbulvetrBg_Tornado_C
 Img_FimbulvetrBg_Tornado_C:
-	.incbin "baserom.gba", 0x64001C, 0x1084
+	.incbin "graphics/banim/_us/banim/assets/img/00613444_Img_FimbulvetrBg_Tornado_C.4bpp.lz"
 	.global Img_FimbulvetrBg_Tornado_D
 Img_FimbulvetrBg_Tornado_D:
-	.incbin "baserom.gba", 0x6410A0, 0x1440
+	.incbin "graphics/banim/_us/banim/assets/img/006144C8_Img_FimbulvetrBg_Tornado_D.4bpp.lz"
 	.global Img_FimbulvetrBg_Tornado_E
 Img_FimbulvetrBg_Tornado_E:
-	.incbin "baserom.gba", 0x6424E0, 0x13B8
+	.incbin "graphics/banim/_us/banim/assets/img/00615908_Img_FimbulvetrBg_Tornado_E.4bpp.lz"
 	.global Img_FimbulvetrBg_Tornado_F
 Img_FimbulvetrBg_Tornado_F:
-	.incbin "baserom.gba", 0x643898, 0x1244
+	.incbin "graphics/banim/_us/banim/assets/img/00616CC0_Img_FimbulvetrBg_Tornado_F.4bpp.lz"
 	.global Pal_FimbulvetrBg_Tornado
 Pal_FimbulvetrBg_Tornado:
-	.incbin "baserom.gba", 0x644ADC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/00616CC0_Img_FimbulvetrBg_Tornado_F.gbapal"
 	.global Tsa_FimbulvetrBg_Tornado_A
 Tsa_FimbulvetrBg_Tornado_A:
-	.incbin "baserom.gba", 0x644AFC, 0x1EC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00617F24_Tsa_FimbulvetrBg_Tornado_A.map.bin.lz"
 	.global Tsa_FimbulvetrBg_Tornado_B
 Tsa_FimbulvetrBg_Tornado_B:
-	.incbin "baserom.gba", 0x644CE8, 0x1D8
+	.incbin "graphics/banim/_us/banim/assets/tsa/00618110_Tsa_FimbulvetrBg_Tornado_B.map.bin.lz"
 	.global Tsa_FimbulvetrBg_Tornado_C
 Tsa_FimbulvetrBg_Tornado_C:
-	.incbin "baserom.gba", 0x644EC0, 0x1C8
+	.incbin "graphics/banim/_us/banim/assets/tsa/006182E8_Tsa_FimbulvetrBg_Tornado_C.map.bin.lz"
 	.global Tsa_FimbulvetrBg_Tornado_D
 Tsa_FimbulvetrBg_Tornado_D:
-	.incbin "baserom.gba", 0x645088, 0x234
+	.incbin "graphics/banim/_us/banim/assets/tsa/006184B0_Tsa_FimbulvetrBg_Tornado_D.map.bin.lz"
 	.global Tsa_FimbulvetrBg_Tornado_E
 Tsa_FimbulvetrBg_Tornado_E:
-	.incbin "baserom.gba", 0x6452BC, 0x248
+	.incbin "graphics/banim/_us/banim/assets/tsa/006186E4_Tsa_FimbulvetrBg_Tornado_E.map.bin.lz"
 	.global Tsa_FimbulvetrBg_Tornado_F
 Tsa_FimbulvetrBg_Tornado_F:
-	.incbin "baserom.gba", 0x645504, 0x290
+	.incbin "graphics/banim/_us/banim/assets/tsa/0061892C_Tsa_FimbulvetrBg_Tornado_F.map.bin.lz"
 	.global Img_FimbulvetrSprites_Snow
 Img_FimbulvetrSprites_Snow:
-	.incbin "baserom.gba", 0x645794, 0x350
+	.incbin "graphics/banim/_us/banim/assets/img/00618BBC_Img_FimbulvetrSprites_Snow.4bpp.lz"
 	.global AnimSprite_FimbulvetrOBJ_1
 AnimSprite_FimbulvetrOBJ_1:
 	.incbin "baserom.gba", 0x645AE4, 0x78

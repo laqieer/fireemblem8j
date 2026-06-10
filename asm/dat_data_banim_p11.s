@@ -2,7 +2,7 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x08606778 (US 0x085dc050, shift -0xFFFD58D8); incbin baserom.gba
 	.global Pal_SpellJavelinUnk
 Pal_SpellJavelinUnk:
-	.incbin "baserom.gba", 0x606778, 0x20
+	.incbin "graphics/banim/_us/efxmagic/Img_SpellJavelinUnk.gbapal", 0x0, 0x20
 	.global AnimSprite_Banim_0
 AnimSprite_Banim_0:
 	.incbin "baserom.gba", 0x606798, 0x24

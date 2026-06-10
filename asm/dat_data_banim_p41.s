@@ -2,7 +2,7 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x0861b0d0 (US 0x085ee4f8, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_EfxMagfcastBG
 Img_EfxMagfcastBG:
-	.incbin "baserom.gba", 0x61B0D0, 0xD54
+	.incbin "graphics/banim/_us/banim/assets/img/005EE4F8_Img_EfxMagfcastBG.4bpp.lz"
 	.global Pal_EfxMagfcastBG
 Pal_EfxMagfcastBG:
-	.incbin "baserom.gba", 0x61BE24, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/005EE4F8_Img_EfxMagfcastBG.gbapal"

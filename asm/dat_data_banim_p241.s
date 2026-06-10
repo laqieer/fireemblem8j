@@ -2,10 +2,10 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x087a1d3c (US 0x08751808, shift -0xFFFAFACC); incbin baserom.gba
 	.global Img_Banim_18
 Img_Banim_18:
-	.incbin "baserom.gba", 0x7A1D3C, 0x5AC
+	.incbin "graphics/banim/_us/banim/assets/img/00751808_Img_08751808.4bpp.lz"
 	.global Pal_efxSuperdruidOBJ
 Pal_efxSuperdruidOBJ:
-	.incbin "baserom.gba", 0x7A22E8, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/00751DB4_Pal_08751DB4.gbapal"
 	.global AnimSprite_efxSuperdruidOBJ_0
 AnimSprite_efxSuperdruidOBJ_0:
 	.incbin "baserom.gba", 0x7A2308, 0x48

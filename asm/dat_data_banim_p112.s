@@ -2,4 +2,4 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x0867f30c (US 0x08652734, shift -0xFFFD3428); incbin baserom.gba
 	.global Tsa_FenrirBg_Sigils
 Tsa_FenrirBg_Sigils:
-	.incbin "baserom.gba", 0x67F30C, 0x214
+	.incbin "graphics/banim/_us/banim/assets/tsa/00652734_Tsa_FenrirBg_Sigils.map.bin.lz"

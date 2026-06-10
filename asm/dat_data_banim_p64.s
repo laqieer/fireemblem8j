@@ -2,7 +2,7 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x08622210 (US 0x085f5638, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_FireSpellBg
 Img_FireSpellBg:
-	.incbin "baserom.gba", 0x622210, 0xBF8
+	.incbin "graphics/banim/_us/banim/assets/img/005F5638_Img_FireSpellBg.4bpp.lz"
 	.global Pal_FireSpellBg
 Pal_FireSpellBg:
-	.incbin "baserom.gba", 0x622E08, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/005F6230_Pal_FireSpellBg.agbpal"

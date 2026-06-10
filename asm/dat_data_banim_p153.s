@@ -2,67 +2,67 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086b1eb0 (US 0x086852d8, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_SleepBg
 Img_SleepBg:
-	.incbin "baserom.gba", 0x6B1EB0, 0xECC
+	.incbin "graphics/banim/_us/banim/assets/img/006852D8_Img_SleepBg.4bpp.lz"
 	.global Pal_SleepBg
 Pal_SleepBg:
-	.incbin "baserom.gba", 0x6B2D7C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/006852D8_Img_SleepBg.gbapal"
 	.global Tsa_SleepBg_0
 Tsa_SleepBg_0:
-	.incbin "baserom.gba", 0x6B2D9C, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/006861C4_Tsa_086861C4.map.bin.lz"
 	.global Tsa_SleepBg_1
 Tsa_SleepBg_1:
-	.incbin "baserom.gba", 0x6B2E78, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/006862A0_Tsa_086862A0.map.bin.lz"
 	.global Tsa_SleepBg_2
 Tsa_SleepBg_2:
-	.incbin "baserom.gba", 0x6B2F54, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/0068637C_Tsa_0868637C.map.bin.lz"
 	.global Tsa_SleepBg_3
 Tsa_SleepBg_3:
-	.incbin "baserom.gba", 0x6B3030, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00686458_Tsa_08686458.map.bin.lz"
 	.global Tsa_SleepBg_4
 Tsa_SleepBg_4:
-	.incbin "baserom.gba", 0x6B310C, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00686534_Tsa_08686534.map.bin.lz"
 	.global Tsa_SleepBg_5
 Tsa_SleepBg_5:
-	.incbin "baserom.gba", 0x6B31E8, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00686610_Tsa_08686610.map.bin.lz"
 	.global Tsa_SleepBg_6
 Tsa_SleepBg_6:
-	.incbin "baserom.gba", 0x6B32C4, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/006866EC_Tsa_086866EC.map.bin.lz"
 	.global Tsa_SleepBg_7
 Tsa_SleepBg_7:
-	.incbin "baserom.gba", 0x6B33A0, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/006867C8_Tsa_086867C8.map.bin.lz"
 	.global Tsa_SleepBg_8
 Tsa_SleepBg_8:
-	.incbin "baserom.gba", 0x6B347C, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/006868A4_Tsa_086868A4.map.bin.lz"
 	.global Tsa_SleepBg_9
 Tsa_SleepBg_9:
-	.incbin "baserom.gba", 0x6B3558, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00686980_Tsa_08686980.map.bin.lz"
 	.global Tsa_SleepBg_10
 Tsa_SleepBg_10:
-	.incbin "baserom.gba", 0x6B3634, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00686A5C_Tsa_08686A5C.map.bin.lz"
 	.global Tsa_SleepBg_11
 Tsa_SleepBg_11:
-	.incbin "baserom.gba", 0x6B3710, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00686B38_Tsa_08686B38.map.bin.lz"
 	.global Tsa_SleepBg_12
 Tsa_SleepBg_12:
-	.incbin "baserom.gba", 0x6B37EC, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00686C14_Tsa_08686C14.map.bin.lz"
 	.global Tsa_SleepBg_13
 Tsa_SleepBg_13:
-	.incbin "baserom.gba", 0x6B38C8, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00686CF0_Tsa_08686CF0.map.bin.lz"
 	.global Tsa_SleepBg_14
 Tsa_SleepBg_14:
-	.incbin "baserom.gba", 0x6B39A4, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00686DCC_Tsa_08686DCC.map.bin.lz"
 	.global Tsa_SleepBg_15
 Tsa_SleepBg_15:
-	.incbin "baserom.gba", 0x6B3A80, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00686EA8_Tsa_08686EA8.map.bin.lz"
 	.global Img_SleepSprites
 Img_SleepSprites:
-	.incbin "baserom.gba", 0x6B3B5C, 0x1E8
+	.incbin "graphics/banim/_us/banim/assets/img/00686F84_Img_SleepSprites.4bpp.lz"
 	.global Pal_SleepSprites
 Pal_SleepSprites:
-	.incbin "baserom.gba", 0x6B3D44, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/0068716C_Pal_SleepSprites.gbapal"
 	.global Pal_HammerneSprites
 Pal_HammerneSprites:
-	.incbin "baserom.gba", 0x6B3D64, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/0068718C_Pal_HammerneSprites.gbapal"
 	.global AnimSprite_EfxSleepOBJ2_1
 AnimSprite_EfxSleepOBJ2_1:
 	.incbin "baserom.gba", 0x6B3D84, 0x24

@@ -2,10 +2,10 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x08604384 (US 0x085d9c5c, shift -0xFFFD58D8); incbin baserom.gba
 	.global Img_TeonoOBJ
 Img_TeonoOBJ:
-	.incbin "baserom.gba", 0x604384, 0x400
+	.incbin "graphics/banim/_us/efxmagic/Img_EfxTeonoOBJ.4bpp.lz"
 	.global Pal_TeonoOBJ
 Pal_TeonoOBJ:
-	.incbin "baserom.gba", 0x604784, 0x20
+	.incbin "graphics/banim/_us/efxmagic/Img_EfxTeonoOBJ.gbapal", 0x0, 0x20
 	.global AnimSprite_EfxTeonoObj_TeonoO
 AnimSprite_EfxTeonoObj_TeonoO:
 	.incbin "baserom.gba", 0x6047A4, 0x18

@@ -2,118 +2,118 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086638d0 (US 0x08636cf8, shift -0xFFFD3428); incbin baserom.gba
 	.global Tsa_NosferatuBg_8
 Tsa_NosferatuBg_8:
-	.incbin "baserom.gba", 0x6638D0, 0x108
+	.incbin "graphics/banim/_us/banim/assets/tsa/00636CF8_Tsa_08636CF8.map.bin.lz"
 	.global Tsa_NosferatuBg_9
 Tsa_NosferatuBg_9:
-	.incbin "baserom.gba", 0x6639D8, 0x11C
+	.incbin "graphics/banim/_us/banim/assets/tsa/00636E00_Tsa_08636E00.map.bin.lz"
 	.global Tsa_NosferatuBg_10
 Tsa_NosferatuBg_10:
-	.incbin "baserom.gba", 0x663AF4, 0x13C
+	.incbin "graphics/banim/_us/banim/assets/tsa/00636F1C_Tsa_08636F1C.map.bin.lz"
 	.global Tsa_NosferatuBg_11
 Tsa_NosferatuBg_11:
-	.incbin "baserom.gba", 0x663C30, 0x150
+	.incbin "graphics/banim/_us/banim/assets/tsa/00637058_Tsa_08637058.map.bin.lz"
 	.global Tsa_NosferatuBg_12
 Tsa_NosferatuBg_12:
-	.incbin "baserom.gba", 0x663D80, 0x158
+	.incbin "graphics/banim/_us/banim/assets/tsa/006371A8_Tsa_086371A8.map.bin.lz"
 	.global Tsa_NosferatuBg_13
 Tsa_NosferatuBg_13:
-	.incbin "baserom.gba", 0x663ED8, 0x158
+	.incbin "graphics/banim/_us/banim/assets/tsa/00637300_Tsa_08637300.map.bin.lz"
 	.global Tsa_NosferatuBg_14
 Tsa_NosferatuBg_14:
-	.incbin "baserom.gba", 0x664030, 0x154
+	.incbin "graphics/banim/_us/banim/assets/tsa/00637458_Tsa_08637458.map.bin.lz"
 	.global Tsa_NosferatuBg_15
 Tsa_NosferatuBg_15:
-	.incbin "baserom.gba", 0x664184, 0x150
+	.incbin "graphics/banim/_us/banim/assets/tsa/006375AC_Tsa_086375AC.map.bin.lz"
 	.global Tsa_NosferatuBg_16
 Tsa_NosferatuBg_16:
-	.incbin "baserom.gba", 0x6642D4, 0x150
+	.incbin "graphics/banim/_us/banim/assets/tsa/006376FC_Tsa_086376FC.map.bin.lz"
 	.global Tsa_NosferatuBg_17
 Tsa_NosferatuBg_17:
-	.incbin "baserom.gba", 0x664424, 0x138
+	.incbin "graphics/banim/_us/banim/assets/tsa/0063784C_Tsa_0863784C.map.bin.lz"
 	.global Tsa_NosferatuBg_18
 Tsa_NosferatuBg_18:
-	.incbin "baserom.gba", 0x66455C, 0x12C
+	.incbin "graphics/banim/_us/banim/assets/tsa/00637984_Tsa_08637984.map.bin.lz"
 	.global Tsa_NosferatuBg_19
 Tsa_NosferatuBg_19:
-	.incbin "baserom.gba", 0x664688, 0x11C
+	.incbin "graphics/banim/_us/banim/assets/tsa/00637AB0_Tsa_08637AB0.map.bin.lz"
 	.global Tsa_NosferatuBg_20
 Tsa_NosferatuBg_20:
-	.incbin "baserom.gba", 0x6647A4, 0x10C
+	.incbin "graphics/banim/_us/banim/assets/tsa/00637BCC_Tsa_08637BCC.map.bin.lz"
 	.global Tsa_NosferatuBg_21
 Tsa_NosferatuBg_21:
-	.incbin "baserom.gba", 0x6648B0, 0xF8
+	.incbin "graphics/banim/_us/banim/assets/tsa/00637CD8_Tsa_08637CD8.map.bin.lz"
 	.global Tsa_NosferatuBg_22
 Tsa_NosferatuBg_22:
-	.incbin "baserom.gba", 0x6649A8, 0xEC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00637DD0_Tsa_08637DD0.map.bin.lz"
 	.global Tsa_NosferatuBg_23
 Tsa_NosferatuBg_23:
-	.incbin "baserom.gba", 0x664A94, 0xD0
+	.incbin "graphics/banim/_us/banim/assets/tsa/00637EBC_Tsa_08637EBC.map.bin.lz"
 	.global Tsa_NosferatuBg_24
 Tsa_NosferatuBg_24:
-	.incbin "baserom.gba", 0x664B64, 0xBC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00637F8C_Tsa_08637F8C.map.bin.lz"
 	.global Tsa_NosferatuBg_25
 Tsa_NosferatuBg_25:
-	.incbin "baserom.gba", 0x664C20, 0xB4
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638048_Tsa_08638048.map.bin.lz"
 	.global Tsa_NosferatuBg_26
 Tsa_NosferatuBg_26:
-	.incbin "baserom.gba", 0x664CD4, 0xB0
+	.incbin "graphics/banim/_us/banim/assets/tsa/006380FC_Tsa_086380FC.map.bin.lz"
 	.global Tsa_NosferatuBg_27
 Tsa_NosferatuBg_27:
-	.incbin "baserom.gba", 0x664D84, 0xAC
+	.incbin "graphics/banim/_us/banim/assets/tsa/006381AC_Tsa_086381AC.map.bin.lz"
 	.global Tsa_NosferatuBg_28
 Tsa_NosferatuBg_28:
-	.incbin "baserom.gba", 0x664E30, 0xA8
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638258_Tsa_08638258.map.bin.lz"
 	.global Tsa_NosferatuBg_29
 Tsa_NosferatuBg_29:
-	.incbin "baserom.gba", 0x664ED8, 0xB4
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638300_Tsa_08638300.map.bin.lz"
 	.global Tsa_NosferatuBg_30
 Tsa_NosferatuBg_30:
-	.incbin "baserom.gba", 0x664F8C, 0xC0
+	.incbin "graphics/banim/_us/banim/assets/tsa/006383B4_Tsa_086383B4.map.bin.lz"
 	.global Tsa_NosferatuBg_31
 Tsa_NosferatuBg_31:
-	.incbin "baserom.gba", 0x66504C, 0xCC
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638474_Tsa_08638474.map.bin.lz"
 	.global Tsa_NosferatuBg_32
 Tsa_NosferatuBg_32:
-	.incbin "baserom.gba", 0x665118, 0xC8
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638540_Tsa_08638540.map.bin.lz"
 	.global Tsa_NosferatuBg_33
 Tsa_NosferatuBg_33:
-	.incbin "baserom.gba", 0x6651E0, 0xC8
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638608_Tsa_08638608.map.bin.lz"
 	.global Tsa_NosferatuBg_34
 Tsa_NosferatuBg_34:
-	.incbin "baserom.gba", 0x6652A8, 0xD4
+	.incbin "graphics/banim/_us/banim/assets/tsa/006386D0_Tsa_086386D0.map.bin.lz"
 	.global Tsa_NosferatuBg_35
 Tsa_NosferatuBg_35:
-	.incbin "baserom.gba", 0x66537C, 0xDC
+	.incbin "graphics/banim/_us/banim/assets/tsa/006387A4_Tsa_086387A4.map.bin.lz"
 	.global Tsa_NosferatuBg_36
 Tsa_NosferatuBg_36:
-	.incbin "baserom.gba", 0x665458, 0xE8
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638880_Tsa_08638880.map.bin.lz"
 	.global Tsa_NosferatuBg_37
 Tsa_NosferatuBg_37:
-	.incbin "baserom.gba", 0x665540, 0xF4
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638968_Tsa_08638968.map.bin.lz"
 	.global Tsa_NosferatuBg_38
 Tsa_NosferatuBg_38:
-	.incbin "baserom.gba", 0x665634, 0x108
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638A5C_Tsa_08638A5C.map.bin.lz"
 	.global Tsa_NosferatuBg_39
 Tsa_NosferatuBg_39:
-	.incbin "baserom.gba", 0x66573C, 0x108
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638B64_Tsa_08638B64.map.bin.lz"
 	.global Tsa_NosferatuBg_40
 Tsa_NosferatuBg_40:
-	.incbin "baserom.gba", 0x665844, 0x124
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638C6C_Tsa_08638C6C.map.bin.lz"
 	.global Tsa_NosferatuBg_41
 Tsa_NosferatuBg_41:
-	.incbin "baserom.gba", 0x665968, 0x120
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638D90_Tsa_08638D90.map.bin.lz"
 	.global Tsa_NosferatuBg_42
 Tsa_NosferatuBg_42:
-	.incbin "baserom.gba", 0x665A88, 0x11C
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638EB0_Tsa_08638EB0.map.bin.lz"
 	.global Tsa_NosferatuBg_43
 Tsa_NosferatuBg_43:
-	.incbin "baserom.gba", 0x665BA4, 0x110
+	.incbin "graphics/banim/_us/banim/assets/tsa/00638FCC_Tsa_08638FCC.map.bin.lz"
 	.global Tsa_NosferatuBg_44
 Tsa_NosferatuBg_44:
-	.incbin "baserom.gba", 0x665CB4, 0x10C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006390DC_Tsa_086390DC.map.bin.lz"
 	.global Tsa_NosferatuBg_45
 Tsa_NosferatuBg_45:
-	.incbin "baserom.gba", 0x665DC0, 0x100
+	.incbin "graphics/banim/_us/banim/assets/tsa/006391E8_Tsa_086391E8.map.bin.lz"
 	.global Tsa_NosferatuBg_46
 Tsa_NosferatuBg_46:
-	.incbin "baserom.gba", 0x665EC0, 0xF0
+	.incbin "graphics/banim/_us/banim/assets/tsa/006392E8_Tsa_086392E8.map.bin.lz"

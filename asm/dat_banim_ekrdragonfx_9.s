@@ -51,52 +51,52 @@ Img_DemonLightBg_Close_16:
 	.incbin "baserom.gba", 0x805C80, 0xB08
 	.global Pal_DemonLightBg_Close_1
 Pal_DemonLightBg_Close_1:
-	.incbin "baserom.gba", 0x806788, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_1.gbapal"
 	.global Pal_DemonLightBg_Close_2
 Pal_DemonLightBg_Close_2:
-	.incbin "baserom.gba", 0x8067A8, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_2.gbapal"
 	.global Pal_DemonLightBg_Close_3
 Pal_DemonLightBg_Close_3:
-	.incbin "baserom.gba", 0x8067C8, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_3.gbapal"
 	.global Pal_DemonLightBg_Close_4
 Pal_DemonLightBg_Close_4:
-	.incbin "baserom.gba", 0x8067E8, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_4.gbapal"
 	.global Pal_DemonLightBg_Close_5
 Pal_DemonLightBg_Close_5:
-	.incbin "baserom.gba", 0x806808, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_5.gbapal"
 	.global Pal_DemonLightBg_Close_6
 Pal_DemonLightBg_Close_6:
-	.incbin "baserom.gba", 0x806828, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_6.gbapal"
 	.global Pal_DemonLightBg_Close_7
 Pal_DemonLightBg_Close_7:
-	.incbin "baserom.gba", 0x806848, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_7.gbapal"
 	.global Pal_DemonLightBg_Close_8
 Pal_DemonLightBg_Close_8:
-	.incbin "baserom.gba", 0x806868, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_8.gbapal"
 	.global Pal_DemonLightBg_Close_9
 Pal_DemonLightBg_Close_9:
-	.incbin "baserom.gba", 0x806888, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_9.gbapal"
 	.global Pal_DemonLightBg_Close_10
 Pal_DemonLightBg_Close_10:
-	.incbin "baserom.gba", 0x8068A8, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_10.gbapal"
 	.global Pal_DemonLightBg_Close_11
 Pal_DemonLightBg_Close_11:
-	.incbin "baserom.gba", 0x8068C8, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_11.gbapal"
 	.global Pal_DemonLightBg_Close_12
 Pal_DemonLightBg_Close_12:
-	.incbin "baserom.gba", 0x8068E8, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_12.gbapal"
 	.global Pal_DemonLightBg_Close_13
 Pal_DemonLightBg_Close_13:
-	.incbin "baserom.gba", 0x806908, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_13.gbapal"
 	.global Pal_DemonLightBg_Close_14
 Pal_DemonLightBg_Close_14:
-	.incbin "baserom.gba", 0x806928, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_14.gbapal"
 	.global Pal_DemonLightBg_Close_15
 Pal_DemonLightBg_Close_15:
-	.incbin "baserom.gba", 0x806948, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_15.gbapal"
 	.global Pal_DemonLightBg_Close_16
 Pal_DemonLightBg_Close_16:
-	.incbin "baserom.gba", 0x806968, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_16.gbapal"
 	.global Tsa_DemonLightBg_Close_1
 Tsa_DemonLightBg_Close_1:
 	.incbin "baserom.gba", 0x806988, 0x274
@@ -195,52 +195,52 @@ Img_DemonLightBg_Close_32:
 	.incbin "baserom.gba", 0x816860, 0xA2C
 	.global Pal_DemonLightBg_Close_17
 Pal_DemonLightBg_Close_17:
-	.incbin "baserom.gba", 0x81728C, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_17.gbapal"
 	.global Pal_DemonLightBg_Close_18
 Pal_DemonLightBg_Close_18:
-	.incbin "baserom.gba", 0x8172AC, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_18.gbapal"
 	.global Pal_DemonLightBg_Close_19
 Pal_DemonLightBg_Close_19:
-	.incbin "baserom.gba", 0x8172CC, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_19.gbapal"
 	.global Pal_DemonLightBg_Close_20
 Pal_DemonLightBg_Close_20:
-	.incbin "baserom.gba", 0x8172EC, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_20.gbapal"
 	.global Pal_DemonLightBg_Close_21
 Pal_DemonLightBg_Close_21:
-	.incbin "baserom.gba", 0x81730C, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_21.gbapal"
 	.global Pal_DemonLightBg_Close_22
 Pal_DemonLightBg_Close_22:
-	.incbin "baserom.gba", 0x81732C, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_22.gbapal"
 	.global Pal_DemonLightBg_Close_23
 Pal_DemonLightBg_Close_23:
-	.incbin "baserom.gba", 0x81734C, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_23.gbapal"
 	.global Pal_DemonLightBg_Close_24
 Pal_DemonLightBg_Close_24:
-	.incbin "baserom.gba", 0x81736C, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_24.gbapal"
 	.global Pal_DemonLightBg_Close_25
 Pal_DemonLightBg_Close_25:
-	.incbin "baserom.gba", 0x81738C, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_25.gbapal"
 	.global Pal_DemonLightBg_Close_26
 Pal_DemonLightBg_Close_26:
-	.incbin "baserom.gba", 0x8173AC, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_26.gbapal"
 	.global Pal_DemonLightBg_Close_27
 Pal_DemonLightBg_Close_27:
-	.incbin "baserom.gba", 0x8173CC, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_27.gbapal"
 	.global Pal_DemonLightBg_Close_28
 Pal_DemonLightBg_Close_28:
-	.incbin "baserom.gba", 0x8173EC, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_28.gbapal"
 	.global Pal_DemonLightBg_Close_29
 Pal_DemonLightBg_Close_29:
-	.incbin "baserom.gba", 0x81740C, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_29.gbapal"
 	.global Pal_DemonLightBg_Close_30
 Pal_DemonLightBg_Close_30:
-	.incbin "baserom.gba", 0x81742C, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_30.gbapal"
 	.global Pal_DemonLightBg_Close_31
 Pal_DemonLightBg_Close_31:
-	.incbin "baserom.gba", 0x81744C, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_31.gbapal"
 	.global Pal_DemonLightBg_Close_32
 Pal_DemonLightBg_Close_32:
-	.incbin "baserom.gba", 0x81746C, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_32.gbapal"
 	.global Tsa_DemonLightBg_Close_17
 Tsa_DemonLightBg_Close_17:
 	.incbin "baserom.gba", 0x81748C, 0x270
@@ -291,121 +291,121 @@ Tsa_DemonLightBg_Close_32:
 	.incbin "baserom.gba", 0x81958C, 0x15C
 	.global Img_DemonLightBg_0
 Img_DemonLightBg_0:
-	.incbin "baserom.gba", 0x8196E8, 0x554
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087C5190.4bpp.lz"
 	.global Img_DemonLightBg4_Close_0
 Img_DemonLightBg4_Close_0:
-	.incbin "baserom.gba", 0x819C3C, 0xAB8
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087C56E4.4bpp.lz"
 	.global Img_DemonLightBg4_Close_1
 Img_DemonLightBg4_Close_1:
-	.incbin "baserom.gba", 0x81A6F4, 0xB58
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087C619C.4bpp.lz"
 	.global Img_DemonLightBg4_Close_2
 Img_DemonLightBg4_Close_2:
-	.incbin "baserom.gba", 0x81B24C, 0x984
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087C6CF4.4bpp.lz"
 	.global Img_DemonLightBg4_Close_3
 Img_DemonLightBg4_Close_3:
-	.incbin "baserom.gba", 0x81BBD0, 0xA94
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087C7678.4bpp.lz"
 	.global Img_DemonLightBg4_Close_4
 Img_DemonLightBg4_Close_4:
-	.incbin "baserom.gba", 0x81C664, 0x5B0
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087C810C.4bpp.lz"
 	.global Img_DemonLightBg4_Close_5
 Img_DemonLightBg4_Close_5:
-	.incbin "baserom.gba", 0x81CC14, 0x5C4
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087C86BC.4bpp.lz"
 	.global Img_DemonLightBg4_Close_6
 Img_DemonLightBg4_Close_6:
-	.incbin "baserom.gba", 0x81D1D8, 0x610
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087C8C80.4bpp.lz"
 	.global Pal_DemonLightBg4_Close_0
 Pal_DemonLightBg4_Close_0:
-	.incbin "baserom.gba", 0x81D7E8, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087C9290.gbapal"
 	.global Pal_DemonLightBg4_Close_1
 Pal_DemonLightBg4_Close_1:
-	.incbin "baserom.gba", 0x81D808, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087C92B0.gbapal"
 	.global Pal_DemonLightBg4_Close_2
 Pal_DemonLightBg4_Close_2:
-	.incbin "baserom.gba", 0x81D828, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087C92D0.gbapal"
 	.global Pal_DemonLightBg4_Close_3
 Pal_DemonLightBg4_Close_3:
-	.incbin "baserom.gba", 0x81D848, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087C92F0.gbapal"
 	.global Pal_DemonLightBg4_Close_4
 Pal_DemonLightBg4_Close_4:
-	.incbin "baserom.gba", 0x81D868, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087C9310.gbapal"
 	.global Pal_DemonLightBg4_Close_5
 Pal_DemonLightBg4_Close_5:
-	.incbin "baserom.gba", 0x81D888, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087C9330.gbapal"
 	.global Pal_DemonLightBg4_Close_6
 Pal_DemonLightBg4_Close_6:
-	.incbin "baserom.gba", 0x81D8A8, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087C9350.gbapal"
 	.global Pal_DemonLightBg4_Close_7
 Pal_DemonLightBg4_Close_7:
-	.incbin "baserom.gba", 0x81D8C8, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087C9370.gbapal"
 	.global Tsa_DemonLightBg4_Close_0
 Tsa_DemonLightBg4_Close_0:
-	.incbin "baserom.gba", 0x81D8E8, 0xD4
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_0.map.bin.lz"
 	.global Tsa_DemonLightBg4_Close_1
 Tsa_DemonLightBg4_Close_1:
-	.incbin "baserom.gba", 0x81D9BC, 0x19C
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_1.map.bin.lz"
 	.global Tsa_DemonLightBg4_Close_2
 Tsa_DemonLightBg4_Close_2:
-	.incbin "baserom.gba", 0x81DB58, 0x218
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_2.map.bin.lz"
 	.global Tsa_DemonLightBg4_Close_3
 Tsa_DemonLightBg4_Close_3:
-	.incbin "baserom.gba", 0x81DD70, 0x214
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_3.map.bin.lz"
 	.global Tsa_DemonLightBg4_Close_4
 Tsa_DemonLightBg4_Close_4:
-	.incbin "baserom.gba", 0x81DF84, 0x1C0
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_4.map.bin.lz"
 	.global Tsa_DemonLightBg4_Close_5
 Tsa_DemonLightBg4_Close_5:
-	.incbin "baserom.gba", 0x81E144, 0x108
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_5.map.bin.lz"
 	.global Tsa_DemonLightBg4_Close_6
 Tsa_DemonLightBg4_Close_6:
-	.incbin "baserom.gba", 0x81E24C, 0x110
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_6.map.bin.lz"
 	.global Tsa_DemonLightBg4_Close_7
 Tsa_DemonLightBg4_Close_7:
-	.incbin "baserom.gba", 0x81E35C, 0x114
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_7.map.bin.lz"
 	.global Img_DemonLightBg3_Close_0
 Img_DemonLightBg3_Close_0:
-	.incbin "baserom.gba", 0x81E470, 0x774
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087C9F18.4bpp.lz"
 	.global Img_DemonLightBg3_Close_1
 Img_DemonLightBg3_Close_1:
-	.incbin "baserom.gba", 0x81EBE4, 0x7D4
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087CA68C.4bpp.lz"
 	.global Img_DemonLightBg3_Close_2
 Img_DemonLightBg3_Close_2:
-	.incbin "baserom.gba", 0x81F3B8, 0x7D0
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087CAE60.4bpp.lz"
 	.global Img_DemonLightBg3_Close_3
 Img_DemonLightBg3_Close_3:
-	.incbin "baserom.gba", 0x81FB88, 0x7C4
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087CB630.4bpp.lz"
 	.global Img_DemonLightBg3_Close_4
 Img_DemonLightBg3_Close_4:
-	.incbin "baserom.gba", 0x82034C, 0x768
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087CBDF4.4bpp.lz"
 	.global Pal_DemonLightBg3_Close_0
 Pal_DemonLightBg3_Close_0:
-	.incbin "baserom.gba", 0x820AB4, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087CC55C.gbapal"
 	.global Pal_DemonLightBg3_Close_1
 Pal_DemonLightBg3_Close_1:
-	.incbin "baserom.gba", 0x820AD4, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087CC57C.gbapal"
 	.global Pal_DemonLightBg3_Close_2
 Pal_DemonLightBg3_Close_2:
-	.incbin "baserom.gba", 0x820AF4, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087CC59C.gbapal"
 	.global Pal_DemonLightBg3_Close_3
 Pal_DemonLightBg3_Close_3:
-	.incbin "baserom.gba", 0x820B14, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087CC5BC.gbapal"
 	.global Pal_DemonLightBg3_Close_4
 Pal_DemonLightBg3_Close_4:
-	.incbin "baserom.gba", 0x820B34, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087CC5DC.gbapal"
 	.global Tsa_DemonLightBg3_Close_0
 Tsa_DemonLightBg3_Close_0:
-	.incbin "baserom.gba", 0x820B54, 0x138
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_0.map.bin.lz"
 	.global Tsa_DemonLightBg3_Close_1
 Tsa_DemonLightBg3_Close_1:
-	.incbin "baserom.gba", 0x820C8C, 0x144
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_1.map.bin.lz"
 	.global Tsa_DemonLightBg3_Close_2
 Tsa_DemonLightBg3_Close_2:
-	.incbin "baserom.gba", 0x820DD0, 0x140
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_2.map.bin.lz"
 	.global Tsa_DemonLightBg3_Close_3
 Tsa_DemonLightBg3_Close_3:
-	.incbin "baserom.gba", 0x820F10, 0x120
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_3.map.bin.lz"
 	.global Tsa_DemonLightBg3_Close_4
 Tsa_DemonLightBg3_Close_4:
-	.incbin "baserom.gba", 0x821030, 0x120
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_4.map.bin.lz"
 	.global Img_DemonLightBg_Far_1
 Img_DemonLightBg_Far_1:
 	.incbin "baserom.gba", 0x821150, 0xB40
@@ -456,52 +456,52 @@ Img_DemonLightBg_Far_16:
 	.incbin "baserom.gba", 0x82B43C, 0xB04
 	.global Pal_DemonLightBg_Far_1
 Pal_DemonLightBg_Far_1:
-	.incbin "baserom.gba", 0x82BF40, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_1.gbapal"
 	.global Pal_DemonLightBg_Far_2
 Pal_DemonLightBg_Far_2:
-	.incbin "baserom.gba", 0x82BF60, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_2.gbapal"
 	.global Pal_DemonLightBg_Far_3
 Pal_DemonLightBg_Far_3:
-	.incbin "baserom.gba", 0x82BF80, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_3.gbapal"
 	.global Pal_DemonLightBg_Far_4
 Pal_DemonLightBg_Far_4:
-	.incbin "baserom.gba", 0x82BFA0, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_4.gbapal"
 	.global Pal_DemonLightBg_Far_5
 Pal_DemonLightBg_Far_5:
-	.incbin "baserom.gba", 0x82BFC0, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_5.gbapal"
 	.global Pal_DemonLightBg_Far_6
 Pal_DemonLightBg_Far_6:
-	.incbin "baserom.gba", 0x82BFE0, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_6.gbapal"
 	.global Pal_DemonLightBg_Far_7
 Pal_DemonLightBg_Far_7:
-	.incbin "baserom.gba", 0x82C000, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_7.gbapal"
 	.global Pal_DemonLightBg_Far_8
 Pal_DemonLightBg_Far_8:
-	.incbin "baserom.gba", 0x82C020, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_8.gbapal"
 	.global Pal_DemonLightBg_Far_9
 Pal_DemonLightBg_Far_9:
-	.incbin "baserom.gba", 0x82C040, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_9.gbapal"
 	.global Pal_DemonLightBg_Far_10
 Pal_DemonLightBg_Far_10:
-	.incbin "baserom.gba", 0x82C060, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_10.gbapal"
 	.global Pal_DemonLightBg_Far_11
 Pal_DemonLightBg_Far_11:
-	.incbin "baserom.gba", 0x82C080, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_11.gbapal"
 	.global Pal_DemonLightBg_Far_12
 Pal_DemonLightBg_Far_12:
-	.incbin "baserom.gba", 0x82C0A0, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_12.gbapal"
 	.global Pal_DemonLightBg_Far_13
 Pal_DemonLightBg_Far_13:
-	.incbin "baserom.gba", 0x82C0C0, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_13.gbapal"
 	.global Pal_DemonLightBg_Far_14
 Pal_DemonLightBg_Far_14:
-	.incbin "baserom.gba", 0x82C0E0, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_14.gbapal"
 	.global Pal_DemonLightBg_Far_15
 Pal_DemonLightBg_Far_15:
-	.incbin "baserom.gba", 0x82C100, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_15.gbapal"
 	.global Pal_DemonLightBg_Far_16
 Pal_DemonLightBg_Far_16:
-	.incbin "baserom.gba", 0x82C120, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_16.gbapal"
 	.global Tsa_DemonLightBg_Far_1
 Tsa_DemonLightBg_Far_1:
 	.incbin "baserom.gba", 0x82C140, 0x274
@@ -600,52 +600,52 @@ Img_DemonLightBg_Far_32:
 	.incbin "baserom.gba", 0x83BDF8, 0xA2C
 	.global Pal_DemonLightBg_Far_17
 Pal_DemonLightBg_Far_17:
-	.incbin "baserom.gba", 0x83C824, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_17.gbapal"
 	.global Pal_DemonLightBg_Far_18
 Pal_DemonLightBg_Far_18:
-	.incbin "baserom.gba", 0x83C844, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_18.gbapal"
 	.global Pal_DemonLightBg_Far_19
 Pal_DemonLightBg_Far_19:
-	.incbin "baserom.gba", 0x83C864, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_19.gbapal"
 	.global Pal_DemonLightBg_Far_20
 Pal_DemonLightBg_Far_20:
-	.incbin "baserom.gba", 0x83C884, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_20.gbapal"
 	.global Pal_DemonLightBg_Far_21
 Pal_DemonLightBg_Far_21:
-	.incbin "baserom.gba", 0x83C8A4, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_21.gbapal"
 	.global Pal_DemonLightBg_Far_22
 Pal_DemonLightBg_Far_22:
-	.incbin "baserom.gba", 0x83C8C4, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_22.gbapal"
 	.global Pal_DemonLightBg_Far_23
 Pal_DemonLightBg_Far_23:
-	.incbin "baserom.gba", 0x83C8E4, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_23.gbapal"
 	.global Pal_DemonLightBg_Far_24
 Pal_DemonLightBg_Far_24:
-	.incbin "baserom.gba", 0x83C904, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_24.gbapal"
 	.global Pal_DemonLightBg_Far_25
 Pal_DemonLightBg_Far_25:
-	.incbin "baserom.gba", 0x83C924, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_25.gbapal"
 	.global Pal_DemonLightBg_Far_26
 Pal_DemonLightBg_Far_26:
-	.incbin "baserom.gba", 0x83C944, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_26.gbapal"
 	.global Pal_DemonLightBg_Far_27
 Pal_DemonLightBg_Far_27:
-	.incbin "baserom.gba", 0x83C964, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_27.gbapal"
 	.global Pal_DemonLightBg_Far_28
 Pal_DemonLightBg_Far_28:
-	.incbin "baserom.gba", 0x83C984, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_28.gbapal"
 	.global Pal_DemonLightBg_Far_29
 Pal_DemonLightBg_Far_29:
-	.incbin "baserom.gba", 0x83C9A4, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_29.gbapal"
 	.global Pal_DemonLightBg_Far_30
 Pal_DemonLightBg_Far_30:
-	.incbin "baserom.gba", 0x83C9C4, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_30.gbapal"
 	.global Pal_DemonLightBg_Far_31
 Pal_DemonLightBg_Far_31:
-	.incbin "baserom.gba", 0x83C9E4, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_31.gbapal"
 	.global Pal_DemonLightBg_Far_32
 Pal_DemonLightBg_Far_32:
-	.incbin "baserom.gba", 0x83CA04, 0x20
+	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_32.gbapal"
 	.global Tsa_DemonLightBg_Far_17
 Tsa_DemonLightBg_Far_17:
 	.incbin "baserom.gba", 0x83CA24, 0x270
@@ -696,148 +696,148 @@ Tsa_DemonLightBg_Far_32:
 	.incbin "baserom.gba", 0x83EB28, 0x15C
 	.global Img_DemonLightBg_1
 Img_DemonLightBg_1:
-	.incbin "baserom.gba", 0x83EC84, 0x554
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087EA72C.4bpp.lz"
 	.global Img_DemonLightBg4_Far_0
 Img_DemonLightBg4_Far_0:
-	.incbin "baserom.gba", 0x83F1D8, 0xA84
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087EAC80.4bpp.lz"
 	.global Img_DemonLightBg4_Far_1
 Img_DemonLightBg4_Far_1:
-	.incbin "baserom.gba", 0x83FC5C, 0x950
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087EB704.4bpp.lz"
 	.global Img_DemonLightBg4_Far_2
 Img_DemonLightBg4_Far_2:
-	.incbin "baserom.gba", 0x8405AC, 0x8F0
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087EC054.4bpp.lz"
 	.global Img_DemonLightBg4_Far_3
 Img_DemonLightBg4_Far_3:
-	.incbin "baserom.gba", 0x840E9C, 0x96C
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087EC944.4bpp.lz"
 	.global Img_DemonLightBg4_Far_4
 Img_DemonLightBg4_Far_4:
-	.incbin "baserom.gba", 0x841808, 0x578
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087ED2B0.4bpp.lz"
 	.global Img_DemonLightBg4_Far_5
 Img_DemonLightBg4_Far_5:
-	.incbin "baserom.gba", 0x841D80, 0x598
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087ED828.4bpp.lz"
 	.global Img_DemonLightBg4_Far_6
 Img_DemonLightBg4_Far_6:
-	.incbin "baserom.gba", 0x842318, 0x5E0
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087EDDC0.4bpp.lz"
 	.global Pal_DemonLightBg4_Far_0
 Pal_DemonLightBg4_Far_0:
-	.incbin "baserom.gba", 0x8428F8, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087EE3A0.gbapal"
 	.global Pal_DemonLightBg4_Far_1
 Pal_DemonLightBg4_Far_1:
-	.incbin "baserom.gba", 0x842918, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087EE3C0.gbapal"
 	.global Pal_DemonLightBg4_Far_2
 Pal_DemonLightBg4_Far_2:
-	.incbin "baserom.gba", 0x842938, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087EE3E0.gbapal"
 	.global Pal_DemonLightBg4_Far_3
 Pal_DemonLightBg4_Far_3:
-	.incbin "baserom.gba", 0x842958, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087EE400.gbapal"
 	.global Pal_DemonLightBg4_Far_4
 Pal_DemonLightBg4_Far_4:
-	.incbin "baserom.gba", 0x842978, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087EE420.gbapal"
 	.global Pal_DemonLightBg4_Far_5
 Pal_DemonLightBg4_Far_5:
-	.incbin "baserom.gba", 0x842998, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087EE440.gbapal"
 	.global Pal_DemonLightBg4_Far_6
 Pal_DemonLightBg4_Far_6:
-	.incbin "baserom.gba", 0x8429B8, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087EE460.gbapal"
 	.global Pal_DemonLightBg4_Far_7
 Pal_DemonLightBg4_Far_7:
-	.incbin "baserom.gba", 0x8429D8, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087EE480.gbapal"
 	.global Tsa_DemonLightBg4_Far_0
 Tsa_DemonLightBg4_Far_0:
-	.incbin "baserom.gba", 0x8429F8, 0xD8
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_0.map.bin.lz"
 	.global Tsa_DemonLightBg4_Far_1
 Tsa_DemonLightBg4_Far_1:
-	.incbin "baserom.gba", 0x842AD0, 0x198
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_1.map.bin.lz"
 	.global Tsa_DemonLightBg4_Far_2
 Tsa_DemonLightBg4_Far_2:
-	.incbin "baserom.gba", 0x842C68, 0x1E8
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_2.map.bin.lz"
 	.global Tsa_DemonLightBg4_Far_3
 Tsa_DemonLightBg4_Far_3:
-	.incbin "baserom.gba", 0x842E50, 0x1FC
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_3.map.bin.lz"
 	.global Tsa_DemonLightBg4_Far_4
 Tsa_DemonLightBg4_Far_4:
-	.incbin "baserom.gba", 0x84304C, 0x1B4
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_4.map.bin.lz"
 	.global Tsa_DemonLightBg4_Far_5
 Tsa_DemonLightBg4_Far_5:
-	.incbin "baserom.gba", 0x843200, 0x104
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_5.map.bin.lz"
 	.global Tsa_DemonLightBg4_Far_6
 Tsa_DemonLightBg4_Far_6:
-	.incbin "baserom.gba", 0x843304, 0x104
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_6.map.bin.lz"
 	.global Tsa_DemonLightBg4_Far_7
 Tsa_DemonLightBg4_Far_7:
-	.incbin "baserom.gba", 0x843408, 0x10C
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_7.map.bin.lz"
 	.global Img_DemonLightBg3_Far_0
 Img_DemonLightBg3_Far_0:
-	.incbin "baserom.gba", 0x843514, 0x774
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087EEFBC.4bpp.lz"
 	.global Img_DemonLightBg3_Far_1
 Img_DemonLightBg3_Far_1:
-	.incbin "baserom.gba", 0x843C88, 0x7D4
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087EF730.4bpp.lz"
 	.global Img_DemonLightBg3_Far_2
 Img_DemonLightBg3_Far_2:
-	.incbin "baserom.gba", 0x84445C, 0x7D0
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087EFF04.4bpp.lz"
 	.global Img_DemonLightBg3_Far_3
 Img_DemonLightBg3_Far_3:
-	.incbin "baserom.gba", 0x844C2C, 0x7C4
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087F06D4.4bpp.lz"
 	.global Img_DemonLightBg3_Far_4
 Img_DemonLightBg3_Far_4:
-	.incbin "baserom.gba", 0x8453F0, 0x768
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087F0E98.4bpp.lz"
 	.global Pal_DemonLightBg3_Far_0
 Pal_DemonLightBg3_Far_0:
-	.incbin "baserom.gba", 0x845B58, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087F1600.gbapal"
 	.global Pal_DemonLightBg3_Far_1
 Pal_DemonLightBg3_Far_1:
-	.incbin "baserom.gba", 0x845B78, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087F1620.gbapal"
 	.global Pal_DemonLightBg3_Far_2
 Pal_DemonLightBg3_Far_2:
-	.incbin "baserom.gba", 0x845B98, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087F1640.gbapal"
 	.global Pal_DemonLightBg3_Far_3
 Pal_DemonLightBg3_Far_3:
-	.incbin "baserom.gba", 0x845BB8, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087F1660.gbapal"
 	.global Pal_DemonLightBg3_Far_4
 Pal_DemonLightBg3_Far_4:
-	.incbin "baserom.gba", 0x845BD8, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087F1680.gbapal"
 	.global Tsa_DemonLightBg3_Far_0
 Tsa_DemonLightBg3_Far_0:
-	.incbin "baserom.gba", 0x845BF8, 0x138
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_0.map.bin.lz"
 	.global Tsa_DemonLightBg3_Far_1
 Tsa_DemonLightBg3_Far_1:
-	.incbin "baserom.gba", 0x845D30, 0x144
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_1.map.bin.lz"
 	.global Tsa_DemonLightBg3_Far_2
 Tsa_DemonLightBg3_Far_2:
-	.incbin "baserom.gba", 0x845E74, 0x138
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_2.map.bin.lz"
 	.global Tsa_DemonLightBg3_Far_3
 Tsa_DemonLightBg3_Far_3:
-	.incbin "baserom.gba", 0x845FAC, 0x120
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_3.map.bin.lz"
 	.global Tsa_DemonLightBg3_Far_4
 Tsa_DemonLightBg3_Far_4:
-	.incbin "baserom.gba", 0x8460CC, 0x120
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_4.map.bin.lz"
 	.global Img_DemonLightBg_2
 Img_DemonLightBg_2:
-	.incbin "baserom.gba", 0x8461EC, 0x7D0
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087F1C94.4bpp.lz"
 	.global Img_DemonLightBg_3
 Img_DemonLightBg_3:
-	.incbin "baserom.gba", 0x8469BC, 0x9DC
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087F2464.4bpp.lz"
 	.global Img_DemonLightBg_4
 Img_DemonLightBg_4:
-	.incbin "baserom.gba", 0x847398, 0xDD4
+	.incbin "graphics/banim/_us/banim/dragonfx/Img_087F2E40.4bpp.lz"
 	.global Pal_DemonLightBg_0
 Pal_DemonLightBg_0:
-	.incbin "baserom.gba", 0x84816C, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087F3C14.gbapal"
 	.global Pal_DemonLightBg_1
 Pal_DemonLightBg_1:
-	.incbin "baserom.gba", 0x84818C, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087F3C34.gbapal"
 	.global Pal_Ekrdragonfx_2
 Pal_Ekrdragonfx_2:
-	.incbin "baserom.gba", 0x8481AC, 0x20
+	.incbin "graphics/banim/_us/banim/dragonfx/Pal_087F3C54.gbapal"
 	.global Tsa_DemonLightBg_0
 Tsa_DemonLightBg_0:
-	.incbin "baserom.gba", 0x8481CC, 0xEC
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg_0.map.bin.lz"
 	.global Tsa_DemonLightBg_1
 Tsa_DemonLightBg_1:
-	.incbin "baserom.gba", 0x8482B8, 0x128
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg_1.map.bin.lz"
 	.global Tsa_DemonLightBg_2
 Tsa_DemonLightBg_2:
-	.incbin "baserom.gba", 0x8483E0, 0x1B8
+	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg_2.map.bin.lz"
 	.global AnimSprite_DemoKingTunkFace_1
 AnimSprite_DemoKingTunkFace_1:
 	.incbin "baserom.gba", 0x848598, 0xB4

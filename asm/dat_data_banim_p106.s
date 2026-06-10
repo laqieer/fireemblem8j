@@ -2,13 +2,13 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086721fc (US 0x08645624, shift -0xFFFD3428); incbin baserom.gba
 	.global Tsa_DivineBg_12
 Tsa_DivineBg_12:
-	.incbin "baserom.gba", 0x6721FC, 0xE4
+	.incbin "graphics/banim/_us/banim/assets/tsa/00645624_Tsa_08645624.map.bin.lz"
 	.global Tsa_DivineBg_13
 Tsa_DivineBg_13:
-	.incbin "baserom.gba", 0x6722E0, 0xB4
+	.incbin "graphics/banim/_us/banim/assets/tsa/00645708_Tsa_08645708.map.bin.lz"
 	.global Tsa_DivineBg_14
 Tsa_DivineBg_14:
-	.incbin "baserom.gba", 0x672394, 0x9C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006457BC_Tsa_086457BC.map.bin.lz"
 	.global Tsa_DivineBg_15
 Tsa_DivineBg_15:
-	.incbin "baserom.gba", 0x672430, 0x9C
+	.incbin "graphics/banim/_us/banim/assets/tsa/00645858_Tsa_08645858.map.bin.lz"

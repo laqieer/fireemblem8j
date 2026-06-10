@@ -2,28 +2,28 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x0860a83c (US 0x085ddc64, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_BreathSprites
 Img_BreathSprites:
-	.incbin "baserom.gba", 0x60A83C, 0xD00
+	.incbin "graphics/banim/_us/banim/assets/img/FireBreathSprites.4bpp.lz"
 	.global Pal_FireBreathSprites
 Pal_FireBreathSprites:
-	.incbin "baserom.gba", 0x60B53C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/FireBreathSprites.gbapal"
 	.global Img_EfxHurtmutEff00OBJ1
 Img_EfxHurtmutEff00OBJ1:
-	.incbin "baserom.gba", 0x60B55C, 0x8A0
+	.incbin "graphics/banim/_us/banim/assets/img/005DE984_Img_EfxHurtmutEff00OBJ1.4bpp.lz"
 	.global Img_EfxHurtmutEff00OBJ2
 Img_EfxHurtmutEff00OBJ2:
-	.incbin "baserom.gba", 0x60BDFC, 0x7E4
+	.incbin "graphics/banim/_us/banim/assets/img/005DF224_Img_EfxHurtmutEff00OBJ2.4bpp.lz"
 	.global Pal_EfxHurtmutEff00OBJ
 Pal_EfxHurtmutEff00OBJ:
-	.incbin "baserom.gba", 0x60C5E0, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/005DE984_Img_EfxHurtmutEff00OBJ1.gbapal"
 	.global Pal_IceBreathSprites
 Pal_IceBreathSprites:
-	.incbin "baserom.gba", 0x60C600, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/IceBreathSprites.gbapal"
 	.global Pal_DarkBreathSprites
 Pal_DarkBreathSprites:
-	.incbin "baserom.gba", 0x60C620, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/DarkBreathSprites.gbapal"
 	.global Pal_WretchedAirSprites
 Pal_WretchedAirSprites:
-	.incbin "baserom.gba", 0x60C640, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/WretchedAirSprites.gbapal"
 	.global AnimSprite_EfxBindingBlade_Left1
 AnimSprite_EfxBindingBlade_Left1:
 	.incbin "baserom.gba", 0x60C660, 0x18

@@ -5,4 +5,4 @@ Img_BarrierBg:
 	.incbin "baserom.gba", 0x6BA2A8, 0x88C
 	.global Pal_BarrierBg
 Pal_BarrierBg:
-	.incbin "baserom.gba", 0x6BAB34, 0x40
+	.incbin "graphics/banim/_us/banim/assets/pal/0068DF5C_Pal_BarrierBg.gbapal"

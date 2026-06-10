@@ -2,193 +2,193 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x0871848c (US 0x086eb8b4, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_efxGorgonBGDirt_0
 Img_efxGorgonBGDirt_0:
-	.incbin "baserom.gba", 0x71848C, 0x490
+	.incbin "graphics/banim/_us/banim/assets/img/006EB8B4_Img_086EB8B4.4bpp.lz"
 	.global Img_efxGorgonBGDirt_1
 Img_efxGorgonBGDirt_1:
-	.incbin "baserom.gba", 0x71891C, 0x520
+	.incbin "graphics/banim/_us/banim/assets/img/006EBD44_Img_086EBD44.4bpp.lz"
 	.global Img_efxGorgonBGDirt_2
 Img_efxGorgonBGDirt_2:
-	.incbin "baserom.gba", 0x718E3C, 0x570
+	.incbin "graphics/banim/_us/banim/assets/img/006EC264_Img_086EC264.4bpp.lz"
 	.global Img_efxGorgonBGDirt_3
 Img_efxGorgonBGDirt_3:
-	.incbin "baserom.gba", 0x7193AC, 0x604
+	.incbin "graphics/banim/_us/banim/assets/img/006EC7D4_Img_086EC7D4.4bpp.lz"
 	.global Img_efxGorgonBGDirt_4
 Img_efxGorgonBGDirt_4:
-	.incbin "baserom.gba", 0x7199B0, 0x64C
+	.incbin "graphics/banim/_us/banim/assets/img/006ECDD8_Img_086ECDD8.4bpp.lz"
 	.global Img_efxGorgonBGDirt_5
 Img_efxGorgonBGDirt_5:
-	.incbin "baserom.gba", 0x719FFC, 0x6D4
+	.incbin "graphics/banim/_us/banim/assets/img/006ED424_Img_086ED424.4bpp.lz"
 	.global Img_efxGorgonBGDirt_6
 Img_efxGorgonBGDirt_6:
-	.incbin "baserom.gba", 0x71A6D0, 0x764
+	.incbin "graphics/banim/_us/banim/assets/img/006EDAF8_Img_086EDAF8.4bpp.lz"
 	.global Img_efxGorgonBGDirt_7
 Img_efxGorgonBGDirt_7:
-	.incbin "baserom.gba", 0x71AE34, 0x79C
+	.incbin "graphics/banim/_us/banim/assets/img/006EE25C_Img_086EE25C.4bpp.lz"
 	.global Img_efxGorgonBGDirt_8
 Img_efxGorgonBGDirt_8:
-	.incbin "baserom.gba", 0x71B5D0, 0x7E4
+	.incbin "graphics/banim/_us/banim/assets/img/006EE9F8_Img_086EE9F8.4bpp.lz"
 	.global Img_efxGorgonBGDirt_9
 Img_efxGorgonBGDirt_9:
-	.incbin "baserom.gba", 0x71BDB4, 0x7EC
+	.incbin "graphics/banim/_us/banim/assets/img/006EF1DC_Img_086EF1DC.4bpp.lz"
 	.global Img_efxGorgonBGDirt_10
 Img_efxGorgonBGDirt_10:
-	.incbin "baserom.gba", 0x71C5A0, 0x81C
+	.incbin "graphics/banim/_us/banim/assets/img/006EF9C8_Img_086EF9C8.4bpp.lz"
 	.global Pal_efxGorgonBGDirt_0
 Pal_efxGorgonBGDirt_0:
-	.incbin "baserom.gba", 0x71CDBC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F01E4_Pal_086F01E4.gbapal"
 	.global Pal_efxGorgonBGDirt_1
 Pal_efxGorgonBGDirt_1:
-	.incbin "baserom.gba", 0x71CDDC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F0204_Pal_086F0204.gbapal"
 	.global Pal_efxGorgonBGDirt_2
 Pal_efxGorgonBGDirt_2:
-	.incbin "baserom.gba", 0x71CDFC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F0224_Pal_086F0224.gbapal"
 	.global Pal_efxGorgonBGDirt_3
 Pal_efxGorgonBGDirt_3:
-	.incbin "baserom.gba", 0x71CE1C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F0244_Pal_086F0244.gbapal"
 	.global Pal_efxGorgonBGDirt_4
 Pal_efxGorgonBGDirt_4:
-	.incbin "baserom.gba", 0x71CE3C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F0264_Pal_086F0264.gbapal"
 	.global Pal_efxGorgonBGDirt_5
 Pal_efxGorgonBGDirt_5:
-	.incbin "baserom.gba", 0x71CE5C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F0284_Pal_086F0284.gbapal"
 	.global Pal_efxGorgonBGDirt_6
 Pal_efxGorgonBGDirt_6:
-	.incbin "baserom.gba", 0x71CE7C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F02A4_Pal_086F02A4.gbapal"
 	.global Pal_efxGorgonBGDirt_7
 Pal_efxGorgonBGDirt_7:
-	.incbin "baserom.gba", 0x71CE9C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F02C4_Pal_086F02C4.gbapal"
 	.global Pal_efxGorgonBGDirt_8
 Pal_efxGorgonBGDirt_8:
-	.incbin "baserom.gba", 0x71CEBC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F02E4_Pal_086F02E4.gbapal"
 	.global Pal_efxGorgonBGDirt_9
 Pal_efxGorgonBGDirt_9:
-	.incbin "baserom.gba", 0x71CEDC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F0304_Pal_086F0304.gbapal"
 	.global Pal_efxGorgonBGDirt_10
 Pal_efxGorgonBGDirt_10:
-	.incbin "baserom.gba", 0x71CEFC, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F0324_Pal_086F0324.gbapal"
 	.global Tsa_efxGorgonBGDirt_0
 Tsa_efxGorgonBGDirt_0:
-	.incbin "baserom.gba", 0x71CF1C, 0xA8
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F0344_Tsa_086F0344.map.bin.lz"
 	.global Tsa_efxGorgonBGDirt_1
 Tsa_efxGorgonBGDirt_1:
-	.incbin "baserom.gba", 0x71CFC4, 0xCC
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F03EC_Tsa_086F03EC.map.bin.lz"
 	.global Tsa_efxGorgonBGDirt_2
 Tsa_efxGorgonBGDirt_2:
-	.incbin "baserom.gba", 0x71D090, 0xE8
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F04B8_Tsa_086F04B8.map.bin.lz"
 	.global Tsa_efxGorgonBGDirt_3
 Tsa_efxGorgonBGDirt_3:
-	.incbin "baserom.gba", 0x71D178, 0xFC
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F05A0_Tsa_086F05A0.map.bin.lz"
 	.global Tsa_efxGorgonBGDirt_4
 Tsa_efxGorgonBGDirt_4:
-	.incbin "baserom.gba", 0x71D274, 0x100
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F069C_Tsa_086F069C.map.bin.lz"
 	.global Tsa_efxGorgonBGDirt_5
 Tsa_efxGorgonBGDirt_5:
-	.incbin "baserom.gba", 0x71D374, 0x11C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F079C_Tsa_086F079C.map.bin.lz"
 	.global Tsa_efxGorgonBGDirt_6
 Tsa_efxGorgonBGDirt_6:
-	.incbin "baserom.gba", 0x71D490, 0x128
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F08B8_Tsa_086F08B8.map.bin.lz"
 	.global Tsa_efxGorgonBGDirt_7
 Tsa_efxGorgonBGDirt_7:
-	.incbin "baserom.gba", 0x71D5B8, 0x14C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F09E0_Tsa_086F09E0.map.bin.lz"
 	.global Tsa_efxGorgonBGDirt_8
 Tsa_efxGorgonBGDirt_8:
-	.incbin "baserom.gba", 0x71D704, 0x15C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F0B2C_Tsa_086F0B2C.map.bin.lz"
 	.global Tsa_efxGorgonBGDirt_9
 Tsa_efxGorgonBGDirt_9:
-	.incbin "baserom.gba", 0x71D860, 0x170
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F0C88_Tsa_086F0C88.map.bin.lz"
 	.global Tsa_efxGorgonBGDirt_10
 Tsa_efxGorgonBGDirt_10:
-	.incbin "baserom.gba", 0x71D9D0, 0x174
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F0DF8_Tsa_086F0DF8.map.bin.lz"
 	.global Img_efxGorgonBGTwister_0
 Img_efxGorgonBGTwister_0:
-	.incbin "baserom.gba", 0x71DB44, 0x155C
+	.incbin "graphics/banim/_us/banim/assets/img/006F0F6C_Img_086F0F6C.4bpp.lz"
 	.global Img_efxGorgonBGTwister_1
 Img_efxGorgonBGTwister_1:
-	.incbin "baserom.gba", 0x71F0A0, 0x1368
+	.incbin "graphics/banim/_us/banim/assets/img/006F24C8_Img_086F24C8.4bpp.lz"
 	.global Img_efxGorgonBGTwister_2
 Img_efxGorgonBGTwister_2:
-	.incbin "baserom.gba", 0x720408, 0x1208
+	.incbin "graphics/banim/_us/banim/assets/img/006F3830_Img_086F3830.4bpp.lz"
 	.global Pal_efxGorgonBGTwister_0
 Pal_efxGorgonBGTwister_0:
-	.incbin "baserom.gba", 0x721610, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/006F3830_Img_086F3830.gbapal"
 	.global Pal_efxGorgonBGTwister_1
 Pal_efxGorgonBGTwister_1:
-	.incbin "baserom.gba", 0x721630, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F4A58_Pal_086F4A58.gbapal"
 	.global Pal_efxGorgonBGTwister_2
 Pal_efxGorgonBGTwister_2:
-	.incbin "baserom.gba", 0x721650, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006F4A78_Pal_086F4A78.gbapal"
 	.global Tsa_efxGorgonBGTwister_0
 Tsa_efxGorgonBGTwister_0:
-	.incbin "baserom.gba", 0x721670, 0x234
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F4A98_Tsa_086F4A98.map.bin.lz"
 	.global Tsa_efxGorgonBGTwister_1
 Tsa_efxGorgonBGTwister_1:
-	.incbin "baserom.gba", 0x7218A4, 0x20C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F4CCC_Tsa_086F4CCC.map.bin.lz"
 	.global Tsa_efxGorgonBGTwister_2
 Tsa_efxGorgonBGTwister_2:
-	.incbin "baserom.gba", 0x721AB0, 0x1FC
+	.incbin "graphics/banim/_us/banim/assets/tsa/006F4ED8_Tsa_086F4ED8.map.bin.lz"
 	.global Img_efxGorgonBGFinish_0
 Img_efxGorgonBGFinish_0:
-	.incbin "baserom.gba", 0x721CAC, 0x1190
+	.incbin "graphics/banim/_us/banim/assets/img/006F50D4_Img_086F50D4.4bpp.lz"
 	.global Img_efxGorgonBGFinish_1
 Img_efxGorgonBGFinish_1:
-	.incbin "baserom.gba", 0x722E3C, 0xEEC
+	.incbin "graphics/banim/_us/banim/assets/img/006F6264_Img_086F6264.4bpp.lz"
 	.global Img_efxGorgonBGFinish_2
 Img_efxGorgonBGFinish_2:
-	.incbin "baserom.gba", 0x723D28, 0xF68
+	.incbin "graphics/banim/_us/banim/assets/img/006F7150_Img_086F7150.4bpp.lz"
 	.global Img_efxGorgonBGFinish_3
 Img_efxGorgonBGFinish_3:
-	.incbin "baserom.gba", 0x724C90, 0x10A4
+	.incbin "graphics/banim/_us/banim/assets/img/006F80B8_Img_086F80B8.4bpp.lz"
 	.global Img_efxGorgonBGFinish_4
 Img_efxGorgonBGFinish_4:
-	.incbin "baserom.gba", 0x725D34, 0x11F4
+	.incbin "graphics/banim/_us/banim/assets/img/006F915C_Img_086F915C.4bpp.lz"
 	.global Img_efxGorgonBGFinish_5
 Img_efxGorgonBGFinish_5:
-	.incbin "baserom.gba", 0x726F28, 0xD2C
+	.incbin "graphics/banim/_us/banim/assets/img/006FA350_Img_086FA350.4bpp.lz"
 	.global Img_efxGorgonBGFinish_6
 Img_efxGorgonBGFinish_6:
-	.incbin "baserom.gba", 0x727C54, 0xC6C
+	.incbin "graphics/banim/_us/banim/assets/img/006FB07C_Img_086FB07C.4bpp.lz"
 	.global Img_efxGorgonBGFinish_7
 Img_efxGorgonBGFinish_7:
-	.incbin "baserom.gba", 0x7288C0, 0x1070
+	.incbin "graphics/banim/_us/banim/assets/img/006FBCE8_Img_086FBCE8.4bpp.lz"
 	.global Img_efxGorgonBGFinish_8
 Img_efxGorgonBGFinish_8:
-	.incbin "baserom.gba", 0x729930, 0xCEC
+	.incbin "graphics/banim/_us/banim/assets/img/006FCD58_Img_086FCD58.4bpp.lz"
 	.global Pal_efxGorgonBGFinish_1
 Pal_efxGorgonBGFinish_1:
-	.incbin "baserom.gba", 0x72A61C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/006FCD58_Img_086FCD58.gbapal"
 	.global Tsa_efxGorgonBGFinish_0
 Tsa_efxGorgonBGFinish_0:
-	.incbin "baserom.gba", 0x72A63C, 0xA4
+	.incbin "graphics/banim/_us/banim/assets/tsa/006FDA64_Tsa_086FDA64.map.bin.lz"
 	.global Tsa_efxGorgonBGFinish_1
 Tsa_efxGorgonBGFinish_1:
-	.incbin "baserom.gba", 0x72A6E0, 0x1D8
+	.incbin "graphics/banim/_us/banim/assets/tsa/006FDB08_Tsa_086FDB08.map.bin.lz"
 	.global Tsa_efxGorgonBGFinish_2
 Tsa_efxGorgonBGFinish_2:
-	.incbin "baserom.gba", 0x72A8B8, 0x1E4
+	.incbin "graphics/banim/_us/banim/assets/tsa/006FDCE0_Tsa_086FDCE0.map.bin.lz"
 	.global Tsa_efxGorgonBGFinish_3
 Tsa_efxGorgonBGFinish_3:
-	.incbin "baserom.gba", 0x72AA9C, 0x210
+	.incbin "graphics/banim/_us/banim/assets/tsa/006FDEC4_Tsa_086FDEC4.map.bin.lz"
 	.global Tsa_efxGorgonBGFinish_4
 Tsa_efxGorgonBGFinish_4:
-	.incbin "baserom.gba", 0x72ACAC, 0x24C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006FE0D4_Tsa_086FE0D4.map.bin.lz"
 	.global Tsa_efxGorgonBGFinish_5
 Tsa_efxGorgonBGFinish_5:
-	.incbin "baserom.gba", 0x72AEF8, 0x1C0
+	.incbin "graphics/banim/_us/banim/assets/tsa/006FE320_Tsa_086FE320.map.bin.lz"
 	.global Tsa_efxGorgonBGFinish_6
 Tsa_efxGorgonBGFinish_6:
-	.incbin "baserom.gba", 0x72B0B8, 0x1A0
+	.incbin "graphics/banim/_us/banim/assets/tsa/006FE4E0_Tsa_086FE4E0.map.bin.lz"
 	.global Tsa_efxGorgonBGFinish_7
 Tsa_efxGorgonBGFinish_7:
-	.incbin "baserom.gba", 0x72B258, 0x19C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006FE680_Tsa_086FE680.map.bin.lz"
 	.global Tsa_efxGorgonBGFinish_8
 Tsa_efxGorgonBGFinish_8:
-	.incbin "baserom.gba", 0x72B3F4, 0x11C
+	.incbin "graphics/banim/_us/banim/assets/tsa/006FE81C_Tsa_086FE81C.map.bin.lz"
 	.global Img_NaglfarSprites_A
 Img_NaglfarSprites_A:
-	.incbin "baserom.gba", 0x72B510, 0xA6C
+	.incbin "graphics/banim/_us/banim/assets/img/006FE938_Img_NaglfarSprites_A.4bpp.lz"
 	.global Pal_NaglfarSprites_A
 Pal_NaglfarSprites_A:
-	.incbin "baserom.gba", 0x72BF7C, 0x20
+	.incbin "graphics/banim/_us/banim/assets/img/006FE938_Img_NaglfarSprites_A.gbapal"
 	.global AnimSprite_NaglfarSprites_A_0
 AnimSprite_NaglfarSprites_A_0:
 	.incbin "baserom.gba", 0x72BF9C, 0x48

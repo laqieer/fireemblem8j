@@ -2,7 +2,7 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x0869edf8 (US 0x08672220, shift -0xFFFD3428); incbin baserom.gba
 	.global Pal_efxLiveBGCOL
 Pal_efxLiveBGCOL:
-	.incbin "baserom.gba", 0x69EDF8, 0x200
+	.incbin "graphics/banim/_us/banim/assets/pal/00672220_Pal_08672220.gbapal"
 	.global AnimSprite_EfxLiveOBJ_1
 AnimSprite_EfxLiveOBJ_1:
 	.incbin "baserom.gba", 0x69EFF8, 0x24

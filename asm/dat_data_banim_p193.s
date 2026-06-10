@@ -2,10 +2,10 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x086e9e38 (US 0x086bd260, shift -0xFFFD3428); incbin baserom.gba
 	.global Img_StoneSprites
 Img_StoneSprites:
-	.incbin "baserom.gba", 0x6E9E38, 0x50C
+	.incbin "graphics/banim/_us/banim/assets/img/006BD260_Img_StoneSprites.4bpp.lz"
 	.global Pal_StoneSprites
 Pal_StoneSprites:
-	.incbin "baserom.gba", 0x6EA344, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/006BD76C_Pal_StoneSprites.gbapal"
 	.global AnimSprite_EfxStone_1
 AnimSprite_EfxStone_1:
 	.incbin "baserom.gba", 0x6EA364, 0x24

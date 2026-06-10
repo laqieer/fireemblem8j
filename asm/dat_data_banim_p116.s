@@ -2,22 +2,22 @@
 @ src/data/banim/data_banim.o: region-same content at JP 0x0868753c (US 0x0865a964, shift -0xFFFD3428); incbin baserom.gba
 	.global Tsa_FenrirBg_47
 Tsa_FenrirBg_47:
-	.incbin "baserom.gba", 0x68753C, 0x258
+	.incbin "graphics/banim/_us/banim/assets/tsa/0065A964_Tsa_0865A964.map.bin.lz"
 	.global Tsa_FenrirBg_48
 Tsa_FenrirBg_48:
-	.incbin "baserom.gba", 0x687794, 0x208
+	.incbin "graphics/banim/_us/banim/assets/tsa/0065ABBC_Tsa_0865ABBC.map.bin.lz"
 	.global Tsa_FenrirBg_49
 Tsa_FenrirBg_49:
-	.incbin "baserom.gba", 0x68799C, 0x178
+	.incbin "graphics/banim/_us/banim/assets/tsa/0065ADC4_Tsa_0865ADC4.map.bin.lz"
 	.global Img_FenrirSprites
 Img_FenrirSprites:
-	.incbin "baserom.gba", 0x687B14, 0xB7C
+	.incbin "graphics/banim/_us/banim/assets/img/0065AF3C_Img_FenrirSprites.4bpp.lz"
 	.global Pal_FenrirSprites_A
 Pal_FenrirSprites_A:
-	.incbin "baserom.gba", 0x688690, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/0065BAB8_Pal_FenrirSprites_A.gbapal"
 	.global Pal_FenrirSprites_B
 Pal_FenrirSprites_B:
-	.incbin "baserom.gba", 0x6886B0, 0x20
+	.incbin "graphics/banim/_us/banim/assets/pal/0065BAD8_Pal_FenrirSprites_B.gbapal"
 	.global AnimSprite_EfxFenrir_1
 AnimSprite_EfxFenrir_1:
 	.incbin "baserom.gba", 0x6886D0, 0x24
