@@ -1,0 +1,8 @@
+# code-grind: bind bmreliance.c TU-private ROM static sSupportMaxExpLookup as an
+# ABS baseline_syms symbol so the support funcs in separately-graduated files link.
+# JP 0x085C3E88 (from asm/CanUnitSupportNow.s =0x085C3E88). The 16 bytes
+# {80,160,240,241} (region-same support-exp thresholds) are already provided by the
+# data-4 frontier blob frontier_df4_uistuff (data_frontier4_df4_uistuff.tsv); this
+# is a pure ABS name binding (no bytes, no conflict with the blob -- D34 class-2).
+# extract_func_only drops the file-scope static; graduated files prepend an extern.
+sSupportMaxExpLookup	085C3E88	data	codegrind_bmreliance_support
