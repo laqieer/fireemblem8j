@@ -140,18 +140,33 @@ def main():
         else:
             new_body.append(ln)
 
-    missing = set()
+    # Any `_08xxxxxx` label referenced (branch/.4byte) but NOT defined in the
+    # merged body is an EXTERNAL absolute address living in another (already-
+    # carved) function -- e.g. a `bl`/`b` to a mid-function entry point. The label
+    # name encodes its address, so de-symbolize it with `.set _08xxxxxx, 0xADDR`.
+    # For Thumb the assembler masks the thumb bit on branch operands, so the even
+    # byte address is correct (matches gbadisasm's own US carves).
+    defined = set(local)
     for ln in new_body:
-        for sym in re.findall(r'_[0-9A-Fa-f]{8}', ln):
-            if sym not in local and not ln.lstrip().startswith(sym + ':'):
-                missing.add(sym)
-    if missing:
-        print(f"  WARNING: {len(missing)} labels referenced but not defined: "
-              f"{sorted(missing)[:8]}")
+        m = re.match(r'^(_[0-9A-Fa-f]{8}):', ln)
+        if m:
+            defined.add(m.group(1))
+    ext_local = {}
+    for ln in new_body:
+        for sym in re.findall(r'_([0-9A-Fa-f]{8})\b', ln):
+            lbl = "_" + sym
+            if lbl in defined or ln.lstrip().startswith(lbl + ':'):
+                continue
+            ext_local[lbl] = int(sym, 16)
+    if ext_local:
+        print(f"  resolving {len(ext_local)} external local-address ref(s): "
+              f"{sorted(ext_local)[:8]}")
 
     L = ['\t.syntax unified']
     for sym, (a2, thumb) in sorted(branch_refs.items()):
         L.append(f'\t.set {sym}, 0x{a2:08X}{" + 1" if thumb else ""}')
+    for sym, a2 in sorted(ext_local.items()):
+        L.append(f'\t.set {sym}, 0x{a2:08X}')
     L += [f'\t.section .text.{objname}, "ax", %progbits',
           f'@ {objname} @ JP 0x{start:08X}-0x{end:08X} - region-different, '
           f'gbadisasm descriptive asm (merged run, D24)',
