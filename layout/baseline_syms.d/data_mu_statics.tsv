@@ -1,0 +1,7 @@
+# code-grind: bind mu.c TU-private statics so the mu image/buffer getters graduate.
+# Addresses from each function's decoded literal pool (authoritative):
+#   sMuImgBufOffLut (static u8 CONST_DATA[MU_MAX_COUNT+1]) JP 0x08A13302 -- bytes in
+#     the data-4 frontier blob df4_banim_b (gap83); ABS name binding (D34 class-2).
+#   gMUGfxBuffer (u8[] EWRAM gfx buffer) JP 0x02004BE0 (extern in mu.h).
+sMuImgBufOffLut	08A13302	data	codegrind_mu_statics
+gMUGfxBuffer	02004BE0	data	codegrind_mu_statics
