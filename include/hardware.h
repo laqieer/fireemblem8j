@@ -399,6 +399,7 @@ void UpdateHBlankHandlerState(void);
 void SetPrimaryHBlankHandler(void (*hblankHandler)(void));
 void SetSecondaryHBlankHandler(void(*)(void));
 int GetBackgroundFromBufferPointer(u16 *ptr);
+extern struct BgCnt *sBGControlStructPtrs[];
 void BG_SetPriority(int bg, int priority);
 int BG_GetPriority(int bg);
 void SetBlendConfig(u16 effect, u8 coeffA, u8 coeffB, u8 blendY);

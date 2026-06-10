@@ -1,0 +1,6 @@
+# Phase-1 data table: sBGControlStructPtrs (hardware.c), JP 0x085775F8, 16 B.
+# Typed C array ported from fireemblem8u (struct BgCnt *[] = {&gLCDControlBuffer.bgNcnt}).
+# Region-same in STRUCTURE: pointers resolve via JP gLCDControlBuffer=0x03003020 ->
+# bytes byte-match the JP ROM. COMMITTED source (no baserom incbin). Unblocks
+# BG_GetPriority/BG_SetPriority (Phase-2 funcmap masked tier).
+5775F8	577608	src/hardware.o(.data)	hardware: sBGControlStructPtrs (typed C, region-same struct)

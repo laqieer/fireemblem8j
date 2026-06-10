@@ -29,6 +29,14 @@ struct KeyProc {
     /* 64 */ s16 unk64;
 };
 
+struct BgCnt *sBGControlStructPtrs[] =
+{
+    &gLCDControlBuffer.bg0cnt,
+    &gLCDControlBuffer.bg1cnt,
+    &gLCDControlBuffer.bg2cnt,
+    &gLCDControlBuffer.bg3cnt,
+};
+
 void ExecMainUpdate(void)
 {
     if (gMainCallback != NULL)

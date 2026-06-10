@@ -537,3 +537,5 @@
 0C1BFC	0C1C4C	src/GetGmPathBetweenNodes.o(.text)	GetGmPathBetweenNodes (exact-tier graduated from gbadisasm asm)
 0D4DCC	0D4E30	src/MidiKeyToFreq.o(.text)	MidiKeyToFreq (exact-tier graduated from gbadisasm asm)
 0D58C8	0D5970	src/MidiKeyToCgbFreq.o(.text)	MidiKeyToCgbFreq (exact-tier graduated from gbadisasm asm)
+001DDC	001DF0	src/BG_GetPriority.o(.text)	BG_GetPriority (exact-tier graduated from gbadisasm asm)
+001DBC	001DDC	src/BG_SetPriority.o(.text)	BG_SetPriority (exact-tier graduated from gbadisasm asm)
