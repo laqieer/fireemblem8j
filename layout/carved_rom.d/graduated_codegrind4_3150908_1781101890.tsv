@@ -1,0 +1,5 @@
+016C70	016C8C	src/IsItemDanceRing.o(.text)	IsItemDanceRing (region-different: JP range-check vs US switch; same item consts 0x7C-0x80)
+0355C4	035610	src/SubtitleHelp_Loop.o(.text)	SubtitleHelp_Loop (region-different: extern lut.29 @ 0x5C6690 + PutSubtitleHelpText callee)
+0354B4	03551C	src/SubtitleHelpDarkenerOnHBlank.o(.text)	SubtitleHelpDarkenerOnHBlank (region-different: extern bldyLut.10 @ 0x5C6646)
+003C24	003C50	src/SetTextFontGlyphs.o(.text)	SetTextFontGlyphs (region-diff data: gActiveFont/TextGlyphs_System/Talk @ JP addrs)
+003C50	003C68	src/ResetTextFont.o(.text)	ResetTextFont (region-diff data: gActiveFont/sSpecialCharStList @ JP addrs)
