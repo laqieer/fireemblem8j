@@ -1520,3 +1520,51 @@ per D35) is the gold-standard refinement. (3) **Named symbols 58.78% → 100%**.
 *decomp* work; the **#1 ungameable goal — build the ROM from source with `baserom.gba` removed — is DONE.**
 
 **Status:** DONE 2026-06-10 (merge `e11b69ea`). Acceptance test passes: byte-perfect ROM from source, baserom absent.
+
+## D37 — asm→matching-C grind: funcmap-range bug fix, extern-inline accessor expansion, parallel-safe graduate fragments (2026-06-10)
+
+**Context.** Branch `feat/code-grind-1`. Post-Phase-1 (all data named, self-containment 100%), re-ran the
+graduate fast paths expecting the named data to unblock many funcmap exact/masked functions. It did NOT, at
+first: `graduate_exact_asm --all` (16 exact) and `--tier masked --tu bmitem` (44) BOTH graduated 0, every one
+"make compare RED". Root-caused two distinct issues, not a data-dependency one.
+
+**Bug 1 (the dominant blocker) — carved-row range from funcmap size, not the gbadisasm fragment.**
+`graduate_inline_accessors.py` and `graduate_sio_cursors.py` wrote the carved_rom row as
+`jp .. jp+funcmap_size`. The funcmap `size` can be ~2 bytes SHORT of the padded gbadisasm region (`.align 2,0`
+tail the layout already accounts for) — e.g. GetItemHpBonus funcmap size 0x2E vs fragment 0x30. That 2-byte
+gap shifted the whole ROM → make compare RED on EVERY function. **Fix: read the EXACT byte range from the
+function's `gbadisasm_<fn>.tsv` fragment** (start..end incl. padding). `graduate_exact_asm.py` was already
+correct (it uses the fragment range), so its 0/16 is a *separate* genuine-divergence story (see below).
+
+**Bug-class for graduate_exact_asm's exact-tier 0/16 — funcmap "exact" false-positives + unnamed callees.**
+The leaf exact functions (VerifySramFast_Core etc.) diverge by 2 bytes at the register-allocation level
+(JP `ldrh r0,[r2]` / our `[r1]` for a REG_WAITCNT mask) — a true codegen difference the "exact" byte-pin
+didn't catch. The non-leaf ones (Proc_Run→`sub_8002D78`, etc.) call helpers that exist in the JP build ONLY as
+unnamed `sub_<addr>` placeholders, so the US-named C call has no symbol to link. **These are genuinely
+region-different / callee-blocked, NOT data-blocked — leave as asm (permuter/manual later).**
+
+**Bug 2 (parallelism) — shared fragment file.** All three graduate scripts appended to the single
+`layout/carved_rom.d/exact_layer.tsv`, which lost-updates / merge-conflicts under concurrent runs. **Fix: each
+run now writes its own unique `layout/carved_rom.d/graduated_<scope>_<pid>_<epoch>.tsv`** (the Makefile globs
+`carved_rom.d/*.tsv`, so it's linked automatically and existing exact_layer.tsv rows keep working).
+`graduate_exact_asm` also gained `--frag <path>` for orchestrators that pre-assign disjoint files.
+
+**Decision — the extern-inline accessor pattern (D34) is the high-yield asm→C vein, EXPANDED.** The JP getters
+inline small `inline` accessors at -O2 (literal pool = a named global), which `extract_func_only`'s out-of-line
+port diverges from. Added the full bmitem.c `inline` getter set (GetItemData/StatBonuses/Attributes/Index/
+MaxUses/Uses/Type/Min-Max-EncodedRange/Effectiveness/RequiredExp/UseEffect) + GetTrap to
+`graduate_inline_accessors.py`, with **recursive transitive-dep resolution** (DFS over a DEPS map, dependency
+emitted first) so multi-level chains (GetItemMaxUses→GetItemAttributes→GetItemData) byte-match.
+
+**Harvest: 47 functions graduated gbadisasm asm → matching C** (matching-C 2353→2400, 27.59%→28.14%), all
+`make check` + `make compare` + `make clean && make compare` gated, named from US source:
+bmitem 40/44 (the item stat/attribute/cost/range getters + MakeNewItem/CanUnitUse*), bmunit 4 (GetUnit
+inliners), bmtrick 3 (GetTrap inliners). Committed as three clean per-TU fragments
+(`graduated_<tu>_inline_accessors.tsv`).
+
+**Remaining frontier (needs permuter/manual or new static-binding, NOT this fast path):** the generic
+`graduate_exact_asm --tier masked` path returns RED for region-different TUs (fontgrp 0/7, etc.) — those are
+genuinely region-different codegen. Uncovered inline accessors are nearly exhausted: only `SetWorkingBmMap`
+(gWorkingBmMap), `GetSelectTargetCount`/`GetTarget` (sSelectTargetCount/sSelectTargetList TU-private statics,
+need baseline_syms binding like sio cursors / sTrapPool) remain, 1-2 funcs each. The bulk of the ~6125
+still-asm functions are region-different and need m2c→permuter or hand-decompile.
