@@ -26,3 +26,5 @@ SubtitleHelp_TextShowLut	085C6690	data	codegrind4_bb_subtitle
 SubtitleHelpDarkener_BldyLut	085C6646	data	codegrind4_bb_subtitle
 gActiveFont	02028E70	data	codegrind4_fontgrp
 sSpecialCharStList	02028E74	data	codegrind4_fontgrp
+PutGuideCategoryName	080D2EBC	thumb	codegrind4_bmguide
+GenerateMovementMap	0801A1B8	thumb	codegrind4_bmidoten

@@ -3,3 +3,6 @@
 0354B4	03551C	src/SubtitleHelpDarkenerOnHBlank.o(.text)	SubtitleHelpDarkenerOnHBlank (region-different: extern bldyLut.10 @ 0x5C6646)
 003C24	003C50	src/SetTextFontGlyphs.o(.text)	SetTextFontGlyphs (region-diff data: gActiveFont/TextGlyphs_System/Talk @ JP addrs)
 003C50	003C68	src/ResetTextFont.o(.text)	ResetTextFont (region-diff data: gActiveFont/sSpecialCharStList @ JP addrs)
+0D2F44	0D2F88	src/PutGuideCategoryList.o(.text)	PutGuideCategoryList (region-diff: gGuideSt @ 0x8BABAF4, callee PutGuideCategoryName @ 0xD2EBC)
+01A108	01A138	src/GenerateExtendedMovementMapOnRange.o(.text)	GenerateExtendedMovementMapOnRange (region-diff: JP inlines SetWorkingBmMap; callee GenerateMovementMap @ 0x1A1B8)
+01A138	01A168	src/GenerateExtendedMovementMap.o(.text)	GenerateExtendedMovementMap (region-diff: JP inlines SetWorkingBmMap)
