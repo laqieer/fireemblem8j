@@ -16,20 +16,20 @@ none of which can ever become matching C.
 
 | kind | US functions | graduated (JP) | note |
 |------|-------------:|---------------:|------|
-| US-C-portable | 8209 | 2450 | real C TUs -- **THE matching-C ceiling** |
+| US-C-portable | 8209 | 2466 | real C TUs -- **THE matching-C ceiling** |
 | US-ASM-stays | 20 | 0 | arm.o/arm_call.o ARM-mode; stays .s (US standard); NEVER matching-C |
 | LIBC/LIBGCC | 150 | 0 | vendored tools/agbcc lib; NEVER matching-C |
-| **TOTAL US functions** | **8379** | **2450** | US text symbols |
+| **TOTAL US functions** | **8379** | **2466** | US text symbols |
 
 - **The honest matching-C denominator is 8209** (US-C-portable), not 8,528.
   170 US functions (20 ASM-stays + 150 libc/libgcc)
   legitimately stay non-C -- the US decomp itself keeps them that way.
-- **Graduated: 2450 / 8209 = 29.85%** of the real ceiling.
+- **Graduated: 2466 / 8209 = 30.04%** of the real ceiling.
 - For comparison, calcprogress.py axis 2 reports matching-C against the
   flat 8,528 total; the true reachable target on that axis is
   8209/8528 = 96.3% (the rest
-  is asm/libc), so 2450/8528 = 28.73%
-  there is 29.85% of what is actually portable.
+  is asm/libc), so 2466/8528 = 28.92%
+  there is 30.04% of what is actually portable.
 
 ## funcmap-tracked subset (per-function confidence)
 
@@ -113,7 +113,6 @@ per-function work (extract_func_only + bind statics).
 | sio_uiutils | 57 | 10 | 47 | no-funcmap:47 |
 | uisupport | 62 | 15 | 47 | no-funcmap:47 |
 | prep_sallycursor | 53 | 8 | 45 | no-funcmap:45 |
-| face | 62 | 19 | 43 | masked:3, no-funcmap:40 |
 | player_interface | 55 | 12 | 43 | no-funcmap:43 |
 | m4a | 58 | 15 | 43 | exact:21, masked:12, no-funcmap:10 |
 | worldmap_path | 68 | 27 | 41 | no-funcmap:41 |
@@ -130,8 +129,8 @@ per-function work (extract_func_only + bind statics).
 | mapanim_eventcall | 53 | 17 | 36 | no-funcmap:36 |
 | unitlistscreen | 40 | 4 | 36 | exact:1, no-funcmap:35 |
 | worldmap_mapmu | 46 | 10 | 36 | no-funcmap:36 |
+| face | 62 | 27 | 35 | masked:3, no-funcmap:32 |
 | playerphase | 40 | 5 | 35 | no-funcmap:35 |
-| prepscreen | 46 | 13 | 33 | exact:4, no-funcmap:29 |
 | gamecontrol | 44 | 12 | 32 | no-funcmap:32 |
 | bmusemind | 38 | 6 | 32 | no-funcmap:32 |
 | cp_script | 46 | 14 | 32 | no-funcmap:32 |
@@ -143,6 +142,7 @@ per-function work (extract_func_only + bind statics).
 | bm | 47 | 18 | 29 | no-funcmap:29 |
 | bmudisp | 41 | 12 | 29 | no-funcmap:29 |
 | banim-efxmagic-demonlight | 33 | 4 | 29 | no-funcmap:29 |
+| prepscreen | 46 | 17 | 29 | exact:4, no-funcmap:25 |
 | bmtrade | 44 | 17 | 27 | no-funcmap:27 |
 | mapanim_spellassoc | 51 | 24 | 27 | no-funcmap:27 |
 | bmsave | 41 | 14 | 27 | no-funcmap:27 |
@@ -179,13 +179,13 @@ per-function work (extract_func_only + bind statics).
 | banim-efxhit | 24 | 4 | 20 | no-funcmap:20 |
 | banim-efxsound | 24 | 4 | 20 | exact:3, no-funcmap:17 |
 | mapanim | 22 | 2 | 20 | no-funcmap:20 |
-| soundwrapper | 32 | 13 | 19 | exact:4, no-funcmap:15 |
 | sio_teamlist | 25 | 6 | 19 | no-funcmap:19 |
 | minimap | 34 | 15 | 19 | exact:3, no-funcmap:16 |
 | bonusclaim | 21 | 2 | 19 | no-funcmap:19 |
 | worldmap_gmapunit | 39 | 20 | 19 | no-funcmap:19 |
 | worldmap_player_interface | 27 | 8 | 19 | no-funcmap:19 |
 | classchg-sel | 23 | 4 | 19 | no-funcmap:19 |
+| soundwrapper | 32 | 14 | 18 | exact:4, no-funcmap:14 |
 | bmmap | 24 | 6 | 18 | masked:2, no-funcmap:16 |
 | cp_perform | 27 | 9 | 18 | masked:1, no-funcmap:17 |
 | sio_points | 20 | 2 | 18 | no-funcmap:18 |
@@ -285,7 +285,6 @@ per-function work (extract_func_only + bind statics).
 | worldmap_timemons | 12 | 5 | 7 | no-funcmap:7 |
 | worldmap_text | 8 | 1 | 7 | no-funcmap:7 |
 | ap | 21 | 15 | 6 | no-funcmap:6 |
-| bmreliance | 19 | 13 | 6 | masked:2, no-funcmap:4 |
 | banim-efxmagic-evileye | 8 | 2 | 6 | no-funcmap:6 |
 | banim-ekrdragon-myrrh | 8 | 2 | 6 | no-funcmap:6 |
 | chapter_title | 11 | 5 | 6 | masked:1, no-funcmap:5 |
@@ -323,6 +322,7 @@ per-function work (extract_func_only + bind statics).
 | gameoverbgfx | 11 | 8 | 3 | no-funcmap:3 |
 | lightrunefx | 12 | 9 | 3 | no-funcmap:3 |
 | eventwarpfx | 6 | 3 | 3 | no-funcmap:3 |
+| bmreliance | 19 | 16 | 3 | masked:2, no-funcmap:1 |
 | sio_multiboot | 9 | 6 | 3 | no-funcmap:3 |
 | banim-efxmagic-ballista | 4 | 1 | 3 | no-funcmap:3 |
 | banim-efxmagic-bindingblade | 5 | 2 | 3 | no-funcmap:3 |
