@@ -1,0 +1,2 @@
+097564	0975AC	src/prepscreen_08097564.o(.text)	prepscreen_08097564(run): PrepScreenMenu_OnUnk3, PrepScreenMenu_OnBPress, PrepScreenMenu_OnCheckMap
+097304	097374	src/prepscreen_08097304.o(.text)	prepscreen_08097304(run): Prep_GetActiveMenuItemTextId

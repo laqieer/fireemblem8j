@@ -1,0 +1,5 @@
+CanPrepScreenCheckMap	080977E4	thumb	prepscreen_08097564
+PrepSpriteDraw_BlinkButtonB	08098EC4	thumb	prepscreen_08097564
+GetActivePrepMenuItemIndex	080993F0	thumb	prepscreen_08097304
+IsDivinationOptionAvailable	080A2C10	thumb	prepscreen_08097304
+CanPrepScreenSave	080972D4	thumb	prepscreen_08097304
