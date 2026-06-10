@@ -1,0 +1,3 @@
+0013DC	0013FC	src/ResetKeyStatus.o(.text)	ResetKeyStatus (exact-tier graduated from gbadisasm asm)
+0014D8	0014EC	src/Hardware_StoreUnk3435.o(.text)	Hardware_StoreUnk3435 (exact-tier graduated from gbadisasm asm)
+01967C	01973C	src/InitBaseTilesBmMap.o(.text)	InitBaseTilesBmMap (exact-tier graduated from gbadisasm asm)

@@ -1,0 +1,6 @@
+# code-grind: bind bmmap-region EWRAM_OVERLAY(bmstart) globals so the bmmap funcs
+# in separately-graduated files can graduate to matching C. Address from the
+# function's decoded literal pool (authoritative):
+#   gBmMapBuffer u16[0x800/2] 0x02001000 (asm/InitBaseTilesBmMap.s =0x02001000)
+# extern-declared in include/bmmap.h; pure address binding (no ROM bytes).
+gBmMapBuffer	02001000	data	codegrind_bmmap_overlay

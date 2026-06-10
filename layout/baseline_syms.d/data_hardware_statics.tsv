@@ -6,3 +6,10 @@
 sModifiedBGs	0300000C	data	phase1_hardware_statics
 sOamHi	03000018	data	phase1_hardware_statics
 sOamLo	03000028	data	phase1_hardware_statics
+# code-grind additions: more hardware.c TU-private IWRAM globals, addresses from
+# each function's decoded literal pool (authoritative):
+#   gKeyStatusIgnoredSt u16 0x0300000E (asm/ResetKeyStatus.s)
+#   gUnk_34 u8 0x03000014, gUnk_35 u8 0x03000015 (asm/Hardware_StoreUnk3435.s)
+gKeyStatusIgnoredSt	0300000E	data	codegrind_hardware_statics
+gUnk_34	03000014	data	codegrind_hardware_statics
+gUnk_35	03000015	data	codegrind_hardware_statics
