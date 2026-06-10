@@ -6,7 +6,7 @@
 	.global UnregisterEfxSoundSeExist
 	.thumb_func
 UnregisterEfxSoundSeExist:
-	.incbin "baserom.gba", 0x73F70, 0xC
+	.incbin "data/sound/UnregisterEfxSoundSeExist.bin"
 
 	.section .text.s_08073F7C, "ax", %progbits
 @ RegisterEfxSoundSeExist region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -16,7 +16,7 @@ UnregisterEfxSoundSeExist:
 	.global RegisterEfxSoundSeExist
 	.thumb_func
 RegisterEfxSoundSeExist:
-	.incbin "baserom.gba", 0x73F7C, 0xC
+	.incbin "data/sound/RegisterEfxSoundSeExist.bin"
 
 	.section .text.s_08073F88, "ax", %progbits
 @ CheckEfxSoundSeExist region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -26,5 +26,5 @@ RegisterEfxSoundSeExist:
 	.global CheckEfxSoundSeExist
 	.thumb_func
 CheckEfxSoundSeExist:
-	.incbin "baserom.gba", 0x73F88, 0xC
+	.incbin "data/sound/CheckEfxSoundSeExist.bin"
 

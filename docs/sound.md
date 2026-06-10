@@ -52,7 +52,54 @@ and rewrites `asm/direct_sound_data.s`.
 
 ---
 
-## Feasibility of the remaining sound classes
+## DONE — remaining sound classes (voicegroups + song bodies + m4a tables) now self-contained
+
+The entire sound remainder — voicegroups, song bodies, gMPlayTable, m4a scalar
+tables, frontier voice gaps, gSoundRoomTable, AND the m4a-engine / sound-wrapper
+CODE TUs (`m4a_1`, `stranded_m4a`, `stranded_soundwrapper`,
+`stranded_banim-efxsound`), **449 `.incbin "baserom.gba"` directives across 140
+`.s` files, 192,255 bytes** — is now reproduced from **committed `data/sound/*.bin`**
+(one symbol-named blob per incbin), exactly the `data/banim/*.bin` model: a
+committed `.bin` is the self-contained source of truth for region-different /
+table-pinned opaque data (and region-same-shifted code, descriptively carried).
+baserom.gba is no longer in the sound build chain.
+`scripts/sound/reroot_sound_incbin.py` does the extraction + `.s` rewrite; the
+Makefile adds one flagged dependency block (`SOUND_DATA_BINS`). **0 sound
+`.incbin "baserom.gba"` remain.**
+
+**Proven self-contained.** With `baserom.gba` removed, every re-rooted sound object
+(`snd_song*`, `dat_voicegroup*_ref`, `dat_m4a_tables`, `frontier_df3_voicegroup`,
+`m4a_1`, `stranded_m4a`, …) assembles from `data/sound/*.bin`; `make compare` and
+`make clean && make compare` stay `OK`. Build self-containment **92.38% → 93.53%**
+(+1.15 pts). (The m4a-engine code TUs are region-same-shifted Thumb; re-rooting
+gives self-containment now, the C decompilation is later readability polish.)
+
+**mid2agb feasibility — VERIFIED end-to-end (the D33 hypothesis, now proven).**
+song001 compiled from the US `.mid` (`song001_agbfe3_bgm_opening.mid`) with the US
+flags `-E -G000 -R020 -P010 -V051`, assembled (`-I include`, MPlayDef.s),
+and **linked at the JP address 0x08534E80 with `voicegroup000 = 0x081F7120`**
+(read live from the JP song-header `tone` pointer) is **BYTE-IDENTICAL** to the
+4320-byte JP ROM span (0 differing bytes). The `R_ARM_ABS32` self-pointer
+relocations against `.rodata` resolve to the correct JP-absolute pointers when the
+object is placed at the JP address. So the `.mid` → mid2agb → assemble → link path
+**does** reconstruct the JP song. The voicegroup-pointer in the song header is why
+voicegroups must be named symbols at their JP addresses for the readable form.
+
+**Why the readable form (mid2agb `.mid` / `voice_*` macros) is DEFERRED, not done.**
+The live build uses the *parallel-carving glue* ldscript: each song is **split into
+~4 named fragments at its self-pointer boundaries** and interleaved with **232
+non-sound objects** (frontier_*, `data_*` residue, dat_*) tiled across the song
+address region. Full mid2agb integration means **un-tiling** that region — replacing
+the 97 song fragments + their residue fillers with single per-song `.o` linked at
+fixed addresses — which restructures the ldscript glue and **touches non-sound files
+owned by the parallel final-sweep agent** (high regression risk to the glue this
+round). The committed-`.bin` re-root achieves the hard self-containment goal now,
+sound-files-only and byte-neutral; the `.mid`/`voice_*` readability is the right
+later polish once the song region can be un-tiled safely. See D35.
+
+---
+
+## Feasibility of the remaining sound classes (historical — superseded by the DONE section above)
 
 ### Voicegroups + program-wave + tables (~118 KB) — TRACTABLE, region-different `.s`
 
@@ -116,8 +163,13 @@ song labels exist at their JP addresses (depends on the song-body wiring above).
 ## Summary
 
 - **Samples (3.12 MB, the bulk): DONE** — committed `.aif` + aif2pcm, self-contained, byte-verified.
-- **Voicegroups/tables (~118 KB): tractable** region-different `.s` (JP pointer values), mechanical per-voicegroup.
-- **Song bodies + gSongTable (~120 KB): hard but feasible** — `.mid`+mid2agb is the right tool and reproduces the structure; the work is the link-time relocation wiring so song self-pointers resolve at the JP address.
+- **Voicegroups / m4a tables / song bodies / frontier voice (186 KB): SELF-CONTAINED** —
+  re-rooted to committed `data/sound/*.bin`, 0 baserom incbins remaining, byte-verified.
+- **mid2agb song reconstruction: PROVEN feasible** (song001 byte-identical from US `.mid` linked
+  at the JP address) but the readable-`.s` form is deferred — the parallel-carving glue tiles songs
+  across the ldscript and un-tiling crosses into non-sound files (see D35).
 
 The 3.12 MB samples were the single biggest self-containment lever in the whole
-repo; extracting them moved build self-containment **62.39% → 81.89%**.
+repo; extracting them moved build self-containment **62.39% → 81.89%**. The sound
+remainder re-root moved it **92.38% → 93.49%** and brought the sound classes to
+**0 `.incbin "baserom.gba"`**.

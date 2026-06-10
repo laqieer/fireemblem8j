@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global voicegroup070
 voicegroup070:
-	.incbin "baserom.gba", 0x20E6E8, 0x600
+	.incbin "data/sound/voicegroup070.bin"

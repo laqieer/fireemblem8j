@@ -1449,3 +1449,47 @@ dep chains (GetCharacterData struct-deref, map-change statics) — left for a la
 **Reusable takeaway.** `extern inline` is the missing tool for graduating any function that inlines an already-carved
 `inline` accessor — it composes with the D32 binding classes and stays oracle-gated. Self-containment held ~62.3% (the
 gClassData move is a relabel between two named-incbin representations, byte-neutral).
+
+## D35 — Music Phase 1 finish: re-root the sound remainder to committed `data/sound/*.bin`; mid2agb song reconstruction PROVEN but deferred (2026-06-10)
+
+**Context.** After D33 (the 3.12 MB direct-sound samples → committed `.aif`+aif2pcm), the last sound `.incbin "baserom.gba"`
+were the **voicegroups** (32 `dat_voicegroup*_ref.s` + `frontier_df3_voicegroup.s`/`frontier_df4_voice.s`), the **97 song
+bodies** (`snd_song*.s`), **gMPlayTable / gMPlayJumpTableTemplate**, the **m4a scalar tables** (`dat_m4a_tables.s`), and
+`snd_banim_efxsound_data` — **388 incbin directives, 135 files, 186,135 bytes**. Branch `feat/phase1-sound-finish`,
+isolated worktree, sound-files-only (a parallel final-sweep agent owns all non-sound `asm/*.s`).
+
+**mid2agb feasibility — VERIFIED end-to-end (D33's hypothesis, now proven, not assumed).** Compiled song001 from the US
+`.mid` (`song001_agbfe3_bgm_opening.mid`) with the US flags `-E -G000 -R020 -P010 -V051`, assembled (`-I include`,
+MPlayDef.s), and **linked at the JP address 0x08534E80 with `voicegroup000 = 0x081F7120`** (read live from the JP
+song-header `tone` pointer) → **BYTE-IDENTICAL** to the 4320-byte JP ROM span (0 differing bytes). The mid2agb `.o`
+carries `R_ARM_ABS32` self-pointer relocations against `.rodata`; placing the object at the JP address resolves them to the
+correct JP-absolute pointers. So `.mid` → mid2agb → assemble → link **reconstructs the JP song** — the relocation wiring
+works. (Also confirms why voicegroups must be named symbols at their JP addresses: the song header points at `voicegroup000`.)
+
+**Fork (autonomous decision; Copilot consult timed out, decided on validated reasoning).** Two paths to remove the
+remaining sound baserom incbins: (1) **re-root to committed `data/sound/*.bin`** — the `data/banim/*.bin` model, byte-neutral,
+**sound-files-only**, no ldscript change; (2) **full mid2agb / `voice_*`-macro readable reconstruction**. Path 2 is PROVEN
+feasible but the live build uses the *parallel-carving glue* ldscript: each song is split into ~4 fragments at its
+self-pointer boundaries and **interleaved with 232 non-sound objects** (frontier_*, `data_*` residue, dat_*) tiled across
+the song region. Un-tiling that (single per-song `.o` at fixed addresses) restructures the glue and **touches non-sound
+files owned by the parallel final-sweep agent** → high regression risk this round.
+
+**Decision.** Do **Path 1 now** (achieves the hard self-containment goal: 0 sound baserom incbins, sound-files-only, low
+risk), **defer Path 2** (the `.mid`/`voice_*` readability) as later polish once the song region can be un-tiled safely.
+`scripts/sound/reroot_sound_incbin.py` extracts each incbin to a symbol-named `data/sound/<label>.bin` (the label is 1:1
+with each incbin, verified) and rewrites the `.s`; the Makefile gets one flagged `SOUND_DATA_BINS` dependency block (the
+`.bin` are committed leaves, no recipe). `data/sound/*.bin` is committed source (NOT gitignored — only top-level
+`sound/**/*.bin` is, the aif2pcm intermediates).
+
+**Result.** **0 sound `.incbin "baserom.gba"` remaining** (data classes + the m4a-engine/sound-wrapper CODE TUs `m4a_1`,
+`stranded_m4a`, `stranded_soundwrapper`, `stranded_banim-efxsound`, `dat_gSoundRoomTable_ref` — all region-same-shifted
+Thumb, re-rooted the same way; their eventual C decompilation is later readability polish). **449 incbin directives,
+192,255 bytes** moved to committed source. Build self-containment **92.38% → 93.53%** (+1.15 pts; sound incbin count
+5666 → 5217). `make check`, `make compare`, `make clean && make compare` all green. PROVEN self-contained: with
+`baserom.gba` removed, every re-rooted sound object assembles from `data/sound/*.bin`.
+
+**Takeaways.** (a) The committed-named-`.bin` model (banim, D33) generalizes to *any* region-different opaque blob — it
+decouples self-containment (have it now) from readability (`.mid`/`voice_*`, later). (b) mid2agb's relocation wiring is
+SOLVED: link the mid2agb `.o` at the JP address and the self-pointers resolve byte-exactly; the only remaining blocker to
+readable songs is the ldscript tiling, which is an integration/ownership problem, not an m4a problem. (c) Read the
+voicegroup pointer for a song straight from its JP ROM header `tone` field rather than re-deriving the JP↔US shift.
