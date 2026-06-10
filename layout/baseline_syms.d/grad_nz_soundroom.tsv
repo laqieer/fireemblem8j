@@ -1,0 +1,2 @@
+gSoundroom_2	08A9E244	data	soundroom volume-graph buffer ptr (frontier-resident, code-ref bind)
+gpSoundInfo	08A9E26C	data	soundroom sound-info ptr (frontier-resident, code-ref bind)
