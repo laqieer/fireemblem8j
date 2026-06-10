@@ -1568,3 +1568,63 @@ genuinely region-different codegen. Uncovered inline accessors are nearly exhaus
 (gWorkingBmMap), `GetSelectTargetCount`/`GetTarget` (sSelectTargetCount/sSelectTargetList TU-private statics,
 need baseline_syms binding like sio cursors / sTrapPool) remain, 1-2 funcs each. The bulk of the ~6125
 still-asm functions are region-different and need m2c→permuter or hand-decompile.
+
+## D38 — asm→C grind for a–m TUs: the "diff is only an unresolved reference" graduation taxonomy (2026-06-10)
+
+**Context.** Branch `feat/code-grind-2` (a–m–scope agent; n–z to a sibling). D37 declared the inline-accessor
+vein nearly exhausted, but the *partial-TU* remainder (funcmap-matched functions still as gbadisasm asm) had a
+large unworked seam: functions whose ONLY byte difference from the JP ROM is an **unresolved reference** —
+an undefined data symbol, an unnamed `sub_<addr>` callee, or a dropped file-scope declaration/macro that
+`extract_func_only` strips. Once that one reference resolves, the function byte-matches. **36 functions
+graduated** (matching-C 2400→2436, 28.14%→28.56%), all `make check`+`make compare`+`make clean && make compare`
+gated, self-containment held 100%.
+
+**The diagnostic (decisive).** For a candidate: function-only-extract → compile → `objcopy -j .text` → byte-diff
+vs the JP ROM range. If the diffs are confined to (a) the literal pool (an unresolved data/func address) or
+(b) a `bl`/`.4byte` operand (an unlinked callee), it's an **unblock candidate**, not region-different. If diffs
+land in the *code body*, it's genuinely region-different (different codegen/inlining) → leave as asm. This
+turns "make compare RED" (opaque) into an actionable class. (Tooling: ad-hoc probes that compile each candidate
+and bucket NEAR-with-undef vs FAR-body-diff; not committed, but the workflow is the reusable artifact.)
+
+**Five graduation sub-patterns (all verify-or-revert, `make compare` the sole oracle):**
+1. **Unbound data global → bind as baseline_syms at the literal-pool address.** EWRAM/IWRAM statics
+   (gKeyStatusIgnoredSt, gUnk_34/35, sHBlankHandler1/2, sModifiedPalette, gBmMapBuffer, gUnitSpriteSlots,
+   gBanimValid/DoneFlag, the banim-ekr overlay globals) and ROM tables that live inside a data-4 `frontier_*`
+   blob (portrait_data, ItemEffectiveness_Monsters, sWeaponTriangleRules, the 6 gamerankings tables,
+   sMuImgBufOffLut, sSupportMaxExpLookup) — for the latter the bind is a **pure ABS symbol, no bytes, no
+   conflict with the blob** (D34 class-2). Address ALWAYS decoded from the *function's own literal pool*, which
+   is authoritative (an initial gBanimValid↔gBanimDoneFlag swap was caught only by reading the asm, not the ref
+   maps).
+2. **Already-named symbol (named incbin / dat_*_ref / a graduated partial object) → extern-only prepend, NO
+   bind.** Binding an already-defined symbol → `multiple definition` link error. gEfxmagicCrimsoneye_1,
+   gEfxmagicGleipnir_0..6, gBmudisp_0, gEventListCmdInfoTable, gGuideSt (defined by the bmguide partial) just
+   needed the dropped file-scope decl re-added as `extern`.
+3. **Unnamed intra-TU `sub_<addr>` callee → name it as a thumb baseline symbol** (`addr+1`). The JP function at
+   that address IS the US function; the `bl`/`.4byte` operand gives the address and the call/store *position*
+   matches the US source order (confirmed by the oracle, e.g. bmmap RefreshTorchlights/Units/MinesOnBmMap — the
+   3-helper order was right because make-compare went green). Done for GetBattleUnitUpdatedWeaponExp,
+   UpdateHBlankHandlerState, CheckRound1, ekrBattle_StartPromotion, SearchAvailableEvent,
+   ArenaSetFallbackWeaponForUnit, the 3 bmmap Refresh helpers.
+4. **Dropped file-scope type/macro → prepend it.** `extract_func_only` emits only the body + `#include`s, so a
+   file-local `struct WeaponTriangleRule {…}` or `#define EVT_CMD_LO(…)` must be prepended alongside the extern,
+   or the function won't compile (incomplete type / implicit-decl-as-call).
+5. **Genuinely region-different → revert, leave asm.** m4a library code (register-allocation differs:
+   `ldr r2` vs `ldr r3` — needs CC1_OLD/-O1/MUSICPLAYER_LIST config, D31), VerifySramFast_Core (REG_WAITCNT
+   2-byte reg-alloc, D37), IsItemDanceRing / the bmidoten Extended* (JP inlines a helper US calls). The oracle
+   filters these at zero risk.
+
+**Tooling note.** The shared `graduate_exact_asm.py` handles header-extern'd refs; a small uncommitted
+`grad_manual.py` adds an arbitrary **prepend** (extern decls / struct defs / file-local macros) for the cases
+the generic tool can't. Each run writes its own parallel-safe `graduated_<scope>_<pid>_<epoch>.tsv` fragment
+(D37). New baseline_syms files are grouped by owner (data_<tu>_*.tsv / code_intratu_callees.tsv).
+
+**Pitfall logged.** When reverting a manual graduate, NEVER `rm` the per-run carved_rom fragment without also
+restoring the function's `asm/<fn>.s` + `gbadisasm_<fn>.tsv` — deleting just the fragment leaves the function
+with no bytes and no row → `make compare` RED. Always revert all four (src, fragment, asm, gbadisasm frag) as a
+unit; `make check` (git-tracked-objects gate) catches a stranded state.
+
+**Remaining a–m frontier (needs more than this seam):** function-local-static **.data/.rodata placement**
+(GetGenericChibiImg's icon lut, SubtitleHelp_Loop's `lut[]` — the compiler emits the static under an internal
+name that must alias an already-carved data symbol at a fixed address); the whole **m4a** TU (compiler-config
+region-diff); the **C99/other NOCOMPILE** functions (need C89 conversion); and the truly region-different
+bodies. These want m2c→permuter or a dedicated placed-local-static carve helper, not this fast path.
