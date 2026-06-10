@@ -1,0 +1,10 @@
+# code-grind: bind bmudisp.c EWRAM_DATA globals so ResetUnitSprites[B] graduate.
+# Addresses from the functions' decoded literal pools (authoritative; same in both):
+#   gUnitSpriteSlots      u8[0xD0] JP 0x02033F3C (the |=0xFF array base)
+#   gSMS32xGfxIndexCounter int     JP 0x0203A010
+#   gSMS16xGfxIndexCounter int     JP 0x0203A00C
+# Pure EWRAM address bindings (no ROM bytes); not in headers -> graduated files
+# prepend externs.
+gUnitSpriteSlots	02033F3C	data	codegrind_bmudisp_sprites
+gSMS32xGfxIndexCounter	0203A010	data	codegrind_bmudisp_sprites
+gSMS16xGfxIndexCounter	0203A00C	data	codegrind_bmudisp_sprites
