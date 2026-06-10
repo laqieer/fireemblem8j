@@ -131,6 +131,26 @@ def already_defined_globals(src_tu):
     return defs
 
 
+def baseline_bound_globals():
+    """Data globals ALREADY bound as baseline_syms (monolith + every fragment) at a
+    fixed JP address. A harvest run that re-emits the file header would DEFINE such a
+    global in its own .data/.rodata — colliding with the ABS baseline binding (or
+    double-carving bytes a frontier blob already provides at that address). Demoting
+    it to `extern` lets the literal resolve to the existing binding and the existing
+    carve/incbin supply the bytes (D34 class-3). Verify-or-revert guards a misjudge."""
+    names = set()
+    for p in (["layout/baseline_syms.tsv"]
+              + sorted(glob_mod.glob("layout/baseline_syms.d/*.tsv"))):
+        if not os.path.exists(p):
+            continue
+        for l in open(p):
+            if l.strip() and not l.startswith("#"):
+                c = l.split("\t")
+                if len(c) >= 3 and c[2].strip() == "data":
+                    names.add(c[0].strip())
+    return names
+
+
 def demote_defs_to_extern(src, names):
     """Rewrite each file-scope DEFINITION of a name in `names` to an `extern` decl
     (drop the initializer, prepend `extern`). Byte-neutral for the run's .text — the
@@ -147,8 +167,14 @@ def demote_defs_to_extern(src, names):
         )
         def repl(m):
             decl = m.group(1).rstrip()
-            if decl.lstrip().startswith("extern"):
+            ds = decl.lstrip()
+            if ds.startswith("extern"):
                 return m.group(0)            # already extern
+            if "static" in re.split(r"[\s\*]", ds):
+                # `extern static` is illegal; a TU-private static can't be an extern
+                # alias of an already-carved global. Leave it (port_run's data-trim or
+                # the verify-or-revert net handles a genuinely-unreferenced static).
+                return m.group(0)
             return "extern " + decl + ";"
         src2 = pat.sub(repl, src, count=1)
         if src2 != src:
@@ -225,9 +251,11 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False,
                   if not (l.lstrip().startswith('#include "src/data/')
                           and '"' in l and not os.path.exists(l.split('"')[1])))
     if dedup_globals:
-        # Demote globals the existing partial src/<src_tu>.o already defines to
-        # `extern` so this NEXT run doesn't multiple-define them (D41 unblock).
-        dups = already_defined_globals(src_tu)
+        # Demote globals the existing partial src/<src_tu>.o already defines, OR that
+        # are already bound as a fixed-address baseline_syms data symbol (a frontier
+        # blob / dat_*_ref already provides the bytes), to `extern` -- so this NEXT run
+        # doesn't multiple-define them or double-carve their .data/.rodata (D41 unblock).
+        dups = already_defined_globals(src_tu) | baseline_bound_globals()
         if dups:
             sub = demote_defs_to_extern(sub, dups)
     open(f"src/{name}.c", "w").write(sub)
@@ -552,6 +580,29 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False,
             sec_relocs.setdefault(cur, set()).add(int(p[0], 16))
             if p[1] == "R_ARM_ABS32":
                 sec_reloc_tgts.setdefault(cur, []).append((int(p[0], 16), p[2]))
+    # Existing carved ROM ranges (monolith + every fragment) so a run's region-SAME
+    # section whose JP bytes are ALREADY provided by another carved object/incbin
+    # (e.g. a frontier blob that swallowed the same region-same constants) is placed
+    # NOLOAD instead of carving a fresh loadable row -> no overlap. Safe ONLY when the
+    # section has NO relocations of its own (else its relocated bytes would never be
+    # emitted); the existing provider supplies byte-identical data and make compare is
+    # the oracle. (D42; Copilot-validated.)
+    existing = []
+    for pth in (["layout/carved_rom.tsv"]
+                + sorted(glob_mod.glob("layout/carved_rom.d/*.tsv"))):
+        if not os.path.exists(pth):
+            continue
+        for ln in open(pth):
+            c = ln.rstrip("\n").split("\t")
+            if len(c) >= 3 and c[0] and c[0][0] in "0123456789abcdefABCDEF":
+                try:
+                    existing.append((int(c[0], 16), int(c[1], 16)))
+                except ValueError:
+                    pass
+
+    def overlaps_existing(off0, size):
+        return any(es < off0 + size and ee > off0 for es, ee in existing)
+
     kept, noload_rom, aligns = [], [], []
     for off0, size, dsec in data_carves:
         need = (0x08000000 + off0) & -(0x08000000 + off0)
@@ -589,6 +640,19 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False,
                 if need_addr.setdefault(sym, want_addr) != want_addr:
                     match = False
                     break
+        # Region-SAME section whose JP range is ALREADY provided by another carved row
+        # (a frontier incbin blob that swallowed the same region-same constants): place
+        # it NOLOAD so we don't double-carve / overlap. ONLY when this section has no
+        # relocations of its own (a relocation-free constant blob) -- a relocated
+        # section would need its relocated bytes emitted (NOLOAD never emits), and the
+        # OVERLAP means a provider already supplies byte-identical bytes there. The
+        # section symbol still resolves to the JP base; .text refs into it are baked by
+        # the `want` pass. make compare is the oracle. (D42; Copilot-validated.)
+        if match and not rel and overlaps_existing(off0, size):
+            match = False
+            if os.environ.get("PORTRUN_DEBUG"):
+                print(f"  [carve-decide {dsec}@{0x08000000+off0:#x} sz={size:#x}] "
+                      f"NOLOAD (region-same, reloc-free, overlaps existing provider)")
         (kept if match else noload_rom).append((off0, size, dsec))
         if os.environ.get("PORTRUN_DEBUG"):
             mism = [i for i in range(min(size, len(cb))) if cb[i] != jp[off0+i]
