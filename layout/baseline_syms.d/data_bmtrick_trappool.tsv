@@ -1,0 +1,8 @@
+# Phase-1 data-table support: bind the bmtrick.c TU-private EWRAM static
+# sTrapPool (struct Trap[TRAP_MAX_COUNT=64], 512 B) so the trap functions that
+# live in separately-graduated files (GetTrapAt/AddTrap/...) can graduate to
+# matching C. JP 0x0203A610 read directly from the trap functions' literal pool
+# (e.g. asm/GetTrapAt.s `=0x0203A610`), which is authoritative; the extern decl
+# in each graduated file aliases this exact RAM location.
+sTrapPool	0203A610	data	phase1_bmtrick_trappool
+sTrapLast	0203A810	data	phase1_bmtrick_trappool

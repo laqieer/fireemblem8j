@@ -1,0 +1,4 @@
+# gClassData reassigned out of frontier_df4_banim_b gap68 (mislabeled banim gfx).
+# JP 0x0885B6BC..0x0885E068 (10668 B = 127 x sizeof(struct ClassData)); sits
+# between gCharacterData (..85B6BC) and gItemData (85E068..), both already named.
+85B6BC	85E068	asm/dat_gClassData_ref.o(.rodata.dat_gClassData_ref)	gClassData region-diff (reassigned from df4_banim_b gap68; funcmap code-ref, 10668 B)

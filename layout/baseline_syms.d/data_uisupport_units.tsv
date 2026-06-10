@@ -1,0 +1,13 @@
+# Phase-1 data-table support: bind uisupport.c's sSupportScreenUnits ROM pointer
+# so the support-screen indexing functions can graduate to matching C. It is
+# `struct SupportScreenUnit* CONST_DATA sSupportScreenUnits = (void*)gBufPrep` --
+# a 4-byte ROM pointer at JP 0x08A95B10 (value 0x0200F17C = gBufPrep), the 4 bytes
+# immediately BEFORE the carved uisupport.o(.data) at 0xA95B14. Address from the
+# functions' literal pool (e.g. asm/GetSupportScreenCharIdAt.s `=0x08A95B10`),
+# authoritative. baseline_syms emits only an ABS symbol (no bytes), so it does not
+# conflict with the raw blob that still incbins these 4 bytes.
+sSupportScreenUnits	08A95B10	data	phase1_uisupport_units
+# sSupportScreenUnitCount: EWRAM_OVERLAY(0) int at JP 0x020136E8 (from the
+# functions' literal pool, e.g. asm/GetNextSupportScreenUnit.s `=0x020136E8`).
+sSupportScreenUnitCount	020136E8	data	phase1_uisupport_units
+

@@ -414,11 +414,8 @@ frontier_df4_banim_b_066_7E13A4:
 frontier_df4_banim_b_067_84886C:
 	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_067_84886C.bin"
 
-	.section .data.frontier_df4_banim_b.gap68, "a", %progbits
-@ df4_banim_b region-different data, JP 0x0885b6bc..0x0885e068 (10668 B); long-tail data gap (no .text in window), byte-perfect incbin.
-	.global frontier_df4_banim_b_068_85B6BC
-frontier_df4_banim_b_068_85B6BC:
-	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_068_85B6BC.bin"
+@ gap68 (JP 0x0885b6bc..0x0885e068) reassigned to gClassData -- see
+@ asm/dat_gClassData_ref.s; it was MISLABELED here as banim graphics data.
 
 	.section .data.frontier_df4_banim_b.gap69, "a", %progbits
 @ df4_banim_b region-different data, JP 0x088601b1..0x088609d1 (2080 B); long-tail data gap (no .text in window), byte-perfect incbin.
