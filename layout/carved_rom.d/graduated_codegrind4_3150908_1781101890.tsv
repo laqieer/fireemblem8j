@@ -24,3 +24,5 @@
 0049D4	004A14	src/GetSpecialCharChr.o(.text)	GetSpecialCharChr (region-diff: sSpecialCharStList, AddSpecialChar)
 017220	017254	src/SetItemUnsealedForCharacter.o(.text)	SetItemUnsealedForCharacter (region-diff: inline GetItemType/SetChapterUnk1C)
 017254	017294	src/IsItemUnsealedForUnit.o(.text)	IsItemUnsealedForUnit (region-diff: inline GetItemType/GetChapterUnk1C)
+028270	0282A4	src/UnitGainSupportLevel.o(.text)	UnitGainSupportLevel (region-diff: SetSupportLevelGained @ 0x286D0, GetUnitSupporterCharacter, gPlaySt)
+001650	00169C	src/Hardware_CopyViaDmaStruct.o(.text)	Hardware_CopyViaDmaStruct (region-diff: struct UnknownDmaStruct; byte-exact)
