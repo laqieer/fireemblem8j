@@ -4,43 +4,43 @@
 @ Generated: labels tile 0x08c02000..0x08e47180; bytes incbinned from baserom.gba.
 	.global banim_lorm_sp1_sheet_0
 banim_lorm_sp1_sheet_0:
-	.incbin "baserom.gba", 0xC02000, 0xC74
+	.incbin "graphics/banim/banim_lorm_sp1_sheet_0.4bpp.lz"
 	.global banim_lorm_sp1_sheet_1
 banim_lorm_sp1_sheet_1:
-	.incbin "baserom.gba", 0xC02C74, 0xBB0
+	.incbin "graphics/banim/banim_lorm_sp1_sheet_1.4bpp.lz"
 	.global banim_lorm_sp1_sheet_2
 banim_lorm_sp1_sheet_2:
-	.incbin "baserom.gba", 0xC03824, 0xA28
+	.incbin "graphics/banim/banim_lorm_sp1_sheet_2.4bpp.lz"
 	.global banim_lorm_sp1_sheet_8
 banim_lorm_sp1_sheet_8:
-	.incbin "baserom.gba", 0xC0424C, 0x8D8
+	.incbin "graphics/banim/banim_lorm_sp1_sheet_8.4bpp.lz"
 	.global banim_lorm_sp1_sheet_3
 banim_lorm_sp1_sheet_3:
-	.incbin "baserom.gba", 0xC04B24, 0xAE8
+	.incbin "graphics/banim/banim_lorm_sp1_sheet_3.4bpp.lz"
 	.global banim_lorm_sp1_sheet_4
 banim_lorm_sp1_sheet_4:
-	.incbin "baserom.gba", 0xC0560C, 0xAA8
+	.incbin "graphics/banim/banim_lorm_sp1_sheet_4.4bpp.lz"
 	.global banim_lorm_sp1_sheet_5
 banim_lorm_sp1_sheet_5:
-	.incbin "baserom.gba", 0xC060B4, 0x9C4
+	.incbin "graphics/banim/banim_lorm_sp1_sheet_5.4bpp.lz"
 	.global banim_lorm_sp1_sheet_6
 banim_lorm_sp1_sheet_6:
-	.incbin "baserom.gba", 0xC06A78, 0xAFC
+	.incbin "graphics/banim/banim_lorm_sp1_sheet_6.4bpp.lz"
 	.global banim_lorm_sp1_sheet_9
 banim_lorm_sp1_sheet_9:
-	.incbin "baserom.gba", 0xC07574, 0xC38
+	.incbin "graphics/banim/banim_lorm_sp1_sheet_9.4bpp.lz"
 	.global banim_lorm_sp1_sheet_10
 banim_lorm_sp1_sheet_10:
-	.incbin "baserom.gba", 0xC081AC, 0xBB0
+	.incbin "graphics/banim/banim_lorm_sp1_sheet_10.4bpp.lz"
 	.global banim_lorm_sp1_sheet_11
 banim_lorm_sp1_sheet_11:
-	.incbin "baserom.gba", 0xC08D5C, 0x654
+	.incbin "graphics/banim/banim_lorm_sp1_sheet_11.4bpp.lz"
 	.global banim_lorm_sp1_sheet_7
 banim_lorm_sp1_sheet_7:
-	.incbin "baserom.gba", 0xC093B0, 0x760
+	.incbin "graphics/banim/banim_lorm_sp1_sheet_7.4bpp.lz"
 	.global banim_lorm_sp1_agbpal
 banim_lorm_sp1_agbpal:
-	.incbin "baserom.gba", 0xC09B10, 0x5C
+	.incbin "graphics/banim/banim_lorm_sp1.agbpal.lz"
 	.global banim_lorm_sp1_oam_l_bin
 banim_lorm_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xC09B6C, 0x838
@@ -55,7 +55,7 @@ banim_lorm_sp1_modes_bin:
 	.incbin "baserom.gba", 0xC0B030, 0x60
 	.global banim_lorm_sp1_2_agbpal
 banim_lorm_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xC0B090, 0x5C
+	.incbin "graphics/banim/banim_lorm_sp1_2.agbpal.lz"
 	.global banim_lorm_sp1_2_oam_l_bin
 banim_lorm_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC0B0EC, 0x80
@@ -70,22 +70,22 @@ banim_lorm_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xC0B29C, 0x60
 	.global banim_lorf_sw1_sheet_0
 banim_lorf_sw1_sheet_0:
-	.incbin "baserom.gba", 0xC0B2FC, 0xCD8
+	.incbin "graphics/banim/banim_lorf_sw1_sheet_0.4bpp.lz"
 	.global banim_lorf_sw1_sheet_1
 banim_lorf_sw1_sheet_1:
-	.incbin "baserom.gba", 0xC0BFD4, 0xC78
+	.incbin "graphics/banim/banim_lorf_sw1_sheet_1.4bpp.lz"
 	.global banim_lorf_sw1_sheet_2
 banim_lorf_sw1_sheet_2:
-	.incbin "baserom.gba", 0xC0CC4C, 0xA9C
+	.incbin "graphics/banim/banim_lorf_sw1_sheet_2.4bpp.lz"
 	.global banim_lorf_sw1_sheet_3
 banim_lorf_sw1_sheet_3:
-	.incbin "baserom.gba", 0xC0D6E8, 0xCA0
+	.incbin "graphics/banim/banim_lorf_sw1_sheet_3.4bpp.lz"
 	.global banim_lorf_sw1_sheet_4
 banim_lorf_sw1_sheet_4:
-	.incbin "baserom.gba", 0xC0E388, 0x7A8
+	.incbin "graphics/banim/banim_lorf_sw1_sheet_4.4bpp.lz"
 	.global banim_lorf_sw1_agbpal
 banim_lorf_sw1_agbpal:
-	.incbin "baserom.gba", 0xC0EB30, 0x50
+	.incbin "graphics/banim/banim_lorf_sw1.agbpal.lz"
 	.global banim_lorf_sw1_oam_l_bin
 banim_lorf_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xC0EB80, 0x490
@@ -100,7 +100,7 @@ banim_lorf_sw1_modes_bin:
 	.incbin "baserom.gba", 0xC0F76C, 0x60
 	.global banim_lorf_sw1_2_agbpal
 banim_lorf_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xC0F7CC, 0x50
+	.incbin "graphics/banim/banim_lorf_sw1_2.agbpal.lz"
 	.global banim_lorf_sw1_2_oam_l_bin
 banim_lorf_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC0F81C, 0xAC
@@ -115,31 +115,31 @@ banim_lorf_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xC0FA14, 0x60
 	.global banim_lomm_sp1_sheet_0
 banim_lomm_sp1_sheet_0:
-	.incbin "baserom.gba", 0xC0FA74, 0xFF4
+	.incbin "graphics/banim/banim_lomm_sp1_sheet_0.4bpp.lz"
 	.global banim_lomm_sp1_sheet_1
 banim_lomm_sp1_sheet_1:
-	.incbin "baserom.gba", 0xC10A68, 0x1288
+	.incbin "graphics/banim/banim_lomm_sp1_sheet_1.4bpp.lz"
 	.global banim_lomm_sp1_sheet_2
 banim_lomm_sp1_sheet_2:
-	.incbin "baserom.gba", 0xC11CF0, 0xC50
+	.incbin "graphics/banim/banim_lomm_sp1_sheet_2.4bpp.lz"
 	.global banim_lomm_sp1_sheet_4
 banim_lomm_sp1_sheet_4:
-	.incbin "baserom.gba", 0xC12940, 0x1378
+	.incbin "graphics/banim/banim_lomm_sp1_sheet_4.4bpp.lz"
 	.global banim_lomm_sp1_sheet_5
 banim_lomm_sp1_sheet_5:
-	.incbin "baserom.gba", 0xC13CB8, 0xB78
+	.incbin "graphics/banim/banim_lomm_sp1_sheet_5.4bpp.lz"
 	.global banim_lomm_sp1_sheet_6
 banim_lomm_sp1_sheet_6:
-	.incbin "baserom.gba", 0xC14830, 0x99C
+	.incbin "graphics/banim/banim_lomm_sp1_sheet_6.4bpp.lz"
 	.global banim_lomm_sp1_sheet_7
 banim_lomm_sp1_sheet_7:
-	.incbin "baserom.gba", 0xC151CC, 0xC0C
+	.incbin "graphics/banim/banim_lomm_sp1_sheet_7.4bpp.lz"
 	.global banim_lomm_sp1_sheet_3
 banim_lomm_sp1_sheet_3:
-	.incbin "baserom.gba", 0xC15DD8, 0xE1C
+	.incbin "graphics/banim/banim_lomm_sp1_sheet_3.4bpp.lz"
 	.global banim_lomm_sp1_agbpal
 banim_lomm_sp1_agbpal:
-	.incbin "baserom.gba", 0xC16BF4, 0x4C
+	.incbin "graphics/banim/banim_lomm_sp1.agbpal.lz"
 	.global banim_lomm_sp1_oam_l_bin
 banim_lomm_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xC16C40, 0x914
@@ -154,7 +154,7 @@ banim_lomm_sp1_modes_bin:
 	.incbin "baserom.gba", 0xC181F4, 0x60
 	.global banim_lorf_sw1_3_agbpal
 banim_lorf_sw1_3_agbpal:
-	.incbin "baserom.gba", 0xC18254, 0x50
+	.incbin "graphics/banim/banim_lorf_sw1_3.agbpal.lz"
 	.global banim_lorf_sw1_3_oam_l_bin
 banim_lorf_sw1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xC182A4, 0x490
@@ -169,7 +169,7 @@ banim_lorf_sw1_3_modes_bin:
 	.incbin "baserom.gba", 0xC18E90, 0x60
 	.global banim_lomm_sp1_2_agbpal
 banim_lomm_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xC18EF0, 0x4C
+	.incbin "graphics/banim/banim_lomm_sp1_2.agbpal.lz"
 	.global banim_lomm_sp1_2_oam_l_bin
 banim_lomm_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC18F3C, 0xD8
@@ -184,28 +184,28 @@ banim_lomm_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xC19194, 0x60
 	.global banim_lomf_sw1_sheet_0
 banim_lomf_sw1_sheet_0:
-	.incbin "baserom.gba", 0xC191F4, 0x1230
+	.incbin "graphics/banim/banim_lomf_sw1_sheet_0.4bpp.lz"
 	.global banim_lomf_sw1_sheet_2
 banim_lomf_sw1_sheet_2:
-	.incbin "baserom.gba", 0xC1A424, 0xFEC
+	.incbin "graphics/banim/banim_lomf_sw1_sheet_2.4bpp.lz"
 	.global banim_lomf_sw1_sheet_3
 banim_lomf_sw1_sheet_3:
-	.incbin "baserom.gba", 0xC1B410, 0x1244
+	.incbin "graphics/banim/banim_lomf_sw1_sheet_3.4bpp.lz"
 	.global banim_lomf_sw1_sheet_4
 banim_lomf_sw1_sheet_4:
-	.incbin "baserom.gba", 0xC1C654, 0x119C
+	.incbin "graphics/banim/banim_lomf_sw1_sheet_4.4bpp.lz"
 	.global banim_lomf_sw1_sheet_5
 banim_lomf_sw1_sheet_5:
-	.incbin "baserom.gba", 0xC1D7F0, 0x8E8
+	.incbin "graphics/banim/banim_lomf_sw1_sheet_5.4bpp.lz"
 	.global banim_lomf_sw1_sheet_6
 banim_lomf_sw1_sheet_6:
-	.incbin "baserom.gba", 0xC1E0D8, 0x9FC
+	.incbin "graphics/banim/banim_lomf_sw1_sheet_6.4bpp.lz"
 	.global banim_lomf_sw1_sheet_1
 banim_lomf_sw1_sheet_1:
-	.incbin "baserom.gba", 0xC1EAD4, 0xCC4
+	.incbin "graphics/banim/banim_lomf_sw1_sheet_1.4bpp.lz"
 	.global banim_lomf_sw1_agbpal
 banim_lomf_sw1_agbpal:
-	.incbin "baserom.gba", 0xC1F798, 0x4C
+	.incbin "graphics/banim/banim_lomf_sw1.agbpal.lz"
 	.global banim_lomf_sw1_oam_l_bin
 banim_lomf_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xC1F7E4, 0x744
@@ -220,7 +220,7 @@ banim_lomf_sw1_modes_bin:
 	.incbin "baserom.gba", 0xC20960, 0x60
 	.global banim_lorf_sw1_4_agbpal
 banim_lorf_sw1_4_agbpal:
-	.incbin "baserom.gba", 0xC209C0, 0x50
+	.incbin "graphics/banim/banim_lorf_sw1_4.agbpal.lz"
 	.global banim_lorf_sw1_4_oam_l_bin
 banim_lorf_sw1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xC20A10, 0x490
@@ -235,7 +235,7 @@ banim_lorf_sw1_4_modes_bin:
 	.incbin "baserom.gba", 0xC215FC, 0x60
 	.global banim_lomf_sw1_2_agbpal
 banim_lomf_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xC2165C, 0x4C
+	.incbin "graphics/banim/banim_lomf_sw1_2.agbpal.lz"
 	.global banim_lomf_sw1_2_oam_l_bin
 banim_lomf_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC216A8, 0x510
@@ -250,19 +250,19 @@ banim_lomf_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xC22174, 0x60
 	.global banim_merm_sw1_sheet_0
 banim_merm_sw1_sheet_0:
-	.incbin "baserom.gba", 0xC221D4, 0x12D0
+	.incbin "graphics/banim/banim_merm_sw1_sheet_0.4bpp.lz"
 	.global banim_merm_sw1_sheet_1
 banim_merm_sw1_sheet_1:
-	.incbin "baserom.gba", 0xC234A4, 0x1248
+	.incbin "graphics/banim/banim_merm_sw1_sheet_1.4bpp.lz"
 	.global banim_merm_sw1_sheet_2
 banim_merm_sw1_sheet_2:
-	.incbin "baserom.gba", 0xC246EC, 0x11B8
+	.incbin "graphics/banim/banim_merm_sw1_sheet_2.4bpp.lz"
 	.global banim_merm_sw1_sheet_blank
 banim_merm_sw1_sheet_blank:
-	.incbin "baserom.gba", 0xC258A4, 0x3D0
+	.incbin "graphics/banim/banim_merm_sw1_sheet_blank.4bpp.lz"
 	.global banim_merm_sw1_agbpal
 banim_merm_sw1_agbpal:
-	.incbin "baserom.gba", 0xC25C74, 0x5C
+	.incbin "graphics/banim/banim_merm_sw1.agbpal.lz"
 	.global banim_merm_sw1_oam_l_bin
 banim_merm_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xC25CD0, 0xE48
@@ -277,7 +277,7 @@ banim_merm_sw1_modes_bin:
 	.incbin "baserom.gba", 0xC27DD4, 0x60
 	.global banim_merm_sw1_2_agbpal
 banim_merm_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xC27E34, 0x5C
+	.incbin "graphics/banim/banim_merm_sw1_2.agbpal.lz"
 	.global banim_merm_sw1_2_oam_l_bin
 banim_merm_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC27E90, 0xAC
@@ -292,19 +292,19 @@ banim_merm_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xC28070, 0x60
 	.global banim_bram_sw1_sheet_0
 banim_bram_sw1_sheet_0:
-	.incbin "baserom.gba", 0xC280D0, 0x1004
+	.incbin "graphics/banim/banim_bram_sw1_sheet_0.4bpp.lz"
 	.global banim_bram_sw1_sheet_1
 banim_bram_sw1_sheet_1:
-	.incbin "baserom.gba", 0xC290D4, 0x10CC
+	.incbin "graphics/banim/banim_bram_sw1_sheet_1.4bpp.lz"
 	.global banim_bram_sw1_sheet_3
 banim_bram_sw1_sheet_3:
-	.incbin "baserom.gba", 0xC2A1A0, 0x1260
+	.incbin "graphics/banim/banim_bram_sw1_sheet_3.4bpp.lz"
 	.global banim_bram_sw1_sheet_2
 banim_bram_sw1_sheet_2:
-	.incbin "baserom.gba", 0xC2B400, 0xF44
+	.incbin "graphics/banim/banim_bram_sw1_sheet_2.4bpp.lz"
 	.global banim_bram_sw1_agbpal
 banim_bram_sw1_agbpal:
-	.incbin "baserom.gba", 0xC2C344, 0x4C
+	.incbin "graphics/banim/banim_bram_sw1.agbpal.lz"
 	.global banim_bram_sw1_oam_l_bin
 banim_bram_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xC2C390, 0x15C8
@@ -319,7 +319,7 @@ banim_bram_sw1_modes_bin:
 	.incbin "baserom.gba", 0xC2F610, 0x60
 	.global banim_bram_sw1_2_agbpal
 banim_bram_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xC2F670, 0x4C
+	.incbin "graphics/banim/banim_bram_sw1_2.agbpal.lz"
 	.global banim_bram_sw1_2_oam_l_bin
 banim_bram_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC2F6BC, 0x16C8
@@ -334,10 +334,10 @@ banim_bram_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xC32B30, 0x60
 	.global banim_bram_sw1_3_sheet_0
 banim_bram_sw1_3_sheet_0:
-	.incbin "baserom.gba", 0xC32B90, 0xA2C
+	.incbin "graphics/banim/banim_bram_sw1_3_sheet_0.4bpp.lz"
 	.global banim_bram_sw1_3_agbpal
 banim_bram_sw1_3_agbpal:
-	.incbin "baserom.gba", 0xC335BC, 0x4C
+	.incbin "graphics/banim/banim_bram_sw1_3.agbpal.lz"
 	.global banim_bram_sw1_3_oam_l_bin
 banim_bram_sw1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xC33608, 0x25C
@@ -352,7 +352,7 @@ banim_bram_sw1_3_modes_bin:
 	.incbin "baserom.gba", 0xC33C00, 0x60
 	.global banim_bram_sw1_4_agbpal
 banim_bram_sw1_4_agbpal:
-	.incbin "baserom.gba", 0xC33C60, 0x4C
+	.incbin "graphics/banim/banim_bram_sw1_4.agbpal.lz"
 	.global banim_bram_sw1_4_oam_l_bin
 banim_bram_sw1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xC33CAC, 0xE0
@@ -367,19 +367,19 @@ banim_bram_sw1_4_modes_bin:
 	.incbin "baserom.gba", 0xC33EF0, 0x60
 	.global banim_myrm_sw1_sheet_0
 banim_myrm_sw1_sheet_0:
-	.incbin "baserom.gba", 0xC33F50, 0x10A4
+	.incbin "graphics/banim/banim_myrm_sw1_sheet_0.4bpp.lz"
 	.global banim_myrm_sw1_sheet_1
 banim_myrm_sw1_sheet_1:
-	.incbin "baserom.gba", 0xC34FF4, 0x111C
+	.incbin "graphics/banim/banim_myrm_sw1_sheet_1.4bpp.lz"
 	.global banim_myrm_sw1_sheet_2
 banim_myrm_sw1_sheet_2:
-	.incbin "baserom.gba", 0xC36110, 0xFC0
+	.incbin "graphics/banim/banim_myrm_sw1_sheet_2.4bpp.lz"
 	.global banim_myrm_sw1_sheet_3
 banim_myrm_sw1_sheet_3:
-	.incbin "baserom.gba", 0xC370D0, 0xC5C
+	.incbin "graphics/banim/banim_myrm_sw1_sheet_3.4bpp.lz"
 	.global banim_myrm_sw1_agbpal
 banim_myrm_sw1_agbpal:
-	.incbin "baserom.gba", 0xC37D2C, 0x68
+	.incbin "graphics/banim/banim_myrm_sw1.agbpal.lz"
 	.global banim_myrm_sw1_oam_l_bin
 banim_myrm_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xC37D94, 0xBD8
@@ -394,7 +394,7 @@ banim_myrm_sw1_modes_bin:
 	.incbin "baserom.gba", 0xC39904, 0x60
 	.global banim_myrm_sw1_2_agbpal
 banim_myrm_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xC39964, 0x68
+	.incbin "graphics/banim/banim_myrm_sw1_2.agbpal.lz"
 	.global banim_myrm_sw1_2_oam_l_bin
 banim_myrm_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC399CC, 0xB4
@@ -409,19 +409,19 @@ banim_myrm_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xC39BBC, 0x60
 	.global banim_myrf_sw1_sheet_0
 banim_myrf_sw1_sheet_0:
-	.incbin "baserom.gba", 0xC39C1C, 0xFAC
+	.incbin "graphics/banim/banim_myrf_sw1_sheet_0.4bpp.lz"
 	.global banim_myrf_sw1_sheet_1
 banim_myrf_sw1_sheet_1:
-	.incbin "baserom.gba", 0xC3ABC8, 0x1064
+	.incbin "graphics/banim/banim_myrf_sw1_sheet_1.4bpp.lz"
 	.global banim_myrf_sw1_sheet_2
 banim_myrf_sw1_sheet_2:
-	.incbin "baserom.gba", 0xC3BC2C, 0xE10
+	.incbin "graphics/banim/banim_myrf_sw1_sheet_2.4bpp.lz"
 	.global banim_myrf_sw1_sheet_3
 banim_myrf_sw1_sheet_3:
-	.incbin "baserom.gba", 0xC3CA3C, 0xBC8
+	.incbin "graphics/banim/banim_myrf_sw1_sheet_3.4bpp.lz"
 	.global banim_myrf_sw1_agbpal
 banim_myrf_sw1_agbpal:
-	.incbin "baserom.gba", 0xC3D604, 0x68
+	.incbin "graphics/banim/banim_myrf_sw1.agbpal.lz"
 	.global banim_myrf_sw1_oam_l_bin
 banim_myrf_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xC3D66C, 0xBD8
@@ -436,7 +436,7 @@ banim_myrf_sw1_modes_bin:
 	.incbin "baserom.gba", 0xC3F1DC, 0x60
 	.global banim_myrf_sw1_2_agbpal
 banim_myrf_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xC3F23C, 0x68
+	.incbin "graphics/banim/banim_myrf_sw1_2.agbpal.lz"
 	.global banim_myrf_sw1_2_oam_l_bin
 banim_myrf_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC3F2A4, 0xB4
@@ -451,19 +451,19 @@ banim_myrf_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xC3F494, 0x60
 	.global banim_swmm_sw1_sheet_0
 banim_swmm_sw1_sheet_0:
-	.incbin "baserom.gba", 0xC3F4F4, 0x10B8
+	.incbin "graphics/banim/banim_swmm_sw1_sheet_0.4bpp.lz"
 	.global banim_swmm_sw1_sheet_1
 banim_swmm_sw1_sheet_1:
-	.incbin "baserom.gba", 0xC405AC, 0xEA0
+	.incbin "graphics/banim/banim_swmm_sw1_sheet_1.4bpp.lz"
 	.global banim_swmm_sw1_sheet_2
 banim_swmm_sw1_sheet_2:
-	.incbin "baserom.gba", 0xC4144C, 0x1298
+	.incbin "graphics/banim/banim_swmm_sw1_sheet_2.4bpp.lz"
 	.global banim_swmm_sw1_sheet_3
 banim_swmm_sw1_sheet_3:
-	.incbin "baserom.gba", 0xC426E4, 0x888
+	.incbin "graphics/banim/banim_swmm_sw1_sheet_3.4bpp.lz"
 	.global banim_swmm_sw1_agbpal
 banim_swmm_sw1_agbpal:
-	.incbin "baserom.gba", 0xC42F6C, 0x64
+	.incbin "graphics/banim/banim_swmm_sw1.agbpal.lz"
 	.global banim_swmm_sw1_oam_l_bin
 banim_swmm_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xC42FD0, 0xC0C
@@ -478,7 +478,7 @@ banim_swmm_sw1_modes_bin:
 	.incbin "baserom.gba", 0xC44C78, 0x60
 	.global banim_swmm_sw1_2_agbpal
 banim_swmm_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xC44CD8, 0x64
+	.incbin "graphics/banim/banim_swmm_sw1_2.agbpal.lz"
 	.global banim_swmm_sw1_2_oam_l_bin
 banim_swmm_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC44D3C, 0x54
@@ -493,19 +493,19 @@ banim_swmm_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xC44E44, 0x60
 	.global banim_swmf_sw1_sheet_0
 banim_swmf_sw1_sheet_0:
-	.incbin "baserom.gba", 0xC44EA4, 0x1038
+	.incbin "graphics/banim/banim_swmf_sw1_sheet_0.4bpp.lz"
 	.global banim_swmf_sw1_sheet_1
 banim_swmf_sw1_sheet_1:
-	.incbin "baserom.gba", 0xC45EDC, 0xEB0
+	.incbin "graphics/banim/banim_swmf_sw1_sheet_1.4bpp.lz"
 	.global banim_swmf_sw1_sheet_2
 banim_swmf_sw1_sheet_2:
-	.incbin "baserom.gba", 0xC46D8C, 0x128C
+	.incbin "graphics/banim/banim_swmf_sw1_sheet_2.4bpp.lz"
 	.global banim_swmf_sw1_sheet_3
 banim_swmf_sw1_sheet_3:
-	.incbin "baserom.gba", 0xC48018, 0x888
+	.incbin "graphics/banim/banim_swmf_sw1_sheet_3.4bpp.lz"
 	.global banim_swmf_sw1_agbpal
 banim_swmf_sw1_agbpal:
-	.incbin "baserom.gba", 0xC488A0, 0x64
+	.incbin "graphics/banim/banim_swmf_sw1.agbpal.lz"
 	.global banim_swmf_sw1_oam_l_bin
 banim_swmf_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xC48904, 0xC0C
@@ -520,7 +520,7 @@ banim_swmf_sw1_modes_bin:
 	.incbin "baserom.gba", 0xC4A5A8, 0x60
 	.global banim_swmf_sw1_2_agbpal
 banim_swmf_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xC4A608, 0x64
+	.incbin "graphics/banim/banim_swmf_sw1_2.agbpal.lz"
 	.global banim_swmf_sw1_2_oam_l_bin
 banim_swmf_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC4A66C, 0x54
@@ -535,19 +535,19 @@ banim_swmf_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xC4A774, 0x60
 	.global banim_figm_ax1_sheet_0
 banim_figm_ax1_sheet_0:
-	.incbin "baserom.gba", 0xC4A7D4, 0x1288
+	.incbin "graphics/banim/banim_figm_ax1_sheet_0.4bpp.lz"
 	.global banim_figm_ax1_sheet_1
 banim_figm_ax1_sheet_1:
-	.incbin "baserom.gba", 0xC4BA5C, 0xFB0
+	.incbin "graphics/banim/banim_figm_ax1_sheet_1.4bpp.lz"
 	.global banim_figm_ax1_sheet_2
 banim_figm_ax1_sheet_2:
-	.incbin "baserom.gba", 0xC4CA0C, 0x11D0
+	.incbin "graphics/banim/banim_figm_ax1_sheet_2.4bpp.lz"
 	.global banim_figm_ax1_sheet_3
 banim_figm_ax1_sheet_3:
-	.incbin "baserom.gba", 0xC4DBDC, 0x10EC
+	.incbin "graphics/banim/banim_figm_ax1_sheet_3.4bpp.lz"
 	.global banim_figm_ax1_agbpal
 banim_figm_ax1_agbpal:
-	.incbin "baserom.gba", 0xC4ECC8, 0x4C
+	.incbin "graphics/banim/banim_figm_ax1.agbpal.lz"
 	.global banim_figm_ax1_oam_l_bin
 banim_figm_ax1_oam_l_bin:
 	.incbin "baserom.gba", 0xC4ED14, 0x96C
@@ -562,7 +562,7 @@ banim_figm_ax1_modes_bin:
 	.incbin "baserom.gba", 0xC50284, 0x60
 	.global banim_figm_ax1_2_agbpal
 banim_figm_ax1_2_agbpal:
-	.incbin "baserom.gba", 0xC502E4, 0x4C
+	.incbin "graphics/banim/banim_figm_ax1_2.agbpal.lz"
 	.global banim_figm_ax1_2_oam_l_bin
 banim_figm_ax1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC50330, 0x2CC
@@ -577,7 +577,7 @@ banim_figm_ax1_2_modes_bin:
 	.incbin "baserom.gba", 0xC509F4, 0x60
 	.global banim_figm_ax1_3_agbpal
 banim_figm_ax1_3_agbpal:
-	.incbin "baserom.gba", 0xC50A54, 0x4C
+	.incbin "graphics/banim/banim_figm_ax1_3.agbpal.lz"
 	.global banim_figm_ax1_3_oam_l_bin
 banim_figm_ax1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xC50AA0, 0xCC
@@ -592,31 +592,31 @@ banim_figm_ax1_3_modes_bin:
 	.incbin "baserom.gba", 0xC50C84, 0x60
 	.global banim_warm_ax1_sheet_0
 banim_warm_ax1_sheet_0:
-	.incbin "baserom.gba", 0xC50CE4, 0xFBC
+	.incbin "graphics/banim/banim_warm_ax1_sheet_0.4bpp.lz"
 	.global banim_warm_ax1_sheet_1
 banim_warm_ax1_sheet_1:
-	.incbin "baserom.gba", 0xC51CA0, 0x1108
+	.incbin "graphics/banim/banim_warm_ax1_sheet_1.4bpp.lz"
 	.global banim_warm_ax1_sheet_2
 banim_warm_ax1_sheet_2:
-	.incbin "baserom.gba", 0xC52DA8, 0xCF0
+	.incbin "graphics/banim/banim_warm_ax1_sheet_2.4bpp.lz"
 	.global banim_warm_ax1_sheet_3
 banim_warm_ax1_sheet_3:
-	.incbin "baserom.gba", 0xC53A98, 0xEA4
+	.incbin "graphics/banim/banim_warm_ax1_sheet_3.4bpp.lz"
 	.global banim_warm_ax1_sheet_5
 banim_warm_ax1_sheet_5:
-	.incbin "baserom.gba", 0xC5493C, 0x1140
+	.incbin "graphics/banim/banim_warm_ax1_sheet_5.4bpp.lz"
 	.global banim_warm_ax1_sheet_4
 banim_warm_ax1_sheet_4:
-	.incbin "baserom.gba", 0xC55A7C, 0x1028
+	.incbin "graphics/banim/banim_warm_ax1_sheet_4.4bpp.lz"
 	.global banim_warm_ax1_sheet_6
 banim_warm_ax1_sheet_6:
-	.incbin "baserom.gba", 0xC56AA4, 0xF78
+	.incbin "graphics/banim/banim_warm_ax1_sheet_6.4bpp.lz"
 	.global banim_warm_ax1_sheet_7
 banim_warm_ax1_sheet_7:
-	.incbin "baserom.gba", 0xC57A1C, 0xEF8
+	.incbin "graphics/banim/banim_warm_ax1_sheet_7.4bpp.lz"
 	.global banim_warm_ax1_agbpal
 banim_warm_ax1_agbpal:
-	.incbin "baserom.gba", 0xC58914, 0x4C
+	.incbin "graphics/banim/banim_warm_ax1.agbpal.lz"
 	.global banim_warm_ax1_oam_l_bin
 banim_warm_ax1_oam_l_bin:
 	.incbin "baserom.gba", 0xC58960, 0xDF4
@@ -631,7 +631,7 @@ banim_warm_ax1_modes_bin:
 	.incbin "baserom.gba", 0xC5A958, 0x60
 	.global banim_warm_ax1_2_agbpal
 banim_warm_ax1_2_agbpal:
-	.incbin "baserom.gba", 0xC5A9B8, 0x4C
+	.incbin "graphics/banim/banim_warm_ax1_2.agbpal.lz"
 	.global banim_warm_ax1_2_oam_l_bin
 banim_warm_ax1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC5AA04, 0xAF4
@@ -646,19 +646,19 @@ banim_warm_ax1_2_modes_bin:
 	.incbin "baserom.gba", 0xC5C1E4, 0x60
 	.global banim_warm_ar1_sheet_0
 banim_warm_ar1_sheet_0:
-	.incbin "baserom.gba", 0xC5C244, 0x115C
+	.incbin "graphics/banim/banim_warm_ar1_sheet_0.4bpp.lz"
 	.global banim_warm_ar1_sheet_1
 banim_warm_ar1_sheet_1:
-	.incbin "baserom.gba", 0xC5D3A0, 0xAF0
+	.incbin "graphics/banim/banim_warm_ar1_sheet_1.4bpp.lz"
 	.global banim_warm_ar1_sheet_2
 banim_warm_ar1_sheet_2:
-	.incbin "baserom.gba", 0xC5DE90, 0xB5C
+	.incbin "graphics/banim/banim_warm_ar1_sheet_2.4bpp.lz"
 	.global banim_warm_ar1_sheet_3
 banim_warm_ar1_sheet_3:
-	.incbin "baserom.gba", 0xC5E9EC, 0xA78
+	.incbin "graphics/banim/banim_warm_ar1_sheet_3.4bpp.lz"
 	.global banim_warm_ar1_agbpal
 banim_warm_ar1_agbpal:
-	.incbin "baserom.gba", 0xC5F464, 0x4C
+	.incbin "graphics/banim/banim_warm_ar1.agbpal.lz"
 	.global banim_warm_ar1_oam_l_bin
 banim_warm_ar1_oam_l_bin:
 	.incbin "baserom.gba", 0xC5F4B0, 0x504
@@ -673,7 +673,7 @@ banim_warm_ar1_modes_bin:
 	.incbin "baserom.gba", 0xC60080, 0x60
 	.global banim_warm_ax1_3_agbpal
 banim_warm_ax1_3_agbpal:
-	.incbin "baserom.gba", 0xC600E0, 0x4C
+	.incbin "graphics/banim/banim_warm_ax1_3.agbpal.lz"
 	.global banim_warm_ax1_3_oam_l_bin
 banim_warm_ax1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xC6012C, 0x98
@@ -688,16 +688,16 @@ banim_warm_ax1_3_modes_bin:
 	.incbin "baserom.gba", 0xC602D0, 0x58
 	.global banim_banm_ax1_sheet_0
 banim_banm_ax1_sheet_0:
-	.incbin "baserom.gba", 0xC60328, 0x1258
+	.incbin "graphics/banim/banim_banm_ax1_sheet_0.4bpp.lz"
 	.global banim_banm_ax1_sheet_1
 banim_banm_ax1_sheet_1:
-	.incbin "baserom.gba", 0xC61580, 0x1250
+	.incbin "graphics/banim/banim_banm_ax1_sheet_1.4bpp.lz"
 	.global banim_banm_ax1_2_sheet_0
 banim_banm_ax1_2_sheet_0:
-	.incbin "baserom.gba", 0xC627D0, 0x944
+	.incbin "graphics/banim/banim_banm_ax1_2_sheet_0.4bpp.lz"
 	.global banim_banm_ax1_agbpal
 banim_banm_ax1_agbpal:
-	.incbin "baserom.gba", 0xC63114, 0x4C
+	.incbin "graphics/banim/banim_banm_ax1.agbpal.lz"
 	.global banim_banm_ax1_oam_l_bin
 banim_banm_ax1_oam_l_bin:
 	.incbin "baserom.gba", 0xC63160, 0x68C
@@ -712,7 +712,7 @@ banim_banm_ax1_modes_bin:
 	.incbin "baserom.gba", 0xC640DC, 0x60
 	.global banim_banm_ax1_2_agbpal
 banim_banm_ax1_2_agbpal:
-	.incbin "baserom.gba", 0xC6413C, 0x4C
+	.incbin "graphics/banim/banim_banm_ax1_2.agbpal.lz"
 	.global banim_banm_ax1_2_oam_l_bin
 banim_banm_ax1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC64188, 0x218
@@ -727,7 +727,7 @@ banim_banm_ax1_2_modes_bin:
 	.incbin "baserom.gba", 0xC646D0, 0x60
 	.global banim_banm_ax1_3_agbpal
 banim_banm_ax1_3_agbpal:
-	.incbin "baserom.gba", 0xC64730, 0x4C
+	.incbin "graphics/banim/banim_banm_ax1_3.agbpal.lz"
 	.global banim_banm_ax1_3_oam_l_bin
 banim_banm_ax1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xC6477C, 0x88
@@ -742,13 +742,13 @@ banim_banm_ax1_3_modes_bin:
 	.incbin "baserom.gba", 0xC6490C, 0x60
 	.global banim_brsm_ax1_sheet_0
 banim_brsm_ax1_sheet_0:
-	.incbin "baserom.gba", 0xC6496C, 0x11F8
+	.incbin "graphics/banim/banim_brsm_ax1_sheet_0.4bpp.lz"
 	.global banim_brsm_ax1_sheet_1
 banim_brsm_ax1_sheet_1:
-	.incbin "baserom.gba", 0xC65B64, 0x116C
+	.incbin "graphics/banim/banim_brsm_ax1_sheet_1.4bpp.lz"
 	.global banim_brsm_ax1_agbpal
 banim_brsm_ax1_agbpal:
-	.incbin "baserom.gba", 0xC66CD0, 0x4C
+	.incbin "graphics/banim/banim_brsm_ax1.agbpal.lz"
 	.global banim_brsm_ax1_oam_l_bin
 banim_brsm_ax1_oam_l_bin:
 	.incbin "baserom.gba", 0xC66D1C, 0x8C0
@@ -763,10 +763,10 @@ banim_brsm_ax1_modes_bin:
 	.incbin "baserom.gba", 0xC680D4, 0x60
 	.global banim_brsm_ax1_2_sheet_0
 banim_brsm_ax1_2_sheet_0:
-	.incbin "baserom.gba", 0xC68134, 0xC94
+	.incbin "graphics/banim/banim_brsm_ax1_2_sheet_0.4bpp.lz"
 	.global banim_brsm_ax1_2_agbpal
 banim_brsm_ax1_2_agbpal:
-	.incbin "baserom.gba", 0xC68DC8, 0x4C
+	.incbin "graphics/banim/banim_brsm_ax1_2.agbpal.lz"
 	.global banim_brsm_ax1_2_oam_l_bin
 banim_brsm_ax1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC68E14, 0x22C
@@ -781,7 +781,7 @@ banim_brsm_ax1_2_modes_bin:
 	.incbin "baserom.gba", 0xC6937C, 0x60
 	.global banim_brsm_ax1_3_agbpal
 banim_brsm_ax1_3_agbpal:
-	.incbin "baserom.gba", 0xC693DC, 0x4C
+	.incbin "graphics/banim/banim_brsm_ax1_3.agbpal.lz"
 	.global banim_brsm_ax1_3_oam_l_bin
 banim_brsm_ax1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xC69428, 0xA4
@@ -796,16 +796,16 @@ banim_brsm_ax1_3_modes_bin:
 	.incbin "baserom.gba", 0xC695F0, 0x60
 	.global banim_arcm_ar1_sheet_0
 banim_arcm_ar1_sheet_0:
-	.incbin "baserom.gba", 0xC69650, 0xD18
+	.incbin "graphics/banim/banim_arcm_ar1_sheet_0.4bpp.lz"
 	.global banim_arcm_ar1_sheet_1
 banim_arcm_ar1_sheet_1:
-	.incbin "baserom.gba", 0xC6A368, 0xB9C
+	.incbin "graphics/banim/banim_arcm_ar1_sheet_1.4bpp.lz"
 	.global banim_arcm_ar1_sheet_2
 banim_arcm_ar1_sheet_2:
-	.incbin "baserom.gba", 0xC6AF04, 0x5D8
+	.incbin "graphics/banim/banim_arcm_ar1_sheet_2.4bpp.lz"
 	.global banim_arcm_ar1_agbpal
 banim_arcm_ar1_agbpal:
-	.incbin "baserom.gba", 0xC6B4DC, 0x68
+	.incbin "graphics/banim/banim_arcm_ar1.agbpal.lz"
 	.global banim_arcm_ar1_oam_l_bin
 banim_arcm_ar1_oam_l_bin:
 	.incbin "baserom.gba", 0xC6B544, 0x4B8
@@ -820,7 +820,7 @@ banim_arcm_ar1_modes_bin:
 	.incbin "baserom.gba", 0xC6C0A0, 0x60
 	.global banim_arcm_ar1_2_agbpal
 banim_arcm_ar1_2_agbpal:
-	.incbin "baserom.gba", 0xC6C100, 0x68
+	.incbin "graphics/banim/banim_arcm_ar1_2.agbpal.lz"
 	.global banim_arcm_ar1_2_oam_l_bin
 banim_arcm_ar1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC6C168, 0xCC
@@ -835,16 +835,16 @@ banim_arcm_ar1_2_modes_bin:
 	.incbin "baserom.gba", 0xC6C354, 0x60
 	.global banim_arcf_ar1_sheet_0
 banim_arcf_ar1_sheet_0:
-	.incbin "baserom.gba", 0xC6C3B4, 0xC94
+	.incbin "graphics/banim/banim_arcf_ar1_sheet_0.4bpp.lz"
 	.global banim_arcf_ar1_sheet_1
 banim_arcf_ar1_sheet_1:
-	.incbin "baserom.gba", 0xC6D048, 0xB70
+	.incbin "graphics/banim/banim_arcf_ar1_sheet_1.4bpp.lz"
 	.global banim_arcf_ar1_sheet_2
 banim_arcf_ar1_sheet_2:
-	.incbin "baserom.gba", 0xC6DBB8, 0x5C8
+	.incbin "graphics/banim/banim_arcf_ar1_sheet_2.4bpp.lz"
 	.global banim_arcf_ar1_agbpal
 banim_arcf_ar1_agbpal:
-	.incbin "baserom.gba", 0xC6E180, 0x68
+	.incbin "graphics/banim/banim_arcf_ar1.agbpal.lz"
 	.global banim_arcf_ar1_oam_l_bin
 banim_arcf_ar1_oam_l_bin:
 	.incbin "baserom.gba", 0xC6E1E8, 0x4B8
@@ -859,7 +859,7 @@ banim_arcf_ar1_modes_bin:
 	.incbin "baserom.gba", 0xC6ED44, 0x60
 	.global banim_arcf_ar1_2_agbpal
 banim_arcf_ar1_2_agbpal:
-	.incbin "baserom.gba", 0xC6EDA4, 0x68
+	.incbin "graphics/banim/banim_arcf_ar1_2.agbpal.lz"
 	.global banim_arcf_ar1_2_oam_l_bin
 banim_arcf_ar1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC6EE0C, 0xCC
@@ -874,16 +874,16 @@ banim_arcf_ar1_2_modes_bin:
 	.incbin "baserom.gba", 0xC6EFF8, 0x60
 	.global banim_snim_ar1_sheet_0
 banim_snim_ar1_sheet_0:
-	.incbin "baserom.gba", 0xC6F058, 0xC3C
+	.incbin "graphics/banim/banim_snim_ar1_sheet_0.4bpp.lz"
 	.global banim_snim_ar1_sheet_1
 banim_snim_ar1_sheet_1:
-	.incbin "baserom.gba", 0xC6FC94, 0xAB4
+	.incbin "graphics/banim/banim_snim_ar1_sheet_1.4bpp.lz"
 	.global banim_snim_ar1_sheet_2
 banim_snim_ar1_sheet_2:
-	.incbin "baserom.gba", 0xC70748, 0x7A8
+	.incbin "graphics/banim/banim_snim_ar1_sheet_2.4bpp.lz"
 	.global banim_snim_ar1_agbpal
 banim_snim_ar1_agbpal:
-	.incbin "baserom.gba", 0xC70EF0, 0x68
+	.incbin "graphics/banim/banim_snim_ar1.agbpal.lz"
 	.global banim_snim_ar1_oam_l_bin
 banim_snim_ar1_oam_l_bin:
 	.incbin "baserom.gba", 0xC70F58, 0x4E8
@@ -898,7 +898,7 @@ banim_snim_ar1_modes_bin:
 	.incbin "baserom.gba", 0xC71B14, 0x60
 	.global banim_snim_ar1_2_agbpal
 banim_snim_ar1_2_agbpal:
-	.incbin "baserom.gba", 0xC71B74, 0x68
+	.incbin "graphics/banim/banim_snim_ar1_2.agbpal.lz"
 	.global banim_snim_ar1_2_oam_l_bin
 banim_snim_ar1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC71BDC, 0xAC
@@ -913,16 +913,16 @@ banim_snim_ar1_2_modes_bin:
 	.incbin "baserom.gba", 0xC71D88, 0x60
 	.global banim_snif_ar1_sheet_0
 banim_snif_ar1_sheet_0:
-	.incbin "baserom.gba", 0xC71DE8, 0xB1C
+	.incbin "graphics/banim/banim_snif_ar1_sheet_0.4bpp.lz"
 	.global banim_snif_ar1_sheet_1
 banim_snif_ar1_sheet_1:
-	.incbin "baserom.gba", 0xC72904, 0xA4C
+	.incbin "graphics/banim/banim_snif_ar1_sheet_1.4bpp.lz"
 	.global banim_snif_ar1_sheet_2
 banim_snif_ar1_sheet_2:
-	.incbin "baserom.gba", 0xC73350, 0x764
+	.incbin "graphics/banim/banim_snif_ar1_sheet_2.4bpp.lz"
 	.global banim_snif_ar1_agbpal
 banim_snif_ar1_agbpal:
-	.incbin "baserom.gba", 0xC73AB4, 0x68
+	.incbin "graphics/banim/banim_snif_ar1.agbpal.lz"
 	.global banim_snif_ar1_oam_l_bin
 banim_snif_ar1_oam_l_bin:
 	.incbin "baserom.gba", 0xC73B1C, 0x4E8
@@ -937,7 +937,7 @@ banim_snif_ar1_modes_bin:
 	.incbin "baserom.gba", 0xC746D8, 0x60
 	.global banim_snif_ar1_2_agbpal
 banim_snif_ar1_2_agbpal:
-	.incbin "baserom.gba", 0xC74738, 0x68
+	.incbin "graphics/banim/banim_snif_ar1_2.agbpal.lz"
 	.global banim_snif_ar1_2_oam_l_bin
 banim_snif_ar1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC747A0, 0xAC
@@ -952,19 +952,19 @@ banim_snif_ar1_2_modes_bin:
 	.incbin "baserom.gba", 0xC7494C, 0x60
 	.global banim_form_sw1_sheet_0
 banim_form_sw1_sheet_0:
-	.incbin "baserom.gba", 0xC749AC, 0xB4C
+	.incbin "graphics/banim/banim_form_sw1_sheet_0.4bpp.lz"
 	.global banim_form_sw1_sheet_3
 banim_form_sw1_sheet_3:
-	.incbin "baserom.gba", 0xC754F8, 0x874
+	.incbin "graphics/banim/banim_form_sw1_sheet_3.4bpp.lz"
 	.global banim_form_sw1_sheet_1
 banim_form_sw1_sheet_1:
-	.incbin "baserom.gba", 0xC75D6C, 0xE80
+	.incbin "graphics/banim/banim_form_sw1_sheet_1.4bpp.lz"
 	.global banim_form_sw1_sheet_2
 banim_form_sw1_sheet_2:
-	.incbin "baserom.gba", 0xC76BEC, 0xC70
+	.incbin "graphics/banim/banim_form_sw1_sheet_2.4bpp.lz"
 	.global banim_form_sw1_agbpal
 banim_form_sw1_agbpal:
-	.incbin "baserom.gba", 0xC7785C, 0x70
+	.incbin "graphics/banim/banim_form_sw1.agbpal.lz"
 	.global banim_form_sw1_oam_l_bin
 banim_form_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xC778CC, 0x410
@@ -979,16 +979,16 @@ banim_form_sw1_modes_bin:
 	.incbin "baserom.gba", 0xC78380, 0x60
 	.global banim_form_ar1_sheet_0
 banim_form_ar1_sheet_0:
-	.incbin "baserom.gba", 0xC783E0, 0x1184
+	.incbin "graphics/banim/banim_form_ar1_sheet_0.4bpp.lz"
 	.global banim_form_ar1_sheet_1
 banim_form_ar1_sheet_1:
-	.incbin "baserom.gba", 0xC79564, 0xEDC
+	.incbin "graphics/banim/banim_form_ar1_sheet_1.4bpp.lz"
 	.global banim_form_ar1_sheet_2
 banim_form_ar1_sheet_2:
-	.incbin "baserom.gba", 0xC7A440, 0x1210
+	.incbin "graphics/banim/banim_form_ar1_sheet_2.4bpp.lz"
 	.global banim_form_ar1_agbpal
 banim_form_ar1_agbpal:
-	.incbin "baserom.gba", 0xC7B650, 0x70
+	.incbin "graphics/banim/banim_form_ar1.agbpal.lz"
 	.global banim_form_ar1_oam_l_bin
 banim_form_ar1_oam_l_bin:
 	.incbin "baserom.gba", 0xC7B6C0, 0xBE0
@@ -1003,7 +1003,7 @@ banim_form_ar1_modes_bin:
 	.incbin "baserom.gba", 0xC7D1F0, 0x60
 	.global banim_form_sw1_2_agbpal
 banim_form_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xC7D250, 0x70
+	.incbin "graphics/banim/banim_form_sw1_2.agbpal.lz"
 	.global banim_form_sw1_2_oam_l_bin
 banim_form_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC7D2C0, 0xA4
@@ -1018,19 +1018,19 @@ banim_form_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xC7D49C, 0x60
 	.global banim_forf_sw1_sheet_0
 banim_forf_sw1_sheet_0:
-	.incbin "baserom.gba", 0xC7D4FC, 0xB50
+	.incbin "graphics/banim/banim_forf_sw1_sheet_0.4bpp.lz"
 	.global banim_forf_sw1_sheet_3
 banim_forf_sw1_sheet_3:
-	.incbin "baserom.gba", 0xC7E04C, 0x878
+	.incbin "graphics/banim/banim_forf_sw1_sheet_3.4bpp.lz"
 	.global banim_forf_sw1_sheet_1
 banim_forf_sw1_sheet_1:
-	.incbin "baserom.gba", 0xC7E8C4, 0xE84
+	.incbin "graphics/banim/banim_forf_sw1_sheet_1.4bpp.lz"
 	.global banim_forf_sw1_sheet_2
 banim_forf_sw1_sheet_2:
-	.incbin "baserom.gba", 0xC7F748, 0xC64
+	.incbin "graphics/banim/banim_forf_sw1_sheet_2.4bpp.lz"
 	.global banim_forf_sw1_agbpal
 banim_forf_sw1_agbpal:
-	.incbin "baserom.gba", 0xC803AC, 0x70
+	.incbin "graphics/banim/banim_forf_sw1.agbpal.lz"
 	.global banim_forf_sw1_oam_l_bin
 banim_forf_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xC8041C, 0x410
@@ -1045,16 +1045,16 @@ banim_forf_sw1_modes_bin:
 	.incbin "baserom.gba", 0xC80ED0, 0x60
 	.global banim_forf_ar1_sheet_0
 banim_forf_ar1_sheet_0:
-	.incbin "baserom.gba", 0xC80F30, 0x1184
+	.incbin "graphics/banim/banim_forf_ar1_sheet_0.4bpp.lz"
 	.global banim_forf_ar1_sheet_1
 banim_forf_ar1_sheet_1:
-	.incbin "baserom.gba", 0xC820B4, 0xEF4
+	.incbin "graphics/banim/banim_forf_ar1_sheet_1.4bpp.lz"
 	.global banim_forf_ar1_sheet_2
 banim_forf_ar1_sheet_2:
-	.incbin "baserom.gba", 0xC82FA8, 0x1210
+	.incbin "graphics/banim/banim_forf_ar1_sheet_2.4bpp.lz"
 	.global banim_forf_ar1_agbpal
 banim_forf_ar1_agbpal:
-	.incbin "baserom.gba", 0xC841B8, 0x70
+	.incbin "graphics/banim/banim_forf_ar1.agbpal.lz"
 	.global banim_forf_ar1_oam_l_bin
 banim_forf_ar1_oam_l_bin:
 	.incbin "baserom.gba", 0xC84228, 0xBE0
@@ -1069,7 +1069,7 @@ banim_forf_ar1_modes_bin:
 	.incbin "baserom.gba", 0xC85D58, 0x60
 	.global banim_forf_sw1_2_agbpal
 banim_forf_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xC85DB8, 0x70
+	.incbin "graphics/banim/banim_forf_sw1_2.agbpal.lz"
 	.global banim_forf_sw1_2_oam_l_bin
 banim_forf_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC85E28, 0xA4
@@ -1084,19 +1084,19 @@ banim_forf_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xC86004, 0x60
 	.global banim_sokm_sp1_sheet_0
 banim_sokm_sp1_sheet_0:
-	.incbin "baserom.gba", 0xC86064, 0xE2C
+	.incbin "graphics/banim/banim_sokm_sp1_sheet_0.4bpp.lz"
 	.global banim_sokm_sp1_sheet_1
 banim_sokm_sp1_sheet_1:
-	.incbin "baserom.gba", 0xC86E90, 0x10D0
+	.incbin "graphics/banim/banim_sokm_sp1_sheet_1.4bpp.lz"
 	.global banim_sokm_sp1_sheet_2
 banim_sokm_sp1_sheet_2:
-	.incbin "baserom.gba", 0xC87F60, 0xF4C
+	.incbin "graphics/banim/banim_sokm_sp1_sheet_2.4bpp.lz"
 	.global banim_sokm_sp1_sheet_3
 banim_sokm_sp1_sheet_3:
-	.incbin "baserom.gba", 0xC88EAC, 0x1254
+	.incbin "graphics/banim/banim_sokm_sp1_sheet_3.4bpp.lz"
 	.global banim_sokm_sp1_agbpal
 banim_sokm_sp1_agbpal:
-	.incbin "baserom.gba", 0xC8A100, 0x6C
+	.incbin "graphics/banim/banim_sokm_sp1.agbpal.lz"
 	.global banim_sokm_sp1_oam_l_bin
 banim_sokm_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xC8A16C, 0x890
@@ -1111,7 +1111,7 @@ banim_sokm_sp1_modes_bin:
 	.incbin "baserom.gba", 0xC8B54C, 0x60
 	.global banim_sokm_sp1_2_agbpal
 banim_sokm_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xC8B5AC, 0x6C
+	.incbin "graphics/banim/banim_sokm_sp1_2.agbpal.lz"
 	.global banim_sokm_sp1_2_oam_l_bin
 banim_sokm_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC8B618, 0xC2C
@@ -1126,7 +1126,7 @@ banim_sokm_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xC8D170, 0x60
 	.global banim_sokm_sp1_3_agbpal
 banim_sokm_sp1_3_agbpal:
-	.incbin "baserom.gba", 0xC8D1D0, 0x6C
+	.incbin "graphics/banim/banim_sokm_sp1_3.agbpal.lz"
 	.global banim_sokm_sp1_3_oam_l_bin
 banim_sokm_sp1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xC8D23C, 0xE4
@@ -1141,19 +1141,19 @@ banim_sokm_sp1_3_modes_bin:
 	.incbin "baserom.gba", 0xC8D488, 0x60
 	.global banim_sokf_sp1_sheet_0
 banim_sokf_sp1_sheet_0:
-	.incbin "baserom.gba", 0xC8D4E8, 0xE68
+	.incbin "graphics/banim/banim_sokf_sp1_sheet_0.4bpp.lz"
 	.global banim_sokf_sp1_sheet_1
 banim_sokf_sp1_sheet_1:
-	.incbin "baserom.gba", 0xC8E350, 0x1148
+	.incbin "graphics/banim/banim_sokf_sp1_sheet_1.4bpp.lz"
 	.global banim_sokf_sp1_sheet_2
 banim_sokf_sp1_sheet_2:
-	.incbin "baserom.gba", 0xC8F498, 0xFB8
+	.incbin "graphics/banim/banim_sokf_sp1_sheet_2.4bpp.lz"
 	.global banim_sokf_sp1_sheet_3
 banim_sokf_sp1_sheet_3:
-	.incbin "baserom.gba", 0xC90450, 0x129C
+	.incbin "graphics/banim/banim_sokf_sp1_sheet_3.4bpp.lz"
 	.global banim_sokf_sp1_agbpal
 banim_sokf_sp1_agbpal:
-	.incbin "baserom.gba", 0xC916EC, 0x6C
+	.incbin "graphics/banim/banim_sokf_sp1.agbpal.lz"
 	.global banim_sokf_sp1_oam_l_bin
 banim_sokf_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xC91758, 0x8C0
@@ -1168,7 +1168,7 @@ banim_sokf_sp1_modes_bin:
 	.incbin "baserom.gba", 0xC92B90, 0x60
 	.global banim_sokf_sp1_2_agbpal
 banim_sokf_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xC92BF0, 0x6C
+	.incbin "graphics/banim/banim_sokf_sp1_2.agbpal.lz"
 	.global banim_sokf_sp1_2_oam_l_bin
 banim_sokf_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC92C5C, 0xC5C
@@ -1183,7 +1183,7 @@ banim_sokf_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xC9480C, 0x60
 	.global banim_sokf_sp1_3_agbpal
 banim_sokf_sp1_3_agbpal:
-	.incbin "baserom.gba", 0xC9486C, 0x6C
+	.incbin "graphics/banim/banim_sokf_sp1_3.agbpal.lz"
 	.global banim_sokf_sp1_3_oam_l_bin
 banim_sokf_sp1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xC948D8, 0xE4
@@ -1198,28 +1198,28 @@ banim_sokf_sp1_3_modes_bin:
 	.incbin "baserom.gba", 0xC94B24, 0x60
 	.global banim_pakm_sw1_sheet_0
 banim_pakm_sw1_sheet_0:
-	.incbin "baserom.gba", 0xC94B84, 0x14BC
+	.incbin "graphics/banim/banim_pakm_sw1_sheet_0.4bpp.lz"
 	.global banim_pakm_sw1_sheet_1
 banim_pakm_sw1_sheet_1:
-	.incbin "baserom.gba", 0xC96040, 0x1380
+	.incbin "graphics/banim/banim_pakm_sw1_sheet_1.4bpp.lz"
 	.global banim_pakm_sw1_sheet_2
 banim_pakm_sw1_sheet_2:
-	.incbin "baserom.gba", 0xC973C0, 0x14F8
+	.incbin "graphics/banim/banim_pakm_sw1_sheet_2.4bpp.lz"
 	.global banim_pakm_sw1_sheet_3
 banim_pakm_sw1_sheet_3:
-	.incbin "baserom.gba", 0xC988B8, 0x1514
+	.incbin "graphics/banim/banim_pakm_sw1_sheet_3.4bpp.lz"
 	.global banim_pakm_sw1_sheet_5
 banim_pakm_sw1_sheet_5:
-	.incbin "baserom.gba", 0xC99DCC, 0x1278
+	.incbin "graphics/banim/banim_pakm_sw1_sheet_5.4bpp.lz"
 	.global banim_pakm_sw1_sheet_4
 banim_pakm_sw1_sheet_4:
-	.incbin "baserom.gba", 0xC9B044, 0x11C4
+	.incbin "graphics/banim/banim_pakm_sw1_sheet_4.4bpp.lz"
 	.global banim_pakm_sw1_sheet_6
 banim_pakm_sw1_sheet_6:
-	.incbin "baserom.gba", 0xC9C208, 0x1218
+	.incbin "graphics/banim/banim_pakm_sw1_sheet_6.4bpp.lz"
 	.global banim_pakm_sw1_agbpal
 banim_pakm_sw1_agbpal:
-	.incbin "baserom.gba", 0xC9D420, 0x74
+	.incbin "graphics/banim/banim_pakm_sw1.agbpal.lz"
 	.global banim_pakm_sw1_oam_l_bin
 banim_pakm_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xC9D494, 0xD58
@@ -1234,7 +1234,7 @@ banim_pakm_sw1_modes_bin:
 	.incbin "baserom.gba", 0xC9F388, 0x60
 	.global banim_pakm_sw1_2_agbpal
 banim_pakm_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xC9F3E8, 0x74
+	.incbin "graphics/banim/banim_pakm_sw1_2.agbpal.lz"
 	.global banim_pakm_sw1_2_oam_l_bin
 banim_pakm_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xC9F45C, 0x1128
@@ -1249,7 +1249,7 @@ banim_pakm_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xCA1B1C, 0x60
 	.global banim_pakm_sw1_3_agbpal
 banim_pakm_sw1_3_agbpal:
-	.incbin "baserom.gba", 0xCA1B7C, 0x74
+	.incbin "graphics/banim/banim_pakm_sw1_3.agbpal.lz"
 	.global banim_pakm_sw1_3_oam_l_bin
 banim_pakm_sw1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xCA1BF0, 0xD8
@@ -1264,28 +1264,28 @@ banim_pakm_sw1_3_modes_bin:
 	.incbin "baserom.gba", 0xCA1E20, 0x60
 	.global banim_paif_sw1_sheet_0
 banim_paif_sw1_sheet_0:
-	.incbin "baserom.gba", 0xCA1E80, 0x1418
+	.incbin "graphics/banim/banim_paif_sw1_sheet_0.4bpp.lz"
 	.global banim_paif_sw1_sheet_1
 banim_paif_sw1_sheet_1:
-	.incbin "baserom.gba", 0xCA3298, 0x1254
+	.incbin "graphics/banim/banim_paif_sw1_sheet_1.4bpp.lz"
 	.global banim_paif_sw1_sheet_2
 banim_paif_sw1_sheet_2:
-	.incbin "baserom.gba", 0xCA44EC, 0x1440
+	.incbin "graphics/banim/banim_paif_sw1_sheet_2.4bpp.lz"
 	.global banim_paif_sw1_sheet_3
 banim_paif_sw1_sheet_3:
-	.incbin "baserom.gba", 0xCA592C, 0x148C
+	.incbin "graphics/banim/banim_paif_sw1_sheet_3.4bpp.lz"
 	.global banim_paif_sw1_sheet_5
 banim_paif_sw1_sheet_5:
-	.incbin "baserom.gba", 0xCA6DB8, 0x11F4
+	.incbin "graphics/banim/banim_paif_sw1_sheet_5.4bpp.lz"
 	.global banim_paif_sw1_sheet_4
 banim_paif_sw1_sheet_4:
-	.incbin "baserom.gba", 0xCA7FAC, 0x10DC
+	.incbin "graphics/banim/banim_paif_sw1_sheet_4.4bpp.lz"
 	.global banim_paif_sw1_sheet_6
 banim_paif_sw1_sheet_6:
-	.incbin "baserom.gba", 0xCA9088, 0x1174
+	.incbin "graphics/banim/banim_paif_sw1_sheet_6.4bpp.lz"
 	.global banim_paif_sw1_agbpal
 banim_paif_sw1_agbpal:
-	.incbin "baserom.gba", 0xCAA1FC, 0x64
+	.incbin "graphics/banim/banim_paif_sw1.agbpal.lz"
 	.global banim_paif_sw1_oam_l_bin
 banim_paif_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xCAA260, 0xD5C
@@ -1300,7 +1300,7 @@ banim_paif_sw1_modes_bin:
 	.incbin "baserom.gba", 0xCAC158, 0x60
 	.global banim_paif_sw1_2_agbpal
 banim_paif_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xCAC1B8, 0x64
+	.incbin "graphics/banim/banim_paif_sw1_2.agbpal.lz"
 	.global banim_paif_sw1_2_oam_l_bin
 banim_paif_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xCAC21C, 0x1144
@@ -1315,7 +1315,7 @@ banim_paif_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xCAE90C, 0x60
 	.global banim_paif_sw1_3_agbpal
 banim_paif_sw1_3_agbpal:
-	.incbin "baserom.gba", 0xCAE96C, 0x64
+	.incbin "graphics/banim/banim_paif_sw1_3.agbpal.lz"
 	.global banim_paif_sw1_3_oam_l_bin
 banim_paif_sw1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xCAE9D0, 0xC4
@@ -1330,16 +1330,16 @@ banim_paif_sw1_3_modes_bin:
 	.incbin "baserom.gba", 0xCAEBDC, 0x60
 	.global banim_armm_sp1_sheet_0
 banim_armm_sp1_sheet_0:
-	.incbin "baserom.gba", 0xCAEC3C, 0x1488
+	.incbin "graphics/banim/banim_armm_sp1_sheet_0.4bpp.lz"
 	.global banim_armm_sp1_sheet_1
 banim_armm_sp1_sheet_1:
-	.incbin "baserom.gba", 0xCB00C4, 0x10CC
+	.incbin "graphics/banim/banim_armm_sp1_sheet_1.4bpp.lz"
 	.global banim_armm_sp1_sheet_2
 banim_armm_sp1_sheet_2:
-	.incbin "baserom.gba", 0xCB1190, 0xED4
+	.incbin "graphics/banim/banim_armm_sp1_sheet_2.4bpp.lz"
 	.global banim_armm_sp1_agbpal
 banim_armm_sp1_agbpal:
-	.incbin "baserom.gba", 0xCB2064, 0x64
+	.incbin "graphics/banim/banim_armm_sp1.agbpal.lz"
 	.global banim_armm_sp1_oam_l_bin
 banim_armm_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xCB20C8, 0x5E4
@@ -1354,7 +1354,7 @@ banim_armm_sp1_modes_bin:
 	.incbin "baserom.gba", 0xCB2F68, 0x60
 	.global banim_armm_sp1_2_agbpal
 banim_armm_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xCB2FC8, 0x64
+	.incbin "graphics/banim/banim_armm_sp1_2.agbpal.lz"
 	.global banim_armm_sp1_2_oam_l_bin
 banim_armm_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xCB302C, 0xAC
@@ -1369,7 +1369,7 @@ banim_armm_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xCB3200, 0x60
 	.global banim_armm_sp1_3_agbpal
 banim_armm_sp1_3_agbpal:
-	.incbin "baserom.gba", 0xCB3260, 0x64
+	.incbin "graphics/banim/banim_armm_sp1_3.agbpal.lz"
 	.global banim_armm_sp1_3_oam_l_bin
 banim_armm_sp1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xCB32C4, 0x5E4
@@ -1384,7 +1384,7 @@ banim_armm_sp1_3_modes_bin:
 	.incbin "baserom.gba", 0xCB4164, 0x60
 	.global banim_armm_sp1_4_agbpal
 banim_armm_sp1_4_agbpal:
-	.incbin "baserom.gba", 0xCB41C4, 0x64
+	.incbin "graphics/banim/banim_armm_sp1_4.agbpal.lz"
 	.global banim_armm_sp1_4_oam_l_bin
 banim_armm_sp1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xCB4228, 0xAC
@@ -1399,19 +1399,19 @@ banim_armm_sp1_4_modes_bin:
 	.incbin "baserom.gba", 0xCB43FC, 0x60
 	.global banim_genm_sw1_sheet_0
 banim_genm_sw1_sheet_0:
-	.incbin "baserom.gba", 0xCB445C, 0x11A0
+	.incbin "graphics/banim/banim_genm_sw1_sheet_0.4bpp.lz"
 	.global banim_genm_sw1_sheet_1
 banim_genm_sw1_sheet_1:
-	.incbin "baserom.gba", 0xCB55FC, 0xE74
+	.incbin "graphics/banim/banim_genm_sw1_sheet_1.4bpp.lz"
 	.global banim_genm_sw1_sheet_3
 banim_genm_sw1_sheet_3:
-	.incbin "baserom.gba", 0xCB6470, 0xDEC
+	.incbin "graphics/banim/banim_genm_sw1_sheet_3.4bpp.lz"
 	.global banim_genm_sw1_sheet_2
 banim_genm_sw1_sheet_2:
-	.incbin "baserom.gba", 0xCB725C, 0x1204
+	.incbin "graphics/banim/banim_genm_sw1_sheet_2.4bpp.lz"
 	.global banim_genm_sw1_agbpal
 banim_genm_sw1_agbpal:
-	.incbin "baserom.gba", 0xCB8460, 0x7C
+	.incbin "graphics/banim/banim_genm_sw1.agbpal.lz"
 	.global banim_genm_sw1_oam_l_bin
 banim_genm_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xCB84DC, 0xC2C
@@ -1426,40 +1426,40 @@ banim_genm_sw1_modes_bin:
 	.incbin "baserom.gba", 0xCBA0C8, 0x60
 	.global banim_genm_al1_sheet_0
 banim_genm_al1_sheet_0:
-	.incbin "baserom.gba", 0xCBA128, 0xD10
+	.incbin "graphics/banim/banim_genm_al1_sheet_0.4bpp.lz"
 	.global banim_genm_al1_sheet_1
 banim_genm_al1_sheet_1:
-	.incbin "baserom.gba", 0xCBAE38, 0xD20
+	.incbin "graphics/banim/banim_genm_al1_sheet_1.4bpp.lz"
 	.global banim_genm_al1_sheet_2
 banim_genm_al1_sheet_2:
-	.incbin "baserom.gba", 0xCBBB58, 0xE40
+	.incbin "graphics/banim/banim_genm_al1_sheet_2.4bpp.lz"
 	.global banim_genm_al1_sheet_3
 banim_genm_al1_sheet_3:
-	.incbin "baserom.gba", 0xCBC998, 0xF04
+	.incbin "graphics/banim/banim_genm_al1_sheet_3.4bpp.lz"
 	.global banim_genm_al1_sheet_4
 banim_genm_al1_sheet_4:
-	.incbin "baserom.gba", 0xCBD89C, 0xBBC
+	.incbin "graphics/banim/banim_genm_al1_sheet_4.4bpp.lz"
 	.global banim_genm_al1_sheet_5
 banim_genm_al1_sheet_5:
-	.incbin "baserom.gba", 0xCBE458, 0xD88
+	.incbin "graphics/banim/banim_genm_al1_sheet_5.4bpp.lz"
 	.global banim_genm_al1_sheet_6
 banim_genm_al1_sheet_6:
-	.incbin "baserom.gba", 0xCBF1E0, 0x8F8
+	.incbin "graphics/banim/banim_genm_al1_sheet_6.4bpp.lz"
 	.global banim_genm_al1_sheet_blank
 banim_genm_al1_sheet_blank:
-	.incbin "baserom.gba", 0xCBFAD8, 0x3D0
+	.incbin "graphics/banim/banim_genm_al1_sheet_blank.4bpp.lz"
 	.global banim_genm_al1_sheet_blank_2
 banim_genm_al1_sheet_blank_2:
-	.incbin "baserom.gba", 0xCBFEA8, 0x3D0
+	.incbin "graphics/banim/banim_genm_al1_sheet_blank_2.4bpp.lz"
 	.global banim_genm_al1_sheet_8
 banim_genm_al1_sheet_8:
-	.incbin "baserom.gba", 0xCC0278, 0xD68
+	.incbin "graphics/banim/banim_genm_al1_sheet_8.4bpp.lz"
 	.global banim_genm_al1_sheet_7
 banim_genm_al1_sheet_7:
-	.incbin "baserom.gba", 0xCC0FE0, 0xDB8
+	.incbin "graphics/banim/banim_genm_al1_sheet_7.4bpp.lz"
 	.global banim_genm_al1_agbpal
 banim_genm_al1_agbpal:
-	.incbin "baserom.gba", 0xCC1D98, 0x7C
+	.incbin "graphics/banim/banim_genm_al1.agbpal.lz"
 	.global banim_genm_al1_oam_l_bin
 banim_genm_al1_oam_l_bin:
 	.incbin "baserom.gba", 0xCC1E14, 0xD4C
@@ -1474,7 +1474,7 @@ banim_genm_al1_modes_bin:
 	.incbin "baserom.gba", 0xCC3D84, 0x60
 	.global banim_genm_al1_2_agbpal
 banim_genm_al1_2_agbpal:
-	.incbin "baserom.gba", 0xCC3DE4, 0x7C
+	.incbin "graphics/banim/banim_genm_al1_2.agbpal.lz"
 	.global banim_genm_al1_2_oam_l_bin
 banim_genm_al1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xCC3E60, 0x788
@@ -1489,7 +1489,7 @@ banim_genm_al1_2_modes_bin:
 	.incbin "baserom.gba", 0xCC5220, 0x60
 	.global banim_genm_al1_3_agbpal
 banim_genm_al1_3_agbpal:
-	.incbin "baserom.gba", 0xCC5280, 0x7C
+	.incbin "graphics/banim/banim_genm_al1_3.agbpal.lz"
 	.global banim_genm_al1_3_oam_l_bin
 banim_genm_al1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xCC52FC, 0x368
@@ -1504,7 +1504,7 @@ banim_genm_al1_3_modes_bin:
 	.incbin "baserom.gba", 0xCC5BA4, 0x60
 	.global banim_genm_al1_4_agbpal
 banim_genm_al1_4_agbpal:
-	.incbin "baserom.gba", 0xCC5C04, 0x7C
+	.incbin "graphics/banim/banim_genm_al1_4.agbpal.lz"
 	.global banim_genm_al1_4_oam_l_bin
 banim_genm_al1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xCC5C80, 0x9C
@@ -1519,7 +1519,7 @@ banim_genm_al1_4_modes_bin:
 	.incbin "baserom.gba", 0xCC5E40, 0x60
 	.global banim_genm_sw1_2_agbpal
 banim_genm_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xCC5EA0, 0x7C
+	.incbin "graphics/banim/banim_genm_sw1_2.agbpal.lz"
 	.global banim_genm_sw1_2_oam_l_bin
 banim_genm_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xCC5F1C, 0xC2C
@@ -1534,7 +1534,7 @@ banim_genm_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xCC7B08, 0x60
 	.global banim_genm_al1_5_agbpal
 banim_genm_al1_5_agbpal:
-	.incbin "baserom.gba", 0xCC7B68, 0x7C
+	.incbin "graphics/banim/banim_genm_al1_5.agbpal.lz"
 	.global banim_genm_al1_5_oam_l_bin
 banim_genm_al1_5_oam_l_bin:
 	.incbin "baserom.gba", 0xCC7BE4, 0xD4C
@@ -1549,7 +1549,7 @@ banim_genm_al1_5_modes_bin:
 	.incbin "baserom.gba", 0xCC9B54, 0x60
 	.global banim_genm_al1_6_agbpal
 banim_genm_al1_6_agbpal:
-	.incbin "baserom.gba", 0xCC9BB4, 0x7C
+	.incbin "graphics/banim/banim_genm_al1_6.agbpal.lz"
 	.global banim_genm_al1_6_oam_l_bin
 banim_genm_al1_6_oam_l_bin:
 	.incbin "baserom.gba", 0xCC9C30, 0x788
@@ -1564,7 +1564,7 @@ banim_genm_al1_6_modes_bin:
 	.incbin "baserom.gba", 0xCCAFF0, 0x60
 	.global banim_genm_al1_7_agbpal
 banim_genm_al1_7_agbpal:
-	.incbin "baserom.gba", 0xCCB050, 0x7C
+	.incbin "graphics/banim/banim_genm_al1_7.agbpal.lz"
 	.global banim_genm_al1_7_oam_l_bin
 banim_genm_al1_7_oam_l_bin:
 	.incbin "baserom.gba", 0xCCB0CC, 0x368
@@ -1579,7 +1579,7 @@ banim_genm_al1_7_modes_bin:
 	.incbin "baserom.gba", 0xCCB974, 0x60
 	.global banim_genm_al1_8_agbpal
 banim_genm_al1_8_agbpal:
-	.incbin "baserom.gba", 0xCCB9D4, 0x7C
+	.incbin "graphics/banim/banim_genm_al1_8.agbpal.lz"
 	.global banim_genm_al1_8_oam_l_bin
 banim_genm_al1_8_oam_l_bin:
 	.incbin "baserom.gba", 0xCCBA50, 0x9C
@@ -1594,43 +1594,43 @@ banim_genm_al1_8_modes_bin:
 	.incbin "baserom.gba", 0xCCBC10, 0x60
 	.global banim_grkm_sw1_sheet_0
 banim_grkm_sw1_sheet_0:
-	.incbin "baserom.gba", 0xCCBC70, 0xD40
+	.incbin "graphics/banim/banim_grkm_sw1_sheet_0.4bpp.lz"
 	.global banim_grkm_sw1_sheet_1
 banim_grkm_sw1_sheet_1:
-	.incbin "baserom.gba", 0xCCC9B0, 0x10A4
+	.incbin "graphics/banim/banim_grkm_sw1_sheet_1.4bpp.lz"
 	.global banim_grkm_sw1_sheet_2
 banim_grkm_sw1_sheet_2:
-	.incbin "baserom.gba", 0xCCDA54, 0xDF0
+	.incbin "graphics/banim/banim_grkm_sw1_sheet_2.4bpp.lz"
 	.global banim_grkm_sw1_sheet_3
 banim_grkm_sw1_sheet_3:
-	.incbin "baserom.gba", 0xCCE844, 0xCDC
+	.incbin "graphics/banim/banim_grkm_sw1_sheet_3.4bpp.lz"
 	.global banim_grkm_sw1_sheet_4
 banim_grkm_sw1_sheet_4:
-	.incbin "baserom.gba", 0xCCF520, 0x1014
+	.incbin "graphics/banim/banim_grkm_sw1_sheet_4.4bpp.lz"
 	.global banim_grkm_sw1_sheet_5
 banim_grkm_sw1_sheet_5:
-	.incbin "baserom.gba", 0xCD0534, 0xE50
+	.incbin "graphics/banim/banim_grkm_sw1_sheet_5.4bpp.lz"
 	.global banim_grkm_sw1_sheet_11
 banim_grkm_sw1_sheet_11:
-	.incbin "baserom.gba", 0xCD1384, 0xB78
+	.incbin "graphics/banim/banim_grkm_sw1_sheet_11.4bpp.lz"
 	.global banim_grkm_sw1_sheet_10
 banim_grkm_sw1_sheet_10:
-	.incbin "baserom.gba", 0xCD1EFC, 0x728
+	.incbin "graphics/banim/banim_grkm_sw1_sheet_10.4bpp.lz"
 	.global banim_grkm_sw1_sheet_8
 banim_grkm_sw1_sheet_8:
-	.incbin "baserom.gba", 0xCD2624, 0xC14
+	.incbin "graphics/banim/banim_grkm_sw1_sheet_8.4bpp.lz"
 	.global banim_grkm_sw1_sheet_9
 banim_grkm_sw1_sheet_9:
-	.incbin "baserom.gba", 0xCD3238, 0x1068
+	.incbin "graphics/banim/banim_grkm_sw1_sheet_9.4bpp.lz"
 	.global banim_grkm_sw1_sheet_6
 banim_grkm_sw1_sheet_6:
-	.incbin "baserom.gba", 0xCD42A0, 0xDA8
+	.incbin "graphics/banim/banim_grkm_sw1_sheet_6.4bpp.lz"
 	.global banim_grkm_sw1_sheet_7
 banim_grkm_sw1_sheet_7:
-	.incbin "baserom.gba", 0xCD5048, 0xC2C
+	.incbin "graphics/banim/banim_grkm_sw1_sheet_7.4bpp.lz"
 	.global banim_grkm_sw1_agbpal
 banim_grkm_sw1_agbpal:
-	.incbin "baserom.gba", 0xCD5C74, 0x38
+	.incbin "graphics/banim/banim_grkm_sw1.agbpal.lz"
 	.global banim_grkm_sw1_oam_l_bin
 banim_grkm_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xCD5CAC, 0xA88
@@ -1645,52 +1645,52 @@ banim_grkm_sw1_modes_bin:
 	.incbin "baserom.gba", 0xCD75AC, 0x60
 	.global banim_grkm_sp1_sheet_0
 banim_grkm_sp1_sheet_0:
-	.incbin "baserom.gba", 0xCD760C, 0xA0C
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_0.4bpp.lz"
 	.global banim_grkm_sp1_sheet_1
 banim_grkm_sp1_sheet_1:
-	.incbin "baserom.gba", 0xCD8018, 0x10B4
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_1.4bpp.lz"
 	.global banim_grkm_sp1_sheet_2
 banim_grkm_sp1_sheet_2:
-	.incbin "baserom.gba", 0xCD90CC, 0xE9C
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_2.4bpp.lz"
 	.global banim_grkm_sp1_sheet_3
 banim_grkm_sp1_sheet_3:
-	.incbin "baserom.gba", 0xCD9F68, 0xDA8
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_3.4bpp.lz"
 	.global banim_grkm_sp1_sheet_4
 banim_grkm_sp1_sheet_4:
-	.incbin "baserom.gba", 0xCDAD10, 0x1118
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_4.4bpp.lz"
 	.global banim_grkm_sp1_sheet_5
 banim_grkm_sp1_sheet_5:
-	.incbin "baserom.gba", 0xCDBE28, 0xEA4
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_5.4bpp.lz"
 	.global banim_grkm_sp1_sheet_13
 banim_grkm_sp1_sheet_13:
-	.incbin "baserom.gba", 0xCDCCCC, 0xB24
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_13.4bpp.lz"
 	.global banim_grkm_sp1_sheet_14
 banim_grkm_sp1_sheet_14:
-	.incbin "baserom.gba", 0xCDD7F0, 0xAC8
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_14.4bpp.lz"
 	.global banim_grkm_sp1_sheet_8
 banim_grkm_sp1_sheet_8:
-	.incbin "baserom.gba", 0xCDE2B8, 0xC3C
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_8.4bpp.lz"
 	.global banim_grkm_sp1_sheet_9
 banim_grkm_sp1_sheet_9:
-	.incbin "baserom.gba", 0xCDEEF4, 0x1064
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_9.4bpp.lz"
 	.global banim_grkm_sp1_sheet_6
 banim_grkm_sp1_sheet_6:
-	.incbin "baserom.gba", 0xCDFF58, 0xE20
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_6.4bpp.lz"
 	.global banim_grkm_sp1_sheet_7
 banim_grkm_sp1_sheet_7:
-	.incbin "baserom.gba", 0xCE0D78, 0xE2C
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_7.4bpp.lz"
 	.global banim_grkm_sp1_sheet_10
 banim_grkm_sp1_sheet_10:
-	.incbin "baserom.gba", 0xCE1BA4, 0xC84
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_10.4bpp.lz"
 	.global banim_grkm_sp1_sheet_11
 banim_grkm_sp1_sheet_11:
-	.incbin "baserom.gba", 0xCE2828, 0xAB8
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_11.4bpp.lz"
 	.global banim_grkm_sp1_sheet_12
 banim_grkm_sp1_sheet_12:
-	.incbin "baserom.gba", 0xCE32E0, 0x854
+	.incbin "graphics/banim/banim_grkm_sp1_sheet_12.4bpp.lz"
 	.global banim_grkm_sp1_agbpal
 banim_grkm_sp1_agbpal:
-	.incbin "baserom.gba", 0xCE3B34, 0x38
+	.incbin "graphics/banim/banim_grkm_sp1.agbpal.lz"
 	.global banim_grkm_sp1_oam_l_bin
 banim_grkm_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xCE3B6C, 0xD14
@@ -1705,49 +1705,49 @@ banim_grkm_sp1_modes_bin:
 	.incbin "baserom.gba", 0xCE59CC, 0x60
 	.global banim_grkm_ax1_sheet_0
 banim_grkm_ax1_sheet_0:
-	.incbin "baserom.gba", 0xCE5A2C, 0xE38
+	.incbin "graphics/banim/banim_grkm_ax1_sheet_0.4bpp.lz"
 	.global banim_grkm_ax1_sheet_1
 banim_grkm_ax1_sheet_1:
-	.incbin "baserom.gba", 0xCE6864, 0x1188
+	.incbin "graphics/banim/banim_grkm_ax1_sheet_1.4bpp.lz"
 	.global banim_grkm_ax1_sheet_2
 banim_grkm_ax1_sheet_2:
-	.incbin "baserom.gba", 0xCE79EC, 0xEB4
+	.incbin "graphics/banim/banim_grkm_ax1_sheet_2.4bpp.lz"
 	.global banim_grkm_ax1_sheet_3
 banim_grkm_ax1_sheet_3:
-	.incbin "baserom.gba", 0xCE88A0, 0xDA0
+	.incbin "graphics/banim/banim_grkm_ax1_sheet_3.4bpp.lz"
 	.global banim_grkm_ax1_sheet_4
 banim_grkm_ax1_sheet_4:
-	.incbin "baserom.gba", 0xCE9640, 0x1058
+	.incbin "graphics/banim/banim_grkm_ax1_sheet_4.4bpp.lz"
 	.global banim_grkm_ax1_sheet_5
 banim_grkm_ax1_sheet_5:
-	.incbin "baserom.gba", 0xCEA698, 0xF34
+	.incbin "graphics/banim/banim_grkm_ax1_sheet_5.4bpp.lz"
 	.global banim_grkm_ax1_2_sheet_0
 banim_grkm_ax1_2_sheet_0:
-	.incbin "baserom.gba", 0xCEB5CC, 0xD54
+	.incbin "graphics/banim/banim_grkm_ax1_2_sheet_0.4bpp.lz"
 	.global banim_grkm_ax1_2_sheet_1
 banim_grkm_ax1_2_sheet_1:
-	.incbin "baserom.gba", 0xCEC320, 0xAA0
+	.incbin "graphics/banim/banim_grkm_ax1_2_sheet_1.4bpp.lz"
 	.global banim_grkm_ax1_sheet_8
 banim_grkm_ax1_sheet_8:
-	.incbin "baserom.gba", 0xCECDC0, 0xCCC
+	.incbin "graphics/banim/banim_grkm_ax1_sheet_8.4bpp.lz"
 	.global banim_grkm_ax1_sheet_9
 banim_grkm_ax1_sheet_9:
-	.incbin "baserom.gba", 0xCEDA8C, 0x1108
+	.incbin "graphics/banim/banim_grkm_ax1_sheet_9.4bpp.lz"
 	.global banim_grkm_ax1_sheet_6
 banim_grkm_ax1_sheet_6:
-	.incbin "baserom.gba", 0xCEEB94, 0xE44
+	.incbin "graphics/banim/banim_grkm_ax1_sheet_6.4bpp.lz"
 	.global banim_grkm_ax1_sheet_7
 banim_grkm_ax1_sheet_7:
-	.incbin "baserom.gba", 0xCEF9D8, 0xCD4
+	.incbin "graphics/banim/banim_grkm_ax1_sheet_7.4bpp.lz"
 	.global banim_grkm_ax1_2_sheet_2
 banim_grkm_ax1_2_sheet_2:
-	.incbin "baserom.gba", 0xCF06AC, 0xB40
+	.incbin "graphics/banim/banim_grkm_ax1_2_sheet_2.4bpp.lz"
 	.global banim_grkm_ax1_sheet_10
 banim_grkm_ax1_sheet_10:
-	.incbin "baserom.gba", 0xCF11EC, 0xB48
+	.incbin "graphics/banim/banim_grkm_ax1_sheet_10.4bpp.lz"
 	.global banim_grkm_ax1_agbpal
 banim_grkm_ax1_agbpal:
-	.incbin "baserom.gba", 0xCF1D34, 0x38
+	.incbin "graphics/banim/banim_grkm_ax1.agbpal.lz"
 	.global banim_grkm_ax1_oam_l_bin
 banim_grkm_ax1_oam_l_bin:
 	.incbin "baserom.gba", 0xCF1D6C, 0xBE8
@@ -1762,7 +1762,7 @@ banim_grkm_ax1_modes_bin:
 	.incbin "baserom.gba", 0xCF38D8, 0x60
 	.global banim_grkm_ax1_2_agbpal
 banim_grkm_ax1_2_agbpal:
-	.incbin "baserom.gba", 0xCF3938, 0x38
+	.incbin "graphics/banim/banim_grkm_ax1_2.agbpal.lz"
 	.global banim_grkm_ax1_2_oam_l_bin
 banim_grkm_ax1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xCF3970, 0xC04
@@ -1777,7 +1777,7 @@ banim_grkm_ax1_2_modes_bin:
 	.incbin "baserom.gba", 0xCF5314, 0x60
 	.global banim_grkm_sw1_2_agbpal
 banim_grkm_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xCF5374, 0x38
+	.incbin "graphics/banim/banim_grkm_sw1_2.agbpal.lz"
 	.global banim_grkm_sw1_2_oam_l_bin
 banim_grkm_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xCF53AC, 0xC8
@@ -1792,7 +1792,7 @@ banim_grkm_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xCF55D0, 0x60
 	.global banim_grkm_sw1_3_agbpal
 banim_grkm_sw1_3_agbpal:
-	.incbin "baserom.gba", 0xCF5630, 0x38
+	.incbin "graphics/banim/banim_grkm_sw1_3.agbpal.lz"
 	.global banim_grkm_sw1_3_oam_l_bin
 banim_grkm_sw1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xCF5668, 0xA88
@@ -1807,7 +1807,7 @@ banim_grkm_sw1_3_modes_bin:
 	.incbin "baserom.gba", 0xCF6F68, 0x60
 	.global banim_grkm_sp1_2_agbpal
 banim_grkm_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xCF6FC8, 0x38
+	.incbin "graphics/banim/banim_grkm_sp1_2.agbpal.lz"
 	.global banim_grkm_sp1_2_oam_l_bin
 banim_grkm_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xCF7000, 0xD14
@@ -1822,7 +1822,7 @@ banim_grkm_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xCF8E60, 0x60
 	.global banim_grkm_ax1_3_agbpal
 banim_grkm_ax1_3_agbpal:
-	.incbin "baserom.gba", 0xCF8EC0, 0x38
+	.incbin "graphics/banim/banim_grkm_ax1_3.agbpal.lz"
 	.global banim_grkm_ax1_3_oam_l_bin
 banim_grkm_ax1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xCF8EF8, 0xBE8
@@ -1837,7 +1837,7 @@ banim_grkm_ax1_3_modes_bin:
 	.incbin "baserom.gba", 0xCFAA64, 0x60
 	.global banim_grkm_ax1_4_agbpal
 banim_grkm_ax1_4_agbpal:
-	.incbin "baserom.gba", 0xCFAAC4, 0x38
+	.incbin "graphics/banim/banim_grkm_ax1_4.agbpal.lz"
 	.global banim_grkm_ax1_4_oam_l_bin
 banim_grkm_ax1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xCFAAFC, 0xC04
@@ -1852,7 +1852,7 @@ banim_grkm_ax1_4_modes_bin:
 	.incbin "baserom.gba", 0xCFC4A0, 0x60
 	.global banim_grkm_sw1_4_agbpal
 banim_grkm_sw1_4_agbpal:
-	.incbin "baserom.gba", 0xCFC500, 0x38
+	.incbin "graphics/banim/banim_grkm_sw1_4.agbpal.lz"
 	.global banim_grkm_sw1_4_oam_l_bin
 banim_grkm_sw1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xCFC538, 0xC8
@@ -1867,25 +1867,25 @@ banim_grkm_sw1_4_modes_bin:
 	.incbin "baserom.gba", 0xCFC75C, 0x60
 	.global banim_drkm_sp1_sheet_0
 banim_drkm_sp1_sheet_0:
-	.incbin "baserom.gba", 0xCFC7BC, 0x1274
+	.incbin "graphics/banim/banim_drkm_sp1_sheet_0.4bpp.lz"
 	.global banim_drkm_sp1_sheet_1
 banim_drkm_sp1_sheet_1:
-	.incbin "baserom.gba", 0xCFDA30, 0x11AC
+	.incbin "graphics/banim/banim_drkm_sp1_sheet_1.4bpp.lz"
 	.global banim_drkm_sp1_sheet_2
 banim_drkm_sp1_sheet_2:
-	.incbin "baserom.gba", 0xCFEBDC, 0x1010
+	.incbin "graphics/banim/banim_drkm_sp1_sheet_2.4bpp.lz"
 	.global banim_drkm_sp1_sheet_3
 banim_drkm_sp1_sheet_3:
-	.incbin "baserom.gba", 0xCFFBEC, 0x1398
+	.incbin "graphics/banim/banim_drkm_sp1_sheet_3.4bpp.lz"
 	.global banim_drkm_sp1_sheet_4
 banim_drkm_sp1_sheet_4:
-	.incbin "baserom.gba", 0xD00F84, 0x1050
+	.incbin "graphics/banim/banim_drkm_sp1_sheet_4.4bpp.lz"
 	.global banim_drkm_sp1_sheet_5
 banim_drkm_sp1_sheet_5:
-	.incbin "baserom.gba", 0xD01FD4, 0x730
+	.incbin "graphics/banim/banim_drkm_sp1_sheet_5.4bpp.lz"
 	.global banim_drkm_sp1_agbpal
 banim_drkm_sp1_agbpal:
-	.incbin "baserom.gba", 0xD02704, 0x74
+	.incbin "graphics/banim/banim_drkm_sp1.agbpal.lz"
 	.global banim_drkm_sp1_oam_l_bin
 banim_drkm_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xD02778, 0x1424
@@ -1900,7 +1900,7 @@ banim_drkm_sp1_modes_bin:
 	.incbin "baserom.gba", 0xD052A8, 0x60
 	.global banim_drkm_sp1_2_agbpal
 banim_drkm_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xD05308, 0x74
+	.incbin "graphics/banim/banim_drkm_sp1_2.agbpal.lz"
 	.global banim_drkm_sp1_2_oam_l_bin
 banim_drkm_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD0537C, 0x1F0
@@ -1915,7 +1915,7 @@ banim_drkm_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xD057FC, 0x60
 	.global banim_drkm_sp1_3_agbpal
 banim_drkm_sp1_3_agbpal:
-	.incbin "baserom.gba", 0xD0585C, 0x68
+	.incbin "graphics/banim/banim_drkm_sp1_3.agbpal.lz"
 	.global banim_drkm_sp1_3_oam_l_bin
 banim_drkm_sp1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xD058C4, 0x1424
@@ -1930,7 +1930,7 @@ banim_drkm_sp1_3_modes_bin:
 	.incbin "baserom.gba", 0xD083F4, 0x60
 	.global banim_drkm_sp1_4_agbpal
 banim_drkm_sp1_4_agbpal:
-	.incbin "baserom.gba", 0xD08454, 0x68
+	.incbin "graphics/banim/banim_drkm_sp1_4.agbpal.lz"
 	.global banim_drkm_sp1_4_oam_l_bin
 banim_drkm_sp1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xD084BC, 0x1F0
@@ -1945,40 +1945,40 @@ banim_drkm_sp1_4_modes_bin:
 	.incbin "baserom.gba", 0xD0893C, 0x60
 	.global banim_drmm_sp1_sheet_0
 banim_drmm_sp1_sheet_0:
-	.incbin "baserom.gba", 0xD0899C, 0x1038
+	.incbin "graphics/banim/banim_drmm_sp1_sheet_0.4bpp.lz"
 	.global banim_drmm_sp1_sheet_1
 banim_drmm_sp1_sheet_1:
-	.incbin "baserom.gba", 0xD099D4, 0x118C
+	.incbin "graphics/banim/banim_drmm_sp1_sheet_1.4bpp.lz"
 	.global banim_drmm_sp1_sheet_2
 banim_drmm_sp1_sheet_2:
-	.incbin "baserom.gba", 0xD0AB60, 0xCE0
+	.incbin "graphics/banim/banim_drmm_sp1_sheet_2.4bpp.lz"
 	.global banim_drmm_sp1_sheet_3
 banim_drmm_sp1_sheet_3:
-	.incbin "baserom.gba", 0xD0B840, 0x1370
+	.incbin "graphics/banim/banim_drmm_sp1_sheet_3.4bpp.lz"
 	.global banim_drmm_sp1_sheet_4
 banim_drmm_sp1_sheet_4:
-	.incbin "baserom.gba", 0xD0CBB0, 0x104C
+	.incbin "graphics/banim/banim_drmm_sp1_sheet_4.4bpp.lz"
 	.global banim_drmm_sp1_sheet_5
 banim_drmm_sp1_sheet_5:
-	.incbin "baserom.gba", 0xD0DBFC, 0xE70
+	.incbin "graphics/banim/banim_drmm_sp1_sheet_5.4bpp.lz"
 	.global banim_drmm_sp1_sheet_6
 banim_drmm_sp1_sheet_6:
-	.incbin "baserom.gba", 0xD0EA6C, 0x124C
+	.incbin "graphics/banim/banim_drmm_sp1_sheet_6.4bpp.lz"
 	.global banim_drmm_sp1_sheet_7
 banim_drmm_sp1_sheet_7:
-	.incbin "baserom.gba", 0xD0FCB8, 0x1310
+	.incbin "graphics/banim/banim_drmm_sp1_sheet_7.4bpp.lz"
 	.global banim_drmm_sp1_3_sheet_0
 banim_drmm_sp1_3_sheet_0:
-	.incbin "baserom.gba", 0xD10FC8, 0xD90
+	.incbin "graphics/banim/banim_drmm_sp1_3_sheet_0.4bpp.lz"
 	.global banim_drmm_sp1_sheet_8
 banim_drmm_sp1_sheet_8:
-	.incbin "baserom.gba", 0xD11D58, 0xF80
+	.incbin "graphics/banim/banim_drmm_sp1_sheet_8.4bpp.lz"
 	.global banim_drmm_sp1_sheet_9
 banim_drmm_sp1_sheet_9:
-	.incbin "baserom.gba", 0xD12CD8, 0xA14
+	.incbin "graphics/banim/banim_drmm_sp1_sheet_9.4bpp.lz"
 	.global banim_drmm_sp1_agbpal
 banim_drmm_sp1_agbpal:
-	.incbin "baserom.gba", 0xD136EC, 0x6C
+	.incbin "graphics/banim/banim_drmm_sp1.agbpal.lz"
 	.global banim_drmm_sp1_oam_l_bin
 banim_drmm_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xD13758, 0x1B6C
@@ -1993,7 +1993,7 @@ banim_drmm_sp1_modes_bin:
 	.incbin "baserom.gba", 0xD171F4, 0x60
 	.global banim_drmm_sp1_2_agbpal
 banim_drmm_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xD17254, 0x6C
+	.incbin "graphics/banim/banim_drmm_sp1_2.agbpal.lz"
 	.global banim_drmm_sp1_2_oam_l_bin
 banim_drmm_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD172C0, 0x18F8
@@ -2008,7 +2008,7 @@ banim_drmm_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xD1A880, 0x60
 	.global banim_drmm_sp1_3_agbpal
 banim_drmm_sp1_3_agbpal:
-	.incbin "baserom.gba", 0xD1A8E0, 0x6C
+	.incbin "graphics/banim/banim_drmm_sp1_3.agbpal.lz"
 	.global banim_drmm_sp1_3_oam_l_bin
 banim_drmm_sp1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xD1A94C, 0x1F4
@@ -2023,7 +2023,7 @@ banim_drmm_sp1_3_modes_bin:
 	.incbin "baserom.gba", 0xD1ADB4, 0x60
 	.global banim_drmm_sp1_4_agbpal
 banim_drmm_sp1_4_agbpal:
-	.incbin "baserom.gba", 0xD1AE14, 0x6C
+	.incbin "graphics/banim/banim_drmm_sp1_4.agbpal.lz"
 	.global banim_drmm_sp1_4_oam_l_bin
 banim_drmm_sp1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xD1AE80, 0x1B6C
@@ -2038,7 +2038,7 @@ banim_drmm_sp1_4_modes_bin:
 	.incbin "baserom.gba", 0xD1E91C, 0x60
 	.global banim_drmm_sp1_5_agbpal
 banim_drmm_sp1_5_agbpal:
-	.incbin "baserom.gba", 0xD1E97C, 0x6C
+	.incbin "graphics/banim/banim_drmm_sp1_5.agbpal.lz"
 	.global banim_drmm_sp1_5_oam_l_bin
 banim_drmm_sp1_5_oam_l_bin:
 	.incbin "baserom.gba", 0xD1E9E8, 0x18F8
@@ -2053,7 +2053,7 @@ banim_drmm_sp1_5_modes_bin:
 	.incbin "baserom.gba", 0xD21FA8, 0x60
 	.global banim_drmm_sp1_6_agbpal
 banim_drmm_sp1_6_agbpal:
-	.incbin "baserom.gba", 0xD22008, 0x6C
+	.incbin "graphics/banim/banim_drmm_sp1_6.agbpal.lz"
 	.global banim_drmm_sp1_6_oam_l_bin
 banim_drmm_sp1_6_oam_l_bin:
 	.incbin "baserom.gba", 0xD22074, 0x1F4
@@ -2068,52 +2068,52 @@ banim_drmm_sp1_6_modes_bin:
 	.incbin "baserom.gba", 0xD224DC, 0x60
 	.global banim_wykm_sp1_sheet_0
 banim_wykm_sp1_sheet_0:
-	.incbin "baserom.gba", 0xD2253C, 0xDC4
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_0.4bpp.lz"
 	.global banim_wykm_sp1_sheet_1
 banim_wykm_sp1_sheet_1:
-	.incbin "baserom.gba", 0xD23300, 0xF58
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_1.4bpp.lz"
 	.global banim_wykm_sp1_sheet_2
 banim_wykm_sp1_sheet_2:
-	.incbin "baserom.gba", 0xD24258, 0xE28
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_2.4bpp.lz"
 	.global banim_wykm_sp1_sheet_3
 banim_wykm_sp1_sheet_3:
-	.incbin "baserom.gba", 0xD25080, 0xC70
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_3.4bpp.lz"
 	.global banim_wykm_sp1_sheet_4
 banim_wykm_sp1_sheet_4:
-	.incbin "baserom.gba", 0xD25CF0, 0xBA4
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_4.4bpp.lz"
 	.global banim_wykm_sp1_sheet_7
 banim_wykm_sp1_sheet_7:
-	.incbin "baserom.gba", 0xD26894, 0xC84
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_7.4bpp.lz"
 	.global banim_wykm_sp1_sheet_8
 banim_wykm_sp1_sheet_8:
-	.incbin "baserom.gba", 0xD27518, 0xD8C
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_8.4bpp.lz"
 	.global banim_wykm_sp1_sheet_9
 banim_wykm_sp1_sheet_9:
-	.incbin "baserom.gba", 0xD282A4, 0xE48
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_9.4bpp.lz"
 	.global banim_wykm_sp1_sheet_10
 banim_wykm_sp1_sheet_10:
-	.incbin "baserom.gba", 0xD290EC, 0xD04
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_10.4bpp.lz"
 	.global banim_wykm_sp1_sheet_11
 banim_wykm_sp1_sheet_11:
-	.incbin "baserom.gba", 0xD29DF0, 0xE18
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_11.4bpp.lz"
 	.global banim_wykm_sp1_sheet_12
 banim_wykm_sp1_sheet_12:
-	.incbin "baserom.gba", 0xD2AC08, 0x9E8
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_12.4bpp.lz"
 	.global banim_wykm_sp1_sheet_blank
 banim_wykm_sp1_sheet_blank:
-	.incbin "baserom.gba", 0xD2B5F0, 0x3D0
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_blank.4bpp.lz"
 	.global banim_wykm_sp1_sheet_6
 banim_wykm_sp1_sheet_6:
-	.incbin "baserom.gba", 0xD2B9C0, 0xB08
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_6.4bpp.lz"
 	.global banim_wykm_sp1_sheet_5
 banim_wykm_sp1_sheet_5:
-	.incbin "baserom.gba", 0xD2C4C8, 0xBB8
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_5.4bpp.lz"
 	.global banim_wykm_sp1_sheet_blank_2
 banim_wykm_sp1_sheet_blank_2:
-	.incbin "baserom.gba", 0xD2D080, 0x3D0
+	.incbin "graphics/banim/banim_wykm_sp1_sheet_blank_2.4bpp.lz"
 	.global banim_wykm_sp1_agbpal
 banim_wykm_sp1_agbpal:
-	.incbin "baserom.gba", 0xD2D450, 0x54
+	.incbin "graphics/banim/banim_wykm_sp1.agbpal.lz"
 	.global banim_wykm_sp1_oam_l_bin
 banim_wykm_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xD2D4A4, 0xD2C
@@ -2128,7 +2128,7 @@ banim_wykm_sp1_modes_bin:
 	.incbin "baserom.gba", 0xD2F248, 0x60
 	.global banim_wykm_sp1_2_agbpal
 banim_wykm_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xD2F2A8, 0x54
+	.incbin "graphics/banim/banim_wykm_sp1_2.agbpal.lz"
 	.global banim_wykm_sp1_2_oam_l_bin
 banim_wykm_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD2F2FC, 0x1C8
@@ -2143,7 +2143,7 @@ banim_wykm_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xD2F70C, 0x60
 	.global banim_wykm_sp1_3_agbpal
 banim_wykm_sp1_3_agbpal:
-	.incbin "baserom.gba", 0xD2F76C, 0x54
+	.incbin "graphics/banim/banim_wykm_sp1_3.agbpal.lz"
 	.global banim_wykm_sp1_3_oam_l_bin
 banim_wykm_sp1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xD2F7C0, 0xD2C
@@ -2158,7 +2158,7 @@ banim_wykm_sp1_3_modes_bin:
 	.incbin "baserom.gba", 0xD31564, 0x60
 	.global banim_wykm_sp1_4_agbpal
 banim_wykm_sp1_4_agbpal:
-	.incbin "baserom.gba", 0xD315C4, 0x54
+	.incbin "graphics/banim/banim_wykm_sp1_4.agbpal.lz"
 	.global banim_wykm_sp1_4_oam_l_bin
 banim_wykm_sp1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xD31618, 0x1C8
@@ -2173,31 +2173,31 @@ banim_wykm_sp1_4_modes_bin:
 	.incbin "baserom.gba", 0xD31A28, 0x60
 	.global banim_pekf_sp1_sheet_0
 banim_pekf_sp1_sheet_0:
-	.incbin "baserom.gba", 0xD31A88, 0x12E8
+	.incbin "graphics/banim/banim_pekf_sp1_sheet_0.4bpp.lz"
 	.global banim_pekf_sp1_sheet_1
 banim_pekf_sp1_sheet_1:
-	.incbin "baserom.gba", 0xD32D70, 0x10A0
+	.incbin "graphics/banim/banim_pekf_sp1_sheet_1.4bpp.lz"
 	.global banim_pekf_sp1_sheet_2
 banim_pekf_sp1_sheet_2:
-	.incbin "baserom.gba", 0xD33E10, 0x101C
+	.incbin "graphics/banim/banim_pekf_sp1_sheet_2.4bpp.lz"
 	.global banim_pekf_sp1_sheet_3
 banim_pekf_sp1_sheet_3:
-	.incbin "baserom.gba", 0xD34E2C, 0x12BC
+	.incbin "graphics/banim/banim_pekf_sp1_sheet_3.4bpp.lz"
 	.global banim_pekf_sp1_sheet_4
 banim_pekf_sp1_sheet_4:
-	.incbin "baserom.gba", 0xD360E8, 0x10C8
+	.incbin "graphics/banim/banim_pekf_sp1_sheet_4.4bpp.lz"
 	.global banim_pekf_sp1_sheet_5
 banim_pekf_sp1_sheet_5:
-	.incbin "baserom.gba", 0xD371B0, 0xB78
+	.incbin "graphics/banim/banim_pekf_sp1_sheet_5.4bpp.lz"
 	.global banim_pekf_sp1_sheet_6
 banim_pekf_sp1_sheet_6:
-	.incbin "baserom.gba", 0xD37D28, 0x3D0
+	.incbin "graphics/banim/banim_pekf_sp1_sheet_6.4bpp.lz"
 	.global banim_pekf_sp1_sheet_7
 banim_pekf_sp1_sheet_7:
-	.incbin "baserom.gba", 0xD380F8, 0x3D0
+	.incbin "graphics/banim/banim_pekf_sp1_sheet_7.4bpp.lz"
 	.global banim_pekf_sp1_agbpal
 banim_pekf_sp1_agbpal:
-	.incbin "baserom.gba", 0xD384C8, 0x64
+	.incbin "graphics/banim/banim_pekf_sp1.agbpal.lz"
 	.global banim_pekf_sp1_oam_l_bin
 banim_pekf_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xD3852C, 0x123C
@@ -2212,7 +2212,7 @@ banim_pekf_sp1_modes_bin:
 	.incbin "baserom.gba", 0xD3ACF8, 0x60
 	.global banim_pekf_sp1_2_agbpal
 banim_pekf_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xD3AD58, 0x64
+	.incbin "graphics/banim/banim_pekf_sp1_2.agbpal.lz"
 	.global banim_pekf_sp1_2_oam_l_bin
 banim_pekf_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD3ADBC, 0x1DC
@@ -2227,31 +2227,31 @@ banim_pekf_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xD3B1F8, 0x60
 	.global banim_fakf_sp1_sheet_0
 banim_fakf_sp1_sheet_0:
-	.incbin "baserom.gba", 0xD3B258, 0x10A8
+	.incbin "graphics/banim/banim_fakf_sp1_sheet_0.4bpp.lz"
 	.global banim_fakf_sp1_sheet_1
 banim_fakf_sp1_sheet_1:
-	.incbin "baserom.gba", 0xD3C300, 0x12DC
+	.incbin "graphics/banim/banim_fakf_sp1_sheet_1.4bpp.lz"
 	.global banim_fakf_sp1_sheet_2
 banim_fakf_sp1_sheet_2:
-	.incbin "baserom.gba", 0xD3D5DC, 0xE9C
+	.incbin "graphics/banim/banim_fakf_sp1_sheet_2.4bpp.lz"
 	.global banim_fakf_sp1_sheet_3
 banim_fakf_sp1_sheet_3:
-	.incbin "baserom.gba", 0xD3E478, 0x136C
+	.incbin "graphics/banim/banim_fakf_sp1_sheet_3.4bpp.lz"
 	.global banim_fakf_sp1_sheet_4
 banim_fakf_sp1_sheet_4:
-	.incbin "baserom.gba", 0xD3F7E4, 0xFAC
+	.incbin "graphics/banim/banim_fakf_sp1_sheet_4.4bpp.lz"
 	.global banim_fakf_sp1_sheet_5
 banim_fakf_sp1_sheet_5:
-	.incbin "baserom.gba", 0xD40790, 0xFE8
+	.incbin "graphics/banim/banim_fakf_sp1_sheet_5.4bpp.lz"
 	.global banim_fakf_sp1_sheet_6
 banim_fakf_sp1_sheet_6:
-	.incbin "baserom.gba", 0xD41778, 0x12DC
+	.incbin "graphics/banim/banim_fakf_sp1_sheet_6.4bpp.lz"
 	.global banim_fakf_sp1_sheet_7
 banim_fakf_sp1_sheet_7:
-	.incbin "baserom.gba", 0xD42A54, 0x11BC
+	.incbin "graphics/banim/banim_fakf_sp1_sheet_7.4bpp.lz"
 	.global banim_fakf_sp1_agbpal
 banim_fakf_sp1_agbpal:
-	.incbin "baserom.gba", 0xD43C10, 0x64
+	.incbin "graphics/banim/banim_fakf_sp1.agbpal.lz"
 	.global banim_fakf_sp1_oam_l_bin
 banim_fakf_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xD43C74, 0x178C
@@ -2266,7 +2266,7 @@ banim_fakf_sp1_modes_bin:
 	.incbin "baserom.gba", 0xD46FDC, 0x60
 	.global banim_fakf_sp1_2_agbpal
 banim_fakf_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xD4703C, 0x64
+	.incbin "graphics/banim/banim_fakf_sp1_2.agbpal.lz"
 	.global banim_fakf_sp1_2_oam_l_bin
 banim_fakf_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD470A0, 0x1988
@@ -2281,7 +2281,7 @@ banim_fakf_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xD4A828, 0x60
 	.global banim_fakf_sp1_3_agbpal
 banim_fakf_sp1_3_agbpal:
-	.incbin "baserom.gba", 0xD4A888, 0x64
+	.incbin "graphics/banim/banim_fakf_sp1_3.agbpal.lz"
 	.global banim_fakf_sp1_3_oam_l_bin
 banim_fakf_sp1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xD4A8EC, 0x1BC
@@ -2296,16 +2296,16 @@ banim_fakf_sp1_3_modes_bin:
 	.incbin "baserom.gba", 0xD4ACE8, 0x60
 	.global banim_magm_mg1_sheet_0
 banim_magm_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD4AD48, 0xD3C
+	.incbin "graphics/banim/banim_magm_mg1_sheet_0.4bpp.lz"
 	.global banim_magm_mg1_sheet_1
 banim_magm_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD4BA84, 0xC28
+	.incbin "graphics/banim/banim_magm_mg1_sheet_1.4bpp.lz"
 	.global banim_magm_mg1_sheet_2
 banim_magm_mg1_sheet_2:
-	.incbin "baserom.gba", 0xD4C6AC, 0xC10
+	.incbin "graphics/banim/banim_magm_mg1_sheet_2.4bpp.lz"
 	.global banim_magm_mg1_agbpal
 banim_magm_mg1_agbpal:
-	.incbin "baserom.gba", 0xD4D2BC, 0x70
+	.incbin "graphics/banim/banim_magm_mg1.agbpal.lz"
 	.global banim_magm_mg1_oam_l_bin
 banim_magm_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD4D32C, 0x2AC
@@ -2320,16 +2320,16 @@ banim_magm_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD4DB2C, 0x60
 	.global banim_magf_mg1_sheet_0
 banim_magf_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD4DB8C, 0xCC4
+	.incbin "graphics/banim/banim_magf_mg1_sheet_0.4bpp.lz"
 	.global banim_magf_mg1_sheet_1
 banim_magf_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD4E850, 0xBA0
+	.incbin "graphics/banim/banim_magf_mg1_sheet_1.4bpp.lz"
 	.global banim_magf_mg1_sheet_2
 banim_magf_mg1_sheet_2:
-	.incbin "baserom.gba", 0xD4F3F0, 0xB70
+	.incbin "graphics/banim/banim_magf_mg1_sheet_2.4bpp.lz"
 	.global banim_magf_mg1_agbpal
 banim_magf_mg1_agbpal:
-	.incbin "baserom.gba", 0xD4FF60, 0x70
+	.incbin "graphics/banim/banim_magf_mg1.agbpal.lz"
 	.global banim_magf_mg1_oam_l_bin
 banim_magf_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD4FFD0, 0x2AC
@@ -2344,19 +2344,19 @@ banim_magf_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD507D0, 0x60
 	.global banim_sagm_mg1_sheet_0
 banim_sagm_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD50830, 0xE68
+	.incbin "graphics/banim/banim_sagm_mg1_sheet_0.4bpp.lz"
 	.global banim_sagm_mg1_sheet_1
 banim_sagm_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD51698, 0xAE4
+	.incbin "graphics/banim/banim_sagm_mg1_sheet_1.4bpp.lz"
 	.global banim_sagm_mg1_sheet_3
 banim_sagm_mg1_sheet_3:
-	.incbin "baserom.gba", 0xD5217C, 0xF74
+	.incbin "graphics/banim/banim_sagm_mg1_sheet_3.4bpp.lz"
 	.global banim_sagm_mg1_sheet_2
 banim_sagm_mg1_sheet_2:
-	.incbin "baserom.gba", 0xD530F0, 0xBD4
+	.incbin "graphics/banim/banim_sagm_mg1_sheet_2.4bpp.lz"
 	.global banim_sagm_mg1_agbpal
 banim_sagm_mg1_agbpal:
-	.incbin "baserom.gba", 0xD53CC4, 0x78
+	.incbin "graphics/banim/banim_sagm_mg1.agbpal.lz"
 	.global banim_sagm_mg1_oam_l_bin
 banim_sagm_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD53D3C, 0x5C8
@@ -2371,7 +2371,7 @@ banim_sagm_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD54BF8, 0x60
 	.global banim_sagm_mg1_2_agbpal
 banim_sagm_mg1_2_agbpal:
-	.incbin "baserom.gba", 0xD54C58, 0x78
+	.incbin "graphics/banim/banim_sagm_mg1_2.agbpal.lz"
 	.global banim_sagm_mg1_2_oam_l_bin
 banim_sagm_mg1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD54CD0, 0x160
@@ -2386,19 +2386,19 @@ banim_sagm_mg1_2_modes_bin:
 	.incbin "baserom.gba", 0xD55050, 0x60
 	.global banim_sagf_mg1_sheet_0
 banim_sagf_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD550B0, 0xF34
+	.incbin "graphics/banim/banim_sagf_mg1_sheet_0.4bpp.lz"
 	.global banim_sagf_mg1_sheet_1
 banim_sagf_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD55FE4, 0xE80
+	.incbin "graphics/banim/banim_sagf_mg1_sheet_1.4bpp.lz"
 	.global banim_sagf_mg1_sheet_3
 banim_sagf_mg1_sheet_3:
-	.incbin "baserom.gba", 0xD56E64, 0x11D0
+	.incbin "graphics/banim/banim_sagf_mg1_sheet_3.4bpp.lz"
 	.global banim_sagf_mg1_sheet_2
 banim_sagf_mg1_sheet_2:
-	.incbin "baserom.gba", 0xD58034, 0xF68
+	.incbin "graphics/banim/banim_sagf_mg1_sheet_2.4bpp.lz"
 	.global banim_sagf_mg1_agbpal
 banim_sagf_mg1_agbpal:
-	.incbin "baserom.gba", 0xD58F9C, 0x74
+	.incbin "graphics/banim/banim_sagf_mg1.agbpal.lz"
 	.global banim_sagf_mg1_oam_l_bin
 banim_sagf_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD59010, 0x5C8
@@ -2413,7 +2413,7 @@ banim_sagf_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD59ECC, 0x60
 	.global banim_sagf_mg1_2_agbpal
 banim_sagf_mg1_2_agbpal:
-	.incbin "baserom.gba", 0xD59F2C, 0x74
+	.incbin "graphics/banim/banim_sagf_mg1_2.agbpal.lz"
 	.global banim_sagf_mg1_2_oam_l_bin
 banim_sagf_mg1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD59FA0, 0x160
@@ -2428,19 +2428,19 @@ banim_sagf_mg1_2_modes_bin:
 	.incbin "baserom.gba", 0xD5A320, 0x60
 	.global banim_mgkm_mg1_2_sheet_0
 banim_mgkm_mg1_2_sheet_0:
-	.incbin "baserom.gba", 0xD5A380, 0xD38
+	.incbin "graphics/banim/banim_mgkm_mg1_2_sheet_0.4bpp.lz"
 	.global banim_mgkm_mg1_sheet_2
 banim_mgkm_mg1_sheet_2:
-	.incbin "baserom.gba", 0xD5B0B8, 0xF08
+	.incbin "graphics/banim/banim_mgkm_mg1_sheet_2.4bpp.lz"
 	.global banim_mgkm_mg1_sheet_0
 banim_mgkm_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD5BFC0, 0xDC4
+	.incbin "graphics/banim/banim_mgkm_mg1_sheet_0.4bpp.lz"
 	.global banim_mgkm_mg1_sheet_1
 banim_mgkm_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD5CD84, 0xE04
+	.incbin "graphics/banim/banim_mgkm_mg1_sheet_1.4bpp.lz"
 	.global banim_mgkm_mg1_agbpal
 banim_mgkm_mg1_agbpal:
-	.incbin "baserom.gba", 0xD5DB88, 0x5C
+	.incbin "graphics/banim/banim_mgkm_mg1.agbpal.lz"
 	.global banim_mgkm_mg1_oam_l_bin
 banim_mgkm_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD5DBE4, 0xDE8
@@ -2455,7 +2455,7 @@ banim_mgkm_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD5FC34, 0x60
 	.global banim_mgkm_mg1_2_agbpal
 banim_mgkm_mg1_2_agbpal:
-	.incbin "baserom.gba", 0xD5FC94, 0x5C
+	.incbin "graphics/banim/banim_mgkm_mg1_2.agbpal.lz"
 	.global banim_mgkm_mg1_2_oam_l_bin
 banim_mgkm_mg1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD5FCF0, 0x2C0
@@ -2470,19 +2470,19 @@ banim_mgkm_mg1_2_modes_bin:
 	.incbin "baserom.gba", 0xD603F8, 0x60
 	.global banim_mgkf_mg1_2_sheet_0
 banim_mgkf_mg1_2_sheet_0:
-	.incbin "baserom.gba", 0xD60458, 0xD38
+	.incbin "graphics/banim/banim_mgkf_mg1_2_sheet_0.4bpp.lz"
 	.global banim_mgkf_mg1_sheet_2
 banim_mgkf_mg1_sheet_2:
-	.incbin "baserom.gba", 0xD61190, 0xF18
+	.incbin "graphics/banim/banim_mgkf_mg1_sheet_2.4bpp.lz"
 	.global banim_mgkf_mg1_sheet_0
 banim_mgkf_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD620A8, 0xDC8
+	.incbin "graphics/banim/banim_mgkf_mg1_sheet_0.4bpp.lz"
 	.global banim_mgkf_mg1_sheet_1
 banim_mgkf_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD62E70, 0xE10
+	.incbin "graphics/banim/banim_mgkf_mg1_sheet_1.4bpp.lz"
 	.global banim_mgkf_mg1_agbpal
 banim_mgkf_mg1_agbpal:
-	.incbin "baserom.gba", 0xD63C80, 0x48
+	.incbin "graphics/banim/banim_mgkf_mg1.agbpal.lz"
 	.global banim_mgkf_mg1_oam_l_bin
 banim_mgkf_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD63CC8, 0xDE8
@@ -2497,7 +2497,7 @@ banim_mgkf_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD65D18, 0x60
 	.global banim_mgkf_mg1_2_agbpal
 banim_mgkf_mg1_2_agbpal:
-	.incbin "baserom.gba", 0xD65D78, 0x48
+	.incbin "graphics/banim/banim_mgkf_mg1_2.agbpal.lz"
 	.global banim_mgkf_mg1_2_oam_l_bin
 banim_mgkf_mg1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD65DC0, 0x2C0
@@ -2512,19 +2512,19 @@ banim_mgkf_mg1_2_modes_bin:
 	.incbin "baserom.gba", 0xD664C8, 0x60
 	.global banim_sham_mg1_sheet_0
 banim_sham_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD66528, 0xC2C
+	.incbin "graphics/banim/banim_sham_mg1_sheet_0.4bpp.lz"
 	.global banim_sham_mg1_sheet_1
 banim_sham_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD67154, 0xD98
+	.incbin "graphics/banim/banim_sham_mg1_sheet_1.4bpp.lz"
 	.global banim_sham_mg1_sheet_2
 banim_sham_mg1_sheet_2:
-	.incbin "baserom.gba", 0xD67EEC, 0xBA8
+	.incbin "graphics/banim/banim_sham_mg1_sheet_2.4bpp.lz"
 	.global banim_sham_mg1_sheet_3
 banim_sham_mg1_sheet_3:
-	.incbin "baserom.gba", 0xD68A94, 0xD00
+	.incbin "graphics/banim/banim_sham_mg1_sheet_3.4bpp.lz"
 	.global banim_sham_mg1_agbpal
 banim_sham_mg1_agbpal:
-	.incbin "baserom.gba", 0xD69794, 0x4C
+	.incbin "graphics/banim/banim_sham_mg1.agbpal.lz"
 	.global banim_sham_mg1_oam_l_bin
 banim_sham_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD697E0, 0x8F8
@@ -2539,19 +2539,19 @@ banim_sham_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD6AF20, 0x60
 	.global banim_shaf_mg1_sheet_0
 banim_shaf_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD6AF80, 0xAAC
+	.incbin "graphics/banim/banim_shaf_mg1_sheet_0.4bpp.lz"
 	.global banim_shaf_mg1_sheet_1
 banim_shaf_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD6BA2C, 0xCE4
+	.incbin "graphics/banim/banim_shaf_mg1_sheet_1.4bpp.lz"
 	.global banim_shaf_mg1_sheet_2
 banim_shaf_mg1_sheet_2:
-	.incbin "baserom.gba", 0xD6C710, 0xAF8
+	.incbin "graphics/banim/banim_shaf_mg1_sheet_2.4bpp.lz"
 	.global banim_shaf_mg1_sheet_3
 banim_shaf_mg1_sheet_3:
-	.incbin "baserom.gba", 0xD6D208, 0xC78
+	.incbin "graphics/banim/banim_shaf_mg1_sheet_3.4bpp.lz"
 	.global banim_shaf_mg1_agbpal
 banim_shaf_mg1_agbpal:
-	.incbin "baserom.gba", 0xD6DE80, 0x4C
+	.incbin "graphics/banim/banim_shaf_mg1.agbpal.lz"
 	.global banim_shaf_mg1_oam_l_bin
 banim_shaf_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD6DECC, 0x8F8
@@ -2566,19 +2566,19 @@ banim_shaf_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD6F60C, 0x60
 	.global banim_drum_mg1_sheet_0
 banim_drum_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD6F66C, 0xC10
+	.incbin "graphics/banim/banim_drum_mg1_sheet_0.4bpp.lz"
 	.global banim_drum_mg1_sheet_1
 banim_drum_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD7027C, 0xD30
+	.incbin "graphics/banim/banim_drum_mg1_sheet_1.4bpp.lz"
 	.global banim_drum_mg1_sheet_2
 banim_drum_mg1_sheet_2:
-	.incbin "baserom.gba", 0xD70FAC, 0xBBC
+	.incbin "graphics/banim/banim_drum_mg1_sheet_2.4bpp.lz"
 	.global banim_drum_mg1_sheet_3
 banim_drum_mg1_sheet_3:
-	.incbin "baserom.gba", 0xD71B68, 0xA78
+	.incbin "graphics/banim/banim_drum_mg1_sheet_3.4bpp.lz"
 	.global banim_drum_mg1_agbpal
 banim_drum_mg1_agbpal:
-	.incbin "baserom.gba", 0xD725E0, 0x4C
+	.incbin "graphics/banim/banim_drum_mg1.agbpal.lz"
 	.global banim_drum_mg1_oam_l_bin
 banim_drum_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD7262C, 0x51C
@@ -2593,7 +2593,7 @@ banim_drum_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD73300, 0x60
 	.global banim_drum_mg1_2_agbpal
 banim_drum_mg1_2_agbpal:
-	.incbin "baserom.gba", 0xD73360, 0x4C
+	.incbin "graphics/banim/banim_drum_mg1_2.agbpal.lz"
 	.global banim_drum_mg1_2_oam_l_bin
 banim_drum_mg1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD733AC, 0x2CC
@@ -2608,19 +2608,19 @@ banim_drum_mg1_2_modes_bin:
 	.incbin "baserom.gba", 0xD73AD0, 0x60
 	.global banim_druf_mg1_sheet_0
 banim_druf_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD73B30, 0xAA8
+	.incbin "graphics/banim/banim_druf_mg1_sheet_0.4bpp.lz"
 	.global banim_druf_mg1_sheet_1
 banim_druf_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD745D8, 0xC58
+	.incbin "graphics/banim/banim_druf_mg1_sheet_1.4bpp.lz"
 	.global banim_druf_mg1_sheet_2
 banim_druf_mg1_sheet_2:
-	.incbin "baserom.gba", 0xD75230, 0xAD8
+	.incbin "graphics/banim/banim_druf_mg1_sheet_2.4bpp.lz"
 	.global banim_druf_mg1_sheet_3
 banim_druf_mg1_sheet_3:
-	.incbin "baserom.gba", 0xD75D08, 0x948
+	.incbin "graphics/banim/banim_druf_mg1_sheet_3.4bpp.lz"
 	.global banim_druf_mg1_agbpal
 banim_druf_mg1_agbpal:
-	.incbin "baserom.gba", 0xD76650, 0x50
+	.incbin "graphics/banim/banim_druf_mg1.agbpal.lz"
 	.global banim_druf_mg1_oam_l_bin
 banim_druf_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD766A0, 0x51C
@@ -2635,7 +2635,7 @@ banim_druf_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD77374, 0x60
 	.global banim_druf_mg1_2_agbpal
 banim_druf_mg1_2_agbpal:
-	.incbin "baserom.gba", 0xD773D4, 0x50
+	.incbin "graphics/banim/banim_druf_mg1_2.agbpal.lz"
 	.global banim_druf_mg1_2_oam_l_bin
 banim_druf_mg1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD77424, 0x2CC
@@ -2650,19 +2650,19 @@ banim_druf_mg1_2_modes_bin:
 	.incbin "baserom.gba", 0xD77B48, 0x60
 	.global banim_smnm_ro1_sheet_0
 banim_smnm_ro1_sheet_0:
-	.incbin "baserom.gba", 0xD77BA8, 0xA84
+	.incbin "graphics/banim/banim_smnm_ro1_sheet_0.4bpp.lz"
 	.global banim_smnm_ro1_sheet_1
 banim_smnm_ro1_sheet_1:
-	.incbin "baserom.gba", 0xD7862C, 0xB7C
+	.incbin "graphics/banim/banim_smnm_ro1_sheet_1.4bpp.lz"
 	.global banim_smnm_ro1_sheet_2
 banim_smnm_ro1_sheet_2:
-	.incbin "baserom.gba", 0xD791A8, 0x958
+	.incbin "graphics/banim/banim_smnm_ro1_sheet_2.4bpp.lz"
 	.global banim_smnm_ro1_sheet_3
 banim_smnm_ro1_sheet_3:
-	.incbin "baserom.gba", 0xD79B00, 0xD38
+	.incbin "graphics/banim/banim_smnm_ro1_sheet_3.4bpp.lz"
 	.global banim_smnm_ro1_agbpal
 banim_smnm_ro1_agbpal:
-	.incbin "baserom.gba", 0xD7A838, 0x4C
+	.incbin "graphics/banim/banim_smnm_ro1.agbpal.lz"
 	.global banim_smnm_ro1_oam_l_bin
 banim_smnm_ro1_oam_l_bin:
 	.incbin "baserom.gba", 0xD7A884, 0x3FC
@@ -2677,7 +2677,7 @@ banim_smnm_ro1_modes_bin:
 	.incbin "baserom.gba", 0xD7B3EC, 0x60
 	.global banim_smnm_ro1_2_agbpal
 banim_smnm_ro1_2_agbpal:
-	.incbin "baserom.gba", 0xD7B44C, 0x4C
+	.incbin "graphics/banim/banim_smnm_ro1_2.agbpal.lz"
 	.global banim_smnm_ro1_2_oam_l_bin
 banim_smnm_ro1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD7B498, 0x4DC
@@ -2692,19 +2692,19 @@ banim_smnm_ro1_2_modes_bin:
 	.incbin "baserom.gba", 0xD7C078, 0x60
 	.global banim_monm_mg1_sheet_0
 banim_monm_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD7C0D8, 0x1024
+	.incbin "graphics/banim/banim_monm_mg1_sheet_0.4bpp.lz"
 	.global banim_monm_mg1_sheet_1
 banim_monm_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD7D0FC, 0xF84
+	.incbin "graphics/banim/banim_monm_mg1_sheet_1.4bpp.lz"
 	.global banim_monm_mg1_sheet_blank
 banim_monm_mg1_sheet_blank:
-	.incbin "baserom.gba", 0xD7E080, 0x3D0
+	.incbin "graphics/banim/banim_monm_mg1_sheet_blank.4bpp.lz"
 	.global banim_monm_mg1_sheet_blank_2
 banim_monm_mg1_sheet_blank_2:
-	.incbin "baserom.gba", 0xD7E450, 0x3D0
+	.incbin "graphics/banim/banim_monm_mg1_sheet_blank_2.4bpp.lz"
 	.global banim_monm_mg1_agbpal
 banim_monm_mg1_agbpal:
-	.incbin "baserom.gba", 0xD7E820, 0x68
+	.incbin "graphics/banim/banim_monm_mg1.agbpal.lz"
 	.global banim_monm_mg1_oam_l_bin
 banim_monm_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD7E888, 0x4B4
@@ -2719,10 +2719,10 @@ banim_monm_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD7F55C, 0x60
 	.global banim_prim_ro1_sheet_0
 banim_prim_ro1_sheet_0:
-	.incbin "baserom.gba", 0xD7F5BC, 0xAC8
+	.incbin "graphics/banim/banim_prim_ro1_sheet_0.4bpp.lz"
 	.global banim_prim_ro1_agbpal
 banim_prim_ro1_agbpal:
-	.incbin "baserom.gba", 0xD80084, 0x68
+	.incbin "graphics/banim/banim_prim_ro1.agbpal.lz"
 	.global banim_prim_ro1_oam_l_bin
 banim_prim_ro1_oam_l_bin:
 	.incbin "baserom.gba", 0xD800EC, 0x84
@@ -2737,7 +2737,7 @@ banim_prim_ro1_modes_bin:
 	.incbin "baserom.gba", 0xD80270, 0x58
 	.global banim_prim_ro1_2_agbpal
 banim_prim_ro1_2_agbpal:
-	.incbin "baserom.gba", 0xD802C8, 0x68
+	.incbin "graphics/banim/banim_prim_ro1_2.agbpal.lz"
 	.global banim_prim_ro1_2_oam_l_bin
 banim_prim_ro1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD80330, 0x160
@@ -2752,10 +2752,10 @@ banim_prim_ro1_2_modes_bin:
 	.incbin "baserom.gba", 0xD806D4, 0x60
 	.global banim_prif_ro1_sheet_0
 banim_prif_ro1_sheet_0:
-	.incbin "baserom.gba", 0xD80734, 0x9F0
+	.incbin "graphics/banim/banim_prif_ro1_sheet_0.4bpp.lz"
 	.global banim_prif_ro1_agbpal
 banim_prif_ro1_agbpal:
-	.incbin "baserom.gba", 0xD81124, 0x68
+	.incbin "graphics/banim/banim_prif_ro1.agbpal.lz"
 	.global banim_prif_ro1_oam_l_bin
 banim_prif_ro1_oam_l_bin:
 	.incbin "baserom.gba", 0xD8118C, 0x160
@@ -2770,16 +2770,16 @@ banim_prif_ro1_modes_bin:
 	.incbin "baserom.gba", 0xD81530, 0x60
 	.global banim_bism_mg1_sheet_0
 banim_bism_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD81590, 0x1030
+	.incbin "graphics/banim/banim_bism_mg1_sheet_0.4bpp.lz"
 	.global banim_bism_mg1_sheet_1
 banim_bism_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD825C0, 0x10D0
+	.incbin "graphics/banim/banim_bism_mg1_sheet_1.4bpp.lz"
 	.global banim_bism_mg1_sheet_2
 banim_bism_mg1_sheet_2:
-	.incbin "baserom.gba", 0xD83690, 0x9DC
+	.incbin "graphics/banim/banim_bism_mg1_sheet_2.4bpp.lz"
 	.global banim_bism_mg1_agbpal
 banim_bism_mg1_agbpal:
-	.incbin "baserom.gba", 0xD8406C, 0x70
+	.incbin "graphics/banim/banim_bism_mg1.agbpal.lz"
 	.global banim_bism_mg1_oam_l_bin
 banim_bism_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD840DC, 0xBC
@@ -2794,7 +2794,7 @@ banim_bism_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD842DC, 0x60
 	.global banim_bism_mg1_2_agbpal
 banim_bism_mg1_2_agbpal:
-	.incbin "baserom.gba", 0xD8433C, 0x70
+	.incbin "graphics/banim/banim_bism_mg1_2.agbpal.lz"
 	.global banim_bism_mg1_2_oam_l_bin
 banim_bism_mg1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD843AC, 0x330
@@ -2809,13 +2809,13 @@ banim_bism_mg1_2_modes_bin:
 	.incbin "baserom.gba", 0xD84C60, 0x60
 	.global banim_bisf_mg1_sheet_0
 banim_bisf_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD84CC0, 0x1070
+	.incbin "graphics/banim/banim_bisf_mg1_sheet_0.4bpp.lz"
 	.global banim_bisf_mg1_sheet_1
 banim_bisf_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD85D30, 0xB30
+	.incbin "graphics/banim/banim_bisf_mg1_sheet_1.4bpp.lz"
 	.global banim_bisf_mg1_agbpal
 banim_bisf_mg1_agbpal:
-	.incbin "baserom.gba", 0xD86860, 0x68
+	.incbin "graphics/banim/banim_bisf_mg1.agbpal.lz"
 	.global banim_bisf_mg1_oam_l_bin
 banim_bisf_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD868C8, 0x344
@@ -2830,7 +2830,7 @@ banim_bisf_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD871AC, 0x60
 	.global banim_bisf_mg1_2_agbpal
 banim_bisf_mg1_2_agbpal:
-	.incbin "baserom.gba", 0xD8720C, 0x68
+	.incbin "graphics/banim/banim_bisf_mg1_2.agbpal.lz"
 	.global banim_bisf_mg1_2_oam_l_bin
 banim_bisf_mg1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD87274, 0xFC
@@ -2845,16 +2845,16 @@ banim_bisf_mg1_2_modes_bin:
 	.incbin "baserom.gba", 0xD87514, 0x60
 	.global banim_trof_ro1_2_sheet_0
 banim_trof_ro1_2_sheet_0:
-	.incbin "baserom.gba", 0xD87574, 0xD38
+	.incbin "graphics/banim/banim_trof_ro1_2_sheet_0.4bpp.lz"
 	.global banim_trof_ro1_2_sheet_1
 banim_trof_ro1_2_sheet_1:
-	.incbin "baserom.gba", 0xD882AC, 0xDB8
+	.incbin "graphics/banim/banim_trof_ro1_2_sheet_1.4bpp.lz"
 	.global banim_trof_ro1_sheet_0
 banim_trof_ro1_sheet_0:
-	.incbin "baserom.gba", 0xD89064, 0xA78
+	.incbin "graphics/banim/banim_trof_ro1_sheet_0.4bpp.lz"
 	.global banim_trof_ro1_agbpal
 banim_trof_ro1_agbpal:
-	.incbin "baserom.gba", 0xD89ADC, 0x60
+	.incbin "graphics/banim/banim_trof_ro1.agbpal.lz"
 	.global banim_trof_ro1_oam_l_bin
 banim_trof_ro1_oam_l_bin:
 	.incbin "baserom.gba", 0xD89B3C, 0xC0
@@ -2869,7 +2869,7 @@ banim_trof_ro1_modes_bin:
 	.incbin "baserom.gba", 0xD89D38, 0x60
 	.global banim_trof_ro1_2_agbpal
 banim_trof_ro1_2_agbpal:
-	.incbin "baserom.gba", 0xD89D98, 0x60
+	.incbin "graphics/banim/banim_trof_ro1_2.agbpal.lz"
 	.global banim_trof_ro1_2_oam_l_bin
 banim_trof_ro1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD89DF8, 0x268
@@ -2884,19 +2884,19 @@ banim_trof_ro1_2_modes_bin:
 	.incbin "baserom.gba", 0xD8A42C, 0x60
 	.global banim_valf_mg1_sheet_2
 banim_valf_mg1_sheet_2:
-	.incbin "baserom.gba", 0xD8A48C, 0xD18
+	.incbin "graphics/banim/banim_valf_mg1_sheet_2.4bpp.lz"
 	.global banim_valf_mg1_2_sheet_0
 banim_valf_mg1_2_sheet_0:
-	.incbin "baserom.gba", 0xD8B1A4, 0xDE0
+	.incbin "graphics/banim/banim_valf_mg1_2_sheet_0.4bpp.lz"
 	.global banim_valf_mg1_sheet_0
 banim_valf_mg1_sheet_0:
-	.incbin "baserom.gba", 0xD8BF84, 0xBF0
+	.incbin "graphics/banim/banim_valf_mg1_sheet_0.4bpp.lz"
 	.global banim_valf_mg1_sheet_1
 banim_valf_mg1_sheet_1:
-	.incbin "baserom.gba", 0xD8CB74, 0xC54
+	.incbin "graphics/banim/banim_valf_mg1_sheet_1.4bpp.lz"
 	.global banim_valf_mg1_agbpal
 banim_valf_mg1_agbpal:
-	.incbin "baserom.gba", 0xD8D7C8, 0x6C
+	.incbin "graphics/banim/banim_valf_mg1.agbpal.lz"
 	.global banim_valf_mg1_oam_l_bin
 banim_valf_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xD8D834, 0x4FC
@@ -2911,7 +2911,7 @@ banim_valf_mg1_modes_bin:
 	.incbin "baserom.gba", 0xD8E4D0, 0x60
 	.global banim_valf_mg1_2_agbpal
 banim_valf_mg1_2_agbpal:
-	.incbin "baserom.gba", 0xD8E530, 0x6C
+	.incbin "graphics/banim/banim_valf_mg1_2.agbpal.lz"
 	.global banim_valf_mg1_2_oam_l_bin
 banim_valf_mg1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD8E59C, 0x280
@@ -2926,19 +2926,19 @@ banim_valf_mg1_2_modes_bin:
 	.incbin "baserom.gba", 0xD8EC04, 0x60
 	.global banim_thim_sw1_sheet_0
 banim_thim_sw1_sheet_0:
-	.incbin "baserom.gba", 0xD8EC64, 0xF34
+	.incbin "graphics/banim/banim_thim_sw1_sheet_0.4bpp.lz"
 	.global banim_thim_sw1_sheet_1
 banim_thim_sw1_sheet_1:
-	.incbin "baserom.gba", 0xD8FB98, 0xFA8
+	.incbin "graphics/banim/banim_thim_sw1_sheet_1.4bpp.lz"
 	.global banim_thim_sw1_sheet_2
 banim_thim_sw1_sheet_2:
-	.incbin "baserom.gba", 0xD90B40, 0x960
+	.incbin "graphics/banim/banim_thim_sw1_sheet_2.4bpp.lz"
 	.global banim_thim_sw1_sheet_blank
 banim_thim_sw1_sheet_blank:
-	.incbin "baserom.gba", 0xD914A0, 0x3D0
+	.incbin "graphics/banim/banim_thim_sw1_sheet_blank.4bpp.lz"
 	.global banim_thim_sw1_agbpal
 banim_thim_sw1_agbpal:
-	.incbin "baserom.gba", 0xD91870, 0x5C
+	.incbin "graphics/banim/banim_thim_sw1.agbpal.lz"
 	.global banim_thim_sw1_oam_l_bin
 banim_thim_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xD918CC, 0x474
@@ -2953,7 +2953,7 @@ banim_thim_sw1_modes_bin:
 	.incbin "baserom.gba", 0xD92470, 0x60
 	.global banim_thim_sw1_2_agbpal
 banim_thim_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xD924D0, 0x5C
+	.incbin "graphics/banim/banim_thim_sw1_2.agbpal.lz"
 	.global banim_thim_sw1_2_oam_l_bin
 banim_thim_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD9252C, 0xC0
@@ -2968,19 +2968,19 @@ banim_thim_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xD9273C, 0x60
 	.global banim_asnm_sw1_sheet_0
 banim_asnm_sw1_sheet_0:
-	.incbin "baserom.gba", 0xD9279C, 0x10B8
+	.incbin "graphics/banim/banim_asnm_sw1_sheet_0.4bpp.lz"
 	.global banim_asnm_sw1_sheet_2
 banim_asnm_sw1_sheet_2:
-	.incbin "baserom.gba", 0xD93854, 0xFA8
+	.incbin "graphics/banim/banim_asnm_sw1_sheet_2.4bpp.lz"
 	.global banim_asnm_sw1_sheet_3
 banim_asnm_sw1_sheet_3:
-	.incbin "baserom.gba", 0xD947FC, 0xF6C
+	.incbin "graphics/banim/banim_asnm_sw1_sheet_3.4bpp.lz"
 	.global banim_asnm_sw1_sheet_1
 banim_asnm_sw1_sheet_1:
-	.incbin "baserom.gba", 0xD95768, 0xDD8
+	.incbin "graphics/banim/banim_asnm_sw1_sheet_1.4bpp.lz"
 	.global banim_asnm_sw1_agbpal
 banim_asnm_sw1_agbpal:
-	.incbin "baserom.gba", 0xD96540, 0x58
+	.incbin "graphics/banim/banim_asnm_sw1.agbpal.lz"
 	.global banim_asnm_sw1_oam_l_bin
 banim_asnm_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xD96598, 0xB40
@@ -2995,7 +2995,7 @@ banim_asnm_sw1_modes_bin:
 	.incbin "baserom.gba", 0xD98108, 0x60
 	.global banim_asnm_sw1_2_agbpal
 banim_asnm_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xD98168, 0x58
+	.incbin "graphics/banim/banim_asnm_sw1_2.agbpal.lz"
 	.global banim_asnm_sw1_2_oam_l_bin
 banim_asnm_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD981C0, 0x9C
@@ -3010,7 +3010,7 @@ banim_asnm_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xD98384, 0x60
 	.global banim_asnm_sw1_3_agbpal
 banim_asnm_sw1_3_agbpal:
-	.incbin "baserom.gba", 0xD983E4, 0x58
+	.incbin "graphics/banim/banim_asnm_sw1_3.agbpal.lz"
 	.global banim_asnm_sw1_3_oam_l_bin
 banim_asnm_sw1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xD9843C, 0xB40
@@ -3025,7 +3025,7 @@ banim_asnm_sw1_3_modes_bin:
 	.incbin "baserom.gba", 0xD99FAC, 0x60
 	.global banim_asnm_sw1_4_agbpal
 banim_asnm_sw1_4_agbpal:
-	.incbin "baserom.gba", 0xD9A00C, 0x58
+	.incbin "graphics/banim/banim_asnm_sw1_4.agbpal.lz"
 	.global banim_asnm_sw1_4_oam_l_bin
 banim_asnm_sw1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xD9A064, 0x9C
@@ -3040,19 +3040,19 @@ banim_asnm_sw1_4_modes_bin:
 	.incbin "baserom.gba", 0xD9A228, 0x60
 	.global banim_rogm_sw1_sheet_0
 banim_rogm_sw1_sheet_0:
-	.incbin "baserom.gba", 0xD9A288, 0xDC8
+	.incbin "graphics/banim/banim_rogm_sw1_sheet_0.4bpp.lz"
 	.global banim_rogm_sw1_sheet_1
 banim_rogm_sw1_sheet_1:
-	.incbin "baserom.gba", 0xD9B050, 0xE04
+	.incbin "graphics/banim/banim_rogm_sw1_sheet_1.4bpp.lz"
 	.global banim_rogm_sw1_sheet_2
 banim_rogm_sw1_sheet_2:
-	.incbin "baserom.gba", 0xD9BE54, 0xAC4
+	.incbin "graphics/banim/banim_rogm_sw1_sheet_2.4bpp.lz"
 	.global banim_rogm_sw1_sheet_3
 banim_rogm_sw1_sheet_3:
-	.incbin "baserom.gba", 0xD9C918, 0x7C4
+	.incbin "graphics/banim/banim_rogm_sw1_sheet_3.4bpp.lz"
 	.global banim_rogm_sw1_agbpal
 banim_rogm_sw1_agbpal:
-	.incbin "baserom.gba", 0xD9D0DC, 0x4C
+	.incbin "graphics/banim/banim_rogm_sw1.agbpal.lz"
 	.global banim_rogm_sw1_oam_l_bin
 banim_rogm_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xD9D128, 0x3FC
@@ -3067,7 +3067,7 @@ banim_rogm_sw1_modes_bin:
 	.incbin "baserom.gba", 0xD9DCCC, 0x60
 	.global banim_rogm_sw1_2_agbpal
 banim_rogm_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xD9DD2C, 0x4C
+	.incbin "graphics/banim/banim_rogm_sw1_2.agbpal.lz"
 	.global banim_rogm_sw1_2_oam_l_bin
 banim_rogm_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xD9DD78, 0x80
@@ -3082,25 +3082,25 @@ banim_rogm_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xD9DEF8, 0x60
 	.global banim_danf_da1_sheet_0
 banim_danf_da1_sheet_0:
-	.incbin "baserom.gba", 0xD9DF58, 0x1088
+	.incbin "graphics/banim/banim_danf_da1_sheet_0.4bpp.lz"
 	.global banim_danf_da1_sheet_1
 banim_danf_da1_sheet_1:
-	.incbin "baserom.gba", 0xD9EFE0, 0xCD0
+	.incbin "graphics/banim/banim_danf_da1_sheet_1.4bpp.lz"
 	.global banim_danf_da1_sheet_2
 banim_danf_da1_sheet_2:
-	.incbin "baserom.gba", 0xD9FCB0, 0xD84
+	.incbin "graphics/banim/banim_danf_da1_sheet_2.4bpp.lz"
 	.global banim_danf_da1_sheet_3
 banim_danf_da1_sheet_3:
-	.incbin "baserom.gba", 0xDA0A34, 0xAD8
+	.incbin "graphics/banim/banim_danf_da1_sheet_3.4bpp.lz"
 	.global banim_danf_da1_sheet_4
 banim_danf_da1_sheet_4:
-	.incbin "baserom.gba", 0xDA150C, 0xE84
+	.incbin "graphics/banim/banim_danf_da1_sheet_4.4bpp.lz"
 	.global banim_danf_da1_sheet_5
 banim_danf_da1_sheet_5:
-	.incbin "baserom.gba", 0xDA2390, 0x660
+	.incbin "graphics/banim/banim_danf_da1_sheet_5.4bpp.lz"
 	.global banim_danf_da1_agbpal
 banim_danf_da1_agbpal:
-	.incbin "baserom.gba", 0xDA29F0, 0x4C
+	.incbin "graphics/banim/banim_danf_da1.agbpal.lz"
 	.global banim_danf_da1_oam_l_bin
 banim_danf_da1_oam_l_bin:
 	.incbin "baserom.gba", 0xDA2A3C, 0x37C
@@ -3115,19 +3115,19 @@ banim_danf_da1_modes_bin:
 	.incbin "baserom.gba", 0xDA3534, 0x60
 	.global banim_pbfm_ax1_sheet_0
 banim_pbfm_ax1_sheet_0:
-	.incbin "baserom.gba", 0xDA3594, 0xE6C
+	.incbin "graphics/banim/banim_pbfm_ax1_sheet_0.4bpp.lz"
 	.global banim_pbfm_ax1_sheet_2
 banim_pbfm_ax1_sheet_2:
-	.incbin "baserom.gba", 0xDA4400, 0xF98
+	.incbin "graphics/banim/banim_pbfm_ax1_sheet_2.4bpp.lz"
 	.global banim_pbfm_ax1_sheet_3
 banim_pbfm_ax1_sheet_3:
-	.incbin "baserom.gba", 0xDA5398, 0xF3C
+	.incbin "graphics/banim/banim_pbfm_ax1_sheet_3.4bpp.lz"
 	.global banim_pbfm_ax1_sheet_1
 banim_pbfm_ax1_sheet_1:
-	.incbin "baserom.gba", 0xDA62D4, 0x9D4
+	.incbin "graphics/banim/banim_pbfm_ax1_sheet_1.4bpp.lz"
 	.global banim_pbfm_ax1_agbpal
 banim_pbfm_ax1_agbpal:
-	.incbin "baserom.gba", 0xDA6CA8, 0x4C
+	.incbin "graphics/banim/banim_pbfm_ax1.agbpal.lz"
 	.global banim_pbfm_ax1_oam_l_bin
 banim_pbfm_ax1_oam_l_bin:
 	.incbin "baserom.gba", 0xDA6CF4, 0x3D8
@@ -3142,13 +3142,13 @@ banim_pbfm_ax1_modes_bin:
 	.incbin "baserom.gba", 0xDA770C, 0x60
 	.global banim_pbfm_ax1_2_sheet_0
 banim_pbfm_ax1_2_sheet_0:
-	.incbin "baserom.gba", 0xDA776C, 0xE68
+	.incbin "graphics/banim/banim_pbfm_ax1_2_sheet_0.4bpp.lz"
 	.global banim_pbfm_ax1_2_sheet_1
 banim_pbfm_ax1_2_sheet_1:
-	.incbin "baserom.gba", 0xDA85D4, 0xAB8
+	.incbin "graphics/banim/banim_pbfm_ax1_2_sheet_1.4bpp.lz"
 	.global banim_pbfm_ax1_2_agbpal
 banim_pbfm_ax1_2_agbpal:
-	.incbin "baserom.gba", 0xDA908C, 0x4C
+	.incbin "graphics/banim/banim_pbfm_ax1_2.agbpal.lz"
 	.global banim_pbfm_ax1_2_oam_l_bin
 banim_pbfm_ax1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xDA90D8, 0x1F4
@@ -3163,7 +3163,7 @@ banim_pbfm_ax1_2_modes_bin:
 	.incbin "baserom.gba", 0xDA9634, 0x60
 	.global banim_pbfm_ax1_3_agbpal
 banim_pbfm_ax1_3_agbpal:
-	.incbin "baserom.gba", 0xDA9694, 0x4C
+	.incbin "graphics/banim/banim_pbfm_ax1_3.agbpal.lz"
 	.global banim_pbfm_ax1_3_oam_l_bin
 banim_pbfm_ax1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xDA96E0, 0x78
@@ -3178,19 +3178,19 @@ banim_pbfm_ax1_3_modes_bin:
 	.incbin "baserom.gba", 0xDA982C, 0x60
 	.global banim_pbmm_mg1_sheet_0
 banim_pbmm_mg1_sheet_0:
-	.incbin "baserom.gba", 0xDA988C, 0xD64
+	.incbin "graphics/banim/banim_pbmm_mg1_sheet_0.4bpp.lz"
 	.global banim_pbmm_mg1_sheet_1
 banim_pbmm_mg1_sheet_1:
-	.incbin "baserom.gba", 0xDAA5F0, 0xC58
+	.incbin "graphics/banim/banim_pbmm_mg1_sheet_1.4bpp.lz"
 	.global banim_pbmm_mg1_sheet_3
 banim_pbmm_mg1_sheet_3:
-	.incbin "baserom.gba", 0xDAB248, 0xEA0
+	.incbin "graphics/banim/banim_pbmm_mg1_sheet_3.4bpp.lz"
 	.global banim_pbmm_mg1_sheet_2
 banim_pbmm_mg1_sheet_2:
-	.incbin "baserom.gba", 0xDAC0E8, 0x618
+	.incbin "graphics/banim/banim_pbmm_mg1_sheet_2.4bpp.lz"
 	.global banim_pbmm_mg1_agbpal
 banim_pbmm_mg1_agbpal:
-	.incbin "baserom.gba", 0xDAC700, 0x38
+	.incbin "graphics/banim/banim_pbmm_mg1.agbpal.lz"
 	.global banim_pbmm_mg1_oam_l_bin
 banim_pbmm_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xDAC738, 0x2CC
@@ -3205,25 +3205,25 @@ banim_pbmm_mg1_modes_bin:
 	.incbin "baserom.gba", 0xDACFFC, 0x60
 	.global banim_pbrf_sp1_sheet_0
 banim_pbrf_sp1_sheet_0:
-	.incbin "baserom.gba", 0xDAD05C, 0xB78
+	.incbin "graphics/banim/banim_pbrf_sp1_sheet_0.4bpp.lz"
 	.global banim_pbrf_sp1_sheet_1
 banim_pbrf_sp1_sheet_1:
-	.incbin "baserom.gba", 0xDADBD4, 0xBC8
+	.incbin "graphics/banim/banim_pbrf_sp1_sheet_1.4bpp.lz"
 	.global banim_pbrf_sp1_sheet_2
 banim_pbrf_sp1_sheet_2:
-	.incbin "baserom.gba", 0xDAE79C, 0xB58
+	.incbin "graphics/banim/banim_pbrf_sp1_sheet_2.4bpp.lz"
 	.global banim_pbrf_sp1_sheet_3
 banim_pbrf_sp1_sheet_3:
-	.incbin "baserom.gba", 0xDAF2F4, 0xB64
+	.incbin "graphics/banim/banim_pbrf_sp1_sheet_3.4bpp.lz"
 	.global banim_pbrf_sp1_sheet_4
 banim_pbrf_sp1_sheet_4:
-	.incbin "baserom.gba", 0xDAFE58, 0xB6C
+	.incbin "graphics/banim/banim_pbrf_sp1_sheet_4.4bpp.lz"
 	.global banim_pbrf_sp1_sheet_5
 banim_pbrf_sp1_sheet_5:
-	.incbin "baserom.gba", 0xDB09C4, 0xA10
+	.incbin "graphics/banim/banim_pbrf_sp1_sheet_5.4bpp.lz"
 	.global banim_pbrf_sp1_agbpal
 banim_pbrf_sp1_agbpal:
-	.incbin "baserom.gba", 0xDB13D4, 0x38
+	.incbin "graphics/banim/banim_pbrf_sp1.agbpal.lz"
 	.global banim_pbrf_sp1_oam_l_bin
 banim_pbrf_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xDB140C, 0x72C
@@ -3238,10 +3238,10 @@ banim_pbrf_sp1_modes_bin:
 	.incbin "baserom.gba", 0xDB2600, 0x60
 	.global banim_pbrf_sp1_2_sheet_0
 banim_pbrf_sp1_2_sheet_0:
-	.incbin "baserom.gba", 0xDB2660, 0x954
+	.incbin "graphics/banim/banim_pbrf_sp1_2_sheet_0.4bpp.lz"
 	.global banim_pbrf_sp1_2_agbpal
 banim_pbrf_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xDB2FB4, 0x38
+	.incbin "graphics/banim/banim_pbrf_sp1_2.agbpal.lz"
 	.global banim_pbrf_sp1_2_oam_l_bin
 banim_pbrf_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xDB2FEC, 0x84C
@@ -3256,16 +3256,16 @@ banim_pbrf_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xDB4100, 0x60
 	.global banim_solm_sp1_sheet_0
 banim_solm_sp1_sheet_0:
-	.incbin "baserom.gba", 0xDB4160, 0x1098
+	.incbin "graphics/banim/banim_solm_sp1_sheet_0.4bpp.lz"
 	.global banim_solm_sp1_sheet_1
 banim_solm_sp1_sheet_1:
-	.incbin "baserom.gba", 0xDB51F8, 0x11B8
+	.incbin "graphics/banim/banim_solm_sp1_sheet_1.4bpp.lz"
 	.global banim_solm_sp1_2_sheet_0
 banim_solm_sp1_2_sheet_0:
-	.incbin "baserom.gba", 0xDB63B0, 0x734
+	.incbin "graphics/banim/banim_solm_sp1_2_sheet_0.4bpp.lz"
 	.global banim_solm_sp1_agbpal
 banim_solm_sp1_agbpal:
-	.incbin "baserom.gba", 0xDB6AE4, 0x54
+	.incbin "graphics/banim/banim_solm_sp1.agbpal.lz"
 	.global banim_solm_sp1_oam_l_bin
 banim_solm_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xDB6B38, 0x5E0
@@ -3280,7 +3280,7 @@ banim_solm_sp1_modes_bin:
 	.incbin "baserom.gba", 0xDB7908, 0x60
 	.global banim_solm_sp1_2_agbpal
 banim_solm_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xDB7968, 0x54
+	.incbin "graphics/banim/banim_solm_sp1_2.agbpal.lz"
 	.global banim_solm_sp1_2_oam_l_bin
 banim_solm_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xDB79BC, 0xC4
@@ -3295,13 +3295,13 @@ banim_solm_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xDB7BC0, 0x60
 	.global banim_pirm_ax1_sheet_0
 banim_pirm_ax1_sheet_0:
-	.incbin "baserom.gba", 0xDB7C20, 0x12E8
+	.incbin "graphics/banim/banim_pirm_ax1_sheet_0.4bpp.lz"
 	.global banim_pirm_ax1_sheet_1
 banim_pirm_ax1_sheet_1:
-	.incbin "baserom.gba", 0xDB8F08, 0xF74
+	.incbin "graphics/banim/banim_pirm_ax1_sheet_1.4bpp.lz"
 	.global banim_pirm_ax1_agbpal
 banim_pirm_ax1_agbpal:
-	.incbin "baserom.gba", 0xDB9E7C, 0x54
+	.incbin "graphics/banim/banim_pirm_ax1.agbpal.lz"
 	.global banim_pirm_ax1_oam_l_bin
 banim_pirm_ax1_oam_l_bin:
 	.incbin "baserom.gba", 0xDB9ED0, 0x338
@@ -3316,7 +3316,7 @@ banim_pirm_ax1_modes_bin:
 	.incbin "baserom.gba", 0xDBA684, 0x60
 	.global banim_pirm_ax1_2_agbpal
 banim_pirm_ax1_2_agbpal:
-	.incbin "baserom.gba", 0xDBA6E4, 0x54
+	.incbin "graphics/banim/banim_pirm_ax1_2.agbpal.lz"
 	.global banim_pirm_ax1_2_oam_l_bin
 banim_pirm_ax1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xDBA738, 0x288
@@ -3331,7 +3331,7 @@ banim_pirm_ax1_2_modes_bin:
 	.incbin "baserom.gba", 0xDBAD48, 0x60
 	.global banim_pirm_ax1_3_agbpal
 banim_pirm_ax1_3_agbpal:
-	.incbin "baserom.gba", 0xDBADA8, 0x54
+	.incbin "graphics/banim/banim_pirm_ax1_3.agbpal.lz"
 	.global banim_pirm_ax1_3_oam_l_bin
 banim_pirm_ax1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xDBADFC, 0xB0
@@ -3346,31 +3346,31 @@ banim_pirm_ax1_3_modes_bin:
 	.incbin "baserom.gba", 0xDBAFE0, 0x60
 	.global banim_necm_mg1_sheet_0
 banim_necm_mg1_sheet_0:
-	.incbin "baserom.gba", 0xDBB040, 0xE98
+	.incbin "graphics/banim/banim_necm_mg1_sheet_0.4bpp.lz"
 	.global banim_necm_mg1_sheet_1
 banim_necm_mg1_sheet_1:
-	.incbin "baserom.gba", 0xDBBED8, 0xDEC
+	.incbin "graphics/banim/banim_necm_mg1_sheet_1.4bpp.lz"
 	.global banim_necm_mg1_sheet_2
 banim_necm_mg1_sheet_2:
-	.incbin "baserom.gba", 0xDBCCC4, 0xCAC
+	.incbin "graphics/banim/banim_necm_mg1_sheet_2.4bpp.lz"
 	.global banim_necm_mg1_sheet_3
 banim_necm_mg1_sheet_3:
-	.incbin "baserom.gba", 0xDBD970, 0x790
+	.incbin "graphics/banim/banim_necm_mg1_sheet_3.4bpp.lz"
 	.global banim_necm_mg1_sheet_4
 banim_necm_mg1_sheet_4:
-	.incbin "baserom.gba", 0xDBE100, 0x9F0
+	.incbin "graphics/banim/banim_necm_mg1_sheet_4.4bpp.lz"
 	.global banim_necm_mg1_sheet_5
 banim_necm_mg1_sheet_5:
-	.incbin "baserom.gba", 0xDBEAF0, 0xA78
+	.incbin "graphics/banim/banim_necm_mg1_sheet_5.4bpp.lz"
 	.global banim_necm_mg1_sheet_6
 banim_necm_mg1_sheet_6:
-	.incbin "baserom.gba", 0xDBF568, 0xBA4
+	.incbin "graphics/banim/banim_necm_mg1_sheet_6.4bpp.lz"
 	.global banim_necm_mg1_sheet_7
 banim_necm_mg1_sheet_7:
-	.incbin "baserom.gba", 0xDC010C, 0x860
+	.incbin "graphics/banim/banim_necm_mg1_sheet_7.4bpp.lz"
 	.global banim_necm_mg1_agbpal
 banim_necm_mg1_agbpal:
-	.incbin "baserom.gba", 0xDC096C, 0x44
+	.incbin "graphics/banim/banim_necm_mg1.agbpal.lz"
 	.global banim_necm_mg1_oam_l_bin
 banim_necm_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xDC09B0, 0x704
@@ -3385,25 +3385,25 @@ banim_necm_mg1_modes_bin:
 	.incbin "baserom.gba", 0xDC1C54, 0x60
 	.global banim_necm_ro1_sheet_0
 banim_necm_ro1_sheet_0:
-	.incbin "baserom.gba", 0xDC1CB4, 0xF9C
+	.incbin "graphics/banim/banim_necm_ro1_sheet_0.4bpp.lz"
 	.global banim_necm_ro1_sheet_1
 banim_necm_ro1_sheet_1:
-	.incbin "baserom.gba", 0xDC2C50, 0xE8C
+	.incbin "graphics/banim/banim_necm_ro1_sheet_1.4bpp.lz"
 	.global banim_necm_ro1_sheet_2
 banim_necm_ro1_sheet_2:
-	.incbin "baserom.gba", 0xDC3ADC, 0xDD4
+	.incbin "graphics/banim/banim_necm_ro1_sheet_2.4bpp.lz"
 	.global banim_necm_ro1_sheet_3
 banim_necm_ro1_sheet_3:
-	.incbin "baserom.gba", 0xDC48B0, 0x7B0
+	.incbin "graphics/banim/banim_necm_ro1_sheet_3.4bpp.lz"
 	.global banim_necm_ro1_sheet_4
 banim_necm_ro1_sheet_4:
-	.incbin "baserom.gba", 0xDC5060, 0xA88
+	.incbin "graphics/banim/banim_necm_ro1_sheet_4.4bpp.lz"
 	.global banim_necm_ro1_sheet_5
 banim_necm_ro1_sheet_5:
-	.incbin "baserom.gba", 0xDC5AE8, 0xAF8
+	.incbin "graphics/banim/banim_necm_ro1_sheet_5.4bpp.lz"
 	.global banim_necm_ro1_agbpal
 banim_necm_ro1_agbpal:
-	.incbin "baserom.gba", 0xDC65E0, 0x44
+	.incbin "graphics/banim/banim_necm_ro1.agbpal.lz"
 	.global banim_necm_ro1_oam_l_bin
 banim_necm_ro1_oam_l_bin:
 	.incbin "baserom.gba", 0xDC6624, 0x7D0
@@ -3418,10 +3418,10 @@ banim_necm_ro1_modes_bin:
 	.incbin "baserom.gba", 0xDC7994, 0x60
 	.global banim_stam_ar1_sheet_0
 banim_stam_ar1_sheet_0:
-	.incbin "baserom.gba", 0xDC79F4, 0xA68
+	.incbin "graphics/banim/banim_stam_ar1_sheet_0.4bpp.lz"
 	.global banim_stam_ar1_agbpal
 banim_stam_ar1_agbpal:
-	.incbin "baserom.gba", 0xDC845C, 0x5C
+	.incbin "graphics/banim/banim_stam_ar1.agbpal.lz"
 	.global banim_stam_ar1_oam_l_bin
 banim_stam_ar1_oam_l_bin:
 	.incbin "baserom.gba", 0xDC84B8, 0x194
@@ -3436,19 +3436,19 @@ banim_stam_ar1_modes_bin:
 	.incbin "baserom.gba", 0xDC8890, 0x60
 	.global banim_zom_at1_sheet_0
 banim_zom_at1_sheet_0:
-	.incbin "baserom.gba", 0xDC88F0, 0xF98
+	.incbin "graphics/banim/banim_zom_at1_sheet_0.4bpp.lz"
 	.global banim_zom_at1_sheet_1
 banim_zom_at1_sheet_1:
-	.incbin "baserom.gba", 0xDC9888, 0xF94
+	.incbin "graphics/banim/banim_zom_at1_sheet_1.4bpp.lz"
 	.global banim_zom_at1_sheet_2
 banim_zom_at1_sheet_2:
-	.incbin "baserom.gba", 0xDCA81C, 0xC94
+	.incbin "graphics/banim/banim_zom_at1_sheet_2.4bpp.lz"
 	.global banim_zom_at1_sheet_blank
 banim_zom_at1_sheet_blank:
-	.incbin "baserom.gba", 0xDCB4B0, 0x3D0
+	.incbin "graphics/banim/banim_zom_at1_sheet_blank.4bpp.lz"
 	.global banim_zom_at1_agbpal
 banim_zom_at1_agbpal:
-	.incbin "baserom.gba", 0xDCB880, 0x38
+	.incbin "graphics/banim/banim_zom_at1.agbpal.lz"
 	.global banim_zom_at1_oam_l_bin
 banim_zom_at1_oam_l_bin:
 	.incbin "baserom.gba", 0xDCB8B8, 0x4B8
@@ -3463,7 +3463,7 @@ banim_zom_at1_modes_bin:
 	.incbin "baserom.gba", 0xDCC5A4, 0x60
 	.global banim_zom_at1_2_agbpal
 banim_zom_at1_2_agbpal:
-	.incbin "baserom.gba", 0xDCC604, 0x38
+	.incbin "graphics/banim/banim_zom_at1_2.agbpal.lz"
 	.global banim_zom_at1_2_oam_l_bin
 banim_zom_at1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xDCC63C, 0x4B8
@@ -3478,25 +3478,25 @@ banim_zom_at1_2_modes_bin:
 	.incbin "baserom.gba", 0xDCD328, 0x60
 	.global banim_sks_sw1_sheet_0
 banim_sks_sw1_sheet_0:
-	.incbin "baserom.gba", 0xDCD388, 0xC00
+	.incbin "graphics/banim/banim_sks_sw1_sheet_0.4bpp.lz"
 	.global banim_sks_sw1_sheet_1
 banim_sks_sw1_sheet_1:
-	.incbin "baserom.gba", 0xDCDF88, 0xC70
+	.incbin "graphics/banim/banim_sks_sw1_sheet_1.4bpp.lz"
 	.global banim_sks_sw1_sheet_3
 banim_sks_sw1_sheet_3:
-	.incbin "baserom.gba", 0xDCEBF8, 0xC08
+	.incbin "graphics/banim/banim_sks_sw1_sheet_3.4bpp.lz"
 	.global banim_sks_sw1_sheet_2
 banim_sks_sw1_sheet_2:
-	.incbin "baserom.gba", 0xDCF800, 0xB18
+	.incbin "graphics/banim/banim_sks_sw1_sheet_2.4bpp.lz"
 	.global banim_sks_sw1_sheet_4
 banim_sks_sw1_sheet_4:
-	.incbin "baserom.gba", 0xDD0318, 0x8D8
+	.incbin "graphics/banim/banim_sks_sw1_sheet_4.4bpp.lz"
 	.global banim_sks_sw1_sheet_5
 banim_sks_sw1_sheet_5:
-	.incbin "baserom.gba", 0xDD0BF0, 0x6A0
+	.incbin "graphics/banim/banim_sks_sw1_sheet_5.4bpp.lz"
 	.global banim_sks_sw1_agbpal
 banim_sks_sw1_agbpal:
-	.incbin "baserom.gba", 0xDD1290, 0x38
+	.incbin "graphics/banim/banim_sks_sw1.agbpal.lz"
 	.global banim_sks_sw1_oam_l_bin
 banim_sks_sw1_oam_l_bin:
 	.incbin "baserom.gba", 0xDD12C8, 0x4E0
@@ -3511,22 +3511,22 @@ banim_sks_sw1_modes_bin:
 	.incbin "baserom.gba", 0xDD1F90, 0x60
 	.global banim_sks_sp1_sheet_0
 banim_sks_sp1_sheet_0:
-	.incbin "baserom.gba", 0xDD1FF0, 0xCB8
+	.incbin "graphics/banim/banim_sks_sp1_sheet_0.4bpp.lz"
 	.global banim_sks_sp1_sheet_1_discarded
 banim_sks_sp1_sheet_1_discarded:
-	.incbin "baserom.gba", 0xDD2CA8, 0xCB0
+	.incbin "graphics/banim/banim_sks_sp1_sheet_1_discarded.4bpp.lz"
 	.global banim_sks_sp1_sheet_2
 banim_sks_sp1_sheet_2:
-	.incbin "baserom.gba", 0xDD3958, 0xDC4
+	.incbin "graphics/banim/banim_sks_sp1_sheet_2.4bpp.lz"
 	.global banim_sks_sp1_sheet_3
 banim_sks_sp1_sheet_3:
-	.incbin "baserom.gba", 0xDD471C, 0xD98
+	.incbin "graphics/banim/banim_sks_sp1_sheet_3.4bpp.lz"
 	.global banim_sks_sp1_sheet_1
 banim_sks_sp1_sheet_1:
-	.incbin "baserom.gba", 0xDD54B4, 0x880
+	.incbin "graphics/banim/banim_sks_sp1_sheet_1.4bpp.lz"
 	.global banim_sks_sp1_agbpal
 banim_sks_sp1_agbpal:
-	.incbin "baserom.gba", 0xDD5D34, 0x38
+	.incbin "graphics/banim/banim_sks_sp1.agbpal.lz"
 	.global banim_sks_sp1_oam_l_bin
 banim_sks_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xDD5D6C, 0x600
@@ -3541,7 +3541,7 @@ banim_sks_sp1_modes_bin:
 	.incbin "baserom.gba", 0xDD6C4C, 0x60
 	.global banim_sks_sw1_2_agbpal
 banim_sks_sw1_2_agbpal:
-	.incbin "baserom.gba", 0xDD6CAC, 0x38
+	.incbin "graphics/banim/banim_sks_sw1_2.agbpal.lz"
 	.global banim_sks_sw1_2_oam_l_bin
 banim_sks_sw1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xDD6CE4, 0x94
@@ -3556,19 +3556,19 @@ banim_sks_sw1_2_modes_bin:
 	.incbin "baserom.gba", 0xDD6EC4, 0x60
 	.global banim_ska_ar1_sheet_0
 banim_ska_ar1_sheet_0:
-	.incbin "baserom.gba", 0xDD6F24, 0xB2C
+	.incbin "graphics/banim/banim_ska_ar1_sheet_0.4bpp.lz"
 	.global banim_ska_ar1_sheet_1
 banim_ska_ar1_sheet_1:
-	.incbin "baserom.gba", 0xDD7A50, 0xBB4
+	.incbin "graphics/banim/banim_ska_ar1_sheet_1.4bpp.lz"
 	.global banim_ska_ar1_sheet_discarded
 banim_ska_ar1_sheet_discarded:
-	.incbin "baserom.gba", 0xDD8604, 0x7D8
+	.incbin "graphics/banim/banim_ska_ar1_sheet_discarded.4bpp.lz"
 	.global banim_ska_ar1_sheet_2
 banim_ska_ar1_sheet_2:
-	.incbin "baserom.gba", 0xDD8DDC, 0x6DC
+	.incbin "graphics/banim/banim_ska_ar1_sheet_2.4bpp.lz"
 	.global banim_ska_ar1_agbpal
 banim_ska_ar1_agbpal:
-	.incbin "baserom.gba", 0xDD94B8, 0x38
+	.incbin "graphics/banim/banim_ska_ar1.agbpal.lz"
 	.global banim_ska_ar1_oam_l_bin
 banim_ska_ar1_oam_l_bin:
 	.incbin "baserom.gba", 0xDD94F0, 0x3D4
@@ -3583,7 +3583,7 @@ banim_ska_ar1_modes_bin:
 	.incbin "baserom.gba", 0xDD9F08, 0x60
 	.global banim_sks_sw1_3_agbpal
 banim_sks_sw1_3_agbpal:
-	.incbin "baserom.gba", 0xDD9F68, 0x38
+	.incbin "graphics/banim/banim_sks_sw1_3.agbpal.lz"
 	.global banim_sks_sw1_3_oam_l_bin
 banim_sks_sw1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xDD9FA0, 0x94
@@ -3598,7 +3598,7 @@ banim_sks_sw1_3_modes_bin:
 	.incbin "baserom.gba", 0xDDA180, 0x60
 	.global banim_sks_sw1_4_agbpal
 banim_sks_sw1_4_agbpal:
-	.incbin "baserom.gba", 0xDDA1E0, 0x38
+	.incbin "graphics/banim/banim_sks_sw1_4.agbpal.lz"
 	.global banim_sks_sw1_4_oam_l_bin
 banim_sks_sw1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xDDA218, 0x4E0
@@ -3613,7 +3613,7 @@ banim_sks_sw1_4_modes_bin:
 	.incbin "baserom.gba", 0xDDAEE0, 0x60
 	.global banim_sks_sp1_2_agbpal
 banim_sks_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xDDAF40, 0x38
+	.incbin "graphics/banim/banim_sks_sp1_2.agbpal.lz"
 	.global banim_sks_sp1_2_oam_l_bin
 banim_sks_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xDDAF78, 0x600
@@ -3628,7 +3628,7 @@ banim_sks_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xDDBE58, 0x60
 	.global banim_sks_sw1_5_agbpal
 banim_sks_sw1_5_agbpal:
-	.incbin "baserom.gba", 0xDDBEB8, 0x38
+	.incbin "graphics/banim/banim_sks_sw1_5.agbpal.lz"
 	.global banim_sks_sw1_5_oam_l_bin
 banim_sks_sw1_5_oam_l_bin:
 	.incbin "baserom.gba", 0xDDBEF0, 0x94
@@ -3643,7 +3643,7 @@ banim_sks_sw1_5_modes_bin:
 	.incbin "baserom.gba", 0xDDC0D0, 0x60
 	.global banim_ska_ar1_2_agbpal
 banim_ska_ar1_2_agbpal:
-	.incbin "baserom.gba", 0xDDC130, 0x38
+	.incbin "graphics/banim/banim_ska_ar1_2.agbpal.lz"
 	.global banim_ska_ar1_2_oam_l_bin
 banim_ska_ar1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xDDC168, 0x3D4
@@ -3658,7 +3658,7 @@ banim_ska_ar1_2_modes_bin:
 	.incbin "baserom.gba", 0xDDCB80, 0x60
 	.global banim_sks_sw1_6_agbpal
 banim_sks_sw1_6_agbpal:
-	.incbin "baserom.gba", 0xDDCBE0, 0x38
+	.incbin "graphics/banim/banim_sks_sw1_6.agbpal.lz"
 	.global banim_sks_sw1_6_oam_l_bin
 banim_sks_sw1_6_oam_l_bin:
 	.incbin "baserom.gba", 0xDDCC18, 0x94
@@ -3673,31 +3673,31 @@ banim_sks_sw1_6_modes_bin:
 	.incbin "baserom.gba", 0xDDCDF8, 0x60
 	.global banim_bae_at1_sheet_0
 banim_bae_at1_sheet_0:
-	.incbin "baserom.gba", 0xDDCE58, 0x1104
+	.incbin "graphics/banim/banim_bae_at1_sheet_0.4bpp.lz"
 	.global banim_bae_at1_sheet_1
 banim_bae_at1_sheet_1:
-	.incbin "baserom.gba", 0xDDDF5C, 0xFE4
+	.incbin "graphics/banim/banim_bae_at1_sheet_1.4bpp.lz"
 	.global banim_bae_at1_sheet_2
 banim_bae_at1_sheet_2:
-	.incbin "baserom.gba", 0xDDEF40, 0xFCC
+	.incbin "graphics/banim/banim_bae_at1_sheet_2.4bpp.lz"
 	.global banim_bae_at1_sheet_4
 banim_bae_at1_sheet_4:
-	.incbin "baserom.gba", 0xDDFF0C, 0x1010
+	.incbin "graphics/banim/banim_bae_at1_sheet_4.4bpp.lz"
 	.global banim_bae_at1_sheet_5
 banim_bae_at1_sheet_5:
-	.incbin "baserom.gba", 0xDE0F1C, 0xE58
+	.incbin "graphics/banim/banim_bae_at1_sheet_5.4bpp.lz"
 	.global banim_bae_at1_sheet_6
 banim_bae_at1_sheet_6:
-	.incbin "baserom.gba", 0xDE1D74, 0x10C4
+	.incbin "graphics/banim/banim_bae_at1_sheet_6.4bpp.lz"
 	.global banim_bae_at1_sheet_7
 banim_bae_at1_sheet_7:
-	.incbin "baserom.gba", 0xDE2E38, 0x858
+	.incbin "graphics/banim/banim_bae_at1_sheet_7.4bpp.lz"
 	.global banim_bae_at1_sheet_3
 banim_bae_at1_sheet_3:
-	.incbin "baserom.gba", 0xDE3690, 0xC48
+	.incbin "graphics/banim/banim_bae_at1_sheet_3.4bpp.lz"
 	.global banim_bae_at1_agbpal
 banim_bae_at1_agbpal:
-	.incbin "baserom.gba", 0xDE42D8, 0x38
+	.incbin "graphics/banim/banim_bae_at1.agbpal.lz"
 	.global banim_bae_at1_oam_l_bin
 banim_bae_at1_oam_l_bin:
 	.incbin "baserom.gba", 0xDE4310, 0x484
@@ -3712,7 +3712,7 @@ banim_bae_at1_modes_bin:
 	.incbin "baserom.gba", 0xDE4EA8, 0x60
 	.global banim_bae_at1_2_agbpal
 banim_bae_at1_2_agbpal:
-	.incbin "baserom.gba", 0xDE4F08, 0x38
+	.incbin "graphics/banim/banim_bae_at1_2.agbpal.lz"
 	.global banim_bae_at1_2_oam_l_bin
 banim_bae_at1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xDE4F40, 0x484
@@ -3727,43 +3727,43 @@ banim_bae_at1_2_modes_bin:
 	.incbin "baserom.gba", 0xDE5AD8, 0x60
 	.global banim_cyc_ax1_sheet_0
 banim_cyc_ax1_sheet_0:
-	.incbin "baserom.gba", 0xDE5B38, 0xF74
+	.incbin "graphics/banim/banim_cyc_ax1_sheet_0.4bpp.lz"
 	.global banim_cyc_ax1_sheet_1
 banim_cyc_ax1_sheet_1:
-	.incbin "baserom.gba", 0xDE6AAC, 0x10AC
+	.incbin "graphics/banim/banim_cyc_ax1_sheet_1.4bpp.lz"
 	.global banim_cyc_ax1_2_sheet_0
 banim_cyc_ax1_2_sheet_0:
-	.incbin "baserom.gba", 0xDE7B58, 0x1100
+	.incbin "graphics/banim/banim_cyc_ax1_2_sheet_0.4bpp.lz"
 	.global banim_cyc_ax1_2_sheet_1
 banim_cyc_ax1_2_sheet_1:
-	.incbin "baserom.gba", 0xDE8C58, 0xE18
+	.incbin "graphics/banim/banim_cyc_ax1_2_sheet_1.4bpp.lz"
 	.global banim_cyc_ax1_sheet_2
 banim_cyc_ax1_sheet_2:
-	.incbin "baserom.gba", 0xDE9A70, 0x1008
+	.incbin "graphics/banim/banim_cyc_ax1_sheet_2.4bpp.lz"
 	.global banim_cyc_ax1_sheet_3
 banim_cyc_ax1_sheet_3:
-	.incbin "baserom.gba", 0xDEAA78, 0xB58
+	.incbin "graphics/banim/banim_cyc_ax1_sheet_3.4bpp.lz"
 	.global banim_cyc_ax1_2_sheet_2
 banim_cyc_ax1_2_sheet_2:
-	.incbin "baserom.gba", 0xDEB5D0, 0x9E4
+	.incbin "graphics/banim/banim_cyc_ax1_2_sheet_2.4bpp.lz"
 	.global banim_cyc_ax1_2_sheet_3
 banim_cyc_ax1_2_sheet_3:
-	.incbin "baserom.gba", 0xDEBFB4, 0xBD8
+	.incbin "graphics/banim/banim_cyc_ax1_2_sheet_3.4bpp.lz"
 	.global banim_cyc_ax1_sheet_4
 banim_cyc_ax1_sheet_4:
-	.incbin "baserom.gba", 0xDECB8C, 0xE84
+	.incbin "graphics/banim/banim_cyc_ax1_sheet_4.4bpp.lz"
 	.global banim_cyc_ax1_sheet_5
 banim_cyc_ax1_sheet_5:
-	.incbin "baserom.gba", 0xDEDA10, 0xF08
+	.incbin "graphics/banim/banim_cyc_ax1_sheet_5.4bpp.lz"
 	.global banim_cyc_ax1_sheet_6
 banim_cyc_ax1_sheet_6:
-	.incbin "baserom.gba", 0xDEE918, 0xFA8
+	.incbin "graphics/banim/banim_cyc_ax1_sheet_6.4bpp.lz"
 	.global banim_cyc_ax1_sheet_7
 banim_cyc_ax1_sheet_7:
-	.incbin "baserom.gba", 0xDEF8C0, 0xB24
+	.incbin "graphics/banim/banim_cyc_ax1_sheet_7.4bpp.lz"
 	.global banim_cyc_ax1_agbpal
 banim_cyc_ax1_agbpal:
-	.incbin "baserom.gba", 0xDF03E4, 0x38
+	.incbin "graphics/banim/banim_cyc_ax1.agbpal.lz"
 	.global banim_cyc_ax1_oam_l_bin
 banim_cyc_ax1_oam_l_bin:
 	.incbin "baserom.gba", 0xDF041C, 0x6C4
@@ -3778,7 +3778,7 @@ banim_cyc_ax1_modes_bin:
 	.incbin "baserom.gba", 0xDF13DC, 0x60
 	.global banim_cyc_ax1_2_agbpal
 banim_cyc_ax1_2_agbpal:
-	.incbin "baserom.gba", 0xDF143C, 0x38
+	.incbin "graphics/banim/banim_cyc_ax1_2.agbpal.lz"
 	.global banim_cyc_ax1_2_oam_l_bin
 banim_cyc_ax1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xDF1474, 0x2E0
@@ -3793,7 +3793,7 @@ banim_cyc_ax1_2_modes_bin:
 	.incbin "baserom.gba", 0xDF1BBC, 0x60
 	.global banim_cyc_ax1_3_agbpal
 banim_cyc_ax1_3_agbpal:
-	.incbin "baserom.gba", 0xDF1C1C, 0x38
+	.incbin "graphics/banim/banim_cyc_ax1_3.agbpal.lz"
 	.global banim_cyc_ax1_3_oam_l_bin
 banim_cyc_ax1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xDF1C54, 0x9C
@@ -3808,19 +3808,19 @@ banim_cyc_ax1_3_modes_bin:
 	.incbin "baserom.gba", 0xDF1E1C, 0x60
 	.global banim_mdg_at1_sheet_0
 banim_mdg_at1_sheet_0:
-	.incbin "baserom.gba", 0xDF1E7C, 0xC68
+	.incbin "graphics/banim/banim_mdg_at1_sheet_0.4bpp.lz"
 	.global banim_mdg_at1_sheet_1
 banim_mdg_at1_sheet_1:
-	.incbin "baserom.gba", 0xDF2AE4, 0xD34
+	.incbin "graphics/banim/banim_mdg_at1_sheet_1.4bpp.lz"
 	.global banim_mdg_at1_sheet_2
 banim_mdg_at1_sheet_2:
-	.incbin "baserom.gba", 0xDF3818, 0xEEC
+	.incbin "graphics/banim/banim_mdg_at1_sheet_2.4bpp.lz"
 	.global banim_mdg_at1_sheet_3
 banim_mdg_at1_sheet_3:
-	.incbin "baserom.gba", 0xDF4704, 0x944
+	.incbin "graphics/banim/banim_mdg_at1_sheet_3.4bpp.lz"
 	.global banim_mdg_at1_agbpal
 banim_mdg_at1_agbpal:
-	.incbin "baserom.gba", 0xDF5048, 0x38
+	.incbin "graphics/banim/banim_mdg_at1.agbpal.lz"
 	.global banim_mdg_at1_oam_l_bin
 banim_mdg_at1_oam_l_bin:
 	.incbin "baserom.gba", 0xDF5080, 0x364
@@ -3835,31 +3835,31 @@ banim_mdg_at1_modes_bin:
 	.incbin "baserom.gba", 0xDF5958, 0x60
 	.global banim_cer_at1_sheet_0
 banim_cer_at1_sheet_0:
-	.incbin "baserom.gba", 0xDF59B8, 0xFC8
+	.incbin "graphics/banim/banim_cer_at1_sheet_0.4bpp.lz"
 	.global banim_cer_at1_sheet_1
 banim_cer_at1_sheet_1:
-	.incbin "baserom.gba", 0xDF6980, 0xF7C
+	.incbin "graphics/banim/banim_cer_at1_sheet_1.4bpp.lz"
 	.global banim_cer_at1_sheet_2
 banim_cer_at1_sheet_2:
-	.incbin "baserom.gba", 0xDF78FC, 0xF10
+	.incbin "graphics/banim/banim_cer_at1_sheet_2.4bpp.lz"
 	.global banim_cer_at1_sheet_3
 banim_cer_at1_sheet_3:
-	.incbin "baserom.gba", 0xDF880C, 0xE14
+	.incbin "graphics/banim/banim_cer_at1_sheet_3.4bpp.lz"
 	.global banim_cer_at1_sheet_4
 banim_cer_at1_sheet_4:
-	.incbin "baserom.gba", 0xDF9620, 0xB60
+	.incbin "graphics/banim/banim_cer_at1_sheet_4.4bpp.lz"
 	.global banim_cer_at1_sheet_6
 banim_cer_at1_sheet_6:
-	.incbin "baserom.gba", 0xDFA180, 0xB38
+	.incbin "graphics/banim/banim_cer_at1_sheet_6.4bpp.lz"
 	.global banim_cer_at1_sheet_5
 banim_cer_at1_sheet_5:
-	.incbin "baserom.gba", 0xDFACB8, 0xA20
+	.incbin "graphics/banim/banim_cer_at1_sheet_5.4bpp.lz"
 	.global banim_cer_at1_sheet_blank
 banim_cer_at1_sheet_blank:
-	.incbin "baserom.gba", 0xDFB6D8, 0x3D0
+	.incbin "graphics/banim/banim_cer_at1_sheet_blank.4bpp.lz"
 	.global banim_cer_at1_agbpal
 banim_cer_at1_agbpal:
-	.incbin "baserom.gba", 0xDFBAA8, 0x38
+	.incbin "graphics/banim/banim_cer_at1.agbpal.lz"
 	.global banim_cer_at1_oam_l_bin
 banim_cer_at1_oam_l_bin:
 	.incbin "baserom.gba", 0xDFBAE0, 0x540
@@ -3874,28 +3874,28 @@ banim_cer_at1_modes_bin:
 	.incbin "baserom.gba", 0xDFC7CC, 0x60
 	.global banim_mcd_ax1_sheet_0
 banim_mcd_ax1_sheet_0:
-	.incbin "baserom.gba", 0xDFC82C, 0xCDC
+	.incbin "graphics/banim/banim_mcd_ax1_sheet_0.4bpp.lz"
 	.global banim_mcd_ax1_sheet_1
 banim_mcd_ax1_sheet_1:
-	.incbin "baserom.gba", 0xDFD508, 0xDF0
+	.incbin "graphics/banim/banim_mcd_ax1_sheet_1.4bpp.lz"
 	.global banim_mcd_ax1_sheet_2
 banim_mcd_ax1_sheet_2:
-	.incbin "baserom.gba", 0xDFE2F8, 0xE8C
+	.incbin "graphics/banim/banim_mcd_ax1_sheet_2.4bpp.lz"
 	.global banim_mcd_ax1_sheet_3
 banim_mcd_ax1_sheet_3:
-	.incbin "baserom.gba", 0xDFF184, 0xC40
+	.incbin "graphics/banim/banim_mcd_ax1_sheet_3.4bpp.lz"
 	.global banim_mcd_ax1_sheet_4
 banim_mcd_ax1_sheet_4:
-	.incbin "baserom.gba", 0xDFFDC4, 0x960
+	.incbin "graphics/banim/banim_mcd_ax1_sheet_4.4bpp.lz"
 	.global banim_mcd_ax1_sheet_5
 banim_mcd_ax1_sheet_5:
-	.incbin "baserom.gba", 0xE00724, 0x844
+	.incbin "graphics/banim/banim_mcd_ax1_sheet_5.4bpp.lz"
 	.global banim_mcd_ax1_sheet_6
 banim_mcd_ax1_sheet_6:
-	.incbin "baserom.gba", 0xE00F68, 0xC6C
+	.incbin "graphics/banim/banim_mcd_ax1_sheet_6.4bpp.lz"
 	.global banim_mcd_ax1_agbpal
 banim_mcd_ax1_agbpal:
-	.incbin "baserom.gba", 0xE01BD4, 0x38
+	.incbin "graphics/banim/banim_mcd_ax1.agbpal.lz"
 	.global banim_mcd_ax1_oam_l_bin
 banim_mcd_ax1_oam_l_bin:
 	.incbin "baserom.gba", 0xE01C0C, 0x5E0
@@ -3910,19 +3910,19 @@ banim_mcd_ax1_modes_bin:
 	.incbin "baserom.gba", 0xE029E4, 0x60
 	.global banim_mcd_ax1_3_sheet_0
 banim_mcd_ax1_3_sheet_0:
-	.incbin "baserom.gba", 0xE02A44, 0xA44
+	.incbin "graphics/banim/banim_mcd_ax1_3_sheet_0.4bpp.lz"
 	.global banim_mcd_ax1_2_sheet_0
 banim_mcd_ax1_2_sheet_0:
-	.incbin "baserom.gba", 0xE03488, 0xE54
+	.incbin "graphics/banim/banim_mcd_ax1_2_sheet_0.4bpp.lz"
 	.global banim_mcd_ax1_2_sheet_1
 banim_mcd_ax1_2_sheet_1:
-	.incbin "baserom.gba", 0xE042DC, 0xD5C
+	.incbin "graphics/banim/banim_mcd_ax1_2_sheet_1.4bpp.lz"
 	.global banim_mcd_ax1_2_sheet_2
 banim_mcd_ax1_2_sheet_2:
-	.incbin "baserom.gba", 0xE05038, 0xBC8
+	.incbin "graphics/banim/banim_mcd_ax1_2_sheet_2.4bpp.lz"
 	.global banim_mcd_ax1_2_agbpal
 banim_mcd_ax1_2_agbpal:
-	.incbin "baserom.gba", 0xE05C00, 0x38
+	.incbin "graphics/banim/banim_mcd_ax1_2.agbpal.lz"
 	.global banim_mcd_ax1_2_oam_l_bin
 banim_mcd_ax1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xE05C38, 0x1F4
@@ -3937,7 +3937,7 @@ banim_mcd_ax1_2_modes_bin:
 	.incbin "baserom.gba", 0xE0618C, 0x60
 	.global banim_mcd_ax1_3_agbpal
 banim_mcd_ax1_3_agbpal:
-	.incbin "baserom.gba", 0xE061EC, 0x38
+	.incbin "graphics/banim/banim_mcd_ax1_3.agbpal.lz"
 	.global banim_mcd_ax1_3_oam_l_bin
 banim_mcd_ax1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xE06224, 0xB4
@@ -3952,7 +3952,7 @@ banim_mcd_ax1_3_modes_bin:
 	.incbin "baserom.gba", 0xE063E0, 0x60
 	.global banim_mcd_ax1_4_agbpal
 banim_mcd_ax1_4_agbpal:
-	.incbin "baserom.gba", 0xE06440, 0x38
+	.incbin "graphics/banim/banim_mcd_ax1_4.agbpal.lz"
 	.global banim_mcd_ax1_4_oam_l_bin
 banim_mcd_ax1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xE06478, 0x5E0
@@ -3967,7 +3967,7 @@ banim_mcd_ax1_4_modes_bin:
 	.incbin "baserom.gba", 0xE07250, 0x60
 	.global banim_mcd_ax1_5_agbpal
 banim_mcd_ax1_5_agbpal:
-	.incbin "baserom.gba", 0xE072B0, 0x38
+	.incbin "graphics/banim/banim_mcd_ax1_5.agbpal.lz"
 	.global banim_mcd_ax1_5_oam_l_bin
 banim_mcd_ax1_5_oam_l_bin:
 	.incbin "baserom.gba", 0xE072E8, 0x1F4
@@ -3982,28 +3982,28 @@ banim_mcd_ax1_5_modes_bin:
 	.incbin "baserom.gba", 0xE0783C, 0x60
 	.global banim_mcd_ar1_sheet_0
 banim_mcd_ar1_sheet_0:
-	.incbin "baserom.gba", 0xE0789C, 0xDC4
+	.incbin "graphics/banim/banim_mcd_ar1_sheet_0.4bpp.lz"
 	.global banim_mcd_ar1_sheet_1
 banim_mcd_ar1_sheet_1:
-	.incbin "baserom.gba", 0xE08660, 0xD60
+	.incbin "graphics/banim/banim_mcd_ar1_sheet_1.4bpp.lz"
 	.global banim_mcd_ar1_sheet_2
 banim_mcd_ar1_sheet_2:
-	.incbin "baserom.gba", 0xE093C0, 0xA38
+	.incbin "graphics/banim/banim_mcd_ar1_sheet_2.4bpp.lz"
 	.global banim_mcd_ar1_sheet_3
 banim_mcd_ar1_sheet_3:
-	.incbin "baserom.gba", 0xE09DF8, 0xD9C
+	.incbin "graphics/banim/banim_mcd_ar1_sheet_3.4bpp.lz"
 	.global banim_mcd_ar1_sheet_4
 banim_mcd_ar1_sheet_4:
-	.incbin "baserom.gba", 0xE0AB94, 0xBE8
+	.incbin "graphics/banim/banim_mcd_ar1_sheet_4.4bpp.lz"
 	.global banim_mcd_ar1_sheet_6
 banim_mcd_ar1_sheet_6:
-	.incbin "baserom.gba", 0xE0B77C, 0xA10
+	.incbin "graphics/banim/banim_mcd_ar1_sheet_6.4bpp.lz"
 	.global banim_mcd_ar1_sheet_5
 banim_mcd_ar1_sheet_5:
-	.incbin "baserom.gba", 0xE0C18C, 0xB74
+	.incbin "graphics/banim/banim_mcd_ar1_sheet_5.4bpp.lz"
 	.global banim_mcd_ar1_agbpal
 banim_mcd_ar1_agbpal:
-	.incbin "baserom.gba", 0xE0CD00, 0x38
+	.incbin "graphics/banim/banim_mcd_ar1.agbpal.lz"
 	.global banim_mcd_ar1_oam_l_bin
 banim_mcd_ar1_oam_l_bin:
 	.incbin "baserom.gba", 0xE0CD38, 0x5F8
@@ -4018,7 +4018,7 @@ banim_mcd_ar1_modes_bin:
 	.incbin "baserom.gba", 0xE0DBE4, 0x60
 	.global banim_mcd_ax1_6_agbpal
 banim_mcd_ax1_6_agbpal:
-	.incbin "baserom.gba", 0xE0DC44, 0x38
+	.incbin "graphics/banim/banim_mcd_ax1_6.agbpal.lz"
 	.global banim_mcd_ax1_6_oam_l_bin
 banim_mcd_ax1_6_oam_l_bin:
 	.incbin "baserom.gba", 0xE0DC7C, 0xB4
@@ -4033,19 +4033,19 @@ banim_mcd_ax1_6_modes_bin:
 	.incbin "baserom.gba", 0xE0DE38, 0x60
 	.global banim_bgl_mg1_sheet_0
 banim_bgl_mg1_sheet_0:
-	.incbin "baserom.gba", 0xE0DE98, 0xEB0
+	.incbin "graphics/banim/banim_bgl_mg1_sheet_0.4bpp.lz"
 	.global banim_bgl_mg1_sheet_1
 banim_bgl_mg1_sheet_1:
-	.incbin "baserom.gba", 0xE0ED48, 0x954
+	.incbin "graphics/banim/banim_bgl_mg1_sheet_1.4bpp.lz"
 	.global banim_bgl_mg1_sheet_3
 banim_bgl_mg1_sheet_3:
-	.incbin "baserom.gba", 0xE0F69C, 0xD04
+	.incbin "graphics/banim/banim_bgl_mg1_sheet_3.4bpp.lz"
 	.global banim_bgl_mg1_sheet_2
 banim_bgl_mg1_sheet_2:
-	.incbin "baserom.gba", 0xE103A0, 0xD04
+	.incbin "graphics/banim/banim_bgl_mg1_sheet_2.4bpp.lz"
 	.global banim_bgl_mg1_agbpal
 banim_bgl_mg1_agbpal:
-	.incbin "baserom.gba", 0xE110A4, 0x38
+	.incbin "graphics/banim/banim_bgl_mg1.agbpal.lz"
 	.global banim_bgl_mg1_oam_l_bin
 banim_bgl_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xE110DC, 0x394
@@ -4060,7 +4060,7 @@ banim_bgl_mg1_modes_bin:
 	.incbin "baserom.gba", 0xE11A98, 0x60
 	.global banim_bgl_mg1_2_agbpal
 banim_bgl_mg1_2_agbpal:
-	.incbin "baserom.gba", 0xE11AF8, 0x38
+	.incbin "graphics/banim/banim_bgl_mg1_2.agbpal.lz"
 	.global banim_bgl_mg1_2_oam_l_bin
 banim_bgl_mg1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xE11B30, 0x394
@@ -4075,31 +4075,31 @@ banim_bgl_mg1_2_modes_bin:
 	.incbin "baserom.gba", 0xE124EC, 0x60
 	.global banim_gog_mg1_sheet_0
 banim_gog_mg1_sheet_0:
-	.incbin "baserom.gba", 0xE1254C, 0xCB4
+	.incbin "graphics/banim/banim_gog_mg1_sheet_0.4bpp.lz"
 	.global banim_gog_mg1_sheet_7
 banim_gog_mg1_sheet_7:
-	.incbin "baserom.gba", 0xE13200, 0x990
+	.incbin "graphics/banim/banim_gog_mg1_sheet_7.4bpp.lz"
 	.global banim_gog_mg1_sheet_1
 banim_gog_mg1_sheet_1:
-	.incbin "baserom.gba", 0xE13B90, 0xCB0
+	.incbin "graphics/banim/banim_gog_mg1_sheet_1.4bpp.lz"
 	.global banim_gog_mg1_sheet_2
 banim_gog_mg1_sheet_2:
-	.incbin "baserom.gba", 0xE14840, 0x9D8
+	.incbin "graphics/banim/banim_gog_mg1_sheet_2.4bpp.lz"
 	.global banim_gog_mg1_sheet_3
 banim_gog_mg1_sheet_3:
-	.incbin "baserom.gba", 0xE15218, 0xB70
+	.incbin "graphics/banim/banim_gog_mg1_sheet_3.4bpp.lz"
 	.global banim_gog_mg1_sheet_4
 banim_gog_mg1_sheet_4:
-	.incbin "baserom.gba", 0xE15D88, 0x9F4
+	.incbin "graphics/banim/banim_gog_mg1_sheet_4.4bpp.lz"
 	.global banim_gog_mg1_sheet_5
 banim_gog_mg1_sheet_5:
-	.incbin "baserom.gba", 0xE1677C, 0xDF4
+	.incbin "graphics/banim/banim_gog_mg1_sheet_5.4bpp.lz"
 	.global banim_gog_mg1_sheet_6
 banim_gog_mg1_sheet_6:
-	.incbin "baserom.gba", 0xE17570, 0x740
+	.incbin "graphics/banim/banim_gog_mg1_sheet_6.4bpp.lz"
 	.global banim_gog_mg1_agbpal
 banim_gog_mg1_agbpal:
-	.incbin "baserom.gba", 0xE17CB0, 0x38
+	.incbin "graphics/banim/banim_gog_mg1.agbpal.lz"
 	.global banim_gog_mg1_oam_l_bin
 banim_gog_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xE17CE8, 0x6B8
@@ -4114,43 +4114,43 @@ banim_gog_mg1_modes_bin:
 	.incbin "baserom.gba", 0xE18EEC, 0x60
 	.global banim_gar_sp1_sheet_0
 banim_gar_sp1_sheet_0:
-	.incbin "baserom.gba", 0xE18F4C, 0xD18
+	.incbin "graphics/banim/banim_gar_sp1_sheet_0.4bpp.lz"
 	.global banim_gar_sp1_sheet_1
 banim_gar_sp1_sheet_1:
-	.incbin "baserom.gba", 0xE19C64, 0xDC4
+	.incbin "graphics/banim/banim_gar_sp1_sheet_1.4bpp.lz"
 	.global banim_gar_sp1_sheet_2
 banim_gar_sp1_sheet_2:
-	.incbin "baserom.gba", 0xE1AA28, 0xC04
+	.incbin "graphics/banim/banim_gar_sp1_sheet_2.4bpp.lz"
 	.global banim_gar_sp1_sheet_3
 banim_gar_sp1_sheet_3:
-	.incbin "baserom.gba", 0xE1B62C, 0xDF4
+	.incbin "graphics/banim/banim_gar_sp1_sheet_3.4bpp.lz"
 	.global banim_gar_sp1_sheet_4
 banim_gar_sp1_sheet_4:
-	.incbin "baserom.gba", 0xE1C420, 0xE0C
+	.incbin "graphics/banim/banim_gar_sp1_sheet_4.4bpp.lz"
 	.global banim_gar_sp1_sheet_5
 banim_gar_sp1_sheet_5:
-	.incbin "baserom.gba", 0xE1D22C, 0x102C
+	.incbin "graphics/banim/banim_gar_sp1_sheet_5.4bpp.lz"
 	.global banim_gar_sp1_sheet_6
 banim_gar_sp1_sheet_6:
-	.incbin "baserom.gba", 0xE1E258, 0xCF4
+	.incbin "graphics/banim/banim_gar_sp1_sheet_6.4bpp.lz"
 	.global banim_gar_sp1_2_sheet_0
 banim_gar_sp1_2_sheet_0:
-	.incbin "baserom.gba", 0xE1EF4C, 0xE08
+	.incbin "graphics/banim/banim_gar_sp1_2_sheet_0.4bpp.lz"
 	.global banim_gar_sp1_sheet_7
 banim_gar_sp1_sheet_7:
-	.incbin "baserom.gba", 0xE1FD54, 0xCF4
+	.incbin "graphics/banim/banim_gar_sp1_sheet_7.4bpp.lz"
 	.global banim_gar_sp1_sheet_8
 banim_gar_sp1_sheet_8:
-	.incbin "baserom.gba", 0xE20A48, 0xE30
+	.incbin "graphics/banim/banim_gar_sp1_sheet_8.4bpp.lz"
 	.global banim_gar_sp1_sheet_9
 banim_gar_sp1_sheet_9:
-	.incbin "baserom.gba", 0xE21878, 0xE30
+	.incbin "graphics/banim/banim_gar_sp1_sheet_9.4bpp.lz"
 	.global banim_gar_sp1_sheet_10
 banim_gar_sp1_sheet_10:
-	.incbin "baserom.gba", 0xE226A8, 0xC0C
+	.incbin "graphics/banim/banim_gar_sp1_sheet_10.4bpp.lz"
 	.global banim_gar_sp1_agbpal
 banim_gar_sp1_agbpal:
-	.incbin "baserom.gba", 0xE232B4, 0x34
+	.incbin "graphics/banim/banim_gar_sp1.agbpal.lz"
 	.global banim_gar_sp1_oam_l_bin
 banim_gar_sp1_oam_l_bin:
 	.incbin "baserom.gba", 0xE232E8, 0x99C
@@ -4165,7 +4165,7 @@ banim_gar_sp1_modes_bin:
 	.incbin "baserom.gba", 0xE2499C, 0x60
 	.global banim_gar_sp1_2_agbpal
 banim_gar_sp1_2_agbpal:
-	.incbin "baserom.gba", 0xE249FC, 0x34
+	.incbin "graphics/banim/banim_gar_sp1_2.agbpal.lz"
 	.global banim_gar_sp1_2_oam_l_bin
 banim_gar_sp1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xE24A30, 0x1FC
@@ -4180,7 +4180,7 @@ banim_gar_sp1_2_modes_bin:
 	.incbin "baserom.gba", 0xE24EF0, 0x60
 	.global banim_gar_sp1_3_agbpal
 banim_gar_sp1_3_agbpal:
-	.incbin "baserom.gba", 0xE24F50, 0x38
+	.incbin "graphics/banim/banim_gar_sp1_3.agbpal.lz"
 	.global banim_gar_sp1_3_oam_l_bin
 banim_gar_sp1_3_oam_l_bin:
 	.incbin "baserom.gba", 0xE24F88, 0x99C
@@ -4195,7 +4195,7 @@ banim_gar_sp1_3_modes_bin:
 	.incbin "baserom.gba", 0xE2663C, 0x60
 	.global banim_gar_sp1_4_agbpal
 banim_gar_sp1_4_agbpal:
-	.incbin "baserom.gba", 0xE2669C, 0x38
+	.incbin "graphics/banim/banim_gar_sp1_4.agbpal.lz"
 	.global banim_gar_sp1_4_oam_l_bin
 banim_gar_sp1_4_oam_l_bin:
 	.incbin "baserom.gba", 0xE266D4, 0x1FC
@@ -4210,10 +4210,10 @@ banim_gar_sp1_4_modes_bin:
 	.incbin "baserom.gba", 0xE26B94, 0x60
 	.global banim_drz_mg1_sheet_0
 banim_drz_mg1_sheet_0:
-	.incbin "baserom.gba", 0xE26BF4, 0xA70
+	.incbin "graphics/banim/banim_drz_mg1_sheet_0.4bpp.lz"
 	.global banim_drz_mg1_agbpal
 banim_drz_mg1_agbpal:
-	.incbin "baserom.gba", 0xE27664, 0x38
+	.incbin "graphics/banim/banim_drz_mg1.agbpal.lz"
 	.global banim_drz_mg1_oam_l_bin
 banim_drz_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xE2769C, 0x1A8
@@ -4228,37 +4228,37 @@ banim_drz_mg1_modes_bin:
 	.incbin "baserom.gba", 0xE27B60, 0x60
 	.global banim_bos_at1_sheet_0
 banim_bos_at1_sheet_0:
-	.incbin "baserom.gba", 0xE27BC0, 0x12FC
+	.incbin "graphics/banim/banim_bos_at1_sheet_0.4bpp.lz"
 	.global banim_bos_at1_sheet_2
 banim_bos_at1_sheet_2:
-	.incbin "baserom.gba", 0xE28EBC, 0x12CC
+	.incbin "graphics/banim/banim_bos_at1_sheet_2.4bpp.lz"
 	.global banim_bos_at1_sheet_3
 banim_bos_at1_sheet_3:
-	.incbin "baserom.gba", 0xE2A188, 0x1318
+	.incbin "graphics/banim/banim_bos_at1_sheet_3.4bpp.lz"
 	.global banim_bos_at1_sheet_1
 banim_bos_at1_sheet_1:
-	.incbin "baserom.gba", 0xE2B4A0, 0x1234
+	.incbin "graphics/banim/banim_bos_at1_sheet_1.4bpp.lz"
 	.global banim_bos_at1_sheet_4
 banim_bos_at1_sheet_4:
-	.incbin "baserom.gba", 0xE2C6D4, 0x12A4
+	.incbin "graphics/banim/banim_bos_at1_sheet_4.4bpp.lz"
 	.global banim_bos_at1_sheet_5
 banim_bos_at1_sheet_5:
-	.incbin "baserom.gba", 0xE2D978, 0x1198
+	.incbin "graphics/banim/banim_bos_at1_sheet_5.4bpp.lz"
 	.global banim_bos_at1_sheet_6
 banim_bos_at1_sheet_6:
-	.incbin "baserom.gba", 0xE2EB10, 0x127C
+	.incbin "graphics/banim/banim_bos_at1_sheet_6.4bpp.lz"
 	.global banim_bos_at1_sheet_7
 banim_bos_at1_sheet_7:
-	.incbin "baserom.gba", 0xE2FD8C, 0x129C
+	.incbin "graphics/banim/banim_bos_at1_sheet_7.4bpp.lz"
 	.global banim_bos_at1_sheet_8
 banim_bos_at1_sheet_8:
-	.incbin "baserom.gba", 0xE31028, 0x1368
+	.incbin "graphics/banim/banim_bos_at1_sheet_8.4bpp.lz"
 	.global banim_bos_at1_sheet_9
 banim_bos_at1_sheet_9:
-	.incbin "baserom.gba", 0xE32390, 0x1328
+	.incbin "graphics/banim/banim_bos_at1_sheet_9.4bpp.lz"
 	.global banim_bos_at1_agbpal
 banim_bos_at1_agbpal:
-	.incbin "baserom.gba", 0xE336B8, 0x38
+	.incbin "graphics/banim/banim_bos_at1.agbpal.lz"
 	.global banim_bos_at1_oam_l_bin
 banim_bos_at1_oam_l_bin:
 	.incbin "baserom.gba", 0xE336F0, 0x690
@@ -4273,7 +4273,7 @@ banim_bos_at1_modes_bin:
 	.incbin "baserom.gba", 0xE34640, 0x60
 	.global banim_bos_at1_2_agbpal
 banim_bos_at1_2_agbpal:
-	.incbin "baserom.gba", 0xE346A0, 0x38
+	.incbin "graphics/banim/banim_bos_at1_2.agbpal.lz"
 	.global banim_bos_at1_2_oam_l_bin
 banim_bos_at1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xE346D8, 0x690
@@ -4288,31 +4288,31 @@ banim_bos_at1_2_modes_bin:
 	.incbin "baserom.gba", 0xE355BC, 0x60
 	.global banim_fifd_mg1_sheet_0
 banim_fifd_mg1_sheet_0:
-	.incbin "baserom.gba", 0xE3561C, 0x1260
+	.incbin "graphics/banim/banim_fifd_mg1_sheet_0.4bpp.lz"
 	.global banim_fifd_mg1_sheet_1
 banim_fifd_mg1_sheet_1:
-	.incbin "baserom.gba", 0xE3687C, 0x1290
+	.incbin "graphics/banim/banim_fifd_mg1_sheet_1.4bpp.lz"
 	.global banim_fifd_mg1_sheet_2
 banim_fifd_mg1_sheet_2:
-	.incbin "baserom.gba", 0xE37B0C, 0x10F4
+	.incbin "graphics/banim/banim_fifd_mg1_sheet_2.4bpp.lz"
 	.global banim_fifd_mg1_sheet_3
 banim_fifd_mg1_sheet_3:
-	.incbin "baserom.gba", 0xE38C00, 0x1134
+	.incbin "graphics/banim/banim_fifd_mg1_sheet_3.4bpp.lz"
 	.global banim_fifd_mg1_sheet_4
 banim_fifd_mg1_sheet_4:
-	.incbin "baserom.gba", 0xE39D34, 0x11E8
+	.incbin "graphics/banim/banim_fifd_mg1_sheet_4.4bpp.lz"
 	.global banim_fifd_mg1_sheet_5
 banim_fifd_mg1_sheet_5:
-	.incbin "baserom.gba", 0xE3AF1C, 0xC60
+	.incbin "graphics/banim/banim_fifd_mg1_sheet_5.4bpp.lz"
 	.global banim_fifd_mg1_sheet_7
 banim_fifd_mg1_sheet_7:
-	.incbin "baserom.gba", 0xE3BB7C, 0xC14
+	.incbin "graphics/banim/banim_fifd_mg1_sheet_7.4bpp.lz"
 	.global banim_fifd_mg1_sheet_6
 banim_fifd_mg1_sheet_6:
-	.incbin "baserom.gba", 0xE3C790, 0xC4C
+	.incbin "graphics/banim/banim_fifd_mg1_sheet_6.4bpp.lz"
 	.global banim_fifd_mg1_agbpal
 banim_fifd_mg1_agbpal:
-	.incbin "baserom.gba", 0xE3D3DC, 0x38
+	.incbin "graphics/banim/banim_fifd_mg1.agbpal.lz"
 	.global banim_fifd_mg1_oam_l_bin
 banim_fifd_mg1_oam_l_bin:
 	.incbin "baserom.gba", 0xE3D414, 0x5B4
@@ -4327,19 +4327,19 @@ banim_fifd_mg1_modes_bin:
 	.incbin "baserom.gba", 0xE3E124, 0x60
 	.global banim_fifd_he1_sheet_0
 banim_fifd_he1_sheet_0:
-	.incbin "baserom.gba", 0xE3E184, 0xA60
+	.incbin "graphics/banim/banim_fifd_he1_sheet_0.4bpp.lz"
 	.global banim_fifd_he1_sheet_1
 banim_fifd_he1_sheet_1:
-	.incbin "baserom.gba", 0xE3EBE4, 0xA90
+	.incbin "graphics/banim/banim_fifd_he1_sheet_1.4bpp.lz"
 	.global banim_fifd_he1_sheet_2
 banim_fifd_he1_sheet_2:
-	.incbin "baserom.gba", 0xE3F674, 0x1074
+	.incbin "graphics/banim/banim_fifd_he1_sheet_2.4bpp.lz"
 	.global banim_fifd_he1_sheet_3
 banim_fifd_he1_sheet_3:
-	.incbin "baserom.gba", 0xE406E8, 0xD88
+	.incbin "graphics/banim/banim_fifd_he1_sheet_3.4bpp.lz"
 	.global banim_fifd_he1_agbpal
 banim_fifd_he1_agbpal:
-	.incbin "baserom.gba", 0xE41470, 0x58
+	.incbin "graphics/banim/banim_fifd_he1.agbpal.lz"
 	.global banim_fifd_he1_oam_l_bin
 banim_fifd_he1_oam_l_bin:
 	.incbin "baserom.gba", 0xE414C8, 0x37C
@@ -4354,19 +4354,19 @@ banim_fifd_he1_modes_bin:
 	.incbin "baserom.gba", 0xE41C5C, 0x60
 	.global banim_fifd_hk1_sheet_0
 banim_fifd_hk1_sheet_0:
-	.incbin "baserom.gba", 0xE41CBC, 0x10FC
+	.incbin "graphics/banim/banim_fifd_hk1_sheet_0.4bpp.lz"
 	.global banim_fifd_hk1_sheet_1
 banim_fifd_hk1_sheet_1:
-	.incbin "baserom.gba", 0xE42DB8, 0xDBC
+	.incbin "graphics/banim/banim_fifd_hk1_sheet_1.4bpp.lz"
 	.global banim_fifd_hk1_sheet_2
 banim_fifd_hk1_sheet_2:
-	.incbin "baserom.gba", 0xE43B74, 0xA44
+	.incbin "graphics/banim/banim_fifd_hk1_sheet_2.4bpp.lz"
 	.global banim_fifd_hk1_sheet_3
 banim_fifd_hk1_sheet_3:
-	.incbin "baserom.gba", 0xE445B8, 0x7C0
+	.incbin "graphics/banim/banim_fifd_hk1_sheet_3.4bpp.lz"
 	.global banim_fifd_hk1_agbpal
 banim_fifd_hk1_agbpal:
-	.incbin "baserom.gba", 0xE44D78, 0x58
+	.incbin "graphics/banim/banim_fifd_hk1.agbpal.lz"
 	.global banim_fifd_hk1_oam_l_bin
 banim_fifd_hk1_oam_l_bin:
 	.incbin "baserom.gba", 0xE44DD0, 0x330
@@ -4381,10 +4381,10 @@ banim_fifd_hk1_modes_bin:
 	.incbin "baserom.gba", 0xE454D4, 0x60
 	.global banim_mf_mi1_sheet_0
 banim_mf_mi1_sheet_0:
-	.incbin "baserom.gba", 0xE45534, 0x9A0
+	.incbin "graphics/banim/banim_mf_mi1_sheet_0.4bpp.lz"
 	.global banim_mf_mi1_agbpal
 banim_mf_mi1_agbpal:
-	.incbin "baserom.gba", 0xE45ED4, 0x38
+	.incbin "graphics/banim/banim_mf_mi1.agbpal.lz"
 	.global banim_mf_mi1_oam_l_bin
 banim_mf_mi1_oam_l_bin:
 	.incbin "baserom.gba", 0xE45F0C, 0xD4
@@ -4399,7 +4399,7 @@ banim_mf_mi1_modes_bin:
 	.incbin "baserom.gba", 0xE46134, 0x60
 	.global banim_prif_ro1_2_agbpal
 banim_prif_ro1_2_agbpal:
-	.incbin "baserom.gba", 0xE46194, 0x68
+	.incbin "graphics/banim/banim_prif_ro1_2.agbpal.lz"
 	.global banim_prif_ro1_2_oam_l_bin
 banim_prif_ro1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xE461FC, 0x84
@@ -4414,7 +4414,7 @@ banim_prif_ro1_2_modes_bin:
 	.incbin "baserom.gba", 0xE46380, 0x58
 	.global banim_fifd_mg1_2_agbpal
 banim_fifd_mg1_2_agbpal:
-	.incbin "baserom.gba", 0xE463D8, 0x38
+	.incbin "graphics/banim/banim_fifd_mg1_2.agbpal.lz"
 	.global banim_fifd_mg1_2_oam_l_bin
 banim_fifd_mg1_2_oam_l_bin:
 	.incbin "baserom.gba", 0xE46410, 0x5B4
