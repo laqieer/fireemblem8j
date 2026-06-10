@@ -1682,3 +1682,88 @@ them would require bespoke per-type decoders or accept mis-split risk — below 
 residue chunks have no US correspondence at all (genuinely unidentified gaps — incbin in US too,
 per D10). The `banim_`/`gfx_` placeholders (1583+104) are already descriptive US asset names
 penalized only by the regex prefix — a separate axis-definition question, not addressed here.
+## D40 — code-grind-4: the probe-driven asm→C grind + the extern-aliased function-local-static pattern (2026-06-10)
+
+**Context.** Branch `feat/code-grind-4`. Took the D38 deferred region-different starter batch (the
+named hard cases: SubtitleHelp*, fontgrp cluster, bmidoten `Extended*`, IsItemDanceRing,
+VerifySramFast_Core, GetGenericChibiImg, PutGuideCategoryList, SortUnitList) plus a mined sweep of the
+masked/exact-tier gbadisasm functions. **30 functions graduated gbadisasm asm → byte-matching C**
+(matching-C 2474→2504, 29.01%→29.36%), all `make check` + `make compare` + `make clean && make compare`
+gated, self-containment held 100%. All named from US source.
+
+**Two reusable tools (committed):**
+1. **`scripts/probe_func.py`** — fast per-function `.text` byte-diff vs the JP ROM range, mirroring the
+   Makefile C recipe EXACTLY including the `printf '.text\n.align 2, 0\n'` zero-fill tail (Makefile:302).
+   That tail is decisive: agbcc's own `.s` has no trailing align, so `arm-none-eabi-as` pads a
+   non-4-aligned Thumb function with the `46c0` (`mov r8,r8`) nop — but the JP ROM uses `00 00`. The real
+   build's appended `.align 2, 0` produces `00 00`; a probe omitting it gives a false 2-byte mismatch.
+   The probe compiles standalone (no link), so link-time relocations show as `00`/unresolved-`bl` — i.e.
+   "diffs only at reloc offsets" = a guaranteed match once those symbols resolve.
+2. **`scripts/screen_grad.py`** — batch-screen every still-asm gbadisasm function with a funcmap US name,
+   bucketing MATCH / NEAR (diffs land ONLY at the object's R_ARM reloc offsets — the D38 unblock vein) /
+   FAR (body diffs → genuinely region-different codegen) / NOEXTRACT (extract+compile failed). Turns the
+   opaque "make compare RED" into an actionable triage; the NEAR bucket is the high-yield queue.
+
+**New graduation sub-pattern — function-local static placed by extern-aliasing (extends D38).** When a
+JP function has a `static`/local-array lut whose bytes are already carved as region-different DATA (in a
+named blob or a `dat_*_ref` object), DON'T re-emit the static from C (its private `.rodata`/`.data` would
+either overlap the blob or land at the wrong address). Instead **reference the lut as an `extern` and
+bind that name as a pure ABS data symbol at the lut's JP address** (no bytes, no conflict — the data
+carve owns the bytes). The function's literal pool then relocates to the fixed address and the `.text`
+byte-matches. Used for SubtitleHelp_Loop (`lut.29` @ 0x5C6690), SubtitleHelpDarkenerOnHBlank
+(`bldyLut.10` @ 0x5C6646), StoreNumberHexStringToSmallBuffer (`hexDigits` @ 0xDC3DC). **Caveat (a real
+trap):** this only works when the function takes the lut's ADDRESS (the literal is the symbol). If the JP
+copies the lut ONTO THE STACK (a genuine *local* array, e.g. GetGenericChibiImg's 8 `ldm/stm` words),
+agbcc MUST emit the init-const into the object's own section, so the extern-alias trick changes the
+codegen (shorter function) — that case needs splitting the owning data blob + binding the pointed-to
+symbols, which entangles the concurrent DATA agent → DEFERRED.
+
+**Other patterns exercised (all D38-class, verify-or-revert, make compare the oracle):**
+- *Callee/global binding from the function's own literal pool* (authoritative): bind still-asm
+  `sub_<addr>` callees under their US names (PutSubtitleHelpText, GenerateMovementMap, Clear64byte,
+  DrawSpecialCharGlyph, BMapVSync_InitMapAnimations, UnpackChapterMap, …) and region-different EWRAM/ROM
+  globals (gActiveFont, gDefaultFont, the 12 banim-ekr scroll globals, the bmmap pools, …). ALWAYS
+  cross-check the address against an already-exported symbol first — many JP names ARE exported by the
+  region-same stranded_* carves or `dat_*_ref` blobs (binding them again = `multiple definition`; caught
+  ~8× this session and dropped the redundant bind).
+- *`gNumMusicPlayers` ABS = 9* — `NUM_MUSIC_PLAYERS = (u16)gNumMusicPlayers`, where gNumMusicPlayers is a
+  US-ldscript ABS link symbol (value 9), so the low halfword of its "address" IS the count. Bound as a
+  `data` sym with value 0x9 (m4aMPlayAllStop/Continue).
+- *JP inlines a helper US calls* — bmidoten `GenerateExtendedMovementMap[OnRange]` inline SetWorkingBmMap
+  (`gWorkingBmMap = map`). Use **`extern inline`** so agbcc inlines it WITHOUT emitting a duplicate
+  out-of-line copy (the out-of-line SetWorkingBmMap stays at its own bound address; `inline`/`static
+  inline` either double-define or conflict with the header).
+- *Struct stride from the asm* — GetPidDefeatType's lut entry is 4 bytes in JP (`adds r1,#4`) vs the US
+  2-byte struct; a 4-byte `{u8 pid; u8 defeatType; STRUCT_PAD(2,4);}` reproduces the stride.
+
+**Buckets this session (honest):**
+- **30 byte-matched + graduated** (listed across the code-grind-4 commits): IsItemDanceRing,
+  SubtitleHelp_Loop, SubtitleHelpDarkenerOnHBlank, SetTextFontGlyphs, ResetTextFont, ResetText,
+  SetTextDrawNoClear, AddSpecialChar, GetSpecialCharChr, StoreNumberHexStringToSmallBuffer,
+  PutTwoSpecialChar, PutNumberOrBlank, PutNumberBonus, PutGuideCategoryList,
+  GenerateExtendedMovementMap[OnRange], m4aMPlayAllStop, m4aMPlayAllContinue, MPlayOpen,
+  EfxUpdatePartsofScroll, EfxleveluphbMain, DisableMapPaletteAnimations, BMapVSync_Start,
+  AsnycKeyStatusExt, GetPidDefeatType, IsItemUnsealedForUnit, SetItemUnsealedForCharacter,
+  UnitGainSupportLevel, Hardware_CopyViaDmaStruct, InitMapForMinimap.
+- **Deferred (NEAR but blocked, left as asm):** GetGenericChibiImg (stack-local pointer lut — needs the
+  frontier_df4_misc_lo blob split + gGenericIcon_* binding, DATA-agent coordination); SoundInit (refs
+  gMPlayJumpTable's RAM address 0x03006470, but src/m4a.c's `.bss` is auto-placed at 0x03000120 — needs an
+  m4a-RAM-layout carved_ram pass).
+- **FAR / region-different body, left as asm (oracle-confirmed):** VerifySramFast_Core (REG_WAITCNT
+  reg-alloc + mid-function literal-pool placement), the m4aSongNum* family (m4a register-alloc divergence,
+  D31/D38 — needs CC1_OLD/-O1/MUSICPLAYER_LIST config), and the screener's other FAR bucket.
+- **SortUnitList: NOT a single function.** Its gbadisasm carve is a 9.2 KB *merged run* (0x094ED0–0x0972D4,
+  ~4778 asm lines) spanning the whole unitlistscreen sort cluster; graduating it requires splitting the run
+  into constituent functions first — out of scope for the per-function fast path.
+
+**Remaining frontier + difficulty (next agent):** (1) the rest of the **NOEXTRACT** masked/exact bucket
+(CgbSound 1.1 KB, GetBanimTerrainGround, FaceRefreshSprite, CpPerform_PerformAction, DisplayBmTile,
+MU_SetupPixelEffect, SetupFaceGfxData, PutSpriteListToHiOam, ManimShiftingSineWaveScanlineBuf_Loop,
+SetSramFastFunc, CanUnitSupportNow) — each needs hand-added file-local structs/statics + callee/global
+binds, then probe; most are NEAR once the deps are supplied (the workflow is mechanical now). (2) **m4a RAM
+layout** (place src/m4a.o's bss/data globals at their JP addresses) unblocks SoundInit and likely several
+more m4a wrappers. (3) **A placed-local-static carve helper** (split a DATA blob to carve a function's
+emitted `.rodata`/`.data` at a fixed address + bind the pointed-to symbols) unblocks GetGenericChibiImg and
+the genuine stack-local-pointer-lut class — but must coordinate with the DATA agent. (4) The **FAR
+register-alloc** class (m4a, VerifySramFast_Core) needs m2c→permuter or the compiler-config (CC1_OLD).
+(5) **Merged-run splits** (SortUnitList) need a run-decomposition step before per-function porting.
