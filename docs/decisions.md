@@ -1291,3 +1291,28 @@ NONMATCHING/graduation pipeline doc (D26). Oracle-validated, not advice-only.
 
 **Status:** ACTIVE Phase-2 fast-path engine. Next: re-run after each Phase-1 data-carve advance (newly-placed data
 globals unblock more funcmap functions), then move to m2c+permuter for the region-different remainder.
+
+**Batch-2 re-run (2026-06-10, branch `feat/phase2-code-2`).** Re-ran the fast path at the same commit as batch 1 with
+no new data carves landed since: **0/16 exact + 0/210 masked graduated — every candidate correctly reverted (tree
+returned to byte-identical baseline, `make compare` OK, `make clean && make compare` OK).** This is the EXPECTED
+exhaustion signal, not a regression: batch 1 already harvested every funcmap-tier function whose data dependencies were
+header-exported globals already placed by sibling carves. Root cause of the remainder, verified per-function:
+  * **Data-blocked (dominant)** — the remaining funcmap functions reference TU-PRIVATE file-scope statics that
+    `extract_func_only` deliberately DROPS, and which are NOT yet carved as named symbols (still raw incbin) →
+    undefined reference at link → RED → correct revert. E.g. `BG_GetPriority` needs hardware.c's
+    `static struct BgCnt *sBGControlStructPtrs[]` (JP 0x085775F8); `SioSend` needs sio_core.c's `sSendCursor`/
+    `sWriteCursor` RAM statics; `SetChapterFlag`/`GetClassData` need `gChapterFlagBits`/`gClassData` data tables not
+    yet defined in src. These unblock automatically once Phase-1 data carving (concurrent data-agent work; this branch
+    must NOT touch `asm/dat_*.s` or `graphics/`) names those objects — then re-run the fast path.
+  * **Genuinely region-different bytes** — JP item-ID layout differs: `IsItemDanceRing` inlines `item & 0xFF` + a
+    numeric range (0x7c..0x80) where US calls `GetItemIndex` + named switch; the ~44 bmitem `GetItem*` accessors
+    expand `ITEM_INDEX` differently. m2c+permuter or NONMATCHING-C (D26), low value (mostly 1-line getters).
+  * **Per-TU compiler override needed** — m4a/agb_sram TUs need `CC1 := $(CC1_OLD)` / `-O1` (US uses old_agbcc for
+    library code; agbcc playbook §0/§1) which the fast path doesn't apply.
+
+**Decision (validated by Copilot CLI, 2026-06-10): do NOT widen `extract_func_only` to also emit referenced
+TU-private statics.** It would blur data-carve ownership, duplicate raw-data responsibility, and create
+multiple-definition / address-placement conflicts once Phase-1 names those objects. Function-only graduation should
+only accept bodies whose data deps are already exported/placed; `make compare` stays the revert oracle. The fast-path
+funcmap backlog is EXHAUSTED at this commit — correct action is to gate on Phase-1 data advances and re-run, and route
+the true region-different + compiler-override remainder to m2c/permuter/NONMATCHING separately. Don't force matches.
