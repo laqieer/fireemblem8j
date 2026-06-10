@@ -13,3 +13,8 @@ gpProcEkrLevelup	020200B4	data	codegrind_banim_ekr_overlay
 gpProcEkrClasschg	020200B0	data	codegrind_banim_ekr_overlay
 # gCtrlC01Blocking int 0x02000024 (asm/ekrBattle_2.s =0x02000024)
 gCtrlC01Blocking	02000024	data	codegrind_banim_ekr_overlay
+# ekrBattleTriggerNewRoundStart literal pool (asm verified):
+#   gBanimValid s16[2]   0x0203E100 (read as ldrsh array)
+#   gBanimDoneFlag u32[] 0x0201FB04 (zeroed: str [r0]/[r0,#4])
+gBanimValid	0203E100	data	codegrind_banim_ekr_overlay
+gBanimDoneFlag	0201FB04	data	codegrind_banim_ekr_overlay
