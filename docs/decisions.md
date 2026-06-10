@@ -1362,3 +1362,56 @@ it's authoritative; the ref maps are hints with known errors. (c) When graduatin
 graduate-deleted `asm/<fn>.s` + `gbadisasm_<fn>.tsv` (a prior commit this session missed them → `git ls-files` still
 tracked them; caught by re-staging). (d) Self-containment baseline this session measured **59.98%** on a clean glue
 rebuild (the quoted 50.48% was a stale generated-`asm/baserom.s` artifact present at session start).
+
+## D33 — gClassData reassignment + the extern-inline-accessor / literal-pool-binding graduation patterns (2026-06-10)
+
+**Context.** Batch 2 of D32 (branch `feat/phase1-data-tables-2`). Did the gClassData fix D32 flagged + extended the
+Phase-1→Phase-2 unblock to four new sub-patterns. **31 functions graduated to matching C** (matching-C 2322→2353,
+27.23%→27.59%), all `make compare` + `make clean && make compare` + `make check` gated.
+
+**1. gClassData reassignment (the D32 to-do).** `gClassData` (JP 0x0885B6BC, 10668 B = 127×sizeof(struct
+ClassData)=0x54) was swallowed by `frontier_df4_banim_b.o gap68`, MISLABELED as banim graphics. It sits EXACTLY
+between `gCharacterData` (..0x85B6BC) and `gItemData` (0x85E068..), both already named — so the gap was obviously the
+class table. Reassigned: dropped the gap68 carved_rom row + the frontier `.s` section + the orphan `.bin`, and carved
+`asm/dat_gClassData_ref.s` (named incbin `gClassData`, the exact convention of `dat_gCharacterData_ref.s`). It is
+region-different (JP nameTextId/descTextId msg IDs + JP ROM pointers at +0x34..0x50) so kept as byte-perfect named
+incbin, NOT literal C — but the NAMED symbol is what matters: the class accessors' literal pool base `gClassData-0x54`
+(=0x0885B668) now resolves, unblocking their port. (Verified gap68 in OTHER frontier files is unrelated — each TU has
+its own gap68 numbering.)
+
+**2. `extern inline` accessor injection — the key technique (new `scripts/graduate_inline_accessors.py`).** Many
+funcmap functions INLINE a small `inline` data accessor (`GetUnit`=`gUnitLookup[id&0xFF]`,
+`GetClassData`=`gClassData+(id-1)`, `GetTrap`=`sTrapPool+id`). `extract_func_only` emits ONLY the target body, so the
+accessor compiled to an out-of-line CALL → different bytes than the JP -O2 ROM (which inlined it) → revert. FIX:
+prepend the accessor's US body as **`extern inline`** (GNU89/agbcc semantics: inlined at every call site but NEVER
+emits a standalone out-of-line copy — so NO multiple-definition with the accessor's OWN already-carved object, e.g.
+`GetUnit.o`/`GetClassData.o`). Plain `inline` (non-static) DOES emit a global copy → collides; `static inline` trips
+`-Werror` "static follows non-static" against the header prototype. `extern inline` is the only form that both inlines
+and stays symbol-clean. Graduated this way: GetClassSMSId, CanClassWieldWeaponType (gClassData); GetUnitFromCharId,
+InitUnits, FixROMUnitStructPtr, UnitDrop, UnitGive, SetAllUnitNotBackSprite, HidePlayerUnits, CountAvailableBlueUnits,
+CountRedUnits, CountGreenUnits (GetUnit); GetTrapAt, GetTypedTrapAt, AddTrap, IsMapChangeEnabled, CountDownTraps
+(GetTrap). Prereq: the accessor's data global is already named/placed.
+
+**3. Three binding sub-cases, address ALWAYS from the function's literal pool (authoritative):**
+   - **TU-private EWRAM static array → baseline_syms.** `sTrapPool` (struct Trap[64]) JP 0x0203A610 + `sTrapLast` JP
+     0x0203A810 (from `asm/GetTrapAt.s`/`ClearTraps.s`); `sSupportScreenUnitCount` (EWRAM_OVERLAY int) JP 0x020136E8.
+     Prepend `extern struct Trap sTrapPool[TRAP_MAX_COUNT];` etc. to the function-only C.
+   - **CONST_DATA ROM pointer → baseline_syms (ABS symbol, no bytes — does NOT conflict with the raw blob that still
+     incbins those bytes).** `sSupportScreenUnits` (=`(void*)gBufPrep`) JP 0x08A95B10 — the 4 bytes just BEFORE the
+     carved `uisupport.o(.data)` 0xA95B14 (another silent absorb, like gClassData). Bound, not re-carved (low risk).
+   - **Already-named ROM table/pointer → just `extern` it.** `gCharacterEndingTitleLut` (already
+     `dat_gCharacterEndingTitleLut_ref.s` at 0xAC09E8) unblocked GetPidTitleTextId; `sTalkState` (already defined by the
+     partial `src/scene.o` at 0x085B90D4) unblocked SetTalkFlag/ClearTalkFaceRefs/ClearAllTalkFlags/SetTalkFaceLayer.
+     NO new binding — `extract_func_only` just dropped the file-scope `extern`, re-add it. (A redundant baseline_syms
+     bind of an already-defined symbol → `multiple definition` link error; remove it.)
+
+**Skipped (logged, not failures).** `gCharacterEndingDefeatLut` (GetPidDefeatType): JP 0xAC0AF8 is owned by an
+existing `dat_worldmap_gmapunit_p1655` per-sym-shifted carve and the bytes don't read as a clean (pid,defeatType)
+table — identity ambiguous, 1 function, not worth the mislabel risk. `gamerankings` (3 fns): the rank-threshold tables
+are region-SAME in VALUE (US `{10,20,30,40,50,...}` == JP bytes) but the inter-table SPACING differs (JP gaps 0x1A/0x28
+vs US 0x10/0xc), so a contiguous typed-C data port won't match — defer. uisupport/bmunit/bmtrick reverts are deeper
+dep chains (GetCharacterData struct-deref, map-change statics) — left for a later targeted bind.
+
+**Reusable takeaway.** `extern inline` is the missing tool for graduating any function that inlines an already-carved
+`inline` accessor — it composes with the D32 binding classes and stays oracle-gated. Self-containment held ~62.3% (the
+gClassData move is a relabel between two named-incbin representations, byte-neutral).
