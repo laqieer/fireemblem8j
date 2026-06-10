@@ -42,14 +42,15 @@ jobs:
           git clone --depth 1 https://github.com/pret/agbcc.git
           cd agbcc && ./build.sh && ./install.sh .. && cd ..
 
-      - name: Setup asset toolchain (gbagfx/bin2c/preproc)
-        # Phase-0 extracted assets compile via gbagfx; build it so the acceptance
-        # test fails ONLY on real `.incbin "baserom.gba"`, not on a missing tool.
+      - name: Setup asset toolchain (gbagfx/bin2c/preproc/aif2pcm)
+        # Extracted assets compile via gbagfx (graphics) + aif2pcm (sound samples);
+        # build them so the acceptance test fails ONLY on real `.incbin "baserom.gba"`.
         run: |
           git clone --depth 1 https://github.com/laqieer/fireemblem8u.git ../fireemblem8u || true
           scripts/tools/gbagfx/setup.sh
           scripts/tools/bin2c/setup.sh
           scripts/tools/preproc/setup.sh
+          scripts/tools/aif2pcm/setup.sh
 
       - name: Acceptance test -- build WITHOUT baserom.gba (must fail today)
         # The real definition of done: `make` with baserom.gba absent emits the

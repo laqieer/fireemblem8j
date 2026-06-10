@@ -29,16 +29,17 @@ jobs:
           git clone --depth 1 https://github.com/pret/agbcc.git
           cd agbcc && ./build.sh && ./install.sh .. && cd ..
 
-      - name: Setup asset toolchain (gbagfx/bin2c/preproc)
-        # The build now compiles committed PNG/.pal assets into ROM bytes via gbagfx
-        # (Phase 0), so the asset tools must be built before `make`. Prefer the exact
-        # US gbagfx (byte-matches FE8's LZ); fall back to pret upstream if the clone
-        # fails. This is a BUILD DEPENDENCY only -- the sha1 oracle is unchanged.
+      - name: Setup asset toolchain (gbagfx/bin2c/preproc/aif2pcm)
+        # The build now compiles committed assets into ROM bytes: PNG/.pal via gbagfx,
+        # and the 439 direct-sound PCM samples (.aif) via aif2pcm. These tools must be
+        # built before `make`. Prefer the exact US tools (byte-match FE8); fall back to
+        # pret upstream if the clone fails. BUILD DEPENDENCY only -- sha1 oracle unchanged.
         run: |
           git clone --depth 1 https://github.com/laqieer/fireemblem8u.git ../fireemblem8u || true
           scripts/tools/gbagfx/setup.sh
           scripts/tools/bin2c/setup.sh
           scripts/tools/preproc/setup.sh
+          scripts/tools/aif2pcm/setup.sh
 
       - name: Fetch baserom (sha1-verified)
         if: ${{ env.BASEROM_URL != '' }}
