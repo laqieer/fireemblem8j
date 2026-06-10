@@ -575,3 +575,8 @@
 02E570	02E598	src/IsMapChangeEnabled.o(.text)	IsMapChangeEnabled (masked-tier graduated; extern inline GetTrap)
 02E8E0	02E908	src/CountDownTraps.o(.text)	CountDownTraps (masked-tier graduated; extern inline GetTrap)
 02E100	02E128	src/ClearTraps.o(.text)	ClearTraps (masked-tier graduated; extern sTrapPool/sTrapLast)
+0BB1F8	0BB21C	src/GetPidTitleTextId.o(.text)	GetPidTitleTextId (masked-tier graduated; extern gCharacterEndingTitleLut)
+0069AC	0069C0	src/SetTalkFlag.o(.text)	SetTalkFlag (masked-tier graduated; extern sTalkState)
+0066EC	006710	src/ClearTalkFaceRefs.o(.text)	ClearTalkFaceRefs (masked-tier graduated; extern sTalkState)
+00699C	0069AC	src/ClearAllTalkFlags.o(.text)	ClearAllTalkFlags (masked-tier graduated; extern sTalkState)
+007890	0078E8	src/SetTalkFaceLayer.o(.text)	SetTalkFaceLayer (masked-tier graduated; extern sTalkState)
