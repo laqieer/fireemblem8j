@@ -35,6 +35,17 @@ STRIP   := $(PREFIX)strip$(EXE)
 CC1     := tools/agbcc/bin/agbcc$(EXE)
 CC1_OLD := tools/agbcc/bin/old_agbcc$(EXE)
 
+# Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
+# scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
+# committed PNG/.pal source into the raw GBA bytes the ROM contains, so graphics
+# regions build from source instead of `.incbin "baserom.gba"`. See
+# docs/tools/{gbagfx,bin2c,preproc}.md.
+GBAGFX     := tools/gbagfx/gbagfx$(EXE)
+BIN2C      := tools/bin2c/bin2c$(EXE)
+PREPROC    := tools/preproc/preproc$(EXE)
+# gbagfx converts both tiles and palettes; PAL2GBAPAL aliases it for the .pal rule.
+PAL2GBAPAL := $(GBAGFX)
+
 PYTHON  ?= python3
 
 ifeq ($(UNAME),Darwin)
@@ -136,6 +147,53 @@ asm/baserom.o: baserom.gba
 $(ASM_OBJECTS): %.o: %.s
 	$(AS) $(ASFLAGS) -g $< -o $@
 
+#### Asset (graphics) rules ####
+# Generic source-asset pipeline, ported from ../fireemblem8u. These turn the
+# COMMITTED editable source (PNG / JASC .pal) into the raw GBA bytes the ROM
+# contains, via the vendored gbagfx (scripts/tools/gbagfx/setup.sh). The build
+# intermediates (*.4bpp *.8bpp *.gbapal *.lz *.rl) are gitignored and regenerated.
+#
+#   png (committed) --4bpp--> .4bpp --lz--> .4bpp.lz --.incbin--> object --> ROM
+#
+# baserom.gba is NEVER in this chain: an asset region built this way reproduces
+# byte-for-byte with baserom removed (the Phase-0 self-containment goal).
+#
+# Bit depth is taken from the OUTPUT extension; -width is passed where a decode
+# needs it (encode infers width from the PNG). LZ_FLAGS pins gbagfx's -mindist
+# PER ASSET (1/2/3) so the recompressed bytes match the original FE8 compressor.
+# A `.s` with no recipe and these stop make from trying to "rebuild" committed
+# sources via a chain of implicit rules.
+%.png: ;
+%.pal: ;
+
+%.1bpp: %.png  ; $(GBAGFX) $< $@
+%.4bpp: %.png  ; $(GBAGFX) $< $@
+%.8bpp: %.png  ; $(GBAGFX) $< $@
+%.gbapal: %.pal ; $(PAL2GBAPAL) $< $@
+%.gbapal: %.png ; $(GBAGFX) $< $@
+%.lz: % ; $(GBAGFX) $< $@ $(LZ_FLAGS)
+%.rl: % ; $(GBAGFX) $< $@
+
+# bin2c: emit a tiles blob as a C array header (used where a 4bpp must be a C
+# `const` array rather than an incbin).
+%.4bpp.h: %.4bpp
+	$(BIN2C) $< $(subst .,_,$(notdir $<)) | sed 's/^const //' > $@
+
+# --- PILOT asset (Phase 0) ---------------------------------------------------
+# Img_MenuScrollBar (the menu scroll-bar UI graphic, 16x64, 4bpp) is the FIRST
+# FE8J region whose ROM bytes are reproduced from a REBUILT committed source asset
+# (graphics/misc/Img_MenuScrollBar.png) instead of `.incbin "baserom.gba"`. It was
+# LZ-compressed in the original ROM with gbagfx's default minimum match distance
+# of 2 (verified by decompress->recompress->diff against the ROM blob at
+# 0x00A9645C). Pin it so the rebuilt .4bpp.lz is byte-identical to the original.
+graphics/misc/Img_MenuScrollBar.4bpp.lz: LZ_FLAGS := -mindist 2
+
+# asm/dat_worldmap_gmapunit_p1598.o now .incbins the REBUILT
+# graphics/misc/Img_MenuScrollBar.4bpp.lz (not baserom), so it must be regenerated
+# from the committed PNG before the asm is assembled. (The generic $(ASM_OBJECTS)
+# rule has no way to know about an .incbin'd generated file, so state it here.)
+asm/dat_worldmap_gmapunit_p1598.o: graphics/misc/Img_MenuScrollBar.4bpp.lz
+
 # C compile pipeline (agbcc): cpp -> iconv UTF-8->CP932 -> agbcc -> as.
 # NONMATCH_OBJECTS reuse this exact recipe but are NOT in $(C_OBJECTS) /
 # $(ALL_OBJECTS), so they compile under `make nonmatching` yet never link.
@@ -176,9 +234,24 @@ clean:
 	find asm src -name '*.o' -type f -delete
 	$(RM) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
 	$(RM) $(NONMATCH_CFILES:.c=.s)
+	# Regenerated asset build intermediates (committed source is PNG/.pal; these
+	# are rebuilt by the %.4bpp/%.lz/... rules). Delete ONLY gitignored ones --
+	# `git clean -Xf` removes solely ignored files, so a COMMITTED asset such as
+	# graphics/debug_font.4bpp.h (the hand-committed C array #included by
+	# src/fontgrp.c) is preserved. A bare `find -name '*.4bpp.h' -delete` would
+	# wrongly nuke it and break the build. Falls back to nothing outside a git tree.
+	@git clean -Xf -- 'graphics/**/*.1bpp' 'graphics/**/*.4bpp' 'graphics/**/*.8bpp' \
+		'graphics/**/*.gbapal' 'graphics/**/*.lz' 'graphics/**/*.rl' 'graphics/**/*.4bpp.h' \
+		'graphics/*.1bpp' 'graphics/*.4bpp' 'graphics/*.8bpp' 'graphics/*.gbapal' \
+		'graphics/*.lz' 'graphics/*.rl' 'graphics/*.4bpp.h' >/dev/null 2>&1 || true
 
 # Fast repo-consistency lint (no toolchain / no ROM needed): every object the build links
 # has a git-tracked source. Catches the "layout row without a committed .s/.c" class that
 # builds locally (stale .o) but fails CI's fresh checkout. Also enforced in CI.
 check:
 	$(PYTHON) scripts/check_layout.py
+
+# Keep chained asset intermediates (e.g. the .4bpp produced en route from PNG to
+# .4bpp.lz) instead of letting make treat them as deletable intermediates and
+# rebuild them on every invocation.
+.SECONDARY:

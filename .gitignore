@@ -11,6 +11,18 @@
 .dep/
 .deps/
 
+# Asset build intermediates (Phase 0). The COMMITTED source is the editable
+# PNG / JASC .pal under graphics/; these are REGENERATED from it by the Makefile's
+# gbagfx rules (%.4bpp: %.png, %.lz: %, %.gbapal: %.pal, ...) and must never be
+# committed. baserom.gba is not in their build chain.
+*.1bpp
+*.4bpp
+*.8bpp
+*.gbapal
+*.lz
+*.rl
+*.4bpp.h
+
 # Compiler-generated assembly (agbcc emits src/x.s next to src/x.c).
 # Hand-written assembly lives in asm/ and is tracked.
 src/*.s
@@ -157,6 +169,14 @@ src/_diag_*
 # scripts/tools/coddog/; these are copied to the root only to run coddog).
 /decomp.yaml
 /fe8u.coddog.yaml
+
+# Asset toolchain (Phase 0): gbagfx (graphics + LZ/RL), bin2c (blob->C array),
+# preproc (INCBIN_U8 expander). Built locally into the gitignored tools/<tool>/
+# from ../fireemblem8u via scripts/tools/<tool>/setup.sh. The setup scripts +
+# docs/tools/{gbagfx,bin2c,preproc}.md are tracked; the built binaries are not.
+/tools/gbagfx
+/tools/bin2c
+/tools/preproc
 
 # Scheduler lock (transient local state; was accidentally tracked)
 /.claude/scheduled_tasks.lock
