@@ -1682,6 +1682,7 @@ them would require bespoke per-type decoders or accept mis-split risk — below 
 residue chunks have no US correspondence at all (genuinely unidentified gaps — incbin in US too,
 per D10). The `banim_`/`gfx_` placeholders (1583+104) are already descriptive US asset names
 penalized only by the regex prefix — a separate axis-definition question, not addressed here.
+
 ## D40 — code-grind-4: the probe-driven asm→C grind + the extern-aliased function-local-static pattern (2026-06-10)
 
 **Context.** Branch `feat/code-grind-4`. Took the D38 deferred region-different starter batch (the
@@ -1767,3 +1768,58 @@ emitted `.rodata`/`.data` at a fixed address + bind the pointed-to symbols) unbl
 the genuine stack-local-pointer-lut class — but must coordinate with the DATA agent. (4) The **FAR
 register-alloc** class (m4a, VerifySramFast_Core) needs m2c→permuter or the compiler-config (CC1_OLD).
 (5) **Merged-run splits** (SortUnitList) need a run-decomposition step before per-function porting.
+
+## D41 — the HONEST matching-C ceiling is 8209 (not 8528); verified-run harvest for partial TUs (2026-06-10)
+
+**Context.** Branch `feat/tracker-port-1`. Task #26 asked for an honest denominator: matching-C's real
+ceiling is US-C functions, NOT the flat 8,528 calcprogress denominator, because the US decomp itself keeps
+`asm/arm.o`/`asm/arm_call.o` as descriptive ARM-mode `.s` (its gold standard) and links libc/libgcc from
+`tools/agbcc`. None of that can ever become matching C.
+
+**Part A — `scripts/us_source_tracker.py` + `docs/us_source_inventory.md`.** Classify every US function symbol
+in `../fireemblem8u/fireemblem8.map` by the US source kind of its address (the authoritative cut), parsing the
+object *section* ranges (` .text/.rodata/.data 0x08ADDR 0xSIZE <obj>` — data sections too, because the funcmap
+is a combined function+data symbol map and ~5,942 of its 7,739 rows are DATA globals past the end of `.text`).
+Cross with this repo's byte-matched set (text symbols in the linked `src/*.o`, same source of truth as
+calcprogress axis 2). **Honest totals from the full US text-symbol table:**
+  * **US-C-portable: 8209** — the real matching-C ceiling.
+  * **US-ASM-stays: 20** (arm.o/arm_call.o) + **LIBC/LIBGCC: 150** = 170 functions that legitimately stay
+    non-C (the US keeps them that way).
+  * Graduated at session start: 2450/8209 = 29.85% of the real ceiling (the calcprogress "29.01% of 8528" is
+    of an inflated denominator; the reachable max on that axis is 8209/8528 = 96.3%).
+The funcmap-tracked subset is small (only 1,664 US-C funcs have a per-function exact/masked correspondence);
+the worklist therefore ranks TUs by ungraduated US-C count from the FULL symbol table, not the funcmap.
+
+**Part B — verified-run harvest (`scripts/harvest_verified_runs.py`).** The bulk of ungraduated US-C functions
+are `no-funcmap` (no per-function correspondence) — neither `carve_exact` (funcmap exact-tier only) nor
+`port_run` (largest-run-only, then `carved_objs()` rejects the TU forever) reaches them. But `find_runs.py`
+(D2) proves many form VERIFIED runs: contiguous blocks whose compiled subset byte-matches the JP ROM. The new
+harvester carves each still-uncarved verified run of a partially-ported TU into a separately-named object
+`src/<tu>_<start>.c` (the `exact_<addr>` trick), graduating the gbadisasm descriptive asm it covers. Safety
+mirrors carve_exact: it removes a per-function gbadisasm fragment + its `asm/<sym>.s` ONLY when the C run
+byte-matches in the FULL build (`make compare` the sole oracle, verify-or-revert); runs overlapping a `src/*.o`
+or a SHARED/stranded asm fragment are skipped as unsafe to split. **NO `git add -A`.**
+
+**Harvested: +17 functions (matching-C 2474 → 2491, 29.01% → 29.21%):**
+  * proc: ProcCmd_END_DUPLICATES; soundwrapper: MusicFi_OnLoop;
+  * bmreliance: GetUnitSupporterUnit, ProcessTurnSupportExp, HaveCharactersMaxSupport;
+  * face: FaceChibiSpr_OnIdle, UnpackFaceChibiSprGraphics, FaceBlink_Init/PutEyeSprite/AnimLoop/WaitLoop,
+    FaceMouth_Loop, FaceChange_LoadGfx;
+  * prepscreen: Prep_GetActiveMenuItemTextId, PrepScreenMenu_OnBPress/OnCheckMap/OnUnk3.
+All gated `make check` + `make compare` + `make clean && make compare` + self-containment 100%.
+
+**Confirmed frontier (the honest "remaining matching-C work").** The named targets' OTHER verified runs do
+NOT graduate, and the reason is uniform: the run's code body byte-matches (the isolated-compile non-reloc diff
+is literally 0 — e.g. statscreen DisplayLeftPanel), but the FULL build fails because a referenced symbol is an
+UNPLACED TU-private static or shared `.rodata`/EWRAM table (statscreen `gMid_*`, `sPage*TextInfo`,
+`sStatScreenInfo`; hardware/bmio/bmmap/bmidoten/minimap similar). This is exactly the D38 frontier
+(function-local-static / TU-private-data placement), NOT region-different codegen. Unblocking each needs a
+per-TU data-binding pass (bind the region-same statics as baseline_syms at their JP literal-pool addresses, or
+carve the rodata) before the verified run can land — substantial per-TU data work, deferred. The verify-or-
+revert harvester leaves all of these reverted at zero risk, so the ceiling-honest worklist + harvester are the
+reusable artifacts for that next pass.
+
+**Operational note.** `find_runs` is slow on large TUs; a wall-clock kill mid-`port_run` can strand a TU
+(asm removed, C carve unfinished → carved_rom overlap, build RED). Recovery is always: `git checkout` the
+removed `asm/<sym>.s` + `gbadisasm_<sym>.tsv`, `rm` the partial `src/<tu>_<addr>.*` and the harvest fragments,
+`make layout`. Run the harvester per-TU (or small batches) to bound wall-clock.

@@ -1,0 +1,3 @@
+005EE4	006228	src/face_08005EE4.o(.text)	face_08005EE4(run): FaceMouth_Loop, FaceBlink_PutEyeSprite, FaceBlink_Init...
+0058D0	005A08	src/face_080058D0.o(.text)	face_080058D0(run): UnpackFaceChibiSprGraphics, FaceChibiSpr_OnIdle
+006554	0065AC	src/face_08006554.o(.text)	face_08006554(run): FaceChange_LoadGfx
