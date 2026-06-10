@@ -174,59 +174,31 @@ $(ASM_OBJECTS): %.o: %.s
 %.lz: % ; $(GBAGFX) $< $@ $(LZ_FLAGS)
 %.rl: % ; $(GBAGFX) $< $@
 
+# .fk: FE "fake compression" -- a 4-byte LE header (total-size<<8, low byte 0 =
+# uncompressed) followed by the raw bytes verbatim. Portrait tilesets (and similar
+# graphics) are marked compressed in the ROM but stored raw under this header. The
+# rule (matching ../fireemblem8u's `%.fk: % ; ./scripts/compressor.py $< fk`) is
+# implemented inline so it needs no extra script.
+%.fk: %
+	$(PYTHON) -c "import sys,struct;d=open(sys.argv[1],'rb').read();open(sys.argv[2],'wb').write(struct.pack('<I',(len(d)+4)<<8)+d)" $< $@
+
 # bin2c: emit a tiles blob as a C array header (used where a 4bpp must be a C
 # `const` array rather than an incbin).
 %.4bpp.h: %.4bpp
 	$(BIN2C) $< $(subst .,_,$(notdir $<)) | sed 's/^const //' > $@
 
-# --- PILOT asset (Phase 0) ---------------------------------------------------
-# Img_MenuScrollBar (the menu scroll-bar UI graphic, 16x64, 4bpp) is the FIRST
-# FE8J region whose ROM bytes are reproduced from a REBUILT committed source asset
-# (graphics/misc/Img_MenuScrollBar.png) instead of `.incbin "baserom.gba"`. It was
-# LZ-compressed in the original ROM with gbagfx's default minimum match distance
-# of 2 (verified by decompress->recompress->diff against the ROM blob at
-# 0x00A9645C). Pin it so the rebuilt .4bpp.lz is byte-identical to the original.
-graphics/misc/Img_MenuScrollBar.4bpp.lz: LZ_FLAGS := -mindist 2
-
-# asm/dat_worldmap_gmapunit_p1598.o now .incbins the REBUILT
-# graphics/misc/Img_MenuScrollBar.4bpp.lz (not baserom), so it must be regenerated
-# from the committed PNG before the asm is assembled. (The generic $(ASM_OBJECTS)
-# rule has no way to know about an .incbin'd generated file, so state it here.)
-asm/dat_worldmap_gmapunit_p1598.o: graphics/misc/Img_MenuScrollBar.4bpp.lz
-
-# --- Item icon sheet (Phase 1) -----------------------------------------------
-# asm/dat_data_item_icon.s .incbins 224 REBUILT graphics/item_icon/*.4bpp (each
-# re-encoded from a committed PNG via the generic %.4bpp:%.png rule) plus the
-# committed item_icon_palette.agbpal binary. Region-SAME with US, uncompressed 4bpp
-# (no -mindist needed). The .4bpp must be regenerated from the PNGs before the asm
-# is assembled, so derive the dep list from the committed PNGs. (Ported by
-# scripts/extract_graphics.py; see docs/tools/gbagfx.md.)
-ITEM_ICON_4BPP := $(patsubst %.png,%.4bpp,$(wildcard graphics/item_icon/*.png))
-asm/dat_data_item_icon.o: $(ITEM_ICON_4BPP)
-
-# --- Unit-icon WAIT map-sprite sheets (Phase 1) ------------------------------
-# asm/dat_const_data_unit_icon_wait.s .incbins 107 REBUILT
-# graphics/unit_icon/wait/*.4bpp.lz map-sprite sheets (each PNG -> 4bpp -> LZ77 via
-# the generic %.4bpp:%.png and %.lz:% rules). Region-SAME with US (JP 0x081a71e0 ==
-# US 0x081b7828). These are LZ-COMPRESSED, so -mindist must byte-match the original
-# FE8 compressor PER ASSET: 95 sheets use gbagfx's default (mindist 2); the 12 below
-# need mindist 1 (discovered by scripts/extract_graphics.py's 1/2/3 sweep). Ported
-# by scripts/extract_graphics.py; see docs/tools/gbagfx.md.
-UNIT_ICON_WAIT_LZ := $(patsubst %.png,%.4bpp.lz,$(wildcard graphics/unit_icon/wait/*.png))
-asm/dat_const_data_unit_icon_wait.o: $(UNIT_ICON_WAIT_LZ)
-
-graphics/unit_icon/wait/unit_icon_wait_Archer_sheet.4bpp.lz:      LZ_FLAGS := -mindist 1
-graphics/unit_icon/wait/unit_icon_wait_Archer_F_sheet.4bpp.lz:    LZ_FLAGS := -mindist 1
-graphics/unit_icon/wait/unit_icon_wait_Sage_sheet.4bpp.lz:        LZ_FLAGS := -mindist 1
-graphics/unit_icon/wait/unit_icon_wait_Pirate_sheet.4bpp.lz:      LZ_FLAGS := -mindist 1
-graphics/unit_icon/wait/unit_icon_wait_Monk_sheet.4bpp.lz:        LZ_FLAGS := -mindist 1
-graphics/unit_icon/wait/unit_icon_wait_Necromancer_sheet.4bpp.lz: LZ_FLAGS := -mindist 1
-graphics/unit_icon/wait/unit_icon_wait_Bonewalker_sheet.4bpp.lz:  LZ_FLAGS := -mindist 1
-graphics/unit_icon/wait/unit_icon_wait_Wight_sheet.4bpp.lz:       LZ_FLAGS := -mindist 1
-graphics/unit_icon/wait/unit_icon_wait_Wight_Bow_sheet.4bpp.lz:   LZ_FLAGS := -mindist 1
-graphics/unit_icon/wait/unit_icon_wait_Peer_sheet.4bpp.lz:        LZ_FLAGS := -mindist 1
-graphics/unit_icon/wait/unit_icon_wait_Prince_sheet.4bpp.lz:      LZ_FLAGS := -mindist 1
-graphics/unit_icon/wait/unit_icon_wait_Unk77_sheet.4bpp.lz:       LZ_FLAGS := -mindist 1
+# --- PARALLEL-SAFE per-subsystem asset wiring (graphics/**/*.mk) -------------
+# Per-asset -mindist pins and object->generated-asset dependencies used to live
+# INLINE here, which made every graphics-extraction agent edit this one shared
+# file -> merge conflicts. They now live in a TRACKED `*.mk` PER graphics
+# subsystem (e.g. graphics/item_icon/item_icon.mk), auto-collected below. A new
+# extraction batch adds a NEW file under its graphics/<subsystem>/ dir and never
+# touches this Makefile -- so many graphics agents can run concurrently. Each
+# .mk carries that subsystem's `LZ_FLAGS := -mindist N` overrides and its
+# `asm/<file>.o: <generated assets>` deps. (find, not `wildcard graphics/**`,
+# because GNU make does not expand the `**` globstar.)
+GRAPHICS_MK := $(shell find graphics -name '*.mk' 2>/dev/null)
+-include $(GRAPHICS_MK)
 
 # C compile pipeline (agbcc): cpp -> iconv UTF-8->CP932 -> agbcc -> as.
 # NONMATCH_OBJECTS reuse this exact recipe but are NOT in $(C_OBJECTS) /
@@ -275,9 +247,9 @@ clean:
 	# src/fontgrp.c) is preserved. A bare `find -name '*.4bpp.h' -delete` would
 	# wrongly nuke it and break the build. Falls back to nothing outside a git tree.
 	@git clean -Xf -- 'graphics/**/*.1bpp' 'graphics/**/*.4bpp' 'graphics/**/*.8bpp' \
-		'graphics/**/*.gbapal' 'graphics/**/*.lz' 'graphics/**/*.rl' 'graphics/**/*.4bpp.h' \
+		'graphics/**/*.gbapal' 'graphics/**/*.lz' 'graphics/**/*.rl' 'graphics/**/*.fk' 'graphics/**/*.4bpp.h' \
 		'graphics/*.1bpp' 'graphics/*.4bpp' 'graphics/*.8bpp' 'graphics/*.gbapal' \
-		'graphics/*.lz' 'graphics/*.rl' 'graphics/*.4bpp.h' >/dev/null 2>&1 || true
+		'graphics/*.lz' 'graphics/*.rl' 'graphics/*.fk' 'graphics/*.4bpp.h' >/dev/null 2>&1 || true
 
 # Fast repo-consistency lint (no toolchain / no ROM needed): every object the build links
 # has a git-tracked source. Catches the "layout row without a committed .s/.c" class that

@@ -21,6 +21,7 @@
 *.gbapal
 *.lz
 *.rl
+*.fk
 *.4bpp.h
 
 # Compiler-generated assembly (agbcc emits src/x.s next to src/x.c).

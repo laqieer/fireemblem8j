@@ -149,11 +149,73 @@ Both regions are **region-SAME** (JP bytes == US bytes), so the US committed PNG
 - 107 × `graphics/unit_icon/wait/*.png` → `*.4bpp` → `*.4bpp.lz` (variable size).
 - **`-mindist` is per-asset:** **95 sheets use the default 2**; **12 need 1**
   (`Archer`, `Archer_F`, `Sage`, `Pirate`, `Monk`, `Necromancer`, `Bonewalker`,
-  `Wight`, `Wight_Bow`, `Peer`, `Prince`, `Unk77` — pinned in the Makefile). The
-  default (2) is left implicit; only the 12 mindist-1 overrides are written out.
+  `Wight`, `Wight_Bow`, `Peer`, `Prince`, `Unk77` — pinned in
+  `graphics/unit_icon/unit_icon.mk`). The default (2) is left implicit; only the 12
+  mindist-1 overrides are written out.
 - Removes **37,588 B** of baserom incbin (107 directives).
 
 Both pass `make check`, `make compare`, `make clean && make compare`, and the
 build-with-`baserom.gba`-moved-away spot check (the `.4bpp`/`.4bpp.lz` regenerate
 byte-identical to the ROM from the committed PNGs alone). Self-containment rose
 16.96% → 17.35% (−66,324 baserom bytes, −332 incbin directives).
+
+## Parallel-safe `-mindist` pins: per-subsystem `graphics/**/*.mk`
+
+The per-asset `LZ_FLAGS := -mindist N` overrides and the object→generated-asset
+dependencies used to live **inline in the root Makefile**, so every graphics
+extraction edited that one shared file — guaranteed merge conflicts when several
+extraction agents run concurrently. They now live in a **tracked `*.mk` per
+graphics subsystem**, auto-collected by the root Makefile:
+
+```make
+GRAPHICS_MK := $(shell find graphics -name '*.mk' 2>/dev/null)
+-include $(GRAPHICS_MK)
+```
+
+(`find`, not `wildcard graphics/**/*.mk` — GNU make does **not** expand the `**`
+globstar.) Each `graphics/<subsystem>/<subsystem>.mk` carries, for that subsystem
+only: its `graphics/.../x.4bpp.lz: LZ_FLAGS := -mindist N` pins, and its
+`asm/<file>.o: <generated assets>` deps (so the `.4bpp[.lz/.fk]` is rebuilt from
+the committed PNG/`.pal` before the `.s` that `.incbin`s it is assembled).
+
+**A new extraction batch adds a NEW file under its `graphics/<subsystem>/` dir and
+never touches the root Makefile** — so many graphics agents can run in parallel
+with zero pin/dep conflicts. Existing pins (pilot `Img_MenuScrollBar`, item icons,
+unit-icon WAIT) were migrated into `misc.mk`, `item_icon.mk`, `unit_icon.mk`.
+
+## `.fk` (FE "fake compression") format
+
+Some graphics (notably portrait **tilesets**) are marked compressed in the ROM but
+stored **raw** under a 4-byte little-endian header `(len(raw)+4) << 8` (low byte 0 =
+comp-type "uncompressed"), then the raw 4bpp bytes verbatim. The Makefile rule
+mirrors `../fireemblem8u`'s `%.fk: %`:
+
+```make
+%.fk: %
+	$(PYTHON) -c "import sys,struct;d=open(sys.argv[1],'rb').read();open(sys.argv[2],'wb').write(struct.pack('<I',(len(d)+4)<<8)+d)" $< $@
+```
+
+So a tileset builds `png → 4bpp → 4bpp.fk → .incbin → ROM`. `extract_graphics.py`
+tries uncompressed `.4bpp`, then `.4bpp.fk`, then LZ at `-mindist` 1/2/3, and picks
+the one that byte-matches the ROM blob. `*.fk` is a gitignored build intermediate.
+
+## Phase-1 batch 2 (proven at scale): portraits + unit-icon MOVE sheets
+
+**`asm/dat_data_portrait.s` — 482 portrait assets, region-SAME (JP 0x08861950 ==
+US 0x0880d3f8), wired via `graphics/portrait/portrait.mk`.** Per asset class:
+`*_palette` → committed `.agbpal` (159, verbatim); `*_mouth` → `.4bpp` (90,
+uncompressed); `*_chibi` → `.4bpp.lz` (86); `*_card` → `.4bpp.lz` (57); `*_tileset`
+→ `.4bpp.fk` (90). **All LZ assets use gbagfx's default mindist 2 → zero per-asset
+pins.** 482 committed sources (323 PNG + 159 `.agbpal`). Removes **~755 KB** of
+baserom incbin (482 directives).
+
+**`asm/dat_const_data_unit_icon_move_p*.s` — 82 MOVE map-sprite sheets across 80
+objects (region-SAME, LZ77, all mindist 2), wired via `graphics/unit_icon/unit_icon.mk`.**
+The **14 region-DIFFERENT** sheets (`Hero`, `Swordmaster`, `General`, `Bishop`,
+`Cyclops`, `Draco_Zombie`, the Master-Lords, `Journeyman_T2`, the F-variants, …) and
+the **2** `Bard_motion`/`Dancer_motion` symbols with no matching US asset are LEFT as
+`.incbin "baserom.gba"` — honest. Removes **~71 KB** of baserom incbin (82 directives).
+
+Both pass `make check`, `make compare`, and `make clean && make compare` (all assets
+regenerate byte-identical from the committed PNGs/`.agbpal` alone). Self-containment
+rose **17.35% → 22.28%** (−826,532 baserom bytes, −564 incbin directives).

@@ -2,4 +2,4 @@
 @ src/data/unit_icon/const_data_unit_icon_move.o: region-same content at JP 0x081c2224 (US 0x081d286c, shift -0x10648); incbin baserom.gba
 	.global unit_icon_move_Ranger_sheet
 unit_icon_move_Ranger_sheet:
-	.incbin "baserom.gba", 0x1C2224, 0x928
+	.incbin "graphics/unit_icon/move/unit_icon_move_Ranger_sheet.4bpp.lz"

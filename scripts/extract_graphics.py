@@ -104,6 +104,18 @@ def lz_compress(raw, mindist):
         os.unlink(dst)
 
 
+def fk_wrap(raw):
+    """FE "fake-compression" (.fk) wrapper -- the `%.fk: %` rule via scripts/compressor.py.
+
+    A 4-byte LE header `(len(raw)+4) << 8` (i.e. total-size<<8, low byte = comp-type 0
+    meaning "uncompressed") followed by the raw bytes verbatim. The ROM marks portrait
+    tilesets (and similar graphics) as compressed but stores them raw under this header.
+    """
+    import struct
+
+    return struct.pack("<I", (len(raw) + 4) << 8) + raw
+
+
 def parse_entries(asm_text):
     """List of (names[list], off, size, line_index) for each baserom incbin, with the
     .global labels that immediately precede it (the symbol names the C uses)."""
@@ -183,10 +195,16 @@ def main():
                 print(f"  REGION_DIFF  {names[0]} @ {off:#x} ({size:#x}) [{kind}] -- left as incbin")
                 diff += 1
             continue
-        # tiles: try uncompressed 4bpp, then LZ at mindist 1/2/3
+        # tiles: try uncompressed 4bpp, then .fk (raw under a fake-comp header),
+        # then LZ at mindist 1/2/3. The committed source is always the PNG; the
+        # .4bpp / .4bpp.fk / .4bpp.lz is the Makefile-generated incbin target.
         raw = png_to_4bpp(us_path)
         if raw == jp:
             plan[ln] = (f"{rel_out}/{stem}.4bpp", us_path, None)
+            ok += 1
+            continue
+        if fk_wrap(raw) == jp:
+            plan[ln] = (f"{rel_out}/{stem}.4bpp.fk", us_path, None)
             ok += 1
             continue
         matched = False
