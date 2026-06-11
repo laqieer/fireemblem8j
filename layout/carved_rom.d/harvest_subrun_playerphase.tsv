@@ -1,0 +1,4 @@
+01C5A8	01CCEC	src/playerphase_0801C5A8.o(.text)	playerphase_0801C5A8(run): PlayerPhase_MainIdle, DisplayUnitEffectRange, PlayerPhase_InitUnitMovementSelect...
+01C4FC	01C590	src/playerphase_0801C4FC.o(.text)	playerphase_0801C4FC(run): PlayerPhase_Suspend, HandlePlayerCursorMovement
+01D730	01D7B0	src/playerphase_0801D730.o(.text)	playerphase_0801D730(run): HideMoveRangeGraphics, TrySetCursorOn
+01D808	01D838	src/playerphase_0801D808.o(.text)	playerphase_0801D808(run): PlayerPhase_HandleAutoEnd

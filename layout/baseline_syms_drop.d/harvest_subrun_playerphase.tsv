@@ -1,0 +1,15 @@
+CanMoveActiveUnitTo
+DisplayActiveUnitEffectRange
+Eventinfo_CondFalse_2
+GetCombinedEnemyWeaponUsabilityBits
+PlayerPhase_RangeDisplayIdle
+StartOrphanMenuAdjusted
+UnitSpriteHoverUpdate
+HandleMapCursorInput
+HandleMoveCameraWithMapCursor
+HandleMoveMapCursor
+HandlePlayerCursorMovement
+HideMoveRangeGraphics
+TrySetCursorOn
+gProcScr_SALLYCURSOR
+GetPhaseAbleUnitCount
