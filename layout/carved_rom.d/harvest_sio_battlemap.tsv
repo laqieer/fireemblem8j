@@ -1,0 +1,13 @@
+04BBA8	04C018	src/sio_battlemap_0804BBA8.o(.text)	sio_battlemap_0804BBA8(run): LABattleMap_GetTeamCombatScore, LABattleMap_PollSurrenderHeld, LABattleMap_AiPickWeakestTeam...
+04A6F0	04A920	src/sio_battlemap_0804A6F0.o(.text)	sio_battlemap_0804A6F0(run): LinkArenaBattleMap_StartSelectedUnitMu, LinkArenaBattleMap_WaitLButton, LABattleMap_StartFactionTurn...
+04AA0C	04AD2C	src/sio_battlemap_0804AA0C.o(.text)	sio_battlemap_0804AA0C(run): LABattleMap_UpdateCursorMu, UnitHasUsableWeapon, LABattleMap_CheckNoDamageStall_Loop...
+04C50C	04C6C0	src/sio_battlemap_0804C50C.o(.text)	sio_battlemap_0804C50C(run): LABattleMap_AwardBonusPoints, LABattleMap_SkipIfSingleConsoleMode, LABattle_BeginAnims...
+04B1E8	04B3B0	src/sio_battlemap_0804B1E8.o(.text)	sio_battlemap_0804B1E8(run): LABattleMap_ConfirmTarget, LABattleMap_StartCombatantWarpFx, LABattleMap_PrepareCombatantSprites
+04AD38	04AF4C	src/sio_battlemap_0804AD38.o(.text)	sio_battlemap_0804AD38(run): LABattleMap_SelectTarget_Loop, LABattleMap_ForecastMenu_Init
+04B6B4	04B828	src/sio_battlemap_0804B6B4.o(.text)	sio_battlemap_0804B6B4(run): LABattleMap_EliminateTeamsWithoutAttackers, LABattleMap_RecordEliminationAndAdvance
+04B96C	04BA4C	src/sio_battlemap_0804B96C.o(.text)	sio_battlemap_0804B96C(run): LABattleMap_ReceiveTargetSelection, LABattleMap_StartMuAndSavePosition
+04A390	04A3F0	src/sio_battlemap_0804A390.o(.text)	sio_battlemap_0804A390(run): LinkArenaBattleMap_RebuildUnitMap
+04AF8C	04B054	src/sio_battlemap_0804AF8C.o(.text)	sio_battlemap_0804AF8C(run): LABattleMap_DetermineAttackRange
+04B440	04B55C	src/sio_battlemap_0804B440.o(.text)	sio_battlemap_0804B440(run): LABattleMap_ApplyCombatResults
+04BA64	04BB40	src/sio_battlemap_0804BA64.o(.text)	sio_battlemap_0804BA64(run): LABattleMap_ReceiveForecastResponse
+04C46C	04C494	src/sio_battlemap_0804C46C.o(.text)	sio_battlemap_0804C46C(run): LinkArena_StoreTalkChoice

@@ -1,0 +1,12 @@
+StartAiTargetCursor
+gSioSt
+Sio_GetPendingSendCount
+EkrBattleStarting_IsBattleAnimEnabled
+StartLinkArenaMUDeathFade
+LinkArenaBattleMap_BackupUnitItems
+LinkArenaBattleMap_AdvancePhase
+UnitHasUsableWeapon
+LABattleMap_IsSelectOrCancelMsg
+LABattleMap_StartMuAndSavePosition
+SetUnitAllItemsUsesToMax
+LABattleMap_IsForecastMsg

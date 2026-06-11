@@ -1,0 +1,2 @@
+080DEFA4	rom	src/sio_battlemap_0804AA0C.o(.rodata)	sio_battlemap_0804AA0C .rodata region-diff (incbin)
+080DEFA6	rom	src/sio_battlemap_0804B1E8.o(.rodata)	sio_battlemap_0804B1E8 .rodata region-diff (incbin)
