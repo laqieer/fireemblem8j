@@ -1,0 +1,2 @@
+081F54EC	rom	src/statscreen_0808A450.o(.rodata)	statscreen_0808A450 .rodata region-diff (incbin)
+081F550A	rom	src/statscreen_0808ADCC.o(.rodata)	statscreen_0808ADCC .rodata region-diff (incbin)

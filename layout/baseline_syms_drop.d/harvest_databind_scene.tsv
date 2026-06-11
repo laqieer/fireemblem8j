@@ -2,3 +2,16 @@ CheckTalkFlag
 sTalkState
 SetActiveTalkFace
 StartFaceAuto
+Pal_TalkText
+SetInitTalkTextFont
+StartTalkExt
+IsTalkLocked
+Pal_TalkBubble
+Pal_TalkBubble_Inverted
+Pal_Text_Inverted
+ResumeTalk
+SetTalkFaceLayer
+SetTalkFaceMouthMove
+StartTalkOpen
+TalkHasCorrectBubble
+DisplayUiHand
