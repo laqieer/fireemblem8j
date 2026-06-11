@@ -2420,3 +2420,55 @@ masked-split verified run (region-different codegen / non-contiguous), plus hard
 genuine region-diff). These need hand-decomp (IDA/Ghidra), deferred. Pushed `feat/wave2-B`. Siblings own
 scene/bmbattle/opanim (wave2-A) + mu/bmlib/bmmenu (wave2-C) — not touched. (D-number assigned from the free
 sequence; renumber at integration if a concurrent sibling claimed D52.)
+
+## D54 — the no-funcmap pool is a ~47/53 region-same/region-different SPLIT: ~1953 are lever pool, ~2224 hand-decomp (2026-06-11)
+
+**Context.** Branch `feat/classify-nofuncmap` (analysis-only; no build change). D41 made the matching-C ceiling
+honest (~8209 US-C-portable) and D41-D53 graduated the *partial-TU verified-run* remainder via the carve/bind
+levers. Open question: of the ~4,225 ungraduated **no-funcmap** US-C-portable functions (never run through
+`match_us_jp.py`'s exact/masked tiers, so absent from `layout/us_jp_funcmap.tsv`), how many are region-SAME (the
+lever's remaining pool) vs region-DIFFERENT (permuter/hand-decomp)? "No-funcmap" was an UNMEASURED MIX, *not*
+"region-different" — proven by the fact that **2,191 already-graduated** US-C functions were themselves no-funcmap
+(whole-TU/verified-run ports cover funcmap and non-funcmap alike).
+
+**KEY METHOD FINDING — a raw-byte search is the WRONG classifier; the relocation-aware `find_runs` test is right.**
+First attempt reused `match_us_jp.py`'s raw exact/masked search (mask only pointer-LITERAL words). It labeled the
+no-funcmap pool ~1% region-same / ~95% region-different — which is FALSE. Validated against the
+known-region-same control (the 2,191 graduated no-funcmap functions): the raw-byte search calls ~97% of them
+"region-different". Reason: a region-same function RELOCATED to a different JP address differs at every relocation
+site — `bl`/pc-rel `ldr` offset fields and the trailing constant pool, not just pointer literals — so a raw search
+misses relocated region-same code. That is exactly why most US-C functions are no-funcmap (relocated, not
+different) and why the funcmap is small. **The sound classifier is the project's own `find_runs.py` (D2) test,
+applied per function:** compile the US source in isolation (`extract_run.py` + agbcc, the real pipeline), read the
+TRUE reloc offsets from `objdump -r`, mask every reloc-affected byte, masked-search the JP ROM. On the control it
+labels ~97.5% region-same with **0** false region-different → its region-same count is a sound LOWER bound, its
+region-different count a sound UPPER bound on the genuine hand-decomp frontier.
+
+**RESULT (full pool, exact — `scripts/classify_nofuncmap.py`).** Of **4,477** no-funcmap US-C-portable ungraduated
+functions (nm-based count; ~8332 US-C total vs the tracker's map-symbol 8209, a ~1% local-label difference that
+does not affect the split), **4,177 decided** + 300 inconclusive (needle <6 fixed bytes / isolated compile needs TU
+context):
+  * **region-same = 1,953 (46.8% of decided)** — 1,563 reloc-unique + 390 reloc-ambiguous. **THE LEVER'S REMAINING
+    POOL** (harvest_verified_runs / graduate_shared_run / bind_tu_data / subrun_decompose). All emitted to
+    `layout/nofuncmap_region_same.tsv` (jp_addr us_addr size tier name tu), ranked by TU in the report — richest:
+    sio_battlemap 54, bmio 35, banim-ekrbattle 32, …
+  * **region-different = 2,224 (53.2% of decided)** — zero JP match under the reloc mask → genuine codegen
+    difference → permuter / hand-decomp (IDA/Ghidra) frontier.
+  * Splitting the 300 inconclusive at the decided rate → whole-pool estimate ~2,093 region-same / ~2,384
+    region-different. Headline number for the human: **of the no-funcmap pool, ~47% region-same (lever) vs ~53%
+    region-different (hand-decomp)** — NOT the "overwhelmingly placement/binding" intuition; the no-funcmap tail is
+    roughly half genuine region-different, which is where the matching-C ceiling's real cost now lives.
+
+**CEILING IMPLICATION.** Byte/relocation-confirmable matching-C reach = 3,669 graduated + 186 funcmap-tracked
+ungraduated + 1,953 no-funcmap region-same ≈ **5,948 / 8,332 (~71%)**, leaving ~2,224 (+~160 of the inconclusive)
+no-funcmap functions as the real region-different hand-decomp frontier. Caveat: "region-same" = JP instruction
+stream matches modulo relocation = the lever's *domain* (carve + per-TU data binding, D41-D53), not a promise each
+lands in `make compare` without that binding work; some unique-masked-match functions still need TU-private data
+bound first (the D45/D51 UnpackRaw class). They remain lever pool, not hand-decomp.
+
+**Deliverables (committed, analysis-only — build untouched, no `git add -A`):** `scripts/classify_nofuncmap.py`
+(reloc-aware classifier + `--validate` control mode + raw-byte exact pre-pass + multiprocessing), the sized report
+`docs/nofuncmap_classification.md`, and the worklist `layout/nofuncmap_region_same.tsv` (1,953 region-same targets
+for the harvest agents). Default runs a ≥800 sample (env `CLASSIFY_SAMPLE`, here run FULL); `make compare`
+untouched (not a build change). Pushed `feat/classify-nofuncmap`. (D-number from the free sequence; renumber at
+integration if a concurrent sibling claimed D54.)
