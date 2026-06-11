@@ -1,0 +1,4 @@
+UnitGetDeathDropLocation	080181F4	thumb	bmmind_080325C0
+sProcScr_DeathDropAnim	085C5F74	data	bmmind_080325C0
+GetUnitLastItem	08018A48	thumb	bmmind_080325C0
+NewPopup_GeneralItemGot	08011688	thumb	bmmind_080325C0
