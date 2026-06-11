@@ -1,0 +1,7 @@
+02CA5C	02CDC0	src/bmbattle_0802CA5C.o(.text)	bmbattle_0802CA5C(run): BattleInitItemEffect, BattleInitItemEffectTarget, UpdateActorFromBattle...
+02A0C8	02A2A4	src/bmbattle_0802A0C8.o(.text)	bmbattle_0802A0C8(run): BattleGenerateSimulationInternal, BattleGenerateRealInternal, BattleApplyGameStateUpdates
+02B164	02B2FC	src/bmbattle_0802B164.o(.text)	bmbattle_0802B164(run): BattleCheckSureShot, BattleCheckPierce, BattleCheckGreatShield
+02C8BC	02C9A8	src/bmbattle_0802C8BC.o(.text)	bmbattle_0802C8BC(run): UpdateObstacleFromBattle, BeginBattleAnimations
+02C248	02C27C	src/bmbattle_0802C248.o(.text)	bmbattle_0802C248(run): BattleApplyBallistaUpdates
+02C7FC	02C880	src/bmbattle_0802C7FC.o(.text)	bmbattle_0802C7FC(run): InitObstacleBattleUnit
+02CFF4	02D1EC	src/bmbattle_0802CFF4.o(.text)	bmbattle_0802CFF4(run): UnitLevelUp

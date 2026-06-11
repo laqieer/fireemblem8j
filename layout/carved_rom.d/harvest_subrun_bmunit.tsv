@@ -1,0 +1,2 @@
+0187B0	018804	src/bmunit_080187B0.o(.text)	bmunit_080187B0(run): GetUnitKeyItemSlotForTerrain
+018A48	018A60	src/bmunit_08018A48.o(.text)	bmunit_08018A48(run): GetUnitLastItem
