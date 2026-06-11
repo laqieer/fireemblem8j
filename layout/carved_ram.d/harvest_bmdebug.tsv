@@ -1,0 +1,2 @@
+080DC6F8	rom	src/bmdebug_0801BCA4.o(.rodata)	bmdebug_0801BCA4 .rodata region-diff (incbin)
+080DC740	rom	src/bmdebug_0801C2C4.o(.rodata)	bmdebug_0801C2C4 .rodata region-diff (incbin)

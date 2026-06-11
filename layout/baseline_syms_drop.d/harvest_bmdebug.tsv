@@ -1,0 +1,9 @@
+PrintDebugBuildDateAndTime
+SavePlayThroughData
+SetupDebugFontForBG
+IsValidSuspendSave
+ReadSuspendSave
+CountTotalSoundRoomSongs
+Nop_Gamecontrol_0
+EnterSleepMode
+DebugMenuMapIdleCore

@@ -1,0 +1,12 @@
+01BCA4	01BD8C	src/bmdebug_0801BCA4.o(.text)	bmdebug_0801BCA4(run): DebugMenu_ClearEffect, DebugMenu_ErasedEffect, DebugClearMenu_ClearFile...
+01B750	01B80C	src/bmdebug_0801B750.o(.text)	bmdebug_0801B750(run): DummyFunction2, DebugPrintWithProc, DebugPrint...
+01BFB8	01C044	src/bmdebug_0801BFB8.o(.text)	bmdebug_0801BFB8(run): DebugContinueMenu_IsManualContinueAvailable, DebugContinueMenu_ManualContinue, DebugContinueMenu_InitializeFile...
+01B820	01B998	src/bmdebug_0801B820.o(.text)	bmdebug_0801B820(run): DebugMenu_MapEffect, DebugMenu_BgmDraw, DebugMenu_BgmIdle
+01C12C	01C14C	src/bmdebug_0801C12C.o(.text)	bmdebug_0801C12C(run): DebugMenu_FogEffect, DebugContinueMenu_ReleaseEntry, DebugMenu_GNightEffect
+01B718	01B720	src/bmdebug_0801B718.o(.text)	bmdebug_0801B718(run): Get8, Get23
+01BA20	01BA6C	src/bmdebug_0801BA20.o(.text)	bmdebug_0801BA20(run): DebugMapMenu_DisplayInfoIdle, DebugMapMenu_DisplayInfoEffect
+01BF60	01BF88	src/bmdebug_0801BF60.o(.text)	bmdebug_0801BF60(run): DebugMenu_OpenChuudanMenuEffect, DebugMenu_OpenChargeMenuEffect
+01BE28	01BE6C	src/bmdebug_0801BE28.o(.text)	bmdebug_0801BE28(run): DebugContinueMenuEnd
+01BEB4	01BED8	src/bmdebug_0801BEB4.o(.text)	bmdebug_0801BEB4(run): StartupDebugMenu_ChapterSelectIdle
+01C1F0	01C2A4	src/bmdebug_0801C1F0.o(.text)	bmdebug_0801C1F0(run): DebugChargeMenu_Idle
+01C2C4	01C4FC	src/bmdebug_0801C2C4.o(.text)	bmdebug_0801C2C4(run): DebugMenuMapIdleCore
