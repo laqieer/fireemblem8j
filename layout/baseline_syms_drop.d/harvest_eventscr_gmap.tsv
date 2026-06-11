@@ -1,0 +1,10 @@
+EndGmapRmBorder1
+GmapRMExists
+GmapRm_EndAll
+WmShowNationHighlightedMap
+HideGmUnit
+RemoveGmUnit
+ShowGmUnit
+EndWM
+StartSlowLockingFadeToBlack
+GmMu_SetNode
