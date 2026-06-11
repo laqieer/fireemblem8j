@@ -1,0 +1,2 @@
+08DEBC	08DEDC	src/player_interface_0808DEBC.o(.text)	player_interface_0808DEBC(run): GetWindowQuadrant
+08E688	08E75C	src/player_interface_0808E688.o(.text)	player_interface_0808E688(run): PutUnitMapUiStatus

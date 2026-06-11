@@ -1,0 +1,8 @@
+02DC10	02DDEC	src/bmtrade_0802DC10.o(.text)	bmtrade_0802DC10(run): TradeMenu_HelpBox_OnEnd, StartTradeMenu, TradeMenu_TutorialHandCursor_Update...
+02D3AC	02D4C4	src/bmtrade_0802D3AC.o(.text)	bmtrade_0802D3AC(run): TradeMenu_InitItemText, TradeMenu_RefreshItemText
+02D520	02D6CC	src/bmtrade_0802D520.o(.text)	bmtrade_0802D520(run): TradeMenu_UpdateSelection, TradeMenu_ApplyItemSwap
+02D218	02D2F0	src/bmtrade_0802D218.o(.text)	bmtrade_0802D218(run): TradeMenu_InitUnitNameDisplay
+02D2F8	02D370	src/bmtrade_0802D2F8.o(.text)	bmtrade_0802D2F8(run): TradeMenu_HighlightUpdater_OnLoop
+02D76C	02D850	src/bmtrade_0802D76C.o(.text)	bmtrade_0802D76C(run): TradeMenu_OnLoopUnselected
+02D8B8	02D9E4	src/bmtrade_0802D8B8.o(.text)	bmtrade_0802D8B8(run): TradeMenu_OnLoopSelected
+02DA34	02DA80	src/bmtrade_0802DA34.o(.text)	bmtrade_0802DA34(run): TradeMenu_LoadForcedInitialHover

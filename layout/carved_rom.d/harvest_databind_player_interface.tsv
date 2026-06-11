@@ -1,0 +1,7 @@
+08E8CC	08EF9C	src/player_interface_0808E8CC.o(.text)	player_interface_0808E8CC(run): DrawUnitMapUi, GetUnitBurstMapUiOrientationAt, DrawUnitBurstMapUi...
+08F764	08FA60	src/player_interface_0808F764.o(.text)	player_interface_0808F764(run): GoalDisplay_Loop_OnSideChange, PutGoalDisplayWindow, GoalDisplay_Loop_SlideIn...
+08F2C0	08F48C	src/player_interface_0808F2C0.o(.text)	player_interface_0808F2C0(run): InitPlayerPhaseInterface, StartPlayerPhaseSideWindows, EndPlayerPhaseSideWindows
+08EFC4	08F14C	src/player_interface_0808EFC4.o(.text)	player_interface_0808EFC4(run): MMB_Loop_OnSideChange, MMB_Loop_Display
+08FA68	08FAFC	src/player_interface_0808FA68.o(.text)	player_interface_0808FA68(run): Nop_PlayerInterface_1, GoalDisplay_Loop_Display
+08F198	08F1C4	src/player_interface_0808F198.o(.text)	player_interface_0808F198(run): BurstDisplay_Init
+08F4FC	08F584	src/player_interface_0808F4FC.o(.text)	player_interface_0808F4FC(run): DrawGoalDisplayWindow

@@ -2778,3 +2778,51 @@ two Class C defers left in any verified run. The bulk of each TU's ungraduated f
 verified run (region-different codegen / non-contiguous) → hand-decomp (IDA/Ghidra), deferred. Pushed
 `feat/wave3-A`. Siblings own bmbattle/bmunit/bmitemuse (wave3-B) + banim-efxmagic-*/prep_itemscreen (wave3-C) —
 not touched.
+
+## D61 — h4: playerphase/bmmind/bmtrade/player_interface harvested clean; prep_itemscreen is genuine D43-C/D; 429-crash worktree-reset recovery (2026-06-11)
+
+**Context.** Branch `feat/h4` → recovered as `feat/h4b`. Scope: the D41-flagged partial-TU remainders
+`playerphase` (22 worklist fns), `bmmind` (22), `prep_itemscreen` (22 remainder), `player_interface` (21),
+`bmtrade` (20). Applied the COMPLETE D41-D58 toolkit per TU: `bind_tu_data.py` (func_only ABS-bind),
+`subrun_decompose.py` (D52 asm-gap sub-runs), `graduate_shared_run.py`, and `locate_funcs` per-frag direct
+carve (D58). `make compare` the sole oracle, verify-or-revert, NO `git add -A`.
+
+**RESULT — +92 matching-C across 4 TUs; prep_itemscreen deferred (genuine structural blockers).**
+  * **playerphase: +23** (bind_tu_data 0801D370 +10 / func_only ABS-bind; subrun_decompose +13: PlayerPhase_MainIdle
+    cluster 8, PlayerPhase_Suspend/HandlePlayerCursorMovement 2, HideMoveRangeGraphics/TrySetCursorOn 2,
+    PlayerPhase_HandleAutoEnd 1). EXHAUSTED.
+  * **bmmind: +24** (bind_tu_data 0803212C +12: Action* dispatch cluster, +16 ABS binds; subrun +12:
+    DropRescueOnDeath cluster 11, StoreScriptBattleHits 1). EXHAUSTED.
+  * **bmtrade: +22** (bind_tu_data 0802E064 +5: CallTradeTutEvent*; subrun +17: TradeMenu_HelpBox_OnEnd cluster 8,
+    InitItemText/RefreshItemText 2, UpdateSelection/ApplyItemSwap 2, + 5 singletons). EXHAUSTED.
+  * **player_interface: +23** (bind_tu_data +21 across 7 runs, +42 ABS binds: DrawUnitMapUi/burst-ui, GoalDisplay
+    slide/put, InitPlayerPhaseInterface, MMB_Loop, BurstDisplay_Init, DrawGoalDisplayWindow; subrun +2:
+    GetWindowQuadrant, PutUnitMapUiStatus). EXHAUSTED.
+  * **prep_itemscreen: +0.** Confirmed D58's finding via fresh locate_funcs + per-frag direct carve: ALL 7
+    uncarved matched runs (funds-sprite 0809A720, info-bg 0809A804, DrawFunds 0809A890, DrawPromptBox 0809AE20,
+    UnitGridScreen 0809AF98, EndPrepItemScreenFace 0809C224, GiveAll 0809C804) REVERT under BOTH dedup_globals
+    AND func_only. D43-D RAM-layout conflict (gPrepItemTexts=0x02013490 vs sibling prep carves' 0x02013498) +
+    D43-C frontier-blob overlap. The 3 standalone worklist fns (DrawUnitInfoBg_Init, PutImg_PrepItemUseUnk,
+    PutImg_PrepPopupWindow) are region-different (locate_funcs unmatched). Deferred at zero risk — structural,
+    needs blob-split / RAM reconciliation (DATA-agent-coordinated).
+
+**KEY OPERATIONAL FINDING — the harvest scripts REVERT uncommitted carves from a PRIOR pass on the same TU.**
+Running `subrun_decompose` then `graduate_shared_run` (or a `--list`) in sequence WITHOUT committing in between
+silently reverts the earlier bind_tu_data/subrun carves (their git-based snapshot/restore restores the pre-pass
+state). MUST COMMIT after each script's carve batch before running the next tool on the same TU — or run all
+tools, then stage the combined working-tree state in ONE commit (what worked here for bmtrade/player_interface:
+bind_tu_data THEN subrun THEN stage-all-and-commit, no intervening --list).
+
+**429-CRASH WORKTREE-RESET RECOVERY (process note, reusable).** A rate-limit-429 reset DELETED this agent's
+worktree mid-session; the 3 raw `feat/h4` commits survived in git history and an integrator salvage-merged
+playerphase+bmmind to origin/main (`fb04deac9 merge(h4)`), but bmtrade/player_interface/prep_itemscreen work was
+LOST. Recovery: `git worktree list` + `git reflog | grep <tu>` to find the salvaged state, `git ls-tree -r
+origin/main | grep src/<tu>_` to see exactly which carves landed, then `git worktree add -b feat/h4b origin/main`
+a FRESH worktree and RE-RUN the lost TUs (re-ran bmtrade +22 + player_interface +23 cleanly). LESSON: commit AND
+PUSH after EACH TU's batch (not just commit) so a worktree reset can't lose pushed work — done for h4b.
+
+All work gated: `rm -f src/*.s` + `make check` + `make compare` + `make clean && make compare` +
+`check_selfcontained.py` == 0 incbins; named from US; staged explicitly (NO `git add -A`, only `tools` symlink
+left unstaged); verify-or-revert; baserom/checksum/CI untouched. Pushed `feat/h4b`. Siblings own
+eventscr*/bmio, prep_menuproc/mapanim_spellassoc/bmudisp, unitlistscreen/fontgrp/bmdifficulty/chapterintrofx,
+permuter — not touched. (D-number from the free sequence; renumber at integration if a concurrent sibling claimed D61.)

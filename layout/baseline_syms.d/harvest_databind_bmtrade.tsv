@@ -1,0 +1,7 @@
+ProcScr_TradeMenu_TutorialEventLock	085C411C	data	bmtrade_0802E064
+StartTradeMenuTutorialHandCursor	0802DDA4	thumb	bmtrade_0802E064
+EventScr_TradeTutStart	085C4144	data	bmtrade_0802E064
+EventScr_TradeTut_SelectItem	085C4188	data	bmtrade_0802E064
+StartDoubleTradeMenuTutorialHandCursor	0802DDB8	thumb	bmtrade_0802E064
+EventScr_TradeTut_PressAtoGetItem	085C41D4	data	bmtrade_0802E064
+EventScr_TradeTutDone	085C4220	data	bmtrade_0802E064
