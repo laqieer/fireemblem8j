@@ -1,0 +1,9 @@
+FaceExists
+GetTalkChoiceResult
+GetTalkFaceHPos
+IsTalkActive
+SetTalkUnkStr
+gSprite_TalkTextBack
+gSprite_TalkTextFront
+gTalkFaceHPosLut
+strcpy

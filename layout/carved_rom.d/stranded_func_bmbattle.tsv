@@ -1,5 +1,3 @@
 02A5D4	02A60C	asm/stranded_bmbattle.o(.text.s_0802A5D4)	bmbattle:InitBattleUnitWithoutBonuses region-same Thumb (descriptive incbin)
-02ABD0	02AC00	asm/stranded_bmbattle.o(.text.s_0802ABD0)	bmbattle:ComputeBattleUnitEffectiveHitRate region-same Thumb (descriptive incbin)
 02BE6C	02BF70	asm/stranded_bmbattle.o(.text.s_0802BE6C)	bmbattle:CheckBattleUnitStatCaps region-same Thumb (descriptive incbin)
-02C428	02C46C	asm/stranded_bmbattle.o(.text.s_0802C428)	bmbattle:ModifyUnitSpecialExp region-same Thumb (descriptive incbin)
 02C678	02C6A4	asm/stranded_bmbattle.o(.text.s_0802C678)	bmbattle:BattleUnitTargetCheckCanCounter region-same Thumb (descriptive incbin)

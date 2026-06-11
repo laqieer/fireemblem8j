@@ -1,0 +1,2 @@
+02ABD0	02AC00	src/bmbattle_0802ABD0.o(.text)	bmbattle_0802ABD0(run): ComputeBattleUnitEffectiveHitRate
+02C428	02C46C	src/bmbattle_0802C428.o(.text)	bmbattle_0802C428(run): ModifyUnitSpecialExp
