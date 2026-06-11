@@ -1,0 +1,9 @@
+00CCC4	00CD70	src/eventscr_gmap_0800CCC4.o(.text)	eventscr_gmap_0800CCC4(run): EventB7_WmBigMapWait, EventB8_WmShowBigMapHighlight, EventB9_WmRemoveHighlightNationPart1...
+00C864	00C894	src/eventscr_gmap_0800C864.o(.text)	eventscr_gmap_0800C864(run): EventA0_WmRemoveUnit, EventA1_WmShowUnit, EventA2_WmHideUnit
+00D0B0	00D0BC	src/eventscr_gmap_0800D0B0.o(.text)	eventscr_gmap_0800D0B0(run): Nop_EventscrGmap_3, EventCA_, EventCB_
+00C0D4	00C124	src/eventscr_gmap_0800C0D4.o(.text)	eventscr_gmap_0800C0D4(run): Event81_WmFadeOut, Event82_WmEnd
+00C13C	00C1C4	src/eventscr_gmap_0800C13C.o(.text)	eventscr_gmap_0800C13C(run): Event84_WmSetCameraOntoNode, Event85_WmSetCameraOntoUnit
+00CFB0	00CFFC	src/eventscr_gmap_0800CFB0.o(.text)	eventscr_gmap_0800CFB0(run): Nop_EventscrGmap_0, EventC5_WmClearPortrait
+00C934	00C964	src/eventscr_gmap_0800C934.o(.text)	eventscr_gmap_0800C934(run): EventA6_WmUnitSetOnNode
+00D014	00D04C	src/eventscr_gmap_0800D014.o(.text)	eventscr_gmap_0800D014(run): EventC6_WmDisplayText
+00D08C	00D0AC	src/eventscr_gmap_0800D08C.o(.text)	eventscr_gmap_0800D08C(run): EventC9_RemoveWmText
