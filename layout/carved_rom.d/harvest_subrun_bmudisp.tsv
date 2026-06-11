@@ -1,0 +1,2 @@
+027FA8	0280C4	src/bmudisp_08027FA8.o(.text)	bmudisp_08027FA8(run): PutBlendWindowUnitSprite, ClearUnitSpriteList, HideUnitSprite
+0265CC	02662C	src/bmudisp_080265CC.o(.text)	bmudisp_080265CC(run): ApplyUnitSpritePalettes, ApplyUnitSpriteSepiaPalette
