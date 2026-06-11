@@ -1,0 +1,8 @@
+AnimUpdateAll
+ClearSprites
+EkrEfxStatusClear
+EkrPlayMainBGM
+NewEkrBattle
+Proc_Run
+UnregisterEfxSoundSeExist
+gProcTreeRootArray
