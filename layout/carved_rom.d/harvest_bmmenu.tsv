@@ -1,0 +1,24 @@
+024468	0245FC	src/bmmenu_08024468.o(.text)	bmmenu_08024468(run): SummonCommandEffect, SummonSelection_OnSelect, YobimaCommandUsability...
+0225C4	02261C	src/bmmenu_080225C4.o(.text)	bmmenu_080225C4(run): CommandEffectEndPlayerPhase, MapMenu_UnitCommand, MapMenu_OptionsCommand...
+022A04	022AF8	src/bmmenu_08022A04.o(.text)	bmmenu_08022A04(run): GiveEffect, MakeUnitRescueTransferGraphics, TakeSelection_OnSelect...
+022D4C	022E1C	src/bmmenu_08022D4C.o(.text)	bmmenu_08022D4C(run): WeaponSelectMenu_SwitchIn, BallistaRangeMenu_SwitchOut, AttackMapSelect_Select...
+023B00	023BCC	src/bmmenu_08023B00.o(.text)	bmmenu_08023B00(run): StaffCommandRange, HideMoveRangeGraphicsWrapper2, StaffItemSelect_Usability...
+022C60	022CFC	src/bmmenu_08022C60.o(.text)	bmmenu_08022C60(run): HideMoveRangeGraphicsWrapper, WeaponSelectMenu_IsAvailable, WeaponSelectMenu_Selected
+023514	0236B8	src/bmmenu_08023514.o(.text)	bmmenu_08023514(run): ItemSubMenu_RestartItemSelect, ItemSubMenu_RestartItemSelectAfterDiscard, ItemSubMenu_IsUseAvailable
+023964	023A90	src/bmmenu_08023964.o(.text)	bmmenu_08023964(run): BallistaRangeMenu_Select, FillBallistaRange, StaffCommandUsability
+024ACC	024B80	src/bmmenu_08024ACC.o(.text)	bmmenu_08024ACC(run): ItemMenu_AreOtherCommandsAvailable, ItemMenu_DrawOtherCommands, ItemMenu_SelectOtherCommands
+0226AC	0226EC	src/bmmenu_080226AC.o(.text)	bmmenu_080226AC(run): MapMenu_GuideCommand, MapMenu_DangerZone_UnusedEffect
+022B54	022BF8	src/bmmenu_08022B54.o(.text)	bmmenu_08022B54(run): StartUnitBallistaSelect, StartUnitWeaponSelect
+022E54	022EFC	src/bmmenu_08022E54.o(.text)	bmmenu_08022E54(run): AttackMapSelect_SwitchIn, AttackMapSelect_End
+0238A4	023914	src/bmmenu_080238A4.o(.text)	bmmenu_080238A4(run): MenuCommand_SelectYes, BallistaRangeMenu_BallistaUsability
+023BD8	023C44	src/bmmenu_08023BD8.o(.text)	bmmenu_08023BD8(run): StaffItemSelect_OnHover, StaffItemSelect_SwitchOut
+024930	0249D8	src/bmmenu_08024930.o(.text)	bmmenu_08024930(run): ExitCommandEffect, AttackCommandUsability
+024BA4	024BF0	src/bmmenu_08024BA4.o(.text)	bmmenu_08024BA4(run): ItemMenu_SwitchOut_DoNothing, ItemMenuHelpBox
+024C7C	024C9C	src/bmmenu_08024C7C.o(.text)	bmmenu_08024C7C(run): MapMenu_IsRetreatCommandAvailable, MapMenu_RetreatCommand
+02339C	0233EC	src/bmmenu_0802339C.o(.text)	bmmenu_0802339C(run): ItemSelectMenu_Usability
+023734	0237BC	src/bmmenu_08023734.o(.text)	bmmenu_08023734(run): ItemSubMenu_UseItem
+0237FC	023830	src/bmmenu_080237FC.o(.text)	bmmenu_080237FC(run): ItemSubMenu_TradeItem
+023F74	023F94	src/bmmenu_08023F74.o(.text)	bmmenu_08023F74(run): SupplyCommandEffect
+024218	0242BC	src/bmmenu_08024218.o(.text)	bmmenu_08024218(run): StealMapSelect_Select
+0248D0	0248FC	src/bmmenu_080248D0.o(.text)	bmmenu_080248D0(run): RideCommandEffect
+024A5C	024AA0	src/bmmenu_08024A5C.o(.text)	bmmenu_08024A5C(run): ItemMenu_Draw1stCommand
