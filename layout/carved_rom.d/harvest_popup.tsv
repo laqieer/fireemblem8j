@@ -1,0 +1,2 @@
+011C88	011DB0	src/popup_08011C88.o(.text)	popup_08011C88(run): StartBrownTextBoxCore, StartBrownTextBox
+011870	011B04	src/popup_08011870.o(.text)	popup_08011870(run): BrownTextBox_Loop

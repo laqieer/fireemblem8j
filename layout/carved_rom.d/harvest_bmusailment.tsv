@@ -1,0 +1,6 @@
+0358E4	035D58	src/bmusailment_080358E4.o(.text)	bmusailment_080358E4(run): RenderMapForFogFadeIfUnitDied, BeginUnitHealAnim, BeginUnitPoisonDamageAnim...
+03621C	036574	src/bmusailment_0803621C.o(.text)	bmusailment_0803621C(run): GorgonEggHatchDisplay_Next, StatusDecayDisplay_Init, StatusDecayDisplay_Display...
+036040	0360B8	src/bmusailment_08036040.o(.text)	bmusailment_08036040(run): FinishDamageDisplay, TerrainHealDisplay_Next
+0360F0	03618C	src/bmusailment_080360F0.o(.text)	bmusailment_080360F0(run): PoisonDamageDisplay_Display, PoisonDamageDisplay_Next
+035E9C	035EDC	src/bmusailment_08035E9C.o(.text)	bmusailment_08035E9C(run): StatusHealEffect_Finish
+035F50	035FD8	src/bmusailment_08035F50.o(.text)	bmusailment_08035F50(run): MassEffectDisplay_Check

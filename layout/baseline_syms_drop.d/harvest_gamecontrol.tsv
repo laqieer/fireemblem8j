@@ -1,0 +1,7 @@
+ComputeChapterRankings
+NextRN
+RegisterChapterTimeAndTurnCount
+StoreRNState
+LoadGameCoreGfxLegacyFrame
+StartMuralBackground
+EndProcIfNotMarkedB
