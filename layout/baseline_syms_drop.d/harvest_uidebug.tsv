@@ -1,0 +1,7 @@
+UpdateMapViewWithFog
+DoesCharExistAsPlayerUnit
+AreAnyEnemyUnitDead
+GetDeadEnemyAmount
+HaveCharactersMaxSupport
+Debug_DecrementUnitStats
+IsCharAlivePlayerUnit
