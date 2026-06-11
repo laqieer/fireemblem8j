@@ -1,0 +1,6 @@
+# cross-branch dedup: GLOBAL symbols graduated to real src/ defs but still ABS-bound by a sibling branch
+CanUnitUseItem
+FillBallistaRangeMaybe
+MakeGiveTargetList
+MakeTargetListForSummon
+MakeTargetListForWeapon
