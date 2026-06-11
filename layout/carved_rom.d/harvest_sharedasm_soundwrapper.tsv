@@ -1,0 +1,3 @@
+0021A8	0023C8	src/soundwrapper_080021A8.o(.text)	soundwrapper_080021A8(run): GetCurrentBgmSong, IsBgmPlaying, Sound_SetBGMVolume...
+0029D8	002A48	src/soundwrapper_080029D8.o(.text)	soundwrapper_080029D8(run): Sound_ForceChangeBgm, DeleteAll6CWaitMusicRelated, Sound_StopBgmImmediate
+002820	00284C	src/soundwrapper_08002820.o(.text)	soundwrapper_08002820(run): Sound_SetDefaultMaxNumChannels, Sound_SetMaxNumChannels

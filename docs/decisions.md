@@ -2570,3 +2570,89 @@ GameStateUpdates clusters, InitBattleUnit(WithoutBonuses), BattleUnitTargetCheck
 bmunit ~42 (all 12 verified runs skip-shared-asm, non-contiguous; GetUnitStatusName region-diff), bmitemuse ~30.
 These are region-different codegen / non-contiguous — hand-decomp (IDA/Ghidra), deferred. Pushed `feat/wave3-B`.
 Siblings own opanim/scene/statscreen (wave3-A) + banim-*/prep_itemscreen (wave3-C) — not touched.
+
+## D57 — harvest-rs: region-same harvest of funcmap exact/masked TUs (+71 across 9 TUs); FOUR generalizable extractor/resolver fixes; m4a_1 is NEVER-C (2026-06-11)
+
+**Context.** Branch `feat/harvest-rs` (sibling to the wave3-A/B harvests). Scope: the funcmap exact/masked-tier
+ungraduated region-same functions in `m4a/m4a_1/fontgrp/proc/bmio/hardware/bmreliance/soundwrapper/
+banim-ekrdragonstatus/prepscreen/face/banim-efxsound` (EXCLUDING wave3's scene/statscreen/bmbattle/bmunit/
+bmitemuse/opanim-main/prep_itemscreen/banim-efxmagic-* — siblings own those; and libc/libgcc/arm.o — never-C).
+Applied the COMPLETE D41-D53 toolkit: `graduate_exact_asm.py`, `harvest_verified_runs.py`/`bind_tu_data.py`
+(func_only ABS-bind), `graduate_shared_run.py` (D51 stranded-section + masked-split, func_only/dedup_globals),
+`subrun_decompose.py`. `make compare` the sole oracle, verify-or-revert, NO `git add -A`.
+
+**RESULT — +64 matching-C functions across 9 TUs / 23 carved runs; all gates GREEN, self-containment 100% (0
+incbins).** Per TU (each verify-or-reverted):
+  * **proc: +14** (8 runs). bind_tu_data graduate-asm: ProcCmd_SET_DESTRUCTOR/NEW_CHILD/NEW_CHILD_BLOCKING,
+    Proc_Nop_0/SetRepeatCb, ProcCmd_CALL_ROUTINE/WHILE_ROUTINE/JUMP. graduate_shared_run masked-split/stranded:
+    ForAllFollowingProcs/Proc_ForEachInTree/ProcCmd_DELETE, Proc_Goto/GotoScript, ProcCmd_SET_MARK. The 8-fn
+    08002C60 cluster (DeleteProcessRecursive/AllocateProcess/FreeProcess) reverted BOTH func_only and
+    dedup_globals -> genuine region-diff (proc alloc/tree mgmt differs in JP).
+  * **soundwrapper: +13** (3 runs, 0 reverts): GetCurrentBgmSong/IsBgmPlaying/Sound_Set{BGM,SE}Volume cluster (8),
+    Sound_ForceChangeBgm cluster (3), Sound_Set{Default,}MaxNumChannels (2).
+  * **bmio: +9** (2 runs). THE D43-Class-C-DEFERRED TU's weather-effect runs are region-SAME: WfxBlue_VSync/
+    WfxFlames{HSync,InitGradient,InitGradientPublic,InitParticles} (5), WfxClouds{,OffsetGraphicsEffect}* (4).
+    Unblocked by the recursive-aggregate fix below (its statics are file-local `union WeatherEffectData`/
+    `union GradientEffectData` containing a file-local `struct WeatherParticle`).
+  * **face: +8** (3 runs). StartFaceChange/DecompressFaceImg/ApplyFacePalette (bind_tu_data, +2 ABS binds
+    gProcScr_Face_2/GetPortraitData), SetFaceBlinkControlById/FaceBlinkProc_GenBlinkInterval, SetFaceEyeControlById/
+    StartFace2/SetFacePosition. The 7-fn 08005D9C (PutFace80x72 cluster) COMPILES now but reverts make compare =
+    genuine region-diff.
+  * **banim-efxsound: +9** (2 runs): EfxOverrideBgm/StopBGM1/Un{,}RegisterEfxSoundSeExist cluster (6),
+    EkrPlayMainBGM/EkrRestoreBGM/GetBanimBossBGM (3). REGION-SAME.
+  * **banim-ekrdragonstatus: +5** (1 run): GetEkrDragonStatusUnk1/SetEkrDragonStatusUnk1/GetBanimDragonStatusType/
+    EkrDragonTmCpyHFlip cluster. REGION-SAME.
+  * **m4a: +5** (3 runs): ply_xcmd/ply_xxx, ply_xiecv/ply_xiecl, m4aMPlayStop. (m4a is region-different OVERALL but
+    these player-command/stop fns are byte-identical.) m4aSoundInit (08D4E70) reverted `subset compile failed`
+    (SoundMainRAM_Buffer BSS_CODE ALIGNED(4) extern — single fn, likely region-diff, deferred).
+  * **bmreliance: +2** (1 run): InitSupportBonuses/GetUnitSupportBonuses (masked-split).
+  * **prepscreen: +1** (1 run, bind_tu_data): ReorderPlayerUnitsBasedOnDeployment (+4 ABS binds). The 13-fn
+    080975B0 (SIO/__malloc_unlock cluster) reverted make compare = region-diff.
+  * **fontgrp: +0.** Its 5 graduate-asm runs (Text_DrawString, GreenText_OnLoop, SpecialCharTest, PutNumber2DigitExt,
+    Text_DrawCharacterAscii) all COMPILE now (after the global.h-substring fix) but REVERT make compare -> the
+    funcmap "exact"-tier was a FALSE-POSITIVE; fontgrp is genuinely region-different codegen. Correctly reverted.
+  * **hardware: +0** via this pass (its graduate-asm runs were already wave2-B's; remaining are non-run/region-diff).
+
+**m4a_1 is NEVER-C (excluded, like arm.o).** The task listed m4a_1 (33 funcmap exact/masked) as the top target,
+but `m4a_1` has NO `src/m4a_1.c` in US — it is `src/m4a_1.s` (hand-written ARM/Thumb m4a sound engine: SoundMain,
+MPlayMain, ply_*, MidiKeyToFreq, ...). The US decomp keeps it as descriptive `.s` (its gold standard), exactly like
+arm.o/arm_call.o. The funcmap exact/masked tier only means the JP bytes match the US asm; there is no C to graduate
+to. `harvest_verified_runs --list m4a_1` correctly reports "no verified runs". m4a_1 should be reclassified
+NEVER-C in the worklist (the ~94 libc/libgcc/arm.o never-C set + m4a_1).
+
+**FOUR GENERALIZABLE TOOLKIT FIXES (the session's reusable payoff; each verify-or-revert-guarded, oracle-gated).**
+  1. **`extract_func_only.py` — file-scope variable with brace-INITIALIZER mis-classified as an aggregate type.**
+     `EWRAM_DATA static struct Proc sProcArray[MAX_PROC_COUNT] = {0};` presents a depth-0 `{...}` whose head
+     contains `struct`, so the aggregate-keep heuristic recorded it (tagged "Proc") and RE-EMITTED the static
+     (pulling in its dimension macro MAX_PROC_COUNT -> `subset compile failed`). FIX: a head with a top-level `=`
+     is a VARIABLE def -> drop it (func_only drops all file-scope data). Unblocked ALL of proc's graduate-asm
+     runs (+8 immediately).
+  2. **`extract_func_only.py` — the `global.h` include filter was a SUBSTRING match.** `if 'global.h' not in inc`
+     wrongly dropped `#include "constants/video-global.h"` (its path ENDS with `global.h`), leaving bodies that
+     use its macros (BGPAL_TEXT_DEFAULT) `undeclared`. FIX: match the EXACT `#include "global.h"` line via regex.
+  3. **`port_run._try_decl` / `_us_extern_decl` — two bugs in the func_only auto-extern synthesis.** (a) the scan
+     glued the leading `#include` header onto a first-data-def-after-includes (`struct FaceVramEntry EWRAM_DATA
+     sFaceConfig[4] = {0};`) and the blanket `head.startswith("#") -> None` rejected it -> strip leading `#`-lines.
+     (b) storage-placement MACROS with a `(N)` arg (`EWRAM_OVERLAY(0)`) tripped the function-decl `(` test BEFORE
+     the macro-strip -> reorder: strip storage macros (incl. `(N)`) THEN test for `(`. Plus string/comment-skip in
+     the depth scanner. Together these let sFaceConfig (face +3) and sGradientEffect/sWeatherEffect (bmio) resolve.
+  4. **`port_run` func_only fixpoint — RECURSIVE file-local aggregate-TYPE emission.** When a bound extern's type
+     is a file-local `struct/union/enum` (no header), agbcc errors `invalid use of undefined type 'union X'`. NEW
+     handler: parse the full `union X { ... };` from US (`_us_aggregate_def`, brace-matched) and RECURSIVELY pull
+     the file-local aggregate types ITS fields reference (bmio's `union WeatherEffectData` -> `struct
+     WeatherParticle`), emitting deps-before-referrer. This is what unblocked the D43-Class-C bmio weather runs
+     (+9) — the "entangled blob" framing was partly a missing-type-emission artifact, not purely structural.
+
+**Build-infra note (gbagfx).** The worktree's `scripts/tools/gbagfx/setup.sh` staged a MISMATCHED gbagfx source
+(US tree ships only the prebuilt binary, so setup fell back to current pret upstream whose `main.c` now needs
+`options.h`/a matching `huff.c` the staging didn't copy -> build broke; and the new lz.c dropped the `-mindist`
+flag the FE8 LZ assets require). FIX for this session: copy the US PREBUILT `../fireemblem8u/tools/gbagfx/gbagfx`
+(the exact tool FE8U byte-matched its LZ assets with, supports `-mindist`) into `tools/gbagfx/`. setup.sh should
+be hardened to prefer the US prebuilt binary when US source is absent, or pin the matching pret revision.
+
+**Remaining frontier (all zero-risk reverted / not-in-a-verified-run).** proc 08002C60 (region-diff alloc/tree);
+face 08005D9C (region-diff); fontgrp ALL graduate-asm runs (region-diff codegen — funcmap exact false-positives);
+prepscreen 080975B0 (region-diff SIO); m4a m4aSoundInit + the m4a_1 engine (NEVER-C); hardware/bmreliance/
+soundwrapper residual non-run functions. These need hand-decomp (IDA/Ghidra) or are genuinely non-C. Pushed
+`feat/harvest-rs`. Siblings own scene/statscreen/bmbattle/bmunit/bmitemuse/opanim-main/prep_itemscreen/
+banim-efxmagic-* — not touched. (D-number from the free sequence; renumber at integration if a sibling claimed D54.)

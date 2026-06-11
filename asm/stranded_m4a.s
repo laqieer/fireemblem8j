@@ -88,16 +88,6 @@ m4aSoundVSyncOn:
 MPlayStart:
 	.incbin "data/sound/MPlayStart.bin"
 
-	.section .text.s_080D570C, "ax", %progbits
-@ m4aMPlayStop region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080D570C..0x080D574C
-	.thumb
-	.align 2, 0
-	.global m4aMPlayStop
-	.thumb_func
-m4aMPlayStop:
-	.incbin "data/sound/m4aMPlayStop.bin"
-
 	.section .text.s_080D574C, "ax", %progbits
 @ FadeOutBody region-same Thumb (US shifted); descriptive incbin baserom.gba
 @ JP 0x080D574C..0x080D5814
@@ -177,24 +167,4 @@ m4aMPlayLFOSpeedSet:
 	.thumb_func
 ply_xwave:
 	.incbin "data/sound/ply_xwave.bin"
-
-	.section .text.s_080D6320, "ax", %progbits
-@ ply_xiecv region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080D6320..0x080D632C
-	.thumb
-	.align 2, 0
-	.global ply_xiecv
-	.thumb_func
-ply_xiecv:
-	.incbin "data/sound/ply_xiecv.bin"
-
-	.section .text.s_080D632C, "ax", %progbits
-@ ply_xiecl region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080D632C..0x080D6338
-	.thumb
-	.align 2, 0
-	.global ply_xiecl
-	.thumb_func
-ply_xiecl:
-	.incbin "data/sound/ply_xiecl.bin"
 

@@ -1,0 +1,7 @@
+SetFaceBlinkControl	0800633C	thumb	face_0800635C
+AdvanceGetLCGRNValue	08000CC0	thumb	face_0800635C
+SetFaceEyeControl	080063D8	thumb	face_080063E0
+GetPortraitData	0800541C	thumb	face_080063E0
+gProcScr_E_FACE_ExtraFrame	085B8F24	data	face_080063E0
+sFaceConfig	0202A688	data	face_080063E0
+FaceRefreshSprite	080056C8	thumb	face_080063E0
