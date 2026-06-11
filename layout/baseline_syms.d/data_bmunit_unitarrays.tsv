@@ -1,0 +1,7 @@
+# RAM (EWRAM) unit arrays referenced by the typed gUnitLookup pointer table
+# (src/data/gUnitLookup.c). gUnitArrayBlue/Red/Green are already in the monolith
+# layout/baseline_syms.tsv; gUnitArrayPurple (link arena 4th team, 5 units) was
+# not yet named -- add it here so the typed gUnitLookup C resolves all four
+# faction bases at their JP RAM addresses. Purple sits right after Green:
+#   gUnitArrayGreen 0x0202DDC8 + 20*sizeof(Unit=0x48) = 0x0202E368.
+gUnitArrayPurple	0202E368	data	bmunit (EWRAM, link-arena 4th team units, referenced by gUnitLookup)

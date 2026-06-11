@@ -2420,3 +2420,51 @@ masked-split verified run (region-different codegen / non-contiguous), plus hard
 genuine region-diff). These need hand-decomp (IDA/Ghidra), deferred. Pushed `feat/wave2-B`. Siblings own
 scene/bmbattle/opanim (wave2-A) + mu/bmlib/bmmenu (wave2-C) — not touched. (D-number assigned from the free
 sequence; renumber at integration if a concurrent sibling claimed D52.)
+
+## D54 — typed-data axis: convert opaque committed game-data .bin tables → readable typed C structs (`src/data/`); first 3 tables, +1.7KB extracted (2026-06-11)
+
+**Context.** Branch `feat/data-typed-1`. The EXTRACTED-DATA axis (final-goal point #2) was only 0.12% — most
+game data is committed as OPAQUE `.bin` (`asm/dat_<sym>_ref.s` = `.incbin "data/residual/<sym>.bin"`). This front
+converts the structured GAME-DATA tables fe8u defines as typed C into byte-matching readable typed C in JP, the
+fe8u/pokeemerald standard. `make compare` is the sole oracle (verify-or-revert).
+
+**RESULT — 3 tables typed, 1958 opaque bytes moved to C; EXTRACTED-DATA 0.12% → ~0.14% (17398 → ~19356 bytes in
+src). Self-containment held 100% (0 incbins). `make check` + `make compare` + `make clean && make compare` all
+green; staged explicitly (NO `git add -A`).** Tables:
+  * **`gUnitLookup` (1024 B) — REGION-SAME structure.** Array of EWRAM Unit* pointers keyed by faction byte | slot.
+    Ported the fe8u C verbatim (`src/data/gUnitLookup.c`); the only JP difference is the RAM addresses of the four
+    faction arrays, resolved by the linker from `layout/baseline_syms` as extern absolute symbols. Added the
+    missing `gUnitArrayPurple` (link-arena 4th team, 5 units) at the predictable JP RAM address 0x0202E368
+    (= gUnitArrayGreen + 20*sizeof(Unit=0x48)) via a new baseline_syms fragment + an extern in `include/bmunit.h`.
+  * **`gMonsterItemTable[51][5]` + `gMonsterItemWeightsTable[62][5]` + `gMonsterItemsByClassIndex[22]` (255+313+704
+    = 1272 B incl. inter-array pad) — REGION-DIFFERENT values.** JP assigns different item/class pools and a
+    different weights-row count (62 vs fe8u's 75). Transcribed the JP `.bin` bytes through the fe8u struct/array
+    layouts into named-constant initializers (ITEM_*/CLASS_*; 0xFF sentinels kept raw). One TU
+    `src/data/monstergen_data.c` for all three (see KEY FINDING).
+
+**KEY OPERATIONAL FINDINGS (reusable for the rest of this front).**
+  1. **agbcc puts `const`-initialized arrays in `.data`, NOT `.rodata`.** A layout row pointing at `.o(.rodata)`
+     for a typed `const` array places NOTHING (empty section) → ROM diverges. The carved_rom row MUST reference
+     `.o(.data)`. (gUnitLookup is `CONST_DATA` = `SECTION(".data")` so it was obvious there; the plain `const u8`
+     tables tripped this — first gMonsterItemTable build FAILED until the row was fixed to `.data`.)
+  2. **Inter-array alignment padding is RELATIVE TO THE OBJECT BASE, so tables sharing a contiguous ROM block with
+     alignment padding between them MUST be one TU.** `gMonsterItemsByClassIndex` is 4-aligned (its 31-byte all-u8
+     struct compiles to sizeof 32 under agbcc, alignment 4). When weights+byclass were split into a separate object
+     starting at the ODD address 0x92671B, byclass landed at base+0x138 = 0x926853 (off-by-one). Putting all three
+     in ONE TU at the 4-aligned base 0x92661C reproduces the exact block (ItemTable@+0, weights@+0xFF, byclass@+0x238
+     → 0x926854). This mirrors fe8u, which groups them in one `monstergen_data.c`. Verified objcopy-of-.data ==
+     ROM slice before integrating.
+  3. **Build plumbing:** extended `CFILES` in the Makefile to `$(wildcard src/*.c) $(wildcard src/data/*.c)` (the
+     `src/data/` dir was referenced by `make clean` but never compiled — the wildcard does not recurse). New layout
+     fragments must be git-tracked or `make check` fails (CI fresh-checkout guard).
+
+**TYPED-DATA READABILITY CEILING (estimate).** The fully-clean wins are tables whose only region difference is
+LINK-RESOLVED symbols (pointer arrays into named RAM/ROM) or pure scalar/u8 data with constant coverage in
+`include/constants/` — gUnitLookup and the monster tables are the archetypes. The HARD frontier is the
+pointer-heavy struct tables (`gClassData` +0x34..0x50, `gItemData` pStatBonuses/pEffectiveness, `gCharacterData`)
+whose region-different fields are ROM POINTERS into sub-tables that are themselves still opaque `.bin` — those need
+the pointee data named/carved first (a dependency chain), so they are NOT next-step-tractable as readable C without
+hardcoding addresses (rejected: not byte-stable across relinks). Realistically tractable now: the remaining
+pure-data/scalar tables (gMOVCOST/terrain, menu-item tables, weight/RN/AI-scalar tables) and any pointer arrays
+whose pointees are already named symbols. Remaining opaque-data frontier is still ~790 `dat_*_ref.s` incbins
+(graphics/sound/banim excluded per scope); this batch is the proof-of-method + the two operational gotchas above.
