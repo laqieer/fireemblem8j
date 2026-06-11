@@ -5,3 +5,10 @@ InvalidateGameSave
 MapRoute_BeginRouteTransition
 OpAnimCalcObjSlideIn
 SelectFromWeightedArray
+UpdateBestGlobalSupportValue
+SupportScreen_ScrollToPendingIndex
+LoadSaveMenuInfo
+ReadSaveBlockInfo
+RefreshGmNodeLinksExt
+GmMu_StartMoveToPosition
+EfxPalFlashingInOut
