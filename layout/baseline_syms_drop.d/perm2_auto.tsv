@@ -1,0 +1,7 @@
+GetUnitSkill
+GetUnitSpeed
+EkrDemonkingObj_SetBgPosition
+InvalidateGameSave
+MapRoute_BeginRouteTransition
+OpAnimCalcObjSlideIn
+SelectFromWeightedArray
