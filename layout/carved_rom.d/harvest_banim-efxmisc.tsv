@@ -1,0 +1,11 @@
+06F1A4	06F5B8	src/banim-efxmisc_0806F1A4.o(.text)	banim-efxmisc_0806F1A4(run): NewEfxHurtmutEff00OBJ, efxHurtmutEff00OBJ_0, efxHurtmutEff00OBJ_1...
+06F0C8	06F198	src/banim-efxmisc_0806F0C8.o(.text)	banim-efxmisc_0806F0C8(run): efxYushaSpinShieldOBJ_2, efxYushaSpinShieldOBJ_3, NewEfxHurtmutEff00
+06F678	06F8B8	src/banim-efxmisc_0806F678.o(.text)	banim-efxmisc_0806F678(run): NewEfxSunakemuriOBJ, EfxSunakemuriOBJMain, NewEfxLokmsuna
+06FCA8	06FD84	src/banim-efxmisc_0806FCA8.o(.text)	banim-efxmisc_0806FCA8(run): NewEfxSRankWeaponEffect, EfxSRankWeaponEffectMain, NewEfxSRankWeaponEffectBG
+070390	070470	src/banim-efxmisc_08070390.o(.text)	banim-efxmisc_08070390(run): NewEfxChillEffectBG, EfxChillEffectBGMain, NewEfxChillEffectBGCOL
+06EFB8	06F0A0	src/banim-efxmisc_0806EFB8.o(.text)	banim-efxmisc_0806EFB8(run): NewEfxYushaSpinShieldOBJ, efxYushaSpinShieldOBJ_0
+06FF20	07004C	src/banim-efxmisc_0806FF20.o(.text)	banim-efxmisc_0806FF20(run): NewEfxMagdhisEffectBG, EfxMagdhisEffectBGMain
+0702E8	07034C	src/banim-efxmisc_080702E8.o(.text)	banim-efxmisc_080702E8(run): EfxMantBatabata_Loop2, NewEfxChillEffect
+06F63C	06F66C	src/banim-efxmisc_0806F63C.o(.text)	banim-efxmisc_0806F63C(run): NewEfxSunakemuri
+06FE4C	06FE6C	src/banim-efxmisc_0806FE4C.o(.text)	banim-efxmisc_0806FE4C(run): NewEfxSRankWeaponEffectSCR2
+07054C	0705C8	src/banim-efxmisc_0807054C.o(.text)	banim-efxmisc_0807054C(run): EfxChillAnime_Loop
