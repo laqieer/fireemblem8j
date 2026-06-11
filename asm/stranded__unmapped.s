@@ -48,36 +48,6 @@ InsertChildProcess:
 UnlinkProcess:
 	.incbin "data/residual/UnlinkProcess.bin"
 
-	.section .text.s_08003038, "ax", %progbits
-@ ProcCmd_DELETE region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08003038..0x08003044
-	.thumb
-	.align 2, 0
-	.global ProcCmd_DELETE
-	.thumb_func
-ProcCmd_DELETE:
-	.incbin "data/residual/ProcCmd_DELETE.bin"
-
-	.section .text.s_08003220, "ax", %progbits
-@ ProcCmd_SET_MARK region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08003220..0x08003234
-	.thumb
-	.align 2, 0
-	.global ProcCmd_SET_MARK
-	.thumb_func
-ProcCmd_SET_MARK:
-	.incbin "data/residual/ProcCmd_SET_MARK.bin"
-
-	.section .text.s_08028534, "ax", %progbits
-@ InitSupportBonuses region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08028534..0x08028544
-	.thumb
-	.align 2, 0
-	.global InitSupportBonuses
-	.thumb_func
-InitSupportBonuses:
-	.incbin "data/residual/InitSupportBonuses.bin"
-
 	.section .text.s_08030088, "ax", %progbits
 @ BMapVSync_OnEnd region-same Thumb (US shifted); descriptive incbin baserom.gba
 @ JP 0x08030088..0x08030094
@@ -97,16 +67,6 @@ BMapVSync_OnEnd:
 	.thumb_func
 BMapVSync_OnLoop:
 	.incbin "data/residual/BMapVSync_OnLoop.bin"
-
-	.section .text.s_08030940, "ax", %progbits
-@ WfxCloudsOffsetGraphicsEffect region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08030940..0x080309A8
-	.thumb
-	.align 2, 0
-	.global WfxCloudsOffsetGraphicsEffect
-	.thumb_func
-WfxCloudsOffsetGraphicsEffect:
-	.incbin "data/residual/WfxCloudsOffsetGraphicsEffect.bin"
 
 	.section .text.s_080D6760, "ax", %progbits
 @ __muldi3 region-same Thumb (US shifted); descriptive incbin baserom.gba

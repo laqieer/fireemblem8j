@@ -2,7 +2,6 @@
 009150	00916C	src/masked_08009150.o(.text)	masked_08009150(run): AP_ClearAll
 0095E0	009608	src/masked_080095e0.o(.text)	masked_080095e0(run): AP_Find
 074A24	074A4C	src/masked_08074a24.o(.text)	masked_08074a24(run): EfxCheckRetaliation
-074DAC	074DE8	src/masked_08074dac.o(.text)	masked_08074dac(run): GetBanimBossBGM
 073348	0733B8	src/masked_08073348.o(.text)	masked_08073348(run): EfxTmModifyPal
 073644	0736C4	src/masked_08073644.o(.text)	masked_08073644(run): EkrModifyBarfx
 050ECC	050EE8	src/masked_08050ecc.o(.text)	masked_08050ecc(run): ekrBattlePrepareDragonIntro
@@ -49,7 +48,6 @@
 02326C	0232B0	src/masked_0802326c.o(.text)	masked_0802326c(run): RefreshMapSelect_Select, ItemCommandUsability
 0248FC	024930	src/masked_080248fc.o(.text)	masked_080248fc(run): ExitCommandUsability
 0328EC	03290C	src/masked_080328ec.o(.text)	masked_080328ec(run): BATTLE_HandleArenaDeathsMaybe
-028544	028650	src/masked_08028544.o(.text)	masked_08028544(run): GetUnitSupportBonuses
 0A8E48	0A8E8C	src/masked_080a8e48.o(.text)	masked_080a8e48(run): IsChapterBelongCurGame
 0A9348	0A93BC	src/masked_080a9348.o(.text)	masked_080a9348(run): PidStatsGetTotalBattleAmt, PidStatsGetTotalWinAmt, PidStatsGetTotalLossAmt
 0A9658	0A96F8	src/masked_080a9658.o(.text)	masked_080a9658(run): SavePlayThroughData
@@ -121,9 +119,6 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 005660	005678	src/masked_08005660.o(.text)	masked_08005660(run): EndFaceById
 005694	0056AC	src/masked_08005694.o(.text)	masked_08005694(run): SetFaceDisplayBitsById
 005B28	005BA8	src/masked_08005b28.o(.text)	masked_08005b28(run): ShouldFaceBeRaised
-00635C	006374	src/masked_0800635c.o(.text)	masked_0800635c(run): SetFaceBlinkControlById
-0063E0	0063F8	src/masked_080063e0.o(.text)	masked_080063e0(run): SetFaceEyeControlById
-00651C	006530	src/masked_0800651c.o(.text)	masked_0800651c(run): SetFacePosition
 0096D8	009840	src/masked_080096d8.o(.text)	masked_080096d8(run): GetRealChaperIndex
 009E3C	009E5C	src/masked_08009e3c.o(.text)	masked_08009e3c(run): GameControl_RememberChapterId, GameControl_RestoreChapterId
 08C840	08C8E0	src/masked_0808c840.o(.text)	masked_0808c840(run): ScrollBoxDialogueTilesUp
@@ -192,7 +187,6 @@ A9CA24	A9CA34	src/masked_080a7eac.o(.data)	masked_080a7eac .data
 0B38B4	0B38D4	src/masked_080b38b4.o(.text)	masked_080b38b4(run): CountTotalSoundRoomSongs
 0B38D4	0B390C	src/masked_080b38d4.o(.text)	masked_080b38d4(run): CountSecretSoundRoomSongs
 0B3930	0B3984	src/masked_080b3930.o(.text)	masked_080b3930(run): CountDisplayedSoundRoomSongs
-002A08	002A18	src/masked_08002a08.o(.text)	masked_08002a08(run): DeleteAll6CWaitMusicRelated
 08B528	08B54C	src/masked_0808b528.o(.text)	masked_0808b528(run): SetHelpBoxInitPosition
 0BA2B4	0BA2F0	src/masked_080ba2b4.o(.text)	masked_080ba2b4(run): ArenaUi_IsBgmActive
 0B62BC	0B62EC	src/masked_080b62bc.o(.text)	masked_080b62bc(run): GetConfigUnk32DifficultyAdjusted

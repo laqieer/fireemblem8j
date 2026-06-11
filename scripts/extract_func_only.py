@@ -109,7 +109,17 @@ while i < n:
                 # the full `... { } <trailer> ;` span keyed by its tag/typedef name so
                 # the emitter can re-include only the ones the bodies reference.
                 head = sig.split("(")[0] if mname else sig
-                if re.search(r"\b(struct|union|enum|typedef)\b", head):
+                # GUARD: a file-scope VARIABLE definition with a brace INITIALIZER
+                # (e.g. `EWRAM_DATA static struct Proc sProcArray[N] = {0};`) also
+                # presents a depth-0 `{...}` block whose head contains `struct`, but
+                # it is DATA, not a type definition -- a real aggregate type def
+                # (`struct Foo { .. };`, `typedef struct { .. } T;`, `enum { .. };`)
+                # never has an `=` before its opening brace. Treat any head with a
+                # top-level `=` as a variable definition and DROP it (func_only drops
+                # all file-scope data), so it is not mis-recorded as an aggregate type
+                # and wrongly re-emitted (which double-defines the static and pulls in
+                # its array-dimension macros -> `subset compile failed`).
+                if re.search(r"\b(struct|union|enum|typedef)\b", head) and "=" not in head:
                     end_semi = src.find(";", i)
                     agg_end = end_semi + 1 if end_semi != -1 else i
                     agg_text = src[seg_start:agg_end].lstrip("\n")
@@ -137,8 +147,12 @@ while i < n:
 # wanted funcs (best-effort, so forward references compile), then the funcs.
 out = []
 out.append('#include "global.h"')
+# Skip ONLY the exact `#include "global.h"` (emitted above), not any header whose
+# path merely ENDS with the substring `global.h` -- e.g. `constants/video-global.h`
+# legitimately contains `global.h` and was being wrongly dropped, leaving bodies
+# that use its macros (BGPAL_TEXT_DEFAULT, ...) failing with `undeclared`.
 for inc in includes:
-    if 'global.h' not in inc:
+    if not re.match(r'#\s*include\s+"global\.h"\s*$', inc):
         out.append(inc)
 out.append("")
 

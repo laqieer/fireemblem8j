@@ -1,0 +1,5 @@
+0030D8	00312C	src/proc_080030D8.o(.text)	proc_080030D8(run): ProcCmd_SET_DESTRUCTOR, ProcCmd_NEW_CHILD, ProcCmd_NEW_CHILD_BLOCKING
+003398	0033A0	src/proc_08003398.o(.text)	proc_08003398(run): Proc_Nop_0, Proc_SetRepeatCb
+003054	003068	src/proc_08003054.o(.text)	proc_08003054(run): ProcCmd_CALL_ROUTINE
+00309C	0030C8	src/proc_0800309C.o(.text)	proc_0800309C(run): ProcCmd_WHILE_ROUTINE
+0031B8	0031C8	src/proc_080031B8.o(.text)	proc_080031B8(run): ProcCmd_JUMP

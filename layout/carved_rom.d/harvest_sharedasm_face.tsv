@@ -1,0 +1,2 @@
+00635C	0063D8	src/face_0800635C.o(.text)	face_0800635C(run): SetFaceBlinkControlById, FaceBlinkProc_GenBlinkInterval
+0063E0	006530	src/face_080063E0.o(.text)	face_080063E0(run): SetFaceEyeControlById, StartFace2, SetFacePosition

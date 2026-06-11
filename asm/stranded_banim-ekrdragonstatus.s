@@ -8,33 +8,3 @@
 ResetEkrDragonStatus:
 	.incbin "data/residual/ResetEkrDragonStatus.bin"
 
-	.section .text.s_08072048, "ax", %progbits
-@ GetEkrDragonStatusUnk1 region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08072048..0x08072054
-	.thumb
-	.align 2, 0
-	.global GetEkrDragonStatusUnk1
-	.thumb_func
-GetEkrDragonStatusUnk1:
-	.incbin "data/residual/GetEkrDragonStatusUnk1.bin"
-
-	.section .text.s_08072054, "ax", %progbits
-@ SetEkrDragonStatusUnk1 region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08072054..0x08072060
-	.thumb
-	.align 2, 0
-	.global SetEkrDragonStatusUnk1
-	.thumb_func
-SetEkrDragonStatusUnk1:
-	.incbin "data/residual/SetEkrDragonStatusUnk1.bin"
-
-	.section .text.s_08072060, "ax", %progbits
-@ GetBanimDragonStatusType region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08072060..0x08072088
-	.thumb
-	.align 2, 0
-	.global GetBanimDragonStatusType
-	.thumb_func
-GetBanimDragonStatusType:
-	.incbin "data/residual/GetBanimDragonStatusType.bin"
-

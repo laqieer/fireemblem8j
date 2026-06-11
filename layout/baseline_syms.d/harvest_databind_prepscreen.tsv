@@ -1,0 +1,4 @@
+InitUnitStack	08031610	thumb	prepscreen_080979B8
+PushUnit	0803162C	thumb	prepscreen_080979B8
+LoadPlayerUnitsFromUnitStack	08031660	thumb	prepscreen_080979B8
+gPrepUnitPool	020111CC	data	prepscreen_080979B8

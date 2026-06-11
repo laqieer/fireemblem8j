@@ -1,0 +1,3 @@
+Proc_SetEndCb	08002EBC	thumb	proc_080030D8
+Proc_StartBlocking	08002C30	thumb	proc_080030D8
+Proc_GotoScript	08002EAC	thumb	proc_080031B8

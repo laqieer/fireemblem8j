@@ -49,6 +49,30 @@ def _us_extern_decl(us_src, sym):
     i, n, depth, seg_start = 0, len(us_src), 0, 0
     while i < n:
         c = us_src[i]
+        # Skip string/char literals and comments so a `{`/`}`/`;` INSIDE one does not
+        # corrupt the depth counter (which otherwise drifts and makes a deep file-
+        # scope def like bmio's `EWRAM_OVERLAY(0) union ... sGradientEffect = {};`
+        # never test at depth 0 -> _us_extern_decl wrongly returns None).
+        if c in "\"'":
+            q = c
+            i += 1
+            while i < n:
+                if us_src[i] == "\\":
+                    i += 2
+                    continue
+                if us_src[i] == q:
+                    i += 1
+                    break
+                i += 1
+            continue
+        if c == "/" and i + 1 < n and us_src[i + 1] == "/":
+            j = us_src.find("\n", i)
+            i = n if j == -1 else j + 1
+            continue
+        if c == "/" and i + 1 < n and us_src[i + 1] == "*":
+            j = us_src.find("*/", i)
+            i = n if j == -1 else j + 2
+            continue
         if c == "{":
             if depth == 0:
                 # a '{' at depth 0 ends a declarator head (init-list or func body);
@@ -76,6 +100,34 @@ def _us_extern_decl(us_src, sym):
     return None
 
 
+def _us_aggregate_def(us_src, kind, tag):
+    """The FULL `struct/union/enum <tag> { ... };` definition for a file-local
+    aggregate TYPE, parsed from the US source. Used to resolve agbcc's
+    `invalid use of undefined type 'union X'` -- a func_only run that references a
+    TU-PRIVATE static (e.g. bmio's `EWRAM_OVERLAY(0) union GradientEffectData
+    sGradientEffect`) gets an `extern union GradientEffectData sGradientEffect;`
+    from _us_extern_decl, but the union itself is defined ONLY in the .c file (no
+    header), so the body's `sGradientEffect.lines` access fails on the INCOMPLETE
+    type. Emitting the whole `union GradientEffectData { ... };` completes it.
+    Returns the definition text (incl. trailing `;`) or None. Brace-matched so a
+    nested aggregate is captured whole; verify-or-revert guards a wrong emit."""
+    m = re.search(r"\b" + re.escape(kind) + r"\s+" + re.escape(tag) + r"\s*\{", us_src)
+    if not m:
+        return None
+    i = us_src.index("{", m.start())
+    depth, n = 0, len(us_src)
+    while i < n:
+        if us_src[i] == "{":
+            depth += 1
+        elif us_src[i] == "}":
+            depth -= 1
+            if depth == 0:
+                j = us_src.find(";", i)
+                return us_src[m.start():(j + 1 if j != -1 else i + 1)]
+        i += 1
+    return None
+
+
 def _try_decl(head, sym, word):
     """If top-level statement `head` declares `sym` as a file-scope OBJECT (not a
     function/call/macro), return its bare `extern <type> sym[];` declaration, else
@@ -87,8 +139,17 @@ def _try_decl(head, sym, word):
     # file-scope declaration scanner (D49).
     head = re.sub(r"/\*.*?\*/", " ", head, flags=re.S)
     head = re.sub(r"//[^\n]*", " ", head)
+    # DROP leading preprocessor-directive lines (`#include`, `#define`, ...). The
+    # _us_extern_decl scanner only resets the segment start on a depth-0 `;`/`}`, so
+    # a file-scope declaration NOT preceded by any such terminator (e.g. the first
+    # data def after the include block: `struct FaceVramEntry EWRAM_DATA sFaceConfig
+    # [4] = {0};`) arrives here with the whole `#include` header glued in front of
+    # it. A blanket `head.startswith("#") -> None` then wrongly rejected the real
+    # declaration. Strip the `#` lines so the actual declarator remains.
+    head = "\n".join(ln for ln in head.splitlines()
+                     if not ln.lstrip().startswith("#"))
     head = head.strip()
-    if not head or head.startswith("#"):
+    if not head:
         return None
     # The declarator is everything up to the initializer.
     decl = head.split("=", 1)[0]
@@ -104,12 +165,17 @@ def _try_decl(head, sym, word):
         return None
     m = word.search(decl)
     spec = decl[:m.start()]
-    # a '(' before sym => function decl / call / macro => not an object
-    if "(" in spec:
-        return None
+    # Strip storage-class / placement macros (incl. their `(N)` arg, e.g.
+    # `EWRAM_OVERLAY(0)`) BEFORE the function-decl `(` test below -- otherwise a
+    # macro's own parentheses make a plain object def (bmio's `EWRAM_OVERLAY(0)
+    # union GradientEffectData sGradientEffect = {};`) look like a function decl and
+    # get wrongly rejected.
     for kw in ("static", "CONST_DATA", "EWRAM_DATA", "EWRAM_BSS", "EWRAM_OVERLAY",
                "IWRAM_DATA", "ALIGNED"):
         spec = re.sub(r"\b" + kw + r"\b(?:\(\d+\))?", "", spec)
+    # a '(' still in spec => function decl / call / macro => not an object
+    if "(" in spec:
+        return None
     spec = " ".join(spec.split())
     if not spec or spec == "const":
         return None
@@ -318,13 +384,49 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False,
             # guards any wrong decl.
             us_src = open(f"{US}/{src_tu}.c").read()
             cur = open(f"src/{name}.c").read()
-            prepend, seen = [], set()
+            prepend, aggs, seen, seen_agg = [], [], set(), set()
             for _ in range(40):
                 und = set(re.findall(r"[`'\"](\w+)' undeclared", r.stderr + r.stdout))
                 und -= seen
-                if not und:
+                # File-local aggregate TYPE left INCOMPLETE: the run references a
+                # TU-private static (extern'd above) whose struct/union/enum is
+                # defined ONLY in the .c file. agbcc: `invalid use of undefined type
+                # 'union X'`. Emit the full US definition so the type is complete.
+                badtypes = set(re.findall(
+                    r"invalid use of undefined type [`'\"](struct|union|enum) (\w+)'",
+                    r.stderr + r.stdout))
+                badtypes -= seen_agg
+                if not und and not badtypes:
                     break
                 added = False
+                # Resolve each incomplete file-local aggregate, RECURSIVELY pulling
+                # the file-local aggregate types ITS fields reference (e.g. bmio's
+                # `union WeatherEffectData` has a `struct WeatherParticle particles
+                # [0x40]` field -> emit WeatherParticle too, in dependency order
+                # before the union that uses it). agbcc otherwise errors `field
+                # 'particles' has incomplete type`. Header-provided types are left
+                # alone (their _us_aggregate_def is None).
+                worklist = list(sorted(badtypes))
+                new_defs = []  # (kind, tag, text) in discovery order
+                while worklist:
+                    kind, tag = worklist.pop(0)
+                    if (kind, tag) in seen_agg:
+                        continue
+                    seen_agg.add((kind, tag))
+                    adef = _us_aggregate_def(us_src, kind, tag)
+                    if not adef:
+                        continue
+                    new_defs.append((kind, tag, adef))
+                    for dk, dt in re.findall(r"\b(struct|union|enum)\s+(\w+)", adef):
+                        if (dk, dt) != (kind, tag) and (dk, dt) not in seen_agg:
+                            worklist.append((dk, dt))
+                # A type must appear AFTER its dependencies. Discovery order is
+                # referrer-then-dep (BFS), so reversing yields dep-before-referrer,
+                # which is the correct C definition order; append in that order.
+                for kind, tag, adef in reversed(new_defs):
+                    if adef not in aggs:
+                        aggs.append(adef)
+                    added = True
                 for sym in sorted(und):
                     seen.add(sym)
                     decl = _us_extern_decl(us_src, sym)
@@ -340,13 +442,19 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False,
                         added = True
                 if not added:
                     break
-                # Insert the externs AFTER the last #include — a synthesized decl can
+                # Aggregate type defs FIRST (the externs/bodies use them), then the
+                # externs. Insert the block AFTER the last #include — a synthesized decl can
                 # use a typedef defined in a header (e.g. `extern MuStateFunc
                 # sMuStateFuncs[];` needs mu.h's typedef), so it must follow the
                 # includes, not precede them (mirrors the proto-insert at the
                 # same-file-helper path above).
-                block = ("/* TU-private data externs bound at their JP addresses */\n"
-                         + "\n".join(prepend) + "\n")
+                block = ""
+                if aggs:
+                    block += ("/* TU-private aggregate type defs (file-local) */\n"
+                              + "\n".join(aggs) + "\n")
+                if prepend:
+                    block += ("/* TU-private data externs bound at their JP addresses */\n"
+                              + "\n".join(prepend) + "\n")
                 ls = cur.splitlines(keepends=True)
                 li = max((i for i, l in enumerate(ls)
                           if l.lstrip().startswith("#include")), default=-1)

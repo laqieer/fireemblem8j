@@ -1,4 +1,0 @@
-0021A8	0021B4	asm/stranded_soundwrapper.o(.text.s_080021A8)	soundwrapper:GetCurrentBgmSong region-same Thumb (descriptive incbin)
-0021B4	0021C4	asm/stranded_soundwrapper.o(.text.s_080021B4)	soundwrapper:IsBgmPlaying region-same Thumb (descriptive incbin)
-002820	002838	asm/stranded_soundwrapper.o(.text.s_08002820)	soundwrapper:Sound_SetDefaultMaxNumChannels region-same Thumb (descriptive incbin)
-0029D8	002A08	asm/stranded_soundwrapper.o(.text.s_080029D8)	soundwrapper:Sound_ForceChangeBgm region-same Thumb (descriptive incbin)
