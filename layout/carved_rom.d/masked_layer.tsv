@@ -42,22 +42,11 @@
 01A198	01A1B8	src/masked_0801a198.o(.text)	masked_0801a198(run): SetWorkingMoveCosts
 01A508	01A5C0	src/masked_0801a508.o(.text)	masked_0801a508(run): UnitApplyWorkingMovementScript
 029060	02908C	src/masked_08029060.o(.text)	masked_08029060(run): CanUnitUseTorchItem
-0139A8	0139E0	src/masked_080139a8.o(.text)	masked_080139a8(run): StartPalFadeToBlack, StartPalFadeToWhite
-013EE8	013F60	src/masked_08013ee8.o(.text)	masked_08013ee8(run): FadeOutBlackSpeed04, FadeOutBlackSpeed08, FadeOutBlackSpeed10...
-013FB0	014028	src/masked_08013fb0.o(.text)	masked_08013fb0(run): FadeOutBlackSpeed04Locking, FadeOutBlackSpeed08Locking, FadeOutBlackSpeed10Locking...
-014108	014120	src/masked_08014108.o(.text)	masked_08014108(run): FadeOutWhiteSpeed08Locking
-014BB0	014BC8	src/masked_08014bb0.o(.text)	masked_08014bb0(run): PlaySeDelayed
 019864	019914	src/masked_08019864.o(.text)	masked_08019864(run): DisplayMovementViewTile
 02257C	02259C	src/masked_0802257c.o(.text)	masked_0802257c(run): MapMenu_IsSuspendCommandAvailable
-0228C4	0228D8	src/masked_080228c4.o(.text)	masked_080228c4(run): RescueSelection_OnSelect
-022930	022954	src/masked_08022930.o(.text)	masked_08022930(run): DropSelection_OnSelect
-022FE8	023008	src/masked_08022fe8.o(.text)	masked_08022fe8(run): UnitActionMenu_Seize
 023120	02315C	src/masked_08023120.o(.text)	masked_08023120(run): PlayCommandUsability
 02315C	023198	src/masked_0802315c.o(.text)	masked_0802315c(run): DanceCommandUsability
 02326C	0232B0	src/masked_0802326c.o(.text)	masked_0802326c(run): RefreshMapSelect_Select, ItemCommandUsability
-023CC0	023CD4	src/masked_08023cc0.o(.text)	masked_08023cc0(run): TalkSelection_OnSelect
-023D5C	023D70	src/masked_08023d5c.o(.text)	masked_08023d5c(run): SupportSelection_OnSelect
-023E94	023EAC	src/masked_08023e94.o(.text)	masked_08023e94(run): PickSelection_OnSelect
 0248FC	024930	src/masked_080248fc.o(.text)	masked_080248fc(run): ExitCommandUsability
 0328EC	03290C	src/masked_080328ec.o(.text)	masked_080328ec(run): BATTLE_HandleArenaDeathsMaybe
 028544	028650	src/masked_08028544.o(.text)	masked_08028544(run): GetUnitSupportBonuses
