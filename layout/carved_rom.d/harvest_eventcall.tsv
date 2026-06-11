@@ -1,0 +1,5 @@
+087E24	087EDC	src/eventcall_08087E24.o(.text)	eventcall_08087E24(run): WorldFlushIn, WorldFlushCallBack, StartWorldFlush
+087CB4	087D98	src/eventcall_08087CB4.o(.text)	eventcall_08087CB4(run): Nop_Eventcall_0, WorldFlushInit
+087844	08786C	src/eventcall_08087844.o(.text)	eventcall_08087844(run): StartScreenFlashingRed
+08793C	08799C	src/eventcall_0808793C.o(.text)	eventcall_0808793C(run): EventQuakefxHorizon_SlightLoop
+087C9C	087CB4	src/eventcall_08087C9C.o(.text)	eventcall_08087C9C(run): StartUnitTornOut
