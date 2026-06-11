@@ -2020,3 +2020,42 @@ verify-or-revert, per-run fragments, NO `git add -A`. Pushed `feat/scale-1`.
 **Remaining scale-1 frontier.** bmmenu: the 68 ungraduated fns NOT in any verified run (region-different codegen or
 non-contiguous) — needs hand-decomp / IDA-Ghidra, deferred. bmlib: bmlib_08012F94 (Class C/D region-diff) +
 the skip-shared-asm runs (need a run-decomposition/blob-split step, D40/D43-deferred).
+
+## D46 — next-2: mu + worldmap_rm harvest (+56), and a func_only extern-prepend ORDERING bug fix (2026-06-11)
+
+**Context.** Branch `feat/next-2` (sibling to scale-1/scale-2; distinct D-number). Scope: the two D41-flagged
+partial TUs `mu` (65/95 ungraduated fns in 15 verified runs) and `worldmap_rm` (45/71 ungraduated in 12 verified
+runs) — both region-same ENGINE-shaped code (MU sprite/sound/anim controllers; world-map remove-units/border/
+palette-anim effects), the D44-style "near-pristine" target class. Applied the COMPLETE D41-D45 toolkit:
+`harvest_verified_runs.py` (dedup_globals) first, then `bind_tu_data.py` (func_only ABS-bind) to recover reverts.
+
+**RESULT — +56 matching-C (3192 → 3248, 37.43% → 38.09%); self-containment held 100%.**
+  * **worldmap_rm: 11 runs / 39 fns.** harvest_verified_runs landed 8 runs / 25 fns; the 3 reverts (080C7048 7fns,
+    080C6D94 4fns, 080C7264 3fns) were ALL recovered by `bind_tu_data.py` func_only (+18 ABS data binds —
+    GmapRm node/leader/border tables). Net 0 unrecovered: every graduate-asm run landed. Only the 1 skip-shared-asm
+    run (080C7AFC, WmDotPalAnim_Loop1 cluster, 6 fns) remains — covered by a non-per-function asm row, unsafe to split.
+  * **mu: 6 runs / 17 fns.** harvest landed 4 runs / 12 fns; `bind_tu_data.py` recovered the 2 reverts (0807BE88
+    StartMuHitFlash 1fn; 0807B070 Mu_OnState* cluster 4fns, +25 data binds: the MuSoundScr_* sound-script tables +
+    sMoveOffsetLut + sMuStateFuncs all bound at their JP literal-pool addresses). Net 0 unrecovered graduate-asm runs.
+    The 9 other verified runs are skip-shared-asm (the larger StartMuFogBump/PutMuSMS/MuBlink clusters overlap
+    non-per-function asm rows).
+
+**TOOLKIT BUG FIXED (general, reusable).** `mu_0807B070` first reverted under func_only with `subset compile failed`
+on `sMuStateFuncs` / `sMoveOffsetLut`. Root cause: `port_run.py`'s func_only extern-prepend (D42) inserted the
+synthesized `extern <type> <sym>[];` decls at the VERY TOP of the subset — BEFORE the `#include` lines. When the
+dropped static's type is a HEADER-defined typedef (`sMuStateFuncs` is `static MuStateFunc CONST_DATA …`, and
+`MuStateFunc` is `typedef void(*)(struct MuProc*)` in `include/mu.h`), the extern referenced an unknown type →
+`syntax error before 'sMuStateFuncs'` / `type defaults to int`. **Fix: insert the externs AFTER the last `#include`
+line** (mirrors the existing same-file-helper proto-insert at lines 288-291), so header typedefs are in scope. This
+is a latent bug that would block ANY func_only run whose dropped static uses a typedef'd type; it is now fixed in
+`scripts/port_run.py` and immediately recovered `mu_0807B070` (+25 binds). Verify-or-revert + `make compare` oracle
+unchanged, so the fix is zero-risk (a wrong decl still reverts).
+
+**Takeaway (confirms D44/D45 at the engine-TU class).** Like the D44 animation TUs, both `mu` and `worldmap_rm`
+harvest near-cleanly: every CLEAN (per-function-gbadisasm-only) verified run graduated, with the func_only ABS-bind
+path mopping up all data-placement reverts. Per-TU yield is bounded ONLY by run fragmentation + skip-shared-asm
+(the larger runs overlap non-per-function asm rows), NOT by region-different codegen or a new blocker class. The
+remaining frontier for both TUs is the skip-shared-asm runs (need the D40/D43-deferred run-decomposition/blob-split
+step). All work `make check` (after `rm -f src/*.s`) + `make compare` + `make clean && make compare` + self-cont 100%
+gated, functions named from US, staged explicitly (NO `git add -A`), verify-or-revert, baserom/checksum/CI untouched.
+Siblings own scene/statscreen + bmdebug/savedraw/prep_itemsupply — not touched.

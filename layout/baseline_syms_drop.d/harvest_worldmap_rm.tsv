@@ -1,0 +1,12 @@
+CountProcs
+Pal_WmHighLightNationMap
+EndGmapRmBaPalAnim1
+StartGmapRmBaPalAnim1
+AP_SwitchAnimation
+Proc_FindBegin
+Proc_FindNext
+LoadLegacyUiFrameGraphics
+SetupGmapNodeGfx
+SkipGmNodeIconDisplay
+_DivArm2
+Pal_WmPlaceDot_Standard

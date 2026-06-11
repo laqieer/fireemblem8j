@@ -320,8 +320,17 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False,
                         added = True
                 if not added:
                     break
-                new = ("/* TU-private data externs bound at their JP addresses */\n"
-                       + "\n".join(prepend) + "\n" + cur)
+                # Insert the externs AFTER the last #include — a synthesized decl can
+                # use a typedef defined in a header (e.g. `extern MuStateFunc
+                # sMuStateFuncs[];` needs mu.h's typedef), so it must follow the
+                # includes, not precede them (mirrors the proto-insert at the
+                # same-file-helper path above).
+                block = ("/* TU-private data externs bound at their JP addresses */\n"
+                         + "\n".join(prepend) + "\n")
+                ls = cur.splitlines(keepends=True)
+                li = max((i for i, l in enumerate(ls)
+                          if l.lstrip().startswith("#include")), default=-1)
+                new = "".join(ls[:li+1]) + block + "".join(ls[li+1:])
                 open(f"src/{name}.c", "w").write(new)
                 r = sh(f"make src/{name}.o")
                 if os.path.exists(obj):
