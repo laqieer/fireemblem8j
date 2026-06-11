@@ -1,0 +1,6 @@
+0C12E4	0C1338	src/worldmap_path_080C12E4.o(.text)	worldmap_path_080C12E4(run): WMGeneralMenu_OnEnd, WMGeneralMenu_OnCancel, WMMenu_OnUnitSelected...
+0C13AC	0C13F4	src/worldmap_path_080C13AC.o(.text)	worldmap_path_080C13AC(run): WMMenu_OnGuideSelected, WMMenu_OnOptionsSelected, WMMenu_OnSaveSelected
+0C1484	0C14B4	src/worldmap_path_080C1484.o(.text)	worldmap_path_080C1484(run): WMNodeMenu_OnEnd, WMNodeMenu_OnCancel
+0C106C	0C10E0	src/worldmap_path_080C106C.o(.text)	worldmap_path_080C106C(run): MapRoute_TransitionEnd
+0C1120	0C11E8	src/worldmap_path_080C1120.o(.text)	worldmap_path_080C1120(run): MapRoute_0
+0C2030	0C206C	src/worldmap_path_080C2030.o(.text)	worldmap_path_080C2030(run): GetChapterIndexOnWmNode

@@ -1,0 +1,12 @@
+ClearWorldMapHblankChannelFlags
+FlipWorldMapHblankBuffer
+GetWorldMapHblankBuffer
+SetWorldMapHblankDest
+RememberBlendState
+RestoreBlendState
+LoadWorldmapMinimap
+gImg_WorldmapMinimap_0
+gPal_WorldmapMinimap_0
+gTsa_WorldmapMinimap_0
+GmMuEntry_SetupHblankGradient
+_DivArm1
