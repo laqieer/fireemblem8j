@@ -39,3 +39,5 @@ TryRelocateHbUp
 EndTargetSelection
 HbPopulate_AutoItem
 CheckSomethingSaveRelated
+PrepGetDeployedUnitAmt
+WMLoc_GetNextLocId
