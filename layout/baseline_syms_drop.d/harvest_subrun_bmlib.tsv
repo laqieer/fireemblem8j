@@ -1,0 +1,9 @@
+DeleteAllPaletteAnimator
+StartPaletteAnimatorExt
+WriteFadedPaletteFromArchive
+StartFadeFromBlack
+StartFadeToBlack
+StartLockingFadeFromBlack
+StartLockingFadeToBlack
+StartLockingFadeToWhite
+GetPalFadeSt

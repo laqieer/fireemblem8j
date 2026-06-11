@@ -2309,3 +2309,61 @@ codegen / non-contiguous) -> needs hand-decomp (IDA/Ghidra), deferred. Gated eve
 `rm -f src/*.s`) + `make compare` + `make clean && make compare` + `check_selfcontained.py` == 0 incbins; named from
 US; staged explicitly (NO `git add -A`); verify-or-revert; baserom/checksum/CI untouched. Pushed `feat/wave-C`.
 Siblings own banim-ekrdragon-demonking/banim-efxmisc + uidebug/banim-efxop — not touched.
+
+## D52 — wave2-C: the src_cov sub-run decomposition SCRIPTIFIED + leading-asm-block recovery; mu/bmlib exhausted, bmmenu tapped (2026-06-11)
+
+**Context.** Branch `feat/wave2-C` (sibling to wave2-A/B). Scope: the partial-TU remainders `mu` (47
+ungraduated), `bmlib` (52), `bmmenu` (83) — the wave-C/D51 masked-split lever was already applied to bmmenu/bmlib.
+First diagnosed each TU with `harvest_verified_runs.py --list` + `graduate_shared_run.py --list`: ALL three TUs
+report 0 graduate-asm and 0 eligible skip-shared-asm/masked-split runs (bmlib's only `[plan:graduate-asm]` is
+`bmlib_08012F94` UnpackRaw/Decompress*, the D45/D51-confirmed GENUINE region-diff, left reverted). The remainder
+lives ENTIRELY in the asm GAPS of `src_cov` verified runs — exactly the D50 wave-B situation, which D50 mopped up
+via a THROWAWAY manual zip+carve driver. D52 scriptifies that lever as a reusable, oracle-gated tool.
+
+**RESULT — +43 matching-C (3543 -> 3586, 41.5455% -> 42.0497%); self-containment held 100% (0 baserom incbins).**
+  * **mu: +28** (sub-run decompose +23; leading-block +5). 9 asm-only sub-runs from the MU
+    sprite/anim/blink/pixel-effect/fog-bump/fade clusters. 0 unrecovered reverts.
+  * **bmlib: +15** (sub-run decompose +6; leading-block +9). PaletteAnimator/PalFade/FadeToBlack/SpacialSeTest
+    clusters. 0 unrecovered reverts (the genuine region-diff `bmlib_08012F94` stays reverted).
+  * **bmmenu: +0.** Its 32 verified runs are FULLY src-covered (wave-C/D51 carved every clean+masked-split run);
+    the 94 gbadisasm fragments still in its 0x08022000-0x08025000 range are NOT in any verified run (find_runs
+    can't prove them byte-matching) -> region-different/non-contiguous codegen -> hand-decomp (IDA/Ghidra), deferred.
+
+**THE REUSABLE TOOL — `scripts/subrun_decompose.py`.** For each `src_cov` verified run (a superrun spanning
+existing src/exact_/masked_/<tu>_ carves AND still-asm gbadisasm fragments), it ZIPS the run's fn names against
+the addr-sorted carved rows (gbadisasm row = 1 fn; src row = its objdump `F .text` count), groups maximal
+contiguous gbadisasm-only blocks into asm-only sub-runs, and carves each via `port_run.port` (dedup_globals first,
+func_only fallback). Each sub-run is independently verify-or-reverted (`make compare` sole oracle), so a false
+byte-match or region-diff can't poison the batch. This makes the D50 wave-B manual lever automatic (D50 itself
+flagged this as the obvious follow-up). `--list` classifies; `--runs <file>` reads cached find_runs output to skip
+the slow discovery.
+
+**LEADING-ASM-BLOCK RECOVERY (the zip-mismatch fix).** A run whose FULL zip mismatches (row-fn count != run fn
+list) is usually one where a TRAILING already-carved src/exact row STICKS OUT past the run end and over-consumes
+fns (e.g. mu's `0807AE28..0807B04C` run ends INSIDE `exact_0807b028` which carries 3 Mu_OnState* fns). The full
+decomposition is then unreliable, but the LEADING contiguous gbadisasm block (from the run start) maps fn-names 1:1
+RELIABLY (one fn per gbad row, before any src row drifts the count). `leading_asm_block()` recovers just that block;
+verify-or-revert guards it. This recovered mu_0807AE28 (+5) and bmlib_08013D88 (+6) / bmlib_080134E0 (+3) — runs
+that would otherwise be skipped entirely. (A trailing already-fully-src-covered run like mu_0807AB94 / the many
+bmlib `exact_*`-covered runs correctly yields "no leading block" -> skipped, nothing to graduate.)
+
+**TOOLKIT FIX (general, reusable) — `port_run._try_decl` array-dimension-macro bug.** The func_only
+undeclared-resolver synthesizes `extern <type> sym[];` from a dropped TU-private static's US definition. For
+`static struct MuConfig sMuConfig[MU_MAX_COUNT];` the last-identifier-token test latched onto the array DIMENSION
+MACRO `MU_MAX_COUNT` instead of `sMuConfig` -> returned None -> `subset compile failed`. FIX: strip `[...]` array
+suffixes before the last-token test so the declared name (the token before the suffix), not a `#define`d dimension,
+is matched. Recovered mu_0807BA68 + mu_0807B5E0 (sMuConfig/sMuChrOffLut*). Benefits ANY future func_only run whose
+dropped TU-private static is an array sized by a macro. Verify-or-revert unchanged -> zero-risk.
+
+**Dup audit (the second critical rule):** all 43 defined funcs audited against every effective baseline thumb bind
+minus `baseline_syms_drop.d/` — 0 undropped-and-bound; clean rebuild GREEN confirms no multiple-definition.
+
+**Takeaway.** The `src_cov` skip in the two harvesters is a SAFETY heuristic, not a hard limit — when the overlap
+decomposes into disjoint contiguous asm-only sub-runs, each is independently carvable. `subrun_decompose.py` makes
+this automatic and is the natural complement to `harvest_verified_runs.py` (pure-gbadisasm runs) and
+`graduate_shared_run.py` (masked-split / stranded-section runs): run all three per partial TU. mu + bmlib are now
+exhausted for the verified-run levers; bmmenu's remainder is genuine region-diff (deferred to hand-decomp). All
+gated: `make check` (after `rm -f src/*.s`) + `make compare` + `make clean && make compare` +
+`check_selfcontained.py` == 0 incbins (100.00%); named from US; staged explicitly (NO `git add -A`);
+verify-or-revert; baserom/checksum/CI untouched. Pushed `feat/wave2-C`. Siblings own scene/bmbattle/opanim
+(wave2-A) + sysutil/bmshop/hardware/eventinfo (wave2-B) — not touched.
