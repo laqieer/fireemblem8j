@@ -1,0 +1,4 @@
+013928	0139A4	src/bmlib_08013928.o(.text)	bmlib_08013928(run): SpacialSeTest_OnLoop, StartSpacialSeTest
+014494	0144E0	src/bmlib_08014494.o(.text)	bmlib_08014494(run): DeleteAllPaletteAnimator, StartPaletteAnimatorExt
+013458	0134E0	src/bmlib_08013458.o(.text)	bmlib_08013458(run): DarkenPals
+013608	013844	src/bmlib_08013608.o(.text)	bmlib_08013608(run): WriteFadedPaletteFromArchive
