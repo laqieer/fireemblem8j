@@ -43,6 +43,7 @@ def skip_string(i, q):
 # function body span. We walk top level tracking brace depth.
 includes = []
 defines = []         # (macro_name, full #define text) -- TU-private helper macros
+aggregates = []      # (tag_name, full text) -- TU-private struct/union/enum/typedef defs
 spans = []           # (name, start, end)
 i = 0
 depth = 0
@@ -99,6 +100,31 @@ while i < n:
                 is_func = False
             if is_func:
                 spans.append((mname.group(1), seg_start, i))
+            else:
+                # A TU-private aggregate definition (`struct PalFadeProc { .. };`,
+                # `typedef struct { .. } Foo;`, `enum { .. };`). The headers usually
+                # provide such types, but some are file-LOCAL (bmlib's PalFadeProc) --
+                # dropping them leaves the run's bodies dereferencing an incomplete
+                # type ("dereferencing pointer to incomplete type" -Werror). Record
+                # the full `... { } <trailer> ;` span keyed by its tag/typedef name so
+                # the emitter can re-include only the ones the bodies reference.
+                head = sig.split("(")[0] if mname else sig
+                if re.search(r"\b(struct|union|enum|typedef)\b", head):
+                    end_semi = src.find(";", i)
+                    agg_end = end_semi + 1 if end_semi != -1 else i
+                    agg_text = src[seg_start:agg_end].lstrip("\n")
+                    # the type name is the tag after struct/union/enum, AND/OR the
+                    # typedef alias just before the closing ';'. Capture both.
+                    names = set()
+                    tag = re.search(r"\b(?:struct|union|enum)\s+([A-Za-z_]\w*)", head)
+                    if tag:
+                        names.add(tag.group(1))
+                    trailer = src[i:agg_end]            # `} Alias;` for typedefs
+                    alias = re.search(r"\}\s*([A-Za-z_]\w*)\s*;", trailer)
+                    if alias:
+                        names.add(alias.group(1))
+                    if names:
+                        aggregates.append((names, agg_text))
             seg_start = i
             func_start = None
         continue
@@ -123,6 +149,25 @@ for nm, s, e in spans:
         bodies.append((s, src[s:e].lstrip("\n")))
 bodies.sort()
 body_text = "\n".join(b for _, b in bodies)
+
+# TU-private aggregate definitions (e.g. bmlib's file-local `struct PalFadeProc`)
+# that the headers do NOT provide: emit only the ones the extracted bodies
+# REFERENCE by name, so a body dereferencing the type isn't left with an
+# incomplete type ("dereferencing pointer to incomplete type" -Werror). Emit
+# BEFORE the funcs (and before the #defines, which may use the type). Re-emitting
+# a type the headers DO provide would be a redefinition, but agbcc (C89) tolerates
+# an identical struct re-declaration only via tag, not typedef -- so restrict to
+# names that don't already resolve from headers is not possible at this layer;
+# verify-or-revert (make compare) guards a wrong emit, and in practice the dropped
+# file-local types are exactly the ones headers lack.
+emitted_aggs = []
+for names, atext in aggregates:
+    if any(re.search(r"\b" + re.escape(nm) + r"\b", body_text) for nm in names):
+        emitted_aggs.append(atext)
+for atext in emitted_aggs:
+    out.append(atext)
+if emitted_aggs:
+    out.append("")
 
 # TU-private helper #defines (e.g. scene's function-like TALK_TEXT_BY_LINE) that
 # the headers do NOT provide: emit only the ones the extracted bodies REFERENCE,
