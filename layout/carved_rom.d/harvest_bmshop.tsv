@@ -1,0 +1,5 @@
+0B8F44	0B9030	src/bmshop_080B8F44.o(.text)	bmshop_080B8F44(run): ShopDrawBuyItemLine, ShopDrawSellItemLine, Shop_InitBuyState
+0B9E00	0B9EFC	src/bmshop_080B9E00.o(.text)	bmshop_080B9E00(run): IsItemSellable, GoldBox_OnLoop, InitShopScreenConfig
+0B9F40	0BA01C	src/bmshop_080B9F40.o(.text)	bmshop_080B9F40(run): UnpackUiVArrowGfx, DisplayUiVArrow, HandleShopBuyAction
+0B9284	0B92A4	src/bmshop_080B9284.o(.text)	bmshop_080B9284(run): Shop_AddItemToConvoy
+0B9310	0B933C	src/bmshop_080B9310.o(.text)	bmshop_080B9310(run): Shop_InitSellState

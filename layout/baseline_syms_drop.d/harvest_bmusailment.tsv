@@ -1,0 +1,14 @@
+BattleHitTerminate
+BeginMapAnimForCritAtk
+BeginMapAnimForEggDmg
+BeginMapAnimForPoisonDmg
+BeginUnitCritDamageAnim
+ClearBg0Bg1
+UnitKill
+gUnkData_40
+gUnkData_41
+gUnkData_42
+BeginUnitPoisonDamageAnim
+StartArrowTrapAnim
+StartFireTrapAnim
+StartGasTrapAnim

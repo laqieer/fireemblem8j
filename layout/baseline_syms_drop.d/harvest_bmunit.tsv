@@ -1,0 +1,7 @@
+ClearBmbattleStruct0
+UnitBeginAction
+ClearUnit
+GetUnitSMSId
+InitUnitsupports
+CanUnitCrossTerrain
+GetUnitMovementCost

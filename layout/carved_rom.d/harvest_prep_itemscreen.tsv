@@ -1,0 +1,7 @@
+09C0C8	09C178	src/prep_itemscreen_0809C0C8.o(.text)	prep_itemscreen_0809C0C8(run): StartPrepItemUse, StartPrepItemSupply, StartPrepSell...
+09BD80	09C098	src/prep_itemscreen_0809BD80.o(.text)	prep_itemscreen_0809BD80(run): PrepItem_TradeRedrawItems, PrepItem_InitTradeScreen, PrepItem_EndPopupBoxesAndSync...
+09B8AC	09B9C0	src/prep_itemscreen_0809B8AC.o(.text)	prep_itemscreen_0809B8AC(run): PrepItem_DrawSelectedUnitScreen, PrepItem_InitCommandMenu, PrepItem_RefreshSelectedUnitItems
+09C23C	09C3E8	src/prep_itemscreen_0809C23C.o(.text)	prep_itemscreen_0809C23C(run): StartPrepItemScreen, PrepItemScreen_DrawUnitItems, PrepItem_SnapGridScroll
+09AC94	09ACDC	src/prep_itemscreen_0809AC94.o(.text)	prep_itemscreen_0809AC94(run): PrepItemScreen_OnEnd
+09B3F8	09B600	src/prep_itemscreen_0809B3F8.o(.text)	prep_itemscreen_0809B3F8(run): PrepItem_GridSelectLoop
+09C5EC	09C7D4	src/prep_itemscreen_0809C5EC.o(.text)	prep_itemscreen_0809C5EC(run): PrepItemDrawPopupBox

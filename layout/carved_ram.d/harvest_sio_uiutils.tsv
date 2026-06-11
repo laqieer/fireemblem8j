@@ -1,0 +1,3 @@
+080DF0EE	rom	src/sio_uiutils_0804D584.o(.rodata)	sio_uiutils_0804D584 .rodata region-diff (incbin)
+080DEFD0	rom	src/sio_uiutils_0804D0DC.o(.rodata)	sio_uiutils_0804D0DC .rodata region-diff (incbin)
+080DF0C6	rom	src/sio_uiutils_0804D344.o(.rodata)	sio_uiutils_0804D344 .rodata region-diff (incbin)

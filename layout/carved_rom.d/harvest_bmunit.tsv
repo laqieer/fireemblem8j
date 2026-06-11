@@ -1,0 +1,5 @@
+018370	018454	src/bmunit_08018370.o(.text)	bmunit_08018370(run): UnitBeginAction, UnitBeginCantoAction
+01759C	0175C4	src/bmunit_0801759C.o(.text)	bmunit_0801759C(run): ClearUnit
+0176AC	0176F0	src/bmunit_080176AC.o(.text)	bmunit_080176AC(run): GetUnitSMSId
+018110	018144	src/bmunit_08018110.o(.text)	bmunit_08018110(run): UnitKill
+019174	019194	src/bmunit_08019174.o(.text)	bmunit_08019174(run): CanUnitCrossTerrain

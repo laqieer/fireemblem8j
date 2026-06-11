@@ -1,0 +1,14 @@
+SetGMapBaseMenuPid
+StartPrepItemListScreenProc
+StartPrepItemSupplyProc
+EndHelpPromptSprite
+StartParallelFiniteLoop
+Tsa_PrepItemScreen
+Tsa_UnkData_4
+IsCoordHiddenByMinimug
+GetItemUses
+IsItemDisplayUsable
+PrepItemScreen_DrawUnitItems
+EndMenuScrollBar
+GetGMapBaseMenuKind
+PrepItemDrawPopupBox

@@ -1,0 +1,3 @@
+0A7BB4	0A7D34	src/bmsave-lib_080A7BB4.o(.text)	bmsave-lib_080A7BB4(run): ReadChapterFlags, ReadPermanentFlags, ReadPermanentFlags_ret...
+0A79D8	0A7AA8	src/bmsave-lib_080A79D8.o(.text)	bmsave-lib_080A79D8(run): WriteSaveBlockInfo, EraseSaveBlockInfo
+0A7670	0A767C	src/bmsave-lib_080A7670.o(.text)	bmsave-lib_080A7670(run): BmSave_GetUnusedBuffer

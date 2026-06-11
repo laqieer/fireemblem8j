@@ -1,0 +1,14 @@
+GmHideMuUnit
+GmMu_RemoveUnit
+GmMu_StartMoveBetweenNodes
+GmShowMuUnit
+MapMU_SetUnitChar
+MapMU_SetUnitClass
+MapUnitC_GetDisplayedClass
+GmMuPrim_CalcMoveDuration
+MapUnitC_GetPosition
+GmMuPrim_PlayStepSfx
+MapUnitC_GetAnimId
+MapUnitC_GetLayer
+MapUnitC_SetLayer
+GmMu_GetPosition

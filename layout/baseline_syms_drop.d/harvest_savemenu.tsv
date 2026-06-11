@@ -1,0 +1,17 @@
+Img_MainMenuBgFog
+Img_SaveMenuBG
+InitSaveMenuHelpTextSt
+LoadObjUIGfx
+LoadUiFrameGraphics
+Pal_MainMenuBgFog
+Pal_SaveMenuBG
+ReadLastGameSaveId
+SaveMenuGetValidMenuAmt
+SaveMenuPutChapterTitle
+StartItemHelpBox
+Tsa_SaveMenuBG
+WMLoc_GetChapterId
+gMenuMainObjs_5
+ExecSaveMenuMiscOption
+SaveMenu_NewGame
+ChangeBgm

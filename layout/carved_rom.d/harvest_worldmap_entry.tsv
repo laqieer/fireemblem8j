@@ -1,0 +1,6 @@
+0C4B84	0C4E64	src/worldmap_entry_080C4B84.o(.text)	worldmap_entry_080C4B84(run): GmMuEntry_SetupHblankGradient, GmMuEntry_0, GmMuEntry_1
+0C476C	0C48D0	src/worldmap_entry_080C476C.o(.text)	worldmap_entry_080C476C(run): GmapBaseEntry_1, GmapBaseEntry_2
+0C4930	0C49B0	src/worldmap_entry_080C4930.o(.text)	worldmap_entry_080C4930(run): GmapMuEntry_OnEnd, GmapMuEntry_Init
+0C4A28	0C4AAC	src/worldmap_entry_080C4A28.o(.text)	worldmap_entry_080C4A28(run): GmapMuEntry_1
+0C4B0C	0C4B60	src/worldmap_entry_080C4B0C.o(.text)	worldmap_entry_080C4B0C(run): LoadWorldmapMinimap
+0C4F28	0C4FC0	src/worldmap_entry_080C4F28.o(.text)	worldmap_entry_080C4F28(run): GmMuEntry_3

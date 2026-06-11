@@ -1,0 +1,4 @@
+009CF8	009D88	src/gamecontrol_08009CF8.o(.text)	gamecontrol_08009CF8(run): GameControl_ChapterSwitch, GameControl_CallPostChapterSaveMenu, GameCtrlStartIntroMonologue
+009C04	009C40	src/gamecontrol_08009C04.o(.text)	gamecontrol_08009C04(run): GameCtrlStartExtraMap, GameControl_InvalidateSuspendSave
+009914	009948	src/gamecontrol_08009914.o(.text)	gamecontrol_08009914(run): GameControl_CallEraseMural
+0099D4	009A0C	src/gamecontrol_080099D4.o(.text)	gamecontrol_080099D4(run): GameControl_ClearPaletteAndReset

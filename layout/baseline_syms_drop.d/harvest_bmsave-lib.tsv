@@ -1,0 +1,7 @@
+ReadChapterFlags
+ReadPermanentFlags
+ReadSupplyItems
+WriteAndVerifySramFast
+WriteSupplyItems
+WriteSaveBlockInfo
+gSram

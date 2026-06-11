@@ -1,0 +1,8 @@
+0B18F4	0B1D98	src/sysutil_080B18F4.o(.text)	sysutil_080B18F4(run): SysBlackBox_Main, NewSysBlackBoxHandler, SysBlackBoxSetGfx...
+0B1F1C	0B1FBC	src/sysutil_080B1F1C.o(.text)	sysutil_080B1F1C(run): ResetSysHandCursor, DisplaySysHandCursorTextShadow, SetSysHandCursorXPos...
+0B261C	0B2708	src/sysutil_080B261C.o(.text)	sysutil_080B261C(run): StartSysBrownBox, EnableSysBrownBox, DisableSysBrownBox
+0B31E8	0B3220	src/sysutil_080B31E8.o(.text)	sysutil_080B31E8(run): BmBgfxAdvance, EndBmBgfx
+0B18C0	0B18DC	src/sysutil_080B18C0.o(.text)	sysutil_080B18C0(run): StartParallelFiniteLoop
+0B27C4	0B2874	src/sysutil_080B27C4.o(.text)	sysutil_080B27C4(run): NewSysboxText
+0B3198	0B31CC	src/sysutil_080B3198.o(.text)	sysutil_080B3198(run): BmBgfx_End
+0B32E8	0B33AC	src/sysutil_080B32E8.o(.text)	sysutil_080B32E8(run): MixPaletteCore

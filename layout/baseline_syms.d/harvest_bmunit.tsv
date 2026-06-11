@@ -1,0 +1,5 @@
+ClearBmbattleStruct0	0802C27C	thumb	bmunit_08018370
+gActionData	0203A954	data	bmunit_08018370
+gBmSt	0202BCAC	data	bmunit_08018370
+InitUnitsupports	08028374	thumb	bmunit_08018110
+GetUnitMovementCost	08018A60	thumb	bmunit_08019174

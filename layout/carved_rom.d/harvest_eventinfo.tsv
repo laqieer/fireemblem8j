@@ -1,0 +1,13 @@
+0858A8	08598C	src/eventinfo_080858A8.o(.text)	eventinfo_080858A8(run): SetPidDefeatedFlag, CheckBattleDefeatTalk, DisplayDefeatTalkForPid
+0857A0	08583C	src/eventinfo_080857A0.o(.text)	eventinfo_080857A0(run): GetAvailableBattleTalk, ShouldCallBattleQuote
+085AC8	085B10	src/eventinfo_08085AC8.o(.text)	eventinfo_08085AC8(run): GetSupportTalkSong_, ForceGameOver
+086288	086350	src/eventinfo_08086288.o(.text)	eventinfo_08086288(run): StartCharacterEvent, GetChestItemSubstitute
+0851B8	0851FC	src/eventinfo_080851B8.o(.text)	eventinfo_080851B8(run): StartEventFromInfo
+0854E4	085500	src/eventinfo_080854E4.o(.text)	eventinfo_080854E4(run): IsThereClosedChestAt
+085528	085544	src/eventinfo_08085528.o(.text)	eventinfo_08085528(run): IsThereClosedDoorAt
+08556C	085588	src/eventinfo_0808556C.o(.text)	eventinfo_0808556C(run): IsThereTileCommand15
+085738	08575C	src/eventinfo_08085738.o(.text)	eventinfo_08085738(run): GetChapterSkirmishLeaderClasses
+085A54	085A9C	src/eventinfo_08085A54.o(.text)	eventinfo_08085A54(run): StartSupportTalk
+085D90	085DDC	src/eventinfo_08085D90.o(.text)	eventinfo_08085D90(run): EvCheck0A_SHOP
+08618C	0861E0	src/eventinfo_0808618C.o(.text)	eventinfo_0808618C(run): RunTutorialEvent
+086694	086730	src/eventinfo_08086694.o(.text)	eventinfo_08086694(run): RunWaitEvents

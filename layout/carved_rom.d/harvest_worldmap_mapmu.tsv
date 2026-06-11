@@ -1,0 +1,6 @@
+0C2B14	0C2D8C	src/worldmap_mapmu_080C2B14.o(.text)	worldmap_mapmu_080C2B14(run): GmMu_RemoveUnit, GmMu_RemoveLinkedUnits, GmShowMuUnit...
+0C3238	0C3358	src/worldmap_mapmu_080C3238.o(.text)	worldmap_mapmu_080C3238(run): GmUnitFadeExists, GmMuPrim_PlayStepSfx, MapMU_SetUnitClass...
+0C2224	0C23C4	src/worldmap_mapmu_080C2224.o(.text)	worldmap_mapmu_080C2224(run): GmMuPrim_Loop_Null, GmMuPrim_CalcMoveDuration, GmMuPrim_0
+0C252C	0C2864	src/worldmap_mapmu_080C252C.o(.text)	worldmap_mapmu_080C252C(run): GmMuPrim_UpdateMovement, GmMuPrim_1, GmMuPrim_2
+0C2EB0	0C2EF0	src/worldmap_mapmu_080C2EB0.o(.text)	worldmap_mapmu_080C2EB0(run): GmMu_GetSpriteLayer, GmMu_SetSpriteLayer
+0C318C	0C31D4	src/worldmap_mapmu_080C318C.o(.text)	worldmap_mapmu_080C318C(run): GmMu_GetPosition, GmMu_SetNode

@@ -1,0 +1,2 @@
+0203EF64	ewram	src/bmshop_080B8F44.o(ewram_data)	bmshop_080B8F44 ewram_data
+08ABCA90	rom	src/bmshop_080B9E00.o(.data)	bmshop_080B9E00 .data region-diff (incbin)

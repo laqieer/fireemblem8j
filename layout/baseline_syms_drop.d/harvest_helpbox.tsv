@@ -1,0 +1,9 @@
+ClearHelpBoxText
+StartHelpBoxTextInit
+GetHelpBoxItemInfoKind_bug
+GetUiHandPrevDisplayX
+GetUiHandPrevDisplayY
+SetHelpBoxDefaultRect
+StartHelpBoxAtPos
+EndBoxDialogueMerge
+SetBoxDialogueSize

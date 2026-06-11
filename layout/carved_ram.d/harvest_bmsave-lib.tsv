@@ -1,0 +1,2 @@
+081F56A4	rom	src/bmsave-lib_080A7BB4.o(.rodata)	bmsave-lib_080A7BB4 .rodata region-diff (incbin)
+0203E880	ewram	src/bmsave-lib_080A7670.o(ewram_data)	bmsave-lib_080A7670 ewram_data

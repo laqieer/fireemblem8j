@@ -1,0 +1,7 @@
+0A5048	0A5388	src/uisupport_080A5048.o(.text)	uisupport_080A5048(run): SupportScreen_SetupGraphics, SupportScreen_OnEnd, SupportScreen_UpdateBlend
+0A6718	0A6928	src/uisupport_080A6718.o(.text)	uisupport_080A6718(run): SupportSubScreen_SwapPageIn_FromLeft, SupportSubScreen_ReinitAfterSwapPage, SupportSubScreen_EndSwapPage
+0A4CA8	0A4D18	src/uisupport_080A4CA8.o(.text)	uisupport_080A4CA8(run): SupportScreen_LoadUnitSprites
+0A5774	0A5868	src/uisupport_080A5774.o(.text)	uisupport_080A5774(run): SupportScreen_DrawUnitNameRow
+0A5A64	0A5C54	src/uisupport_080A5A64.o(.text)	uisupport_080A5A64(run): DrawSupportSubScreenUnitPartnerText
+0A5D34	0A5E18	src/uisupport_080A5D34.o(.text)	uisupport_080A5D34(run): InitSupportSubScreenPartners
+0A6948	0A699C	src/uisupport_080A6948.o(.text)	uisupport_080A6948(run): SupportSubScreen_PrepareSupportConvo

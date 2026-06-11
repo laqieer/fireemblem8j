@@ -1,0 +1,10 @@
+0BEE54	0BEF48	src/worldmap_main_080BEE54.o(.text)	worldmap_main_080BEE54(run): UpdateWorldMapBgm, WorldMap_PrepareSaveMenu, WorldMap_RestartWithTimer...
+0BEC74	0BED9C	src/worldmap_main_080BEC74.o(.text)	worldmap_main_080BEC74(run): Worlmap_StartGmapSogu, Worlmap_WaitGmapSogu, WorldMap_HideFaceAndCenterCamera...
+0BDCDC	0BDE98	src/worldmap_main_080BDCDC.o(.text)	worldmap_main_080BDCDC(run): SetupGmapNodeGfx, WorldMap_SetupBgGfx, DeployEveryUnit
+0BE3F8	0BE578	src/worldmap_main_080BE3F8.o(.text)	worldmap_main_080BE3F8(run): WorldMap_FindNextSelectableNode, WorldMap_FindNearestNode, WorldMap_JumpCursorToNode
+0BF178	0BF2B8	src/worldmap_main_080BF178.o(.text)	worldmap_main_080BF178(run): NewWorldMap, WorldMap_CallBeginningEvent, CallChapterWMIntroEvents
+0BE594	0BE6A0	src/worldmap_main_080BE594.o(.text)	worldmap_main_080BE594(run): WorldMap_LoopExt, WorldMap_EnableUnitSprites
+0BD8E0	0BD944	src/worldmap_main_080BD8E0.o(.text)	worldmap_main_080BD8E0(run): WorldMap_Destruct
+0BE8F4	0BE930	src/worldmap_main_080BE8F4.o(.text)	worldmap_main_080BE8F4(run): WorldMap_StartSkirmishAnim
+0BEF94	0BF02C	src/worldmap_main_080BEF94.o(.text)	worldmap_main_080BEF94(run): WorldMap_FadeMapSpritePalOut_Loop
+0BF088	0BF11C	src/worldmap_main_080BF088.o(.text)	worldmap_main_080BF088(run): WorldMap_FadeMapSpritePalIn_Loop

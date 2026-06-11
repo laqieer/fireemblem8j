@@ -1,0 +1,6 @@
+WriteSuspendSave	080AA460	thumb	bm_08015518
+gActionData	0203A954	data	bm_08015518
+Proc_StartBlocking	08002C30	thumb	bm_08015518
+gPlaySt	0202BCEC	data	bm_08015518
+gProcScr_ChapterIntro	085C3630	data	bm_08015518
+gBmSt	0202BCAC	data	bm_080160DC

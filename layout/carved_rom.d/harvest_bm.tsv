@@ -1,0 +1,2 @@
+015518	0155AC	src/bm_08015518.o(.text)	bm_08015518(run): BmMain_SuspendBeforePhase, BmMain_StartIntroFx, UndeployEveryone
+0160DC	016148	src/bm_080160DC.o(.text)	bm_080160DC(run): StartMapSongBgm, CamMoveLinear_OnLoop

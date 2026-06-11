@@ -1,0 +1,5 @@
+UpdateMapAnimDitheredCircleScanline
+InitScanline
+Nop_Eventcall_0
+WorldFlushHBlank
+StartScreenFlashing

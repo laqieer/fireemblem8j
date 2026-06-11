@@ -1,0 +1,16 @@
+AreUnitsAllied
+MapAddInRange
+gSubjectUnit
+AddUnitToTargetListIfNotAllied
+CanUnitRescue
+CanUnitSupportNow
+GetItemMinRange
+GetSelectTargetCount
+GetTarget
+GetTerrainHealAmount
+GetTerrainHealsStatus
+IsSameAllegiance
+MakeRescueTargetList
+MakeTradeTargetList
+NextRN_N
+GetCurrentPhase

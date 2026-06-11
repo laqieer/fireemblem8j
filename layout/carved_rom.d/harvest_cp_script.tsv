@@ -1,0 +1,3 @@
+03CAC4	03CDA8	src/cp_script_0803CAC4.o(.text)	cp_script_0803CAC4(run): AiScriptCmd_09_DoStaffAction, AiScriptCmd_0A_DoStaffAction, AiScriptCmd_0B_DoStaffAction...
+03C7F4	03C884	src/cp_script_0803C7F4.o(.text)	cp_script_0803C7F4(run): AiIsUnitEnemyAndNotInScrList, AiIsUnitEnemyOrInScrList
+03CA0C	03CA74	src/cp_script_0803CA0C.o(.text)	cp_script_0803CA0C(run): AiScriptCmd_06_DoNothing, AiScriptCmd_07_DoStandardActionNoMove

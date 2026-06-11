@@ -1,0 +1,4 @@
+0A9A28	0A9C30	src/bmsave_080A9A28.o(.text)	bmsave_080A9A28(run): WriteGameSave, ReadGameSave
+0AAE20	0AAE6C	src/bmsave_080AAE20.o(.text)	bmsave_080AAE20(run): SramChecksum32, VerifySaveBlockChecksum
+0A984C	0A98B4	src/bmsave_080A984C.o(.text)	bmsave_080A984C(run): CopyGameSave
+0AAE88	0AAF5C	src/bmsave_080AAE88.o(.text)	bmsave_080AAE88(run): GetGameStateChecksum_Unused
