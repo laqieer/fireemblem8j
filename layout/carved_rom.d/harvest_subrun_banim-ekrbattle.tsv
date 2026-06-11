@@ -1,0 +1,7 @@
+05183C	051B14	src/banim-ekrbattle_0805183C.o(.text)	banim-ekrbattle_0805183C(run): ekrBattleLvupHanlder, ekrBattle_ExecEkrLvup, ekrBattle_WaitEkrLvupIdle...
+050CD4	050ECC	src/banim-ekrbattle_08050CD4.o(.text)	banim-ekrbattle_08050CD4(run): Nop_BanimEkrbattle_1, ekrBattle_Init, ekrBattleMain...
+050EE8	051004	src/banim-ekrbattle_08050EE8.o(.text)	banim-ekrbattle_08050EE8(run): ekrBattleExecDragonIntro, ekrBattleWaitDragonIntro, ekrBattlePostEkrDragonIntro
+051024	0510D4	src/banim-ekrbattle_08051024.o(.text)	banim-ekrbattle_08051024(run): ekrBattleSetFlashingEffect, ekrBattleExecTriangleAtk, ekrBattleWaitTriangleIdle
+051334	051624	src/banim-ekrbattle_08051334.o(.text)	banim-ekrbattle_08051334(run): ekrBattle_3, ekrBattle_WaitForPostBattleAct, ekrBattleExecExpGain
+051674	0517EC	src/banim-ekrbattle_08051674.o(.text)	banim-ekrbattle_08051674(run): ekrBattle_5, ekrBattleWaitExpBarIdle, ekrBattlePostExpBarIdle
+051174	0511E0	src/banim-ekrbattle_08051174.o(.text)	banim-ekrbattle_08051174(run): ekrBattle_StartPromotion, ekrBattle_WaitPromotionIdle
