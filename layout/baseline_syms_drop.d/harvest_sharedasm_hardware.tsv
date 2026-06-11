@@ -1,0 +1,6 @@
+BG_GetControlBuffer
+BG_Fill
+FlushBackgrounds
+RegisterBlankTile
+SetInterrupt_LCDVBlank
+SetInterrupt_LCDVCountMatch
