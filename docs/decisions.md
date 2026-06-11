@@ -2309,3 +2309,56 @@ codegen / non-contiguous) -> needs hand-decomp (IDA/Ghidra), deferred. Gated eve
 `rm -f src/*.s`) + `make compare` + `make clean && make compare` + `check_selfcontained.py` == 0 incbins; named from
 US; staged explicitly (NO `git add -A`); verify-or-revert; baserom/checksum/CI untouched. Pushed `feat/wave-C`.
 Siblings own banim-ekrdragon-demonking/banim-efxmisc + uidebug/banim-efxop — not touched.
+
+## D52 — wave2-B: the func_only-vs-dedup_globals choice for shared-asm graduation; +73 on the 4 partial-TU remainders (2026-06-11)
+
+**Context.** Branch `feat/wave2-B` (sibling to the wave/scale/next/bind waves; distinct D-number). Scope: the
+D41-flagged partial-TU remainders `sysutil` (59 ungraduated), `bmshop` (47), `hardware` (45 — exact:14/masked:2),
+`eventinfo` (45). Applied the COMPLETE D41-D51 toolkit: `harvest_verified_runs.py` (clean graduate-asm runs),
+`bind_tu_data.py` (func_only ABS-bind), and `graduate_shared_run.py` (D51 stranded-section + masked-split graduation).
+
+**RESULT — +73 matching-C across 14 carved runs (us_source_tracker named-US graduated 3518 → 3579, +61; the
++73 includes file-local static helpers the tracker doesn't count, e.g. hardware ApplyColorAddition_ClampMax/Min);
+honest ceiling 42.86% → 43.60%. Self-containment held 100% (0 incbins).** Per TU (all gated: `make check` after
+`rm -f src/*.s` + `make compare` + `make clean && make compare` + `check_selfcontained.py` == 0 incbins; named
+from US; verify-or-revert; staged explicitly, NO `git add -A`; baserom/checksum/CI untouched):
+  * **bmshop: 4 runs / 16 fns.** ALL 4 graduate-asm verified runs REVERTED under `harvest_verified_runs`
+    (dedup_globals re-emitted region-different file-scope data / dup'd globals already in `src/bmshop.o`), but ALL
+    4 LANDED via `bind_tu_data.py` func_only (drops the file-scope data; binds gProcScr_Shop*/ProcScr_Shop*Init/
+    gShopItemTexts as ABS at JP literal-pool addresses). The clean asm->C-via-func_only class.
+  * **sysutil: 3 runs / 28 fns, 0 reverts** (masked-split; graduate_shared_run func_only). FadeIn/Out + BgAffin*
+    HighPrecision + Mode4* clusters; dropped 3 masked carves + 23 gbadisasm fragments.
+  * **eventinfo: 3 runs / 12 fns, 0 reverts** (masked-split; func_only). Tutorial-event + EvCheck clusters;
+    `extract_func_only` correctly KEPT the file-local struct types (EvCheck01/EvCheck02) + the EVT_CMD_HI macro
+    (D46/D51 keep-fixes). Dropped 3 masked carves + 8 gbadisasm fragments.
+  * **hardware: 4 runs / 17 fns** (stranded-section + masked graduation). 3 of 4 landed func_only
+    (0800169C ColorFade cluster, 08000F54 GetTileIndex, 08000FB4 SetBackgroundMapDataOffset). The 11-fn
+    0800101C (BG_SetColorBpp/ApplyColorAddition_*/FlushBackgrounds/BG_Fill/RegisterBlankTile/SetInterrupt_LCDV*)
+    REVERTED under func_only but LANDED on a `--no-func-only` (dedup_globals) RETRY. 1 reverted both ways:
+    080A76F4 (IsSoftwareReset) — genuinely region-different, zero-risk reverted.
+
+**KEY OPERATIONAL FINDING — func_only and dedup_globals are COMPLEMENTARY graduation paths; try BOTH before
+declaring region-diff.** `graduate_shared_run.py` defaults to `func_only=True` (drop ALL file-scope data, bind
+refs as ABS). That fails when a run NEEDS its region-same file-scope data EMITTED from the subset (not bindable as
+a single ABS symbol) — exactly the hardware_0800101C case (the BG/color-addition cluster's local statics). The fix
+is the existing `--no-func-only` flag (dedup_globals: emit the file-scope data, demote only the globals the
+existing partial `src/<tu>.o`/baseline already provides). So the reusable recipe for a shared-asm/masked-split run
+that reverts under the default is: **rerun `graduate_shared_run.py --no-func-only <TU>`** — it skips the
+already-carved runs (src exists) and retries only the reverted ones with the dedup path. This recovered 11 of
+hardware's 17 fns and is the analogue of D45's "run dedup_globals first, then func_only" but inverted for the
+shared-asm graduator (whose default is func_only). Net across wave2-B: 2 genuine reverts (bmshop's were all
+func_only-recoverable; hardware 080A76F4 the only true region-diff), confirming the partial-TU remainder is
+overwhelmingly placement/binding, not region-different codegen — D41-D43 holds.
+
+**STRAND NOTE (operational).** A `timeout`-wrapped harvester killed mid-revert can leave a stale generated
+`asm/baserom.s` referencing a dropped `gbadisasm_*.tsv` (make: "No rule to make target ..."). Recovery is a plain
+`make layout` (regenerates the glue from the manifests) — NOT a git-checkout strand in this case; the manifests
+were already consistent, only the cached generated file was stale. Avoid `timeout` wrappers on the graduators for
+this reason (run them backgrounded, let them finish their own verify-or-revert).
+
+**Remaining wave2-B frontier (all zero-risk reverted / not-in-a-verified-run).** bmshop 31, hardware 31
+(exact:6/masked:2 left), sysutil 36, eventinfo 37 ungraduated — the functions NOT in any per-function-gbadisasm or
+masked-split verified run (region-different codegen / non-contiguous), plus hardware_080A76F4 (IsSoftwareReset,
+genuine region-diff). These need hand-decomp (IDA/Ghidra), deferred. Pushed `feat/wave2-B`. Siblings own
+scene/bmbattle/opanim (wave2-A) + mu/bmlib/bmmenu (wave2-C) — not touched. (D-number assigned from the free
+sequence; renumber at integration if a concurrent sibling claimed D52.)
