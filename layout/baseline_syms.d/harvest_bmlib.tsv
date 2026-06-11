@@ -1,0 +1,7 @@
+Spline_Ease	0800A788	thumb	bmlib_08014C7C
+Proc_StartBlocking	08002C30	thumb	bmlib_080142F0
+ProcScr_TemporaryLock	085C2558	data	bmlib_080142F0
+SJisZero	085C2570	data	bmlib_08014328
+SJisDash	085C2574	data	bmlib_08014328
+DivRem	080D637C	thumb	bmlib_08014328
+GetGameLock	080153A4	thumb	bmlib_08014990

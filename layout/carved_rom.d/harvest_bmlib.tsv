@@ -1,0 +1,7 @@
+013BAC	013D10	src/bmlib_08013BAC.o(.text)	bmlib_08013BAC(run): FadeToBlack_OnInit, FadeToCommon_OnLoop, FadeFromBlack_OnInit...
+014C7C	014CEC	src/bmlib_08014C7C.o(.text)	bmlib_08014C7C(run): PutDrawTextCentered, GetEasedProgress
+012E84	012F4C	src/bmlib_08012E84.o(.text)	bmlib_08012E84(run): Interpolate
+0142F0	01430C	src/bmlib_080142F0.o(.text)	bmlib_080142F0(run): StartTemporaryLock
+014328	0143EC	src/bmlib_08014328.o(.text)	bmlib_08014328(run): NumberToStringSJis
+0148A4	0148C8	src/bmlib_080148A4.o(.text)	bmlib_080148A4(run): CallDelayed_OnLoop
+014990	0149B4	src/bmlib_08014990.o(.text)	bmlib_08014990(run): PartialGameLock_OnLoop
