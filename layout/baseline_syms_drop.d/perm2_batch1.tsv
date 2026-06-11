@@ -1,0 +1,8 @@
+CopyUnit
+GetEventTriggerState
+IsBattleDeamonActive
+LoadUiFrameGraphicsTo
+PopulateSaveBlockChecksum
+ShouldCallEndEvent
+TalkBgSync
+WriteTraps
