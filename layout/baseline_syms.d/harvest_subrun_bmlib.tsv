@@ -5,3 +5,9 @@ SetPalFadeStClkEnd1	08013528	thumb	bmlib_08013608
 SetPalFadeStClkEnd2	08013538	thumb	bmlib_08013608
 SetPalFadeStClkEnd3	0801354C	thumb	bmlib_08013608
 GetPalFadeSt	08013504	thumb	bmlib_08013608
+ProcScr_FadeToBlack	085C24A8	data	bmlib_08013D88
+ProcScr_FadeFromBlack	085C24C8	data	bmlib_08013D88
+Proc_StartBlocking	08002C30	thumb	bmlib_08013D88
+ProcScr_FadeToWhite	085C24E8	data	bmlib_08013D88
+ProcScr_FadeFromWhite	085C2508	data	bmlib_08013D88
+sPalFadeSt	0202B6AC	data	bmlib_080134E0

@@ -106,6 +106,31 @@ def decompose_run(rows, s, e, fns):
     return [(f"{a:08X}", f"{b:08X}", f, g) for (a, b, f, g) in subs], fi
 
 
+def leading_asm_block(rows, s, e, fns):
+    """A run's LEADING contiguous gbadisasm-only block, if it begins at the run
+    start. The fn-name assignment is ALWAYS reliable here (1:1 from the run start,
+    one fn per gbad row, before any src row can drift the count) -- so this recovers
+    the leading asm gap even when the full zip mismatches downstream (e.g. a trailing
+    already-carved exact/src row that sticks out past the run end over-consumes fns).
+    Returns (start_hex, end_hex, [fns], [gbad_rows]) or None."""
+    cov = sorted([r for r in rows if r[0] < e and r[1] > s])
+    if not cov or cov[0][0] != s or not cov[0][4]:
+        return None  # run doesn't start with a gbad row
+    block, k = [], 0
+    for r in cov:
+        if r[4] and r[0] == s + sum(x[1] - x[0] for x in block):
+            block.append(r)
+            k += 1
+        else:
+            break
+    if not block:
+        return None
+    a, b = block[0][0], block[-1][1]
+    if k > len(fns):
+        return None
+    return (f"{a:08X}", f"{b:08X}", fns[:k], block)
+
+
 def main():
     args = sys.argv[1:]
     do_list = "--list" in args
@@ -140,10 +165,21 @@ def main():
                 continue  # pure gbad/fresh -> harvest_verified_runs handles it
             subs, fi = decompose_run(rows, s, e, fns)
             if fi != len(fns):
-                # zip mismatch: row-fn count disagrees with run fn list -> skip (unsafe)
-                if do_list:
+                # zip mismatch: the full row-fn count disagrees with the run fn list
+                # (usually a trailing already-carved src/exact row that STICKS OUT
+                # past the run end, over-consuming fns). The full decomposition is
+                # unreliable, but a LEADING asm-only block (from the run start) maps
+                # 1:1 reliably -> recover just that block; verify-or-revert guards it.
+                lead = leading_asm_block(rows, s, e, fns)
+                if lead:
+                    all_subs.append(lead)
+                    if do_list:
+                        print(f"  [zip-mismatch->lead] {tu}_{s:08X} "
+                              f"(consumed {fi}/{len(fns)}) -- leading block "
+                              f"{lead[0]} {len(lead[2])} fns: {', '.join(lead[2][:4])}")
+                elif do_list:
                     print(f"  [zip-mismatch] {tu}_{s:08X} "
-                          f"(consumed {fi}/{len(fns)} fns) -- skipped")
+                          f"(consumed {fi}/{len(fns)} fns) -- no leading block, skipped")
                 continue
             for (a, b, f, g) in subs:
                 all_subs.append((a, b, f, g))

@@ -2,3 +2,5 @@
 014494	0144E0	src/bmlib_08014494.o(.text)	bmlib_08014494(run): DeleteAllPaletteAnimator, StartPaletteAnimatorExt
 013458	0134E0	src/bmlib_08013458.o(.text)	bmlib_08013458(run): DarkenPals
 013608	013844	src/bmlib_08013608.o(.text)	bmlib_08013608(run): WriteFadedPaletteFromArchive
+013D88	013E20	src/bmlib_08013D88.o(.text)	bmlib_08013D88(run): StartFadeToBlack, StartFadeFromBlack, StartLockingFadeToBlack...
+0134E0	01350C	src/bmlib_080134E0.o(.text)	bmlib_080134E0(run): Nop_Bmlib_1, Bmlib_DeadRecursiveStub, GetPalFadeSt

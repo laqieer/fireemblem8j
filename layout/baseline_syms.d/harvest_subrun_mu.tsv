@@ -28,3 +28,9 @@ ProcScr_MuPixelEffect	08A13370	data	mu_0807BA68
 sMuChrOffLut_Default	08A132F0	data	mu_0807B5E0
 sMuConfig	030018F8	data	mu_0807B5E0
 sMuChrOffLut	08A132F8	data	mu_0807B5E0
+AP_SwitchAnimation	08009408	thumb	mu_0807AE28
+Img_GmapSoguSprites	08A1E3D4	data	mu_0807AE28
+ApHandle_GmapSoguSprites	08A19580	data	mu_0807AE28
+ProcScr_MuFogBump	08A12FF0	data	mu_0807AE28
+gPlaySt	0202BCEC	data	mu_0807AE28
+gSinLookup	080DC15C	data	mu_0807AE28

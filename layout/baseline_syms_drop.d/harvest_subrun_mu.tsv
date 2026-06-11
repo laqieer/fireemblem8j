@@ -14,3 +14,6 @@ AP_SetDefinition
 GetMuAnimForJid
 GetMuImg
 GetMuImgBufById
+ApHandle_GmapSoguSprites
+Img_GmapSoguSprites
+MU_IsFogBumpFxActive
