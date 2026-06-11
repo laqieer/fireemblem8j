@@ -2165,3 +2165,37 @@ slow TU. Pushed `feat/next-3`. Siblings own scene/statscreen (next-1) and mu/wor
 
 **Remaining next-3 frontier.** savedraw SaveDraw_DrawPlayTime + prep_itemsupply 080A0250 (both D42 macro/header-less-
 static residuals); the skip-shared-asm runs in each TU (D40/D43-deferred run-decomposition). All zero-risk reverted.
+
+## D49 — wave-A: banim-efxmisc + banim-ekrdragon-demonking harvest +68 (the D44 animation class, 0 unrecovered) (2026-06-11)
+
+**Context.** Branch `feat/wave-A` (sibling to scale-1/scale-2/next-1/next-2/next-3; distinct D-number). Scope: the
+D44 high-yield ANIMATION TUs `banim-efxmisc` (52 ungraduated) and `banim-ekrdragon-demonking` (56 ungraduated) —
+both region-same `no-funcmap` partial TUs. Applied the COMPLETE D41-D48 toolkit unchanged: `harvest_verified_runs.py`
+(dedup_globals + reloc-free NOLOAD-on-overlap) first, then `bind_tu_data.py` (func_only ABS-bind) to recover reverts.
+
+**RESULT — +68 matching-C (3328 -> 3396, 39.02% -> 39.82%); self-containment held 100% (0 incbins).** Per TU (all
+gated: `make check` after `rm -f src/*.s` + `make compare` + `make clean && make compare` + self-cont 100%; named
+from US; verify-or-revert; staged explicitly, NO `git add -A`):
+  * **banim-efxmisc: 12 runs / 33 fns.** harvest landed 11 runs / 32 fns; the 1 revert (NewEfxYushaSpinShield,
+    0806EF84) was a textbook D42 re-emitted-data revert — recovered by `bind_tu_data.py` func_only (+2 data binds).
+    0 unrecovered.
+  * **banim-ekrdragon-demonking: 9 runs / 35 fns.** harvest landed 6 runs / 27 fns; ALL 3 reverts (08078C38=5fns
+    +5 binds, 08078DC8=2fns +2 binds, 08078960=1fn +5 binds) recovered by `bind_tu_data.py` func_only. 0 unrecovered.
+
+**Net blocker rate: 4 reverts / 68 graduated, ALL func_only-recoverable.** Confirms D44 again: region-same animation
+ENGINE TUs are near-pristine — file-scope data is either region-same shared globals already bound (dedup_globals
+demotes to extern, byte-neutral) or proc-script CONST_DATA the run doesn't need (func_only drops it). NO Class C/D
+surfaced. No new tooling needed; the D41-D48 toolkit was sufficient.
+
+**Cross-TU func-ref dedup (the second critical RULE).** func_only/harvest left 7 functions ABS-bound that my own
+src/ now defines (cross-RUN references inside the same TU — e.g. banim-efxmisc_0806F0C8 referencing
+NewEfxHurtmutEff00OBJ, defined by banim-efxmisc_0806F1A4). Audited all 68 defined functions (objdump) against ALL
+effective baseline binds; dropped the 7 residuals via `layout/baseline_syms_drop.d/wave_a_banim.tsv`
+(NewEfxHurtmutEff00OBJ/01OBJ, NewEfxSRankWeaponEffect, NewEfxSunakemuriOBJ, NewEfxYushaSpinShieldOBJ,
+NewEkrDragonBaseAppear, NewEkrWhiteOUT). Final re-audit: 0 my-defined funcs effectively baseline-bound; clean
+rebuild GREEN proves no multiple-definition.
+
+**Remaining wave-A frontier.** The verified-run remainder of both TUs that `find_runs` does NOT prove as
+per-function-gbadisasm-only contiguous runs (already-graduated runs are src_cov-skipped; no skip-shared-asm surfaced
+in these two). Nothing deferred for a new blocker class. Pushed `feat/wave-A`. Siblings own uidebug/banim-efxop
+(wave-B) and bmmenu/bmlib (wave-C) — not touched. baserom/checksum/CI untouched.

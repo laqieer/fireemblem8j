@@ -1,0 +1,3 @@
+078C38	078DBC	src/banim-ekrdragon-demonking_08078C38.o(.text)	banim-ekrdragon-demonking_08078C38(run): EkrDK_ReloadTerrainEtc, EkrDK_ReloadCustomBgAndFadeOut, EkrDK_SetDragonStatusBit3...
+078DC8	078E98	src/banim-ekrdragon-demonking_08078DC8.o(.text)	banim-ekrdragon-demonking_08078DC8(run): NewEkrDragonBaseAppear, EkrDragonBaseAppearMain
+078960	0789B8	src/banim-ekrdragon-demonking_08078960.o(.text)	banim-ekrdragon-demonking_08078960(run): NewEkrDragonDemonKing

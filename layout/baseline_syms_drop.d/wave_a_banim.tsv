@@ -1,0 +1,10 @@
+# wave-A: functions now DEFINED by my carved src/banim-*_<addr>.o objects
+# (cross-TU/cross-source function refs that the harvester also left as ABS binds).
+# Drop the redundant ABS binds so the real definition is the only one (RULE 2).
+NewEfxHurtmutEff00OBJ
+NewEfxHurtmutEff01OBJ
+NewEfxSRankWeaponEffect
+NewEfxSunakemuriOBJ
+NewEfxYushaSpinShieldOBJ
+NewEkrDragonBaseAppear
+NewEkrWhiteOUT

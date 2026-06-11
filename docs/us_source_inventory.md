@@ -16,20 +16,20 @@ none of which can ever become matching C.
 
 | kind | US functions | graduated (JP) | note |
 |------|-------------:|---------------:|------|
-| US-C-portable | 8209 | 2466 | real C TUs -- **THE matching-C ceiling** |
+| US-C-portable | 8209 | 3303 | real C TUs -- **THE matching-C ceiling** |
 | US-ASM-stays | 20 | 0 | arm.o/arm_call.o ARM-mode; stays .s (US standard); NEVER matching-C |
 | LIBC/LIBGCC | 150 | 0 | vendored tools/agbcc lib; NEVER matching-C |
-| **TOTAL US functions** | **8379** | **2466** | US text symbols |
+| **TOTAL US functions** | **8379** | **3303** | US text symbols |
 
 - **The honest matching-C denominator is 8209** (US-C-portable), not 8,528.
   170 US functions (20 ASM-stays + 150 libc/libgcc)
   legitimately stay non-C -- the US decomp itself keeps them that way.
-- **Graduated: 2466 / 8209 = 30.04%** of the real ceiling.
+- **Graduated: 3303 / 8209 = 40.24%** of the real ceiling.
 - For comparison, calcprogress.py axis 2 reports matching-C against the
   flat 8,528 total; the true reachable target on that axis is
   8209/8528 = 96.3% (the rest
-  is asm/libc), so 2466/8528 = 28.92%
-  there is 30.04% of what is actually portable.
+  is asm/libc), so 3303/8528 = 38.73%
+  there is 40.24% of what is actually portable.
 
 ## funcmap-tracked subset (per-function confidence)
 
@@ -39,14 +39,14 @@ a SUBSET of US functions; the worklist below uses the full table above.
 
 | funcmap kind | rows | graduated | note |
 |------|-----:|----------:|------|
-| US-C-portable | 1664 | 1430 | C functions (exact/masked tier) |
+| US-C-portable | 1664 | 1462 | C functions (exact/masked tier) |
 | US-ASM-stays | 13 | 0 | arm.o code |
 | LIBC/LIBGCC | 115 | 0 | libc/libgcc code |
 | DATA-obj | 5942 | 0 | data globals (the funcmap also tracks data symbols) |
 | region-different/UNKNOWN | 5 | 0 | no US section owns the addr (truly unplaced) |
-| **TOTAL** | **7739** | **1430** | funcmap rows |
+| **TOTAL** | **7739** | **1462** | funcmap rows |
 
-- funcmap US-C-portable: 1430/1664 graduated. The 5,481 DATA-obj rows are data globals, not functions.
+- funcmap US-C-portable: 1462/1664 graduated. The 5,481 DATA-obj rows are data globals, not functions.
 
 ## Whole-TU-port worklist (fully-unported US-C TUs)
 
@@ -80,105 +80,98 @@ per-function work (extract_func_only + bind statics).
 
 | US TU | US-C funcs | graduated | ungraduated | tiers |
 |-------|-----------:|----------:|------------:|-------|
-| bmmenu | 179 | 21 | 158 | no-funcmap:158 |
-| fontgrp | 96 | 1 | 95 | exact:28, masked:7, no-funcmap:60 |
-| opanim-main | 102 | 11 | 91 | no-funcmap:91 |
+| bmmenu | 179 | 84 | 95 | no-funcmap:95 |
 | eventscr | 97 | 8 | 89 | no-funcmap:89 |
-| scene | 99 | 11 | 88 | exact:4, no-funcmap:84 |
-| sysutil | 93 | 12 | 81 | no-funcmap:81 |
-| statscreen | 93 | 14 | 79 | exact:4, no-funcmap:75 |
+| fontgrp | 96 | 11 | 85 | exact:25, no-funcmap:60 |
 | sio_battlemap | 89 | 12 | 77 | no-funcmap:77 |
 | uidebug | 123 | 47 | 76 | no-funcmap:76 |
 | eventscr_gmap | 87 | 12 | 75 | no-funcmap:75 |
-| bmlib | 162 | 87 | 75 | no-funcmap:75 |
-| mapanim_staffeffect | 76 | 6 | 70 | no-funcmap:70 |
-| bmtarget | 75 | 6 | 69 | no-funcmap:69 |
-| bmbattle | 109 | 40 | 69 | exact:5, no-funcmap:64 |
-| banim-efxop | 74 | 5 | 69 | no-funcmap:69 |
-| mu | 94 | 30 | 64 | masked:1, no-funcmap:63 |
-| worldmap_rm | 70 | 6 | 64 | no-funcmap:64 |
-| eventinfo | 110 | 47 | 63 | no-funcmap:63 |
-| worldmap_main | 76 | 16 | 60 | no-funcmap:60 |
-| prep_itemscreen | 62 | 3 | 59 | no-funcmap:59 |
-| bmshop | 81 | 23 | 58 | no-funcmap:58 |
-| helpbox | 71 | 14 | 57 | no-funcmap:57 |
+| bmlib | 162 | 98 | 64 | no-funcmap:64 |
+| sysutil | 93 | 34 | 59 | no-funcmap:59 |
+| scene | 99 | 41 | 58 | exact:4, no-funcmap:54 |
 | banim-ekrdragon-demonking | 70 | 14 | 56 | no-funcmap:56 |
-| savemenu | 66 | 12 | 54 | no-funcmap:54 |
-| hardware | 78 | 26 | 52 | exact:15, masked:3, no-funcmap:34 |
+| bmbattle | 109 | 55 | 54 | exact:5, no-funcmap:49 |
 | banim-efxmisc | 63 | 11 | 52 | no-funcmap:52 |
-| bmdebug | 54 | 3 | 51 | no-funcmap:51 |
-| bmunit | 93 | 43 | 50 | masked:1, no-funcmap:49 |
-| bmitemuse | 57 | 8 | 49 | no-funcmap:49 |
-| ending_details | 54 | 6 | 48 | masked:1, no-funcmap:47 |
-| sio_uiutils | 57 | 10 | 47 | no-funcmap:47 |
-| uisupport | 62 | 15 | 47 | no-funcmap:47 |
-| prep_sallycursor | 53 | 8 | 45 | no-funcmap:45 |
-| player_interface | 55 | 12 | 43 | no-funcmap:43 |
-| m4a | 58 | 15 | 43 | exact:21, masked:12, no-funcmap:10 |
-| worldmap_path | 68 | 27 | 41 | no-funcmap:41 |
+| banim-efxop | 74 | 22 | 52 | no-funcmap:52 |
+| opanim-main | 102 | 51 | 51 | no-funcmap:51 |
+| mu | 94 | 47 | 47 | masked:1, no-funcmap:46 |
+| bmshop | 81 | 34 | 47 | no-funcmap:47 |
+| ending_details | 54 | 7 | 47 | no-funcmap:47 |
+| hardware | 78 | 33 | 45 | exact:14, masked:2, no-funcmap:29 |
+| eventinfo | 110 | 65 | 45 | no-funcmap:45 |
+| statscreen | 93 | 48 | 45 | exact:2, no-funcmap:43 |
+| bmunit | 93 | 49 | 44 | masked:1, no-funcmap:43 |
+| bmitemuse | 57 | 15 | 42 | no-funcmap:42 |
 | banim-efxmagic-healstaves | 42 | 2 | 40 | no-funcmap:40 |
-| opinfo | 48 | 8 | 40 | no-funcmap:40 |
-| bmsave-lib | 68 | 29 | 39 | no-funcmap:39 |
-| bmusailment | 43 | 5 | 38 | no-funcmap:38 |
+| prep_itemscreen | 62 | 22 | 40 | no-funcmap:40 |
+| m4a | 58 | 18 | 40 | exact:21, masked:9, no-funcmap:10 |
 | bmdifficulty | 50 | 12 | 38 | exact:1, no-funcmap:37 |
-| cp_utility | 46 | 8 | 38 | no-funcmap:38 |
 | prep_menuproc | 45 | 7 | 38 | no-funcmap:38 |
-| soundroom | 52 | 14 | 38 | no-funcmap:38 |
 | banim-ekrbattle | 48 | 11 | 37 | no-funcmap:37 |
 | banim-efxmagic-effectstaves | 48 | 11 | 37 | no-funcmap:37 |
+| helpbox | 71 | 34 | 37 | no-funcmap:37 |
 | mapanim_eventcall | 53 | 17 | 36 | no-funcmap:36 |
 | unitlistscreen | 40 | 4 | 36 | exact:1, no-funcmap:35 |
-| worldmap_mapmu | 46 | 10 | 36 | no-funcmap:36 |
+| uisupport | 62 | 26 | 36 | no-funcmap:36 |
 | face | 62 | 27 | 35 | masked:3, no-funcmap:32 |
-| playerphase | 40 | 5 | 35 | no-funcmap:35 |
-| gamecontrol | 44 | 12 | 32 | no-funcmap:32 |
-| bmusemind | 38 | 6 | 32 | no-funcmap:32 |
-| cp_script | 46 | 14 | 32 | no-funcmap:32 |
-| prep_itemsupply | 39 | 7 | 32 | exact:1, no-funcmap:31 |
-| cp_0803E2F4 | 43 | 12 | 31 | no-funcmap:31 |
-| chapterintrofx | 41 | 11 | 30 | no-funcmap:30 |
-| eventcall | 45 | 15 | 30 | no-funcmap:30 |
+| player_interface | 55 | 20 | 35 | no-funcmap:35 |
+| worldmap_main | 76 | 41 | 35 | no-funcmap:35 |
+| savemenu | 66 | 32 | 34 | no-funcmap:34 |
+| playerphase | 40 | 8 | 32 | no-funcmap:32 |
+| soundroom | 52 | 20 | 32 | no-funcmap:32 |
 | prep_unitselect | 34 | 4 | 30 | no-funcmap:30 |
-| bm | 47 | 18 | 29 | no-funcmap:29 |
+| bmsave-lib | 68 | 38 | 30 | no-funcmap:30 |
+| opinfo | 48 | 18 | 30 | no-funcmap:30 |
+| chapterintrofx | 41 | 12 | 29 | no-funcmap:29 |
 | bmudisp | 41 | 12 | 29 | no-funcmap:29 |
+| cp_utility | 46 | 17 | 29 | no-funcmap:29 |
 | banim-efxmagic-demonlight | 33 | 4 | 29 | no-funcmap:29 |
+| mapanim_staffeffect | 76 | 47 | 29 | no-funcmap:29 |
 | prepscreen | 46 | 17 | 29 | exact:4, no-funcmap:25 |
-| bmtrade | 44 | 17 | 27 | no-funcmap:27 |
+| worldmap_path | 68 | 39 | 29 | no-funcmap:29 |
 | mapanim_spellassoc | 51 | 24 | 27 | no-funcmap:27 |
-| bmsave | 41 | 14 | 27 | no-funcmap:27 |
+| bmtrade | 44 | 18 | 26 | no-funcmap:26 |
 | bmmind | 32 | 6 | 26 | no-funcmap:26 |
 | cpextra_80407F0 | 31 | 5 | 26 | no-funcmap:26 |
 | banim-ekrutils | 36 | 10 | 26 | no-funcmap:26 |
-| banim-efxlvup | 32 | 6 | 26 | exact:2, masked:1, no-funcmap:23 |
-| bmsave-bwl | 48 | 22 | 26 | no-funcmap:26 |
-| savedraw | 37 | 11 | 26 | exact:1, no-funcmap:25 |
-| worldmap_entry | 31 | 5 | 26 | no-funcmap:26 |
-| popup | 39 | 14 | 25 | no-funcmap:25 |
-| bmio | 30 | 5 | 25 | exact:1, masked:2, no-funcmap:22 |
+| gamecontrol | 44 | 19 | 25 | no-funcmap:25 |
 | banim-efxmagic-excalibur | 28 | 3 | 25 | no-funcmap:25 |
 | banim-efxmagic-demonsurge | 26 | 1 | 25 | no-funcmap:25 |
-| event | 36 | 12 | 24 | no-funcmap:24 |
+| worldmap_rm | 70 | 45 | 25 | no-funcmap:25 |
+| bm | 47 | 23 | 24 | no-funcmap:24 |
 | sio_bat | 25 | 1 | 24 | no-funcmap:24 |
+| banim-efxlvup | 32 | 8 | 24 | exact:1, no-funcmap:23 |
+| bmsave-bwl | 48 | 24 | 24 | no-funcmap:24 |
 | opsubtitle | 28 | 4 | 24 | no-funcmap:24 |
+| event | 36 | 13 | 23 | no-funcmap:23 |
+| bmio | 30 | 7 | 23 | exact:1, no-funcmap:22 |
+| prep_sallycursor | 53 | 30 | 23 | no-funcmap:23 |
 | banim-efxmagic-light | 24 | 1 | 23 | no-funcmap:23 |
 | banim-ekrlvup | 25 | 2 | 23 | no-funcmap:23 |
 | prep_atmenu | 27 | 4 | 23 | no-funcmap:23 |
+| savedraw | 37 | 14 | 23 | exact:1, no-funcmap:22 |
 | titlescreen | 35 | 12 | 23 | no-funcmap:23 |
+| popup | 39 | 17 | 22 | no-funcmap:22 |
+| bmdebug | 54 | 32 | 22 | no-funcmap:22 |
 | bksel | 31 | 9 | 22 | no-funcmap:22 |
 | banim-efxmagic-luna | 23 | 1 | 22 | no-funcmap:22 |
 | banim-efxmagic-ivaldi | 23 | 1 | 22 | no-funcmap:22 |
 | banim-efxmagic-gleipnir | 39 | 17 | 22 | no-funcmap:22 |
 | banim-ekrclasschg | 30 | 8 | 22 | no-funcmap:22 |
 | banim-ekrpopup | 25 | 3 | 22 | no-funcmap:22 |
+| eventcall | 45 | 23 | 22 | no-funcmap:22 |
 | cgtext | 41 | 19 | 22 | no-funcmap:22 |
-| bmitem | 72 | 51 | 21 | exact:2, masked:3, no-funcmap:16 |
 | unitinfowindow | 31 | 10 | 21 | no-funcmap:21 |
+| cp_0803E2F4 | 43 | 22 | 21 | no-funcmap:21 |
 | banim-efxmagic | 27 | 6 | 21 | no-funcmap:21 |
+| bmsave | 41 | 20 | 21 | no-funcmap:21 |
+| bmusemind | 38 | 18 | 20 | no-funcmap:20 |
 | sio_core | 42 | 22 | 20 | no-funcmap:20 |
 | uimenu | 40 | 20 | 20 | no-funcmap:20 |
 | banim-efxhit | 24 | 4 | 20 | no-funcmap:20 |
 | banim-efxsound | 24 | 4 | 20 | exact:3, no-funcmap:17 |
 | mapanim | 22 | 2 | 20 | no-funcmap:20 |
+| cp_script | 46 | 27 | 19 | no-funcmap:19 |
 | sio_teamlist | 25 | 6 | 19 | no-funcmap:19 |
 | minimap | 34 | 15 | 19 | exact:3, no-funcmap:16 |
 | bonusclaim | 21 | 2 | 19 | no-funcmap:19 |
@@ -186,25 +179,30 @@ per-function work (extract_func_only + bind statics).
 | worldmap_player_interface | 27 | 8 | 19 | no-funcmap:19 |
 | classchg-sel | 23 | 4 | 19 | no-funcmap:19 |
 | soundwrapper | 32 | 14 | 18 | exact:4, no-funcmap:14 |
-| bmmap | 24 | 6 | 18 | masked:2, no-funcmap:16 |
+| bmitem | 72 | 54 | 18 | exact:1, masked:1, no-funcmap:16 |
 | cp_perform | 27 | 9 | 18 | masked:1, no-funcmap:17 |
 | sio_points | 20 | 2 | 18 | no-funcmap:18 |
+| sio_uiutils | 57 | 39 | 18 | no-funcmap:18 |
 | banim-efxmagic-breath | 20 | 2 | 18 | no-funcmap:18 |
 | prep_itemuse | 21 | 3 | 18 | no-funcmap:18 |
+| prep_itemsupply | 39 | 21 | 18 | exact:1, no-funcmap:17 |
 | prep_itemlist | 20 | 2 | 18 | no-funcmap:18 |
-| bmguide | 29 | 11 | 18 | masked:1, no-funcmap:17 |
-| bmidoten | 23 | 6 | 17 | masked:2, no-funcmap:15 |
 | sio_tactician | 22 | 5 | 17 | no-funcmap:17 |
 | banim-efxmagic-naglfar | 21 | 4 | 17 | no-funcmap:17 |
 | banim-efxmagic-crimsoneye | 24 | 7 | 17 | no-funcmap:17 |
 | uiarena | 25 | 8 | 17 | no-funcmap:17 |
+| worldmap_mapmu | 46 | 29 | 17 | no-funcmap:17 |
+| bmguide | 29 | 12 | 17 | no-funcmap:17 |
 | sio_event | 19 | 3 | 16 | no-funcmap:16 |
 | banim-efxmagic-phywpn | 30 | 14 | 16 | no-funcmap:16 |
 | banim-ekrtriangle | 19 | 3 | 16 | no-funcmap:16 |
 | mapanim_scanline | 43 | 27 | 16 | masked:1, no-funcmap:15 |
 | prep_wm_sell | 19 | 3 | 16 | no-funcmap:16 |
+| worldmap_entry | 31 | 15 | 16 | no-funcmap:16 |
 | opanim-healthsafetyscreen | 17 | 1 | 16 | no-funcmap:16 |
 | eventscr3 | 19 | 4 | 15 | no-funcmap:15 |
+| bmidoten | 23 | 8 | 15 | no-funcmap:15 |
+| bmtarget | 75 | 60 | 15 | no-funcmap:15 |
 | banim-efxhpbar | 20 | 5 | 15 | no-funcmap:15 |
 | banim-ekrmain | 25 | 10 | 15 | no-funcmap:15 |
 | banim-efxmagic-fenrir | 17 | 2 | 15 | no-funcmap:15 |
@@ -215,6 +213,7 @@ per-function work (extract_func_only + bind statics).
 | ending_credits | 20 | 6 | 14 | no-funcmap:14 |
 | spline | 18 | 5 | 13 | no-funcmap:13 |
 | eventscr_utils | 16 | 3 | 13 | no-funcmap:13 |
+| bmmap | 24 | 11 | 13 | masked:1, no-funcmap:12 |
 | convoymenu | 14 | 1 | 13 | no-funcmap:13 |
 | cp_staff | 14 | 1 | 13 | no-funcmap:13 |
 | sio_mu | 21 | 8 | 13 | no-funcmap:13 |
@@ -225,6 +224,7 @@ per-function work (extract_func_only + bind statics).
 | bmsave-multiarena | 14 | 1 | 13 | no-funcmap:13 |
 | uiconfig | 20 | 7 | 13 | no-funcmap:13 |
 | worldmap_status_ui | 14 | 1 | 13 | no-funcmap:13 |
+| bmusailment | 43 | 31 | 12 | no-funcmap:12 |
 | bmtrap | 14 | 2 | 12 | no-funcmap:12 |
 | banim-efxbattle | 14 | 2 | 12 | no-funcmap:12 |
 | muctrl | 19 | 7 | 12 | no-funcmap:12 |
@@ -251,7 +251,6 @@ per-function work (extract_func_only + bind statics).
 | mapanim_lvup | 14 | 4 | 10 | no-funcmap:10 |
 | worldmap_screen | 15 | 5 | 10 | no-funcmap:10 |
 | worldmap_radar | 16 | 6 | 10 | no-funcmap:10 |
-| bb | 13 | 4 | 9 | masked:2, no-funcmap:7 |
 | sio_menu | 12 | 3 | 9 | no-funcmap:9 |
 | uiutils | 25 | 16 | 9 | no-funcmap:9 |
 | banim-ekrmainmini | 22 | 13 | 9 | no-funcmap:9 |
@@ -271,6 +270,7 @@ per-function work (extract_func_only + bind statics).
 | worldmap_tm_confront | 11 | 3 | 8 | no-funcmap:8 |
 | worldmap_effect | 10 | 2 | 8 | no-funcmap:8 |
 | worldmap_basemenu | 15 | 7 | 8 | no-funcmap:8 |
+| bb | 13 | 6 | 7 | no-funcmap:7 |
 | sio_postbattle | 12 | 5 | 7 | no-funcmap:7 |
 | uiselecttarget | 18 | 11 | 7 | no-funcmap:7 |
 | banim-efxflashunit | 15 | 8 | 7 | no-funcmap:7 |
@@ -322,7 +322,6 @@ per-function work (extract_func_only + bind statics).
 | gameoverbgfx | 11 | 8 | 3 | no-funcmap:3 |
 | lightrunefx | 12 | 9 | 3 | no-funcmap:3 |
 | eventwarpfx | 6 | 3 | 3 | no-funcmap:3 |
-| bmreliance | 19 | 16 | 3 | masked:2, no-funcmap:1 |
 | sio_multiboot | 9 | 6 | 3 | no-funcmap:3 |
 | banim-efxmagic-ballista | 4 | 1 | 3 | no-funcmap:3 |
 | banim-efxmagic-bindingblade | 5 | 2 | 3 | no-funcmap:3 |
@@ -337,6 +336,7 @@ per-function work (extract_func_only + bind statics).
 | koido | 5 | 3 | 2 | no-funcmap:2 |
 | menuitempanel | 4 | 2 | 2 | no-funcmap:2 |
 | whitecircularfadefx | 3 | 1 | 2 | no-funcmap:2 |
+| bmreliance | 19 | 17 | 2 | masked:1, no-funcmap:1 |
 | chapterdata | 6 | 4 | 2 | no-funcmap:2 |
 | sio_rulesettings | 5 | 3 | 2 | no-funcmap:2 |
 | sio_menudef | 6 | 4 | 2 | no-funcmap:2 |
