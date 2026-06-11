@@ -138,6 +138,27 @@ def drop_tsv_row(path, obj, snap):
     open(path, "w").write("".join(kept))
 
 
+def drop_obj_rows(path, obj_o, snap):
+    """Remove EVERY row in `path` whose object field references the `.o` `obj_o`
+    (any section: `<obj_o>(.text)`, `<obj_o>(ewram_data)`, ...). A masked carve has
+    BOTH a carved_rom `(.text)` row AND, if it owns EWRAM/.bss storage, carved_ram
+    rows (`(ewram_data)`/`(ewram_bss)`) keyed on the same `.o` -> dropping only the
+    rom row leaves the ram rows referencing the now-deleted `.o` (`ld: cannot find
+    src/masked_*.o`). Drop all of them by `.o`-prefix. Snapshots the file."""
+    if not os.path.exists(path):
+        return
+    if path not in snap:
+        snap[path] = open(path).read()
+    pref = obj_o + "("
+    kept = []
+    for ln in open(path):
+        c = ln.split("\t")
+        if len(c) >= 3 and c[2].startswith(pref):
+            continue
+        kept.append(ln)
+    open(path, "w").write("".join(kept))
+
+
 def main():
     args = sys.argv[1:]
     do_list = "--list" in args
@@ -213,7 +234,11 @@ def main():
                 if af and os.path.exists(af):
                     os.remove(af)
 
-            # 2) masked-layer objects: drop the masked_layer carved_rom row + src/<obj>.c
+            # 2) masked-layer objects: drop the masked_layer carved_rom row + the
+            #    object's carved_ram rows (a masked carve that owns EWRAM/.bss storage
+            #    lists `(ewram_data)`/`(ewram_bss)` rows in carved_ram.d/masked_layer.tsv
+            #    keyed on the SAME .o; leaving them strands the deleted .o in the link)
+            #    + src/<obj>.c.
             for (_rs, _re, obj, path, _g) in masked:
                 drop_tsv_row(path, obj, snap)
                 mc = masked_src(obj)
@@ -221,6 +246,7 @@ def main():
                     snap.setdefault(mc, open(mc).read())
                     os.remove(mc)
                     mo = mc[:-2] + ".o"
+                    drop_obj_rows("layout/carved_ram.d/masked_layer.tsv", mo, snap)
                     if os.path.exists(mo):
                         os.remove(mo)
 

@@ -22,3 +22,6 @@ gUnkData_30
 gUnkData_31
 gUnkData_32
 UnitHasMagicRank
+StartMovingHelpBox
+StartMovingHelpBoxExt
+gProcScr_HelpBoxMoveCtrl

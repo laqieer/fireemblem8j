@@ -139,13 +139,11 @@ def _try_decl(head, sym, word):
     # file-scope declaration scanner (D49).
     head = re.sub(r"/\*.*?\*/", " ", head, flags=re.S)
     head = re.sub(r"//[^\n]*", " ", head)
-    # DROP leading preprocessor-directive lines (`#include`, `#define`, ...). The
-    # _us_extern_decl scanner only resets the segment start on a depth-0 `;`/`}`, so
-    # a file-scope declaration NOT preceded by any such terminator (e.g. the first
-    # data def after the include block: `struct FaceVramEntry EWRAM_DATA sFaceConfig
-    # [4] = {0};`) arrives here with the whole `#include` header glued in front of
-    # it. A blanket `head.startswith("#") -> None` then wrongly rejected the real
-    # declaration. Strip the `#` lines so the actual declarator remains.
+    # DROP leading preprocessor-directive lines (`#include`/`#define`/...). They have
+    # no terminating `;`, so they leak into the SAME depth-0 segment as the following
+    # declaration (the first data def after the include block, or an `extern` right
+    # after a `#include`). A blanket `head.startswith("#") -> None` then wrongly
+    # rejected the real declaration. Strip the `#` lines so the declarator remains.
     head = "\n".join(ln for ln in head.splitlines()
                      if not ln.lstrip().startswith("#"))
     head = head.strip()
@@ -169,8 +167,9 @@ def _try_decl(head, sym, word):
     # `EWRAM_OVERLAY(0)`) BEFORE the function-decl `(` test below -- otherwise a
     # macro's own parentheses make a plain object def (bmio's `EWRAM_OVERLAY(0)
     # union GradientEffectData sGradientEffect = {};`) look like a function decl and
-    # get wrongly rejected.
-    for kw in ("static", "CONST_DATA", "EWRAM_DATA", "EWRAM_BSS", "EWRAM_OVERLAY",
+    # get wrongly rejected. `extern` included (wave3-A): a US file-scope decl is often
+    # already `extern u8 CONST_DATA X[];` -> stripping avoids invalid `extern extern`.
+    for kw in ("extern", "static", "CONST_DATA", "EWRAM_DATA", "EWRAM_BSS", "EWRAM_OVERLAY",
                "IWRAM_DATA", "ALIGNED"):
         spec = re.sub(r"\b" + kw + r"\b(?:\(\d+\))?", "", spec)
     # a '(' still in spec => function decl / call / macro => not an object

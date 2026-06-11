@@ -44,3 +44,6 @@ TryRelocateHbUp	0808B5E0	thumb	statscreen_0808ADCC
 gStatScreen	02003BFC	data	statscreen_0808ADCC
 TryRelocateHbDown	0808B610	thumb	statscreen_0808ADCC
 UnitHasMagicRank	0801876C	thumb	statscreen_0808ADCC
+Proc_StartBlocking	08002C30	thumb	statscreen_0808B3DC
+gProcScr_HelpBoxMoveCtrl	08A72B88	data	statscreen_0808B3DC
+sHbOrigin	0203E784	data	statscreen_0808B3DC
