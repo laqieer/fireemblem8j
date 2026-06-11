@@ -2420,3 +2420,64 @@ masked-split verified run (region-different codegen / non-contiguous), plus hard
 genuine region-diff). These need hand-decomp (IDA/Ghidra), deferred. Pushed `feat/wave2-B`. Siblings own
 scene/bmbattle/opanim (wave2-A) + mu/bmlib/bmmenu (wave2-C) — not touched. (D-number assigned from the free
 sequence; renumber at integration if a concurrent sibling claimed D52.)
+
+## D54 — wave3-C: locate_funcs (not find_runs) + per-frag direct carve clears region-same spell-effect TUs; +57; the masked-"unmatched" label is NOT region-diff (2026-06-11)
+
+**Context.** Branch `feat/wave3-C` (sibling to wave3-A opanim/scene/statscreen + wave3-B bmbattle/bmunit/bmitemuse;
+distinct D-number). Scope: the D44-class region-same ANIMATION spell-effect TUs `banim-efxmagic-healstaves` (40
+ungraduated), `banim-efxmagic-aura` (14), `banim-efxmagic-refresh` (8), `banim-efxmagic-gespenst` (6), plus
+`prep_itemscreen` (40, already heavily ported). The D44 note flagged that "some efxmagic spell effects may be
+region-different" — verify-or-revert was the directive.
+
+**KEY METHOD FINDING — `find_runs` returns 0 verified runs for these TUs, but `locate_funcs` + per-frag direct
+carve recovers nearly all of them.** `harvest_verified_runs.py`/`bind_tu_data.py`/`subrun_decompose.py` all rely on
+`find_runs`, which here proves only 6-9 tiny graduate-asm runs per TU (and 0 for aura/refresh/gespenst): the
+masked singletons are SPLIT by region-different DATA refs, so no contiguous verified BLOCK forms. But
+`scripts/locate_funcs.py` proposes per-FUNCTION masked runs (e.g. aura 6 matched in 4 runs, healstaves 19 matched
+in 9 runs that find_runs collapsed to 9 fns) — AND, critically, the frags `locate_funcs` labels
+"region-different/unmatched" ALSO mostly byte-match when carved directly via the func_only ABS-bind path. The
+masked-unmatched label is NOT authoritative for region-diff; only `make compare` is. A throwaway per-frag driver
+(the D48/D50 manual-carve pattern: snapshot the gbadisasm frag + asm/<sym>.s, `port_run.port(runs=[(s,e,fns)],
+src_tu, frag=...)` trying dedup_globals then func_only, restore-on-revert) carved every byte-matching frag.
+
+**RESULT — +57 matching-C (3670 -> 3727, 43.0347% -> 43.7031%); self-contained 100% (0 incbins).**
+  * **healstaves: +32** (6 harvest graduate-asm + 1 subrun_decompose + 11 locate_funcs matched-run carves + 14
+    masked-"unmatched" carves). 5 reverted both ways = genuine region-diff: StartSpellAnimHeal,
+    efxLive/Relive/Recover/Reblow_Loop_Main (the spell-ENTRY + main-loop functions).
+  * **aura: +12 of 14** (6 matched + 6 masked-unmatched). 2 region-diff: StartSpellAnimAura, StartSpellAnimLuce_Null.
+  * **refresh: +8 of 8 — COMPLETE.**
+  * **gespenst: +5 of 6** (StartSpellAnimGespenst_Null, a 4-byte null-entry, region-diff / no clean frag boundary).
+  * **prep_itemscreen: +0.** Its 2 graduate-asm verified runs are GENUINE region-diff: 0809A720 (14 fns) needs
+    `gPrepItemTexts=0x02013490` but 3 byte-perfect SIBLING prep carves bind it at 0x02013498 -> D43-D RAM-layout
+    conflict; 0809AE20 (10 fns) has `.rodata`@0x1f560c overlapping a DATA-agent frontier blob -> D43-C blob-split.
+    Both deferred, reverted at zero risk. Its other 9 verified runs are already src_cov (prior carves).
+
+**PATTERN (reusable):** for a region-same spell-effect/animation TU, the region-diff is confined to the
+`StartSpellAnim*` spell-ENTRY functions and the top-level `*_Loop_Main` dispatchers (region-different anim-script
+IDs / proc-script tables); the sub-spell builders (`StartSubSpell_*`), `*BG*`/`*OBJ*`/`*ALPHA*`/`*BGCOL*` setup
+functions, and their `*_Loop`/`*_OnEnd` workers byte-match via func_only ABS-bind (region-different DATA refs,
+region-SAME code). Map US fns to JP frags via a single anchor offset (here a uniform +0x1100), then carve each
+frag with verify-or-revert. Net region-diff rate: 8 / 65 attempted across the 4 banim TUs.
+
+**TOOLKIT FIX (general, reusable) — `port_run.py` new-symbol write filter `have` now unions the .d/ fragment
+binds.** `have` (the filter at the new_syms write, line ~745) consulted ONLY the monolith `baseline_syms.tsv`, not
+the per-task `baseline_syms.d/*.tsv` fragments. A symbol another run already bound in a FRAGMENT (e.g.
+`gPrepItemTexts`, bound at 0x02013498 by sibling prep runs) got RE-ADDED here with THIS run's freshly-decoded value
+(0x02013490, a region-different addend mis-decode), and the duplicate binding CORRUPTED the OTHER objects
+referencing the symbol (their literals re-resolved to the wrong address -> 6-byte cross-object diff). Fix: union
+the fragment binds into `have` so an already-bound symbol is reused (this run's own .text resolves to the existing
+value), not re-decoded. This is why earlier waves mostly didn't hit it (the fresh decode usually MATCHED); it bites
+only when a run's decoded value differs from an existing bind. Verify-or-revert unchanged -> a wrong reuse still
+reverts -> zero-risk.
+
+**Cross-TU dup audit (the second critical rule):** all 57 defined funcs audited (objdump) against every effective
+baseline thumb bind (monolith + all .d/ fragments) minus `baseline_syms_drop.d/` -> 0 undropped-and-bound; clean
+rebuild (`make clean && make compare` OK) confirms no multiple-definition.
+
+**Remaining wave3-C frontier (all zero-risk reverted, genuine region-diff -> hand-decomp/IDA-Ghidra, deferred):**
+healstaves 5 (StartSpellAnimHeal + 4 *_Loop_Main); aura 2 (StartSpellAnimAura, StartSpellAnimLuce_Null); gespenst
+1 (StartSpellAnimGespenst_Null); prep_itemscreen 2 graduate-asm runs (D43-C/D, structural). Gated every batch:
+`make check` (after `rm -f src/*.s`) + `make compare` + `make clean && make compare` + `check_selfcontained.py`
+== 0 incbins; named from US; staged explicitly (NO `git add -A`); verify-or-revert; baserom/checksum/CI untouched.
+Pushed `feat/wave3-C`. Siblings own opanim/scene/statscreen (wave3-A) + bmbattle/bmunit/bmitemuse (wave3-B) — not
+touched. (D-number assigned from the free sequence; renumber at integration if a concurrent sibling claimed D54.)
