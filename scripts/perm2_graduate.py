@@ -317,8 +317,27 @@ def main():
     for attempt in range(6):
         sh("rm -f src/*.s; rm -f fireemblem8.elf fireemblem8.gba")
         lay = sh("make layout 2>&1")
-        if "error" in lay.stdout.lower() or "Error" in lay.stderr:
-            print("LAYOUT ERROR:", (lay.stdout + lay.stderr)[-400:])
+        laylog = lay.stdout + lay.stderr
+        if "overlap/order error" in laylog or "Error 1" in laylog:
+            # parse the colliding address and revert the perm2 carve there
+            m = re.search(r"overlap/order error at 0x([0-9a-f]+)", laylog)
+            if m:
+                addr = int(m.group(1), 16)
+                victim = None
+                for n in kept:
+                    fp = f"layout/carved_rom.d/perm2_{n}.tsv"
+                    if not os.path.exists(fp):
+                        continue
+                    pp = open(fp).readline().split("\t")
+                    if int(pp[0], 16) <= addr < int(pp[1], 16) or int(pp[0], 16) == addr:
+                        victim = n
+                        break
+                if victim:
+                    print(f"attempt {attempt}: layout overlap at {addr:06X} -> revert {victim}")
+                    revert(victim)
+                    kept.remove(victim)
+                    continue
+            print("LAYOUT ERROR (unhandled):", laylog[-400:])
             return
         sh("rm -f src/*.s")
         c = sh("make compare 2>&1")
