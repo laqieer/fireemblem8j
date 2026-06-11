@@ -2165,3 +2165,53 @@ slow TU. Pushed `feat/next-3`. Siblings own scene/statscreen (next-1) and mu/wor
 
 **Remaining next-3 frontier.** savedraw SaveDraw_DrawPlayTime + prep_itemsupply 080A0250 (both D42 macro/header-less-
 static residuals); the skip-shared-asm runs in each TU (D40/D43-deferred run-decomposition). All zero-risk reverted.
+
+## D49 — wave-C: stranded-section graduation SCALES — the "skip-shared-asm" blocker is the MASKED-LAYER SPLIT; +24 on bmmenu/bmlib via one reusable helper (2026-06-11)
+
+**Context.** Branch `feat/wave-C` (sibling to next-1/2/3 + scale waves). Scope: GENERALIZE + scriptify D46's one-off
+stranded-section graduation and SCALE it across the `bmmenu` (95 ungraduated) + `bmlib` (64) skip-shared-asm remainders.
+The task framed the blocker as runs overlapping `asm/stranded_*.o(.text.s_XXXX)` sections.
+
+**ROOT-CAUSE FINDING (what the skip-shared-asm blocker actually IS for bmmenu/bmlib).** Neither TU has a
+`stranded_bmmenu.o`/`stranded_bmlib.o`. Their `harvest_verified_runs --list` shows NOTHING (all surfaced runs hit
+`src_cov` and are silently skipped). Diagnosing every verified run's coverage revealed the real blocker: the
+**masked-layer split**. `carve_masked.py` carved individual funcmap-`masked`-tier functions (`src/masked_<addr>.o`)
+out of the MIDDLE of larger verified runs, stranding the surrounding `gbadisasm_*` functions. The harvester's
+`cover()` classifies any `src/...` row as `src_cov` ("already matching C") -> it skips the WHOLE run at line 129,
+even though only the one masked function is carved and the gbadisasm functions around it are NOT. So the
+"skip-shared-asm remainder" is dominated by masked-split runs, NOT stranded asm sections (the latter is the
+statscreen/D46 shape; bmmenu/bmlib have the masked-split shape). Same byte-safety argument either way: the
+overlapping unit is FULLY CONTAINED in the verified run and the run's own C re-provides those exact functions.
+
+**RESULT — +24 matching-C (3328 -> 3352, 39.0244% -> 39.3058%); self-containment held 100%.**
+  * **bmmenu: 5 runs / 18 fns** (+12 net): 08023D5C(8), 08022F50(5), 080228A4(2), 08022910(2), 08023CC0(1).
+  * **bmlib: 5 runs / 26 fns** (+12 net): 080139A4(9), 08014AA0(6), 08013EE8(5), 08013FB0(5), 08014108(1).
+  (net < fns carved because the re-provided masked functions + gbadisasm `sub_*`/`nullsub_*` placeholders were
+  already counted; the delta is the genuinely-new named matching-C.)
+
+**THE REUSABLE HELPER — `scripts/graduate_shared_run.py` (the lever's payoff).** For each verified run of a TU whose
+coverage is ONLY per-function gbadisasm + FULLY-CONTAINED non-per-function units (`src/masked_*.o` masked carves
+AND/OR `asm/stranded_*.o(.text.s_XXXX)` sections, D46), it: snapshots everything; drops the gbadisasm frags + asm,
+the masked carved_rom rows + their `src/masked_*.c`, and the stranded `.section` blocks + their stranded_func rows;
+then `port_run.port(func_only=True, frag="harvest_sharedasm_<tu>")`. A run whose every shared row STICKS OUT past
+its end is reported + skipped (carving it would leave a baserom gap). `make compare` + full snapshot/revert make it
+ZERO-risk. `--list` classifies; it handles BOTH the D46 stranded-section case and the masked-split case under one
+contained-unit byte-safety rule -> stranded-section graduation GENERALIZES and SCALES.
+
+**TOOLKIT FIX (general, reusable) — `extract_func_only.py` now KEEPS TU-private aggregate type defs.** bmlib_080139A4
+(9 fns) first reverted `subset compile failed`: the bodies dereference `struct PalFadeProc`, a FILE-LOCAL struct
+defined in `bmlib.c` (not in any header), which the extractor dropped -> "dereferencing pointer to incomplete type"
+-Werror. FIX: record TU-private `struct`/`union`/`enum`/`typedef` definitions during the parse and emit the ones the
+extracted bodies reference (by tag or typedef alias), after the includes. Mirrors D46's `#define` keep-fix; recovered
+bmlib_080139A4 (+9). Benefits any future func_only run blocked by a dropped file-local type. Verify-or-revert guards
+a wrong emit.
+
+**Scope discipline + remaining frontier.** Confirmed (zero-risk reverted) `bmlib_08012F94` (UnpackRaw/Decompress*, a
+CLEAN graduate-asm run, NOT skip-shared-asm) still FAILS make compare -> genuinely region-different (D45 Class C/D
+holds). `bmmenu_0802326C` is the one masked-split STICKOUT (masked_0802326c covers RefreshMapSelect_Select +
+ItemCommandUsability past the 1-fn verified run end) -> skipped, yields no new fns (the masked carve already provides
+both). The bulk of bmmenu's 95 / bmlib's 64 ungraduated fns are NOT in any verified run at all (region-different
+codegen / non-contiguous) -> needs hand-decomp (IDA/Ghidra), deferred. Gated every batch: `make check` (after
+`rm -f src/*.s`) + `make compare` + `make clean && make compare` + `check_selfcontained.py` == 0 incbins; named from
+US; staged explicitly (NO `git add -A`); verify-or-revert; baserom/checksum/CI untouched. Pushed `feat/wave-C`.
+Siblings own banim-ekrdragon-demonking/banim-efxmisc + uidebug/banim-efxop — not touched.
