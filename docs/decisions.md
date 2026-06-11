@@ -2520,3 +2520,53 @@ hardcoding addresses (rejected: not byte-stable across relinks). Realistically t
 pure-data/scalar tables (gMOVCOST/terrain, menu-item tables, weight/RN/AI-scalar tables) and any pointer arrays
 whose pointees are already named symbols. Remaining opaque-data frontier is still ~790 `dat_*_ref.s` incbins
 (graphics/sound/banim excluded per scope); this batch is the proof-of-method + the two operational gotchas above.
+
+## D56 — wave3-B: bmbattle/bmunit/bmitemuse — the SUBRUN path is the dominant lever; shared-asm runs are genuine region-diff (2026-06-11)
+
+**Context.** Branch `feat/wave3-B` (sibling to wave3-A opanim/scene/statscreen and wave3-C banim-*/prep_itemscreen;
+distinct D-number). Scope: the D41 partial-TU remainders `bmbattle` (52 ungraduated), `bmunit` (44), `bmitemuse`
+(39 → 18 done at session start). Applied the COMPLETE D41-D53 toolkit per TU: `harvest_verified_runs.py`,
+`bind_tu_data.py` (func_only ABS-bind), `graduate_shared_run.py` (D51 stranded/masked split, func_only default +
+`--no-func-only` dedup retry), `subrun_decompose.py` (D52 asm-only-gap sub-runs).
+
+**RESULT — +29 matching-C (calcprogress 43.00% → 43.37%, 3667 → 3699). Self-containment held 100% (0 incbins).**
+All gated: `make check` (after `rm -f src/*.s`) + `make compare` + `make clean && make compare` +
+`check_selfcontained.py` == 0; named from US; verify-or-revert; staged explicitly (NO `git add -A`);
+baserom/checksum/CI untouched. Per TU:
+  * **bmitemuse: +9 (3 runs).** `bind_tu_data` func_only landed bmitemuse_08029770 (WarpSelect_OnConfirm/
+    OnCancel/OnEnd, WarpOnSelectTarget) + 08029E64 (DoUseTorchStaff, CanUnitUseItemPrepScreen,
+    DoesUnitHoldItemCC), +10 ABS data binds (gProcScr_BackToUnitMenu/SquareSelectWarp, gSelectInfo_WarpUnit, …);
+    both first REVERTED under `harvest_verified_runs` (file-scope data re-emit mismatch), the D42/D53 class.
+    `subrun_decompose` landed 08029024 (CanUnitUseHealItem, CanUnitUseUnusedItem).
+  * **bmbattle: +18 (7 sub-runs), ALL via `subrun_decompose`.** The asm-only GAPS inside src_cov runs
+    (0802CA5C BattleInitItemEffect/MiscAction/ItemEffect cluster ×7; 0802A0C8 BattleGenerate*Internal ×3;
+    0802B164 BattleCheckSureShot/Pierce/GreatShield; 0802C8BC obstacle/anim ×2; 0802C248 Ballista; 0802C7FC
+    InitObstacleBattleUnit; 0802CFF4 UnitLevelUp). Each first failed dedup_globals then landed func_only (the
+    D52 dual-path).
+  * **bmunit: +2 (2 sub-runs), `subrun_decompose`** (GetUnitKeyItemSlotForTerrain, GetUnitLastItem).
+    GetUnitStatusName reverted (region-diff sStatusNameTextIdLookup, JP msg-id table).
+
+**KEY FINDING — for these three TUs, `bind_tu_data`/`graduate_shared_run` yield ~0; `subrun_decompose` is the
+dominant lever, and the shared-asm verified runs are GENUINELY region-different.** `bind_tu_data --list` found 0
+directly-bindable runs for bmunit and bmbattle (their verified runs are all `skip-shared-asm`). `graduate_shared_run`
+found 5 eligible bmbattle runs (stranded-section + masked-split: 0802A0C8/BE6C/C4F0/A4F0/C248, 22 fns) but ALL 5
+REVERTED under func_only AND again under `--no-func-only` dedup_globals (build GREEN both times) — i.e. NOT a
+placement/binding problem (D53's recoverable class) but genuine region-different codegen: each run mixes one
+funcmap `exact`/stranded function with `no-funcmap` neighbors whose JP codegen diverges, so the whole-run C never
+byte-matches in the full build even though `find_runs` proved an isolated-compile match. By contrast
+`subrun_decompose` isolates the asm-only CONTIGUOUS gaps (which exclude the region-diff stranded/masked functions),
+so its 18+2 sub-runs all landed. So the partial-TU remainder splits cleanly: the contiguous asm-only gaps are
+placement-blocked (subrun recovers them); the shared-asm/stranded runs are region-different (revert, hand-decomp).
+
+**ENV FIX (shared, non-source).** The worktree's `tools/gbagfx/gbagfx` (symlink → main `tools/`) had been
+rebuilt to a 58456-byte binary lacking the `-mindist` LZ option the Makefile uses (graphics `.lz` rule failed
+after `make clean` purged the cached `.lz`). Restored the canonical US prebuilt (`../fireemblem8u/tools/gbagfx/
+gbagfx`, 39560 B, supports `-mindist`, produces byte-identical `.lz` to the main cache). gbagfx is a gitignored
+build artifact, so this is safe and helps all siblings; no source/baserom/checksum touched.
+
+**Remaining wave3-B frontier (zero-risk reverted / not in a recoverable verified run).** bmbattle ~34 (the 5
+region-diff shared-asm runs' fns: CheckBattleUnitStatCaps + BattleApplyUnitUpdates/ItemExpGains/MiscActionExpGains/
+GameStateUpdates clusters, InitBattleUnit(WithoutBonuses), BattleUnitTargetCheckCanCounter/SetEquippedWeapon, …),
+bmunit ~42 (all 12 verified runs skip-shared-asm, non-contiguous; GetUnitStatusName region-diff), bmitemuse ~30.
+These are region-different codegen / non-contiguous — hand-decomp (IDA/Ghidra), deferred. Pushed `feat/wave3-B`.
+Siblings own opanim/scene/statscreen (wave3-A) + banim-*/prep_itemscreen (wave3-C) — not touched.
