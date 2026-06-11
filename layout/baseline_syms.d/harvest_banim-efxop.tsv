@@ -14,3 +14,4 @@ StartCRSubSpell_efxopLiveBG	08071568	thumb	banim-efxop_08071514
 StartCRSubSpell_efxopLiveBGCOL	08071608	thumb	banim-efxop_08071514
 StartCRSubSpell_efxopLiveALPHA	0807167C	thumb	banim-efxop_08071514
 banim_data	08C00008	data	banim-efxop_08071C18
+GetMagicEffectBufferFor	08070F08	thumb	banim-efxop_08070F94

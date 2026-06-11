@@ -1,0 +1,14 @@
+086C6C	086D14	src/uidebug_08086C6C.o(.text)	uidebug_08086C6C(run): Uidebug_GetClockCyclingIndex, Uidebug_GetClockCyclingIndexHalf, Uidebug_GetClockCyclingIndexQuarter
+086E58	086E98	src/uidebug_08086E58.o(.text)	uidebug_08086E58(run): Debug_RefreshMapFog, Debug_AddGold, Debug_SubtractPartyGold
+087580	087604	src/uidebug_08087580.o(.text)	uidebug_08087580(run): Uidebug_IsGoldOver9999, Uidebug_IsGoldOver7999, Uidebug_IsGoldOver5999...
+08761C	087640	src/uidebug_0808761C.o(.text)	uidebug_0808761C(run): Uidebug_ConstFalse, Uidebug_IsActiveUnitHpZero, Uidebug_ConstFalse2
+087104	087134	src/uidebug_08087104.o(.text)	uidebug_08087104(run): IsChar0AlivePlayerUnit_22, IsChar0AlivePlayerUnit_23, IsChar0AlivePlayerUnit_24
+087154	087184	src/uidebug_08087154.o(.text)	uidebug_08087154(run): DoesCharExistAsPlayerUnit
+087194	0871B4	src/uidebug_08087194.o(.text)	uidebug_08087194(run): DoesChar0ExistAsPlayerUnit_02, DoesChar0ExistAsPlayerUnit_03
+087024	087104	src/uidebug_08087024.o(.text)	uidebug_08087024(run): IsChar0AlivePlayerUnit_08, IsChar0AlivePlayerUnit_09, IsChar0AlivePlayerUnit_10...
+0871B4	087220	src/uidebug_080871B4.o(.text)	uidebug_080871B4(run): AreAnyEnemyUnitDead, GetDeadEnemyAmount
+087238	0874EC	src/uidebug_08087238.o(.text)	uidebug_08087238(run): IsCharDeadAsNonPlayerUnit, CountDeployedSelectablePlayerUnits, AreAllNpcUnitsUnselectable...
+086D14	086D34	src/uidebug_08086D14.o(.text)	uidebug_08086D14(run): Uidebug_ScanUnitsCond2RetFalse
+086DD8	086E0C	src/uidebug_08086DD8.o(.text)	uidebug_08086DD8(run): Debug_RemoveAllLightRunes, Debug_SoftReset
+086E2C	086E38	src/uidebug_08086E2C.o(.text)	uidebug_08086E2C(run): Debug_SoftReset2
+086F04	086FB4	src/uidebug_08086F04.o(.text)	uidebug_08086F04(run): Debug_DecrementCharStatsByPid, IsCharDeployedPlayerUnit, IsChar0DeployedPlayerUnit...

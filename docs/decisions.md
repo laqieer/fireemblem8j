@@ -2199,3 +2199,63 @@ rebuild GREEN proves no multiple-definition.
 per-function-gbadisasm-only contiguous runs (already-graduated runs are src_cov-skipped; no skip-shared-asm surfaced
 in these two). Nothing deferred for a new blocker class. Pushed `feat/wave-A`. Siblings own uidebug/banim-efxop
 (wave-B) and bmmenu/bmlib (wave-C) — not touched. baserom/checksum/CI untouched.
+
+## D50 — wave-B: uidebug (+73) + banim-efxop (+50) harvest via MANUAL per-RUN sub-run carving of src_cov runs; func_only comment-leak fix (2026-06-11)
+
+**Context.** Branch `feat/wave-B` (sibling to bind-*/scale-*/next-*; distinct D-number). Scope: the D41-flagged
+partial TUs `uidebug` (76 ungraduated) and `banim-efxop` (52 remainder, after D44's +17). Applied the COMPLETE
+D41-D48 toolkit (`harvest_verified_runs.py` dedup_globals; `bind_tu_data.py` func_only ABS-bind).
+
+**RESULT — +123 functions graduated (uidebug 76->3, banim-efxop 52->2); calcprogress matching-C 38.83% -> 40.47%
+(3311 -> 3451, +140 incl. internal helpers); self-containment held 100%.** All gated: `make check` (after
+`rm -f src/*.s`) + `make compare` + `make clean && make compare` + `check_selfcontained.py` == 0 incbins; named
+from US; verify-or-revert; staged explicitly (NO `git add -A`); baserom/checksum/CI untouched.
+
+**KEY FINDING — the high-yield runs were ALL `src_cov`, so NEITHER harvester touched them automatically.** Both
+TUs' `find_runs` verified runs were either already-matching-C (the existing `src/<tu>.o`) or, more importantly,
+INTERMIXED: a verified superrun spans existing `src/exact_*.o`/`src/masked_*.o` carves AND still-asm gbadisasm
+fragments. `harvest_verified_runs.py`/`bind_tu_data.py` both `continue` on ANY `src/*.o` overlap (never
+double-carve), so they reported "0 carved" while 73/52 functions sat ungraduated in the asm GAPS of those runs.
+For banim-efxop the 52 ungraduated functions formed NO verified run at all — the masked search can't place them
+(region-different data refs) — but they still live in contiguous asm-fragment gaps between the D44 src carves.
+
+**THE LEVER (manual per-RUN sub-run carving).** For each TU, build the source-order -> JP-address map by ZIPPING
+the US function order (file-scope defs in order) against the addr-sorted carved rows (each `asm/<sub>.o` = 1 fn;
+each `src/*.o` consumes the next N already-defined US funcs). Group maximal runs of CONSECUTIVE asm-only rows into
+contiguous sub-runs, then carve each sub-run as a separately-named object via a direct `port_run.port(name,
+runs=[(s,e,fns)], src_tu=<tu>, ...)` call (a throwaway driver, per the D48 per-run-isolation pattern; removed after
+use). dedup_globals first (lands the region-same bodies), func_only fallback (binds region-different data refs as
+ABS at their JP literal-pool addresses). Each sub-run is independently verify-or-reverted, so a false byte-match
+or a region-different function can't poison the batch. uidebug's biggest blocks: IsChar0AlivePlayerUnit_08-21 (14
+fns, one contiguous asm block), the IsCharDead/Alive/HaveMaxSupport cluster (28 fns). banim-efxop: 10 sub-runs,
+8 of them recovered ONLY via the func_only path (the spell-effect bodies reference region-different proc-scripts
+/anim tables, so dedup re-emits region-different `.rodata` and fails `make compare`; func_only drops them and binds
+the externs). This validates that the `src_cov` skip in the two harvesters is a SAFETY heuristic, not a hard
+limit: when the overlap decomposes into disjoint contiguous asm-only sub-runs, each sub-run is independently
+carvable, and the manual zip+carve recovers the bulk of a partial TU's remainder.
+
+**TOOLKIT FIX (general, reusable) — `port_run._try_decl` comment-leak.** func_only's undeclared-resolver synthesizes
+`extern <type> <sym>[];` from a dropped static's US file-scope definition via `_us_extern_decl`/`_try_decl`. For
+`gClassReelSpellAnimFuncLut` (preceded by a `// clang-format off` banner) it emitted `extern // clang-format off
+SpellAnimFunc gClassReelSpellAnimFuncLut[];` -> `subset compile failed`. This is the SAME comment-leak class as the
+D46 fix #1, but in the FILE-SCOPE DECLARATION scanner (D46 fixed the helper-prototype scanner). FIX: strip `//` and
+`/* */` comments from `head` at the top of `_try_decl`. Recovered 8 of banim-efxop's 9 func_only sub-runs. Benefits
+ANY future func_only run whose dropped static carries a comment banner. Verify-or-revert unchanged -> zero-risk.
+
+**CROSS-TU/CROSS-SOURCE DUP AUDIT (the second critical rule).** func_only added many thumb-function/data ABS binds.
+Audited every function my 141 new carves define against ALL baseline thumb binds (monolith + every fragment) minus
+the `baseline_syms_drop.d/` drops: ALL CLEAN (every defined-and-bound func is auto-dropped by port_run/bind_tu_data).
+Clean build GREEN confirms no multiple-definition at link.
+
+**Takeaway.** uidebug behaves like the D44/D45/D48 high-yield "region-same menu/debug TU" class (most asm bodies
+byte-match under dedup_globals); banim-efxop is the region-different ANIMATION-data class (most bodies need the
+func_only ABS-bind path) — and BOTH are reachable once you carve the asm-only sub-runs of their `src_cov` verified
+runs by hand. The two harvesters could be extended to AUTO-decompose a `src_cov` run into its disjoint asm-only
+sub-runs (the zip+group logic here) and carve each — an obvious follow-up that would make this lever automatic.
+
+**Remaining wave-B frontier (4 functions, all zero-risk reverted, all genuine region-diff).** uidebug
+Uidebug_PickRandomActiveCond0/1/2 (reference region-different `gUidebug_*` data tables AND a file-LOCAL struct type
+`Struct089ED67C` the func_only extern-prepend can't synthesize — the D42/D46 header-less-private-TYPE residual, a
+class the comment-strip fix does NOT cover); banim-efxop GetMagicEffectBufferFor + SetCRSpellBgPosition (fail `make
+compare` under BOTH dedup and func_only -> genuine region-different codegen). Siblings own
+banim-ekrdragon-demonking/banim-efxmisc (wave-A) and bmmenu/bmlib (wave-C) — not touched.

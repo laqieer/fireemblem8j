@@ -80,6 +80,13 @@ def _try_decl(head, sym, word):
     """If top-level statement `head` declares `sym` as a file-scope OBJECT (not a
     function/call/macro), return its bare `extern <type> sym[];` declaration, else
     None. `head` is the text up to the statement's `=` init / `{` init-list / `;`."""
+    # Strip line/block comments first: a `// clang-format off` (or a `/* ... */`
+    # banner) immediately before the declaration would otherwise leak into the
+    # type spec -> `extern // clang-format off SpellAnimFunc foo[];` (invalid C).
+    # Same comment-leak class as the D46 helper-prototype-scan fix, here in the
+    # file-scope declaration scanner (D49).
+    head = re.sub(r"/\*.*?\*/", " ", head, flags=re.S)
+    head = re.sub(r"//[^\n]*", " ", head)
     head = head.strip()
     if not head or head.startswith("#"):
         return None

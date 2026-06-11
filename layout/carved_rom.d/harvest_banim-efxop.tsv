@@ -7,3 +7,4 @@
 071798	0717C0	src/banim-efxop_08071798.o(.text)	banim-efxop_08071798(run): efxopLiveOBJ_Loop
 071C18	071C64	src/banim-efxop_08071C18.o(.text)	banim-efxop_08071C18(run): efxopMyrrh_Loop_Main
 071F88	071FAC	src/banim-efxop_08071F88.o(.text)	banim-efxop_08071F88(run): efxopStoneOBJ_Loop
+070F94	071084	src/banim-efxop_08070F94.o(.text)	banim-efxop_08070F94(run): CRSpellCreateFrontAnim, CRSpell_WriteBgMap, CRSpell_RegisterBgGfx
