@@ -679,7 +679,7 @@
 5BA470	5C14B0	asm/dat_data_item_icon.o(.rodata.dat_data_item_icon)	dat_data_item_icon region-same shifted (28KB)
 5C14B0	5C1D30	asm/dat_generic_icon.o(.rodata.dat_generic_icon)	dat_generic_icon region-same shifted (2KB)
 5C28B8	5C2980	src/bm.o(.data)	bm .data
-5C2A50	5C2E50	asm/dat_gUnitLookup_ref.o(.rodata.dat_gUnitLookup_ref)	gUnitLookup region-diff (funcmap code-ref, 1KB)
+5C2A50	5C2E50	src/data/gUnitLookup.o(.data)	gUnitLookup typed C (faction unit-array pointer LUT; region-same structure, JP RAM bases)
 5C3308	5C3320	src/menuitempanel.o(.data)	menuitempanel .data
 5C3320	5C3348	src/prep_unitswap.o(.data)	prep_unitswap .data
 5C3378	5C33C0	asm/dat_gProcScr_PhaseIntroText_ref.o(.rodata.dat_gProcScr_PhaseIntroText_ref)	gProcScr_PhaseIntroText region-diff (funcmap code-ref, 0KB)
@@ -1163,9 +1163,7 @@
 926094	926134	asm/dat_worldmap_gmapunit_p1417.o(.rodata.dat_worldmap_gmapunit_p1417)	dat_worldmap_gmapunit_p1417 region-same per-sym shifted (0KB)
 926218	9263A8	asm/dat_worldmap_gmapunit_p1418.o(.rodata.dat_worldmap_gmapunit_p1418)	dat_worldmap_gmapunit_p1418 region-same per-sym shifted (0KB)
 9264B4	92661C	asm/dat_worldmap_gmapunit_p1419.o(.rodata.dat_worldmap_gmapunit_p1419)	dat_worldmap_gmapunit_p1419 region-same per-sym shifted (0KB)
-92661C	92671B	asm/dat_gMonsterItemTable_ref.o(.rodata.dat_gMonsterItemTable_ref)	gMonsterItemTable region-diff (funcmap code-ref, 0KB)
-92671B	926854	asm/dat_gMonsterItemWeightsTable_ref.o(.rodata.dat_gMonsterItemWeightsTable_ref)	gMonsterItemWeightsTable region-diff (funcmap code-ref, 0KB)
-926854	926B14	asm/dat_gMonsterItemsByClassIndex_ref.o(.rodata.dat_gMonsterItemsByClassIndex_ref)	gMonsterItemsByClassIndex region-diff (funcmap code-ref, 0KB)
+92661C	926B14	src/data/monstergen_data.o(.data)	monstergen typed C: gMonsterItemTable[51][5] + gMonsterItemWeightsTable[62][5] + gMonsterItemsByClassIndex[22] (region-different JP values; one TU so inter-array alignment matches the contiguous ROM block)
 92AA3C	92AB3C	asm/dat_data_bg_p0.o(.rodata.dat_data_bg_p0)	dat_data_bg_p0 region-same per-sym shifted (0KB)
 92EDD8	92EED8	asm/dat_data_bg_p1.o(.rodata.dat_data_bg_p1)	dat_data_bg_p1 region-same per-sym shifted (0KB)
 9323B0	932964	asm/dat_data_bg_p2.o(.rodata.dat_data_bg_p2)	dat_data_bg_p2 region-same per-sym shifted (1KB)
