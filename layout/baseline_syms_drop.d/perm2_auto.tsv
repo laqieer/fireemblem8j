@@ -24,3 +24,5 @@ PlayMuStepSe
 EndMu
 GetConvoyItemCount_
 LinkArenaBattleMap_RefreshMapAndSprites
+PrepScreenProc_HideEverythingAndUnlockGame
+ResetLinkArenaUiBlend
