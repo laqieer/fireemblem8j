@@ -22,3 +22,5 @@ APProc_Delete
 SetDefaultColorEffects_
 PlayMuStepSe
 EndMu
+GetConvoyItemCount_
+LinkArenaBattleMap_RefreshMapAndSprites
