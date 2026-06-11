@@ -1,0 +1,4 @@
+SetStandingMuFacing	0802700C	thumb	mu_0807AAB8
+AP_SwitchAnimation	08009408	thumb	mu_0807AAB8
+EndMuMovement	0807ACB8	thumb	mu_0807B4E0
+SetMuScreenOffset	0807BC08	thumb	mu_0807BE00

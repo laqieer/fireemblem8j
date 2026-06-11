@@ -1,0 +1,4 @@
+07AAB8	07AB5C	src/mu_0807AAB8.o(.text)	mu_0807AAB8(run): SetMuFacing, SetMuDefaultFacing, SetAutoMuDefaultFacing...
+07B4E0	07B50C	src/mu_0807B4E0.o(.text)	mu_0807B4E0(run): HaltMu, LockMus, ReleaseMus
+07AC34	07AC60	src/mu_0807AC34.o(.text)	mu_0807AC34(run): MuStepSe_PlaySeA, MuStepSe_PlaySeB
+07BE00	07BE64	src/mu_0807BE00.o(.text)	mu_0807BE00(run): MuCritFlash_StartFadeBack_maybe, MuCritFlash_SpriteShakeLoop
