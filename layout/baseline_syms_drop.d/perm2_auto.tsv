@@ -26,3 +26,5 @@ GetConvoyItemCount_
 LinkArenaBattleMap_RefreshMapAndSprites
 PrepScreenProc_HideEverythingAndUnlockGame
 ResetLinkArenaUiBlend
+EndPrepItemScreenFace
+PrepScreenProc_Cleanup
