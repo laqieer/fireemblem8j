@@ -1,0 +1,6 @@
+09FA24	09FB74	src/prep_itemsupply_0809FA24.o(.text)	prep_itemsupply_0809FA24(run): PutGiveTakeBoxSprites, PutGiveSprites, PutTakeSprites...
+09F4E0	09F59C	src/prep_itemsupply_0809F4E0.o(.text)	prep_itemsupply_0809F4E0(run): PrepItemSupply_PutPromptBoxSprites, PrepItemSupply_StartPromptText, StoreConvoyWeaponIconGraphics
+09FBB4	09FCA0	src/prep_itemsupply_0809FBB4.o(.text)	prep_itemsupply_0809FBB4(run): PrepItemSupply_ResetBackgrounds
+09FF10	0A019C	src/prep_itemsupply_0809FF10.o(.text)	prep_itemsupply_0809FF10(run): PrepItemSupply_EnterGiveTakeMenu, PrepItemSupply_Loop_GiveTakeKeyHandler
+0A0568	0A0AE0	src/prep_itemsupply_080A0568.o(.text)	prep_itemsupply_080A0568(run): PrepItemSupply_TakeItemFromSupply, PrepItemSupply_Loop_ItemListKeyHandler, PrepItemSupply_HandleUnitInvCursorInput
+0A0AFC	0A0C14	src/prep_itemsupply_080A0AFC.o(.text)	prep_itemsupply_080A0AFC(run): PrepItemSupply_GiveItemToSupply

@@ -1,0 +1,2 @@
+0AF54C	0AF64C	src/savedraw_080AF54C.o(.text)	savedraw_080AF54C(run): SaveDraw_Init
+0B0698	0B06B4	src/savedraw_080B0698.o(.text)	savedraw_080B0698(run): SaveBgUp_Loop

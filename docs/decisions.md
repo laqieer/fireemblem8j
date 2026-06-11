@@ -2020,3 +2020,53 @@ verify-or-revert, per-run fragments, NO `git add -A`. Pushed `feat/scale-1`.
 **Remaining scale-1 frontier.** bmmenu: the 68 ungraduated fns NOT in any verified run (region-different codegen or
 non-contiguous) — needs hand-decomp / IDA-Ghidra, deferred. bmlib: bmlib_08012F94 (Class C/D region-diff) +
 the skip-shared-asm runs (need a run-decomposition/blob-split step, D40/D43-deferred).
+
+## D46 — next-3: debug/save/prep TUs harvest +46 via the COMPLETE toolkit; the find_runs-strand recovery is per-RUN isolation (2026-06-11)
+
+**Context.** Branch `feat/next-3` (sibling to scale-1/scale-2/bind-*; distinct D-number). Scope: the D41-flagged
+partial TUs `bmdebug` (51 ungraduated), `savedraw` (26), `prep_itemsupply` (32 — flagged in the task note as
+needing per-RUN isolation, "one false-positive expected"). Applied the COMPLETE D41-D45 toolkit
+(`harvest_verified_runs.py` dedup_globals + reloc-free NOLOAD-on-overlap, then `bind_tu_data.py` func_only ABS-bind).
+
+**RESULT — +46 matching-C (3192 -> 3238, 37.43% -> 37.97%), self-containment held 100%.** Per TU (all gated:
+`make check` after `rm -f src/*.s` + `make compare` + `make clean && make compare` + self-cont 100%; named from US;
+verify-or-revert; staged explicitly, NO `git add -A`):
+  * **bmdebug: 12 runs / 29 fns, 0 reverts** — a near-pristine debug-menu TU exactly like the D44 animation class.
+    All proposed graduate-asm runs landed (DebugMenu_*/DebugContinueMenu_*/DebugMapMenu_*/StartDebugMenu/DebugPrint*
+    clusters). Confirms the D44/D45 "region-same ENGINE/menu TU = high-yield, low-risk" pattern extends to debug code.
+  * **savedraw: 3 fns** — harvest landed SaveDraw_Init + SaveBgUp_Loop; `bind_tu_data.py` func_only recovered
+    SaveMenuInitSubBoxText (+2 data binds). 1 deferred: SaveDraw_DrawPlayTime — `subset compile failed` even with
+    func_only (drops the TU-private const sprite-array statics `Sprite_Savedraw_7`/`SpriteArray_Savedraw_1` that
+    aren't header-extern'd → the D42 macro/header-less-static residual, not region-diff). Left reverted at zero risk.
+  * **prep_itemsupply: 14 fns** — harvest landed 4 runs / 10 fns (PutGive/Take sprite cluster, prompt-box cluster,
+    ResetBackgrounds, EnterGiveTakeMenu cluster); `bind_tu_data.py` func_only then recovered 2 reverts (080A0568
+    TakeItemFromSupply cluster +17 binds; 080A0AFC GiveItemToSupply +13 binds). 1 deferred: 080A0250 (the
+    SwitchPage/Scroll cluster) — `subset compile failed` under func_only too (dropped file-local macro the
+    extern-prepend can't synthesize, the D42 TALK_TEXT_BY_LINE-class residual).
+
+**OPERATIONAL FINDING — `find_runs`'s 600s strand IS the per-RUN-isolation mechanism for prep_itemsupply.** The
+first `harvest_verified_runs.py prep_itemsupply` invocation was wall-clock-killed mid-carve (find_runs on prep is
+slow), stranding 3 partial src carves + dangling fragments → build RED. Recovery (per D41 note): `git checkout`
+the removed prep `asm/sub_809F*`/`sub_80A0*.s` + their `gbadisasm_*.tsv`, `rm` the partial `src/prep_itemsupply_*`
+and the `harvest_prep_itemsupply` fragments, `make layout`, re-verify GREEN. Then carved each find_runs-cached run
+INDIVIDUALLY (a tiny driver calling `port_run.port(one run)` + `make compare` per run, so find_runs is NOT
+re-invoked) — which IS the "per-RUN isolation, one false-positive expected" the note asked for: each run is
+independently verify-or-reverted, so a false byte-match can't poison the batch. The driver was a throwaway (removed
+after use); the canonical tools are unchanged.
+
+**CROSS-TU/CROSS-SOURCE DUP AUDIT (the second critical rule).** func_only added many thumb-function ABS binds.
+Audited every function MY carves define (46, via objdump) against ALL baseline_syms thumb binds (mine + committed
+`layout/baseline_syms.tsv` + every fragment): the within-TU dups were auto-dropped by dedup_globals/port_run, and
+the one cross-SOURCE dup — `SaveMenuInitSubBoxText` (defined by my `src/savedraw_080B0250.c`, ALSO ABS-bound in the
+committed `baseline_syms.tsv` as `savemenu`) — was auto-added to `baseline_syms_drop.d/harvest_databind_savedraw.tsv`
+by `bind_tu_data.py`. Final audit: ALL CLEAN (every defined-and-bound func is dropped); clean build GREEN proves no
+multiple-definition at link.
+
+**Takeaway.** Debug/save/prep menu+UI TUs behave like the D44/D45 high-yield class (bmdebug 0 reverts), and the
+residual reverts are the SAME two deferred D42 classes (header-less TU-private const-data statics; dropped file-local
+macros the extern-prepend can't synthesize) — NOT new blocker classes. The D41-D45 toolkit was sufficient; no new
+tooling needed. The find_runs strand-recovery + per-run-isolation procedure is now demonstrated end-to-end for a
+slow TU. Pushed `feat/next-3`. Siblings own scene/statscreen (next-1) and mu/worldmap_rm (next-2) — not touched.
+
+**Remaining next-3 frontier.** savedraw SaveDraw_DrawPlayTime + prep_itemsupply 080A0250 (both D42 macro/header-less-
+static residuals); the skip-shared-asm runs in each TU (D40/D43-deferred run-decomposition). All zero-risk reverted.
