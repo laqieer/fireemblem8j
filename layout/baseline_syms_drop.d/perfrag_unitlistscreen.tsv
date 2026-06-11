@@ -1,0 +1,16 @@
+ClearIconGfx
+InitMenuScrollBarImg
+PutMenuScrollBarAt
+StartMenuScrollBar
+gImg_UiSpinningArrow_Horizontal
+UnitList_AddUnit
+RegisterSioPid
+RemoveSioPid
+SetLastStatScreenUid
+SortUnitList
+UnitList_ClearUnusedEquipIcons
+UnitList_HandleListInput
+UnitList_HandleSortInput
+UnitList_ReorderPlayerUnits
+StartUnitListScreenField
+UnitList_DrawColumnNames
