@@ -26,3 +26,5 @@ DoM4aSongNumStop
 IsSaveValid
 IsMultiArenaSaveValid
 GetItemSellPrice
+UnitRemoveItem
+ItemSelectMenu_Teardown
