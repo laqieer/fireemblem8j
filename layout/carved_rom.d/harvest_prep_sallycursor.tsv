@@ -1,0 +1,9 @@
+033CE0	033DDC	src/prep_sallycursor_08033CE0.o(.text)	prep_sallycursor_08033CE0(run): PrepScreenProc_RecenterOnActiveUnit, PrepScreen_StartUnitSwapAnim, InitMapChangeGraphicsIfFog...
+0333DC	033458	src/prep_sallycursor_080333DC.o(.text)	prep_sallycursor_080333DC(run): PrepScreenProc_DimMapImmediate, PrepScreenProc_StartBrightenMap, PrepScreenProc_StartDimMap
+033F98	03409C	src/prep_sallycursor_08033F98.o(.text)	prep_sallycursor_08033F98(run): PrepScreenProc_RefreshAfterStatScreen, StartPrepSaveScreen, PrepScreenProc_RestoreBgmAfterSave
+03411C	03421C	src/prep_sallycursor_0803411C.o(.text)	prep_sallycursor_0803411C(run): ShrinkPlayerUnits, EndPrepScreen, IsPrepMapActive
+033168	03325C	src/prep_sallycursor_08033168.o(.text)	prep_sallycursor_08033168(run): GetPlayerLeaderPid, Prep_ShowDeployableTiles
+03327C	0332D4	src/prep_sallycursor_0803327C.o(.text)	prep_sallycursor_0803327C(run): PrepMapMenu_OnFormation, PrepMapMenu_OnStartPress
+0332E4	03333C	src/prep_sallycursor_080332E4.o(.text)	prep_sallycursor_080332E4(run): SALLYCURSOR_DeploySupplyUnit, PrepMapMenu_OnOptions
+033E3C	033F80	src/prep_sallycursor_08033E3C.o(.text)	prep_sallycursor_08033E3C(run): PrepScreenProc_MapMovementLoop
+0340D8	034108	src/prep_sallycursor_080340D8.o(.text)	prep_sallycursor_080340D8(run): PrepScreenProc_LockGame

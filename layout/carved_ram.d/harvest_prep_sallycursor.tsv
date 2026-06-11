@@ -1,0 +1,2 @@
+085C609C	rom	src/prep_sallycursor_0803411C.o(.data)	prep_sallycursor_0803411C .data region-diff (incbin)
+080DCCB4	rom	src/prep_sallycursor_0803411C.o(.rodata)	prep_sallycursor_0803411C .rodata region-diff (incbin)
