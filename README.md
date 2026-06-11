@@ -48,7 +48,7 @@ real axes (target: **100%** each):
 | Axis | Today | Meaning |
 |---|---|---|
 | **Build self-containment** | **100%** ✅ | the ROM builds from committed source with `baserom.gba` absent — **0 `.incbin "baserom.gba"`** directives. The only ungameable number, and it's met. |
-| **Matching-C functions** | **~27.6%** (2,353 / 8,528) | functions whose bytes come from compiling `src/*.c`. The rest are **gbadisasm descriptive asm** (disassembly, *not* decompilation) — the ongoing asm→C grind. |
+| **Matching-C functions** | **~37.4%** (3,192 / 8,528) | functions whose bytes come from compiling `src/*.c`. The rest are **gbadisasm descriptive asm** (disassembly, *not* decompilation) — the ongoing asm→C grind. NB: the honest ceiling is **8,209**, not 8,528 — 170 functions (ARM-mode `arm.o`, libgcc/libc) are hand-assembly even in the US decomp; against that ceiling matching-C is **~38.9%**. |
 | **Extracted data** | **~0.1%** | genuinely-extracted asset bytes (C struct tables / PNG) ÷ data bytes. Named `.incbin "baserom.gba"` is **not** extraction. |
 | **Named symbols** | **~59%** | labels with meaningful names ÷ total labels. The rest are `sub_/data_/nullsub_/sheet` placeholders. |
 
