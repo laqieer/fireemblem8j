@@ -8,6 +8,19 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## Verified state (update each working stretch)
 
+- **2026-06-11 — MATCHING-C GRIND: 27.59% → 39.02% (3328/8528; ~40.5% of the honest 8209 ceiling)**,
+  self-containment held 100% (0 incbins). Engine of progress: the **per-TU data-binding harvest lever**
+  (D41–D48) — `scripts/harvest_verified_runs.py` + `bind_tu_data.py` (func_only ABS-bind) + `port_run.py`
+  (`dedup_globals`, NOLOAD-on-overlap) + stranded-section graduation. Validated yields: animation/menu/debug
+  TUs are near-pristine (scale-2 +98, scale-3 +445, next-1/2/3 +136). **Integration routine** (see
+  [[fe8j-integration-routine]] / decisions): after each merge run `scripts/dedup_baseline_syms.py` +
+  `scripts/close_baserom_gaps.py`, assert `check_selfcontained.py` == 0 incbins LOCALLY (cold build can't
+  catch a self-containment regression — baserom is present), and watch the **Self-contained CI gate** not
+  just make compare. (A 40-byte baserom-gap regression from a harvest graduation went unnoticed for 6
+  commits on 2026-06-11 because only `make compare` was watched; fixed at `a7b5615a4`, gap-closer scripted.)
+  Remaining levers: scale stranded-section graduation over the ~430 skip-shared-asm remainders; permuter for
+  the ~330 region-different cluster (eventscr/fontgrp/sio_battlemap/eventscr_gmap).
+
 - **✅🎉 2026-06-10 — SELF-CONTAINED BUILD ACHIEVED (D36): `mv baserom.gba away && make` builds the
   byte-identical FE8 JP ROM (sha1 `7da0456…`) from committed source ALONE.** Build self-containment
   **16.96% → 100.00%** this session — 0 `.incbin "baserom.gba"`, baserom removed from the build graph
@@ -628,9 +641,12 @@ generalizing fixes, all byte-perfect and durable.**
    functions in `ida`/`ghidra` (decompile by JP address), write `src/` C matching
    the JP behaviour, byte-match with the permuter, then carve + `make compare`.
    - **CONFIRMED region-different (2026-06-08):** `match_us_jp.py` runs BOTH exact AND
-     masked (pointer-word-wildcarded) matching → 7739/8528 mapped. The ~789 unmapped
-     functions (the 15 no-run TUs) failed BOTH tiers — their non-pointer instruction
-     bytes genuinely differ JP-vs-US. No generalizing fix remains; each needs real RE.
+     masked (pointer-word-wildcarded) matching → 7739/8528 SYMBOLS mapped. NB (corrected
+     2026-06-11): that 7739 is the funcmap SYMBOL count = **1792 functions + 5947 DATA
+     symbols** (gSinLookup/gCpData_*/… past the end of `.text`), NOT 7739 functions — see
+     `scripts/us_source_tracker.py` / D41. The genuinely region-different functions that
+     fail both tiers and need real RE are far fewer; the honest matching-C ceiling is 8209
+     (170 fns — arm.o ARM-mode + libgcc/libc — are hand-asm even in fe8u).
    - **REQUIRES an interactive, MCP-connected session.** The `ida`/`ghidra` MCP
      servers are configured (~/.claude.json) but are NOT reachable in a headless run
      (ToolSearch returns no RE tools) — so Phase-3 carves cannot be done headless/in
