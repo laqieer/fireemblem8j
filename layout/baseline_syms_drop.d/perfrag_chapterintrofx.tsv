@@ -1,0 +1,9 @@
+ChapterIntro_0
+ColorFadeSetupRange
+gObject_32x32
+PutOppositeLightExplosionSprites
+ChapterIntro_RevealDecalSprite_Init
+GetCameraCenteredX
+GetCameraCenteredY
+WfxFlamesInitGradientPublic
+ChapterIntro_RevealDecalSprite_Loop

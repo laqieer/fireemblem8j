@@ -2826,3 +2826,61 @@ All work gated: `rm -f src/*.s` + `make check` + `make compare` + `make clean &&
 left unstaged); verify-or-revert; baserom/checksum/CI untouched. Pushed `feat/h4b`. Siblings own
 eventscr*/bmio, prep_menuproc/mapanim_spellassoc/bmudisp, unitlistscreen/fontgrp/bmdifficulty/chapterintrofx,
 permuter — not touched. (D-number from the free sequence; renumber at integration if a concurrent sibling claimed D61.)
+
+## D62 — h3: the no-funcmap worklist harvest via per-FUNCTION direct carve (perfrag_carve.py); +67 across 3 TUs; fontgrp is whole-TU region-DIFFERENT codegen (2026-06-11)
+
+**Context.** Branch `feat/h3` (sibling to the integrated wave3 + h4b harvests; distinct D-number). Scope: the
+`layout/nofuncmap_region_same.tsv` (D54 reloc-aware classifier) worklist's region-same functions for
+`unitlistscreen` (25), `fontgrp` (25), `bmdifficulty` (24), `chapterintrofx` (23). These TUs are all PARTIALLY
+carved: their code region in ldscript is interleaved `asm/sub_*.o` per-function gbadisasm fragments + a handful
+of already-carved `src/<tu>*.o`/`exact_`/`masked_`/`stranded_` objects. `harvest_verified_runs`/`subrun_decompose`
+find these via find_runs but classify the spanning verified runs as `src_cov` (they overlap an existing src object)
+and SKIP them; `locate_funcs` proposes COARSE runs that also span already-defined fns → its whole-run carve is
+rejected. So neither the D44/D50/D58 trio path nor the D58 locate_funcs-run path reaches them directly.
+
+**KEY METHOD — carve each WORKLIST FUNCTION as its own single-fn run over its gbadisasm fragment
+(`scripts/perfrag_carve.py`, new, the session payoff).** For each region-same worklist row `(jp_addr, jp_addr+size,
+fn)`: skip if `fn` already has a body in any `src/<tu>*.c`; find the `asm/sub_*.o(.text.sub_*)` gbadisasm carved
+rows OVERLAPPING `[jp_addr, jp_addr+size)`; snapshot + remove those rows (rewriting the per-frag manifests to drop
+only the covered rows) and their `asm/sub_*.s`; `port_run.port(name=<tu>_<jp>, runs=[(s,e,[fn])], src_tu=<tu>,
+frag=perfrag_<tu>, dedup_globals=True)`, func_only fallback; `port` verify-or-reverts vs `make compare`; on revert,
+restore the manifests + asm. Single-function granularity is what unblocks these partial TUs — it carves the asm-only
+GAPS around already-defined functions without ever redefining one or skipping a whole src_cov run. `[skip-shared-asm]`
+guard leaves multi-section `stranded_<tu>.o` descriptive-incbin objects untouched (too risky to surgically split).
+
+**RESULT — +67 matching-C across 3 TUs / 67 carved runs; all gates GREEN, self-containment 100% (0 incbins).**
+Each TU committed incrementally + pushed; gated every batch: `rm -f src/*.s` + `make check` + `make compare` +
+`make clean && make compare` + `check_selfcontained.py` == 0; named from US; staged explicitly (NO `git add -A`);
+verify-or-revert; baserom/checksum/CI untouched.
+  * **chapterintrofx: +22 of 23.** All ChapterIntro_* fog/light/fade/scroll/map-display workers. 1 revert:
+    `ChapterIntro_DrawChapterTitle` (08020470) = genuine region-diff.
+  * **bmdifficulty: +21 of 21 plannable.** All DungeonRecordUi_* + UnlockPostgameAlly* + UpdateDungeon* +
+    SetupDungeonRecordUi/Draw*. The 3 `reloc-ambiguous` worklist rows (PopGlobalTimer 08002B44,
+    StartDungeonRecordProcFromMenu/RecordDisplayAfterTowerCleared 08006DC8) point at OTHER TUs' carves
+    (ramfunc.o / scene_08006CA4.o) — the ambiguous-addr classifier mis-attributed them → correctly skipped.
+  * **unitlistscreen: +24 of 25.** All UnitList_* list/sort/page-change/deploy/build/loop + StartUnitListScreen* +
+    UnitListScreenSprites_Init. 1 revert: `UnitListScreenSprites_Main` (08092A5C, 960 B) = genuine region-diff
+    (the sprite-anim main loop / OAM-table dispatch differs in JP).
+  * **fontgrp: +0 of 25 — the whole TU is region-DIFFERENT codegen.** EVERY worklist function reverted (debug-string
+    Print*/Clear*/Setup*, the core text engine InitTextFont/ClearText/Text_DrawString/Text_DrawCharacter*/
+    DrawTextGlyph*, the sprite-text SpriteText_*/DrawSpriteTextGlyph/TextPrint_OnLoop/GreenText_OnLoop, the
+    special-char/number DrawSpecialCharGlyph/PutNumberExt/SpecialCharTest/PutNumber2DigitExt, and GetColorLut).
+    This CONFIRMS D57's fontgrp finding from the OTHER classifier: the funcmap exact-tier (D57) AND the reloc-aware
+    no-funcmap tier (D54, this worklist) BOTH false-positive fontgrp as region-same, but `make compare` is the only
+    authority and rejects all of them. **Lesson: "region-same" by either classifier means the JP instruction stream
+    matches modulo relocation — it is NOT a promise of a byte-perfect full-build carve.** fontgrp's JP codegen
+    differs (register allocation / scheduling / literal-pool layout) in ways func_only/dedup binding can't reconcile.
+    fontgrp should be reclassified whole-TU region-different (hand-decomp/permuter) like proc-alloc/m4a.
+
+**THE WORKLIST `reloc-ambiguous` ROWS ARE THE NOISE TIER.** Of the 4 reverts/skips that weren't clean region-same
+carves, the 3 bmdifficulty mis-attributions were all `reloc-ambiguous` (the D54 classifier's lower-confidence
+tier); the `reloc-unique` rows carved at a far higher rate. Future harvest agents can carve `reloc-unique` rows
+optimistically and treat `reloc-ambiguous` as suspect (verify-or-revert still makes both safe).
+
+**TOOLKIT (new, reusable): `scripts/perfrag_carve.py`** — `[--list]`/`[--only fn,..] <TU>`; reads the worklist,
+per-function carve over gbadisasm frags, dedup_globals→func_only, verify-or-revert, parallel-safe per-frag
+manifests (`perfrag_<tu>`), NEVER `git add`. Generalizes to ANY partial TU whose ungraduated region-same functions
+sit in individual `asm/sub_*.o` fragments. No `port_run.py` changes were needed (the D57/D58/D59 resolver fixes
+already covered the func_only fixpoint for these TUs). Pushed `feat/h3`. Siblings own eventscr*/bmio,
+prep_menuproc/mapanim_spellassoc/bmudisp, playerphase/bmmind/prep_itemscreen/player_interface/bmtrade, permuter —
+not touched. (D-number from the free sequence; renumber at integration if a concurrent sibling claimed D60.)

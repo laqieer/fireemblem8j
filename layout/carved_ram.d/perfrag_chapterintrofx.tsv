@@ -1,0 +1,2 @@
+085C35A0	rom	src/chapterintrofx_0801FFF0.o(.data)	chapterintrofx_0801FFF0 .data region-diff (incbin)
+085C35C4	rom	src/chapterintrofx_080204C0.o(.data)	chapterintrofx_080204C0 .data region-diff (incbin)
