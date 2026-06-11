@@ -1,0 +1,9 @@
+0AD3FC	0ADC68	src/savemenu_080AD3FC.o(.text)	savemenu_080AD3FC(run): SaveMenuWaitHelpBoxAnim, SaveMenuPutChapterTitle, SaveMenu_SetLcdChapterIdx...
+0AE774	0AE850	src/savemenu_080AE774.o(.text)	savemenu_080AE774(run): SaveMenuTryMoveExtraSlotCursor, SaveMenuPopupHelpBox_Init, SaveMenuPopupHelpBox_WaitInput
+0AD244	0AD25C	src/savemenu_080AD244.o(.text)	savemenu_080AD244(run): SaveMenu_NewGame
+0ADCA4	0ADEA8	src/savemenu_080ADCA4.o(.text)	savemenu_080ADCA4(run): ExecSaveMenuMiscOption
+0AE42C	0AE47C	src/savemenu_080AE42C.o(.text)	savemenu_080AE42C(run): SaveMenuScrollBackToMain
+0AE508	0AE558	src/savemenu_080AE508.o(.text)	savemenu_080AE508(run): SaveMenuScrollExtraSlotIn
+0AEA6C	0AEA84	src/savemenu_080AEA6C.o(.text)	savemenu_080AEA6C(run): SaveMenuStartSqMask
+0AEB54	0AEB6C	src/savemenu_080AEB54.o(.text)	savemenu_080AEB54(run): ExtraMapStartSomeBgm
+0AEFDC	0AEFFC	src/savemenu_080AEFDC.o(.text)	savemenu_080AEFDC(run): SaveMenuDirectlySelectSlotOnPrepScreen

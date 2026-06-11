@@ -1,0 +1,2 @@
+01D20C	01D2B0	src/playerphase_0801D20C.o(.text)	playerphase_0801D20C(run): CanMoveActiveUnitTo, PlayerPhase_DisplayUnitMovement
+01CEA8	01CF64	src/playerphase_0801CEA8.o(.text)	playerphase_0801CEA8(run): TryMakeCantoUnit

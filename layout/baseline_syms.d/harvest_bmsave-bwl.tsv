@@ -1,0 +1,6 @@
+PidStatsAddWinAmt	080A8F78	thumb	bmsave-bwl_080A94E8
+PidStatsRecordLoseData	080A8FD8	thumb	bmsave-bwl_080A94E8
+gBattleActor	0203A4E8	data	bmsave-bwl_080A94E8
+gBattleTarget	0203A568	data	bmsave-bwl_080A94E8
+gPlaySt	0202BCEC	data	bmsave-bwl_080A94E8
+IsSaveValid	080A9C30	thumb	bmsave-bwl_080A94E8

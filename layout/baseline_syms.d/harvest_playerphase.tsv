@@ -1,0 +1,6 @@
+gActiveUnitMoveOrigin	0202BE44	data	playerphase_0801D20C
+GetMovementScriptFromPath	08032BB0	thumb	playerphase_0801D20C
+CanUnitMove	080188EC	thumb	playerphase_0801CEA8
+gActionData	0203A954	data	playerphase_0801CEA8
+UnitBeginCantoAction	080183E8	thumb	playerphase_0801CEA8
+gPlaySt	0202BCEC	data	playerphase_0801CEA8

@@ -1,0 +1,5 @@
+0290E0	029108	src/bmitemuse_080290E0.o(.text)	bmitemuse_080290E0(run): CanUnitUseDoorKeyItem, CanUnitOpenBridge
+029150	0294AC	src/bmitemuse_08029150.o(.text)	bmitemuse_08029150(run): CanUnitUsePromotionItem, CanUnitUseStatGainItem
+029874	029890	src/bmitemuse_08029874.o(.text)	bmitemuse_08029874(run): OnSelectPutTrap, DoUsePutTrap
+02881C	028BB8	src/bmitemuse_0802881C.o(.text)	bmitemuse_0802881C(run): CanUnitUseItem
+029C74	029CB4	src/bmitemuse_08029C74.o(.text)	bmitemuse_08029C74(run): AttackStaffMapSelect_SwitchIn

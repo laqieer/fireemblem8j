@@ -1,0 +1,9 @@
+InvalidateSuspendSave
+ReadGMMonsterRnState
+ReadGameSave
+SGM_SetCharacterKnown
+WriteGameSave
+WriteLastGameSaveId
+ComputeChecksum32
+CopyGameSave
+SramChecksum32

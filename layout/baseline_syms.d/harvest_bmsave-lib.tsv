@@ -1,0 +1,6 @@
+GetChapterFlagBitsSize	080860FC	thumb	bmsave-lib_080A7BB4
+GetPermanentFlagBitsSize	080860F0	thumb	bmsave-lib_080A7BB4
+WriteAndVerifySramFast	080D6548	thumb	bmsave-lib_080A7BB4
+PopulateSaveBlockChecksum	080AAE6C	thumb	bmsave-lib_080A79D8
+WriteAndVerifySramFast	080D6548	thumb	bmsave-lib_080A79D8
+gSram	08A9CA20	data	bmsave-lib_080A79D8
