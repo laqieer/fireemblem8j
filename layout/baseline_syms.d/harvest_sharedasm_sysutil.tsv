@@ -1,0 +1,4 @@
+ProcScr_BmFadeIN	08A9DD0C	data	sysutil_080B2C1C
+ProcScr_BmFadeOUT	08A9DD34	data	sysutil_080B2C1C
+Proc_StartBlocking	08002C30	thumb	sysutil_080B2C1C
+BgAffineSet	080D6368	thumb	sysutil_080B29C4
