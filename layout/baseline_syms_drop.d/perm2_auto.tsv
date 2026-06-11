@@ -23,3 +23,6 @@ SetDefaultColorEffects_
 PlayMuStepSe
 EndMu
 DoM4aSongNumStop
+IsSaveValid
+IsMultiArenaSaveValid
+GetItemSellPrice
