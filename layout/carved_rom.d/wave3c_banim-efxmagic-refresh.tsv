@@ -1,0 +1,7 @@
+05D708	05D860	src/banim-efxmagic-refresh_0805D708.o(.text)	banim-efxmagic-refresh_0805D708(run): efxSong_Loop_Main, StartSubSpell_efxSongBG
+05D8DC	05D944	src/banim-efxmagic-refresh_0805D8DC.o(.text)	banim-efxmagic-refresh_0805D8DC(run): StartSubSpell_efxSongOBJ
+05D9B0	05DAA8	src/banim-efxmagic-refresh_0805D9B0.o(.text)	banim-efxmagic-refresh_0805D9B0(run): efxDance_Loop_Main
+05D6D0	05D708	src/banim-efxmagic-refresh_0805D6D0.o(.text)	banim-efxmagic-refresh_0805D6D0(run): StartSpellAnimSong
+05D860	05D8DC	src/banim-efxmagic-refresh_0805D860.o(.text)	banim-efxmagic-refresh_0805D860(run): efxSongBG_Loop
+05D944	05D978	src/banim-efxmagic-refresh_0805D944.o(.text)	banim-efxmagic-refresh_0805D944(run): efxSongOBJ_Loop
+05D978	05D9B0	src/banim-efxmagic-refresh_0805D978.o(.text)	banim-efxmagic-refresh_0805D978(run): StartSpellAnimDance

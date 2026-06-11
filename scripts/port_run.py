@@ -691,7 +691,19 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False,
               ", ".join(f"{s}={a:08X}/{t}" for s, (a, t) in sorted(new_syms.items())))
         print(f"  [dbg] ram={ {s: f'{b:08X}' for s, b in ram.items()} } "
               f"romdata={ {s: f'{b:08X}' for s, b in romdata.items()} } undef={sorted(undef)}")
-    have = have_syms()
+    # `have` must include the per-task FRAGMENT binds (layout/baseline_syms.d/*.tsv),
+    # not just the monolith — otherwise a symbol another run already bound in a
+    # fragment (e.g. gPrepItemTexts bound by a sibling prep_itemscreen run) gets
+    # RE-ADDED here with this run's freshly-decoded value, and when that value
+    # DIFFERS (a region-different addend mis-decode) the duplicate binding corrupts
+    # the OTHER objects that reference the symbol (their literals re-resolve to the
+    # wrong address). Reusing the existing bind lets this run's own .text resolve to
+    # it; verify-or-revert confirms the body byte-matches at the existing address.
+    have = have_syms() | {
+        l.split("\t")[0]
+        for p in sorted(glob_mod.glob("layout/baseline_syms.d/*.tsv"))
+        for l in open(p) if l.strip() and not l.startswith("#")
+    }
     # Carved-section end = the ACTUAL compiled .text size (base + len(otext)), not the
     # run's nominal end. A function whose size isn't 4-aligned gets a trailing 0x0000
     # alignment pad (matching the JP inter-function padding), so the .o's .text is a

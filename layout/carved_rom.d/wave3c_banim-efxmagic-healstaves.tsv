@@ -1,0 +1,21 @@
+062694	062804	src/banim-efxmagic-healstaves_08062694.o(.text)	banim-efxmagic-healstaves_08062694(run): StartSubSpell_efxLiveBG_A, StartSubSpell_efxLiveBG_B
+06299C	0629D8	src/banim-efxmagic-healstaves_0806299C.o(.text)	banim-efxmagic-healstaves_0806299C(run): StartSubSpell_efxLiveALPHA
+062A6C	062B30	src/banim-efxmagic-healstaves_08062A6C.o(.text)	banim-efxmagic-healstaves_08062A6C(run): StartSubSpell_efxLiveOBJ, StartSubSpell_efxReserveOBJ
+062BCC	062CE4	src/banim-efxmagic-healstaves_08062BCC.o(.text)	banim-efxmagic-healstaves_08062BCC(run): StartSubSpell_efxReblowOBJ, efxReblowOBJ_Loop_A
+062D18	062D78	src/banim-efxmagic-healstaves_08062D18.o(.text)	banim-efxmagic-healstaves_08062D18(run): StartSpellAnimFortify, StartSpellAnimLatona
+062F8C	063078	src/banim-efxmagic-healstaves_08062F8C.o(.text)	banim-efxmagic-healstaves_08062F8C(run): StartSubSpell_efxReserveBG2
+063458	0634D0	src/banim-efxmagic-healstaves_08063458.o(.text)	banim-efxmagic-healstaves_08063458(run): StartSubSpell_efxRestOBJ
+062258	062280	src/banim-efxmagic-healstaves_08062258.o(.text)	banim-efxmagic-healstaves_08062258(run): StartSpellAnimMend
+0623BC	0623E4	src/banim-efxmagic-healstaves_080623BC.o(.text)	banim-efxmagic-healstaves_080623BC(run): StartSpellAnimRecover
+062520	062548	src/banim-efxmagic-healstaves_08062520.o(.text)	banim-efxmagic-healstaves_08062520(run): StartSpellAnimPhysic
+062874	0628E4	src/banim-efxmagic-healstaves_08062874.o(.text)	banim-efxmagic-healstaves_08062874(run): StartSubSpell_efxLiveBGCOL_A
+0628E4	062954	src/banim-efxmagic-healstaves_080628E4.o(.text)	banim-efxmagic-healstaves_080628E4(run): StartSubSpell_efxLiveBGCOL_B
+062954	06299C	src/banim-efxmagic-healstaves_08062954.o(.text)	banim-efxmagic-healstaves_08062954(run): efxLiveBGCOL_Loop
+0629D8	0629F4	src/banim-efxmagic-healstaves_080629D8.o(.text)	banim-efxmagic-healstaves_080629D8(run): efxLiveALPHA_Loop_A
+062EF8	062F44	src/banim-efxmagic-healstaves_08062EF8.o(.text)	banim-efxmagic-healstaves_08062EF8(run): StartSubSpell_efxReserveBGCOL
+062F44	062F8C	src/banim-efxmagic-healstaves_08062F44.o(.text)	banim-efxmagic-healstaves_08062F44(run): efxReserveBGCOL_Loop
+063158	0631A4	src/banim-efxmagic-healstaves_08063158.o(.text)	banim-efxmagic-healstaves_08063158(run): StartSubSpell_efxReserveBGCOL2
+0631A4	0631EC	src/banim-efxmagic-healstaves_080631A4.o(.text)	banim-efxmagic-healstaves_080631A4(run): efxReserveBGCOL2_Loop
+0631EC	063228	src/banim-efxmagic-healstaves_080631EC.o(.text)	banim-efxmagic-healstaves_080631EC(run): StartSpellAnimRestore
+0633A0	0633F4	src/banim-efxmagic-healstaves_080633A0.o(.text)	banim-efxmagic-healstaves_080633A0(run): StartSubSpell_efxRestBG
+0633F4	063458	src/banim-efxmagic-healstaves_080633F4.o(.text)	banim-efxmagic-healstaves_080633F4(run): efxRestBG_Loop

@@ -1,0 +1,4 @@
+080E345A	rom	src/banim-efxmagic-aura_08066560.o(.rodata)	banim-efxmagic-aura_08066560 .rodata region-diff (incbin)
+080E34EE	rom	src/banim-efxmagic-aura_080669EC.o(.rodata)	banim-efxmagic-aura_080669EC .rodata region-diff (incbin)
+080E350C	rom	src/banim-efxmagic-aura_08066A7C.o(.rodata)	banim-efxmagic-aura_08066A7C .rodata region-diff (incbin)
+080E34BA	rom	src/banim-efxmagic-aura_080667E0.o(.rodata)	banim-efxmagic-aura_080667E0 .rodata region-diff (incbin)

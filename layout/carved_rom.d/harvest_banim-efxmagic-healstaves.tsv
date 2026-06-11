@@ -1,0 +1,6 @@
+062804	062874	src/banim-efxmagic-healstaves_08062804.o(.text)	banim-efxmagic-healstaves_08062804(run): efxLiveBG_Loop
+0629F4	062A6C	src/banim-efxmagic-healstaves_080629F4.o(.text)	banim-efxmagic-healstaves_080629F4(run): efxLiveALPHA_Loop_B
+062D78	062E28	src/banim-efxmagic-healstaves_08062D78.o(.text)	banim-efxmagic-healstaves_08062D78(run): efxReserve_Loop_Main
+062E78	062EF8	src/banim-efxmagic-healstaves_08062E78.o(.text)	banim-efxmagic-healstaves_08062E78(run): efxReserveBG_Loop
+063078	063158	src/banim-efxmagic-healstaves_08063078.o(.text)	banim-efxmagic-healstaves_08063078(run): efxReserveBG2_Loop
+063228	0633A0	src/banim-efxmagic-healstaves_08063228.o(.text)	banim-efxmagic-healstaves_08063228(run): efxRest_Loop_Main

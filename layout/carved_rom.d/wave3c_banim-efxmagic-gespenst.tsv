@@ -1,0 +1,5 @@
+066234	0662DC	src/banim-efxmagic-gespenst_08066234.o(.text)	banim-efxmagic-gespenst_08066234(run): StartSubSpell_efxGespenstBG4
+066318	066360	src/banim-efxmagic-gespenst_08066318.o(.text)	banim-efxmagic-gespenst_08066318(run): StartSubSpell_efxGespenstBGCOL2
+0662DC	0662F8	src/banim-efxmagic-gespenst_080662DC.o(.text)	banim-efxmagic-gespenst_080662DC(run): efxGespenstBG4_OnEnd
+0662F8	066318	src/banim-efxmagic-gespenst_080662F8.o(.text)	banim-efxmagic-gespenst_080662F8(run): efxGespenstBG4_Loop
+066360	0663A8	src/banim-efxmagic-gespenst_08066360.o(.text)	banim-efxmagic-gespenst_08066360(run): efxGespenstBGCOL2_Loop

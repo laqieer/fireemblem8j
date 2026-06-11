@@ -1,0 +1,10 @@
+066560	0667E0	src/banim-efxmagic-aura_08066560.o(.text)	banim-efxmagic-aura_08066560(run): efxOura_Loop_Main, StartSubSpell_efxOuraBG_A, StartSubSpell_efxOuraBG_B
+0668CC	0669B0	src/banim-efxmagic-aura_080668CC.o(.text)	banim-efxmagic-aura_080668CC(run): StartSubSpell_efxOuraBG2
+0669EC	066A34	src/banim-efxmagic-aura_080669EC.o(.text)	banim-efxmagic-aura_080669EC(run): StartSubSpell_efxOuraBGCOL
+066A7C	066ADC	src/banim-efxmagic-aura_08066A7C.o(.text)	banim-efxmagic-aura_08066A7C(run): StartSubSpell_efxOuraBG3
+0667E0	066874	src/banim-efxmagic-aura_080667E0.o(.text)	banim-efxmagic-aura_080667E0(run): StartSubSpell_efxOuraBG_C
+066874	0668CC	src/banim-efxmagic-aura_08066874.o(.text)	banim-efxmagic-aura_08066874(run): efxOuraBG_Loop
+0669B0	0669CC	src/banim-efxmagic-aura_080669B0.o(.text)	banim-efxmagic-aura_080669B0(run): efxOuraBG2_OnEnd
+0669CC	0669EC	src/banim-efxmagic-aura_080669CC.o(.text)	banim-efxmagic-aura_080669CC(run): efxOuraBG2_Loop
+066A34	066A7C	src/banim-efxmagic-aura_08066A34.o(.text)	banim-efxmagic-aura_08066A34(run): efxOuraBGCOL_Loop
+066ADC	066B40	src/banim-efxmagic-aura_08066ADC.o(.text)	banim-efxmagic-aura_08066ADC(run): efxOuraBG3_Loop

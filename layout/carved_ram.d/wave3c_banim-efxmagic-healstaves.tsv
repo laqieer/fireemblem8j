@@ -1,0 +1,4 @@
+080E2BF6	rom	src/banim-efxmagic-healstaves_08062F8C.o(.rodata)	banim-efxmagic-healstaves_08062F8C .rodata region-diff (incbin)
+080E2AE4	rom	src/banim-efxmagic-healstaves_08062EF8.o(.rodata)	banim-efxmagic-healstaves_08062EF8 .rodata region-diff (incbin)
+080E2C0E	rom	src/banim-efxmagic-healstaves_08063158.o(.rodata)	banim-efxmagic-healstaves_08063158 .rodata region-diff (incbin)
+080E2CFE	rom	src/banim-efxmagic-healstaves_080633A0.o(.rodata)	banim-efxmagic-healstaves_080633A0 .rodata region-diff (incbin)
