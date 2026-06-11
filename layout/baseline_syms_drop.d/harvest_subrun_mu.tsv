@@ -1,0 +1,16 @@
+GetSpellAssocFacing
+SetBattleAnimFacing
+StartMuActionAnim
+StartMuDelayedFaceDefender
+StartMuSpeedUpAnim
+GetMuQ4MovementSpeed
+PutMu
+PutMuSMS
+MU_StartDeathFade
+StartMuHitFlash
+unit_icon_move_table
+MuMaxWalkSpeedFunc
+AP_SetDefinition
+GetMuAnimForJid
+GetMuImg
+GetMuImgBufById

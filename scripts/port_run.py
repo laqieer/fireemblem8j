@@ -92,8 +92,14 @@ def _try_decl(head, sym, word):
         return None
     # The declarator is everything up to the initializer.
     decl = head.split("=", 1)[0]
-    # sym must be the LAST identifier token of the declarator (the thing declared).
-    toks = re.findall(r"[A-Za-z_]\w*", decl)
+    # sym must be the LAST identifier token of the declaratOR — i.e. the thing
+    # being declared, which is the identifier just before any array suffix `[...]`
+    # (NOT a dimension macro inside it: `static struct MuConfig sMuConfig[MU_MAX_COUNT]`
+    # has `MU_MAX_COUNT` as the literal last token, but the DECLARED name is sMuConfig).
+    # Strip `[...]` suffixes before the last-token test so an identifier dimension
+    # (a `#define`d array size) doesn't masquerade as the declared symbol.
+    decl_noarr = re.sub(r"\[[^\]]*\]", "", decl)
+    toks = re.findall(r"[A-Za-z_]\w*", decl_noarr)
     if not toks or toks[-1] != sym:
         return None
     m = word.search(decl)
