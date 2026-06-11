@@ -1,0 +1,4 @@
+0B75D0	0B762C	src/opinfo_080B75D0.o(.text)	opinfo_080B75D0(run): SetClassReelMode, ClassReel_FadeOutBGM, ClassReel_OnEnd...
+0B7430	0B75A0	src/opinfo_080B7430.o(.text)	opinfo_080B7430(run): ClassReel_Init, ClassReel_ButtonPress_GoToTitle, ClassReel_Loop
+0B7B64	0B7BE8	src/opinfo_080B7B64.o(.text)	opinfo_080B7B64(run): ClassIntroLetter_LoopFadeIn, ClassIntroLetter_LoopDisplay
+0B7C78	0B7CEC	src/opinfo_080B7C78.o(.text)	opinfo_080B7C78(run): ClassIntroIcon_Init
