@@ -1,0 +1,12 @@
+04D148	04D2F8	src/sio_uiutils_0804D148.o(.text)	sio_uiutils_0804D148(run): Nop_SioUiutils_0, CopyLinkArenaTileRows, LATitleBanner_Init...
+04E3F8	04E50C	src/sio_uiutils_0804E3F8.o(.text)	sio_uiutils_0804E3F8(run): StartLinkArenaVersusSpriteDraw, EndLinkArenaVersusSpriteDraw, GetLinkArenaVersusSpriteDraw...
+04DD50	04DFE4	src/sio_uiutils_0804DD50.o(.text)	sio_uiutils_0804DD50(run): StartSioMenuBurstFx, LinkArenaMenuScroll_Init, LinkArenaMenuScroll_Loop...
+04D9B4	04DA6C	src/sio_uiutils_0804D9B4.o(.text)	sio_uiutils_0804D9B4(run): PutLinkArenaTeamSprites, ScrollMultiArenaTeamSprites, UpdateNameEntrySpriteGlow
+04D584	04D634	src/sio_uiutils_0804D584.o(.text)	sio_uiutils_0804D584(run): UpdateLinkArenaSideMenuGlow, UpdateLinkArenaNameBannerGlow
+04E570	04E5C8	src/sio_uiutils_0804E570.o(.text)	sio_uiutils_0804E570(run): StartLinkArenaResultBanner, LoadLinkArenaChoiceBoxGfx
+04D0DC	04D140	src/sio_uiutils_0804D0DC.o(.text)	sio_uiutils_0804D0DC(run): InitSioBG
+04D344	04D398	src/sio_uiutils_0804D344.o(.text)	sio_uiutils_0804D344(run): UpdateSioMenuSelectedGlow
+04D4F8	04D568	src/sio_uiutils_0804D4F8.o(.text)	sio_uiutils_0804D4F8(run): StartSioMenuItem
+04D88C	04D934	src/sio_uiutils_0804D88C.o(.text)	sio_uiutils_0804D88C(run): StartSioTeamMenuSpriteDraw
+04DB28	04DB68	src/sio_uiutils_0804DB28.o(.text)	sio_uiutils_0804DB28(run): StartNameEntrySpriteDraw
+04E1BC	04E210	src/sio_uiutils_0804E1BC.o(.text)	sio_uiutils_0804E1BC(run): UpdateLinkArenaVersusBannerGlow
