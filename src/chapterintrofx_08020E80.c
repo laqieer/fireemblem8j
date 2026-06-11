@@ -1,0 +1,62 @@
+#include "global.h"
+
+#include "hardware.h"
+#include "proc.h"
+#include "m4a.h"
+#include "soundwrapper.h"
+#include "ctc.h"
+#include "bmio.h"
+#include "fontgrp.h"
+#include "bmmap.h"
+#include "chapterdata.h"
+#include "bmfx.h"
+#include "bmudisp.h"
+#include "bm.h"
+#include "bmlib.h"
+#include "sysutil.h"
+#include "worldmap.h"
+
+#include "constants/songs.h"
+
+// clang-format off
+
+extern struct ProcCmd CONST_DATA ProcScr_ChapterIntro_Bg2Scroll[];
+
+
+
+extern struct ProcCmd CONST_DATA ProcScr_ChapterIntro_Bg1And3Scroll[];
+
+
+
+
+
+
+
+extern struct ProcCmd CONST_DATA ProcScr_ChapterIntro_PutDecalSprite[];
+
+extern struct ProcCmd CONST_DATA ProcScr_ChapterIntro_LightBurst[];
+
+
+
+extern struct ProcCmd CONST_DATA gProcScr_ChapterIntro[];
+
+
+
+//! FE8U = 0x08021188
+void ChapterIntro_4(struct ChapterIntroFxProc * proc)
+{
+    if ((GetGameClock() & 1) == 0)
+    {
+        CALLARM_ColorFadeTick();
+
+        if (GetROMChapterStruct(gPlaySt.chapterIndex)->initialWeather == 5)
+        {
+            WfxFlamesInitGradientPublic();
+        }
+
+        ResetMapPaletteAnimations();
+        Proc_Break(proc);
+    }
+
+    return;
+}
