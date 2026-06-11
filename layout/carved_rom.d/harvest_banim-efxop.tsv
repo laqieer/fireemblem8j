@@ -1,0 +1,9 @@
+071A64	071B6C	src/banim-efxop_08071A64.o(.text)	banim-efxop_08071A64(run): efxopMistyrainOBJ_OnEnd, efxopMistyrainOBJ_Loop_A, efxopMistyrainOBJ_Loop_B...
+071084	071104	src/banim-efxop_08071084.o(.text)	banim-efxop_08071084(run): CRSpell_RegisterBgPal, CRSpell_RegisterObjGfx, CRSpell_RegisterObjPal
+070F64	070F94	src/banim-efxop_08070F64.o(.text)	banim-efxop_08070F64(run): ClearCRSpellBgTmBuf
+07114C	07116C	src/banim-efxop_0807114C.o(.text)	banim-efxop_0807114C(run): efxopFire_Loop_Main
+0712DC	071304	src/banim-efxop_080712DC.o(.text)	banim-efxop_080712DC(run): efxopThunder_Loop_Main
+071514	071568	src/banim-efxop_08071514.o(.text)	banim-efxop_08071514(run): efxopLive_Loop_Main
+071798	0717C0	src/banim-efxop_08071798.o(.text)	banim-efxop_08071798(run): efxopLiveOBJ_Loop
+071C18	071C64	src/banim-efxop_08071C18.o(.text)	banim-efxop_08071C18(run): efxopMyrrh_Loop_Main
+071F88	071FAC	src/banim-efxop_08071F88.o(.text)	banim-efxop_08071F88(run): efxopStoneOBJ_Loop

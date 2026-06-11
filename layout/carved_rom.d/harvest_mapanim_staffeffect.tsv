@@ -1,0 +1,17 @@
+080414	08056C	src/mapanim_staffeffect_08080414.o(.text)	mapanim_staffeffect_08080414(run): MapAnimSleepEffect, MapAnimSleep_Init, MapAnimSleep_Anim1...
+08029C	080394	src/mapanim_staffeffect_0808029C.o(.text)	mapanim_staffeffect_0808029C(run): MapAnimRepair_Loop2, MapAnimRepair_Loop3, MapAnimRestoreEffect...
+080CB8	080DD8	src/mapanim_staffeffect_08080CB8.o(.text)	mapanim_staffeffect_08080CB8(run): SetDefaultMapAnimScreenConf, StartMapAnimEffect_Unk_1, EndMapAnimEffect_Unk_1...
+07FB1C	07FBA4	src/mapanim_staffeffect_0807FB1C.o(.text)	mapanim_staffeffect_0807FB1C(run): StartMapAnimEffect_Unk_2, MapAnimEffect_Unk_2_PlaySe, NewMapAnimEffectAnimator
+07FD70	07FE2C	src/mapanim_staffeffect_0807FD70.o(.text)	mapanim_staffeffect_0807FD70(run): MapSpellAnim_CommonEnd, MapSpellAnim_EndWithHBlank, StartWarpFlashy
+0800C0	0801B0	src/mapanim_staffeffect_080800C0.o(.text)	mapanim_staffeffect_080800C0(run): MapAnimBerserkEffect, MapAnimBerserk_Loop, MapAnimRepairEffect
+080744	080810	src/mapanim_staffeffect_08080744.o(.text)	mapanim_staffeffect_08080744(run): MapAnim_Loop1_0, MapAnim_Loop2_0, MapAnimCallSpellAssocSilencefx
+080AA0	080B20	src/mapanim_staffeffect_08080AA0.o(.text)	mapanim_staffeffect_08080AA0(run): MapAnimUnlockEffect, HideUnitUnlockDoor, UnhideUnit
+07F7A8	07F860	src/mapanim_staffeffect_0807F7A8.o(.text)	mapanim_staffeffect_0807F7A8(run): MapLatonaShiningfx_Loop3, MapAnimCallSpellAssocNightMarefx
+07F9B4	07FA1C	src/mapanim_staffeffect_0807F9B4.o(.text)	mapanim_staffeffect_0807F9B4(run): NightMarefx_End, MapAnimCallSpellAssocAntitoxinPureWaterfx
+080674	0806D0	src/mapanim_staffeffect_08080674.o(.text)	mapanim_staffeffect_08080674(run): MapAnimMonsterStone_Resetfx, StartMapAnimEffect_Unk_0
+080930	0809BC	src/mapanim_staffeffect_08080930.o(.text)	mapanim_staffeffect_08080930(run): MapAnimSilence_Loop, MapAnimCallSpellAssocBarrierfx
+07F750	07F784	src/mapanim_staffeffect_0807F750.o(.text)	mapanim_staffeffect_0807F750(run): MapLatonaShiningfx_Loop1
+07FC88	07FCFC	src/mapanim_staffeffect_0807FC88.o(.text)	mapanim_staffeffect_0807FC88(run): MapAnimEffectAnimator_Loop1
+07FEEC	07FF28	src/mapanim_staffeffect_0807FEEC.o(.text)	mapanim_staffeffect_0807FEEC(run): MapAnimTorchEffect
+07FFE8	08004C	src/mapanim_staffeffect_0807FFE8.o(.text)	mapanim_staffeffect_0807FFE8(run): MapAnimTorch_Loop1
+080BF0	080C74	src/mapanim_staffeffect_08080BF0.o(.text)	mapanim_staffeffect_08080BF0(run): MapAnimUnlock_Loop1

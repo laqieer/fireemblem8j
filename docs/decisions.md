@@ -1948,3 +1948,42 @@ duplicate-global (now auto-fixed), overlapping-section (now auto-fixed), and the
 then NOLOAD the run's `.data`); bmidoten (Class D — reconcile the `gBmMap*` −4 binding without regressing cp_perform).
 Both are higher-risk structural work, explicitly deferred; minimap is exhausted. All bind-2 work `make check` +
 `make compare` + `make clean && make compare` + self-containment-100% gated, verify-or-revert, NO `git add -A`.
+
+## D44 — scale-2 ANIMATION TUs are near-pristine harvest targets: +98 matching-C at near-zero blocker rate (2026-06-11)
+
+**Context.** Branch `feat/scale-2` (sibling to bind-1/bind-2; distinct D-number). Scope: the region-same
+ANIMATION engine TUs `opanim-main`, `mapanim_staffeffect`, `banim-efxop`. Tested whether the COMPLETE D42+D43
+toolkit (`harvest_verified_runs.py` with `dedup_globals`, the `func_only`+ABS-bind path via `bind_tu_data.py`,
+reloc-free NOLOAD-on-overlap) clears these TUs' verified-run remainder, and at what blocker rate.
+
+**RESULT — the cleanest TU class harvested so far: +98 matching-C / ~zero structural blockers** (matching-C
+2575 → 2673, **30.19% → 31.34%**; honest ceiling axis advances accordingly). Per TU (all `make check` after
+`rm -f src/*.s` + `make compare` + `make clean && make compare` + self-containment-100% gated, functions named
+from US, data binds decoded from literal pools):
+  * **opanim-main: 40 fns** (11 carved runs from 15 verified-run plan entries; the OpAnimFaceMontage*/Fade/Scroll/
+    Gather/Title/Split clusters) — **0 reverts**. 9 new ABS data binds; the dedup demoted ~70 already-bound shared
+    animation globals (e.g. the opanim scroll/palette state) to extern.
+  * **mapanim_staffeffect: 41 fns** (17 carved runs; the MapAnimSleep/Repair/Restore/Berserk/Unlock/Torch/
+    Silence/spell-assoc effect clusters) — **0 reverts**. ~14 new ABS data binds across the spell-effect tables.
+  * **banim-efxop: 17 fns** (16 via the harvester + **1 recovered via `bind_tu_data.py`'s func_only path**) — the
+    single harvester revert was `efxopEvilEyeOBJ_Loop`, a tiny body whose `extract_run` re-emitted the file-scope
+    `ProcScr_efxopEvilEyeOBJ` CONST_DATA table (a D42 grow-the-ROM revert, NOT a region-diff). `func_only` drops
+    that table; the body then linked with **0 new syms** — confirming the blocker was re-emitted-data, not a
+    missing bind. This is the textbook D42 lever firing on a single function.
+
+**Why animation TUs harvest so cleanly (the takeaway).** Unlike the bind-2 set (D43, dominated by deferred
+Classes C/D), the animation engine's file-scope data is overwhelmingly EITHER region-same shared globals already
+bound (so `dedup_globals` demotes them to extern, byte-neutral) OR proc-script CONST_DATA tables the run doesn't
+need (so `func_only` drops them). NO Class C (interleaved region-diff `.data` straddling a loadable carve), NO
+Class D (region-diff RAM-layout conflict) surfaced. Net blocker rate across 3 TUs: **1 revert / 98 graduated**,
+and that one was func_only-recoverable. The lever's per-TU yield here (~13–40 fns) is bounded only by how many
+of the TU's functions `find_runs` proves as verified runs (66/47/22 proposed vs the ~91/70/69 ungraduated total
+the worklist counted — the rest are either already graduated, or don't form a verified contiguous run, NOT a
+new blocker class).
+
+**Reusable conclusion for the next agent.** Region-same ENGINE TUs (animation, and likely other graphics/audio
+engine code) are the highest-yield, lowest-risk targets for the harvest+bind toolkit — run `harvest_verified_runs.py
+<TU>` then `bind_tu_data.py <TU>` to mop up func_only-recoverable reverts; expect near-100% of the verified-run
+functions to graduate with the standard gates. No new tooling was needed; the D42+D43 toolkit was sufficient.
+All work on `feat/scale-2`, staged explicitly (NO `git add -A`), verify-or-revert, `make compare` the sole oracle;
+baserom/checksum/CI untouched. Siblings own bmmenu/bmlib + sysutil/bmtarget — not touched.
