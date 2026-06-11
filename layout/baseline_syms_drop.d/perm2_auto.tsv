@@ -12,3 +12,13 @@ ReadSaveBlockInfo
 RefreshGmNodeLinksExt
 GmMu_StartMoveToPosition
 EfxPalFlashingInOut
+Proc_Break
+SetFaceEyeControl
+GetDataSize
+GetMagicEffectBufferFor
+SetHelpBoxInitPosition_bug
+ResetIconGraphics_
+APProc_Delete
+SetDefaultColorEffects_
+PlayMuStepSe
+EndMu
