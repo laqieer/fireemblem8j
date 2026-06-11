@@ -1,0 +1,3 @@
+030017C0	iwram	src/cp_script_0803CAC4.o(.bss)	cp_script_0803CAC4 .bss
+030017C0	iwram	src/cp_script_0803C7F4.o(.bss)	cp_script_0803C7F4 .bss
+030017C0	iwram	src/cp_script_0803CA0C.o(.bss)	cp_script_0803CA0C .bss

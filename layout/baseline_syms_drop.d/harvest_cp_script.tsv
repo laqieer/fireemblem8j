@@ -1,0 +1,7 @@
+AiFindSafestReachableLocation
+AiFindTargetInReachByCharId
+AiFindTargetInReachByClassId
+AiLocationIsPillageTarget
+AiSetDecision
+AiUpdateDecision
+AiIsInShortList

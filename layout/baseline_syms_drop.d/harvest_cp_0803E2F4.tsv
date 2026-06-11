@@ -1,0 +1,8 @@
+FillMovementAndRangeMapForItem
+GetItemMight
+AiTryDoCombatInRangeFromPosition
+AiTryDoStealAdjacent
+UpdateAllPhaseHealingAIStatus
+AiClearDecision
+AiExecFallbackScriptA
+AiTryExecScriptA

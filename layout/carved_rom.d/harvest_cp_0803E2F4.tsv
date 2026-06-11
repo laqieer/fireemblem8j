@@ -1,0 +1,7 @@
+03E284	03E3D8	src/cp_0803E2F4_0803E284.o(.text)	cp_0803E2F4_0803E284(run): AiInitDangerMap, AiFillDangerMap
+03EDDC	03EF70	src/cp_0803E2F4_0803EDDC.o(.text)	cp_0803E2F4_0803EDDC(run): AiTryDoStealAdjacent, AiTryDoCombatInRangeFromPosition
+03F720	03F7BC	src/cp_0803E2F4_0803F720.o(.text)	cp_0803E2F4_0803F720(run): AiFunc_TryHealStaffByChance, AiFunc_TrySpecialItemsByChance
+03E5D0	03E628	src/cp_0803E2F4_0803E5D0.o(.text)	cp_0803E2F4_0803E5D0(run): UpdateAllPhaseHealingAIStatus
+03E6A8	03E760	src/cp_0803E2F4_0803E6A8.o(.text)	cp_0803E2F4_0803E6A8(run): AiTryHealSelf
+03F4AC	03F570	src/cp_0803E2F4_0803F4AC.o(.text)	cp_0803E2F4_0803F4AC(run): AiFunc_FindLeaderCombatTarget
+03F648	03F6BC	src/cp_0803E2F4_0803F648.o(.text)	cp_0803E2F4_0803F648(run): AiIsUnitEnemyInDirectionOfTarget
