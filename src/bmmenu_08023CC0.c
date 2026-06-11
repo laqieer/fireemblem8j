@@ -1,5 +1,4 @@
 #include "global.h"
-
 #include "hardware.h"
 #include "fontgrp.h"
 #include "uimenu.h"
@@ -48,20 +47,10 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 
-extern u16 gBattleForecast_2[];
+u8 TalkSelection_OnSelect(ProcPtr proc, struct SelectTarget* target) {
 
-extern u8 gSummonConfig[4][2];
-
-
-
-
-
-
-
-u8 RescueSelection_OnSelect(ProcPtr proc, struct SelectTarget* target) {
-
+    gActionData.unitActionType = UNIT_ACTION_TALK;
     gActionData.targetIndex = target->uid;
-    gActionData.unitActionType = UNIT_ACTION_RESCUE;
 
     return MENU_ACT_SKIPCURSOR | MENU_ACT_END | MENU_ACT_SND6A | MENU_ACT_CLEAR;
 }
