@@ -28,3 +28,4 @@ PrepScreenProc_HideEverythingAndUnlockGame
 ResetLinkArenaUiBlend
 EndPrepItemScreenFace
 PrepScreenProc_Cleanup
+GetWMPointDistance
