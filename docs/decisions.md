@@ -2420,3 +2420,64 @@ masked-split verified run (region-different codegen / non-contiguous), plus hard
 genuine region-diff). These need hand-decomp (IDA/Ghidra), deferred. Pushed `feat/wave2-B`. Siblings own
 scene/bmbattle/opanim (wave2-A) + mu/bmlib/bmmenu (wave2-C) — not touched. (D-number assigned from the free
 sequence; renumber at integration if a concurrent sibling claimed D52.)
+
+## D54 — wave3-A: opanim-main/scene/statscreen harvest +37; TWO func_only resolver fixes + the masked-carve carved_ram drop bug (2026-06-11)
+
+**Context.** Branch `feat/wave3-A` (sibling to the wave/wave2 waves; distinct D-number). Scope: the
+D41-flagged partial-TU remainders `opanim-main` (a prior wave2-A agent's opanim work was LOST — redone here),
+`scene`, `statscreen`. Applied the COMPLETE D41-D53 toolkit per TU: `graduate_shared_run.py` (D51 masked-split /
+stranded-section), `subrun_decompose.py` (D52 src_cov asm-gap sub-runs), `harvest_verified_runs.py` /
+`bind_tu_data.py` (func_only ABS-bind). All three TUs were dominated by `src_cov` (masked-split / sub-run)
+runs — `harvest_verified_runs --list` surfaced essentially nothing carvable directly.
+
+**RESULT — +37 matching-C (3670 → 3707, 43.03% → 43.47%); self-containment held 100% (0 incbins).** Per TU
+(all gated: `rm -f src/*.s` + `make check` + `make compare` + `make clean && make compare` +
+`check_selfcontained.py` == 0; named from US; verify-or-revert; staged explicitly, NO `git add -A`;
+baserom/checksum/CI untouched):
+  * **opanim-main: 5 runs / 16 fns, 0 reverts.** 1 masked-split via `graduate_shared_run` (080CD474:
+    OpAnimFadeToBlack/OpAnimScrollBg3Loop, dropping masked_080cd4f0) + 4 `subrun_decompose` sub-runs
+    (080CBDBC=5 BldAlpha/UpdateScreen/WorldMapfx clusters, 080CC2C0=5 PreparefxEphraim/MergeBGProc/SplitLine,
+    080CC0CC=2, 080CC810=2). The clean D44 animation class.
+  * **scene: 3 runs / 6 fns** via `subrun_decompose` (08006A14=3 TalkPrintColor/SkipListener/OnInit,
+    08008004=2, 08006954=1 StartTalkMsgExt leading-block). 1 DEFERRED zero-risk: `scene_080080A4` (6 fns,
+    ClearTalkBubble/ClearPutTalkText/ClearTalkText/PutTalkBubble/StartOpenTalkBubble/TalkBubbleOpen_OnIdle).
+  * **statscreen: 5 runs / 17 fns.** 1 masked-split via `graduate_shared_run` (0808B3DC=8 HelpBox-move cluster,
+    dropping masked_0808b528) + 4 `subrun_decompose` sub-runs (0808B128=4, 0808AEA0=3, 0808AFF0=1, 0808B0A0=1).
+    1 DEFERRED zero-risk: `statscreen_08089B58` (9 fns, DisplayPage/PageSlide/GlowBlend).
+
+**THREE generally-reusable toolkit fixes (all oracle-gated, verify-or-revert):**
+1. **`port_run._try_decl`: a leading `#include`/`#define` line in the same depth-0 segment dropped the FIRST
+   extern after it.** scene's `extern u8 CONST_DATA Img_TalkBubbleOpening_A[];` sits immediately after
+   `#include "constants/songs.h"`; a preprocessor directive has no terminating `;`, so it leaked into the SAME
+   depth-0 statement segment as that decl. `_try_decl`'s `head.startswith("#")` bail then returned None for
+   `_A` (its siblings `_B`.._E`, segmented by the preceding `;`, resolved fine) → `subset compile failed`.
+   FIX: strip leading `#...` directive lines from `head` (regex `(?m)^\s*#.*$`) instead of bailing.
+2. **`port_run._try_decl`: `extern` not stripped from the type spec → `extern extern u8 X[];` (invalid C).** A
+   US file-scope decl is often ALREADY `extern u8 CONST_DATA X[];` (a forward decl of an asset defined
+   elsewhere); the synthesized extern re-prepended `extern`. FIX: add `extern` to the storage-class strip list
+   (alongside static/CONST_DATA/EWRAM_*) — `extern` is never part of a type, so dropping it is always safe.
+3. **`graduate_shared_run.py`: dropping a masked carve left its `carved_ram.d/masked_layer.tsv` rows dangling
+   → `ld: cannot find src/masked_*.o`.** A masked carve that owns EWRAM/.bss storage lists BOTH a carved_rom
+   `(.text)` row AND carved_ram `(ewram_data)`/`(ewram_bss)` rows keyed on the SAME `.o`. The graduator dropped
+   only the rom row + deleted the `.o`, so `make layout` kept the ram rows referencing the now-deleted object
+   (this was the ONLY blocker for statscreen_0808B3DC — content-diff=0, byte-perfect body). FIX: new
+   `drop_obj_rows()` removes EVERY row in carved_ram.d/masked_layer.tsv whose object field references the `.o`
+   (any section), called from the masked-drop path. Byte-safe: the dropped EWRAM is .bss (zero-init, no ROM
+   bytes); the func_only/dedup path binds its symbol at the masked carve's JP address; `make compare` confirms.
+   Benefits ANY future masked-split graduation whose masked carve owns EWRAM storage. Recovered
+   statscreen_0808B3DC (+8).
+
+**The two DEFERS are both D43 Class C (relocated `.rodata` interleaved in a LOADABLE DATA-agent frontier
+blob).** Confirmed by PORTRUN_DEBUG: each has content-diff=0 (byte-perfect body) but `overlap/order error` —
+`scene_080080A4`'s `.rodata`@0x80DC52C (6 pointer relocs to Img_TalkBubbleOpening_*) and
+`statscreen_08089B58`'s `.rodata`@0x81F54DC (4 relocs) both fall inside the loadable blob
+`frontier_df4_misc_lo` (0x80DC3DC..0x80DC650 / 0x1F4F60..0x1F5784). NOLOAD-on-overlap (D43-B) can't apply
+(relocs would never emit their bytes); cleanly landing them needs SPLITTING the loadable frontier blob — the
+DATA-agent-entangled D40/D43-C blob-split, high regression risk → DEFERRED at zero risk (the same defer D46
+recorded for statscreen_08089B58). These are NOT region-different codegen.
+
+**Remaining wave3-A frontier.** opanim-main exhausted on the verified-run levers; scene/statscreen have only the
+two Class C defers left in any verified run. The bulk of each TU's ungraduated fns are NOT in any per-function
+verified run (region-different codegen / non-contiguous) → hand-decomp (IDA/Ghidra), deferred. Pushed
+`feat/wave3-A`. Siblings own bmbattle/bmunit/bmitemuse (wave3-B) + banim-efxmagic-*/prep_itemscreen (wave3-C) —
+not touched.

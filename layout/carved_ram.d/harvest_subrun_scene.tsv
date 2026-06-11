@@ -1,0 +1,2 @@
+03000040	iwram	src/scene_08006A14.o(.bss)	scene_08006A14 .bss
+03000040	iwram	src/scene_08008004.o(.bss)	scene_08008004 .bss

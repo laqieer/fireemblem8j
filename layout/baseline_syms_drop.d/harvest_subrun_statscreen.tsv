@@ -1,0 +1,11 @@
+ApplyHelpBoxContentSize
+ApplyHelpBoxPosition
+CloseHelpBox
+ResetHelpBoxInitSize
+SetHelpBoxInitPosition
+StartHelpBoxExt
+StartHelpBoxExt_Unk
+gProcScr_HelpBox
+sLastHbi
+UpdateHelpBoxDisplay
+gProcScr_HelpPromptSpr

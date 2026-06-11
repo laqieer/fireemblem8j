@@ -1,0 +1,3 @@
+006A14	006B38	src/scene_08006A14.o(.text)	scene_08006A14(run): SetTalkPrintColor, TalkSkipListener_OnIdle, Talk_OnInit
+008004	008094	src/scene_08008004.o(.text)	scene_08008004(run): TalkSpriteShiftClear_ClearLine, TalkFlushAllLine
+006954	006974	src/scene_08006954.o(.text)	scene_08006954(run): StartTalkMsgExt

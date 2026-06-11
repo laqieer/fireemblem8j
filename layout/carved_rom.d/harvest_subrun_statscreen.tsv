@@ -1,0 +1,4 @@
+08B128	08B2EC	src/statscreen_0808B128.o(.text)	statscreen_0808B128(run): StartHelpBoxExt, StartHelpBoxExt_Unk, CloseHelpBox...
+08AEA0	08AFC8	src/statscreen_0808AEA0.o(.text)	statscreen_0808AEA0(run): HbRedirect_SSSupports, UpdateHelpBoxDisplay, HelpBox_OnOpen
+08AFF0	08B044	src/statscreen_0808AFF0.o(.text)	statscreen_0808AFF0(run): HelpBox_OnClose
+08B0A0	08B0EC	src/statscreen_0808B0A0.o(.text)	statscreen_0808B0A0(run): StartHelpBox_Unk

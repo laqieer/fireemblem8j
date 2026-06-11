@@ -87,8 +87,15 @@ def _try_decl(head, sym, word):
     # file-scope declaration scanner (D49).
     head = re.sub(r"/\*.*?\*/", " ", head, flags=re.S)
     head = re.sub(r"//[^\n]*", " ", head)
+    # A preprocessor directive (`#include`/`#define`/...) has no terminating `;`, so
+    # it leaks into the SAME depth-0 segment as the following declaration (e.g. the
+    # `#include "constants/songs.h"` line just above scene.c's `extern u8 CONST_DATA
+    # Img_TalkBubbleOpening_A[];`). Drop any leading `#...` lines rather than bailing
+    # on `head.startswith("#")` (which dropped the FIRST extern after a #include while
+    # later siblings, segmented by the preceding `;`, resolved fine).
+    head = re.sub(r"(?m)^\s*#.*$", " ", head)
     head = head.strip()
-    if not head or head.startswith("#"):
+    if not head:
         return None
     # The declarator is everything up to the initializer.
     decl = head.split("=", 1)[0]
@@ -107,8 +114,11 @@ def _try_decl(head, sym, word):
     # a '(' before sym => function decl / call / macro => not an object
     if "(" in spec:
         return None
-    for kw in ("static", "CONST_DATA", "EWRAM_DATA", "EWRAM_BSS", "EWRAM_OVERLAY",
-               "IWRAM_DATA", "ALIGNED"):
+    # `extern` too: a US file-scope decl is often ALREADY `extern u8 CONST_DATA X[];`
+    # (a forward decl of an asset defined elsewhere) -> stripping it avoids emitting
+    # the invalid `extern extern u8 X[];`.
+    for kw in ("extern", "static", "CONST_DATA", "EWRAM_DATA", "EWRAM_BSS",
+               "EWRAM_OVERLAY", "IWRAM_DATA", "ALIGNED"):
         spec = re.sub(r"\b" + kw + r"\b(?:\(\d+\))?", "", spec)
     spec = " ".join(spec.split())
     if not spec or spec == "const":
