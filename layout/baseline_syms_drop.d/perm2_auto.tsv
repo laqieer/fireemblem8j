@@ -29,3 +29,13 @@ ResetLinkArenaUiBlend
 EndPrepItemScreenFace
 PrepScreenProc_Cleanup
 GetWMPointDistance
+MapMUPrim_RemoveLinkedMapUnit
+MapUnitC_DeleteGmapUnit
+SALLYCURSOR_RemoveSupplyUnit
+InitSupportSubScreenPartnerLevels
+TryRelocateHbDown
+TryRelocateHbLeft
+TryRelocateHbUp
+EndTargetSelection
+HbPopulate_AutoItem
+CheckSomethingSaveRelated
