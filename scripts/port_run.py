@@ -315,8 +315,15 @@ def port(name, exclude=(), runs=None, src_tu=None, frag=None, func_only=False,
                 for sym in sorted(und):
                     seen.add(sym)
                     decl = _us_extern_decl(us_src, sym)
-                    if decl:
+                    # An enum constant resolves to its WHOLE `enum {...};` block;
+                    # several undeclared constants from the SAME enum return the
+                    # identical block -> dedup or agbcc errors `redefinition of X`.
+                    if decl and decl not in prepend:
                         prepend.append(decl)
+                        added = True
+                    elif decl:
+                        # the decl (e.g. a shared enum block) is already prepended;
+                        # this symbol is now declared -> count as progress.
                         added = True
                 if not added:
                     break

@@ -2020,3 +2020,59 @@ verify-or-revert, per-run fragments, NO `git add -A`. Pushed `feat/scale-1`.
 **Remaining scale-1 frontier.** bmmenu: the 68 ungraduated fns NOT in any verified run (region-different codegen or
 non-contiguous) — needs hand-decomp / IDA-Ghidra, deferred. bmlib: bmlib_08012F94 (Class C/D region-diff) +
 the skip-shared-asm runs (need a run-decomposition/blob-split step, D40/D43-deferred).
+
+## D46 — next-1: scene/statscreen harvest +34 via THREE new extract/resolve fixes (comment-strip, #define, enum-dedup) + the stranded-section graduation (2026-06-11)
+
+**Context.** Branch `feat/next-1` (sibling to bind-1/bind-2/scale-1/scale-2). Scope: the D41/D42-flagged partial
+TUs `scene` (73 ungraduated) and `statscreen` (64 remainder), via the COMPLETE D41-D45 toolkit
+(`harvest_verified_runs.py` dedup_globals, `bind_tu_data.py` func_only ABS-bind). On first pass BOTH TUs harvested
++2 only — every other verified run reverted with `subset compile failed` (the func_only path failing to compile),
+NOT a region-diff. Root-caused each failure to a fixable extract/resolve bug, NOT a deferred structural class.
+
+**RESULT — +34 matching-C (3192 -> 3226, 37.43% -> 37.83%), self-containment held 100%.**
+  * **scene: +15** (scene_080067B0=4, scene_08006CA4=7, scene_08007CE4=4) — all recovered via `bind_tu_data.py`
+    func_only after the two extractor fixes below. +37 ABS data binds (sTalkState, Pal_Talk*, the gProcScr_Talk*
+    proc-scripts, etc.).
+  * **statscreen: +19** (statscreen_0808A2A0=2 via harvest_verified_runs; statscreen_0808A450=15 +
+    statscreen_0808ADCC=2 via the stranded-section graduation below, after the enum-dedup fix).
+
+**THREE generally-useful toolkit fixes (all oracle-gated, verify-or-revert):**
+1. **`extract_func_only.py` comment-strip in the helper-prototype scan.** The signature-capture region
+   (`src[s-400:e].split('{')[0]`) included the preceding `//! FE8U = 0x...` annotation; the `[A-Za-z_]` start
+   latched onto the `x` of the `0x...` literal, emitting invalid C `x08007838 int SetActiveTalkFace(int)` ->
+   `subset compile failed`. FIX: strip `//` and `/* */` comments from the region before the regex. (Unblocked
+   scene_080067B0.)
+2. **`extract_func_only.py` keep TU-private `#define` macros REFERENCED by the bodies.** The extractor kept only
+   `#include` lines and DROPPED file-scope `#define`s, so scene's function-like `TALK_TEXT_BY_LINE(line)` macro
+   (the D42-noted blocker) looked like an `implicit declaration of function` -Werror failure. FIX: collect
+   top-level `#define`s and emit the ones the extracted bodies reference (referenced-only, so an unused header
+   macro isn't redefined). (Unblocked scene_08006CA4, scene_08007CE4.)
+3. **`port_run.py` func_only undeclared-resolver: dedup the prepended enum block.** statscreen's 9 `PAGENUM_*`
+   constants all live in ONE anonymous file-local `enum {...};`. `_us_extern_decl` correctly returns the WHOLE
+   enum block for an enum constant, but the resolver appended it ONCE PER undeclared constant -> agbcc
+   `redefinition of PAGENUM_SELECT_XOFF` (9 copies). FIX: `if decl and decl not in prepend` (and count an
+   already-prepended shared block as progress). (Unblocked statscreen_0808A450's 15-fn run.)
+
+**The stranded-section graduation (statscreen).** statscreen's three largest verified runs were `skip-shared-asm`:
+each overlaps ONE `asm/stranded_statscreen.o(.text.s_XXXX)` row — a real-named function (`PageNumCtrl_CheckSlide`,
+`PageSlide_OnEnd`, `HbRedirect_SSItem`) gbadisasm parked in a SHARED 4-section asm file, which the harvesters
+conservatively treat as non-graduatable. But each `.text.s_XXXX` is an INDEPENDENT `.section` with its own
+`.global`/`.incbin`, and the verified run's C subset PROVIDES that exact function. So graduating a run can safely
+drop just that one section: remove the matching `.section ... .text.s_XXXX` block from `asm/stranded_statscreen.s`
+AND its row from `stranded_func_statscreen.tsv` (the other 3 sections still assemble + place), then func_only-carve
+the run (the C supersedes it). Done via a one-off helper (full snapshot/verify-or-revert). Graduated
+statscreen_0808A450 (15 fns, incl. PageNumCtrl_CheckSlide) + statscreen_0808ADCC (2 fns, incl. HbRedirect_SSItem;
+its reloc-free `.rodata`@0x81F550A NOLOAD'd per D43-B). REVERTED at zero risk: statscreen_08089B58 (9 fns) — body
+byte-matches (content-diff=0) but its relocated `.rodata`@0x81F54DC (4 pointer relocs) is interleaved inside an
+already-carved LOADABLE DATA-agent frontier blob (`frontier_df4_misc_lo` 0x1F4F60..0x1F5784) -> overlap/order
+error; reloc'd so NOLOAD can't apply -> exactly D43 Class C (blob-split, DATA-agent-entangled, DEFERRED).
+
+**Takeaway.** For partial TUs whose verified runs revert with `subset compile failed` (not a `make compare`
+mismatch), the failure is almost always a func_only extract/resolve gap (leaked comment text, dropped helper
+macro, duplicated enum block), NOT region-different codegen — root-cause + fix the extractor/resolver and the
+byte-matching body graduates. These three fixes are general and benefit every future TU. The stranded-section
+graduation is also generalizable (any TU with a `stranded_*.o` of independent per-function sections) and could be
+folded into harvest_verified_runs as a follow-up. Remaining frontier: scene/statscreen skip-shared-asm runs whose
+`.rodata` is entangled in a loadable frontier blob (Class C, deferred). All work `make check` (after rm -f
+src/*.s) + `make compare` + `make clean && make compare` + self-containment-100% gated, per-run fragments, NO
+`git add -A`. Siblings own mu/worldmap_rm + bmdebug/savedraw/prep_itemsupply — not touched.

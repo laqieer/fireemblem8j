@@ -42,6 +42,7 @@ def skip_string(i, q):
 # Collect the leading #include / #define block (header), and each top-level
 # function body span. We walk top level tracking brace depth.
 includes = []
+defines = []         # (macro_name, full #define text) -- TU-private helper macros
 spans = []           # (name, start, end)
 i = 0
 depth = 0
@@ -58,6 +59,10 @@ while i < n:
         line = src[i:line_end]
         if depth == 0 and re.match(r"#\s*include", line):
             includes.append(line.rstrip("\n"))
+        elif depth == 0:
+            md = re.match(r"#\s*define\s+([A-Za-z_]\w*)", line)
+            if md:
+                defines.append((md.group(1), line.rstrip("\n")))
         i = line_end
         if depth == 0:
             seg_start = i
@@ -117,20 +122,37 @@ for nm, s, e in spans:
     if nm in wanted:
         bodies.append((s, src[s:e].lstrip("\n")))
 bodies.sort()
+body_text = "\n".join(b for _, b in bodies)
+
+# TU-private helper #defines (e.g. scene's function-like TALK_TEXT_BY_LINE) that
+# the headers do NOT provide: emit only the ones the extracted bodies REFERENCE,
+# so a referenced macro doesn't look like an undeclared function (an
+# `implicit declaration of function TALK_TEXT_BY_LINE` -Werror failure). Limiting
+# to referenced names avoids redefining a header macro the run doesn't use.
+for mname, mtext in defines:
+    if re.search(r"\b" + re.escape(mname) + r"\b", body_text):
+        out.append(mtext)
+if any(re.search(r"\b" + re.escape(m) + r"\b", body_text) for m, _ in defines):
+    out.append("")
 
 # same-file helper prototypes: any wanted-func body calls a same-file function
 # defined AFTER it -> emit a prototype. Best-effort: emit prototypes for all
 # same-file funcs the bodies reference and that are defined later.
 proto_lines = []
-body_text = "\n".join(b for _, b in bodies)
 for nm, s, e in spans:
     if nm in wanted:
         continue
     if re.search(r"\b" + re.escape(nm) + r"\s*\(", body_text):
-        sig = src[:s]
-        # find this function's signature (text before its body's '{')
+        # find this function's signature (text before its body's '{').
+        # Strip // and /* */ comments first: a preceding `//! FE8U = 0x...`
+        # annotation otherwise leaks into the captured signature (the
+        # `[A-Za-z_]` start can latch onto the `x` of a `0x...` literal),
+        # producing invalid C like `x08007838 int Foo(int)` -> compile fail.
+        region = src[max(0, s - 400):e].split("{")[0]
+        region = re.sub(r"//[^\n]*", "", region)
+        region = re.sub(r"/\*.*?\*/", "", region, flags=re.S)
         m = re.search(r"([A-Za-z_][\w\s\*]*?\b" + re.escape(nm) + r"\s*\([^;{]*\))\s*$",
-                      src[max(0, s - 400):e].split("{")[0])
+                      region)
         if m:
             proto = re.sub(r"\s+", " ", m.group(1).strip())
             proto_lines.append(proto + ";")
