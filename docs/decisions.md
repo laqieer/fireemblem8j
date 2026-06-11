@@ -1948,3 +1948,36 @@ duplicate-global (now auto-fixed), overlapping-section (now auto-fixed), and the
 then NOLOAD the run's `.data`); bmidoten (Class D — reconcile the `gBmMap*` −4 binding without regressing cp_perform).
 Both are higher-risk structural work, explicitly deferred; minimap is exhausted. All bind-2 work `make check` +
 `make compare` + `make clean && make compare` + self-containment-100% gated, verify-or-revert, NO `git add -A`.
+
+## D45 — scale-1: the rich menu/lib TUs deliver ~big yield via the COMPLETE D41-D43 toolkit (bmmenu +63 / bmlib +11) (2026-06-11)
+
+**Context.** Branch `feat/scale-1` (sibling to bind-1/bind-2; D44 taken by a concurrent sibling). Scope: the two
+RICHEST D41-flagged partial TUs — `bmmenu` (179 US-C fns, 21 graduated, 158 ungraduated, all no-funcmap) and
+`bmlib` (162 US-C fns, 87 graduated, 75 ungraduated). Tested whether applying the FULL D41/D42/D43 toolkit
+(`harvest_verified_runs.py` dedup_globals + reloc-free NOLOAD-on-overlap, THEN `bind_tu_data.py` func_only ABS-bind)
+to a rich TU clears the "body byte-matches, only a reference/placement issue" frontier en masse.
+
+**RESULT — +74 matching-C (2575 -> 2649, 30.19% -> 31.06%), self-containment held 100%.**
+  * **bmmenu: 25 runs / 63 fns.** harvest_verified_runs (dedup_globals) landed 24 runs / 59 fns in one pass (the
+    32 verified runs split into many small graduate-asm blocks — 8/4/4/4/4/4/3/3/3/3/2×7/1×9). The ONE harvest
+    revert (`bmmenu_0802346C`, 4 fns) was then recovered by `bind_tu_data.py` func_only (+2 ABS data binds) — a
+    clean demonstration that the func_only path complements dedup_globals on the unplaced-static class. Net: 0
+    unrecovered blockers.
+  * **bmlib: 7 runs / 11 fns.** Fewer clean graduate-asm runs (most of bmlib's 75 ungraduated fns don't form
+    per-function-gbadisasm-only verified runs — they're skip-shared-asm or region-different). The ONE revert
+    (`bmlib_08012F94`, 3 fns) reverts under BOTH dedup_globals AND func_only -> a genuine region-different blocker
+    (D43 Class C/D), left reverted at zero risk (deferred).
+
+**Takeaway (validates D42/D43 at scale).** The "richest TU" hypothesis HOLDS for menu-shaped code: bmmenu's 158
+ungraduated fns yielded 63 (40%) with zero hand-decompilation — the run-fragmentation that capped earlier TUs at
+~15/TU does NOT cap a TU with this many small independent menu-command/usability/effect functions, because each
+small run graduates independently. lib-shaped code (bmlib) yields less because its ungraduated remainder is
+genuinely region-different / shared-asm-entangled, not unplaced-static. The two harvesters are COMPLEMENTARY: run
+dedup_globals first (lands the bulk), then func_only (recovers the unplaced-static reverts). All gbadisasm asm
+graduated to byte-matching C named from US (SummonCommandEffect, YobimaCommandEffect, ItemSubMenu_*, FadeCore_*,
+StaffItemSelect_*, MapMenu_*, etc.). Gated: make check + make compare + make clean && make compare + self-cont 100%,
+verify-or-revert, per-run fragments, NO `git add -A`. Pushed `feat/scale-1`.
+
+**Remaining scale-1 frontier.** bmmenu: the 68 ungraduated fns NOT in any verified run (region-different codegen or
+non-contiguous) — needs hand-decomp / IDA-Ghidra, deferred. bmlib: bmlib_08012F94 (Class C/D region-diff) +
+the skip-shared-asm runs (need a run-decomposition/blob-split step, D40/D43-deferred).
