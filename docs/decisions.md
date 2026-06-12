@@ -3596,3 +3596,36 @@ the `Events_WM_Beginning`/`Events_WM_ChapterIntro` arrays from the same fe8u TU 
 0x907F78 but are structurally region-different — JP's `Events_WM_Beginning[0]` is non-NULL, unlike US — so they
 need their own investigation, not a naive extend. `gWMNodeData`/`gWMNodeIconData` and `gTacticianTextConf` are
 real typed tables but pointer-/text-ID-heavy region-different, deferred.)
+## D83 — mcHi2: hi-addr (>=0x8067584) mechanical re-sweep — +210 matching-C via reloc-resolve + CF data-bind; the no-worklist funclib pool is the big find (2026-06-12)
+
+**Context.** Branch `feat/mcHi2` (re-sweep of the killed mcMechHi range). Scope: every `asm/sub_<addr>.s` with
+addr >= 0x8067584 (996 files at start). Levers: `perm2_graduate.py` (reloc-resolve NEAR->carve), per-function
+func_only+ABS-data-bind (the `CF:agbcc` bucket), `perfrag_carve.py` (region-same). `make compare` sole oracle,
+verify-or-revert every batch; cold build + check_selfcontained==0 + ROM==16MB gated each commit.
+
+**RESULT — +210 matching-C (73.91% -> 76.37%, 6513/8528); 996 -> 786 asm files in range; self-contained 100%.**
+  * **perm2 reloc-resolve on RD-in-range worklist: +21** (batch1 +5, batch2-6 +16). Of 521 RD-in-range, only ~37
+    probed NEAR (reloc-resolvable region-same); the rest split CF:agbcc (211), FAR-body (160), LEN-mismatch (113).
+  * **cf_bind (func_only + port_run ABS data-bind) on the CF:agbcc bucket: +2 pilot + +85 big run = +87.** The
+    `CF:agbcc` perm2-skip is NOT region-different — it's func_only dropping a TU-private data ref (gProcScr_*, sFoo*)
+    that agbcc -Werror rejects as undeclared. port_run.port(func_only=True) auto-binds each dropped data sym as ABS
+    baseline_syms at its JP literal-pool addr and the (already-byte-matching) body links. ~50% hit-rate; the misses
+    are genuine region-diff (link byte-mismatch) or the D42/D46 incomplete-TU-private-TYPE residual (`struct UnkXX`
+    field with no header def — func_only can't synthesize it; 20 of the CF pool).
+  * **THE BIG FIND — the no-worklist funclib pool: +73 NEAR + +29 CF = +102.** 252 funclib-named functions in range
+    were in NEITHER the RD nor region-same classifier worklists (D54 only classified the nofuncmap US-C set). Probing
+    them: 118 NEAR, 32 CF, 8 FAR, 10 LEN, 84 NOTU/NOEXTRACT. Carved 73 NEAR (perm2 with `find_tu` monkeypatched to an
+    explicit name->tu map) + 29 CF (cf_bind same patch). The classifier worklists are INCOMPLETE for relocated
+    funclib-named functions; always probe the no-worklist named pool directly.
+
+**OPERATIONAL NOTES.** (1) cf_bind big run = 185 candidates serial (port_run does its own make compare per fn) ~80
+min; the NEAR batch via perm2's batched-verify (one build + self-correcting revert loop) is far faster — prefer it.
+(2) perm2's verify loop bails "RED but no offender" on multiple-def-where-owner==sym (a NEAR fn already provided by a
+sibling TU-run carve); recovery = reset --hard to the green HEAD, drop the colliders (detect via `nm` over existing
+src/*.o, AFTER removing stale .o from the failed run), re-run. (3) git status races a concurrent `make layout` and
+transiently reads empty/partial — confirm carve counts via `ls layout/carved_rom.d/cfbind_*.tsv` on a settled tree.
+
+**RESIDUE (786 asm in range, all non-reachable by these mechanical levers).** 413 RD-worklist-named (FAR-body
+constant-diff = constDiff sibling's domain; + LEN-mismatch + incomplete-type), 181 not-in-RD-named (FAR/NOTU/
+NOEXTRACT), 192 unnamed (pure-JP / data / local-label, not US-C-portable). The reloc-resolve / region-same /
+CF-bindable reachable set is exhausted for this range. Pushed `feat/mcHi2`. No PR.

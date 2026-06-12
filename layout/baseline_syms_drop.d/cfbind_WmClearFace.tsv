@@ -1,0 +1,5 @@
+ApplyFacePalette
+DecompressFaceImg
+GetWMFaceBg
+GetWMFaceVramOffset
+WmClearFace

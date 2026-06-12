@@ -1,0 +1,4 @@
+GetWMFaceBg	080BD158	thumb	WmClearFace
+GetWMFaceVramOffset	080BD174	thumb	WmClearFace
+DecompressFaceImg	08006600	thumb	WmClearFace
+ApplyFacePalette	08006620	thumb	WmClearFace
