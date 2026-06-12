@@ -1,0 +1,7 @@
+068EB0	068EDC	src/StartSubSpell_efxMaohFlashWOUT.o(.text)	StartSubSpell_efxMaohFlashWOUT(run): StartSubSpell_efxMaohFlashWOUT
+068F70	068FB8	src/StartSubSpell_efxMaohFlashBGCOL.o(.text)	StartSubSpell_efxMaohFlashBGCOL(run): StartSubSpell_efxMaohFlashBGCOL
+069574	0695C4	src/StartSubSpell_efxMaohFlashThunderOBJ.o(.text)	StartSubSpell_efxMaohFlashThunderOBJ(run): StartSubSpell_efxMaohFlashThunderOBJ
+068B84	068BE0	src/StartSubSpell_efxMaohFlashBG2.o(.text)	StartSubSpell_efxMaohFlashBG2(run): StartSubSpell_efxMaohFlashBG2
+068A78	068B00	src/StartSubSpell_efxMaohFlashBG1.o(.text)	StartSubSpell_efxMaohFlashBG1(run): StartSubSpell_efxMaohFlashBG1
+068CB4	068D3C	src/StartSubSpell_efxMaohFlashBG3.o(.text)	StartSubSpell_efxMaohFlashBG3(run): StartSubSpell_efxMaohFlashBG3
+068DAC	068E34	src/StartSubSpell_efxMaohFlashBG4.o(.text)	StartSubSpell_efxMaohFlashBG4(run): StartSubSpell_efxMaohFlashBG4

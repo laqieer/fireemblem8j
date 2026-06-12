@@ -1,0 +1,5 @@
+080E3A8E	rom	src/StartSubSpell_efxMaohFlashBGCOL.o(.rodata)	StartSubSpell_efxMaohFlashBGCOL .rodata region-diff (incbin)
+080E39EC	rom	src/StartSubSpell_efxMaohFlashBG2.o(.rodata)	StartSubSpell_efxMaohFlashBG2 .rodata region-diff (incbin)
+080E3958	rom	src/StartSubSpell_efxMaohFlashBG1.o(.rodata)	StartSubSpell_efxMaohFlashBG1 .rodata region-diff (incbin)
+080E3A0C	rom	src/StartSubSpell_efxMaohFlashBG3.o(.rodata)	StartSubSpell_efxMaohFlashBG3 .rodata region-diff (incbin)
+080E3A44	rom	src/StartSubSpell_efxMaohFlashBG4.o(.rodata)	StartSubSpell_efxMaohFlashBG4 .rodata region-diff (incbin)
