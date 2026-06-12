@@ -1,0 +1,5 @@
+087F48	088098	src/events_script_utils_08087F48.o(.text)	events_script_utils_08087F48(run): DisplayEventMapAnim
+088098	0880D4	src/events_script_utils_08088098.o(.text)	events_script_utils_08088098(run): DrawEventMapAnimMaskfx
+0880D4	088114	src/events_script_utils_080880D4.o(.text)	events_script_utils_080880D4(run): DrawEventMapAnimMaskfxTsa
+088114	088160	src/events_script_utils_08088114.o(.text)	events_script_utils_08088114(run): EventMapAnim_Init
+088160	088250	src/events_script_utils_08088160.o(.text)	events_script_utils_08088160(run): EventMapAnim_SlideSquaresInLoop
