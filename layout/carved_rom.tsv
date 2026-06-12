@@ -1051,6 +1051,9 @@
 861232	8612F5	asm/dat_worldmap_gmapunit_p1133.o(.rodata.dat_worldmap_gmapunit_p1133)	dat_worldmap_gmapunit_p1133 region-same per-sym shifted (0KB)
 861336	86147B	asm/dat_worldmap_gmapunit_p1134.o(.rodata.dat_worldmap_gmapunit_p1134)	dat_worldmap_gmapunit_p1134 region-same per-sym shifted (0KB)
 8614BC	8617C8	asm/dat_worldmap_gmapunit_p1135.o(.rodata.dat_worldmap_gmapunit_p1135)	dat_worldmap_gmapunit_p1135 region-same per-sym shifted (0KB)
+8582BC	85B6BC	asm/dat_gCharacterData_ref.o(.rodata.dat_gCharacterData_ref)	gCharacterData region-diff (funcmap code-ref, 13KB)
+85E068	85FD60	asm/dat_gItemData_ref.o(.rodata.dat_gItemData_ref)	gItemData region-diff (funcmap code-ref, 7KB)
+85FD60	8617C8	src/data/data_terrains.o(.data)	data_terrains typed C: battle/combat terrain LUTs (movement-cost per class Normal/Rain/Snow, avoid/def/res bonuses, heal amount+status, banim terrain ground + BG LUTs); region-same prefix of fe8u src/data_terrains.c (replaces 10 misattributed dat_worldmap_gmapunit_p112x..p1135 per-sym carves that were actually these terrain symbols)
 861950	901138	asm/dat_data_portrait.o(.rodata.dat_data_portrait)	dat_data_portrait region-same shifted (637KB)
 902440	902538	src/data/data_itemuse.o(.data)	data_itemuse typed C: ItemEffectiveness_* class lists + gItemUseJidList_* promotion tables (region-diff: ArmorAndHorse drops 4 classes vs fe8u); pointees for gItemData.pEffectiveness
 903138	903450	asm/dat_worldmap_gmapunit_p1290.o(.rodata.dat_worldmap_gmapunit_p1290)	dat_worldmap_gmapunit_p1290 region-same per-sym shifted (0KB)
