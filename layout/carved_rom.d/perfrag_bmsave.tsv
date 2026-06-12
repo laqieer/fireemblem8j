@@ -1,0 +1,10 @@
+0A9784	0A97A0	src/bmsave_080A9784.o(.text)	bmsave_080A9784(run): WriteBonusContentClaimFlags
+0A97A0	0A97C4	src/bmsave_080A97A0.o(.text)	bmsave_080A97A0(run): ReadBonusContentClaimFlags
+0A9C44	0A9C64	src/bmsave_080A9C44.o(.text)	bmsave_080A9C44(run): ReadGameSavePlaySt
+0A9C64	0A9C8C	src/bmsave_080A9C64.o(.text)	bmsave_080A9C64(run): LoadSavedBonusClaimFlags
+0A9C8C	0A9CA8	src/bmsave_080A9C8C.o(.text)	bmsave_080A9C8C(run): LoadSavedWMStuff
+0A9CA8	0A9CD4	src/bmsave_080A9CA8.o(.text)	bmsave_080A9CA8(run): LoadSavedEid8A
+0A9D54	0AA1AC	src/bmsave_080A9D54.o(.text)	bmsave_080A9D54(run): WriteGameSavePackedUnit
+0AA1AC	0AA3F8	src/bmsave_080AA1AC.o(.text)	bmsave_080AA1AC(run): LoadSavedUnit
+0AADA4	0AADC8	src/bmsave_080AADA4.o(.text)	bmsave_080AADA4(run): ReadTraps
+0AADC8	0AADE8	src/bmsave_080AADC8.o(.text)	bmsave_080AADC8(run): GetLastSuspendSaveId
