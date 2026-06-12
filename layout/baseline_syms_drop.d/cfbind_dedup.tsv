@@ -265,3 +265,7 @@ EndSysBlackBoxs
 GetLatestUnitIndexInPrepListByUId
 MakePrepUnitList
 GmTmConfront_LoadPositions
+Img_LinkArenaWarpFx
+Pal_LinkArenaWarpFx
+PutTmAnimFrame
+gMapanimBattleinfo_0
