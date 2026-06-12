@@ -278,3 +278,13 @@ Pal_WretchedAirSprites
 CountUnitsInState
 DecayTraps
 gUidebug_2
+DifficultyMenu_StartCursorMove
+GetChapterTitleExtra
+IsGameNotFirstChapter
+ReadSuspendSavePlaySt
+SaveMenu_SetDifficultyChoice
+gMenuMainObjs_0
+gUnkData_43
+gUnkData_44
+gUnkData_45
+gUnkData_46
