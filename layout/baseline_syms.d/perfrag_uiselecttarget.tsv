@@ -1,0 +1,5 @@
+TargetSelection_GetRealCursorPosition	080506CC	thumb	uiselecttarget_080506E0
+TargetSelection_HandleMoveInput	08050860	thumb	uiselecttarget_080506E0
+TargetSelection_HandleSelectInput	080508D8	thumb	uiselecttarget_080506E0
+GetLinkedTargets	08050A84	thumb	uiselecttarget_080507B0
+gProcScr_TargetSelection	085E073C	data	uiselecttarget_080507B0
