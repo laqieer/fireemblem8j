@@ -202,3 +202,4 @@ src/_diag_*
 
 # Scheduler lock (transient local state; was accidentally tracked)
 /.claude/scheduled_tasks.lock
+asm/msg_data.s
