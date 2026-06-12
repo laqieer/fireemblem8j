@@ -3629,3 +3629,14 @@ transiently reads empty/partial — confirm carve counts via `ls layout/carved_r
 constant-diff = constDiff sibling's domain; + LEN-mismatch + incomplete-type), 181 not-in-RD-named (FAR/NOTU/
 NOEXTRACT), 192 unnamed (pure-JP / data / local-label, not US-C-portable). The reloc-resolve / region-same /
 CF-bindable reachable set is exhausted for this range. Pushed `feat/mcHi2`. No PR.
+
+## D84 — NEXT WAVE COMPLETE: constant-diff carver (+66) + high-addr mechanical re-sweep (+210) + gChapterDataAssetTable → matching-C 73.91%→77.15% (2026-06-12)
+
+**Result.** 3-agent follow-up wave integrated, pushed (`9780f53f0`), cold-green (sha1 `7da0456…`, self-contained 100%):
+- **constDiff +66 (D81)** — built `scripts/const_diff_carve.py` (the D79/D80-proposed lever) and ran it on the small/medium FAR tail. Confirms the thesis: the "FAR" matching-C tail is largely JP-CONSTANT diffs (msg-IDs, jump/string indices), mechanically carveable by substituting the JP literal — NOT hand-decomp. **The tool is committed + reusable.**
+- **mcHi2 +210 (D83)** — high-addr (≥0x8067584) mechanical re-sweep (perm2 reloc-resolve + perfrag region-same + bind_tu CF) finishing the range the contaminated mcMechHi couldn't. Big yield — the never-swept-asm re-sweep (D69 hypothesis) keeps paying.
+- **dataMore +944B (D82)** — gChapterDataAssetTable[236] typed C (JP asset table not 1:1 with fe8u symbol names → synthetic per-index baseline syms from ROM addresses).
+
+Matching-C **73.91% → 77.15%** (6577/8528; ~80.1% of the 8209 ceiling). Self-containment 100%; extracted-data 3.51%; named-symbols ~76%. No main contamination this wave (hardened cwd guards + early detection held). Session arc: matching-C 27.59% → 77.15%, extracted-data 0.14% → 3.51%.
+
+**Next lever (highest yield).** constDiff was only a pilot batch — `scripts/const_diff_carve.py` should be run AT SCALE over the entire remaining FAR tail (both address halves; mcMechLo reported 157 FAR + 226 LEN + 288 CF low-addr, plus mcHi2's high-addr residue). Combined with continued perm2/perfrag/CF re-sweep, the matching-C ceiling looks reachable well beyond 80%. Plus: more typed-data tables, and NAME-data tooling (needs a us_syms.tsv build step).
