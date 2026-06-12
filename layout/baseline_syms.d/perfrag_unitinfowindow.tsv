@@ -1,0 +1,6 @@
+gProcScr_UnitInfoWindow	085C661C	data	unitinfowindow_080346B0
+GetUnitAidIconId	08018804	thumb	unitinfowindow_080349E4
+IsItemHammernable	08016E28	thumb	unitinfowindow_08034D64
+GetItemMaxUses	08017358	thumb	unitinfowindow_08034D64
+DrawUnitHpText	08034904	thumb	unitinfowindow_08034EB8
+DrawUnitStatusText	08034A18	thumb	unitinfowindow_08034F24
