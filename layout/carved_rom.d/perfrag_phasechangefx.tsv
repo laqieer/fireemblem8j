@@ -1,0 +1,10 @@
+01EB00	01EC40	src/phasechangefx_0801EB00.o(.text)	phasechangefx_0801EB00(run): PhaseIntroUnk_Loop
+01EC40	01EC48	src/phasechangefx_0801EC40.o(.text)	phasechangefx_0801EC40(run): PhaseIntroBlendBox_Init
+01EC48	01ED1C	src/phasechangefx_0801EC48.o(.text)	phasechangefx_0801EC48(run): PhaseIntroSquares_InLoop
+01ED1C	01EDF0	src/phasechangefx_0801ED1C.o(.text)	phasechangefx_0801ED1C(run): PhaseIntroSquares_OutLoop
+01EDF8	01EE80	src/phasechangefx_0801EDF8.o(.text)	phasechangefx_0801EDF8(run): PhaseIntroBlendBox_InLoop
+01EE80	01EF04	src/phasechangefx_0801EE80.o(.text)	phasechangefx_0801EE80(run): PhaseIntroBlendBox_OutLoop
+01EF04	01EF24	src/phasechangefx_0801EF04.o(.text)	phasechangefx_0801EF04(run): PhaseIntro_EndIfNoUnits
+01EF24	01F000	src/phasechangefx_0801EF24.o(.text)	phasechangefx_0801EF24(run): PhaseIntro_InitGraphics
+01F000	01F0E8	src/phasechangefx_0801F000.o(.text)	phasechangefx_0801F000(run): PhaseIntro_InitDisp
+01F0E8	01F164	src/phasechangefx_0801F0E8.o(.text)	phasechangefx_0801F0E8(run): PhaseIntro_WaitForEnd
