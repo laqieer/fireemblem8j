@@ -1,0 +1,14 @@
+0152C8	015318	src/bm_080152C8.o(.text)	bm_080152C8(run): OnVBlank
+015318	015384	src/bm_08015318.o(.text)	bm_08015318(run): OnMain
+0153B0	0153F8	src/bm_080153B0.o(.text)	bm_080153B0(run): SwitchPhases
+0153F8	015434	src/bm_080153F8.o(.text)	bm_080153F8(run): CallBeginningEvents
+015434	015458	src/bm_08015434.o(.text)	bm_08015434(run): BmMain_ChangePhase
+015458	015474	src/bm_08015458.o(.text)	bm_08015458(run): BmMain_CheckBeginPhaseEvent
+015474	0154C8	src/bm_08015474.o(.text)	bm_08015474(run): BmMain_StartPhase
+0154C8	0154EC	src/bm_080154C8.o(.text)	bm_080154C8(run): BmMain_ResumePlayerPhase
+015CBC	015D3C	src/bm_08015CBC.o(.text)	bm_08015CBC(run): CamMove_OnLoop
+015D90	015E18	src/bm_08015D90.o(.text)	bm_08015D90(run): EnsureCameraCenteredOnPosition
+015E18	015EA8	src/bm_08015E18.o(.text)	bm_08015E18(run): EnsureCameraOntoPosition
+015EE8	015F4C	src/bm_08015EE8.o(.text)	bm_08015EE8(run): CameraMove_0
+015F9C	015FD4	src/bm_08015F9C.o(.text)	bm_08015F9C(run): StartMapCursorSlide
+01614C	016198	src/bm_0801614C.o(.text)	bm_0801614C(run): StartCamMoveLinear

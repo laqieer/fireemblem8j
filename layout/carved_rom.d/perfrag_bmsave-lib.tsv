@@ -1,0 +1,15 @@
+0A7680	0A76F4	src/bmsave-lib_080A7680.o(.text)	bmsave-lib_080A7680(run): SramInit
+0A7704	0A7740	src/bmsave-lib_080A7704.o(.text)	bmsave-lib_080A7704(run): WipeSram
+0A77EC	0A7814	src/bmsave-lib_080A77EC.o(.text)	bmsave-lib_080A77EC(run): WriteGlobalSaveInfo
+0A7814	0A7828	src/bmsave-lib_080A7814.o(.text)	bmsave-lib_080A7814(run): WriteGlobalSaveInfoNoChecksum
+0A7828	0A78EC	src/bmsave-lib_080A7828.o(.text)	bmsave-lib_080A7828(run): InitGlobalSaveInfodata
+0A78EC	0A7918	src/bmsave-lib_080A78EC.o(.text)	bmsave-lib_080A78EC(run): EraseBonusContentData
+0A7F10	0A7F44	src/bmsave-lib_080A7F10.o(.text)	bmsave-lib_080A7F10(run): GetTotalAverageSupportValue
+0A7F88	0A7FC8	src/bmsave-lib_080A7F88.o(.text)	bmsave-lib_080A7F88(run): GetTotalSupportCollection
+0A7FC8	0A8030	src/bmsave-lib_080A7FC8.o(.text)	bmsave-lib_080A7FC8(run): GetGlobalBestSupport
+0A8030	0A8168	src/bmsave-lib_080A8030.o(.text)	bmsave-lib_080A8030(run): GetGlobalSupportListFromSave
+0A858C	0A881C	src/bmsave-lib_080A858C.o(.text)	bmsave-lib_080A858C(run): GenerateGameRankSaveData
+0A886C	0A8890	src/bmsave-lib_080A886C.o(.text)	bmsave-lib_080A886C(run): EraseSoundRoomSaveData
+0A88E8	0A8914	src/bmsave-lib_080A88E8.o(.text)	bmsave-lib_080A88E8(run): WriteSoundRoomSaveData
+0A89C8	0A89EC	src/bmsave-lib_080A89C8.o(.text)	bmsave-lib_080A89C8(run): EraseLinkArenaStruct2
+0A8A44	0A8A70	src/bmsave-lib_080A8A44.o(.text)	bmsave-lib_080A8A44(run): WriteLinkArenaStruct2

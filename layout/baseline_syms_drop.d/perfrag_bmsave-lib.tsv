@@ -1,0 +1,16 @@
+SetSramFastFunc
+gBoolSramWorking
+WriteGlobalSaveInfo
+WriteGlobalSaveInfoNoChecksum
+InitGlobalSaveInfodata
+WipeSram
+SaveBonusContentData
+GetSupportTalkList
+GetTotalAverageSupportValue
+GetTotalGlobalSupportValue
+FormatTime
+GenerateGameRankSaveData
+GetCurCompleteChapters
+GetGameTotalTime
+WriteSoundRoomSaveData
+WriteLinkArenaStruct2

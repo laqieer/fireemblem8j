@@ -1,0 +1,15 @@
+019194	019294	src/bmmap_08019194.o(.text)	bmmap_08019194(run): InitChapterMap
+019450	01947C	src/bmmap_08019450.o(.text)	bmmap_08019450(run): RefreshChapterMap
+0194BC	019518	src/bmmap_080194BC.o(.text)	bmmap_080194BC(run): BmMapFill
+019584	0195E4	src/bmmap_08019584.o(.text)	bmmap_08019584(run): UnpackChapterMap
+0195E4	01964C	src/bmmap_080195E4.o(.text)	bmmap_080195E4(run): UnpackChapterMapGraphics
+01964C	01967C	src/bmmap_0801964C.o(.text)	bmmap_0801964C(run): UnpackChapterMapPalette
+01973C	0197CC	src/bmmap_0801973C.o(.text)	bmmap_0801973C(run): RefreshTerrainBmMap
+019914	019994	src/bmmap_08019914.o(.text)	bmmap_08019914(run): RenderBmMap
+019994	019A00	src/bmmap_08019994.o(.text)	bmmap_08019994(run): RenderBmMapOnBg2
+019A00	019AE0	src/bmmap_08019A00.o(.text)	bmmap_08019A00(run): UpdateBmMapDisplay
+019AE0	019BAC	src/bmmap_08019AE0.o(.text)	bmmap_08019AE0(run): RenderBmMapColumn
+019BAC	019C78	src/bmmap_08019BAC.o(.text)	bmmap_08019BAC(run): RenderBmMapLine
+019C78	019E4C	src/bmmap_08019C78.o(.text)	bmmap_08019C78(run): RefreshUnitsOnBmMap
+019E4C	019E78	src/bmmap_08019E4C.o(.text)	bmmap_08019E4C(run): RefreshTorchlightsOnBmMap
+019E78	019ECC	src/bmmap_08019E78.o(.text)	bmmap_08019E78(run): RefreshMinesOnBmMap

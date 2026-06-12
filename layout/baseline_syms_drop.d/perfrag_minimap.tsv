@@ -1,0 +1,16 @@
+GetMinimapObjectCellAt
+DrawMinimapInternal
+Minimap_InitProcVars
+InitMinimapWindowBuffers
+InitWindowScanlineBounds
+RasterizeWindowEdge
+ApplyMinimapGraphics
+gGfx_MinimapTiles
+gPal_MinimapTiles
+gPal_Minimap_0
+Minimap_AdjustDisplay
+Minimap_ApplyFlashPalette
+Minimap_ApplyViewportFlashColor
+Minimap_HandleMoveInput
+Minimap_PutViewport
+InitMapForMinimap

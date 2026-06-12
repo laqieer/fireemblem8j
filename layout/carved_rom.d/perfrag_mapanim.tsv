@@ -1,0 +1,13 @@
+07CAC0	07CAE4	src/mapanim_0807CAC0.o(.text)	mapanim_0807CAC0(run): MapAnim_StoleItemPopup
+07CAE4	07CB28	src/mapanim_0807CAE4.o(.text)	mapanim_0807CAE4(run): DisplayWpnBrokePopup
+07CBC4	07CBF0	src/mapanim_0807CBC4.o(.text)	mapanim_0807CBC4(run): MapAnim_Cleanup
+07CC4C	07CCA8	src/mapanim_0807CC4C.o(.text)	mapanim_0807CC4C(run): MapAnim_PrepareNextBattleRound
+07CCA8	07CCBC	src/mapanim_0807CCA8.o(.text)	mapanim_0807CCA8(run): MapAnim_DisplayRoundAnim
+07CCBC	07CCF8	src/mapanim_0807CCBC.o(.text)	mapanim_0807CCBC(run): MapAnim_ShowPoisonEffectIfAny
+07CCF8	07CD14	src/mapanim_0807CCF8.o(.text)	mapanim_0807CCF8(run): MapAnim_MoveCameraOntoSubject
+07CD14	07CD3C	src/mapanim_0807CD14.o(.text)	mapanim_0807CD14(run): MapAnim_MoveCameraOntoTarget
+07CD9C	07CDE8	src/mapanim_0807CD9C.o(.text)	mapanim_0807CD9C(run): MapAnim_DisplayDeathFade
+07CDE8	07CE78	src/mapanim_0807CDE8.o(.text)	mapanim_0807CDE8(run): MapAnim_DisplayExpBar
+07CF54	07CF7C	src/mapanim_0807CF54.o(.text)	mapanim_0807CF54(run): MapAnim_CallBattleQuoteEvents
+07D004	07D028	src/mapanim_0807D004.o(.text)	mapanim_0807D004(run): SetBattleMuPalette
+07D028	07D044	src/mapanim_0807D028.o(.text)	mapanim_0807D028(run): MapAnim_PlayStealSe

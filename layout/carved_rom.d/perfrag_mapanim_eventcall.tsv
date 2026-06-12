@@ -1,0 +1,11 @@
+07F3E0	07F3F8	src/mapanim_eventcall_0807F3E0.o(.text)	mapanim_eventcall_0807F3E0(run): SummonGfxAnim_Cleanup
+0825C8	0826CC	src/mapanim_eventcall_080825C8.o(.text)	mapanim_eventcall_080825C8(run): MapEventcallFx2_RampToWhite
+0826CC	082718	src/mapanim_eventcall_080826CC.o(.text)	mapanim_eventcall_080826CC(run): MapEventcallFx2_FadeOutBlend
+082718	082748	src/mapanim_eventcall_08082718.o(.text)	mapanim_eventcall_08082718(run): MapEventcallFx2_ClearBgs
+0829A0	082A70	src/mapanim_eventcall_080829A0.o(.text)	mapanim_eventcall_080829A0(run): DemonKingSummonAnim_Init
+082EC4	082EE8	src/mapanim_eventcall_08082EC4.o(.text)	mapanim_eventcall_08082EC4(run): DemonKingSummonAnim_Cleanup
+08306C	0830AC	src/mapanim_eventcall_0808306C.o(.text)	mapanim_eventcall_0808306C(run): New6C_SummonGfx
+0831DC	083224	src/mapanim_eventcall_080831DC.o(.text)	mapanim_eventcall_080831DC(run): StartSummonUnitRevealAnim
+0834EC	083510	src/mapanim_eventcall_080834EC.o(.text)	mapanim_eventcall_080834EC(run): GlowingCross_OnEnd
+083510	08352C	src/mapanim_eventcall_08083510.o(.text)	mapanim_eventcall_08083510(run): RemoveGlowingCrossDirectlyWithAnim
+08352C	083548	src/mapanim_eventcall_0808352C.o(.text)	mapanim_eventcall_0808352C(run): GlowCrossExit_Init

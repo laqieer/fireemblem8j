@@ -1,0 +1,14 @@
+ApplyEnabledMapChanges
+ApplyWaterShadowsBmMap
+BmMapInit
+InitBaseTilesBmMap
+InitChapterMap
+BmMapFill
+UnpackChapterMap
+UnpackChapterMapGraphics
+UnpackChapterMapPalette
+RefreshTerrainBmMap
+DisplayBmTile
+RenderBmMap
+RenderBmMapOnBg2
+GetUnitFogViewRange

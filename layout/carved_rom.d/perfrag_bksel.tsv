@@ -1,0 +1,13 @@
+03660C	036694	src/bksel_0803660C.o(.text)	bksel_0803660C(run): InitBattleForecastIconPaletteBuffer
+036694	0366E4	src/bksel_08036694.o(.text)	bksel_08036694(run): InitBattleForecastLabels
+0366E4	036728	src/bksel_080366E4.o(.text)	bksel_080366E4(run): PutBattleForecastUnitName
+036918	036B70	src/bksel_08036918.o(.text)	bksel_08036918(run): DrawBattleForecastContentsStandard
+036B70	036DD0	src/bksel_08036B70.o(.text)	bksel_08036B70(run): DrawBattleForecastContentsExtended
+036E4C	036E9C	src/bksel_08036E4C.o(.text)	bksel_08036E4C(run): InitBattleForecastFramePalettes
+036E9C	036F1C	src/bksel_08036E9C.o(.text)	bksel_08036E9C(run): BattleForecast_Init
+036F2C	036FA8	src/bksel_08036F2C.o(.text)	bksel_08036F2C(run): PutBattleForecastTilemaps
+036FA8	03704C	src/bksel_08036FA8.o(.text)	bksel_08036FA8(run): PutBattleForecastWeaponTriangleArrows
+03704C	0370E8	src/bksel_0803704C.o(.text)	bksel_0803704C(run): PutBattleForecastMultipliers
+0370E8	03715C	src/bksel_080370E8.o(.text)	bksel_080370E8(run): UpdateBattleForecastEffectivenessPalettes
+03720C	0372F0	src/bksel_0803720C.o(.text)	bksel_0803720C(run): BattleForecast_LoopSlideIn
+03744C	037474	src/bksel_0803744C.o(.text)	bksel_0803744C(run): UpdateBattleForecastContents

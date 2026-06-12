@@ -1,0 +1,4 @@
+081F578C	rom	src/minimap_080AC624.o(.rodata)	minimap_080AC624 .rodata region-diff (incbin)
+081F578F	rom	src/minimap_080ACEB4.o(.rodata)	minimap_080ACEB4 .rodata region-diff (incbin)
+081F579F	rom	src/minimap_080ACEF0.o(.rodata)	minimap_080ACEF0 .rodata region-diff (incbin)
+081F57C0	rom	src/minimap_080ACF34.o(.rodata)	minimap_080ACF34 .rodata region-diff (incbin)

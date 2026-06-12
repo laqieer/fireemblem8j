@@ -1,0 +1,3 @@
+0202E4F0	ewram	src/bmmap_08019194.o(ewram_data)	bmmap_08019194 ewram_data
+03000800	iwram	src/bmmap_08019194.o(.bss)	bmmap_08019194 .bss
+02030B88	ewram	src/bmmap_08019584.o(ewram_data)	bmmap_08019584 ewram_data

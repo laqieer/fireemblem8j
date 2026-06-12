@@ -1,0 +1,12 @@
+0AC624	0AC674	src/minimap_080AC624.o(.text)	minimap_080AC624(run): GetMinimapObjectCellAt
+0AC89C	0AC8DC	src/minimap_080AC89C.o(.text)	minimap_080AC89C(run): Minimap_Init
+0ACA38	0ACBD0	src/minimap_080ACA38.o(.text)	minimap_080ACA38(run): Minimap_OpenAnim
+0ACC4C	0ACDE8	src/minimap_080ACC4C.o(.text)	minimap_080ACC4C(run): Minimap_CloseAnim
+0ACDE8	0ACE28	src/minimap_080ACDE8.o(.text)	minimap_080ACDE8(run): ApplyMinimapGraphics
+0ACEB4	0ACEF0	src/minimap_080ACEB4.o(.text)	minimap_080ACEB4(run): Minimap_ApplyFlashPalette
+0ACEF0	0ACF34	src/minimap_080ACEF0.o(.text)	minimap_080ACEF0(run): Minimap_ApplyViewportFlashColor
+0ACF34	0ACF80	src/minimap_080ACF34.o(.text)	minimap_080ACF34(run): Minimap_PutViewport
+0ACF80	0ACFFC	src/minimap_080ACF80.o(.text)	minimap_080ACF80(run): Minimap_AdjustDisplay
+0AD0E4	0AD120	src/minimap_080AD0E4.o(.text)	minimap_080AD0E4(run): Minimap_AdjustCursorOnClose
+0AD120	0AD1E0	src/minimap_080AD120.o(.text)	minimap_080AD120(run): Minimap_Main
+0AD208	0AD244	src/minimap_080AD208.o(.text)	minimap_080AD208(run): DrawMinimap

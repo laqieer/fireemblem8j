@@ -1,0 +1,3 @@
+080DCCE4	rom	src/bksel_08036694.o(.rodata)	bksel_08036694 .rodata region-diff (incbin)
+085C6A20	rom	src/bksel_080370E8.o(.data)	bksel_080370E8 .data region-diff (incbin)
+085C6A40	rom	src/bksel_0803720C.o(.data)	bksel_0803720C .data region-diff (incbin)
