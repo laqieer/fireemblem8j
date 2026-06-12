@@ -1,0 +1,3 @@
+0C8444	0C8458	src/StartWmTextHandler.o(.text)	StartWmTextHandler(run): StartWmTextHandler
+0C83A4	0C83DC	src/WmText_Loop_DrawText.o(.text)	WmText_Loop_DrawText(run): WmText_Loop_DrawText
+0C83DC	0C8418	src/ShowWmText.o(.text)	ShowWmText(run): ShowWmText
