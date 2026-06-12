@@ -1,0 +1,5 @@
+CheckEfxSoundSeExist	08073F88	thumb	banim-efxsound_08073E74
+RegisterEfxSoundSeExist	08073F7C	thumb	banim-efxsound_08073E74
+Sound_SetBGMVolume	080021C4	thumb	banim-efxsound_08073E74
+ProcScr_efxSoundSE	087A8F7C	data	banim-efxsound_08073E74
+GetProperAnimSoundLocation	08074DE8	thumb	banim-efxsound_08074E9C
