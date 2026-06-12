@@ -1,0 +1,3 @@
+0B083C	0B08F0	src/difficultymenu_080B083C.o(.text)	difficultymenu_080B083C(run): SaveMenuInitSlotPalette
+0B0AE8	0B0B2C	src/difficultymenu_080B0AE8.o(.text)	difficultymenu_080B0AE8(run): DifficultySelect_PutModeText
+0B0EC0	0B0FA0	src/difficultymenu_080B0EC0.o(.text)	difficultymenu_080B0EC0(run): DrawDifficultyMenuCursorMaybe
