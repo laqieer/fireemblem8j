@@ -1,0 +1,3 @@
+ProcScr_GmapTmConfront	08AC20A4	data	IsWorldmapSkirmishAnimActive
+GmTmConfront_LoadPositions	080C5330	thumb	GmTmConfront_InitUnitPositionB
+gWmSkirmish_PositionsB	081F65C8	data	GmTmConfront_InitUnitPositionB
