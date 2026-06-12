@@ -3165,3 +3165,38 @@ assigned). HYPOTHESIS: a meaningful fraction are still mechanically reachable (r
 not genuine FAR. ACTION: a frontier re-sweep — run `perm2_graduate.py` + `perfrag_carve.py` over the CURRENT
 `asm/sub_*.s` set (re-derived, not the stale worklists), partitioned a–m / n–z, carving the reachable and reporting
 the true FAR/LEN tail. Reserve decomp-permuter / IDA-Ghidra for the confirmed FAR residue after the re-sweep.
+
+## D70 — JP message text: emit as compiled C (`src/msg_data.c`), not asm `.byte` — moves EXTRACTED-DATA 0.14% → 3.04% (2026-06-12)
+
+**Context.** The JP in-game message block (3339 Huffman-compressed messages +
+`gMsgHuffmanTable` + `gMsgTable`, ROM `0x080ED7F4..0x081504B8`, 404,676 bytes)
+was already extracted to committed, byte-exact source (`texts/jp_texts.txt` +
+the `msg_jp.py` codec, D3/D4 era) and built via a GENERATED `asm/msg_data.s`
+(`.byte` blob). But the honest scorecard's **EXTRACTED-DATA axis counts only
+bytes that come from `src/*.o`** (compiled C structs / PNG) — a named `.byte`
+asm blob is "assembled, not extracted." So those 404 KB sat outside the metric;
+EXTRACTED-DATA read 0.14% (19,694 / 13,938,060 B) despite the text being fully
+source-producible.
+
+**Decision.** Emit the message block as **compiled C** — the same shape as the
+US `src/msg_data.c`: `static const u8 CompressedText_MSG_XXX[]` bitstream arrays
+in message order, `const u32 gMsgHuffmanTable[]`, `const u32 * const
+gMsgHuffmanTableRoot = gMsgHuffmanTable + 0xF7A`, and `const u8 * const
+gMsgTable[]`. Added `emit_c` + `build-c` to `scripts/texttools/msg_jp.py`;
+`src/msg_data.c` is GENERATED-AND-COMMITTED (Makefile regenerates from
+`texts/jp_*.txt`); the carve manifest row now points at `src/msg_data.o(.rodata)`.
+
+**Why byte-exact.** Verified empirically: agbcc emits the `static const u8`
+arrays back-to-back with NO inter-array padding, then a single `.align 2` before
+the `u32` tables — exactly reproducing the contiguous bitstream blob + the lone
+ROM pad byte. The compiled `.o`'s `.rodata` is byte-identical to the ROM block
+EXCEPT the 3340 pointer fields (root ptr + `gMsgTable`), which carry `R_ARM_ABS32`
+relocations that resolve to the ROM addresses at link time. The one JP suffix-
+share (`gMsgTable[0x63A]` points 8 bytes into msg `0x639`) is expressed as
+`CompressedText_MSG_639 + 8`. Result after link: `make compare` → **OK**.
+
+**Result.** EXTRACTED-DATA **0.14% → 3.04%** (19,694 → 424,370 B). Self-
+containment held 100%, matching-C unaffected, ROM = 16 MB. All gates green
+(`make check`, `make compare`, `make clean && make compare`, self-contained==0).
+The legacy `msg_jp.py build`/`emit_asm` path is kept for reference but no longer
+feeds the build. See `docs/text.md`.

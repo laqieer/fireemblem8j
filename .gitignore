@@ -47,10 +47,12 @@ src/nonmatching/*.s
 /asm/baserom.s
 /asm/jp_syms.s
 
-# asm/msg_data.s is GENERATED from texts/jp_texts.txt by scripts/texttools/msg_jp.py
-# (re-Huffman-encodes the JP message block byte-identically). The committed source
-# is texts/jp_*.txt; this .s is regenerated at build time. See docs/text.md.
-/asm/msg_data.s
+# src/msg_data.c is GENERATED-AND-COMMITTED from texts/jp_texts.txt by
+# scripts/texttools/msg_jp.py build-c (re-Huffman-encodes the JP message block
+# as compiled C, byte-identical after link). It is COMMITTED (the src/*.c wildcard
+# must see it on a fresh checkout); only the agbcc intermediate src/msg_data.s is
+# ignored (via src/*.s above). The higher-level source is texts/jp_*.txt. See
+# docs/text.md.
 
 # Per-task layout fragments (layout/<name>.d/*.tsv) ARE committed -- they are the
 # parallel-carve mechanism. The generic `*.d` rule above (for make dependency
