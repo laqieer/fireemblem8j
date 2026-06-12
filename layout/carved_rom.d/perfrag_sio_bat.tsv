@@ -1,0 +1,8 @@
+045A94	045BB4	src/sio_bat_08045A94.o(.text)	sio_bat_08045A94(run): SioBat_LoadAllTeamUnits
+045C08	045C5C	src/sio_bat_08045C08.o(.text)	sio_bat_08045C08(run): SioBat_StartTalkText
+045C8C	045D60	src/sio_bat_08045C8C.o(.text)	sio_bat_08045C8C(run): LinkArena_UpdatePlayerStatusText
+045EA4	045EEC	src/sio_bat_08045EA4.o(.text)	sio_bat_08045EA4(run): StartSioProcs
+0463D8	0463F4	src/sio_bat_080463D8.o(.text)	sio_bat_080463D8(run): SioBat_PlayFirstMoverSound
+0463F4	04642C	src/sio_bat_080463F4.o(.text)	sio_bat_080463F4(run): SioBat_PrepareTeamUnit
+04642C	0464FC	src/sio_bat_0804642C.o(.text)	sio_bat_0804642C(run): SioBat_InitTeamTransfer
+0464FC	046680	src/sio_bat_080464FC.o(.text)	sio_bat_080464FC(run): SioBat_TeamTransferLoop
