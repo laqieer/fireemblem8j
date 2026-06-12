@@ -341,3 +341,13 @@ UnitLoadStatsFromChracter
 WorldmapStatus_CountAllies
 gWorldmapMinimap_1
 gWorldmapMinimap_2
+CanUnitPrepScreenUse
+PrepItemScreen_GiveAll
+PrepItemScreen_OnEnd
+PrepItemScreen_OnHBlank
+PrepItem_SnapGridScroll
+PrepUpdateSMS
+PutClassSpriteForSecretShop
+StartPrepErrorHelpbox
+StartUiCursorHand
+UnitGetIndexInPrepList
