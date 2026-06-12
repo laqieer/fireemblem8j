@@ -3143,3 +3143,25 @@ The next region-same lever is the a–m remainder (harvAM, in-flight) + CF:agbcc
 (scratch, NOT committed): `/tmp/harvnz_drive.sh` (carve+cold-gate+stage-all-subdirs+commit+push per TU) and
 `/tmp/harvnz_batch.sh` (sequential multi-TU). Reusable for any region-same worklist sweep. (D-number from the free
 sequence after D65; renumber at integration if a concurrent sibling claimed D66.)
+
+## D69 — WAVE COMPLETE: 6-agent mechanical sweep landed +1,533 matching-C (27.59→67.89% this session); CI-green; next frontier = re-classify the 2,508 unswept asm (2026-06-12)
+
+**Result.** The full reloc-resolve + region-same + CF:agbcc wave is integrated, pushed (`df3bc6394`), and CI-green
+(both gates: `make compare` ✅, `Self-contained build` ✅). Six agents, **+1,533 matching-C**: rd1 +272 / rd2 +158 /
+harv1 +19 (D63/D64 reloc-resolve) → harvAM +290 (D66 region-same a–m) → cfBind +356 (D67 CF:agbcc data-binding) →
+harvNZ +438 (D68 region-same n–z). Matching-C **27.59% → 67.89% (5790/8528; ~70.5% of the 8209 ceiling)**;
+self-containment held 100% throughout; final cold sha1 = `7da0456…`.
+
+**Integration hazards hit + fixed this wave (all in [[memory]]/D65):** orphaned-asm oversizing (salvage glob can't
+stage deletions); THREE rounds of cross-branch dedup (6 + 32 + 86 dups) — the **dedup-ordering rule is load-bearing**
+(compile all `.o` BEFORE dedup, else it nm-scans nothing and wipes the drop list; I re-tripped this once and caught
+it); the **same-JP-address carve overlap** (harvAM & harvNZ both carved 0x8056158 under different US names — resolved
+by neighbor-consistency, kept `SpellFx_SetSomeColorEffect`, dropped the `opinfo`/`// ???` misattribution); two silent
+agent stalls (harv1, harvAM) salvaged via build-test-then-commit. Zero regressions; oracle-gated throughout.
+
+**Next frontier (re-plan).** 2,508 `asm/sub_*.s` remain (~2,419 to ceiling). The agents' reported FAR/LEN/NOADDR
+residue (~1,019) is far short of 2,508 — so **~1,500 functions were never on any swept worklist** (TUs no agent was
+assigned). HYPOTHESIS: a meaningful fraction are still mechanically reachable (region-same / NEAR-reloc / CF:agbcc),
+not genuine FAR. ACTION: a frontier re-sweep — run `perm2_graduate.py` + `perfrag_carve.py` over the CURRENT
+`asm/sub_*.s` set (re-derived, not the stale worklists), partitioned a–m / n–z, carving the reachable and reporting
+the true FAR/LEN tail. Reserve decomp-permuter / IDA-Ghidra for the confirmed FAR residue after the re-sweep.
