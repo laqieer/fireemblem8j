@@ -1,0 +1,18 @@
+# feat/dataItems: gItemData + dependency tables (data_itemuse/data_itembonus) carved
+# as typed C in src/data/. These symbols are now REAL .data definitions in those
+# objects (byte-verified against the JP ROM), so the prior ABS baseline_syms bindings
+# (harvested approximations from bmitemuse_08029150 / codegrind_bmitem_effectiveness)
+# must be dropped to avoid linker multiple-definition. The carved objects define them
+# at the exact JP addresses, so dropping is safe for every referencing TU.
+ItemEffectiveness_Monsters
+gItemUseJidList_LunarBrace
+gItemUseJidList_SolarBrace
+gItemUseJidList_HeroCrest
+gItemUseJidList_KnightCrest
+gItemUseJidList_OrionsBolt
+gItemUseJidList_ElysianWhip
+gItemUseJidList_GuidRing
+gItemUseJidList_MasterSeal
+gItemUseJidList_HeavenSeal
+gItemUseJidList_C1
+gItemUseJidList_OceanSeal

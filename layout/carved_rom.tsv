@@ -1043,6 +1043,8 @@
 85616C	8582BC	asm/dat_data_banimmisc.o(.rodata.dat_data_banimmisc)	dat_data_banimmisc region-same shifted (8KB)
 8582BC	85B6BC	src/data/data_characters.o(.data)	gCharacterData typed C (256 entries x struct CharacterData; region-different JP values transcribed through the fe8u layout; pSupportData -> JP SupportData_* syms)
 85E068	85FD60	asm/dat_gItemData_ref.o(.rodata.dat_gItemData_ref)	gItemData region-diff (funcmap code-ref, 7KB)
+8582BC	85B6BC	asm/dat_gCharacterData_ref.o(.rodata.dat_gCharacterData_ref)	gCharacterData region-diff (funcmap code-ref, 13KB)
+85E068	85FD60	src/data/data_items.o(.data)	gItemData[206] typed C (region-diff JP text IDs + a few gameplay values; pStatBonuses/pEffectiveness link-resolved to data_itembonus/data_itemuse)
 85FDE2	85FF27	asm/dat_worldmap_gmapunit_p1125.o(.rodata.dat_worldmap_gmapunit_p1125)	dat_worldmap_gmapunit_p1125 region-same per-sym shifted (0KB)
 85FFEA	8601B1	asm/dat_worldmap_gmapunit_p1127.o(.rodata.dat_worldmap_gmapunit_p1127)	dat_worldmap_gmapunit_p1127 region-same per-sym shifted (0KB)
 8609D1	860A53	asm/dat_worldmap_gmapunit_p1128.o(.rodata.dat_worldmap_gmapunit_p1128)	dat_worldmap_gmapunit_p1128 region-same per-sym shifted (0KB)
@@ -1054,7 +1056,9 @@
 861336	86147B	asm/dat_worldmap_gmapunit_p1134.o(.rodata.dat_worldmap_gmapunit_p1134)	dat_worldmap_gmapunit_p1134 region-same per-sym shifted (0KB)
 8614BC	8617C8	asm/dat_worldmap_gmapunit_p1135.o(.rodata.dat_worldmap_gmapunit_p1135)	dat_worldmap_gmapunit_p1135 region-same per-sym shifted (0KB)
 861950	901138	asm/dat_data_portrait.o(.rodata.dat_data_portrait)	dat_data_portrait region-same shifted (637KB)
+902440	902538	src/data/data_itemuse.o(.data)	data_itemuse typed C: ItemEffectiveness_* class lists + gItemUseJidList_* promotion tables (region-diff: ArmorAndHorse drops 4 classes vs fe8u); pointees for gItemData.pEffectiveness
 903138	903450	asm/dat_worldmap_gmapunit_p1290.o(.rodata.dat_worldmap_gmapunit_p1290)	dat_worldmap_gmapunit_p1290 region-same per-sym shifted (0KB)
+903450	903564	src/data/data_itembonus.o(.data)	data_itembonus typed C: ItemBonus_* ItemStatBonuses (region-diff DemonLight/Ravger values); pointees for gItemData.pStatBonuses
 9036DC	90375C	asm/dat_worldmap_gmapunit_p1293.o(.rodata.dat_worldmap_gmapunit_p1293)	dat_worldmap_gmapunit_p1293 region-same per-sym shifted (0KB)
 9037AC	9038BC	asm/dat_worldmap_gmapunit_p1295.o(.rodata.dat_worldmap_gmapunit_p1295)	dat_worldmap_gmapunit_p1295 region-same per-sym shifted (0KB)
 9039C0	903A50	asm/dat_worldmap_gmapunit_p1297.o(.rodata.dat_worldmap_gmapunit_p1297)	dat_worldmap_gmapunit_p1297 region-same per-sym shifted (0KB)

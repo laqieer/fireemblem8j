@@ -3321,3 +3321,43 @@ me transfer the fe8u source's symbolic field choices wholesale and only re-decod
    it) — defining it in C needs the D65 **drop-fragment** (`layout/baseline_syms_drop.d/dataCharClass.tsv`).
    gClassData was not aliased, so no drop needed. Also: delete the old `asm/dat_*_ref.s` (they're
    in the ALL_OBJECTS wildcard; their `.global gCharacterData/gClassData` would collide with the C).
+## D75 — typed-data: gItemData[206] + its pointee tables (data_itemuse/data_itembonus) carved to typed C; +7,940 B extracted, broke the "pointer-heavy struct table" frontier D55 flagged (2026-06-12)
+
+**Context.** Branch `feat/dataItems` (DATA-items unit). D55's typed-data axis explicitly deferred `gItemData`'s
+`pStatBonuses`/`pEffectiveness` columns as "NOT next-step-tractable... because the pointees are themselves opaque
+`.bin`" — a dependency chain. This carve resolves that chain: name/carve the pointees FIRST, then gItemData's
+pointers link-resolve. `make compare` sole oracle; final cold sha1 = `7da0456…`, ROM = 16,777,216 B, self-contained 100%.
+
+**RESULT — 3 region-different tables converted from opaque incbin → byte-matching typed C; +7,940 B extracted.**
+  * **`gItemData[206]` (7,416 B = 206 × 0x24), JP 0x0885E068.** Was `asm/dat_gItemData_ref.s` (.incbin). Ported
+    fe8u `src/data_items.c` as the template; the region difference is REAL-data, not layout: **476 text-ID field
+    diffs** (name/desc/useDescTextId — JP text DB) regenerated from JP ROM bytes by a script that substitutes only
+    the `.nameTextId/.descTextId/.useDescTextId` hex per entry (preserving every fe8u symbolic constant), **plus 12
+    gameplay-value diffs** patched by hand (costPerUse: SwordBrave 250→100, AxeBrave 250→75; crit: DarkLuna 10→20,
+    Ravager 10→removed; attributes: DarkGleipnir drop IA_UNSELLABLE, Reginleif drop IA_UNSELLABLE; hit: Vidofnir
+    85→80, Ravager 85→100; might: Siegmund 17→19, DemonLight 15→13, Ravager 15→18; encodedRange: DemonLight
+    0x13→0x12). `.o` `.data` verified == ROM at every non-pointer byte (the 252 pointer bytes are link relocs).
+  * **`data_itemuse.c` (248 B), JP 0x08902440.** ItemEffectiveness_* + gItemUseJidList_* promotion tables. Only ONE
+    of 31 lists differs vs fe8u: `ItemEffectiveness_ArmorAndHorse` drops its last 4 classes (MAGE_KNIGHT/_F, TARVOS,
+    MAELDUIN). `.o` `.data` == ROM exactly.
+  * **`data_itembonus.c` (276 B), JP 0x08903450.** ItemBonus_* ItemStatBonuses. Two differ: DemonLight
+    {pow10,skl10,def10,res15,lck10}→{pow13,skl10,def10,res15}; Ravger {pow15,skl15,def15,res10}→{pow10,skl10,def15,res10}.
+
+**KEY OPERATIONAL FINDINGS (reusable).**
+  1. **Carve the pointee tables FIRST to break the pointer-heavy-struct frontier.** Placing data_itemuse@0x902440
+     and data_itembonus@0x903450 as typed C makes ItemEffectiveness_*/ItemBonus_* real `.data` symbols at the exact
+     JP addresses, so gItemData's 63 `.rel.data` pointer columns link-resolve with no hardcoded addresses (relink-stable).
+  2. **The pointees lived inside a frontier gap blob, not the trailing incbin.** `frontier_df4_banim_b` gap70
+     (0x901138–0x903138) and gap71 (0x903450–0x9036DC) covered the two regions. Split each via `.incbin "f", skip,
+     count` against the SAME `.bin` (no new asset files): gap70→gap70a[0,4872]+itemuse+gap70b[5120,3072];
+     gap71→itembonus+gap71[276,376]. Verified all slice boundaries reconstruct the ROM byte-exact before building.
+  3. **Removing an incbin `dat_*_ref.s` row from carved_rom.tsv is NOT enough — `git rm` the orphan `.s`+residual
+     `.bin`.** The Makefile links every `asm/*.s` object regardless of ldscript section refs, so the stale
+     `dat_gItemData_ref.o` still defined `gItemData` → `multiple definition` link error. (First build failed exactly
+     here; fixed by deleting `asm/dat_gItemData_ref.s` + `data/residual/gItemData.bin`.)
+  4. **Drop colliding harvested baseline_syms.** 12 ItemEffectiveness_*/gItemUseJidList_* were ABS-bound (some with
+     wrong `thumb` type) by prior harvests; added `layout/baseline_syms_drop.d/data_items.tsv` so the typed-C defs win.
+     All references to them are `.word` data refs (e.g. IsUnitEffectiveAgainst.s), not calls — safe.
+
+**SCORECARD.** EXTRACTED-DATA +7,940 B typed C (gItemData was the single largest deferred game-data table). Confirms
+D55's method scales to pointer-heavy struct tables once the pointee dependency chain is carved bottom-up.
