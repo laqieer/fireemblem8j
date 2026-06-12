@@ -1,0 +1,8 @@
+CountDisplayedSoundRoomSongs
+CountSecretSoundRoomSongs
+StartSoundRoomSong
+InitSoundRoomShuffleBuffer
+Img_SoundRoomVolumeGraph
+Pal_SoundRoomVolumeGraph
+gObject_64x32
+DrawSoundRoomVolumeGraphSprites

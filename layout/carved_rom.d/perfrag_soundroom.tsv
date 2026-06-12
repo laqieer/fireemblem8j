@@ -1,0 +1,10 @@
+0B3984	0B3AE0	src/soundroom_080B3984.o(.text)	soundroom_080B3984(run): InitSoundRoomSongData
+0B3AE4	0B3B08	src/soundroom_080B3AE4.o(.text)	soundroom_080B3AE4(run): SoundRoomSongChange_FadeOutPrevious
+0B3B08	0B3B44	src/soundroom_080B3B08.o(.text)	soundroom_080B3B08(run): SoundRoomSongChange_StartNext
+0B3B84	0B3D00	src/soundroom_080B3B84.o(.text)	soundroom_080B3B84(run): InitSoundRoomShuffleBuffer
+0B3DF8	0B3E40	src/soundroom_080B3DF8.o(.text)	soundroom_080B3DF8(run): InitSoundRoomVolumeGraph
+0B3F58	0B3F70	src/soundroom_080B3F58.o(.text)	soundroom_080B3F58(run): SoundRoom_UpdateScrollBar
+0B3F70	0B3F98	src/soundroom_080B3F70.o(.text)	soundroom_080B3F70(run): SoundRoom_PutHandCursor
+0B3FE8	0B40F0	src/soundroom_080B3FE8.o(.text)	soundroom_080B3FE8(run): SoundRoom_DrawSongList
+0B4CA0	0B4D94	src/soundroom_080B4CA0.o(.text)	soundroom_080B4CA0(run): SoundRoom_DrawSongTitleSprites
+0B4D94	0B4E1C	src/soundroom_080B4D94.o(.text)	soundroom_080B4D94(run): DrawSoundRoomVolumeGraphSprites
