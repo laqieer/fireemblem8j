@@ -1,0 +1,12 @@
+026694	026720	src/bmudisp_08026694.o(.text)	bmudisp_08026694(run): StartUiSMS
+026720	0267A0	src/bmudisp_08026720.o(.text)	bmudisp_08026720(run): StartWorldMapSMS
+0267A0	02686C	src/bmudisp_080267A0.o(.text)	bmudisp_080267A0(run): UseUnitSprite
+026ED0	026F38	src/bmudisp_08026ED0.o(.text)	bmudisp_08026ED0(run): SyncUnitSpriteSheet
+027144	027310	src/bmudisp_08027144.o(.text)	bmudisp_08027144(run): RefreshUnitSprites
+027348	0274D4	src/bmudisp_08027348.o(.text)	bmudisp_08027348(run): PutUnitSpritesOam
+0274D4	02758C	src/bmudisp_080274D4.o(.text)	bmudisp_080274D4(run): PutChapterMarkedTileIconOam
+027AF4	027BDC	src/bmudisp_08027AF4.o(.text)	bmudisp_08027AF4(run): PutUnitSprite
+027BDC	027C90	src/bmudisp_08027BDC.o(.text)	bmudisp_08027BDC(run): PutUnitSpriteForClassId
+027C90	027D48	src/bmudisp_08027C90.o(.text)	bmudisp_08027C90(run): PutWindowUnitSpriteForClassId
+027D48	027DE0	src/bmudisp_08027D48.o(.text)	bmudisp_08027D48(run): PutStandingMuSprite
+027DE0	027EBC	src/bmudisp_08027DE0.o(.text)	bmudisp_08027DE0(run): PutUiUnitSprite

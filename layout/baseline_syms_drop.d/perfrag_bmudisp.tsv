@@ -1,0 +1,12 @@
+gSomeSMSLookupTable_0
+UseUnitSprite
+gSMSSyncFlag
+SyncUnitSpriteSheet
+AddUnitSprite
+GetUnitDisplayedSpritePalette
+RefreshUnitSprites
+gSMSHandleIt
+gObject_16x32
+PutUnitSprite
+PutUnitSpriteForClassId
+PutStandingMuSprite
