@@ -82,3 +82,15 @@ Pal_ExcaliburSprites
 Tsa_ExcaliburBg1
 Tsa_ExcaliburBg2_Left
 Tsa_ExcaliburBg2_Right
+APProc_SetParameters
+AddExtraMenuOption
+AddMainMenuOption
+IsExtraBonusClaimEnabled
+IsExtraFreeMapEnabled
+IsExtraLinkArenaEnabled
+IsExtraSupportViewerEnabled
+SaveDraw_DrawExtraMenuOptions
+SaveDraw_DrawMainMenuOptions
+SaveDraw_DrawSelectedOption
+SaveDraw_SetCursorSlotMark
+SaveDraw_UpdateSlotPalette
