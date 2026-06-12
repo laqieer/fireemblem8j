@@ -1,0 +1,5 @@
+GetGameOption	080B6A00	thumb	uiconfig_080B62FC
+gConfigUiState	08AAF6D8	data	uiconfig_080B62FC
+GetSelectedOptionValue	080B62FC	thumb	uiconfig_080B63A4
+gGameOptions	08AAF700	data	uiconfig_080B63A4
+GetSelectedGameOption	080B62EC	thumb	uiconfig_080B6558

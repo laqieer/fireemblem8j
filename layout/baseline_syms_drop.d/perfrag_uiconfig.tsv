@@ -1,0 +1,7 @@
+GetGameOption
+gConfigUiState
+GetSelectedOptionValue
+gGameOptions
+DrawGameOptionText
+DrawOptionValueTexts
+GetSelectedGameOption
