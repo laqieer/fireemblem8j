@@ -1,0 +1,2 @@
+081F531C	rom	src/statscreen_08089B58.o(.rodata)	statscreen_08089B58 .rodata region-diff (incbin)
+08A728D4	rom	src/statscreen_08089C68.o(.data)	statscreen_08089C68 .data region-diff (incbin)

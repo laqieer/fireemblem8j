@@ -1,0 +1,7 @@
+089B58	089BAC	src/statscreen_08089B58.o(.text)	statscreen_08089B58(run): DisplayPage
+089BAC	089C68	src/statscreen_08089BAC.o(.text)	statscreen_08089BAC(run): FindNextUnit
+089C68	089D58	src/statscreen_08089C68.o(.text)	statscreen_08089C68(run): PageSlide_OnLoop
+089D64	089DCC	src/statscreen_08089D64.o(.text)	statscreen_08089D64(run): StartPageSlide
+089DCC	089E2C	src/statscreen_08089DCC.o(.text)	statscreen_08089DCC(run): GlowBlendCtrl_OnInit
+089E2C	089E7C	src/statscreen_08089E2C.o(.text)	statscreen_08089E2C(run): GlowBlendCtrl_OnLoop
+089E90	089EC0	src/statscreen_08089E90.o(.text)	statscreen_08089E90(run): EndGlowBlendCtrl
