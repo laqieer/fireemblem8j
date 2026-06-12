@@ -1,0 +1,5 @@
+GetManimLevelUpStatGain	08080F48	thumb	mapanim_lvup_080816DC
+StartManimLevelUpStatGainLabelAnim	080811C4	thumb	mapanim_lvup_080816DC
+gManimLevelUpLabelInfoList	08A1455C	data	mapanim_lvup_080816DC
+Img_ManimLevelUpText	08A1CE1C	data	mapanim_lvup_080817CC
+gMapanimTorchfx_0	08A160F4	data	mapanim_lvup_080817CC
