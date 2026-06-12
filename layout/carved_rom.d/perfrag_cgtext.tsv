@@ -1,0 +1,7 @@
+091398	0913C0	src/cgtext_08091398.o(.text)	cgtext_08091398(run): CgText_OnEnd
+091590	0915E0	src/cgtext_08091590.o(.text)	cgtext_08091590(run): CgText_ClearSpriteText
+09189C	091AF8	src/cgtext_0809189C.o(.text)	cgtext_0809189C(run): CgText_Display
+0921F8	09227C	src/cgtext_080921F8.o(.text)	cgtext_080921F8(run): CgTextInterpreter_1
+09227C	0922A4	src/cgtext_0809227C.o(.text)	cgtext_0809227C(run): CgTextInterpreter_2
+0922DC	0922F4	src/cgtext_080922DC.o(.text)	cgtext_080922DC(run): IsCgTextBlocking
+0922F4	0923CC	src/cgtext_080922F4.o(.text)	cgtext_080922F4(run): YesNoChoice_Loop_KeyHandler
