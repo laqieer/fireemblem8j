@@ -447,17 +447,31 @@ def _all_baseline_binds():
 
 
 def _drop_carve_rows(name, s, e):
-    """Remove this carve's carved_rom row (the one that PLACES src/<name>.o(.text) and
-    would cause the overlap/mismatch). Keyed on the src/<name>.o object so sibling
-    carves in the same fragment survive. Leaves the baseline_syms ABS binds in place:
-    an orphan bind is a harmless absolute alias to an unused symbol (it places no
-    bytes), and a SHARED pointee bind (several funcs -> same ProcScr table) must NOT
-    be dropped while a sibling still needs it."""
+    """Remove EVERY manifest row that references src/<name>.o (carved_rom .text/.data
+    sections, carved_ram NOLOAD region-diff rows, patches align/reloc rows) so a
+    reverted carve leaves no dangling object reference (the ldscript would else
+    `cannot find src/<name>.o`). Keyed on the src/<name>.o object so sibling carves
+    in the same fragment survive. Leaves baseline_syms ABS binds in place: an orphan
+    bind is a harmless absolute alias to an unused symbol (places no bytes), and a
+    SHARED pointee bind (several funcs -> same ProcScr table) must NOT be dropped
+    while a sibling still needs it."""
     tu = find_tu(name)
-    cr = f"layout/carved_rom.d/cfbind_{tu}.tsv"
-    if os.path.exists(cr):
-        kept = [l for l in open(cr) if f"src/{name}.o(" not in l]
-        open(cr, "w").writelines(kept)
+    obj_rom = f"src/{name}.o("        # carved_rom / carved_ram section rows
+    obj_pat = f"src/{name}.o\t"       # patches rows: "<objbase>\t<sec>\t..."
+    objbase = f"{name}.o"
+    for base in ("carved_rom", "carved_ram", "patches"):
+        fp = f"layout/{base}.d/cfbind_{tu}.tsv"
+        if not os.path.exists(fp):
+            continue
+        kept = []
+        for l in open(fp):
+            if base == "patches":
+                if l.split("\t")[0:1] == [objbase] or l.startswith(objbase + "\t"):
+                    continue
+            elif obj_rom in l:
+                continue
+            kept.append(l)
+        open(fp, "w").writelines(kept)
 
 
 if __name__ == "__main__":

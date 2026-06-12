@@ -1,0 +1,13 @@
+064580	0645BC	src/StartSpellAnimSleep.o(.text)	StartSpellAnimSleep(run): StartSpellAnimSleep
+064A74	064AB0	src/StartSpellAnimHammerne.o(.text)	StartSpellAnimHammerne(run): StartSpellAnimHammerne
+065414	065450	src/StartSpellAnimBerserk.o(.text)	StartSpellAnimBerserk(run): StartSpellAnimBerserk
+065E08	065E44	src/StartSpellAnimBarrier.o(.text)	StartSpellAnimBarrier(run): StartSpellAnimBarrier
+064528	064568	src/StartSubSpell_efxMshieldBGOBJ2.o(.text)	StartSubSpell_efxMshieldBGOBJ2(run): StartSubSpell_efxMshieldBGOBJ2
+063BF4	063C48	src/StartSubSpell_efxHammarneBG.o(.text)	StartSubSpell_efxHammarneBG(run): StartSubSpell_efxHammarneBG
+063708	063760	src/StartSubSpell_efxSilenceOBJ.o(.text)	StartSubSpell_efxSilenceOBJ(run): StartSubSpell_efxSilenceOBJ
+063CAC	063D04	src/StartSubSpell_efxHammarneOBJ.o(.text)	StartSubSpell_efxHammarneOBJ(run): StartSubSpell_efxHammarneOBJ
+0644D0	064528	src/StartSubSpell_efxMshieldBGOBJ.o(.text)	StartSubSpell_efxMshieldBGOBJ(run): StartSubSpell_efxMshieldBGOBJ
+06441C	064478	src/StartSubSpell_efxMshieldBG.o(.text)	StartSubSpell_efxMshieldBG(run): StartSubSpell_efxMshieldBG
+063624	0636B0	src/StartSubSpell_efxSilenceBG.o(.text)	StartSubSpell_efxSilenceBG(run): StartSubSpell_efxSilenceBG
+063D50	063E30	src/efxBerserk_Loop_Main.o(.text)	efxBerserk_Loop_Main(run): efxBerserk_Loop_Main
+0637B4	0638B4	src/efxSleep_Loop_Main.o(.text)	efxSleep_Loop_Main(run): efxSleep_Loop_Main
