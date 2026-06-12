@@ -3513,3 +3513,47 @@ shared checkout) collided with `src/msg_data.o` `gMsgTable` — gitignored + rem
 agent grabbed D70) — renumbered D70–D79 at integration; (5) one agent (mcMechHi) cwd-contaminated main again,
 TaskStop + reset-discard recovered it (its range re-swept by mcMechLo). NEVER broad-`pgrep`-kill (crashed an agent +
 MCP servers earlier) — use TaskStop.
+
+## D81 — CONSTANT-DIFF CARVER: mechanized the D79/D80 finding — +66 matching-C from the FAR tail by JP-constant substitution; `scripts/const_diff_carve.py` (2026-06-12)
+
+**Goal.** Build + run the constant-diff carver D79/D80 recommended as "the next matching-C lever". Branch
+`feat/constDiff`. The decomp-permuter pilot proved the small-FAR matching-C tail is DOMINATED by JP DATA-CONSTANT
+diffs, not codegen-shape: many ≤200B "FAR" functions differ from the US-compiled bytes ONLY in constant immediates /
+literal-pool words (msg-IDs like US `0x8A3` vs JP `0x843`, `Proc_Goto` jump indices, string/table indices). The
+permuter can't guess constants — but these are MECHANICALLY carveable.
+
+**Tool — `scripts/const_diff_carve.py` (committed).** Reuses the perm2_graduate/rd_screen funclib+extract+mask
+machinery. Per FAR function: (1) JP range from `funclib_us_jp.tsv` (jp_addr→next boundary); (2) `extract_func_only`
+the US function alone; (3) compile isolated → `.text` bytes + `objdump -r` relocs + `objdump -d` disasm; (4) align vs
+JP bytes and classify each byte-diff — **reloc offset → IGNORE** (perm2's job; linker resolves once carved),
+**LEN mismatch → ABORT** (structurally region-diff), **diff inside an instruction OPCODE (not its immediate field) →
+ABORT** (true-codegen FAR → permuter), **constant immediate / literal-pool word → CANDIDATE**; (5) if ALL non-reloc
+diffs are constant-candidates, **derive the JP constant** (literal-pool 4-byte `.word`: read it directly; inline
+`movs #imm8` [+ `lsls Rd,#sh`] shifted-constant: decode imm<<sh for both US and JP — agbcc's >0xFF small-constant
+loader), **substitute the JP value for the US value in the C source** (rewrite the matching `0x…`/decimal literal),
+recompile isolated, and require **byte-EXACT vs the JP range — the REAL gate.** The classifier only PROPOSES; the
+bytes DECIDE. Then carve (`src/<fn>.c` + `carved_rom.d/constdiff_<fn>.tsv`, swap the gbadisasm `asm/sub_<addr>.s`,
+drop colliding baseline binds). `--verify` runs the self-correcting build+revert loop; `make compare` is the sole
+oracle.
+
+**RESULT — +66 matching-C carved (matching-C 73.9% → 74.6%, 6307→~6373 / 8528). All gates GREEN.** Batch1 (≤200B):
+77 staged, 18 reverted as full-build failures (NEAR-but-fails: TU-private data ref / reloc-target-resolves-different —
+correctly excluded by verify-or-revert), **+59**. Batch2 (201–700B): 12 staged, 5 reverted, **+7**. The carves are
+overwhelmingly **JP message-ID shifts** (the canonical US `0x8A3`→JP `0x843` Shop/menu/help-text indices — JP's msg
+table is offset ~0x60–0x90 below US's), plus a few `Proc_Goto`/restart jump indices (`RestartGameAndGoto8` 8→7,
+`GameControlHandlePostNormalOrExtraChapter` 0xA→0x1), VRAM/blend addresses (`GlowingCross_Init` 0x6002C00→0x6002800,
+`Title_SetupMainGraphics` 0x6013000→0x6012800), and frame/timing counts. Gates per batch + final: `rm -f src/*.s` +
+`make check` (check_layout OK, 8557 tracked) + `make compare` OK + **`make clean && make compare` cold OK** +
+`check_selfcontained.py` == 0 incbins (100%) + ROM == 16,777,216. Staged explicitly (`git add -u asm/ src/ layout/` +
+new files + `-A layout/`; NO blanket `git add -A` — dropped the `tools` worktree symlink). Pushed `feat/constDiff`.
+
+**Confirms the D79/D80 thesis at scale: the "FAR" classifier count materially overstates the true codegen frontier.**
+The dominant FAR sub-class is data-constant substitution (mechanical, ~seconds/fn), NOT permuter/hand-decomp.
+
+**Residue (true-codegen-FAR + un-substitutable).** The carver correctly ABORTed on: (a) **symbolic-enum constants**
+where the US value is a named macro not a raw literal (`Proc_Goto(proc, LGAMECTRL_TITLE_DIRECT)` → no `4` literal to
+rewrite; substituting the symbol with the JP raw literal is a safe future enhancement, deferred to avoid
+enum-resolution ambiguity); (b) **structural strides** (`StrLen`'s `adds r1,#1`→`#2` is logic, not a substitutable
+constant); (c) **genuine opcode/length codegen diffs** (different instruction selection, register alloc, or `.text`
+length). These remain the permuter / IDA-Ghidra hand-decomp frontier. Next levers: extend the carver to the
+symbolic-enum case and to FAR functions >700B; feed the residual opcode-diff FAR set to the permuter (D79).
