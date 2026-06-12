@@ -385,3 +385,5 @@ SetTalkPrintDelay
 ApplyUnitPromotion
 InitBattleUnitWithoutBonuses
 NewPopup2_PlanB
+GetEnemyStartCursorPosition
+GetPlayerStartCursorPosition
