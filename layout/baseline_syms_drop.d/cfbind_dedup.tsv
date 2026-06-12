@@ -338,3 +338,6 @@ StartGmapRm
 StartWmPlaceDot
 UnitAutolevel
 UnitLoadStatsFromChracter
+WorldmapStatus_CountAllies
+gWorldmapMinimap_1
+gWorldmapMinimap_2
