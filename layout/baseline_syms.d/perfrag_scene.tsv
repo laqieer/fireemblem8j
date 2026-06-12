@@ -1,0 +1,5 @@
+ClearPutTalkText	080080E8	thumb	scene_080080A4
+TalkToggleInvertedPalette	08006E90	thumb	scene_080081A0
+InitTalkTextWin	08008360	thumb	scene_080081A0
+StartOpenTalkBubble	080082DC	thumb	scene_080081A0
+gProcScr_TalkBubbleOpen	085B92C8	data	scene_080082DC
