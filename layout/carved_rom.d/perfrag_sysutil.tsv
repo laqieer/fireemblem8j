@@ -1,0 +1,6 @@
+0878A0	0878C4	src/sysutil_080878A0.o(.text)	sysutil_080878A0(run): DisableAllGfx
+0B1E04	0B1ED4	src/sysutil_080B1E04.o(.text)	sysutil_080B1E04(run): DisplayExtendedSysHand
+0B20B0	0B23F0	src/sysutil_080B20B0.o(.text)	sysutil_080B20B0(run): SysGrayBox_Loop
+0B23F0	0B2438	src/sysutil_080B23F0.o(.text)	sysutil_080B23F0(run): NewSysGrayBox
+0B2438	0B2488	src/sysutil_080B2438.o(.text)	sysutil_080B2438(run): EnableUnransportWindow
+0B2488	0B24B0	src/sysutil_080B2488.o(.text)	sysutil_080B2488(run): DisableSysGrayBox
