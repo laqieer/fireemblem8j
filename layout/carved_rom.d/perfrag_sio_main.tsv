@@ -1,0 +1,3 @@
+042D90	042DB0	src/sio_main_08042D90.o(.text)	sio_main_08042D90(run): SioInit
+042DB0	042DFC	src/sio_main_08042DB0.o(.text)	sio_main_08042DB0(run): SioPollingMsgAndAck
+042E2C	042E38	src/sio_main_08042E2C.o(.text)	sio_main_08042E2C(run): LinkArena_ResetUnk04
