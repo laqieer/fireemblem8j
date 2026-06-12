@@ -1,0 +1,1 @@
+009EEC	009F10	src/RestartGameAndGoto8.o(.text)	RestartGameAndGoto8 (const-diff: JP-constant substituted -> matching C; pairs=[('0x8', '0x7')])

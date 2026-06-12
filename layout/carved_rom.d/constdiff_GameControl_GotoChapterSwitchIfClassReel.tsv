@@ -1,0 +1,1 @@
+009BA0	009BBC	src/GameControl_GotoChapterSwitchIfClassReel.o(.text)	GameControl_GotoChapterSwitchIfClassReel (const-diff: JP-constant substituted -> matching C; pairs=[('0x13', '0x12')])

@@ -1,0 +1,1 @@
+0B9254	0B9284	src/Shop_NoSendToConvoyDialogue.o(.text)	Shop_NoSendToConvoyDialogue (const-diff: JP-constant substituted -> matching C; pairs=[('0x8c7', '0x867'), ('0x8ca', '0x86a')])

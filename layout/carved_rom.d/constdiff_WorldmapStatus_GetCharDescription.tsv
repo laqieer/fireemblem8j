@@ -1,0 +1,1 @@
+0C57DC	0C5810	src/WorldmapStatus_GetCharDescription.o(.text)	WorldmapStatus_GetCharDescription (const-diff: JP-constant substituted -> matching C; pairs=[('0x6be', '0x63f')])

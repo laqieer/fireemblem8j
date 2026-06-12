@@ -1,0 +1,1 @@
+08C0F8	08C168	src/DrawHelpBoxSaveMenuStats.o(.text)	DrawHelpBoxSaveMenuStats (const-diff: JP-constant substituted -> matching C; pairs=[('0x538', '0x4c8'), ('0x535', '0x4c5')])

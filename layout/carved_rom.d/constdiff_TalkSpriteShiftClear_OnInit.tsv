@@ -1,0 +1,1 @@
+007FCC	008004	src/TalkSpriteShiftClear_OnInit.o(.text)	TalkSpriteShiftClear_OnInit (const-diff: JP-constant substituted -> matching C; pairs=[('0x1c', '0x1a')])

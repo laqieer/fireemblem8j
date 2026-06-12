@@ -1,0 +1,1 @@
+0B8F30	0B8F44	src/Shop_BuyDialogue.o(.text)	Shop_BuyDialogue (const-diff: JP-constant substituted -> matching C; pairs=[('0x8a3', '0x843')])

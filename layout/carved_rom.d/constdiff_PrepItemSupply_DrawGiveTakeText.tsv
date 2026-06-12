@@ -1,0 +1,1 @@
+09F8E0	09F968	src/PrepItemSupply_DrawGiveTakeText.o(.text)	PrepItemSupply_DrawGiveTakeText (const-diff: JP-constant substituted -> matching C; pairs=[('0x59e', '0x529'), ('0x59f', '0x52a')])

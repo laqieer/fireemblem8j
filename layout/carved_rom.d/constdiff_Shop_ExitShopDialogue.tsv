@@ -1,0 +1,1 @@
+0B9580	0B95A8	src/Shop_ExitShopDialogue.o(.text)	Shop_ExitShopDialogue (const-diff: JP-constant substituted -> matching C; pairs=[('0x898', '0x838'), ('0x8b8', '0x858')])

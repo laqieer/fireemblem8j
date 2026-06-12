@@ -1,0 +1,16 @@
+RestartGameAndGoto8
+RestartGameAndGoto12
+GetWorldMapNodeName
+GameControl_SetupBackdropBlend
+GameControlHandlePostNormalOrExtraChapter
+DrawAccuracyText
+WorldmapStatus_GetCharDescription
+PutGMapPIClassName
+PutGMapPICharName
+PrepItemList_DrawOwnerHeaderText
+UnitActionMenu_Attack
+DrawShopItemLine
+DrawHelpBoxSaveMenuStats
+SaveMenuHandleHelpBox
+PrepItemSupply_DrawGiveTakeText
+Prep_DrawChapterGoal

@@ -1,0 +1,38 @@
+#include "global.h"
+#include "bmunit.h"
+#include "player_interface.h"
+#include "bmitem.h"
+#include "fontgrp.h"
+#include "hardware.h"
+#include "m4a.h"
+#include "soundwrapper.h"
+#include "statscreen.h"
+#include "uiutils.h"
+#include "bmcontainer.h"
+#include "mu.h"
+#include "icon.h"
+#include "ctc.h"
+#include "bmio.h"
+#include "face.h"
+#include "bm.h"
+#include "bmmind.h"
+#include "scene.h"
+#include "prepscreen.h"
+#include "bmshop.h"
+#include "bmlib.h"
+#include "mapanim.h"
+#include "helpbox.h"
+#include "worldmap.h"
+#include "gba_sprites.h"
+#include "constants/faces.h"
+#include "constants/items.h"
+#include "constants/songs.h"
+
+void Shop_AnythingElseRestartDialogue(struct ProcShop * proc)
+{
+    proc->head_loc = 0;
+    StartShopDialogue(0x83D, proc);
+    // SHOP_TYPE_ARMORY: "Do you need anything else?[NL][BuySell]"
+    // SHOP_TYPE_VENDOR: "Anything else for you?[NL][BuySell]"
+    // SHOP_TYPE_SECRET_SHOP: "Well? Anything else for you?[NL][BuySell]"
+}
