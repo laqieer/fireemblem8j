@@ -238,3 +238,6 @@ Pal_efxCrimsonEyeBGFinish1
 efxCrimsonEyeOBJ_SetDrawPriority
 efxCrimsonEyeOBJ_WrapAngle
 gEfxmagicCrimsoneye_0
+AnyLinkArenaTeamExists
+LoadLinkArenaChoiceBoxGfx
+SioTeamList_SetTeamSpriteXOffsets
