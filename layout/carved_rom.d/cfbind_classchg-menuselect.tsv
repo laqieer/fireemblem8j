@@ -1,0 +1,3 @@
+0D29FC	0D2A34	src/ClassChgMenuItem_OnChange.o(.text)	ClassChgMenuItem_OnChange(run): ClassChgMenuItem_OnChange
+0D29C0	0D29FC	src/ClassChgMenuItem_OnTextDraw.o(.text)	ClassChgMenuItem_OnTextDraw(run): ClassChgMenuItem_OnTextDraw
+0D2A74	0D2AD0	src/ClassChgMenuExec.o(.text)	ClassChgMenuExec(run): ClassChgMenuExec

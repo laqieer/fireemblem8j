@@ -1,0 +1,6 @@
+ChangeClassDescription	080D1780	thumb	ClassChgMenuItem_OnChange
+SetTalkPrintDelay	080069F4	thumb	ClassChgMenuItem_OnChange
+ClassChgMenuOnDrawCore	080D2938	thumb	ClassChgMenuItem_OnTextDraw
+gMenuDef_PromoSel	08BABA34	data	ClassChgMenuExec
+ClassChgMenuRect	08BABAB0	data	ClassChgMenuExec
+ClearTextPart	08003D30	thumb	ClassChgMenuOnDrawCore
