@@ -197,12 +197,19 @@ def main():
             print(f"  {tu:32s} {n}")
         return
 
+    batch = "--batch" in args
+    if batch:
+        args.remove("--batch")
+
     if tu_mode:
         rows = all_cf_rows(funclib, bounds)
         wanted = set(args)
         names = [r[0] for r in rows if r[1] in wanted]
     else:
         names = args
+
+    if batch:
+        return run_batch(names, funclib, bounds)
 
     carved, reverted, skipped = [], [], []
     for name in names:
@@ -225,6 +232,150 @@ def main():
     if carved:
         print("OBJECTS: " + " ".join(carved))
     return 0 if green else 1
+
+
+def run_batch(names, funclib, bounds):
+    """Stage MANY carves with the per-function `make compare` FAKED OK, then run ONE
+    real `make compare`; on RED, range-diff each staged carve vs JP and revert
+    offenders, rebuild, converge. ~1 build for N carves vs N builds."""
+    rom = open("baserom.gba", "rb").read()
+    real_sh = port_run.sh
+
+    def fake_sh(c):
+        # During staging, short-circuit the expensive whole-ROM verify so port_run
+        # WRITES its fragments + returns True without building/reverting. Everything
+        # else (make src/X.o, make layout, objdump, iconv...) runs for real.
+        if c.strip() in ("make compare", "make clean") or c.strip().startswith("make compare"):
+            class R:  # mimic CompletedProcess
+                returncode = 0
+                stdout = "fireemblem8.gba: OK\n"
+                stderr = ""
+            return R()
+        return real_sh(c)
+
+    staged = []           # (name, s, e, cov)
+    skipped = []
+    port_run.sh = fake_sh
+    try:
+        for name in names:
+            if os.path.exists(f"src/{name}.c"):
+                continue
+            tu = find_tu(name)
+            if not tu:
+                skipped.append((name, "NOTU")); continue
+            if not os.path.exists(f"/home/laqieer/fireemblem8u/src/{tu}.c"):
+                skipped.append((name, "NOTUFILE")); continue
+            s, e = jp_range(name, funclib, bounds)
+            if s is None:
+                skipped.append((name, "NOADDR")); continue
+            start, end = f"{0x08000000+s:08X}", f"{0x08000000+e:08X}"
+            cov = gbadisasm_cover(s, e)
+            for path, _c, asm_path, _ac in cov:
+                os.remove(path)
+                if asm_path and os.path.exists(asm_path):
+                    os.remove(asm_path)
+            ok = port_run.port(name, runs=[(start, end, [name])], src_tu=tu,
+                               frag=f"cfbind_{tu}", func_only=True)
+            if ok and os.path.exists(f"src/{name}.c"):
+                staged.append((name, s, e, cov))
+                print(f"[stage ] {name}  {start}..{end}")
+            else:
+                for path, content, asm_path, asm_content in cov:
+                    if not os.path.exists(path):
+                        open(path, "w").write(content)
+                    if asm_path and asm_content is not None and not os.path.exists(asm_path):
+                        open(asm_path, "w").write(asm_content)
+                skipped.append((name, "CF/compile"))
+                print(f"[skip  ] {name}")
+    finally:
+        port_run.sh = real_sh
+
+    print(f"\nstaged {len(staged)}; running real make compare ...")
+    if not staged:
+        return 0
+
+    def revert_staged(name, s, e, cov):
+        for p in (f"src/{name}.c", f"src/{name}.o", f"src/{name}.s"):
+            if os.path.exists(p):
+                os.remove(p)
+        _drop_carve_rows(name, s, e)
+        for path, content, asm_path, asm_content in cov:
+            if not os.path.exists(path):
+                open(path, "w").write(content)
+            if asm_path and asm_content is not None and not os.path.exists(asm_path):
+                open(asm_path, "w").write(asm_content)
+
+    kept = list(staged)
+    for attempt in range(6):
+        real_sh("rm -f src/*.s fireemblem8.elf fireemblem8.gba")
+        lay = real_sh("make layout 2>&1")
+        log = lay.stdout + lay.stderr
+        if "overlap/order error" in log:
+            m = re.search(r"overlap/order error at 0x([0-9a-f]+)"
+                          r"(?:\s*\(prev end 0x([0-9a-f]+)\))?", log)
+            if m:
+                addr = int(m.group(1), 16)
+                prev = int(m.group(2), 16) if m.group(2) else addr
+                lo, hi = min(addr, prev), max(addr, prev)
+                # any kept carve whose [s,e) touches the overlap window is the offender
+                victims = [t for t in kept if t[1] < hi and t[2] > lo]
+                # also a carve that starts/ends exactly at the boundary
+                victims += [t for t in kept if t not in victims
+                            and (t[1] == addr or t[2] == addr
+                                 or t[1] == prev or t[2] == prev)]
+                if victims:
+                    v = victims[0]
+                    print(f"  layout overlap @{addr:06X} (prev {prev:06X}) -> revert {v[0]}")
+                    revert_staged(*v); kept.remove(v); continue
+            print("LAYOUT ERROR (recovering):", log[-300:])
+            for t in kept:
+                revert_staged(*t)
+            real_sh("make layout")
+            return 1
+        real_sh("rm -f src/*.s")
+        mc = real_sh("make compare 2>&1")
+        clog = mc.stdout + mc.stderr
+        if "fireemblem8.gba: OK" in clog:
+            print(f"OK: +{len(kept)} graduated (attempt {attempt})")
+            print("OBJECTS: " + " ".join(t[0] for t in kept))
+            return 0
+        bad = set()
+        for m in re.finditer(r"src/(\w+)\.c:\d+.*undefined reference", clog):
+            bad.add(m.group(1))
+        for m in re.finditer(r"multiple definition of [`'](\w+)'", clog):
+            sym = m.group(1)
+            for t in kept:
+                if t[0] == sym:
+                    bad.add(sym)
+        if not bad and os.path.exists("fireemblem8.gba"):
+            built = open("fireemblem8.gba", "rb").read()
+            for (n2, s2, e2, _c) in kept:
+                if rom[s2:e2] != built[s2:e2]:
+                    bad.add(n2)
+        if not bad:
+            print("RED, no offender:", clog[-400:]); return 1
+        print(f"  attempt {attempt}: revert {len(bad)} offenders: {sorted(bad)}")
+        for n2 in bad:
+            t = next((x for x in kept if x[0] == n2), None)
+            if t:
+                revert_staged(*t); kept.remove(t)
+        if not kept:
+            print("all reverted"); return 0
+    print("exhausted retries"); return 1
+
+
+def _drop_carve_rows(name, s, e):
+    """Remove this carve's carved_rom row (the one that PLACES src/<name>.o(.text) and
+    would cause the overlap/mismatch). Keyed on the src/<name>.o object so sibling
+    carves in the same fragment survive. Leaves the baseline_syms ABS binds in place:
+    an orphan bind is a harmless absolute alias to an unused symbol (it places no
+    bytes), and a SHARED pointee bind (several funcs -> same ProcScr table) must NOT
+    be dropped while a sibling still needs it."""
+    tu = find_tu(name)
+    cr = f"layout/carved_rom.d/cfbind_{tu}.tsv"
+    if os.path.exists(cr):
+        kept = [l for l in open(cr) if f"src/{name}.o(" not in l]
+        open(cr, "w").writelines(kept)
 
 
 if __name__ == "__main__":
