@@ -1,0 +1,3 @@
+0C3F84	0C3FFC	src/worldmap_scrollmanage_080C3F84.o(.text)	worldmap_scrollmanage_080C3F84(run): GmMoveCursor_OnLoop
+0C40C4	0C415C	src/worldmap_scrollmanage_080C40C4.o(.text)	worldmap_scrollmanage_080C40C4(run): GmScrollManage_OnLoop
+0C4274	0C428C	src/worldmap_scrollmanage_080C4274.o(.text)	worldmap_scrollmanage_080C4274(run): CheckGmScrolling
