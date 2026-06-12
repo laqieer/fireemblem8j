@@ -1,0 +1,6 @@
+0502A4	0502F4	src/uimenu_080502A4.o(.text)	uimenu_080502A4(run): Menu_FrozenHelpBox_OnLoop
+0502F4	050328	src/uimenu_080502F4.o(.text)	uimenu_080502F4(run): MenuFrozenHelpBox
+050328	050370	src/uimenu_08050328.o(.text)	uimenu_08050328(run): Menu_Frozen_OnLoop
+050380	0503A0	src/uimenu_08050380.o(.text)	uimenu_08050380(run): FreezeMenu
+0503A0	0503C0	src/uimenu_080503A0.o(.text)	uimenu_080503A0(run): ResumeMenu
+0505A0	0505C0	src/uimenu_080505A0.o(.text)	uimenu_080505A0(run): SyncMenuBgs
