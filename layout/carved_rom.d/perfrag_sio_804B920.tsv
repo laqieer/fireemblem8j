@@ -1,0 +1,3 @@
+04C8F4	04C940	src/sio_804B920_0804C8F4.o(.text)	sio_804B920_0804C8F4(run): Sio_BoxTransition_Init
+04C940	04C9DC	src/sio_804B920_0804C940.o(.text)	sio_804B920_0804C940(run): Sio_BoxTransitionOpen_Loop
+04CADC	04CB78	src/sio_804B920_0804CADC.o(.text)	sio_804B920_0804CADC(run): Sio_BoxTransitionClose_Loop

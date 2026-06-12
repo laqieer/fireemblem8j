@@ -1,0 +1,3 @@
+InitWindowScanlineBounds
+Sio_BoxTransitionHBlankHandler
+Sio_SwapBoxTransitionBuffers
