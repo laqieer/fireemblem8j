@@ -1,0 +1,9 @@
+0906C8	090710	src/uichapterstatus_080906C8.o(.text)	uichapterstatus_080906C8(run): ChapterStatus_SetupFont
+090710	090780	src/uichapterstatus_08090710.o(.text)	uichapterstatus_08090710(run): DrawChapterStatusStatValues
+0908DC	0909F0	src/uichapterstatus_080908DC.o(.text)	uichapterstatus_080908DC(run): ChapterStatus_LoopKeyHandler
+0909F0	090A1C	src/uichapterstatus_080909F0.o(.text)	uichapterstatus_080909F0(run): ChapterStatus_OnEnd
+090A1C	090A38	src/uichapterstatus_08090A1C.o(.text)	uichapterstatus_08090A1C(run): ChapterStatus_FocusLeaderUnit
+090A38	090A70	src/uichapterstatus_08090A38.o(.text)	uichapterstatus_08090A38(run): StartChapterStatusScreen
+090A70	090A88	src/uichapterstatus_08090A70.o(.text)	uichapterstatus_08090A70(run): StartChapterStatusScreen_FromPrep
+090A88	090AEC	src/uichapterstatus_08090A88.o(.text)	uichapterstatus_08090A88(run): StatusScreenSpriteDraw_Init
+090AEC	090CAC	src/uichapterstatus_08090AEC.o(.text)	uichapterstatus_08090AEC(run): StatusScreenSpriteDraw_Loop
