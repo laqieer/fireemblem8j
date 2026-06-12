@@ -1,0 +1,5 @@
+03C5D8	03C67C	src/cp_script_0803C5D8.o(.text)	cp_script_0803C5D8(run): AiScriptCmd_00_ConditionalGoto
+03C67C	03C6AC	src/cp_script_0803C67C.o(.text)	cp_script_0803C67C(run): AiScriptCmd_01_FunctionCall
+03D1B8	03D268	src/cp_script_0803D1B8.o(.text)	cp_script_0803D1B8(run): AiScriptCmd_18_TryAttackSnagWall
+03D268	03D2E4	src/cp_script_0803D268.o(.text)	cp_script_0803D268(run): AiScriptCmd_19_MoveTowardsTerrain
+03D2E4	03D360	src/cp_script_0803D2E4.o(.text)	cp_script_0803D2E4(run): AiScriptCmd_1A_MoveTowardsTerrain
