@@ -1,0 +1,4 @@
+StartSubSpell_efxResireBG.o	.rodata	ALIGN	2
+StartSubSpell_efxResireBG.o	.text	68	00000000
+StartSubSpell_efxResireBG2.o	.rodata	ALIGN	2
+StartSubSpell_efxResireBG2.o	.text	78	00000000

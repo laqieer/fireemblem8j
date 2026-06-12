@@ -1,0 +1,7 @@
+ProcScr_efxResireRST	085FFF70	data	StartSubSpell_efxResireRST
+ProcScr_efxResireBG	085FFD90	data	StartSubSpell_efxResireBG
+TsaArray_NosferatuBg	085FFEA4	data	StartSubSpell_efxResireBG
+ImgArray_NosferatuBg	085FFDD8	data	StartSubSpell_efxResireBG
+Pal_NosferatuBg	08663218	data	StartSubSpell_efxResireBG
+gFrameConfig_EfxmagicNosferatu_0	080E2268	data	efxResireBG_Loop_B
+ProcScr_efxResireBG2	085FFDC0	data	StartSubSpell_efxResireBG2

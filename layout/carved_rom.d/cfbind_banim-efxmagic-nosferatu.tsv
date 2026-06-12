@@ -1,0 +1,3 @@
+0605B0	06063C	src/StartSubSpell_efxResireBG.o(.text)	StartSubSpell_efxResireBG(run): StartSubSpell_efxResireBG
+060760	0607FC	src/efxResireBG_Loop_B.o(.text)	efxResireBG_Loop_B(run): efxResireBG_Loop_B
+06063C	0606DC	src/StartSubSpell_efxResireBG2.o(.text)	StartSubSpell_efxResireBG2(run): StartSubSpell_efxResireBG2

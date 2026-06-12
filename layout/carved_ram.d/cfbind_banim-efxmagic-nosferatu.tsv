@@ -1,0 +1,2 @@
+080E21FA	rom	src/StartSubSpell_efxResireBG.o(.rodata)	StartSubSpell_efxResireBG .rodata region-diff (incbin)
+080E22C6	rom	src/StartSubSpell_efxResireBG2.o(.rodata)	StartSubSpell_efxResireBG2 .rodata region-diff (incbin)
