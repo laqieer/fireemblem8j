@@ -446,7 +446,7 @@
 1F5784	1F578C	src/bmsave-misc.o(.rodata)	bmsave-misc .rodata
 1F5BEC	1F5BF0	src/gamerankings.o(.rodata)	gamerankings .rodata
 1F5C6C	1F611C	asm/dat_worldmap_node_data_gf.o(.rodata.dat_worldmap_node_data_gf)	dat_worldmap_node_data_gf region-diff asset, boundary-pinned (1KB)
-1F6188	1F6340	asm/dat_worldmap_gmapunit_p2.o(.rodata.dat_worldmap_gmapunit_p2)	dat_worldmap_gmapunit_p2 region-same per-sym shifted (0KB)
+1F6188	1F6340	src/data/worldmap_path_data.o(.data)	gWorldmapPath_0..19 typed C (GMapMovementPathData; region-same coords; upgraded from dat_worldmap_gmapunit_p2 incbin)
 1F6340	1F64C0	asm/dat_gWMPathData_ref.o(.rodata.dat_gWMPathData_ref)	gWMPathData region-diff (funcmap code-ref, 0KB)
 1F6534	1F65C0	asm/dat_worldmap_gmapunit_p3.o(.rodata.dat_worldmap_gmapunit_p3)	dat_worldmap_gmapunit_p3 region-same per-sym shifted (0KB)
 1F6620	1F66A4	asm/dat_worldmap_gmapunit_p5.o(.rodata.dat_worldmap_gmapunit_p5)	dat_worldmap_gmapunit_p5 region-same per-sym shifted (0KB)

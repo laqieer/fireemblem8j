@@ -3165,3 +3165,31 @@ assigned). HYPOTHESIS: a meaningful fraction are still mechanically reachable (r
 not genuine FAR. ACTION: a frontier re-sweep — run `perm2_graduate.py` + `perfrag_carve.py` over the CURRENT
 `asm/sub_*.s` set (re-derived, not the stale worklists), partitioned a–m / n–z, carving the reachable and reporting
 the true FAR/LEN tail. Reserve decomp-permuter / IDA-Ghidra for the confirmed FAR residue after the re-sweep.
+
+## D70 — dataWmMenu: upgrade region-same incbin carves to typed C (gWorldmapPath_0..19 → src/data/worldmap_path_data.c) to grow EXTRACTED-DATA (2026-06-12)
+
+**Context.** DATA-worldmap-menu unit: drive the EXTRACTED-DATA axis up by porting world-map / menu *definition*
+tables to typed C. Survey of fe8u `src/data/worldmap/` + `src/data/menu/` found those `.c` are almost entirely
+graphics INCBIN (4bpp/tsa/gbapal asset data), not typed struct tables — out of scope. The genuine typed-table
+sources are in `src/*.c` (e.g. `worldmap_path.c`, `menu_def.c`), and most menu tables (MenuItemDef) are already
+carved region-different in JP because they embed JP-specific text IDs and function pointers (the `dat_g*MenuItems_ref`
+/ `dat_MenuItemDef_*_ref` incbins).
+
+**Decision.** The clean, oracle-safe win for this unit is to **upgrade existing region-same incbin carves to typed
+C** rather than carve new bytes. `gWorldmapPath_0..19` (the world-map node-to-node movement-path keyframe tables,
+`struct GMapMovementPathData {int elapsedTime; s16 x; s16 y;}`) were carved as the incbin block
+`dat_worldmap_gmapunit_p2` (JP 0x1F6188..0x1F6340, 0x1B8 bytes). They are pure region-same coordinate data (verified
+every value byte-for-byte against fe8u `worldmap_path.c`; `{ -1 }` terminator = `{-1,0,0}`), so a typed
+`src/data/worldmap_path_data.c` (using `CONST_DATA` → `.data`, mirroring the gUnitLookup/monstergen template)
+compiles to a `.data` section byte-identical to the concatenated residual bins (`cmp` clean). Swapped the
+carved_rom.tsv row to `src/data/worldmap_path_data.o(.data)` and `git rm` the asm carve.
+
+**Why not the MenuItemDef tables.** They're region-different (text-ID + fnptr divergence) and already covered by the
+`_ref` incbins; re-deriving them as typed C would need JP `raw_text_jp.h` IDs and JP fnptr symbols — higher risk, no
+EXTRACTED-DATA gain over the existing carve. Left as-is.
+
+**Result.** `make compare` OK (incremental + cold `make clean`), ROM = 16,777,216 B, `check_layout` OK (new `.c`
+git-tracked), `check_selfcontained` = 100% (0 baserom incbins). +1 typed-C TU, ~440 bytes moved from incbin to
+real source. `gWMPathData` (references these paths) stays region-different incbin — its `.gfxData` resolves to
+JP-shifted `gWorldmapSprite_*`. **Lever for future EXTRACTED-DATA growth: sweep the region-same `dat_*` incbin
+carves whose underlying data is a known typed fe8u struct table and upgrade them to `src/data/*.c` in place.**
