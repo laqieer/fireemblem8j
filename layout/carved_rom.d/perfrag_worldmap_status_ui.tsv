@@ -1,0 +1,8 @@
+0C57B8	0C57DC	src/worldmap_status_ui_080C57B8.o(.text)	worldmap_status_ui_080C57B8(run): StartWorldmapStatusHelpBox
+0C5810	0C5830	src/worldmap_status_ui_080C5810.o(.text)	worldmap_status_ui_080C5810(run): WorldmapStatus_GetClassDescription
+0C59F4	0C5A10	src/worldmap_status_ui_080C59F4.o(.text)	worldmap_status_ui_080C59F4(run): WorldmapStatus_InitText
+0C5A10	0C5AC0	src/worldmap_status_ui_080C5A10.o(.text)	worldmap_status_ui_080C5A10(run): WorldmapStatus_InitDetails
+0C5BBC	0C5C18	src/worldmap_status_ui_080C5BBC.o(.text)	worldmap_status_ui_080C5BBC(run): WorldmapStatus_Init
+0C5C24	0C5C88	src/worldmap_status_ui_080C5C24.o(.text)	worldmap_status_ui_080C5C24(run): WorldmapStatus_0
+0C5C88	0C5CCC	src/worldmap_status_ui_080C5C88.o(.text)	worldmap_status_ui_080C5C88(run): WorldmapStatus_PutTimeAndGold
+0C5CCC	0C5D70	src/worldmap_status_ui_080C5CCC.o(.text)	worldmap_status_ui_080C5CCC(run): WorldmapStatus_Loop_KeyHandler
