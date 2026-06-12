@@ -1,0 +1,17 @@
+09A720	09A74C	src/prep_itemscreen_0809A720.o(.text)	prep_itemscreen_0809A720(run): DrawFundsSprite_Init
+09A74C	09A780	src/prep_itemscreen_0809A74C.o(.text)	prep_itemscreen_0809A74C(run): DrawFundsSprite_Loop
+09A780	09A7A4	src/prep_itemscreen_0809A780.o(.text)	prep_itemscreen_0809A780(run): StartDrawPrepFundsSprite
+09A7A4	09A7C4	src/prep_itemscreen_0809A7A4.o(.text)	prep_itemscreen_0809A7A4(run): ShowPrepFundsSpriteAt
+09A7C4	09A7D8	src/prep_itemscreen_0809A7C4.o(.text)	prep_itemscreen_0809A7C4(run): HidePrepFundsSprite
+09A804	09A82C	src/prep_itemscreen_0809A804.o(.text)	prep_itemscreen_0809A804(run): DrawUnitInfoBg_Loop
+09A82C	09A848	src/prep_itemscreen_0809A82C.o(.text)	prep_itemscreen_0809A82C(run): StartDrawPrepUnitInfoBgSprites
+09A848	09A868	src/prep_itemscreen_0809A848.o(.text)	prep_itemscreen_0809A848(run): ShowUnitInfoBgSpritesAt
+09A868	09A87C	src/prep_itemscreen_0809A868.o(.text)	prep_itemscreen_0809A868(run): HideUnitInfoBgSprites
+09A8D8	09A8F8	src/prep_itemscreen_0809A8D8.o(.text)	prep_itemscreen_0809A8D8(run): PrepItemScreen_HideFunds
+09AE20	09AE40	src/prep_itemscreen_0809AE20.o(.text)	prep_itemscreen_0809AE20(run): PrepItem_DrawPromptBox
+09AE40	09AE80	src/prep_itemscreen_0809AE40.o(.text)	prep_itemscreen_0809AE40(run): PrepItem_DrawPromptBoxGMap
+09AE80	09AEA0	src/prep_itemscreen_0809AE80.o(.text)	prep_itemscreen_0809AE80(run): PrepItem_DrawItemListBox
+09AEA0	09AEC0	src/prep_itemscreen_0809AEA0.o(.text)	prep_itemscreen_0809AEA0(run): PrepItem_DrawCommandMenuBox
+09AEC0	09AF14	src/prep_itemscreen_0809AEC0.o(.text)	prep_itemscreen_0809AEC0(run): PrepItem_EndPopupBoxWorkers
+09AF98	09B118	src/prep_itemscreen_0809AF98.o(.text)	prep_itemscreen_0809AF98(run): PrepItem_DrawUnitGridScreen
+09B284	09B3AC	src/prep_itemscreen_0809B284.o(.text)	prep_itemscreen_0809B284(run): PrepItem_UpdateGridScroll

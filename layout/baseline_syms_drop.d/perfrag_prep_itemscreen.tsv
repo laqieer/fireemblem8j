@@ -1,0 +1,10 @@
+Img_PrepFunds
+HideUnitInfoBgSprites
+HidePrepFundsSprite
+PrepItem_DrawCommandMenuBox
+PrepItem_DrawItemListBox
+PrepItem_DrawPromptBox
+PrepItem_DrawPromptBoxGMap
+PrepItem_EndPopupBoxWorkers
+PrepItem_SnapGridScroll
+PrepItem_UpdateGridScroll
