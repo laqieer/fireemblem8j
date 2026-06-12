@@ -85,3 +85,9 @@ StartMu
 GetUnitWeaponUsabilityBits
 ApplyHelpBoxPosition_bug
 AiTryDoDanceAdjacent
+EfxCheckStaffType
+EfxClearScreenFx
+StartMuInternal
+GetCgTextBoxDimensions
+CheckBattleUnitLevelUp
+SetBattleUnitWeapon
