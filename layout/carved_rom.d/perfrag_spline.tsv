@@ -1,0 +1,3 @@
+00A788	00A844	src/spline_0800A788.o(.text)	spline_0800A788(run): Spline_Ease
+00A9DC	00AB34	src/spline_0800A9DC.o(.text)	spline_0800A9DC(run): Spline_ComputeLeftTangents
+00AEB0	00B044	src/spline_0800AEB0.o(.text)	spline_0800AEB0(run): Spline_QuaternionToMatrix4x4
