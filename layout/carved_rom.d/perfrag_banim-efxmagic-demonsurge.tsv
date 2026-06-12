@@ -1,0 +1,7 @@
+06D858	06D970	src/banim-efxmagic-demonsurge_0806D858.o(.text)	banim-efxmagic-demonsurge_0806D858(run): efxGorgon_Loop_Main
+06DB54	06DBC0	src/banim-efxmagic-demonsurge_0806DB54.o(.text)	banim-efxmagic-demonsurge_0806DB54(run): efxGorgonBGTwister_Loop
+06DDF0	06DF00	src/banim-efxmagic-demonsurge_0806DDF0.o(.text)	banim-efxmagic-demonsurge_0806DDF0(run): EfxmagicDemonsurgeFadeBlack_Loop_HoldBlack
+06DF14	06DFBC	src/banim-efxmagic-demonsurge_0806DF14.o(.text)	banim-efxmagic-demonsurge_0806DF14(run): efxGorgonOBJTwisterPiece_Loop
+06E0B8	06E210	src/banim-efxmagic-demonsurge_0806E0B8.o(.text)	banim-efxmagic-demonsurge_0806E0B8(run): efxGorgonOBJTwister_Loop
+06E374	06E3DC	src/banim-efxmagic-demonsurge_0806E374.o(.text)	banim-efxmagic-demonsurge_0806E374(run): efxGorgonBGFinish_Loop
+06E3DC	06E470	src/banim-efxmagic-demonsurge_0806E3DC.o(.text)	banim-efxmagic-demonsurge_0806E3DC(run): StartSubSpell_efxGorgonBGFinish
