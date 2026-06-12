@@ -15,3 +15,7 @@ SoundRoom_DrawVolumeGraphSprites
 SoundRoom_GetScrollDirection
 StartSoundRoomSong
 StopSoundRoomSong
+Img_DivineSprites
+Pal_DivineBg
+Pal_DivineBg3
+Pal_DivineSprites
