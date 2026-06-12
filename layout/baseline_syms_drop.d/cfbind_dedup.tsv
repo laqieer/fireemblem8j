@@ -192,3 +192,11 @@ PutGuideCategoryList
 SetGuidePanelTilemapPalette
 Tsa_UnkData_5
 gGuideSt
+ArenaGetMatchupGoldValue
+ArenaGetResult
+SetTalkNumber
+StartArenaDialogue
+StartUiGoldBox
+gGfx_ArenaBuildingFront
+gPal_ArenaBuildingFront
+gTsa_ArenaBuildingFront
