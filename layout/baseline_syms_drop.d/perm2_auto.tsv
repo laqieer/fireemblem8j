@@ -84,3 +84,4 @@ AiGetChestUnlockItemSlot
 StartMu
 GetUnitWeaponUsabilityBits
 ApplyHelpBoxPosition_bug
+AiTryDoDanceAdjacent
