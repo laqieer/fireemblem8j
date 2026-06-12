@@ -1,0 +1,5 @@
+NewUnitInfoWindow
+GetUnitAidIconId
+PutUnitAidIconForTextAt
+GetItemMaxUses
+IsItemHammernable

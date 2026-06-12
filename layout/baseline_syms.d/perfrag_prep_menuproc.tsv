@@ -1,0 +1,7 @@
+ProcScr_PrepMenu	08A73E74	data	prep_menuproc_08091574
+ExecUnitDefaultPromotion	0802F4B8	thumb	prep_menuproc_080987D8
+ProcScr_PrepPromoteDebug	08A941F8	data	prep_menuproc_080988D4
+Sprite_PrepExMap	08A942B2	data	prep_menuproc_080989AC
+SpriteArray_PrepChapterNumbers	08A94358	data	prep_menuproc_080989D4
+Sprite_PrepChapter	08A942C6	data	prep_menuproc_080989D4
+Sprite_PrepRuins	08A942E2	data	prep_menuproc_08098B54

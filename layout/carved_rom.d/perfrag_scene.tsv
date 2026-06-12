@@ -1,0 +1,6 @@
+006990	00699C	src/scene_08006990.o(.text)	scene_08006990(run): SetTalkLines
+0080A4	0080E8	src/scene_080080A4.o(.text)	scene_080080A4(run): ClearTalkBubble
+0080E8	00814C	src/scene_080080E8.o(.text)	scene_080080E8(run): ClearPutTalkText
+00814C	0081A0	src/scene_0800814C.o(.text)	scene_0800814C(run): ClearTalkText
+0081A0	0082DC	src/scene_080081A0.o(.text)	scene_080081A0(run): PutTalkBubble
+0082DC	0082F4	src/scene_080082DC.o(.text)	scene_080082DC(run): StartOpenTalkBubble

@@ -1,0 +1,6 @@
+gUnk_9	02019D00	data	worldmap_path_080C0A98
+MapRoute_RenderPathGfx	080C0A38	thumb	worldmap_path_080C0A98
+gWMPathData	081F6340	data	worldmap_path_080C0A98
+BG_EnableSync	08001F0C	thumb	worldmap_path_080C0DA4
+MapRoute_BlitScrollEdge	080C0BE8	thumb	worldmap_path_080C0DA4
+BG_GetPriority	08001DDC	thumb	worldmap_path_080C0FC8

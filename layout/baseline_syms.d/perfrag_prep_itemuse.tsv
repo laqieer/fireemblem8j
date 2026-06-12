@@ -1,0 +1,4 @@
+PrepItemUseTryMoveHand	0809E144	thumb	prep_itemuse_0809EAC4
+DrawPrepScreenItemUseDesc	0809E6B4	thumb	prep_itemuse_0809EAC4
+PrepItemUseDrawSubBox	0809EBFC	thumb	prep_itemuse_0809EC98
+ProcScr_PrepItemUseScreen	08A94DA8	data	prep_itemuse_0809EF94

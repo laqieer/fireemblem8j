@@ -1,0 +1,3 @@
+002570	0025C0	src/soundwrapper_08002570.o(.text)	soundwrapper_08002570(run): OverrideBgm
+0025C0	00260C	src/soundwrapper_080025C0.o(.text)	soundwrapper_080025C0(run): RestoreBgm
+00260C	00265C	src/soundwrapper_0800260C.o(.text)	soundwrapper_0800260C(run): _RestoreBgm

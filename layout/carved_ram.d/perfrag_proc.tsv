@@ -1,0 +1,3 @@
+02024E68	ewram	src/proc_08002EC0.o(ewram_data)	proc_08002EC0 ewram_data
+02024E68	ewram	src/proc_08002EE8.o(ewram_data)	proc_08002EE8 ewram_data
+02024E68	ewram	src/proc_08002F10.o(ewram_data)	proc_08002F10 ewram_data

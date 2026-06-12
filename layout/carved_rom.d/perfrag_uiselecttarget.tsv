@@ -1,0 +1,6 @@
+0506E0	0507B0	src/uiselecttarget_080506E0.o(.text)	uiselecttarget_080506E0(run): TargetSelection_Loop
+0507B0	050818	src/uiselecttarget_080507B0.o(.text)	uiselecttarget_080507B0(run): NewTargetSelection
+050860	0508D8	src/uiselecttarget_08050860.o(.text)	uiselecttarget_08050860(run): TargetSelection_HandleMoveInput
+0508D8	050930	src/uiselecttarget_080508D8.o(.text)	uiselecttarget_080508D8(run): TargetSelection_HandleSelectInput
+050930	050950	src/uiselecttarget_08050930.o(.text)	uiselecttarget_08050930(run): TargetSelection_Freeze
+050950	050970	src/uiselecttarget_08050950.o(.text)	uiselecttarget_08050950(run): TargetSelection_Unfreeze

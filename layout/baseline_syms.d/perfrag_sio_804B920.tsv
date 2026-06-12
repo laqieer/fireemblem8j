@@ -1,0 +1,5 @@
+InitWindowScanlineBounds	08013288	thumb	sio_804B920_0804C8F4
+gUnk_Sio_2	02000F00	data	sio_804B920_0804C8F4
+Sio_BoxTransitionHBlankHandler	0804C704	thumb	sio_804B920_0804C8F4
+Sio_RasterRotatedBoxToWinBuf	0804C784	thumb	sio_804B920_0804C940
+Sio_SwapBoxTransitionBuffers	0804C744	thumb	sio_804B920_0804C940

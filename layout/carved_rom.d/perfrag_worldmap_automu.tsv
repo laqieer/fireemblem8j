@@ -1,0 +1,5 @@
+0C7EDC	0C7F60	src/worldmap_automu_080C7EDC.o(.text)	worldmap_automu_080C7EDC(run): GmapAutoMu_OnEnd
+0C7F7C	0C7F98	src/worldmap_automu_080C7F7C.o(.text)	worldmap_automu_080C7F7C(run): GmapAutoMu_0
+0C7F98	0C7FB4	src/worldmap_automu_080C7F98.o(.text)	worldmap_automu_080C7F98(run): GmapAutoMu_1
+0C7FD8	0C7FFC	src/worldmap_automu_080C7FD8.o(.text)	worldmap_automu_080C7FD8(run): GmapAutoMu_StartFadeIn
+0C7FFC	0C801C	src/worldmap_automu_080C7FFC.o(.text)	worldmap_automu_080C7FFC(run): GmapAutoMu_StartFadeOut

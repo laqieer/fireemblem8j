@@ -1,0 +1,12 @@
+0BDA6C	0BDC24	src/worldmap_main_080BDA6C.o(.text)	worldmap_main_080BDA6C(run): WorldMap_MuWalkLoop
+0BDEB4	0BDEF0	src/worldmap_main_080BDEB4.o(.text)	worldmap_main_080BDEB4(run): WorldMap_SetNextNodeIcon
+0BDEF0	0BDF94	src/worldmap_main_080BDEF0.o(.text)	worldmap_main_080BDEF0(run): WorldMap_ShowMapUnits
+0BDF94	0BDFDC	src/worldmap_main_080BDF94.o(.text)	worldmap_main_080BDF94(run): WorldMap_ResetMapUnits
+0BE01C	0BE0E0	src/worldmap_main_080BE01C.o(.text)	worldmap_main_080BE01C(run): WorldMap_Init
+0BE6C8	0BE718	src/worldmap_main_080BE6C8.o(.text)	worldmap_main_080BE6C8(run): WorldMap_RestoreDisplay
+0BE718	0BE738	src/worldmap_main_080BE718.o(.text)	worldmap_main_080BE718(run): WorldMap_CallGuide
+0BE94C	0BE988	src/worldmap_main_080BE94C.o(.text)	worldmap_main_080BE94C(run): WorldMap_EndSkirmishDisplay
+0BE988	0BE9D4	src/worldmap_main_080BE988.o(.text)	worldmap_main_080BE988(run): WorldMap_RemoveMergedSkirmishUnits
+0BE9D4	0BEA40	src/worldmap_main_080BE9D4.o(.text)	worldmap_main_080BE9D4(run): WorldMap_CallIntroEvent
+0BEA40	0BEB4C	src/worldmap_main_080BEA40.o(.text)	worldmap_main_080BEA40(run): WorldMap_PostBeginningEvent
+0BEB4C	0BEBA0	src/worldmap_main_080BEB4C.o(.text)	worldmap_main_080BEB4C(run): WorldMap_WaitForChapterIntroEvents

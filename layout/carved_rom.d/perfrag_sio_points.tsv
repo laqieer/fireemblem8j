@@ -1,0 +1,9 @@
+049744	049798	src/sio_points_08049744.o(.text)	sio_points_08049744(run): DrawLinkArenaPointsBox
+049798	049878	src/sio_points_08049798.o(.text)	sio_points_08049798(run): LAPointsBox_LoadBoxes
+049AC8	049B2C	src/sio_points_08049AC8.o(.text)	sio_points_08049AC8(run): PointsNumberMover_LoopMoveToPointsBox
+049B2C	049B74	src/sio_points_08049B2C.o(.text)	sio_points_08049B2C(run): DrawLinkArenaScoreNumber
+049B74	049BE0	src/sio_points_08049B74.o(.text)	sio_points_08049B74(run): PointsNumberMover_InitScoreChange
+049BE0	049C7C	src/sio_points_08049BE0.o(.text)	sio_points_08049BE0(run): PointsNumberMover_TickScore
+049C7C	049C94	src/sio_points_08049C7C.o(.text)	sio_points_08049C7C(run): PointsNumberMover_AwaitEnd
+049CC0	049DDC	src/sio_points_08049CC0.o(.text)	sio_points_08049CC0(run): PointsSpriteText_LoopIn
+049DDC	049EF4	src/sio_points_08049DDC.o(.text)	sio_points_08049DDC(run): PointsSpriteText_LoopOut

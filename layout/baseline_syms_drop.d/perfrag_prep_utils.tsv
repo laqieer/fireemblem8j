@@ -1,0 +1,7 @@
+CountUnitUsableWeapons
+IsWeaponUsable
+GetPrepPageForItem
+SomethingPrepListRelated
+SortPrepScreenItemsByPage
+ClearSupplyItems
+RebuildConvoyFromPrepList

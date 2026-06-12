@@ -1,0 +1,2 @@
+0C51F0	0C52B0	src/worldmap_line_fade_080C51F0.o(.text)	worldmap_line_fade_080C51F0(run): GmapLineFade_Init
+0C52B0	0C52D8	src/worldmap_line_fade_080C52B0.o(.text)	worldmap_line_fade_080C52B0(run): GmapLineFade_Loop

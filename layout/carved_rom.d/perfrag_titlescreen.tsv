@@ -1,0 +1,7 @@
+0CA318	0CA350	src/titlescreen_080CA318.o(.text)	titlescreen_080CA318(run): Title_SetBg2AffineScale
+0CA350	0CA374	src/titlescreen_080CA350.o(.text)	titlescreen_080CA350(run): SkipTitleFx_Loop_KeyListener
+0CA39C	0CA4C4	src/titlescreen_080CA39C.o(.text)	titlescreen_080CA39C(run): Title_Init
+0CA640	0CA69C	src/titlescreen_080CA640.o(.text)	titlescreen_080CA640(run): Title_EnableMainScreenDisplay
+0CAEC0	0CAEF4	src/titlescreen_080CAEC0.o(.text)	titlescreen_080CAEC0(run): Title_ClearLightExplosionScratch
+0CB2A0	0CB310	src/titlescreen_080CB2A0.o(.text)	titlescreen_080CB2A0(run): Title_IDLE
+0CB31C	0CB370	src/titlescreen_080CB31C.o(.text)	titlescreen_080CB31C(run): Title_RestartProc

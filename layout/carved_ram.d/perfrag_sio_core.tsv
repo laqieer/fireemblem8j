@@ -1,0 +1,3 @@
+030017D8	iwram	src/sio_core_08041880.o(.bss)	sio_core_08041880 .bss
+030017D8	iwram	src/sio_core_080418FC.o(.bss)	sio_core_080418FC .bss
+080DD3F0	rom	src/sio_core_08041D0C.o(.rodata)	sio_core_08041D0C .rodata region-diff (incbin)

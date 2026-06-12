@@ -1,0 +1,4 @@
+SioRegisterIrq	08041880	thumb	sio_main_08042D90
+Sio_ResetState	08041818	thumb	sio_main_08042D90
+SioPollingMsg	08041530	thumb	sio_main_08042DB0
+GetSioIndex	08041650	thumb	sio_main_08042DB0

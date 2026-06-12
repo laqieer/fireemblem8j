@@ -1,0 +1,11 @@
+List_PutHighlightedCategorySprites
+PrepItemSupply_DrawConvoyWeaponIconTiles
+StartFace2
+StoreConvoyWeaponIconGraphics
+gUnkData_61
+gUnkData_71
+PrepItemList_ClampCursorAndScroll
+PrepItemList_SnapCursorIntoView
+PrepItemList_ScrollVertical
+PrepItemList_SwitchPageLeft
+PrepItemList_SwitchPageRight

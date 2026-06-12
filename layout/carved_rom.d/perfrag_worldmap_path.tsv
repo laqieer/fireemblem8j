@@ -1,0 +1,10 @@
+0C0A98	0C0B0C	src/worldmap_path_080C0A98.o(.text)	worldmap_path_080C0A98(run): MapRoute_RenderOpenPaths
+0C0B0C	0C0BE8	src/worldmap_path_080C0B0C.o(.text)	worldmap_path_080C0B0C(run): MapRoute_BlitFullWindow
+0C0BE8	0C0CF8	src/worldmap_path_080C0BE8.o(.text)	worldmap_path_080C0BE8(run): MapRoute_BlitScrollEdge
+0C0DA4	0C0F00	src/worldmap_path_080C0DA4.o(.text)	worldmap_path_080C0DA4(run): MapRoute_Loop
+0C0F00	0C0F38	src/worldmap_path_080C0F00.o(.text)	worldmap_path_080C0F00(run): MapRoute_StartTransition
+0C0F38	0C0FC8	src/worldmap_path_080C0F38.o(.text)	worldmap_path_080C0F38(run): MapRoute_PrepareTransition
+0C0FC8	0C0FFC	src/worldmap_path_080C0FC8.o(.text)	worldmap_path_080C0FC8(run): MapRoute_EnableBGSyncs
+0C1DE8	0C1E20	src/worldmap_path_080C1DE8.o(.text)	worldmap_path_080C1DE8(run): GetPlayChapterId
+0C1E54	0C1E74	src/worldmap_path_080C1E54.o(.text)	worldmap_path_080C1E54(run): GetNextUnclearedChapter
+0C207C	0C2090	src/worldmap_path_080C207C.o(.text)	worldmap_path_080C207C(run): SetGmRNState

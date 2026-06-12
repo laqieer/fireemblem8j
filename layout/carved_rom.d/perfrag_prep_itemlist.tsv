@@ -1,0 +1,12 @@
+0A0F9C	0A102C	src/prep_itemlist_080A0F9C.o(.text)	prep_itemlist_080A0F9C(run): List_PutHighlightedCategorySprites
+0A102C	0A139C	src/prep_itemlist_080A102C.o(.text)	prep_itemlist_080A102C(run): PrepItemList_InitGfx
+0A139C	0A13F0	src/prep_itemlist_080A139C.o(.text)	prep_itemlist_080A139C(run): PrepItemList_OnEnd
+0A14B8	0A1564	src/prep_itemlist_080A14B8.o(.text)	prep_itemlist_080A14B8(run): PrepItemList_SwitchPageLeft
+0A1564	0A1610	src/prep_itemlist_080A1564.o(.text)	prep_itemlist_080A1564(run): PrepItemList_SwitchPageRight
+0A1610	0A1694	src/prep_itemlist_080A1610.o(.text)	prep_itemlist_080A1610(run): PrepItemList_ClampCursorAndScroll
+0A1694	0A1738	src/prep_itemlist_080A1694.o(.text)	prep_itemlist_080A1694(run): PrepItemList_ScrollVertical
+0A1738	0A1894	src/prep_itemlist_080A1738.o(.text)	prep_itemlist_080A1738(run): PrepItemList_TakeItemToUnit
+0A1894	0A1928	src/prep_itemlist_080A1894.o(.text)	prep_itemlist_080A1894(run): PrepItemList_SnapCursorIntoView
+0A1928	0A1D28	src/prep_itemlist_080A1928.o(.text)	prep_itemlist_080A1928(run): PrepItemList_Loop_MainKeyHandler
+0A1D28	0A1DD4	src/prep_itemlist_080A1D28.o(.text)	prep_itemlist_080A1D28(run): PrepItemList_MoveUnitInvCursor
+0A1E10	0A1EC4	src/prep_itemlist_080A1E10.o(.text)	prep_itemlist_080A1E10(run): PrepItemList_SwapItemWithUnitSlot

@@ -1,0 +1,11 @@
+097418	097498	src/prepscreen_08097418.o(.text)	prepscreen_08097418(run): Prep_DrawWindowFrame
+097498	0974AC	src/prepscreen_08097498.o(.text)	prepscreen_08097498(run): PrepScreenMenu_OnPickUnits
+0974AC	0974C0	src/prepscreen_080974AC.o(.text)	prepscreen_080974AC(run): PrepScreenMenu_OnItems
+0974C0	0974F0	src/prepscreen_080974C0.o(.text)	prepscreen_080974C0(run): PrepScreenMenu_OnSupport
+0974F0	097520	src/prepscreen_080974F0.o(.text)	prepscreen_080974F0(run): PrepScreenMenu_OnSave
+097520	097544	src/prepscreen_08097520.o(.text)	prepscreen_08097520(run): PrepScreenMenu_OnStartPress
+097674	0976A0	src/prepscreen_08097674.o(.text)	prepscreen_08097674(run): PrepGetLatestCharId
+0976A0	0976D0	src/prepscreen_080976A0.o(.text)	prepscreen_080976A0(run): PrepSetLatestCharId
+0976D0	0976FC	src/prepscreen_080976D0.o(.text)	prepscreen_080976D0(run): IsCharacterForceDeployed
+0976FC	09773C	src/prepscreen_080976FC.o(.text)	prepscreen_080976FC(run): CalcForceDeployedUnitCounts
+097CFC	097D18	src/prepscreen_08097CFC.o(.text)	prepscreen_08097CFC(run): RestartMuralBackground

@@ -1,0 +1,7 @@
+0346B0	0346DC	src/unitinfowindow_080346B0.o(.text)	unitinfowindow_080346B0(run): NewUnitInfoWindow
+0346DC	034744	src/unitinfowindow_080346DC.o(.text)	unitinfowindow_080346DC(run): UnitInfoWindow_PositionUnitName
+0349E4	034A18	src/unitinfowindow_080349E4.o(.text)	unitinfowindow_080349E4(run): PutUnitAidIconForTextAt
+034D64	034EA4	src/unitinfowindow_08034D64.o(.text)	unitinfowindow_08034D64(run): RefreshHammerneUnitInfoWindow
+034EB8	034F04	src/unitinfowindow_08034EB8.o(.text)	unitinfowindow_08034EB8(run): RefreshUnitHpInfoWindow
+034F04	034F24	src/unitinfowindow_08034F04.o(.text)	unitinfowindow_08034F04(run): StartUnitHpStatusInfoWindow
+034F24	034F98	src/unitinfowindow_08034F24.o(.text)	unitinfowindow_08034F24(run): RefreshUnitHpStatusInfoWindow

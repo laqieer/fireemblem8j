@@ -1,0 +1,7 @@
+IsWeaponUsable	0809A0B8	thumb	prep_utils_0809A21C
+CountUnitUsableWeapons	0809A0E0	thumb	prep_utils_0809A21C
+gPrepItemTypePageLut	08A94604	data	prep_utils_0809A2EC
+gPrepscreen_0	02012914	data	prep_utils_0809A320
+gPrepscreen_1	02012F54	data	prep_utils_0809A320
+SortPrepScreenItemsByPage	0809A320	thumb	prep_utils_0809A4BC
+ClearSupplyItems	08031454	thumb	prep_utils_0809A590

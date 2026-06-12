@@ -1,0 +1,17 @@
+0C9644	0C96A8	src/opsubtitle_080C9644.o(.text)	opsubtitle_080C9644(run): OpSubtitle_InitBgFromCommGfx
+0C96A8	0C96D0	src/opsubtitle_080C96A8.o(.text)	opsubtitle_080C96A8(run): OpSubtitle_FillBgIncrementalTiles
+0C96D0	0C96FC	src/opsubtitle_080C96D0.o(.text)	opsubtitle_080C96D0(run): OpSubtitle_HandleStartPress
+0C9A18	0C9A88	src/opsubtitle_080C9A18.o(.text)	opsubtitle_080C9A18(run): OpSubtitle_LoadSlideToBg0
+0C9A88	0C9B0C	src/opsubtitle_080C9A88.o(.text)	opsubtitle_080C9A88(run): OpSubtitle_LoadSlideToBg0AndBg1
+0C9B0C	0C9B58	src/opsubtitle_080C9B0C.o(.text)	opsubtitle_080C9B0C(run): OpSubtitle_LoadTitleSlide
+0C9B58	0C9BD0	src/opsubtitle_080C9B58.o(.text)	opsubtitle_080C9B58(run): OpSubtitle_FadeInSlide_Loop
+0C9BD0	0C9C7C	src/opsubtitle_080C9BD0.o(.text)	opsubtitle_080C9BD0(run): OpSubtitle_FadeOutSlideAndAdvance_Loop
+0C9C7C	0C9D18	src/opsubtitle_080C9C7C.o(.text)	opsubtitle_080C9C7C(run): OpSubtitle_FadeOutSlideToTitle_Loop
+0C9D18	0C9DD4	src/opsubtitle_080C9D18.o(.text)	opsubtitle_080C9D18(run): OpSubtitle_BlendFadeInSlide_Loop
+0C9E58	0C9EBC	src/opsubtitle_080C9E58.o(.text)	opsubtitle_080C9E58(run): OpSubtitle_SetupScrollTextBgs
+0C9EBC	0C9F60	src/opsubtitle_080C9EBC.o(.text)	opsubtitle_080C9EBC(run): OpSubtitle_FadeInScrollTextPal_Loop
+0C9F60	0C9F80	src/opsubtitle_080C9F60.o(.text)	opsubtitle_080C9F60(run): OpSubtitle_ReloadTitleSlide
+0C9FD0	0CA0E0	src/opsubtitle_080C9FD0.o(.text)	opsubtitle_080C9FD0(run): OpSubtitle_SetupTitleBgs
+0CA0E0	0CA128	src/opsubtitle_080CA0E0.o(.text)	opsubtitle_080CA0E0(run): OpSubtitle_ClearTileAndDisableTitleBg2
+0CA128	0CA144	src/opsubtitle_080CA128.o(.text)	opsubtitle_080CA128(run): OpSubtitle_BackupPalette
+0CA144	0CA1B8	src/opsubtitle_080CA144.o(.text)	opsubtitle_080CA144(run): OpSubtitle_FadeOutWholePalette_Loop

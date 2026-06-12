@@ -1,0 +1,5 @@
+GetMenuCursorPosition	08050174	thumb	uimenu_080502A4
+ApplyMenuCursorVScroll	08050418	thumb	uimenu_080502A4
+sProc_MenuMain	085E0698	data	uimenu_080502A4
+sProc_MenuFrozenHelpBox	085E0710	data	uimenu_080502F4
+sProc_Menu	085E06B0	data	uimenu_08050380

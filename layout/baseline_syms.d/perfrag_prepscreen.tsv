@@ -1,0 +1,7 @@
+Tsa_UnkData_1	08A96C6C	data	prepscreen_08097418
+Tsa_UnkData_2	08A96C84	data	prepscreen_08097418
+Tsa_UnkData_3	08A96CC4	data	prepscreen_08097418
+PrepSpriteDraw_BlinkButtonStart	08098EA8	thumb	prepscreen_08097520
+GetGMapBaseMenuPid	080C8E40	thumb	prepscreen_08097674
+gPrepUnitList	020121CC	data	prepscreen_08097674
+IsCharacterForceDeployed_	08086ACC	thumb	prepscreen_080976D0

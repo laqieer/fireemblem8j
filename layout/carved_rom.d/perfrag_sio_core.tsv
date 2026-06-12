@@ -1,0 +1,9 @@
+041880	0418FC	src/sio_core_08041880.o(.text)	sio_core_08041880(run): SioRegisterIrq
+0418FC	04195C	src/sio_core_080418FC.o(.text)	sio_core_080418FC(run): SioReleaseIrq
+041B9C	041CE8	src/sio_core_08041B9C.o(.text)	sio_core_08041B9C(run): SioVsync_Loop
+041D0C	041D44	src/sio_core_08041D0C.o(.text)	sio_core_08041D0C(run): Sio_PlayRemoteSoundEffect
+042A8C	042AEC	src/sio_core_08042A8C.o(.text)	sio_core_08042A8C(run): SioBigSend_Init
+042AEC	042B5C	src/sio_core_08042AEC.o(.text)	sio_core_08042AEC(run): SioBigSend_Loop
+042B5C	042B84	src/sio_core_08042B5C.o(.text)	sio_core_08042B5C(run): SioBigReceive_Init
+042B84	042BC8	src/sio_core_08042B84.o(.text)	sio_core_08042B84(run): SioBigReceive_RecvHeader
+042BC8	042C74	src/sio_core_08042BC8.o(.text)	sio_core_08042BC8(run): SioBigReceive_Loop

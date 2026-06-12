@@ -1,0 +1,9 @@
+0A4954	0A49A4	src/uisupport_080A4954.o(.text)	uisupport_080A4954(run): GetSupportClassForCharId
+0A49A4	0A49DC	src/uisupport_080A49A4.o(.text)	uisupport_080A49A4(run): DoesCharIdHaveSupportTalk
+0A49DC	0A4A28	src/uisupport_080A49DC.o(.text)	uisupport_080A49DC(run): RegisterAllSupportTalksToGlobalSave
+0A5F9C	0A5FE8	src/uisupport_080A5F9C.o(.text)	uisupport_080A5F9C(run): SupportSubScreen_Init
+0A6040	0A6214	src/uisupport_080A6040.o(.text)	uisupport_080A6040(run): SupportSubScreen_SetupGraphics
+0A6214	0A63C4	src/uisupport_080A6214.o(.text)	uisupport_080A6214(run): SupportSubScreen_Loop_KeyHandler
+0A63C4	0A6474	src/uisupport_080A63C4.o(.text)	uisupport_080A63C4(run): SupportSubScreen_StartSupportConvo
+0A6474	0A64FC	src/uisupport_080A6474.o(.text)	uisupport_080A6474(run): SupportSubScreen_StartSwapPage
+0A64FC	0A65CC	src/uisupport_080A64FC.o(.text)	uisupport_080A64FC(run): SupportSubScreen_DrawScrolledTilemaps

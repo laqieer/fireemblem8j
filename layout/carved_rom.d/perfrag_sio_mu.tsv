@@ -1,0 +1,7 @@
+04CECC	04CEE8	src/sio_mu_0804CECC.o(.text)	sio_mu_0804CECC(run): SioWarp_End
+04CEE8	04CF18	src/sio_mu_0804CEE8.o(.text)	sio_mu_0804CEE8(run): SioWarpFx_StartSioWarp
+04CF34	04CF58	src/sio_mu_0804CF34.o(.text)	sio_mu_0804CF34(run): SioWarpFx_SetMUPosition
+04CF58	04CF78	src/sio_mu_0804CF58.o(.text)	sio_mu_0804CF58(run): SioWarpFx_ShowMoveUnit
+04CF84	04CFA8	src/sio_mu_0804CF84.o(.text)	sio_mu_0804CF84(run): SioWarpFx_AwaitSioWarp
+04D08C	04D0BC	src/sio_mu_0804D08C.o(.text)	sio_mu_0804D08C(run): StartLinkArenaButtonSpriteDraw
+04D0BC	04D0DC	src/sio_mu_0804D0BC.o(.text)	sio_mu_0804D0BC(run): EndLinkArenaButtonSpriteDraw

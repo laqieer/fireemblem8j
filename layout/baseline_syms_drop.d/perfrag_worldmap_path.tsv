@@ -1,0 +1,8 @@
+MapRoute_RenderOpenPaths
+MapRoute_RenderPathGfx
+gWMPathData
+MapRoute_BlitFullWindow
+BG_EnableSync
+MapRoute_BlitScrollEdge
+BG_GetPriority
+GetPlayChapterId

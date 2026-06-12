@@ -1,0 +1,5 @@
+0B62FC	0B6320	src/uiconfig_080B62FC.o(.text)	uiconfig_080B62FC(run): GetSelectedOptionValue
+0B63A4	0B6404	src/uiconfig_080B63A4.o(.text)	uiconfig_080B63A4(run): DrawGameOptionHelpText
+0B6404	0B6470	src/uiconfig_080B6404.o(.text)	uiconfig_080B6404(run): DrawGameOptionText
+0B6470	0B6540	src/uiconfig_080B6470.o(.text)	uiconfig_080B6470(run): DrawOptionValueTexts
+0B6558	0B6628	src/uiconfig_080B6558.o(.text)	uiconfig_080B6558(run): DrawConfigUiSprites

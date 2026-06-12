@@ -1,0 +1,2 @@
+01F4E4	01F520	src/trapfx_0801F4E4.o(.text)	trapfx_0801F4E4(run): ProcShowMapChange_UpdateGame
+01F55C	01F5D0	src/trapfx_0801F55C.o(.text)	trapfx_0801F55C(run): PikeTrapSpriteAnim_Init

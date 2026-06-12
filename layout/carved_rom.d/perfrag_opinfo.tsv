@@ -1,0 +1,6 @@
+056158	056214	src/opinfo_08056158.o(.text)	opinfo_08056158(run): ClassInfoDisplay_ResetWindowBlend
+0B7E9C	0B7FD4	src/opinfo_080B7E9C.o(.text)	opinfo_080B7E9C(run): ClassIntroFlare_Loop
+0B87C0	0B87FC	src/opinfo_080B87C0.o(.text)	opinfo_080B87C0(run): ClassInfoDisplay_AutoAdvanceWorker
+0B8930	0B89C4	src/opinfo_080B8930.o(.text)	opinfo_080B8930(run): ClassInfoDisplay_ExecScript
+0B89C4	0B8A48	src/opinfo_080B89C4.o(.text)	opinfo_080B89C4(run): ClassInfoDisplay_LoopScript
+0B8A48	0B8A88	src/opinfo_080B8A48.o(.text)	opinfo_080B8A48(run): ClassInfoDisplay_OnEnd

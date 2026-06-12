@@ -1,0 +1,9 @@
+09F6B4	09F718	src/prep_itemsupply_0809F6B4.o(.text)	prep_itemsupply_0809F6B4(run): PrepItemSupply_DrawItemListIcons
+09F718	09F7CC	src/prep_itemsupply_0809F718.o(.text)	prep_itemsupply_0809F718(run): PrepItemSupply_DrawItemListRow
+09F80C	09F8A4	src/prep_itemsupply_0809F80C.o(.text)	prep_itemsupply_0809F80C(run): PrepItemSupply_Init
+09F8A4	09F8E0	src/prep_itemsupply_0809F8A4.o(.text)	prep_itemsupply_0809F8A4(run): PrepItemSupply_InitGiveTakeText
+0A0250	0A02F4	src/prep_itemsupply_080A0250.o(.text)	prep_itemsupply_080A0250(run): PrepItemSupply_SwitchPageLeft
+0A02F4	0A03A0	src/prep_itemsupply_080A02F4.o(.text)	prep_itemsupply_080A02F4(run): PrepItemSupply_SwitchPageRight
+0A03A0	0A0424	src/prep_itemsupply_080A03A0.o(.text)	prep_itemsupply_080A03A0(run): PrepItemSupply_ClampScroll
+0A0424	0A04B8	src/prep_itemsupply_080A0424.o(.text)	prep_itemsupply_080A0424(run): PrepItemSupply_AdjustCursorAndScroll
+0A04B8	0A055C	src/prep_itemsupply_080A04B8.o(.text)	prep_itemsupply_080A04B8(run): PrepItemSupply_ScrollVertical

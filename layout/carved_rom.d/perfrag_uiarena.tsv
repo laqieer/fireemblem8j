@@ -1,0 +1,5 @@
+0BA2F0	0BA310	src/uiarena_080BA2F0.o(.text)	uiarena_080BA2F0(run): StartArenaScreen
+0BA4F4	0BA51C	src/uiarena_080BA4F4.o(.text)	uiarena_080BA4F4(run): ArenaUi_UpdatePlayerUnitAfterBattle
+0BA5BC	0BA600	src/uiarena_080BA5BC.o(.text)	uiarena_080BA5BC(run): ArenaUi_ConfirmWager
+0BA638	0BA684	src/uiarena_080BA638.o(.text)	uiarena_080BA638(run): ArenaUi_StartArenaBattle
+0BA8CC	0BA8E0	src/uiarena_080BA8CC.o(.text)	uiarena_080BA8CC(run): ArenaUi_IsTalkChoiceYes

@@ -1,0 +1,11 @@
+011288	0112E0	src/popup_08011288.o(.text)	popup_08011288(run): PopupProc_PrepareGfx
+0112E0	0112FC	src/popup_080112E0.o(.text)	popup_080112E0(run): PopupProc_MaybeSetVolume
+0112FC	011324	src/popup_080112FC.o(.text)	popup_080112FC(run): PopupProc_PlaySound
+011324	011340	src/popup_08011324.o(.text)	popup_08011324(run): PopupProc_MaybeResetVolume
+011340	01135C	src/popup_08011340.o(.text)	popup_08011340(run): PopupIconUpdateProc_Loop
+01135C	0114AC	src/popup_0801135C.o(.text)	popup_0801135C(run): PopupProc_GfxDraw
+0114E4	01153C	src/popup_080114E4.o(.text)	popup_080114E4(run): PopupProc_GfxClear
+01157C	0115C8	src/popup_0801157C.o(.text)	popup_0801157C(run): NewPopupCore
+011624	011640	src/popup_08011624.o(.text)	popup_08011624(run): ItemGot_GotLeItem
+011640	011688	src/popup_08011640.o(.text)	popup_08011640(run): NewPopup_ItemGot
+011730	011780	src/popup_08011730.o(.text)	popup_08011730(run): NewPopup_GoldGot

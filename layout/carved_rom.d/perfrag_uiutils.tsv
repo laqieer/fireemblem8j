@@ -1,0 +1,5 @@
+04EDFC	04EE2C	src/uiutils_0804EDFC.o(.text)	uiutils_0804EDFC(run): UnpackLegacyUiFramePalette
+04EE5C	04EE8C	src/uiutils_0804EE5C.o(.text)	uiutils_0804EE5C(run): UnpackLegacyUiFrameImage
+04EEBC	04EEEC	src/uiutils_0804EEBC.o(.text)	uiutils_0804EEBC(run): UnpackUiBarPalette
+04EEEC	04EF40	src/uiutils_0804EEEC.o(.text)	uiutils_0804EEEC(run): UnpackUiFrameBuffered
+04F098	04F0EC	src/uiutils_0804F098.o(.text)	uiutils_0804F098(run): ClearUiFrame

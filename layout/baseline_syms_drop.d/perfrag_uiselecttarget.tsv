@@ -1,0 +1,5 @@
+TargetSelection_GetRealCursorPosition
+GetLinkedTargets
+NewTargetSelection
+TargetSelection_HandleMoveInput
+TargetSelection_HandleSelectInput

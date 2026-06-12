@@ -1,0 +1,9 @@
+043438	0434B0	src/sio_teamlist_08043438.o(.text)	sio_teamlist_08043438(run): DrawLinkArenaTeamName
+0434CC	043574	src/sio_teamlist_080434CC.o(.text)	sio_teamlist_080434CC(run): UpdateLinkArenaTeamNamePalettes
+043884	043A88	src/sio_teamlist_08043884.o(.text)	sio_teamlist_08043884(run): SioTeamList_SetupGfx
+043A88	043AEC	src/sio_teamlist_08043A88.o(.text)	sio_teamlist_08043A88(run): SioTeamList_Main_HandleDPadInput
+043AEC	043C74	src/sio_teamlist_08043AEC.o(.text)	sio_teamlist_08043AEC(run): SioTeamList_Loop_MainKeyHandler
+043C74	043CBC	src/sio_teamlist_08043C74.o(.text)	sio_teamlist_08043C74(run): SioTeamList_StartUnitList
+043CBC	043CDC	src/sio_teamlist_08043CBC.o(.text)	sio_teamlist_08043CBC(run): SioTeamList_WaitForUnitListScreen
+043D0C	044200	src/sio_teamlist_08043D0C.o(.text)	sio_teamlist_08043D0C(run): SioTeamList_0
+0443C4	0444C4	src/sio_teamlist_080443C4.o(.text)	sio_teamlist_080443C4(run): SioTeamList_EraseTeam_KeyHandler

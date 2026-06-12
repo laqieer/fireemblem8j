@@ -1,0 +1,1 @@
+080DEF14	rom	src/sio_points_08049B74.o(.rodata)	sio_points_08049B74 .rodata region-diff (incbin)

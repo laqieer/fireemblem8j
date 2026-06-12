@@ -1,0 +1,4 @@
+046EAC	046F4C	src/sio_result_08046EAC.o(.text)	sio_result_08046EAC(run): DrawLinkArenaRankings
+047140	04723C	src/sio_result_08047140.o(.text)	sio_result_08047140(run): SioResult_Loop_Main
+047494	047550	src/sio_result_08047494.o(.text)	sio_result_08047494(run): SioResult_NewHS_LoopScroll
+047550	047578	src/sio_result_08047550.o(.text)	sio_result_08047550(run): SioResult_NewHS_AwaitAPress

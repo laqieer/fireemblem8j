@@ -1,0 +1,4 @@
+09EFAC	09F06C	src/prep_itemusemind_0809EFAC.o(.text)	prep_itemusemind_0809EFAC(run): PrepItemUseBooster_OnDraw
+09F370	09F418	src/prep_itemusemind_0809F370.o(.text)	prep_itemusemind_0809F370(run): PrepItemUseJuna_OnInit
+09F418	09F45C	src/prep_itemusemind_0809F418.o(.text)	prep_itemusemind_0809F418(run): PrepItemUseJuna_IDLE
+09F45C	09F4E0	src/prep_itemusemind_0809F45C.o(.text)	prep_itemusemind_0809F45C(run): PrepItemUseJuna_OnEnd
