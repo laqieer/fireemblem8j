@@ -1,0 +1,7 @@
+EventEngine_CanStartSkip
+EventEngine_Create
+EventEngine_CreateBattle
+SetDialogueSkipEvBit
+EventEngine_BlankTalkDisplay
+EventEngine_StartSkip
+WM_Exists
