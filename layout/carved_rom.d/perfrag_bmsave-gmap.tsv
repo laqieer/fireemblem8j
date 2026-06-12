@@ -1,0 +1,3 @@
+0AB924	0AB968	src/bmsave-gmap_080AB924.o(.text)	bmsave-gmap_080AB924(run): ReadWorldMapPaths
+0ABA8C	0ABAC8	src/bmsave-gmap_080ABA8C.o(.text)	bmsave-gmap_080ABA8C(run): ClearWorldMapStuff
+0ABAC8	0ABB50	src/bmsave-gmap_080ABAC8.o(.text)	bmsave-gmap_080ABAC8(run): WriteWorldMapStuff

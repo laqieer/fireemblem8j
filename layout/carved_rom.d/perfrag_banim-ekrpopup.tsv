@@ -1,0 +1,12 @@
+077E84	077EA4	src/banim-ekrpopup_08077E84.o(.text)	banim-ekrpopup_08077E84(run): PutBanimBgIMG
+077EA4	077EE8	src/banim-ekrpopup_08077EA4.o(.text)	banim-ekrpopup_08077EA4(run): PutBanimBgTSA
+077EE8	077F0C	src/banim-ekrpopup_08077EE8.o(.text)	banim-ekrpopup_08077EE8(run): PutBanimBgPAL
+077F0C	077F54	src/banim-ekrpopup_08077F0C.o(.text)	banim-ekrpopup_08077F0C(run): PutBanimBG
+077F8C	077F9C	src/banim-ekrpopup_08077F8C.o(.text)	banim-ekrpopup_08077F8C(run): EfxPlaySound5AVol100
+077F9C	077FAC	src/banim-ekrpopup_08077F9C.o(.text)	banim-ekrpopup_08077F9C(run): EfxPlaySound5CVol100
+078338	07848C	src/banim-ekrpopup_08078338.o(.text)	banim-ekrpopup_08078338(run): NewEkrPopup
+07848C	0784A8	src/banim-ekrpopup_0807848C.o(.text)	banim-ekrpopup_0807848C(run): BattlePopup_Wait16Frames
+0784A8	0784D0	src/banim-ekrpopup_080784A8.o(.text)	banim-ekrpopup_080784A8(run): ekrPopup_DrawWRankUp
+078570	078598	src/banim-ekrpopup_08078570.o(.text)	banim-ekrpopup_08078570(run): ekrPopup_DrawWpnBroke
+0785D4	0785FC	src/banim-ekrpopup_080785D4.o(.text)	banim-ekrpopup_080785D4(run): ekrPopup_DrawWpnBroke2
+07863C	07866C	src/banim-ekrpopup_0807863C.o(.text)	banim-ekrpopup_0807863C(run): ekrPopup_MarkEnd

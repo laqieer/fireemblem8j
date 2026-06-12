@@ -1,0 +1,4 @@
+Img_MapAnimBerserkfx_1	08A1EE2C	data	mapanim_spellassocfx_08081A00
+Pal_MapAnimBerserkfx_0	08A1EE4C	data	mapanim_spellassocfx_08081A00
+PutSparkGfxRotation	08081A64	thumb	mapanim_spellassocfx_08081AC8
+ProcScr_MapAnimSpellAssocRotationEffect	08A14704	data	mapanim_spellassocfx_08081B38

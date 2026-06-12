@@ -1,0 +1,10 @@
+06C224	06C32C	src/banim-efxmagic-crimsoneye_0806C224.o(.text)	banim-efxmagic-crimsoneye_0806C224(run): efxCrimsonEye_Loop_Main
+06C32C	06C38C	src/banim-efxmagic-crimsoneye_0806C32C.o(.text)	banim-efxmagic-crimsoneye_0806C32C(run): efxCrimsonEyeBGFinish1_Loop
+06C3F0	06C45C	src/banim-efxmagic-crimsoneye_0806C3F0.o(.text)	banim-efxmagic-crimsoneye_0806C3F0(run): efxCrimsonEyeOBJFinishPiece_Loop
+06C510	06C6F0	src/banim-efxmagic-crimsoneye_0806C510.o(.text)	banim-efxmagic-crimsoneye_0806C510(run): efxCrimsonEyeOBJFinish_Loop
+06C718	06C7A0	src/banim-efxmagic-crimsoneye_0806C718.o(.text)	banim-efxmagic-crimsoneye_0806C718(run): StartSubSpell_efxGorgonBGFinish_
+06C7A0	06C7F0	src/banim-efxmagic-crimsoneye_0806C7A0.o(.text)	banim-efxmagic-crimsoneye_0806C7A0(run): efxCrimsonEyeBG_Loop
+06C8B4	06C958	src/banim-efxmagic-crimsoneye_0806C8B4.o(.text)	banim-efxmagic-crimsoneye_0806C8B4(run): efxCrimsonEyeOBJ_SetAffineScale
+06CC0C	06CCE8	src/banim-efxmagic-crimsoneye_0806CC0C.o(.text)	banim-efxmagic-crimsoneye_0806CC0C(run): efxCrimsonEyeOBJ_Loop_B
+06CCE8	06CDC4	src/banim-efxmagic-crimsoneye_0806CCE8.o(.text)	banim-efxmagic-crimsoneye_0806CCE8(run): efxCrimsonEyeOBJ_Loop_C
+06CDC4	06CEF0	src/banim-efxmagic-crimsoneye_0806CDC4.o(.text)	banim-efxmagic-crimsoneye_0806CDC4(run): efxCrimsonEyeOBJ_Loop_D

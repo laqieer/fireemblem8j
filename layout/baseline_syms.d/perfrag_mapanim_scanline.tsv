@@ -1,0 +1,5 @@
+HBlank_MapAnimWin0H	080842A4	thumb	mapanim_scanline_080841EC
+PrepareGradientScanlineBuf	08084804	thumb	mapanim_scanline_08084418
+SwapScanlineBufs	080846D0	thumb	mapanim_scanline_08084418
+HBlank_MapAnimGradientColor	0808433C	thumb	mapanim_scanline_08084418
+MapAnimEllipseScanlineCore	08084F88	thumb	mapanim_scanline_08085178

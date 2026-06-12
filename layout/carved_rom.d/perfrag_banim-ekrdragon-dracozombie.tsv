@@ -1,0 +1,6 @@
+0721E0	072200	src/banim-ekrdragon-dracozombie_080721E0.o(.text)	banim-ekrdragon-dracozombie_080721E0(run): Fill16_EkrTsaBuffer
+072200	07223C	src/banim-ekrdragon-dracozombie_08072200.o(.text)	banim-ekrdragon-dracozombie_08072200(run): EkrDZ_CustomBgFadeIn
+072454	072484	src/banim-ekrdragon-dracozombie_08072454.o(.text)	banim-ekrdragon-dracozombie_08072454(run): EkrDZ_PrepareBanimfx
+0724F8	07267C	src/banim-ekrdragon-dracozombie_080724F8.o(.text)	banim-ekrdragon-dracozombie_080724F8(run): EkrDZ_ReloadCustomBg
+07267C	072750	src/banim-ekrdragon-dracozombie_0807267C.o(.text)	banim-ekrdragon-dracozombie_0807267C(run): EkrDZ_ReloadCustomBgAndFadeOut
+072750	072768	src/banim-ekrdragon-dracozombie_08072750.o(.text)	banim-ekrdragon-dracozombie_08072750(run): EkrDZ_SetDragonStatAttrEndBit

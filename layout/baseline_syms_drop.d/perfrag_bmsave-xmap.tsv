@@ -1,0 +1,5 @@
+LoadAndVerfySuspendSave
+gExtraMapSaveHead
+ReadExtraMapSaveHead
+GetGlobalCompletionCount
+NullBmMapHidden_

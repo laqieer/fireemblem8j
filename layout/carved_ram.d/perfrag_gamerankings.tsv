@@ -1,0 +1,2 @@
+081F5BE8	rom	src/gamerankings_080BA9F0.o(.rodata)	gamerankings_080BA9F0 .rodata region-diff (incbin)
+081F5BEC	rom	src/gamerankings_080BAB20.o(.rodata)	gamerankings_080BAB20 .rodata region-diff (incbin)

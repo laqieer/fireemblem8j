@@ -1,0 +1,7 @@
+0815FC	08164C	src/mapanim_lvup_080815FC.o(.text)	mapanim_lvup_080815FC(run): ManimLevelUpLabelColor_Loop
+08164C	081694	src/mapanim_lvup_0808164C.o(.text)	mapanim_lvup_0808164C(run): ManimLevelUp_ScrollIn
+081694	0816DC	src/mapanim_lvup_08081694.o(.text)	mapanim_lvup_08081694(run): ManimLevelUp_ScrollOut
+0816DC	0817B8	src/mapanim_lvup_080816DC.o(.text)	mapanim_lvup_080816DC(run): ManimLevelUp_PutStatGainLabels
+0817B8	0817CC	src/mapanim_lvup_080817B8.o(.text)	mapanim_lvup_080817B8(run): ManimLevelUp_DimBgm
+0817CC	08187C	src/mapanim_lvup_080817CC.o(.text)	mapanim_lvup_080817CC(run): ManimLevelUp_StartLevelUpText
+081888	08189C	src/mapanim_lvup_08081888.o(.text)	mapanim_lvup_08081888(run): ManimLevelUp_RestoreBgm

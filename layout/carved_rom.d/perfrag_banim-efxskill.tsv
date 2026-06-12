@@ -1,0 +1,2 @@
+070E1C	070E58	src/banim-efxskill_08070E1C.o(.text)	banim-efxskill_08070E1C(run): EfxSkillCommonBG_MoveCamToSelf
+070E58	070EA4	src/banim-efxskill_08070E58.o(.text)	banim-efxskill_08070E58(run): EfxSkillCommonBG_MoveCamToOther

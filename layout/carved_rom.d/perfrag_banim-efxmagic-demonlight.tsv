@@ -1,0 +1,4 @@
+0688F8	068A78	src/banim-efxmagic-demonlight_080688F8.o(.text)	banim-efxmagic-demonlight_080688F8(run): efxMaohFlash_Loop_Main
+068D3C	068DAC	src/banim-efxmagic-demonlight_08068D3C.o(.text)	banim-efxmagic-demonlight_08068D3C(run): efxMaohFlashBG3_Loop
+068EDC	068F58	src/banim-efxmagic-demonlight_08068EDC.o(.text)	banim-efxmagic-demonlight_08068EDC(run): efxMaohFlashWOUT_Loop_A
+068F58	068F70	src/banim-efxmagic-demonlight_08068F58.o(.text)	banim-efxmagic-demonlight_08068F58(run): efxMaohFlashWOUT_Loop_B

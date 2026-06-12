@@ -1,0 +1,4 @@
+08A9CA34	rom	src/bmsave-multiarena_080AAF78.o(.data)	bmsave-multiarena_080AAF78 .data region-diff (incbin)
+081F56BC	rom	src/bmsave-multiarena_080AAF78.o(.rodata)	bmsave-multiarena_080AAF78 .rodata region-diff (incbin)
+0203EDB8	ewram	src/bmsave-multiarena_080AB10C.o(ewram_data)	bmsave-multiarena_080AB10C ewram_data
+0203EE7C	ewram	src/bmsave-multiarena_080AB258.o(ewram_data)	bmsave-multiarena_080AB258 ewram_data

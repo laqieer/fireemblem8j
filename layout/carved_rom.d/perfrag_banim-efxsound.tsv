@@ -1,0 +1,5 @@
+073E74	073ED4	src/banim-efxsound_08073E74.o(.text)	banim-efxsound_08073E74(run): EfxPlaySE
+073ED4	073F28	src/banim-efxsound_08073ED4.o(.text)	banim-efxsound_08073ED4(run): Loop6C_efxSoundSE
+0748E4	074934	src/banim-efxsound_080748E4.o(.text)	banim-efxsound_080748E4(run): GetEfxHpChangeType
+074E80	074E9C	src/banim-efxsound_08074E80.o(.text)	banim-efxsound_08074E80(run): PlaySFX
+074E9C	074EBC	src/banim-efxsound_08074E9C.o(.text)	banim-efxsound_08074E9C(run): PlaySfxAutomatically

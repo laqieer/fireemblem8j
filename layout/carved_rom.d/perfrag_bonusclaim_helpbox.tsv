@@ -1,0 +1,2 @@
+0B3798	0B37C4	src/bonusclaim_helpbox_080B3798.o(.text)	bonusclaim_helpbox_080B3798(run): BonusClaimHelp_Init
+0B37C4	0B3804	src/bonusclaim_helpbox_080B37C4.o(.text)	bonusclaim_helpbox_080B37C4(run): BonusClaimHelp_Loop

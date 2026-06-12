@@ -1,0 +1,10 @@
+08BB14	08BBD4	src/helpbox_0808BB14.o(.text)	helpbox_0808BB14(run): LoadHelpBoxGfx
+08BBD4	08BC90	src/helpbox_0808BBD4.o(.text)	helpbox_0808BBD4(run): LoadHelpBoxGfx2
+08C828	08C834	src/helpbox_0808C828.o(.text)	helpbox_0808C828(run): SetDialogueBoxConfig
+08C8E0	08CAC0	src/helpbox_0808C8E0.o(.text)	helpbox_0808C8E0(run): InitBoxDialogue
+08D00C	08D3AC	src/helpbox_0808D00C.o(.text)	helpbox_0808D00C(run): PutBoxDialogueBoxSprites
+08D3AC	08D3E4	src/helpbox_0808D3AC.o(.text)	helpbox_0808D3AC(run): BoxDialogueDrawText_Init
+08D3E4	08D408	src/helpbox_0808D3E4.o(.text)	helpbox_0808D3E4(run): BoxDialogue_StopFaceMouthMove
+08D42C	08D488	src/helpbox_0808D42C.o(.text)	helpbox_0808D42C(run): BoxDialogue_ClearTextLines
+08DA98	08DAC8	src/helpbox_0808DA98.o(.text)	helpbox_0808DA98(run): BoxDialogueDrawText_WaitIdle
+08DAC8	08DB14	src/helpbox_0808DAC8.o(.text)	helpbox_0808DAC8(run): BoxDialogueDrawText_ScrollLines

@@ -1,0 +1,9 @@
+0B5250	0B528C	src/bonusclaim_080B5250.o(.text)	bonusclaim_080B5250(run): PutChapterBannerSprites
+0B528C	0B5314	src/bonusclaim_080B528C.o(.text)	bonusclaim_080B528C(run): BonusClaim_DrawChapterTitle
+0B5314	0B5378	src/bonusclaim_080B5314.o(.text)	bonusclaim_080B5314(run): BonusClaim_HBlankHandler
+0B5378	0B54AC	src/bonusclaim_080B5378.o(.text)	bonusclaim_080B5378(run): InitBonusClaimData
+0B5640	0B566C	src/bonusclaim_080B5640.o(.text)	bonusclaim_080B5640(run): SetBonusItemClaimed
+0B566C	0B56D8	src/bonusclaim_080B566C.o(.text)	bonusclaim_080B566C(run): SetupBonusClaimTargets
+0B56D8	0B56F8	src/bonusclaim_080B56D8.o(.text)	bonusclaim_080B56D8(run): BonusClaim_DrawMainWindowFrame
+0B5C24	0B5C3C	src/bonusclaim_080B5C24.o(.text)	bonusclaim_080B5C24(run): BonusClaim_EndTargetSpriteWorker
+0B5F70	0B5FDC	src/bonusclaim_080B5F70.o(.text)	bonusclaim_080B5F70(run): BonusClaim_EndSelectTargetSubMenu

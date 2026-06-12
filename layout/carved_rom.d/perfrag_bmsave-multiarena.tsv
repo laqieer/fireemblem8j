@@ -1,0 +1,13 @@
+0AAF78	0AB0D8	src/bmsave-multiarena_080AAF78.o(.text)	bmsave-multiarena_080AAF78(run): WriteNewMultiArenaSave
+0AB0D8	0AB10C	src/bmsave-multiarena_080AB0D8.o(.text)	bmsave-multiarena_080AB0D8(run): ReadMultiArenaSaveTeamRaw
+0AB10C	0AB150	src/bmsave-multiarena_080AB10C.o(.text)	bmsave-multiarena_080AB10C(run): ReadMultiArenaSaveTeamName
+0AB150	0AB18C	src/bmsave-multiarena_080AB150.o(.text)	bmsave-multiarena_080AB150(run): WriteMultiArenaSaveTeamName
+0AB18C	0AB1E0	src/bmsave-multiarena_080AB18C.o(.text)	bmsave-multiarena_080AB18C(run): WipeMultiArenaSaveTeam
+0AB1E0	0AB258	src/bmsave-multiarena_080AB1E0.o(.text)	bmsave-multiarena_080AB1E0(run): CopyMultiArenaSaveTeam
+0AB258	0AB2F4	src/bmsave-multiarena_080AB258.o(.text)	bmsave-multiarena_080AB258(run): SwapMultiArenaSaveTeams
+0AB2F4	0AB354	src/bmsave-multiarena_080AB2F4.o(.text)	bmsave-multiarena_080AB2F4(run): WriteMultiArenaSaveTeam
+0AB354	0AB3B8	src/bmsave-multiarena_080AB354.o(.text)	bmsave-multiarena_080AB354(run): ReadMultiArenaSaveTeam
+0AB3B8	0AB3F4	src/bmsave-multiarena_080AB3B8.o(.text)	bmsave-multiarena_080AB3B8(run): WriteMultiArenaSaveRankings
+0AB3F4	0AB41C	src/bmsave-multiarena_080AB3F4.o(.text)	bmsave-multiarena_080AB3F4(run): ReadMultiArenaSaveRankings
+0AB41C	0AB458	src/bmsave-multiarena_080AB41C.o(.text)	bmsave-multiarena_080AB41C(run): WriteMultiArenaSaveConfig
+0AB458	0AB480	src/bmsave-multiarena_080AB458.o(.text)	bmsave-multiarena_080AB458(run): ReadMultiArenaSaveConfig

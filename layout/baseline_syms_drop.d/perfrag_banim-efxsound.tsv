@@ -1,0 +1,7 @@
+CheckEfxSoundSeExist
+EfxPlaySE
+RegisterEfxSoundSeExist
+Sound_SetBGMVolume
+GetEfxHpChangeType
+PlaySFX
+GetProperAnimSoundLocation

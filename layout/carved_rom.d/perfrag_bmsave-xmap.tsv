@@ -1,0 +1,4 @@
+0AB4B8	0AB514	src/bmsave-xmap_080AB4B8.o(.text)	bmsave-xmap_080AB4B8(run): LoadAndVerfySuspendSave
+0AB514	0AB588	src/bmsave-xmap_080AB514.o(.text)	bmsave-xmap_080AB514(run): ReadExtraMapSaveHead
+0AB750	0AB764	src/bmsave-xmap_080AB750.o(.text)	bmsave-xmap_080AB750(run): NullBmMapHidden_
+0AB764	0AB7B8	src/bmsave-xmap_080AB764.o(.text)	bmsave-xmap_080AB764(run): GetCurrentChapterStats

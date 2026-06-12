@@ -1,0 +1,5 @@
+0737A4	073820	src/banim-efxutils_080737A4.o(.text)	banim-efxutils_080737A4(run): EfxPalBlackInOut
+073820	0738A4	src/banim-efxutils_08073820.o(.text)	banim-efxutils_08073820(run): EfxPalWhiteInOut
+07395C	0739D0	src/banim-efxutils_0807395C.o(.text)	banim-efxutils_0807395C(run): EfxPalModifyPetrifyEffect
+073A10	073A68	src/banim-efxutils_08073A10.o(.text)	banim-efxutils_08073A10(run): EfxSplitColorPetrify
+073B80	073BA4	src/banim-efxutils_08073B80.o(.text)	banim-efxutils_08073B80(run): EfxChapterMapFadeOUT

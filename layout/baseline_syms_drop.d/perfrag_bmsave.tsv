@@ -1,0 +1,12 @@
+WriteBonusContentClaimFlags
+gBonusContentClaimFlags
+ReadBonusContentClaimFlags
+ReadGameSavePlaySt
+LoadSavedBonusClaimFlags
+LoadSavedWMStuff
+LoadSavedEid8A
+ReadPermanentFlags_ret
+WriteGameSavePackedUnit
+LoadSavedUnit
+ReadTraps
+GetLastSuspendSaveId

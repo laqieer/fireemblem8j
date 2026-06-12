@@ -1,0 +1,3 @@
+081F6D2C	rom	src/classchg-event_080D24EC.o(.rodata)	classchg-event_080D24EC .rodata region-diff (incbin)
+081F6D38	rom	src/classchg-event_080D2588.o(.rodata)	classchg-event_080D2588 .rodata region-diff (incbin)
+081F6D5C	rom	src/classchg-event_080D26A8.o(.rodata)	classchg-event_080D26A8 .rodata region-diff (incbin)

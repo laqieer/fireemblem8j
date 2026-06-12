@@ -1,0 +1,3 @@
+0D5248	0D525C	src/m4a_080D5248.o(.text)	m4a_080D5248(run): ClearChain
+0D5368	0D540C	src/m4a_080D5368.o(.text)	m4a_080D5368(run): SampleFreqSet
+0D54A4	0D54F8	src/m4a_080D54A4.o(.text)	m4a_080D54A4(run): SoundClear

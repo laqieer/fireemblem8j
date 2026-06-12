@@ -1,0 +1,6 @@
+0D231C	0D2348	src/classchg-event_080D231C.o(.text)	classchg-event_080D231C(run): RefreshBMapDisplay_FromPromotion
+0D23A0	0D2480	src/classchg-event_080D23A0.o(.text)	classchg-event_080D23A0(run): PromoTrainee_InitScreen
+0D2480	0D24EC	src/classchg-event_080D2480.o(.text)	classchg-event_080D2480(run): PromoTrainee_OnEnd
+0D24EC	0D2588	src/classchg-event_080D24EC.o(.text)	classchg-event_080D24EC(run): PromoTrainee_Talk1
+0D2588	0D25E8	src/classchg-event_080D2588.o(.text)	classchg-event_080D2588(run): PromoTrainee_Talk2
+0D26A8	0D271C	src/classchg-event_080D26A8.o(.text)	classchg-event_080D26A8(run): PromoTrainee_Talk5

@@ -1,0 +1,11 @@
+0A8B48	0A8BE8	src/bmsave-bwl_080A8B48.o(.text)	bmsave-bwl_080A8B48(run): ClearPidChStatsSaveData
+0A8BE8	0A8C0C	src/bmsave-bwl_080A8BE8.o(.text)	bmsave-bwl_080A8BE8(run): ClearPidStats_ret
+0A8C0C	0A8C60	src/bmsave-bwl_080A8C0C.o(.text)	bmsave-bwl_080A8C0C(run): ClearPidStats
+0A8C60	0A8C8C	src/bmsave-bwl_080A8C60.o(.text)	bmsave-bwl_080A8C60(run): ReadPidStats
+0A8C8C	0A8CA8	src/bmsave-bwl_080A8C8C.o(.text)	bmsave-bwl_080A8C8C(run): ReadChapterStats
+0A8CA8	0A8CCC	src/bmsave-bwl_080A8CA8.o(.text)	bmsave-bwl_080A8CA8(run): WritePidStats
+0A8CCC	0A8CE0	src/bmsave-bwl_080A8CCC.o(.text)	bmsave-bwl_080A8CCC(run): WriteChapterStats
+0A93BC	0A93E8	src/bmsave-bwl_080A93BC.o(.text)	bmsave-bwl_080A93BC(run): PidStatsGetTotalLevel
+0A93E8	0A940C	src/bmsave-bwl_080A93E8.o(.text)	bmsave-bwl_080A93E8(run): PidStatsGetTotalExpGain
+0A964C	0A9658	src/bmsave-bwl_080A964C.o(.text)	bmsave-bwl_080A964C(run): GetCurerentGameMode
+0A9740	0A976C	src/bmsave-bwl_080A9740.o(.text)	bmsave-bwl_080A9740(run): GetPidStats

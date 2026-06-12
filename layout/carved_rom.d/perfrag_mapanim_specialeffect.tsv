@@ -1,0 +1,2 @@
+07EE68	07EEC4	src/mapanim_specialeffect_0807EE68.o(.text)	mapanim_specialeffect_0807EE68(run): MapAnim_BeginMISSAnim
+07F274	07F3E0	src/mapanim_specialeffect_0807F274.o(.text)	mapanim_specialeffect_0807F274(run): LoadGorgonFromEgg

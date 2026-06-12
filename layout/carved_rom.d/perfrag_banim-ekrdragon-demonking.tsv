@@ -1,0 +1,8 @@
+079074	079180	src/banim-ekrdragon-demonking_08079074.o(.text)	banim-ekrdragon-demonking_08079074(run): EkrDemoKingAtkRavager_Lunge
+079180	079208	src/banim-ekrdragon-demonking_08079180.o(.text)	banim-ekrdragon-demonking_08079180(run): EkrDemoKingAtkRavager_Recoil
+079208	079220	src/banim-ekrdragon-demonking_08079208.o(.text)	banim-ekrdragon-demonking_08079208(run): EkrDemoKingAtkRavager_WaitHit
+079220	0792A4	src/banim-ekrdragon-demonking_08079220.o(.text)	banim-ekrdragon-demonking_08079220(run): EkrDemoKingAtkRavager_Settle
+0792A4	079328	src/banim-ekrdragon-demonking_080792A4.o(.text)	banim-ekrdragon-demonking_080792A4(run): EkrDemoKingBodyHold
+079368	0793F0	src/banim-ekrdragon-demonking_08079368.o(.text)	banim-ekrdragon-demonking_08079368(run): EkrDemoKingBodyShake_Out
+0797BC	0797E0	src/banim-ekrdragon-demonking_080797BC.o(.text)	banim-ekrdragon-demonking_080797BC(run): EkrDragonTunk_WhiteOutSfx
+079808	079884	src/banim-ekrdragon-demonking_08079808.o(.text)	banim-ekrdragon-demonking_08079808(run): EkrdragonDemonking_Loop

@@ -1,0 +1,7 @@
+07DD40	07DD70	src/mapanim_infobox_0807DD40.o(.text)	mapanim_infobox_0807DD40(run): UncompMapBattleBoxNumGfx
+07DD70	07DE2C	src/mapanim_infobox_0807DD70.o(.text)	mapanim_infobox_0807DD70(run): MapAnim_DrawNumber
+07DE2C	07DE58	src/mapanim_infobox_0807DE2C.o(.text)	mapanim_infobox_0807DE2C(run): PrepareMapBattleBoxNumGfx
+07DE88	07DF00	src/mapanim_infobox_0807DE88.o(.text)	mapanim_infobox_0807DE88(run): MapAnim_DrawBar
+07DF10	07DF38	src/mapanim_infobox_0807DF10.o(.text)	mapanim_infobox_0807DF10(run): StartMapAnimInfoWindow
+07DF48	07DFF0	src/mapanim_infobox_0807DF48.o(.text)	mapanim_infobox_0807DF48(run): ProcMapInfoBox_OnDraw
+07E098	07E114	src/mapanim_infobox_0807E098.o(.text)	mapanim_infobox_0807E098(run): MapInfoBox_DrawHp

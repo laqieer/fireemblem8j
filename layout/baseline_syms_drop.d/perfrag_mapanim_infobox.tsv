@@ -1,0 +1,11 @@
+Img_MapBattleInfoNum
+MapAnim_DrawNumber
+PutNumberTilesRightAligned
+UncompMapBattleBoxNumGfx
+MapAnim_DrawBar
+MapAnim_DrawBarSegment
+DisplayBattleInfoBox
+Img_MapBattleInfoBox
+Img_MapBattleInfoHpBar
+PrepareMapBattleBoxNumGfx
+MapInfoBox_DrawHp
