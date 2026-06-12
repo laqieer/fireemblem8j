@@ -1,4 +1,5 @@
-@ data_085D1F2C: 356 bytes of raw JP ROM data at 0x085D1F2C..0x085D2090,
+@ data_085D1F2C: 264 bytes of raw JP ROM data at 0x085D1F2C..0x085D2034,
+@ (shrunk from ..0x085D2090 when cp_data.o(.data) at 0x085D2034 became typed C; D70)
 @ descriptively included for byte-completeness (D29). This makes NO semantic
 @ claim about the bytes — it is exactly the original ROM data at this address,
 @ carried as committed source so the final-goal metric (every catch-all incbin

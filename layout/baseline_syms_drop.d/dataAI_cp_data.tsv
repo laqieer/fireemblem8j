@@ -1,0 +1,14 @@
+# cp_data.c now provides these as real typed-C definitions; drop the baseline
+# aliases that pointed into the raw-ROM incbin (else multiple-definition).
+gAI3HealingThresholdTable
+gAiClassRankLists
+gAiCombatScoreCoefficientTable
+gAiItemConfigTable
+gAiScript_FallbackAi1
+gAiScript_FallbackAi2
+gAiStealPriorityItemList
+gCpData_31
+gGreenAiEscapePoints
+gRedAiEscapePoints
+gpAi1Table
+gpAi2Table

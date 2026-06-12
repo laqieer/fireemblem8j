@@ -18,11 +18,18 @@ frontier_df4_misc_lo_000_0DC3DC:
 frontier_df4_misc_lo_001_0DC96C:
 	.incbin "graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_001_0DC96C.bin"
 
-	.section .data.frontier_df4_misc_lo.gap2, "a", %progbits
-@ df4_misc_lo region-different data, JP 0x080dcdd0..0x080dd368 (1432 B); long-tail data gap (no .text in window), byte-perfect incbin.
-	.global frontier_df4_misc_lo_002_0DCDD0
-frontier_df4_misc_lo_002_0DCDD0:
-	.incbin "graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_002_0DCDD0.bin"
+	.section .data.frontier_df4_misc_lo.gap2a, "a", %progbits
+@ df4_misc_lo region-different data, JP 0x080dcdd0..0x080dce48 (120 B); long-tail data gap (no .text in window), byte-perfect incbin.
+@ Was gap2 (0x080dcdd0..0x080dd368); split around cp_data.o(.rodata) at 0x080dce48..0x080dd358 (now typed C, src/cp_data.c).
+	.global frontier_df4_misc_lo_002a_0DCDD0
+frontier_df4_misc_lo_002a_0DCDD0:
+	.incbin "graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_002a_0DCDD0.bin"
+
+	.section .data.frontier_df4_misc_lo.gap2b, "a", %progbits
+@ df4_misc_lo region-different data, JP 0x080dd358..0x080dd368 (16 B); long-tail data gap (no .text in window), byte-perfect incbin.
+	.global frontier_df4_misc_lo_002b_0DD358
+frontier_df4_misc_lo_002b_0DD358:
+	.incbin "graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_002b_0DD358.bin"
 
 	.section .data.frontier_df4_misc_lo.gap3, "a", %progbits
 @ df4_misc_lo region-different data, JP 0x080de85c..0x080ded24 (1224 B); long-tail data gap (no .text in window), byte-perfect incbin.

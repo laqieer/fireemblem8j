@@ -1,0 +1,3 @@
+AiCountEnemyInRangeOrTryMoveToSpecificPosition	0803F3C4	thumb	cp_data
+AiFunc_AttackStoredTargetOrMoveToward	0803F6BC	thumb	cp_data
+AiFunc_CountEnemiesInRange	0803EFA8	thumb	cp_data

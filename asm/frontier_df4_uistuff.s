@@ -228,12 +228,6 @@ frontier_df4_uistuff_035_5CDF84:
 frontier_df4_uistuff_036_5D14D4:
 	.incbin "graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.bin"
 
-	.section .data.frontier_df4_uistuff.gap37, "a", %progbits
-@ df4_uistuff region-different data, JP 0x085d2608..0x085d2984 (892 B); long-tail data gap (no .text in window), byte-perfect incbin.
-	.global frontier_df4_uistuff_037_5D2608
-frontier_df4_uistuff_037_5D2608:
-	.incbin "graphics/frontier_df4_uistuff/frontier_df4_uistuff_037_5D2608.bin"
-
 	.section .data.frontier_df4_uistuff.gap38, "a", %progbits
 @ df4_uistuff region-different data, JP 0x085d32d8..0x085d3624 (844 B); long-tail data gap (no .text in window), byte-perfect incbin.
 	.global frontier_df4_uistuff_038_5D32D8
