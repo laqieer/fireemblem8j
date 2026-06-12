@@ -1,0 +1,14 @@
+09C84C	09C910	src/prep_unitselect_0809C84C.o(.text)	prep_unitselect_0809C84C(run): PrepUnit_DrawUnitListNames
+09C910	09C938	src/prep_unitselect_0809C910.o(.text)	prep_unitselect_0809C910(run): PrepUpdateMenuTsaScroll
+09C938	09CAE0	src/prep_unitselect_0809C938.o(.text)	prep_unitselect_0809C938(run): PrepUnit_DrawSMSAndObjs
+09CB40	09CBC4	src/prep_unitselect_0809CB40.o(.text)	prep_unitselect_0809CB40(run): PrepUnit_InitGfx
+09CBC4	09CBFC	src/prep_unitselect_0809CBC4.o(.text)	prep_unitselect_0809CBC4(run): PrepUnit_InitSMS
+09CBFC	09CCB4	src/prep_unitselect_0809CBFC.o(.text)	prep_unitselect_0809CBFC(run): PrepUnit_DrawLeftUnitName
+09CCC4	09CDBC	src/prep_unitselect_0809CCC4.o(.text)	prep_unitselect_0809CCC4(run): PrepUnit_DrawUnitItems
+09CE9C	09CF0C	src/prep_unitselect_0809CE9C.o(.text)	prep_unitselect_0809CE9C(run): PrepCheckCanSelectUnit
+09CF0C	09CF80	src/prep_unitselect_0809CF0C.o(.text)	prep_unitselect_0809CF0C(run): PrepCheckCanUnselectUnit
+09D090	09D0D8	src/prep_unitselect_0809D090.o(.text)	prep_unitselect_0809D090(run): PrepUnit_AdjustScrollToCursor
+09D0D8	09D104	src/prep_unitselect_0809D0D8.o(.text)	prep_unitselect_0809D0D8(run): PrepUnit_UpdateScrollArrows
+09D104	09D144	src/prep_unitselect_0809D104.o(.text)	prep_unitselect_0809D104(run): ProcPrepUnit_OnInit
+09D638	09D650	src/prep_unitselect_0809D638.o(.text)	prep_unitselect_0809D638(run): PrepUnit_ParkCursorOffList
+09D67C	09D6D4	src/prep_unitselect_0809D67C.o(.text)	prep_unitselect_0809D67C(run): PrepUnit_WaitDpadUpLoop
