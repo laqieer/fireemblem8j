@@ -318,3 +318,8 @@ IsWeaponUsable
 Img_Banim_18
 Pal_EreshkigalBg3
 Pal_efxSuperdruidOBJ
+BattleHitAdvance
+EvtBattleGenerateBallistaReal
+EvtBattleGenerateReal
+GetNextDeployedPlayerUnitId
+GetPlayerLeaderPid
