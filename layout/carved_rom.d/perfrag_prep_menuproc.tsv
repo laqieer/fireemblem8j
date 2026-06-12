@@ -1,0 +1,10 @@
+091574	091590	src/prep_menuproc_08091574.o(.text)	prep_menuproc_08091574(run): ShowPrepScreenMenuActiveHand
+098778	0987D8	src/prep_menuproc_08098778.o(.text)	prep_menuproc_08098778(run): TraineePromo_ResetScreenEffect
+0987D8	098850	src/prep_menuproc_080987D8.o(.text)	prep_menuproc_080987D8(run): DoPromoteAnimForChar100
+098874	0988D4	src/prep_menuproc_08098874.o(.text)	prep_menuproc_08098874(run): NullExpForChar100AndResetScreen
+0988D4	09894C	src/prep_menuproc_080988D4.o(.text)	prep_menuproc_080988D4(run): PrepPromoteDebugMaybe
+0989AC	0989D4	src/prep_menuproc_080989AC.o(.text)	prep_menuproc_080989AC(run): PutPrepChapterSprite_Skirmish
+0989D4	098A94	src/prep_menuproc_080989D4.o(.text)	prep_menuproc_080989D4(run): PutPrepChapterSprite_Default
+098B54	098C14	src/prep_menuproc_08098B54.o(.text)	prep_menuproc_08098B54(run): PutPrepChapterSprite_Ruins
+098FF4	099228	src/prep_menuproc_08098FF4.o(.text)	prep_menuproc_08098FF4(run): PrepMenu_CtrlLoop
+099250	09927C	src/prep_menuproc_08099250.o(.text)	prep_menuproc_08099250(run): PrepMenu_ShowActiveHand
