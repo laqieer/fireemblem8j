@@ -3067,3 +3067,30 @@ banim-ekrpopup, banim-ekrtriangle, banim-efxmagic-*, banim-ekrmain, banim-efxdea
 helpbox, hardware, bmusemind, bmsave-bwl, gamerankings, bonusclaim, face, convoymenu,
 classchg-*, bmbattle, event, cgtext, bmguide, cp_* — each a clean perfrag batch. The genuine
 hand-decomp tail (FAR codegen + CF:agbcc data-binding) is unaffected by this sweep.
+
+## D67 — cfBind: CF:agbcc data-binding lever delivered +356 matching-C (58.58→62.76%); detached self-healing run survived agent-context death; 32-dup dedup at integration (2026-06-12)
+
+**Result.** The `feat/cfBind` agent worked the **CF:agbcc** frontier rd2 flagged in D63: region-different
+functions that PASS the reloc-mask probe but `perm2_graduate.py` skips because they reference a **TU-private data
+table** (static `ProcCmd[]`/`ProcScr`/lookup) not bound in sym_jp, so the isolated agbcc compile can't resolve it.
+Method: bind/carve the **pointee data** alongside the function (the D45/D51/D53/D62 class) so the symbol resolves
+at the real JP address, then the function graduates byte-exact. **+356 matching-C** across ~147 CF TUs (run1 ~93 +
+run2 ~263); matching-C **58.58 → 62.76% (4996 → 5352 / 8528; ~65.2% of the 8209 ceiling)**. CF:agbcc was the most
+productive single lever yet — it converts a large slice of the "region-different" residue that the plain
+reloc-resolve carve (D60/D63/D64) could not.
+
+**Process findings.**
+- **Detached self-healing run outlived the agent context.** The agent's reasoning context hit its ~300K-token
+  budget and "completed" while a detached `run2` shell-loop (perm2/​bind driver + a completion-waiter) kept carving,
+  committing, and pushing per yield for hours — crash-safe by construction. P9 (me) integrated, since the dead
+  context could not run its promised "final integration." Lesson: a detached driver loop is a robust way to outrun
+  the per-agent token budget for long mechanical sweeps; the orchestrator must own the final integration.
+- **32 cross-branch dups at merge** (`StartBattleMap`, `sCameraAnimTable`, `MapMain_Resume*`, …): cfBind ABS-bound
+  data/neighbors that sibling branches (harvAM/rd1/rd2) had graduated to `src/`, and vice versa. The **hardened
+  dedup ordering (D65)** — merge → build all `.o` → gen_layout → `dedup_baseline_syms.py` → gen_layout → cold
+  `make compare` — caught all 32 in one pass; `integration_dedup.tsv` (git-tracked) now carries 32 drops. Cold OK,
+  ROM 16,777,216, self-contained 100%.
+
+**Frontier.** CF:agbcc on the worklist is now ~exhausted; what remains is the genuine **FAR codegen** tail
+(region-different bodies → decomp-permuter / IDA-Ghidra) + **LEN/NOADDR** + the **region-same harvest remainder**
+(harvNZ still sweeping n–z; a–m frontier per D66). Matching-C trajectory this session: 27.59% → 62.76%.
