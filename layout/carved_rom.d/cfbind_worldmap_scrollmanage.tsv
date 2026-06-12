@@ -1,0 +1,4 @@
+0C4080	0C4098	src/GmMoveCursorExists.o(.text)	GmMoveCursorExists(run): GmMoveCursorExists
+0C428C	0C42B4	src/EndGmScroll.o(.text)	EndGmScroll(run): EndGmScroll
+0C3FFC	0C4080	src/StartGmMoveCursor.o(.text)	StartGmMoveCursor(run): StartGmMoveCursor
+0C415C	0C41E0	src/StartGmScrollManage.o(.text)	StartGmScrollManage(run): StartGmScrollManage
