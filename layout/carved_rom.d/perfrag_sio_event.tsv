@@ -1,0 +1,7 @@
+042F08	042F1C	src/sio_event_08042F08.o(.text)	sio_event_08042F08(run): Sio_InitAckMask
+048310	048330	src/sio_event_08048310.o(.text)	sio_event_08048310(run): XMapTransfer_1
+048330	048378	src/sio_event_08048330.o(.text)	sio_event_08048330(run): XMapTransfer_2
+048378	0483F0	src/sio_event_08048378.o(.text)	sio_event_08048378(run): XMapTransfer_3
+04843C	0484AC	src/sio_event_0804843C.o(.text)	sio_event_0804843C(run): DrawXMapReceiveProgress
+048594	0485EC	src/sio_event_08048594.o(.text)	sio_event_08048594(run): XMapTransfer_AwaitCompletion
+0486D4	048730	src/sio_event_080486D4.o(.text)	sio_event_080486D4(run): EndSioMenuForXMapTransfer

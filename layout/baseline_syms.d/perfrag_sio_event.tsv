@@ -1,0 +1,6 @@
+Nop_Scene_0	08008F28	thumb	sio_event_08048310
+gUnk_Sio_15	0203DD88	data	sio_event_08048330
+PutXMapProgressPercent	080483F0	thumb	sio_event_0804843C
+IsSioBigTransferActive	08042D20	thumb	sio_event_08048594
+gUnk_Sio_0	02000000	data	sio_event_08048594
+Nop_SioUiutils_1	0804D140	thumb	sio_event_080486D4
