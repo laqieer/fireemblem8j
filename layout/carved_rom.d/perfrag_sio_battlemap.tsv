@@ -1,0 +1,16 @@
+04A14C	04A1A4	src/sio_battlemap_0804A14C.o(.text)	sio_battlemap_0804A14C(run): LinkArenaBattleMap_SendCommand
+04A1CC	04A2D0	src/sio_battlemap_0804A1CC.o(.text)	sio_battlemap_0804A1CC(run): LinkArenaBattleMap_StartUnitMoveOut
+04A4A0	04A508	src/sio_battlemap_0804A4A0.o(.text)	sio_battlemap_0804A4A0(run): LinkArenaBattleMap_InitChapter
+04A508	04A540	src/sio_battlemap_0804A508.o(.text)	sio_battlemap_0804A508(run): LinkArenaBattleMap_InitMap
+04A584	04A59C	src/sio_battlemap_0804A584.o(.text)	sio_battlemap_0804A584(run): LoadLinkArenaFogPlaceholder
+04A59C	04A5C8	src/sio_battlemap_0804A59C.o(.text)	sio_battlemap_0804A59C(run): LinkArenaBattleMap_InitDisplay
+04C12C	04C140	src/sio_battlemap_0804C12C.o(.text)	sio_battlemap_0804C12C(run): StartLinkArenaFogPlaceholders
+04C150	04C170	src/sio_battlemap_0804C150.o(.text)	sio_battlemap_0804C150(run): LABattleMap_StartStatScreen
+04C170	04C1A8	src/sio_battlemap_0804C170.o(.text)	sio_battlemap_0804C170(run): LABattleMap_HandleSurrenderPrompt
+04C1A8	04C1DC	src/sio_battlemap_0804C1A8.o(.text)	sio_battlemap_0804C1A8(run): LABattleMap_HandleNoDamagePrompt
+04C1DC	04C220	src/sio_battlemap_0804C1DC.o(.text)	sio_battlemap_0804C1DC(run): LABattleMap_Ai_HandleSurrender
+04C220	04C2B8	src/sio_battlemap_0804C220.o(.text)	sio_battlemap_0804C220(run): LABattleMap_RecordSurrenderRanking
+04C2B8	04C2F4	src/sio_battlemap_0804C2B8.o(.text)	sio_battlemap_0804C2B8(run): LABattleMap_SetQuitEndState
+04C2F4	04C380	src/sio_battlemap_0804C2F4.o(.text)	sio_battlemap_0804C2F4(run): LABattleMap_Remote_RecordSurrenderRanking
+04C380	04C3A4	src/sio_battlemap_0804C380.o(.text)	sio_battlemap_0804C380(run): LABattleMap_Remote_SetQuitEndState
+04C3C4	04C44C	src/sio_battlemap_0804C3C4.o(.text)	sio_battlemap_0804C3C4(run): LAUnitDeaths_FindNextAndStart
