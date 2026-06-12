@@ -1,0 +1,6 @@
+077394	0773B8	src/banim-ekrtriangle_08077394.o(.text)	banim-ekrtriangle_08077394(run): NewEkrTriangle
+0773B8	0775BC	src/banim-ekrtriangle_080773B8.o(.text)	banim-ekrtriangle_080773B8(run): EkrTriangleMain
+0775BC	0775F4	src/banim-ekrtriangle_080775BC.o(.text)	banim-ekrtriangle_080775BC(run): NewEkrTriPegasusKnight
+0775F4	0776B4	src/banim-ekrtriangle_080775F4.o(.text)	banim-ekrtriangle_080775F4(run): EkrTriPegasusKnightMain
+077834	07785C	src/banim-ekrtriangle_08077834.o(.text)	banim-ekrtriangle_08077834(run): EkrTriPegasusKnightObjMain
+077894	077970	src/banim-ekrtriangle_08077894.o(.text)	banim-ekrtriangle_08077894(run): EkrTriArmorKnightMain
