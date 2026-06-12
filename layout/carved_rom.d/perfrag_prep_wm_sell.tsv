@@ -1,0 +1,7 @@
+0A2198	0A2210	src/prep_wm_sell_080A2198.o(.text)	prep_wm_sell_080A2198(run): WmSell_DrawSellOptionSpriteText
+0A2210	0A224C	src/prep_wm_sell_080A2210.o(.text)	prep_wm_sell_080A2210(run): WmSell_DrawValueSpriteText
+0A224C	0A22D0	src/prep_wm_sell_080A224C.o(.text)	prep_wm_sell_080A224C(run): WmSell_DrawItemGoldValue
+0A22D0	0A2318	src/prep_wm_sell_080A22D0.o(.text)	prep_wm_sell_080A22D0(run): WmSell_DrawPartyFunds
+0A25C8	0A2660	src/prep_wm_sell_080A25C8.o(.text)	prep_wm_sell_080A25C8(run): WmSell_MainLoop_HandleDpadKeys
+0A2858	0A28E8	src/prep_wm_sell_080A2858.o(.text)	prep_wm_sell_080A2858(run): WmSell_ConfirmSellItem
+0A28E8	0A298C	src/prep_wm_sell_080A28E8.o(.text)	prep_wm_sell_080A28E8(run): WmSell_OnLoop_ConfirmSellKeyHandler
