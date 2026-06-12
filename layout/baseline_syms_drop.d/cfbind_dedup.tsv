@@ -232,3 +232,9 @@ StartLinkArenaTitleBanner
 StartSioMenuItem
 gImg_WorldmapNodeRevealEffect
 gPal_WorldmapNodeRevealEffect
+Img_efxCrimsonEyeBG
+OnHBlank_0
+Pal_efxCrimsonEyeBGFinish1
+efxCrimsonEyeOBJ_SetDrawPriority
+efxCrimsonEyeOBJ_WrapAngle
+gEfxmagicCrimsoneye_0

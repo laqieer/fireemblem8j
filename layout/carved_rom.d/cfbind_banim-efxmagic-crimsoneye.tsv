@@ -1,0 +1,6 @@
+06C6F0	06C718	src/StartSubSpell_efxCrimsonEyeOBJFinish.o(.text)	StartSubSpell_efxCrimsonEyeOBJFinish(run): StartSubSpell_efxCrimsonEyeOBJFinish
+06C38C	06C3F0	src/StartSubSpell_efxCrimsonEyeBGFinish1.o(.text)	StartSubSpell_efxCrimsonEyeBGFinish1(run): StartSubSpell_efxCrimsonEyeBGFinish1
+06C7F0	06C884	src/StartSubSpell_efxCrimsonEyeBG.o(.text)	StartSubSpell_efxCrimsonEyeBG(run): StartSubSpell_efxCrimsonEyeBG
+06C45C	06C510	src/StartSubSpell_efxCrimsonEyeOBJFinishPiece.o(.text)	StartSubSpell_efxCrimsonEyeOBJFinishPiece(run): StartSubSpell_efxCrimsonEyeOBJFinishPiece
+06CAE8	06CC0C	src/efxCrimsonEyeOBJ_Loop_A.o(.text)	efxCrimsonEyeOBJ_Loop_A(run): efxCrimsonEyeOBJ_Loop_A
+06CEF0	06D218	src/StartSubSpell_efxCrimsonEyeOBJ.o(.text)	StartSubSpell_efxCrimsonEyeOBJ(run): StartSubSpell_efxCrimsonEyeOBJ
