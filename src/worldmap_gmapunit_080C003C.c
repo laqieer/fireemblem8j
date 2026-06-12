@@ -15,7 +15,7 @@
 void SMS_DisplayOne(int class, int layer, int x, int y, int oam2, int isBlend);
 
 /* prototypes for same-file helpers called by this run */
-void MapUnitC_SetDisplayEnabled(struct GMapUnitContainerProc * container, int index, s8 flag);
+void MapUnitC_SetDisplayEnabled(struct GMapUnitContainerProc * container, int index, char flag);
 void MapUnitC_SetFaction(struct GMapUnitContainerProc * container, int index, int faction);
 
 //! FE8U = 0x080BB20C

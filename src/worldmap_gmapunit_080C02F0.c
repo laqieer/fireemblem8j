@@ -16,7 +16,7 @@ void SMS_DisplayOne(int class, int layer, int x, int y, int oam2, int isBlend);
 
 /* prototypes for same-file helpers called by this run */
 int GetPaletteIdForAllegience(int faction);
-void MapUnitC_SetDisplayEnabled(struct GMapUnitContainerProc * container, int index, s8 flag);
+void MapUnitC_SetDisplayEnabled(struct GMapUnitContainerProc * container, int index, char flag);
 void MapUnitC_SetPalette(struct GMapUnitContainerProc * container, int index, int pal);
 ProcPtr StartGmapUnitFade(int index, int palA, int palB, int arg3, ProcPtr parent);
 ProcPtr GetGmapUnitFade(void);
