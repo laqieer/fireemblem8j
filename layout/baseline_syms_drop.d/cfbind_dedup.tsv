@@ -201,3 +201,11 @@ gGfx_ArenaBuildingFront
 gPal_ArenaBuildingFront
 gTsa_ArenaBuildingFront
 FadeExists
+ClearAllTalkFlags
+ClearCgTextFlag
+DoesStringContainTact
+GetCgTextDimensions
+SetCgTextFlags
+StartTalkWaitForInputUnk
+gCgTextSt
+gPal_HelpTextBox
