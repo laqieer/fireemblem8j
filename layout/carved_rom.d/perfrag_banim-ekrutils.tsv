@@ -1,0 +1,13 @@
+056130	056158	src/banim-ekrutils_08056130.o(.text)	banim-ekrutils_08056130(run): SpellFx_ClearBG1
+056158	056214	src/banim-ekrutils_08056158.o(.text)	banim-ekrutils_08056158(run): SpellFx_SetSomeColorEffect
+0564B4	0564F0	src/banim-ekrutils_080564B4.o(.text)	banim-ekrutils_080564B4(run): StartBattleAnimStatusChgHitEffects
+0565A8	05660C	src/banim-ekrutils_080565A8.o(.text)	banim-ekrutils_080565A8(run): SpellFx_WriteBgMapRaw
+05660C	05668C	src/banim-ekrutils_0805660C.o(.text)	banim-ekrutils_0805660C(run): SpellFx_WriteBgMap
+05668C	056708	src/banim-ekrutils_0805668C.o(.text)	banim-ekrutils_0805668C(run): SpellFx_WriteBgMapUnused
+056708	056774	src/banim-ekrutils_08056708.o(.text)	banim-ekrutils_08056708(run): SpellFx_WriteBgMapExt
+056774	05679C	src/banim-ekrutils_08056774.o(.text)	banim-ekrutils_08056774(run): SpellFx_RegisterObjGfx
+05679C	0567B8	src/banim-ekrutils_0805679C.o(.text)	banim-ekrutils_0805679C(run): SpellFx_RegisterObjPal
+0567B8	0567E0	src/banim-ekrutils_080567B8.o(.text)	banim-ekrutils_080567B8(run): SpellFx_RegisterBgGfx
+056828	056858	src/banim-ekrutils_08056828.o(.text)	banim-ekrutils_08056828(run): EfxCyclePalette
+056944	056964	src/banim-ekrutils_08056944.o(.text)	banim-ekrutils_08056944(run): EfxTmFillA
+056964	056984	src/banim-ekrutils_08056964.o(.text)	banim-ekrutils_08056964(run): EfxTmFill

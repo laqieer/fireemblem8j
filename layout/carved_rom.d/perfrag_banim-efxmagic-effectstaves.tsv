@@ -1,0 +1,10 @@
+05C1E8	05C1F8	src/banim-efxmagic-effectstaves_0805C1E8.o(.text)	banim-efxmagic-effectstaves_0805C1E8(run): efxBerserkCLONE_OnEnd
+05DC60	05DC9C	src/banim-efxmagic-effectstaves_0805DC60.o(.text)	banim-efxmagic-effectstaves_0805DC60(run): StartSpellAnimSilence
+05E6EC	05E744	src/banim-efxmagic-effectstaves_0805E6EC.o(.text)	banim-efxmagic-effectstaves_0805E6EC(run): efxMshieldBG_Loop
+05F3B4	05F418	src/banim-efxmagic-effectstaves_0805F3B4.o(.text)	banim-efxmagic-effectstaves_0805F3B4(run): efxHammarneBG_Loop
+060F68	060F80	src/banim-efxmagic-effectstaves_08060F68.o(.text)	banim-efxmagic-effectstaves_08060F68(run): efxMshieldBGOBJ_OnEnd
+06351C	063624	src/banim-efxmagic-effectstaves_0806351C.o(.text)	banim-efxmagic-effectstaves_0806351C(run): efxSilence_Loop_Main
+063AD4	063BF4	src/banim-efxmagic-effectstaves_08063AD4.o(.text)	banim-efxmagic-effectstaves_08063AD4(run): efxHammarne_Loop_Main
+063F44	063FAC	src/banim-efxmagic-effectstaves_08063F44.o(.text)	banim-efxmagic-effectstaves_08063F44(run): efxBerserkBG_Loop
+063FD8	06403C	src/banim-efxmagic-effectstaves_08063FD8.o(.text)	banim-efxmagic-effectstaves_08063FD8(run): efxBerserkCLONE_Loop
+064350	06441C	src/banim-efxmagic-effectstaves_08064350.o(.text)	banim-efxmagic-effectstaves_08064350(run): efxMshield_Loop_Main

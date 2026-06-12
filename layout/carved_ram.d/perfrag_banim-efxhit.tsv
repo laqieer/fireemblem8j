@@ -1,0 +1,2 @@
+080E4484	rom	src/banim-efxhit_0806EB34.o(.rodata)	banim-efxhit_0806EB34 .rodata region-diff (incbin)
+080E44EA	rom	src/banim-efxhit_0806EC28.o(.rodata)	banim-efxhit_0806EC28 .rodata region-diff (incbin)

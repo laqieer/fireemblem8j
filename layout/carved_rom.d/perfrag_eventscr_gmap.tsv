@@ -1,0 +1,8 @@
+00C35C	00C390	src/eventscr_gmap_0800C35C.o(.text)	eventscr_gmap_0800C35C(run): Event89_WmScrollWait
+00C3A0	00C3AC	src/eventscr_gmap_0800C3A0.o(.text)	eventscr_gmap_0800C3A0(run): Event8B_WmHideCursor_Unsure
+00C3C8	00C3E0	src/eventscr_gmap_0800C3C8.o(.text)	eventscr_gmap_0800C3C8(run): Event8D_WmNop
+00C410	00C43C	src/eventscr_gmap_0800C410.o(.text)	eventscr_gmap_0800C410(run): Event90_WmAddPathDisplayed
+00C43C	00C470	src/eventscr_gmap_0800C43C.o(.text)	eventscr_gmap_0800C43C(run): Event91_WmAddPath
+00C4DC	00C52C	src/eventscr_gmap_0800C4DC.o(.text)	eventscr_gmap_0800C4DC(run): Event95_WmEnableNodeDisplayed
+00CE7C	00CEA8	src/eventscr_gmap_0800CE7C.o(.text)	eventscr_gmap_0800CE7C(run): EventBF_
+00CEA8	00CEC0	src/eventscr_gmap_0800CEA8.o(.text)	eventscr_gmap_0800CEA8(run): EventC0_

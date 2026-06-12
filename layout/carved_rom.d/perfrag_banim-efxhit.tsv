@@ -1,0 +1,12 @@
+06E940	06E974	src/banim-efxhit_0806E940.o(.text)	banim-efxhit_0806E940(run): NewEfxDamageMojiEffect
+06E974	06E9A0	src/banim-efxhit_0806E974.o(.text)	banim-efxhit_0806E974(run): efxDamageMojiEffectMain
+06E9A0	06EA10	src/banim-efxhit_0806E9A0.o(.text)	banim-efxhit_0806E9A0(run): NewEfxDamageMojiEffectOBJ
+06EA10	06EA40	src/banim-efxhit_0806EA10.o(.text)	banim-efxhit_0806EA10(run): efxDamageMojiEffectOBJMain
+06EA40	06EA8C	src/banim-efxhit_0806EA40.o(.text)	banim-efxhit_0806EA40(run): NewEfxPierceCritical
+06EA8C	06EABC	src/banim-efxhit_0806EA8C.o(.text)	banim-efxhit_0806EA8C(run): efxCriricalEffectMain
+06EABC	06EB0C	src/banim-efxhit_0806EABC.o(.text)	banim-efxhit_0806EABC(run): NewEfxCriricalEffectBG
+06EB34	06EB64	src/banim-efxhit_0806EB34.o(.text)	banim-efxhit_0806EB34(run): NewEfxCriricalEffectBGCOL
+06EBA0	06EBE8	src/banim-efxhit_0806EBA0.o(.text)	banim-efxhit_0806EBA0(run): NewEfxNormalEffect
+06EBE8	06EC28	src/banim-efxhit_0806EBE8.o(.text)	banim-efxhit_0806EBE8(run): efxNormalEffectMain
+06EC28	06ECB4	src/banim-efxhit_0806EC28.o(.text)	banim-efxhit_0806EC28(run): NewEfxNormalEffectBG
+06ED0C	06ED2C	src/banim-efxhit_0806ED0C.o(.text)	banim-efxhit_0806ED0C(run): NewEfxPierceCriticalEffect

@@ -1,0 +1,9 @@
+03A27C	03A2B4	src/cp_perform_0803A27C.o(.text)	cp_perform_0803A27C(run): AiStaffAction
+03A2B4	03A2E8	src/cp_perform_0803A2B4.o(.text)	cp_perform_0803A2B4(run): AiUseItemAction
+03A2EC	03A330	src/cp_perform_0803A2EC.o(.text)	cp_perform_0803A2EC(run): AiTalkAction
+03A330	03A358	src/cp_perform_0803A330.o(.text)	cp_perform_0803A330(run): AiRideBallistaAction
+03A380	03A3D0	src/cp_perform_0803A380.o(.text)	cp_perform_0803A380(run): AiDKNightmareAction
+03A3D0	03A408	src/cp_perform_0803A3D0.o(.text)	cp_perform_0803A3D0(run): AiDKSummonAction
+03A408	03A440	src/cp_perform_0803A408.o(.text)	cp_perform_0803A408(run): AiPickAction
+03A670	03A6B4	src/cp_perform_0803A670.o(.text)	cp_perform_0803A670(run): CpPerform_WaitAction
+03A6B4	03A6EC	src/cp_perform_0803A6B4.o(.text)	cp_perform_0803A6B4(run): CpPerform_Cleanup

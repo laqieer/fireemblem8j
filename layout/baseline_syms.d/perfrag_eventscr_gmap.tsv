@@ -1,0 +1,6 @@
+GmScrollManageExist	080C41E0	thumb	eventscr_gmap_0800C35C
+EndGmScroll	080C428C	thumb	eventscr_gmap_0800C35C
+AddAndDrawGmPath	080C4370	thumb	eventscr_gmap_0800C410
+WorldMap_PrepareSaveMenu	080BEE68	thumb	eventscr_gmap_0800CE7C
+WorldMap_TeardownForSubscreen	080BE6AC	thumb	eventscr_gmap_0800CE7C
+WorldMap_Init	080BE01C	thumb	eventscr_gmap_0800CEA8

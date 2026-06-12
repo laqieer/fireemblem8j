@@ -1,0 +1,17 @@
+075DA0	075DF8	src/banim-ekrlvup_08075DA0.o(.text)	banim-ekrlvup_08075DA0(run): EkrLvup_DrawUpdatedStatus
+075DF8	075E30	src/banim-ekrlvup_08075DF8.o(.text)	banim-ekrlvup_08075DF8(run): EkrLvup_DrawUnitName
+075E30	075E70	src/banim-ekrlvup_08075E30.o(.text)	banim-ekrlvup_08075E30(run): EkrLvup_DrawPreLevelValue
+076170	0762A0	src/banim-ekrlvup_08076170.o(.text)	banim-ekrlvup_08076170(run): EkrLvup_InitLevelUpBox
+0762A0	0762D0	src/banim-ekrlvup_080762A0.o(.text)	banim-ekrlvup_080762A0(run): EkrLvup_SetBgs
+0762D0	076314	src/banim-ekrlvup_080762D0.o(.text)	banim-ekrlvup_080762D0(run): EkrLvup_InitPalette
+076314	07643C	src/banim-ekrlvup_08076314.o(.text)	banim-ekrlvup_08076314(run): EkrLvup_PutWindowOnScreen
+07643C	076468	src/banim-ekrlvup_0807643C.o(.text)	banim-ekrlvup_0807643C(run): EkrLvup_PrepareApGfx
+076468	0764C8	src/banim-ekrlvup_08076468.o(.text)	banim-ekrlvup_08076468(run): EkrLvup_Promo_WindowScroll0
+0764C8	076550	src/banim-ekrlvup_080764C8.o(.text)	banim-ekrlvup_080764C8(run): EkrLvup_Promo_DrawPromoNewClassName
+076550	0765A4	src/banim-ekrlvup_08076550.o(.text)	banim-ekrlvup_08076550(run): EkrLvup_Promo_WindowScroll1
+0765A4	076624	src/banim-ekrlvup_080765A4.o(.text)	banim-ekrlvup_080765A4(run): EkrLvup_DrawNewLevel
+076624	076654	src/banim-ekrlvup_08076624.o(.text)	banim-ekrlvup_08076624(run): EkrLvup_InitCounterForMainAnim
+076654	076744	src/banim-ekrlvup_08076654.o(.text)	banim-ekrlvup_08076654(run): EkrLvup_MainAnime
+076744	076774	src/banim-ekrlvup_08076744.o(.text)	banim-ekrlvup_08076744(run): EkrLvup_SetHBlank
+076780	076848	src/banim-ekrlvup_08076780.o(.text)	banim-ekrlvup_08076780(run): EkrLvup_PutWindowOffScreen
+076980	0769BC	src/banim-ekrlvup_08076980.o(.text)	banim-ekrlvup_08076980(run): EkrLvup_OnEnd

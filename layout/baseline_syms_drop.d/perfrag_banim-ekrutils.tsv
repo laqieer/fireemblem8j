@@ -1,0 +1,11 @@
+SpellFx_ClearBG1
+SpellFx_SetSomeColorEffect
+StartBattleAnimStatusChgHitEffects
+SpellFx_WriteBgMapRaw
+SpellFx_WriteBgMap
+SpellFx_WriteBgMapExt
+SpellFx_RegisterObjGfx
+SpellFx_RegisterObjPal
+SpellFx_RegisterBgGfx
+EfxCyclePalette
+EfxTmFill

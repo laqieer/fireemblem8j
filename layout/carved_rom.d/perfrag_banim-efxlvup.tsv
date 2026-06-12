@@ -1,0 +1,14 @@
+0769BC	0769D4	src/banim-efxlvup_080769BC.o(.text)	banim-efxlvup_080769BC(run): NewEfxPartsofScroll
+076AF8	076BC4	src/banim-efxlvup_08076AF8.o(.text)	banim-efxlvup_08076AF8(run): NewEfxleveluphb
+076CFC	076D44	src/banim-efxlvup_08076CFC.o(.text)	banim-efxlvup_08076CFC(run): NewEfxlvupbg
+076D44	076D9C	src/banim-efxlvup_08076D44.o(.text)	banim-efxlvup_08076D44(run): EfxlvupbgMain
+076D9C	076DE8	src/banim-efxlvup_08076D9C.o(.text)	banim-efxlvup_08076D9C(run): NewEfxLvupBG2
+076F78	076FC8	src/banim-efxlvup_08076F78.o(.text)	banim-efxlvup_08076F78(run): EkrLvupApfxMain
+076FC8	07702C	src/banim-efxlvup_08076FC8.o(.text)	banim-efxlvup_08076FC8(run): NewEkrLvupApfx
+07702C	077048	src/banim-efxlvup_0807702C.o(.text)	banim-efxlvup_0807702C(run): EkrLvupApfxEndEach
+077048	0770B0	src/banim-efxlvup_08077048.o(.text)	banim-efxlvup_08077048(run): PutEkrLvupStatGainLabelGfx1
+0770B0	077190	src/banim-efxlvup_080770B0.o(.text)	banim-efxlvup_080770B0(run): PutEkrLvupStatGainLabelGfx2
+077190	0772A4	src/banim-efxlvup_08077190.o(.text)	banim-efxlvup_08077190(run): BanimDrawStatupAp
+0772A4	077314	src/banim-efxlvup_080772A4.o(.text)	banim-efxlvup_080772A4(run): EobjLvup_SpawnArrowAndLabel
+077314	07734C	src/banim-efxlvup_08077314.o(.text)	banim-efxlvup_08077314(run): EobjLvup_RedrawGainLabel
+07734C	077374	src/banim-efxlvup_0807734C.o(.text)	banim-efxlvup_0807734C(run): EobjLvup_WaitEndAndClear
