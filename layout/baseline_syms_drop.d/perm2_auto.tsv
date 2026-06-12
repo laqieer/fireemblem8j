@@ -187,3 +187,7 @@ SpellFx_RegisterBgPal
 UnsetMapStaffAnim
 WaitForFade
 efxPurge_PlayAlternatingSFX
+EfxUpdateBg2Scroll
+InitSubtitleHelpText
+PutFace80x72_Core
+StartSubtitleHelp
