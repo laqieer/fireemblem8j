@@ -216,3 +216,8 @@ gGfx_GMapPI_LevelNums
 gGfx_GMapPI_ShopIcons
 Img_ShineBg2
 Pal_ShineBg2
+SioQueuePendingRecvData
+Sio_ResetSession
+Sio_SetCommParams
+Sio_SetSubState
+gSioIncoming
