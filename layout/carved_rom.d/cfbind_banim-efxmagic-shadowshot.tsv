@@ -1,0 +1,4 @@
+06D808	06D81C	src/StartSubSpell_efxDarkLongMonsFadeToBlack.o(.text)	StartSubSpell_efxDarkLongMonsFadeToBlack(run): StartSubSpell_efxDarkLongMonsFadeToBlack
+06D458	06D4B8	src/StartSubSpell_efxDarkLongMonsBG01.o(.text)	StartSubSpell_efxDarkLongMonsBG01(run): StartSubSpell_efxDarkLongMonsBG01
+06D50C	06D570	src/StartSubSpell_efxDarkLongMonsBG02.o(.text)	StartSubSpell_efxDarkLongMonsBG02(run): StartSubSpell_efxDarkLongMonsBG02
+06D5E4	06D660	src/StartSubSpell_efxDarkLongMonsOBJ.o(.text)	StartSubSpell_efxDarkLongMonsOBJ(run): StartSubSpell_efxDarkLongMonsOBJ
