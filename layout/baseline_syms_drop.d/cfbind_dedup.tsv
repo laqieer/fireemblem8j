@@ -361,3 +361,10 @@ AddPartyGoldAmount
 DrawUiFrame
 GetConvoyItemCount
 GetItemMaxUses
+GetGameOption
+PutGameOptionRow
+Sound_StopBgmImmediate
+StartUnitListScreenForSoloAnim
+UpdateWorldMapBgm
+gConfigUiState
+gGameOptions
