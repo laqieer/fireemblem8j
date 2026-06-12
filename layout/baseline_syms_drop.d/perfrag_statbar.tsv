@@ -1,0 +1,10 @@
+ApplyBitmap
+DrawStatBarCappedCol
+DrawStatBarFilledCol
+DrawStatBarLeftBorder
+DrawStatBarRightBorder
+DrawStatBarShadow
+DrawStatBarUnfilledCol
+DrawStatBar
+DrawStatBarGfx
+PutAppliedBitmap

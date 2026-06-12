@@ -1,0 +1,3 @@
+088BF0	088C1C	src/statbar_08088BF0.o(.text)	statbar_08088BF0(run): UnusedDrawOutline
+088CFC	088DE8	src/statbar_08088CFC.o(.text)	statbar_08088CFC(run): DrawStatBar
+088DE8	088E30	src/statbar_08088DE8.o(.text)	statbar_08088DE8(run): DrawStatBarGfx
