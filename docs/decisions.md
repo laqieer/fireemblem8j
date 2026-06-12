@@ -2985,3 +2985,32 @@ skip-list-aware `scripts/rd1_drive2.sh`. They wrap `perm2_graduate.py --verify`,
 -A`, drop the `tools` symlink), run all four gates, and commit+push per band only on a green cold `make compare`.
 Reusable for the rd2 (n–z) / large-band re-sweeps. Siblings own n–z (rd2) and the region-same worklist (harv1) —
 not touched. (D-number from the free sequence; renumber at integration if a concurrent sibling claimed D63.)
+
+## D65 — INTEGRATION: rd1+rd2+harv1 wave landed (+449 matching-C → 55.18%); three integration-hazard bugs found+fixed; hardened the post-merge ordering (2026-06-12)
+
+**Result.** Serially integrated the three completed/​salvaged agents of the reloc-resolve wave onto `main`
+(`32097dc2b`, pushed): **rd1 +272** (a–m region-different), **rd2 +158** (n–z region-different), **harv1 +19**
+(cpextra region-same, salvaged after a watchdog stall via build-test-then-commit). Matching-C **49.92 → 55.18%
+(4257 → 4706 / 8528; ~57.3% of the honest 8209 ceiling)**, self-containment held 100%, cold `make compare` OK.
+This validates the D60/D63/D64 thesis at scale: the reloc-resolve carve (`perm2_graduate.py`), not the permuter,
+is the dominant lever — most of the "region-different" worklist was region-SAME modulo relocation.
+
+**Three bugs the integration surfaced (all fixed; lessons → memory `fe8j-integration-routine`):**
+1. **Oversized ROM from a salvage glob.** Committing harv1's uncommitted worktree carve with `git add 'asm/sub_804*.s'`
+   failed to stage the 19 asm **deletions** (shell glob can't match already-deleted files). The orphaned `.s` floated
+   their `.o` past `0x09000000` → ROM = 16,780,808 B (sha1 FAIL, *no* byte-diff in the first 16 MB — `cmp` EOF on
+   baserom). Fix: `git rm` the orphans; assert `stat -c%s fireemblem8.gba == 16777216` after any carve-swap commit.
+2. **`jp_syms` multiple-definition from a blind dedup.** `dedup_baseline_syms.py` `nm`-scans only `src/*.o` that
+   EXIST on disk + are in the CURRENT `ldscript.txt`. Run right after merge (before the new `.c` compiled) it missed
+   `AiGenerateUnitMovementMapRespectStay` (harv1 ABS-bound it as a cpextra neighbor; rd1 carved it) → cold link died
+   `multiple definition`. Fix/order: merge → build once (compile all `.o`, link may fail) → `gen_layout.py` (fresh
+   ldscript) → `dedup_baseline_syms.py` (now finds the COMPLETE set: 6 dups) → `gen_layout.py` → `make clean && make compare`.
+3. (Corollary) `integration_dedup.tsv` is git-TRACKED — must be committed or CI's fresh checkout regenerates jp_syms
+   without the drops and goes RED; the local cold build can't catch a gitignored-drop gap.
+
+**Frontier after this wave (from rd1/rd2 probes — the reloc-resolve fast path is now ~exhausted on the
+region-different worklist).** Next levers, in yield order: (a) **CF:agbcc data-binding** — ~309 (n–z) + a large a–m
+share skip the perm2 probe because they reference a TU-private data table (static `ProcCmd[]`, etc.) not in sym_jp;
+bind the pointee alongside (D45/D51/D62 class) and they carve. (b) **region-same harvest remainder** —
+`nofuncmap_region_same.tsv` still has most of its ~1.9k rows un-graduated (harv1 only cleared cpextra). (c) genuine
+**FAR codegen** (~103 n–z + a share of a–m's 758) + **LEN/NOADDR** → decomp-permuter / IDA-Ghidra hand work.
