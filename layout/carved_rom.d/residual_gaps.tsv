@@ -1,2 +1,7 @@
 BD0C8	BD0CC	asm/gap_000BD0C8.o(.rodata.gap_000BD0C8)	gap_000BD0C8 residual gap, committed bytes (was baserom incbin)
 C31D4	C31F8	asm/gap_000C31D4.o(.rodata.gap_000C31D4)	gap_000C31D4 residual gap, committed bytes (was baserom incbin)
+6582C	658DC	asm/gap_0006582C.o(.rodata.gap_0006582C)	gap_0006582C residual gap, committed bytes (was baserom incbin)
+8359C	835A0	asm/gap_0008359C.o(.rodata.gap_0008359C)	gap_0008359C residual gap, committed bytes (was baserom incbin)
+B46D4	B47D4	asm/gap_000B46D4.o(.rodata.gap_000B46D4)	gap_000B46D4 residual gap, committed bytes (was baserom incbin)
+BBA3C	BBC98	asm/gap_000BBA3C.o(.rodata.gap_000BBA3C)	gap_000BBA3C residual gap, committed bytes (was baserom incbin)
+BD054	BD05C	asm/gap_000BD054.o(.rodata.gap_000BD054)	gap_000BD054 residual gap, committed bytes (was baserom incbin)
