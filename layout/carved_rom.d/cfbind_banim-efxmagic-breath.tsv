@@ -1,0 +1,5 @@
+06AEA8	06AEE0	src/StartSpellAnimDarkBreath.o(.text)	StartSpellAnimDarkBreath(run): StartSpellAnimDarkBreath
+05E744	05E780	src/StartSubSpell_efxDarkbreathBGCOL.o(.text)	StartSubSpell_efxDarkbreathBGCOL(run): StartSubSpell_efxDarkbreathBGCOL
+05E69C	05E6EC	src/StartSubSpell_efxDarkbreathBG.o(.text)	StartSubSpell_efxDarkbreathBG(run): StartSubSpell_efxDarkbreathBG
+05E544	05E5B8	src/StartSubSpell_efxIcebreathOBJ.o(.text)	StartSubSpell_efxIcebreathOBJ(run): StartSubSpell_efxIcebreathOBJ
+05E19C	05E24C	src/efxFirebreath_Loop_Main.o(.text)	efxFirebreath_Loop_Main(run): efxFirebreath_Loop_Main
