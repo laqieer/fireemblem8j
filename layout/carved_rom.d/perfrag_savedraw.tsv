@@ -1,0 +1,3 @@
+0AF2CC	0AF4B8	src/savedraw_080AF2CC.o(.text)	savedraw_080AF2CC(run): SaveDraw_DrawPlayTime
+0B0028	0B01DC	src/savedraw_080B0028.o(.text)	savedraw_080B0028(run): SaveDraw_UpdateParticles
+0B01DC	0B021C	src/savedraw_080B01DC.o(.text)	savedraw_080B01DC(run): SaveBgFog_Init
