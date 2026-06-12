@@ -3165,3 +3165,36 @@ assigned). HYPOTHESIS: a meaningful fraction are still mechanically reachable (r
 not genuine FAR. ACTION: a frontier re-sweep — run `perm2_graduate.py` + `perfrag_carve.py` over the CURRENT
 `asm/sub_*.s` set (re-derived, not the stale worklists), partitioned a–m / n–z, carving the reachable and reporting
 the true FAR/LEN tail. Reserve decomp-permuter / IDA-Ghidra for the confirmed FAR residue after the re-sweep.
+
+## D70 — dataMaps1: data_map_change ported to typed C as ONE TU (chapters 1-16 + all maps); resolves a stack of misattributed carves over the same bytes (2026-06-12)
+
+**Context / task.** DATA-maps-1 asked for chapter map-change tables (chapters 1-16) as typed C. The fe8u source
+for this is `src/data/map/data_map_change.s` (a `.data` TU, 0x19fc bytes, US 0x08a1e0f8): per-map `struct MapChange[]`
+tables (`{s8 id; u8 x,y,w,h; const void* tiles}`, `{-1,..NULL}`-terminated) plus the `*_change_N` u16 tile arrays
+each table points at. Inja-generated `.inc` in fe8u, NOT typed C there.
+
+**Fork: how to make a region-DIFFERENT region byte-perfect as typed C.** I diffed the whole US `.data` block
+against the JP ROM. The JP region lives at **0x08A9B024** (= US 0x08a1e0f8 relocated). Masking 0x08-prefixed
+pointer words, the entire 0x19fc-byte region is **byte-identical to US except (a) 341 pointer relocations and (b)
+exactly ONE tile id**: `Ch14EirikaMapChanges_change_1[1]` 0x0CD0 (US) → **0x0C40** (JP). So: port the *whole* region
+as ONE typed-C TU (chapters are interleaved + cross-reference; the in-table tile pointers must resolve to contiguous
+JP addrs at link). Generated `src/data/map/data_map_change.c` programmatically from the fe8u `.s`+`.inc`
+(`scripts/gen_data_map_change.py`) to avoid hand-transcription error, applied the single JP fixup, and **proved
+byte-equality by simulating agbcc's type-based layout (u16→align2, MapChange→align4) + JP-resolved pointers vs the JP
+ROM: 0 diffs over all 0x19fc bytes.** Decision: ONE TU, not per-chapter files (linker can't resolve cross-chapter
+tile pointers across separate objects without externs; and the US TU is itself monolithic). Verified the lone tile
+fixup is scoped (other arrays keep 0x0CD0).
+
+**Resolved misattributions (the real work).** The region was already tiled by ~20 placeholder carves from earlier
+funcmap/gap passes, ALL naming the same bytes wrongly: `dat_worldmap_gmapunit_p1610` (= Ch14Eirika_change_5/6),
+`dat_worldmap_gmapunit_p1613` (= Ch11Eph_change_0..3), `dat_TileAnimations5_ref` (= **UnusedMapChanges5**),
+`dat_Ch15Map_ref` (= **Ch15MapChanges**), `dat_Ch11EphraimTileAnimations_ref` (= **Ch11EphraimMapChanges**), 4 correctly-named
+`dat_ChNMapChanges_ref`, 9 `data_08A9*` raw-residue gaps (D29), and 2 `frontier_df4_menu` long-tail gaps. None are
+referenced by symbol name in any JP `asm/sub_*.s` or `baseline_syms` (the "funcmap code-ref" note only records *why*
+the address was identified; code refs are address/literal-pool, resolved by absolute placement). Dropped all 20
+(3 rows in carved_rom.tsv, 8 in data_refs_recursive.tsv, 9 residue fragment files), **truncated** df4_menu gap24 to
+end at 0xA9B024 (it legitimately owns A9AC28..A9B024, pre-region), dropped gap25 (fully inside), removed the 20 orphan
+`asm/*.s`. Replaced with one carved_rom row → `src/data/map/data_map_change.o(.data)` @ A9B024..A9CA20. `make
+compare` = OK, ROM 16MB, layout 100%. Lesson reaffirmed (D69): region-different "funcmap code-ref" and gap-filler
+carves over a relocated US `.data`/`.rodata` block are often the SAME bytes under several wrong names — the typed-C
+port is the disambiguator; drop the placeholders, don't stack on them.
