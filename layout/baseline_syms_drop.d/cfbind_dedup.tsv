@@ -150,3 +150,5 @@ GetItemWeight
 GetLeaderLevelForSaveMenu
 gBoxDialogueConf
 gHelpBoxSt
+BG_GetPriority
+GmIsNodeInList
