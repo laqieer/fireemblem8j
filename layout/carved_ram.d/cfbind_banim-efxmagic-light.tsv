@@ -1,0 +1,4 @@
+080E239C	rom	src/StartSubSpell_efxPurgeBG.o(.rodata)	StartSubSpell_efxPurgeBG .rodata region-diff (incbin)
+080E2548	rom	src/StartSubSpell_efxDivineBG.o(.rodata)	StartSubSpell_efxDivineBG .rodata region-diff (incbin)
+080E25B6	rom	src/StartSubSpell_efxDivineBG_2.o(.rodata)	StartSubSpell_efxDivineBG_2 .rodata region-diff (incbin)
+080E25C4	rom	src/StartSubSpell_efxDivineBG_3.o(.rodata)	StartSubSpell_efxDivineBG_3 .rodata region-diff (incbin)

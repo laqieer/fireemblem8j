@@ -1,0 +1,11 @@
+04C458	04C46C	src/LAUnitDeaths_OnEnd.o(.text)	LAUnitDeaths_OnEnd(run): LAUnitDeaths_OnEnd
+04C494	04C4A8	src/LABattleMap_StartSurrenderPrompt.o(.text)	LABattleMap_StartSurrenderPrompt(run): LABattleMap_StartSurrenderPrompt
+04C4A8	04C4BC	src/LABattleMap_StartNoDamagePrompt.o(.text)	LABattleMap_StartNoDamagePrompt(run): LABattleMap_StartNoDamagePrompt
+04B828	04B844	src/LABattleMap_RefreshAfterCombat.o(.text)	LABattleMap_RefreshAfterCombat(run): LABattleMap_RefreshAfterCombat
+04B1CC	04B1E8	src/LABattleMap_StartForecast.o(.text)	LABattleMap_StartForecast(run): LABattleMap_StartForecast
+04B3B0	04B440	src/LABattleMap_StartCombat.o(.text)	LABattleMap_StartCombat(run): LABattleMap_StartCombat
+04A2EC	04A390	src/LinkArenaBattleMap_InitUnitSlots.o(.text)	LinkArenaBattleMap_InitUnitSlots(run): LinkArenaBattleMap_InitUnitSlots
+04B89C	04B954	src/LABattleMap_ReceiveAttackDeclaration.o(.text)	LABattleMap_ReceiveAttackDeclaration(run): LABattleMap_ReceiveAttackDeclaration
+04A624	04A6F0	src/LinkArenaBattleMap_Init.o(.text)	LinkArenaBattleMap_Init(run): LinkArenaBattleMap_Init
+04B054	04B164	src/LABattleMap_GenerateForecast.o(.text)	LABattleMap_GenerateForecast(run): LABattleMap_GenerateForecast
+04C018	04C12C	src/LinkArenaFogSprite_Loop.o(.text)	LinkArenaFogSprite_Loop(run): LinkArenaFogSprite_Loop

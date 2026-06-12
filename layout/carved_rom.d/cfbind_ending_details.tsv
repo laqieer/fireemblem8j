@@ -1,0 +1,9 @@
+0BB740	0BB754	src/CharacterEnding_StartBattleDisplayText.o(.text)	CharacterEnding_StartBattleDisplayText(run): CharacterEnding_StartBattleDisplayText
+0BC044	0BC058	src/StartCharacterEndings.o(.text)	StartCharacterEndings(run): StartCharacterEndings
+0BD02C	0BD040	src/StartFinScreen.o(.text)	StartFinScreen(run): StartFinScreen
+0BD040	0BD054	src/StartEndingTurnRecordScreen.o(.text)	StartEndingTurnRecordScreen(run): StartEndingTurnRecordScreen
+0BBA1C	0BBA3C	src/StartSoloEndingBattleDisplay.o(.text)	StartSoloEndingBattleDisplay(run): StartSoloEndingBattleDisplay
+0BBD60	0BBD80	src/StartPairedEndingBattleDisplay.o(.text)	StartPairedEndingBattleDisplay(run): StartPairedEndingBattleDisplay
+0BB9D8	0BBA1C	src/SoloEndingBattleDisp_Loop.o(.text)	SoloEndingBattleDisp_Loop(run): SoloEndingBattleDisp_Loop
+0BBC98	0BBCF8	src/PairedEndingBattleDisp_Loop_SlideIn.o(.text)	PairedEndingBattleDisp_Loop_SlideIn(run): PairedEndingBattleDisp_Loop_SlideIn
+0BC638	0BCA74	src/EndingDetails_PutSprites.o(.text)	EndingDetails_PutSprites(run): EndingDetails_PutSprites

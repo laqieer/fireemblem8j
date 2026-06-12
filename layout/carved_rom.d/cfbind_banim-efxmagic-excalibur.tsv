@@ -1,0 +1,9 @@
+065808	06582C	src/StartSubSpell_efxExcaliburSCR.o(.text)	StartSubSpell_efxExcaliburSCR(run): StartSubSpell_efxExcaliburSCR
+065A64	065AA8	src/StartSubSpell_efxExcaliburBGCOL2.o(.text)	StartSubSpell_efxExcaliburBGCOL2(run): StartSubSpell_efxExcaliburBGCOL2
+065C10	065C54	src/StartSubSpell_efxExcaliburBGCOL3.o(.text)	StartSubSpell_efxExcaliburBGCOL3(run): StartSubSpell_efxExcaliburBGCOL3
+065778	0657BC	src/StartSubSpell_efxExcaliburBGCOL.o(.text)	StartSubSpell_efxExcaliburBGCOL(run): StartSubSpell_efxExcaliburBGCOL
+065D34	065D8C	src/StartSubSpell_efxExcaliburBG0.o(.text)	StartSubSpell_efxExcaliburBG0(run): StartSubSpell_efxExcaliburBG0
+065C9C	065D08	src/StartSubSpell_efxExcaliburOBJ.o(.text)	StartSubSpell_efxExcaliburOBJ(run): StartSubSpell_efxExcaliburOBJ
+0655EC	065658	src/StartSubSpell_efxExcaliburBG.o(.text)	StartSubSpell_efxExcaliburBG(run): StartSubSpell_efxExcaliburBG
+065944	065A28	src/StartSubSpell_efxExcaliburBG2.o(.text)	StartSubSpell_efxExcaliburBG2(run): StartSubSpell_efxExcaliburBG2
+065AF0	065BD4	src/StartSubSpell_efxExcaliburBG3.o(.text)	StartSubSpell_efxExcaliburBG3(run): StartSubSpell_efxExcaliburBG3

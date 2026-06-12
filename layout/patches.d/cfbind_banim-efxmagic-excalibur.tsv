@@ -1,0 +1,5 @@
+StartSubSpell_efxExcaliburBGCOL2.o	.text	3C	00000000
+StartSubSpell_efxExcaliburBGCOL3.o	.text	3C	00000000
+StartSubSpell_efxExcaliburBGCOL.o	.rodata	ALIGN	2
+StartSubSpell_efxExcaliburBGCOL.o	.text	3C	00000000
+StartSubSpell_efxExcaliburBG0.o	.text	48	00000000

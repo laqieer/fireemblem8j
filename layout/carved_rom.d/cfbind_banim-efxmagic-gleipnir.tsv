@@ -1,0 +1,8 @@
+06B0A0	06B0C4	src/StartSubSpell_efxDarkGradoMapFadeOut.o(.text)	StartSubSpell_efxDarkGradoMapFadeOut(run): StartSubSpell_efxDarkGradoMapFadeOut
+06B6F4	06B728	src/efxDarkGradoBG02_0.o(.text)	efxDarkGradoBG02_0(run): efxDarkGradoBG02_0
+06BDE8	06BE20	src/StartSubSpell_efxDarkGradoOBJ01.o(.text)	StartSubSpell_efxDarkGradoOBJ01(run): StartSubSpell_efxDarkGradoOBJ01
+06C1AC	06C1E8	src/StartSubSpell_efxDarkGradoOBJ02.o(.text)	StartSubSpell_efxDarkGradoOBJ02(run): StartSubSpell_efxDarkGradoOBJ02
+06B7B0	06B850	src/StartSubSpell_efxDarkGradoBG02.o(.text)	StartSubSpell_efxDarkGradoBG02(run): StartSubSpell_efxDarkGradoBG02
+06B5D8	06B684	src/StartSubSpell_efxDarkGradoBG01.o(.text)	StartSubSpell_efxDarkGradoBG01(run): StartSubSpell_efxDarkGradoBG01
+06C000	06C1AC	src/efxDarkGradoOBJ02_Loop.o(.text)	efxDarkGradoOBJ02_Loop(run): efxDarkGradoOBJ02_Loop
+06B858	06BA18	src/efxDarkGradoPalFlash_Loop.o(.text)	efxDarkGradoPalFlash_Loop(run): efxDarkGradoPalFlash_Loop

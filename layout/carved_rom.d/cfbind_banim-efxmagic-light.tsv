@@ -1,0 +1,9 @@
+060E5C	060E90	src/StartSubSpell_efxPurgeOBJRND.o(.text)	StartSubSpell_efxPurgeOBJRND(run): StartSubSpell_efxPurgeOBJRND
+060BE0	060C24	src/StartSpellAnimPurge.o(.text)	StartSpellAnimPurge(run): StartSpellAnimPurge
+060D90	060DE0	src/StartSubSpell_efxPurgeBG.o(.text)	StartSubSpell_efxPurgeBG(run): StartSubSpell_efxPurgeBG
+060E90	060EFC	src/efxPurgeOBJRND_Loop.o(.text)	efxPurgeOBJRND_Loop(run): efxPurgeOBJRND_Loop
+0612E0	061354	src/StartSubSpell_efxDivineOBJ.o(.text)	StartSubSpell_efxDivineOBJ(run): StartSubSpell_efxDivineOBJ
+0610B0	061134	src/StartSubSpell_efxDivineBG.o(.text)	StartSubSpell_efxDivineBG(run): StartSubSpell_efxDivineBG
+061134	0611B8	src/StartSubSpell_efxDivineBG_2.o(.text)	StartSubSpell_efxDivineBG_2(run): StartSubSpell_efxDivineBG_2
+0611B8	06123C	src/StartSubSpell_efxDivineBG_3.o(.text)	StartSubSpell_efxDivineBG_3(run): StartSubSpell_efxDivineBG_3
+0609F0	060AA8	src/efxLightning_Loop_Main.o(.text)	efxLightning_Loop_Main(run): efxLightning_Loop_Main

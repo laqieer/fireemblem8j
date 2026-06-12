@@ -30,12 +30,17 @@ for tu in "$@"; do
     # stage: new src/*.c (untracked carves), this TU's cfbind frags, dedup frag,
     # asm deletions + gbadisasm frag deletions.
     git add src/ 2>/dev/null
-    git add "layout/baseline_syms.d/cfbind_${tu}.tsv" \
-            "layout/carved_rom.d/cfbind_${tu}.tsv" \
-            "layout/carved_ram.d/cfbind_${tu}.tsv" \
-            "layout/patches.d/cfbind_${tu}.tsv" \
-            "layout/baseline_syms_drop.d/cfbind_${tu}.tsv" \
-            layout/baseline_syms_drop.d/cfbind_dedup.tsv 2>/dev/null
+    # add each fragment INDIVIDUALLY: a multi-pathspec `git add` aborts atomically
+    # (rc=128, stages nothing) if ANY path is missing — and a TU with no region-diff
+    # rodata has no carved_ram fragment. Add only the ones that exist.
+    for f in "layout/baseline_syms.d/cfbind_${tu}.tsv" \
+             "layout/carved_rom.d/cfbind_${tu}.tsv" \
+             "layout/carved_ram.d/cfbind_${tu}.tsv" \
+             "layout/patches.d/cfbind_${tu}.tsv" \
+             "layout/baseline_syms_drop.d/cfbind_${tu}.tsv" \
+             "layout/baseline_syms_drop.d/cfbind_dedup.tsv"; do
+        [ -f "$f" ] && git add "$f"
+    done
     git add -u asm/ layout/carved_rom.d/ layout/carved_ram.d/ layout/patches.d/ layout/baseline_syms.d/ layout/baseline_syms_drop.d/ 2>/dev/null
     n=$(grep "^OK: " "/tmp/cf_${tu}.log" | grep -oE '\+[0-9]+' | head -1)
     git commit -q -m "feat(cfBind): ${n} ${tu} — CF:agbcc data-bind (bind TU-private ProcScr/lookup tables)
