@@ -141,3 +141,12 @@ TalkPrepNextChar
 TalkSpritePrepNextChar
 ToggleTalkTextRed
 Tsa_LunaBg2
+ApplyBoxDialoguePosition
+BoxDialogueShouldAnimateText
+DialogBoxGetGlyphLen
+GetBoxDialogueSize
+GetHelpBoxItemInfoKind
+GetItemWeight
+GetLeaderLevelForSaveMenu
+gBoxDialogueConf
+gHelpBoxSt

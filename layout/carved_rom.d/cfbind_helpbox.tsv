@@ -1,0 +1,2 @@
+08C2DC	08C31C	src/HelpBoxDrawstring.o(.text)	HelpBoxDrawstring(run): HelpBoxDrawstring
+08C268	08C2DC	src/HelpBoxSetupstringLines.o(.text)	HelpBoxSetupstringLines(run): HelpBoxSetupstringLines
