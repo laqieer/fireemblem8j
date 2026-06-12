@@ -1,0 +1,15 @@
+Img_CharacterEndingMenu
+Pal_CharacterEndingMenu
+Tsa_CharacterEnding_BottomBorder
+Tsa_CharacterEnding_TopBorder
+gSoloEndingBattleDispConf
+SetupCharacterEndingGfx
+SetupCharacterEndingBg
+GetUnitASupporterPid
+DoesUnitHavePairedEnding
+GetUnitForCharacterEnding
+Img_ChapterIntroFog
+Pal_PlayerRankFog
+Tsa_PlayerRankFog
+Pal_FinScreen_1
+Tsa_EndingFin
