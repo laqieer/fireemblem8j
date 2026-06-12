@@ -1,0 +1,3 @@
+ClearTileRigistry	08001F30	thumb	hardware_08001FD8
+ClearOAMBuffer	080DC0D4	thumb	hardware_08002088
+gOamLoPutIt	03003010	data	hardware_080020CC
