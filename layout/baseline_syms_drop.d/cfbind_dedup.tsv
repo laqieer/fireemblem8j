@@ -261,3 +261,6 @@ FaceBlink_AnimLoop
 FaceBlink_PutEyeSprite
 UnpackFaceChibiSprGraphics
 gProcScr_FaceChibiSpr
+EndSysBlackBoxs
+GetLatestUnitIndexInPrepListByUId
+MakePrepUnitList
