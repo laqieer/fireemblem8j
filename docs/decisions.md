@@ -3165,3 +3165,21 @@ assigned). HYPOTHESIS: a meaningful fraction are still mechanically reachable (r
 not genuine FAR. ACTION: a frontier re-sweep — run `perm2_graduate.py` + `perfrag_carve.py` over the CURRENT
 `asm/sub_*.s` set (re-derived, not the stale worklists), partitioned a–m / n–z, carving the reachable and reporting
 the true FAR/LEN tail. Reserve decomp-permuter / IDA-Ghidra for the confirmed FAR residue after the re-sweep.
+
+## D70 — dataBattle: gAffinityBonuses typed C carved from inside a coarse frontier gap (region-same battle table; +1 TU) (2026-06-12)
+CONTEXT: DATA-battle unit, goal = port US typed battle/combat tables to JP `src/data/`. First target
+`gAffinityBonuses` (affinity support-bonus table, fe8u `src/bmreliance-data.c`). US `0x088B05F8` →
+JP `0x08904B84` via `layout/addr_map.tsv`. Dumped JP bytes: 8 entries × 8-byte stride (= 0x40) match the
+fe8u source values exactly (region-same gameplay data; the 7-field `struct SupportBonuses` is padded to an
+8-byte stride by agbcc, reproducing the ROM block). FINDING: the table did NOT sit in raw incbin — it was
+already covered by a coarse `carve_frontier.py` "long-tail gap" block (`frontier_df4_banim_b.gap72`,
+`0x903A50..0x904E1C`, a bulk descriptive-asm incbin, NOT genuinely region-different content). ACTION: split
+that incbin into head (`903A50..904B84`) + typed-C table + tail (`904BC4..904E1C`) using GAS
+`.incbin file,skip,count` on the existing `.bin` (no new bin files); placed `src/data/bmreliance_data.c`
+between them via the carved_rom.d fragment; removed the now-superseded baseline-symbol stub
+`layout/baseline_syms.d/permuter1_bmreliance.tsv` (which set `gAffinityBonuses` as an *ABS* symbol → caused a
+`multiple definition` link error against the real C definition). RESULT: all gates green — warm + cold
+`make compare`=OK, `check_selfcontained.py`=100%/exit-0, ROM=16,777,216, `make check`=OK. PATTERN (reusable):
+a frontier "gap" block is not a wall — splitting its incbin around a known typed sub-table is byte-safe and the
+cheap way to graduate region-same tables that happened to be bulk-carved; always grep `baseline_syms.d/` for a
+matching ABS stub and drop it when you add the real definition.
