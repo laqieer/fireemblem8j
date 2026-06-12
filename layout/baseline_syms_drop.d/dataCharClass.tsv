@@ -1,0 +1,4 @@
+# gCharacterData is now DEFINED by src/data/data_characters.o; drop the
+# baseline_syms aliases (added by carved code that references it) to avoid
+# multiple-definition.
+gCharacterData

@@ -3289,3 +3289,35 @@ it is fully owned here. Per-chapter map graphics are already incbin-carved
 (const_data_chapter_maps_p*). Remaining maps-frontier work is the
 `gChapterDataAssetTable` (JP 0x907BC8, 944 B, still incbin) and any region-different
 map-change/obj-anim/pal-anim tables not yet typed.
+## D74 — dataCharClass: typed `gCharacterData` + `gClassData` to C (EXTRACTED-DATA 0.14→0.31%); incbin→typed-C swap, US-correspondence pointer naming, drop real-object-defined syms (2026-06-12)
+
+**Result.** Carved the character & class stat tables from named `.incbin`
+(`asm/dat_gCharacterData_ref.s` @ 0x8582BC, `asm/dat_gClassData_ref.s` @ 0x85B6BC)
+to **typed C** (`src/data/data_characters.c` = 256×`struct CharacterData`/0x3400 B;
+`src/data/data_classes.c` = 127×`struct ClassData`/0x29AC B). `make compare` OK warm
+**and cold** (`make clean`), self-contained 100% (0 incbins), ROM=16MB, `make check`
+layout-consistent. EXTRACTED-DATA axis **0.14→0.31%** (+23,980 typed bytes). Reproducible
+via `scripts/gen_data_charclass.py` (decodes the JP ROM bytes through the fe8u struct
+layout and re-emits typed C with CHARACTER_*/CLASS_*/ITYPE_*/WPN_EXP_*/UNIT_AFFIN_*/CA_*
+constants — `make compare` is the oracle, not a guess).
+
+**Region-DIFFERENT, structurally-IDENTICAL.** JP differs from fe8u in text IDs (all 256
+nameTextId/descTextId), some base/growth stats, and every pointer target — but the per-row
+*structure* is byte-for-byte the same: the set of classes with a nonzero `_pU50` pointer
+**exactly matches** fe8u's, and `slowWalking`/`SMSId` presence patterns match too. That let
+me transfer the fe8u source's symbolic field choices wholesale and only re-decode literals.
+
+**Three integration lessons (logged for the next data-carve agent):**
+1. **sym_jp.txt is NOT fed to the linker** — only `layout/baseline_syms` (→ `asm/jp_syms.s`)
+   defines linker symbols. A symbol "in sym_jp.txt" does **not** resolve a reference. The 157
+   gClassData pointer targets (AnimConf_*/TerrainTable_*/Unk_TerrainTable_*) had to be checked
+   against `baseline_syms`, not sym_jp. (First link failed: undefined AnimConf_91-96 etc.)
+2. **Don't redeclare a symbol a real carved object already defines.** 36 of the 157 targets
+   (worldmap_gmapunit_p1293/1295/1297/1125/1127/1129 fragments, which happen to `.global`-cover
+   the AnimConf/TerrainTable ROM regions) provide the symbol via their `.o`; adding a baseline
+   `.set` is a multiple-definition. Scan `asm/*.s` for `\.global NAME` and **omit those** from
+   the baseline fragment (kept 117 in `layout/baseline_syms.d/dataCharClass.tsv`).
+3. **gCharacterData was aliased in baseline_syms** (by uisupport/masked carved code that calls
+   it) — defining it in C needs the D65 **drop-fragment** (`layout/baseline_syms_drop.d/dataCharClass.tsv`).
+   gClassData was not aliased, so no drop needed. Also: delete the old `asm/dat_*_ref.s` (they're
+   in the ALL_OBJECTS wildcard; their `.global gCharacterData/gClassData` would collide with the C).
