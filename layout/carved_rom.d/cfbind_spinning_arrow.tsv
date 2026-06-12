@@ -1,0 +1,3 @@
+0B1780	0B1794	src/StartUiSpinningArrows.o(.text)	StartUiSpinningArrows(run): StartUiSpinningArrows
+0B1794	0B1800	src/LoadUiSpinningArrowGfx.o(.text)	LoadUiSpinningArrowGfx(run): LoadUiSpinningArrowGfx
+0B15D4	0B1780	src/UiSpinningArrows_Loop.o(.text)	UiSpinningArrows_Loop(run): UiSpinningArrows_Loop
