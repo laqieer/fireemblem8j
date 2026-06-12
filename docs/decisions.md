@@ -2938,3 +2938,50 @@ graduated ~all true NEAR carves (+158). The remaining n–z frontier is CF:agbcc
 LEN (98) + NOADDR (60) — the genuine hand-decomp/perfrag work, untouched at zero risk. Pushed `feat/rd2`. Siblings
 own a–m (rd1) and region-same (harv1) — not touched. (D-number from the free sequence; renumber at integration if
 a concurrent sibling claimed D63.)
+## D64 — rd1: perm2_graduate reloc-resolve carve of the region-DIFFERENT worklist (a–m scope) — +272 matching-C; hit rate falls sharply with size, FAR residue is the genuine permuter frontier (2026-06-12)
+
+**Context.** Branch `feat/rd1` (sibling to rd2 = n–z, harv1 = region-same). Scope: the
+`layout/nofuncmap_region_different.tsv` (D54 reloc-aware classifier) worklist's functions whose US TU name
+starts a–m (1,366 of the 2,189 total). The base branch already had 122 prior perm2 carves; this session added
+**+272 net** new matching-C functions across ~70 TUs (top: bmmenu 22, eventinfo 17, bmlib 11, bmunit 9,
+banim-ekrdragon-demonking 8, cp_utility/bmsave-lib 7). Method = `scripts/perm2_graduate.py --verify` exactly as
+specified (D54's KEY FINDING restated as the prompt's "D60": most "region-different" is region-SAME modulo
+relocation — the NEAR bucket clears by carving func_only at the real JP address with callees/globals bound as
+layout symbols; the linker resolves the BL/pc-rel/literal-pool reloc sites). perm2's per-function probe
+(`extract_func_only` → isolated agbcc compile → reloc-mask diff vs JP bytes) gates FAR at zero cost; its
+self-correcting `--verify` loop builds the whole ROM once, parses undefined-ref / multiple-def / byte-mismatch
+offenders, reverts them, rebuilds, converges; `make compare` is the sole oracle.
+
+**RESULT by size band (smallest-first = highest yield, exactly as D54 predicted).**
+  * **<60B: +167** (4 sub-batches: 20+13+19+115; the +115 single shot validated feeding the whole band at once —
+    perm2 stages all NEAR, builds once, reverts the few offenders, converges in ~2 attempts).
+  * **60–120B: +85.**  **120–200B: +8.**  **200–300B: +4.**  **300B+: +8** (122 fed).
+  Hit rate per band collapses with size (small ≈ richest, ≥120B ≈ a handful each) — the larger a function, the
+  more likely its JP codegen genuinely differs (register alloc / scheduling / literal-pool layout) rather than
+  just relocating. All gates GREEN every batch: `rm -f src/*.s` + `make check` + `make compare` + `make clean &&
+  make compare` (cold) + `check_selfcontained.py` == 0 incbins; named from US; staged EXPLICITLY (NO `git add -A`,
+  unstaged the worktree `tools` symlink); verify-or-revert; baserom/checksum/CI untouched; committed + pushed per
+  band on `feat/rd1`.
+
+**THE asm→C SWAP IS AUTOMATIC AND CORRECT.** Where a carve range was previously a gbadisasm `sub_<addr>` asm
+fragment, perm2 stashes `asm/sub_*.s` + its `gbadisasm_*.tsv` and on a kept carve those deletions must be
+committed alongside the new `src/<fn>.c` + `perm2_<fn>.tsv` (40 deletions accompanied the first 20 carves). The
+driver stages `git add -u asm/ layout/carved_rom.d/` to capture them. `make check` flags new carves as "dangling /
+layout INCONSISTENT" ONLY until their src+frag are git-tracked — staging+committing clears it (expected, not a
+failure).
+
+**THE FAR / full-build-offender RESIDUE = the genuine permuter frontier (758 functions tried-and-failed in a–m).**
+Two failure classes, both safely auto-handled: (1) FAR at probe time (a non-reloc body byte differs) → genuine
+region-different codegen; (2) NEAR at probe but byte-mismatch / undefined-ref / multiple-def at FULL build (e.g.
+the recurring `MapMenu_StatusCommand`/`BarrierMapSelect_Init`/`*MapSelect_Init`/`CpOrderFunc_End` set) → either
+needs TU-private data bound first (D45/D51 class) or a referenced symbol lands at a different JP address than the
+gbadisasm baseline. These re-probe cheaply but cost a build round each in the revert loop — `scripts/rd1_drive2.sh`
+maintains a persistent tried-failed skip list (`/tmp/rd1_tried_failed.txt`) so later bands never re-feed them.
+**Leave the FAR residue for a decomp-permuter pass** (per the prompt mandate); verify-or-revert already proved they
+don't reconcile via func_only/dedup binding.
+
+**TOOLKIT (scratch, NOT committed — kept in worktree):** `scripts/rd1_drive.sh` (carve+stage+gate+commit) and the
+skip-list-aware `scripts/rd1_drive2.sh`. They wrap `perm2_graduate.py --verify`, stage explicitly (never `git add
+-A`, drop the `tools` symlink), run all four gates, and commit+push per band only on a green cold `make compare`.
+Reusable for the rd2 (n–z) / large-band re-sweeps. Siblings own n–z (rd2) and the region-same worklist (harv1) —
+not touched. (D-number from the free sequence; renumber at integration if a concurrent sibling claimed D63.)
