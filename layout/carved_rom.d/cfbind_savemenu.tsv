@@ -1,0 +1,6 @@
+0AE41C	0AE42C	src/SaveMenuLoadExtraOptionGfx.o(.text)	SaveMenuLoadExtraOptionGfx(run): SaveMenuLoadExtraOptionGfx
+0AEF80	0AEF98	src/SaveMenuStartBonusClaim.o(.text)	SaveMenuStartBonusClaim(run): SaveMenuStartBonusClaim
+0AF010	0AF034	src/SaveMenu_SetDifficultyChoice.o(.text)	SaveMenu_SetDifficultyChoice(run): SaveMenu_SetDifficultyChoice
+0AEFA4	0AEFDC	src/StartSaveMenu.o(.text)	StartSaveMenu(run): StartSaveMenu
+0AE558	0AE5A4	src/SaveMenuScrollExtraSlotOut.o(.text)	SaveMenuScrollExtraSlotOut(run): SaveMenuScrollExtraSlotOut
+0AF034	0AF0F8	src/BonusClaimMenu_Init.o(.text)	BonusClaimMenu_Init(run): BonusClaimMenu_Init
