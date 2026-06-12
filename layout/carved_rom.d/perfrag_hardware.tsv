@@ -1,0 +1,3 @@
+001FD8	00204C	src/hardware_08001FD8.o(.text)	hardware_08001FD8(run): FlushTiles
+002088	0020CC	src/hardware_08002088.o(.text)	hardware_08002088(run): SyncHiOam
+0020CC	002100	src/hardware_080020CC.o(.text)	hardware_080020CC(run): SyncLoOam

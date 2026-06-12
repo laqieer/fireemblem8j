@@ -1,0 +1,6 @@
+00D110	00D220	src/event_0800D110.o(.text)	event_0800D110(run): EventEngine_OnUpdate
+00D374	00D404	src/event_0800D374.o(.text)	event_0800D374(run): EventEngine_Create
+00D404	00D45C	src/event_0800D404.o(.text)	event_0800D404(run): EventEngine_CreateBattle
+00D4BC	00D4C8	src/event_0800D4BC.o(.text)	event_0800D4BC(run): SetEventSlotC
+00D6A8	00D6D8	src/event_0800D6A8.o(.text)	event_0800D6A8(run): SetDialogueSkipEvBit
+00D6D8	00D74C	src/event_0800D6D8.o(.text)	event_0800D6D8(run): EventEngine_StartSkip

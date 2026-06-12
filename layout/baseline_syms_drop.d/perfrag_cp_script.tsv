@@ -1,0 +1,5 @@
+AiCompare
+AiFindBestAttackPositionAgainstTarget
+AiFindClosestReachableTerrainPosition
+GenerateExtendedMovementMapOnRangeNeglectWallSnag
+AiFindClosestTerrainPosition

@@ -1,0 +1,6 @@
+AiCompare	0803A794	thumb	cp_script_0803C5D8
+GenerateExtendedMovementMapOnRangeNeglectWallSnag	08040FA0	thumb	cp_script_0803D1B8
+AiFindClosestReachableTerrainPosition	0803D0B4	thumb	cp_script_0803D1B8
+AiFindBestAttackPositionAgainstTarget	0803CF44	thumb	cp_script_0803D1B8
+gCpData_24	085D2054	data	cp_script_0803D1B8
+AiFindClosestTerrainPosition	0803AD58	thumb	cp_script_0803D268

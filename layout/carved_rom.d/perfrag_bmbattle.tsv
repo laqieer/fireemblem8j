@@ -1,0 +1,2 @@
+02BF70	02BFF8	src/bmbattle_0802BF70.o(.text)	bmbattle_0802BF70(run): BattleApplyUnitUpdates
+02C134	02C21C	src/bmbattle_0802C134.o(.text)	bmbattle_0802C134(run): UpdateUnitFromBattle

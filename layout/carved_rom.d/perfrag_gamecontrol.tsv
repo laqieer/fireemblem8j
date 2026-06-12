@@ -1,0 +1,3 @@
+009DB4	009DF8	src/gamecontrol_08009DB4.o(.text)	gamecontrol_08009DB4(run): GameControl_StartRuinEvent
+009DF8	009E3C	src/gamecontrol_08009DF8.o(.text)	gamecontrol_08009DF8(run): CallGameEndingEvent
+009E68	009EA0	src/gamecontrol_08009E68.o(.text)	gamecontrol_08009E68(run): StartGame
