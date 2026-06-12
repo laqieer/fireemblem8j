@@ -1,0 +1,5 @@
+080DCC20	rom	src/bmio_080301A8.o(.rodata)	bmio_080301A8 .rodata region-diff (incbin)
+080DCC20	rom	src/bmio_080302E0.o(.rodata)	bmio_080302E0 .rodata region-diff (incbin)
+085C5DE8	rom	src/bmio_08030344.o(.data)	bmio_08030344 .data region-diff (incbin)
+085C5D98	rom	src/bmio_08030B90.o(.data)	bmio_08030B90 .data region-diff (incbin)
+080DCC2C	rom	src/bmio_08030BE4.o(.rodata)	bmio_08030BE4 .rodata region-diff (incbin)
