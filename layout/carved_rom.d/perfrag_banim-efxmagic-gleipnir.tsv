@@ -1,0 +1,6 @@
+06AEE0	06B048	src/banim-efxmagic-gleipnir_0806AEE0.o(.text)	banim-efxmagic-gleipnir_0806AEE0(run): efxDarkGrado_Loop_Main
+06B048	06B0A0	src/banim-efxmagic-gleipnir_0806B048.o(.text)	banim-efxmagic-gleipnir_0806B048(run): efxDarkGradoMapFadeOut_Loop
+06B728	06B7B0	src/banim-efxmagic-gleipnir_0806B728.o(.text)	banim-efxmagic-gleipnir_0806B728(run): efxDarkGradoBG02_Loop_B
+06BB1C	06BBA0	src/banim-efxmagic-gleipnir_0806BB1C.o(.text)	banim-efxmagic-gleipnir_0806BB1C(run): efxDarkGradoOBJ01piece_Loop
+06BCCC	06BDE8	src/banim-efxmagic-gleipnir_0806BCCC.o(.text)	banim-efxmagic-gleipnir_0806BCCC(run): efxDarkGradoOBJ01_Loop
+06BE20	06BE8C	src/banim-efxmagic-gleipnir_0806BE20.o(.text)	banim-efxmagic-gleipnir_0806BE20(run): efxDarkGradoOBJ02piece_Loop
