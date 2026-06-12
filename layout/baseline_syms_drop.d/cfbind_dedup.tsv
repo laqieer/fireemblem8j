@@ -11,3 +11,7 @@ Pal_HammerneSprites
 Pal_Silence
 Pal_SleepBg
 SetFacePosition
+SoundRoom_DrawVolumeGraphSprites
+SoundRoom_GetScrollDirection
+StartSoundRoomSong
+StopSoundRoomSong
