@@ -1,6 +1,7 @@
 # AUTO (scripts/dedup_baseline_syms.py): GLOBAL symbols graduated to real
 # src/ defs but still ABS-bound by a sibling branch -- dropped to avoid
 # linker multiple-definition. Regenerate with: python3 scripts/dedup_baseline_syms.py
+AiGenerateUnitMovementMapRespectStay
 CanUnitUseItem
 FillBallistaRangeMaybe
 MakeGiveTargetList
