@@ -417,11 +417,9 @@ frontier_df4_banim_b_067_84886C:
 @ gap68 (JP 0x0885b6bc..0x0885e068) reassigned to gClassData -- see
 @ asm/dat_gClassData_ref.s; it was MISLABELED here as banim graphics data.
 
-	.section .data.frontier_df4_banim_b.gap69, "a", %progbits
-@ df4_banim_b region-different data, JP 0x088601b1..0x088609d1 (2080 B); long-tail data gap (no .text in window), byte-perfect incbin.
-	.global frontier_df4_banim_b_069_8601B1
-frontier_df4_banim_b_069_8601B1:
-	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_069_8601B1.bin"
+@ gap69 (JP 0x088601b1..0x088609d1) removed: it was MISLABELED banim graphics data but is
+@ actually region-same terrain LUT bytes (US 0x080bc59..0x080c479, inside the data_terrains
+@ block); now owned by src/data/data_terrains.o(.data).
 
 	.section .data.frontier_df4_banim_b.gap70, "a", %progbits
 @ df4_banim_b region-different data, JP 0x08901138..0x08903138 (8192 B); long-tail data gap (no .text in window), byte-perfect incbin.

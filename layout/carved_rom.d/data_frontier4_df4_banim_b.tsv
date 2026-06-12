@@ -67,7 +67,6 @@
 7D3984	7D3D2C	asm/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap65)	df4_banim_b region-diff data (936 B, long-tail gap)
 7E13A4	7E15D4	asm/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap66)	df4_banim_b region-diff data (560 B, long-tail gap)
 84886C	848B28	asm/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap67)	df4_banim_b region-diff data (700 B, long-tail gap)
-8601B1	8609D1	asm/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap69)	df4_banim_b region-diff data (2080 B, long-tail gap)
 901138	903138	asm/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap70)	df4_banim_b region-diff data (8192 B, long-tail gap)
 903450	9036DC	asm/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap71)	df4_banim_b region-diff data (652 B, long-tail gap)
 903A50	904B84	asm/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap72)	df4_banim_b region-diff data head (4404 B, long-tail gap; gAffinityBonuses split out)

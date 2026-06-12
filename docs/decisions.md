@@ -3166,7 +3166,7 @@ not genuine FAR. ACTION: a frontier re-sweep — run `perm2_graduate.py` + `perf
 `asm/sub_*.s` set (re-derived, not the stale worklists), partitioned a–m / n–z, carving the reachable and reporting
 the true FAR/LEN tail. Reserve decomp-permuter / IDA-Ghidra for the confirmed FAR residue after the re-sweep.
 
-## D70 — dataBattle: gAffinityBonuses typed C carved from inside a coarse frontier gap (region-same battle table; +1 TU) (2026-06-12)
+## D72 — dataBattle: gAffinityBonuses typed C carved from inside a coarse frontier gap (region-same battle table; +1 TU) (2026-06-12)
 CONTEXT: DATA-battle unit, goal = port US typed battle/combat tables to JP `src/data/`. First target
 `gAffinityBonuses` (affinity support-bonus table, fe8u `src/bmreliance-data.c`). US `0x088B05F8` →
 JP `0x08904B84` via `layout/addr_map.tsv`. Dumped JP bytes: 8 entries × 8-byte stride (= 0x40) match the
@@ -3183,3 +3183,28 @@ between them via the carved_rom.d fragment; removed the now-superseded baseline-
 a frontier "gap" block is not a wall — splitting its incbin around a known typed sub-table is byte-safe and the
 cheap way to graduate region-same tables that happened to be bulk-carved; always grep `baseline_syms.d/` for a
 matching ABS stub and drop it when you add the real definition.
+
+## D73 — dataBattle: data_terrains region-same prefix as one typed C TU; reclaimed 10 misattributed worldmap per-sym carves + 1 frontier gap (2026-06-12)
+CONTEXT: DATA-battle, port US `src/data_terrains.c` (the core battle/combat terrain lookup tables:
+per-class movement-cost Normal/Rain/Snow, avoid/def/res terrain bonuses, heal amount + heals-status,
+battle-anim terrain ground + BG LUTs). US base `0x0880B808` → JP `0x0885FD60` via the consistent
+addr_map delta `0x54558`. FINDING (boundary): only the PREFIX is region-same — byte-comparing the recompiled
+US `.data` (0x1bee) against the JP ROM shows an exact match for the first `0x1A68` bytes (ends right at the
+`gBanimBGLut14` / `Unk_TerrainTable_8` boundary, JP `0x8617C8`); the fe8u tail (`Unk_TerrainTable_8..11` +
+the `gTerrains_0` u16 tile-id table) is region-DIFFERENT in JP and stays raw. So the TU is fe8u's file
+truncated after `gBanimBGLut14` (verified: compiles to exactly 0x1A68 bytes, byte-identical to the ROM).
+FINDING (carve hygiene): the JP prefix range was NOT raw incbin — it was punched full of bogus carves:
+(1) 10 rows `dat_worldmap_gmapunit_p1125..p1135` labeled "region-same per-sym shifted" whose backing asm
+actually `.global`s `TerrainTable_MovCost_ArmorNormal` etc. — i.e. the per-sym carver got the SYMBOLS right
+(from the US ELF) but MISLABELED the owning TU as worldmap; (2) 9 "byte-completeness" residue gap-fillers
+between them; (3) one coarse `frontier_df4_banim_b.gap69` (`0x8601B1..0x8609D1`) mislabeled banim graphics
+but mapping back into the US terrain block. ACTION: deleted all 20 (10 worldmap + 9 residue) fragment/asm
+pairs, removed frontier gap69 (incbin block + tsv row), added one `src/data/data_terrains.o(.data)` row
+spanning `0x85FD60..0x8617C8`, and dropped two stray ABS baseline stubs (`gBanimBGLut02`, `gBanimBGLut08`,
+mistyped `thumb` in baseline_syms.tsv so `dedup_baseline_syms.py` skipped them) via a new
+`baseline_syms_drop.d/dataBattle_data_terrains.tsv`. RESULT: all gates green — warm + cold `make compare`=OK,
+self-contained=100%/exit-0, ROM=16,777,216, `make check`=OK; net layout objects 8618→8600 (replaced ~20
+mislabeled asm carves with one correct typed TU). PATTERN: a "region-same per-sym shifted" carve whose
+backing asm `.global`s gameplay-table symbols (TerrainTable_*, gBanim*) is a strong misattribution signal —
+prefer one contiguous typed TU. Always byte-diff the full US `.data` vs the ROM to find the EXACT
+region-same/different boundary before deciding the TU's extent.
