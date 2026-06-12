@@ -3165,3 +3165,36 @@ assigned). HYPOTHESIS: a meaningful fraction are still mechanically reachable (r
 not genuine FAR. ACTION: a frontier re-sweep — run `perm2_graduate.py` + `perfrag_carve.py` over the CURRENT
 `asm/sub_*.s` set (re-derived, not the stale worklists), partitioned a–m / n–z, carving the reachable and reporting
 the true FAR/LEN tail. Reserve decomp-permuter / IDA-Ghidra for the confirmed FAR residue after the re-sweep.
+
+## D70 — DATA-ai: ported the whole AI data TU (src/cp_data.c) as one typed-C object, superseding ~25 named-incbin fragments (2026-06-12)
+
+**Goal.** Drive EXTRACTED-DATA up by typing fe8u's AI data tables. The AI data in FE8 is one TU,
+`src/cp_data.c` (1604 lines): `struct AiScr` scripts (`AiScr_AiB_*`, `gAiScript_*`), `gCpData_*` byte/word
+lists, `gAiCombatScoreCoefficientTable`, `gRed/GreenAiEscapePoints` + `AiEscapePts_*`, `gAiItemConfigTable`,
+`gAI3HealingThresholdTable`, `gAiStealPriorityItemList`, `gAi1/2ScriptTable`, `gpAi1/2Table`. It links into TWO
+sections: `.rodata` (JP 0x0DCE48–0x0DD358, 1296 B) and `.data` (JP 0x5D2034–0x5D30F8, 4292 B).
+
+**Finding (the interesting part).** The bytes are **region-SAME** — `.rodata` byte-identical to fe8u (0 diffs);
+`.data` identical-modulo-pointer-relocation (every diff = a `R_ARM_ABS32` resolving to a JP address). The only
+genuine region difference in the whole TU is **2 bytes**: `gCpData_33` is `{CHARACTER_NATASHA(0x0D),0,0,0}` in US
+but `{0x00,0x01,0x00,0x00}` in JP (0x085D2908) — matched to the JP bytes. So this is a **CF:agbcc/reloc-resolve
+data-binding** carve (same class as D67), not a hand-port.
+
+**The entanglement.** The JP `.data` range was already piecemeal-carved by ~25 fragments from earlier passes, several
+**misattributed**: 14 `data_refs_recursive` named-incbins (each one cp_data symbol), 10 `data_085Dxxxx` raw residue
+glue, 1 `frontier_df4_uistuff.gap37` and 2 `dat_worldmap_gmapunit_p729/p730` (these last three were cp_data AI scripts
+mislabeled as worldmap/uistuff "long-tail data"); `.rodata` was inside `frontier_df4_misc_lo.gap2`. **Decision:**
+replace ALL of them with the single relocatable typed-C TU and let the linker re-derive identical bytes. Removed 18
+fragment `.s` + their bins + 14 rows from data_refs_recursive; split `frontier_df4_misc_lo.gap2`→gap2a/gap2b and
+shrank residue `085D1F2C`/`085D30E0` around the cp_data extent (they straddle the boundary); dropped the 12 baseline
+aliases the source now defines (`layout/baseline_syms_drop.d/dataAI_cp_data.tsv`); added the 3 still-incbin AI
+functions the scripts call (`AiCountEnemyInRangeOrTryMoveToSpecificPosition`, `AiFunc_AttackStoredTargetOrMoveToward`,
+`AiFunc_CountEnemiesInRange`) to `baseline_syms.d/dataAI_cp_data.tsv` (the other 11 callees are already real source).
+
+**Result.** `make compare` OK on both incremental and **cold** (`make clean`) build; `make check` OK; self-contained
+100% (0 incbins); ROM = 16,777,216 B. +5,588 B of genuinely-typed AI data extracted (was named-incbin/residue).
+Net 86 files changed (1 new C TU, 69 deletions of superseded fragments/bins). **Reusable lesson:** when a target TU's
+bytes are region-same modulo relocation, porting the *whole* TU and deleting the misattributed per-symbol incbin
+fragments is cleaner and higher-yield than carving symbol-by-symbol — the linker is the relocation engine.
+(Consulted Copilot per fork policy; the call timed out, so self-decided on D67 precedent + the dual-section
+cp_order/perform/staff pattern already in-tree. Oracle-gated throughout. D-number from the free sequence after D69.)

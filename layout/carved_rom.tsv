@@ -317,6 +317,7 @@
 0DCC90	0DCCB2	src/bmarena.o(.rodata)	bmarena .rodata
 0DCD88	0DCDAC	src/cp_order.o(.rodata)	cp_order .rodata
 0DCDC4	0DCDD0	src/cp_perform.o(.rodata)	cp_perform .rodata
+0DCE48	0DD358	src/cp_data.o(.rodata)	cp_data typed C .rodata: gClassList_Empty1-9, gAiCombatScoreCoefficientTable, gCpData_*, AiEscapePts_*, gAiItemConfigTable, AiCountInRangArg_InRange2 (region-same, byte-identical to fe8u)
 0DD368	0DD3D0	src/cp_staff.o(.rodata)	cp_staff .rodata
 0DD41C	0DE85C	asm/dat_gTacticianTextConf_ref.o(.rodata.dat_gTacticianTextConf_ref)	gTacticianTextConf region-diff (funcmap code-ref, 5KB)
 0DED24	0DED3A	src/sio_main2.o(.rodata)	sio_main2 .rodata
@@ -736,10 +737,7 @@
 5D1DD0	5D1E10	asm/dat_mine_pal.o(.rodata.dat_mine_pal)	dat_mine_pal region-same shifted (0KB)
 5D1E60	5D1EA4	src/cp_order.o(.data)	cp_order .data
 5D1F0C	5D1F2C	src/cp_perform.o(.data)	cp_perform .data
-5D2090	5D2194	asm/dat_gRedAiEscapePoints_ref.o(.rodata.dat_gRedAiEscapePoints_ref)	gRedAiEscapePoints region-diff (funcmap code-ref, 0KB)
-5D2194	5D2298	asm/dat_gGreenAiEscapePoints_ref.o(.rodata.dat_gGreenAiEscapePoints_ref)	gGreenAiEscapePoints region-diff (funcmap code-ref, 0KB)
-5D2338	5D23B8	asm/dat_worldmap_gmapunit_p729.o(.rodata.dat_worldmap_gmapunit_p729)	dat_worldmap_gmapunit_p729 region-same per-sym shifted (0KB)
-5D2418	5D24D8	asm/dat_worldmap_gmapunit_p730.o(.rodata.dat_worldmap_gmapunit_p730)	dat_worldmap_gmapunit_p730 region-same per-sym shifted (0KB)
+5D2034	5D30F8	src/cp_data.o(.data)	cp_data typed C .data: AI scripts (gAiScript_*, AiScr_AiB_*), gRed/GreenAiEscapePoints, gAI3HealingThresholdTable, gAi1/2ScriptTable, gpAi1/2Table; region-same content, JP pointer relocs. Supersedes dat_gRed/GreenAiEscapePoints_ref + dat_worldmap_gmapunit_p729/p730 (those were misattributed cp_data AI scripts).
 5D31E8	5D31EC	src/sio_core.o(.data)	sio_core .data
 5D32C0	5D32D8	src/sio_main2.o(.data)	sio_main2 .data
 5D3624	5D367C	asm/dat_ProcScr_SioPostBattle_ref.o(.rodata.dat_ProcScr_SioPostBattle_ref)	ProcScr_SioPostBattle region-diff (funcmap code-ref, 0KB)
