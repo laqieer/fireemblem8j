@@ -374,3 +374,8 @@ MaybeCallEndEvent_
 MoveLimitViewChange_OnInit
 MoveLimitView_OnInit
 TryMakeCantoUnit
+DisplayTexts
+GetDisplayRankStringFromExp
+GetWeaponExpProgressState
+Tsa_StatscreenEquipedWeaponHighlight
+Tsa_StatscreenEquipmentBG
