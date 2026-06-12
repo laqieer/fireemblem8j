@@ -1,0 +1,2 @@
+1B2C80	1B2D81	src/chapterdata.o(.rodata)	chapterdata internalName string pool ("L00".."I10x"); pooled .rodata of the chapter_settings.h TU (region-same bytes, JP placement)
+904E1C	907BC8	src/chapterdata.o(.data)	gChapterDataTable[79] typed C (struct ROMChapterData, 0x94 each) ported from US chapter_settings layout; JP text/event/title IDs (region-different values, region-same struct)

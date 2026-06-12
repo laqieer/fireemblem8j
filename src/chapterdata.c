@@ -3,6 +3,7 @@
 #include "agb_sram.h"
 #include "bmsave.h"
 
+#include "src/data/chapter_settings.h"
 
 /* prototypes for same-file helpers called by this run */
 const struct ROMChapterData* GetROMChapterStruct(unsigned chIndex);
