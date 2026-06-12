@@ -1,0 +1,4 @@
+GetNextUnclearedChapter	080C1E54	thumb	GmapTimeMons_Init
+GenerateRandomonsterMergeConf	080C6530	thumb	GmapTimeMons_Init
+SetGmClassUnit	07E457E4	thumb	GmapTimeMons_ExecMonsterMergeMu
+Sprite_0	08B1CD80	data	GmapTimeMons_ExecMonsterMergeMu

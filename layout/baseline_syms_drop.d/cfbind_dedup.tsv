@@ -379,3 +379,5 @@ GetDisplayRankStringFromExp
 GetWeaponExpProgressState
 Tsa_StatscreenEquipedWeaponHighlight
 Tsa_StatscreenEquipmentBG
+SetGmClassUnit
+Sprite_0
