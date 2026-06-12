@@ -212,3 +212,5 @@ gPal_HelpTextBox
 GetGmPathLength
 GmMu_GetRawPosition
 InitMus
+gGfx_GMapPI_LevelNums
+gGfx_GMapPI_ShopIcons
