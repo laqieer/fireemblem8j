@@ -1,0 +1,6 @@
+ExecTrapAfterWarp	08037864	thumb	PostWarpStaff_ExecTrap
+JunaItemEffLevelLut	080DC978	data	ApplyJunaFruitItem
+ApplyJunaFruitItem	0802F8C4	thumb	ExecJunaFruitItem
+NewPopup2_PlanB	0801F6E4	thumb	ExecJunaFruitItem
+InitBattleUnitWithoutBonuses	0802A5D4	thumb	ExecUnitDefaultPromotion
+ApplyUnitPromotion	0802BC98	thumb	ExecUnitPromotion

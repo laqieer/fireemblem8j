@@ -382,3 +382,6 @@ Tsa_StatscreenEquipmentBG
 SetGmClassUnit
 Sprite_0
 SetTalkPrintDelay
+ApplyUnitPromotion
+InitBattleUnitWithoutBonuses
+NewPopup2_PlanB
