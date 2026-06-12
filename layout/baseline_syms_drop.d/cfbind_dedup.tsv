@@ -249,3 +249,10 @@ Img_efxDarkLongMonsBG
 GetMapUnitMMSGfxBuffer
 MMS_GetGfx
 MMS_GetROMTCS2
+BeginGorgonEggHatchDamageAnim
+BeginUnitHealAnim
+MakePoisonDamageTargetList
+PidStatsRecordTargetListDeaths
+SetClassToHatchingGorgonEgg
+StatusHealEffect_PalSpriteAnim_SetOutlineIntensity
+sProcScr_StatusHealEffect

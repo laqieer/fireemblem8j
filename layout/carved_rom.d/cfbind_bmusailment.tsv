@@ -1,0 +1,5 @@
+035E70	035E9C	src/StatusHealEffect_PalSpriteAnim_LoopOut.o(.text)	StatusHealEffect_PalSpriteAnim_LoopOut(run): StatusHealEffect_PalSpriteAnim_LoopOut
+0361B8	0361E8	src/GorgonEggHatchDisplay_Init.o(.text)	GorgonEggHatchDisplay_Init(run): GorgonEggHatchDisplay_Init
+0361E8	03621C	src/GorgonEggHatchDisplay_Display.o(.text)	GorgonEggHatchDisplay_Display(run): GorgonEggHatchDisplay_Display
+0360B8	0360F0	src/PoisonDamageDisplay_Init.o(.text)	PoisonDamageDisplay_Init(run): PoisonDamageDisplay_Init
+035FFC	036040	src/TerrainHealDisplay_Display.o(.text)	TerrainHealDisplay_Display(run): TerrainHealDisplay_Display
