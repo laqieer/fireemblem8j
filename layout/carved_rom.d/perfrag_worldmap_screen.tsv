@@ -1,0 +1,3 @@
+001EF0	001EFC	src/worldmap_screen_08001EF0.o(.text)	worldmap_screen_08001EF0(run): GMapScreen_ResetState
+0BF600	0BF6B4	src/worldmap_screen_080BF600.o(.text)	worldmap_screen_080BF600(run): MapScreen_Init
+0BF95C	0BFA40	src/worldmap_screen_080BF95C.o(.text)	worldmap_screen_080BF95C(run): GMapScreen_Loop
