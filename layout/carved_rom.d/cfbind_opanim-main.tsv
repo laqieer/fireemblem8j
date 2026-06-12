@@ -1,0 +1,9 @@
+0CD500	0CD51C	src/OpAnimApplyScrollAndPalettes.o(.text)	OpAnimApplyScrollAndPalettes(run): OpAnimApplyScrollAndPalettes
+0CFDFC	0CFF08	src/OpAnimTitleFlyInSeg3.o(.text)	OpAnimTitleFlyInSeg3(run): OpAnimTitleFlyInSeg3
+0D0570	0D067C	src/OpAnimTitleFlyInSeg8.o(.text)	OpAnimTitleFlyInSeg8(run): OpAnimTitleFlyInSeg8
+0D0C1C	0D0D58	src/OpAnimTitleFlyInSeg12.o(.text)	OpAnimTitleFlyInSeg12(run): OpAnimTitleFlyInSeg12
+0CFA14	0CFB8C	src/OpAnimTitleFlyInSeg1.o(.text)	OpAnimTitleFlyInSeg1(run): OpAnimTitleFlyInSeg1
+0D067C	0D0854	src/OpAnimTitleFlyInSeg9.o(.text)	OpAnimTitleFlyInSeg9(run): OpAnimTitleFlyInSeg9
+0D0A40	0D0C1C	src/OpAnimTitleFlyInSeg11.o(.text)	OpAnimTitleFlyInSeg11(run): OpAnimTitleFlyInSeg11
+0D0854	0D0A40	src/OpAnimTitleFlyInSeg10.o(.text)	OpAnimTitleFlyInSeg10(run): OpAnimTitleFlyInSeg10
+0CFB8C	0CFDFC	src/OpAnimTitleFlyInSeg2.o(.text)	OpAnimTitleFlyInSeg2(run): OpAnimTitleFlyInSeg2
