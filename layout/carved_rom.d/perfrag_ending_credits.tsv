@@ -1,0 +1,4 @@
+0C94A8	0C94F0	src/ending_credits_080C94A8.o(.text)	ending_credits_080C94A8(run): EndingCredits_0
+0C94F0	0C9568	src/ending_credits_080C94F0.o(.text)	ending_credits_080C94F0(run): EndingCredits_ShowCopyright
+0C9568	0C95AC	src/ending_credits_080C9568.o(.text)	ending_credits_080C9568(run): EndingCredits_AwaitInputForEnd
+0C95AC	0C9630	src/ending_credits_080C95AC.o(.text)	ending_credits_080C95AC(run): EndingCredits_OnEnd
