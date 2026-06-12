@@ -1,0 +1,2 @@
+0BD218	0BD304	src/worldmap_face_080BD218.o(.text)	worldmap_face_080BD218(run): HandleWMFaceFade
+0BD4F8	0BD544	src/worldmap_face_080BD4F8.o(.text)	worldmap_face_080BD4F8(run): WMFaceCtrl_Loop
