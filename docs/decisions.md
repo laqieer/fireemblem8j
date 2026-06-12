@@ -3482,3 +3482,34 @@ position), `/tmp/mk_target2.py` (asm→permuter-target .s with symbol alignment 
 nofuncmap_region_different.tsv`. Gates held every carve: probe byte-exact → carve → `make compare` OK → cold `make
 clean && make compare` OK → `check_selfcontained.py`==0 → ROM==16,777,216. Permuter `nonmatchings/` scratch NOT
 committed (gitignored).
+
+## D80 — BATCH WAVE COMPLETE: /batch 11-unit parallel wave integrated — extracted-data 0.14%→3.50%, matching-C 73.49%→73.91%; the FAR tail is mostly JP-constant diffs (next lever) (2026-06-12)
+
+**Result.** The dedicated-resource `/batch` wave (user freed all API; gap-analysis → plan → 11 parallel
+worktree agents) is fully integrated, pushed, cold-green (sha1 `7da0456…`, self-contained 100%). Axes:
+- **Extracted data 0.14% → 3.50%** (19,694 → 487,743 B typed C). Eight data units (D70–D78): JP message block as
+  compiled `src/msg_data.c` (+404 KB, the big one), + typed game-data tables — gCharacterData/gClassData,
+  gItemData+use/bonus, terrain/affinity battle LUTs, AI `cp_data`, chapter map-change + gChapterDataTable,
+  worldmap paths. Method = port fe8u `src/data/*.c`, transcribe JP bytes through the US struct layout,
+  carve pointees-first so pointer columns link-resolve.
+- **Matching-C 73.49% → 73.91%** (D79): mcMechLo low-addr re-sweep (+30) + the decomp-permuter pilot (+5).
+- Self-containment held 100%; named-symbols drifted 75.26 → 75.44% (coupled to the carves).
+
+**Decisive strategic finding (decomp-permuter pilot, D79).** The permuter WORKS for ARM/agbcc (2/13 direct,
+5/13 with delta-transfer, ~1.5 min/fn) but the small-FAR matching-C tail is **dominated by JP DATA-CONSTANT diffs**
+(msg-IDs like US `0x8A3` vs JP `0x843`, `Proc_Goto` jump indices, string indices) — **32 of 59 ≤200 B FAR
+candidates are single-byte constant diffs**. The permuter permutes C *shape* and can never guess a JP constant.
+**⇒ The next matching-C lever is a CONSTANT-DIFF CARVER: probe the function, identify the diverging literal-pool
+word / immediate, substitute the JP constant, verify byte-exact.** This is mechanical (not hand-decomp) and likely
+reclaims a large slice of the "FAR" tail — meaning the matching-C ceiling is materially closer than the raw
+FAR count suggests. Reserve the permuter for true codegen-shape diffs + delta-transfer of its wins.
+
+**Integration hazards this wave (all resolved; → memory):** (1) parallel data agents all reclaimed the SAME
+mislabeled `worldmap_gmapunit`/`frontier_df4_banim_b` gap regions → heavy carved_rom + frontier-`.tsv` conflicts,
+resolved by address-union of gap splits; (2) merges RE-INTRODUCED stale `dat_*_ref` carved_rom rows whose `.s` the
+carving branch deleted → 0x8582bc/0x85e068 overlaps — general fix: after each merge drop carved_rom rows whose
+`asm/*.s` is missing; (3) a stale untracked `asm/msg_data.s` (rule removed by dataMsg but leftover present in the
+shared checkout) collided with `src/msg_data.o` `gMsgTable` — gitignored + removed; (4) D-number collisions (every
+agent grabbed D70) — renumbered D70–D79 at integration; (5) one agent (mcMechHi) cwd-contaminated main again,
+TaskStop + reset-discard recovered it (its range re-swept by mcMechLo). NEVER broad-`pgrep`-kill (crashed an agent +
+MCP servers earlier) — use TaskStop.
