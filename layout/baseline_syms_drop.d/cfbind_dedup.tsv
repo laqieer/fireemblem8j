@@ -395,3 +395,15 @@ GetTrapPointer
 GetTypedTrapAt
 RemoveTrap
 MakeCircleWindowBounds
+CheckBattleScripted
+GetBanimBackgroundIndex
+GetBanimFactionPalette
+GetBattleAnimPreconfType
+GetSpellAssocCharCount
+IsItemEffectiveAgainst
+IsUnitEffectiveAgainst
+ResetEkrDragonStatus
+SyncEkrDispUP
+gAnimCharaPalConfig
+gAnimCharaPalIt
+GetBanimTerrainGround
