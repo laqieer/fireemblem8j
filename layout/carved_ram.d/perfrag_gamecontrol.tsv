@@ -1,0 +1,2 @@
+085B946C	rom	src/gamecontrol_08009E68.o(.data)	gamecontrol_08009E68 .data region-diff (incbin)
+080DC550	rom	src/gamecontrol_08009E68.o(.rodata)	gamecontrol_08009E68 .rodata region-diff (incbin)
