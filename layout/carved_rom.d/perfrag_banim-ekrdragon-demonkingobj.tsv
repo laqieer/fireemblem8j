@@ -1,0 +1,4 @@
+07A468	07A49C	src/banim-ekrdragon-demonkingobj_0807A468.o(.text)	banim-ekrdragon-demonkingobj_0807A468(run): NewEkrSelfThunder
+07A49C	07A4C8	src/banim-ekrdragon-demonkingobj_0807A49C.o(.text)	banim-ekrdragon-demonkingobj_0807A49C(run): EkrSelfThunderMain
+07A4C8	07A548	src/banim-ekrdragon-demonkingobj_0807A4C8.o(.text)	banim-ekrdragon-demonkingobj_0807A4C8(run): EfxSelfThunderBGUpdateAnimTSA
+07A564	07A598	src/banim-ekrdragon-demonkingobj_0807A564.o(.text)	banim-ekrdragon-demonkingobj_0807A564(run): EfxSelfThunderBGUpdateAnim
