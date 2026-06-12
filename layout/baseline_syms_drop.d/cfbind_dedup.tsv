@@ -209,3 +209,6 @@ SetCgTextFlags
 StartTalkWaitForInputUnk
 gCgTextSt
 gPal_HelpTextBox
+GetGmPathLength
+GmMu_GetRawPosition
+InitMus
