@@ -94,3 +94,10 @@ SaveDraw_DrawMainMenuOptions
 SaveDraw_DrawSelectedOption
 SaveDraw_SetCursorSlotMark
 SaveDraw_UpdateSlotPalette
+CheckGmapRmBaPalAnim1State
+EndAllWmDotPalAnim
+EndGmapEffectProc
+GetWmDotPalAnimFlag
+GmapRm_GetPosition
+Img_WorldMapPlaceDot
+StartWmDotPalAnim

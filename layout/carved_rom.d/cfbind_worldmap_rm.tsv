@@ -1,0 +1,10 @@
+0C7350	0C7370	src/GmapRmBaPalAnim1_End.o(.text)	GmapRmBaPalAnim1_End(run): GmapRmBaPalAnim1_End
+0C77B0	0C77D4	src/GmapRmBorder1_3.o(.text)	GmapRmBorder1_3(run): GmapRmBorder1_3
+0C77D4	0C77F8	src/GmapRmBorder1_4.o(.text)	GmapRmBorder1_4(run): GmapRmBorder1_4
+0C7D54	0C7D78	src/WmPlaceDot_Loop2.o(.text)	WmPlaceDot_Loop2(run): WmPlaceDot_Loop2
+0C7C28	0C7C5C	src/WmPlaceDot_OnEnd.o(.text)	WmPlaceDot_OnEnd(run): WmPlaceDot_OnEnd
+0C7E98	0C7EDC	src/SetWmPlaceDotFlagForIndex.o(.text)	SetWmPlaceDotFlagForIndex(run): SetWmPlaceDotFlagForIndex
+0C7E04	0C7E4C	src/EndWmPlaceDotByIndex.o(.text)	EndWmPlaceDotByIndex(run): EndWmPlaceDotByIndex
+0C7E4C	0C7E98	src/IsWmPlaceDotActiveAtIndex.o(.text)	IsWmPlaceDotActiveAtIndex(run): IsWmPlaceDotActiveAtIndex
+0C7C5C	0C7CA8	src/WmPlaceDot_Init.o(.text)	WmPlaceDot_Init(run): WmPlaceDot_Init
+0C7D78	0C7E04	src/StartWmPlaceDot.o(.text)	StartWmPlaceDot(run): StartWmPlaceDot
