@@ -230,3 +230,5 @@ SetLinkArenaUiBlendAndWindowOff
 SioMenuItem_SetPosition
 StartLinkArenaTitleBanner
 StartSioMenuItem
+gImg_WorldmapNodeRevealEffect
+gPal_WorldmapNodeRevealEffect

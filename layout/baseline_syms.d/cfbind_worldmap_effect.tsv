@@ -1,0 +1,5 @@
+gProcScr_GmapEffect	08AC23F8	data	GmapEffect_OnEnd
+gProcScr_GmapEffectPal	08AC23C0	data	GmapEffect_OnEnd
+GmapEffect_0	080C5F68	thumb	GmapEffect_Loop
+gPal_WorldmapNodeRevealEffect	08B1D0BC	data	GmapEffect_Init
+gImg_WorldmapNodeRevealEffect	08B1CF2C	data	GmapEffect_Init
