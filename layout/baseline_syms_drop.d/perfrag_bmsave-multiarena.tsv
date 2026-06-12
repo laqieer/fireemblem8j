@@ -1,0 +1,12 @@
+WriteNewMultiArenaSave
+ReadMultiArenaSaveTeamRaw
+ReadMultiArenaSaveTeamName
+WipeMultiArenaSaveTeam
+gMultiArenaSaveTeamBufA
+SwapMultiArenaSaveTeams
+WriteMultiArenaSaveTeam
+ReadMultiArenaSaveTeam
+WriteMultiArenaSaveRankings
+ReadMultiArenaSaveRankings
+WriteMultiArenaSaveConfig
+ReadMultiArenaSaveConfig
