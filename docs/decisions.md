@@ -3557,3 +3557,42 @@ enum-resolution ambiguity); (b) **structural strides** (`StrLen`'s `adds r1,#1`�
 constant); (c) **genuine opcode/length codegen diffs** (different instruction selection, register alloc, or `.text`
 length). These remain the permuter / IDA-Ghidra hand-decomp frontier. Next levers: extend the carver to the
 symbolic-enum case and to FAR functions >700B; feed the residual opcode-diff FAR set to the permuter (D79).
+## D82 — dataMore: gChapterDataAssetTable[236] incbin -> typed C; the JP asset table does NOT map 1:1 onto fe8u asset-symbol names, so use synthetic per-index baseline symbols pinned to the ROM addresses (2026-06-12)
+
+**Context.** dataMore unit (branch `feat/dataMore`), residual typed-data tables the D70-D80 wave deferred.
+Picked the explicitly-flagged `gChapterDataAssetTable` (JP 0x08907BC8, 944 B = 236 pointers, 1 leading NULL +
+235 asset pointers). Was `asm/dat_gChapterDataAssetTable_ref.s` (named .incbin, "funcmap code-ref"). fe8u
+template: `src/data/data_8B363C.c` (the array is `.data`, not `.rodata`, because it carries R_ARM_ABS32 relocs).
+Same entry count in both regions (236).
+
+**Fork (the trap).** The obvious port — reference the fe8u asset symbol names (`ObjectType1`, `MapPalette5`,
+`Ch1Events`, ...) and let the per-symbol asm carves (`const_data_chapter_maps_p*`, `data_map_change.o`, the
+`dat_Ch*MapChanges_ref` blobs) resolve them — FAILS. 149 of the 235 names are already `.global`'d by those carves,
+but only **150 of 235 resolve to the address the JP table actually points at**. The other **84 entries point to
+data the JP ROM lays the asset table over DIFFERENTLY from US** — the US-named asm symbol resolves elsewhere (or
+is absent in FE8J). First build proved it empirically: the ROM diffed at exactly 0x907BC8 with a one-slot SHIFT
+pattern (entry i got entry i+1's US symbol address), 84 entries wrong, **all 84 from asm `.global`, 0 from my
+baseline**. So the fe8u name->semantics mapping is NOT valid for the JP asset table.
+
+**Decision (oracle-driven, self-decided on D67/D74/D76 precedent).** Do NOT trust the fe8u asset-symbol names for
+this table. Reference a **synthetic `gChDAsset_N` symbol per non-NULL entry**, each pinned by an absolute
+`baseline_syms` `.set` to the exact JP ROM pointer word (`layout/baseline_syms.d/dataMore_chapter_asset_table.tsv`,
+234 rows). Addresses come straight from the ROM => guaranteed correct, relink-stable, unique-named (0 collisions
+with the 4837 existing baseline syms or the asm globals). The leading entry and the final entry (US
+`Ch5TownMapPast`, absent in FE8J) are `NULL`. Dropped the `gChapterDataAssetTable` baseline alias (perfrag_bmio)
+via `baseline_syms_drop.d/dataMore_chapter_asset_table.tsv` since the C now defines it; `git rm`'d the orphan
+`asm/dat_gChapterDataAssetTable_ref.s` + `data/residual/gChapterDataAssetTable.bin`.
+
+**Result.** All gates green: warm `make compare` = OK, cold `make clean && make compare` = OK, `make check`
+layout-consistent (8557 objects tracked), `check_selfcontained.py` = 100% (0 incbins, exit 0), ROM = 16,777,216 B.
+EXTRACTED-DATA +944 B typed C (the chapter-asset pointer table, region-different).
+
+**Reusable lesson (new).** For a pure POINTER table that is region-different, the per-symbol asm carves that
+`.global` the fe8u names are NOT a reliable resolution source — the JP ROM can point the same table index at
+different data. Verify each entry's resolved address against the ROM pointer word (build once, diff at the table
+offset); where they disagree, define a synthetic absolute baseline symbol from the ROM word rather than reusing the
+mislabeled name. Transcribing addresses straight from the ROM is the safe, byte-exact path. (NOTE for follow-ups:
+the `Events_WM_Beginning`/`Events_WM_ChapterIntro` arrays from the same fe8u TU sit contiguously at JP
+0x907F78 but are structurally region-different — JP's `Events_WM_Beginning[0]` is non-NULL, unlike US — so they
+need their own investigation, not a naive extend. `gWMNodeData`/`gWMNodeIconData` and `gTacticianTextConf` are
+real typed tables but pointer-/text-ID-heavy region-different, deferred.)
