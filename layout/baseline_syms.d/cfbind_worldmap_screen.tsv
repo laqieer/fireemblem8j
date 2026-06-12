@@ -1,0 +1,6 @@
+StartGMapRoute	080C11E8	thumb	NewMapScreen
+ProcScr_GMapScreen	08AC1844	data	NewMapScreen
+ProcScr_GMapScreenVSync	08AC17B4	data	NewMapScreenVSync
+GMapScreen_ApplyTilePalettes	080D4D62	thumb	GMapScreen_UpdateScroll
+GMapScreenVSync_RequestFullCopy	07F18C9A	thumb	GMapScreen_UpdateScroll
+GMapScreenVSync_AddCopyRequest	080BF578	thumb	GMapScreen_UpdateScroll

@@ -269,3 +269,7 @@ Img_LinkArenaWarpFx
 Pal_LinkArenaWarpFx
 PutTmAnimFrame
 gMapanimBattleinfo_0
+GMapScreenVSync_AddCopyRequest
+GMapScreenVSync_RequestFullCopy
+GMapScreen_ApplyTilePalettes
+StartGMapRoute
