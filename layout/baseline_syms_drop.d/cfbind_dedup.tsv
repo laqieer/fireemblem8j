@@ -257,3 +257,7 @@ SetClassToHatchingGorgonEgg
 StatusHealEffect_PalSpriteAnim_SetOutlineIntensity
 sProcScr_StatusHealEffect
 IsItemHammernable
+FaceBlink_AnimLoop
+FaceBlink_PutEyeSprite
+UnpackFaceChibiSprGraphics
+gProcScr_FaceChibiSpr
