@@ -436,10 +436,17 @@ frontier_df4_banim_b_071_903450:
 	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_071_903450.bin"
 
 	.section .data.frontier_df4_banim_b.gap72, "a", %progbits
-@ df4_banim_b region-different data, JP 0x08903a50..0x08904e1c (5068 B); long-tail data gap (no .text in window), byte-perfect incbin.
+@ df4_banim_b raw data head, JP 0x08903a50..0x08904b84 (4404 B); long-tail data gap, byte-perfect incbin.
+@ The 0x08904b84..0x08904bc4 hole (gAffinityBonuses, region-same) is now typed C in src/data/bmreliance_data.c.
 	.global frontier_df4_banim_b_072_903A50
 frontier_df4_banim_b_072_903A50:
-	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_072_903A50.bin"
+	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_072_903A50.bin", 0, 4404
+
+	.section .data.frontier_df4_banim_b.gap72b, "a", %progbits
+@ df4_banim_b raw data tail, JP 0x08904bc4..0x08904e1c (600 B); long-tail data gap, byte-perfect incbin.
+	.global frontier_df4_banim_b_072b_904BC4
+frontier_df4_banim_b_072b_904BC4:
+	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_072_903A50.bin", 4468, 600
 
 	.section .data.frontier_df4_banim_b.gap73, "a", %progbits
 @ df4_banim_b region-different data, JP 0x08907f78..0x089081d8 (608 B); long-tail data gap (no .text in window), byte-perfect incbin.
