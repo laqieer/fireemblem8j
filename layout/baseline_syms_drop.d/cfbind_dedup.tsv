@@ -301,3 +301,13 @@ StartLinkArenaVersusSpriteDraw
 StartRuleSettingSpriteDrawStatic
 gUnkData_15
 gUnkData_6
+IsItemStealable
+ItemSubMenu_InitFontAndSaveBg
+ItemSubMenu_RestartItemSelect
+MakeTargetListForRefresh
+RefreshUnitRescueInfoWindows
+RefreshUnitTakeRescueInfoWindows
+StartSuspendPrompt
+StartUnitBallistaSelect
+StartUnitGiveInfoWindows
+StartUnitWeaponSelect

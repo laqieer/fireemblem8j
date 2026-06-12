@@ -1,0 +1,15 @@
+023BCC	023BD8	src/StaffItemSelect_TextDraw.o(.text)	StaffItemSelect_TextDraw(run): StaffItemSelect_TextDraw
+0247E8	0247F4	src/WarpUnitMapSelect_Init.o(.text)	WarpUnitMapSelect_Init(run): WarpUnitMapSelect_Init
+0245FC	024608	src/HealMapSelect_Init.o(.text)	HealMapSelect_Init(run): HealMapSelect_Init
+024C6C	024C7C	src/MapMenu_RecordsCommand.o(.text)	MapMenu_RecordsCommand(run): MapMenu_RecordsCommand
+02261C	02262C	src/MapMenu_StatusCommand.o(.text)	MapMenu_StatusCommand(run): MapMenu_StatusCommand
+02262C	022644	src/MapMenu_IsGuideCommandAvailable.o(.text)	MapMenu_IsGuideCommandAvailable(run): MapMenu_IsGuideCommandAvailable
+0241F4	024218	src/StealMapSelect_SwitchIn.o(.text)	StealMapSelect_SwitchIn(run): StealMapSelect_SwitchIn
+024780	0247A4	src/TalkSupportSelection_OnChange.o(.text)	TalkSupportSelection_OnChange(run): TalkSupportSelection_OnChange
+0247C4	0247E8	src/RefreshMapSelect_SwitchIn.o(.text)	RefreshMapSelect_SwitchIn(run): RefreshMapSelect_SwitchIn
+0247F4	024818	src/HealMapSelect_SwitchIn.o(.text)	HealMapSelect_SwitchIn(run): HealMapSelect_SwitchIn
+02464C	024670	src/RescueSelection_OnChange.o(.text)	RescueSelection_OnChange(run): RescueSelection_OnChange
+022E2C	022E54	src/AttackMapSelect_Cancel.o(.text)	AttackMapSelect_Cancel(run): AttackMapSelect_Cancel
+024738	024760	src/TradeSelection_OnChange.o(.text)	TradeSelection_OnChange(run): TradeSelection_OnChange
+024148	024198	src/StealCommandUsability.o(.text)	StealCommandUsability(run): StealCommandUsability
+023F20	023F74	src/SupplyUsability.o(.text)	SupplyUsability(run): SupplyUsability
