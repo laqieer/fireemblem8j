@@ -1,0 +1,14 @@
+GetGmPathLength
+GetGmPathNode
+WorldMap_IsMonsterAtUnclearedNode
+WorldMap_ShowMapUnits
+DeployEveryUnit
+WorldMap_ResetMapUnits
+WorldMap_SetMergedNodeIcon
+WorldMap_SetNextNodeIcon
+WorldMap_SetupBgGfx
+CallChapterWMIntroEvents
+WmRemoveRandomMonsters
+EndGmapRM
+EndGmapRmUpdateExt
+MapRoute_0
