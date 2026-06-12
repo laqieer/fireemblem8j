@@ -127,3 +127,16 @@ GetSupportScreenClassIdAt
 GetSupportTalkSong_
 SetSysHandCursorXPos
 gSprite_SupportScreenSuccessBox
+ClearTalkFlag
+GetTalkPauseCmdDuration
+Img_TalkBubble
+LockTalk
+SetupFaceGfxDataInBanim
+StartFaceChange
+StartSpriteTextScroll
+StartTalkChoice
+StartTalkWaitForInput
+TalkFlushAllLine
+TalkPrepNextChar
+TalkSpritePrepNextChar
+ToggleTalkTextRed

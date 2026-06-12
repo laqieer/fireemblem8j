@@ -1,0 +1,3 @@
+008708	00873C	src/TalkOpen_PutTalkBubble.o(.text)	TalkOpen_PutTalkBubble(run): TalkOpen_PutTalkBubble
+007CA0	007CE4	src/TalkShiftClearAll_OnIdle.o(.text)	TalkShiftClearAll_OnIdle(run): TalkShiftClearAll_OnIdle
+006B38	006CA4	src/Talk_OnIdle.o(.text)	Talk_OnIdle(run): Talk_OnIdle
