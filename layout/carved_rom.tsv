@@ -1049,7 +1049,7 @@
 9036DC	90375C	asm/dat_worldmap_gmapunit_p1293.o(.rodata.dat_worldmap_gmapunit_p1293)	dat_worldmap_gmapunit_p1293 region-same per-sym shifted (0KB)
 9037AC	9038BC	asm/dat_worldmap_gmapunit_p1295.o(.rodata.dat_worldmap_gmapunit_p1295)	dat_worldmap_gmapunit_p1295 region-same per-sym shifted (0KB)
 9039C0	903A50	asm/dat_worldmap_gmapunit_p1297.o(.rodata.dat_worldmap_gmapunit_p1297)	dat_worldmap_gmapunit_p1297 region-same per-sym shifted (0KB)
-907BC8	907F78	asm/dat_gChapterDataAssetTable_ref.o(.rodata.dat_gChapterDataAssetTable_ref)	gChapterDataAssetTable region-diff (funcmap code-ref, 0KB)
+907BC8	907F78	src/data/data_chapter_asset_table.o(.data)	gChapterDataAssetTable[236] typed C (region-diff pointers, JP-shifted; last entry NULL)
 9081D8	908228	asm/dat_UnitDef_Event_PrologueEnemy_ref.o(.rodata.dat_UnitDef_Event_PrologueEnemy_ref)	UnitDef_Event_PrologueEnemy region-diff (funcmap code-ref, 0KB)
 9082A0	908354	asm/dat_worldmap_gmapunit_p1311.o(.rodata.dat_worldmap_gmapunit_p1311)	dat_worldmap_gmapunit_p1311 region-same per-sym shifted (0KB)
 908740	908790	asm/dat_UnitDef_Event_Ch1EnemyReinforce_ref.o(.rodata.dat_UnitDef_Event_Ch1EnemyReinforce_ref)	UnitDef_Event_Ch1EnemyReinforce region-diff (funcmap code-ref, 0KB)
