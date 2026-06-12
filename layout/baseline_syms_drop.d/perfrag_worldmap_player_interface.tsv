@@ -1,0 +1,7 @@
+PutGMapPINodeName
+GetGMapPIQuadrantFromOffsets
+GetWMCursorScreenQuadrant
+RedrawGMapPIForNode
+gWorldmapPlayerInterface_0
+GMapPI_GetGMapUnitIndexAndFaction
+GetGmUnitFaction

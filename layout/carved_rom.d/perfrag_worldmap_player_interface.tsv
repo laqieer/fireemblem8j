@@ -1,0 +1,8 @@
+0C36D4	0C3704	src/worldmap_player_interface_080C36D4.o(.text)	worldmap_player_interface_080C36D4(run): PutGMapPINodeName
+0C3744	0C378C	src/worldmap_player_interface_080C3744.o(.text)	worldmap_player_interface_080C3744(run): PutGMapPIFace
+0C3864	0C3918	src/worldmap_player_interface_080C3864.o(.text)	worldmap_player_interface_080C3864(run): PutGMapPILevelNumber
+0C39C0	0C3A44	src/worldmap_player_interface_080C39C0.o(.text)	worldmap_player_interface_080C39C0(run): GMapPI_ShowInit
+0C3AA4	0C3BB8	src/worldmap_player_interface_080C3AA4.o(.text)	worldmap_player_interface_080C3AA4(run): GMapPI_TrackCursorLoop
+0C3C34	0C3C88	src/worldmap_player_interface_080C3C34.o(.text)	worldmap_player_interface_080C3C34(run): GMapPI_GetGMapUnitIndexAndFaction
+0C3D58	0C3DA4	src/worldmap_player_interface_080C3D58.o(.text)	worldmap_player_interface_080C3D58(run): GMapPI_WaitForNodeLoop
+0C3DA4	0C3E34	src/worldmap_player_interface_080C3DA4.o(.text)	worldmap_player_interface_080C3DA4(run): GMapPI_Init
