@@ -1,0 +1,7 @@
+SioTacticianIndexMap	080DEC7A	data	sio_tactician_080445A8
+gTacticianTextConf	080DD41C	data	sio_tactician_080445A8
+MemCpy	08014C60	thumb	sio_tactician_0804490C
+WriteMultiArenaSaveTeam	080AB2F4	thumb	sio_tactician_0804490C
+gSioPidPool	0203E878	data	sio_tactician_0804490C
+TacticianTryAppendChar	080449D4	thumb	sio_tactician_08044B14
+TacticianDrawCharacters	08044694	thumb	sio_tactician_08044B14

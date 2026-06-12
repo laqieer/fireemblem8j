@@ -1,0 +1,6 @@
+0445A8	044694	src/sio_tactician_080445A8.o(.text)	sio_tactician_080445A8(run): Tactician_DrawCharGrid
+04490C	04498C	src/sio_tactician_0804490C.o(.text)	sio_tactician_0804490C(run): SioUpdateTeam
+044B14	044BF0	src/sio_tactician_08044B14.o(.text)	sio_tactician_08044B14(run): Tactician_TryChangeLastCharVariant
+045008	04504C	src/sio_tactician_08045008.o(.text)	sio_tactician_08045008(run): Tactician_PageFadeIn_Loop
+0450A8	045190	src/sio_tactician_080450A8.o(.text)	sio_tactician_080450A8(run): NameSelect_ConfirmLoop
+045190	0451A8	src/sio_tactician_08045190.o(.text)	sio_tactician_08045190(run): Tactician_OnEnd
