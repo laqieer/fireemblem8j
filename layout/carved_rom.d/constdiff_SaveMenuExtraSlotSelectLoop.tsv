@@ -1,0 +1,1 @@
+0AE870	0AEA6C	src/SaveMenuExtraSlotSelectLoop.o(.text)	SaveMenuExtraSlotSelectLoop (const-diff: JP-constant substituted -> matching C; pairs=[('0x892', '0x82f'), ('0x891', '0x82e'), ('0x895', '0x835')])
