@@ -370,3 +370,7 @@ gConfigUiState
 gGameOptions
 gChapterTitleFxSt
 gUnkData_47
+MaybeCallEndEvent_
+MoveLimitViewChange_OnInit
+MoveLimitView_OnInit
+TryMakeCantoUnit

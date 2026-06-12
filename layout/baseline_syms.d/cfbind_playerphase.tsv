@@ -1,0 +1,4 @@
+MoveLimitView_OnInit	0801D590	thumb	DisplayMoveRangeGraphics
+MoveLimitViewChange_OnInit	0801D500	thumb	DisplayMoveRangeGraphics
+TryMakeCantoUnit	0801CEA8	thumb	PlayerPhase_FinishAction
+MaybeCallEndEvent_	080855A4	thumb	PlayerPhase_FinishAction
