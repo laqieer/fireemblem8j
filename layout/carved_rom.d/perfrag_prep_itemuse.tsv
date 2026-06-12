@@ -1,0 +1,6 @@
+09E144	09E1D4	src/prep_itemuse_0809E144.o(.text)	prep_itemuse_0809E144(run): PrepItemUseTryMoveHand
+09E764	09E788	src/prep_itemuse_0809E764.o(.text)	prep_itemuse_0809E764(run): PrepItemUseParallel_UpdateSMS
+09EAC4	09EBE4	src/prep_itemuse_0809EAC4.o(.text)	prep_itemuse_0809EAC4(run): PrepItemUse_CtrlLoop
+09EC98	09ECB8	src/prep_itemuse_0809EC98.o(.text)	prep_itemuse_0809EC98(run): PrepItemUse_ConfirmWindowInit
+09EE4C	09EEE4	src/prep_itemuse_0809EE4C.o(.text)	prep_itemuse_0809EE4C(run): PrepItemUse_ExecPromotionItemUnused
+09EF94	09EFAC	src/prep_itemuse_0809EF94.o(.text)	prep_itemuse_0809EF94(run): StartPrepItemUseScreen
