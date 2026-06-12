@@ -1,0 +1,4 @@
+081A00	081A28	src/mapanim_spellassocfx_08081A00.o(.text)	mapanim_spellassocfx_08081A00(run): LoadSparkGfx
+081A28	081A64	src/mapanim_spellassocfx_08081A28.o(.text)	mapanim_spellassocfx_08081A28(run): PutSparkGfx
+081AC8	081B38	src/mapanim_spellassocfx_08081AC8.o(.text)	mapanim_spellassocfx_08081AC8(run): MapAnimRotation_Main
+081B38	081B78	src/mapanim_spellassocfx_08081B38.o(.text)	mapanim_spellassocfx_08081B38(run): StartStarRotationEffect
