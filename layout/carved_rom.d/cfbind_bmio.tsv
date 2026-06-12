@@ -1,0 +1,2 @@
+030490	03054C	src/WfxSnowStorm_Init.o(.text)	WfxSnowStorm_Init(run): WfxSnowStorm_Init
+030F30	031044	src/GameCtrl_StartResumedGame.o(.text)	GameCtrl_StartResumedGame(run): GameCtrl_StartResumedGame

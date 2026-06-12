@@ -1,0 +1,7 @@
+MakePrepUnitList	08097B9C	thumb	PrepUnit_RestoreListAfterStatScreen
+GetLatestUnitIndexInPrepListByUId	08097954	thumb	PrepUnit_RestoreListAfterStatScreen
+EndSysBlackBoxs	080B1D74	thumb	PrepUnit_EndScreenGfx
+EndUiSpinningArrows	080B187C	thumb	PrepUnit_EndScreenGfx
+PrepUpdateMenuTsaScroll	0809C910	thumb	PrepUnit_ScrollDownLoop
+PrepUnit_DrawUnitListNames	0809C84C	thumb	PrepUnit_ScrollUpLoop
+gPrepUnitTexts	02013590	data	PrepUnit_InitTexts

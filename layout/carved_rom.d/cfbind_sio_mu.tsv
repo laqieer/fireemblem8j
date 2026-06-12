@@ -1,0 +1,2 @@
+04CDCC	04CE18	src/SioWarp_Init.o(.text)	SioWarp_Init(run): SioWarp_Init
+04CE18	04CECC	src/SioWarp_Loop.o(.text)	SioWarp_Loop(run): SioWarp_Loop

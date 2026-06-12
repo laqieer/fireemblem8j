@@ -1,0 +1,2 @@
+080E1C48	rom	src/StartSubSpell_efxDarkbreathBGCOL.o(.rodata)	StartSubSpell_efxDarkbreathBGCOL .rodata region-diff (incbin)
+080E1BEC	rom	src/StartSubSpell_efxDarkbreathBG.o(.rodata)	StartSubSpell_efxDarkbreathBG .rodata region-diff (incbin)

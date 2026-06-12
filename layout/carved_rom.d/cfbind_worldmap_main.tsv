@@ -1,0 +1,11 @@
+0BED9C	0BEDA8	src/NULL_WorldmapMain_0.o(.text)	NULL_WorldmapMain_0(run): NULL_WorldmapMain_0
+0BEDA8	0BEDB8	src/WorldMap_StartArmory.o(.text)	WorldMap_StartArmory(run): WorldMap_StartArmory
+0BEDB8	0BEDC8	src/WorldMap_StartVendor.o(.text)	WorldMap_StartVendor(run): WorldMap_StartVendor
+0BEDC8	0BEDD8	src/WorldMap_StartSecretShop.o(.text)	WorldMap_StartSecretShop(run): WorldMap_StartSecretShop
+0BEDD8	0BEDE8	src/WorldMap_StartManageItems.o(.text)	WorldMap_StartManageItems(run): WorldMap_StartManageItems
+0BE930	0BE94C	src/Worldmap_WaitForSkirmishAnim.o(.text)	Worldmap_WaitForSkirmishAnim(run): Worldmap_WaitForSkirmishAnim
+0BDA04	0BDA28	src/WorldMap_WaitMuWalkScroll.o(.text)	WorldMap_WaitMuWalkScroll(run): WorldMap_WaitMuWalkScroll
+0BF02C	0BF088	src/WorldMap_StartFadeMapSpritePalIn.o(.text)	WorldMap_StartFadeMapSpritePalIn(run): WorldMap_StartFadeMapSpritePalIn
+0BF11C	0BF178	src/WorldMap_StartFadeMapSpritePalOut.o(.text)	WorldMap_StartFadeMapSpritePalOut(run): WorldMap_StartFadeMapSpritePalOut
+0BDC24	0BDCDC	src/SetupGraphicSystemsForWorldMap.o(.text)	SetupGraphicSystemsForWorldMap(run): SetupGraphicSystemsForWorldMap
+0BD944	0BDA04	src/WorldMap_StartMuWalkScroll.o(.text)	WorldMap_StartMuWalkScroll(run): WorldMap_StartMuWalkScroll

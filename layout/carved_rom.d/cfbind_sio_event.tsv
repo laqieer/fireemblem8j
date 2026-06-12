@@ -1,0 +1,3 @@
+048764	048778	src/CallEraseSaveEvent.o(.text)	CallEraseSaveEvent(run): CallEraseSaveEvent
+04874C	048764	src/EraseSaveData.o(.text)	EraseSaveData(run): EraseSaveData
+048730	04874C	src/EndSioSessionAndLoadSuspend.o(.text)	EndSioSessionAndLoadSuspend(run): EndSioSessionAndLoadSuspend

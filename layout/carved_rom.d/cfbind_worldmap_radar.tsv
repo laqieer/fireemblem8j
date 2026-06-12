@@ -1,0 +1,6 @@
+0C8C38	0C8C4C	src/StartWorldmapMinimap.o(.text)	StartWorldmapMinimap(run): StartWorldmapMinimap
+0C8ADC	0C8B14	src/GMapRadar_SlideIn.o(.text)	GMapRadar_SlideIn(run): GMapRadar_SlideIn
+0C8B14	0C8B54	src/GMapRadar_SlideOut.o(.text)	GMapRadar_SlideOut(run): GMapRadar_SlideOut
+0C8870	0C88F8	src/GMapRadar_1.o(.text)	GMapRadar_1(run): GMapRadar_1
+0C88F8	0C899C	src/GMapRadar_2.o(.text)	GMapRadar_2(run): GMapRadar_2
+0C8B64	0C8C38	src/StartWorldMapMinimapCore.o(.text)	StartWorldMapMinimapCore(run): StartWorldMapMinimapCore

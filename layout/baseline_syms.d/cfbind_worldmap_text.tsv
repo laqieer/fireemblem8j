@@ -1,0 +1,2 @@
+ProcScr_WorldMapTextHandler	08AC2808	data	StartWmTextHandler
+Sprite_WmText	08AC27E8	data	WmText_Loop_DrawText

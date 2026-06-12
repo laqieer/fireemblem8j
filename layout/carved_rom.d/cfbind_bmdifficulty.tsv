@@ -1,0 +1,3 @@
+037DF0	037E00	src/StartRetreatProcessing.o(.text)	StartRetreatProcessing(run): StartRetreatProcessing
+0396B4	0396D8	src/DungeonRecordUi_StopTallySound.o(.text)	DungeonRecordUi_StopTallySound(run): DungeonRecordUi_StopTallySound
+0394B4	039504	src/DungeonRecordUi_ClearCountAnim_Init.o(.text)	DungeonRecordUi_ClearCountAnim_Init(run): DungeonRecordUi_ClearCountAnim_Init

@@ -1,0 +1,5 @@
+StartSubSpell_efxPurgeBG.o	.text	40	00000000
+StartSubSpell_efxDivineBG.o	.text	5C	00000000
+StartSubSpell_efxDivineBG_2.o	.rodata	ALIGN	2
+StartSubSpell_efxDivineBG_2.o	.text	5C	00000000
+StartSubSpell_efxDivineBG_3.o	.text	5C	00000000

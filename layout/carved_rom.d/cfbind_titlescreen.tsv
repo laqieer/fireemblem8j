@@ -1,0 +1,7 @@
+0CA374	0CA388	src/Title_StartSkipFxListener.o(.text)	Title_StartSkipFxListener(run): Title_StartSkipFxListener
+0CB390	0CB3A8	src/StartTitleScreen_FlagFalse.o(.text)	StartTitleScreen_FlagFalse(run): StartTitleScreen_FlagFalse
+0CB3A8	0CB3C0	src/StartTitleScreen_FlagTrue.o(.text)	StartTitleScreen_FlagTrue(run): StartTitleScreen_FlagTrue
+0CB370	0CB390	src/StartTitleScreen_WithMusic.o(.text)	StartTitleScreen_WithMusic(run): StartTitleScreen_WithMusic
+0CA618	0CA640	src/TitleScreenTryJumpIntroAnim.o(.text)	TitleScreenTryJumpIntroAnim(run): TitleScreenTryJumpIntroAnim
+0CB014	0CB054	src/Title_PrepareLightExplosionFx.o(.text)	Title_PrepareLightExplosionFx(run): Title_PrepareLightExplosionFx
+0CB228	0CB2A0	src/Title_EnterMainScreen.o(.text)	Title_EnterMainScreen(run): Title_EnterMainScreen

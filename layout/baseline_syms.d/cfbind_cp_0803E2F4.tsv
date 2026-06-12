@@ -1,0 +1,3 @@
+gUnkData_0	0203AA9C	data	AiIsUnitEnemyWithStoredCharId
+gAI3HealingThresholdTable	085D2298	data	AiUpdateGetUnitIsHealing
+sTerrainList_Fort	085D31C0	data	AiTryGetNearestHealPoint

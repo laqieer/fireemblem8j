@@ -1,0 +1,2 @@
+0C0A08	0C0A38	src/NewGmapCursor.o(.text)	NewGmapCursor(run): NewGmapCursor
+0C0918	0C0A08	src/GmapCursor_Loop.o(.text)	GmapCursor_Loop(run): GmapCursor_Loop

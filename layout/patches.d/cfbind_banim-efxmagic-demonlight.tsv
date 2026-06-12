@@ -1,0 +1,6 @@
+StartSubSpell_efxMaohFlashBGCOL.o	.rodata	ALIGN	2
+StartSubSpell_efxMaohFlashBGCOL.o	.text	3C	00000000
+StartSubSpell_efxMaohFlashBG2.o	.text	4C	00000000
+StartSubSpell_efxMaohFlashBG1.o	.text	44	00000000
+StartSubSpell_efxMaohFlashBG3.o	.text	44	00000000
+StartSubSpell_efxMaohFlashBG4.o	.text	44	00000000

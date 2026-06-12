@@ -1,0 +1,4 @@
+0C11E8	0C1218	src/StartGMapRoute.o(.text)	StartGMapRoute(run): StartGMapRoute
+0C1298	0C12D4	src/StartWMGeneralMenu.o(.text)	StartWMGeneralMenu(run): StartWMGeneralMenu
+0C0CFC	0C0D60	src/MapRoute_Init.o(.text)	MapRoute_Init(run): MapRoute_Init
+0C13F4	0C1474	src/StartWMNodeMenu.o(.text)	StartWMNodeMenu(run): StartWMNodeMenu

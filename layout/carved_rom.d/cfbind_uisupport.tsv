@@ -1,0 +1,5 @@
+0A56F0	0A5708	src/SupportScreen_StartUnitSubMenu.o(.text)	SupportScreen_StartUnitSubMenu(run): SupportScreen_StartUnitSubMenu
+0A5744	0A575C	src/StartSupportScreenFromPrepScreen.o(.text)	StartSupportScreenFromPrepScreen(run): StartSupportScreenFromPrepScreen
+0A575C	0A5774	src/StartSupportScreen.o(.text)	StartSupportScreen(run): StartSupportScreen
+0A6928	0A6948	src/SupportSubScreen_OnEnd.o(.text)	SupportSubScreen_OnEnd(run): SupportSubScreen_OnEnd
+0A5968	0A5A64	src/DrawSupportSubScreenSprites.o(.text)	DrawSupportSubScreenSprites(run): DrawSupportSubScreenSprites

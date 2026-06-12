@@ -1,0 +1,5 @@
+InitRN	08000BA0	thumb	StartupDebugMenu_WorldMapEffect
+WriteNewGameSave	080A98B4	thumb	StartupDebugMenu_WorldMapEffect
+RestartGameAndGoto7	08009F34	thumb	StartupDebugMenu_WorldMapEffect
+DebugMenu_WeatherDraw	0836FB3E	thumb	DebugMenu_WeatherIdle
+SetWeather	08030BCC	thumb	DebugMenu_WeatherIdle

@@ -1,0 +1,3 @@
+09B3D8	09B3F8	src/PrepItemScreen_ResumeFromStatScreen.o(.text)	PrepItemScreen_ResumeFromStatScreen(run): PrepItemScreen_ResumeFromStatScreen
+09C098	09C0C8	src/StartPrepItemTradeScreen.o(.text)	StartPrepItemTradeScreen(run): StartPrepItemTradeScreen
+09A6E0	09A720	src/PrepItemScreen_Init.o(.text)	PrepItemScreen_Init(run): PrepItemScreen_Init

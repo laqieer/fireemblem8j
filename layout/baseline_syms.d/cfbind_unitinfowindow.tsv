@@ -1,0 +1,6 @@
+GetUnitStatusName	080190EC	thumb	DrawUnitStatusText
+PutUiUnitSprite	08027DE0	thumb	UnitInfoWindow_OnLoop
+UnitInfoWindow_PositionUnitName	080346DC	thumb	UnitInfoWindow_DrawBase
+gProcScr_UnitInfoWindow	085C661C	data	UnitInfoWindow_DrawBase
+gTSA_UnitInfoWindow	08A93138	data	UnitInfoWindow_DrawBase
+gUnitinfowindow_0	080DCCC6	data	UnitInfoWindow_DrawBase

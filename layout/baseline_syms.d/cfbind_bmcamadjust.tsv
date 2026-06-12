@@ -1,0 +1,2 @@
+GetPlayerStartCursorPosition	0801DA8C	thumb	ProcFun_ResetCursorPosition
+GetEnemyStartCursorPosition	0801DAE4	thumb	ProcFun_ResetCursorPosition

@@ -1,0 +1,6 @@
+StartSubSpell_efxHammarneBG.o	.rodata	ALIGN	2
+StartSubSpell_efxHammarneBG.o	.text	44	00000000
+StartSubSpell_efxMshieldBG.o	.rodata	ALIGN	2
+StartSubSpell_efxMshieldBG.o	.text	4C	00000000
+StartSubSpell_efxSilenceBG.o	.rodata	ALIGN	2
+StartSubSpell_efxSilenceBG.o	.text	68	00000000

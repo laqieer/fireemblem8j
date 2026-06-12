@@ -1,0 +1,4 @@
+0B505C	0B5070	src/DrawSoundRoomSprites.o(.text)	DrawSoundRoomSprites(run): DrawSoundRoomSprites
+0B46B4	0B46D4	src/SoundRoomUi_OnEnd.o(.text)	SoundRoomUi_OnEnd(run): SoundRoomUi_OnEnd
+0B4910	0B4960	src/SoundRoomUi_Loop_MainUiSlideIn.o(.text)	SoundRoomUi_Loop_MainUiSlideIn(run): SoundRoomUi_Loop_MainUiSlideIn
+0B4F3C	0B505C	src/SoundRoom_DrawSprites_Loop.o(.text)	SoundRoom_DrawSprites_Loop(run): SoundRoom_DrawSprites_Loop

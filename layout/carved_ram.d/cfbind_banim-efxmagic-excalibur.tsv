@@ -1,0 +1,4 @@
+080E32C0	rom	src/StartSubSpell_efxExcaliburBGCOL2.o(.rodata)	StartSubSpell_efxExcaliburBGCOL2 .rodata region-diff (incbin)
+080E32F8	rom	src/StartSubSpell_efxExcaliburBGCOL3.o(.rodata)	StartSubSpell_efxExcaliburBGCOL3 .rodata region-diff (incbin)
+080E3242	rom	src/StartSubSpell_efxExcaliburBGCOL.o(.rodata)	StartSubSpell_efxExcaliburBGCOL .rodata region-diff (incbin)
+080E332C	rom	src/StartSubSpell_efxExcaliburBG0.o(.rodata)	StartSubSpell_efxExcaliburBG0 .rodata region-diff (incbin)

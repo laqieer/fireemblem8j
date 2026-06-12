@@ -1,0 +1,4 @@
+09D7E8	09D800	src/PrepUnit_RestoreListAfterStatScreen.o(.text)	PrepUnit_RestoreListAfterStatScreen(run): PrepUnit_RestoreListAfterStatScreen
+09D2DC	09D300	src/PrepUnit_EndScreenGfx.o(.text)	PrepUnit_EndScreenGfx(run): PrepUnit_EndScreenGfx
+09D5A4	09D5EC	src/PrepUnit_ScrollDownLoop.o(.text)	PrepUnit_ScrollDownLoop(run): PrepUnit_ScrollDownLoop
+09D5EC	09D634	src/PrepUnit_ScrollUpLoop.o(.text)	PrepUnit_ScrollUpLoop(run): PrepUnit_ScrollUpLoop

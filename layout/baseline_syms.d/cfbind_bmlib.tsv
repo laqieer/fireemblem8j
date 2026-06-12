@@ -1,0 +1,5 @@
+gBmlib_1	085C2458	data	MapPaletteBrightnessFadeExists
+FadeExists	08013D40	thumb	WaitForFade
+ProcScr_PartialGameLock	085C2660	data	StartPartialGameLock
+tmp_text	030007F8	data	PutString
+gBmlib_0	080DC594	data	StartFadeCore

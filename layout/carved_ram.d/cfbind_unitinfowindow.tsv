@@ -1,0 +1,1 @@
+080DCCC0	rom	src/UnitInfoWindow_OnLoop.o(.rodata)	UnitInfoWindow_OnLoop .rodata region-diff (incbin)

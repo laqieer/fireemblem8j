@@ -1,0 +1,7 @@
+FaceBlink_AnimLoop	080061BC	thumb	FaceBlink_CloseEyesLoop
+FaceBlink_PutEyeSprite	08006038	thumb	FaceBlink_CloseEyesLoop
+UnpackFaceChibiSprGraphics	080058D0	thumb	StartFaceChibiSpr
+gProcScr_FaceChibiSpr	085B8F70	data	StartFaceChibiSpr
+Sprite_Face_1	085B8F8E	data	StartFaceChibiSpr
+Sprite_Face_0	085B8F80	data	StartFaceChibiSpr
+gFace_0	080DC43C	data	PutFaceOnBackGround

@@ -1,0 +1,4 @@
+0C99F4	0C9A18	src/OpSubtitle_AwaitTimer2a.o(.text)	OpSubtitle_AwaitTimer2a(run): OpSubtitle_AwaitTimer2a
+0C9F80	0C9FD0	src/OpSubtitle_SetupBackgrounds.o(.text)	OpSubtitle_SetupBackgrounds(run): OpSubtitle_SetupBackgrounds
+0C9DD4	0C9E58	src/OpSubtitle_BlendFadeOutSlide_Loop.o(.text)	OpSubtitle_BlendFadeOutSlide_Loop(run): OpSubtitle_BlendFadeOutSlide_Loop
+0C96FC	0C97F4	src/OpSubtitle_Init.o(.text)	OpSubtitle_Init(run): OpSubtitle_Init

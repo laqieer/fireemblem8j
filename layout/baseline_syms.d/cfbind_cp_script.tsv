@@ -1,0 +1,4 @@
+gpAiScriptCurrent	030017C8	data	AiIsUnitEnemyAndScrCharId
+AiIsInByteList	0803AD38	thumb	AiFindClosestReachableTerrainPosition
+AiCountNearbyEnemyUnits	0803B434	thumb	AiFindClosestReachableTerrainPosition
+AiGetAttackPositionScore	0803CEF0	thumb	AiFindBestAttackPositionAgainstTarget

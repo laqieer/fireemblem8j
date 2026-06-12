@@ -1,0 +1,3 @@
+080E2F12	rom	src/StartSubSpell_efxHammarneBG.o(.rodata)	StartSubSpell_efxHammarneBG .rodata region-diff (incbin)
+080E2FAE	rom	src/StartSubSpell_efxMshieldBG.o(.rodata)	StartSubSpell_efxMshieldBG .rodata region-diff (incbin)
+080E2D5A	rom	src/StartSubSpell_efxSilenceBG.o(.rodata)	StartSubSpell_efxSilenceBG .rodata region-diff (incbin)

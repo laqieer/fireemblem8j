@@ -1,0 +1,10 @@
+00CC00	00CC14	src/EventB2_WmFancyFade.o(.text)	EventB2_WmFancyFade(run): EventB2_WmFancyFade
+00CC14	00CC2C	src/EventB3_WmFancyFadeWait.o(.text)	EventB3_WmFancyFadeWait(run): EventB3_WmFancyFadeWait
+00C0B8	00C0D4	src/Event80_WmSkip_Unsure.o(.text)	Event80_WmSkip_Unsure(run): Event80_WmSkip_Unsure
+00D04C	00D06C	src/EventC7_.o(.text)	EventC7_(run): EventC7_
+00D06C	00D08C	src/EventC8_.o(.text)	EventC8_(run): EventC8_
+00CB8C	00CBB0	src/EventAF_WmShowTextBox.o(.text)	EventAF_WmShowTextBox(run): EventAF_WmShowTextBox
+00CBB0	00CBD4	src/EventB0_WmHideTextBox_Bugged.o(.text)	EventB0_WmHideTextBox_Bugged(run): EventB0_WmHideTextBox_Bugged
+00C90C	00C934	src/EventA5_WmUnitFadeWait.o(.text)	EventA5_WmUnitFadeWait(run): EventA5_WmUnitFadeWait
+00CB60	00CB8C	src/EventAE_WmFadeToDarkerWait.o(.text)	EventAE_WmFadeToDarkerWait(run): EventAE_WmFadeToDarkerWait
+00CBD4	00CC00	src/EventB1_WmTextBoxWait.o(.text)	EventB1_WmTextBoxWait(run): EventB1_WmTextBoxWait

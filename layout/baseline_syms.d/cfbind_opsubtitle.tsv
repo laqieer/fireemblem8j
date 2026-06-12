@@ -1,0 +1,4 @@
+gProcScr_OpSubtitle	08B3B54C	data	StartIntroMonologue
+OpSubtitle_HandleStartPress	080C96D0	thumb	OpSubtitle_AwaitTimer2a
+gOpsubtitle_0	08B3B534	data	OpSubtitle_SetupBackgrounds
+gBgConfig_OpSubtitle	08B3B4CC	data	OpSubtitle_Init

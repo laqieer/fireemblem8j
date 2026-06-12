@@ -1,0 +1,4 @@
+03C884	03C8C4	src/AiIsUnitEnemyAndScrCharId.o(.text)	AiIsUnitEnemyAndScrCharId(run): AiIsUnitEnemyAndScrCharId
+03C8C4	03C904	src/AiIsUnitEnemyAndScrClassId.o(.text)	AiIsUnitEnemyAndScrClassId(run): AiIsUnitEnemyAndScrClassId
+03D0B4	03D1B8	src/AiFindClosestReachableTerrainPosition.o(.text)	AiFindClosestReachableTerrainPosition(run): AiFindClosestReachableTerrainPosition
+03CF44	03D0B4	src/AiFindBestAttackPositionAgainstTarget.o(.text)	AiFindBestAttackPositionAgainstTarget(run): AiFindBestAttackPositionAgainstTarget

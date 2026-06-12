@@ -1,0 +1,5 @@
+UpdateDungeonEnemiesDefeated	08038260	thumb	StartRetreatProcessing
+sProcScr_DungeonRecord_UpdateValue	085C6D2C	data	DungeonRecordUi_SpawnUpdateValueProc
+gBmdifficulty_9	085C6D54	data	DungeonRecordUi_ClearCountAnim_Init
+gBmdifficulty_10	085C6D60	data	DungeonRecordUi_ClearCountAnim_Init
+Text_DrawNumber	08081696	thumb	DrawNumberText
