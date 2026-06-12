@@ -18,15 +18,42 @@ for tu in "$@"; do
     # snapshot the committed src set so we can stage only NEW carves
     git ls-files src/ > /tmp/cf_pre_src.txt
     python3 scripts/cf_bind_drive.py --batch --tu "$tu" 2>&1 | tee "/tmp/cf_${tu}.log" | tail -4
-    grep -q "^OK: " "/tmp/cf_${tu}.log" || { echo "[$tu] no graduates / not green — skipping commit"; \
-        # ensure tree is clean+green even on a 'no graduate' batch
-        rm -f src/*.s; make compare >/dev/null 2>&1; assert_rom || exit 1; continue; }
+    # FULL restore-to-HEAD helper: clean every untracked cfbind/gap artifact + any
+    # reverted/leftover src, restore tracked asm/layout/src/data, rebuild. Never aborts.
+    restore_head() {
+        git checkout -- asm/ layout/ src/ data/ include/ 2>/dev/null
+        git clean -fq "layout/carved_rom.d/cfbind_${tu}.tsv" "layout/carved_ram.d/cfbind_${tu}.tsv" \
+            "layout/patches.d/cfbind_${tu}.tsv" "layout/baseline_syms.d/cfbind_${tu}.tsv" \
+            "layout/baseline_syms_drop.d/cfbind_${tu}.tsv" 2>/dev/null
+        # drop any untracked src created by this TU's batch (not in pre-snapshot)
+        comm -13 /tmp/cf_pre_src.txt <(git ls-files --others --exclude-standard src/ | sort) 2>/dev/null | xargs -r rm -f
+        rm -f src/*.s; make layout >/dev/null 2>&1; make compare >/dev/null 2>&1
+    }
+    if ! grep -q "^OK: " "/tmp/cf_${tu}.log"; then
+        echo "[$tu] no graduates / not green — restoring to HEAD"; restore_head
+        if ! make compare 2>&1 | tail -1 | grep -q OK; then echo "[$tu] WARN: still not green after restore"; fi
+        continue
+    fi
     rm -f src/*.s
     if ! make compare 2>&1 | tail -1 | grep -q OK; then
-        echo "[$tu] make compare NOT OK after batch — recovering";
-        git checkout -- asm/ layout/ src/ 2>/dev/null; rm -f src/*.s; make compare >/dev/null 2>&1; continue
+        echo "[$tu] make compare NOT OK after batch — restoring to HEAD"; restore_head; continue
     fi
-    assert_rom || exit 1
+    assert_rom || { echo "[$tu] ROM bad after batch — restoring"; restore_head; continue; }
+    # close any baserom gaps the asm->C swap opened (self-containment), so each TU
+    # commit stays at 0 incbins. Byte-identical by construction; re-verify compare.
+    rm -f src/*.s
+    if python3 scripts/check_selfcontained.py 2>&1 | grep -q "NOT YET"; then
+        python3 scripts/close_baserom_gaps.py >/dev/null 2>&1
+        rm -f src/*.s; make layout >/dev/null 2>&1
+        if ! make compare 2>&1 | tail -1 | grep -q OK; then
+            echo "[$tu] gap-close broke compare — recovering"; \
+            git checkout -- asm/ layout/ src/ data/ 2>/dev/null; \
+            git clean -fq asm/gap_*.s data/residual/ 2>/dev/null; \
+            rm -f src/*.s; make compare >/dev/null 2>&1; continue
+        fi
+        git add asm/gap_*.s data/residual/gap_*.bin layout/carved_rom.d/residual_gaps.tsv 2>/dev/null
+        assert_rom || exit 1
+    fi
     # stage: new src/*.c (untracked carves), this TU's cfbind frags, dedup frag,
     # asm deletions + gbadisasm frag deletions.
     git add src/ 2>/dev/null
