@@ -389,3 +389,8 @@ GetEnemyStartCursorPosition
 GetPlayerStartCursorPosition
 gParticlesFx_1
 GenerateUnitMovementMapOnRange
+GetHardModeTrapPointer
+GetPickTrapType
+GetTrapPointer
+GetTypedTrapAt
+RemoveTrap
