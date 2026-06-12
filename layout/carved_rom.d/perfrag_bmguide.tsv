@@ -1,0 +1,6 @@
+0D2C48	0D2C74	src/bmguide_080D2C48.o(.text)	bmguide_080D2C48(run): IsGuideLocked
+0D2C84	0D2E44	src/bmguide_080D2C84.o(.text)	bmguide_080D2C84(run): GuideSpriteDraw_Loop
+0D3658	0D36E4	src/bmguide_080D3658.o(.text)	bmguide_080D3658(run): GuideDetailsRedraw_Init
+0D36E4	0D37E4	src/bmguide_080D36E4.o(.text)	bmguide_080D36E4(run): GuideDetailsRedraw_Loop
+0D4158	0D4178	src/bmguide_080D4158.o(.text)	bmguide_080D4158(run): BmGuideTextSetAllGreen
+0D4178	0D41B0	src/bmguide_080D4178.o(.text)	bmguide_080D4178(run): BmGuideTextShowGreenOrNormal
