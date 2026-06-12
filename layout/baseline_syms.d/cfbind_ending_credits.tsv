@@ -1,0 +1,6 @@
+ProcScr_EndingCredits	08B3B414	data	StartEndingCredits
+ProcScr_EndingCredits_BlendCGMaybe	08B3B3D4	data	IsCreditsBlendCGActive
+CheckGameEndFlag	080A96F8	thumb	EndingCredits_Loop_Main
+EndingCredits_UpdateStaffReel	080C8FF0	thumb	EndingCredits_Loop_Main
+EndingCredits_UpdateScroll	080C916C	thumb	EndingCredits_Loop_Main
+EndingCredits_LoadCG	080C9398	thumb	EndingCredits_Loop_Main

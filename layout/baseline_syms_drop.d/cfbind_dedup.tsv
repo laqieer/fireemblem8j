@@ -164,3 +164,6 @@ gTSA_UnitInfoWindow
 ReadExtraMapInfo
 SaveMenuTryMoveExtraSlotCursor
 UnlockSoundRoomSong
+CheckGameEndFlag
+EndingCredits_LoadCG
+EndingCredits_UpdateScroll
