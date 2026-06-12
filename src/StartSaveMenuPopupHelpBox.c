@@ -1,0 +1,38 @@
+#include "global.h"
+#include "m4a.h"
+#include "soundwrapper.h"
+#include "fontgrp.h"
+#include "statscreen.h"
+#include "bmsave.h"
+#include "bmunit.h"
+#include "hardware.h"
+#include "uiutils.h"
+#include "bm.h"
+#include "ap.h"
+#include "gamecontrol.h"
+#include "bmlib.h"
+#include "eventinfo.h"
+#include "soundroom.h"
+#include "bonusclaim.h"
+#include "worldmap.h"
+#include "bonusclaim.h"
+#include "sysutil.h"
+#include "helpbox.h"
+#include "savemenu.h"
+#include "uisupport.h"
+#include "gba_sprites.h"
+#include "constants/event-flags.h"
+#include "constants/characters.h"
+#include "constants/chapters.h"
+#include "constants/songs.h"
+/* TU-private data externs bound at their JP addresses */
+extern struct ProcCmd gProcScr_Savemenu_0[];
+
+//! FE8U = 0x080A9DFC
+void StartSaveMenuPopupHelpBox(int x, int y, int msgId, ProcPtr parent)
+{
+    struct SaveMenu8A20068Proc  * proc = Proc_StartBlocking(gProcScr_Savemenu_0, parent);
+    proc->msgId = msgId;
+    proc->x = x;
+    proc->y = y;
+}

@@ -1,0 +1,6 @@
+ProcScr_efxEvilEyeBG2	08602670	data	StartSubSpell_efxEvilEyeBG2
+TsaArray_EvilEyeBg2_Far	086026B8	data	StartSubSpell_efxEvilEyeBG2
+TsaArray_EvilEyeBg2_Close	086026A0	data	StartSubSpell_efxEvilEyeBG2
+ImgArray_EvilEyeBg2	08602688	data	StartSubSpell_efxEvilEyeBG2
+PalArray_EvilEyeBg2	086026D0	data	StartSubSpell_efxEvilEyeBG2
+Pal_EvilEyeBg2_A	0870566C	data	StartSubSpell_efxEvilEyeBG2
