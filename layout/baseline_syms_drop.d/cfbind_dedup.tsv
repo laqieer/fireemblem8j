@@ -167,3 +167,10 @@ UnlockSoundRoomSong
 CheckGameEndFlag
 EndingCredits_LoadCG
 EndingCredits_UpdateScroll
+UpdateLinkArenaActiveBannerObjGlow
+UpdateLinkArenaNameBannerGlow
+UpdateLinkArenaSideMenuGlow
+UpdateLinkArenaVersusBannerGlow
+UpdateSioMenuBurstGlow
+UpdateSioMenuSelectedGlow
+gUnkData_75

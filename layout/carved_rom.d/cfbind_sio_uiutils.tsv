@@ -1,0 +1,7 @@
+04E5C8	04E5EC	src/PutLinkArenaChoiceBannerSprite.o(.text)	PutLinkArenaChoiceBannerSprite(run): PutLinkArenaChoiceBannerSprite
+04E544	04E570	src/LinkArenaResultBanner_Loop.o(.text)	LinkArenaResultBanner_Loop(run): LinkArenaResultBanner_Loop
+04D934	04D9B4	src/LATeamSpriteDraw_Loop.o(.text)	LATeamSpriteDraw_Loop(run): LATeamSpriteDraw_Loop
+04DC9C	04DD50	src/SioMenuBurstFx_Loop.o(.text)	SioMenuBurstFx_Loop(run): SioMenuBurstFx_Loop
+04D398	04D4F8	src/SioMenuItem_Loop.o(.text)	SioMenuItem_Loop(run): SioMenuItem_Loop
+04E210	04E3F8	src/LAVersusSpriteDraw_Loop.o(.text)	LAVersusSpriteDraw_Loop(run): LAVersusSpriteDraw_Loop
+04D634	04D88C	src/SioTeamMenuSpriteDraw_Loop.o(.text)	SioTeamMenuSpriteDraw_Loop(run): SioTeamMenuSpriteDraw_Loop
