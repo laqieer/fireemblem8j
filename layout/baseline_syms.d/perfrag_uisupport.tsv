@@ -1,0 +1,5 @@
+GetSupportTalkList	08086AC4	thumb	uisupport_080A49A4
+SupportSubScreen_MakeDimmedObjPalette	080A5FE8	thumb	uisupport_080A6040
+ConfigSysHandCursorShadowEnabled	080B2034	thumb	uisupport_080A6040
+DrawSupportSubScreenSprites	080A5968	thumb	uisupport_080A6040
+StartSupportViewerTalk	08085A9C	thumb	uisupport_080A63C4
