@@ -1,0 +1,6 @@
+0841EC	084264	src/mapanim_scanline_080841EC.o(.text)	mapanim_scanline_080841EC(run): SetupMapAnimScanlineWindow
+084418	0844CC	src/mapanim_scanline_08084418.o(.text)	mapanim_scanline_08084418(run): StartManimFrameGradientScanlineEffect
+0844CC	084568	src/mapanim_scanline_080844CC.o(.text)	mapanim_scanline_080844CC(run): PrepareProfileScanlineWindow
+084C8C	084CE4	src/mapanim_scanline_08084C8C.o(.text)	mapanim_scanline_08084C8C(run): HBlank_MapAnimBg1OfsInterlaced
+084F88	085178	src/mapanim_scanline_08084F88.o(.text)	mapanim_scanline_08084F88(run): MapAnimEllipseScanlineCore
+085178	0851B8	src/mapanim_scanline_08085178.o(.text)	mapanim_scanline_08085178(run): UpdateMapAnimEllipseScanline

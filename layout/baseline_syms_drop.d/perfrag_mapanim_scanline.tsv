@@ -1,0 +1,7 @@
+HBlank_MapAnimWin0H
+HBlank_MapAnimGradientColor
+PrepareGradientScanlineBuf
+StartManimFrameGradientScanlineEffect
+SwapScanlineBufs
+PrepareProfileScanlineWindow
+MapAnimEllipseScanlineCore
