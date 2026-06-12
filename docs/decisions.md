@@ -2884,3 +2884,57 @@ sit in individual `asm/sub_*.o` fragments. No `port_run.py` changes were needed 
 already covered the func_only fixpoint for these TUs). Pushed `feat/h3`. Siblings own eventscr*/bmio,
 prep_menuproc/mapanim_spellassoc/bmudisp, playerphase/bmmind/prep_itemscreen/player_interface/bmtrade, permuter —
 not touched. (D-number from the free sequence; renumber at integration if a concurrent sibling claimed D60.)
+
+## D63 — rd2: perm2_graduate fast-path swept the n–z region-different worklist; +158 matching-C; the bulk-NEAR-probe pattern; CF:agbcc/FAR/LEN are the true frontier (2026-06-12)
+
+**Context.** Branch `feat/rd2` (sibling rd1 = a–m worklist TUs, harv1 = region-same). Scope: the D54
+`layout/nofuncmap_region_different.tsv` frontier rows whose US TU name starts **n–z** (823 functions, 29
+pre-carved). Tool: `scripts/perm2_graduate.py` ONLY (the D54 lever — compile US source in isolation via
+`extract_func_only`, mask at the TRUE `objdump -r` reloc offsets, masked-compare the JP ROM range; carve only
+NEAR/MATCH = body-identical modulo relocation; the linker resolves the reloc sites once carved at the JP address).
+`make compare` the sole oracle; `--verify` self-correcting loop auto-reverts every full-build failure.
+
+**RESULT — +158 matching-C across the n–z worklist (158 src/<fn>.c, 158 perm2 carved_rom frags, 158 gbadisasm
+sub_*.o asm carves swapped asm→C). All gates GREEN every batch:** `rm -f src/*.s` + `make check`(check_layout) +
+`make compare` + (on the big batch) `make clean && make compare` + `check_selfcontained.py == 0 incbins`; named
+from US; verify-or-revert; staged explicitly (NO `git add -A`, only the `tools` worktree symlink left untracked);
+baserom/checksum/CI untouched. Committed + pushed per batch (7 commits).
+
+**KEY METHOD — the BULK-NEAR-PROBE pattern (the session's efficiency payoff).** The naive head-window approach
+(feed the next K smallest names to `--verify`) wastes the build window: most names in a window are NOT stageable
+(NOADDR / CF:agbcc / FAR / LEN at the probe stage), so each ~120-name batch only graduated ~10–14. Better:
+**(1) stage-only probe ALL remaining stageable names in one fast pass (no `--verify`, no build), capture the
+`[STAGE NEAR/MATCH]` names; (2) git-clean-revert that throwaway stage (`git checkout -- asm/ layout/` + `rm` the
+untracked perm2 frags/src — SAFE because nothing was committed); (3) `--verify` ONLY the captured NEAR set in one
+shot.** That turned 70 NEAR → +55 in a single build (vs ~14/batch). The probe is the cheap classifier; the build
+is the expensive oracle — run the oracle once over the pre-filtered NEAR set. CAUTION: NEVER hand-`rm` the perm2
+frags of an ALREADY-COMMITTED stage (it deletes tracked sibling carves); only `git checkout -- asm/ layout/` +
+remove the freshly-untracked files. The script's own `revert()` is the only safe per-function revert mid-`--verify`.
+
+**THE REAL CEILING for this fast path (probe breakdown of the 580 remaining stageable n–z funcs after the sweep):
+70 NEAR (all graduated or binding-hard), 309 CF:agbcc, 103 FAR, 98 LEN.** These three skip-classes are the genuine
+hand-decomp/binding frontier, NOT reachable by perm2's func_only fast path:
+  * **CF:agbcc (309, the largest residue)** — func_only extraction compiles standalone only if the function
+    references no file-scope TU symbol. These fail because they reference a TU-private data table (e.g. `StartGmMu`
+    → `ProcScr_GMapMu`, a `CONST_DATA ProcCmd[]` defined static in worldmap_mapmu.c and NOT a bound JP symbol — only
+    `ProcScr_GMapMuPrim` is in sym_jp). They need the pointee data carved/bound alongside (the D62 perfrag/
+    `bind_tu_data` full-TU dedup_globals path), region-SAME-worklist (harv1) territory with RAM/blob binding risk —
+    left for the data-coordinated harvest, not the zero-risk perm2 lever.
+  * **FAR (103)** — a body byte differs outside any reloc offset → genuine JP codegen difference (reg-alloc/
+    scheduling/literal-pool) → permuter / IDA-Ghidra hand-decomp.
+  * **LEN (98)** — standalone .text length ≠ JP range → structurally region-different.
+  * Plus 60 NOADDR (no `funclib_us_jp.tsv` JP-address mapping → perm2 can't place them).
+
+**THE NEAR-BUT-FAILS-BUILD CLASS (≈30, incl. the bulk batch's 15 reverts: DrawSupportScreenUnitSprites,
+LABattleMap_GenerateForecast, PlayerPhase_FinishAction, ProcessMenuSelectInput, SaveTactician,
+SortPlayerUnitsForPrepScreen, Tactician_LoopCore, WorldMap_HandleNodeConfirm/UpdateBgm, …).** They probe NEAR
+(body matches modulo reloc) but REVERT under `--verify` even in isolation — the masked-body match is necessary but
+not sufficient: a reloc TARGET resolves to a different value in JP, or they need TU-private data bound first.
+Confirms D62's lesson ("region-same by classifier ≠ byte-perfect full-build carve") on the region-DIFFERENT side
+too. Correctly NOT graduated; verify-or-revert kept the build green throughout.
+
+**Yield framing.** Of the n–z worklist's stageable-in-funclib functions, the perm2 func_only fast path cleanly
+graduated ~all true NEAR carves (+158). The remaining n–z frontier is CF:agbcc-data-binding (309) + FAR (103) +
+LEN (98) + NOADDR (60) — the genuine hand-decomp/perfrag work, untouched at zero risk. Pushed `feat/rd2`. Siblings
+own a–m (rd1) and region-same (harv1) — not touched. (D-number from the free sequence; renumber at integration if
+a concurrent sibling claimed D63.)
