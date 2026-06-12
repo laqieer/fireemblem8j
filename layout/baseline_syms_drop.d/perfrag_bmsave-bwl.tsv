@@ -1,0 +1,9 @@
+gPidStatsData
+ClearPidStats
+ReadPidStats
+ReadChapterStats
+WritePidStats
+WriteChapterStats
+PidStatsGetTotalExpGain
+GetCurerentGameMode
+GetPidStats
