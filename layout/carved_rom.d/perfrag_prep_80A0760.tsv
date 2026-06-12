@@ -1,0 +1,7 @@
+0A29C0	0A29F4	src/prep_80A0760_080A29C0.o(.text)	prep_80A0760_080A29C0(run): FortuneSubMenu_StartText
+0A2BF8	0A2C10	src/prep_80A0760_080A2BF8.o(.text)	prep_80A0760_080A2BF8(run): StartFortuneSubMenu
+0A2C40	0A2C5C	src/prep_80A0760_080A2C40.o(.text)	prep_80A0760_080A2C40(run): GetChapterDivinationTextIdHectorStory
+0A2C5C	0A2C78	src/prep_80A0760_080A2C5C.o(.text)	prep_80A0760_080A2C5C(run): GetChapterDivinationTextIdBeginning
+0A2C78	0A2C94	src/prep_80A0760_080A2C78.o(.text)	prep_80A0760_080A2C78(run): GetChapterDivinationTextIdEnding
+0A2C94	0A2CB0	src/prep_80A0760_080A2C94.o(.text)	prep_80A0760_080A2C94(run): GetChapterDivinationFee
+0A2CB0	0A2CCC	src/prep_80A0760_080A2CB0.o(.text)	prep_80A0760_080A2CB0(run): GetChapterDivinationPortrait

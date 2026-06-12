@@ -1,0 +1,6 @@
+SetCgTextFlags
+FortuneSubMenu_OnOptionSelected
+StartFortuneSubMenu
+GetChapterDivinationTextIdHectorStory
+GetChapterDivinationTextIdBeginning
+GetChapterDivinationPortrait

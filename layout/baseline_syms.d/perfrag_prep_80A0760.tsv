@@ -1,0 +1,6 @@
+StartCgText	080913FC	thumb	prep_80A0760_080A29C0
+SetCgTextFlags	08090CAC	thumb	prep_80A0760_080A29C0
+FortuneSubMenu_Init_Null	080A29F4	thumb	prep_80A0760_080A2BF8
+FortuneSubMenu_HandleOptionSwitch	080A2BC0	thumb	prep_80A0760_080A2BF8
+FortuneSubMenu_OnOptionSelected	080A2B9C	thumb	prep_80A0760_080A2BF8
+StartSupportScreenFromPrepScreen	00000000	data	prep_80A0760_080A2BF8
