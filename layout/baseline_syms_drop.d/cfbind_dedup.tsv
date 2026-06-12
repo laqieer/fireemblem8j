@@ -21,3 +21,14 @@ Pal_DivineBg3
 Pal_DivineSprites
 gMapanimEventcall_293
 gMapanimEventcall_294
+BMapVSync_Start
+ClearSioBG
+GetUnitDisplayedSpritePalette
+LABattleMap_IsAttackOrSurrenderMsg
+LinkArenaBattleMap_CountTeamUnits
+LinkArenaBattleMap_FindUnitSlot
+LinkArenaBattleMap_InitConfig
+LinkArenaBattleMap_RebuildUnitMap
+LinkArenaBattleMap_RestoreUnitItems
+NewPopup_Simple
+SioSend
