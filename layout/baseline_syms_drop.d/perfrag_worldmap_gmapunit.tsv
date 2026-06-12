@@ -1,0 +1,9 @@
+MapUnitC_SetAnimId
+GetMapUnitMMSGfxBuffer
+MMS_GetGfx
+MMS_GetROMTCS2
+MapUnitC_SetDisplayedClass
+MapUnitC_SetFaction
+GmapUnitFade_InterpolateColor
+GmapUnitFade_AddUnit
+MapUnitC_SetPalette
