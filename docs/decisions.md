@@ -3014,3 +3014,56 @@ share skip the perm2 probe because they reference a TU-private data table (stati
 bind the pointee alongside (D45/D51/D62 class) and they carve. (b) **region-same harvest remainder** —
 `nofuncmap_region_same.tsv` still has most of its ~1.9k rows un-graduated (harv1 only cleared cpextra). (c) genuine
 **FAR codegen** (~103 n–z + a share of a–m's 758) + **LEN/NOADDR** → decomp-permuter / IDA-Ghidra hand work.
+
+## D66 — harvAM: perfrag_carve sweep of the region-SAME a–m worklist; +290 matching-C (55.18%→58.58%); serial-queue throughput pattern + grep-buffering monitor pitfall (2026-06-12)
+
+**Context.** D65 left `layout/nofuncmap_region_same.tsv` (~1.8k rows: identical instruction
+stream modulo relocation) largely un-graduated — harv1 only cleared cpextra. The a–m US-TU
+share was assigned to a dedicated P8 worktree (`feat/harvAM`); n–z went to `feat/harvNZ`,
+CF:agbcc data-binding to `feat/cfBind` (no overlap). fontgrp excluded (whole-TU
+region-different per D62).
+
+**Method.** `scripts/perfrag_carve.py <tu>` — per-function direct carve over the gbadisasm
+`asm/sub_*.o` fragments: read the row `(JP_addr, US_addr, size, match_type, func_name, TU)`,
+snapshot+remove the covered `sub_*.o`/.s rows, `port_run.port(..., dedup_globals=True)` with a
+**func_only fallback**, then **verify-or-revert against `make compare`** (the sole oracle).
+Genuine region-diff funcs (JP reg-alloc / scheduling / literal-pool differences the classifier
+false-positived as "same") revert cleanly → zero-risk. Per-TU `perfrag_<tu>.tsv` manifests keep
+parallel runs conflict-free (D62 class).
+
+**Yield (+290 matching-C, 4706→4996, 55.18%→58.58%; honest ceiling ~57.3%→~60.9% of 8209):**
+- bmio +28, mapanim_spellassoc +18, bmudisp +12, ending_details +18
+- queue1 (mapanim_eventcall, bmsave-lib, bmmap, bm, mapanim, bksel, minimap) +93
+- queue2 (eventscr +27, banim-ekrlvup +17, banim-efxmagic-effectstaves +10, banim-efxhit +12,
+  banim-efxlvup +14, eventscr_gmap +8, banim-ekrutils +13, banim-ekrclasschg +11, cp_perform,
+  bmsave-multiarena) +121
+- Region-diff clusters correctly reverted (zero-risk): bmudisp sprite-blit tails,
+  banim-* battle-anim fx tails (e.g. SpellFx_RegisterObjPal, NewEfxClasschgOBJGain neighbors),
+  cp_perform tail.
+
+**Reusable SOP / pitfalls (复盘).**
+1. **Serial-queue throughput pattern.** Don't babysit one TU at a time. Write
+   `for tu in <TUs>; do python3 -u perfrag_carve.py "$tu"; done`, launch once in background,
+   let it grind ~100–160 functions unattended. The verify-or-revert discipline means an
+   interrupted queue always leaves a build-green committable state.
+2. **grep-buffering defeats line-monitors.** Piping `python3 -u … | grep CARVED` to a file
+   block-buffers — per-TU lines stay invisible until the TU's python exits. Track progress via
+   `git status --short src/ | grep -c '^?? src/.*\.c'` instead, and rely on the background-task
+   completion notification.
+3. **Watchdog salvage is real, not data-loss.** When a queue stalled, the harness watchdog
+   committed+pushed the build-verified staged carves (cf8023b47, +121). A subsequent
+   `git status` showing only `?? tools` looked like loss but was the worktree post-commit; the
+   incremental git-add inside `port_run` + verify-or-revert meant nothing was lost. Confirm via
+   `git reflog`, never re-carve on a scare.
+4. **glob false-counts.** "N .c files in a TU" ≠ "N new" — pre-existing tracked files inflate
+   `ls` counts; trust `git status --short | grep '^??'` for the true new count.
+
+**Gates (all green per batch):** `rm -f src/*.s && make check`, `make compare`=OK,
+`make clean && make compare`=OK, `python3 scripts/check_selfcontained.py`=0 incbins, ROM
+`stat -c%s`==16,777,216. Integrated to main (commit 01bd410e5); README scorecard refreshed.
+
+**Frontier (a–m region-same remainder).** Rich: banim-* (dozens of 1–7-function TUs:
+banim-ekrpopup, banim-ekrtriangle, banim-efxmagic-*, banim-ekrmain, banim-efxdeath…),
+helpbox, hardware, bmusemind, bmsave-bwl, gamerankings, bonusclaim, face, convoymenu,
+classchg-*, bmbattle, event, cgtext, bmguide, cp_* — each a clean perfrag batch. The genuine
+hand-decomp tail (FAR codegen + CF:agbcc data-binding) is unaffected by this sweep.
