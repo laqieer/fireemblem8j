@@ -1,0 +1,4 @@
+0451D4	04532C	src/sio_postbattle_080451D4.o(.text)	sio_postbattle_080451D4(run): SioPostBattleSprites_Loop_DrawSlideIn
+04532C	045434	src/sio_postbattle_0804532C.o(.text)	sio_postbattle_0804532C(run): SioPostBattleSprites_Loop_DrawStatic
+045484	04550C	src/sio_postbattle_08045484.o(.text)	sio_postbattle_08045484(run): SioPostBattle_DrawRankingRowBar
+04550C	0455B0	src/sio_postbattle_0804550C.o(.text)	sio_postbattle_0804550C(run): SioPostBattle_DrawRankingText
