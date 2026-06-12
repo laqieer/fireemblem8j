@@ -288,3 +288,16 @@ gUnkData_43
 gUnkData_44
 gUnkData_45
 gUnkData_46
+DrawLinkArenaModeIcon
+Img_LinkArenaPlayerBanners
+Img_LinkArenaRankIcons
+InsertMultiArenaRanking
+LinkArena_GetPlayerRanking
+LoadLinkArenaRuleSettings
+LoadRNState
+Pal_TacticianSelObj
+SioRuleSettings_DrawRuleOptions
+StartLinkArenaVersusSpriteDraw
+StartRuleSettingSpriteDrawStatic
+gUnkData_15
+gUnkData_6
