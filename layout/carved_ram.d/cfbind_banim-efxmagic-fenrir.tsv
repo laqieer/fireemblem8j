@@ -1,0 +1,2 @@
+080E2780	rom	src/StartSubSpell_efxFenrirBGCOL.o(.rodata)	StartSubSpell_efxFenrirBGCOL .rodata region-diff (incbin)
+080E27DE	rom	src/StartSubSpell_efxFenrirBG2_A.o(.rodata)	StartSubSpell_efxFenrirBG2_A .rodata region-diff (incbin)

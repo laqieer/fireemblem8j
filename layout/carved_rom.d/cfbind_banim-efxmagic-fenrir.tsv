@@ -1,0 +1,7 @@
+061C7C	061CC4	src/StartSubSpell_efxFenrirBGCOL.o(.text)	StartSubSpell_efxFenrirBGCOL(run): StartSubSpell_efxFenrirBGCOL
+061F90	061FD8	src/StartSubSpell_efxFenrirOBJ2.o(.text)	StartSubSpell_efxFenrirOBJ2(run): StartSubSpell_efxFenrirOBJ2
+061D18	061D78	src/StartSubSpell_efxFenrirOBJ.o(.text)	StartSubSpell_efxFenrirOBJ(run): StartSubSpell_efxFenrirOBJ
+062024	0620A4	src/StartSubSpell_efxFenrirOBJ2Chiri.o(.text)	StartSubSpell_efxFenrirOBJ2Chiri(run): StartSubSpell_efxFenrirOBJ2Chiri
+061E3C	061EC4	src/StartSubSpell_efxFenrirBG2_B.o(.text)	StartSubSpell_efxFenrirBG2_B(run): StartSubSpell_efxFenrirBG2_B
+061B9C	061C2C	src/StartSubSpell_efxFenrirBG.o(.text)	StartSubSpell_efxFenrirBG(run): StartSubSpell_efxFenrirBG
+061DAC	061E3C	src/StartSubSpell_efxFenrirBG2_A.o(.text)	StartSubSpell_efxFenrirBG2_A(run): StartSubSpell_efxFenrirBG2_A
