@@ -1,0 +1,9 @@
+0BA8F8	0BA9F0	src/gamerankings_080BA8F8.o(.text)	gamerankings_080BA8F8(run): GetGameTacticsRank
+0BA9F0	0BAA28	src/gamerankings_080BA9F0.o(.text)	gamerankings_080BA9F0(run): GetGameSurvivalRank
+0BAA28	0BAB20	src/gamerankings_080BAA28.o(.text)	gamerankings_080BAA28(run): GetGameExpRank
+0BAB20	0BAB54	src/gamerankings_080BAB20.o(.text)	gamerankings_080BAB20(run): GetGameCombatRank
+0BAB54	0BABF4	src/gamerankings_080BAB54.o(.text)	gamerankings_080BAB54(run): GetGameFundsRank
+0BACC8	0BAD48	src/gamerankings_080BACC8.o(.text)	gamerankings_080BACC8(run): GetChapterTacticsRank
+0BADB0	0BADE8	src/gamerankings_080BADB0.o(.text)	gamerankings_080BADB0(run): GetGameDeathCount
+0BADE8	0BAE08	src/gamerankings_080BADE8.o(.text)	gamerankings_080BADE8(run): GetGameWinPerc
+0BAE08	0BAE5C	src/gamerankings_080BAE08.o(.text)	gamerankings_080BAE08(run): GetChapterDeathCount
