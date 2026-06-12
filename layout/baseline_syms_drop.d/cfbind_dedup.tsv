@@ -221,3 +221,12 @@ Sio_ResetSession
 Sio_SetCommParams
 Sio_SetSubState
 gSioIncoming
+InitSioTexts
+IsMultiArenaSaveReady
+Pal_LinkArenaMenu
+PutSioText
+SetBmStLinkArenaFlag
+SetLinkArenaUiBlendAndWindowOff
+SioMenuItem_SetPosition
+StartLinkArenaTitleBanner
+StartSioMenuItem

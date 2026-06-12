@@ -1,0 +1,4 @@
+0480F8	048178	src/StartLinkArenaMainMenu.o(.text)	StartLinkArenaMainMenu(run): StartLinkArenaMainMenu
+047B78	047C08	src/SioMenu_0.o(.text)	SioMenu_0(run): SioMenu_0
+047C08	047CA0	src/SioMenu_AnimateItemsSpreadFromSelection.o(.text)	SioMenu_AnimateItemsSpreadFromSelection(run): SioMenu_AnimateItemsSpreadFromSelection
+047FCC	048080	src/SioMenu_1.o(.text)	SioMenu_1(run): SioMenu_1
