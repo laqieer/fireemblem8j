@@ -1,0 +1,5 @@
+072B10	072B50	src/banim-ekrdragon-utils_08072B10.o(.text)	banim-ekrdragon-utils_08072B10(run): NewEkrWhiteINOUT
+072B50	072BC0	src/banim-ekrdragon-utils_08072B50.o(.text)	banim-ekrdragon-utils_08072B50(run): EkrWhiteINOUT_Loop1
+072BC0	072C18	src/banim-ekrdragon-utils_08072BC0.o(.text)	banim-ekrdragon-utils_08072BC0(run): EkrWhiteINOUT_Loop2
+072C18	072C88	src/banim-ekrdragon-utils_08072C18.o(.text)	banim-ekrdragon-utils_08072C18(run): EkrWhiteINOUT_Loop3
+072C88	072CB8	src/banim-ekrdragon-utils_08072C88.o(.text)	banim-ekrdragon-utils_08072C88(run): EkrWhiteINOUT_RefrainPalette
