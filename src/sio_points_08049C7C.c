@@ -1,0 +1,41 @@
+#include "global.h"
+
+#include "ctc.h"
+#include "hardware.h"
+#include "fontgrp.h"
+#include "bmlib.h"
+#include "uiutils.h"
+#include "bmunit.h"
+#include "m4a.h"
+#include "soundwrapper.h"
+
+#include "sio_core.h"
+#include "sio.h"
+#include "constants/songs.h"
+
+// clang-format off
+
+extern const u8 gSioPoints_0[][4];
+
+
+
+
+
+extern const u8 gSioPoints_3[];
+
+// clang-format off
+
+extern u16 CONST_DATA Sprite_SioPoints_0[];
+
+//! FE8U = 0x08048E6C
+void PointsNumberMover_AwaitEnd(struct PointsNumberMoverProc * proc)
+{
+    proc->timer++;
+
+    if (proc->timer > 20)
+    {
+        Proc_Break(proc);
+    }
+
+    return;
+}
