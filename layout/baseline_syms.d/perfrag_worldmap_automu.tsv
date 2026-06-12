@@ -1,0 +1,4 @@
+GmMu_FinishMovement	080C3118	thumb	worldmap_automu_080C7EDC
+EndGmapUnitFade	080C02AC	thumb	worldmap_automu_080C7EDC
+GmMu_StartFadeIn	080C31F8	thumb	worldmap_automu_080C7FD8
+GmMu_StartFadeOut	080C3218	thumb	worldmap_automu_080C7FFC
