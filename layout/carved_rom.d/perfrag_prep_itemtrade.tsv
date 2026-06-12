@@ -1,0 +1,4 @@
+09DAF4	09DB30	src/prep_itemtrade_0809DAF4.o(.text)	prep_itemtrade_0809DAF4(run): DrawPrepScreenItemIcons
+09DB30	09DDF8	src/prep_itemtrade_0809DB30.o(.text)	prep_itemtrade_0809DB30(run): PrepItemTrade_Init
+09E100	09E124	src/prep_itemtrade_0809E100.o(.text)	prep_itemtrade_0809E100(run): StartPrepItemTradeScreenProc
+09E124	09E144	src/prep_itemtrade_0809E124.o(.text)	prep_itemtrade_0809E124(run): StartPrepItemTradeScreenProcAtSlot
