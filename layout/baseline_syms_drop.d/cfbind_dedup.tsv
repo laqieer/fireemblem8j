@@ -336,3 +336,5 @@ ShowWmText
 StartGmapLineFade
 StartGmapRm
 StartWmPlaceDot
+UnitAutolevel
+UnitLoadStatsFromChracter

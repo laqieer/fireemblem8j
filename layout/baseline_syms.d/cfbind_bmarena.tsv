@@ -1,0 +1,7 @@
+gClassList_MeleeArena	085C5EDC	data	ArenaGenerateOpposingClassId
+gClassList_BowArena	085C5F2A	data	ArenaGenerateOpposingClassId
+gClassList_MagicArena	085C5F02	data	ArenaGenerateOpposingClassId
+UnitInitFromDefinition	08017A5C	thumb	ArenaGenerateOpponentUnit
+UnitLoadStatsFromChracter	08017B54	thumb	ArenaGenerateOpponentUnit
+gArenaOpponent	0203A90C	data	ArenaGenerateOpponentUnit
+UnitAutolevel	08017E3C	thumb	ArenaGenerateOpponentUnit
