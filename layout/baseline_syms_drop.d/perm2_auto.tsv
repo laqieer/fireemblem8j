@@ -191,3 +191,7 @@ EfxUpdateBg2Scroll
 InitSubtitleHelpText
 PutFace80x72_Core
 StartSubtitleHelp
+EndMuralBackground_
+HasConvoyAccess_
+GmMu_StartFadeIn
+GmMu_StartFadeOut
