@@ -246,3 +246,6 @@ LCGRand_N
 Pal_FimbulvetrBg
 Pal_FimbulvetrBg_Tornado
 Img_efxDarkLongMonsBG
+GetMapUnitMMSGfxBuffer
+MMS_GetGfx
+MMS_GetROMTCS2
