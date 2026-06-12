@@ -323,3 +323,16 @@ EvtBattleGenerateBallistaReal
 EvtBattleGenerateReal
 GetNextDeployedPlayerUnitId
 GetPlayerLeaderPid
+EndGmPalFade
+GetGmMuEntryFlag
+GmMuEntryStartHide
+GmMuEntryStartShow
+GmMu_PauseMovement
+GmMu_ResumeMovement
+GmUnitFadeExists
+IsGmPalFadeActive
+IsGmapLineFadeActive
+ShowWmText
+StartGmapLineFade
+StartGmapRm
+StartWmPlaceDot
