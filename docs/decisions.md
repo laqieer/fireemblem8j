@@ -3434,3 +3434,51 @@ mislabeled asm carves with one correct typed TU). PATTERN: a "region-same per-sy
 backing asm `.global`s gameplay-table symbols (TerrainTable_*, gBanim*) is a strong misattribution signal —
 prefer one contiguous typed TU. Always byte-diff the full US `.data` vs the ROM to find the EXACT
 region-same/different boundary before deciding the TU's extent.
+## D79 — MC-permuter PILOT: decomp-permuter VALIDATED on FAR codegen; +5 carved; but the small-FAR tail is dominated by JP DATA-CONSTANT diffs the permuter CANNOT solve (2026-06-12)
+
+**Goal.** First at-scale run of the wired-but-never-piloted `scripts/permuter/` (decomp-permuter over agbcc/ARM-Thumb)
+on the FAR tail (functions that compile CLOSE but not byte-exact — region-different *codegen*). Branch `feat/mcPermuter`.
+Measure hit-rate, time/fn, and whether it's a viable lever for the ~951-fn FAR/pure-JP tail.
+
+**Pipeline validated end-to-end.** `permuter_settings.toml` + `scripts/permuter/permute.sh` work; setup was already
+done (venv + tools/decomp-permuter present). Two harness gotchas fixed for the target `.s`: (1) the gbadisasm carves
+label functions `sub_<addr>:` not `glabel <USname>`, and use UAL mnemonics needing `.syntax unified` (the prelude lacks
+it) — wrote `/tmp/mk_target2.py` to relabel + keep `.syntax unified` + insert `.align 2,0` before every literal pool
+(prelude's plain `.text` doesn't inherit the carve's section alignment → PC-rel `ldr` errors). (2) the scorer's ARM
+reloc handler emits the *symbol name* into the scored sequence, so target callee/data names must match the C's
+(rename `.set sub_XXXX` aliases → US names via funcmap; otherwise residual score from name mismatch). **KEY: the
+permuter's score is NOT the oracle** — score ≤ (#reloc-bytes) already byte-matches after link; `make compare` is the
+truth. Two near-misses at "score 5" (EnsureCameraOntoActiveUnitPosition, EventAA_WmUnitPauseMove) were body-identical
+(all residual diffs were reloc operands) and linked clean.
+
+**RESULT — pilot of 13 small FAR candidates (3 import-failed on pre-fix alignment, re-launched; 1 had no asm carve).**
+The permuter reached score 0 on **2** within ~2 min / <50 iterations each:
+  - `MapUnitC_SetBlendEnabled` (40B): found `s8 flag` → **`char flag`** (agbcc treats plain `char` ≠ `signed char` for
+    promotion here).
+  - `Event29_SetFogVision` (48B): found `u16 newVision` → **`unsigned long newVision`** (temp-var width).
+Both deltas were applied to the US source, probe-confirmed byte-exact, carved, `make compare` OK.
+**+3 more by TRANSFERRING the discovered delta WITHOUT re-running the permuter** (the session's biggest efficiency
+finding): `MapUnitC_SetDisplayEnabled` (sibling of SetBlendEnabled, same `char` fix), and the two "score-5" near-misses
+above (EnsureCamera = temp-var reordering, EventAA = same `unsigned long` width fix as Event29). **Total +5 carved.**
+
+**MEASUREMENT / VIABILITY.** Hit-rate **2/13 (~15%) by the permuter alone**, **5/13 (~38%) counting delta-transfer**.
+Avg time to score-0 for the 2 direct wins: **~1.5 min/fn** (fast — small fns converge in <50 iters with -j3). BUT the
+other 8 plateaued after **35k–114k iterations** (~30–45 min) with no score-0 — and inspecting them gives the decisive
+finding: **the small-FAR tail is dominated by JP DATA-CONSTANT differences, which the permuter structurally CANNOT
+solve** (it permutes C *shape*, never guesses a JP constant). Of 59 small FAR (≤200B) classified, **32 are single
+body-byte diffs = a literal/msg-ID constant**: `Shop_*Dialogue` (US `0x8A3` vs JP `0x843`), `RefreshMapSelect_Init`
+(`GetStringFromIndex(0x870)`), `GameControlHandlePost…` (`Proc_Goto(proc, 9/10)`), `GetWorldMapNodeName`
+(`GetStringFromIndex(0x66D)` vs JP `0x5FF`). These are a **separate mechanical lever** (read the JP literal from the
+ROM, substitute it) — NOT permuter work, and far cheaper. **VIABLE = YES, but NARROW:** the permuter is the right tool
+ONLY for genuine codegen-shape diffs (type width/signedness, temp-var ordering) — a minority. For the ~951 FAR/pure-JP
+tail the dominant sub-class is data-constant substitution; recommend a **constant-diff carver** (probe → if the only
+body diff is a literal-pool word or immediate, lift the JP value) as the primary next lever, with the permuter reserved
+for the residual true-codegen cases and its wins propagated across sibling functions by delta-transfer.
+
+**Reusable artifacts (scratch, /tmp, not committed):** `/tmp/classify_far.py` (probe + bucket NEAR/FAR/CONST?/LEN/CF
+over the region-different worklist, sorted by size), `/tmp/triage_far.py` (CODEGEN vs CONST split via body-diff
+position), `/tmp/mk_target2.py` (asm→permuter-target .s with symbol alignment + pool .align), `/tmp/pilot_run.sh`
+(import + detached `bg` launch per candidate). All re-derive from the live `asm/sub_*.s` set + `layout/
+nofuncmap_region_different.tsv`. Gates held every carve: probe byte-exact → carve → `make compare` OK → cold `make
+clean && make compare` OK → `check_selfcontained.py`==0 → ROM==16,777,216. Permuter `nonmatchings/` scratch NOT
+committed (gitignored).
