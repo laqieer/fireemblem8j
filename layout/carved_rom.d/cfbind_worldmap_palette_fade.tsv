@@ -1,0 +1,2 @@
+0C4514	0C452C	src/IsGmPalFadeActive.o(.text)	IsGmPalFadeActive(run): IsGmPalFadeActive
+0C452C	0C456C	src/EndGmPalFade.o(.text)	EndGmPalFade(run): EndGmPalFade
