@@ -16,3 +16,4 @@
 0BC0F4	0BC1B8	src/ending_details_080BC0F4.o(.text)	ending_details_080BC0F4(run): TurnRecord_Init
 0BC590	0BC638	src/ending_details_080BC590.o(.text)	ending_details_080BC590(run): TurnRecord_Loop_Main
 0BCECC	0BD020	src/ending_details_080BCECC.o(.text)	ending_details_080BCECC(run): TurnRecord_SetupGfx
+0BBD80	0BBE08	src/ending_details_080BBD80.o(.text)	ending_details_080BBD80(run): EndingBattleInitText
