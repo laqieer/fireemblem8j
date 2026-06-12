@@ -3014,3 +3014,53 @@ share skip the perm2 probe because they reference a TU-private data table (stati
 bind the pointee alongside (D45/D51/D62 class) and they carve. (b) **region-same harvest remainder** —
 `nofuncmap_region_same.tsv` still has most of its ~1.9k rows un-graduated (harv1 only cleared cpextra). (c) genuine
 **FAR codegen** (~103 n–z + a share of a–m's 758) + **LEN/NOADDR** → decomp-permuter / IDA-Ghidra hand work.
+
+## D66 — harvNZ: perfrag_carve swept the n–z REGION-SAME worklist; +439 matching-C across 67 TUs; the bulk per-frag direct carve is the dominant region-same lever (2026-06-12)
+
+**Context.** Branch `feat/harvNZ` (sibling: harvAM owns a–m region-same; cfBind owns CF:agbcc). Scope: the
+`layout/nofuncmap_region_same.tsv` (D54 reloc-aware classifier) worklist's region-same functions whose US TU name
+starts **n–z** (504 reloc-unique + 66 reloc-ambiguous rows across ~70 TUs). Tool: `scripts/perfrag_carve.py` ONLY
+(the D62 lever — per-function single-fn run over each gbadisasm `asm/sub_*.o` fragment; `dedup_globals`→`func_only`
+fallback; `port_run` verify-or-reverts vs `make compare`; never `git add`). `make compare` the sole oracle.
+
+**RESULT — +439 matching-C across 67 TUs / 410 new src/<tu>_<addr>.c (some carves cover 2 fns). 67 commits, all
+gates GREEN every batch:** `rm -f src/*.s` + `make check`(check_layout) + `make compare` + periodic cold `make
+clean && make compare` + `check_selfcontained.py == 0 incbins`; named from US; verify-or-revert; staged EXPLICITLY
+(NO `git add -A`, only the `tools` worktree symlink left untracked); baserom/checksum/CI untouched. Pushed
+`feat/harvNZ` (HEAD == origin). Top TUs: opsubtitle 17, prep_itemscreen 17, sio_battlemap 16, prep_unitselect 14,
+prep_atmenu 13, worldmap_main 12, prep_itemlist 12, popup/prepscreen/sio_core/sio_points/sio_teamlist/soundroom/
+worldmap_path/phasechangefx/uisupport/uichapterstatus/prep_itemsupply 9–11. The sio_* + worldmap_* + ui* families
+swept at ~100% (region-same code shared cleanly); prep_menuproc was the lowest-yield (+10 of 24 plannable — the
+rest are region-DIFFERENT prep-menu draw/setup workers).
+
+**KEY OPERATIONAL FINDINGS (the session's payoff for future harvest agents).**
+  1. **NEVER run perfrag_carve.py for a multi-fn TU under a foreground tool timeout.** Each per-fn carve runs a
+     full `make compare` (~60–90s); a 600s tool window kills the script MID-carve, leaving ONE half-applied carve
+     (asm deleted + src+manifest written but its internal `make compare` never ran/reverted). That half-state
+     byte-mismatches the cold build. **Run every carve DETACHED (`nohup ... &`) and poll** via a wait-loop
+     (`until ! kill -0 $PID; do sleep N; done`); the detached script's own verify-or-revert keeps the tree green.
+     Recovery from a mid-carve kill: `cmp baserom.gba fireemblem8.gba` → the diff offset maps to the interrupted
+     fn's JP addr; `git checkout -- asm/sub_<addr>.s layout/carved_rom.d/gbadisasm_sub_<addr>.tsv`, `rm` its
+     untracked src + drop the row from the perfrag manifests (incl. the stale baseline_syms.d row for the NEXT fn
+     it bound). Cold rebuild → OK.
+  2. **perfrag carves can produce manifests in FIVE layout subdirs, not just two.** A carve with a region-diff
+     `.rodata` owner (e.g. sio_battlemap LinkArenaBattleMap_StartUnitMoveOut 0804A1CC) emits
+     `layout/{carved_rom.d,baseline_syms.d,baseline_syms_drop.d,carved_ram.d,patches.d}/perfrag_<tu>.tsv`. ALL are
+     git-tracked + read by gen_layout/check_layout. A commit that stages only carved_rom.d+baseline_syms.d leaves
+     the carved_ram/patches/drop manifests UNTRACKED → local cold build passes (files present) but CI's fresh
+     checkout regenerates layout WITHOUT them and goes RED (the D65 hazard #2/#3 on the region-same side). **Stage
+     with `find layout -name "perfrag_<tu>.tsv" | xargs git add` (every subdir), not a hardcoded two-path add.**
+     `make check`'s "layout fragment(s) exist locally but NOT git-tracked" line is the canary — it must be clean
+     AFTER staging+commit (it's expected-noisy only before).
+  3. **The "plannable" count re-inflates after reverts.** perfrag_carve's `--list` re-proposes any fn not yet in
+     src, so a reverted region-diff fn re-appears as `[plan]` forever. A final re-survey showing N plannable for an
+     already-swept TU = N confirmed reverts (cross-check the `/tmp/harv_<tu>.log` `reverted` lines), NOT N misses.
+
+**FRONTIER after harvNZ (the n–z region-same fast path is now exhausted).** The residue per TU (prep_menuproc 14,
+worldmap_player_interface 2, proc 2, prepscreen 2, prep_itemscreen 2, popup 2, scene/uiconfig/trapfx/sio_* 1 each)
+is all verify-or-reverted region-DIFFERENT codegen (reg-alloc/scheduling/literal-pool/.rodata differs in JP) —
+decomp-permuter / IDA-Ghidra hand work, same class as D63's FAR/LEN and D62's fontgrp/UnitListScreenSprites_Main.
+The next region-same lever is the a–m remainder (harvAM, in-flight) + CF:agbcc data-binding (cfBind). Toolkit
+(scratch, NOT committed): `/tmp/harvnz_drive.sh` (carve+cold-gate+stage-all-subdirs+commit+push per TU) and
+`/tmp/harvnz_batch.sh` (sequential multi-TU). Reusable for any region-same worklist sweep. (D-number from the free
+sequence after D65; renumber at integration if a concurrent sibling claimed D66.)
