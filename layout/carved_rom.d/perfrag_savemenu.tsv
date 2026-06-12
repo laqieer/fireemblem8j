@@ -1,0 +1,4 @@
+0AE100	0AE3D4	src/savemenu_080AE100.o(.text)	savemenu_080AE100(run): SaveMenuWaitSlotBoxScrolling
+0AE3D4	0AE41C	src/savemenu_080AE3D4.o(.text)	savemenu_080AE3D4(run): SaveMenuScrollSlot
+0AF248	0AF270	src/savemenu_080AF248.o(.text)	savemenu_080AF248(run): GetWMNodeNameForSaveMenu
+0AF28C	0AF2CC	src/savemenu_080AF28C.o(.text)	savemenu_080AF28C(run): SaveMenuUpdateCursorPalette
