@@ -351,3 +351,5 @@ PutClassSpriteForSecretShop
 StartPrepErrorHelpbox
 StartUiCursorHand
 UnitGetIndexInPrepList
+InitRN
+SetWeather
