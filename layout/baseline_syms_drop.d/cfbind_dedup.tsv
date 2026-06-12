@@ -357,3 +357,7 @@ EraseSaveRankData
 IsExtraMapAvailable
 SioClearOutgoingQueue
 Sio_CheckLinkAlive
+AddPartyGoldAmount
+DrawUiFrame
+GetConvoyItemCount
+GetItemMaxUses
