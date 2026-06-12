@@ -122,3 +122,8 @@ Img_CrimsonEyeSprites
 GetWMCursorScreenQuadrant
 PutWmMinimapSprites
 gPal_GMapPI_ShopIcons
+GGM_IsCharacterKnown
+GetSupportScreenClassIdAt
+GetSupportTalkSong_
+SetSysHandCursorXPos
+gSprite_SupportScreenSuccessBox
