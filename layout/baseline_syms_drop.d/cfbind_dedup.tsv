@@ -388,3 +388,4 @@ NewPopup2_PlanB
 GetEnemyStartCursorPosition
 GetPlayerStartCursorPosition
 gParticlesFx_1
+GenerateUnitMovementMapOnRange
