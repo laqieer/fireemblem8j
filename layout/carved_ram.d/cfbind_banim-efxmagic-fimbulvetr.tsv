@@ -1,0 +1,2 @@
+080E1EE2	rom	src/StartSubSpell_efxFimbulvetrBGTR.o(.rodata)	StartSubSpell_efxFimbulvetrBGTR .rodata region-diff (incbin)
+080E1F60	rom	src/StartSubSpell_efxFimbulvetrBG.o(.rodata)	StartSubSpell_efxFimbulvetrBG .rodata region-diff (incbin)
