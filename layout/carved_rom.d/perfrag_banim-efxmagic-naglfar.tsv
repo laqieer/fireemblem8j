@@ -1,0 +1,5 @@
+069EE8	06A0F4	src/banim-efxmagic-naglfar_08069EE8.o(.text)	banim-efxmagic-naglfar_08069EE8(run): efxNaglfar_Loop_Main
+06A14C	06A1C8	src/banim-efxmagic-naglfar_0806A14C.o(.text)	banim-efxmagic-naglfar_0806A14C(run): efxNaglfarBG_Loop
+06A218	06A294	src/banim-efxmagic-naglfar_0806A218.o(.text)	banim-efxmagic-naglfar_0806A218(run): efxNaglfarBG2_Loop
+06A2E8	06A358	src/banim-efxmagic-naglfar_0806A2E8.o(.text)	banim-efxmagic-naglfar_0806A2E8(run): efxNaglfarBG3_Loop
+06A670	06A93C	src/banim-efxmagic-naglfar_0806A670.o(.text)	banim-efxmagic-naglfar_0806A670(run): efxNaglfarOBJRockGyre_Loop
