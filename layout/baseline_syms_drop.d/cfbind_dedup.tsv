@@ -353,3 +353,7 @@ StartUiCursorHand
 UnitGetIndexInPrepList
 InitRN
 SetWeather
+EraseSaveRankData
+IsExtraMapAvailable
+SioClearOutgoingQueue
+Sio_CheckLinkAlive
