@@ -394,3 +394,4 @@ GetPickTrapType
 GetTrapPointer
 GetTypedTrapAt
 RemoveTrap
+MakeCircleWindowBounds
