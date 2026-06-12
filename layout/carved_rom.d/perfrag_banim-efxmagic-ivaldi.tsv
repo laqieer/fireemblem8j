@@ -1,0 +1,5 @@
+067BD0	067D6C	src/banim-efxmagic-ivaldi_08067BD0.o(.text)	banim-efxmagic-ivaldi_08067BD0(run): efxIvaldi_Loop_Main
+06812C	06814C	src/banim-efxmagic-ivaldi_0806812C.o(.text)	banim-efxmagic-ivaldi_0806812C(run): PrepareSomeIvaldiParticleGraphics
+06830C	068408	src/banim-efxmagic-ivaldi_0806830C.o(.text)	banim-efxmagic-ivaldi_0806830C(run): efxIvaldiOBJSideWash_Loop
+06845C	068600	src/banim-efxmagic-ivaldi_0806845C.o(.text)	banim-efxmagic-ivaldi_0806845C(run): efxIvaldiOBJUprise_Loop
+0687DC	068818	src/banim-efxmagic-ivaldi_080687DC.o(.text)	banim-efxmagic-ivaldi_080687DC(run): efxIvaldiOBJ2_Loop
