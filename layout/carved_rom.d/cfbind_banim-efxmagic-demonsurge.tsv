@@ -1,0 +1,9 @@
+06E788	06E79C	src/StartEfxmagicDemonsurgeFlashWhite.o(.text)	StartEfxmagicDemonsurgeFlashWhite(run): StartEfxmagicDemonsurgeFlashWhite
+06E92C	06E940	src/StartEfxmagicDemonsurgeFlashBlack.o(.text)	StartEfxmagicDemonsurgeFlashBlack(run): StartEfxmagicDemonsurgeFlashBlack
+06DF00	06DF14	src/StartEfxmagicDemonsurgeFadeBlack.o(.text)	StartEfxmagicDemonsurgeFadeBlack(run): StartEfxmagicDemonsurgeFadeBlack
+06E478	06E4DC	src/EfxmagicDemonsurgeFlash_Loop_White.o(.text)	EfxmagicDemonsurgeFlash_Loop_White(run): EfxmagicDemonsurgeFlash_Loop_White
+06DACC	06DB54	src/StartSubSpell_efxGorgonBGDirt.o(.text)	StartSubSpell_efxGorgonBGDirt(run): StartSubSpell_efxGorgonBGDirt
+06DBC0	06DC5C	src/StartSubSpell_efxGorgonBGTwister.o(.text)	StartSubSpell_efxGorgonBGTwister(run): StartSubSpell_efxGorgonBGTwister
+06D9A4	06DA60	src/StartSubSpell_efxGorgon_0.o(.text)	StartSubSpell_efxGorgon_0(run): StartSubSpell_efxGorgon_0
+06DFBC	06E0B8	src/StartSubSpell_efxGorgonOBJTwisterPiece.o(.text)	StartSubSpell_efxGorgonOBJTwisterPiece(run): StartSubSpell_efxGorgonOBJTwisterPiece
+06E210	06E374	src/StartSubSpell_efxGorgonOBJTwister.o(.text)	StartSubSpell_efxGorgonOBJTwister(run): StartSubSpell_efxGorgonOBJTwister
