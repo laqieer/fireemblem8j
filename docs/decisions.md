@@ -3244,3 +3244,48 @@ between them via the carved_rom.d fragment; removed the now-superseded baseline-
 a frontier "gap" block is not a wall — splitting its incbin around a known typed sub-table is byte-safe and the
 cheap way to graduate region-same tables that happened to be bulk-carved; always grep `baseline_syms.d/` for a
 matching ABS stub and drop it when you add the real definition.
+## D73 — DATA-maps-2: gChapterDataTable[79] carved as typed C (region-different chapter map data → real struct array) (2026-06-12)
+
+**Context.** DATA-maps task split: dataMaps1 owns "chapter map data ch 1-16",
+dataMaps2 (this agent) owns "ch 17-end + skirmish/tower/ruins". Investigation
+showed the per-chapter MAP GRAPHICS (Ch17Map…, TowerOfValni*, LagdouRuins*) are
+ALREADY carved (`dat_const_data_chapter_maps_p0..pN`, region-same per-sym shifted).
+The only remaining typed-C target is `gChapterDataTable` (JP 0x08904E1C, 11692 B =
+79 × `struct ROMChapterData` 0x94 each), still raw incbin (`dat_gChapterDataTable_ref`).
+
+**Fork.** `gChapterDataTable` is ONE contiguous C array, one symbol, one object —
+it cannot be physically split into a "1-16 file" and a "17+ file". The 1-16/17+
+split is logical only.
+
+**Decision (Copilot-reviewed, validated).** dataMaps2 owns the ENTIRE
+`gChapterDataTable[79]` typed-C TU as the single physical implementation unit;
+the 1-16/17+ split is treated as logical/verification-only. Splitting ownership
+physically would create coordination risk with zero technical benefit (one global
+symbol, one contiguous .data block). Copilot CLI concurred.
+
+**Implementation.** Generated `src/data/chapter_settings.h` (the 79-entry typed
+array) by transcribing JP ROM bytes at 0x08904E1C field-by-field (region-different
+values: JP text/event/title IDs; region-SAME struct layout). Included it from the
+existing `src/chapterdata.c` (US pattern). agbcc emits two output sections:
+- `.data` = `gChapterDataTable` → placed at JP 0x904E1C (11692 B, byte-identical)
+- `.rodata` = the `internalName` string pool ("L00".."I10x", 257 B) → placed at
+  JP 0x1B2C80 (region-same bytes, JP-specific placement). Verified the compiled
+  .data (non-pointer fields) and .rodata both byte-match the ROM before wiring.
+
+The string pool at 0x1B2C80 sat inside an existing generic incbin blob
+(`frontier_df4_misc_lo.gap17`, 0x1B1878-0x1B2D84). Split gap17 via `.incbin file,
+skip,count` into gap17 (0x1B1878-0x1B2C80, 5128 B) + gap17b (0x1B2D81-0x1B2D84,
+3 B align tail), freeing the hole for chapterdata's `.rodata`. Removed the
+superseded `dat_gChapterDataTable_ref` row + asm + `data/residual/*.bin`; the
+baseline `.set gChapterDataTable` was already dropped (baseline_syms_drop.d).
+
+**Verification.** `make compare` OK; `make clean && make compare` OK (durable);
+`make check` layout-consistency OK; `check_selfcontained.py` = 100% (0 incbins);
+ROM = 16,777,216 B. EXTRACTED-DATA: gChapterDataTable now from real typed source
+(~11.7 KB region-different data converted from incbin → struct C).
+
+**Note for dataMaps1.** Do NOT also carve gChapterDataTable / chapter_settings.h —
+it is fully owned here. Per-chapter map graphics are already incbin-carved
+(const_data_chapter_maps_p*). Remaining maps-frontier work is the
+`gChapterDataAssetTable` (JP 0x907BC8, 944 B, still incbin) and any region-different
+map-change/obj-anim/pal-anim tables not yet typed.
