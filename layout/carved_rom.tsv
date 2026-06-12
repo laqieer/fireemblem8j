@@ -1431,9 +1431,7 @@ A97C2C	A980D0	asm/dat_worldmap_gmapunit_p1601.o(.rodata.dat_worldmap_gmapunit_p1
 A980F0	A99FA8	asm/dat_worldmap_gmapunit_p1602.o(.rodata.dat_worldmap_gmapunit_p1602)	dat_worldmap_gmapunit_p1602 region-same per-sym shifted (7KB)
 A9A624	A9A8D4	asm/dat_worldmap_gmapunit_p1605.o(.rodata.dat_worldmap_gmapunit_p1605)	dat_worldmap_gmapunit_p1605 region-same per-sym shifted (0KB)
 A9AA9C	A9AC28	asm/dat_worldmap_gmapunit_p1606.o(.rodata.dat_worldmap_gmapunit_p1606)	dat_worldmap_gmapunit_p1606 region-same per-sym shifted (0KB)
-A9B604	A9B688	asm/dat_worldmap_gmapunit_p1610.o(.rodata.dat_worldmap_gmapunit_p1610)	dat_worldmap_gmapunit_p1610 region-same per-sym shifted (0KB)
-A9BA88	A9BD54	asm/dat_worldmap_gmapunit_p1613.o(.rodata.dat_worldmap_gmapunit_p1613)	dat_worldmap_gmapunit_p1613 region-same per-sym shifted (0KB)
-A9BE84	A9C020	asm/dat_TileAnimations5_ref.o(.rodata.dat_TileAnimations5_ref)	TileAnimations5 region-diff (funcmap code-ref, 0KB)
+A9B024	A9CA20	src/data/map/data_map_change.o(.rodata)	data_map_change typed C: per-map MapChange/TileChange tables (chapters 1-16 + all maps); whole region one TU so in-table tile-array pointers resolve to contiguous JP addrs at link. Region-same as fe8u except pointer relocs + one tile id (Ch14EirikaMapChanges_change_1[1] 0x0CD0->0x0C40). Replaces misattributed dat_worldmap_gmapunit_p1610/p1613 (= Ch14Eirika/Ch11Eph _change_N) + dat_TileAnimations5_ref (= UnusedMapChanges5).
 A9CA20	A9CA24	src/bmsave-lib.o(.data)	bmsave-lib .data
 A9CA60	A9CA64	src/bmsave-xmap.o(.data)	bmsave-xmap .data
 A9CB04	A9CF7C	asm/dat_worldmap_gmapunit_p1621.o(.rodata.dat_worldmap_gmapunit_p1621)	dat_worldmap_gmapunit_p1621 region-same per-sym shifted (1KB)

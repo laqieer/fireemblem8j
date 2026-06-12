@@ -151,16 +151,13 @@ frontier_df4_menu_023_A99FA8:
 	.incbin "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin"
 
 	.section .data.frontier_df4_menu.gap24, "a", %progbits
-@ df4_menu region-different data, JP 0x08a9ac28..0x08a9b08c (1124 B); long-tail data gap (no .text in window), byte-perfect incbin.
+@ df4_menu region-different data, JP 0x08a9ac28..0x08a9b024 (1020 B); TRUNCATED at A9B024 = data_map_change start (D70); long-tail data gap (no .text in window), byte-perfect incbin.
 	.global frontier_df4_menu_024_A9AC28
 frontier_df4_menu_024_A9AC28:
-	.incbin "graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin"
+	.incbin "graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin", 0, 0x3FC
 
-	.section .data.frontier_df4_menu.gap25, "a", %progbits
-@ df4_menu region-different data, JP 0x08a9c020..0x08a9ca20 (2560 B); long-tail data gap (no .text in window), byte-perfect incbin.
-	.global frontier_df4_menu_025_A9C020
-frontier_df4_menu_025_A9C020:
-	.incbin "graphics/frontier_df4_menu/frontier_df4_menu_025_A9C020.bin"
+@ gap25 (JP 0x08a9c020..0x08a9ca20) removed: those bytes are now owned by
+@ src/data/map/data_map_change.o(.rodata) (D70). See layout/carved_rom.tsv.
 
 	.section .data.frontier_df4_menu.gap26, "a", %progbits
 @ df4_menu region-different data, JP 0x08a9cf7c..0x08a9d448 (1228 B); long-tail data gap (no .text in window), byte-perfect incbin.

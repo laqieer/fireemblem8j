@@ -81,7 +81,7 @@ ELF      := $(ROM:.gba=.elf)
 MAP      := $(ROM:.gba=.map)
 LDSCRIPT := ldscript.txt
 
-CFILES      := $(wildcard src/*.c) $(wildcard src/data/*.c)
+CFILES      := $(wildcard src/*.c) $(wildcard src/data/*.c) $(wildcard src/data/map/*.c)
 # asm/baserom.s + asm/jp_syms.s are GENERATED from the layout/ manifests by
 # scripts/gen_layout.py (gitignored, regenerated at build time). Manage them
 # explicitly rather than via the wildcard, which would miss them on a fresh
