@@ -383,6 +383,91 @@ def assemble_block(messages_syms, codes, table):
     return bytes(blob), msg_vmas, tree_off, table_off
 
 
+# --- C emitter --------------------------------------------------------------
+def _assemble_comp(messages_syms, codes):
+    """Return (comp, share) for the message bitstreams.
+
+    comp[i]  = compressed bytes for message i (with terminator) -- the bytes the
+               message OWNS as a standalone array, or None if it is a pure suffix
+               of message i-1 (shared -- no own array).
+    share[i] = None for an owner, else (owner_index, byte_offset) meaning message
+               i's pointer is &CompressedText_MSG_<owner>[byte_offset].
+
+    Mirrors assemble_block()'s suffix-share rule exactly (the JP ROM does one such
+    share: msg 0x63A is the trailing 13 bytes of msg 0x639)."""
+    raw = [bytes(compress(m, codes)) for m in messages_syms]
+    comp = [None] * len(raw)
+    share = [None] * len(raw)
+    prev_owner = None
+    prev_bytes = None
+    for i, c in enumerate(raw):
+        if (prev_bytes is not None and len(c) < len(prev_bytes)
+                and prev_bytes.endswith(c)):
+            share[i] = (prev_owner, len(prev_bytes) - len(c))
+        else:
+            comp[i] = c
+            prev_owner = i
+            prev_bytes = c
+    return comp, share
+
+
+def emit_c(messages_syms, codes, table, out_path):
+    """Emit src/msg_data.c -- the JP message block as compiled C source.
+
+    Layout (matches the US src/msg_data.c and the JP ROM byte-for-byte):
+      * static const u8 CompressedText_MSG_XXX[] = { ... };   (message order)
+      * const u32 gMsgHuffmanTable[]            = { ... };
+      * const u32 * const gMsgHuffmanTableRoot  = gMsgHuffmanTable + ROOT_NODE;
+      * const u8 * const gMsgTable[]            = { CompressedText_MSG_XXX, ... };
+
+    agbcc emits the static arrays back-to-back with no inter-array padding, then
+    a single .align 2 before the u32 tables, reproducing the contiguous Huffman
+    bitstream blob + the one pad byte the ROM uses. The lone suffix-share is
+    written as `CompressedText_MSG_<owner> + <off>` in gMsgTable."""
+    comp, share = _assemble_comp(messages_syms, codes)
+    n = len(messages_syms)
+    L = []
+    L.append("#include \"global.h\"")
+    L.append("")
+    L.append("/* FE8 JP (Seima no Kouseki) in-game message text + Huffman tree.")
+    L.append(" * GENERATED from texts/jp_texts.txt by scripts/texttools/msg_jp.py build-c;")
+    L.append(" * re-Huffman-encodes byte-identically to ROM 0x080ED7F4..0x081504B8.")
+    L.append(" * DO NOT EDIT BY HAND -- edit texts/jp_texts.txt and regenerate. */")
+    L.append("")
+    # 1. compressed-text arrays (owners only)
+    for i in range(n):
+        if comp[i] is None:
+            continue
+        body = ", ".join("0x%02X" % b for b in comp[i])
+        L.append("static const u8 CompressedText_MSG_%03X[] = {%s, };" % (i, body))
+    L.append("")
+    # 2. Huffman node table
+    L.append("const u32 gMsgHuffmanTable[] = {")
+    for i in range(0, len(table), 8):
+        chunk = table[i:i + 8]
+        L.append("    " + ", ".join("0x%08X" % w for w in chunk) + ",")
+    L.append("};")
+    L.append("")
+    # 3. root pointer (node index == ROOT_NODE)
+    L.append("const u32 * const gMsgHuffmanTableRoot = gMsgHuffmanTable + 0x%X;" % ROOT_NODE)
+    L.append("")
+    # 4. message pointer table
+    L.append("const u8 * const gMsgTable[] = {")
+    cells = []
+    for i in range(n):
+        if share[i] is None:
+            cells.append("CompressedText_MSG_%03X" % i)
+        else:
+            owner, off = share[i]
+            cells.append("CompressedText_MSG_%03X + %d" % (owner, off))
+    for i in range(0, n, 8):
+        L.append("    " + ", ".join(cells[i:i + 8]) + ",")
+    L.append("};")
+    L.append("")
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(L))
+
+
 # --- asm emitter ------------------------------------------------------------
 def emit_asm(block_bytes, out_path):
     """Emit the carved msg_data .s: the whole block as .byte data, with the
@@ -528,6 +613,20 @@ def cmd_build(texts_path, defs_path, tiebreaks_path, out_asm):
     return len(messages), len(block)
 
 
+def cmd_build_c(texts_path, defs_path, tiebreaks_path, out_c):
+    """texts -> src/msg_data.c (compiled-C source for the JP message block)."""
+    control = load_control_chars(defs_path)
+    overrides = load_tiebreaks(tiebreaks_path)
+    messages = _process_texts(texts_path, control)
+    all_syms = []
+    for m in messages:
+        all_syms.extend(m)
+    table, root = build_huffman(all_syms, overrides)
+    codes = build_code_table(root)
+    emit_c(messages, codes, table, out_c)
+    return len(messages)
+
+
 def cmd_verify(rom_path, texts_path, defs_path, tiebreaks_path):
     """Build from texts and diff the block against the ROM. Returns True if exact."""
     control = load_control_chars(defs_path)
@@ -549,6 +648,7 @@ def main(argv):
     texts = os.path.join(TEXT_DIR, "jp_texts.txt")
     tiebreaks = os.path.join(TEXT_DIR, "jp_huffman_tiebreaks.txt")
     out_asm = os.path.join(REPO_ROOT, "asm", "msg_data.s")
+    out_c = os.path.join(REPO_ROOT, "src", "msg_data.c")
     rom = os.path.join(REPO_ROOT, ROM_DEFAULT)
     cmd = argv[0] if argv else "build"
 
@@ -559,6 +659,9 @@ def main(argv):
     elif cmd == "build":
         n, sz = cmd_build(texts, defs, tiebreaks, out_asm)
         print("built %d messages (%d bytes) -> %s" % (n, sz, out_asm))
+    elif cmd == "build-c":
+        n = cmd_build_c(texts, defs, tiebreaks, out_c)
+        print("built %d messages -> %s" % (n, out_c))
     elif cmd == "verify":
         ok, a, b = cmd_verify(rom, texts, defs, tiebreaks)
         print("byte-identical: %s (rebuilt %d, rom %d)" % (ok, a, b))

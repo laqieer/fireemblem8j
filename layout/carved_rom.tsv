@@ -335,7 +335,7 @@
 0E6BA0	0E7544	asm/dat_const_data_E162A_p0.o(.rodata.dat_const_data_E162A_p0)	dat_const_data_E162A_p0 region-same per-sym shifted (2KB)
 0E8934	0E8F58	asm/dat_const_data_E162A_p1.o(.rodata.dat_const_data_E162A_p1)	dat_const_data_E162A_p1 region-same per-sym shifted (1KB)
 0EAC84	0ED67C	asm/dat_const_data_E162A_p2.o(.rodata.dat_const_data_E162A_p2)	dat_const_data_E162A_p2 region-same per-sym shifted (10KB)
-0ED7F4	1504B8	asm/msg_data.o(.rodata.msg_data)	msg_data JP message text+gMsgTable (per-subsystem boundary)
+0ED7F4	1504B8	src/msg_data.o(.rodata)	msg_data JP message text+gMsgTable: 3339 CompressedText_MSG arrays + gMsgHuffmanTable + gMsgTable (compiled C, byte-exact)
 1504B8	159850	asm/dat_const_data_chapter_maps_p0.o(.rodata.dat_const_data_chapter_maps_p0)	dat_const_data_chapter_maps_p0 region-same per-sym shifted (36KB)
 1608A4	17B398	asm/dat_const_data_chapter_maps_p1.o(.rodata.dat_const_data_chapter_maps_p1)	dat_const_data_chapter_maps_p1 region-same per-sym shifted (106KB)
 190010	19D42C	asm/dat_const_data_chapter_maps_p2.o(.rodata.dat_const_data_chapter_maps_p2)	dat_const_data_chapter_maps_p2 region-same per-sym shifted (53KB)

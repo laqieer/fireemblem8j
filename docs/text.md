@@ -11,17 +11,33 @@ texts/jp_texts.txt          (bracket-annotated CP932 strings, 3339 messages)
 texts/jp_textdefs.txt       (control-token name -> u16 value map)
 texts/jp_huffman_tiebreaks.txt (1 documented tie-break override)
         |
-        |  scripts/texttools/msg_jp.py build   (no baserom.gba)
+        |  scripts/texttools/msg_jp.py build-c   (no baserom.gba)
         v
-asm/msg_data.s              (.byte data: bitstreams + Huffman tree + gMsgTable)
-        |  as + ld
+src/msg_data.c              (compiled C: 3339 CompressedText_MSG arrays +
+                             gMsgHuffmanTable + gMsgHuffmanTableRoot + gMsgTable)
+        |  agbcc + as + ld
         v
 ROM block 0x080ED7F4 .. 0x081504B8   (byte-identical to original)
 ```
 
-Generated `asm/msg_data.s` is gitignored and rebuilt by the Makefile from the
-`texts/jp_*.txt` source whenever those change. `make text-verify` rebuilds the
-block from text and asserts byte-identity against `baserom.gba`.
+`src/msg_data.c` has the **same shape as the US `src/msg_data.c`** (D70): the
+message block is emitted as genuine compiled-C data — `static const u8`
+bitstream arrays in message order, the `const u32 gMsgHuffmanTable[]`, the
+`gMsgHuffmanTableRoot` pointer, and the `const u8 * const gMsgTable[]` pointer
+table. agbcc lays the static arrays back-to-back with no inter-array padding,
+then a single `.align 2` before the `u32` tables, so the compiled `.rodata`
+reproduces the contiguous bitstream blob + the lone pad byte; the `gMsgTable`
+and root pointers resolve to the ROM addresses at link time. This makes the
+~404 KB block count as genuinely *extracted* data (it comes from `src/*.o`),
+not an opaque `.byte` asm blob.
+
+`src/msg_data.c` is **committed** (like the US) so the `src/*.c` build wildcard
+sees it on a fresh checkout with no `baserom.gba` dependency; the Makefile
+regenerates it from `texts/jp_*.txt` whenever the text source changes (`msg_jp.py
+build-c`). `make text-verify` rebuilds the block from text and asserts
+byte-identity against `baserom.gba`. The legacy `msg_jp.py build` still emits the
+descriptive `asm/msg_data.s` form for reference/debugging, but the build no
+longer uses it.
 
 To re-dump from a ROM (e.g. after format changes): `python3
 scripts/texttools/msg_jp.py dump`.
