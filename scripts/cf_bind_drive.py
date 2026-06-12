@@ -89,6 +89,29 @@ def find_tu(name):
     return None
 
 
+def us_size(name):
+    for ln in open(RD_TSV):
+        if ln.startswith("#"):
+            continue
+        p = ln.rstrip("\n").split("\t")
+        if len(p) >= 4 and p[2] == name:
+            try:
+                return int(p[1])
+            except ValueError:
+                return 0
+    return 0
+
+
+def cover_extent(name, s, e, funclib, bounds):
+    """The JP byte extent port_run will actually carve. The boundary table can put a
+    SPURIOUS symbol inside a function (truncating jp_range), but port_run carves to
+    the COMPILED size -- so coverage/overlap reasoning must span the REAL function.
+    Use max(boundary-range, US size) clamped to the next REAL boundary >= s+us_size."""
+    sz = us_size(name)
+    end = max(e, s + sz)
+    return s, end
+
+
 def all_cf_rows(funclib, bounds):
     """Every region-different worklist row that maps to a JP addr (perm2-placeable)."""
     rows = []
@@ -104,6 +127,30 @@ def all_cf_rows(funclib, bounds):
             continue
         rows.append((name, tu, int(p[1])))
     return rows
+
+
+def real_carve_overlap(s, e):
+    """True if [s,e) overlaps a NON-gbadisasm carved_rom row (a sibling src/* object
+    or exact_/masked_/stranded_ carve). Such a region is already owned -- carving the
+    function there would collide (a spurious funclib JP address or a region-different
+    LEN). Skip rather than destructively overlap."""
+    for path in ["layout/carved_rom.tsv"] + glob.glob("layout/carved_rom.d/*.tsv"):
+        if not os.path.exists(path):
+            continue
+        if os.path.basename(path).startswith("gbadisasm_"):
+            continue
+        # this task's own cfbind fragment is fine to coexist with (different ranges)
+        for ln in open(path):
+            if ln.startswith("#") or not ln.strip():
+                continue
+            p = ln.split("\t")
+            try:
+                rs, re_ = int(p[0], 16), int(p[1], 16)
+            except ValueError:
+                continue
+            if rs < e and re_ > s:
+                return p[2] if len(p) > 2 else "?"
+    return None
 
 
 def gbadisasm_cover(s, e):
@@ -151,9 +198,14 @@ def carve_one(name, funclib, bounds):
     end = f"{0x08000000 + e:08X}"
     frag = f"cfbind_{tu}"
 
-    # asm->C swap: stash gbadisasm fragments overlapping this range, remove them
-    # so port_run can place the C object; restore exactly on revert.
-    cov = gbadisasm_cover(s, e)
+    cs, ce = cover_extent(name, s, e, funclib, bounds)
+    occ = real_carve_overlap(cs, ce)
+    if occ:
+        return "OCCUPIED"
+    # asm->C swap: stash gbadisasm fragments overlapping the REAL function extent
+    # (port_run carves to the compiled size, which can exceed a spurious boundary),
+    # remove them so port_run can place the C object; restore exactly on revert.
+    cov = gbadisasm_cover(cs, ce)
     for path, _c, asm_path, _ac in cov:
         os.remove(path)
         if asm_path and os.path.exists(asm_path):
@@ -269,7 +321,10 @@ def run_batch(names, funclib, bounds):
             if s is None:
                 skipped.append((name, "NOADDR")); continue
             start, end = f"{0x08000000+s:08X}", f"{0x08000000+e:08X}"
-            cov = gbadisasm_cover(s, e)
+            cs, ce = cover_extent(name, s, e, funclib, bounds)
+            if real_carve_overlap(cs, ce):
+                skipped.append((name, "OCCUPIED")); continue
+            cov = gbadisasm_cover(cs, ce)
             for path, _c, asm_path, _ac in cov:
                 os.remove(path)
                 if asm_path and os.path.exists(asm_path):
@@ -277,7 +332,8 @@ def run_batch(names, funclib, bounds):
             ok = port_run.port(name, runs=[(start, end, [name])], src_tu=tu,
                                frag=f"cfbind_{tu}", func_only=True)
             if ok and os.path.exists(f"src/{name}.c"):
-                staged.append((name, s, e, cov))
+                # record the REAL carved extent for overlap reasoning / range-diff
+                staged.append((name, s, max(e, ce), cov))
                 print(f"[stage ] {name}  {start}..{end}")
             else:
                 for path, content, asm_path, asm_content in cov:
@@ -339,6 +395,20 @@ def run_batch(names, funclib, bounds):
             print(f"OK: +{len(kept)} graduated (attempt {attempt})")
             print("OBJECTS: " + " ".join(t[0] for t in kept))
             return 0
+        # multiple-definition of a BOUND symbol an existing object provides: drop
+        # the redundant baseline alias (port_run's own dedup), retry — don't revert
+        # the carve. Only if the dup name isn't itself a staged carve.
+        dup_binds = set()
+        for m in re.finditer(r"multiple definition of [`'](\w+)'", clog):
+            sym = m.group(1)
+            if not any(t[0] == sym for t in kept) and sym in _all_baseline_binds():
+                dup_binds.add(sym)
+        if dup_binds:
+            os.makedirs("layout/baseline_syms_drop.d", exist_ok=True)
+            with open("layout/baseline_syms_drop.d/cfbind_dedup.tsv", "a") as f:
+                f.write("".join(s + "\n" for s in sorted(dup_binds)))
+            print(f"  attempt {attempt}: drop {len(dup_binds)} dup baseline binds: {sorted(dup_binds)}")
+            continue
         bad = set()
         for m in re.finditer(r"src/(\w+)\.c:\d+.*undefined reference", clog):
             bad.add(m.group(1))
@@ -362,6 +432,18 @@ def run_batch(names, funclib, bounds):
         if not kept:
             print("all reverted"); return 0
     print("exhausted retries"); return 1
+
+
+def _all_baseline_binds():
+    names = set()
+    for p in (["layout/baseline_syms.tsv"]
+              + glob.glob("layout/baseline_syms.d/*.tsv")):
+        if not os.path.exists(p):
+            continue
+        for l in open(p):
+            if l.strip() and not l.startswith("#"):
+                names.add(l.split("\t")[0])
+    return names
 
 
 def _drop_carve_rows(name, s, e):
