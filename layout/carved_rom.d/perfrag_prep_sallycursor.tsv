@@ -1,0 +1,7 @@
+033518	033530	src/prep_sallycursor_08033518.o(.text)	prep_sallycursor_08033518(run): PrepScreenProc_ApplyBrownBoxPalette
+033700	033780	src/prep_sallycursor_08033700.o(.text)	prep_sallycursor_08033700(run): PrepCameraPan_Loop
+033780	0337D0	src/prep_sallycursor_08033780.o(.text)	prep_sallycursor_08033780(run): InitPrepScreenUnitsAndCamera
+0337D0	033850	src/prep_sallycursor_080337D0.o(.text)	prep_sallycursor_080337D0(run): InitPrepScreenCursorPosition
+033850	033888	src/prep_sallycursor_08033850.o(.text)	prep_sallycursor_08033850(run): PrepScreenProc_SetupMapIdle
+033888	033B08	src/prep_sallycursor_08033888.o(.text)	prep_sallycursor_08033888(run): PrepScreenProc_MapIdle
+033B08	033B20	src/prep_sallycursor_08033B08.o(.text)	prep_sallycursor_08033B08(run): PrepMapMenu_ReturnToAtMenu
