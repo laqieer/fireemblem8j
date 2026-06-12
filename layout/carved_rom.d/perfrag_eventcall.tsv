@@ -1,0 +1,5 @@
+087654	08767C	src/eventcall_08087654.o(.text)	eventcall_08087654(run): GameOver_FadeOutCurrentBgm
+08767C	08769C	src/eventcall_0808767C.o(.text)	eventcall_0808767C(run): SkilGameOverForToturialExtraMap
+0876F4	087750	src/eventcall_080876F4.o(.text)	eventcall_080876F4(run): HideAllAlliesExceptLeader
+087750	0877B0	src/eventcall_08087750.o(.text)	eventcall_08087750(run): ResetAllPlayerUnitState
+0877C8	0877F8	src/eventcall_080877C8.o(.text)	eventcall_080877C8(run): ResetAllBG
