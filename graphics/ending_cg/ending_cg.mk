@@ -22,4 +22,4 @@
 # before the .s is assembled, so derive the dep lists from the committed sources.
 ENDING_CG_TILES_LZ := $(patsubst %.png,%.4bpp.lz,$(wildcard graphics/ending_cg/cg_*_part_*.png))
 ENDING_CG_PAL      := $(patsubst %.pal,%.gbapal,$(wildcard graphics/ending_cg/cg_*.pal))
-asm/dat_ending_cg_p0.o: $(ENDING_CG_TILES_LZ) $(ENDING_CG_PAL)
+src/data/ending/ending_cg.o: $(ENDING_CG_TILES_LZ) $(ENDING_CG_PAL)
