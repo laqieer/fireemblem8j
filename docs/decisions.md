@@ -4115,3 +4115,30 @@ main** on `wave_status.py` cadence + supervision — P9s do not merge to main th
 **Reusable.** When the ungameable axis is already 100% and the headline axis (matching-C) is mechanically exhausted +
 partly unreachable, the CTO move is NOT to grind the exhausted axis harder — it is to re-point capacity at the axis with
 the largest *real* (source-of-truth, not blob) byte headroom, gated by a cheap byte-perfect pilot before funding scale.
+
+## D97 — graphics/gbagfx data pipeline PROVEN portable (P9-Soil GO); worldmap_gmap pilot, ~9 MB region-same headroom un-deferred (2026-06-13)
+
+**Result.** The D96 P9-Soil go/no-go spike returned **GO**. The deferred graphics pipeline ports JP ROM bytes
+**byte-for-byte**: `worldmap_gmap` (`dat_worldmap_gmap_p0`, JP `0x08B085F8–0x08B1CCD4`, **83,676 B**) was moved from
+opaque `.bin`/asm to `src/data/worldmap/worldmap_gmap.c` (PNG sources → `gbagfx` → `INCBIN_U8`). CTO integrator
+**independently COLD-verified** (`mv baserom.gba /tmp; make compare` => `fireemblem8.gba: OK`, MAKE_RC=0 — built from
+committed source alone), self-contained 100% (0 incbins), dedup + 0 baserom gaps. Merge `ad411e789`. **Axis-3
+extracted-data 3.51% → 4.11%** (489,492 → 573,168 B) — the FIRST data-axis movement this drive.
+
+**Pipeline gap closed (the reusable unlock).** The JP Makefile had no `preproc` compile path for `src/data/*.c`, so
+`INCBIN_U8()` macros couldn't be used in C (unlike fe8u's `DATA_SRC_C_OBJECTS`). P9-Soil added a `DATA_WORLDMAP_CFILES`
+recipe (`$(PREPROC) $< | cpp | agbcc`) + filtered the replaced `asm/*.o` from `ASM_OBJECTS` (duplicate-symbol guard).
+**Scaling pattern:** rename → `DATA_INCBIN_CFILES`, expand the wildcard to `src/data/**/*.c`; then any future data C with
+`INCBIN_U8` auto-gets the preproc pipeline with no per-subsystem Makefile edit.
+
+**What GO unlocks vs not.** GO proves the pipeline for **region-SAME** graphics (JP bytes == US bytes; PNG ported from
+the US repo, verified byte-identical first). ~**9 MB** of `data_asm` is PNG-sourced region-same graphics movable by this
+exact pattern (327 `asm/dat_*.s` with `graphics/` incbins) — the data-axis volume lever. Per-asset LZ assets need an
+empirical `-mindist {1,2,3}` pin (US pins these in `.mk`). **Still NOT proven:** region-DIFFERENT graphics (`btl_bg_*`,
+JP fonts/title) need a fresh `gbagfx` *decode* of the JP `.4bpp` → PNG (own extraction step), and the 3.27 MB audio is
+already AIFF source-of-truth (lower priority).
+
+**Reusable.** A deferred asset pipeline is de-risked by ONE byte-perfect pilot that also discovers + closes the missing
+build-graph path (here: the `src/data/*.c` preproc recipe). Prove region-SAME first (cheapest: US asset byte-identical →
+port the source form), bank the scaling pattern, THEN fund the volume wave. Integrator COLD-verifies independently —
+never merge a worker's "make compare OK" claim on trust.
