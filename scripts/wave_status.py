@@ -46,7 +46,12 @@ PRODUCTIVE = [
 ]
 
 STALE_MIN = 45        # main not advanced this long + work waiting => integrate now
-THRASH_HRS = 2.0      # a branch alive >this with <2 commits => low-yield, re-target
+# A SLOW hard-tail lever (data-table-unblock, permuter, hand-decomp) legitimately takes
+# 2-4h PER cluster — do NOT stop it on commit-rate alone; only flag for INSPECTION, and
+# verify it's truly idle (0 live worktree procs + no recent activity) before stopping.
+# (2026-06-13: I prematurely stopped a productive tableUnblock at "3h/0-commits" — it was
+# mid-carve, +6 already landed. Check `readlink /proc/<pid>/cwd` for the worktree first.)
+THRASH_HRS = 4.0      # FLAG-FOR-INSPECTION threshold (was 2.0 — too aggressive for slow levers)
 
 
 def sh(c):
@@ -82,7 +87,7 @@ def main():
             flag = "  <-- INTEGRATE NOW"
         if hrs > THRASH_HRS and n < 2:
             thrash.append(name)
-            flag += "  <-- LOW-YIELD: inspect/re-target"
+            flag += "  <-- SLOW: INSPECT (verify 0 live procs + no recent activity before stopping; slow levers are slow)"
         print(f"  {name}: {n} unintegrated, {rate:.1f} commits/hr, last {last_cr}{flag}")
 
     if stale and not any_work:
@@ -100,7 +105,7 @@ def main():
     if integrate:
         print(f"\n>>> ACTION: integrate {', '.join(integrate)} NOW (do not wait for agent completion).")
     if thrash:
-        print(f">>> ACTION: {', '.join(thrash)} are low-yield (>2h, <2 commits) — inspect + stop/re-target.")
+        print(f">>> INSPECT (do NOT auto-stop): {', '.join(thrash)} slow (>4h, <2 commits). Check `readlink /proc/<pid>/cwd` for live worktree procs + last activity; a slow lever mid-carve is FINE — only stop if genuinely idle.")
     return 1 if action else 0
 
 
