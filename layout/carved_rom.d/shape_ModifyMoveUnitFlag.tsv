@@ -1,0 +1,1 @@
+00FE54	00FE88	src/ModifyMoveUnitFlag.o(.text)	ModifyMoveUnitFlag (shape-diff: u16 result=0 default-init -> explicit if/else result=1/0 so unk narrows first; matching C)

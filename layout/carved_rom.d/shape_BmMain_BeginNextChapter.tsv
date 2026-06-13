@@ -1,0 +1,1 @@
+0155E0	015624	src/BmMain_BeginNextChapter.o(.text)	BmMain_BeginNextChapter (shape-diff: JP wrote 'if (flag == 1)' not 'if (flag)' -> cmp #1 vs cmp #0; matching C)
