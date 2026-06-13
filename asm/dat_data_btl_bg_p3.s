@@ -1,8 +1,8 @@
 	.section .rodata.dat_data_btl_bg_p3, "a", %progbits
-@ src/data/data_btl_bg.o: region-same content at JP 0x087b8100 (US 0x08767bcc, shift -0xFFFAFACC); incbin baserom.gba
+@ src/data/data_btl_bg.o: region-different content at JP 0x087b8100; extracted via gbagfx -mindist 2
 	.global btl_bg_8_palette
 btl_bg_8_palette:
-	.incbin "data/residual/btl_bg_8_palette.bin"
+	.incbin "graphics/btl_bg/btl_bg_8.gbapal.lz"
 	.global btl_bg_8_map
 btl_bg_8_map:
-	.incbin "data/residual/btl_bg_8_map.bin"
+	.incbin "graphics/btl_bg/btl_bg_8.fetsa3.bin.lz"
