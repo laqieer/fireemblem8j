@@ -1,3 +1,8 @@
 SetBonusItemClaimed
 BonusClaim_DrawMainWindowFrame
 BonusClaim_EndTargetSpriteWorker
+BonusClaim_DrawChapterTitle
+BonusClaim_HBlankHandler
+InitBonusClaimData
+PutChapterBannerSprites
+SetupBonusClaimTargets
