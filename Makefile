@@ -82,11 +82,13 @@ MAP      := $(ROM:.gba=.map)
 LDSCRIPT := ldscript.txt
 
 CFILES      := $(wildcard src/*.c) $(wildcard src/data/*.c) $(wildcard src/data/map/*.c)
-# DATA_WORLDMAP: src/data/worldmap/*.c compiled with preproc (INCBIN_U8 expansion).
-# Mirror of the US DATA_SRC_C_OBJECTS rule. Separate from $(C_OBJECTS) so that
-# the regular C files (which have no INCBIN_*) don't go through preproc.
-DATA_WORLDMAP_CFILES  := $(wildcard src/data/worldmap/*.c)
-DATA_WORLDMAP_OBJECTS := $(DATA_WORLDMAP_CFILES:.c=.o)
+# DATA_INCBIN_CFILES: any src/data/<subdir>/*.c (depth >= 2, excluding map/ which
+# has no INCBIN macros and is already in CFILES) compiled with preproc first so
+# INCBIN_U8/INCBIN_U16/INCBIN_U32 expand before cpp sees them.  Mirror of the US
+# DATA_SRC_C_OBJECTS rule.  Adding a new data-C subsystem under src/data/<new>/
+# gets the preproc pipeline automatically -- no per-subsystem Makefile edit needed.
+DATA_INCBIN_CFILES  := $(shell find src/data -mindepth 2 -name '*.c' -not -path '*/map/*' 2>/dev/null)
+DATA_INCBIN_OBJECTS := $(DATA_INCBIN_CFILES:.c=.o)
 # asm/baserom.s + asm/jp_syms.s are GENERATED from the layout/ manifests by
 # scripts/gen_layout.py (gitignored, regenerated at build time). Manage them
 # explicitly rather than via the wildcard, which would miss them on a fresh
@@ -102,11 +104,12 @@ GENERATED_S := asm/baserom.s asm/jp_syms.s
 # docs/text.md.
 ASM_S_FILES := $(filter-out $(GENERATED_S),$(wildcard asm/*.s))
 C_OBJECTS   := $(CFILES:.c=.o)
-# soil-pilot: exclude asm objects whose symbols are now provided by DATA_WORLDMAP_OBJECTS.
+# DATA_INCBIN_ASM_EXCLUDE: asm/*.s whose symbols are now provided by DATA_INCBIN_OBJECTS.
 # The .s files remain committed (so git is clean) but must not enter the link.
-SOIL_PILOT_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s
-ASM_OBJECTS := $(filter-out $(SOIL_PILOT_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
-ALL_OBJECTS := $(C_OBJECTS) $(DATA_WORLDMAP_OBJECTS) $(ASM_OBJECTS)
+# Add one entry per data-C object added under src/data/<subdir>/.
+DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s
+ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
+ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 
 # --- NON_MATCHING staging (D26): readable C that DOCUMENTS a region-different
 # function whose byte source is still asm/<fn>.s. PROVE-BUILDS ONLY -- NEVER
@@ -318,11 +321,13 @@ $(RESIDUAL_OBJS): $(RESIDUAL_BINS)
 GRAPHICS_MK := $(shell find graphics -name '*.mk' 2>/dev/null)
 -include $(GRAPHICS_MK)
 
-# DATA_WORLDMAP: src/data/worldmap/*.c compiled with preproc first (expands
-# INCBIN_U8/INCBIN_U16 macros into .incbin directives before cpp sees them).
-# Mirror of the US DATA_SRC_C_OBJECTS rule. These objects ARE in ALL_OBJECTS
-# and DO get linked -- they replace their asm/dat_*.s counterparts in the layout.
-$(DATA_WORLDMAP_OBJECTS): %.o: %.c
+# DATA_INCBIN: src/data/**/*.c (any subdirectory, excluding map/) compiled with
+# preproc first so INCBIN_U8/INCBIN_U16/INCBIN_U32 expand into .incbin directives
+# before cpp sees them.  Mirror of the US DATA_SRC_C_OBJECTS rule.  These objects
+# ARE in ALL_OBJECTS and DO get linked -- they replace their asm/dat_*.s
+# counterparts in the layout.  A new subsystem under src/data/<new>/ automatically
+# uses this recipe; no additional Makefile edit is required.
+$(DATA_INCBIN_OBJECTS): %.o: %.c
 	$(PREPROC) $< | $(CPP) $(CPPFLAGS) - | iconv -f UTF-8 -t CP932 | $(CC1) $(CC1FLAGS) -o $*.s
 	printf '\t.text\n\t.align 2, 0\n' >> $*.s
 	$(AS) $(ASFLAGS) $*.s -o $@
@@ -366,7 +371,7 @@ clean:
 	# (MAX_ARG_STRLEN, 128 KiB) and `make clean` dies with "Argument list too long".
 	# NOTE: only *.o -- never `find -name '*.s'`: asm/*.s are the COMMITTED descriptive-asm sources.
 	find asm src -name '*.o' -type f -delete
-	$(RM) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(DATA_WORLDMAP_CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
+	$(RM) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(DATA_INCBIN_CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
 	$(RM) $(NONMATCH_CFILES:.c=.s)
 	# Regenerated asset build intermediates (committed source is PNG/.pal; these
 	# are rebuilt by the %.4bpp/%.lz/... rules). Delete ONLY gitignored ones --
