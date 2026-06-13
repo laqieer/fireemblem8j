@@ -1,0 +1,1 @@
+09CDBC	09CE9C	src/prep_unitselect_0809CDBC.o(.text)	prep_unitselect_0809CDBC(run): PrepUnit_DrawPickLeftBar (JP coord 0xD->0xE, x 6->0 & 0x29->0x20, msgid 0x5A1->0x52C 0x5A2->0x52D)
