@@ -16,3 +16,5 @@ PrepItemSupply_DrawGiveTakeText
 Prep_DrawChapterGoal
 ArenaUi_Init
 UnitList_DrawSortLabel
+HandleNewItemGetFromDrop
+TacticianDrawCharacters

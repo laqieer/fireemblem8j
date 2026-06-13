@@ -1,0 +1,4 @@
+InitPlayConfig	08030C44	thumb	gamecontrol
+SetPrepScreenMenuItem	08099308	thumb	prepscreen
+gProcCmd_ConvoyMenu	085C32B8	data	convoymenu
+Text_0	0203DD18	data	sio_tactician

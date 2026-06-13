@@ -1,0 +1,1 @@
+01DCF4	01DD94	src/HandleNewItemGetFromDrop.o(.text)	HandleNewItemGetFromDrop (const-diff: JP-constant substituted -> matching C; pairs=[('0x867', '0x7e5'), ('0x866', '0x7e4')])
