@@ -454,7 +454,7 @@
 1F671D	1F67BC	asm/dat_worldmap_gmapunit_p7.o(.rodata.dat_worldmap_gmapunit_p7)	dat_worldmap_gmapunit_p7 region-same per-sym shifted (0KB)
 1F6CF4	1F6D00	src/classchg-handler.o(.rodata)	classchg-handler .rodata
 1F6E40	1F6ED0	asm/dat_gMPlayJumpTableTemplate_ref.o(.rodata.dat_gMPlayJumpTableTemplate_ref)	gMPlayJumpTableTemplate region-diff (funcmap code-ref, 0KB)
-1F6ED0	1F70E8	asm/dat_m4a_tables.o(.rodata.dat_m4a_tables)	dat_m4a_tables region-same shifted (0KB)
+1F6ED0	1F70E5	src/m4a_tables.o(.rodata)	m4a sound tables typed C (region-same; was dat_m4a_tables incbin; 3B trailing align padding flows to next baseline gap)
 1FD720	1FDD20	asm/dat_voicegroup018_ref.o(.rodata.dat_voicegroup018_ref)	voicegroup018 region-diff (funcmap code-ref, 1KB)
 1FDD20	1FE320	asm/dat_voicegroup019_ref.o(.rodata.dat_voicegroup019_ref)	voicegroup019 region-diff (funcmap code-ref, 1KB)
 20189C	201CBC	asm/dat_voicegroup031_ref.o(.rodata.dat_voicegroup031_ref)	voicegroup031 region-diff (funcmap code-ref, 1KB)
