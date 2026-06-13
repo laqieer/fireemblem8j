@@ -6,13 +6,13 @@
 # Region-different assets (btl_bg_0..8, 52..60, 63, 66-68) extracted 2026-06-13
 # via gbagfx -mindist 2 (all round-trip byte-perfect at mindist=2).
 
-asm/dat_data_btl_bg_p0.o: \
+src/data/btl_bg/data_btl_bg_p0.o: \
   graphics/btl_bg/btl_bg_0.feimg3.bin.lz \
   graphics/btl_bg/btl_bg_0.gbapal.lz \
   graphics/btl_bg/btl_bg_0.fetsa3.bin.lz \
   graphics/btl_bg/btl_bg_1.feimg3.bin.lz
 
-asm/dat_data_btl_bg_p1.o: \
+src/data/btl_bg/data_btl_bg_p1.o: \
   graphics/btl_bg/btl_bg_1.fetsa3.bin.lz \
   graphics/btl_bg/btl_bg_2.feimg3.bin.lz \
   graphics/btl_bg/btl_bg_2.gbapal.lz \
@@ -27,18 +27,18 @@ asm/dat_data_btl_bg_p1.o: \
   graphics/btl_bg/btl_bg_5.gbapal.lz \
   graphics/btl_bg/btl_bg_5.fetsa3.bin.lz
 
-asm/dat_data_btl_bg_p2.o: \
+src/data/btl_bg/data_btl_bg_p2.o: \
   graphics/btl_bg/btl_bg_6.gbapal.lz \
   graphics/btl_bg/btl_bg_6.fetsa3.bin.lz \
   graphics/btl_bg/btl_bg_7.feimg3.bin.lz \
   graphics/btl_bg/btl_bg_7.gbapal.lz \
   graphics/btl_bg/btl_bg_7.fetsa3.bin.lz
 
-asm/dat_data_btl_bg_p3.o: \
+src/data/btl_bg/data_btl_bg_p3.o: \
   graphics/btl_bg/btl_bg_8.gbapal.lz \
   graphics/btl_bg/btl_bg_8.fetsa3.bin.lz
 
-asm/dat_data_btl_bg_p13.o: \
+src/data/btl_bg/data_btl_bg_p13.o: \
   graphics/btl_bg/btl_bg_52.feimg3.bin.lz \
   graphics/btl_bg/btl_bg_52.gbapal.lz \
   graphics/btl_bg/btl_bg_52.fetsa3.bin.lz \
@@ -47,7 +47,7 @@ asm/dat_data_btl_bg_p13.o: \
   graphics/btl_bg/btl_bg_59.feimg3.bin.lz \
   graphics/btl_bg/btl_bg_59.gbapal.lz
 
-asm/dat_data_btl_bg_p14.o: \
+src/data/btl_bg/data_btl_bg_p14.o: \
   graphics/btl_bg/btl_bg_55.feimg3.bin.lz \
   graphics/btl_bg/btl_bg_55.gbapal.lz \
   graphics/btl_bg/btl_bg_55.fetsa3.bin.lz \
@@ -64,10 +64,10 @@ asm/dat_data_btl_bg_p14.o: \
   graphics/btl_bg/btl_bg_60.gbapal.lz \
   graphics/btl_bg/btl_bg_60.fetsa3.bin.lz
 
-asm/dat_data_btl_bg_p15.o: \
+src/data/btl_bg/data_btl_bg_p15.o: \
   graphics/btl_bg/btl_bg_63.gbapal.lz
 
-asm/dat_data_btl_bg_p16.o: \
+src/data/btl_bg/data_btl_bg_p16.o: \
   graphics/btl_bg/btl_bg_66.gbapal.lz \
   graphics/btl_bg/btl_bg_67.gbapal.lz \
   graphics/btl_bg/btl_bg_68.gbapal.lz
