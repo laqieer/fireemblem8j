@@ -3665,3 +3665,42 @@ residue ONLY (D81/D84). Each future wave that exhausts a lever must add it to `w
 
 **State at fix:** matching-C 77.19% (6583/8528), extracted-data 3.51%, named-symbols 76.84%, self-contained 100%
 (a 3-byte baserom gap re-opened by the merge was re-closed via `close_baserom_gaps.py`).
+
+## D86 — cdSmall: the const_diff_carve `<=200B` FAR pool is EXHAUSTED (0 new yield); the residue is call-graph-different, not constant-diff (2026-06-13)
+
+**Task.** Run `scripts/const_diff_carve.py` (D81/D84) in a loop on the small FAR pool (`--batch K --max 200
+--verify`) until the `<=200B` FAR pool is exhausted; branch `feat/cdSmall` (size-disjoint sibling `cdLarge` does
+>200B). `make compare` is the sole oracle.
+
+**Result — +0. The `<=200B` pool is EXHAUSTED.** Two batches (`--batch 20`, then `--batch 30`) both scanned the
+*entire* `<=200B` FAR pool (1776 candidate names; 1010 already have `src/<name>.c` from prior waves, 766 un-carved)
+and the classifier proposes **exactly 18 CARVE candidates** — and **all 18 revert** under verify (`make compare`
+fails byte-exact). The `--batch 30` cap was never reached: the pool only yields 18 CARVE classifications total. This
+is precisely D81's documented residue ("batch1: 77 staged, 18 reverted as full-build failures — NEAR-but-fails:
+reloc-target-resolves-different"). **D81's productive 59 are already merged on `main`** (68 committed
+`constdiff_*.tsv`); what remains classifies-then-reverts.
+
+**Root cause (traced, not guessed).** The 18 reverters are **call-graph-different**, not data-constant-different.
+Worked example: `RefreshMapSelect_Init` (JP 0x246D4..0x246F4). The classifier's only proposed diff was the JP msg-ID
+`0x870→0x7E8` (correct — the `movs/lsls` shifted-constant byte-matches after substitution). The residual diff is at
+the BL at +0x4: the JP ROM calls **0x350D4 = `RefreshUnitTakeRescueInfoWindows`** (funclib-confirmed), but the US
+source calls `StartUnitHpInfoWindow` (JP 0x34F9C). The JP call graph genuinely diverges from US — the BL reloc can
+NEVER resolve byte-exact by constant substitution. `PrepItemUseClearSubBox`, the `*Selection_OnInit` family, the
+`DoUse*Staff` family, etc. all share this shape (thin wrapper = a couple of BLs + a msg-ID; the BL targets differ).
+Confirmed the funclib map is NOT stale (0x350D4 is a real, correctly-named adjacent JP function). Copilot review
+concurred: the lever fixes data-immediates, not BL relocations to different JP callees; the `nolit` symbolic-enum
+abort case won't help wrong call targets; switch to permuter/hand-decomp.
+
+**Disposition.** Added `const_diff_carve.py (<=200B FAR pool)` to `wave_status.py` EXHAUSTED; narrowed the PRODUCTIVE
+`const_diff` entry to `>200B ONLY (cdLarge domain)`. **No carves to commit (yield 0); no source/layout change** — only
+this decision + the `wave_status.py` lever bookkeeping. Baseline re-verified GREEN after probing: `make compare` OK,
+ROM == 16,777,216, working tree clean (verify-or-revert left no residue).
+
+**Residue (the true const_diff-FAR frontier, `<=200B`):** 18 call-graph-different functions — `RefreshMapSelect_Init`,
+`PrepItemUseClearSubBox`, `GiveSelection_OnInit`, `TakeSelection_OnInit`, `TradeTargetSelection_OnInit`,
+`TalkSupportSelection_OnInit`, `RescueSelection_OnConstruction`, `StartRescueStaffSelection`, `DoUseRepairStaff`,
+`DoUseBarrierStaff`, `DoUseWarpStaff`, `Text_DrawNumberOrBlank`, `GameControl_InitTutorialGame`,
+`TacticianDrawCharacters`, `SummonUnitGfx_Init`, `AtMenu_AddPrepScreenSupportMenuItem`, `PrepItemUseBooster_OnEnd`,
+`HandleNewItemGetFromDrop`. These need decomp-permuter / IDA-Ghidra hand-decomp (call-graph divergence), NOT constant
+substitution. The separate `nolit` symbolic-enum aborts (`0x4160→0x4140` map-anim VRAM, `Proc_Goto` enum jumps) remain
+a possible *tool enhancement* (rewrite the named macro to the JP raw literal) — deferred, out of this unit's scope.
