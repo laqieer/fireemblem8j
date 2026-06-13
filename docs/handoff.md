@@ -6,7 +6,24 @@
 cron was DISABLED 2026-06-08 — see decisions.md D8; the launched agent kept
 getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
-## ⏩ CURRENT STATE — 2026-06-13 (READ THIS FIRST; newest)
+## ⏩ CURRENT STATE — 2026-06-13 CTO ORG DISPATCH (READ THIS FIRST; newest)
+
+**main `ff74c5e52`, VERIFIED green (`make compare` => OK this session) + synced, clean.** Acting-CTO (P10)
+re-baselined vs ground truth and committed **D96** (2-front next-phase strategy). **TWO P9 worktree agents are
+LIVE in the background** (each in its own git worktree off `ff74c5e52`, branch-push only, COLD-OK gated):
+- **P9-Soil (PRIMARY)** — data-pipeline go/no-go spike. Goal: prove ≥1 opaque-`.incbin` JP asset round-trips to
+  real source-of-truth (PNG/.pal/typed-C/structured-bin) with `make compare` OK; pilot lands on `feat/soil-pilot`.
+  Un-defers axis 3 (data 3.51%, 13.4 MB headroom). Guards: hard go/no-go, no blob-rename=extraction, JP≠US pipeline.
+- **P9-Grind (continuous, smaller)** — matching-C tail (permuter true-FAR + delta-transfer, IDA/Ghidra hand-decomp,
+  data-table-unblocking) + coddog naming; branches `feat/grind-*`. Mechanical levers EXHAUSTED; lsr↔asr+reg-alloc UNREACHABLE.
+- **P9↔P9 interface:** Soil's table/graphics extractions unblock Grind's data-table-blocked FAR fns.
+
+**CTO owns SERIAL integration to main** (P9s never self-merge): on each push/completion, run `scripts/wave_status.py`,
+integrate `feat/soil-*`/`feat/grind-*` serially, gate each on COLD `make compare` OK, then run the integration routine
+(`dedup_baseline_syms.py` + `close_baserom_gaps.py`, assert `check_selfcontained.py`==0). Axes unchanged until a branch lands:
+matching-C **77.98%** (6650/8528), data **3.51%**, named **77.48%**, self-containment **100%**.
+
+### (prior) ⏩ CURRENT STATE — 2026-06-13 (newest before CTO dispatch)
 
 **main `d21ff5762`, green + synced, clean (0 worktrees, 0 build procs, no live agents).** Axes:
 | Axis | Now | Notes |
