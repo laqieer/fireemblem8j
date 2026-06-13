@@ -446,7 +446,8 @@
 1F4B78	1F4F60	asm/dat_const_data_unit_icon_move_p102.o(.rodata.dat_const_data_unit_icon_move_p102)	dat_const_data_unit_icon_move_p102 region-same per-sym shifted (0KB)
 1F5784	1F578C	src/bmsave-misc.o(.rodata)	bmsave-misc .rodata
 1F5BEC	1F5BF0	src/gamerankings.o(.rodata)	gamerankings .rodata
-1F5C6C	1F611C	asm/dat_worldmap_node_data_gf.o(.rodata.dat_worldmap_node_data_gf)	dat_worldmap_node_data_gf region-diff asset, boundary-pinned (1KB)
+1F5C6C	1F5D7C	src/worldmap_node_data.o(.rodata)	gWMNodeIconData typed C (region-same; pointers resolve to JP gObject_* frames; upgraded from incbin)
+1F5D7C	1F611C	asm/dat_worldmap_node_data_gf.o(.rodata.dat_worldmap_node_data_gf)	gWMNodeData region-diff asset (JP nameTextId/ItemList_WM_* layout), boundary-pinned
 1F6188	1F6340	src/data/worldmap_path_data.o(.data)	gWorldmapPath_0..19 typed C (GMapMovementPathData; region-same coords; upgraded from dat_worldmap_gmapunit_p2 incbin)
 1F6340	1F64C0	asm/dat_gWMPathData_ref.o(.rodata.dat_gWMPathData_ref)	gWMPathData region-diff (funcmap code-ref, 0KB)
 1F6534	1F65C0	asm/dat_worldmap_gmapunit_p3.o(.rodata.dat_worldmap_gmapunit_p3)	dat_worldmap_gmapunit_p3 region-same per-sym shifted (0KB)

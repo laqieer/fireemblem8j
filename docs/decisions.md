@@ -3665,3 +3665,36 @@ residue ONLY (D81/D84). Each future wave that exhausts a lever must add it to `w
 
 **State at fix:** matching-C 77.19% (6583/8528), extracted-data 3.51%, named-symbols 76.84%, self-contained 100%
 (a 3-byte baserom gap re-opened by the merge was re-closed via `close_baserom_gaps.py`).
+
+## D86 — dataPure: split the worldmap node tables — gWMNodeIconData incbin → typed C; gWMNodeData stays region-different incbin (2026-06-13)
+
+**Context.** `src/worldmap_node_data.o(.rodata)` (JP 0x1f5c6c..0x1f611c) was carved as one
+region-different incbin (`dat_worldmap_node_data_gf`) holding two tables: `gWMNodeIconData[17]`
+(`struct NodeIcon`, 0x110 B) then `gWMNodeData[]` (`struct GMapNodeData`).
+
+**Finding.** The two tables differ in *transcribability*:
+- `gWMNodeIconData` is **region-IDENTICAL** to fe8u. Its only pointers (`pSpriteData`) reference
+  the four `gObject_{8x8,16x16,16x32,32x32}` sprite-frame symbols, which ARE named/placed in fe8j
+  (`src/ctc.s`). Decoded JP bytes match the fe8u C field-for-field (all 17 entries) and the embedded
+  pointers equal the JP `gObject_*` ELF addresses (0x085b8cdc.., verified). So real C regenerates the
+  exact bytes.
+- `gWMNodeData` is genuinely **region-DIFFERENT**: its `nameTextId` values are the JP message IDs
+  (e.g. entry 0 = 0x05e2, not fe8u's MSG_650=0x650) and its armory/vendor/secretShop pointers target
+  `ItemList_WM_*` symbols that are **not yet named** in fe8j (0/87). Porting it to C is a separate,
+  larger region-diff effort — left as incbin.
+
+**Action.** New focused TU `src/worldmap_node_data.c` defining ONLY `gWMNodeIconData` (from fe8u,
+pointers resolved by the linker to JP `gObject_*`). Split the carved_rom.tsv row into
+`1F5C6C..1F5D7C → src/worldmap_node_data.o(.rodata)` + `1F5D7C..1F611C → dat_worldmap_node_data_gf`
+(now `gWMNodeData` only). Deleted the orphaned `data/residual/gWMNodeIconData.bin`.
+
+**Result.** +1 typed-C data table (272 B incbin → extracted C), byte-neutral. `make check` +
+`make compare` + `make clean && make compare` all OK, self-contained 100%, ROM 16 MB. Addresses
+unchanged (`gWMNodeIconData`@0x1f5c6c, `gWMNodeData`@0x1f5d7c).
+
+**Lever note (dataPure unit):** the prior "pure const-array `src/*.c`, no INCBIN/funcs" sweep is
+near-exhausted — of 8 fe8u candidates, 4 already done (m4a_tables/cp_data/msg_data + monstergen_data
+as graphics wrapper), 3 are high-ROM debug leftovers (gDebugPInfo/gDebugCreditInfo @0x088x, English
+ASCII, likely region-diff) or region-diff (worldmap_node_data — now partly carved here),
+const_data_DAEF0 already an asm carve. Future dataPure yield is in *partial* table splits like this one
+(region-same sub-tables inside a region-diff incbin), not whole new files.
