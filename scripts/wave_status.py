@@ -29,11 +29,17 @@ EXHAUSTED = {
     "perm2 reloc-resolve (addr >= 0x8067584)": "mcHi2 D83 swept it",
     "perfrag region-same (both halves)": "harvAM/harvNZ/mcMechLo/mcHi2",
     "CF:agbcc bind_tu (funcmap functions)": "cfBind D67 swept the funcmap set",
-    "const_diff_carve.py (<=200B FAR pool)": "cdSmall D86: pool classifies exactly 18 CARVE candidates, ALL revert (call-graph-different, e.g. RefreshMapSelect_Init BL->RefreshUnitTakeRescueInfoWindows@0x350D4 not StartUnitHpInfoWindow); D81's productive 59 already merged",
+    "const_diff_carve.py (<=200B FAR pool)": "cdSmall D87: 18 candidates all revert — call-graph-different (BL to a different JP callee); D81's productive 59 already merged",
+    "const_diff_carve.py (>200B FAR pool)": "cdLarge D88: 0/424 land — const lives in TU-private DATA TABLES, not inline literals",
 }
 # Levers still productive (dispatch THESE):
 PRODUCTIVE = [
-    "const_diff_carve.py on the FAR *constant-diff* residue >200B ONLY (D81/D84; <=200B EXHAUSTED per D86) — cdLarge domain",
+    "MECHANICAL LEVERS EXHAUSTED at matching-C ~77%. The remaining matching-C frontier needs SLOW levers:",
+    "  decomp-permuter (TRUE codegen-shape FAR minority + delta-transfer),",
+    "  IDA/Ghidra hand-decomp (call-graph-different, LEN, pure-JP),",
+    "  DATA-TABLE-UNBLOCKING: carve the TU-private table a FAR fn reads, then its const/call resolves -> the fn carves",
+    "typed-data: region-same sub-table splits inside region-diff incbins (slow; pure-const-array US TUs near-exhausted)",
+
     "typed-data: pure-const-array US TUs in src/*.c (not src/data/*.c graphics wrappers) — m4a_tables.c pattern",
     "NAME-data byte-neutral renaming (needs /tmp/us_syms.tsv built from fe8u map first)",
     "decomp-permuter for the TRUE codegen-shape FAR (minority) + delta-transfer",
