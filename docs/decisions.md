@@ -4011,3 +4011,34 @@ region-DIFFERENT (not reloc); engine fns (Proc_Start) `func_only`-compile-fail o
 open(src/<name>.c)`) that crashes instead of cleanly reverting a FAILED carve — run on a CLEAN tree
 only (it false-greens / leaves orphan `src/<name>.s` on polluted incremental state). Naming, not
 carving, is this pool's yield.
+
+## D94 — stale-branch reconciliation: merge mcMechLo (asm→C upgrade, byte-verified), drop perm2 (renumbered into D63/D64/D65) (2026-06-13)
+
+**Context.** After the branch-cleanup pass deleted 111 merged branches, two local branches survived as
+"not merged into main": `feat/mcMechLo` (+1 commit) and `feat/perm2` (+1 commit). Before merging blind,
+checked supersession + build-impact (a stale branch can reintroduce removed code or regress `make compare`).
+
+**`feat/mcMechLo` — MERGED (worth it).** Single unmerged commit carves `sub_802EEE4/F99C/FA20/FB98/FF04`
+(bmusemind TU) as **matching C** (`src/bmusemind_*.c`). Timeline disproved the "superseded" hypothesis:
+main carved these 5 as **region-different gbadisasm descriptive asm** on **Jun 9** (`0ff143710`,
+`ee0a59556`); mcMechLo forked **Jun 12** *on top of* that base and **upgraded** them to region-SAME
+matching C. So it's the newer work, left behind in the D92 build-race window — NOT superseded. Merge was
+**clean (0 conflicts**: nothing on main touched those 5 files since the branch base), and `make compare`
+=> **OK** (byte-perfect), self-contained **100%**, dedup clean. This is a SOURCE-QUALITY upgrade
+(descriptive-asm → real C), +5 matching-C (6645→6650, 77.92→77.98%), not new byte coverage. Merge commit
+`5057613a3`.
+
+**`feat/perm2` — NOT merged (superseded).** Its only unmerged change is a 51-line `docs/decisions.md`
+draft "## D60" entry; the +94 matching-C code + tooling (`perm2_graduate.py`, `rd_screen.py`) it describes
+were already integrated. Main has **no `## D60` section** (decisions jumps D59→D61) because the work was
+**renumbered to D63 (rd2) / D64 (rd1) / D65 (integration)** — exactly as the perm2 commit message
+anticipated ("renumber at integration if a concurrent sibling claimed D60"). Distinctive perm2 prose
+("CLASSIFIER FALSE NEGATIVE", "rd_screen.py") appears 0× in main = the draft was deliberately dropped, not
+lost. Merging it would inject an obsolete duplicate D60 contradicting the live D61–D65 sequence. The branch
+has nothing of value not already in main; recommend force-deleting it.
+
+**Reusable.** A stale `feat/*` branch that won't merge cleanly is one of two things: (a) genuinely-newer
+work stranded by an integration race → verify with `make compare` and take it; (b) a parallel sibling whose
+code/tooling was integrated under a renumbered D-entry, leaving only an obsolete docs draft → drop it. Tell
+them apart by **timeline** (`git show -s --format=%ci`) + **supersession grep** (distinctive prose / symbol
+names in main), never by the branch name or commit subject alone.
