@@ -1,2 +1,6 @@
 GetHpBarLeftTile
 SaveDraw_ScrollFogBG
+DrawShopItemPriceLine
+PrepScreen_UnitSwapIdle
+UnitMapUiUpdate
+InitBattleForecastBattleStats
