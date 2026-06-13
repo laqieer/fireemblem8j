@@ -1,0 +1,1 @@
+07F15C	07F1BC	src/SummonUnitGfx_Init.o(.text)	SummonUnitGfx_Init (data-table-unblock: JP uses Img/Pal_GorgonHatchCloud not gMapanimEventcall_293/294 + VRAM 0x6002C00->0x6002800 -> matching C)
