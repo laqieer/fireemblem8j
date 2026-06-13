@@ -51,7 +51,7 @@ asm/dat_data_titlescreen_p2.o: \
   graphics/misc_gfx/gPal_TitleLargeGlowingOrb.gbapal \
   graphics/misc_gfx/gPal_TitleSmallLightBubbles.gbapal
 
-asm/dat_mapanim_battleinfo.o: \
+src/data/mapanim/mapanim_battleinfo.o: \
   graphics/misc_gfx/Img_GmapSoguSprites.bin.lz \
   graphics/misc_gfx/Img_LinkArenaWarpFx.bin.lz \
   graphics/misc_gfx/Img_MapAnimAntitoxinPureWater.bin.lz \
@@ -80,7 +80,7 @@ asm/dat_mapanim_battleinfo.o: \
   graphics/misc_gfx/Tsa_MapBattleBoxGfx3.bin.lz \
   graphics/misc_gfx/Tsa_ShopWindows.bin.lz
 
-asm/dat_mapanim_monster_gorgon.o: \
+src/data/mapanim/mapanim_monster_gorgon.o: \
   graphics/misc_gfx/Img_GorgonHatchCloud.bin.lz \
   graphics/misc_gfx/Img_MonsterStoneMapAnimfx.bin.lz \
   graphics/misc_gfx/Pal_GorgonHatchCloud.gbapal \
@@ -93,7 +93,7 @@ asm/dat_mapanim_monster_gorgon.o: \
   graphics/misc_gfx/Tsa_GorgonHatchCloud_F.bin.lz \
   graphics/misc_gfx/Tsa_GorgonHatchCloud_G.bin.lz
 
-asm/dat_mapanim_nightmare.o: \
+src/data/mapanim/mapanim_nightmare.o: \
   graphics/misc_gfx/Img_ManimBarrierBgfx.bin.lz \
   graphics/misc_gfx/Img_NightMareMapAnimfx.bin.lz \
   graphics/misc_gfx/Pal_NightMareMapAnimfx.gbapal \

@@ -16,7 +16,7 @@
 #
 # -mindist: the LZ assets below need mindist 1 (1/2/3 sweep); the rest use default 2.
 
-asm/dat_mapanim_eventcall.o: \
+src/data/mapanim/mapanim_eventcall.o: \
   graphics/mapanim/Tsa_Mapeventcall_0.tsa.bin.lz \
   graphics/mapanim/Tsa_Mapeventcall_1.tsa.bin.lz \
   graphics/mapanim/Tsa_Mapeventcall_10.tsa.bin.lz \
