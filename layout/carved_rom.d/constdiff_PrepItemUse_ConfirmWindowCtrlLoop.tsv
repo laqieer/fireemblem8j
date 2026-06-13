@@ -1,0 +1,1 @@
+09ECB8	09EDDC	src/PrepItemUse_ConfirmWindowCtrlLoop.o(.text)	PrepItemUse_ConfirmWindowCtrlLoop (const-diff: JP-constant substituted -> matching C; pairs=[('0x80', '0x88'), ('0xc', '0xb')])
