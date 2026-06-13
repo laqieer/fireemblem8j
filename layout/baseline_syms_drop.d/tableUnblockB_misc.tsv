@@ -3,3 +3,4 @@ Text_InsertDrawString
 UpdateSleep
 PlaySong
 ProcessMenuSelectInput
+GetStringTextBox
