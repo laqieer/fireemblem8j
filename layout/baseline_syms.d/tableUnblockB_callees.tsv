@@ -1,0 +1,3 @@
+Sound_SetupMaxChannelsForSong	0800284C	thumb	PlaySong
+OverriddenMenuSelected	0805055C	thumb	ProcessMenuSelectInput
+GetStringLineEnd	08003F10	thumb	GetStringTextBox
