@@ -3978,3 +3978,36 @@ cmdline) then ONE build; no cron auto-`make compare`. (3) Gate every push on `CO
 step. (4) Dangling-carve guard: every `src/<fn>.o` carve row must have a git-tracked `src/<fn>.c`.
 (5) Never blanket `git add -A` for layout fixes. Net real damage was ONE function; the rest was
 self-inflicted build-race + over-correction noise.
+
+## D93 — funcmapExtend: +67 named placeholders — coddog jp_addr->us_name is a HINT, disambiguate via LIS-anchoring + US-order/size + baseline_syms cross-check (2026-06-13)
+
+**Lever.** Many still-asm `sub_<JPaddr>` functions HAVE a confident US identity in
+`reference/maps/coddog_classification.tsv` (jp_addr->us_name) but the funcmap/tooling didn't use it, so
+they were neither carved nor NAMED. Renaming the descriptive-asm `.global sub_<addr>`/label/`.section`
+to the real US name (+ suppressing the now-redundant `jp_syms` absolute alias via a
+`baseline_syms_drop.d` fragment, parallel-safe) eliminates a placeholder => advances the
+**named-symbols** axis WITHOUT a carve. Self-recursive `bl sub_<addr>` inside the body must be renamed
+too (only RunProcessRecursive had one); caller-side `.set sub_<addr>` aliases are file-local and stay.
+
+**The find — coddog is NOT ground truth for thin wrappers.** coddog `compare2` POINTER-MASKS, so any
+table-accessor / single-call wrapper (`ldr =<table>; ...; bl <fn>`) false-positives onto ANY same-shape
+sibling. Concrete coddog errors caught: 5x `DeleteAll6CWaitMusicRelated` were distinct
+`Proc_EndEach`/`Proc_GotoScript` wrappers on DIFFERENT proc scripts; `BG_GetMapBuffer` mapped TWO JP
+accessors (0x1BC0, 0x4140 reading different tables) to ONE US addr; `sub_8000CE4`=**SetGameTime** not
+SetLCGRNValue (writes 0x03000010 ~ clock, not RNG 0x03000008); `sub_80043DC`=
+**Text_InsertDrawNumberOrBlank** not Text_InsertDrawString; the ColorFade family was sibling-shifted;
+`LockTalk`@0xB1138 false-positive (real LockTalk already carved at 0x6CA4).
+
+**REUSABLE VERIFICATION (3 independent signals, all must agree).** (1) **LIS monotonic anchoring** — sort
+candidates by jp_addr; the Longest-Increasing-Subsequence by us_addr = the same-TU same-layout members
+(OFF-SEQ flags false positives). (2) **US function-order + size** disambiguates near-identical siblings
+(ColorFade size 132 vs 128). (3) **`layout/baseline_syms.tsv`** (hand-verified) WINS on conflict — it
+caught both name-corrections above. Of 86 coddog-named still-asm fns, 67 passed all three; the rest were
+thin-wrapper false positives or already-carved-elsewhere. named-syms 77.10%->77.45%; placeholders -67.
+
+**Carving the named pool is mostly blocked** (D90's "SWEPT" holds): text/font fns are JP-SJIS
+region-DIFFERENT (not reloc); engine fns (Proc_Start) `func_only`-compile-fail on TU-private statics
+(`sFaceConfig`). NOTE `scripts/perfrag_carve.py` has a revert-path crash (`port_run.py:954
+open(src/<name>.c)`) that crashes instead of cleanly reverting a FAILED carve — run on a CLEAN tree
+only (it false-greens / leaves orphan `src/<name>.s` on polluted incremental state). Naming, not
+carving, is this pool's yield.
