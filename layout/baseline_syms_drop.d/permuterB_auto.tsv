@@ -4,3 +4,6 @@ DrawShopItemPriceLine
 PrepScreen_UnitSwapIdle
 UnitMapUiUpdate
 InitBattleForecastBattleStats
+SaveMenuWriteNewGame
+StartAfterUnitMovedEvent
+StartDestSelectedEvent
