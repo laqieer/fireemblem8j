@@ -678,7 +678,7 @@
 5BA174	5BA1B4	asm/dat_PopupScr_ItemStolen_ref.o(.rodata.dat_PopupScr_ItemStolen_ref)	PopupScr_ItemStolen region-diff (funcmap code-ref, 0KB)
 5BA1B4	5BA1F4	asm/dat_PopupScr_WpnBroken_ref.o(.rodata.dat_PopupScr_WpnBroken_ref)	PopupScr_WpnBroken region-diff (funcmap code-ref, 0KB)
 5BA34C	5BA36C	src/eventfx-boomfog.o(.data)	eventfx-boomfog .data
-5BA470	5C14B0	asm/dat_data_item_icon.o(.rodata.dat_data_item_icon)	dat_data_item_icon region-same shifted (28KB)
+5BA470	5C14B0	src/data/item_icon/data_item_icon.o(.data)	data_item_icon typed C INCBIN_U8 (224 item icons + palette, 28736B; region-same; soil-scale)
 5C14B0	5C1D30	asm/dat_generic_icon.o(.rodata.dat_generic_icon)	dat_generic_icon region-same shifted (2KB)
 5C28B8	5C2980	src/bm.o(.data)	bm .data
 5C2A50	5C2E50	src/data/gUnitLookup.o(.data)	gUnitLookup typed C (faction unit-array pointer LUT; region-same structure, JP RAM bases)
