@@ -1,5 +1,7 @@
 # carve_frontier.py data_gaps long-tail data (parallel-safe fragment)
-0DC3DC	0DC650	asm/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0)	df4_misc_lo region-diff data (628 B, long-tail gap)
+0DC3DC	0DC3FC	asm/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0a)	df4_misc_lo region-diff data (32 B, gap0a split before GetGenericChibiImg rodata)
+0DC3FC	0DC41C	src/GetGenericChibiImg.o(.rodata)	GetGenericChibiImg(run): gUnknown_080DC3FC array
+0DC41C	0DC650	asm/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0b)	df4_misc_lo region-diff data (564 B, gap0b split after GetGenericChibiImg rodata)
 0DC96C	0DCC90	asm/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap1)	df4_misc_lo region-diff data (804 B, long-tail gap)
 0DCDD0	0DCE48	asm/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap2a)	df4_misc_lo region-diff data (120 B, long-tail gap); split around cp_data.o(.rodata)
 0DD358	0DD368	asm/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap2b)	df4_misc_lo region-diff data (16 B, long-tail gap); split around cp_data.o(.rodata)

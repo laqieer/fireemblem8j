@@ -89,7 +89,7 @@ struct BMVSyncProc {
  void WfxSnow_Init(void);
  void WfxSnow_VSync(void);
  void WfxRain_Init(void);
-static void WfxRain_VSync(void);
+ void WfxRain_VSync(void);
  void WfxSandStorm_Init(void);
  void WfxSandStorm_VSync(void);
  void WfxSnowStorm_Init(void);

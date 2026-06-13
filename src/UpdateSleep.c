@@ -1,7 +1,7 @@
 #include "global.h"
 #include "proc.h"
 
-static void UpdateSleep(ProcPtr proc)
+void UpdateSleep(ProcPtr proc)
 {
     ((struct Proc*) proc)->proc_sleepTime--;
 
