@@ -36,9 +36,9 @@ asm/dat_data_opanim_gfx_p26.o: \
 asm/dat_data_opanim_gfx_p27.o: \
   graphics/misc_gfx3/Img_IntelligentSystems.bin.lz
 
-asm/dat_gGfx_OpSubtitle_00_ref.o: \
+src/data/op_subtitle/op_subtitle_gfx.o: \
   graphics/misc_gfx3/gGfx_OpSubtitle_00.bin.lz
 
-asm/dat_gGfx_OpSubtitle_01_ref.o: \
+src/data/op_subtitle/op_subtitle_gfx.o: \
   graphics/misc_gfx3/gGfx_OpSubtitle_01.bin.lz
 
