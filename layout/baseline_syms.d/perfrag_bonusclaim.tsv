@@ -1,1 +1,6 @@
 gpBonusClaimDataUpdated	08A9E4FC	data	bonusclaim_080B5378
+BonusClaim_DrawChapterTitle	080B528C	thumb	bonusclaim_080B56F8
+InitBonusClaimData	080B5378	thumb	bonusclaim_080B56F8
+SetupBonusClaimTargets	080B566C	thumb	bonusclaim_080B56F8
+PutChapterBannerSprites	080B5250	thumb	bonusclaim_080B56F8
+BonusClaim_HBlankHandler	080B5314	thumb	bonusclaim_080B56F8

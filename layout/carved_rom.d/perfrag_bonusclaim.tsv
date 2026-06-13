@@ -7,3 +7,4 @@
 0B56D8	0B56F8	src/bonusclaim_080B56D8.o(.text)	bonusclaim_080B56D8(run): BonusClaim_DrawMainWindowFrame
 0B5C24	0B5C3C	src/bonusclaim_080B5C24.o(.text)	bonusclaim_080B5C24(run): BonusClaim_EndTargetSpriteWorker
 0B5F70	0B5FDC	src/bonusclaim_080B5F70.o(.text)	bonusclaim_080B5F70(run): BonusClaim_EndSelectTargetSubMenu
+0B56F8	0B5954	src/bonusclaim_080B56F8.o(.text)	bonusclaim_080B56F8(run): BonusClaim_Init
