@@ -1463,7 +1463,7 @@ ACF418	AD02D4	asm/dat_ending_staffreel_p2.o(.rodata.dat_ending_staffreel_p2)	dat
 AD06F4	AD0CFC	asm/dat_ending_staffreel_p3.o(.rodata.dat_ending_staffreel_p3)	dat_ending_staffreel_p3 region-same per-sym shifted (1KB)
 AD1284	AD1444	asm/dat_ending_staffreel_p4.o(.rodata.dat_ending_staffreel_p4)	dat_ending_staffreel_p4 region-same per-sym shifted (0KB)
 AD247C	B085F8	asm/dat_ending_cg_p0.o(.rodata.dat_ending_cg_p0)	dat_ending_cg_p0 region-same per-sym shifted (216KB)
-B085F8	B1CCD4	asm/dat_worldmap_gmap_p0.o(.rodata.dat_worldmap_gmap_p0)	dat_worldmap_gmap_p0 region-same per-sym shifted (81KB)
+B085F8	B1CCD4	src/data/worldmap/worldmap_gmap.o(.data)	worldmap_gmap typed C INCBIN_U8 (gWorldmapGmap_0..3, Img_GmapNodes, Img_GmapCastleNodes; region-same, PNG source round-trip verified; soil-pilot)
 B1CCF4	B1CD80	asm/dat_worldmap_gmap_p1.o(.rodata.dat_worldmap_gmap_p1)	dat_worldmap_gmap_p1 region-same per-sym shifted (0KB)
 B1CD80	B1D954	asm/dat_anim_worldmap_sprite.o(.rodata.dat_anim_worldmap_sprite)	dat_anim_worldmap_sprite region-same shifted (2KB)
 B1E49C	B1E5FC	asm/dat_worldmap_minimap_p0.o(.rodata.dat_worldmap_minimap_p0)	dat_worldmap_minimap_p0 region-same per-sym shifted (0KB)
