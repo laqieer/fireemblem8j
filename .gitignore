@@ -35,7 +35,7 @@ sound/**/*.bin
 # Hand-written assembly lives in asm/ and is tracked.
 src/*.s
 src/data/*.s
-src/data/map/*.s
+src/data/**/*.s
 # NON_MATCHING staging (D26): the readable C in src/nonmatching/*.c is tracked,
 # but the agbcc .s intermediate from `make nonmatching` is a build artifact.
 src/nonmatching/*.s

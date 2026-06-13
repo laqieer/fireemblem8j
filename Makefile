@@ -109,7 +109,12 @@ C_OBJECTS   := $(CFILES:.c=.o)
 # Add one entry per data-C object added under src/data/<subdir>/.
 DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_portrait.s \
-                           asm/dat_data_item_icon.s
+                           asm/dat_data_item_icon.s \
+                           asm/dat_const_data_unit_icon_wait.s \
+                           asm/dat_mapanim_battleinfo.s \
+                           asm/dat_mapanim_nightmare.s \
+                           asm/dat_mapanim_monster_gorgon.s \
+                           asm/dat_mapanim_eventcall.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 
