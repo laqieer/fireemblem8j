@@ -7,6 +7,26 @@ from real decompiled source — the raw-ROM incbin in `asm/baserom.s` fully
 replaced. Signal completion ONLY when that is achieved by outputting the
 promise phrase `FE8J_FINAL_GOAL_DONE`.
 
+## When orchestrating background agents (P9 wave mode) — DO THIS EVERY TICK FIRST
+
+**`python3 scripts/wave_status.py`** — it tells you, in one shot, how long since
+`main` advanced, which `origin/feat/*` branches have UNINTEGRATED commits, which
+agents are low-yield, and which carve levers are EXHAUSTED. Then:
+
+1. **Integrate on cadence, NOT on completion.** If a branch has ≥1 unintegrated
+   commit and `main` is stale (>45 min), MERGE IT NOW — do not wait for the agent
+   to "complete". Agents run for hours or hoard commits; `main` must keep advancing.
+   (The 2026-06-13 7-hour stall: agents alive + committing to branches, but the
+   orchestrator waited for completion and never integrated → `main` frozen.)
+2. **Never re-dispatch an EXHAUSTED lever** (wave_status.py lists them: perm2/​perfrag/​CF
+   are swept on both address halves). Re-sweeping them yields ~0 and burns hours.
+   Dispatch only PRODUCTIVE levers (const_diff_carve.py on the FAR constant-diff
+   residue; pure-const-array US TUs; NAME-data; permuter for true-codegen FAR).
+3. **Time-box waves.** If wave_status flags a branch as low-yield (>2 h, <2 commits),
+   inspect its log and stop/re-target — don't let it thrash.
+4. After exhausting a lever, ADD it to `EXHAUSTED` in `scripts/wave_status.py` and
+   note it in `docs/decisions.md` so no future wave repeats it.
+
 ## Each iteration: ONE small verifiable increment
 
 1. **Pick the next task.** Read the board (`gh project view 3 --owner laqieer`,

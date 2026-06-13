@@ -3640,3 +3640,28 @@ CF-bindable reachable set is exhausted for this range. Pushed `feat/mcHi2`. No P
 Matching-C **73.91% → 77.15%** (6577/8528; ~80.1% of the 8209 ceiling). Self-containment 100%; extracted-data 3.51%; named-symbols ~76%. No main contamination this wave (hardened cwd guards + early detection held). Session arc: matching-C 27.59% → 77.15%, extracted-data 0.14% → 3.51%.
 
 **Next lever (highest yield).** constDiff was only a pilot batch — `scripts/const_diff_carve.py` should be run AT SCALE over the entire remaining FAR tail (both address halves; mcMechLo reported 157 FAR + 226 LEN + 288 CF low-addr, plus mcHi2's high-addr residue). Combined with continued perm2/perfrag/CF re-sweep, the matching-C ceiling looks reachable well beyond 80%. Plus: more typed-data tables, and NAME-data tooling (needs a us_syms.tsv build step).
+
+## D85 — PROCESS FIX: the 7-hour stall — integrate-on-cadence + exhausted-lever tracking (scripts/wave_status.py) (2026-06-13)
+
+**Incident.** Dispatched 3 carve agents (constScaleLo/Hi, dataNaming) and watched them on loop ticks waiting
+for *completion* before integrating. They were alive + committing to their branches but at near-zero yield
+(+5 in 7 h) — because the prompt told them to run **perm2/perfrag/CF**, levers already **exhausted** by mcMechLo
+(D83-era) + mcHi2 (D83) on both address halves. `main` did not advance for 7 h until the user flagged it.
+
+**Root causes.** (1) Re-dispatched EXHAUSTED levers → agents burned hours re-probing functions that only revert.
+(2) Treated integration as a completion event, not a cadence → durable branch commits sat unmerged.
+
+**Fix (tooling + docs, committed).**
+- `scripts/wave_status.py` — run EVERY loop tick while agents are dispatched: reports time-since-`main`-advanced,
+  unintegrated `origin/feat/*` commits, per-branch yield-rate, and the EXHAUSTED-lever list; exits non-zero when
+  action is needed (integrate / re-target).
+- `.claude/loop_prompt.md` — new "P9 wave mode" section: integrate-on-cadence (≥1 commit + main stale >45 min →
+  merge now), never re-dispatch an exhausted lever, time-box low-yield branches (>2 h / <2 commits).
+- Memory `wave-integrate-on-cadence`.
+
+**Exhausted levers (do NOT re-dispatch):** perm2 reloc-resolve (both halves), perfrag region-same (both halves),
+CF:agbcc bind_tu (funcmap set). **Live matching-C lever:** `const_diff_carve.py` on the FAR *constant-diff*
+residue ONLY (D81/D84). Each future wave that exhausts a lever must add it to `wave_status.py` + note here.
+
+**State at fix:** matching-C 77.19% (6583/8528), extracted-data 3.51%, named-symbols 76.84%, self-contained 100%
+(a 3-byte baserom gap re-opened by the merge was re-closed via `close_baserom_gaps.py`).
