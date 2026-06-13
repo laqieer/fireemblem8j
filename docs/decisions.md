@@ -4073,3 +4073,45 @@ feeds them was untouched and already present — only the README links were miss
 decompilation and must sit in the unmatched bucket for any cross-project (decomp.dev/frogress) number;
 otherwise an incbin-baseline decomp that has merely *disassembled* the ROM reports as ~100% "done". Counting
 rule must match fe8u/calcrom (src-only numerator) on BOTH code and data.
+
+## D96 — CTO next-phase strategy: 2-front org (Soil-primary data-pipeline spike + small continuous Grind lane); bias capacity to the biggest byte-headroom axis (2026-06-13)
+
+**Context (acting-CTO / P10 framing).** Re-baselined the whole goal against VERIFIED ground truth (`calcprogress.py`
++ `make compare` => OK, both run this session, tree clean & synced `8bd520116`):
+| Axis | Now | Reality |
+|---|---|---|
+| 1 Build self-containment | **100%** ✅ | the ONLY ungameable axis — DONE (ROM builds byte-identical from committed source, baserom removed) |
+| 2 Matching-C | **77.98%** (6650/8528) | MECHANICAL levers EXHAUSTED (perm2/perfrag/CF-bind/const_diff/codegen-widening all swept per wave_status); remaining ~22% is the hard tail; 100% likely NOT fully reachable (lsr↔asr + reg-alloc agbcc dead-ends) |
+| 3 Extracted data | **3.51%** (489KB/13.9MB) | data is **83% of the ROM by bytes**, 96.5% still opaque `.incbin`; gated on the DEFERRED fe8u-style graphics/gbagfx pipeline |
+| 4 Named symbols | **77.48%** | coddog 3-signal naming = live, byte-neutral lever |
+
+**Decision.** Pouring all remaining capacity into the code hard-tail (axis 2) has bad marginal ROI — it is mechanically
+exhausted and partly unreachable. Axis 3 holds **13.4 MB of un-extracted headroom** (vs code's ~0.3 MB still-asm) and is
+the place "every byte from real source" is most violated. So the next-phase org is **2-front, Soil-primary**:
+- **P9-Soil (PRIMARY, bias capacity here):** investigation-first spike to scope un-deferring the graphics/gbagfx data
+  pipeline (fe8u HAS `gbagfx`/`aif2pcm`/`mid2agb` + 24 Makefile gfx rules as reference). **Hard go/no-go: prove ≥1 JP
+  graphics/data asset round-trips byte-perfect** (extract → re-encode → `.incbin`-free build → `make compare` OK)
+  before any team is funded to scale it.
+- **P9-Grind (SMALLER, continuous):** keep the proven live levers turning as steady safe yield — matching-C tail
+  (decomp-permuter true-codegen-FAR + delta-transfer, IDA/Ghidra hand-decomp, data-table-unblocking) + coddog naming.
+- **P9↔P9 interface:** Soil prioritizes table/graphics/data extractions that **unblock Grind's data-table-blocked FAR
+  functions** (carve the TU-private table a fn reads → its const resolves → the fn carves), not just raw byte count.
+
+**Copilot consult (`agency cp --yolo`, validated independently before logging).** Concurred: fund the spike, bias
+near-term capacity to Soil, keep Grind small-but-continuous, exploit the unblock interface. Added five guards now binding
+on the org: (1) **spike-creep** — Soil MUST have explicit go/no-go, not drift into an open-ended impl project; (2)
+**false-data-progress** — extracting opaque blobs as "assets" does NOT count (calcprogress already enforces: named
+`.incbin` ≠ extraction); require real source-of-truth structure; (3) **pipeline-mismatch** — US gbagfx rules may not map
+to JP text/font/compression/palette ordering; require a byte-perfect PILOT asset before scaling; (4) **integration-races**
+— branch-push + serial coordinator + COLD `make compare` OK stays non-negotiable (D92); (5) **weak-handoff-contract** —
+Soil outputs must carry exact carved ranges, asset type, round-trip command, and which functions/symbols they unblock.
+
+**Org topology + 土壤 (process rules baked into both P9 inputs).** Each P9 works in an **isolated git worktree**; P8/P7
+executors **branch-push to `feat/*`, NEVER self-push to main**; **no two `make` in one checkout** (worktree isolation
+satisfies this); **every push gated on COLD `make compare` OK** (sha1 `7da0456…`); **dangling-carve guard** (every
+`src/<fn>.o` row has a tracked `src/<fn>.c`); **no blanket `git add -A`**. The **CTO (me) owns SERIAL integration to
+main** on `wave_status.py` cadence + supervision — P9s do not merge to main themselves.
+
+**Reusable.** When the ungameable axis is already 100% and the headline axis (matching-C) is mechanically exhausted +
+partly unreachable, the CTO move is NOT to grind the exhausted axis harder — it is to re-point capacity at the axis with
+the largest *real* (source-of-truth, not blob) byte headroom, gated by a cheap byte-perfect pilot before funding scale.
