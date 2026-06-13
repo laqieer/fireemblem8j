@@ -108,7 +108,8 @@ C_OBJECTS   := $(CFILES:.c=.o)
 # The .s files remain committed (so git is clean) but must not enter the link.
 # Add one entry per data-C object added under src/data/<subdir>/.
 DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
-                           asm/dat_data_portrait.s
+                           asm/dat_data_portrait.s \
+                           asm/dat_data_item_icon.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 
