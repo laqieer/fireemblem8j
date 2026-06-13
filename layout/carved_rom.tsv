@@ -1043,7 +1043,7 @@
 8582BC	85B6BC	src/data/data_characters.o(.data)	gCharacterData typed C (256 entries x struct CharacterData; region-different JP values transcribed through the fe8u layout; pSupportData -> JP SupportData_* syms)
 85E068	85FD60	src/data/data_items.o(.data)	gItemData[206] typed C (region-diff JP text IDs + a few gameplay values; pStatBonuses/pEffectiveness link-resolved to data_itembonus/data_itemuse)
 85FD60	8617C8	src/data/data_terrains.o(.data)	data_terrains typed C: battle/combat terrain LUTs (movement-cost per class Normal/Rain/Snow, avoid/def/res bonuses, heal amount+status, banim terrain ground + BG LUTs); region-same prefix of fe8u src/data_terrains.c (replaces 10 misattributed dat_worldmap_gmapunit_p112x..p1135 per-sym carves that were actually these terrain symbols)
-861950	901138	asm/dat_data_portrait.o(.rodata.dat_data_portrait)	dat_data_portrait region-same shifted (637KB)
+861950	901138	src/data/portrait/data_portrait.o(.data)	data_portrait typed C INCBIN_U8 (482 portrait graphics; region-same, 653288B verified; soil-scale)
 902440	902538	src/data/data_itemuse.o(.data)	data_itemuse typed C: ItemEffectiveness_* class lists + gItemUseJidList_* promotion tables (region-diff: ArmorAndHorse drops 4 classes vs fe8u); pointees for gItemData.pEffectiveness
 903138	903450	asm/dat_worldmap_gmapunit_p1290.o(.rodata.dat_worldmap_gmapunit_p1290)	dat_worldmap_gmapunit_p1290 region-same per-sym shifted (0KB)
 903450	903564	src/data/data_itembonus.o(.data)	data_itembonus typed C: ItemBonus_* ItemStatBonuses (region-diff DemonLight/Ravger values); pointees for gItemData.pStatBonuses
