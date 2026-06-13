@@ -3959,3 +3959,22 @@ landed. perfrag's "skipped region-same run" hypothesis is mostly false-positive 
 (a two-agent self-push race left main with a carved_rom overlap), commit each carve to feat/chainUnblock and
 `git push origin HEAD:feat/chainUnblock`; the coordinator integrates serially. First 5 fns were already on main
 (verified OK at push time); BonusClaim_Init delivered on-branch.
+
+## D92 — INCIDENT POSTMORTEM: self-push race + concurrent-build cascade (see docs/incident-2026-06-13-self-push-build-race.md) (2026-06-13)
+
+A two-agent **self-push** race left a **dangling carve** (a `perfrag_*.tsv` fragment committed
+referencing `src/icon_080034D0.o`/`src/face_0800549C.o` whose `.c` was never committed →
+`ld: cannot find src/X.o` on fresh checkout). My `git add -A` "race-fix" (`06c830c75`) made it
+permanent (committed the dangling fragments + removed the asm fallback). Diagnosis was then buried
+under **concurrent `make` builds in one checkout** (every repair attempt + a 17-min cron
+auto-`make compare`) racing on shared generated `src/*.s` → corruption (`bad instruction 'byte 0x..'`)
+→ hours of FALSE failures. Resolved via the `funcmapExtend` agent's `9d1f87fc6` (revert dangling
+carves to descriptive asm); `main` green again at `0b1e528cf` (matching-C 77.93%).
+
+**Standing rules adopted (full detail in the incident doc + memory `wave-integrate-on-cadence`):**
+(1) BRANCH-push + serial integration > multi-agent self-push (self-push races leave dangling carves
+the serial integrator catches). (2) NEVER two `make` in one checkout — drain (`comm`-match, not
+cmdline) then ONE build; no cron auto-`make compare`. (3) Gate every push on `COLD OK` as a separate
+step. (4) Dangling-carve guard: every `src/<fn>.o` carve row must have a git-tracked `src/<fn>.c`.
+(5) Never blanket `git add -A` for layout fixes. Net real damage was ONE function; the rest was
+self-inflicted build-race + over-correction noise.
