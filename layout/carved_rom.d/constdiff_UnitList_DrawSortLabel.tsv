@@ -1,0 +1,1 @@
+092518	092604	src/UnitList_DrawSortLabel.o(.text)	UnitList_DrawSortLabel (const-diff: JP-constant substituted -> matching C; pairs=[('0x4fd', '0x48c')])

@@ -36,3 +36,4 @@ GetChapterAllyUnitCount	08012414	thumb	unitlistscreen_080943D4
 ProcScr_UnitListScreen_SoloAnim	08A936DC	data	unitlistscreen_0809442C
 ProcScr_UnitListScreen_WorldMap	08A9377C	data	unitlistscreen_0809448C
 gUnitlistscreen_5	0200E148	data	unitlistscreen_080944C4
+gUnitlistscreen_6	0200E150	data	unitlistscreen_08092518
