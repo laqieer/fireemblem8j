@@ -1047,9 +1047,9 @@
 902440	902538	src/data/data_itemuse.o(.data)	data_itemuse typed C: ItemEffectiveness_* class lists + gItemUseJidList_* promotion tables (region-diff: ArmorAndHorse drops 4 classes vs fe8u); pointees for gItemData.pEffectiveness
 903138	903450	src/data/data_supports.o(.data)	SupportData_* typed C (33 structs, 792B, region-same bytes; upgraded from dat_worldmap_gmapunit_p1290 incbin)
 903450	903564	src/data/data_itembonus.o(.data)	data_itembonus typed C: ItemBonus_* ItemStatBonuses (region-diff DemonLight/Ravger values); pointees for gItemData.pStatBonuses
-9036DC	90375C	asm/dat_worldmap_gmapunit_p1293.o(.rodata.dat_worldmap_gmapunit_p1293)	dat_worldmap_gmapunit_p1293 region-same per-sym shifted (0KB)
-9037AC	9038BC	asm/dat_worldmap_gmapunit_p1295.o(.rodata.dat_worldmap_gmapunit_p1295)	dat_worldmap_gmapunit_p1295 region-same per-sym shifted (0KB)
-9039C0	903A50	asm/dat_worldmap_gmapunit_p1297.o(.rodata.dat_worldmap_gmapunit_p1297)	dat_worldmap_gmapunit_p1297 region-same per-sym shifted (0KB)
+9036DC	90375C	src/data/data_banimconf_24_29.o(.data)	AnimConf_24-29 typed C (128B, region-same; upgraded from dat_worldmap_gmapunit_p1293 incbin)
+9037AC	9038BC	src/data/data_banimconf_36_47.o(.data)	AnimConf_36-47 typed C (272B, region-same; upgraded from dat_worldmap_gmapunit_p1295 incbin)
+9039C0	903A50	src/data/data_banimconf_61_66.o(.data)	AnimConf_61-66 typed C (144B, region-same; upgraded from dat_worldmap_gmapunit_p1297 incbin)
 907BC8	907F78	src/data/data_chapter_asset_table.o(.data)	gChapterDataAssetTable[236] typed C (region-diff pointers, JP-shifted; last entry NULL)
 9081D8	908228	asm/dat_UnitDef_Event_PrologueEnemy_ref.o(.rodata.dat_UnitDef_Event_PrologueEnemy_ref)	UnitDef_Event_PrologueEnemy region-diff (funcmap code-ref, 0KB)
 9082A0	908354	asm/dat_worldmap_gmapunit_p1311.o(.rodata.dat_worldmap_gmapunit_p1311)	dat_worldmap_gmapunit_p1311 region-same per-sym shifted (0KB)
