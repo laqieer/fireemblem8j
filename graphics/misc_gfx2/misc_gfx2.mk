@@ -172,6 +172,22 @@ asm/dat_trap_gas.o: \
   graphics/misc_gfx2/Pal_ArrowTrap.gbapal \
   graphics/misc_gfx2/Pal_GasTrap.gbapal
 
+# soil-pilot: gWorldmapGmap_3, Img_GmapNodes, Img_GmapCastleNodes need mindist=2
+# for the LZ recompressor to produce byte-identical output.
+graphics/misc_gfx2/gWorldmapGmap_3.4bpp.lz: LZ_FLAGS := -mindist 2
+graphics/misc_gfx2/Img_GmapNodes.4bpp.lz: LZ_FLAGS := -mindist 2
+graphics/misc_gfx2/Img_GmapCastleNodes.4bpp.lz: LZ_FLAGS := -mindist 2
+
+# soil-pilot: typed C object replaces asm/dat_worldmap_gmap_p0.s in the layout.
+# It depends on 4 PNG-derived 4bpp files + 2 PNG-derived 4bpp.lz files.
+src/data/worldmap/worldmap_gmap.o: \
+  graphics/misc_gfx2/gWorldmapGmap_0.4bpp \
+  graphics/misc_gfx2/gWorldmapGmap_1.4bpp \
+  graphics/misc_gfx2/gWorldmapGmap_2.4bpp \
+  graphics/misc_gfx2/gWorldmapGmap_3.4bpp.lz \
+  graphics/misc_gfx2/Img_GmapNodes.4bpp.lz \
+  graphics/misc_gfx2/Img_GmapCastleNodes.4bpp.lz
+
 asm/dat_worldmap_gmap_p0.o: \
   graphics/misc_gfx2/Img_GmapCastleNodes.bin.lz \
   graphics/misc_gfx2/Img_GmapNodes.bin.lz
