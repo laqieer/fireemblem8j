@@ -9,7 +9,7 @@
 # FE8 compressor PER ASSET: 95 sheets use gbagfx's default (mindist 2); the 12 below
 # need mindist 1 (discovered by scripts/extract_graphics.py's 1/2/3 sweep).
 UNIT_ICON_WAIT_LZ := $(patsubst %.png,%.4bpp.lz,$(wildcard graphics/unit_icon/wait/*.png))
-asm/dat_const_data_unit_icon_wait.o: $(UNIT_ICON_WAIT_LZ)
+src/data/unit_icon/const_data_unit_icon_wait.o: $(UNIT_ICON_WAIT_LZ)
 
 graphics/unit_icon/wait/unit_icon_wait_Archer_sheet.4bpp.lz:      LZ_FLAGS := -mindist 1
 graphics/unit_icon/wait/unit_icon_wait_Archer_F_sheet.4bpp.lz:    LZ_FLAGS := -mindist 1

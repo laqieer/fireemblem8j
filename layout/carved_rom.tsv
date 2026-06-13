@@ -348,7 +348,7 @@
 1A00D4	1A4C88	asm/dat_const_data_chapter_maps_p7.o(.rodata.dat_const_data_chapter_maps_p7)	dat_const_data_chapter_maps_p7 region-same per-sym shifted (18KB)
 1A4F44	1A6774	asm/dat_const_data_chapter_maps_p8.o(.rodata.dat_const_data_chapter_maps_p8)	dat_const_data_chapter_maps_p8 region-same per-sym shifted (6KB)
 1A6930	1A71E0	asm/dat_const_data_chapter_maps_p9.o(.rodata.dat_const_data_chapter_maps_p9)	dat_const_data_chapter_maps_p9 region-same per-sym shifted (2KB)
-1A71E0	1B04B4	asm/dat_const_data_unit_icon_wait.o(.rodata.dat_const_data_unit_icon_wait)	dat_const_data_unit_icon_wait region-same shifted (36KB)
+1A71E0	1B04B4	src/data/unit_icon/const_data_unit_icon_wait.o(.rodata)	const_data_unit_icon_wait typed C INCBIN_U8 (107 wait sheets, 37588B; region-same; soil-scale)
 1B04B4	1B1878	asm/dat_const_data_1C0AFC.o(.rodata.dat_const_data_1C0AFC)	dat_const_data_1C0AFC region-same shifted (4KB)
 1B2D84	1B3734	asm/dat_const_data_unit_icon_move_p0.o(.rodata.dat_const_data_unit_icon_move_p0)	dat_const_data_unit_icon_move_p0 region-same per-sym shifted (2KB)
 1B388C	1B4084	asm/dat_const_data_unit_icon_move_p1.o(.rodata.dat_const_data_unit_icon_move_p1)	dat_const_data_unit_icon_move_p1 region-same per-sym shifted (1KB)
