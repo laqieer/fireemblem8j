@@ -38,6 +38,12 @@ PRODUCTIVE = [
     "  decomp-permuter (TRUE codegen-shape FAR minority + delta-transfer),",
     "  IDA/Ghidra hand-decomp (call-graph-different, LEN, pure-JP),",
     "  DATA-TABLE-UNBLOCKING: carve the TU-private table a FAR fn reads, then its const/call resolves -> the fn carves",
+    "  NO-WORKLIST coddog-named re-sweep (D90, +15): for each still-asm coddog-NAMED fn (reference/maps/",
+    "    coddog_classification.tsv jp_addr->us_name — TRUST IT OVER funclib, whose JP-addr col is stale),",
+    "    extract_func_only + compile + diff vs the JP range at the asm-file addr; 0 non-reloc diffs => carve",
+    "    (drop the fn's OWN colliding ABS bind + bind callees at their asm-.set JP addrs); 1-3 diffs => clean",
+    "    const/glyph/layout substitution. NOTE: the 0/1-3-diff coddog-named subset is now SWEPT (D90); only",
+    "    StartFaceChibiSpr (weak-near codegen-diff) remained -> permuter. Re-scan only after new funcmap coverage.",
     "typed-data: region-same sub-table splits inside region-diff incbins (slow; pure-const-array US TUs near-exhausted)",
 
     "typed-data: pure-const-array US TUs in src/*.c (not src/data/*.c graphics wrappers) — m4a_tables.c pattern",
