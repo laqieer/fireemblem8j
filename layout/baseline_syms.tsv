@@ -1275,3 +1275,4 @@ ProcScr_efxThunderBGCOL	085FF700	data	banim-efxmagic-thunder
 ProcScr_efxThunderOBJ	085FF720	data	banim-efxmagic-thunder
 AnimScr_EfxThunderOBJ_L	08622128	data	banim-efxmagic-thunder
 AnimScr_EfxThunderOBJ_R	086215FC	data	banim-efxmagic-thunder
+sInitializingMap	03000800	data	BmMapInit working ptr (static in bmmap_08019194.o BSS)

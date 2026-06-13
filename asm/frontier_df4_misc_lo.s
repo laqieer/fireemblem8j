@@ -6,11 +6,17 @@
 @ snapped to carved edges; already-carved region-same sub-assets are
 @ gap-subtracted, so only the uncarved blobs are emitted here.
 
-	.section .data.frontier_df4_misc_lo.gap0, "a", %progbits
-@ df4_misc_lo region-different data, JP 0x080dc3dc..0x080dc650 (628 B); long-tail data gap (no .text in window), byte-perfect incbin.
-	.global frontier_df4_misc_lo_000_0DC3DC
-frontier_df4_misc_lo_000_0DC3DC:
-	.incbin "graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000_0DC3DC.bin"
+	.section .data.frontier_df4_misc_lo.gap0a, "a", %progbits
+@ df4_misc_lo region-different data, JP 0x080dc3dc..0x080dc3fc (32 B); split before GetGenericChibiImg rodata at 0x080dc3fc.
+	.global frontier_df4_misc_lo_000a_0DC3DC
+frontier_df4_misc_lo_000a_0DC3DC:
+	.incbin "graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000a_0DC3DC.bin"
+
+	.section .data.frontier_df4_misc_lo.gap0b, "a", %progbits
+@ df4_misc_lo region-different data, JP 0x080dc41c..0x080dc650 (564 B); split after GetGenericChibiImg rodata at 0x080dc3fc.
+	.global frontier_df4_misc_lo_000b_0DC41C
+frontier_df4_misc_lo_000b_0DC41C:
+	.incbin "graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin"
 
 	.section .data.frontier_df4_misc_lo.gap1, "a", %progbits
 @ df4_misc_lo region-different data, JP 0x080dc96c..0x080dcc90 (804 B); long-tail data gap (no .text in window), byte-perfect incbin.
