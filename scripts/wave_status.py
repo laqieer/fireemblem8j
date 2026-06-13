@@ -31,6 +31,7 @@ EXHAUSTED = {
     "CF:agbcc bind_tu (funcmap functions)": "cfBind D67 swept the funcmap set",
     "const_diff_carve.py (<=200B FAR pool)": "cdSmall D87: 18 candidates all revert — call-graph-different (BL to a different JP callee); D81's productive 59 already merged",
     "const_diff_carve.py (>200B FAR pool)": "cdLarge D88: 0/424 land — const lives in TU-private DATA TABLES, not inline literals",
+    "codegen-shape type-widening sweep (signed/bool->int local, 0-2000B FAR/LEN)": "permuterB D89: +30 carved (the temp-var-width delta) incl. per-occurrence re-sweep; worklist now SWEPT — residual winners are callee-blocked (unbound region-diff callee), data-table-blocked (TU-private static arrays), or pool-word false-NEAR. Re-scan only after new callee/data carves unblock chains.",
 }
 # Levers still productive (dispatch THESE):
 PRODUCTIVE = [

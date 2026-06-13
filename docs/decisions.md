@@ -3878,3 +3878,37 @@ pointer `gpBonusClaimText+14` -> ROM literal 0x8A9E508 that the existing 0xE048 
 (s8-param sign-extend width diff). Gates green throughout: warm+cold `make compare` OK, `make check` OK,
 self-contained 100% (0 incbins), ROM 16,777,216. No PR; integrated on cadence by the coordinator. (D89 was used
 informally by the prior tableUnblock run's commit 87d588b03 without a decisions entry; took D90 to avoid collision.)
+
+## D89-followup — permuterB type-widening lever EXHAUSTED on 0-2000B FAR/LEN: +30 carved total (per-occurrence re-sweep recovered the missed minority); residue is callee/data-blocked (2026-06-13)
+
+Extended D89 to completion. Final tally **+30 matching-C** from the codegen-shape type-widening sweep
+(`signed/bool -> int` local-temp, per declaration). Two refinements over the initial pass:
+- **per-occurrence widening**: the sweep now widens EACH narrow-type declaration independently (not just the
+  first match). This recovered functions where the relevant var wasn't the first occurrence —
+  `StartAfterUnitMovedEvent`/`StartDestSelectedEvent`/`TryCallSelectEvents` (eventinfo `s8 ret -> int` sibling
+  family), `SaveMenuWriteNewGame` (the earlier LEN+4 false-positive resolved to the correct occurrence),
+  `SaveDraw_SetObjPalColor` (`s8 flag -> u8` param; no active prototype to conflict). The sweep now also writes
+  the winning variant to `/tmp/winners/<name>.c` so the carve uses the EXACT verified source (eliminates the
+  re-application divergence that caused a false LEN on PutUnitSpriteIconsOam).
+- **`/tmp/autofix.py` transform set**: `s8|s16|u8|u16|bool|char -> int` (count=1) + all-occurrence + signedness
+  flips + per-occurrence `#k`. Verify each hit with `make compare` (object `.text` size == declared range, then
+  full ROM sha1) — NEAR is necessary but NOT sufficient (pool-word diffs and size growth both probe NEAR).
+
+**EXHAUSTED on the 0-2000B FAR/LEN worklist** (added to `scripts/wave_status.py`). The residual sweep winners
+are all blocked, not codegen-shape-fixable:
+- **callee-blocked** (unbound region-diff callee → `undefined reference`): EventAC_WmUnitMoveWait
+  (IsGmAutoMuActiveFor/EndGmAutoMuFor), ItemSelectMenu_TextDraw (WeaponSelectMenu_Draw),
+  AiAttemptStealActionWithinMovement (AiFindBestAdjacentPositionByFunc/AiGetUnitStealItemSlot),
+  StartBattleAnimHitEffects (NewEfxHpBar/NewEfxHitQuake/NewEfxFlashHPBar). Carveable once the named callee is
+  carved (carve-order chain — re-sweep after the data-table/funcmap waves bind them). The chain heads
+  (e.g. IsGmAutoMuActiveFor) need real header work (`struct AutoMuTarget`, `ProcScr_GmapAutoMu` undefined in the
+  JP headers) — a porting task, not this lever.
+- **data-table-blocked**: PutUnitSpriteIconsOam reads TU-private static sprite tables (`sPoisonIconSprites`, …)
+  the function-only extract omits → typed-data carving territory, not codegen-shape.
+- **pool-word false-NEAR**: DrawBonusClaimItemText (a pc-rel literal word resolves differently in the full link).
+
+The `lsr↔asr` single-byte cluster (D89, ~27 fns: ConfigSysHandCursorShadowEnabled/GmMu_0/EkrPrepareBanimfx/…)
+re-confirmed UNSOLVABLE: identical C + identical types compile `lsrs` (US) vs `asrs` (JP); not a C-shape or
+permuter-reachable difference. The remaining true-permuter cases are reg-allocation/temp-ordering
+(e.g. WeaponSelectMenu_Draw's arg-eval-order swap — permuter base score floored at 130 after symbol mapping,
+no score-0 found; needs more iterations or a manual statement reorder).
