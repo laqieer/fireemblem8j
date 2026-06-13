@@ -3665,3 +3665,41 @@ residue ONLY (D81/D84). Each future wave that exhausts a lever must add it to `w
 
 **State at fix:** matching-C 77.19% (6583/8528), extracted-data 3.51%, named-symbols 76.84%, self-contained 100%
 (a 3-byte baserom gap re-opened by the merge was re-closed via `close_baserom_gaps.py`).
+
+## D86 — cdLarge EXHAUSTED: const_diff_carve on >200B FAR yields 0 clean landings (the large-function const-diff residue is data-table-dependent, not inline-literal) (2026-06-13)
+
+**Goal.** Run `scripts/const_diff_carve.py` (D81/D84) at scale on the LARGER FAR pool (>200B, `--min 200`),
+the size-band disjoint from the sibling cdSmall (≤200B). Branch `feat/cdLarge`. Hit-rate is known to be lower for
+big functions; the hypothesis was that const-diff matches still land at volume.
+
+**Method.** Full no-verify scan of all 424 FAR functions ≥200B (`nofuncmap_region_different.tsv`), then `--verify`
+batches on every CARVE candidate. `make compare` the sole oracle (baseline + final cold build both OK, ROM 16 MB,
+self-contained 100%).
+
+**Result — 0 clean landings out of 424.** The classifier proposed only **4 CARVE candidates** in the entire >200B
+pool (`UnitList_DrawSortLabel` 0x4FD→0x48C, `PrepUnit_DrawPickLeftBar`, `PrepItemUse_ConfirmWindowCtrlLoop`,
+`BonusClaim_DrawItemSentPopup`), and **all 4 reverted** under verify-or-revert. Full skip breakdown of the 326
+examined: 119 `LEN` (structurally region-diff → permuter), 106 `CF:agbcc` (funcmap codegen → bind_tu, exhausted),
+31 `NOADDR`, 24+ `ABORT:codegen` (true opcode/instr-selection FAR → permuter), 9 `NEAR(use-perm2)` (exhausted),
+3 `NOMATCH`, ~18 `ABORT:nolit` (const-diff value present but NOT a substitutable raw literal — symbolic macro or
+data-table field).
+
+**Root cause (the structural finding).** Large FAR functions that DO have const-diffs pull their varying constants
+from **TU-private DATA TABLES**, not inline literals. Inspected directly: `UnitList_DrawSortLabel` and
+`DrawLinkArenaRuleScreen` both read msg-IDs via `GetStringFromIndex(<table>[i].labelTextId)` — the JP/US diff lives
+in the table's bytes, unreachable by function-only isolation, so the single-literal substitution can never
+byte-match (correctly reverted). The `ABORT:nolit` cases (VRAM-addr shifts `0x6002C00→0x6002800`,
+`0x6011140→0x60119C0`; msg-IDs `0x74B→0x6D6`) are the same class: the value is computed/table-sourced, not a raw C
+literal. **const_diff_carve's sweet spot is SMALL functions with INLINE literals (cdSmall ≤200B); the large band's
+const-diff residue is data-table-dependent and belongs to a DIFFERENT lever (typed-data carving of those tables),
+not const-diff substitution.**
+
+**EXHAUSTED lever (do NOT re-dispatch):** `const_diff_carve.py --min 200` (the >200B FAR band). Added to
+`scripts/wave_status.py`. The remaining matching-C in this band is true-codegen-FAR (119 LEN + ~25 codegen → permuter)
+or data-table-dependent (→ typed-data carving), neither addressable by const-diff. No commits on `feat/cdLarge`
+(nothing landed); build left cold-green at the pre-existing main state.
+
+**Tooling note.** `const_diff_carve.py`'s no-verify scan and single-fn `--verify` leave staged artifacts on revert
+(dirty `src/*.c` + `layout/carved_rom.d/constdiff_*.tsv` + dropped asm) that must be cleaned with
+`git checkout -- asm/ layout/ && git clean -fd src/ layout/carved_rom.d/` before the next `make compare`. A future
+hardening would make `revert()` fully restore the tree.

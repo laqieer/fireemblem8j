@@ -29,10 +29,11 @@ EXHAUSTED = {
     "perm2 reloc-resolve (addr >= 0x8067584)": "mcHi2 D83 swept it",
     "perfrag region-same (both halves)": "harvAM/harvNZ/mcMechLo/mcHi2",
     "CF:agbcc bind_tu (funcmap functions)": "cfBind D67 swept the funcmap set",
+    "const_diff_carve.py --min 200 (FAR >200B band)": "cdLarge D86: 0/424 land — residue is data-table-dependent, not inline-literal",
 }
 # Levers still productive (dispatch THESE):
 PRODUCTIVE = [
-    "const_diff_carve.py on the FAR *constant-diff* residue ONLY (D81/D84) — the live matching-C lever",
+    "const_diff_carve.py on the SMALL FAR const-diff residue (<=200B inline-literal band) ONLY (D81/D84/D86) — the live matching-C lever",
     "typed-data: pure-const-array US TUs in src/*.c (not src/data/*.c graphics wrappers) — m4a_tables.c pattern",
     "NAME-data byte-neutral renaming (needs /tmp/us_syms.tsv built from fe8u map first)",
     "decomp-permuter for the TRUE codegen-shape FAR (minority) + delta-transfer",
