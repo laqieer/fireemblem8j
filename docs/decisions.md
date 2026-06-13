@@ -4142,3 +4142,32 @@ already AIFF source-of-truth (lower priority).
 build-graph path (here: the `src/data/*.c` preproc recipe). Prove region-SAME first (cheapest: US asset byte-identical →
 port the source form), bank the scaling pattern, THEN fund the volume wave. Integrator COLD-verifies independently —
 never merge a worker's "make compare OK" claim on trust.
+
+## D98 — long-running worker agents STALL (~5-6h, watchdog kill); use BOUNDED workers + integrator owns serial recovery (2026-06-13)
+
+**Incident.** During the `/pua:pua-loop` drive, all 4 long-running worker agents (Soil-Scale graphics, P9-Grind
+matching-C, W-Naming, W-GfxJP2) hit the harness stream-watchdog ("no progress for 600s, stream watchdog did not
+recover") after ~5-6h runs and were killed. Detected via agent `.output` mtime (~18-22k s idle) — a more reliable
+liveness signal than worktree-file mtime (a detached `make` can touch worktree files after the agent itself hangs).
+Their **committed** work was already integrated; only **uncommitted WIP** (a generated C file, a half-done rename
+batch) was lost — incomplete, so safely discarded rather than salvaged.
+
+**Recovery (integrator-owned, all COLD-verified).** Salvaged the one outstanding committed commit (GfxJP2's btl_bg
+asm→src/data conversion, +115 KB now COUNTS → data 12.59→13.41%); its merge hit the FIRST real conflict of the drive
+(`Makefile DATA_INCBIN_ASM_EXCLUDE` list — resolved by **union** of both branches' excluded-asm entries; `carved_rom.tsv`
+auto-merged). COLD `make compare` OK, verified mapanim/ending/Grind files all survived the conflict resolution. Then
+unlock+remove the 4 locked stalled worktrees (`git worktree unlock` then `remove --force`; single `--force` fails on a
+harness-locked worktree) + 2 orphan sub-agent worktrees. 0 stray processes after.
+
+**Fix — BOUNDED workers.** Re-dispatched fresh **general-purpose** (not P9 — fewer sub-processes = less contention)
+workers with **bounded scope**: "do UP TO N items (8 graphics / 5 funcs / 120 names) OR ~45 min, then push + report +
+EXIT — do NOT loop forever." Bounded workers complete cleanly before the stall window; the integrator (CTO main thread)
+re-dispatches the next bounded wave on completion. This replaces the "one long-running agent per lane" model that
+stalls.
+
+**Reusable.** (1) Worker agents have a finite reliable lifetime (~hours) before the stream watchdog kills them — design
+work as **bounded batches that exit**, not forever-loops. (2) `.output` mtime > worktree mtime for agent liveness. (3) A
+worker branched off an old main shows scary "deletion" diffs for everything main added since its base — the 3-way merge
+PRESERVES main's additions; verify the key files survived rather than trusting the stat. (4) The recurring conflict
+surface for parallel data carving is `Makefile DATA_INCBIN_ASM_EXCLUDE` + `ldscript.txt` + `carved_rom.tsv`; resolve by
+union/different-rows. (5) Integrator must COLD-verify after resolving a conflict, never just trust the auto-merge.
