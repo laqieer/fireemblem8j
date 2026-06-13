@@ -6,7 +6,24 @@
 cron was DISABLED 2026-06-08 — see decisions.md D8; the launched agent kept
 getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
-## ⏩ CURRENT STATE — 2026-06-13 CTO ORG DISPATCH (READ THIS FIRST; newest)
+## ⏩ CURRENT STATE — 2026-06-13 PUA-LOOP DRIVE (READ THIS FIRST; newest)
+
+**main `dbaa615d3`, green (`make compare` OK), self-contained 100%.** Autonomous `/pua:pua-loop` driving the
+final goal under a strict Oracle (`scripts/final_goal_oracle.sh`: make compare OK + all 4 axes 100% — cannot fake-complete).
+Axes: self-contain **100%** · matching-C **77.98%** (6650/8528) · extracted-data **4.12%** (up from 3.51%) · named **77.48%**.
+
+**3-lane parallel org (worktree workers branch-push; CTO=main thread serial-integrates, COLD-verifies each):**
+- **Soil-Scale** (`feat/soil-scale`) — region-SAME PNG-sourced graphics batch (the ~9 MB volume lever, DATA_INCBIN_CFILES). BIG data jump pending.
+- **W-GfxJP** (`feat/soil-gfxjp`) — region-DIFFERENT graphics decode (btl_bg/fonts, JP .4bpp→PNG; Soil-Scale skips these).
+- **P9-Grind** (`feat/grind-*`) — matching-C hand-decomp/permuter + coddog naming (slow tail).
+
+**Integrations done this drive (all COLD/byte-verified, make compare never regressed):** D97 worldmap_gmap graphics pilot
+(+83 KB, proved gbagfx pipeline portable) → Makefile `DATA_INCBIN_CFILES` generalization → W-Tables supports+AnimConf
+(+1.3 KB, region-same tables EXHAUSTED; char/class already typed-C on main `5a49aa39f`).
+**Ruled-out levers (don't re-open):** us_syms-naming, NAME-data (3 names), Tier-4 opaque (180 KB padding/tiny), region-same tables.
+**Decisions:** D96 (2-front strategy) + D97 (graphics GO). `docs/data-target-map.md` tiers the data axis.
+
+### (prior) ⏩ CURRENT STATE — 2026-06-13 CTO ORG DISPATCH
 
 **main `ff74c5e52`, VERIFIED green (`make compare` => OK this session) + synced, clean.** Acting-CTO (P10)
 re-baselined vs ground truth and committed **D96** (2-front next-phase strategy). **TWO P9 worktree agents are
