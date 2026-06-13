@@ -1,12 +1,12 @@
 	.syntax unified
 	.set sub_800579C, 0x0800579C + 1
 	.set sub_800582C, 0x0800582C + 1
-	.section .text.sub_8005890, "ax", %progbits
-@ sub_8005890 @ JP 0x08005890 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.PutFaceChibi, "ax", %progbits
+@ PutFaceChibi @ JP 0x08005890 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8005890
+	.global PutFaceChibi
 	.thumb_func
-sub_8005890:
+PutFaceChibi:
 	push {r4, r5, r6, lr}
 	mov r6, r8
 	push {r6}

@@ -1,11 +1,11 @@
 	.syntax unified
 	.set CallARM_PushToSecondaryOAM, 0x08002B08 + 1
-	.section .text.sub_8005360, "ax", %progbits
-@ sub_8005360 @ JP 0x08005360 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.PushSpriteLayerObjects, "ax", %progbits
+@ PushSpriteLayerObjects @ JP 0x08005360 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8005360
+	.global PushSpriteLayerObjects
 	.thumb_func
-sub_8005360:
+PushSpriteLayerObjects:
 	push {r4, lr}
 	lsls r0, r0, #4
 	ldr r1, _0800538C @ =0x0202A588

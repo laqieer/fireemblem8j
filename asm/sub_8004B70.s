@@ -4,12 +4,12 @@
 	.set PutSpecialChar, 0x08004A14 + 1
 	.set __divsi3, 0x080D65F8 + 1
 	.set __modsi3, 0x080D6690 + 1
-	.section .text.sub_8004B70, "ax", %progbits
-@ sub_8004B70 @ JP 0x08004B70 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.PutTime, "ax", %progbits
+@ PutTime @ JP 0x08004B70 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8004B70
+	.global PutTime
 	.thumb_func
-sub_8004B70:
+PutTime:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

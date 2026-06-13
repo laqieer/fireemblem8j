@@ -2,12 +2,12 @@
 	.set Text_Skip, 0x08003D88 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_80040B8, 0x080040B8 + 1
-	.section .text.sub_80047B8, "ax", %progbits
-@ sub_80047B8 @ JP 0x080047B8 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.TextPrint_OnLoop, "ax", %progbits
+@ TextPrint_OnLoop @ JP 0x080047B8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80047B8
+	.global TextPrint_OnLoop
 	.thumb_func
-sub_80047B8:
+TextPrint_OnLoop:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	adds r1, r4, #0

@@ -1,10 +1,10 @@
 	.syntax unified
-	.section .text.sub_80012FC, "ax", %progbits
-@ sub_80012FC @ JP 0x080012FC - region-different, gbadisasm descriptive asm (D23)
+	.section .text._UpdateKeyStatus, "ax", %progbits
+@ _UpdateKeyStatus @ JP 0x080012FC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80012FC
+	.global _UpdateKeyStatus
 	.thumb_func
-sub_80012FC:
+_UpdateKeyStatus:
 	push {r4, r5, lr}
 	adds r2, r0, #0
 	lsls r1, r1, #0x10

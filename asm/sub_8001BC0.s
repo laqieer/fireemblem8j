@@ -1,10 +1,10 @@
 	.syntax unified
-	.section .text.sub_8001BC0, "ax", %progbits
-@ sub_8001BC0 @ JP 0x08001BC0 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.BG_GetMapBuffer, "ax", %progbits
+@ BG_GetMapBuffer @ JP 0x08001BC0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8001BC0
+	.global BG_GetMapBuffer
 	.thumb_func
-sub_8001BC0:
+BG_GetMapBuffer:
 	ldr r1, _08001BCC @ =0x085775E8
 	lsls r0, r0, #2
 	adds r0, r0, r1

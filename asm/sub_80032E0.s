@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80D65C0, 0x080D65C0 + 1
-	.section .text.sub_80032E0, "ax", %progbits
-@ sub_80032E0 @ JP 0x080032E0 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.RunProcessScript, "ax", %progbits
+@ RunProcessScript @ JP 0x080032E0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80032E0
+	.global RunProcessScript
 	.thumb_func
-sub_80032E0:
+RunProcessScript:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r0, [r4]

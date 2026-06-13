@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8004470, 0x08004470 + 1
-	.section .text.sub_8003E0C, "ax", %progbits
-@ sub_8003E0C @ JP 0x08003E0C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.GetStringTextLen, "ax", %progbits
+@ GetStringTextLen @ JP 0x08003E0C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8003E0C
+	.global GetStringTextLen
 	.thumb_func
-sub_8003E0C:
+GetStringTextLen:
 	push {r4, r5, lr}
 	adds r2, r0, #0
 	movs r4, #0

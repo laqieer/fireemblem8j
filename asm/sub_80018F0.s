@@ -1,10 +1,10 @@
 	.syntax unified
-	.section .text.sub_80018F0, "ax", %progbits
-@ sub_80018F0 @ JP 0x080018F0 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.ColorFadeSetupFromColorToWhite, "ax", %progbits
+@ ColorFadeSetupFromColorToWhite @ JP 0x080018F0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80018F0
+	.global ColorFadeSetupFromColorToWhite
 	.thumb_func
-sub_80018F0:
+ColorFadeSetupFromColorToWhite:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

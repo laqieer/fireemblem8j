@@ -3,12 +3,12 @@
 	.set InsertChildProcess, 0x08002D18 + 1
 	.set InsertRootProcess, 0x08002CF4 + 1
 	.set sub_80032E0, 0x080032E0 + 1
-	.section .text.sub_8002BCC, "ax", %progbits
-@ sub_8002BCC @ JP 0x08002BCC - region-different, gbadisasm descriptive asm (D23)
+	.section .text.Proc_Start, "ax", %progbits
+@ Proc_Start @ JP 0x08002BCC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8002BCC
+	.global Proc_Start
 	.thumb_func
-sub_8002BCC:
+Proc_Start:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	adds r6, r1, #0

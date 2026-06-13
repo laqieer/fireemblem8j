@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8004140, 0x08004140 + 1
-	.section .text.sub_800493C, "ax", %progbits
-@ sub_800493C @ JP 0x0800493C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.DrawSpecialCharGlyph, "ax", %progbits
+@ DrawSpecialCharGlyph @ JP 0x0800493C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800493C
+	.global DrawSpecialCharGlyph
 	.thumb_func
-sub_800493C:
+DrawSpecialCharGlyph:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

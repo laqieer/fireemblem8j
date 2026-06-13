@@ -1,10 +1,10 @@
 	.syntax unified
-	.section .text.sub_800579C, "ax", %progbits
-@ sub_800579C @ JP 0x0800579C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.PutFaceTm, "ax", %progbits
+@ PutFaceTm @ JP 0x0800579C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800579C
+	.global PutFaceTm
 	.thumb_func
-sub_800579C:
+PutFaceTm:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

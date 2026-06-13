@@ -2,12 +2,12 @@
 	.set __ashldi3, 0x080D6588 + 1
 	.set sub_8004140, 0x08004140 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
-	.section .text.sub_80041A0, "ax", %progbits
-@ sub_80041A0 @ JP 0x080041A0 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.DrawTextGlyphNoClear, "ax", %progbits
+@ DrawTextGlyphNoClear @ JP 0x080041A0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80041A0
+	.global DrawTextGlyphNoClear
 	.thumb_func
-sub_80041A0:
+DrawTextGlyphNoClear:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -2,12 +2,12 @@
 	.set AreUnitsAllied, 0x08024D3C + 1
 	.set sub_803B434, 0x0803B434 + 1
 	.set sub_803B720, 0x0803B720 + 1
-	.section .text.sub_803AFFC, "ax", %progbits
-@ sub_803AFFC @ JP 0x0803AFFC - region-different, gbadisasm descriptive asm (D23)
+	.section .text.AiFindClosestUnlockPosition, "ax", %progbits
+@ AiFindClosestUnlockPosition @ JP 0x0803AFFC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803AFFC
+	.global AiFindClosestUnlockPosition
 	.thumb_func
-sub_803AFFC:
+AiFindClosestUnlockPosition:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

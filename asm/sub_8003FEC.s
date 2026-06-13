@@ -2,12 +2,12 @@
 	.set __divsi3, 0x080D65F8 + 1
 	.set __modsi3, 0x080D6690 + 1
 	.set sub_80040B8, 0x080040B8 + 1
-	.section .text.sub_8003FEC, "ax", %progbits
-@ sub_8003FEC @ JP 0x08003FEC - region-different, gbadisasm descriptive asm (D23)
+	.section .text.Text_DrawNumberOrSpace, "ax", %progbits
+@ Text_DrawNumberOrSpace @ JP 0x08003FEC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8003FEC
+	.global Text_DrawNumberOrSpace
 	.thumb_func
-sub_8003FEC:
+Text_DrawNumberOrSpace:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r4, r0, #0

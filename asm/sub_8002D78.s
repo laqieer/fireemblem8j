@@ -1,18 +1,18 @@
 	.syntax unified
 	.set sub_80032E0, 0x080032E0 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
-	.section .text.sub_8002D78, "ax", %progbits
-@ sub_8002D78 @ JP 0x08002D78 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.RunProcessRecursive, "ax", %progbits
+@ RunProcessRecursive @ JP 0x08002D78 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8002D78
+	.global RunProcessRecursive
 	.thumb_func
-sub_8002D78:
+RunProcessRecursive:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r0, [r4, #0x20]
 	cmp r0, #0
 	beq _08002D86
-	bl sub_8002D78
+	bl RunProcessRecursive
 _08002D86:
 	adds r0, r4, #0
 	adds r0, #0x28
@@ -49,7 +49,7 @@ _08002DC4:
 	ldr r0, [r4, #0x18]
 	cmp r0, #0
 	beq _08002DCE
-	bl sub_8002D78
+	bl RunProcessRecursive
 _08002DCE:
 	pop {r4, r5}
 	pop {r0}

@@ -1,12 +1,12 @@
 	.syntax unified
 	.set BG_EnableSyncByMask, 0x08001EFC + 1
 	.set sub_80011D0, 0x080011D0 + 1
-	.section .text.sub_80037BC, "ax", %progbits
-@ sub_80037BC @ JP 0x080037BC - region-different, gbadisasm descriptive asm (D23)
+	.section .text.ClearDBG, "ax", %progbits
+@ ClearDBG @ JP 0x080037BC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80037BC
+	.global ClearDBG
 	.thumb_func
-sub_80037BC:
+ClearDBG:
 	push {r4, r5, r6, lr}
 	movs r1, #0
 	ldr r2, _080037F8 @ =0x02026E30

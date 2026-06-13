@@ -2,12 +2,12 @@
 	.set GetPortraitData, 0x0800541C + 1
 	.set sub_80139E0, 0x080139E0 + 1
 	.set sub_8013B3C, 0x08013B3C + 1
-	.section .text.sub_8005DF4, "ax", %progbits
-@ sub_8005DF4 @ JP 0x08005DF4 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.StartFaceFadeIn, "ax", %progbits
+@ StartFaceFadeIn @ JP 0x08005DF4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8005DF4
+	.global StartFaceFadeIn
 	.thumb_func
-sub_8005DF4:
+StartFaceFadeIn:
 	push {r4, r5, r6, lr}
 	mov r6, r8
 	push {r6}

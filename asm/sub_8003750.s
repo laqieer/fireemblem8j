@@ -1,11 +1,11 @@
 	.syntax unified
 	.set BG_EnableSync, 0x08001F0C + 1
-	.section .text.sub_8003750, "ax", %progbits
-@ sub_8003750 @ JP 0x08003750 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.PrintDebugStringToBG, "ax", %progbits
+@ PrintDebugStringToBG @ JP 0x08003750 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8003750
+	.global PrintDebugStringToBG
 	.thumb_func
-sub_8003750:
+PrintDebugStringToBG:
 	push {r4, r5, r6, lr}
 	adds r2, r0, #0
 	ldrb r0, [r1]

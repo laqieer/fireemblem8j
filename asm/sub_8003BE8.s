@@ -2,12 +2,12 @@
 	.set SetTextFont, 0x08003C68 + 1
 	.set sub_8003BC0, 0x08003BC0 + 1
 	.set sub_80042E0, 0x080042E0 + 1
-	.section .text.sub_8003BE8, "ax", %progbits
-@ sub_8003BE8 @ JP 0x08003BE8 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.InitTextFont, "ax", %progbits
+@ InitTextFont @ JP 0x08003BE8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8003BE8
+	.global InitTextFont
 	.thumb_func
-sub_8003BE8:
+InitTextFont:
 	push {r4, lr}
 	adds r4, r0, #0
 	cmp r4, #0

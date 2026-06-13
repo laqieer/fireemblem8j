@@ -1,12 +1,12 @@
 	.syntax unified
 	.set sub_8000CD8, 0x08000CD8 + 1
 	.set sub_8001EE4, 0x08001EE4 + 1
-	.section .text.sub_800488C, "ax", %progbits
-@ sub_800488C @ JP 0x0800488C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.GreenText_OnLoop, "ax", %progbits
+@ GreenText_OnLoop @ JP 0x0800488C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800488C
+	.global GreenText_OnLoop
 	.thumb_func
-sub_800488C:
+GreenText_OnLoop:
 	push {lr}
 	bl sub_8000CD8
 	lsrs r0, r0, #2

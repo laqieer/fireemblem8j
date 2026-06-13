@@ -1,12 +1,12 @@
 	.syntax unified
 	.set sub_80D636C, 0x080D636C + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
-	.section .text.sub_8004564, "ax", %progbits
-@ sub_8004564 @ JP 0x08004564 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.SpriteText_Clear, "ax", %progbits
+@ SpriteText_Clear @ JP 0x08004564 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8004564
+	.global SpriteText_Clear
 	.thumb_func
-sub_8004564:
+SpriteText_Clear:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #8
 	adds r7, r0, #0

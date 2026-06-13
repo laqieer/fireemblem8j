@@ -1,10 +1,10 @@
 	.syntax unified
-	.section .text.sub_8004470, "ax", %progbits
-@ sub_8004470 @ JP 0x08004470 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.GetStringTextLenASCII, "ax", %progbits
+@ GetStringTextLenASCII @ JP 0x08004470 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8004470
+	.global GetStringTextLenASCII
 	.thumb_func
-sub_8004470:
+GetStringTextLenASCII:
 	push {lr}
 	adds r1, r0, #0
 	movs r2, #0

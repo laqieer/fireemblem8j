@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80D6370, 0x080D6370 + 1
-	.section .text.sub_80034D0, "ax", %progbits
-@ sub_80034D0 @ JP 0x080034D0 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.ResetIconGraphics, "ax", %progbits
+@ ResetIconGraphics @ JP 0x080034D0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80034D0
+	.global ResetIconGraphics
 	.thumb_func
-sub_80034D0:
+ResetIconGraphics:
 	push {r4, lr}
 	sub sp, #4
 	mov r0, sp

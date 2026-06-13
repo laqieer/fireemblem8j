@@ -5,12 +5,12 @@
 	.set sub_8001EE4, 0x08001EE4 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_80D636C, 0x080D636C + 1
-	.section .text.sub_8005544, "ax", %progbits
-@ sub_8005544 @ JP 0x08005544 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.StartFace, "ax", %progbits
+@ StartFace @ JP 0x08005544 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8005544
+	.global StartFace
 	.thumb_func
-sub_8005544:
+StartFace:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

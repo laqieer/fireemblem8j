@@ -1,12 +1,12 @@
 	.syntax unified
 	.set Sound_SetDefaultMaxNumChannels, 0x08002820 + 1
 	.set sub_8002838, 0x08002838 + 1
-	.section .text.sub_800284C, "ax", %progbits
-@ sub_800284C @ JP 0x0800284C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.Sound_SetupMaxChannelsForSong, "ax", %progbits
+@ Sound_SetupMaxChannelsForSong @ JP 0x0800284C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800284C
+	.global Sound_SetupMaxChannelsForSong
 	.thumb_func
-sub_800284C:
+Sound_SetupMaxChannelsForSong:
 	push {lr}
 	cmp r0, #0x40
 	beq _0800286C

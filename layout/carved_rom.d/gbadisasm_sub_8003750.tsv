@@ -1,1 +1,1 @@
-003750	003798	asm/sub_8003750.o(.text.sub_8003750)	sub_8003750 region-different gbadisasm descriptive asm
+003750	003798	asm/sub_8003750.o(.text.PrintDebugStringToBG)	sub_8003750 region-different gbadisasm descriptive asm

@@ -2,12 +2,12 @@
 	.set __ashldi3, 0x080D6588 + 1
 	.set sub_8004140, 0x08004140 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
-	.section .text.sub_8004608, "ax", %progbits
-@ sub_8004608 @ JP 0x08004608 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.DrawSpriteTextGlyph, "ax", %progbits
+@ DrawSpriteTextGlyph @ JP 0x08004608 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8004608
+	.global DrawSpriteTextGlyph
 	.thumb_func
-sub_8004608:
+DrawSpriteTextGlyph:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

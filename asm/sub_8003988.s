@@ -1,12 +1,12 @@
 	.syntax unified
 	.set BG_EnableSyncByMask, 0x08001EFC + 1
 	.set sub_80011D0, 0x080011D0 + 1
-	.section .text.sub_8003988, "ax", %progbits
-@ sub_8003988 @ JP 0x08003988 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.FlushDBGToBG2, "ax", %progbits
+@ FlushDBGToBG2 @ JP 0x08003988 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8003988
+	.global FlushDBGToBG2
 	.thumb_func
-sub_8003988:
+FlushDBGToBG2:
 	push {r4, r5, r6, r7, lr}
 	ldr r0, _080039D4 @ =0x02023CA8
 	movs r1, #0

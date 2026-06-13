@@ -6,12 +6,12 @@
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_80B62FC, 0x080B62FC + 1
 	.set sub_80B6470, 0x080B6470 + 1
-	.section .text.sub_80B6934, "ax", %progbits
-@ sub_80B6934 @ JP 0x080B6934 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.GenericOptionChangeHandler, "ax", %progbits
+@ GenericOptionChangeHandler @ JP 0x080B6934 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B6934
+	.global GenericOptionChangeHandler
 	.thumb_func
-sub_80B6934:
+GenericOptionChangeHandler:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

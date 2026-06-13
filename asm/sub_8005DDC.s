@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8002BCC, 0x08002BCC + 1
-	.section .text.sub_8005DDC, "ax", %progbits
-@ sub_8005DDC @ JP 0x08005DDC - region-different, gbadisasm descriptive asm (D23)
+	.section .text.EndFaceIn8Frames, "ax", %progbits
+@ EndFaceIn8Frames @ JP 0x08005DDC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8005DDC
+	.global EndFaceIn8Frames
 	.thumb_func
-sub_8005DDC:
+EndFaceIn8Frames:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldr r0, _08005DF0 @ =0x085B8FCC

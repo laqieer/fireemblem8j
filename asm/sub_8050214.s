@@ -6,12 +6,12 @@
 	.set sub_8050418, 0x08050418 + 1
 	.set sub_808B2A4, 0x0808B2A4 + 1
 	.set sub_80D65C4, 0x080D65C4 + 1
-	.section .text.sub_8050214, "ax", %progbits
-@ sub_8050214 @ JP 0x08050214 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.Menu_AutoHelpBox_OnLoop, "ax", %progbits
+@ Menu_AutoHelpBox_OnLoop @ JP 0x08050214 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8050214
+	.global Menu_AutoHelpBox_OnLoop
 	.thumb_func
-sub_8050214:
+Menu_AutoHelpBox_OnLoop:
 	push {r4, r5, lr}
 	sub sp, #8
 	adds r5, r0, #0

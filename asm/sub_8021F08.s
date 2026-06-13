@@ -4,12 +4,12 @@
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8021EC0, 0x08021EC0 + 1
-	.section .text.sub_8021F08, "ax", %progbits
-@ sub_8021F08 @ JP 0x08021F08 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.LetsEmitStars, "ax", %progbits
+@ LetsEmitStars @ JP 0x08021F08 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8021F08
+	.global LetsEmitStars
 	.thumb_func
-sub_8021F08:
+LetsEmitStars:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

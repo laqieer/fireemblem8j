@@ -2,12 +2,12 @@
 	.set PutSpecialChar, 0x08004A14 + 1
 	.set __divsi3, 0x080D65F8 + 1
 	.set __modsi3, 0x080D6690 + 1
-	.section .text.sub_8004CC0, "ax", %progbits
-@ sub_8004CC0 @ JP 0x08004CC0 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.PutNumber2DigitSmall, "ax", %progbits
+@ PutNumber2DigitSmall @ JP 0x08004CC0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8004CC0
+	.global PutNumber2DigitSmall
 	.thumb_func
-sub_8004CC0:
+PutNumber2DigitSmall:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	adds r6, r1, #0

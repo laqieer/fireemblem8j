@@ -1,12 +1,12 @@
 	.syntax unified
 	.set sub_8003750, 0x08003750 + 1
 	.set sub_80D6A4C, 0x080D6A4C + 1
-	.section .text.sub_8003798, "ax", %progbits
-@ sub_8003798 @ JP 0x08003798 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.PrintDebugStringFmtToBG, "ax", %progbits
+@ PrintDebugStringFmtToBG @ JP 0x08003798 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8003798
+	.global PrintDebugStringFmtToBG
 	.thumb_func
-sub_8003798:
+PrintDebugStringFmtToBG:
 	push {r1, r2, r3}
 	push {r4, lr}
 	sub sp, #0x100

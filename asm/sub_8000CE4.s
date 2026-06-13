@@ -1,10 +1,10 @@
 	.syntax unified
-	.section .text.sub_8000CE4, "ax", %progbits
-@ sub_8000CE4 @ JP 0x08000CE4 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.SetGameTime, "ax", %progbits
+@ SetGameTime @ JP 0x08000CE4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8000CE4
+	.global SetGameTime
 	.thumb_func
-sub_8000CE4:
+SetGameTime:
 	ldr r1, _08000CEC @ =0x03000010
 	str r0, [r1]
 	bx lr

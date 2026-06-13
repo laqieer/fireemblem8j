@@ -2,12 +2,12 @@
 	.set GetPortraitData, 0x0800541C + 1
 	.set Proc_EndEach, 0x08002FC8 + 1
 	.set sub_8005BA8, 0x08005BA8 + 1
-	.section .text.sub_8005D9C, "ax", %progbits
-@ sub_8005D9C @ JP 0x08005D9C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.PutFace80x72, "ax", %progbits
+@ PutFace80x72 @ JP 0x08005D9C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8005D9C
+	.global PutFace80x72
 	.thumb_func
-sub_8005D9C:
+PutFace80x72:
 	push {r4, r5, r6, lr}
 	mov r6, r8
 	push {r6}

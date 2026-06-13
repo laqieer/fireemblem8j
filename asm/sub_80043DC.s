@@ -2,12 +2,12 @@
 	.set sub_8003D84, 0x08003D84 + 1
 	.set sub_8003D90, 0x08003D90 + 1
 	.set sub_800407C, 0x0800407C + 1
-	.section .text.sub_80043DC, "ax", %progbits
-@ sub_80043DC @ JP 0x080043DC - region-different, gbadisasm descriptive asm (D23)
+	.section .text.Text_InsertDrawNumberOrBlank, "ax", %progbits
+@ Text_InsertDrawNumberOrBlank @ JP 0x080043DC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80043DC
+	.global Text_InsertDrawNumberOrBlank
 	.thumb_func
-sub_80043DC:
+Text_InsertDrawNumberOrBlank:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	adds r5, r2, #0

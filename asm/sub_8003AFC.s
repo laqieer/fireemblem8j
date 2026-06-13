@@ -1,11 +1,11 @@
 	.syntax unified
 	.set CallARM_PushToSecondaryOAM, 0x08002B08 + 1
-	.section .text.sub_8003AFC, "ax", %progbits
-@ sub_8003AFC @ JP 0x08003AFC - region-different, gbadisasm descriptive asm (D23)
+	.section .text.PrintDebugStringAsOBJ, "ax", %progbits
+@ PrintDebugStringAsOBJ @ JP 0x08003AFC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8003AFC
+	.global PrintDebugStringAsOBJ
 	.thumb_func
-sub_8003AFC:
+PrintDebugStringAsOBJ:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	adds r6, r1, #0

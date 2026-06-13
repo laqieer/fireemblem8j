@@ -2,12 +2,12 @@
 	.set ClearSmallStringBuffer, 0x08003814 + 1
 	.set __divsi3, 0x080D65F8 + 1
 	.set __modsi3, 0x080D6690 + 1
-	.section .text.sub_800382C, "ax", %progbits
-@ sub_800382C @ JP 0x0800382C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.StoreNumberStringToSmallBuffer, "ax", %progbits
+@ StoreNumberStringToSmallBuffer @ JP 0x0800382C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800382C
+	.global StoreNumberStringToSmallBuffer
 	.thumb_func
-sub_800382C:
+StoreNumberStringToSmallBuffer:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	bl ClearSmallStringBuffer

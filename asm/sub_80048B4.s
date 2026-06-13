@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8002BCC, 0x08002BCC + 1
-	.section .text.sub_80048B4, "ax", %progbits
-@ sub_80048B4 @ JP 0x080048B4 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.StartGreenText, "ax", %progbits
+@ StartGreenText @ JP 0x080048B4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80048B4
+	.global StartGreenText
 	.thumb_func
-sub_80048B4:
+StartGreenText:
 	push {lr}
 	adds r1, r0, #0
 	cmp r1, #0

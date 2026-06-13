@@ -1,12 +1,12 @@
 	.syntax unified
 	.set SetTextFontGlyphs, 0x08003C24 + 1
 	.set sub_8000D68, 0x08000D68 + 1
-	.section .text.sub_80042E0, "ax", %progbits
-@ sub_80042E0 @ JP 0x080042E0 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.InitSystemTextFont, "ax", %progbits
+@ InitSystemTextFont @ JP 0x080042E0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80042E0
+	.global InitSystemTextFont
 	.thumb_func
-sub_80042E0:
+InitSystemTextFont:
 	push {r4, lr}
 	ldr r0, _08004310 @ =0x085C7420
 	ldr r4, _08004314 @ =0x02028E70

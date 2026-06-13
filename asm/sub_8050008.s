@@ -2,12 +2,12 @@
 	.set m4aSongNumStart, 0x080D4EF4 + 1
 	.set sub_804FE54, 0x0804FE54 + 1
 	.set sub_80D65C4, 0x080D65C4 + 1
-	.section .text.sub_8050008, "ax", %progbits
-@ sub_8050008 @ JP 0x08050008 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.ProcessMenuDpadInput, "ax", %progbits
+@ ProcessMenuDpadInput @ JP 0x08050008 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8050008
+	.global ProcessMenuDpadInput
 	.thumb_func
-sub_8050008:
+ProcessMenuDpadInput:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	adds r2, r5, #0

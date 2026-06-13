@@ -1,12 +1,12 @@
 	.syntax unified
 	.set SetTextFont, 0x08003C68 + 1
 	.set sub_8003BC0, 0x08003BC0 + 1
-	.section .text.sub_80044A4, "ax", %progbits
-@ sub_80044A4 @ JP 0x080044A4 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.InitSpriteTextFont, "ax", %progbits
+@ InitSpriteTextFont @ JP 0x080044A4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80044A4
+	.global InitSpriteTextFont
 	.thumb_func
-sub_80044A4:
+InitSpriteTextFont:
 	push {r4, lr}
 	adds r4, r0, #0
 	str r1, [r4]

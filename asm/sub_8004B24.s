@@ -2,12 +2,12 @@
 	.set BG_EnableSyncByMask, 0x08001EFC + 1
 	.set PutSpecialChar, 0x08004A14 + 1
 	.set sub_8000CD8, 0x08000CD8 + 1
-	.section .text.sub_8004B24, "ax", %progbits
-@ sub_8004B24 @ JP 0x08004B24 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.SpecialCharTest, "ax", %progbits
+@ SpecialCharTest @ JP 0x08004B24 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8004B24
+	.global SpecialCharTest
 	.thumb_func
-sub_8004B24:
+SpecialCharTest:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

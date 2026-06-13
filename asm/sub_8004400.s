@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80D65C4, 0x080D65C4 + 1
-	.section .text.sub_8004400, "ax", %progbits
-@ sub_8004400 @ JP 0x08004400 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.Text_DrawStringASCII, "ax", %progbits
+@ Text_DrawStringASCII @ JP 0x08004400 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8004400
+	.global Text_DrawStringASCII
 	.thumb_func
-sub_8004400:
+Text_DrawStringASCII:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0

@@ -2,12 +2,12 @@
 	.set DrawGlyphRam, 0x08002AE0 + 1
 	.set sub_8004140, 0x08004140 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
-	.section .text.sub_8004150, "ax", %progbits
-@ sub_8004150 @ JP 0x08004150 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.DrawTextGlyph, "ax", %progbits
+@ DrawTextGlyph @ JP 0x08004150 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8004150
+	.global DrawTextGlyph
 	.thumb_func
-sub_8004150:
+DrawTextGlyph:
 	push {r4, r5, r6, lr}
 	mov r6, sb
 	mov r5, r8

@@ -1,1 +1,1 @@
-005360	005390	asm/sub_8005360.o(.text.sub_8005360)	sub_8005360 region-different gbadisasm descriptive asm
+005360	005390	asm/sub_8005360.o(.text.PushSpriteLayerObjects)	sub_8005360 region-different gbadisasm descriptive asm

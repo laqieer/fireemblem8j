@@ -4,12 +4,12 @@
 	.set m4aMPlayVolumeControl, 0x080D5E9C + 1
 	.set sub_80027E0, 0x080027E0 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
-	.section .text.sub_80024C4, "ax", %progbits
-@ sub_80024C4 @ JP 0x080024C4 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.StartBgmFadeIn, "ax", %progbits
+@ StartBgmFadeIn @ JP 0x080024C4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80024C4
+	.global StartBgmFadeIn
 	.thumb_func
-sub_80024C4:
+StartBgmFadeIn:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

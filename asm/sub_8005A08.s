@@ -1,12 +1,12 @@
 	.syntax unified
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_80058D0, 0x080058D0 + 1
-	.section .text.sub_8005A08, "ax", %progbits
-@ sub_8005A08 @ JP 0x08005A08 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.StartFaceChibiSpr, "ax", %progbits
+@ StartFaceChibiSpr @ JP 0x08005A08 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8005A08
+	.global StartFaceChibiSpr
 	.thumb_func
-sub_8005A08:
+StartFaceChibiSpr:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

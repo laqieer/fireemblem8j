@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8013008, 0x08013008 + 1
-	.section .text.sub_800549C, "ax", %progbits
-@ sub_800549C @ JP 0x0800549C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.Face_OnInit, "ax", %progbits
+@ Face_OnInit @ JP 0x0800549C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800549C
+	.global Face_OnInit
 	.thumb_func
-sub_800549C:
+Face_OnInit:
 	push {lr}
 	ldr r1, [r0, #0x2c]
 	ldr r2, [r1]

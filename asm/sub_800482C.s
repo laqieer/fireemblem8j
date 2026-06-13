@@ -2,12 +2,12 @@
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_8003F10, 0x08003F10 + 1
 	.set sub_8003F28, 0x08003F28 + 1
-	.section .text.sub_800482C, "ax", %progbits
-@ sub_800482C @ JP 0x0800482C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.StartTextPrint, "ax", %progbits
+@ StartTextPrint @ JP 0x0800482C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800482C
+	.global StartTextPrint
 	.thumb_func
-sub_800482C:
+StartTextPrint:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r6, r1, #0

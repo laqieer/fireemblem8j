@@ -1,11 +1,11 @@
 	.syntax unified
 	.set StartOrphanMenuAdjusted, 0x0804F924 + 1
-	.section .text.sub_80503C0, "ax", %progbits
-@ sub_80503C0 @ JP 0x080503C0 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.StartSemiCenteredOrphanMenu, "ax", %progbits
+@ StartSemiCenteredOrphanMenu @ JP 0x080503C0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80503C0
+	.global StartSemiCenteredOrphanMenu
 	.thumb_func
-sub_80503C0:
+StartSemiCenteredOrphanMenu:
 	push {r4, r5, r6, r7, lr}
 	bl StartOrphanMenuAdjusted
 	adds r5, r0, #0

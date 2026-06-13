@@ -1,12 +1,12 @@
 	.syntax unified
 	.set RegisterDataMove, 0x08001F64 + 1
 	.set sub_8001EE4, 0x08001EE4 + 1
-	.section .text.sub_8003A70, "ax", %progbits
-@ sub_8003A70 @ JP 0x08003A70 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.SetupDebugFontForOBJ, "ax", %progbits
+@ SetupDebugFontForOBJ @ JP 0x08003A70 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8003A70
+	.global SetupDebugFontForOBJ
 	.thumb_func
-sub_8003A70:
+SetupDebugFontForOBJ:
 	push {r4, lr}
 	adds r2, r0, #0
 	adds r4, r1, #0
