@@ -47,12 +47,9 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 
-void StealMapSelect_Init(ProcPtr menu) {
-    // JP region-different call-graph: calls StartUnitGiveInfoWindows (0x08035288),
-    // NOT StartUnitInventoryInfoWindow (US). The two are distinct functions in JP;
-    // freeing the StartUnitInventoryInfoWindow symbol for its real body at 0x08034B20.
-    StartUnitGiveInfoWindows(menu);
-    StartSubtitleHelp(menu, GetStringFromIndex(0x7E9)); // TODO: msgid "Select which unit to steal from."
+void TradeTargetSelection_OnInit(ProcPtr menu) {
+    StartUnitInventoryInfoWindow(menu);
+    StartSubtitleHelp(menu, GetStringFromIndex(0x7EA)); // TODO: msgid "Select which unit to trade with."
 
     return;
 }

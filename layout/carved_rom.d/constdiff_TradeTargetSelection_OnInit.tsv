@@ -1,0 +1,1 @@
+024718	024738	src/TradeTargetSelection_OnInit.o(.text)	TradeTargetSelection_OnInit (msgid 0x86C->0x7EA; calls real StartUnitInventoryInfoWindow @08034B20)
