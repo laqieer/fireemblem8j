@@ -3829,3 +3829,52 @@ frag, swap asm, drop baseline bind; asserts object size). The permuter (`scripts
 for residual reg-allocation/temp-ordering cases that the type sweep can't express (e.g. MoveUnitExt's count/flags
 extension-order swap — but its score is floored by unmapped `.set sub_<addr>` callee symbols; fix those in the
 target .s first). `make compare` is the sole oracle throughout.
+## D90 — tableUnblockB: +15 matching-C — the FUNCLIB-STALE-ADDR + NO-WORKLIST-NAMED-POOL re-sweep (data-table-unblock cluster + region-same-reloc func_only) (2026-06-13)
+
+**Context.** Branch `feat/tableUnblockB` (data-table-unblock unit). The prompt's lever: bind the TU-private
+data/symbol a FAR function reads, then it carves. `make compare` sole oracle, verify-or-revert, all gates green.
+
+**RESULT — +15 matching-C across 8 commits.** Two productive sub-veins, BOTH masked by the SAME root cause D87
+documented but under-exploited — **`reference/maps/funclib_us_jp.tsv` is a STALE HINT** whose JP-addr column
+disagrees with the gbadisasm `asm/sub_<JPaddr>.s` ground truth, so `const_diff_carve.py`/perm2 keyed off the wrong
+ROM bytes and mis-classified clean functions as "call-graph-different" or skipped them entirely.
+
+**Vein 1 — the bmmenu Selection-init cluster D87 called 'call-graph-different' is actually clean msgid const-diff (+4).**
+`RescueSelection_OnConstruction`/`TakeSelection_OnInit`/`TalkSupportSelection_OnInit`/`RefreshMapSelect_Init` are thin
+wrappers (info-window call + `GetStringFromIndex(msgid)` + `StartSubtitleHelp`). The ONLY JP divergence is the
+message-ID (US msgid - 0x82, validated vs the StaffSelection 0x876->0x7F4 sibling). The callees already resolve
+(`RefreshUnitTakeRescueInfoWindows`@0x350D4 real src; `StartUnitHpInfoWindow`@0x34EA4 bound). D87 misread it because
+funclib's JP addr (e.g. RescueSelection JP=0x802467C) is wrong — the real fn is at the asm-file addr 0x02462C.
+**TradeTargetSelection_OnInit (sub_8024718) IS the one genuine call-graph-different member** (calls JP 0x34B20, a
+24-byte loop fn, NOT StartUnitInventoryInfoWindow@0x35288) — correctly deferred.
+
+**Vein 2 — DATA-TABLE-UNBLOCK proper (+3) and the NO-WORKLIST coddog-named region-same-reloc pool (+8).**
+  * `SummonUnitGfx_Init` (data-table-unblock): JP points at `Img_GorgonHatchCloud`/`Pal_GorgonHatchCloud` (already
+    real symbols) where US uses `gMapanimEventcall_293/_294` — substitute the data symbols + VRAM 0x6002C00->0x6002800.
+  * `PrepItemUseBooster_OnEnd` (data-table-unblock): `gPrepItemTexts` already bound; body byte-exact modulo TWO JP
+    popup-layout constants (`TileMap_FillRect` x 14->17, w 14->12), read from the gBG2TilemapBuffer literal-pool word.
+  * `Text_DrawNumberOrBlank` (msgid 0x535->0x4C5).
+  * **8 region-same-reloc func_only carves from the coddog-NAMED pool perm2/bind_tu's run-detector skipped** (they sit
+    ISOLATED among region-diff neighbors, so they're never a contiguous "verified run"): `PutDrawText`,
+    `GetStringTextCenteredPos`, `GetStringTextBox`, `Text_InsertDrawString`, `UpdateSleep`, `PlaySong`,
+    `ProcessMenuSelectInput`, `PutNumberTwoChr`. Recipe: extract_func_only -> drop the fn's OWN colliding ABS bind
+    (baseline_syms_drop.d) -> bind any unbound callee at its asm-`.set` JP addr (`Sound_SetupMaxChannelsForSong`,
+    `OverriddenMenuSelected`, `GetStringLineEnd`) -> byte-exact. `PutNumberTwoChr` also needed a JP-font glyph
+    const-diff (TEXT_SPECIAL_100_A/B 0x28/0x29->0x27/0x28 — a nolit named-enum the tool can't auto-substitute).
+
+**REUSABLE METHOD (the find).** For the remaining `asm/sub_*.s` pool, **`reference/maps/coddog_classification.tsv`
+(jp_addr->us_name) is a FAR better identity source than funclib** — it's keyed on the true JP addr. Scan: for each
+coddog-named still-asm fn with a US TU, extract_func_only + compile + diff vs the JP range at the asm-file addr;
+0 non-reloc diffs => carveable region-same-reloc (drop own bind + bind callees); 1-3 diffs => inspect for a clean
+const/glyph/layout substitution. This pool is now SWEPT for clean carves (last 0-diff = GetStringTextBox; only
+`StartFaceChibiSpr`, a weak-near genuine codegen/type diff, remains -> permuter). Funclib's JP column should NOT be
+trusted for code-addr identification; the gbadisasm asm-file name = the true JP addr.
+
+**Deferred (real but not clean unblocks):** `TradeTargetSelection_OnInit` (call-graph-diff -> permuter);
+`PrepUnit_DrawPickLeftBar` (multi-coord JP UI layout: the literal-pool dedup structure changes when a TILEMAP coord
+diverges -> a +4B length shift, needs full hand-decomp); `BonusClaim_DrawItemSentPopup` (a folded `CONST_DATA`
+pointer `gpBonusClaimText+14` -> ROM literal 0x8A9E508 that the existing 0xE048 bind doesn't satisfy — needs the
+`gBonusClaimText` ROM array bound + a const-pointer def, risks the shared gp-pointer binding); `StartFaceChibiSpr`
+(s8-param sign-extend width diff). Gates green throughout: warm+cold `make compare` OK, `make check` OK,
+self-contained 100% (0 incbins), ROM 16,777,216. No PR; integrated on cadence by the coordinator. (D89 was used
+informally by the prior tableUnblock run's commit 87d588b03 without a decisions entry; took D90 to avoid collision.)
