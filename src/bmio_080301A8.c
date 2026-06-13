@@ -86,7 +86,7 @@ struct BMVSyncProc {
  void BMapVSync_OnLoop(struct BMVSyncProc* proc);
 
  void WfxNone_Init(void);
-static void WfxSnow_Init(void);
+ void WfxSnow_Init(void);
  void WfxSnow_VSync(void);
  void WfxRain_Init(void);
  void WfxRain_VSync(void);
