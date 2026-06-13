@@ -228,11 +228,18 @@ out.append("")
 # FE Decomp Portal cannot show an inflated curve. Bug fixes vs the old script:
 #   * data total is the REAL total (not data_bytes) -> data% is genuine (~0.12%).
 #   * symbols never exceed total (placeholders are undocumented) -> no >100%.
+# DECOMP ratio, not disasm ratio. Only code built from real compiled C (src/*.o)
+# counts as "in src" (matched/decompiled). gbadisasm descriptive asm (code_asm) is
+# DISASSEMBLY, not decompilation, so it joins the still-incbin remainder in the "asm"
+# (not-yet-decompiled) bucket. This mirrors the data metric below (data_src alone is
+# the numerator) and the fe8u/decomp.dev convention, where asm/ bytes are unmatched
+# code -- the prior `code_src + code_asm` numerator reported the disasm ratio (~99.5%)
+# and inflated decomp.dev's matched_code_percent far above the true matching-C level.
 jp_code_total = CODE_REGION[1] - CODE_REGION[0]
-code_incbin = max(0, jp_code_total - code_src - code_asm)
+code_not_src = max(0, jp_code_total - code_src)  # descriptive asm + still-incbin = not decompiled
 out.append(f"{jp_code_total} total bytes of code")
-out.append(f"{code_src + code_asm} bytes of code in src ({pct(code_src + code_asm, jp_code_total):.4f}%)")
-out.append(f"{code_incbin} bytes of code in asm ({pct(code_incbin, jp_code_total):.4f}%)")
+out.append(f"{code_src} bytes of code in src ({pct(code_src, jp_code_total):.4f}%)")
+out.append(f"{code_not_src} bytes of code in asm ({pct(code_not_src, jp_code_total):.4f}%)")
 out.append("")
 out.append(f"{sym_total} total symbols")
 out.append(f"{sym_named} symbols documented ({named_pct:.4f}%)")

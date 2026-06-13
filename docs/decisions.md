@@ -4042,3 +4042,34 @@ work stranded by an integration race → verify with `make compare` and take it;
 code/tooling was integrated under a renumbered D-entry, leaving only an obsolete docs draft → drop it. Tell
 them apart by **timeline** (`git show -s --format=%ci`) + **supersession grep** (distinctive prose / symbol
 names in main), never by the branch name or commit subject alone.
+
+## D95 — code-byte metric was the DISASM ratio, not the DECOMP ratio; fixed + restored the decomp.dev Code/Data badges (2026-06-13)
+
+**Bug.** `scripts/calcprogress.py` reported the portal/decomp.dev "bytes of code in src" line as
+`code_src + code_asm` — lumping **gbadisasm descriptive asm** (`asm/*.o`, disassembly) into the *decompiled*
+bucket. That is the **disasm ratio** (everything carved out of the raw incbin), which read **99.5%** and,
+via `scripts/gen-report.py` (`matched_code = bytes of code in src`), inflated decomp.dev's
+`matched_code_percent` to ~99.5% — wildly above the true matching-C level. The **data** metric in the same
+file was already honest (`data_src` alone is the numerator; `data_asm` incbin/descriptive is "in data"),
+so code was internally inconsistent with data.
+
+**Fix.** "bytes of code in src" now counts **`code_src` only** (real compiled C from `src/*.o`, which
+`make compare` proves byte-identical); descriptive asm + still-incbin (`code_not_src = jp_code_total -
+code_src`) is the "in asm" (not-decompiled) remainder. Verified against the reference: fe8u
+`scripts/calcrom.pl` does exactly this — `$src += size` only when `dir eq 'src'`, asm/ text is the unmatched
+bucket, and it prints `$src bytes of code in src` (NOT src+asm). Result: code-in-src **99.5% → 67.02%**
+(604104 / 901428 B). By-size (67%) sits below by-count matching-C (77.98%, 6650/8528) because the functions
+still in asm are larger on average (~158 B vs ~91 B) — the gnarly region-different ones. decomp.dev
+`matched_code_percent` is now 67.02, honest and aligned with other GBA decomps.
+
+**Badges.** The decomp.dev **Code**/**Data** shields + the portal **Functions** shield were dropped
+unintentionally by `b543620cd` (the "honest 4-axis scorecard" header rewrite), which had ADDED the
+Self-contained badge but discarded the three progress shields PR #38/#39 introduced. Restored all three after
+the two CI-gate badges; Code/Data point at `decomp.dev/laqieer/fireemblem8j/jp`, Functions at the FE Decomp
+Portal (decomp.dev has no per-function measure). The `decomp-dev.yml` workflow + `gen-report.py` pipeline that
+feeds them was untouched and already present — only the README links were missing.
+
+**Reusable.** "in src" = matched/decompiled = real C only. Disassembly (descriptive asm) is NOT
+decompilation and must sit in the unmatched bucket for any cross-project (decomp.dev/frogress) number;
+otherwise an incbin-baseline decomp that has merely *disassembled* the ROM reports as ~100% "done". Counting
+rule must match fe8u/calcrom (src-only numerator) on BOTH code and data.
