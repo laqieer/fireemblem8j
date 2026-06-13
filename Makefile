@@ -115,7 +115,15 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_mapanim_nightmare.s \
                            asm/dat_mapanim_monster_gorgon.s \
                            asm/dat_mapanim_eventcall.s \
-                           asm/dat_ending_cg_p0.s
+                           asm/dat_ending_cg_p0.s \
+                           asm/dat_data_btl_bg_p0.s \
+                           asm/dat_data_btl_bg_p1.s \
+                           asm/dat_data_btl_bg_p2.s \
+                           asm/dat_data_btl_bg_p3.s \
+                           asm/dat_data_btl_bg_p13.s \
+                           asm/dat_data_btl_bg_p14.s \
+                           asm/dat_data_btl_bg_p15.s \
+                           asm/dat_data_btl_bg_p16.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 
