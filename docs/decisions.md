@@ -3773,3 +3773,59 @@ or data-table-dependent (→ typed-data carving), neither addressable by const-d
 (dirty `src/*.c` + `layout/carved_rom.d/constdiff_*.tsv` + dropped asm) that must be cleaned with
 `git checkout -- asm/ layout/ && git clean -fd src/ layout/carved_rom.d/` before the next `make compare`. A future
 hardening would make `revert()` fully restore the tree.
+
+## D89 — permuterB: the TRUE codegen-shape FAR is a mechanizable "signed/bool -> int local-temp" lever, NOT 1-by-1 permuter; +18 matching-C from an automated type-widening sweep (2026-06-13)
+
+**Goal.** Run decomp-permuter on the TRUE codegen-shape FAR residue D79/D84 deferred (the ~25 "codegen ABORT"
+/ LEN-FAR functions that compile CLOSE). Branch `feat/permuterB`. Measure whether the permuter is the right tool,
+or whether the residue is itself mechanizable.
+
+**Decisive finding — the codegen-shape FAR tail is dominated by ONE mechanical delta, not per-function permutation.**
+Classified the region-different no-funcmap worklist by probe bucket (`/tmp/classify_far_mine.py`, reuses
+`perm2_graduate.compile_probe`): size 0-250 gave **183 FAR + 228 LEN**. Triaging the FAR by body-diff position
+(`/tmp/triage_mine.py`) and inspecting LEN candidates, the dominant true-codegen sub-class is a **temp-var width
+difference**: JP declares a local/temp as `int` where the US source uses `s8`/`s16`/`u8`/`u16`/`bool`, so agbcc
+holds one int temp instead of narrowing (re-extending) it. This is exactly the D79 class (MapUnitC `char` /
+Event29 `unsigned long`) but it is **mechanizable, not 1-by-1 permuter work**: a textual type-widening sweep
+(`s8|s16|u8|u16|bool -> int`, applied to one declaration at a time, body only) + `compile_probe` → keep the
+variant that probes NEAR/MATCH. `/tmp/autofix.py` ran this over the LEN+FAR tail; ~20 functions probed NEAR on
+the first or second transform. **The permuter itself is the WRONG tool for this sub-class** (it would rediscover
+the same widening by random search, ~30-45 min/fn; the sweep finds it deterministically in seconds).
+
+**RESULT — +18 matching-C carved (hit-rate 18/~25 codegen-shape candidates probed; ~72% on the *true*-codegen subset).**
+  - `StrLen` (buf+=2 — JP walks the buffer 2 bytes/char; a genuine SOURCE delta, not a type, found by disasm).
+  - `GetHpBarLeftTile` (int-local clamp temp avoids double s16 sign-extension).
+  - 6 LEN `signed->int`: EfxMagfcastBGMain, ProcMapInfoBox_AnimateHp, SaveDraw_ScrollFogBG,
+    WorldMap_GenerateRandomMonsters, efxIvaldiBG4_Loop, efxMaohFlashBG2_Loop.
+  - 8 FAR `signed->int`: the eventscr_gmap Wm* cluster (EventB4/EventCC/EventAB/EventA3/EventA4/EventBB —
+    s16-unitId->int sibling delta-transfer), TradeMenu_HelpBox_OnLoop, TorchSelect_OnIdle.
+  - 2 `bool->int`: DrawShopItemPriceLine, AssignUnitToFreeDeploySlot.
+  Each: probe NEAR -> carve (src/<fn>.c + perm2 layout frag, swap the gbadisasm asm carve) -> `make compare` OK ->
+  cold `make clean && make compare` OK -> self-contained 100% -> ROM=16,777,216. Object `.text` size asserted
+  == declared range (guards against a false-NEAR that grows the ROM, e.g. SaveMenuWriteNewGame `s8->int` =
+  LEN+4, correctly rejected).
+
+**Two non-permuter blockers on otherwise-clean carves (verify-or-revert caught both):**
+  1. **Unbound region-diff callees.** A widened fn that calls a function still living as `sub_<addr>` asm
+     (US name not bound in the layout: `IsGmAutoMuActiveFor`, `EndGmAutoMuFor`, `WeaponSelectMenu_Draw`) fails
+     to link (`undefined reference`). Reverted EventAC_WmUnitMoveWait + ItemSelectMenu_TextDraw; they become
+     carveable once their callees are carved (carve-order dependency — re-sweep after each wave).
+  2. **False-NEAR via size growth.** `compile_probe` masks at reloc offsets; a transform that adds a literal-pool
+     word probes NEAR but grows the object past its declared range, shifting the ROM (+4). The object-size
+     assertion is mandatory.
+
+**The `0e->16` cluster is NOT permuter/source-solvable (separate dead-end, ~20 fns).** Store-only setters
+(`ConfigSysHandCursorShadowEnabled`, `GmMu_0`, `BmBgfxSetLoopEN`, `SetSysBrownBoxWidth`, ...) differ in exactly
+one byte: US `lsrs` (0e, unsigned narrow) vs JP `asrs` (16, signed narrow) on a value preserved across a call or
+written to a bitfield. The C is **identical** (often already `s8`); sweeping param/field/local signedness does NOT
+flip the instruction (agbcc picks lsrs regardless here). It is a compiler-internal extension choice the JP build
+made differently with the *same* source — unreachable by C-shape edits or the permuter. **Do NOT spend permuter
+cycles on the `0e->16` single-byte cluster.**
+
+**Reusable artifacts (scratch, /tmp, gitignored):** `/tmp/classify_far_mine.py` (probe+bucket, set MYROOT),
+`/tmp/triage_mine.py` (CODEGEN vs CONST split), `/tmp/autofix.py` (type-widening sweep — the productive lever),
+`/tmp/probe_one.py` (single-fn NEAR/MATCH/FAR/LEN probe), `/tmp/carve_one.sh` (stage a verified carve: src + perm2
+frag, swap asm, drop baseline bind; asserts object size). The permuter (`scripts/permuter/`) remains the tool ONLY
+for residual reg-allocation/temp-ordering cases that the type sweep can't express (e.g. MoveUnitExt's count/flags
+extension-order swap — but its score is floored by unmapped `.set sub_<addr>` callee symbols; fix those in the
+target .s first). `make compare` is the sole oracle throughout.
