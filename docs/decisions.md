@@ -3912,3 +3912,50 @@ re-confirmed UNSOLVABLE: identical C + identical types compile `lsrs` (US) vs `a
 permuter-reachable difference. The remaining true-permuter cases are reg-allocation/temp-ordering
 (e.g. WeaponSelectMenu_Draw's arg-eval-order swap — permuter base score floored at 130 after symbol mapping,
 no score-0 found; needs more iterations or a manual statement reorder).
+
+## D91 — chainUnblock: +6 matching-C from the D90-deferred residue — the deferrals were mostly mis-classified, not genuinely hard (2026-06-13)
+
+**Context.** Branch `feat/chainUnblock` (chain-unblocking unit). Target: the 3 functions D90 explicitly
+deferred (`BonusClaim_DrawItemSentPopup`, `TradeTargetSelection_OnInit`, `PrepUnit_DrawPickLeftBar`) plus the
+callee/data-table-blocked residue. `make compare` sole oracle, verify-or-revert, all gates green.
+
+**RESULT — +6 matching-C.** All 3 D90 deferrals carved byte-exact; two of the three were mis-classified by D90.
+
+- **BonusClaim_DrawItemSentPopup (JP 0x80B5FDC).** Blocker was a BOGUS speculative cfbind
+  `gpBonusClaimText -> 0000E048 thumb` (an unused guess; DrawBonusClaimItemText was still asm so nothing
+  consumed it). The body folds `gpBonusClaimText+14` to ROM literal `0x08A9E508` = the const-pointer var
+  (sibling of gpBonusClaimItemCount@0x504 / gpBonusClaimConfig@0x50C). Fix: rebind
+  `gpBonusClaimText -> 08A9E508 data`; sole body diff is msgid US 0x883 -> JP 0x823.
+
+- **TradeTargetSelection_OnInit (JP 0x8024718) + the bmmenu InfoWindow symbol soup.** D90 called this
+  "call-graph-different" because it BLs 0x08034B20 instead of the bound StartUnitInventoryInfoWindow@0x08035288.
+  ROOT CAUSE: the cfbind ALIASED `StartUnitInventoryInfoWindow -> 0x08035288`, but 0x08035288 is the REAL
+  `StartUnitGiveInfoWindows` body (already carved in unitinfowindow.c; linker showed both symbols at 0x08035288).
+  The TRUE StartUnitInventoryInfoWindow body lives at 0x08034B20 (byte-identical to US 0x08034C18 mod BL relocs).
+  Fix (3 fns unblocked): carve the real StartUnitInventoryInfoWindow @0x08034B20 (region-same-reloc); drop the
+  bogus 0x08035288 alias; re-point StealMapSelect_Init to its TRUE callee StartUnitGiveInfoWindows (JP genuinely
+  calls Give, not Inventory — a real region-diff call-graph the alias had been papering over); then carve
+  TradeTargetSelection_OnInit (msgid US 0x86C -> JP 0x7EA) now that the symbol resolves correctly.
+
+- **PrepUnit_DrawPickLeftBar (JP 0x809CDBC).** D90 deferred as "multi-coord layout -> +4B LEN shift, full
+  hand-decomp". RE-ANALYSIS: identical instruction sequence, identical 5-word literal pool — NO length shift.
+  Pure const-diff: PutDrawText tilemap coord x 0xD->0xE (both draws); 1st PutDrawText x-arg 6->0; 2nd x-arg
+  0x29->0x20; msgid Pick 0x5A1->0x52C; msgid 'Units Left' 0x5A2->0x52D. All callees already bound
+  (TileMap_FillRect->0x080DC0E4 j_TmFillRect thunk).
+
+- **BonusClaim_Init** carved via perfrag (a region-same run perfrag's run-detector had skipped).
+
+**REUSABLE FIND.** D90's deferrals were dominated by SYMBOL-POLLUTION, not genuine difficulty: speculative
+cfbinds aliasing a real symbol to the WRONG address can make a clean function LOOK call-graph-different. Always
+disassemble the BL target in the JP ROM and check it against coddog jp_name/us_name BEFORE concluding
+call-graph-different. The +4B-LEN fear (DrawPickLeftBar) was also wrong — compare the literal-pool WORD COUNT
+(equal => no structural shift => pure const-diff).
+
+**Process note.** A broad perfrag re-sweep of the 28 partial TUs with [plan] candidates was UNPRODUCTIVE
+(prep_menuproc 0/11, bmudisp 0/9 — all verify-or-reverted as genuinely region-different); only BonusClaim_Init
+landed. perfrag's "skipped region-same run" hypothesis is mostly false-positive on this residue.
+
+**Self-push -> branch-push.** Mid-run the coordinator switched the integration flow: STOP self-pushing to main
+(a two-agent self-push race left main with a carved_rom overlap), commit each carve to feat/chainUnblock and
+`git push origin HEAD:feat/chainUnblock`; the coordinator integrates serially. First 5 fns were already on main
+(verified OK at push time); BonusClaim_Init delivered on-branch.
