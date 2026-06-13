@@ -227,3 +227,5 @@ EndDrawPrepUnitInfoBgSprites
 EndSysBrownBox
 GetBonusContentClaimFlags
 ShopSt_SetHeadLocBak
+CallEvent
+IsActiveEventTextTypeOnMap
