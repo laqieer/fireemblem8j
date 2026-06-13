@@ -6,6 +6,32 @@
 cron was DISABLED 2026-06-08 — see decisions.md D8; the launched agent kept
 getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
+## ⏩ CURRENT STATE — 2026-06-13 (READ THIS FIRST; newest)
+
+**main `d21ff5762`, green + synced, clean (0 worktrees, 0 build procs, no live agents).** Axes:
+| Axis | Now | Notes |
+|---|---|---|
+| Build self-containment | **100%** ✅ | done |
+| Matching-C | **77.92%** (6645/8528; ~81% of the 8209 ceiling) | session drove it 27.59% → 77.92% |
+| Extracted data | **3.51%** (~490 KB typed C) | typed-table lever near-exhausted; realistic ceiling ~55% needs the DEFERRED graphics/gbagfx pipeline |
+| Named symbols | **77.45%** | coddog 3-signal naming (D93) is the live lever |
+
+**RESUME PROTOCOL (do this first):**
+1. `python3 scripts/wave_status.py` — shows EXHAUSTED levers (don't re-dispatch) + PRODUCTIVE levers + any unintegrated `feat/*` branches to merge.
+2. **Read `docs/decisions.md` D80–D93 + `docs/incident-2026-06-13-self-push-build-race.md`** — the mechanical levers (perm2/perfrag/CF/const_diff) are EXHAUSTED; the live levers are below.
+3. **PROCESS RULES (learned the hard way — D92):** agents push to their OWN `feat/<branch>` (NOT self-push to main); the coordinator integrates serially. **Never run two `make` in one checkout** (drain by `comm`-match first, then ONE build). **Gate every push on `COLD OK` (sha1 7da0456…) as a separate step.** **Dangling-carve guard:** every `src/<fn>.o` carve row must have a git-tracked `src/<fn>.c`. **Never blanket `git add -A`** for layout fixes.
+
+**LIVE PRODUCTIVE LEVERS (the hard tail; SLOW — 2-4h/cluster is normal):**
+- **D91 cfbind-alias unblocking** (matching-C): the "call-graph-different" residue is often a speculative cfbind aliasing a symbol to the WRONG JP addr — disassemble the BL target, check vs `coddog_classification.tsv`, drop the bogus alias, bind the real callee, then carve.
+- **Data-table-unblocking** (matching-C + data): carve the TU-private table a FAR fn reads (msgid/label tables), then its const resolves and it carves.
+- **D93 coddog 3-signal naming** (named-symbols): `coddog_classification.tsv` jp→us is a HINT (pointer-masks → false positives); cross-verify with LIS-anchoring + US-order/size + `baseline_syms.tsv` before naming.
+- **decomp-permuter** (matching-C): the signed/bool→int local-temp codegen-shape delta + DELTA-TRANSFER to sibling families (high multiplier). Dead-ends confirmed UNREACHABLE: `lsr↔asr` cluster (~27) + reg-alloc/temp-ordering.
+- **Reachability note:** matching-C 100% is likely NOT fully reachable (the lsr↔asr + reg-alloc dead-ends); data 100% needs graphics (deferred). Drive each axis as far as the tooling reaches.
+
+**KNOWN TOOL BUG:** `scripts/perfrag_carve.py` has a revert-path crash (`port_run.py:954`) — run it on a CLEAN tree.
+
+**Next action:** re-dispatch a 2-agent BRANCH-push wave (one on D91/data-table matching-C, one on D93 coddog naming + permuter), serially integrate via `wave_status.py` cadence. Reliability: a SAFE cron may help (integrate-only when a branch has commits; do NOT auto-`make compare` every fire — that caused the 2026-06-13 build-spam).
+
 ## Verified state (update each working stretch)
 
 - **2026-06-11 — MATCHING-C GRIND: 27.59% → 39.02% (3328/8528; ~40.5% of the honest 8209 ceiling)**,
