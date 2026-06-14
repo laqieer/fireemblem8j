@@ -19,7 +19,7 @@ already = set(re.findall(r'asm/[\w]+\.s', excl_block(mk)))
 
 INCLUDE_DATA = '--data' in sys.argv   # also relocate committed data/residual *.bin incbins to src
 cands = []
-for f in glob.glob('asm/dat_*.s'):
+for f in glob.glob('asm/*.s'):
     if f in already:
         continue
     t = open(f).read()

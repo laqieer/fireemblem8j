@@ -1,2 +1,2 @@
 # carve_frontier.py table-pinned region-different data (parallel-safe fragment)
-59D4FC	5B8CDC	asm/frontier_fontgrp_ui.o(.data.frontier_fontgrp_ui.gap0)	fontgrp_ui region-diff data (112608 B, table-pinned)
+59D4FC	5B8CDC	src/data/frontier_fontgrp_ui/frontier_fontgrp_ui.o(.data.frontier_fontgrp_ui.gap0)	fontgrp_ui region-diff data (112608 B, table-pinned)

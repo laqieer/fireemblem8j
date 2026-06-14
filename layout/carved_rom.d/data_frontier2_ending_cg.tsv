@@ -1,2 +1,2 @@
 # carve_frontier.py table-pinned region-different data (parallel-safe fragment)
-B27970	B3B3D4	asm/frontier_ending_cg.o(.data.frontier_ending_cg.gap0)	ending_cg region-diff data (80484 B, table-pinned)
+B27970	B3B3D4	src/data/frontier_ending_cg/frontier_ending_cg.o(.data.frontier_ending_cg.gap0)	ending_cg region-diff data (80484 B, table-pinned)
