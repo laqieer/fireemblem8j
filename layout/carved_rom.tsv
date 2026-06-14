@@ -487,7 +487,7 @@
 21329C	213A10	src/data/voicegroup085_ref/dat_voicegroup085_ref.o(.rodata.dat_voicegroup085_ref)	voicegroup085 region-diff (funcmap code-ref, 1KB)
 213B84	214004	src/data/voicegroup092_ref/dat_voicegroup092_ref.o(.rodata.dat_voicegroup092_ref)	voicegroup092 region-diff (funcmap code-ref, 1KB)
 2140B4	214120	src/data/gMPlayTable_ref/dat_gMPlayTable_ref.o(.rodata.dat_gMPlayTable_ref)	gMPlayTable region-diff (funcmap code-ref, 0KB)
-216064	534E80	asm/direct_sound_data.o(.rodata.direct_sound_data)	direct_sound_data M4A samples (region-same, shifted)
+216064	534E80	src/data/sound_pcm/direct_sound_data.o(.rodata.direct_sound_data)	direct_sound_data M4A samples (region-same, shifted)
 534E80	53518C	asm/snd_song001_agbfe3_bgm_opening_0.o(.rodata.snd_song001_agbfe3_bgm_opening_0)	snd_song001_agbfe3_bgm_opening_0 region-same shifted (0KB)
 535311	5355F1	asm/snd_song001_agbfe3_bgm_opening_1.o(.rodata.snd_song001_agbfe3_bgm_opening_1)	snd_song001_agbfe3_bgm_opening_1 region-same shifted (0KB)
 535824	53593F	asm/snd_song001_agbfe3_bgm_opening_2.o(.rodata.snd_song001_agbfe3_bgm_opening_2)	snd_song001_agbfe3_bgm_opening_2 region-same shifted (0KB)

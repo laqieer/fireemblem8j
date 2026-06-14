@@ -1523,7 +1523,8 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_Ch2Events_ref.s \
                            asm/dat_Ch1Events_ref.s \
                            asm/dat_data_5AA96C_p0.s \
-                           asm/data_banim.s
+                           asm/data_banim.s \
+                           asm/direct_sound_data.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 
