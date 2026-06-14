@@ -35,8 +35,9 @@ _MACRO = {'u8': 'INCBIN_U8', 'u16': 'INCBIN_U16', 'u32': 'INCBIN_U32'}
 def convert(asm_path):
     lines = open(asm_path).read().splitlines()
     section = None
-    syms = []          # list of [name, incbin_path]
+    syms = []          # list of [name, incbin_path, align_bytes]
     pending_global = None
+    pending_align = 0  # bytes; arm `.align N` aligns the NEXT symbol to 2**N bytes
     for raw in lines:
         s = raw.strip()
         if not s or s.startswith('@'):
@@ -47,14 +48,18 @@ def convert(asm_path):
                 sys.exit(f"ABORT: multiple sections ({section} vs {m.group(1)}) — not a clean single-section file")
             section = m.group(1)
             continue
-        if re.match(r'\.align', s) or re.match(r'\.balign', s):
-            continue
+        m = re.match(r'\.align\s+(\d+)', s)        # arm `.align N` -> 2**N byte alignment
+        if m:
+            pending_align = 1 << int(m.group(1)); continue
+        m = re.match(r'\.balign\s+(\d+)', s)        # `.balign N` -> N byte alignment
+        if m:
+            pending_align = int(m.group(1)); continue
         m = re.match(r'\.global\s+(\w+)$', s)
         if m:
             pending_global = m.group(1); continue
         m = re.match(r'(\w+):$', s)
         if m:
-            syms.append([m.group(1), None]); pending_global = None; continue
+            syms.append([m.group(1), None, pending_align]); pending_global = None; pending_align = 0; continue
         m = re.match(r'\.incbin\s+"([^"]+)"$', s)   # FULL incbin only (no comma/args)
         if m:
             if not syms:
@@ -79,12 +84,15 @@ def convert(asm_path):
            f'/* Migrated from {asm_path} (region-same graphics, single section).',
            ' * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.',
            ' */', '']
-    for i, (name, path) in enumerate(syms):
+    for i, (name, path, align) in enumerate(syms):
         const, width = tm.get(name, ('', 'u8'))   # default u8 when no extern decl (no conflict possible)
         if path is not None:
-            out.append(f'SECTION("{section}") {const}{width} {name}[] = {_MACRO[width]}("{path}");')
+            attrs = f'section("{section}")'
+            if align > 1:
+                attrs += f', aligned({align})'
+            out.append(f'{const}{width} {name}[] __attribute__(({attrs})) = {_MACRO[width]}("{path}");')
         else:
-            target = next((n for n, p in syms[i + 1:] if p is not None), None)
+            target = next((n for n, p, _a in syms[i + 1:] if p is not None), None)
             if target is None:
                 sys.exit(f"ABORT: symbol {name} has no incbin and no following data symbol (end-marker)")
             out.append(f'{const}{width} {name}[] __attribute__((alias("{target}")));')
