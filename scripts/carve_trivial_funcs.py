@@ -95,15 +95,47 @@ def _c_body(name, body):
             i = _idx(n, u)
             if i is not None:
                 return f'void {name}({t} *p, {t} v)\n{{\n    p[{i}] = v;\n}}\n'
-    if len(body) == 3 and body[0] == 'movs r1, #0' and body[2] == 'bx lr':
-        # zero-store:  movs r1,#0 ; st* r1, [r0, #N] ; bx lr -> void f(T *p){ p[N/u]=0; }
-        m = re.fullmatch(r'(strb|strh|str) r1, \[r0(?:, #(0x[0-9a-fA-F]+|\d+))?\]', body[1])
-        if m:
-            t, u = _ST[m.group(1)]
-            n = int(m.group(2), 0) if m.group(2) else 0
+    if len(body) == 3 and body[2] == 'bx lr':
+        # const-into-field: movs r1,#K ; st* r1, [r0, #N] ; bx lr -> void f(T *p){ p[N/u]=K; }
+        mk = re.fullmatch(r'movs r1, #(0x[0-9a-fA-F]+|\d+)', body[0])
+        ms = re.fullmatch(r'(strb|strh|str) r1, \[r0(?:, #(0x[0-9a-fA-F]+|\d+))?\]', body[1])
+        if mk and ms:
+            k = int(mk.group(1), 0)
+            t, u = _ST[ms.group(1)]
+            n = int(ms.group(2), 0) if ms.group(2) else 0
             i = _idx(n, u)
             if i is not None:
-                return f'void {name}({t} *p)\n{{\n    p[{i}] = 0;\n}}\n'
+                return f'void {name}({t} *p)\n{{\n    p[{i}] = {hex(k)};\n}}\n'
+        # two-field byte setter: strb r1,[r0,#N] ; strb r2,[r0,#M] ; bx lr
+        m1 = re.fullmatch(r'strb r1, \[r0(?:, #(0x[0-9a-fA-F]+|\d+))?\]', body[0])
+        m2 = re.fullmatch(r'strb r2, \[r0(?:, #(0x[0-9a-fA-F]+|\d+))?\]', body[1])
+        if m1 and m2:
+            n1 = int(m1.group(1), 0) if m1.group(1) else 0
+            n2 = int(m2.group(1), 0) if m2.group(1) else 0
+            return (f'void {name}(u8 *p, u8 a, u8 b)\n{{\n'
+                    f'    p[{n1}] = a;\n    p[{n2}] = b;\n}}\n')
+    if len(body) == 4 and body[3] == 'bx lr':
+        # large-offset const-store: adds r0,#N ; movs r1,#K ; st* r1,[r0] ; bx lr
+        ma = re.fullmatch(r'adds r0, #(0x[0-9a-fA-F]+|\d+)', body[0])
+        mk = re.fullmatch(r'movs r1, #(0x[0-9a-fA-F]+|\d+)', body[1])
+        ms = re.fullmatch(r'(strb|strh|str) r1, \[r0\]', body[2])
+        if ma and mk and ms:
+            off = int(ma.group(1), 0)
+            k = int(mk.group(1), 0)
+            t, u = _ST[ms.group(1)]
+            i = _idx(off, u)
+            if i is not None:
+                return f'void {name}({t} *p)\n{{\n    p[{i}] = {hex(k)};\n}}\n'
+        # semaphore inc/dec: adds r0,#N ; ldrb r1,[r0] ; adds|subs r1,#1 ; strb r1,[r0] ; bx lr
+    if len(body) == 5 and body[4] == 'bx lr':
+        ma = re.fullmatch(r'adds r0, #(0x[0-9a-fA-F]+|\d+)', body[0])
+        ml = body[1] == 'ldrb r1, [r0]'
+        mo = re.fullmatch(r'(adds|subs) r1, #1', body[2])
+        ms = body[3] == 'strb r1, [r0]'
+        if ma and ml and mo and ms:
+            off = int(ma.group(1), 0)
+            op = '++' if mo.group(1) == 'adds' else '--'
+            return f'void {name}(u8 *p)\n{{\n    p[{off}]{op};\n}}\n'
     return None
 
 

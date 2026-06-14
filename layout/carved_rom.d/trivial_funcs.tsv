@@ -102,3 +102,12 @@
 0C3F7C	0C3F84	src/sub_80C3F7C.o(.text)	trivial_funcs(run): sub_80C3F7C
 0C40BC	0C40C4	src/sub_80C40BC.o(.text)	trivial_funcs(run): sub_80C40BC
 0CBD20	0CBD28	src/sub_80CBD20.o(.text)	trivial_funcs(run): sub_80CBD20
+0033A0	0033AC	src/Proc_BlockSemaphore.o(.text)	trivial_funcs(run): Proc_BlockSemaphore
+0033AC	0033B8	src/Proc_WakeSemaphore.o(.text)	trivial_funcs(run): Proc_WakeSemaphore
+003D98	003DA0	src/sub_8003D98.o(.text)	trivial_funcs(run): sub_8003D98
+009948	009950	src/sub_8009948.o(.text)	trivial_funcs(run): sub_8009948
+037BD4	037BDC	src/sub_8037BD4.o(.text)	trivial_funcs(run): sub_8037BD4
+06B850	06B858	src/sub_806B850.o(.text)	trivial_funcs(run): sub_806B850
+06D660	06D668	src/sub_806D660.o(.text)	trivial_funcs(run): sub_806D660
+0848F0	0848F8	src/sub_80848F0.o(.text)	trivial_funcs(run): sub_80848F0
+088E30	088E38	src/sub_8088E30.o(.text)	trivial_funcs(run): sub_8088E30
