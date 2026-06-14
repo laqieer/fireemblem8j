@@ -1,3 +1,3 @@
 # carve_frontier.py table-pinned region-different data (parallel-safe fragment)
-1C0D80	1C2224	asm/frontier_df3_const_unit_ic.o(.data.frontier_df3_const_unit_ic.gap0)	df3_const_unit_ic region-diff data (5284 B, table-pinned)
-1C2B4C	1C4A04	asm/frontier_df3_const_unit_ic.o(.data.frontier_df3_const_unit_ic.gap1)	df3_const_unit_ic region-diff data (7864 B, table-pinned)
+1C0D80	1C2224	src/data/frontier_df3_const_unit_ic/frontier_df3_const_unit_ic.o(.data.frontier_df3_const_unit_ic.gap0)	df3_const_unit_ic region-diff data (5284 B, table-pinned)
+1C2B4C	1C4A04	src/data/frontier_df3_const_unit_ic/frontier_df3_const_unit_ic.o(.data.frontier_df3_const_unit_ic.gap1)	df3_const_unit_ic region-diff data (7864 B, table-pinned)

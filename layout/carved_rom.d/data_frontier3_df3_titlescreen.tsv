@@ -1,4 +1,4 @@
 # carve_frontier.py table-pinned region-different data (parallel-safe fragment)
-B44B40	B4678C	asm/frontier_df3_titlescreen.o(.data.frontier_df3_titlescreen.gap0)	df3_titlescreen region-diff data (7244 B, table-pinned)
-B48D38	B49B6C	asm/frontier_df3_titlescreen.o(.data.frontier_df3_titlescreen.gap1)	df3_titlescreen region-diff data (3636 B, table-pinned)
-B4B200	B4BBA0	asm/frontier_df3_titlescreen.o(.data.frontier_df3_titlescreen.gap2)	df3_titlescreen region-diff data (2464 B, table-pinned)
+B44B40	B4678C	src/data/frontier_df3_titlescreen/frontier_df3_titlescreen.o(.data.frontier_df3_titlescreen.gap0)	df3_titlescreen region-diff data (7244 B, table-pinned)
+B48D38	B49B6C	src/data/frontier_df3_titlescreen/frontier_df3_titlescreen.o(.data.frontier_df3_titlescreen.gap1)	df3_titlescreen region-diff data (3636 B, table-pinned)
+B4B200	B4BBA0	src/data/frontier_df3_titlescreen/frontier_df3_titlescreen.o(.data.frontier_df3_titlescreen.gap2)	df3_titlescreen region-diff data (2464 B, table-pinned)

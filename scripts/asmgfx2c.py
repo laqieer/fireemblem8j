@@ -44,9 +44,7 @@ def convert(asm_path):
             continue
         m = re.match(r'\.section\s+(\.[^,\s]+)', s)
         if m:
-            if section is not None and m.group(1) != section:
-                sys.exit(f"ABORT: multiple sections ({section} vs {m.group(1)}) — not a clean single-section file")
-            section = m.group(1)
+            section = m.group(1)   # current section (may change per symbol — multi-section ok)
             continue
         m = re.match(r'\.align\s+(\d+)', s)        # arm `.align N` -> 2**N byte alignment
         if m:
@@ -59,7 +57,9 @@ def convert(asm_path):
             pending_global = m.group(1); continue
         m = re.match(r'(\w+):$', s)
         if m:
-            syms.append([m.group(1), None, pending_align]); pending_global = None; pending_align = 0; continue
+            if section is None:
+                sys.exit(f"ABORT: symbol {m.group(1)} before any .section")
+            syms.append([m.group(1), None, pending_align, section]); pending_global = None; pending_align = 0; continue
         m = re.match(r'\.incbin\s+"([^"]+)"$', s)   # FULL incbin only (no comma/args)
         if m:
             if not syms:
@@ -84,15 +84,15 @@ def convert(asm_path):
            f'/* Migrated from {asm_path} (region-same graphics, single section).',
            ' * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.',
            ' */', '']
-    for i, (name, path, align) in enumerate(syms):
+    for i, (name, path, align, sec) in enumerate(syms):
         const, width = tm.get(name, ('', 'u8'))   # default u8 when no extern decl (no conflict possible)
         if path is not None:
-            attrs = f'section("{section}")'
+            attrs = f'section("{sec}")'
             if align > 1:
                 attrs += f', aligned({align})'
             out.append(f'{const}{width} {name}[] __attribute__(({attrs})) = {_MACRO[width]}("{path}");')
         else:
-            target = next((n for n, p, _a in syms[i + 1:] if p is not None), None)
+            target = next((n for n, p, _a, _s in syms[i + 1:] if p is not None), None)
             if target is None:
                 sys.exit(f"ABORT: symbol {name} has no incbin and no following data symbol (end-marker)")
             out.append(f'{const}{width} {name}[] __attribute__((alias("{target}")));')

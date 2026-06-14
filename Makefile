@@ -2249,7 +2249,29 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/gap_000062C0.s \
                            asm/gap_00006274.s \
                            asm/gap_00003240.s \
-                           asm/gap_00003080.s
+                           asm/gap_00003080.s \
+                           asm/gfx_data_bg.s \
+                           asm/frontier_df4_font_cc.s \
+                           asm/frontier_df3_unitdef_b.s \
+                           asm/frontier_banim_aurabg3.s \
+                           asm/frontier_banim_dracozombie.s \
+                           asm/frontier_df4_uistuff.s \
+                           asm/frontier_df3_eventscr_ch.s \
+                           asm/frontier_df4_ending.s \
+                           asm/frontier_df4_banim_a.s \
+                           asm/frontier_df3_banim_aura.s \
+                           asm/frontier_df3_voicegroup.s \
+                           asm/frontier_df3_data_5aa96c.s \
+                           asm/frontier_df3_fontgrp_se.s \
+                           asm/frontier_df3_banim_mid.s \
+                           asm/frontier_df3_opanim_gfx.s \
+                           asm/frontier_df4_voice.s \
+                           asm/frontier_df3_titlescreen.s \
+                           asm/frontier_df3_btl_bg.s \
+                           asm/frontier_df3_ending.s \
+                           asm/frontier_map_objtype.s \
+                           asm/frontier_df3_const_unit_ic.s \
+                           asm/frontier_df4_tail.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 

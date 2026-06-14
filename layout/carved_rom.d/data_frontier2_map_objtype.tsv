@@ -1,4 +1,4 @@
 # carve_frontier.py table-pinned region-different data (parallel-safe fragment)
-17B398	181610	asm/frontier_map_objtype.o(.data.frontier_map_objtype.gap0)	map_objtype region-diff data (25208 B, table-pinned)
-181610	188888	asm/frontier_map_objtype.o(.data.frontier_map_objtype.gap1)	map_objtype region-diff data (29304 B, table-pinned)
-188888	190010	asm/frontier_map_objtype.o(.data.frontier_map_objtype.gap2)	map_objtype region-diff data (30600 B, table-pinned)
+17B398	181610	src/data/frontier_map_objtype/frontier_map_objtype.o(.data.frontier_map_objtype.gap0)	map_objtype region-diff data (25208 B, table-pinned)
+181610	188888	src/data/frontier_map_objtype/frontier_map_objtype.o(.data.frontier_map_objtype.gap1)	map_objtype region-diff data (29304 B, table-pinned)
+188888	190010	src/data/frontier_map_objtype/frontier_map_objtype.o(.data.frontier_map_objtype.gap2)	map_objtype region-diff data (30600 B, table-pinned)

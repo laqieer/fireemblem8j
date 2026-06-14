@@ -62,7 +62,7 @@ for asm, cp, oa, oc in conv:
     for lf in ['layout/carved_rom.tsv'] + sorted(glob.glob('layout/carved_rom.d/*.tsv')):
         t = open(lf).read()
         if oa in t:
-            open(lf, 'w').write(t.replace(oa, oc)); done = True; break
+            open(lf, 'w').write(t.replace(oa, oc)); done = True   # all files (multi-section entries may span)
     if not done:
         os.remove(cp); skip.append((os.path.basename(asm)[:-2], 'no-layout-entry')); continue
     new.append(asm)

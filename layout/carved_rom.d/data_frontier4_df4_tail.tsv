@@ -1,3 +1,3 @@
 # carve_frontier.py data_gaps long-tail data (parallel-safe fragment)
-BABAF8	BABE04	asm/frontier_df4_tail.o(.data.frontier_df4_tail.gap0)	df4_tail region-diff data (780 B, long-tail gap)
-BB08B4	BB8788	asm/frontier_df4_tail.o(.data.frontier_df4_tail.gap1)	df4_tail region-diff data (32468 B, long-tail gap)
+BABAF8	BABE04	src/data/frontier_df4_tail/frontier_df4_tail.o(.data.frontier_df4_tail.gap0)	df4_tail region-diff data (780 B, long-tail gap)
+BB08B4	BB8788	src/data/frontier_df4_tail/frontier_df4_tail.o(.data.frontier_df4_tail.gap1)	df4_tail region-diff data (32468 B, long-tail gap)
