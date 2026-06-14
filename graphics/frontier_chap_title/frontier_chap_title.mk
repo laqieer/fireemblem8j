@@ -4,7 +4,7 @@
 # at -mindist 1/2/3 are committed as verbatim compressed .bin (incbin'd directly). All
 # extracted fresh from the JP ROM (region-different). Oracle: make compare.
 
-asm/frontier_chap_title.o: \
+src/data/chap_title/frontier_chap_title.o: \
   graphics/frontier_chap_title/frontier_chap_title_000_A7E188.bin.lz \
   graphics/frontier_chap_title/frontier_chap_title_001_A7E504.bin.lz \
   graphics/frontier_chap_title/frontier_chap_title_002_A7E800.bin.lz \
