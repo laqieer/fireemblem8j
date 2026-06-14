@@ -76,3 +76,6 @@ if new:
 print(f"GOOD {len(new)}; SKIPPED {len(skip)}")
 for s in skip[:20]:
     print("  skip", s)
+
+import subprocess as _sp
+_sp.run(["python3","scripts/gen_data_incbin_deps.py"])

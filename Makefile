@@ -2484,6 +2484,8 @@ $(RESIDUAL_OBJS): $(RESIDUAL_BINS)
 # because GNU make does not expand the `**` globstar.)
 GRAPHICS_MK := $(shell find graphics -name '*.mk' 2>/dev/null)
 -include $(GRAPHICS_MK)
+# src/data INCBIN objects -> their generated assets (clean-build ordering); see scripts/gen_data_incbin_deps.py
+-include layout/data_incbin_deps.mk
 
 # DATA_INCBIN: src/data/**/*.c (any subdirectory, excluding map/) compiled with
 # preproc first so INCBIN_U8/INCBIN_U16/INCBIN_U32 expand into .incbin directives
