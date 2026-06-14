@@ -1,4 +1,4 @@
 # carve_incbin_residue.py residue split into named US objects (D38)
-A64FA0	A64FC8	asm/data_08A64FA0.o(.data.residue.08A64FA0)	EventScr_Ch7_1 region-diff data (40 B, residue split D38)
-A64FC8	A64FF0	asm/data_08A64FA0.o(.data.residue.08A64FC8)	EventScr_Ch7_2 region-diff data (40 B, residue split D38)
-A64FF0	A6506C	asm/data_08A64FA0.o(.data.residue.08A64FF0)	EventScr_Ch7_3 region-diff data (124 B, residue split D38)
+A64FA0	A64FC8	src/data/data_08A64FA0/data_08A64FA0.o(.data.residue.08A64FA0)	EventScr_Ch7_1 region-diff data (40 B, residue split D38)
+A64FC8	A64FF0	src/data/data_08A64FA0/data_08A64FA0.o(.data.residue.08A64FC8)	EventScr_Ch7_2 region-diff data (40 B, residue split D38)
+A64FF0	A6506C	src/data/data_08A64FA0/data_08A64FA0.o(.data.residue.08A64FF0)	EventScr_Ch7_3 region-diff data (124 B, residue split D38)

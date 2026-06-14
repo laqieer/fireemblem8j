@@ -121,7 +121,9 @@ def convert(asm_path):
             target = next((n for n, p, _a, _s in syms[i + 1:] if p), None)
             if target is None:
                 sys.exit(f"ABORT: symbol {name} has no incbin and no following data symbol (end-marker)")
-            out.append(f'{const}{width} {name}[] __attribute__((alias("{target}")));')
+            # agbcc (GCC 2.95) rejects `T X[] __attribute__((alias))` ("defined both normally
+            # and as an alias" / "assumed one element"); the accepted form is extern + size 1.
+            out.append(f'extern {const}{width} {name}[1] __attribute__((alias("{target}")));')
     return '\n'.join(out) + '\n', section, len(syms)
 
 if __name__ == '__main__':

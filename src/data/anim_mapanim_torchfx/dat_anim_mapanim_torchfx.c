@@ -1,0 +1,73 @@
+#include "global.h"
+
+/* Migrated from asm/dat_anim_mapanim_torchfx.s (region-same graphics, single section).
+ * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+ */
+
+extern u16 gMapanimTorchfx_0[1] __attribute__((alias("gMapanimTorchfx_motion")));
+u8 gMapanimTorchfx_motion[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_motion.bin");
+u8 gMapanimTorchfx_frame_list[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_list.bin");
+u8 gMapanimTorchfx_anim_list[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_anim_list.bin");
+u8 gMapanimTorchfx_frame_0[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_0.bin");
+u8 gMapanimTorchfx_frame_1[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_1.bin");
+u8 gMapanimTorchfx_frame_2[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_2.bin");
+u8 gMapanimTorchfx_frame_3[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_3.bin");
+u8 gMapanimTorchfx_frame_4[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_4.bin");
+u8 gMapanimTorchfx_frame_5[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_5.bin");
+u8 gMapanimTorchfx_frame_6[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_6.bin");
+u8 gMapanimTorchfx_frame_7[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_7.bin");
+u8 gMapanimTorchfx_frame_8[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_8.bin");
+u8 gMapanimTorchfx_frame_9[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_9.bin");
+u8 gMapanimTorchfx_frame_10[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_10.bin");
+u8 gMapanimTorchfx_frame_11[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_11.bin");
+u8 gMapanimTorchfx_frame_12[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_12.bin");
+u8 gMapanimTorchfx_frame_13[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_13.bin");
+u8 gMapanimTorchfx_frame_14[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_14.bin");
+u8 gMapanimTorchfx_frame_15[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_15.bin");
+u8 gMapanimTorchfx_frame_16[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_16.bin");
+u8 gMapanimTorchfx_frame_17[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_17.bin");
+u8 gMapanimTorchfx_frame_18[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_18.bin");
+u8 gMapanimTorchfx_frame_19[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_19.bin");
+u8 gMapanimTorchfx_frame_20[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_20.bin");
+u8 gMapanimTorchfx_frame_21[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_21.bin");
+u8 gMapanimTorchfx_frame_22[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_22.bin");
+u8 gMapanimTorchfx_frame_23[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_23.bin");
+u8 gMapanimTorchfx_frame_24[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_24.bin");
+u8 gMapanimTorchfx_frame_25[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_25.bin");
+u8 gMapanimTorchfx_frame_26[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_26.bin");
+u8 gMapanimTorchfx_frame_27[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_27.bin");
+u8 gMapanimTorchfx_frame_28[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_28.bin");
+u8 gMapanimTorchfx_frame_29[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_29.bin");
+u8 gMapanimTorchfx_frame_30[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_30.bin");
+u8 gMapanimTorchfx_frame_31[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_31.bin");
+u8 gMapanimTorchfx_frame_32[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_32.bin");
+u8 gMapanimTorchfx_frame_33[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_33.bin");
+u8 gMapanimTorchfx_frame_34[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_34.bin");
+u8 gMapanimTorchfx_frame_35[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_35.bin");
+u8 gMapanimTorchfx_frame_36[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_36.bin");
+u8 gMapanimTorchfx_frame_37[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_37.bin");
+u8 gMapanimTorchfx_frame_38[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_38.bin");
+u8 gMapanimTorchfx_frame_39[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_39.bin");
+u8 gMapanimTorchfx_frame_40[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_40.bin");
+u8 gMapanimTorchfx_frame_41[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_41.bin");
+u8 gMapanimTorchfx_frame_42[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_42.bin");
+u8 gMapanimTorchfx_frame_43[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_43.bin");
+u8 gMapanimTorchfx_frame_44[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_44.bin");
+u8 gMapanimTorchfx_frame_45[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_45.bin");
+u8 gMapanimTorchfx_frame_46[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_46.bin");
+u8 gMapanimTorchfx_frame_47[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_47.bin");
+u8 gMapanimTorchfx_frame_48[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_48.bin");
+u8 gMapanimTorchfx_frame_49[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_frame_49.bin");
+u8 gMapanimTorchfx_anim_0[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_anim_0.bin");
+u8 gMapanimTorchfx_anim_1[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_anim_1.bin");
+u8 gMapanimTorchfx_anim_2[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_anim_2.bin");
+u8 gMapanimTorchfx_anim_3[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/gMapanimTorchfx_anim_3.bin");
+extern u16 ApConf_MapAnimTorchfx[1] __attribute__((alias("ApConf_MapAnimTorchfx_motion")));
+u8 ApConf_MapAnimTorchfx_motion[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/ApConf_MapAnimTorchfx_motion.bin");
+u8 ApConf_MapAnimTorchfx_frame_list[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/ApConf_MapAnimTorchfx_frame_list.bin");
+u8 ApConf_MapAnimTorchfx_anim_list[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/ApConf_MapAnimTorchfx_anim_list.bin");
+u8 ApConf_MapAnimTorchfx_frame_0[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/ApConf_MapAnimTorchfx_frame_0.bin");
+u8 ApConf_MapAnimTorchfx_frame_1[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/ApConf_MapAnimTorchfx_frame_1.bin");
+u8 ApConf_MapAnimTorchfx_frame_2[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/ApConf_MapAnimTorchfx_frame_2.bin");
+u8 ApConf_MapAnimTorchfx_frame_3[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/ApConf_MapAnimTorchfx_frame_3.bin");
+u8 ApConf_MapAnimTorchfx_anim_0[] __attribute__((section(".rodata.dat_anim_mapanim_torchfx"))) = INCBIN_U8("data/residual/ApConf_MapAnimTorchfx_anim_0.bin");

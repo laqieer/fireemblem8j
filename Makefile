@@ -2280,7 +2280,64 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_opanim_gfx_p25.s \
                            asm/frontier_df4_menu.s \
                            asm/frontier_df4_misc_lo.s \
-                           asm/dat_data_opanim_gfx_p24.s
+                           asm/dat_data_opanim_gfx_p24.s \
+                           asm/data_08909A80.s \
+                           asm/dat_data_banim_p17.s \
+                           asm/dat_data_banim_p0.s \
+                           asm/data_08908DBC.s \
+                           asm/data_08908590.s \
+                           asm/dat_worldmap_gmapunit_p1573.s \
+                           asm/data_0890B3B0.s \
+                           asm/dat_data_99D6DC.s \
+                           asm/dat_data_banim_p11.s \
+                           asm/data_08A61C70.s \
+                           asm/data_08A66768.s \
+                           asm/data_08A63D0C.s \
+                           asm/data_089084A8.s \
+                           asm/data_08908CA0.s \
+                           asm/data_085C6770.s \
+                           asm/data_08A68360.s \
+                           asm/data_08A62134.s \
+                           asm/dat_worldmap_gmapunit_p723.s \
+                           asm/data_08A72A80.s \
+                           asm/data_08A67C08.s \
+                           asm/data_08A668DC.s \
+                           asm/data_08A674E0.s \
+                           asm/dat_anim_mapanim_objects.s \
+                           asm/dat_anim_mapanim_torchfx.s \
+                           asm/dat_anim_worldmap_skirmish.s \
+                           asm/dat_anim_mapanim_berserk_silence.s \
+                           asm/dat_anim_arrow_trap.s \
+                           asm/dat_anim_worldmap_highlight.s \
+                           asm/dat_anim_mine_fx.s \
+                           asm/dat_data_banim_p134.s \
+                           asm/dat_anim_085A0EA0.s \
+                           asm/data_08A64420.s \
+                           asm/data_08A642F0.s \
+                           asm/dat_data_A01CC4_2.s \
+                           asm/data_08A62FA4.s \
+                           asm/data_08A62D74.s \
+                           asm/data_08A62AFC.s \
+                           asm/data_08A607B4.s \
+                           asm/data_08A67B00.s \
+                           asm/data_08A64FA0.s \
+                           asm/dat_particles_fx.s \
+                           asm/snd_song021_agbfe3_bgm_map_cp3_3.s \
+                           asm/data_08A62734.s \
+                           asm/data_08A61F60.s \
+                           asm/data_085C33C0.s \
+                           asm/data_08A625BC.s \
+                           asm/data_08A157AC.s \
+                           asm/data_08A61B60.s \
+                           asm/data_08A66A00.s \
+                           asm/data_08A63238.s \
+                           asm/dat_worldmap_gmapunit_p798.s \
+                           asm/data_08A70F34.s \
+                           asm/data_08A66080.s \
+                           asm/data_08A63894.s \
+                           asm/dat_data_banim_p19.s \
+                           asm/dat_worldmap_gmapunit_p275.s \
+                           asm/data_08B25710.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 

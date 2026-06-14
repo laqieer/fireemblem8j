@@ -1,2 +1,2 @@
 # carve_incbin_residue.py residue split into named US objects (D38)
-B25710	B2576C	asm/data_08B25710.o(.data.residue.08B25710)	Ap_WmHightLightMap4 region-diff data (92 B, residue split D38)
+B25710	B2576C	src/data/data_08B25710/data_08B25710.o(.data.residue.08B25710)	Ap_WmHightLightMap4 region-diff data (92 B, residue split D38)
