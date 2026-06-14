@@ -1,2 +1,3 @@
 000CD8	000CE4	src/time_08000CD8.o(.text)	time_08000CD8(run): GetGameClock
+000CE4	000CF0	src/time_08000CE4.o(.text)	time_08000CE4(run): SetGameTime
 001EE4	001EF0	src/time_08001EE4.o(.text)	time_08001EE4(run): EnableKeyComboResetEN
