@@ -146,7 +146,26 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_banim_p117.s \
                            asm/dat_data_btl_bg.s \
                            asm/dat_data_banim_p105.s \
-                           asm/dat_data_banim_p104.s
+                           asm/dat_data_banim_p104.s \
+                           asm/dat_data_banim_p183.s \
+                           asm/dat_data_banim_p185.s \
+                           asm/dat_data_banim_p118.s \
+                           asm/dat_data_banim_p200.s \
+                           asm/dat_data_banim_p36.s \
+                           asm/dat_const_data_chapter_maps_p7.s \
+                           asm/dat_data_banim_p199.s \
+                           asm/dat_data_opanim_gfx_p11.s \
+                           asm/dat_data_banim_p108.s \
+                           asm/dat_data_opanim_gfx_p1.s \
+                           asm/dat_const_data_chapter_maps_p2.s \
+                           asm/dat_ui_palettes.s \
+                           asm/dat_data_banim_p95.s \
+                           asm/dat_data_banim_p75.s \
+                           asm/dat_const_data_chapter_maps_p6.s \
+                           asm/dat_data_banim_p231.s \
+                           asm/dat_data_banim_p102.s \
+                           asm/dat_data_banim_p96.s \
+                           asm/dat_data_banim_p87.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 

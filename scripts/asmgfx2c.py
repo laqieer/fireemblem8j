@@ -11,7 +11,26 @@ Usage: python3 scripts/asmgfx2c.py asm/dat_data_map_anim_frames.c_out_dir <subdi
   e.g. python3 scripts/asmgfx2c.py asm/dat_data_map_anim_frames.s mapanim
 prints the generated C to stdout (caller redirects to src/data/<subdir>/<name>.c).
 """
-import re, sys
+import re, sys, glob
+
+_TYPES = None
+def load_types():
+    """sym -> (const_prefix, width_type) from extern array decls in include/*.h."""
+    global _TYPES
+    if _TYPES is not None:
+        return _TYPES
+    _TYPES = {}
+    for hf in glob.glob('include/*.h') + glob.glob('include/**/*.h'):
+        try:
+            for ln in open(hf, errors='replace'):
+                m = re.match(r'\s*extern\s+(const\s+)?(u8|u16|u32)\s+(\w+)\s*\[', ln)
+                if m:
+                    _TYPES[m.group(3)] = (m.group(1) or '', m.group(2))
+        except OSError:
+            pass
+    return _TYPES
+
+_MACRO = {'u8': 'INCBIN_U8', 'u16': 'INCBIN_U16', 'u32': 'INCBIN_U32'}
 
 def convert(asm_path):
     lines = open(asm_path).read().splitlines()
@@ -56,8 +75,10 @@ def convert(asm_path):
            f'/* Migrated from {asm_path} (region-same graphics, single section).',
            ' * Each symbol kept in the original section in order; byte-identical via INCBIN_U8.',
            ' */', '']
+    tm = load_types()
     for name, path in syms:
-        out.append(f'SECTION("{section}") u8 {name}[] = INCBIN_U8("{path}");')
+        const, width = tm.get(name, ('', 'u8'))   # default u8 when no extern decl (no conflict possible)
+        out.append(f'SECTION("{section}") {const}{width} {name}[] = {_MACRO[width]}("{path}");')
     return '\n'.join(out) + '\n', section, len(syms)
 
 if __name__ == '__main__':
