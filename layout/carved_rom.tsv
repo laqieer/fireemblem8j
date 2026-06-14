@@ -1198,7 +1198,7 @@
 9C7B64	9C7C64	asm/dat_data_bg_p40.o(.rodata.dat_data_bg_p40)	dat_data_bg_p40 region-same per-sym shifted (0KB)
 9CC924	9CCA24	asm/dat_data_bg_p41.o(.rodata.dat_data_bg_p41)	dat_data_bg_p41 region-same per-sym shifted (0KB)
 9CDD18	9CF318	asm/dat_classchg_data.o(.rodata.dat_classchg_data)	dat_classchg_data region-same shifted (5KB)
-9CFD20	A0DE50	asm/dat_data_map_anim_frames.o(.rodata.dat_data_map_anim_frames)	dat_data_map_anim_frames region-same shifted (248KB)
+9CFD20	A0DE50	src/data/mapanim/data_map_anim_frames.o(.rodata.dat_data_map_anim_frames)	dat_data_map_anim_frames region-same shifted (248KB)
 A0DE50	A12AC0	asm/dat_data_99D6DC.o(.rodata.dat_data_99D6DC)	dat_data_99D6DC region-same shifted (19KB)
 A1313A	A13256	asm/dat_worldmap_gmapunit_p1471.o(.rodata.dat_worldmap_gmapunit_p1471)	dat_worldmap_gmapunit_p1471 region-same per-sym shifted (0KB)
 A13488	A13880	asm/dat_unit_icon_move_table_ref.o(.rodata.dat_unit_icon_move_table_ref)	unit_icon_move_table region-diff (funcmap code-ref, 0KB)
