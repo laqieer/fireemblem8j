@@ -270,7 +270,73 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_const_data_unit_icon_move_p20.s \
                            asm/dat_const_data_unit_icon_move_p16.s \
                            asm/dat_ending_fin_p0.s \
-                           asm/dat_const_data_unit_icon_move_p80.s
+                           asm/dat_const_data_unit_icon_move_p80.s \
+                           asm/dat_const_data_unit_icon_move_p68.s \
+                           asm/dat_const_data_unit_icon_move_p55.s \
+                           asm/dat_const_data_unit_icon_move_p11.s \
+                           asm/dat_Img_WmHightLightMap7_ref.s \
+                           asm/dat_const_data_unit_icon_move_p101.s \
+                           asm/dat_const_data_unit_icon_move_p81.s \
+                           asm/dat_const_data_unit_icon_move_p76.s \
+                           asm/dat_const_data_unit_icon_move_p62.s \
+                           asm/dat_const_data_unit_icon_move_p48.s \
+                           asm/dat_const_data_unit_icon_move_p40.s \
+                           asm/dat_const_data_unit_icon_move_p22.s \
+                           asm/dat_const_data_unit_icon_move_p19.s \
+                           asm/dat_const_data_unit_icon_move_p15.s \
+                           asm/dat_const_data_unit_icon_move_p10.s \
+                           asm/dat_const_data_unit_icon_move_p4.s \
+                           asm/dat_const_data_unit_icon_move_p97.s \
+                           asm/dat_const_data_unit_icon_move_p74.s \
+                           asm/dat_const_data_unit_icon_move_p66.s \
+                           asm/dat_const_data_unit_icon_move_p53.s \
+                           asm/dat_const_data_unit_icon_move_p52.s \
+                           asm/dat_const_data_unit_icon_move_p51.s \
+                           asm/dat_const_data_unit_icon_move_p5.s \
+                           asm/dat_const_data_unit_icon_move_p96.s \
+                           asm/dat_const_data_unit_icon_move_p79.s \
+                           asm/dat_const_data_unit_icon_move_p77.s \
+                           asm/dat_const_data_unit_icon_move_p75.s \
+                           asm/dat_const_data_unit_icon_move_p60.s \
+                           asm/dat_const_data_unit_icon_move_p57.s \
+                           asm/dat_const_data_unit_icon_move_p54.s \
+                           asm/dat_const_data_unit_icon_move_p38.s \
+                           asm/dat_const_data_unit_icon_move_p33.s \
+                           asm/dat_const_data_unit_icon_move_p31.s \
+                           asm/dat_const_data_unit_icon_move_p23.s \
+                           asm/dat_const_data_unit_icon_move_p21.s \
+                           asm/dat_const_data_unit_icon_move_p98.s \
+                           asm/dat_const_data_unit_icon_move_p95.s \
+                           asm/dat_const_data_unit_icon_move_p65.s \
+                           asm/dat_const_data_unit_icon_move_p41.s \
+                           asm/dat_const_data_unit_icon_move_p39.s \
+                           asm/dat_const_data_unit_icon_move_p9.s \
+                           asm/dat_const_data_unit_icon_move_p100.s \
+                           asm/dat_const_data_unit_icon_move_p94.s \
+                           asm/dat_const_data_unit_icon_move_p69.s \
+                           asm/dat_const_data_unit_icon_move_p56.s \
+                           asm/dat_const_data_unit_icon_move_p32.s \
+                           asm/dat_const_data_unit_icon_move_p30.s \
+                           asm/dat_data_banim_p187.s \
+                           asm/dat_worldmap_gmapunit_p757.s \
+                           asm/dat_data_banim_p112.s \
+                           asm/dat_anim_worldmap_highlight_p7.s \
+                           asm/dat_anim_worldmap_highlight_p5.s \
+                           asm/dat_data_banim_p240.s \
+                           asm/dat_data_banim_p93.s \
+                           asm/dat_worldmap_minimap_p2.s \
+                           asm/dat_data_banim_p103.s \
+                           asm/dat_data_banim_p76.s \
+                           asm/dat_data_banim_p121.s \
+                           asm/dat_const_data_E162A_p0.s \
+                           asm/dat_data_banim_p222.s \
+                           asm/dat_data_banim_p141.s \
+                           asm/dat_data_banim_p223.s \
+                           asm/dat_data_banim_p181.s \
+                           asm/dat_data_banim_p152.s \
+                           asm/dat_const_data_chapter_maps_p5.s \
+                           asm/dat_worldmap_gmapunit_p938.s \
+                           asm/dat_worldmap_gmapunit_p1605.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 
