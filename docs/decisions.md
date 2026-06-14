@@ -4237,3 +4237,35 @@ coddog hints remain false-positive-prone (D93).
 highest-value tractable region-different functions on the main thread; carve-verify-commit each. Do **not**
 fabricate a final-goal `LOOP_DONE` — the all-4-axes-100% target is partly unreachable; deliver a structured
 unreachable-residual report only once each residue is *proven* (not assumed) unreachable.
+
+## D101 — data extraction 95% -> 99.91%: asmgfx2c hardened (multi-incbin/slice/CONST_DATA/alias); the "~50-70% ceiling" was wrong (2026-06-14)
+
+**Context.** The loop playbook listed DATA graphics conversion as lever #1 with a hardcoded
+stale "14% -> ~50-70% ceiling". Ground truth (calcprogress) was already **95.02%** — the
+percentage was stale, but ~300 grep-matched `asm/dat_*.s` graphics files suggested headroom.
+Investigation: only ~21 were genuinely unconverted; the rest already in `DATA_INCBIN_ASM_EXCLUDE`.
+The blockers were converter limitations, not a real asset ceiling.
+
+**Fixes to `scripts/asmgfx2c.py` (each COLD-`make compare`-verified, baserom removed):**
+1. **Multi-incbin per symbol** — a label followed by several `.incbin` lines -> preproc
+   `INCBIN_U8("a","b",..)` concatenation (the preproc supports it: "a quoted argument starts a
+   new file, repeatable for concat"). Unblocked `opanim_gfx` multi-asset symbols.
+2. **Genuine slices** — `.incbin "X", off, len` -> `INCBIN_U8("X", off, len)` (preproc slicing).
+   Unblocked `opanim_gfx_p25` (122 KB) + the `frontier_df4` files (+498 KB in one batch).
+3. **`extern u16 CONST_DATA SYM[]` type form** — `CONST_DATA`/`EWRAM_DATA`/`__attribute__()` may
+   sit between type and symbol; was mis-emitted as `u8` -> conflicting-types. Palettes now `u16`.
+4. **agbcc-accepted alias form** — GCC 2.95 rejects `T X[] __attribute__((alias(Y)))` ("defined
+   both normally and as an alias" / "assumed one element"); the accepted form (matching the
+   existing `src/data/item_icon` file) is `extern T X[1] __attribute__((alias(Y)))`. Unblocked
+   co-located-label files (mapanim objects, worldmap_gmapunit, data_99D6DC, banim) -> +57 files.
+5. **`baserom` incbin guard** — ABORT on `.incbin "baserom.gba"` (raw ROM, not committed source);
+   without it a mixed file would pass WARM (baserom present) but fail COLD. Critical after the
+   slice change removed the old partial-incbin ABORT that had implicitly blocked baserom slices.
+
+**Result.** extracted-data **95.02% -> 99.91%** (13.93 MB), self-contained still 100%, COLD OK.
+**Residual ~0.09% (12 KB), genuinely hard (not a quick converter fix):** struct-typed symbols
+(need real typed C tables, not byte INCBIN), GCC dot-in-name local labels (`bldyLut.10`,
+`blanks.12` — not valid C identifiers), and ~18 miscategorized stranded *code* files (matching-C
+territory, not data). So data is at its practical ceiling for the INCBIN-converter approach;
+100% would need typed-table extraction + symbol renaming. The pessimistic "~50-70%" ceiling is
+retired.
