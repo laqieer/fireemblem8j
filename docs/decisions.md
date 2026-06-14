@@ -4201,3 +4201,39 @@ ancestry before declaring another process hostile.
    branch-push from genuinely separate clones.
 3. Salvage stands: the agency-era committed work (+10 matching-C, +101 KB data) was COLD-verified byte-perfect and
    integrated (main `09ab544cb`). No data lost; `make compare` never regressed.
+
+## D100 — stall-break: trivial stub-graduation tier swept (+114 matching-C); mechanical matching-C AND reliable-naming levers now both exhausted; remaining = hand-decomp frontier (2026-06-14)
+
+**Context.** After data hit 95% the loop stalled ~12h (user-flagged) in *analysis* of the
+matching-C/named hard tail without shipping carves. Root-caused as analysis-not-output and
+broke it with real, committed, byte-verified progress.
+
+**What shipped (matching-C 78.15% → 79.49%, 6665 → 6779; 6 commits).**
+- `SetGameTime` (sub_8000CE4): a 12-byte region-different stub stranded between two already-carved
+  `time` files; region-different only in the `gGameClock` address (JP `0x03000010`), which is already
+  a JP linker symbol → `gGameClock = newTime` byte-matches.
+- **`scripts/carve_trivial_funcs.py`** (new, reusable, make-compare-gated, snapshot-revert): graduates
+  the trivial region-different gbadisasm stubs the disasm pass **never tried** as C — `bx lr`→`void f(void){}`,
+  `movs r0,#N`→`return N`, `ld*/st* [r0,#N]` getters/setters, `movs r1,#K; st*` const/zero field-stores,
+  large-offset `adds r0,#N; movs r1,#0; st* [r0]`, and `Proc_*Semaphore` inc/dec. **+113 funcs.** Skips the
+  `0x080D6xxx` BIOS/libgcc `svc` region (agbcc cannot emit). Bug found + fixed: the carved `.c` must
+  `#include "global.h"` (the `void`/`int` trivial stubs compiled without it, masking the omission; the
+  `u8/u16/u32` accessors exposed it); revert is now snapshot-based (the line-matching revert left
+  `trivial_funcs.tsv` dirty → cascade failures).
+
+**Strategic finding (the fork, decided).** Exhaustive cataloging of the 1513 remaining still-asm
+non-BIOS functions confirms **the deterministic mechanical matching-C tier is swept** — remaining
+clusters are ≤2× singletons or need per-function RE. The **global-accessor** family (`ldr =addr; ld/st; bx lr`,
+SetGameTime-shaped) is only ~13 funcs and a *clean* carve needs the global **named** (the codebase uses
+named globals, never raw `*(u32*)0x03…` derefs — verified 0 occurrences); raw-pointer carving would create
+named-axis debt, so it's deferred to a naming pass. The **reliable funcmap-naming lever is also exhausted**:
+0 of the 1604 still-asm `sub_` placeholders carry a `us_jp_funcmap.tsv` name — they are placeholders
+*precisely because* they are region-different/unmatched (funcmap-named funcs are already carved+named). The
+coddog hints remain false-positive-prone (D93).
+
+**Therefore.** Remaining matching-C **and** named progress now requires genuine per-function hand-decomp
+(IDA/Ghidra → byte-matching C), which advances **both** axes together but is slow and partly **unreachable**
+(D96: ~170 libgcc/BIOS hand-asm + agbcc reg-alloc/`lsr↔asr` dead-ends). Next lever: hand-decomp the
+highest-value tractable region-different functions on the main thread; carve-verify-commit each. Do **not**
+fabricate a final-goal `LOOP_DONE` — the all-4-axes-100% target is partly unreachable; deliver a structured
+unreachable-residual report only once each residue is *proven* (not assumed) unreachable.
