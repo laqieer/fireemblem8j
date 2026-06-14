@@ -1,0 +1,165 @@
+#!/usr/bin/env python3
+"""Graduate TRIVIAL region-different descriptive-asm functions to matching C.
+
+The gbadisasm pass dumped every unmatched JP function as descriptive asm without
+ever trying to recompile it. The trivial ones recompile to byte-identical code:
+
+  bx lr                       ->  void NAME(void) {}
+  movs r0, #N ; bx lr         ->  int  NAME(void) { return N; }
+
+Both are deterministic agbcc codegen (verified by `make compare`). This ADDS
+matching-C functions (calcprogress axis 2). Names stay as-is (placeholder
+sub_/nullsub_ — the JP real name is genuinely unknown for these dummy stubs;
+the US decomp auto-names them the same way), so the named axis is unchanged.
+
+SKIPS the libgcc/BIOS hand-asm region 0x080D6000..0x080DBFFF (svc wrappers etc.
+that agbcc cannot emit) and anything not matching a known-trivial signature.
+
+Safe: carves in sub-batches, runs `make compare` after each, and reverts the
+whole sub-batch on any sha1 failure (so the build is never left broken).
+
+Usage:
+  scripts/carve_trivial_funcs.py --list        # print plan, carve nothing
+  scripts/carve_trivial_funcs.py --limit N      # carve at most N functions
+  scripts/carve_trivial_funcs.py --batch B      # make compare every B funcs (default 30)
+  scripts/carve_trivial_funcs.py                # carve all eligible
+"""
+import os, re, sys, glob, subprocess
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(ROOT)
+
+BIOS_LO, BIOS_HI = 0x080D6000, 0x080DBFFF   # libgcc/BIOS hand-asm region -> skip
+
+
+def body_of(name):
+    """Stripped instruction list of asm/<name>.s, or None."""
+    sf = f'asm/{name}.s'
+    if not os.path.exists(sf):
+        return None
+    out, started = [], False
+    for ln in open(sf):
+        s = ln.strip()
+        if re.match(rf'{re.escape(name)}:', s):
+            started = True
+            continue
+        if not started or not s or s.startswith('@') or s.startswith('.'):
+            continue
+        out.append(re.sub(r'\s+', ' ', s))
+    return out
+
+
+def c_for(name, body):
+    """Return C source string for a recognised trivial body, else None."""
+    if body == ['bx lr']:
+        return f'void {name}(void)\n{{\n}}\n'
+    if len(body) == 2 and body[1] == 'bx lr':
+        m = re.fullmatch(r'movs r0, #(0x[0-9a-fA-F]+|\d+)', body[0])
+        if m:
+            return f'int {name}(void)\n{{\n    return {m.group(1)};\n}}\n'
+    return None
+
+
+def eligible():
+    """(addr_hex, name, frag_path) for every trivial still-asm gbadisasm func."""
+    out = []
+    for frag in sorted(glob.glob('layout/carved_rom.d/gbadisasm_*.tsv')):
+        lines = open(frag).read().splitlines()
+        if len(lines) != 1:
+            continue                       # only clean one-function fragments
+        p = lines[0].split('\t')
+        if len(p) < 3:
+            continue
+        try:
+            a = int(p[0], 16)
+        except ValueError:
+            continue
+        if BIOS_LO <= 0x08000000 + a <= BIOS_HI:
+            continue
+        m = re.search(r'\.text\.(\w+)', p[2]) or re.search(r'asm/(\w+)\.o', p[2])
+        if not m:
+            continue
+        name = m.group(1)
+        b = body_of(name)
+        if b is None:
+            continue
+        if c_for(name, b) is not None:
+            out.append((p[0], name, frag, b))
+    out.sort()
+    return out
+
+
+def sh(c):
+    return subprocess.run(c, shell=True, capture_output=True, text=True)
+
+
+def make_compare():
+    return sh('make compare').stdout.find('fireemblem8.gba: OK') >= 0 or \
+           sh('make compare 2>&1 | tail -3').stdout.find('OK') >= 0
+
+
+def carve_one(addr, name, frag, body):
+    """Write C, add layout row, remove asm placement+source. Returns rollback fn."""
+    cfile = f'src/{name}.c'
+    open(cfile, 'w').write(c_for(name, body))
+    # layout row -> shared per-task fragment
+    end = f'{int(addr,16)+ (4 if body==["bx lr"] else 4):06X}'
+    # compute true end from fragment line (col 1)
+    end = open(frag).read().split('\t')[1]
+    row = f'{addr}\t{end}\tsrc/{name}.o(.text)\ttrivial_funcs(run): {name}\n'
+    with open('layout/carved_rom.d/trivial_funcs.tsv', 'a') as f:
+        f.write(row)
+    sh(f'git rm -q "{frag}" "asm/{name}.s"')
+    return cfile, frag, name
+
+
+def revert(carved):
+    open('layout/carved_rom.d/trivial_funcs.tsv', 'w').write(
+        ''.join(l for l in open('layout/carved_rom.d/trivial_funcs.tsv')
+                if not any(f'(run): {n}\n' == l[-len(f'(run): {n}\n'):] for _, _, n in carved)))
+    for cfile, frag, name in carved:
+        if os.path.exists(cfile):
+            os.remove(cfile)
+        sh(f'git checkout -- "{frag}" "asm/{name}.s"')
+
+
+def main():
+    args = sys.argv[1:]
+    limit = next((int(args[i+1]) for i, a in enumerate(args) if a == '--limit'), None)
+    batch = next((int(args[i+1]) for i, a in enumerate(args) if a == '--batch'), 30)
+    plan = eligible()
+    if limit:
+        plan = plan[:limit]
+    print(f"eligible trivial funcs: {len(plan)}")
+    if '--list' in args:
+        for addr, name, frag, body in plan:
+            print(f"  {addr}  {name:22s}  {' ; '.join(body)}")
+        return
+    if not os.path.exists('layout/carved_rom.d/trivial_funcs.tsv'):
+        open('layout/carved_rom.d/trivial_funcs.tsv', 'w').close()
+    done, failed = 0, []
+    for i in range(0, len(plan), batch):
+        chunk = plan[i:i+batch]
+        carved = [carve_one(*c) for c in chunk]
+        if make_compare():
+            done += len(carved)
+            print(f"  [{done}/{len(plan)}] sub-batch OK ({len(carved)} funcs)")
+        else:
+            print(f"  sub-batch FAILED at {i}; bisecting...")
+            revert(carved)
+            # bisect one-by-one to salvage the good ones
+            for c in chunk:
+                cc = [carve_one(*c)]
+                if make_compare():
+                    done += 1
+                else:
+                    revert(cc)
+                    failed.append(c[1])
+            print(f"  [{done}/{len(plan)}] after bisect; {len(failed)} failed so far")
+    print(f"DONE: carved {done}, failed {len(failed)}")
+    if failed:
+        print("  failed:", ' '.join(failed[:30]))
+
+
+if __name__ == '__main__':
+    main()
