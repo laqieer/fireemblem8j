@@ -1,0 +1,12 @@
+#include "global.h"
+
+/* Migrated from asm/dat_worldmap_gmapunit_p1002.s (region-same graphics, single section).
+ * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+ */
+
+SECTION(".rodata.dat_worldmap_gmapunit_p1002") u8 AnimSprite_efxNaglfarOBJ_3[] = INCBIN_U8("data/residual/AnimSprite_efxNaglfarOBJ_3.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1002") u8 AnimSprite_efxNaglfarOBJ_4[] = INCBIN_U8("data/residual/AnimSprite_efxNaglfarOBJ_4.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1002") u8 AnimSprite_efxNaglfarOBJ_5[] = INCBIN_U8("data/residual/AnimSprite_efxNaglfarOBJ_5.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1002") u8 AnimSprite_efxNaglfarOBJ_6[] = INCBIN_U8("data/residual/AnimSprite_efxNaglfarOBJ_6.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1002") u8 AnimSprite_efxNaglfarOBJ_7[] = INCBIN_U8("data/residual/AnimSprite_efxNaglfarOBJ_7.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1002") u8 AnimSprite_efxNaglfarOBJ_8[] = INCBIN_U8("data/residual/AnimSprite_efxNaglfarOBJ_8.bin");

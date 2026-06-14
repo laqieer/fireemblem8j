@@ -1,0 +1,9 @@
+#include "global.h"
+
+/* Migrated from asm/dat_data_banim_p138.s (region-same graphics, single section).
+ * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+ */
+
+SECTION(".rodata.dat_data_banim_p138") u8 AnimSprite_EfxRestOBJ_25[] = INCBIN_U8("data/residual/AnimSprite_EfxRestOBJ_25.bin");
+SECTION(".rodata.dat_data_banim_p138") u8 AnimSprite_EfxRestOBJ_26[] = INCBIN_U8("data/residual/AnimSprite_EfxRestOBJ_26.bin");
+SECTION(".rodata.dat_data_banim_p138") u8 AnimSprite_EfxRestOBJ_27[] = INCBIN_U8("data/residual/AnimSprite_EfxRestOBJ_27.bin");
