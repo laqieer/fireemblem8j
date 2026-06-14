@@ -79,3 +79,5 @@ for s in skip[:20]:
 
 import subprocess as _sp
 _sp.run(["python3","scripts/gen_data_incbin_deps.py"])
+_chk=_sp.run(["python3","scripts/check_incbin_deps.py"])
+if _chk.returncode: raise SystemExit("INCBIN dep check FAILED — clean/CI build would break")
