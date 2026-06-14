@@ -58,11 +58,19 @@ def _idx(n, unit):
     return n // unit if n % unit == 0 else None
 
 
+_HDR = '#include "global.h"\n\n'
+
+
 def c_for(name, body):
     """Return C source string for a recognised trivial body, else None.
 
     Deterministic agbcc codegen; `make compare` is still the oracle (auto-revert).
     """
+    inner = _c_body(name, body)
+    return _HDR + inner if inner else None
+
+
+def _c_body(name, body):
     if body == ['bx lr']:
         return f'void {name}(void)\n{{\n}}\n'
     if len(body) == 2 and body[1] == 'bx lr':
@@ -137,25 +145,23 @@ def make_compare():
     return 'fireemblem8.gba: OK' in (r.stdout + r.stderr)
 
 
+TSV = 'layout/carved_rom.d/trivial_funcs.tsv'
+
+
 def carve_one(addr, name, frag, body):
-    """Write C, add layout row, remove asm placement+source. Returns rollback fn."""
+    """Write C, add layout row, remove asm placement+source. Returns rollback tuple."""
     cfile = f'src/{name}.c'
     open(cfile, 'w').write(c_for(name, body))
-    # layout row -> shared per-task fragment
-    end = f'{int(addr,16)+ (4 if body==["bx lr"] else 4):06X}'
-    # compute true end from fragment line (col 1)
-    end = open(frag).read().split('\t')[1]
-    row = f'{addr}\t{end}\tsrc/{name}.o(.text)\ttrivial_funcs(run): {name}\n'
-    with open('layout/carved_rom.d/trivial_funcs.tsv', 'a') as f:
-        f.write(row)
+    end = open(frag).read().split('\t')[1]   # true end addr (col 1 of the fragment)
+    with open(TSV, 'a') as f:
+        f.write(f'{addr}\t{end}\tsrc/{name}.o(.text)\ttrivial_funcs(run): {name}\n')
     sh(f'git rm -q "{frag}" "asm/{name}.s"')
     return cfile, frag, name
 
 
-def revert(carved):
-    open('layout/carved_rom.d/trivial_funcs.tsv', 'w').write(
-        ''.join(l for l in open('layout/carved_rom.d/trivial_funcs.tsv')
-                if not any(f'(run): {n}\n' == l[-len(f'(run): {n}\n'):] for _, _, n in carved)))
+def revert(carved, tsv_snapshot):
+    """Restore exactly to the pre-chunk state (snapshot-based, not line-matching)."""
+    open(TSV, 'w').write(tsv_snapshot)        # exact pre-chunk TSV
     for cfile, frag, name in carved:
         if os.path.exists(cfile):
             os.remove(cfile)
@@ -174,25 +180,27 @@ def main():
         for addr, name, frag, body in plan:
             print(f"  {addr}  {name:22s}  {' ; '.join(body)}")
         return
-    if not os.path.exists('layout/carved_rom.d/trivial_funcs.tsv'):
-        open('layout/carved_rom.d/trivial_funcs.tsv', 'w').close()
+    if not os.path.exists(TSV):
+        open(TSV, 'w').close()
     done, failed = 0, []
     for i in range(0, len(plan), batch):
         chunk = plan[i:i+batch]
+        snap = open(TSV).read()               # exact TSV before this chunk
         carved = [carve_one(*c) for c in chunk]
         if make_compare():
             done += len(carved)
             print(f"  [{done}/{len(plan)}] sub-batch OK ({len(carved)} funcs)")
         else:
             print(f"  sub-batch FAILED at {i}; bisecting...")
-            revert(carved)
+            revert(carved, snap)
             # bisect one-by-one to salvage the good ones
             for c in chunk:
+                s1 = open(TSV).read()
                 cc = [carve_one(*c)]
                 if make_compare():
                     done += 1
                 else:
-                    revert(cc)
+                    revert(cc, s1)
                     failed.append(c[1])
             print(f"  [{done}/{len(plan)}] after bisect; {len(failed)} failed so far")
     print(f"DONE: carved {done}, failed {len(failed)}")
