@@ -1,0 +1,69 @@
+#include "global.h"
+
+/* Migrated from asm/dat_data_banim_p38.s (region-same graphics, single section).
+ * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+ */
+
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_1[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_1.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_2[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_2.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_3[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_3.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_4[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_4.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_5[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_5.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_6[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_6.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_7[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_7.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_8[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_8.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_9[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_9.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_10[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_10.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_11[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_11.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_12[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_12.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_13[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_13.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_14[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_14.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_15[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_15.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_16[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_16.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_17[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_17.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_18[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_18.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_19[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_19.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_20[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_20.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_21[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_21.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_22[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_22.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_23[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_23.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_24[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_24.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_25[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_25.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_26[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_26.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_27[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_27.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_28[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_28.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_29[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_29.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_30[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_30.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_31[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_31.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_32[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_32.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_33[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_33.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_34[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_34.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_35[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_35.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_36[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_36.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_37[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_37.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_38[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_38.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_39[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_39.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_40[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_40.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_41[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_41.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_42[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_42.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_43[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_43.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_44[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_44.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_45[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_45.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_46[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_46.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_47[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_47.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_48[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_48.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_49[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_49.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_50[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_50.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_51[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_51.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_52[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_52.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_53[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_53.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_54[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_54.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_55[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_55.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_56[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_56.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_57[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_57.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_58[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_58.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_59[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_59.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_60[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_60.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_61[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_61.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_62[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_62.bin");
+SECTION(".rodata.dat_data_banim_p38") u8 AnimSprite_YushaSpinShield2_63[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield2_63.bin");

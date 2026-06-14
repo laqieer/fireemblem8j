@@ -336,7 +336,43 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_banim_p152.s \
                            asm/dat_const_data_chapter_maps_p5.s \
                            asm/dat_worldmap_gmapunit_p938.s \
-                           asm/dat_worldmap_gmapunit_p1605.s
+                           asm/dat_worldmap_gmapunit_p1605.s \
+                           asm/dat_banim_ekrdragonfx_9.s \
+                           asm/dat_data_banim_p243.s \
+                           asm/dat_banim_ekrdragonfx_1.s \
+                           asm/dat_data_banim_p153.s \
+                           asm/dat_data_banim_p206.s \
+                           asm/dat_data_banim_p40.s \
+                           asm/dat_data_banim_p39.s \
+                           asm/dat_data_banim_p38.s \
+                           asm/dat_data_banim_p37.s \
+                           asm/dat_data_banim_p123.s \
+                           asm/dat_data_banim_p172.s \
+                           asm/dat_data_banim_p174.s \
+                           asm/dat_data_banim_p91.s \
+                           asm/dat_data_banim_p125.s \
+                           asm/dat_data_banim_p194.s \
+                           asm/dat_data_banim_p89.s \
+                           asm/dat_banim_ekrdragonfx_0.s \
+                           asm/dat_data_banim_p171.s \
+                           asm/dat_data_banim_p20.s \
+                           asm/dat_data_banim_p92.s \
+                           asm/dat_data_banim_p90.s \
+                           asm/dat_worldmap_gmapunit_p761.s \
+                           asm/dat_data_banim_p109.s \
+                           asm/dat_data_banim_p77.s \
+                           asm/dat_worldmap_gmapunit_p771.s \
+                           asm/dat_data_banim_p116.s \
+                           asm/dat_data_banim_p63.s \
+                           asm/dat_banim_ekrskill_p0.s \
+                           asm/dat_data_banim_p21.s \
+                           asm/dat_anim_worldmap_sprite.s \
+                           asm/dat_data_banim_p62.s \
+                           asm/dat_data_banim_p29.s \
+                           asm/dat_data_banim_p28.s \
+                           asm/dat_data_banim_p130.s \
+                           asm/dat_data_banim_p126.s \
+                           asm/dat_data_banim_p30.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 

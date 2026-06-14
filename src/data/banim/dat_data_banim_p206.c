@@ -1,0 +1,75 @@
+#include "global.h"
+
+/* Migrated from asm/dat_data_banim_p206.s (region-same graphics, single section).
+ * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+ */
+
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGDirt_0[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006EB8B4_Img_086EB8B4.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGDirt_1[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006EBD44_Img_086EBD44.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGDirt_2[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006EC264_Img_086EC264.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGDirt_3[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006EC7D4_Img_086EC7D4.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGDirt_4[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006ECDD8_Img_086ECDD8.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGDirt_5[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006ED424_Img_086ED424.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGDirt_6[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006EDAF8_Img_086EDAF8.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGDirt_7[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006EE25C_Img_086EE25C.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGDirt_8[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006EE9F8_Img_086EE9F8.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGDirt_9[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006EF1DC_Img_086EF1DC.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGDirt_10[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006EF9C8_Img_086EF9C8.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGDirt_0[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F01E4_Pal_086F01E4.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGDirt_1[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F0204_Pal_086F0204.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGDirt_2[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F0224_Pal_086F0224.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGDirt_3[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F0244_Pal_086F0244.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGDirt_4[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F0264_Pal_086F0264.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGDirt_5[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F0284_Pal_086F0284.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGDirt_6[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F02A4_Pal_086F02A4.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGDirt_7[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F02C4_Pal_086F02C4.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGDirt_8[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F02E4_Pal_086F02E4.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGDirt_9[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F0304_Pal_086F0304.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGDirt_10[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F0324_Pal_086F0324.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGDirt_0[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F0344_Tsa_086F0344.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGDirt_1[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F03EC_Tsa_086F03EC.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGDirt_2[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F04B8_Tsa_086F04B8.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGDirt_3[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F05A0_Tsa_086F05A0.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGDirt_4[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F069C_Tsa_086F069C.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGDirt_5[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F079C_Tsa_086F079C.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGDirt_6[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F08B8_Tsa_086F08B8.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGDirt_7[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F09E0_Tsa_086F09E0.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGDirt_8[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F0B2C_Tsa_086F0B2C.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGDirt_9[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F0C88_Tsa_086F0C88.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGDirt_10[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F0DF8_Tsa_086F0DF8.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGTwister_0[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006F0F6C_Img_086F0F6C.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGTwister_1[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006F24C8_Img_086F24C8.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGTwister_2[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006F3830_Img_086F3830.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGTwister_0[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006F3830_Img_086F3830.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGTwister_1[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F4A58_Pal_086F4A58.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGTwister_2[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/006F4A78_Pal_086F4A78.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGTwister_0[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F4A98_Tsa_086F4A98.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGTwister_1[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F4CCC_Tsa_086F4CCC.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGTwister_2[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006F4ED8_Tsa_086F4ED8.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGFinish_0[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006F50D4_Img_086F50D4.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGFinish_1[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006F6264_Img_086F6264.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGFinish_2[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006F7150_Img_086F7150.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGFinish_3[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006F80B8_Img_086F80B8.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGFinish_4[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006F915C_Img_086F915C.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGFinish_5[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006FA350_Img_086FA350.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGFinish_6[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006FB07C_Img_086FB07C.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGFinish_7[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006FBCE8_Img_086FBCE8.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_efxGorgonBGFinish_8[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006FCD58_Img_086FCD58.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_efxGorgonBGFinish_1[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006FCD58_Img_086FCD58.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGFinish_0[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006FDA64_Tsa_086FDA64.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGFinish_1[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006FDB08_Tsa_086FDB08.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGFinish_2[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006FDCE0_Tsa_086FDCE0.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGFinish_3[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006FDEC4_Tsa_086FDEC4.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGFinish_4[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006FE0D4_Tsa_086FE0D4.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGFinish_5[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006FE320_Tsa_086FE320.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGFinish_6[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006FE4E0_Tsa_086FE4E0.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGFinish_7[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006FE680_Tsa_086FE680.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGFinish_8[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006FE81C_Tsa_086FE81C.map.bin.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Img_NaglfarSprites_A[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006FE938_Img_NaglfarSprites_A.4bpp.lz");
+SECTION(".rodata.dat_data_banim_p206") u16 Pal_NaglfarSprites_A[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006FE938_Img_NaglfarSprites_A.gbapal");
+SECTION(".rodata.dat_data_banim_p206") u8 AnimSprite_NaglfarSprites_A_0[] = INCBIN_U8("data/residual/AnimSprite_NaglfarSprites_A_0.bin");
+SECTION(".rodata.dat_data_banim_p206") u8 AnimSprite_NaglfarSprites_A_1[] = INCBIN_U8("data/residual/AnimSprite_NaglfarSprites_A_1.bin");
+SECTION(".rodata.dat_data_banim_p206") u8 AnimSprite_Banim_49[] = INCBIN_U8("data/residual/AnimSprite_Banim_49.bin");
+SECTION(".rodata.dat_data_banim_p206") u8 AnimSprite_efxNaglfarOBJ_0[] = INCBIN_U8("data/residual/AnimSprite_efxNaglfarOBJ_0.bin");
+SECTION(".rodata.dat_data_banim_p206") u8 AnimSprite_efxNaglfarOBJ_1[] = INCBIN_U8("data/residual/AnimSprite_efxNaglfarOBJ_1.bin");
+SECTION(".rodata.dat_data_banim_p206") u8 AnimSprite_efxNaglfarOBJ_2[] = INCBIN_U8("data/residual/AnimSprite_efxNaglfarOBJ_2.bin");

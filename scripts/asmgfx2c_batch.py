@@ -9,7 +9,7 @@ Usage: python3 scripts/asmgfx2c_batch.py [N]    (default N=40)
 """
 import subprocess, re, os, glob, sys
 
-N = int(sys.argv[1]) if len(sys.argv) > 1 else 40
+N = next((int(a) for a in sys.argv[1:] if a.isdigit()), 40)
 
 def excl_block(mk):
     return re.search(r'DATA_INCBIN_ASM_EXCLUDE :=(.*?)\nASM_OBJECTS', mk, re.S).group(1)
@@ -17,12 +17,15 @@ def excl_block(mk):
 mk = open('Makefile').read()
 already = set(re.findall(r'asm/[\w]+\.s', excl_block(mk)))
 
+INCLUDE_DATA = '--data' in sys.argv   # also relocate committed data/residual *.bin incbins to src
 cands = []
 for f in glob.glob('asm/dat_*.s'):
     if f in already:
         continue
     t = open(f).read()
-    if 'incbin "graphics/' not in t or 'incbin "data/' in t:
+    if '.incbin "' not in t:
+        continue
+    if not INCLUDE_DATA and ('incbin "graphics/' not in t or 'incbin "data/' in t):
         continue
     if re.search(r'\.incbin\s+"[^"]+",', t):   # partial incbin (offset/length)
         continue
