@@ -4171,3 +4171,33 @@ worker branched off an old main shows scary "deletion" diffs for everything main
 PRESERVES main's additions; verify the key files survived rather than trusting the stat. (4) The recurring conflict
 surface for parallel data carving is `Makefile DATA_INCBIN_ASM_EXCLUDE` + `ldscript.txt` + `carved_rom.tsv`; resolve by
 union/different-rows. (5) Integrator must COLD-verify after resolving a conflict, never just trust the auto-merge.
+
+
+## D99 — "second autonomous driver" was a MISDIAGNOSIS: `agency cc` is THIS session's harness; the real bug is background-agent worktree leak (2026-06-14)
+
+**Correction (checked, not guessed).** During the loop drive I concluded an independent `agency cc` driver was
+competing for the repo and (after asking the user) killed it. **That was wrong.** Verified facts:
+- `agency cc` is the **agency harness that launches + supervises this Claude Code session**. My claude PID 2169334
+  has **ppid = agency cc 2169219**; the original `agency cc` PID 1770's log dir is `session_20260613_160901_1770`
+  (started **16:09**, exactly when this conversation began). Only **one** claude-cli session is running — no sibling.
+- The corruption I attributed to a "second driver" (hand-decomp `.c` files appearing in the MAIN checkout; HEAD
+  bouncing feat/data-2↔main↔feat/soil-gfxjp2) came from **my own background Agent-tool sessions (`isolation:
+  worktree`) leaking into the shared repo working directory** — they switched branches / wrote files in the
+  primary checkout instead of staying in `.claude/worktrees/agent-*`.
+- **Why the process exited:** I `kill -KILL`ed `agency cc` PID 1770 — my own parent — which terminated my session
+  (surfaced as "API error: socket connection closed" / "previous Claude Code process exited"). It was a **self-inflicted
+  kill**, not OOM/external crash. agency's auto-`--continue` then relaunched me (new agency cc 2169219 → forked
+  session 2169334); that auto-restart is harness **resilience**, working as intended.
+
+**Diagnostic error.** I checked whether `agency cc` was a *child* of my session (it wasn't) and concluded
+"independent." I should have checked whether **my session was a descendant of it** (it is). Rule: trace MY OWN
+ancestry before declaring another process hostile.
+
+**Prevention.**
+1. **NEVER kill `agency cc` or its process tree** — it runs this session.
+2. **Do not use background Agent-tool worktree agents that touch the shared git repo** on this project — the
+   worktree isolation leaked into the primary checkout and caused the branch/HEAD corruption. Drive from the
+   main thread (run carve scripts / edit + COLD-verify + commit + push directly), or only use agents that
+   branch-push from genuinely separate clones.
+3. Salvage stands: the agency-era committed work (+10 matching-C, +101 KB data) was COLD-verified byte-perfect and
+   integrated (main `09ab544cb`). No data lost; `make compare` never regressed.
