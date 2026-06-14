@@ -67,16 +67,24 @@ def convert(asm_path):
         if m:
             if not syms:
                 sys.exit(f"ABORT: incbin before any symbol: {s}")
-            syms[-1][1].append(m.group(1)); continue   # preproc INCBIN_U8("a","b",..) concatenates
-        # partial incbin `.incbin "X", off, len` -> OK only if it's effectively the FULL file
-        m = re.match(r'\.incbin\s+"([^"]+)"\s*,\s*(\w+)\s*,\s*(\w+)\s*$', s)
+            if 'baserom' in m.group(1):   # raw ROM bytes are NOT a committed source asset
+                sys.exit(f"ABORT: baserom incbin (not extracted to source): {s}")
+            syms[-1][1].append((m.group(1), None, None)); continue
+        # slice incbin `.incbin "X", off[, len]` -> preproc INCBIN_U*("X", off, len) slices
+        m = re.match(r'\.incbin\s+"([^"]+)"\s*,\s*(\w+)\s*(?:,\s*(\w+)\s*)?$', s)
         if m:
-            path, off, ln = m.group(1), int(m.group(2), 0), int(m.group(3), 0)
-            if off == 0 and os.path.exists(path) and os.path.getsize(path) == ln:
-                if not syms:
-                    sys.exit(f"ABORT: partial incbin before any symbol: {s}")
-                syms[-1][1].append(path); continue
-            sys.exit(f"ABORT: genuine partial incbin (off={off} len={ln} file={path}): {s}")
+            path = m.group(1)
+            off = int(m.group(2), 0)
+            ln = int(m.group(3), 0) if m.group(3) else None
+            if 'baserom' in path:         # slice of raw ROM -> COLD build can't reproduce it
+                sys.exit(f"ABORT: baserom slice incbin (not extracted to source): {s}")
+            if not syms:
+                sys.exit(f"ABORT: slice incbin before any symbol: {s}")
+            if off == 0 and ln is not None and os.path.exists(path) and os.path.getsize(path) == ln:
+                syms[-1][1].append((path, None, None))     # whole file -> clean full form
+            else:
+                syms[-1][1].append((path, off, ln))        # genuine slice
+            continue
         # benign metadata directives -> ignore
         if re.match(r'\.(size|type|weak|hidden|local)\b', s):
             continue
@@ -100,8 +108,15 @@ def convert(asm_path):
             attrs = f'section("{sec}")'
             if align > 1:
                 attrs += f', aligned({align})'
-            arglist = ', '.join(f'"{p}"' for p in paths)   # >1 path -> preproc concatenates
-            out.append(f'{const}{width} {name}[] __attribute__(({attrs})) = {_MACRO[width]}({arglist});')
+            parts = []
+            for (p, off, ln) in paths:                     # full -> "p"; slice -> "p", off[, len]
+                if off is None:
+                    parts.append(f'"{p}"')
+                elif ln is None:
+                    parts.append(f'"{p}", {off}')
+                else:
+                    parts.append(f'"{p}", {off}, {ln}')
+            out.append(f'{const}{width} {name}[] __attribute__(({attrs})) = {_MACRO[width]}({", ".join(parts)});')
         else:
             target = next((n for n, p, _a, _s in syms[i + 1:] if p), None)
             if target is None:

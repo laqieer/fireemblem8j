@@ -27,8 +27,9 @@ for f in glob.glob('asm/*.s'):
         continue
     if not INCLUDE_DATA and ('incbin "graphics/' not in t or 'incbin "data/' in t):
         continue
-    if re.search(r'\.incbin\s+"[^"]+",', t):   # partial incbin (offset/length)
+    if 'incbin "baserom' in t:    # mixed file w/ raw-ROM bytes -> converter ABORTs anyway; skip early
         continue
+    # slice incbins (`.incbin "X", off, len`) are now handled by asmgfx2c (INCBIN slicing)
     cands.append((os.path.getsize(f), f))
 cands.sort(reverse=True)
 batch = [f for _, f in cands[:N]]

@@ -2275,7 +2275,12 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_opanim_gfx_p0.s \
                            asm/dat_data_A01CC4_p2.s \
                            asm/dat_mine_pal.s \
-                           asm/dat_worldmap_gmapunit_p724.s
+                           asm/dat_worldmap_gmapunit_p724.s \
+                           asm/frontier_df4_banim_b.s \
+                           asm/dat_data_opanim_gfx_p25.s \
+                           asm/frontier_df4_menu.s \
+                           asm/frontier_df4_misc_lo.s \
+                           asm/dat_data_opanim_gfx_p24.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 

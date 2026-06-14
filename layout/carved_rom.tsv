@@ -1506,8 +1506,8 @@ B7AFFC	B7F118	src/data/opanim_gfx/dat_data_opanim_gfx_p11.o(.rodata.dat_data_opa
 B839F4	B864A8	src/data/opanim_gfx/dat_data_opanim_gfx_p18.o(.rodata.dat_data_opanim_gfx_p18)	dat_data_opanim_gfx_p18 region-same per-sym shifted (10KB)
 B89AF8	B8A7B0	src/data/opanim_gfx/dat_data_opanim_gfx_p22.o(.rodata.dat_data_opanim_gfx_p22)	dat_data_opanim_gfx_p22 region-same per-sym shifted (3KB)
 B8A7D0	B8B490	src/data/opanim_gfx/dat_data_opanim_gfx_p23.o(.rodata.dat_data_opanim_gfx_p23)	dat_data_opanim_gfx_p23 region-same per-sym shifted (3KB)
-B8B4B0	B8B998	asm/dat_data_opanim_gfx_p24.o(.rodata.dat_data_opanim_gfx_p24)	dat_data_opanim_gfx_p24 region-same per-sym shifted (1KB)
-B8C43C	BAA2E0	asm/dat_data_opanim_gfx_p25.o(.rodata.dat_data_opanim_gfx_p25)	dat_data_opanim_gfx_p25 region-same per-sym shifted (119KB)
+B8B4B0	B8B998	src/data/opanim_gfx/dat_data_opanim_gfx_p24.o(.rodata.dat_data_opanim_gfx_p24)	dat_data_opanim_gfx_p24 region-same per-sym shifted (1KB)
+B8C43C	BAA2E0	src/data/opanim_gfx/dat_data_opanim_gfx_p25.o(.rodata.dat_data_opanim_gfx_p25)	dat_data_opanim_gfx_p25 region-same per-sym shifted (119KB)
 BAA71C	BAB2DC	src/data/opanim_gfx/dat_data_opanim_gfx_p27.o(.rodata.dat_data_opanim_gfx_p27)	dat_data_opanim_gfx_p27 region-same per-sym shifted (2KB)
 BAB41C	BAB5E4	src/data/opanim_gfx/dat_data_opanim_gfx_p26.o(.rodata.dat_data_opanim_gfx_p26)	dat_data_opanim_gfx_p26 region-same per-sym shifted (0KB)
 BAB71C	BAB754	src/classchg-handler.o(.data)	classchg-handler .data
