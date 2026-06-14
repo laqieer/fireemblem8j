@@ -11,7 +11,7 @@ Usage: python3 scripts/asmgfx2c.py asm/dat_data_map_anim_frames.c_out_dir <subdi
   e.g. python3 scripts/asmgfx2c.py asm/dat_data_map_anim_frames.s mapanim
 prints the generated C to stdout (caller redirects to src/data/<subdir>/<name>.c).
 """
-import re, sys, glob
+import re, sys, glob, os
 
 _TYPES = None
 def load_types():
@@ -67,10 +67,19 @@ def convert(asm_path):
             if syms[-1][1] is not None:
                 sys.exit(f"ABORT: symbol {syms[-1][0]} has >1 incbin — multi-incbin not supported")
             syms[-1][1] = m.group(1); continue
+        # partial incbin `.incbin "X", off, len` -> OK only if it's effectively the FULL file
+        m = re.match(r'\.incbin\s+"([^"]+)"\s*,\s*(\w+)\s*,\s*(\w+)\s*$', s)
+        if m:
+            path, off, ln = m.group(1), int(m.group(2), 0), int(m.group(3), 0)
+            if off == 0 and os.path.exists(path) and os.path.getsize(path) == ln:
+                if not syms or syms[-1][1] is not None:
+                    sys.exit(f"ABORT: partial incbin placement issue: {s}")
+                syms[-1][1] = path; continue
+            sys.exit(f"ABORT: genuine partial incbin (off={off} len={ln} file={path}): {s}")
         # benign metadata directives -> ignore
         if re.match(r'\.(size|type|weak|hidden|local)\b', s):
             continue
-        # anything else (partial incbin with comma, .word/.byte data, etc.) => bail
+        # anything else (.word/.byte data, etc.) => bail
         if '.incbin' in s:
             sys.exit(f"ABORT: non-full incbin: {s}")
         sys.exit(f"ABORT: unexpected directive: {s}")
