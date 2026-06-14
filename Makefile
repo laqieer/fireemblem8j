@@ -165,7 +165,43 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_banim_p231.s \
                            asm/dat_data_banim_p102.s \
                            asm/dat_data_banim_p96.s \
-                           asm/dat_data_banim_p87.s
+                           asm/dat_data_banim_p87.s \
+                           asm/dat_data_banim_p68.s \
+                           asm/dat_data_opanim_gfx_p9.s \
+                           asm/dat_data_opanim_gfx_p18.s \
+                           asm/dat_data_banim_p35.s \
+                           asm/dat_data_banim_p191.s \
+                           asm/dat_data_banim_p69.s \
+                           asm/dat_data_banim_p182.s \
+                           asm/dat_data_banim_p201.s \
+                           asm/dat_data_banim_p114.s \
+                           asm/dat_data_banim_p230.s \
+                           asm/dat_phase_change.s \
+                           asm/dat_const_data_E162A_p2.s \
+                           asm/dat_data_banim_p65.s \
+                           asm/dat_data_opanim_gfx_p2.s \
+                           asm/dat_data_banim_p239.s \
+                           asm/dat_const_data_chapter_maps_p3.s \
+                           asm/dat_data_banim_p86.s \
+                           asm/dat_data_banim_p232.s \
+                           asm/dat_data_banim_p79.s \
+                           asm/dat_worldmap_gmapunit_p1519.s \
+                           asm/dat_const_data_E162A_p1.s \
+                           asm/dat_ending_staffreel_p0.s \
+                           asm/dat_data_banim_p78.s \
+                           asm/dat_ending_staffreel_p2.s \
+                           asm/dat_const_data_chapter_maps_p8.s \
+                           asm/dat_data_5AA96C_p2.s \
+                           asm/dat_data_banim_p135.s \
+                           asm/dat_data_banim_p238.s \
+                           asm/dat_data_B12A60.s \
+                           asm/dat_data_banim_p70.s \
+                           asm/dat_data_banim_p106.s \
+                           asm/dat_menu_save_main_bg_p0.s \
+                           asm/dat_data_banim_p163.s \
+                           asm/dat_data_banim_p228.s \
+                           asm/dat_trap_gas.s \
+                           asm/dat_data_opanim_gfx_p5.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 
