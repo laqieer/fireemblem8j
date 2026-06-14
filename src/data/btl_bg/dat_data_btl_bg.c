@@ -1,0 +1,71 @@
+#include "global.h"
+
+/* Migrated from asm/dat_data_btl_bg.s (region-same graphics, single section).
+ * Each symbol kept in the original section in order; byte-identical via INCBIN_U8.
+ */
+
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_10_tiles[] = INCBIN_U8("graphics/btl_bg/btl_bg_10.feimg3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_10_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_10.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_10_map[] = INCBIN_U8("graphics/btl_bg/btl_bg_10.fetsa3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_11_tiles[] = INCBIN_U8("graphics/btl_bg/btl_bg_11.feimg3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_11_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_11.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_11_map[] = INCBIN_U8("graphics/btl_bg/btl_bg_11.fetsa3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_12_tiles[] = INCBIN_U8("graphics/btl_bg/btl_bg_12.feimg3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_12_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_12.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_12_map[] = INCBIN_U8("graphics/btl_bg/btl_bg_12.fetsa3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_13_tiles[] = INCBIN_U8("graphics/btl_bg/btl_bg_13.feimg3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_13_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_13.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_13_map[] = INCBIN_U8("graphics/btl_bg/btl_bg_13.fetsa3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_14_tiles[] = INCBIN_U8("graphics/btl_bg/btl_bg_14.feimg3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_14_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_14.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_14_map[] = INCBIN_U8("graphics/btl_bg/btl_bg_14.fetsa3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_15_tiles[] = INCBIN_U8("graphics/btl_bg/btl_bg_15.feimg3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_15_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_15.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_15_map[] = INCBIN_U8("graphics/btl_bg/btl_bg_15.fetsa3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_16_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_16.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_17_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_17.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_18_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_18.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_19_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_19.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_20_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_20.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_21_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_21.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_22_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_22.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_23_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_23.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_24_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_24.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_25_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_25.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_26_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_26.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_27_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_27.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_28_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_28.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_29_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_29.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_30_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_30.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_27_tiles[] = INCBIN_U8("graphics/btl_bg/btl_bg_27.feimg3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_31_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_31.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_27_map[] = INCBIN_U8("graphics/btl_bg/btl_bg_27.fetsa3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_32_tiles[] = INCBIN_U8("graphics/btl_bg/btl_bg_32.feimg3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_32_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_32.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_32_map[] = INCBIN_U8("graphics/btl_bg/btl_bg_32.fetsa3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_33_tiles[] = INCBIN_U8("graphics/btl_bg/btl_bg_33.feimg3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_33_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_33.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_33_map[] = INCBIN_U8("graphics/btl_bg/btl_bg_33.fetsa3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_34_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_34.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_35_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_35.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_36_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_36.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_37_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_37.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_38_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_38.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_39_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_39.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_40_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_40.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_41_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_41.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_42_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_42.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_43_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_43.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_44_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_44.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_45_tiles[] = INCBIN_U8("graphics/btl_bg/btl_bg_45.feimg3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_45_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_45.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_45_map[] = INCBIN_U8("graphics/btl_bg/btl_bg_45.fetsa3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_46_tiles[] = INCBIN_U8("graphics/btl_bg/btl_bg_46.feimg3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_46_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_46.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_46_map[] = INCBIN_U8("graphics/btl_bg/btl_bg_46.fetsa3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_47_tiles[] = INCBIN_U8("graphics/btl_bg/btl_bg_47.feimg3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_47_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_47.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_47_map[] = INCBIN_U8("graphics/btl_bg/btl_bg_47.fetsa3.bin.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_48_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_48.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_49_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_49.gbapal.lz");
+SECTION(".rodata.dat_data_btl_bg") u8 btl_bg_50_palette[] = INCBIN_U8("graphics/btl_bg/btl_bg_50.gbapal.lz");

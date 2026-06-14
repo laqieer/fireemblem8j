@@ -138,7 +138,15 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_gTsa_OpSubtitle_04_ref.s \
                            asm/dat_gTsa_OpSubtitle_05_ref.s \
                            asm/dat_const_data_DB034_gf.s \
-                           asm/dat_data_map_anim_frames.s
+                           asm/dat_data_map_anim_frames.s \
+                           asm/dat_data_banim_p196.s \
+                           asm/dat_data_banim_p175.s \
+                           asm/dat_data_banim_p213.s \
+                           asm/dat_data_ekrdk.s \
+                           asm/dat_data_banim_p117.s \
+                           asm/dat_data_btl_bg.s \
+                           asm/dat_data_banim_p105.s \
+                           asm/dat_data_banim_p104.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 
