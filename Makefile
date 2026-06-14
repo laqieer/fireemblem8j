@@ -201,7 +201,41 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_banim_p163.s \
                            asm/dat_data_banim_p228.s \
                            asm/dat_trap_gas.s \
-                           asm/dat_data_opanim_gfx_p5.s
+                           asm/dat_data_opanim_gfx_p5.s \
+                           asm/dat_data_opanim_gfx_p4.s \
+                           asm/dat_data_banim_p42.s \
+                           asm/dat_data_opanim_gfx_p3.s \
+                           asm/dat_const_data_chapter_maps_p9.s \
+                           asm/dat_const_data_chapter_maps_p1.s \
+                           asm/dat_data_banim_p94.s \
+                           asm/dat_data_opanim_gfx_p22.s \
+                           asm/dat_worldmap_gmapunit_p1638.s \
+                           asm/dat_data_banim_p115.s \
+                           asm/dat_data_banim_p113.s \
+                           asm/dat_data_banim_p85.s \
+                           asm/dat_worldmap_gmap_p1.s \
+                           asm/dat_data_banim_p97.s \
+                           asm/dat_data_banim_p192.s \
+                           asm/dat_worldmap_gmapunit_p1621.s \
+                           asm/dat_data_opanim_gfx_p23.s \
+                           asm/dat_data_banim_p208.s \
+                           asm/dat_worldmap_gmapunit_p1579.s \
+                           asm/dat_data_banim_p190.s \
+                           asm/dat_data_banim_p41.s \
+                           asm/dat_data_banim_p143.s \
+                           asm/dat_const_data_chapter_maps_p4.s \
+                           asm/dat_data_banim_p64.s \
+                           asm/dat_data_opanim_gfx_p6.s \
+                           asm/dat_ending_staffreel_p3.s \
+                           asm/dat_ending_staffreel_p1.s \
+                           asm/dat_data_banim_p229.s \
+                           asm/dat_data_opanim_gfx_p27.s \
+                           asm/dat_data_opanim_gfx_p26.s \
+                           asm/dat_ending_staffreel_p4.s \
+                           asm/dat_const_data_chapter_maps_p0.s \
+                           asm/dat_const_data_unit_icon_move_p89.s \
+                           asm/dat_const_data_unit_icon_move_p88.s \
+                           asm/dat_const_data_unit_icon_move_p87.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 
