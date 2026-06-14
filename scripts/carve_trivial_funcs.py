@@ -49,14 +49,53 @@ def body_of(name):
     return out
 
 
+_LD = {'ldrb': ('u8', 1), 'ldrh': ('u16', 2), 'ldr': ('u32', 4)}
+_ST = {'strb': ('u8', 1), 'strh': ('u16', 2), 'str': ('u32', 4)}
+
+
+def _idx(n, unit):
+    """byte offset -> element index for a `type*` deref, or None if unaligned."""
+    return n // unit if n % unit == 0 else None
+
+
 def c_for(name, body):
-    """Return C source string for a recognised trivial body, else None."""
+    """Return C source string for a recognised trivial body, else None.
+
+    Deterministic agbcc codegen; `make compare` is still the oracle (auto-revert).
+    """
     if body == ['bx lr']:
         return f'void {name}(void)\n{{\n}}\n'
     if len(body) == 2 and body[1] == 'bx lr':
         m = re.fullmatch(r'movs r0, #(0x[0-9a-fA-F]+|\d+)', body[0])
         if m:
             return f'int {name}(void)\n{{\n    return {m.group(1)};\n}}\n'
+        # getter:  ld* r0, [r0, #N] ; bx lr   ->  T f(T *p){ return p[N/u]; }
+        m = re.fullmatch(r'(ldrb|ldrh|ldr) r0, \[r0(?:, #(0x[0-9a-fA-F]+|\d+))?\]', body[0])
+        if m:
+            t, u = _LD[m.group(1)]
+            n = int(m.group(2), 0) if m.group(2) else 0
+            i = _idx(n, u)
+            if i is not None:
+                ret = 'u32' if t == 'u32' else 'int'
+                return f'{ret} {name}({t} *p)\n{{\n    return p[{i}];\n}}\n'
+    if len(body) == 2 and body[1] == 'bx lr':
+        # setter:  st* r1, [r0, #N] ; bx lr   ->  void f(T *p, T v){ p[N/u] = v; }
+        m = re.fullmatch(r'(strb|strh|str) r1, \[r0(?:, #(0x[0-9a-fA-F]+|\d+))?\]', body[0])
+        if m:
+            t, u = _ST[m.group(1)]
+            n = int(m.group(2), 0) if m.group(2) else 0
+            i = _idx(n, u)
+            if i is not None:
+                return f'void {name}({t} *p, {t} v)\n{{\n    p[{i}] = v;\n}}\n'
+    if len(body) == 3 and body[0] == 'movs r1, #0' and body[2] == 'bx lr':
+        # zero-store:  movs r1,#0 ; st* r1, [r0, #N] ; bx lr -> void f(T *p){ p[N/u]=0; }
+        m = re.fullmatch(r'(strb|strh|str) r1, \[r0(?:, #(0x[0-9a-fA-F]+|\d+))?\]', body[1])
+        if m:
+            t, u = _ST[m.group(1)]
+            n = int(m.group(2), 0) if m.group(2) else 0
+            i = _idx(n, u)
+            if i is not None:
+                return f'void {name}({t} *p)\n{{\n    p[{i}] = 0;\n}}\n'
     return None
 
 
@@ -94,8 +133,8 @@ def sh(c):
 
 
 def make_compare():
-    return sh('make compare').stdout.find('fireemblem8.gba: OK') >= 0 or \
-           sh('make compare 2>&1 | tail -3').stdout.find('OK') >= 0
+    r = sh('make compare')
+    return 'fireemblem8.gba: OK' in (r.stdout + r.stderr)
 
 
 def carve_one(addr, name, frag, body):
@@ -120,7 +159,7 @@ def revert(carved):
     for cfile, frag, name in carved:
         if os.path.exists(cfile):
             os.remove(cfile)
-        sh(f'git checkout -- "{frag}" "asm/{name}.s"')
+        sh(f'git checkout HEAD -- "{frag}" "asm/{name}.s"')
 
 
 def main():

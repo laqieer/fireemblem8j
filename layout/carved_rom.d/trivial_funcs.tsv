@@ -84,3 +84,4 @@
 0C66A4	0C66A8	src/nullsub_104.o(.text)	trivial_funcs(run): nullsub_104
 0C8C7C	0C8C80	src/nullsub_107.o(.text)	trivial_funcs(run): nullsub_107
 0D4E30	0D4E34	src/nullsub_110.o(.text)	trivial_funcs(run): nullsub_110
+003D80	003D84	src/sub_8003D80.o(.text)	trivial_funcs(run): sub_8003D80
