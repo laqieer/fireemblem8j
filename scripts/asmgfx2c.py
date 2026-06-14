@@ -62,23 +62,32 @@ def convert(asm_path):
             if syms[-1][1] is not None:
                 sys.exit(f"ABORT: symbol {syms[-1][0]} has >1 incbin — multi-incbin not supported")
             syms[-1][1] = m.group(1); continue
-        # anything else (e.g. partial incbin with comma, .word, .byte) => bail
+        # benign metadata directives -> ignore
+        if re.match(r'\.(size|type|weak|hidden|local)\b', s):
+            continue
+        # anything else (partial incbin with comma, .word/.byte data, etc.) => bail
         if '.incbin' in s:
             sys.exit(f"ABORT: non-full incbin: {s}")
         sys.exit(f"ABORT: unexpected directive: {s}")
     if section is None:
         sys.exit("ABORT: no .section found")
-    missing = [n for n, p in syms if p is None]
-    if missing:
-        sys.exit(f"ABORT: {len(missing)} symbols without an incbin (e.g. {missing[:3]}) — labels/aliases unsupported")
+    # A symbol with no incbin is an ALIAS of the next data-bearing symbol (same address,
+    # zero bytes between them) — the op_subtitle/item_icon pattern. A trailing no-incbin
+    # symbol (no next data) is an end-marker we can't represent cleanly -> bail.
+    tm = load_types()
     out = ['#include "global.h"', '',
            f'/* Migrated from {asm_path} (region-same graphics, single section).',
-           ' * Each symbol kept in the original section in order; byte-identical via INCBIN_U8.',
+           ' * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.',
            ' */', '']
-    tm = load_types()
-    for name, path in syms:
+    for i, (name, path) in enumerate(syms):
         const, width = tm.get(name, ('', 'u8'))   # default u8 when no extern decl (no conflict possible)
-        out.append(f'SECTION("{section}") {const}{width} {name}[] = {_MACRO[width]}("{path}");')
+        if path is not None:
+            out.append(f'SECTION("{section}") {const}{width} {name}[] = {_MACRO[width]}("{path}");')
+        else:
+            target = next((n for n, p in syms[i + 1:] if p is not None), None)
+            if target is None:
+                sys.exit(f"ABORT: symbol {name} has no incbin and no following data symbol (end-marker)")
+            out.append(f'{const}{width} {name}[] __attribute__((alias("{target}")));')
     return '\n'.join(out) + '\n', section, len(syms)
 
 if __name__ == '__main__':

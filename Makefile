@@ -235,7 +235,42 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_const_data_chapter_maps_p0.s \
                            asm/dat_const_data_unit_icon_move_p89.s \
                            asm/dat_const_data_unit_icon_move_p88.s \
-                           asm/dat_const_data_unit_icon_move_p87.s
+                           asm/dat_const_data_unit_icon_move_p87.s \
+                           asm/dat_worldmap_gmapunit_p1598.s \
+                           asm/dat_const_data_unit_icon_move_p67.s \
+                           asm/dat_const_data_unit_icon_move_p50.s \
+                           asm/dat_const_data_unit_icon_move_p99.s \
+                           asm/dat_const_data_unit_icon_move_p59.s \
+                           asm/dat_const_data_unit_icon_move_p35.s \
+                           asm/dat_const_data_unit_icon_move_p28.s \
+                           asm/dat_trap_fire_pike_2.s \
+                           asm/dat_const_data_unit_icon_move_p43.s \
+                           asm/dat_const_data_unit_icon_move_p6.s \
+                           asm/dat_const_data_unit_icon_move_p0.s \
+                           asm/dat_const_data_unit_icon_move_p102.s \
+                           asm/dat_const_data_unit_icon_move_p93.s \
+                           asm/dat_const_data_unit_icon_move_p92.s \
+                           asm/dat_const_data_unit_icon_move_p91.s \
+                           asm/dat_const_data_unit_icon_move_p90.s \
+                           asm/dat_const_data_unit_icon_move_p78.s \
+                           asm/dat_const_data_unit_icon_move_p64.s \
+                           asm/dat_const_data_unit_icon_move_p34.s \
+                           asm/dat_const_data_unit_icon_move_p12.s \
+                           asm/dat_const_data_unit_icon_move_p1.s \
+                           asm/dat_trap_fire_pike.s \
+                           asm/dat_ending_fin_p1.s \
+                           asm/dat_const_data_unit_icon_move_p85.s \
+                           asm/dat_const_data_unit_icon_move_p82.s \
+                           asm/dat_const_data_unit_icon_move_p73.s \
+                           asm/dat_const_data_unit_icon_move_p70.s \
+                           asm/dat_const_data_unit_icon_move_p61.s \
+                           asm/dat_const_data_unit_icon_move_p49.s \
+                           asm/dat_const_data_unit_icon_move_p44.s \
+                           asm/dat_const_data_unit_icon_move_p42.s \
+                           asm/dat_const_data_unit_icon_move_p20.s \
+                           asm/dat_const_data_unit_icon_move_p16.s \
+                           asm/dat_ending_fin_p0.s \
+                           asm/dat_const_data_unit_icon_move_p80.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 
