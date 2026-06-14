@@ -733,9 +733,9 @@
 5CBE84	5CBFA4	src/data/particles_fx/dat_particles_fx_p0.o(.rodata.dat_particles_fx_p0)	dat_particles_fx_p0 region-same per-sym shifted (0KB)
 5CBFE4	5CDF84	asm/dat_particles_fx.o(.rodata.dat_particles_fx)	dat_particles_fx region-same shifted (7KB)
 5CF274	5D14D4	asm/dat_worldmap_gmapunit_p723.o(.rodata.dat_worldmap_gmapunit_p723)	dat_worldmap_gmapunit_p723 region-same per-sym shifted (8KB)
-5D1BC8	5D1D3C	asm/dat_worldmap_gmapunit_p724.o(.rodata.dat_worldmap_gmapunit_p724)	dat_worldmap_gmapunit_p724 region-same per-sym shifted (0KB)
+5D1BC8	5D1D3C	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p724.o(.rodata.dat_worldmap_gmapunit_p724)	dat_worldmap_gmapunit_p724 region-same per-sym shifted (0KB)
 5D1D3C	5D1DD0	asm/dat_anim_mine_fx.o(.rodata.dat_anim_mine_fx)	dat_anim_mine_fx region-same shifted (0KB)
-5D1DD0	5D1E10	asm/dat_mine_pal.o(.rodata.dat_mine_pal)	dat_mine_pal region-same shifted (0KB)
+5D1DD0	5D1E10	src/data/mine_pal/dat_mine_pal.o(.rodata.dat_mine_pal)	dat_mine_pal region-same shifted (0KB)
 5D1E60	5D1EA4	src/cp_order.o(.data)	cp_order .data
 5D1F0C	5D1F2C	src/cp_perform.o(.data)	cp_perform .data
 5D2034	5D30F8	src/cp_data.o(.data)	cp_data typed C .data: AI scripts (gAiScript_*, AiScr_AiB_*), gRed/GreenAiEscapePoints, gAI3HealingThresholdTable, gAi1/2ScriptTable, gpAi1/2Table; region-same content, JP pointer relocs. Supersedes dat_gRed/GreenAiEscapePoints_ref + dat_worldmap_gmapunit_p729/p730 (those were misattributed cp_data AI scripts).
@@ -1407,7 +1407,7 @@ A72BB8	A72BF0	src/statscreen.o(.data)	statscreen .data
 A738E0	A73900	src/player_interface.o(.data)	player_interface .data
 A73F9C	A74CEC	asm/dat_worldmap_gmapunit_p1572.o(.rodata.dat_worldmap_gmapunit_p1572)	dat_worldmap_gmapunit_p1572 region-same per-sym shifted (3KB)
 A74FEC	A79E90	asm/dat_worldmap_gmapunit_p1573.o(.rodata.dat_worldmap_gmapunit_p1573)	dat_worldmap_gmapunit_p1573 region-same per-sym shifted (19KB)
-A7B098	A7CDA4	asm/dat_data_A01CC4_p2.o(.rodata.dat_data_A01CC4_p2)	dat_data_A01CC4_p2 region-same per-sym shifted (7KB)
+A7B098	A7CDA4	src/data/A01CC4/dat_data_A01CC4_p2.o(.rodata.dat_data_A01CC4_p2)	dat_data_A01CC4_p2 region-same per-sym shifted (7KB)
 A7CDA4	A7D10C	src/data/anim_player_rank_fog/dat_anim_player_rank_fog.o(.rodata.dat_anim_player_rank_fog)	dat_anim_player_rank_fog region-same shifted (0KB)
 A7D10C	A7E188	asm/dat_data_A01CC4_2.o(.rodata.dat_data_A01CC4_2)	dat_data_A01CC4_2 region-same shifted (4KB)
 A84B00	A84BFC	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1576.o(.rodata.dat_worldmap_gmapunit_p1576)	dat_worldmap_gmapunit_p1576 region-same per-sym shifted (0KB)
@@ -1494,7 +1494,7 @@ B3F690	B3F7BC	src/data/AA6BFA/dat_data_AA6BFA.o(.rodata.dat_data_AA6BFA)	dat_dat
 B3FCF4	B44B40	src/data/titlescreen/dat_data_titlescreen.o(.rodata.dat_data_titlescreen)	dat_data_titlescreen region-same shifted (19KB)
 B4678C	B48D38	src/data/titlescreen/dat_data_titlescreen_p1.o(.rodata.dat_data_titlescreen_p1)	dat_data_titlescreen_p1 region-same per-sym shifted (9KB)
 B49B6C	B4B200	src/data/titlescreen/dat_data_titlescreen_p2.o(.rodata.dat_data_titlescreen_p2)	dat_data_titlescreen_p2 region-same per-sym shifted (5KB)
-B4BBA0	B5B560	asm/dat_data_opanim_gfx_p0.o(.rodata.dat_data_opanim_gfx_p0)	dat_data_opanim_gfx_p0 region-same per-sym shifted (62KB)
+B4BBA0	B5B560	src/data/opanim_gfx/dat_data_opanim_gfx_p0.o(.rodata.dat_data_opanim_gfx_p0)	dat_data_opanim_gfx_p0 region-same per-sym shifted (62KB)
 B5B654	B65D08	src/data/opanim_gfx/dat_data_opanim_gfx_p1.o(.rodata.dat_data_opanim_gfx_p1)	dat_data_opanim_gfx_p1 region-same per-sym shifted (41KB)
 B65DA8	B6BD34	src/data/opanim_gfx/dat_data_opanim_gfx_p2.o(.rodata.dat_data_opanim_gfx_p2)	dat_data_opanim_gfx_p2 region-same per-sym shifted (23KB)
 B6BE7C	B6EE04	src/data/opanim_gfx/dat_data_opanim_gfx_p3.o(.rodata.dat_data_opanim_gfx_p3)	dat_data_opanim_gfx_p3 region-same per-sym shifted (11KB)
