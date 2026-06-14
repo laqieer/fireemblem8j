@@ -1,0 +1,2 @@
+00D844	00D850	src/SetEventSlotCounter.o(.text)	graduate(run): SetEventSlotCounter
+00D850	00D85C	src/GetEventSlotCounter.o(.text)	graduate(run): GetEventSlotCounter

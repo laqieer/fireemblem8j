@@ -34,6 +34,7 @@ ClearUnit	0801759C	thumb	bmusort
 CopyUnit	080175C4	thumb	bmusort
 CpuSet	080D6370	thumb	bmusort
 gGameClock	03000010	data	time game clock (IncrementGameClock/FormatTime)
+gEventSlotCounter	03000560	data	event slot counter (Set/GetEventSlotCounter)
 __udivsi3	080D67D0	thumb	libgcc unsigned divide (FormatTime)
 __umodsi3	080D6848	thumb	libgcc unsigned modulo (FormatTime)
 _call_via_r3	080D65C8	thumb	bmsave
