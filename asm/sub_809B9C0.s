@@ -13,7 +13,6 @@
 	.set sub_809B600, 0x0809B600 + 1
 	.set sub_809C250, 0x0809C250 + 1
 	.set sub_809C804, 0x0809C804 + 1
-	.set sub_80B1524, 0x080B1524 + 1
 	.set sub_80B1FBC, 0x080B1FBC + 1
 	.section .text.sub_809B9C0, "ax", %progbits
 @ sub_809B9C0 @ JP 0x0809B9C0 - region-different, gbadisasm descriptive asm (D23)
@@ -282,7 +281,7 @@ _0809BBC8:
 	movs r0, #0xff
 	strb r0, [r2]
 	movs r0, #0
-	bl sub_80B1524
+	bl ClearUiCursorHandConfig
 	ldr r0, _0809BC04 @ =0x0202BCEC
 	adds r0, #0x41
 	ldrb r0, [r0]

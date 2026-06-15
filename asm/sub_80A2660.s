@@ -3,7 +3,6 @@
 	.set sub_809DA14, 0x0809DA14 + 1
 	.set sub_80A2074, 0x080A2074 + 1
 	.set sub_80A224C, 0x080A224C + 1
-	.set sub_80B1524, 0x080B1524 + 1
 	.set sub_80B1DD8, 0x080B1DD8 + 1
 	.set sub_80B1FBC, 0x080B1FBC + 1
 	.section .text.sub_80A2660, "ax", %progbits
@@ -29,7 +28,7 @@ sub_80A2660:
 	ldrh r0, [r1]
 	bl sub_80A224C
 	movs r0, #0
-	bl sub_80B1524
+	bl ClearUiCursorHandConfig
 	ldr r0, _080A26BC @ =sub_80A2198
 	bl sub_80B1DD8
 	bl Proc_End
