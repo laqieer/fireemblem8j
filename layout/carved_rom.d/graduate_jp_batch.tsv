@@ -3,3 +3,8 @@
 07B4B8	07B4C8	src/EndAllMus.o(.text)	graduate_jp_batch(run): EndAllMus
 07DF00	07DF10	src/EndMapAnimInfoWindow.o(.text)	graduate_jp_batch(run): EndMapAnimInfoWindow
 089078	089088	src/EndMuralBackground.o(.text)	graduate_jp_batch(run): EndMuralBackground
+098738	09874C	src/StartPrepAtMenu.o(.text)	graduate_jp_batch(run): StartPrepAtMenu
+0ABC10	0ABC24	src/LoadGMMonsterRnState.o(.text)	graduate_jp_batch(run): LoadGMMonsterRnState
+00D45C	00D474	src/EventEngineExists.o(.text)	graduate_jp_batch(run): EventEngineExists
+00D474	00D48C	src/BattleEventEngineExists.o(.text)	graduate_jp_batch(run): BattleEventEngineExists
+0B2874	0B2898	src/EndAllProcChildren.o(.text)	graduate_jp_batch(run): EndAllProcChildren
