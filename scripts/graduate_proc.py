@@ -156,16 +156,20 @@ def main():
         return
     if not os.path.exists(FRAG):
         open(FRAG, "w").close()
-    added_syms, wired = [], []
+    # INCREMENTAL: add one (name script + carve) -> make compare -> keep/revert.
+    # Isolates a bad symbol/parse (e.g. a mis-parsed script name) instead of letting
+    # it sink a wire-all batch. ~1 link per candidate, but robust.
+    kept = 0
     for a0, a1, nm, frag, asmf, sym, addr, uf, body in plan:
-        # 1) name the script (if not already)
-        if named_addr(sym) is None:
+        added = named_addr(sym) is None
+        if added:
             with open(SYMS, "a") as f:
                 f.write(f"{sym}\t{addr:08X}\tdata\tproc script ({nm})\n")
-            added_syms.append(sym)
-        # 2) C = extract_func_only US body + extern decl for the script
+            _DEFINED[sym] = addr
         c = sh(f'python3 scripts/extract_func_only.py "{uf}" "{nm}"').stdout
         if nm not in c:
+            if added:
+                _drop_sym(sym)
             continue
         if sym not in c.split("\n", 1)[0] and f"{sym}[" not in c:
             c = c.replace('#include "global.h"',
@@ -176,45 +180,29 @@ def main():
         sh(f"make src/{nm}.o")
         if not os.path.exists(f"src/{nm}.o"):
             os.remove(f"src/{nm}.c")
-            continue
-        # pure-.text only: extra sections (.data/.rodata/.bss) place bytes OUTSIDE
-        # the checked [a0,a1) range, so the all-wired byte-check would miss that diff.
-        if any(re.search(r"\s(\.(?:data|rodata|bss)\S*)\s+([0-9a-f]+)", ln) and
-               int(re.search(r"\s\.(?:data|rodata|bss)\S*\s+([0-9a-f]+)", ln).group(1), 16) > 0
-               for ln in sh(f"arm-none-eabi-objdump -h src/{nm}.o").stdout.splitlines()):
-            os.remove(f"src/{nm}.o"); os.remove(f"src/{nm}.c")
+            if added:
+                _drop_sym(sym)
             continue
         with open(FRAG, "a") as f:
             f.write(f"{a0}\t{a1}\tsrc/{nm}.o(.text)\tgraduate_proc(run): {nm}\n")
         open(f"layout/baseline_syms_drop.d/graduate_proc_{nm}.tsv", "w").write(nm + "\n")
         sh(f'git rm -q "{frag}" "{asmf}"')
-        wired.append((a0, a1, nm, frag, asmf, sym))
-    print(f"compiled+wired: {len(wired)}")
-    if not wired:
-        return
-    # build once, byte-check, revert mismatches
-    r = sh("make fireemblem8.gba 2>&1")
-    if not os.path.exists("fireemblem8.gba") or "Error" in (r.stdout + r.stderr).split("fireemblem8.gba", 1)[-1][:200]:
-        print("build failed; reverting all")
-        revert_all(wired, added_syms)
-        return
-    rom = open("fireemblem8.gba", "rb").read()
-    base = open("baserom.gba", "rb").read()
-    kept = 0
-    for a0, a1, nm, frag, asmf, sym in list(wired):
-        o, e = int(a0, 16), int(a1, 16)
-        if rom[o:e] == base[o:e]:
+        r = sh("make compare")
+        if "fireemblem8.gba: OK" in (r.stdout + r.stderr):
             kept += 1
+            print(f"  [{kept}] OK: {nm} ({sym})")
         else:
             unwire(nm, frag, asmf)
-            wired.remove((a0, a1, nm, frag, asmf, sym))
-    print(f"byte-check: kept {kept}, reverted {len(plan)-kept if False else ''}")
-    if sh("make compare").stdout.find("fireemblem8.gba: OK") < 0 and \
-       "fireemblem8.gba: OK" not in sh("make compare").stderr:
-        print("make compare FAILED after byte-check; reverting all")
-        revert_all(wired, added_syms)
-        return
+            if added:
+                _drop_sym(sym)
+            print(f"  revert: {nm}")
     print(f"DONE: graduated {kept}. COLD-verify + commit.")
+
+
+def _drop_sym(sym):
+    lines = [l for l in open(SYMS) if l.split("\t")[0] != sym]   # read BEFORE truncating
+    open(SYMS, "w").writelines(lines)
+    _DEFINED.pop(sym, None)
 
 
 def unwire(nm, frag, asmf):

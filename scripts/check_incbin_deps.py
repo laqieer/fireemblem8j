@@ -13,7 +13,12 @@ Exit 0 = all generated INCBIN assets have a declared dep. Exit 1 = missing deps 
 """
 import re, glob, os, subprocess, sys
 
-INCBIN = re.compile(r'INCBIN_(?:U8|U16|U32)\(\s*"([^"]+)"')
+INCBIN = re.compile(r'INCBIN_(?:U8|U16|U32)\(([^)]*)\)')   # whole arg list (multi-path)
+def incbin_assets(text):
+    out = []
+    for args in INCBIN.findall(text):
+        out += re.findall(r'"([^"]+)"', args)               # all quoted paths, not just the 1st
+    return out
 
 # git-tracked set (committed assets need no build dep)
 tracked = set(subprocess.run(['git', 'ls-files'], capture_output=True, text=True).stdout.split('\n'))
@@ -33,7 +38,7 @@ for c in glob.glob('src/data/**/*.c', recursive=True):
     if '/map/' in c or c.count('/') < 3:
         continue
     obj = c[:-2] + '.o'
-    for asset in set(INCBIN.findall(open(c, errors='replace').read())):
+    for asset in set(incbin_assets(open(c, errors='replace').read())):
         if asset in tracked:
             continue                      # committed -> exists in clean checkout, no dep needed
         if asset not in dep.get(obj, ()):
