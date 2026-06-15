@@ -5,8 +5,10 @@
 # with decompiled C (src/) and descriptively-named asm/data. Mirrors the
 # toolchain of the sibling US decomp (../fireemblem8u).
 #
-# Requires a local copy of the original ROM at ./baserom.gba
-#   sha1: 7da0456035366aa18414faa79d8fe7649f03c1ed   (Fire Emblem - Seima no Kouseki (J))
+# baserom.gba is NOT a build input: the build is self-contained (0 `.incbin
+# "baserom.gba"`), so `make compare` builds from committed source and verifies
+# `sha1sum -c checksum.sha1` (7da0456035366aa18414faa79d8fe7649f03c1ed). A local
+# baserom.gba is needed ONLY for optional dev-only re-extraction, never to build.
 
 #### Parallelism ####
 # The build is per-object (`%.o: %.c/.s`) and embarrassingly parallel: a clean

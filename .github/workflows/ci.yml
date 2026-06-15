@@ -1,0 +1,94 @@
+name: CI
+
+# Single per-commit CI run that REPLACES the old split workflows
+# (make compare + Self-contained build + layout consistency + decomp.dev report +
+# Decomp progress). They duplicated the expensive agbcc+toolchain+build; this runs
+# it ONCE and folds in every gate. `Backfill decomp progress` stays separate
+# (manual workflow_dispatch only).
+#
+# NO baserom.gba dependency. The build is self-contained (0 `.incbin "baserom.gba"`),
+# so building from committed source with baserom ABSENT and checking sha1 against
+# checksum.sha1 (7da0456...) is simultaneously the byte-match oracle AND the
+# self-contained acceptance test. The copyrighted ROM is never fetched or needed.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    env:
+      PROGRESS_API_KEY: ${{ secrets.PROGRESS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # upload-progress.py needs the commit timestamp + hash
+
+      # ---- Fast repo-consistency gates (seconds, no toolchain, fail early) ----
+      - name: Self-containment metric (0 baserom incbins — blocking)
+        run: python3 scripts/check_selfcontained.py
+
+      - name: Layout consistency (every linked object has committed source)
+        run: python3 scripts/check_layout.py
+
+      - name: INCBIN build-dep guard (clean-build asset ordering)
+        # Catches the class that broke CI on 2026-06-15: a src/data INCBIN of a
+        # generated (gitignored) asset with no make-dependency -> a clean parallel
+        # build compiles the .incbin before gbagfx produces the asset. Multi-path
+        # INCBIN_U8("a","b",...) aware. Runs WITHOUT a build, so the signal is instant.
+        run: python3 scripts/check_incbin_deps.py
+
+      # ---- Toolchain (agbcc + binutils + asset tools), built once ----
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential binutils-arm-none-eabi libpng-dev
+          python3 -m pip install ttp requests
+
+      - name: Install agbcc
+        run: |
+          git clone --depth 1 https://github.com/pret/agbcc.git
+          cd agbcc && ./build.sh && ./install.sh .. && cd ..
+
+      - name: Setup asset toolchain (gbagfx/bin2c/preproc/aif2pcm)
+        run: |
+          git clone --depth 1 https://github.com/laqieer/fireemblem8u.git ../fireemblem8u || true
+          scripts/tools/gbagfx/setup.sh
+          scripts/tools/bin2c/setup.sh
+          scripts/tools/preproc/setup.sh
+          scripts/tools/aif2pcm/setup.sh
+
+      # ---- THE byte-perfect, self-contained gate (baserom.gba ABSENT) ----
+      - name: Build from source + byte-match (make compare, no baserom)
+        # `make compare` builds fireemblem8.gba from committed source and runs
+        # `sha1sum -c checksum.sha1` (expects 7da0456...). With baserom.gba absent,
+        # a successful build PROVES self-containment and the sha1 PROVES byte-identity
+        # to the JP ROM. One step = the old `make compare` + `Self-contained build`.
+        run: make compare
+
+      # ---- Progress reports (non-blocking, reuse the built objects) ----
+      - name: Compute progress
+        run: python3 scripts/calcprogress.py | tee progress.txt
+
+      - name: Generate decomp.dev report (jp_report)
+        run: python3 scripts/gen-report.py progress.txt report.json
+
+      - name: Upload decomp.dev report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jp_report
+          path: report.json
+
+      - name: Publish progress to frogress
+        if: ${{ env.PROGRESS_API_KEY != '' }}
+        continue-on-error: true
+        run: |
+          python3 scripts/upload-progress.py \
+            -b "https://progress.deco.mp" -a "$PROGRESS_API_KEY" \
+            -p fireemblem8j -v jp -t scripts/progress-template.txt progress.txt
