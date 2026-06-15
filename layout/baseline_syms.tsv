@@ -1297,3 +1297,5 @@ ProcScr_GmScrollManage	08AC1EEC	data	gmap scroll manage proc script
 gChapterIdOrderedList	085C2F1C	data	debug chapter id ordered list (Debug_GetChapterId)
 ReadGameSaveCoreGfx	08015710	thumb	bmio graphics
 InitMoreBMapGraphics	080310C4	thumb	bmio graphics
+GetAffinityBonuses	080284C0	thumb	funcmap-confirmed function; promoted from .set-shim (named-axis counting fix)
+ShouldSkipGasTrapDisplay	0802E70C	thumb	funcmap-confirmed function; promoted from .set-shim (named-axis counting fix)

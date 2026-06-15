@@ -4305,3 +4305,19 @@ unique symbols (ProcScr_* scripts, proc globals — 1 each), no common cascade b
 Every carve COLD-`make compare`-verified. The named axis rises in lockstep (alias-drops make
 real labels win). Final goal stays partly unreachable (D96 libgcc/agbcc dead-ends + D101 data
 residual) — no fake promise; the loop keeps grinding the reachable tail.
+
+## D103 — Batch naming/carving levers verified EXHAUSTED; remaining work is per-function hand-decomp (2026-06-15)
+
+**Context.** matching-C plateaued at 80.15%, named at 78.09%. Re-checked every *batch* (non-hand-decomp) lever to be sure none was left on the table before accepting that the tail is per-function work.
+
+**Findings (all measured this iteration):**
+- **graduate_jp_batch straight-port: tapped.** Re-ran after aliasing Proc_Start + 3 bmio callees (the deps that caused prior link-reverts): 356 candidates ≤200B, 194 compiled, **byte-check kept 0**. The now-linkable multi-call functions are region-different/codegen-shape, not straight-ports.
+- **addr_map func-rename: 0.** `layout/addr_map.tsv` (conflicts=0) is derived from data/pointer references — only **1 / 1548** still-asm `sub_` function *starts* appear in it. Cannot batch-name functions.
+- **funcmap sub_ rename: 0.** `layout/us_jp_funcmap.tsv` (7733 rows) IS the matched set; the 1548 `asm/sub_*.s` are the un-matched backlog → **0 overlap** by construction.
+- **coddog naming: stale + unreliable for the tail.** `reference/maps/coddog_classification.tsv` is from Jun-9 (most of its `sub_` entries have since been carved/renamed). After 1:1-uniqueness + dup-name + file-exists filters → **1** candidate (`sub_80B1138`→LockTalk). Verified by hand it is a **false positive**: JP body calls `Proc_Start`, US LockTalk calls `Proc_StartBlocking` — coddog matched on the generic 6-insn wrapper opcode pattern (`push/adds/ldr/bl/pop/bx`) shared by dozens of proc-wrappers. **Did NOT rename** (integrity). coddog's value is region-same/different *classification of already-carved code*, not naming the backlog.
+- **shim-promotion: net +2.** 437 real-named functions are referenced only via local `.set Name,addr+1` shims (not `.global` → uncounted). 343 funcmap-confirmed (0 disagreements). But promoting to `baseline_syms` → **150 conflict** (already carved in src, stale shims) and **gen_layout skips ~190 more** (their address is inside a carved object's range). Only **2** were genuine incbin-gap functions (`GetAffinityBonuses@080284C0`, `ShouldSkipGasTrapDisplay@0802E70C`) → kept those, dropped the rest.
+- **data-residue naming: tapped.** `build_data_name_candidates.py` → 2 chunks; both names already exist as labels → 0 applied.
+
+**Integrity bonus.** Disassembled JP `0x08002BCC` and confirmed it IS `Proc_Start` (alloc→init→InsertRoot/Child→RunProcessScript→clear STARTING) — my earlier alias is correct. `0x08002C30` = `Proc_StartBlocking` (calls Proc_Start, sets BLOCKING + lockCnt++).
+
+**Decision.** Stop re-probing batch levers (this is the 2nd confirmation, per anti-stall). The matching-C tail (~1693 asm funcs) and the named tail are now **per-function hand-decomp of region-different functions** (IDA/Ghidra MCP + decomp-permuter), skipping the D96 lsr↔asr / reg-alloc dead-ends. Verified `make compare` OK + self-contained 100%.
