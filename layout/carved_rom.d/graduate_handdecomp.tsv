@@ -1,2 +1,5 @@
 018FCC	018FEC	src/GetUnitPortraitId.o(.text)	graduate_handdecomp(run): GetUnitPortraitId
 018FEC	019018	src/GetUnitMiniPortraitId.o(.text)	graduate_handdecomp(run): GetUnitMiniPortraitId
+018E64	018EA4	src/GetUnitCurrentHp.o(.text)	graduate_handdecomp(run): GetUnitCurrentHp
+019040	01907C	src/SetUnitHp.o(.text)	graduate_handdecomp(run): SetUnitHp
+01907C	0190C0	src/AddUnitHp.o(.text)	graduate_handdecomp(run): AddUnitHp
