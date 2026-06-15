@@ -4269,3 +4269,39 @@ The blockers were converter limitations, not a real asset ceiling.
 territory, not data). So data is at its practical ceiling for the INCBIN-converter approach;
 100% would need typed-table extraction + symbol renaming. The pessimistic "~50-70%" ceiling is
 retired.
+
+## D102 — matching-C frontier tooling: batch harvester + hand-decomp patterns (2026-06-15)
+
+With the mechanical levers swept (D100) and data at its ceiling (D101, 99.91%), the live
+matching-C frontier (79.5% → 79.8% this span) advances by per-function work with two tools:
+
+**(a) `scripts/graduate_jp_batch.py` — efficient batch harvester.** Insight: the earlier
+leaf-only harvest was too strict; NON-leaf jp-aliased region-different functions byte-match
+too — their bl/literal relocations resolve correctly when LINKED at the JP layout. Efficiency:
+wire ALL compiled candidates → build the ROM ONCE → byte-check each function's [a0,a1) range
+(linked ROM vs baserom) → revert mismatches → rebuild → make compare. O(few builds), not
+O(N make-compares) — sound because a function matching in the all-wired build stays matched
+after reverting independent siblings (their addresses are identical whether asm or src).
+Guards: pure-`.text` filter (a static-local/string-literal func emits .data/.rodata OUTSIDE
+the checked range), link-error auto-revert (undefined/multiple-def), undef-symbol blocker log.
+Yield: ~20% byte-match of *linkable* small functions; larger funcs (>120B) and ~40% of
+candidates (unplaced deps) don't graduate. Diagnostic: link-reverts are blocked by DIVERSE
+unique symbols (ProcScr_* scripts, proc globals — 1 each), no common cascade blocker.
+
+**(b) Manual hand-decomp — what the batch can't see.** Three classes:
+- **Region-different LOGIC** — the JP algorithm differs from US; re-derive from asm
+  (`GetStringLineEnd`: JP variable-width text encoding `0x04`→+1 else +2, vs US `str++`).
+- **US-inline / no clean def** — `extract_func_only` finds nothing, so the batch skips them;
+  re-derive from asm + struct headers (`GetUnit{,Mini}PortraitId`), and when the function
+  inlines another accessor that JP declares only as a prototype (`GetUnitMaxHp`, `GetUnitPower`),
+  provide that accessor as `extern inline` (GNU89: inlines at call sites, emits no standalone
+  copy) so it inlines instead of emitting `bl` (the bmunit HP cluster: Get/Set/AddUnitHp,
+  GetUnitMagBy2Range).
+- **Codegen-shape** — same logic, wrong agbcc shape; pick the matching form (explicit `if/else`
+  vs boolean-expr, result-temp/id-var vs early-return, scratch r3 vs callee-saved r4). When the
+  shape is reg-allocation (not source-controllable, e.g. GetHpBarRightTile r3/r4), it's
+  permuter/dead-end — skip, don't force.
+
+Every carve COLD-`make compare`-verified. The named axis rises in lockstep (alias-drops make
+real labels win). Final goal stays partly unreachable (D96 libgcc/agbcc dead-ends + D101 data
+residual) — no fake promise; the loop keeps grinding the reachable tail.
