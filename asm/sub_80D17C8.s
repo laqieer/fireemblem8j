@@ -1,7 +1,6 @@
 	.syntax unified
 	.set sub_8000D68, 0x08000D68 + 1
 	.set sub_8013008, 0x08013008 + 1
-	.set sub_80B8C9C, 0x080B8C9C + 1
 	.section .text.sub_80D17C8, "ax", %progbits
 @ sub_80D17C8 @ JP 0x080D17C8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -35,7 +34,7 @@ sub_80D17C8:
 	adds r4, r1, #0
 _080D17FA:
 	ldrb r0, [r4]
-	bl sub_80B8C9C
+	bl GetClassDisplayFontInfo
 	ldrb r1, [r0, #5]
 	ldrb r0, [r0, #4]
 	subs r1, r1, r0

@@ -1,0 +1,1 @@
+0B8C9C	0B8CDC	src/GetClassDisplayFontInfo.o(.text)	handdecomp: GetClassDisplayFontInfo (region-diff: JP drops the chr==0x2E case, US classdisplayfont.c)

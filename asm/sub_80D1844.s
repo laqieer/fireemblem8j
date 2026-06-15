@@ -1,6 +1,5 @@
 	.syntax unified
 	.set PutSpriteExt, 0x08005330 + 1
-	.set sub_80B8C9C, 0x080B8C9C + 1
 	.section .text.sub_80D1844, "ax", %progbits
 @ sub_80D1844 @ JP 0x080D1844 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -31,7 +30,7 @@ sub_80D1844:
 	adds r5, r1, #0
 _080D1870:
 	ldrb r0, [r5]
-	bl sub_80B8C9C
+	bl GetClassDisplayFontInfo
 	adds r4, r0, #0
 	ldr r3, [r4]
 	cmp r3, #0
