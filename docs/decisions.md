@@ -4329,3 +4329,25 @@ residual) — no fake promise; the loop keeps grinding the reachable tail.
 **Integrity: funcmap "exact" opcode-collision mis-alias.** Carving SetBanimArenaFlag hit a multiple-def vs a baseline alias `SetBanimArenaFlag@08070EF0`. That address is actually `SetActiveClassReelSpell` (already carved in banim-efxop.c, writes gpActiveClassReelSpellProc@0203E1E4). Root cause: `us_jp_funcmap.tsv`'s opcode-similarity matcher treats two trivial functions with **identical opcodes but different literals** (`ldr/str/bx` + a different `.4byte`) as the same → assigns the US name to the WRONG JP address. This is the same false-positive class as coddog naming (D103). Fixed the alias (dropped) + funcmap row (→ US 0806E93C SetActiveClassReelSpell).
 
 **Audit.** Cross-checked every baseline alias against the linked ELF symbol table for addresses bearing a *different* real global name. Result: **5 hits, all benign** (data/AP objects with intentional dual names, `_motion` suffix convention) — **0 other code mis-aliases** of the detectable (carved-adjacent) kind. Mis-aliases pointing at *uncarved* addresses can't be caught this way; residual risk noted, not systemic. Method recorded for re-runs after future carves.
+
+## D105 — Positional-bracket identity reconstruction for region-different functions (2026-06-15)
+
+**Method (scripts/bracket_identify.py).** The funcmap is the matched set; the 1500ish
+`asm/sub_*.s` are the un-matched region-different backlog with no US name. Reconstruct
+their identities positionally: for a sub_ between funcmap neighbors JP_pred→US_pred and
+JP_succ→US_succ, if the US gap holds EXACTLY ONE US function, the bracket holds EXACTLY
+ONE JP sub_, AND the sub_'s JP addr matches the predecessor's US→JP delta within 0x30,
+then sub_ = that US function (1:1 positional). The delta-consistency + 1:1-tightness
+filters are load-bearing: without them, wide region-diff modules (e.g. 0x080A support
+screen) dump many sub_ into one bracket and all falsely map to the single gap function.
+74 raw → 15 after filters.
+
+**Use it gated, never byte-neutral-only.** A positional name is a *hypothesis*; confirm
+by (a) behavior match (decompile JP vs US body) AND (b) a CARVE that byte-matches
+(`make compare` is the oracle). Region-same → carves clean; region-different → reverts
+(no false claim). This iteration: 15 candidates, carved 3 region-same
+(GetChapterTitleName sub_80345E8, StartLinkArenaTeamList sub_804328C, Config_SetSource-
+FromWorldMap sub_80B70D8 — matching-C 80.17→80.21%), reverted 1 region-different
+(ClearNonPlayerUnits sub_8018CD4 — compiled+linked but bytes differ). The larger
+candidates (40–455 insn) are more likely region-different; expect a lower hit rate.
+Pairs naturally with the trivial-setter seam (D104) and the existing carve flow.
