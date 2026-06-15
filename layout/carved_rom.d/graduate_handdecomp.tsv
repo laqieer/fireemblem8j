@@ -17,3 +17,4 @@
 03830C	038320	src/StartDungeonRecordProcFromMenu.o(.text)	graduate_handdecomp(run): StartDungeonRecordProcFromMenu
 0D1A3C	0D1A50	src/StartPromoClassSelect.o(.text)	graduate_handdecomp(run): StartPromoClassSelect
 0D2358	0D236C	src/StartPromoTraineeEvent.o(.text)	graduate_handdecomp(run): StartPromoTraineeEvent
+05BDCC	05BDD8	src/GetBattleAnimArenaFlag.o(.text)	graduate_handdecomp(run): GetBattleAnimArenaFlag
