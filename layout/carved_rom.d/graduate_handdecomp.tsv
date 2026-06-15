@@ -19,3 +19,4 @@
 0D2358	0D236C	src/StartPromoTraineeEvent.o(.text)	graduate_handdecomp(run): StartPromoTraineeEvent
 05BDCC	05BDD8	src/GetBattleAnimArenaFlag.o(.text)	graduate_handdecomp(run): GetBattleAnimArenaFlag
 0C41E0	0C41F0	src/GmScrollManageExist.o(.text)	graduate_handdecomp(run): GmScrollManageExist
+01C2B8	01C2C4	src/Debug_GetChapterId.o(.text)	graduate_handdecomp(run): Debug_GetChapterId

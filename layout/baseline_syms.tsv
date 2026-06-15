@@ -1294,3 +1294,4 @@ ProcScr_SIORESULT_NewHighScore	085D3CA0	data	proc script (StartSioResultNewHighS
 ProcScr_PrepTraineePromo	08A94238	data	proc script (PrepScreenTraineePromotionManagerExists)
 gBaArenaFlag	0203E1E0	data	battle anim arena flag (banim-ekrarena)
 ProcScr_GmScrollManage	08AC1EEC	data	gmap scroll manage proc script
+gChapterIdOrderedList	085C2F1C	data	debug chapter id ordered list (Debug_GetChapterId)
