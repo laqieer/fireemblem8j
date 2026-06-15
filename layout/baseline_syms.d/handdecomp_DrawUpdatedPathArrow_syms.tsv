@@ -1,0 +1,2 @@
+UpdatePathArrowWithCursor	08032DCC	thumb	callee of DrawUpdatedPathArrow (US bmpatharrowdisp.c)
+DrawPathArrow	0803309C	thumb	callee of DrawUpdatedPathArrow (US bmpatharrowdisp.c)

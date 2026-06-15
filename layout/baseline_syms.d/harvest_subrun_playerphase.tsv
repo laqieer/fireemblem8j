@@ -15,7 +15,6 @@ GenerateDangerZoneRange	0801B4E8	thumb	playerphase_0801C5A8
 GetCombinedEnemyWeaponUsabilityBits	080188B4	thumb	playerphase_0801C5A8
 StartDestSelectedEvent	08086784	thumb	playerphase_0801C5A8
 CanMoveActiveUnitTo	0801D20C	thumb	playerphase_0801C5A8
-DrawUpdatedPathArrow	08033158	thumb	playerphase_0801C5A8
 HandleMapCursorInput	08015730	thumb	playerphase_0801C4FC
 HandleMoveMapCursor	08015854	thumb	playerphase_0801C4FC
 HandleMoveCameraWithMapCursor	080158A8	thumb	playerphase_0801C4FC
