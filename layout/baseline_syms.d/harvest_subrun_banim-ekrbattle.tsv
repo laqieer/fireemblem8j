@@ -7,7 +7,6 @@ CheckEkrLvupDone	080759D4	thumb	banim-ekrbattle_0805183C
 EndEkrLevelUp	080759F4	thumb	banim-ekrbattle_0805183C
 NewEkrPopup	08078338	thumb	banim-ekrbattle_0805183C
 CheckEkrPopupEnded	08077F54	thumb	banim-ekrbattle_0805183C
-DeleteAnimsOnPopup	08077F70	thumb	banim-ekrbattle_0805183C
 EndProcEfxWeaponIcon	08055BA4	thumb	banim-ekrbattle_0805183C
 EndEfxHPBarColorChange	08055398	thumb	banim-ekrbattle_0805183C
 SetEkrDragonExit	08072798	thumb	banim-ekrbattle_0805183C
