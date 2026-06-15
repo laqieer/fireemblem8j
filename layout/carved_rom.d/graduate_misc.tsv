@@ -1,2 +1,4 @@
 020D78	020D80	src/sub_8020D78.o(.text)	graduate_misc(run): sub_8020D78
 020D80	020D88	src/sub_8020D80.o(.text)	graduate_misc(run): sub_8020D80
+048C68	048C7C	src/sub_8048C68.o(.text)	graduate_misc(run): sub_8048C68
+048D60	048D74	src/sub_8048D60.o(.text)	graduate_misc(run): sub_8048D60
