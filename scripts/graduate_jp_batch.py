@@ -140,6 +140,7 @@ def main():
         return
     for c in wired.values():
         wire(*c)
+    undef_seen = {}
     # phase 2: build once; resolve link errors by reverting offending candidates
     for _ in range(60):
         r = sh("make fireemblem8.gba 2>&1")
@@ -147,6 +148,8 @@ def main():
         if "fireemblem8.gba" in out and "Error" not in out.split("fireemblem8.gba")[-1]:
             built = os.path.exists("fireemblem8.gba")
         undef = set(re.findall(r"undefined reference to `(\w+)'", out))
+        for u in undef:
+            undef_seen[u] = undef_seen.get(u, 0) + 1
         # also: a multiple-definition means our name collides -> drop it
         multi = set(re.findall(r"multiple definition of `(\w+)'", out))
         bad = set()
@@ -162,6 +165,9 @@ def main():
             c = wired.pop(name)
             unwire(name, c[3], c[4])
         print(f"  link-fix: reverted {len(bad)} (undef/multi); retry build")
+    if undef_seen:
+        top = sorted(undef_seen.items(), key=lambda kv: -kv[1])[:20]
+        print("  top undefined-symbol blockers:", ", ".join(f"{k}({v})" for k, v in top))
     # phase 3: byte-check each vs baserom in the all-wired ROM
     if not os.path.exists("fireemblem8.gba"):
         print("build still failing; reverting all");
