@@ -23,3 +23,4 @@
 0AD1E0	0AD1F4	src/StartMinimapPlayerPhase.o(.text)	graduate_handdecomp(run): StartMinimapPlayerPhase
 0BA310	0BA324	src/StartArenaResultsScreen.o(.text)	graduate_handdecomp(run): StartArenaResultsScreen
 098968	09897C	src/NewPrepScreenTraineePromotionManager.o(.text)	graduate_handdecomp(run): NewPrepScreenTraineePromotionManager
+0310F4	031108	src/RefreshBMapGraphics.o(.text)	graduate_handdecomp(run): RefreshBMapGraphics
