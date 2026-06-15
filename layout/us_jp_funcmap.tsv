@@ -973,7 +973,7 @@
 0806C970	0806A64C	24	masked	efxCrimsonEyeOBJ_GetOffsetY
 0806D3AC	0806B088	36	exact	OnHBlank_0
 08070EA4	0806E8F0	20	masked	ResetClassReelSpell
-08070EF0	0805B01C	12	exact	SetBanimArenaFlag
+08070EF0	0806E93C	12	exact	SetActiveClassReelSpell
 08070EFC	0806E93C	12	exact	SetActiveClassReelSpell
 08071FAC	0806F9FC	44	exact	ResetEkrDragonStatus
 08071FF8	0806FA48	12	exact	GetEkrDragonStatusAttr

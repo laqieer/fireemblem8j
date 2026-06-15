@@ -2,7 +2,6 @@ SyncEkrDispUP	08052868	thumb	EkrNamewinAppearMain
 EndEkrDispUP	080527EC	thumb	EkrNamewinAppearMain
 BanimUpdateSpriteRotScale	08073D00	thumb	UnitKakudaiMain
 ResetEkrDragonStatus	08071FAC	thumb	PrepareBattleGraphicsMaybe
-SetBanimArenaFlag	08070EF0	thumb	PrepareBattleGraphicsMaybe
 gBanimPositionIsEnemy	0203E184	data	PrepareBattleGraphicsMaybe
 GetBanimFactionPalette	080597E4	thumb	PrepareBattleGraphicsMaybe
 GetSpellAssocCharCount	0807A66C	thumb	PrepareBattleGraphicsMaybe

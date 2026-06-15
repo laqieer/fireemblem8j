@@ -22,7 +22,6 @@
 	.set sub_8059790, 0x08059790 + 1
 	.set sub_80598BC, 0x080598BC + 1
 	.set sub_80599A0, 0x080599A0 + 1
-	.set sub_805BDC0, 0x0805BDC0 + 1
 	.set sub_805BDCC, 0x0805BDCC + 1
 	.section .text.sub_8057F80, "ax", %progbits
 @ sub_8057F80 @ JP 0x08057F80 - region-different, gbadisasm descriptive asm (D23)
@@ -44,13 +43,13 @@ sub_8057F80:
 	cmp r0, #0
 	bne _08057FA8
 	movs r0, #0
-	bl sub_805BDC0
+	bl SetBanimArenaFlag
 	b _08057FAE
 	.align 2, 0
 _08057FA4: .4byte 0x0203A4D0
 _08057FA8:
 	movs r0, #1
-	bl sub_805BDC0
+	bl SetBanimArenaFlag
 _08057FAE:
 	ldr r0, _08057FC4 @ =0x0202BCAC
 	ldrb r1, [r0, #4]
