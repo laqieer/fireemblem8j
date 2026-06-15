@@ -9,7 +9,6 @@ GameControl_EnableSoundEffects	08B3F7BC	data	gamecontrol_08009E68
 ProcScr_OpAnim	08009A3C	thumb	gamecontrol_08009E68
 GameControl_PostIntro	00000000	data	gamecontrol_08009E68
 GamceControl_StartClassReel	08009AB4	thumb	gamecontrol_08009E68
-GameControl_PostClassReel	00000000	data	gamecontrol_08009E68
 StartTitleScreen_WithMusic	00000000	data	gamecontrol_08009E68
 StartTitleScreen_FlagTrue	00000000	data	gamecontrol_08009E68
 StartTitleScreen_FlagFalse	00000000	data	gamecontrol_08009E68
