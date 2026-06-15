@@ -1,1 +1,2 @@
 08C834	08C840	src/GetDialogueBoxConfig.o(.text)	graduate_jp_leaf(run): GetDialogueBoxConfig
+003F10	003F28	src/GetStringLineEnd.o(.text)	graduate_jp_leaf(run): GetStringLineEnd
