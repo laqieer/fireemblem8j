@@ -12,7 +12,6 @@
 	.set UnitHideIfUnderRoof, 0x0802E598 + 1
 	.set UnitLoadStatsFromChracter, 0x08017B54 + 1
 	.set sub_801759C, 0x0801759C + 1
-	.set sub_8017618, 0x08017618 + 1
 	.set sub_8017A5C, 0x08017A5C + 1
 	.set sub_8017C14, 0x08017C14 + 1
 	.set sub_8017C40, 0x08017C40 + 1
@@ -129,7 +128,7 @@ _08017930:
 	b _0801794A
 _08017936:
 	adds r0, r4, #0
-	bl sub_8017618
+	bl GetFreeBlueUnit
 	b _08017948
 _0801793E:
 	movs r0, #0x80
