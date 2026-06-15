@@ -3,7 +3,6 @@
 	.set SetNextChapterId, 0x08009EC4 + 1
 	.set SetNextGameActionId, 0x08009EB0 + 1
 	.set sub_800226C, 0x0800226C + 1
-	.set sub_80155AC, 0x080155AC + 1
 	.section .text.sub_800F62C, "ax", %progbits
 @ sub_800F62C @ JP 0x0800F62C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -78,7 +77,7 @@ _0800F6B0: .4byte 0x0202BCEC
 _0800F6B4:
 	lsls r0, r2, #0x10
 	lsrs r0, r0, #0x10
-	bl sub_80155AC
+	bl GotoChapterWithoutSave
 	b _0800F6E2
 _0800F6BE:
 	ldr r2, _0800F700 @ =0x0202BCEC
