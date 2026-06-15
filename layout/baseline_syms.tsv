@@ -949,7 +949,6 @@ StartPrepItemTradeScreenProcAtSlot	0809E124	thumb	prep_itemlist
 gPrepScreenItemList	020122D4	data	prep_itemlist
 ProcScr_PrepItemListScreen	08A95168	data	prep_itemlist
 PrepItemDrawPopupBox	0809C5EC	thumb	prep_itemusemind
-EndPrepScreenMenu_	0803325C	thumb	prep_sallycursor
 StartOrphanMenu	0804F970	thumb	prep_sallycursor
 gDebugMenuDef	085C5520	data	prep_sallycursor
 SaveMenuCopyPalette	080AF270	thumb	savemenu
