@@ -8,7 +8,6 @@
 	.set sub_8052E7C, 0x08052E7C + 1
 	.set sub_8056C64, 0x08056C64 + 1
 	.set sub_805BDCC, 0x0805BDCC + 1
-	.set sub_8078750, 0x08078750 + 1
 	.section .text.sub_8056B5C, "ax", %progbits
 @ sub_8056B5C @ JP 0x08056B5C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -25,7 +24,7 @@ _08056B6C:
 	bl CheckBanimHensei
 	cmp r0, #1
 	bne _08056B7A
-	bl sub_8078750
+	bl BeginAnimsOnBattle_Hensei
 	b _08056BAC
 _08056B7A:
 	bl sub_8050AD4
