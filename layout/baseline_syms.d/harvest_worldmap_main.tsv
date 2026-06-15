@@ -44,7 +44,6 @@ WmMain_MoveCursor	080BE2A8	thumb	worldmap_main_080BE594
 WmMain_MoveCamera	080BE0E0	thumb	worldmap_main_080BE594
 ClearWmHblank	080C6B2C	thumb	worldmap_main_080BD8E0
 EndGMapPlayerInterface	080C3F48	thumb	worldmap_main_080BD8E0
-EndWorldmapMinimap	080C8C4C	thumb	worldmap_main_080BD8E0
 GmMu_0	080C2EF0	thumb	worldmap_main_080BE8F4
 WMLoc_GetChapterId	080C03E0	thumb	worldmap_main_080BE8F4
 GetGmSkirmishUnitAtNode	080C185C	thumb	worldmap_main_080BE8F4
