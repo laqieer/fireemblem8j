@@ -9,3 +9,7 @@
 0C619C	0C61AC	src/EndGmapEffect.o(.text)	graduate_handdecomp(run): EndGmapEffect
 006980	006990	src/EndTalk.o(.text)	graduate_handdecomp(run): EndTalk
 0C8E00	0C8E10	src/FindGMapBaseMenu.o(.text)	graduate_handdecomp(run): FindGMapBaseMenu
+0048D8	0048E8	src/EndGreenText.o(.text)	graduate_handdecomp(run): EndGreenText
+0096B0	0096C0	src/APProc_DeleteAll.o(.text)	graduate_handdecomp(run): APProc_DeleteAll
+05B784	05B798	src/EndEfxAnimeDrvProc.o(.text)	graduate_handdecomp(run): EndEfxAnimeDrvProc
+05C124	05C138	src/EndEkrTogiColor.o(.text)	graduate_handdecomp(run): EndEkrTogiColor

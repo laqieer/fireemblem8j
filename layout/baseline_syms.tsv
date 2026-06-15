@@ -1280,3 +1280,7 @@ sInitializingMap	03000800	data	BmMapInit working ptr (static in bmmap_08019194.o
 gProcScr_GmapEffect	08AC23F8	data	worldmap_effect proc script (EndGmapEffect)
 gProcScr_Talk	085B90F0	data	scene talk proc script (EndTalk)
 ProcScr_GmapBaseMenu	08AC28B0	data	worldmap base menu proc script (FindGMapBaseMenu)
+ProcScr_GreenTextColor	08577F34	data	green-text proc script (EndGreenText)
+ProcScr_ApProc	085B9424	data	ap proc script (APProc_DeleteAll)
+gpProcEfxAnimeDrv	0201FB18	data	efx anime drv proc ptr (EndEfxAnimeDrvProc)
+gpProcEkrTogiColor	0201FB24	data	ekr togi color proc ptr (EndEkrTogiColor)
