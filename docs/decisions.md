@@ -4351,3 +4351,18 @@ FromWorldMap sub_80B70D8 — matching-C 80.17→80.21%), reverted 1 region-diffe
 (ClearNonPlayerUnits sub_8018CD4 — compiled+linked but bytes differ). The larger
 candidates (40–455 insn) are more likely region-different; expect a lower hit rate.
 Pairs naturally with the trivial-setter seam (D104) and the existing carve flow.
+
+## D106 — Proc-wrapper carve sub-classification (which byte-match, which are D96 dead-ends) (2026-06-15)
+
+Carving the small region-different proc-wrapper tail, a clean rule emerged (verified by re-carving + diffing compiled .s vs JP asm):
+
+**Byte-match reliably (carve these):**
+- Pure proc management: `Proc_End/Find/EndEach/Goto/StartBlocking/ForEach` over a named ProcScr, void/ProcPtr/s8-return. (EndSysGrayBoxs, EndMixPalette, DeleteEventEngines, Is*Active, Block/UnblockUiCursorHand, EndWorldmapMinimap, EndAllBoxDialogue, Shop_OnExit…)
+- Field **load** then use: `Proc_End((void*)proc->img)`, `if (gKeyStatusPtr->heldKeys == K) Proc_Goto(...)` (DemonKingSummonAnim_OnEnd, GameControl_CallEraseSaveEventWithKeyCombo).
+- Field **store of a constant or a param-used-as-index**: `proc->flags[index] = 0` (ClearUiCursorHandConfig).
+- Region-different constant/action substitutions are fine once matched (GotoChapterWithoutSave drops a call; GameControl combo gotos ENDING_SCENE(17) not ERASE_SAVE(18)).
+
+**Do NOT carve (D96 lsr↔asr + reg-alloc dead-ends — confirmed by diff):**
+- **Store a small-int PARAM into a struct field**: `proc->x = x` with `s16/s8/u8` params. agbcc emits `lsl;lsr` (zero-ext) + its own reg-alloc order; JP has `lsl;asr` (sign-ext) + r4/r5 in the other order. With 2+ small-int args the sign-extension residue + temp-reg ordering never reconciles. Examples: GmapRm_SetPosition (2×s16), ConfigSysHandCursorShadowEnabled / BmBgfxSetLoopEN (u8→field), MakeNew6CBMXFADE2 (s8→field). The header also pins the param type (can't flip u8→s8 without breaking callers).
+
+**Apply:** the proc-wrapper scanner should down-rank candidates whose asm sign/zero-extends an entry arg (`lsls rN,#0x18|#0x10` early) and then `strb/strh` it to `[rX,#off]` — those are the dead-ends. Pure/void/load/const-store wrappers are the reliable yield.
