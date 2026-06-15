@@ -6,3 +6,4 @@
 018730	01876C	src/GetUnitMagBy2Range.o(.text)	graduate_handdecomp(run): GetUnitMagBy2Range
 01B668	01B674	src/SetWorkingBmMap.o(.text)	graduate_handdecomp(run): SetWorkingBmMap
 02EAC4	02EAD0	src/GetTrap.o(.text)	graduate_handdecomp(run): GetTrap
+0C619C	0C61AC	src/EndGmapEffect.o(.text)	graduate_handdecomp(run): EndGmapEffect
