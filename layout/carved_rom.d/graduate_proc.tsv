@@ -3,3 +3,6 @@
 0096C0	0096D8	src/APProc_Exists.o(.text)	graduate_proc(run): APProc_Exists
 01DA74	01DA8C	src/DoesBMXFADEExist.o(.text)	graduate_proc(run): DoesBMXFADEExist
 047578	047590	src/StartSioResultNewHighScore.o(.text)	graduate_proc(run): StartSioResultNewHighScore
+09897C	098994	src/PrepScreenTraineePromotionManagerExists.o(.text)	graduate_proc(run): PrepScreenTraineePromotionManagerExists
+0138FC	013918	src/MapPaletteBrightnessFadeExists.o(.text)	graduate_proc(run): MapPaletteBrightnessFadeExists
+0B1800	0B181C	src/SetUiSpinningArrowConfig.o(.text)	graduate_proc(run): SetUiSpinningArrowConfig
