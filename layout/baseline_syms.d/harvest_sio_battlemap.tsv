@@ -1,5 +1,4 @@
 GetUnitBestWeaponPower	0804BB40	thumb	sio_battlemap_0804BBA8
-EndLinkArenaPointsBox	080498A4	thumb	sio_battlemap_0804BBA8
 LinkArenaBattleMap_StartUnitMoveOut	0804A1CC	thumb	sio_battlemap_0804BBA8
 StartAiTargetCursor	08039F44	thumb	sio_battlemap_0804BBA8
 LABattleMap_StartMuAndSavePosition	0804BA08	thumb	sio_battlemap_0804BBA8

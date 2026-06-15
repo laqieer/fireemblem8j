@@ -1,6 +1,5 @@
 	.syntax unified
 	.set sub_804987C, 0x0804987C + 1
-	.set sub_80498A4, 0x080498A4 + 1
 	.set sub_8049EF4, 0x08049EF4 + 1
 	.section .text.sub_804A040, "ax", %progbits
 @ sub_804A040 @ JP 0x0804A040 - region-different, gbadisasm descriptive asm (D23)
@@ -21,7 +20,7 @@ sub_804A040:
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	bne _0804A062
-	bl sub_80498A4
+	bl EndLinkArenaPointsBox
 _0804A062:
 	add sp, #4
 	pop {r4}
