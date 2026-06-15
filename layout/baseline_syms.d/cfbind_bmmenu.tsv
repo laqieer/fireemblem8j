@@ -1,5 +1,4 @@
 ItemSelectMenu_TextDraw	08023318	thumb	StaffItemSelect_TextDraw
-StartUnitHpInfoWindow	08034EA4	thumb	WarpUnitMapSelect_Init
 StartDungeonRecordProcFromMenu	0803830C	thumb	MapMenu_RecordsCommand
 StartChapterStatusScreen	08090A38	thumb	MapMenu_StatusCommand
 IsGuideLocked	080D2C48	thumb	MapMenu_IsGuideCommandAvailable
