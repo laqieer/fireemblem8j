@@ -962,7 +962,6 @@ Pal_SaveScreenSprits	08AA51BC	data	savemenu
 Pal_MenuMainObjs_0	08AA7310	data	savemenu
 Img_GameMainMenuObjs	08AA59A0	data	savemenu
 gLinkArenaTeamList	0203DB78	data	sio_teamlist
-PutLinkArenaButtonSpriteAt	0804D058	thumb	sio_uiutils
 SpriteArray_RuleSettingIcons	085D4B80	data	sio_uiutils
 ProcScr_RuleSettingSpriteDraw_Interactive	085D4B8C	data	sio_uiutils
 ProcScr_RuleSettingSpriteDraw_Static	085D4BA4	data	sio_uiutils
