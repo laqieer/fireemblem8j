@@ -2,7 +2,6 @@ EventScr_Ruin_83	08A72414	data	gamecontrol_08009DB4
 EventScr_Ruin_84	08A7241C	data	gamecontrol_08009DB4
 EventScr_EirikaModeGameEnd	08A72434	data	gamecontrol_08009DF8
 EventScr_EphraimModeGameEnd	08A72544	data	gamecontrol_08009DF8
-GameControl_CallEraseSaveEventWithKeyCombo	080098F0	thumb	gamecontrol_08009E68
 GameControl_0	08009948	thumb	gamecontrol_08009E68
 GameControl_Null_0	08009950	thumb	gamecontrol_08009E68
 ProcScr_GameEarlyStartUI	00000000	data	gamecontrol_08009E68
