@@ -97,7 +97,6 @@ MenuFrozenHelpBox	080502F4	thumb	bmmenu_08023734
 gActionData	0203A954	data	bmmenu_08023734
 ClearBg0Bg1	0804F610	thumb	bmmenu_08023734
 DoItemUse	08028E0C	thumb	bmmenu_08023734
-EndAllMenus	0804FCAC	thumb	bmmenu_08023734
 gPlaySt	0202BCEC	data	bmmenu_08023734
 ItemSelectMenu_Teardown	080234FC	thumb	bmmenu_080237FC
 TradeCommandEffect	08022F50	thumb	bmmenu_080237FC
