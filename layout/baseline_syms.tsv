@@ -1289,3 +1289,5 @@ sProcScr_DisplayDungeonRecord_FromMenu	085C6B74	data	dungeon record proc script
 ProcScr_PromoSelect	08BAB76C	data	promo class select proc script
 ProcScr_PromoSelectEvent	08BAB85C	data	promo trainee event proc script
 gProcScr_TalkFaceMove	085B9148	data	talk face move proc script (IsTalkFaceMoving)
+sProcScr_BMXFADE	085C3248	data	proc script (DoesBMXFADEExist)
+ProcScr_SIORESULT_NewHighScore	085D3CA0	data	proc script (StartSioResultNewHighScore)

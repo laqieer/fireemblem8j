@@ -1,1 +1,5 @@
 007940	00795C	src/IsTalkFaceMoving.o(.text)	graduate_proc(run): IsTalkFaceMoving
+091544	091558	src/EndCgText.o(.text)	graduate_proc(run): EndCgText
+0096C0	0096D8	src/APProc_Exists.o(.text)	graduate_proc(run): APProc_Exists
+01DA74	01DA8C	src/DoesBMXFADEExist.o(.text)	graduate_proc(run): DoesBMXFADEExist
+047578	047590	src/StartSioResultNewHighScore.o(.text)	graduate_proc(run): StartSioResultNewHighScore
