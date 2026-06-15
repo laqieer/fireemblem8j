@@ -1,0 +1,2 @@
+018FCC	018FEC	src/GetUnitPortraitId.o(.text)	graduate_handdecomp(run): GetUnitPortraitId
+018FEC	019018	src/GetUnitMiniPortraitId.o(.text)	graduate_handdecomp(run): GetUnitMiniPortraitId
