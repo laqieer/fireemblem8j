@@ -1,0 +1,5 @@
+084298	0842A4	src/MapAnimResetHBlank.o(.text)	graduate_jp_batch(run): MapAnimResetHBlank
+009EA0	009EB0	src/GetGameControl.o(.text)	graduate_jp_batch(run): GetGameControl
+07B4B8	07B4C8	src/EndAllMus.o(.text)	graduate_jp_batch(run): EndAllMus
+07DF00	07DF10	src/EndMapAnimInfoWindow.o(.text)	graduate_jp_batch(run): EndMapAnimInfoWindow
+089078	089088	src/EndMuralBackground.o(.text)	graduate_jp_batch(run): EndMuralBackground
