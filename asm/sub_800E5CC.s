@@ -5,7 +5,6 @@
 	.set sub_800E4E8, 0x0800E4E8 + 1
 	.set sub_800E574, 0x0800E574 + 1
 	.set sub_800E854, 0x0800E854 + 1
-	.set sub_808DE84, 0x0808DE84 + 1
 	.set sub_8091544, 0x08091544 + 1
 	.section .text.sub_800E5CC, "ax", %progbits
 @ sub_800E5CC @ JP 0x0800E5CC - region-different, gbadisasm descriptive asm (D23)
@@ -165,7 +164,7 @@ _0800E6F0:
 	strh r1, [r4, #0x3c]
 	bl sub_8006980
 	bl sub_8091544
-	bl sub_808DE84
+	bl EndAllBoxDialogue
 	adds r0, r4, #0
 	adds r0, #0x41
 	ldrb r0, [r0]

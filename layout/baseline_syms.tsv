@@ -884,7 +884,6 @@ SetupBackgrounds	08001ACC	thumb	ending_credits
 Pal_StaffReelEnt_EndingFin	08AC73E8	data	ending_credits
 gEndingCredits_1	081F6C8C	data	ending_credits
 EndTalk	08006980	thumb	eventscr
-EndAllBoxDialogue	0808DE84	thumb	eventscr
 ChangeUnitSpritePalette	0800BFC8	thumb	eventscr
 ResumeTalk	08006DF4	thumb	eventscr
 IsTalkActive	080088CC	thumb	eventscr

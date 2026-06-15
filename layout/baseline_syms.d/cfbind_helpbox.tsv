@@ -13,7 +13,7 @@ GetItemDisplayRangeString	08016A68	thumb	DrawHelpBoxWeaponStats
 GetItemWeight	080173B4	thumb	DrawHelpBoxWeaponStats
 PutBoxDialogueBoxSprites	0808D00C	thumb	BoxDialogue_DrawBoxInterpolated
 gBoxDialogueConf	0203E7E4	data	ClearBoxDialogueText
-ProcScr_BoxDialogueDrawTextExt	0203E7FC	data	ClearBoxDialogueText
+ProcScr_BoxDialogueDrawTextExt	08A73818	data	ROM proc script (EndAllBoxDialogue); was mis-aliased to RAM 0203E7FC
 GetBoxDialogueSize	0808CDEC	thumb	DrawBoxDialogueText
 ApplyBoxDialoguePosition	0808CAC0	thumb	DrawBoxDialogueText
 StartBoxDialogueDrawText	0808DD70	thumb	DrawBoxDialogueText
