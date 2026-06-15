@@ -2,7 +2,6 @@
 	.set CanBattleUnitGainLevels, 0x0802B93C + 1
 	.set ModifyUnitSpecialExp, 0x0802C428 + 1
 	.set sub_802C2B0, 0x0802C2B0 + 1
-	.set sub_802C398, 0x0802C398 + 1
 	.section .text.sub_802C46C, "ax", %progbits
 @ sub_802C46C @ JP 0x0802C46C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -51,7 +50,7 @@ _0802C4B0:
 	str r0, [sp]
 	adds r0, r4, #0
 	adds r1, r5, #0
-	bl sub_802C398
+	bl GetUnitKillExpBonus
 	ldr r1, [sp]
 	adds r1, r1, r0
 	str r1, [sp]
