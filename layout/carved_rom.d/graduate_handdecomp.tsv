@@ -7,3 +7,5 @@
 01B668	01B674	src/SetWorkingBmMap.o(.text)	graduate_handdecomp(run): SetWorkingBmMap
 02EAC4	02EAD0	src/GetTrap.o(.text)	graduate_handdecomp(run): GetTrap
 0C619C	0C61AC	src/EndGmapEffect.o(.text)	graduate_handdecomp(run): EndGmapEffect
+006980	006990	src/EndTalk.o(.text)	graduate_handdecomp(run): EndTalk
+0C8E00	0C8E10	src/FindGMapBaseMenu.o(.text)	graduate_handdecomp(run): FindGMapBaseMenu

@@ -1278,3 +1278,5 @@ AnimScr_EfxThunderOBJ_L	08622128	data	banim-efxmagic-thunder
 AnimScr_EfxThunderOBJ_R	086215FC	data	banim-efxmagic-thunder
 sInitializingMap	03000800	data	BmMapInit working ptr (static in bmmap_08019194.o BSS)
 gProcScr_GmapEffect	08AC23F8	data	worldmap_effect proc script (EndGmapEffect)
+gProcScr_Talk	085B90F0	data	scene talk proc script (EndTalk)
+ProcScr_GmapBaseMenu	08AC28B0	data	worldmap base menu proc script (FindGMapBaseMenu)
