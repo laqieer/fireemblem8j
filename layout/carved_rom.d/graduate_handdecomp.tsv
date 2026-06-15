@@ -3,3 +3,4 @@
 018E64	018EA4	src/GetUnitCurrentHp.o(.text)	graduate_handdecomp(run): GetUnitCurrentHp
 019040	01907C	src/SetUnitHp.o(.text)	graduate_handdecomp(run): SetUnitHp
 01907C	0190C0	src/AddUnitHp.o(.text)	graduate_handdecomp(run): AddUnitHp
+018730	01876C	src/GetUnitMagBy2Range.o(.text)	graduate_handdecomp(run): GetUnitMagBy2Range
