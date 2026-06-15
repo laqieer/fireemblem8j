@@ -13,3 +13,7 @@
 0096B0	0096C0	src/APProc_DeleteAll.o(.text)	graduate_handdecomp(run): APProc_DeleteAll
 05B784	05B798	src/EndEfxAnimeDrvProc.o(.text)	graduate_handdecomp(run): EndEfxAnimeDrvProc
 05C124	05C138	src/EndEkrTogiColor.o(.text)	graduate_handdecomp(run): EndEkrTogiColor
+0AD1F4	0AD208	src/StartMinimapPrepPhase.o(.text)	graduate_handdecomp(run): StartMinimapPrepPhase
+03830C	038320	src/StartDungeonRecordProcFromMenu.o(.text)	graduate_handdecomp(run): StartDungeonRecordProcFromMenu
+0D1A3C	0D1A50	src/StartPromoClassSelect.o(.text)	graduate_handdecomp(run): StartPromoClassSelect
+0D2358	0D236C	src/StartPromoTraineeEvent.o(.text)	graduate_handdecomp(run): StartPromoTraineeEvent

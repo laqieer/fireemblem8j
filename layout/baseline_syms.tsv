@@ -1284,3 +1284,7 @@ ProcScr_GreenTextColor	08577F34	data	green-text proc script (EndGreenText)
 ProcScr_ApProc	085B9424	data	ap proc script (APProc_DeleteAll)
 gpProcEfxAnimeDrv	0201FB18	data	efx anime drv proc ptr (EndEfxAnimeDrvProc)
 gpProcEkrTogiColor	0201FB24	data	ekr togi color proc ptr (EndEkrTogiColor)
+gProcScr_Minimap	08A9CA64	data	minimap proc script (StartMinimapPrepPhase)
+sProcScr_DisplayDungeonRecord_FromMenu	085C6B74	data	dungeon record proc script
+ProcScr_PromoSelect	08BAB76C	data	promo class select proc script
+ProcScr_PromoSelectEvent	08BAB85C	data	promo trainee event proc script
