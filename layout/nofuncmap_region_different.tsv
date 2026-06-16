@@ -1377,7 +1377,6 @@
 08018B28	118	GetUnitWeaponUsabilityBits	bmunit
 080375E8	118	GetPickTrapType	bmtrap
 0804EEA8	118	EndMenu	uimenu
-0805C88C	118	NewEfxTeyariOBJ	banim-efxmagic-phywpn
 0808A3C4	118	ApplyHelpBoxPosition_bug	helpbox
 0809EB78	118	PrepItemList_Init	prep_itemlist
 080B2E30	118	ClassIntro_LoopIn	opinfo

@@ -494,7 +494,6 @@ SpellFx_Begin	08056108	thumb	banim-efxmagic-phywpn
 SpellFx_ClearBG1Position	08056120	thumb	banim-efxmagic-phywpn
 GetAnimRoundTypeAnotherSide	0805B0B4	thumb	banim-efxmagic-phywpn
 CheckRoundMiss	0805AF28	thumb	banim-efxmagic-phywpn
-NewEfxTeyariOBJ	0805D628	thumb	banim-efxmagic-phywpn
 ProcScr_efxTeyari	085FF358	data	banim-efxmagic-phywpn
 Pal_SpellJavelin	08605258	data	banim-efxmagic-phywpn
 Img_SpellJavelin	08605028	data	banim-efxmagic-phywpn
