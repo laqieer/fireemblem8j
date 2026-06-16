@@ -860,7 +860,6 @@
 080CA9F8	62	OpAnimCalcObjSlideIn	opanim-main
 080043A8	64	InitSystemTextFont	fontgrp
 080043E8	64	InitTalkTextFont	fontgrp
-0800A240	64	GetStringFromIndex	msg
 080241DC	64	StealCommandEffect	bmmenu
 080237F8	64	ItemSubMenu_EquipItem	bmmenu
 0803B7C8	64	AiGetUnitStealItemSlot	cp_utility

@@ -1,0 +1,2 @@
+sMsgString	0202A6A8	data	EWRAM msg buffer (US msg.c)
+sActiveMsg	0202B6A8	data	EWRAM active msg index (US msg.c)
