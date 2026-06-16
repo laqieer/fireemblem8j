@@ -650,7 +650,6 @@
 080230C0	48	VisitCommandEffect	bmmenu
 080379D4	48	GetSomeBallistaItemAt	bmarch
 080391D0	48	DungeonRecordUi_SpawnUpdateValueProc	bmdifficulty
-08045610	48	SioPostBattle_StartMusicProc	sio_postbattle
 0805B3CC	48	StartSpellAnimation	banim-efxmagic
 0806428C	48	StartSubSpell_efxLunaRST	banim-efxmagic-luna
 080896A8	48	PutChapterTitleBGAlt	chapter_title

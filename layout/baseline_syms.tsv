@@ -377,7 +377,6 @@ InitSpriteText	080044E0	thumb	sio_postbattle
 SpriteText_DrawBackgroundExt	080045BC	thumb	sio_postbattle
 Sio_SortPlayersByScore	08049694	thumb	sio_postbattle
 SioPostBattle_DrawRankingText	0804550C	thumb	sio_postbattle
-SioPostBattle_StartMusicProc	080455B0	thumb	sio_postbattle
 Img_TacticianSelObj	085D6004	data	sio_postbattle
 Img_LinkArenaPlacementRanks	085D737C	data	sio_postbattle
 Font_Sio_0	02000C60	data	sio_postbattle
