@@ -658,9 +658,9 @@
 577648	577688	src/data/sMusicProc4Script_ref/dat_sMusicProc4Script_ref.o(.rodata.dat_sMusicProc4Script_ref)	sMusicProc4Script region-diff (funcmap code-ref, 0KB)
 5776F0	577EF0	src/fontgrp.o(.data)	fontgrp .data
 577F4C	57994C	src/data/fontgrp_data/dat_fontgrp_data.o(.rodata.dat_fontgrp_data)	dat_fontgrp_data region-same shifted (6KB)
-57994C	579D4C	asm/dat_TextGlyphs_System_ref.o(.rodata.dat_TextGlyphs_System_ref)	TextGlyphs_System region-diff (funcmap code-ref, 1KB)
-593ECC	593F74	asm/dat_TextGlyphs_Special_ref.o(.rodata.dat_TextGlyphs_Special_ref)	TextGlyphs_Special region-diff (funcmap code-ref, 0KB)
-593F74	594374	asm/dat_TextGlyphs_Talk_ref.o(.rodata.dat_TextGlyphs_Talk_ref)	TextGlyphs_Talk region-diff (funcmap code-ref, 1KB)
+57994C	579D4C	src/data/TextGlyphs_System_ref/dat_TextGlyphs_System_ref.o(.rodata.dat_TextGlyphs_System_ref)	TextGlyphs_System region-diff (funcmap code-ref, 1KB)
+593ECC	593F74	src/data/TextGlyphs_Special_ref/dat_TextGlyphs_Special_ref.o(.rodata.dat_TextGlyphs_Special_ref)	TextGlyphs_Special region-diff (funcmap code-ref, 0KB)
+593F74	594374	src/data/TextGlyphs_Talk_ref/dat_TextGlyphs_Talk_ref.o(.rodata.dat_TextGlyphs_Talk_ref)	TextGlyphs_Talk region-diff (funcmap code-ref, 1KB)
 5B8CDC	5B8D84	src/ctc.o(.data)	ctc .data
 5B8D84	5B8EEC	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p676.o(.rodata.dat_worldmap_gmapunit_p676)	dat_worldmap_gmapunit_p676 region-same per-sym shifted (0KB)
 5B8F70	5B8F80	src/face.o(.data)	face .data
