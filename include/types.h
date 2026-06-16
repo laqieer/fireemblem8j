@@ -426,6 +426,8 @@ struct FaceVramEntry
     /* 04 */ u16 paletteId;
 };
 
+extern struct FaceVramEntry sFaceConfig[4];
+
 struct Struct202B6B0 {
     u8 _pad00_[0x2A - 0x00];
     u16 unk2A;
