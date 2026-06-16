@@ -406,7 +406,6 @@ SetTextFont	08003C68	thumb	uiarena
 InitSystemTextFont	080042E0	thumb	uiarena
 PutString	08014450	thumb	uiarena
 PutNumber	08004A90	thumb	uiarena
-GetItemName	0801729C	thumb	uiarena
 gMid_Lv	08A73210	data	uiarena
 StartBgmCore	08002398	thumb	uiarena
 EndGmapEffect	080C619C	thumb	worldmap_entry

@@ -480,7 +480,6 @@
 08009A00	36	GameControl_CallEraseSaveEventWithKeyCombo	gamecontrol
 08009B64	36	GameControl_PostClassReel	gamecontrol
 08014944	36	StartPartialGameLock	bmlib
-080174F4	36	GetItemName	bmitem
 0804D834	36	PutLinkArenaChoiceBannerSprite	sio_uiutils
 0804C2B8	36	PutLinkArenaButtonSpriteAt	sio_mu
 0805E900	36	StartSubSpell_efxThunderstormOBJ	banim-efxmagic-bolting
