@@ -812,7 +812,6 @@ gEfxQuakeVecs	080DF4C8	data	banim-ekrutils
 gProcScr_SubtitleHelp	085C6698	data	bb
 InitSubtitleHelpText	080353E8	thumb	bb
 IsChapterBelongCurGame	080A8E48	thumb	bmsave-bwl
-ForEachAdjacentUnit	08024F20	thumb	bmtarget
 GetUnitSupporterCount	0802815C	thumb	bmunit
 GetUnitSupporterInitialExp	08028320	thumb	bmunit
 GetItemType	080172F0	thumb	bmunit
