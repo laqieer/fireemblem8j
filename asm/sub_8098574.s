@@ -8,11 +8,11 @@
 	.set sub_8097D18, 0x08097D18 + 1
 	.set sub_80B2874, 0x080B2874 + 1
 	.section .text.sub_8098574, "ax", %progbits
-@ sub_8098574 @ JP 0x08098574 - region-different, gbadisasm descriptive asm (D23)
+@ AtMenu_ResetScreenEffect @ JP 0x08098574 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8098574
+	.global AtMenu_ResetScreenEffect
 	.thumb_func
-sub_8098574:
+AtMenu_ResetScreenEffect:
 	push {r4, lr}
 	sub sp, #4
 	adds r4, r0, #0

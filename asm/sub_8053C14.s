@@ -12,11 +12,11 @@
 	.set sub_8053C9C, 0x08053C9C + 1
 	.set sub_8057CAC, 0x08057CAC + 1
 	.section .text.sub_8053C14, "ax", %progbits
-@ sub_8053C14 @ JP 0x08053C14 - region-different, gbadisasm descriptive asm (D23)
+@ efxDeadEvent_Loop_D @ JP 0x08053C14 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8053C14
+	.global efxDeadEvent_Loop_D
 	.thumb_func
-sub_8053C14:
+efxDeadEvent_Loop_D:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	bl sub_800D474

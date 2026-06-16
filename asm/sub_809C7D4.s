@@ -1,5 +1,5 @@
 	.syntax unified
-	.set sub_809C3E8, 0x0809C3E8 + 1
+	.set PrepItem_DrawUnitNameRow, 0x0809C3E8 + 1
 	.section .text.sub_809C7D4, "ax", %progbits
 @ sub_809C7D4 @ JP 0x0809C7D4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -20,7 +20,7 @@ _0809C7E6:
 	lsrs r1, r1, #0x18
 	adds r0, r5, #0
 	adds r2, r6, #0
-	bl sub_809C3E8
+	bl PrepItem_DrawUnitNameRow
 	adds r4, #1
 	ldrh r0, [r5, #0x34]
 	lsrs r0, r0, #4

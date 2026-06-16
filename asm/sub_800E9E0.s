@@ -9,11 +9,11 @@
 	.set sub_8001EE4, 0x08001EE4 + 1
 	.set sub_8013008, 0x08013008 + 1
 	.section .text.sub_800E9E0, "ax", %progbits
-@ sub_800E9E0 @ JP 0x0800E9E0 - region-different, gbadisasm descriptive asm (D23)
+@ EventShowTextBgDirect @ JP 0x0800E9E0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800E9E0
+	.global EventShowTextBgDirect
 	.thumb_func
-sub_800E9E0:
+EventShowTextBgDirect:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	lsls r0, r0, #0x18

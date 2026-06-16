@@ -9,11 +9,11 @@
 	.set sub_8018144, 0x08018144 + 1
 	.set sub_807C44C, 0x0807C44C + 1
 	.section .text.sub_800F8D4, "ax", %progbits
-@ sub_800F8D4 @ JP 0x0800F8D4 - region-different, gbadisasm descriptive asm (D23)
+@ LoadUnit_0 @ JP 0x0800F8D4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800F8D4
+	.global LoadUnit_0
 	.thumb_func
-sub_800F8D4:
+LoadUnit_0:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

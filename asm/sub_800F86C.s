@@ -1,6 +1,6 @@
 	.syntax unified
 	.set sub_800F720, 0x0800F720 + 1
-	.set sub_800F8D4, 0x0800F8D4 + 1
+	.set LoadUnit_0, 0x0800F8D4 + 1
 	.section .text.sub_800F86C, "ax", %progbits
 @ sub_800F86C @ JP 0x0800F86C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -41,7 +41,7 @@ _0800F896:
 	movs r1, #1
 	movs r2, #1
 	mov r3, r8
-	bl sub_800F8D4
+	bl LoadUnit_0
 	adds r0, r5, #0
 	ldr r1, _0800F8D0 @ =0xFFFF0000
 	adds r5, r5, r1

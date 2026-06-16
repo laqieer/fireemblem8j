@@ -5,7 +5,7 @@
 	.set SpellFx_Finish, 0x08056114 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_80540C0, 0x080540C0 + 1
-	.set sub_80563C0, 0x080563C0 + 1
+	.set StartBattleAnimResireHitEffects, 0x080563C0 + 1
 	.set sub_805C1A4, 0x0805C1A4 + 1
 	.set sub_805C5D8, 0x0805C5D8 + 1
 	.set sub_805C7CC, 0x0805C7CC + 1
@@ -130,7 +130,7 @@ _08060568:
 	adds r4, #0x29
 	ldrb r1, [r4]
 	adds r0, r5, #0
-	bl sub_80563C0
+	bl StartBattleAnimResireHitEffects
 	ldrb r0, [r4]
 	cmp r0, #0
 	bne _080605A8

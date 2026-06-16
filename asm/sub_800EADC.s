@@ -1,6 +1,6 @@
 	.syntax unified
 	.set Proc_StartBlocking, 0x08002C30 + 1
-	.set sub_800E9E0, 0x0800E9E0 + 1
+	.set EventShowTextBgDirect, 0x0800E9E0 + 1
 	.set sub_800F2DC, 0x0800F2DC + 1
 	.set sub_80B7344, 0x080B7344 + 1
 	.set sub_80B7398, 0x080B7398 + 1
@@ -51,7 +51,7 @@ _0800EB1A:
 	ldrb r0, [r0]
 	lsls r1, r7, #0x10
 	lsrs r1, r1, #0x10
-	bl sub_800E9E0
+	bl EventShowTextBgDirect
 	b _0800EBDE
 _0800EB2A:
 	ldrh r6, [r2, #4]
@@ -189,7 +189,7 @@ _0800EC30:
 	ldrb r0, [r0]
 	lsls r1, r7, #0x10
 	lsrs r1, r1, #0x10
-	bl sub_800E9E0
+	bl EventShowTextBgDirect
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
 	cmp r0, #6

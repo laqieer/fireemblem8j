@@ -4,7 +4,7 @@
 	.set __udivsi3, 0x080D67D0 + 1
 	.set __umodsi3, 0x080D6848 + 1
 	.set m4aSongNumStart, 0x080D4EF4 + 1
-	.set sub_809C3E8, 0x0809C3E8 + 1
+	.set PrepItem_DrawUnitNameRow, 0x0809C3E8 + 1
 	.set sub_80B1F84, 0x080B1F84 + 1
 	.set sub_80B1FBC, 0x080B1FBC + 1
 	.section .text.sub_809B118, "ax", %progbits
@@ -138,7 +138,7 @@ _0809B20C:
 	lsrs r1, r1, #0x18
 	mov r0, r8
 	movs r2, #0
-	bl sub_809C3E8
+	bl PrepItem_DrawUnitNameRow
 	ldrb r0, [r6]
 	movs r1, #3
 	bl __umodsi3

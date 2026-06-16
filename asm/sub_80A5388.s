@@ -13,11 +13,11 @@
 	.set sub_80B1F84, 0x080B1F84 + 1
 	.set sub_80B1FBC, 0x080B1FBC + 1
 	.section .text.sub_80A5388, "ax", %progbits
-@ sub_80A5388 @ JP 0x080A5388 - region-different, gbadisasm descriptive asm (D23)
+@ SupportScreen_Loop_KeyHandler @ JP 0x080A5388 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A5388
+	.global SupportScreen_Loop_KeyHandler
 	.thumb_func
-sub_80A5388:
+SupportScreen_Loop_KeyHandler:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -9,7 +9,7 @@
 	.set sub_809C910, 0x0809C910 + 1
 	.set sub_809CCC4, 0x0809CCC4 + 1
 	.set sub_809CDBC, 0x0809CDBC + 1
-	.set sub_809CF80, 0x0809CF80 + 1
+	.set PrepUnit_HandlePressA, 0x0809CF80 + 1
 	.set sub_809D058, 0x0809D058 + 1
 	.set sub_809D0D8, 0x0809D0D8 + 1
 	.set sub_80B18C0, 0x080B18C0 + 1
@@ -124,7 +124,7 @@ _0809D3C0:
 	cmp r0, #0
 	beq _0809D3E2
 	adds r0, r5, #0
-	bl sub_809CF80
+	bl PrepUnit_HandlePressA
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	bne _0809D3D8

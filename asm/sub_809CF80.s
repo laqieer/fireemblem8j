@@ -7,11 +7,11 @@
 	.set sub_809CE9C, 0x0809CE9C + 1
 	.set sub_809CF0C, 0x0809CF0C + 1
 	.section .text.sub_809CF80, "ax", %progbits
-@ sub_809CF80 @ JP 0x0809CF80 - region-different, gbadisasm descriptive asm (D23)
+@ PrepUnit_HandlePressA @ JP 0x0809CF80 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809CF80
+	.global PrepUnit_HandlePressA
 	.thumb_func
-sub_809CF80:
+PrepUnit_HandlePressA:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldrh r0, [r4, #0x2e]

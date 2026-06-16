@@ -16,11 +16,11 @@
 	.set sub_8076AF8, 0x08076AF8 + 1
 	.set sub_80D636C, 0x080D636C + 1
 	.section .text.sub_8075F34, "ax", %progbits
-@ sub_8075F34 @ JP 0x08075F34 - region-different, gbadisasm descriptive asm (D23)
+@ EkrLvup_InitScreen @ JP 0x08075F34 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8075F34
+	.global EkrLvup_InitScreen
 	.thumb_func
-sub_8075F34:
+EkrLvup_InitScreen:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

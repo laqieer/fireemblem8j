@@ -1,7 +1,7 @@
 	.syntax unified
 	.set sub_800F720, 0x0800F720 + 1
 	.set sub_800F86C, 0x0800F86C + 1
-	.set sub_800F8D4, 0x0800F8D4 + 1
+	.set LoadUnit_0, 0x0800F8D4 + 1
 	.set sub_800FE0C, 0x0800FE0C + 1
 	.set sub_800FE54, 0x0800FE54 + 1
 	.section .text.sub_800F7B0, "ax", %progbits
@@ -78,7 +78,7 @@ _0800F80A:
 	mov r1, sl
 	movs r2, #0
 	mov r3, sb
-	bl sub_800F8D4
+	bl LoadUnit_0
 	subs r0, r5, #1
 	lsls r0, r0, #0x10
 	asrs r5, r0, #0x10

@@ -1,5 +1,5 @@
 	.syntax unified
-	.set sub_800F8D4, 0x0800F8D4 + 1
+	.set LoadUnit_0, 0x0800F8D4 + 1
 	.section .text.sub_801015C, "ax", %progbits
 @ sub_801015C @ JP 0x0801015C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -134,7 +134,7 @@ _0801024C:
 	mov r0, sp
 	movs r1, #0
 	movs r2, #0
-	bl sub_800F8D4
+	bl LoadUnit_0
 	movs r0, #0
 	add sp, #0x14
 	pop {r4, r5, r6, r7}
