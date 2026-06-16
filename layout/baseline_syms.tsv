@@ -893,7 +893,6 @@ ClearTalkFaceRefs	080066EC	thumb	eventscr
 FaceExists	080088E4	thumb	eventscr
 gEventscr_0	085B9BCC	data	eventscr
 InitBattleUnit	0802A4F0	thumb	eventscr3
-SetBattleUnitWeaponBallista	0802A884	thumb	eventscr3
 SetBattleUnitWeapon	0802A69C	thumb	eventscr3
 BattleInitTargetCanCounter	0802C77C	thumb	eventscr3
 BattleApplyWeaponTriangleEffect	0802C6F8	thumb	eventscr3

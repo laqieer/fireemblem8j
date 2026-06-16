@@ -839,7 +839,6 @@
 08019150	62	GetUnitCurrentHp	bmunit
 080191D0	62	GetUnitSkill	bmunit
 08019210	62	GetUnitSpeed	bmunit
-0802A918	62	SetBattleUnitWeaponBallista	bmbattle
 080377F0	62	ExecTrapAfterDropAction	bmtrap
 0803C8F4	62	AiIsUnitEnemyAndScrCharId	cp_script
 0803C934	62	AiIsUnitEnemyAndScrClassId	cp_script
