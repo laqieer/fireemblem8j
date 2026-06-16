@@ -2,7 +2,7 @@
 	.set RefreshEntityBmMaps, 0x08019ECC + 1
 	.set sub_80181B0, 0x080181B0 + 1
 	.set sub_8027144, 0x08027144 + 1
-	.set sub_807C8DC, 0x0807C8DC + 1
+	.set AdjustNewUnitPosition, 0x0807C8DC + 1
 	.section .text.sub_807C3A0, "ax", %progbits
 @ sub_807C3A0 @ JP 0x0807C3A0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -36,7 +36,7 @@ sub_807C3A0:
 	adds r0, r5, #0
 	mov r1, sp
 	adds r2, r3, #0
-	bl sub_807C8DC
+	bl AdjustNewUnitPosition
 	mov r0, sp
 	ldrh r0, [r0]
 	strb r0, [r5, #0x10]

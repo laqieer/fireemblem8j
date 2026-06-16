@@ -6,7 +6,7 @@
 	.set GetUnitEfxDebuff, 0x080558AC + 1
 	.set NewEfxNoDamage, 0x08053888 + 1
 	.set SetUnitEfxDebuff, 0x0805587C + 1
-	.set sub_8052FFC, 0x08052FFC + 1
+	.set NewEfxHpBar, 0x08052FFC + 1
 	.set sub_8053668, 0x08053668 + 1
 	.set sub_80546C8, 0x080546C8 + 1
 	.set sub_8055128, 0x08055128 + 1
@@ -152,7 +152,7 @@ _08056310:
 	cmp r6, r4
 	beq _0805639E
 	adds r0, r5, #0
-	bl sub_8052FFC
+	bl NewEfxHpBar
 	adds r0, r7, #0
 	bl CheckRoundCrit
 	cmp r0, #1

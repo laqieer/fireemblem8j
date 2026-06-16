@@ -7,11 +7,11 @@
 	.set sub_804ECBC, 0x0804ECBC + 1
 	.set sub_80D6398, 0x080D6398 + 1
 	.section .text.sub_804E790, "ax", %progbits
-@ sub_804E790 @ JP 0x0804E790 - region-different, gbadisasm descriptive asm (D23)
+@ MultiBootMain @ JP 0x0804E790 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804E790
+	.global MultiBootMain
 	.thumb_func
-sub_804E790:
+MultiBootMain:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

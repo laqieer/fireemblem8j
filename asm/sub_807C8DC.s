@@ -4,11 +4,11 @@
 	.set NextRN_N, 0x08000C58 + 1
 	.set sub_803BD70, 0x0803BD70 + 1
 	.section .text.sub_807C8DC, "ax", %progbits
-@ sub_807C8DC @ JP 0x0807C8DC - region-different, gbadisasm descriptive asm (D23)
+@ AdjustNewUnitPosition @ JP 0x0807C8DC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807C8DC
+	.global AdjustNewUnitPosition
 	.thumb_func
-sub_807C8DC:
+AdjustNewUnitPosition:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

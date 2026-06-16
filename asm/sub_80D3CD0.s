@@ -14,11 +14,11 @@
 	.set sub_80D344C, 0x080D344C + 1
 	.set sub_80D3554, 0x080D3554 + 1
 	.section .text.sub_80D3CD0, "ax", %progbits
-@ sub_80D3CD0 @ JP 0x080D3CD0 - region-different, gbadisasm descriptive asm (D23)
+@ Guide_MainLoop @ JP 0x080D3CD0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D3CD0
+	.global Guide_MainLoop
 	.thumb_func
-sub_80D3CD0:
+Guide_MainLoop:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	movs r4, #0

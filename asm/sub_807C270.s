@@ -2,7 +2,7 @@
 	.set HideMu, 0x0807BBE8 + 1
 	.set sub_80280A0, 0x080280A0 + 1
 	.set sub_807A888, 0x0807A888 + 1
-	.set sub_807C8DC, 0x0807C8DC + 1
+	.set AdjustNewUnitPosition, 0x0807C8DC + 1
 	.section .text.sub_807C270, "ax", %progbits
 @ sub_807C270 @ JP 0x0807C270 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -46,7 +46,7 @@ sub_807C270:
 	adds r0, r7, #0
 	mov r1, sp
 	adds r2, r5, #0
-	bl sub_807C8DC
+	bl AdjustNewUnitPosition
 	mov r0, r8
 	str r7, [r0, #0x2c]
 	adds r0, r7, #0

@@ -3,7 +3,7 @@
 	.set Proc_Goto, 0x08002E74 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8043190, 0x08043190 + 1
-	.set sub_804E790, 0x0804E790 + 1
+	.set MultiBootMain, 0x0804E790 + 1
 	.set sub_804EBF0, 0x0804EBF0 + 1
 	.section .text.sub_80489C8, "ax", %progbits
 @ sub_80489C8 @ JP 0x080489C8 - region-different, gbadisasm descriptive asm (D23)
@@ -96,7 +96,7 @@ _08048A44:
 _08048A68:
 	ldr r4, _08048AB8 @ =0x03004EB0
 	adds r0, r4, #0
-	bl sub_804E790
+	bl MultiBootMain
 	movs r1, #0
 	ldrsh r0, [r6, r1]
 	cmp r0, #0

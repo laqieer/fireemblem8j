@@ -4366,3 +4366,15 @@ Carving the small region-different proc-wrapper tail, a clean rule emerged (veri
 - **Store a small-int PARAM into a struct field**: `proc->x = x` with `s16/s8/u8` params. agbcc emits `lsl;lsr` (zero-ext) + its own reg-alloc order; JP has `lsl;asr` (sign-ext) + r4/r5 in the other order. With 2+ small-int args the sign-extension residue + temp-reg ordering never reconciles. Examples: GmapRm_SetPosition (2×s16), ConfigSysHandCursorShadowEnabled / BmBgfxSetLoopEN (u8→field), MakeNew6CBMXFADE2 (s8→field). The header also pins the param type (can't flip u8→s8 without breaking callers).
 
 **Apply:** the proc-wrapper scanner should down-rank candidates whose asm sign/zero-extends an entry arg (`lsls rN,#0x18|#0x10` early) and then `strb/strh` it to `[rX,#off]` — those are the dead-ends. Pure/void/load/const-store wrappers are the reliable yield.
+
+## D106 — Named-symbols lever #2: callee-fingerprint identification (reliable, behavior-confirmed)
+
+**Context:** matching-C cheap levers exhausted (3 consecutive ~0-yield iterations of autocarve/permuter). Stepped back (揪头发): of the 4 axes only matching-C (82.9%) and named-symbols (79.0%) are short. Named-symbols had 3,514 placeholders: 1,583 `banim_` + 104 `gfx_` (asset-sheet ceiling), but **1,256 `sub_<hex>` functions + 564 `data_`** are genuinely nameable.
+
+**Rejected levers (verified unreliable, FACT-DRIVEN):**
+- `layout/nofuncmap_region_same.tsv` predicted JP addresses are **stale/wrong** — e.g. it claims `sub_80A421C`=ReadPidStats but baseline already binds ReadPidStats@080A8C60 (conflict). Only 8/1407 land on an actual placeholder symbol; 1305 land on no symbol at all. Abandoned.
+- `bracket_identify.py` (D105 positional 1:1) produced 9 candidates; **call-fingerprint cross-check showed 7/9 were WRONG** (NOMATCH/WEAK callees). Positional evidence alone must NOT be trusted for naming.
+
+**The lever (`scripts/fingerprint_identify.py`):** a region-different `sub_<hex>` can't byte-match, but its set of resolved real-name `bl` callees is a behavioral fingerprint. Match vs US function callee-sets (from `objdump -d ../fireemblem8u/fireemblem8.elf`): when EXACTLY ONE unmapped, not-yet-`.global`'d US function has a callee-set ⊇ the JP set (≥3 callees), that's a unique identification. **Cross-validate** with two independent signals: (a) callee-set Jaccard ≥0.7, (b) positional-delta vs nearest funcmap anchor within 0x2000. GOLD = both pass. 115 unique-superset hits → **30 GOLD** (6 at Jaccard 1.0). Renaming `sub_<hex>`→`RealName` is byte-neutral (skip the `.section`/filename/tsv to avoid layout churn; rename the `.global`/label/`.set`/`bl` token across target + caller files); `make compare` re-gates integrity. **+30 named symbols (79.02→79.20%), COLD make compare OK.**
+
+**Apply:** GOLD (two-signal) is the safe bar — never rename on one signal. A `SILVER` tier (delta_ok + 0.6≤Jaccard) is a candidate follow-up but each needs the second signal. Watch out: prior interrupted `make -k` runs leave **corrupt/partial `.o`** that fail `ld` with "file format not recognized" — detect with `nm` + reassemble (unrelated to the rename). Relates to D105 (bracket), autocarve harness.

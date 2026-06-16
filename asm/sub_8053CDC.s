@@ -7,11 +7,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8053E10, 0x08053E10 + 1
 	.section .text.sub_8053CDC, "ax", %progbits
-@ sub_8053CDC @ JP 0x08053CDC - region-different, gbadisasm descriptive asm (D23)
+@ efxDead_Loop_A @ JP 0x08053CDC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8053CDC
+	.global efxDead_Loop_A
 	.thumb_func
-sub_8053CDC:
+efxDead_Loop_A:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	bl GetBanimDragonStatusType

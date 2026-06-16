@@ -7,11 +7,11 @@
 	.set sub_8013008, 0x08013008 + 1
 	.set sub_8014B50, 0x08014B50 + 1
 	.section .text.sub_807FBA4, "ax", %progbits
-@ sub_807FBA4 @ JP 0x0807FBA4 - region-different, gbadisasm descriptive asm (D23)
+@ MapAnimEffectAnimator_Init @ JP 0x0807FBA4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807FBA4
+	.global MapAnimEffectAnimator_Init
 	.thumb_func
-sub_807FBA4:
+MapAnimEffectAnimator_Init:
 	push {r4, r5, r6, lr}
 	sub sp, #8
 	adds r6, r0, #0

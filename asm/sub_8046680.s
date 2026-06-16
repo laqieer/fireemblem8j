@@ -4,11 +4,11 @@
 	.set m4aSongNumStart, 0x080D4EF4 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_8046680, "ax", %progbits
-@ sub_8046680 @ JP 0x08046680 - region-different, gbadisasm descriptive asm (D23)
+@ SioBat_WaitTeamTransferDone @ JP 0x08046680 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8046680
+	.global SioBat_WaitTeamTransferDone
 	.thumb_func
-sub_8046680:
+SioBat_WaitTeamTransferDone:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	adds r0, #0x4c

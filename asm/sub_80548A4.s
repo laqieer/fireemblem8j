@@ -12,11 +12,11 @@
 	.set sub_8056984, 0x08056984 + 1
 	.set sub_805BBFC, 0x0805BBFC + 1
 	.section .text.sub_80548A4, "ax", %progbits
-@ sub_80548A4 @ JP 0x080548A4 - region-different, gbadisasm descriptive asm (D23)
+@ efxHitQuake_Loop @ JP 0x080548A4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80548A4
+	.global efxHitQuake_Loop
 	.thumb_func
-sub_80548A4:
+efxHitQuake_Loop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

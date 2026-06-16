@@ -2,7 +2,7 @@
 	.set CheckEkrDragonDead, 0x080727C4 + 1
 	.set CheckEkrDragonSkipTransfer, 0x080727E4 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
-	.set sub_8053E94, 0x08053E94 + 1
+	.set NewEfxDeadAlpha, 0x08053E94 + 1
 	.set sub_8053F7C, 0x08053F7C + 1
 	.set sub_8073E74, 0x08073E74 + 1
 	.set sub_8073F94, 0x08073F94 + 1
@@ -51,7 +51,7 @@ sub_8053D70:
 _08053DC2:
 	ldr r0, [r4, #0x5c]
 	ldr r1, [r4, #0x60]
-	bl sub_8053E94
+	bl NewEfxDeadAlpha
 	movs r1, #0x80
 	lsls r1, r1, #1
 	movs r0, #0xd6

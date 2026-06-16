@@ -4,11 +4,11 @@
 	.set IsItemEffectiveAgainst, 0x08016994 + 1
 	.set IsUnitEffectiveAgainst, 0x08016A30 + 1
 	.section .text.sub_802AA28, "ax", %progbits
-@ sub_802AA28 @ JP 0x0802AA28 - region-different, gbadisasm descriptive asm (D23)
+@ ComputeBattleUnitAttack @ JP 0x0802AA28 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802AA28
+	.global ComputeBattleUnitAttack
 	.thumb_func
-sub_802AA28:
+ComputeBattleUnitAttack:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

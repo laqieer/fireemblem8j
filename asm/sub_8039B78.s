@@ -11,11 +11,11 @@
 	.set sub_803E284, 0x0803E284 + 1
 	.set sub_80D65BC, 0x080D65BC + 1
 	.section .text.sub_8039B78, "ax", %progbits
-@ sub_8039B78 @ JP 0x08039B78 - region-different, gbadisasm descriptive asm (D23)
+@ CpDecide_Main @ JP 0x08039B78 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8039B78
+	.global CpDecide_Main
 	.thumb_func
-sub_8039B78:
+CpDecide_Main:
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
 _08039B7C:

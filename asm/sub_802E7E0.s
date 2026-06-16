@@ -6,11 +6,11 @@
 	.set InitTargets, 0x08050618 + 1
 	.set ShouldSkipGasTrapDisplay, 0x0802E70C + 1
 	.section .text.sub_802E7E0, "ax", %progbits
-@ sub_802E7E0 @ JP 0x0802E7E0 - region-different, gbadisasm descriptive asm (D23)
+@ GenerateDisplayedTrapDamageTargets @ JP 0x0802E7E0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802E7E0
+	.global GenerateDisplayedTrapDamageTargets
 	.thumb_func
-sub_802E7E0:
+GenerateDisplayedTrapDamageTargets:
 	push {r4, r5, lr}
 	movs r5, #0
 	movs r0, #0

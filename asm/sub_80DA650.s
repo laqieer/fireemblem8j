@@ -3,11 +3,11 @@
 	.set findslot, 0x080DA3C8 + 1
 	.set strlen, 0x080D6A08 + 1
 	.section .text.sub_80DA650, "ax", %progbits
-@ sub_80DA650 @ JP 0x080DA650 - region-different, gbadisasm descriptive asm (D23)
+@ _swiopen @ JP 0x080DA650 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80DA650
+	.global _swiopen
 	.thumb_func
-sub_80DA650:
+_swiopen:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

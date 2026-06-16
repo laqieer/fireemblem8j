@@ -7,11 +7,11 @@
 	.set sub_80096A4, 0x080096A4 + 1
 	.set sub_80A9B40, 0x080A9B40 + 1
 	.section .text.sub_80AEA84, "ax", %progbits
-@ sub_80AEA84 @ JP 0x080AEA84 - region-different, gbadisasm descriptive asm (D23)
+@ PostSaveMenuHandler @ JP 0x080AEA84 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80AEA84
+	.global PostSaveMenuHandler
 	.thumb_func
-sub_80AEA84:
+PostSaveMenuHandler:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r0, [r4, #0x60]

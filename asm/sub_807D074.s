@@ -7,11 +7,11 @@
 	.set sub_801759C, 0x0801759C + 1
 	.set sub_80D637C, 0x080D637C + 1
 	.section .text.sub_807D074, "ax", %progbits
-@ sub_807D074 @ JP 0x0807D074 - region-different, gbadisasm descriptive asm (D23)
+@ GenerateSummonUnitDef @ JP 0x0807D074 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807D074
+	.global GenerateSummonUnitDef
 	.thumb_func
-sub_807D074:
+GenerateSummonUnitDef:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

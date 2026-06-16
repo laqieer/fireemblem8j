@@ -1,7 +1,7 @@
 	.syntax unified
 	.set AiCanEquip, 0x0803E890 + 1
 	.set AiEquipBestConsideringDanger, 0x0803EB80 + 1
-	.set sub_803E8CC, 0x0803E8CC + 1
+	.set AiEquipGetFlags, 0x0803E8CC + 1
 	.set sub_803E9E8, 0x0803E9E8 + 1
 	.section .text.sub_803A748, "ax", %progbits
 @ sub_803A748 @ JP 0x0803A748 - region-different, gbadisasm descriptive asm (D23)
@@ -16,7 +16,7 @@ sub_803A748:
 	cmp r0, #0
 	beq _0803A786
 	add r0, sp, #4
-	bl sub_803E8CC
+	bl AiEquipGetFlags
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	beq _0803A786

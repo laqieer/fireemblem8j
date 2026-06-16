@@ -1,6 +1,6 @@
 	.syntax unified
 	.set GetUnit, 0x08019108 + 1
-	.set sub_807C8DC, 0x0807C8DC + 1
+	.set AdjustNewUnitPosition, 0x0807C8DC + 1
 	.section .text.sub_807C44C, "ax", %progbits
 @ sub_807C44C @ JP 0x0807C44C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -54,7 +54,7 @@ _0807C474:
 	mov r4, sp
 	mov r1, sp
 	adds r2, r5, #0
-	bl sub_807C8DC
+	bl AdjustNewUnitPosition
 	mov r0, sp
 	ldrh r0, [r0]
 	strb r0, [r6]

@@ -5,11 +5,11 @@
 	.set SetBlendTargetB, 0x08001E5C + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_8053E94, "ax", %progbits
-@ sub_8053E94 @ JP 0x08053E94 - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxDeadAlpha @ JP 0x08053E94 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8053E94
+	.global NewEfxDeadAlpha
 	.thumb_func
-sub_8053E94:
+NewEfxDeadAlpha:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0

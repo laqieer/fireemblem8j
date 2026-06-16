@@ -4,11 +4,11 @@
 	.set GetEfxHp, 0x08059890 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_8052FFC, "ax", %progbits
-@ sub_8052FFC @ JP 0x08052FFC - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxHpBar @ JP 0x08052FFC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8052FFC
+	.global NewEfxHpBar
 	.thumb_func
-sub_8052FFC:
+NewEfxHpBar:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	bl GetAnimPosition

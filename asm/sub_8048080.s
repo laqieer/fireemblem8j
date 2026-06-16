@@ -8,11 +8,11 @@
 	.set nullsub_2, 0x0804D148 + 1
 	.set sub_8089078, 0x08089078 + 1
 	.section .text.sub_8048080, "ax", %progbits
-@ sub_8048080 @ JP 0x08048080 - region-different, gbadisasm descriptive asm (D23)
+@ SioMenu_End @ JP 0x08048080 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8048080
+	.global SioMenu_End
 	.thumb_func
-sub_8048080:
+SioMenu_End:
 	push {r4, r5, r6, lr}
 	sub sp, #0x14
 	adds r6, r0, #0

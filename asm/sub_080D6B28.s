@@ -18,11 +18,11 @@
 	.set sub_80D7A88, 0x080D7A88 + 1
 	.set sub_80D7B7C, 0x080D7B7C + 1
 	.section .text.sub_080D6B28, "ax", %progbits
-@ sub_080D6B28 @ JP 0x080D6B28 - region-different, gbadisasm descriptive asm (D23)
+@ _vfprintf_r @ JP 0x080D6B28 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_080D6B28
+	.global _vfprintf_r
 	.thumb_func
-sub_080D6B28:
+_vfprintf_r:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

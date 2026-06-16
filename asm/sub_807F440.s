@@ -11,11 +11,11 @@
 	.set sub_8013008, 0x08013008 + 1
 	.set sub_8080CB8, 0x08080CB8 + 1
 	.section .text.sub_807F440, "ax", %progbits
-@ sub_807F440 @ JP 0x0807F440 - region-different, gbadisasm descriptive asm (D23)
+@ MapLatonafx_Init @ JP 0x0807F440 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807F440
+	.global MapLatonafx_Init
 	.thumb_func
-sub_807F440:
+MapLatonafx_Init:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r5, r0, #0

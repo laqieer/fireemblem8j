@@ -3,11 +3,11 @@
 	.set ResetMenuOverrides, 0x0805046C + 1
 	.set memcpy, 0x080D6908 + 1
 	.section .text.sub_80109F0, "ax", %progbits
-@ sub_80109F0 @ JP 0x080109F0 - region-different, gbadisasm descriptive asm (D23)
+@ Event3D_MenuOverride @ JP 0x080109F0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80109F0
+	.global Event3D_MenuOverride
 	.thumb_func
-sub_80109F0:
+Event3D_MenuOverride:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

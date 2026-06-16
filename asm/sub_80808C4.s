@@ -6,11 +6,11 @@
 	.set SetBlendTargetA, 0x08001E20 + 1
 	.set sub_8014B50, 0x08014B50 + 1
 	.section .text.sub_80808C4, "ax", %progbits
-@ sub_80808C4 @ JP 0x080808C4 - region-different, gbadisasm descriptive asm (D23)
+@ MapAnimSilence_InitScreenConf @ JP 0x080808C4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80808C4
+	.global MapAnimSilence_InitScreenConf
 	.thumb_func
-sub_80808C4:
+MapAnimSilence_InitScreenConf:
 	push {r4, r5, lr}
 	sub sp, #8
 	adds r4, r0, #0

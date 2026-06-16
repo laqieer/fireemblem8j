@@ -4,11 +4,11 @@
 	.set SetNextGameActionId, 0x08009EB0 + 1
 	.set sub_800226C, 0x0800226C + 1
 	.section .text.sub_800F62C, "ax", %progbits
-@ sub_800F62C @ JP 0x0800F62C - region-different, gbadisasm descriptive asm (D23)
+@ Event2A_MoveToChapter @ JP 0x0800F62C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800F62C
+	.global Event2A_MoveToChapter
 	.thumb_func
-sub_800F62C:
+Event2A_MoveToChapter:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldr r1, [r4, #0x38]

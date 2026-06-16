@@ -3,11 +3,11 @@
 	.set EventStartFade, 0x08012888 + 1
 	.set NewEventFadefx, 0x08012954 + 1
 	.section .text.sub_800E1FC, "ax", %progbits
-@ sub_800E1FC @ JP 0x0800E1FC - region-different, gbadisasm descriptive asm (D23)
+@ Event18_ColorFade @ JP 0x0800E1FC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800E1FC
+	.global Event18_ColorFade
 	.thumb_func
-sub_800E1FC:
+Event18_ColorFade:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

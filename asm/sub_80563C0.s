@@ -3,7 +3,7 @@
 	.set GetAnimPosition, 0x0805AF10 + 1
 	.set GetEfxHp, 0x08059890 + 1
 	.set NewEfxNoDamage, 0x08053888 + 1
-	.set sub_80532DC, 0x080532DC + 1
+	.set NewEfxHpBarResire, 0x080532DC + 1
 	.set sub_8053668, 0x08053668 + 1
 	.set sub_80546C8, 0x080546C8 + 1
 	.set sub_8055128, 0x08055128 + 1
@@ -79,7 +79,7 @@ _08056448:
 	cmp r6, r4
 	beq _0805648A
 	adds r0, r5, #0
-	bl sub_80532DC
+	bl NewEfxHpBarResire
 	adds r0, r7, #0
 	bl CheckRoundCrit
 	cmp r0, #1

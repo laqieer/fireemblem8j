@@ -11,11 +11,11 @@
 	.set sub_803EBA8, 0x0803EBA8 + 1
 	.set sub_80D6374, 0x080D6374 + 1
 	.section .text.sub_803E8CC, "ax", %progbits
-@ sub_803E8CC @ JP 0x0803E8CC - region-different, gbadisasm descriptive asm (D23)
+@ AiEquipGetFlags @ JP 0x0803E8CC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803E8CC
+	.global AiEquipGetFlags
 	.thumb_func
-sub_803E8CC:
+AiEquipGetFlags:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

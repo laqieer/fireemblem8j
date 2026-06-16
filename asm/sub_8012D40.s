@@ -4,11 +4,11 @@
 	.set Proc_Find, 0x08002DEC + 1
 	.set sub_8002330, 0x08002330 + 1
 	.section .text.sub_8012D40, "ax", %progbits
-@ sub_8012D40 @ JP 0x08012D40 - region-different, gbadisasm descriptive asm (D23)
+@ EndEventEarthQuake @ JP 0x08012D40 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8012D40
+	.global EndEventEarthQuake
 	.thumb_func
-sub_8012D40:
+EndEventEarthQuake:
 	push {lr}
 	ldr r0, _08012D5C @ =0x085BA36C
 	bl Proc_Find

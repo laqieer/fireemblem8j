@@ -4,11 +4,11 @@
 	.set IsItemHammernable, 0x08016E28 + 1
 	.set sub_8016688, 0x08016688 + 1
 	.section .text.sub_8029A10, "ax", %progbits
-@ sub_8029A10 @ JP 0x08029A10 - region-different, gbadisasm descriptive asm (D23)
+@ RepairMenuItemDraw @ JP 0x08029A10 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8029A10
+	.global RepairMenuItemDraw
 	.thumb_func
-sub_8029A10:
+RepairMenuItemDraw:
 	push {r4, r5, r6, lr}
 	adds r5, r1, #0
 	ldr r0, _08029A64 @ =0x0203A954

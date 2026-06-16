@@ -1,6 +1,6 @@
 	.syntax unified
 	.set sub_8012CEC, 0x08012CEC + 1
-	.set sub_8012D40, 0x08012D40 + 1
+	.set EndEventEarthQuake, 0x08012D40 + 1
 	.section .text.sub_8010D9C, "ax", %progbits
 @ sub_8010D9C @ JP 0x08010D9C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -64,7 +64,7 @@ _08010E04:
 	bl sub_8012CEC
 	b _08010E14
 _08010E10:
-	bl sub_8012D40
+	bl EndEventEarthQuake
 _08010E14:
 	movs r0, #0
 _08010E16:

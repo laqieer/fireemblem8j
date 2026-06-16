@@ -4,11 +4,11 @@
 	.set GetItemMinRange, 0x08017414 + 1
 	.set sub_80165F0, 0x080165F0 + 1
 	.section .text.sub_804E670, "ax", %progbits
-@ sub_804E670 @ JP 0x0804E670 - region-different, gbadisasm descriptive asm (D23)
+@ SioWeaponSelectMenu_Draw @ JP 0x0804E670 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804E670
+	.global SioWeaponSelectMenu_Draw
 	.thumb_func
-sub_804E670:
+SioWeaponSelectMenu_Draw:
 	push {r4, r5, r6, lr}
 	adds r4, r1, #0
 	ldr r0, _0804E6C8 @ =0x03004DF0

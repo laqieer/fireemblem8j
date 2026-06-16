@@ -7,11 +7,11 @@
 	.set nullsub_13, 0x08008F28 + 1
 	.set sub_8042678, 0x08042678 + 1
 	.section .text.sub_80481F8, "ax", %progbits
-@ sub_80481F8 @ JP 0x080481F8 - region-different, gbadisasm descriptive asm (D23)
+@ XMapTransfer_0 @ JP 0x080481F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80481F8
+	.global XMapTransfer_0
 	.thumb_func
-sub_80481F8:
+XMapTransfer_0:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0

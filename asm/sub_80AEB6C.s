@@ -3,11 +3,11 @@
 	.set ReadExtraMapInfo, 0x080AB6A4 + 1
 	.set SetNextGameActionId, 0x08009EB0 + 1
 	.section .text.sub_80AEB6C, "ax", %progbits
-@ sub_80AEB6C @ JP 0x080AEB6C - region-different, gbadisasm descriptive asm (D23)
+@ ExecExtraMap @ JP 0x080AEB6C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80AEB6C
+	.global ExecExtraMap
 	.thumb_func
-sub_80AEB6C:
+ExecExtraMap:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	movs r0, #8

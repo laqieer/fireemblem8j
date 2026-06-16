@@ -4,11 +4,11 @@
 	.set RefreshEntityBmMaps, 0x08019ECC + 1
 	.set sub_8027144, 0x08027144 + 1
 	.section .text.sub_80122A4, "ax", %progbits
-@ sub_80122A4 @ JP 0x080122A4 - region-different, gbadisasm descriptive asm (D23)
+@ EventBattleReloadBmStatus @ JP 0x080122A4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80122A4
+	.global EventBattleReloadBmStatus
 	.thumb_func
-sub_80122A4:
+EventBattleReloadBmStatus:
 	push {r4, r5, r6, r7, lr}
 	ldr r5, _08012328 @ =0x0203A4E8
 	movs r0, #0xb
