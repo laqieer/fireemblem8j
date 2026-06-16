@@ -1197,7 +1197,7 @@
 9C2AC0	9C2BC0	src/data/bg/dat_data_bg_p39.o(.rodata.dat_data_bg_p39)	dat_data_bg_p39 region-same per-sym shifted (0KB)
 9C7B64	9C7C64	src/data/bg/dat_data_bg_p40.o(.rodata.dat_data_bg_p40)	dat_data_bg_p40 region-same per-sym shifted (0KB)
 9CC924	9CCA24	src/data/bg/dat_data_bg_p41.o(.rodata.dat_data_bg_p41)	dat_data_bg_p41 region-same per-sym shifted (0KB)
-9CDD18	9CF318	asm/dat_classchg_data.o(.rodata.dat_classchg_data)	dat_classchg_data region-same shifted (5KB)
+9CDD18	9CF318	src/data/classchg_data/dat_classchg_data.o(.rodata.dat_classchg_data)	dat_classchg_data region-same shifted (5KB)
 9CFD20	A0DE50	src/data/mapanim/data_map_anim_frames.o(.rodata.dat_data_map_anim_frames)	dat_data_map_anim_frames region-same shifted (248KB)
 A0DE50	A12AC0	src/data/99D6DC/dat_data_99D6DC.o(.rodata.dat_data_99D6DC)	dat_data_99D6DC region-same shifted (19KB)
 A1313A	A13256	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1471.o(.rodata.dat_worldmap_gmapunit_p1471)	dat_worldmap_gmapunit_p1471 region-same per-sym shifted (0KB)
@@ -1405,7 +1405,7 @@ A729F0	A72A30	src/data/gProcScr_SSPageNameCtrl_ref/dat_gProcScr_SSPageNameCtrl_r
 A72A30	A72A80	src/data/gProcScr_SSPageNumCtrl_ref/dat_gProcScr_SSPageNumCtrl_ref.o(.rodata.dat_gProcScr_SSPageNumCtrl_ref)	gProcScr_SSPageNumCtrl region-diff (funcmap code-ref, 0KB)
 A72BB8	A72BF0	src/statscreen.o(.data)	statscreen .data
 A738E0	A73900	src/player_interface.o(.data)	player_interface .data
-A73F9C	A74CEC	asm/dat_worldmap_gmapunit_p1572.o(.rodata.dat_worldmap_gmapunit_p1572)	dat_worldmap_gmapunit_p1572 region-same per-sym shifted (3KB)
+A73F9C	A74CEC	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1572.o(.rodata.dat_worldmap_gmapunit_p1572)	dat_worldmap_gmapunit_p1572 region-same per-sym shifted (3KB)
 A74FEC	A79E90	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1573.o(.rodata.dat_worldmap_gmapunit_p1573)	dat_worldmap_gmapunit_p1573 region-same per-sym shifted (19KB)
 A7B098	A7CDA4	src/data/A01CC4/dat_data_A01CC4_p2.o(.rodata.dat_data_A01CC4_p2)	dat_data_A01CC4_p2 region-same per-sym shifted (7KB)
 A7CDA4	A7D10C	src/data/anim_player_rank_fog/dat_anim_player_rank_fog.o(.rodata.dat_anim_player_rank_fog)	dat_anim_player_rank_fog region-same shifted (0KB)
