@@ -746,7 +746,6 @@ GetChapterSurvivalRank	080BAD48	thumb	gamerankings
 GetChapterFundsRank	080BAE60	thumb	gamerankings
 GetOverallRank	080BABF4	thumb	gamerankings
 MoveUnit_	0807C40C	thumb	muctrl
-UnitFinalizeMovement	080181B0	thumb	muctrl
 SortMus	0807BFF4	thumb	muctrl
 ClearEventMoveBuffer	0807C144	thumb	muctrl
 gUnk_53	03001C2C	thumb	muctrl
