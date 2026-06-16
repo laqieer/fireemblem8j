@@ -631,7 +631,6 @@ StartFace	08005544	thumb	mapanim_lvup
 gFaces	03004920	data	mapanim_lvup
 StartMuActionAnim	0807BCC4	thumb	mapanim_spellassoc
 StartMuDelayedFaceDefender	0807BCFC	thumb	mapanim_spellassoc
-CallDelayed	080148F0	thumb	mapanim_spellassoc
 StartMuSpeedUpAnim	0807BD58	thumb	mapanim_spellassoc
 DeleteAllPaletteAnimator	08014494	thumb	mapanim_staffeffect
 ProcScr_MapLatonaShiningfx	08A140C8	data	mapanim_staffeffect
