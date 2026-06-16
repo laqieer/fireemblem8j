@@ -12,7 +12,6 @@ StartSioProcs	08045EA4	thumb	SioBat_WaitSetupAck
 StartLinkArenaButtonSpriteDraw	07FDC9A2	thumb	SioBat_WaitSetupAck
 gUnk_Sio_13	0203DD24	data	SioBat_WaitSetupAck
 SioEmitData	08042678	thumb	SioBat_DecideFirstMover
-StartSioErrorScreen	0808FF5C	thumb	SioBat_WaitTeamTransferDone
 gSioMain_0	085D32A8	data	SioBat_WaitTeamTransferDone
 LoadRNState	08000C0C	thumb	SioBat_ReceiveFirstMover
 StartLinkArenaVersusSpriteDraw	0804E3F8	thumb	SioBat_InitSetupScreen

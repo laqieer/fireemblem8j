@@ -3,7 +3,6 @@
 	.set SioSend, 0x08042238 + 1
 	.set m4aSongNumStart, 0x080D4EF4 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
-	.set sub_808FF5C, 0x0808FF5C + 1
 	.section .text.sub_8046680, "ax", %progbits
 @ sub_8046680 @ JP 0x08046680 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -46,7 +45,7 @@ _080466B6:
 	lsls r0, r0, #2
 	cmp r1, r0
 	ble _080466CA
-	bl sub_808FF5C
+	bl StartSioErrorScreen
 _080466CA:
 	ldr r0, _0804671C @ =0x03004EFC
 	movs r1, #0xc9
