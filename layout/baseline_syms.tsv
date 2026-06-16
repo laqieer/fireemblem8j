@@ -1000,7 +1000,6 @@ BanimScr_Ekrdragonfx_3	0884886C	data	banim-ekrdragon-demonking
 GetEkrDragonStatusAttr	08071FF8	thumb	banim-ekrdragonstatus
 DrawBattlePopup	080780DC	thumb	banim-ekrpopup
 EfxPlaySound5AVol100	08077F8C	thumb	banim-ekrpopup
-NewEfxQuakePure	08054364	thumb	banim-ekrtriangle
 ProcScr_EfxTriangleQUAKE	087A9BA0	data	banim-ekrtriangle
 StartMovingHelpBoxExt	0808B414	thumb	bksel
 gHelpInfo_MbpHp	08A730A4	data	bksel

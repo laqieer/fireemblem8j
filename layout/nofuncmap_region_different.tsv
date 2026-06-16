@@ -863,7 +863,6 @@
 080237F8	64	ItemSubMenu_EquipItem	bmmenu
 0803B7C8	64	AiGetUnitStealItemSlot	cp_utility
 08045C28	64	SioMain2_WaitEndAndRoute	sio_bat
-08053678	64	NewEfxQuakePure	banim-efxbattle
 08063428	64	StartSubSpell_efxMshieldBGOBJ2	banim-efxmagic-effectstaves
 0807A014	64	MoveUnit_	muctrl
 0807D3CC	64	MapLatonaShiningfx_Start	mapanim_staffeffect
