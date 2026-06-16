@@ -119,7 +119,11 @@ def main():
             print(f"[NEAR ] {name}: {len(bad)}/{e-s} {ctx} -> revert (inspect)")
             revert(name,r['addr']); subprocess.run(["python3","scripts/gen_layout.py"],capture_output=True); results.append((name,"NEAR"))
         else:
-            print(f"[REGION] {name}: {len(bad)}/{e-s}"); revert(name,r['addr']); subprocess.run(["python3","scripts/gen_layout.py"],capture_output=True); results.append((name,"REGION"))
+            tag=""
+            if len(bad)<=25:
+                offs=[b-s for b in bad]; span=offs[-1]-offs[0]+1
+                tag=" CONTIG" if span<=len(bad)*1.6 else " scattered"; tag+=f" @{hex(offs[0])}"
+            print(f"[REGION] {name}: {len(bad)}/{e-s}{tag}"); revert(name,r['addr']); subprocess.run(["python3","scripts/gen_layout.py"],capture_output=True); results.append((name,"REGION"))
     sh("rm -f fireemblem8.gba; make compare >/dev/null 2>&1")
     keep=[n for n,s in results if s=="MATCH"]
     print("\n=== KEPT(MATCH):",", ".join(keep) if keep else "(none)")
