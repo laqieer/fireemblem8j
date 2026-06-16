@@ -775,7 +775,6 @@ PutScreenFogEffect	0801FB0C	thumb	gameoverbgfx
 MaybeResetSomePal	0800169C	thumb	gameoverbgfx
 MaybeSmoothChangeSomePal	080016B8	thumb	gameoverbgfx
 MapAnim_GorgonHatch_Init	0807F15C	thumb	eventfx-boomfog
-ProcLightRuneAnim_Init	08021234	thumb	lightrunefx
 ProcLightRuneAnim_Loop	080212E8	thumb	lightrunefx
 AnimScr_EfxBerserk1	086B9E8C	data	banim-efxmagic-effectstaves
 AnimScr_EfxBerserk2	086B9EA0	data	banim-efxmagic-effectstaves
