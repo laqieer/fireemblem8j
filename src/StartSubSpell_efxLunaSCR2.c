@@ -4,6 +4,8 @@
 #include "efxbattle.h"
 #include "efxmagic.h"
 
+extern struct ProcCmd ProcScr_efxLunaSCR2[];
+
 void StartSubSpell_efxLunaSCR2(ProcPtr proc)
 {
     struct ProcEfxSCR * otherProc = Proc_Start(ProcScr_efxLunaSCR2, PROC_TREE_3);

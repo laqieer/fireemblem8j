@@ -4,6 +4,8 @@
 #include "efxbattle.h"
 #include "efxmagic.h"
 
+extern struct ProcCmd ProcScr_efxSleepSE[];
+
 void StartSubSpell_efxSleepSE(struct Anim * anim)
 {
     struct ProcEfx * proc;

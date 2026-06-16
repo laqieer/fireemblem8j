@@ -4,6 +4,8 @@
 #include "efxbattle.h"
 #include "efxmagic.h"
 
+extern struct ProcCmd gProcScr_efxThunderstormCOLOR[];
+
 void StartSubSpell_efxThunderstormCOLOR(struct Anim * anim)
 {
     struct ProcEfxBGCOL * proc;
