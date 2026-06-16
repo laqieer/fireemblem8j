@@ -341,12 +341,14 @@ enum
     GAME_ACTION_4 = 4,
     GAME_ACTION_5 = 5,
     GAME_ACTION_6 = 6,
-    GAME_ACTION_EXTRA_MAP = 7,
-    GAME_ACTION_8 = 8,
-    GAME_ACTION_9 = 9,
-    GAME_ACTION_A = 0xA,
-    GAME_ACTION_B = 0xB,
-    GAME_ACTION_C = 0xC,
+    /* JP inserts an extra game action at 7, shifting EXTRA_MAP and all later ids +1 vs US */
+    GAME_ACTION_JP_7 = 7,
+    GAME_ACTION_EXTRA_MAP = 8,
+    GAME_ACTION_8 = 9,
+    GAME_ACTION_9 = 0xA,
+    GAME_ACTION_A = 0xB,
+    GAME_ACTION_B = 0xC,
+    GAME_ACTION_C = 0xD,
 };
 
 enum
