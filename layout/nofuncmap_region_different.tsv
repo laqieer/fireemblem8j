@@ -915,7 +915,6 @@
 0800D544	68	SlotQueuePop	event
 08012AE0	68	NewShinningStonefx	eventfx-shinningstone
 08013800	68	StartMapPaletteBrightnessFade	bmlib
-0801443C	68	PutString	bmlib
 080155C4	68	BmMain_BeginNextChapter	bm
 0801E250	68	SendToConvoyMenu_Selected2	convoymenu
 0802B38C	68	BattleCheckSilencer	bmbattle
