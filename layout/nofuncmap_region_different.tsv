@@ -1248,7 +1248,6 @@
 0800DDB0	100	Event13_BgmFadeIn	eventscr
 080106E4	100	Event3A_DisplayPopup	eventscr
 080143D8	100	PutStringCentered	bmlib
-08034B48	100	DrawUnitResChangeText	unitinfowindow
 0803F61C	100	AiFunc_AttackUnitWithCharId	cp_0803E2F4
 0803F72C	100	AiFunc_AttackStoredTargetOrMoveToward	cp_0803E2F4
 08047A54	100	SioMenu_GetItemHelpText	sio_menu
