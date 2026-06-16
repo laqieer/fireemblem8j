@@ -5,11 +5,11 @@
 	.set sub_8001BC0, 0x08001BC0 + 1
 	.set sub_800663C, 0x0800663C + 1
 	.section .text.sub_80BD194, "ax", %progbits
-@ sub_80BD194 @ JP 0x080BD194 - region-different, gbadisasm descriptive asm (D23)
+@ PutWMFaceOnBg @ JP 0x080BD194 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BD194
+	.global PutWMFaceOnBg
 	.thumb_func
-sub_80BD194:
+PutWMFaceOnBg:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

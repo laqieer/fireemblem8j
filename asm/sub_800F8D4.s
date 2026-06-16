@@ -5,7 +5,7 @@
 	.set memcpy, 0x080D6908 + 1
 	.set sub_800FA64, 0x0800FA64 + 1
 	.set sub_801786C, 0x0801786C + 1
-	.set sub_8017DE8, 0x08017DE8 + 1
+	.set UnitApplyBonusLevels, 0x08017DE8 + 1
 	.set sub_8018144, 0x08018144 + 1
 	.set sub_807C44C, 0x0807C44C + 1
 	.section .text.sub_800F8D4, "ax", %progbits
@@ -175,7 +175,7 @@ _0800F9CA:
 	lsrs r1, r1, #0x1c
 	rsbs r1, r1, #0
 	adds r0, r5, #0
-	bl sub_8017DE8
+	bl UnitApplyBonusLevels
 	b _0800FA48
 	.align 2, 0
 _0800FA20: .4byte 0xFFBFFFFF
@@ -194,7 +194,7 @@ _0800FA36:
 	ldrb r1, [r0, #0x14]
 	lsrs r1, r1, #4
 	adds r0, r5, #0
-	bl sub_8017DE8
+	bl UnitApplyBonusLevels
 _0800FA48:
 	adds r0, r5, #0
 	adds r1, r6, #0

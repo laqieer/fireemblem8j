@@ -38,10 +38,19 @@ for ln in open("layout/us_jp_funcmap.tsv"):
     if len(p)>=5: mapped.add(p[4])
 # names already used as a .global anywhere (avoid dup-define)
 existing=set()
+cdef=re.compile(r'^[A-Za-z_][\w \t\*]*?\b([A-Za-z_]\w+)\s*\(')  # top-level C func definition
 for f in glob.glob("asm/**/*.s",recursive=True)+glob.glob("src/**/*.c",recursive=True):
     try: t=open(f,errors='replace').read()
     except: continue
     for mm in re.finditer(r'\.global\s+(\w+)',t): existing.add(mm.group(1))
+    if f.endswith(".c"):
+        # C function definitions have NO `.global` -- a rename colliding with one is a
+        # multiple-definition link error (and a wrong ID: that US func is already placed).
+        for line in t.splitlines():
+            if line.endswith((";",",")) or line.lstrip().startswith(("//","*","/*")): continue
+            m=cdef.match(line)
+            if m and m.group(1) not in ("if","for","while","switch","return","sizeof","do"):
+                existing.add(m.group(1))
 for ln in open("layout/baseline_syms.tsv"):
     existing.add(ln.split('\t')[0])
 

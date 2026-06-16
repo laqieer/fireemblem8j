@@ -5,11 +5,11 @@
 	.set sub_8017CE4, 0x08017CE4 + 1
 	.set sub_8017D84, 0x08017D84 + 1
 	.section .text.sub_8017DE8, "ax", %progbits
-@ sub_8017DE8 @ JP 0x08017DE8 - region-different, gbadisasm descriptive asm (D23)
+@ UnitApplyBonusLevels @ JP 0x08017DE8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8017DE8
+	.global UnitApplyBonusLevels
 	.thumb_func
-sub_8017DE8:
+UnitApplyBonusLevels:
 	push {r4, lr}
 	adds r4, r0, #0
 	adds r2, r1, #0

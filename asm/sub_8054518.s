@@ -6,11 +6,11 @@
 	.set SetEkrBg2QuakeVec, 0x08052F0C + 1
 	.set sub_8056984, 0x08056984 + 1
 	.section .text.sub_8054518, "ax", %progbits
-@ sub_8054518 @ JP 0x08054518 - region-different, gbadisasm descriptive asm (D23)
+@ efxQuake_Loop @ JP 0x08054518 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8054518
+	.global efxQuake_Loop
 	.thumb_func
-sub_8054518:
+efxQuake_Loop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

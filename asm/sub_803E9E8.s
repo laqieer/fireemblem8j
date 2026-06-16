@@ -8,11 +8,11 @@
 	.set sub_801A05C, 0x0801A05C + 1
 	.set sub_803EC28, 0x0803EC28 + 1
 	.section .text.sub_803E9E8, "ax", %progbits
-@ sub_803E9E8 @ JP 0x0803E9E8 - region-different, gbadisasm descriptive asm (D23)
+@ AiEquipGetDanger @ JP 0x0803E9E8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803E9E8
+	.global AiEquipGetDanger
 	.thumb_func
-sub_803E9E8:
+AiEquipGetDanger:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

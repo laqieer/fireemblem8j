@@ -5,11 +5,11 @@
 	.set sub_80088FC, 0x080088FC + 1
 	.set sub_8031E18, 0x08031E18 + 1
 	.section .text.sub_80BA570, "ax", %progbits
-@ sub_80BA570 @ JP 0x080BA570 - region-different, gbadisasm descriptive asm (D23)
+@ ArenaUi_CheckConfirmation @ JP 0x080BA570 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BA570
+	.global ArenaUi_CheckConfirmation
 	.thumb_func
-sub_80BA570:
+ArenaUi_CheckConfirmation:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	bl sub_80088FC

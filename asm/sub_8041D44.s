@@ -5,11 +5,11 @@
 	.set sub_8041D0C, 0x08041D0C + 1
 	.set sub_8042330, 0x08042330 + 1
 	.section .text.sub_8041D44, "ax", %progbits
-@ sub_8041D44 @ JP 0x08041D44 - region-different, gbadisasm descriptive asm (D23)
+@ SioMain_Loop @ JP 0x08041D44 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8041D44
+	.global SioMain_Loop
 	.thumb_func
-sub_8041D44:
+SioMain_Loop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

@@ -7,11 +7,11 @@
 	.set sub_8005544, 0x08005544 + 1
 	.set sub_8018FCC, 0x08018FCC + 1
 	.section .text.sub_80298E4, "ax", %progbits
-@ sub_80298E4 @ JP 0x080298E4 - region-different, gbadisasm descriptive asm (D23)
+@ RepairSelectOnSelect @ JP 0x080298E4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80298E4
+	.global RepairSelectOnSelect
 	.thumb_func
-sub_80298E4:
+RepairSelectOnSelect:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r4, r1, #0

@@ -16,11 +16,11 @@
 	.set sub_80D6374, 0x080D6374 + 1
 	.set sub_80D637C, 0x080D637C + 1
 	.section .text.sub_8051FB8, "ax", %progbits
-@ sub_8051FB8 @ JP 0x08051FB8 - region-different, gbadisasm descriptive asm (D23)
+@ ekrGaugeMain @ JP 0x08051FB8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8051FB8
+	.global ekrGaugeMain
 	.thumb_func
-sub_8051FB8:
+ekrGaugeMain:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

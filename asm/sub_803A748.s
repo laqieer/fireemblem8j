@@ -4,11 +4,11 @@
 	.set AiEquipGetFlags, 0x0803E8CC + 1
 	.set sub_803E9E8, 0x0803E9E8 + 1
 	.section .text.sub_803A748, "ax", %progbits
-@ sub_803A748 @ JP 0x0803A748 - region-different, gbadisasm descriptive asm (D23)
+@ CpPerform_EquipBest @ JP 0x0803A748 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803A748
+	.global CpPerform_EquipBest
 	.thumb_func
-sub_803A748:
+CpPerform_EquipBest:
 	push {r4, r5, r6, lr}
 	sub sp, #0x18
 	bl AiCanEquip

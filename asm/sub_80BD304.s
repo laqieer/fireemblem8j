@@ -6,7 +6,7 @@
 	.set sub_80011D0, 0x080011D0 + 1
 	.set sub_8001BC0, 0x08001BC0 + 1
 	.set sub_80056AC, 0x080056AC + 1
-	.set sub_80BD194, 0x080BD194 + 1
+	.set PutWMFaceOnBg, 0x080BD194 + 1
 	.section .text.sub_80BD304, "ax", %progbits
 @ sub_80BD304 @ JP 0x080BD304 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -225,7 +225,7 @@ _080BD47C:
 	str r0, [sp]
 	adds r0, r4, #0
 	movs r3, #0x1c
-	bl sub_80BD194
+	bl PutWMFaceOnBg
 	mov r0, sl
 	lsls r7, r0
 	adds r0, r7, #0

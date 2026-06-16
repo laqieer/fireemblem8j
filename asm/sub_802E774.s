@@ -4,11 +4,11 @@
 	.set GenerateGasTrapTargets, 0x0802E68C + 1
 	.set InitTargets, 0x08050618 + 1
 	.section .text.sub_802E774, "ax", %progbits
-@ sub_802E774 @ JP 0x0802E774 - region-different, gbadisasm descriptive asm (D23)
+@ GenerateTrapDamageTargets @ JP 0x0802E774 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802E774
+	.global GenerateTrapDamageTargets
 	.thumb_func
-sub_802E774:
+GenerateTrapDamageTargets:
 	push {r4, lr}
 	movs r0, #0
 	movs r1, #0

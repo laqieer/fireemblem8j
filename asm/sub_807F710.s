@@ -3,11 +3,11 @@
 	.set PutTmRectSequential, 0x08014574 + 1
 	.set SetBlendConfig, 0x08001DF0 + 1
 	.section .text.sub_807F710, "ax", %progbits
-@ sub_807F710 @ JP 0x0807F710 - region-different, gbadisasm descriptive asm (D23)
+@ MapLatonaShiningfx_Start @ JP 0x0807F710 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807F710
+	.global MapLatonaShiningfx_Start
 	.thumb_func
-sub_807F710:
+MapLatonaShiningfx_Start:
 	push {r4, r5, lr}
 	sub sp, #8
 	adds r5, r0, #0
