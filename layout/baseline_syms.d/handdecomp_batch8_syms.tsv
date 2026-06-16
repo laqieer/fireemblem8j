@@ -1,0 +1,3 @@
+ProcScr_CallDelayedArg	085C2590	data	ProcScr for CallDelayedArg
+sProc_DelayedBMapDispResume	085C5EC4	data	ProcScr for BMapDispResume_FromBattleDelayed
+ProcScr_GmapAutoMu	08AC2720	data	ProcScr for StartGmapAutoMu_Type0
