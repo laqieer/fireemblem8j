@@ -369,10 +369,8 @@ GetItemAttributes	08017314	thumb	prep_utils
 PutSpriteExt	08005330	thumb	prep_wm_sell
 ProcScr_TacticianNameSelection	085D351C	data	sio_event
 UnsetBmStLinkArenaFlag	08042E0C	thumb	sio_event
-InitTextFont	08003BE8	thumb	sio_event
 Font_0	0203DB60	data	sio_event
 InitSioBG	0804D0DC	thumb	sio_postbattle
-InitSpriteTextFont	080044A4	thumb	sio_postbattle
 InitSpriteText	080044E0	thumb	sio_postbattle
 SpriteText_DrawBackgroundExt	080045BC	thumb	sio_postbattle
 Sio_SortPlayersByScore	08049694	thumb	sio_postbattle
