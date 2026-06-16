@@ -114,19 +114,19 @@ def main():
             print(f"[skip ] {name}: no sub addr"); continue
         carve(name, r, addr)
         subprocess.run([sys.executable, "scripts/gen_layout.py"], capture_output=True)
-        errs = sh("make -k 2>&1 | grep -c 'Error 1'").strip()
+        # SINGLE build per candidate: `make -k` builds the default target (fireemblem8.gba)
+        # if every .o compiles AND links. rm first so a fresh ROM = success; missing ROM = link fail.
+        sh("rm -f fireemblem8.gba; make -k >/dev/null 2>&1")
         nm = sh(f"arm-none-eabi-nm src/{name}.o 2>/dev/null | grep -E ' (T|t) {name}'")
         if not nm.strip():
             print(f"[COMPILE] {name}: did not compile -> revert")
             revert(name, addr)
             subprocess.run([sys.executable, "scripts/gen_layout.py"], capture_output=True)
             results.append((name, "COMPILE")); continue
-        sh("rm -f fireemblem8.gba; make compare >/dev/null 2>&1")
         if not os.path.exists("fireemblem8.gba"):
             print(f"[LINK ] {name}: ROM did not build (undefined ref?) -> revert")
             revert(name, addr)
             subprocess.run([sys.executable, "scripts/gen_layout.py"], capture_output=True)
-            sh("rm -f fireemblem8.gba; make compare >/dev/null 2>&1")
             results.append((name, "LINK")); continue
         bad, size = diff_range(r["start"], r["end"])
         n = len(bad)
