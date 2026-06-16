@@ -1,5 +1,5 @@
 	.syntax unified
-	.set sub_80D8F5C, 0x080D8F5C + 1
+	.set __sfvwrite, 0x080D8F5C + 1
 	.section .text.sub_80D6A80, "ax", %progbits
 @ sub_80D6A80 @ JP 0x080D6A80 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -12,7 +12,7 @@ sub_80D6A80:
 	cmp r1, #0
 	beq _080D6A98
 	adds r1, r4, #0
-	bl sub_80D8F5C
+	bl __sfvwrite
 	movs r1, #0
 	str r1, [r4, #8]
 	str r1, [r4, #4]

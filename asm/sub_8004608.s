@@ -1,6 +1,6 @@
 	.syntax unified
 	.set __ashldi3, 0x080D6588 + 1
-	.set sub_8004140, 0x08004140 + 1
+	.set GetColorLut, 0x08004140 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
 	.section .text.DrawSpriteTextGlyph, "ax", %progbits
 @ DrawSpriteTextGlyph @ JP 0x08004608 - region-different, gbadisasm descriptive asm (D23)
@@ -31,7 +31,7 @@ DrawSpriteTextGlyph:
 	adds r3, #8
 	str r3, [sp, #0xc]
 	ldrb r0, [r1, #3]
-	bl sub_8004140
+	bl GetColorLut
 	mov r8, r0
 	movs r0, #0xff
 	mov sb, r0

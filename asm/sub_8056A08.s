@@ -3,11 +3,11 @@
 	.set Set0201FAC8, 0x080569D8 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_8056A08, "ax", %progbits
-@ sub_8056A08 @ JP 0x08056A08 - region-different, gbadisasm descriptive asm (D23)
+@ efxSPDQuake_Loop @ JP 0x08056A08 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8056A08
+	.global efxSPDQuake_Loop
 	.thumb_func
-sub_8056A08:
+efxSPDQuake_Loop:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	ldr r6, [r5, #0x44]

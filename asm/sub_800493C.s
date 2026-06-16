@@ -1,5 +1,5 @@
 	.syntax unified
-	.set sub_8004140, 0x08004140 + 1
+	.set GetColorLut, 0x08004140 + 1
 	.section .text.DrawSpecialCharGlyph, "ax", %progbits
 @ DrawSpecialCharGlyph @ JP 0x0800493C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -18,7 +18,7 @@ DrawSpecialCharGlyph:
 	adds r7, r2, #0
 	adds r7, #8
 	adds r0, r1, #0
-	bl sub_8004140
+	bl GetColorLut
 	adds r2, r0, #0
 	movs r6, #0xff
 	movs r3, #0xf

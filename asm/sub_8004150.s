@@ -1,6 +1,6 @@
 	.syntax unified
 	.set DrawGlyphRam, 0x08002AE0 + 1
-	.set sub_8004140, 0x08004140 + 1
+	.set GetColorLut, 0x08004140 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
 	.section .text.DrawTextGlyph, "ax", %progbits
 @ DrawTextGlyph @ JP 0x08004150 - region-different, gbadisasm descriptive asm (D23)
@@ -26,7 +26,7 @@ DrawTextGlyph:
 	mov r6, sb
 	adds r6, #8
 	ldrb r0, [r5, #3]
-	bl sub_8004140
+	bl GetColorLut
 	mov r1, r8
 	adds r2, r6, #0
 	adds r3, r4, #0

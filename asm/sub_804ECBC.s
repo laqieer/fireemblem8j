@@ -2,11 +2,11 @@
 	.set MultiBootInit, 0x0804E754 + 1
 	.set MultiBootSend, 0x0804EB80 + 1
 	.section .text.sub_804ECBC, "ax", %progbits
-@ sub_804ECBC @ JP 0x0804ECBC - region-different, gbadisasm descriptive asm (D23)
+@ MultiBootHandShake @ JP 0x0804ECBC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804ECBC
+	.global MultiBootHandShake
 	.thumb_func
-sub_804ECBC:
+MultiBootHandShake:
 	push {r4, r5, r6, lr}
 	adds r3, r0, #0
 	ldrb r0, [r3, #0x18]

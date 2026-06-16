@@ -3,11 +3,11 @@
 	.set AiTryExecScriptA, 0x0803C44C + 1
 	.set sub_803D374, 0x0803D374 + 1
 	.section .text.sub_8039E58, "ax", %progbits
-@ sub_8039E58 @ JP 0x08039E58 - region-different, gbadisasm descriptive asm (D23)
+@ DecideScriptA @ JP 0x08039E58 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8039E58
+	.global DecideScriptA
 	.thumb_func
-sub_8039E58:
+DecideScriptA:
 	push {r4, lr}
 	movs r4, #0
 	ldr r0, _08039E80 @ =0x03004DF0

@@ -5,11 +5,11 @@
 	.set sub_80D65C8, 0x080D65C8 + 1
 	.set sub_80D8AEC, 0x080D8AEC + 1
 	.section .text.sub_80D8F5C, "ax", %progbits
-@ sub_80D8F5C @ JP 0x080D8F5C - region-different, gbadisasm descriptive asm (D23)
+@ __sfvwrite @ JP 0x080D8F5C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D8F5C
+	.global __sfvwrite
 	.thumb_func
-sub_80D8F5C:
+__sfvwrite:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

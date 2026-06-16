@@ -1,6 +1,6 @@
 	.syntax unified
 	.set __ashldi3, 0x080D6588 + 1
-	.set sub_8004140, 0x08004140 + 1
+	.set GetColorLut, 0x08004140 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
 	.section .text.DrawTextGlyphNoClear, "ax", %progbits
 @ DrawTextGlyphNoClear @ JP 0x080041A0 - region-different, gbadisasm descriptive asm (D23)
@@ -31,11 +31,11 @@ DrawTextGlyphNoClear:
 	adds r3, #8
 	str r3, [sp, #0x14]
 	movs r0, #9
-	bl sub_8004140
+	bl GetColorLut
 	mov sl, r0
 	ldr r1, [sp]
 	ldrb r0, [r1, #3]
-	bl sub_8004140
+	bl GetColorLut
 	mov sb, r0
 	movs r2, #0xf
 	str r2, [sp, #8]

@@ -4,7 +4,7 @@
 	.set MultiBootSend, 0x0804EB80 + 1
 	.set MultiBootStartProbe, 0x0804EBCC + 1
 	.set MultiBootWaitSendDone, 0x0804EDC0 + 1
-	.set sub_804ECBC, 0x0804ECBC + 1
+	.set MultiBootHandShake, 0x0804ECBC + 1
 	.set sub_80D6398, 0x080D6398 + 1
 	.section .text.sub_804E790, "ax", %progbits
 @ MultiBootMain @ JP 0x0804E790 - region-different, gbadisasm descriptive asm (D23)
@@ -59,7 +59,7 @@ _0804E7E4:
 	cmp r0, #0xdf
 	bls _0804E836
 	adds r0, r7, #0
-	bl sub_804ECBC
+	bl MultiBootHandShake
 	adds r5, r0, #0
 	cmp r5, #0
 	beq _0804E7F8
