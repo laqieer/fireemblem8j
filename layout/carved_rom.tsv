@@ -709,8 +709,8 @@
 5C5BD8	5C5CE0	src/data/TileAnimations3_ref/dat_TileAnimations3_ref.o(.rodata.dat_TileAnimations3_ref)	TileAnimations3 region-diff (funcmap code-ref, 0KB)
 5C5D98	5C5DE8	src/data/sProc_BMVSync_ref/dat_sProc_BMVSync_ref.o(.rodata.dat_sProc_BMVSync_ref)	sProc_BMVSync region-diff (funcmap code-ref, 0KB)
 5C6080	5C6084	src/bmpatharrowdisp.o(.data)	bmpatharrowdisp .data
-5C6646	5C6690	asm/dat_bldyLut_10_ref.o(.rodata.dat_bldyLut_10_ref)	bldyLut.10 region-diff (funcmap code-ref, 0KB)
-5C6690	5C6770	asm/dat_lut_29_ref.o(.rodata.dat_lut_29_ref)	lut.29 region-diff (funcmap code-ref, 0KB)
+5C6646	5C6690	src/data/bldyLut_10_ref/dat_bldyLut_10_ref.o(.rodata.dat_bldyLut_10_ref)	bldyLut.10 region-diff (funcmap code-ref, 0KB)
+5C6690	5C6770	src/data/lut_29_ref/dat_lut_29_ref.o(.rodata.dat_lut_29_ref)	lut.29 region-diff (funcmap code-ref, 0KB)
 5C6830	5C6890	src/data/gProcScr_TerrainHealDisplay_ref/dat_gProcScr_TerrainHealDisplay_ref.o(.rodata.dat_gProcScr_TerrainHealDisplay_ref)	gProcScr_TerrainHealDisplay region-diff (funcmap code-ref, 0KB)
 5C6890	5C68F8	src/data/gProcScr_PoisonDamageDisplay_ref/dat_gProcScr_PoisonDamageDisplay_ref.o(.rodata.dat_gProcScr_PoisonDamageDisplay_ref)	gProcScr_PoisonDamageDisplay region-diff (funcmap code-ref, 0KB)
 5C68F8	5C6960	src/data/gProcScr_GorgonEggHatchDisplay_ref/dat_gProcScr_GorgonEggHatchDisplay_ref.o(.rodata.dat_gProcScr_GorgonEggHatchDisplay_ref)	gProcScr_GorgonEggHatchDisplay region-diff (funcmap code-ref, 0KB)
