@@ -6,7 +6,6 @@
 	.set AddTrap8, 0x0802E2C0 + 1
 	.set AddTrap9, 0x0802E2D0 + 1
 	.set sub_80379C0, 0x080379C0 + 1
-	.set sub_8037A9C, 0x08037A9C + 1
 	.section .text.sub_80378D8, "ax", %progbits
 @ sub_80378D8 @ JP 0x080378D8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -49,7 +48,7 @@ _0803792C:
 	ldrb r0, [r5, #1]
 	ldrb r1, [r5, #2]
 	ldrb r2, [r5, #3]
-	bl sub_8037A9C
+	bl AddBallista
 	b _08037998
 _08037938:
 	ldrb r0, [r5, #1]
