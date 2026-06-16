@@ -699,7 +699,6 @@
 080BA424	52	GMapScreen_OnWorldmapEventUpdate	worldmap_screen
 080C05C4	52	GmTmConfront_InitUnitPositionB	worldmap_tm_confront
 080C2E70	52	WmPlaceDot_OnEnd	worldmap_rm
-080C3590	52	ClearWmTextVram	worldmap_text
 080C09B8	52	ClearWMPlayerInterfaceTilemapBuffers	worldmap_80C0834
 080C0A10	52	WorldmapStatus_GetCharDescription	worldmap_status_ui
 080CBDD8	52	TryTickHSScreenExit	opanim-healthsafetyscreen
