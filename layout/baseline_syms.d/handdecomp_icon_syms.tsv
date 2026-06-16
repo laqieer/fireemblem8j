@@ -1,0 +1,2 @@
+DrawnIconLookupTable	02026A90	data	icon ref LUT (icon.c EWRAM)
+IconGFXIDLookupTable	02026E10	data	icon gfxid LUT (icon.c EWRAM)
