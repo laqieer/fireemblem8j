@@ -1,4 +1,4 @@
-ProcScr_PrepMenu	08A73E74	data	prep_menuproc_08091574
+ProcScr_PrepMenu_08A73E74	08A73E74	data	prep_menuproc_08091574
 ExecUnitDefaultPromotion	0802F4B8	thumb	prep_menuproc_080987D8
 ProcScr_PrepPromoteDebug	08A941F8	data	prep_menuproc_080988D4
 Sprite_PrepExMap	08A942B2	data	prep_menuproc_080989AC

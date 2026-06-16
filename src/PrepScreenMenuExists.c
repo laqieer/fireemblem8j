@@ -1,5 +1,4 @@
 #include "global.h"
-
 #include "ap.h"
 #include "bm.h"
 #include "bmbattle.h"
@@ -19,17 +18,15 @@
 #include "sysutil.h"
 #include "uiutils.h"
 #include "worldmap.h"
-
 #include "constants/chapters.h"
 #include "constants/songs.h"
 
-s8 CheckInLinkArena(void);
-extern struct ProcCmd ProcScr_PrepMenu_08A73E74[];
-
-void ShowPrepScreenMenuActiveHand(void)
+int PrepScreenMenuExists(void)
 {
-    struct ProcPrepMenu * proc = Proc_Find(ProcScr_PrepMenu_08A73E74);
+    struct ProcPrepMenu * proc = Proc_Find(ProcScr_PrepMenu);
 
     if (proc != NULL)
-        Proc_Goto(proc, 0);
+        return true;
+    else
+        return false;
 }
