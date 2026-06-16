@@ -564,7 +564,6 @@ InitOam	0800204C	thumb	banim-ekrarena
 EfxClearScreenFx	080529BC	thumb	banim-ekrarena
 UpdateBanimFrame	0805A78C	thumb	banim-ekrarena
 NewEkrGauge	08051C2C	thumb	banim-ekrarena
-NewEkrDispUP	080527BC	thumb	banim-ekrarena
 NewEkrBattle	08050B48	thumb	banim-ekrarena
 gEkrInitialHitSide	0203E0FC	data	banim-ekrarena
 LZ77UnCompVram	080D6390	thumb	banim-ekrarena

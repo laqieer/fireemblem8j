@@ -1,0 +1,3 @@
+gProc_ekrDispUP	085E37CC	data	ProcScr for NewEkrDispUP
+gpProcEkrDispUP	0200006C	data	EWRAM proc ptr (NewEkrDispUP)
+UnAsyncEkrDispUP	08052898	thumb	callee of NewEkrDispUP
