@@ -20,10 +20,19 @@ def sh(cmd):
 
 
 def name_to_addr(name):
+    # 1) baseline_syms.tsv (NAME<TAB>ADDR<TAB>type)
     for ln in open(os.path.join(ROOT, 'layout/baseline_syms.tsv')):
         p = ln.rstrip('\n').split('\t')
         if len(p) >= 2 and p[0] == name:
             return p[1]
+    # 2) jp_syms.s aliases (`.set NAME, 0xADDR + 1`) — many gbadisasm functions are
+    #    named only here (the graduate_jp_batch candidate pool), not in baseline_syms.
+    jp = os.path.join(ROOT, 'asm/jp_syms.s')
+    if os.path.exists(jp):
+        for ln in open(jp):
+            m = re.search(rf'\.set\s+{re.escape(name)},\s*0x([0-9A-Fa-f]+)', ln)
+            if m:
+                return m.group(1).upper().zfill(8)
     return None
 
 
