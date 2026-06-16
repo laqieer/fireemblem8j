@@ -912,7 +912,6 @@ GetCurrentMapMusicIndex	08015FD4	thumb	phasechangefx
 CheckInLinkArena	08042E1C	thumb	phasechangefx
 Img_PrepHelpButtonSprites	08A95E80	data	player_interface
 GetCursorQuadrant	0808DEDC	thumb	player_interface
-StartSemiCenteredOrphanMenu	080503C0	thumb	playerphase
 gUnitActionMenuDef	085C56D0	data	playerphase
 StartAfterUnitMovedEvent	080867D8	thumb	playerphase
 BrownTextBox_SetBlendFlag	08011B08	thumb	popup
