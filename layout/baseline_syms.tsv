@@ -762,7 +762,6 @@ DrawUnitResChangeText	08034A50	thumb	unitinfowindow
 NewUnitInfoWindow	080346B0	thumb	unitinfowindow
 DrawUnitResUnkText	08034AB4	thumb	unitinfowindow
 DrawAccuracyText	08034AEC	thumb	unitinfowindow
-DrawUnitAidText	080349AC	thumb	unitinfowindow
 PutUnitAidIconForTextAt	080349E4	thumb	unitinfowindow
 DrawUnitConText	08034964	thumb	unitinfowindow
 GetWeaponLevelFromExp	08016B04	thumb	bmitem

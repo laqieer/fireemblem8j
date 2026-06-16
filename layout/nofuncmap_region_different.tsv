@@ -715,7 +715,6 @@
 08029A4C	54	RepairMenuItemIsAvailable	bmitemuse
 0802AB74	54	ComputeBattleUnitSpeed	bmbattle
 080315E4	54	GetConvoyItemSlot	bmcontainer
-08034AA4	54	DrawUnitAidText	unitinfowindow
 08034BAC	54	DrawUnitResUnkText	unitinfowindow
 08035C80	54	StatusHealEffect_BlendSpriteAnim_Loop	bmusailment
 08035FB8	54	PoisonDamageDisplay_Init	bmusailment
