@@ -1823,7 +1823,6 @@
 080AB89C	238	InitSaveMenuChoice	savedraw
 080C119C	238	GmapEffect_0	worldmap_effect
 08000A20	240	AgbMain	main
-0800BCDC	240	ChangeUnitSpritePalette	eventscr_utils
 08010A58	240	Event3F_ScriptBattle	eventscr
 080A4594	240	PidStatsRecordLoseData	bmsave-bwl
 080BBAD4	240	GmapCursor_Loop	worldmap_cursor
