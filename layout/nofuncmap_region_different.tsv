@@ -1333,7 +1333,6 @@
 08031A14	112	ArenaGetPowerRanking	bmarena
 0803CA0C	112	AiScriptCmd_05_DoStandardAction	cp_script
 0805CFC0	112	StartSubSpell_efxHurtmutOBJ	banim-efxmagic-bindingblade
-08060440	112	StartSubSpell_efxHazymoonBG_A	banim-efxmagic-eclipse
 08065A10	112	efxIvaldiBG1_Loop	banim-efxmagic-ivaldi
 08080890	112	DemonKingSummonAnim_PhaseBurst	mapanim_eventcall
 08089DE8	112	DrawHelpBoxSaveMenuStats	helpbox

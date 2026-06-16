@@ -1,0 +1,5 @@
+ProcScr_efxHazymoonBG	08600754	data	ProcScr for efxHazymoonBG
+TsaArray_EclipseBg	0860076C	data	TSA array (efxHazymoonBG)
+ImgArray_EclipseBg	086007D8	data	img array (efxHazymoonBG)
+Pal_NosferatuBg	08663218	data	BG palette (efxHazymoonBG)
+Frames_efxHazymoonBG_A	080E2646	data	frame config (efxHazymoonBG_A)
