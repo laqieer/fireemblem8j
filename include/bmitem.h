@@ -165,7 +165,7 @@ s8 CanUnitUseWeaponNow(struct Unit* unit, int item);
 s8 CanUnitUseStaff(struct Unit* unit, int item);
 s8 CanUnitUseStaffNow(struct Unit* unit, int item);
 void DrawItemMenuLine(struct Text* text, int item, s8 isGrayed, u16* mapOut);
-void DrawItemMenuLineLong(struct Text* text, int item, s8 isGrayed, u16* mapOut);
+void DrawItemMenuLineLong(struct Text* text, int item, int isGrayed, u16* mapOut);
 void DrawItemMenuLineNoColor(struct Text* text, int item, u16* mapOut);
 void DrawItemStatScreenLine(struct Text* text, int item, int nameColor, u16* mapOut);
 u16 GetItemAfterUse(int item);
