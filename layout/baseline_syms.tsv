@@ -125,7 +125,6 @@ M4aPlayWithPostionCtrl	08073F94	thumb	banim-ekrlvupfan
 StartTemporaryLock	080142F0	thumb	minefx
 Decompress	08013008	thumb	minefx
 CopyToPaletteBuffer	08000D68	thumb	minefx
-APProc_Create	08009608	thumb	minefx
 StartSpriteAnimfx	080B342C	thumb	sprite-animfx
 SetDefaultColorEffects	08001ED0	thumb	bmxfade
 SetBackgroundTileDataOffset	08000F8C	thumb	bmxfade
@@ -420,7 +419,6 @@ SetSecondaryHBlankHandler	08001D3C	thumb	cgtext
 GetFaceDisplayBitsById	080056B0	thumb	cgtext
 SetFaceDisplayBitsById	08005694	thumb	cgtext
 EndCgTextInterpreter	080922C8	thumb	cgtext
-StartFaceFadeOut	08005E3C	thumb	cgtext
 gProcScr_E_FACE	085B8EEC	data	cgtext
 SetDialogueSkipEvBit	0800D6A8	thumb	cgtext
 GetBattleMapKind	080C1E74	thumb	eventinfo
