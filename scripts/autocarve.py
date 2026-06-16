@@ -100,9 +100,21 @@ def diff_range(start, end):
     return bad, e - s
 
 
+def defined_syms():
+    """All symbols DEFINED by the current (last-built) ELF — used to skip the slow
+    relink for candidates whose undefined refs won't resolve (LINK-fail)."""
+    s = set()
+    for ln in sh("arm-none-eabi-nm fireemblem8.elf 2>/dev/null").splitlines():
+        p = ln.split()
+        if len(p) >= 3 and p[1] not in ("U", "u", "w", "v"):
+            s.add(p[2])
+    return s
+
+
 def main():
     names = sys.argv[1:]
     results = []
+    DEFINED = defined_syms()  # parse once; fast LINK-fail pre-filter
     for name in names:
         r = recipe(name)
         if not r:
@@ -113,18 +125,26 @@ def main():
         if not addr:
             print(f"[skip ] {name}: no sub addr"); continue
         carve(name, r, addr)
-        subprocess.run([sys.executable, "scripts/gen_layout.py"], capture_output=True)
-        # SINGLE build per candidate: `make -k` builds the default target (fireemblem8.gba)
-        # if every .o compiles AND links. rm first so a fresh ROM = success; missing ROM = link fail.
-        sh("rm -f fireemblem8.gba; make -k >/dev/null 2>&1")
+        # FAST PRE-FILTER (no full relink): compile just this .o, then check its
+        # undefined symbols all resolve in the last build. Skips the ~60s ROM relink
+        # for COMPILE/LINK fails (typically ~half a batch).
+        sh(f"rm -f src/{name}.o; make src/{name}.o >/dev/null 2>&1")
         nm = sh(f"arm-none-eabi-nm src/{name}.o 2>/dev/null | grep -E ' (T|t) {name}'")
         if not nm.strip():
             print(f"[COMPILE] {name}: did not compile -> revert")
             revert(name, addr)
-            subprocess.run([sys.executable, "scripts/gen_layout.py"], capture_output=True)
             results.append((name, "COMPILE")); continue
+        und = [ln.split()[-1] for ln in sh(f"arm-none-eabi-nm -u src/{name}.o 2>/dev/null").splitlines() if ln.strip()]
+        missing = [u for u in und if u not in DEFINED]
+        if missing:
+            print(f"[LINK ] {name}: unresolved {missing[:4]} -> revert")
+            revert(name, addr)
+            results.append((name, "LINK")); continue
+        # passers only: now do the slow relink + byte-diff
+        subprocess.run([sys.executable, "scripts/gen_layout.py"], capture_output=True)
+        sh("rm -f fireemblem8.gba; make -k >/dev/null 2>&1")
         if not os.path.exists("fireemblem8.gba"):
-            print(f"[LINK ] {name}: ROM did not build (undefined ref?) -> revert")
+            print(f"[LINK ] {name}: ROM did not build -> revert")
             revert(name, addr)
             subprocess.run([sys.executable, "scripts/gen_layout.py"], capture_output=True)
             results.append((name, "LINK")); continue
