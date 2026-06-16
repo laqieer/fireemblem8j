@@ -1,0 +1,45 @@
+BattleGenerateUiStats
+ClassChgMenuOnDrawCore
+ClearTemporaryUnits
+DrawBattlePopup
+DrawHelpBoxWeaponLabels
+DrawPrepScreenSprites
+EfxAdvanceFrameLut
+ExecTrap
+GenerateMovementMap
+GetItemDisplayRangeString
+GetUnitItemCostSum
+LoadTrapData
+LoadUnitPrepScreenPositions
+MoveActiveUnit
+MuCtr_GenMoveScript
+NewEkrGauge
+NewEkrTriPegasusKnightBG
+OpAnimApplyScrollPalettes
+PrepScreen_StartUnitSwap
+PutGuideCategoryName
+PutTalkBubbleTm
+RefreshUnitInventoryInfoWindow
+StartSubSpell_efxEvilEyeOBJ
+StrInsertTact
+SwitchAISFrameDataFromBARoundType
+TalkLoadFace
+UnitInfoWindow_DrawBase
+UnitInitFromDefinition
+[skip ] BgAffinRotScaling: DEAD-END pre-screen (sign-ext)
+[skip ] CheckForWaitEvents: DEAD-END pre-screen (sign-ext)
+[skip ] EfxCalcSplitedColorStep: DEAD-END pre-screen (sign-ext)
+[skip ] EventShinningCursorAdvance: no clean US body/range
+[skip ] GenUnitDefinitionFinalPosition: DEAD-END pre-screen (sign-ext)
+[skip ] GetBattleUnitExpGain: DEAD-END pre-screen (sign-ext)
+[skip ] GetUnitStructFromEventParameter: DEAD-END pre-screen (sign-ext)
+[skip ] GmapSugoAdvance: DEAD-END pre-screen (sign-ext)
+[skip ] ItemSelectMenu_TextDraw: DEAD-END pre-screen (sign-ext)
+[skip ] OpAnim1_UpdateScrollOneLine: DEAD-END pre-screen (sign-ext)
+[skip ] PathArrowDisp_Init: DEAD-END pre-screen (sign-ext)
+[skip ] PutWmDotSprite: DEAD-END pre-screen (sign-ext)
+[skip ] SetBattleMuPaletteByIndex: DEAD-END pre-screen (sign-ext)
+[skip ] ShopTryMoveHand: DEAD-END pre-screen (sign-ext)
+[skip ] Sio_StartBoxTransitionClose: DEAD-END pre-screen (sign-ext)
+[skip ] StartGmScroll: DEAD-END pre-screen (sign-ext)
+[skip ] WriteWorldMapNodes: DEAD-END pre-screen (sign-ext)
