@@ -50,8 +50,11 @@ def recipe(name):
     return dict(start=rng.group(1).upper(),end=rng.group(2).upper(),addr=m.group(1).upper(),inc=keep,body=body.group(1))
 
 def write(name,r,decls):
+    body=r["body"]
+    for s in os.environ.get("DECL_SUBST","").split(";"):
+        if "=>" in s: o,n=s.split("=>"); body=body.replace(o,n)
     open(f"src/{name}.c","w").write("".join(f'#include "{h}"\n' for h in r["inc"])+"\n"+
-        "".join(d+"\n" for d in decls)+"\n"+r["body"]+"\n")
+        "".join(d+"\n" for d in decls)+"\n"+body+"\n")
 
 def wire(name,r):
     sh(f"git rm -q asm/sub_{r['addr']}.s layout/carved_rom.d/gbadisasm_sub_{r['addr']}.tsv")
