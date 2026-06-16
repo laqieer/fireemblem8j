@@ -13,7 +13,7 @@
 
 enum
 {
-    SIO_MSG_84 = 0x84, // sound ?
+    SIO_MSG_84 = 0xC4, // sound ?
     SIO_MSG_85,
     SIO_MSG_86,
     SIO_MSG_87,
