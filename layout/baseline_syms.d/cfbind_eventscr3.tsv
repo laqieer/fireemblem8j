@@ -3,7 +3,7 @@ GetNextDeployedPlayerUnitId	0801263C	thumb	BuildDeployedUnitDefinitionList
 SetBattleScripted	08059994	thumb	StartEventBattle
 EvtBattleGenerateReal	08011FA4	thumb	StartEventBattle
 EvtBattleGenerateBallistaReal	08011FB8	thumb	StartEventBattle
-ItemBackupEvtBattle	F0061C38	data	StartEventBattle
+ItemBackupEvtBattle	030005F4	data	StartEventBattle
 BattleHitAdvance	0802D1EC	thumb	StartEventBattle
 SetBattleUnscripted	08193A22	thumb	StartEventBattle
 StartScriptBattleAnim	080D3290	thumb	StartEventBattle
