@@ -1172,9 +1172,7 @@ StartSubSpell_efxSongBG	0805D800	thumb	banim-efxmagic-dancerings
 StartSubSpell_efxSongOBJ	0805D8DC	thumb	banim-efxmagic-dancerings
 NewEfxRestWINH_	0805C6EC	thumb	banim-efxmagic-dancerings
 NewEfxTwobaiRST	0805C28C	thumb	banim-efxmagic-dancerings
-NewEfxALPHA	0805C7CC	thumb	banim-efxmagic-dancerings
 EfxGetCamMovDuration	08056920	thumb	banim-efxmagic-eclipse
-NewefxRestRST	0805C1A4	thumb	banim-efxmagic-eclipse
 StartSubSpell_efxEvilEyeOBJ	08069DD0	thumb	banim-efxmagic-evileye
 StartSubSpell_efxEvilEyeBG	08069BBC	thumb	banim-efxmagic-evileye
 StartSubSpell_efxEvilEyeBG2	08069CB4	thumb	banim-efxmagic-evileye
