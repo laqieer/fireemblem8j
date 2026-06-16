@@ -1491,7 +1491,6 @@
 08066A0C	136	StartSubSpell_efxMaohFlashBG4	banim-efxmagic-demonlight
 0806788C	136	StartSubSpell_efxEvilEyeBG	banim-efxmagic-evileye
 0806B7A8	136	StartSubSpell_efxGorgonBGDirt	banim-efxmagic-demonsurge
-0807B334	136	MakeBattleMOVEUNIT	mapanim_api
 0807D6D8	136	AntitoxinPureWaterfx_Init	mapanim_staffeffect
 08081078	136	GlowingCross_Init	mapanim_eventcall
 0809CF8C	136	PrepItemUseBooster_OnEnd	prep_itemusemind

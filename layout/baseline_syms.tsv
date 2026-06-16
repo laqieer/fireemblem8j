@@ -1045,7 +1045,6 @@ ProcScr_MapAnimSumDK	08A13A48	data	mapanim_api
 ProcScr_MapAnimDance	08A13B38	data	mapanim_api
 EventEngineExists	0800D45C	thumb	mapanim_api
 ProcScr_MapAnimEventBattle	08A13EFC	data	mapanim_api
-MakeBattleMOVEUNIT	0807D6B4	thumb	mapanim_api
 GetAvailableTileEventCommand	08086350	thumb	bmcommanddbg
 CanUnitSeize	08037BFC	thumb	bmcommanddbg
 InitTargets	08050618	thumb	bmcommanddbg
