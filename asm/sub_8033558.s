@@ -3,7 +3,6 @@
 	.set CanPrepScreenSave, 0x080972D4 + 1
 	.set ResetText, 0x08003BC4 + 1
 	.set sub_801D730, 0x0801D730 + 1
-	.set sub_8033530, 0x08033530 + 1
 	.set sub_808BB14, 0x0808BB14 + 1
 	.set sub_808F44C, 0x0808F44C + 1
 	.set sub_8097C50, 0x08097C50 + 1
@@ -94,7 +93,7 @@ _08033600:
 	bl sub_8099308
 _08033612:
 	adds r0, r4, #0
-	bl sub_8033530
+	bl StartPrepHelpPrompt
 	ldr r0, _08033650 @ =sub_80332D4
 	bl sub_80992B4
 	ldr r0, _08033654 @ =sub_80332B4
