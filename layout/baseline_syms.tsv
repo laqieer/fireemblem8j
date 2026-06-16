@@ -400,7 +400,6 @@ SetTalkPrintColor	08006A14	thumb	uiarena
 SetTalkFlag	080069AC	thumb	uiarena
 SetActiveTalkFace	0800773C	thumb	uiarena
 SetTextFont	08003C68	thumb	uiarena
-InitSystemTextFont	080042E0	thumb	uiarena
 PutNumber	08004A90	thumb	uiarena
 gMid_Lv	08A73210	data	uiarena
 StartBgmCore	08002398	thumb	uiarena

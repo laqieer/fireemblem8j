@@ -855,7 +855,6 @@
 080BC29C	62	MapRoute_BeginRouteTransition	worldmap_path
 080C6104	62	Title_PrepareLightExplosionFx	titlescreen
 080CA9F8	62	OpAnimCalcObjSlideIn	opanim-main
-080043A8	64	InitSystemTextFont	fontgrp
 080043E8	64	InitTalkTextFont	fontgrp
 080241DC	64	StealCommandEffect	bmmenu
 080237F8	64	ItemSubMenu_EquipItem	bmmenu
