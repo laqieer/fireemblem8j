@@ -19,7 +19,6 @@ AtMenu_DrawSubmenuOptions	08098234	thumb	prep_atmenu_080982E4
 Prep_GetSupportItemBitIndex	08097374	thumb	prep_atmenu_0809830C
 CleanupPrepMenuScreen	080982B8	thumb	prep_atmenu_0809830C
 SetPrepScreenMenuPosition	080994E4	thumb	prep_atmenu_0809830C
-AtMenu_EndScreenElements	08097F0C	thumb	prep_atmenu_08098600
 StartPrepItemScreen	0809C23C	thumb	prep_atmenu_08098600
 ProcScr_PrepUnitScreen	08A94BD0	data	prep_atmenu_08098600
 StartFortuneSubMenu	080A2BF8	thumb	prep_atmenu_08098600
