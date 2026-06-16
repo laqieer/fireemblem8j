@@ -1261,7 +1261,6 @@
 08022C30	102	DisplayUnitStandingAttackRange	bmmenu
 080230F0	102	PlayDanceCommandUsabilityCommon	bmmenu
 080232E8	102	ItemCommandEffect	bmmenu
-0802A398	102	BattleGenerate	bmbattle
 0802AC90	102	ComputeBattleUnitEffectiveCritRate	bmbattle
 0803AC90	102	AiCouldReachByBirdsEyeDistance	cp_utility
 0804ADA0	102	GetUnitBestWeaponPower	sio_battlemap
