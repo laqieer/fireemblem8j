@@ -21,7 +21,6 @@ LoadChapterTraps	080379A8	thumb	bmio_08030D50
 StartBMapMain	08031108	thumb	bmio_08030D50
 BMapVSync_Start	080300A0	thumb	bmio_08030E94
 Proc_EndEachMarked	08002F90	thumb	bmio_0803113C
-ArenaResume	080317DC	thumb	bmio_08031344
 BattleGenerateArena	0802CC9C	thumb	bmio_08031344
 StartArenaResultsScreen	080BA310	thumb	bmio_08031344
 SaveEndgameRankings	080A881C	thumb	bmio_080313FC
