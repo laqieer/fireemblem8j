@@ -653,7 +653,6 @@ Pal_MenuScrollBar	08A964FC	data	prep_menuscroll
 LinkTargets	08050684	thumb	uiselecttarget
 GetFurthestTargetDistance	08050970	thumb	uiselecttarget
 PutUnitSprite	08027AF4	thumb	prep_unitswap
-PrepUnitSwapProc_Init	0801E6BC	thumb	prep_unitswap
 GetBattleAnimRoundTypeFlags	08059864	thumb	banim-efxhpbar
 NewEfxDamageMojiEffect	0806E940	thumb	banim-efxhpbar
 gEkrHpBarCount	02017728	data	banim-efxhpbar

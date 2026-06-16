@@ -1447,7 +1447,6 @@
 080C4664	128	EndingCredits_Loop_Main	ending_credits
 08008FB4	130	SpriteTextScroll_OnIdle	scene
 080169A8	130	DrawItemMenuLineNoColor	bmitem
-0801EA64	130	PrepUnitSwapProc_Init	prep_unitswap
 0802C534	130	GetBattleUnitExpGain	bmbattle
 080A3724	130	UpdateBestGlobalSupportValue	bmsave-lib
 080BF210	130	StartGmMoveCursor	worldmap_scrollmanage
