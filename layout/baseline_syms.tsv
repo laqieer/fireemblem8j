@@ -609,7 +609,6 @@ AnimCreate	08004E50	thumb	banim-ekrmainmini
 gBattleStats	0203A4D0	data	danceringfx
 ProcBmFx_CommonEnd	08021360	thumb	danceringfx
 pMADebugInfoData	08A13E98	data	mapanim_debug
-Text_InsertDrawNumberOrBlank	080043DC	thumb	mapanim_debug
 MADebugStrings1	08A13DF8	data	mapanim_debug
 ProcScr_DebugMonitor	085C2EDC	data	mapanim_debug
 ResetText	08003BC4	thumb	mapanim_debug

@@ -420,7 +420,6 @@
 080C128C	32	GmapEffect_OnEnd	worldmap_effect
 080C6424	32	StartTitleScreen_WithMusic	titlescreen
 08004480	34	Text_InsertDrawString	fontgrp
-080044A4	34	Text_InsertDrawNumberOrBlank	fontgrp
 0800662C	34	FaceChange_LockChildProcs	face
 0800C8B0	34	EventAF_WmShowTextBox	eventscr_gmap
 0800C8D4	34	EventB0_WmHideTextBox_Bugged	eventscr_gmap
