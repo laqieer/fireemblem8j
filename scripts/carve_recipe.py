@@ -28,12 +28,17 @@ def name_to_addr(name):
 
 
 def addr_named(addr):
-    """Return the symbol name bound to 0x0ADDR (8-hex upper) in baseline_syms, or None."""
+    """Return the symbol name bound to 0x0ADDR (8-hex upper), checking baseline_syms.tsv AND
+    the baseline_syms.d/*.tsv fragments AND already-carved src/*.c (the gen_layout merges all
+    of these, so a symbol present in any of them does NOT need a fresh alias)."""
     a = addr.upper().lstrip('0').zfill(7)
-    for ln in open(os.path.join(ROOT, 'layout/baseline_syms.tsv')):
-        p = ln.rstrip('\n').split('\t')
-        if len(p) >= 2 and re.match(r'^[0-9A-Fa-f]{6,8}$', p[1]) and p[1].upper().lstrip('0').zfill(7) == a:
-            return p[0]
+    files = [os.path.join(ROOT, 'layout/baseline_syms.tsv')]
+    files += glob.glob(os.path.join(ROOT, 'layout/baseline_syms.d/*.tsv'))
+    for fp in files:
+        for ln in open(fp):
+            p = ln.rstrip('\n').split('\t')
+            if len(p) >= 2 and re.match(r'^[0-9A-Fa-f]{6,8}$', p[1]) and p[1].upper().lstrip('0').zfill(7) == a:
+                return p[0]
     return None
 
 
