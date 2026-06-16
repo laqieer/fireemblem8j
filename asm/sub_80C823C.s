@@ -3,11 +3,11 @@
 	.set Proc_FindBegin, 0x0800347C + 1
 	.set Proc_FindNext, 0x0800348C + 1
 	.section .text.sub_80C823C, "ax", %progbits
-@ sub_80C823C @ JP 0x080C823C - region-different, gbadisasm descriptive asm (D23)
+@ IsGmAutoMuActiveFor @ JP 0x080C823C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C823C
+	.global IsGmAutoMuActiveFor
 	.thumb_func
-sub_80C823C:
+IsGmAutoMuActiveFor:
 	push {r4, lr}
 	sub sp, #0xc
 	adds r4, r0, #0

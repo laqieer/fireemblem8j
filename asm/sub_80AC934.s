@@ -5,11 +5,11 @@
 	.set SetBlendTargetB, 0x08001E5C + 1
 	.set SetPrimaryHBlankHandler, 0x08001D28 + 1
 	.section .text.sub_80AC934, "ax", %progbits
-@ sub_80AC934 @ JP 0x080AC934 - region-different, gbadisasm descriptive asm (D23)
+@ Minimap_InitOpenAnim @ JP 0x080AC934 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80AC934
+	.global Minimap_InitOpenAnim
 	.thumb_func
-sub_80AC934:
+Minimap_InitOpenAnim:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

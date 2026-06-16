@@ -4,11 +4,11 @@
 	.set SetBlendTargetB, 0x08001E5C + 1
 	.set m4aSongNumStart, 0x080D4EF4 + 1
 	.section .text.sub_80ACBD0, "ax", %progbits
-@ sub_80ACBD0 @ JP 0x080ACBD0 - region-different, gbadisasm descriptive asm (D23)
+@ Minimap_InitCloseAnim @ JP 0x080ACBD0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80ACBD0
+	.global Minimap_InitCloseAnim
 	.thumb_func
-sub_80ACBD0:
+Minimap_InitCloseAnim:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r5, r0, #0

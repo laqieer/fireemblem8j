@@ -4,11 +4,11 @@
 	.set GetUnitMovementCost, 0x08018A60 + 1
 	.set sub_80D65E0, 0x080D65E0 + 1
 	.section .text.sub_803A99C, "ax", %progbits
-@ sub_803A99C @ JP 0x0803A99C - region-different, gbadisasm descriptive asm (D23)
+@ AiFindTargetInReachByFunc @ JP 0x0803A99C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803A99C
+	.global AiFindTargetInReachByFunc
 	.thumb_func
-sub_803A99C:
+AiFindTargetInReachByFunc:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

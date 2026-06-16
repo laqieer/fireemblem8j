@@ -1,5 +1,5 @@
 	.syntax unified
-	.set sub_803A99C, 0x0803A99C + 1
+	.set AiFindTargetInReachByFunc, 0x0803A99C + 1
 	.set sub_803BA10, 0x0803BA10 + 1
 	.section .text.sub_803CDA8, "ax", %progbits
 @ sub_803CDA8 @ JP 0x0803CDA8 - region-different, gbadisasm descriptive asm (D23)
@@ -18,7 +18,7 @@ sub_803CDA8:
 	ldr r0, _0803CDE8 @ =sub_803C7A8
 	add r5, sp, #4
 	adds r1, r5, #0
-	bl sub_803A99C
+	bl AiFindTargetInReachByFunc
 	lsls r0, r0, #0x18
 	asrs r4, r0, #0x18
 	cmp r4, #1
@@ -41,7 +41,7 @@ _0803CDEC:
 	ldr r0, _0803CE24 @ =sub_803C7F4
 	add r5, sp, #4
 	adds r1, r5, #0
-	bl sub_803A99C
+	bl AiFindTargetInReachByFunc
 	lsls r0, r0, #0x18
 	asrs r4, r0, #0x18
 	cmp r4, #1
