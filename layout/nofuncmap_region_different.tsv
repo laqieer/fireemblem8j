@@ -1407,7 +1407,6 @@
 0800B764	124	Spline_SetupChannels	spline
 08010E6C	124	EventShinningCursorAdvance	eventscr2
 0805AFA0	124	RegisterBanimTerrainTmByPos	banim-ekrmainmini
-080605E8	124	StartSubSpell_efxHazymoonOBJ2	banim-efxmagic-eclipse
 0806B2C0	124	StartSubSpell_efxDarkLongMonsOBJ	banim-efxmagic-shadowshot
 0807A984	124	MapAnim_DisplayDeathQuote	mapanim
 08080530	124	MapanimEventcall_SummonLoadFrame	mapanim_eventcall
