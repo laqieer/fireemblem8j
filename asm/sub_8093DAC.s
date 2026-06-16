@@ -3,11 +3,11 @@
 	.set SetBlendTargetA, 0x08001E20 + 1
 	.set SetBlendTargetB, 0x08001E5C + 1
 	.section .text.sub_8093DAC, "ax", %progbits
-@ sub_8093DAC @ JP 0x08093DAC - region-different, gbadisasm descriptive asm (D23)
+@ UnitList_SetBlendEffects @ JP 0x08093DAC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8093DAC
+	.global UnitList_SetBlendEffects
 	.thumb_func
-sub_8093DAC:
+UnitList_SetBlendEffects:
 	push {r4, lr}
 	sub sp, #4
 	movs r0, #1

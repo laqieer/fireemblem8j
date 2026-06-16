@@ -3,11 +3,11 @@
 	.set Proc_Goto, 0x08002E74 + 1
 	.set SioTeamList_SetTeamSpriteXOffsets, 0x08044200 + 1
 	.section .text.sub_804421C, "ax", %progbits
-@ sub_804421C @ JP 0x0804421C - region-different, gbadisasm descriptive asm (D23)
+@ SioTeamList_1 @ JP 0x0804421C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804421C
+	.global SioTeamList_1
 	.thumb_func
-sub_804421C:
+SioTeamList_1:
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	ldr r7, [r4, #0x2c]

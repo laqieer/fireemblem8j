@@ -3,11 +3,11 @@
 	.set SetBlendTargetA, 0x08001E20 + 1
 	.set SetBlendTargetB, 0x08001E5C + 1
 	.section .text.sub_804E50C, "ax", %progbits
-@ sub_804E50C @ JP 0x0804E50C - region-different, gbadisasm descriptive asm (D23)
+@ SetLinkArenaResultBlend @ JP 0x0804E50C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804E50C
+	.global SetLinkArenaResultBlend
 	.thumb_func
-sub_804E50C:
+SetLinkArenaResultBlend:
 	push {r4, lr}
 	sub sp, #4
 	movs r0, #1
