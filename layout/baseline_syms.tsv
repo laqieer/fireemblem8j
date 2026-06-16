@@ -597,7 +597,6 @@ EkrDemonkingObj_StartDissolveProc	0807A310	thumb	banim-ekrdragon-demonkingobj
 GetAISLayerId	0805AEF8	thumb	banim-ekrmainmini
 StartClassReelSpellAnim	08071104	thumb	banim-ekrmainmini
 RegisterAISSheetGraphics	0805A6E0	thumb	banim-ekrmainmini
-NewEkrChienCHR	0805A6B0	thumb	banim-ekrmainmini
 BanimDefaultModeConfig	080DFF00	data	banim-ekrmainmini
 BanimScr_DefaultAnim	085E3F8C	data	banim-ekrmainmini
 AnimCreate	08004E50	thumb	banim-ekrmainmini
