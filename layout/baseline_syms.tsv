@@ -578,7 +578,6 @@ OnMain	08015318	thumb	banim-ekrarena
 OnVBlank	080152C8	thumb	banim-ekrarena
 NewEkrUnitKakudai	08057888	thumb	banim-ekrbattleending
 NewEkrBaseKaiten	08057424	thumb	banim-ekrbattleending
-NewEkrWindowAppear	08057CAC	thumb	banim-ekrbattleending
 gEkrBmLocation	0203E11E	data	banim-ekrbattleending
 ResetUnitSprites	0802662C	thumb	banim-ekrbattleending
 BMapDispResume_FromBattleDelayed	080310A0	thumb	banim-ekrbattleending
