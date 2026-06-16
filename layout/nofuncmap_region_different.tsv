@@ -1085,7 +1085,6 @@
 080028FC	84	Sound_SetupMaxChannelsForSong	soundwrapper
 08012C34	84	StartEventEarthQuake	eventfx-earthquake
 080180CC	84	UnitApplyBonusLevels	bmunit
-0801DC7C	84	Make6CKOIDO	koido
 0801E1FC	84	SendToConvoyMenu_Selected	convoymenu
 08021DA4	84	StartEventWarpAnim_unused	eventwarpfx
 08024348	84	StealItemMenuCommand_Draw	bmmenu
