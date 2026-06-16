@@ -8,7 +8,7 @@
 	.set sub_801B620, 0x0801B620 + 1
 	.set sub_801B668, 0x0801B668 + 1
 	.set sub_803BA10, 0x0803BA10 + 1
-	.set sub_803D648, 0x0803D648 + 1
+	.set AiAttemptCombatWithinMovement, 0x0803D648 + 1
 	.set sub_803D864, 0x0803D864 + 1
 	.section .text.sub_803F0EC, "ax", %progbits
 @ sub_803F0EC @ JP 0x0803F0EC - region-different, gbadisasm descriptive asm (D23)
@@ -217,7 +217,7 @@ _0803F27C:
 	bge _0803F1FA
 _0803F282:
 	ldr r0, _0803F2B8 @ =sub_803C7A8
-	bl sub_803D648
+	bl AiAttemptCombatWithinMovement
 	ldr r0, _0803F2BC @ =0x0203AA90
 	ldrb r0, [r0, #0xa]
 	lsls r0, r0, #0x18
