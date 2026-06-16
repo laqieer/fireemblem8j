@@ -1,0 +1,3 @@
+ProcScr_efxTwobaiRST	085FF1E8	data	ProcScr for NewEfxTwobaiRST
+gpBg1ScrollOffsetList1	0201FDC4	data	EWRAM scroll offset list 1
+gpBg1ScrollOffsetList2	0201FF04	data	EWRAM scroll offset list 2
