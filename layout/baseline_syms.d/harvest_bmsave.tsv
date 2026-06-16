@@ -3,7 +3,6 @@ WriteAndVerifySramFast	080D6548	thumb	bmsave_080A9A28
 WriteGameSavePackedUnit	080A9D54	thumb	bmsave_080A9A28
 SGM_SetCharacterKnown	080A81EC	thumb	bmsave_080A9A28
 WriteGlobalSaveInfo	080A77EC	thumb	bmsave_080A9A28
-WriteGMMonsterRnState	080AA3F8	thumb	bmsave_080A9A28
 WriteBonusContentClaimFlags	080A9784	thumb	bmsave_080A9A28
 WriteLastGameSaveId	080A97C4	thumb	bmsave_080A9A28
 gPlaySt	0202BCEC	data	bmsave_080A9A28
