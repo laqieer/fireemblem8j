@@ -1055,7 +1055,6 @@
 0803943C	80	DungeonRecordUi_ClearCountAnim_Init	bmdifficulty
 0803CAE4	80	AiScriptCmd_08_DoStandardActionAgainstClass	cp_script
 08044700	80	TacticianDrawCharacters	sio_tactician
-08045494	80	StartDrawLinkArenaRankSprites	sio_postbattle
 0804B71C	80	LABattleMap_StartBonusPointsHelp	sio_battlemap
 080548E0	80	NewEfxFlashUnitEffectEnd	banim-efxflashunit
 0805D59C	80	StartSubSpell_efxDarkbreathBG	banim-efxmagic-breath

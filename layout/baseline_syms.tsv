@@ -383,7 +383,6 @@ Font_Sio_0	02000C60	data	sio_postbattle
 Texts_1	0203DB10	data	sio_postbattle
 UpdateLinkArenaActiveBannerBgGlow	0804E468	thumb	sio_postbattle
 SioPostBattle_DrawRankingRowBar	08045484	thumb	sio_postbattle
-StartDrawLinkArenaRankSprites	08045434	thumb	sio_postbattle
 gUnk_Sio_16	0203DD8C	data	sio_postbattle
 m4aMPlayFadeOut	080D508C	thumb	sio_postbattle
 gSongTable	08214120	data	sio_postbattle
