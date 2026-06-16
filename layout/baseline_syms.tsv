@@ -863,7 +863,6 @@ Tsa_ChapterIntro_Fog	08BB272C	data	chapterintrofx
 ChapterIntro_LightBurst_Init	080204EC	thumb	chapterintrofx
 RestoreBgm	080025C0	thumb	classchg-main
 OverrideBgm	08002570	thumb	classchg-main
-Check3rdTraineeEnabled	080D19A0	thumb	classchg-menuselect
 ProcScr_ClassChgMenuSel	08BABA58	data	classchg-menuselect
 AiTryDoDanceAdjacent	0803ECB8	thumb	cp_0803E2F4
 AiTryDoStealAdjacent	0803EDDC	thumb	cp_0803E2F4

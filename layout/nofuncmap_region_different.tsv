@@ -799,7 +799,6 @@
 080A1930	58	SupportScreen_RestartSourceScreenMusic	uisupport
 080AA69C	58	BonusClaimMenu_WaitInput	savemenu
 080C6090	58	Title_Loop_MainLogoZoom	titlescreen
-080CCCA4	58	Check3rdTraineeEnabled	classchg-sel
 080CDCC4	58	ClassChgMenuItem_OnTextDraw	classchg-menuselect
 080044C8	60	Text_DrawStringASCII	fontgrp
 08004144	60	Text_DrawNumberOrBlank	fontgrp
