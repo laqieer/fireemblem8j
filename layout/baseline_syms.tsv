@@ -566,7 +566,6 @@ NewEkrBattle	08050B48	thumb	banim-ekrarena
 gEkrInitialHitSide	0203E0FC	data	banim-ekrarena
 LZ77UnCompVram	080D6390	thumb	banim-ekrarena
 LZ77UnCompWram	080D6394	thumb	banim-ekrarena
-NewEkrTogiColor	0805C0F0	thumb	banim-ekrarena
 EndEkrTogiColor	0805C124	thumb	banim-ekrarena
 gProc_ekrTogiEnd	085E403C	data	banim-ekrarena
 EndEkrGauge	08051EA0	thumb	banim-ekrarena

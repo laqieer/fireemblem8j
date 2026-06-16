@@ -684,7 +684,6 @@
 08037928	52	AddGorgonEggTrap	bmtrap
 08048E84	52	PointsSpriteText_Init	sio_points
 08049238	52	StartLinkArenaShowPointsAnimated	sio_points
-0805B34C	52	NewEkrTogiColor	banim-ekrarena
 0805FD5C	52	StartSubSpell_efxPurgeOBJRND	banim-efxmagic-light
 08068314	52	StartSubSpell_efxNaglfarOBJRockGyre	banim-efxmagic-naglfar
 080693CC	52	efxDarkGradoBG02_0	banim-efxmagic-gleipnir
