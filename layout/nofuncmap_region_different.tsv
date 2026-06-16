@@ -654,7 +654,6 @@
 080391D0	48	DungeonRecordUi_SpawnUpdateValueProc	bmdifficulty
 08045610	48	SioPostBattle_StartMusicProc	sio_postbattle
 0805B3CC	48	StartSpellAnimation	banim-efxmagic
-0805F838	48	StartSubSpell_efxResireRST	banim-efxmagic-nosferatu
 0806428C	48	StartSubSpell_efxLunaRST	banim-efxmagic-luna
 080896A8	48	PutChapterTitleBGAlt	chapter_title
 080AA1BC	48	SaveMenuPostExtraMiscScreen	savemenu
