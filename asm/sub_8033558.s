@@ -98,7 +98,7 @@ _08033612:
 	bl sub_80992B4
 	ldr r0, _08033654 @ =sub_80332B4
 	bl sub_80992D0
-	ldr r0, _08033658 @ =sub_8033544
+	ldr r0, _08033658 @ =PrepMapMenu_OnEnd
 	bl sub_80992EC
 	movs r0, #0xa
 	movs r1, #2
@@ -116,5 +116,5 @@ _08033648: .4byte 0x08033369  @ sub_8033368
 _0803364C: .4byte 0x0000050D
 _08033650: .4byte 0x080332D5  @ sub_80332D4
 _08033654: .4byte 0x080332B5  @ sub_80332B4
-_08033658: .4byte 0x08033545  @ sub_8033544
+_08033658: .4byte 0x08033545  @ PrepMapMenu_OnEnd
 
