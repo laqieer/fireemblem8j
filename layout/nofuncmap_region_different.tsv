@@ -987,7 +987,6 @@
 080151F4	72	MatRotC	bmlib-math
 08015BD4	72	UpdateStatArrowSprites	bm
 08016800	72	CanUnitUseStaffNow	bmitem
-08019108	72	RefreshAllies	bmunit
 0801C1DC	72	StartupDebugMenu_WorldMapEffect	bmdebug
 08024144	72	ArenaCommandEffect	bmmenu
 08034A5C	72	DrawUnitConText	unitinfowindow

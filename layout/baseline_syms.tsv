@@ -432,7 +432,6 @@ StartFaceFadeOut	08005E3C	thumb	cgtext
 gProcScr_E_FACE	085B8EEC	data	cgtext
 SetDialogueSkipEvBit	0800D6A8	thumb	cgtext
 GetBattleMapKind	080C1E74	thumb	eventinfo
-RefreshAllies	08018E1C	thumb	eventinfo
 EventScr_SkirmishCommonEnd	08A71E1C	data	eventinfo
 CheckFlag	080860D0	thumb	eventinfo
 ShouldCallEndEvent	08085588	thumb	eventinfo
