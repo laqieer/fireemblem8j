@@ -6,7 +6,6 @@ gEkrBattleEndFlag	02017724	data	banim-ekrbattle_08050B44
 gEkrDebugTimer	02000018	data	banim-ekrbattle_08050B44
 gEkrDebugUnk1	0200001C	data	banim-ekrbattle_08050B44
 gEkrDebugUnk2	02000020	data	banim-ekrbattle_08050B44
-EkrMainEndExec	08056BC0	thumb	banim-ekrbattle_08050B44
 ClearSprites	080052AC	thumb	banim-ekrbattle_08050B44
 UnregisterEfxSoundSeExist	08073F70	thumb	banim-ekrbattle_08050B44
 Proc_Run	08002DD4	thumb	banim-ekrbattle_08050B44
