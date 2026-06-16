@@ -33,6 +33,19 @@ def name_to_addr(name):
             m = re.search(rf'\.set\s+{re.escape(name)},\s*0x([0-9A-Fa-f]+)', ln)
             if m:
                 return m.group(1).upper().zfill(8)
+    # 3) named-but-still-asm: a `.global NAME` inside asm/sub_<hex>.s (fingerprint-named
+    #    region-diff backlog) — the address is the file's sub_<hex>. Lets autocarve
+    #    attempt matching-C on the named set (GetColorLut was a classifier false-neg).
+    import glob
+    for f in glob.glob(os.path.join(ROOT, 'asm/sub_*.s')):
+        try:
+            txt = open(f, errors='replace').read()
+        except OSError:
+            continue
+        if re.search(rf'^\s*\.global\s+{re.escape(name)}\b', txt, re.M):
+            m = re.match(r'sub_([0-9A-Fa-f]+)\.s$', os.path.basename(f))
+            if m:
+                return m.group(1).upper().zfill(8)
     return None
 
 
