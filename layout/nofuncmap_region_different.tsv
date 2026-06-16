@@ -332,7 +332,6 @@
 080C1A58	26	GmapTimeMons_WaitSpriteDone	worldmap_timemons
 080C1E54	26	GmapRmUpdateExt_Delay	worldmap_rm
 080C8564	26	OpAnimApplyScrollAndPalettes	opanim-main
-08001470	28	AsnycKeyStatus	hardware
 0800C0D4	28	Event8C_WmSetCursor_Unsure	eventscr_gmap
 080246C0	28	DropSelection_OnConstruction	bmmenu
 080248A8	28	PickSelection_OnInit	bmmenu
