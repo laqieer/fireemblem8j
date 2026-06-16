@@ -1634,7 +1634,6 @@
 080146A0	170	PutTmAnimFrame	bmlib
 080A7138	170	ReadWorldMapStuff	bmsave-gmap
 080B6674	170	PrepareUnitDefeatLocationString	ending_details
-08002574	172	StartBgmFadeIn	soundwrapper
 0800BFD8	172	Event88_WmScrollCameraOntoUnit	eventscr_gmap
 08029AE0	172	RepairMenuItemSelect	bmitemuse
 0803DFBC	172	AiGetFriendZoneCombatScoreComponent	cp_battle
