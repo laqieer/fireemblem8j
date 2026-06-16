@@ -1175,7 +1175,6 @@ gUnk_71	03004E14	data	sio_core
 gUnk_75	03004F10	data	sio_core
 UnpackLegacyUiFrameImage	0804EE5C	thumb	uiutils
 UnpackLegacyUiFramePalette	0804EDFC	thumb	uiutils
-UnpackUiFrameImage	0804EE8C	thumb	uiutils
 UnpackUiFramePalette	0804EE2C	thumb	uiutils
 gLegacyUiFrameAPalette	085E1740	data	uiutils
 gLegacyUiFrameBPalette	085E2034	data	uiutils
