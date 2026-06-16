@@ -868,7 +868,6 @@
 0800A240	64	GetStringFromIndex	msg
 080241DC	64	StealCommandEffect	bmmenu
 080237F8	64	ItemSubMenu_EquipItem	bmmenu
-0802EB10	64	DisableAllLightRunes	bmtrick
 0803B7C8	64	AiGetUnitStealItemSlot	cp_utility
 08045C28	64	SioMain2_WaitEndAndRoute	sio_bat
 08053678	64	NewEfxQuakePure	banim-efxbattle

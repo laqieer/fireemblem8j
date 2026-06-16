@@ -901,7 +901,6 @@ SetBattleUnitWeaponBallista	0802A884	thumb	eventscr3
 SetBattleUnitWeapon	0802A69C	thumb	eventscr3
 BattleInitTargetCanCounter	0802C77C	thumb	eventscr3
 BattleApplyWeaponTriangleEffect	0802C6F8	thumb	eventscr3
-DisableAllLightRunes	0802EA48	thumb	eventscr3
 SetBattleUnitTerrainBonusesAuto	0802A648	thumb	eventscr3
 BattleGenerate	0802A324	thumb	eventscr3
 BattleUnitTargetCheckCanCounter	0802C678	thumb	eventscr3
