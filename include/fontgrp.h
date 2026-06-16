@@ -43,6 +43,8 @@ struct Font {
     /*0x16*/ u8 lang;
 };
 
+extern struct Font *gActiveFont;
+
 struct TextInitInfo {
     struct Text *text;
     u8 width;
