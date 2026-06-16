@@ -220,7 +220,6 @@ gUisupport_1	02014FE4	data	colorfade
 UpdateAllPhaseHealingAIStatus	0803E5D0	thumb	cp_phase
 SetupUnitInventoryAIFlags	0803BFF4	thumb	cp_phase
 gAiItemConfigTable	080DD214	data	cp_phase
-BG_GetMapBuffer	08001BC0	thumb	cursor_hand
 PutSprite	080052F0	thumb	cursor_hand
 RegisterDataMove	08001F64	thumb	emitstarfx
 LetsEmitStars	08021F08	thumb	emitstarfx
@@ -586,7 +585,6 @@ gEkrBgPosition	0201FB0C	data	banim-ekrdragon-demonkingobj
 gUnk_77	03004F94	data	banim-ekrdragon-demonkingobj
 gEkrdragonDemonkingobj_2	08856004	data	banim-ekrdragon-demonkingobj
 SetBlackPal	08013B3C	thumb	banim-ekrdragon-demonkingobj
-EkrDemonkingObj_StartDissolveProc	0807A310	thumb	banim-ekrdragon-demonkingobj
 GetAISLayerId	0805AEF8	thumb	banim-ekrmainmini
 StartClassReelSpellAnim	08071104	thumb	banim-ekrmainmini
 RegisterAISSheetGraphics	0805A6E0	thumb	banim-ekrmainmini
