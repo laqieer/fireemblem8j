@@ -1134,7 +1134,6 @@
 0804C260	88	StartSioWarpFxPartial	sio_mu
 0804F64C	88	StartSemiCenteredOrphanMenu	uimenu
 0804D24C	88	UpdateLinkArenaMenuScrollBar	sio_uiutils
-08060514	88	StartSubSpell_efxHazymoonBG_C	banim-efxmagic-eclipse
 08062608	88	StartSubSpell_efxSilenceOBJ	banim-efxmagic-effectstaves
 08062898	88	StartSubSpell_efxSleepOBJ	banim-efxmagic-effectstaves
 08062BAC	88	StartSubSpell_efxHammarneOBJ	banim-efxmagic-effectstaves
