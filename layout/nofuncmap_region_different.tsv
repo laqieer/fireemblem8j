@@ -815,7 +815,6 @@
 0802439C	60	StealItemMenuCommand_Effect	bmmenu
 08029C34	60	DoUseBarrierStaff	bmitemuse
 0802E470	60	RefreshAllLightRunes	bmtrick
-0802EB50	60	EnableAllLightRunes	bmtrick
 0804F7AC	60	OverriddenMenuAvailability	uimenu
 080547DC	60	NewEfxFlashUnit	banim-efxflashunit
 0805D2EC	60	StartSubSpell_efxFirebreathBGCOL	banim-efxmagic-breath

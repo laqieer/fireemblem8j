@@ -904,7 +904,6 @@ BattleApplyWeaponTriangleEffect	0802C6F8	thumb	eventscr3
 DisableAllLightRunes	0802EA48	thumb	eventscr3
 SetBattleUnitTerrainBonusesAuto	0802A648	thumb	eventscr3
 BattleGenerate	0802A324	thumb	eventscr3
-EnableAllLightRunes	0802EA88	thumb	eventscr3
 BattleUnitTargetCheckCanCounter	0802C678	thumb	eventscr3
 BattleUnitTargetSetEquippedWeapon	0802C624	thumb	eventscr3
 WMLoc_GetNextLocId	080C0414	thumb	eventscr_gmap
