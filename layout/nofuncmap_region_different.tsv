@@ -1246,7 +1246,6 @@
 08047A54	100	SioMenu_GetItemHelpText	sio_menu
 0804D8DC	100	SioWeaponSelectMenu_Draw	sio_menudef
 0805E430	100	StartSubSpell_efxFimbulvetrOBJ	banim-efxmagic-fimbulvetr
-080604B0	100	StartSubSpell_efxHazymoonBG_B	banim-efxmagic-eclipse
 080659AC	100	StartSpellBG_IvaldiBG1	banim-efxmagic-ivaldi
 08065B54	100	StartSpellBG_IvaldiBG3	banim-efxmagic-ivaldi
 0806B1E8	100	StartSubSpell_efxDarkLongMonsBG02	banim-efxmagic-shadowshot
