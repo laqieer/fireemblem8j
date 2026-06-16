@@ -575,7 +575,6 @@ EndEkrGauge	08051EA0	thumb	banim-ekrarena
 SetInterrupt_LCDVBlank	08001208	thumb	banim-ekrarena
 OnMain	08015318	thumb	banim-ekrarena
 OnVBlank	080152C8	thumb	banim-ekrarena
-NewEkrUnitKakudai	08057888	thumb	banim-ekrbattleending
 NewEkrBaseKaiten	08057424	thumb	banim-ekrbattleending
 gEkrBmLocation	0203E11E	data	banim-ekrbattleending
 ResetUnitSprites	0802662C	thumb	banim-ekrbattleending
