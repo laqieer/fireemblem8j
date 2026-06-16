@@ -897,7 +897,6 @@ BattleUnitTargetCheckCanCounter	0802C678	thumb	eventscr3
 BattleUnitTargetSetEquippedWeapon	0802C624	thumb	eventscr3
 WMLoc_GetNextLocId	080C0414	thumb	eventscr_gmap
 ResetGmStoryNode	080C1DC0	thumb	eventscr_gmap
-StartGmBaseEntry	080C48D0	thumb	eventscr_gmap
 GmBaseEntryExists	080C4918	thumb	eventscr_gmap
 EndGmBaseEntry	080C4908	thumb	eventscr_gmap
 FaceChibiSpr_OnIdle	080059D8	thumb	face

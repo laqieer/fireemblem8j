@@ -1,0 +1,2 @@
+Proc_StartBlocking	08002C30	thumb	callee of StartGmBaseEntry
+gProcScr_GmapBaseEntry	08AC1F54	data	ProcScr for StartGmBaseEntry

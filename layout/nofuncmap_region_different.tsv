@@ -754,7 +754,6 @@
 080ACA4C	56	UiCursorHand_0	cursor_hand
 080ACDA4	56	SetUiSpinningArrowFastMaybe	spinning_arrow
 080AE964	56	StartMixPalette	sysutil
-080BFAEC	56	StartGmBaseEntry	worldmap_entry
 080BFCC8	56	StartGmapMuEntry1	worldmap_entry
 080C07D4	56	StartWorldmapSkirmishAnim	worldmap_tm_confront
 080C3D24	56	GMapRadar_SlideIn	worldmap_radar
