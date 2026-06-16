@@ -9,11 +9,11 @@
 	.set sub_80B6DA0, 0x080B6DA0 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
 	.section .text.sub_80B6E24, "ax", %progbits
-@ sub_80B6E24 @ JP 0x080B6E24 - region-different, gbadisasm descriptive asm (D23)
+@ Config_Loop_KeyHandler @ JP 0x080B6E24 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B6E24
+	.global Config_Loop_KeyHandler
 	.thumb_func
-sub_80B6E24:
+Config_Loop_KeyHandler:
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	movs r3, #0

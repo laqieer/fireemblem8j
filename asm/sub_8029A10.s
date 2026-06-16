@@ -2,7 +2,7 @@
 	.set BG_EnableSyncByMask, 0x08001EFC + 1
 	.set GetUnit, 0x08019108 + 1
 	.set IsItemHammernable, 0x08016E28 + 1
-	.set sub_8016688, 0x08016688 + 1
+	.set DrawItemMenuLineLong, 0x08016688 + 1
 	.section .text.sub_8029A10, "ax", %progbits
 @ RepairMenuItemDraw @ JP 0x08029A10 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -40,7 +40,7 @@ RepairMenuItemDraw:
 	ldr r1, _08029A68 @ =0x02022CA8
 	adds r3, r3, r1
 	adds r1, r4, #0
-	bl sub_8016688
+	bl DrawItemMenuLineLong
 	movs r0, #1
 	bl BG_EnableSyncByMask
 	movs r0, #0

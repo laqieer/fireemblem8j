@@ -3,7 +3,7 @@
 	.set Proc_StartBlocking, 0x08002C30 + 1
 	.set sub_8002EB4, 0x08002EB4 + 1
 	.set sub_800BF3C, 0x0800BF3C + 1
-	.set sub_8012038, 0x08012038 + 1
+	.set StartEventBattle, 0x08012038 + 1
 	.set sub_80153A4, 0x080153A4 + 1
 	.set sub_802CDF4, 0x0802CDF4 + 1
 	.section .text.sub_8010B9C, "ax", %progbits
@@ -110,7 +110,7 @@ _08010C44:
 	mov r1, sb
 	ldr r2, [sp, #0x10]
 	adds r3, r5, #0
-	bl sub_8012038
+	bl StartEventBattle
 	movs r0, #2
 	b _08010C74
 	.align 2, 0

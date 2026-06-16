@@ -1,5 +1,5 @@
 	.syntax unified
-	.set sub_800BDE8, 0x0800BDE8 + 1
+	.set TriggerMapChanges, 0x0800BDE8 + 1
 	.set sub_800BE34, 0x0800BE34 + 1
 	.set sub_802E468, 0x0802E468 + 1
 	.section .text.sub_800F4D0, "ax", %progbits
@@ -91,7 +91,7 @@ _0800F568:
 	lsrs r0, r0, #0x10
 	movs r1, #0
 	adds r2, r5, #0
-	bl sub_800BDE8
+	bl TriggerMapChanges
 	b _0800F582
 _0800F576:
 	lsls r0, r2, #0x10
@@ -128,7 +128,7 @@ _0800F5AE:
 	lsls r0, r2, #0x10
 	lsrs r0, r0, #0x10
 	adds r2, r5, #0
-	bl sub_800BDE8
+	bl TriggerMapChanges
 	b _0800F5C4
 _0800F5BA:
 	lsls r0, r2, #0x10

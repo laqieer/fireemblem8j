@@ -12,11 +12,11 @@
 	.set sub_8080CB8, 0x08080CB8 + 1
 	.set sub_80841EC, 0x080841EC + 1
 	.section .text.sub_807FF28, "ax", %progbits
-@ sub_807FF28 @ JP 0x0807FF28 - region-different, gbadisasm descriptive asm (D23)
+@ MapAnimTorch_Init @ JP 0x0807FF28 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807FF28
+	.global MapAnimTorch_Init
 	.thumb_func
-sub_807FF28:
+MapAnimTorch_Init:
 	push {r4, r5, lr}
 	sub sp, #8
 	adds r5, r0, #0

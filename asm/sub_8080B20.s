@@ -12,11 +12,11 @@
 	.set sub_8080CB8, 0x08080CB8 + 1
 	.set sub_80841EC, 0x080841EC + 1
 	.section .text.sub_8080B20, "ax", %progbits
-@ sub_8080B20 @ JP 0x08080B20 - region-different, gbadisasm descriptive asm (D23)
+@ MapAnimUnlock_Init @ JP 0x08080B20 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8080B20
+	.global MapAnimUnlock_Init
 	.thumb_func
-sub_8080B20:
+MapAnimUnlock_Init:
 	push {r4, r5, lr}
 	sub sp, #0x10
 	adds r5, r0, #0

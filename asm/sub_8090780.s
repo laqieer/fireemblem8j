@@ -15,11 +15,11 @@
 	.set sub_8090710, 0x08090710 + 1
 	.set sub_80C1E74, 0x080C1E74 + 1
 	.section .text.sub_8090780, "ax", %progbits
-@ sub_8090780 @ JP 0x08090780 - region-different, gbadisasm descriptive asm (D23)
+@ ChapterStatus_DrawText @ JP 0x08090780 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8090780
+	.global ChapterStatus_DrawText
 	.thumb_func
-sub_8090780:
+ChapterStatus_DrawText:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

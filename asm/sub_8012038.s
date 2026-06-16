@@ -18,11 +18,11 @@
 	.set sub_807A888, 0x0807A888 + 1
 	.set sub_807AB0C, 0x0807AB0C + 1
 	.section .text.sub_8012038, "ax", %progbits
-@ sub_8012038 @ JP 0x08012038 - region-different, gbadisasm descriptive asm (D23)
+@ StartEventBattle @ JP 0x08012038 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8012038
+	.global StartEventBattle
 	.thumb_func
-sub_8012038:
+StartEventBattle:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

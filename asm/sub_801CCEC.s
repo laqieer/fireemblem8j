@@ -6,11 +6,11 @@
 	.set sub_801CC58, 0x0801CC58 + 1
 	.set sub_801CC70, 0x0801CC70 + 1
 	.section .text.sub_801CCEC, "ax", %progbits
-@ sub_801CCEC @ JP 0x0801CCEC - region-different, gbadisasm descriptive asm (D23)
+@ PlayerPhase_PrepareAction @ JP 0x0801CCEC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801CCEC
+	.global PlayerPhase_PrepareAction
 	.thumb_func
-sub_801CCEC:
+PlayerPhase_PrepareAction:
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	ldr r4, _0801CD2C @ =0x0203A954

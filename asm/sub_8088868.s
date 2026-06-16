@@ -6,11 +6,11 @@
 	.set sub_802B970, 0x0802B970 + 1
 	.set sub_802C134, 0x0802C134 + 1
 	.section .text.sub_8088868, "ax", %progbits
-@ sub_8088868 @ JP 0x08088868 - region-different, gbadisasm descriptive asm (D23)
+@ AutolevelSecondaryLord @ JP 0x08088868 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8088868
+	.global AutolevelSecondaryLord
 	.thumb_func
-sub_8088868:
+AutolevelSecondaryLord:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

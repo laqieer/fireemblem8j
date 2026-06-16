@@ -1,6 +1,6 @@
 	.syntax unified
 	.set sub_803AA9C, 0x0803AA9C + 1
-	.set sub_803BBC0, 0x0803BBC0 + 1
+	.set AiTryMoveTowardsNeglectWall, 0x0803BBC0 + 1
 	.section .text.sub_803CE28, "ax", %progbits
 @ sub_803CE28 @ JP 0x0803CE28 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -32,7 +32,7 @@ sub_803CE28:
 	ldrb r3, [r2, #2]
 	str r4, [sp]
 	movs r2, #0
-	bl sub_803BBC0
+	bl AiTryMoveTowardsNeglectWall
 	b _0803CE94
 	.align 2, 0
 _0803CE64: .4byte 0x030017C8
@@ -55,7 +55,7 @@ _0803CE6C:
 	ldrb r3, [r2, #2]
 	str r4, [sp]
 	movs r2, #0
-	bl sub_803BBC0
+	bl AiTryMoveTowardsNeglectWall
 _0803CE94:
 	ldrb r0, [r7]
 	adds r0, #1

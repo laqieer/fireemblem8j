@@ -8,11 +8,11 @@
 	.set sub_8043190, 0x08043190 + 1
 	.set sub_80AB41C, 0x080AB41C + 1
 	.section .text.sub_8047848, "ax", %progbits
-@ sub_8047848 @ JP 0x08047848 - region-different, gbadisasm descriptive asm (D23)
+@ SioRuleSettings_Loop_Main @ JP 0x08047848 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8047848
+	.global SioRuleSettings_Loop_Main
 	.thumb_func
-sub_8047848:
+SioRuleSettings_Loop_Main:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r6, r0, #0

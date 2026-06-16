@@ -6,11 +6,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8013008, 0x08013008 + 1
 	.section .text.sub_80CA69C, "ax", %progbits
-@ sub_80CA69C @ JP 0x080CA69C - region-different, gbadisasm descriptive asm (D23)
+@ Title_SetupSpecialEffectGraphics @ JP 0x080CA69C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80CA69C
+	.global Title_SetupSpecialEffectGraphics
 	.thumb_func
-sub_80CA69C:
+Title_SetupSpecialEffectGraphics:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	ldrh r0, [r5, #0x2a]

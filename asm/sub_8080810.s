@@ -10,11 +10,11 @@
 	.set sub_8014B50, 0x08014B50 + 1
 	.set sub_8080CB8, 0x08080CB8 + 1
 	.section .text.sub_8080810, "ax", %progbits
-@ sub_8080810 @ JP 0x08080810 - region-different, gbadisasm descriptive asm (D23)
+@ MapAnimSilence_InitGfx @ JP 0x08080810 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8080810
+	.global MapAnimSilence_InitGfx
 	.thumb_func
-sub_8080810:
+MapAnimSilence_InitGfx:
 	push {r4, r5, r6, lr}
 	sub sp, #8
 	adds r6, r0, #0

@@ -13,11 +13,11 @@
 	.set sub_80D2100, 0x080D2100 + 1
 	.set sub_80D216C, 0x080D216C + 1
 	.section .text.sub_80D1D1C, "ax", %progbits
-@ sub_80D1D1C @ JP 0x080D1D1C - region-different, gbadisasm descriptive asm (D23)
+@ LoadBattleSpritesForBranchScreen @ JP 0x080D1D1C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D1D1C
+	.global LoadBattleSpritesForBranchScreen
 	.thumb_func
-sub_80D1D1C:
+LoadBattleSpritesForBranchScreen:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

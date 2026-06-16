@@ -6,11 +6,11 @@
 	.set sub_8031E18, 0x08031E18 + 1
 	.set sub_8031E24, 0x08031E24 + 1
 	.section .text.sub_80BA69C, "ax", %progbits
-@ sub_80BA69C @ JP 0x080BA69C - region-different, gbadisasm descriptive asm (D23)
+@ ArenaUi_ResultsDialogue @ JP 0x080BA69C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BA69C
+	.global ArenaUi_ResultsDialogue
 	.thumb_func
-sub_80BA69C:
+ArenaUi_ResultsDialogue:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	bl GetPartyGoldAmount

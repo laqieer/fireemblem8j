@@ -16,11 +16,11 @@
 	.set sub_809162C, 0x0809162C + 1
 	.set sub_80923CC, 0x080923CC + 1
 	.section .text.sub_8091B88, "ax", %progbits
-@ sub_8091B88 @ JP 0x08091B88 - region-different, gbadisasm descriptive asm (D23)
+@ CgTextInterpreter_Loop_Main @ JP 0x08091B88 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8091B88
+	.global CgTextInterpreter_Loop_Main
 	.thumb_func
-sub_8091B88:
+CgTextInterpreter_Loop_Main:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

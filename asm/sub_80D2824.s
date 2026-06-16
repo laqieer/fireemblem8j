@@ -6,11 +6,11 @@
 	.set sub_8003BE8, 0x08003BE8 + 1
 	.set sub_8037B04, 0x08037B04 + 1
 	.section .text.sub_80D2824, "ax", %progbits
-@ sub_80D2824 @ JP 0x080D2824 - region-different, gbadisasm descriptive asm (D23)
+@ ClassChgMenuItem_OnSelect @ JP 0x080D2824 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D2824
+	.global ClassChgMenuItem_OnSelect
 	.thumb_func
-sub_80D2824:
+ClassChgMenuItem_OnSelect:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #8
 	adds r7, r0, #0

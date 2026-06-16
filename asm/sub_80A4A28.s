@@ -11,11 +11,11 @@
 	.set sub_80A8030, 0x080A8030 + 1
 	.set sub_80D6370, 0x080D6370 + 1
 	.section .text.sub_80A4A28, "ax", %progbits
-@ sub_80A4A28 @ JP 0x080A4A28 - region-different, gbadisasm descriptive asm (D23)
+@ SupportScreen_SetupUnits @ JP 0x080A4A28 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A4A28
+	.global SupportScreen_SetupUnits
 	.thumb_func
-sub_80A4A28:
+SupportScreen_SetupUnits:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

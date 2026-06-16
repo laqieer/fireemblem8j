@@ -9,7 +9,7 @@
 	.set sub_8037B04, 0x08037B04 + 1
 	.set sub_803AC5C, 0x0803AC5C + 1
 	.set sub_803D810, 0x0803D810 + 1
-	.set sub_803D928, 0x0803D928 + 1
+	.set AiAttemptBallistaCombat, 0x0803D928 + 1
 	.set sub_80D65D8, 0x080D65D8 + 1
 	.section .text.sub_803D648, "ax", %progbits
 @ sub_803D648 @ JP 0x0803D648 - region-different, gbadisasm descriptive asm (D23)
@@ -179,7 +179,7 @@ _0803D77A:
 	beq _0803D7B4
 	ldr r0, [sp, #0x24]
 	add r1, sp, #0xc
-	bl sub_803D928
+	bl AiAttemptBallistaCombat
 	adds r1, r0, #0
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18

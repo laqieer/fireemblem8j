@@ -36,7 +36,7 @@
 	.set sub_807032C, 0x0807032C + 1
 	.set sub_80704AC, 0x080704AC + 1
 	.set sub_80705C8, 0x080705C8 + 1
-	.set sub_8070918, 0x08070918 + 1
+	.set NewEfxSkillType01BG, 0x08070918 + 1
 	.set sub_8074050, 0x08074050 + 1
 	.set sub_80748E4, 0x080748E4 + 1
 	.set _0805A650, 0x0805A650
@@ -483,7 +483,7 @@ _08059E54:
 	cmp r0, #0
 	bne _08059EF4
 	adds r0, r7, #0
-	bl sub_8070918
+	bl NewEfxSkillType01BG
 	b _08059EF4
 _08059E6C:
 	adds r0, r7, #0
@@ -548,7 +548,7 @@ _08059EDE:
 	cmp r0, #0
 	bne _08059EF4
 	adds r0, r7, #0
-	bl sub_8070918
+	bl NewEfxSkillType01BG
 _08059EF4:
 	ldrh r1, [r7, #0x10]
 	movs r0, #0x20

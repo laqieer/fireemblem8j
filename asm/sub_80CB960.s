@@ -8,11 +8,11 @@
 	.set sub_8013008, 0x08013008 + 1
 	.set sub_80D636C, 0x080D636C + 1
 	.section .text.sub_80CB960, "ax", %progbits
-@ sub_80CB960 @ JP 0x080CB960 - region-different, gbadisasm descriptive asm (D23)
+@ OpAnimInit @ JP 0x080CB960 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80CB960
+	.global OpAnimInit
 	.thumb_func
-sub_80CB960:
+OpAnimInit:
 	push {r4, lr}
 	sub sp, #4
 	adds r4, r0, #0

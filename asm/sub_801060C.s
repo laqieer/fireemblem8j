@@ -6,11 +6,11 @@
 	.set sub_8019914, 0x08019914 + 1
 	.set sub_8027144, 0x08027144 + 1
 	.section .text.sub_801060C, "ax", %progbits
-@ sub_801060C @ JP 0x0801060C - region-different, gbadisasm descriptive asm (D23)
+@ Event35_UnitClassChanging @ JP 0x0801060C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801060C
+	.global Event35_UnitClassChanging
 	.thumb_func
-sub_801060C:
+Event35_UnitClassChanging:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

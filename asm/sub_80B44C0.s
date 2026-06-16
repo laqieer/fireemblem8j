@@ -12,11 +12,11 @@
 	.set sub_80B4460, 0x080B4460 + 1
 	.set sub_80B4498, 0x080B4498 + 1
 	.section .text.sub_80B44C0, "ax", %progbits
-@ sub_80B44C0 @ JP 0x080B44C0 - region-different, gbadisasm descriptive asm (D23)
+@ SoundRoomUi_Loop_MainKeyHandler @ JP 0x080B44C0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B44C0
+	.global SoundRoomUi_Loop_MainKeyHandler
 	.thumb_func
-sub_80B44C0:
+SoundRoomUi_Loop_MainKeyHandler:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	movs r6, #0

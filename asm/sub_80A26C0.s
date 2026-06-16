@@ -10,11 +10,11 @@
 	.set sub_80B1FBC, 0x080B1FBC + 1
 	.set sub_80B9DEC, 0x080B9DEC + 1
 	.section .text.sub_80A26C0, "ax", %progbits
-@ sub_80A26C0 @ JP 0x080A26C0 - region-different, gbadisasm descriptive asm (D23)
+@ WmSell_OnLoop_MainKeyHandler @ JP 0x080A26C0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A26C0
+	.global WmSell_OnLoop_MainKeyHandler
 	.thumb_func
-sub_80A26C0:
+WmSell_OnLoop_MainKeyHandler:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	ldrh r0, [r4, #0x34]

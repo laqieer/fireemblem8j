@@ -6,11 +6,11 @@
 	.set sub_8056158, 0x08056158 + 1
 	.set sub_8074E80, 0x08074E80 + 1
 	.section .text.sub_8070918, "ax", %progbits
-@ sub_8070918 @ JP 0x08070918 - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxSkillType01BG @ JP 0x08070918 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8070918
+	.global NewEfxSkillType01BG
 	.thumb_func
-sub_8070918:
+NewEfxSkillType01BG:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

@@ -7,11 +7,11 @@
 	.set sub_803D810, 0x0803D810 + 1
 	.set sub_80D65C8, 0x080D65C8 + 1
 	.section .text.sub_803D928, "ax", %progbits
-@ sub_803D928 @ JP 0x0803D928 - region-different, gbadisasm descriptive asm (D23)
+@ AiAttemptBallistaCombat @ JP 0x0803D928 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803D928
+	.global AiAttemptBallistaCombat
 	.thumb_func
-sub_803D928:
+AiAttemptBallistaCombat:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

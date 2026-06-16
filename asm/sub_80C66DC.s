@@ -6,11 +6,11 @@
 	.set sub_8009608, 0x08009608 + 1
 	.set sub_80C2BAC, 0x080C2BAC + 1
 	.section .text.sub_80C66DC, "ax", %progbits
-@ sub_80C66DC @ JP 0x080C66DC - region-different, gbadisasm descriptive asm (D23)
+@ GmapTimeMons_ExecMonsterMergeMu @ JP 0x080C66DC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C66DC
+	.global GmapTimeMons_ExecMonsterMergeMu
 	.thumb_func
-sub_80C66DC:
+GmapTimeMons_ExecMonsterMergeMu:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -8,11 +8,11 @@
 	.set sub_8019994, 0x08019994 + 1
 	.set sub_801DA50, 0x0801DA50 + 1
 	.section .text.sub_800BDE8, "ax", %progbits
-@ sub_800BDE8 @ JP 0x0800BDE8 - region-different, gbadisasm descriptive asm (D23)
+@ TriggerMapChanges @ JP 0x0800BDE8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800BDE8
+	.global TriggerMapChanges
 	.thumb_func
-sub_800BDE8:
+TriggerMapChanges:
 	push {r4, r5, r6, r7, lr}
 	adds r7, r2, #0
 	lsls r0, r0, #0x10

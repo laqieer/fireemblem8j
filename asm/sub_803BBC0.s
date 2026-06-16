@@ -6,11 +6,11 @@
 	.set sub_8040EA8, 0x08040EA8 + 1
 	.set sub_8040ED4, 0x08040ED4 + 1
 	.section .text.sub_803BBC0, "ax", %progbits
-@ sub_803BBC0 @ JP 0x0803BBC0 - region-different, gbadisasm descriptive asm (D23)
+@ AiTryMoveTowardsNeglectWall @ JP 0x0803BBC0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803BBC0
+	.global AiTryMoveTowardsNeglectWall
 	.thumb_func
-sub_803BBC0:
+AiTryMoveTowardsNeglectWall:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

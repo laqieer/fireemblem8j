@@ -6,11 +6,11 @@
 	.set sub_80B0A94, 0x080B0A94 + 1
 	.set sub_80B0AE8, 0x080B0AE8 + 1
 	.section .text.sub_80B0D30, "ax", %progbits
-@ sub_80B0D30 @ JP 0x080B0D30 - region-different, gbadisasm descriptive asm (D23)
+@ DifficultySelect_Loop_KeyHandler @ JP 0x080B0D30 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B0D30
+	.global DifficultySelect_Loop_KeyHandler
 	.thumb_func
-sub_80B0D30:
+DifficultySelect_Loop_KeyHandler:
 	push {r4, lr}
 	adds r4, r0, #0
 	movs r2, #0

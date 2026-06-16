@@ -23,11 +23,11 @@
 	.set sub_80B6404, 0x080B6404 + 1
 	.set sub_80B6470, 0x080B6470 + 1
 	.section .text.sub_80B6628, "ax", %progbits
-@ sub_80B6628 @ JP 0x080B6628 - region-different, gbadisasm descriptive asm (D23)
+@ Config_Init @ JP 0x080B6628 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B6628
+	.global Config_Init
 	.thumb_func
-sub_80B6628:
+Config_Init:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

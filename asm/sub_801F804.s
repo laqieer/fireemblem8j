@@ -13,11 +13,11 @@
 	.set sub_801729C, 0x0801729C + 1
 	.set sub_804F0EC, 0x0804F0EC + 1
 	.section .text.sub_801F804, "ax", %progbits
-@ sub_801F804 @ JP 0x0801F804 - region-different, gbadisasm descriptive asm (D23)
+@ NewPopup2_PlanD @ JP 0x0801F804 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801F804
+	.global NewPopup2_PlanD
 	.thumb_func
-sub_801F804:
+NewPopup2_PlanD:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -11,11 +11,11 @@
 	.set sub_805BDCC, 0x0805BDCC + 1
 	.set sub_80D636C, 0x080D636C + 1
 	.section .text.sub_8076848, "ax", %progbits
-@ sub_8076848 @ JP 0x08076848 - region-different, gbadisasm descriptive asm (D23)
+@ EkrLvup_ResetScreen @ JP 0x08076848 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8076848
+	.global EkrLvup_ResetScreen
 	.thumb_func
-sub_8076848:
+EkrLvup_ResetScreen:
 	push {r4, r5, r6, lr}
 	sub sp, #0x2c
 	adds r5, r0, #0
