@@ -9,7 +9,7 @@ Prints, for a still-asm region-different function:
     symbols that likely need an alias), each flagged DEAD-END if a `lsls;asrs` param sign-ext is present
 This is read-only: it makes no edits. Use its output to author src/<F>.c + the layout fragments.
 """
-import sys, os, re, subprocess
+import sys, os, re, subprocess, glob
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 US = os.path.join(ROOT, '..', 'fireemblem8u', 'src')
