@@ -986,7 +986,6 @@
 08016800	72	CanUnitUseStaffNow	bmitem
 0801C1DC	72	StartupDebugMenu_WorldMapEffect	bmdebug
 08024144	72	ArenaCommandEffect	bmmenu
-08034A5C	72	DrawUnitConText	unitinfowindow
 08042F98	72	Sio_Msg89Barrier_Loop	sio_main
 08054E8C	72	NewEfxWeaponIcon	banim-efxflashobj
 08060B7C	72	StartSubSpell_efxFenrirBGCOL	banim-efxmagic-fenrir
