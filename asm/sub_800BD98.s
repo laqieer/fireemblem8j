@@ -6,11 +6,11 @@
 	.set MakeNew6CBMXFADE2, 0x0801DA50 + 1
 	.set sub_8027144, 0x08027144 + 1
 	.section .text.sub_800BD98, "ax", %progbits
-@ sub_800BD98 @ JP 0x0800BD98 - region-different, gbadisasm descriptive asm (D23)
+@ EventSetFogVisionExt @ JP 0x0800BD98 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800BD98
+	.global EventSetFogVisionExt
 	.thumb_func
-sub_800BD98:
+EventSetFogVisionExt:
 	push {r4, r5, r6, r7, lr}
 	adds r7, r2, #0
 	lsls r0, r0, #0x10

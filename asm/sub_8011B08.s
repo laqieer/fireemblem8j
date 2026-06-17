@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_8011B08, "ax", %progbits
-@ sub_8011B08 @ JP 0x08011B08 - region-different, gbadisasm descriptive asm (D23)
+@ BrownTextBox_SetBlendFlag @ JP 0x08011B08 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8011B08
+	.global BrownTextBox_SetBlendFlag
 	.thumb_func
-sub_8011B08:
+BrownTextBox_SetBlendFlag:
 	push {lr}
 	lsls r1, r1, #0x18
 	asrs r1, r1, #0x18

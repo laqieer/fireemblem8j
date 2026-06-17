@@ -2,11 +2,11 @@
 	.set GetWeaponLevelFromExp, 0x08016B04 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.section .text.sub_8016B3C, "ax", %progbits
-@ sub_8016B3C @ JP 0x08016B3C - region-different, gbadisasm descriptive asm (D23)
+@ GetItemDisplayRankString @ JP 0x08016B3C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8016B3C
+	.global GetItemDisplayRankString
 	.thumb_func
-sub_8016B3C:
+GetItemDisplayRankString:
 	push {r4, r5, lr}
 	sub sp, #0x20
 	mov r2, sp

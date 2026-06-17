@@ -9,11 +9,11 @@
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.set sub_800A118, 0x0800A118 + 1
 	.section .text.sub_80167D4, "ax", %progbits
-@ sub_80167D4 @ JP 0x080167D4 - region-different, gbadisasm descriptive asm (D23)
+@ DrawItemStatScreenLine @ JP 0x080167D4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80167D4
+	.global DrawItemStatScreenLine
 	.thumb_func
-sub_80167D4:
+DrawItemStatScreenLine:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

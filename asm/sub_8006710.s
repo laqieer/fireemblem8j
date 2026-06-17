@@ -8,11 +8,11 @@
 	.set sub_800687C, 0x0800687C + 1
 	.set sub_8013008, 0x08013008 + 1
 	.section .text.sub_8006710, "ax", %progbits
-@ sub_8006710 @ JP 0x08006710 - region-different, gbadisasm descriptive asm (D23)
+@ InitTalk @ JP 0x08006710 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8006710
+	.global InitTalk
 	.thumb_func
-sub_8006710:
+InitTalk:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r6, r1, #0

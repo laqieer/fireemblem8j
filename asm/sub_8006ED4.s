@@ -30,11 +30,11 @@
 	.set sub_80D6374, 0x080D6374 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
 	.section .text.sub_8006ED4, "ax", %progbits
-@ sub_8006ED4 @ JP 0x08006ED4 - region-different, gbadisasm descriptive asm (D23)
+@ TalkInterpret @ JP 0x08006ED4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8006ED4
+	.global TalkInterpret
 	.thumb_func
-sub_8006ED4:
+TalkInterpret:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

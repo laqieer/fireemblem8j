@@ -2,11 +2,11 @@
 	.set CopyString, 0x08012F78 + 1
 	.set sub_8031430, 0x08031430 + 1
 	.section .text.sub_800A118, "ax", %progbits
-@ sub_800A118 @ JP 0x0800A118 - region-different, gbadisasm descriptive asm (D23)
+@ StrInsertTact @ JP 0x0800A118 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800A118
+	.global StrInsertTact
 	.thumb_func
-sub_800A118:
+StrInsertTact:
 	push {r4, r5, lr}
 	ldr r5, _0800A130 @ =0x0202B4A8
 	movs r0, #0x80

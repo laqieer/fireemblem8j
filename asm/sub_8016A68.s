@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.section .text.sub_8016A68, "ax", %progbits
-@ sub_8016A68 @ JP 0x08016A68 - region-different, gbadisasm descriptive asm (D23)
+@ GetItemDisplayRangeString @ JP 0x08016A68 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8016A68
+	.global GetItemDisplayRangeString
 	.thumb_func
-sub_8016A68:
+GetItemDisplayRangeString:
 	push {r4, r5, lr}
 	sub sp, #0x28
 	mov r2, sp

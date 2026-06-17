@@ -11,11 +11,11 @@
 	.set sub_8018FCC, 0x08018FCC + 1
 	.set sub_8050B14, 0x08050B14 + 1
 	.section .text.sub_8007758, "ax", %progbits
-@ sub_8007758 @ JP 0x08007758 - region-different, gbadisasm descriptive asm (D23)
+@ TalkLoadFace @ JP 0x08007758 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8007758
+	.global TalkLoadFace
 	.thumb_func
-sub_8007758:
+TalkLoadFace:
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
 	movs r6, #0

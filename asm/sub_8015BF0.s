@@ -3,11 +3,11 @@
 	.set __umodsi3, 0x080D6848 + 1
 	.set sub_8000CD8, 0x08000CD8 + 1
 	.section .text.sub_8015BF0, "ax", %progbits
-@ sub_8015BF0 @ JP 0x08015BF0 - region-different, gbadisasm descriptive asm (D23)
+@ UpdateStatArrowSprites @ JP 0x08015BF0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8015BF0
+	.global UpdateStatArrowSprites
 	.thumb_func
-sub_8015BF0:
+UpdateStatArrowSprites:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0

@@ -3,11 +3,11 @@
 	.set __modsi3, 0x080D6690 + 1
 	.set sub_80040B8, 0x080040B8 + 1
 	.section .text.sub_8003F98, "ax", %progbits
-@ sub_8003F98 @ JP 0x08003F98 - region-different, gbadisasm descriptive asm (D23)
+@ Text_DrawNumber @ JP 0x08003F98 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8003F98
+	.global Text_DrawNumber
 	.thumb_func
-sub_8003F98:
+Text_DrawNumber:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r5, r0, #0

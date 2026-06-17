@@ -9,11 +9,11 @@
 	.set sub_807B4B8, 0x0807B4B8 + 1
 	.set sub_807DB9C, 0x0807DB9C + 1
 	.section .text.sub_8011FCC, "ax", %progbits
-@ sub_8011FCC @ JP 0x08011FCC - region-different, gbadisasm descriptive asm (D23)
+@ StartScriptBattleAnim @ JP 0x08011FCC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8011FCC
+	.global StartScriptBattleAnim
 	.thumb_func
-sub_8011FCC:
+StartScriptBattleAnim:
 	push {r4, lr}
 	adds r4, r0, #0
 	lsls r4, r4, #0x18

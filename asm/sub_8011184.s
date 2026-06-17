@@ -7,11 +7,11 @@
 	.set sub_8014328, 0x08014328 + 1
 	.set sub_801729C, 0x0801729C + 1
 	.section .text.sub_8011184, "ax", %progbits
-@ sub_8011184 @ JP 0x08011184 - region-different, gbadisasm descriptive asm (D23)
+@ GeneratePopupText @ JP 0x08011184 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8011184
+	.global GeneratePopupText
 	.thumb_func
-sub_8011184:
+GeneratePopupText:
 	push {r4, r5, lr}
 	sub sp, #0x18
 	adds r5, r0, #0

@@ -6,11 +6,11 @@
 	.set sub_8014328, 0x08014328 + 1
 	.set sub_801729C, 0x0801729C + 1
 	.section .text.sub_8011080, "ax", %progbits
-@ sub_8011080 @ JP 0x08011080 - region-different, gbadisasm descriptive asm (D23)
+@ ParsePopupInstAndGetLen @ JP 0x08011080 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8011080
+	.global ParsePopupInstAndGetLen
 	.thumb_func
-sub_8011080:
+ParsePopupInstAndGetLen:
 	push {r4, r5, r6, lr}
 	sub sp, #0x10
 	adds r6, r0, #0

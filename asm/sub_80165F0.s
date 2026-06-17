@@ -7,11 +7,11 @@
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.set sub_800A118, 0x0800A118 + 1
 	.section .text.sub_80165F0, "ax", %progbits
-@ sub_80165F0 @ JP 0x080165F0 - region-different, gbadisasm descriptive asm (D23)
+@ DrawItemMenuLine @ JP 0x080165F0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80165F0
+	.global DrawItemMenuLine
 	.thumb_func
-sub_80165F0:
+DrawItemMenuLine:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

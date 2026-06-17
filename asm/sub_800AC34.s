@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_800AC34, "ax", %progbits
-@ sub_800AC34 @ JP 0x0800AC34 - region-different, gbadisasm descriptive asm (D23)
+@ Spline_FindSegment @ JP 0x0800AC34 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800AC34
+	.global Spline_FindSegment
 	.thumb_func
-sub_800AC34:
+Spline_FindSegment:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r6, r2, #0

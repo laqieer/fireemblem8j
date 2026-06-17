@@ -4,11 +4,11 @@
 	.set sub_8014328, 0x08014328 + 1
 	.set sub_8031430, 0x08031430 + 1
 	.section .text.sub_8008A40, "ax", %progbits
-@ sub_8008A40 @ JP 0x08008A40 - region-different, gbadisasm descriptive asm (D23)
+@ GetStrTalkLen @ JP 0x08008A40 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8008A40
+	.global GetStrTalkLen
 	.thumb_func
-sub_8008A40:
+GetStrTalkLen:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
@@ -299,7 +299,7 @@ _08008DA6:
 	adds r0, #0x60
 _08008DAC:
 	mov r1, r8
-	bl sub_8008A40
+	bl GetStrTalkLen
 _08008DB2:
 	adds r6, r6, r0
 	b _08008C96

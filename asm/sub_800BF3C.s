@@ -3,11 +3,11 @@
 	.set GetUnitFromCharId, 0x08017FB0 + 1
 	.set sub_8033168, 0x08033168 + 1
 	.section .text.sub_800BF3C, "ax", %progbits
-@ sub_800BF3C @ JP 0x0800BF3C - region-different, gbadisasm descriptive asm (D23)
+@ GetUnitStructFromEventParameter @ JP 0x0800BF3C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800BF3C
+	.global GetUnitStructFromEventParameter
 	.thumb_func
-sub_800BF3C:
+GetUnitStructFromEventParameter:
 	push {lr}
 	lsls r0, r0, #0x10
 	asrs r1, r0, #0x10

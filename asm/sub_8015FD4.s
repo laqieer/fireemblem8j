@@ -4,11 +4,11 @@
 	.set GetROMChapterStruct, 0x08034520 + 1
 	.set sub_80C1E74, 0x080C1E74 + 1
 	.section .text.sub_8015FD4, "ax", %progbits
-@ sub_8015FD4 @ JP 0x08015FD4 - region-different, gbadisasm descriptive asm (D23)
+@ GetCurrentMapMusicIndex @ JP 0x08015FD4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8015FD4
+	.global GetCurrentMapMusicIndex
 	.thumb_func
-sub_8015FD4:
+GetCurrentMapMusicIndex:
 	push {r4, r5, r6, r7, lr}
 	movs r0, #4
 	bl CheckFlag

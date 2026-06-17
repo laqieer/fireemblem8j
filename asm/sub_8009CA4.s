@@ -1,11 +1,11 @@
 	.syntax unified
 	.set Proc_Goto, 0x08002E74 + 1
 	.section .text.sub_8009CA4, "ax", %progbits
-@ sub_8009CA4 @ JP 0x08009CA4 - region-different, gbadisasm descriptive asm (D23)
+@ GameCtrl_CheckGameCompleteAndBranch @ JP 0x08009CA4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8009CA4
+	.global GameCtrl_CheckGameCompleteAndBranch
 	.thumb_func
-sub_8009CA4:
+GameCtrl_CheckGameCompleteAndBranch:
 	push {lr}
 	adds r2, r0, #0
 	ldr r0, _08009CC8 @ =0x0202BCEC

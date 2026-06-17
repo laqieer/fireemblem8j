@@ -2,11 +2,11 @@
 	.set BG_EnableSyncByMask, 0x08001EFC + 1
 	.set sub_8001BC0, 0x08001BC0 + 1
 	.section .text.sub_800BCA8, "ax", %progbits
-@ sub_800BCA8 @ JP 0x0800BCA8 - region-different, gbadisasm descriptive asm (D23)
+@ BgChangeChr @ JP 0x0800BCA8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800BCA8
+	.global BgChangeChr
 	.thumb_func
-sub_800BCA8:
+BgChangeChr:
 	push {r4, r5, r6, r7, lr}
 	lsls r0, r0, #0x18
 	lsrs r5, r0, #0x18

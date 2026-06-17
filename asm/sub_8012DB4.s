@@ -6,11 +6,11 @@
 	.set m4aSongNumStart, 0x080D4EF4 + 1
 	.set sub_80B3240, 0x080B3240 + 1
 	.section .text.sub_8012DB4, "ax", %progbits
-@ sub_8012DB4 @ JP 0x08012DB4 - region-different, gbadisasm descriptive asm (D23)
+@ StartStoneShatterAnim @ JP 0x08012DB4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8012DB4
+	.global StartStoneShatterAnim
 	.thumb_func
-sub_8012DB4:
+StartStoneShatterAnim:
 	push {r4, r5, r6, lr}
 	sub sp, #0x14
 	adds r5, r0, #0

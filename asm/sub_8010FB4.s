@@ -2,11 +2,11 @@
 	.set CallARM_PushToSecondaryOAM, 0x08002B08 + 1
 	.set sub_8011030, 0x08011030 + 1
 	.section .text.sub_8010FB4, "ax", %progbits
-@ sub_8010FB4 @ JP 0x08010FB4 - region-different, gbadisasm descriptive asm (D23)
+@ EventShinningCursorAdvance @ JP 0x08010FB4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8010FB4
+	.global EventShinningCursorAdvance
 	.thumb_func
-sub_8010FB4:
+EventShinningCursorAdvance:
 	push {r4, r5, lr}
 	lsls r5, r2, #0x10
 	lsrs r4, r5, #0x10

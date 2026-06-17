@@ -2,11 +2,11 @@
 	.set GameControl_FadeBgmVolume, 0x08009A28 + 1
 	.set Proc_Goto, 0x08002E74 + 1
 	.section .text.sub_8009A3C, "ax", %progbits
-@ sub_8009A3C @ JP 0x08009A3C - region-different, gbadisasm descriptive asm (D23)
+@ GameControl_PostIntro @ JP 0x08009A3C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8009A3C
+	.global GameControl_PostIntro
 	.thumb_func
-sub_8009A3C:
+GameControl_PostIntro:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r0, #0x29

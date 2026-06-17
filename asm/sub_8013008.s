@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80D65C4, 0x080D65C4 + 1
 	.section .text.sub_8013008, "ax", %progbits
-@ sub_8013008 @ JP 0x08013008 - region-different, gbadisasm descriptive asm (D23)
+@ Decompress @ JP 0x08013008 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8013008
+	.global Decompress
 	.thumb_func
-sub_8013008:
+Decompress:
 	push {r4, r5, lr}
 	adds r3, r0, #0
 	adds r4, r1, #0

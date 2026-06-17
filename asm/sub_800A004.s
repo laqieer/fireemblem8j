@@ -5,11 +5,11 @@
 	.set sub_801729C, 0x0801729C + 1
 	.set sub_8031430, 0x08031430 + 1
 	.section .text.sub_800A004, "ax", %progbits
-@ sub_800A004 @ JP 0x0800A004 - region-different, gbadisasm descriptive asm (D23)
+@ StringInsertSpecialPrefixByCtrl @ JP 0x0800A004 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800A004
+	.global StringInsertSpecialPrefixByCtrl
 	.thumb_func
-sub_800A004:
+StringInsertSpecialPrefixByCtrl:
 	push {r4, r5, lr}
 	ldr r5, _0800A01C @ =0x0202AAA8
 	movs r0, #0x80

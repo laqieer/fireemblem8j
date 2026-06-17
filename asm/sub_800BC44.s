@@ -2,11 +2,11 @@
 	.set BG_EnableSyncByMask, 0x08001EFC + 1
 	.set sub_80D636C, 0x080D636C + 1
 	.section .text.sub_800BC44, "ax", %progbits
-@ sub_800BC44 @ JP 0x0800BC44 - region-different, gbadisasm descriptive asm (D23)
+@ CopyBgTiles @ JP 0x0800BC44 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800BC44
+	.global CopyBgTiles
 	.thumb_func
-sub_800BC44:
+CopyBgTiles:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x10
 	adds r4, r1, #0

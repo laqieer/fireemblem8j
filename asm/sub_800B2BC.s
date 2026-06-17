@@ -3,11 +3,11 @@
 	.set sub_800AC34, 0x0800AC34 + 1
 	.set sub_80D6378, 0x080D6378 + 1
 	.section .text.sub_800B2BC, "ax", %progbits
-@ sub_800B2BC @ JP 0x0800B2BC - region-different, gbadisasm descriptive asm (D23)
+@ Spline_EvalIndirect @ JP 0x0800B2BC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800B2BC
+	.global Spline_EvalIndirect
 	.thumb_func
-sub_800B2BC:
+Spline_EvalIndirect:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_800795C, 0x0800795C + 1
 	.section .text.sub_80078E8, "ax", %progbits
-@ sub_80078E8 @ JP 0x080078E8 - region-different, gbadisasm descriptive asm (D23)
+@ MoveTalkFace @ JP 0x080078E8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80078E8
+	.global MoveTalkFace
 	.thumb_func
-sub_80078E8:
+MoveTalkFace:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

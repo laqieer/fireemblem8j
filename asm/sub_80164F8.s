@@ -2,11 +2,11 @@
 	.set CanUnitUseWeapon, 0x0801631C + 1
 	.set IsUnitMagicSealed, 0x08018A1C + 1
 	.section .text.sub_80164F8, "ax", %progbits
-@ sub_80164F8 @ JP 0x080164F8 - region-different, gbadisasm descriptive asm (D23)
+@ CanUnitUseWeaponNow @ JP 0x080164F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80164F8
+	.global CanUnitUseWeaponNow
 	.thumb_func
-sub_80164F8:
+CanUnitUseWeaponNow:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0
