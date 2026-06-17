@@ -19,7 +19,7 @@
 	.set sub_80569E4, 0x080569E4 + 1
 	.set sub_805A488, 0x0805A488 + 1
 	.set sub_805A6B0, 0x0805A6B0 + 1
-	.set sub_805AE20, 0x0805AE20 + 1
+	.set SwitchAISFrameDataFromBARoundType, 0x0805AE20 + 1
 	.set sub_805AF28, 0x0805AF28 + 1
 	.set sub_805B094, 0x0805B094 + 1
 	.set sub_805B0B4, 0x0805B0B4 + 1
@@ -691,10 +691,10 @@ _0805A016:
 	adds r0, r2, #0
 	mov r1, r8
 	str r2, [sp]
-	bl sub_805AE20
+	bl SwitchAISFrameDataFromBARoundType
 	adds r0, r6, #0
 	mov r1, r8
-	bl sub_805AE20
+	bl SwitchAISFrameDataFromBARoundType
 	ldr r2, [sp]
 	ldrh r0, [r2, #0x10]
 	movs r1, #4
@@ -805,10 +805,10 @@ _0805A11E:
 	adds r0, r2, #0
 	mov r1, r8
 	str r2, [sp]
-	bl sub_805AE20
+	bl SwitchAISFrameDataFromBARoundType
 	adds r0, r6, #0
 	mov r1, r8
-	bl sub_805AE20
+	bl SwitchAISFrameDataFromBARoundType
 	ldr r2, [sp]
 _0805A132:
 	adds r0, r2, #0

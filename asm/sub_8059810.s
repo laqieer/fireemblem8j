@@ -1,7 +1,7 @@
 	.syntax unified
 	.set GetAnimPosition, 0x0805AF10 + 1
 	.set sub_805A78C, 0x0805A78C + 1
-	.set sub_805AE20, 0x0805AE20 + 1
+	.set SwitchAISFrameDataFromBARoundType, 0x0805AE20 + 1
 	.section .text.sub_8059810, "ax", %progbits
 @ sub_8059810 @ JP 0x08059810 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -20,7 +20,7 @@ sub_8059810:
 	bl sub_805A78C
 	adds r0, r5, #0
 	movs r1, #6
-	bl sub_805AE20
+	bl SwitchAISFrameDataFromBARoundType
 	pop {r4, r5}
 	pop {r0}
 	bx r0

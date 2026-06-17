@@ -5,7 +5,7 @@
 	.set GetBattleAnimRoundType, 0x0805983C + 1
 	.set sub_8059A04, 0x08059A04 + 1
 	.set sub_805A6E0, 0x0805A6E0 + 1
-	.set sub_805AE20, 0x0805AE20 + 1
+	.set SwitchAISFrameDataFromBARoundType, 0x0805AE20 + 1
 	.set sub_805B094, 0x0805B094 + 1
 	.section .text.sub_805A488, "ax", %progbits
 @ sub_805A488 @ JP 0x0805A488 - region-different, gbadisasm descriptive asm (D23)
@@ -96,7 +96,7 @@ _0805A504:
 	adds r0, r2, #0
 	mov r1, r8
 	str r2, [sp]
-	bl sub_805AE20
+	bl SwitchAISFrameDataFromBARoundType
 	ldr r2, [sp]
 	ldrh r1, [r2, #0x10]
 	ldr r4, _0805A554 @ =0x0000FFFD
@@ -157,7 +157,7 @@ _0805A590:
 	adds r0, r2, #0
 	mov r1, r8
 	str r2, [sp]
-	bl sub_805AE20
+	bl SwitchAISFrameDataFromBARoundType
 	ldr r2, [sp]
 	ldrh r1, [r2, #0x10]
 	ldr r4, _0805A618 @ =0x00007FFF
@@ -177,7 +177,7 @@ _0805A5CC:
 	ldr r6, [r0]
 	adds r0, r6, #0
 	mov r1, r8
-	bl sub_805AE20
+	bl SwitchAISFrameDataFromBARoundType
 	ldrh r0, [r6, #0x10]
 	ands r4, r0
 	orrs r4, r5
