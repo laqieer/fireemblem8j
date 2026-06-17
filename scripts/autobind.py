@@ -12,6 +12,20 @@ sys.path.insert(0,"scripts"); os.chdir("/home/laqieer/fireemblem8j")
 from decl_carve import us_decl, recipe, DEFINED
 US_SRC=glob.glob("../fireemblem8u/src/*.c")
 def sh(c): return subprocess.run(c,shell=True,capture_output=True,text=True).stdout
+def us_inline_body(sym):
+    for f in US_SRC:
+        try: txt=open(f,errors='replace').read()
+        except: continue
+        m=re.search(rf'^static\s+inline\s+[A-Za-z_][\w 	\*]*?{re.escape(sym)}\s*\([^;{{]*\)\s*\{{',txt,re.M)
+        if m:
+            i=txt.index(m.group(0)); depth=0; j=txt.index('{',i)
+            for k in range(j,len(txt)):
+                if txt[k]=='{': depth+=1
+                elif txt[k]=='}':
+                    depth-=1
+                    if depth==0: return txt[i:k+1]
+    return None
+
 def us_structs(name):
     for f in US_SRC:
         try: txt=open(f,errors='replace').read()
@@ -39,7 +53,8 @@ def carve(name):
             if re.search(r' [Tt] '+re.escape(name),sh(f"arm-none-eabi-nm src/{name}.o 2>/dev/null")): break
             return None,"compile-other"
         for u in und:
-            tried.add(u); d=us_decl(u)
+            tried.add(u); ib=us_inline_body(u)
+            d=ib if ib else us_decl(u)
             decls.append(d if d else f"int {u}();")
     else: return None,"decl-loop"
     # undefined (link) syms
