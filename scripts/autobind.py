@@ -84,7 +84,7 @@ def run(name):
     with open(BINDF(name),"w") as f:
         for u,a in sent.items(): f.write(f"{u}\t{a:08X}\t{'thumb' if func[u] else 'data'}\t{name}\n")
     s,e=int(r['start'],16),int(r['end'],16)
-    sh(f"git rm -q asm/sub_{r['addr']}.s layout/carved_rom.d/gbadisasm_sub_{r['addr']}.tsv")
+    sh(f"git rm -qf asm/sub_{r['addr']}.s layout/carved_rom.d/gbadisasm_sub_{r['addr']}.tsv 2>/dev/null; rm -f asm/sub_{r['addr']}.s layout/carved_rom.d/gbadisasm_sub_{r['addr']}.tsv")
     open(f"layout/carved_rom.d/handdecomp_{name}.tsv","w").write(f"{r['start']}\t{r['end']}\tsrc/{name}.o(.text)\thanddecomp\n")
     open(f"layout/baseline_syms_drop.d/handdecomp_{name}.tsv","w").write(name+"\n")
     subprocess.run(["python3","scripts/gen_layout.py"],capture_output=True)
