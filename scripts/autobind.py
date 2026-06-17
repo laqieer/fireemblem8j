@@ -76,8 +76,11 @@ def run(name):
     r,decls,miss=res
     base=open("baserom.gba","rb").read()
     # sentinel-bind each missing sym
-    sent={u:0x09000000+(i+1)*0x10000 for i,u in enumerate(miss)}
     func={u:is_func(u) for u in miss}
+    _fs=0x08000000+int(r['start'],16)  # VRAM address of the function
+    _fbase=_fs+0x180000 if _fs<0x08E00000 else _fs-0x180000  # within Thumb BL ±4MB of call sites
+    # data -> far 32-bit-literal sentinel; function -> near sentinel (BL-reachable)
+    sent={u:(_fbase+(i+1)*0x10 if func[u] else 0x09000000+(i+1)*0x10000) for i,u in enumerate(miss)}
     with open(BINDF(name),"w") as f:
         for u,a in sent.items(): f.write(f"{u}\t{a:08X}\t{'thumb' if func[u] else 'data'}\t{name}\n")
     s,e=int(r['start'],16),int(r['end'],16)
