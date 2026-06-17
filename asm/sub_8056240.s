@@ -160,7 +160,7 @@ _08056310:
 	adds r0, r5, #0
 	adds r1, r7, #0
 	mov r2, sl
-	bl sub_80546C8
+	bl NewEfxHitQuake
 	b _08056386
 	.align 2, 0
 _08056378: .4byte 0x0203E14E
@@ -168,7 +168,7 @@ _0805637C:
 	adds r0, r5, #0
 	adds r1, r7, #0
 	ldr r2, [sp]
-	bl sub_80546C8
+	bl NewEfxHitQuake
 _08056386:
 	adds r0, r5, #0
 	movs r1, #0

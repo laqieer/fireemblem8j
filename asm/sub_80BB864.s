@@ -15,9 +15,9 @@
 	.section .text.sub_80BB864, "ax", %progbits
 @ sub_80BB864 @ JP 0x080BB864 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BB864
+	.global SoloEndingBattleDisp_Init
 	.thumb_func
-sub_80BB864:
+SoloEndingBattleDisp_Init:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

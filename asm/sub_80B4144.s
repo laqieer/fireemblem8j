@@ -146,7 +146,7 @@ SoundRoomUi_Init:
 	strb r1, [r0]
 	adds r0, r4, #0
 	bl sub_80B3984
-	bl sub_80B4B48
+	bl SoundRoom_InitText
 	adds r0, r4, #0
 	bl sub_80B4498
 	adds r0, r4, #0

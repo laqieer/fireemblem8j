@@ -10,9 +10,9 @@
 	.section .text.sub_808FE1C, "ax", %progbits
 @ sub_808FE1C @ JP 0x0808FE1C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_808FE1C
+	.global PutSioErrorMessage
 	.thumb_func
-sub_808FE1C:
+PutSioErrorMessage:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

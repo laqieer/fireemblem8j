@@ -18,9 +18,9 @@
 	.section .text.sub_80D1A50, "ax", %progbits
 @ sub_80D1A50 @ JP 0x080D1A50 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D1A50
+	.global Make6C_PromotionMenuSelect
 	.thumb_func
-sub_80D1A50:
+Make6C_PromotionMenuSelect:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

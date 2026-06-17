@@ -87,13 +87,13 @@ _08056448:
 	adds r0, r5, #0
 	adds r1, r7, #0
 	movs r2, #4
-	bl sub_80546C8
+	bl NewEfxHitQuake
 	b _08056472
 _08056468:
 	adds r0, r5, #0
 	adds r1, r7, #0
 	movs r2, #3
-	bl sub_80546C8
+	bl NewEfxHitQuake
 _08056472:
 	adds r0, r5, #0
 	movs r1, #0

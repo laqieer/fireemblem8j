@@ -12,9 +12,9 @@
 	.section .text.sub_8092A5C, "ax", %progbits
 @ sub_8092A5C @ JP 0x08092A5C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8092A5C
+	.global UnitListScreenSprites_Main
 	.thumb_func
-sub_8092A5C:
+UnitListScreenSprites_Main:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

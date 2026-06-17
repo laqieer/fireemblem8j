@@ -15,9 +15,9 @@
 	.section .text.sub_80B5C3C, "ax", %progbits
 @ sub_80B5C3C @ JP 0x080B5C3C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B5C3C
+	.global BonusClaim_StartSelectTargetSubMenu
 	.thumb_func
-sub_80B5C3C:
+BonusClaim_StartSelectTargetSubMenu:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

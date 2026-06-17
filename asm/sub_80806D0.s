@@ -12,9 +12,9 @@
 	.section .text.sub_80806D0, "ax", %progbits
 @ sub_80806D0 @ JP 0x080806D0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80806D0
+	.global MapAnim_Init_0
 	.thumb_func
-sub_80806D0:
+MapAnim_Init_0:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldr r1, [r4, #0x30]

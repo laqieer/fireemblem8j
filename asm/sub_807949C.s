@@ -11,9 +11,9 @@
 	.section .text.sub_807949C, "ax", %progbits
 @ sub_807949C @ JP 0x0807949C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807949C
+	.global EkrDragonBodyAnimeMain
 	.thumb_func
-sub_807949C:
+EkrDragonBodyAnimeMain:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldr r0, [r4, #0x5c]

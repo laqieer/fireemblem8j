@@ -65,7 +65,7 @@ sub_808FEB0:
 	ldr r1, _0808FF50 @ =0x06008000
 	adds r2, r5, #0
 	bl sub_80D636C
-	bl sub_808FE1C
+	bl PutSioErrorMessage
 	ldr r0, _0808FF54 @ =0x0202BCEC
 	adds r0, #0x41
 	ldrb r0, [r0]

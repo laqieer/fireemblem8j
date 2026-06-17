@@ -12,9 +12,9 @@
 	.section .text.sub_80546C8, "ax", %progbits
 @ sub_80546C8 @ JP 0x080546C8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80546C8
+	.global NewEfxHitQuake
 	.thumb_func
-sub_80546C8:
+NewEfxHitQuake:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

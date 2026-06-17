@@ -13,9 +13,9 @@
 	.section .text.sub_800F390, "ax", %progbits
 @ sub_800F390 @ JP 0x0800F390 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800F390
+	.global Event25_ChangeMap
 	.thumb_func
-sub_800F390:
+Event25_ChangeMap:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	ldr r0, [r5, #0x38]

@@ -14,9 +14,9 @@
 	.section .text.sub_804FED8, "ax", %progbits
 @ sub_804FED8 @ JP 0x0804FED8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804FED8
+	.global Menu_OnIdle
 	.thumb_func
-sub_804FED8:
+Menu_OnIdle:
 	push {r4, r5, r6, lr}
 	sub sp, #8
 	adds r5, r0, #0
