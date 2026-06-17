@@ -4502,3 +4502,20 @@ similar, but once carved at its JP address the linker resolves those relocs and 
 (make-compare-gated, skips the genuine codegen-diff ones safely). matching-C 7195 -> 7234 (**+39 total
 this session**, 84.83%), named crossed **80.01%**. The band's tail (<99.5%) is increasingly true codegen
 diff -> the hand-decomp/permuter frontier remains.
+
+## D109 — Matching-C: the thin-wrapper class gbadisasm/automation entirely missed (2026-06-17)
+After D108's coddog/auto_decode automation chain looked EXHAUSTED at 84.83% (the final virtuous-cycle
+pass committed 0), inspecting the SMALLEST still-asm `sub_<addr>` (4-12 insns) revealed a winnable class
+NO tool had tried: **thin wrappers** `[ret] f([args]) { [return] CALLEE(args); }`. gbadisasm left them as
+"region-different" descriptive asm; coddog never matched them (different opcode stream from any US fn —
+they're JP-specific glue); the trivial-stub sweep (D100) only did `bx lr`/`movs #N`/accessor stubs, not
+the `bl X; pop{rN}; bx rN` shape. KEY: agbcc -mthumb-interwork emits the interwork return `pop{r0}; bx r0`
+(NOT `pop{pc}`) for a void fn ending in a call — EXACTLY reproducible from C (verified: hand-written
+`void f(){m4aSoundVSyncOn();}` compiled byte-identical). +10 this session (7234->7244, **+49 total**).
+Tool `~/wrap_carve.py`: parse `push{lr}; [movs rK,#imm | ldr rK,=0xLIT]; bl CALLEE; [lsls;asrs/lsrs cast];
+pop{rN}; bx rN` -> generate C (void if pop pops r0=discards result, else int/s8/s16/u8/u16 per cast),
+bind sub_ callees via baseline_syms, FULL-make-compare-gate each. GOTCHAS fixed: (a) don't redeclare
+NAMED callees (in global.h -> -Werror conflict); only declare sub_ ones. (b) pop-register parse bug
+(`body[-2][5]`='r' not the digit -> everything misclassified int) -> use regex group. STILL LEFT (next):
+int-return wrappers (need callee return-type), `push{r4,lr}` shapes, multi-arg/typed-pointer args.
+LESSON: "automation exhausted" != "frontier exhausted" — inspect the actual residual asm by SHAPE/SIZE.
