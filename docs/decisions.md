@@ -4580,3 +4580,16 @@ Continuing the SHAPE sweep past the wrapper/str/cond classes:
   dead-end (the D96/directive class to SKIP). 4 funcs deferred to permuter. The clean mechanical
   shape-class vein (wrappers, str/cond, passthrough, call+dec) is now ~exhausted; remaining small still-
   asm is BIOS-svc/trampolines (genuine asm, not matching-C) + reg-alloc-fragile + the hand-decomp frontier.
+
+## D110 addendum 3 — leaf/micro shape-classes (+6 -> 7291); mechanical vein ~exhausted (2026-06-17)
+Final small-shape sweep (~/handcarve.py, pre-written C carved one-at-a-time): **leaf global-decrement**
+`ldr r1,=L;ldr r0,[r1];subs r0,#N;str r0,[r1];bx lr` -> `void f(void){ *(int*)L -= N; }` (no push/pop, agbcc
+emits a bare `bx lr` leaf); **leaf byte/half/word store** `ldr;movs;strb;bx lr` -> `*(uchar*)L = 0`;
+**mul-store** `*(u16*)L = (*(int*)L*0xD+1)` (lsls;lsrs#0x10 = u16 cast); **two-call**
+`void f(void){ cw_A((void*)L,0); cw_B(N); }`. matching-C 7285->7291. Callees (named or sub_) all via the
+`cw_<addr>` no-prototype alias. **The clean mechanical shape-class vein is now EXHAUSTED** (this session:
++40 matching-C 7251->7291, +8 named via fingerprint). Remaining small still-asm: ~13 BIOS-`svc`/`bx nop`
+trampolines (genuine hand-asm, NOT matching-C — same as fe8u) + reg-alloc-fragile (multi-store) + the
+larger region-different functions = the genuine hand-decomp/permuter/IDA frontier. Next levers: per-
+function permuter on byte-CLOSE reg-alloc near-misses; IDA/Ghidra for region-different logic; the named
+axis is at its practical ceiling (banim_/gfx_/sheet placeholders + fingerprint exhausted).
