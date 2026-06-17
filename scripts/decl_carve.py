@@ -30,7 +30,7 @@ def us_decl(sym):
             ret=m.group(1).strip(); args=m.group(3).strip()
             return f"{ret} {sym}({args});"
         # data definition (skip 'static'/'EWRAM_DATA'/'CONST_DATA' qualifiers -> extern)
-        m=re.search(rf'^(?:static\s+|EWRAM_DATA\s+|CONST_DATA\s+|const\s+|EWRAM_OVERLAY\s*\([^)]*\)\s*|EWRAM_OVERLAY_LZ77\s*\([^)]*\)\s*)*([A-Za-z_][\w \t\*]*?\b{re.escape(sym)}\s*(\[[^\]=]*\])?)\s*(=|;)',t,re.M)
+        m=re.search(rf'^(?:static\s+|EWRAM_DATA\s+|CONST_DATA\s+|const\s+|EWRAM_OVERLAY\s*\([^)]*\)\s*|EWRAM_OVERLAY_LZ77\s*\([^)]*\)\s*)*([A-Za-z_][\w \t\*]*?\b{re.escape(sym)}\s*(?:\[[^\]=]*\])*)\s*(=|;)',t,re.M)
         if m:
             decl=m.group(1).strip()
             # strip a leading EWRAM_DATA/CONST_DATA/EWRAM_OVERLAY that landed inside (rare)
