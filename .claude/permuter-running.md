@@ -166,3 +166,18 @@ focused iter):
      RELIABLY name it (byte-neutral, +named axis, which has ~10% headroom to the ~89.9% asset-sheet ceiling).
 Yield uncertain (mechanical levers cleared most region-same) but it's the only untried automation
 that can SEE the backlog. If it finds nothing region-same, it still feeds reliable naming.
+
+## coddog-on-backlog — EXECUTION PLAN refined (pyelftools blocked; asm-sizing one-time analysis)
+- pyelftools NOT available (system pip PEP-668-blocked, no --break-system-packages per HARD RULE;
+  permuter-venv has no pip). So the clean ELF-symbol-table rewrite is out.
+- External `.size sub_X, N` in a separate file FAILS (makes sub_X an undefined `U` ref; .size must be
+  in the DEFINING asm file). NB the asm FILENAME (asm/sub_<addr>.s) != the .global inside (e.g.
+  asm/sub_080D6B28.s defines `_vfprintf_r`).
+- PATH (one-time analysis, NOT a permanent build change): script over the 2303
+  `layout/carved_rom.d/gbadisasm_sub_*.tsv` (each: start end `asm/X.o(.text.SECT)` NAME) -> for each,
+  append `.size <global_name>, <end-start>` to its asm file (BYTE-NEUTRAL; test 1 + COLD make compare).
+  Then build the sized ELF, recreate `decomp.yaml`+`fe8.coddog.yaml` (jp=fireemblem8.elf,
+  us=../fireemblem8u/fireemblem8.elf; see docs/tools/coddog-classification.md), run
+  `tools/coddog/target/release/coddog compare2`, capture similarity %, then `git checkout -- asm/`
+  to revert the .size. ACT on results: ~100% sim sub_ = region-same (CARVE); 0.5-0.95 sim = feed the
+  fingerprint as the 3rd naming signal (byte-neutral +named). 1170 sub_ are size-0 T symbols today.
