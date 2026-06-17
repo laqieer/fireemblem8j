@@ -1,0 +1,5 @@
+BanimTypesPosRight	080DFF32	data	InitRightAnim
+gBanimOamr2	020099C8	data	InitRightAnim
+gBanimRightImgSheetBuf	02002088	data	InitRightAnim
+gBanimScrRight	02011BC8	data	InitRightAnim
+gpBanimModesRight	02000060	data	InitRightAnim
