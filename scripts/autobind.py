@@ -16,7 +16,7 @@ def us_inline_body(sym):
     for f in US_SRC:
         try: txt=open(f,errors='replace').read()
         except: continue
-        m=re.search(rf'^static\s+inline\s+[A-Za-z_][\w 	\*]*?{re.escape(sym)}\s*\([^;{{]*\)\s*\{{',txt,re.M)
+        m=re.search(r'^static\s+inline\b[^\n;{]*?\b'+re.escape(sym)+r'\s*\([^;{]*\)\s*\{', txt, re.M)
         if m:
             i=txt.index(m.group(0)); depth=0; j=txt.index('{',i)
             for k in range(j,len(txt)):
@@ -54,7 +54,7 @@ def carve(name):
     if not r: return None,"no recipe"
     decls=[]; tried=set()
     for _ in range(15):
-        open(f"src/{name}.c","w").write("".join(f'#include "{h}"\n' for h in r["inc"])+"\n"+us_enums(name)+"\n"+us_structs(name)+"\n"+"".join(d+"\n" for d in decls)+"\n"+r["body"]+"\n")
+        open(f"src/{name}.c","w").write("".join(f'#include "{h}"\n' for h in r["inc"])+"\n"+us_enums(name)+"\n"+us_structs(name)+"\n"+"".join(d+"\n" for d in decls)+"\n"+re.sub(r"^static\s+","",r["body"])+"\n")
         err=sh(f"rm -f src/{name}.o; make src/{name}.o 2>&1")
         und=[u for u in re.findall(r"`([A-Za-z_]\w+)' undeclared",err)+re.findall(r"implicit declaration of function `([A-Za-z_]\w+)'",err) if u not in tried]
         if not und:
