@@ -271,3 +271,5 @@ instr-order near-misses, stochastic) or IDA/Ghidra hand-decomp per function, aga
 TOOLS for next iter: `~/auto_decode.py` + `~/carve_subst.py` (re-run after ANY new carve/tooling-fix —
 the virtuous cycle); `scripts/permuter/permute.sh` for byte-CLOSE [DIFF]; the `[DIFF]` base bytes ARE
 the JP const. DISCIPLINE: launch detached auto-runs + ONE wakeup at est-completion, DON'T poll per tick.
+
+**Fingerprint naming ALSO exhausted (re-confirmed after +39 carves):** re-running scripts/fingerprint_identify.py gives 7 (was 6), but ALL 7 COLLIDE on `make compare` — their US-names are already bound in `layout/*.tsv` (e.g. UntriggerMapChange in nofuncmap_region_different.tsv) = the funcmap already knows them; they are region-different DUPLICATES, not nameable. So named-axis automation is exhausted too. Both matching-C AND named automatable frontiers are done; ONLY hand-decomp/permuter remains (slow, per-fn, D96 ceiling).
