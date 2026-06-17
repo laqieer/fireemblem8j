@@ -4519,3 +4519,16 @@ NAMED callees (in global.h -> -Werror conflict); only declare sub_ ones. (b) pop
 (`body[-2][5]`='r' not the digit -> everything misclassified int) -> use regex group. STILL LEFT (next):
 int-return wrappers (need callee return-type), `push{r4,lr}` shapes, multi-arg/typed-pointer args.
 LESSON: "automation exhausted" != "frontier exhausted" — inspect the actual residual asm by SHAPE/SIZE.
+
+## D109 addendum — "automation exhausted" was WRONG; small region-different SHAPE-CLASSES are winnable (2026-06-17)
+Inspecting the smallest still-asm sub_ by SHAPE re-opened matching-C past the coddog/auto_decode
+"xhaustion'. Classes found (each ~3-15 fns, agbcc-reproducible, the gbadisasm pass just never tried them
+as C): (1) **thin wrappers** `[ret] f(args){ [return] CALLEE(args); }` -- DONE +17 via ~/wrap_carve.py
+(handles void/int/s8/s16/u8/u16 return, movs-int + ldr-(void*) args, sub_/named/local-aliased callees via
+decl-loop + baseline_syms bind). matching-C 7234->7251, **+56 session**, crossed 85%/named 80%.
+(2) **call + store-arg-to-field** `void f(int a){ *(int*)((char*)CALLEE((void*)L)+OFF)=a; }` (push{r4,lr};
+adds r4,r0; ldr r0,=L; bl X; str r4,[r0,#OFF]) -- BYTE-CONFIRMED winnable (carved .o matches baserom
+exactly) but FULL `make compare` hits an asm/baserom.s "Error 1" (make, not make -k) I have not yet
+diagnosed; deferred. NEXT LEVER (rich vein): enumerate small region-diff fns by shape, write a per-class
+carver, byte-confirm in isolation first (compile .c -> objdump vs the JP asm). LESSON: never conclude
+"frontier exhausted" from "automation exhausted" -- read the residual asm by SHAPE+SIZE.
