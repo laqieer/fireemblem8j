@@ -1,5 +1,5 @@
 	.syntax unified
-	.set sub_8012A14, 0x08012A14 + 1
+	.set StartEventWarpAnim_ret, 0x08012A14 + 1
 	.set sub_8012A38, 0x08012A38 + 1
 	.section .text.sub_8010D24, "ax", %progbits
 @ sub_8010D24 @ JP 0x08010D24 - region-different, gbadisasm descriptive asm (D23)
@@ -56,7 +56,7 @@ _08010D78:
 	str r4, [sp]
 _08010D7A:
 	adds r0, r5, #0
-	bl sub_8012A14
+	bl StartEventWarpAnim_ret
 	b _08010D92
 _08010D82:
 	bl sub_8012A38
