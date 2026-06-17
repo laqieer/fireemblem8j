@@ -4563,3 +4563,20 @@ TWO process bugs root-caused (both could silently break origin):
    del; verify `git cat-file -e HEAD:<f>` after. (memory: git-add-abort-selfcontain-regression)
 LESSON reinforced: the mechanical frontier is found by reading residual asm by SHAPE+SIZE, not by
 declaring "automation exhausted". More classes remain (multi-store config, complex cond-str).
+
+## D110 addendum 2 — two more shape-classes: call+global-decrement (WIN), multi-store (reg-alloc DEAD-END) (2026-06-17)
+Continuing the SHAPE sweep past the wrapper/str/cond classes:
+- **call(s)+global-decrement (WIN, +6, ~/decarve.py):** `push{lr}; [ldr r0,[r0,#OFF]; bl C1]|[bl C1];
+  ldr r1,=L; ldr r0,[r1]; subs r0,#N; str r0,[r1]; [bl C2]; pop{r0}; bx r0` ->
+  `void f([int proc]){ cw_C1([*(int*)(proc+OFF)]); *(int*)L -= N; [cw_C2();] }`. Statements emitted IN
+  ORDER from the parse; the `*(int*)L -= N` decrement is self-contained (no reg-reuse hazard) so it
+  byte-matches cleanly. Carved both the AnimDelete(proc->field60)+dec and the wrap-call/dec/wrap-call
+  variants. matching-C 7279->7285.
+- **multi-store config (DEAD-END, reg-alloc):** `push{lr}; ldr r2,[r0,#0x60]; ldr r1,=L; str r1,[r2,#A];
+  str r1,[r2,#B]; movs r1,#0; strh r1,[r2,#6]; bl C; pop` -- the natural C
+  `{ s->a=L; s->b=L; s->c=0; C(proc,0,s); }` makes agbcc EMIT AN EXTRA `movs r1,#0` to re-materialize the
+  call's 0 arg, but the JP REUSES the r1=0 from the strh. Tried the assignment-expression idiom
+  (`C(proc, s->c=0, s)`) too -- still reloads. agbcc 2.95 won't reuse here -> a codegen-shape/reg-alloc
+  dead-end (the D96/directive class to SKIP). 4 funcs deferred to permuter. The clean mechanical
+  shape-class vein (wrappers, str/cond, passthrough, call+dec) is now ~exhausted; remaining small still-
+  asm is BIOS-svc/trampolines (genuine asm, not matching-C) + reg-alloc-fragile + the hand-decomp frontier.
