@@ -34,9 +34,24 @@ Decode needs reading the JP asm pool entries directly, not guessing. The other C
 - `SioRuleSettings_Init` re-attempted: instruction-correlation hampered by the cascade; the JP
   movs `#0xda` @ func+0x14e is NOT MSG_745 (that SUBST went 39->96). Needs full objdump-vs-asm
   instruction alignment by bl-callee sequence — a focused ~30-min task, deferred.
-**CONCLUSION: matching-C reliable+semi-reliable levers EXHAUSTED at 84.19% (7180). Remaining =
-genuine agbcc codegen hand-decomp (very slow, ~1/iter at best) + the one entangled SioRuleSettings.
-Named axis also at ceiling (fingerprint n>=7 done, n=3 unreliable, coddog blind to backlog).**
+**UPDATE 2: SioRuleSettings_Init WON (7180->7181) via the SYSTEMATIC CONST-SEQUENCE method.**
+The "entangled cascade" was ONE const: MSG_745 = 0x6D0, which agbcc encodes as `movs #0xda; lsls #3`
+(0xDA<<3, shorter than a pool load) — so my pool `ldr` shifted every later ldr-offset. METHOD that
+cracks entangled DATA-DIFF cascades (don't guess bytes): objdump my .o + parse the JP asm, extract
+the LOADED-CONST sequence (movs #imm + ldr pool .4byte) from each, diff the sequences — the one extra
+JP `movs N` (where mine has a `ldr`) is the cascade const; read its asm context (`movs #N; lsls #k`
+=> source value N<<k) to get the source SUBST. This is in /tmp/carve_one.py-style flow.
+
+**CODE-DIFF re-screen (movs-seq similarity) = DEAD END / false signal.** Re-screened the 66 CODE-DIFF
+by movs-immediate-sequence similarity; ~14 scored 0.93-1.00, but carving them gave HUGE diffs
+(77-559 B, >50%): high movs-sim just means the few small immediates coincide — the ldr/branch/struct
+code genuinely differs. The original screen's CODE-DIFF ratio (full mnemonic seq <0.9) was CORRECT.
+Don't re-chase the CODE-DIFF bucket by movs-sim.
+
+**CONCLUSION: the static-screen winnable bucket is now FULLY EXHAUSTED (3 Sio DATA-DIFFs done:
+SioResult_NewHS_Init, SioResult_Init, SioRuleSettings_Init; ColorFade*=reg-alloc dead-end; 66
+CODE-DIFF + 11 CMPL = genuine region/codegen dead-ends, re-confirmed). matching-C at 84.20% (7181).
+Remaining matching-C = genuine agbcc codegen hand-decomp (very slow). Named axis at ceiling.**
 
 ---
 (prior detached run, retired:)
