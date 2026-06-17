@@ -6,7 +6,7 @@
 	.set sub_801973C, 0x0801973C + 1
 	.set sub_8019914, 0x08019914 + 1
 	.set sub_8019994, 0x08019994 + 1
-	.set sub_801DA50, 0x0801DA50 + 1
+	.set MakeNew6CBMXFADE2, 0x0801DA50 + 1
 	.section .text.sub_800BDE8, "ax", %progbits
 @ TriggerMapChanges @ JP 0x0800BDE8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -40,7 +40,7 @@ _0800BE0A:
 	bne _0800BE2E
 	movs r0, #1
 	adds r1, r7, #0
-	bl sub_801DA50
+	bl MakeNew6CBMXFADE2
 _0800BE2E:
 	pop {r4, r5, r6, r7}
 	pop {r0}

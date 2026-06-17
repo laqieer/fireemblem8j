@@ -2,11 +2,11 @@
 	.set LockGame, 0x08015384 + 1
 	.set Proc_StartBlocking, 0x08002C30 + 1
 	.section .text.sub_801DA50, "ax", %progbits
-@ sub_801DA50 @ JP 0x0801DA50 - region-different, gbadisasm descriptive asm (D23)
+@ MakeNew6CBMXFADE2 @ JP 0x0801DA50 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801DA50
+	.global MakeNew6CBMXFADE2
 	.thumb_func
-sub_801DA50:
+MakeNew6CBMXFADE2:
 	push {r4, lr}
 	adds r4, r0, #0
 	lsls r4, r4, #0x18
