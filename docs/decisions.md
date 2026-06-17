@@ -4720,3 +4720,17 @@ gamecontrol-specific (now mined). The broader small-N-FAR breaks down by the INS
 Net: the FAST const/struct quick-vein is ~+4 total (gamecontrol x3 + OpAnimHS); remaining small-N-FAR is
 dominated by lsr<->asr (skip) + literal-pool-pointer (binding) -> the genuine permuter/hand-decomp frontier.
 Ground truth: matching-C 86.20% (7351) / named 80.65%.
+
+
+## D113 addendum 2 — BGCHR const-fix sub-vein (+4): JP map-anim BG slot 0x140 not 0x160 (2026-06-17)
+A productive const-fix cluster: JP map-anim background functions place tiles at BGCHR slot **0x140** where
+the US source uses **0x160** (`BGCHR_MANIM_160` / `BM_BGCHR_BANIM_UNK160`, both =0x160 in the headers, but
+the JP ROM uses 0x140). Tell: a single literal diff `06002C00`->`06002800` (= VRAM + CHR_SIZE*BGCHR; 0x20*0x160
+vs 0x20*0x140). Fix = substitute 0x140 (`BGCHR_MANIM_140` if in scope, else the literal `0x140`). Carved the
+CLEAN ones (only the BGCHR differs; Img/Pal data-pointers happen to match US): MapAnimRepair_Init0,
+MapAnimBarrierfx_Init, WarpFlashy_Init, AntitoxinPureWaterfx_Init. matching-C 7351->7355 (+4). The `*_Loop`
+siblings did NOT match after the BGCHR fix (they ALSO have data-pointer diffs: Img/Pal at JP-different asset
+addresses, e.g. NightMarefx_Init Img 0x08A23C58->JP 0x08A27128 — JP uses different asset data -> needs
+data-asset RE, SKIP). Batch tool: per fn carve_inspect -> sed BGCHR_160->140 -> byte-verify -> commit/revert.
+The const-fix family so far (D113): Proc_Goto label shift (gamecontrol, JP=US-1), BGCHR slot (0x160->0x140),
+struct field-selection (OpAnimHS delay_timer not unk38). Ground truth: matching-C 86.25% (7355) / named 80.67%.
