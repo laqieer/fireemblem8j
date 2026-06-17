@@ -22,6 +22,22 @@ go ldr->movs and the literal-pool cascade is sensitive (a wrong single SUBST wen
 Decode needs reading the JP asm pool entries directly, not guessing. The other CLOSE were the
 4 ColorFade* (reg-alloc, permuter-confirmed dead-end). 66 CODE-DIFF + 11 CMPL = agbcc dead-ends.
 
+**ITER UPDATE (2026-06-17, screen winnable bucket EXHAUSTED — no new clean win this iter):**
+- CMPL bucket triaged: `SoundRoom_InitText` compiles after a DECL fix (struct Unknown201F148 from
+  US soundroom.c:42 + `extern struct ... gUnk_SoundRoom_0;` — autobind's auto-decl `int X()` was the
+  wrong TYPE for a struct instance) BUT then byte-diffs 50/232 with a CODE-LENGTH delta (my code is
+  4 B longer; +1 ldr-offset shifts persist regardless of the 0x5AA->0x535 / 0x5AE->0xe9 msg-id fix)
+  = codegen dead-end, NOT a const-diff. The other CMPL (ClassInfoDisplay_Init, ClassIntro_Init) need
+  multiple struct-decls + binds (gOpinfo_0/1, gUnk_58) and are likely the same code-diff outcome;
+  MultiBootMain/DrawItemMenuLineLong/libc = known dead-ends; AutolevelSecondaryLord = no recipe.
+- Borderline CODE-DIFF (ratio>=0.85 + same len) check: ZERO — the 66 CODE-DIFF are genuine.
+- `SioRuleSettings_Init` re-attempted: instruction-correlation hampered by the cascade; the JP
+  movs `#0xda` @ func+0x14e is NOT MSG_745 (that SUBST went 39->96). Needs full objdump-vs-asm
+  instruction alignment by bl-callee sequence — a focused ~30-min task, deferred.
+**CONCLUSION: matching-C reliable+semi-reliable levers EXHAUSTED at 84.19% (7180). Remaining =
+genuine agbcc codegen hand-decomp (very slow, ~1/iter at best) + the one entangled SioRuleSettings.
+Named axis also at ceiling (fingerprint n>=7 done, n=3 unreliable, coddog blind to backlog).**
+
 ---
 (prior detached run, retired:)
 # Detached permuter run — ColorFadeSetupFromBlack
