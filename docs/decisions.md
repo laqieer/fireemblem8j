@@ -4702,3 +4702,21 @@ with the US value 4, so the shift is route-specific). NOTE which diff types are 
   agbcc dead-end -> permuter or SKIP (D110).
 ~40 small-N-FAR candidates remain in the first perm2 batch alone (more in the backlog) -> a fresh productive
 matching-C vein for next iterations. Ground truth: matching-C 86.19% (7350) / named 80.64%.
+
+
+## D113 addendum — const-fix vein diff-type triage (struct-offset OK, lsr<->asr SKIP) (2026-06-17)
+Extended ~/carve_inspect.sh across more small-N-FAR candidates; the const-immediate (Proc_Goto) cluster was
+gamecontrol-specific (now mined). The broader small-N-FAR breaks down by the INSTRUCTION at the diff byte:
+- **single-field struct-offset** (str/ldr `[rN, #off]`, off differs by a few words; e.g.
+  OpAnimHS_InitFadeToBlack `str r0,[r4,#0x38]`->JP `#0x34`): FIXABLE via a LOCALIZED access
+  `*(int*)((char*)proc + 0xJP) = v;` (byte-matches, no risky struct-header change). +1 (7350->7351).
+- **lsr<->asr** (`lsrs rN,#24`=u8 zero-ext vs JP `asrs`=s8 sign-ext; BgChangeChr/StartEventEarthQuake/
+  UnitList_DrawPageHeader/StartSioWarpFx, all showed identical 0xe->0x16): agbcc narrows the param by USAGE
+  not declaration (`u8 a; a+=chr_chg` masks to u8 -> lsr even if the param is declared s8) -> can't flip via
+  a C type change -> SKIP (D110 dead-end, as the directive warns).
+- **literal-pool data-pointer** (diffs land in the `.4byte` pool, e.g. mapanim *_Init ProcScr/sprite ptrs):
+  a referenced data symbol resolves to a JP-different address -> needs per-symbol binding, not a const-fix.
+- **multi-diff (3+)** mixed: case-by-case, lower priority.
+Net: the FAST const/struct quick-vein is ~+4 total (gamecontrol x3 + OpAnimHS); remaining small-N-FAR is
+dominated by lsr<->asr (skip) + literal-pool-pointer (binding) -> the genuine permuter/hand-decomp frontier.
+Ground truth: matching-C 86.20% (7351) / named 80.65%.
