@@ -144,3 +144,25 @@ Build this screen (slow per-func build is the cost; run bounded/monitored, NOT a
 
 **Closed this iter: single-signal fingerprint naming callee+caller (0/0 pass 2-signal);
 data axis re-confirmed 100% (no headroom). WON: PutGuideBottomBarText 0/120 (1f7ef404a).**
+
+## NEXT-ITER LEVER (genuinely untried, switch away from hand-picking): coddog-on-backlog
+PutFaceTm (this iter) confirmed: the small-diff CODE-DIFF functions are instruction-SCHEDULING
+dead-ends (JP emits `lsls/asr` sign-extend BEFORE a ldrb-load block, mine after — same class the
+permuter non-converges on). So hand-picking named-asm is exhausted.
+**The one untried automation: coddog content-similarity on the 1202 un-carved sub_ functions.**
+coddog IS built (tools/coddog/target/release/coddog) but skips the sub_ backlog because those
+symbols have size=0 in the ELF (real `.text` syms but no `.size`). SETUP (multi-step, do in a
+focused iter):
+  1. Add `.size sub_X, .-sub_X` to each asm/sub_*.s (BYTE-NEUTRAL — doesn't change code, only the
+     symbol table; `make compare` stays OK). CAUTION: structures vary (some start with a `.set`
+     callee block; ensure the .size targets the function label, after its body). Script + verify
+     COLD make compare.
+  2. Recreate the (throwaway, uncommitted) `decomp.yaml` + `fe8.coddog.yaml` pointing jp=fireemblem8.elf,
+     us=../fireemblem8u/fireemblem8.elf (see docs/tools/coddog-classification.md "How it was run").
+  3. `coddog compare2` → for each sub_, similarity % to its best US match.
+  4. PAYOFF (two axes): (a) any sub_ at ~100% similarity = region-SAME the funcmap missed -> CARVE
+     it (+matching-C +named); (b) for region-diff sub_, the content-similarity is the 3rd signal
+     (hook's "coddog 3-signal naming") to combine with fingerprint callee-set + positional-delta ->
+     RELIABLY name it (byte-neutral, +named axis, which has ~10% headroom to the ~89.9% asset-sheet ceiling).
+Yield uncertain (mechanical levers cleared most region-same) but it's the only untried automation
+that can SEE the backlog. If it finds nothing region-same, it still feeds reliable naming.
