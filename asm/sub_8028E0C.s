@@ -3,7 +3,7 @@
 	.set GetItemIndex, 0x08017294 + 1
 	.set SetItemUseAction, 0x080294EC + 1
 	.set SetStaffUseAction, 0x080294C4 + 1
-	.set sub_8029510, 0x08029510 + 1
+	.set DoUseRescueStaff, 0x08029510 + 1
 	.set sub_8029550, 0x08029550 + 1
 	.set sub_802981C, 0x0802981C + 1
 	.set sub_8029890, 0x08029890 + 1
@@ -123,7 +123,7 @@ _08028F54: .4byte 0x08025E55  @ sub_8025E54
 _08028F58:
 	ldr r1, _08028F64 @ =sub_802607C
 	adds r0, r5, #0
-	bl sub_8029510
+	bl DoUseRescueStaff
 	b _0802900A
 	.align 2, 0
 _08028F64: .4byte 0x0802607D  @ sub_802607C
