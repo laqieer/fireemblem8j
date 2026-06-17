@@ -4,7 +4,7 @@
 	.set NewPopup2_PlanB, 0x0801F6E4 + 1
 	.set m4aSongNumStart, 0x080D4EF4 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
-	.set sub_802F8C4, 0x0802F8C4 + 1
+	.set ApplyJunaFruitItem, 0x0802F8C4 + 1
 	.section .text.sub_802F92C, "ax", %progbits
 @ sub_802F92C @ JP 0x0802F92C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -28,7 +28,7 @@ sub_802F92C:
 	movs r2, #0xff
 	strb r2, [r1]
 	ldrb r1, [r4, #0x12]
-	bl sub_802F8C4
+	bl ApplyJunaFruitItem
 	adds r6, r0, #0
 	ldr r0, _0802F994 @ =0x0202BCEC
 	adds r0, #0x41
