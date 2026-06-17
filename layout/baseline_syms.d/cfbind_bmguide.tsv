@@ -1,5 +1,5 @@
 gGuideSt	08BABAF4	data	PutGuideBottomBarText
-gTextIds_GuideCategoriesTopic	00000566	data	PutGuideBottomBarText
+gTextIds_GuideCategoriesTopic	08BABB54	data	PutGuideBottomBarText
 gProcScr_GuideEntryListRedraw_Down	08BABC64	data	GuideList_ScrollDown
 gProcScr_GuideEntryListRedraw_Up	08BABC3C	data	GuideList_ScrollUp
 BuildGuideTopicList	080D37E4	thumb	Guide_Init
