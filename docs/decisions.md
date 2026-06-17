@@ -4489,3 +4489,16 @@ ClassInfoDisplay_LoopWindowIn). ROOT CAUSE: the cascade's early passes ran befor
 so they re-bound already-aliased syms -> false `[LINK]`/`no-match` -> a whole cluster was skipped. LESSON:
 after fixing a harness bug, RE-SWEEP the full population (cf. D107's autobind re-sweep). NEXT: re-run
 `size_backlog`+coddog and run `auto_decode.py` over the full 413-candidate backlog to recover the rest.
+
+### D108 addendum 2 — the 95-99.9% coddog band has relocation-only straight matches (2026-06-17)
+After the 99.99%/100% bands were swept, running `auto_decode.py` over the **95-99.9% similarity band**
+(67 uncarved candidates, sorted by similarity desc) recovered **11 more region-SAME STRAIGHT matches**
+(SallyCir_RectLoop, PrepSpriteDraw_Init, Gmap{Base,Mu}Entry_0, EndingDetails_DimPalette, efx{SPDQuake,
+QuakePure}_Loop2/_Loop, Event15_BgmVolume, Sio_SyncWaitAllAck, ClassIntro_LoopBackdropFadeIn,
+PrepItemUse_ResetBgmAfterPromo) + the StartupDebugMenu msg-id pair. WHY <99.99%: coddog scores opcode
+streams; a function with several BL/literal RELOCATIONS to as-yet-unnamed JP targets reads as 99.5-99.9%
+similar, but once carved at its JP address the linker resolves those relocs and it byte-MATCHES. So the
+95-99.9% band is NOT all codegen-different — its high end is relocation-noise. Driver: `auto_decode.py`
+(make-compare-gated, skips the genuine codegen-diff ones safely). matching-C 7195 -> 7234 (**+39 total
+this session**, 84.83%), named crossed **80.01%**. The band's tail (<99.5%) is increasingly true codegen
+diff -> the hand-decomp/permuter frontier remains.
