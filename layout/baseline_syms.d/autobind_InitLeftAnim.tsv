@@ -1,0 +1,6 @@
+BanimTypesPosLeft	080DFF2D	data	InitLeftAnim
+gBanimLeftImgSheetBuf	02000088	data	InitLeftAnim
+gBanimOaml	020041C8	data	InitLeftAnim
+gBanimScrLeft	0200F1C8	data	InitLeftAnim
+gEkrYPosBase	02000034	data	InitLeftAnim
+gpBanimModesLeft	0200005C	data	InitLeftAnim
