@@ -73,7 +73,7 @@ sub_8000A20:
 	bl AdvanceGetLCGRNValue
 	bl InitRN
 	bl EraseInvalidSaveData
-	bl sub_80A8AEC
+	bl EraseSramDataIfInvalid
 	bl m4aSoundInit
 	bl Sound_SetDefaultMaxNumChannels
 	ldr r0, _08000AE4 @ =sub_80152C8
