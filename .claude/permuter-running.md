@@ -240,3 +240,20 @@ The reliable quick decodes are: hardcoded-msg-id literals (GetStringFromIndex(0x
 calls (bl sub_<X> to a duplicate), single-const movs. Triage by carving + objdump'ing the diff
 offset's instruction. The bind-only autobind matches are mostly exhausted in the first ~30 candidates;
 deeper ones are const-different/overlap. README scorecard refreshed (84.4%/7195, 79.8%/13313, D108).
+
+## coddog NAMING — bulk-rename is UNSAFE (reverted a regression). Use carve-based naming only.
+Attempted to NAME the const-different coddog candidates by byte-neutral rename (sub_<addr>->US_name
+without carving), betting the 99.99% opcode-identity is reliable. IT IS NOT SAFE in bulk:
+- coddog 99.99% includes DUPLICATES — multiple JP functions opcode-identical to ONE US function.
+  Renaming sub_<addr>->US_name when US_name is ALREADY defined at another addr creates a 2nd
+  definition; the linker resolves data-table/caller references to the WRONG copy -> BYTE MISMATCH
+  (make compare fails). CpDecide_Suspend@805CC2C collides this way (isolation-confirmed).
+- The `u not in DEFINED` filter does NOT catch all (some collide despite passing it).
+- WORSE: a background rename loop + committing MID-LOOP captured a half-rename -> committed+pushed a
+  make-compare-FAIL (REGRESSION). Fixed by `git revert` (force-push is blocked by branch protection,
+  so forward-revert only). LESSON: never commit while a background tree-mutating loop runs; always
+  `make compare` and SEE "OK" before `git add`.
+**SAFE naming = CARVE-based** (the +14 coddog carves): carve + autobind 0-diff byte-CONFIRMS the
+identity before naming. The bulk-rename skips that confirmation -> wrong names + collisions. Do NOT
+re-attempt bulk-rename. Continue the per-function carve harvest (bind-only + const-decode) which is
+self-verifying. matching-C 7195/84.37%, named 79.82% (stable, origin OK).
