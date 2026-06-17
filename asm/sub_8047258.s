@@ -24,9 +24,9 @@
 	.section .text.sub_8047258, "ax", %progbits
 @ sub_8047258 @ JP 0x08047258 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8047258
+	.global SioResult_NewHS_Init
 	.thumb_func
-sub_8047258:
+SioResult_NewHS_Init:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

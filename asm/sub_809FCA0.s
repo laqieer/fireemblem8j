@@ -34,9 +34,9 @@
 	.section .text.sub_809FCA0, "ax", %progbits
 @ sub_809FCA0 @ JP 0x0809FCA0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809FCA0
+	.global PrepItemSupply_InitGfx
 	.thumb_func
-sub_809FCA0:
+PrepItemSupply_InitGfx:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

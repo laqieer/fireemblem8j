@@ -23,9 +23,9 @@
 	.section .text.sub_8045EEC, "ax", %progbits
 @ sub_8045EEC @ JP 0x08045EEC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8045EEC
+	.global SioBat_SetupLoop
 	.thumb_func
-sub_8045EEC:
+SioBat_SetupLoop:
 	push {r4, r5, r6, lr}
 	sub sp, #8
 	adds r4, r0, #0

@@ -18,9 +18,9 @@
 	.section .text.sub_809D300, "ax", %progbits
 @ sub_809D300 @ JP 0x0809D300 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809D300
+	.global ProcPrepUnit_Idle
 	.thumb_func
-sub_809D300:
+ProcPrepUnit_Idle:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	ldrh r0, [r5, #0x2c]

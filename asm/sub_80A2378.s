@@ -37,9 +37,9 @@
 	.section .text.sub_80A2378, "ax", %progbits
 @ sub_80A2378 @ JP 0x080A2378 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A2378
+	.global WmSell_Setup
 	.thumb_func
-sub_80A2378:
+WmSell_Setup:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

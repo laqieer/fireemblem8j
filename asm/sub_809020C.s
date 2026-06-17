@@ -25,9 +25,9 @@
 	.section .text.sub_809020C, "ax", %progbits
 @ sub_809020C @ JP 0x0809020C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809020C
+	.global ChapterStatus_Init
 	.thumb_func
-sub_809020C:
+ChapterStatus_Init:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

@@ -46,9 +46,9 @@
 	.section .text.sub_809E794, "ax", %progbits
 @ sub_809E794 @ JP 0x0809E794 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809E794
+	.global PrepItemUse_InitDisplay
 	.thumb_func
-sub_809E794:
+PrepItemUse_InitDisplay:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

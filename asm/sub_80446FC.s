@@ -23,9 +23,9 @@
 	.section .text.sub_80446FC, "ax", %progbits
 @ sub_80446FC @ JP 0x080446FC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80446FC
+	.global Tactician_InitScreen
 	.thumb_func
-sub_80446FC:
+Tactician_InitScreen:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

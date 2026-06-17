@@ -28,9 +28,9 @@
 	.section .text.sub_80476A4, "ax", %progbits
 @ sub_80476A4 @ JP 0x080476A4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80476A4
+	.global SioRuleSettings_Init
 	.thumb_func
-sub_80476A4:
+SioRuleSettings_Init:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

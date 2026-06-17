@@ -27,9 +27,9 @@
 	.section .text.sub_809D144, "ax", %progbits
 @ sub_809D144 @ JP 0x0809D144 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809D144
+	.global ProcPrepUnit_InitScreen
 	.thumb_func
-sub_809D144:
+ProcPrepUnit_InitScreen:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r5, r0, #0

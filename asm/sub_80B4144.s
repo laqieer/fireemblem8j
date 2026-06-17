@@ -34,9 +34,9 @@
 	.section .text.sub_80B4144, "ax", %progbits
 @ sub_80B4144 @ JP 0x080B4144 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B4144
+	.global SoundRoomUi_Init
 	.thumb_func
-sub_80B4144:
+SoundRoomUi_Init:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
