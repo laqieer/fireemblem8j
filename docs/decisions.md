@@ -4378,3 +4378,40 @@ Carving the small region-different proc-wrapper tail, a clean rule emerged (veri
 **The lever (`scripts/fingerprint_identify.py`):** a region-different `sub_<hex>` can't byte-match, but its set of resolved real-name `bl` callees is a behavioral fingerprint. Match vs US function callee-sets (from `objdump -d ../fireemblem8u/fireemblem8.elf`): when EXACTLY ONE unmapped, not-yet-`.global`'d US function has a callee-set ⊇ the JP set (≥3 callees), that's a unique identification. **Cross-validate** with two independent signals: (a) callee-set Jaccard ≥0.7, (b) positional-delta vs nearest funcmap anchor within 0x2000. GOLD = both pass. 115 unique-superset hits → **30 GOLD** (6 at Jaccard 1.0). Renaming `sub_<hex>`→`RealName` is byte-neutral (skip the `.section`/filename/tsv to avoid layout churn; rename the `.global`/label/`.set`/`bl` token across target + caller files); `make compare` re-gates integrity. **+30 named symbols (79.02→79.20%), COLD make compare OK.**
 
 **Apply:** GOLD (two-signal) is the safe bar — never rename on one signal. A `SILVER` tier (delta_ok + 0.6≤Jaccard) is a candidate follow-up but each needs the second signal. Watch out: prior interrupted `make -k` runs leave **corrupt/partial `.o`** that fail `ld` with "file format not recognized" — detect with `nm` + reassemble (unrelated to the rename). Relates to D105 (bracket), autocarve harness.
+
+## D107 — Matching-C: re-sweep autobind after tooling fixes + 3 follow-on veins (2026-06-17)
+**Context:** matching-C plateaued at 7155/8528 (83.90%). One session drove it to 7178 (84.17%, **+23**)
+via four reliable mechanical levers, all `make compare`-gated, no regressions.
+
+**Lever 1 — re-run `autobind.py` after fixing two silent bugs (+12, then +4 on the tail).** The
+"dead-ends" were TOOLING ARTIFACTS: (a) function-callee sentinel `0x09000000` was 16 MB from the call
+site → Thumb `bl` reloc overflow → whole-ROM link fail reported as `[LINK] []`; fixed to a NEAR-VRAM
+sentinel (`func_vram ± 0x180000`), data syms keep the far sentinel. (b) `git rm` failed silently on a
+modified asm → symbol overlap → `[LINK]`; fixed to `git rm -qf … ; rm -f …`. Also fixed the revert
+guard `if len(bad)>4` → unconditional `revert` (a carve must be byte-PERFECT; the old guard KEPT
+≤4-byte non-matching carves and broke `make compare`). RE-SWEEPING the full 135 named-asm population
+at ~18-23% hit rate is the takeaway: after ANY tooling fix, re-test the whole population, don't trust
+prior verdicts.
+
+**Lever 2 — const-near-fix decode (+4).** Small (1-4 byte) `[DIFF]` near-misses are ONE JP-vs-US data
+constant: msg-ID −0x60, BGCHR tile-const 0x160→0x140, tilemap coord (x:9→8). Substitute in the carved
+body via `/tmp/carve_one.py` (autobind + per-fn SUBST). See memory const-near-fix-decode.
+
+**Lever 3 — far-rodata gap-split (+2: AiAttemptBallistaCombat, Event3D_MenuOverride).** A local-array
+initializer (`u8 x[]={…}`) emits `.o(.rodata)` the JP ROM places FAR from .text; the handdecomp tsv
+only places `.o(.text)` so the literal dangles to 0x09000000 (the `:0x9->0x8` near-miss signature).
+Fix mirrors the existing `GetGenericChibiImg.o(.rodata)` precedent: add a `src/Fn.o(.rodata)` tsv row
+at the rodata addr + split the owning data incbin (shrink-before + 2nd INCBIN_U8(bin,off,len)-after;
+sections pack at explicit addrs, no alignment padding). COLD `make clean && make compare` REQUIRED.
+
+**Lever 4 — sentinel-stuck DIFF bind (+1: StartFace).** A `[DIFF]` whose bind shows a `0x09xxxxxx`
+value = the data-map matched a false offset; the JP literal at the diff offset IS the real addr — bind
+manually.
+
+**Confirmed dead-ends (don't chase):** branch-polarity codegen (`cmp#0;beq` vs `cmp#1;bne` on a 0/1
+bool); `[UNMAPPED]` functions where the base prologue genuinely differs (region-diff — PROLOGUE-MATCH
+test first, remembering objdump shows halfword VALUES = file bytes reversed); multi-symbol UNMAPPED with
+a no-clean-literal symbol (ekrGaugeMain — compiler emits no direct load for gEkrgauge_5) needs an
+autobinder data-map fix, deferred. n=3 fingerprint candidates remain unreliable (ambiguous duplicates).
+**Next-iteration lever:** fix `autobind.py` data-map to handle multi-symbol/no-clean-literal cases →
+~5 confirmed-carvable UNMAPPED functions (matching prologues) become harvestable.
