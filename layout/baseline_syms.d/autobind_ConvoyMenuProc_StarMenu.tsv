@@ -1,0 +1,3 @@
+gConvoyItemCount	02001F70	data	ConvoyMenuProc_StarMenu
+gConvoyMenuDef	085C558C	data	ConvoyMenuProc_StarMenu
+gSendToConvoyMenuDef	085C55B0	data	ConvoyMenuProc_StarMenu
