@@ -8,3 +8,5 @@ cw_8021AE4	08021AE4	thumb	handdecomp_wrap2
 cw_8004F0C	08004F0C	thumb	handdecomp_wrap2
 cw_8056130	08056130	thumb	handdecomp_wrap2
 cw_8056214	08056214	thumb	handdecomp_wrap2
+cw_80011D0	080011D0	thumb	handdecomp_wrap2
+cw_8001EFC	08001EFC	thumb	handdecomp_wrap2
