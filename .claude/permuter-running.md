@@ -257,3 +257,17 @@ without carving), betting the 99.99% opcode-identity is reliable. IT IS NOT SAFE
 identity before naming. The bulk-rename skips that confirmation -> wrong names + collisions. Do NOT
 re-attempt bulk-rename. Continue the per-function carve harvest (bind-only + const-decode) which is
 self-verifying. matching-C 7195/84.37%, named 79.82% (stable, origin OK).
+
+## coddog/auto_decode lever EXHAUSTED at matching-C 84.83% (7234) — next = hand-decomp (2026-06-17)
+One session drove matching-C 7195->7234 (**+39**) and named past 80% via the full coddog automation
+chain: dependency cascade -> manual const-decode (msg-id/face-id/coord) -> auto_decode.py (straight +
+msg-id, make-compare-gated) -> 95-99.9% relocation-noise band (+11 straight) -> virtuous-cycle re-run.
+The FINAL virtuous-cycle pass (146 candidates incl. all bands, fresh coddog after the +39 carves)
+committed **0** -> the automatable region-SAME + simple-const frontier is EXHAUSTED. Remaining
+matching-C (1294 fns, ~15%) is genuine region-DIFFERENT codegen: needs `scripts/permuter/` (reg-alloc/
+instr-order near-misses, stochastic) or IDA/Ghidra hand-decomp per function, against the D96 "matching-C
+100% likely unreachable" ceiling. Named (3326 placeholders) is ~1687 unnameable asset sheets +
+~1639 region-different sub_ (same hand-decomp frontier; fingerprint-naming exhausted at 6).
+TOOLS for next iter: `~/auto_decode.py` + `~/carve_subst.py` (re-run after ANY new carve/tooling-fix —
+the virtuous cycle); `scripts/permuter/permute.sh` for byte-CLOSE [DIFF]; the `[DIFF]` base bytes ARE
+the JP const. DISCIPLINE: launch detached auto-runs + ONE wakeup at est-completion, DON'T poll per tick.
