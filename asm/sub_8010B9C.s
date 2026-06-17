@@ -7,11 +7,11 @@
 	.set sub_80153A4, 0x080153A4 + 1
 	.set sub_802CDF4, 0x0802CDF4 + 1
 	.section .text.sub_8010B9C, "ax", %progbits
-@ sub_8010B9C @ JP 0x08010B9C - region-different, gbadisasm descriptive asm (D23)
+@ Event3F_ScriptBattle @ JP 0x08010B9C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8010B9C
+	.global Event3F_ScriptBattle
 	.thumb_func
-sub_8010B9C:
+Event3F_ScriptBattle:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

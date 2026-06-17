@@ -19,11 +19,11 @@
 	.set sub_8088FA4, 0x08088FA4 + 1
 	.set sub_80AB458, 0x080AB458 + 1
 	.section .text.sub_8047CA0, "ax", %progbits
-@ sub_8047CA0 @ JP 0x08047CA0 - region-different, gbadisasm descriptive asm (D23)
+@ SioMenu_RestartGraphicsMaybe @ JP 0x08047CA0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8047CA0
+	.global SioMenu_RestartGraphicsMaybe
 	.thumb_func
-sub_8047CA0:
+SioMenu_RestartGraphicsMaybe:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

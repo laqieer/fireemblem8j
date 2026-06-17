@@ -12,11 +12,11 @@
 	.set sub_804E448, 0x0804E448 + 1
 	.set sub_8088FA4, 0x08088FA4 + 1
 	.section .text.sub_8046728, "ax", %progbits
-@ sub_8046728 @ JP 0x08046728 - region-different, gbadisasm descriptive asm (D23)
+@ DrawLinkArenaLoadingScreen @ JP 0x08046728 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8046728
+	.global DrawLinkArenaLoadingScreen
 	.thumb_func
-sub_8046728:
+DrawLinkArenaLoadingScreen:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r5, r0, #0

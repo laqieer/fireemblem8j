@@ -3,11 +3,11 @@
 	.set Proc_Goto, 0x08002E74 + 1
 	.set m4aSongNumStart, 0x080D4EF4 + 1
 	.section .text.sub_80A3B70, "ax", %progbits
-@ sub_80A3B70 @ JP 0x080A3B70 - region-different, gbadisasm descriptive asm (D23)
+@ SaveMenuExtrasMenuLoop @ JP 0x080A3B70 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A3B70
+	.global SaveMenuExtrasMenuLoop
 	.thumb_func
-sub_80A3B70:
+SaveMenuExtrasMenuLoop:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r4, r0, #0

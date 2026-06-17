@@ -7,11 +7,11 @@
 	.set sub_801DA28, 0x0801DA28 + 1
 	.set sub_8027144, 0x08027144 + 1
 	.section .text.sub_801856C, "ax", %progbits
-@ sub_801856C @ JP 0x0801856C - region-different, gbadisasm descriptive asm (D23)
+@ TickActiveFactionTurn @ JP 0x0801856C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801856C
+	.global TickActiveFactionTurn
 	.thumb_func
-sub_801856C:
+TickActiveFactionTurn:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

@@ -1,6 +1,6 @@
 	.syntax unified
 	.set BitfileToIndex, 0x080AD2D0 + 1
-	.set sub_80B0278, 0x080B0278 + 1
+	.set SaveMenuDrawSubSelBoxExt, 0x080B0278 + 1
 	.section .text.sub_80B02F8, "ax", %progbits
 @ sub_80B02F8 @ JP 0x080B02F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -20,7 +20,7 @@ sub_80B02F8:
 	adds r0, r0, r4
 	ldr r0, [r0]
 	adds r1, r5, #0
-	bl sub_80B0278
+	bl SaveMenuDrawSubSelBoxExt
 	cmp r5, #0
 	bne _080B0322
 	adds r0, r6, #0

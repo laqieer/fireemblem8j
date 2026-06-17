@@ -1,6 +1,6 @@
 	.syntax unified
 	.set TriggerMapChanges, 0x0800BDE8 + 1
-	.set sub_800BE34, 0x0800BE34 + 1
+	.set UntriggerMapChange, 0x0800BE34 + 1
 	.set sub_802E468, 0x0802E468 + 1
 	.section .text.sub_800F4D0, "ax", %progbits
 @ sub_800F4D0 @ JP 0x0800F4D0 - region-different, gbadisasm descriptive asm (D23)
@@ -98,7 +98,7 @@ _0800F576:
 	lsrs r0, r0, #0x10
 	movs r1, #0
 	adds r2, r5, #0
-	bl sub_800BE34
+	bl UntriggerMapChange
 _0800F582:
 	mov r1, r8
 	adds r1, #4
@@ -134,7 +134,7 @@ _0800F5BA:
 	lsls r0, r2, #0x10
 	lsrs r0, r0, #0x10
 	adds r2, r5, #0
-	bl sub_800BE34
+	bl UntriggerMapChange
 _0800F5C4:
 	mov r1, r8
 	adds r1, #4

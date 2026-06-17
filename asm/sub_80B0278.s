@@ -9,11 +9,11 @@
 	.set sub_8003F28, 0x08003F28 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.section .text.sub_80B0278, "ax", %progbits
-@ sub_80B0278 @ JP 0x080B0278 - region-different, gbadisasm descriptive asm (D23)
+@ SaveMenuDrawSubSelBoxExt @ JP 0x080B0278 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B0278
+	.global SaveMenuDrawSubSelBoxExt
 	.thumb_func
-sub_80B0278:
+SaveMenuDrawSubSelBoxExt:
 	push {r4, r5, lr}
 	lsls r1, r1, #0x18
 	cmp r1, #0
