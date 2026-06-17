@@ -4734,3 +4734,17 @@ addresses, e.g. NightMarefx_Init Img 0x08A23C58->JP 0x08A27128 — JP uses diffe
 data-asset RE, SKIP). Batch tool: per fn carve_inspect -> sed BGCHR_160->140 -> byte-verify -> commit/revert.
 The const-fix family so far (D113): Proc_Goto label shift (gamecontrol, JP=US-1), BGCHR slot (0x160->0x140),
 struct field-selection (OpAnimHS delay_timer not unk38). Ground truth: matching-C 86.25% (7355) / named 80.67%.
+
+
+## D113 addendum 3 — JP enum HEADER-fix lever (BG_BLANK/BG_RANDOM +0x1A): +2 (2026-06-17)
+A const-fix variant that's a SHARED header correction, not a per-function literal: the JP conversation-
+background enum has BG_BLANK=0x4F / BG_RANDOM=0x51 (US 0x35/0x37, +0x1A — JP has 26 more backgrounds). Tell:
+a function (ConvoBackgroundFade_LoadBg2) shows two diffs both +0x1A in `cmp`/`movs` immediates that map to
+these enum consts. SAFE header-fix gate: confirm NO committed src/*.c uses the consts (grep src/ -> only my
+uncommitted .s intermediates) so the change is byte-neutral for carved code; the COLD make compare re-gates
+the whole ROM. Fixed include/constants/backgrounds.h -> carving ConvoBackgroundFade_LoadBg2 + _LoadBg3 both
+byte-matched (the header unlocks ALL users at once). matching-C 7355->7357. BGCHR extension to the 12 other
+anim-TU BGCHR users yielded 0 (all have ADDITIONAL data-pointer diffs: Img/Pal at JP-different asset
+addresses -> data-asset RE, skip). The const-fix family (D113): Proc_Goto label shift, BGCHR slot
+0x160->0x140, struct field-selection, and now BG-enum +0x1A header-fix. lsr<->asr (ShopTryMoveHand/
+ExecUnitPromotion) remains the dominant SKIP. Ground truth: matching-C 86.27% (7357) / named 80.67%.
