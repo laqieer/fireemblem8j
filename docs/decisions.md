@@ -4667,3 +4667,18 @@ Two important negatives that bound the D112 vein:
    `~/efx_carve.py` self-commits + COLD-gates; reusable but low-yield. NOTE: carving drops baseline aliases
    the function no longer needs from jp_syms.s -> named axis (asm/-only count) churns down a few per carve
    (artifact; ROM byte-perfect+self-contained verified). Ground truth: matching-C 86.12% (7344) / named 80.61%.
+
+## D112 addendum 2 — generalized region-diff NEAR harvest (~/rd_carve.py): +3, ~1.2% rate (2026-06-17)
+Generalized the D112 vein to a self-committing background harvester `~/rd_carve.py` over ALL uncarved
+region-diff funcs (US name in nofuncmap_region_different + funclib JP addr + still-asm + US TU exists):
+572 candidates, pre-screen (extract+compile+`.rodata`==0+all-global-callees) -> **259 clean** -> chunk(12)
+carve -> build -> byte-check each range (the NEAR gate) -> revert FAR -> COLD make compare -> commit matches.
+Result: **3 NEAR** (ScriptBattleDeamon, WaitEventPromoteDone, PutTalkBubbleTm) = ~1.2% of clean (consistent
+with the efx 1/72). matching-C 7344->7347. perm2's STAGE-NEAR list is useless for discovery (re-detects
+already-carved; 200-batch -> 0 uncarved). **Limitation:** 4/22 chunks hit BUILD FAIL — a candidate compiles
+standalone but breaks the chunk build (LEN mismatch US .text size != JP range, not checked in pre-screen);
+the whole chunk is skipped (~0-1 lost match each, low EV to recover; future fix: add a per-candidate LEN
+check or CHUNK=1 retry-on-fail bisect). CONCLUSION: the NEAR vein across ALL region-diff funcs is now
+materially exhausted (~1% rate, ~3-8 left scattered in the BUILD-FAIL chunks). Remaining matching-C = the
+genuine codegen-FAR frontier (reg-alloc/struct-offset/logic) -> permuter/IDA/Ghidra (D96). Ground truth:
+matching-C 86.15% (7347) / named 80.63%.
