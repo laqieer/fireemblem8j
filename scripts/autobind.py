@@ -26,6 +26,14 @@ def us_inline_body(sym):
                     if depth==0: return txt[i:k+1]
     return None
 
+def us_enums(name):
+    for f in US_SRC:
+        try: txt=open(f,errors='replace').read()
+        except: continue
+        if re.search(rf'^[A-Za-z_][\w \t\*]*?\b{re.escape(name)}\s*\([^;{{]*\)\s*\{{',txt,re.M):
+            return "\n".join(m.group(0) for m in re.finditer(r'^enum\s*\{[^}]*\}\s*;',txt,re.M))
+    return ""
+
 def us_structs(name):
     for f in US_SRC:
         try: txt=open(f,errors='replace').read()
@@ -46,7 +54,7 @@ def carve(name):
     if not r: return None,"no recipe"
     decls=[]; tried=set()
     for _ in range(15):
-        open(f"src/{name}.c","w").write("".join(f'#include "{h}"\n' for h in r["inc"])+"\n"+us_structs(name)+"\n"+"".join(d+"\n" for d in decls)+"\n"+r["body"]+"\n")
+        open(f"src/{name}.c","w").write("".join(f'#include "{h}"\n' for h in r["inc"])+"\n"+us_enums(name)+"\n"+us_structs(name)+"\n"+"".join(d+"\n" for d in decls)+"\n"+r["body"]+"\n")
         err=sh(f"rm -f src/{name}.o; make src/{name}.o 2>&1")
         und=[u for u in re.findall(r"`([A-Za-z_]\w+)' undeclared",err)+re.findall(r"implicit declaration of function `([A-Za-z_]\w+)'",err) if u not in tried]
         if not und:
