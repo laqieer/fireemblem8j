@@ -4532,3 +4532,34 @@ exactly) but FULL `make compare` hits an asm/baserom.s "Error 1" (make, not make
 diagnosed; deferred. NEXT LEVER (rich vein): enumerate small region-diff fns by shape, write a per-class
 carver, byte-confirm in isolation first (compile .c -> objdump vs the JP asm). LESSON: never conclude
 "frontier exhausted" from "automation exhausted" -- read the residual asm by SHAPE+SIZE.
+
+## D110 — Matching-C: generalized register-dataflow wrapper carver + str/cond shape-classes (2026-06-17)
+The D109 thin-wrapper carver (`~/wrap_carve.py`) only handled in-order args (movs r0 / ldr r0). A
+SHAPE histogram of the remaining small still-asm sub_ (read via `git show HEAD:` to stay clear of the
+churning worktree) showed three more agbcc-reproducible classes the gbadisasm pass never tried as C:
+- **[13] `push;adds r1,r0;ldr r0,=L;bl X;pop;bx`** and **[4] `push;ldr rK,=L;bl X;pop;bx`** — wrappers
+  where the const is loaded into r1/r2 (NOT r0) and params pass through. ROOT-CAUSE BUG that broke the
+  first batch: `nargs` was derived from CONST registers only, so `adds r1,r0;ldr r0,=L` (arg in r1
+  ABOVE const r0) reconstructed as `CALLEE(L)` (1 arg) instead of `CALLEE(L, a0)`. FIX: nargs = highest
+  EXPLICITLY-WRITTEN arg register (r0-r3; r4+ are callee-saves, not args), const OR adds-copied param.
+  `~/wrap2.py` reconstructs `[return] cw_<addr>(arg0,arg1,...)` by simulating r0-r3 dataflow; void iff
+  `pop {r0}` (result clobbered) else int-return (`pop {rN≥1}` preserves r0). +16 (7254->7270).
+- **cond-str-to-field** `void f(int a){ void *p=CALLEE((void*)L); if(p) *(T*)((char*)p+OFF)=a; }`
+  (`~/strfield.py`; the `cmp r0,#0;beq` guard variant of D109's str-to-field) and plain str-to-field.
+- **cond-return** `int f(void){ return CALLEE((void*)L) != 0; }` (`~/condret.py`;
+  `bl;cmp r0,#0;beq;movs r0,#1` — agbcc emits this idiom for `!=0`, verified byte-identical).
+Callees referenced through a synthetic no-prototype alias `cw_<calleeaddr>` (thumb) bound in
+`layout/baseline_syms.d/handdecomp_wrap2.tsv` -> identical `bl` codegen, dodges typed-prototype -Werror.
+
+TWO process bugs root-caused (both could silently break origin):
+1. **str-to-field "asm/baserom.s Error 1" (D109 #2) was a PHANTOM** — a transient stale-state artifact,
+   NOT a real blocker. Re-ran clean: COLD `make compare` OK. The class carves fine.
+2. **BATCH carving corrupts the ROM** — placing N carved .o's together shifts the whole ROM if even one
+   range is off; even previously-committed wrappers then mismatch. MUST carve ONE-AT-A-TIME, each
+   COLD-`make compare`-gated (`~/wrap_one.py` / strfield / condret drivers do this + safe-commit + push).
+3. **`git add A B C` ABORTS ENTIRELY if any pathspec is missing** (a just-`git rm`'d asm) -> commits only
+   the deletion, leaves src/.c UNTRACKED -> clean checkout fails make compare (cold mc on the dirty
+   worktree still says OK -> slipped past). FIX: add ONLY existing files; the `git rm` already staged the
+   del; verify `git cat-file -e HEAD:<f>` after. (memory: git-add-abort-selfcontain-regression)
+LESSON reinforced: the mechanical frontier is found by reading residual asm by SHAPE+SIZE, not by
+declaring "automation exhausted". More classes remain (multi-store config, complex cond-str).
