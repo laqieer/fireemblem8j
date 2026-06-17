@@ -210,3 +210,20 @@ in the launch cmd (self-matches the shell -> exit 144; use explicit pids). Some 
 different (Sio-like, won't straight-match) -> autobind reverts them; harvest the bind-only ones first.
 Also: 5 sub_ at 100.00% (exact) + 604 at 95-99.9% (the 95-99.9 band = bigger reloc/const deltas, lower
 priority). Re-run size_backlog + coddog after a batch to refresh (carving changes the ELF).
+
+## coddog harvest — STATUS + const-decode (matching-C 7181 -> 7194, +13 coddog carves)
+The bind-only autobind harvest (~22% of candidates) banked ~12 (harvester + manual). The
+remaining ~130 candidates are mostly CONST-DIFFERENT (coddog 99.99% = opcode-identical, operands
+differ) — these are NOT dead-ends, they're per-function const-decodes:
+- **JP-VARIANT CALL** (ChapterIntro_DrawChapterTitle, WON 0/80): the US calls FuncX but JP calls a
+  DUPLICATE at a nearby addr (DrawChapterTitleStrEx@0808B99C vs JP's bl sub_808B9C0@0808B9C0, +0x24).
+  Fix: rename the call to FuncX_jp + bind it to the JP addr (from the `bl sub_<X>` in the asm).
+- **JP-DIFFERENT FLAG/CONST** (ItemSelectMenu_Effect 1/112 @0x2e `movs #0xe0`->`#0xa0`): a single const
+  differs; find it by objdump'ing the diff offset's instruction + matching to the US body. (NB the
+  return MENU_ACT_SND6A=0xe0 is CORRECT — the 0xe0 at 0x2e is a DIFFERENT const, still undiagnosed.)
+**HARVEST METHOD (main-thread, foreground):** per fn — rename sub_<addr>->US_name (def+callers),
+autobind.run; [MATCH]->commit; [DIFF] small->objdump the diff instruction + decode the const/call;
+[LINK]->a fn callee autobind couldn't bind (find its addr from `bl sub_<X>` in the asm). Candidates:
+reference/coddog/region_same_candidates.txt (144). Re-run size_backlog+coddog after a batch (virtuous
+cycle). DON'T run a detached background harvester (protocol = main-thread; also /tmp scripts vanish +
+pkill self-matches exit-144). The 604 sub_ at 95-99.9% are a second wave (bigger deltas).
