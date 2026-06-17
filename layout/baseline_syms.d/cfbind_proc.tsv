@@ -1,3 +1,4 @@
 sProcArray	02024E68	data	ProcCmd_END_IF_DUPLICATE
 ProcScr_TextPrint	08577F24	data	StartTextPrint
 ProcScr_efxDeadAlpha	085E3974	data	NewEfxDeadAlpha
+NewEfxDead	08053C9C	thumb	efxDeadEvent_Loop_D
