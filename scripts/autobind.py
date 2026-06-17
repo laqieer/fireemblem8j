@@ -120,7 +120,7 @@ def run(name):
         print(f"[MATCH] {name}: 0/{e-s}  binds={ {u:hex(a) for u,a in real.items()} }")
     else:
         print(f"[DIFF] {name}: {len(bad)}/{e-s} " + " ".join(f"{i-s:#x}:{mine[i]:#x}->{base[i]:#x}" for i in bad[:10]) + f"  binds={ {u:hex(a) for u,a in real.items()} }")
-        if len(bad)>4: revert(name,r)
+        revert(name,r)  # a carve must be byte-PERFECT; always revert non-zero (the [DIFF] log keeps the near-miss for hand-fix). prev `if len(bad)>4` wrongly KEPT <=4B diffs -> broke make compare
 def revert(name,r):
     sh(f"git checkout HEAD -- asm/sub_{r['addr']}.s layout/carved_rom.d/gbadisasm_sub_{r['addr']}.tsv")
     for p in (f"src/{name}.c",f"src/{name}.o",f"layout/carved_rom.d/handdecomp_{name}.tsv",f"layout/baseline_syms_drop.d/handdecomp_{name}.tsv",BINDF(name)):
