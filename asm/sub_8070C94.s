@@ -2,12 +2,12 @@
 	.set GetAnimAnotherSide, 0x0805B058 + 1
 	.set GetAnimPosition, 0x0805AF10 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
-	.section .text.sub_8070C94, "ax", %progbits
-@ sub_8070C94 @ JP 0x08070C94 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.EfxSkillCommonBG_FreezeAnims, "ax", %progbits
+@ EfxSkillCommonBG_FreezeAnims @ JP 0x08070C94 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8070C94
+	.global EfxSkillCommonBG_FreezeAnims
 	.thumb_func
-sub_8070C94:
+EfxSkillCommonBG_FreezeAnims:
 	push {r4, r5, r6, lr}
 	mov r6, sl
 	mov r5, sb

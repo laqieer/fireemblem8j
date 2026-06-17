@@ -5,12 +5,12 @@
 	.set sub_80194BC, 0x080194BC + 1
 	.set sub_8035610, 0x08035610 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
-	.section .text.sub_8029890, "ax", %progbits
-@ sub_8029890 @ JP 0x08029890 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.DoUsePutTrap, "ax", %progbits
+@ DoUsePutTrap @ JP 0x08029890 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8029890
+	.global DoUsePutTrap
 	.thumb_func
-sub_8029890:
+DoUsePutTrap:
 	push {r4, r5, lr}
 	adds r5, r2, #0
 	bl sub_80D65C0

@@ -16,12 +16,12 @@
 	.set sub_804D4F8, 0x0804D4F8 + 1
 	.set sub_8088FA4, 0x08088FA4 + 1
 	.set sub_80AB458, 0x080AB458 + 1
-	.section .text.sub_8047A4C, "ax", %progbits
-@ sub_8047A4C @ JP 0x08047A4C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.SioMenu_LoadGraphics, "ax", %progbits
+@ SioMenu_LoadGraphics @ JP 0x08047A4C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8047A4C
+	.global SioMenu_LoadGraphics
 	.thumb_func
-sub_8047A4C:
+SioMenu_LoadGraphics:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r6, r0, #0

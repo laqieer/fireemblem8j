@@ -4,12 +4,12 @@
 	.set sub_80176AC, 0x080176AC + 1
 	.set sub_80267A0, 0x080267A0 + 1
 	.set sub_80D636C, 0x080D636C + 1
-	.section .text.sub_8026BC0, "ax", %progbits
-@ sub_8026BC0 @ JP 0x08026BC0 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.TornOutUnitSprite, "ax", %progbits
+@ TornOutUnitSprite @ JP 0x08026BC0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8026BC0
+	.global TornOutUnitSprite
 	.thumb_func
-sub_8026BC0:
+TornOutUnitSprite:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

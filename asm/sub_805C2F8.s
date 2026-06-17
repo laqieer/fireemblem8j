@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8002BCC, 0x08002BCC + 1
-	.section .text.sub_805C2F8, "ax", %progbits
-@ sub_805C2F8 @ JP 0x0805C2F8 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.NewDummvRST, "ax", %progbits
+@ NewDummvRST @ JP 0x0805C2F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805C2F8
+	.global NewDummvRST
 	.thumb_func
-sub_805C2F8:
+NewDummvRST:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0

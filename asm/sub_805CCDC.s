@@ -5,17 +5,17 @@
 	.set StartBattleAnimHitEffectsDefault, 0x08056220 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_80540C0, 0x080540C0 + 1
-	.set sub_805CD78, 0x0805CD78 + 1
+	.set NewEfxTeonoOBJ, 0x0805CD78 + 1
 	.set sub_806EA40, 0x0806EA40 + 1
 	.set sub_806EBA0, 0x0806EBA0 + 1
 	.set sub_80748E4, 0x080748E4 + 1
 	.set sub_8074934, 0x08074934 + 1
-	.section .text.sub_805CCDC, "ax", %progbits
-@ sub_805CCDC @ JP 0x0805CCDC - region-different, gbadisasm descriptive asm (D23)
+	.section .text.EfxTeonoMain, "ax", %progbits
+@ EfxTeonoMain @ JP 0x0805CCDC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805CCDC
+	.global EfxTeonoMain
 	.thumb_func
-sub_805CCDC:
+EfxTeonoMain:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	ldr r0, [r5, #0x5c]
@@ -33,7 +33,7 @@ sub_805CCDC:
 	rsbs r1, r1, #0
 	bl sub_80540C0
 	ldr r0, [r5, #0x5c]
-	bl sub_805CD78
+	bl NewEfxTeonoOBJ
 	movs r1, #0x2c
 	ldrsh r0, [r5, r1]
 	cmp r0, #1

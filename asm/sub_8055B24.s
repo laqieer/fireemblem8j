@@ -2,12 +2,12 @@
 	.set GetAnimPosition, 0x0805AF10 + 1
 	.set sub_8001EE4, 0x08001EE4 + 1
 	.set sub_80D636C, 0x080D636C + 1
-	.section .text.sub_8055B24, "ax", %progbits
-@ sub_8055B24 @ JP 0x08055B24 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.EfxStatusUnitEnd, "ax", %progbits
+@ EfxStatusUnitEnd @ JP 0x08055B24 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8055B24
+	.global EfxStatusUnitEnd
 	.thumb_func
-sub_8055B24:
+EfxStatusUnitEnd:
 	push {lr}
 	ldr r0, [r0, #0x5c]
 	bl GetAnimPosition

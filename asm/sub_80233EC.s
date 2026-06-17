@@ -1,12 +1,12 @@
 	.syntax unified
 	.set StartMenuAt, 0x0804FA24 + 1
 	.set sub_8023470, 0x08023470 + 1
-	.section .text.sub_80233EC, "ax", %progbits
-@ sub_80233EC @ JP 0x080233EC - region-different, gbadisasm descriptive asm (D23)
+	.section .text.ItemSelectMenu_Effect, "ax", %progbits
+@ ItemSelectMenu_Effect @ JP 0x080233EC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80233EC
+	.global ItemSelectMenu_Effect
 	.thumb_func
-sub_80233EC:
+ItemSelectMenu_Effect:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r2, _08023444 @ =0x0203A954

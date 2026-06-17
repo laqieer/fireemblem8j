@@ -1,1 +1,1 @@
-040B0C	040B34	asm/sub_8040B0C.o(.text.sub_8040B0C)	sub_8040B0C region-different gbadisasm descriptive asm
+040B0C	040B34	asm/AiFindClosestChestPosition.o(.text.AiFindClosestChestPosition)	AiFindClosestChestPosition region-different gbadisasm descriptive asm

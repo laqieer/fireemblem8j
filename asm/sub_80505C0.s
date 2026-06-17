@@ -2,12 +2,12 @@
 	.set BG_EnableSyncByMask, 0x08001EFC + 1
 	.set sub_80011D0, 0x080011D0 + 1
 	.set sub_8001BC0, 0x08001BC0 + 1
-	.section .text.sub_80505C0, "ax", %progbits
-@ sub_80505C0 @ JP 0x080505C0 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.ClearMenuBgs, "ax", %progbits
+@ ClearMenuBgs @ JP 0x080505C0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80505C0
+	.global ClearMenuBgs
 	.thumb_func
-sub_80505C0:
+ClearMenuBgs:
 	push {r4, lr}
 	adds r4, r0, #0
 	adds r4, #0x64

@@ -2,12 +2,12 @@
 	.set Proc_Find, 0x08002DEC + 1
 	.set Proc_Goto, 0x08002E74 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
-	.section .text.sub_8045BC8, "ax", %progbits
-@ sub_8045BC8 @ JP 0x08045BC8 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.SioMain2_WaitEndAndRoute, "ax", %progbits
+@ SioMain2_WaitEndAndRoute @ JP 0x08045BC8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8045BC8
+	.global SioMain2_WaitEndAndRoute
 	.thumb_func
-sub_8045BC8:
+SioMain2_WaitEndAndRoute:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r0, _08045C00 @ =0x085D4760

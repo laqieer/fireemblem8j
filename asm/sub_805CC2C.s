@@ -2,12 +2,12 @@
 	.set SpellFx_Begin, 0x08056108 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_8056120, 0x08056120 + 1
-	.section .text.sub_805CC2C, "ax", %progbits
-@ sub_805CC2C @ JP 0x0805CC2C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.StartSpellAnimDummy, "ax", %progbits
+@ StartSpellAnimDummy @ JP 0x0805CC2C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805CC2C
+	.global StartSpellAnimDummy
 	.thumb_func
-sub_805CC2C:
+StartSpellAnimDummy:
 	push {r4, lr}
 	adds r4, r0, #0
 	bl SpellFx_Begin

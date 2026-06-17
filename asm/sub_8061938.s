@@ -1,12 +1,12 @@
 	.syntax unified
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_80564F0, 0x080564F0 + 1
-	.section .text.sub_8061938, "ax", %progbits
-@ sub_8061938 @ JP 0x08061938 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.StartSubSpell_efxHazymoonOBJ3RND, "ax", %progbits
+@ StartSubSpell_efxHazymoonOBJ3RND @ JP 0x08061938 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8061938
+	.global StartSubSpell_efxHazymoonOBJ3RND
 	.thumb_func
-sub_8061938:
+StartSubSpell_efxHazymoonOBJ3RND:
 	push {r4, r5, r6, lr}
 	mov r6, r8
 	push {r6}

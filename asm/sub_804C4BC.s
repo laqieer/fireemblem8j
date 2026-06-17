@@ -2,12 +2,12 @@
 	.set Sio_IsPlayerConnected, 0x08042114 + 1
 	.set sub_808B1F4, 0x0808B1F4 + 1
 	.set sub_808BB14, 0x0808BB14 + 1
-	.section .text.sub_804C4BC, "ax", %progbits
-@ sub_804C4BC @ JP 0x0804C4BC - region-different, gbadisasm descriptive asm (D23)
+	.section .text.LABattleMap_StartBonusPointsHelp, "ax", %progbits
+@ LABattleMap_StartBonusPointsHelp @ JP 0x0804C4BC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804C4BC
+	.global LABattleMap_StartBonusPointsHelp
 	.thumb_func
-sub_804C4BC:
+LABattleMap_StartBonusPointsHelp:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	ldr r0, _0804C500 @ =0x06015000

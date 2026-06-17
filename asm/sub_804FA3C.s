@@ -5,7 +5,7 @@
 	.set Proc_StartBlocking, 0x08002C30 + 1
 	.set m4aSongNumStart, 0x080D4EF4 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
-	.set sub_8050520, 0x08050520 + 1
+	.set OverriddenMenuAvailability, 0x08050520 + 1
 	.set sub_80D65C4, 0x080D65C4 + 1
 	.section .text.sub_804FA3C, "ax", %progbits
 @ sub_804FA3C @ JP 0x0804FA3C - region-different, gbadisasm descriptive asm (D23)
@@ -117,7 +117,7 @@ _0804FADC:
 _0804FB0E:
 	adds r0, r1, r6
 	adds r1, r7, #0
-	bl sub_8050520
+	bl OverriddenMenuAvailability
 	lsls r0, r0, #0x18
 	lsrs r4, r0, #0x18
 	cmp r4, #0

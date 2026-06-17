@@ -2,12 +2,12 @@
 	.set AiClearDecision, 0x08039C78 + 1
 	.set sub_803BF14, 0x0803BF14 + 1
 	.set sub_803D3E0, 0x0803D3E0 + 1
-	.section .text.sub_803F5AC, "ax", %progbits
-@ sub_803F5AC @ JP 0x0803F5AC - region-different, gbadisasm descriptive asm (D23)
+	.section .text.AiFunc_AttackUnitWithCharId, "ax", %progbits
+@ AiFunc_AttackUnitWithCharId @ JP 0x0803F5AC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803F5AC
+	.global AiFunc_AttackUnitWithCharId
 	.thumb_func
-sub_803F5AC:
+AiFunc_AttackUnitWithCharId:
 	push {lr}
 	ldr r2, _0803F5CC @ =0x0203AA9C
 	ldrb r1, [r0]

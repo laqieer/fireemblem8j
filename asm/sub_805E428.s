@@ -4,12 +4,12 @@
 	.set sub_8056890, 0x08056890 + 1
 	.set sub_8073820, 0x08073820 + 1
 	.set sub_80D636C, 0x080D636C + 1
-	.section .text.sub_805E428, "ax", %progbits
-@ sub_805E428 @ JP 0x0805E428 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.efxFirebreathBGCOL_Loop, "ax", %progbits
+@ efxFirebreathBGCOL_Loop @ JP 0x0805E428 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805E428
+	.global efxFirebreathBGCOL_Loop
 	.thumb_func
-sub_805E428:
+efxFirebreathBGCOL_Loop:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r0, #0x2c

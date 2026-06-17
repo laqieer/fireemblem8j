@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80D65C4, 0x080D65C4 + 1
-	.section .text.sub_8050520, "ax", %progbits
-@ sub_8050520 @ JP 0x08050520 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.OverriddenMenuAvailability, "ax", %progbits
+@ OverriddenMenuAvailability @ JP 0x08050520 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8050520
+	.global OverriddenMenuAvailability
 	.thumb_func
-sub_8050520:
+OverriddenMenuAvailability:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r2, _08050528 @ =0x03001868

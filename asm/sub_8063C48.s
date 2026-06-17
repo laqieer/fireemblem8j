@@ -5,12 +5,12 @@
 	.set sub_805660C, 0x0805660C + 1
 	.set sub_80567B8, 0x080567B8 + 1
 	.set sub_8056890, 0x08056890 + 1
-	.section .text.sub_8063C48, "ax", %progbits
-@ sub_8063C48 @ JP 0x08063C48 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.efxFimbulvetrBGTR_Loop, "ax", %progbits
+@ efxFimbulvetrBGTR_Loop @ JP 0x08063C48 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8063C48
+	.global efxFimbulvetrBGTR_Loop
 	.thumb_func
-sub_8063C48:
+efxFimbulvetrBGTR_Loop:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r0, #0x2c

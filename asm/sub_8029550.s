@@ -4,12 +4,12 @@
 	.set sub_80194BC, 0x080194BC + 1
 	.set sub_8035610, 0x08035610 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
-	.section .text.sub_8029550, "ax", %progbits
-@ sub_8029550 @ JP 0x08029550 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.DoUseSpecialDance, "ax", %progbits
+@ DoUseSpecialDance @ JP 0x08029550 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8029550
+	.global DoUseSpecialDance
 	.thumb_func
-sub_8029550:
+DoUseSpecialDance:
 	push {r4, r5, lr}
 	adds r5, r2, #0
 	bl sub_80D65C0

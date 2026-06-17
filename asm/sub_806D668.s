@@ -3,12 +3,12 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8012E84, 0x08012E84 + 1
 	.set sub_80D636C, 0x080D636C + 1
-	.section .text.sub_806D668, "ax", %progbits
-@ sub_806D668 @ JP 0x0806D668 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.EfxmagicShadowshot_FadeToBlack_Loop, "ax", %progbits
+@ EfxmagicShadowshot_FadeToBlack_Loop @ JP 0x0806D668 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_806D668
+	.global EfxmagicShadowshot_FadeToBlack_Loop
 	.thumb_func
-sub_806D668:
+EfxmagicShadowshot_FadeToBlack_Loop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

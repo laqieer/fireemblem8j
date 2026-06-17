@@ -1,11 +1,11 @@
 	.syntax unified
 	.set WriteSuspendSave, 0x080AA460 + 1
-	.section .text.sub_8039B40, "ax", %progbits
-@ sub_8039B40 @ JP 0x08039B40 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.CpDecide_Suspend, "ax", %progbits
+@ CpDecide_Suspend @ JP 0x08039B40 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8039B40
+	.global CpDecide_Suspend
 	.thumb_func
-sub_8039B40:
+CpDecide_Suspend:
 	push {lr}
 	ldr r0, _08039B5C @ =0x03004DF0
 	ldr r0, [r0]

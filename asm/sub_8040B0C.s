@@ -1,12 +1,12 @@
 	.syntax unified
 	.set sub_803AD58, 0x0803AD58 + 1
 	.set sub_8040E18, 0x08040E18 + 1
-	.section .text.sub_8040B0C, "ax", %progbits
-@ sub_8040B0C @ JP 0x08040B0C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.AiFindClosestChestPosition, "ax", %progbits
+@ AiFindClosestChestPosition @ JP 0x08040B0C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8040B0C
+	.global AiFindClosestChestPosition
 	.thumb_func
-sub_8040B0C:
+AiFindClosestChestPosition:
 	push {r4, lr}
 	adds r4, r1, #0
 	bl sub_8040E18

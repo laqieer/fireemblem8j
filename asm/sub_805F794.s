@@ -1,12 +1,12 @@
 	.syntax unified
 	.set AnimDelete, 0x08004F0C + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
-	.section .text.sub_805F794, "ax", %progbits
-@ sub_805F794 @ JP 0x0805F794 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.efxFimbulvetrOBJ2Fall_Loop, "ax", %progbits
+@ efxFimbulvetrOBJ2Fall_Loop @ JP 0x0805F794 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805F794
+	.global efxFimbulvetrOBJ2Fall_Loop
 	.thumb_func
-sub_805F794:
+efxFimbulvetrOBJ2Fall_Loop:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r3, [r4, #0x60]

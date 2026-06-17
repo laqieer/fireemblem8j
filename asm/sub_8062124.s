@@ -3,12 +3,12 @@
 	.set SpellFx_Begin, 0x08056108 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_8056120, 0x08056120 + 1
-	.section .text.sub_8062124, "ax", %progbits
-@ sub_8062124 @ JP 0x08062124 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.StartSpellAnimHeal, "ax", %progbits
+@ StartSpellAnimHeal @ JP 0x08062124 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8062124
+	.global StartSpellAnimHeal
 	.thumb_func
-sub_8062124:
+StartSpellAnimHeal:
 	push {r4, lr}
 	adds r4, r0, #0
 	bl SpellFx_Begin

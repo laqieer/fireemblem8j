@@ -1,6 +1,6 @@
 	.syntax unified
 	.set sub_8002DE4, 0x08002DE4 + 1
-	.set sub_8061938, 0x08061938 + 1
+	.set StartSubSpell_efxHazymoonOBJ3RND, 0x08061938 + 1
 	.section .text.sub_80618D8, "ax", %progbits
 @ sub_80618D8 @ JP 0x080618D8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -32,7 +32,7 @@ sub_80618D8:
 	movs r3, #0
 	ldrsh r2, [r0, r3]
 	ldr r0, [r4, #0x5c]
-	bl sub_8061938
+	bl StartSubSpell_efxHazymoonOBJ3RND
 	ldrh r0, [r4, #0x2e]
 	adds r0, #1
 	strh r0, [r4, #0x2e]

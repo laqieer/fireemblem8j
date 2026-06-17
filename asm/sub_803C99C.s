@@ -2,12 +2,12 @@
 	.set NextRN_N, 0x08000C58 + 1
 	.set sub_803D3E0, 0x0803D3E0 + 1
 	.set sub_803F9C0, 0x0803F9C0 + 1
-	.section .text.sub_803C99C, "ax", %progbits
-@ sub_803C99C @ JP 0x0803C99C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.AiScriptCmd_05_DoStandardAction, "ax", %progbits
+@ AiScriptCmd_05_DoStandardAction @ JP 0x0803C99C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803C99C
+	.global AiScriptCmd_05_DoStandardAction
 	.thumb_func
-sub_803C99C:
+AiScriptCmd_05_DoStandardAction:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	movs r0, #0x64

@@ -1,11 +1,11 @@
 	.syntax unified
 	.set PutSprite, 0x080052F0 + 1
-	.section .text.sub_8033484, "ax", %progbits
-@ sub_8033484 @ JP 0x08033484 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.PrepHelpPrompt_Loop, "ax", %progbits
+@ PrepHelpPrompt_Loop @ JP 0x08033484 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8033484
+	.global PrepHelpPrompt_Loop
 	.thumb_func
-sub_8033484:
+PrepHelpPrompt_Loop:
 	push {r4, lr}
 	sub sp, #4
 	ldr r4, _080334F4 @ =0x085B8D24
