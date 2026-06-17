@@ -4748,3 +4748,17 @@ anim-TU BGCHR users yielded 0 (all have ADDITIONAL data-pointer diffs: Img/Pal a
 addresses -> data-asset RE, skip). The const-fix family (D113): Proc_Goto label shift, BGCHR slot
 0x160->0x140, struct field-selection, and now BG-enum +0x1A header-fix. lsr<->asr (ShopTryMoveHand/
 ExecUnitPromotion) remains the dominant SKIP. Ground truth: matching-C 86.27% (7357) / named 80.67%.
+
+
+## D113 addendum 4 — const-fix continues (+1 modulo); data-pointer + codegen-shape ceilings (2026-06-17)
++1: DebugContinueMenuInit — JP `% 101` not US `% 100` (two `(checksum & 0xff) % 100 + 1` face-id picks; JP has
+101 debug faces). New const class: a modulo divisor. Two ceilings confirmed this iter:
+- **data-pointer = JP asset REORDER, not mis-binding** (verified NightMarefx_Init: its JP image is at
+  0x08A27128 which is labeled `Img_MonsterStoneMapAnimfx` — JP orders the mapanim assets differently than US,
+  so the US-named data symbols don't map; per-asset data RE, SKIP).
+- **codegen-shape (condition polarity)** = HARD: PlayCommandEffect US `if(!itemUsable)` -> `cmp #0;beq` but JP
+  `cmp #1;bne`; tried `itemUsable!=1` (agbcc optimizes identically, s8 in {0,1}) and `int itemUsable`+`!=1`
+  (made it WORSE, 4 diffs) -> needs the EXACT JP source structure, uncertain -> permuter territory, SKIP.
+The clean const-fix candidates are thinning (the dominant remaining small-N-FAR is lsr<->asr + data-pointer +
+codegen-shape, all skip). const-fix family now 5 classes (Proc_Goto, BGCHR, struct-field-sel, BG-enum
+header, modulo). Ground truth: matching-C 86.28% (7358) / named 80.68%.
