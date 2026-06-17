@@ -1,6 +1,6 @@
 	.syntax unified
 	.set sub_800AC34, 0x0800AC34 + 1
-	.set sub_800ACA8, 0x0800ACA8 + 1
+	.set Spline_Eval, 0x0800ACA8 + 1
 	.set sub_80D6378, 0x080D6378 + 1
 	.section .text.sub_800B4F0, "ax", %progbits
 @ sub_800B4F0 @ JP 0x0800B4F0 - region-different, gbadisasm descriptive asm (D23)
@@ -152,7 +152,7 @@ _0800B5F0:
 	ldr r1, [sp, #0x14]
 	mov r0, sp
 	adds r2, r7, #0
-	bl sub_800ACA8
+	bl Spline_Eval
 	cmp r0, #0
 	bge _0800B620
 	str r4, [r7, #8]

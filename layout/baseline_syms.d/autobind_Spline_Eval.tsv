@@ -1,0 +1,3 @@
+Spline_BuildCubicCoeffs	0800AB34	thumb	Spline_Eval
+Spline_FindSegment	0800AC34	thumb	Spline_Eval
+gSpline_0	085B9894	data	Spline_Eval
