@@ -181,3 +181,32 @@ that can SEE the backlog. If it finds nothing region-same, it still feeds reliab
   `tools/coddog/target/release/coddog compare2`, capture similarity %, then `git checkout -- asm/`
   to revert the .size. ACT on results: ~100% sim sub_ = region-same (CARVE); 0.5-0.95 sim = feed the
   fingerprint as the 3rd naming signal (byte-neutral +named). 1170 sub_ are size-0 T symbols today.
+
+## ★ MAJOR LEVER FOUND: coddog-on-backlog carves the un-named sub_ functions (+matching-C +named)
+**Executed the coddog-on-backlog plan — it WORKS.** `scripts/tools/coddog/size_backlog.py`
+appends byte-neutral `.size` to the 1100+ un-carved `asm/sub_*.s`, making them visible to coddog.
+`coddog compare2` then found **413 sub_ at 99.99%/100%** (region-SAME modulo relocation) — each a
+US-function identification the funcmap LACKED. 144 unique (non-dup, not-already-carved) saved to
+`reference/coddog/region_same_candidates.txt` (format: `US_name JP_addr`).
+
+**Carve workflow (PROVEN, +6 this iter):** for `US_name JP_addr`:
+  1. `SUB=sub_<addr-no-leading-0>` ; rename in its asm + callers:
+     `sed -i 's/\.global $SUB\b/.global $US/; s/^$SUB:/$US:/' asm/$SUB.s`
+     `for f in $(grep -rlE "\b$SUB\b" asm/ layout/); do sed -i "s/\b$SUB\b/$US/g" $f; done`
+  2. `python3 -c "import sys;sys.path.insert(0,'scripts');sys.argv=['x'];import autobind;autobind.run('$US')"`
+     -> autobind sentinel-binds the missing data/proc symbols and byte-checks; [MATCH] keeps, else reverts.
+  3. if `src/$US.c` exists (matched): dedup_baseline_syms + gen_layout + COLD make compare + commit + push.
+  4. else: `git checkout HEAD -- src/ asm/ layout/` + rm untracked strays (the rename must be reverted).
+**WON +6:** DebugMenu_StartNameEntryEffect, ADJUSTFROMXI_MoveCameraOnSomeUnit, ConvoyMenuProc_StarMenu,
+ConvoyMenuProc_ExecBootlegPopup, MenuCommand_DrawExtraItem, StartPikeTrapAnim. matching-C 7181->7187.
+
+**WHY straight-port (graduate_jp_batch) gave 0:** it doesn't BIND the undefined data/proc symbols
+(proc-scripts like ProcScr_PikeTrapAnim@085C3520). autobind's sentinel-bind is the fix.
+
+**NEXT ITER (~138 candidates remain, high-yield):** run the per-function workflow as a SERIAL loop
+(one function at a time = robust; the batch/global-sentinel version has a cascade bug — chunks >1 fail,
+chunks=1 work but a prior chunk's incomplete revert poisons the next, so PRE-CLEAN each). AVOID `pkill`
+in the launch cmd (self-matches the shell -> exit 144; use explicit pids). Some candidates are CONST-
+different (Sio-like, won't straight-match) -> autobind reverts them; harvest the bind-only ones first.
+Also: 5 sub_ at 100.00% (exact) + 604 at 95-99.9% (the 95-99.9 band = bigger reloc/const deltas, lower
+priority). Re-run size_backlog + coddog after a batch to refresh (carving changes the ELF).
