@@ -4415,3 +4415,53 @@ a no-clean-literal symbol (ekrGaugeMain — compiler emits no direct load for gE
 autobinder data-map fix, deferred. n=3 fingerprint candidates remain unreliable (ambiguous duplicates).
 **Next-iteration lever:** fix `autobind.py` data-map to handle multi-symbol/no-clean-literal cases →
 ~5 confirmed-carvable UNMAPPED functions (matching prologues) become harvestable.
+
+## D108 — Matching-C: coddog-on-backlog + self-committing multi-wave dependency cascade (2026-06-17)
+**Context:** after D107's autobind re-sweep, matching-C looked exhausted at 7195/8528 (84.37%). One
+session drove it to 7205 (84.49%, **+10**) by re-opening the frontier with coddog and a corrected
+auto-carve harness. All `make compare`-gated, no regressions.
+
+**Lever — coddog-on-backlog (the breakthrough).** coddog's `read_elf` keeps only size>0 ELF symbols,
+so the ~1100 un-carved `sub_<addr>` (gbadisasm, size-0) were INVISIBLE to it.
+`scripts/tools/coddog/size_backlog.py` appends byte-neutral `.size sub_X, .-sub_X`; rebuild, run
+`coddog compare2 … -t 0.9`, then `git checkout -- asm/` (analysis only). This surfaced **413 sub_ at
+99.99%/100%** (region-SAME modulo relocation) the funcmap never identified
+(`reference/coddog/region_same_candidates.txt`, 144 unique after filtering). Each carves by renaming
+`sub_<addr>`→US-name (def + all callers + layout refs) then `autobind.run` (sentinel-binds the
+data/proc symbols `graduate_jp_batch` misses). +matching-C AND +named together.
+
+**Self-committing multi-wave harvest** (`~/cod_harvest.sh` + `cod_waves.sh`). A single pass skips
+already-carved, per-candidate renames+`autobind.run`, double-`make compare`-gates, and commits+pushes
+EACH match individually (never a batch, so a timeout/kill can't capture a half-state). A carved
+function entering the JP link then resolves the previously-undefined call in its un-carved CALLERS, so
+the next pass unlocks them — a dependency cascade. Observed: `AiDoBerserkMove` → `AiScriptCmd_05/08` →
+`AiFunc_AttackUnitWithCharId`; the `DoUse*` and `Sio_*`/`Efx*` chains likewise. `cod_waves.sh` reruns
+passes until one yields 0 new matches (frontier exhausted for that wave).
+
+**Two harness bugs root-caused + fixed (事实驱动, both gave FALSE no-matches that hid real carves):**
+1. **Cascade poisoning** — `clean()` reverted source but left the prior candidate's `fireemblem8.elf`/
+   `.gba`; the stale build poisoned the next candidate (e.g. `CpDecide_Suspend` no-matched in the loop
+   but `[MATCH] 0/56` in isolation). 
+2. **Empty/stale DEFINED** — `autobind` computes `DEFINED=defined_elf()` from the CURRENT
+   `fireemblem8.elf` at import. With the elf deleted/stale, already-aliased common symbols
+   (`BG_Fill`, `UpdateMenuItemPanel`, AI funcs — defined via `baseline_syms` `.set` aliases, type 'A')
+   read as "missing" → autobind re-binds them → duplicate `.set` → multiple-definition `[LINK]`.
+   Confirmed: `AiDoBerserkMove` `[LINK]`→`[MATCH]` once DEFINED was correct.
+   **Fix:** `clean()` restores a cached HEAD-state elf (`cp ~/head_baseline.elf fireemblem8.elf`) each
+   candidate — correct DEFINED AND no stale poison, ~2× faster than rebuilding (re-cache after every
+   match commit since HEAD moves).
+
+**Bulk-rename naming is UNSAFE (don't retry).** Naming a region-different `sub_`→US-name WITHOUT
+carving, betting on coddog's 99.99% opcode-identity, COLLIDES: coddog 99.99% includes DUPLICATES
+(several JP funcs opcode-identical to one US func), so renaming when the US-name is already defined at
+another address resolves data-table refs to the wrong copy → byte mismatch (`CpDecide_Suspend`
+isolation-confirmed). CARVE-based naming is safe (autobind 0-diff byte-CONFIRMS the identity first);
+the bulk rename skips that confirmation. A mid-background-loop commit of a half-rename once regressed
+`make compare` on origin — fixed by `git revert` (branch protection blocks force-push). LESSON: never
+commit while a background tree-mutating loop runs.
+
+**Residual classes (the auto-carve tail):** `[DIFF]` = const-different (decode per-function: JP msg-ID,
+JP-variant call, ±0x40 enum/const shift — see D107/D81); `[LINK]`-with-empty-miss = coddog duplicate
+name (skip); `[UNMAPPED]` = autobinder can't map a symbol from the literal pool (manual bind). Next:
+const-decode the `[DIFF]` subset; re-run `size_backlog`+coddog after a batch (newly-carved funcs
+surface fresh matches — the virtuous cycle); the 604 sub_ at 95-99.9% are a lower-confidence 2nd wave.
