@@ -1,0 +1,3 @@
+gMinimapDisplayedWinBuf	02000508	data	Minimap_InitOpenAnim
+gMinimapFrontWinBuf	02000500	data	Minimap_InitOpenAnim
+gMinimapWinBuf	02000000	data	Minimap_InitOpenAnim
