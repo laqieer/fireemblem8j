@@ -4762,3 +4762,16 @@ ExecUnitPromotion) remains the dominant SKIP. Ground truth: matching-C 86.27% (7
 The clean const-fix candidates are thinning (the dominant remaining small-N-FAR is lsr<->asr + data-pointer +
 codegen-shape, all skip). const-fix family now 5 classes (Proc_Goto, BGCHR, struct-field-sel, BG-enum
 header, modulo). Ground truth: matching-C 86.28% (7358) / named 80.68%.
+
+## D113 addendum 5 — 0-yield explore: dead-ends mapped + permuter UNBLOCKED (2026-06-17)
+A 0-matching-C iteration that mapped the remaining small-N-FAR dead-ends and FIXED the permuter setup.
+Candidates all SKIP: GmMuPrim_TrackMovementDelta/ShopTryMoveHand/ExecUnitPromotion/StartMuralBackgroundAlt
+(lsr<->asr), PrepItemScreen_DrawSelectedUnitDetails (`adds r5,#0x80`->JP `#0x78` = agbcc-computed offset, not
+a clean literal; `[31]`->`[30]` over-corrected to 122 diffs), PlayCommandEffect (codegen-shape condition
+polarity), Sio_/GameIntro (BUILD FAIL). **Permuter import bug FIXED**: the glabel-`.s` converter must KEEP
+`.align` (dropping it misaligns the literal pool -> `as: invalid offset, value too big`). With .align kept,
+`permute.sh import src/<fn>.c /tmp/<fn>.s` works (drop @comment/.section/.global/.thumb_func/.size, replace
+`<fn>:`->`glabel <fn>`, keep .syntax/.thumb/.align/.set/body; rm src/<fn>.c after so CFILES skips it). BUT
+permuter does NOT crack codegen-shape (PlayCommandEffect base score 220, stuck, never <220 in 520 iters) — it
+permutes statements/temps, not agbcc's `cmp #0;beq` vs `cmp #1;bne`. Permuter is for REG-ALLOC targets, not
+yet isolated. Matching-C unchanged 7358; the automated const-fix vein is materially thinning.
