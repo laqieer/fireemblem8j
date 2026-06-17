@@ -1,6 +1,6 @@
 	.syntax unified
 	.set AP_Update, 0x080091AC + 1
-	.set sub_8027080, 0x08027080 + 1
+	.set SetStandingMuFacingWM, 0x08027080 + 1
 	.set sub_8027EBC, 0x08027EBC + 1
 	.set sub_80C7264, 0x080C7264 + 1
 	.section .text.sub_80BFAC8, "ax", %progbits
@@ -94,7 +94,7 @@ _080BFB0C:
 	lsls r1, r1, #5
 	ldr r2, _080BFBB8 @ =0x06010000
 	adds r1, r1, r2
-	bl sub_8027080
+	bl SetStandingMuFacingWM
 	adds r0, r6, #0
 	adds r0, #0x36
 	ldrb r0, [r0]
