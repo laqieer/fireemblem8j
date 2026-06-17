@@ -4593,3 +4593,33 @@ trampolines (genuine hand-asm, NOT matching-C — same as fe8u) + reg-alloc-frag
 larger region-different functions = the genuine hand-decomp/permuter/IDA frontier. Next levers: per-
 function permuter on byte-CLOSE reg-alloc near-misses; IDA/Ghidra for region-different logic; the named
 axis is at its practical ceiling (banim_/gfx_/sheet placeholders + fingerprint exhausted).
+
+## D111 — screen_grad NEAR named-asm carve vein + named-axis counting artifact (2026-06-17)
+After the coddog autobind harvest re-run proved exhausted (wave-2 over 235 residual candidates: data-
+driven 7/7 no-match, breakdown 3 `[DIFF]`/2 `[LINK]`/1 `[UNMAPPED]`, 0 `[MATCH]` — second-order callee
+resolution from the 46 session carves did NOT flip the region-different residual), switched to the
+**screen_grad NEAR vein**: `scripts/screen_grad.py` buckets funcmap-named still-asm functions; a **NEAR**
+(diffs ONLY at reloc offsets) byte-matches once carved at the JP address with referenced symbols bound.
+Carved both NEARs (the screenable pool is only ~16 funcmap-asm funcs): **FaceRefreshSprite** (face;
+`extern struct FaceVramEntry sFaceConfig[]` matching StartFaceFadeOut + gSprite_Face* resolve in-ELF) and
+**SoundInit** (m4a; bind `DummyFunc`→`nullsub_4` @0x080D6360 thumb; `MPlayJumpTableCopy` already defined in
+asm/m4a_1.o — do NOT re-bind). matching-C 7338->7340. Also **named** sub_801DA50->`MakeNew6CBMXFADE2` via
+`scripts/caller_fingerprint_identify.py` (independent signal: the unmapped US func all named callers
+commonly call + tight positional delta 0x4; cross-confirmed by `funclib_us_jp.tsv` + identical callee-set
+{LockGame,Proc_StartBlocking}; it's a documented reg-alloc dead-end so name-only). Both fingerprint levers
+(callee `fingerprint_identify` + caller `caller_fingerprint_identify`) now yield ~1 each = exhausted.
+
+**Key insight — named axis is asm/-only:** `calcprogress.label_stats()` counts `.global` ONLY under `asm/`.
+So carving a NAMED asm fn to src/ REMOVES its `.global` from asm/ → named −1 (it's still named, just in
+uncounted src/). Carving a PLACEHOLDER `sub_` improves BOTH axes (placeholder−1 → named% up). Naming a
+placeholder in-place (fingerprint/caller-fp) is +1 named, byte-neutral. Implication: prioritize sub_
+placeholder carves/names; named-asm→src carves trade −1 named-optics for +1 matching-C (still required for
+the goal; named recovers as the asm/ pool shrinks to data-only).
+
+**Regression caught+fixed:** a `git checkout cffef96a0 -- <paths>` parent-count diagnostic STAGED the
+restored files; the next `docs(scorecard)` commit (`git add README.md`) swept them in → re-added the
+just-deleted asm/FaceRefreshSprite.s → ldscript overlap@0x56c8 → broken build COMMITTED+PUSHED. Fixed by
+`git rm` the duplicates + rebuild + COLD make compare. Lesson saved to memory (git-checkout-paths-staging-
+trap): always `git reset` after such diagnostics; `git show <commit>:<path>` for read-only reads; verify
+`git status --short` before every commit. Ground truth now: self-contain 100% / matching-C 86.07% (7340) /
+data 100% / named 80.60% (13366).
