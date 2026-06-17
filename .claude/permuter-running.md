@@ -1,4 +1,30 @@
-# Detached permuter run — ColorFadeSetupFromBlack (CURRENT)
+# NO permuter running — both attempts retired as non-converge (2026-06-17)
+
+**Permuter is NOT a viable lever for the FE8J reg-alloc/instruction-ordering tail.**
+Two genuine runs both failed to converge: efxHitQuake_Loop (852 B, best stuck at base 330
+over 1.3M iters) and ColorFadeSetupFromBlack (128 B, best 475 vs base 480 over 7k iters).
+The reorderings agbcc needs are not in the permuter's transformation space. Don't re-launch
+without a fundamentally different residual class.
+
+## CURRENT high-yield lever — static-screen DATA-DIFF carves (the Sio family vein)
+The static mnemonic screen (`/tmp/mscreen.py`, names from `/tmp/named_asm.txt`) on the
+remaining ~84 named-asm surfaced the winnable DATA-DIFF / CLOSE functions. **WON this iter:
+SioResult_NewHS_Init (0/572), SioResult_Init (0/500)** — both Sio link-arena result screens
+with the SAME layout-const decode:
+  - 4 rank-header text X-offsets shifted (JP wider): ~12->16, 84->92/94, 120->129/132, 150->156
+  - 4 header msg-IDs MSG_772/773/774/775 -> JP indices 0x5a/0x5b/0x5d/0x5f
+  - help-text PutSioText id (MSG_744 -> 0x6cf)
+  Method: `/tmp/carve_one.py` SUBST (autobind + per-fn body replace), iterate (fix msg-IDs +
+  X-offsets, the ldr->movs change cascades to fix literal-pool-offset diffs). See the SioResult_*
+  entries already in /tmp/carve_one.py for the exact SUBST.
+**STILL OPEN (next iter):** `SioRuleSettings_Init` (0.921) — same class but ENTANGLED: 2+ consts
+go ldr->movs and the literal-pool cascade is sensitive (a wrong single SUBST went 39->96).
+Decode needs reading the JP asm pool entries directly, not guessing. The other CLOSE were the
+4 ColorFade* (reg-alloc, permuter-confirmed dead-end). 66 CODE-DIFF + 11 CMPL = agbcc dead-ends.
+
+---
+(prior detached run, retired:)
+# Detached permuter run — ColorFadeSetupFromBlack
 
 **Launched:** 2026-06-17. **Function:** ColorFadeSetupFromBlack (sub_8001870, 128 B).
 **Residual:** 10-byte diff @0xa-0x14 — a literal-load / instruction-ORDERING swap at the
