@@ -104,7 +104,9 @@ def run(name):
                         bo=((b1&0x7ff)<<12)|((b2&0x7ff)<<1); bo-=0x800000 if bo&0x400000 else 0
                         real[u]=(0x08000000+i+4+bo)&0xFFFFFFFF; break
         else:
-            for i in range(s,e-3):
+            # literal-pool entries are 4-aligned (abs addr % 4 == 0, i.e. file offset % 4 == 0);
+            # scanning every byte hit MISALIGNED false-matches spanning instruction bytes -> garbage map
+            for i in range((s+3)&~3,e-3,4):
                 mv=struct.unpack("<I",mine[i:i+4])[0]
                 if sv<=mv<sv+0x8000:
                     real[u]=struct.unpack("<I",base[i:i+4])[0]-(mv-sv); break
