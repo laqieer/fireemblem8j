@@ -15,9 +15,9 @@
 	.section .text.sub_80B77A4, "ax", %progbits
 @ sub_80B77A4 @ JP 0x080B77A4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B77A4
+	.global ClassIntro_Init
 	.thumb_func
-sub_80B77A4:
+ClassIntro_Init:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

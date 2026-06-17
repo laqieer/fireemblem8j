@@ -20,9 +20,9 @@
 	.section .text.sub_808D488, "ax", %progbits
 @ sub_808D488 @ JP 0x0808D488 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_808D488
+	.global BoxDialogueInterpreter_Main
 	.thumb_func
-sub_808D488:
+BoxDialogueInterpreter_Main:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

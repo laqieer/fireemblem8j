@@ -27,9 +27,9 @@
 	.section .text.sub_8046798, "ax", %progbits
 @ sub_8046798 @ JP 0x08046798 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8046798
+	.global DrawLinkArenaRuleScreen
 	.thumb_func
-sub_8046798:
+DrawLinkArenaRuleScreen:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

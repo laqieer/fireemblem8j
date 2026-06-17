@@ -19,9 +19,9 @@
 	.section .text.sub_80ABD8C, "ax", %progbits
 @ sub_80ABD8C @ JP 0x080ABD8C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80ABD8C
+	.global EraseInvalidSaveData
 	.thumb_func
-sub_80ABD8C:
+EraseInvalidSaveData:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -14,9 +14,9 @@
 	.section .text.sub_8023198, "ax", %progbits
 @ sub_8023198 @ JP 0x08023198 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8023198
+	.global PlayCommandEffect
 	.thumb_func
-sub_8023198:
+PlayCommandEffect:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

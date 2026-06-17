@@ -17,9 +17,9 @@
 	.section .text.sub_8060490, "ax", %progbits
 @ sub_8060490 @ JP 0x08060490 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8060490
+	.global efxResire_Loop_Main
 	.thumb_func
-sub_8060490:
+efxResire_Loop_Main:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #8
 	adds r4, r0, #0

@@ -26,9 +26,9 @@
 	.section .text.sub_8046F4C, "ax", %progbits
 @ sub_8046F4C @ JP 0x08046F4C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8046F4C
+	.global SioResult_Init
 	.thumb_func
-sub_8046F4C:
+SioResult_Init:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #8
 	adds r7, r0, #0

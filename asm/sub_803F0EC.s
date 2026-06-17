@@ -13,9 +13,9 @@
 	.section .text.sub_803F0EC, "ax", %progbits
 @ sub_803F0EC @ JP 0x0803F0EC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803F0EC
+	.global AiTryAttackFromConfiguredPosition
 	.thumb_func
-sub_803F0EC:
+AiTryAttackFromConfiguredPosition:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
