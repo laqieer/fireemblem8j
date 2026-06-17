@@ -2,4 +2,4 @@ gEkrSpellAnimLut	085FF090	data	StartSpellAnimation
 ProcScr_EfxRestWIN	085FF220	data	NewEfxRestWIN
 gEfxutils_0	087A8CD0	data	efxRestRSTMain
 MakeCircleWindowBounds	08013330	thumb	EfxCircleWINMain
-SetEkrFrontAnimPostion	07E6DB48	thumb	Loop6C_efxMagicQUAKE
+SetEkrFrontAnimPostion	08056984	thumb	Loop6C_efxMagicQUAKE
