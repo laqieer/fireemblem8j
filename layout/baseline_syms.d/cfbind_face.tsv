@@ -6,3 +6,4 @@ Sprite_Face_1	085B8F8E	data	StartFaceChibiSpr
 Sprite_Face_0	085B8F80	data	StartFaceChibiSpr
 gFace_0	080DC43C	data	PutFaceOnBackGround
 gProcScr_FaceEndIn8Frames	085B8FCC	data	EndFaceIn8Frames
+gProcScr_Face_0	085B8F9C	data	PutFace80x72
