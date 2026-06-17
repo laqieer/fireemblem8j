@@ -55,9 +55,9 @@ enum {
     BG_VOLCANO                 = 0x32,
     BG_BLACK_TEMPLE_OUTSIDE    = 0x33,
     BG_BLACK_TEMPLE_INSIDE     = 0x34,
-    BG_BLANK                   = 0x35,
+    BG_BLANK                   = 0x4F, /* JP: +0x1A (26 more BGs) */
 
-    BG_RANDOM                  = 0x37,
+    BG_RANDOM                  = 0x51, /* JP: +0x1A */
 };
 
 #endif // GUARD_CONSTANTS_BACKGROUNDS_H
