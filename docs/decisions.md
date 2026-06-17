@@ -4623,3 +4623,30 @@ just-deleted asm/FaceRefreshSprite.s → ldscript overlap@0x56c8 → broken buil
 trap): always `git reset` after such diagnostics; `git show <commit>:<path>` for read-only reads; verify
 `git status --short` before every commit. Ground truth now: self-contain 100% / matching-C 86.07% (7340) /
 data 100% / named 80.60% (13366).
+
+## D112 — perm2-NEAR MANUAL carve vein (batch carvers blocked; manual works) (2026-06-17)
+The automatic carvers are exhausted/blocked: `const_diff_carve` (const-only vein dry — remaining FAR is
+true `ABORT:codegen`), `perm2_graduate` and `const_diff` BOTH revert their staged carves on **layout
+overlap** (their candidates' funclib ranges collide with already-carved trivial_funcs/stranded/adhoc
+regions), `graduate_exact` has 2 candidates both region-different (agb_sram/m4a hand-asm). ROOT CAUSE of the
+overlap: the US-name carvers can't cleanly swap functions still named `sub_<addr>` in the gbadisasm layer
+when the region is partially claimed.
+
+BUT the perm2-flagged **NEAR** functions (reloc-only / region-same-modulo-relocation) ARE carveable by HAND,
+exactly like the [[screen_grad NEAR]] FaceRefreshSprite/SoundInit path:
+1. `extract_func_only.py <us_tu>.c <Fn>` -> src/<Fn>.c (verify .rodata==0; a local const array splits
+   .text/.rodata and lands in a contested data gap — SKIP those, e.g. ArenaSetFallbackWeaponForUnit).
+2. For each undefined `U` symbol, check it's global `T`/`A` in the HEAD elf (the `a` lowercase entries are
+   just caller thumb-aliases — a real global `T` usually co-exists; grep ` T <sym>$`). Bind only the ones
+   with NO global form: a still-`sub_<addr>` callee -> `<Name>\t<JPADDR>\tthumb\t...`, a ROM data table ->
+   `<Name>\t<JPADDR>\tdata\t...` (find the JP addr from the OLD asm/sub_<addr>.s literal pool / `.set`).
+3. Swap: git rm asm/sub_<addr>.s + gbadisasm tsv; handdecomp carved_rom tsv (JP range -> src/<Fn>.o(.text));
+   drop both <Fn> AND sub_<addr> in baseline_syms_drop.d.
+4. **The byte-check is the ONLY reliable NEAR gate** — compile-clean siblings are NOT all NEAR (codegen-FAR
+   ones show 40-90 systematic diffs, often JP struct-offset +0x08 deltas). carve -> byte-check [s,e] -> keep
+   0-diff, revert else.
+Carved this way: **EfxHpBarResire_DeclineToDeath** (NewEfxDeadEvent->sub_8053AC4 thumb), **EfxDKUpdateFront-
+AnimPostion** (all-global), **EfxHpBar_DeclineToDeath** (NewEfxDeadEvent bind). matching-C 7340->7343; each
+is a placeholder sub_ -> +matching-C AND +named (placeholder leaves asm/). Reverted as FAR: EfxHpBarResire_
+SetAnotherSide (47 diffs), EfxNoDamageYureMain (89, struct-offset). Source of NEAR candidates: perm2_graduate
+/const_diff `[STAGE NEAR]` / `NEAR(use-perm2)` log lines. Ground truth: matching-C 86.10% (7343) / named 80.61%.
