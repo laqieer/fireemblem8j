@@ -1,35 +1,34 @@
-# Detached permuter run — efxHitQuake_Loop
+# Detached permuter run — ColorFadeSetupFromBlack (CURRENT)
 
-**Launched:** 2026-06-17. **Function:** efxHitQuake_Loop (sub_80548A4, 852 B).
-**Residual:** 13-byte CONTIG diff @0x198 — an instruction-SCHEDULING reorder
-(JP emits the `(s16)` sign-extend `LSL/ASR` before a `LDR/LDRH/ADD` load-block;
-mine emits them swapped). Pure ordering → permuter's domain, not a const-diff.
+**Launched:** 2026-06-17. **Function:** ColorFadeSetupFromBlack (sub_8001870, 128 B).
+**Residual:** 10-byte diff @0xa-0x14 — a literal-load / instruction-ORDERING swap at the
+function start (two ~5-byte setup blocks emitted in opposite order vs JP; base sets up loop
+counter + pointer BEFORE zero-extending the u8 param, mine does the param-extend first).
+Pure ordering/reg-alloc → permuter's domain; the C body is a plain nested loop with no
+statement to reorder, so NOT source-forceable. base score = 480.
 
-**State:** `nonmatchings/efxHitQuake_Loop/` (imported, base score = 330).
-Running detached: `setsid ... permute.sh bg nonmatchings/efxHitQuake_Loop/ -j4 --stop-on-zero`.
-Log: `nonmatchings/efxHitQuake_Loop/permute.log`.
+**State:** `nonmatchings/ColorFadeSetupFromBlack/` (imported). Running detached:
+`setsid bash scripts/permuter/permute.sh bg nonmatchings/ColorFadeSetupFromBlack/ -j4 --stop-on-zero`.
+Log: `nonmatchings/ColorFadeSetupFromBlack/permute.log`.
 
 **NEXT ITERATION — check it:**
 ```
-grep -c 'score = 0' nonmatchings/efxHitQuake_Loop/permute.log     # >0 = WIN
-ls nonmatchings/efxHitQuake_Loop/output-*                          # winning sources
-ps -eo pid,cmd | grep '[p]ermuter.py'                             # still alive?
+grep -c 'score = 0' nonmatchings/ColorFadeSetupFromBlack/permute.log   # >0 = WIN
+ls nonmatchings/ColorFadeSetupFromBlack/output-*                        # winning sources
+pgrep -af '[p]ermuter.py'                                              # still alive?
 ```
-- If a `score = 0` / `output-*/source.c` exists: copy it to `src/efxHitQuake_Loop.c`,
-  wire (handdecomp tsv + drop baseline_sym + gen_layout), COLD `make compare`, commit, push.
-- Also read `output-<low>/diff.txt` even if not 0 — **permuter-as-diagnostic** may reveal
-  a source statement-order/cast fix to apply directly (see [[decomp-permuter-workflow]]).
-- If alive but stuck at 330 for many turns: it's a likely non-converge; kill via
-  `ps -eo pid,cmd | grep '[p]ermuter.py'` then `kill`, and move on.
+- If `score = 0` / an `output-*/source.c` exists: copy → `src/ColorFadeSetupFromBlack.c`,
+  wire (handdecomp tsv + baseline_syms_drop + `git rm` asm/sub_8001870.s + gbadisasm tsv +
+  gen_layout), COLD `make compare`, commit, push. The SAME fix likely ports to the 3 siblings
+  (ColorFadeSetupFromColorToBlack/White, ColorFadeSetupFromWhite — identical 10-byte structure) → +4.
+- Also read `output-<low>/source.c` even if not 0 — **permuter-as-diagnostic** may show a
+  source statement-order/cast fix to apply directly (see memory decomp-permuter-workflow).
+- If alive but no win after many turns: like efxHitQuake (no win in 1.3M iters), it's the
+  reg-alloc/ordering dead-end tail — `pkill -f '[p]ermuter.py'` and move on.
 
-**NEXT permuter target after efxHitQuake: ColorFadeSetupFrom{Black,White,ColorToBlack,ColorToWhite}**
-— all 4 share an identical 10-byte CONTIG @0xa scheduling diff (base sets up loop
-counter r1=#31 + pointer→r9 BEFORE zero-extending the u8 param into sl; mine does the
-param-extend first; also base uses r2 as the ldr→r9 temp, mine uses r0). Pure
-scheduling/reg-alloc — a permuter win on ONE likely yields a source pattern that carves
-all 4 (+4). Confirmed NOT a const-diff (disasm'd both sides 2026-06-17). My memory's
-earlier "ColorFade reg-alloc dead-end" was the `u8 a`→int test on the main ColorFade; the
-Setup* variants weren't permuter'd yet — worth a run.
+**PRIOR run (efxHitQuake_Loop, 852 B):** NO WIN — best score stuck at base 330 over 1.3M iters;
+instruction-scheduling reorders are low-probability for the permuter. ColorFade is smaller
+(128 B) so a faster/more-thorough search, but temper expectations.
 
 **BREAKTHROUGH 2026-06-17 — garbage-binding 'region-diff' verdicts are HAND-DECOMP CANDIDATES,
 not dead-ends.** PutGuideBottomBarText was marked REGION 60/120 by the batch (find_real
