@@ -1,0 +1,48 @@
+#include "global.h"
+#include "m4a.h"
+#include "soundwrapper.h"
+#include "hardware.h"
+#include "ctc.h"
+#include "fontgrp.h"
+#include "ap.h"
+#include "bmitem.h"
+#include "bmunit.h"
+#include "bmmap.h"
+#include "bmbattle.h"
+#include "bmtarget.h"
+#include "bmtrick.h"
+#include "uiutils.h"
+#include "uimenu.h"
+#include "uiselecttarget.h"
+#include "playerphase.h"
+#include "bb.h"
+#include "face.h"
+#include "bm.h"
+#include "unitinfowindow.h"
+#include "eventinfo.h"
+#include "bmmenu.h"
+#include "menu_def.h"
+#include "menuitempanel.h"
+#include "bmmind.h"
+#include "worldmap.h"
+#include "constants/characters.h"
+#include "constants/items.h"
+#include "constants/terrains.h"
+#include "bmitemuse.h"
+#include "constants/songs.h"
+
+
+
+
+void DoUsePutTrap(struct Unit* unit, void(*func)(struct Unit*), int msgHelp)
+{
+    func(unit);
+
+    BmMapFill(gBmMapMovement, -1);
+
+    StartSubtitleHelp(
+        NewTargetSelection_Specialized(&gSelectInfo_PutTrap, OnSelectPutTrap),
+        GetStringFromIndex(msgHelp));
+
+    PlaySoundEffect(SONG_SE_SYS_WINDOW_SELECT1);
+}
