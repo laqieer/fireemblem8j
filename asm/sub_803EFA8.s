@@ -3,7 +3,7 @@
 	.set GetUnitEquippedWeapon, 0x080168D0 + 1
 	.set GetUnitMovementCost, 0x08018A60 + 1
 	.set SetWorkingMoveCosts, 0x0801A198 + 1
-	.set sub_801A1B8, 0x0801A1B8 + 1
+	.set GenerateMovementMap, 0x0801A1B8 + 1
 	.set sub_801B668, 0x0801B668 + 1
 	.set sub_803D864, 0x0803D864 + 1
 	.section .text.sub_803EFA8, "ax", %progbits
@@ -108,7 +108,7 @@ _0803F04C:
 	asrs r1, r1, #0x18
 	adds r2, r5, #0
 	movs r3, #0
-	bl sub_801A1B8
+	bl GenerateMovementMap
 	ldr r0, _0803F0E4 @ =0x0202E4D0
 	movs r1, #2
 	ldrsh r0, [r0, r1]

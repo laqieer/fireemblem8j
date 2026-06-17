@@ -1,7 +1,7 @@
 	.syntax unified
 	.set GetUnitMovementCost, 0x08018A60 + 1
 	.set SetWorkingMoveCosts, 0x0801A198 + 1
-	.set sub_801A1B8, 0x0801A1B8 + 1
+	.set GenerateMovementMap, 0x0801A1B8 + 1
 	.section .text.sub_801A09C, "ax", %progbits
 @ sub_801A09C @ JP 0x0801A09C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -25,7 +25,7 @@ sub_801A09C:
 	movs r3, #0xb
 	ldrsb r3, [r4, r3]
 	adds r2, r5, #0
-	bl sub_801A1B8
+	bl GenerateMovementMap
 	pop {r4, r5}
 	pop {r0}
 	bx r0
