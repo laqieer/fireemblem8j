@@ -1,3 +1,6 @@
+#ifndef CHAR_NEWLINE
+#define CHAR_NEWLINE 0x01
+#endif
 #ifndef GUARD_CTC_H
 #define GUARD_CTC_H
 
