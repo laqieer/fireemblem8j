@@ -1,0 +1,6 @@
+AnimScr_TeonoObjCloseLeft	08604E24	data	NewEfxTeonoOBJ
+AnimScr_TeonoObjCloseRight	08604A8C	data	NewEfxTeonoOBJ
+AnimScr_TeonoObjFarLeft	08604E80	data	NewEfxTeonoOBJ
+AnimScr_TeonoObjFarRight	08604AE8	data	NewEfxTeonoOBJ
+NewEfxTeonoSE	0805CF64	thumb	NewEfxTeonoOBJ
+ProcScr_efxTeonoOBJ	085FF2D0	data	NewEfxTeonoOBJ
