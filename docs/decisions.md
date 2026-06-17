@@ -4465,3 +4465,27 @@ JP-variant call, ±0x40 enum/const shift — see D107/D81); `[LINK]`-with-empty-
 name (skip); `[UNMAPPED]` = autobinder can't map a symbol from the literal pool (manual bind). Next:
 const-decode the `[DIFF]` subset; re-run `size_backlog`+coddog after a batch (newly-carved funcs
 surface fresh matches — the virtuous cycle); the 604 sub_ at 95-99.9% are a lower-confidence 2nd wave.
+
+### D108 addendum — const-decode automation + auto-decode re-sweep (2026-06-17, same session)
+After the cascade, two follow-on levers drove matching-C 7195 -> 7221 (**+26 total** this session):
+
+**Const-decode of `[DIFF]` candidates (+6).** coddog candidates that carve to a small `[DIFF]` are JP
+DATA-CONSTANT diffs, decodable per-function — the `[DIFF]` base bytes ARE the JP value:
+- `ItemSelectMenu_Effect` 0x2e: `rect.w 7->5` (JP item submenu is 5 tiles wide).
+- `SioBat_DecideFirstMover`/`SioBat_ReceiveFirstMover`: `MSG_749->0x6d4`, `MSG_74E->0x6d9` (JP msg-id, -0x75).
+- `SioMenu_LoadGraphics`: `FID_ANNA->0x65` (JP face-id, +1).
+- `PrepHelpPrompt_Loop`: 6 `PutSprite` X-coords US `100,132,164,16,48,80` -> JP `64..224` step 32.
+- `LABattleMap_StartBonusPointsHelp`: `MSG_756->0x6e1`.
+Tool: `~/carve_subst.py <Fn> <addr> "old=>new"...` (rename -> autobind.carve -> substitute the US named
+const in the generated .c -> layout -> build -> byte-check the fn range -> keep/revert).
+
+**Auto-decoder + cascade-miss recovery (+8).** `~/auto_decode.py <candidates>` automates the whole loop:
+carve each candidate, byte-check; if it matches outright -> commit; if `[DIFF]` is pure 2-byte halfwords
+matching `MSG_<hex(mine)>` in the .c -> substitute the JP base halfword and require a byte-match. Every
+commit is FULL-`make compare`-gated (a wrong decode just skips). Re-running it over the 145-list found
+**8 region-SAME STRAIGHT matches the multi-wave cascade had FALSE-REJECTED** (efxFirebreathBGCOL_Loop,
+efxFimbulvetrBGTR_Loop, EfxSkillCommonBG_Freeze/UnfreezeAnims, En/DisableAllDisplay, GetPrepMenuItemAmt,
+ClassInfoDisplay_LoopWindowIn). ROOT CAUSE: the cascade's early passes ran before the empty-DEFINED fix,
+so they re-bound already-aliased syms -> false `[LINK]`/`no-match` -> a whole cluster was skipped. LESSON:
+after fixing a harness bug, RE-SWEEP the full population (cf. D107's autobind re-sweep). NEXT: re-run
+`size_backlog`+coddog and run `auto_decode.py` over the full 413-candidate backlog to recover the rest.
