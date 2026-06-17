@@ -227,3 +227,16 @@ autobind.run; [MATCH]->commit; [DIFF] small->objdump the diff instruction + deco
 reference/coddog/region_same_candidates.txt (144). Re-run size_backlog+coddog after a batch (virtuous
 cycle). DON'T run a detached background harvester (protocol = main-thread; also /tmp scripts vanish +
 pkill self-matches exit-144). The 604 sub_ at 95-99.9% are a second wave (bigger deltas).
+
+## coddog harvest — SKIP rules (build-fails diagnosed)
+The harder coddog candidates fall into skip buckets (autobind reverts/builds-fail cleanly):
+- **OVERLAP/RANGE** (DoUsePutTrap@0x29890: "overlap/order error ... prev end 0x298e4"): the coddog
+  match is mid-function or the gbadisasm boundary differs from the US function boundary — the carve
+  range overlaps a neighbour. SKIP (not a const-decode).
+- **VARIABLE msg-id** (DoUseSpecialDance/DoUsePutTrap: `GetStringFromIndex(msgHelp)` — a fn arg, not a
+  literal): no hardcoded const to substitute; the diff (if any) is elsewhere. Harder.
+- **CLEAN WINS this iter:** DoUseRescueStaff (hardcoded `GetStringFromIndex(0x876)`->JP 0x7f4 msg-id).
+The reliable quick decodes are: hardcoded-msg-id literals (GetStringFromIndex(0xNNN)), JP-variant
+calls (bl sub_<X> to a duplicate), single-const movs. Triage by carving + objdump'ing the diff
+offset's instruction. The bind-only autobind matches are mostly exhausted in the first ~30 candidates;
+deeper ones are const-different/overlap. README scorecard refreshed (84.4%/7195, 79.8%/13313, D108).
