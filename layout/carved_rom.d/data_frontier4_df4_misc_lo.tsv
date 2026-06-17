@@ -1,7 +1,9 @@
 # carve_frontier.py data_gaps long-tail data (parallel-safe fragment)
 0DC3DC	0DC3FC	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0a)	df4_misc_lo region-diff data (32 B, gap0a split before GetGenericChibiImg rodata)
 0DC3FC	0DC41C	src/GetGenericChibiImg.o(.rodata)	GetGenericChibiImg(run): gUnknown_080DC3FC array
-0DC41C	0DC650	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0b)	df4_misc_lo region-diff data (564 B, gap0b split after GetGenericChibiImg rodata)
+0DC41C	0DC56F	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0b)	df4_misc_lo region-diff data (339 B, gap0b shrunk before Event3D_MenuOverride rodata)
+0DC56F	0DC583	src/Event3D_MenuOverride.o(.rodata)	Event3D_MenuOverride(run): UnitMenuOverrideConf[15]+ItemMenuOverrideConf[5]
+0DC583	0DC650	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0b2)	df4_misc_lo region-diff data (205 B, gap0b2 after Event3D_MenuOverride rodata)
 0DC96C	0DCC90	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap1)	df4_misc_lo region-diff data (804 B, long-tail gap)
 0DCDD0	0DCE48	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap2a)	df4_misc_lo region-diff data (120 B, long-tail gap); split around cp_data.o(.rodata)
 0DD358	0DD35B	src/AiAttemptBallistaCombat.o(.rodata)	AiAttemptBallistaCombat(run): ballistaItemIds[3] = {35 36 37}
