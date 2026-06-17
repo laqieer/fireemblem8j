@@ -4682,3 +4682,23 @@ check or CHUNK=1 retry-on-fail bisect). CONCLUSION: the NEAR vein across ALL reg
 materially exhausted (~1% rate, ~3-8 left scattered in the BUILD-FAIL chunks). Remaining matching-C = the
 genuine codegen-FAR frontier (reg-alloc/struct-offset/logic) -> permuter/IDA/Ghidra (D96). Ground truth:
 matching-C 86.15% (7347) / named 80.63%.
+
+## D113 — FAR-1body/2body MANUAL const-fix vein re-opens matching-C (2026-06-17)
+The codegen-FAR frontier is NOT uniformly permuter/dead-end. `perm2_graduate --batch` logs `[skip FAR Nbody]`
+= N non-reloc byte-diffs. The **small-N (1-2 body)** ones are often a single JP-different CONSTANT (not
+reg-alloc), MANUALLY fixable far faster than the stochastic permuter. Tool `~/carve_inspect.sh <fn> <tu>`:
+carve (extract US body, swap asm->C via funclib JP addr) -> build -> report exact `off/mine/base` diff bytes,
+leaving src/<fn>.c staged. Decode the const at the diff offset, substitute the JP value, re-verify byte=0,
+COLD make compare, commit. Carved this way (all gamecontrol.c Proc_Goto label-index diffs, JP = US-1 due to
+a JP proc-script layout shift): **GameControl_GotoTitleIfAction5** (LGAMECTRL_TITLE_DIRECT 4->3),
+**GameCtrl_CheckNewGameAndBranch** (LGAMECTRL_EXEC_BM_EXT 6->5; uses gPlaySt, now resolvable after the
+[[rd_carve all-defined-gsyms fix]]), **GameControl_PostChapterSwitch** (4->3 AND 16->15). matching-C
+7347->7350. The fix is PER-FUNCTION (NOT a gamecontrol.h enum change — gamecontrol_08009E68.c byte-matches
+with the US value 4, so the shift is route-specific). NOTE which diff types are FIXABLE vs NOT:
+- **const-immediate** (movs #imm = Proc_Goto index / msgid / table index): FIXABLE (substitute JP literal).
+- **struct-offset** (systematic +0x08 etc., e.g. SetSysBrownBoxWidth priv[].width 0xe->0x16): needs a JP
+  struct-header change -> risky (affects other users) -> SKIP unless the struct is single-use.
+- **reg-alloc / lsr<->asr sign-ext** (ConfigSysHandCursorShadowEnabled, BmBgfxSetLoopEN, GmapRm_SetPosition):
+  agbcc dead-end -> permuter or SKIP (D110).
+~40 small-N-FAR candidates remain in the first perm2 batch alone (more in the backlog) -> a fresh productive
+matching-C vein for next iterations. Ground truth: matching-C 86.19% (7350) / named 80.64%.
