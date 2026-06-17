@@ -4650,3 +4650,20 @@ AnimPostion** (all-global), **EfxHpBar_DeclineToDeath** (NewEfxDeadEvent bind). 
 is a placeholder sub_ -> +matching-C AND +named (placeholder leaves asm/). Reverted as FAR: EfxHpBarResire_
 SetAnotherSide (47 diffs), EfxNoDamageYureMain (89, struct-offset). Source of NEAR candidates: perm2_graduate
 /const_diff `[STAGE NEAR]` / `NEAR(use-perm2)` log lines. Ground truth: matching-C 86.10% (7343) / named 80.61%.
+
+## D112 addendum — perm2-NEAR vein is SPARSE; batch-screen confirms ~1/72 (2026-06-17)
+Two important negatives that bound the D112 vein:
+1. **`perm2_graduate --batch`'s `[STAGE NEAR]` list is POLLUTED** — it does NOT skip already-carved
+   functions, so it re-detects carved src/ functions as NEAR (then reverts them on layout overlap). All of
+   the first ~40 STAGE NEAR were already-carved. Filter to UNCARVED (no `src/<fn>.c`, still `gbadisasm_sub_*`).
+2. **compile-clean ≠ NEAR.** Screened all 119 uncarved banim/efx region-diff funcs (US name in
+   nofuncmap_region_different + funclib JP addr + still asm); 72 were "clean profile" (no .rodata, all-global
+   callees). Batch-carved all 72 via `~/efx_carve.py` (chunk -> build -> byte-check each -> revert FAR ->
+   COLD make compare -> commit matches): **only 1 byte-matched** (efxCriricalEffectBGCOLMain, sub_8076F34);
+   the other 71 are codegen-FAR (struct-offset/reg-alloc region diffs). So the reloc-only NEAR rate among
+   region-different functions is ~1-2%, NOT predictable from compile-cleanliness — the per-function full-build
+   byte-check is the only gate, and it's expensive. matching-C 7343->7344. **Implication:** the NEAR-carve
+   vein is now near-exhausted; remaining matching-C is the genuine FAR frontier (permuter/IDA/Ghidra, D96).
+   `~/efx_carve.py` self-commits + COLD-gates; reusable but low-yield. NOTE: carving drops baseline aliases
+   the function no longer needs from jp_syms.s -> named axis (asm/-only count) churns down a few per carve
+   (artifact; ROM byte-perfect+self-contained verified). Ground truth: matching-C 86.12% (7344) / named 80.61%.
