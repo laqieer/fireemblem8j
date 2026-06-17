@@ -5,12 +5,12 @@
 	.set sub_8000CD8, 0x08000CD8 + 1
 	.set sub_8042678, 0x08042678 + 1
 	.set sub_8043084, 0x08043084 + 1
-	.section .text.SioBat_DecideFirstMover, "ax", %progbits
-@ SioBat_DecideFirstMover @ JP 0x080461B0 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.sub_80461B0, "ax", %progbits
+@ sub_80461B0 @ JP 0x080461B0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global SioBat_DecideFirstMover
+	.global sub_80461B0
 	.thumb_func
-SioBat_DecideFirstMover:
+sub_80461B0:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x10
 	adds r7, r0, #0

@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8002BCC, 0x08002BCC + 1
-	.section .text.NewEfxDeadEvent, "ax", %progbits
-@ NewEfxDeadEvent @ JP 0x08053AC4 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.sub_8053AC4, "ax", %progbits
+@ sub_8053AC4 @ JP 0x08053AC4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global NewEfxDeadEvent
+	.global sub_8053AC4
 	.thumb_func
-NewEfxDeadEvent:
+sub_8053AC4:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0

@@ -2,7 +2,7 @@
 	.set ApplyBanimUniquePalette, 0x0805A714 + 1
 	.set GetBanimPalette, 0x0805A740 + 1
 	.set sub_8001EE4, 0x08001EE4 + 1
-	.set GetBattleAnimationId_WithUnique, 0x08058AF8 + 1
+	.set sub_8058AF8, 0x08058AF8 + 1
 	.set sub_807395C, 0x0807395C + 1
 	.set sub_80D636C, 0x080D636C + 1
 	.set sub_80D6394, 0x080D6394 + 1
@@ -214,7 +214,7 @@ _0805A92C:
 	adds r0, r2, #0
 	movs r2, #0
 	mov r3, sp
-	bl GetBattleAnimationId_WithUnique
+	bl sub_8058AF8
 	lsls r0, r0, #0x10
 	ldr r2, _0805A9AC @ =0x0203E198
 	lsrs r0, r0, #0xb
@@ -306,7 +306,7 @@ _0805AA16:
 	ldr r1, [r1, #0x34]
 	movs r2, #0
 	mov r3, sp
-	bl GetBattleAnimationId_WithUnique
+	bl sub_8058AF8
 	lsls r0, r0, #0x10
 	ldr r2, _0805AA6C @ =0x0203E198
 	lsrs r0, r0, #0xb

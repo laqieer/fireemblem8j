@@ -2,12 +2,12 @@
 	.set GetItemIndex, 0x08017294 + 1
 	.set GetItemType, 0x080172F0 + 1
 	.set sub_80598BC, 0x080598BC + 1
-	.section .text.GetBattleAnimationId_WithUnique, "ax", %progbits
-@ GetBattleAnimationId_WithUnique @ JP 0x08058AF8 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.sub_8058AF8, "ax", %progbits
+@ sub_8058AF8 @ JP 0x08058AF8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global GetBattleAnimationId_WithUnique
+	.global sub_8058AF8
 	.thumb_func
-GetBattleAnimationId_WithUnique:
+sub_8058AF8:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

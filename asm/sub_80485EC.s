@@ -1,10 +1,10 @@
 	.syntax unified
-	.section .text.Sio_Msg89Barrier_Init, "ax", %progbits
-@ Sio_Msg89Barrier_Init @ JP 0x080485EC - region-different, gbadisasm descriptive asm (D23)
+	.section .text.sub_80485EC, "ax", %progbits
+@ sub_80485EC @ JP 0x080485EC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global Sio_Msg89Barrier_Init
+	.global sub_80485EC
 	.thumb_func
-Sio_Msg89Barrier_Init:
+sub_80485EC:
 	ldr r0, _080485FC @ =0x085D31E8
 	ldr r2, [r0]
 	movs r1, #6

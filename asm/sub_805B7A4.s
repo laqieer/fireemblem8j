@@ -1,12 +1,12 @@
 	.syntax unified
 	.set InitMainMiniAnim, 0x0805B3B0 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
-	.section .text.NewEkrUnitMainMini, "ax", %progbits
-@ NewEkrUnitMainMini @ JP 0x0805B7A4 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.sub_805B7A4, "ax", %progbits
+@ sub_805B7A4 @ JP 0x0805B7A4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global NewEkrUnitMainMini
+	.global sub_805B7A4
 	.thumb_func
-NewEkrUnitMainMini:
+sub_805B7A4:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r0, _0805B7C8 @ =0x085E3FF4

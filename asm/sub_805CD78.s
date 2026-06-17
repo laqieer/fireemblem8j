@@ -5,12 +5,12 @@
 	.set sub_8056774, 0x08056774 + 1
 	.set sub_805679C, 0x0805679C + 1
 	.set sub_805CF64, 0x0805CF64 + 1
-	.section .text.NewEfxTeonoOBJ, "ax", %progbits
-@ NewEfxTeonoOBJ @ JP 0x0805CD78 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.sub_805CD78, "ax", %progbits
+@ sub_805CD78 @ JP 0x0805CD78 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global NewEfxTeonoOBJ
+	.global sub_805CD78
 	.thumb_func
-NewEfxTeonoOBJ:
+sub_805CD78:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r4, r0, #0

@@ -3,7 +3,7 @@
 	.set GetUnitItemCount, 0x08017780 + 1
 	.set sub_803BA10, 0x0803BA10 + 1
 	.set sub_803BF60, 0x0803BF60 + 1
-	.set AiFindClosestChestPosition, 0x08040B0C + 1
+	.set sub_8040B0C, 0x08040B0C + 1
 	.set sub_8040B34, 0x08040B34 + 1
 	.section .text.sub_8040BDC, "ax", %progbits
 @ sub_8040BDC @ JP 0x08040BDC - region-different, gbadisasm descriptive asm (D23)
@@ -124,7 +124,7 @@ _08040CBC:
 	ldr r0, [r4]
 	add r6, sp, #0xc
 	adds r1, r6, #0
-	bl AiFindClosestChestPosition
+	bl sub_8040B0C
 	lsls r0, r0, #0x18
 	asrs r0, r0, #0x18
 	cmp r0, #1

@@ -3,12 +3,12 @@
 	.set sub_80564F0, 0x080564F0 + 1
 	.set sub_8056774, 0x08056774 + 1
 	.set sub_805679C, 0x0805679C + 1
-	.section .text.efxThunderstormOBJ_Loop, "ax", %progbits
-@ efxThunderstormOBJ_Loop @ JP 0x0805FA24 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.sub_805FA24, "ax", %progbits
+@ sub_805FA24 @ JP 0x0805FA24 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global efxThunderstormOBJ_Loop
+	.global sub_805FA24
 	.thumb_func
-efxThunderstormOBJ_Loop:
+sub_805FA24:
 	push {r4, lr}
 	sub sp, #4
 	adds r4, r0, #0

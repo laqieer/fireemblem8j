@@ -1,1 +1,1 @@
-050520	05055C	asm/OverriddenMenuAvailability.o(.text.OverriddenMenuAvailability)	OverriddenMenuAvailability region-different gbadisasm descriptive asm
+050520	05055C	asm/sub_8050520.o(.text.sub_8050520)	sub_8050520 region-different gbadisasm descriptive asm

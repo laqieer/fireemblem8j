@@ -1,7 +1,7 @@
 	.syntax unified
 	.set ResetClassReelSpell, 0x08070EA4 + 1
 	.set sub_805B764, 0x0805B764 + 1
-	.set NewEkrUnitMainMini, 0x0805B7A4 + 1
+	.set sub_805B7A4, 0x0805B7A4 + 1
 	.section .text.sub_80D216C, "ax", %progbits
 @ sub_80D216C @ JP 0x080D216C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -96,7 +96,7 @@ _080D21AC:
 	str r1, [r0, #0x24]
 	bl ResetClassReelSpell
 	adds r0, r4, #0
-	bl NewEkrUnitMainMini
+	bl sub_805B7A4
 	pop {r3, r4}
 	mov r8, r3
 	mov sb, r4

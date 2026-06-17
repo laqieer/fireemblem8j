@@ -2,12 +2,12 @@
 	.set GetUnit, 0x08019108 + 1
 	.set SetTextFont, 0x08003C68 + 1
 	.set sub_8042D6C, 0x08042D6C + 1
-	.section .text.PointsNumberMover_Init, "ax", %progbits
-@ PointsNumberMover_Init @ JP 0x080498B8 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.sub_80498B8, "ax", %progbits
+@ sub_80498B8 @ JP 0x080498B8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global PointsNumberMover_Init
+	.global sub_80498B8
 	.thumb_func
-PointsNumberMover_Init:
+sub_80498B8:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r0, #0x33

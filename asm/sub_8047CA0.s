@@ -18,12 +18,12 @@
 	.set sub_804D4F8, 0x0804D4F8 + 1
 	.set sub_8088FA4, 0x08088FA4 + 1
 	.set sub_80AB458, 0x080AB458 + 1
-	.section .text.SioMenu_RestartGraphicsMaybe, "ax", %progbits
-@ SioMenu_RestartGraphicsMaybe @ JP 0x08047CA0 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.sub_8047CA0, "ax", %progbits
+@ sub_8047CA0 @ JP 0x08047CA0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global SioMenu_RestartGraphicsMaybe
+	.global sub_8047CA0
 	.thumb_func
-SioMenu_RestartGraphicsMaybe:
+sub_8047CA0:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

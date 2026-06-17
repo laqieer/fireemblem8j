@@ -1,1 +1,1 @@
-046250	046324	asm/SioBat_ReceiveFirstMover.o(.text.SioBat_ReceiveFirstMover)	SioBat_ReceiveFirstMover region-different gbadisasm descriptive asm
+046250	046324	asm/sub_8046250.o(.text.sub_8046250)	sub_8046250 region-different gbadisasm descriptive asm

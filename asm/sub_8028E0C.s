@@ -4,9 +4,9 @@
 	.set SetItemUseAction, 0x080294EC + 1
 	.set SetStaffUseAction, 0x080294C4 + 1
 	.set DoUseRescueStaff, 0x08029510 + 1
-	.set DoUseSpecialDance, 0x08029550 + 1
+	.set sub_8029550, 0x08029550 + 1
 	.set sub_802981C, 0x0802981C + 1
-	.set DoUsePutTrap, 0x08029890 + 1
+	.set sub_8029890, 0x08029890 + 1
 	.set sub_8029944, 0x08029944 + 1
 	.set sub_8029B18, 0x08029B18 + 1
 	.set sub_8029B54, 0x08029B54 + 1
@@ -187,7 +187,7 @@ _08028FD4:
 	ldr r2, _08028FE4 @ =0x000007FC
 _08028FD8:
 	adds r0, r5, #0
-	bl DoUsePutTrap
+	bl sub_8029890
 	b _0802900A
 	.align 2, 0
 _08028FE0: .4byte 0x08026525  @ sub_8026524
@@ -200,7 +200,7 @@ _08028FF0:
 	ldr r1, _08028FFC @ =sub_8026588
 	ldr r2, _08029000 @ =0x000007FD
 	adds r0, r5, #0
-	bl DoUseSpecialDance
+	bl sub_8029550
 	b _0802900A
 	.align 2, 0
 _08028FFC: .4byte 0x08026589  @ sub_8026588

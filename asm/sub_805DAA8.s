@@ -5,12 +5,12 @@
 	.set sub_805AF28, 0x0805AF28 + 1
 	.set sub_805B0B4, 0x0805B0B4 + 1
 	.set sub_8074E80, 0x08074E80 + 1
-	.section .text.StartSpellAnimBallista, "ax", %progbits
-@ StartSpellAnimBallista @ JP 0x0805DAA8 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.sub_805DAA8, "ax", %progbits
+@ sub_805DAA8 @ JP 0x0805DAA8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global StartSpellAnimBallista
+	.global sub_805DAA8
 	.thumb_func
-StartSpellAnimBallista:
+sub_805DAA8:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	bl SpellFx_Begin

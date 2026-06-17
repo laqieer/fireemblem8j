@@ -1,1 +1,1 @@
-0485EC	048600	asm/Sio_Msg89Barrier_Init.o(.text.Sio_Msg89Barrier_Init)	Sio_Msg89Barrier_Init region-different gbadisasm descriptive asm
+0485EC	048600	asm/sub_80485EC.o(.text.sub_80485EC)	sub_80485EC region-different gbadisasm descriptive asm

@@ -5,12 +5,12 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8042720, 0x08042720 + 1
 	.set sub_8043084, 0x08043084 + 1
-	.section .text.SioBat_ReceiveFirstMover, "ax", %progbits
-@ SioBat_ReceiveFirstMover @ JP 0x08046250 - region-different, gbadisasm descriptive asm (D23)
+	.section .text.sub_8046250, "ax", %progbits
+@ sub_8046250 @ JP 0x08046250 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global SioBat_ReceiveFirstMover
+	.global sub_8046250
 	.thumb_func
-SioBat_ReceiveFirstMover:
+sub_8046250:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x14
 	adds r5, r0, #0

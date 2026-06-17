@@ -3,7 +3,7 @@
 	.set GetSelectTargetCount, 0x08050AC8 + 1
 	.set PlayDeathSoundForArena, 0x0805BE20 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
-	.set NewEfxDeadEvent, 0x08053AC4 + 1
+	.set sub_8053AC4, 0x08053AC4 + 1
 	.set sub_8053C9C, 0x08053C9C + 1
 	.set sub_8073E74, 0x08073E74 + 1
 	.set sub_8073F94, 0x08073F94 + 1
@@ -130,7 +130,7 @@ _08053614:
 	bne _08053628
 	adds r0, r6, #0
 	mov r1, r8
-	bl NewEfxDeadEvent
+	bl sub_8053AC4
 	b _08053644
 	.align 2, 0
 _08053624: .4byte 0x0203E18C

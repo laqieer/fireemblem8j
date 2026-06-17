@@ -4,12 +4,12 @@
 	.set sub_8042C74, 0x08042C74 + 1
 	.set sub_8042CF4, 0x08042CF4 + 1
 	.set sub_80D65C8, 0x080D65C8 + 1
-	.section .text.StartXMapTransfer, "ax", %progbits
-@ StartXMapTransfer @ JP 0x0804851C - region-different, gbadisasm descriptive asm (D23)
+	.section .text.sub_804851C, "ax", %progbits
+@ sub_804851C @ JP 0x0804851C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global StartXMapTransfer
+	.global sub_804851C
 	.thumb_func
-StartXMapTransfer:
+sub_804851C:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
@@ -48,7 +48,7 @@ _08048570: .4byte 0x02000000
 _08048574: .4byte 0x0804843D  @ sub_804843C
 _08048578:
 	ldr r0, _0804858C @ =0x02000000
-	ldr r1, _08048590 @ =DrawXMapSendProgress
+	ldr r1, _08048590 @ =sub_80484AC
 	adds r2, r6, #0
 	bl sub_8042CF4
 _08048582:
@@ -58,5 +58,5 @@ _08048582:
 	bx r0
 	.align 2, 0
 _0804858C: .4byte 0x02000000
-_08048590: .4byte 0x080484AD  @ DrawXMapSendProgress
+_08048590: .4byte 0x080484AD  @ sub_80484AC
 

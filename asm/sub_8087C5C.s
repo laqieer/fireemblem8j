@@ -1,7 +1,7 @@
 	.syntax unified
 	.set RefreshEntityBmMaps, 0x08019ECC + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
-	.set TornOutUnitSprite, 0x08026BC0 + 1
+	.set sub_8026BC0, 0x08026BC0 + 1
 	.set sub_8027144, 0x08027144 + 1
 	.section .text.sub_8087C5C, "ax", %progbits
 @ sub_8087C5C @ JP 0x08087C5C - region-different, gbadisasm descriptive asm (D23)
@@ -17,7 +17,7 @@ sub_8087C5C:
 	movs r0, #0
 	ldrsh r1, [r4, r0]
 	adds r0, r5, #0
-	bl TornOutUnitSprite
+	bl sub_8026BC0
 	ldrh r0, [r4]
 	adds r0, #1
 	strh r0, [r4]

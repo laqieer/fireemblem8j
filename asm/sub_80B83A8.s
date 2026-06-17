@@ -29,7 +29,7 @@
 	.set sub_800814C, 0x0800814C + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.set sub_8013008, 0x08013008 + 1
-	.set NewEkrUnitMainMini, 0x0805B7A4 + 1
+	.set sub_805B7A4, 0x0805B7A4 + 1
 	.set sub_805B80C, 0x0805B80C + 1
 	.set sub_80B8C64, 0x080B8C64 + 1
 	.section .text.sub_80B83A8, "ax", %progbits
@@ -421,7 +421,7 @@ _080B8618:
 	str r2, [r1, #0x20]
 	ldr r2, _080B87A8 @ =sub_80B82EC
 	str r2, [r1, #0x24]
-	bl NewEkrUnitMainMini
+	bl sub_805B7A4
 	ldr r4, _080B87AC @ =0x0201DB00
 	mov r0, sb
 	ldr r1, [r0, #0x34]
