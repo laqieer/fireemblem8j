@@ -18,11 +18,11 @@
 	.set sub_8088FA4, 0x08088FA4 + 1
 	.set sub_80AB10C, 0x080AB10C + 1
 	.section .text.sub_8045D60, "ax", %progbits
-@ sub_8045D60 @ JP 0x08045D60 - region-different, gbadisasm descriptive asm (D23)
+@ SioBat_InitSetupScreen @ JP 0x08045D60 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8045D60
+	.global SioBat_InitSetupScreen
 	.thumb_func
-sub_8045D60:
+SioBat_InitSetupScreen:
 	push {r4, r5, r6, lr}
 	sub sp, #0x14
 	adds r6, r0, #0
