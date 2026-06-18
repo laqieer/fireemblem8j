@@ -41,4 +41,5 @@
 1F5588	1F5598	src/Prep_LoadWindowGfx.o(.rodata)	Prep_LoadWindowGfx palettes[4] template
 1F5598	1F55EC	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap21bt)	gap tail after palettes
 1F55EC	1F560C	src/PrepItemScreen_SetupGfx.o(.rodata)	PrepItemScreen_SetupGfx faceConfig rodata
-1F560C	1F5784	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap21c)	gap
+1F560C	1F561C	src/PutImg_PrepItemUseUnk.o(.rodata)	PutImg_PrepItemUseUnk Pals_PrepWindow[4] ptr array (gap21c split)
+1F561C	1F5784	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap21c)	gap21c remainder (360 B)
