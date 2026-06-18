@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_801B6B0, 0x0801B6B0 + 1
 	.section .text.sub_8032938, "ax", %progbits
-@ sub_8032938 @ JP 0x08032938 - region-different, gbadisasm descriptive asm (D23)
+@ CutOffPathLength @ JP 0x08032938 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8032938
+	.global CutOffPathLength
 	.thumb_func
-sub_8032938:
+CutOffPathLength:
 	push {r4, r5, r6, r7, lr}
 	lsls r0, r0, #0x18
 	asrs r3, r0, #0x18

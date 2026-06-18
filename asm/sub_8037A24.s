@@ -1,11 +1,11 @@
 	.syntax unified
 	.set GetTrapAt, 0x0802E128 + 1
 	.section .text.sub_8037A24, "ax", %progbits
-@ sub_8037A24 @ JP 0x08037A24 - region-different, gbadisasm descriptive asm (D23)
+@ GetBallistaItemAt @ JP 0x08037A24 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8037A24
+	.global GetBallistaItemAt
 	.thumb_func
-sub_8037A24:
+GetBallistaItemAt:
 	push {lr}
 	bl GetTrapAt
 	adds r1, r0, #0

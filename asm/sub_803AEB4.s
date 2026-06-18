@@ -4,11 +4,11 @@
 	.set sub_803B434, 0x0803B434 + 1
 	.set sub_803B720, 0x0803B720 + 1
 	.section .text.sub_803AEB4, "ax", %progbits
-@ sub_803AEB4 @ JP 0x0803AEB4 - region-different, gbadisasm descriptive asm (D23)
+@ AiFindClosestTerrainAdjacentPosition @ JP 0x0803AEB4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803AEB4
+	.global AiFindClosestTerrainAdjacentPosition
 	.thumb_func
-sub_803AEB4:
+AiFindClosestTerrainAdjacentPosition:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -13,11 +13,11 @@
 	.set sub_801729C, 0x0801729C + 1
 	.set sub_8034744, 0x08034744 + 1
 	.section .text.sub_8034B44, "ax", %progbits
-@ sub_8034B44 @ JP 0x08034B44 - region-different, gbadisasm descriptive asm (D23)
+@ RefreshUnitInventoryInfoWindow @ JP 0x08034B44 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8034B44
+	.global RefreshUnitInventoryInfoWindow
 	.thumb_func
-sub_8034B44:
+RefreshUnitInventoryInfoWindow:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

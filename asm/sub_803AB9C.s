@@ -3,11 +3,11 @@
 	.set NextRN_N, 0x08000C58 + 1
 	.set sub_801A05C, 0x0801A05C + 1
 	.section .text.sub_803AB9C, "ax", %progbits
-@ sub_803AB9C @ JP 0x0803AB9C - region-different, gbadisasm descriptive asm (D23)
+@ AiRandomMove @ JP 0x0803AB9C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803AB9C
+	.global AiRandomMove
 	.thumb_func
-sub_803AB9C:
+AiRandomMove:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

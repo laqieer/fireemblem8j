@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_803BF60, "ax", %progbits
-@ sub_803BF60 @ JP 0x0803BF60 - region-different, gbadisasm descriptive asm (D23)
+@ AiIsWithinRectDistance @ JP 0x0803BF60 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803BF60
+	.global AiIsWithinRectDistance
 	.thumb_func
-sub_803BF60:
+AiIsWithinRectDistance:
 	push {r4, r5, r6, r7, lr}
 	ldr r4, [sp, #0x14]
 	lsls r0, r0, #0x10

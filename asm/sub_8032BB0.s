@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_8032BB0, "ax", %progbits
-@ sub_8032BB0 @ JP 0x08032BB0 - region-different, gbadisasm descriptive asm (D23)
+@ GetMovementScriptFromPath @ JP 0x08032BB0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8032BB0
+	.global GetMovementScriptFromPath
 	.thumb_func
-sub_8032BB0:
+GetMovementScriptFromPath:
 	push {r4, r5, r6, r7, lr}
 	movs r4, #1
 	ldr r1, _08032BF0 @ =0x085C6080

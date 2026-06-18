@@ -14,11 +14,11 @@
 	.set sub_80993B0, 0x080993B0 + 1
 	.set sub_8099438, 0x08099438 + 1
 	.section .text.sub_8033558, "ax", %progbits
-@ sub_8033558 @ JP 0x08033558 - region-different, gbadisasm descriptive asm (D23)
+@ PrepScreenProc_StartMapMenu @ JP 0x08033558 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8033558
+	.global PrepScreenProc_StartMapMenu
 	.thumb_func
-sub_8033558:
+PrepScreenProc_StartMapMenu:
 	push {r4, lr}
 	sub sp, #4
 	adds r4, r0, #0

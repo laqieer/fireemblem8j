@@ -3,11 +3,11 @@
 	.set MakeNewItem, 0x080162E8 + 1
 	.set memcpy, 0x080D6908 + 1
 	.section .text.sub_8031EC0, "ax", %progbits
-@ sub_8031EC0 @ JP 0x08031EC0 - region-different, gbadisasm descriptive asm (D23)
+@ ArenaSetFallbackWeaponForUnit @ JP 0x08031EC0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8031EC0
+	.global ArenaSetFallbackWeaponForUnit
 	.thumb_func
-sub_8031EC0:
+ArenaSetFallbackWeaponForUnit:
 	push {r4, r5, lr}
 	sub sp, #8
 	adds r5, r0, #0

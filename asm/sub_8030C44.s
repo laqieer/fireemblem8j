@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80D6370, 0x080D6370 + 1
 	.section .text.sub_8030C44, "ax", %progbits
-@ sub_8030C44 @ JP 0x08030C44 - region-different, gbadisasm descriptive asm (D23)
+@ InitPlayConfig @ JP 0x08030C44 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8030C44
+	.global InitPlayConfig
 	.thumb_func
-sub_8030C44:
+InitPlayConfig:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

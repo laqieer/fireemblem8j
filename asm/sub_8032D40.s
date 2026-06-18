@@ -6,11 +6,11 @@
 	.set sub_80329D8, 0x080329D8 + 1
 	.set sub_8032DCC, 0x08032DCC + 1
 	.section .text.sub_8032D40, "ax", %progbits
-@ sub_8032D40 @ JP 0x08032D40 - region-different, gbadisasm descriptive asm (D23)
+@ PathArrowDisp_Init @ JP 0x08032D40 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8032D40
+	.global PathArrowDisp_Init
 	.thumb_func
-sub_8032D40:
+PathArrowDisp_Init:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	lsls r4, r4, #0x18

@@ -4,11 +4,11 @@
 	.set sub_801A09C, 0x0801A09C + 1
 	.set sub_803BA10, 0x0803BA10 + 1
 	.section .text.sub_803E760, "ax", %progbits
-@ sub_803E760 @ JP 0x0803E760 - region-different, gbadisasm descriptive asm (D23)
+@ AiTryMoveTowardsEscape @ JP 0x0803E760 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803E760
+	.global AiTryMoveTowardsEscape
 	.thumb_func
-sub_803E760:
+AiTryMoveTowardsEscape:
 	push {r4, r5, r6, lr}
 	sub sp, #0xc
 	ldr r6, _0803E7D0 @ =0x03004DF0

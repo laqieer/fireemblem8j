@@ -11,11 +11,11 @@
 	.set sub_8032AB8, 0x08032AB8 + 1
 	.set sub_8032CBC, 0x08032CBC + 1
 	.section .text.sub_8032DCC, "ax", %progbits
-@ sub_8032DCC @ JP 0x08032DCC - region-different, gbadisasm descriptive asm (D23)
+@ UpdatePathArrowWithCursor @ JP 0x08032DCC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8032DCC
+	.global UpdatePathArrowWithCursor
 	.thumb_func
-sub_8032DCC:
+UpdatePathArrowWithCursor:
 	push {r4, r5, r6, r7, lr}
 	ldr r7, _08032E4C @ =0x085C6080
 	ldr r2, [r7]

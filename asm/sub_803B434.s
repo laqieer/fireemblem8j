@@ -1,11 +1,11 @@
 	.syntax unified
 	.set AreUnitsAllied, 0x08024D3C + 1
 	.section .text.sub_803B434, "ax", %progbits
-@ sub_803B434 @ JP 0x0803B434 - region-different, gbadisasm descriptive asm (D23)
+@ AiCountNearbyEnemyUnits @ JP 0x0803B434 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803B434
+	.global AiCountNearbyEnemyUnits
 	.thumb_func
-sub_803B434:
+AiCountNearbyEnemyUnits:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

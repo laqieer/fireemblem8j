@@ -11,11 +11,11 @@
 	.set sub_804F0EC, 0x0804F0EC + 1
 	.set sub_804F610, 0x0804F610 + 1
 	.section .text.sub_8034744, "ax", %progbits
-@ sub_8034744 @ JP 0x08034744 - region-different, gbadisasm descriptive asm (D23)
+@ UnitInfoWindow_DrawBase @ JP 0x08034744 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8034744
+	.global UnitInfoWindow_DrawBase
 	.thumb_func
-sub_8034744:
+UnitInfoWindow_DrawBase:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

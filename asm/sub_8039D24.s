@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80D65BC, 0x080D65BC + 1
 	.section .text.sub_8039D24, "ax", %progbits
-@ sub_8039D24 @ JP 0x08039D24 - region-different, gbadisasm descriptive asm (D23)
+@ AiDecideMain @ JP 0x08039D24 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8039D24
+	.global AiDecideMain
 	.thumb_func
-sub_8039D24:
+AiDecideMain:
 	push {r4, r5, lr}
 	ldr r2, _08039D7C @ =0x085D1EA4
 	ldr r0, _08039D80 @ =0x0203AA00

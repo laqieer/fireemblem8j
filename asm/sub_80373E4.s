@@ -3,11 +3,11 @@
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_80194BC, 0x080194BC + 1
 	.section .text.sub_80373E4, "ax", %progbits
-@ sub_80373E4 @ JP 0x080373E4 - region-different, gbadisasm descriptive asm (D23)
+@ NewBattleForecast @ JP 0x080373E4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80373E4
+	.global NewBattleForecast
 	.thumb_func
-sub_80373E4:
+NewBattleForecast:
 	push {r4, lr}
 	ldr r0, _080373FC @ =0x0202BCEC
 	adds r4, r0, #0

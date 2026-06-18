@@ -6,11 +6,11 @@
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.set ApplyJunaFruitItem, 0x0802F8C4 + 1
 	.section .text.sub_802F92C, "ax", %progbits
-@ sub_802F92C @ JP 0x0802F92C - region-different, gbadisasm descriptive asm (D23)
+@ ExecJunaFruitItem @ JP 0x0802F92C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802F92C
+	.global ExecJunaFruitItem
 	.thumb_func
-sub_802F92C:
+ExecJunaFruitItem:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r7, r0, #0

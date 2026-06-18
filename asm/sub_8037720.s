@@ -10,11 +10,11 @@
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.set sub_80376A8, 0x080376A8 + 1
 	.section .text.sub_8037720, "ax", %progbits
-@ sub_8037720 @ JP 0x08037720 - region-different, gbadisasm descriptive asm (D23)
+@ ExecTrap @ JP 0x08037720 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8037720
+	.global ExecTrap
 	.thumb_func
-sub_8037720:
+ExecTrap:
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	adds r5, r1, #0

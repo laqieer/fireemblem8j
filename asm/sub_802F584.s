@@ -6,11 +6,11 @@
 	.set sub_80186A8, 0x080186A8 + 1
 	.set sub_802BC98, 0x0802BC98 + 1
 	.section .text.sub_802F584, "ax", %progbits
-@ sub_802F584 @ JP 0x0802F584 - region-different, gbadisasm descriptive asm (D23)
+@ ExecUnitPromotion @ JP 0x0802F584 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802F584
+	.global ExecUnitPromotion
 	.thumb_func
-sub_802F584:
+ExecUnitPromotion:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

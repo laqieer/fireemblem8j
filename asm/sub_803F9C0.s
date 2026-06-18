@@ -4,11 +4,11 @@
 	.set GetItemRequiredExp, 0x08017460 + 1
 	.set sub_80D65C4, 0x080D65C4 + 1
 	.section .text.sub_803F9C0, "ax", %progbits
-@ sub_803F9C0 @ JP 0x0803F9C0 - region-different, gbadisasm descriptive asm (D23)
+@ AiTryDoStaff @ JP 0x0803F9C0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803F9C0
+	.global AiTryDoStaff
 	.thumb_func
-sub_803F9C0:
+AiTryDoStaff:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

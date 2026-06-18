@@ -10,11 +10,11 @@
 	.set sub_80D6374, 0x080D6374 + 1
 	.set sub_80D65E0, 0x080D65E0 + 1
 	.section .text.sub_803FB38, "ax", %progbits
-@ sub_803FB38 @ JP 0x0803FB38 - region-different, gbadisasm descriptive asm (D23)
+@ AiStaffHealMendRecover @ JP 0x0803FB38 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803FB38
+	.global AiStaffHealMendRecover
 	.thumb_func
-sub_803FB38:
+AiStaffHealMendRecover:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

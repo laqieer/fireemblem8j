@@ -1,11 +1,11 @@
 	.syntax unified
 	.set AddDamagingTrap, 0x0802E218 + 1
 	.section .text.sub_80379C0, "ax", %progbits
-@ sub_80379C0 @ JP 0x080379C0 - region-different, gbadisasm descriptive asm (D23)
+@ AddGorgonEggTrap @ JP 0x080379C0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80379C0
+	.global AddGorgonEggTrap
 	.thumb_func
-sub_80379C0:
+AddGorgonEggTrap:
 	push {r4, r5, lr}
 	sub sp, #0xc
 	adds r5, r2, #0

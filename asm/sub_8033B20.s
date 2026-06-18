@@ -6,11 +6,11 @@
 	.set sub_8015E18, 0x08015E18 + 1
 	.set sub_8035610, 0x08035610 + 1
 	.section .text.sub_8033B20, "ax", %progbits
-@ sub_8033B20 @ JP 0x08033B20 - region-different, gbadisasm descriptive asm (D23)
+@ PrepScreen_StartUnitSwap @ JP 0x08033B20 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8033B20
+	.global PrepScreen_StartUnitSwap
 	.thumb_func
-sub_8033B20:
+PrepScreen_StartUnitSwap:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	ldr r0, _08033B8C @ =0x085C93C0

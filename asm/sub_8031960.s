@@ -3,11 +3,11 @@
 	.set sub_8018F64, 0x08018F64 + 1
 	.set sub_8018F84, 0x08018F84 + 1
 	.section .text.sub_8031960, "ax", %progbits
-@ sub_8031960 @ JP 0x08031960 - region-different, gbadisasm descriptive asm (D23)
+@ ArenaGetPowerRanking @ JP 0x08031960 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8031960
+	.global ArenaGetPowerRanking
 	.thumb_func
-sub_8031960:
+ArenaGetPowerRanking:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	lsls r1, r1, #0x18

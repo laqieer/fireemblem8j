@@ -2,11 +2,11 @@
 	.set memcpy, 0x080D6908 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
 	.section .text.sub_803C56C, "ax", %progbits
-@ sub_803C56C @ JP 0x0803C56C - region-different, gbadisasm descriptive asm (D23)
+@ AiScript_Exec @ JP 0x0803C56C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803C56C
+	.global AiScript_Exec
 	.thumb_func
-sub_803C56C:
+AiScript_Exec:
 	push {r4, lr}
 	sub sp, #0x70
 	adds r4, r0, #0

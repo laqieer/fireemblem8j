@@ -4,11 +4,11 @@
 	.set PutSprite, 0x080052F0 + 1
 	.set sub_803305C, 0x0803305C + 1
 	.section .text.sub_803309C, "ax", %progbits
-@ sub_803309C @ JP 0x0803309C - region-different, gbadisasm descriptive asm (D23)
+@ DrawPathArrow @ JP 0x0803309C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803309C
+	.global DrawPathArrow
 	.thumb_func
-sub_803309C:
+DrawPathArrow:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

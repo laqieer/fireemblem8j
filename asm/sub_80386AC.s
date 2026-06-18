@@ -7,11 +7,11 @@
 	.set sub_80D6374, 0x080D6374 + 1
 	.set sub_80D637C, 0x080D637C + 1
 	.section .text.sub_80386AC, "ax", %progbits
-@ sub_80386AC @ JP 0x080386AC - region-different, gbadisasm descriptive asm (D23)
+@ DrawNumberText_WithReset @ JP 0x080386AC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80386AC
+	.global DrawNumberText_WithReset
 	.thumb_func
-sub_80386AC:
+DrawNumberText_WithReset:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -2,11 +2,11 @@
 	.set memcpy, 0x080D6908 + 1
 	.set sub_80D65E0, 0x080D65E0 + 1
 	.section .text.sub_803B720, "ax", %progbits
-@ sub_803B720 @ JP 0x0803B720 - region-different, gbadisasm descriptive asm (D23)
+@ AiFindBestAdjacentPositionByFunc @ JP 0x0803B720 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803B720
+	.global AiFindBestAdjacentPositionByFunc
 	.thumb_func
-sub_803B720:
+AiFindBestAdjacentPositionByFunc:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

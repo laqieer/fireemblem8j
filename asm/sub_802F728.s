@@ -5,11 +5,11 @@
 	.set UnitHasMagicRank, 0x0801876C + 1
 	.set sub_80186A8, 0x080186A8 + 1
 	.section .text.sub_802F728, "ax", %progbits
-@ sub_802F728 @ JP 0x0802F728 - region-different, gbadisasm descriptive asm (D23)
+@ ApplyStatBoostItem @ JP 0x0802F728 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802F728
+	.global ApplyStatBoostItem
 	.thumb_func
-sub_802F728:
+ApplyStatBoostItem:
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	adds r7, r1, #0
