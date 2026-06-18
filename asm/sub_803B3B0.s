@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_803B3B0, "ax", %progbits
-@ sub_803B3B0 @ JP 0x0803B3B0 - region-different, gbadisasm descriptive asm (D23)
+@ AiCountNearbyUnits @ JP 0x0803B3B0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803B3B0
+	.global AiCountNearbyUnits
 	.thumb_func
-sub_803B3B0:
+AiCountNearbyUnits:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
