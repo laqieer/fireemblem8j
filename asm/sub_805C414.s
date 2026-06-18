@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_805C414, "ax", %progbits
-@ sub_805C414 @ JP 0x0805C414 - region-different, gbadisasm descriptive asm (D23)
+@ EfxRestWINMain @ JP 0x0805C414 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805C414
+	.global EfxRestWINMain
 	.thumb_func
-sub_805C414:
+EfxRestWINMain:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

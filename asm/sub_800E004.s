@@ -2,11 +2,11 @@
 	.set sub_800226C, 0x0800226C + 1
 	.set sub_80024C4, 0x080024C4 + 1
 	.section .text.sub_800E004, "ax", %progbits
-@ sub_800E004 @ JP 0x0800E004 - region-different, gbadisasm descriptive asm (D23)
+@ Event13_BgmFadeIn @ JP 0x0800E004 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800E004
+	.global Event13_BgmFadeIn
 	.thumb_func
-sub_800E004:
+Event13_BgmFadeIn:
 	push {r4, lr}
 	adds r3, r0, #0
 	ldr r1, [r3, #0x38]

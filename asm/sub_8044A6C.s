@@ -2,11 +2,11 @@
 	.set sub_8043190, 0x08043190 + 1
 	.set sub_8044694, 0x08044694 + 1
 	.section .text.sub_8044A6C, "ax", %progbits
-@ sub_8044A6C @ JP 0x08044A6C - region-different, gbadisasm descriptive asm (D23)
+@ TacticianTryDeleteChar @ JP 0x08044A6C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8044A6C
+	.global TacticianTryDeleteChar
 	.thumb_func
-sub_8044A6C:
+TacticianTryDeleteChar:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r5, #0

@@ -1,11 +1,11 @@
 	.syntax unified
 	.set LoadUnit_0, 0x0800F8D4 + 1
 	.section .text.sub_801015C, "ax", %progbits
-@ sub_801015C @ JP 0x0801015C - region-different, gbadisasm descriptive asm (D23)
+@ Event32_SpawnSingleUnit @ JP 0x0801015C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801015C
+	.global Event32_SpawnSingleUnit
 	.thumb_func
-sub_801015C:
+Event32_SpawnSingleUnit:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x14
 	ldr r1, [r0, #0x38]

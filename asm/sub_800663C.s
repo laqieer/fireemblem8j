@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_800663C, "ax", %progbits
-@ sub_800663C @ JP 0x0800663C - region-different, gbadisasm descriptive asm (D23)
+@ PutFaceOnBackGround @ JP 0x0800663C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800663C
+	.global PutFaceOnBackGround
 	.thumb_func
-sub_800663C:
+PutFaceOnBackGround:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

@@ -3,11 +3,11 @@
 	.set GetUnit, 0x08019108 + 1
 	.set sub_8025C48, 0x08025C48 + 1
 	.section .text.sub_8024390, "ax", %progbits
-@ sub_8024390 @ JP 0x08024390 - region-different, gbadisasm descriptive asm (D23)
+@ SummonCommandUsability @ JP 0x08024390 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8024390
+	.global SummonCommandUsability
 	.thumb_func
-sub_8024390:
+SummonCommandUsability:
 	push {r4, r5, lr}
 	ldr r4, _080243DC @ =0x03004DF0
 	ldr r2, [r4]

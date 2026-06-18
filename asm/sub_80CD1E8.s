@@ -4,11 +4,11 @@
 	.set sub_80CC0F0, 0x080CC0F0 + 1
 	.set sub_80CC590, 0x080CC590 + 1
 	.section .text.sub_80CD1E8, "ax", %progbits
-@ sub_80CD1E8 @ JP 0x080CD1E8 - region-different, gbadisasm descriptive asm (D23)
+@ OpAnimEirikaDisplayName @ JP 0x080CD1E8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80CD1E8
+	.global OpAnimEirikaDisplayName
 	.thumb_func
-sub_80CD1E8:
+OpAnimEirikaDisplayName:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r5, r0, #0

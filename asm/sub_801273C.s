@@ -1,11 +1,11 @@
 	.syntax unified
 	.set GetUnitFromCharId, 0x08017FB0 + 1
 	.section .text.sub_801273C, "ax", %progbits
-@ sub_801273C @ JP 0x0801273C - region-different, gbadisasm descriptive asm (D23)
+@ LoadUnitWordStructs @ JP 0x0801273C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801273C
+	.global LoadUnitWordStructs
 	.thumb_func
-sub_801273C:
+LoadUnitWordStructs:
 	push {r4, lr}
 	ldr r4, _08012744 @ =0x030005F8
 	b _08012774

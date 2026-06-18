@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_8084630, "ax", %progbits
-@ sub_8084630 @ JP 0x08084630 - region-different, gbadisasm descriptive asm (D23)
+@ PrepareSineWaveScanlineBufInterleavedOffset @ JP 0x08084630 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8084630
+	.global PrepareSineWaveScanlineBufInterleavedOffset
 	.thumb_func
-sub_8084630:
+PrepareSineWaveScanlineBufInterleavedOffset:
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	lsls r1, r1, #0x10
