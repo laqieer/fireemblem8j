@@ -5042,3 +5042,21 @@ src/data/{libc,worldmap_gmapunit}/*.c + DATA_INCBIN_ASM_EXCLUDE + repointed carv
 COLD make compare OK, self-contained YES. **EXTRACTED-DATA now 13938060/13938060 =
 TRUE 100% (0 residual).** Reusable: any region-same .bin with a dot-in-name label is
 now extractable via this alias. AXIS 3 of 4 is now genuinely complete.
+
+### D127 — same-TU const-dedup carve (ArenaSetFallbackWeaponForUnit) (2026-06-18)
+NEW matching-C lever + recovery from the D126 regression discipline. autocarve
+NEAR 4/84 on ArenaSetFallbackWeaponForUnit: the single diff was a 4-byte word
+0x09000000(unbound)->0x080DCC90 = the R_ARM_ABS32 .rodata reloc for its LOCAL
+`u8 arenaWeapons[] = {...}` const (like D121 faceConfig). But 0x0DCC90 is ALREADY
+src/bmarena.o(.rodata) — because another bmarena func uses the SAME static-local
+const, which agbcc DEDUPLICATES within a TU. So the function isn't a separate carve
+(its own .o .rodata would conflict/be unplaced) — it BELONGS to bmarena.c. FIX:
+append the US func to src/bmarena.c after ArenaIsUnitAllowed (matching US source
+order, since sub_8031EC0 sits exactly at the end of bmarena.o(.text) @ 0x031EC0),
+extend the bmarena.o(.text) carved_rom range 0x031EC0->0x031F14, git rm the asm.
+The const dedupes (proven: JP bmarena.o .rodata stays 0x0DCC90-0x0DCCB2). Verified
+byte-exact: arenaWeapons compiles to 01141f2d00383f45 = the JP bytes at 0x0DCC90.
+matching-C 7367->7368. DISCIPLINE: per D126, verified the FULL COLD make compare
+sha1 = OK (not just the function byte-range) BEFORE commit. LEVER: autocarve NEARs
+whose only diff is a 0x09000000 .rodata-reloc word, where that addr is already a
+carved sibling-TU .rodata -> add the func to that TU's .c (const-dedup), don't carve separately.
