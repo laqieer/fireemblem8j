@@ -4893,3 +4893,27 @@ Conclusion: the reliable automated veins (region-same carve, const-only-diff,
 aliased/mnemonic/callee naming) are mined. Remaining matching-C = genuine per-function
 hand-decomp of reg-alloc/codegen-shape dead-ends (permuter-assisted, slow, low hit-rate)
 + larger region-different logic. Not the D96 "proven-unreachable" bar; do NOT loop-abort.
+
+### D118 — caller-corroboration + libc/BIOS naming re-opens the NAMED axis (2026-06-18)
+The naming floor (~83.3%) was NOT the real floor. Two new reliable signals named
++29 placeholder sub_ this iteration (named 83.28 -> 83.46%), all byte-neutral +
+COLD make-compare gated:
+- **caller-corroboration (2-signal):** for a placeholder sub_<addr> with a funclib
+  hint H, if a NAMED caller F (carved src or named asm) references sub_<addr> AND
+  the US version of F calls H, then sub_<addr>=H (funclib + caller-calls-it; e.g.
+  ManimShiftingSineWaveScanlineBuf_Loop calls sub_8084568, US calls
+  PrepareSineWaveScanlineBuf, and the bl SEQUENCE aligns). +9 (mostly newlib).
+- **libc/BIOS pattern naming:** the remaining sub_ in the newlib range (>=0x80D6000)
+  are standard library/BIOS funcs whose funclib hint is corroborated by code:
+  callee-subset vs the US ELF's named libc funcs (+9: fflush, vsprintf, __mulsf3,
+  cvt, exponent, _s2b, __sprint, __sbprintf, __sfmoreglue); trivial-stub code
+  (+8: _call_via_r8/r9/sl veneers `bx rN`, _unlink `-1` stub, __errno, ObjAffineSet
+  `svc#0xF`, ArcTan2 `svc#0xA`, MultiBoot `svc#0x25`); BIOS SWI-number scan
+  (+3: HuffUnComp #0x13, RLUnCompVram #0x15, RLUnCompWram #0x14) + CpuSet (svc#0xB,
+  confirmed by MPlayExtender caller). The svc-number IS the identity = definitive.
+NOTE: the asm sub_ symbol is provided by jp_syms.s (address binding), so renaming the
+descriptive .global is safe even when many callers still `bl sub_<addr>` — they resolve
+via jp_syms. SKIPPED ply_memacc (funclib-only, no 2nd signal — held to no-wrong-names).
+rename_callee.py re-run = 0 (its callee-overlap set was already mined). Also: baserom.gba
+had been left in /tmp by an earlier mv — restored (sha1 7da0456…); every build this
+session was therefore inherently self-contained-verified (baserom absent).
