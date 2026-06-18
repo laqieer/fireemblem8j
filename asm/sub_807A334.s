@@ -2,11 +2,11 @@
 	.set EkrDemonkingObj_SetTilePixel, 0x0807A3C0 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_807A334, "ax", %progbits
-@ sub_807A334 @ JP 0x0807A334 - region-different, gbadisasm descriptive asm (D23)
+@ EkrDemonkingObj_DissolveLoop @ JP 0x0807A334 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807A334
+	.global EkrDemonkingObj_DissolveLoop
 	.thumb_func
-sub_807A334:
+EkrDemonkingObj_DissolveLoop:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	movs r4, #0

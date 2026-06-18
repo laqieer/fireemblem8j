@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80D65C4, 0x080D65C4 + 1
 	.section .text.sub_800DD68, "ax", %progbits
-@ sub_800DD68 @ JP 0x0800DD68 - region-different, gbadisasm descriptive asm (D23)
+@ Event0D_AsmCall @ JP 0x0800DD68 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800DD68
+	.global Event0D_AsmCall
 	.thumb_func
-sub_800DD68:
+Event0D_AsmCall:
 	push {lr}
 	adds r3, r0, #0
 	ldr r0, [r3, #0x38]

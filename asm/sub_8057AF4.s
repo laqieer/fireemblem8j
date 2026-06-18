@@ -4,11 +4,11 @@
 	.set sub_8012E84, 0x08012E84 + 1
 	.set sub_8073D00, 0x08073D00 + 1
 	.section .text.sub_8057AF4, "ax", %progbits
-@ sub_8057AF4 @ JP 0x08057AF4 - region-different, gbadisasm descriptive asm (D23)
+@ UnitKakudaiMain @ JP 0x08057AF4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8057AF4
+	.global UnitKakudaiMain
 	.thumb_func
-sub_8057AF4:
+UnitKakudaiMain:
 	push {r4, r5, r6, r7, lr}
 	ldr r4, _08057B14 @ =0xFFFFFCB4
 	add sp, r4

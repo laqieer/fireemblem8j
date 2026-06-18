@@ -6,11 +6,11 @@
 	.set sub_8014B50, 0x08014B50 + 1
 	.set sub_807F274, 0x0807F274 + 1
 	.section .text.sub_807F1BC, "ax", %progbits
-@ sub_807F1BC @ JP 0x0807F1BC - region-different, gbadisasm descriptive asm (D23)
+@ MapAnim_GorgonHatch_Loop @ JP 0x0807F1BC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807F1BC
+	.global MapAnim_GorgonHatch_Loop
 	.thumb_func
-sub_807F1BC:
+MapAnim_GorgonHatch_Loop:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r4, r0, #0

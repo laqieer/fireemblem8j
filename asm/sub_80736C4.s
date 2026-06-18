@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8012E84, 0x08012E84 + 1
 	.section .text.sub_80736C4, "ax", %progbits
-@ sub_80736C4 @ JP 0x080736C4 - region-different, gbadisasm descriptive asm (D23)
+@ EkrPalModifyUnused @ JP 0x080736C4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80736C4
+	.global EkrPalModifyUnused
 	.thumb_func
-sub_80736C4:
+EkrPalModifyUnused:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_800D860, "ax", %progbits
-@ sub_800D860 @ JP 0x0800D860 - region-different, gbadisasm descriptive asm (D23)
+@ Event01_End @ JP 0x0800D860 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800D860
+	.global Event01_End
 	.thumb_func
-sub_800D860:
+Event01_End:
 	push {r4, r5, r6, lr}
 	adds r3, r0, #0
 	ldrh r1, [r3, #0x3c]

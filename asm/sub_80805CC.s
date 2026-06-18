@@ -5,11 +5,11 @@
 	.set sub_8013008, 0x08013008 + 1
 	.set sub_8014B50, 0x08014B50 + 1
 	.section .text.sub_80805CC, "ax", %progbits
-@ sub_80805CC @ JP 0x080805CC - region-different, gbadisasm descriptive asm (D23)
+@ MapAnimMonsterStone_Loop1 @ JP 0x080805CC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80805CC
+	.global MapAnimMonsterStone_Loop1
 	.thumb_func
-sub_80805CC:
+MapAnimMonsterStone_Loop1:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r4, r0, #0

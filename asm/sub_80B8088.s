@@ -5,11 +5,11 @@
 	.set sub_80B7FEC, 0x080B7FEC + 1
 	.set sub_80D6374, 0x080D6374 + 1
 	.section .text.sub_80B8088, "ax", %progbits
-@ sub_80B8088 @ JP 0x080B8088 - region-different, gbadisasm descriptive asm (D23)
+@ ClassIntroBurst_Loop @ JP 0x080B8088 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B8088
+	.global ClassIntroBurst_Loop
 	.thumb_func
-sub_80B8088:
+ClassIntroBurst_Loop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

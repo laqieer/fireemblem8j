@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_806FDCC, "ax", %progbits
-@ sub_806FDCC @ JP 0x0806FDCC - region-different, gbadisasm descriptive asm (D23)
+@ EfxSRankWeaponEffectSCRMain @ JP 0x0806FDCC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_806FDCC
+	.global EfxSRankWeaponEffectSCRMain
 	.thumb_func
-sub_806FDCC:
+EfxSRankWeaponEffectSCRMain:
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
 	ldr r0, _0806FE10 @ =0x0201FDB8

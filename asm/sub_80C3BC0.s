@@ -2,11 +2,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_80C3448, 0x080C3448 + 1
 	.section .text.sub_80C3BC0, "ax", %progbits
-@ sub_80C3BC0 @ JP 0x080C3BC0 - region-different, gbadisasm descriptive asm (D23)
+@ GMapPI_HideLoop @ JP 0x080C3BC0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C3BC0
+	.global GMapPI_HideLoop
 	.thumb_func
-sub_80C3BC0:
+GMapPI_HideLoop:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r2, r4, #0

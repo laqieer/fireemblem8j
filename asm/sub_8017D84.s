@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8017E3C, 0x08017E3C + 1
 	.section .text.sub_8017D84, "ax", %progbits
-@ sub_8017D84 @ JP 0x08017D84 - region-different, gbadisasm descriptive asm (D23)
+@ UnitAutolevelPenalty @ JP 0x08017D84 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8017D84
+	.global UnitAutolevelPenalty
 	.thumb_func
-sub_8017D84:
+UnitAutolevelPenalty:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	movs r5, #8

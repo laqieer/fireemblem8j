@@ -7,11 +7,11 @@
 	.set sub_800E854, 0x0800E854 + 1
 	.set sub_8091544, 0x08091544 + 1
 	.section .text.sub_800E5CC, "ax", %progbits
-@ sub_800E5CC @ JP 0x0800E5CC - region-different, gbadisasm descriptive asm (D23)
+@ Event1B_TEXTSHOW @ JP 0x0800E5CC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800E5CC
+	.global Event1B_TEXTSHOW
 	.thumb_func
-sub_800E5CC:
+Event1B_TEXTSHOW:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r1, [r4, #0x38]

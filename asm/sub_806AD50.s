@@ -3,11 +3,11 @@
 	.set sub_8056130, 0x08056130 + 1
 	.set sub_8056214, 0x08056214 + 1
 	.section .text.sub_806AD50, "ax", %progbits
-@ sub_806AD50 @ JP 0x0806AD50 - region-different, gbadisasm descriptive asm (D23)
+@ efxNaglfarOBJ_Loop @ JP 0x0806AD50 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_806AD50
+	.global efxNaglfarOBJ_Loop
 	.thumb_func
-sub_806AD50:
+efxNaglfarOBJ_Loop:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldrh r0, [r4, #0x2c]
