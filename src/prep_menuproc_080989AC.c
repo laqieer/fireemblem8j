@@ -25,7 +25,7 @@
 
 s8 CheckInLinkArena(void);
 
-void PutPrepChapterSprite_Skirmish(int xOam1, int yOam0, u16 oam2)
+void PutPrepInformationSprite(int xOam1, int yOam0, u16 oam2)
 {
-    PutSpriteExt(4, xOam1, yOam0, Sprite_PrepExMap, oam2);
+    PutSpriteExt(4, xOam1, yOam0, Sprite_PrepInformation, oam2);
 }
