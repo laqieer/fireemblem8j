@@ -1,11 +1,11 @@
 	.syntax unified
 	.set StartArenaDialogue, 0x080BA788 + 1
 	.section .text.sub_80BA51C, "ax", %progbits
-@ sub_80BA51C @ JP 0x080BA51C - region-different, gbadisasm descriptive asm (D23)
+@ ArenaUi_WelcomeDialogue @ JP 0x080BA51C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BA51C
+	.global ArenaUi_WelcomeDialogue
 	.thumb_func
-sub_80BA51C:
+ArenaUi_WelcomeDialogue:
 	push {lr}
 	adds r2, r0, #0
 	ldr r0, _080BA53C @ =0x0203A8EC
