@@ -3,11 +3,11 @@
 	.set GetEfxHp, 0x08059890 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_8053478, "ax", %progbits
-@ sub_8053478 @ JP 0x08053478 - region-different, gbadisasm descriptive asm (D23)
+@ EfxHpBarResire_SetAnotherSide @ JP 0x08053478 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8053478
+	.global EfxHpBarResire_SetAnotherSide
 	.thumb_func
-sub_8053478:
+EfxHpBarResire_SetAnotherSide:
 	push {r4, r5, r6, r7, lr}
 	adds r6, r0, #0
 	ldrh r0, [r6, #0x2c]

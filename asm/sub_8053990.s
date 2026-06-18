@@ -3,11 +3,11 @@
 	.set GetBanimDragonStatusType, 0x08072060 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_8053990, "ax", %progbits
-@ sub_8053990 @ JP 0x08053990 - region-different, gbadisasm descriptive asm (D23)
+@ EfxNoDamageYureMain @ JP 0x08053990 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8053990
+	.global EfxNoDamageYureMain
 	.thumb_func
-sub_8053990:
+EfxNoDamageYureMain:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

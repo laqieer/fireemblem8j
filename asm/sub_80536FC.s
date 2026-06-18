@@ -3,11 +3,11 @@
 	.set GetEfxHp, 0x08059890 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_80536FC, "ax", %progbits
-@ sub_80536FC @ JP 0x080536FC - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxHpBarLive @ JP 0x080536FC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80536FC
+	.global NewEfxHpBarLive
 	.thumb_func
-sub_80536FC:
+NewEfxHpBarLive:
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
 	ldr r1, _0805372C @ =0x02017728
