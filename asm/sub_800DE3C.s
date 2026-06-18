@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_800DE3C, "ax", %progbits
-@ sub_800DE3C @ JP 0x0800DE3C - region-different, gbadisasm descriptive asm (D23)
+@ Event0F_CounterOps @ JP 0x0800DE3C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800DE3C
+	.global Event0F_CounterOps
 	.thumb_func
-sub_800DE3C:
+Event0F_CounterOps:
 	push {r4, r5, r6, r7, lr}
 	ldr r0, [r0, #0x38]
 	ldrb r1, [r0]

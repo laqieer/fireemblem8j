@@ -4,11 +4,11 @@
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_8013008, 0x08013008 + 1
 	.section .text.sub_8088F0C, "ax", %progbits
-@ sub_8088F0C @ JP 0x08088F0C - region-different, gbadisasm descriptive asm (D23)
+@ StartMuralBackgroundAlt @ JP 0x08088F0C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8088F0C
+	.global StartMuralBackgroundAlt
 	.thumb_func
-sub_8088F0C:
+StartMuralBackgroundAlt:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

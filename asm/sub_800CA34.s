@@ -2,11 +2,11 @@
 	.set HideGmUnit, 0x080C4354 + 1
 	.set sub_80C8130, 0x080C8130 + 1
 	.section .text.sub_800CA34, "ax", %progbits
-@ sub_800CA34 @ JP 0x0800CA34 - region-different, gbadisasm descriptive asm (D23)
+@ EventA9_WmUnitMovePaths @ JP 0x0800CA34 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800CA34
+	.global EventA9_WmUnitMovePaths
 	.thumb_func
-sub_800CA34:
+EventA9_WmUnitMovePaths:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x10
 	ldr r1, [r0, #0x38]

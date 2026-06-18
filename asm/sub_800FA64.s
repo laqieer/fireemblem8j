@@ -3,11 +3,11 @@
 	.set sub_807C3A0, 0x0807C3A0 + 1
 	.set sub_807C40C, 0x0807C40C + 1
 	.section .text.sub_800FA64, "ax", %progbits
-@ sub_800FA64 @ JP 0x0800FA64 - region-different, gbadisasm descriptive asm (D23)
+@ LoadUnit_MoveToPosition @ JP 0x0800FA64 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800FA64
+	.global LoadUnit_MoveToPosition
 	.thumb_func
-sub_800FA64:
+LoadUnit_MoveToPosition:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0

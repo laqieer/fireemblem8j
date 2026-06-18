@@ -1,11 +1,11 @@
 	.syntax unified
 	.set AiGetItemStealRank, 0x0803B79C + 1
 	.section .text.sub_803B7D0, "ax", %progbits
-@ sub_803B7D0 @ JP 0x0803B7D0 - region-different, gbadisasm descriptive asm (D23)
+@ AiGetUnitStealItemSlot @ JP 0x0803B7D0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803B7D0
+	.global AiGetUnitStealItemSlot
 	.thumb_func
-sub_803B7D0:
+AiGetUnitStealItemSlot:
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
 	movs r6, #0xff

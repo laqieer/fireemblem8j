@@ -2,11 +2,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8012E84, 0x08012E84 + 1
 	.section .text.sub_80651D0, "ax", %progbits
-@ sub_80651D0 @ JP 0x080651D0 - region-different, gbadisasm descriptive asm (D23)
+@ efxLunaOBJ_Loop_B @ JP 0x080651D0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80651D0
+	.global efxLunaOBJ_Loop_B
 	.thumb_func
-sub_80651D0:
+efxLunaOBJ_Loop_B:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

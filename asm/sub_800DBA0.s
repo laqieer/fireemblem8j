@@ -2,11 +2,11 @@
 	.set SlotQueuePush, 0x0800D7EC + 1
 	.set sub_800D808, 0x0800D808 + 1
 	.section .text.sub_800DBA0, "ax", %progbits
-@ sub_800DBA0 @ JP 0x0800DBA0 - region-different, gbadisasm descriptive asm (D23)
+@ Event07_SlotQueueOperations @ JP 0x0800DBA0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800DBA0
+	.global Event07_SlotQueueOperations
 	.thumb_func
-sub_800DBA0:
+Event07_SlotQueueOperations:
 	push {r4, lr}
 	ldr r1, [r0, #0x38]
 	ldrb r0, [r1]

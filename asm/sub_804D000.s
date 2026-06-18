@@ -2,11 +2,11 @@
 	.set Proc_StartBlocking, 0x08002C30 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_804D000, "ax", %progbits
-@ sub_804D000 @ JP 0x0804D000 - region-different, gbadisasm descriptive asm (D23)
+@ StartSioWarpFxPartial @ JP 0x0804D000 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804D000
+	.global StartSioWarpFxPartial
 	.thumb_func
-sub_804D000:
+StartSioWarpFxPartial:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

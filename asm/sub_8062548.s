@@ -17,11 +17,11 @@
 	.set sub_8062BCC, 0x08062BCC + 1
 	.set sub_8074E80, 0x08074E80 + 1
 	.section .text.sub_8062548, "ax", %progbits
-@ sub_8062548 @ JP 0x08062548 - region-different, gbadisasm descriptive asm (D23)
+@ efxReblow_Loop_Main @ JP 0x08062548 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8062548
+	.global efxReblow_Loop_Main
 	.thumb_func
-sub_8062548:
+efxReblow_Loop_Main:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	ldr r0, [r4, #0x5c]

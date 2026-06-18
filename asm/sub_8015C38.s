@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_8015C38, "ax", %progbits
-@ sub_8015C38 @ JP 0x08015C38 - region-different, gbadisasm descriptive asm (D23)
+@ CamMove_OnInit @ JP 0x08015C38 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8015C38
+	.global CamMove_OnInit
 	.thumb_func
-sub_8015C38:
+CamMove_OnInit:
 	push {r4, r5, r6, lr}
 	adds r3, r0, #0
 	movs r5, #1

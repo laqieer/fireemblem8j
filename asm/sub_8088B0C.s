@@ -2,11 +2,11 @@
 	.set sub_8001EE4, 0x08001EE4 + 1
 	.set sub_80D6374, 0x080D6374 + 1
 	.section .text.sub_8088B0C, "ax", %progbits
-@ sub_8088B0C @ JP 0x08088B0C - region-different, gbadisasm descriptive asm (D23)
+@ ApplySepiaToPaletteBuffer @ JP 0x08088B0C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8088B0C
+	.global ApplySepiaToPaletteBuffer
 	.thumb_func
-sub_8088B0C:
+ApplySepiaToPaletteBuffer:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

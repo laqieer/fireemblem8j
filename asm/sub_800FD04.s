@@ -6,11 +6,11 @@
 	.set sub_80856E8, 0x080856E8 + 1
 	.set sub_80D65C0, 0x080D65C0 + 1
 	.section .text.sub_800FD04, "ax", %progbits
-@ sub_800FD04 @ JP 0x0800FD04 - region-different, gbadisasm descriptive asm (D23)
+@ Event2C_LoadUnits @ JP 0x0800FD04 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800FD04
+	.global Event2C_LoadUnits
 	.thumb_func
-sub_800FD04:
+Event2C_LoadUnits:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
