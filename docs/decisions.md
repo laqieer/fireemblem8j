@@ -5004,3 +5004,22 @@ must grep the actual function DEFINITION across all src/*.c (`^\w[\w *]*\bNAME\s
 not just file basenames; make compare's multiple-definition link error is the final gate.
 Held leaf-efx (EfxmagicShadowshot 0.98, no callees) + callee-CONTRADICTION (Fin_End 0.94,
 callees ⊄ US) as too risky. named 84.47 -> 84.50%.
+
+### D124 — automated levers confirmed mined; Ghidra MCP validated as the frontier tool (2026-06-18)
+0-yield byte-progress iteration that EXHAUSTIVELY re-confirmed (fact-driven, so future
+iters skip): coddog all-US mnemonic naming (efx AND non-efx ≥0.94) = mined; msg_map.tsv
+does NOT explain the text-function diffs (MSG_672-675 map identity, yet the bytes differ
+— the JP uses genuinely different message slots not captured by the auto-shift map);
+autocarve on text/draw/setup classes = no tractable NEARs (the D122 gPrepItemTexts cluster
+is fully mined — PrepItemScreen_DrawFunds was already carved); the 72 low-mnemonic-sim
+funclib-hint sub_ have 0 callee-overlap (genuinely wrong-hints/JP-specific). IDA MCP not
+running headless (no sessions). **Ghidra MCP IS live** (`mcp__ghidra__list_project_binaries`
+shows /fireemblem8.elf analyzed; `decompile_function` works) — this is the validated
+decompiler frontier tool for the remaining HARD multi-cause hand-decomp. Example of that
+hardness: PutWmItemScreenPromptText (12/212) needs simultaneous tilemap-column (0->1),
+x-offset (4->0), color, and msgid changes — deferred (too many uncertain coupled consts).
+CONCLUSION: the reliable automated/semi-automated levers (D108/D113-D123) are exhausted;
+remaining matching-C = slow per-function Ghidra-assisted hand-decomp of hard multi-cause
+region-different logic, +1 at a time. Named is at its structural floor (~84.5%; nameable
+sub_ exhausted, 1687 asset + 451 gap-filler-data unnameable). NOT loop-abort (hand-decomp
+still reaches some); NOT faking.
