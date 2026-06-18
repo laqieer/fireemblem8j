@@ -12,7 +12,7 @@ gEfxbattle_5	080DF9E4	data	NewEfxHitQuake
 gEfxbattle_6	080DFA7A	data	NewEfxHitQuake
 gEkrXPosBase	02000030	data	NewEfxHitQuake
 AnimScr_EkrMainMini_R_Far	085F1568	data	NewEfxHitQuake
-AnimScr_EkrMainMini_L_Far	0201775C	data	NewEfxHitQuake
+AnimScr_EkrMainMini_L_Far	085F14DC	data	NewEfxHitQuake
 RegisterBanimTerrainTmByPos	0805F874	thumb	NewEfxHitQuake
 EfxUpdateBg2Scroll	07C6D5AC	thumb	NewEfxHitQuake
 gEfxTerrainPalette	02022B08	data	NewEfxHitQuake
