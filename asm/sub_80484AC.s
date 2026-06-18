@@ -4,11 +4,11 @@
 	.set sub_80483F0, 0x080483F0 + 1
 	.set sub_8088DE8, 0x08088DE8 + 1
 	.section .text.sub_80484AC, "ax", %progbits
-@ sub_80484AC @ JP 0x080484AC - region-different, gbadisasm descriptive asm (D23)
+@ DrawXMapSendProgress @ JP 0x080484AC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80484AC
+	.global DrawXMapSendProgress
 	.thumb_func
-sub_80484AC:
+DrawXMapSendProgress:
 	push {r4, r5, lr}
 	sub sp, #0xc
 	adds r5, r0, #0

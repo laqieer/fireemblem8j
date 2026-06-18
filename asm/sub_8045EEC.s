@@ -21,7 +21,7 @@
 	.set sub_804D08C, 0x0804D08C + 1
 	.set sub_804D0BC, 0x0804D0BC + 1
 	.section .text.sub_8045EEC, "ax", %progbits
-@ sub_8045EEC @ JP 0x08045EEC - region-different, gbadisasm descriptive asm (D23)
+@ SioBat_SetupLoop @ JP 0x08045EEC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
 	.global SioBat_SetupLoop
 	.thumb_func

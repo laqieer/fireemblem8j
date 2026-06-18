@@ -9,11 +9,11 @@
 	.set sub_8044AC8, 0x08044AC8 + 1
 	.set sub_8044B14, 0x08044B14 + 1
 	.section .text.sub_8044BF0, "ax", %progbits
-@ sub_8044BF0 @ JP 0x08044BF0 - region-different, gbadisasm descriptive asm (D23)
+@ Tactician_LoopCore @ JP 0x08044BF0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8044BF0
+	.global Tactician_LoopCore
 	.thumb_func
-sub_8044BF0:
+Tactician_LoopCore:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r6, r1, #0

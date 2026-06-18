@@ -5,11 +5,11 @@
 	.set sub_803BA10, 0x0803BA10 + 1
 	.set sub_8040DE8, 0x08040DE8 + 1
 	.section .text.sub_803F7BC, "ax", %progbits
-@ sub_803F7BC @ JP 0x0803F7BC - region-different, gbadisasm descriptive asm (D23)
+@ AiBallistaRideExit @ JP 0x0803F7BC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803F7BC
+	.global AiBallistaRideExit
 	.thumb_func
-sub_803F7BC:
+AiBallistaRideExit:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

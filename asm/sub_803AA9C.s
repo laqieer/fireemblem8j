@@ -4,11 +4,11 @@
 	.set sub_8040EA8, 0x08040EA8 + 1
 	.set sub_80D65E0, 0x080D65E0 + 1
 	.section .text.sub_803AA9C, "ax", %progbits
-@ sub_803AA9C @ JP 0x0803AA9C - region-different, gbadisasm descriptive asm (D23)
+@ AiFindTargetInReachNeglectWallByFunc @ JP 0x0803AA9C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803AA9C
+	.global AiFindTargetInReachNeglectWallByFunc
 	.thumb_func
-sub_803AA9C:
+AiFindTargetInReachNeglectWallByFunc:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

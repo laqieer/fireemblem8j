@@ -21,7 +21,7 @@
 	.set sub_804DB28, 0x0804DB28 + 1
 	.set sub_8088FA4, 0x08088FA4 + 1
 	.section .text.sub_80446FC, "ax", %progbits
-@ sub_80446FC @ JP 0x080446FC - region-different, gbadisasm descriptive asm (D23)
+@ Tactician_InitScreen @ JP 0x080446FC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
 	.global Tactician_InitScreen
 	.thumb_func

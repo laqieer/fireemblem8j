@@ -3,11 +3,11 @@
 	.set GetUnitMovementCost, 0x08018A60 + 1
 	.set sub_801A0D4, 0x0801A0D4 + 1
 	.section .text.sub_803BD70, "ax", %progbits
-@ sub_803BD70 @ JP 0x0803BD70 - region-different, gbadisasm descriptive asm (D23)
+@ AiGetUnitClosestValidPosition @ JP 0x0803BD70 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803BD70
+	.global AiGetUnitClosestValidPosition
 	.thumb_func
-sub_803BD70:
+AiGetUnitClosestValidPosition:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

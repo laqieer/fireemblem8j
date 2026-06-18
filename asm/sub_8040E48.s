@@ -4,11 +4,11 @@
 	.set GenerateMovementMap, 0x0801A1B8 + 1
 	.set sub_801B668, 0x0801B668 + 1
 	.section .text.sub_8040E48, "ax", %progbits
-@ sub_8040E48 @ JP 0x08040E48 - region-different, gbadisasm descriptive asm (D23)
+@ GenerateUnitExtendedMovementMapNeglectWall @ JP 0x08040E48 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8040E48
+	.global GenerateUnitExtendedMovementMapNeglectWall
 	.thumb_func
-sub_8040E48:
+GenerateUnitExtendedMovementMapNeglectWall:
 	push {r4, lr}
 	adds r4, r0, #0
 	bl GetUnitMovementCost

@@ -5,11 +5,11 @@
 	.set sub_803D3E0, 0x0803D3E0 + 1
 	.set sub_803F9C0, 0x0803F9C0 + 1
 	.section .text.sub_803C904, "ax", %progbits
-@ sub_803C904 @ JP 0x0803C904 - region-different, gbadisasm descriptive asm (D23)
+@ AiScriptCmd_04_ActionOnSelectedCharacter @ JP 0x0803C904 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803C904
+	.global AiScriptCmd_04_ActionOnSelectedCharacter
 	.thumb_func
-sub_803C904:
+AiScriptCmd_04_ActionOnSelectedCharacter:
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	movs r0, #0x64

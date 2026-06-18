@@ -7,11 +7,11 @@
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.set sub_804E5A0, 0x0804E5A0 + 1
 	.section .text.sub_8044340, "ax", %progbits
-@ sub_8044340 @ JP 0x08044340 - region-different, gbadisasm descriptive asm (D23)
+@ SioTeamList_StartEraseTeamSubMenu @ JP 0x08044340 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8044340
+	.global SioTeamList_StartEraseTeamSubMenu
 	.thumb_func
-sub_8044340:
+SioTeamList_StartEraseTeamSubMenu:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r1, r5, #0
