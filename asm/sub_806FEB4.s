@@ -2,11 +2,11 @@
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_8056120, 0x08056120 + 1
 	.section .text.sub_806FEB4, "ax", %progbits
-@ sub_806FEB4 @ JP 0x0806FEB4 - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxMagdhisEffect @ JP 0x0806FEB4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_806FEB4
+	.global NewEfxMagdhisEffect
 	.thumb_func
-sub_806FEB4:
+NewEfxMagdhisEffect:
 	push {r4, lr}
 	adds r4, r0, #0
 	bl sub_8056120
