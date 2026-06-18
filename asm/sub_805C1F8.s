@@ -1,11 +1,11 @@
 	.syntax unified
 	.set Proc_End, 0x08002CBC + 1
 	.section .text.sub_805C1F8, "ax", %progbits
-@ sub_805C1F8 @ JP 0x0805C1F8 - region-different, gbadisasm descriptive asm (D23)
+@ efxRestRSTMain @ JP 0x0805C1F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805C1F8
+	.global efxRestRSTMain
 	.thumb_func
-sub_805C1F8:
+efxRestRSTMain:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -4,11 +4,11 @@
 	.set sub_80502F4, 0x080502F4 + 1
 	.set sub_80507B0, 0x080507B0 + 1
 	.section .text.sub_8024198, "ax", %progbits
-@ sub_8024198 @ JP 0x08024198 - region-different, gbadisasm descriptive asm (D23)
+@ StealCommandEffect @ JP 0x08024198 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8024198
+	.global StealCommandEffect
 	.thumb_func
-sub_8024198:
+StealCommandEffect:
 	push {lr}
 	adds r2, r0, #0
 	adds r1, #0x3d
