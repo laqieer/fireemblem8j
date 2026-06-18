@@ -3,11 +3,11 @@
 	.set m4aSongNumStart, 0x080D4EF4 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_8012CEC, "ax", %progbits
-@ sub_8012CEC @ JP 0x08012CEC - region-different, gbadisasm descriptive asm (D23)
+@ StartEventEarthQuake @ JP 0x08012CEC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8012CEC
+	.global StartEventEarthQuake
 	.thumb_func
-sub_8012CEC:
+StartEventEarthQuake:
 	push {r4, r5, r6, lr}
 	lsls r0, r0, #0x18
 	lsrs r5, r0, #0x18

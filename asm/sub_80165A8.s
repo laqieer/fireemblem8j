@@ -2,11 +2,11 @@
 	.set CanUnitUseStaff, 0x0801654C + 1
 	.set IsUnitMagicSealed, 0x08018A1C + 1
 	.section .text.sub_80165A8, "ax", %progbits
-@ sub_80165A8 @ JP 0x080165A8 - region-different, gbadisasm descriptive asm (D23)
+@ CanUnitUseStaffNow @ JP 0x080165A8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80165A8
+	.global CanUnitUseStaffNow
 	.thumb_func
-sub_80165A8:
+CanUnitUseStaffNow:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0

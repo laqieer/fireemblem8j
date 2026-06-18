@@ -4,11 +4,11 @@
 	.set __modsi3, 0x080D6690 + 1
 	.set sub_801BA6C, 0x0801BA6C + 1
 	.section .text.sub_801BAEC, "ax", %progbits
-@ sub_801BAEC @ JP 0x0801BAEC - region-different, gbadisasm descriptive asm (D23)
+@ DebugMenu_WeatherIdle @ JP 0x0801BAEC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801BAEC
+	.global DebugMenu_WeatherIdle
 	.thumb_func
-sub_801BAEC:
+DebugMenu_WeatherIdle:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	adds r6, r1, #0
