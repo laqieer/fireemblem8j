@@ -4,11 +4,11 @@
 	.set sub_807D324, 0x0807D324 + 1
 	.set sub_807D3BC, 0x0807D3BC + 1
 	.section .text.sub_807D544, "ax", %progbits
-@ sub_807D544 @ JP 0x0807D544 - region-different, gbadisasm descriptive asm (D23)
+@ SelSumPosAndMoveCamera @ JP 0x0807D544 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807D544
+	.global SelSumPosAndMoveCamera
 	.thumb_func
-sub_807D544:
+SelSumPosAndMoveCamera:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0xc
 	adds r4, r0, #0

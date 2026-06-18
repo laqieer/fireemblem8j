@@ -2,11 +2,11 @@
 	.set GetUnit, 0x08019108 + 1
 	.set AdjustNewUnitPosition, 0x0807C8DC + 1
 	.section .text.sub_807C44C, "ax", %progbits
-@ sub_807C44C @ JP 0x0807C44C - region-different, gbadisasm descriptive asm (D23)
+@ GenUnitDefinitionFinalPosition @ JP 0x0807C44C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807C44C
+	.global GenUnitDefinitionFinalPosition
 	.thumb_func
-sub_807C44C:
+GenUnitDefinitionFinalPosition:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r4, r0, #0

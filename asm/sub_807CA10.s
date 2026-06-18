@@ -5,11 +5,11 @@
 	.set sub_802EA88, 0x0802EA88 + 1
 	.set sub_803BD70, 0x0803BD70 + 1
 	.section .text.sub_807CA10, "ax", %progbits
-@ sub_807CA10 @ JP 0x0807CA10 - region-different, gbadisasm descriptive asm (D23)
+@ MuCtr_GenMoveScript @ JP 0x0807CA10 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807CA10
+	.global MuCtr_GenMoveScript
 	.thumb_func
-sub_807CA10:
+MuCtr_GenMoveScript:
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0

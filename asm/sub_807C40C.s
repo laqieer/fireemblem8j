@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_807C3A0, 0x0807C3A0 + 1
 	.section .text.sub_807C40C, "ax", %progbits
-@ sub_807C40C @ JP 0x0807C40C - region-different, gbadisasm descriptive asm (D23)
+@ MoveUnit_ @ JP 0x0807C40C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807C40C
+	.global MoveUnit_
 	.thumb_func
-sub_807C40C:
+MoveUnit_:
 	push {r4, r5, r6, lr}
 	sub sp, #8
 	lsls r1, r1, #0x18
