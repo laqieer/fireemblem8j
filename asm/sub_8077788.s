@@ -5,11 +5,11 @@
 	.set sub_805679C, 0x0805679C + 1
 	.set sub_80D6394, 0x080D6394 + 1
 	.section .text.sub_8077788, "ax", %progbits
-@ sub_8077788 @ JP 0x08077788 - region-different, gbadisasm descriptive asm (D23)
+@ NewEkrTriPegasusKnightOBJ @ JP 0x08077788 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8077788
+	.global NewEkrTriPegasusKnightOBJ
 	.thumb_func
-sub_8077788:
+NewEkrTriPegasusKnightOBJ:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

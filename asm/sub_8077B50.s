@@ -6,11 +6,11 @@
 	.set sub_805679C, 0x0805679C + 1
 	.set sub_80D6394, 0x080D6394 + 1
 	.section .text.sub_8077B50, "ax", %progbits
-@ sub_8077B50 @ JP 0x08077B50 - region-different, gbadisasm descriptive asm (D23)
+@ NewEkrTriArmorKnightOBJ2 @ JP 0x08077B50 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8077B50
+	.global NewEkrTriArmorKnightOBJ2
 	.thumb_func
-sub_8077B50:
+NewEkrTriArmorKnightOBJ2:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_807B660, "ax", %progbits
-@ sub_807B660 @ JP 0x0807B660 - region-different, gbadisasm descriptive asm (D23)
+@ GetMuDisplayPosition @ JP 0x0807B660 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807B660
+	.global GetMuDisplayPosition
 	.thumb_func
-sub_807B660:
+GetMuDisplayPosition:
 	push {r4, r5, lr}
 	mov ip, r0
 	adds r4, r1, #0

@@ -8,11 +8,11 @@
 	.set sub_807B4E0, 0x0807B4E0 + 1
 	.set sub_807B99C, 0x0807B99C + 1
 	.section .text.sub_807ACBC, "ax", %progbits
-@ sub_807ACBC @ JP 0x0807ACBC - region-different, gbadisasm descriptive asm (D23)
+@ RunMuMoveScript @ JP 0x0807ACBC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807ACBC
+	.global RunMuMoveScript
 	.thumb_func
-sub_807ACBC:
+RunMuMoveScript:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 _0807ACC0:
