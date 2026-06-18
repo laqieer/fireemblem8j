@@ -36,11 +36,11 @@
 	.set sub_8094ED0, 0x08094ED0 + 1
 	.set sub_80D636C, 0x080D636C + 1
 	.section .text.sub_8093058, "ax", %progbits
-@ sub_8093058 @ JP 0x08093058 - region-different, gbadisasm descriptive asm (D23)
+@ UnitList_SetupDisplay @ JP 0x08093058 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8093058
+	.global UnitList_SetupDisplay
 	.thumb_func
-sub_8093058:
+UnitList_SetupDisplay:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

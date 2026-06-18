@@ -4,11 +4,11 @@
 	.set PutSpecialChar, 0x08004A14 + 1
 	.set sub_80944C4, 0x080944C4 + 1
 	.section .text.sub_8094590, "ax", %progbits
-@ sub_8094590 @ JP 0x08094590 - region-different, gbadisasm descriptive asm (D23)
+@ UnitList_DrawPageHeader @ JP 0x08094590 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8094590
+	.global UnitList_DrawPageHeader
 	.thumb_func
-sub_8094590:
+UnitList_DrawPageHeader:
 	push {r4, r5, r6, r7, lr}
 	lsls r0, r0, #0x18
 	lsrs r6, r0, #0x18

@@ -2,11 +2,11 @@
 	.set sub_8000D68, 0x08000D68 + 1
 	.set sub_8013008, 0x08013008 + 1
 	.section .text.sub_80973C8, "ax", %progbits
-@ sub_80973C8 @ JP 0x080973C8 - region-different, gbadisasm descriptive asm (D23)
+@ Prep_LoadWindowGfx @ JP 0x080973C8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80973C8
+	.global Prep_LoadWindowGfx
 	.thumb_func
-sub_80973C8:
+Prep_LoadWindowGfx:
 	push {r4, r5, r6, lr}
 	sub sp, #0x10
 	adds r2, r0, #0

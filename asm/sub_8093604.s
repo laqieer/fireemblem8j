@@ -6,11 +6,11 @@
 	.set sub_8093560, 0x08093560 + 1
 	.set sub_809A110, 0x0809A110 + 1
 	.section .text.sub_8093604, "ax", %progbits
-@ sub_8093604 @ JP 0x08093604 - region-different, gbadisasm descriptive asm (D23)
+@ UnitList_TogglePrepDeployState @ JP 0x08093604 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8093604
+	.global UnitList_TogglePrepDeployState
 	.thumb_func
-sub_8093604:
+UnitList_TogglePrepDeployState:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r0, #0x30
