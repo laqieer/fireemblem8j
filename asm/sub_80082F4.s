@@ -3,11 +3,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8013008, 0x08013008 + 1
 	.section .text.sub_80082F4, "ax", %progbits
-@ sub_80082F4 @ JP 0x080082F4 - region-different, gbadisasm descriptive asm (D23)
+@ TalkBubbleOpen_OnIdle @ JP 0x080082F4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80082F4
+	.global TalkBubbleOpen_OnIdle
 	.thumb_func
-sub_80082F4:
+TalkBubbleOpen_OnIdle:
 	push {r4, r5, r6, lr}
 	sub sp, #0x1c
 	adds r6, r0, #0
