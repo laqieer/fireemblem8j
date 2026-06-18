@@ -10,11 +10,11 @@
 	.set sub_8004374, 0x08004374 + 1
 	.set sub_801729C, 0x0801729C + 1
 	.section .text.sub_80B54AC, "ax", %progbits
-@ sub_80B54AC @ JP 0x080B54AC - region-different, gbadisasm descriptive asm (D23)
+@ DrawBonusClaimItemText @ JP 0x080B54AC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B54AC
+	.global DrawBonusClaimItemText
 	.thumb_func
-sub_80B54AC:
+DrawBonusClaimItemText:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

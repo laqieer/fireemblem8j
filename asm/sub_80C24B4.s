@@ -3,11 +3,11 @@
 	.set sub_80C5604, 0x080C5604 + 1
 	.set sub_80D6364, 0x080D6364 + 1
 	.section .text.sub_80C24B4, "ax", %progbits
-@ sub_80C24B4 @ JP 0x080C24B4 - region-different, gbadisasm descriptive asm (D23)
+@ GmMuPrim_GetMovementFacing @ JP 0x080C24B4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C24B4
+	.global GmMuPrim_GetMovementFacing
 	.thumb_func
-sub_80C24B4:
+GmMuPrim_GetMovementFacing:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80C5628, "ax", %progbits
-@ sub_80C5628 @ JP 0x080C5628 - region-different, gbadisasm descriptive asm (D23)
+@ GetWMCenteredCameraPosition @ JP 0x080C5628 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C5628
+	.global GetWMCenteredCameraPosition
 	.thumb_func
-sub_80C5628:
+GetWMCenteredCameraPosition:
 	push {lr}
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10

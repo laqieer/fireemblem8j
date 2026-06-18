@@ -2,11 +2,11 @@
 	.set Proc_Find, 0x08002DEC + 1
 	.set sub_8013008, 0x08013008 + 1
 	.section .text.sub_80B1474, "ax", %progbits
-@ sub_80B1474 @ JP 0x080B1474 - region-different, gbadisasm descriptive asm (D23)
+@ SetUiCursorHandConfig @ JP 0x080B1474 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B1474
+	.global SetUiCursorHandConfig
 	.thumb_func
-sub_80B1474:
+SetUiCursorHandConfig:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

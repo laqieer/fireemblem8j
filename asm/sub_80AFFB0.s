@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80AFFB0, "ax", %progbits
-@ sub_80AFFB0 @ JP 0x080AFFB0 - region-different, gbadisasm descriptive asm (D23)
+@ SaveDraw_SetCursorBox @ JP 0x080AFFB0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80AFFB0
+	.global SaveDraw_SetCursorBox
 	.thumb_func
-sub_80AFFB0:
+SaveDraw_SetCursorBox:
 	lsls r1, r1, #0x10
 	asrs r1, r1, #0x10
 	lsls r2, r2, #0x10

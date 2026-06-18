@@ -1,11 +1,11 @@
 	.syntax unified
 	.set m4aSongNumStart, 0x080D4EF4 + 1
 	.section .text.sub_80BA01C, "ax", %progbits
-@ sub_80BA01C @ JP 0x080BA01C - region-different, gbadisasm descriptive asm (D23)
+@ ShopTryMoveHand @ JP 0x080BA01C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BA01C
+	.global ShopTryMoveHand
 	.thumb_func
-sub_80BA01C:
+ShopTryMoveHand:
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0

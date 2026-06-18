@@ -4,11 +4,11 @@
 	.set sub_8002100, 0x08002100 + 1
 	.set sub_80D6374, 0x080D6374 + 1
 	.section .text.sub_80B762C, "ax", %progbits
-@ sub_80B762C @ JP 0x080B762C - region-different, gbadisasm descriptive asm (D23)
+@ PutClassNameIntroLetter @ JP 0x080B762C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B762C
+	.global PutClassNameIntroLetter
 	.thumb_func
-sub_80B762C:
+PutClassNameIntroLetter:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

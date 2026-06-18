@@ -3,11 +3,11 @@
 	.set GetGmPathWaypointCount, 0x080C1218 + 1
 	.set sub_80D6378, 0x080D6378 + 1
 	.section .text.sub_80C1C4C, "ax", %progbits
-@ sub_80C1C4C @ JP 0x080C1C4C - region-different, gbadisasm descriptive asm (D23)
+@ BuildGmPathSplineData @ JP 0x080C1C4C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C1C4C
+	.global BuildGmPathSplineData
 	.thumb_func
-sub_80C1C4C:
+BuildGmPathSplineData:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

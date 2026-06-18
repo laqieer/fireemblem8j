@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_80B7B2C, "ax", %progbits
-@ sub_80B7B2C @ JP 0x080B7B2C - region-different, gbadisasm descriptive asm (D23)
+@ StartClassNameIntro @ JP 0x080B7B2C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B7B2C
+	.global StartClassNameIntro
 	.thumb_func
-sub_80B7B2C:
+StartClassNameIntro:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0

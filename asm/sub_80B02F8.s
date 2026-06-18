@@ -2,11 +2,11 @@
 	.set BitfileToIndex, 0x080AD2D0 + 1
 	.set SaveMenuDrawSubSelBoxExt, 0x080B0278 + 1
 	.section .text.sub_80B02F8, "ax", %progbits
-@ sub_80B02F8 @ JP 0x080B02F8 - region-different, gbadisasm descriptive asm (D23)
+@ SaveMenuDrawSubSelBox @ JP 0x080B02F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B02F8
+	.global SaveMenuDrawSubSelBox
 	.thumb_func
-sub_80B02F8:
+SaveMenuDrawSubSelBox:
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	lsls r1, r1, #0x18

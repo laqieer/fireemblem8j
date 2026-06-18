@@ -4,11 +4,11 @@
 	.set __modsi3, 0x080D6690 + 1
 	.set sub_80BF6B4, 0x080BF6B4 + 1
 	.section .text.sub_80BF73C, "ax", %progbits
-@ sub_80BF73C @ JP 0x080BF73C - region-different, gbadisasm descriptive asm (D23)
+@ GMapScreen_UpdateScroll @ JP 0x080BF73C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BF73C
+	.global GMapScreen_UpdateScroll
 	.thumb_func
-sub_80BF73C:
+GMapScreen_UpdateScroll:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

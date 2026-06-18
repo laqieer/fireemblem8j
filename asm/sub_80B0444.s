@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80A9C30, 0x080A9C30 + 1
 	.section .text.sub_80B0444, "ax", %progbits
-@ sub_80B0444 @ JP 0x080B0444 - region-different, gbadisasm descriptive asm (D23)
+@ SaveMenuModifySaveSlot @ JP 0x080B0444 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B0444
+	.global SaveMenuModifySaveSlot
 	.thumb_func
-sub_80B0444:
+SaveMenuModifySaveSlot:
 	push {r4, r5, r6, lr}
 	lsls r0, r0, #0x18
 	lsrs r4, r0, #0x18

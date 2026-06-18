@@ -4,11 +4,11 @@
 	.set _DivArm2, 0x0800BB3C + 1
 	.set sub_80D6378, 0x080D6378 + 1
 	.section .text.sub_80C513C, "ax", %progbits
-@ sub_80C513C @ JP 0x080C513C - region-different, gbadisasm descriptive asm (D23)
+@ GmapLineFade_0 @ JP 0x080C513C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C513C
+	.global GmapLineFade_0
 	.thumb_func
-sub_80C513C:
+GmapLineFade_0:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

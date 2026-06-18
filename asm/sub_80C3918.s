@@ -5,11 +5,11 @@
 	.set sub_80C3744, 0x080C3744 + 1
 	.set sub_80C3864, 0x080C3864 + 1
 	.section .text.sub_80C3918, "ax", %progbits
-@ sub_80C3918 @ JP 0x080C3918 - region-different, gbadisasm descriptive asm (D23)
+@ DrawGMapPIPanelContents @ JP 0x080C3918 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C3918
+	.global DrawGMapPIPanelContents
 	.thumb_func
-sub_80C3918:
+DrawGMapPIPanelContents:
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	adds r0, #0x5e

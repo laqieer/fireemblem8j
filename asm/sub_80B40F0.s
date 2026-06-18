@@ -2,11 +2,11 @@
 	.set PutNumber, 0x08004A90 + 1
 	.set PutText, 0x08003DA0 + 1
 	.section .text.sub_80B40F0, "ax", %progbits
-@ sub_80B40F0 @ JP 0x080B40F0 - region-different, gbadisasm descriptive asm (D23)
+@ SoundRoom_DrawCompletionPercent @ JP 0x080B40F0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B40F0
+	.global SoundRoom_DrawCompletionPercent
 	.thumb_func
-sub_80B40F0:
+SoundRoom_DrawCompletionPercent:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0

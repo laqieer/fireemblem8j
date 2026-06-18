@@ -19,11 +19,11 @@
 	.set sub_80ABA8C, 0x080ABA8C + 1
 	.set sub_80D6370, 0x080D6370 + 1
 	.section .text.sub_80A98B4, "ax", %progbits
-@ sub_80A98B4 @ JP 0x080A98B4 - region-different, gbadisasm descriptive asm (D23)
+@ WriteNewGameSave @ JP 0x080A98B4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A98B4
+	.global WriteNewGameSave
 	.thumb_func
-sub_80A98B4:
+WriteNewGameSave:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

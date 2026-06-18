@@ -2,11 +2,11 @@
 	.set sub_8026ED0, 0x08026ED0 + 1
 	.set sub_8027BDC, 0x08027BDC + 1
 	.section .text.sub_80B5BB0, "ax", %progbits
-@ sub_80B5BB0 @ JP 0x080B5BB0 - region-different, gbadisasm descriptive asm (D23)
+@ BonusClaim_DrawTargetUnitSprites @ JP 0x080B5BB0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B5BB0
+	.global BonusClaim_DrawTargetUnitSprites
 	.thumb_func
-sub_80B5BB0:
+BonusClaim_DrawTargetUnitSprites:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

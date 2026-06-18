@@ -1,11 +1,11 @@
 	.syntax unified
 	.set Proc_Find, 0x08002DEC + 1
 	.section .text.sub_80B2034, "ax", %progbits
-@ sub_80B2034 @ JP 0x080B2034 - region-different, gbadisasm descriptive asm (D23)
+@ ConfigSysHandCursorShadowEnabled @ JP 0x080B2034 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B2034
+	.global ConfigSysHandCursorShadowEnabled
 	.thumb_func
-sub_80B2034:
+ConfigSysHandCursorShadowEnabled:
 	push {r4, lr}
 	lsls r0, r0, #0x18
 	asrs r4, r0, #0x18

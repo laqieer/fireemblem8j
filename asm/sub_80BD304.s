@@ -8,11 +8,11 @@
 	.set sub_80056AC, 0x080056AC + 1
 	.set PutWMFaceOnBg, 0x080BD194 + 1
 	.section .text.sub_80BD304, "ax", %progbits
-@ sub_80BD304 @ JP 0x080BD304 - region-different, gbadisasm descriptive asm (D23)
+@ WMFaceCtrl_LoopExt @ JP 0x080BD304 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BD304
+	.global WMFaceCtrl_LoopExt
 	.thumb_func
-sub_80BD304:
+WMFaceCtrl_LoopExt:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -1,11 +1,11 @@
 	.syntax unified
 	.set j_TmFillRect, 0x080DC0E4 + 1
 	.section .text.sub_80C3618, "ax", %progbits
-@ sub_80C3618 @ JP 0x080C3618 - region-different, gbadisasm descriptive asm (D23)
+@ ClearGMapPIPanel @ JP 0x080C3618 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C3618
+	.global ClearGMapPIPanel
 	.thumb_func
-sub_80C3618:
+ClearGMapPIPanel:
 	push {r4, r5, lr}
 	ldr r1, _080C36B0 @ =0x08AC1E08
 	lsls r0, r0, #2

@@ -2,11 +2,11 @@
 	.set __divsi3, 0x080D65F8 + 1
 	.set sub_80D6368, 0x080D6368 + 1
 	.section .text.sub_80B289C, "ax", %progbits
-@ sub_80B289C @ JP 0x080B289C - region-different, gbadisasm descriptive asm (D23)
+@ BgAffinRotScaling @ JP 0x080B289C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B289C
+	.global BgAffinRotScaling
 	.thumb_func
-sub_80B289C:
+BgAffinRotScaling:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

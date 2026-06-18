@@ -2,11 +2,11 @@
 	.set memcpy, 0x080D6908 + 1
 	.set sub_80BAE08, 0x080BAE08 + 1
 	.section .text.sub_80BAD48, "ax", %progbits
-@ sub_80BAD48 @ JP 0x080BAD48 - region-different, gbadisasm descriptive asm (D23)
+@ GetChapterSurvivalRank @ JP 0x080BAD48 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BAD48
+	.global GetChapterSurvivalRank
 	.thumb_func
-sub_80BAD48:
+GetChapterSurvivalRank:
 	push {lr}
 	sub sp, #4
 	ldr r1, _080BAD7C @ =0x081F5BF0

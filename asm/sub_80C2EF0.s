@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80C2EF0, "ax", %progbits
-@ sub_80C2EF0 @ JP 0x080C2EF0 - region-different, gbadisasm descriptive asm (D23)
+@ GmMu_0 @ JP 0x080C2EF0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C2EF0
+	.global GmMu_0
 	.thumb_func
-sub_80C2EF0:
+GmMu_0:
 	lsls r2, r2, #0x18
 	asrs r2, r2, #0x18
 	lsls r1, r1, #2

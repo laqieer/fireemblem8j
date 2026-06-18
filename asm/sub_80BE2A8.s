@@ -3,11 +3,11 @@
 	.set sub_80C3FFC, 0x080C3FFC + 1
 	.set sub_80C4080, 0x080C4080 + 1
 	.section .text.sub_80BE2A8, "ax", %progbits
-@ sub_80BE2A8 @ JP 0x080BE2A8 - region-different, gbadisasm descriptive asm (D23)
+@ WmMain_MoveCursor @ JP 0x080BE2A8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BE2A8
+	.global WmMain_MoveCursor
 	.thumb_func
-sub_80BE2A8:
+WmMain_MoveCursor:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

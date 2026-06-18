@@ -2,11 +2,11 @@
 	.set AP_Update, 0x080091AC + 1
 	.set sub_80C7264, 0x080C7264 + 1
 	.section .text.sub_80C7560, "ax", %progbits
-@ sub_80C7560 @ JP 0x080C7560 - region-different, gbadisasm descriptive asm (D23)
+@ GmapRmBorder1_PutSprite2 @ JP 0x080C7560 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C7560
+	.global GmapRmBorder1_PutSprite2
 	.thumb_func
-sub_80C7560:
+GmapRmBorder1_PutSprite2:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

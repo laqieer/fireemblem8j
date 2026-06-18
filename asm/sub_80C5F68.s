@@ -2,11 +2,11 @@
 	.set PutSprite, 0x080052F0 + 1
 	.set sub_80C7264, 0x080C7264 + 1
 	.section .text.sub_80C5F68, "ax", %progbits
-@ sub_80C5F68 @ JP 0x080C5F68 - region-different, gbadisasm descriptive asm (D23)
+@ GmapEffect_0 @ JP 0x080C5F68 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C5F68
+	.global GmapEffect_0
 	.thumb_func
-sub_80C5F68:
+GmapEffect_0:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

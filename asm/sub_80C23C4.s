@@ -1,11 +1,11 @@
 	.syntax unified
 	.set MapUnitC_GetPosition, 0x080BFD74 + 1
 	.section .text.sub_80C23C4, "ax", %progbits
-@ sub_80C23C4 @ JP 0x080C23C4 - region-different, gbadisasm descriptive asm (D23)
+@ GmMuPrim_TrackMovementDelta @ JP 0x080C23C4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C23C4
+	.global GmMuPrim_TrackMovementDelta
 	.thumb_func
-sub_80C23C4:
+GmMuPrim_TrackMovementDelta:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0

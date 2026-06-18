@@ -3,11 +3,11 @@
 	.set j_TmCopyRect, 0x080DC0F4 + 1
 	.set j_TmFillRect, 0x080DC0E4 + 1
 	.section .text.sub_80C3448, "ax", %progbits
-@ sub_80C3448 @ JP 0x080C3448 - region-different, gbadisasm descriptive asm (D23)
+@ DrawGMapPIPanelAtHeight @ JP 0x080C3448 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C3448
+	.global DrawGMapPIPanelAtHeight
 	.thumb_func
-sub_80C3448:
+DrawGMapPIPanelAtHeight:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

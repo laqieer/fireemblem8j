@@ -15,11 +15,11 @@
 	.set sub_80C086C, 0x080C086C + 1
 	.set sub_80C5830, 0x080C5830 + 1
 	.section .text.sub_80C5868, "ax", %progbits
-@ sub_80C5868 @ JP 0x080C5868 - region-different, gbadisasm descriptive asm (D23)
+@ PutWorldmapStatusDetails @ JP 0x080C5868 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C5868
+	.global PutWorldmapStatusDetails
 	.thumb_func
-sub_80C5868:
+PutWorldmapStatusDetails:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

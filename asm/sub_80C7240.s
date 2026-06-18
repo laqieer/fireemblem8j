@@ -1,11 +1,11 @@
 	.syntax unified
 	.set Proc_Find, 0x08002DEC + 1
 	.section .text.sub_80C7240, "ax", %progbits
-@ sub_80C7240 @ JP 0x080C7240 - region-different, gbadisasm descriptive asm (D23)
+@ GmapRm_SetPosition @ JP 0x080C7240 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C7240
+	.global GmapRm_SetPosition
 	.thumb_func
-sub_80C7240:
+GmapRm_SetPosition:
 	push {r4, r5, lr}
 	lsls r0, r0, #0x10
 	asrs r4, r0, #0x10

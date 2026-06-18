@@ -4,11 +4,11 @@
 	.set sub_80C19D4, 0x080C19D4 + 1
 	.set sub_80D6370, 0x080D6370 + 1
 	.section .text.sub_80C1B20, "ax", %progbits
-@ sub_80C1B20 @ JP 0x080C1B20 - region-different, gbadisasm descriptive asm (D23)
+@ GmFindPath @ JP 0x080C1B20 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C1B20
+	.global GmFindPath
 	.thumb_func
-sub_80C1B20:
+GmFindPath:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

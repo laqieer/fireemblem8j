@@ -13,11 +13,11 @@
 	.set sub_80B0AE8, 0x080B0AE8 + 1
 	.set sub_80B1138, 0x080B1138 + 1
 	.section .text.sub_80B0B38, "ax", %progbits
-@ sub_80B0B38 @ JP 0x080B0B38 - region-different, gbadisasm descriptive asm (D23)
+@ InitDifficultySelectScreen @ JP 0x080B0B38 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B0B38
+	.global InitDifficultySelectScreen
 	.thumb_func
-sub_80B0B38:
+InitDifficultySelectScreen:
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	bl ResetTextFont

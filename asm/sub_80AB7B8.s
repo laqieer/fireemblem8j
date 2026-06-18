@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80AB7B8, "ax", %progbits
-@ sub_80AB7B8 @ JP 0x080AB7B8 - region-different, gbadisasm descriptive asm (D23)
+@ WriteWorldMapNodes @ JP 0x080AB7B8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80AB7B8
+	.global WriteWorldMapNodes
 	.thumb_func
-sub_80AB7B8:
+WriteWorldMapNodes:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

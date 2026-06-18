@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80B296C, "ax", %progbits
-@ sub_80B296C @ JP 0x080B296C - region-different, gbadisasm descriptive asm (D23)
+@ BgAffinAnchoring @ JP 0x080B296C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B296C
+	.global BgAffinAnchoring
 	.thumb_func
-sub_80B296C:
+BgAffinAnchoring:
 	push {r4, r5, r6, r7, lr}
 	ldr r4, [sp, #0x14]
 	lsls r0, r0, #0x18

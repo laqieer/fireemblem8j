@@ -1,11 +1,11 @@
 	.syntax unified
 	.set Proc_Find, 0x08002DEC + 1
 	.section .text.sub_80C61AC, "ax", %progbits
-@ sub_80C61AC @ JP 0x080C61AC - region-different, gbadisasm descriptive asm (D23)
+@ GmapSugoAdvance @ JP 0x080C61AC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C61AC
+	.global GmapSugoAdvance
 	.thumb_func
-sub_80C61AC:
+GmapSugoAdvance:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
