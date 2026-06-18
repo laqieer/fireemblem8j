@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_8076A74, "ax", %progbits
-@ sub_8076A74 @ JP 0x08076A74 - region-different, gbadisasm descriptive asm (D23)
+@ EfxPartsofScroll2Main @ JP 0x08076A74 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8076A74
+	.global EfxPartsofScroll2Main
 	.thumb_func
-sub_8076A74:
+EfxPartsofScroll2Main:
 	push {r4, r5, r6, lr}
 	ldr r0, _08076AC0 @ =0x0201FDB8
 	ldr r0, [r0]
