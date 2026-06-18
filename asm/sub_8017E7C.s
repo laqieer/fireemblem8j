@@ -3,11 +3,11 @@
 	.set sub_802B970, 0x0802B970 + 1
 	.set sub_802C134, 0x0802C134 + 1
 	.section .text.sub_8017E7C, "ax", %progbits
-@ sub_8017E7C @ JP 0x08017E7C - region-different, gbadisasm descriptive asm (D23)
+@ UnitAutolevelRealistic @ JP 0x08017E7C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8017E7C
+	.global UnitAutolevelRealistic
 	.thumb_func
-sub_8017E7C:
+UnitAutolevelRealistic:
 	push {r4, r5, r6, lr}
 	sub sp, #0x80
 	adds r4, r0, #0
