@@ -5023,3 +5023,22 @@ remaining matching-C = slow per-function Ghidra-assisted hand-decomp of hard mul
 region-different logic, +1 at a time. Named is at its structural floor (~84.5%; nameable
 sub_ exhausted, 1687 asset + 451 gap-filler-data unnameable). NOT loop-abort (hand-decomp
 still reaches some); NOT faking.
+
+### D125 — extracted-data axis closed to TRUE 100% via GNU asm() dot-label trick (2026-06-18)
+The directive's "DATA lever" finally hit a REAL target: the entire remaining
+data_asm residual was just 546 B in 3 objects (the calcprogress display already
+rounded to 100.00%, but the true figure was 13937514/13938060 = 99.996%):
+- dat_libc_a_mprec: p05.27 (292 B)
+- dat_libc_a_vfprintf: blanks.12, zeroes.13 (122 B)
+- dat_worldmap_gmapunit_p5: chance_lut.3 (132 B)
+All region-SAME committed .bin data, blocked from src/data migration ONLY because
+their compiler-generated static-local labels contain a DOT (`name.N`) — not a legal
+C identifier (the "dot-in-name ceiling" from the data-extraction memory; README had
+wrongly called these a "firm ceiling / libc not game source / dual-def risk").
+FIX: GNU C asm() symbol alias — `u8 chance_lut_3[] asm("chance_lut.3") = INCBIN_U8(...)`
+compiles (verified `.globl chance_lut.3` in the preproc->agbcc .s) so the linker emits
+the EXACT dotted symbol; all references resolve, no rename/dual-def. Migrated all 3 to
+src/data/{libc,worldmap_gmapunit}/*.c + DATA_INCBIN_ASM_EXCLUDE + repointed carved_rom.
+COLD make compare OK, self-contained YES. **EXTRACTED-DATA now 13938060/13938060 =
+TRUE 100% (0 residual).** Reusable: any region-same .bin with a dot-in-name label is
+now extractable via this alias. AXIS 3 of 4 is now genuinely complete.
