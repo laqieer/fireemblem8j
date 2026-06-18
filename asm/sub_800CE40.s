@@ -2,11 +2,11 @@
 	.set sub_80C7E04, 0x080C7E04 + 1
 	.set sub_80C7E4C, 0x080C7E4C + 1
 	.section .text.sub_800CE40, "ax", %progbits
-@ sub_800CE40 @ JP 0x0800CE40 - region-different, gbadisasm descriptive asm (D23)
+@ EventBE_ @ JP 0x0800CE40 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800CE40
+	.global EventBE_
 	.thumb_func
-sub_800CE40:
+EventBE_:
 	push {r4, lr}
 	ldr r1, [r0, #0x38]
 	ldr r4, [r1, #4]
