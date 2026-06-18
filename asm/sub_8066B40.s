@@ -6,11 +6,11 @@
 	.set sub_805AF28, 0x0805AF28 + 1
 	.set sub_805B0B4, 0x0805B0B4 + 1
 	.section .text.sub_8066B40, "ax", %progbits
-@ sub_8066B40 @ JP 0x08066B40 - region-different, gbadisasm descriptive asm (D23)
+@ StartSpellAnimExcalibur @ JP 0x08066B40 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8066B40
+	.global StartSpellAnimExcalibur
 	.thumb_func
-sub_8066B40:
+StartSpellAnimExcalibur:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	bl SpellFx_Begin
