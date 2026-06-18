@@ -4970,3 +4970,19 @@ an unplaced local-initializer .rodata const sitting in a carved gap -> split+pla
 matching-C 7365 -> 7366. (This iter also confirmed: the +163-name cascade unblocked
 LINK on UnitAutolevelPenalty/PidStatsAddSquaresMoved but those callers are region-
 different; naming is exhausted — 265 no-funclib-hint + 72 hint-but-<0.80-mnemonic-sim.)
+
+### D122 — gPrepItemTexts high-index -1 cluster + shared-base cascade rule (2026-06-18)
+PrepItemScreen_DrawSelectedUnitDetails (autocarve NEAR 1/272): JP uses
+gPrepItemTexts[30] where US uses [31] — same family as PrepItemScreen_SetupGfx
+(D121, [30]/[31]->[29]/[30]). The JP gPrepItemTexts array effectively has its
+HIGH indices (>=30) shifted -1 vs US (one fewer text element). KEY CODEGEN RULE:
+when a function references the SAME array index from MULTIPLE call-sites, agbcc
+SHARES the base computation (one `adds rN,#off`, reused). Changing only ONE of
+them in the source breaks the sharing -> agbcc reallocates the WHOLE function
+(1-byte diff exploded to 122). FIX = change ALL refs to that index together
+(`sed s/gPrepItemTexts[31]/gPrepItemTexts[30]/g`) so the shared base stays shared
+-> the single shared `adds` flips its immediate -> 1-byte -> byte-match. +1 (7366->7367).
+NOTE: not every prep_itemscreen func is a clean cluster member — PutWmItemScreenPromptText
+is genuinely region-different (12 diffs: JP msgids 0x72-0x75->0x04-0x07 + colors + offsets).
+This iter also confirmed the rodata-in-gap (D121) signature is rare — a scan of
+Setup/Init/Draw candidates surfaced no new 0x09000000-literal cases.
