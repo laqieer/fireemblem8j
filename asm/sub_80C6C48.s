@@ -4,11 +4,11 @@
 	.set sub_80C7240, 0x080C7240 + 1
 	.set sub_80D6378, 0x080D6378 + 1
 	.section .text.sub_80C6C48, "ax", %progbits
-@ sub_80C6C48 @ JP 0x080C6C48 - region-different, gbadisasm descriptive asm (D23)
+@ GmapRmUpdateExt_ScrollPosition @ JP 0x080C6C48 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C6C48
+	.global GmapRmUpdateExt_ScrollPosition
 	.thumb_func
-sub_80C6C48:
+GmapRmUpdateExt_ScrollPosition:
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
 	ldrh r0, [r7, #0x34]
