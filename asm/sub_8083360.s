@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_8083360, "ax", %progbits
-@ sub_8083360 @ JP 0x08083360 - region-different, gbadisasm descriptive asm (D23)
+@ StartGlowingCross @ JP 0x08083360 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8083360
+	.global StartGlowingCross
 	.thumb_func
-sub_8083360:
+StartGlowingCross:
 	push {r4, lr}
 	adds r2, r0, #0
 	adds r4, r1, #0
