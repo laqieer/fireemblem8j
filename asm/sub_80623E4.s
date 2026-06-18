@@ -16,11 +16,11 @@
 	.set sub_8062A6C, 0x08062A6C + 1
 	.set sub_8074E80, 0x08074E80 + 1
 	.section .text.sub_80623E4, "ax", %progbits
-@ sub_80623E4 @ JP 0x080623E4 - region-different, gbadisasm descriptive asm (D23)
+@ efxRecover_Loop_Main @ JP 0x080623E4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80623E4
+	.global efxRecover_Loop_Main
 	.thumb_func
-sub_80623E4:
+efxRecover_Loop_Main:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	ldr r0, [r4, #0x5c]

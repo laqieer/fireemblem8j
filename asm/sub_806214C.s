@@ -14,11 +14,11 @@
 	.set sub_8062A6C, 0x08062A6C + 1
 	.set sub_8074E80, 0x08074E80 + 1
 	.section .text.sub_806214C, "ax", %progbits
-@ sub_806214C @ JP 0x0806214C - region-different, gbadisasm descriptive asm (D23)
+@ efxLive_Loop_Main @ JP 0x0806214C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_806214C
+	.global efxLive_Loop_Main
 	.thumb_func
-sub_806214C:
+efxLive_Loop_Main:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	ldr r0, [r4, #0x5c]
