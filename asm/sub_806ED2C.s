@@ -3,11 +3,11 @@
 	.set sub_806ED5C, 0x0806ED5C + 1
 	.set sub_806EDD4, 0x0806EDD4 + 1
 	.section .text.sub_806ED2C, "ax", %progbits
-@ sub_806ED2C @ JP 0x0806ED2C - region-different, gbadisasm descriptive asm (D23)
+@ efxPierceCriticalEffectMain @ JP 0x0806ED2C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_806ED2C
+	.global efxPierceCriticalEffectMain
 	.thumb_func
-sub_806ED2C:
+efxPierceCriticalEffectMain:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldrh r0, [r4, #0x2c]
