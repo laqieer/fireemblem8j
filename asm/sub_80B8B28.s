@@ -1,11 +1,11 @@
 	.syntax unified
 	.set PutSpriteExt, 0x08005330 + 1
 	.section .text.sub_80B8B28, "ax", %progbits
-@ sub_80B8B28 @ JP 0x080B8B28 - region-different, gbadisasm descriptive asm (D23)
+@ ClassStatsDisplay_Loop @ JP 0x080B8B28 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B8B28
+	.global ClassStatsDisplay_Loop
 	.thumb_func
-sub_80B8B28:
+ClassStatsDisplay_Loop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

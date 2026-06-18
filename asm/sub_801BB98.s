@@ -5,11 +5,11 @@
 	.set sub_80043B8, 0x080043B8 + 1
 	.set sub_80043DC, 0x080043DC + 1
 	.section .text.sub_801BB98, "ax", %progbits
-@ sub_801BB98 @ JP 0x0801BB98 - region-different, gbadisasm descriptive asm (D23)
+@ DebugMenu_ClearDraw @ JP 0x0801BB98 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801BB98
+	.global DebugMenu_ClearDraw
 	.thumb_func
-sub_801BB98:
+DebugMenu_ClearDraw:
 	push {r4, r5, lr}
 	adds r5, r1, #0
 	adds r4, r5, #0
