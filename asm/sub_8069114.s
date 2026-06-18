@@ -2,11 +2,11 @@
 	.set AnimDelete, 0x08004F0C + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_8069114, "ax", %progbits
-@ sub_8069114 @ JP 0x08069114 - region-different, gbadisasm descriptive asm (D23)
+@ efxMaohFlashEyeLOBJ2_Loop @ JP 0x08069114 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8069114
+	.global efxMaohFlashEyeLOBJ2_Loop
 	.thumb_func
-sub_8069114:
+efxMaohFlashEyeLOBJ2_Loop:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldrh r0, [r4, #0x2c]
