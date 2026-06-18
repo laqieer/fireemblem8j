@@ -2,11 +2,11 @@
 	.set GetCharacterData, 0x0801913C + 1
 	.set sub_80A9478, 0x080A9478 + 1
 	.section .text.sub_80A9260, "ax", %progbits
-@ sub_80A9260 @ JP 0x080A9260 - region-different, gbadisasm descriptive asm (D23)
+@ PidStatsAddSquaresMoved @ JP 0x080A9260 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A9260
+	.global PidStatsAddSquaresMoved
 	.thumb_func
-sub_80A9260:
+PidStatsAddSquaresMoved:
 	push {r4, r5, r6, lr}
 	adds r5, r1, #0
 	lsls r0, r0, #0x18
