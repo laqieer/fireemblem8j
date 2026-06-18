@@ -5,11 +5,11 @@
 	.set sub_80A776C, 0x080A776C + 1
 	.set sub_80A77EC, 0x080A77EC + 1
 	.section .text.sub_801BBFC, "ax", %progbits
-@ sub_801BBFC @ JP 0x0801BBFC - region-different, gbadisasm descriptive asm (D23)
+@ DebugMenu_ClearIdle @ JP 0x0801BBFC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801BBFC
+	.global DebugMenu_ClearIdle
 	.thumb_func
-sub_801BBFC:
+DebugMenu_ClearIdle:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x64
 	adds r6, r0, #0
