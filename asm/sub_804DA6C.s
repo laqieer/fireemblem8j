@@ -2,11 +2,11 @@
 	.set PutSprite, 0x080052F0 + 1
 	.set sub_804DA18, 0x0804DA18 + 1
 	.section .text.sub_804DA6C, "ax", %progbits
-@ sub_804DA6C @ JP 0x0804DA6C - region-different, gbadisasm descriptive asm (D23)
+@ NameEntrySpriteDraw_Loop @ JP 0x0804DA6C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804DA6C
+	.global NameEntrySpriteDraw_Loop
 	.thumb_func
-sub_804DA6C:
+NameEntrySpriteDraw_Loop:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r7, r0, #0
