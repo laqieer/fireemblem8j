@@ -7,11 +7,11 @@
 	.set sub_8013008, 0x08013008 + 1
 	.set sub_8014B50, 0x08014B50 + 1
 	.section .text.sub_807F8C0, "ax", %progbits
-@ sub_807F8C0 @ JP 0x0807F8C0 - region-different, gbadisasm descriptive asm (D23)
+@ NightMarefx_Loop @ JP 0x0807F8C0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807F8C0
+	.global NightMarefx_Loop
 	.thumb_func
-sub_807F8C0:
+NightMarefx_Loop:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0

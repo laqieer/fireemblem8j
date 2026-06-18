@@ -5,11 +5,11 @@
 	.set sub_804F610, 0x0804F610 + 1
 	.set sub_804F8F4, 0x0804F8F4 + 1
 	.section .text.sub_8088798, "ax", %progbits
-@ sub_8088798 @ JP 0x08088798 - region-different, gbadisasm descriptive asm (D23)
+@ CallRouteSplitMenu @ JP 0x08088798 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8088798
+	.global CallRouteSplitMenu
 	.thumb_func
-sub_8088798:
+CallRouteSplitMenu:
 	push {r4, lr}
 	adds r4, r0, #0
 	bl sub_804F610

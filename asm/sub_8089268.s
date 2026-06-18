@@ -7,11 +7,11 @@
 	.set sub_8030C10, 0x08030C10 + 1
 	.set sub_80A9740, 0x080A9740 + 1
 	.section .text.sub_8089268, "ax", %progbits
-@ sub_8089268 @ JP 0x08089268 - region-different, gbadisasm descriptive asm (D23)
+@ DisplayBwl @ JP 0x08089268 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8089268
+	.global DisplayBwl
 	.thumb_func
-sub_8089268:
+DisplayBwl:
 	push {r4, r5, r6, lr}
 	ldr r5, _08089338 @ =0x02003BFC
 	ldr r0, [r5, #0xc]

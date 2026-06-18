@@ -2,11 +2,11 @@
 	.set GetUnit, 0x08019108 + 1
 	.set Proc_Goto, 0x08002E74 + 1
 	.section .text.sub_807D324, "ax", %progbits
-@ sub_807D324 @ JP 0x0807D324 - region-different, gbadisasm descriptive asm (D23)
+@ CheckCanSummon @ JP 0x0807D324 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807D324
+	.global CheckCanSummon
 	.thumb_func
-sub_807D324:
+CheckCanSummon:
 	push {r4, r5, r6, r7, lr}
 	adds r6, r0, #0
 	movs r7, #0

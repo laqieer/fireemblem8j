@@ -10,11 +10,11 @@
 	.set sub_80900E0, 0x080900E0 + 1
 	.set sub_80C1E74, 0x080C1E74 + 1
 	.section .text.sub_808F584, "ax", %progbits
-@ sub_808F584 @ JP 0x0808F584 - region-different, gbadisasm descriptive asm (D23)
+@ GoalDisplay_Init @ JP 0x0808F584 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_808F584
+	.global GoalDisplay_Init
 	.thumb_func
-sub_808F584:
+GoalDisplay_Init:
 	push {r4, r5, r6, r7, lr}
 	adds r6, r0, #0
 	movs r1, #0

@@ -9,7 +9,7 @@
 	.set sub_80795EC, 0x080795EC + 1
 	.set sub_80D6394, 0x080D6394 + 1
 	.section .text.sub_807949C, "ax", %progbits
-@ sub_807949C @ JP 0x0807949C - region-different, gbadisasm descriptive asm (D23)
+@ EkrDragonBodyAnimeMain @ JP 0x0807949C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
 	.global EkrDragonBodyAnimeMain
 	.thumb_func

@@ -8,11 +8,11 @@
 	.set sub_808B640, 0x0808B640 + 1
 	.set sub_808B670, 0x0808B670 + 1
 	.section .text.sub_808B314, "ax", %progbits
-@ sub_808B314 @ JP 0x0808B314 - region-different, gbadisasm descriptive asm (D23)
+@ HbMoveCtrl_OnIdle @ JP 0x0808B314 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_808B314
+	.global HbMoveCtrl_OnIdle
 	.thumb_func
-sub_808B314:
+HbMoveCtrl_OnIdle:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	movs r4, #0

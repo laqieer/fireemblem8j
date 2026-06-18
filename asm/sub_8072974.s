@@ -6,11 +6,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8056984, 0x08056984 + 1
 	.section .text.sub_8072974, "ax", %progbits
-@ sub_8072974 @ JP 0x08072974 - region-different, gbadisasm descriptive asm (D23)
+@ EkrDragonQuakeMain @ JP 0x08072974 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8072974
+	.global EkrDragonQuakeMain
 	.thumb_func
-sub_8072974:
+EkrDragonQuakeMain:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

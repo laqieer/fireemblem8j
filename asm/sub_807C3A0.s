@@ -4,11 +4,11 @@
 	.set sub_8027144, 0x08027144 + 1
 	.set AdjustNewUnitPosition, 0x0807C8DC + 1
 	.section .text.sub_807C3A0, "ax", %progbits
-@ sub_807C3A0 @ JP 0x0807C3A0 - region-different, gbadisasm descriptive asm (D23)
+@ MoveUnitExt @ JP 0x0807C3A0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807C3A0
+	.global MoveUnitExt
 	.thumb_func
-sub_807C3A0:
+MoveUnitExt:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r5, r0, #0

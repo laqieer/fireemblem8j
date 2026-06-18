@@ -4,11 +4,11 @@
 	.set sub_807A888, 0x0807A888 + 1
 	.set AdjustNewUnitPosition, 0x0807C8DC + 1
 	.section .text.sub_807C270, "ax", %progbits
-@ sub_807C270 @ JP 0x0807C270 - region-different, gbadisasm descriptive asm (D23)
+@ MuCtr_InitDefinedMove @ JP 0x0807C270 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807C270
+	.global MuCtr_InitDefinedMove
 	.thumb_func
-sub_807C270:
+MuCtr_InitDefinedMove:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

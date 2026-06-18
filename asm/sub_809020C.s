@@ -23,7 +23,7 @@
 	.set sub_80900A8, 0x080900A8 + 1
 	.set sub_80900E0, 0x080900E0 + 1
 	.section .text.sub_809020C, "ax", %progbits
-@ sub_809020C @ JP 0x0809020C - region-different, gbadisasm descriptive asm (D23)
+@ ChapterStatus_Init @ JP 0x0809020C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
 	.global ChapterStatus_Init
 	.thumb_func

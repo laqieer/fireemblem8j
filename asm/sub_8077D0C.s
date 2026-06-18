@@ -6,11 +6,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8056984, 0x08056984 + 1
 	.section .text.sub_8077D0C, "ax", %progbits
-@ sub_8077D0C @ JP 0x08077D0C - region-different, gbadisasm descriptive asm (D23)
+@ EfxTriangleQUAKEMain @ JP 0x08077D0C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8077D0C
+	.global EfxTriangleQUAKEMain
 	.thumb_func
-sub_8077D0C:
+EfxTriangleQUAKEMain:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

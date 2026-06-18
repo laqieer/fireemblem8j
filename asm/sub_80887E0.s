@@ -5,11 +5,11 @@
 	.set sub_8003F28, 0x08003F28 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.section .text.sub_80887E0, "ax", %progbits
-@ sub_80887E0 @ JP 0x080887E0 - region-different, gbadisasm descriptive asm (D23)
+@ MenuCommand_DrawRouteSplit @ JP 0x080887E0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80887E0
+	.global MenuCommand_DrawRouteSplit
 	.thumb_func
-sub_80887E0:
+MenuCommand_DrawRouteSplit:
 	push {r4, r5, r6, lr}
 	adds r4, r1, #0
 	ldr r0, [r4, #0x30]
