@@ -3,11 +3,11 @@
 	.set sub_8000D68, 0x08000D68 + 1
 	.set sub_80D637C, 0x080D637C + 1
 	.section .text.sub_80CA1F8, "ax", %progbits
-@ sub_80CA1F8 @ JP 0x080CA1F8 - region-different, gbadisasm descriptive asm (D23)
+@ DrawTitleSprites_Loop @ JP 0x080CA1F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80CA1F8
+	.global DrawTitleSprites_Loop
 	.thumb_func
-sub_80CA1F8:
+DrawTitleSprites_Loop:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r5, r0, #0
