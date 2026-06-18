@@ -8,11 +8,11 @@
 	.set sub_8013008, 0x08013008 + 1
 	.set sub_80D636C, 0x080D636C + 1
 	.section .text.sub_80D0DD8, "ax", %progbits
-@ sub_80D0DD8 @ JP 0x080D0DD8 - region-different, gbadisasm descriptive asm (D23)
+@ GameIntroPrepareNintendofx @ JP 0x080D0DD8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D0DD8
+	.global GameIntroPrepareNintendofx
 	.thumb_func
-sub_80D0DD8:
+GameIntroPrepareNintendofx:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
