@@ -1,11 +1,11 @@
 	.syntax unified
 	.set Proc_Find, 0x08002DEC + 1
 	.section .text.sub_80993B0, "ax", %progbits
-@ sub_80993B0 @ JP 0x080993B0 - region-different, gbadisasm descriptive asm (D23)
+@ SetPrepScreenMenuSelectedItem @ JP 0x080993B0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80993B0
+	.global SetPrepScreenMenuSelectedItem
 	.thumb_func
-sub_80993B0:
+SetPrepScreenMenuSelectedItem:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	movs r4, #0
