@@ -5060,3 +5060,21 @@ matching-C 7367->7368. DISCIPLINE: per D126, verified the FULL COLD make compare
 sha1 = OK (not just the function byte-range) BEFORE commit. LEVER: autocarve NEARs
 whose only diff is a 0x09000000 .rodata-reloc word, where that addr is already a
 carved sibling-TU .rodata -> add the func to that TU's .c (const-dedup), don't carve separately.
+
+### D128 — 109 region-SAME named functions are uncarved (re-opens matching-C) (2026-06-18)
+STRATEGIC FIND: my prior "0 region-same uncarved" was WRONG — it only checked
+funclib-hinted sub_ placeholders. The NAMED region-same functions in
+layout/nofuncmap_region_same.tsv that aren't in any src/*.c = **109** (prep_menuproc
+11, banim-efxmagic-* clusters, popup, hardware, eventscr*, ...). These are
+byte-matchable (region-same modulo reloc) — a real reachable matching-C vein.
+Why uncarved: LINK-blocked on undefined sibling data tables (e.g. banim-efxflashobj's
+ProcScr_efxWeaponIcon/gFrameLut), or unplaced local-const .rodata, or just missed by
+the straight-port batch. autocarve can't process them directly ("no clean US body" —
+carve_recipe needs a baseline-bound sub_, these are named/descriptive) so they need
+the TU-aware / rodata-in-gap path. First harvest: CopyBgTiles (eventscr_utils) — NEAR
+4/64, the single diff was its local `u16 *bgs[4]={gBG0-3TilemapBuffer}` const (16 B)
+unplaced -> 0x09000000; that const lives in carved gap0b @ 0x0DC55C (verified bytes
+a82c0202.. = the 4 BG-buffer EWRAM ptrs). D121 fix: split gap0b (INCBIN 0,339 -> 0,320
++ tail 336,3) + carved_rom row src/CopyBgTiles.o(.rodata)@0x0DC55C. matching-C 7368->7369,
+extracted-data stays TRUE 100%, full-sha1 gated (D126). NEXT: harvest the other 108
+(many will need the same rodata-in-gap or sibling-data-bind, careful per-function).
