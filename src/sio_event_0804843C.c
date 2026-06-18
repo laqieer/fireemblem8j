@@ -22,7 +22,7 @@
 void PutXMapProgressPercent(struct Text * th, const char * str, int number);
 
 //! FE8U = 0x08048594
-void DrawXMapReceiveProgress(struct SioBigReceiveProc * proc)
+void DrawXMapSendProgress(struct SioBigSendProc * proc)
 {
     if (proc->unk_3C < proc->completionPercent)
     {
