@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80D6364, "ax", %progbits
-@ sub_80D6364 @ JP 0x080D6364 - region-different, gbadisasm descriptive asm (D23)
+@ ArcTan2 @ JP 0x080D6364 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D6364
+	.global ArcTan2
 	.thumb_func
-sub_80D6364:
+ArcTan2:
 	svc #0xa
 	bx lr
 

@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80DA8E0, "ax", %progbits
-@ sub_80DA8E0 @ JP 0x080DA8E0 - region-different, gbadisasm descriptive asm (D23)
+@ __errno @ JP 0x080DA8E0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80DA8E0
+	.global __errno
 	.thumb_func
-sub_80DA8E0:
+__errno:
 	ldr r0, _080DA8E8 @ =0x08BB8A74
 	ldr r0, [r0]
 	bx lr
