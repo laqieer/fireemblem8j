@@ -4775,3 +4775,19 @@ polarity), Sio_/GameIntro (BUILD FAIL). **Permuter import bug FIXED**: the glabe
 permuter does NOT crack codegen-shape (PlayCommandEffect base score 220, stuck, never <220 in 520 iters) — it
 permutes statements/temps, not agbcc's `cmp #0;beq` vs `cmp #1;bne`. Permuter is for REG-ALLOC targets, not
 yet isolated. Matching-C unchanged 7358; the automated const-fix vein is materially thinning.
+
+## D114 — NAMING lever: rename aliased sub_ placeholders -> confirmed US names (+231, named 80.68->81.79%) (2026-06-18)
+BREAKTHROUGH on the long-stuck named axis. Many uncarved region-different `sub_<addr>` functions can't be
+byte-matched (lsr<->asr / data-pointer / struct dead-ends) BUT their US identity is CONFIRMED: the US name is
+already bound as a `baseline_syms` alias at that address (a carved caller references it `bl <USname>` and
+links byte-perfect -> the name is proven correct by the linked carve). nm shows the dup: `A <USname>` (alias)
++ `T sub_<addr>` (function) at the same address. Renaming the function `.global`/label sub_<addr>-><USname>
+(section-preserving, KEEP `.section .text.sub_<addr>`) + dropping the now-redundant alias
+(baseline_syms_drop.d/rename_<nm>.tsv) is BYTE-NEUTRAL -> eliminates the placeholder. `~/rename_aliased.py`
+(chunks of 40 -> gen_layout -> COLD make compare -> commit/revert): filters name-collisions (2+ subs -> 1
+name), carved-src names, and named-asm-file collisions. 311 safe candidates; 231 renamed (chunks 4-5 = 80 had
+a residual collision -> auto-reverted, recoverable via smaller chunks). placeholder 3199->2975, named%
+80.68->81.79. This DECOUPLES naming from matching-C: functions that are agbcc dead-ends for byte-matching are
+still NAMEABLE (their identity is linker-proven). Source of confirmed names: `funclib_us_jp.tsv` JP-addr ∩
+`baseline_syms` aliases. Ground truth: matching-C 86.28% (7358) / named 81.79% (13363/16338) / self-contain
+100% / data 100%.
