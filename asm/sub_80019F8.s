@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80019F8, "ax", %progbits
-@ sub_80019F8 @ JP 0x080019F8 - region-different, gbadisasm descriptive asm (D23)
+@ ColorFadeTickThumb @ JP 0x080019F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80019F8
+	.global ColorFadeTickThumb
 	.thumb_func
-sub_80019F8:
+ColorFadeTickThumb:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
