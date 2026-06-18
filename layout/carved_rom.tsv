@@ -451,7 +451,7 @@
 1F6188	1F6340	src/data/worldmap_path_data.o(.data)	gWorldmapPath_0..19 typed C (GMapMovementPathData; region-same coords; upgraded from dat_worldmap_gmapunit_p2 incbin)
 1F6340	1F64C0	src/data/gWMPathData_ref/dat_gWMPathData_ref.o(.rodata.dat_gWMPathData_ref)	gWMPathData region-diff (funcmap code-ref, 0KB)
 1F6534	1F65C0	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p3.o(.rodata.dat_worldmap_gmapunit_p3)	dat_worldmap_gmapunit_p3 region-same per-sym shifted (0KB)
-1F6620	1F66A4	asm/dat_worldmap_gmapunit_p5.o(.rodata.dat_worldmap_gmapunit_p5)	dat_worldmap_gmapunit_p5 region-same per-sym shifted (0KB)
+1F6620	1F66A4	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p5.o(.rodata.dat_worldmap_gmapunit_p5)	dat_worldmap_gmapunit_p5 region-same per-sym shifted (0KB)
 1F671D	1F67BC	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p7.o(.rodata.dat_worldmap_gmapunit_p7)	dat_worldmap_gmapunit_p7 region-same per-sym shifted (0KB)
 1F6CF4	1F6D00	src/classchg-handler.o(.rodata)	classchg-handler .rodata
 1F6E40	1F6ED0	src/data/gMPlayJumpTableTemplate_ref/dat_gMPlayJumpTableTemplate_ref.o(.rodata.dat_gMPlayJumpTableTemplate_ref)	gMPlayJumpTableTemplate region-diff (funcmap code-ref, 0KB)
@@ -653,8 +653,8 @@
 5767DC	576874	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p664.o(.rodata.dat_worldmap_gmapunit_p664)	dat_worldmap_gmapunit_p664 region-same per-sym shifted (0KB)
 576884	576B40	src/data/snd_song980_btl_evl_magic2/snd_song980_btl_evl_magic2.o(.rodata.snd_song980_btl_evl_magic2)	snd_song980_btl_evl_magic2 region-same shifted (0KB)
 576B58	5772B4	src/data/snd_song981_btl_mon_magic1/snd_song981_btl_mon_magic1.o(.rodata.snd_song981_btl_mon_magic1)	snd_song981_btl_mon_magic1 region-same shifted (1KB)
-5773B4	57742E	asm/dat_libc_a_vfprintf.o(.rodata.dat_libc_a_vfprintf)	dat_libc_a_vfprintf region-same shifted (0KB)
-577480	5775A4	asm/dat_libc_a_mprec.o(.rodata.dat_libc_a_mprec)	dat_libc_a_mprec region-same shifted (0KB)
+5773B4	57742E	src/data/libc/dat_libc_a_vfprintf.o(.rodata.dat_libc_a_vfprintf)	dat_libc_a_vfprintf region-same shifted (0KB)
+577480	5775A4	src/data/libc/dat_libc_a_mprec.o(.rodata.dat_libc_a_mprec)	dat_libc_a_mprec region-same shifted (0KB)
 577648	577688	src/data/sMusicProc4Script_ref/dat_sMusicProc4Script_ref.o(.rodata.dat_sMusicProc4Script_ref)	sMusicProc4Script region-diff (funcmap code-ref, 0KB)
 5776F0	577EF0	src/fontgrp.o(.data)	fontgrp .data
 577F4C	57994C	src/data/fontgrp_data/dat_fontgrp_data.o(.rodata.dat_fontgrp_data)	dat_fontgrp_data region-same shifted (6KB)
