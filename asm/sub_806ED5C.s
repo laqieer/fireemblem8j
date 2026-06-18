@@ -5,11 +5,11 @@
 	.set sub_80567B8, 0x080567B8 + 1
 	.set sub_80567E0, 0x080567E0 + 1
 	.section .text.sub_806ED5C, "ax", %progbits
-@ sub_806ED5C @ JP 0x0806ED5C - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxPierceCriticalEffectBG @ JP 0x0806ED5C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_806ED5C
+	.global NewEfxPierceCriticalEffectBG
 	.thumb_func
-sub_806ED5C:
+NewEfxPierceCriticalEffectBG:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	ldr r0, _0806ED98 @ =0x08603484
