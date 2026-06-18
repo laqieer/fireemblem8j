@@ -2,11 +2,11 @@
 	.set sub_800F720, 0x0800F720 + 1
 	.set LoadUnit_0, 0x0800F8D4 + 1
 	.section .text.sub_800F86C, "ax", %progbits
-@ sub_800F86C @ JP 0x0800F86C - region-different, gbadisasm descriptive asm (D23)
+@ EventLoadUnitSliently @ JP 0x0800F86C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800F86C
+	.global EventLoadUnitSliently
 	.thumb_func
-sub_800F86C:
+EventLoadUnitSliently:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
