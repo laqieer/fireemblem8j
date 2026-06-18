@@ -4,11 +4,11 @@
 	.set SetBlendTargetB, 0x08001E5C + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_80BCC90, "ax", %progbits
-@ sub_80BCC90 @ JP 0x080BCC90 - region-different, gbadisasm descriptive asm (D23)
+@ GameIntroHealthSafetyWaitButton @ JP 0x080BCC90 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BCC90
+	.global GameIntroHealthSafetyWaitButton
 	.thumb_func
-sub_80BCC90:
+GameIntroHealthSafetyWaitButton:
 	push {r4, lr}
 	sub sp, #4
 	adds r4, r0, #0
