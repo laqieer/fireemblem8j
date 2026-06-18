@@ -2,11 +2,11 @@
 	.set AnimDelete, 0x08004F0C + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_8066F68, "ax", %progbits
-@ sub_8066F68 @ JP 0x08066F68 - region-different, gbadisasm descriptive asm (D23)
+@ efxReblowOBJ_Loop_B @ JP 0x08066F68 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8066F68
+	.global efxReblowOBJ_Loop_B
 	.thumb_func
-sub_8066F68:
+efxReblowOBJ_Loop_B:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldrh r0, [r4, #0x2c]
