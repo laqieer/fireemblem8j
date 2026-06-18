@@ -85,3 +85,20 @@ void AiUpdateDecision(u8 actionId, u8 targetId, u8 itemSlot, u8 xTarget, u8 yTar
 
     gAiDecision.actionPerformed = TRUE;
 }
+
+static DecideFunc CONST_DATA sDecideFuncList[] =
+{
+    DecideHealOrEscape,
+    DecideScriptA,
+    DecideScriptB,
+    DecideSpecialItems,
+    NULL, NULL,
+};
+
+void AiDecideMain(void)
+{
+    while (sDecideFuncList[gAiState.decideState] && !gAiDecision.actionPerformed)
+    {
+        sDecideFuncList[gAiState.decideState++]();
+    }
+}
