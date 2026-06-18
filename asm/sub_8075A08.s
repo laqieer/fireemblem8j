@@ -11,11 +11,11 @@
 	.set sub_8003F98, 0x08003F98 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.section .text.sub_8075A08, "ax", %progbits
-@ sub_8075A08 @ JP 0x08075A08 - region-different, gbadisasm descriptive asm (D23)
+@ EkrLvup_InitStatusText @ JP 0x08075A08 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8075A08
+	.global EkrLvup_InitStatusText
 	.thumb_func
-sub_8075A08:
+EkrLvup_InitStatusText:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

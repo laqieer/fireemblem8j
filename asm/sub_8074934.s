@@ -7,11 +7,11 @@
 	.set sub_80748E4, 0x080748E4 + 1
 	.set sub_80749E0, 0x080749E0 + 1
 	.section .text.sub_8074934, "ax", %progbits
-@ sub_8074934 @ JP 0x08074934 - region-different, gbadisasm descriptive asm (D23)
+@ EfxPlayHittedSFX @ JP 0x08074934 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8074934
+	.global EfxPlayHittedSFX
 	.thumb_func
-sub_8074934:
+EfxPlayHittedSFX:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	bl GetAnimAnotherSide

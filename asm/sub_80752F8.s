@@ -2,11 +2,11 @@
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_8056158, 0x08056158 + 1
 	.section .text.sub_80752F8, "ax", %progbits
-@ sub_80752F8 @ JP 0x080752F8 - region-different, gbadisasm descriptive asm (D23)
+@ NewEkrClasschgBG2 @ JP 0x080752F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80752F8
+	.global NewEkrClasschgBG2
 	.thumb_func
-sub_80752F8:
+NewEkrClasschgBG2:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldr r0, _08075328 @ =0x087A951C

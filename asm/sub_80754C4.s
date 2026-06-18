@@ -4,11 +4,11 @@
 	.set sub_8056774, 0x08056774 + 1
 	.set sub_805679C, 0x0805679C + 1
 	.section .text.sub_80754C4, "ax", %progbits
-@ sub_80754C4 @ JP 0x080754C4 - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxClasschgOBJDrop @ JP 0x080754C4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80754C4
+	.global NewEfxClasschgOBJDrop
 	.thumb_func
-sub_80754C4:
+NewEfxClasschgOBJDrop:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r4, r0, #0
