@@ -2,11 +2,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_80D63D4, 0x080D63D4 + 1
 	.section .text.sub_8099CC0, "ax", %progbits
-@ sub_8099CC0 @ JP 0x08099CC0 - region-different, gbadisasm descriptive asm (D23)
+@ SallyCir_Loop @ JP 0x08099CC0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8099CC0
+	.global SallyCir_Loop
 	.thumb_func
-sub_8099CC0:
+SallyCir_Loop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
