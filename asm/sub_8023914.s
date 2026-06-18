@@ -2,11 +2,11 @@
 	.set sub_80165F0, 0x080165F0 + 1
 	.set sub_8037A24, 0x08037A24 + 1
 	.section .text.sub_8023914, "ax", %progbits
-@ sub_8023914 @ JP 0x08023914 - region-different, gbadisasm descriptive asm (D23)
+@ BallistaRangeMenu_Draw @ JP 0x08023914 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8023914
+	.global BallistaRangeMenu_Draw
 	.thumb_func
-sub_8023914:
+BallistaRangeMenu_Draw:
 	push {r4, r5, r6, lr}
 	adds r4, r1, #0
 	movs r5, #0
