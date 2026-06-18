@@ -3,11 +3,11 @@
 	.set sub_80502F4, 0x080502F4 + 1
 	.set sub_80507B0, 0x080507B0 + 1
 	.section .text.sub_8023D24, "ax", %progbits
-@ sub_8023D24 @ JP 0x08023D24 - region-different, gbadisasm descriptive asm (D23)
+@ SupportCommandEffect @ JP 0x08023D24 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8023D24
+	.global SupportCommandEffect
 	.thumb_func
-sub_8023D24:
+SupportCommandEffect:
 	push {lr}
 	adds r2, r0, #0
 	adds r1, #0x3d
