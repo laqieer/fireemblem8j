@@ -4,11 +4,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_80153A4, 0x080153A4 + 1
 	.section .text.sub_804AF4C, "ax", %progbits
-@ sub_804AF4C @ JP 0x0804AF4C - region-different, gbadisasm descriptive asm (D23)
+@ LABattleMap_ForecastMenu_Loop @ JP 0x0804AF4C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804AF4C
+	.global LABattleMap_ForecastMenu_Loop
 	.thumb_func
-sub_804AF4C:
+LABattleMap_ForecastMenu_Loop:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r0, #0x64

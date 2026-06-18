@@ -2,11 +2,11 @@
 	.set GetClassSMSId, 0x08018AA4 + 1
 	.set PutSpriteExt, 0x08005330 + 1
 	.section .text.sub_8027EBC, "ax", %progbits
-@ sub_8027EBC @ JP 0x08027EBC - region-different, gbadisasm descriptive asm (D23)
+@ SMS_DisplayOne @ JP 0x08027EBC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8027EBC
+	.global SMS_DisplayOne
 	.thumb_func
-sub_8027EBC:
+SMS_DisplayOne:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
