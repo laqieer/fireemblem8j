@@ -1,11 +1,11 @@
 	.syntax unified
 	.set __sfvwrite, 0x080D8F5C + 1
 	.section .text.sub_80D6A80, "ax", %progbits
-@ sub_80D6A80 @ JP 0x080D6A80 - region-different, gbadisasm descriptive asm (D23)
+@ __sprint @ JP 0x080D6A80 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D6A80
+	.global __sprint
 	.thumb_func
-sub_80D6A80:
+__sprint:
 	push {r4, lr}
 	adds r4, r1, #0
 	ldr r1, [r4, #8]

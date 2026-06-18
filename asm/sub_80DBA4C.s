@@ -3,11 +3,11 @@
 	.set __pack_f, 0x080DB73C + 1
 	.set __unpack_f, 0x080DB7F4 + 1
 	.section .text.sub_80DBA4C, "ax", %progbits
-@ sub_80DBA4C @ JP 0x080DBA4C - region-different, gbadisasm descriptive asm (D23)
+@ __mulsf3 @ JP 0x080DBA4C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80DBA4C
+	.global __mulsf3
 	.thumb_func
-sub_80DBA4C:
+__mulsf3:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

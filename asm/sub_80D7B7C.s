@@ -2,11 +2,11 @@
 	.set __divsi3, 0x080D65F8 + 1
 	.set __modsi3, 0x080D6690 + 1
 	.section .text.sub_80D7B7C, "ax", %progbits
-@ sub_80D7B7C @ JP 0x080D7B7C - region-different, gbadisasm descriptive asm (D23)
+@ exponent @ JP 0x080D7B7C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D7B7C
+	.global exponent
 	.thumb_func
-sub_80D7B7C:
+exponent:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x134
 	adds r7, r0, #0

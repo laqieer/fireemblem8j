@@ -3,23 +3,23 @@
 	.set sub_80D65C8, 0x080D65C8 + 1
 	.set sub_80D9188, 0x080D9188 + 1
 	.section .text.sub_80D8AEC, "ax", %progbits
-@ sub_80D8AEC @ JP 0x080D8AEC - region-different, gbadisasm descriptive asm (D23)
+@ fflush @ JP 0x080D8AEC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D8AEC
+	.global fflush
 	.thumb_func
-sub_80D8AEC:
+fflush:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	cmp r4, #0
 	bne _080D8B08
 	ldr r0, _080D8B00 @ =0x08BB8A74
 	ldr r0, [r0]
-	ldr r1, _080D8B04 @ =sub_80D8AEC
+	ldr r1, _080D8B04 @ =fflush
 	bl sub_80D9188
 	b _080D8B7E
 	.align 2, 0
 _080D8B00: .4byte 0x08BB8A74
-_080D8B04: .4byte sub_80D8AEC
+_080D8B04: .4byte fflush
 _080D8B08:
 	ldr r0, [r4, #0x54]
 	cmp r0, #0

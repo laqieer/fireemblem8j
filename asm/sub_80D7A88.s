@@ -4,11 +4,11 @@
 	.set __negdf2, 0x080DB6A8 + 1
 	.set sub_080D7DF4, 0x080D7DF4 + 1
 	.section .text.sub_80D7A88, "ax", %progbits
-@ sub_80D7A88 @ JP 0x080D7A88 - region-different, gbadisasm descriptive asm (D23)
+@ cvt @ JP 0x080D7A88 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D7A88
+	.global cvt
 	.thumb_func
-sub_80D7A88:
+cvt:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

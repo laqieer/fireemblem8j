@@ -3,11 +3,11 @@
 	.set __divsi3, 0x080D65F8 + 1
 	.set sub_80D99D8, 0x080D99D8 + 1
 	.section .text.sub_80D9A70, "ax", %progbits
-@ sub_80D9A70 @ JP 0x080D9A70 - region-different, gbadisasm descriptive asm (D23)
+@ _s2b @ JP 0x080D9A70 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D9A70
+	.global _s2b
 	.thumb_func
-sub_80D9A70:
+_s2b:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

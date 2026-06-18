@@ -1,11 +1,11 @@
 	.syntax unified
 	.set vfprintf, 0x080D6B14 + 1
 	.section .text.sub_80D6A4C, "ax", %progbits
-@ sub_80D6A4C @ JP 0x080D6A4C - region-different, gbadisasm descriptive asm (D23)
+@ vsprintf @ JP 0x080D6A4C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D6A4C
+	.global vsprintf
 	.thumb_func
-sub_80D6A4C:
+vsprintf:
 	push {r4, r5, lr}
 	sub sp, #0x58
 	mov r4, sp

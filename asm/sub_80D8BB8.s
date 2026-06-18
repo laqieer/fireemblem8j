@@ -2,11 +2,11 @@
 	.set _malloc_r, 0x080D946C + 1
 	.set memset, 0x080D6968 + 1
 	.section .text.sub_80D8BB8, "ax", %progbits
-@ sub_80D8BB8 @ JP 0x080D8BB8 - region-different, gbadisasm descriptive asm (D23)
+@ __sfmoreglue @ JP 0x080D8BB8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D8BB8
+	.global __sfmoreglue
 	.thumb_func
-sub_80D8BB8:
+__sfmoreglue:
 	push {r4, r5, r6, lr}
 	adds r5, r1, #0
 	movs r1, #0x58
