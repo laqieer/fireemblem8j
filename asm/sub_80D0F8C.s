@@ -3,11 +3,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_80D636C, 0x080D636C + 1
 	.section .text.sub_80D0F8C, "ax", %progbits
-@ sub_80D0F8C @ JP 0x080D0F8C - region-different, gbadisasm descriptive asm (D23)
+@ OpAnimHS_FadeToBlackLoop @ JP 0x080D0F8C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D0F8C
+	.global OpAnimHS_FadeToBlackLoop
 	.thumb_func
-sub_80D0F8C:
+OpAnimHS_FadeToBlackLoop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
