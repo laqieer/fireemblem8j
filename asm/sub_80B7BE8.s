@@ -2,11 +2,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_80B762C, 0x080B762C + 1
 	.section .text.sub_80B7BE8, "ax", %progbits
-@ sub_80B7BE8 @ JP 0x080B7BE8 - region-different, gbadisasm descriptive asm (D23)
+@ ClassIntroLetter_LoopFadeOut @ JP 0x080B7BE8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B7BE8
+	.global ClassIntroLetter_LoopFadeOut
 	.thumb_func
-sub_80B7BE8:
+ClassIntroLetter_LoopFadeOut:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #8
 	adds r4, r0, #0
