@@ -1,11 +1,11 @@
 	.syntax unified
 	.set GetCharacterData, 0x0801913C + 1
 	.section .text.sub_80A940C, "ax", %progbits
-@ sub_80A940C @ JP 0x080A940C - region-different, gbadisasm descriptive asm (D23)
+@ PidStatsGetExpGain @ JP 0x080A940C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A940C
+	.global PidStatsGetExpGain
 	.thumb_func
-sub_80A940C:
+PidStatsGetExpGain:
 	push {r4, lr}
 	lsls r0, r0, #0x18
 	lsrs r0, r0, #0x18
