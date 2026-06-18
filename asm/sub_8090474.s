@@ -21,11 +21,11 @@
 	.set sub_8018FEC, 0x08018FEC + 1
 	.set sub_80901D8, 0x080901D8 + 1
 	.section .text.sub_8090474, "ax", %progbits
-@ sub_8090474 @ JP 0x08090474 - region-different, gbadisasm descriptive asm (D23)
+@ DrawChapterStatusTextForUnit @ JP 0x08090474 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8090474
+	.global DrawChapterStatusTextForUnit
 	.thumb_func
-sub_8090474:
+DrawChapterStatusTextForUnit:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0

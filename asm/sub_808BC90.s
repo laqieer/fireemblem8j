@@ -1,11 +1,11 @@
 	.syntax unified
 	.set PutSprite, 0x080052F0 + 1
 	.section .text.sub_808BC90, "ax", %progbits
-@ sub_808BC90 @ JP 0x0808BC90 - region-different, gbadisasm descriptive asm (D23)
+@ DisplayHelpBoxObj @ JP 0x0808BC90 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_808BC90
+	.global DisplayHelpBoxObj
 	.thumb_func
-sub_808BC90:
+DisplayHelpBoxObj:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

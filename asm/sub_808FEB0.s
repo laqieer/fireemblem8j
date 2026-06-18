@@ -11,11 +11,11 @@
 	.set sub_808FE1C, 0x0808FE1C + 1
 	.set sub_80D636C, 0x080D636C + 1
 	.section .text.sub_808FEB0, "ax", %progbits
-@ sub_808FEB0 @ JP 0x0808FEB0 - region-different, gbadisasm descriptive asm (D23)
+@ OnMain_SioError @ JP 0x0808FEB0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_808FEB0
+	.global OnMain_SioError
 	.thumb_func
-sub_808FEB0:
+OnMain_SioError:
 	push {r4, r5, lr}
 	sub sp, #8
 	movs r0, #0

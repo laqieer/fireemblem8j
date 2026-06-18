@@ -5,11 +5,11 @@
 	.set sub_80045BC, 0x080045BC + 1
 	.set sub_808C834, 0x0808C834 + 1
 	.section .text.sub_808DDB4, "ax", %progbits
-@ sub_808DDB4 @ JP 0x0808DDB4 - region-different, gbadisasm descriptive asm (D23)
+@ ClearBoxDialogueText @ JP 0x0808DDB4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_808DDB4
+	.global ClearBoxDialogueText
 	.thumb_func
-sub_808DDB4:
+ClearBoxDialogueText:
 	push {r4, lr}
 	ldr r4, _0808DE0C @ =0x0203E7E4
 	adds r0, r4, #0

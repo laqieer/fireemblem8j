@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_808DF74, "ax", %progbits
-@ sub_808DF74 @ JP 0x0808DF74 - region-different, gbadisasm descriptive asm (D23)
+@ GetHpBarRightTile @ JP 0x0808DF74 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_808DF74
+	.global GetHpBarRightTile
 	.thumb_func
-sub_808DF74:
+GetHpBarRightTile:
 	push {lr}
 	adds r3, r0, #0
 	lsls r1, r1, #0x10
