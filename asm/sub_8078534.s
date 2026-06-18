@@ -3,11 +3,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8056130, 0x08056130 + 1
 	.section .text.sub_8078534, "ax", %progbits
-@ sub_8078534 @ JP 0x08078534 - region-different, gbadisasm descriptive asm (D23)
+@ ekrPopup_WaitWRankUp @ JP 0x08078534 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8078534
+	.global ekrPopup_WaitWRankUp
 	.thumb_func
-sub_8078534:
+ekrPopup_WaitWRankUp:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldr r0, [r4, #0x4c]

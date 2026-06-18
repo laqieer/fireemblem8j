@@ -3,11 +3,11 @@
 	.set sub_80858E0, 0x080858E0 + 1
 	.set sub_8085914, 0x08085914 + 1
 	.section .text.sub_807CD3C, "ax", %progbits
-@ sub_807CD3C @ JP 0x0807CD3C - region-different, gbadisasm descriptive asm (D23)
+@ MapAnim_DisplayDeathQuote @ JP 0x0807CD3C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807CD3C
+	.global MapAnim_DisplayDeathQuote
 	.thumb_func
-sub_807CD3C:
+MapAnim_DisplayDeathQuote:
 	push {r4, lr}
 	movs r2, #1
 	rsbs r2, r2, #0

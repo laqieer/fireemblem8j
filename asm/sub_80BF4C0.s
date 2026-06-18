@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80D636C, 0x080D636C + 1
 	.section .text.sub_80BF4C0, "ax", %progbits
-@ sub_80BF4C0 @ JP 0x080BF4C0 - region-different, gbadisasm descriptive asm (D23)
+@ GMScreenVSync_Loop @ JP 0x080BF4C0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BF4C0
+	.global GMScreenVSync_Loop
 	.thumb_func
-sub_80BF4C0:
+GMScreenVSync_Loop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

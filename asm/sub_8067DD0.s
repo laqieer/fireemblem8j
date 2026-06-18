@@ -7,11 +7,11 @@
 	.set sub_805660C, 0x0805660C + 1
 	.set sub_8056890, 0x08056890 + 1
 	.section .text.sub_8067DD0, "ax", %progbits
-@ sub_8067DD0 @ JP 0x08067DD0 - region-different, gbadisasm descriptive asm (D23)
+@ efxIvaldiBG2_Loop @ JP 0x08067DD0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8067DD0
+	.global efxIvaldiBG2_Loop
 	.thumb_func
-sub_8067DD0:
+efxIvaldiBG2_Loop:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r0, [r4, #0x5c]

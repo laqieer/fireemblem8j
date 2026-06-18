@@ -2,11 +2,11 @@
 	.set sub_804F718, 0x0804F718 + 1
 	.set sub_804F794, 0x0804F794 + 1
 	.section .text.sub_804FE54, "ax", %progbits
-@ sub_804FE54 @ JP 0x0804FE54 - region-different, gbadisasm descriptive asm (D23)
+@ DrawMenuItemHover @ JP 0x0804FE54 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804FE54
+	.global DrawMenuItemHover
 	.thumb_func
-sub_804FE54:
+DrawMenuItemHover:
 	push {r4, r5, lr}
 	sub sp, #4
 	mov ip, r0

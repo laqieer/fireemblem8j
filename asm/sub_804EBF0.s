@@ -1,11 +1,11 @@
 	.syntax unified
 	.set MultiBootInit, 0x0804E754 + 1
 	.section .text.sub_804EBF0, "ax", %progbits
-@ sub_804EBF0 @ JP 0x0804EBF0 - region-different, gbadisasm descriptive asm (D23)
+@ MultiBootStartMaster @ JP 0x0804EBF0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804EBF0
+	.global MultiBootStartMaster
 	.thumb_func
-sub_804EBF0:
+MultiBootStartMaster:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r7, r1, #0

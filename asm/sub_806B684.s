@@ -6,11 +6,11 @@
 	.set sub_8056890, 0x08056890 + 1
 	.set sub_806BA18, 0x0806BA18 + 1
 	.section .text.sub_806B684, "ax", %progbits
-@ sub_806B684 @ JP 0x0806B684 - region-different, gbadisasm descriptive asm (D23)
+@ efxDarkGradoBG02_Loop_A @ JP 0x0806B684 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_806B684
+	.global efxDarkGradoBG02_Loop_A
 	.thumb_func
-sub_806B684:
+efxDarkGradoBG02_Loop_A:
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
 	adds r0, #0x2c

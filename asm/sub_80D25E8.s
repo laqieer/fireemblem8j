@@ -2,11 +2,11 @@
 	.set SetCgTextFlags, 0x08090CAC + 1
 	.set sub_80913FC, 0x080913FC + 1
 	.section .text.sub_80D25E8, "ax", %progbits
-@ sub_80D25E8 @ JP 0x080D25E8 - region-different, gbadisasm descriptive asm (D23)
+@ PromoTrainee_Talk3 @ JP 0x080D25E8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D25E8
+	.global PromoTrainee_Talk3
 	.thumb_func
-sub_80D25E8:
+PromoTrainee_Talk3:
 	push {r4, r5, lr}
 	sub sp, #0x1c
 	add r2, sp, #0x10

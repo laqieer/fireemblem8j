@@ -5,11 +5,11 @@
 	.set sub_80C3144, 0x080C3144 + 1
 	.set sub_80D6378, 0x080D6378 + 1
 	.section .text.sub_80C53F4, "ax", %progbits
-@ sub_80C53F4 @ JP 0x080C53F4 - region-different, gbadisasm descriptive asm (D23)
+@ GmTmConfront_Loop_MoveUnitPositions @ JP 0x080C53F4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C53F4
+	.global GmTmConfront_Loop_MoveUnitPositions
 	.thumb_func
-sub_80C53F4:
+GmTmConfront_Loop_MoveUnitPositions:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

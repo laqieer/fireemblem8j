@@ -2,11 +2,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_80C3448, 0x080C3448 + 1
 	.section .text.sub_80C3A44, "ax", %progbits
-@ sub_80C3A44 @ JP 0x080C3A44 - region-different, gbadisasm descriptive asm (D23)
+@ GMapPI_ShowLoop @ JP 0x080C3A44 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C3A44
+	.global GMapPI_ShowLoop
 	.thumb_func
-sub_80C3A44:
+GMapPI_ShowLoop:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r0, #0x5e

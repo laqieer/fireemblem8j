@@ -2,11 +2,11 @@
 	.set sub_801183C, 0x0801183C + 1
 	.set sub_8011D78, 0x08011D78 + 1
 	.section .text.sub_8010834, "ax", %progbits
-@ sub_8010834 @ JP 0x08010834 - region-different, gbadisasm descriptive asm (D23)
+@ Event3A_DisplayPopup @ JP 0x08010834 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8010834
+	.global Event3A_DisplayPopup
 	.thumb_func
-sub_8010834:
+Event3A_DisplayPopup:
 	push {r4, lr}
 	adds r3, r0, #0
 	ldrh r0, [r3, #0x3c]

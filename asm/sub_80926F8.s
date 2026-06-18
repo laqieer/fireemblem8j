@@ -2,11 +2,11 @@
 	.set sub_8089088, 0x08089088 + 1
 	.set sub_8097674, 0x08097674 + 1
 	.section .text.sub_80926F8, "ax", %progbits
-@ sub_80926F8 @ JP 0x080926F8 - region-different, gbadisasm descriptive asm (D23)
+@ UnitList_SetCursorToUnit @ JP 0x080926F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80926F8
+	.global UnitList_SetCursorToUnit
 	.thumb_func
-sub_80926F8:
+UnitList_SetCursorToUnit:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

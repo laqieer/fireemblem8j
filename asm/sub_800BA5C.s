@@ -2,11 +2,11 @@
 	.set sub_800B4F0, 0x0800B4F0 + 1
 	.set sub_800B6C0, 0x0800B6C0 + 1
 	.section .text.sub_800BA5C, "ax", %progbits
-@ sub_800BA5C @ JP 0x0800BA5C - region-different, gbadisasm descriptive asm (D23)
+@ Spline_SetupChannels @ JP 0x0800BA5C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800BA5C
+	.global Spline_SetupChannels
 	.thumb_func
-sub_800BA5C:
+Spline_SetupChannels:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

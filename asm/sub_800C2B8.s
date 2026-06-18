@@ -2,11 +2,11 @@
 	.set sub_80C41F0, 0x080C41F0 + 1
 	.set sub_80C5628, 0x080C5628 + 1
 	.section .text.sub_800C2B8, "ax", %progbits
-@ sub_800C2B8 @ JP 0x0800C2B8 - region-different, gbadisasm descriptive asm (D23)
+@ Event88_WmScrollCameraOntoUnit @ JP 0x0800C2B8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800C2B8
+	.global Event88_WmScrollCameraOntoUnit
 	.thumb_func
-sub_800C2B8:
+Event88_WmScrollCameraOntoUnit:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
