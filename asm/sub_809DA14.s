@@ -11,11 +11,11 @@
 	.set sub_801729C, 0x0801729C + 1
 	.set sub_8029E8C, 0x08029E8C + 1
 	.section .text.sub_809DA14, "ax", %progbits
-@ sub_809DA14 @ JP 0x0809DA14 - region-different, gbadisasm descriptive asm (D23)
+@ DrawPrepScreenItems @ JP 0x0809DA14 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809DA14
+	.global DrawPrepScreenItems
 	.thumb_func
-sub_809DA14:
+DrawPrepScreenItems:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

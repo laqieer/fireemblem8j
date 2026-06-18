@@ -1,11 +1,11 @@
 	.syntax unified
 	.set PrepItem_DrawUnitNameRow, 0x0809C3E8 + 1
 	.section .text.sub_809C7D4, "ax", %progbits
-@ sub_809C7D4 @ JP 0x0809C7D4 - region-different, gbadisasm descriptive asm (D23)
+@ PrepItemScreen_DrawVisibleUnitNames @ JP 0x0809C7D4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809C7D4
+	.global PrepItemScreen_DrawVisibleUnitNames
 	.thumb_func
-sub_809C7D4:
+PrepItemScreen_DrawVisibleUnitNames:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	lsls r1, r1, #0x18

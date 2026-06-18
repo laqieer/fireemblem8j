@@ -6,11 +6,11 @@
 	.set sub_80063F8, 0x080063F8 + 1
 	.set sub_8018FCC, 0x08018FCC + 1
 	.section .text.sub_809C178, "ax", %progbits
-@ sub_809C178 @ JP 0x0809C178 - region-different, gbadisasm descriptive asm (D23)
+@ UpdatePrepItemScreenFace @ JP 0x0809C178 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809C178
+	.global UpdatePrepItemScreenFace
 	.thumb_func
-sub_809C178:
+UpdatePrepItemScreenFace:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
