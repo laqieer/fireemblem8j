@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80D65CC, "ax", %progbits
-@ sub_80D65CC @ JP 0x080D65CC - region-different, gbadisasm descriptive asm (D23)
+@ _call_via_r4 @ JP 0x080D65CC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D65CC
+	.global _call_via_r4
 	.thumb_func
-sub_80D65CC:
+_call_via_r4:
 	bx r4
 	nop
 

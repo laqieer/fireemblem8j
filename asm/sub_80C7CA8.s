@@ -2,11 +2,11 @@
 	.set PutSprite, 0x080052F0 + 1
 	.set sub_80C7264, 0x080C7264 + 1
 	.section .text.sub_80C7CA8, "ax", %progbits
-@ sub_80C7CA8 @ JP 0x080C7CA8 - region-different, gbadisasm descriptive asm (D23)
+@ PutWmDotSprite @ JP 0x080C7CA8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C7CA8
+	.global PutWmDotSprite
 	.thumb_func
-sub_80C7CA8:
+PutWmDotSprite:
 	push {r4, r5, r6, lr}
 	sub sp, #8
 	adds r5, r0, #0

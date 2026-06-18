@@ -7,11 +7,11 @@
 	.set SetBlendTargetB, 0x08001E5C + 1
 	.set SetDefaultColorEffects, 0x08001ED0 + 1
 	.section .text.sub_80CC1B0, "ax", %progbits
-@ sub_80CC1B0 @ JP 0x080CC1B0 - region-different, gbadisasm descriptive asm (D23)
+@ OpAnimApplyScrollPalettes @ JP 0x080CC1B0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80CC1B0
+	.global OpAnimApplyScrollPalettes
 	.thumb_func
-sub_80CC1B0:
+OpAnimApplyScrollPalettes:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r4, r0, #0

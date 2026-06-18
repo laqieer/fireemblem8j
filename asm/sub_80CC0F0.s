@@ -2,11 +2,11 @@
 	.set sub_8013008, 0x08013008 + 1
 	.set sub_80D637C, 0x080D637C + 1
 	.section .text.sub_80CC0F0, "ax", %progbits
-@ sub_80CC0F0 @ JP 0x080CC0F0 - region-different, gbadisasm descriptive asm (D23)
+@ OpAnim1_UpdateScrollOneLine @ JP 0x080CC0F0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80CC0F0
+	.global OpAnim1_UpdateScrollOneLine
 	.thumb_func
-sub_80CC0F0:
+OpAnim1_UpdateScrollOneLine:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

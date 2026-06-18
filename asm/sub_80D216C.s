@@ -3,11 +3,11 @@
 	.set sub_805B764, 0x0805B764 + 1
 	.set sub_805B7A4, 0x0805B7A4 + 1
 	.section .text.sub_80D216C, "ax", %progbits
-@ sub_80D216C @ JP 0x080D216C - region-different, gbadisasm descriptive asm (D23)
+@ ClassChgSel_StartClassBattleSprite @ JP 0x080D216C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D216C
+	.global ClassChgSel_StartClassBattleSprite
 	.thumb_func
-sub_80D216C:
+ClassChgSel_StartClassBattleSprite:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

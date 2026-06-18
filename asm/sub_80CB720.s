@@ -5,11 +5,11 @@
 	.set SetFirstPalDirectly, 0x080CB6E0 + 1
 	.set sub_8001BC0, 0x08001BC0 + 1
 	.section .text.sub_80CB720, "ax", %progbits
-@ sub_80CB720 @ JP 0x080CB720 - region-different, gbadisasm descriptive asm (D23)
+@ TsaModifyFirstPalMaybe @ JP 0x080CB720 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80CB720
+	.global TsaModifyFirstPalMaybe
 	.thumb_func
-sub_80CB720:
+TsaModifyFirstPalMaybe:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

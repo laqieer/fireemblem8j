@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80D6420, "ax", %progbits
-@ sub_80D6420 @ JP 0x080D6420 - region-different, gbadisasm descriptive asm (D23)
+@ WriteSramFast @ JP 0x080D6420 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D6420
+	.global WriteSramFast
 	.thumb_func
-sub_80D6420:
+WriteSramFast:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0

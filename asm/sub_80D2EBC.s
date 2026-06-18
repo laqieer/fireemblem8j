@@ -3,11 +3,11 @@
 	.set sub_8004374, 0x08004374 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.section .text.sub_80D2EBC, "ax", %progbits
-@ sub_80D2EBC @ JP 0x080D2EBC - region-different, gbadisasm descriptive asm (D23)
+@ PutGuideCategoryName @ JP 0x080D2EBC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D2EBC
+	.global PutGuideCategoryName
 	.thumb_func
-sub_80D2EBC:
+PutGuideCategoryName:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #8
 	adds r5, r0, #0

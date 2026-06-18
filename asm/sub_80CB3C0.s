@@ -1,11 +1,11 @@
 	.syntax unified
 	.set PutSpriteExt, 0x08005330 + 1
 	.section .text.sub_80CB3C0, "ax", %progbits
-@ sub_80CB3C0 @ JP 0x080CB3C0 - region-different, gbadisasm descriptive asm (D23)
+@ OpAnimPutObjCommon @ JP 0x080CB3C0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80CB3C0
+	.global OpAnimPutObjCommon
 	.thumb_func
-sub_80CB3C0:
+OpAnimPutObjCommon:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r6, r0, #0

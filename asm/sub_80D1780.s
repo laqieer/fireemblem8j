@@ -6,11 +6,11 @@
 	.set sub_8006A14, 0x08006A14 + 1
 	.set sub_800814C, 0x0800814C + 1
 	.section .text.sub_80D1780, "ax", %progbits
-@ sub_80D1780 @ JP 0x080D1780 - region-different, gbadisasm descriptive asm (D23)
+@ ChangeClassDescription @ JP 0x080D1780 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D1780
+	.global ChangeClassDescription
 	.thumb_func
-sub_80D1780:
+ChangeClassDescription:
 	push {r4, lr}
 	adds r4, r0, #0
 	bl sub_800687C

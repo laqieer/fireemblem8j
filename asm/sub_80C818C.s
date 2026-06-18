@@ -2,11 +2,11 @@
 	.set Proc_StartBlocking, 0x08002C30 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_80C818C, "ax", %progbits
-@ sub_80C818C @ JP 0x080C818C - region-different, gbadisasm descriptive asm (D23)
+@ StartGmapAutoMu_Type1 @ JP 0x080C818C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C818C
+	.global StartGmapAutoMu_Type1
 	.thumb_func
-sub_80C818C:
+StartGmapAutoMu_Type1:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0

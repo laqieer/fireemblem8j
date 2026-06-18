@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80D63D4, "ax", %progbits
-@ sub_80D63D4 @ JP 0x080D63D4 - region-different, gbadisasm descriptive asm (D23)
+@ Sqrt @ JP 0x080D63D4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D63D4
+	.global Sqrt
 	.thumb_func
-sub_80D63D4:
+Sqrt:
 	svc #8
 	bx lr
 

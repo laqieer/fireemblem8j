@@ -3,11 +3,11 @@
 	.set sub_8013008, 0x08013008 + 1
 	.set sub_80D636C, 0x080D636C + 1
 	.section .text.sub_80C8FF0, "ax", %progbits
-@ sub_80C8FF0 @ JP 0x080C8FF0 - region-different, gbadisasm descriptive asm (D23)
+@ EndingCredits_UpdateStaffReel @ JP 0x080C8FF0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C8FF0
+	.global EndingCredits_UpdateStaffReel
 	.thumb_func
-sub_80C8FF0:
+EndingCredits_UpdateStaffReel:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
