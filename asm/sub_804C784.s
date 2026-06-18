@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80132A8, 0x080132A8 + 1
 	.section .text.sub_804C784, "ax", %progbits
-@ sub_804C784 @ JP 0x0804C784 - region-different, gbadisasm descriptive asm (D23)
+@ Sio_RasterRotatedBoxToWinBuf @ JP 0x0804C784 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804C784
+	.global Sio_RasterRotatedBoxToWinBuf
 	.thumb_func
-sub_804C784:
+Sio_RasterRotatedBoxToWinBuf:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

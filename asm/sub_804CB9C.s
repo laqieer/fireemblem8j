@@ -1,11 +1,11 @@
 	.syntax unified
 	.set Proc_StartBlocking, 0x08002C30 + 1
 	.section .text.sub_804CB9C, "ax", %progbits
-@ sub_804CB9C @ JP 0x0804CB9C - region-different, gbadisasm descriptive asm (D23)
+@ Sio_StartBoxTransitionClose @ JP 0x0804CB9C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804CB9C
+	.global Sio_StartBoxTransitionClose
 	.thumb_func
-sub_804CB9C:
+Sio_StartBoxTransitionClose:
 	push {r4, lr}
 	adds r4, r0, #0
 	lsls r4, r4, #0x10

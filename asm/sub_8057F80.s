@@ -24,11 +24,11 @@
 	.set sub_80599A0, 0x080599A0 + 1
 	.set sub_805BDCC, 0x0805BDCC + 1
 	.section .text.sub_8057F80, "ax", %progbits
-@ sub_8057F80 @ JP 0x08057F80 - region-different, gbadisasm descriptive asm (D23)
+@ PrepareBattleGraphicsMaybe @ JP 0x08057F80 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8057F80
+	.global PrepareBattleGraphicsMaybe
 	.thumb_func
-sub_8057F80:
+PrepareBattleGraphicsMaybe:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

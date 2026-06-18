@@ -11,11 +11,11 @@
 	.set sub_80AB18C, 0x080AB18C + 1
 	.set sub_80AB354, 0x080AB354 + 1
 	.section .text.sub_8043574, "ax", %progbits
-@ sub_8043574 @ JP 0x08043574 - region-different, gbadisasm descriptive asm (D23)
+@ SioTeamList_EraseTeam @ JP 0x08043574 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8043574
+	.global SioTeamList_EraseTeam
 	.thumb_func
-sub_8043574:
+SioTeamList_EraseTeam:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

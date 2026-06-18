@@ -4,11 +4,11 @@
 	.set UnitHasMagicRank, 0x0801876C + 1
 	.set sub_8073BA4, 0x08073BA4 + 1
 	.section .text.sub_8059034, "ax", %progbits
-@ sub_8059034 @ JP 0x08059034 - region-different, gbadisasm descriptive asm (D23)
+@ ParseBattleHitToBanimCmd @ JP 0x08059034 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8059034
+	.global ParseBattleHitToBanimCmd
 	.thumb_func
-sub_8059034:
+ParseBattleHitToBanimCmd:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

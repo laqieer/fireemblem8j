@@ -6,11 +6,11 @@
 	.set AiFindClosestChestPosition, 0x08040B0C + 1
 	.set sub_8040B34, 0x08040B34 + 1
 	.section .text.sub_8040BDC, "ax", %progbits
-@ sub_8040BDC @ JP 0x08040BDC - region-different, gbadisasm descriptive asm (D23)
+@ AiTryDoRogueSpecialItems @ JP 0x08040BDC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8040BDC
+	.global AiTryDoRogueSpecialItems
 	.thumb_func
-sub_8040BDC:
+AiTryDoRogueSpecialItems:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x14
 	movs r6, #0

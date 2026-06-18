@@ -2,11 +2,11 @@
 	.set SioSend16, 0x080424EC + 1
 	.set Sio_IsPlayerConnected, 0x08042114 + 1
 	.section .text.sub_804195C, "ax", %progbits
-@ sub_804195C @ JP 0x0804195C - region-different, gbadisasm descriptive asm (D23)
+@ SioHandleIrq_Serial @ JP 0x0804195C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804195C
+	.global SioHandleIrq_Serial
 	.thumb_func
-sub_804195C:
+SioHandleIrq_Serial:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_8056890, "ax", %progbits
-@ sub_8056890 @ JP 0x08056890 - region-different, gbadisasm descriptive asm (D23)
+@ EfxAdvanceFrameLut @ JP 0x08056890 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8056890
+	.global EfxAdvanceFrameLut
 	.thumb_func
-sub_8056890:
+EfxAdvanceFrameLut:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0

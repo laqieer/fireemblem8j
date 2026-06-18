@@ -12,11 +12,11 @@
 	.set sub_8055128, 0x08055128 + 1
 	.set sub_80554C4, 0x080554C4 + 1
 	.section .text.sub_8056240, "ax", %progbits
-@ sub_8056240 @ JP 0x08056240 - region-different, gbadisasm descriptive asm (D23)
+@ StartBattleAnimHitEffects @ JP 0x08056240 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8056240
+	.global StartBattleAnimHitEffects
 	.thumb_func
-sub_8056240:
+StartBattleAnimHitEffects:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

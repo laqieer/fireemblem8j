@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8000D68, 0x08000D68 + 1
 	.section .text.sub_804EE2C, "ax", %progbits
-@ sub_804EE2C @ JP 0x0804EE2C - region-different, gbadisasm descriptive asm (D23)
+@ UnpackUiFramePalette @ JP 0x0804EE2C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804EE2C
+	.global UnpackUiFramePalette
 	.thumb_func
-sub_804EE2C:
+UnpackUiFramePalette:
 	push {lr}
 	adds r3, r0, #0
 	cmp r3, #0

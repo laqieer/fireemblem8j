@@ -9,11 +9,11 @@
 	.set sub_804FE54, 0x0804FE54 + 1
 	.set sub_80D65C4, 0x080D65C4 + 1
 	.section .text.sub_804FCFC, "ax", %progbits
-@ sub_804FCFC @ JP 0x0804FCFC - region-different, gbadisasm descriptive asm (D23)
+@ RedrawMenu @ JP 0x0804FCFC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804FCFC
+	.global RedrawMenu
 	.thumb_func
-sub_804FCFC:
+RedrawMenu:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

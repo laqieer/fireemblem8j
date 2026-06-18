@@ -2,11 +2,11 @@
 	.set Proc_Find, 0x08002DEC + 1
 	.set __divsi3, 0x080D65F8 + 1
 	.section .text.sub_804DFE4, "ax", %progbits
-@ sub_804DFE4 @ JP 0x0804DFE4 - region-different, gbadisasm descriptive asm (D23)
+@ UpdateLinkArenaMenuScrollBar @ JP 0x0804DFE4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804DFE4
+	.global UpdateLinkArenaMenuScrollBar
 	.thumb_func
-sub_804DFE4:
+UpdateLinkArenaMenuScrollBar:
 	push {r4, r5, r6, r7, lr}
 	lsls r0, r0, #0x18
 	lsrs r4, r0, #0x18

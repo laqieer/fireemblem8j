@@ -1,11 +1,11 @@
 	.syntax unified
 	.set GetItemIndex, 0x08017294 + 1
 	.section .text.sub_8058E44, "ax", %progbits
-@ sub_8058E44 @ JP 0x08058E44 - region-different, gbadisasm descriptive asm (D23)
+@ GetSpellAnimId @ JP 0x08058E44 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8058E44
+	.global GetSpellAnimId
 	.thumb_func
-sub_8058E44:
+GetSpellAnimId:
 	push {r4, lr}
 	lsls r0, r0, #0x10
 	lsrs r4, r0, #0x10

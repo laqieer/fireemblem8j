@@ -9,11 +9,11 @@
 	.set sub_80AB258, 0x080AB258 + 1
 	.set sub_80AB354, 0x080AB354 + 1
 	.section .text.sub_8043644, "ax", %progbits
-@ sub_8043644 @ JP 0x08043644 - region-different, gbadisasm descriptive asm (D23)
+@ SioTeamList_SwapTeams @ JP 0x08043644 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8043644
+	.global SioTeamList_SwapTeams
 	.thumb_func
-sub_8043644:
+SioTeamList_SwapTeams:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

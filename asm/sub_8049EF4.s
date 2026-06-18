@@ -10,11 +10,11 @@
 	.set sub_80044A4, 0x080044A4 + 1
 	.set sub_80045BC, 0x080045BC + 1
 	.section .text.sub_8049EF4, "ax", %progbits
-@ sub_8049EF4 @ JP 0x08049EF4 - region-different, gbadisasm descriptive asm (D23)
+@ StartLinkArenaPointsNumberMovers @ JP 0x08049EF4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8049EF4
+	.global StartLinkArenaPointsNumberMovers
 	.thumb_func
-sub_8049EF4:
+StartLinkArenaPointsNumberMovers:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

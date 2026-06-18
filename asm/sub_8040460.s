@@ -12,11 +12,11 @@
 	.set sub_8040228, 0x08040228 + 1
 	.set sub_80D65E0, 0x080D65E0 + 1
 	.section .text.sub_8040460, "ax", %progbits
-@ sub_8040460 @ JP 0x08040460 - region-different, gbadisasm descriptive asm (D23)
+@ AiStaffSleepBerserk @ JP 0x08040460 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8040460
+	.global AiStaffSleepBerserk
 	.thumb_func
-sub_8040460:
+AiStaffSleepBerserk:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

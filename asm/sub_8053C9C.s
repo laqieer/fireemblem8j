@@ -2,11 +2,11 @@
 	.set DisableEfxStatusUnits, 0x0805583C + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_8053C9C, "ax", %progbits
-@ sub_8053C9C @ JP 0x08053C9C - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxDead @ JP 0x08053C9C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8053C9C
+	.global NewEfxDead
 	.thumb_func
-sub_8053C9C:
+NewEfxDead:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0

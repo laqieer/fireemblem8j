@@ -1,11 +1,11 @@
 	.syntax unified
 	.set __umodsi3, 0x080D6848 + 1
 	.section .text.sub_804A920, "ax", %progbits
-@ sub_804A920 @ JP 0x0804A920 - region-different, gbadisasm descriptive asm (D23)
+@ LABattleMap_MoveSelectCursor @ JP 0x0804A920 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804A920
+	.global LABattleMap_MoveSelectCursor
 	.thumb_func
-sub_804A920:
+LABattleMap_MoveSelectCursor:
 	push {r4, r5, r6, r7, lr}
 	lsls r0, r0, #0x10
 	lsrs r3, r0, #0x10

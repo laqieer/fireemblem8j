@@ -2,11 +2,11 @@
 	.set BG_EnableSyncByMask, 0x08001EFC + 1
 	.set BG_SetPosition, 0x08001448 + 1
 	.section .text.sub_804F0EC, "ax", %progbits
-@ sub_804F0EC @ JP 0x0804F0EC - region-different, gbadisasm descriptive asm (D23)
+@ DrawUiFrame2 @ JP 0x0804F0EC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804F0EC
+	.global DrawUiFrame2
 	.thumb_func
-sub_804F0EC:
+DrawUiFrame2:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

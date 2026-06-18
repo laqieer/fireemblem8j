@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_8053E10, "ax", %progbits
-@ sub_8053E10 @ JP 0x08053E10 - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxDeadPika @ JP 0x08053E10 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8053E10
+	.global NewEfxDeadPika
 	.thumb_func
-sub_8053E10:
+NewEfxDeadPika:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0

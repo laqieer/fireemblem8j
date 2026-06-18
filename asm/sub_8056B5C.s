@@ -9,11 +9,11 @@
 	.set sub_8056C64, 0x08056C64 + 1
 	.set sub_805BDCC, 0x0805BDCC + 1
 	.section .text.sub_8056B5C, "ax", %progbits
-@ sub_8056B5C @ JP 0x08056B5C - region-different, gbadisasm descriptive asm (D23)
+@ BeginAnimsOnBattleAnimations @ JP 0x08056B5C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8056B5C
+	.global BeginAnimsOnBattleAnimations
 	.thumb_func
-sub_8056B5C:
+BeginAnimsOnBattleAnimations:
 	push {lr}
 	bl sub_805BDCC
 	cmp r0, #1

@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_8047970, "ax", %progbits
-@ sub_8047970 @ JP 0x08047970 - region-different, gbadisasm descriptive asm (D23)
+@ SioMenu_GetItemHelpText @ JP 0x08047970 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8047970
+	.global SioMenu_GetItemHelpText
 	.thumb_func
-sub_8047970:
+SioMenu_GetItemHelpText:
 	push {r4, r5, r6, lr}
 	sub sp, #0x28
 	adds r2, r0, #0

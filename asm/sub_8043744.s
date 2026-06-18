@@ -6,11 +6,11 @@
 	.set sub_8014C7C, 0x08014C7C + 1
 	.set sub_80D65BC, 0x080D65BC + 1
 	.section .text.sub_8043744, "ax", %progbits
-@ sub_8043744 @ JP 0x08043744 - region-different, gbadisasm descriptive asm (D23)
+@ DrawLinkArenaTeamListMenu @ JP 0x08043744 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8043744
+	.global DrawLinkArenaTeamListMenu
 	.thumb_func
-sub_8043744:
+DrawLinkArenaTeamListMenu:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

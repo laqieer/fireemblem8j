@@ -8,11 +8,11 @@
 	.set sub_80405E8, 0x080405E8 + 1
 	.set sub_80D65E0, 0x080D65E0 + 1
 	.section .text.sub_803FF8C, "ax", %progbits
-@ sub_803FF8C @ JP 0x0803FF8C - region-different, gbadisasm descriptive asm (D23)
+@ AiStaffWarp @ JP 0x0803FF8C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803FF8C
+	.global AiStaffWarp
 	.thumb_func
-sub_803FF8C:
+AiStaffWarp:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

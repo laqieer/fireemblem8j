@@ -13,11 +13,11 @@
 	.set sub_80D6374, 0x080D6374 + 1
 	.set sub_80D65E0, 0x080D65E0 + 1
 	.section .text.sub_803FCB0, "ax", %progbits
-@ sub_803FCB0 @ JP 0x0803FCB0 - region-different, gbadisasm descriptive asm (D23)
+@ AiStaffPhysicRescue @ JP 0x0803FCB0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803FCB0
+	.global AiStaffPhysicRescue
 	.thumb_func
-sub_803FCB0:
+AiStaffPhysicRescue:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -2,11 +2,11 @@
 	.set SioSend, 0x08042238 + 1
 	.set sub_80D65E4, 0x080D65E4 + 1
 	.section .text.sub_8042720, "ax", %progbits
-@ sub_8042720 @ JP 0x08042720 - region-different, gbadisasm descriptive asm (D23)
+@ SioReceiveData @ JP 0x08042720 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8042720
+	.global SioReceiveData
 	.thumb_func
-sub_8042720:
+SioReceiveData:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -13,11 +13,11 @@
 	.set sub_8040280, 0x08040280 + 1
 	.set sub_80D65E4, 0x080D65E4 + 1
 	.section .text.sub_80402D4, "ax", %progbits
-@ sub_80402D4 @ JP 0x080402D4 - region-different, gbadisasm descriptive asm (D23)
+@ AiStaffSilence @ JP 0x080402D4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80402D4
+	.global AiStaffSilence
 	.thumb_func
-sub_80402D4:
+AiStaffSilence:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

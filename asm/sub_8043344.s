@@ -6,11 +6,11 @@
 	.set sub_80AB10C, 0x080AB10C + 1
 	.set sub_80AB354, 0x080AB354 + 1
 	.section .text.sub_8043344, "ax", %progbits
-@ sub_8043344 @ JP 0x08043344 - region-different, gbadisasm descriptive asm (D23)
+@ LoadLinkArenaTeamList @ JP 0x08043344 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8043344
+	.global LoadLinkArenaTeamList
 	.thumb_func
-sub_8043344:
+LoadLinkArenaTeamList:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

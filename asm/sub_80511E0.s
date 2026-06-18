@@ -9,11 +9,11 @@
 	.set sub_805AACC, 0x0805AACC + 1
 	.set sub_805BDCC, 0x0805BDCC + 1
 	.section .text.sub_80511E0, "ax", %progbits
-@ sub_80511E0 @ JP 0x080511E0 - region-different, gbadisasm descriptive asm (D23)
+@ ekrBattleInRoundIdle @ JP 0x080511E0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80511E0
+	.global ekrBattleInRoundIdle
 	.thumb_func
-sub_80511E0:
+ekrBattleInRoundIdle:
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	movs r5, #0

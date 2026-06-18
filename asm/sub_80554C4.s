@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_80554C4, "ax", %progbits
-@ sub_80554C4 @ JP 0x080554C4 - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxFlashUnit @ JP 0x080554C4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80554C4
+	.global NewEfxFlashUnit
 	.thumb_func
-sub_80554C4:
+NewEfxFlashUnit:
 	push {r4, r5, r6, lr}
 	mov r6, r8
 	push {r6}

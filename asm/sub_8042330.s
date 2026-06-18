@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_8042330, "ax", %progbits
-@ sub_8042330 @ JP 0x08042330 - region-different, gbadisasm descriptive asm (D23)
+@ Sio_ReadPacket @ JP 0x08042330 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8042330
+	.global Sio_ReadPacket
 	.thumb_func
-sub_8042330:
+Sio_ReadPacket:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

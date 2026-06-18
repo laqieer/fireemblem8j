@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_8043840, "ax", %progbits
-@ sub_8043840 @ JP 0x08043840 - region-different, gbadisasm descriptive asm (D23)
+@ GetLATeamListHelpTextId @ JP 0x08043840 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8043840
+	.global GetLATeamListHelpTextId
 	.thumb_func
-sub_8043840:
+GetLATeamListHelpTextId:
 	push {lr}
 	adds r3, r0, #0
 	ldr r2, _08043860 @ =0x085D33A8

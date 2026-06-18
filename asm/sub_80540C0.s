@@ -2,11 +2,11 @@
 	.set GetAnimPosition, 0x0805AF10 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_80540C0, "ax", %progbits
-@ sub_80540C0 @ JP 0x080540C0 - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxFarAttackWithDistance @ JP 0x080540C0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80540C0
+	.global NewEfxFarAttackWithDistance
 	.thumb_func
-sub_80540C0:
+NewEfxFarAttackWithDistance:
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	lsls r1, r1, #0x10

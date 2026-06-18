@@ -8,11 +8,11 @@
 	.set sub_8050520, 0x08050520 + 1
 	.set sub_80D65C4, 0x080D65C4 + 1
 	.section .text.sub_804FA3C, "ax", %progbits
-@ sub_804FA3C @ JP 0x0804FA3C - region-different, gbadisasm descriptive asm (D23)
+@ StartMenuCore @ JP 0x0804FA3C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804FA3C
+	.global StartMenuCore
 	.thumb_func
-sub_804FA3C:
+StartMenuCore:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
