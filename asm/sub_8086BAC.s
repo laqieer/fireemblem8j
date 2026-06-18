@@ -3,11 +3,11 @@
 	.set sub_8000CD8, 0x08000CD8 + 1
 	.set sub_80D65BC, 0x080D65BC + 1
 	.section .text.sub_8086BAC, "ax", %progbits
-@ sub_8086BAC @ JP 0x08086BAC - region-different, gbadisasm descriptive asm (D23)
+@ Uidebug_PickRandomActiveCond2 @ JP 0x08086BAC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8086BAC
+	.global Uidebug_PickRandomActiveCond2
 	.thumb_func
-sub_8086BAC:
+Uidebug_PickRandomActiveCond2:
 	push {r4, r5, r6, lr}
 	sub sp, #0x20
 	movs r6, #0
