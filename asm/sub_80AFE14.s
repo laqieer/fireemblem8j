@@ -2,11 +2,11 @@
 	.set PutSpriteExt, 0x08005330 + 1
 	.set memcpy, 0x080D6908 + 1
 	.section .text.sub_80AFE14, "ax", %progbits
-@ sub_80AFE14 @ JP 0x080AFE14 - region-different, gbadisasm descriptive asm (D23)
+@ SaveDrawCursor_Loop @ JP 0x080AFE14 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80AFE14
+	.global SaveDrawCursor_Loop
 	.thumb_func
-sub_80AFE14:
+SaveDrawCursor_Loop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

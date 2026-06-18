@@ -5,11 +5,11 @@
 	.set sub_8000D68, 0x08000D68 + 1
 	.set sub_8013008, 0x08013008 + 1
 	.section .text.sub_80B5110, "ax", %progbits
-@ sub_80B5110 @ JP 0x080B5110 - region-different, gbadisasm descriptive asm (D23)
+@ ExtramenuUnk_LoadGfx @ JP 0x080B5110 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B5110
+	.global ExtramenuUnk_LoadGfx
 	.thumb_func
-sub_80B5110:
+ExtramenuUnk_LoadGfx:
 	push {lr}
 	ldr r0, _080B51A4 @ =0x08BB059C
 	movs r1, #0

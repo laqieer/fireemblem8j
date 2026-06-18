@@ -44,7 +44,7 @@
 	.set sub_80B261C, 0x080B261C + 1
 	.set sub_80B269C, 0x080B269C + 1
 	.section .text.sub_809E794, "ax", %progbits
-@ sub_809E794 @ JP 0x0809E794 - region-different, gbadisasm descriptive asm (D23)
+@ PrepItemUse_InitDisplay @ JP 0x0809E794 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
 	.global PrepItemUse_InitDisplay
 	.thumb_func

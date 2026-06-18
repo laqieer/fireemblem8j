@@ -2,11 +2,11 @@
 	.set Proc_Find, 0x08002DEC + 1
 	.set Proc_Goto, 0x08002E74 + 1
 	.section .text.sub_809965C, "ax", %progbits
-@ sub_809965C @ JP 0x0809965C - region-different, gbadisasm descriptive asm (D23)
+@ FadeOutCgText @ JP 0x0809965C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809965C
+	.global FadeOutCgText
 	.thumb_func
-sub_809965C:
+FadeOutCgText:
 	push {lr}
 	ldr r0, _08099674 @ =0x08A94430
 	bl Proc_Find

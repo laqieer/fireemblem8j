@@ -6,11 +6,11 @@
 	.set sub_80B1DD8, 0x080B1DD8 + 1
 	.set sub_80B1FBC, 0x080B1FBC + 1
 	.section .text.sub_80A2660, "ax", %progbits
-@ sub_80A2660 @ JP 0x080A2660 - region-different, gbadisasm descriptive asm (D23)
+@ WmSell_OnInit_ItemSelect @ JP 0x080A2660 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A2660
+	.global WmSell_OnInit_ItemSelect
 	.thumb_func
-sub_80A2660:
+WmSell_OnInit_ItemSelect:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r0, _080A26B4 @ =0x02022EEC

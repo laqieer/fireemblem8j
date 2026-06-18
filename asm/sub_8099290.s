@@ -3,11 +3,11 @@
 	.set Proc_Find, 0x08002DEC + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_8099290, "ax", %progbits
-@ sub_8099290 @ JP 0x08099290 - region-different, gbadisasm descriptive asm (D23)
+@ StartPrepScreenMenu @ JP 0x08099290 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8099290
+	.global StartPrepScreenMenu
 	.thumb_func
-sub_8099290:
+StartPrepScreenMenu:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	ldr r4, _080992B0 @ =0x08A94430

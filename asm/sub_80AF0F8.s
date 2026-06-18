@@ -3,11 +3,11 @@
 	.set m4aSongNumStart, 0x080D4EF4 + 1
 	.set sub_808B1F4, 0x0808B1F4 + 1
 	.section .text.sub_80AF0F8, "ax", %progbits
-@ sub_80AF0F8 @ JP 0x080AF0F8 - region-different, gbadisasm descriptive asm (D23)
+@ BonusClaimMenu_PromptSong4 @ JP 0x080AF0F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80AF0F8
+	.global BonusClaimMenu_PromptSong4
 	.thumb_func
-sub_80AF0F8:
+BonusClaimMenu_PromptSong4:
 	push {lr}
 	adds r1, r0, #0
 	ldr r0, [r1, #0x58]

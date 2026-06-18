@@ -3,11 +3,11 @@
 	.set Proc_Goto, 0x08002E74 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_809EF04, "ax", %progbits
-@ sub_809EF04 @ JP 0x0809EF04 - region-different, gbadisasm descriptive asm (D23)
+@ PrepItemUse_PostPromotion @ JP 0x0809EF04 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809EF04
+	.global PrepItemUse_PostPromotion
 	.thumb_func
-sub_809EF04:
+PrepItemUse_PostPromotion:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldr r0, [r4, #0x2c]

@@ -32,7 +32,7 @@
 	.set sub_80B4B48, 0x080B4B48 + 1
 	.set sub_80B505C, 0x080B505C + 1
 	.section .text.sub_80B4144, "ax", %progbits
-@ sub_80B4144 @ JP 0x080B4144 - region-different, gbadisasm descriptive asm (D23)
+@ SoundRoomUi_Init @ JP 0x080B4144 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
 	.global SoundRoomUi_Init
 	.thumb_func
