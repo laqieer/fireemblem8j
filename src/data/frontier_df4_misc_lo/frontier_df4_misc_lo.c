@@ -5,7 +5,7 @@
  */
 
 u8 frontier_df4_misc_lo_000a_0DC3DC[] __attribute__((section(".data.frontier_df4_misc_lo.gap0a"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000a_0DC3DC.bin");
-u8 frontier_df4_misc_lo_000b_0DC41C[] __attribute__((section(".data.frontier_df4_misc_lo.gap0b"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin", 0, 272);
+u8 frontier_df4_misc_lo_000b_0DC43C[] __attribute__((section(".data.frontier_df4_misc_lo.gap0b"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin", 32, 240);
 u8 frontier_df4_misc_lo_000bm_0DC548[] __attribute__((section(".data.frontier_df4_misc_lo.gap0bm"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin", 300, 20);
 u8 frontier_df4_misc_lo_000b1_0DC56C[] __attribute__((section(".data.frontier_df4_misc_lo.gap0b1"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin", 336, 3);
 u8 frontier_df4_misc_lo_000b2_0DC583[] __attribute__((section(".data.frontier_df4_misc_lo.gap0b2"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin", 359, 205);
