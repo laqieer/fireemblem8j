@@ -4,11 +4,11 @@
 	.set sub_8012E84, 0x08012E84 + 1
 	.set sub_80CC590, 0x080CC590 + 1
 	.section .text.sub_80CD16C, "ax", %progbits
-@ sub_80CD16C @ JP 0x080CD16C - region-different, gbadisasm descriptive asm (D23)
+@ OpAnimEirikaMergeShadow @ JP 0x080CD16C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80CD16C
+	.global OpAnimEirikaMergeShadow
 	.thumb_func
-sub_80CD16C:
+OpAnimEirikaMergeShadow:
 	push {r4, lr}
 	sub sp, #4
 	adds r4, r0, #0
