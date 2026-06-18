@@ -3,11 +3,11 @@
 	.set sub_80B1D98, 0x080B1D98 + 1
 	.set sub_80B27C4, 0x080B27C4 + 1
 	.section .text.sub_80A2074, "ax", %progbits
-@ sub_80A2074 @ JP 0x080A2074 - region-different, gbadisasm descriptive asm (D23)
+@ WmSell_ShowDialoguePrompt @ JP 0x080A2074 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A2074
+	.global WmSell_ShowDialoguePrompt
 	.thumb_func
-sub_80A2074:
+WmSell_ShowDialoguePrompt:
 	push {r4, r5, lr}
 	sub sp, #0xc
 	adds r4, r0, #0
