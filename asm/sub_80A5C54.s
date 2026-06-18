@@ -13,11 +13,11 @@
 	.set sub_80045BC, 0x080045BC + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.section .text.sub_80A5C54, "ax", %progbits
-@ sub_80A5C54 @ JP 0x080A5C54 - region-different, gbadisasm descriptive asm (D23)
+@ DrawSupportSubScreenRemainingText @ JP 0x080A5C54 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A5C54
+	.global DrawSupportSubScreenRemainingText
 	.thumb_func
-sub_80A5C54:
+DrawSupportSubScreenRemainingText:
 	push {r4, r5, r6, lr}
 	sub sp, #0x20
 	adds r5, r0, #0

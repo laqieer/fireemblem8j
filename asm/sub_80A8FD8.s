@@ -8,11 +8,11 @@
 	.set sub_80A9478, 0x080A9478 + 1
 	.set sub_80AADC8, 0x080AADC8 + 1
 	.section .text.sub_80A8FD8, "ax", %progbits
-@ sub_80A8FD8 @ JP 0x080A8FD8 - region-different, gbadisasm descriptive asm (D23)
+@ PidStatsRecordLoseData @ JP 0x080A8FD8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A8FD8
+	.global PidStatsRecordLoseData
 	.thumb_func
-sub_80A8FD8:
+PidStatsRecordLoseData:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

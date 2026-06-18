@@ -3,11 +3,11 @@
 	.set GetSupportScreenPartnerCharId, 0x080A4908 + 1
 	.set sub_8085AC8, 0x08085AC8 + 1
 	.section .text.sub_80A5884, "ax", %progbits
-@ sub_80A5884 @ JP 0x080A5884 - region-different, gbadisasm descriptive asm (D23)
+@ UiSupport_GetSupportTalkSong @ JP 0x080A5884 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A5884
+	.global UiSupport_GetSupportTalkSong
 	.thumb_func
-sub_80A5884:
+UiSupport_GetSupportTalkSong:
 	push {r4, r5, r6, lr}
 	mov r6, r8
 	push {r6}

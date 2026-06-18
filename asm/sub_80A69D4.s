@@ -1,11 +1,11 @@
 	.syntax unified
 	.set Proc_StartBlocking, 0x08002C30 + 1
 	.section .text.sub_80A69D4, "ax", %progbits
-@ sub_80A69D4 @ JP 0x080A69D4 - region-different, gbadisasm descriptive asm (D23)
+@ StartSupportUnitSubScreen @ JP 0x080A69D4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A69D4
+	.global StartSupportUnitSubScreen
 	.thumb_func
-sub_80A69D4:
+StartSupportUnitSubScreen:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0

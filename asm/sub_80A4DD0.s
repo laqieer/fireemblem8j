@@ -10,11 +10,11 @@
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.set sub_80A7F88, 0x080A7F88 + 1
 	.section .text.sub_80A4DD0, "ax", %progbits
-@ sub_80A4DD0 @ JP 0x080A4DD0 - region-different, gbadisasm descriptive asm (D23)
+@ DrawSupportScreenText @ JP 0x080A4DD0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A4DD0
+	.global DrawSupportScreenText
 	.thumb_func
-sub_80A4DD0:
+DrawSupportScreenText:
 	push {r4, r5, r6, r7, lr}
 	ldr r5, _080A4E84 @ =0x02013588
 	bl sub_80A7F88
