@@ -2,11 +2,11 @@
 	.set FormatTime, 0x08000D14 + 1
 	.set sub_8000CD8, 0x08000CD8 + 1
 	.section .text.sub_801B6E8, "ax", %progbits
-@ sub_801B6E8 @ JP 0x0801B6E8 - region-different, gbadisasm descriptive asm (D23)
+@ Return3or2BySecondParity @ JP 0x0801B6E8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801B6E8
+	.global Return3or2BySecondParity
 	.thumb_func
-sub_801B6E8:
+Return3or2BySecondParity:
 	push {r4, lr}
 	sub sp, #8
 	bl sub_8000CD8

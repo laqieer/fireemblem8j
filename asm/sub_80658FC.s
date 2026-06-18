@@ -3,11 +3,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8012E84, 0x08012E84 + 1
 	.section .text.sub_80658FC, "ax", %progbits
-@ sub_80658FC @ JP 0x080658FC - region-different, gbadisasm descriptive asm (D23)
+@ efxLunaSCR2_Loop @ JP 0x080658FC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80658FC
+	.global efxLunaSCR2_Loop
 	.thumb_func
-sub_80658FC:
+efxLunaSCR2_Loop:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r4, r0, #0

@@ -4,11 +4,11 @@
 	.set sub_8026BC0, 0x08026BC0 + 1
 	.set sub_8027144, 0x08027144 + 1
 	.section .text.sub_8087C5C, "ax", %progbits
-@ sub_8087C5C @ JP 0x08087C5C - region-different, gbadisasm descriptive asm (D23)
+@ UnitTornOut_Loop @ JP 0x08087C5C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8087C5C
+	.global UnitTornOut_Loop
 	.thumb_func
-sub_8087C5C:
+UnitTornOut_Loop:
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	ldr r5, [r6, #0x54]

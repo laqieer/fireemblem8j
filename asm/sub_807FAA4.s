@@ -3,11 +3,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_80146B4, 0x080146B4 + 1
 	.section .text.sub_807FAA4, "ax", %progbits
-@ sub_807FAA4 @ JP 0x0807FAA4 - region-different, gbadisasm descriptive asm (D23)
+@ AntitoxinPureWaterfx_Loop @ JP 0x0807FAA4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807FAA4
+	.global AntitoxinPureWaterfx_Loop
 	.thumb_func
-sub_807FAA4:
+AntitoxinPureWaterfx_Loop:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x10
 	adds r6, r0, #0

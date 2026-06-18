@@ -3,11 +3,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8014760, 0x08014760 + 1
 	.section .text.sub_8080A20, "ax", %progbits
-@ sub_8080A20 @ JP 0x08080A20 - region-different, gbadisasm descriptive asm (D23)
+@ MapAnimRepair_Loop1 @ JP 0x08080A20 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8080A20
+	.global MapAnimRepair_Loop1
 	.thumb_func
-sub_8080A20:
+MapAnimRepair_Loop1:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x10
 	adds r6, r0, #0

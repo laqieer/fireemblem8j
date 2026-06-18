@@ -5,11 +5,11 @@
 	.set sub_80146B4, 0x080146B4 + 1
 	.set sub_8080CB8, 0x08080CB8 + 1
 	.section .text.sub_807FE74, "ax", %progbits
-@ sub_807FE74 @ JP 0x0807FE74 - region-different, gbadisasm descriptive asm (D23)
+@ WarpFlashy_Loop @ JP 0x0807FE74 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807FE74
+	.global WarpFlashy_Loop
 	.thumb_func
-sub_807FE74:
+WarpFlashy_Loop:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x10
 	adds r7, r0, #0

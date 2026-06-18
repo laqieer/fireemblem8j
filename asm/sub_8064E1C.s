@@ -3,11 +3,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8012E84, 0x08012E84 + 1
 	.section .text.sub_8064E1C, "ax", %progbits
-@ sub_8064E1C @ JP 0x08064E1C - region-different, gbadisasm descriptive asm (D23)
+@ EfxSRankWeaponEffectSCR2Main @ JP 0x08064E1C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8064E1C
+	.global EfxSRankWeaponEffectSCR2Main
 	.thumb_func
-sub_8064E1C:
+EfxSRankWeaponEffectSCR2Main:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r4, r0, #0
