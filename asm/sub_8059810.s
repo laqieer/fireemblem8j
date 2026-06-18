@@ -3,11 +3,11 @@
 	.set sub_805A78C, 0x0805A78C + 1
 	.set SwitchAISFrameDataFromBARoundType, 0x0805AE20 + 1
 	.section .text.sub_8059810, "ax", %progbits
-@ sub_8059810 @ JP 0x08059810 - region-different, gbadisasm descriptive asm (D23)
+@ EkrPrepareBanimfx @ JP 0x08059810 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8059810
+	.global EkrPrepareBanimfx
 	.thumb_func
-sub_8059810:
+EkrPrepareBanimfx:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	lsls r4, r1, #0x10

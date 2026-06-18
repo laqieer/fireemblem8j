@@ -1,11 +1,11 @@
 	.syntax unified
 	.set GetItemIndex, 0x08017294 + 1
 	.section .text.sub_8059790, "ax", %progbits
-@ sub_8059790 @ JP 0x08059790 - region-different, gbadisasm descriptive asm (D23)
+@ FilterBattleAnimCharacterPalette @ JP 0x08059790 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8059790
+	.global FilterBattleAnimCharacterPalette
 	.thumb_func
-sub_8059790:
+FilterBattleAnimCharacterPalette:
 	push {lr}
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10

@@ -7,11 +7,11 @@
 	.set sub_80D636C, 0x080D636C + 1
 	.set sub_80D6394, 0x080D6394 + 1
 	.section .text.sub_805A78C, "ax", %progbits
-@ sub_805A78C @ JP 0x0805A78C - region-different, gbadisasm descriptive asm (D23)
+@ UpdateBanimFrame @ JP 0x0805A78C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805A78C
+	.global UpdateBanimFrame
 	.thumb_func
-sub_805A78C:
+UpdateBanimFrame:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

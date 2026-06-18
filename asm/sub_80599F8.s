@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80599F8, "ax", %progbits
-@ sub_80599F8 @ JP 0x080599F8 - region-different, gbadisasm descriptive asm (D23)
+@ BattleAIS_ExecCommands @ JP 0x080599F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80599F8
+	.global BattleAIS_ExecCommands
 	.thumb_func
-sub_80599F8:
+BattleAIS_ExecCommands:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

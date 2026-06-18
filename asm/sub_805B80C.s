@@ -7,11 +7,11 @@
 	.set sub_80D636C, 0x080D636C + 1
 	.set sub_80D6394, 0x080D6394 + 1
 	.section .text.sub_805B80C, "ax", %progbits
-@ sub_805B80C @ JP 0x0805B80C - region-different, gbadisasm descriptive asm (D23)
+@ InitBanimTerrain @ JP 0x0805B80C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805B80C
+	.global InitBanimTerrain
 	.thumb_func
-sub_805B80C:
+InitBanimTerrain:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
