@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8073418, 0x08073418 + 1
 	.section .text.sub_805BD44, "ax", %progbits
-@ sub_805BD44 @ JP 0x0805BD44 - region-different, gbadisasm descriptive asm (D23)
+@ RegisterBanimTerrainTmByPos @ JP 0x0805BD44 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805BD44
+	.global RegisterBanimTerrainTmByPos
 	.thumb_func
-sub_805BD44:
+RegisterBanimTerrainTmByPos:
 	push {lr}
 	sub sp, #0x10
 	lsls r0, r0, #0x10

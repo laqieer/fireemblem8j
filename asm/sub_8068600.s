@@ -4,11 +4,11 @@
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_80564F0, 0x080564F0 + 1
 	.section .text.sub_8068600, "ax", %progbits
-@ sub_8068600 @ JP 0x08068600 - region-different, gbadisasm descriptive asm (D23)
+@ StartSubSpell_efxIvaldiOBJ1 @ JP 0x08068600 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8068600
+	.global StartSubSpell_efxIvaldiOBJ1
 	.thumb_func
-sub_8068600:
+StartSubSpell_efxIvaldiOBJ1:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
