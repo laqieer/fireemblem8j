@@ -3,11 +3,11 @@
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_800BF3C, 0x0800BF3C + 1
 	.section .text.sub_80108E4, "ax", %progbits
-@ sub_80108E4 @ JP 0x080108E4 - region-different, gbadisasm descriptive asm (D23)
+@ Event3B_DisplayCursor @ JP 0x080108E4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80108E4
+	.global Event3B_DisplayCursor
 	.thumb_func
-sub_80108E4:
+Event3B_DisplayCursor:
 	push {r4, r5, r6, r7, lr}
 	adds r6, r0, #0
 	ldrh r0, [r6, #0x3c]
