@@ -1,11 +1,11 @@
 	.syntax unified
 	.set GetUnit, 0x08019108 + 1
 	.section .text.sub_80886E0, "ax", %progbits
-@ sub_80886E0 @ JP 0x080886E0 - region-different, gbadisasm descriptive asm (D23)
+@ HandleCh5xUnits_Start @ JP 0x080886E0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80886E0
+	.global HandleCh5xUnits_Start
 	.thumb_func
-sub_80886E0:
+HandleCh5xUnits_Start:
 	push {r4, lr}
 	movs r4, #1
 _080886E4:
