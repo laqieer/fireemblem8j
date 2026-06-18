@@ -2,11 +2,11 @@
 	.set sub_803AA9C, 0x0803AA9C + 1
 	.set AiTryMoveTowardsNeglectWall, 0x0803BBC0 + 1
 	.section .text.sub_803CE28, "ax", %progbits
-@ sub_803CE28 @ JP 0x0803CE28 - region-different, gbadisasm descriptive asm (D23)
+@ AiScriptCmd_13 @ JP 0x0803CE28 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803CE28
+	.global AiScriptCmd_13
 	.thumb_func
-sub_803CE28:
+AiScriptCmd_13:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #8
 	adds r7, r0, #0
