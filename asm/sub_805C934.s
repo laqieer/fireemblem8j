@@ -3,11 +3,11 @@
 	.set SetDefaultColorEffects, 0x08001ED0 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_805C934, "ax", %progbits
-@ sub_805C934 @ JP 0x0805C934 - region-different, gbadisasm descriptive asm (D23)
+@ EfxCircleWINMain @ JP 0x0805C934 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805C934
+	.global EfxCircleWINMain
 	.thumb_func
-sub_805C934:
+EfxCircleWINMain:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

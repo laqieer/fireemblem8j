@@ -4,11 +4,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_805B094, 0x0805B094 + 1
 	.section .text.sub_805CC50, "ax", %progbits
-@ sub_805CC50 @ JP 0x0805CC50 - region-different, gbadisasm descriptive asm (D23)
+@ EfxDummymagicMain @ JP 0x0805CC50 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805CC50
+	.global EfxDummymagicMain
 	.thumb_func
-sub_805CC50:
+EfxDummymagicMain:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	ldr r0, [r5, #0x5c]
