@@ -4813,3 +4813,16 @@ Renamed 105 byte-neutral (60 in collision chunks auto-reverted -> recover with s
 are referenced/aliased via generated jp_syms not in baseline_syms.tsv -> dup on rename). named 82.21->82.55.
 Cumulative D114 naming (3 iters): 80.68 -> 82.55% (+~370 placeholders) by decoupling naming from byte-match.
 Ground truth: matching-C 86.28% / named 82.55% (13434/16273) / self-contain 100% / data 100%.
+
+## D114 addendum 3 — naming lever extended to DATA (+113, named ->83.22%) (2026-06-18)
+The D114 alias lever applies to DATA placeholders too. data_<addr> in asm/ are EXCLUDED SHADOWS (counted by
+label_stats but NOT built — the real data is src/data/<...>.o per carved_rom.d, and the US symbol is provided
+by a baseline_syms ALIAS that a carved function references). 113 of 564 data_ have a confirmed non-placeholder
+alias (Pal_FluxAnimSprites, AnimScr_EfxFireOBJ_*, gTSA_TerrainBox_Ballistae...). CRITICAL DIFFERENCE from the
+function lever: do NOT drop the alias (the shadow asm isn't linked, so the alias is the ONLY definition in the
+build -> dropping it -> undefined-symbol link fail). Just section-preserving-rename the shadow .global ->
+US name (placeholder -1; the US name already counted via alias so named count unchanged; placeholder% drops).
+~/rename_data.py (no-drop variant): 113/113 renamed, byte-neutral, COLD-gated. named 82.65->83.22.
+Cumulative D114 naming (5 iters): 80.68 -> 83.22% (+~540 placeholders) across func-alias / func-mnemonic /
+func-callee-overlap / DATA-alias confirmation methods. Remaining: ~451 data_ (no alias), ~160 sub_ (weak hint),
+banim_/gfx_ 1687 = ceiling. Ground truth: matching-C 86.28% / named 83.22% (13449/16160) / self-contain 100%.
