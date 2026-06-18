@@ -6,11 +6,11 @@
 	.set sub_807C37C, 0x0807C37C + 1
 	.set sub_807C394, 0x0807C394 + 1
 	.section .text.sub_8010088, "ax", %progbits
-@ sub_8010088 @ JP 0x08010088 - region-different, gbadisasm descriptive asm (D23)
+@ Event30_ENUN @ JP 0x08010088 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8010088
+	.global Event30_ENUN
 	.thumb_func
-sub_8010088:
+Event30_ENUN:
 	push {lr}
 	ldrh r0, [r0, #0x3c]
 	lsrs r0, r0, #2
