@@ -1,11 +1,11 @@
 	.syntax unified
 	.set PutSpriteExt, 0x08005330 + 1
 	.section .text.sub_80B24DC, "ax", %progbits
-@ sub_80B24DC @ JP 0x080B24DC - region-different, gbadisasm descriptive asm (D23)
+@ SysBrownBox_Loop @ JP 0x080B24DC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B24DC
+	.global SysBrownBox_Loop
 	.thumb_func
-sub_80B24DC:
+SysBrownBox_Loop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

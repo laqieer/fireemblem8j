@@ -4,11 +4,11 @@
 	.set sub_8012E84, 0x08012E84 + 1
 	.set sub_80CF9D4, 0x080CF9D4 + 1
 	.section .text.sub_80D02FC, "ax", %progbits
-@ sub_80D02FC @ JP 0x080D02FC - region-different, gbadisasm descriptive asm (D23)
+@ OpAnimTitleFlyInSeg7 @ JP 0x080D02FC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D02FC
+	.global OpAnimTitleFlyInSeg7
 	.thumb_func
-sub_80D02FC:
+OpAnimTitleFlyInSeg7:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

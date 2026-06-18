@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80145DC, "ax", %progbits
-@ sub_80145DC @ JP 0x080145DC - region-different, gbadisasm descriptive asm (D23)
+@ PutTmRectFlippable @ JP 0x080145DC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80145DC
+	.global PutTmRectFlippable
 	.thumb_func
-sub_80145DC:
+PutTmRectFlippable:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

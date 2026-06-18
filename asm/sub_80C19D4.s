@@ -1,11 +1,11 @@
 	.syntax unified
 	.set GmIsNodeInList, 0x080C18D0 + 1
 	.section .text.sub_80C19D4, "ax", %progbits
-@ sub_80C19D4 @ JP 0x080C19D4 - region-different, gbadisasm descriptive asm (D23)
+@ GmFindPathThroughBlockedRecursive @ JP 0x080C19D4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C19D4
+	.global GmFindPathThroughBlockedRecursive
 	.thumb_func
-sub_80C19D4:
+GmFindPathThroughBlockedRecursive:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
@@ -129,7 +129,7 @@ _080C1AAA:
 	adds r0, r5, #0
 	mov r1, sb
 	mov r2, r8
-	bl sub_80C19D4
+	bl GmFindPathThroughBlockedRecursive
 	b _080C1AFA
 	.align 2, 0
 _080C1ABC: .4byte 0x0201B100
@@ -165,7 +165,7 @@ _080C1AE2:
 	adds r0, r5, #0
 	mov r1, sb
 	mov r2, r8
-	bl sub_80C19D4
+	bl GmFindPathThroughBlockedRecursive
 _080C1AFA:
 	adds r4, #1
 	ldr r0, [sp, #0x10]

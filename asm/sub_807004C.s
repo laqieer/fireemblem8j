@@ -5,11 +5,11 @@
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_80564F0, 0x080564F0 + 1
 	.section .text.sub_807004C, "ax", %progbits
-@ sub_807004C @ JP 0x0807004C - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxMantBatabata @ JP 0x0807004C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807004C
+	.global NewEfxMantBatabata
 	.thumb_func
-sub_807004C:
+NewEfxMantBatabata:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

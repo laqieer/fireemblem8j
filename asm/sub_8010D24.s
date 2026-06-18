@@ -2,11 +2,11 @@
 	.set StartEventWarpAnim_ret, 0x08012A14 + 1
 	.set sub_8012A38, 0x08012A38 + 1
 	.section .text.sub_8010D24, "ax", %progbits
-@ sub_8010D24 @ JP 0x08010D24 - region-different, gbadisasm descriptive asm (D23)
+@ Event41_Warp @ JP 0x08010D24 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8010D24
+	.global Event41_Warp
 	.thumb_func
-sub_8010D24:
+Event41_Warp:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r5, r0, #0

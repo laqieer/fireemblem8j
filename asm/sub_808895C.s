@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_808895C, "ax", %progbits
-@ sub_808895C @ JP 0x0808895C - region-different, gbadisasm descriptive asm (D23)
+@ AutoGenerateUnitdef @ JP 0x0808895C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_808895C
+	.global AutoGenerateUnitdef
 	.thumb_func
-sub_808895C:
+AutoGenerateUnitdef:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

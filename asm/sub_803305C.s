@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_803305C, "ax", %progbits
-@ sub_803305C @ JP 0x0803305C - region-different, gbadisasm descriptive asm (D23)
+@ PointInCameraBounds @ JP 0x0803305C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_803305C
+	.global PointInCameraBounds
 	.thumb_func
-sub_803305C:
+PointInCameraBounds:
 	push {r4, r5, r6, lr}
 	lsls r0, r0, #0x10
 	asrs r5, r0, #0x10

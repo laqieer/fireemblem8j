@@ -1,11 +1,11 @@
 	.syntax unified
 	.set CheckFlag, 0x080860D0 + 1
 	.section .text.sub_800D97C, "ax", %progbits
-@ sub_800D97C @ JP 0x0800D97C - region-different, gbadisasm descriptive asm (D23)
+@ Event03_CheckEvBitOrId @ JP 0x0800D97C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800D97C
+	.global Event03_CheckEvBitOrId
 	.thumb_func
-sub_800D97C:
+Event03_CheckEvBitOrId:
 	push {r4, lr}
 	adds r2, r0, #0
 	ldr r1, [r2, #0x38]

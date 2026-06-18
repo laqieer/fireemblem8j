@@ -9,11 +9,11 @@
 	.set sub_8013008, 0x08013008 + 1
 	.set sub_80D637C, 0x080D637C + 1
 	.section .text.sub_80CDCCC, "ax", %progbits
-@ sub_80CDCCC @ JP 0x080CDCCC - region-different, gbadisasm descriptive asm (D23)
+@ OpAnimFaceMontageBegin @ JP 0x080CDCCC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80CDCCC
+	.global OpAnimFaceMontageBegin
 	.thumb_func
-sub_80CDCCC:
+OpAnimFaceMontageBegin:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #4
 	adds r7, r0, #0

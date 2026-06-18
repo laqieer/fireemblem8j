@@ -6,11 +6,11 @@
 	.set sub_807395C, 0x0807395C + 1
 	.set sub_80D6394, 0x080D6394 + 1
 	.section .text.sub_80578FC, "ax", %progbits
-@ sub_80578FC @ JP 0x080578FC - region-different, gbadisasm descriptive asm (D23)
+@ UnitKakudaiPrepareAnimScript @ JP 0x080578FC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80578FC
+	.global UnitKakudaiPrepareAnimScript
 	.thumb_func
-sub_80578FC:
+UnitKakudaiPrepareAnimScript:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	ldr r1, _08057A68 @ =0x080DFF28

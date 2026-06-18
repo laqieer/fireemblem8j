@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80C0574, "ax", %progbits
-@ sub_80C0574 @ JP 0x080C0574 - region-different, gbadisasm descriptive asm (D23)
+@ GmapScreen2_GetNodeScreenPos @ JP 0x080C0574 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C0574
+	.global GmapScreen2_GetNodeScreenPos
 	.thumb_func
-sub_80C0574:
+GmapScreen2_GetNodeScreenPos:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r3, #0

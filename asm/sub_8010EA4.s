@@ -4,11 +4,11 @@
 	.set sub_80833A8, 0x080833A8 + 1
 	.set sub_8083510, 0x08083510 + 1
 	.section .text.sub_8010EA4, "ax", %progbits
-@ sub_8010EA4 @ JP 0x08010EA4 - region-different, gbadisasm descriptive asm (D23)
+@ Event45_GlowingCross @ JP 0x08010EA4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8010EA4
+	.global Event45_GlowingCross
 	.thumb_func
-sub_8010EA4:
+Event45_GlowingCross:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	ldr r1, [r5, #0x38]

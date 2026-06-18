@@ -4,11 +4,11 @@
 	.set sub_8056214, 0x08056214 + 1
 	.set sub_807A564, 0x0807A564 + 1
 	.section .text.sub_807A5C0, "ax", %progbits
-@ sub_807A5C0 @ JP 0x0807A5C0 - region-different, gbadisasm descriptive asm (D23)
+@ EfxSelfThunderBGMain @ JP 0x0807A5C0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807A5C0
+	.global EfxSelfThunderBGMain
 	.thumb_func
-sub_807A5C0:
+EfxSelfThunderBGMain:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r4, r0, #0
