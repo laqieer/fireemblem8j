@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_801759C, 0x0801759C + 1
 	.section .text.sub_8018CD4, "ax", %progbits
-@ sub_8018CD4 @ JP 0x08018CD4 - region-different, gbadisasm descriptive asm (D23)
+@ ClearNonPlayerUnits @ JP 0x08018CD4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8018CD4
+	.global ClearNonPlayerUnits
 	.thumb_func
-sub_8018CD4:
+ClearNonPlayerUnits:
 	push {r4, r5, lr}
 	movs r4, #0x41
 	ldr r5, _08018D00 @ =0x085C2A50
