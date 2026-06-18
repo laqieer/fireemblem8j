@@ -4826,3 +4826,14 @@ US name (placeholder -1; the US name already counted via alias so named count un
 Cumulative D114 naming (5 iters): 80.68 -> 83.22% (+~540 placeholders) across func-alias / func-mnemonic /
 func-callee-overlap / DATA-alias confirmation methods. Remaining: ~451 data_ (no alias), ~160 sub_ (weak hint),
 banim_/gfx_ 1687 = ceiling. Ground truth: matching-C 86.28% / named 83.22% (13449/16160) / self-contain 100%.
+
+### D114 addendum 4 — relaxed-mnemonic (≥90%) naming tier (2026-06-18)
+After exact-mnemonic (15) and callee-overlap (105) confirmation tiers, added a
+5th tier: funclib-hinted sub_ with no alias, confirmed when US-compile mnemonics
+match JP-asm mnemonics at ≥90% identity AND len≥8 (`~/rename_confirmed90.py`).
+31 confirmed, ~22 already named via the callee-overlap tier → **+9 NEW** named
+(13,449→13,458; 83.22→83.28%). Byte-neutral, COLD make-compare gated per chunk.
+The high-confidence naming veins (alias/mnemonic-exact/callee-overlap) are now
+mined thin; remaining nameable backlog = ~451 no-alias data_ (need a data-xref
+confirmation method) + weak-hint sub_ + the ~1,687 asset-sheet ceiling
+(banim_/gfx_, unnameable by fe8u convention → named max ≈ 89.6%).
