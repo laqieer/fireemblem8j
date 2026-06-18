@@ -4837,3 +4837,23 @@ The high-confidence naming veins (alias/mnemonic-exact/callee-overlap) are now
 mined thin; remaining nameable backlog = ~451 no-alias data_ (need a data-xref
 confirmation method) + weak-hint sub_ + the ~1,687 asset-sheet ceiling
 (banim_/gfx_, unnameable by fe8u convention → named max ≈ 89.6%).
+
+### D115 — autocarve re-opens the matching-C frontier (2026-06-18)
+After the D114 naming levers hit their reliable floor (~83.3%), pivoted back to
+matching-C via `scripts/autocarve.py` on the 559 small funclib-named still-asm
+sub_ with US source. It mechanically carves each ALONE (no batch layout-shift),
+auto-skips sign-ext (lsr↔asr) dead-ends + no-clean-body, auto-reverts REGION/
+COMPILE/LINK, and FLAGS NEAR≤8B with the diffing bytes. Yield ≈ 2-3 winnable per
+15 candidates. Banked +4 this iter via three fix-classes:
+- **region-same exact** (0-byte): Return3or2BySecondParity, ChangeClassDescription.
+- **JP-specific signature** (param US lacks): FadeOutPrepBgm — JP takes a `songId`
+  param passed through to ChangeBgm (+ arg3=0x100); decoded from the r0-never-set
+  + reg-shuffle pattern in the JP bytes.
+- **JP proc-label difference**: GameCtrl_CheckGameCompleteAndBranch — JP gotos
+  PROC_LABEL(16) (ClearTemporaryUnits/DeclareCompletedChapter path) not
+  LGAMECTRL_EXEC_ENDING_SCENE(17); confirmed the other 2 carved users keep 17 so
+  it's function-local, NOT a global enum shift.
+Reg-alloc NEARs (r0↔r1 swap on commutative ands, e.g. WriteSramFast/ReadSramFast_
+Core 2/64) remain dead-ends (permuter territory), correctly reverted. The frontier
+is live: keep running autocarve batches + hand-decoding const/signature/proc-label
+NEARs. matching-C 7358 -> 7362 (86.28 -> 86.33%).
