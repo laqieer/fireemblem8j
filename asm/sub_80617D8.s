@@ -3,11 +3,11 @@
 	.set sub_8056774, 0x08056774 + 1
 	.set sub_805679C, 0x0805679C + 1
 	.section .text.sub_80617D8, "ax", %progbits
-@ sub_80617D8 @ JP 0x080617D8 - region-different, gbadisasm descriptive asm (D23)
+@ efxHazymoonOBJ2_Loop_A @ JP 0x080617D8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80617D8
+	.global efxHazymoonOBJ2_Loop_A
 	.thumb_func
-sub_80617D8:
+efxHazymoonOBJ2_Loop_A:
 	push {r4, lr}
 	adds r1, r0, #0
 	ldr r2, [r1, #0x60]
