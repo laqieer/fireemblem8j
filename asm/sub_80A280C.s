@@ -4,11 +4,11 @@
 	.set sub_80B1D98, 0x080B1D98 + 1
 	.set sub_80B1FBC, 0x080B1FBC + 1
 	.section .text.sub_80A280C, "ax", %progbits
-@ sub_80A280C @ JP 0x080A280C - region-different, gbadisasm descriptive asm (D23)
+@ WmSell_OnInit_ConfirmSell @ JP 0x080A280C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A280C
+	.global WmSell_OnInit_ConfirmSell
 	.thumb_func
-sub_80A280C:
+WmSell_OnInit_ConfirmSell:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r5, r4, #0
