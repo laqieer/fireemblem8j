@@ -3,11 +3,11 @@
 	.set IsItemStealable, 0x08016DFC + 1
 	.set sub_80165F0, 0x080165F0 + 1
 	.section .text.sub_8024300, "ax", %progbits
-@ sub_8024300 @ JP 0x08024300 - region-different, gbadisasm descriptive asm (D23)
+@ StealItemMenuCommand_Draw @ JP 0x08024300 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8024300
+	.global StealItemMenuCommand_Draw
 	.thumb_func
-sub_8024300:
+StealItemMenuCommand_Draw:
 	push {r4, r5, r6, lr}
 	adds r5, r1, #0
 	ldr r0, _0802434C @ =0x0203A954
