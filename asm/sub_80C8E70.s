@@ -4,11 +4,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_80D6378, 0x080D6378 + 1
 	.section .text.sub_80C8E70, "ax", %progbits
-@ sub_80C8E70 @ JP 0x080C8E70 - region-different, gbadisasm descriptive asm (D23)
+@ CreditsBlendCG_0 @ JP 0x080C8E70 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C8E70
+	.global CreditsBlendCG_0
 	.thumb_func
-sub_80C8E70:
+CreditsBlendCG_0:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldrh r0, [r4, #0x30]
