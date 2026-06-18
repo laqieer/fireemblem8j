@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_8073418, "ax", %progbits
-@ sub_8073418 @ JP 0x08073418 - region-different, gbadisasm descriptive asm (D23)
+@ EfxTmCpyExt @ JP 0x08073418 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8073418
+	.global EfxTmCpyExt
 	.thumb_func
-sub_8073418:
+EfxTmCpyExt:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

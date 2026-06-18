@@ -12,11 +12,11 @@
 	.set sub_80749E0, 0x080749E0 + 1
 	.set sub_8074DE8, 0x08074DE8 + 1
 	.section .text.sub_8074050, "ax", %progbits
-@ sub_8074050 @ JP 0x08074050 - region-different, gbadisasm descriptive asm (D23)
+@ EfxPlaySEwithCmdCtrl @ JP 0x08074050 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8074050
+	.global EfxPlaySEwithCmdCtrl
 	.thumb_func
-sub_8074050:
+EfxPlaySEwithCmdCtrl:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

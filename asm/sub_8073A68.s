@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80D6374, 0x080D6374 + 1
 	.section .text.sub_8073A68, "ax", %progbits
-@ sub_8073A68 @ JP 0x08073A68 - region-different, gbadisasm descriptive asm (D23)
+@ EfxCalcSplitedColorStep @ JP 0x08073A68 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8073A68
+	.global EfxCalcSplitedColorStep
 	.thumb_func
-sub_8073A68:
+EfxCalcSplitedColorStep:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

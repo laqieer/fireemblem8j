@@ -3,11 +3,11 @@
 	.set GetUnitFromCharId, 0x08017FB0 + 1
 	.set SetEkrDragonStatusType, 0x08072034 + 1
 	.section .text.sub_80730E4, "ax", %progbits
-@ sub_80730E4 @ JP 0x080730E4 - region-different, gbadisasm descriptive asm (D23)
+@ RegisterEkrDragonStatusType @ JP 0x080730E4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80730E4
+	.global RegisterEkrDragonStatusType
 	.thumb_func
-sub_80730E4:
+RegisterEkrDragonStatusType:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
