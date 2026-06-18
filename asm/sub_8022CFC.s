@@ -2,11 +2,11 @@
 	.set CanUnitUseWeapon, 0x0801631C + 1
 	.set sub_80165F0, 0x080165F0 + 1
 	.section .text.sub_8022CFC, "ax", %progbits
-@ sub_8022CFC @ JP 0x08022CFC - region-different, gbadisasm descriptive asm (D23)
+@ WeaponSelectMenu_Draw @ JP 0x08022CFC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8022CFC
+	.global WeaponSelectMenu_Draw
 	.thumb_func
-sub_8022CFC:
+WeaponSelectMenu_Draw:
 	push {r4, r5, r6, lr}
 	adds r5, r1, #0
 	ldr r0, _08022D44 @ =0x03004DF0
