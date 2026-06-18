@@ -4986,3 +4986,21 @@ NOTE: not every prep_itemscreen func is a clean cluster member — PutWmItemScre
 is genuinely region-different (12 diffs: JP msgids 0x72-0x75->0x04-0x07 + colors + offsets).
 This iter also confirmed the rodata-in-gap (D121) signature is rare — a scan of
 Setup/Init/Draw candidates surfaced no new 0x09000000-literal cases.
+
+### D123 — coddog-style all-US mnemonic naming for NO-funclib-hint sub_ (2026-06-18)
+New NAMED signal independent of funclib (directive lever #3): match a placeholder
+sub_<addr> that has NO funclib hint against the mnemonic stream of EVERY unmapped
+US ELF function (prefilter by length ±25% + mnemonic-multiset overlap >=0.72, then
+difflib.ratio on the top few). Confirm a UNIQUE best match (ratio gap >= 0.05-0.06)
+at ratio >= 0.92 (1-signal near-exact) OR ratio >= 0.85 WITH callee-subset (>=2 JP
+resolved callees ⊆ the US func's callees, 2-signal). +6 this iter (NewEfxCircleWIN,
+XMapTransfer_4, DebugMenu_FogDraw, NameSelect_DrawName, DebugMenu_ClearDraw,
+ClassStatsDisplay_Loop). CRITICAL efx-CLUSTER TRAP: efx/banim animation funcs are
+templated -> they share BOTH mnemonics AND callees, so even a 1.0 mnemonic + callee
+match can be a DIFFERENT efx func. Two false positives (efxIvaldiWOUT_Loop,
+StartSubSpell_efxMistyrainBG2) were ALREADY carved at other addresses; my basename-only
+existing_src guard missed them (they're defined INSIDE multi-func .c files). FIX: guard
+must grep the actual function DEFINITION across all src/*.c (`^\w[\w *]*\bNAME\s*\(`),
+not just file basenames; make compare's multiple-definition link error is the final gate.
+Held leaf-efx (EfxmagicShadowshot 0.98, no callees) + callee-CONTRADICTION (Fin_End 0.94,
+callees ⊄ US) as too risky. named 84.47 -> 84.50%.
