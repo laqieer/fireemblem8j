@@ -5,11 +5,11 @@
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_80564F0, 0x080564F0 + 1
 	.section .text.sub_80704AC, "ax", %progbits
-@ sub_80704AC @ JP 0x080704AC - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxChillAnime @ JP 0x080704AC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80704AC
+	.global NewEfxChillAnime
 	.thumb_func
-sub_80704AC:
+NewEfxChillAnime:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
