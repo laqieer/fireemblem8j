@@ -4,11 +4,11 @@
 	.set __umodsi3, 0x080D6848 + 1
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_80B7A98, "ax", %progbits
-@ sub_80B7A98 @ JP 0x080B7A98 - region-different, gbadisasm descriptive asm (D23)
+@ ClassIntro_LoopOut @ JP 0x080B7A98 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B7A98
+	.global ClassIntro_LoopOut
 	.thumb_func
-sub_80B7A98:
+ClassIntro_LoopOut:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldrh r0, [r4, #0x2a]
