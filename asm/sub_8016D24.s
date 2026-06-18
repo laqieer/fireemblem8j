@@ -2,11 +2,11 @@
 	.set CanUnitUseWeapon, 0x0801631C + 1
 	.set sub_802881C, 0x0802881C + 1
 	.section .text.sub_8016D24, "ax", %progbits
-@ sub_8016D24 @ JP 0x08016D24 - region-different, gbadisasm descriptive asm (D23)
+@ CanUnitUse_unused @ JP 0x08016D24 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8016D24
+	.global CanUnitUse_unused
 	.thumb_func
-sub_8016D24:
+CanUnitUse_unused:
 	push {lr}
 	adds r3, r0, #0
 	adds r2, r1, #0
