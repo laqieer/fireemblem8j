@@ -3,11 +3,11 @@
 	.set UntriggerMapChange, 0x0800BE34 + 1
 	.set sub_802E468, 0x0802E468 + 1
 	.section .text.sub_800F4D0, "ax", %progbits
-@ sub_800F4D0 @ JP 0x0800F4D0 - region-different, gbadisasm descriptive asm (D23)
+@ Event27_MapChange @ JP 0x0800F4D0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800F4D0
+	.global Event27_MapChange
 	.thumb_func
-sub_800F4D0:
+Event27_MapChange:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

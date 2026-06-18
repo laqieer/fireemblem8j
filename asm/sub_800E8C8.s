@@ -7,11 +7,11 @@
 	.set sub_800E854, 0x0800E854 + 1
 	.set sub_8091544, 0x08091544 + 1
 	.section .text.sub_800E8C8, "ax", %progbits
-@ sub_800E8C8 @ JP 0x0800E8C8 - region-different, gbadisasm descriptive asm (D23)
+@ Event1E_ @ JP 0x0800E8C8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800E8C8
+	.global Event1E_
 	.thumb_func
-sub_800E8C8:
+Event1E_:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r1, [r4, #0x38]

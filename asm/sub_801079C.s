@@ -3,11 +3,11 @@
 	.set GetUnit, 0x08019108 + 1
 	.set sub_8011DF4, 0x08011DF4 + 1
 	.section .text.sub_801079C, "ax", %progbits
-@ sub_801079C @ JP 0x0801079C - region-different, gbadisasm descriptive asm (D23)
+@ Event39_ChangeAiScript @ JP 0x0801079C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801079C
+	.global Event39_ChangeAiScript
 	.thumb_func
-sub_801079C:
+Event39_ChangeAiScript:
 	push {r4, r5, r6, r7, lr}
 	ldr r2, [r0, #0x38]
 	ldrb r0, [r2]

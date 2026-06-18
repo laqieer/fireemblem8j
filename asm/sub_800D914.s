@@ -2,11 +2,11 @@
 	.set ClearFlag, 0x080860BC + 1
 	.set SetFlag, 0x080860A8 + 1
 	.section .text.sub_800D914, "ax", %progbits
-@ sub_800D914 @ JP 0x0800D914 - region-different, gbadisasm descriptive asm (D23)
+@ Event02_EvBitAndIdMod @ JP 0x0800D914 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800D914
+	.global Event02_EvBitAndIdMod
 	.thumb_func
-sub_800D914:
+Event02_EvBitAndIdMod:
 	push {r4, r5, lr}
 	adds r3, r0, #0
 	ldr r2, [r3, #0x38]

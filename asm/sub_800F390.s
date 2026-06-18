@@ -11,7 +11,7 @@
 	.set sub_8030E94, 0x08030E94 + 1
 	.set sub_80310F4, 0x080310F4 + 1
 	.section .text.sub_800F390, "ax", %progbits
-@ sub_800F390 @ JP 0x0800F390 - region-different, gbadisasm descriptive asm (D23)
+@ Event25_ChangeMap @ JP 0x0800F390 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
 	.global Event25_ChangeMap
 	.thumb_func

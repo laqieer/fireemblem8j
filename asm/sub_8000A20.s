@@ -21,11 +21,11 @@
 	.set sub_80C165C, 0x080C165C + 1
 	.set sub_80D636C, 0x080D636C + 1
 	.section .text.sub_8000A20, "ax", %progbits
-@ sub_8000A20 @ JP 0x08000A20 - region-different, gbadisasm descriptive asm (D23)
+@ AgbMain @ JP 0x08000A20 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8000A20
+	.global AgbMain
 	.thumb_func
-sub_8000A20:
+AgbMain:
 	push {r4, lr}
 	sub sp, #4
 	movs r2, #0

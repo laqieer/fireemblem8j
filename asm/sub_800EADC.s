@@ -5,11 +5,11 @@
 	.set sub_80B7344, 0x080B7344 + 1
 	.set sub_80B7398, 0x080B7398 + 1
 	.section .text.sub_800EADC, "ax", %progbits
-@ sub_800EADC @ JP 0x0800EADC - region-different, gbadisasm descriptive asm (D23)
+@ Event21_TextBg @ JP 0x0800EADC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800EADC
+	.global Event21_TextBg
 	.thumb_func
-sub_800EADC:
+Event21_TextBg:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

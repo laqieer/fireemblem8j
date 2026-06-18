@@ -2,11 +2,11 @@
 	.set EndGmAutoMuFor, 0x080C81F4 + 1
 	.set IsGmAutoMuActiveFor, 0x080C823C + 1
 	.section .text.sub_800CAF4, "ax", %progbits
-@ sub_800CAF4 @ JP 0x0800CAF4 - region-different, gbadisasm descriptive asm (D23)
+@ EventAC_WmUnitMoveWait @ JP 0x0800CAF4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800CAF4
+	.global EventAC_WmUnitMoveWait
 	.thumb_func
-sub_800CAF4:
+EventAC_WmUnitMoveWait:
 	push {r4, lr}
 	ldr r1, [r0, #0x38]
 	movs r2, #4

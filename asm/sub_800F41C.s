@@ -6,11 +6,11 @@
 	.set sub_8015E18, 0x08015E18 + 1
 	.set sub_8019914, 0x08019914 + 1
 	.section .text.sub_800F41C, "ax", %progbits
-@ sub_800F41C @ JP 0x0800F41C - region-different, gbadisasm descriptive asm (D23)
+@ Event26_CameraControl @ JP 0x0800F41C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800F41C
+	.global Event26_CameraControl
 	.thumb_func
-sub_800F41C:
+Event26_CameraControl:
 	push {r4, r5, r6, r7, lr}
 	adds r6, r0, #0
 	ldr r2, [r6, #0x38]

@@ -4,11 +4,11 @@
 	.set sub_80C3144, 0x080C3144 + 1
 	.set sub_80C818C, 0x080C818C + 1
 	.section .text.sub_800C994, "ax", %progbits
-@ sub_800C994 @ JP 0x0800C994 - region-different, gbadisasm descriptive asm (D23)
+@ EventA8_WmUnitMoveFree @ JP 0x0800C994 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800C994
+	.global EventA8_WmUnitMoveFree
 	.thumb_func
-sub_800C994:
+EventA8_WmUnitMoveFree:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -3,11 +3,11 @@
 	.set NewPopup_Simple, 0x08011560 + 1
 	.set sub_801153C, 0x0801153C + 1
 	.section .text.sub_8011814, "ax", %progbits
-@ sub_8011814 @ JP 0x08011814 - region-different, gbadisasm descriptive asm (D23)
+@ NewPopup_NewAlly @ JP 0x08011814 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8011814
+	.global NewPopup_NewAlly
 	.thumb_func
-sub_8011814:
+NewPopup_NewAlly:
 	push {r4, lr}
 	adds r4, r0, #0
 	lsls r0, r1, #0x18
