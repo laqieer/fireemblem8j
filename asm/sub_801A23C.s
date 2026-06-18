@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_801A23C, "ax", %progbits
-@ sub_801A23C @ JP 0x0801A23C - region-different, gbadisasm descriptive asm (D23)
+@ MapFloodCoreStepThumb @ JP 0x0801A23C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801A23C
+	.global MapFloodCoreStepThumb
 	.thumb_func
-sub_801A23C:
+MapFloodCoreStepThumb:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
