@@ -2,11 +2,11 @@
 	.set sub_8012CEC, 0x08012CEC + 1
 	.set EndEventEarthQuake, 0x08012D40 + 1
 	.section .text.sub_8010D9C, "ax", %progbits
-@ sub_8010D9C @ JP 0x08010D9C - region-different, gbadisasm descriptive asm (D23)
+@ Event42_EarthQuake @ JP 0x08010D9C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8010D9C
+	.global Event42_EarthQuake
 	.thumb_func
-sub_8010D9C:
+Event42_EarthQuake:
 	push {r4, r5, lr}
 	adds r2, r0, #0
 	ldr r0, [r2, #0x38]
