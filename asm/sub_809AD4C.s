@@ -5,11 +5,11 @@
 	.set sub_8004374, 0x08004374 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.section .text.sub_809AD4C, "ax", %progbits
-@ sub_809AD4C @ JP 0x0809AD4C - region-different, gbadisasm descriptive asm (D23)
+@ PutWmItemScreenPromptText @ JP 0x0809AD4C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809AD4C
+	.global PutWmItemScreenPromptText
 	.thumb_func
-sub_809AD4C:
+PutWmItemScreenPromptText:
 	push {r4, r5, r6, lr}
 	sub sp, #8
 	adds r6, r0, #0

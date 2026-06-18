@@ -49,11 +49,11 @@
 	.set sub_80B1F40, 0x080B1F40 + 1
 	.set sub_80D636C, 0x080D636C + 1
 	.section .text.sub_809A8F8, "ax", %progbits
-@ sub_809A8F8 @ JP 0x0809A8F8 - region-different, gbadisasm descriptive asm (D23)
+@ PrepItemScreen_SetupGfx @ JP 0x0809A8F8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809A8F8
+	.global PrepItemScreen_SetupGfx
 	.thumb_func
-sub_809A8F8:
+PrepItemScreen_SetupGfx:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

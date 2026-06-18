@@ -2,11 +2,11 @@
 	.set sub_8000D68, 0x08000D68 + 1
 	.set sub_8013008, 0x08013008 + 1
 	.section .text.sub_809AF64, "ax", %progbits
-@ sub_809AF64 @ JP 0x0809AF64 - region-different, gbadisasm descriptive asm (D23)
+@ PutImg_PrepPopupWindow @ JP 0x0809AF64 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809AF64
+	.global PutImg_PrepPopupWindow
 	.thumb_func
-sub_809AF64:
+PutImg_PrepPopupWindow:
 	push {r4, lr}
 	adds r2, r0, #0
 	adds r4, r1, #0

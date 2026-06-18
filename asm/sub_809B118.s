@@ -8,11 +8,11 @@
 	.set sub_80B1F84, 0x080B1F84 + 1
 	.set sub_80B1FBC, 0x080B1FBC + 1
 	.section .text.sub_809B118, "ax", %progbits
-@ sub_809B118 @ JP 0x0809B118 - region-different, gbadisasm descriptive asm (D23)
+@ PrepItemScreen_DpadKeyHandler @ JP 0x0809B118 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809B118
+	.global PrepItemScreen_DpadKeyHandler
 	.thumb_func
-sub_809B118:
+PrepItemScreen_DpadKeyHandler:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}
