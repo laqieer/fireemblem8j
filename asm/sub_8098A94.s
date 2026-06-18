@@ -3,11 +3,11 @@
 	.set __divsi3, 0x080D65F8 + 1
 	.set __modsi3, 0x080D6690 + 1
 	.section .text.sub_8098A94, "ax", %progbits
-@ sub_8098A94 @ JP 0x08098A94 - region-different, gbadisasm descriptive asm (D23)
+@ PutPrepChapterSprite_Tower @ JP 0x08098A94 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8098A94
+	.global PutPrepChapterSprite_Tower
 	.thumb_func
-sub_8098A94:
+PutPrepChapterSprite_Tower:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
