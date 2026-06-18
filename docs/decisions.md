@@ -4951,3 +4951,22 @@ UnitKakudaiMain (182/195), Event2C_LoadUnits, UnitAutolevelPenalty (was a LINK
 blocker). Spot-checked correct. Combined D119+D120 = +162 named in two iters; the
 mnemonic-stream family is the strongest NAMED lever (works on region-diff funcs that
 can never byte-match). Tool: /tmp/rename_sim.py.
+
+### D121 — rodata-in-gap carve cracks a big region-diff function (2026-06-18)
+PrepItemScreen_SetupGfx (924 B, autocarve NEAR 6/924) had two diff classes:
+(1) two InitText calls at JP array-index -1 vs US (`gPrepItemTexts[30]/[31]` ->
+`[29]/[30]`) — a JP source diff like the proc-label/msgid family; and (2) a
+`struct FaceVramEntry faceConfig[4] = {…}` LOCAL initializer whose compiler-emitted
+.rodata const the autocarve (text-only) left unplaced -> the literal pool held the
+unbound-placeholder 0x09000000 instead of the JP addr 0x081F55EC. KEY: that const's
+32 bytes are ALREADY in the ROM at 0x1F55EC, carried as anonymous gap data
+(frontier_df4_misc_lo gap21b) — verified byte-identical to {0x5800,6, 0x6800,7,
+0,0,0,0}. FIX (replicating the existing UnitListScreenSprites_Main precedent at
+0x1F555C): SPLIT the gap INCBIN around the const (gap21b 536B -> 128B + new gap21c
+376B) and add a carved_rom row mapping `src/PrepItemScreen_SetupGfx.o(.rodata)` ->
+0x1F55EC-0x1F560C. Byte-perfect, self-contained preserved (data still 100%).
+REUSABLE LEVER: autocarve NEARs whose only data diff is a 0x09000000 literal =
+an unplaced local-initializer .rodata const sitting in a carved gap -> split+place.
+matching-C 7365 -> 7366. (This iter also confirmed: the +163-name cascade unblocked
+LINK on UnitAutolevelPenalty/PidStatsAddSquaresMoved but those callers are region-
+different; naming is exhausted — 265 no-funclib-hint + 72 hint-but-<0.80-mnemonic-sim.)
