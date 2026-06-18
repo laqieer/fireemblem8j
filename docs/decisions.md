@@ -4791,3 +4791,14 @@ a residual collision -> auto-reverted, recoverable via smaller chunks). placehol
 still NAMEABLE (their identity is linker-proven). Source of confirmed names: `funclib_us_jp.tsv` JP-addr ∩
 `baseline_syms` aliases. Ground truth: matching-C 86.28% (7358) / named 81.79% (13363/16338) / self-contain
 100% / data 100%.
+
+## D114 addendum — naming lever continued: +65 recovery + 15 mnemonic-confirmed (named ->82.21%) (2026-06-18)
+Recovered the alias-lever collision-reverts with CHUNK=5 (skip-already-renamed): +65 of 80 (2 chunks still
+collide -> ~10 left, finer chunks). Then the NON-aliased funclib-hinted sub_ (no linker proof): confirm
+identity via MNEMONIC-SEQUENCE match (~/rename_confirmed.py: US-compile objdump mnemonics == JP asm mnemonics,
+EXACT -> it's the US func region-different in operands only). 309 hinted -> only **15 mnemonic-exact-
+confirmed** (most region-diff funcs differ in instruction sequence, not just operands -> NOT safely nameable;
+kept the strict exact gate to avoid wrong names). named 81.79->82.21% (+80 this iter; +311 over the 2 iters
+since D114). Remaining placeholders 2895 (~1687 asset-sheets = ceiling); the ~294 mnemonic-unconfirmed need a
+stronger signal (byte-close carve or callee-fingerprint) before naming. Ground truth: matching-C 86.28% /
+named 82.21% (13378/16273) / self-contain 100% / data 100%.
