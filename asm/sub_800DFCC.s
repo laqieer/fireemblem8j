@@ -1,11 +1,11 @@
 	.syntax unified
 	.set StartBgmExt, 0x08002434 + 1
 	.section .text.sub_800DFCC, "ax", %progbits
-@ sub_800DFCC @ JP 0x0800DFCC - region-different, gbadisasm descriptive asm (D23)
+@ Event12_StartBGM @ JP 0x0800DFCC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800DFCC
+	.global Event12_StartBGM
 	.thumb_func
-sub_800DFCC:
+Event12_StartBGM:
 	push {lr}
 	adds r2, r0, #0
 	ldrh r0, [r2, #0x3c]
