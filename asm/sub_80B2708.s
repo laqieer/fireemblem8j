@@ -1,11 +1,11 @@
 	.syntax unified
 	.set Proc_Find, 0x08002DEC + 1
 	.section .text.sub_80B2708, "ax", %progbits
-@ sub_80B2708 @ JP 0x080B2708 - region-different, gbadisasm descriptive asm (D23)
+@ SetSysBrownBoxWidth @ JP 0x080B2708 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B2708
+	.global SetSysBrownBoxWidth
 	.thumb_func
-sub_80B2708:
+SetSysBrownBoxWidth:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	lsls r1, r1, #0x18

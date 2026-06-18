@@ -1,11 +1,11 @@
 	.syntax unified
 	.set Proc_Find, 0x08002DEC + 1
 	.section .text.sub_80B3220, "ax", %progbits
-@ sub_80B3220 @ JP 0x080B3220 - region-different, gbadisasm descriptive asm (D23)
+@ BmBgfxSetLoopEN @ JP 0x080B3220 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B3220
+	.global BmBgfxSetLoopEN
 	.thumb_func
-sub_80B3220:
+BmBgfxSetLoopEN:
 	push {r4, lr}
 	lsls r0, r0, #0x18
 	asrs r4, r0, #0x18

@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80D63E0, "ax", %progbits
-@ sub_80D63E0 @ JP 0x080D63E0 - region-different, gbadisasm descriptive asm (D23)
+@ ReadSramFast_Core @ JP 0x080D63E0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D63E0
+	.global ReadSramFast_Core
 	.thumb_func
-sub_80D63E0:
+ReadSramFast_Core:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0

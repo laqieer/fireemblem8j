@@ -1,11 +1,11 @@
 	.syntax unified
 	.set ChangeBgm, 0x08002938 + 1
 	.section .text.sub_80B377C, "ax", %progbits
-@ sub_80B377C @ JP 0x080B377C - region-different, gbadisasm descriptive asm (D23)
+@ FadeOutPrepBgm @ JP 0x080B377C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B377C
+	.global FadeOutPrepBgm
 	.thumb_func
-sub_80B377C:
+FadeOutPrepBgm:
 	push {lr}
 	sub sp, #4
 	movs r2, #0x80

@@ -1,11 +1,11 @@
 	.syntax unified
 	.set Proc_StartBlocking, 0x08002C30 + 1
 	.section .text.sub_8099D84, "ax", %progbits
-@ sub_8099D84 @ JP 0x08099D84 - region-different, gbadisasm descriptive asm (D23)
+@ StartSallyCirProc @ JP 0x08099D84 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8099D84
+	.global StartSallyCirProc
 	.thumb_func
-sub_8099D84:
+StartSallyCirProc:
 	push {r4, lr}
 	adds r2, r0, #0
 	lsls r4, r1, #0x18

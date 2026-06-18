@@ -3,11 +3,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_80D0DB4, 0x080D0DB4 + 1
 	.section .text.sub_80D10E0, "ax", %progbits
-@ sub_80D10E0 @ JP 0x080D10E0 - region-different, gbadisasm descriptive asm (D23)
+@ GameIntroIntelligentSystemsFadeIN @ JP 0x080D10E0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D10E0
+	.global GameIntroIntelligentSystemsFadeIN
 	.thumb_func
-sub_80D10E0:
+GameIntroIntelligentSystemsFadeIN:
 	push {r4, lr}
 	sub sp, #4
 	adds r4, r0, #0
