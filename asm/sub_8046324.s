@@ -4,11 +4,11 @@
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.set sub_8043084, 0x08043084 + 1
 	.section .text.sub_8046324, "ax", %progbits
-@ sub_8046324 @ JP 0x08046324 - region-different, gbadisasm descriptive asm (D23)
+@ SioBat_FirstMoverRoulette @ JP 0x08046324 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8046324
+	.global SioBat_FirstMoverRoulette
 	.thumb_func
-sub_8046324:
+SioBat_FirstMoverRoulette:
 	push {r4, r5, r6, r7, lr}
 	adds r6, r0, #0
 	ldr r7, [r6, #0x2c]
