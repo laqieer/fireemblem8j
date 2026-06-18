@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80D65C4, 0x080D65C4 + 1
 	.section .text.sub_80D60E8, "ax", %progbits
-@ sub_80D60E8 @ JP 0x080D60E8 - region-different, gbadisasm descriptive asm (D23)
+@ ply_memacc @ JP 0x080D60E8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D60E8
+	.global ply_memacc
 	.thumb_func
-sub_80D60E8:
+ply_memacc:
 	push {r4, r5, r6, lr}
 	adds r4, r0, #0
 	adds r6, r1, #0
