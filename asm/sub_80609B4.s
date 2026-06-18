@@ -6,11 +6,11 @@
 	.set sub_805AF28, 0x0805AF28 + 1
 	.set sub_805B0B4, 0x0805B0B4 + 1
 	.section .text.sub_80609B4, "ax", %progbits
-@ sub_80609B4 @ JP 0x080609B4 - region-different, gbadisasm descriptive asm (D23)
+@ StartSpellAnimBolting @ JP 0x080609B4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80609B4
+	.global StartSpellAnimBolting
 	.thumb_func
-sub_80609B4:
+StartSpellAnimBolting:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	bl SpellFx_Begin
