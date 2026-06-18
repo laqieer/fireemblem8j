@@ -4857,3 +4857,17 @@ Reg-alloc NEARs (r0↔r1 swap on commutative ands, e.g. WriteSramFast/ReadSramFa
 Core 2/64) remain dead-ends (permuter territory), correctly reverted. The frontier
 is live: keep running autocarve batches + hand-decoding const/signature/proc-label
 NEARs. matching-C 7358 -> 7362 (86.28 -> 86.33%).
+
+### D116 — sign-ext (lsr↔asr) class characterized; widen-to-int sub-lever (2026-06-18)
+The autocarve sign-ext pre-skip (`carve_recipe` flags `lsls;asrs` param narrow as
+DEAD-END) is a heuristic. Built `scripts/autocarve_sx.py` (the `if r["deadend"]:`
+→ `if False:` variant, MUST live under scripts/ or ROOT resolves to "/") to get the
+real build verdicts. Two sub-classes:
+- WINNABLE — param-reassign+arithmetic: JP sign-extends an s8/s16 param once at
+  entry then uses it as int; US double-narrows. FIX = widen param to an int local
+  (`int hp = hpArg;`). GetHpBarRightTile carved byte-exact (matching-C 7364->7365).
+- DEAD-END — field-store: 1-byte `lsrs`->`asrs` on a param only `strb`'d to a struct
+  field (BmBgfxSetLoopEN, ConfigSysHandCursorShadowEnabled, SetSysBrownBoxWidth,
+  GmMu_0). No param-type NOR field-type signedness combo flips it (agbcc narrows by
+  USAGE = 8-bit store ⇒ lsrs). Genuine lsr↔asr dead-end. The winnable pattern is
+  rare; most sign-ext are field-store dead-ends — do not grind the whole class.
