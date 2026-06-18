@@ -8,11 +8,11 @@
 	.set sub_80976D0, 0x080976D0 + 1
 	.set sub_809773C, 0x0809773C + 1
 	.section .text.sub_8097A28, "ax", %progbits
-@ sub_8097A28 @ JP 0x08097A28 - region-different, gbadisasm descriptive asm (D23)
+@ SortPlayerUnitsForPrepScreen @ JP 0x08097A28 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8097A28
+	.global SortPlayerUnitsForPrepScreen
 	.thumb_func
-sub_8097A28:
+SortPlayerUnitsForPrepScreen:
 	push {r4, r5, r6, r7, lr}
 	bl sub_8012414
 	adds r7, r0, #0

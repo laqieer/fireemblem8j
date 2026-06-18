@@ -5,11 +5,11 @@
 	.set sub_8004374, 0x08004374 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.section .text.sub_80994E4, "ax", %progbits
-@ sub_80994E4 @ JP 0x080994E4 - region-different, gbadisasm descriptive asm (D23)
+@ SetPrepScreenMenuPosition @ JP 0x080994E4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80994E4
+	.global SetPrepScreenMenuPosition
 	.thumb_func
-sub_80994E4:
+SetPrepScreenMenuPosition:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8
