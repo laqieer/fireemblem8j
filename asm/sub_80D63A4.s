@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80D63A4, "ax", %progbits
-@ sub_80D63A4 @ JP 0x080D63A4 - region-different, gbadisasm descriptive asm (D23)
+@ RLUnCompVram @ JP 0x080D63A4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D63A4
+	.global RLUnCompVram
 	.thumb_func
-sub_80D63A4:
+RLUnCompVram:
 	svc #0x15
 	bx lr
 
