@@ -10,11 +10,11 @@
 	.set sub_80274D4, 0x080274D4 + 1
 	.set sub_80C1E74, 0x080C1E74 + 1
 	.section .text.sub_802758C, "ax", %progbits
-@ sub_802758C @ JP 0x0802758C - region-different, gbadisasm descriptive asm (D23)
+@ PutUnitSpriteIconsOam @ JP 0x0802758C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802758C
+	.global PutUnitSpriteIconsOam
 	.thumb_func
-sub_802758C:
+PutUnitSpriteIconsOam:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -3,11 +3,11 @@
 	.set MapAddInRange, 0x0801A798 + 1
 	.set sub_8018730, 0x08018730 + 1
 	.section .text.sub_801B2F4, "ax", %progbits
-@ sub_801B2F4 @ JP 0x0801B2F4 - region-different, gbadisasm descriptive asm (D23)
+@ GenerateUnitCompleteStaffRange @ JP 0x0801B2F4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801B2F4
+	.global GenerateUnitCompleteStaffRange
 	.thumb_func
-sub_801B2F4:
+GenerateUnitCompleteStaffRange:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

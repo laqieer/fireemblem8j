@@ -1,11 +1,11 @@
 	.syntax unified
 	.set Roll1RN, 0x08000C78 + 1
 	.section .text.sub_802A490, "ax", %progbits
-@ sub_802A490 @ JP 0x0802A490 - region-different, gbadisasm descriptive asm (D23)
+@ BattleRoll1RN @ JP 0x0802A490 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802A490
+	.global BattleRoll1RN
 	.thumb_func
-sub_802A490:
+BattleRoll1RN:
 	push {lr}
 	lsls r0, r0, #0x10
 	lsrs r3, r0, #0x10

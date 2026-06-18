@@ -1,11 +1,11 @@
 	.syntax unified
 	.set PidStatsSubFavval08, 0x080A9320 + 1
 	.section .text.sub_80184D4, "ax", %progbits
-@ sub_80184D4 @ JP 0x080184D4 - region-different, gbadisasm descriptive asm (D23)
+@ ClearActiveFactionGrayedStates @ JP 0x080184D4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80184D4
+	.global ClearActiveFactionGrayedStates
 	.thumb_func
-sub_80184D4:
+ClearActiveFactionGrayedStates:
 	push {r4, r5, r6, lr}
 	ldr r0, _0801855C @ =0x0202BCEC
 	ldrb r0, [r0, #0xf]

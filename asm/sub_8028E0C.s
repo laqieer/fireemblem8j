@@ -15,11 +15,11 @@
 	.set sub_8029E64, 0x08029E64 + 1
 	.set sub_804F610, 0x0804F610 + 1
 	.section .text.sub_8028E0C, "ax", %progbits
-@ sub_8028E0C @ JP 0x08028E0C - region-different, gbadisasm descriptive asm (D23)
+@ DoItemUse @ JP 0x08028E0C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8028E0C
+	.global DoItemUse
 	.thumb_func
-sub_8028E0C:
+DoItemUse:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0

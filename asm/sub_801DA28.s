@@ -2,11 +2,11 @@
 	.set LockGame, 0x08015384 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_801DA28, "ax", %progbits
-@ sub_801DA28 @ JP 0x0801DA28 - region-different, gbadisasm descriptive asm (D23)
+@ NewBMXFADE @ JP 0x0801DA28 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801DA28
+	.global NewBMXFADE
 	.thumb_func
-sub_801DA28:
+NewBMXFADE:
 	push {r4, lr}
 	adds r4, r0, #0
 	lsls r4, r4, #0x18

@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_802E3A8, "ax", %progbits
-@ sub_802E3A8 @ JP 0x0802E3A8 - region-different, gbadisasm descriptive asm (D23)
+@ RefreshAllLightRunes @ JP 0x0802E3A8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802E3A8
+	.global RefreshAllLightRunes
 	.thumb_func
-sub_802E3A8:
+RefreshAllLightRunes:
 	push {r4, lr}
 	ldr r2, _0802E3DC @ =0x0203A610
 	ldrb r0, [r2, #2]

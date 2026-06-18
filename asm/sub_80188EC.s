@@ -2,11 +2,11 @@
 	.set GetUnitMovementCost, 0x08018A60 + 1
 	.set memcpy, 0x080D6908 + 1
 	.section .text.sub_80188EC, "ax", %progbits
-@ sub_80188EC @ JP 0x080188EC - region-different, gbadisasm descriptive asm (D23)
+@ CanUnitMove @ JP 0x080188EC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80188EC
+	.global CanUnitMove
 	.thumb_func
-sub_80188EC:
+CanUnitMove:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

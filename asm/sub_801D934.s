@@ -3,11 +3,11 @@
 	.set SetMuMoveScript, 0x0807ABB4 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_801D934, "ax", %progbits
-@ sub_801D934 @ JP 0x0801D934 - region-different, gbadisasm descriptive asm (D23)
+@ Make6CKOIDOAMM @ JP 0x0801D934 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801D934
+	.global Make6CKOIDOAMM
 	.thumb_func
-sub_801D934:
+Make6CKOIDOAMM:
 	push {r4, r5, r6, r7, lr}
 	adds r6, r0, #0
 	adds r4, r1, #0

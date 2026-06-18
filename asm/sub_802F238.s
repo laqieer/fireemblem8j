@@ -10,11 +10,11 @@
 	.set sub_802CA5C, 0x0802CA5C + 1
 	.set sub_802CB8C, 0x0802CB8C + 1
 	.section .text.sub_802F238, "ax", %progbits
-@ sub_802F238 @ JP 0x0802F238 - region-different, gbadisasm descriptive asm (D23)
+@ ExecLatona @ JP 0x0802F238 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802F238
+	.global ExecLatona
 	.thumb_func
-sub_802F238:
+ExecLatona:
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
 	ldr r4, _0802F29C @ =0x0203A954

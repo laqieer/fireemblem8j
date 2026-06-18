@@ -2,11 +2,11 @@
 	.set GetItemIndex, 0x08017294 + 1
 	.set sub_8029150, 0x08029150 + 1
 	.section .text.sub_8028BB8, "ax", %progbits
-@ sub_8028BB8 @ JP 0x08028BB8 - region-different, gbadisasm descriptive asm (D23)
+@ GetItemCantUseMsgid @ JP 0x08028BB8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8028BB8
+	.global GetItemCantUseMsgid
 	.thumb_func
-sub_8028BB8:
+GetItemCantUseMsgid:
 	push {r4, r5, r6, lr}
 	adds r6, r1, #0
 	adds r0, r6, #0

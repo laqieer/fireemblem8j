@@ -1,11 +1,11 @@
 	.syntax unified
 	.set GetUnit, 0x08019108 + 1
 	.section .text.sub_8017178, "ax", %progbits
-@ sub_8017178 @ JP 0x08017178 - region-different, gbadisasm descriptive asm (D23)
+@ GetUnitItemCostSum @ JP 0x08017178 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8017178
+	.global GetUnitItemCostSum
 	.thumb_func
-sub_8017178:
+GetUnitItemCostSum:
 	push {r4, r5, r6, r7, lr}
 	movs r5, #0
 	movs r4, #1

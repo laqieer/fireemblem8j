@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_8028768, "ax", %progbits
-@ sub_8028768 @ JP 0x08028768 - region-different, gbadisasm descriptive asm (D23)
+@ SwapUnitStats @ JP 0x08028768 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8028768
+	.global SwapUnitStats
 	.thumb_func
-sub_8028768:
+SwapUnitStats:
 	push {lr}
 	adds r2, r0, #0
 	adds r3, r1, #0

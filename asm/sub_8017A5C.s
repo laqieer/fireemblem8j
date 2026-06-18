@@ -4,11 +4,11 @@
 	.set UnitAddItem, 0x080176F0 + 1
 	.set sub_807C44C, 0x0807C44C + 1
 	.section .text.sub_8017A5C, "ax", %progbits
-@ sub_8017A5C @ JP 0x08017A5C - region-different, gbadisasm descriptive asm (D23)
+@ UnitInitFromDefinition @ JP 0x08017A5C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8017A5C
+	.global UnitInitFromDefinition
 	.thumb_func
-sub_8017A5C:
+UnitInitFromDefinition:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r6, r1, #0

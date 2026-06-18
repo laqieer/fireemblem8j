@@ -2,11 +2,11 @@
 	.set GenerateExtendedMovementMap, 0x0801A138 + 1
 	.set GetUnitMovementCost, 0x08018A60 + 1
 	.section .text.sub_80181F4, "ax", %progbits
-@ sub_80181F4 @ JP 0x080181F4 - region-different, gbadisasm descriptive asm (D23)
+@ UnitGetDeathDropLocation @ JP 0x080181F4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80181F4
+	.global UnitGetDeathDropLocation
 	.thumb_func
-sub_80181F4:
+UnitGetDeathDropLocation:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

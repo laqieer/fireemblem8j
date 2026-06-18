@@ -2,11 +2,11 @@
 	.set MapAddInRange, 0x0801A798 + 1
 	.set sub_8018730, 0x08018730 + 1
 	.section .text.sub_801B13C, "ax", %progbits
-@ sub_801B13C @ JP 0x0801B13C - region-different, gbadisasm descriptive asm (D23)
+@ GenerateUnitStandingReachRange @ JP 0x0801B13C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801B13C
+	.global GenerateUnitStandingReachRange
 	.thumb_func
-sub_801B13C:
+GenerateUnitStandingReachRange:
 	push {r4, r5, lr}
 	adds r2, r0, #0
 	movs r4, #0x10

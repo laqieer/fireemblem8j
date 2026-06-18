@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_803144C, 0x0803144C + 1
 	.section .text.sub_8017124, "ax", %progbits
-@ sub_8017124 @ JP 0x08017124 - region-different, gbadisasm descriptive asm (D23)
+@ GetConvoyItemCostSum @ JP 0x08017124 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8017124
+	.global GetConvoyItemCostSum
 	.thumb_func
-sub_8017124:
+GetConvoyItemCostSum:
 	push {r4, r5, r6, r7, lr}
 	movs r6, #0
 	bl sub_803144C

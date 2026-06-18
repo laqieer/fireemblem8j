@@ -6,11 +6,11 @@
 	.set sub_8022CFC, 0x08022CFC + 1
 	.set sub_802881C, 0x0802881C + 1
 	.section .text.sub_8023318, "ax", %progbits
-@ sub_8023318 @ JP 0x08023318 - region-different, gbadisasm descriptive asm (D23)
+@ ItemSelectMenu_TextDraw @ JP 0x08023318 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8023318
+	.global ItemSelectMenu_TextDraw
 	.thumb_func
-sub_8023318:
+ItemSelectMenu_TextDraw:
 	push {r4, r5, r6, r7, lr}
 	adds r6, r0, #0
 	adds r4, r1, #0

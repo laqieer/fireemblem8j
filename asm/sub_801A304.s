@@ -2,11 +2,11 @@
 	.set NextRN_N, 0x08000C58 + 1
 	.set RevertMovementScript, 0x0801A4D0 + 1
 	.section .text.sub_801A304, "ax", %progbits
-@ sub_801A304 @ JP 0x0801A304 - region-different, gbadisasm descriptive asm (D23)
+@ GenerateBestMovementScript @ JP 0x0801A304 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801A304
+	.global GenerateBestMovementScript
 	.thumb_func
-sub_801A304:
+GenerateBestMovementScript:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

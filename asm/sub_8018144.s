@@ -3,11 +3,11 @@
 	.set sub_801759C, 0x0801759C + 1
 	.set sub_80175C4, 0x080175C4 + 1
 	.section .text.sub_8018144, "ax", %progbits
-@ sub_8018144 @ JP 0x08018144 - region-different, gbadisasm descriptive asm (D23)
+@ UnitChangeFaction @ JP 0x08018144 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8018144
+	.global UnitChangeFaction
 	.thumb_func
-sub_8018144:
+UnitChangeFaction:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	adds r6, r1, #0

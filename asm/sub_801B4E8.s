@@ -8,11 +8,11 @@
 	.set sub_801B2F4, 0x0801B2F4 + 1
 	.set sub_801B620, 0x0801B620 + 1
 	.section .text.sub_801B4E8, "ax", %progbits
-@ sub_801B4E8 @ JP 0x0801B4E8 - region-different, gbadisasm descriptive asm (D23)
+@ GenerateDangerZoneRange @ JP 0x0801B4E8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801B4E8
+	.global GenerateDangerZoneRange
 	.thumb_func
-sub_801B4E8:
+GenerateDangerZoneRange:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

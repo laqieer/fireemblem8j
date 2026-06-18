@@ -8,11 +8,11 @@
 	.set sub_802A69C, 0x0802A69C + 1
 	.set sub_802A8C8, 0x0802A8C8 + 1
 	.section .text.sub_802A38C, "ax", %progbits
-@ sub_802A38C @ JP 0x0802A38C - region-different, gbadisasm descriptive asm (D23)
+@ BattleGenerateUiStats @ JP 0x0802A38C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802A38C
+	.global BattleGenerateUiStats
 	.thumb_func
-sub_802A38C:
+BattleGenerateUiStats:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x48
 	adds r7, r0, #0

@@ -2,11 +2,11 @@
 	.set GetUnit, 0x08019108 + 1
 	.set memcpy, 0x080D6908 + 1
 	.section .text.sub_802B03C, "ax", %progbits
-@ sub_802B03C @ JP 0x0802B03C - region-different, gbadisasm descriptive asm (D23)
+@ BattleCheckTriangleAttack @ JP 0x0802B03C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802B03C
+	.global BattleCheckTriangleAttack
 	.thumb_func
-sub_802B03C:
+BattleCheckTriangleAttack:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

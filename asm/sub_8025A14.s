@@ -4,11 +4,11 @@
 	.set GetUnit, 0x08019108 + 1
 	.set InitTargets, 0x08050618 + 1
 	.section .text.sub_8025A14, "ax", %progbits
-@ sub_8025A14 @ JP 0x08025A14 - region-different, gbadisasm descriptive asm (D23)
+@ MakeGorgonEggHatchTargetList @ JP 0x08025A14 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8025A14
+	.global MakeGorgonEggHatchTargetList
 	.thumb_func
-sub_8025A14:
+MakeGorgonEggHatchTargetList:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

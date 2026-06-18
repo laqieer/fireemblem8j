@@ -5,11 +5,11 @@
 	.set MapAddInRange, 0x0801A798 + 1
 	.set sub_8037A24, 0x08037A24 + 1
 	.section .text.sub_801A998, "ax", %progbits
-@ sub_801A998 @ JP 0x0801A998 - region-different, gbadisasm descriptive asm (D23)
+@ GenerateUnitCompleteAttackRange @ JP 0x0801A998 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801A998
+	.global GenerateUnitCompleteAttackRange
 	.thumb_func
-sub_801A998:
+GenerateUnitCompleteAttackRange:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

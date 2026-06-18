@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8018EC4, 0x08018EC4 + 1
 	.section .text.sub_8016D60, "ax", %progbits
-@ sub_8016D60 @ JP 0x08016D60 - region-different, gbadisasm descriptive asm (D23)
+@ GetUnitItemHealAmount @ JP 0x08016D60 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8016D60
+	.global GetUnitItemHealAmount
 	.thumb_func
-sub_8016D60:
+GetUnitItemHealAmount:
 	push {r4, lr}
 	adds r3, r0, #0
 	adds r2, r1, #0

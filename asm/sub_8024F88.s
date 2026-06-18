@@ -2,11 +2,11 @@
 	.set InitTargets, 0x08050618 + 1
 	.set sub_8024EC8, 0x08024EC8 + 1
 	.section .text.sub_8024F88, "ax", %progbits
-@ sub_8024F88 @ JP 0x08024F88 - region-different, gbadisasm descriptive asm (D23)
+@ ForEachPosAtSinglePosition @ JP 0x08024F88 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8024F88
+	.global ForEachPosAtSinglePosition
 	.thumb_func
-sub_8024F88:
+ForEachPosAtSinglePosition:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

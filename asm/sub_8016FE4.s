@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_802881C, 0x0802881C + 1
 	.section .text.sub_8016FE4, "ax", %progbits
-@ sub_8016FE4 @ JP 0x08016FE4 - region-different, gbadisasm descriptive asm (D23)
+@ GetUnitItemUseReachBits @ JP 0x08016FE4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8016FE4
+	.global GetUnitItemUseReachBits
 	.thumb_func
-sub_8016FE4:
+GetUnitItemUseReachBits:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	movs r6, #0

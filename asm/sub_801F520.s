@@ -2,11 +2,11 @@
 	.set Proc_StartBlocking, 0x08002C30 + 1
 	.set sub_802EAC4, 0x0802EAC4 + 1
 	.section .text.sub_801F520, "ax", %progbits
-@ sub_801F520 @ JP 0x0801F520 - region-different, gbadisasm descriptive asm (D23)
+@ StartShowMapChangeAnim @ JP 0x0801F520 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801F520
+	.global StartShowMapChangeAnim
 	.thumb_func
-sub_801F520:
+StartShowMapChangeAnim:
 	push {r4, r5, lr}
 	adds r1, r0, #0
 	adds r4, r2, #0

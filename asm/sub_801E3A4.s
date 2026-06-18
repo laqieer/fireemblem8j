@@ -15,11 +15,11 @@
 	.set sub_802A38C, 0x0802A38C + 1
 	.set sub_804F0EC, 0x0804F0EC + 1
 	.section .text.sub_801E3A4, "ax", %progbits
-@ sub_801E3A4 @ JP 0x0801E3A4 - region-different, gbadisasm descriptive asm (D23)
+@ UpdateMenuItemPanel @ JP 0x0801E3A4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801E3A4
+	.global UpdateMenuItemPanel
 	.thumb_func
-sub_801E3A4:
+UpdateMenuItemPanel:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

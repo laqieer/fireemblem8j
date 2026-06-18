@@ -10,11 +10,11 @@
 	.set sub_802AB88, 0x0802AB88 + 1
 	.set sub_802ACC4, 0x0802ACC4 + 1
 	.section .text.sub_802A8C8, "ax", %progbits
-@ sub_802A8C8 @ JP 0x0802A8C8 - region-different, gbadisasm descriptive asm (D23)
+@ ComputeBattleUnitStats @ JP 0x0802A8C8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802A8C8
+	.global ComputeBattleUnitStats
 	.thumb_func
-sub_802A8C8:
+ComputeBattleUnitStats:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0

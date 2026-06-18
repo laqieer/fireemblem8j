@@ -4,11 +4,11 @@
 	.set sub_80181B0, 0x080181B0 + 1
 	.set sub_80A9260, 0x080A9260 + 1
 	.section .text.sub_8018454, "ax", %progbits
-@ sub_8018454 @ JP 0x08018454 - region-different, gbadisasm descriptive asm (D23)
+@ MoveActiveUnit @ JP 0x08018454 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8018454
+	.global MoveActiveUnit
 	.thumb_func
-sub_8018454:
+MoveActiveUnit:
 	push {r4, r5, r6, lr}
 	ldr r6, _080184CC @ =0x03004DF0
 	ldr r2, [r6]

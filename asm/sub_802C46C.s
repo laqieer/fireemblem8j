@@ -3,11 +3,11 @@
 	.set ModifyUnitSpecialExp, 0x0802C428 + 1
 	.set sub_802C2B0, 0x0802C2B0 + 1
 	.section .text.sub_802C46C, "ax", %progbits
-@ sub_802C46C @ JP 0x0802C46C - region-different, gbadisasm descriptive asm (D23)
+@ GetBattleUnitExpGain @ JP 0x0802C46C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802C46C
+	.global GetBattleUnitExpGain
 	.thumb_func
-sub_802C46C:
+GetBattleUnitExpGain:
 	push {r4, r5, lr}
 	sub sp, #4
 	adds r4, r0, #0

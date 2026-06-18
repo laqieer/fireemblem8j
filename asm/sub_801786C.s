@@ -19,11 +19,11 @@
 	.set sub_8017E7C, 0x08017E7C + 1
 	.set sub_807A710, 0x0807A710 + 1
 	.section .text.sub_801786C, "ax", %progbits
-@ sub_801786C @ JP 0x0801786C - region-different, gbadisasm descriptive asm (D23)
+@ LoadUnit @ JP 0x0801786C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801786C
+	.global LoadUnit
 	.thumb_func
-sub_801786C:
+LoadUnit:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0x14
 	adds r4, r0, #0

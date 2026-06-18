@@ -7,11 +7,11 @@
 	.set sub_802B2FC, 0x0802B2FC + 1
 	.set sub_802B328, 0x0802B328 + 1
 	.section .text.sub_802B344, "ax", %progbits
-@ sub_802B344 @ JP 0x0802B344 - region-different, gbadisasm descriptive asm (D23)
+@ BattleGenerateHitAttributes @ JP 0x0802B344 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802B344
+	.global BattleGenerateHitAttributes
 	.thumb_func
-sub_802B344:
+BattleGenerateHitAttributes:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

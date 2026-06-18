@@ -9,11 +9,11 @@
 	.set sub_802CA5C, 0x0802CA5C + 1
 	.set sub_802CB8C, 0x0802CB8C + 1
 	.section .text.sub_802F08C, "ax", %progbits
-@ sub_802F08C @ JP 0x0802F08C - region-different, gbadisasm descriptive asm (D23)
+@ ExecFortify @ JP 0x0802F08C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802F08C
+	.global ExecFortify
 	.thumb_func
-sub_802F08C:
+ExecFortify:
 	push {r4, r5, r6, r7, lr}
 	adds r7, r0, #0
 	ldr r4, _0802F100 @ =0x0203A954

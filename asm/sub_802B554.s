@@ -3,11 +3,11 @@
 	.set GetItemWeaponEffect, 0x080174CC + 1
 	.set sub_802A490, 0x0802A490 + 1
 	.section .text.sub_802B554, "ax", %progbits
-@ sub_802B554 @ JP 0x0802B554 - region-different, gbadisasm descriptive asm (D23)
+@ BattleGenerateHitEffects @ JP 0x0802B554 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_802B554
+	.global BattleGenerateHitEffects
 	.thumb_func
-sub_802B554:
+BattleGenerateHitEffects:
 	push {r4, r5, r6, r7, lr}
 	adds r5, r0, #0
 	adds r4, r1, #0

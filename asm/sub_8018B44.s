@@ -3,11 +3,11 @@
 	.set sub_8018DC8, 0x08018DC8 + 1
 	.set sub_8087750, 0x08087750 + 1
 	.section .text.sub_8018B44, "ax", %progbits
-@ sub_8018B44 @ JP 0x08018B44 - region-different, gbadisasm descriptive asm (D23)
+@ LoadUnitPrepScreenPositions @ JP 0x08018B44 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8018B44
+	.global LoadUnitPrepScreenPositions
 	.thumb_func
-sub_8018B44:
+LoadUnitPrepScreenPositions:
 	push {r4, lr}
 	bl sub_8087750
 	bl sub_8018DC8

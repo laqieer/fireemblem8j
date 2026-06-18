@@ -3,11 +3,11 @@
 	.set sub_801759C, 0x0801759C + 1
 	.set sub_8027144, 0x08027144 + 1
 	.section .text.sub_8018BCC, "ax", %progbits
-@ sub_8018BCC @ JP 0x08018BCC - region-different, gbadisasm descriptive asm (D23)
+@ ClearTemporaryUnits @ JP 0x08018BCC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8018BCC
+	.global ClearTemporaryUnits
 	.thumb_func
-sub_8018BCC:
+ClearTemporaryUnits:
 	push {r4, r5, lr}
 	movs r4, #1
 	ldr r5, _08018C58 @ =0x085C2A50
