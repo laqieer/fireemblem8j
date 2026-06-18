@@ -4936,3 +4936,18 @@ This is the strongest NAMED lever found; supersedes the rename_confirmed.py
 mnemonic-EXACT (same-length) check which missed all the region-diff-length ones.
 Byte-neutral (jp_syms.s provides the sub_ address symbol for callers). matching-C
 unchanged (naming-only). Tool: /tmp/rename_prefix2.py.
+
+### D120 — mnemonic-SIMILARITY naming: +90 (named 83.90 -> 84.46%) (2026-06-18)
+Generalized D119 from PREFIX to whole-sequence SIMILARITY. Region-different funcs
+that diverge in the MIDDLE/END (not just prologue) still align highly to their
+funclib-hinted US function. For each placeholder sub_ (not already prefix-caught)
+with funclib hint H: `difflib.SequenceMatcher(JP_mnemonics, US_H_mnemonics)` from
+the US ELF; CONFIRM if ratio >= 0.80 AND matched-blocks >= 20 (funclib positional +
+>=80% instruction-stream alignment = 2 signals). 91 candidates after the same
+collision-guard (H not already .global/baseline-alias/carved-src) + name-uniqueness;
++90 landed, only 1 SKIP (this batch had far fewer collisions than the prefix batch).
+Examples: TornOutUnitSprite (340/345 matched), OpAnimTitleFlyInSeg7 (258/274),
+UnitKakudaiMain (182/195), Event2C_LoadUnits, UnitAutolevelPenalty (was a LINK
+blocker). Spot-checked correct. Combined D119+D120 = +162 named in two iters; the
+mnemonic-stream family is the strongest NAMED lever (works on region-diff funcs that
+can never byte-match). Tool: /tmp/rename_sim.py.
