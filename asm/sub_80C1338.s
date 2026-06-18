@@ -5,11 +5,11 @@
 	.set sub_8003F28, 0x08003F28 + 1
 	.set sub_80D4178, 0x080D4178 + 1
 	.section .text.sub_80C1338, "ax", %progbits
-@ sub_80C1338 @ JP 0x080C1338 - region-different, gbadisasm descriptive asm (D23)
+@ WMMenu_OnGuideDraw @ JP 0x080C1338 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C1338
+	.global WMMenu_OnGuideDraw
 	.thumb_func
-sub_80C1338:
+WMMenu_OnGuideDraw:
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	adds r5, r1, #0
