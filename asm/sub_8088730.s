@@ -2,11 +2,11 @@
 	.set GetUnit, 0x08019108 + 1
 	.set sub_801759C, 0x0801759C + 1
 	.section .text.sub_8088730, "ax", %progbits
-@ sub_8088730 @ JP 0x08088730 - region-different, gbadisasm descriptive asm (D23)
+@ HandleCh5xUnits_End @ JP 0x08088730 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8088730
+	.global HandleCh5xUnits_End
 	.thumb_func
-sub_8088730:
+HandleCh5xUnits_End:
 	push {r4, lr}
 	movs r4, #1
 _08088734:
