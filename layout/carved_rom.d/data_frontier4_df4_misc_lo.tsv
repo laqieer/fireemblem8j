@@ -29,4 +29,6 @@
 1EC9E0	1EE2D8	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap20)	df4_misc_lo region-diff data (6392 B, long-tail gap)
 1F4F60	1F555C	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap21a)	gap split
 1F555C	1F556C	src/UnitListScreenSprites_Main.o(.rodata)	UnitListScreenSprites rodata
-1F556C	1F5784	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap21b)	gap
+1F556C	1F55EC	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap21b)	gap
+1F55EC	1F560C	src/PrepItemScreen_SetupGfx.o(.rodata)	PrepItemScreen_SetupGfx faceConfig rodata
+1F560C	1F5784	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap21c)	gap
