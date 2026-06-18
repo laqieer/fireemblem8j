@@ -2,11 +2,11 @@
 	.set sub_8012700, 0x08012700 + 1
 	.set sub_8087750, 0x08087750 + 1
 	.section .text.sub_8018AC4, "ax", %progbits
-@ sub_8018AC4 @ JP 0x08018AC4 - region-different, gbadisasm descriptive asm (D23)
+@ UpdatePrevDeployStates @ JP 0x08018AC4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8018AC4
+	.global UpdatePrevDeployStates
 	.thumb_func
-sub_8018AC4:
+UpdatePrevDeployStates:
 	push {r4, r5, lr}
 	movs r3, #1
 	ldr r5, _08018AF4 @ =0x0202BCEC
