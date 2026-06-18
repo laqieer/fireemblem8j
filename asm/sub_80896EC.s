@@ -11,11 +11,11 @@
 	.set sub_8016A68, 0x08016A68 + 1
 	.set sub_80890BC, 0x080890BC + 1
 	.section .text.sub_80896EC, "ax", %progbits
-@ sub_80896EC @ JP 0x080896EC - region-different, gbadisasm descriptive asm (D23)
+@ DisplayPage1 @ JP 0x080896EC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80896EC
+	.global DisplayPage1
 	.thumb_func
-sub_80896EC:
+DisplayPage1:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

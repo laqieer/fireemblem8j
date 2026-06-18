@@ -9,11 +9,11 @@
 	.set sub_80871B4, 0x080871B4 + 1
 	.set sub_80C1E74, 0x080C1E74 + 1
 	.section .text.sub_8086604, "ax", %progbits
-@ sub_8086604 @ JP 0x08086604 - region-different, gbadisasm descriptive asm (D23)
+@ CheckForWaitEvents @ JP 0x08086604 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8086604
+	.global CheckForWaitEvents
 	.thumb_func
-sub_8086604:
+CheckForWaitEvents:
 	push {r4, lr}
 	sub sp, #0x1c
 	bl sub_80871B4

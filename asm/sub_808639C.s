@@ -14,11 +14,11 @@
 	.set sub_8086870, 0x08086870 + 1
 	.set sub_80C1E74, 0x080C1E74 + 1
 	.section .text.sub_808639C, "ax", %progbits
-@ sub_808639C @ JP 0x0808639C - region-different, gbadisasm descriptive asm (D23)
+@ StartAvailableTileEvent @ JP 0x0808639C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_808639C
+	.global StartAvailableTileEvent
 	.thumb_func
-sub_808639C:
+StartAvailableTileEvent:
 	push {r4, r5, lr}
 	sub sp, #0x1c
 	lsls r0, r0, #0x18

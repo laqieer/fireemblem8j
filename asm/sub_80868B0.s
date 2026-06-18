@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80868B0, "ax", %progbits
-@ sub_80868B0 @ JP 0x080868B0 - region-different, gbadisasm descriptive asm (D23)
+@ GetEventTriggerId @ JP 0x080868B0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80868B0
+	.global GetEventTriggerId
 	.thumb_func
-sub_80868B0:
+GetEventTriggerId:
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	ldr r0, _080868D8 @ =0x03001C78
