@@ -4871,3 +4871,25 @@ real build verdicts. Two sub-classes:
   GmMu_0). No param-type NOR field-type signedness combo flips it (agbcc narrows by
   USAGE = 8-bit store ⇒ lsrs). Genuine lsr↔asr dead-end. The winnable pattern is
   rare; most sign-ext are field-store dead-ends — do not grind the whole class.
+
+### D117 — automated matching-C levers exhausted this pass; permuter on the hard frontier (2026-06-18)
+Switched off the autocarve sweep (per anti-stall) and probed the matching-C
+frontier with FIVE distinct methods; all at ceiling this iteration:
+- autocarve region-same MATCH: 0 in the untested baseline-bound tail (mined).
+- autocarve NEAR: only field-store lsr↔asr dead-ends (0e→16, agbcc narrows by
+  usage; no param/field signedness combo flips it) — see D116.
+- region-diff hand-decode: ExecJunaFruitItem (11/112) decoded — JP uses msgid
+  0x81D where US has GetStringFromIndex(0x1E) (D81 class); but a residual r5↔r6
+  reg-alloc swap (unit/itemId) blocks the byte-match. Imported into the permuter
+  (nonmatchings/ExecJunaFruitItem) and launched detached; base score 35 → stuck
+  at 15 (the &gActionData-temp permutation helps but randomization can't flip the
+  core reg-alloc). Still running.
+- const_diff_carve --batch: 0 valid (remaining FAR candidates skip on LEN/CF:agbcc/
+  codegen; the GiveSelection_OnInit "candidate" was a bad funclib addr — 0x24760 is
+  already TalkSupportSelection_OnInit).
+- naming re-check: the 306 "aliased sub_ placeholders" are ALREADY renamed (their
+  .global is the US name; the file is just still named sub_<addr>.s) — naming floored.
+Conclusion: the reliable automated veins (region-same carve, const-only-diff,
+aliased/mnemonic/callee naming) are mined. Remaining matching-C = genuine per-function
+hand-decomp of reg-alloc/codegen-shape dead-ends (permuter-assisted, slow, low hit-rate)
++ larger region-different logic. Not the D96 "proven-unreachable" bar; do NOT loop-abort.
