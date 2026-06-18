@@ -5,11 +5,11 @@
 	.set sub_805AF28, 0x0805AF28 + 1
 	.set sub_805B0B4, 0x0805B0B4 + 1
 	.section .text.sub_805E164, "ax", %progbits
-@ sub_805E164 @ JP 0x0805E164 - region-different, gbadisasm descriptive asm (D23)
+@ StartSpellAnimArrow @ JP 0x0805E164 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805E164
+	.global StartSpellAnimArrow
 	.thumb_func
-sub_805E164:
+StartSpellAnimArrow:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	bl SpellFx_Begin
