@@ -1,11 +1,11 @@
 	.syntax unified
 	.set NewPopup_Simple, 0x08011560 + 1
 	.section .text.sub_801183C, "ax", %progbits
-@ sub_801183C @ JP 0x0801183C - region-different, gbadisasm descriptive asm (D23)
+@ NewPopup_VerySimple @ JP 0x0801183C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801183C
+	.global NewPopup_VerySimple
 	.thumb_func
-sub_801183C:
+NewPopup_VerySimple:
 	push {r4, r5, lr}
 	adds r5, r0, #0
 	adds r3, r2, #0
