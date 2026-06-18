@@ -7,11 +7,11 @@
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.set sub_804E5A0, 0x0804E5A0 + 1
 	.section .text.sub_804504C, "ax", %progbits
-@ sub_804504C @ JP 0x0804504C - region-different, gbadisasm descriptive asm (D23)
+@ NameSelect_DrawName @ JP 0x0804504C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_804504C
+	.global NameSelect_DrawName
 	.thumb_func
-sub_804504C:
+NameSelect_DrawName:
 	push {r4, lr}
 	adds r0, #0x3b
 	movs r1, #1

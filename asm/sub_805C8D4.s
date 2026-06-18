@@ -2,11 +2,11 @@
 	.set GetAnimAnotherSide, 0x0805B058 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_805C8D4, "ax", %progbits
-@ sub_805C8D4 @ JP 0x0805C8D4 - region-different, gbadisasm descriptive asm (D23)
+@ NewEfxCircleWIN @ JP 0x0805C8D4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805C8D4
+	.global NewEfxCircleWIN
 	.thumb_func
-sub_805C8D4:
+NewEfxCircleWIN:
 	push {r4, r5, r6, lr}
 	mov r6, sl
 	mov r5, sb
