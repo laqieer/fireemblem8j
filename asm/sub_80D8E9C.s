@@ -4,11 +4,11 @@
 	.set nullsub_7, 0x080D9960 + 1
 	.set nullsub_8, 0x080D9964 + 1
 	.section .text.sub_80D8E9C, "ax", %progbits
-@ sub_80D8E9C @ JP 0x080D8E9C - region-different, gbadisasm descriptive asm (D23)
+@ _malloc_trim_r @ JP 0x080D8E9C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D8E9C
+	.global _malloc_trim_r
 	.thumb_func
-sub_80D8E9C:
+_malloc_trim_r:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

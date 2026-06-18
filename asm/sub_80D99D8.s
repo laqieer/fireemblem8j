@@ -3,11 +3,11 @@
 	.set _Bfree, 0x080D99C0 + 1
 	.set memcpy, 0x080D6908 + 1
 	.section .text.sub_80D99D8, "ax", %progbits
-@ sub_80D99D8 @ JP 0x080D99D8 - region-different, gbadisasm descriptive asm (D23)
+@ _multadd @ JP 0x080D99D8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D99D8
+	.global _multadd
 	.thumb_func
-sub_80D99D8:
+_multadd:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

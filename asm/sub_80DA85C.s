@@ -2,11 +2,11 @@
 	.set _malloc_r, 0x080D946C + 1
 	.set memset, 0x080D6968 + 1
 	.section .text.sub_80DA85C, "ax", %progbits
-@ sub_80DA85C @ JP 0x080DA85C - region-different, gbadisasm descriptive asm (D23)
+@ _calloc_r @ JP 0x080DA85C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80DA85C
+	.global _calloc_r
 	.thumb_func
-sub_80DA85C:
+_calloc_r:
 	push {r4, lr}
 	muls r1, r2, r1
 	bl _malloc_r

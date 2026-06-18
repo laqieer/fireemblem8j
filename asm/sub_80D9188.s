@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_80D65DC, 0x080D65DC + 1
 	.section .text.sub_80D9188, "ax", %progbits
-@ sub_80D9188 @ JP 0x080D9188 - region-different, gbadisasm descriptive asm (D23)
+@ _fwalk @ JP 0x080D9188 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D9188
+	.global _fwalk
 	.thumb_func
-sub_80D9188:
+_fwalk:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

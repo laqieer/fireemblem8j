@@ -2,11 +2,11 @@
 	.set __mcmp, 0x080D9E88 + 1
 	.set __udivsi3, 0x080D67D0 + 1
 	.section .text.sub_80D7C98, "ax", %progbits
-@ sub_80D7C98 @ JP 0x080D7C98 - region-different, gbadisasm descriptive asm (D23)
+@ quorem @ JP 0x080D7C98 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80D7C98
+	.global quorem
 	.thumb_func
-sub_80D7C98:
+quorem:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
