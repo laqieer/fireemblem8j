@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_8065278, "ax", %progbits
-@ sub_8065278 @ JP 0x08065278 - region-different, gbadisasm descriptive asm (D23)
+@ efxLunaOBJ_Loop_C @ JP 0x08065278 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8065278
+	.global efxLunaOBJ_Loop_C
 	.thumb_func
-sub_8065278:
+efxLunaOBJ_Loop_C:
 	push {r4, r5, r6, r7, lr}
 	adds r4, r0, #0
 	ldr r5, [r4, #0x60]
