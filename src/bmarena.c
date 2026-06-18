@@ -284,3 +284,33 @@ s8 ArenaIsUnitAllowed(struct Unit* unit) {
 
     return 1;
 }
+
+void ArenaSetFallbackWeaponForUnit(struct Unit* unit, u16* pItem) {
+
+    int i;
+
+    u8 arenaWeapons[] = {
+        [ITYPE_SWORD] = ITEM_SWORD_IRON,
+        [ITYPE_LANCE] = ITEM_LANCE_IRON,
+        [ITYPE_AXE] = ITEM_AXE_IRON,
+        [ITYPE_BOW] = ITEM_BOW_IRON,
+        [ITYPE_STAFF] = ITEM_NONE,
+        [ITYPE_ANIMA] = ITEM_ANIMA_FIRE,
+        [ITYPE_LIGHT] = ITEM_LIGHT_LIGHTNING,
+        [ITYPE_DARK] = ITEM_DARK_FLUX
+    };
+
+    if (CanUnitUseWeapon(unit, *pItem) != 0) {
+        return;
+    }
+
+    for (i = 0; i < 8; i++) {
+
+        if (unit->pClassData->baseRanks[i] != 0) {
+            *pItem = MakeNewItem(arenaWeapons[i]);
+            return;
+        }
+    }
+
+    return;
+}
