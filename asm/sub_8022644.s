@@ -5,11 +5,11 @@
 	.set sub_8003F28, 0x08003F28 + 1
 	.set sub_80D4178, 0x080D4178 + 1
 	.section .text.sub_8022644, "ax", %progbits
-@ sub_8022644 @ JP 0x08022644 - region-different, gbadisasm descriptive asm (D23)
+@ MapMenu_GuideCommandDraw @ JP 0x08022644 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8022644
+	.global MapMenu_GuideCommandDraw
 	.thumb_func
-sub_8022644:
+MapMenu_GuideCommandDraw:
 	push {r4, r5, r6, lr}
 	adds r6, r0, #0
 	adds r4, r1, #0
