@@ -4,11 +4,11 @@
 	.set sub_801C064, 0x0801C064 + 1
 	.set sub_801DA74, 0x0801DA74 + 1
 	.section .text.sub_801C0D4, "ax", %progbits
-@ sub_801C0D4 @ JP 0x0801C0D4 - region-different, gbadisasm descriptive asm (D23)
+@ DebugMenu_FogIdle @ JP 0x0801C0D4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_801C0D4
+	.global DebugMenu_FogIdle
 	.thumb_func
-sub_801C0D4:
+DebugMenu_FogIdle:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	adds r5, r1, #0
