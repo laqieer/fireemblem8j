@@ -2,11 +2,11 @@
 	.set sub_8074DE8, 0x08074DE8 + 1
 	.set sub_8074E80, 0x08074E80 + 1
 	.section .text.sub_805CFB8, "ax", %progbits
-@ sub_805CFB8 @ JP 0x0805CFB8 - region-different, gbadisasm descriptive asm (D23)
+@ EfxTeonoSeMain @ JP 0x0805CFB8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805CFB8
+	.global EfxTeonoSeMain
 	.thumb_func
-sub_805CFB8:
+EfxTeonoSeMain:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldrh r0, [r4, #0x2c]
