@@ -2,11 +2,11 @@
 	.set sub_8002BCC, 0x08002BCC + 1
 	.set sub_807C270, 0x0807C270 + 1
 	.section .text.sub_807C1DC, "ax", %progbits
-@ sub_807C1DC @ JP 0x0807C1DC - region-different, gbadisasm descriptive asm (D23)
+@ MuCtr_StartMoveTowards @ JP 0x0807C1DC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807C1DC
+	.global MuCtr_StartMoveTowards
 	.thumb_func
-sub_807C1DC:
+MuCtr_StartMoveTowards:
 	push {r4, r5, r6, lr}
 	mov r6, sb
 	mov r5, r8
