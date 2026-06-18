@@ -5078,3 +5078,30 @@ a82c0202.. = the 4 BG-buffer EWRAM ptrs). D121 fix: split gap0b (INCBIN 0,339 ->
 + tail 336,3) + carved_rom row src/CopyBgTiles.o(.rodata)@0x0DC55C. matching-C 7368->7369,
 extracted-data stays TRUE 100%, full-sha1 gated (D126). NEXT: harvest the other 108
 (many will need the same rodata-in-gap or sibling-data-bind, careful per-function).
+
+## D129 — region-same-uncarved matching-C vein (re-opened the axis)
+
+**Context:** matching-C looked stalled (~86.4%). Re-derived the opportunity list correctly:
+region-SAME functions (`layout/nofuncmap_region_same.tsv`, `tier==reloc-unique`) whose JP addr is
+NOT inside any `src/*.o(.text)` range — unioning BOTH `carved_rom.tsv` AND `carved_rom.d/*.tsv`.
+Earlier counts were wrong: (a) name-only check → bogus 109; (b) monolith-only manifest → bogus 1407
+(missed the `.d/` handdecomp/synthetic-C fragments). Synthetic-C `src/sub_<addr>.o` ALREADY counts as
+matching-C (calcprogress counts every t/T symbol in any manifest `src/*.o`), so those are a NAMED lever,
+not matching-C. **~35 reloc-unique** genuinely on descriptive asm = the live lever.
+
+**Method (per function, COLD-make-compare-gated, D126 full-sha1 discipline):** write the US source to
+`src/<Fn>.c`; for each undeclared symbol add an `extern` decl + bind its JP addr (read from the asm
+literal pool) in `layout/baseline_syms.d/`; replace the `gbadisasm_<sub>.tsv` carved_rom fragment with a
+`src/<Fn>.o(.text)` row + `git rm` the descriptive-asm `.s`. For global data tables used with
+`ARRAY_COUNT`, declare `extern T table[N]` (explicit count from the US def) so the macro compiles.
+
+**Harvested +9 this iteration:** SetPrepScreenMenuSelectedItem, DrawPrepScreenMenuFrameAt,
+SetPrepScreenMenuPosition, GMapPI_ShowLoop, GMapPI_HideLoop, EfxStatusCHGMain, NewEfxDeadEvent, NewEfxDead
+(+ CopyBgTiles/Store/LoadUnitWordStructs earlier). matching-C 7368→7379.
+
+**Two traps banked:** (1) RELOC-AMBIGUOUS CALLEE — a reloc-unique fn calling a trivial reloc-ambiguous
+fn (`SetPopupUnit`=`gpPopupUnit=unit`) that an `exact_<addr>.c` matched at the WRONG addr → 1-byte BL diff
+(reverted NewPopup_NewAlly). Verify `nm` addr of each `bl` target == the asm `.set sub_X,0xADDR`.
+(2) SILENT-STUB — a missing header (`anim.h` vs `anime.h`) fails the cc compile, but the Makefile appends
+`.text` and assembles an EMPTY `.o` → `undefined reference` at LINK, not a clear compile error. After
+carving, `nm src/<Fn>.o | grep 'T <Fn>'` to confirm the symbol exists.
