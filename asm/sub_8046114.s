@@ -8,11 +8,11 @@
 	.set sub_8045EA4, 0x08045EA4 + 1
 	.set sub_804D08C, 0x0804D08C + 1
 	.section .text.sub_8046114, "ax", %progbits
-@ sub_8046114 @ JP 0x08046114 - region-different, gbadisasm descriptive asm (D23)
+@ SioBat_WaitSetupAck @ JP 0x08046114 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8046114
+	.global SioBat_WaitSetupAck
 	.thumb_func
-sub_8046114:
+SioBat_WaitSetupAck:
 	push {r4, lr}
 	adds r4, r0, #0
 	bl sub_8045C8C
