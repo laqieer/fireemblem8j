@@ -1,11 +1,11 @@
 	.syntax unified
 	.set sub_8002DE4, 0x08002DE4 + 1
 	.section .text.sub_80C8F10, "ax", %progbits
-@ sub_80C8F10 @ JP 0x080C8F10 - region-different, gbadisasm descriptive asm (D23)
+@ CreditsBlendCG_2 @ JP 0x080C8F10 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C8F10
+	.global CreditsBlendCG_2
 	.thumb_func
-sub_80C8F10:
+CreditsBlendCG_2:
 	push {lr}
 	adds r3, r0, #0
 	ldrh r0, [r3, #0x34]
