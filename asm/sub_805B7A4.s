@@ -2,11 +2,11 @@
 	.set InitMainMiniAnim, 0x0805B3B0 + 1
 	.set sub_8002BCC, 0x08002BCC + 1
 	.section .text.sub_805B7A4, "ax", %progbits
-@ sub_805B7A4 @ JP 0x0805B7A4 - region-different, gbadisasm descriptive asm (D23)
+@ NewEkrUnitMainMini @ JP 0x0805B7A4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_805B7A4
+	.global NewEkrUnitMainMini
 	.thumb_func
-sub_805B7A4:
+NewEkrUnitMainMini:
 	push {r4, r5, lr}
 	adds r4, r0, #0
 	ldr r0, _0805B7C8 @ =0x085E3FF4
