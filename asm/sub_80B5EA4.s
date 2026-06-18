@@ -6,11 +6,11 @@
 	.set sub_80B3804, 0x080B3804 + 1
 	.set sub_80B5E00, 0x080B5E00 + 1
 	.section .text.sub_80B5EA4, "ax", %progbits
-@ sub_80B5EA4 @ JP 0x080B5EA4 - region-different, gbadisasm descriptive asm (D23)
+@ BonusClaim_Loop_SelectTargetKeyHandler @ JP 0x080B5EA4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B5EA4
+	.global BonusClaim_Loop_SelectTargetKeyHandler
 	.thumb_func
-sub_80B5EA4:
+BonusClaim_Loop_SelectTargetKeyHandler:
 	push {r4, r5, r6, lr}
 	adds r5, r0, #0
 	adds r6, r5, #0

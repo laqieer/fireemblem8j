@@ -33,7 +33,7 @@
 	.set sub_805B80C, 0x0805B80C + 1
 	.set sub_80B8C64, 0x080B8C64 + 1
 	.section .text.sub_80B83A8, "ax", %progbits
-@ sub_80B83A8 @ JP 0x080B83A8 - region-different, gbadisasm descriptive asm (D23)
+@ ClassInfoDisplay_Init @ JP 0x080B83A8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
 	.global ClassInfoDisplay_Init
 	.thumb_func

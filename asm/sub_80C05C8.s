@@ -3,11 +3,11 @@
 	.set PutSpriteExt, 0x08005330 + 1
 	.set sub_80C0574, 0x080C0574 + 1
 	.section .text.sub_80C05C8, "ax", %progbits
-@ sub_80C05C8 @ JP 0x080C05C8 - region-different, gbadisasm descriptive asm (D23)
+@ GmapScreen2_Loop @ JP 0x080C05C8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C05C8
+	.global GmapScreen2_Loop
 	.thumb_func
-sub_80C05C8:
+GmapScreen2_Loop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

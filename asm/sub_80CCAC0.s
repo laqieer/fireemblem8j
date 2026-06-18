@@ -11,11 +11,11 @@
 	.set sub_80CB7D8, 0x080CB7D8 + 1
 	.set sub_80CC590, 0x080CC590 + 1
 	.section .text.sub_80CCAC0, "ax", %progbits
-@ sub_80CCAC0 @ JP 0x080CCAC0 - region-different, gbadisasm descriptive asm (D23)
+@ OpAnimEirikaExit @ JP 0x080CCAC0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80CCAC0
+	.global OpAnimEirikaExit
 	.thumb_func
-sub_80CCAC0:
+OpAnimEirikaExit:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

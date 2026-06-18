@@ -10,11 +10,11 @@
 	.set sub_8015710, 0x08015710 + 1
 	.set sub_80265CC, 0x080265CC + 1
 	.section .text.sub_80C5AC0, "ax", %progbits
-@ sub_80C5AC0 @ JP 0x080C5AC0 - region-different, gbadisasm descriptive asm (D23)
+@ WorldmapStatus_InitGfx @ JP 0x080C5AC0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C5AC0
+	.global WorldmapStatus_InitGfx
 	.thumb_func
-sub_80C5AC0:
+WorldmapStatus_InitGfx:
 	push {r4, r5, r6, r7, lr}
 	ldr r0, _080C5B7C @ =0x08AC2248
 	bl sub_8001ACC

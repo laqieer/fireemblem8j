@@ -5,11 +5,11 @@
 	.set sub_8013008, 0x08013008 + 1
 	.set sub_80C318C, 0x080C318C + 1
 	.section .text.sub_80C54CC, "ax", %progbits
-@ sub_80C54CC @ JP 0x080C54CC - region-different, gbadisasm descriptive asm (D23)
+@ GmTmConfront_StartAnim @ JP 0x080C54CC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C54CC
+	.global GmTmConfront_StartAnim
 	.thumb_func
-sub_80C54CC:
+GmTmConfront_StartAnim:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #0xc
 	adds r7, r0, #0

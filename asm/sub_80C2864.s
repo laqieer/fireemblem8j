@@ -8,11 +8,11 @@
 	.set sub_80C5628, 0x080C5628 + 1
 	.set sub_80D6378, 0x080D6378 + 1
 	.section .text.sub_80C2864, "ax", %progbits
-@ sub_80C2864 @ JP 0x080C2864 - region-different, gbadisasm descriptive asm (D23)
+@ GmMuPrim_3 @ JP 0x080C2864 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C2864
+	.global GmMuPrim_3
 	.thumb_func
-sub_80C2864:
+GmMuPrim_3:
 	push {r4, r5, r6, r7, lr}
 	sub sp, #8
 	adds r7, r0, #0

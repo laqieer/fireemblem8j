@@ -4,11 +4,11 @@
 	.set sub_8027EBC, 0x08027EBC + 1
 	.set sub_80C7264, 0x080C7264 + 1
 	.section .text.sub_80BFAC8, "ax", %progbits
-@ sub_80BFAC8 @ JP 0x080BFAC8 - region-different, gbadisasm descriptive asm (D23)
+@ GmapUnit_Loop @ JP 0x080BFAC8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BFAC8
+	.global GmapUnit_Loop
 	.thumb_func
-sub_80BFAC8:
+GmapUnit_Loop:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

@@ -13,7 +13,7 @@
 	.set sub_80B1D98, 0x080B1D98 + 1
 	.set sub_80B1FBC, 0x080B1FBC + 1
 	.section .text.sub_80B5C3C, "ax", %progbits
-@ sub_80B5C3C @ JP 0x080B5C3C - region-different, gbadisasm descriptive asm (D23)
+@ BonusClaim_StartSelectTargetSubMenu @ JP 0x080B5C3C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
 	.global BonusClaim_StartSelectTargetSubMenu
 	.thumb_func

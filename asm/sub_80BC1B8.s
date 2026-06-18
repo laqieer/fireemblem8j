@@ -5,11 +5,11 @@
 	.set sub_8003F28, 0x08003F28 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.section .text.sub_80BC1B8, "ax", %progbits
-@ sub_80BC1B8 @ JP 0x080BC1B8 - region-different, gbadisasm descriptive asm (D23)
+@ TurnRecord_SetupText @ JP 0x080BC1B8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BC1B8
+	.global TurnRecord_SetupText
 	.thumb_func
-sub_80BC1B8:
+TurnRecord_SetupText:
 	push {r4, r5, r6, lr}
 	ldr r2, _080BC298 @ =0x0000FF78
 	movs r0, #1

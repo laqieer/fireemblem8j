@@ -13,7 +13,7 @@
 	.set sub_80BB460, 0x080BB460 + 1
 	.set sub_80BB7E8, 0x080BB7E8 + 1
 	.section .text.sub_80BB864, "ax", %progbits
-@ sub_80BB864 @ JP 0x080BB864 - region-different, gbadisasm descriptive asm (D23)
+@ SoloEndingBattleDisp_Init @ JP 0x080BB864 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
 	.global SoloEndingBattleDisp_Init
 	.thumb_func

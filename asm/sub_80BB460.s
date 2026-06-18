@@ -2,11 +2,11 @@
 	.set InitText, 0x08003C8C + 1
 	.set ResetText, 0x08003BC4 + 1
 	.section .text.sub_80BB460, "ax", %progbits
-@ sub_80BB460 @ JP 0x080BB460 - region-different, gbadisasm descriptive asm (D23)
+@ InitCharacterEndingText @ JP 0x080BB460 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80BB460
+	.global InitCharacterEndingText
 	.thumb_func
-sub_80BB460:
+InitCharacterEndingText:
 	push {r4, r5, r6, r7, lr}
 	bl ResetText
 	ldr r7, _080BB4A8 @ =0x08AC0B90

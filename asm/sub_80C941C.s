@@ -6,11 +6,11 @@
 	.set sub_80C916C, 0x080C916C + 1
 	.set sub_80C9398, 0x080C9398 + 1
 	.section .text.sub_80C941C, "ax", %progbits
-@ sub_80C941C @ JP 0x080C941C - region-different, gbadisasm descriptive asm (D23)
+@ EndingCredits_Loop_Main @ JP 0x080C941C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80C941C
+	.global EndingCredits_Loop_Main
 	.thumb_func
-sub_80C941C:
+EndingCredits_Loop_Main:
 	push {r4, lr}
 	adds r4, r0, #0
 	ldr r0, _080C9440 @ =0x085775CC

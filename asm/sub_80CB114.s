@@ -7,11 +7,11 @@
 	.set sub_80CAEF4, 0x080CAEF4 + 1
 	.set sub_80CB054, 0x080CB054 + 1
 	.section .text.sub_80CB114, "ax", %progbits
-@ sub_80CB114 @ JP 0x080CB114 - region-different, gbadisasm descriptive asm (D23)
+@ Title_Loop_LightExplosionFx @ JP 0x080CB114 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80CB114
+	.global Title_Loop_LightExplosionFx
 	.thumb_func
-sub_80CB114:
+Title_Loop_LightExplosionFx:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

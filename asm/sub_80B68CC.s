@@ -6,11 +6,11 @@
 	.set sub_80B6934, 0x080B6934 + 1
 	.set sub_80BEE54, 0x080BEE54 + 1
 	.section .text.sub_80B68CC, "ax", %progbits
-@ sub_80B68CC @ JP 0x080B68CC - region-different, gbadisasm descriptive asm (D23)
+@ MusicOptionChangeHandler @ JP 0x080B68CC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80B68CC
+	.global MusicOptionChangeHandler
 	.thumb_func
-sub_80B68CC:
+MusicOptionChangeHandler:
 	push {r4, lr}
 	bl sub_80B6934
 	lsls r0, r0, #0x18
