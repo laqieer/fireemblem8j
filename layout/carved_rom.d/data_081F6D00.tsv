@@ -1,2 +1,5 @@
 # carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-1F6D00	1F6E40	src/data/data_081F6D00/data_081F6D00.o(.data.residue.081F6D00)	descriptive raw ROM data (320 B, byte-completeness D29)
+1F6D00	1F6D44	src/data/data_081F6D00/data_081F6D00.o(.data.residue.081F6D00)	residue part1 (68 B)
+1F6D44	1F6D50	src/PromoTrainee_Talk3.o(.rodata)	PromoTrainee_Talk3 msgs[3] (gap split)
+1F6D50	1F6D5C	src/PromoTrainee_Talk4.o(.rodata)	PromoTrainee_Talk4 msgs[3] (gap split)
+1F6D5C	1F6E40	src/data/data_081F6D00/data_081F6D00.o(.data.residue.081F6D5C)	residue part2 (228 B)
