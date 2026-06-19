@@ -87,4 +87,6 @@ A13256	A13488	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontie
 A13880	A13B90	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap84)	df4_banim_b region-diff data (784 B, long-tail gap)
 A13CD0	A141F4	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap85)	gap85 part1 (1316 B)
 A141F4	A14209	src/AntitoxinPureWaterfx_Loop.o(.data)	AntitoxinPureWaterfx_Loop lut.3 (gap split)
-A14209	A146BC	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap85b)	gap85 part2 (1203 B)
+A14209	A14294	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap85b)	WarpFlashy_Loop gap pre
+A14294	A142AA	src/WarpFlashy_Loop.o(.data)	WarpFlashy_Loop lut (gap split)
+A142AA	A146BC	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap85bb)	WarpFlashy_Loop gap post
