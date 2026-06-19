@@ -14,6 +14,8 @@
 #include "bmusailment.h"
 #include "bmtrick.h"
 
+extern struct Trap sTrapPool[];
+
 
 
 static void GenerateFireTileTrapTargets(int x, int y, int damage);
@@ -166,4 +168,33 @@ s8 ShouldSkipGasTrapDisplay(int x, int y, int facing)
     }
 
     return boolHasNoEffect;
+}
+void GenerateTrapDamageTargets(void)
+{
+    struct Trap* trap;
+
+    InitTargets(0, 0);
+
+    for (trap = sTrapPool; trap->type != TRAP_NONE; ++trap)
+    {
+        if ((s8) trap->data[TRAP_EXTDATA_TRAP_COUNTER] == 0)
+        {
+            switch (trap->type)
+            {
+
+            case TRAP_FIRETILE:
+                GenerateFireTileTrapTargets(trap->xPos, trap->yPos, (s8) trap->data[TRAP_EXTDATA_TRAP_DAMAGE]);
+                break;
+
+            case TRAP_LIGHTARROW:
+                GenerateArrowTrapTargets(trap->xPos, trap->yPos, (s8) trap->data[TRAP_EXTDATA_TRAP_DAMAGE]);
+                break;
+
+            case TRAP_GAS:
+                GenerateGasTrapTargets(trap->xPos, trap->yPos, (s8) trap->data[TRAP_EXTDATA_TRAP_DAMAGE], trap->extra);
+                break;
+
+            }
+        }
+    }
 }
