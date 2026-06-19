@@ -131,7 +131,7 @@ static const u16* sLegacyUiFramePaletteLookup[] = {
     gLegacyUiFrameDPalette,
 };
 
-static const u16* sUiFramePaletteLookup[] = {
+const u16* sUiFramePaletteLookup[] = {
     gUiFramePaletteA,
     gUiFramePaletteB,
     gUiFramePaletteC,
