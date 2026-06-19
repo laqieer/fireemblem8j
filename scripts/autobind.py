@@ -113,7 +113,7 @@ def _restore_artifact(r):
 def carve(name):
     r=recipe(name) or recipe_fallback(name)
     if not r: return None,"no recipe"
-    decls=[]; tried=set()
+    decls=[]; tried=set(); use_structs=False
     # make the carved fn GLOBAL (US-static fns referenced by already-carved callers must export):
     # strip `static ` before any decl/def of THIS name, not just a leading one.
     body0=re.sub(rf"\bstatic\s+(?=[\w \t\*]*?\b{re.escape(name)}\s*\()","",r["body"])
@@ -121,8 +121,13 @@ def carve(name):
     for s in os.environ.get("DECL_SUBST","").split(";"):   # per-fn const substitution (e.g. JP BGCHR_MANIM 0x160->0x140)
         if "=>" in s: o,n=s.split("=>"); body0=body0.replace(o,n)
     for _ in range(15):
-        open(f"src/{name}.c","w").write("".join(f'#include "{h}"\n' for h in r["inc"])+"\n"+us_enums(name)+"\n"+us_structs(name)+"\n"+"".join(d+"\n" for d in decls)+"\n"+body0+"\n")
+        # inject the US TU's file-scope structs ONLY when needed (TU-local structs not in headers);
+        # injecting them unconditionally REDEFINES header structs -> -Werror -> false [compile-other].
+        structs=us_structs(name) if use_structs else ""
+        open(f"src/{name}.c","w").write("".join(f'#include "{h}"\n' for h in r["inc"])+"\n"+us_enums(name)+"\n"+structs+"\n"+"".join(d+"\n" for d in decls)+"\n"+body0+"\n")
         err=sh(f"rm -f src/{name}.o; make src/{name}.o 2>&1")
+        if (not use_structs) and re.search(r"storage size|incomplete type|undefined (?:struct|type)|field `\w+' has incomplete", err):
+            use_structs=True; continue   # a TU-local struct IS needed -> retry with us_structs
         und=[u for u in re.findall(r"`([A-Za-z_]\w+)' undeclared",err)+re.findall(r"implicit declaration of function `([A-Za-z_]\w+)'",err) if u not in tried]
         if not und:
             if re.search(r' [Tt] '+re.escape(name),sh(f"arm-none-eabi-nm src/{name}.o 2>/dev/null")): break
