@@ -5135,3 +5135,30 @@ UnitAutolevelRealistic, GenUnitDefinitionFinalPosition, AiGetUnitClosestValidPos
 **Status:** vein now exhausted — no more frame-table `==-1` sentinels still in asm, no other `0x????0000`
 shifted constants. `autocarve`'s `DEAD-END pre-screen (sign-ext)` over-rejects this class (a future fix
 could route sign-ext candidates through the disasm-diff discriminator instead of skipping).
+
+## D147 — trivial unnamed-sub_ hand-decomp moves BOTH matching-C and named (+3)
+
+**Context:** the funclib naming levers are exhausted (rename_confirmed = already-named false
+positives w/ empty commits; prefix-match = all 61 hints already defined in ELF / structural-similarity
+false matches). The region-same carve vein is also exhausted (the "uncarved" candidates were already
+synthetic-C `src/sub_*.o`, just unnamed — and calcprogress's NAMED axis only scans `asm/` `.global`,
+so renaming src symbols is metric-neutral).
+
+**The metric-mover:** carving an `asm/sub_<addr>.s` → `src/sub_<addr>.c` deletes its `.global sub_`
+placeholder (named axis up) AND adds a compiled function (matching-C up). The smallest still-asm `sub_`
+(4–24B) are *unnamed*, so the D100 trivial-stub sweep skipped them, yet many hand-decompile trivially:
+`sub_80DA784` = `return 1`; `sub_801153C` = `*(int*)0x030005E8 = a`; `sub_8048BF0` = signed range-check
+`[0,2]?1:0`. Carved 3, COLD `make clean && make compare` OK, matching-C 7529→7532, placeholders 2411→2408.
+
+**Stale-OK trap reconfirmed (cost 4 false carves):** `carve_synth` ran `make compare` then byte-diffed
+the function range. When a *sibling* carve in the same tree had an undefined callee (a `sub_` only
+reachable via a caller-local `.set`, never a global symbol), the LINK failed → `fireemblem8.gba` stayed
+stale (old asm bytes, which happen to equal the target) → every later per-carve byte-check falsely
+reported MATCH. A cold rebuild exposed 4 real diffs (sub_80A4088 arg-eval reg-alloc: JP saves p→r2 then
+arg0→r0, agbcc uses a temp; sub_800C124/3AC memory-op order; sub_8010E1C). **SOP:** gate on the full
+`fireemblem8.gba: OK` (sha1), never a range byte-diff against a possibly-stale ROM; carve callee-free or
+globally-defined-callee functions one at a time.
+
+**Vein:** ~337 unnamed asm `sub_` remain; the simple no-callee ones (const return / single store / accessor
+/ range-check) are reliable wins, the reg-alloc-sensitive (multi-arg eval order, memory-op order) and
+local-`.set`-callee ones are dead/blocked. Both naming axes via funclib are otherwise exhausted.
