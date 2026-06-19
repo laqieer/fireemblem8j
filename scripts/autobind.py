@@ -49,11 +49,75 @@ def is_func(sym):
         if re.search(rf'^[A-Za-z_][\w \t\*]*?\b{re.escape(sym)}\s*\([^;{{]*\)\s*\{{',t,re.M): return True
     return False
 def BINDF(n): return f"layout/baseline_syms.d/autobind_{n}.tsv"
+def _striptu(body):
+    body=re.sub(r'^#include\s+"[^"]+"\n','',body,flags=re.M)
+    body=re.sub(r'^struct\s+\w+\s*\{.*?^\};\n','',body,flags=re.M|re.S)
+    body=re.sub(r'^enum\s*\{[^}]*\}\s*;\n','',body,flags=re.M)
+    return body
+def _tu_of(name):
+    for f in US_SRC:
+        try: t=open(f,errors='replace').read()
+        except: continue
+        if re.search(rf'^[A-Za-z_][\w \t\*]*?\b{re.escape(name)}\s*\([^;{{]*\)\s*\{{',t,re.M): return f
+    return None
+def recipe_fallback(name):
+    """Recipe for NAMED (asm/<Name>.s) or STRANDED (stranded_<TU>.s section) region-diff asm
+    funcs that carve_recipe (baseline_syms-only) can't see. Adds mode/asm/gtsv|sec+tsv+row so
+    run()/revert() remove/restore the right artifacts. Full autobind sentinel-bind still applies."""
+    info=None
+    gt=f"layout/carved_rom.d/gbadisasm_{name}.tsv"
+    if os.path.exists(gt):
+        c=open(gt).readline().rstrip("\n").split("\t")
+        if len(c)>=3:
+            m=re.match(r'(asm/.+?\.o)',c[2]); af=(m.group(1)[:-2]+".s") if m else None
+            if af and os.path.exists(af) and 'stranded' not in af:
+                info=dict(start=c[0].strip().upper(),end=c[1].strip().upper(),asm=af,gtsv=gt,mode='named')
+    if not info:
+        for tsv in glob.glob("layout/carved_rom.d/stranded_func_*.tsv"):
+            for ln in open(tsv):
+                cc=ln.rstrip("\n").split("\t")
+                if len(cc)>=4 and re.search(rf':{re.escape(name)}(\s|$)',cc[3]):
+                    m=re.match(r'(asm/stranded_[\w-]+\.o)\((\.text\.[\w]+)\)',cc[2])
+                    if m: info=dict(start=cc[0].strip().upper(),end=cc[1].strip().upper(),
+                                    asm=m.group(1)[:-2]+".s",sec=m.group(2),tsv=tsv,row=ln,mode='stranded')
+                    break
+            if info: break
+    if not info: return None
+    tu=_tu_of(name)
+    if not tu: return None
+    raw=sh(f"python3 scripts/extract_func_only.py {tu} {name}")
+    if not raw.strip(): return None
+    incs=re.findall(r'#include\s+"([^"]+)"',open(tu,errors='replace').read())
+    keep=[h for h in incs if os.path.exists("include/"+h)]
+    if "global.h" not in keep: keep.insert(0,"global.h")
+    info.update(addr=f"{int(info['start'],16):X}",inc=keep,body=_striptu(raw))
+    return info
+def _rm_artifact(r):
+    if r.get('mode')=='stranded':
+        lines=open(r['asm']).read().split("\n"); out=[]; i=0
+        while i<len(lines):
+            if re.match(rf'\s*\.section\s+{re.escape(r["sec"])}[,\s]',lines[i]):
+                i+=1
+                while i<len(lines) and not re.match(r'\s*\.section\s',lines[i]): i+=1
+            else: out.append(lines[i]); i+=1
+        open(r['asm'],"w").write("\n".join(out))
+        open(r['tsv'],"w").write("".join(l for l in open(r['tsv']) if l!=r['row']))
+    elif r.get('mode')=='named':
+        sh(f"git rm -qf {r['asm']} {r['gtsv']} 2>/dev/null; rm -f {r['asm']} {r['gtsv']}")
+    else:
+        sh(f"git rm -qf asm/sub_{r['addr']}.s layout/carved_rom.d/gbadisasm_sub_{r['addr']}.tsv 2>/dev/null; rm -f asm/sub_{r['addr']}.s layout/carved_rom.d/gbadisasm_sub_{r['addr']}.tsv")
+def _restore_artifact(r):
+    if r.get('mode')=='stranded': sh(f"git checkout HEAD -- {r['asm']} {r['tsv']}")
+    elif r.get('mode')=='named': sh(f"git checkout HEAD -- {r['asm']} {r['gtsv']}")
+    else: sh(f"git checkout HEAD -- asm/sub_{r['addr']}.s layout/carved_rom.d/gbadisasm_sub_{r['addr']}.tsv")
 def carve(name):
-    r=recipe(name)
+    r=recipe(name) or recipe_fallback(name)
     if not r: return None,"no recipe"
     decls=[]; tried=set()
-    body0=re.sub(r"^static\s+","",r["body"])
+    # make the carved fn GLOBAL (US-static fns referenced by already-carved callers must export):
+    # strip `static ` before any decl/def of THIS name, not just a leading one.
+    body0=re.sub(rf"\bstatic\s+(?=[\w \t\*]*?\b{re.escape(name)}\s*\()","",r["body"])
+    body0=re.sub(r"^static\s+","",body0)
     for s in os.environ.get("DECL_SUBST","").split(";"):   # per-fn const substitution (e.g. JP BGCHR_MANIM 0x160->0x140)
         if "=>" in s: o,n=s.split("=>"); body0=body0.replace(o,n)
     for _ in range(15):
@@ -87,7 +151,7 @@ def run(name):
     with open(BINDF(name),"w") as f:
         for u,a in sent.items(): f.write(f"{u}\t{a:08X}\t{'thumb' if func[u] else 'data'}\t{name}\n")
     s,e=int(r['start'],16),int(r['end'],16)
-    sh(f"git rm -qf asm/sub_{r['addr']}.s layout/carved_rom.d/gbadisasm_sub_{r['addr']}.tsv 2>/dev/null; rm -f asm/sub_{r['addr']}.s layout/carved_rom.d/gbadisasm_sub_{r['addr']}.tsv")
+    _rm_artifact(r)
     open(f"layout/carved_rom.d/handdecomp_{name}.tsv","w").write(f"{r['start']}\t{r['end']}\tsrc/{name}.o(.text)\thanddecomp\n")
     open(f"layout/baseline_syms_drop.d/handdecomp_{name}.tsv","w").write(name+"\n")
     subprocess.run(["python3","scripts/gen_layout.py"],capture_output=True)
@@ -127,7 +191,7 @@ def run(name):
         print(f"[DIFF] {name}: {len(bad)}/{e-s} " + " ".join(f"{i-s:#x}:{mine[i]:#x}->{base[i]:#x}" for i in bad[:10]) + f"  binds={ {u:hex(a) for u,a in real.items()} }")
         revert(name,r)  # a carve must be byte-PERFECT; always revert non-zero (the [DIFF] log keeps the near-miss for hand-fix). prev `if len(bad)>4` wrongly KEPT <=4B diffs -> broke make compare
 def revert(name,r):
-    sh(f"git checkout HEAD -- asm/sub_{r['addr']}.s layout/carved_rom.d/gbadisasm_sub_{r['addr']}.tsv")
+    _restore_artifact(r)
     for p in (f"src/{name}.c",f"src/{name}.o",f"layout/carved_rom.d/handdecomp_{name}.tsv",f"layout/baseline_syms_drop.d/handdecomp_{name}.tsv",BINDF(name)):
         os.path.exists(p) and os.remove(p)
     subprocess.run(["python3","scripts/gen_layout.py"],capture_output=True)
