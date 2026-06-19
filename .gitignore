@@ -206,3 +206,10 @@ src/_diag_*
 /.claude/scheduled_tasks.lock
 asm/msg_data.s
 /permscratch/
+
+fireemblem8.elf.id0
+fireemblem8.elf.id1
+fireemblem8.elf.id2
+fireemblem8.elf.nam
+fireemblem8.elf.til
+fireemblem8.elf.i64
