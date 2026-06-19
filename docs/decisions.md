@@ -5105,3 +5105,33 @@ fn (`SetPopupUnit`=`gpPopupUnit=unit`) that an `exact_<addr>.c` matched at the W
 (2) SILENT-STUB — a missing header (`anim.h` vs `anime.h`) fails the cc compile, but the Makefile appends
 `.text` and assembles an EMPTY `.o` → `undefined reference` at LINK, not a clear compile error. After
 carving, `nm src/<Fn>.o | grep 'T <Fn>'` to confirm the symbol exists.
+
+## D146 — shifted-domain `s16 == -1` sentinel is MATCHABLE, not an asr dead-end (matching-C +6)
+
+**Context:** EfxSelfThunderBGMain (sub_807A5C0) byte-diffed 31/120; the entire diff cascaded from one
+`proc->timer == -1` (s16) sentinel. JP compiles it **shifted-domain** (`lsls#16; cmp #0xFFFF0000`, reusing
+the int value in r0); US/agbcc emits the **asr form** (`lsls#16; asrs#16; movs#1; negs; cmp #-1`) — 4 bytes
+(2 instrs) longer, shifting every following branch target. I had long mis-filed this as a compiler-version
+asr-elision dead-end (cousin of lsr↔asr).
+
+**Verification (fact-driven):** cross-checked fe8u's OWN matching ROM at EfxSelfThunderBGMain — it has the
+identical asr form. So the US source definitively compiles asr in this agbcc; the JP shifted form is a
+genuine region difference, NOT a build discrepancy. → the goal is to produce the JP BYTES via equivalent C.
+
+**Decision / SOP:** force agbcc's shifted-domain compare by writing the sentinel in shifted form while
+REUSING the value (no reload, no extra local that perturbs reg-alloc):
+- s16 FIELD: assignment-in-condition `((proc->timer = ...duration) << 16) == 0xFFFF0000` (keeps proc in r4;
+  an `int duration` local moves proc r4→r5 = 15-diff; `proc->timer << 16` reloads the field = +2 instrs).
+- s16-returning FUNCTION: directly `(GetAnimNextRoundType(anim) << 16) != 0xFFFF0000`.
+Carved EfxSelfThunderBGMain + efx heal-staff Loop_Main family (efxRelive/efxLive/efxReblow/efxRecover, all
+share `GetAnimNextRoundType(anim) != -1`) + EfxDummymagicMain. Each → 0 diff, COLD `make clean && make
+compare` OK, committed individually.
+
+**Discriminator** (the `0xFFFF0000`-grep over asm/sub_*.s finds 17, only ~6 winnable): carve plain →
+disasm-diff. ONE asr-cluster + branch-target cascade (0 high-reg churn) = WIN. Pervasive `mov sl/r8/r9`
+register churn or an `lsls#24;asrs#24` loop-counter = genuine dead-end (EfxTmCpyExt 126/164;
+UnitAutolevelRealistic, GenUnitDefinitionFinalPosition, AiGetUnitClosestValidPosition).
+
+**Status:** vein now exhausted — no more frame-table `==-1` sentinels still in asm, no other `0x????0000`
+shifted constants. `autocarve`'s `DEAD-END pre-screen (sign-ext)` over-rejects this class (a future fix
+could route sign-ext candidates through the disasm-diff discriminator instead of skipping).
