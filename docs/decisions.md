@@ -5306,3 +5306,23 @@ literal-pool), CFAIL=51 (clean proc-init/DECL_ONLY ones harvested; rest are popu
 base<150 spill (mostly done), lsr↔asr extension dead-ends, region-different logic/struct layout, and the
 ~319 libc/libgcc/BIOS hand-asm. NOT loop-aborting (the FAR bucket + deep-RE may yield a few), but the
 mechanical frontier is reached — future +1s require per-function IDA/Ghidra deep-RE, not screening.
+
+## D163 — screen_aliased incbin-split RE-OPENS matching-C (+3, real 7700→7703); README drift found
+
+The matching-C cascade (recent carves entering the link) unlocked region-same INCBIN-RESIDENT functions that
+`scripts/screen_aliased.py` (D132 vein) surfaces — these have NO dedicated asm/sub_*.s (they live in the
+baserom incbin), so screen_named_rd/autobind miss them. Carve = US body + a `carved_rom.d/<Fn>.tsv` entry
+using the **ROM OFFSET** (addr & 0xFFFFFF, NOT the 0x08… VRAM addr — that errors "carved past ROM end") +
+gen_layout splits the incbin. Carved GetBattleUnitExpGain, SortPlayerUnitsForPrepScreen, Spline_BuildCubicCoeffs
+(the latter needed DECL_ONLY protos for spline.h's commented Spline_Compute*Tangents helpers).
+**Local-const arrays:** the US `s8 lut[8]={…}` is dedup'd by the JP compiler into a far .rodata cluster
+(0x80DC684), one copy per fn — place it with a SECOND entry `<rodata_off>\t<end>\tsrc/<Fn>.o(.rodata)` (often
+already wired by a prior residue-split, e.g. data_080DC684.tsv — then a duplicate entry errors, use .text-only).
+Caveat: screen_aliased reads a STALE /tmp/aliased_asm.txt — several "CARVEABLE" (CanUnitMove,
+BattleCheckTriangleAttack) are ALREADY carved; check `git cat-file -e HEAD:src/<Fn>.c` first.
+
+**README/metric DRIFT discovered + reconciled:** calcprogress matching-C was actually 7700, but the README
+claimed 7703 (overstated ~+3 over prior iterations — likely extern-inline carves whose inline helper isn't a
+separate T-symbol, or already-done carves recounted). The verify-by-removal test (mv the 3 tsv out → 7700; back
+→ 7703) proved it. These +3 incbin-split carves are GENUINE and closed the gap, so README 7703 is now ACCURATE.
+RULE: trust `calcprogress.py` as ground truth each iter (it counts src/*.o T-symbols), not running +1 tallies.
