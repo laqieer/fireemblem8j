@@ -6,7 +6,40 @@
 cron was DISABLED 2026-06-08 — see decisions.md D8; the launched agent kept
 getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
-## ⏩ CURRENT STATE — 2026-06-13 PUA-LOOP DRIVE (READ THIS FIRST; newest)
+## ⏩ CURRENT STATE — 2026-06-20 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
+
+**main `38b13dbde`, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
+matching-C **91.19%** (7777/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
+`banim_`/`gfx_`/`snd_` asset-sheet labels are fe8u's own auto-naming, un-named in fe8u too → named
+can't reach 100% → the 4-axis Oracle is structurally unreachable; user directive is "keep driving
+matching-C").
+
+**This session: +10 matching-C carves (7767→7777), D203–D212.** The winning levers, in yield order:
+1. **IDA cascade-root — JP-omitted block/call/guard (the big one, +6):** IDA-decode a structure-matching
+   region-diff fn, diff its call/control sequence vs the fe8u source line-by-line, DELETE the block the
+   JP is missing. The JP ROM systematically drops US tutorial/lord-special-case/leader-target/portrait
+   blocks. Wins: ExecLatona + ExecFortify (`BattleInitItemEffectTarget` line), MapAnim_DisplayDeathQuote
+   (EVFLAG_GAMEOVER lord block), RepairSelectOnSelect (portrait guard + raw-addr gMenuInfo_RepairItems),
+   NewBattleForecast (tutorial block). Also GameIntroHealthSafetyWaitButton = a full JP REWRITE
+   reconstructed from IDA pseudocode (SetBlend*/SetDispEnable/Proc_Start raw-addr ProcScr).
+2. **DECL_ONLY + cast-hoist (+3):** screen_cfail NEAR bucket; declare the JP-bound-but-undeclared sym,
+   then the residual single `0e->16` entry sign-ext → cast-hoist `int x = (s8)param` WHEN the value is
+   HELD ACROSS A CALL (UpdateStatArrowSprites, StartSupportUnitSubScreen). Dead-end when used immediately
+   (ShopTryMoveHand) or OR-accumulation-truncation (HbMoveCtrl).
+3. **const-decode (+1):** SioBat_InitSetupScreen (FID_ANNA+1, msgid 0x6D3 pool-load).
+4. **permuter (+1):** PutWMFaceOnBg — permuter localized a CALLEE-PROTO bug (PutFaceOnBackGround 3rd
+   param is `int` not `s8` in JP); diff 0 after declaring it int.
+
+**NEXT — continue the cascade-root vein.** `reference/omit_candidates.txt` = 99 size-delta candidates
+(US-compiled .text size > JP gbadisasm size). CLASSIFY each via IDA: (a) clean omitted-block → delete &
+carve (fast); (b) full JP-rewrite (GameIntro-style) → reconstruct from IDA; (c) FALSE POSITIVE
+codegen-tighter (loop-rotation/reg-pressure, structure matches — SKIP). Large-delta ones tend to be
+rewrites; the heuristic does NOT reliably find clean single-block omissions (those came from IDA-decoding
+gameplay handlers directly). Permuter still running on ClassChgSel (likely killed/hopeless@65). The
+matching-C tail is now genuinely region-different logic — IDA Hex-Rays (`idb_open fireemblem8.elf.i64`;
+the .elf is deleted after each make compare but the .i64 persists, JP addrs stable) is the primary tool.
+
+## ⏩ CURRENT STATE — 2026-06-13 PUA-LOOP DRIVE
 
 **main `dbaa615d3`, green (`make compare` OK), self-contained 100%.** Autonomous `/pua:pua-loop` driving the
 final goal under a strict Oracle (`scripts/final_goal_oracle.sh`: make compare OK + all 4 axes 100% — cannot fake-complete).
