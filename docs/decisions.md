@@ -5629,3 +5629,14 @@ vs `#11` after the type/order fix). Decode the type (enum interpolate_method: LI
 + const from the disasm regs (`movs#0x80;lsls#7`=0x4000, `lsls#11`=0x40000). LESSON: a NEAR diff at an
 arg-setup block that looks like "scheduling" can be a JP-different CALL ARGUMENT (animation tuning differs
 JP vs US) — decode each arg from the regs, don't assume reg-alloc. Session run: +30 (7723→7753).
+
+## D184 — arg-hoist re-opens a mis-marked "structural" (+1 EfxTeonoSeMain, 7753→7754)
+Applying last iter's "NEAR arg-block can be a real fix" lens: EfxTeonoSeMain (diff=8, I'd mis-marked
+structural/permuter-stuck-at-100) is actually the NewEfxTeonoSE arg-eval-order class — JP narrows the
+(s16)sound_pos PlaySFX arg BEFORE loading the 0x100 const; `int sp=(s16)sound_pos;` hoist (NOT plain s16 sp,
+which kept diff=8) forces it → diff=0. Re-checked the rest of the diff-rank ≤10 tail under this lens and they
+ARE genuinely dead-class: WeaponSelectMenu_Draw (isUsable-sign-ext vs &text-address-compute order — not arg-
+eval, hoist no help), MoveUnitExt (r2/r3 param-narrow interleave order, permuter-confirmed structural),
+RegisterBanimTerrainTmByPos/FilterBattleAnimCharacterPalette/ColorFade (param-prologue narrow order),
+ShopTryMoveHand/HbMoveCtrl (lsr↔asr boolean-collapse), reg-alloc swaps. The efx PlaySFX-cast-arg vein is now
+exhausted (no more still-asm matches). Session run: +31 (7723→7754).
