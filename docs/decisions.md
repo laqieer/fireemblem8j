@@ -6008,3 +6008,17 @@ The clean cascade-root vein (single behavioral const OR off_next-style local sig
 session +12 (7754→7766). Remaining matching-C is at the agbcc/region-diff ceiling. No regression: make
 compare OK, 91.06% (7766/8528). Next lever: behavioral-const SETUP functions (disp/blend/win args) in fresh
 modules — a DIFFERENT class than sign-ext — or accept the ceiling.
+
+## D202 (2026-06-20) — behavioral-const SETUP class: extra-call carve (+1, 7766→7767)
+
+Lever-switch (per D201): from sign-ext FAR screening to behavioral-const SETUP functions (disp/blend/win
+calls where a single JP behavioral difference cascades — the D197 OpAnimApplyScrollPalettes class).
+Screened still-asm functions whose fe8u body calls SetDispEnable/SetBlendConfig/SetWinEnable.
+`AtMenu_ResetScreenEffect` (sub_8098574, 80B): fe8u body diffed 38 (JP +4). `mcp__ida__decompile` showed
+JP calls an EXTRA `EndAllProcChildren(proc)` at the very start (before EndMuralBackground_) — fe8u omits it.
+Adding `EndAllProcChildren(proc);` → diff 0, full cold make compare OK. A clean extra-call behavioral diff.
+
+**SOP: behavioral-const SETUP class is a live vein.** IDA-decode a SETUP/init function, diff vs fe8u
+statement-by-statement; the JP difference is often a single extra call, a different SetDispEnable/SetBlend
+arg, or a different const that cascades the surrounding bl-offsets & reg-alloc. Distinct from the sign-ext
+class (D198, harvested) and the multi-part dead-ends (D200/D201). matching-C 91.08% (7767/8528). Session +13.
