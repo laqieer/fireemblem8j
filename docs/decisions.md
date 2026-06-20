@@ -5491,3 +5491,16 @@ the whole subsystem dir, not just git-rm. DATA_INCBIN_CFILES auto-discovers new 
 -mindepth 2` (no Makefile edit needed). Clean build + self-contained + data-axis 100% all verified.
 ClassIntroLetter_LoopFadeOut (diff=8) is the opinfo OpInfoEnterProc struct-offset cluster (deferred — whole
 struct). Session total this run: +10 (5 AiStaff, AiTryDoRogue, WMFaceCtrl, ClearBox, GetChapterSurvivalRank).
+
+## D172 — return-width DECL fix (+1); opinfo struct cluster is region-DIFFERENT (abandon)
+**UiSupport_GetSupportTalkSong (+1):** `int f(){ return g(); }` where g returns u16 — agbcc adds a defensive
+u16 narrow (lsls/lsrs#16) on the return that JP doesn't emit. Declaring the callee `int GetSupportTalkSong_(…)`
+(not u16) makes agbcc treat the return as int → no narrow → diff=0. (Return-width sibling of the param-width
+DECL fixes.) **opinfo OpInfoEnterProc cluster (ClassIntro_Init/LoopOut, ClassIntroLetter_LoopFadeOut) — NOT a
+struct-offset shift, genuinely region-DIFFERENT:** the struct is used ONLY by these 3 (carved opinfo fns use
+the separate OpInfoProc, so a JP struct WOULD be safe) — BUT the JP ClassIntro_LoopOut accesses
+`classNameLength` via a POINTER INDIRECTION (`[proc+0x64]->[+12]`) where US reads it as a direct field
+(proc->classNameLength@0x2E), and iconProc moved 0x38→0x5C while letterProcsPtr stayed @0x34. That's different
+LOGIC, not relayout — abandon (deep RE). Mid-diff decl-aware tail (WmSell_OnLoop_MainKeyHandler 33,
+UnitInfoWindow_DrawBase 24, SoundRoomUi_Init 43, PutWMFaceOnBg 44) are region-different (different mid-fn
+calls) — hand-RE-tier, not clean fixes. The decl-aware diff=0 vein is now fully harvested.
