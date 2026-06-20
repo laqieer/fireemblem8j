@@ -16,7 +16,7 @@
 /* prototypes for same-file helpers called by this run */
 ProcPtr StartGmapRmBaPalAnim1(ProcPtr parent);
 void EndGmapRmBaPalAnim1(void);
-void GmapRmBorder1_PutSprite2(struct ProcGmapRmBorder1 * proc, int x, int y, bool transparency);
+void GmapRmBorder1_PutSprite2(struct ProcGmapRmBorder1 * proc, int x, int y, int transparency);
 
 void GmapRmBorder1_NationMergeIn(struct ProcGmapRmBorder1 * proc)
 {

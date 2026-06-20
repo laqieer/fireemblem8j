@@ -871,7 +871,7 @@ void GmMu_SetBlendEnabled(struct GMapMuProc *, int, s8);
 void GmMu_GetRawPosition(struct GMapMuProc *, int, s16*, s16*);
 // ??? GmMu_GetSpriteLayer(???);
 void GmMu_SetSpriteLayer(struct GMapMuProc *, int, int);
-void GmMu_0(struct GMapMuProc *, int, s8);
+void GmMu_0(struct GMapMuProc *, int, int);
 s8 GmMu_IsMoving(struct GMapMuProc *, int);
 // ??? GmMuPrim_FinishMovement(???);
 void GmMu_FinishMovement(struct GMapMuProc * muProc, int index);
@@ -1186,7 +1186,7 @@ extern const struct GmMapRmBorderSet GfxSet_WmNationMap[WM_NATION_MAX];
 
 void GmapRmBorder1_End(struct ProcGmapRmBorder1 * proc);
 void GmapRmBorder1_0(struct ProcGmapRmBorder1 * proc);
-void GmapRmBorder1_PutSprite2(struct ProcGmapRmBorder1 * proc, int x, int y, bool transparency);
+void GmapRmBorder1_PutSprite2(struct ProcGmapRmBorder1 * proc, int x, int y, int transparency);
 void GmapRmBorder1_NationMergeIn(struct ProcGmapRmBorder1 * proc);
 void GmapRmBorder1_1(struct ProcGmapRmBorder1 * proc);
 void GmapRmBorder1_NationMergeOut(struct ProcGmapRmBorder1 * proc);
