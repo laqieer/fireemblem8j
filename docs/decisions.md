@@ -6187,3 +6187,14 @@ make compare OK (the full gate confirms gBmMapRange is the correct symbol, not a
 **SOP:** when IDA shows the same pool address used for two reads that fe8u splits across two symbols
 (signed-view vs unsigned), collapse to the one JP symbol with a `(s8)`/`(u8)` cast. Check AI siblings
 (AiFindClosestReachableTerrainPosition, AiFindClosestTerrainPosition) for the same gMapRangeSigned pattern.
+
+## D215 — ClearGMapPIPanel: DECL_ONLY struct + JP layout consts (+1, 7780→7781)
+`ClearGMapPIPanel` (sub_80C3618, 188B, fe8u src/worldmap_player_interface.c). Defined local
+`struct Unknown8A3E448 { s8 unk_00..03; }` (4 bytes) + `extern ... gWorldmapPlayerInterface_0[]`.
+JP differs in TWO layout consts: TileMap_FillRect width 13→12 (×8) AND the right-column pointer
+offset 0x011→0x012 / 0x211→0x212 (the panel is narrower and shifted right 1 tile).
+**LESSON (reinforces D126):** the width is an IMMEDIATE → sadiff (reloc-excluded) sees it; the
+buffer+offset is a LITERAL-POOL ADDRESS (reloc) → sadiff is BLIND. sadiff showed diff 0 but full
+make compare FAILED on 4 pool bytes. ALWAYS gate on full cold make compare. To decode a reloc-offset
+diff: `python3` diff the built .gba vs baserom, read the differing pool words, compute the byte delta
+(here +2 bytes = +1 u16 → offset 0x11→0x12).
