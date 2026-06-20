@@ -5417,3 +5417,16 @@ US `if` (single-stmt → two stmts need explicit `{}` or the 2nd runs unconditio
 branch-target diff). The larger OpAnim* (DisplayName/Exit/PutObjCommon, diff 56-262) are heavier region-diff
 clusters — future hand-RE targets, not quick wins. STANCE: keep hand-RE'ing reachable region-diff fns each
 iter; do NOT loop-abort while this lever yields (named is blocked but matching-C still advances slowly).
+
+## D167 — two more matching-C techniques: statement-reorder + region-diff bitfield-arg decode (+2, 7716→7718)
+Continued hand-RE/const-decode on low-diff smallfar candidates with two NEW source-controllable techniques:
+**(1) statement-reorder for scheduling** — EfxCalcSplitedColorStep (sub_8073A68): agbcc scheduled the
+`src1++,src2++` pointer increments BEFORE the `c=(c1-c2)*0x100` subtraction; JP does the subtract first.
+Moving the `src1++,src2++;` line to AFTER the `c=...` line in the C source fixed all 3 unrolled R/G/B blocks
+→ diff=0. (Unlike param-prologue order, INDEPENDENT-statement scheduling IS source-controllable by reordering
+the statements.) **(2) region-diff bitfield-arg decode** — OpAnimTitleFlyInSeg7 (sub_80D02FC, diff=10 in
+628B): the JP title window enables BG3 where US enables BG2. Decoded the inlined `SetWin0Layers`/`SetWin1Layers`
+WinCnt bitfield masks (`|4`=bg2 bit2 vs JP `|8`=bg3 bit3, per the struct: bg0=0x01..bg3=0x08,obj=0x10) →
+changed the call args `(0,0,1,0,1)`→`(0,0,0,1,1)` → diff=0. + a DECL for OpAnimCalcObjSlideIn. Both
+cold-`make compare` OK. Remaining smallfar (NewEfxHpBarLive, GmapRmUpdateExt_ScrollPosition,
+GmapScreen2_GetNodeScreenPos) are mixed sign-ext+region-diff/reg-alloc — heavier, not clean single-fix.
