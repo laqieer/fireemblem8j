@@ -5504,3 +5504,13 @@ the separate OpInfoProc, so a JP struct WOULD be safe) — BUT the JP ClassIntro
 LOGIC, not relayout — abandon (deep RE). Mid-diff decl-aware tail (WmSell_OnLoop_MainKeyHandler 33,
 UnitInfoWindow_DrawBase 24, SoundRoomUi_Init 43, PutWMFaceOnBg 44) are region-different (different mid-fn
 calls) — hand-RE-tier, not clean fixes. The decl-aware diff=0 vein is now fully harvested.
+
+## D173 — param-narrow hoist re-opens the narrow-use-store shape (+1, 7734→7735)
+SaveDraw_SetCursorBox: JP narrows the s16 b,c params (lsls/asrs#16) BEFORE loading `proc->unk_34`; agbcc loaded
+the struct ptr first. `int bb=b; int cc=c;` at the top forces the narrow first → diff=0. This works for the
+"narrow-USE(b-2)-then-STORE-to-struct" shape (the narrowed value feeds a computation). It does NOT help the
+pure-PASS-THROUGH param-prologue shape (AddGorgonEggTrap: `AddDamagingTrap(x,y,...,meta,delay,level)` — JP
+narrows s8 x,y before u8 meta/delay/level; the hoist optimizes away since x,y are just forwarded — stays the
+agbcc-fixed dead-class). Other small candidates checked & skipped: PutNumber2Digit (region-diff, whole 12-B
+fn), PutFaceOnBackGround (compile-fail dep), PutWMFaceOnBg (diff=45, region-diff mid-fn call). Session run
+total: +12 matching-C (7723→7735).
