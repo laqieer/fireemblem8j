@@ -5989,3 +5989,22 @@ artifacts, not real consts). DISCRIMINATOR (memory): the cascade-root fix collap
 root; 2+ independent issues (param-narrow + reg-alloc + code-shape) = defer (agbcc dead-end). param-narrow
 on a value HELD ACROSS THE BODY is unforceable (unlike off_next which fed a store and yielded to the
 int-cast-hoist). No regression: make compare OK, matching-C 91.06% (7766/8528) unchanged. Session +12.
+
+## D201 (2026-06-20) — FAR sign-ext aborts exhausted; clean cascade-root vein harvested (exploration, 0-carve)
+
+2nd exploration round. Screened const_diff_carve's "ABORT:codegen(lsrs #16)" FAR candidates for more
+off_next-style cast-hoist wins (D198). None clean:
+- `OpAnim1_UpdateScrollOneLine`: best partial (fe8u 86 diff → `int _index=(s16)(99-index)` → 25 →
+  `int si=index` hoist → 17), but the residual 17 is a CSE/reg-alloc tail (JP holds `index<<16` and derives
+  HIWORD/arith-shift in a specific reg order; my agbcc differs, cascading r1/r6/r7 + a loop-area diff;
+  writing `(u16)index>99` explicitly made it WORSE). Region-diff residual, deferred.
+- `MoveUnit_`: region-different — JP INLINES MoveUnitExt (fe8u is a 3-line wrapper). Not a match.
+- GetUnitStructFromEventParameter / AddGorgonEggTrap / ColorFade* / EfxHpBarResire_SetAnotherSide /
+  Sio_RasterRotatedBoxToWinBuf: param-narrow-held / reorder / scheduling / reg-alloc dead-ends.
+
+CONCLUSION: the off_next-clean sign-ext cascade-root was SPECIFIC to the efxhpbar family (a LOCAL fed to a
+store). Generic FAR sign-ext aborts are param-narrow-held-across-body (unforceable) or reg-alloc/CSE tails.
+The clean cascade-root vein (single behavioral const OR off_next-style local sign-ext) is now HARVESTED;
+session +12 (7754→7766). Remaining matching-C is at the agbcc/region-diff ceiling. No regression: make
+compare OK, 91.06% (7766/8528). Next lever: behavioral-const SETUP functions (disp/blend/win args) in fresh
+modules — a DIFFERENT class than sign-ext — or accept the ceiling.
