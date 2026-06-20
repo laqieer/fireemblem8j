@@ -6176,3 +6176,14 @@ const / struct-access / scheduling). IDA-decode each to classify.
 `Text_DrawString(text, GetStringFromIndex(menuItemProc->def->nameMsgId))` → `*(const char **)
 menuItemProc->def` → diff 0. FAMILY (grep `GetStringFromIndex(.*->def->nameMsgId)` in fe8u): also
 RedrawMenu (uimenu.c, sub_804FCFC, still asm) + 4 bmdebug.c menu draws — same fix candidates.
+
+## D214 — AiFindClosestTerrainAdjacentPosition: DECL_ONLY + JP gBmMapRange-reuse (+1, 7779→7780)
+**Date:** 2026-06-20. `AiFindClosestTerrainAdjacentPosition` (sub_803AEB4, 328B, fe8u src/cp_utility.c).
+(1) DECL_ONLY: declared `u8 AiGetPositionRange(int x, int y);` (JP-bound 0x803AE5D, undeclared in JP hdrs).
+(2) IDA showed JP reads `*0803AFD4` (= gBmMapRange) for BOTH the best-distance comparison AND the
+assignment, where fe8u uses the separate `gMapRangeSigned[]` symbol for the signed comparison. Replaced
+`gMapRangeSigned[tmp.y][tmp.x]` → `(s8)gBmMapRange[tmp.y][tmp.x]` → reloc-excluded diff 0 AND full cold
+make compare OK (the full gate confirms gBmMapRange is the correct symbol, not a reloc false-positive).
+**SOP:** when IDA shows the same pool address used for two reads that fe8u splits across two symbols
+(signed-view vs unsigned), collapse to the one JP symbol with a `(s8)`/`(u8)` cast. Check AI siblings
+(AiFindClosestReachableTerrainPosition, AiFindClosestTerrainPosition) for the same gMapRangeSigned pattern.
