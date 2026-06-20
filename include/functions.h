@@ -371,7 +371,7 @@ void DrawStatBarGfx(
 // ??? BackgroundSlide_Init(???);
 // ??? BackgroundSlide_Loop(???);
 ProcPtr StartMuralBackground(ProcPtr, void*, int);
-ProcPtr StartMuralBackgroundAlt(ProcPtr parent, void * vram, int pal, u8 flag);
+ProcPtr StartMuralBackgroundAlt(ProcPtr parent, void * vram, int pal, int flag);
 ProcPtr StartMuralBackgroundExt(ProcPtr, void*, int, int, int);
 void EndMuralBackground(void);
 
