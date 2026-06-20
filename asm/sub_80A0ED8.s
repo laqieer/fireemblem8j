@@ -6,11 +6,11 @@
 	.set sub_8004374, 0x08004374 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.section .text.sub_80A0ED8, "ax", %progbits
-@ sub_80A0ED8 @ JP 0x080A0ED8 - region-different, gbadisasm descriptive asm (D23)
+@ PrepItemList_DrawCurrentOwnerText @ JP 0x080A0ED8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A0ED8
+	.global PrepItemList_DrawCurrentOwnerText
 	.thumb_func
-sub_80A0ED8:
+PrepItemList_DrawCurrentOwnerText:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

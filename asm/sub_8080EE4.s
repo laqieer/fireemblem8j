@@ -3,11 +3,11 @@
 	.set PutNumberOrBlank, 0x08004A9C + 1
 	.set sub_8081070, 0x08081070 + 1
 	.section .text.sub_8080EE4, "ax", %progbits
-@ sub_8080EE4 @ JP 0x08080EE4 - region-different, gbadisasm descriptive asm (D23)
+@ PutManimLevelUpStat @ JP 0x08080EE4 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8080EE4
+	.global PutManimLevelUpStat
 	.thumb_func
-sub_8080EE4:
+PutManimLevelUpStat:
 	push {r4, r5, r6, r7, lr}
 	mov r7, r8
 	push {r7}

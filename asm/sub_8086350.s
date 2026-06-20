@@ -3,11 +3,11 @@
 	.set sub_80851FC, 0x080851FC + 1
 	.set sub_80C1E74, 0x080C1E74 + 1
 	.section .text.sub_8086350, "ax", %progbits
-@ sub_8086350 @ JP 0x08086350 - region-different, gbadisasm descriptive asm (D23)
+@ GetAvailableTileEventCommand @ JP 0x08086350 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_8086350
+	.global GetAvailableTileEventCommand
 	.thumb_func
-sub_8086350:
+GetAvailableTileEventCommand:
 	push {r4, r5, lr}
 	sub sp, #0x1c
 	adds r4, r0, #0

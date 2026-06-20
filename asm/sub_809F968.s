@@ -9,11 +9,11 @@
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.set sub_8099FA0, 0x08099FA0 + 1
 	.section .text.sub_809F968, "ax", %progbits
-@ sub_809F968 @ JP 0x0809F968 - region-different, gbadisasm descriptive asm (D23)
+@ PrepItemSupply_DrawConvoyHeader @ JP 0x0809F968 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809F968
+	.global PrepItemSupply_DrawConvoyHeader
 	.thumb_func
-sub_809F968:
+PrepItemSupply_DrawConvoyHeader:
 	push {r4, r5, r6, lr}
 	sub sp, #8
 	movs r0, #0

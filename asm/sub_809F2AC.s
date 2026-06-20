@@ -7,11 +7,11 @@
 	.set sub_8004374, 0x08004374 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
 	.section .text.sub_809F2AC, "ax", %progbits
-@ sub_809F2AC @ JP 0x0809F2AC - region-different, gbadisasm descriptive asm (D23)
+@ PrepItemUseJuna_OnDraw @ JP 0x0809F2AC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_809F2AC
+	.global PrepItemUseJuna_OnDraw
 	.thumb_func
-sub_809F2AC:
+PrepItemUseJuna_OnDraw:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb
