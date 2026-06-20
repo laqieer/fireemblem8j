@@ -5945,3 +5945,22 @@ diffs that all resolve together. The `ApplyPalettesOpAnim`↔`CopyToPalOpAnim` t
 no-op (macro alias); the real diff was the DISPCNT arg. Verified: full cold make compare OK,
 self-contain 100%, matching-C 91.03% (7763/8528). The IDA logic-decode lever is now PROVEN to carve
 (not just near-miss) when the JP difference is a behavioral const in straight-line code.
+
+## D198 (2026-06-20) — NewEfxHpBar cast-hoist cascade-root (+1, 7763→7764)
+
+Continuing the IDA-screen of dismissed pervasive-diff functions. `NewEfxHpBar` (sub_8052FFC, 228B):
+fe8u body compiled → diff 65 (size-matched), incl a scary `0x94` cluster that LOOKED like reg-alloc
+(`lsls#16;asrs#15;adds` vs `lsls#1;adds`). IDA confirmed the structure matches fe8u; the disasm showed
+the ROOT at 0x76: `off_next`'s s16 narrowing is `lsrs` (zero-ext) in mine but `asrs` (sign-ext) in JP.
+The 0x94 cluster was a CASCADE — mine RE-sign-extended off_next at the `*2` use because it zero-extended
+at the narrow. FIX: `s16 off_next` → `int off_next = (s16)(off_this + 1)` (cast-hoist) → diff 0, and the
+redundant re-extension vanished (size 232→228 = the REAL size; the gbadisasm range was right, I misread
+the END as 0x530E4 — it is 0x530E0, where the next fn `EfxHpBar_DeclineToDeath` begins).
+
+Then a link error: `ProcScr_efxHPBar` declared-but-unbound. TRAP (2nd time): IDA's `Proc_Start(0805304C,3)`
+shows the POOL ADDRESS, not the value — the real ProcScr is the WORD at 0x0805304C = **0x085E37E4** (found
+via the 3-byte ROM diff after my first wrong raw-addr). Raw-addressed that → full cold make compare OK.
+
+**Reinforces D197's cascade lesson (now 2×):** a pervasive/"reg-alloc-looking" diff in a structure-matching
+function is usually a CASCADE from ONE root (a sign-ext narrow, a behavioral const). Decode the FIRST diff
+offset, fix it, and the cluster collapses. Verified: self-contain 100%, matching-C 91.04% (7764/8528).
