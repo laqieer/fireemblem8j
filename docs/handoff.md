@@ -8,13 +8,29 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## ⏩ CURRENT STATE — 2026-06-20 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
 
-**main `38b13dbde`, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **91.19%** (7777/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
+**main `ead288ada`, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
+matching-C **91.22%** (7779/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
 `banim_`/`gfx_`/`snd_` asset-sheet labels are fe8u's own auto-naming, un-named in fe8u too → named
 can't reach 100% → the 4-axis Oracle is structurally unreachable; user directive is "keep driving
 matching-C").
 
-**This session: +10 matching-C carves (7767→7777), D203–D212.** The winning levers, in yield order:
+**This session: +12 matching-C carves (7767→7779), D203–D213b.** Newest levers (continue these first):
+- **D213 JP menu-def string-pointer (+2, a FAMILY):** any menu `*Draw` fn doing `Text_DrawString(text,
+  GetStringFromIndex(...->def->nameMsgId))` → JP stores a `char*` STRING POINTER as the def's first field
+  → `*(const char **)...->def`. Wins: MapMenu_GuideCommandDraw, WMMenu_OnGuideDraw. Remaining family
+  (grep `GetStringFromIndex(.*->def->nameMsgId)` in fe8u): RedrawMenu (multi-part, NOT just this), 4
+  bmdebug.c draws (multi-part). Likely more `*CommandDraw`/menu-text fns elsewhere — check each.
+- **TOOLS — two candidate lists saved:** `reference/omit_candidates.txt` (99; US-compiled size ≫ JP =
+  omit/rewrite) and `reference/moddiff_candidates.txt` (110; reloc-excluded baseline diff 12–80 = the
+  single-root sweet spot). **CAVEAT:** the moddiff screen (`/tmp/diff_screen.py`) compiles WITHOUT
+  `-Werror`, so DECL_ONLY fns (undeclared sym → implicit-int) show BOGUS diffs (e.g. UnitInfoWindow_DrawBase
+  "diff 24" is fake — it CFAILs in the real make). Only trust diffs for fns that compile clean under -Werror.
+- **Classification heuristic that WORKS:** small diff in a BIG function = localized single root (const /
+  one block); small diff in a SMALL function = often prologue/arg SCHEDULING (PrepareSineWaveScanlineBuf
+  family, AddGorgonEggTrap wrapper — permuter-class, SKIP). "JP OMITS a block" = delete & carve (easy);
+  "JP ADDS a block" (MoveActiveUnit HP-clamp) = must reconstruct exact reg-alloc, much harder (defer).
+
+**Earlier this session: the original +10 (7767→7777), D203–D212.** The winning levers, in yield order:
 1. **IDA cascade-root — JP-omitted block/call/guard (the big one, +6):** IDA-decode a structure-matching
    region-diff fn, diff its call/control sequence vs the fe8u source line-by-line, DELETE the block the
    JP is missing. The JP ROM systematically drops US tutorial/lord-special-case/leader-target/portrait
