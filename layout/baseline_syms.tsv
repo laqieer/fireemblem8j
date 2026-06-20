@@ -1239,3 +1239,4 @@ GetAffinityBonuses	080284C0	thumb	funcmap-confirmed function; promoted from .set
 ShouldSkipGasTrapDisplay	0802E70C	thumb	funcmap-confirmed function; promoted from .set-shim (named-axis counting fix)
 gEfxBgData_086039CC	086039CC	data	banim-efxmagic
 gEfxBgData_08601BB0	08601BB0	data	banim-efxmagic
+gMapAnimParamList	081F51DC	data	mapanim
