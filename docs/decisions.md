@@ -5388,3 +5388,32 @@ call), so reordering the DECLS doesn't reorder the COMPUTATIONS. Distinct from t
 **param-prologue narrowing ORDER** dead-class (AddGorgonEggTrap, ColorFadeSetup×4, FilterBattleAnim — JP
 narrows s8 params before u8, agbcc reverse; source can't steer params) and the **back-to-back local swap**
 (ClassChgSel c1/d1 computed adjacently → decl-reorder also reorders computation, no good).
+
+## D166 — named-axis ceiling PROVEN; matching-C automated-vein exhausted; hand-RE re-opens region-diff (+2)
+SWITCHED method to attack the named axis, then rigorously established BOTH sub-100% axes' ceilings:
+
+**NAMED 100% is PROVABLY UNREACHABLE** (concrete evidence, not assumption): the 2304 placeholders break down
+as 1583 banim_ + 28 gfx_ + 451 data_ + 240 sub_ + 2 nullsub_. (a) **banim_ (1583): fe8u — the essentially-
+complete REFERENCE decomp — uses the IDENTICAL labels** (`grep banim_arcf_ar1_2_agbpal ../fireemblem8u` →
+present verbatim). These are battle-animation asset-pipeline auto-labels with no "real" name in EITHER decomp.
+(b) **gfx_ (28): duplicate-data collisions** — `gfx_data_bg_005_bg_Village_Clear_palette` @0x08932964 embeds a
+canonical name, but `bg_Village_Clear_palette` is ALREADY taken @0x089361f0 (the residual-bg copy), so the
+sheet copy can't take it (D131 left exactly these). (c) **data_ (451): `build_data_name_candidates.py` → 0**.
+(d) **sub_ (240): `fingerprint_identify.py` → 0; `caller_fingerprint_identify.py` → 5 hits all the SAME name
+(ambiguous false-positives)**. ⇒ Naming the 1583 banim_ alone is impossible ⇒ named caps at ~89-90%, the
+ORACLE (all-4==100%) is unreachable. (Self-contain + data are already 100%.)
+
+**MATCHING-C automated vein EXHAUSTED:** `autocarve.py` on 70 US-named still-asm fns (of 455 total) → **0
+MATCH/NEAR** (all DEAD-END sign-ext / REGION / LINK). The reliable levers (int-promotion, const-decode,
+decl-reorder, incbin-split, do-while, arg-hoist, (int)-cast) are applied to every screenable candidate over
+D155-D165. Remaining matching-C = region-different logic needing **hand-RE** (slow, per-function) + agbcc
+dead-ends (param-prologue order, lsr↔asr collapse, reg-alloc).
+
+**HAND-RE lever demonstrated (+2, the directive's lever #2):** OpAnim{Eirika,Ephraim}MergeShadow — JP ending
+art draws TWO merge-shadow sprites where US draws one. Reconstructed by decoding the JP disasm + literal pool:
+read each `ldr rN,[pc,#X]` target from the JP ROM (`PutSpriteExt(1, x, y, (const u16*)0x08B3F1F0, oam)`),
+reference the JP Obj pointers RAW (US `Obj_Opanimfx_0` is misbound to garbage 0x1c208560). Watch brace-less
+US `if` (single-stmt → two stmts need explicit `{}` or the 2nd runs unconditionally — caught by a 1-byte
+branch-target diff). The larger OpAnim* (DisplayName/Exit/PutObjCommon, diff 56-262) are heavier region-diff
+clusters — future hand-RE targets, not quick wins. STANCE: keep hand-RE'ing reachable region-diff fns each
+iter; do NOT loop-abort while this lever yields (named is blocked but matching-C still advances slowly).
