@@ -5609,3 +5609,12 @@ shifts EVERY oam2_chr by +0x44 (US 0x8A→JP 0xCE, 0xB2→0xF6...) — applied v
 reloc-offset→`.4byte` (08B3F218..290). Cold make compare OK. The sibling OpAnim{Eirika,Ephraim}DisplayName/Exit
 (diff 105-262) are HEAVIER region-diff (different draw structure from offset 0xe — extra sprites/coords like
 the merge-shadows, not a clean const-shift) — deferred. Session run: +26 (7723→7749).
+
+## D182 — merge-shadow 2-sprite hand-RE extends to the DisplayName pair (+2, 7749→7751)
+OpAnim{Ephraim,Eirika}DisplayName (diff 105/168): same region-diff shape as the merge-shadows — JP draws TWO
+name sprites where US draws one. Decoded each from the JP disasm + literal pool: Ephraim
+PutSpriteExt(1,0xaa,0x78,0x08B3F1CE,0x2056)+(1,0x98,0x88,0x08B3F1DC,0x207A); Eirika (1,8,0x78,0x08B3F1F0,
+0x20A0)+(1,8,0x88,0x08B3F204,0x20C0). US Obj_OpAnimEphEirikaName/Obj_Opanimfx_0 are misbound garbage → raw JP
+ptrs. Read the oam from the actual literal (don't guess — Eirika's 1st was 0x20A0 not the merge-shadow 0x208E,
+caught by a 1-byte diff). The sibling OpAnim{Eirika,Ephraim}Exit (diff 258-262) draw the 2 sprites too BUT also
+differ in TsaModifyFirstPalMaybe/time-logic — heavier, deferred. Session run: +28 (7723→7751).
