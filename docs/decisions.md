@@ -5909,3 +5909,21 @@ const_diff) is EXHAUSTED at 91.02% (7762/8528) — the D96-predicted agbcc ceili
 headroom is (1) agbcc reg-alloc/narrow dead-ends (unreachable from valid C) and (2) rare genuinely-LOGIC-
 different functions (heavy IDA hand-RE, hours each, low EV). NOT loop-aborting (matching-C not strictly
 proven-unreachable; named is provably capped but that alone doesn't gate). make compare OK, no regression.
+
+## D196 (2026-06-20) — IDA-driven logic reconstruction of OpAnimFaceMontageBegin (near-miss, agbcc-order blocked)
+
+Per "keep driving", pursued the heavy IDA-driven hand-RE lever (the one class with theoretical
+matching-C headroom). `OpAnimFaceMontageBegin` (sub_80CDCCC, 504B) is JP +84B vs fe8u = genuinely
+LOGIC-different. Used the IDA Hex-Rays MCP (`mcp__ida__decompile` @ 0x80CDCCC) to decode the JP logic:
+the difference is a NON-EMPTY `case 1` (empty in fe8u) — decompress a BG tile + image to
+gBG3TilemapBuffer, `buf[i] += 0xE100` over 640 u16, BG_EnableSyncByMask(BG3_SYNC_BIT). Reconstructed
+it: diff 154 -> 12. The reg-alloc was fixed by reusing the function-scope `i` as the loop counter
+(a fresh `int j` mis-allocated). The residual 12 bytes (0xd6-0xe1) are an agbcc LOOP-INVARIANT-HOIST
+ORDER difference (JP materializes the 0xE100 add-const before the counter; agbcc here emits it after)
+— survived ~11 C forms (do-while/for/const-left/-=0x1F00/separate-vars/explicit-order/add-var/ret-var)
++ the permuter (base 245, no convergence). NOT byte-matchable from valid C = the D96 agbcc ceiling,
+now confirmed to bind even genuinely-reconstructable logic-different functions.
+
+**Reusable: the IDA-decode technique WORKS** (correctly recovered the JP case-1 block). Reconstruction
+preserved at `reference/nonmatching/OpAnimFaceMontageBegin.c` for a ~5-min carve if an agbcc-order
+trick is ever found. make compare OK, no regression, matching-C 91.02% (7762) unchanged.
