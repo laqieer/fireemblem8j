@@ -5704,3 +5704,29 @@ Always gate on the sha1, never the range diff.
 **Next:** sibling `OpAnimEirikaExit` is the same shape with Eirika sprite addrs/consts — apply
 the same recipe next iteration. Verified: self-contain 100%, matching-C 90.95% (7756/8528),
 data 100%, `make compare` OK, self-contained YES.
+
+## D188 (2026-06-20) — OpAnimEirikaExit sibling carve + the crossed-route insight (+1, 7756→7757)
+
+**Function:** `OpAnimEirikaExit` (sub_80CCAC0, JP 0x080CCAC0–0x080CCC50, 400B), the Eirika-route
+counterpart of D187's Ephraim ending.
+
+**The insight that cracked it (and validated D187):** JP SWAPS the two routes' ending layouts
+vs fe8u. Decoding JP-Eirika showed it uses fe8u-**Ephraim**'s constants verbatim
+(`(0xE8,0x100)` split-line, `0x170`/`0x88`/`0x180`/`0xC8` Tsa, normal Maybe-first/Reverse-second
+call order, NO extra SetPrimaryHBlankHandler) — while D187's JP-Ephraim used fe8u-**Eirika**'s
+constants (`(8,0)`/`0x158`/`0x98`/`0x1BC`/`0xC0`, Reverse-first/Maybe-second, +extra HBlank-clear).
+fe8u's own OpAnimEirikaExit body already carries the `(8,0)`/`0x158`/Reverse-first layout — i.e.
+fe8u-Eirika ≈ JP-Ephraim, confirming the cross independently.
+
+**Reconstruction:** fe8u OpAnimEphraimExit body (correct consts + normal call order) renamed to
+OpAnimEirikaExit, with the single name-sprite replaced by JP-Eirika's 2-sprite pair
+(`PutSpriteExt(1, 0xAA, 0x78, (u16*)0x08B3F1CE, 0x2046)` + `(1, 0x98, 0x88, (u16*)0x08B3F1DC, 0x2066)`).
+Verified: reloc-excluded range-diff 0, then full cold `make compare` OK (the two Tsa `bl`s decode
+to Maybe@0x0CB720 first / Reverse@0x0CB7D8 second = normal order, so no call-name swap needed,
+unlike D187). matching-C 7756→7757 (90.96%), self-contain 100%, data 100%.
+
+**Reusable SOP (op-anim ending pair):** for a region-diff op-anim ending, (1) the fe8u sibling of
+the OTHER route is often the correct constant template (JP cross-swaps routes); (2) the only true
+deltas are the 2-sprite name draw (decode Obj/oam from the literal pool) + which fe8u body's consts
+apply + the Tsa call ORDER (decode both `bl` targets — Maybe@0xCB720/Reverse@0xCB7D8 — and match,
+swapping call names if needed); (3) always gate on full cold `make compare`, never the range diff.
