@@ -1,1 +1,1 @@
-0C5868	0C59F4	src/PutWorldmapStatusDetails.o(.text)	PutWorldmapStatusDetails (aliased-fn carve; JP special-char 0x35->0x1f)
+0C5868	0C59F4	src/PutWorldmapStatusDetails.o(.text)	handdecomp

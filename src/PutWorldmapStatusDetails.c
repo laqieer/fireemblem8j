@@ -1,4 +1,5 @@
 #include "global.h"
+int WorldmapStatus_CountAllies(void);
 #include "fontgrp.h"
 #include "statscreen.h"
 #include "bmunit.h"
@@ -17,8 +18,6 @@
 #include "helpbox.h"
 #include "worldmap.h"
 #include "constants/songs.h"
-
-int WorldmapStatus_CountAllies(void);
 
 struct WorldmapStatusProc
 {
@@ -46,7 +45,7 @@ void PutWorldmapStatusDetails(struct WorldmapStatusProc * proc)
 
     PutTwoSpecialChar(
         TILEMAP_LOCATED(gBG0TilemapBuffer, 17, 15), TEXT_COLOR_SYSTEM_GOLD, TEXT_SPECIAL_LV_A, TEXT_SPECIAL_LV_B);
-    PutSpecialChar(TILEMAP_LOCATED(gBG0TilemapBuffer, 21, 15), TEXT_COLOR_SYSTEM_GOLD, 0x1f /* JP special-char index (US TEXT_SPECIAL_35=0x35) */);
+    PutSpecialChar(TILEMAP_LOCATED(gBG0TilemapBuffer, 21, 15), TEXT_COLOR_SYSTEM_GOLD, 0x1F);
 
     PutTwoSpecialChar(
         TILEMAP_LOCATED(gBG0TilemapBuffer, 17, 17), TEXT_COLOR_SYSTEM_GOLD, TEXT_SPECIAL_HP_A, TEXT_SPECIAL_HP_B);
