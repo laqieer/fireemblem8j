@@ -5477,3 +5477,17 @@ Splitting requires registering a NEW src/data/<subsys>/ in the Makefile's data-o
 globs src/data/*.c, not subdirs) — deferred (the unplaced old .o appended 124 B to the ROM). Remaining
 decl-aware NEAR (diff>0 after decls): ClassIntroLetter_LoopFadeOut(8), UnitInfoWindow_DrawBase(24),
 UiSupport_GetSupportTalkSong(13) — need an additional fix beyond the decl.
+
+## D171 — DECL_ONLY tail (data-syms + D121 data-split) (+2, 7731→7733)
+Extended the decl-aware screen (`/tmp/declrank2.py`) to also resolve undeclared DATA symbols (add the US
+`extern` decl when the sym is in the JP ELF). Confirmed the diff=0 FUNCTION-DECL_ONLY vein is harvested; the
+tail is 3 candidates: **ClearBoxDialogueText (+1)** — needed BOTH a fn proto (GetDialogueBoxConfig) AND extern
+decls for two baseline-bound ProcScr tables (ProcScr_BoxDialogueDrawTextExt, gHelpbox_3; both `A` syms in the
+ELF). **GetChapterSurvivalRank (+1, D121 data-split now working)** — its `u8 arr[4]={4,3,2,1}` auto-array
+emits a 4-B .rodata template JP places at 0x1F5BF0 (first 4 B of the data_081F5BF0 residue). Split: carve the
+fn's .text @0BAD48 + .rodata @1F5BF0, replace data_081F5BF0 with data_081F5BF4 (remaining 120 B). The earlier
++124-byte failure was a STALE `src/data/data_081F5BF0/*.o` left on disk after `git rm` (untracked) — `rm -rf`
+the whole subsystem dir, not just git-rm. DATA_INCBIN_CFILES auto-discovers new src/data/<sub>/ via `find
+-mindepth 2` (no Makefile edit needed). Clean build + self-contained + data-axis 100% all verified.
+ClassIntroLetter_LoopFadeOut (diff=8) is the opinfo OpInfoEnterProc struct-offset cluster (deferred — whole
+struct). Session total this run: +10 (5 AiStaff, AiTryDoRogue, WMFaceCtrl, ClearBox, GetChapterSurvivalRank).
