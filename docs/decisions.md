@@ -6123,3 +6123,13 @@ EVFLAG_GAMEOVER)) ClearFlag(EVFLAG_GAMEOVER); break; }` block — JP goes straig
 lord special-casing here; BattleInitItemEffectTarget in the staff effects D207/D208). When IDA shows a
 structure-matching region-diff fn is SHORTER and skips a recognizable US block, delete that block.
 +4 this vein (ExecLatona, ExecFortify, MapAnim_DisplayDeathQuote, +the staff family already-carved).
+
+## D210 — RepairSelectOnSelect: IDA cascade-root JP-omitted guard + raw-addr (+1, 7774→7775)
+**Date:** 2026-06-20. `RepairSelectOnSelect` (sub_80298E4, 96B, fe8u src/bmitemuse.c).
+IDA: JP omits the `if (GetPortraitData(GetUnitPortraitId(GetUnit(targetIndex)))->img)` portrait guard
+— JP calls StartFace(0,...,184,12,FACE_96x80) + SetFaceBlinkControlById(0,5) UNCONDITIONALLY. Remove
+the if → diff 0. Then LINK failed (undefined gMenuInfo_RepairItems — unbound JP data); raw-addressed it
+`(const struct MenuDef *)0x085C5544` (pool value read via struct.unpack from ROM 0x29940). Full cold OK.
+**SOP add:** after a cascade-root diff-0, a LINK failure on an unbound data symbol = raw-address it at
+its pool value (read the .4byte the asm literal pool held at the call site); mind the exact pointer
+type (StartOrphanMenu wants const struct MenuDef*, not MenuInfo* — agbcc -Werror catches the mismatch).
