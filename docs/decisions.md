@@ -6066,3 +6066,19 @@ is still asm and has few src/ callers, apply the proto change to the real header
 rather than treating the permuter output as non-physical. The permuter localized a header bug a
 hand search wouldn't have found. NOTE the sed-with-digit trap: `[a-z ]*c` won't match `s8 c`
 (the `8`); use `[^;]*` for prototype-type substitution.
+
+## D205 — UpdateStatArrowSprites: DECL_ONLY + cast-hoist (+1, 7769→7770)
+**Date:** 2026-06-20. **Function:** `UpdateStatArrowSprites` (sub_8015BF0, JP 0x8015BF0, 72B, fe8u src/bm.c).
+- DECL_ONLY: `gSysUpArrowSpriteLut`/`gSysDownArrowSpriteLut` are JP-bound (abs 0x85C29B0/0x85C29BC)
+  but undeclared in JP headers. Added `extern u16 * gSys{Up,Down}ArrowSpriteLut[];` locally in the .c.
+- Residual diff 1 (entry sign-ext): the 3rd param `isDown` is held in r4 across the GetGameClock
+  call then `cmp r4,#0` (ternary). JP sign-extends at entry (`asrs`), agbcc zero-extends (`lsrs`).
+  `s8 isDown` param alone did NOT force it (boolean truth-test → agbcc proves non-neg). The cast-hoist
+  `int d = (s8)isDown;` first statement + use `d` DID → diff 0. NO header proto change (kept u8 param),
+  zero caller blast-radius. Full cold make compare OK.
+**SOP refine — boolean-param sign-ext:** the D189 "boolean 0/1 sign-ext is a dead-end" rule has an
+exception: when the value is HELD ACROSS A CALL in a callee-saved reg (not used immediately), the
+`int d = (s8)param` cast-hoist forces the entry asr and matches. Same mechanism as PutWMFaceOnBg (D204).
+**TRAP reconfirmed (memory):** a permuter base C file left in src/ causes a multiple-definition LINK
+error (the Makefile links ALL src/*.o, not just ldscript entries) — `rm src/<Fn>.c` immediately after
+`permute.sh import` (the base is preserved in nonmatchings/<Fn>/base.c). Broke a make compare here.
