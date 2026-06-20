@@ -6107,3 +6107,9 @@ cold make compare OK. Classic cascade-root: a 43-byte pervasive diff collapsed t
 region-different function — diff the JP pseudocode's call sequence against the fe8u source line-by-line;
 a missing/extra call is the root. (IDA session note: reopen via `idb_open(fireemblem8.elf.i64)` — the
 .elf is removed after each `make compare` but the .i64 persists and JP addresses are stable.)
+
+## D208 — ExecFortify + Exec* staff family: same JP-omitted call (+1, 7772→7773)
+**Date:** 2026-06-20. `ExecFortify` (sub_802F08C, 120B) — IDA confirmed the SAME root as D207:
+JP omits `BattleInitItemEffectTarget(GetUnitFromCharId(GetPlayerLeaderPid()))`. The JP item-use
+staff effects (bmusemind.c family) systematically drop that fe8u line. Remove → diff 0.
+Sweeping the rest of the still-asm Exec* staff functions for this pattern.
