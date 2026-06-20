@@ -5779,3 +5779,35 @@ From the same `screen_cfail.py` NEAR bucket (`15:0c->14`).
 
 Verified: full cold `make compare` OK (the link error only surfaced at full-ROM link, not the
 range-diff — reinforces the full-compare gate), self-contain 100%, matching-C 90.98% (7759/8528).
+
+## D191 (2026-06-20) — StartLinkArenaPointsNumberMovers: s8 cast-hoist + misbound-sym raw-addr (+1, 7759→7760)
+
+**Long exhaustion round (anti-spinning: tried 4 distinct levers before landing one):**
+- NAMING SWEEP (different axis): `fingerprint_identify.py` = 0 hits; `caller_fingerprint_identify.py`
+  = 5 bogus hits all "GetUnitRescueName" (single-signal collapse). The 240 residual sub_ are
+  genuinely unidentifiable by automated naming → advance only via hand-decomp (which also names).
+- `screen_msgid_offset.py` = 0 clean/near. Exhausted.
+- NEAR sign-ext bucket: confirmed DEAD-ENDs — `ShopTryMoveHand`/`HbMoveCtrl_OnIdle` (boolean 0/1,
+  agbcc proves non-negative → won't asr even as s8), `ReadSramFast_Core`/`WriteSramFast` (r0↔r1
+  reg-swap on `REG_WAITCNT & ~3`), `GmMuPrim_TrackMovementDelta` (s16 delta stored to u16 field;
+  `int` cast breaks the field stores, diff→112), `StartSubSpell_efxIvaldiOBJ1` (s16 x/y sign-ext +
+  x↔y register swap with `mov sl/r9` churn = structural, per the permuter memo).
+
+**The win — `StartLinkArenaPointsNumberMovers` (sub_8049EF4, JP 0x08049EF4–0x0804A040, 332B):**
+1. DECL_ONLY: 2 ProcScr (`ProcScr_LinkArena_PointsNumberMover/PointsSpriteText`, both bound A syms)
+   declared extern.
+2. The `u8 flag` param (a genuine multi-bit flag, NOT 0/1) is zero-extended by agbcc but JP
+   sign-extends. Neither `s8 flag` (param+header) nor `(s8)flag` cast flipped it (agbcc
+   back-propagates the u8 store). FIX = `int fl = (s8)flag;` AS THE FIRST STATEMENT (before
+   `int count = 0`) + route all `flag` uses through `fl`. Statement ORDER was essential — placing
+   it after `count=0` reordered the prologue (diff→9); first-position matches JP's flag-narrowed-
+   first sequence. This is the NewEfxRestWINH (D190) int-intermediate lever; discriminator vs the
+   boolean dead-ends = the value is genuinely multi-bit.
+3. Full `make compare` then failed on ONE pool word (0xe4): `gUnk_Sio_1` is misbound in
+   `asm/jp_syms.s:3785` to the sentinel `0x4645464E` (placeholder for unknown addr); real JP addr
+   is `0x02000C78` (US fe8u-confirmed). `src/sub_80498B8.c` already documented this exact corruption
+   in a comment and raw-addresses it — followed that convention:
+   `InitSpriteText((struct Text *)0x02000C78)`. (Reinforces the full-compare gate — the misbound
+   symbol is reloc-masked, range-diff was 0.)
+
+Verified: self-contain 100%, matching-C 90.99% (7760/8528), `make compare` OK.
