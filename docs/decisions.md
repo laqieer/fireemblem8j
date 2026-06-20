@@ -6113,3 +6113,13 @@ a missing/extra call is the root. (IDA session note: reopen via `idb_open(fireem
 JP omits `BattleInitItemEffectTarget(GetUnitFromCharId(GetPlayerLeaderPid()))`. The JP item-use
 staff effects (bmusemind.c family) systematically drop that fe8u line. Remove → diff 0.
 Sweeping the rest of the still-asm Exec* staff functions for this pattern.
+
+## D209 — MapAnim_DisplayDeathQuote: IDA cascade-root, JP-omitted block (+1, 7773→7774)
+**Date:** 2026-06-20. `MapAnim_DisplayDeathQuote` (sub_807CD3C, 96B, fe8u src/mapanim.c).
+IDA showed JP omits the whole `switch(pid){ case CHARACTER_EIRIKA/EPHRAIM: if(CheckFlag(
+EVFLAG_GAMEOVER)) ClearFlag(EVFLAG_GAMEOVER); break; }` block — JP goes straight from
+`pid = UNIT_CHAR_ID(...)` to `if (CheckBattleDefeatTalk(pid))`. Removing it → diff 0.
+**Pattern emerging:** the JP ROM systematically drops certain US-only control blocks (EVFLAG_GAMEOVER
+lord special-casing here; BattleInitItemEffectTarget in the staff effects D207/D208). When IDA shows a
+structure-matching region-diff fn is SHORTER and skips a recognizable US block, delete that block.
++4 this vein (ExecLatona, ExecFortify, MapAnim_DisplayDeathQuote, +the staff family already-carved).
