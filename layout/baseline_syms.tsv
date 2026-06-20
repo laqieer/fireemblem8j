@@ -1240,3 +1240,5 @@ ShouldSkipGasTrapDisplay	0802E70C	thumb	funcmap-confirmed function; promoted fro
 gEfxBgData_086039CC	086039CC	data	banim-efxmagic
 gEfxBgData_08601BB0	08601BB0	data	banim-efxmagic
 gMapAnimParamList	081F51DC	data	mapanim
+gMapAnimParamList_520D	081F520D	data	mapanim
+gMapAnimParamList_51FE	081F51FE	data	mapanim
