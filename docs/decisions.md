@@ -5366,3 +5366,25 @@ ReadSramFast_Core r0↔r1); (e) **structural** (MoveUnitExt, EfxTeonoSeMain, Pla
 (f) **large-msgid** (ExecJunaFruitItem GetStringFromIndex(0x1E)→big JP literal, mixed with other diffs).
 Next iter should PIVOT lever: hand-RE a specific region-diff fn, the NAMED axis (rename carved sub_
 placeholders), or autocarve on baseline-bound sub_. Do NOT launch permuters on base>150 (won't converge).
+
+## D165 — named axis at tooling ceiling; const-decode+decl-reorder re-opens a "reg-swap" (+1, 7713→7714)
+PIVOTED to the NAMED axis (85.53%, 2304 placeholders) per switch-methods. Breakdown of placeholders:
+**1583 banim_ + 28 gfx_** (asset sheets — the fe8u-convention hard ceiling, genuinely unnamed in fe8u too),
+**451 data_** (`build_data_name_candidates.py` → 0 candidates: exhausted), **240 sub_** functions
+(`fingerprint_identify.py` → 0 reliable; `caller_fingerprint_identify.py` → 5 hits but ALL the same name
+= ambiguous false-positives, unusable), 2 nullsub_. CONCLUSION: the named axis is at its automated ceiling —
+the only path left for the 240 sub_ is full hand-RE (which also yields matching-C). Named 100% requires
+naming the 1611 asset sheets, which have no real name in either decomp ⇒ **named 100% is unreachable**
+(D96 confirmed); the reachable named work == the matching-C hand-RE work (each carved sub_ = +1 both axes).
+
+Pivoted back to matching-C via **const-decode + declaration-reorder** (a NEW combo, different from the
+sign-ext carves). **ExecJunaFruitItem** (sub_802F92C, was NEAR6): 2 diffs were a large JP msgid
+(`GetStringFromIndex(0x1E)`→`0x81D`; US 0x1E and JP 0x81D are different ID spaces, NOT an offset — read the
+literal from the JP pool at the `ldr`'s pc-target), and 4 diffs were a **r5↔r6 swap of two LOCALS**
+(itemId/levelCount). KEY INSIGHT: that "reg-alloc swap" was **declaration-order-driven** — the US declares
+`int levelCount;` before `int itemId`; reordering so itemId is declared first flipped r5/r6 to match JP →
+diff=0. This works because the two locals are computed at DIFFERENT points (itemId early, levelCount after a
+call), so reordering the DECLS doesn't reorder the COMPUTATIONS. Distinct from the agbcc-fixed
+**param-prologue narrowing ORDER** dead-class (AddGorgonEggTrap, ColorFadeSetup×4, FilterBattleAnim — JP
+narrows s8 params before u8, agbcc reverse; source can't steer params) and the **back-to-back local swap**
+(ClassChgSel c1/d1 computed adjacently → decl-reorder also reorders computation, no good).
