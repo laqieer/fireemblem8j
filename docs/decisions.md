@@ -5759,3 +5759,23 @@ JP 0x080B4144–0x080B4414, 720B) as NEAR=1 (`16e:cf->d0`):
 Verified: reloc-excluded diff 0 → full cold `make compare` OK, self-contain 100%, matching-C 90.97%
 (7758/8528). The CFAIL+const class remains a live (if slow) matching-C vein; the NEAR sign-ext/reg
 bucket is mostly exhausted dead-ends.
+
+## D190 (2026-06-20) — NewEfxRestWINH s16-cast-hoist + raw-addr ProcScr (+1, 7758→7759)
+
+**Function:** `NewEfxRestWINH` (sub_805C5D8, JP 0x0805C5D8–0x0805C6EC, 276B), efx BG-scroll WINH setup.
+From the same `screen_cfail.py` NEAR bucket (`15:0c->14`).
+
+**Two fixes:**
+1. The `s16 b` param (a BG scroll offset, genuinely signed) is narrowed zero-ext (`lsls#16;lsrs#16`)
+   by agbcc because it only feeds `*buf = b` strh stores (width-preserving → agbcc picks lsr); JP
+   sign-extends (`asrs#16`). Forced the asr with an early `int bb = (s16)b;` and replaced the 4
+   `*buf = b` loop stores with `*buf = bb` (D153 cast-hoist). **Discriminator confirmed:** this
+   WORKS for a genuine s16 value (negative-capable scroll offset) but the SAME `0e→16`/`0c→14` is a
+   DEAD-END for a 0/1 boolean (D189 ShopTryMoveHand/HbMoveCtrl_OnIdle — agbcc proves non-negative).
+2. `ProcScr_EfxRestWINH` declared (header) but UNBOUND in the JP link → linker error. Read its addr
+   from the JP literal pool (`_0805C6E8: .4byte 0x085FF238`) and referenced it raw:
+   `Proc_Start((const struct ProcCmd *)0x085FF238, ...)` (D147 — data region-same in the
+   self-contained ROM, no binding needed). EfxMagicHBlank_0/1 were already bound (0x0805C4D4/C500).
+
+Verified: full cold `make compare` OK (the link error only surfaced at full-ROM link, not the
+range-diff — reinforces the full-compare gate), self-contain 100%, matching-C 90.98% (7759/8528).
