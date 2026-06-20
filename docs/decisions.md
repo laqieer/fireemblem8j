@@ -5270,3 +5270,21 @@ Carved CanUnitUse_unused + GetConvoyItemCostSum (full GetItemCost chain). The ms
 (screen_msgid_offset.py) is now exhausted (remaining hardcoded-msgid fns are region-diff size).
 DEAD: PidStats* (the JP UnitUsageStats/bwl struct is 16B w/ different bitfields vs the US 50B struct —
 region-different data layout, not an inline issue).
+
+## D161 — decomp-permuter cracks reg-alloc near-misses (the productive lever past the hand-decomp frontier; +3)
+
+After the mechanical matching-C levers (const-decode/ldrsh/int-promotion/extern-inline) thinned, the
+**decomp-permuter** is the reliable next lever for reg-alloc/spill near-misses that hand-decomp can't force.
+Workflow (per [[decomp-permuter-workflow]]): get the near-match C (often already int-promoted to ~8-30 diff),
+`permute.sh import src/<F>.c <massaged.s>` (C must be in src/ tree for root detection; rm after), launch via
+the HARNESS background (`~/permuter-venv/bin/python tools/decomp-permuter/permuter.py nonmatchings/<F>/ -j 3
+--stop-on-zero > log 2>&1 &`), `--stop-on-zero` exits the instant it hits 0. CONVERGED FAST:
+DrawMenuItemHover (base 40 -> 0, 178 iters), TriggerMapChanges (base 135 -> 0). **Base 135 still converged**
+— don't pre-judge >100 as structural; TRY it (cheap, ~30s). Re-validate the winning output-0/source.c under
+the REAL -Werror flags before carving (compile.sh drops -Werror).
+**Two reusable winning transforms:** (1) route a value through a temp before its real use
+(`w = menuItems[item]->yTile; y = w; w = rect.w-2`) to force a reg; (2) **force a held value to the stack**
+via address-taking (`int *p = &f; ... (*p)==1`) to match the JP spilling a param across calls.
+**Pair bonus:** the transform applies to structurally-identical siblings (TriggerMapChanges +
+UntriggerMapChange both 0-diff from one permuter run). Candidates: the small-FAR reg-alloc residuals whose
+diff does NOT start at offset 0 (those are region-different, not permutable).
