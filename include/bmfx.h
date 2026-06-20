@@ -99,7 +99,7 @@ void ShinningStonefx_Delay(struct ProcShinningStonefx * proc);
 // ??? NewBoomFogFx(???);
 // ??? CheckBoomFogFxExists(???);
 void EventEarthQuakeMain(struct ProcBmFx * proc);
-void StartEventEarthQuake(u8 type, u8 direction, s8 play_sound);
+void StartEventEarthQuake(u8 type, u8 direction, int play_sound);
 void EndEventEarthQuake(void);
 // ??? StoneShatterEvent_OnEnd(???);
 void StartStoneShatterAnim(struct Unit *, ProcPtr);
