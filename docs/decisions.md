@@ -5551,3 +5551,19 @@ Img_UnitListBanner_Animation, gUnkData_77) were ALREADY defined in worldmap_gmap
 vein is thin (clean only when the msgid is the ONLY diff). TU-detection trap: use `grep -rln "\bFn\b"` over all
 files + pick the one whose extract_func_only returns a real body (caller files give empty bodies). Session run:
 +21 (7723→7744).
+
+## D177 — data-bind screen (+1 OnMain_SioError); AUTOBIND POLLUTION WARNING
+Built a data-bind screen (/tmp/dbind.py) to find region-same fns blocked only by unbound data syms. It flagged
+4 (OnMain_SioError, StartSubSpell_efxEvilEyeOBJ, ExtramenuUnk_LoadGfx, SysBrownBox_Loop) but the "binds=N"
+count is UNRELIABLE (screen uses non-Werror + ignores .rodata/multi-sym). Only **OnMain_SioError (+1)** was
+clean — and its "bind" was actually a FUNCTION (OnMain_SioErrorWait) that the auto-decl mis-declared as
+`extern u8[]` (→ -Werror incompatible-pointer-type); declaring it `void Fn(void);` fixed it. StartSubSpell had
+a local .rodata (embedded AnimScr ptr table) + 6 unbound syms (Pal_Banim_6/Img_Banim_15/AnimScr_Banim_0/1/
+gEfxBgSemaphore/ProcScr) → too complex, reverted.
+**CRITICAL — NEVER run `autobind.py <Fn>...` blindly on still-asm sub_ fns:** it printed "[no recipe]" for most
+but for StringInsertSpecialPrefixByCtrl + TalkLoadFace it CARVED them (created untracked handdecomp/autobind
+tsvs + src/.c + git-rm'd the asm) WITHOUT byte-verifying → 54-byte ROM corruption from a non-matching src/.c
+leaking into the build (CFILES globs ALL src/*.c). Cleanup: rm the untracked autobind_/handdecomp_ tsvs +
+stray src, `git checkout HEAD -- asm/sub_XXXX.s gbadisasm_*.tsv` to restore the deleted asm. Lesson: a stray
+uncarved src/*.c with a real symbol BREAKS make compare; always `git status --short src/*.c | grep ??` before
+trusting a cold compare. Session run: +22 (7723→7745).
