@@ -6082,3 +6082,16 @@ exception: when the value is HELD ACROSS A CALL in a callee-saved reg (not used 
 **TRAP reconfirmed (memory):** a permuter base C file left in src/ causes a multiple-definition LINK
 error (the Makefile links ALL src/*.o, not just ldscript entries) — `rm src/<Fn>.c` immediately after
 `permute.sh import` (the base is preserved in nonmatchings/<Fn>/base.c). Broke a make compare here.
+
+## D206 — StartSupportUnitSubScreen: DECL_ONLY + cast-hoist (+1, 7770→7771)
+**Date:** 2026-06-20. **Function:** `StartSupportUnitSubScreen` (sub_80A69D4, JP 0x80A69D4, 36B, fe8u src/uisupport.c).
+Same SOP as D205. (1) DECL_ONLY: `gProcScr_SupportUnitSubScreen` JP-bound (abs 0x8A95C94) but
+undeclared — `extern struct ProcCmd gProcScr_SupportUnitSubScreen[];`. (2) The `s8 fromPrepScreen`
+param is stored to `proc->fromPrepScreen` AFTER Proc_StartBlocking (held across the call); agbcc
+zero-extends (8-bit store), JP sign-extends at entry. Cast-hoist `int fp = (s8)fromPrepScreen;` +
+store `fp` → diff 0. Full cold make compare OK.
+**This is now a repeatable vein:** screen_cfail NEAR bucket (single `0e->16` sign-ext, DECL_ONLY) +
+the "s8 param held across a call (stored to field / passed later)" cast-hoist. UpdateStatArrowSprites
+(D205), StartSupportUnitSubScreen (D206) both this way. Discriminator from the dead-ends
+(ShopTryMoveHand, HbMoveCtrl): held-across-a-call = winnable; used-immediately (truth test) or
+OR-accumulation-truncation = dead-end (cast-hoist spawns a spurious callee-saved reg, diff explodes).
