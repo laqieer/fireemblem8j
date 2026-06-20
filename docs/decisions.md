@@ -5889,3 +5889,23 @@ region-same text-draws were the last of them). What remains is HEAVY region-diff
 (multi-section reconstruction like the D187/D188 op-anim endings) + agbcc reg-alloc/sign-ext dead-ends.
 NEXT: commit to a full structural reconstruction of one region-different function per iteration.
 No regression: make compare OK, matching-C 91.02% (7762/8528) unchanged.
+
+## D195 (2026-06-20) — 2nd confirming sweep: NEAR bucket = prologue param-narrow dead-ends (HONEST, 0-carve)
+
+Extends D194. Probed the remaining cheap matching-C buckets with concrete per-function evidence:
+- **NEAR bucket (1-8 reloc-excluded diffs) is EXHAUSTED — dominated by agbcc PROLOGUE param-narrow-ORDER
+  dead-ends:** `FilterBattleAnimCharacterPalette` (agbcc narrows `item` before `index`; JP reverse),
+  `MoveUnitExt` (narrows count/flags interleaved differently; permuter "stuck at 120"). The narrowing is
+  generated in the PROLOGUE from the signature — a body temp (`int idx=index`) does NOT change the order,
+  and the body-mutating permuter can't reach it. Plus the known boolean/field sign-ext + reg-swap dead-ends.
+- **`const_diff_carve.py` staged 0 across ALL 80 size-matched FAR** (LEN-mismatch or codegen-ABORT) — the
+  D81 const-only vein is fully harvested.
+- The efx computation loops are codegen-different (same logic): `EfxRestWINMain` (JP saves high regs
+  r8/sl, +12B), `EfxPartsofScroll2Main`/`EfxCircleWINMain` (s16-narrow + const-materialization, +4/+16B).
+  Codegen-different ≠ IDA-portable (IDA only helps LOGIC-different fns).
+
+**Conclusion:** the cheap matching-C frontier (DECL_ONLY / msgid-const / size-matched-const / NEAR /
+const_diff) is EXHAUSTED at 91.02% (7762/8528) — the D96-predicted agbcc ceiling region. The only residual
+headroom is (1) agbcc reg-alloc/narrow dead-ends (unreachable from valid C) and (2) rare genuinely-LOGIC-
+different functions (heavy IDA hand-RE, hours each, low EV). NOT loop-aborting (matching-C not strictly
+proven-unreachable; named is provably capped but that alone doesn't gate). make compare OK, no regression.
