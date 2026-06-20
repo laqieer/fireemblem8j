@@ -5665,3 +5665,42 @@ confirmed all genuinely structural/region-different (fact-driven, NOT assumed):
 HONEST STATE: the screen-reachable + small-diff + narrow-hoist matching-C is exhausted. Remaining gains require
 either heavy full-reconstruction hand-RE of region-different fns (OpAnim Exit ~400B, low yield/hr) or the 240
 unnamed sub_ (full RE). No carve this iteration — did NOT fake one. Session run stays +32 (7723→7755).
+
+## D187 (2026-06-20) — OpAnimEphraimExit full disasm-driven hand-RE (+1 matching-C, 7755→7756)
+
+**Context:** small-diff matching-C vein exhausted (D186 0-carve). Committed to heavy
+region-different op-anim ending reconstruction, the representative remaining frontier.
+
+**Function:** `OpAnimEphraimExit` (sub_80CD2E0, JP 0x080CD2E0–0x080CD474, 404B). Draws the
+Ephraim-route ending name + split-line/Tsa palette transition. Region-different from fe8u
+(JP ending art positioned differently), so it sat as gbadisasm descriptive asm.
+
+**Method (SCR2_Loop-class const-decode, scaled to a multi-section function):**
+1. Ported the fe8u body; replaced the single name-sprite `PutSpriteExt` with the JP 2-sprite
+   pair (Obj 0x08B3F1F0/oam 0x208E @ (8,0x78); Obj 0x08B3F204/oam 0x20B2 @ (8,0x88)) — the
+   DisplayName-class merge-shadow fix.
+2. Full mnemonic-level disasm diff (reloc-excluded) of mine vs JP isolated 6 JP layout consts:
+   - 2nd Interpolate (split-line X): `(1,0xE8,0x100,…)` → `(1,8,0,…)`
+   - unk34 Interpolate 3rd arg: `0x170` → `0x158`
+   - TsaModifyFirstPalMaybe Y arg: `0x88` → `0x98`
+   - unk36 Interpolate 3rd arg: `0x180` → `0x1BC`
+   - TsaModifyFirstPalReverse Y arg: `0xC8` → `0xC0`
+   - extra `SetPrimaryHBlankHandler(NULL)` inside the `time2==0x18` block before `Proc_Break`
+   The cmp/threshold (timing) constants were all identical → only positional layout differs.
+3. Reloc-excluded range-diff hit 0 — but full COLD `make compare` FAILED on 3 bytes: the two
+   `TsaModifyFirstPal{Maybe,Reverse}` `bl`s resolved to SWAPPED targets. Decoded: JP's first
+   call site (Maybe-arg semantics: 0x98/BG_2/+0x1000/NULL/flag-1) targets 0x0CB7D8 and the
+   second (Reverse semantics: 0xC0/BG_0/+0x800/flag-0) targets 0x0CB720 — opposite to my
+   name→addr map (Maybe@0xCB720, Reverse@0xCB7D8). Fixed by SWAPPING the two call *names* in
+   this file only (args unchanged, both 7-arg, compiles clean). The global labels are
+   load-bearing — OpAnimCharacterFlyIn1/FlyOutBg1 + opanim-main_* call them in the normal
+   (US) order and still byte-match — so JP's OpAnimEphraimExit genuinely calls them swapped.
+
+**Lesson (reinforces D126 full-compare gate):** a 0 reloc-excluded range-diff is necessary
+but NOT sufficient — a swapped `bl` between two same-signature siblings passes the range
+screen (relocations masked) and only surfaces under the full self-contained cold `make compare`.
+Always gate on the sha1, never the range diff.
+
+**Next:** sibling `OpAnimEirikaExit` is the same shape with Eirika sprite addrs/consts — apply
+the same recipe next iteration. Verified: self-contain 100%, matching-C 90.95% (7756/8528),
+data 100%, `make compare` OK, self-contained YES.
