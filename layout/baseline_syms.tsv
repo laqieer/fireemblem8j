@@ -1243,3 +1243,4 @@ gMapAnimParamList	081F51DC	data	mapanim
 gMapAnimParamList_520D	081F520D	data	mapanim
 gMapAnimParamList_51FE	081F51FE	data	mapanim
 SaveMenuSubSelBoxTexts	08A9D64C	data	savemenu sub-select box text-id table
+SlotQueuePop	0800D808	thumb	slot-queue pop (=sub_800D808)
