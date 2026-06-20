@@ -5618,3 +5618,14 @@ PutSpriteExt(1,0xaa,0x78,0x08B3F1CE,0x2056)+(1,0x98,0x88,0x08B3F1DC,0x207A); Eir
 ptrs. Read the oam from the actual literal (don't guess — Eirika's 1st was 0x20A0 not the merge-shadow 0x208E,
 caught by a 1-byte diff). The sibling OpAnim{Eirika,Ephraim}Exit (diff 258-262) draw the 2 sprites too BUT also
 differ in TsaModifyFirstPalMaybe/time-logic — heavier, deferred. Session run: +28 (7723→7751).
+
+## D183 — efx SCR2_Loop pair: JP-different Interpolate args (+2, 7751→7753)
+Pivoted off OpAnim (3 iters) to the efx SCR2_Loop pair (diff 6/7 — I'd previously mis-filed as "intertwined
+scheduling"; it's actually a clean const/arg decode). The JP versions call Interpolate with DIFFERENT
+arguments than US: efxLunaSCR2_Loop US `(INTERPOLATE_LINEAR, 0, 0x4000, t, n)` → JP `(INTERPOLATE_RSQUARE,
+0x4000, 0, t, n)` (different type + reversed start/end); efxExcaliburSCR2_Loop US `(RSQUARE, 0x4000, 0, ...)`
+→ JP `(LINEAR, 0, 0x40000, ...)` (the MIRROR + a 10x end const 0x4000→0x40000, caught by a residual `lsls#7`
+vs `#11` after the type/order fix). Decode the type (enum interpolate_method: LINEAR=0..RCUBIC=5) + start/end
++ const from the disasm regs (`movs#0x80;lsls#7`=0x4000, `lsls#11`=0x40000). LESSON: a NEAR diff at an
+arg-setup block that looks like "scheduling" can be a JP-different CALL ARGUMENT (animation tuning differs
+JP vs US) — decode each arg from the regs, don't assume reg-alloc. Session run: +30 (7723→7753).
