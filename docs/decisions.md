@@ -6095,3 +6095,15 @@ the "s8 param held across a call (stored to field / passed later)" cast-hoist. U
 (D205), StartSupportUnitSubScreen (D206) both this way. Discriminator from the dead-ends
 (ShopTryMoveHand, HbMoveCtrl): held-across-a-call = winnable; used-immediately (truth test) or
 OR-accumulation-truncation = dead-end (cast-hoist spawns a spurious callee-saved reg, diff explodes).
+
+## D207 — ExecLatona: IDA cascade-root, JP-omitted call (+1, 7771→7772)
+**Date:** 2026-06-20. **Function:** `ExecLatona` (sub_802F238, JP 0x802F238, 104B, fe8u src/bmusemind.c).
+IDA Hex-Rays decompile of the JP function showed it goes straight from `BattleInitItemEffect(GetUnit(
+subjectIndex), itemSlotIndex)` to `GetUnit(subjectIndex); MakeTargetListForLatona(...)` — it OMITS the
+entire fe8u line `BattleInitItemEffectTarget(GetUnitFromCharId(GetPlayerLeaderPid()));`. Deleting that
+one line from the US body → diff 0 (a genuine JP-vs-US gameplay difference in the Latona staff). Full
+cold make compare OK. Classic cascade-root: a 43-byte pervasive diff collapsed to one removed call.
+**SOP:** IDA Hex-Rays is the fastest way to spot a JP-omitted/added CALL in a structure-matching
+region-different function — diff the JP pseudocode's call sequence against the fe8u source line-by-line;
+a missing/extra call is the root. (IDA session note: reopen via `idb_open(fireemblem8.elf.i64)` — the
+.elf is removed after each `make compare` but the .i64 persists and JP addresses are stable.)
