@@ -5836,3 +5836,25 @@ constant — don't fold it.
 
 Verified: self-contain 100%, matching-C 91.01% (7761/8528), `make compare` OK. The msgid-const-decode
 (D81) vein is still alive in the CFAIL bucket for region-SAME text/draw functions.
+
+## D193 (2026-06-20) — DrawChapterStatusTextForUnit cursor-const + JP-hardcoded-string-ptr (+1, 7761→7762)
+
+**Lever:** continuing the D81/D192 text-draw const-decode vein. `DrawChapterStatusTextForUnit`
+(sub_8090474, JP 0x08090474–0x080906A8, 564B), uichapterstatus.c.
+
+**Carve:** struct StatusScreenSt already in JP headers; only `extern struct StatusScreenSt
+gStatusScreenSt` (bound 0x02004bbc) needed. Size matched (region-same). Two JP differences in the
+common tail:
+1. `Text_SetCursor(&ptr->th, 179)` → JP **177** (layout coord).
+2. `Text_DrawString(&ptr->th, GetStringFromIndex(MSG_539))` → JP hardcodes the string pointer:
+   `Text_DrawString(&ptr->th, (char *)0x081F5548)` (decoded from pool; JP skips the
+   `bl GetStringFromIndex` entirely). MSG_535 (the 3 roof/HP-cap draws) already matched JP (=0x535).
+
+**Boundary lesson:** with the GetStringFromIndex version mine was 568B; the direct-pointer version
+is 564B (2 fewer instructions). The real function IS 564B — confirmed by the gbadisasm range
+(0x906A8) AND the next symbol `ChapterStatus_ShowAllLayers` @ 0x080906A8 (already perm2-carved). So a
+4B size shrink from a structural fix can be the CORRECT size; cross-check the next symbol's address
+rather than assuming the longer disasm range. New class: JP hardcodes a ROM string pointer where US
+calls GetStringFromIndex(MSG_x) — substitute `(char *)<pool-addr>`.
+
+Verified: self-contain 100%, matching-C 91.02% (7762/8528), `make compare` OK.
