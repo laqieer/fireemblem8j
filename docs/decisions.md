@@ -5858,3 +5858,34 @@ rather than assuming the longer disasm range. New class: JP hardcodes a ROM stri
 calls GetStringFromIndex(MSG_x) — substitute `(char *)<pool-addr>`.
 
 Verified: self-contain 100%, matching-C 91.02% (7762/8528), `make compare` OK.
+
+## D194 (2026-06-20) — 0-carve iteration: easy veins exhausted, frontier characterized (HONEST)
+
+After D187–D193 (+8 matching-C this session), a broad sweep this round found NO clean region-same
+candidate. Exhaustive search (~25 candidates + permuter + all naming levers), all dead-ends:
+
+**FAR bucket (compiles, >8 reloc-excluded diffs) — KEY LESSON:** the reloc-excluded diff count
+UNDERCOUNTS structural distance. `ColorFadeSetupFromBlack` showed reloc-diff=10 but the permuter
+BASE SCORE = 480 (>150 = structural per the permuter rule) — a pervasive reg-alloc difference
+(param-narrow of `a` scheduled before vs after the loop-induction setup `i=31`/`gFadeComponents+0x600`
+ptr). Permuter ran 495 iters, best 445 (no convergence). The 4-fn ColorFadeSetupFrom* cluster all
+share this → all structural. `AddGorgonEggTrap` (param-narrow REORDER), `PlayerPhase_PrepareAction`
+(s8-return-narrow `lsls#24;asrs#24` agbcc-redundant vs JP `adds`), `Text_DrawNumber*`/`DrawNumberText*`
+/`PrepItem_Draw*` (pervasive sign-ext + reg-alloc) — all reg-alloc/sign-ext dead-ends. **Use the
+permuter base score, not the reloc-excluded diff, to gauge a FAR candidate.**
+
+**CFAIL bucket draws — region-different (size mismatch):** `DrawGMapPIPanelContents` (172≠168),
+`HandleTurnRecordText` (816≠748, +68B), `SoloEndingBattleDisp_Init` (428≠372, +56B),
+`InitDifficultySelectScreen` (push-list `b5f0→b570`). `DrawSupportSubScreenRemainingText` size-matched
+(236) but the string-draw section (0x82+) is genuinely structural (JP uses a different Text-API
+arrangement; the 0x5AB/0x5AC msgids already match JP — substitution had zero effect).
+
+**Naming axis — all 3 byte-neutral levers EXHAUSTED:** `fingerprint_identify` 0, `caller_fingerprint_identify`
+bogus (5×"GetUnitRescueName"), `harvest_names` (mnemonic-exact) 0/24. The 240 residual sub_ are
+unidentifiable by automation → advance only via hand-decomp.
+
+**Frontier now:** the easy DECL_ONLY / const-decode / msgid veins are exhausted (the D192/D193
+region-same text-draws were the last of them). What remains is HEAVY region-different hand-RE
+(multi-section reconstruction like the D187/D188 op-anim endings) + agbcc reg-alloc/sign-ext dead-ends.
+NEXT: commit to a full structural reconstruction of one region-different function per iteration.
+No regression: make compare OK, matching-C 91.02% (7762/8528) unchanged.
