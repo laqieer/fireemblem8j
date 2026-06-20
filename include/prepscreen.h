@@ -631,7 +631,7 @@ struct SallyCirProc {
 void SallyCir_Init(struct SallyCirProc * proc);
 void SallyCir_Loop(struct SallyCirProc * proc);
 void SallyCir_OnEnd(void);
-struct SallyCirProc* StartSallyCirProc(ProcPtr parent, u8 unk);
+struct SallyCirProc* StartSallyCirProc(ProcPtr parent, int unk);
 void SallyCir_RectInit(struct SallyCirProc * proc);
 void SallyCir_RectLoop(struct SallyCirProc * proc);
 int PrepUtils_CondFalse_0(void);
