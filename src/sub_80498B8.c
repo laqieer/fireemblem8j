@@ -38,7 +38,9 @@ void PointsNumberMover_Init(struct PointsNumberMoverProc * proc)
     proc->yTarget = gSioPoints_3[idx * 2 + 1] * 8 + 8;
 
     SetTextFont(&Font_Sio_0);
-    SioDrawNumber(&gUnk_Sio_1[0], proc->playerId * 32 + 24, TEXT_COLOR_SYSTEM_BLUE, proc->difference);
+    /* gUnk_Sio_1 symbol is bound to a corrupt baseline address (0x4645464e);
+       its JP literal-pool address is 0x02000C78 -- reference it raw. */
+    SioDrawNumber((struct Text *)0x02000C78, proc->playerId * 32 + 24, TEXT_COLOR_SYSTEM_BLUE, proc->difference);
 
     proc->timer = 0;
 
