@@ -256,7 +256,7 @@ unsigned GetEventSlotCounter(void);
 void CopyBgImage(u8 bg1, u8 bg2, u8 nbgs);
 void CopyBgTiles(u8 src, u8 dst, u8 nbgs);
 void CopyBgPalette(u8 src, u8 dst, u8 npals);
-// void BgChangeChr(u8 bg, u8 b);
+void BgChangeChr(int bg, int chr_chg);
 void BackupPalette(u8, u8);
 void RestorePalette(void);
 void SetSomeRealCamPos(int x, int y, s8 unk);
