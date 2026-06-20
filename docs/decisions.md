@@ -5240,3 +5240,21 @@ reg-alloc). The winning idioms, each gated on a SEPARATE make compare before com
 
 DEAD in this vein: ColorFade/SineWave (scheduling block-swaps), PidStatsGetExpGain (JP inlines GetPidStats
 w/ a different 16-byte struct), BonusClaim (many scattered window-coord consts), PrepItemScreen (hoist quirk).
+
+## D159 — const-decode msgid-offset varies by range; extern-inline re-opens dismissed funcs (+2, 7693→7695)
+
+- **msgid OFFSET is per-range, not global:** GetItemCantUseMsgid was US-0x82 (0x85X range),
+  DrawPrepScreenItemUseStatLabels US-0x71 (0x4EX), DisplayBwl would be US-0x53 (0x51X). Find the offset by
+  mapping the asm `.4byte` literal pool to the US `GetStringFromIndex(0xNNN)` returns, then `re.sub` all.
+- **broad msgid search > small-FAR screen:** `grep -rlE 'GetStringFromIndex\(0x[0-9A-Fa-f]{3}\)'` over the US
+  src finds still-asm NAMED const-decode candidates the small-FAR screen MISSES (e.g.
+  DrawPrepScreenItemUseStatLabels, 9 msgids, was same-size but not in the screen's list). BUT must
+  **size-match filter**: many (DisplayBwl 272≠236, DisplayPage0 768≠720) are region-DIFFERENT (the JP
+  inlines accessors → smaller), not pure const-decode. Compile, compare `len(.text)` to the gbadisasm range,
+  carve only the same-size ones.
+- **extern-inline re-opens dismissed candidates:** UnitApplyBonusLevels (dismissed earlier as branch-shift)
+  byte-matched once GetUnitMaxHp was provided `extern inline` (GNU C89 inline-only) — the JP inlines it but
+  the JP header declares it non-inline so a naive compile CALLS it. Re-examine old "reg-alloc" near-misses
+  for an inlined-accessor root cause (GetUnitMaxHp/GetPidStats/GetUnitCurrentHp). PidStatsGetExpGain stays
+  DEAD (JP bwl struct is genuinely 16B vs US 0x78B).
+- Watch the gbadisasm range END (I used a 4-byte-short end and got a false SIZE-MISMATCH; read it from the tsv).
