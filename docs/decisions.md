@@ -5567,3 +5567,16 @@ leaking into the build (CFILES globs ALL src/*.c). Cleanup: rm the untracked aut
 stray src, `git checkout HEAD -- asm/sub_XXXX.s gbadisasm_*.tsv` to restore the deleted asm. Lesson: a stray
 uncarved src/*.c with a real symbol BREAKS make compare; always `git status --short src/*.c | grep ??` before
 trusting a cold compare. Session run: +22 (7723→7745).
+
+## D178 — data-bind candidates need careful per-fn handling (+1 ExtramenuUnk_LoadGfx, 7745→7746)
+Carved 2 of the 4 data-bind-screen candidates carefully (no autobind, no blind batch — per D177). **ExtramenuUnk_
+LoadGfx (+1):** clean once ExtramenuUnk_HBlank is declared a FUNCTION (`void f(void);`, not the auto-decl's
+`extern u8[]` → SetPrimaryHBlankHandler incompatible-pointer -Werror); the gMenuMainObjs_* data were already
+defined. **SysBrownBox_Loop (deferred):** diff=0 BUT has a 32-B embedded `.rodata` (referenced @0x081F5820/30)
+that lands INSIDE an existing data gap (frontier_df4_voice.gap0a, 0x1F578C-0x1F5880) → needs a 3-way residue
+split (risk/effort > +1 value); reverted. Reusable data-bind carve recipe: (1) correct-TU extract; (2) auto-decl
+loop — declare FUNCTIONS (`grep "^\w.*Fn(...)\{" fe8u` to confirm it's a fn) as `T f(args);`, ProcScr as
+`extern const struct ProcCmd X[];`, other data as `extern u16/u8 X[];` (NO const — US uses CONST_DATA=section);
+(3) diff=0 reloc-excluded + NO `.rodata` section (else D121 split needed); (4) bind undefined-in-ELF syms from
+the asm literal pool (reloc off → `.4byte`), nm-checking each is genuinely undefined (skip already-defined →
+multiple-definition). Session run: +23 (7723→7746).
