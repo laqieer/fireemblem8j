@@ -5430,3 +5430,19 @@ WinCnt bitfield masks (`|4`=bg2 bit2 vs JP `|8`=bg3 bit3, per the struct: bg0=0x
 changed the call args `(0,0,1,0,1)`→`(0,0,0,1,1)` → diff=0. + a DECL for OpAnimCalcObjSlideIn. Both
 cold-`make compare` OK. Remaining smallfar (NewEfxHpBarLive, GmapRmUpdateExt_ScrollPosition,
 GmapScreen2_GetNodeScreenPos) are mixed sign-ext+region-diff/reg-alloc — heavier, not clean single-fix.
+
+## D168 — comprehensive diff-rank screen + extern-inline Ballista cluster + param-narrow hoist (+4, 7718→7722)
+Built a fresh lever: `/tmp/diffrank.py` ranks ALL 455 US-named still-asm fns by non-reloc byte-diff (compiles
+each US body; handles size-mismatch unlike screen_smallfar's same-size-only) → surfaces low-diff carveables
+the worked lists missed. Yielded +4:
+**(1) Ballista cluster (+3, extern-inline D160):** GetRiddenBallistaAt/GetBallistaItemAt/GetSomeBallistaItemAt
+each call `IsBallista`/`GetBallistaItemUses`/`GetBallistaItem`/`GetBallistaItemIndex` — US declares these
+`inline` in bmarch.c (same-TU → US inlines), but JP headers declare them non-inline so MY build emitted `bl`
+(JP inlines them). Providing the chain as `extern inline` (GNU C89, no out-of-line copy) in each carved .c →
+agbcc inlines → all 3 byte-match. NB: gbadisasm range was the TRUE 48B (the screen's non-inline compile was
+only 28B — the inlined version is the real size).
+**(2) PutFaceTm (+1, param-narrow hoist):** JP narrows `isFlipped` (lsls#24) BEFORE the `*data++` width/height
+reads; agbcc did the reads first. `int flip = isFlipped;` as the FIRST local forces the narrow first → diff=0.
+(Same family as the int-promotion/decl-reorder schedule controls.)
+Skipped: UnitChangeFaction (diff=16 mixed), Event0D_AsmCall (region-diff from offset 0), UiSupport_
+GetSupportTalkSong (diff=13 tail reg-alloc), ClassIntro_LoopOut (mixed const+struct).
