@@ -5460,3 +5460,20 @@ JP value was used. Skipped: ClassIntro_LoopOut (JP OpInfoEnterProc struct-offset
 whole-struct, risky), PrepareSineWaveScanlineBuf×4 (param-narrow-vs-literal-load schedule, partial-fixable
 but not clean). The diff-rank ≤24 tail is now mostly worked dead-class (param-prologue, lsr↔asr, reg-alloc,
 struct-offset).
+
+## D170 — DECL-AWARE diff-rank screen re-opens the DECL_ONLY vein (+7, 7724→7731)
+The plain diff-rank skips functions that compile-FAIL (implicit-decl) → it missed the whole DECL_ONLY class.
+Built `/tmp/declrank.py`: same as diff-rank but on an `implicit declaration of function X` error it auto-adds
+`X`'s US signature as a proto and RETRIES (up to 5 undeclared syms), then ranks. This surfaced a rich vein of
+diff=0 functions blocked ONLY by JP-undeclared sibling protos: **AiStaff{HealMendRecover,Restore,Silence,
+SleepBerserk,Warp}** (+5, cp_staff.c — need GetAiSafestAccessibleAdjacentPosition / AiUnitHasUsableWeaponOrStaff
+/ GetAiSilenceEffectivenessScore), **AiTryDoRogueSpecialItems** (+1, AiFindReachableUnlockPosition /
+AiFindClosestChestPosition), **WMFaceCtrl_LoopExt** (+1, GetWMFaceBg / PutWMFaceOnBg / GetWMFaceVramOffset).
+All carve as plain DECL_ONLY (add protos → diff=0 → standard sub_ carve). The fe8u functions are defined
+elsewhere in the build; the JP headers just lack the prototype.
+GetChapterSurvivalRank (also diff=0) needs a D121 data-residue SPLIT — its `u8 arr[4]={4,3,2,1}` auto-array
+emits a 4-byte .rodata template that JP places at 0x1F5BF0 (the first 4 B of the 124-B data_081F5BF0 residue).
+Splitting requires registering a NEW src/data/<subsys>/ in the Makefile's data-object discovery (CFILES only
+globs src/data/*.c, not subdirs) — deferred (the unplaced old .o appended 124 B to the ROM). Remaining
+decl-aware NEAR (diff>0 after decls): ClassIntroLetter_LoopFadeOut(8), UnitInfoWindow_DrawBase(24),
+UiSupport_GetSupportTalkSong(13) — need an additional fix beyond the decl.
