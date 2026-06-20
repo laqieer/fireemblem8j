@@ -5258,3 +5258,15 @@ w/ a different 16-byte struct), BonusClaim (many scattered window-coord consts),
   for an inlined-accessor root cause (GetUnitMaxHp/GetPidStats/GetUnitCurrentHp). PidStatsGetExpGain stays
   DEAD (JP bwl struct is genuinely 16B vs US 0x78B).
 - Watch the gbadisasm range END (I used a 4-byte-short end and got a false SIZE-MISMATCH; read it from the tsv).
+
+## D160 — extern-inline accessor (TU-scoped) re-opens item-cost/attr functions (+2, 7695→7697)
+
+The US `inline` accessors (GetItemData/GetItemAttributes/GetItemUses/GetItemCost in bmitem.c,
+GetUnitMaxHp in bmunit.c, GetPidStats in bmsave-bwl.c) are INLINED only in functions in the SAME US TU
+(the header declares them non-inline, so other TUs CALL them). A still-asm function defined in such a TU
+byte-mismatches because a naive compile CALLS the accessor; providing the accessor (and its chain) as
+`extern inline` (GNU C89, inline-only — no out-of-line copy, no layout shift) inlines it to match.
+Carved CanUnitUse_unused + GetConvoyItemCostSum (full GetItemCost chain). The msgid-offset screen
+(screen_msgid_offset.py) is now exhausted (remaining hardcoded-msgid fns are region-diff size).
+DEAD: PidStats* (the JP UnitUsageStats/bwl struct is 16B w/ different bitfields vs the US 50B struct —
+region-different data layout, not an inline issue).
