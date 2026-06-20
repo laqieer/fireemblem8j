@@ -5650,3 +5650,18 @@ for more: efxLunaOBJ_Loop_C/D (diff 30/51) have a push-list change (`b570→b5f0
 regs) = genuinely heavier reg-alloc/structural; NewEfxHpBarLive (diff=32) is sign-ext + a region-diff block.
 LEVER refined: `int v=(s16/s8)expr` forces agbcc to narrow at the assignment (vs deferring to the use) — fixes
 "deferred-narrow scheduling" that looks like reg-alloc. Session run: +32 (7723→7755).
+
+## D186 — small-diff vein exhausted (0 carves); remaining is structural/heavy hand-RE (matching-C 7755, 90.94%)
+Automated the narrow-hoist (/tmp/hoistscreen.py: for each still-asm US-named fn with base diff 1-25, try
+`int v=(s16/s8)expr` on each s16/s8 local) → **0 new hits** (the deferred-narrow vein that re-opened
+EfxTeonoSeMain/efxHitQuake_Loop is now harvested). Audited the medium/heavy op-anim/efx candidates per-fn and
+confirmed all genuinely structural/region-different (fact-driven, NOT assumed):
+- efxLunaOBJ_Loop_C/D (diff 30/51): push-list change b570→b5f0 (JP uses an extra callee-saved reg) = reg-alloc;
+  permuter base = **560** (≫150 structural threshold) → not permuter-fixable.
+- EfxHpBarResire_SetAnotherSide (diff 43): JP does `off_this*2` as `lsls#1` (off held sign-extended) vs agbcc's
+  `lsls#16;asrs#15`; `int off_this` had NO effect (agbcc re-narrows regardless), both-int → diff 88. Resistant.
+- EfxPartsofScroll2Main (51): region-diff loop body. OpAnim{Eirika,Ephraim}Exit (258): 2-sprite fix only drops
+  it to 250 (genuine multi-section logic diff beyond the merge-shadow pattern + Tsa/time logic), heavy.
+HONEST STATE: the screen-reachable + small-diff + narrow-hoist matching-C is exhausted. Remaining gains require
+either heavy full-reconstruction hand-RE of region-different fns (OpAnim Exit ~400B, low yield/hr) or the 240
+unnamed sub_ (full RE). No carve this iteration — did NOT fake one. Session run stays +32 (7723→7755).
