@@ -5514,3 +5514,17 @@ narrows s8 x,y before u8 meta/delay/level; the hoist optimizes away since x,y ar
 agbcc-fixed dead-class). Other small candidates checked & skipped: PutNumber2Digit (region-diff, whole 12-B
 fn), PutFaceOnBackGround (compile-fail dep), PutWMFaceOnBg (diff=45, region-diff mid-fn call). Session run
 total: +12 matching-C (7723→7735).
+
+## D174 — extern-inline ACCESSOR CLUSTER lever (+5, 7735→7740); DATA lever settled stale
+First, settled the directive's DATA lever definitively: 2083 asm/dat_*.s/data_*.s files EXIST but ZERO are
+LINKED — all 13,937,984 data bytes come from src/data (verified by scanning the manifest for asm/*.o
+.data/.rodata sections = 0). Data axis is genuinely 100%; the "14.15%, ~300 candidates" claim is permanently
+stale (the asm files are gitignored descriptive mirrors, replaced by src/data).
+**extern-inline GetUnit cluster (+5):** UnitChangeFaction's diff was JP INLINING GetUnit (`gUnitLookup[id&0xFF]`)
+where agbcc called it. Grepping ALL still-asm US-named fns whose US body calls `GetUnit(` found 22 — batch-test
+with GetUnit provided as `extern inline` (gutest.sh): 5 byte-match (UnitChangeFaction, TickActiveFactionTurn,
+UpdatePrevDeployStates, ClearNonPlayerUnits, ClearTemporaryUnits); the rest are region-different beyond GetUnit
+(large diff) or compile-fail on other syms. LEVER: a common US-inline accessor (GetUnit, [[D169]] GetPidStats,
+GetCharacterData) blocks a CLUSTER of still-asm callers — provide it `extern inline` and batch-test all callers.
+TRAP: a stale `.o` from a failed batch build makes `make src/F.o` report empty .text (false size=0/diff=0) —
+`rm -f src/F.o` before the real build. Next: mine GetItemData/GetClassData/etc accessor clusters the same way.
