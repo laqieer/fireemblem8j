@@ -882,7 +882,7 @@ void BeginAnimsOnBattleAnimations(void);
 void EkrMainEndExec(void);
 void MainUpdate_0(void);
 
-void EkrPrepareBanimfx(struct Anim * anim, u16);
+void EkrPrepareBanimfx(struct Anim * anim, int);
 s16 GetEfxHp(int index);
 // ??? GetEfxHpModMaybe(???);
 u16 IsItemDisplayedInBattle(u16 item);

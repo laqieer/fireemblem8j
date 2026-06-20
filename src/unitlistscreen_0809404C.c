@@ -46,7 +46,7 @@ extern EWRAM_OVERLAY(0) u32 gUnitlistscreen_9[8]; // equipped item icons
 /* prototypes for same-file helpers called by this run */
 void UnitList_DrawSortLabel(u8 key);
 void UnitList_DrawColumnNames(u16 * tm, u8 page);
-void UnitList_DrawPageHeader(u8 maxPages, u8 page, s8 drawColumnNames);
+void UnitList_DrawPageHeader(u8 maxPages, u8 page, int drawColumnNames);
 void UnitList_PutRow(struct UnitListScreenProc * proc, u8 unitNum, u16 * tm, u8 page, s8 putName);
 
 //! FE8U = 0x08091D54
