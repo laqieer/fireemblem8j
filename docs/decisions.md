@@ -6159,3 +6159,14 @@ a full rewrite). Found 64 candidates. CAVEAT: 3 classes — (a) clean omitted-bl
 quick win), (b) full JP-rewrite (this one, reconstruct from IDA), (c) FALSE POSITIVE codegen-tighter
 (AdjustNewUnitPosition `&0x3FF` mask, GmMuPrim loop-rotation — structure matches, NOT carveable easily).
 IDA-decode to classify. Candidate list saved; agbcc flag note: NO `-quiet` (invalid), keep -O2 -fhex-asm.
+
+## D213 — MapMenu_GuideCommandDraw: JP menu-def string-pointer (+1, 7777→7778)
+**Date:** 2026-06-20. `MapMenu_GuideCommandDraw` (sub_8022644, 104B, fe8u src/bmmenu.c).
+IDA: JP calls `Text_DrawString(text, *menuItem->def)` — passes the def's FIRST 4 bytes as a char*
+string pointer directly, where fe8u does `Text_DrawString(text, GetStringFromIndex(def->nameMsgId))`.
+The JP menu-item defs store STRING POINTERS, not u16 msgids. Fix: `*(const char **)menuItem->def`
+(skips GetStringFromIndex) → diff 0. NEW reusable lever — check other menu *Draw fns for the same.
+**TOOL:** `/tmp/diff_screen.py` (standalone, compiles US bodies in /tmp, reloc-excluded byte-diff,
+flags 12–80 baseline diff) found 91 moderate-diff candidates → `reference/moddiff_candidates.txt`.
+Moderate baseline diff (not 0, not >80) = the sweet spot for single-root carves (omitted block /
+const / struct-access / scheduling). IDA-decode each to classify.
