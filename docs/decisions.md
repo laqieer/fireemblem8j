@@ -5288,3 +5288,21 @@ via address-taking (`int *p = &f; ... (*p)==1`) to match the JP spilling a param
 **Pair bonus:** the transform applies to structurally-identical siblings (TriggerMapChanges +
 UntriggerMapChange both 0-diff from one permuter run). Candidates: the small-FAR reg-alloc residuals whose
 diff does NOT start at offset 0 (those are region-different, not permutable).
+
+## D162 — matching-C reliable veins exhausted; remaining is structural (permuter base evidence)
+
+A fresh screen_named_rd re-run (after the cascade of recent carves) confirms the reliable matching-C buckets
+are EXHAUSTED: CARVE=3 (all sz=0/0 unreliable), NEAR=9 (all confirmed dead-ends: FilterBattle/RegisterBanim/
+MoveUnitExt param-reorder, HbMoveCtrl/ShopTryMoveHand/GmMuPrim lsr↔asr, EfxTeonoSe structural, SRAM
+literal-pool), CFAIL=51 (clean proc-init/DECL_ONLY ones harvested; rest are popup-enum/branch-merge/region-diff).
+
+**The permuter only cracks LOW-base reg-alloc spill (D161): converged DrawMenuItemHover (40), TriggerMapChanges
+(135). It does NOT crack high-base structural — measured this iteration:** GmapScreen2_GetNodeScreenPos 340
+(bounds-check fold), EfxCalcSplitedColorStep 180 (3x-unrolled loop scheduling, plateaued at 60), MoveUnit_ 495
+(REDA bitfield packing), StartStoneShatterAnim 645 (s16-cast scheduling across the whole fn). Rule of thumb:
+**base > ~150 ⇒ structural, don't run.** lsr↔asr is type/extension (permuter can't reorder its way out).
+
+**The matching-C residual (~825 fns) is now genuinely the D96 ceiling class:** reg-alloc/scheduling that needs
+base<150 spill (mostly done), lsr↔asr extension dead-ends, region-different logic/struct layout, and the
+~319 libc/libgcc/BIOS hand-asm. NOT loop-aborting (the FAR bucket + deep-RE may yield a few), but the
+mechanical frontier is reached — future +1s require per-function IDA/Ghidra deep-RE, not screening.
