@@ -5580,3 +5580,13 @@ loop — declare FUNCTIONS (`grep "^\w.*Fn(...)\{" fe8u` to confirm it's a fn) a
 (3) diff=0 reloc-excluded + NO `.rodata` section (else D121 split needed); (4) bind undefined-in-ELF syms from
 the asm literal pool (reloc off → `.4byte`), nm-checking each is genuinely undefined (skip already-defined →
 multiple-definition). Session run: +23 (7723→7746).
+
+## D179 — D121 3-way split via INCBIN offset/length; data-bind vein fully harvested (+1 SysBrownBox_Loop, 7746→7747)
+SysBrownBox_Loop: region-same, diff=0, no unbound syms, but a 32-B embedded `.rodata` template @0x1F5820 that
+lands INSIDE an existing data gap (frontier_df4_voice.gap0a, .bin offset [0,244)). Clean 3-way split using
+INCBIN_U8's (file, OFFSET, LENGTH) form — NO new .bin needed: gap0a→[0,148), insert SysBrownBox_Loop.o(.rodata)
+@1F5820-1F5840, add gap0a2→[180,64). (Config_Init had already split this same gap0a, so the pattern was
+established.) Manifest: split the gap0a carved_rom.d row + add gap0a2 + the fn's text & rodata handdecomp rows.
+Clean build + data-axis 100% verified. This completes the data-bind screen's 4 candidates (OnMain_SioError,
+ExtramenuUnk_LoadGfx no-rodata; StartSubSpell_efxEvilEyeOBJ still deferred — it has 6 unbound syms incl
+AnimScr/Pal/Img + a rodata ptr table, heavier). Session run: +24 (7723→7747).
