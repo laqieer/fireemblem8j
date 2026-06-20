@@ -6170,3 +6170,9 @@ The JP menu-item defs store STRING POINTERS, not u16 msgids. Fix: `*(const char 
 flags 12–80 baseline diff) found 91 moderate-diff candidates → `reference/moddiff_candidates.txt`.
 Moderate baseline diff (not 0, not >80) = the sweet spot for single-root carves (omitted block /
 const / struct-access / scheduling). IDA-decode each to classify.
+
+## D213b — WMMenu_OnGuideDraw: D213 string-ptr family (+1, 7778→7779)
+`WMMenu_OnGuideDraw` (sub_80C1338, 116B, fe8u src/worldmap_path.c) — identical D213 fix:
+`Text_DrawString(text, GetStringFromIndex(menuItemProc->def->nameMsgId))` → `*(const char **)
+menuItemProc->def` → diff 0. FAMILY (grep `GetStringFromIndex(.*->def->nameMsgId)` in fe8u): also
+RedrawMenu (uimenu.c, sub_804FCFC, still asm) + 4 bmdebug.c menu draws — same fix candidates.
