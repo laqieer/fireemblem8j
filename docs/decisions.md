@@ -5538,3 +5538,16 @@ carveable callers; the other 74 accessors' callers are carved or region-differen
 reconfirmed (cost 2 debug cycles): `grep -rl "\bFn\s*("` picks the first file = often a CALLER not the
 definition → extract_func_only returns empty → empty .text/.o that links-undefined. Use `grep -rl "void Fn"` /
 the actual definition signature for the TU. Session run: +20 matching-C (7723→7743).
+
+## D176 — msgid const-decode + data-bind (+1 UnitList_SetupDisplay, 7743→7744)
+Screened still-asm fns calling GetStringFromIndex(0xNNN) with literal msgids (12 found). Most are
+region-DIFFERENT beyond the msgid (different layout/struct/sign-ext — DrawTimeText_WithReset 485, DisplayPage0
+157, DisplayBwl 112, UpdateMenuItemPanel 229, BonusClaim_StartSelectTargetSubMenu 21). Only **UnitList_
+SetupDisplay (diff=1)** was a clean single-msgid: 0x4E5→0x474 (-0x71, the low diff byte e5→74 reveals it).
+It then needed 8 TU-static data-binds (ProcScr_bmview @08A93854 + gUnitlistscreen_{2,3,4,5,6,8,9} EWRAM, read
+from the asm literal pool at each reloc offset) — and CAREFUL: 3 of the auto-found syms (Img_UnitListBanners,
+Img_UnitListBanner_Animation, gUnkData_77) were ALREADY defined in worldmap_gmapunit data → binding them =
+"multiple definition" link error; nm-check each candidate is genuinely undefined before binding. The msgid
+vein is thin (clean only when the msgid is the ONLY diff). TU-detection trap: use `grep -rln "\bFn\b"` over all
+files + pick the one whose extract_func_only returns a real body (caller files give empty bodies). Session run:
++21 (7723→7744).
