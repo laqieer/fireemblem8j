@@ -177,7 +177,7 @@ void StartUnitListScreenForSoloAnim(ProcPtr parent);
 void StartUnitListScreenUnk(ProcPtr parent);
 void StartUnitListScreenWorldMap(ProcPtr parent);
 void UnitList_DrawColumnNames(u16 * tm, u8 page);
-void UnitList_DrawPageHeader(u8 maxPages, u8 page, s8 flag);
+void UnitList_DrawPageHeader(u8 maxPages, u8 page, int flag);
 void UnitList_PutRow(struct UnitListScreenProc * proc, u8 unitNum, u16 * tm, u8 page, s8 putName);
 int SortUnitList_GetUnitSoloAnimation(struct Unit * unit);
 bool SortUnitList(u8 key, u8 order);
