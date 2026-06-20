@@ -5590,3 +5590,13 @@ established.) Manifest: split the gap0a carved_rom.d row + add gap0a2 + the fn's
 Clean build + data-axis 100% verified. This completes the data-bind screen's 4 candidates (OnMain_SioError,
 ExtramenuUnk_LoadGfx no-rodata; StartSubSpell_efxEvilEyeOBJ still deferred — it has 6 unbound syms incl
 AnimScr/Pal/Img + a rodata ptr table, heavier). Session run: +24 (7723→7747).
+
+## D180 — StartSubSpell_efxEvilEyeOBJ via D121 split + ProcScr bind (+1, 7747→7748); data-bind vein DONE
+The last data-bind candidate: region-same, 8-B embedded .rodata (an AnimScr_Banim_0/1 pointer table — both
+targets already defined) @0x0E3D70 inside frontier_df4_misc_lo.gap10. D121 INCBIN-offset split: gap10→[0,153)
++ fn.o(.rodata) @0E3D70-0E3D78 + gap10b→[161,2144). The earlier "6 unbound syms" was the false-positive nm
+check (Pal_Banim_6/Img_Banim_15/gEfxBgSemaphore/AnimScr_Banim_0/1 were all defined); only ProcScr_efxEvilEyeOBJ
+needed binding (@086026E8 from the asm literal). The data-bind screen's 4 candidates are ALL carved now
+(OnMain_SioError, ExtramenuUnk_LoadGfx, SysBrownBox_Loop, StartSubSpell_efxEvilEyeOBJ). Always nm-check binds
+PROPERLY (grep ` sym$` over `nm --defined-only`); the loose grep mis-flags defined syms as undefined. Session
+run: +25 (7723→7748).
