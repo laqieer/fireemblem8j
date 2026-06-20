@@ -5195,3 +5195,29 @@ vs deferred-past-a-pool-load in agbcc — pure instruction-scheduling, permuter-
 opcode/const region-diff skip, reg-alloc/scheduling → permuter). The two scheduling skips
 (EventShinningCursorAdvance 21-diff best, StartStoneShatterAnim 20-diff) are clean permuter
 candidates (pure reorder).
+
+## D157 — small-FAR vein: ldrsh-cascade + int-promotion (+5, 7683→7688)
+
+**Context:** after the screen CARVE/NEAR/CFAIL buckets and naming/data levers exhausted, wrote
+`/tmp/smallfar.py` — a screen variant that surfaces same-size FAR functions with 9-40 non-reloc diff
+(const-decode / single-root-cause candidates, vs pervasive region-diff). Found 51.
+
+**Two productive sub-classes (the rest are scheduling block-swaps / reg-alloc — skip):**
+1. **ldrsh-cascade:** the JP reads an `s16` lvalue with `ldrsh` (signed, register-offset, 2 instr) where
+   agbcc emits `ldrh` (unsigned, immediate-offset, 1 instr) for an `s16` LOCAL — the 1-instr-shorter load
+   shifts everything → a big cascade (Event12_StartBGM was 29 diff from this ONE cause). FIX = `int` local +
+   `(s16)` cast on the read: `int evArgument = EVT_CMD_ARGV(scr)[0]` (s16 lvalue → int forces ldrsh) and
+   `(s16)gEventSlots[2]` (forces ldrsh on the low half of a u32). The EVT_CMD_ARGV readers in eventscr.c are
+   a cluster (Event12_StartBGM, Event07_SlotQueueOperations carved; `int slot` for the index).
+2. **int-promotion (D155 again):** s8/bool param held across a call/loop then compared/returned →
+   `int v = param` forces the single entry asr (BattleRoll1RN s8 simResult, SaveMenuModifySaveSlot bool valid).
+
+**Dead-end in this vein:** an s8 value PASSED to an s8 param INSIDE a loop — agbcc holds `param<<0x18` and
+defers the asr to the call site each iteration; the JP hoists the asr'd value to entry. Neither `int f=param`
+nor `s8 f=param` hoists it (PrepItemScreen_DrawVisibleUnitNames, 29 diff) — compiler hoisting quirk.
+
+**Also +2 newlib leaf stubs** (D156): isatty, _fstat, _localeconv_r (`return (void*)0x08577444`).
+
+**REGRESSION (3rd time, same root cause):** chained `make compare && git commit` and a LINK failure
+(SlotQueuePop undefined — the JP fn is sub_800D808) slipped through. Fixed by binding SlotQueuePop in
+baseline_syms. RULE: `make compare` MUST be a separate, result-checked step before every commit.
