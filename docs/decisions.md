@@ -5221,3 +5221,22 @@ nor `s8 f=param` hoists it (PrepItemScreen_DrawVisibleUnitNames, 29 diff) — co
 **REGRESSION (3rd time, same root cause):** chained `make compare && git commit` and a LINK failure
 (SlotQueuePop undefined — the JP fn is sub_800D808) slipped through. Fixed by binding SlotQueuePop in
 baseline_syms. RULE: `make compare` MUST be a separate, result-checked step before every commit.
+
+## D158 — small-FAR const-decode is the richest remaining matching-C vein (+5, 7688→7693)
+
+The `screen_smallfar.py` same-size-FAR list is dominated by **JP-different msgid/layout constants** (not
+reg-alloc). The winning idioms, each gated on a SEPARATE make compare before commit:
+- **single hardcoded msgid:** read the JP value from the asm literal pool (`ldr r0,=0x07C3`) or `movs`+`lsls`
+  (0xe0<<3 = 0x700!) and substitute. Carved SaveMenuDrawSubSelBoxExt (0x142→0x7C3),
+  NameSelect_DrawName (0x141/0x146→0x7C2/0x7C3), PrepItemSupply_DrawItemList (0x5a8→0x533),
+  UnitList_TogglePrepDeployState (0xC52/0x88A/0x889→0x700/0x6FD/0x6FB).
+- **uniform msgid OFFSET:** a whole switch's return msgids were uniformly **US − 0x82**
+  (GetItemCantUseMsgid: 0x859..0x861 → 0x7D7..0x7DF). Verify by mapping the JP literal pool to the US returns,
+  then `re.sub` all. The JP msg table is shifted for that range — likely more functions share it.
+- **eager sign-ext (int local):** GetItemCantUseMsgid also needed `int boolval` (not `s8`) so agbcc
+  sign-extends the `CanUnitUsePromotionItem` result BEFORE the intervening level-restore store (JP order),
+  not after — the D155/D157 int-promotion again, here for a call-result rather than a param.
+- **ldrsh-cascade (D157):** Event12_StartBGM, Event07_SlotQueueOperations (`int` + `(s16)` cast).
+
+DEAD in this vein: ColorFade/SineWave (scheduling block-swaps), PidStatsGetExpGain (JP inlines GetPidStats
+w/ a different 16-byte struct), BonusClaim (many scattered window-coord consts), PrepItemScreen (hoist quirk).
