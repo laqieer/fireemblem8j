@@ -5528,3 +5528,13 @@ UpdatePrevDeployStates, ClearNonPlayerUnits, ClearTemporaryUnits); the rest are 
 GetCharacterData) blocks a CLUSTER of still-asm callers — provide it `extern inline` and batch-test all callers.
 TRAP: a stale `.o` from a failed batch build makes `make src/F.o` report empty .text (false size=0/diff=0) —
 `rm -f src/F.o` before the real build. Next: mine GetItemData/GetClassData/etc accessor clusters the same way.
+
+## D175 — generalized auto-inline accessor screen; GetUnit cluster fully harvested (+3, 7740→7743)
+Built `/tmp/inlscreen.py`: maps all 75 fe8u `inline` accessors → extern-inline defs, then for every still-asm
+US-named fn, substitutes the inline defs for any accessor it declares + auto-decls, ranks by diff. Found 3
+more GetUnit-cluster diff≤2: ClearActiveFactionGrayedStates, LoadUnitPrepScreenPositions, ClearCutsceneUnits
+(+3). Re-run at ≤12 → EMPTY: the inline-accessor cluster lever is now FULLY harvested (only GetUnit had
+carveable callers; the other 74 accessors' callers are carved or region-different-beyond-the-accessor). TRAP
+reconfirmed (cost 2 debug cycles): `grep -rl "\bFn\s*("` picks the first file = often a CALLER not the
+definition → extract_func_only returns empty → empty .text/.o that links-undefined. Use `grep -rl "void Fn"` /
+the actual definition signature for the TU. Session run: +20 matching-C (7723→7743).
