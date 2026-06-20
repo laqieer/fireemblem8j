@@ -6133,3 +6133,14 @@ the if → diff 0. Then LINK failed (undefined gMenuInfo_RepairItems — unbound
 **SOP add:** after a cascade-root diff-0, a LINK failure on an unbound data symbol = raw-address it at
 its pool value (read the .4byte the asm literal pool held at the call site); mind the exact pointer
 type (StartOrphanMenu wants const struct MenuDef*, not MenuInfo* — agbcc -Werror catches the mismatch).
+
+## D211 — NewBattleForecast: IDA cascade-root, JP-omitted tutorial block (+1, 7775→7776)
+**Date:** 2026-06-20. `NewBattleForecast` (sub_80373E4, 104B, fe8u src/bksel.c).
+IDA: JP omits `if (CheckBattleForecastTutorialEvent() == 1) { SetKeyStatus_IgnoreMask(
+GetKeyStatus_IgnoreMask() | A_BUTTON); }` — JP goes from `proc->ready = 0` straight to the
+switch(battleForecastType). The JP ROM has no battle-forecast tutorial event. Remove → diff 0.
+**Session tally — IDA cascade-root vein (JP-omitted block/call/guard) +6:** ExecLatona,
+ExecFortify (BattleInitItemEffectTarget), MapAnim_DisplayDeathQuote (EVFLAG_GAMEOVER block),
+RepairSelectOnSelect (portrait guard), NewBattleForecast (tutorial block). The JP ROM systematically
+drops US tutorial/lord-special-case/leader-target blocks. Fastest lever now: IDA-decode a structure-
+matching region-diff fn, diff its call/control sequence vs fe8u line-by-line, delete the JP-missing block.
