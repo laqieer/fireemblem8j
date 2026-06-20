@@ -6144,3 +6144,18 @@ ExecFortify (BattleInitItemEffectTarget), MapAnim_DisplayDeathQuote (EVFLAG_GAME
 RepairSelectOnSelect (portrait guard), NewBattleForecast (tutorial block). The JP ROM systematically
 drops US tutorial/lord-special-case/leader-target blocks. Fastest lever now: IDA-decode a structure-
 matching region-diff fn, diff its call/control sequence vs fe8u line-by-line, delete the JP-missing block.
+
+## D212 — GameIntroHealthSafetyWaitButton: IDA JP-rewrite reconstruct via size-delta screen (+1, 7776→7777)
+**Date:** 2026-06-20. `GameIntroHealthSafetyWaitButton` (sub_80BCC90, 96B, fe8u src/opanim-healthsafetyscreen.c).
+The JP function is NOT the fe8u body with an omitted block — it's an ENTIRELY DIFFERENT, simpler
+implementation. fe8u: a palette-fade `palette_timer` wait loop (SetBlendConfig per-frame + button
+poll + Proc_Break). JP (from IDA): `SetBlendConfig(1,8,16,0); SetBlendTargetA(0,0,1,0,0);
+SetBlendTargetB(1,1,1,1,1); SetDispEnable(1,1,1,1,1); Proc_Start(<ProcScr>, proc);`. Reconstructed
+verbatim from the IDA pseudocode → diff 0. The DISPCNT byte-OR (5×: 1,2,4,8,0x10 on 0x3003021) IS
+`SetDispEnable(1,1,1,1,1)`; the ProcScr 0x08AC0EBC is unbound — raw-addr `(const struct ProcCmd *)`.
+**NEW TOOL — size-delta screen (`/tmp/omit_screen.sh`):** compile each still-asm named fn's US body in
+/tmp, compare compiled .text size to the JP gbadisasm size; flag where US ≫ JP (JP omits a block OR is
+a full rewrite). Found 64 candidates. CAVEAT: 3 classes — (a) clean omitted-block (ExecLatona-style,
+quick win), (b) full JP-rewrite (this one, reconstruct from IDA), (c) FALSE POSITIVE codegen-tighter
+(AdjustNewUnitPosition `&0x3FF` mask, GmMuPrim loop-rotation — structure matches, NOT carveable easily).
+IDA-decode to classify. Candidate list saved; agbcc flag note: NO `-quiet` (invalid), keep -O2 -fhex-asm.
