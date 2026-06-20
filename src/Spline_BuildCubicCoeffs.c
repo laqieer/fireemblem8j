@@ -1,12 +1,13 @@
 #include "global.h"
-#include "spline.h"
 
-void Spline_PrepareSegmentControls(struct UnkSplineStruct1 * src, struct UnkSplineStruct2 * dest);
-void Spline_ComputeRightTangents(struct UnkSplineStruct2 * arg_0, int * arg_1, int arg_2);
-void Spline_ComputeLeftTangents(struct UnkSplineStruct2 * arg_0, int * arg_1, int arg_2);
+#include "spline.h"
+#include "hardware.h"
 
 
 //! FE8U = 0x0800A7D8
+void Spline_PrepareSegmentControls(struct UnkSplineStruct1 * src, struct UnkSplineStruct2 * dest);
+void Spline_ComputeLeftTangents(struct UnkSplineStruct2 * a, int * b, int c);
+void Spline_ComputeRightTangents(struct UnkSplineStruct2 * a, int * b, int c);
 void Spline_BuildCubicCoeffs(struct UnkSplineStruct1 * arg_0, struct UnkSplineStruct3 * arg_1, int arg_2)
 {
     int * r8;
