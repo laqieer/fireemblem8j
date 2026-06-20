@@ -5162,3 +5162,36 @@ globally-defined-callee functions one at a time.
 **Vein:** ~337 unnamed asm `sub_` remain; the simple no-callee ones (const return / single store / accessor
 / range-check) are reliable wins, the reg-alloc-sensitive (multi-arg eval order, memory-op order) and
 local-`.set`-callee ones are dead/blocked. Both naming axes via funclib are otherwise exhausted.
+
+## D155 — DECL_ONLY proc-init + int-promotion: a fresh matching-C vein (+7)
+
+**Context:** after the screen_named_rd.py NEAR sign-ext vein (D153) thinned to dead-ends
+(reg-alloc reorders, SRAM literal-pool, complex-usage sign-ext), pivoted to the **CFAIL bucket**
+(63 funcs that compile-fail ONLY on a JP-bound-but-undeclared symbol). Most are region-SAME.
+
+**Two reusable levers, +7 matching-C (7666→7673):**
+1. **DECL_ONLY proc-init / Proc_Find-dispatch:** declare the bound symbol
+   (`extern struct ProcCmd X[]` for a ProcScr) and the US body byte-matches. When the US
+   symbol is MIS-BOUND (rename_aliased attached it to the wrong JP addr — e.g.
+   ProcScr_SIOMAIN2 bound @08a13e9c but the function's literal pool wants 0x085D4760),
+   reference it by RAW ADDRESS `Proc_Find((const struct ProcCmd*)0x085D4760)` to match the
+   pool directly. Carved NewBMXFADE, MakeNew6CBMXFADE2, SioMain2_WaitEndAndRoute,
+   StartGmapMuEntry1 (inline struct copied from a sibling TU).
+2. **int-promotion (generalizes D148/D149):** an `s8`/`s16` PARAM held across a call and
+   stored to a WIDER field — JP sign-extends ONCE at entry (`asr`), agbcc zero-extends at
+   entry (`lsr`) THEN re-sign-extends after the call (22-diff). The `(s8)` cast at the store
+   RESTRUCTURES reg-alloc (defers the load, drops the held reg). FIX = a plain
+   `int v = param;` local at the top → promotes once at entry, held in the callee-saved reg
+   across the call, matching JP byte-for-byte. Carved StartSioWarpFx + StartSioWarpFxPartial
+   (sio.h `u8 playStepSe`→`s8` proto + clean-build sweep), and NewBMXFADE (s8 lock_game).
+
+**Dead-ends found (skip):** NewPopup_VerySimple (JP popup opcodes 0xa/6/4 ≠ popup.h enum →
+region-diff enum, whole popup family suspect); Uidebug_PickRandomActiveCond2 (63-diff
+reg-alloc on a stack-buffer loop); ClearGMapPIPanel (JP width const 12 vs US 13);
+EventShinningCursorAdvance + StartStoneShatterAnim (the two s16 casts schedule eagerly in JP
+vs deferred-past-a-pool-load in agbcc — pure instruction-scheduling, permuter-class).
+
+**Next:** ~55 CFAIL candidates remain; triage each against its JP asm (proc-init clean,
+opcode/const region-diff skip, reg-alloc/scheduling → permuter). The two scheduling skips
+(EventShinningCursorAdvance 21-diff best, StartStoneShatterAnim 20-diff) are clean permuter
+candidates (pure reorder).
