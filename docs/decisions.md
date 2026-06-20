@@ -5927,3 +5927,21 @@ now confirmed to bind even genuinely-reconstructable logic-different functions.
 **Reusable: the IDA-decode technique WORKS** (correctly recovered the JP case-1 block). Reconstruction
 preserved at `reference/nonmatching/OpAnimFaceMontageBegin.c` for a ~5-min carve if an agbcc-order
 trick is ever found. make compare OK, no regression, matching-C 91.02% (7762) unchanged.
+
+## D197 (2026-06-20) — OpAnimApplyScrollPalettes: IDA-driven logic-different carve (+1, 7762→7763)
+
+The IDA reconstruction lever (D196) finally PAID OFF on a function without the loop-order pathology.
+`OpAnimApplyScrollPalettes` (sub_80CC1B0, JP 0x080CC1B0–0x080CC2C0, 272B) compiled from the fe8u body
+diffed 112 bytes (JP +4) — looked like reg-alloc (bg2cnt `movs r0,#2` vs `r2`) at first glance.
+`mcp__ida__decompile` @ 0x80CC1B0 revealed the ACTUAL root cause: the `else`-branch's
+`SetDispEnable(1, 0, 0, 0, 0)` (DISPCNT byte1 `& 0xE0 | 1` = BG0) is in JP `& 0xE0 | 6` = BG1+BG2 =
+**`SetDispEnable(0, 1, 1, 0, 0)`** — a genuine JP BEHAVIORAL difference (the scroll-palette setup
+enables different backgrounds). Applying that single arg change → diff 0 (the bg2cnt reg-alloc diffs
+were a CASCADE from the changed register pressure, not independent dead-ends).
+
+**LESSON: don't pre-judge a pervasive-diff function as reg-alloc dead-end — IDA-decode it first.** A
+single JP behavioral const (here a SetDispEnable arg) can cascade into dozens of apparent reg-alloc
+diffs that all resolve together. The `ApplyPalettesOpAnim`↔`CopyToPalOpAnim` the IDA showed is a
+no-op (macro alias); the real diff was the DISPCNT arg. Verified: full cold make compare OK,
+self-contain 100%, matching-C 91.03% (7763/8528). The IDA logic-decode lever is now PROVEN to carve
+(not just near-miss) when the JP difference is a behavioral const in straight-line code.
