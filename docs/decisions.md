@@ -5964,3 +5964,16 @@ via the 3-byte ROM diff after my first wrong raw-addr). Raw-addressed that → f
 **Reinforces D197's cascade lesson (now 2×):** a pervasive/"reg-alloc-looking" diff in a structure-matching
 function is usually a CASCADE from ONE root (a sign-ext narrow, a behavioral const). Decode the FIRST diff
 offset, fix it, and the cluster collapses. Verified: self-contain 100%, matching-C 91.04% (7764/8528).
+
+## D199 (2026-06-20) — HP-bar sibling pair via the D198 cast-hoist SOP (+2, 7764→7766)
+
+The D198 cascade-root fix generalizes across the efxhpbar family. `NewEfxHpBarLive` (sub_80536FC, 216B)
+and `NewEfxHpBarResire` (sub_80532DC, 220B) have the IDENTICAL `s16 off_this, off_next; off_next =
+off_this + 1; ... GetEfxHp(off_next*2 + ...)` pattern as NewEfxHpBar. Applied the same recipe:
+`s16 off_next` → `int off_next = (s16)(off_this + 1)` → diff 0 each, + raw-addr the declared-but-unbound
+ProcScrs read from the asm literal pool (`ProcScr_efxHPBarLive` = 0x085E386C, `ProcScr_EfxHpBarResire`
+= 0x085E380C — the single ROM `.4byte 0x085E...` in each gbadisasm). Full cold make compare OK.
+
+**SOP: once a cascade-root fix lands one function, sweep its siblings** (same source file / call family
+share the codegen pathology). matching-C 91.06% (7766/8528). Session: +12 (7754→7766), the last 4 via
+the re-opened IDA cascade-root vein (D197-D199).
