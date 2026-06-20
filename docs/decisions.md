@@ -5600,3 +5600,12 @@ needed binding (@086026E8 from the asm literal). The data-bind screen's 4 candid
 (OnMain_SioError, ExtramenuUnk_LoadGfx, SysBrownBox_Loop, StartSubSpell_efxEvilEyeOBJ). Always nm-check binds
 PROPERLY (grep ` sym$` over `nm --defined-only`); the loose grep mis-flags defined syms as undefined. Session
 run: +25 (7723→7748).
+
+## D181 — const-table-shift hand-RE + auto-Obj-bind (+1 OpAnimPutObjCommon, 7748→7749)
+OpAnimPutObjCommon (diff=56): a big (a,b)→(oam2_chr,Obj_Opanimfx_N) switch. The JP op-anim sprite sheet layout
+shifts EVERY oam2_chr by +0x44 (US 0x8A→JP 0xCE, 0xB2→0xF6...) — applied via a regex `oam2_chr=0xNN`→`0x(NN+44)`
+(agbcc folds the const so codegen == the JP value). Then the 10 Obj_Opanimfx_{1..10} sheets were undefined
+(only Obj_Opanimfx_0 was the misbound-garbage one @1c208560); bound each from the asm literal pool by
+reloc-offset→`.4byte` (08B3F218..290). Cold make compare OK. The sibling OpAnim{Eirika,Ephraim}DisplayName/Exit
+(diff 105-262) are HEAVIER region-diff (different draw structure from offset 0xe — extra sprites/coords like
+the merge-shadows, not a clean const-shift) — deferred. Session run: +26 (7723→7749).
