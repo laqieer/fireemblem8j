@@ -571,7 +571,7 @@ struct WMFaceCtrlProc {
 
 void WorldMapFaceHolder_Init(struct WMFaceHolderProc * proc);
 // ??? WMFaceCtrl_Init(???);
-// ??? GetWMFaceTileXAndScroll(???);
+int GetWMFaceTileXAndScroll(int xIn, int *xOut);
 // ??? GetWMFaceBg(???);
 // ??? GetWMFaceVramOffset(???);
 // ??? PutWMFaceOnBg(???);

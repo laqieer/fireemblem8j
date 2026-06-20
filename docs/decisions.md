@@ -6043,3 +6043,26 @@ read the pool word directly (it IS the JP value). The +N size = the added pool w
 (u8 param-narrow + arithmetic-order + sign-ext, diff 42 after param+arith fix) AND a proto
 change (sio.h s16→u8) risks the carved callers (sio_result_*, sio_teamlist_*); reverted to
 protect callers. GmapLineFade_0 = DivArm computation + loop (multi-part).
+
+## D204 — PutWMFaceOnBg: DECL_ONLY + cast-hoist + permuter-found callee-proto (+1, 7768→7769)
+**Date:** 2026-06-20. **Function:** `PutWMFaceOnBg` (sub_80BD194, JP 0x80BD194, 132B, fe8u src/worldmap_face.c).
+Three stacked JP differences, each needed for diff 0:
+1. **DECL_ONLY:** `GetWMFaceTileXAndScroll` is JP-bound (0x80BD139) but only a `// ???` stub in
+   include/worldmap.h. Declared real proto `int GetWMFaceTileXAndScroll(int xIn, int *xOut)`.
+2. **cast-hoist (D155):** the 5th param `flip` is `s8` in JP (entry `asrs`, sign-extend), where
+   agbcc with `u8 flip` zero-extends (`lsrs`) AND re-sign-extends before the call (+4B). Fix:
+   declare `s8 flip` + `int f = flip;` cast-hoist as first statement, pass `f`. Collapses to the
+   single entry asr, drops the re-extension (size 136→132 = the real size).
+3. **permuter-found callee proto:** a residual r9↔sl reg-alloc swap (`offset` in sl/r9 vs `flip`)
+   that NO source reorder (decl-order, late-assign, volatile-local) could force. decomp-permuter
+   (base score 20 → 0 in 9078 iters) revealed the root: it changed `PutFaceOnBackGround`'s 3rd
+   param to a wider type. The fe8u proto is `s8 c`; that narrowing at the call pinned the swapped
+   allocation. Declaring it **`int c`** in include/face.h flips it → diff 0. ZERO blast-radius:
+   PutFaceOnBackGround is still asm (C proto doesn't bind it) and PutWMFaceOnBg is its ONLY src/
+   caller (verified). Full cold make compare OK.
+**SOP — permuter as a DIAGNOSTIC, not just a search:** when the permuter's score-0 source changes
+a CALLEE PROTOTYPE (not the body), read it as "the JP callee signature differs"; if that callee
+is still asm and has few src/ callers, apply the proto change to the real header (zero blast-radius)
+rather than treating the permuter output as non-physical. The permuter localized a header bug a
+hand search wouldn't have found. NOTE the sed-with-digit trap: `[a-z ]*c` won't match `s8 c`
+(the `8`); use `[^;]*` for prototype-type substitution.

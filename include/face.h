@@ -152,7 +152,7 @@ void FaceChange_Finish(struct UnkFaceProc* proc);
 void StartFaceChange(struct FaceProc* parent, int fid);
 void DecompressFaceImg(int offset, int fid);
 void ApplyFacePalette(int pal, int fid);
-void PutFaceOnBackGround(u16* a, u16 b, s8 c);
+void PutFaceOnBackGround(u16* a, u16 b, int c);
 
 extern const struct FaceData portrait_data[];
 extern struct FaceProc* gFaces[];
