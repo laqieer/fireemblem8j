@@ -2697,7 +2697,7 @@ void EndEfxHPBarColorChange(void);
 void DisableEfxHpBarColorChange(void);
 void EnableEfxHpBarColorChange(void);
 void EfxHPBarColorChangeMain(struct ProcEfxHpBarColorChange * proc);
-void NewEfxFlashUnit(struct Anim * anim, u16 dura1, u16 dura2, int c);
+void NewEfxFlashUnit(struct Anim * anim, int dura1, int dura2, int c);
 void EfxFlashUnitMain(struct ProcEfxFlashing * proc);
 void EfxFlashUnitRestorePal(struct ProcEfxFlashing * proc);
 void NewEfxFlashUnitEffectEnd(struct Anim * anim, int dura1, int dura2, int c);
