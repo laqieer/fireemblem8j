@@ -5811,3 +5811,28 @@ range-diff — reinforces the full-compare gate), self-contain 100%, matching-C 
    symbol is reloc-masked, range-diff was 0.)
 
 Verified: self-contain 100%, matching-C 90.99% (7760/8528), `make compare` OK.
+
+## D192 (2026-06-20) — SoundRoom_InitText msgid-const-decode (+1, 7760→7761; crossed 91%)
+
+**Lever:** the CFAIL→data-bind bucket. After confirming the screen's 3 "CARVE" are false (empty US
+body → NOTU) and the 8 NEAR are all dead-ends, and `InitDifficultySelectScreen` is structural
+(push-list `b5f0→b570`, size 292≠280 = reg-alloc), found `SoundRoom_InitText` (sub_80B4B48,
+JP 0x080B4B48–0x080B4C30, 232B) as a region-SAME D81 const-decode.
+
+**Carve:**
+1. Added the local `struct Unknown201F148 { struct Font font; struct Text text[7]; u16 unk_50; }`
+   def (JP headers lack it) + `extern ... gUnk_SoundRoom_0` (bound 0x0201F148).
+2. Size matched (232) immediately → region-SAME. The 31 raw diffs were 3 real JP consts + bl-offset
+   cascade. Read the exact JP values from the literal pool: `InitText(&text[0], 5)` → width **4**;
+   `GetStringFromIndex(0x5AA)` → **0x535** (pool); `GetStringFromIndex(0x5AE)` → **0x748** (agbcc
+   strength-reduces to `movs#0xe9; lsls#3`, matching JP). All 3 fixes → diff 0.
+
+**TRAP (cost a cycle):** the JP pool has an extra word 0x020228A8 mine "lacked". I wrongly read it as
+a `gPaletteBuffer[0x1A0]` constant-fold and raw-addressed it (`*(u16*)0x020228A8=0`) → size 232→228,
+diff→126. It was just the auto-resolving RELOC for `&gPaletteBuffer[0x1A0]` (sadiff excludes it, so it
+didn't show as a literal in my pool dump). Reverting to plain `gPaletteBuffer[0x1A*0x10]=0` → diff 0.
+LESSON: a JP pool word absent from your reloc-excluded dump is usually YOUR reloc, not a missing
+constant — don't fold it.
+
+Verified: self-contain 100%, matching-C 91.01% (7761/8528), `make compare` OK. The msgid-const-decode
+(D81) vein is still alive in the CFAIL bucket for region-SAME text/draw functions.
