@@ -5977,3 +5977,15 @@ ProcScrs read from the asm literal pool (`ProcScr_efxHPBarLive` = 0x085E386C, `P
 **SOP: once a cascade-root fix lands one function, sweep its siblings** (same source file / call family
 share the codegen pathology). matching-C 91.06% (7766/8528). Session: +12 (7754→7766), the last 4 via
 the re-opened IDA cascade-root vein (D197-D199).
+
+## D200 (2026-06-20) — cascade-root discriminator refined (IDA exploration, 0-carve, honest)
+
+After +4 in 3 rounds (D197-199), this round's IDA candidates were all multi-part (no clean single-root):
+`NewEfxFarAttackWithDistance` (s16 param-narrow on `arg` held across body + reg-alloc + if/else order +
+unk_38 var-reuse), `EfxNoDamageYureMain` (param-narrow + high-reg r8/r9 + asymmetric LOWORD), and
+`InitPrepScreenMainMenu` (SAVE if/else-vs-inline + CHECKMAP 5th-arg reuse + structural 0x44 cluster; the
++4 in the if-branch cascades the bne-target & every pool-ldr offset, so the early "diffs" are cascade
+artifacts, not real consts). DISCRIMINATOR (memory): the cascade-root fix collapses a diff ONLY with ONE
+root; 2+ independent issues (param-narrow + reg-alloc + code-shape) = defer (agbcc dead-end). param-narrow
+on a value HELD ACROSS THE BODY is unforceable (unlike off_next which fed a store and yielded to the
+int-cast-hoist). No regression: make compare OK, matching-C 91.06% (7766/8528) unchanged. Session +12.
