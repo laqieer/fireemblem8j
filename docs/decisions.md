@@ -5730,3 +5730,32 @@ the OTHER route is often the correct constant template (JP cross-swaps routes); 
 deltas are the 2-sprite name draw (decode Obj/oam from the literal pool) + which fe8u body's consts
 apply + the Tsa call ORDER (decode both `bl` targets — Maybe@0xCB720/Reverse@0xCB7D8 — and match,
 swapping call names if needed); (3) always gate on full cold `make compare`, never the range diff.
+
+## D189 (2026-06-20) — SoundRoomUi_Init DECL_ONLY + layout-coord const (+1, 7757→7758)
+
+**Lever pivot:** fresh `screen_named_rd.py` run (622 named region-diff still-asm) → CARVE=3 (false
+0/0-size positives), NEAR=8, CFAIL=48. The NEAR bucket was mostly dead-ends: `ShopTryMoveHand`
+(1× 0e→16) and `HbMoveCtrl_OnIdle` (4× 0e→16) are BOOLEAN-param/accumulator lsr↔asr — agbcc proves
+the 0/1 value non-negative and emits `lsr` regardless of declared signedness (`s8`/`signed char`
+both fail to flip); `ReadSramFast_Core`/`WriteSramFast` (2× 11→10/48→49) are a pure r0↔r1 reg-swap
+on `(REG_WAITCNT & ~3)`. All confirmed lsr↔asr/reg-alloc dead-ends (directive: skip).
+
+**The win — `screen_cfail.py` (auto-declare → re-bucket) surfaced `SoundRoomUi_Init`** (sub_80B4144,
+JP 0x080B4144–0x080B4414, 720B) as NEAR=1 (`16e:cf->d0`):
+1. DECL_ONLY: ~10 soundroom siblings are undeclared in JP headers (the headers carry only commented
+   `// ??? InitSoundRoomSongData(???)` stubs — fe8u never typed them). Declared them locally in the
+   .c with usage-derived signatures (`void X(struct SoundRoomProc *)`, `SoundRoom_DrawCompletionPercent(u16*, proc)`,
+   `ProcPtr StartMenuScrollBarExt(ProcPtr,int,int,int,int)`).
+2. Two graphics syms still unbound (`Img/Pal_SoundRoomUiElements`). Deduced their ROM addresses from
+   the JP function's literal pool (0x08AADC58/AAEAE4/AAAC4C/AAB440) by ELIMINATION: the bound
+   `Img/Pal_PlayStatusSprites` siblings (nm) take AADC58/AAEAE4, so by source use-order
+   Img_SoundRoomUiElements=0x08AAAC4C, Pal_SoundRoomUiElements=0x08AAB440. Referenced by raw address
+   `(const void *)0x08AAAC4C` (D147 pattern — no binding needed, the data is already region-same in
+   the self-contained ROM).
+3. The 1 const: `SoundRoom_DrawCompletionPercent(TILEMAP_LOCATED(gBG0TilemapBuffer, 15, 6), proc)` →
+   JP `16, 6` (TILEMAP_INDEX 0xcf→0xd0; the completion-% text is one tile right). Same class as the
+   D139 SoundRoom_DrawCompletionPercent coord shift.
+
+Verified: reloc-excluded diff 0 → full cold `make compare` OK, self-contain 100%, matching-C 90.97%
+(7758/8528). The CFAIL+const class remains a live (if slow) matching-C vein; the NEAR sign-ext/reg
+bucket is mostly exhausted dead-ends.
