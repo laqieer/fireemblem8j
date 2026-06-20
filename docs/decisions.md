@@ -5326,3 +5326,43 @@ claimed 7703 (overstated ~+3 over prior iterations — likely extern-inline carv
 separate T-symbol, or already-done carves recounted). The verify-by-removal test (mv the 3 tsv out → 7700; back
 → 7703) proved it. These +3 incbin-split carves are GENUINE and closed the gap, so README 7703 is now ACCURATE.
 RULE: trust `calcprogress.py` as ground truth each iter (it counts src/*.o T-symbols), not running +1 tallies.
+
+## D164 — fresh-aliased-list regen re-opens matching-C (+11, 7702→7713); scheduling/dead-class taxonomy
+Continued the screen_aliased NEAR/CARVE lever. KEY: the stale `/tmp/aliased_asm.txt` (314 entries,
+Jun 18) was exhausted of easy wins — REGENERATING it (all `asm/sub_*.s` carrying a real US-name `.global`,
+not yet carved → 461 still-asm US-named fns) re-opened the vein. **Carved +11 this iteration:**
+CheckForWaitEvents, ExecUnit{,Default}Promotion, PathArrowDisp_Init, BonusClaim_DrawTargetUnitSprites,
+PutWorldmapStatusDetails, efxHazymoonOBJ2_Loop_{A,B,C}, StartFaceChibiSpr, efxRestRSTMain.
+
+Reliable fix classes that WORKED (all `make compare`-gated): (1) **int-promotion** `int v=isFlipped/unk/a`
+for an s8/u8 param held across a call then tested (CheckForWaitEvents, ExecUnit*Promotion,
+PathArrowDisp_Init, StartFaceChibiSpr); (2) **(int)cast on an unsigned product to force signed `>>16`=asr**
+(efxRestRSTMain: `gEfxutils_0[v] * (int)proc->frame` — proc->frame was unsigned so the product went unsigned
+→ agbcc lsr; cast → asr); (3) **JP layout const** (BonusClaim unit-sprite x 96→112; PutWorldmap special-char
+0x35→0x1F); (4) **do-while reg-swap transform** (GmapRm_SetPosition — but it was ALREADY carved as
+sub_80C7240); (5) **arg-hoist for eval-order** (NewEfxTeonoSE — also already carved).
+
+**efxHazymoon data-label scramble fix (reusable):** 3 region-same eclipse Loop procs referenced
+`Img_EclipseSprites_{efxHazymoonOBJ,Swirl,0}` which were attached to the JP `.rodata` blocks in US order
+but JP uses a DIFFERENT order. Cold compare failed with the 3rd literal CYCLICALLY shifted. Fix = a
+byte-neutral **3-way rename** of the variables in `src/data/banim/dat_data_banim_p109.c` (INCBINs unmoved,
+only var names remapped to JP order: efxHazymoonOBJ=D4B4, Swirl=D980, _0=DE18, derived from each Loop's asm
+`.4byte` literal at the AnimScr reloc offset). Plus bind the 3 `AnimScr_EfxHazymoonOBJ2_{1,2,3}` data syms
+(JP 0x867E6BC/E9B8/E3B4). Data axis stays 100% (clean build verified).
+
+**Metric-drift recurrence:** my per-carve `calcprogress | grep '7NNN/8528'` readings drifted +2 again;
+the removal test (mv 2 tsv out → 7706, back → 7708) is ground truth. README reconciled to calcprogress each
+push. Filter-bug lesson: `ls A B && hd=yes` fails if EITHER missing — check each handdecomp file separately;
+and `gbadisasm_*.tsv` is the STILL-ASM marker, NOT a carved marker (only `handdecomp_*`/src-in-HEAD = carved).
+
+**DEAD/permuter-class remaining (do NOT re-grind):** the still-asm US-named pool is now dominated by
+agbcc-fixed codegen that source can't steer: (a) **param-prologue narrowing ORDER** (agbcc narrows r1 before
+r0; JP forward — FilterBattleAnimCharacterPalette, RegisterBanimTerrainTmByPos, ColorFadeSetup×4 base=480);
+(b) **lsr↔asr boolean-collapse** (a u8/s8 accumulated by `|=`/only tested for truth — agbcc drops the
+sign-ext — ShopTryMoveHand, HbMoveCtrl_OnIdle×4); (c) **arg-setup scheduling** (sign-ext vs address-compute
+order — WeaponSelectMenu_Draw, StealItemMenuCommand_Draw, efxLuna/Excalibur SCR2_Loop); (d) **reg-alloc
+swap** (ClassChgSel_StartClassBattleSprite r6↔r7 — permuter 96k iters stuck at 65/85; WriteSramFast/
+ReadSramFast_Core r0↔r1); (e) **structural** (MoveUnitExt, EfxTeonoSeMain, PlayerPhase_PrepareAction);
+(f) **large-msgid** (ExecJunaFruitItem GetStringFromIndex(0x1E)→big JP literal, mixed with other diffs).
+Next iter should PIVOT lever: hand-RE a specific region-diff fn, the NAMED axis (rename carved sub_
+placeholders), or autocarve on baseline-bound sub_. Do NOT launch permuters on base>150 (won't converge).
