@@ -5446,3 +5446,17 @@ reads; agbcc did the reads first. `int flip = isFlipped;` as the FIRST local for
 (Same family as the int-promotion/decl-reorder schedule controls.)
 Skipped: UnitChangeFaction (diff=16 mixed), Event0D_AsmCall (region-diff from offset 0), UiSupport_
 GetSupportTalkSong (diff=13 tail reg-alloc), ClassIntro_LoopOut (mixed const+struct).
+
+## D169 — refined extern-inline (direct-only) + multi-msgid const-decode (+2, 7722→7724)
+**(1) PidStatsGetExpGain (+1):** extern-inline class refinement — provide ONLY the DIRECTLY-called US-inline
+accessor (`GetPidStats`), NOT its nested inline callees (`GetCharacterData`, which JP emits as a `bl`).
+Inlining both gave diff=52; inlining only GetPidStats gave diff=0. Read the JP disasm to see which level JP
+inlines (JP inlined GetPidStats's pid-bound + affinity-via-bl-GetCharacterData + &gBWLDataArray[pid], but
+called GetCharacterData). **(2) PrepItemList_DrawCurrentOwnerText (+1):** two JP msgids with DIFFERENT
+per-range offsets — `GetStringFromIndex(0x536)→0x4C6` (-0x70) and `(0x598)→0x523` (-0x75, read from the JP
+literal pool @+0x8c since 0x523 isn't a clean `movs<<3` so agbcc literal-loads it, matching JP's `ldr`).
+The 2nd msgid's movs→ldr structural change cascaded branch/pool-offset diffs that all resolved once the exact
+JP value was used. Skipped: ClassIntro_LoopOut (JP OpInfoEnterProc struct-offset diff iconProc 0x38→0x5c —
+whole-struct, risky), PrepareSineWaveScanlineBuf×4 (param-narrow-vs-literal-load schedule, partial-fixable
+but not clean). The diff-rank ≤24 tail is now mostly worked dead-class (param-prologue, lsr↔asr, reg-alloc,
+struct-offset).
