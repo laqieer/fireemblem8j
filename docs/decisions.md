@@ -5640,3 +5640,13 @@ eval, hoist no help), MoveUnitExt (r2/r3 param-narrow interleave order, permuter
 RegisterBanimTerrainTmByPos/FilterBattleAnimCharacterPalette/ColorFade (param-prologue narrow order),
 ShopTryMoveHand/HbMoveCtrl (lsr↔asr boolean-collapse), reg-alloc swaps. The efx PlaySFX-cast-arg vein is now
 exhausted (no more still-asm matches). Session run: +31 (7723→7754).
+
+## D185 — narrow-hoist re-opens efxHitQuake_Loop (+1, 7754→7755); permuter-list re-audit
+efxHitQuake_Loop (852B, diff=13 localized @0x198): mis-marked permuter-structural in the workflow memo, but
+it's the SAME deferred-narrow class as EfxTeonoSeMain — JP narrows `s16 hm` immediately after computing it;
+`int hm=(s16)(expr)` forces the narrow at the assignment → diff=0. So TWO of the "permuter score ~100" entries
+(efxHitQuake, EfxTeonoSeMain) were actually narrow-hoist-fixable, not structural. Audited the efx Loop cluster
+for more: efxLunaOBJ_Loop_C/D (diff 30/51) have a push-list change (`b570→b5f0` = JP uses more callee-saved
+regs) = genuinely heavier reg-alloc/structural; NewEfxHpBarLive (diff=32) is sign-ext + a region-diff block.
+LEVER refined: `int v=(s16/s8)expr` forces agbcc to narrow at the assignment (vs deferring to the use) — fixes
+"deferred-narrow scheduling" that looks like reg-alloc. Session run: +32 (7723→7755).
