@@ -1020,7 +1020,7 @@ void StartMapAnimEffect_Unk_1(int bg, int x_inc, int y_inc, ProcPtr parent);
 void EndMapAnimEffect_Unk_1(void);
 void MapAnimEffect_Unk_1_Loop(struct ManimSomethingProc_08067498 * proc);
 void PutManimLevelUpFrame(int actor_id, int x, int y);
-void PutManimLevelUpStat(int actor_id, int x, int y, int stat_num, bool after_gain);
+void PutManimLevelUpStat(int actor_id, int x, int y, int stat_num, int after_gain);
 int GetManimLevelUpStatGain(int actor_id, int stat_num);
 int GetManimLevelUpBaseStat(int actor_id, int stat_num);
 // ??? ManimLevelUpStatGainLabel_Finish(???);

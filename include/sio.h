@@ -668,11 +668,11 @@ void Sio_RasterRotatedBoxToWinBuf(s16 * a, int b, int c, int d, int e, int f, in
 void Sio_BoxTransition_Init(struct SioProc85AA7B4 * proc);
 void Sio_BoxTransitionOpen_Loop(struct SioProc85AA7B4 * proc);
 void Sio_BoxTransitionOpen_End(void);
-void Sio_StartBoxTransitionOpen(u16 a, ProcPtr parent);
+void Sio_StartBoxTransitionOpen(int a, ProcPtr parent);
 void Sio_StartBoxTransitionOpenDefault(ProcPtr parent);
 void Sio_BoxTransitionClose_Loop(struct SioProc85AA7B4 * proc);
 void Sio_BoxTransitionClose_End(void);
-void Sio_StartBoxTransitionClose(u16 a, ProcPtr parent);
+void Sio_StartBoxTransitionClose(int a, ProcPtr parent);
 void Sio_StartBoxTransitionCloseDefault(ProcPtr parent);
 void Sio_WaitBoxTransitionOpen(ProcPtr proc);
 void Sio_WaitBoxTransitionClose(ProcPtr proc);
