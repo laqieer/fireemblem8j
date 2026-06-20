@@ -6022,3 +6022,24 @@ Adding `EndAllProcChildren(proc);` → diff 0, full cold make compare OK. A clea
 statement-by-statement; the JP difference is often a single extra call, a different SetDispEnable/SetBlend
 arg, or a different const that cascades the surrounding bl-offsets & reg-alloc. Distinct from the sign-ext
 class (D198, harvested) and the multi-part dead-ends (D200/D201). matching-C 91.08% (7767/8528). Session +13.
+
+## D203 — Dual-const SETUP carve: SioBat_InitSetupScreen (+1 matching-C, 7767→7768)
+**Date:** 2026-06-20. **Lever:** behavioral-const SETUP vein (continues D202).
+**Function:** `SioBat_InitSetupScreen` (sub_8045D60, JP 0x8045D60, 324B, fe8u src/sio_bat.c).
+**Finding:** US body compiled to size=320, diff=37 concentrated at 0xc0 + 0xe2-0xf0 — a
+structure-matching function whose whole diff cascaded from TWO JP data constants:
+  1. `StartFace(3, FID_ANNA, ...)` — JP face id is **0x65** (US FID_ANNA=0x64); the JP
+     face table inserts one entry before Anna. Fix: `FID_ANNA + 1`.
+  2. `PutSioText(MSG_748 + proc->unk_30, 1)` — JP msgid is **0x6D3** (US MSG_748=0x748,
+     delta -117). Because 0x6D3 is NOT `imm8<<shift`-expressible, agbcc can't strength-reduce
+     it (US 0x748 = `movs#0xe9; lsls#3`) and instead loads it from a literal-pool word — that
+     extra pool word is exactly the +4 size delta (320→324). Read the JP value from the pool
+     at ROM 0x45E9C (= struct.unpack '<I'). Fix: literal `0x6D3`.
+Both substituted → diff 0, size 324 matches, cold `make compare` OK, self-contain 100%.
+**SOP reinforced:** when a structure-match function loads a value from a pool where US
+materializes it inline (movs+lsls/lsrs), the JP CONSTANT differs and isn't shift-expressible —
+read the pool word directly (it IS the JP value). The +N size = the added pool word(s).
+**Deferred this iteration:** UpdateLinkArenaMenuScrollBar (sub_804DFE4) — multi-part
+(u8 param-narrow + arithmetic-order + sign-ext, diff 42 after param+arith fix) AND a proto
+change (sio.h s16→u8) risks the carved callers (sio_result_*, sio_teamlist_*); reverted to
+protect callers. GmapLineFade_0 = DivArm computation + loop (multi-part).
