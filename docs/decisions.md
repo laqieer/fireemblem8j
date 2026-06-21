@@ -6793,3 +6793,27 @@ SKIPPED (not cleanly linkable, would regress an axis):
 - syscalls.o (1124B): its range is ENTANGLED with already-decompiled matching-C (_fstat, sub_80DA784,
   sub_80DA7D0, nullsub_112 as src/*.o) + a .data residue; whole-object placement would regress matching-C.
 - multi-symbol stubs (vfprintf.o/findfp.o/libcfunc.o): non-contiguous extra members in the ROM.
+
+## D265 — libc/libgcc .a-linking: metrics fix + mprec/vfprintf/findfp linked (488 -> 14612B code, 414B data)
+Per "code+data linked from lib are supposed to be completed; continue linking; check fe8u".
+1. METRICS FIX (commit e4d88b095): calcprogress now counts .rodata/.data linked from libc.a/libgcc.a as
+   COMPLETED (new data_lib category, in the EXTRACTED-DATA numerator), mirroring code_lib. Honest: archive
+   data is real-source like fe8u, not baserom incbin. Unblocks placing archive .rodata without regressing
+   extracted-data (stays 100%).
+2. LINKED the remaining clean objects (whole-.o, EXTERN-pulled): mprec.o (.text 2256B @0x080D9968 +
+   .rodata 292B @0x080D9968 .rodata @0x08577480, replacing the extracted dat_libc_a_mprec), vfprintf.o
+   (the FULL printf, .text 4460B @0x080D6A80 + .rodata 122B @0x085773B4, replacing dat_libc_a_vfprintf;
+   bound _impure_ptr @0x08BB8A74 + __mb_cur_max @0x08BB8A78), findfp.o (.text 348B @0x080D8B80). For each
+   .rodata swap: removed the dat_libc_a_* .c + dead asm + Makefile DATA_INCBIN_ASM_EXCLUDE entry (fix the
+   now-last entry's trailing backslash!) + monolith row, and rm the stale .o + clean-relink (incremental
+   make keeps a stale dat .o whose orphan section appends to the ROM). dp-bit/fp-bit .bss placed NOLOAD.
+3. fe8u CHECK: fe8u links vfprintf.o/stdio.o/syscalls.o whole from libc.a; error/wrap don't exist in fe8u
+   (FE8J-specific). FE8J now matches fe8u for vfprintf/stdio (+the softfloat/dtoa/mem/div libs).
+4. NOT LINKED (deliberate): syscalls.o (1124B) + libcfunc.o (40B) ranges contain already-DECOMPILED
+   matching-C (_fstat/sub_80DA784/sub_80DA7D0/nullsub_112/...); linking them whole (fe8u-style) would
+   DELETE matching-C functions -- a primary axis -- to gain a secondary code-byte stat. Matching-C is the
+   superior completion path, so those stay decompiled. error/wrap have no .a member (stay incbin).
+RESULT: code-from-archive 488 -> 14612 bytes (30x), data-from-archive 0 -> 414 bytes; 'in asm'
+18.84% -> 17.13%. All 4 oracle axes intact (self-contain/extracted-data 100%, matching-C 92.66%).
+Objects linked: __divsi3/__modsi3/__udivsi3/__umodsi3, memchr/memmove/isinf/isnan, stdio, dp-bit, fp-bit,
+mprec, vfprintf, findfp (+ the original memcpy/memset/strcpy/strlen/__ashldi3/__muldi3).
