@@ -10,7 +10,7 @@ enum
     PROC_FLAG_STARTING = (1 << 3),
 };
 
-static void DeleteProcessRecursive(struct Proc *proc)
+void DeleteProcessRecursive(struct Proc *proc)
 {
     if (proc->proc_prev)
         DeleteProcessRecursive(proc->proc_prev);

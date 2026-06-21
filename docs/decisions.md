@@ -6590,3 +6590,13 @@ absolute @0x02026E10), UnitList_RegisterEquippedIcon (extern u32 gUnitlistscreen
 (deep proto chain: Minimap_Init→Minimap_OpenAnim→...). _unmapped 44 = libgcc/newlib ceiling.
 SESSION TOTAL: +120 matching-C (7767→7887, 91.10%→92.48%). Veins: named-THUMB direct ports,
 extern-inline accessors, m4a old_agbcc (+25), stranded-section individual carve (+69).
+
+## D251 — last stranded fns: Proc_End + InitMinimapFlashPalette (+2 matching-C, 7887→7889)
+Proc_End (JP 0x08002CBC): blocked because DeleteProcessRecursive was `static` in
+src/proc_08002C60.c — globalized it (removed `static`, byte-neutral: linkage doesn't change the
+recursive bl codegen; full make compare confirms proc_08002C60.o unchanged). InitMinimapFlashPalette
+(0x080ACE28): the earlier "deep proto chain" was a MIS-EXTRACTION (awk grabbed the gProcScr_Minimap
+table block); the real body only sets gMinimapObjectFlashPal = gGenericBuffer + a palette-flash loop
+→ extern gMinimapObjectFlashPal (bound @0x0200050C). 2×diff 0.
+**ALL stranded TUs now fully matching-C** except _unmapped's 44 libgcc/newlib fns (the hand-asm
+ceiling). Stranded vein total this session: +71. Matching-C 92.51% (against honest 8209 ceiling: ~96.1%).
