@@ -6212,3 +6212,9 @@ build would CALL them). Provided all three as `extern inline` locally (GNU C89: 
 no out-of-line copy → no duplicate symbol; the out-of-line defs stay in asm). The item-ID switch
 range-checks matched JP as-is. → diff 0, full cold make compare OK. The D102 extern-inline lever is
 alive for any still-asm fn that the JP inlines a tiny accessor into.
+
+## D217b — CanUnitUseStaffNow: extern-inline accessor family (+1, 7783→7784)
+`CanUnitUseStaffNow` (sub_80165A8, 72B, fe8u src/bmitem.c) — same D102 fix as GetUnitItemHealAmount:
+provide GetItemData + GetItemAttributes as `extern inline` → JP inlines the IA_STAFF table lookup →
+diff 0. FAMILY: any bmitem.c fn calling GetItemAttributes/GetItemIndex/GetItemData (CanUnitUseWeaponNow
+next). cold make compare OK.
