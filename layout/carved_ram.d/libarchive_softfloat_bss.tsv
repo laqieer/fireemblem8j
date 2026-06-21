@@ -1,0 +1,2 @@
+03002BE0	iwram	*libgcc.a:dp-bit.o(.bss)	dp-bit.o thenan scratch (softfloat)
+03002BF8	iwram	*libgcc.a:fp-bit.o(.bss)	fp-bit.o thenan scratch (softfloat)
