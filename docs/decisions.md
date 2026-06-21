@@ -6851,3 +6851,38 @@ raw 0x08...... to a pointer. Fixed ALL 163 (Type*)0x08...... casts across ~30 so
   Str_DebugPlaythroughTh 周目, Str_DebugFogState さく敵 (build does preproc->cpp->iconv UTF-8->CP932).
 - RAM/VRAM/REG raw addrs (0x02/03/04/06......) left as-is: fixed hardware-map addresses, don't shift.
 Standing rule saved to memory [[no-raw-hex-pointers]]. All 4 axes intact; cold `make clean && compare` OK.
+
+## D268 — frontier-sweep behavioral carve (matching-C 93.80% -> 94.07%, +23 funcs)
+
+A two-pass worktree-workflow swept the still-asm *named* functions that have fe8u
+**C** source (the "behavioral" frontier, distinct from codegen dead-ends). Sweep 1
+screened 98 curated candidates; agents port the fe8u body verbatim then reloc-aware
+byte-diff the compiled .o vs baserom (`/tmp/sadiff.sh`). 23 returned diff=0.
+
+Each match was then applied ONE AT A TIME on the main thread with a FULL cold
+`make compare` gate (worktree sadiff only proves compiled-.o bytes, never the full
+link — `full-make-compare-before-commit`). 22/23 passed full-sha1; the 23rd
+(BattleGenerateHitAttributes) link-failed on two hand-asm callees still `sub_<addr>`
+in JP — pinned by `bl`-order against 5 sibling callees that verify exactly
+(SureShot=B164, GreatShield=B258, Pierce=B1E8, Roll1RN=A490, Petrify=B328):
+  BattleRoll2RN = 0x0802A4C0,  BattleCheckSilencer = 0x0802B2FC
+added as byte-neutral baseline aliases → all 23 carved.
+
+Recipe classes (corrected JP-specific C, NOT raw US body):
+- int-local sign-extension: widen s8/s16 params/locals to `int` so agbcc emits JP's
+  `ldrsh`/`ldrsb` instead of zero-extend+re-extend (Event*, BgAffinRotScaling, ...).
+- `(s16)gEventSlots[2]` sentinel reads, statement reorder, inlined accessors
+  (`GetPidStats`), region-diff const/logic fixes (JP msgIds, layout coords, the JP
+  UnitAutolevelPenalty clamps levelCount to baseLevel then always autolevels).
+
+Tooling note: the first apply-driver gave ALL-FAIL false-negatives because it did
+not rebuild after each revert (left a broken .elf); v2 restores a known-good ROM
+after every revert. Also cleared a pre-existing untracked stray
+`src/BattleAIS_ExecCommands.c` that broke the link (incomplete carve, banim syms
+undeclared — a future DECL_ONLY candidate, saved to /tmp).
+
+KEY DISCOVERY: the 98 was NOT the full candidate set — reconstructing
+named-asm-with-fe8u-C found 266 total, so **195 more were never screened**. Sweep 2
+(15 agents) is running on those; at sweep-1's ~23% hit rate it should yield ~40 more.
+The behavioral vein is far from exhausted; the 73 sweep-1 dead-ends are genuine
+codegen mismatches (reloc-excluded diff>0 → full link only adds more).
