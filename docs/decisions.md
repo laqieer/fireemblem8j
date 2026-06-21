@@ -6286,3 +6286,9 @@ table (with -1 separators), JP values = US − 0x75 (MSG_735→0x6C0=1728 confir
 split gap4 (INCBIN 0,52 → 40,12 remainder at 0DEEB0), mapped the .rodata at 0DEE88. Full cold make compare
 OK. The JP-msgid embedded-table pattern (the JP message table is shifted by a per-region delta ~0x74-0x82)
 is a rich vein for fns with a local msgid lookup array — IDA gives the return-value delta + the FAR address.
+
+## D225 — SioTeamList_StartEraseTeamSubMenu: JP-msgid const (+1, 7794→7795)
+`SioTeamList_StartEraseTeamSubMenu` (sub_8044340, 132B, fe8u src/sio_teamlist.c). "Erase"/"Back" msgids
+MSG_140/MSG_141 (0x140/0x141) → JP 0x7C1/0x7C3 (read from the function's literal-pool words via the IDA
+GetStringFromIndex refs). The JP sio msgids are in a totally different region (not the −0x74 delta);
+US 0x140 compiles INLINE (movs+lsls), JP 0x7C1 POOL-loads → +4B size. Substitute → diff 0, cold OK.
