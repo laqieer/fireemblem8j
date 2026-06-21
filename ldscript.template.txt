@@ -18,6 +18,7 @@ __iwram_start = ORIGIN(iwram);
 
 ENTRY(Init)
 
+@EXTERN_BODY@
 SECTIONS
 {
     .rom __rom_start : ALIGN(4)
