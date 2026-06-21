@@ -86,7 +86,7 @@ def read_manifest(name):
 # C: real struct tables, INCBIN'd PNG, etc). Bytes from asm/*.o are descriptive asm OR
 # named `.incbin "baserom.gba"` -- assembled, but NOT decompiled/extracted.
 code_src = code_asm = code_lib = 0  # .text bytes by source kind (lib = libc.a/libgcc.a)
-data_src = data_asm = 0          # .data/.rodata bytes by source kind
+data_src = data_asm = data_lib = 0  # .data/.rodata bytes by source kind (lib = archives)
 objs = set()
 for r in read_manifest("carved_rom"):
     start, end, sec = int(r[0], 16), int(r[1], 16), r[2]
@@ -110,6 +110,10 @@ for r in read_manifest("carved_rom"):
     elif secname.startswith((".rodata", ".data")):
         if is_src:
             data_src += size
+        elif is_lib:
+            # .rodata/.data linked from libc.a/libgcc.a -- real-source library data
+            # (like fe8u), NOT named .incbin baserom. Counts as completed/extracted.
+            data_lib += size
         else:
             data_asm += size
     if obj and obj not in ("asm/baserom.o",):
@@ -203,9 +207,11 @@ selfcontain_pct = pct(self_bytes, ROM_SIZE)
 func_pct = pct(funcs, US_FUNCTIONS)
 
 # Real data total = all data the linked ROM accounts for (extracted-to-source +
-# still-as-incbin/descriptive-asm). NOT data_src (that was the tautology).
-data_total = data_src + data_asm
-data_pct = pct(data_src, data_total)
+# real-source library + still-as-incbin/descriptive-asm). NOT data_src (tautology).
+# Library data (data_lib) is real-source like fe8u, so it counts as COMPLETED in
+# the extracted numerator alongside data_src (mirrors code_lib for the code axis).
+data_total = data_src + data_lib + data_asm
+data_pct = pct(data_src + data_lib, data_total)
 
 named_pct = pct(sym_named, sym_total)
 
@@ -257,7 +263,9 @@ out.append(f"0 symbols partially documented (0.0000%)")
 out.append(f"{sym_placeholder} symbols undocumented ({pct(sym_placeholder, sym_total):.4f}%)")
 out.append("")
 out.append(f"{data_total} total bytes of data")
-out.append(f"{data_src} bytes of data in src ({data_pct:.4f}%)")
+out.append(f"{data_src} bytes of data in src ({pct(data_src, data_total):.4f}%)")
+if data_lib:
+    out.append(f"{data_lib} bytes of data in libc/libgcc archives ({pct(data_lib, data_total):.4f}%, linked like fe8u)")
 out.append(f"{data_asm} bytes of data in data ({pct(data_asm, data_total):.4f}%)")
 out.append(f"0 bytes of data in banim (0.0000%)")
 out.append(f"0 bytes of data in sound (0.0000%)")
