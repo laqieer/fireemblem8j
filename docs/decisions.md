@@ -6453,3 +6453,14 @@ extender. old_agbcc (D234) reproduces the codegen byte-exact. Two fixes:
 LESSON: when a carved fn's forward references are all off by a constant delta, the gbadisasm
 range over-spans into the NEXT function — split it, don't fight the codegen.
 Remaining named m4a asm: CgbSound (591 lines).
+
+## D238 — CgbSound: m4a CGB channel processor via old_agbcc (+1 matching-C, 7814→7815)
+`CgbSound` (JP 0x080D5A28, 1100B; fe8u src/m4a.c, 319 lines). The m4a GameBoy-PSG
+(CGB) per-channel sound processing function — the largest m4a carve. old_agbcc (D234)
+reproduces it byte-exact over all 1100 bytes (reloc-excluded sadiff diff 0; .o .text exactly
+0x44C so no range-split trap). Only blocker: `CgbModVol` JP-undeclared → forward decl
+`void CgbModVol(struct CgbChannel *)`. CgbModVol/CgbOscOff/gCgb3Vol all already bound.
+diff 0.
+The named m4a engine vein is now exhausted this session: ClearModM (D234), m4aSongNum×5
+(D235), m4aSoundInit (D236), MPlayExtender (D237), CgbSound (D238) = +8. Remaining m4a is
+m4a_1.s (ARM hand-asm core, ceiling) + small sub_ in the libc/newlib region (also ceiling).
