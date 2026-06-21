@@ -6,8 +6,8 @@
 030088	030094	src/BMapVSync_OnEnd.o(.text)	handdecomp
 030094	0300A0	src/BMapVSync_OnLoop.o(.text)	handdecomp
 0D6760	0D67D0	*libgcc.a:_muldi3.o(.text)	libc __muldi3 from libgcc.a
-0D67D0	0D6848	asm/stranded__unmapped.o(.text.s_080D67D0)	_unmapped:__udivsi3 region-same Thumb (descriptive incbin)
-0D6848	0D6908	asm/stranded__unmapped.o(.text.s_080D6848)	_unmapped:__umodsi3 region-same Thumb (descriptive incbin)
+0D67D0	0D6848	*libgcc.a:_udivsi3.o(.text)	__udivsi3 from libgcc.a (byte-verified, real-source library)
+0D6848	0D6908	*libgcc.a:_umodsi3.o(.text)	__umodsi3 from libgcc.a (byte-verified, real-source library)
 0D6B14	0D6B28	asm/stranded__unmapped.o(.text.s_080D6B14)	_unmapped:vfprintf region-same Thumb (descriptive incbin)
 0D8BE8	0D8C5C	asm/stranded__unmapped.o(.text.s_080D8BE8)	_unmapped:__sfp region-same Thumb (descriptive incbin)
 0D9858	0D98D8	asm/stranded__unmapped.o(.text.s_080D9858)	_unmapped:memchr region-same Thumb (descriptive incbin)

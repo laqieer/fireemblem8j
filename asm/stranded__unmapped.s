@@ -1,23 +1,3 @@
-	.section .text.s_080D67D0, "ax", %progbits
-@ __udivsi3 region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080D67D0..0x080D6848
-	.thumb
-	.align 2, 0
-	.global __udivsi3
-	.thumb_func
-__udivsi3:
-	.incbin "data/residual/__udivsi3.bin"
-
-	.section .text.s_080D6848, "ax", %progbits
-@ __umodsi3 region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080D6848..0x080D6908
-	.thumb
-	.align 2, 0
-	.global __umodsi3
-	.thumb_func
-__umodsi3:
-	.incbin "data/residual/__umodsi3.bin"
-
 	.section .text.s_080D6B14, "ax", %progbits
 @ vfprintf region-same Thumb (US shifted); descriptive incbin baserom.gba
 @ JP 0x080D6B14..0x080D6B28
