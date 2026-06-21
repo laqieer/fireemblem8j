@@ -6380,3 +6380,16 @@ named asm (gbadisasm D23 region-diff) that ports byte-identically:
 callers reference it). GetAffinityBonuses (0x080284C0) already bound (baseline_syms +
 src/GetAffinityBonuses.c); forward-declared since JP bmreliance.h omits the prototype.
 struct SupportBonuses already in JP headers. diff 0.
+
+## D233 — IsItemEffectiveAgainst: extern-inline accessors, bmitem family (+1 matching-C, 7805→7806)
+`IsItemEffectiveAgainst` (JP 0x08016994, 156B; fe8u src/bmitem.c). Same extern-inline
+accessor lever as DrawItemMenuLineNoColor (D229): JP inlines GetItemEffectiveness
+(`gItemData[ITEM_INDEX(item)].pEffectiveness`, field @0x10), GetItemAttributes (@8) and
+GetItemData (table base) — all plain-declared in JP bmitem.h, so provided as `extern
+inline` (GNU C89 inline-only, no dup). Body ports verbatim incl. the `goto
+check_flying_effectiveness_negation` and the 5-slot (UNIT_ITEM_COUNT) attribute-OR loop.
+The two effectiveness-list pointers ItemEffectiveness_Flier (0x089024B6) /
+ItemEffectiveness_FlierAndMonsters (0x0890247D) resolve by NAME (defined in
+src/data/data_itemuse.c) — no raw-addr needed. JP ItemData struct already has
+attributes@8 / pEffectiveness@0x10. diff 0. The bmitem item-accessor family is a
+reliable extern-inline vein.
