@@ -237,6 +237,7 @@ PutDrawText	08004374	thumb	popup2
 InitText	08003C8C	thumb	popup2
 Text_Skip	08003D88	thumb	popup2
 Text_SetColor	08003D90	thumb	popup2
+Text_GetColor	08003D94	thumb	popup2
 Text_DrawString	08003F28	thumb	popup2
 Text_DrawNumberOrSpace	08003FEC	thumb	popup2
 PutText	08003DA0	thumb	popup2

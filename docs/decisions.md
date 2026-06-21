@@ -6328,3 +6328,19 @@ Text_SetCursor(text, 0) not fe8u's 8, AND an EXTRA `Text_DrawString(text, (char*
 ROM string pointer, read from the IDA Text_DrawString pool ref) inserted before the `str` draw — JP draws
 a fixed prefix string then the item string. diff 42→0, cold OK. The "JP adds an extra Text_DrawString of
 a direct-ROM-string" + "different cursor const" is a recurring menu-draw pattern (see DebugMenu_ClearDraw).
+
+## D229 — DrawItemMenuLineNoColor: extern-inline accessors + Text_GetColor binding (+1 matching-C, 7801→7802)
+`DrawItemMenuLineNoColor` (sub_8016750, JP 0x08016750, 132B; fe8u src/bmitem.c).
+IDA Hex-Rays showed JP inlines three bmitem.c accessors that fe8u's JP headers
+declare as plain functions: `GetItemName` (wraps the arg-less global-buffer
+`StrInsertTact()`), `GetItemUses` (`ITEM_USES(item)` = `item>>8`, IA_UNBREAKABLE→0xFF),
+`GetItemIconId` (`item ? gItemData[idx].iconId : -1`). Provided all five
+(GetItemData/GetItemAttributes/GetItemName/GetItemUses/GetItemIconId) as
+`extern inline` (GNU C89 = inline-only, no out-of-line dup → no layout shift) —
+the D102/D217 extern-inline-accessor lever. .text diff 0.
+**Link fix:** the body calls `Text_GetColor(text)` (declared in headers, IDA
+`sub_8003D94`) but the symbol was UNBOUND — it's a 4-byte thumb sibling of
+`Text_SetColor` (0x08003D90) and was simply missing from `layout/baseline_syms.tsv`.
+Added `Text_GetColor 08003D94 thumb popup2`. Cold `make compare` → OK,
+self-contained YES, dedup/close-gaps clean.
+Confirms the extern-inline accessor vein extends to the bmitem item-menu-draw family.
