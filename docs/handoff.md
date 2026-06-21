@@ -52,10 +52,21 @@ WeaponSelectMenu_Draw, ColorFadeSetup×4 [pointer-load scheduling], AddGorgonEgg
 191 CFAILed = DECL_ONLY candidates (a bound symbol undeclared in JP headers — the highest-yield *remaining*
 lever, but slow per-function: fix the decl, re-sadiff). So NO fast batch win remains — confirmed by exhaustive screen.
 
-**NEXT VEIN (only per-function work left):** (a) DECL_ONLY sweep the 191 aliased CFAILs (add the missing
-extern/proto of the bound symbol → some become MATCH/NEAR); (b) permuter on the low-base NEAR reg-alloc
-(diff 5-6: RegisterBanimTerrainTmByPos, FilterBattleAnimCharacterPalette — fresh, not the stuck MoveUnitExt/
-ClassChgSel/WeaponSelect); (c) IDA cascade-root on the region-different sub_/named Draw/Init/
+**RULED OUT (this iter, don't re-try):** (a) DECL_ONLY auto-sweep of all 341 aliased (auto-pulls fe8u
+header decls for undeclared syms, up to 8 per fn) → **0 new MATCH** (the resolved CFAILs are all FAR
+region-diff). (b) Permuter on the freshest small NEAR `RegisterBanimTerrainTmByPos` (124B, reloc-excluded
+diff 5) → **base score 240** (>>150 won't-converge threshold; the one permuter success PutWMFaceOnBg was
+base 20). The reloc-excluded diff understates the permuter distance — scheduling/reloc dominates. So the
+permuter is NOT viable on these reg-alloc/scheduling dead-ends either (consistent with the stuck
+WeaponSelect/ClassChgSel/ColorFade/MoveUnitExt logs). (c) CLOSE-bucket decode: AddGorgonEggTrap (diff14) =
+arg-eval-order/sign-ext marshalling of a 7-arg AddDamagingTrap call (dead-end).
+
+**MATCHING-C IS AT THE DETERMINISTIC TOOLING CEILING (92.53%, 7891/8528; ~96.1% of the honest 8209).**
+Residual = ~319 libc/libgcc hand-asm (ceiling, asm in fe8u too) + ~318 region-diff agbcc dead-ends
+(reg-alloc/scheduling/arg-eval/sign-ext; permuter base scores too high). This is the documented D96 ceiling.
+
+**ONLY REMAINING LEVER (per-function, slow, proven D203-D228):** IDA cascade-root on the FAR region-diff
+sub_/named Draw/Init/Menu/
 Display bucket — open `fireemblem8.elf.i64`, decompile a fn, find the single JP const/msgid/omitted-call/
 extra-call root, fix, verify cold make compare. Slow (~many tool calls per +1). Levers proven D203-D228:
 JP-msgid + TU-local-struct DECL, omitted-call, extern-inline accessor, cursor+extra-Text_DrawString,
