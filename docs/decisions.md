@@ -6371,3 +6371,12 @@ Kept it GLOBAL (a still-asm ProcScr table `bl`s it). Only blocker: PROC_FLAG_UNK
 TU-local enum `(1<<2)` in fe8u proc.c, undeclared in JP headers — defined the same enum
 locally. diff 0. The dedicated-named-asm THUMB files (non-sub_) are a fresh small vein:
 ProcCmd_*, Wfx*, trivial handlers that gbadisasm tagged region-diff but port directly.
+
+## D232 — ApplyAffinitySupportBonuses: 6-field multiply-accumulate direct port (+1 matching-C, 7804→7805)
+`ApplyAffinitySupportBonuses` (JP 0x080284E4, 96B; fe8u src/bmreliance.c). Dedicated
+named asm (gbadisasm D23 region-diff) that ports byte-identically:
+`added = GetAffinityBonuses(affinity); bonuses->bonusX += level * added->bonusX` for the
+6 struct SupportBonuses fields (bonusAttack@1 … bonusDodge@6). Global (carved bmreliance
+callers reference it). GetAffinityBonuses (0x080284C0) already bound (baseline_syms +
+src/GetAffinityBonuses.c); forward-declared since JP bmreliance.h omits the prototype.
+struct SupportBonuses already in JP headers. diff 0.
