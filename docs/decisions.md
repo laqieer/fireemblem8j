@@ -6393,3 +6393,17 @@ ItemEffectiveness_FlierAndMonsters (0x0890247D) resolve by NAME (defined in
 src/data/data_itemuse.c) — no raw-addr needed. JP ItemData struct already has
 attributes@8 / pEffectiveness@0x10. diff 0. The bmitem item-accessor family is a
 reliable extern-inline vein.
+
+## D234 — ClearModM: m4a old_agbcc toolchain lever (+1 matching-C, 7806→7807)
+`ClearModM` (JP 0x080D5FE0, 36B; fe8u src/m4a.c). The body is a trivial direct port
+(`lfoSpeedC=0; modM=0; flags |= modT? VOLCHG : PITCHG`) but the regular agbcc -O2 emitted
+a `push {lr}` prologue + different reg-alloc → diff 34/36. ROOT: the m4a sound engine was
+built with the OLD GBA SDK compiler (`old_agbcc`), which fe8u routes via
+`src/m4a.o: CC1 := $(CC1_OLD)`. `old_agbcc` reproduces the JP codegen EXACTLY
+(`adds r1,r0,#0; movs r2,#0; movs r0,#0; strb...` incl. the dead r2 init). Added the
+per-target override `src/ClearModM.o: CC1 := $(CC1_OLD)` (CC1_OLD was defined at
+Makefile:50 but previously UNUSED). diff 0.
+**FRESH VEIN:** the still-asm m4a functions (ply_*, MPlay*, Clear*, TrackAll*, etc.) that
+fail to match under regular agbcc are likely old_agbcc codegen-shape — carve via the
+m4a.c body + the per-target CC1_OLD override. Reopens a class long treated as
+codegen-shape dead-ends.
