@@ -28,16 +28,6 @@ FreeProcess:
 InsertRootProcess:
 	.incbin "data/residual/InsertRootProcess.bin"
 
-	.section .text.s_08002D18, "ax", %progbits
-@ InsertChildProcess region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08002D18..0x08002D30
-	.thumb
-	.align 2, 0
-	.global InsertChildProcess
-	.thumb_func
-InsertChildProcess:
-	.incbin "data/residual/InsertChildProcess.bin"
-
 	.section .text.s_08002D30, "ax", %progbits
 @ UnlinkProcess region-same Thumb (US shifted); descriptive incbin baserom.gba
 @ JP 0x08002D30..0x08002D78

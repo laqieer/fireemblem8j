@@ -6523,3 +6523,14 @@ sProcAllocListHead@0x02026A6C) that are `static` (internal linkage) in their def
 — blocked unless co-located or globalized. Deferred.
 Session stranded total: m4a 25, hardware 6, fontgrp 15, prepscreen 4, bmbattle 3, +5 singles,
 BMapVSync 2.
+
+## D244 — InsertChildProcess: proc tree fn, BSS-shift trap (+1 matching-C, 7865→7866)
+`InsertChildProcess` (JP 0x08002D18; fe8u proc.c). Pure proc-field manipulation (no global
+statics), so carved clean once I DROPPED the EWRAM_DATA static block. KEY TRAP: the proc-carve
+header pattern re-declares `EWRAM_DATA static struct Proc sProcArray[64]` + sProcAllocList +
+sProcAllocListHead; including those in a NEW TU adds ~1KB of EWRAM BSS that SHIFTS the EWRAM
+layout and breaks byte-checked references elsewhere (full make compare FAILED even though
+reloc-excluded sadiff=0). Only safe when the function uses NONE of those statics.
+The 4 siblings (AllocateProcess/FreeProcess→sProcAllocListHead@0x02026A6C,
+InsertRootProcess/UnlinkProcess→gProcTreeRootArray) need the statics raw-addr'd (D215) so no
+new BSS is allocated. Deferred to a raw-addr pass.
