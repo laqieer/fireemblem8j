@@ -6580,3 +6580,13 @@ Back/Displayed + gMinimapObjectFlashPal + Minimap_Init proto). 4×diff 0. minima
 InitMinimapFlashPalette deferred (needs Minimap_AdjustDisplay + Minimap_InitOpenAnim protos +
 had cascading parse errs). Remaining stranded: icon GetNextFreeIcon (static registry),
 prep_itemsupply, unitlistscreen, proc Proc_End, minimap×1.
+
+## D250 — icon/unitlistscreen/prep_itemsupply stranded (+3 matching-C, 7884→7887)
+GetNextFreeIcon (#define MAX_ICON_GFX_COUNT 32 + extern u8 IconGFXIDLookupTable[32], bound
+absolute @0x02026E10), UnitList_RegisterEquippedIcon (extern u32 gUnitlistscreen_9[8]
+@0x0200F15C), PrepItemSupply_DrawConvoyWeaponIconTiles (TU-local `#define TILEREF_(c,p)
+(((p)<<12)+(c))`). 3×diff 0. STRANDED VEIN ~EXHAUSTED. Remaining 2 deferred: Proc_End
+(DeleteProcessRecursive is `static t` — needs co-location/globalize) and InitMinimapFlashPalette
+(deep proto chain: Minimap_Init→Minimap_OpenAnim→...). _unmapped 44 = libgcc/newlib ceiling.
+SESSION TOTAL: +120 matching-C (7767→7887, 91.10%→92.48%). Veins: named-THUMB direct ports,
+extern-inline accessors, m4a old_agbcc (+25), stranded-section individual carve (+69).

@@ -1,1 +1,1 @@
-09FB74	09FBB4	asm/stranded_prep_itemsupply.o(.text.s_0809FB74)	prep_itemsupply:PrepItemSupply_DrawConvoyWeaponIconTiles region-same Thumb (descriptive incbin)
+09FB74	09FBB4	src/PrepItemSupply_DrawConvoyWeaponIconTiles.o(.text)	handdecomp

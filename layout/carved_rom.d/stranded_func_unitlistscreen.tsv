@@ -1,1 +1,1 @@
-092604	092638	asm/stranded_unitlistscreen.o(.text.s_08092604)	unitlistscreen:UnitList_RegisterEquippedIcon region-same Thumb (descriptive incbin)
+092604	092638	src/UnitList_RegisterEquippedIcon.o(.text)	handdecomp
