@@ -1,3 +1,3 @@
 # carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-5775A4	5775F8	src/data/data_085775A4/data_085775A4.o(.data.residue.085775A4)	descriptive raw ROM data (84 B, byte-completeness D29)
+5775C9	5775F8	src/data/data_085775C9/data_085775C9.o(.data.residue.085775C9)	data_085775C9 residue (after syscalls.o .rodata split)
 577608	577648	src/data/data/data_08577608.o(.data.residue.08577608)	descriptive raw ROM data (64 B; split off for typed sBGControlStructPtrs)

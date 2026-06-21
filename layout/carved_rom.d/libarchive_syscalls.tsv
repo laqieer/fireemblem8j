@@ -1,0 +1,2 @@
+0DA3C8	0DA82C	*libc.a:syscalls.o(.text)	syscalls.o .text whole object from libc.a
+5775A4	5775C9	*libc.a:syscalls.o(.rodata)	syscalls.o .rodata from libc.a

@@ -1,0 +1,1 @@
+03002B30	iwram	*libc.a:syscalls.o(.bss)	syscalls.o .bss
