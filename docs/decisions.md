@@ -6314,3 +6314,10 @@ diff 0, cold OK. This turn the Sio*/bmitem JP-msgid + embedded-table + TU-local-
 `DrawLinkArenaTeamListMenu` (sub_8043744, 252B) — extern gSioTeamListConfigLut + `extern char
 gUnk_Sio_14[][15]` (bound 0x0203DD4C) + msgid MSG_76B/0x76B → JP 0x58. diff 0, cold OK. The Sio
 LinkArena team-list cluster is fully tractable via the DECL + JP-msgid recipe.
+
+## D227 — PutClassNameIntroLetter: JP OAM-tile scale const + raw-addr sprite (+1, 7799→7800)
+`PutClassNameIntroLetter` (sub_80B762C, 376B, fe8u src/opinfo.c). diffs=2 (screen_cfail) = the two
+PutSpriteExt tile args `charId * 2 + (k&0xF)*0x1000 + 0x800/0x400` → JP uses `charId * 4` (the OAM
+tile stride; a `lsls #1`→`#2` byte at 0x102/0x146). Plus the TU-static sprite `sSprite_Opinfo_0` is
+unbound → raw-addr `(const u16 *)0x08AAFCAC` (read from the PutSpriteExt 4th-arg pool word). diff 0,
+cold OK. 7800 milestone. The screen_cfail NEAR/diffs-2 bucket still has a few non-sign-ext const carves.
