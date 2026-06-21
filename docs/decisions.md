@@ -6292,3 +6292,10 @@ is a rich vein for fns with a local msgid lookup array — IDA gives the return-
 MSG_140/MSG_141 (0x140/0x141) → JP 0x7C1/0x7C3 (read from the function's literal-pool words via the IDA
 GetStringFromIndex refs). The JP sio msgids are in a totally different region (not the −0x74 delta);
 US 0x140 compiles INLINE (movs+lsls), JP 0x7C1 POOL-loads → +4B size. Substitute → diff 0, cold OK.
+
+## D226 — SioTeamList_SwapTeams: local-struct DECL + JP-msgid (+1, 7795→7796)
+`SioTeamList_SwapTeams` (sub_8043644, 256B, fe8u src/sio_teamlist.c). DECL_ONLY: define the TU-local
+`struct LinkArenaTeamEnt` (20B: char name[15]; u8 unk_0f; u8 unk_10; pad) + `#define MULTIARENA_LIST_SWAP 4`
+(an enum value, not an array — both pool words resolve to the bound gLinkArenaTeamList @0x0203DB78). Plus
+the "NO DATA" msgid MSG_0CC/0xCC → JP 0x61 (read from the IDA GetStringFromIndex ref). → diff 0, cold OK.
+The Sio* family is rich in JP-msgid + TU-local-struct DECL carves.
