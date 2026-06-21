@@ -6241,3 +6241,10 @@ ZERO-extended (lsrs, held in r0) then RE-SIGN-extended (asrs→r1) before the `i
 entry asr → diff 0. **REFINES the cast-hoist rule (D205):** it works even WITHOUT a held-across-call —
 a redundant zero-then-sign double-extension of an s8 param is enough. Found via the omit screen's
 +8-delta bucket (US 8 bytes bigger than JP). The omit-screen +8 deltas are a fresh cast-hoist vein.
+
+## D221 — BgAffinScaling: cast-hoist + decl-reorder (+1, 7788→7789)
+`BgAffinScaling` (sub_80B2924, 72B, fe8u src/sysutil.c). The `s16 sy/sx` params were double-extended
+(zero then re-sign, +8B vs JP). cast-hoist `int syy=(s16)sy; int sxx=(s16)sx` collapses each to one asr;
+declaring them BEFORE the `struct BgAffineDstData* affin = NULL` local matches JP's order (sign-ext first,
+then NULL) → diff 0. cold make compare OK. The omit-screen +8-delta bucket = a rich double-extension
+cast-hoist vein. Siblings BgAffinAnchoring/BgAffinRotScaling (sysutil.c) likely same pattern.
