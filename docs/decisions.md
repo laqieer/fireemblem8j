@@ -6309,3 +6309,8 @@ diff 0, cold OK. This turn the Sio*/bmitem JP-msgid + embedded-table + TU-local-
 ## D226c — LoadLinkArenaTeamList: Sio family DECL + JP-msgid (+1, 7797→7798)
 `LoadLinkArenaTeamList` (sub_8043344, 244B) — identical Sio-family fix: TU-local struct LinkArenaTeamEnt
 + extern gLinkArenaTeamList + extern gSioTeamListConfigLut + msgid 0xCC→0x61. diff 0, cold OK.
+
+## D226d — DrawLinkArenaTeamListMenu: Sio family DECL + JP-msgid (+1, 7798→7799)
+`DrawLinkArenaTeamListMenu` (sub_8043744, 252B) — extern gSioTeamListConfigLut + `extern char
+gUnk_Sio_14[][15]` (bound 0x0203DD4C) + msgid MSG_76B/0x76B → JP 0x58. diff 0, cold OK. The Sio
+LinkArena team-list cluster is fully tractable via the DECL + JP-msgid recipe.
