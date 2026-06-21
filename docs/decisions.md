@@ -6305,3 +6305,7 @@ The Sio* family is rich in JP-msgid + TU-local-struct DECL carves.
 + extern gLinkArenaTeamList + extern `struct LATeamListConfig * gSioTeamListConfigLut[]` + msgid 0xCC→0x61.
 diff 0, cold OK. This turn the Sio*/bmitem JP-msgid + embedded-table + TU-local-struct vein gave +6
 (GetItemDisplayRange/RankString, SioMenu_GetItemHelpText, SioTeamList_StartEraseTeamSubMenu/SwapTeams/EraseTeam).
+
+## D226c — LoadLinkArenaTeamList: Sio family DECL + JP-msgid (+1, 7797→7798)
+`LoadLinkArenaTeamList` (sub_8043344, 244B) — identical Sio-family fix: TU-local struct LinkArenaTeamEnt
++ extern gLinkArenaTeamList + extern gSioTeamListConfigLut + msgid 0xCC→0x61. diff 0, cold OK.
