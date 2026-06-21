@@ -18,7 +18,8 @@
 0DD358	0DD35B	src/AiAttemptBallistaCombat.o(.rodata)	AiAttemptBallistaCombat(run): ballistaItemIds[3] = {35 36 37}
 0DD35B	0DD368	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap2b)	df4_misc_lo region-diff data (13 B, gap2b shrunk after AiAttemptBallistaCombat rodata)
 0DE85C	0DED24	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap3)	df4_misc_lo region-diff data (1224 B, long-tail gap)
-0DEE88	0DEEBC	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap4)	df4_misc_lo region-diff data (52 B, gap4 before SioMenuProcLut)
+0DEE88	0DEEB0	src/SioMenu_GetItemHelpText.o(.rodata)	SioMenu_GetItemHelpText linkMenuMsgLut[10] (embedded table)
+0DEEB0	0DEEBC	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap4r)	gap4 remainder
 0DEEBC	0DEED0	src/SioMenu_End.o(.rodata)	SioMenu_End SioMenuProcLut[5] template
 0DEED0	0DF2E0	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap4b)	df4_misc_lo region-diff data (1040 B, gap4b after SioMenuProcLut)
 0DF388	0DFBE4	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap5)	df4_misc_lo region-diff data (2140 B, long-tail gap)

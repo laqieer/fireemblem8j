@@ -6278,3 +6278,11 @@ GetItemRequiredExp (NB: fe8u's GetItemRequiredExp returns `->weaponRank` @0x1C, 
 JP values 0x4B8-0x4BF (= US 0x52C-0x533 − 0x74) at 0x0DC630 — which was the gap0b2b residual I made for
 D223; replaced that residual INCBIN with src/GetItemDisplayRankString.o(.rodata). The condition
 `if(A&&B==0){7}else{B'}` (US) == JP `if(!A||B){B'}else{7}` compiled identically. Full cold make compare OK.
+
+## D224 — SioMenu_GetItemHelpText: embedded-table + JP-msgid (+1, 7793→7794)
+`SioMenu_GetItemHelpText` (sub_8047970, 96B, fe8u src/sio_menu.c). Local `int linkMenuMsgLut[10]` msgid
+table (with -1 separators), JP values = US − 0x75 (MSG_735→0x6C0=1728 confirmed by IDA return; MSG_736-73B
+→ 0x6C1-0x6C6), embedded FAR at 0x0DEE88 (= start of frontier_df4_misc_lo.gap4). Set table to JP values +
+split gap4 (INCBIN 0,52 → 40,12 remainder at 0DEEB0), mapped the .rodata at 0DEE88. Full cold make compare
+OK. The JP-msgid embedded-table pattern (the JP message table is shifted by a per-region delta ~0x74-0x82)
+is a rich vein for fns with a local msgid lookup array — IDA gives the return-value delta + the FAR address.
