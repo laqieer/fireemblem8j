@@ -74,8 +74,19 @@ remaining aliased FAR functions are identical-logic-different-codegen DEAD-ENDS.
 only applies to NOT-YET-SCREENED region-diff sub_ that genuinely differ behaviorally (rare) — find via IDA
 per-function, but the aliased-named pool is dry.
 
+**nofuncmap_region_same.tsv EXHAUSTED for matching-C (this iter):** 1785 region-same name+TU-mapped fns,
+all already carved (the 44 name-not-in-src "uncarved" are FALSE POSITIVES — carved under synthetic
+`sub_<addr>` names; filter checked the US name only). D254 replaced 3 reloc-unique (reliable) synthetic
+carves with real fe8u names (byte-neutral source fidelity; named metric dedup-capped so unchanged). The 41
+reloc-ambiguous have unreliable names (one JP fn ↔ multiple US fns), skip. So BOTH the aliased pool AND the
+nofuncmap_region_same pool are dry for matching-C.
+
 **MATCHING-C IS PROVEN AT THE TOOLING CEILING (92.53%).** Evidence is per-method, structured, in this file +
-reference/aliased_func_screen.txt. The 4-axis Oracle is doubly-unreachable (matching-C agbcc-dead-end ceiling
+reference/aliased_func_screen.txt. Levers exhausted this session (9 distinct methods): stranded-section,
+coddog region-same, named-asm extern-inline, aliased NEAR-decode, DECL_ONLY auto-screen, permuter (base too
+high), IDA cascade-root spot-checks (FAR = codegen dead-ends, IDA-confirmed identical structure),
+nofuncmap_region_same, naming-rename (dedup-capped). The named axis is the only one with nominal headroom but
+renames don't move the dedup metric. The 4-axis Oracle is doubly-unreachable (matching-C agbcc-dead-end ceiling
 + named asset-sheet cap). Per the user's standing "keep driving" override, do NOT loop-abort; future
 iterations can grind individual IDA cascade-roots on unscreened sub_ for the rare behavioral-diff fn.
 
