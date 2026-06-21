@@ -1,12 +1,12 @@
 003800	003814	src/PrintEmptyStringToDBG.o(.text)	handdecomp
 003814	00382C	src/ClearSmallStringBuffer.o(.text)	handdecomp
-003868	003898	asm/stranded_fontgrp.o(.text.s_08003868)	fontgrp:StoreNumberStringOrDashesToSmallBuffer region-same Thumb (descriptive incbin)
+003868	003898	src/StoreNumberStringOrDashesToSmallBuffer.o(.text)	handdecomp
 003898	0038B4	src/PrintNumberToDBG.o(.text)	handdecomp
-003900	00391C	asm/stranded_fontgrp.o(.text.s_08003900)	fontgrp:PrintHexNumberToDBG region-same Thumb (descriptive incbin)
+003900	00391C	src/PrintHexNumberToDBG.o(.text)	handdecomp
 00391C	003988	asm/stranded_fontgrp.o(.text.s_0800391C)	fontgrp:PrintStringToDBG region-same Thumb (descriptive incbin)
 003A08	003A70	asm/stranded_fontgrp.o(.text.s_08003A08)	fontgrp:UpdateDBGScroll region-same Thumb (descriptive incbin)
-003B48	003B6C	asm/stranded_fontgrp.o(.text.s_08003B48)	fontgrp:PrintNumberAsOBJ region-same Thumb (descriptive incbin)
-003B6C	003B90	asm/stranded_fontgrp.o(.text.s_08003B6C)	fontgrp:PrintHexNumberAsOBJ region-same Thumb (descriptive incbin)
+003B48	003B6C	src/PrintNumberAsOBJ.o(.text)	handdecomp
+003B6C	003B90	src/PrintHexNumberAsOBJ.o(.text)	handdecomp
 003C68	003C8C	src/SetTextFont.o(.text)	handdecomp
 003C8C	003CB4	src/InitText.o(.text)	handdecomp
 003CB4	003CDC	src/InitTextDb.o(.text)	handdecomp
@@ -20,6 +20,6 @@
 0045E8	004608	src/GetSpriteTextDrawDest.o(.text)	handdecomp
 004874	00487C	src/IsTextPrinting.o(.text)	handdecomp
 0048E8	00493C	src/DrawSpecialCharGlyph_old.o(.text)	handdecomp
-004A14	004A50	asm/stranded_fontgrp.o(.text.s_08004A14)	fontgrp:PutSpecialChar region-same Thumb (descriptive incbin)
+004A14	004A50	src/PutSpecialChar.o(.text)	handdecomp
 004A90	004A9C	src/PutNumber.o(.text)	handdecomp
 004AEC	004AF8	src/PutNumberSmall.o(.text)	handdecomp

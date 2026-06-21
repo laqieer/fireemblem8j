@@ -6554,3 +6554,11 @@ gDefaultFont` @0x02028E58, bound absolute). 3×diff 0. Remaining 7 fontgrp need 
 (struct Struct02026E30 — JP-undeclared struct) or a TU-local small-string buffer: the DBG
 family (PrintStringToDBG, UpdateDBGScroll, PrintHexNumberToDBG, PrintNumberAsOBJ,
 PrintHexNumberAsOBJ), StoreNumberStringOrDashesToSmallBuffer, PutSpecialChar. Deferred.
+
+## D247 — fontgrp DECL_ONLY sibling-protos (+5 matching-C, 7873→7878)
+5 more fontgrp stranded fns carved by forward-declaring their bound siblings (JP fontgrp.h
+carries only `// ???` stubs): StoreNumberStringOrDashesToSmallBuffer (ClearSmallStringBuffer,
+StoreNumberStringToSmallBuffer), PrintHexNumberToDBG/PrintHexNumberAsOBJ
+(StoreNumberHexStringToSmallBuffer), PrintNumberAsOBJ (PrintDebugStringAsOBJ), PutSpecialChar
+(GetSpecialCharChr). 5×diff 0. fontgrp now 23/25 carved; last 2 (PrintStringToDBG,
+UpdateDBGScroll) need the JP-undeclared `struct Struct02026E30 gFontgrp_0` def — deferred.
