@@ -6698,3 +6698,13 @@ SNOW,SNOWSTORM,RAIN,NIGHT,FLAMES... different cycle). Reconstructed from IDA →
 0x0836FB3E (a baseline_syms error) — the real draw fn is sub_801BA6C @0x0801BA6C, so called it directly.
 Debug-menu vein now: FogIdle (D258) + WeatherIdle (D259) carved; FogDraw/ClearDraw remain (TU-local
 gTextIds_OnOff table + D213 string-ptr + JP msgid — multi-part).
+
+## D260 — Tactician kana name-entry 2-byte vein (+3 matching-C, 7893→7896)
+The Tactician name-entry screen (sio_tactician.c) differs fundamentally: JP uses 2-BYTE kana
+chars, fe8u uses 1-byte alphabet. The fe8u source structure ports VERBATIM with the 2-byte
+substitutions: TacticianTryAppendChar (0x080449D4: `cur_len < 2*max_len`, `cur_len += 2`,
+`unk4C[cur_len>>1]`; KEEP fe8u's OK-condition-first if/else order — inverting it cost a diff),
+TacticianTryDeleteChar (0x08044A6C: `cur_len -= 2`, `unk4C[cur_len>>1]`), Tactician_Loop
+(0x08044E74: VLA `[2*max_len+1]`, `_cbuf[2*max_len-2]=0`, `StrLen*9` not `*7`). 3×diff 0.
+Struct ProcTactician offsets match fe8u (cur_len@0x38, max_len@0x3C, unk4C@0x4C, etc.).
+Found via the size-mismatch grind + IDA. Tactician_InitScreen (the 4th, big) pending.
