@@ -1,6 +1,6 @@
-0012D8	0012E4	asm/stranded_hardware.o(.text.s_080012D8)	hardware:SetMainUpdateRoutine region-same Thumb (descriptive incbin)
-0014EC	001508	asm/stranded_hardware.o(.text.s_080014EC)	hardware:CopyTilemapScreen region-same Thumb (descriptive incbin)
-001D50	001DBC	asm/stranded_hardware.o(.text.s_08001D50)	hardware:GetBackgroundFromBufferPointer region-same Thumb (descriptive incbin)
-001F30	001F64	asm/stranded_hardware.o(.text.s_08001F30)	hardware:ClearTileRigistry region-same Thumb (descriptive incbin)
-001F64	001FA4	asm/stranded_hardware.o(.text.s_08001F64)	hardware:RegisterDataMove region-same Thumb (descriptive incbin)
-001FA4	001FD8	asm/stranded_hardware.o(.text.s_08001FA4)	hardware:RegisterFillTile region-same Thumb (descriptive incbin)
+0012D8	0012E4	src/SetMainUpdateRoutine.o(.text)	handdecomp
+0014EC	001508	src/CopyTilemapScreen.o(.text)	handdecomp
+001D50	001DBC	src/GetBackgroundFromBufferPointer.o(.text)	handdecomp
+001F30	001F64	src/ClearTileRigistry.o(.text)	handdecomp
+001F64	001FA4	src/RegisterDataMove.o(.text)	handdecomp
+001FA4	001FD8	src/RegisterFillTile.o(.text)	handdecomp

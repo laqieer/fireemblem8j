@@ -6480,3 +6480,13 @@ sadiff=0; full cold make compare OK. Two needed TU-local pieces: CgbModVol inlin
 `static inline int CgbPan(...)` helper; ply_xwave needs the multi-line `READ_XCMD_BYTE`
 macro. This + D234-238 = +25 m4a matching-C this session. m4a now fully C except m4a_1.s
 (ARM hand-asm core, the ceiling).
+
+## D240 — stranded-section vein generalized (hardware +6, 7832→7838)
+The D239 m4a stranded carve generalizes to EVERY TU with a `stranded_func_<TU>.tsv` +
+`asm/stranded_<TU>.s` of individually-sectioned region-same descriptive incbins. Tooling:
+`/tmp/carve_stranded.py <TU> <fns...>` rewrites each carved fn's tsv provider to
+`src/<fn>.o(.text)` + prunes its `.text.s_<addr>` block from the .s. Per-fn src is the fe8u
+body + the TU's include set; verify reloc-excluded sadiff=0 first (addr = `0x08`+the 6-hex
+tsv START). Carved all 6 hardware.c stranded fns (regular agbcc — only m4a needs old_agbcc).
+Remaining stranded backlog: fontgrp(25), _unmapped(51, likely libc), prepscreen(4),
+bmbattle(3), minimap(3), statscreen(2), + 8 singletons. A large matching-C vein.
