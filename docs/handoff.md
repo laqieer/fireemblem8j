@@ -32,7 +32,6 @@ matching-C").
   draws (D213 family but multi-part). DEFERRED winnable: GetUnitItemHealAmount (D102 extern-inline accessor
   + item-ID range checks — needs GetItemAttributes/GetItemIndex as `extern inline`).
 - **D213 JP menu-def string-pointer (+2, a FAMILY):** any menu `*Draw` fn doing `Text_DrawString(text,
-- **D213 JP menu-def string-pointer (+2, a FAMILY):** any menu `*Draw` fn doing `Text_DrawString(text,
   GetStringFromIndex(...->def->nameMsgId))` → JP stores a `char*` STRING POINTER as the def's first field
   → `*(const char **)...->def`. Wins: MapMenu_GuideCommandDraw, WMMenu_OnGuideDraw. Remaining family
   (grep `GetStringFromIndex(.*->def->nameMsgId)` in fe8u): RedrawMenu (multi-part, NOT just this), 4
