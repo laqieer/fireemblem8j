@@ -90,35 +90,6 @@ _ratio:
 	.incbin "data/residual/_ratio.bin"
 
 
-	.section .text.s_080DA2A8, "ax", %progbits
-@ __sread region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080DA2A8..0x080DA2DC
-	.thumb
-	.align 2, 0
-	.global __sread
-	.thumb_func
-__sread:
-	.incbin "data/residual/__sread.bin"
-
-	.section .text.s_080DA2DC, "ax", %progbits
-@ __swrite region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080DA2DC..0x080DA31C
-	.thumb
-	.align 2, 0
-	.global __swrite
-	.thumb_func
-__swrite:
-	.incbin "data/residual/__swrite.bin"
-
-	.section .text.s_080DA35C, "ax", %progbits
-@ __sclose region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080DA35C..0x080DA36C
-	.thumb
-	.align 2, 0
-	.global __sclose
-	.thumb_func
-__sclose:
-	.incbin "data/residual/__sclose.bin"
 
 	.section .text.s_080DA4B8, "ax", %progbits
 @ error region-same Thumb (US shifted); descriptive incbin baserom.gba

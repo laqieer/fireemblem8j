@@ -1,0 +1,1 @@
+0DA2A8	0DA36C	*libc.a:stdio.o(.text)	stdio.o (__sread/__swrite/__sseek/__sclose) from libc.a, whole object
