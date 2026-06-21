@@ -6218,3 +6218,6 @@ alive for any still-asm fn that the JP inlines a tiny accessor into.
 provide GetItemData + GetItemAttributes as `extern inline` → JP inlines the IA_STAFF table lookup →
 diff 0. FAMILY: any bmitem.c fn calling GetItemAttributes/GetItemIndex/GetItemData (CanUnitUseWeaponNow
 next). cold make compare OK.
+
+## D217c — CanUnitUseWeaponNow: extern-inline accessor family (+1, 7784→7785)
+`CanUnitUseWeaponNow` (sub_80164F8, 84B) — same D102 extern-inline fix. cold make compare OK.
