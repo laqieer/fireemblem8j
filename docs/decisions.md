@@ -6259,3 +6259,14 @@ v6). cold make compare OK.
 the "Reorder your units" msgid is 0x7F0 (2032) not MSG_872/0x872. Substitute → diff 42→0 (the wrong
 const shifted the whole function via pool layout). cold make compare OK. Lesson: a moderate diff (42)
 in a structure-matching fn can be ONE const — always IDA-diff the call args before assuming codegen.
+
+## D223 — GetItemDisplayRangeString: extern-inline + embedded-table gap-split (+1, 7791→7792)
+`GetItemDisplayRangeString` (sub_8016A68, 156B, fe8u src/bmitem.c). Two parts: (1) extern-inline
+GetItemEncodedRange/GetItemData (D102). (2) The local `int rangeTextIdLookup[10]` msgid table is
+region-different — JP values 0x4AE–0x4B7 (= US 0x522–0x52B − 0x74) — and agbcc places it FAR in .rodata
+at 0x0DC608 (NOT after the .text; sadiff is blind to it → diff 0 but full make compare FAILED on the
+4-byte pool word). Fixed via the D121 embedded-table gap-split: changed the array to JP values, split the
+`frontier_df4_misc_lo.gap0b2` residual INCBIN (359,205 → 359,133 + a new gap0b2b 532,32) to make a 0x28-byte
+hole at 0x0DC608, mapped `src/GetItemDisplayRangeString.o(.rodata)` there. Full cold make compare OK,
+self-contain + extracted-data still 100%. LESSON: a function with a local const TABLE needs its .rodata
+placed at the JP address (the table can be region-different); sadiff (.text-only) won't catch it.

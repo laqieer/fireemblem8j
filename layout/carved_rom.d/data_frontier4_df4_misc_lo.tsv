@@ -8,7 +8,9 @@
 0DC55C	0DC56C	src/CopyBgTiles.o(.rodata)	CopyBgTiles bgs[] rodata
 0DC56C	0DC56F	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0b1)	gap tail
 0DC56F	0DC583	src/Event3D_MenuOverride.o(.rodata)	Event3D_MenuOverride(run): UnitMenuOverrideConf[15]+ItemMenuOverrideConf[5]
-0DC583	0DC650	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0b2)	df4_misc_lo region-diff data (205 B, gap0b2 after Event3D_MenuOverride rodata)
+0DC583	0DC608	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0b2)	df4_misc_lo region-diff data (before rangeTextIdLookup)
+0DC608	0DC630	src/GetItemDisplayRangeString.o(.rodata)	GetItemDisplayRangeString rangeTextIdLookup[10] (embedded table)
+0DC630	0DC650	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0b2b)	df4_misc_lo region-diff data (after)
 0DC96C	0DC974	src/BattleCheckTriangleAttack.o(.rodata)	BattleCheckTriangleAttack local lut[8] (gap1 split)
 0DC974	0DCC90	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap1)	gap1 remainder (796 B)
 0DCDD0	0DCDD8	src/AiFindBestAdjacentPositionByFunc.o(.rodata)	AiFindBestAdjacentPositionByFunc adjacencyLut[8] (gap2a split)
