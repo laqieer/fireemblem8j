@@ -6731,3 +6731,21 @@ Two reusable levers, both verified by full cold `make compare` OK:
    (0x08016688, diff 112) — identical callee SEQUENCE but pervasive reg-alloc divergence (text r4<->r5,
    inline-ternary color held in r2 vs r3); the inline-ternary variants don't match while the
    `color`-local variant (DrawItemStatScreenLine) does. The gItemData-inline asm vein is now exhausted.
+
+## D262 — CORRECTION: FE8J uses the SAME newlib/libgcc as every pret GBA decomp (no "different newlib")
+Commit a1e03f713's message wrongly claimed "the bulk newlib clusters (vfprintf/dtoa/malloc/mprec) use a
+DIFFERENT newlib version and do NOT match." That was a MEASUREMENT ERROR. Rigorous re-test (reloc-aware,
+correct addresses):
+- All 6 linked fns are BYTE-EXACT vs the agbcc archives: memcpy/memset/strcpy/strlen (libc.a),
+  __ashldi3/__muldi3 (libgcc.a) — 0 diffs each.
+- The div/mod helpers also match: __divsi3 @0x080D65F8, __modsi3, __udivsi3, __umodsi3 differ ONLY in the
+  resolved-vs-placeholder `bl __div0`/`__udiv0` call bytes (a relocation, not a code difference).
+- The "bulk newlib doesn't match" was bogus: vfprintf/_dtoa/_malloc_r/_mprec are NOT in the FE8 JP ROM at
+  all (no symbols — FE8 never links the printf/dtoa/malloc stack). My earlier diff compared those UNUSED
+  .a members against unrelated ROM data → garbage "529/453/88/63-byte diffs."
+- The "6 functions failed to link" earlier = memchr/memmove/strcmp/_mbtowc_r/isinf/isnan are UNREFERENCED
+  by FE8, so `-lc` doesn't pull them (dead code) — a linking/dead-code fact, NOT a version mismatch.
+CONCLUSION: FE8 JP's libc/libgcc == the pret/agbcc archives == newlib 1.8.x (AGB SDK) + libgcc from
+gcc 2.9-arm-000512, identical to fe6/fe7/fe8u and the Pokémon decomps. There is no FE8J-specific newlib.
+(What CAN differ per-JP-subsystem is the agbcc COMPILER variant — r2-vs-r3 literal pool / old_agbcc — a
+codegen-matching concern, not a library version. See docs/gba-decomp-survey.md.)
