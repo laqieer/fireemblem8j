@@ -6270,3 +6270,11 @@ at 0x0DC608 (NOT after the .text; sadiff is blind to it → diff 0 but full make
 hole at 0x0DC608, mapped `src/GetItemDisplayRangeString.o(.rodata)` there. Full cold make compare OK,
 self-contain + extracted-data still 100%. LESSON: a function with a local const TABLE needs its .rodata
 placed at the JP address (the table can be region-different); sadiff (.text-only) won't catch it.
+
+## D223b — GetItemDisplayRankString: embedded-table sibling (+1, 7792→7793)
+`GetItemDisplayRankString` (sub_8016B3C, 100B) — sibling of D223. extern-inline GetItemAttributes +
+GetItemRequiredExp (NB: fe8u's GetItemRequiredExp returns `->weaponRank` @0x1C, not requiredExp/weaponExp
+— a naming quirk; got it right on the 3rd try by reading the JP IDA offset v6+28). rankTextIdLookup[8]
+JP values 0x4B8-0x4BF (= US 0x52C-0x533 − 0x74) at 0x0DC630 — which was the gap0b2b residual I made for
+D223; replaced that residual INCBIN with src/GetItemDisplayRankString.o(.rodata). The condition
+`if(A&&B==0){7}else{B'}` (US) == JP `if(!A||B){B'}else{7}` compiled identically. Full cold make compare OK.
