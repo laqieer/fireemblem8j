@@ -5,10 +5,18 @@
  */
 
 u8 frontier_df4_banim_b_000_602568[] __attribute__((section(".data.frontier_df4_banim_b.gap0"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_000_602568.bin");
-u8 frontier_df4_banim_b_001_602FB0[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_001_602FB0.bin");
-u8 frontier_df4_banim_b_002_603894[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_002_603894.bin");
+u8 frontier_df4_banim_b_001_602FB0[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_001_602FB0.bin", 0x0, 0x4EC);
+u8 data_0860349C[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_001_602FB0.bin", 0x4EC, 0x308);
+u8 frontier_df4_banim_b_002_603894[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_002_603894.bin", 0x0, 0xD4);
+u8 data_08603968[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_002_603894.bin", 0xD4, 0x18);
+u8 data_08603980[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_002_603894.bin", 0xEC, 0x80);
+u8 data_08603A00[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_002_603894.bin", 0x16C, 0x18);
+u8 data_08603A18[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_002_603894.bin", 0x184, 0x96C);
 u8 frontier_df4_banim_b_003_604F7C[] __attribute__((section(".data.frontier_df4_banim_b.gap3"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_003_604F7C.bin");
-u8 frontier_df4_banim_b_004_60838C[] __attribute__((section(".data.frontier_df4_banim_b.gap4"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_004_60838C.bin");
+u8 frontier_df4_banim_b_004_60838C[] __attribute__((section(".data.frontier_df4_banim_b.gap4"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_004_60838C.bin", 0x0, 0x1128);
+u8 data_086094B4[] __attribute__((section(".data.frontier_df4_banim_b.gap4"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_004_60838C.bin", 0x1128, 0xEC0);
+u8 data_0860A374[] __attribute__((section(".data.frontier_df4_banim_b.gap4"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_004_60838C.bin", 0x1FE8, 0x100);
+u8 data_0860A474[] __attribute__((section(".data.frontier_df4_banim_b.gap4"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_004_60838C.bin", 0x20E8, 0x3C8);
 u8 frontier_df4_banim_b_005_611798[] __attribute__((section(".data.frontier_df4_banim_b.gap5"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_005_611798.bin");
 u8 frontier_df4_banim_b_006_6123D4[] __attribute__((section(".data.frontier_df4_banim_b.gap6"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_006_6123D4.bin");
 u8 frontier_df4_banim_b_007_617424[] __attribute__((section(".data.frontier_df4_banim_b.gap7"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_007_617424.bin");
@@ -63,7 +71,11 @@ u8 frontier_df4_banim_b_055_7179EC[] __attribute__((section(".data.frontier_df4_
 u8 frontier_df4_banim_b_056_7657CC[] __attribute__((section(".data.frontier_df4_banim_b.gap56"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_056_7657CC.bin");
 u8 frontier_df4_banim_b_057_79A108[] __attribute__((section(".data.frontier_df4_banim_b.gap57"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_057_79A108.bin.lz");
 u8 frontier_df4_banim_b_058_79F83C[] __attribute__((section(".data.frontier_df4_banim_b.gap58"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_058_79F83C.bin.lz");
-u8 frontier_df4_banim_b_059_79FCB0[] __attribute__((section(".data.frontier_df4_banim_b.gap59"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_059_79FCB0.bin");
+u8 frontier_df4_banim_b_059_79FCB0[] __attribute__((section(".data.frontier_df4_banim_b.gap59"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_059_79FCB0.bin", 0x0, 0xDD0);
+u8 data_087A0A80[] __attribute__((section(".data.frontier_df4_banim_b.gap59"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_059_79FCB0.bin", 0xDD0, 0x474);
+u8 data_087A0EF4[] __attribute__((section(".data.frontier_df4_banim_b.gap59"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_059_79FCB0.bin", 0x1244, 0xD10);
+u8 data_087A1C04[] __attribute__((section(".data.frontier_df4_banim_b.gap59"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_059_79FCB0.bin", 0x1F54, 0x20);
+u8 data_087A1C24[] __attribute__((section(".data.frontier_df4_banim_b.gap59"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_059_79FCB0.bin", 0x1F74, 0x118);
 u8 frontier_df4_banim_b_060_7A8B10[] __attribute__((section(".data.frontier_df4_banim_b.gap60"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_060_7A8B10.bin");
 u8 frontier_df4_banim_b_061_7A9254[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_061_7A9254.bin");
 u8 frontier_df4_banim_b_062_7AA39C[] __attribute__((section(".data.frontier_df4_banim_b.gap62"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_062_7AA39C.bin");
@@ -87,7 +99,8 @@ u8 frontier_df4_banim_b_079_90EFAC[] __attribute__((section(".data.frontier_df4_
 u8 frontier_df4_banim_b_080_9CD958[] __attribute__((section(".data.frontier_df4_banim_b.gap80"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_080_9CD958.bin");
 u8 frontier_df4_banim_b_081_9CF318[] __attribute__((section(".data.frontier_df4_banim_b.gap81"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_081_9CF318.bin");
 u8 frontier_df4_banim_b_082_A12AC0[] __attribute__((section(".data.frontier_df4_banim_b.gap82"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_082_A12AC0.bin");
-u8 frontier_df4_banim_b_083_A13256[] __attribute__((section(".data.frontier_df4_banim_b.gap83"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_083_A13256.bin");
+u8 frontier_df4_banim_b_083_A13256[] __attribute__((section(".data.frontier_df4_banim_b.gap83"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_083_A13256.bin", 0x0, 0x1E2);
+u8 data_08A13438[] __attribute__((section(".data.frontier_df4_banim_b.gap83"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_083_A13256.bin", 0x1E2, 0x50);
 u8 frontier_df4_banim_b_084_A13880[] __attribute__((section(".data.frontier_df4_banim_b.gap84"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_084_A13880.bin");
 u8 frontier_df4_banim_b_085_A13CD0[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_085_A13CD0.bin", 0, 1316);
 u8 frontier_df4_banim_b_085b_A14209[] __attribute__((section(".data.frontier_df4_banim_b.gap85b"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_085_A13CD0.bin", 1337, 139);

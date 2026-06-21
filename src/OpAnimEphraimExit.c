@@ -8,6 +8,9 @@
 #include "sysutil.h"
 #include "opanim.h"
 
+extern u8 data_08B3F1F0[];
+extern u8 data_08B3F204[];
+
 void OpAnimEphraimExit(struct ProcOpAnim * proc)
 {
     int time, time1, time2, ret;
@@ -16,8 +19,8 @@ void OpAnimEphraimExit(struct ProcOpAnim * proc)
 
     if (proc->timer < 2)
     {
-        PutSpriteExt(1, 8, 0x78, (const u16 *)0x08B3F1F0, 0x0000208E);
-        PutSpriteExt(1, 8, 0x88, (const u16 *)0x08B3F204, 0x000020B2);
+        PutSpriteExt(1, 8, 0x78, (const u16 *)data_08B3F1F0, 0x0000208E);
+        PutSpriteExt(1, 8, 0x88, (const u16 *)data_08B3F204, 0x000020B2);
     }
 
     if (proc->timer < 0x11)

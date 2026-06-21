@@ -5,10 +5,14 @@
 #include "efxbattle.h"
 #include "efxmagic.h"
 #include "hardware.h"
+
+extern u8 data_08601700[];
+extern u8 data_0875DF20[];
+extern u8 data_0875F138[];
 void sub_8065FF0(void *anim) {
     gEfxBgSemaphore += 1;
     {
-        void *q = Proc_Start((const struct ProcCmd *)0x08601700, (ProcPtr)3);
+        void *q = Proc_Start((const struct ProcCmd *)data_08601700, (ProcPtr)3);
         *(void **)((char *)q + 0x5c) = anim;
         {
             int z = 0;
@@ -18,8 +22,8 @@ void sub_8065FF0(void *anim) {
         *(int *)((char *)q + 0x48) = 0x080E334E;
         *(int *)((char *)q + 0x4c) = 0x08601718;
         *(int *)((char *)q + 0x50) = 0x08601718;
-        SpellFx_RegisterBgGfx((const u16 *)0x0875DF20, 0x2000);
-        SpellFx_RegisterBgPal((const u16 *)0x0875F138, 0x20);
+        SpellFx_RegisterBgGfx((const u16 *)data_0875DF20, 0x2000);
+        SpellFx_RegisterBgPal((const u16 *)data_0875F138, 0x20);
         BG_SetPosition(1, 0, 0);
         if (*(s16 *)0x0203E11C != 0) {
             if (GetAnimPosition(*(struct Anim **)((char *)q + 0x5c)) == 0)

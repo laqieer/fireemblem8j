@@ -31,6 +31,8 @@
 #include "bmitemuse.h"
 #include "constants/songs.h"
 
+extern u8 data_085C5544[];
+
 u8 RepairSelectOnSelect(ProcPtr proc, struct SelectTarget* target)
 {
     ResetTextFont();
@@ -38,7 +40,7 @@ u8 RepairSelectOnSelect(ProcPtr proc, struct SelectTarget* target)
     gActionData.targetIndex = target->uid;
 
     ForceMenuItemPanel(
-        StartOrphanMenu((const struct MenuDef *)0x085C5544),
+        StartOrphanMenu((const struct MenuDef *)data_085C5544),
         GetUnit(gActionData.targetIndex),
         16, 11);
 

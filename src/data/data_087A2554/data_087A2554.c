@@ -4,4 +4,5 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 data_087A2554[] __attribute__((section(".data.residue.087A2554"))) = INCBIN_U8("data/residual/data_087A2554.bin");
+u8 data_087A2554[] __attribute__((section(".data.residue.087A2554"))) = INCBIN_U8("data/residual/data_087A2554.bin", 0x0, 0x18);
+u8 data_087A256C[] __attribute__((section(".data.residue.087A2554"))) = INCBIN_U8("data/residual/data_087A2554.bin", 0x18, 0xC);

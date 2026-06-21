@@ -12,6 +12,9 @@
 #include "soundroom.h"
 #include "constants/songs.h"
 
+extern u8 data_08AAB440[];
+extern u8 frontier_df4_menu_032_AAAC4C[];
+
 extern u8 gMenuSoundroom_0[];
 extern u8 gMenuSoundroom_1[];
 extern u8 gMenuSoundroom_3[];
@@ -100,8 +103,8 @@ void SoundRoomUi_Init(struct SoundRoomProc * proc)
     SetWin0Box(4, 66, 240, 144);
     SetWOutLayers(1, 1, 0, 1, 1);
 
-    Decompress((const void *)0x08AAAC4C, (void *)0x06012000);
-    ApplyPalettes((const void *)0x08AAB440, 0x13, 3);
+    Decompress((const void *)frontier_df4_menu_032_AAAC4C, (void *)0x06012000);
+    ApplyPalettes((const void *)data_08AAB440, 0x13, 3);
 
     DrawSoundRoomSprites(proc);
 

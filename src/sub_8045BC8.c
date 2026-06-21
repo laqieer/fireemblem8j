@@ -2,9 +2,11 @@
 #include "proc.h"
 #include "sio.h"
 
+extern u8 data_085D4760[];
+
 void SioMain2_WaitEndAndRoute(ProcPtr proc)
 {
-    if (Proc_Find((const struct ProcCmd *)0x085D4760) != NULL)
+    if (Proc_Find((const struct ProcCmd *)data_085D4760) != NULL)
     {
         return;
     }

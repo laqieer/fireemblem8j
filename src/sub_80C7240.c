@@ -1,10 +1,12 @@
 #include "global.h"
 #include "proc.h"
+
+extern u8 data_08AC2510[];
 void GmapRm_SetPosition(int x, int y) {
     int xx = (s16)x;
     int yy = (s16)y;
     char * q;
-    ProcPtr p = Proc_Find((const struct ProcCmd *)0x08AC2510);
+    ProcPtr p = Proc_Find((const struct ProcCmd *)data_08AC2510);
     int b;
     int a;
     if (p) {

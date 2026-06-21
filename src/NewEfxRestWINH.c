@@ -7,6 +7,8 @@
 #include "bmlib.h"
 #include "ekrdragon.h"
 
+extern u8 data_085FF238[];
+
 void EfxMagicHBlank_0(void);
 void EfxMagicHBlank_1(void);
 
@@ -59,7 +61,7 @@ void NewEfxRestWINH(struct Anim *anim, int a, s16 b, u32 c)
         break;
     }
 
-    proc = Proc_Start((const struct ProcCmd *)0x085FF238, PROC_TREE_VSYNC);
+    proc = Proc_Start((const struct ProcCmd *)data_085FF238, PROC_TREE_VSYNC);
     proc->anim = anim;
     proc->timer = 0;
     proc->unk44 = a;

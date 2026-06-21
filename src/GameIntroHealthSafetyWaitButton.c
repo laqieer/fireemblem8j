@@ -3,6 +3,8 @@
 #include "proc.h"
 #include "ctc.h"
 
+extern u8 data_08AC0EBC[];
+
 struct ProcOpAnimHS;
 
 void GameIntroHealthSafetyWaitButton(struct ProcOpAnimHS * proc)
@@ -11,5 +13,5 @@ void GameIntroHealthSafetyWaitButton(struct ProcOpAnimHS * proc)
     SetBlendTargetA(0, 0, 1, 0, 0);
     SetBlendTargetB(1, 1, 1, 1, 1);
     SetDispEnable(1, 1, 1, 1, 1);
-    Proc_Start((const struct ProcCmd *)0x08AC0EBC, proc);
+    Proc_Start((const struct ProcCmd *)data_08AC0EBC, proc);
 }

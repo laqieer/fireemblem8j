@@ -18,6 +18,8 @@
 #include "sysutil.h"
 #include "constants/classes.h"
 
+extern u8 data_08AAFCAC[];
+
 
 void PutClassNameIntroLetter(u8 charId, int x, int y, u16 xScale, u16 yScale, u8 offset) {
     int i;
@@ -57,7 +59,7 @@ void PutClassNameIntroLetter(u8 charId, int x, int y, u16 xScale, u16 yScale, u8
             4,
             (x & 0x1FF) + (charId << 9),
             y & 0x1FF,
-            (const u16 *)0x08AAFCAC,
+            (const u16 *)data_08AAFCAC,
             charId * 4 + (k & 0xF) * 0x1000 + 0x800
         );
     } else {
@@ -65,7 +67,7 @@ void PutClassNameIntroLetter(u8 charId, int x, int y, u16 xScale, u16 yScale, u8
             4,
             (x & 0x1FF) + (charId << 9),
             y & 0x1FF,
-            (const u16 *)0x08AAFCAC,
+            (const u16 *)data_08AAFCAC,
             charId * 4 + (k & 0xF) * 0x1000 + 0x400
         );
     }

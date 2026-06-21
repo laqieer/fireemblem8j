@@ -3,12 +3,14 @@
 #include "anime.h"
 #include "ekrbattle.h"
 #include "efxbattle.h"
+
+extern u8 data_085FF270[];
 void NewEfxCircleWIN(struct Anim * anim, int terminator, u16 * c, int d, int e) {
     void *q;
     int dd = (s16)d;
     int ee = (s16)e;
     gEfxBgSemaphore += 1;
-    q = Proc_Start((const struct ProcCmd *)0x085FF270, (ProcPtr)3);
+    q = Proc_Start((const struct ProcCmd *)data_085FF270, (ProcPtr)3);
     *(struct Anim **)((char *)q + 0x5c) = anim;
     *(u16 *)((char *)q + 0x2c) = 0;
     *(u16 *)((char *)q + 0x2e) = 0;

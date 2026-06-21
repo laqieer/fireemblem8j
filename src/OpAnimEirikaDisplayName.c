@@ -8,6 +8,9 @@
 #include "sysutil.h"
 #include "opanim.h"
 
+extern u8 data_08B3F1F0[];
+extern u8 data_08B3F204[];
+
 void OpAnim1_UpdateScrollOneLine(s16 index);
 
 //! FE8U = 0x080C8278
@@ -16,8 +19,8 @@ void OpAnimEirikaDisplayName(struct ProcOpAnim * proc)
     int i;
 
     OpAnimDrawSplitLine(8, 0x88);
-    PutSpriteExt(1, 8, 0x78, (const u16 *)0x08B3F1F0, 0x000020A0);
-    PutSpriteExt(1, 8, 0x88, (const u16 *)0x08B3F204, 0x000020C0);
+    PutSpriteExt(1, 8, 0x78, (const u16 *)data_08B3F1F0, 0x000020A0);
+    PutSpriteExt(1, 8, 0x88, (const u16 *)data_08B3F204, 0x000020C0);
 
     switch (proc->timer)
     {

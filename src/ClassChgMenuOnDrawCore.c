@@ -9,6 +9,8 @@
 #include "scene.h"
 #include "constants/classes.h"
 
+extern u8 data_081F6D7C[];
+
 void ClassChgMenuOnDrawCore(struct MenuProc *pmenu, struct MenuItemProc *pmitem, char *str)
 {
     u8 unused_stack[32];
@@ -21,7 +23,7 @@ void ClassChgMenuOnDrawCore(struct MenuProc *pmenu, struct MenuItemProc *pmitem,
 
     ClearTextPart(&pmitem->text, 0, 20);
     Text_SetCursor(&pmitem->text, 0);
-    Text_DrawString(&pmitem->text, (char *)0x081F6D7C);
+    Text_DrawString(&pmitem->text, (char *)data_081F6D7C);
     Text_DrawString(&pmitem->text, str);
     mapbuf = BG_GetMapBuffer(pmenu->frontBg);
 

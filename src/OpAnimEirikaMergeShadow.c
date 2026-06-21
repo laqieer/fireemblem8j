@@ -8,6 +8,9 @@
 #include "sysutil.h"
 #include "opanim.h"
 
+extern u8 data_08B3F1F0[];
+extern u8 data_08B3F204[];
+
 //! FE8U = 0x080C8214
 void OpAnimEirikaMergeShadow(struct ProcOpAnim * proc)
 {
@@ -16,8 +19,8 @@ void OpAnimEirikaMergeShadow(struct ProcOpAnim * proc)
 
     if (proc->timer > 0xe)
     {
-        PutSpriteExt(1, 8, 0x78, (const u16 *)0x08B3F1F0, 0x0000208E);
-        PutSpriteExt(1, 8, 0x88, (const u16 *)0x08B3F204, 0x000020B2);
+        PutSpriteExt(1, 8, 0x78, (const u16 *)data_08B3F1F0, 0x0000208E);
+        PutSpriteExt(1, 8, 0x88, (const u16 *)data_08B3F204, 0x000020B2);
     }
 
     if (proc->timer == 0x10)

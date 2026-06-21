@@ -12,6 +12,8 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 
+extern u8 data_085E37E4[];
+
 /* During dmage, cause hp bar change value effect */
 void NewEfxHpBar(struct Anim * anim)
 {
@@ -24,7 +26,7 @@ void NewEfxHpBar(struct Anim * anim)
 
     gEkrHpBarCount = 1;
 
-    proc = Proc_Start((const struct ProcCmd *)0x085E37E4, PROC_TREE_3);
+    proc = Proc_Start((const struct ProcCmd *)data_085E37E4, PROC_TREE_3);
     proc->anim_this = anim;
 
     if (GetAnimPosition(anim) == EKR_POS_L)

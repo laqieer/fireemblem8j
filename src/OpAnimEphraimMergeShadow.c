@@ -8,6 +8,9 @@
 #include "sysutil.h"
 #include "opanim.h"
 
+extern u8 data_08B3F1CE[];
+extern u8 data_08B3F1DC[];
+
 void OpAnimEphraimMergeShadow(struct ProcOpAnim * proc)
 {
     gOpAnimSt.unk06 =
@@ -17,8 +20,8 @@ void OpAnimEphraimMergeShadow(struct ProcOpAnim * proc)
 
     if (proc->timer > 0xE)
     {
-        PutSpriteExt(1, 0xaa, 0x78, (const u16 *)0x08B3F1CE, 0x00002046);
-        PutSpriteExt(1, 0x98, 0x88, (const u16 *)0x08B3F1DC, 0x00002066);
+        PutSpriteExt(1, 0xaa, 0x78, (const u16 *)data_08B3F1CE, 0x00002046);
+        PutSpriteExt(1, 0x98, 0x88, (const u16 *)data_08B3F1DC, 0x00002066);
     }
 
     if (proc->timer == 0x10)

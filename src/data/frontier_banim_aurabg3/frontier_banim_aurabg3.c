@@ -20,7 +20,10 @@ u8 frontier_banim_aurabg3_012_775DDC[] __attribute__((section(".data.frontier_ba
 u8 frontier_banim_aurabg3_013_776054[] __attribute__((section(".data.frontier_banim_aurabg3.gap13"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_013_776054.bin.lz");
 u8 frontier_banim_aurabg3_014_7762CC[] __attribute__((section(".data.frontier_banim_aurabg3.gap14"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_014_7762CC.bin.lz");
 u8 frontier_banim_aurabg3_015_776544[] __attribute__((section(".data.frontier_banim_aurabg3.gap15"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_015_776544.bin.lz");
-u8 frontier_banim_aurabg3_016_7767BC[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016_7767BC.bin");
+u8 frontier_banim_aurabg3_016_7767BC[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016_7767BC.bin", 0x0, 0x278);
+u8 data_08776A34[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016_7767BC.bin", 0x278, 0x560);
+u8 data_08776F94[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016_7767BC.bin", 0x7D8, 0x20);
+u8 data_08776FB4[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016_7767BC.bin", 0x7F8, 0x164);
 u8 frontier_banim_aurabg3_017_777118[] __attribute__((section(".data.frontier_banim_aurabg3.gap17"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_017_777118.bin.lz");
 u8 frontier_banim_aurabg3_018_7771B8[] __attribute__((section(".data.frontier_banim_aurabg3.gap18"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_018_7771B8.bin.lz");
 u8 frontier_banim_aurabg3_019_777264[] __attribute__((section(".data.frontier_banim_aurabg3.gap19"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_019_777264.bin.lz");
@@ -32,7 +35,9 @@ u8 frontier_banim_aurabg3_024_7775CC[] __attribute__((section(".data.frontier_ba
 u8 frontier_banim_aurabg3_025_777674[] __attribute__((section(".data.frontier_banim_aurabg3.gap25"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_025_777674.bin.lz");
 u8 frontier_banim_aurabg3_026_77771C[] __attribute__((section(".data.frontier_banim_aurabg3.gap26"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_026_77771C.bin.lz");
 u8 frontier_banim_aurabg3_027_7777BC[] __attribute__((section(".data.frontier_banim_aurabg3.gap27"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_027_7777BC.bin.lz");
-u8 frontier_banim_aurabg3_028_777858[] __attribute__((section(".data.frontier_banim_aurabg3.gap28"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_028_777858.bin");
+u8 frontier_banim_aurabg3_028_777858[] __attribute__((section(".data.frontier_banim_aurabg3.gap28"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_028_777858.bin", 0x0, 0x1F0C);
+u8 data_08779764[] __attribute__((section(".data.frontier_banim_aurabg3.gap28"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_028_777858.bin", 0x1F0C, 0x330);
+u8 data_08779A94[] __attribute__((section(".data.frontier_banim_aurabg3.gap28"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_028_777858.bin", 0x223C, 0x22);
 u8 frontier_banim_aurabg3_029_779AB6[] __attribute__((section(".data.frontier_banim_aurabg3.gap29"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_029_779AB6.bin");
 u8 frontier_banim_aurabg3_030_779AFE[] __attribute__((section(".data.frontier_banim_aurabg3.gap30"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_030_779AFE.bin");
 u8 frontier_banim_aurabg3_031_779B76[] __attribute__((section(".data.frontier_banim_aurabg3.gap31"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_031_779B76.bin");
@@ -59,4 +64,6 @@ u8 frontier_banim_aurabg3_051_77A91A[] __attribute__((section(".data.frontier_ba
 u8 frontier_banim_aurabg3_052_77A986[] __attribute__((section(".data.frontier_banim_aurabg3.gap52"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_052_77A986.bin");
 u8 frontier_banim_aurabg3_053_77A9F2[] __attribute__((section(".data.frontier_banim_aurabg3.gap53"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_053_77A9F2.bin");
 u8 frontier_banim_aurabg3_054_77AA5E[] __attribute__((section(".data.frontier_banim_aurabg3.gap54"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_054_77AA5E.bin");
-u8 frontier_banim_aurabg3_055_77AACA[] __attribute__((section(".data.frontier_banim_aurabg3.gap55"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_055_77AACA.bin");
+u8 frontier_banim_aurabg3_055_77AACA[] __attribute__((section(".data.frontier_banim_aurabg3.gap55"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_055_77AACA.bin", 0x0, 0x6A);
+u8 data_0877AB34[] __attribute__((section(".data.frontier_banim_aurabg3.gap55"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_055_77AACA.bin", 0x6A, 0x98);
+u8 data_0877ABCC[] __attribute__((section(".data.frontier_banim_aurabg3.gap55"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_055_77AACA.bin", 0x102, 0x28);

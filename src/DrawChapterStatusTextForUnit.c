@@ -24,6 +24,8 @@
 #include "constants/msg.h"
 #include "constants/songs.h"
 
+extern u8 data_081F5548[];
+
 extern struct StatusScreenSt gStatusScreenSt;
 
 //! FE8U = 0x0808E19C
@@ -114,7 +116,7 @@ void DrawChapterStatusTextForUnit(struct Unit * unit)
     Text_SetColor(&ptr->th, TEXT_COLOR_SYSTEM_WHITE);
 
     Text_SetCursor(&ptr->th, 177);
-    Text_DrawString(&ptr->th, (char *)0x081F5548); /* JP hardcodes the string ptr */
+    Text_DrawString(&ptr->th, (char *)data_081F5548); /* JP hardcodes the string ptr */
 
     SetTextFont(NULL);
 

@@ -5,4 +5,5 @@
  */
 
 u8 data_081F6D00[] __attribute__((section(".data.residue.081F6D00"))) = INCBIN_U8("data/residual/data_081F6D00.bin", 0, 68);
-u8 data_081F6D5C[] __attribute__((section(".data.residue.081F6D5C"))) = INCBIN_U8("data/residual/data_081F6D00.bin", 92, 228);
+u8 data_081F6D5C[] __attribute__((section(".data.residue.081F6D5C"))) = INCBIN_U8("data/residual/data_081F6D00.bin", 0x5C, 0x20);
+u8 data_081F6D7C[] __attribute__((section(".data.residue.081F6D5C"))) = INCBIN_U8("data/residual/data_081F6D00.bin", 0x7C, 0xC4);

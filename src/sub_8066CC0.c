@@ -5,10 +5,12 @@
 #include "efxbattle.h"
 #include "efxmagic.h"
 #include "hardware.h"
+
+extern u8 data_08601978[];
 void sub_8066CC0(void *anim) {
     void *q;
     (*(int *)0x0201774C)++;
-    q = Proc_Start((const struct ProcCmd *)0x08601978, (ProcPtr)3);
+    q = Proc_Start((const struct ProcCmd *)data_08601978, (ProcPtr)3);
     *(void **)((char *)q + 0x5c) = anim;
     { int z = 0; *(u16 *)((char *)q + 0x2c) = z; *(int *)((char *)q + 0x44) = z; }
     *(int *)((char *)q + 0x48) = 0x080E3592;

@@ -12,6 +12,8 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 
+extern u8 data_085E386C[];
+
 void NewEfxHpBarLive(struct Anim * anim)
 {
     s16 off_this;
@@ -23,7 +25,7 @@ void NewEfxHpBarLive(struct Anim * anim)
 
     gEkrHpBarCount = 1;
 
-    proc = Proc_Start((const struct ProcCmd *)0x085E386C, PROC_TREE_3);
+    proc = Proc_Start((const struct ProcCmd *)data_085E386C, PROC_TREE_3);
 
 
     if (GetAnimPosition(anim) == POS_L)
