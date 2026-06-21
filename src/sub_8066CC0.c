@@ -16,8 +16,8 @@ void sub_8066CC0(void *anim) {
     *(int *)((char *)q + 0x48) = 0x080E3592;
     *(int *)((char *)q + 0x4c) = 0x08601990;
     *(int *)((char *)q + 0x50) = 0x08601990;
-    SpellFx_RegisterBgGfx((const u16 *)0x08763B10, 0x2000);
-    SpellFx_RegisterBgPal((const u16 *)0x08764488, 0x20);
+    SpellFx_RegisterBgGfx((const u16 *)Img_AuraBg1, 0x2000);
+    SpellFx_RegisterBgPal((const u16 *)Pal_AuraBg1, 0x20);
     BG_SetPosition(1, 0, 0);
     SpellFx_SetSomeColorEffect();
 }

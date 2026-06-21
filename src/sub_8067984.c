@@ -17,6 +17,6 @@ void sub_8067984(void *anim) {
     *(struct Anim **)((char *)q + 0x60) = e;
     *(u16 *)((char *)e + 2) = *(u16 *)((char *)anim + 2);
     *(u16 *)((char *)e + 4) = *(u16 *)((char *)anim + 4);
-    SpellFx_RegisterObjGfx((const void *)0x087A1D3C, 0x1000);
-    SpellFx_RegisterObjPal((const void *)0x087A22E8, 0x20);
+    SpellFx_RegisterObjGfx((const void *)Img_Banim_18, 0x1000);
+    SpellFx_RegisterObjPal((const void *)Pal_efxSuperdruidOBJ, 0x20);
 }
