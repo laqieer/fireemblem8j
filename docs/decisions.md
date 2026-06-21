@@ -6648,3 +6648,20 @@ all with JP>mine). Reconstructed 2 via IDA:
 CONCLUSION: the size-mismatch candidates are STRUCTURALLY reconstructable but hit the same agbcc
 codegen walls (lsr↔asr, reg-alloc) as everything else — the agbcc ceiling is pervasive even for
 behaviorally-reconstructable functions. 10 distinct levers now exhausted; matching-C ceiling holds.
+
+## D256 — size-mismatch reconstructions all codegen-walled (3/3); old_agbcc m4a-only
+Continued the D255 size-mismatch lever + tested 2 new sub-levers this iter:
+- DATA axis re-verified 100% (1451 dat_*_ref.s are UNCOMPILED residuals superseded by src/data;
+  EXTRACTED-DATA 100%, self-contain 100%). The directive's "data 14%" is definitively stale.
+- old_agbcc hypothesis (JP used diff compiler versions per-file, proven for m4a): tested on
+  non-m4a codegen-walled fns (DrawItemMenuLine, SioWeaponSelectMenu_Draw, PutFaceChibi) —
+  old_agbcc produces IDENTICAL mnemonics to regular agbcc (0 diffs). old_agbcc is m4a-ONLY.
+- 3rd size-mismatch reconstruction Event0D_AsmCall (delta +4, JP omits a push): IDA shows JP
+  keeps `proc` in r3 (caller-saved) across the indirect `func(proc)` veneer call where agbcc
+  uses r4 (callee-saved → push {r4} = the +4 bytes). Reg-alloc wall. (Text_DrawNumber=lsr/asr
+  wall, DrawItemMenuLine=r4/r5 swap wall.) 3/3 size-mismatch reconstructions codegen-walled.
+CONCLUSION: 11+ distinct levers exhausted this session; the matching-C residual is the
+pervasive agbcc codegen ceiling (lsr↔asr + reg-alloc, unforceable from C) + libc/libgcc
+hand-asm. All 4 axes at their structural ceilings (self-contain/data 100%, matching-C 92.53%
+agbcc-capped, named 85.4% asset-sheet/dedup-capped). The 4-axis Oracle is structurally
+unreachable; driving continues per the user's standing override.
