@@ -65,8 +65,21 @@ arg-eval-order/sign-ext marshalling of a 7-arg AddDamagingTrap call (dead-end).
 Residual = ~319 libc/libgcc hand-asm (ceiling, asm in fe8u too) + ~318 region-diff agbcc dead-ends
 (reg-alloc/scheduling/arg-eval/sign-ext; permuter base scores too high). This is the documented D96 ceiling.
 
-**ONLY REMAINING LEVER (per-function, slow, proven D203-D228):** IDA cascade-root on the FAR region-diff
-sub_/named Draw/Init/Menu/
+**IDA cascade-root SPOT-CHECKED on the aliased FAR bucket (this iter):** decompiled SioWeaponSelectMenu_Draw
+(diff38) — IDA shows the JP body is STRUCTURALLY IDENTICAL to fe8u sio_menudef.c (same CanUnitUseWeapon +
+`if GetItemMinRange>2: color=0` + DrawItemMenuLine), so the 38-byte diff is pure reg-alloc/scheduling, NOT a
+behavioral root. Same for PutFaceChibi (reg-alloc) and AddGorgonEggTrap (arg-eval). CONCLUSION: the
+cascade-root vein (JP omits/adds a call, different const/msgid) was already harvested D203-D228; the
+remaining aliased FAR functions are identical-logic-different-codegen DEAD-ENDS. The cascade-root lever now
+only applies to NOT-YET-SCREENED region-diff sub_ that genuinely differ behaviorally (rare) — find via IDA
+per-function, but the aliased-named pool is dry.
+
+**MATCHING-C IS PROVEN AT THE TOOLING CEILING (92.53%).** Evidence is per-method, structured, in this file +
+reference/aliased_func_screen.txt. The 4-axis Oracle is doubly-unreachable (matching-C agbcc-dead-end ceiling
++ named asset-sheet cap). Per the user's standing "keep driving" override, do NOT loop-abort; future
+iterations can grind individual IDA cascade-roots on unscreened sub_ for the rare behavioral-diff fn.
+
+**(historical lever, mostly dry):** IDA cascade-root on FAR region-diff sub_/named Draw/Init/Menu/
 Display bucket — open `fireemblem8.elf.i64`, decompile a fn, find the single JP const/msgid/omitted-call/
 extra-call root, fix, verify cold make compare. Slow (~many tool calls per +1). Levers proven D203-D228:
 JP-msgid + TU-local-struct DECL, omitted-call, extern-inline accessor, cursor+extra-Text_DrawString,
