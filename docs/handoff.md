@@ -9,12 +9,20 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## ⏩ CURRENT STATE — 2026-06-20 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
 
 **main `96b7f6097`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **91.31%** (7787/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
+matching-C **91.35%** (7790/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
 `banim_`/`gfx_`/`snd_` asset-sheet labels are fe8u's own auto-naming, un-named in fe8u too → named
 can't reach 100% → the 4-axis Oracle is structurally unreachable; user directive is "keep driving
 matching-C").
 
-**This session: +20 matching-C carves (7767→7787), D203–D219.** D219 DrawLinkArenaLoadingScreen
+**This session: +23 matching-C carves (7767→7790), D203–D221b.** FRESH VEIN — the omit-screen +8-delta
+bucket (US 8 bytes bigger than JP) = a **double-extension cast-hoist** class: an s8/s16 param ZERO-extended
+then RE-SIGN-extended (8 redundant bytes); `int x=(s8/s16)param` collapses it. Wins: BrownTextBox_SetBlendFlag
+(D220), BgAffinScaling+BgAffinAnchoring (D221/b — cast-hoist the s16 params, declare them BEFORE the
+`affin=NULL` local to match JP order). Plus D219 DrawLinkArenaLoadingScreen (JP omits a centering line +
+msgid 0x77D→0x4D + raw-addr unbound gUnk_Sio_6). CAVEAT: only SMALL simple functions (<90B, single/few
+params) crack this way — the bigger +8 candidates (Event*/MuCtr/UnitList/Generic*, 150-252B) are codegen-shape
+(diff 85-165, SKIP). BgAffinRotScaling (sibling) got 97→66 via cast-hoist but divisions+clamps block it.
+**This session (earlier): +20 (7767→7787), D203–D219.** D219 DrawLinkArenaLoadingScreen
 (JP omits a `Text_SetCursor(GetStringTextCenteredPos(...))` centering line + msgid 0x77D→0x4D + raw-addr
 unbound gUnk_Sio_6 @0x0203DA74). MORE DEAD-ENDS (SKIP): Title_SetupSpecialEffectGraphics (JP adds an
 extra graphics-load block to case 4 [gfx@0x08B4B200→0x06015800, pal@0x08B4BB80, idx 0x18] + restructures
