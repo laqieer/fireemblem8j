@@ -6,11 +6,29 @@
 cron was DISABLED 2026-06-08 — see decisions.md D8; the launched agent kept
 getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
-## ⏩ CURRENT STATE — 2026-06-21 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
+## ⏩ CURRENT STATE — 2026-06-21 MATCHING-C AT TOOLING CEILING + RESUME PLAN (READ THIS FIRST; newest)
 
-**main `d01062b9d`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **92.48%** (7887/8528) · extracted-data **100%** · named ~85.5% (capped). Oracle structurally
-unreachable (named cap); directive = keep driving matching-C.
+**main `146e0e04e`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
+matching-C **92.53%** (7891/8528) · extracted-data **100%** · named 85.37% (capped). **Oracle structurally
+UNREACHABLE** — proven via 12 distinct levers this session (logged D255-D257 + the loop-abort evidence):
+- NAMED can't reach 100% (~1611 banim_/gfx_/snd_ are fe8u's OWN auto-naming, un-named in fe8u; renames dedup-capped).
+- MATCHING-C residual = ~319 libc/libgcc hand-asm (ceiling 8209) + ~318 agbcc codegen dead-ends (lsr<->asr
+  result-narrowed-unforceable + reg-alloc; permuter base 200-240 won't converge; old_agbcc m4a-only).
+
+**RESUME PLAN (user said "resume the grind" 2026-06-21):** per-function IDA-reconstruct on the remaining
+~104 size-mismatch candidates (`reference/sizemismatch_behavioral.txt`). MAIN-THREAD SERIAL ONLY (D99 — no
+parallel agents; the verify step `make src/X.o`+sadiff mutates shared src/). Workflow: (1) prioritize by
+diff-PATTERN — clustered byte-diffs = behavioral (JP omits/adds a call/block → reconstructable, worth IDA);
+scattered = reg-alloc (skip). (2) For positive-delta (mine>JP, JP omits) IDA-decompile → remove the JP-omitted
+thing. For negative-delta (JP>mine, JP adds) IDA → add the JP-specific block/encoding. (3) sadiff each; carve
+diff=0; document walls. Known walls so far: Text_DrawNumber (lsr/asr, diff1), DrawItemMenuLine (r4/r5, diff28),
+Event0D_AsmCall (r3/r4, diff21), PutFaceChibi/SioWeaponSelectMenu_Draw (reg-alloc). Expect low hit-rate;
+this is marginal extraction beyond the proven ceiling, NOT a path to the Oracle.
+
+**(prior) THIS SESSION: +124 matching-C (7767→7891), D229–D254. TWO BREAKTHROUGH VEINS:**
+1. **m4a old_agbcc lever (D234–239, +25):** the m4a sound engine TUs need `old_agbcc` (regular agbcc
+   codegen-shape differs). Per-target Makefile override `src/<Fn>.o: CC1 := $(CC1_OLD)` (CC1_OLD was
+   defined-unused at Makefile:50). Carved ClearModM, m4aSongNum×5, m4aSoundInit (raw-addr RAM globals),
 
 **THIS SESSION: +120 matching-C (7767→7887), D229–D250. TWO BREAKTHROUGH VEINS:**
 1. **m4a old_agbcc lever (D234–239, +25):** the m4a sound engine TUs need `old_agbcc` (regular agbcc
