@@ -8,7 +8,6 @@
 0D6760	0D67D0	*libgcc.a:_muldi3.o(.text)	libc __muldi3 from libgcc.a
 0D67D0	0D6848	*libgcc.a:_udivsi3.o(.text)	__udivsi3 from libgcc.a (byte-verified, real-source library)
 0D6848	0D6908	*libgcc.a:_umodsi3.o(.text)	__umodsi3 from libgcc.a (byte-verified, real-source library)
-0D8BE8	0D8C5C	asm/stranded__unmapped.o(.text.s_080D8BE8)	_unmapped:__sfp region-same Thumb (descriptive incbin)
 0D9858	0D98D8	*libc.a:memchr.o(.text)	memchr from libc.a (byte-verified, real-source library)
 0D98D8	0D9960	*libc.a:memmove.o(.text)	memmove from libc.a (byte-verified, real-source library)
 0DA238	0DA25C	*libc.a:s_isinf.o(.text)	isinf from libc.a (byte-verified, real-source library)

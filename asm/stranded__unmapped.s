@@ -1,14 +1,3 @@
-	.section .text.s_080D8BE8, "ax", %progbits
-@ __sfp region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080D8BE8..0x080D8C5C
-	.thumb
-	.align 2, 0
-	.global __sfp
-	.thumb_func
-__sfp:
-	.incbin "data/residual/__sfp.bin"
-
-
 	.section .text.s_080DA4B8, "ax", %progbits
 @ error region-same Thumb (US shifted); descriptive incbin baserom.gba
 @ JP 0x080DA4B8..0x080DA4CC
