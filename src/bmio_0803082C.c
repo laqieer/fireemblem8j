@@ -101,7 +101,7 @@ struct BMVSyncProc {
  void WfxFlamesInitGradient(void);
  void WfxFlamesInitParticles(void);
  void WfxFlames_Init(void);
-static void WfxFlamesUpdateGradient(void);
+ void WfxFlamesUpdateGradient(void);
  void WfxFlamesUpdateParticles(void);
  void WfxFlames_VSync(void);
  void WfxCloudsOffsetGraphicsEffect(u32* lines);

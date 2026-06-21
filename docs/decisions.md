@@ -6344,3 +6344,20 @@ the D102/D217 extern-inline-accessor lever. .text diff 0.
 Added `Text_GetColor 08003D94 thumb popup2`. Cold `make compare` → OK,
 self-contained YES, dedup/close-gaps clean.
 Confirms the extern-inline accessor vein extends to the bmitem item-menu-draw family.
+
+## D230 — WfxFlames_VSync: 2-call wrapper, static→global callee (+1 matching-C, 7802→7803)
+`WfxFlames_VSync` (JP 0x08030930, 16B; fe8u src/bmio.c). Body = the trivial
+`WfxFlamesUpdateGradient(); WfxFlamesUpdateParticles();` (JP `sub_803082C` = the
+first, `WfxFlamesUpdateParticles` @0x08030898 = the second — both confirmed by the
+gbadisasm `.set` targets). Byte-identical to the JP asm
+(`push{lr};bl;bl;pop{r0};bx r0`).
+Both callees were ALREADY carved (bmio_0803082C.o defines WfxFlamesUpdateGradient,
+bmio_WfxFlamesUpdateParticles.o defines WfxFlamesUpdateParticles) — so NO baseline_syms
+binding needed (initially mis-bound, reverted). The only blocker: fe8u declares
+WfxFlamesUpdateGradient `static` (the forward decl in bmio_0803082C.c carried internal
+linkage to the definition), so the cross-TU `bl` was undefined. Removed the `static`
+on the forward decl → global symbol (BYTE-NEUTRAL: linkage doesn't alter the function's
+code bytes; full cold make compare confirms bmio_0803082C.o range unchanged). diff 0.
+LESSON: before binding a callee in baseline_syms, check it isn't already carved in a
+src/*.o — a duplicate define link-errors; the fix for an already-carved-but-static
+callee is to globalize it, not re-bind it.
