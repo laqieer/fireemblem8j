@@ -6534,3 +6534,14 @@ reloc-excluded sadiff=0). Only safe when the function uses NONE of those statics
 The 4 siblings (AllocateProcess/FreeProcess→sProcAllocListHead@0x02026A6C,
 InsertRootProcess/UnlinkProcess→gProcTreeRootArray) need the statics raw-addr'd (D215) so no
 new BSS is allocated. Deferred to a raw-addr pass.
+
+## D245 — proc tree fns BSS-free carve (+4 matching-C, 7866→7870)
+The 4 remaining stranded proc.c tree fns, carved WITHOUT re-declaring the EWRAM_DATA statics
+(which would shift the BSS, D244): InsertRootProcess + UnlinkProcess use only the GLOBAL
+`gProcTreeRootArray` (bound @0x02026A70, declared extern in proc.h via ROOT_PROC) — no statics
+needed. AllocateProcess + FreeProcess use the static `sProcAllocListHead` — raw-addr'd as
+`#define sProcAllocListHead (*(struct Proc ***)0x02026A6C)` (address verified by decoding the
+ROM literal pool at 0x08002CD4/CE4). All 4 diff 0, full make compare OK. The proc allocator/
+tree-link family is now fully matching-C. Total session stranded carves: 5 proc + m4a 25 +
+fontgrp 15 + hardware 6 + prepscreen 4 + bmbattle 3 + bmdifficulty/savedraw/scene 3 +
+BMapVSync 2 = 63.
