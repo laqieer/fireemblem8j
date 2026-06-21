@@ -6226,3 +6226,10 @@ next). cold make compare OK.
 `StartTalkFaceMove` (sub_800795C, 80B, fe8u src/scene.c). Declared `extern struct ProcCmd
 gProcScr_TalkFaceMove[]` + cast-hoist the `s8 isSwap` param (stored to proc->unk6A AFTER Proc_Start,
 held across the call) via `int sw = (s8)isSwap` → diff 0. cold make compare OK. Same vein as D205/D206/D218.
+
+## D219 — DrawLinkArenaLoadingScreen: IDA cascade-root + msgid + raw-addr (+1, 7786→7787)
+`DrawLinkArenaLoadingScreen` (sub_8046728, 112B, fe8u src/sio_bat.c). THREE JP differences:
+(1) JP OMITS the `Text_SetCursor(&gUnk_Sio_6, GetStringTextCenteredPos(96, GetStringFromIndex(MSG_77D)))`
+centering line — JP doesn't center the "Now Loading" text (diff 41→8). (2) msgid is 0x4D (77) not
+MSG_77D/0x77D (small → JP uses `movs` immediate; fe8u 0x77D > 255 → pool load). (3) `gUnk_Sio_6` is
+unbound EWRAM (0x0203DA74) → raw-addr `(struct Text *)0x0203DA74`. → diff 0, full cold make compare OK.
