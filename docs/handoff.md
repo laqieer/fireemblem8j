@@ -6,10 +6,42 @@
 cron was DISABLED 2026-06-08 — see decisions.md D8; the launched agent kept
 getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
-## ⏩ CURRENT STATE — 2026-06-20 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
+## ⏩ CURRENT STATE — 2026-06-21 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
 
-**main `96b7f6097`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **91.48%** (7801/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
+**main `d01062b9d`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
+matching-C **92.48%** (7887/8528) · extracted-data **100%** · named ~85.5% (capped). Oracle structurally
+unreachable (named cap); directive = keep driving matching-C.
+
+**THIS SESSION: +120 matching-C (7767→7887), D229–D250. TWO BREAKTHROUGH VEINS:**
+1. **m4a old_agbcc lever (D234–239, +25):** the m4a sound engine TUs need `old_agbcc` (regular agbcc
+   codegen-shape differs). Per-target Makefile override `src/<Fn>.o: CC1 := $(CC1_OLD)` (CC1_OLD was
+   defined-unused at Makefile:50). Carved ClearModM, m4aSongNum×5, m4aSoundInit (raw-addr RAM globals),
+   MPlayExtender (gMaxLines=0 absolute + range-split), CgbSound, +17 m4a stranded. m4a now fully C except
+   `asm/m4a_1.s` (ARM hand-asm core = ceiling). See memory `m4a-old-agbcc-lever`.
+2. **STRANDED-SECTION individual carve (D239–250, +69):** `asm/stranded_<TU>.s` hold region-same fns as
+   descriptive incbins, EACH individually `.text.s_<addr>`-sectioned + placed via
+   `layout/carved_rom.d/stranded_func_<TU>.tsv`. So carve ONE-BY-ONE (NOT the D135 whole-section dead-end):
+   write src/<Fn>.c = fe8u body + TU includes; verify `/tmp/sadiff.sh <Fn> 0x08<6hexSTART>`=diff0; then
+   `python3 /tmp/carve_stranded.py <TU> <fns...>` (rewrites tsv provider→src + prunes the .s block);
+   gen_layout; COLD make compare. Carved: m4a 17, fontgrp 25 (FULL), hardware 6, proc 5, prepscreen 4,
+   bmbattle 3, statscreen 2, minimap 2, +5 singles, BMapVSync 2. See memory `stranded-section-carve-vein`.
+   TRAPS: (a) re-declaring `EWRAM_DATA static sProcArray[64]` adds BSS → shifts EWRAM → full compare FAILS
+   (sadiff still 0) → only carve fns using NO statics, or raw-addr the static (D215) / use the bound GLOBAL;
+   (b) gbadisasm range can over-span into a trailing tiny fn (MPlayExtender bundled a 4-byte svc wrapper) →
+   forward refs off by constant delta → split the range; (c) DECL_ONLY: most CFAILs just need forward-decls
+   of bound siblings / extern of bound globals (no BSS).
+
+**REMAINING stranded (deferred, blocked):** Proc_End (calls `static t` DeleteProcessRecursive → needs
+co-location/globalize), minimap InitMinimapFlashPalette (deep proto chain). `_unmapped` 44 = libgcc/newlib
+(__muldi3/__adddf3/vfprintf/_dtoa/memmove…) = the hand-asm ceiling (honest cap ~8209, not matchable from C).
+
+**NEXT VEINS:** back to per-function IDA cascade-root on the FAR Draw/Init/Display sub_ bucket
+(`python3 scripts/screen_cfail.py $(cat /tmp/named_asm.txt)`); or check other `*.c` files for region-same
+fns still in `asm/sub_*.s` that compile clean. Against the honest 8209 ceiling, matching-C is now ~96.1%.
+
+--- (prior session, archived below) ---
+
+**(prior) main `96b7f6097`+, green, self-contained 100%.** matching-C **91.48%** (7801/8528) · named **85.48%** (capped — ~1611
 `banim_`/`gfx_`/`snd_` asset-sheet labels are fe8u's own auto-naming, un-named in fe8u too → named
 can't reach 100% → the 4-axis Oracle is structurally unreachable; user directive is "keep driving
 matching-C").
