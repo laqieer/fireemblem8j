@@ -21,7 +21,14 @@ parallel agents; the verify step `make src/X.o`+sadiff mutates shared src/). Wor
 diff-PATTERN — clustered byte-diffs = behavioral (JP omits/adds a call/block → reconstructable, worth IDA);
 scattered = reg-alloc (skip). (2) For positive-delta (mine>JP, JP omits) IDA-decompile → remove the JP-omitted
 thing. For negative-delta (JP>mine, JP adds) IDA → add the JP-specific block/encoding. (3) sadiff each; carve
-diff=0; document walls. GRIND RESULTS (2026-06-21): the DEBUG-MENU / JP-REWRITE subset YIELDS — DebugMenu_FogIdle (D258, JP omits the
+diff=0; document walls. GRIND RESULTS (2026-06-21): +7 this session-segment via the JP-DIVERGENT-DOMAIN subset of the size-mismatch grind:
+DEBUG-MENU (D258 FogIdle omit-skirmish, D259 WeatherIdle JP-rewrite counter%7) + TACTICIAN KANA 2-BYTE name-entry
+(D260 AppendChar/DeleteChar/Loop: fe8u structure + 2*max_len/+=2/-=2/unk4C[cur_len>>1]/StrLen*9). KEY METHOD: IDA
+the size-mismatch candidate, find the JP behavioral difference (omits a US block, or a domain rewrite like
+1-byte->2-byte chars), port fe8u's structure with the JP substitution, KEEP fe8u's if/else polarity. Pending:
+Tactician_InitScreen (big, setup matches but 2-byte name-copy loop diff 103 = reg-alloc-ish), FogDraw/ClearDraw
+(embedded gTextIds table + D213). NEXT JP-divergent domains to mine: other Sio/LinkArena, more event fns.
+ORIGINAL NOTE:  the DEBUG-MENU / JP-REWRITE subset YIELDS — DebugMenu_FogIdle (D258, JP omits the
 US-only GetBattleMapKind==SKIRMISH fog branch) + DebugMenu_WeatherIdle (D259, JP counter++%7 weather cycle,
 different impl; calls sub_801BA6C directly since DebugMenu_WeatherDraw is mis-bound @0x0836FB3E). +2 -> 7893.
 Walls (skip): Text_DrawNumber (lsr/asr diff1), DrawItemMenuLine (r4/r5 diff28), Event0D_AsmCall (r3/r4 diff21),
