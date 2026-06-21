@@ -12,4 +12,3 @@
 0D98D8	0D9960	*libc.a:memmove.o(.text)	memmove from libc.a (byte-verified, real-source library)
 0DA238	0DA25C	*libc.a:s_isinf.o(.text)	isinf from libc.a (byte-verified, real-source library)
 0DA25C	0DA27C	*libc.a:s_isnan.o(.text)	isnan from libc.a (byte-verified, real-source library)
-0DA918	0DA938	asm/stranded__unmapped.o(.text.s_080DA918)	_unmapped:abort region-same Thumb (descriptive incbin)

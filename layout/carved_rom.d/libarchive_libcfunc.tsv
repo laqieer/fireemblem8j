@@ -1,0 +1,1 @@
+0DA918	0DA940	*libc.a:libcfunc.o(.text)	libcfunc.o (abort/isatty/alarm) whole object from libc.a
