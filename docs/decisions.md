@@ -6435,3 +6435,21 @@ auto-placed BSS symbols that currently match). diff 0.
 **NOTE for MPlayExtender/CgbSound:** same RAM-global situation — MPlayExtender additionally
 needs gMPlayJumpTable@fixed (referenced by 4 other src files) + ply_*/CgbSound/CgbOscOff/
 MidiKeyToCgbFreq bound; CgbSound is 591 asm lines. Larger lifts, deferred.
+
+## D237 — MPlayExtender: old_agbcc + gMaxLines bind + gbadisasm range-split (+1 matching-C, 7813→7814)
+`MPlayExtender` (JP 0x080D512C, 280B; fe8u src/m4a.c). The m4a CGB-channel setup + jump-table
+extender. old_agbcc (D234) reproduces the codegen byte-exact. Two fixes:
+1. `MAX_LINES = (u32)gMaxLines` where gMaxLines is an absolute linker symbol = 0 (fe8u
+   `gMaxLines = 0;`). Bound it via `layout/baseline_syms.d/harvest_databind_m4a.tsv`
+   (`gMaxLines 00000000 data m4a`) → absolute symbol, MAX_LINES=0. All ply_*/Cgb*/gMPlayJumpTable
+   already resolve (SOUND_INFO_PTR is indirect via 0x3007FF0, so no gSoundInfo-addr dependency).
+2. gbadisasm range trap: the tsv span 0D512C–0D5248 (284B) had BUNDLED a trailing 4-byte BIOS
+   `svc #0x2A; bx lr` wrapper at JP 0x080D5244 (a separate function preceding ClearChain@0x080D5248)
+   into MPlayExtender. My compiled .o is the true 280B MPlayExtender, so placing it in the 284B
+   slot let every subsequent function shift −4 (8 forward literal-pool refs off-by-4 + the CpuFill32
+   bl resolving to CpuFastSet instead of CpuSet — the diagnostic tell). Fixed by setting the
+   handdecomp range to 0D512C–0D5244 and re-homing the 4 bytes as asm/sub_80D5244.s (its own
+   gbadisasm tsv 0D5244–0D5248). diff 0.
+LESSON: when a carved fn's forward references are all off by a constant delta, the gbadisasm
+range over-spans into the NEXT function — split it, don't fight the codegen.
+Remaining named m4a asm: CgbSound (591 lines).
