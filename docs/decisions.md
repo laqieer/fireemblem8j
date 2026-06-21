@@ -6248,3 +6248,8 @@ a redundant zero-then-sign double-extension of an s8 param is enough. Found via 
 declaring them BEFORE the `struct BgAffineDstData* affin = NULL` local matches JP's order (sign-ext first,
 then NULL) → diff 0. cold make compare OK. The omit-screen +8-delta bucket = a rich double-extension
 cast-hoist vein. Siblings BgAffinAnchoring/BgAffinRotScaling (sysutil.c) likely same pattern.
+
+## D221b — BgAffinAnchoring: same cast-hoist (+1, 7789→7790)
+`BgAffinAnchoring` (sub_80B296C, 88B) — same sysutil.c double-extension fix: cast-hoist the four s16
+params (`int qx=(s16)q0_x; ...`) declared before `affin=NULL` → diff 0 (agbcc CSE'd `-qy` to match JP's
+v6). cold make compare OK.
