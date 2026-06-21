@@ -8,13 +8,30 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## ⏩ CURRENT STATE — 2026-06-20 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
 
-**main `ead288ada`, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **91.22%** (7779/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
+**main `2fe25194f`, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
+matching-C **91.25%** (7782/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
 `banim_`/`gfx_`/`snd_` asset-sheet labels are fe8u's own auto-naming, un-named in fe8u too → named
 can't reach 100% → the 4-axis Oracle is structurally unreachable; user directive is "keep driving
 matching-C").
 
-**This session: +12 matching-C carves (7767→7779), D203–D213b.** Newest levers (continue these first):
+**This session: +15 matching-C carves (7767→7782), D203–D216.** Newest levers (continue these first):
+- **Work `reference/moddiff_candidates.txt` (110, sorted by diff)** — the live backlog. Per-fn: extract US
+  body → IDA-decode → classify. WINS this run from it: AiFindClosestTerrainAdjacentPosition (D214, DECL_ONLY
+  AiGetPositionRange + JP reuses `(s8)gBmMapRange[]` where fe8u splits to the `gMapRangeSigned[]` symbol),
+  ClearGMapPIPanel (D215, DECL_ONLY local struct + JP layout consts: FillRect width 13→12 AND pool-offset
+  0x11→0x12/0x211→0x212), PrepItemUse_PostPromotion (D216, JP omits a `PrepSetLatestCharId` call).
+- **CRITICAL reloc-blind-spot (D215, reinforces D126):** sadiff/the screen EXCLUDE relocs, so a wrong
+  literal-pool ADDRESS (buffer+offset, data-sym addr) gives sadiff diff 0 yet full make compare FAILS.
+  ALWAYS gate on full cold make compare; to decode, `python3`-diff built .gba vs baserom, read the pool
+  words, compute the byte delta.
+- **DEAD-ENDS confirmed this run (SKIP, don't re-try):** ClassIntro_LoopOut (div6 const is real but the
+  >=80 control-flow FOLD won't match — codegen-shape, 4 forms failed), PrepareSineWaveScanlineBuf family
+  (prologue sign-ext SCHEDULING), AddGorgonEggTrap (wrapper arg-eval reg-alloc), Event0D_AsmCall
+  (`__call_via_rN` interwork-thunk reg-alloc), MoveActiveUnit (JP ADDS an HP-clamp block — reg-alloc too
+  hard), BonusClaim_StartSelectTargetSubMenu (many UI-layout consts, multi-part), RedrawMenu + bmdebug
+  draws (D213 family but multi-part). DEFERRED winnable: GetUnitItemHealAmount (D102 extern-inline accessor
+  + item-ID range checks — needs GetItemAttributes/GetItemIndex as `extern inline`).
+- **D213 JP menu-def string-pointer (+2, a FAMILY):** any menu `*Draw` fn doing `Text_DrawString(text,
 - **D213 JP menu-def string-pointer (+2, a FAMILY):** any menu `*Draw` fn doing `Text_DrawString(text,
   GetStringFromIndex(...->def->nameMsgId))` → JP stores a `char*` STRING POINTER as the def's first field
   → `*(const char **)...->def`. Wins: MapMenu_GuideCommandDraw, WMMenu_OnGuideDraw. Remaining family
