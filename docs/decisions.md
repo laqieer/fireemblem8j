@@ -6253,3 +6253,9 @@ cast-hoist vein. Siblings BgAffinAnchoring/BgAffinRotScaling (sysutil.c) likely 
 `BgAffinAnchoring` (sub_80B296C, 88B) — same sysutil.c double-extension fix: cast-hoist the four s16
 params (`int qx=(s16)q0_x; ...`) declared before `affin=NULL` → diff 0 (agbcc CSE'd `-qy` to match JP's
 v6). cold make compare OK.
+
+## D222 — PrepScreen_StartUnitSwap: JP msgid const (+1, 7790→7791)
+`PrepScreen_StartUnitSwap` (sub_8033B20, 124B, fe8u src/prep_sallycursor.c). Single JP difference:
+the "Reorder your units" msgid is 0x7F0 (2032) not MSG_872/0x872. Substitute → diff 42→0 (the wrong
+const shifted the whole function via pool layout). cold make compare OK. Lesson: a moderate diff (42)
+in a structure-matching fn can be ONE const — always IDA-diff the call args before assuming codegen.
