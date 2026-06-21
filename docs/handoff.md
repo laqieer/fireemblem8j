@@ -9,12 +9,22 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## ⏩ CURRENT STATE — 2026-06-20 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
 
 **main `96b7f6097`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **91.29%** (7785/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
+matching-C **91.30%** (7786/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
 `banim_`/`gfx_`/`snd_` asset-sheet labels are fe8u's own auto-naming, un-named in fe8u too → named
 can't reach 100% → the 4-axis Oracle is structurally unreachable; user directive is "keep driving
 matching-C").
 
-**This session: +18 matching-C carves (7767→7785), D203–D217c.** TOP LEVER NOW = **D102 extern-inline
+**This session: +19 matching-C carves (7767→7786), D203–D218.** Latest: D218 StartTalkFaceMove
+(DECL_ONLY gProcScr_TalkFaceMove + cast-hoist s8 isSwap held across Proc_Start). MORE DEAD-ENDS confirmed
+(SKIP): GetUnitStructFromEventParameter (switch-lowering, pervasive), PrepItemScreen_DrawVisibleUnitNames
+(loop codegen), Text_DrawNumber (literal-pool placement + shifted-domain char), GmapRmUpdateExt_ScrollPosition
+(multi-part: cond-order + GetEasedProgress 3-vs-4-arg + casts), efxLunaOBJ_Loop_C (s16-intermediate eval-order
+codegen), MoveTalkFace (diff-3 arg-eval-order, permuter stuck at 5 — KILLED). The moddiff easy-win tail is
+thinning; remaining are mostly codegen-shape (loop-rotation/switch-lowering/s16-intermediate/eval-order/
+arg-order). Best remaining bets: DECL_ONLY+cast-hoist (s8 param held across a call) + IDA-clear single
+omitted-call/const + D102 extern-inline single-accessor.
+
+**(earlier) +18 matching-C carves (7767→7785), D203–D217c.** TOP LEVER NOW = **D102 extern-inline
 accessor** (+4: GetUnitItemHealAmount, CanUnitUseStaffNow, CanUnitUseWeaponNow + the pattern): fe8u
 defines many accessors `inline` in their .c but the JP headers declare them as PLAIN functions, so the
 JP build INLINES them (a table lookup) while a naive port CALLS them. Fix: paste the fe8u `inline` body
