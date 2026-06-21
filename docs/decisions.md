@@ -6665,3 +6665,14 @@ pervasive agbcc codegen ceiling (lsr↔asr + reg-alloc, unforceable from C) + li
 hand-asm. All 4 axes at their structural ceilings (self-contain/data 100%, matching-C 92.53%
 agbcc-capped, named 85.4% asset-sheet/dedup-capped). The 4-axis Oracle is structurally
 unreachable; driving continues per the user's standing override.
+
+## D257 — permuter on diff=1 reconstruction: base 200, won't converge (12th lever)
+Tested the permuter on Text_DrawNumber's IDA reconstruction (reloc-excluded diff=1, the
+CLOSEST any residual function has gotten — only the lsr↔asr opcode differs). Permuter
+base score = 200 (>>150 won't-converge threshold), NO improvement over 3900 iterations.
+KEY FINDING: the permuter score is dominated by relocs/structure, NOT the byte-diff — a
+1-byte-off function still scores 200 (the one permuter success, PutWMFaceOnBg, had base 20,
+a simpler function with fewer relocs). So the permuter cannot crack the lsr↔asr / reg-alloc
+walls even on near-perfect reconstructions. 12th distinct lever exhausted.
+The IDA-reconstruct→permuter pipeline (my best hope for the size-mismatch candidates) is
+confirmed non-viable. Matching-C residual is the agbcc codegen ceiling, full stop.
