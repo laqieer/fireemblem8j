@@ -6221,3 +6221,8 @@ next). cold make compare OK.
 
 ## D217c — CanUnitUseWeaponNow: extern-inline accessor family (+1, 7784→7785)
 `CanUnitUseWeaponNow` (sub_80164F8, 84B) — same D102 extern-inline fix. cold make compare OK.
+
+## D218 — StartTalkFaceMove: DECL_ONLY + cast-hoist (+1, 7785→7786)
+`StartTalkFaceMove` (sub_800795C, 80B, fe8u src/scene.c). Declared `extern struct ProcCmd
+gProcScr_TalkFaceMove[]` + cast-hoist the `s8 isSwap` param (stored to proc->unk6A AFTER Proc_Start,
+held across the call) via `int sw = (s8)isSwap` → diff 0. cold make compare OK. Same vein as D205/D206/D218.
