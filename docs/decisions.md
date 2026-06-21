@@ -6676,3 +6676,14 @@ a simpler function with fewer relocs). So the permuter cannot crack the lsr↔as
 walls even on near-perfect reconstructions. 12th distinct lever exhausted.
 The IDA-reconstruct→permuter pipeline (my best hope for the size-mismatch candidates) is
 confirmed non-viable. Matching-C residual is the agbcc codegen ceiling, full stop.
+
+## D258 — DebugMenu_FogIdle: size-mismatch grind yields a clean omit-block (+1, 7891→7892)
+The "resume the grind" request (user) on the size-mismatch candidates: after 11 reg-alloc/lsr-asr
+walls, the DEBUG-menu functions are a fresh region-diff vein. `DebugMenu_FogIdle` (0x0801C0D4):
+JP OMITS fe8u's `if (gPlaySt.chapterVisionRange==0) { if (GetBattleMapKind()==BATTLEMAP_KIND_SKIRMISH)
+UpdateMapViewWithFog(3); else UpdateMapViewWithFog(...initialFogLevel); }` — the JP collapses it to
+just `UpdateMapViewWithFog(...initialFogLevel)` (no skirmish→fog-3 branch). The +16-byte size delta =
+that omitted branch. Removed it → diff 0. CONFIRMS the size-mismatch+IDA pipeline DOES yield carves on
+the omit-block (behavioral) subset, even though the reg-alloc subset is walled.
+Sibling DebugMenu_WeatherIdle (0x0801BAEC) is a full JP-rewrite (counter++ %7 vs fe8u dec/inc+clamp) —
+harder, deferred. More DebugMenu_*/Uidebug_* are likely the same vein.
