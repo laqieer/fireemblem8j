@@ -6198,3 +6198,8 @@ buffer+offset is a LITERAL-POOL ADDRESS (reloc) → sadiff is BLIND. sadiff show
 make compare FAILED on 4 pool bytes. ALWAYS gate on full cold make compare. To decode a reloc-offset
 diff: `python3` diff the built .gba vs baserom, read the differing pool words, compute the byte delta
 (here +2 bytes = +1 u16 → offset 0x11→0x12).
+
+## D216 — PrepItemUse_PostPromotion: IDA cascade-root JP-omitted call (+1, 7781→7782)
+`PrepItemUse_PostPromotion` (sub_809EF04, 48B, fe8u src/prep_itemuse.c). JP omits the
+`PrepSetLatestCharId(proc->unit->pCharacterData->number);` call (size 60→48). Remove → diff 0,
+full cold make compare OK. Same omitted-call vein as ExecLatona/ExecFortify (D207/D208).
