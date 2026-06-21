@@ -6631,3 +6631,20 @@ nofuncmap reloc-unique + byte-match diff0) were carved as synthetic reconstructi
 + store func to on_PressB/on_PressStart/on_End). Byte-neutral (make compare OK). Named metric
 unchanged within rounding (dedup-capped, [named-axis ceiling]) but source is now faithful.
 The 41 reloc-ambiguous have UNRELIABLE names (one JP fn matches multiple US fns) — skip.
+
+## D255 — size-mismatch (behavioral) screen: reconstructable but codegen-walled
+NEW 10th lever this session: a screen comparing my-compiled-size vs JP-gbadisasm-size on the
+FAR aliased bucket isolates STRUCTURAL diffs (JP has MORE code = adds a call/block/encoding my
+fe8u-port lacks) from pure codegen. Found 107 candidates (reference/sizemismatch_behavioral.txt,
+all with JP>mine). Reconstructed 2 via IDA:
+- Text_DrawNumber (0x08003F98, delta -8): JP uses a DIFFERENT digit-glyph encoding
+  (`u16 c = (((n%10)<<24)+0x4F820000)>>16` = JP font glyph, not ASCII '0'+d) + a ROM "0" string
+  (raw-addr 0x080DC3F0) + `text->x -= 16` (not 15). Reconstructed → diff 37→**1**, the final byte
+  being `lsrs` (mine) vs `asrs` (JP) for the >>16 — UNFORCEABLE (result is strh-narrowed so the
+  shifted-out bits are discarded → both agbcc AND old_agbcc pick lsr; semantically equivalent).
+- DrawItemMenuLine (0x080165F0, delta -36): same inlined item-accessors as DrawItemMenuLineNoColor
+  (D229) + color logic; reconstructed → diff **28**, an r4/r5 text-register swap + r2/r3 color-temp
+  copy (reg-alloc, propagates).
+CONCLUSION: the size-mismatch candidates are STRUCTURALLY reconstructable but hit the same agbcc
+codegen walls (lsr↔asr, reg-alloc) as everything else — the agbcc ceiling is pervasive even for
+behaviorally-reconstructable functions. 10 distinct levers now exhausted; matching-C ceiling holds.
