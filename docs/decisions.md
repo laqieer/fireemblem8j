@@ -6418,3 +6418,20 @@ matched once added to the D234 `old_agbcc` per-target override (extended the rul
 MPlayContinue, m4aMPlayStop, struct MusicPlayer/Song, MUSICPLAYER_STATUS_*) already bound.
 Full cold make compare OK (batch-safe: full sha1 can't false-positive). 5×diff 0.
 Remaining named m4a asm: CgbSound, MPlayExtender, m4aSoundInit (larger).
+
+## D236 — m4aSoundInit: old_agbcc + raw-addr m4a RAM globals (+1 matching-C, 7812→7813)
+`m4aSoundInit` (JP 0x080D4E70, 120B; fe8u src/m4a.c). old_agbcc (D234 override) reproduces
+the codegen byte-exact — reloc-excluded sadiff diff 0. But full make compare FAILED (D215
+trap): the m4a engine RAM globals it references (gSoundInfo, gCgbChans, gMPlayMemAccArea,
+SoundMainRAM_Buffer) are DEFINED in src/m4a.c as plain BSS and auto-placed at the wrong
+IWRAM addresses (gSoundInfo=0x03000150 etc.) instead of the JP fixed addresses
+(0x03005400/0x03006500/0x03006700/0x03002C08, read from the original asm literal pool).
+Those addresses appear as literal-pool WORDS in m4aSoundInit's ROM bytes → mismatch.
+Fixed by `#define`-ing the four globals to their real JP runtime addresses (raw-addr,
+established D215 pattern) — byte-correct (matches the original ROM's pools) and contained
+(these 4 globals are referenced by 0 other src files; the still-asm m4a uses the same raw
+addresses). Did NOT touch src/m4a.c's BSS layout (rebinding risks shifting other
+auto-placed BSS symbols that currently match). diff 0.
+**NOTE for MPlayExtender/CgbSound:** same RAM-global situation — MPlayExtender additionally
+needs gMPlayJumpTable@fixed (referenced by 4 other src files) + ply_*/CgbSound/CgbOscOff/
+MidiKeyToCgbFreq bound; CgbSound is 591 asm lines. Larger lifts, deferred.
