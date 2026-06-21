@@ -85,7 +85,7 @@ def read_manifest(name):
 # A byte is genuinely "extracted to source" only if it comes from a src/*.o (compiled
 # C: real struct tables, INCBIN'd PNG, etc). Bytes from asm/*.o are descriptive asm OR
 # named `.incbin "baserom.gba"` -- assembled, but NOT decompiled/extracted.
-code_src = code_asm = 0          # .text bytes by source kind
+code_src = code_asm = code_lib = 0  # .text bytes by source kind (lib = libc.a/libgcc.a)
 data_src = data_asm = 0          # .data/.rodata bytes by source kind
 objs = set()
 for r in read_manifest("carved_rom"):
@@ -96,9 +96,15 @@ for r in read_manifest("carved_rom"):
     om = re.match(r"(\S+\.o)\(", sec)
     obj = om.group(1) if om else ""
     is_src = obj.startswith("src/")
+    # Code linked directly from the toolchain archives (libc.a/libgcc.a), like
+    # fe8u does -- this is REAL-SOURCE library code, NOT hand-disassembly to
+    # decompile. Track it separately so it is not lumped with "still as asm".
+    is_lib = ".a:" in obj
     if secname == ".text" or secname.startswith(".text."):
         if is_src:
             code_src += size
+        elif is_lib:
+            code_lib += size
         else:
             code_asm += size
     elif secname.startswith((".rodata", ".data")):
@@ -236,9 +242,13 @@ out.append("")
 # code -- the prior `code_src + code_asm` numerator reported the disasm ratio (~99.5%)
 # and inflated decomp.dev's matched_code_percent far above the true matching-C level.
 jp_code_total = CODE_REGION[1] - CODE_REGION[0]
-code_not_src = max(0, jp_code_total - code_src)  # descriptive asm + still-incbin = not decompiled
+# "in asm" = still hand-disassembly to decompile; EXCLUDE library code linked
+# from libc.a/libgcc.a (that is real-source, like fe8u -- reported separately).
+code_not_src = max(0, jp_code_total - code_src - code_lib)
 out.append(f"{jp_code_total} total bytes of code")
 out.append(f"{code_src} bytes of code in src ({pct(code_src, jp_code_total):.4f}%)")
+if code_lib:
+    out.append(f"{code_lib} bytes of code in libc/libgcc archives ({pct(code_lib, jp_code_total):.4f}%, linked like fe8u)")
 out.append(f"{code_not_src} bytes of code in asm ({pct(code_not_src, jp_code_total):.4f}%)")
 out.append("")
 out.append(f"{sym_total} total symbols")

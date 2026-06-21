@@ -2607,7 +2607,7 @@ check-nonmatching:
 	$(PYTHON) scripts/check_nonmatching.py
 
 $(ELF): $(ALL_OBJECTS) $(LDSCRIPT)
-	$(LD) --no-check-sections -T $(LDSCRIPT) -Map $(MAP) -o $@ $(ALL_OBJECTS)
+	$(LD) --no-check-sections -T $(LDSCRIPT) -Map $(MAP) -o $@ $(ALL_OBJECTS) -L tools/agbcc/lib -lc -lgcc
 
 %.gba: %.elf
 	$(OBJCOPY) --strip-debug -O binary --pad-to 0x9000000 --gap-fill=0xff $< $@

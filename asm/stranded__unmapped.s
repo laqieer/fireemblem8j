@@ -1,13 +1,3 @@
-	.section .text.s_080D6760, "ax", %progbits
-@ __muldi3 region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080D6760..0x080D67D0
-	.thumb
-	.align 2, 0
-	.global __muldi3
-	.thumb_func
-__muldi3:
-	.incbin "data/residual/__muldi3.bin"
-
 	.section .text.s_080D67D0, "ax", %progbits
 @ __udivsi3 region-same Thumb (US shifted); descriptive incbin baserom.gba
 @ JP 0x080D67D0..0x080D6848
