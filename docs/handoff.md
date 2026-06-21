@@ -8,12 +8,27 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## ⏩ CURRENT STATE — 2026-06-21 MATCHING-C AT TOOLING CEILING + RESUME PLAN (READ THIS FIRST; newest)
 
-**main `146e0e04e`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **92.53%** (7891/8528) · extracted-data **100%** · named 85.37% (capped). **Oracle structurally
-UNREACHABLE** — proven via 12 distinct levers this session (logged D255-D257 + the loop-abort evidence):
+**main `ed100fd55`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
+matching-C **92.64%** (7900/8528) · extracted-data **100%** · named 85.36% (capped). **Oracle structurally
+UNREACHABLE** — proven via 12+ distinct levers (logged D255-D261 + the loop-abort evidence):
 - NAMED can't reach 100% (~1611 banim_/gfx_/snd_ are fe8u's OWN auto-naming, un-named in fe8u; renames dedup-capped).
-- MATCHING-C residual = ~319 libc/libgcc hand-asm (ceiling 8209) + ~318 agbcc codegen dead-ends (lsr<->asr
+- MATCHING-C residual = ~319 libc/libgcc hand-asm (ceiling 8209) + agbcc codegen dead-ends (lsr<->asr
   result-narrowed-unforceable + reg-alloc; permuter base 200-240 won't converge; old_agbcc m4a-only).
+
+**2026-06-21 session (+4 matching-C, 7896→7900; D261):** WINS via two levers — (1) **int-local sign-ext order**:
+GetWMCenteredCameraPosition (0x080C5628) matched once `int x=xIn; int y=yIn;` forced agbcc to sign-extend both
+s16 params up-front (asrs) like JP. (2) **extern-inline item-accessor cluster** (gItemData @0x0885E068 inline):
+GetUnitItemCostSum (0x08017178), GetUnitItemUseReachBits (0x08016FE4), DrawItemStatScreenLine (0x080167D4) — model
+src/sub_8017124.c & DrawItemMenuLineNoColor.c. Also linked 6 byte-matching libc/libgcc fns from .a (commit a1e03f713).
+**NEW DEAD-END CHARACTERIZATION (the recurring theme: agbcc -O2 optimizes MORE than the JP build did):**
+- Event0D_AsmCall (0x0800DD68): reg-alloc, proc→r4 vs JP r3 (proc dead after the single call → JP uses scratch).
+- PutTime (0x08004B70): +88 inline (PutNumber2Digit/Ext) reconstruction is byte-perfect EXCEPT 2 bytes — `lsrs`
+  vs JP `asrs` on `s8 hs`/`bool` (=typedef s8) only compared to 0; agbcc AND old_agbcc both pick lsrs. lsr<->asr dead-end.
+- SwapUnitStats (0x08028768): JP uses verbose `movs r1,#off; ldrsb r1,[r2,r1]` per byte-swap (+24B); agbcc & old_agbcc
+  both optimize to immediate `ldrb` (sign unused). ldrb<->ldrsb selection dead-end (same class as lsr/asr).
+- DrawItemMenuLine/Long, PointInCameraBounds, SioTeamList_1: reg-alloc (r4<->r5, extra r7 push, prologue normalize order).
+  RULE: raw-US-compile diff >20% on identical logic = codegen dead-end (skip). Winnable = JP-behavioral-DIFFERENT logic
+  (debug menus, kana, inline-accessor) where reconstruction → diff 0.
 
 **RESUME PLAN (user said "resume the grind" 2026-06-21):** per-function IDA-reconstruct on the remaining
 ~104 size-mismatch candidates (`reference/sizemismatch_behavioral.txt`). MAIN-THREAD SERIAL ONLY (D99 — no
