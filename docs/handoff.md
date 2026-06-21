@@ -21,9 +21,15 @@ parallel agents; the verify step `make src/X.o`+sadiff mutates shared src/). Wor
 diff-PATTERN — clustered byte-diffs = behavioral (JP omits/adds a call/block → reconstructable, worth IDA);
 scattered = reg-alloc (skip). (2) For positive-delta (mine>JP, JP omits) IDA-decompile → remove the JP-omitted
 thing. For negative-delta (JP>mine, JP adds) IDA → add the JP-specific block/encoding. (3) sadiff each; carve
-diff=0; document walls. Known walls so far: Text_DrawNumber (lsr/asr, diff1), DrawItemMenuLine (r4/r5, diff28),
-Event0D_AsmCall (r3/r4, diff21), PutFaceChibi/SioWeaponSelectMenu_Draw (reg-alloc). Expect low hit-rate;
-this is marginal extraction beyond the proven ceiling, NOT a path to the Oracle.
+diff=0; document walls. GRIND RESULTS (2026-06-21): the DEBUG-MENU / JP-REWRITE subset YIELDS — DebugMenu_FogIdle (D258, JP omits the
+US-only GetBattleMapKind==SKIRMISH fog branch) + DebugMenu_WeatherIdle (D259, JP counter++%7 weather cycle,
+different impl; calls sub_801BA6C directly since DebugMenu_WeatherDraw is mis-bound @0x0836FB3E). +2 -> 7893.
+Walls (skip): Text_DrawNumber (lsr/asr diff1), DrawItemMenuLine (r4/r5 diff28), Event0D_AsmCall (r3/r4 diff21),
+GmapRm/PointInCameraBounds/EventAC/PutFaceChibi/SioWeaponSelectMenu_Draw (reg-alloc/sign-ext). Deferred multi-part:
+DebugMenu_FogDraw/ClearDraw (embedded local .rodata: gTextIds_OnOff msgid table + D213 string-ptr — gap-split),
+InitPlayConfig/PutUnitSpriteIconsOam/PidStatsRecordLoseData (large diffs, complex). VEIN: IDA the ~90 unchecked
+size-mismatch candidates for the behavioral subset (JP omits a US-only block, or is a simpler JP-rewrite) — ~2
+wins per ~17 checked; skip scattered-byte reg-alloc diffs. NOT a path to the Oracle (still marginal).
 
 **(prior) THIS SESSION: +124 matching-C (7767→7891), D229–D254. TWO BREAKTHROUGH VEINS:**
 1. **m4a old_agbcc lever (D234–239, +25):** the m4a sound engine TUs need `old_agbcc` (regular agbcc
