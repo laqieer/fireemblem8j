@@ -9,12 +9,23 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## ⏩ CURRENT STATE — 2026-06-20 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
 
 **main `96b7f6097`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **91.37%** (7792/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
+matching-C **91.43%** (7797/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
 `banim_`/`gfx_`/`snd_` asset-sheet labels are fe8u's own auto-naming, un-named in fe8u too → named
 can't reach 100% → the 4-axis Oracle is structurally unreachable; user directive is "keep driving
 matching-C").
 
-**This session: +25 matching-C carves (7767→7792), D203–D223.** TWO NEW levers this turn: (1) **JP
+**This session: +30 matching-C carves (7767→7797), D203–D226b.** RICHEST CURRENT VEIN = **JP-msgid +
+TU-local-struct/table DECL** (the Sio*/item-display family, +8 this run): a fn with `GetStringFromIndex(MSG_xxx)`
+where the JP msgid DIFFERS (read it from the IDA `GetStringFromIndex` ref / the literal-pool word) — JP
+msgids are a totally different table (deltas seen: −0x74, −0x75, −0x6B, or a whole region e.g. MSG_140/0x140
+→ 0x7C1). Often combined with: (a) define the TU-LOCAL struct (LinkArenaTeamEnt 20B, LATeamListConfig) +
+extern the bound data array; (b) extern-inline accessors (GetItemEncodedRange/GetItemRequiredExp→weaponRank);
+(c) embedded-table gap-split when a LOCAL msgid array sits FAR in .rodata (gap-split the owning
+frontier_df4_misc_lo residual INCBIN around it — sadiff is .text-only, full make compare is the gate). Wins:
+PrepScreen_StartUnitSwap, GetItemDisplayRange/RankString, SioMenu_GetItemHelpText, SioTeamList_StartEraseTeamSubMenu/SwapTeams/EraseTeam.
+NEXT: more Sio*/menu fns with GetStringFromIndex(MSG_) — grep fe8u + IDA the JP msgid. DEAD (codegen):
+SioTeamList_1/_2 (s8 sentinels, diff 100+), SioBat_WaitSetupAck (63), GoalDisplay_Init (192).
+**(earlier) +25 (D203–D223).** TWO NEW levers this turn: (1) **JP
 msgid const** — a MODERATE diff (D222 PrepScreen_StartUnitSwap, diff 42) can be ONE wrong msgid
 (MSG_872/0x872 → JP 0x7F0); always IDA-diff the GetStringFromIndex args before assuming codegen. (2)
 **extern-inline + embedded-table gap-split** (D223 GetItemDisplayRangeString) — a fn with a LOCAL const
