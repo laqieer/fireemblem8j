@@ -6203,3 +6203,12 @@ diff: `python3` diff the built .gba vs baserom, read the differing pool words, c
 `PrepItemUse_PostPromotion` (sub_809EF04, 48B, fe8u src/prep_itemuse.c). JP omits the
 `PrepSetLatestCharId(proc->unit->pCharacterData->number);` call (size 60→48). Remove → diff 0,
 full cold make compare OK. Same omitted-call vein as ExecLatona/ExecFortify (D207/D208).
+
+## D217 — GetUnitItemHealAmount: extern-inline accessor (D102) (+1, 7782→7783)
+`GetUnitItemHealAmount` (sub_8016D60, 116B, fe8u src/bmitem.c). JP inlines GetItemIndex
+(`item & 0xFF`), GetItemData (`gItemData + index`), GetItemAttributes (`GetItemData(ITEM_INDEX)
+->attributes`) — all `inline` in fe8u's bmitem.c but plain-declared in the JP headers (so the JP
+build would CALL them). Provided all three as `extern inline` locally (GNU C89: inline-only body,
+no out-of-line copy → no duplicate symbol; the out-of-line defs stay in asm). The item-ID switch
+range-checks matched JP as-is. → diff 0, full cold make compare OK. The D102 extern-inline lever is
+alive for any still-asm fn that the JP inlines a tiny accessor into.
