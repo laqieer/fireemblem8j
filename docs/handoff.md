@@ -9,12 +9,21 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## ⏩ CURRENT STATE — 2026-06-20 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
 
 **main `96b7f6097`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **91.45%** (7799/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
+matching-C **91.48%** (7801/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
 `banim_`/`gfx_`/`snd_` asset-sheet labels are fe8u's own auto-naming, un-named in fe8u too → named
 can't reach 100% → the 4-axis Oracle is structurally unreachable; user directive is "keep driving
 matching-C").
 
-**This session: +32 matching-C carves (7767→7799), D203–D226d.** The Sio LinkArena team-list cluster is
+**This session: +34 matching-C carves (7767→7801), D203–D228.** After the Sio cluster, the FRESH lever is
+the **screen_cfail FAR bucket + IDA cascade-root** (per-fn IDA, find the single const/msgid/extra-call root):
+D227 PutClassNameIntroLetter (JP OAM tile stride charId*2→*4 + raw-addr unbound TU-static sprite
+sSprite_Opinfo_0@0x08AAFCAC), D228 ClassChgMenuOnDrawCore (Text_SetCursor 8→0 + an EXTRA Text_DrawString of
+a DIRECT ROM string @0x081F6D7C before the item str). RECURRING menu-draw pattern: JP differs by a cursor
+const + an extra Text_DrawString of a direct-ROM-string pointer (read the addr from the IDA Text_DrawString
+pool ref); also DebugMenu_ClearDraw (still multi-part). screen_cfail NEAR bucket = sign-ext/reg-alloc
+dead-ends (skip). NEXT: keep IDA-decoding the FAR bucket (91 fns) Draw/Init/Display functions for single
+const/msgid/extra-call roots — `python3 scripts/screen_cfail.py $(cat /tmp/named_asm.txt)`.
+**(earlier) +32 (D203–D226d).** The Sio LinkArena team-list cluster is
 now EXHAUSTED via the DECL+JP-msgid recipe (+10 total): SioTeamList_StartEraseTeamSubMenu/SwapTeams/EraseTeam,
 LoadLinkArenaTeamList, DrawLinkArenaTeamListMenu (extern gUnk_Sio_14[][15]@0x0203DD4C + gSioTeamListConfigLut
 + TU-local struct LinkArenaTeamEnt 20B + msgid). The recipe: extern the bound data array, define the
