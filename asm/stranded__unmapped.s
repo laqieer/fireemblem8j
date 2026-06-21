@@ -18,25 +18,6 @@ vfprintf:
 __sfp:
 	.incbin "data/residual/__sfp.bin"
 
-	.section .text.s_080D9858, "ax", %progbits
-@ memchr region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080D9858..0x080D98D8
-	.thumb
-	.align 2, 0
-	.global memchr
-	.thumb_func
-memchr:
-	.incbin "data/residual/memchr.bin"
-
-	.section .text.s_080D98D8, "ax", %progbits
-@ memmove region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080D98D8..0x080D9960
-	.thumb
-	.align 2, 0
-	.global memmove
-	.thumb_func
-memmove:
-	.incbin "data/residual/memmove.bin"
 
 	.section .text.s_080D99C0, "ax", %progbits
 @ _Bfree region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -108,25 +89,6 @@ _d2b:
 _ratio:
 	.incbin "data/residual/_ratio.bin"
 
-	.section .text.s_080DA238, "ax", %progbits
-@ isinf region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080DA238..0x080DA25C
-	.thumb
-	.align 2, 0
-	.global isinf
-	.thumb_func
-isinf:
-	.incbin "data/residual/isinf.bin"
-
-	.section .text.s_080DA25C, "ax", %progbits
-@ isnan region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080DA25C..0x080DA27C
-	.thumb
-	.align 2, 0
-	.global isnan
-	.thumb_func
-isnan:
-	.incbin "data/residual/isnan.bin"
 
 	.section .text.s_080DA2A8, "ax", %progbits
 @ __sread region-same Thumb (US shifted); descriptive incbin baserom.gba
