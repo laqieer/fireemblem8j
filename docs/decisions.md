@@ -6545,3 +6545,12 @@ ROM literal pool at 0x08002CD4/CE4). All 4 diff 0, full make compare OK. The pro
 tree-link family is now fully matching-C. Total session stranded carves: 5 proc + m4a 25 +
 fontgrp 15 + hardware 6 + prepscreen 4 + bmbattle 3 + bmdifficulty/savedraw/scene 3 +
 BMapVSync 2 = 63.
+
+## D246 — fontgrp DECL_ONLY stranded (+3 matching-C, 7870→7873)
+3 more fontgrp stranded fns carved as DECL_ONLY (the bound sibling/global was just undeclared
+in JP fontgrp.h): PutNumber + PutNumberSmall (forward-decl `void PutNumberExt(u16*,int,int,int)`
+— fontgrp.h only has the `// ??? PutNumberExt` stub), SetTextFont (extern `struct Font
+gDefaultFont` @0x02028E58, bound absolute). 3×diff 0. Remaining 7 fontgrp need gFontgrp_0
+(struct Struct02026E30 — JP-undeclared struct) or a TU-local small-string buffer: the DBG
+family (PrintStringToDBG, UpdateDBGScroll, PrintHexNumberToDBG, PrintNumberAsOBJ,
+PrintHexNumberAsOBJ), StoreNumberStringOrDashesToSmallBuffer, PutSpecialChar. Deferred.

@@ -7,7 +7,7 @@
 003A08	003A70	asm/stranded_fontgrp.o(.text.s_08003A08)	fontgrp:UpdateDBGScroll region-same Thumb (descriptive incbin)
 003B48	003B6C	asm/stranded_fontgrp.o(.text.s_08003B48)	fontgrp:PrintNumberAsOBJ region-same Thumb (descriptive incbin)
 003B6C	003B90	asm/stranded_fontgrp.o(.text.s_08003B6C)	fontgrp:PrintHexNumberAsOBJ region-same Thumb (descriptive incbin)
-003C68	003C8C	asm/stranded_fontgrp.o(.text.s_08003C68)	fontgrp:SetTextFont region-same Thumb (descriptive incbin)
+003C68	003C8C	src/SetTextFont.o(.text)	handdecomp
 003C8C	003CB4	src/InitText.o(.text)	handdecomp
 003CB4	003CDC	src/InitTextDb.o(.text)	handdecomp
 003CDC	003CF8	src/InitTextInitInfo.o(.text)	handdecomp
@@ -21,5 +21,5 @@
 004874	00487C	src/IsTextPrinting.o(.text)	handdecomp
 0048E8	00493C	src/DrawSpecialCharGlyph_old.o(.text)	handdecomp
 004A14	004A50	asm/stranded_fontgrp.o(.text.s_08004A14)	fontgrp:PutSpecialChar region-same Thumb (descriptive incbin)
-004A90	004A9C	asm/stranded_fontgrp.o(.text.s_08004A90)	fontgrp:PutNumber region-same Thumb (descriptive incbin)
-004AEC	004AF8	asm/stranded_fontgrp.o(.text.s_08004AEC)	fontgrp:PutNumberSmall region-same Thumb (descriptive incbin)
+004A90	004A9C	src/PutNumber.o(.text)	handdecomp
+004AEC	004AF8	src/PutNumberSmall.o(.text)	handdecomp
