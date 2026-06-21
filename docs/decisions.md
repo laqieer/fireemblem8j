@@ -6299,3 +6299,9 @@ US 0x140 compiles INLINE (movs+lsls), JP 0x7C1 POOL-loads → +4B size. Substitu
 (an enum value, not an array — both pool words resolve to the bound gLinkArenaTeamList @0x0203DB78). Plus
 the "NO DATA" msgid MSG_0CC/0xCC → JP 0x61 (read from the IDA GetStringFromIndex ref). → diff 0, cold OK.
 The Sio* family is rich in JP-msgid + TU-local-struct DECL carves.
+
+## D226b — SioTeamList_EraseTeam: Sio family DECL + JP-msgid (+1, 7796→7797)
+`SioTeamList_EraseTeam` (sub_8043574, 208B) — same vein as D226: define TU-local struct LinkArenaTeamEnt
++ extern gLinkArenaTeamList + extern `struct LATeamListConfig * gSioTeamListConfigLut[]` + msgid 0xCC→0x61.
+diff 0, cold OK. This turn the Sio*/bmitem JP-msgid + embedded-table + TU-local-struct vein gave +6
+(GetItemDisplayRange/RankString, SioMenu_GetItemHelpText, SioTeamList_StartEraseTeamSubMenu/SwapTeams/EraseTeam).
