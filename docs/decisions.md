@@ -6233,3 +6233,11 @@ held across the call) via `int sw = (s8)isSwap` → diff 0. cold make compare OK
 centering line — JP doesn't center the "Now Loading" text (diff 41→8). (2) msgid is 0x4D (77) not
 MSG_77D/0x77D (small → JP uses `movs` immediate; fe8u 0x77D > 255 → pool load). (3) `gUnk_Sio_6` is
 unbound EWRAM (0x0203DA74) → raw-addr `(struct Text *)0x0203DA74`. → diff 0, full cold make compare OK.
+
+## D220 — BrownTextBox_SetBlendFlag: cast-hoist double-extension (+1, 7787→7788)
+`BrownTextBox_SetBlendFlag` (sub_8011B08, 36B, fe8u src/popup.c). The `s8 doBlend` param was
+ZERO-extended (lsrs, held in r0) then RE-SIGN-extended (asrs→r1) before the `if (doBlend)` test —
+8 redundant bytes (US compiled 44, JP 36). `int db = (s8)doBlend` + `if (db)` collapses to a single
+entry asr → diff 0. **REFINES the cast-hoist rule (D205):** it works even WITHOUT a held-across-call —
+a redundant zero-then-sign double-extension of an s8 param is enough. Found via the omit screen's
++8-delta bucket (US 8 bytes bigger than JP). The omit-screen +8 deltas are a fresh cast-hoist vein.
