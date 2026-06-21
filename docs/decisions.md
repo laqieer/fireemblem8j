@@ -6835,3 +6835,19 @@ RESULT: ALL libc/libgcc functions in the ROM are now linked from the real archiv
 incbin) -- code-from-archive 488 -> 15776 bytes (32x), data 0 -> 451 bytes, 'in asm' 18.84% -> 17.01%,
 MATCHING-C 92.66% -> 93.80% (7896 src + 103 lib / 8528). All 4 oracle axes intact (self-contain/
 extracted-data 100%). Cold `make clean && make compare` OK. .bss base = section base, not symbol addr.
+
+## D267 — converted ALL 163 raw-hex ROM pointers in C to named symbols (decomp correctness)
+User: raw hex addresses cast to pointers in decomp C break if the layout shifts on rebuild (PC ->
+invalid address); must be symbolic (&/label/string); ROM strings are Shift-JIS. fe8u NEVER casts a
+raw 0x08...... to a pointer. Fixed ALL 163 (Type*)0x08...... casts across ~30 source files:
+- KEY constraint: (blob + offset) does NOT byte-match -- agbcc emits `=blob`(addend 0)+`add #offset`
+  (+57B). Only a symbol AT the exact address gives the single-literal `=0x...` match.
+- METHOD: every pointer targets an extracted data blob; split the containing INCBIN_U8/U16 array into
+  byte-identical contiguous sub-ranges (`INCBIN_U8(bin, off, a)` + `data_0X......[] = INCBIN_U8(bin,
+  off+a, size)` + rest), exposing a named symbol at the exact address (reuse the array symbol when the
+  ptr is at its start; reference an existing named graphic like Img_AuraBg1/Pal_* when one is there).
+  Now the references relocate with the data. Scripted (/tmp/fixptrs.py) + verified by FULL clean build.
+- DEBUG-MENU STRINGS (Shift-JIS) exposed as named const char[]: Str_DebugPlaythroughCount 周回数,
+  Str_DebugPlaythroughTh 周目, Str_DebugFogState さく敵 (build does preproc->cpp->iconv UTF-8->CP932).
+- RAM/VRAM/REG raw addrs (0x02/03/04/06......) left as-is: fixed hardware-map addresses, don't shift.
+Standing rule saved to memory [[no-raw-hex-pointers]]. All 4 axes intact; cold `make clean && compare` OK.
