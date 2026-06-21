@@ -6687,3 +6687,14 @@ that omitted branch. Removed it → diff 0. CONFIRMS the size-mismatch+IDA pipel
 the omit-block (behavioral) subset, even though the reg-alloc subset is walled.
 Sibling DebugMenu_WeatherIdle (0x0801BAEC) is a full JP-rewrite (counter++ %7 vs fe8u dec/inc+clamp) —
 harder, deferred. More DebugMenu_*/Uidebug_* are likely the same vein.
+
+## D259 — DebugMenu_WeatherIdle: debug-menu JP-rewrite (+1, 7892→7893)
+`DebugMenu_WeatherIdle` (0x0801BAEC). JP is a DIFFERENT (simpler) implementation than fe8u:
+`if (gKeyStatusPtr->newKeys & (A_BUTTON|DPAD_LEFT|DPAD_RIGHT)) { p=Proc_Find(ProcScr_DebugMonitor);
+p->unk_58++; DebugMenu_WeatherDraw(...); switch(p->unk_58 % 7){...} }` cycling weather in the JP order
+case0-6 -> FINE,SANDSTORM,SNOW,SNOWSTORM,RAIN,NIGHT,FLAMES (vs fe8u's dec/inc+clamp + FINE,SANDSTORM,
+SNOW,SNOWSTORM,RAIN,NIGHT,FLAMES... different cycle). Reconstructed from IDA → diff 1 (weather order) ->
+0 after fixing the case->WEATHER_ mapping. NOTE: the named `DebugMenu_WeatherDraw` symbol is MIS-BOUND to
+0x0836FB3E (a baseline_syms error) — the real draw fn is sub_801BA6C @0x0801BA6C, so called it directly.
+Debug-menu vein now: FogIdle (D258) + WeatherIdle (D259) carved; FogDraw/ClearDraw remain (TU-local
+gTextIds_OnOff table + D213 string-ptr + JP msgid — multi-part).
