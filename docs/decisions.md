@@ -6321,3 +6321,10 @@ PutSpriteExt tile args `charId * 2 + (k&0xF)*0x1000 + 0x800/0x400` → JP uses `
 tile stride; a `lsls #1`→`#2` byte at 0x102/0x146). Plus the TU-static sprite `sSprite_Opinfo_0` is
 unbound → raw-addr `(const u16 *)0x08AAFCAC` (read from the PutSpriteExt 4th-arg pool word). diff 0,
 cold OK. 7800 milestone. The screen_cfail NEAR/diffs-2 bucket still has a few non-sign-ext const carves.
+
+## D228 — ClassChgMenuOnDrawCore: IDA cascade-root JP cursor + extra string-draw (+1, 7800→7801)
+`ClassChgMenuOnDrawCore` (sub_80D2938, 136B, fe8u src/classchg-menuselect.c). TWO JP differences:
+Text_SetCursor(text, 0) not fe8u's 8, AND an EXTRA `Text_DrawString(text, (char*)0x081F6D7C)` (a direct
+ROM string pointer, read from the IDA Text_DrawString pool ref) inserted before the `str` draw — JP draws
+a fixed prefix string then the item string. diff 42→0, cold OK. The "JP adds an extra Text_DrawString of
+a direct-ROM-string" + "different cursor const" is a recurring menu-draw pattern (see DebugMenu_ClearDraw).
