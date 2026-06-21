@@ -6708,3 +6708,26 @@ TacticianTryDeleteChar (0x08044A6C: `cur_len -= 2`, `unk4C[cur_len>>1]`), Tactic
 (0x08044E74: VLA `[2*max_len+1]`, `_cbuf[2*max_len-2]=0`, `StrLen*9` not `*7`). 3×diff 0.
 Struct ProcTactician offsets match fe8u (cur_len@0x38, max_len@0x3C, unk4C@0x4C, etc.).
 Found via the size-mismatch grind + IDA. Tactician_InitScreen (the 4th, big) pending.
+
+## D261 — extern-inline item-accessor cluster + int-local sign-ext (+4 matching-C, 7896→7900)
+Two reusable levers, both verified by full cold `make compare` OK:
+1. **int-local sign-ext order.** `GetWMCenteredCameraPosition` (0x080C5628). The fe8u source
+   (`xIn - DISPLAY_WIDTH/2`, clamp [0,DISPLAY_WIDTH]; same y) is byte-correct, but agbcc compiled
+   the s16 params with point-of-use extension (a spurious `lsrs` zero-extend on y then a re-`asrs`).
+   JP sign-extends BOTH params up-front (`asrs r0; asrs r1`, reusing r1). Adding `int x = xIn; int
+   y = yIn;` locals forces the up-front double sign-extension → diff 0. (NOTE: the size-mismatch
+   screen's "my=28" was a measurement artifact — it found only the forward-decl TU.)
+2. **extern-inline item-accessor cluster.** Several bmitem functions are +30..+40 bytes vs a plain
+   `GetItemCost()`/`GetItem*()` call because JP INLINES the accessor (reads gItemData @0x0885E068
+   directly). Carve by defining the accessor chain `extern inline` (GNU C89 = inline-only, no
+   out-of-line copy) so agbcc inlines exactly where JP does, modeled on the existing
+   src/sub_8017124.c (GetConvoyItemCostSum) and src/DrawItemMenuLineNoColor.c:
+   - GetUnitItemCostSum (0x08017178): extern-inline GetItemData/Attributes/Uses/Cost. diff 0.
+   - GetUnitItemUseReachBits (0x08016FE4): extern-inline GetItemMaxRange (encodedRange&0xF);
+     CanUnitUseItem stays a real bl (sub_802881C). diff 0.
+   - DrawItemStatScreenLine (0x080167D4): full GetItemName(+GetStringFromIndex/StrInsertTact)/
+     Uses/MaxUses/IconId chain; matched because of its explicit `int color` local. diff 0.
+   DEAD-ENDS in the same cluster: DrawItemMenuLine (0x080165F0, diff 28) and DrawItemMenuLineLong
+   (0x08016688, diff 112) — identical callee SEQUENCE but pervasive reg-alloc divergence (text r4<->r5,
+   inline-ternary color held in r2 vs r3); the inline-ternary variants don't match while the
+   `color`-local variant (DrawItemStatScreenLine) does. The gItemData-inline asm vein is now exhausted.
