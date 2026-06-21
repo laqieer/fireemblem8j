@@ -6749,3 +6749,21 @@ CONCLUSION: FE8 JP's libc/libgcc == the pret/agbcc archives == newlib 1.8.x (AGB
 gcc 2.9-arm-000512, identical to fe6/fe7/fe8u and the Pokémon decomps. There is no FE8J-specific newlib.
 (What CAN differ per-JP-subsystem is the agbcc COMPILER variant — r2-vs-r3 literal pool / old_agbcc — a
 codegen-matching concern, not a library version. See docs/gba-decomp-survey.md.)
+
+## D263 — libc/libgcc .a-linking: div/mod linked (+668B); rest verified-linkable but layout-blocked
+Per "reference all libc/libgcc to .a to improve metrics". Investigation (reloc-aware, correct addresses)
+proved the ENTIRE FE8J library region byte-matches the agbcc archives (reinforces D262 — same newlib):
+- LINKED this round: __divsi3/__modsi3/__udivsi3/__umodsi3 from libgcc.a (commit 3f386389b). __div0 bound
+  to nullsub_3 @0x080D668C. libc/libgcc-from-archive code 488 -> 1156 bytes; 'in asm' 18.78% -> 18.62%.
+- VERIFIED-LINKABLE but NOT yet done (~9.7KB): 39 more functions match the .a with 0 non-reloc diffs —
+  memchr/memmove/isinf/isnan (standalone .o) + the COMBINED objects whose whole .text matches the ROM
+  contiguously: mprec.o (2256B), dp-bit.o (3484B), fp-bit.o (2380B), syscalls.o (1124B), stdio.o (196B).
+  Only `error`/`wrap` (44B) have no .a member.
+- BLOCKER: converting memchr/memmove (stranded incbin -> *libc.a:memchr.o(.text)) builds but ld does NOT
+  place memchr.o at its address (0x080D9858) — the member is pulled via -lc and placed elsewhere, so
+  nullsub_7/8 shift into the gap and every literal-pool pointer to the moved lib fns cascades (~15K diffs).
+  Curiously __udivsi3/__umodsi3 (libgcc, same in-place stranded->.a edit) AND memcpy/memset/strcpy/strlen
+  (libc, separate libarchive tsv) both work — so it's a gen_layout/ldscript member-placement-ordering
+  subtlety specific to these, NOT a byte mismatch. Reverted to keep the build green; needs dedicated
+  ldscript-generation work (ensure the address-specific `*libc.a:M.o(.text)` rule wins over the -lc default
+  placement), best done as a tooling task rather than per-function trial-and-error.
