@@ -6407,3 +6407,14 @@ Makefile:50 but previously UNUSED). diff 0.
 fail to match under regular agbcc are likely old_agbcc codegen-shape — carve via the
 m4a.c body + the per-target CC1_OLD override. Reopens a class long treated as
 codegen-shape dead-ends.
+
+## D235 — m4a song-num family via old_agbcc (+5 matching-C, 7807→7812)
+`m4aSongNumStart` (0x080D4EF4), `m4aSongNumStop` (0x080D4FC0), `m4aSongNumContinue`
+(0x080D4FF4), `m4aSongNumStartOrChange` (0x080D4F20), `m4aSongNumStartOrContinue`
+(0x080D4F6C) — fe8u src/m4a.c. The gMPlayTable[song->ms]/gSongTable[n] dispatch wrappers
+(MPlayStart/MPlayContinue/m4aMPlayStop on header match/status). Direct ports; all five
+matched once added to the D234 `old_agbcc` per-target override (extended the rule to
+`src/m4aSongNum*.o: CC1 := $(CC1_OLD)`). All deps (gMPlayTable, gSongTable, MPlayStart,
+MPlayContinue, m4aMPlayStop, struct MusicPlayer/Song, MUSICPLAYER_STATUS_*) already bound.
+Full cold make compare OK (batch-safe: full sha1 can't false-positive). 5×diff 0.
+Remaining named m4a asm: CgbSound, MPlayExtender, m4aSoundInit (larger).

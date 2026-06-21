@@ -52,7 +52,9 @@ CC1_OLD := tools/agbcc/bin/old_agbcc$(EXE)
 # m4a sound-engine TUs were built with the old GBA SDK agbcc; their codegen
 # shape (prologue, dead reg-inits) differs from the regular agbcc, so they
 # only byte-match under old_agbcc (same as fe8u's `src/m4a.o: CC1 := CC1_OLD`).
-src/ClearModM.o: CC1 := $(CC1_OLD)
+src/ClearModM.o src/m4aSongNumStart.o src/m4aSongNumStop.o \
+src/m4aSongNumContinue.o src/m4aSongNumStartOrChange.o \
+src/m4aSongNumStartOrContinue.o: CC1 := $(CC1_OLD)
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
