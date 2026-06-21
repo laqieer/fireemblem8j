@@ -1,0 +1,2 @@
+_impure_ptr	08BB8A74	data	newlib reentrancy struct pointer (vfprintf)
+__mb_cur_max	08BB8A78	data	newlib multibyte cur max (vfprintf)

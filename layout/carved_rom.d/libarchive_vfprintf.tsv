@@ -1,0 +1,2 @@
+0D6A80	0D7BEC	*libc.a:vfprintf.o(.text)	vfprintf.o whole object from libc.a (byte-verified, real-source library)
+5773B4	57742E	*libc.a:vfprintf.o(.rodata)	vfprintf.o .rodata from libc.a

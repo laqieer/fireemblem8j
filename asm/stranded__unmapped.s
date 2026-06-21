@@ -1,13 +1,3 @@
-	.section .text.s_080D6B14, "ax", %progbits
-@ vfprintf region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080D6B14..0x080D6B28
-	.thumb
-	.align 2, 0
-	.global vfprintf
-	.thumb_func
-vfprintf:
-	.incbin "data/residual/vfprintf.bin"
-
 	.section .text.s_080D8BE8, "ax", %progbits
 @ __sfp region-same Thumb (US shifted); descriptive incbin baserom.gba
 @ JP 0x080D8BE8..0x080D8C5C

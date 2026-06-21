@@ -2354,8 +2354,7 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_TextGlyphs_Special_ref.s \
                            asm/dat_lut_29_ref.s \
                            asm/dat_bldyLut_10_ref.s \
-                           asm/dat_worldmap_gmapunit_p5.s \
-                           asm/dat_libc_a_vfprintf.s
+                           asm/dat_worldmap_gmapunit_p5.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
 ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
 
