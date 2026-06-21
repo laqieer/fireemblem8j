@@ -8,13 +8,25 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 
 ## ⏩ CURRENT STATE — 2026-06-20 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
 
-**main `2fe25194f`, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **91.25%** (7782/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
+**main `96b7f6097`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
+matching-C **91.29%** (7785/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
 `banim_`/`gfx_`/`snd_` asset-sheet labels are fe8u's own auto-naming, un-named in fe8u too → named
 can't reach 100% → the 4-axis Oracle is structurally unreachable; user directive is "keep driving
 matching-C").
 
-**This session: +15 matching-C carves (7767→7782), D203–D216.** Newest levers (continue these first):
+**This session: +18 matching-C carves (7767→7785), D203–D217c.** TOP LEVER NOW = **D102 extern-inline
+accessor** (+4: GetUnitItemHealAmount, CanUnitUseStaffNow, CanUnitUseWeaponNow + the pattern): fe8u
+defines many accessors `inline` in their .c but the JP headers declare them as PLAIN functions, so the
+JP build INLINES them (a table lookup) while a naive port CALLS them. Fix: paste the fe8u `inline` body
+as `extern inline` (GNU C89 = inline-only, no out-of-line dup) into the .c. The full inline-accessor list
++ which moddiff candidates use them is computed by grepping `^inline ` in fe8u/src; CAVEAT — inlining is
+NECESSARY-not-sufficient (GetSpellAnimId/DoItemUse/SioWeaponSelectMenu still diff 64-148 = multi-part).
+The CLEAN ones are single-accessor with matching item-IDs. `reference/moddiff_candidates.txt` lists the
+candidates that call inline accessors (PlayerPhase, ItemSelectMenu, WmSell, ArenaGetPowerRanking,
+DrawItemMenuLine, GetItemDisplayRankString, …) — try each. PENDING: MoveTalkFace permuter (diff 3
+arg-eval-order, base 35 → stuck at 5; `nonmatchings/MoveTalkFace/`, harvest output-0 if it converges).
+
+**Earlier this session: +15 matching-C carves (7767→7782), D203–D216.** Levers (continue these too):
 - **Work `reference/moddiff_candidates.txt` (110, sorted by diff)** — the live backlog. Per-fn: extract US
   body → IDA-decode → classify. WINS this run from it: AiFindClosestTerrainAdjacentPosition (D214, DECL_ONLY
   AiGetPositionRange + JP reuses `(s8)gBmMapRange[]` where fe8u splits to the `gMapRangeSigned[]` symbol),
