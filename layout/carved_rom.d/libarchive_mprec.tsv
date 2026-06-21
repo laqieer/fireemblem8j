@@ -1,0 +1,2 @@
+0D9968	0DA238	*libc.a:mprec.o(.text)	mprec.o whole object from libc.a (byte-verified, real-source library)
+577480	5775A4	*libc.a:mprec.o(.rodata)	mprec.o .rodata (__mprec_tens/__mprec_bigtens) from libc.a

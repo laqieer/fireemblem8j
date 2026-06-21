@@ -654,7 +654,6 @@
 576884	576B40	src/data/snd_song980_btl_evl_magic2/snd_song980_btl_evl_magic2.o(.rodata.snd_song980_btl_evl_magic2)	snd_song980_btl_evl_magic2 region-same shifted (0KB)
 576B58	5772B4	src/data/snd_song981_btl_mon_magic1/snd_song981_btl_mon_magic1.o(.rodata.snd_song981_btl_mon_magic1)	snd_song981_btl_mon_magic1 region-same shifted (1KB)
 5773B4	57742E	src/data/libc/dat_libc_a_vfprintf.o(.rodata.dat_libc_a_vfprintf)	dat_libc_a_vfprintf region-same shifted (0KB)
-577480	5775A4	src/data/libc/dat_libc_a_mprec.o(.rodata.dat_libc_a_mprec)	dat_libc_a_mprec region-same shifted (0KB)
 577648	577688	src/data/sMusicProc4Script_ref/dat_sMusicProc4Script_ref.o(.rodata.dat_sMusicProc4Script_ref)	sMusicProc4Script region-diff (funcmap code-ref, 0KB)
 5776F0	577EF0	src/fontgrp.o(.data)	fontgrp .data
 577F4C	57994C	src/data/fontgrp_data/dat_fontgrp_data.o(.rodata.dat_fontgrp_data)	dat_fontgrp_data region-same shifted (6KB)
