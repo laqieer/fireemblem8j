@@ -6464,3 +6464,19 @@ diff 0.
 The named m4a engine vein is now exhausted this session: ClearModM (D234), m4aSongNum×5
 (D235), m4aSoundInit (D236), MPlayExtender (D237), CgbSound (D238) = +8. Remaining m4a is
 m4a_1.s (ARM hand-asm core, ceiling) + small sub_ in the libc/newlib region (also ceiling).
+
+## D239 — m4a stranded-section batch via old_agbcc (+17 matching-C, 7815→7832)
+The 17 region-same m4a functions held as DESCRIPTIVE INCBINs in `asm/stranded_m4a.s`
+(MPlayContinue, MPlayFadeOut, m4aMPlayFadeOutTemporarily, m4aMPlayFadeIn, m4aMPlayImmInit,
+m4aSoundMode, m4aSoundVSyncOff, m4aSoundVSyncOn, MPlayStart, FadeOutBody, TrkVolPitSet,
+CgbOscOff, CgbModVol, m4aMPlayTempoControl, m4aMPlayModDepthSet, m4aMPlayLFOSpeedSet,
+ply_xwave) ALL carve to matching-C under old_agbcc (D234). KEY: although flagged a
+"stranded carve dead-end" (D135 — removing the WHOLE section shifts the ROM), each function
+here has its OWN `.text.s_<addr>` section placed INDIVIDUALLY in the ldscript via
+`layout/carved_rom.d/stranded_func_m4a.tsv`, so they carve one-by-one: rewrite the tsv
+provider `asm/stranded_m4a.o(.text.s_XXX)` → `src/<Fn>.o(.text)` + prune the incbin block
+from stranded_m4a.s (avoids the duplicate-symbol link error). All 17 reloc-excluded
+sadiff=0; full cold make compare OK. Two needed TU-local pieces: CgbModVol inlines the
+`static inline int CgbPan(...)` helper; ply_xwave needs the multi-line `READ_XCMD_BYTE`
+macro. This + D234-238 = +25 m4a matching-C this session. m4a now fully C except m4a_1.s
+(ARM hand-asm core, the ceiling).

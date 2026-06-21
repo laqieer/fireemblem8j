@@ -54,7 +54,7 @@ CC1_OLD := tools/agbcc/bin/old_agbcc$(EXE)
 # only byte-match under old_agbcc (same as fe8u's `src/m4a.o: CC1 := CC1_OLD`).
 src/ClearModM.o src/m4aSongNumStart.o src/m4aSongNumStop.o \
 src/m4aSongNumContinue.o src/m4aSongNumStartOrChange.o \
-src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSound.o: CC1 := $(CC1_OLD)
+src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSound.o src/m4aSoundMode.o src/MPlayContinue.o src/MPlayFadeOut.o src/m4aMPlayFadeOutTemporarily.o src/m4aMPlayFadeIn.o src/m4aMPlayImmInit.o src/m4aSoundVSyncOff.o src/m4aSoundVSyncOn.o src/MPlayStart.o src/FadeOutBody.o src/TrkVolPitSet.o src/CgbOscOff.o src/CgbModVol.o src/m4aMPlayTempoControl.o src/m4aMPlayModDepthSet.o src/m4aMPlayLFOSpeedSet.o src/ply_xwave.o: CC1 := $(CC1_OLD)
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn

@@ -1,17 +1,17 @@
-0D4E34	0D4E50	asm/stranded_m4a.o(.text.s_080D4E34)	m4a:MPlayContinue region-same Thumb (descriptive incbin)
-0D4E50	0D4E70	asm/stranded_m4a.o(.text.s_080D4E50)	m4a:MPlayFadeOut region-same Thumb (descriptive incbin)
-0D509C	0D50BC	asm/stranded_m4a.o(.text.s_080D509C)	m4a:m4aMPlayFadeOutTemporarily region-same Thumb (descriptive incbin)
-0D50BC	0D50E4	asm/stranded_m4a.o(.text.s_080D50BC)	m4a:m4aMPlayFadeIn region-same Thumb (descriptive incbin)
-0D50E4	0D512C	asm/stranded_m4a.o(.text.s_080D50E4)	m4a:m4aMPlayImmInit region-same Thumb (descriptive incbin)
-0D540C	0D54A4	asm/stranded_m4a.o(.text.s_080D540C)	m4a:m4aSoundMode region-same Thumb (descriptive incbin)
-0D54F8	0D5574	asm/stranded_m4a.o(.text.s_080D54F8)	m4a:m4aSoundVSyncOff region-same Thumb (descriptive incbin)
-0D5574	0D55B0	asm/stranded_m4a.o(.text.s_080D5574)	m4a:m4aSoundVSyncOn region-same Thumb (descriptive incbin)
-0D5628	0D570C	asm/stranded_m4a.o(.text.s_080D5628)	m4a:MPlayStart region-same Thumb (descriptive incbin)
-0D574C	0D5814	asm/stranded_m4a.o(.text.s_080D574C)	m4a:FadeOutBody region-same Thumb (descriptive incbin)
-0D5814	0D58C8	asm/stranded_m4a.o(.text.s_080D5814)	m4a:TrkVolPitSet region-same Thumb (descriptive incbin)
-0D5970	0D59C0	asm/stranded_m4a.o(.text.s_080D5970)	m4a:CgbOscOff region-same Thumb (descriptive incbin)
-0D59C0	0D5A28	asm/stranded_m4a.o(.text.s_080D59C0)	m4a:CgbModVol region-same Thumb (descriptive incbin)
-0D5E74	0D5E9C	asm/stranded_m4a.o(.text.s_080D5E74)	m4a:m4aMPlayTempoControl region-same Thumb (descriptive incbin)
-0D6000	0D6074	asm/stranded_m4a.o(.text.s_080D6000)	m4a:m4aMPlayModDepthSet region-same Thumb (descriptive incbin)
-0D6074	0D60E8	asm/stranded_m4a.o(.text.s_080D6074)	m4a:m4aMPlayLFOSpeedSet region-same Thumb (descriptive incbin)
-0D6274	0D62BC	asm/stranded_m4a.o(.text.s_080D6274)	m4a:ply_xwave region-same Thumb (descriptive incbin)
+0D4E34	0D4E50	src/MPlayContinue.o(.text)	handdecomp
+0D4E50	0D4E70	src/MPlayFadeOut.o(.text)	handdecomp
+0D509C	0D50BC	src/m4aMPlayFadeOutTemporarily.o(.text)	handdecomp
+0D50BC	0D50E4	src/m4aMPlayFadeIn.o(.text)	handdecomp
+0D50E4	0D512C	src/m4aMPlayImmInit.o(.text)	handdecomp
+0D540C	0D54A4	src/m4aSoundMode.o(.text)	handdecomp
+0D54F8	0D5574	src/m4aSoundVSyncOff.o(.text)	handdecomp
+0D5574	0D55B0	src/m4aSoundVSyncOn.o(.text)	handdecomp
+0D5628	0D570C	src/MPlayStart.o(.text)	handdecomp
+0D574C	0D5814	src/FadeOutBody.o(.text)	handdecomp
+0D5814	0D58C8	src/TrkVolPitSet.o(.text)	handdecomp
+0D5970	0D59C0	src/CgbOscOff.o(.text)	handdecomp
+0D59C0	0D5A28	src/CgbModVol.o(.text)	handdecomp
+0D5E74	0D5E9C	src/m4aMPlayTempoControl.o(.text)	handdecomp
+0D6000	0D6074	src/m4aMPlayModDepthSet.o(.text)	handdecomp
+0D6074	0D60E8	src/m4aMPlayLFOSpeedSet.o(.text)	handdecomp
+0D6274	0D62BC	src/ply_xwave.o(.text)	handdecomp
