@@ -6562,3 +6562,12 @@ StoreNumberStringToSmallBuffer), PrintHexNumberToDBG/PrintHexNumberAsOBJ
 (StoreNumberHexStringToSmallBuffer), PrintNumberAsOBJ (PrintDebugStringAsOBJ), PutSpecialChar
 (GetSpecialCharChr). 5×diff 0. fontgrp now 23/25 carved; last 2 (PrintStringToDBG,
 UpdateDBGScroll) need the JP-undeclared `struct Struct02026E30 gFontgrp_0` def — deferred.
+
+## D248 — fontgrp DBG family complete (+2 matching-C, 7878→7880)
+PrintStringToDBG + UpdateDBGScroll: provided the JP-undeclared `struct Struct02026E30`
+(def inline in fe8u fontgrp.c) + extern `gFontgrp_0` (bound @0x02026E30, GLOBAL so extern =
+no BSS) + FlushDBGToBG2 proto. 2×diff 0. **fontgrp.c now FULLY carved (25/25).**
+Session total +113 (7767→7880, 92.40%). Stranded-section vein largely harvested: m4a(25),
+fontgrp(25), hardware(6), proc(5), prepscreen(4), bmbattle(3), +3 singles, BMapVSync(2).
+Remaining stranded CFAIL: minimap(3), statscreen(2), icon, prep_itemsupply, unitlistscreen,
+proc Proc_End; _unmapped 44 libgcc/newlib = ceiling.

@@ -3,8 +3,8 @@
 003868	003898	src/StoreNumberStringOrDashesToSmallBuffer.o(.text)	handdecomp
 003898	0038B4	src/PrintNumberToDBG.o(.text)	handdecomp
 003900	00391C	src/PrintHexNumberToDBG.o(.text)	handdecomp
-00391C	003988	asm/stranded_fontgrp.o(.text.s_0800391C)	fontgrp:PrintStringToDBG region-same Thumb (descriptive incbin)
-003A08	003A70	asm/stranded_fontgrp.o(.text.s_08003A08)	fontgrp:UpdateDBGScroll region-same Thumb (descriptive incbin)
+00391C	003988	src/PrintStringToDBG.o(.text)	handdecomp
+003A08	003A70	src/UpdateDBGScroll.o(.text)	handdecomp
 003B48	003B6C	src/PrintNumberAsOBJ.o(.text)	handdecomp
 003B6C	003B90	src/PrintHexNumberAsOBJ.o(.text)	handdecomp
 003C68	003C8C	src/SetTextFont.o(.text)	handdecomp
