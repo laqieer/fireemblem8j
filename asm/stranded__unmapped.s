@@ -48,26 +48,6 @@ InsertChildProcess:
 UnlinkProcess:
 	.incbin "data/residual/UnlinkProcess.bin"
 
-	.section .text.s_08030088, "ax", %progbits
-@ BMapVSync_OnEnd region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08030088..0x08030094
-	.thumb
-	.align 2, 0
-	.global BMapVSync_OnEnd
-	.thumb_func
-BMapVSync_OnEnd:
-	.incbin "data/residual/BMapVSync_OnEnd.bin"
-
-	.section .text.s_08030094, "ax", %progbits
-@ BMapVSync_OnLoop region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08030094..0x080300A0
-	.thumb
-	.align 2, 0
-	.global BMapVSync_OnLoop
-	.thumb_func
-BMapVSync_OnLoop:
-	.incbin "data/residual/BMapVSync_OnLoop.bin"
-
 	.section .text.s_080D6760, "ax", %progbits
 @ __muldi3 region-same Thumb (US shifted); descriptive incbin baserom.gba
 @ JP 0x080D6760..0x080D67D0

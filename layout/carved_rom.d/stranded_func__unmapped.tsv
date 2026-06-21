@@ -3,8 +3,8 @@
 002CF4	002D18	asm/stranded__unmapped.o(.text.s_08002CF4)	_unmapped:InsertRootProcess region-same Thumb (descriptive incbin)
 002D18	002D30	asm/stranded__unmapped.o(.text.s_08002D18)	_unmapped:InsertChildProcess region-same Thumb (descriptive incbin)
 002D30	002D78	asm/stranded__unmapped.o(.text.s_08002D30)	_unmapped:UnlinkProcess region-same Thumb (descriptive incbin)
-030088	030094	asm/stranded__unmapped.o(.text.s_08030088)	_unmapped:BMapVSync_OnEnd region-same Thumb (descriptive incbin)
-030094	0300A0	asm/stranded__unmapped.o(.text.s_08030094)	_unmapped:BMapVSync_OnLoop region-same Thumb (descriptive incbin)
+030088	030094	src/BMapVSync_OnEnd.o(.text)	handdecomp
+030094	0300A0	src/BMapVSync_OnLoop.o(.text)	handdecomp
 0D6760	0D67D0	asm/stranded__unmapped.o(.text.s_080D6760)	_unmapped:__muldi3 region-same Thumb (descriptive incbin)
 0D67D0	0D6848	asm/stranded__unmapped.o(.text.s_080D67D0)	_unmapped:__udivsi3 region-same Thumb (descriptive incbin)
 0D6848	0D6908	asm/stranded__unmapped.o(.text.s_080D6848)	_unmapped:__umodsi3 region-same Thumb (descriptive incbin)

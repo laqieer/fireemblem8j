@@ -6511,3 +6511,15 @@ savedraw (SaveDraw_InitParticles), scene (StartTalk). 10×diff 0.
 Deferred CFAIL (TU-local statics/helpers): minimap×3, statscreen×2, icon, prep_itemsupply,
 proc (Proc_End), unitlistscreen. DIFF (region-different): bmitem GetUnitItemSlot (41).
 Next: _unmapped (51 sections, likely libc/newlib).
+
+## D243 — _unmapped real functions (+2 matching-C, 7863→7865)
+The _unmapped stranded section (51 fns) is MOSTLY libgcc/newlib (__muldi3, __adddf3, vfprintf,
+_dtoa helpers, memchr/memmove, __pack_d, etc.) — the documented hand-asm ceiling (not
+matchable from agbcc C). But 7 are real fe8u functions misfiled there: BMapVSync_OnEnd
+(`SetSecondaryHBlankHandler(NULL)`) + BMapVSync_OnLoop (`Proc_Goto(proc,0)`) carved clean
+(2×diff 0). The other 5 (AllocateProcess, FreeProcess, InsertRootProcess, InsertChildProcess,
+UnlinkProcess) share TU-local statics (sProcArray@0x02024E68, sProcAllocList@0x02026968,
+sProcAllocListHead@0x02026A6C) that are `static` (internal linkage) in their defining proc TU
+— blocked unless co-located or globalized. Deferred.
+Session stranded total: m4a 25, hardware 6, fontgrp 15, prepscreen 4, bmbattle 3, +5 singles,
+BMapVSync 2.
