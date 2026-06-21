@@ -6500,3 +6500,14 @@ The 10 CFAIL (StoreNumberStringOrDashesToSmallBuffer, PrintHexNumberToDBG, Print
 UpdateDBGScroll, PrintNumberAsOBJ, PrintHexNumberAsOBJ, SetTextFont, PutSpecialChar,
 PutNumber, PutNumberSmall) reference TU-local statics/helpers/the debug_font graphic —
 deferred (need the TU-local pieces or co-located src/fontgrp.c additions). Broke 92.0%.
+
+## D242 — multi-TU stranded batch (+10 matching-C, 7853→7863)
+Generalized the stranded carve across all remaining non-_unmapped TUs (auto-extract the
+fe8u source's #include lines as the per-fn header set). Clean carves: prepscreen×4
+(GetUnitFromPrepList, RegisterPrepUnitList, PrepGetUnitAmount, PrepSetUnitAmount),
+bmbattle×3 (InitBattleUnitWithoutBonuses, CheckBattleUnitStatCaps,
+BattleUnitTargetCheckCanCounter), bmdifficulty (DungeonRecordUi_InitText),
+savedraw (SaveDraw_InitParticles), scene (StartTalk). 10×diff 0.
+Deferred CFAIL (TU-local statics/helpers): minimap×3, statscreen×2, icon, prep_itemsupply,
+proc (Proc_End), unitlistscreen. DIFF (region-different): bmitem GetUnitItemSlot (41).
+Next: _unmapped (51 sections, likely libc/newlib).

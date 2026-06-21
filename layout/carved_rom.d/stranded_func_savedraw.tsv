@@ -1,1 +1,1 @@
-0B0004	0B0028	asm/stranded_savedraw.o(.text.s_080B0004)	savedraw:SaveDraw_InitParticles region-same Thumb (descriptive incbin)
+0B0004	0B0028	src/SaveDraw_InitParticles.o(.text)	handdecomp

@@ -1,1 +1,1 @@
-037C44	037CD8	asm/stranded_bmdifficulty.o(.text.s_08037C44)	bmdifficulty:DungeonRecordUi_InitText region-same Thumb (descriptive incbin)
+037C44	037CD8	src/DungeonRecordUi_InitText.o(.text)	handdecomp
