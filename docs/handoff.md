@@ -9,12 +9,22 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## ⏩ CURRENT STATE — 2026-06-20 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
 
 **main `96b7f6097`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **91.43%** (7797/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
+matching-C **91.45%** (7799/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
 `banim_`/`gfx_`/`snd_` asset-sheet labels are fe8u's own auto-naming, un-named in fe8u too → named
 can't reach 100% → the 4-axis Oracle is structurally unreachable; user directive is "keep driving
 matching-C").
 
-**This session: +30 matching-C carves (7767→7797), D203–D226b.** RICHEST CURRENT VEIN = **JP-msgid +
+**This session: +32 matching-C carves (7767→7799), D203–D226d.** The Sio LinkArena team-list cluster is
+now EXHAUSTED via the DECL+JP-msgid recipe (+10 total): SioTeamList_StartEraseTeamSubMenu/SwapTeams/EraseTeam,
+LoadLinkArenaTeamList, DrawLinkArenaTeamListMenu (extern gUnk_Sio_14[][15]@0x0203DD4C + gSioTeamListConfigLut
++ TU-local struct LinkArenaTeamEnt 20B + msgid). The recipe: extern the bound data array, define the
+TU-local struct, read the JP msgid from the IDA GetStringFromIndex ref (sio msgids are a totally different
+table — MSG_0CC→0x61, MSG_140/141→0x7C1/0x7C3, MSG_76B→0x58). REMAINING msgid candidates are MULTI-PART
+(skip unless fresh): DebugMenu_ClearDraw (D213 string-ptr + direct-ROM-string-ptr for "Clears"@0x0DC6F0 +
+InsertDrawNumberOrBlank, diff 57), HandleTurnRecordText (statement-exprs + chapter switch + 3 msgids),
+SoloEndingBattleDisp_Init/GoalDisplay_Init (codegen 192). NEXT VEINS to try: other DECL+msgid clusters
+(sio_result/sio_menu remaining), or back to the IDA cascade-root (omitted-call) on medium fns.
+**(earlier) +30 (D203–D226b).** RICHEST CURRENT VEIN = **JP-msgid +
 TU-local-struct/table DECL** (the Sio*/item-display family, +8 this run): a fn with `GetStringFromIndex(MSG_xxx)`
 where the JP msgid DIFFERS (read it from the IDA `GetStringFromIndex` ref / the literal-pool word) — JP
 msgids are a totally different table (deltas seen: −0x74, −0x75, −0x6B, or a whole region e.g. MSG_140/0x140
