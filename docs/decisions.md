@@ -6767,3 +6767,29 @@ proved the ENTIRE FE8J library region byte-matches the agbcc archives (reinforce
   subtlety specific to these, NOT a byte mismatch. Reverted to keep the build green; needs dedicated
   ldscript-generation work (ensure the address-specific `*libc.a:M.o(.text)` rule wins over the -lc default
   placement), best done as a tooling task rather than per-function trial-and-error.
+
+## D264 — libc/libgcc .a-linking COMPLETED for the clean set (488 -> 7548 bytes; D263 blocker fixed)
+Resolved D263's blocker and linked the full cleanly-linkable library set (user: "reference all libc/libgcc
+to .a"). Root cause of D263: ld pulls an archive member only when a symbol of it is referenced UNDEFINED;
+library fns referenced only via asm `.set name,<addr>` (or unused) were never pulled, so a
+`*libc.a:M.o(.text)` placement stayed EMPTY and shifted everything after it. FIX (commit 3cfb7acc8):
+gen_layout now nm's each placed archive member and emits `EXTERN(<sym>)` to force the pull (byte-neutral
+for already-referenced members). Then linked:
+- memchr/memmove/isinf/isnan (standalone libc.a single-fn .o) — +332B.
+- stdio.o whole object (__sread/__swrite/__sseek/__sclose) — +196B. Externals (_*_r) resolve to asm defs.
+- dp-bit.o (3484B) + fp-bit.o (2380B) whole softfloat objects. Each .o's `thenan` scratch `.bss` placed
+  NOLOAD in IWRAM (dp-bit @0x03002BE0, fp-bit @0x03002BF8 — decoded from the .text ABS32 .bss relocs).
+  Externals __lshrdi3/__negdi2/__make_dp/__make_fp all asm-defined; __muldi3 already linked.
+KEY INSIGHT: FE8's linker placed each .o's .text contiguously, so a combined object byte-matches the ROM
+as ONE block — `*archive:obj.o(.text)` at its base works. External addresses recovered by decoding the
+incbin/ROM bytes at each .o's reloc sites (reloc-aware), since the old incbin baked them in.
+RESULT: libc/libgcc-from-archive code 488 -> 7548 bytes; 'in asm' 18.84% -> 17.91%. All 4 oracle axes
+intact (self-contain/extracted-data 100%, matching-C 92.66% unchanged; named 85.36->85.31% — the ~56
+library `.global` labels are now real .a code, not decomp placeholders, a neutral consolidation).
+SKIPPED (not cleanly linkable, would regress an axis):
+- mprec.o (2256B): its .rodata (__mprec_tens) is ALREADY extracted as src/data/libc/dat_libc_a_mprec
+  (counts as extracted-data); linking mprec.o(.text) forces placing mprec.o(.rodata), which calcprogress
+  counts as data_asm not data_src -> would drop extracted-data below 100%. Not worth trading axes.
+- syscalls.o (1124B): its range is ENTANGLED with already-decompiled matching-C (_fstat, sub_80DA784,
+  sub_80DA7D0, nullsub_112 as src/*.o) + a .data residue; whole-object placement would regress matching-C.
+- multi-symbol stubs (vfprintf.o/findfp.o/libcfunc.o): non-contiguous extra members in the ROM.
