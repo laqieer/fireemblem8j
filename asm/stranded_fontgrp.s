@@ -1,23 +1,3 @@
-	.section .text.s_08003800, "ax", %progbits
-@ PrintEmptyStringToDBG region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08003800..0x08003814
-	.thumb
-	.align 2, 0
-	.global PrintEmptyStringToDBG
-	.thumb_func
-PrintEmptyStringToDBG:
-	.incbin "data/residual/PrintEmptyStringToDBG.bin"
-
-	.section .text.s_08003814, "ax", %progbits
-@ ClearSmallStringBuffer region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08003814..0x0800382C
-	.thumb
-	.align 2, 0
-	.global ClearSmallStringBuffer
-	.thumb_func
-ClearSmallStringBuffer:
-	.incbin "data/residual/ClearSmallStringBuffer.bin"
-
 	.section .text.s_08003868, "ax", %progbits
 @ StoreNumberStringOrDashesToSmallBuffer region-same Thumb (US shifted); descriptive incbin baserom.gba
 @ JP 0x08003868..0x08003898
@@ -27,16 +7,6 @@ ClearSmallStringBuffer:
 	.thumb_func
 StoreNumberStringOrDashesToSmallBuffer:
 	.incbin "data/residual/StoreNumberStringOrDashesToSmallBuffer.bin"
-
-	.section .text.s_08003898, "ax", %progbits
-@ PrintNumberToDBG region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08003898..0x080038B4
-	.thumb
-	.align 2, 0
-	.global PrintNumberToDBG
-	.thumb_func
-PrintNumberToDBG:
-	.incbin "data/residual/PrintNumberToDBG.bin"
 
 	.section .text.s_08003900, "ax", %progbits
 @ PrintHexNumberToDBG region-same Thumb (US shifted); descriptive incbin baserom.gba
@@ -97,126 +67,6 @@ PrintHexNumberAsOBJ:
 	.thumb_func
 SetTextFont:
 	.incbin "data/residual/SetTextFont.bin"
-
-	.section .text.s_08003C8C, "ax", %progbits
-@ InitText region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08003C8C..0x08003CB4
-	.thumb
-	.align 2, 0
-	.global InitText
-	.thumb_func
-InitText:
-	.incbin "data/residual/InitText.bin"
-
-	.section .text.s_08003CB4, "ax", %progbits
-@ InitTextDb region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08003CB4..0x08003CDC
-	.thumb
-	.align 2, 0
-	.global InitTextDb
-	.thumb_func
-InitTextDb:
-	.incbin "data/residual/InitTextDb.bin"
-
-	.section .text.s_08003CDC, "ax", %progbits
-@ InitTextInitInfo region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08003CDC..0x08003CF8
-	.thumb
-	.align 2, 0
-	.global InitTextInitInfo
-	.thumb_func
-InitTextInitInfo:
-	.incbin "data/residual/InitTextInitInfo.bin"
-
-	.section .text.s_08003D70, "ax", %progbits
-@ Text_GetChrOffset region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08003D70..0x08003D80
-	.thumb
-	.align 2, 0
-	.global Text_GetChrOffset
-	.thumb_func
-Text_GetChrOffset:
-	.incbin "data/residual/Text_GetChrOffset.bin"
-
-	.section .text.s_08003D88, "ax", %progbits
-@ Text_Skip region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08003D88..0x08003D90
-	.thumb
-	.align 2, 0
-	.global Text_Skip
-	.thumb_func
-Text_Skip:
-	.incbin "data/residual/Text_Skip.bin"
-
-	.section .text.s_08003DA0, "ax", %progbits
-@ PutText region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08003DA0..0x08003DEC
-	.thumb
-	.align 2, 0
-	.global PutText
-	.thumb_func
-PutText:
-	.incbin "data/residual/PutText.bin"
-
-	.section .text.s_08003DEC, "ax", %progbits
-@ PutBlankText region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08003DEC..0x08003E0C
-	.thumb
-	.align 2, 0
-	.global PutBlankText
-	.thumb_func
-PutBlankText:
-	.incbin "data/residual/PutBlankText.bin"
-
-	.section .text.s_08004120, "ax", %progbits
-@ GetTextDrawDest region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08004120..0x08004140
-	.thumb
-	.align 2, 0
-	.global GetTextDrawDest
-	.thumb_func
-GetTextDrawDest:
-	.incbin "data/residual/GetTextDrawDest.bin"
-
-	.section .text.s_080044E0, "ax", %progbits
-@ InitSpriteText region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080044E0..0x08004504
-	.thumb
-	.align 2, 0
-	.global InitSpriteText
-	.thumb_func
-InitSpriteText:
-	.incbin "data/residual/InitSpriteText.bin"
-
-	.section .text.s_080045E8, "ax", %progbits
-@ GetSpriteTextDrawDest region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080045E8..0x08004608
-	.thumb
-	.align 2, 0
-	.global GetSpriteTextDrawDest
-	.thumb_func
-GetSpriteTextDrawDest:
-	.incbin "data/residual/GetSpriteTextDrawDest.bin"
-
-	.section .text.s_08004874, "ax", %progbits
-@ IsTextPrinting region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x08004874..0x0800487C
-	.thumb
-	.align 2, 0
-	.global IsTextPrinting
-	.thumb_func
-IsTextPrinting:
-	.incbin "data/residual/IsTextPrinting.bin"
-
-	.section .text.s_080048E8, "ax", %progbits
-@ DrawSpecialCharGlyph_old region-same Thumb (US shifted); descriptive incbin baserom.gba
-@ JP 0x080048E8..0x0800493C
-	.thumb
-	.align 2, 0
-	.global DrawSpecialCharGlyph_old
-	.thumb_func
-DrawSpecialCharGlyph_old:
-	.incbin "data/residual/DrawSpecialCharGlyph_old.bin"
 
 	.section .text.s_08004A14, "ax", %progbits
 @ PutSpecialChar region-same Thumb (US shifted); descriptive incbin baserom.gba

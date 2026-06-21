@@ -6490,3 +6490,13 @@ body + the TU's include set; verify reloc-excluded sadiff=0 first (addr = `0x08`
 tsv START). Carved all 6 hardware.c stranded fns (regular agbcc — only m4a needs old_agbcc).
 Remaining stranded backlog: fontgrp(25), _unmapped(51, likely libc), prepscreen(4),
 bmbattle(3), minimap(3), statscreen(2), + 8 singletons. A large matching-C vein.
+
+## D241 — fontgrp.c stranded batch (+15 matching-C, 7838→7853)
+15 of 25 fontgrp.c stranded incbin fns carve clean via the D240 flow (regular agbcc, fontgrp
+includes): InitText, InitTextDb, InitTextInitInfo, PutText, PutBlankText, Text_Skip,
+Text_GetChrOffset, IsTextPrinting, InitSpriteText, GetTextDrawDest, GetSpriteTextDrawDest,
+DrawSpecialCharGlyph_old, ClearSmallStringBuffer, PrintEmptyStringToDBG, PrintNumberToDBG.
+The 10 CFAIL (StoreNumberStringOrDashesToSmallBuffer, PrintHexNumberToDBG, PrintStringToDBG,
+UpdateDBGScroll, PrintNumberAsOBJ, PrintHexNumberAsOBJ, SetTextFont, PutSpecialChar,
+PutNumber, PutNumberSmall) reference TU-local statics/helpers/the debug_font graphic —
+deferred (need the TU-local pieces or co-located src/fontgrp.c additions). Broke 92.0%.

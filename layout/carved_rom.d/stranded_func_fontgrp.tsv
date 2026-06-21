@@ -1,25 +1,25 @@
-003800	003814	asm/stranded_fontgrp.o(.text.s_08003800)	fontgrp:PrintEmptyStringToDBG region-same Thumb (descriptive incbin)
-003814	00382C	asm/stranded_fontgrp.o(.text.s_08003814)	fontgrp:ClearSmallStringBuffer region-same Thumb (descriptive incbin)
+003800	003814	src/PrintEmptyStringToDBG.o(.text)	handdecomp
+003814	00382C	src/ClearSmallStringBuffer.o(.text)	handdecomp
 003868	003898	asm/stranded_fontgrp.o(.text.s_08003868)	fontgrp:StoreNumberStringOrDashesToSmallBuffer region-same Thumb (descriptive incbin)
-003898	0038B4	asm/stranded_fontgrp.o(.text.s_08003898)	fontgrp:PrintNumberToDBG region-same Thumb (descriptive incbin)
+003898	0038B4	src/PrintNumberToDBG.o(.text)	handdecomp
 003900	00391C	asm/stranded_fontgrp.o(.text.s_08003900)	fontgrp:PrintHexNumberToDBG region-same Thumb (descriptive incbin)
 00391C	003988	asm/stranded_fontgrp.o(.text.s_0800391C)	fontgrp:PrintStringToDBG region-same Thumb (descriptive incbin)
 003A08	003A70	asm/stranded_fontgrp.o(.text.s_08003A08)	fontgrp:UpdateDBGScroll region-same Thumb (descriptive incbin)
 003B48	003B6C	asm/stranded_fontgrp.o(.text.s_08003B48)	fontgrp:PrintNumberAsOBJ region-same Thumb (descriptive incbin)
 003B6C	003B90	asm/stranded_fontgrp.o(.text.s_08003B6C)	fontgrp:PrintHexNumberAsOBJ region-same Thumb (descriptive incbin)
 003C68	003C8C	asm/stranded_fontgrp.o(.text.s_08003C68)	fontgrp:SetTextFont region-same Thumb (descriptive incbin)
-003C8C	003CB4	asm/stranded_fontgrp.o(.text.s_08003C8C)	fontgrp:InitText region-same Thumb (descriptive incbin)
-003CB4	003CDC	asm/stranded_fontgrp.o(.text.s_08003CB4)	fontgrp:InitTextDb region-same Thumb (descriptive incbin)
-003CDC	003CF8	asm/stranded_fontgrp.o(.text.s_08003CDC)	fontgrp:InitTextInitInfo region-same Thumb (descriptive incbin)
-003D70	003D80	asm/stranded_fontgrp.o(.text.s_08003D70)	fontgrp:Text_GetChrOffset region-same Thumb (descriptive incbin)
-003D88	003D90	asm/stranded_fontgrp.o(.text.s_08003D88)	fontgrp:Text_Skip region-same Thumb (descriptive incbin)
-003DA0	003DEC	asm/stranded_fontgrp.o(.text.s_08003DA0)	fontgrp:PutText region-same Thumb (descriptive incbin)
-003DEC	003E0C	asm/stranded_fontgrp.o(.text.s_08003DEC)	fontgrp:PutBlankText region-same Thumb (descriptive incbin)
-004120	004140	asm/stranded_fontgrp.o(.text.s_08004120)	fontgrp:GetTextDrawDest region-same Thumb (descriptive incbin)
-0044E0	004504	asm/stranded_fontgrp.o(.text.s_080044E0)	fontgrp:InitSpriteText region-same Thumb (descriptive incbin)
-0045E8	004608	asm/stranded_fontgrp.o(.text.s_080045E8)	fontgrp:GetSpriteTextDrawDest region-same Thumb (descriptive incbin)
-004874	00487C	asm/stranded_fontgrp.o(.text.s_08004874)	fontgrp:IsTextPrinting region-same Thumb (descriptive incbin)
-0048E8	00493C	asm/stranded_fontgrp.o(.text.s_080048E8)	fontgrp:DrawSpecialCharGlyph_old region-same Thumb (descriptive incbin)
+003C8C	003CB4	src/InitText.o(.text)	handdecomp
+003CB4	003CDC	src/InitTextDb.o(.text)	handdecomp
+003CDC	003CF8	src/InitTextInitInfo.o(.text)	handdecomp
+003D70	003D80	src/Text_GetChrOffset.o(.text)	handdecomp
+003D88	003D90	src/Text_Skip.o(.text)	handdecomp
+003DA0	003DEC	src/PutText.o(.text)	handdecomp
+003DEC	003E0C	src/PutBlankText.o(.text)	handdecomp
+004120	004140	src/GetTextDrawDest.o(.text)	handdecomp
+0044E0	004504	src/InitSpriteText.o(.text)	handdecomp
+0045E8	004608	src/GetSpriteTextDrawDest.o(.text)	handdecomp
+004874	00487C	src/IsTextPrinting.o(.text)	handdecomp
+0048E8	00493C	src/DrawSpecialCharGlyph_old.o(.text)	handdecomp
 004A14	004A50	asm/stranded_fontgrp.o(.text.s_08004A14)	fontgrp:PutSpecialChar region-same Thumb (descriptive incbin)
 004A90	004A9C	asm/stranded_fontgrp.o(.text.s_08004A90)	fontgrp:PutNumber region-same Thumb (descriptive incbin)
 004AEC	004AF8	asm/stranded_fontgrp.o(.text.s_08004AEC)	fontgrp:PutNumberSmall region-same Thumb (descriptive incbin)
