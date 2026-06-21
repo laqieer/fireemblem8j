@@ -6817,3 +6817,21 @@ RESULT: code-from-archive 488 -> 14612 bytes (30x), data-from-archive 0 -> 414 b
 18.84% -> 17.13%. All 4 oracle axes intact (self-contain/extracted-data 100%, matching-C 92.66%).
 Objects linked: __divsi3/__modsi3/__udivsi3/__umodsi3, memchr/memmove/isinf/isnan, stdio, dp-bit, fp-bit,
 mprec, vfprintf, findfp (+ the original memcpy/memset/strcpy/strlen/__ashldi3/__muldi3).
+
+## D266 — libc/libgcc linking COMPLETE + func_lib metric (matching-C 92.66% -> 93.80%)
+Per "lib funcs count as completed in code/data/FUNC metrics; do not leave lib functions".
+1. FUNC METRIC FIX (commit e2c336db0): calcprogress now counts functions linked from libc.a/libgcc.a
+   (the global T symbols, incl. real __-prefixed libgcc/newlib fns, which ARE in the JP funcmap) as
+   COMPLETED in the MATCHING-C axis (new func_lib term), mirroring code_lib/data_lib. This makes linking
+   a lib object an IMPROVEMENT even when it replaces a few decompiled src fns.
+2. LINKED THE LAST TWO (entangled) objects:
+   - syscalls.o (commit ecf302db5): split across 13 region-diff asm + 6 incbin + 4 DECOMPILED matching-C
+     (_fstat/sub_80DA784/sub_80DA7D0/nullsub_112) + embedded .text data table (data_080DA744) + shared
+     .rodata residue. Whole .o: .text@0x080DA3C8, .rodata@0x085775A4 (split the shared data_085775A4
+     residue -> data_085775C9 keeps the other 47B), .bss NOLOAD@0x03002B30 (the .bss SECTION base is
+     0x10 below the first .bss symbol -- decode the section base, not a symbol). Bound `end`@0x0203EFB4.
+   - libcfunc.o (commit c819d2e3b): abort/isatty/alarm, 40B .text-only, no externals.
+RESULT: ALL libc/libgcc functions in the ROM are now linked from the real archives (none left as asm/
+incbin) -- code-from-archive 488 -> 15776 bytes (32x), data 0 -> 451 bytes, 'in asm' 18.84% -> 17.01%,
+MATCHING-C 92.66% -> 93.80% (7896 src + 103 lib / 8528). All 4 oracle axes intact (self-contain/
+extracted-data 100%). Cold `make clean && make compare` OK. .bss base = section base, not symbol addr.
