@@ -6361,3 +6361,13 @@ code bytes; full cold make compare confirms bmio_0803082C.o range unchanged). di
 LESSON: before binding a callee in baseline_syms, check it isn't already carved in a
 src/*.o — a duplicate define link-errors; the fix for an already-carved-but-static
 callee is to globalize it, not re-bind it.
+
+## D231 — ProcCmd_SET_BIT4: ProcCmd handler direct port (+1 matching-C, 7803→7804)
+`ProcCmd_SET_BIT4` (JP 0x080032C8, 24B; fe8u src/proc.c). A dedicated named asm file
+(region-different per gbadisasm D23) that is actually a byte-identical direct port:
+`proc->proc_flags |= PROC_FLAG_UNK2; proc->proc_scrCur++; return TRUE;` — JP asm sets
+bit 2 of the 0x27 flags byte, advances proc_scrCur (+8 = one ProcCmd), returns 1.
+Kept it GLOBAL (a still-asm ProcScr table `bl`s it). Only blocker: PROC_FLAG_UNK2 is a
+TU-local enum `(1<<2)` in fe8u proc.c, undeclared in JP headers — defined the same enum
+locally. diff 0. The dedicated-named-asm THUMB files (non-sub_) are a fresh small vein:
+ProcCmd_*, Wfx*, trivial handlers that gbadisasm tagged region-diff but port directly.
