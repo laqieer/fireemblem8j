@@ -1,2 +1,2 @@
-089D58	089D64	asm/stranded_statscreen.o(.text.s_08089D58)	statscreen:PageSlide_OnEnd region-same Thumb (descriptive incbin)
-08AE8C	08AEA0	asm/stranded_statscreen.o(.text.s_0808AE8C)	statscreen:HbPopulate_SSClass region-same Thumb (descriptive incbin)
+089D58	089D64	src/PageSlide_OnEnd.o(.text)	handdecomp
+08AE8C	08AEA0	src/HbPopulate_SSClass.o(.text)	handdecomp

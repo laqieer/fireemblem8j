@@ -6571,3 +6571,12 @@ Session total +113 (7767→7880, 92.40%). Stranded-section vein largely harveste
 fontgrp(25), hardware(6), proc(5), prepscreen(4), bmbattle(3), +3 singles, BMapVSync(2).
 Remaining stranded CFAIL: minimap(3), statscreen(2), icon, prep_itemsupply, unitlistscreen,
 proc Proc_End; _unmapped 44 libgcc/newlib = ceiling.
+
+## D249 — statscreen + minimap stranded (+4 matching-C, 7880→7884)
+statscreen: PageSlide_OnEnd, HbPopulate_SSClass (extern `struct StatScreenSt gStatScreen`
+@0x02003BFC, bound absolute — EWRAM_OVERLAY global, extern = no BSS). minimap: Minimap_OnHBlank,
+InitMinimapWindowBuffers (extern the bound s16* window-buffer globals gMinimapWinBuf/Front/
+Back/Displayed + gMinimapObjectFlashPal + Minimap_Init proto). 4×diff 0. minimap
+InitMinimapFlashPalette deferred (needs Minimap_AdjustDisplay + Minimap_InitOpenAnim protos +
+had cascading parse errs). Remaining stranded: icon GetNextFreeIcon (static registry),
+prep_itemsupply, unitlistscreen, proc Proc_End, minimap×1.
