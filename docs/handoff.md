@@ -9,12 +9,21 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## ⏩ CURRENT STATE — 2026-06-20 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
 
 **main `96b7f6097`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **91.35%** (7790/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
+matching-C **91.37%** (7792/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
 `banim_`/`gfx_`/`snd_` asset-sheet labels are fe8u's own auto-naming, un-named in fe8u too → named
 can't reach 100% → the 4-axis Oracle is structurally unreachable; user directive is "keep driving
 matching-C").
 
-**This session: +23 matching-C carves (7767→7790), D203–D221b.** FRESH VEIN — the omit-screen +8-delta
+**This session: +25 matching-C carves (7767→7792), D203–D223.** TWO NEW levers this turn: (1) **JP
+msgid const** — a MODERATE diff (D222 PrepScreen_StartUnitSwap, diff 42) can be ONE wrong msgid
+(MSG_872/0x872 → JP 0x7F0); always IDA-diff the GetStringFromIndex args before assuming codegen. (2)
+**extern-inline + embedded-table gap-split** (D223 GetItemDisplayRangeString) — a fn with a LOCAL const
+table (msgid lookup) whose table is region-different (JP values) AND placed FAR in .rodata: extern-inline
+its accessors, set the table to JP values, and gap-split the owning residual INCBIN around the .rodata
+(here frontier_df4_misc_lo.gap0b2 → split 359,205 into 359,133 + new gap0b2b 532,32, hole at 0x0DC608).
+sadiff (.text-only) is BLIND to the far .rodata table — full make compare is the gate. SIBLING NOTE:
+GetItemDisplayRankString (sub_8016B3C) has the same shape but .text diff 52 (var if-else logic harder) —
+its table is the gap0b2b region (now correctly incbin'd), so leaving it asm is valid. **(earlier) +23 (D203–D221b).** FRESH VEIN — the omit-screen +8-delta
 bucket (US 8 bytes bigger than JP) = a **double-extension cast-hoist** class: an s8/s16 param ZERO-extended
 then RE-SIGN-extended (8 redundant bytes); `int x=(s8/s16)param` collapses it. Wins: BrownTextBox_SetBlendFlag
 (D220), BgAffinScaling+BgAffinAnchoring (D221/b — cast-hoist the s16 params, declare them BEFORE the
