@@ -43,7 +43,19 @@ coddog region_same_candidates (125/144 carved; the 19 leftovers = 11 libc + 2 co
 (`asm/<Name>.s` down to libc/SRAM: SetSramFastFunc/VerifySramFast_Core are the REG_WAITCNT r0↔r1 reg-swap
 dead-end even under fe8u's -O1; _Balloc/malloc_extend_top/j_ClearOam = newlib/veneer ceiling).
 
-**NEXT VEIN (only per-function work left):** IDA cascade-root on the region-different sub_/named Draw/Init/
+**ALIASED-FUNCTION FRONTIER MAPPED (this iter):** screened all 341 US-name-aliased still-asm sub_;
+150 compiled (`reference/aliased_func_screen.txt`, name addr diff): 0 MATCH, 7 NEAR (diff 2-6 — ALL
+reg-alloc/scheduling/sign-ext dead-ends: GmMuPrim_TrackMovementDelta/ReadSramFast/WriteSramFast/MoveUnitExt/
+RegisterBanimTerrainTmByPos/ClassChgSel_StartClassBattleSprite/FilterBattleAnimCharacterPalette — the
+NEAR diffs are prologue register-list/push-reg differences, NOT single-const), 6 CLOSE (diff 8-21:
+WeaponSelectMenu_Draw, ColorFadeSetup×4 [pointer-load scheduling], AddGorgonEggTrap), 137 FAR (region-diff).
+191 CFAILed = DECL_ONLY candidates (a bound symbol undeclared in JP headers — the highest-yield *remaining*
+lever, but slow per-function: fix the decl, re-sadiff). So NO fast batch win remains — confirmed by exhaustive screen.
+
+**NEXT VEIN (only per-function work left):** (a) DECL_ONLY sweep the 191 aliased CFAILs (add the missing
+extern/proto of the bound symbol → some become MATCH/NEAR); (b) permuter on the low-base NEAR reg-alloc
+(diff 5-6: RegisterBanimTerrainTmByPos, FilterBattleAnimCharacterPalette — fresh, not the stuck MoveUnitExt/
+ClassChgSel/WeaponSelect); (c) IDA cascade-root on the region-different sub_/named Draw/Init/
 Display bucket — open `fireemblem8.elf.i64`, decompile a fn, find the single JP const/msgid/omitted-call/
 extra-call root, fix, verify cold make compare. Slow (~many tool calls per +1). Levers proven D203-D228:
 JP-msgid + TU-local-struct DECL, omitted-call, extern-inline accessor, cursor+extra-Text_DrawString,
