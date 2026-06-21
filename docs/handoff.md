@@ -9,12 +9,20 @@ getting SIGTERM-killed mid-task and the frontier is now region-different.)
 ## ⏩ CURRENT STATE — 2026-06-20 PUA-LOOP MATCHING-C DRIVE (READ THIS FIRST; newest)
 
 **main `96b7f6097`+, green (`make compare` OK), self-contained 100%.** Axes: self-contain **100%** ·
-matching-C **91.30%** (7786/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
+matching-C **91.31%** (7787/8528) · extracted-data **100%** · named **85.48%** (capped — ~1611
 `banim_`/`gfx_`/`snd_` asset-sheet labels are fe8u's own auto-naming, un-named in fe8u too → named
 can't reach 100% → the 4-axis Oracle is structurally unreachable; user directive is "keep driving
 matching-C").
 
-**This session: +19 matching-C carves (7767→7786), D203–D218.** Latest: D218 StartTalkFaceMove
+**This session: +20 matching-C carves (7767→7787), D203–D219.** D219 DrawLinkArenaLoadingScreen
+(JP omits a `Text_SetCursor(GetStringTextCenteredPos(...))` centering line + msgid 0x77D→0x4D + raw-addr
+unbound gUnk_Sio_6 @0x0203DA74). MORE DEAD-ENDS (SKIP): Title_SetupSpecialEffectGraphics (JP adds an
+extra graphics-load block to case 4 [gfx@0x08B4B200→0x06015800, pal@0x08B4BB80, idx 0x18] + restructures
+the switch so all cases share the increment; restructure got byte-diff 38→20 but literal-pool placement +
+reg-alloc r5 block it, permuter base 1620 = hopeless), Sio_RasterRotatedBoxToWinBuf (full codegen mismatch
+335, fixed-point math), WmSell_OnLoop_MainKeyHandler (StartItemHelpBox 3→2 args + condition-inversion +
+accessor-inline + inlined PlaySoundEffect, multi-part), GetUnitStructFromEventParameter (switch-lowering).
+**This session: +19 (7767→7786), D203–D218.** Latest: D218 StartTalkFaceMove
 (DECL_ONLY gProcScr_TalkFaceMove + cast-hoist s8 isSwap held across Proc_Start). MORE DEAD-ENDS confirmed
 (SKIP): GetUnitStructFromEventParameter (switch-lowering, pervasive), PrepItemScreen_DrawVisibleUnitNames
 (loop codegen), Text_DrawNumber (literal-pool placement + shifted-domain char), GmapRmUpdateExt_ScrollPosition
