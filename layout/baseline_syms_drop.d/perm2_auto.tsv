@@ -229,3 +229,4 @@ GetBonusContentClaimFlags
 ShopSt_SetHeadLocBak
 CallEvent
 IsActiveEventTextTypeOnMap
+TryRelocateHbRight
