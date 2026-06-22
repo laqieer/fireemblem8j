@@ -218,3 +218,6 @@ fireemblem8.elf.i64
 
 # local learning reference (community-matched scratches from decomp.me; not redistributed)
 docs/refs/decompme_fe/
+
+# local learning reference (Discord exports; not redistributed)
+docs/refs/discord/
