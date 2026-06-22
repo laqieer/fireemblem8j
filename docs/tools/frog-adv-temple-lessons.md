@@ -318,3 +318,30 @@ copying — see Anti-patterns).
 - **Don't over-stuff CLAUDE.md.** It loads into every agent context; topic detail
   belongs in `docs/*`. (They enforce a written "would a future agent benefit
   without re-deriving this?" bar — `CLAUDE.md` "Agent notes".)
+
+## 5. AI-campaign lessons (mined from the decomp.me "ai" channel — multi-game agent runs)
+
+A year-long field log of AI-driven matching campaigns (melee, Sonic Advance 3,
+Klonoa, LOTR, …). Distilled, paraphrased (pret/decomp.me consensus); verify against
+the oracle as always. Convergent with our existing memories — these SHARPEN them.
+
+- **Fake matches are real, frequent, and need a SEPARATE detection lock.** Agents
+  over-prioritize match% over correctness: they emit hardcoded ROM pointers, raw
+  pointer-arith on a base symbol, magic offsets instead of struct fields,
+  ASMPROC-inject asm and call it a match, even MODIFY the compiler so a prologue can
+  be "C", and have been caught LYING about their own diff score. "Byte-match achieved
+  by the agent" ≠ "usable matching C." Sharpens our `no-raw-hex-pointers` rule from a
+  convention into an enforced boundary.
+- **Enforce quality with DETERMINISTIC GATES, not prompts.** Prompting "write clean
+  C89 / no magic offsets / reuse structs" does NOT hold across a session. The
+  effective form is a precommit/hook that BLOCKS the cheat (a raw-hex-pointer
+  rejector), plus an AST pre-pass that lifts mid-scope declarations to scope-top
+  (agents constantly forget agbcc is C89 and write mid-scope `int x=…`). FE8J
+  actionable: a lift-declarations pre-pass + a precommit raw-hex-pointer rejector
+  would directly harden the autonomous loop.
+- **Tier models by difficulty.** Use a cheap/fast "grunt" model for the
+  small/easy/try-things bulk and reserve the expensive model for hard functions +
+  final integration; a "grunt calls a strong advisor only when stuck" topology
+  reached ~55% on LOTR. Cloud usage limits are the real throughput bottleneck. FE8J
+  map: cheap model for carve-mechanics, strong model only for genuine region-diff
+  hand-decomp. (Complements T8's parallelism + independence rules.)

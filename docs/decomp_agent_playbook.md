@@ -16,6 +16,19 @@ Do **not** mark DEADEND for a codegen/scheduling/register difference. DEADEND is
 actually DATA mis-split as code (decodes to garbage / incoherent control flow). Everything else is
 UNSOLVED at worst. If you're tempted to give up, you're missing a lever below.
 
+**Two clean hand-asm TRIAGE signals (case (a) — no C exists, stop grinding).** agbcc compiled from C
+**never** does either of these, so their presence in the target is strong evidence the region is
+hand-written asm, not agbcc-C:
+- **Flag-setting arith as a branch condition.** agbcc always emits an explicit `cmp` before a
+  conditional branch — it never reuses the flags from a `subs`/`adds`/`ands`. A `subs;bgt` (no `cmp`
+  between) in the target = handwritten asm, NOT matchable from C.
+- **`tst`.** agbcc CANNOT emit `tst` (it lowers a mask test to `mov #mask; and; cmp #0; b…` — see
+  §7b). A `tst` in the target ⇒ not agbcc-C ⇒ likely handwritten (the only `tst` users are m4a /
+  old_agbcc TUs, themselves hand-tweaked).
+
+(pret asm2c consensus. These sharpen — they do NOT relax — §0: a flag-arith/`tst` region is the rare
+genuine case (a), everything else is still UNSOLVED, not a "wall.")
+
 ## 1. Codegen levers (empirically proven against this exact agbcc)
 - **lsr vs asr = signedness of the shifted operand ONLY.** `(u32)x>>n`→lsr, `(s32)x>>n`→asr.
   Signed sub-word sign-extends fused: `s16 field >>n` = `lsl#16;asr#(16+n)` (unsigned = lsl;lsr).
@@ -49,16 +62,59 @@ UNSOLVED at worst. If you're tempted to give up, you're missing a lever below.
 - **arg-evaluation order & prologue save-mask are NOT walls (source-proven, see `agbcc_internals.md`):** thumb agbcc loads call args strictly LEFT-TO-RIGHT (arg0→r0…) — fixed, so a wrong rN↔value mapping is a PROTOTYPE/arg-expression bug (match param types/count exactly, mind PROMOTE_PROTOTYPES widening s8/s16 to a full reg + struct-return's hidden sret arg), not an order knob. The prologue PUSH mask = callee-saved regs r4-r7 that are `regs_ever_live`; a `register asm("rN")` IS added to the push (no asm-pin-excluded quirk) — so pin to match a JP save.
 - **struct-field offset diffs** (a literal resolves ±N): the struct layout in the header differs
   from JP — usually a JP-specific field offset; fix the struct or use the right field, don't force.
+- **force a RELOAD across a GCSE hoist.** agbcc's GCSE will load `a->f` ONCE and reuse it across both
+  arms of `if(c){x=a->f;}else{x=a->f;}` (or before/after a call) — when JP loads it TWICE, force the
+  second load with `asm("" ::: "memory");` before the 2nd read (scoped `-fno-gcse`), or declare the
+  pointer/field `volatile`. Common near-miss fix; see `agbcc_internals.md` GCSE rule. (pret asm2c
+  consensus; a real pokeemerald sound comment cites `-fno-gcse`.)
+- **carve the CALLER to unlock a callee's regalloc.** A `sub_` that won't byte-match in ISOLATION
+  (a regalloc/spill permutation) can spontaneously match once a function that CALLS it is compiled in
+  the same build — inter-procedural register pressure nudges the callee's allocation. Try carving the
+  caller BEFORE declaring UNSOLVED. (Mechanistically consistent with the agbcc_internals reg-alloc
+  call-crossing rule; pret asm2c consensus.)
+- **unused-pointer address pin.** An UNUSED local pointer assigned an element address
+  (`unused = &arr[i];`) forces that address to be COMPUTED at that point (not optimized away at -O2),
+  matching a redundant address-load the JP asm has but your C dropped. (pret asm2c consensus.)
+- **benign allocator nudges (byte-neutral logic, reorder regalloc).** Before a `register asm("rN")`
+  pin (a SMELL — heavy reliance usually means wrong compiler version/flags or an undiscovered C shape;
+  audit and remove), try: an empty `do{}while(0);` (zero instructions, shifts subsequent stack-local
+  DECL ORDER → sp offsets); a `++var;--var;` / `--var;++var;` pair; a self-assign `T*x = x = expr;`;
+  `asm("":::"rN")` clobber to evict a reg; a `static inline` helper; or a 2D-array vs array-of-struct
+  swap to flip a regswap. Local struct/array DECLARATION ORDER = sp-offset order (earlier decl = higher
+  sp); reordering struct-local decls changes offsets and where the `ldmia/stmia` block-copy lands.
+  (decomp.me ai / pret asm2c consensus.)
+- **`-O3` ≠ extra opts on GCC 2.95.** `-O3` = `-O2` + automatic inlining of `static` functions, nothing
+  else. An -O3 TU matches an -O2 build if you mark the inlined statics `inline`. FE8J builds -O2.
+- **struct-return (sret) = hidden r0 output-pointer.** A function returning a struct by value takes a
+  HIDDEN output pointer in r0; explicit args shift to r1,r2,…; the callee stores through `*r0` (no
+  r0/r1 return value), and the caller pre-allocs a stack slot and loads `r0=sp` before the call. If JP
+  has this shape, declare the return type as the struct (don't fake it with an out-param). See
+  `agbcc_internals.md` arg-eval-order for the CUM=4 mechanism.
 
 ## 2. Identifying UNNAMED sub_ (no .global name)
 A `sub_<addr>` with no US name is almost always a REAL function (FE8 dispatches heavily through
 function-pointer tables — proc command lists, handler LUTs, AI scripts — so absence of a direct
 `bl <name>` means nothing; the pointer lives as a raw `addr|1` word in incbin'd ROM data).
+- **easiest-first anchors**: start ID from the SELF-identifying classes — functions that reference a
+  known string (incl. a pool `.word`→SJIS text addr), BIOS-call wrappers (`svc #NN`), and known-MMIO
+  hardware-register accesses (a pool literal that is a `0x0400xxxx` address). These pin a function with
+  near-zero ambiguity; clear them before grinding on fingerprints. (pret asm2c consensus.)
+- **caller-side asset-name strings**: name/type an asset-handling function from a file/asset-name string
+  XREF'd by its CALLER (not only in the body) — generalizes the SJIS-string ID one level up the call
+  graph. (pret asm2c consensus.)
 - **callee-fingerprint**: the NAMED `bl` targets + their ORDER identify the fe8u function. grep
-  fe8u/src for the rarest callees; confirm the bl SEQUENCE matches `asm/sub_<H>.s`.
+  fe8u/src for the rarest callees; confirm the bl SEQUENCE matches `asm/sub_<H>.s`. (Require BOTH a
+  callee-Jaccard ≥0.7 AND the correct positional delta — one signal alone mislabels.)
 - **function vs DATA**: decide ONLY by disassembly coherence (valid instructions, sane control
   flow, prologue/epilogue or clean leaf). The call-graph CANNOT prove "data." If it decodes to
   garbage → DATA (report it for reclassification, don't carve as code).
+- **function vs intra-function-`bl`-target (disassembler "fake function" — re-merge, don't carve)**:
+  in a large enough function agbcc emits `bl <addr-inside-this-function>` (the BL encoding reaches
+  farther than a `b`), and a disassembler MIS-SPLITS that inner address as a separate `sub_`. A
+  `sub_<addr>` whose ONLY inbound ref is a `bl` from the immediately-preceding function AND that has
+  no real prologue is almost certainly the TAIL of that preceding function — re-merge it, do NOT carve
+  it as its own object. (pret asm2c consensus; see also `agbcc-matching-playbook.md` §4 "bl for long
+  intra-function branches — DO NOT CHASE.")
 - If no fe8u match: the JP function may be region-DIFFERENT or JP-only — hand-decompile from the
   asm + struct field offsets (this works; e.g. ProcEfx loops were reconstructed from scratch).
 
@@ -109,6 +165,22 @@ These were discovered by reconstruction agents and promoted here so every agent 
   addr (the "primary" copy). The unnamed one is the duplicate/`_unused` variant — carve it under the
   distinct US name (e.g. `MapAnim_PlayStealSe_Unused`), it is NOT a collision. Verify with
   `git ls-files` which name is taken.
+- **FE8 worldmap INVERTED array indexing** (FE8-specific): worldmap code is written
+  `proc->confs[i].node[gWMNodeData]` instead of `gWMNodeData[proc->confs[i].node]`. In C `a[b]==b[a]`
+  (byte-identical), so when a worldmap access looks index-backwards, swap the index order to match the
+  source's idiom. (pret asm2c consensus.)
+- **FE8 worldmap proc patterns** (FE8-specific): worldmap proc functions call `Proc_Break(proc)` and
+  access proc fields by RAW byte offsets (e.g. `*(((u8*)proc)+0x9F)`) where the header layout differs
+  from the named struct — the raw field-offset cast is the valid matching pattern here. (This is a
+  field-offset cast on a KNOWN proc base, NOT a raw-hex ROM pointer — the `no-raw-hex-pointers` rule
+  still applies to ROM addresses.) Combine with the inverted-index idiom above. (pret asm2c consensus.)
+- **don't "fix" matching UB**: agbcc evaluates the undefined-order `arr[i].field = ++i;` RIGHT-TO-LEFT
+  (`++i` first, the store uses the OLD address) and it MATCHES including regalloc. If the JP source has
+  this shape, write it verbatim — do not normalize the evaluation order. (pret asm2c consensus.)
+- **per-TU duplicated string/const = TU boundary marker**: every TU that `#include`s a header defining
+  a string / inline / const emits its OWN copy, so a duplicate string/const blob in the ROM marks a TU
+  boundary. Use it to corroborate where one fe8u `.c` ends when re-pointing splits onto JP. (pret asm2c
+  consensus; complements the §8 source map.)
 
 ## 6. Knowledge-sharing protocol (how this file stays current)
 Every agent MUST, in its structured result, populate a `discovered_technique` field whenever it
@@ -120,6 +192,12 @@ discoveries die in per-function prose — the gap this protocol closes.)
 ## 7. agbcc asm-idiom → C dictionary (inverse compilation; verified against the binary)
 Read the JP asm idiom, write the C that produces it. (Starter set — verified by compiling C through
 tools/agbcc/bin/agbcc -O2; extend by mining fe8u's real .c↔agbcc-.s pairs.)
+
+**The load/store mnemonic is the field TYPE ORACLE — uncastable.** `ldrh`=u16, `ldrsh`=s16,
+`ldrb`=u8, `ldrsb`=s8; `strh`=16-bit store, `strb`=8-bit. A post-load cast does NOT change the emitted
+instruction — to match a given load you must DECLARE the field that exact signedness/width. This is the
+single most reliable struct-field diagnostic: read the load width/signedness off the JP asm and set the
+field type to match. (pret asm2c/agbcc consensus, corroborated across channels.)
 - `ldrb r,[b,#o]` (bare)                  → **u8** field/var.
 - `ldrb r,[b,#o]; lsl#24; asr#24`         → **s8** field (sign-extended on read).
 - `ldrh r,[b,#o]`                          → **u16** field.
@@ -130,6 +208,16 @@ tools/agbcc/bin/agbcc -O2; extend by mining fe8u's real .c↔agbcc-.s pairs.)
   do NOT int-widen here. (int-widen is the OPPOSITE fix — for when JP sign-extends ONCE at entry.)
 - `mov r1,#N; bl __divsi3` → `int / N`; `bl __udivsi3` → `unsigned / N`; `__modsi3`/`__umodsi3` → `%`.
   **agbcc never strength-reduces division** — every `/`,`%` by a non-pow2 is a libcall. (pow2: `>>`/`&`.)
+  The signed-vs-unsigned div libcall follows the **WHOLE expression type, not just the field**: a `u16`
+  field `/ int N` emits `__divsi3` (the u16 zero-extends to a non-negative s32), while `u16 / (u32)N`
+  emits `__udivsi3`. Match the libcall first, then back out the cast. (pret asm2c consensus.)
+- `rsbs rN,rN,#0` (IDA/gbadisasm) == agbcc `neg rN,rN` → write **`-x`** (or `x*-1`); byte-identical, do
+  NOT confuse with a 3-operand RSB.
+- `ldr rN,=val` (pool literal) is used for **ANY non-trivial constant even when it fits `movs #imm8`**,
+  because `movs` sets flags and Thumb16 has no flag-safe `mov #imm`. A pool load for a small constant
+  does NOT imply a JP-specific value — read the pool `.word` for the real value before assuming a diff.
+- `*(volatile S*)ptr;` as a bare statement → a real load with the result **discarded** (agbcc keeps
+  volatile loads). Appears in HW-register checks / stubbed asserts; emit the bare volatile-cast read.
 - `… cmp #0; beq L; mov rX,#V; L:` with the OTHER value moved first → **ternary** `c ? V : other`
   (the "else" value is materialized first, the branch skips the override → drives branch polarity).
 - `cmp #hi; bgt def; cmp #lo; blt def; lsl#1; …` → **dense switch** lowered to a bounds-check + jump
@@ -336,6 +424,14 @@ Each entry's `example` is real agbcc output. Read JP asm idiom → write the C c
 - **`identical asm to a single &&: cmp r0,#0; beq Lfalse; cmp r1,#0; beq Lfalse; (body)`** ⟸ nested if (a) { if (b) {...} }  ==  if (a && b)  
   _Nested ifs with no else collapse to the && form bit-for-bit, so either source form matches. Useful when JP's structure is ambiguous — pick whichever reads cleaner._  
   `ex: cmp r0, #0 ; 	beq .L17 ; 	cmp r1, #0 ; 	beq .L17 ; 	mov r0, #0x7`
+- **`if(a||b){X}else{Y}` and the `if(a){X}else if(b){X}else{Y}` chain emit DIFFERENT asm — write the structure AS IT APPEARS`** ⟸ choosing between the OR form and a duplicate-body else-if chain  
+  _agbcc does NOT collapse two identical else-if bodies into the `||` form: it cross-jumps the shared TAILS but keeps DISTINCT condition branches per disjunct. So an `if(a){X}else if(b){X}else{Y}` (two separate `cmp`/branch tests reaching one X block) is byte-different from `if(a||b){X}else{Y}` (short-circuit OR). Match the JP's actual condition structure; don't "simplify" a duplicate-body chain into an `||`. (pret asm2c consensus.)_
+- **`falls straight into a `do{}while` body (no entry `cmp;b` guard)` vs `top `cmp;b<cc>` guard before the body`** ⟸ counted loop with a CONSTANT positive bound vs a RUNTIME bound  
+  _`for(i=0;i<POSITIVE_CONSTANT;i++)` folds to a bottom-test do-while with NO entry guard (the first iteration is provably taken); a RUNTIME bound keeps the entry guard. When you must reproduce the guarded form (runtime bound) the C shapes are `while(1){...;if(c)break;}` or `if(x){do{}while(x);}`. Pick the loop form whose guard-presence matches JP. (Reinforces the constant-bound entry at the top of §7b.)_
+- **`a too-large `add sp,sp,#-N` / extra stack store for a local that is never spilled by pressure`** ⟸ taking `&localVar` (incl. implicitly by passing its address to a function)  
+  _Taking the address of a local FORCES that local onto the stack (it can no longer live purely in a register), which explains "too-large" sp setups and a stack slot for a variable that the body otherwise keeps in a reg. If JP has the extra frame, the source took an address you didn't. (pret asm2c consensus.)_
+- **`ldrb/ldrh; and/or with a mask; strb/strh  (read-modify-write)` may differ from a manual `&mask | val<<pos``** ⟸ a struct BITFIELD (`:N`) vs hand-rolled bit-ops  
+  _When manual `field = (field & ~mask) | (val<<pos)` near-misses the JP RMW sequence, try declaring the member as a real C bitfield (`unsigned x : N;`) — agbcc's bitfield lowering can differ from the manual bit-ops. (See §7 memory-structs for the exact bitfield-read/write shapes.)_
 - **`mov rT,#MASK; and rT,rT,rflags; cmp rT,#0; beq skip  — agbcc loads the mask into a reg and ANDs (does not use tst)`** ⟸ if (flags & MASK) ...  (bit-test branch)  
   _agbcc emits `mov #mask; and; cmp #0; beq` rather than `tst`. For masks needing a pool literal (mask > 0xFF and not a shifted-immediate) it loads via `ldr rT,=mask` instead of `mov`._  
   `ex: mov r1, #0x40 ; 	and r1, r1, r0 ; 	cmp r1, #0 ; 	beq .L15`
@@ -351,6 +447,9 @@ Each entry's `example` is real agbcc output. Read JP asm idiom → write the C c
 - **`...load fn-ptr into rP...; <args set in r0-r3>; bl _call_via_rP where the fn-ptr is materialized AFTER the arg registers`** ⟸ struct-field / variable fn-pointer call p->handler(a,b). The pointer (ldr [base,#off]) is loaded LAST, after r0..r3 args are placed; arg regs are filled via scratch-then-shuffle (add rN,rX,#0).  
   _If you place the ptr load first, you get a near-miss reorder diff. Match by writing the call so the callee-ptr expression is the call target (lowered last). bmshop.c gShopState->draw_line(...) is the real fe8u instance._  
   `ex: ldr r2, [r0, #0x4] ;  ldr r1, [r0, #0x8] ;  ldr r3, [r0] ;  add r0, r2, #0 ;  bl _call_via_r3`
+- **`ldr rN,[sp,#off]; lsl#24;lsr#24 (u8) / lsl#16;lsr#16 (u16) — a WORD load + shift-narrow, NOT a narrow ldrb/ldrh`** ⟸ reading back a stack-spilled narrow ARG (the 5th+ arg, or any narrow param re-read from the incoming stack)  
+  _Distinguishes a spilled-arg read from a struct/global field read: agbcc spills/reloads a u8/u16 arg as a full word then masks with lsl;lsr (signed=lsl;asr), whereas a struct/global narrow field uses a real `ldrb`/`ldrh`. Introduced by the Oct-2003 agbcc patch (this build has it). Don't "fix" the word load to a narrow load — it is the spilled-arg form. (pret asm2c consensus.)_  
+  `ex: ldr r0, [sp, #0x10] ;  lsl r0, r0, #0x18 ;  lsr r0, r0, #0x18    @ u8 5th arg reloaded`
 - **`add sp,sp,#-K; <set r1-r3>; ldr r4,[sp,#orig]; str r4,[sp]; ldr r5,[sp,#orig2]; str r5,[sp,#4]; bl f; add sp,sp,#K`** ⟸ >4 args: 5th+ args go on the stack. agbcc reserves the outgoing frame (add sp,#-K, K = 4*(nargs-4) rounded), fills r0-r3 normally, then materializes stack args at [sp], [sp,#4]... For pass-through params it RE-LOADS them from the now-shifted incoming stack (offset += K).  
   _Critical: incoming caller-stack args get offset by +K after the sub-sp, so [sp,#0xc] for the 5th param of a fn that itself spilled. Computed/const stack args reuse ONE scratch reg (r4): add r4,r0,#5; str r4,[sp]; add r4,r0,#6; str r4,[sp,#4]._  
   `ex: add sp, sp, #-0x8 ;  ldr r4, [sp, #0x14] ;  ldr r5, [sp, #0x18] ;  str r4, [sp] ;  str r5, [sp, #0x4] ;  bl f6`

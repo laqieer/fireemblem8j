@@ -157,6 +157,37 @@ list whose items each carry a per-symbol `fuzzy_match_percent`. The top-level
 `measures` is the project-wide roll-up — that is the number to watch climb
 toward 100%.
 
+## GBA / Thumb gotchas (pret/decomp.me consensus — verify per-object)
+
+Mined operator experience running objdiff on GBA/Thumb objects, beyond the
+ARM-support facts above:
+
+1. **Needs objdiff ≳3.7 for Thumb-branch relocs.** Older objdiff refuses an object
+   carrying `R_ARM_THM_JUMP8` / `R_ARM_THM_JUMP11` relocs. (This repo ships 3.7.2,
+   so we are clear — but pin ≥3.7 if `setup.sh` ever fetches an older asset.)
+2. **Data-after-function makes it over-read trailing data as code** (very common in
+   FE: rodata/pools right after a function). objdiff then shows phantom diffs like
+   `.hword 0x0` vs `lsl r0,#0`. Fix with accurate symbol **`.size`** / bounds — the
+   same sizing discipline the coddog backlog already uses; export local labels as
+   symbols so objdiff segments functions correctly.
+3. **A "match" is instruction/mnemonic-EQUIVALENCE, not byte-identity.** objdiff
+   can report 100% on equivalent mnemonics that differ in encoding/operands. It is a
+   navigation aid; **`make compare` sha1 is still the only proof** (consistent with
+   the all-or-nothing note above).
+
+## Progress / report pipeline & CI (decomp.dev)
+
+`objdiff-cli report generate` emits a machine-readable per-object report (proto
+schema) and runs in GitHub Actions; the **decomp.dev** dashboard ingests it for a
+per-function progress view. GBA friction worth knowing: the standard split
+pipeline emits EITHER a target OR a source object, but objdiff needs BOTH — which
+is exactly why the "Generating the target objects" section above has to produce a
+per-TU **target extract** from `baserom.gba`. (Cross-tool: **frogress is being
+sunset** in favor of decomp.dev / objdiff-based reporting; `mapfile_parser` (pip)
+can also emit an objdiff-format progress report straight from a `.map`, with a
+path-index mode that counts WITHOUT relying on asm-file paths — robust to
+`#ifdef`-skipped `INCLUDE_ASM`. Cross-check against `scripts/calcprogress.py`.)
+
 ## Relationship to the existing progress script
 
 `scripts/calcprogress.py` already computes a coarse progress number for the

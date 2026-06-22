@@ -189,6 +189,22 @@ coordinator to run on a full checkout with the toolchain + API key present.
 - **Cost/throughput.** The `run` loop spends API tokens per function with up to 25
   retries; without IDA/Ghidra grounding it will burn more for less on the hard
   functions than our existing loop.
+
+### Context / compaction discipline for a matching loop (pret/decomp.me consensus)
+
+A transferable lesson regardless of whether we pilot mizuchi's `run`: **aggressive
+context compaction HURTS reverse-engineering** — it lowers the resolution of the
+problem space the model needs to keep in view. Empirically, long single-session runs
+"go rogue" / forget the primary task around ~20 attempts in. Mitigations that the
+field found work:
+
+- **Move the goal into the SYSTEM prompt** (not just the running transcript) so it
+  survives long loops.
+- **Prefer fresh-session-per-function** (Ralph-style) with tight per-function context
+  over one giant accumulating session.
+- Mizuchi itself is built on the **Claude Agent SDK (not Claude Code) with NO
+  auto-compact**, and reports cost ~linear in attempts and **no unrailing past 25
+  attempts** — i.e. for this matching loop, NOT compacting is better than compacting.
 - **Vendored weight.** ~540 MB (node_modules + 2 venvs + torch on first index).
   Gitignored, but non-trivial to keep around.
 - **Host friction we already hit & worked around:** SSH submodule URLs (→ rewrote

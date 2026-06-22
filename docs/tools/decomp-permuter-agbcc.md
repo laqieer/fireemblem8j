@@ -165,6 +165,25 @@ prebuilt-`.o` ergonomics, the cheap path is to add an optional `.o`-import mode
 to our own `permute.sh` (copy a prebuilt `target.o`) rather than adopt the stale
 fork — but this is not currently needed.
 
+### Usage discipline (pret/decomp.me consensus)
+
+- **Don't permute far-off code.** The permuter only bridges ~1-5% / 1-2-instruction
+  gaps; running it on a 50%-match wastes hours. Use it as the **FINAL polish** after
+  the deterministic §1 levers (`agbcc-matching-playbook.md`), never as a first pass.
+  The agbcc/GBA permuter is much WEAKER than the IDO/N64 one it was tuned for — the
+  right agbcc randomizations largely don't exist yet — so calibrate expectations and
+  exhaust the hand levers first.
+- **`PERM_RANDOMIZE` scoping.** Wrap only the region you want mutated in the
+  `PERM_RANDOMIZE(...)` macro; and if import errors with `'global.h' not found`,
+  `permuter_settings.toml`'s `compiler_command` is missing the include path
+  (`-I tools/agbcc/include -iquote include -nostdinc -undef`).
+- **Feed a permuter NEAR-match back into the LLM.** When the permuter reaches a very
+  low score (e.g. 1 instruction off) but an LLM matcher is stuck high, INJECT the
+  permuter's best-but-imperfect C as a "close reference" into the next LLM retry —
+  but GATE this on a genuinely close score: a broken/low-quality start ANCHORS the
+  model on bad artifacts. (Documented failure: a permuter hit score 5 four times
+  while the LLM stayed at 34.6% and the bestCode was never fed back.)
+
 ### Reference: agbcc `permuter_settings.toml` template from the fork's README
 
 For comparison only — ours is already equivalent and additionally handles the

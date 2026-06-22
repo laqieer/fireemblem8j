@@ -182,6 +182,13 @@ Finds `window`-length instruction runs shared between `<SymbolName>` and other
 functions — handy when only part of a function is region-different and you want
 to see which slice diverges.
 
+**Under-exploited cross-corpus use (pret/decomp.me consensus):** coddog is
+exact-match-oriented (it won't over-claim sameness), so `submatch` can localize
+WHICH span of a region-different `sub_` corresponds to which US span when pointed
+at the broader corpus — fe8u + fe6j + fe7j + this repo's carved corpus, not just
+the two FE8 ELFs. The project mostly uses coddog for whole-function region-same
+identification; the slice-against-corpus mode is the lever for partial matches.
+
 ## How results feed the carve workflow
 
 1. Build both ELFs (`make` here and in `../fireemblem8u`).

@@ -223,6 +223,22 @@ endpoint. From a normal browser the same endpoints return the JSON and the
 website UI works as described. This Cloudflare gating is also a practical reason
 **not** to rely on scripted API access.
 
+## Backend shape & the no-link limitation (pret/decomp.me consensus)
+
+Two operator facts worth keeping in mind:
+
+- **It compiles only `.text` and diffs — it does NOT link.** The backend pipeline
+  is `compile → objdump (specific flags) → asm-differ`. So decomp.me **cannot
+  reproduce reloc-resolved diffs** — it shares the exact limitation of this
+  project's local `.o`-byte-diff screen (`/tmp/sadiff.sh`). A decomp.me "100%
+  match" is necessary but not sufficient; the full `make compare` sha1 in THIS repo
+  is still the only proof (same as the CP932 caveat above, for a different reason).
+- **A community decomp.me MCP server exists** (drives scratch creation/iteration
+  from an agent). If ever used, the same opt-in/publishing discipline below
+  applies — scratch creation publishes target asm + context + C to a public service.
+- When dumping target asm for a scratch with this repo's local differ, note
+  `asmdiff.sh` needs `-t` for Thumb disassembly.
+
 ## Honest recommendation
 
 - **Use the hosted site (decomp.me) as an occasional human/AI aid** for the few

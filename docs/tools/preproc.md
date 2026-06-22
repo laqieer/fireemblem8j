@@ -53,3 +53,14 @@ $(DATA_SRC_C_OBJECTS): %.o: %.c $(PREPROC)
 	$(PREPROC) $< | $(CPP) $(CPPFLAGS) - | iconv -f UTF-8 -t CP932 | $(CC1) ... -o $*.s
 	$(AS) $(ASFLAGS) $*.s -o $@
 ```
+
+## CP932/iconv dependency-tracking trap (pret consensus)
+
+Because our C pipeline runs `iconv -f UTF-8 -t CP932` over the **whole TU**, proper
+header dependency-tracking is "basically impossible" — the transcode changes the
+byte stream `cpp` already emitted, so `.d`-style dep files don't line up cleanly.
+The fix pattern (when it bites): keep the Shift-JIS string data in its **own file**,
+`iconv` THAT file, and `#include` the re-encoded result into the TU — rather than
+iconv'ing the whole TU. This isolates the transcode to the text payload and keeps
+the rest of the TU on the normal preproc/cpp dep path. (Context generators in this
+space: `decompctx.py` (dtk), `pcpp`, and m2c's `m2ctx`/our `gen_ctx.py`.)

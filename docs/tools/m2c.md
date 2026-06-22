@@ -293,6 +293,33 @@ Both confirm the GBA Thumb pipeline works: with `--target gba`, m2c parses
 - m2c can't generate initializers for bitfield structs or symbols whose type it
   can't infer; provide types via `--context` for those.
 
+### ARM/Thumb-specific weaknesses (pret/decomp.me consensus)
+
+ARM support is the YOUNGER backend (lower coverage than MIPS) — treat m2c-ARM as
+experimental and the AI seed-and-refine loop as the standard path. Known rough
+edges to hand-fix:
+
+- **Poor register-size aliasing** — m2c is weak at tracking when a value is read
+  back at u8/u16 vs word width; re-type fields against the load mnemonic oracle
+  (`decomp_agent_playbook.md` §7).
+- **"Doesn't believe in arrays"** — it emits individual field accesses for fixed
+  offsets instead of an indexed array; **re-array by hand** when the asm clearly
+  walks a table.
+- **All-or-nothing if-reconstruction** — when it can't structure the control flow
+  it falls back to `goto` soup; the cleanup is structural.
+- **Input prep:** prepend `.syntax unified` to the Thumb `.s` (decomp.me
+  auto-injects this on `thumb_func_start`); strip/resolve `LDR Rn,=sym` pool loads;
+  and `#define` away `__attribute__`/SDK keywords in the context (our `gen_ctx.py`
+  already does the keyword neutralization).
+
+### Using an m2c seed to ground an LLM (double-edged — pret/decomp.me consensus)
+
+A *close* m2c/Ghidra draft helps an LLM matcher; a *broken* one ANCHORS the model
+on bad artifacts and it then defends them. Prompt the model to "clean the m2c
+output WITHOUT changing behavior," and pick worked examples whose **control-flow
+SHAPE resembles the target**, not just the domain — a no-`goto` example will push
+the model to avoid `goto` and mismatch an end-of-function that genuinely needs one.
+
 ## See also
 
 - `scripts/tools/m2c/setup.sh`, `scripts/tools/m2c/m2c.sh` — install + wrapper.
