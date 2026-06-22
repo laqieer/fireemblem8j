@@ -140,3 +140,41 @@ How to LEARN MORE from fe8u (the real corpus): fe8u is thousands of proven C→b
 JP idiom you don't recognize, `grep` fe8u/src for the C construct, compile that file's function with
 this agbcc (or disassemble fe8u's `fireemblem8.elf` at the function and read its src/*.c), and read
 off the asm↔C mapping. This is faster and surer than guessing.
+
+## 8. Source map — where to look (use BEFORE writing C)
+Matching is a *compiler* skill, so the corpus is every same-engine agbcc decomp + this compiler's
+source. Ranked by usefulness for fe8j:
+- **fe8u** (`../fireemblem8u`, US) — same exact agbcc → byte-level. Primary source for US-shared funcs.
+- **fe6j** (`../fireemblem6j`, JP) — verified codegen-identical agbcc → **byte-level**. Primary JP source.
+- **fe7j** (MokhaLeee/FireEmblem7J, JP) — clone it; **run the output-equivalence test first** (below).
+- **decomp.me harvested corpus** (`docs/refs/decompme_fe/`) — community-matched FE functions incl JP
+  (`fe8_sub_*`, `fe7j_sub_*`, `func_fe6_*`). GREP THIS by name/`sub_<addr>` BEFORE reconstructing —
+  someone may have already solved it. (agbcc build may differ → treat as a strong hint, re-verify.)
+- **agbcc source** (`../fireemblem8u/.deps/agbcc/gcc`) — the deterministic-pass rules (§1).
+
+**Output-equivalence test (run before trusting ANY source's bytes):** compile a probe through that
+source's agbcc and through fe8j's, `diff` the emitted `.s`. Identical ⇒ byte-level (port directly,
+then still re-verify against fe8j's `make compare`). Different ⇒ structure-only (adapt + re-match).
+NEVER decide this from the binary's sha1 — two builds of the same source hash differently but emit
+identical code (fe6j proved this). fe8u + fe6j = verified identical; fe7j = pending.
+
+**Router:** US-shared → fe8u. JP function → search decomp.me corpus + fe6j/fe7j for an analog → port
+→ re-verify. No analog anywhere → §9 from-scratch.
+
+## 9. From-scratch reconstruction (no analog in any corpus)
+1. **Behavior**: `mcp__ida__decompile` the JP addr (+ read `asm/sub_<H>.s`). Identify struct field
+   accesses, calls (named bl + fn-ptr LUTs), control flow, constants.
+2. **Struct layout from asm**: each `ldr/ldrb/ldrh [base,#off]` is a field at byte `off`; a signed
+   load (`ldrsh`/`ldrsb`, or `ldrb;lsl;asr`) ⇒ a *signed* field. Start from fe8u/fe6j headers; if an
+   offset doesn't fit the known struct, the JP layout differs — derive it from the accesses.
+3. **Write idiomatic C** using the §7 idiom dictionary so it lowers toward the target bytes (don't
+   write "any correct C" — write the C whose codegen matches).
+4. **Diff-refine** against the oracle; apply §1 levers. Byte-match ⇒ behavioral proof (identical bytes
+   means identical behavior — you cannot be wrong about behavior once it matches).
+5. **Name** per §0: meaningful name if you can infer logic/purpose (follow fe8u/fe6j/fe7j naming);
+   else keep `sub_<addr>`. Never invent a misleading name when unsure.
+
+## 0b. Naming policy (project directive)
+Give a carved function a MEANINGFUL name only when you can infer its logic/usage/purpose (and match
+the fe-family naming conventions). If unsure, keep `sub_<addr>` — a correct match under `sub_<addr>`
+is better than a wrong name.
