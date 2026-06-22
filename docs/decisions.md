@@ -6928,3 +6928,25 @@ register-pin (1, clean swaps only — often regresses). Plus data-bind + branch-
 for the LINK/ordering residue. Full toolkit: docs/agbcc_codegen_levers.md. Result:
 reg-alloc/shift dead-ends are NOT a hard ceiling — a recoverable vein. 30 PARTIALs +
 the 'scheduling'/'region-diff' buckets remain to mine.
+
+## D271 — learning-infrastructure build + P10/P9 topology + codegen "walls" dissolved
+
+Pivot from port→reconstruct (fe8u-borrow vein mined at ~95.4% matching-C; remaining ~450 still-asm are
+region-diff + JP-only needing real decompilation). Built the compounding knowledge base:
+- `docs/decomp_agent_playbook.md` (read-first; §0-§9 + §7/§7b 66 agent-verified idioms + source-router +
+  from-scratch procedure + naming policy + §6 knowledge up-loop).
+- `docs/agbcc_internals.md` — 6 source-grounded decision rules read from `../fireemblem8u/.deps/agbcc/gcc`.
+- VERIFIED 3 byte-level corpora via the OUTPUT-EQUIVALENCE test (compile probe through both agbccs, diff
+  .s — NEVER trust binary sha1): fe8u (US) + fe6j (JP, StanHash@tpcs_frame) + fe7j (JP, pret/agbcc@master,
+  identical for agbcc AND old_agbcc). Both JP corpora directly supply JP-only functions.
+- Harvested 167 community-matched FE solutions from decomp.me (cookie-gated) → docs/refs/decompme_fe/
+  (gitignored). DCE-exported pret/decomp.me channels → docs/refs/discord/ (gitignored). BOTH local-only
+  (piracy/IP boundary — only distilled techniques enter committed docs).
+
+Three of my prior "agbcc walls" were REFUTED by reading source/probing: cross-jump IS achievable;
+arg-order is fixed left-to-right (wrong rN↔value = prototype bug); `register asm()` IS added to the
+prologue push. Only register-allocation OUTCOME is genuinely hard; hand-asm+ARM are the real exclusions.
+
+ORG: P10 CTO (main thread, owns playbook + serial integration per D99) → P9 tech-lead teams (action right,
+produce recipes/findings). Launched P9-DiscordMining + P9-Verification (re-matching the 80 deferred
+near-misses to replace wall-theory with byte-proof). Staged: 6 reconstruction P9 teams by subsystem.
