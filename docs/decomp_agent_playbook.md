@@ -79,3 +79,39 @@ function-pointer tables — proc command lists, handler LUTs, AI scripts — so 
 `/tmp/sadiff.sh` (reloc-EXCLUDED `.o` byte-diff) is a fast screen, NOT proof — the full LINK can
 still differ on resolved relocs. A MATCHED claim REQUIRES a full cold `make compare` →
 `fireemblem8.gba: OK`. Re-run it; if a stale .o made a previous OK, rm the .o and rebuild.
+
+## 5. Field-discovered techniques (harvested from agent runs — grows every cycle)
+These were discovered by reconstruction agents and promoted here so every agent has them.
+- **Identification by funcmap-neighbor / map-proximity**: an unnamed `sub_<addr>` immediately
+  before/after a NAMED function (by address, see `layout/us_jp_funcmap.tsv` / the .map) is usually
+  the next/prev function in that same fe8u TU — port from that .c file, that region. (Used to ID
+  StartSpellAnimation, GMapScreen_OnWorldmapEventUpdate, GmMu_SetBlendEnabled, SaveMenuPostExtraMiscScreen.)
+- **IDA pseudocode for ID** when callee-fingerprint is ambiguous: `mcp__ida__decompile` the JP addr,
+  match its structure to a fe8u function. (StartEventWarpAnim_unused, Event14_BgmOverideRestore.)
+- **JP region-diff signal — raw Shift-JIS string literal**: where US calls
+  `GetStringFromIndex(msgId)`, JP often hardcodes a pointer to in-ROM Shift-JIS bytes (a `0x08…`
+  addr). Bind that addr as a `data` alias and reference it (a UTF-8 string literal in the .c becomes
+  SJIS via the build's iconv). (StartLinkArenaShowPointsAnimated, DebugChargeMenu_Draw 緑軍/赤軍/ＣＰ.)
+- **JP-simplified variant**: JP frequently has a SHORTER version of a US function (drops cases /
+  checks / a NECROMANCER branch). Read the JP disasm and keep ONLY the branches JP keeps; don't
+  port the full US body. (BattleCheckSilencer.)
+- **`int` vs `s16` local changes SCHEDULING, not only sign-ext**: choosing `int index` over
+  `s16 index` made agbcc emit the `ldrsh` index load BEFORE the table-pointer load (matching JP). Try
+  the type swap as a scheduling lever. (StartSpellAnimation.)
+- **inline-made-standalone**: a US `static inline` (header) that JP emits out-of-line → port as a
+  standalone non-inline function; inline any tiny helper it needs as `static inline` to avoid
+  multiple-definition with an already-carved copy. (MapAddInBoundedRange, GetUnitRescueName.)
+- **stale baseline alias**: a committed baseline alias may point at the WRONG address; the real
+  function is elsewhere (`bl`/pool says so) — drop the stale alias, bind/define the real one.
+  (GMapScreen: Sound_StopBgmImmediate alias 0x080B878A was stale; real def 0x08002A18.)
+- **`_unused`/duplicate functions**: a fingerprint can match a function ALREADY carved at another
+  addr (the "primary" copy). The unnamed one is the duplicate/`_unused` variant — carve it under the
+  distinct US name (e.g. `MapAnim_PlayStealSe_Unused`), it is NOT a collision. Verify with
+  `git ls-files` which name is taken.
+
+## 6. Knowledge-sharing protocol (how this file stays current)
+Every agent MUST, in its structured result, populate a `discovered_technique` field whenever it
+finds a generalizable strategy (a new lever, an ID trick, a JP-divergence pattern, a wiring gotcha)
+— a one-line rule + the function that proved it. The orchestrator harvests these after EACH workflow
+and appends the novel ones to §5 here, so the NEXT cycle's agents start with them. (Without this,
+discoveries die in per-function prose — the gap this protocol closes.)
