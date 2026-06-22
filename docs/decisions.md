@@ -6950,3 +6950,21 @@ prologue push. Only register-allocation OUTCOME is genuinely hard; hand-asm+ARM 
 ORG: P10 CTO (main thread, owns playbook + serial integration per D99) → P9 tech-lead teams (action right,
 produce recipes/findings). Launched P9-DiscordMining + P9-Verification (re-matching the 80 deferred
 near-misses to replace wall-theory with byte-proof). Staged: 6 reconstruction P9 teams by subsystem.
+
+## D272 — Discord knowledge integrated + 3 region-diff carves + 6 parallel P9 subsystem teams (matching-C 95.44%)
+P9-DiscordMining delivered (86 distilled findings from ~17.4k signal msgs across 5 channels);
+P9-Verification's parent stalled (no verify_results.json) — I spot-verified its targets myself instead.
+Lesson confirmed (D98): UNBOUNDED workers stall ~5-6h; bounded ones (DiscordMining) succeed. So all new
+P9 teams are explicitly BOUNDED (≤3 workers × ≤5 funcs × ≤3 iters, ~40min watchdog, return partial).
+Integrated ~48 NEW Discord levers into agbcc_internals.md (leaf-LR/public-phantom-push prologue bug
+classes, GCSE load-hoist + force-reload, no-Thumb-scheduler) + playbook (load-type oracle
+ldrh/ldrsh/ldrb/ldrsb=u16/s16/u8/s8; no-tst/flag-arith DEADEND signal; bl-to-self fake-function;
+carve-the-caller lever) + docs/tools/* + committed docs/discord_findings.md (distilled, piracy-safe).
+PROOF the levers break "walls": carved 3 region-diff funcs to diff=0 (full make compare OK): PutTime
+(105→0 extern-inline+int-widen), GenericOptionChangeHandler (96→0 ==true cross-jump), _UpdateKeyStatus
+(121→0 int-widen). 6 NEAR (lsr/asr value-range + prologue-order) handed off as permuter/team targets.
+Then dispatched 6 BOUNDED P9 subsystem teams in parallel (Event, Menus, Worldmap, BattleAnim, UISys,
+UnitLibSio) in isolated worktrees → /tmp/recipes_<sub>.json; CTO integrates each serially with make
+compare. CORRECTION (user): as P10, do NOT run detailed tasks inline (it blocks the main thread) —
+delegate to background P9 teams, keep CTO free to orchestrate+integrate. Addresses: region-same jp==us
+(reliable); region-different nofuncmap addrs are STALE — use carve_recipe.py / carved_rom.d / disasm.
