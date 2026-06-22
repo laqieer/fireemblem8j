@@ -1,0 +1,3 @@
+sRange3OffsetLut	085D1FC4	data	cp_utility rodata LUT (AiCountNearbyEnemyUnits)
+gProcScr_StoneShatterEvent	085BA384	data	StartStoneShatterAnim
+BmBgxConf_StoneShatter	085BA3A4	data	StartStoneShatterAnim
