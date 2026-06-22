@@ -89,10 +89,15 @@ concrete wins: splitting a chained `pointAlias = point = f();` into two statemen
 `(s16)` cast let agbcc materialize signed values eagerly to match JP scheduling
 (`GmapTimeMons_ExecMonsterMergeMu` 104→0).
 
-**Irreducible wall (NOT C-source-addressable — stop here, document, move on):**
-- **tail-merge / cross-jumping**: JP merges a shared call tail of two branches into one
-  block (function 4 bytes shorter); agbcc doesn't → every downstream branch/pool entry
-  shifts (`GetStrTalkLen`).
+**"Hard" patterns — UNSOLVED reconstruction work, NOT a wall.** (Correction: an earlier
+version of this doc called these "irreducible / not C-addressable." That was WRONG — a
+Thumb function compiled from C has matching C by construction. Do not mark these DEADEND;
+mark UNSOLVED and report the exact differing bytes. See `decomp_agent_playbook.md`.)
+- **tail-merge / cross-jumping**: agbcc DOES cross-jump — proven (two switch cases each
+  ending `acc += g(p,flag)` compile to ONE shared `bl g`). If JP merged a shared call tail
+  and your C didn't, your two tails aren't textually identical; make them identical (compute
+  a common local in each case, share the call via fallthrough/goto). `GetStrTalkLen` is a
+  source-structure fix, not a wall.
 - **post-RTL instruction scheduler batching**: JP finishes computing X fully before
   starting Y; agbcc batches two shared-base loads then both clamps (`EventShinningCursorAdvance`).
 - **call-argument evaluation order**: agbcc evaluates the last arg first; JP left-to-right
