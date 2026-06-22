@@ -78,3 +78,31 @@ only `diff==0` fixes. Re-verify every reclaim with a full cold `make compare` on
 main thread before commit (worktree sadiff is reloc-excluded; the full link is the
 oracle). Candidate sources: the `lsr-asr` / `reg-alloc` buckets of the sweep
 dead-end classifications.
+
+## 6. Statement reordering (scheduling class) + the irreducible wall
+
+agbcc materializes values in **source-statement order**. If JP computes A before B but
+you emit B first, reorder the source (or hoist into an earlier temp / sink later). Two
+concrete wins: splitting a chained `pointAlias = point = f();` into two statements kept
+`point` (s8) sign-extended so `++point` used `adds;lsl;asr` not the shifted-domain
+`+0x01000000` increment (`UpdatePathArrowWithCursor` 238→0); and removing a redundant
+`(s16)` cast let agbcc materialize signed values eagerly to match JP scheduling
+(`GmapTimeMons_ExecMonsterMergeMu` 104→0).
+
+**Irreducible wall (NOT C-source-addressable — stop here, document, move on):**
+- **tail-merge / cross-jumping**: JP merges a shared call tail of two branches into one
+  block (function 4 bytes shorter); agbcc doesn't → every downstream branch/pool entry
+  shifts (`GetStrTalkLen`).
+- **post-RTL instruction scheduler batching**: JP finishes computing X fully before
+  starting Y; agbcc batches two shared-base loads then both clamps (`EventShinningCursorAdvance`).
+- **call-argument evaluation order**: agbcc evaluates the last arg first; JP left-to-right
+  (`MoveTalkFace` 3 bytes, `PutFaceChibi`, `PrepItemScreen_DrawVisibleUnitNames`).
+- **prologue push-list vs asm-pin**: a `register asm("r7")` is used in the body but NOT
+  added to the prologue push/epilogue pop (`UpdateLinkArenaMenuScrollBar` — body byte-perfect,
+  only the push reg-list differs by 2 bytes).
+- **scratch-register choice**: agbcc picks r0 where JP picks r1 for an internal narrow
+  (`Event1B_TEXTSHOW`).
+
+Reclaim hit rate: **17 of ~142 classified dead-ends** (lsr/asr 31 + reg-alloc 93 +
+scheduling 36, minus overlap) recovered to byte-0; the rest split between the
+irreducible wall above and genuine region-different behavior (different US source).
