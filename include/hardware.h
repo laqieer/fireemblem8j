@@ -364,7 +364,7 @@ void SetNextVCount(int a);
 void SetLCDVCountSetting(int set);
 void SetMainUpdateRoutine(void(*)(void));
 void ExecMainUpdate();
-// ??? _UpdateKeyStatus(???);
+void _UpdateKeyStatus(struct KeyStatusBuffer *keyStatus, s16 keys);
 void UpdateKeyStatus(struct KeyStatusBuffer *keyStatus);
 void SnycKeyStatus(struct KeyStatusBuffer *keyStatus);
 void ResetKeyStatus(struct KeyStatusBuffer *keyStatus);
