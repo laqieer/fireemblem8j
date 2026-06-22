@@ -6886,3 +6886,32 @@ named-asm-with-fe8u-C found 266 total, so **195 more were never screened**. Swee
 (15 agents) is running on those; at sweep-1's ~23% hit rate it should yield ~40 more.
 The behavioral vein is far from exhausted; the 73 sweep-1 dead-ends are genuine
 codegen mismatches (reloc-excluded diff>0 → full link only adds more).
+
+## D269 — frontier sweeps 2-4 + near-miss recovery (matching-C 94.07% -> 94.52%, +39)
+
+Continued the D268 behavioral vein. Reconstructed the candidate set TWICE more:
+the 98 was a subset of 266 (`.global`-named still-asm with fe8u C); a further 39
+are named only via baseline aliases (not asm `.global`). Three more worktree
+sweeps (195, 39-redo, 39-broadened) returned ~22-28% diff=0 each.
+
+Carved this run (62 total): sweep-1 22 + BattleGenerateHitAttributes; sweep-2 25;
+sweep-3 7; plus 8 recovered near-miss FAILS that the worktree reloc-excluded
+sadiff passed but the full link did not. Recovery levers (all byte-neutral):
+- **EWRAM file-static -> baseline data alias**: a recipe that re-declares a
+  `.lcomm` (local) file-static as a fresh `static` gets new .bss placed in ROM
+  (literal 0x08xxxxxx vs JP EWRAM 0x03xxxxxx). Fix: `extern` + a `data` baseline
+  `.set name, 0x03xxxxxx` at the JP addr (gAiScriptEnded/gpAiScriptCurrent,
+  gUnk_50, gPopupInst[deferred]).
+- **data-operand binding**: LINK-undefined rodata LUT/ProcScr/BmBgxConf -> read
+  the JP addr from the original asm literal pool, add a `data` baseline alias
+  (sRange3OffsetLut=085D1FC4, gProcScr_StoneShatterEvent=085BA384,
+  BmBgxConf_StoneShatter=085BA3A4, gSioBattlemap_2=085D4200).
+- **call-order callee pinning**: LINK-undefined function -> pin its JP addr by
+  bl-order vs sibling callees that resolve (BattleRoll2RN=0802A4C0,
+  BattleCheckSilencer=0802B2FC, EventWarpAnimExists_ret=08012A38,
+  SelectSummonPos=0807D3BC). Also names the pinned callee.
+
+Genuine dead-ends (documented, NOT forced): struct-offset diffs (DrawGMapPIPanelAtHeight
+-2, BonusClaim -4), data-index offsets (EndingCredits -0x14, Uidebug +0x18),
+NewPopup 2nd-diff, and one truncated agent recipe (SioHandleIrq_Serial). The 73+119
+sweep dead-ends are codegen mismatches (reloc-excluded diff>0). Sweep 4 in progress.
