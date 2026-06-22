@@ -115,3 +115,28 @@ finds a generalizable strategy (a new lever, an ID trick, a JP-divergence patter
 — a one-line rule + the function that proved it. The orchestrator harvests these after EACH workflow
 and appends the novel ones to §5 here, so the NEXT cycle's agents start with them. (Without this,
 discoveries die in per-function prose — the gap this protocol closes.)
+
+## 7. agbcc asm-idiom → C dictionary (inverse compilation; verified against the binary)
+Read the JP asm idiom, write the C that produces it. (Starter set — verified by compiling C through
+tools/agbcc/bin/agbcc -O2; extend by mining fe8u's real .c↔agbcc-.s pairs.)
+- `ldrb r,[b,#o]` (bare)                  → **u8** field/var.
+- `ldrb r,[b,#o]; lsl#24; asr#24`         → **s8** field (sign-extended on read).
+- `ldrh r,[b,#o]`                          → **u16** field.
+- `mov rN,#o; ldrsh r,[b,rN]` (REGISTER-indexed, distinctive) → **s16** field. A `(s16)` cast on any
+  memory read forces this signed register-indexed load; same with `ldrsb`+`(s8)`.
+- `lsl#24; … add #0x01000000; … asr#24` (or lsl/asr#16 for shorts) → arithmetic on an **s8/s16 value
+  KEPT narrow** (the "shifted-domain" op). Match by keeping the var `s8`/`s16` and operating directly;
+  do NOT int-widen here. (int-widen is the OPPOSITE fix — for when JP sign-extends ONCE at entry.)
+- `mov r1,#N; bl __divsi3` → `int / N`; `bl __udivsi3` → `unsigned / N`; `__modsi3`/`__umodsi3` → `%`.
+  **agbcc never strength-reduces division** — every `/`,`%` by a non-pow2 is a libcall. (pow2: `>>`/`&`.)
+- `… cmp #0; beq L; mov rX,#V; L:` with the OTHER value moved first → **ternary** `c ? V : other`
+  (the "else" value is materialized first, the branch skips the override → drives branch polarity).
+- `cmp #hi; bgt def; cmp #lo; blt def; lsl#1; …` → **dense switch** lowered to a bounds-check + jump
+  table; a SPARSE switch lowers to a compare chain (`cmp #k; beq …`).
+- `bl <name>` where name is a tiny veneer (`_call_via_rN`) → a **function-pointer call** through a LUT
+  (`tbl[i](args)`); the LUT is data — bind it.
+
+How to LEARN MORE from fe8u (the real corpus): fe8u is thousands of proven C→bytes functions. For a
+JP idiom you don't recognize, `grep` fe8u/src for the C construct, compile that file's function with
+this agbcc (or disassemble fe8u's `fireemblem8.elf` at the function and read its src/*.c), and read
+off the asm↔C mapping. This is faster and surer than guessing.
