@@ -146,7 +146,9 @@ Matching is a *compiler* skill, so the corpus is every same-engine agbcc decomp 
 source. Ranked by usefulness for fe8j:
 - **fe8u** (`../fireemblem8u`, US) — same exact agbcc → byte-level. Primary source for US-shared funcs.
 - **fe6j** (`../fireemblem6j`, JP) — verified codegen-identical agbcc → **byte-level**. Primary JP source.
-- **fe7j** (MokhaLeee/FireEmblem7J, JP) — clone it; **run the output-equivalence test first** (below).
+- **fe7j** (`../FireEmblem7J`, JP, MokhaLeee) — **VERIFIED codegen-identical (both `agbcc` and
+  `old_agbcc`)** via the output test, despite building `pret/agbcc@master` vs fe8j's
+  `StanHash@tpcs_frame` → **byte-level**. ~84 matched `.c`. Second primary JP source.
 - **decomp.me harvested corpus** (`docs/refs/decompme_fe/`) — community-matched FE functions incl JP
   (`fe8_sub_*`, `fe7j_sub_*`, `func_fe6_*`). GREP THIS by name/`sub_<addr>` BEFORE reconstructing —
   someone may have already solved it. (agbcc build may differ → treat as a strong hint, re-verify.)
@@ -156,7 +158,7 @@ source. Ranked by usefulness for fe8j:
 source's agbcc and through fe8j's, `diff` the emitted `.s`. Identical ⇒ byte-level (port directly,
 then still re-verify against fe8j's `make compare`). Different ⇒ structure-only (adapt + re-match).
 NEVER decide this from the binary's sha1 — two builds of the same source hash differently but emit
-identical code (fe6j proved this). fe8u + fe6j = verified identical; fe7j = pending.
+identical code (fe6j proved this). fe8u + fe6j + fe7j = ALL verified codegen-identical (fe7j: agbcc+old_agbcc).
 
 **Router:** US-shared → fe8u. JP function → search decomp.me corpus + fe6j/fe7j for an analog → port
 → re-verify. No analog anywhere → §9 from-scratch.
