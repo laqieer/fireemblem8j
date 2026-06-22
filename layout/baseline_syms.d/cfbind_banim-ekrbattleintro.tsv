@@ -15,7 +15,7 @@ GetBanimTerrainGround	08058BF4	thumb	PrepareBattleGraphicsMaybe
 gAnimCharaPalConfig	0203E118	data	PrepareBattleGraphicsMaybe
 gBanimTriAtkPalettes	0203E198	data	PrepareBattleGraphicsMaybe
 ParseBattleHitToBanimCmd	0805962A	thumb	PrepareBattleGraphicsMaybe
-gBanimCon	0203E114	data	PrepareBattleGraphicsMaybe
+gBanimCon	0203E1CC	data	EfxPlaySEwithCmdCtrl (corrected)
 gBanimMaxHP	68504652	data	PrepareBattleGraphicsMaybe
 GetSpellAnimId	080605F4	thumb	PrepareBattleGraphicsMaybe
 IsItemDisplayedInBattle	081586A8	thumb	PrepareBattleGraphicsMaybe
