@@ -239,6 +239,26 @@ Two operator facts worth keeping in mind:
 - When dumping target asm for a scratch with this repo's local differ, note
   `asmdiff.sh` needs `-t` for Thumb disassembly.
 
+## Scratch hygiene & ARM/Thumb setup (pret/decomp.me consensus)
+
+- **Turn on "Include function labels in diff" ("diff label")** when a ctx-compiled
+  helper stacks at the TOP of the diff (e.g. a carved caller pollutes the view) — it
+  lets the differ segment by symbol.
+- **You CANNOT edit a scratch's target asm after creation** — delete and recreate.
+- **"Match Override" (Options)** flags a 99.x% scratch as a match for a known-correct-
+  but-unprovable residual. It is purely a decomp.me UI affordance: it does NOT make the
+  local build match — treat it as a triage note, never "done." Only this repo's full
+  `make compare` sha1 counts.
+- **ARM/Thumb scratch setup.** The GBA assembler path expects THUMB by default and its
+  `thumb_func_start`/`glabel` macro is LOWERCASE and does NOT enable UAL. To paste
+  gbadisasm/IDA ARM-mode or UAL asm: use `glabel <name>` for thumb-no-UAL; prepend
+  `.arm` for ARM functions; prepend `.syntax unified` for UAL mnemonics. A 3-operand
+  `add r3,r3,r3,lsl #1` is REJECTED ("unshifted register required") because it is an
+  ARM-mode encoding — confirm the function is Thumb before pasting.
+- **Export the SYMBOLIZED target object.** Pasting asm into a scratch symbolizes its
+  branch/call targets; download/export the scratch to get a properly-symbolized
+  `target.o` to feed objdiff LOCALLY — avoids hand-fixing `*ABS*` jump labels.
+
 ## Honest recommendation
 
 - **Use the hosted site (decomp.me) as an occasional human/AI aid** for the few

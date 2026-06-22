@@ -83,6 +83,18 @@ also be filed upstream. See `docs/decisions.md`.
 
 ## Config
 
+> **RECOMMENDATION (follow-up Discord mining, Bf7): ship a canonical root
+> `decomp.yaml`.** coddog (and other `decomp_settings` tools) consume a project-root
+> `decomp.yaml` (the cross-tool decomp-settings schema: `name`/`platform`/
+> `build_system`/`versions`/`tools`) — NOT a splat yaml (a splat yaml errors
+> `unknown field 'basename'`). With a committed root `decomp.yaml`, `compare2
+> <decomp.yaml> A <decomp.yaml> B --sort-by vram-addr` works OUT OF THE BOX — the
+> exact fe8j↔fe8u VRAM-ordered region-same lever — instead of the per-run
+> "copy `fe8.coddog.yaml` → `decomp.yaml`" throwaway dance below. The
+> `--sort-by vram-addr` ordering is what aligns the two versions' functions for
+> cross-version matching. (This is a recommendation only; the yaml is not created
+> here. Until it lands, use the copy-to-root procedure under "Path handling.")
+
 `scripts/tools/coddog/fe8.coddog.yaml` describes both binaries as two versions
 of the same game:
 

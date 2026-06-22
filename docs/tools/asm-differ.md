@@ -180,6 +180,24 @@ Useful flags (see `diff.py --help`):
   machine, endianness, and per-instruction ARM/Thumb state all come from the ELF
   mapping symbols.
 
+## GBA gotchas (pret/decomp.me consensus — prefer objdiff)
+
+- **The "load address" failure on GBA is STRUCTURAL, not a config bug.** GBA executes
+  in place, so the link address == the final ROM/VRAM address — there is NO separate
+  load-address (LMA) map, and asm-differ's map parser fails with
+  `Failed to find "load address" in map file`. `export LANG := C` does NOT fix it
+  (that is a different locale issue). The numeric `vma - 0x08000000` file-offset
+  workflow (#1) sidesteps it, but **objdiff (object-vs-object) is the recommended GBA
+  differ** — see `objdiff.md` (better ELF parsing, reloc-aware, no map dependency).
+- **asm-differ shows RELOCATIONS only in `-o`/object mode** (default raw `-bbinary`
+  mode strips relocs); and older asm-differ choked on Thumb output with `lr`/`pc` in
+  pop lists (`invalid literal for int(): 'lr'`) — needs a recent asm-differ. On
+  non-MIPS targets objdiff's reloc-aware diff is materially more trustworthy. A
+  `.o`-level diff is instruction-equivalence, never the sha1 proof.
+- **What asm-differ still wins at:** it DOES surface `-g` DWARF debug info that objdiff
+  does not — keep it (or build the `.o` twice) when you want debug names in a diff/AI
+  prompt.
+
 ## Relationship to the other tools
 
 | Tool | Question it answers |

@@ -24,7 +24,11 @@ hand-written asm, not agbcc-C:
   between) in the target = handwritten asm, NOT matchable from C.
 - **`tst`.** agbcc CANNOT emit `tst` (it lowers a mask test to `mov #mask; and; cmp #0; b…` — see
   §7b). A `tst` in the target ⇒ not agbcc-C ⇒ likely handwritten (the only `tst` users are m4a /
-  old_agbcc TUs, themselves hand-tweaked).
+  old_agbcc TUs, themselves hand-tweaked). **QUANTIFIED (decomp.me decomp-help):** a sibling GBA/agbcc
+  decomp burned 22 distinct C variants + ~870k permuter iterations on a residual that was exactly this
+  `tst` and never crossed it — so a `tst`-only diff is a PROVEN ceiling, not under-explored; stop
+  grinding and classify case (a). (Likewise an ARM-mode function is case (b) — Thumb is the matchable
+  surface; ARM-mode is almost always handwritten, see `agbcc_internals.md`.)
 
 (pret asm2c consensus. These sharpen — they do NOT relax — §0: a flag-arith/`tst` region is the rare
 genuine case (a), everything else is still UNSOLVED, not a "wall.")
@@ -67,6 +71,26 @@ genuine case (a), everything else is still UNSOLVED, not a "wall.")
   second load with `asm("" ::: "memory");` before the 2nd read (scoped `-fno-gcse`), or declare the
   pointer/field `volatile`. Common near-miss fix; see `agbcc_internals.md` GCSE rule. (pret asm2c
   consensus; a real pokeemerald sound comment cites `-fno-gcse`.)
+- **`volatile` = anti-sign-extension-fold lever.** GCC folds your manual `<<16>>16` / `<<24>>24` into
+  the load (emits a single `ldrsh`/`ldrsb`) and DROPS the shift pair JP kept. If you "can't force the
+  shifts to survive," the load already sign-extends — make the pointer/field/local `volatile` so the
+  load is non-foldable and the explicit shift survives. (Also lines up a `ldrh`-load that is then
+  sign-extended as s16.) Verify the full sha1; volatile changes more than the shift. See
+  `agbcc_internals.md` volatile rule. (decomp.me decomp-help consensus; HYPOTHESIS — verify.)
+- **fuse two tail-shared call sites with different args into ONE call.** When JP has ONE call where
+  your source has two call sites sharing a tail but passing DIFFERENT args, hoist the call and SELECT
+  its arg first: `if(c){a=X;}else{a=Y;} f(a);`. (Complements the cross-jump lever; decomp.me decomp-help
+  consensus.)
+- **unused local that forces a register live (inverse of the unused-pointer pin).** An UNUSED local
+  whose only effect is forcing a register live — `T x = expr;` with `x` never read — can fix a regalloc
+  near-miss. Try before declaring a regalloc dead-end. (decomp.me decomp-help consensus.)
+- **interchangeable zero-instruction BB separators.** `do{}while(0);`, a bare `asm("");`, and
+  `while(0){}` are INTERCHANGEABLE zero-instruction statement separators that flip the compiler's
+  basic-block / tail-merge decision — pick whichever lands a stray instruction on the correct side of a
+  call. (Extends the `do{}while(0)` decl-order nudge.)
+- **toggle `const` on a function-local constant.** A `const` local may go to an immediate/`.rodata`
+  instead of a stack slot, so toggling `const` can fix a stack-layout or immediate-vs-pool near-miss on
+  a small local constant. (HYPOTHESIS for agbcc — verify; see `agbcc_internals.md`.)
 - **carve the CALLER to unlock a callee's regalloc.** A `sub_` that won't byte-match in ISOLATION
   (a regalloc/spill permutation) can spontaneously match once a function that CALLS it is compiled in
   the same build — inter-procedural register pressure nudges the callee's allocation. Try carving the
@@ -98,7 +122,39 @@ function-pointer tables — proc command lists, handler LUTs, AI scripts — so 
 - **easiest-first anchors**: start ID from the SELF-identifying classes — functions that reference a
   known string (incl. a pool `.word`→SJIS text addr), BIOS-call wrappers (`svc #NN`), and known-MMIO
   hardware-register accesses (a pool literal that is a `0x0400xxxx` address). These pin a function with
-  near-zero ambiguity; clear them before grinding on fingerprints. (pret asm2c consensus.)
+  near-zero ambiguity; clear them before grinding on fingerprints. (pret asm2c consensus.) Add
+  STRENGTH-REDUCED ARITHMETIC to the anchors: a loaded magic constant + multiply-high + shift (`/C`/`%C`
+  for non-pow2 C, reconstruct `C ≈ 2^(32+s)/magic`) or a bias-then-shift (signed `/2^k`) self-identifies
+  the divisor without a debugger. (decomp.me decomp-help consensus.)
+- **Ghidra/IDA LIE about field WIDTH and SIGN — the load mnemonic is GROUND TRUTH (read it, don't trust
+  the pseudocode).** Decompilers GUESS a 4-byte field where the instruction is `ldrb`/`ldrh`/`ldrsh`
+  (two adjacent shorts look like one word), INVERT if-conditions, push `return` into nested ifs, and
+  fabricate array indexing on a struct. NEVER size/sign a field from pseudocode — read the actual
+  load/store mnemonic + offset (`ldrh`=u16, `ldrsh`=s16, `ldrb`=u8, `ldrsb`=s8; see §7), and un-invert
+  "reversed-looking" Ghidra conditions before trusting control flow. (decomp.me decomp-help consensus;
+  RE-side corollary of the §7 load oracle.)
+- **STRUCT-MISMATCH is the DOMINANT near-miss root cause — audit the struct BEFORE reaching for the
+  permuter.** Wrong field width/sign, wrong struct base offset, or a cluster of stack locals that is
+  actually ONE struct routinely manifests as extra/duplicate loads, operand-order diffs, AND
+  register-allocation diffs that LOOK unrelated. ELEVATE struct-audit ahead of the permuter: before
+  blaming regalloc on a near-miss, re-audit the struct against the load mnemonics — a struct fix
+  frequently resolves the "regalloc/operand-order" diff. (decomp.me decomp-help consensus, very high
+  frequency; pairs with §5 from-scratch struct derivation.)
+- **memset / contiguous zero-fill is a struct SIZE tell**: a contiguous stack/region zero-fill is almost
+  certainly ONE struct/array and the memset length gives its exact size (stronger than guessing field
+  boundaries). Conversely a region written field-by-field with per-call-varying values is probably NOT a
+  struct (just adjacent scalars). RE order: get the SIZE first (max offset referenced, memset length, or
+  array stride `base + size*i + off`), enter it in Ghidra to auto-pad, then fill fields. (consensus.)
+- **GBA rarely interleaves code and data** — to split a GBA TU you can reliably disassemble, find the
+  next data run, cut the function there, repeat until you hit rodata; this justifies aggressive
+  function-boundary carving without fearing embedded data (unlike PS2/N64 overlays). CAVEAT: trailing
+  PER-FUNCTION data IS common in FE — keep accurate symbol `.size` (the objdiff/coddog discipline) so a
+  data tail isn't mis-read as code. (decomp.me decomp-help consensus.)
+- **compiler-family ID by a mnemonic-shape probe BEFORE matching**: compile a trivial 1-liner and
+  compare its prologue/epilogue + trailing padding shape to identify the toolchain (`-O0` adds chunky
+  prologues; debug builds pad differently). FE8J analogue: agbcc-vs-old_agbcc-vs-handwritten is a
+  mnemonic-shape question (cf. the `tst`/flag-arith hand-asm signals in §0) — run the trivial probe
+  before guessing. (consensus.)
 - **caller-side asset-name strings**: name/type an asset-handling function from a file/asset-name string
   XREF'd by its CALLER (not only in the body) — generalizes the SJIS-string ID one level up the call
   graph. (pret asm2c consensus.)
@@ -181,6 +237,22 @@ These were discovered by reconstruction agents and promoted here so every agent 
   a string / inline / const emits its OWN copy, so a duplicate string/const blob in the ROM marks a TU
   boundary. Use it to corroborate where one fe8u `.c` ends when re-pointing splits onto JP. (pret asm2c
   consensus; complements the §8 source map.)
+- **GBA DMA / fill is a MACRO, not an open-coded loop** (FE-DMA): a function whose target is a volatile
+  MMIO `DMA3SAD/DMA3DAD/DMA3CNT` dance, or a `DmaCopy16`/`CpuFill16`/`CpuSet`, uses the common GBA
+  DMA/intrinsic macros — match it with those, NOT a hand loop. A MISSING `CpuFill16`/`CpuSet` intrinsic
+  (where you wrote a loop) is a common reason a GBA init function near-misses. (decomp.me decomp-help.)
+- **GBA palette/VRAM sizing tells**: a copy/fill to palette RAM implies a `u16[0x20]` palette block;
+  VRAM tile data is u8/u16 arrays sized in 0x20-tile (0x140-byte) units. Size palette/tile struct
+  members from the DMA length and the 0x20/0x140 quanta. Tile/CHR/palette index math often looks like
+  `base[k] + (((tile&3) + ((tile&0xFC)<<6)) << 6)` — masking a tile id into low+high bits then
+  recombining into a VRAM address; when a graphics access disassembles to nested mask+shift+add, suspect
+  a tile-index DECOMPOSITION, not an opaque struct. (decomp.me decomp-help.)
+- **asset data `base + index*SIZE` = typed INCBIN array, not a raw pointer**: `vram = SegmentBase(n) +
+  tex[i]` where `tex` is a `u8 tex[][SIZE]` of `#include "...inc"` blobs — declare the typed 2D array
+  and index it; do NOT cast a raw ROM address (reinforces the no-raw-hex-pointers rule + typed-INCBIN).
+- **compressed assets: keep the verified INCBIN** — making the COMPRESSED bytes in the ROM match the
+  original needs a byte-exact RE-compressor; otherwise the incbin must stay. Only carve a compressed
+  asset to C/source if a bit-exact compressor is PROVEN. (decomp.me decomp-help.)
 
 ## 6. Knowledge-sharing protocol (how this file stays current)
 Every agent MUST, in its structured result, populate a `discovered_technique` field whenever it
@@ -264,6 +336,14 @@ identical code (fe6j proved this). fe8u + fe6j + fe7j = ALL verified codegen-ide
    means identical behavior — you cannot be wrong about behavior once it matches).
 5. **Name** per §0: meaningful name if you can infer logic/purpose (follow fe8u/fe6j/fe7j naming);
    else keep `sub_<addr>`. Never invent a misleading name when unsure.
+
+**Cross-version symbol migration (when callee-fingerprint is ambiguous):** Ghidra **BSim**
+(P-Code-structure similarity with a confidence score) + Ghidra **Version Tracking** port symbol names
+between two builds of the SAME engine — directly applicable to migrating fe8u/fe6j/fe7j names onto fe8j
+by STRUCTURE. The practitioner pipeline is `Ghidra BSim + Version Tracking + coddog` (the standard
+cross-version symbol-migration combo) — use it to propose names when the fingerprint/funcmap-neighbor
+levers are ambiguous, then re-verify (byte-neutral rename; `make compare` re-gates). (decomp.me
+decomp-help consensus; extends the fingerprint naming levers.)
 
 ## 0b. Naming policy (project directive)
 Give a carved function a MEANINGFUL name only when you can infer its logic/usage/purpose (and match
@@ -432,6 +512,14 @@ Each entry's `example` is real agbcc output. Read JP asm idiom → write the C c
   _Taking the address of a local FORCES that local onto the stack (it can no longer live purely in a register), which explains "too-large" sp setups and a stack slot for a variable that the body otherwise keeps in a reg. If JP has the extra frame, the source took an address you didn't. (pret asm2c consensus.)_
 - **`ldrb/ldrh; and/or with a mask; strb/strh  (read-modify-write)` may differ from a manual `&mask | val<<pos``** ⟸ a struct BITFIELD (`:N`) vs hand-rolled bit-ops  
   _When manual `field = (field & ~mask) | (val<<pos)` near-misses the JP RMW sequence, try declaring the member as a real C bitfield (`unsigned x : N;`) — agbcc's bitfield lowering can differ from the manual bit-ops. (See §7 memory-structs for the exact bitfield-read/write shapes.)_
+- **`(x<<16)>>16` written as an EXPRESSION (no load) — the s16-cast idiom when no `ldrsh` is available** ⟸ narrowing sign-extend of a value already in a register/stack slot (`(x<<24)>>24` = s8 form)  
+  _The compiler emits the shift PAIR (not a sign-extending load) only when the value is already in a register and the type forces a narrowing sign-extend it cannot fold into a load. This is the form you WRITE for the no-load case; the `ldrsh`/`ldrsb` form (§7) is for a memory read. (Extends the load-oracle with the no-load case; decomp.me decomp-help.)_
+- **`& 0xFFFF` / `(u16)x` HOISTS the masked computation — a near-miss trap** ⟸ trying to add a single missing `and 0xFFFF`  
+  _When the only missing instruction is `and 0xFFFF`, writing `x & 0xFFFF` / `(u16)x` on the FULL expression often applies the mask too early (de-matching more than it fixes); the mask usually belongs on a narrower-typed INTERMEDIATE or a struct field declared `u16`. (Making a var `unsigned` can similarly add a spurious `and 0xFFFF`.) (decomp.me decomp-help.)_
+- **named `union{struct{u16 l;u16 h;}w; u32 word;}` matches top/bottom-16-bit access of a 32-bit slot** ⟸ reading/writing the high or low halfword of a 32-bit field on a halfword boundary (`union{char b[2];u16 w;}` for byte-swaps)  
+  _Try the union before assuming a bitfield when code reads/writes the top or bottom 16 bits of a 32-bit slot. (Sits beside the bitfield rule; decomp.me decomp-help.)_
+- **a "phantom" stack slot that is never read = a struct/union/array LOCAL** ⟸ reproducing a too-large `sub sp` with no apparent use  
+  _The optimizer kept a local struct/union/array on the stack for address-of/aliasing reasons (or an `#ifdef`-removed local that survived in the shipped layout). Declare a matching local struct/array (size = the slot) — do NOT delete it. (Generalizes the `&localVar`→stack rule with the union-on-stack sub-case; decomp.me decomp-help.)_
 - **`mov rT,#MASK; and rT,rT,rflags; cmp rT,#0; beq skip  — agbcc loads the mask into a reg and ANDs (does not use tst)`** ⟸ if (flags & MASK) ...  (bit-test branch)  
   _agbcc emits `mov #mask; and; cmp #0; beq` rather than `tst`. For masks needing a pool literal (mask > 0xFF and not a shifted-immediate) it loads via `ldr rT,=mask` instead of `mov`._  
   `ex: mov r1, #0x40 ; 	and r1, r1, r0 ; 	cmp r1, #0 ; 	beq .L15`

@@ -296,8 +296,14 @@ Both confirm the GBA Thumb pipeline works: with `--target gba`, m2c parses
 ### ARM/Thumb-specific weaknesses (pret/decomp.me consensus)
 
 ARM support is the YOUNGER backend (lower coverage than MIPS) — treat m2c-ARM as
-experimental and the AI seed-and-refine loop as the standard path. Known rough
-edges to hand-fix:
+experimental and the AI seed-and-refine loop as the standard path. **Resolving the
+"no m2c for ARM" rumor (Bf9):** m2c's ARM/Thumb support is REAL and m2c-from-CLI on
+GBA works; what was broken was the decomp.me WEBSITE gating it via a config bug
+(`has_decompiler=True` missing for ARM in `coreapp/platforms.py`) — the website, not
+the tool. m2c's effort ranking is MIPS ≫ PPC ≫ ARM (ARM is the weakest, breaks on
+C++/LTO, emits `MULT_HI`-isms + goto-soup), so use it to get COMPILING/EQUIVALENT
+output fast then hand-iterate; doing many scratches for the same game trains you to
+read its patterns. Known rough edges to hand-fix:
 
 - **Poor register-size aliasing** — m2c is weak at tracking when a value is read
   back at u8/u16 vs word width; re-type fields against the load mnemonic oracle

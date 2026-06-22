@@ -431,6 +431,53 @@ strategically relevant corpus for FE8J. Highest-value lessons:
   is NOT production-ready — the decomp.me maintainer's view: generic LLM fine-tuning learns to
   RESEMBLE a project, not follow the asm; sanitize identifiers so a model can't cheat with names.
 
+### Follow-up deltas (decomp.me decomp-general TAIL + decomp-help; ≥MED, NEW)
+
+- **Ff1 [HIGH] Transmuter CLEANS UP `register asm()` pin hacks into readable C.** Transmuter (macabeus,
+  a no-AI permuter-rewrite with an HTTP server) fed an ugly pinned routine brute-forced a PIN-FREE
+  plain-arithmetic equivalent that still matches. USE-CASE: after a function only matches with
+  `register asm()` pins, run transmuter to remove the pins and recover maintainable C — turns "matched
+  but ugly" into clean WITHOUT an LLM. (Extends the Transmuter catalog entry above.)
+- **Ff2 [HIGH, governance] "AI matched it with pins" is PROVISIONAL.** An AI/LLM 100% byte-match whose C
+  is hack-laden (register-asm pins, raw pointers, magic offsets) is worthless for mod-friendly source.
+  For FE8J the byte match IS the deliverable, so we are less exposed — BUT the same hack-prone behavior
+  is exactly what `no-raw-hex-pointers` + the deterministic gate must keep blocking. Schedule a
+  transmuter cleanup pass (Ff1) before banking. (Sharpens F1/F14.)
+- **Ff3 [HIGH] Route LOOP-WITH-ARRAY-ACCESS functions AWAY from blind AI.** AI reliably decompiles the
+  SMALLEST functions once the compiler + thin tooling is in place, but is a "massive waste of tokens"
+  on anything serious — ESPECIALLY loops with array access. Route those to permuter/hand-decomp;
+  reserve AI for small + identification work. "AI is NOT good at GBA decomp" + agbcc under-representation
+  in every corpus means the FE8J loop must lean HARD on the deterministic compile/diff loop + the
+  same-compiler matched corpus (F9), not the model's intrinsic agbcc knowledge. (Sharpens F4/F8/F12.)
+- **Ff4 [HIGH, loop state-machine] Match LOGIC first, registers/stack LATER.** Gate "is it logically
+  equivalent yet?" BEFORE spending permuter/regalloc budget; rotate stalled functions to the BACK of
+  the queue (sharing a scratch often rubber-ducks the fix); "don't grind one function — build experience
+  on others and return." The NEW emphasis is the explicit logic-first / registers-later PHASE ORDERING.
+  (Convergent with F8/F15; feeds the wave picker.)
+- **Ff5 [MED] INCLUDE_ASM↔C handoff traps that fail the FULL build though a scratch is 100%:** (a) a
+  referenced data symbol in a DISCARDED section (`.sdata`/`.scommon` "defined in discarded section" link
+  error → `extern` it / don't re-emit), (b) an unexpected trailing `nop` (alignment) the ROM lacks,
+  (c) a `void`/empty function the splitter emits as an empty stub → undefined reference. A `.text`-only
+  scratch match is necessary-not-sufficient — only the cold FULL `make compare` sha1 counts. (Convergent
+  with the git-add-abort / full-make-compare-before-commit memories; NEW concrete modes.)
+- **Ff6 [MED, optional] `#if NON_MATCHING / <WIP> #else #include "asm" #endif`** keeps half-done
+  reconstruction C beside the byte-matching incbin so the build always stays OK. FE8J's ldscript-incbin
+  already guarantees this, but the in-file toggle is a clean way to keep WIP C for a region without
+  regressing `make compare`. (See also `docs/nonmatching.md` staging tier.)
+- **Ff7 [HIGH, harness ref] `jurrejelle/ai-melee-decomp`** — an `AUTO_CLAUDE.md` "main playbook" the
+  agent follows + a `skills/melee-objdiff/SKILL.md` that wraps objdiff to report current match%/state as
+  a Claude Skill. Pattern: encode build/diff/state-read loops as token-minimal SKILLS the agent calls,
+  not prose. FE8J already does this (autocarve/loop_prompt) — cross-reference for skill-shape ideas.
+- **Ff8 [MED, governance] "Vibe decomp" is OUT OF SCOPE.** A non-byte-exact LLM + IDA/Ghidra MCP
+  ("remake the source with the same types/names/dirs") is a fast path to a PLAYABLE port but explicitly
+  NOT byte-matching and accumulates hidden mistakes. FE8J requires sha1 — the byte-exact oracle is
+  exactly the value vibe-decomp lacks; never let an agent silently drift into vibe-mode.
+- **Cf7 [HIGH, governance] Byte-match fake-rate is OPT-LEVEL-dependent.** A verified 100% byte-match can
+  still be a FAKE (manual pointer-arith, magic offsets, C-emulated vtables). A corpus shows fakes in
+  30–50% of `-O0`/`-O1` functions vs only ~0.5% (8/1600) for a clean `-O3` GCC build. IMPLICATION:
+  agbcc `-O2` is on the LOW-fake end (good), but "byte-match ≠ usable C" (F1) still bites whenever a
+  carve uses raw offsets — keep the raw-hex-pointer gate. (Quantifies F1 by opt level.)
+
 ---
 
 ## Top ~10 highest-value findings (for CTO triage)

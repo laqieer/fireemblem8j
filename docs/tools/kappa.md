@@ -19,6 +19,14 @@ AI prompts (with embeddings-based "similar function" retrieval using Voyage AI
 clean up decompiler output. It targets a `decomp.yaml`-described project across
 many platforms (gba/nds/n64/gc/ps1/...).
 
+> **Note (follow-up Discord mining, Bf10): Kappa was BUILT arm/GBA-first.** Its
+> asm-embedding indexer makes ARM assumptions and does not yet generalize to MIPS,
+> so for an ARM/Thumb project like FE8J Kappa's similarity index is the
+> MOST-aligned existing tool of its class; it is migrating to objdiff as its diff
+> backend and adding a per-platform config (asm path, arm-vs-mips name extraction).
+> This sharpens "borrow ideas" below — the embeddings/AST-grep layers are designed
+> for exactly our target.
+
 **Why it's not a direct fit for us.** kappa is fundamentally a VS Code / Copilot
 **IDE workflow** — its entry points are code lenses, command-palette commands,
 `vscode.window` progress UI, `vscode.LanguageModelTool` registrations, and the

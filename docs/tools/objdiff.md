@@ -174,6 +174,21 @@ ARM-support facts above:
    can report 100% on equivalent mnemonics that differ in encoding/operands. It is a
    navigation aid; **`make compare` sha1 is still the only proof** (consistent with
    the all-or-nothing note above).
+4. **objdiff is the RECOMMENDED default GBA differ over asm-differ** (better ELF
+   parsing, reloc-aware, doesn't over-include neighboring functions, no `diff_settings.py`,
+   no shared-symbol-name requirement if you `.global` the symbol) — and asm-differ's
+   "load address" failure on GBA is STRUCTURAL (GBA runs in place, so there is no
+   separate load-address map; see `asm-differ.md`). **KNOWN GAP:** objdiff does NOT
+   surface `-g` DWARF debug info (shows nothing / `UnexpectedEof`) whereas asm-differ
+   DOES — to get debug names in a diff/AI prompt, build the `.o` twice (with/without
+   `-g`) and read symbols outside objdiff.
+5. **False-100% modes to guard:** (a) old objdiff IGNORED `.NON_MATCHING`/nonmatching
+   markers until a specific fix landed (reported 100% on files still marked nonmatching);
+   (b) it can treat two distinct relocations as "equal" when only the reloc TARGET differs.
+   The cold full `make compare` sha1 is the only proof.
+6. **Function mis-segmentation** (trailing data / inline jump-tables read as a separate
+   func): in IDA press `C` to force-code; in Ghidra select start→shift+click end (or script
+   the span). Accurate symbol `.size` is the fix — the same discipline as gotcha 2.
 
 ## Progress / report pipeline & CI (decomp.dev)
 
