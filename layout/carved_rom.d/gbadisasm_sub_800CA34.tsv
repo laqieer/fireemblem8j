@@ -1,1 +1,1 @@
-00CA34	00CA94	asm/sub_800CA34.o(.text.sub_800CA34)	sub_800CA34 region-different gbadisasm descriptive asm
+00CA34	00CA94	src/sub_800CA34.o(.text)	EventA9_WmUnitMovePaths region-different C

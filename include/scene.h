@@ -209,7 +209,7 @@ void PrintStringToTexts(struct Text** texts, const char* str, u16 * tm, int unk)
 void TalkPutSpriteText_OnIdle(struct Proc*);
 void ClearPrimaryHBlank(void);
 void TalkPutSpriteText_OnEnd(void);
-int GetStrTalkLen(const char*, s8);
+int GetStrTalkLen(const char*, int);
 bool GetZero(void);
 void TalkDebugNop(void);
 void TalkBgSync(int bg);
