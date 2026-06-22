@@ -215,3 +215,6 @@ fireemblem8.elf.til
 fireemblem8.elf.i64
 
 .claude/pua-loop-*
+
+# local learning reference (community-matched scratches from decomp.me; not redistributed)
+docs/refs/decompme_fe/
