@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-22)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 95.53%** (8147/8528 funcs) → **~381 functions genuinely unmatched**
+- **MATCHING-C: 95.57%** (8150/8528 funcs) → **~378 functions genuinely unmatched**
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
 - NAMED SYMBOLS: 85.24% (capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 
