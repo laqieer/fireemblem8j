@@ -3,3 +3,5 @@ gSummonConfig	089CFD18	data	SummonCommandUsability config
 gEventscr_1	085B9BE4	data	Event21_TextBg
 gEventscr_3	085B9C3C	data	Event21_TextBg
 gEventscr_4	085B9C94	data	Event21_TextBg
+gUnk_82	030053D0	data	ClassChgSel_StartClassBattleSprite
+gUnk_83	030053F8	data	ClassChgSel_StartClassBattleSprite
