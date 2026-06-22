@@ -46,6 +46,7 @@ UNSOLVED at worst. If you're tempted to give up, you're missing a lever below.
 - **arg-evaluation order / scratch-register choice** (the "hard" ones — under-tried, NOT walls):
   try ordered temporaries (`int a0=x; int a1=y; f(a0,a1);`), splitting the call, changing which
   value is live/recomputed at the call, or restructuring the expression. Report exact bytes if stuck.
+- **arg-evaluation order & prologue save-mask are NOT walls (source-proven, see `agbcc_internals.md`):** thumb agbcc loads call args strictly LEFT-TO-RIGHT (arg0→r0…) — fixed, so a wrong rN↔value mapping is a PROTOTYPE/arg-expression bug (match param types/count exactly, mind PROMOTE_PROTOTYPES widening s8/s16 to a full reg + struct-return's hidden sret arg), not an order knob. The prologue PUSH mask = callee-saved regs r4-r7 that are `regs_ever_live`; a `register asm("rN")` IS added to the push (no asm-pin-excluded quirk) — so pin to match a JP save.
 - **struct-field offset diffs** (a literal resolves ±N): the struct layout in the header differs
   from JP — usually a JP-specific field offset; fix the struct or use the right field, don't force.
 
