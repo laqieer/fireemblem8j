@@ -6968,3 +6968,18 @@ UnitLibSio) in isolated worktrees → /tmp/recipes_<sub>.json; CTO integrates ea
 compare. CORRECTION (user): as P10, do NOT run detailed tasks inline (it blocks the main thread) —
 delegate to background P9 teams, keep CTO free to orchestrate+integrate. Addresses: region-same jp==us
 (reliable); region-different nofuncmap addrs are STALE — use carve_recipe.py / carved_rom.d / disasm.
+
+## D273 — Session integration outcome + the sadiff-is-not-the-oracle lesson (+11 matching-C)
+Banked +11 matching-C: 1589e042f (+3 carvable: PutTime/GenericOptionChangeHandler/_UpdateKeyStatus),
+f3e7d5319 (+5 P9-Verification), 76a5fa5c3 (+3 statscreen: DisplayBwl/HbPopulate_SSStatus/TryRelocateHbRight).
+HARD LESSON (cost several rebuild cycles): worker `sadiff diff=0` is RELOC-EXCLUDED and is NOT the gate.
+Of 7 P9-Verification "matches", the full-link `make compare` confirmed only 5 — rejecting Event25_ChangeMap
+(reloc-mismatched BL, range diff=6) and StartSubSpell_efxNaglfarOBJ2 (unbound AnimScr_*_1/_3 data, masked
+by sadiff). Integration MUST: batch carves → ONE full make compare → on fail, diff each fn range in
+fireemblem8.gba vs baserom to find the culprit → revert it → rebuild → commit the byte-perfect remainder.
+Also: baseline-symbol drop must check BOTH layout/baseline_syms.tsv (master) AND baseline_syms.d/
+(apply_v2 only checks .d/ — GmMu_SetPosition was master-only). Process corrections this session (logged as
+memories): bounded-workers, verify-don't-declare-dead, JP-area-first frontier (docs/frontier.md), the
+fe8u-module matching-C frontier is EXHAUSTED (6 module teams → ~0 net-new; real remainder = permuter-class
++ JP-only areas). Discord follow-up mined +59 findings (/tmp/discord_findings_followup.md). DEFERRED:
+efxNaglfar binds, Event25 permuter, ~20 byte-neutral renames, JP-area ground-truth before re-dispatch.
