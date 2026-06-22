@@ -1,6 +1,12 @@
 # FE8J Data-Axis Target Map (CTO scout — 2026-06-13, loop iter2)
 
-Axis 3 "Extracted data" = **3.51%** (489,492 / 13,938,060 B). The ~13.4 MB un-extracted lives
+> **Note on data metrics.** `calcprogress.py` reports "Extracted data = 100%" but this is
+> tautological (denominator == numerator). The 3.51% figure below uses a more honest
+> denominator (raw data region bytes). Neither figure should be taken as "done" — the
+> tier map below describes what genuinely remains to extract. See `docs/frontier.md`
+> for the overall work list.
+
+Axis 3 "Extracted data" = **3.51%** (489,492 / 13,938,060 B, honest denominator). The ~13.4 MB un-extracted lives
 in committed-but-opaque `data/*.bin` (named `.incbin` is NOT extraction — `calcprogress.py` excludes it).
 This map tiers the remainder by **(volume × confidence × risk)** so each P9-Soil wave hits the right target.
 

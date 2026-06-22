@@ -182,10 +182,10 @@ coordinator to run on a full checkout with the toolchain + API key present.
   must still pass `make compare` before anything is committed.
 
 ### Risks / caveats
-- **Bigger picture mismatch.** FE8J is ~94% *data*; the frontier is region-different
-  *assets/tables* carved via `scripts/carve_data.py`, not function decompilation.
-  Mizuchi targets function matching, so it addresses a shrinking slice of remaining
-  work.
+- **Bigger picture mismatch.** FE8J is ~94% *data* (by ROM volume); see
+  `docs/frontier.md` for the current code-matching frontier (~389 unmatched functions
+  at 95.44% matching-C). Mizuchi targets function matching, which is now a smaller
+  but still real slice of remaining work.
 - **Cost/throughput.** The `run` loop spends API tokens per function with up to 25
   retries; without IDA/Ghidra grounding it will burn more for less on the hard
   functions than our existing loop.

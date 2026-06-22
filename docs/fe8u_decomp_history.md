@@ -111,7 +111,9 @@ FE8J should mirror it.
   ~2.4 MB banim blob, still incbin). Hand-ARM `arm.s`/`arm_call.s` are permanent.
 - **2026 — declared code-complete.** Remaining work is *data extraction and full
   shiftability* (resolving every pointer so `baserom.gba` leaves the build graph) —
-  exactly the frontier FE8J faces.
+  the frontier FE8J faced at the time of writing; FE8J has since reached 100%
+  extracted-data and 95.44% matching-C. (For the current FE8J frontier, see
+  `docs/frontier.md`.)
 
 ---
 

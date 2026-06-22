@@ -49,8 +49,9 @@ error rate plus stale names, so every entry must pass `make compare` before comm
   addresses are *not* in `us_jp_funcmap.tsv` — i.e. region-different candidates,
   the high-value ones. Of these, **6,378 carry a usable FE8U address** and ~1,972
   also carry a (possibly stale) name. This roughly covers the **entire remaining
-  region-different code front** (~5,942 functions remain to map; ~350 already
-  carved as gbadisasm anchors). 97.6% of all library FE8J entries also have an
+  region-different code front** (~5,942 functions remain to map at the time of
+  this investigation; ~350 already carved as gbadisasm anchors). (Historical
+  snapshot — matching-C is now at 95.44%; see `docs/frontier.md` for current counts.) 97.6% of all library FE8J entries also have an
   FE8U address, so almost every hint is directly portable from the US decomp.
 
 - **Spot-check accuracy: 10/10 addresses correct.** A spot-check of 10 NEW
@@ -183,7 +184,7 @@ is a verified real US-ELF function address, so they drop into QBinDiff verbatim 
 crosswalk**. Add the carved gbadisasm anchors and the library's `functions.ls`
 pairs as extra (lower-priority) seeds. That pins ~57% of all nodes, turning
 belief-propagation from recall-favoring guesswork into **high-precision neighbor
-propagation** over the ~5,942 unmatched region-different funcs.
+propagation** over the then-unmatched region-different funcs (~5,942 at the time of this investigation; see `docs/frontier.md` for current counts).
 
 ### Step 3 — Constrain with address-order monotonicity
 

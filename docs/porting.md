@@ -72,8 +72,6 @@ address; `layout/us_jp_funcmap.tsv` maps function *names*.
 
 ## Scaling
 
-Functions calling only mapped symbols + own data are portable now. The frontier
-is data globals that no located function references yet (absent from
-`addr_map.tsv`) — extend coverage by locating more functions (improve the masked
-tier of `match_us_jp.py`) and by content-matching data blobs (the dump_*.py
-extractors, re-pointed to JP). Track on the project board.
+Functions calling only mapped symbols + own data are portable now. For what
+remains as the active work list, see `docs/frontier.md` (single source of truth
+for the remaining work). Track progress on the project board.

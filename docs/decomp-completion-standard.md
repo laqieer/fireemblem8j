@@ -1,5 +1,15 @@
 # What "Decompilation Complete" Actually Means (and Where FE8J Really Stands)
 
+> **NOTE — Snapshot document.** The definitions, methodology, and standards
+> described here are timeless and remain valid. However, the "FE8J's TRUE current
+> state" figures throughout (25.6% matching-C, ~0.12% data, ~17% build
+> self-containment, ~59% named) are **historical snapshots from early in the
+> project**. Current ground-truth figures (from `scripts/calcprogress.py`):
+> matching-C **95.44% (8139 / 8528)**, build self-containment **100%**, extracted
+> data **100% of measured set**, named symbols **85.23%**. For what remains, see
+> `docs/frontier.md`.
+
+
 A prior effort drove the catch-all `asm/baserom.s` to **zero** `.incbin "baserom.gba"`
 directives and declared the FE8J decompilation **complete**. That conclusion was
 wrong. Nothing was decompiled or extracted to achieve it — the 12,462 incbins were
@@ -304,13 +314,14 @@ met.
 
 | Axis | Definition (denominator) | FE8J today | Target |
 |---|---|---|---|
-| **Build self-containment** | bytes producible from source ÷ 16,777,216 | **~17%** | 100% (self-contained build passes) |
-| **Matching-C functions** | matching-C funcs ÷ 8,528 | **25.6%** (2,187) | 100% (FE8U: 99.777%) |
-| **Extracted data** | extracted-asset bytes ÷ data bytes (real `dataTotal`, **not** `data_bytes`) | **~0.12%** | 100% |
-| **Named symbols** | named ÷ total labels (no overflow) | **~59%** (8,180 placeholders of 19,961) | 100% (FE8U: 0 `sub_`/`nullsub`) |
+| **Build self-containment** | bytes producible from source ÷ 16,777,216 | ~~**~17%**~~ → **100%** (current) | 100% (self-contained build passes) |
+| **Matching-C functions** | matching-C funcs ÷ 8,528 | ~~**25.6%** (2,187)~~ → **95.44% (8139)** (current) | 100% (FE8U: 99.777%) |
+| **Extracted data** | extracted-asset bytes ÷ data bytes (real `dataTotal`, **not** `data_bytes`) | ~~**~0.12%**~~ → **100% of measured set** (current) | 100% |
+| **Named symbols** | named ÷ total labels (no overflow) | ~~**~59%**~~ → **85.23%** (current) | 100% (FE8U: 0 `sub_`/`nullsub`) |
+
+_(Row values updated to ground truth from `scripts/calcprogress.py`. Struck-through values are the historical snapshots from when this doc was written. See `docs/frontier.md` for what remains.)_
 
 Until all four reach 100% **and** the self-contained build passes with `make compare`
-→ `OK`, FE8J is an **in-progress** decompilation — currently ~17% build-independent,
-25.6% decompiled-to-C, ~0.1% data-extracted, ~59% symbol-named — not a complete one.
-The single number that matters most is the first one, because it is the only one that
-cannot be gamed by relabeling: **remove `baserom.gba`, and see if `make` still builds.**
+→ `OK`, FE8J is an **in-progress** decompilation. The single number that matters most
+for true completion is matching-C at 100%, because it is the only one that cannot be
+gamed by relabeling: **every function must compile to exact bytes.**

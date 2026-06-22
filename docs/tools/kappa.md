@@ -28,8 +28,9 @@ oracle. Almost every kappa feature is glued to the `vscode` API
 (`src/db/db.ts`, `src/decompme/create-scratch.ts`, `src/m2c/m2c.ts` all
 `import * as vscode`), so we cannot consume kappa as-is. It is also built for
 **function matching** (m2c/permuter/decomp.me all operate per-function), whereas
-our remaining frontier is ~94% **data** plus ~11 region-different code TUs
-(`docs/decisions.md` D9/D10) — a
+our remaining frontier is primarily **data** plus the unmatched code TUs
+(see `docs/frontier.md` for current counts — the ~11 TU figure is a historical
+snapshot from early in the project; `docs/decisions.md` D9/D10 for context) — a
 mismatch in problem shape. So: **learn-only**, borrow ideas, do not install.
 
 ## 2. Borrowable ideas

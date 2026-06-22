@@ -1,13 +1,18 @@
 # FE8J decomp frontier (living doc — update every session)
 
+> **This is the SINGLE SOURCE OF TRUTH for what remains.** All other docs (README,
+> CLAUDE.md, strategy/porting/etc.) point here for "the frontier / what's left" and
+> must not fork it. Do **not** read `layout/nofuncmap_*.tsv` as the work list — it is
+> a stale, ~10× inflated classification cache (see "Pitfall" below).
+
 **Keep this current.** Refresh the numbers from `scripts/calcprogress.py` and the target lists from
 ground truth whenever an axis moves. Stale frontier data caused real wasted work (see "Pitfall" below).
 
 ## Current state (2026-06-22)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 95.44%** (8139/8528 funcs) → **~389 functions genuinely unmatched**
+- **MATCHING-C: 95.53%** (8147/8528 funcs) → **~381 functions genuinely unmatched**
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.23% (capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.24% (capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 
 ## Code frontier — priority order (USER-DEFINED, JP-area-first)
 The remaining matching-C work is JP-only / JP-divergent code that **cannot be ported from fe8u** and

@@ -62,6 +62,29 @@ so you don't re-open or contradict settled decisions. Only escalate to the human
 for matters genuinely outside your authority or irreversible. See also the loop
 playbook in `docs/porting.md` and the per-iteration prompt `.claude/loop_prompt.md`.
 
+### Doc-maintenance discipline (every session / integration — MANDATORY)
+
+Stale docs cost real work (teams were once aimed at an already-carved frontier).
+Before ending a session that moved any axis, run this checklist (full version in
+[`docs/maintenance.md`](docs/maintenance.md)):
+
+1. **Frontier = `docs/frontier.md`, and only there.** It is the single source of
+   truth for what remains. Refresh its numbers (from `scripts/calcprogress.py`)
+   and its target lists whenever an axis moves. Never define a work frontier from
+   `layout/nofuncmap_*.tsv` — that is a stale, ~10× inflated, un-pruned
+   classification cache, **not** the work list. Spot-check a sample before
+   dispatching any team; if entries are already carved, the list is stale.
+2. **README scorecard** — if a 4-axis number changed, update the README table
+   from `scripts/calcprogress.py` (keep the honest 4-axis framing; do not inline
+   per-carve history there — that lives in `docs/decisions.md`).
+3. **Log decisions** — record any fork/approach/next-phase decision + rationale in
+   `docs/decisions.md` (and project board #14).
+4. **Cross-check, don't invent.** Numbers come from `scripts/calcprogress.py` /
+   `scripts/check_selfcontained.py`; if a doc states a permanent agbcc "wall /
+   dead-end", treat it as provisional and cross-reference
+   `docs/agbcc_codegen_levers.md` (most were dissolved into forceable levers).
+
+
 ## Reference repo
 
 `../fireemblem8u` — complete source, `fireemblem8.map`, `fireemblem8.elf`, and

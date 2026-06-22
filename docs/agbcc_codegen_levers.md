@@ -3,8 +3,10 @@
 Empirically established against the exact build binary `tools/agbcc/bin/agbcc`
 (GCC 2.95, `-O2 -mthumb-interwork -fhex-asm`). These turn many region-different
 `sub_` near-misses — previously written off as "unforceable reg-alloc / lsr↔asr
-dead-ends" — into byte-perfect matching C. **13 of 107 documented dead-ends were
-reclaimed** applying these; 30 more reduced to single-digit diffs.
+dead-ends" — into byte-perfect matching C. **17 of ~142 documented dead-ends were
+reclaimed** applying these; 30 more reduced to single-digit diffs. The remainder
+are marked UNSOLVED (not DEADEND — any Thumb function compiled from C has matching
+C by construction; treat non-zero diffs as unsolved reconstruction work).
 
 ## 1. `lsr` vs `asr` is chosen ONLY by the shifted operand's signedness
 
@@ -79,7 +81,7 @@ main thread before commit (worktree sadiff is reloc-excluded; the full link is t
 oracle). Candidate sources: the `lsr-asr` / `reg-alloc` buckets of the sweep
 dead-end classifications.
 
-## 6. Statement reordering (scheduling class) + the irreducible wall
+## 6. Statement reordering (scheduling class) + unsolved patterns (NOT a permanent wall)
 
 agbcc materializes values in **source-statement order**. If JP computes A before B but
 you emit B first, reorder the source (or hoist into an earlier temp / sink later). Two
@@ -110,4 +112,5 @@ mark UNSOLVED and report the exact differing bytes. See `decomp_agent_playbook.m
 
 Reclaim hit rate: **17 of ~142 classified dead-ends** (lsr/asr 31 + reg-alloc 93 +
 scheduling 36, minus overlap) recovered to byte-0; the rest split between the
-irreducible wall above and genuine region-different behavior (different US source).
+unsolved patterns above (provisional — mark UNSOLVED, not DEADEND) and genuine
+region-different behavior (different US source).

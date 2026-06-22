@@ -1,5 +1,12 @@
 # NON_MATCHING C — the readability tier above descriptive asm
 
+> **Note on dead-end classifications:** Any function labelled "dead-end" in this
+> doc or in issue comments should be treated as **provisional**. Many previously
+> classified dead-ends (lsr/asr, reg-alloc, prologue-push) were reclaimed via
+> deterministic levers. Before parking a function as permanently non-matching, apply
+> `docs/agbcc_codegen_levers.md`. For the current live frontier of genuinely
+> unmatched functions, see `docs/frontier.md` (single source of truth — not tsv caches).
+
 ## Core thesis
 
 FE8J carves every hard, region-different function as **descriptive asm**
@@ -15,8 +22,11 @@ descriptive asm  ──►  NON_MATCHING C  ──►  matching C
  byte source = .s      byte source STILL = .s    byte source = .c
 ```
 
-NON_MATCHING C **unblocks documentation and readability of the ~5942 remaining
-hard functions WITHOUT ever touching `make compare`**. It is an *enhancement*,
+NON_MATCHING C **unblocks documentation and readability of the remaining
+hard functions WITHOUT ever touching `make compare`**. (For the current count
+of genuinely unmatched functions, see `docs/frontier.md` — the single source of
+truth. The ~5942 figure above is a historical snapshot from when this document
+was written; matching-C is now at 95.44%.) It is an *enhancement*,
 not a goal change: CLAUDE.md already accepts descriptive asm as "real source"
 for the final goal. NON_MATCHING C is a staging area for future matching plus
 living documentation of intent — never a byte-match claim.
@@ -52,8 +62,8 @@ BUGFIX 1` prelude block, and the iron rule that the oracle build never defines
 (`#if !defined(MODERN) || !MODERN` for `STRUCT_PAD`) but lacks the block —
 adding it wires the two-build split for free. We keep the US `#if NONMATCHING`
 in-C toggle **only** for genuinely-matching C (the ~6 inherited files like
-`src/spline.c` — already correct, leave them). For the ~5942 region-different
-functions whose byte source is asm, we use a **distinct file/build-level
+`src/spline.c` — already correct, leave them). For the region-different
+functions whose byte source is asm (~5942 at time of writing; see `docs/frontier.md`), we use a **distinct file/build-level
 convention** (below), because reusing the same token for "in-oracle matching
 aid" and "out-of-oracle documentation" would be ambiguous and the US repo has no
 INCLUDE_ASM analogue to copy.
