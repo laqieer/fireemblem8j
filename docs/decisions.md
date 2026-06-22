@@ -6915,3 +6915,16 @@ Genuine dead-ends (documented, NOT forced): struct-offset diffs (DrawGMapPIPanel
 -2, BonusClaim -4), data-index offsets (EndingCredits -0x14, Uidebug +0x18),
 NewPopup 2nd-diff, and one truncated agent recipe (SioHandleIrq_Serial). The 73+119
 sweep dead-ends are codegen mismatches (reloc-excluded diff>0). Sweep 4 in progress.
+
+## D270 — codegen "dead-ends" ARE forceable: agbcc lever toolkit (matching-C 94.59→94.75%, +13)
+
+Investigated the "unforceable reg-alloc / lsr↔asr" frontier. Empirically established
+(probe matrix vs tools/agbcc/bin/agbcc) that agbcc chooses lsr/asr SOLELY by the
+shifted operand's signedness, and HONORS `register T x asm("rN")` pins. Built
+scripts/-style reclaim workflow (/tmp/reclaim.js) over the 107 lsr-asr+reg-alloc
+sweep dead-ends → 13 reclaimed to diff=0, 30 reduced to single digits. Levers, in
+yield order: int-local-widen (8), signedness-cast (3), per-target -O1 (2, agb_sram),
+register-pin (1, clean swaps only — often regresses). Plus data-bind + branch-polarity
+for the LINK/ordering residue. Full toolkit: docs/agbcc_codegen_levers.md. Result:
+reg-alloc/shift dead-ends are NOT a hard ceiling — a recoverable vein. 30 PARTIALs +
+the 'scheduling'/'region-diff' buckets remain to mine.
