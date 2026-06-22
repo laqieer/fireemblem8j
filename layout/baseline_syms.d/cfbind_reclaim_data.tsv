@@ -1,2 +1,5 @@
 gGMapMuSpriteLayerLut	08AC1CB0	data	GmMu_SetUnit LUT
 gSummonConfig	089CFD18	data	SummonCommandUsability config
+gEventscr_1	085B9BE4	data	Event21_TextBg
+gEventscr_3	085B9C3C	data	Event21_TextBg
+gEventscr_4	085B9C94	data	Event21_TextBg
