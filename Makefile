@@ -80,6 +80,8 @@ else
 endif
 
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -ffix-debug-line -g
+# agb_sram fast-SRAM routines byte-match only at -O1 (same as fe8u's `src/agb_sram.o`).
+src/ReadSramFast_Core.o src/WriteSramFast.o: CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1 -fhex-asm -ffix-debug-line -g
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .
 
