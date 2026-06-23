@@ -35,17 +35,16 @@ cd "$HERE"
 # and clobber the main repo's output, breaking isolation. The worktree builds its
 # own ELF from the (copied) objects below.
 mkdir -p tools
-ln -sfn "$MAIN/tools/agbcc" tools/agbcc
 ln -sf  "$MAIN/baserom.gba" baserom.gba
-# build-essential gitignored tool dirs: preproc + gbagfx are required to build the
-# data/graphics objects (without them ~39 data .o compile EMPTY and `make compare`
-# silently produces a wrong ROM). Symlink them like agbcc.
-for t in preproc gbagfx; do
-    [ -e "$MAIN/tools/$t" ] && ln -sfn "$MAIN/tools/$t" "tools/$t" || true
-done
-# objdiff/asm-differ/m2c/coddog (per-symbol pre-gate + triage) if the agent uses them
-for t in objdiff asm-differ m2c coddog; do
-    [ -e "$MAIN/tools/$t" ] && ln -sfn "$MAIN/tools/$t" "tools/$t" || true
+# Symlink EVERY toolchain dir under tools/ (all read-only build inputs). Missing any
+# of them makes a whole object class build EMPTY and `make compare` silently produce
+# a wrong ROM: agbcc (code), preproc/gbagfx/bin2c (data+gfx), aif2pcm/mid2agb (sound),
+# gbadisasm (carve diffs), plus triage tools (objdiff/asm-differ/m2c/coddog). A glob
+# is future-proof — new tools are picked up automatically.
+for d in "$MAIN/tools/"*/; do
+    [ -d "$d" ] || continue
+    name="$(basename "$d")"
+    ln -sfn "$d" "tools/$name"
 done
 
 # --- warm object cache: COPY built objects (do NOT hardlink) -----------------
