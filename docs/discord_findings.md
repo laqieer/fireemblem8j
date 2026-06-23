@@ -523,3 +523,59 @@ strategically relevant corpus for FE8J. Highest-value lessons:
 - **Existing-doc overlap:** docs/tools/* and docs/agbcc-matching-playbook.md already cover much of
   Bucket B and some D — the CTO should DIFF before integrating to avoid duplication (the per-item
   "→ target" routing and the NEW/already-in-docs flags are provided to make this cheap).
+
+## New AI-decomp tooling (decomp.me `ai` channel, re-read 2026-06-23)
+
+Distilled from the `ai` channel export (2025-07 → 2026-06). Paraphrased; no raw log text.
+Bottom line: one newly-released tool — **Transmuter** — natively targets our exact stack
+(agbcc + ARM-Thumb + Claude-Code-in-the-loop) and is the highest-leverage thing to evaluate
+against our `-mjp-promote` reg-alloc/scheduling NEAR backlog.
+
+### Transmuter — EVALUATE (highest priority)
+- By `bmacabeus` (active GBA/agbcc tooler). Repo: https://github.com/macabeus/transmuter
+  (announced ~2026-04-12; young, ~"needs real-world battle testing").
+- A **from-scratch rewrite of decomp-permuter** as a *library + HTTP service*, built specifically
+  because **permuter is inaccurate on agbcc** — our exact pain point. README claims built-in
+  **`agbcc` and `old-agbcc`** compiler profiles, ARM/Thumb via `arm-none-eabi-as`, 49 mutation
+  rules, source-reduction + post-match cleanup, and an **`--api` HTTP control server "so a coding
+  agent like Claude Code can guide Transmuter automatically."**
+- Fit: maps directly onto our "permuter is stochastic; some NEARs stall" reality (Event0E/Event26/
+  PutFaceOnBackGround base-100+ NEARs that the stock permuter didn't converge). An LLM steering the
+  mutation search (inject candidate C, read asm diff, repeat) may close NEARs blind search can't.
+- Try (validate every score-0 through the real `make compare` sha1 — Transmuter's score is NOT our oracle):
+  - `git submodule add https://github.com/macabeus/transmuter tools/transmuter`; run its setup; it's a
+    `bun` CLI. **Register a custom compiler profile wrapping our exact pipeline incl. `-mjp-promote`**
+    (`cpp → iconv UTF-8→CP932 → agbcc -mthumb-interwork -mjp-promote -O2 -fhex-asm → arm-none-eabi-as`)
+    — the stock agbcc profile won't reproduce our flag's codegen space (same lesson as patching the
+    permuter's generated `compile.sh`, see docs/frontier.md).
+
+### Mizuchi — EVALUATE selectively (borrow patterns, don't rip-and-replace)
+- Same author. Repo: https://github.com/macabeus/mizuchi (open-sourced 2026-01-26, ~62 stars).
+- A pipeline runner: LLM writes C → compile → objdiff-score → auto-retry with the asm diff as context,
+  **racing decomp-permuter AND m2c** in parallel and preempting the LLM if permuter hits 0; indexes the
+  codebase to auto-pick the best reference candidate; m2c used as a no-LLM fast path for trivial fns.
+  Works on a Claude-Code subscription (no API credits) or `ANTHROPIC_API_KEY`. Targets gba/n64/ps1.
+- We already have a more ROM-aware topology (carve-worker/integrator + the single `make compare`
+  oracle + `-mjp-promote`/jp_agbcc). Worth borrowing: the **m2c fast-path pre-filter** and the
+  **objdiff-scored auto-retry-with-diff** loop into our autocarve/permuter scripts. Don't replace
+  the existing pipeline.
+
+### Actionable references mined alongside (GBA/agbcc-specific)
+- **Instrumented agbcc for ground-truth reg-alloc:** the Frogger's-Adventures GBA/agbcc decomp
+  (`JRickey/frog-adv-temple-decomp`, ~731/1000 in ~2 weeks with a worktree-worker + whole-ROM-check
+  topology like ours) built a *logging-augmented* agbcc (NOT a match-hacking one) so the agent reads
+  the compiler's actual register allocation instead of guessing. **Directly applicable to taming our
+  `-mjp-promote` reg-alloc NEARs** — consider adding a debug-print build of agbcc that dumps the
+  reg-alloc decision, to hand the permuter/LLM the exact swap to target.
+- **agbcc config ceilings are patchable, not foreign-compiler walls:** `bmacabeus` hit an m4a `tst`
+  ceiling (only old_agbcc's flag-setting path emits it) and ultimately *patched agbcc* — the SAME
+  class of fix as our jp_agbcc PROMOTE patches, independently confirming the D276 "config knob, not a
+  different compiler" thesis. Flag discipline echoes ours: m4a/SDK → old_agbcc (+ sometimes `-O1`);
+  link libgcc/libc objects directly rather than decompiling runtime thunks.
+- **Integrity consensus:** never let the AI modify the compiler to force a match; treat register-pin/
+  inline-`asm`/`while(1){…break;}` as last-resort TODOs, not real matches — reinforces our standing
+  "matching-C may be structurally unreachable for a subset; don't game `calcprogress`" rule.
+
+**Verdict:** ADOPT-after-pilot **Transmuter** for the NEAR backlog (it's the only new matcher built for
+agbcc+Thumb+agent-in-the-loop); BORROW patterns from **Mizuchi**; the bare agent-orchestrators and
+PS1/recomp tools mentioned in the channel are NOT-APPLICABLE.
