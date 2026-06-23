@@ -86,6 +86,7 @@ src/GetMovementScriptFromPath.o: CC1FLAGS += -mjp-promote
 src/GetEventTriggerId.o: CC1FLAGS += -mjp-promote
 src/TsaModifyFirstPalMaybe.o: CC1FLAGS += -mjp-promote
 src/Sio_RasterRotatedBoxToWinBuf.o: CC1FLAGS += -mjp-promote
+src/FilterBattleAnimCharacterPalette.o: CC1FLAGS += -mjp-promote
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
