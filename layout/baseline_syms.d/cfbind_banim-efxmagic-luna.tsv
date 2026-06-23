@@ -16,7 +16,7 @@ TsaArray_LunaBg3	086013E8	data	StartSubSpell_efxLunaBG3
 ImgArray_LunaBg3	08601418	data	StartSubSpell_efxLunaBG3
 Pal_LunaBg3	08759A38	data	StartSubSpell_efxLunaBG3
 AnimScr_EfxLuna2	0875ABFC	data	efxLunaOBJ_Loop_C
-AnimScr_EfxLuna4	BCF04698	data	efxLunaOBJ_Loop_B
+AnimScr_EfxLuna4	0875AE24	data	efxLunaOBJ_Loop_B
 ProcScr_efxLunaBG2	08601388	data	StartSubSpell_efxLunaBG2
 Img_LunaBg2	08756454	data	StartSubSpell_efxLunaBG2
 Tsa_LunaBg2	08756D94	data	StartSubSpell_efxLunaBG2
