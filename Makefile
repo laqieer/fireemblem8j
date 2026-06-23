@@ -67,6 +67,7 @@ src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSo
 # JP-agbcc (signedness-preserving) per-TU overrides — s8/s16-hold-form functions
 # that only byte-match when sub-word values keep their type signedness (D275).
 src/TsaModifyFirstPalReverse.o: CC1 := $(CC1_JP)
+src/DrawNumberText_WithReset.o: CC1 := $(CC1_JP)
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
