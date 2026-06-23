@@ -10,10 +10,13 @@
 #include "worldmap.h"
 
 //! FE8U = 0x080BAFE0
-void MapUnitC_SetBlendEnabled(struct GMapUnitContainerProc * container, int index, char flag)
+void MapUnitC_SetBlendEnabled(struct GMapUnitContainerProc * container, int index, s8 flag)
 {
-    struct GMapUnitProc * mapUnitProc = container->pMapUnitProcs[index];
-
+    struct GMapUnitProc * mapUnitProc;
+    if (flag)
+    {
+    }
+    mapUnitProc = container->pMapUnitProcs[index];
     if (flag)
     {
         mapUnitProc->flags |= GMAPUNIT_FLAG_BLEND;
@@ -22,6 +25,4 @@ void MapUnitC_SetBlendEnabled(struct GMapUnitContainerProc * container, int inde
     {
         mapUnitProc->flags &= ~GMAPUNIT_FLAG_BLEND;
     }
-
-    return;
 }
