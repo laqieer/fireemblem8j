@@ -103,6 +103,7 @@ src/Event3F_ScriptBattle.o: CC1FLAGS += -mjp-promote
 src/EventSetFogVisionExt.o: CC1FLAGS += -mjp-promote
 src/Event88_WmScrollCameraOntoUnit.o: CC1FLAGS += -mjp-promote
 src/ComputeBattleUnitAttack.o: CC1FLAGS += -mjp-promote
+src/GmMuPrim_3.o: CC1FLAGS += -mjp-promote
 src/CheckCanSummon.o: CC1FLAGS += -mjp-promote
 src/ForEachPosAtSinglePosition.o: CC1FLAGS += -mjp-promote
 
