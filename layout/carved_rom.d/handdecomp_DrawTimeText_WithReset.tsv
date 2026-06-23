@@ -1,0 +1,1 @@
+0389CC	038C1C	src/DrawTimeText_WithReset.o(.text)	handdecomp: DrawTimeText_WithReset (JP sub_80389CC; jp_agbcc s8-hold, DrawNumberText_WithReset + ClearText/InitText reset, GetStringFromIndex(0x194))
