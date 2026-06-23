@@ -69,6 +69,7 @@ src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSo
 src/TsaModifyFirstPalReverse.o: CC1FLAGS += -mjp-promote
 src/EfxTmCpyExt.o: CC1FLAGS += -mjp-promote
 src/efxLunaOBJ_Loop_C.o: CC1FLAGS += -mjp-promote
+src/efxLunaOBJ_Loop_D.o: CC1FLAGS += -mjp-promote
 src/efxHazymoonOBJ3_Loop.o: CC1FLAGS += -mjp-promote
 src/EventShinningCursorAdvance.o: CC1FLAGS += -mjp-promote
 src/EfxTmCpyExtHFlip.o: CC1FLAGS += -mjp-promote
