@@ -68,6 +68,7 @@ src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSo
 # declaration-order arg extension (PROMOTE_FUNCTION_ARGS). One flag, one agbcc.
 src/TsaModifyFirstPalReverse.o: CC1FLAGS += -mjp-promote
 src/EfxTmCpyExt.o: CC1FLAGS += -mjp-promote
+src/EventShinningCursorAdvance.o: CC1FLAGS += -mjp-promote
 src/EfxTmCpyExtHFlip.o: CC1FLAGS += -mjp-promote
 src/UnitGetDeathDropLocation.o: CC1FLAGS += -mjp-promote
 src/DrawPathArrow.o: CC1FLAGS += -mjp-promote
