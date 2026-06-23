@@ -1,0 +1,1 @@
+08B9C0	08BA30	src/DrawChapterTitleStrEx_jp.o(.text)	handdecomp: DrawChapterTitleStrEx_jp (JP sub_808B9C0; jp_agbcc; chap_title_data[c].null_1 branch: Decompress(gChapterTitleStrTsa_jp,gGenericBuffer)+CallARM_FillTileRect(gBG0TilemapBuffer,...,TILEREF(0x280,pal))+BG_SetPosition; else 0x40-tile DrawChapterTitleStr loop)
