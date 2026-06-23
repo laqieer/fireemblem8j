@@ -10,13 +10,15 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-23)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 95.70%** (8161/8528 funcs) → **~367 functions genuinely unmatched**
-- 🔑 **A major ceiling subclass was RECLASSIFIED from "unreachable" to "fixable" (D276).** The s8/s16
-  "hold-form" functions (hold a signed sub-word value sign-extended across the body) are NOT a foreign
-  compiler — they are a thumb `PROMOTE_MODE` config knob. `scripts/build_jp_agbcc.sh` builds `jp_agbcc`
-  (stock agbcc minus the forced-zero-extend on sub-word ints → preserves type signedness), applied **PER-TU**
-  via Makefile `CC1_JP` (like m4a `CC1_OLD`). First carve: TsaModifyFirstPalReverse (8160→8161). **Campaign
-  the s8/s16-hold subclass this way**, each gated by full `make compare`.
+- **MATCHING-C: 95.73%** (8164/8528 funcs) → **~364 functions genuinely unmatched**
+- 🔑🔑 **TWO major ceiling subclasses RECLASSIFIED from "unreachable" to "fixable" (D276/D276b)** via
+  `jp_agbcc` (built by `scripts/build_jp_agbcc.sh`, applied **PER-TU** via Makefile `CC1_JP`, like m4a
+  `CC1_OLD`). Two thumb-config knobs: (1) `PROMOTE_MODE` preserve sub-word signedness → **s8/s16-hold form**
+  (TsaModifyFirstPalReverse, DrawNumberText_WithReset, UpdateLinkArenaMenuScrollBar); (2) `PROMOTE_FUNCTION_ARGS`
+  → **arg-extension ORDER** (AddGorgonEggTrap — D275's flagship "impossible" fn). The combined patch is a
+  verified SAFE SUPERSET (one jp_agbcc serves both). jp_agbcc ALSO fixes downstream reg-alloc tiebreaks
+  (UpdateLinkArenaMenuScrollBar's r4↔r7 fell out with no extra lever). **Campaign all promotion/extension/
+  reg-alloc ceilings this way**, each gated by full COLD `make compare`.
 - The WINNABLE remainder also = **JP-divergent reconstruction** (rebuild from gbadisasm when the fe8u port is
   a structural mismatch — often a first-compile match) + localized signedness/int-widen/empty-if-hoist/
   scheduling levers + saturation-killed permuter NEARs re-run solo on a quiet machine.
