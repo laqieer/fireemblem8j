@@ -101,6 +101,7 @@ src/MoveUnit_.o: CC1FLAGS += -mjp-promote
 src/ChangeAiForPositions.o: CC1FLAGS += -mjp-promote
 src/Event3F_ScriptBattle.o: CC1FLAGS += -mjp-promote
 src/EventSetFogVisionExt.o: CC1FLAGS += -mjp-promote
+src/Event88_WmScrollCameraOntoUnit.o: CC1FLAGS += -mjp-promote
 src/ForEachPosAtSinglePosition.o: CC1FLAGS += -mjp-promote
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
