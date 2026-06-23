@@ -702,7 +702,7 @@ void MapUnitC_GetPosition(struct GMapUnitContainerProc * container, int index, u
 void MapUnitC_AddToPosition(struct GMapUnitContainerProc * container, int index, int x, int y);
 int MapUnitC_GetAnimId(struct GMapUnitContainerProc * container, int index);
 void MapUnitC_SetAnimId(struct GMapUnitContainerProc * container, int index, int animId);
-void MapUnitC_SetDisplayEnabled(struct GMapUnitContainerProc * container, int index, s8 flag);
+void MapUnitC_SetDisplayEnabled(struct GMapUnitContainerProc * container, int index, char flag);
 s8 MapUnitC_IsBlendEnabled(struct GMapUnitContainerProc * container, int index);
 void MapUnitC_SetBlendEnabled(struct GMapUnitContainerProc * container, int index, s8 flag);
 int MapUnitC_GetLayer(struct GMapUnitContainerProc * container, int index);
