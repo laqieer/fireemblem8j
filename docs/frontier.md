@@ -10,7 +10,13 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-23)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 95.66%** (8158/8528 funcs) → **~370 functions genuinely unmatched**
+- **MATCHING-C: 95.68%** (8160/8528 funcs) → **~368 functions genuinely unmatched**
+- ⚠️ **A large share of the ~368 is a PROVEN agbcc compiler-version ceiling** (D275): FE8-JP was built with
+  an agbcc that NONE of fe8j-US/fe6j/fe7j/old_agbcc reproduce (decisive AddGorgonEggTrap cross-compile test).
+  Those are unreachable by C levers, the permuter, OR swapping agbcc — leave as descriptive asm. The WINNABLE
+  remainder = **JP-divergent reconstruction** (rebuild from gbadisasm when the fe8u port is a structural
+  mismatch — often a first-compile match) + localized signedness/int-widen/empty-if-hoist/scheduling levers +
+  saturation-killed permuter NEARs re-run solo on a quiet machine. Mine those.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
 - NAMED SYMBOLS: 85.24% (capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 

@@ -7101,3 +7101,26 @@ signedness / int-widen / empty-if-hoist / scheduling-reorder diffs — keep mini
 iterations and froze, so unlike GetMuDisplayPosition a quiet re-run is low-EV). See
 [[parallel-carve-fleet-ops]] — cap concurrent permuter workers (~3) and guard against worker→main
 partial-carve contamination (`git status` clean before every cherry-pick).
+
+**DECISIVE agbcc-variant test — the JP-FE8 compiler is NOT reproduced by any available agbcc.** The whole
+ceiling class traces to JP using a different agbcc patch level, so the natural unlock is to find that
+compiler. I compiled the AddGorgonEggTrap ceiling (the cleanest arg-extension-ORDER case) through ALL three
+distinct community agbcc builds on hand — ours `e39955aa` (fe8u/a0d984a3 lineage), **fe6j's StanHash@tpcs_frame
+`1dcc636d`**, **fe7j's pret@master `40f3900c`** — plus our `old_agbcc`. **ALL FOUR emit the identical WRONG
+order** (meta,delay,level then x,y); NONE produces JP's declaration-order (x,y first). Since fe6j and fe7j
+*byte-match their own JP ROMs* with these compilers, this proves FE8-JP was built with a compiler distinct
+from FE6-JP's and FE7-JP's (and from FE8-US's) — none of which we can reproduce. **Strategic consequence:**
+the ceiling subset (eager-vs-deferred extension / extension-form / loop-inversion / reg-alloc tiebreaks) is a
+HARD structural limit; it is unreachable by C-source levers, by the permuter, AND by swapping to fe6j/fe7j
+agbcc. Reaching it would require reverse-engineering/obtaining the exact JP-FE8 (2004 GBA-SDK) agbcc — a
+toolchain project, not a carving one. **Matching-C therefore has a real ceiling < 100% with today's tools.**
+The remaining WINNABLE frontier is the JP-divergent-reconstruction subset (DrawLinkArenaRankingRow,
+DebugChargeMenu_Draw — structurally-different JP code reconstructed from gbadisasm, often a first-compile
+match) plus localized signedness/int-widen/empty-if-hoist/scheduling diffs and saturation-killed permuter
+NEARs (GetMuDisplayPosition). Mine those; leave the compiler-ceiling functions as descriptive asm.
+
+**Session total: 10 matching-C carves (8150→8160, 95.57→95.68%).** Banked: GetStringFromIndexInBuffer,
+GmMu_SetBlendEnabled, SetCRSpellBgPosition, GmapRmBorder1_PutSpriteAll, PrepItemScreen_DrawVisibleUnitNames,
+OpAnim1_UpdateScrollOneLine, UpdatePrepItemScreenFace, GetMuDisplayPosition, DrawLinkArenaRankingRow,
+DebugChargeMenu_Draw. Ceilings proven (6): AddGorgonEggTrap, DrawNumberText_WithReset, AddPointToPathArrowProc,
+DrawItemMenuLine, TsaModifyFirstPalReverse, LoadClassNameInClassReelFont.
