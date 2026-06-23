@@ -28,15 +28,10 @@ jobs:
           sudo apt-get install -y build-essential binutils-arm-none-eabi libpng-dev
           python -m pip install requests
 
-      - name: Install agbcc
-        run: |
-          git clone --depth 1 https://github.com/pret/agbcc.git
-          cd agbcc && ./build.sh && ./install.sh .. && cd ..
-
-      - name: Add -mjp-promote flag to agbcc (per-TU JP promotion, D276c)
-        # Rebuilds the thumb agbcc with the runtime-gated -mjp-promote flag and
-        # overwrites tools/agbcc/bin/agbcc. Default-off = byte-identical to stock;
-        # the Makefile enables it per-TU for the JP-promotion functions.
+      - name: Install agbcc (with the -mjp-promote flag, D276c)
+        # Applies scripts/agbcc_jp_promote.patch BEFORE ./build.sh, so the toolchain
+        # is built exactly once with the flag baked in (default-off = byte-identical
+        # to stock; the Makefile enables it per-TU for the JP-promotion functions).
         run: bash scripts/build_jp_agbcc.sh
 
       - name: Backfill the full progress timeline
