@@ -7063,12 +7063,21 @@ ones fixable by signedness/int-widen/empty-if-hoist levers (where the param is r
 through). This means matching-C 100% may be structurally unreachable for the subset JP compiled this way —
 honest goal framing, like the named-axis asset-label cap.
 
-**Full fleet outcome (10 functions attempted across 3 waves; 7 banked).** BANKED: GetStringFromIndexInBuffer,
+**Full fleet outcome (10 functions attempted across 3 waves; 8 banked).** BANKED: GetStringFromIndexInBuffer,
 GmMu_SetBlendEnabled, SetCRSpellBgPosition, GmapRmBorder1_PutSpriteAll, PrepItemScreen_DrawVisibleUnitNames,
 OpAnim1_UpdateScrollOneLine (int-local-widen + register-lineage reuse + statement-reorder),
 UpdatePrepItemScreenFace (the `(u16)(s16)x` adjacency idiom — forces a deferred u16 narrowing to stay
-adjacent). **matching-C 8150→8157 (95.57→95.65%).** The hit rate fell wave-over-wave (W1 4/6, W2 2/3,
-W3 0/2) as the readily-winnable functions were exhausted and the remainder turned ceiling-dominated.
+adjacent), and **GetMuDisplayPosition** (recovered post-fleet — see below). **matching-C 8150→8158
+(95.57→95.66%).** The hit rate fell wave-over-wave (W1 4/6, W2 2/3, W3 0/2) as the readily-winnable
+functions were exhausted and the remainder turned ceiling-dominated.
+
+**Permuter-recovery is real for SATURATION-killed NEARs (not for genuinely-searched ones).**
+GetMuDisplayPosition's in-fleet permuter was OOM-SIGKILLed at iteration ~281 (never actually searched);
+re-run SOLO on a quiet machine it drove base-score 430 → 0 in ~80k iterations and byte-matched (the
+"score 5" plateau was the permuter's weighted metric — the real ROM range diff was 0). KEY DISTINCTION:
+this works when the prior permuter was *starved*; it does NOT help when the permuter genuinely ran (e.g.
+Sio_RasterRotatedBoxToWinBuf searched 22k iterations and froze at a 4-byte scheduling residual — that is a
+probable scheduling ceiling, left deferred). Cap concurrent permuter workers so they actually get to search.
 
 **The ceiling is ONE root cause — agbcc EAGER vs JP DEFERRED parameter extension** (proven on 4 functions
 with the decisive fe8u-own-ROM cross-check each time, 24k–47k permuter iterations frozen):
@@ -7087,8 +7096,8 @@ sourcing the exact JP-era agbcc build is the only path to those; until then they
 **matching-C has a structural ceiling < 100%**. The genuinely-winnable remainder is the localized
 signedness / int-widen / empty-if-hoist / scheduling-reorder diffs — keep mining those with the lever kit.
 
-**SOLVABLE NEARs deferred to a quiet machine (permuter starved by fleet OOM-contention, NOT ceilings):**
-GetMuDisplayPosition (13B, reg-alloc/scheduling; hard `ip` allocation already solved; base score 430) and
-Sio_RasterRotatedBoxToWinBuf (4B, one `lsls` schedule slot). See [[parallel-carve-fleet-ops]] — cap
-concurrent permuter workers (~3) and guard against worker→main partial-carve contamination
-(`git status` clean before every cherry-pick).
+**Deferred NEAR (likely a scheduling ceiling, not saturation):** Sio_RasterRotatedBoxToWinBuf (4B — one
+`lsls` schedule slot immovable past k's entry-normalization; the in-fleet permuter genuinely searched 22k
+iterations and froze, so unlike GetMuDisplayPosition a quiet re-run is low-EV). See
+[[parallel-carve-fleet-ops]] — cap concurrent permuter workers (~3) and guard against worker→main
+partial-carve contamination (`git status` clean before every cherry-pick).
