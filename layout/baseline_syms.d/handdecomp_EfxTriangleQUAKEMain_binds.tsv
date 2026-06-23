@@ -1,0 +1,5 @@
+EkrGauge_Setxy323A	08051F18	thumb	EfxTriangleQUAKEMain callee (JP-unbound)
+EkrDispUP_SetPositionSync	08052854	thumb	EfxTriangleQUAKEMain callee (JP-unbound)
+SetEkrFrontAnimPostion	08056984	thumb	EfxTriangleQUAKEMain callee (JP-unbound)
+gEkrXPosReal	02000028	data	EfxTriangleQUAKEMain data (JP-unbound)
+gEkrYPosReal	0200002C	data	EfxTriangleQUAKEMain data (JP-unbound)
