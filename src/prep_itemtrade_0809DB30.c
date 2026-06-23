@@ -18,7 +18,7 @@
 #include "constants/songs.h"
 
 /* prototypes for same-file helpers called by this run */
-void DrawPrepScreenItems(u16 * tm, struct Text* th, struct Unit* unit, u8 checkPrepUsability);
+void DrawPrepScreenItems(u16 * tm, struct Text* th, struct Unit* unit, s8 checkPrepUsability);
 
 //! FE8U = 0x0809B86C
 void PrepItemTrade_Init(struct PrepMenuTradeProc * proc)
