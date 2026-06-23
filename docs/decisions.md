@@ -7226,3 +7226,30 @@ and overwrites `tools/agbcc/bin/agbcc` (no separate `jp_agbcc` binary); the agbc
 bit-reproducible (embedded build path) but its CODEGEN is identical (the only property that matters). Makefile
 per-TU lines migrated `CC1 := $(CC1_JP)` → `CC1FLAGS += -mjp-promote`; `CC1_JP` removed. Precedent: the Sram
 funcs' per-TU `CC1FLAGS := … -O1`. Cleaner provenance (the flag names the requirement), one toolchain to build.
+
+**Build refinement (follow-up commits):** the flag patch lives as a readable unified diff
+`scripts/agbcc_jp_promote.patch` applied via `git apply --check && git apply` (not an inline
+python-regex), and `scripts/build_jp_agbcc.sh` applies it to the agbcc source BEFORE `./build.sh`
+so the toolchain is built exactly ONCE with the flag baked in (no stock build + overwrite). The
+two CI steps collapse to one "Install agbcc (with the -mjp-promote flag)" step. CI is green.
+
+**Correctness — the flag changes the FORM of the emitted asm, never the computed logic.**
+`PROMOTE_MODE` and `PROMOTE_FUNCTION_ARGS` are *standard GCC target hooks* — the in-register
+sub-word representation convention, and whether incoming params are extended at entry. They are the
+exact conventions the full ARM GCC backend (`config/arm/arm.h`) uses; agbcc's `thumb.h` had merely
+stripped them. A core GCC invariant is that it inserts whatever extensions/truncations are needed to
+honor the C type semantics *under either convention* — so the value a function computes is identical;
+only instruction selection, ordering, and register allocation change. Concrete proof (disassembling
+`PointInCameraBounds` flag-OFF vs flag-ON):
+ - flag-OFF (stock): `lsrs r4, r0, #16` zero-extends the `s16 x` eagerly, then at the *use* site re-does
+   `lsls r0,r4,#16; asrs r0,#16` — re-sign-extending before the subtraction.
+ - flag-ON (= retail): `asrs r5, r0, #16` sign-extends `x` once (per its `s16` type) and reuses it.
+ Both feed the **identical sign-extended value** into the same `subs`/`cmn`/`cmp` chain; the flag build
+ is just 4 bytes shorter (skips the redundant re-extension). ABI-safe across the per-TU boundary: the
+ caller-side promotion (`PROMOTE_PROTOTYPES`) is always on for *all* TUs, and the callee's entry
+ re-extension is idempotent (re-extending an already-extended value is a no-op).
+ **The decisive guarantee is the oracle itself:** `make compare` checks the FULL ROM sha1 against the
+ original JP cartridge, so every `-mjp-promote` function is byte-identical to the exact machine code
+ Intelligent Systems shipped — not "expected" correct but *proven* identical to the shipped, tested game.
+ Combined with default-OFF (the ~8082 non-flag TUs are provably untouched) and per-TU opt-in, a flag that
+ ever produced different-but-wrong bytes would FAIL `make compare`; it passes on every carve.
