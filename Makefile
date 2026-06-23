@@ -67,6 +67,10 @@ src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSo
 # promotion behavior: s8/s16-hold form (signedness preserved) and/or
 # declaration-order arg extension (PROMOTE_FUNCTION_ARGS). One flag, one agbcc.
 src/TsaModifyFirstPalReverse.o: CC1FLAGS += -mjp-promote
+src/GmTmConfront_Loop_MoveUnitPositions.o: CC1FLAGS += -mjp-promote
+src/EfxHpBarResire_SetAnotherSide.o: CC1FLAGS += -mjp-promote
+src/EfxCircleWINMain.o: CC1FLAGS += -mjp-promote
+src/EfxRestWINMain.o: CC1FLAGS += -mjp-promote
 src/DrawNumberText_WithReset.o: CC1FLAGS += -mjp-promote
 src/AddGorgonEggTrap.o: CC1FLAGS += -mjp-promote
 src/UpdateLinkArenaMenuScrollBar.o: CC1FLAGS += -mjp-promote
