@@ -1,0 +1,1 @@
+0387B8	0389CC	src/DrawTimeText.o(.text)	handdecomp: DrawTimeText (JP sub_80387B8; jp_agbcc s8-hold, GetStringFromIndex(0x194))
