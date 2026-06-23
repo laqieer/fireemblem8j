@@ -100,6 +100,7 @@ src/MuCtr_InitDefinedMove.o: CC1FLAGS += -mjp-promote
 src/MoveUnit_.o: CC1FLAGS += -mjp-promote
 src/ChangeAiForPositions.o: CC1FLAGS += -mjp-promote
 src/Event3F_ScriptBattle.o: CC1FLAGS += -mjp-promote
+src/EventSetFogVisionExt.o: CC1FLAGS += -mjp-promote
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
