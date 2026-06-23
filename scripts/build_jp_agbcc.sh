@@ -26,46 +26,14 @@ echo "[jp_agbcc] cloning pret/agbcc @ $AGBCC_COMMIT ..."
 git clone "$AGBCC_URL" "$WORK/agbcc"
 git -C "$WORK/agbcc" checkout --quiet "$AGBCC_COMMIT"
 
-echo "[jp_agbcc] adding the -mjp-promote flag (PROMOTE_MODE + PROMOTE_FUNCTION_ARGS, runtime-gated) ..."
-python3 - "$WORK/agbcc/gcc" <<'PY'
-import sys, re
-D = sys.argv[1] + "/"
-
-# --- gcc/thumb.h: declare the flag, gate PROMOTE_MODE, always-define PROMOTE_FUNCTION_ARGS
-f = D + "thumb.h"; s = open(f).read()
-s, n = re.subn(r'(#define ARM_FLAG_LONG_CALLS\t\(0x10000\)[^\n]*\n)',
-               r'\1#define ARM_FLAG_JP_PROMOTE\t(0x20000)\n', s); assert n == 1, ("bit", n)
-s, n = re.subn(r'(#define TARGET_LONG_CALLS\t\t\(target_flags & ARM_FLAG_LONG_CALLS\)\n)',
-               r'\1#define TARGET_JP_PROMOTE\t(target_flags & ARM_FLAG_JP_PROMOTE)\n', s); assert n == 1, ("macro", n)
-s, n = re.subn(r'(  \{"no-long-calls",\t       -ARM_FLAG_LONG_CALLS, ""\},\t\\\n)',
-               r'\1  {"jp-promote",\t\tARM_FLAG_JP_PROMOTE, ""},\t\\\n', s); assert n == 1, ("switch", n)
-# gate the force-zero-extend of sub-word ints on the flag (default OFF = stock)
-s, n = re.subn(r'(\{\s*\\\n  if \(GET_MODE_CLASS \(MODE\) == MODE_INT\t\t\\\n      && GET_MODE_SIZE \(MODE\) < 4\)\t\t\\\n    \{\t\t\t\t\t\t\\\n)      \(UNSIGNEDP\) = 1;(\t*\\\n)',
-               r'\1      if (! TARGET_JP_PROMOTE) (UNSIGNEDP) = 1;\2', s); assert n == 1, ("promote_mode", n)
-# define PROMOTE_FUNCTION_ARGS so the arg-promotion code compiles in; the actual
-# promotion is runtime-gated on TARGET_JP_PROMOTE at every use site below.
-s, n = re.subn(r'(#define PROMOTE_PROTOTYPES 1\n)', r'#define PROMOTE_FUNCTION_ARGS\n\1', s); assert n == 1, ("pfa_def", n)
-open(f, 'w').write(s)
-
-# --- gcc/calls.c: gate the outgoing-arg promotion
-f = D + "calls.c"; s = open(f).read()
-s, n = re.subn(r'\n      mode = promote_mode \(type, mode, &unsignedp, 1\);\n',
-               r'\n      if (TARGET_JP_PROMOTE) mode = promote_mode (type, mode, &unsignedp, 1);\n', s); assert n == 1, ("calls", n)
-open(f, 'w').write(s)
-
-# --- gcc/function.c: gate the incoming-param promotion
-f = D + "function.c"; s = open(f).read()
-s, n = re.subn(r'\n      unsignedp = TREE_UNSIGNED \(passed_type\);\n      promoted_mode = promote_mode \(passed_type, promoted_mode, &unsignedp, 1\);\n',
-               r'\n      if (TARGET_JP_PROMOTE) {\n      unsignedp = TREE_UNSIGNED (passed_type);\n      promoted_mode = promote_mode (passed_type, promoted_mode, &unsignedp, 1);\n      }\n', s); assert n == 1, ("func", n)
-open(f, 'w').write(s)
-
-# --- gcc/combine.c: gate the setup_incoming_promotions loop
-f = D + "combine.c"; s = open(f).read()
-s, n = re.subn(r'(  rtx first = get_insns \(\);\n\n)(  for \(regno = 0; regno < FIRST_PSEUDO_REGISTER; regno\+\+\))',
-               r'\1  if (TARGET_JP_PROMOTE)\n\2', s); assert n == 1, ("combine", n)
-open(f, 'w').write(s)
-print("[jp_agbcc] flag patch applied (4 files, all asserts passed)")
-PY
+echo "[jp_agbcc] applying the -mjp-promote flag patch (scripts/agbcc_jp_promote.patch) ..."
+# Unified diff against pret/agbcc gcc/{thumb.h,calls.c,function.c,combine.c}: declares the
+# ARM_FLAG_JP_PROMOTE flag, runtime-gates the PROMOTE_MODE force-line, and always-defines
+# PROMOTE_FUNCTION_ARGS with its 3 promotion actions each gated on TARGET_JP_PROMOTE.
+# --check first so a context drift (e.g. an upstream agbcc change) fails LOUD, not silently.
+git -C "$WORK/agbcc" apply --check "$ROOT/scripts/agbcc_jp_promote.patch"
+git -C "$WORK/agbcc" apply "$ROOT/scripts/agbcc_jp_promote.patch"
+echo "[jp_agbcc] flag patch applied cleanly"
 
 echo "[jp_agbcc] building the flag-capable thumb agbcc (serial) ..."
 make -C "$WORK/agbcc/gcc" -j1

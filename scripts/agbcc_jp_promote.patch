@@ -1,0 +1,85 @@
+diff --git a/gcc/calls.c b/gcc/calls.c
+index f700460..226ce40 100755
+--- a/gcc/calls.c
++++ b/gcc/calls.c
+@@ -1378,7 +1378,7 @@ expand_call (exp, target, ignore)
+       unsignedp = TREE_UNSIGNED (type);
+ 
+ #ifdef PROMOTE_FUNCTION_ARGS
+-      mode = promote_mode (type, mode, &unsignedp, 1);
++      if (TARGET_JP_PROMOTE) mode = promote_mode (type, mode, &unsignedp, 1);
+ #endif
+ 
+       args[i].unsignedp = unsignedp;
+diff --git a/gcc/combine.c b/gcc/combine.c
+index e3a3f3f..47c836e 100755
+--- a/gcc/combine.c
++++ b/gcc/combine.c
+@@ -709,6 +709,7 @@ setup_incoming_promotions ()
+   int unsignedp;
+   rtx first = get_insns ();
+ 
++  if (TARGET_JP_PROMOTE)
+   for (regno = 0; regno < FIRST_PSEUDO_REGISTER; regno++)
+     if (FUNCTION_ARG_REGNO_P (regno)
+ 	&& (reg = promoted_input_arg (regno, &mode, &unsignedp)) != 0)
+diff --git a/gcc/function.c b/gcc/function.c
+index 5119688..26ed210 100755
+--- a/gcc/function.c
++++ b/gcc/function.c
+@@ -3921,8 +3921,10 @@ assign_parms (fndecl, second_time)
+ 
+ #ifdef PROMOTE_FUNCTION_ARGS
+       /* Compute the mode in which the arg is actually extended to.  */
++      if (TARGET_JP_PROMOTE) {
+       unsignedp = TREE_UNSIGNED (passed_type);
+       promoted_mode = promote_mode (passed_type, promoted_mode, &unsignedp, 1);
++      }
+ #endif
+ 
+       /* Let machine desc say which reg (if any) the parm arrives in.
+diff --git a/gcc/thumb.h b/gcc/thumb.h
+index 9911f76..2a109c9 100755
+--- a/gcc/thumb.h
++++ b/gcc/thumb.h
+@@ -42,6 +42,7 @@ Boston, MA 02111-1307, USA.  */
+ 
+ /* Nonzero if all call instructions should be indirect.  */
+ #define ARM_FLAG_LONG_CALLS	(0x10000) /* same as in arm.h */
++#define ARM_FLAG_JP_PROMOTE	(0x20000)
+ 
+ 
+ /* Run-time compilation parameters selecting different hardware/software subsets.  */
+@@ -50,6 +51,7 @@ extern int target_flags;
+ #define TARGET_THUMB_INTERWORK	(target_flags & ARM_FLAG_THUMB)
+ 
+ #define TARGET_LONG_CALLS		(target_flags & ARM_FLAG_LONG_CALLS)
++#define TARGET_JP_PROMOTE	(target_flags & ARM_FLAG_JP_PROMOTE)
+ 
+ /* SUBTARGET_SWITCHES is used to add flags on a per-config basis. */
+ #ifndef SUBTARGET_SWITCHES
+@@ -63,6 +65,7 @@ extern int target_flags;
+   {"long-calls",		ARM_FLAG_LONG_CALLS,		\
+    "Generate all call instructions as indirect calls"},		\
+   {"no-long-calls",	       -ARM_FLAG_LONG_CALLS, ""},	\
++  {"jp-promote",		ARM_FLAG_JP_PROMOTE, ""},	\
+   SUBTARGET_SWITCHES						\
+   {"",                          TARGET_DEFAULT}         	\
+ }
+@@ -346,7 +349,7 @@ do {									\
+   if (GET_MODE_CLASS (MODE) == MODE_INT		\
+       && GET_MODE_SIZE (MODE) < 4)		\
+     {						\
+-      (UNSIGNEDP) = 1;				\
++      if (! TARGET_JP_PROMOTE) (UNSIGNEDP) = 1;				\
+       (MODE) = SImode;				\
+     }						\
+ }
+@@ -623,6 +626,7 @@ int thumb_shiftable_const ();
+ 
+ /* Passing Arguments on the stack */
+ 
++#define PROMOTE_FUNCTION_ARGS
+ #define PROMOTE_PROTOTYPES 1
+ 
+ #define ACCUMULATE_OUTGOING_ARGS 1
