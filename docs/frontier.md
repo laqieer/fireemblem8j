@@ -8,11 +8,32 @@
 **Keep this current.** Refresh the numbers from `scripts/calcprogress.py` and the target lists from
 ground truth whenever an axis moves. Stale frontier data caused real wasted work (see "Pitfall" below).
 
-## Current state (2026-06-22)
+## Current state (2026-06-23)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 95.57%** (8150/8528 funcs) → **~378 functions genuinely unmatched**
+- **MATCHING-C: 95.63%** (8155/8528 funcs) → **~373 functions genuinely unmatched**
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
 - NAMED SYMBOLS: 85.24% (capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+
+### How the remaining ~373 are carved (D275 — the current playbook)
+Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
+in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
+the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in
+isolated worktrees by carve-workers and integrated serially through the single `make compare` oracle:
+- **signedness cast** at the shift/load site (`(s16)/(s8)/(int)` ⇄ `(u16)/(u8)`) — flips `asr↔lsr`,
+  `ldrh↔ldrsh`. Caveat: a cast whose result only feeds `!=0`/a narrow store collapses back to `lsr`.
+- **int + `(s16)` cast** — `int v; v = (s16)(...)` keeps field loads `ldrh` while sign-extending in-reg
+  (use when the signed value is reused). [SetCRSpellBgPosition]
+- **int-local-widen** — `int v = (s8)field;` hoists a loop-invariant sign-extend to one entry op.
+  [PrepItemScreen_DrawVisibleUnitNames]
+- **empty-if hoist** — `if (param){}` (one per arg, in order) forces arg-evaluation ORDER.
+  [GmMu_SetBlendEnabled, GmapRmBorder1_PutSpriteAll]
+- **TU-local macro-shadow prototype** — give a callee an `int` arg in ONE TU without touching the shared
+  header or the callee's own s8 body (parallel-safe).
+- **decomp-permuter** for genuine reg-alloc/scheduling residual.
+- **CEILING (skip):** a pure arg-extension REORDER where the first params (passed first) are extended
+  LAST by agbcc but FIRST by JP is **agbcc-impossible** — JP used a compiler that extends params in
+  declaration order in-place. Leave as descriptive asm. [AddGorgonEggTrap; proof in D275] This means
+  matching-C 100% may be structurally unreachable for the subset JP compiled this way.
 
 ## Code frontier — priority order (USER-DEFINED, JP-area-first)
 The remaining matching-C work is JP-only / JP-divergent code that **cannot be ported from fe8u** and
