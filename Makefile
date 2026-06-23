@@ -93,6 +93,7 @@ src/MoveUnitExt.o: CC1FLAGS += -mjp-promote
 src/InitPlayConfig.o: CC1FLAGS += -mjp-promote
 src/GmMuPrim_TrackMovementDelta.o: CC1FLAGS += -mjp-promote
 src/GmMuPrim_GetMovementFacing.o: CC1FLAGS += -mjp-promote
+src/ColorFadeTickThumb.o: CC1FLAGS += -mjp-promote
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
