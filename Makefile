@@ -48,6 +48,14 @@ STRIP   := $(PREFIX)strip$(EXE)
 # same as the US decomp. Only needed once C decompilation begins.
 CC1     := tools/agbcc/bin/agbcc$(EXE)
 CC1_OLD := tools/agbcc/bin/old_agbcc$(EXE)
+# CC1_JP: agbcc with the thumb PROMOTE_MODE patched to PRESERVE sub-word type
+# signedness (s8/s16 -> sign-extend) instead of force-zero-extending everything.
+# The stock agbcc force-zero-extends all sub-word values; the JP-FE8 build kept
+# type signedness, so functions that hold an s8/s16 value sign-extended across the
+# body only byte-match under this variant (the s8/s16-hold "ceiling" class, D275).
+# Applied PER-TU (like CC1_OLD for m4a) since it is NOT globally byte-neutral.
+# Build it with scripts/build_jp_agbcc.sh (clones pret/agbcc + applies the patch).
+CC1_JP  := tools/agbcc/bin/jp_agbcc$(EXE)
 
 # m4a sound-engine TUs were built with the old GBA SDK agbcc; their codegen
 # shape (prologue, dead reg-inits) differs from the regular agbcc, so they
@@ -55,6 +63,10 @@ CC1_OLD := tools/agbcc/bin/old_agbcc$(EXE)
 src/ClearModM.o src/m4aSongNumStart.o src/m4aSongNumStop.o \
 src/m4aSongNumContinue.o src/m4aSongNumStartOrChange.o \
 src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSound.o src/m4aSoundMode.o src/MPlayContinue.o src/MPlayFadeOut.o src/m4aMPlayFadeOutTemporarily.o src/m4aMPlayFadeIn.o src/m4aMPlayImmInit.o src/m4aSoundVSyncOff.o src/m4aSoundVSyncOn.o src/MPlayStart.o src/FadeOutBody.o src/TrkVolPitSet.o src/CgbOscOff.o src/CgbModVol.o src/m4aMPlayTempoControl.o src/m4aMPlayModDepthSet.o src/m4aMPlayLFOSpeedSet.o src/ply_xwave.o: CC1 := $(CC1_OLD)
+
+# JP-agbcc (signedness-preserving) per-TU overrides — s8/s16-hold-form functions
+# that only byte-match when sub-word values keep their type signedness (D275).
+src/TsaModifyFirstPalReverse.o: CC1 := $(CC1_JP)
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn

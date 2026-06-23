@@ -7144,3 +7144,51 @@ coalescing/extension/inversion tiebreaks). (2) the thin remaining **logic-diverg
 where codegen happens to coincide (rare: 2 of ~16 attempts). (3) the **333 unnamed `sub_*.s`** (need
 fingerprint ID first) and the 29 COMPILE-fail / 8 LINK-fail sets (need decls/aliases, then same ceiling
 distribution). Do NOT blind-grind the baseline-aliased REGION set further — proven ~0 yield.
+
+## D276 — the "agbcc ceiling" is partly a thumb PROMOTE_MODE CONFIG knob (jp_agbcc per-TU), not a foreign compiler
+
+**User challenge → breakthrough.** D275 concluded the remaining region-diff functions were an unreachable
+"compiler-version ceiling." The user pushed back: fe6j/fe7j (older) and fe8u (the same game, US) all use the
+community agbcc — why would FE8-JP alone need a foreign compiler? That skepticism was right and led to the
+root cause for one major ceiling subclass.
+
+**Root cause (s8/s16 "hold-form" subclass).** Stock agbcc's thumb config `gcc/thumb.h PROMOTE_MODE`
+**force-sets `(UNSIGNEDP) = 1` for ALL sub-word ints** (QImode + HImode) → every s8/s16/u8/u16 value is
+**zero-extended** (`lsls;lsrs`) when promoted/held. The functions that "ceilinged" hold a SIGNED sub-word
+value sign-extended across the body (`lsls;asrs`) and reuse it without re-extending — which stock agbcc
+cannot emit from any C source (workers exhausted 15+ source forms; the `(s16)` cast collapses back to `lsr`
+when the value feeds only `!=0`/narrow uses). So this subclass needs a compiler whose PROMOTE_MODE
+**preserves type signedness** (s8/s16→sign-extend, u8/u16→zero-extend).
+
+**jp_agbcc + validation.** Built a one-line patched agbcc (`scripts/build_jp_agbcc.sh`: clone pret/agbcc at a
+PINNED commit, drop the `(UNSIGNEDP)=1` line in PROMOTE_MODE, `make -C gcc -j1`, install gitignored
+`tools/agbcc/bin/jp_agbcc`). It reproduces JP's exact prologue (verified: s16→`asrs`, u16→`lsrs`, s8→`asrs`)
+and the reproducible build is output-identical to the hand-patched binary. Applied **PER-TU** via Makefile
+`CC1_JP` (exactly like the existing m4a `CC1_OLD` override), the previously-IMPOSSIBLE ceiling function
+**TsaModifyFirstPalReverse byte-matches (0/228), full `make compare` OK → matching-C 8160→8161 (95.70%).**
+
+**Why PER-TU, not global (important).** jp_agbcc is NOT globally byte-neutral — using it for ALL TUs diffs
+~12M bytes, because MOST functions JP zero-extended (they match stock agbcc). Only the hold-form functions
+want the signed promotion. So this is an OPT-IN per-TU override with `make compare` (sha1) as the ONLY
+acceptance gate, never a global compiler swap. **Conservative attribution:** the evidence supports "some
+TUs (the s8/s16-hold subclass) were built under a signedness-preserving promotion profile," NOT "JP used
+this everywhere."
+
+**Copilot review: SOUND** (consulted per the fork-review protocol). Endorsed per-TU patched-compiler as
+standard decomp practice (pokeemerald/fe8u precedent); flagged reproducibility (PIN the pret/agbcc commit,
+FAIL if the patch target isn't found exactly — the build script asserts `n==1`) and over-claim (phrase as a
+per-TU compiler profile). All applied. Integration committed: `scripts/build_jp_agbcc.sh` (pinned) + Makefile
+`CC1_JP` per-TU wiring + a `Build jp_agbcc` step in `ci.yml`/`backfill-progress.yml` (a legitimate compiler
+build like the existing agbcc step; the sha1 oracle is unchanged).
+
+**Also fixed this session:** a latent clean-build regression — the GmMu carve's collateral `char→s8` on the
+`MapUnitC_SetDisplayEnabled` prototype (worktree-worker over-broad edit) conflicted with its `.c` + local
+decls but was masked by a stale `.o` across all incremental `make compare`s; a cold rebuild exposed it. Fixed
+(reverted to `char`). LESSON: incremental `make compare` can stale-OK; periodically force a cold rebuild
+(`find -delete` + `gen_layout.py` to regenerate `asm/baserom.s` — deleting it WITHOUT re-running gen_layout
+makes the build link a stale `baserom.o` → garbage ROM).
+
+**Next:** campaign the s8/s16-hold subclass per-TU with jp_agbcc (each gated by full `make compare`), and
+test whether the OTHER ceiling classes (arg-extension ORDER, eager-vs-deferred, LICM hoist, cross-jump/
+tail-merge, reg-coalescing+DSE) are ALSO agbcc thumb-config/flag knobs (PROMOTE_FUNCTION_ARGS, scheduling,
+LICM) — the same investigate-the-config method.

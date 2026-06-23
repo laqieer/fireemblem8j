@@ -10,13 +10,19 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-23)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 95.68%** (8160/8528 funcs) → **~368 functions genuinely unmatched**
-- ⚠️ **A large share of the ~368 is a PROVEN agbcc compiler-version ceiling** (D275): FE8-JP was built with
-  an agbcc that NONE of fe8j-US/fe6j/fe7j/old_agbcc reproduce (decisive AddGorgonEggTrap cross-compile test).
-  Those are unreachable by C levers, the permuter, OR swapping agbcc — leave as descriptive asm. The WINNABLE
-  remainder = **JP-divergent reconstruction** (rebuild from gbadisasm when the fe8u port is a structural
-  mismatch — often a first-compile match) + localized signedness/int-widen/empty-if-hoist/scheduling levers +
-  saturation-killed permuter NEARs re-run solo on a quiet machine. Mine those.
+- **MATCHING-C: 95.70%** (8161/8528 funcs) → **~367 functions genuinely unmatched**
+- 🔑 **A major ceiling subclass was RECLASSIFIED from "unreachable" to "fixable" (D276).** The s8/s16
+  "hold-form" functions (hold a signed sub-word value sign-extended across the body) are NOT a foreign
+  compiler — they are a thumb `PROMOTE_MODE` config knob. `scripts/build_jp_agbcc.sh` builds `jp_agbcc`
+  (stock agbcc minus the forced-zero-extend on sub-word ints → preserves type signedness), applied **PER-TU**
+  via Makefile `CC1_JP` (like m4a `CC1_OLD`). First carve: TsaModifyFirstPalReverse (8160→8161). **Campaign
+  the s8/s16-hold subclass this way**, each gated by full `make compare`.
+- The WINNABLE remainder also = **JP-divergent reconstruction** (rebuild from gbadisasm when the fe8u port is
+  a structural mismatch — often a first-compile match) + localized signedness/int-widen/empty-if-hoist/
+  scheduling levers + saturation-killed permuter NEARs re-run solo on a quiet machine.
+- ⚠️ Still-open ceiling classes (test whether they too are agbcc thumb-config/flag knobs, D276): arg-extension
+  ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
+  don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
 - NAMED SYMBOLS: 85.24% (capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 

@@ -56,6 +56,9 @@ jobs:
           git clone --depth 1 https://github.com/pret/agbcc.git
           cd agbcc && ./build.sh && ./install.sh .. && cd ..
 
+      - name: Build jp_agbcc (per-TU signedness-preserving agbcc, D276)
+        run: bash scripts/build_jp_agbcc.sh
+
       - name: Setup asset toolchain (gbagfx/bin2c/preproc/aif2pcm)
         run: |
           git clone --depth 1 https://github.com/laqieer/fireemblem8u.git ../fireemblem8u || true

@@ -33,6 +33,9 @@ jobs:
           git clone --depth 1 https://github.com/pret/agbcc.git
           cd agbcc && ./build.sh && ./install.sh .. && cd ..
 
+      - name: Build jp_agbcc (per-TU signedness-preserving agbcc, D276)
+        run: bash scripts/build_jp_agbcc.sh
+
       - name: Backfill the full progress timeline
         if: ${{ env.PROGRESS_API_KEY != '' }}
         run: |
