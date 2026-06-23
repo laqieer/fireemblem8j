@@ -7122,5 +7122,25 @@ NEARs (GetMuDisplayPosition). Mine those; leave the compiler-ceiling functions a
 **Session total: 10 matching-C carves (8150→8160, 95.57→95.68%).** Banked: GetStringFromIndexInBuffer,
 GmMu_SetBlendEnabled, SetCRSpellBgPosition, GmapRmBorder1_PutSpriteAll, PrepItemScreen_DrawVisibleUnitNames,
 OpAnim1_UpdateScrollOneLine, UpdatePrepItemScreenFace, GetMuDisplayPosition, DrawLinkArenaRankingRow,
-DebugChargeMenu_Draw. Ceilings proven (6): AddGorgonEggTrap, DrawNumberText_WithReset, AddPointToPathArrowProc,
-DrawItemMenuLine, TsaModifyFirstPalReverse, LoadClassNameInClassReelFont.
+DebugChargeMenu_Draw.
+
+**Ceiling catalog (8 proven instances — a near-complete taxonomy of the JP-vs-our agbcc differences; in EVERY
+case fe8u's own ROM agrees with our agbcc and only JP differs):** AddGorgonEggTrap (arg-extension ORDER),
+DrawNumberText_WithReset (s8 extension PLACEMENT), AddPointToPathArrowProc (eager-vs-deferred extension),
+DrawItemMenuLine (r4↔r5 tiebreak), TsaModifyFirstPalReverse (s16-hold FORM asrs-vs-lsrs),
+LoadClassNameInClassReelFont (loop-inversion), UpdateLinkArenaMenuScrollBar (r4↔r7 tiebreak + s16-hold),
+GetPidDefeatedEndingString (register COALESCING + dead-store-elimination + jump-table layout). These span
+nearly every codegen-decision an agbcc version can make differently — strong evidence the JP-FE8 compiler is a
+single distinct build, not a per-function fluke. **NOTE the ceiling-skip clause in the worker prompt cut the
+cost of proving a ceiling from ~190k tokens (LoadClassNameInClassReelFont, pre-clause) to ~56k
+(UpdateLinkArenaMenuScrollBar, post-clause).**
+
+**EXHAUSTION SIGNAL + next-session strategy.** Wave-6 was 0/2 and the last 4 worker attempts were all
+ceilings → the cheaply-winnable functions in the baseline-aliased / small-REGION set are essentially picked
+off this session. Remaining matching-C paths, in priority order: (1) **HIGHEST LEVERAGE — source/identify the
+JP-FE8 agbcc** (the only thing that unlocks the ~hundreds of ceiling functions at once; it is NOT fe8u/fe6j/
+fe7j/old_agbcc — would need RE of the 2004 GBA-SDK compiler or a new agbcc patch that flips the
+coalescing/extension/inversion tiebreaks). (2) the thin remaining **logic-divergent reconstruction** wins
+where codegen happens to coincide (rare: 2 of ~16 attempts). (3) the **333 unnamed `sub_*.s`** (need
+fingerprint ID first) and the 29 COMPILE-fail / 8 LINK-fail sets (need decls/aliases, then same ceiling
+distribution). Do NOT blind-grind the baseline-aliased REGION set further — proven ~0 yield.
