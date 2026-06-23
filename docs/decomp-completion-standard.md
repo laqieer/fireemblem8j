@@ -91,12 +91,20 @@ bytes = 13.29 MB = 83.0%** of the 16 MiB (16,777,216-byte) ROM. Every one resolv
 
 ---
 
-## Why the "Code" badge (~86%) is lower than the "Functions" badge (~96%)
+## Why the "Code" badge is lower than the "Functions" badge
+
+> ⚠️ **The specific numbers below are a point-in-time SNAPSHOT (as of 2026-06-23) and keep
+> rising as decomp progresses — do NOT read them as the current values.** Get live numbers
+> from `python3 scripts/calcprogress.py` (function count + the code-byte breakdown). The
+> **durable, version-independent fact** is the *relationship*: the byte-weighted **Code** %
+> trails the function-count **Functions** % because the still-unmatched tail is made of
+> larger-than-average functions. Both percentages climb toward 100%; the gap shrinks as the
+> large functions get carved.
 
 The two README badges measure the **same code progress with different denominators**, so
-they legitimately diverge — both are correct:
+they legitimately diverge — both are correct. Illustrative snapshot:
 
-| Badge | Source | What it counts | Today |
+| Badge | Source | What it counts | Snapshot (2026-06-23) |
 |---|---|---|---|
 | **Functions** | progress.deco.mp | function **count** — every function = 1 unit, size-blind | 8,190 / 8,528 = **96.0%** |
 | **Code** | decomp.dev (objdiff report via `scripts/gen-report.py`) | matched code **bytes** ÷ total code bytes (size-weighted) | 774,048 / 901,428 = **~85.9%** |
