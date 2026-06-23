@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-23)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 96.12%** (8197/8528 funcs) → **~331 functions genuinely unmatched**
+- **MATCHING-C: 96.14%** (8199/8528 funcs) → **~329 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -22,16 +22,25 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ColorFadeTickThumb, EventA7_WmUnitSetPosition, MuCtr_StartMoveTowards, MuCtr_InitDefinedMove,
   EventSetFogVisionExt, ForEachPosAtSinglePosition, Event88_WmScrollCameraOntoUnit,
   MoveUnit_, ChangeAiForPositions, Event3F_ScriptBattle.
-- ⚠️ **SATURATION POINT REACHED for flag-only carves.** The flag-clean vein is the TINY argv→call→return
-  shapes (EventA7/Event88/Event3F/EventSetFogVisionExt/ForEachPosAtSinglePosition matched). MEDIUM
-  functions with locals consistently NEAR on a **free register-allocation tiebreak the flag does NOT
-  dissolve** (it only fixes *promotion-driven* reg-alloc like MuCtr_InitDefinedMove r5→r6). These are
-  **decomp-permuter candidates** — body byte-correct, only a clean N-byte register swap remains. The
-  faithful near-match C is already known for each (in this session's transcript); the next phase is to
-  import each glabel'd `.s` + its near-match C into `scripts/permuter/` and run `permute.sh bg
-  --stop-on-zero`. PRIME targets (smallest swaps first):
-  - **ComputeBattleUnitAttack** (sub_802AA28, 4B — `attack` local r1↔r4 in the `*3` path)
-  - **CheckCanSummon** (sub_807D324, 7B — proc/count r6↔r7)
+- 🟢🟢 **PERMUTER PHASE IS LIVE & FAST — the flag-saturation reg-alloc NEARs are NOT a wall.** When a
+  faithful port + `-mjp-promote` leaves a small reg-alloc/scheduling NEAR, decomp-permuter cracks it in
+  SECONDS-to-MINUTES. Proven: **ComputeBattleUnitAttack** (base 15 → 0 @ iter 30) and **CheckCanSummon**
+  (base 35 → 0 @ iter 149). **REPRODUCIBLE RECIPE (the critical detail is the flag):**
+  1. near-match `_permwork/<Fn>.c` (the faithful flag near-match) + glabel'd `_permwork/<Fn>.s`
+     (`.syntax unified` + `glabel <Fn>` + the asm body after `<Fn>:`, DROP the `.set`/`.section`/`.global`
+     preamble so callees stay external relocs).
+  2. `scripts/permuter/permute.sh import _permwork/<Fn>.c _permwork/<Fn>.s` (run from repo root; inputs
+     must be INSIDE the repo or import.py errors "Can't find root dir").
+  3. **CRITICAL: `sed -i 's#agbcc -mthumb-interwork#agbcc -mthumb-interwork -mjp-promote#' nonmatchings/<Fn>/compile.sh`**
+     — without the flag the permuter searches stock-agbcc space and the base score is huge/unwinnable; WITH
+     it the base score is the small flag-NEAR.
+  4. `scripts/permuter/permute.sh bg nonmatchings/<Fn> -j 4 --stop-on-zero` (detached, survives turns; cap
+     ~1 concurrent run, -j4 ≈ 4 workers — more OOM-starve).
+  5. Extract the MUTATION from `nonmatchings/<Fn>/output-0-*/source.c` (it's the preprocessed source —
+     diff vs the near-match to find the load-bearing change), apply it to a CLEAN `#include` version, carve.
+     Mutations seen: split `x = a*3` → `x=a; x=x*3` (reg-alloc); wrap `return X` in `do{ }while(0)` (reg-alloc).
+- ⚠️ Remaining decomp-permuter queue (faithful flag near-match known; same recipe). PRIME targets:
+  - ✅ ComputeBattleUnitAttack (DONE — permuter) · ✅ CheckCanSummon (DONE — permuter)
   - **Event0E_STAL** (sub_800DD9C, 10B — proc r3↔r4)
   - **Event1B_TEXTSHOW** (sub_800E5CC, 6B — `ea` u16-narrow r0-temp vs in-place r1; + bind
     EventText_StartBoxDialogueMsg=0x0800E574)
