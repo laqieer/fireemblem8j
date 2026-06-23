@@ -97,6 +97,7 @@ src/ColorFadeTickThumb.o: CC1FLAGS += -mjp-promote
 src/EventA7_WmUnitSetPosition.o: CC1FLAGS += -mjp-promote
 src/MuCtr_StartMoveTowards.o: CC1FLAGS += -mjp-promote
 src/MuCtr_InitDefinedMove.o: CC1FLAGS += -mjp-promote
+src/MoveUnit_.o: CC1FLAGS += -mjp-promote
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
