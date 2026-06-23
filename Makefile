@@ -84,6 +84,7 @@ src/GetPointAlongPath.o: CC1 := $(CC1_JP)
 src/DrawChapterTitleStrEx_jp.o: CC1 := $(CC1_JP)
 src/GetMovementScriptFromPath.o: CC1 := $(CC1_JP)
 src/GetEventTriggerId.o: CC1 := $(CC1_JP)
+src/TsaModifyFirstPalMaybe.o: CC1 := $(CC1_JP)
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
