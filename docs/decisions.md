@@ -7062,3 +7062,33 @@ likely this ceiling — do NOT burn a permuter fleet on it; leave as descriptive
 ones fixable by signedness/int-widen/empty-if-hoist levers (where the param is reused, not just passed
 through). This means matching-C 100% may be structurally unreachable for the subset JP compiled this way —
 honest goal framing, like the named-axis asset-label cap.
+
+**Full fleet outcome (10 functions attempted across 3 waves; 7 banked).** BANKED: GetStringFromIndexInBuffer,
+GmMu_SetBlendEnabled, SetCRSpellBgPosition, GmapRmBorder1_PutSpriteAll, PrepItemScreen_DrawVisibleUnitNames,
+OpAnim1_UpdateScrollOneLine (int-local-widen + register-lineage reuse + statement-reorder),
+UpdatePrepItemScreenFace (the `(u16)(s16)x` adjacency idiom — forces a deferred u16 narrowing to stay
+adjacent). **matching-C 8150→8157 (95.57→95.65%).** The hit rate fell wave-over-wave (W1 4/6, W2 2/3,
+W3 0/2) as the readily-winnable functions were exhausted and the remainder turned ceiling-dominated.
+
+**The ceiling is ONE root cause — agbcc EAGER vs JP DEFERRED parameter extension** (proven on 4 functions
+with the decisive fe8u-own-ROM cross-check each time, 24k–47k permuter iterations frozen):
+- *order:* AddGorgonEggTrap — JP extends params in declaration order; agbcc stages stack/high-reg args first.
+- *placement:* DrawNumberText_WithReset — JP sign-extends once at entry + uses in-loop; agbcc must either
+  zero-ext-at-entry+re-narrow-in-loop OR sign-ext-at-entry+hoist-the-multiply (mutually exclusive, neither
+  is JP's form).
+- *eager-vs-deferred:* AddPointToPathArrowProc — JP defers param shifts and derives signed+unsigned lazily
+  at each store; agbcc eagerly copies to callee-saved regs and zero-extends up front.
+- *frozen reg-alloc tiebreak:* DrawItemMenuLine — a single r4↔r5 coloring of two equal-pressure
+  call-surviving pointers; fe8u AND our agbcc both pick r5, JP picks r4 (JP is the outlier).
+In every case **fe8u's own byte-perfect ROM agrees with our agbcc, and the JP ROM is the outlier** → JP was
+built with a different agbcc patch level whose param-extension/register-coloring strategy we cannot
+reproduce from C. A meaningful fraction of the remaining ~371 functions are this class. **Recommendation:**
+sourcing the exact JP-era agbcc build is the only path to those; until then they stay descriptive asm and
+**matching-C has a structural ceiling < 100%**. The genuinely-winnable remainder is the localized
+signedness / int-widen / empty-if-hoist / scheduling-reorder diffs — keep mining those with the lever kit.
+
+**SOLVABLE NEARs deferred to a quiet machine (permuter starved by fleet OOM-contention, NOT ceilings):**
+GetMuDisplayPosition (13B, reg-alloc/scheduling; hard `ip` allocation already solved; base score 430) and
+Sio_RasterRotatedBoxToWinBuf (4B, one `lsls` schedule slot). See [[parallel-carve-fleet-ops]] — cap
+concurrent permuter workers (~3) and guard against worker→main partial-carve contamination
+(`git status` clean before every cherry-pick).
