@@ -71,6 +71,7 @@ src/DrawNumberText_WithReset.o: CC1 := $(CC1_JP)
 src/AddGorgonEggTrap.o: CC1 := $(CC1_JP)
 src/UpdateLinkArenaMenuScrollBar.o: CC1 := $(CC1_JP)
 src/AddPointToPathArrowProc.o: CC1 := $(CC1_JP)
+src/DrawItemMenuLine.o: CC1 := $(CC1_JP)
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
