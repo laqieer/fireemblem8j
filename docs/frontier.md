@@ -10,7 +10,22 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-23)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 95.92%** (8180/8528 funcs) → **~348 functions genuinely unmatched**
+- **MATCHING-C: 95.98%** (8185/8528 funcs) → **~343 functions genuinely unmatched**
+- 🟢 **PROVEN PLAYBOOK — the `-mjp-promote` flag-carve (D276c).** The pre-flag verification run
+  (`/tmp/verify_results.json`, 42 PARTIAL near-misses) diagnosed many functions as
+  "param-extension ORDER / decl-order / sign-vs-zero-extend" — i.e. unfixable by any C lever because
+  it is *compiler behavior*. The `-mjp-promote` flag IS that behavior. Carve recipe (5-10 min each):
+  port the faithful fe8u C verbatim → `src/<Fn>.c`, `git rm asm/sub_<addr>.s` + its gbadisasm tsv,
+  add `layout/carved_rom.d/handdecomp_<Fn>.tsv` (`<start>\t<end>\tsrc/<Fn>.o(.text)\thanddecomp: <Fn>`)
+  and `layout/baseline_syms_drop.d/handdecomp_<Fn>.tsv` (just the name), add
+  `src/<Fn>.o: CC1FLAGS += -mjp-promote` to the Makefile per-TU block, `gen_layout.py` + full
+  `make compare`. Carved this way this session: FilterBattleAnimCharacterPalette, PointInCameraBounds,
+  AiIsWithinRectDistance, MoveUnitExt, InitPlayConfig (+ GetEventTriggerId). **Best targets = the
+  remaining PARTIALs whose note says param-order / decl-order / extension scheduling.** Skip the
+  ones noted "decomp-permuter target / intractable reg-alloc" (ColorFadeSetup*, Event0E_STAL,
+  StartSubSpell_efxIvaldi*, ShopTryMoveHand r6/r7 cascade) — those are genuine reg-alloc, not flag.
+  Traps: callees that are JP-unnamed sub_ (need a bind, e.g. PutFaceChibi) cost more; missing
+  prototypes are -Werror compile fails (add the header, e.g. MoveUnitExt needed bmmap.h+bmudisp.h).
 - 🔑🔑 **TWO major ceiling subclasses RECLASSIFIED from "unreachable" to "fixable" (D276/D276b)**, now served
   by a SINGLE agbcc with a **`-mjp-promote` CC flag** (D276c — built by `scripts/build_jp_agbcc.sh`, applied
   **PER-TU** via Makefile `CC1FLAGS += -mjp-promote`, like m4a `CC1_OLD` / Sram `-O1`). Default-off it is
