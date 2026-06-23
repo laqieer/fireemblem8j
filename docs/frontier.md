@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-23)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 96.11%** (8196/8528 funcs) → **~332 functions genuinely unmatched**
+- **MATCHING-C: 96.12%** (8197/8528 funcs) → **~331 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -20,15 +20,24 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   Carved this session: FilterBattleAnimCharacterPalette, PointInCameraBounds, AiIsWithinRectDistance,
   MoveUnitExt, InitPlayConfig, GmMuPrim_TrackMovementDelta (+s16), GmMuPrim_GetMovementFacing,
   ColorFadeTickThumb, EventA7_WmUnitSetPosition, MuCtr_StartMoveTowards, MuCtr_InitDefinedMove,
-  EventSetFogVisionExt, ForEachPosAtSinglePosition,
+  EventSetFogVisionExt, ForEachPosAtSinglePosition, Event88_WmScrollCameraOntoUnit,
   MoveUnit_, ChangeAiForPositions, Event3F_ScriptBattle.
-- ⚠️ **The flag dissolves SOME reg-alloc tiebreaks (promotion-driven: MuCtr_InitDefinedMove r5→r6) but
-  NOT all.** Genuine reg-alloc swaps that the flag does NOT fix → **decomp-permuter candidates** (clean
-  N-byte register swaps, body otherwise correct): **CheckCanSummon** (sub_807D324, 7B r6↔r7 proc/count),
-  **PutFaceOnBackGround** (sub_800663C, 16B r4↔r6 loop-temps; also needs face.h:155 `int c`→`s8 c`),
-  **Event1B_TEXTSHOW** (sub_800E5CC, 6B `ea` u16-narrow r0-temp vs in-place r1; needs
-  EventText_StartBoxDialogueMsg bound to 0x0800E574), **GetPathFromMovementScript** (sub_8032AB8,
-  eval-order, faithful+split gave a layout-shift — reconstruct or permuter).
+- ⚠️ **SATURATION POINT REACHED for flag-only carves.** The flag-clean vein is the TINY argv→call→return
+  shapes (EventA7/Event88/Event3F/EventSetFogVisionExt/ForEachPosAtSinglePosition matched). MEDIUM
+  functions with locals consistently NEAR on a **free register-allocation tiebreak the flag does NOT
+  dissolve** (it only fixes *promotion-driven* reg-alloc like MuCtr_InitDefinedMove r5→r6). These are
+  **decomp-permuter candidates** — body byte-correct, only a clean N-byte register swap remains. The
+  faithful near-match C is already known for each (in this session's transcript); the next phase is to
+  import each glabel'd `.s` + its near-match C into `scripts/permuter/` and run `permute.sh bg
+  --stop-on-zero`. PRIME targets (smallest swaps first):
+  - **ComputeBattleUnitAttack** (sub_802AA28, 4B — `attack` local r1↔r4 in the `*3` path)
+  - **CheckCanSummon** (sub_807D324, 7B — proc/count r6↔r7)
+  - **Event0E_STAL** (sub_800DD9C, 10B — proc r3↔r4)
+  - **Event1B_TEXTSHOW** (sub_800E5CC, 6B — `ea` u16-narrow r0-temp vs in-place r1; + bind
+    EventText_StartBoxDialogueMsg=0x0800E574)
+  - **PutFaceOnBackGround** (sub_800663C, 16B — r4↔r6 loop-temps; + face.h:155 `int c`→`s8 c`)
+  - **Event35_UnitClassChanging** (sub_801060C, 61B — larger, switch/class-data codegen; lower priority)
+  - **GetPathFromMovementScript** (sub_8032AB8 — eval-order; faithful+split layout-shifted, reconstruct)
 - 🟢 **PROVEN PLAYBOOK — the `-mjp-promote` flag-carve (D276c).** The pre-flag verification run
   (`/tmp/verify_results.json`, 42 PARTIAL near-misses) diagnosed many functions as
   "param-extension ORDER / decl-order / sign-vs-zero-extend" — i.e. unfixable by any C lever because
