@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-23)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 96.08%** (8194/8528 funcs) → **~334 functions genuinely unmatched**
+- **MATCHING-C: 96.11%** (8196/8528 funcs) → **~332 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -20,6 +20,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   Carved this session: FilterBattleAnimCharacterPalette, PointInCameraBounds, AiIsWithinRectDistance,
   MoveUnitExt, InitPlayConfig, GmMuPrim_TrackMovementDelta (+s16), GmMuPrim_GetMovementFacing,
   ColorFadeTickThumb, EventA7_WmUnitSetPosition, MuCtr_StartMoveTowards, MuCtr_InitDefinedMove,
+  EventSetFogVisionExt, ForEachPosAtSinglePosition,
   MoveUnit_, ChangeAiForPositions, Event3F_ScriptBattle.
 - ⚠️ **The flag dissolves SOME reg-alloc tiebreaks (promotion-driven: MuCtr_InitDefinedMove r5→r6) but
   NOT all.** Genuine reg-alloc swaps that the flag does NOT fix → **decomp-permuter candidates** (clean
