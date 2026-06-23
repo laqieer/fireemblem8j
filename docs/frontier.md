@@ -10,7 +10,24 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-23)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 95.98%** (8185/8528 funcs) → **~343 functions genuinely unmatched**
+- **MATCHING-C: 96.08%** (8194/8528 funcs) → **~334 functions genuinely unmatched**
+- 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
+  Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
+  build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
+  resolution + bind lines for JP-unnamed `sub_` callees, asm range, the `-mjp-promote` lever).
+  The main thread (sole oracle) integrates each serially: apply → full `make compare` → commit on
+  match / revert on NEAR. Hit rate ~60% (clean flag wins land first try; reg-alloc NEARs revert).
+  Carved this session: FilterBattleAnimCharacterPalette, PointInCameraBounds, AiIsWithinRectDistance,
+  MoveUnitExt, InitPlayConfig, GmMuPrim_TrackMovementDelta (+s16), GmMuPrim_GetMovementFacing,
+  ColorFadeTickThumb, EventA7_WmUnitSetPosition, MuCtr_StartMoveTowards, MuCtr_InitDefinedMove,
+  MoveUnit_, ChangeAiForPositions, Event3F_ScriptBattle.
+- ⚠️ **The flag dissolves SOME reg-alloc tiebreaks (promotion-driven: MuCtr_InitDefinedMove r5→r6) but
+  NOT all.** Genuine reg-alloc swaps that the flag does NOT fix → **decomp-permuter candidates** (clean
+  N-byte register swaps, body otherwise correct): **CheckCanSummon** (sub_807D324, 7B r6↔r7 proc/count),
+  **PutFaceOnBackGround** (sub_800663C, 16B r4↔r6 loop-temps; also needs face.h:155 `int c`→`s8 c`),
+  **Event1B_TEXTSHOW** (sub_800E5CC, 6B `ea` u16-narrow r0-temp vs in-place r1; needs
+  EventText_StartBoxDialogueMsg bound to 0x0800E574), **GetPathFromMovementScript** (sub_8032AB8,
+  eval-order, faithful+split gave a layout-shift — reconstruct or permuter).
 - 🟢 **PROVEN PLAYBOOK — the `-mjp-promote` flag-carve (D276c).** The pre-flag verification run
   (`/tmp/verify_results.json`, 42 PARTIAL near-misses) diagnosed many functions as
   "param-extension ORDER / decl-order / sign-vs-zero-extend" — i.e. unfixable by any C lever because
