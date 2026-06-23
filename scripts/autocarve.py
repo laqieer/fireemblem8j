@@ -119,7 +119,7 @@ def main():
         r = recipe(name)
         if not r:
             print(f"[skip ] {name}: no clean US body/range"); continue
-        if r["deadend"]:
+        if r["deadend"] and not os.environ.get("AUTOCARVE_NODEADEND"):
             print(f"[skip ] {name}: DEAD-END pre-screen (sign-ext)"); continue
         addr = addr_of(name)
         if not addr:
