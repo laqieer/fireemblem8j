@@ -74,6 +74,7 @@ src/efxLunaOBJ_Loop_B.o: CC1FLAGS += -mjp-promote
 src/EfxSRankWeaponEffectSCRMain.o: CC1FLAGS += -mjp-promote
 src/efxIvaldiBG2_Loop.o: CC1FLAGS += -mjp-promote
 src/StartSubSpell_efxMaohFlashEyeROBJ2.o: CC1FLAGS += -mjp-promote
+src/StartSubSpell_efxMaohFlashEyeLOBJ2.o: CC1FLAGS += -mjp-promote
 src/efxDarkGradoBG02_Loop_A.o: CC1FLAGS += -mjp-promote
 src/AiGetUnitClosestValidPosition.o: CC1FLAGS += -mjp-promote
 src/efxSPDQuake_Loop.o: CC1FLAGS += -mjp-promote
