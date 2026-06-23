@@ -7006,3 +7006,59 @@ audit (read-only agent) flagged that read-only is `disallowedTools`-stripped-Edi
 (so no-`make`/no-commit is a PROMPT contract, honestly documented in the README) and that the integrator
 singleton needed a real lock (added via claim.py). NOTE: new agent files + the new project env var only
 load on a session RESTART. Change is config/docs only — no build input touched, `make compare` unaffected.
+
+## D275 — baseline-aliased frontier is region-different CODEGEN; permuter+lever fleet (matching-C 95.57→95.6x)
+
+**Empirical frontier characterization (the durable finding).** After confirming every *named* game
+function is already carved (ground-truth: only 1 non-data named `.s` remains; the ~427 `asm/sub_*.s`
+are the whole matching-C frontier), I isolated the most tractable subset: **94 `sub_*.s` whose address
+has a linker-proven US-name baseline alias** (in `layout/baseline_syms.d/*.tsv`). Ran `autocarve.py` over
+the 86 non-BIOS ones (added an `AUTOCARVE_NODEADEND` env bypass — the old "sign-ext dead-end" pre-screen
+pre-dates D270 and wrongly skipped winnable candidates). Result: **0 region-same, 1 NEAR, 45 REGION,
+29 COMPILE-fail, 8 LINK-fail.** Conclusion: the easy "port fe8u C verbatim → byte-match" vein is
+**exhausted**; the remainder is region-different in *codegen* (arg-eval order, signedness, reg-alloc) —
+JP was built from a slightly different source/compiler than fe8u, so the fe8u-C port reproduces the
+*logic* but not the exact bytes. fe8u matches its own ROM; JP genuinely differs. The COMPILE-fails are
+NOT free DECL_ONLY wins — adding the missing prototype just *enables attempting* a still-region-different
+function (verified on GmMuPrim_GetMovementFacing: compiles after a proto, but reg-alloc differs).
+
+**The agbcc codegen-lever taxonomy (extends D270), validated this session:**
+- **Signedness cast at the shift/load site** — `(s16)/(s8)/(int)` to force `asr`/signed-load; `(u16)/(u8)`
+  for `lsr`/unsigned. CAVEAT: a `(s16)` cast whose result only feeds a `!=0` test or a narrow store gets
+  optimized back to `lsr` (agbcc drops the unneeded sign) — that case is permuter-or-impossible, not a
+  lever fix (proven on GmMuPrim_TrackMovementDelta: 2-byte NEAR, `lsrs` vs JP `asrs`, unfixable by cast).
+- **int-local + `(s16)` cast** — declare the var `int` (no narrowing store round-trip) and cast the
+  assignment `(s16)(...)`; keeps field loads `ldrh` while sign-extending the result in-register. This
+  cracked **SetCRSpellBgPosition** (worked because the downstream use `x - off` needs the signed value).
+- **Empty-if hoist (the key new lever)** — a no-op `if (param) {}` (or `if (x){}; ...; if (y){}`) forces
+  agbcc to materialize/sign-extend that arg FIRST, controlling argument-evaluation ORDER. Cracked
+  **GmMu_SetBlendEnabled** (1×) and **GmapRmBorder1_PutSpriteAll** (2×, one per arg). NOTE it is optimized
+  away if the param is never otherwise used in that scope (failed on AddGorgonEggTrap — pure reorder →
+  permuter).
+- **Callee prototype signedness** — a value passed to a callee emits the wrong extension when the callee's
+  param type is `char` vs `s8`; fix the prototype (re-verify the callee still matches; flag shared-header).
+
+**Topology:** D99-safe — P10 (main thread) owns the single `make compare`/commit/push oracle and
+re-verifies every worker branch with a full cold `make compare` before banking (never trusts a worker's
+self-claim). Worktree carve-workers grind one target each with the lever kit + decomp-permuter and push
+a branch. Fixed `scripts/parallel/worktree_setup.sh` to symlink ALL `tools/*/` dirs (workers were hitting
+missing preproc/gbagfx/aif2pcm/gbadisasm → silently-empty data/sound objects → wrong ROM).
+
+**Carves banked this session:** GetStringFromIndexInBuffer (sub_8009FE4, region-same JP-omits-terminator),
+GmMu_SetBlendEnabled (empty-if hoist + s8 proto), SetCRSpellBgPosition (int+`(s16)` cast),
+GmapRmBorder1_PutSpriteAll (double empty-if hoist). matching-C 8150→8154+ (fleet still landing).
+
+**HARD CEILING discovered — argument-extension ORDER (agbcc-impossible class).** A worker proved
+**AddGorgonEggTrap** (sub_80379C0) is NOT matchable from any agbcc-compilable C: the only diff is a 14-byte
+reorder where JP extends params in *declaration* order (x,y,meta,delay,level) but agbcc *always* stages the
+stack/high-register args (meta→r5,delay→r3,level→r4) before touching r0/r1 (which still hold live incoming
+x/y) — so agbcc emits meta,delay,level,**then** x,y. Decisive proof: fe8u's *byte-perfect* ROM compiles the
+identical one-line source (`bmtrap.c:299`→`bmtrap.s:972`) to agbcc's order, i.e. **JP differs from agbcc
+itself, not from our C.** Exhausted: local copies, int-widen, `register asm("rN")` pins, old_agbcc, -O1/-O3,
+-fno-schedule-insns/2, -fno-reorder-blocks, and ~33,000 permuter iterations (base score frozen). JP was
+evidently built with a compiler/patch variant that extends params in-place in declaration order. **Triage
+implication:** a region-diff that is purely an x/y-args-extended-LAST reorder (first params passed first) is
+likely this ceiling — do NOT burn a permuter fleet on it; leave as descriptive asm. Matchable diffs are the
+ones fixable by signedness/int-widen/empty-if-hoist levers (where the param is reused, not just passed
+through). This means matching-C 100% may be structurally unreachable for the subset JP compiled this way —
+honest goal framing, like the named-axis asset-label cap.
