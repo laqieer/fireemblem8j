@@ -56,7 +56,10 @@ jobs:
           git clone --depth 1 https://github.com/pret/agbcc.git
           cd agbcc && ./build.sh && ./install.sh .. && cd ..
 
-      - name: Build jp_agbcc (per-TU signedness-preserving agbcc, D276)
+      - name: Add -mjp-promote flag to agbcc (per-TU JP promotion, D276c)
+        # Rebuilds the thumb agbcc with the runtime-gated -mjp-promote flag and
+        # overwrites tools/agbcc/bin/agbcc. Default-off = byte-identical to stock;
+        # the Makefile enables it per-TU for the JP-promotion functions.
         run: bash scripts/build_jp_agbcc.sh
 
       - name: Setup asset toolchain (gbagfx/bin2c/preproc/aif2pcm)

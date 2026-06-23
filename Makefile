@@ -48,14 +48,13 @@ STRIP   := $(PREFIX)strip$(EXE)
 # same as the US decomp. Only needed once C decompilation begins.
 CC1     := tools/agbcc/bin/agbcc$(EXE)
 CC1_OLD := tools/agbcc/bin/old_agbcc$(EXE)
-# CC1_JP: agbcc with the thumb PROMOTE_MODE patched to PRESERVE sub-word type
-# signedness (s8/s16 -> sign-extend) instead of force-zero-extending everything.
-# The stock agbcc force-zero-extends all sub-word values; the JP-FE8 build kept
-# type signedness, so functions that hold an s8/s16 value sign-extended across the
-# body only byte-match under this variant (the s8/s16-hold "ceiling" class, D275).
-# Applied PER-TU (like CC1_OLD for m4a) since it is NOT globally byte-neutral.
-# Build it with scripts/build_jp_agbcc.sh (clones pret/agbcc + applies the patch).
-CC1_JP  := tools/agbcc/bin/jp_agbcc$(EXE)
+# The project agbcc (built by scripts/build_jp_agbcc.sh) carries a `-mjp-promote`
+# target flag (D276c). DEFAULT-OFF it is byte-identical to stock agbcc, so the
+# ~8077 normal TUs are unchanged. With `-mjp-promote` it (1) preserves sub-word
+# type signedness in PROMOTE_MODE (s8/s16 -> sign-extend, not force-zero-extend)
+# and (2) enables PROMOTE_FUNCTION_ARGS (declaration-order incoming-param
+# extension). A subset of JP functions only byte-match under that behavior, so it
+# is enabled PER-TU below via `CC1FLAGS += -mjp-promote` (one binary, not two).
 
 # m4a sound-engine TUs were built with the old GBA SDK agbcc; their codegen
 # shape (prologue, dead reg-inits) differs from the regular agbcc, so they
@@ -64,28 +63,29 @@ src/ClearModM.o src/m4aSongNumStart.o src/m4aSongNumStop.o \
 src/m4aSongNumContinue.o src/m4aSongNumStartOrChange.o \
 src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSound.o src/m4aSoundMode.o src/MPlayContinue.o src/MPlayFadeOut.o src/m4aMPlayFadeOutTemporarily.o src/m4aMPlayFadeIn.o src/m4aMPlayImmInit.o src/m4aSoundVSyncOff.o src/m4aSoundVSyncOn.o src/MPlayStart.o src/FadeOutBody.o src/TrkVolPitSet.o src/CgbOscOff.o src/CgbModVol.o src/m4aMPlayTempoControl.o src/m4aMPlayModDepthSet.o src/m4aMPlayLFOSpeedSet.o src/ply_xwave.o: CC1 := $(CC1_OLD)
 
-# JP-agbcc (signedness-preserving) per-TU overrides — s8/s16-hold-form functions
-# that only byte-match when sub-word values keep their type signedness (D275).
-src/TsaModifyFirstPalReverse.o: CC1 := $(CC1_JP)
-src/DrawNumberText_WithReset.o: CC1 := $(CC1_JP)
-src/AddGorgonEggTrap.o: CC1 := $(CC1_JP)
-src/UpdateLinkArenaMenuScrollBar.o: CC1 := $(CC1_JP)
-src/AddPointToPathArrowProc.o: CC1 := $(CC1_JP)
-src/DrawItemMenuLine.o: CC1 := $(CC1_JP)
-src/DrawNumberText.o: CC1 := $(CC1_JP)
-src/DrawTimeText.o: CC1 := $(CC1_JP)
-src/Text_DrawNumber.o: CC1 := $(CC1_JP)
-src/Tactician_MoveHand.o: CC1 := $(CC1_JP)
-src/_PutChapterTitleGfx.o: CC1 := $(CC1_JP)
-src/DrawSupportScreenText.o: CC1 := $(CC1_JP)
-src/DrawTimeText_WithReset.o: CC1 := $(CC1_JP)
-src/DrawPrepScreenItems.o: CC1 := $(CC1_JP)
-src/GetPointAlongPath.o: CC1 := $(CC1_JP)
-src/DrawChapterTitleStrEx_jp.o: CC1 := $(CC1_JP)
-src/GetMovementScriptFromPath.o: CC1 := $(CC1_JP)
-src/GetEventTriggerId.o: CC1 := $(CC1_JP)
-src/TsaModifyFirstPalMaybe.o: CC1 := $(CC1_JP)
-src/Sio_RasterRotatedBoxToWinBuf.o: CC1 := $(CC1_JP)
+# -mjp-promote per-TU overrides — functions that only byte-match under the JP
+# promotion behavior: s8/s16-hold form (signedness preserved) and/or
+# declaration-order arg extension (PROMOTE_FUNCTION_ARGS). One flag, one agbcc.
+src/TsaModifyFirstPalReverse.o: CC1FLAGS += -mjp-promote
+src/DrawNumberText_WithReset.o: CC1FLAGS += -mjp-promote
+src/AddGorgonEggTrap.o: CC1FLAGS += -mjp-promote
+src/UpdateLinkArenaMenuScrollBar.o: CC1FLAGS += -mjp-promote
+src/AddPointToPathArrowProc.o: CC1FLAGS += -mjp-promote
+src/DrawItemMenuLine.o: CC1FLAGS += -mjp-promote
+src/DrawNumberText.o: CC1FLAGS += -mjp-promote
+src/DrawTimeText.o: CC1FLAGS += -mjp-promote
+src/Text_DrawNumber.o: CC1FLAGS += -mjp-promote
+src/Tactician_MoveHand.o: CC1FLAGS += -mjp-promote
+src/_PutChapterTitleGfx.o: CC1FLAGS += -mjp-promote
+src/DrawSupportScreenText.o: CC1FLAGS += -mjp-promote
+src/DrawTimeText_WithReset.o: CC1FLAGS += -mjp-promote
+src/DrawPrepScreenItems.o: CC1FLAGS += -mjp-promote
+src/GetPointAlongPath.o: CC1FLAGS += -mjp-promote
+src/DrawChapterTitleStrEx_jp.o: CC1FLAGS += -mjp-promote
+src/GetMovementScriptFromPath.o: CC1FLAGS += -mjp-promote
+src/GetEventTriggerId.o: CC1FLAGS += -mjp-promote
+src/TsaModifyFirstPalMaybe.o: CC1FLAGS += -mjp-promote
+src/Sio_RasterRotatedBoxToWinBuf.o: CC1FLAGS += -mjp-promote
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn

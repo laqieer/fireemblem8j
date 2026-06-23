@@ -7205,3 +7205,24 @@ into `scripts/build_jp_agbcc.sh` (two asserted patches). **AddGorgonEggTrap carv
 (95.72%).** So at least TWO of the D275 "ceiling" classes are agbcc thumb-config knobs, not a foreign
 compiler — the user's skepticism was decisively right. Remaining ceiling classes (LICM hoist, cross-jump/
 tail-merge, reg-coalescing+DSE, eager-vs-deferred) are the next config/flag knobs to probe.
+
+### D276c — ONE agbcc, a `-mjp-promote` CC flag (replaces the two-binary jp_agbcc)
+**User's architecture question** ("can the jp_agbcc behaviour be controlled via a CC flag — 1 agbcc, set a
+flag per-TU for the JP funcs?") — investigated and **shipped; it is strictly better than two binaries.** Both
+JP knobs are now gated behind a new `-mjp-promote` ARM target flag (`ARM_FLAG_JP_PROMOTE 0x20000` +
+`TARGET_JP_PROMOTE`), so a SINGLE agbcc serves everything:
+- `PROMOTE_MODE` is already a runtime macro → gated `if (! TARGET_JP_PROMOTE) (UNSIGNEDP) = 1;` (default keeps
+  the stock force-zero-extend).
+- `PROMOTE_FUNCTION_ARGS` was a compile-time `#ifdef` → **always-defined** so the arg-promotion code compiles
+  in, with the 3 promotion *actions* (calls.c outgoing, function.c incoming, combine.c setup_incoming_promotions
+  loop) each runtime-gated `if (TARGET_JP_PROMOTE)`. Default-off = no promotion = stock arg-order.
+
+**Validation (all byte-level):** (1) flag-OFF compile == stock agbcc byte-identical (AddGorgonEggTrap + full
+cold ROM, diff 0 → the ~8077 normal TUs are provably unaffected); (2) flag-ON == the old two-patch jp_agbcc
+byte-identical on every committed JP function (AddGorgonEggTrap, TsaModifyFirstPalReverse, DrawNumberText_WithReset,
+GetEventTriggerId); (3) full cold `make compare` with the single flag-agbcc + Makefile `CC1FLAGS += -mjp-promote`
+per-TU → **ROM diff 0, OK, self-contained 100%.** `scripts/build_jp_agbcc.sh` now builds the flag-capable agbcc
+and overwrites `tools/agbcc/bin/agbcc` (no separate `jp_agbcc` binary); the agbcc binary itself isn't
+bit-reproducible (embedded build path) but its CODEGEN is identical (the only property that matters). Makefile
+per-TU lines migrated `CC1 := $(CC1_JP)` → `CC1FLAGS += -mjp-promote`; `CC1_JP` removed. Precedent: the Sram
+funcs' per-TU `CC1FLAGS := … -O1`. Cleaner provenance (the flag names the requirement), one toolchain to build.

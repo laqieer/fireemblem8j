@@ -10,15 +10,17 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-23)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 95.73%** (8164/8528 funcs) → **~364 functions genuinely unmatched**
-- 🔑🔑 **TWO major ceiling subclasses RECLASSIFIED from "unreachable" to "fixable" (D276/D276b)** via
-  `jp_agbcc` (built by `scripts/build_jp_agbcc.sh`, applied **PER-TU** via Makefile `CC1_JP`, like m4a
-  `CC1_OLD`). Two thumb-config knobs: (1) `PROMOTE_MODE` preserve sub-word signedness → **s8/s16-hold form**
-  (TsaModifyFirstPalReverse, DrawNumberText_WithReset, UpdateLinkArenaMenuScrollBar); (2) `PROMOTE_FUNCTION_ARGS`
-  → **arg-extension ORDER** (AddGorgonEggTrap — D275's flagship "impossible" fn). The combined patch is a
-  verified SAFE SUPERSET (one jp_agbcc serves both). jp_agbcc ALSO fixes downstream reg-alloc tiebreaks
-  (UpdateLinkArenaMenuScrollBar's r4↔r7 fell out with no extra lever). **Campaign all promotion/extension/
-  reg-alloc ceilings this way**, each gated by full COLD `make compare`.
+- **MATCHING-C: 95.92%** (8180/8528 funcs) → **~348 functions genuinely unmatched**
+- 🔑🔑 **TWO major ceiling subclasses RECLASSIFIED from "unreachable" to "fixable" (D276/D276b)**, now served
+  by a SINGLE agbcc with a **`-mjp-promote` CC flag** (D276c — built by `scripts/build_jp_agbcc.sh`, applied
+  **PER-TU** via Makefile `CC1FLAGS += -mjp-promote`, like m4a `CC1_OLD` / Sram `-O1`). Default-off it is
+  byte-identical to stock agbcc (the ~8077 normal TUs are unchanged). The flag gates two thumb-config knobs:
+  (1) `PROMOTE_MODE` preserve sub-word signedness → **s8/s16-hold form** (TsaModifyFirstPalReverse,
+  DrawNumberText_WithReset, UpdateLinkArenaMenuScrollBar); (2) `PROMOTE_FUNCTION_ARGS` → **arg-extension ORDER**
+  (AddGorgonEggTrap — D275's flagship "impossible" fn). It ALSO dissolves downstream reg-alloc tiebreaks
+  (UpdateLinkArenaMenuScrollBar's r4↔r7), LICM/IV-strength-reduction (GetEventTriggerId), and scheduling
+  residuals (Sio_RasterRotatedBoxToWinBuf). **Campaign all promotion/extension/reg-alloc/LICM/scheduling
+  ceilings this way**, each gated by full COLD `make compare`.
 - The WINNABLE remainder also = **JP-divergent reconstruction** (rebuild from gbadisasm when the fe8u port is
   a structural mismatch — often a first-compile match) + localized signedness/int-widen/empty-if-hoist/
   scheduling levers + saturation-killed permuter NEARs re-run solo on a quiet machine.
@@ -26,7 +28,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.24% (capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.29% (capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 
 ### How the remaining ~373 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
