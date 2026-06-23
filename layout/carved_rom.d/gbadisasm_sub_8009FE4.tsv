@@ -1,1 +1,1 @@
-009FE4	00A004	asm/sub_8009FE4.o(.text.sub_8009FE4)	sub_8009FE4 region-different gbadisasm descriptive asm
+009FE4	00A004	src/GetStringFromIndexInBuffer.o(.text)	GetStringFromIndexInBuffer region-different C
