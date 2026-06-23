@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-23)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 96.38%** (8219/8528 funcs) → **~309 functions genuinely unmatched**
+- **MATCHING-C: 96.48%** (8228/8528 funcs) → **~300 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -79,9 +79,9 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.26% (13184/15463; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.32% (13197/15467; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 
-### How the remaining ~309 are carved (D275 — the current playbook)
+### How the remaining ~300 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in
