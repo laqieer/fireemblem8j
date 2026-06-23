@@ -79,10 +79,12 @@ isolated worktrees by carve-workers and integrated serially through the single `
 - **TU-local macro-shadow prototype** — give a callee an `int` arg in ONE TU without touching the shared
   header or the callee's own s8 body (parallel-safe).
 - **decomp-permuter** for genuine reg-alloc/scheduling residual.
-- **CEILING (skip):** a pure arg-extension REORDER where the first params (passed first) are extended
-  LAST by agbcc but FIRST by JP is **agbcc-impossible** — JP used a compiler that extends params in
-  declaration order in-place. Leave as descriptive asm. [AddGorgonEggTrap; proof in D275] This means
-  matching-C 100% may be structurally unreachable for the subset JP compiled this way.
+- **~~CEILING~~ → SOLVED by `-mjp-promote` (D276b):** the arg-extension REORDER once thought
+  "agbcc-impossible" (params extended in declaration order in-place) is exactly what the
+  `-mjp-promote` flag now produces. **AddGorgonEggTrap — D275's flagship "impossible" example —
+  byte-matches under the flag.** The only remaining genuine ceiling is *free* reg-alloc tiebreaks
+  (not promotion-driven) and instruction scheduling that the flag doesn't touch → decomp-permuter,
+  not a structural wall. 100% matching-C is NOT believed unreachable anymore.
 
 ## Code frontier — priority order (USER-DEFINED, JP-area-first)
 The remaining matching-C work is JP-only / JP-divergent code that **cannot be ported from fe8u** and
