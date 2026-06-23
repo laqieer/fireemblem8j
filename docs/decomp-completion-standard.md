@@ -91,6 +91,38 @@ bytes = 13.29 MB = 83.0%** of the 16 MiB (16,777,216-byte) ROM. Every one resolv
 
 ---
 
+## Why the "Code" badge (~86%) is lower than the "Functions" badge (~96%)
+
+The two README badges measure the **same code progress with different denominators**, so
+they legitimately diverge — both are correct:
+
+| Badge | Source | What it counts | Today |
+|---|---|---|---|
+| **Functions** | progress.deco.mp | function **count** — every function = 1 unit, size-blind | 8,190 / 8,528 = **96.0%** |
+| **Code** | decomp.dev (objdiff report via `scripts/gen-report.py`) | matched code **bytes** ÷ total code bytes (size-weighted) | 774,048 / 901,428 = **~85.9%** |
+
+The gap is pure **byte-weighting**. From `scripts/calcprogress.py`: of 901,428 code bytes,
+774,048 are in matching `src/*.c` and **111,604 are still in `asm/`** — that residual is
+**12.4% of code bytes but only ~338 functions (4% by count)**. So the still-unmatched
+functions are *disproportionately large*:
+
+```
+avg matched function:   774,048 / 8,087 ≈  96 bytes
+avg UNmatched function: 111,604 /   338 ≈ 330 bytes   (~3.4× larger)
+```
+
+This is expected, not a bug or a stale report (CI regenerates `report.json` every run): the
+small, easy region-different helpers matched first (cheap function-*count* wins), so the tail
+is the big, complex region-different bodies — they barely move the count but are a large slice
+of the *bytes*. As those large functions get carved, the **Code** % climbs toward the
+**Functions** %. To lift the Code badge fastest, prioritise large region-different functions
+(event handlers, the 300+ byte `sub_` bodies), not just small param-order helpers.
+
+(The 6-unit `objdiff.json` is only for the *local interactive* objdiff GUI/watch — it does
+**not** feed the decomp.dev badge; that badge comes from the whole-ROM byte totals above.)
+
+---
+
 ## The four real fronts
 
 ### (a) Data extraction — replace ~14 MB of incbin with extracted assets
