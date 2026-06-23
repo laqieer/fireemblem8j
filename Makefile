@@ -70,6 +70,7 @@ src/TsaModifyFirstPalReverse.o: CC1FLAGS += -mjp-promote
 src/EfxTmCpyExt.o: CC1FLAGS += -mjp-promote
 src/efxLunaOBJ_Loop_C.o: CC1FLAGS += -mjp-promote
 src/EfxNoDamageYureMain.o: CC1FLAGS += -mjp-promote
+src/EfxTriangleQUAKEMain.o: CC1FLAGS += -mjp-promote
 src/efxLunaOBJ_Loop_B.o: CC1FLAGS += -mjp-promote
 src/EfxSRankWeaponEffectSCRMain.o: CC1FLAGS += -mjp-promote
 src/efxIvaldiBG2_Loop.o: CC1FLAGS += -mjp-promote
