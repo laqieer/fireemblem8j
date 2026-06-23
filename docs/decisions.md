@@ -6983,3 +6983,26 @@ memories): bounded-workers, verify-don't-declare-dead, JP-area-first frontier (d
 fe8u-module matching-C frontier is EXHAUSTED (6 module teams → ~0 net-new; real remainder = permuter-class
 + JP-only areas). Discord follow-up mined +59 findings (/tmp/discord_findings_followup.md). DEFERRED:
 efxNaglfar binds, Event25 permuter, ~20 byte-neutral renames, JP-area ground-truth before re-dispatch.
+
+## D274 — Enabled Claude Code agent teams for the project (a first-class team roster)
+Request: "enable claude code agent teams for the project." The `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
+flag was already on at user level; I made it explicit + portable in `.claude/settings.json` `env` (so any
+session/clone of THIS project gets teams, not just this machine), and — the valuable part — authored a
+project-scoped roster in `.claude/agents/` that encodes the PROVEN D99 / `docs/parallel-carving.md` /
+`p9-team-safe-topology` topology rather than generic roles:
+- `carve-researcher` (read-only, many-parallel) — ID a JP fn → fe8u/fe6j/fe7j/decomp.me, classify
+  region-same/diff with exact diff, emit a CARVE RECIPE.
+- `carve-worker` (`isolation: worktree`, `acceptEdits`) — claim → carve in its OWN worktree → `make compare`
+  → push a `feat/*` branch (never main/integration/--force).
+- `carve-integrator` (SINGLETON) — the single `make compare` oracle owner; acquires an exclusive
+  `scripts/parallel/claim.py claim integrator` lock at start (fail-closed) and lands work fast-forward-only.
+- `decomp-verifier` (read-only) — adversarial refuter: objdump diff + struct/mnemonic audit → MATCH/NEAR/
+  UNSOLVED/WRONG-ID; never self-certifies.
+- `data-extractor` (read-only) — typed-INCBIN migration recipes for the data frontier.
+Verified two ways: claude-code-guide confirmed file-frontmatter (`disallowedTools`/`effort`/`isolation`/
+`permissionMode`/`color`) is honored in 2.1.186 and that the folded-scalar `description:` is undocumented
+(collapsed to single-line; also fixed a YAML colon-space/quote break in two descs). An adversarial safety
+audit (read-only agent) flagged that read-only is `disallowedTools`-stripped-Edit/Write but Bash-retained
+(so no-`make`/no-commit is a PROMPT contract, honestly documented in the README) and that the integrator
+singleton needed a real lock (added via claim.py). NOTE: new agent files + the new project env var only
+load on a session RESTART. Change is config/docs only — no build input touched, `make compare` unaffected.
