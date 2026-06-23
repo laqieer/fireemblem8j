@@ -7192,3 +7192,16 @@ makes the build link a stale `baserom.o` → garbage ROM).
 test whether the OTHER ceiling classes (arg-extension ORDER, eager-vs-deferred, LICM hoist, cross-jump/
 tail-merge, reg-coalescing+DSE) are ALSO agbcc thumb-config/flag knobs (PROMOTE_FUNCTION_ARGS, scheduling,
 LICM) — the same investigate-the-config method.
+
+### D276b — SECOND knob confirmed: PROMOTE_FUNCTION_ARGS = the arg-extension-ORDER subclass
+The same investigate-the-config method cracked the arg-order ceiling too. `gcc/thumb.h` does NOT define
+`PROMOTE_FUNCTION_ARGS` (the ARM config does). Defining it makes the callee promote/extend its incoming
+sub-word params **at entry in DECLARATION order**, instead of stock agbcc staging the outgoing stack-args
+first. Test: AddGorgonEggTrap — D275's FLAGSHIP "agbcc-impossible" example (33k permuter iterations frozen)
+— compiles **byte-identical** to JP under the combined patch. Crucially the combined patch (PROMOTE_MODE +
+PROMOTE_FUNCTION_ARGS) is a SAFE SUPERSET: TsaModifyFirstPalReverse and DrawNumberText_WithReset compile to
+the IDENTICAL object under it (verified), so ONE jp_agbcc with BOTH knobs serves both subclasses. Folded both
+into `scripts/build_jp_agbcc.sh` (two asserted patches). **AddGorgonEggTrap carved per-TU → matching-C 8163
+(95.72%).** So at least TWO of the D275 "ceiling" classes are agbcc thumb-config knobs, not a foreign
+compiler — the user's skepticism was decisively right. Remaining ceiling classes (LICM hoist, cross-jump/
+tail-merge, reg-coalescing+DSE, eager-vs-deferred) are the next config/flag knobs to probe.

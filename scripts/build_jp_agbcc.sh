@@ -26,18 +26,24 @@ echo "[jp_agbcc] cloning pret/agbcc @ $AGBCC_COMMIT ..."
 git clone "$AGBCC_URL" "$WORK/agbcc"
 git -C "$WORK/agbcc" checkout --quiet "$AGBCC_COMMIT"
 
-echo "[jp_agbcc] patching thumb PROMOTE_MODE (preserve sub-word type signedness) ..."
+echo "[jp_agbcc] patching thumb config (D276): preserve sub-word signedness + promote function args ..."
 python3 - "$WORK/agbcc/gcc/thumb.h" <<'PY'
 import sys, re
 p = sys.argv[1]
 s = open(p).read()
-# In the PROMOTE_MODE macro, drop the line that force-sets (UNSIGNEDP) = 1; so the
-# promotion keeps the type's own signedness (s8/s16 -> sign-extend, u8/u16 -> zero).
+# Knob 1 (PROMOTE_MODE): drop the force `(UNSIGNEDP) = 1;` so sub-word ints keep
+# their type signedness (s8/s16 -> sign-extend, u8/u16 -> zero) -> s8/s16 "hold-form".
 pat = re.compile(r'(\#define PROMOTE_MODE\(MODE,UNSIGNEDP,TYPE\).*?MODE_SIZE \(MODE\) < 4\)\s*\\\n\s*\{\s*\\\n)\s*\(UNSIGNEDP\) = 1;\s*\\\n', re.S)
-s2, n = pat.subn(r'\1', s)
-assert n == 1, "expected exactly one PROMOTE_MODE force-unsigned line, found %d" % n
-open(p, 'w').write(s2)
-print("[jp_agbcc] patched OK")
+s, n1 = pat.subn(r'\1', s)
+assert n1 == 1, "expected exactly one PROMOTE_MODE force-unsigned line, found %d" % n1
+# Knob 2 (PROMOTE_FUNCTION_ARGS): the thumb config omits it (the ARM config defines it).
+# Defining it makes the callee promote/extend its incoming sub-word params at entry in
+# DECLARATION order -> matches JP's arg-extension-ORDER class (e.g. AddGorgonEggTrap).
+assert 'PROMOTE_FUNCTION_ARGS' not in s, "PROMOTE_FUNCTION_ARGS already present"
+s, n2 = re.subn(r'^#define PROMOTE_PROTOTYPES 1', '#define PROMOTE_FUNCTION_ARGS\n#define PROMOTE_PROTOTYPES 1', s, count=1, flags=re.M)
+assert n2 == 1, "expected exactly one PROMOTE_PROTOTYPES anchor, found %d" % n2
+open(p, 'w').write(s)
+print("[jp_agbcc] patched OK (PROMOTE_MODE + PROMOTE_FUNCTION_ARGS)")
 PY
 
 echo "[jp_agbcc] building thumb agbcc (serial; genrtl.h codegen must precede rtl.o) ..."
