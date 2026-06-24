@@ -4,8 +4,22 @@
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
 ## State (HEAD clean, `make compare` → OK, self-contained YES)
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.61% (8324/8528, ~204 left, +105 this session)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.36% (13176/15436, structurally capped ~96%).
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.71% (8333/8528, ~195 left, +110 net this session — note the StartEventBattle revert -1)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.36% (13177/15437, structurally capped ~96%).
 - This session banked **+61 matching-C** (8219→8280) via the engine below, kept docs current, pruned 55+ stale branches, and stood up a **reusable Discord learning loop**. The 0x800 (eventscr) clean-port vein is now NEARLY EXHAUSTED (see frontier "Vein status — eventscr"); the remaining eventscr handlers are reg-alloc/scheduling NEARs. **Next CLEAN fuel = the 0x808 band (AutoGenerateUnitdef, AutolevelSecondaryLord, SioWeaponSelectMenu_Draw) + scattered singletons + the next-tier Text_DrawNumberOrSpace.** Worker A proved even "region-same" handlers can be reg-alloc NEARs (~1/5 hit on that cluster), so a **permuter campaign on the close NEARs is now higher-yield than more clean-port dispatch.** 0x80A (60 unnamed) and 0x80D (BIOS/libc) are traps.
+
+## REMAINING WORK (~195 left — the clean-recipe vein is ~EXHAUSTED; 2026-06-24)
+Even the 'self-cert leaves' (EfxAdvanceFrameLut + AddAttr2dBitMap) match the fe8u ELF but NOT JP
+(compiler-config PROMOTE/CSE/reg-pressure divergence). The tail is now four classes:
+- **`-mjp-promote` / jp_agbcc config-NEARs** — promotion/extension/reg-alloc tiebreaks the flag still
+  shifts; retry the flag before deferring.
+- **permuter-running reg-alloc NEARs** — Tactician_InitScreen (320→125), SelectSummonPos, ClassIntro_Init,
+  AdjustNewUnitPosition, StrInsertTact, SioBat_SetupLoop, EfxAdvanceFrameLut, AddAttr2dBitMap,
+  ColorFadeSetup×4. Run the worktree permuter (`-j4 --stop-on-zero`, base≤35 cracks fast).
+- **reconstructs** (fe8u port is a structural mismatch — rebuild from gbadisasm behavior) — Menu_OnIdle,
+  SaveMenuExtrasMenuLoop, LoadUnit, BattleAIS_ExecCommands, PrepareBattleGraphicsMaybe.
+- **corrupt-cfbind blockers** — NewEfxHitQuake (gEfxTerrainPalette→0x02016828), ekrGauge (gBanimMaxHP
+  still TODO). Fix the bad bind addr in the cfbind fragment FIRST, then carve (these are data/cfbind
+  commits → gate with `make clean && make compare` + `gh run list` per the CI lesson above).
 
 ## THE ENGINE (proven this session — ~90%+ land rate on well-specified recipes)
 **researcher → worker(worktree) → serial-integrate.** In ONE message dispatch:
@@ -146,6 +160,7 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
 4. **Commit cadence:** one verified carve = one commit = one push. Bump `docs/frontier.md` + README scorecard whenever an axis moves.
 5. **P10 posture:** delegate to background/worktree agents; keep the integrator (you) free — serial integration is the only non-delegable work.
 6. **Integrator gate must be a FORCED-CLEAN rebuild** (`rm -f fireemblem8.gba fireemblem8.elf && make compare`) — a worker's incremental worktree OK can be a stale-OK artifact; and verify `nm src/<fn>.o` shows any static-inline'd helper as `U` not `T` (out-of-line-dup → 12.6M layout shift).
+7. **CI INCIDENT LESSON (2026-06-24): shared-header & data/cfbind commits need `make clean && make compare` + a `gh run list` CI check — NOT a warm `rm rom/elf`.** StartEventBattle's `include/functions.h` isBallista u8→s8 SHARED-HEADER edit passed the warm `rm rom/elf` gate but CLEAN-BUILD-BROKE the ROM (12.7M-byte cascade) → CI red twice → REVERTED. Any shared-header (functions.h/variables.h/struct header) or cfbind/data-bind commit MUST be gated with a FULL `make clean && make compare` (warm `rm rom/elf` is insufficient) AND a `gh run list` CI confirmation before pushing. Re-land such carves with LOCAL prototypes/structs in the carve TU, never a shared-header edit.
 
 ## KNOWLEDGE (committed)
 `docs/frontier.md` (SSoT + playbook + vein status), `docs/decisions.md` (D276/D276b/D276c flag), `docs/decomp-completion-standard.md` (4-axis honest framing + Code<Functions byte-weighting), `docs/agbcc_codegen_levers.md`, `docs/discord_findings.md`, `docs/fe8u_mining_findings.md` (data roadmap), `docs/tools/*`. Byte-level corpora: `../fireemblem8u` (primary), `../fireemblem6j` (efx reconstruction source — mind `s16/8`→`ldrh+lsrs`), `../FireEmblem7J`.

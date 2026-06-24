@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.61%** (8324/8528 funcs) → **~204 functions genuinely unmatched**
+- **MATCHING-C: 97.71%** (8333/8528 funcs) → **~195 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -79,7 +79,23 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.36% (13176/15436; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.36% (13177/15437; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- **Batch + CI-incident (2026-06-24):** carved DisplayPage0/1, NewPopup2_PlanD, Loop6C_efxMagicQUAKE,
+  UnitKakudaiMain, UnitKakudaiPrepareAnimScript, ParseBattleHitToBanimCmd (all `-mjp-promote` where noted;
+  fixed 2 corrupt cfbind addrs: gBanimForceUnitChgDebug→0x0203E1A0, gBanimPositionIsEnemy→0x0203E104,
+  gBanimMaxHP still TODO). ⚠️ **CI INCIDENT + LESSON:** StartEventBattle's `include/functions.h` isBallista
+  u8→s8 SHARED-HEADER edit passed the warm `rm rom/elf` gate but CLEAN-BUILD-BROKE the ROM (12.7M-byte
+  cascade) → CI red twice → REVERTED (restored 0-diff). **RULE:** any shared-header
+  (functions.h/variables.h/struct header) or cfbind/data-bind commit MUST be gated with
+  `make clean && make compare` (NOT warm `rm rom/elf`) + a `gh run list` CI check. Re-land such carves
+  with LOCAL prototypes/structs, never a shared-header edit. The clean-recipe vein is now ~EXHAUSTED —
+  even the 'self-cert leaves' EfxAdvanceFrameLut + AddAttr2dBitMap match the fe8u ELF but NOT JP
+  (compiler-config PROMOTE/CSE/reg-pressure divergence). The tail is now: `-mjp-promote`/jp_agbcc
+  config-NEARs, permuter-running reg-alloc NEARs (Tactician_InitScreen 320→125, SelectSummonPos,
+  ClassIntro_Init, AdjustNewUnitPosition, StrInsertTact, SioBat_SetupLoop, EfxAdvanceFrameLut,
+  AddAttr2dBitMap, ColorFadeSetup×4), reconstructs (Menu_OnIdle, SaveMenuExtrasMenuLoop, LoadUnit,
+  BattleAIS_ExecCommands, PrepareBattleGraphicsMaybe), and corrupt-cfbind blockers (NewEfxHitQuake
+  gEfxTerrainPalette→0x02016828, ekrGauge gBanimMaxHP).
 
 #### Group A/B clean-fuel batch (2026-06-24, +5)
 Carved **PutFaceChibi** (-mjp-promote s8 isFlipped + `gFace_1` bind @0x085B8F5C),
@@ -283,7 +299,7 @@ seed, not another port attempt.
 Also in the 0x080C band remaining: **Nop_Titlescreen_0** @0x080CAEF4 + **Title_Loop_LightExplosionFx**
 @0x080CB114 are hard RECONSTRUCTs (US is a no-op stub / JP adds a banner ladder) — likely permuter.
 
-### How the remaining ~204 are carved (D275 — the current playbook)
+### How the remaining ~195 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in
