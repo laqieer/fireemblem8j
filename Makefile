@@ -103,6 +103,7 @@ src/DrawPathArrow.o: CC1FLAGS += -mjp-promote
 src/GmTmConfront_Loop_MoveUnitPositions.o: CC1FLAGS += -mjp-promote
 src/EfxHpBarResire_SetAnotherSide.o: CC1FLAGS += -mjp-promote
 src/EfxCircleWINMain.o: CC1FLAGS += -mjp-promote
+src/banim-ekrdragon-demonking_0807A078.o: CC1FLAGS += -mjp-promote
 src/EfxRestWINMain.o: CC1FLAGS += -mjp-promote
 src/DrawNumberText_WithReset.o: CC1FLAGS += -mjp-promote
 src/AddGorgonEggTrap.o: CC1FLAGS += -mjp-promote
