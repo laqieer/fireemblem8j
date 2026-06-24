@@ -178,6 +178,14 @@ src/ReadSramFast_Core.o src/WriteSramFast.o: CC1FLAGS := -mthumb-interwork -Wimp
 # Spline_SetupChannels: JP defers s16 arg sign-extension (PROMOTE) vs eager US.
 src/spline_0800BA5C.o: CC1FLAGS += -mjp-promote
 src/eventscr_0800F4D0.o: CC1FLAGS += -mjp-promote
+# LoadUnit_0: JP sign-extends s8 quiet/d params (asrs) vs eager-zero-extend US.
+src/eventscr_0800F8D4.o: CC1FLAGS += -mjp-promote
+# EventLoadUnitSliently: JP defers s16 count / s8 r3 extension (PROMOTE).
+src/eventscr_0800F86C.o: CC1FLAGS += -mjp-promote
+# Event2C_LoadUnits: JP signed-loads s16 unitLoadCount (ldrsh) (PROMOTE).
+src/eventscr_0800FD04.o: CC1FLAGS += -mjp-promote
+# Event01_End: JP defers s8 i loop-counter sign-extension (PROMOTE).
+src/eventscr_0800D860.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .

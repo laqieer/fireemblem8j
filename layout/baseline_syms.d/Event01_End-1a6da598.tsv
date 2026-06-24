@@ -1,0 +1,2 @@
+gEventActiveQueue	03000568	data	(Event01_End; JP -8 vs US 0x03000570)
+EventScr_CutsceneExecEnd	085B9EF8	data	(Event01_End; JP vs US 0x08592114)
