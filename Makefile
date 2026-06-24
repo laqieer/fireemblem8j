@@ -139,6 +139,7 @@ src/ForEachPosAtSinglePosition.o: CC1FLAGS += -mjp-promote
 src/GmFindPathRecursive.o: CC1FLAGS += -mjp-promote
 src/GmFindPathThroughBlockedRecursive.o: CC1FLAGS += -mjp-promote
 src/GmFindPath.o: CC1FLAGS += -mjp-promote
+src/GmapRmUpdateExt_ScrollPosition.o: CC1FLAGS += -mjp-promote
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
