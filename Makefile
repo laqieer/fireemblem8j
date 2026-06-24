@@ -248,6 +248,7 @@ src/prep_sallycir_08099CC0.o: CC1FLAGS += -mjp-promote
 src/worldmap_effect_080C5F68.o: CC1FLAGS += -mjp-promote
 src/monstergen_0807A710.o: CC1FLAGS += -mjp-promote
 src/GenerateBestMovementScript.o: CC1FLAGS += -mjp-promote
+src/Sio_ReadPacket.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .
