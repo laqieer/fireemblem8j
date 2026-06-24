@@ -8,9 +8,9 @@
 **Keep this current.** Refresh the numbers from `scripts/calcprogress.py` and the target lists from
 ground truth whenever an axis moves. Stale frontier data caused real wasted work (see "Pitfall" below).
 
-## Current state (2026-06-23)
+## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 96.48%** (8228/8528 funcs) → **~300 functions genuinely unmatched**
+- **MATCHING-C: 96.53%** (8232/8528 funcs) → **~296 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -79,9 +79,40 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.32% (13197/15467; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.34% (13200/15467; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 
-### How the remaining ~300 are carved (D275 — the current playbook)
+### Vein status (2026-06-24) — battle-anim efx
+Verified vein-exhaustion + technique notes so future sessions don't re-dispatch teams at dead veins.
+- **The two clean efx fingerprints are EXHAUSTED in still-asm** (verified by a full `asm/` sweep):
+  (a) the **"BG-scroll shake loop"** (`GetAnimPosition` + `gLCDControlBuffer.bgoffset[N].x` ± delta +
+  timer/terminator/`Proc_Break`), and (b) the **"frame-LUT BG-loop"** (`EfxAdvanceFrameLut` + conditional
+  `SpellFx_RegisterBgGfx` + `WriteBgMap` / `ClearBG1`). The 4 carved members were `sub_80661EC`,
+  `sub_8066E40`, `sub_806166C`, `sub_8070724`. **No clean instances remain.**
+- **The `StartSubSpell_efx*` proc-spawner class is ~EXHAUSTED: 171/172 bodies carved.** Only THREE remain,
+  all **FIELD-WRITERS** (lower confidence — need `-mjp-promote` + the `make compare` oracle):
+  - `StartSubSpell_efxIvaldiOBJ1` (JP `0x08068600`)
+  - `StartSubSpell_efxIvaldiOBJ2` (JP `0x08068738`, GNU computed-goto = high codegen risk)
+  - `StartSubSpell_efxMaohFlashThunderOBJ2` (US `0x08067400`; JP addr needs an IDA pin via an
+    `EfxCreateFrontAnim` xref)
+- **Carved this session via the researcher→worker→serial-integrate engine: +13** — the 4 fingerprint fns,
+  5 demonlight Eye spawners, `EfxTriangleQUAKEMain`, `sub_805DE74` + `sub_8055F90` reconstructs, and
+  `StartSubSpell_efxNaglfarOBJ2`.
+- **Techniques worth keeping:**
+  (i) function-local `u32* tbl[N]` AnimScr arrays in JP spawners are **JP-specific addresses** — read the
+  rodata blob straight from `baserom.gba` at the pool literal as a **3rd ID signal**, and bind/extern them
+  (split the carved data-gap TU, e.g. `frontier_df4_misc_lo`, if the rodata lands wrong);
+  (ii) **alias-by-name spawners** (the name is a `baseline_syms_drop` rename alias, and carved callers
+  already `bl` it) need **NO caller rewire** — just drop the alias + add the C TU;
+  (iii) **ALWAYS re-verify callee names against `layout/baseline_syms.tsv`**, not behavioral guesses —
+  e.g. `sub_8001EE4` = `EnablePaletteSync`, NOT `EnableKeyComboResetEN`; a misID fabricates a false
+  region-diff;
+  (iv) **`fe6j/src/banim_efxmagic.c` is the reconstruction byte-shape source** for fe8u-absent efx idioms;
+  mind fe6j `s16`/`s8` → JP `ldrh`+`lsrs` (unsigned read) to avoid `asr`.
+- **Next veins (not yet swept):** the secondary larger **region-diff efx dispatchers** (`sub_80705E8`,
+  `sub_8067040`, `sub_8067160`, `sub_8070A4C`, `EkrDragonBodyAnimeMain`/`sub_807949C`, `sub_806A41C`)
+  and the **worldmap `Gm*` / AI `Ai*` helper families**.
+
+### How the remaining ~296 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in
