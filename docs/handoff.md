@@ -4,22 +4,51 @@
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
 ## State (HEAD clean, `make compare` → OK, self-contained YES)
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.71% (8333/8528, ~195 left, +110 net this session — note the StartEventBattle revert -1)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.36% (13177/15437, structurally capped ~96%).
-- This session banked **+61 matching-C** (8219→8280) via the engine below, kept docs current, pruned 55+ stale branches, and stood up a **reusable Discord learning loop**. The 0x800 (eventscr) clean-port vein is now NEARLY EXHAUSTED (see frontier "Vein status — eventscr"); the remaining eventscr handlers are reg-alloc/scheduling NEARs. **Next CLEAN fuel = the 0x808 band (AutoGenerateUnitdef, AutolevelSecondaryLord, SioWeaponSelectMenu_Draw) + scattered singletons + the next-tier Text_DrawNumberOrSpace.** Worker A proved even "region-same" handlers can be reg-alloc NEARs (~1/5 hit on that cluster), so a **permuter campaign on the close NEARs is now higher-yield than more clean-port dispatch.** 0x80A (60 unnamed) and 0x80D (BIOS/libc) are traps.
+- **HEAD `b7cb6f120`** (run `git rev-parse --short HEAD` — newer if you integrated the in-flight worker below). **main GREEN + CI GREEN, self-contained 100%.**
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.74% (8335/8528, ~193 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.36% (13175/15435, structurally capped ~96%).
+- This session banked **+112 net matching-C** (8219→8335; from the 8150 baseline that is **+185**) via the engine below, kept docs current, and fixed 3 corrupt cfbind addrs (see bucket (c)). The clean-recipe vein is now **EXHAUSTED** — the tail is the 3-bucket frontier below.
 
-## REMAINING WORK (~195 left — the clean-recipe vein is ~EXHAUSTED; 2026-06-24)
+## ⚠️ IN-FLIGHT WORKER — INTEGRATE FIRST (verify-don't-declare-dead)
+A `carve-worker` was carving three targets when this handoff was written. **Before any new work, check what it landed and integrate it.** Do NOT declare it dead from an absent file or a mid-snapshot transcript (memory `verify-dont-declare-dead`); confirm via `git branch -r` / the worker's completion notification, then merge.
+- `git branch -r | grep feat/` — already pushed when this was written: **`origin/feat/ekrBattleInRoundIdle`** (tip `9689ce8ba`, ekrBattleInRoundIdle = JP `sub_80511E0`) and **`origin/feat/SaveMenuExtrasMenuLoop`** (tip `665faf37e`, SaveMenuExtrasMenuLoop = JP `sub_80A3B70` reconstruct). Also expected: **ekrGaugeMain** (`sub_8051FB8`, corrupt-cfbind gBanimMaxHP decode) on its own `feat/*` branch.
+- **Integrate serially, ONE branch at a time, full `make compare` gate.** ⚠️ **ekrGaugeMain touches cfbind → gate with `make clean && make compare`** (NOT the warm `rm rom/elf` form) + `gh run list` per the CI lesson below.
+
+## DETACHED PERMUTERS still running (may have cracked a NEAR late)
+Check `nonmatchings/<Fn>/output-0-*` for a zero-score solution before deferring these:
+**Tactician_InitScreen** (1-instr, base 320→125), **SelectSummonPos**, **ClassIntro_Init**, **AdjustNewUnitPosition**. If `output-0-*` exists, extract the mutation (diff `source.c` vs the near-match), apply to a clean `#include` version, carve.
+
+## THE FRONTIER — clean-recipe vein EXHAUSTED, ~193 remain — 3 BUCKETS
 Even the 'self-cert leaves' (EfxAdvanceFrameLut + AddAttr2dBitMap) match the fe8u ELF but NOT JP
-(compiler-config PROMOTE/CSE/reg-pressure divergence). The tail is now four classes:
-- **`-mjp-promote` / jp_agbcc config-NEARs** — promotion/extension/reg-alloc tiebreaks the flag still
-  shifts; retry the flag before deferring.
-- **permuter-running reg-alloc NEARs** — Tactician_InitScreen (320→125), SelectSummonPos, ClassIntro_Init,
-  AdjustNewUnitPosition, StrInsertTact, SioBat_SetupLoop, EfxAdvanceFrameLut, AddAttr2dBitMap,
-  ColorFadeSetup×4. Run the worktree permuter (`-j4 --stop-on-zero`, base≤35 cracks fast).
-- **reconstructs** (fe8u port is a structural mismatch — rebuild from gbadisasm behavior) — Menu_OnIdle,
-  SaveMenuExtrasMenuLoop, LoadUnit, BattleAIS_ExecCommands, PrepareBattleGraphicsMaybe.
-- **corrupt-cfbind blockers** — NewEfxHitQuake (gEfxTerrainPalette→0x02016828), ekrGauge (gBanimMaxHP
-  still TODO). Fix the bad bind addr in the cfbind fragment FIRST, then carve (these are data/cfbind
-  commits → gate with `make clean && make compare` + `gh run list` per the CI lesson above).
+(compiler-config PROMOTE/CSE/reg-pressure divergence). The remaining ~193 fall into 3 buckets:
+
+### (a) agbcc config-ceiling NEARs — HIGHEST-LEVERAGE UNLOCK (do this first)
+Functions that match the **fe8u ELF but not the JP ROM** via **register-save-ORDER** / **cross-jump-MERGE** /
+**register-PRESSURE-r7**. **`-mjp-promote` AND the decomp-permuter CANNOT crack these** — proven:
+- **AddAttr2dBitMap** — 2-halfword diff, permuter stuck **104k iters**, no zero.
+- **EfxAdvanceFrameLut** — cross-jump / tail-merge.
+- **SioBat_SetupLoop** — **+48B**, an extra callee-saved r7 (register pressure).
+**Do NOT keep throwing multi-hour permuter runs at this class** (one run burned ~7h for 0).
+**PATH (likely unlocks a whole class):** extend the jp_agbcc patch — **`scripts/build_jp_agbcc.sh` +
+`scripts/agbcc_jp_promote.patch`** — with NEW `thumb.h` config knobs for **save-order / cross-jump /
+reg-pressure** (analogous to how PROMOTE_MODE + PROMOTE_FUNCTION_ARGS dissolved the s8/s16-hold and
+arg-order subclasses — see memory `jp-agbcc-config-ceiling` and `docs/agbcc_codegen_levers.md`). This is a
+TOOLCHAIN investigation, not a per-function grind.
+
+### (b) Reconstructs (carveable — rebuild from gbadisasm behavior, not a fe8u port)
+The fe8u port is a structural mismatch; rebuild from the gbadisasm behavior (often a first-compile match).
+- **Menu_OnIdle** — ✅ DONE this session (JP INLINED ClearMenuBgs).
+- **LoadUnit** (`sub_801786C`)
+- **BattleAIS_ExecCommands** (`sub_80599F8`) — truncated-stub union 0x80599F8–0x805A488; split the range at the true boundary first (truncated-stub-split technique).
+- **PrepareBattleGraphicsMaybe** (`sub_8057F80`)
+- **SaveMenuExtrasMenuLoop** (`sub_80A3B70`) — in-flight worker (integrate from `origin/feat/SaveMenuExtrasMenuLoop`).
+
+### (c) Corrupt-cfbind field-writers (carveable)
+**Pattern:** decode the real EWRAM addr from the function's asm `.4byte` pool literal, then fix it with an
+**additive last-wins** `zfix_<Fn>.tsv` fragment in `baseline_syms.d` — **do NOT edit the shared cfbind row**
+(that breaks other readers). These are data/cfbind commits → gate with `make clean && make compare` + `gh run list`.
+- **NewEfxHitQuake** — ✅ DONE this session (gEfxTerrainPalette→0x02016828).
+- **ekrGaugeMain** — in-flight worker (gBanimMaxHP decode).
+- Fixed this session (reuse as reference): **gEfxTerrainPalette→0x02016828**, **gBanimForceUnitChgDebug→0x0203E1A0**, **gBanimPositionIsEnemy→0x0203E104**.
 
 ## THE ENGINE (proven this session — ~90%+ land rate on well-specified recipes)
 **researcher → worker(worktree) → serial-integrate.** In ONE message dispatch:
@@ -151,7 +180,10 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
 - **Data-gap split:** function-local `u32* tbl[N]` AnimScr arrays in JP spawners land their rodata in carved data-gap TUs (e.g. `frontier_df4_misc_lo`) — split the INCBIN to free the exact bytes (see the carved StartSubSpell_efxMaohFlashEye*/Naglfar/Ivaldi for the pattern).
 
 ## Discord learning loop (REUSABLE — set up this session, user-authorized)
-`scripts/discord_fetch.sh` (committed) — incremental, per-channel watermark, fetches NEW messages only. Token at `~/.config/fe8j-decomp/discord.env` (chmod 600, OUTSIDE repo, `DISCORD_TOKEN=`, DCE auto-reads env). DCE binary at `~/tools/dce/`. Raw logs `docs/refs/discord/` gitignored (piracy boundary — distill into `docs/discord_findings.md` only). As of 2026-06-23 the 7 channels were quiet since the 6/22 base. New tool found: **Transmuter** (github.com/macabeus/transmuter — agbcc+Thumb+Claude-Code permuter rewrite; EVALUATE for the NEAR backlog). See `docs/discord_learning.md`.
+`scripts/discord_fetch.sh` (committed) — incremental, per-channel message-ID watermark, fetches NEW messages only (`--seed` for first run). Token at `~/.config/fe8j-decomp/discord.env` (chmod 600, OUTSIDE repo, `DISCORD_TOKEN=`, DCE auto-reads env). DCE binary at `~/tools/dce/`. Raw logs `docs/refs/discord/` gitignored (piracy boundary — distill into `docs/discord_findings.md` only).
+- ⚠️ **The fetch loop is FIXED** (message-ID watermarks, `--seed`) **but the TOKEN IS INVALID** — the user's account is locked, password-reset pending. To resume mining, drop a fresh `DISCORD_TOKEN` into `~/.config/fe8j-decomp/discord.env`.
+- The **6/23 message was about gba-kit** (macabeus's TypeScript GBA emulator) = **NOT applicable** to this decomp; already recorded in `docs/discord_findings.md`.
+- Prior tool find: **Transmuter** (github.com/macabeus/transmuter — agbcc+Thumb+Claude-Code permuter rewrite; EVALUATE for the NEAR backlog). See `docs/discord_learning.md`.
 
 ## PROCESS (hard-won — do NOT relearn)
 1. **Frontier = ground truth (`asm/sub_*.s` stubs), NEVER `layout/nofuncmap_*.tsv`** (10× stale, US-offset addresses).
@@ -160,7 +192,7 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
 4. **Commit cadence:** one verified carve = one commit = one push. Bump `docs/frontier.md` + README scorecard whenever an axis moves.
 5. **P10 posture:** delegate to background/worktree agents; keep the integrator (you) free — serial integration is the only non-delegable work.
 6. **Integrator gate must be a FORCED-CLEAN rebuild** (`rm -f fireemblem8.gba fireemblem8.elf && make compare`) — a worker's incremental worktree OK can be a stale-OK artifact; and verify `nm src/<fn>.o` shows any static-inline'd helper as `U` not `T` (out-of-line-dup → 12.6M layout shift).
-7. **CI INCIDENT LESSON (2026-06-24): shared-header & data/cfbind commits need `make clean && make compare` + a `gh run list` CI check — NOT a warm `rm rom/elf`.** StartEventBattle's `include/functions.h` isBallista u8→s8 SHARED-HEADER edit passed the warm `rm rom/elf` gate but CLEAN-BUILD-BROKE the ROM (12.7M-byte cascade) → CI red twice → REVERTED. Any shared-header (functions.h/variables.h/struct header) or cfbind/data-bind commit MUST be gated with a FULL `make clean && make compare` (warm `rm rom/elf` is insufficient) AND a `gh run list` CI confirmation before pushing. Re-land such carves with LOCAL prototypes/structs in the carve TU, never a shared-header edit.
+7. **CI INCIDENT LESSON (2026-06-24) — MANDATORY: any commit touching a SHARED header (functions.h/variables.h/struct header) OR cfbind/data-bind/data-residue MUST be gated with `make clean && make compare`** — **NOT** the warm `rm fireemblem8.gba fireemblem8.elf` form. WHY: the warm form keeps the warm `.o` cache and the Makefile has **no header-dependency tracking**, so a header change clean-build-BREAKS but the warm gate still passes → CI red. StartEventBattle's `include/functions.h` isBallista u8→s8 SHARED-HEADER edit did exactly this (12.7M-byte cascade, CI red twice → REVERTED). Always also run `gh run list` to watch the CI clean-build. **Re-land header-needing carves via a LOCAL prototype/struct in the carve TU (the opinfo `OpInfoEnterProcJ`/`ClassReelEntJ` pattern), NEVER a shared-header edit.** **StartEventBattle (sub_8012038) is currently REVERTED** and needs a local-prototype re-land (or first understand the u8→s8 0xA99-cascade), not another shared-header attempt.
 
 ## KNOWLEDGE (committed)
 `docs/frontier.md` (SSoT + playbook + vein status), `docs/decisions.md` (D276/D276b/D276c flag), `docs/decomp-completion-standard.md` (4-axis honest framing + Code<Functions byte-weighting), `docs/agbcc_codegen_levers.md`, `docs/discord_findings.md`, `docs/fe8u_mining_findings.md` (data roadmap), `docs/tools/*`. Byte-level corpora: `../fireemblem8u` (primary), `../fireemblem6j` (efx reconstruction source — mind `s16/8`→`ldrh+lsrs`), `../FireEmblem7J`.
