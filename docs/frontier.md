@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 96.53%** (8232/8528 funcs) → **~296 functions genuinely unmatched**
+- **MATCHING-C: 96.69%** (8246/8528 funcs) → **~282 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -79,7 +79,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.34% (13200/15467; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.35% (13201/15467; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 
 ### Vein status (2026-06-24) — battle-anim efx
 Verified vein-exhaustion + technique notes so future sessions don't re-dispatch teams at dead veins.
@@ -112,7 +112,19 @@ Verified vein-exhaustion + technique notes so future sessions don't re-dispatch 
   `sub_8067040`, `sub_8067160`, `sub_8070A4C`, `EkrDragonBodyAnimeMain`/`sub_807949C`, `sub_806A41C`)
   and the **worldmap `Gm*` / AI `Ai*` helper families**.
 
-### How the remaining ~296 are carved (D275 — the current playbook)
+### Vein status (2026-06-24) — worldmap Gm*/opanim/savedraw/SIO
+Carved this session: GmapLineFade_0, GMScreenVSync_Loop, GmFindPath cluster (3, incl. permuter on
+GmFindPath + gUnk_12 alias fix 0xF7FF9A04→0x0201B100), GmapRmUpdateExt_ScrollPosition,
+OpAnimFaceMontageBlendOut, SaveDrawCursor_Loop (lut bound from baserom @0x081F57F1, NOT re-emitted),
+DrawGMapPIPanelAtHeight (width 13→12), SioHandleIrq_Serial (0x1288→0x1286), SioTeamList_1/2
+(gSioMain2_1 alias fix 0x20013144→0x080DED3D).
+- **Vein depth remaining:** worldmap band ~14 still-asm (now fewer), SIO band ~7, save band 1;
+  **name-entry/kana has NO fe8u twin** (reconstruct-only).
+- **Reusable technique — stale EWRAM-alias detection:** a `jp_syms`/baseline `.set NAME,0x20xxxxxx`
+  whose function pool literal is `.4byte 0x08xxxxxx` AND funcmap says ROM-exact = STALE alias; fix it
+  before carving any data-reader (hit on `gUnk_12` and `gSioMain2_1`).
+
+### How the remaining ~282 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in
@@ -134,6 +146,11 @@ isolated worktrees by carve-workers and integrated serially through the single `
   byte-matches under the flag.** The only remaining genuine ceiling is *free* reg-alloc tiebreaks
   (not promotion-driven) and instruction scheduling that the flag doesn't touch → decomp-permuter,
   not a structural wall. 100% matching-C is NOT believed unreachable anymore.
+
+> ⚠️ **KNOWN TOOLING BUG — `layout_frag.py write`.** The `layout_frag.py write <task> <manifest> <row>`
+> CLI deletes that task's fragments in the OTHER manifests (`write()` iterates all MANIFESTS, removing
+> rowless ones). When a carve needs BOTH a `carved_rom` AND a `baseline_syms` fragment, write them in a
+> **single `layout_frag.write()` python call**, NOT two CLI calls (the 2nd wipes the 1st → 16MB-overflow build).
 
 ## Code frontier — priority order (USER-DEFINED, JP-area-first)
 The remaining matching-C work is JP-only / JP-divergent code that **cannot be ported from fe8u** and
