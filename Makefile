@@ -152,6 +152,8 @@ src/GmTmConfront_StartAnim.o: CC1FLAGS += -mjp-promote
 src/bm_08015C38.o: CC1FLAGS += -mjp-promote
 # Event25_ChangeMap: JP defers s16 chIndex sign-extension (PROMOTE) vs eager US.
 src/eventscr_0800F390.o: CC1FLAGS += -mjp-promote
+# ApplySepiaToPaletteBuffer: JP defers s16 Div-result sign-extension (asr) vs eager US (lsr).
+src/code_8086934_08088B0C.o: CC1FLAGS += -mjp-promote
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
