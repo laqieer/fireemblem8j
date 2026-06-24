@@ -3,9 +3,9 @@
 **Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
-## State (HEAD ~`80384a30f`+, clean, `make compare` → OK, self-contained YES)
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 96.75% (8251/8528, ~277 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.35% (structurally capped ~96%).
-- This session banked **+30 matching-C** (8219→8249) via the engine below, kept docs current, pruned 51+ stale branches, and stood up a **reusable Discord learning loop**. A background worker (Title_SetupSpecialEffectGraphics + EndingCredits_UpdateStaffReel) may still be in flight — check `git branch -r` for an unmerged `feat/*` and integrate it before new work (verify, don't declare dead).
+## State (HEAD clean, `make compare` → OK, self-contained YES)
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 96.86% (8260/8528, ~268 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.34% (structurally capped ~96%).
+- This session banked **+41 matching-C** (8219→8260) via the engine below, kept docs current, pruned 55+ stale branches, and stood up a **reusable Discord learning loop**. **Next clean vein = the 0x800 (eventscr) + 0x808 (menu/autolevel) bands** (researcher band-map in transcript / frontier "Vein status"); 0x80A (60 unnamed) and 0x80D (BIOS/libc) are traps. A `carve-researcher` is mining the next 0x800 eventscr batch (background) — check for its recipes / an unmerged `feat/*` before new work (verify, don't declare dead).
 
 ## THE ENGINE (proven this session — ~90%+ land rate on well-specified recipes)
 **researcher → worker(worktree) → serial-integrate.** In ONE message dispatch:
@@ -40,6 +40,10 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
   stack-spill. (gWMNodeData=0x081F5D7C, gWMNodeIconData=0x081F5C6C if/when solved.)
 - **GMapScreen_UpdateScroll** @0x080BF73C — 3-way reg permutation (r9/r5/r7 vs sl/r7/r5) + one
   `str [sp,#8]` reorder; permuter plateaued 245. Not source-fixable; try fresh seed / manual pin.
+- **Event0F_CounterOps** @0x0800DE3C — clean fe8u port compiles+links, but a pervasive r4↔r5 (+ r0↔r3
+  in INC/DEC) reg-alloc tiebreak (~25 insn diffs); `-mjp-promote` fixed the s8-DEC clamp but not the
+  swap. Needs decomp-permuter with project include-path plumbing (bare `cpp -nostdinc` import lacks it),
+  or a manual reg-pin find. (gEventSlots/gEventSlotCounter are NAMED — no binds.)
 - **GmapEffect_0** @0x080C5F68 — clean reg permutation (JP i=r6/ptr=r4, agbcc picks r7/r5); permuter
   plateaued 1315/1650. Needs `gWorldmapEffect_0` data bind + baseline alias drop when solved.
 - **OpAnimFaceMontageBegin** @0x080CDCCC — blocked by a shared opanim `.text` +8-byte region shift
