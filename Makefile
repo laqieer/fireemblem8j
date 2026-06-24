@@ -156,6 +156,8 @@ src/eventscr_0800F390.o: CC1FLAGS += -mjp-promote
 src/code_8086934_08088B0C.o: CC1FLAGS += -mjp-promote
 # AiFindTargetInReachByFunc: JP defers s16 ix/iy loop-index sign-extension vs eager US.
 src/cp_utility_0803A99C.o: CC1FLAGS += -mjp-promote
+# AiFindTargetInReachNeglectWallByFunc: JP defers s16 ix/iy loop-index sign-extension vs eager US.
+src/cp_utility_0803AA9C.o: CC1FLAGS += -mjp-promote
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
