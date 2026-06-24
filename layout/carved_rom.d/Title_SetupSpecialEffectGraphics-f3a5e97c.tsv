@@ -1,0 +1,1 @@
+0CA69C	0CA838	src/titlescreen_080CA69C.o(.text)	Title_SetupSpecialEffectGraphics (JP region-diff: case 4 does real Decompress+ApplyPalette work, not just Proc_Break)

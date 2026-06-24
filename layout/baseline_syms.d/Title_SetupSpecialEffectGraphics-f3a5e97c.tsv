@@ -1,0 +1,2 @@
+gGfx_Titlescreen_4	08B4B200	data	Title_SetupSpecialEffectGraphics (case 4 gfx)
+gPal_Titlescreen_5	08B4BB80	data	Title_SetupSpecialEffectGraphics (case 4 palette; gPal_Titlescreen_4=08B49B4C is a distinct symbol used by Title_PrepareMainLogoZoom)
