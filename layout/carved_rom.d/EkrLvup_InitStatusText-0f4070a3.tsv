@@ -1,0 +1,1 @@
+075A08	075DA0	src/EkrLvup_InitStatusText.o(.text)	handdecomp: EkrLvup_InitStatusText (US banim-ekrlvup.c; JP centers level-up stat labels via cursor=(0x10-GetStringTextLen)>>1; permuter split-statement reg-alloc)
