@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.26%** (8294/8528 funcs) → **~234 functions genuinely unmatched**
+- **MATCHING-C: 97.30%** (8298/8528 funcs) → **~230 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -79,7 +79,28 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.32% (13170/15436; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.32% (13166/15432; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+
+### PIVOT: permuter campaign is now the highest-leverage move (2026-06-24)
+The clean-recipe engine drove matching-C 8150→8298 (+148 over the session); yield has dropped to ~50%
+as remaining functions hit agbcc CSE/reg-alloc divergences that `-mjp-promote` does NOT fix. The next
+leverage is a PERMUTER CAMPAIGN on the ~17-function NEAR backlog (many byte-close). BLOCKER to fix
+first: the decomp-permuter `compile.sh` (a) resolves its root to the shared MAIN repo not the worker's
+worktree, (b) uses bare agbcc WITHOUT `-mjp-promote` (wrong codegen space — base score huge), (c) its
+`run` deletes `src/F.c` from the MAIN tree (not parallel-safe). FIX: make `permute.sh` import/run
+operate relative to an explicit root (worktree), and always `sed`-patch `compile.sh` to
+`agbcc -mthumb-interwork -mjp-promote`. Then run `permute.sh bg <dir> -j4 --stop-on-zero` per NEAR.
+CLOSEST NEARs first (best permuter ROI):
+- **EkrLvup_InitStatusText** — 1 instruction (`adds r1,r0,#0` move agbcc won't emit; near-match
+  preserved `/tmp/banim-ekrlvup_08075A08.NEAR.c`).
+- **EkrDragonBodyAnimeMain** — 4-byte literal-pool flush/pad.
+- **Event26_CameraControl** — 3B sc2-first scheduling.
+- **Event1B_TEXTSHOW** — 9B.
+- **Event0E_STAL** — 10B.
+
+Heavier: ChapterStatus_Init (gGenericBuffer-CSE-into-r4, +16B), EkrDragonQuakeMain (r6↔r7 + CSE),
+AdjustNewUnitPosition (39B), SallyCir_Loop, GmapScreen2_Loop, GMapScreen_UpdateScroll, GmapEffect_0,
+Event18/35/A8, OpAnimFaceMontageBegin, Event0F.
 
 ### Vein status (2026-06-24) — battle-anim efx
 Verified vein-exhaustion + technique notes so future sessions don't re-dispatch teams at dead veins.
@@ -203,7 +224,7 @@ seed, not another port attempt.
 Also in the 0x080C band remaining: **Nop_Titlescreen_0** @0x080CAEF4 + **Title_Loop_LightExplosionFx**
 @0x080CB114 are hard RECONSTRUCTs (US is a no-op stub / JP adds a banner ladder) — likely permuter.
 
-### How the remaining ~234 are carved (D275 — the current playbook)
+### How the remaining ~230 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in
