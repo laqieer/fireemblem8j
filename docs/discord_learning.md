@@ -29,16 +29,30 @@ is gone, re-fetch a self-contained Linux-x64 release of DiscordChatExporter into
 ## How to fetch (incremental — new messages only)
 
 ```bash
-scripts/discord_fetch.sh                 # all tracked channels, since last run
+scripts/discord_fetch.sh --seed          # ONE-TIME: seed message-ID watermarks from base exports (no network)
+scripts/discord_fetch.sh                 # all tracked channels, since their last message-ID watermark
 scripts/discord_fetch.sh ai tools        # only the named channels
-FE8J_DISCORD_AFTER=2026-06-01 scripts/discord_fetch.sh ai   # override lower bound
 ```
 
-Each run fetches only messages **after** that channel's stored watermark, writes
-a `delta_<label>_<id>_<after>.json` (dropped if empty), and advances the
-watermark to the run time. So re-running never re-pulls the whole history — it is
-true incremental. First run after the 2026-06-22 base export uses a
-`2026-06-22T00:00:00` lower bound.
+The watermark is a Discord **message ID** (snowflake) per channel, stored in the
+gitignored `docs/refs/discord/.state/<label>.lastid`. Each run exports only
+`--after <messageId>` (DCE filters message IDs unambiguously), writes a delta
+(dropped if empty), and advances the watermark to the **last message actually
+fetched**. Never re-pulls history; never needs a full re-export.
+
+> **2026-06-24 bug + fix (don't regress):** the original script passed `--after` a
+> *date string* (`2026-06-22T00:00:00`). DCE silently mis-filtered it and returned
+> **0 messages even when new ones existed** — it missed a real 6/23 message in the
+> `ai` channel and wrongly reported "nothing new". The fix is message-ID `--after`
+> (above). If you ever re-seed or the state is lost, run `--seed` (reads the
+> committed base exports, no network) — it recovers each channel's watermark from
+> its base export's last message id.
+
+**Do NOT bulk-re-export full channel logs** (ban risk — the user flagged this).
+Incremental `--after <id>` is light: one request window per channel. If the token
+is invalid (DCE prints `Authentication token is invalid`), the script says so and
+does NOT retry-spam; refresh `~/.config/fe8j-decomp/discord.env` with a fresh
+token, then run the incremental fetch once.
 
 ## Tracked channels
 

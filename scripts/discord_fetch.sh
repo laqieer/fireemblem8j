@@ -54,6 +54,25 @@ set -a; . "$ENV_FILE"; set +a
 [ -n "${DISCORD_TOKEN:-}" ] || { echo "ERROR: DISCORD_TOKEN not set by $ENV_FILE" >&2; exit 1; }
 mkdir -p "$OUT_DIR" "$STATE_DIR"
 
+# ---- --seed: recover each channel's watermark from its committed base export (NO network) ----
+# The watermark is a Discord MESSAGE ID (snowflake), NOT a wall-clock timestamp. The old
+# date-string `--after` form silently mis-filtered and MISSED a real 6/23 message; `--after
+# <messageId>` is unambiguous. Run `discord_fetch.sh --seed` once to migrate from the old state.
+if [ "${1:-}" = "--seed" ]; then
+  echo "== seeding message-ID watermarks from committed base exports (no network) =="
+  for entry in "${CHANNELS[@]}"; do
+    label="${entry%%:*}"; cid="${entry##*:}"
+    base="$(ls "$OUT_DIR"/*"[${cid}].json" 2>/dev/null | head -1)"
+    [ -n "$base" ] || { echo "   ${label}: no base export — skip" >&2; continue; }
+    lid="$("${PYTHON:-python3}" -c 'import json,sys; d=json.load(open(sys.argv[1])); m=d.get("messages",[]); print(m[-1]["id"] if m else "")' "$base" 2>/dev/null)"
+    [ -n "$lid" ] || { echo "   ${label}: base has no messages — skip" >&2; continue; }
+    echo "$lid" > "$STATE_DIR/${label}.lastid"; rm -f "$STATE_DIR/${label}.last"
+    echo "   ${label}: watermark -> ${lid}"
+  done
+  echo "== seeded. Re-run without --seed (with a VALID token) to fetch new messages only. =="
+  exit 0
+fi
+
 # ---- which channels ---------------------------------------------------------
 want=("$@")
 selected=()
@@ -64,24 +83,48 @@ for entry in "${CHANNELS[@]}"; do
 done
 [ ${#selected[@]} -gt 0 ] || { echo "no matching channels for: ${want[*]:-<all>}" >&2; exit 1; }
 
-# ---- fetch loop -------------------------------------------------------------
+PY="${PYTHON:-python3}"
+last_id_of() {  # print the highest (last) message id in a DCE Json export, or empty
+  "$PY" - "$1" <<'PYEOF' 2>/dev/null
+import json,sys
+try:
+    d=json.load(open(sys.argv[1])); m=d.get('messages',[])
+    print(m[-1]['id'] if m else '')
+except Exception:
+    print('')
+PYEOF
+}
+
+# ---- fetch loop (message-ID watermark) ---------------------------------------
 now="$(date -u +%Y-%m-%dT%H:%M:%S)"
-echo "== discord_fetch (incremental) @ ${now}Z =="
+echo "== discord_fetch (incremental, message-ID watermark) @ ${now}Z =="
 for entry in "${selected[@]}"; do
   label="${entry%%:*}"; cid="${entry##*:}"
-  state_file="$STATE_DIR/${label}.last"
-  after="$DEFAULT_AFTER"; [ -f "$state_file" ] && after="$(cat "$state_file")"
-  out="$OUT_DIR/delta_${label}_${cid}_$(echo "$after" | tr -d ':-').json"
-  echo "-- ${label} (${cid}) : messages after ${after}"
-  # DCE reads DISCORD_TOKEN from env; do NOT pass -t (keeps token out of `ps`).
-  if "$DCE_BIN" export -c "$cid" -f Json --after "$after" -o "$out" >/dev/null 2>"$OUT_DIR/.dce_err_${label}.log"; then
-    # messageCount is in the JSON header; grep it cheaply.
-    n="$(grep -o '"messageCount":[0-9]*' "$out" 2>/dev/null | head -1 | grep -o '[0-9]*' || echo '?')"
-    echo "   -> ${n:-0} new messages  ($(basename "$out"))"
-    [ "${n:-0}" = "0" ] && rm -f "$out"   # drop empty deltas to keep the tree clean
-    echo "$now" > "$state_file"           # advance watermark only on success
+  state_file="$STATE_DIR/${label}.lastid"
+  after=""; [ -f "$state_file" ] && after="$(cat "$state_file")"
+  if [ -z "$after" ]; then
+    echo "-- ${label}: NO watermark — run 'scripts/discord_fetch.sh --seed' first (seeds from the base export). Skipping (avoids a full re-fetch / ban risk)." >&2
+    continue
+  fi
+  out="$OUT_DIR/delta_${label}_${cid}_${after}.json"
+  err="$OUT_DIR/.dce_err_${label}.log"
+  echo "-- ${label} (${cid}) : messages after id ${after}"
+  # DCE reads DISCORD_TOKEN from env; do NOT pass -t (keeps token out of `ps`). --after <id> is exact.
+  if "$DCE_BIN" export -c "$cid" -f Json --after "$after" -o "$out" >/dev/null 2>"$err"; then
+    n="$(grep -o '"messageCount":[0-9]*' "$out" 2>/dev/null | head -1 | grep -o '[0-9]*' || echo 0)"
+    if [ "${n:-0}" = "0" ]; then
+      echo "   -> 0 new messages"; rm -f "$out"
+    else
+      newid="$(last_id_of "$out")"
+      echo "   -> ${n} new messages ($(basename "$out")); watermark -> ${newid:-<unchanged>}"
+      [ -n "$newid" ] && echo "$newid" > "$state_file"   # advance only to the real last id
+    fi
   else
-    echo "   !! DCE export failed (see $OUT_DIR/.dce_err_${label}.log); watermark NOT advanced" >&2
+    if grep -qiE 'token is invalid|unauthorized|\b401\b' "$err" 2>/dev/null; then
+      echo "   !! TOKEN INVALID — refresh ~/.config/fe8j-decomp/discord.env; do NOT retry-spam (ban risk)." >&2
+    else
+      echo "   !! DCE export failed (see $err); watermark NOT advanced." >&2
+    fi
   fi
 done
 echo "== done.  Distil new content into docs/discord_findings.md (commit docs only, NEVER the raw json). =="
