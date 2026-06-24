@@ -188,6 +188,8 @@ src/eventscr_0800F86C.o: CC1FLAGS += -mjp-promote
 src/eventscr_0800FD04.o: CC1FLAGS += -mjp-promote
 # Event01_End: JP defers s8 i loop-counter sign-extension (PROMOTE).
 src/eventscr_0800D860.o: CC1FLAGS += -mjp-promote
+# Text_DrawNumberOrSpace: JP s16 digit char (0x4F82) shifted-domain (asr #16) (PROMOTE).
+src/text_08003FEC.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .
