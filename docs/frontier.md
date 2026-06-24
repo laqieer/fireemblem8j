@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.09%** (8280/8528 funcs) → **~248 functions genuinely unmatched**
+- **MATCHING-C: 97.19%** (8288/8528 funcs) → **~240 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -79,7 +79,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.33% (13183/15449; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.33% (13176/15442; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 
 ### Vein status (2026-06-24) — battle-anim efx
 Verified vein-exhaustion + technique notes so future sessions don't re-dispatch teams at dead veins.
@@ -149,6 +149,15 @@ DrawGMapPIPanelAtHeight (width 13→12), SioHandleIrq_Serial (0x1288→0x1286), 
   0x807=~20, 0x803=~12, 0x808=~6. Technique: masked-layer / graduated-accessor / handdecomp TUs
   already supply many callees (CopyEventMoveREDAs, GetItemHpBonus, GetStringFromIndex, etc.) —
   re-check `git ls-files src/` before flagging NEEDS_ALIAS (collapses phantom binds to zero).
+- **0x801–0x807 clean vein (+8 more):** carved GenerateSummonUnitDef (gSummonConfig JP=0x089CFD18; the
+  'suspect' addr was just the US funcmap column), RefreshUnitStealInventoryInfoWindow, AiTryMoveTowards +
+  AiTryMoveTowardsNeglectWall (cp_utility.h `unk` param u8->s8, byte-neutral across callers),
+  AiBallistaRideExit, GetPathFromMovementScript, EkrPalModifyUnused, RegisterEkrDragonStatusType (JP omits
+  7 fe8u guards in the MANAKETE_MYRRH arm — region-different reconstruct). IMPORTANT LESSON: three prior
+  'dead-end' flags were DEBUNKED this round — GetPathFromMovementScript ('eval-order reconstruct'),
+  EkrPalModifyUnused ('193B structural fail'), AdjustNewUnitPosition ('structural fail') were all
+  -mjp-promote / loop-invariant-cast-hoist / stack-spill issues, NOT structural. Treat ALL
+  'structural/dead-end' flags as PROVISIONAL — re-attempt with -mjp-promote + cast-hoist before deferring.
 
 ### Cross-cutting facts (corrections discovered 2026-06-24)
 - **ChangeUnitSpritePalette (0x0800BFC8) and RestartBattleMap (0x08030E94) are ALREADY committed C globals**
@@ -180,7 +189,7 @@ seed, not another port attempt.
 Also in the 0x080C band remaining: **Nop_Titlescreen_0** @0x080CAEF4 + **Title_Loop_LightExplosionFx**
 @0x080CB114 are hard RECONSTRUCTs (US is a no-op stub / JP adds a banner ladder) — likely permuter.
 
-### How the remaining ~248 are carved (D275 — the current playbook)
+### How the remaining ~240 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in
