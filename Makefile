@@ -143,6 +143,7 @@ src/GmapRmUpdateExt_ScrollPosition.o: CC1FLAGS += -mjp-promote
 src/savedraw_080AFE14.o: CC1FLAGS += -mjp-promote
 src/sio_teamlist_0804421C.o: CC1FLAGS += -mjp-promote
 src/sio_teamlist_080442A8.o: CC1FLAGS += -mjp-promote
+src/worldmap_rm_080C7CA8.o: CC1FLAGS += -mjp-promote
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
