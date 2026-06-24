@@ -1,0 +1,2 @@
+ClearUnit	0801759C	thumb	mapanim_summon_0807D074 (JP sub_801759C = ClearUnit, bound for GenerateSummonUnitDef carve)
+gUnitDef1	03001C30	data	mapanim_summon_0807D074 (JP gUnitDef1 RAM; pool literal 0x03001C30 in asm/sub_807D074.s)
