@@ -252,7 +252,6 @@ src/PutFaceChibi.o: CC1FLAGS += -mjp-promote
 src/statscreen_0808B314.o: CC1FLAGS += -mjp-promote
 src/GenerateBestMovementScript.o: CC1FLAGS += -mjp-promote
 src/Sio_ReadPacket.o: CC1FLAGS += -mjp-promote
-src/StartEventBattle.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .

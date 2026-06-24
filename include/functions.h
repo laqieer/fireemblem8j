@@ -76,7 +76,7 @@ void ChangeAiForCharacter(u8, u8, u8, u8);
 // ??? EvtBattleGenerateReal(???);
 // ??? EvtBattleGenerateBallistaReal(???);
 // ??? StartScriptBattleAnim(???);
-void StartEventBattle(struct Unit *, struct Unit *, s8, s8, u16, struct BattleHit *, s8);
+void StartEventBattle(struct Unit *, struct Unit *, u8, s8, u16, struct BattleHit *, s8);
 void EventBattleReloadBmStatus(void);
 void EventPromoteUnitExt(struct Unit *, u8, u8);
 void RestoreScreenAfterPromotion(void);
