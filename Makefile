@@ -148,6 +148,8 @@ src/worldmap_rm_080C7CA8.o: CC1FLAGS += -mjp-promote
 src/worldmap_gmapunit_080BFAC8.o: CC1FLAGS += -mjp-promote
 src/GmTmConfront_StartAnim.o: CC1FLAGS += -mjp-promote
 src/bm_08015C38.o: CC1FLAGS += -mjp-promote
+# Event25_ChangeMap: JP defers s16 chIndex sign-extension (PROMOTE) vs eager US.
+src/eventscr_0800F390.o: CC1FLAGS += -mjp-promote
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn
