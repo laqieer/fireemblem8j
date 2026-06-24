@@ -235,6 +235,7 @@ src/ShopTryMoveHand.o: CC1FLAGS += -mjp-promote
 # WmMain_MoveCursor: s16 cursor coords held sign-extended (lsl#16;asr#16) ->
 # PROMOTE preserves sub-word signedness for the (gGMData.ix >> 8) / 16 math.
 src/worldmap_main_080BE2A8.o: CC1FLAGS += -mjp-promote
+src/bmidoten_0801B2F4.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .
