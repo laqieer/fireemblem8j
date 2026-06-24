@@ -1,0 +1,4 @@
+BanimDefaultStandingTypes	080DFF28	data	UnitKakudaiPrepareAnimScript
+gEkrKakudaiSomeBufLeft	02001088	data	UnitKakudaiPrepareAnimScript
+gEkrKakudaiSomeBufRight	02003088	data	UnitKakudaiPrepareAnimScript
+gBanimForceUnitChgDebug	0203E1A0	data	UnitKakudaiPrepareAnimScript (corrects cfbind garbage 4D088004)
