@@ -1,0 +1,1 @@
+0780DC	078338	src/banim-ekrpopup_080780DC.o(.text)	handdecomp: DrawBattlePopup JP region-diff text-layout msgids 0x800 0x801 0x802 0x80B GetItemName 1-arg CpuFastSet PAL_BG1
