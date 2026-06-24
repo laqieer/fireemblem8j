@@ -223,6 +223,19 @@ src/banim-efxutils_080736C4.o: CC1FLAGS += -mjp-promote
 # RegisterEkrDragonStatusType: JP s16 gBanimValid loads sign-extended (ldrsh) -> PROMOTE.
 src/banim-ekrdragon-myrrh_080730E4.o: CC1FLAGS += -mjp-promote
 
+# BallistaRangeMenu_Draw: JP places arg2 (isAvailable) after the complex arg3
+# (mapOut), keeping it in callee-saved r5 + using r6 as index temp -> PROMOTE
+# flips the arg-evaluation tiebreak to match (declaration-order arg extension).
+src/BallistaRangeMenu_Draw.o: CC1FLAGS += -mjp-promote
+
+# ShopTryMoveHand: JP sign-extends the bool hscroll_en param (lsls#18;asrs#18)
+# instead of zero-extending -> PROMOTE preserves sub-word signedness.
+src/ShopTryMoveHand.o: CC1FLAGS += -mjp-promote
+
+# WmMain_MoveCursor: s16 cursor coords held sign-extended (lsl#16;asr#16) ->
+# PROMOTE preserves sub-word signedness for the (gGMData.ix >> 8) / 16 math.
+src/worldmap_main_080BE2A8.o: CC1FLAGS += -mjp-promote
+
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .
 
