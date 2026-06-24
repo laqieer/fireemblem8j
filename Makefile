@@ -134,6 +134,7 @@ src/ComputeBattleUnitAttack.o: CC1FLAGS += -mjp-promote
 src/GmMuPrim_3.o: CC1FLAGS += -mjp-promote
 src/CheckCanSummon.o: CC1FLAGS += -mjp-promote
 src/ForEachPosAtSinglePosition.o: CC1FLAGS += -mjp-promote
+src/GmFindPathRecursive.o: CC1FLAGS += -mjp-promote
 
 # Asset toolchain (Phase 0): vendored into the gitignored tools/<tool>/ via
 # scripts/tools/<tool>/setup.sh (gbagfx FIRST, then bin2c, preproc). These turn

@@ -7,4 +7,4 @@ gMenu_WMNodeMenu	08AC1BC0	data	StartWMNodeMenu
 gMenuRect_WMNodeMenuRectA	08AC1BE4	data	StartWMNodeMenu
 gMenuRect_WMNodeMenuRectB	08AC1BE8	data	StartWMNodeMenu
 GmIsNodeInList	080C18D0	thumb	GmFindPathRecursive
-gUnk_12	F7FF9A04	data	GmFindPathRecursive
+gUnk_12	0201B100	data	GmFindPathRecursive
