@@ -579,3 +579,40 @@ against our `-mjp-promote` reg-alloc/scheduling NEAR backlog.
 **Verdict:** ADOPT-after-pilot **Transmuter** for the NEAR backlog (it's the only new matcher built for
 agbcc+Thumb+agent-in-the-loop); BORROW patterns from **Mizuchi**; the bare agent-orchestrators and
 PS1/recomp tools mentioned in the channel are NOT-APPLICABLE.
+
+## gba-kit (2026-06-23, decomp.me #ai)
+
+- Repo: https://github.com/macabeus/gba-kit (TypeScript, MIT, created 2026-03-14, ~4 stars at look-up).
+  Same author as Transmuter/Mizuchi (Bruno Macabeus, `macabeus`), which is why it surfaced in the
+  `#ai` channel — but read the README before assuming it's a matcher: it is **not**.
+- What it is: a **GBA emulator written entirely in TypeScript**, shipped as a set of modular npm
+  packages — `@gba-kit/arm-emulator` (ARM7TDMI core, Thumb+ARM), `@gba-kit/gba-emulator` (PPU/APU/
+  DMA/timers/IRQ/bus), plus Node.js / browser / React runtimes and a browser debugger webapp
+  (disassembler, breakpoints, memory viewer). HLE BIOS, no ROM/firmware bundled.
+- Assessment for our agbcc byte-matching workflow:
+  - agbcc / `-mjp-promote` / old-compiler matching — **NOTHING.** It executes machine code; it has no
+    C front-end, no compiler, no codegen, no source-to-asm mapping. Irrelevant to producing matching C.
+  - decomp-permuter / reg-alloc NEAR cracking — **NOTHING.** No objdiff/asm-diff scoring, no mutation
+    search; an emulator can't tell you why two byte-streams differ at the source level.
+  - asset/data extraction — only weakly and indirectly: the headless `@gba-kit/gba-node` scripting API
+    can `takeScreenshot`, `record` sprite-sheets, and `takeMemorySnapshot` (iwram/ewram/vram/oam/
+    palette/io/sram → JSON) at chosen frames. That is *runtime RAM/framebuffer* capture, not the
+    *static ROM* graphics/text/charmap extraction our `scripts/dump_*.py` / typed-INCBIN data frontier
+    needs. Not a fit for the data-extraction axis.
+  - AI-in-the-loop carving — the scripting API advertises "automatic research and RE using LLM agents,"
+    but that is *behavioral* automation (drive menus, assert on game state, dump live memory). It does
+    not feed the matching loop (`make compare` sha1 + asm diff), which is where our agents work.
+  - build / linker / layout / CI — **NOTHING** relevant to our agbcc → `ld -T ldscript.txt` pipeline.
+  - The one genuinely interesting capability is the headless runtime's `wait({ pc })` / `wait({ memory })`
+    breakpoint + `takeMemorySnapshot` combo: a *scriptable, pure-JS, BIOS-HLE oracle for dynamic
+    behavior* — could in principle ground-truth a hypothesised function's runtime effect (run to a PC,
+    snapshot RAM, compare) without booting mGBA/a debugger. But our gate is **static byte-equality
+    against `baserom.gba`**, not behavioral equivalence, so even this is orthogonal to the campaign's
+    bottleneck (cracking reg-alloc/extension NEARs), and we already have IDA/Ghidra + the ELF for RE.
+
+**Verdict:** **NOT-APPLICABLE** to FE8J matching/data/permuter work — `gba-kit` is a TypeScript GBA
+*emulator*, not a decompilation/matching tool; it has no compiler, no asm-diff/permuter, and no static
+ROM-asset extraction, so it does not advance any of our four axes. **BORROW-PATTERNS (low priority,
+optional):** only its headless-scripting *idea* — a pure-JS, BIOS-HLE, `wait({pc})`/`takeMemorySnapshot`
+runtime — as a possible behavioral-oracle harness for RE hypothesis-checking; not worth a trial now
+(static `make compare` is our oracle; Transmuter/Mizuchi, same author, are the decomp-relevant repos).
