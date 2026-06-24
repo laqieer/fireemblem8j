@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.19%** (8288/8528 funcs) → **~240 functions genuinely unmatched**
+- **MATCHING-C: 97.26%** (8294/8528 funcs) → **~234 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -79,7 +79,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.33% (13176/15442; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.32% (13170/15436; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 
 ### Vein status (2026-06-24) — battle-anim efx
 Verified vein-exhaustion + technique notes so future sessions don't re-dispatch teams at dead veins.
@@ -159,6 +159,20 @@ DrawGMapPIPanelAtHeight (width 13→12), SioHandleIrq_Serial (0x1288→0x1286), 
   -mjp-promote / loop-invariant-cast-hoist / stack-spill issues, NOT structural. Treat ALL
   'structural/dead-end' flags as PROVISIONAL — re-attempt with -mjp-promote + cast-hoist before deferring.
 
+### Vein status (2026-06-24) — 0x801–0x80B clean vein
+- **0x801-0x80B clean vein (+9 more):** carved the bmidoten range-gen cluster
+  (GenerateUnitCompleteAttackRange/StandingReachRange/CompleteStaffRange via `static inline`
+  MapAddInBoundedRange+SetWorkingBmMap), ShopTryMoveHand ('r6/r7 cascade' flag DEBUNKED — just
+  -mjp-promote), WmMain_MoveCursor (do-while→if reg-alloc fix), BallistaRangeMenu_Draw (load-bearing
+  missing return), GenerateSummonUnitDef, RefreshUnitStealInventoryInfoWindow. NEW INTEGRATION TRAP:
+  when a carve `static inline`s a helper that is ALSO committed out-of-line
+  (MapAddInBoundedRange@0x0801B674, SetWorkingBmMap@0x0801B668), a botched inline emits a SECOND
+  out-of-line copy → CATASTROPHIC full-ROM layout shift (12.6M diff bytes), and an incremental worktree
+  build can stale-OK-mask it. SAFEGUARDS: (a) `nm src/<fn>.o` must show the helper as `U` not `T`;
+  (b) integrator gate = FORCED-CLEAN `rm -f fireemblem8.gba fireemblem8.elf && make compare`; (c) workers
+  must stay in their worktree (never cd to the shared main checkout). The D99 integrator
+  full-make-compare caught it; reverted + re-dispatched cleanly.
+
 ### Cross-cutting facts (corrections discovered 2026-06-24)
 - **ChangeUnitSpritePalette (0x0800BFC8) and RestartBattleMap (0x08030E94) are ALREADY committed C globals**
   (src/ChangeUnitSpritePalette.c, src/bmio_08030E94.c) — bind them ZERO times; adding a bind = multiple-
@@ -189,7 +203,7 @@ seed, not another port attempt.
 Also in the 0x080C band remaining: **Nop_Titlescreen_0** @0x080CAEF4 + **Title_Loop_LightExplosionFx**
 @0x080CB114 are hard RECONSTRUCTs (US is a no-op stub / JP adds a banner ladder) — likely permuter.
 
-### How the remaining ~240 are carved (D275 — the current playbook)
+### How the remaining ~234 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in

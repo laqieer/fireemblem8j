@@ -4,7 +4,7 @@
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
 ## State (HEAD clean, `make compare` → OK, self-contained YES)
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.19% (8288/8528, ~240 left, +69 this session)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.33% (structurally capped ~96%).
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.26% (8294/8528, ~234 left, +75 this session)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.32% (structurally capped ~96%).
 - This session banked **+61 matching-C** (8219→8280) via the engine below, kept docs current, pruned 55+ stale branches, and stood up a **reusable Discord learning loop**. The 0x800 (eventscr) clean-port vein is now NEARLY EXHAUSTED (see frontier "Vein status — eventscr"); the remaining eventscr handlers are reg-alloc/scheduling NEARs. **Next CLEAN fuel = the 0x808 band (AutoGenerateUnitdef, AutolevelSecondaryLord, SioWeaponSelectMenu_Draw) + scattered singletons + the next-tier Text_DrawNumberOrSpace.** Worker A proved even "region-same" handlers can be reg-alloc NEARs (~1/5 hit on that cluster), so a **permuter campaign on the close NEARs is now higher-yield than more clean-port dispatch.** 0x80A (60 unnamed) and 0x80D (BIOS/libc) are traps.
 
 ## THE ENGINE (proven this session — ~90%+ land rate on well-specified recipes)
@@ -81,6 +81,7 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
 3. **Carve INDIVIDUALLY, verify `git cat-file -e HEAD:src/<n>.c` after each commit** (git-add-abort + staged-deletion + cfbind-garbage traps broke HEAD before — see memory `fe8j-carve-regression-traps`). Never `pkill -f <pat>` matching your own command.
 4. **Commit cadence:** one verified carve = one commit = one push. Bump `docs/frontier.md` + README scorecard whenever an axis moves.
 5. **P10 posture:** delegate to background/worktree agents; keep the integrator (you) free — serial integration is the only non-delegable work.
+6. **Integrator gate must be a FORCED-CLEAN rebuild** (`rm -f fireemblem8.gba fireemblem8.elf && make compare`) — a worker's incremental worktree OK can be a stale-OK artifact; and verify `nm src/<fn>.o` shows any static-inline'd helper as `U` not `T` (out-of-line-dup → 12.6M layout shift).
 
 ## KNOWLEDGE (committed)
 `docs/frontier.md` (SSoT + playbook + vein status), `docs/decisions.md` (D276/D276b/D276c flag), `docs/decomp-completion-standard.md` (4-axis honest framing + Code<Functions byte-weighting), `docs/agbcc_codegen_levers.md`, `docs/discord_findings.md`, `docs/fe8u_mining_findings.md` (data roadmap), `docs/tools/*`. Byte-level corpora: `../fireemblem8u` (primary), `../fireemblem6j` (efx reconstruction source — mind `s16/8`→`ldrh+lsrs`), `../FireEmblem7J`.
