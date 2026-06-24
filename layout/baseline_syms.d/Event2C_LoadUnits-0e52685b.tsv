@@ -1,0 +1,2 @@
+GetUnitDefinitionFormEventScr	0800FAD0	thumb	(Event2C_LoadUnits)
+EventLoadUnitWithMovement	0800F7B0	thumb	(Event2C_LoadUnits)
