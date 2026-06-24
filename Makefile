@@ -210,6 +210,8 @@ src/AutoGenerateUnitdef.o: CC1FLAGS += -mjp-promote
 src/GetPathFromMovementScript.o: CC1FLAGS += -mjp-promote
 # EkrPalModifyUnused: JP (s16)start/(s16)end held sign-extended in shifted domain -> PROMOTE.
 src/banim-efxutils_080736C4.o: CC1FLAGS += -mjp-promote
+# RegisterEkrDragonStatusType: JP s16 gBanimValid loads sign-extended (ldrsh) -> PROMOTE.
+src/banim-ekrdragon-myrrh_080730E4.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .
