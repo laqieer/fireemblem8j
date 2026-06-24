@@ -208,6 +208,8 @@ src/mu_0807BFF4.o: CC1FLAGS += -mjp-promote
 src/AutoGenerateUnitdef.o: CC1FLAGS += -mjp-promote
 # GenerateSummonUnitDef: JP short summonerNum/i hold sign-extended (PROMOTE).
 src/mapanim_summon_0807D074.o: CC1FLAGS += -mjp-promote
+# RefreshUnitStealInventoryInfoWindow: JP s8 stealable holds one sign-extension (PROMOTE).
+src/unitinfowindow_08034C54.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .
