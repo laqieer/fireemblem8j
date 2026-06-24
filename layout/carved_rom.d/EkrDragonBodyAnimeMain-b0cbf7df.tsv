@@ -1,0 +1,1 @@
+07949C	0795EC	src/EkrDragonBodyAnimeMain.o(.text)	handdecomp: EkrDragonBodyAnimeMain (US banim-ekrdragon-demonking.c; JP keeps s16 ret copy live (s16 idx=ret) -> -mjp-promote reg-alloc)
