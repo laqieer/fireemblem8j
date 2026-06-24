@@ -1,0 +1,1 @@
+0B0B38	0B0C50	src/difficultymenu_080B0B38.o(.text)	handdecomp: InitDifficultySelectScreen (JP region-diff; CallARM_FillTileRect applies TSA directly, no Decompress to gGenericBuffer)
