@@ -113,6 +113,7 @@ src/AddPointToPathArrowProc.o: CC1FLAGS += -mjp-promote
 src/DrawItemMenuLine.o: CC1FLAGS += -mjp-promote
 src/DrawNumberText.o: CC1FLAGS += -mjp-promote
 src/DrawTimeText.o: CC1FLAGS += -mjp-promote
+src/DrawUiFrame2.o: CC1FLAGS += -mjp-promote
 src/Text_DrawNumber.o: CC1FLAGS += -mjp-promote
 src/Tactician_MoveHand.o: CC1FLAGS += -mjp-promote
 src/_PutChapterTitleGfx.o: CC1FLAGS += -mjp-promote
