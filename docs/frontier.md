@@ -10,7 +10,10 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.74%** (8335/8528 funcs) → **~193 functions genuinely unmatched**
+- **MATCHING-C: 97.78%** (8339/8528 funcs) → **~189 functions genuinely unmatched**
+  - +ekrGaugeMain (int-local-widen `s32 r4` cracked the asrs-cascade extra-mov NEAR — a SUBSET of the
+    "config-ceiling" NEARs are int-widen-fixable, NOT permuter-only; cfbind zfix) +LoadUnit
+    (reconstruct: JP earlier build omits the Shadowshot/Stone secondary-weapon block).
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
