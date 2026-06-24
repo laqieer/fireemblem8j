@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.54%** (8318/8528 funcs) → **~210 functions genuinely unmatched**
+- **MATCHING-C: 97.61%** (8324/8528 funcs) → **~204 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -79,7 +79,23 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.36% (13180/15441; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.36% (13176/15436; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+
+#### Group A/B clean-fuel batch (2026-06-24, +5)
+Carved **PutFaceChibi** (-mjp-promote s8 isFlipped + `gFace_1` bind @0x085B8F5C),
+**HbMoveCtrl_OnIdle** (s8 boxMoved + -mjp-promote), **Sio_ReadPacket** (-mjp-promote s8 playerId,
+extern sio_core statics), **GenerateBestMovementScript** (-mjp-promote), **DrawUiFrame2**
+(-mjp-promote s8-spill collapse). Clean-port yield has dropped to ~45% — the tail is filling with
+reg-alloc NEARs. NEW NEARs added to backlog (mostly PERMUTER-RESISTANT body reg-swaps, NOT
+register-pin-fixable): **SioBat_SetupLoop** (+48B, r5-base-cache vs extra callee-saved r7),
+**WriteNewGameSave** (+44B, agbcc won't OVERLAY GameSavePackedUnit+Dungeon[2] onto one stack slot —
+frame 0x54 vs JP 0x38), **StrInsertTact** (r4↔r5 src/dst, permuter 375→125 no-zero),
+**AiAttemptStealActionWithinMovement** (r4↔r5 gBmMapSize.y index reg), **Menu_OnIdle** (region-diff:
+JP INLINED ClearMenuBgs — reconstruct, not a NEAR). Two NEEDS-SERIAL-INTEGRATION items (1-step each,
+integrator-only): **StartEventBattle** (sub_8012038 — ONE instruction: needs
+include/functions.h:79 isBallista u8->s8 + -mjp-promote, but that regresses the committed caller
+Event3F_ScriptBattle which must be re-matched in the SAME commit; ZERO binds otherwise, recipe was at
+/tmp/StartEventBattle.c.recipe) and **PutUnitSpriteIconsOam** (data_080DC8B0 residue split at 0DC940).
 
 #### 0x80B opinfo/difficulty/bonus/ending cluster (2026-06-24, +5)
 Carved **ClassIntro_LoopOut** (LOCAL OpInfoEnterProcJ struct — JP opinfo procs use local workaround
@@ -267,7 +283,7 @@ seed, not another port attempt.
 Also in the 0x080C band remaining: **Nop_Titlescreen_0** @0x080CAEF4 + **Title_Loop_LightExplosionFx**
 @0x080CB114 are hard RECONSTRUCTs (US is a no-op stub / JP adds a banner ladder) — likely permuter.
 
-### How the remaining ~210 are carved (D275 — the current playbook)
+### How the remaining ~204 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in

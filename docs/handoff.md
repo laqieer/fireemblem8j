@@ -4,7 +4,7 @@
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
 ## State (HEAD clean, `make compare` → OK, self-contained YES)
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.54% (8318/8528, ~210 left, +99 this session)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.36% (13180/15441, structurally capped ~96%).
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.61% (8324/8528, ~204 left, +105 this session)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.36% (13176/15436, structurally capped ~96%).
 - This session banked **+61 matching-C** (8219→8280) via the engine below, kept docs current, pruned 55+ stale branches, and stood up a **reusable Discord learning loop**. The 0x800 (eventscr) clean-port vein is now NEARLY EXHAUSTED (see frontier "Vein status — eventscr"); the remaining eventscr handlers are reg-alloc/scheduling NEARs. **Next CLEAN fuel = the 0x808 band (AutoGenerateUnitdef, AutolevelSecondaryLord, SioWeaponSelectMenu_Draw) + scattered singletons + the next-tier Text_DrawNumberOrSpace.** Worker A proved even "region-same" handlers can be reg-alloc NEARs (~1/5 hit on that cluster), so a **permuter campaign on the close NEARs is now higher-yield than more clean-port dispatch.** 0x80A (60 unnamed) and 0x80D (BIOS/libc) are traps.
 
 ## THE ENGINE (proven this session — ~90%+ land rate on well-specified recipes)
@@ -23,6 +23,23 @@ Dispatch workers only AFTER the prior integration push (so they branch off lates
 - **Name-entry/kana has NO fe8u twin** (JP-specific, reconstruct-only — defer).
 - Remaining ~277 are increasingly field-writers / reconstructs / reg-alloc NEARs.
 
+## NEXT TARGETS — Group C decoded-delta (clean) + reconstruct group (2026-06-24)
+Researcher-specified, build-ready; these are the next clean/reconstruct fuel after the Group A/B batch.
+- **Group C — decoded-delta CLEAN recipes** (const/layout deltas already decoded; fast carves):
+  **NameEntrySpriteDraw_Loop**, **Tactician_InitScreen**, **GoalDisplay_Init**, **DisplayPage0** /
+  **DisplayPage1**.
+- **RECONSTRUCT group** (fe8u port is a structural mismatch — rebuild from gbadisasm behavior):
+  **NewPopup2_PlanD**, **SaveMenuExtrasMenuLoop**, **LoadUnit**, **ClassIntro_Init**,
+  **BattleAIS_ExecCommands**.
+
+### Researcher techniques discovered (2026-06-24 — reuse across recipes)
+1. **PlaySoundEffect-macro** — JP calls go through the PlaySoundEffect macro (not a direct fn) — match the macro expansion, not a bl to a named fn.
+2. **save-format-from-pool** — derive the JP save-record format/sizes from the literal pool constants, not from the fe8u struct (JP save layout diverges).
+3. **same-name≠same-function** — a JP `sub_` sharing a fe8u name can be a DIFFERENT function; confirm by callee-fingerprint, never by name alone.
+4. **per-TU-struct-shape** — JP TUs use LOCAL workaround structs (e.g. opinfo procs); never edit the shared header — define a local struct in the carve TU.
+5. **truncated-stub-split** — a gbadisasm stub can be a TRUNCATION of a larger function; split the range at the true boundary before carving.
+6. **per-cluster-msgid-bands** — JP message-ids shift in per-cluster bands (decode the band offset once per cluster, apply to all members).
+
 ## BACKLOG — the 0x080C band recipe set (researcher-specified, build-ready)
 Full recipes (verbatim bodies, every bind addr, JP deltas) are in the 2026-06-24 researcher outputs in the session transcript; re-derive with a fresh `carve-researcher` if lost. The reg-alloc NEARs (GmapScreen2_Loop, OpAnimFaceMontageBegin, GmapEffect_0, GMapScreen_UpdateScroll) moved to "Other deferred NEARs" below. Ranked:
 1. **Title_SetupSpecialEffectGraphics** @0x080CA69C — RECONSTRUCT case 4 (Decompress gGfx_Titlescreen_4=0x08B4B200→0x06015800; ApplyPalette gPal_Titlescreen_4=0x08B4BB80,0x18). ~15 title data aliases (all addrs in recipe). *[may be landing via the in-flight bg worker]*
@@ -34,6 +51,14 @@ Full recipes (verbatim bodies, every bind addr, JP deltas) are in the 2026-06-24
 ## Other deferred NEARs (need a lever find or fresh permuter seed — NOT clean-recipe targets)
 A faithful fe8u port + `-mjp-promote` lands a small NEAR that current levers don't close; do NOT spend
 a clean-port worker on these. They need a reg-alloc lever discovery or a fresh permuter seed.
+- **NEW permuter-resistant NEARs (2026-06-24, Group A/B batch — body reg-swaps, register-pins make them WORSE):**
+  - **SioBat_SetupLoop** — **+48B**, r5-base-cache vs an extra callee-saved r7. Body reg structure.
+  - **WriteNewGameSave** — **+44B**, agbcc won't OVERLAY GameSavePackedUnit + Dungeon[2] onto one stack
+    slot (frame 0x54 vs JP 0x38). A stack-overlay ceiling, not a register pin.
+  - **StrInsertTact** — r4↔r5 src/dst swap; permuter 375→125 (no zero).
+  - **AiAttemptStealActionWithinMovement** — r4↔r5 gBmMapSize.y index reg.
+  - **Menu_OnIdle** — NOT a NEAR: **region-diff RECONSTRUCT** (JP INLINED ClearMenuBgs). Rebuild from
+    gbadisasm, do not port the fe8u out-of-line-call version.
 - **GmapScreen2_Loop** @0x080C05C8 — CONFIRMED NEAR (was BACKLOG recipe #4). JP allocator spills `chr`
   to a 0x14 stack frame + keeps `proc` in r9; agbcc uses a 0x10 frame + registers. permuter
   (jp-promote, ~46k iters) plateaued at 1745 (best 536/544 bytes). Needs a lever forcing the `chr`
@@ -92,7 +117,12 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
   **ClassStatsDisplay_Loop** (permuter NEAR — see above), **ClassIntro_Init** (sub_80B77A4, ~11
   gUnkData data aliases — heavy).
 
-## Needs SERIAL integration (NOT parallel-safe — shared-data-residue split)
+## Serial-integrator tasks (1-step each, integrator-only — NOT parallel-safe)
+- **StartEventBattle** (sub_8012038) — ONE instruction off: needs `include/functions.h:79` `isBallista`
+  u8->s8 + `-mjp-promote`. The catch: that header change regresses the already-committed caller
+  **Event3F_ScriptBattle**, which must be re-matched in the SAME commit (so the commit is atomic and
+  `make compare` stays green). ZERO binds otherwise. Recipe was at `/tmp/StartEventBattle.c.recipe`
+  (re-derive — `/tmp` is wiped between sessions).
 - **PutUnitSpriteIconsOam** (sub_802758C) — C is correct + compiles + the .o has the right `rescuePalLut`
   .rodata, but those 6 bytes must land at 0x080DC940 which is inside the committed shared data residue TU
   `data_080DC8B0` (range 0DC8B0–0DC948). Splitting it shifts the .rom packing (+0x10 VMA). The integrator
