@@ -4,8 +4,8 @@
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
 ## State (HEAD clean, `make compare` → OK, self-contained YES)
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 96.93% (8266/8528, ~262 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.34% (structurally capped ~96%).
-- This session banked **+47 matching-C** (8219→8266) via the engine below, kept docs current, pruned 55+ stale branches, and stood up a **reusable Discord learning loop**. The 0x800 (eventscr) clean-port vein is now NEARLY EXHAUSTED (see frontier "Vein status — eventscr"); the remaining eventscr handlers are reg-alloc/scheduling NEARs. **Next CLEAN fuel = the 0x808 band (AutoGenerateUnitdef, AutolevelSecondaryLord, SioWeaponSelectMenu_Draw) + scattered singletons + the next-tier Text_DrawNumberOrSpace.** Worker A proved even "region-same" handlers can be reg-alloc NEARs (~1/5 hit on that cluster), so a **permuter campaign on the close NEARs is now higher-yield than more clean-port dispatch.** 0x80A (60 unnamed) and 0x80D (BIOS/libc) are traps.
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.09% (8280/8528, ~248 left, +61 this session)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.33% (structurally capped ~96%).
+- This session banked **+61 matching-C** (8219→8280) via the engine below, kept docs current, pruned 55+ stale branches, and stood up a **reusable Discord learning loop**. The 0x800 (eventscr) clean-port vein is now NEARLY EXHAUSTED (see frontier "Vein status — eventscr"); the remaining eventscr handlers are reg-alloc/scheduling NEARs. **Next CLEAN fuel = the 0x808 band (AutoGenerateUnitdef, AutolevelSecondaryLord, SioWeaponSelectMenu_Draw) + scattered singletons + the next-tier Text_DrawNumberOrSpace.** Worker A proved even "region-same" handlers can be reg-alloc NEARs (~1/5 hit on that cluster), so a **permuter campaign on the close NEARs is now higher-yield than more clean-port dispatch.** 0x80A (60 unnamed) and 0x80D (BIOS/libc) are traps.
 
 ## THE ENGINE (proven this session — ~90%+ land rate on well-specified recipes)
 **researcher → worker(worktree) → serial-integrate.** In ONE message dispatch:
@@ -60,6 +60,10 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
   (`OpAnimEphraimExit.o`/`OpAnimDarken*` land 8 high); needs a SERIAL fix of the shared opanim region
   + `cfbind_opanim-main.tsv` garbage Face rows, not a parallel carve. JP delta: case-1 is a live
   BG-load block (US empty).
+- **AdjustNewUnitPosition** @0x0807C8DC (sub_807C8DC) — 39-byte reg-alloc NEAR (body VERIFIED correct,
+  prior "structural fail" flag DEBUNKED; JP allocates iy→r2/ix→r4/yCur→r5 vs agbcc r5/r3/r4); reaches
+  correct 308B length under `-mjp-promote` + explicit s8 x/y locals; permuter target (patch compile.sh
+  with `-mjp-promote`).
 
 ## Cross-cutting VERIFIED facts (reuse across recipes)
 - **JP shared callee addrs** (bind thumb if not in baseline_syms): Decompress=0x08013008, ApplyPalette=0x08000D68, Proc_Break=0x08002DE4, Interpolate=0x08012E84, Proc_Start=0x08002BCC, EfxCreateFrontAnim=0x080564F0, CpuFastSet=0x080D636C, CpuSet=0x080D6370, DivArm=0x080D6378.
