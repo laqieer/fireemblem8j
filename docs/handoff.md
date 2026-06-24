@@ -4,7 +4,7 @@
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
 ## State (HEAD clean, `make compare` → OK, self-contained YES)
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.40% (8306/8528, ~222 left, +87 this session)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.32% (structurally capped ~96%).
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.46% (8311/8528, ~217 left, +92 this session)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.32% (13165/15431, structurally capped ~96%).
 - This session banked **+61 matching-C** (8219→8280) via the engine below, kept docs current, pruned 55+ stale branches, and stood up a **reusable Discord learning loop**. The 0x800 (eventscr) clean-port vein is now NEARLY EXHAUSTED (see frontier "Vein status — eventscr"); the remaining eventscr handlers are reg-alloc/scheduling NEARs. **Next CLEAN fuel = the 0x808 band (AutoGenerateUnitdef, AutolevelSecondaryLord, SioWeaponSelectMenu_Draw) + scattered singletons + the next-tier Text_DrawNumberOrSpace.** Worker A proved even "region-same" handlers can be reg-alloc NEARs (~1/5 hit on that cluster), so a **permuter campaign on the close NEARs is now higher-yield than more clean-port dispatch.** 0x80A (60 unnamed) and 0x80D (BIOS/libc) are traps.
 
 ## THE ENGINE (proven this session — ~90%+ land rate on well-specified recipes)
@@ -77,11 +77,17 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
   **Event1B_TEXTSHOW** (6B evArgument widen-scratch), **AdjustNewUnitPosition** (base 810→185, 4-way
   reg perm) — see their entries above. The worktree permuter is parallel-safe (3 workers -j4, no OOM)
   with the documented import.py-direct + compile.sh `-mjp-promote` two-step plumbing.
-- **OpInfo struct reconstruction (decoded, READY but RISKY to land):** the OpInfo struct decode that
-  unblocks **ClassStatsDisplay_Loop + ClassIntro_LoopOut** is solved — ClassReelEnt classId 0x05→0x0E /
-  script 0x10→0x18; OpInfoEnterProc letterProcs[10] inline @0x34 / iconProc @0x5C / classNameEnt @0x64 /
-  %6. BUT editing `include/opinfo.h` is risky (shared by 10 committed TUs) → do a FULL `make compare`
-  after the header edit, not just a range diff.
+- **HandleTurnRecordText** @sub_80BC2A4 — permuter/codegen-NEAR (44B short): y/textIndex r4/r8-vs-r6/r9
+  reg perm + tilemap-col factoring. Codegen-shape NEAR (not a const fix). Permuter campaign target.
+- **ClassStatsDisplay_Loop** @sub_80B8B28 — permuter/codegen-NEAR (one of the 0x80B OpInfo cluster, local-
+  struct pattern, NO opinfo.h edit): JP REVERSES the gauge-pip loop + spills i+1/&unk_34/&unk_35 each outer
+  iter, ~121 opcodes diff, permuter base 3885->1450. Needs a loop-direction/spill lever or stronger profile.
+- **OpInfo cluster — PARTLY CARVED (2026-06-24).** ClassIntro_LoopOut is **DONE** (carved via a LOCAL
+  OpInfoEnterProcJ workaround struct — JP opinfo procs use local structs, **NEVER edit shared
+  `include/opinfo.h`**: iconProc@0x5C/parentProc@0x60/classReelEnt@0x64, letterProcs[10] inline@0x34,
+  mod/div const 6, bound classReelEnt->unk_0C). STILL REMAINING in the cluster (same local-struct pattern,
+  no opinfo.h edit): **ClassStatsDisplay_Loop** (above — codegen-NEAR), **ClassIntro_Init**,
+  **ClassInfoDisplay_Init**.
 
 ## Cross-cutting VERIFIED facts (reuse across recipes)
 - **JP shared callee addrs** (bind thumb if not in baseline_syms): Decompress=0x08013008, ApplyPalette=0x08000D68, Proc_Break=0x08002DE4, Interpolate=0x08012E84, Proc_Start=0x08002BCC, EfxCreateFrontAnim=0x080564F0, CpuFastSet=0x080D636C, CpuSet=0x080D6370, DivArm=0x080D6378.

@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.40%** (8306/8528 funcs) → **~222 functions genuinely unmatched**
+- **MATCHING-C: 97.46%** (8311/8528 funcs) → **~217 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -80,6 +80,23 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
 - NAMED SYMBOLS: 85.32% (13165/15431; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+
+#### 0x80B opinfo/difficulty/bonus/ending cluster (2026-06-24, +5)
+Carved **ClassIntro_LoopOut** (LOCAL OpInfoEnterProcJ struct — JP opinfo procs use local workaround
+structs, NEVER edit shared `include/opinfo.h`; iconProc@0x5C/parentProc@0x60/classReelEnt@0x64,
+letterProcs[10] inline@0x34, mod/div const 6, bound classReelEnt->unk_0C),
+**DifficultySelect_Loop_KeyHandler** (UP-path goto restructure), **InitDifficultySelectScreen** (JP
+applies TSA via `CallARM_FillTileRect` directly, no Decompress staging — a recurring JP-uncompressed-asset
+pattern, also in ChapterStatus_Init/SoloEndingBattleDisp_Init), **BonusClaim_StartSelectTargetSubMenu**
+(5 JP deltas: DrawUiFrame2 dims, win0_left, cursor coords, tm+16, PutNumber col, msgid 0x308->0x28F),
+**SoloEndingBattleDisp_Init** (drops 2x Decompress + msgids 0x4CC-0x4CE + fixed-col PutNumber).
+ADDED to the permuter backlog (codegen-shape NEARs, NOT const fixes): **HandleTurnRecordText**
+(sub_80BC2A4, 44B short, y/textIndex r4/r8-vs-r6/r9 + tilemap-col factoring), **ClassStatsDisplay_Loop**
+(sub_80B8B28, JP REVERSES the gauge-pip loop + spills i+1/&unk_34/&unk_35 each outer iter, ~121 opcodes
+diff, permuter base 3885->1450). INTEGRATOR gotcha: do NOT rm+rebuild data objects
+`menu_save_main_bg` / `worldmap_gmapunit_p1634` in a worktree — regenerating their `.s` shifts
+`frontier_df4_menu` gap-packed `.rodata` by 8 bytes (breaks savemenu/difficulty palette literals); the
+forced-clean gate must `rm` only `fireemblem8.gba`/`.elf`, never the `.o` cache.
 
 ### PIVOT: permuter campaign is now the highest-leverage move (2026-06-24)
 The clean-recipe engine drove matching-C 8150→8298 (+148 over the session); yield has dropped to ~50%
@@ -237,7 +254,7 @@ seed, not another port attempt.
 Also in the 0x080C band remaining: **Nop_Titlescreen_0** @0x080CAEF4 + **Title_Loop_LightExplosionFx**
 @0x080CB114 are hard RECONSTRUCTs (US is a no-op stub / JP adds a banner ladder) — likely permuter.
 
-### How the remaining ~222 are carved (D275 — the current playbook)
+### How the remaining ~217 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in
