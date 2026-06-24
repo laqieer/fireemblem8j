@@ -1,0 +1,3 @@
+GoalString_UnitsLeft	081F5528	data	GoalDisplay_Init
+GoalString_LastTurn	081F5530	data	GoalDisplay_Init
+GoalString_Turn	081F553C	data	GoalDisplay_Init
