@@ -254,6 +254,7 @@ src/GenerateBestMovementScript.o: CC1FLAGS += -mjp-promote
 src/Sio_ReadPacket.o: CC1FLAGS += -mjp-promote
 src/Loop6C_efxMagicQUAKE.o: CC1FLAGS += -mjp-promote
 src/UnitKakudaiMain.o: CC1FLAGS += -mjp-promote
+src/ParseBattleHitToBanimCmd.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .
