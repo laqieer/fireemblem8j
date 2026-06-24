@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.30%** (8298/8528 funcs) → **~230 functions genuinely unmatched**
+- **MATCHING-C: 97.40%** (8306/8528 funcs) → **~222 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -79,7 +79,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.32% (13166/15432; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.32% (13165/15431; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 
 ### PIVOT: permuter campaign is now the highest-leverage move (2026-06-24)
 The clean-recipe engine drove matching-C 8150→8298 (+148 over the session); yield has dropped to ~50%
@@ -101,6 +101,19 @@ CLOSEST NEARs first (best permuter ROI):
 Heavier: ChapterStatus_Init (gGenericBuffer-CSE-into-r4, +16B), EkrDragonQuakeMain (r6↔r7 + CSE),
 AdjustNewUnitPosition (39B), SallyCir_Loop, GmapScreen2_Loop, GMapScreen_UpdateScroll, GmapEffect_0,
 Event18/35/A8, OpAnimFaceMontageBegin, Event0F.
+
+**Permuter campaign round 1 (2026-06-24): +8 cracked** — EkrLvup_InitStatusText (135), EkrDragonBodyAnimeMain
+(35, the 'pool-flush' premise was a DCE'd dead-copy), Event26_CameraControl (manual `register int asm("r0/r1/r2")`
+arg-order pin — permuter alone plateaued 105), EkrDragonQuakeMain (r6↔r7 via do-while removal),
+Event35_UnitClassChanging (2000→0), ChapterStatus_Init (permuter-as-diagnostic found a REGION-DIFF: JP
+CallARM_FillTileRect directly, skips Decompress staging), SallyCir_Loop + GmapEffect_0 (deterministic
+-mjp-promote, NOT actually permuter). PLATEAUED (genuine reg-alloc ceiling, need a stronger profile next
+session; WIPs in _permwork/*.wip): Event0E_STAL (10B proc/subcode r3↔r4), Event1B_TEXTSHOW (6B evArgument
+widen-scratch), AdjustNewUnitPosition (base810→185, 4-way reg perm). LEVER TRIAGE: arg-MOVE-order residual →
+manual `register int asm("rN")` pins (permuter can't); BODY callee-saved reg-SWAP → pins make it WORSE; always
+retry `-mjp-promote` before importing (cracks sign-domain NEARs deterministically). The worktree permuter is
+parallel-safe (3 workers -j4, no OOM) with the documented import.py-direct + compile.sh -mjp-promote two-step
+plumbing.
 
 ### Vein status (2026-06-24) — battle-anim efx
 Verified vein-exhaustion + technique notes so future sessions don't re-dispatch teams at dead veins.
@@ -224,7 +237,7 @@ seed, not another port attempt.
 Also in the 0x080C band remaining: **Nop_Titlescreen_0** @0x080CAEF4 + **Title_Loop_LightExplosionFx**
 @0x080CB114 are hard RECONSTRUCTs (US is a no-op stub / JP adds a banner ladder) — likely permuter.
 
-### How the remaining ~230 are carved (D275 — the current playbook)
+### How the remaining ~222 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in

@@ -4,7 +4,7 @@
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
 ## State (HEAD clean, `make compare` → OK, self-contained YES)
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.30% (8298/8528, ~230 left, +79 this session)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.32% (structurally capped ~96%).
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.40% (8306/8528, ~222 left, +87 this session)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.32% (structurally capped ~96%).
 - This session banked **+61 matching-C** (8219→8280) via the engine below, kept docs current, pruned 55+ stale branches, and stood up a **reusable Discord learning loop**. The 0x800 (eventscr) clean-port vein is now NEARLY EXHAUSTED (see frontier "Vein status — eventscr"); the remaining eventscr handlers are reg-alloc/scheduling NEARs. **Next CLEAN fuel = the 0x808 band (AutoGenerateUnitdef, AutolevelSecondaryLord, SioWeaponSelectMenu_Draw) + scattered singletons + the next-tier Text_DrawNumberOrSpace.** Worker A proved even "region-same" handlers can be reg-alloc NEARs (~1/5 hit on that cluster), so a **permuter campaign on the close NEARs is now higher-yield than more clean-port dispatch.** 0x80A (60 unnamed) and 0x80D (BIOS/libc) are traps.
 
 ## THE ENGINE (proven this session — ~90%+ land rate on well-specified recipes)
@@ -41,39 +41,42 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
 - **GMapScreen_UpdateScroll** @0x080BF73C — 3-way reg permutation (r9/r5/r7 vs sl/r7/r5) + one
   `str [sp,#8]` reorder; permuter plateaued 245. Not source-fixable; try fresh seed / manual pin.
 - **eventscr Event-dispatch reg-alloc NEARs** (clean fe8u port compiles+links, leaves a small reg-alloc/
-  scheduling NEAR — permuter-campaign targets, NOT clean-port dispatch; best-first by byte-distance):
-  - **Event26_CameraControl** @0x0800F41C (sub_800F41C) — **3-byte** arg-scheduling, sc2-first. CLOSEST.
-  - **Event1B_TEXTSHOW** @0x0800E5CC (sub_800E5CC) — **9-byte** ea-zero-extend-via-scratch + zeroFlag
-    re-materialize; KEEP the case-3 inline-asm trick.
-  - **Event0E_STAL** @0x0800DD9C (sub_800DD9C) — ~**10-byte** r3↔r4 proc swap.
+  scheduling NEAR — permuter-campaign targets, NOT clean-port dispatch; best-first by byte-distance.
+  STILL-PLATEAUED after round 1 — register-pins make body-reg-swaps WORSE):
+  - **Event1B_TEXTSHOW** @0x0800E5CC (sub_800E5CC) — **6-byte** evArgument widen-scratch (zero-extend-via-
+    scratch + zeroFlag re-materialize); KEEP the case-3 inline-asm trick. WIP in `_permwork/*.wip`.
+  - **Event0E_STAL** @0x0800DD9C (sub_800DD9C) — ~**10-byte** proc/subcode r3↔r4 swap (a BODY callee-saved
+    reg-swap — `register int asm("rN")` pins make it WORSE). WIP in `_permwork/*.wip`.
   - **Event18_ColorFade** @0x0800E1FC (sub_800E1FC) — spill-pattern / frame-size diff.
-  - **Event35_UnitClassChanging** @0x0801060C (sub_801060C) — argv-read reorder / reg-perm.
   - **EventA8_WmUnitMoveFree** @0x0800C994 (sub_800C994) — sl/r8-vs-ip/r7 cascade; OWNS the poisoned-alias
     fix (StartGmapAutoMu_Type1, cfbind_eventscr_gmap.tsv line 21 0x07E72DA4→0x080C818C).
 - **Event0F_CounterOps** @0x0800DE3C — clean fe8u port compiles+links, but a pervasive r4↔r5 (+ r0↔r3
   in INC/DEC) reg-alloc tiebreak (~25 insn diffs); `-mjp-promote` fixed the s8-DEC clamp but not the
   swap. Needs decomp-permuter with project include-path plumbing (bare `cpp -nostdinc` import lacks it),
   or a manual reg-pin find. (gEventSlots/gEventSlotCounter are NAMED — no binds.)
-- **GmapEffect_0** @0x080C5F68 — clean reg permutation (JP i=r6/ptr=r4, agbcc picks r7/r5); permuter
-  plateaued 1315/1650. Needs `gWorldmapEffect_0` data bind + baseline alias drop when solved.
 - **OpAnimFaceMontageBegin** @0x080CDCCC — blocked by a shared opanim `.text` +8-byte region shift
   (`OpAnimEphraimExit.o`/`OpAnimDarken*` land 8 high); needs a SERIAL fix of the shared opanim region
   + `cfbind_opanim-main.tsv` garbage Face rows, not a parallel carve. JP delta: case-1 is a live
   BG-load block (US empty).
-- **AdjustNewUnitPosition** @0x0807C8DC (sub_807C8DC) — 39-byte reg-alloc NEAR (body VERIFIED correct,
-  prior "structural fail" flag DEBUNKED; JP allocates iy→r2/ix→r4/yCur→r5 vs agbcc r5/r3/r4); reaches
-  correct 308B length under `-mjp-promote` + explicit s8 x/y locals; permuter target (patch compile.sh
-  with `-mjp-promote`).
-- **+4 NEW NEARs this round** (permuter-campaign targets — see frontier.md "PIVOT" section):
-  - **EkrLvup_InitStatusText** @0x08075A08 — **1-instruction** (`adds r1,r0,#0` move agbcc won't emit);
-    near-match preserved `/tmp/banim-ekrlvup_08075A08.NEAR.c`. CLOSEST in the whole backlog.
-  - **EkrDragonBodyAnimeMain** — **4-byte** literal-pool flush/pad.
-  - **EkrDragonQuakeMain** — r6↔r7 + CSE.
-  - **ChapterStatus_Init** — gGenericBuffer-CSE-into-r4 (+16B).
-  - **NEXT PRIORITY = the permuter-plumbing fix** (compile.sh root-resolves to the shared MAIN repo, uses
-    bare agbcc without `-mjp-promote`, and `run` deletes `src/F.c` from MAIN = not parallel-safe). Fix
-    `permute.sh` to operate relative to an explicit (worktree) root + always `sed`-patch compile.sh to
-    `agbcc -mthumb-interwork -mjp-promote`. See the frontier PIVOT section for the full target ranking.
+- **AdjustNewUnitPosition** @0x0807C8DC (sub_807C8DC) — STILL-PLATEAUED after round 1 (permuter base
+  810→185, a 4-way reg perm). Body VERIFIED correct (prior "structural fail" flag DEBUNKED; JP allocates
+  iy→r2/ix→r4/yCur→r5 vs agbcc r5/r3/r4); reaches correct 308B length under `-mjp-promote` + explicit
+  s8 x/y locals. A BODY reg-perm — `register int asm("rN")` pins make it WORSE. Needs a stronger profile
+  next session. WIP in `_permwork/*.wip`.
+- **Permuter campaign round 1 (2026-06-24): +8 cracked**, dropping the prior "+4 NEW NEARs" backlog and
+  several others. CRACKED (now carved, no longer NEARs): EkrLvup_InitStatusText (135),
+  EkrDragonBodyAnimeMain (35 — the 'pool-flush' premise was a DCE'd dead-copy), Event26_CameraControl
+  (manual `register int asm("r0/r1/r2")` arg-order pin — permuter alone plateaued 105),
+  EkrDragonQuakeMain (r6↔r7 via do-while removal), Event35_UnitClassChanging (2000→0), ChapterStatus_Init
+  (permuter-as-diagnostic exposed a REGION-DIFF: JP calls CallARM_FillTileRect directly, skips the
+  Decompress staging), SallyCir_Loop + GmapEffect_0 (deterministic `-mjp-promote`, NOT actually permuter).
+  LEVER TRIAGE: arg-MOVE-order residual → manual `register int asm("rN")` pins (permuter can't); BODY
+  callee-saved reg-SWAP → pins make it WORSE; always retry `-mjp-promote` before importing (cracks
+  sign-domain NEARs deterministically). The 3 STILL-PLATEAUED genuine reg-alloc ceilings (need a stronger
+  profile next session, WIPs in `_permwork/*.wip`): **Event0E_STAL** (10B proc/subcode r3↔r4),
+  **Event1B_TEXTSHOW** (6B evArgument widen-scratch), **AdjustNewUnitPosition** (base 810→185, 4-way
+  reg perm) — see their entries above. The worktree permuter is parallel-safe (3 workers -j4, no OOM)
+  with the documented import.py-direct + compile.sh `-mjp-promote` two-step plumbing.
 - **OpInfo struct reconstruction (decoded, READY but RISKY to land):** the OpInfo struct decode that
   unblocks **ClassStatsDisplay_Loop + ClassIntro_LoopOut** is solved — ClassReelEnt classId 0x05→0x0E /
   script 0x10→0x18; OpInfoEnterProc letterProcs[10] inline @0x34 / iconProc @0x5C / classNameEnt @0x64 /
