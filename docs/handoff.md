@@ -4,8 +4,8 @@
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
 ## State (HEAD clean, `make compare` → OK, self-contained YES)
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 96.86% (8260/8528, ~268 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.34% (structurally capped ~96%).
-- This session banked **+41 matching-C** (8219→8260) via the engine below, kept docs current, pruned 55+ stale branches, and stood up a **reusable Discord learning loop**. **Next clean vein = the 0x800 (eventscr) + 0x808 (menu/autolevel) bands** (researcher band-map in transcript / frontier "Vein status"); 0x80A (60 unnamed) and 0x80D (BIOS/libc) are traps. A `carve-researcher` is mining the next 0x800 eventscr batch (background) — check for its recipes / an unmerged `feat/*` before new work (verify, don't declare dead).
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 96.93% (8266/8528, ~262 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.34% (structurally capped ~96%).
+- This session banked **+47 matching-C** (8219→8266) via the engine below, kept docs current, pruned 55+ stale branches, and stood up a **reusable Discord learning loop**. The 0x800 (eventscr) clean-port vein is now NEARLY EXHAUSTED (see frontier "Vein status — eventscr"); the remaining eventscr handlers are reg-alloc/scheduling NEARs. **Next CLEAN fuel = the 0x808 band (AutoGenerateUnitdef, AutolevelSecondaryLord, SioWeaponSelectMenu_Draw) + scattered singletons + the next-tier Text_DrawNumberOrSpace.** Worker A proved even "region-same" handlers can be reg-alloc NEARs (~1/5 hit on that cluster), so a **permuter campaign on the close NEARs is now higher-yield than more clean-port dispatch.** 0x80A (60 unnamed) and 0x80D (BIOS/libc) are traps.
 
 ## THE ENGINE (proven this session — ~90%+ land rate on well-specified recipes)
 **researcher → worker(worktree) → serial-integrate.** In ONE message dispatch:
@@ -40,6 +40,16 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
   stack-spill. (gWMNodeData=0x081F5D7C, gWMNodeIconData=0x081F5C6C if/when solved.)
 - **GMapScreen_UpdateScroll** @0x080BF73C — 3-way reg permutation (r9/r5/r7 vs sl/r7/r5) + one
   `str [sp,#8]` reorder; permuter plateaued 245. Not source-fixable; try fresh seed / manual pin.
+- **eventscr Event-dispatch reg-alloc NEARs** (clean fe8u port compiles+links, leaves a small reg-alloc/
+  scheduling NEAR — permuter-campaign targets, NOT clean-port dispatch; best-first by byte-distance):
+  - **Event26_CameraControl** @0x0800F41C (sub_800F41C) — **3-byte** arg-scheduling, sc2-first. CLOSEST.
+  - **Event1B_TEXTSHOW** @0x0800E5CC (sub_800E5CC) — **9-byte** ea-zero-extend-via-scratch + zeroFlag
+    re-materialize; KEEP the case-3 inline-asm trick.
+  - **Event0E_STAL** @0x0800DD9C (sub_800DD9C) — ~**10-byte** r3↔r4 proc swap.
+  - **Event18_ColorFade** @0x0800E1FC (sub_800E1FC) — spill-pattern / frame-size diff.
+  - **Event35_UnitClassChanging** @0x0801060C (sub_801060C) — argv-read reorder / reg-perm.
+  - **EventA8_WmUnitMoveFree** @0x0800C994 (sub_800C994) — sl/r8-vs-ip/r7 cascade; OWNS the poisoned-alias
+    fix (StartGmapAutoMu_Type1, cfbind_eventscr_gmap.tsv line 21 0x07E72DA4→0x080C818C).
 - **Event0F_CounterOps** @0x0800DE3C — clean fe8u port compiles+links, but a pervasive r4↔r5 (+ r0↔r3
   in INC/DEC) reg-alloc tiebreak (~25 insn diffs); `-mjp-promote` fixed the s8-DEC clamp but not the
   swap. Needs decomp-permuter with project include-path plumbing (bare `cpp -nostdinc` import lacks it),

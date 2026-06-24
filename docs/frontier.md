@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 96.86%** (8260/8528 funcs) → **~268 functions genuinely unmatched**
+- **MATCHING-C: 96.93%** (8266/8528 funcs) → **~262 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -79,7 +79,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.34% (13194/15460; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.34% (13192/15458; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 
 ### Vein status (2026-06-24) — battle-anim efx
 Verified vein-exhaustion + technique notes so future sessions don't re-dispatch teams at dead veins.
@@ -124,6 +124,27 @@ DrawGMapPIPanelAtHeight (width 13→12), SioHandleIrq_Serial (0x1288→0x1286), 
   whose function pool literal is `.4byte 0x08xxxxxx` AND funcmap says ROM-exact = STALE alias; fix it
   before carving any data-reader (hit on `gUnk_12` and `gSioMain2_1`).
 
+### Vein status (2026-06-24) — eventscr Event-dispatch
+- **eventscr.c Event-dispatch vein (2026-06-24):** of ~10 still-asm Event handlers, CARVED this session:
+  Event25_ChangeMap, Event27_MapChange, Event2C_LoadUnits, Event01_End, LoadUnit_0,
+  EventLoadUnitSliently (+ earlier Spline_SetupChannels). The eventscr clean-port vein is now nearly
+  exhausted. REMAINING are reg-alloc/scheduling NEARs (need a permuter campaign or an agbcc tie-break
+  lever, NOT clean-port workers): Event0E_STAL (sub_800DD9C, r3↔r4 swap, ~10B), Event18_ColorFade
+  (sub_800E1FC, spill-pattern/frame-size), Event26_CameraControl (sub_800F41C, **3-byte** arg-scheduling
+  sc2-first — CLOSEST), Event35_UnitClassChanging (sub_801060C, argv-read reorder/reg-perm),
+  Event1B_TEXTSHOW (sub_800E5CC, **9-byte** ea-zero-extend-via-scratch + zeroFlag re-materialize; KEEP
+  the case-3 inline-asm trick), EventA8_WmUnitMoveFree (sub_800C994, sl/r8-vs-ip/r7 cascade — and it OWNS
+  the poisoned-alias fix below), Event0F_CounterOps (sub_800DE3C, r4↔r5). Best permuter targets first:
+  Event26 (3B), Event1B (9B), Event0E (10B).
+
+### Cross-cutting facts (corrections discovered 2026-06-24)
+- **ChangeUnitSpritePalette (0x0800BFC8) and RestartBattleMap (0x08030E94) are ALREADY committed C globals**
+  (src/ChangeUnitSpritePalette.c, src/bmio_08030E94.c) — bind them ZERO times; adding a bind = multiple-
+  definition link error.
+- **Poisoned alias StartGmapAutoMu_Type1:** layout/baseline_syms.d/cfbind_eventscr_gmap.tsv line 21 has an
+  impossible 0x07E72DA4 → real target 0x080C818C; this fix only lands WITH a future EventA8_WmUnitMoveFree
+  carve (it owns that bind).
+
 #### Deferred reg-alloc NEARs (need a lever find or fresh permuter seed — NOT clean-recipe targets)
 Do NOT spend a clean-port worker on these — a faithful fe8u port + `-mjp-promote` lands a small NEAR
 that current levers don't close. They need a register-allocation lever discovery or a fresh permuter
@@ -142,7 +163,7 @@ seed, not another port attempt.
 Also in the 0x080C band remaining: **Nop_Titlescreen_0** @0x080CAEF4 + **Title_Loop_LightExplosionFx**
 @0x080CB114 are hard RECONSTRUCTs (US is a no-op stub / JP adds a banner ladder) — likely permuter.
 
-### How the remaining ~268 are carved (D275 — the current playbook)
+### How the remaining ~262 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in
