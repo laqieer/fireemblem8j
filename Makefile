@@ -67,6 +67,7 @@ src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSo
 # promotion behavior: s8/s16-hold form (signedness preserved) and/or
 # declaration-order arg extension (PROMOTE_FUNCTION_ARGS). One flag, one agbcc.
 src/muctrl_0807C178.o: CC1FLAGS += -mjp-promote
+src/NewEfxHitQuake.o: CC1FLAGS += -mjp-promote
 src/banim-ekrdragon-utils_08072974.o: CC1FLAGS += -mjp-promote
 src/eventscr_0801060C.o: CC1FLAGS += -mjp-promote
 src/uichapterstatus_0809020C.o: CC1FLAGS += -mjp-promote
