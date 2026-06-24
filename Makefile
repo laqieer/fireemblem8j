@@ -190,6 +190,8 @@ src/eventscr_0800FD04.o: CC1FLAGS += -mjp-promote
 src/eventscr_0800D860.o: CC1FLAGS += -mjp-promote
 # Text_DrawNumberOrSpace: JP s16 digit char (0x4F82) shifted-domain (asr #16) (PROMOTE).
 src/text_08003FEC.o: CC1FLAGS += -mjp-promote
+# SioWeaponSelectMenu_Draw: JP (s8)CanUnitUseWeapon sign-extension (asr) (PROMOTE).
+src/sio_menudef_0804E670.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .
