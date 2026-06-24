@@ -183,6 +183,8 @@ src/eventscr_0800F8D4.o: CC1FLAGS += -mjp-promote
 src/eventscr_0800F86C.o: CC1FLAGS += -mjp-promote
 # Event2C_LoadUnits: JP signed-loads s16 unitLoadCount (ldrsh) (PROMOTE).
 src/eventscr_0800FD04.o: CC1FLAGS += -mjp-promote
+# Event01_End: JP defers s8 i loop-counter sign-extension (PROMOTE).
+src/eventscr_0800D860.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .
