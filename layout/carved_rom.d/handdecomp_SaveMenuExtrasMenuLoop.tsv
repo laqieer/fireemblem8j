@@ -1,0 +1,1 @@
+0A3B70	0A3C64	src/savemenu_080A3B70.o(.text)	handdecomp: SaveMenuExtrasMenuLoop (JP sub_80A3B70 reconstruct; JP-specific frame-counted wait loop, NOT fe8u DPAD picker)
