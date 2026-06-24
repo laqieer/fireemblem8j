@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.46%** (8311/8528 funcs) → **~217 functions genuinely unmatched**
+- **MATCHING-C: 97.54%** (8318/8528 funcs) → **~210 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -79,7 +79,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.32% (13165/15431; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.36% (13180/15441; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 
 #### 0x80B opinfo/difficulty/bonus/ending cluster (2026-06-24, +5)
 Carved **ClassIntro_LoopOut** (LOCAL OpInfoEnterProcJ struct — JP opinfo procs use local workaround
@@ -224,6 +224,19 @@ DrawGMapPIPanelAtHeight (width 13→12), SioHandleIrq_Serial (0x1288→0x1286), 
   must stay in their worktree (never cd to the shared main checkout). The D99 integrator
   full-make-compare caught it; reverted + re-dispatched cleanly.
 
+### Vein status (2026-06-24) — 0x802/0x807/0x80B batch
+- **0x802/0x807/0x80B batch (2026-06-24, +7):** carved **DrawPrepScreenItemUseDesc** (data-alias a shared
+  rodata thlut instead of splitting the gap), **GenerateMonsterLevel** (`-mjp-promote` + `gMonsterLevelWeights`
+  bind), **EkrHenseiEnd_FadeOutLoop**, **EfxSkillType01BGMain** (dropped a loop + a call = 0x2C shrink),
+  **EkrDragonSetBgAndFrontPos** + **BanimUpdateSpriteRotScale** (`-mjp-promote` s16 x/y),
+  **ClassInfoDisplay_Init** (opinfo LOCAL ClassReelEntJ struct + `gOpinfo_0` extern-bind @0x081F5900 + several
+  committed syms sit +4 past the asm literal because the gfx skip a 4-byte LZ77 header — bind distinct aliases
+  at the TRUE asm addrs; `gUnk_4`@0x0200A2D8). **BLOCKED** (needs SERIAL integration, not parallel-safe):
+  **PutUnitSpriteIconsOam** (sub_802758C) — C is correct + compiles + .o has the right `rescuePalLut` .rodata,
+  but those 6 bytes must land at 0x080DC940 which is inside the committed shared data residue TU
+  `data_080DC8B0` (range 0DC8B0–0DC948); splitting it shifts the .rom packing (+0x10 VMA). The integrator
+  must split `data_080DC8B0` at 0DC940 and re-verify .rom packing in a single serial step.
+
 ### Cross-cutting facts (corrections discovered 2026-06-24)
 - **ChangeUnitSpritePalette (0x0800BFC8) and RestartBattleMap (0x08030E94) are ALREADY committed C globals**
   (src/ChangeUnitSpritePalette.c, src/bmio_08030E94.c) — bind them ZERO times; adding a bind = multiple-
@@ -254,7 +267,7 @@ seed, not another port attempt.
 Also in the 0x080C band remaining: **Nop_Titlescreen_0** @0x080CAEF4 + **Title_Loop_LightExplosionFx**
 @0x080CB114 are hard RECONSTRUCTs (US is a no-op stub / JP adds a banner ladder) — likely permuter.
 
-### How the remaining ~217 are carved (D275 — the current playbook)
+### How the remaining ~210 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in
