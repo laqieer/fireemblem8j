@@ -241,6 +241,8 @@ src/ShopTryMoveHand.o: CC1FLAGS += -mjp-promote
 src/worldmap_main_080BE2A8.o: CC1FLAGS += -mjp-promote
 src/bmidoten_0801B2F4.o: CC1FLAGS += -mjp-promote
 src/bmbattle_0802A38C.o: CC1FLAGS += -mjp-promote
+src/prep_sallycir_08099CC0.o: CC1FLAGS += -mjp-promote
+src/worldmap_effect_080C5F68.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .
