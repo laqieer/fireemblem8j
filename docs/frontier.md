@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 96.69%** (8246/8528 funcs) → **~282 functions genuinely unmatched**
+- **MATCHING-C: 96.75%** (8251/8528 funcs) → **~277 functions genuinely unmatched**
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
@@ -79,7 +79,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
   ORDER, eager-vs-deferred, LICM hoist, cross-jump/tail-merge, reg-coalescing+DSE. Investigate the config,
   don't blind-grind.
 - EXTRACTED DATA: 100% of the measured set (but data is ~94% of ROM; see Data frontier)
-- NAMED SYMBOLS: 85.35% (13201/15467; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
+- NAMED SYMBOLS: 85.35% (13199/15465; capped by ~1611 asset labels fe8u itself doesn't name — structurally < 100%)
 
 ### Vein status (2026-06-24) — battle-anim efx
 Verified vein-exhaustion + technique notes so future sessions don't re-dispatch teams at dead veins.
@@ -124,7 +124,25 @@ DrawGMapPIPanelAtHeight (width 13→12), SioHandleIrq_Serial (0x1288→0x1286), 
   whose function pool literal is `.4byte 0x08xxxxxx` AND funcmap says ROM-exact = STALE alias; fix it
   before carving any data-reader (hit on `gUnk_12` and `gSioMain2_1`).
 
-### How the remaining ~282 are carved (D275 — the current playbook)
+#### Deferred reg-alloc NEARs (need a lever find or fresh permuter seed — NOT clean-recipe targets)
+Do NOT spend a clean-port worker on these — a faithful fe8u port + `-mjp-promote` lands a small NEAR
+that current levers don't close. They need a register-allocation lever discovery or a fresh permuter
+seed, not another port attempt.
+- **GmapScreen2_Loop** @0x080C05C8 — JP allocator spills `chr` to a 0x14 stack frame + keeps `proc`
+  in r9; agbcc uses a 0x10 frame + registers. permuter (jp-promote, ~46k iters) plateaued at 1745
+  (best 536/544 bytes). Needs a lever forcing the `chr` stack-spill.
+- **GMapScreen_UpdateScroll** @0x080BF73C — 3-way reg permutation (r9/r5/r7 vs sl/r7/r5) + one
+  `str [sp,#8]` reorder; permuter plateaued 245.
+- **GmapEffect_0** @0x080C5F68 — clean reg permutation (JP i=r6/ptr=r4 vs agbcc r7/r5); permuter
+  1315/1650. Needs `gWorldmapEffect_0` data bind + baseline alias drop when solved.
+- **OpAnimFaceMontageBegin** @0x080CDCCC — blocked by a shared opanim `.text` +8-byte region shift
+  (`OpAnimEphraimExit.o`/`OpAnimDarken*` land 8 high); needs a SERIAL fix of the shared opanim region
+  + `cfbind_opanim-main.tsv` garbage Face rows, not a parallel carve.
+
+Also in the 0x080C band remaining: **Nop_Titlescreen_0** @0x080CAEF4 + **Title_Loop_LightExplosionFx**
+@0x080CB114 are hard RECONSTRUCTs (US is a no-op stub / JP adds a banner ladder) — likely permuter.
+
+### How the remaining ~277 are carved (D275 — the current playbook)
 Every *named* game function is already carved; the frontier is the ~426 `asm/sub_*.s`, region-different
 in **codegen** (JP built from a different compiler/source than fe8u, so a verbatim fe8u-C port reproduces
 the logic but not the bytes). They are cracked **per function** with the agbcc lever kit, verified in

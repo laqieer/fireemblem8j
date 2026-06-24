@@ -4,7 +4,7 @@
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
 ## State (HEAD ~`80384a30f`+, clean, `make compare` → OK, self-contained YES)
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 96.73% (8249/8528, ~279 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.35% (structurally capped ~96%).
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 96.75% (8251/8528, ~277 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.35% (structurally capped ~96%).
 - This session banked **+30 matching-C** (8219→8249) via the engine below, kept docs current, pruned 51+ stale branches, and stood up a **reusable Discord learning loop**. A background worker (Title_SetupSpecialEffectGraphics + EndingCredits_UpdateStaffReel) may still be in flight — check `git branch -r` for an unmerged `feat/*` and integrate it before new work (verify, don't declare dead).
 
 ## THE ENGINE (proven this session — ~90%+ land rate on well-specified recipes)
@@ -19,23 +19,33 @@ Dispatch workers only AFTER the prior integration push (so they branch off lates
 
 ## Frontier status (the easy veins are mined — see frontier.md "Vein status")
 - **Battle-anim efx fingerprints EXHAUSTED** (BG-scroll shake + frame-LUT BG-loop). **`StartSubSpell_efx*` spawner class EXHAUSTED** (171/172 carved). Both verified by full asm sweeps — do NOT re-dispatch teams there.
-- **Worldmap Gm* / opanim / savedraw / SIO vein** heavily mined this session (~12 carved). The **0x080C0000–0x080CFFFF band has 8 still-asm subs left, ALL recipied** (see BACKLOG).
+- **Worldmap Gm* / opanim / savedraw / SIO vein** heavily mined this session (~12 carved). The **0x080C band remaining is split**: 2 reconstruct recipes (Title titlescreen FX) + the reg-alloc NEAR backlog (GmapScreen2_Loop, OpAnimFaceMontageBegin, GmapEffect_0, GMapScreen_UpdateScroll — see "Other deferred NEARs").
 - **Name-entry/kana has NO fe8u twin** (JP-specific, reconstruct-only — defer).
-- Remaining ~279 are increasingly field-writers / reconstructs / reg-alloc NEARs.
+- Remaining ~277 are increasingly field-writers / reconstructs / reg-alloc NEARs.
 
-## BACKLOG — the 0x080C band 8-recipe set (researcher-specified, build-ready)
-Full recipes (verbatim bodies, every bind addr, JP deltas) are in the 2026-06-24 researcher outputs in the session transcript; re-derive with a fresh `carve-researcher` if lost. Ranked:
+## BACKLOG — the 0x080C band recipe set (researcher-specified, build-ready)
+Full recipes (verbatim bodies, every bind addr, JP deltas) are in the 2026-06-24 researcher outputs in the session transcript; re-derive with a fresh `carve-researcher` if lost. The reg-alloc NEARs (GmapScreen2_Loop, OpAnimFaceMontageBegin, GmapEffect_0, GMapScreen_UpdateScroll) moved to "Other deferred NEARs" below. Ranked:
 1. **Title_SetupSpecialEffectGraphics** @0x080CA69C — RECONSTRUCT case 4 (Decompress gGfx_Titlescreen_4=0x08B4B200→0x06015800; ApplyPalette gPal_Titlescreen_4=0x08B4BB80,0x18). ~15 title data aliases (all addrs in recipe). *[may be landing via the in-flight bg worker]*
 2. **EndingCredits_UpdateStaffReel** @0x080C8FF0 — FIELD-WRITER. JP **gPlaySt base=0x0202BCEC** (US 0x0202BCF0!). gEndingCredits_0=0x081F6AE8. *[in-flight bg worker]*
 3. **GmTmConfront_StartAnim** @0x080C54CC — ✅ CARVED this session.
-4. **GmapScreen2_Loop** @0x080C05C8 — FIELD-WRITER, port verbatim INCL. the US `asm("":::"memory")` barrier + redundant `state&2?OAM1_X:OAM1_X`. gWMNodeData=0x081F5D7C, gWMNodeIconData=0x081F5C6C.
-5. **OpAnimFaceMontageBegin** @0x080CDCCC — NEAR (blocked by a shared opanim `.text` +8-byte region shift — `OpAnimEphraimExit.o`/`OpAnimDarken*` land 8 high; needs a SERIAL fix of the shared opanim region, not parallel-safe). JP delta: case-1 is a live BG-load block (US empty). Also cfbind_opanim-main.tsv has garbage Face rows.
-6. **GmapEffect_0** @0x080C5F68 — NEAR (clean reg permutation: JP i=r6/ptr=r4, agbcc picks r7/r5; permuter plateaued 1315/1650). Needs a manual reg-pin pass or fresh permuter seed. gWorldmapEffect_0 data bind + baseline alias drop.
-7. **Nop_Titlescreen_0** @0x080CAEF4 — RECONSTRUCT from scratch (US is a no-op stub; JP is a real nibble-blend). Pairs with #8 (#8 bl's it). Hard; likely permuter.
-8. **Title_Loop_LightExplosionFx** @0x080CB114 — RECONSTRUCT (JP adds a timer-gated banner ladder absent from US). Hard.
+4. **Nop_Titlescreen_0** @0x080CAEF4 — RECONSTRUCT from scratch (US is a no-op stub; JP is a real nibble-blend). Pairs with #5 (#5 bl's it). Hard; likely permuter.
+5. **Title_Loop_LightExplosionFx** @0x080CB114 — RECONSTRUCT (JP adds a timer-gated banner ladder absent from US). Hard.
 
-## Other deferred NEARs (need permuter / serial work)
-- **GMapScreen_UpdateScroll** @0x080BF73C — reg-alloc tiebreak (r9/r5/r7 vs sl/r7/r5 + one `str [sp,#8]` reorder); permuter plateaued 245/41k iters. Source at `/tmp/worldmap_screen_080BF73C.c.keep` (─ /tmp wiped between sessions; re-derive). Not source-fixable; try fresh seed / manual pin.
+## Other deferred NEARs (need a lever find or fresh permuter seed — NOT clean-recipe targets)
+A faithful fe8u port + `-mjp-promote` lands a small NEAR that current levers don't close; do NOT spend
+a clean-port worker on these. They need a reg-alloc lever discovery or a fresh permuter seed.
+- **GmapScreen2_Loop** @0x080C05C8 — CONFIRMED NEAR (was BACKLOG recipe #4). JP allocator spills `chr`
+  to a 0x14 stack frame + keeps `proc` in r9; agbcc uses a 0x10 frame + registers. permuter
+  (jp-promote, ~46k iters) plateaued at 1745 (best 536/544 bytes). Needs a lever forcing the `chr`
+  stack-spill. (gWMNodeData=0x081F5D7C, gWMNodeIconData=0x081F5C6C if/when solved.)
+- **GMapScreen_UpdateScroll** @0x080BF73C — 3-way reg permutation (r9/r5/r7 vs sl/r7/r5) + one
+  `str [sp,#8]` reorder; permuter plateaued 245. Not source-fixable; try fresh seed / manual pin.
+- **GmapEffect_0** @0x080C5F68 — clean reg permutation (JP i=r6/ptr=r4, agbcc picks r7/r5); permuter
+  plateaued 1315/1650. Needs `gWorldmapEffect_0` data bind + baseline alias drop when solved.
+- **OpAnimFaceMontageBegin** @0x080CDCCC — blocked by a shared opanim `.text` +8-byte region shift
+  (`OpAnimEphraimExit.o`/`OpAnimDarken*` land 8 high); needs a SERIAL fix of the shared opanim region
+  + `cfbind_opanim-main.tsv` garbage Face rows, not a parallel carve. JP delta: case-1 is a live
+  BG-load block (US empty).
 
 ## Cross-cutting VERIFIED facts (reuse across recipes)
 - **JP shared callee addrs** (bind thumb if not in baseline_syms): Decompress=0x08013008, ApplyPalette=0x08000D68, Proc_Break=0x08002DE4, Interpolate=0x08012E84, Proc_Start=0x08002BCC, EfxCreateFrontAnim=0x080564F0, CpuFastSet=0x080D636C, CpuSet=0x080D6370, DivArm=0x080D6378.
