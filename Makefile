@@ -79,6 +79,7 @@ src/StartSubSpell_efxNaglfarOBJ2.o: CC1FLAGS += -mjp-promote
 src/StartSubSpell_efxMaohFlashEyeLOBJ2.o: CC1FLAGS += -mjp-promote
 src/StartSubSpell_efxMaohFlashEyeOBJ1.o: CC1FLAGS += -mjp-promote
 src/StartSubSpell_efxIvaldiOBJ1.o: CC1FLAGS += -mjp-promote
+src/StartSubSpell_efxIvaldiOBJ2.o: CC1FLAGS += -mjp-promote
 src/StartSubSpell_efxMaohFlashEyeFire1OBJ1.o: CC1FLAGS += -mjp-promote
 src/StartSubSpell_efxMaohFlashEyeFire2OBJ1.o: CC1FLAGS += -mjp-promote
 src/efxDarkGradoBG02_Loop_A.o: CC1FLAGS += -mjp-promote
