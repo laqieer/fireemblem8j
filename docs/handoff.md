@@ -4,14 +4,12 @@
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
 ## State (HEAD clean, `make compare` → OK, self-contained YES)
-- **HEAD `b7cb6f120`** (run `git rev-parse --short HEAD` — newer if you integrated the in-flight worker below). **main GREEN + CI GREEN, self-contained 100%.**
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.74% (8335/8528, ~193 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.36% (13175/15435, structurally capped ~96%).
-- This session banked **+112 net matching-C** (8219→8335; from the 8150 baseline that is **+185**) via the engine below, kept docs current, and fixed 3 corrupt cfbind addrs (see bucket (c)). The clean-recipe vein is now **EXHAUSTED** — the tail is the 3-bucket frontier below.
+- **HEAD `a82f84903`** (run `git rev-parse --short HEAD`). **main GREEN + CI GREEN, self-contained 100%.**
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.76% (8337/8528, ~191 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.36% (structurally capped ~96%).
+- This session banked **+114 net matching-C** (8219→8337; from the 8150 baseline that is **+187**) via the engine below, kept docs current, fixed CI (StartEventBattle shared-header revert), and corrected 3 garbage cfbind addrs. The clean-recipe vein is **EXHAUSTED** — the tail is the 3-bucket frontier below. The in-flight worker's ekrBattleInRoundIdle + SaveMenuExtrasMenuLoop are now MERGED (no pending feat/* branches).
 
-## ⚠️ IN-FLIGHT WORKER — INTEGRATE FIRST (verify-don't-declare-dead)
-A `carve-worker` was carving three targets when this handoff was written. **Before any new work, check what it landed and integrate it.** Do NOT declare it dead from an absent file or a mid-snapshot transcript (memory `verify-dont-declare-dead`); confirm via `git branch -r` / the worker's completion notification, then merge.
-- `git branch -r | grep feat/` — already pushed when this was written: **`origin/feat/ekrBattleInRoundIdle`** (tip `9689ce8ba`, ekrBattleInRoundIdle = JP `sub_80511E0`) and **`origin/feat/SaveMenuExtrasMenuLoop`** (tip `665faf37e`, SaveMenuExtrasMenuLoop = JP `sub_80A3B70` reconstruct). Also expected: **ekrGaugeMain** (`sub_8051FB8`, corrupt-cfbind gBanimMaxHP decode) on its own `feat/*` branch.
-- **Integrate serially, ONE branch at a time, full `make compare` gate.** ⚠️ **ekrGaugeMain touches cfbind → gate with `make clean && make compare`** (NOT the warm `rm rom/elf` form) + `gh run list` per the CI lesson below.
+## ⚠️ NEXT CARVEABLE TARGET — ekrGaugeMain (sub_8051FB8), addrs already decoded
+A prior worker fully decoded this corrupt-cfbind field-writer but deferred it as a reg-alloc NEAR (JP frame 0x124 vs agbcc 0x118, `asrs r4,r0,#0x13` direct-write vs agbcc's `asrs;adds r4` extra-mov cascade — only ~10 insns apart under `-mjp-promote`). **Decoded fixes (apply via additive last-wins `zfix_ekrGaugeMain.tsv`, NOT editing the shared cfbind row):** `gBanimMaxHP 0x68504652`(garbage)→**0x0203E1AC**; `gBanimWtaBonus 0x0203E1D8`(wrong)→**0x0203E1D0**. gBanimmisc_2/3/4/7 + gEkrgauge_2/3/4 are REAL data-TU defs (do NOT bind). Needs `-mjp-promote` + a local `EkrGauge_BuildHpBarGfx` proto + a permuter/reg-pin pass for the asrs-cascade. **cfbind change → gate with `make clean && make compare`** + `gh run list` (CI lesson below).
 
 ## DETACHED PERMUTERS still running (may have cracked a NEAR late)
 Check `nonmatchings/<Fn>/output-0-*` for a zero-score solution before deferring these:
