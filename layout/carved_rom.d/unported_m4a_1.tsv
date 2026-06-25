@@ -1,1 +1,1 @@
-0D41B0	0D4DCC	asm/m4a_1.o(.text.m4a_1)	m4a_1 region-same asm (33 fns, descriptive incbin)
+0D41B0	0D4DCC	src/m4a_1.o(.text)	m4a_1 real-source asm (33 fns, ported from fe8u src/m4a_1.s)

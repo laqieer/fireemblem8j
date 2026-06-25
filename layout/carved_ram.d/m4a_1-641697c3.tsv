@@ -1,0 +1,1 @@
+03002C08	iwram	src/m4a.o(.bss.code)	m4a SoundMainRAM_Buffer (0x400 scratch; JP 0x03002C08 vs US 0x03002C60); referenced by m4a_1.s SoundMainRAM ABS32

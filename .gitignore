@@ -39,6 +39,7 @@ src/*.s
 !src/libagbsyscall.s
 !src/call_via.s
 !src/agbsyscall_80D5244.s
+!src/m4a_1.s
 src/data/*.s
 src/data/map/*.s
 src/data/**/*.s
