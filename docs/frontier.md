@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 98.07%** (8363/8528 funcs) → **~165 functions genuinely unmatched** 🎉 crossed 98%
+- **MATCHING-C: 98.15%** (8370/8528 funcs) → **~158 functions genuinely unmatched** 🎉 crossed 98% (+33 net session)
   - +8 RECOVERED from stranded worktree branches: 3D rotation-matrix cluster (sub_8015188/D0/18), ekrBattleEnding
     pair (sub_805601C/8056078), worldmap event handlers EventB6/C4/BC (sub_800CC7C/CF5C/CDB0).
   - 🚨 **INTEGRATOR PROCESS LESSON (cost ~+8 nearly-missed): scan ALL `worktree-*` branches for committed-but-unpushed
