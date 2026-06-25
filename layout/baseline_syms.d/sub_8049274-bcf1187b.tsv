@@ -1,0 +1,4 @@
+gObj_8049274_a	085D3FA0	data	sub_8049274 OAM template A
+gObj_8049274_b	085D3F74	data	sub_8049274 OAM template B
+sub_8012E84	08012E84	thumb	sub_8049274 glyph/number sprite helper (NEEDS_ALIAS)
+sub_8002DE4	08002DE4	thumb	sub_8049274 Proc_Delete-like (NEEDS_ALIAS)
