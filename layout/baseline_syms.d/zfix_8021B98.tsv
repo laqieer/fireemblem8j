@@ -1,0 +1,4 @@
+j_TmCopyRect	080DC0F4	thumb	sub_8021B98 TmCopyRect veneer (NEEDS_ALIAS)
+sub_8002DE4	08002DE4	thumb	sub_8021B98 Proc_End-like (NEEDS_ALIAS)
+sub_8027144	08027144	thumb	sub_8021B98 callee (NEEDS_ALIAS)
+gConfig_080DC8B0	080DC8B0	data	sub_8021B98 0x38-byte config table (NEEDS_ALIAS, shared rodata gap)
