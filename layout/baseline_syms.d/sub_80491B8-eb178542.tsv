@@ -1,0 +1,3 @@
+gObj_80491B8_a	085D3FA0	data	sub_80491B8 OAM template A
+gObj_80491B8_b	085D3F74	data	sub_80491B8 OAM template B
+DisplayUiHand	0804F528	thumb	sub_80491B8 callee (NEEDS_ALIAS)
