@@ -265,6 +265,7 @@ src/ColorFadeSetupFromColorToBlack.o: CC1FLAGS += -mjp-promote
 src/ColorFadeSetupFromColorToWhite.o: CC1FLAGS += -mjp-promote
 src/ColorFadeSetupFromWhite.o: CC1FLAGS += -mjp-promote
 src/sub_8015188.o: CC1FLAGS += -mjp-promote
+src/sub_8010CB4.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .

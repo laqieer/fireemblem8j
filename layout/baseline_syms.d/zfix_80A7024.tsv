@@ -1,0 +1,2 @@
+sub_80A6FF0	080A6FF0	thumb	JP-only glyph converter callee (sub_80A7024 carve)
+gBuf_2014F28	02014F28	data	JP augury/name-entry glyph out-buffer (sub_80A7024 carve)

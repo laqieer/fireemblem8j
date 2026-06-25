@@ -1,0 +1,2 @@
+gProcScr_85B9D0C	085B9D0C	data	ProcScr for sub_8010CB4 (JP-only proc launcher)
+sub_8012340	08012340	thumb	callee of sub_8010CB4 (unit status setter)
