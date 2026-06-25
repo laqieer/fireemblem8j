@@ -33,6 +33,20 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
     - **+~156 UNNAMED sub_** (no fe8u name) = a separate fingerprint-harvest vein.
     - **cross-jump/reg-save-order/reg-pressure knobs = ALL empirically ZERO yield (D277), do NOT pursue.**
     Harness: /tmp/cjtest/ (bucket.sh, classify2.py, retrunc.sh) — byte-diff is the oracle, re-trunc count is not.
+  - ⚡ **CRITICAL RULE (D2026-06-25, verified): re-measure every NEAR with `-mjp-promote` BEFORE classifying.**
+    The frontier's per-function byte-gaps were measured against PLAIN agbcc and are STALE — `-mjp-promote`
+    collapses the asr/lsr/s8-s16 sign-extension cascade, routinely turning a "30-40-byte reg-alloc ceiling" into
+    a 0-6-instr permuter residual. PROVEN: **AdjustNewUnitPosition (sub_807C8DC)** plain=161 instr →
+    -mjp-promote=**139 = EXACT JP length** (~3-instr load-schedule residual → permuter, not a ceiling — anup-worker
+    carving). GMapScreen_UpdateScroll plain=295→260 (6 over). So the "permuter ≈ 11" are mostly TRACTABLE small
+    residuals after promote, not hopeless. (int-widen+cast add nothing beyond promote — promote already does the
+    signedness work; that's why those buckets are 0.)
+  - 📋 **DECODED reconstruct recipes ready (researcher, in /tmp + relayed to workers):** 3× efx JP-ONLY spawners
+    (StartSubSpell_efxLuceBGCOL sub_8067040, efxLuceBGCOL_Loop sub_8067160, EfxDrsmmoyaMain sub_80705E8 — identity
+    PROVEN via proc-name strings, all callees named, cheapest reconstructs in the tail); SioBat_SetupLoop (JP
+    msgids 0x6D3/4/5 vs US 0x748/9/A); ClassStatsDisplay_Loop (JP drops GetClassReelName, 0x30→0x10 frame);
+    StrInsertTact (recon-worker); StartEventBattle (seb-worker, LOCAL-prototype). **WRONG-ID:** sub_80CAEF4 is
+    NOT Nop_Titlescreen_0 (that's a 2-byte bx lr) — it's a 101-instr JP-only tile-blit; do NOT name it Nop_*.
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
