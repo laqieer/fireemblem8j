@@ -1,0 +1,1 @@
+0446FC	04490C	src/sio_tactician_initscreen.o(.text)	handdecomp: Tactician_InitScreen (JP sub_80446FC; SJIS 2-byte name-copy do-while + child1->unk40 = sub_80446E4(str_buf)*9; reg pins i=r5/j=r4/cl=r0/char_cnt=r1)
