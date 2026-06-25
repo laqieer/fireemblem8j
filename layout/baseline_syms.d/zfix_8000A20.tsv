@@ -1,0 +1,3 @@
+sub_80A7680	080A7680	thumb	AgbMain early-init callee (still-asm)
+sub_8009E68	08009E68	thumb	AgbMain post-init callee (still-asm)
+sub_80012E4	080012E4	thumb	AgbMain main-loop body callee (still-asm)
