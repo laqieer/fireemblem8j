@@ -507,7 +507,6 @@
 08020DB8	080210C0	8	exact	ChapterIntro_SetSkipping
 08020EC0	080211C8	64	exact	GameOverScreen_RandomScroll_Init
 08021120	08021428	12	exact	GameOverScreen_BeginIdle
-080217F4	08021AFC	8	exact	ProcDanceAnim_ResetTimer
 0802257C	080225B0	30	masked	MapMenu_IsSuspendCommandAvailable
 08022700	08022738	16	masked	EffectWait
 080228C4	080228FC	20	masked	RescueSelection_OnSelect
