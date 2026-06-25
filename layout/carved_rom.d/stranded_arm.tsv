@@ -1,1 +1,1 @@
-000228	000A20	asm/arm.o(.text.arm)	arm region-same arm code (13 fns, descriptive incbin)
+000228	000A20	src/arm.o(.text)	arm real-source arm code (13 fns, ported from fe8u asm/arm.s)

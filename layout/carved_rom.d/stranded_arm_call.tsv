@@ -1,1 +1,1 @@
-0DC0DC	0DC104	asm/arm_call.o(.text.arm_call)	arm_call region-same thumb code (5 fns, descriptive incbin)
+0DC0DC	0DC104	src/arm_call.o(.text)	arm_call real-source thumb code (5 fns, ported from fe8u asm/arm_call.s)
