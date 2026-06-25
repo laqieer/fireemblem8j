@@ -7336,3 +7336,23 @@ land in the SHARED main checkout, not their worktree — two agents left stray e
 ALWAYS `git status --short` main before integrating a campaign and clean strays. **Rationale:** 100% remains
 reachable; remaining 82 = 55 carveable (workflow running) + ~6 true NEARs + 10 unknown + ~32 BIOS/libgcc veneers
 ("linked" bucket) + ~4 hard. Trajectory: carve workflow (+~35-45) → ~99.5%+, then mop up NEARs/unknowns/veneers.
+
+## D280 — The 55-fn carve workflow lands +13 (crosses 99.19%); ~21 reg-coloring NEARs recycled to permuter campaign #4
+**Date:** 2026-06-25. **Context:** the D279 triage surfaced 55 carveable still-asm fns with no prior decode.
+An 8-worker worktree CARVE workflow over them produced **12 byte-matched carves (+13 incl. the sub_80A6A1C
+sibling)** → **99.19% (8459/8528)**: two newlib LIB-LINKS (`_calloc_r`→`*libc.a:callocr.o(.text)`,
+`_fwalk`→`*libc.a:fwalk.o(.text)`, wired via the carved_rom.d manifest not raw ldscript, NO C file),
+Spline_SetupSegment4 (fe8u spline.c port), sub_80A705C (link-arena record serializer), augury screen-inits
+(sub_80A2D48/80A3118), StartLinkArenaShowPointsAnimated (sub_804A040), the sub_80A6A0C/A1C leaf pair, an
+efx-magic spell timeline (sub_8065E44), and JP-only leaves sub_800E11C/8009950/800C224. **The other ~21 were
+genuine reg-coloring/scheduling NEARs** — but the workers' reverted near-match analyses (exact residual + binds)
+are PERFECT permuter fuel, so they were saved to /tmp/near_decodes/ and fed to **permuter campaign #4** (14
+tractable ones; skipped 3 known-hard: __sfvwrite=newlib-version codegen mismatch not source-fixable,
+EfxAdvanceFrameLut=fe8u carries its own NONMATCHING asm() guard, sub_80A6C60=9-register-pinned). **Decision /
+SOP confirmed:** the carve→recycle-NEARs-to-permuter pipeline is the endgame engine — every carve workflow both
+banks clean matches AND generates high-quality permuter decodes for its NEARs, so the two workflow types feed
+each other. **Lib-link lesson:** a newlib fn currently wired as `asm/sub_X.o(.text.sub_X)` becomes a matching
+"linked" function by repointing its carved_rom.d fragment to `*libc.a:NAME.o(.text)` — but ONLY if that
+newlib object byte-matches the JP build (calloc/fwalk did; fvwrite did NOT — version-divergent). make compare
+is the oracle. **Remaining 69:** ~14 NEARs in campaign #4 + the hard NEARs + ~10 unknown (IDA) + ~32 BIOS/libgcc
+veneers + ~4 hard. Trajectory holds toward ~99.5%+.
