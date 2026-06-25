@@ -1,0 +1,1 @@
+0DA85C	0DA8B4	*libc.a:callocr.o(.text)	_calloc_r from libc.a (newlib calloc wrapper, lib-link; was sub_80DA85C)
