@@ -1,0 +1,4 @@
+gObj_80490C8_a	085D3FBC	data	sub_80490C8 OAM template A
+gObj_80490C8_b	085D3FB4	data	sub_80490C8 OAM template B
+sub_80D6374	080D6374	thumb	units %10 helper (still-asm)
+sub_80D637C	080D637C	thumb	tens /10 helper (still-asm)
