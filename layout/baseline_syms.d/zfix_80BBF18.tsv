@@ -1,0 +1,6 @@
+sub_8000D68	08000D68	thumb	sub_80BBF18 (gfx decompress/CopyToVram)
+sub_8013008	08013008	thumb	sub_80BBF18 (TSA/CHR loader)
+gUnk_AugTiles	08AC4C88	data	sub_80BBF18 (tiles ROM)
+gUnk_AugChr	08AC4CA8	data	sub_80BBF18 (chr ROM)
+gUnk_AugTsa	08AC50A4	data	sub_80BBF18 (tsa ROM)
+gUnk_AugTsaBuf	02023CA8	data	sub_80BBF18 (TSA RAM buffer)
