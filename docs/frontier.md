@@ -44,6 +44,17 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
     carving). GMapScreen_UpdateScroll plain=295→260 (6 over). So the "permuter ≈ 11" are mostly TRACTABLE small
     residuals after promote, not hopeless. (int-widen+cast add nothing beyond promote — promote already does the
     signedness work; that's why those buckets are 0.)
+  - 🟥 **CONFIRMED reg-PRESSURE (Class-3) ceilings — do NOT retry as reconstructs** (recon-worker verified: after
+    the s8/s16 signedness fix + -mjp-promote they reach EXACT JP size + 99% structural match, but the residual is
+    an agbcc spill/high-reg-count tiebreak the permuter can't reach): **Event18_ColorFade (sub_800E1FC)** (JP s8
+    start/size, 204B exact, JP spills r+g to a 4-word frame; permuter plateau 980@8k), **EventA8_WmUnitMoveFree
+    (sub_800C994)** (JP s16 args, 8B delta = one extra callee-saved high reg kept live across Proc_Find/GmMu_SetPosition).
+  - ⚠️ **cfbind BUG to fix before carving EventA8: `cfbind_eventscr_gmap.tsv:21` binds `StartGmapAutoMu_Type1` to
+    GARBAGE 0x07E72DA4 — correct = 0x080C818C** (Type0@0x080C8130 +0x5C; matches asm `.set sub_80C818C`). Latent
+    (no carved code refs it yet) but WILL link-fail/mis-bind the EventA8 carve. Fix via additive zfix last-wins.
+  - 🔸 **Genuine LARGE reconstructs (JP earlier-build SMALLER, need a dedicated session + unnamed-callee binds):**
+    WriteNewGameSave (sub_80A98B4, JP 44B smaller — likely omits the Sacred-Stones dungeon[2]/bonus/worldmap save
+    blocks; binds sub_8000CE4/8030C44/80D6370/80A9778/80A9784), AgbMain, PrepareBattleGraphicsMaybe (+266B).
   - 📋 **DECODED reconstruct recipes ready (researcher, in /tmp + relayed to workers):** 3× efx JP-ONLY spawners
     (StartSubSpell_efxLuceBGCOL sub_8067040, efxLuceBGCOL_Loop sub_8067160, EfxDrsmmoyaMain sub_80705E8 — identity
     PROVEN via proc-name strings, all callees named, cheapest reconstructs in the tail); SioBat_SetupLoop (JP
