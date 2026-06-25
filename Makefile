@@ -93,6 +93,7 @@ src/EventLoadUnitWithMovement.o: CC1FLAGS += -mjp-promote
 src/EfxSRankWeaponEffectSCRMain.o: CC1FLAGS += -mjp-promote
 src/efxIvaldiBG2_Loop.o: CC1FLAGS += -mjp-promote
 src/sub_8056984.o: CC1FLAGS += -mjp-promote
+src/sub_8048DC0.o: CC1FLAGS += -mjp-promote
 src/StartSubSpell_efxMaohFlashEyeROBJ2.o: CC1FLAGS += -mjp-promote
 src/GmapLineFade_0.o: CC1FLAGS += -mjp-promote
 src/GMScreenVSync_Loop.o: CC1FLAGS += -mjp-promote
