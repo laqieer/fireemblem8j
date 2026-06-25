@@ -7294,3 +7294,24 @@ held for the PROMOTE knobs (D276/b/c) but is REFUTED for cross-jump (no bucket) 
 The genuine-ceiling tail is SMALL and dominated by **int-local-widen-fixable + reconstruct**, NOT config knobs.
 **Highest-leverage going forward = the int-widen lever vein + reconstructs, NOT more compiler knobs.** (3) Lesson:
 confirm real-target BYTE-yield before shipping toolchain infra, not just synthetic-toy proof.
+
+## D278 — Permuter-campaign mass-crack of the reg-coloring NEAR tail (Workflow-orchestrated); matching-C 97.78→98.92%
+**Date:** 2026-06-25. **Context:** after the JP-only leaf + reconstruct veins floored out, the residual was
+classified as a "reg-coloring/spill-slot ceiling." D277 proved the *transmuter* is register-blind (wrong oracle).
+**Decision:** treat the reg-coloring/scheduling NEARs as **source-form discovery problems, not a compiler ceiling**
+— since JP and US share one agbcc, a byte difference means the C *shape* differs, which is exactly decomp-permuter's
+domain. Run them in **Workflow-orchestrated campaigns**: one worktree-isolated `carve-worker` per NEAR, each (a)
+re-measures with `-mjp-promote` FIRST (several flagged "reg-pressure" NEARs are then free exact matches), (b) runs
+the permuter, and (c) — crucially — mines the **lowest-score output's source mutation even when score never hits 0**,
+applies it to clean source, and lets the **linked `make compare` byte-diff be the oracle** (not the permuter score,
+which is register-blind the same way objdiff is). Integrate whole branches with `git merge -X ours --no-ff` + ONE
+authoritative `make compare`; on fail, first-diff-bisect (`cmp -l … | head -1` → ROM addr → revert that one carve).
+**Result:** campaign #1 cracked 9/12, campaign #2 10/14 (~73% sustained). Net +99 matching-C this session
+(8337→8436, crossed 98% and 98.92%). **Cracking mutations seen:** decl-order swap, read-head-before-decrement,
+`&i<=4` to block -O2 loop-reversal, compound-expr inline to flip a/b register coloring, pre-loaded const temp to
+schedule a pool load ahead, shifted-domain `<<26<0` to drop a mask register, and free `-mjp-promote` exact matches.
+**Rationale / SOP:** 100% matching-C is REACHABLE — the tail is a permuter grind at ~73% per batch, not an asymptote.
+Continue batches of ~14 over the ~30 NEARs that still have decodes; only ~3-4 are genuinely hard (PutFaceOnBackGround
+800663C 60+ forms, Event0F_CounterOps 800DE3C, RegisterTsaWithOffset 80D19DC = fe8u-own non-matching todo, 80A6FF0
+basic-block-ordering). **Integrator discipline:** verify each branch's `-mjp-promote` Makefile line survives the
+`-X ours` merge (overlap-drop trap) and `rm src/<f>.o` to defeat the stale-.o trap before the gate.

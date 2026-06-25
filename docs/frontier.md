@@ -8,9 +8,10 @@
 **Keep this current.** Refresh the numbers from `scripts/calcprogress.py` and the target lists from
 ground truth whenever an axis moves. Stale frontier data caused real wasted work (see "Pitfall" below).
 
-## Current state (2026-06-24)
+## Current state (2026-06-25)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 98.80%** (8426/8528 funcs) → **~102 unmatched** (+89 net session). PERMUTER CAMPAIGN cracked 9/12 reg-coloring NEARs (75%!) — the residual IS crackable via permuter best-output + creative source forms (do{}while(0) wrap, ternary-flag, region-diff). The reg-coloring tail is NOT a hard ceiling; it is a permuter grind. Running more permuter batches toward ~99%+.
+- **MATCHING-C: 98.92%** (8436/8528 funcs) → **92 unmatched** (+99 net session). PERMUTER CAMPAIGNS keep cracking the reg-coloring/scheduling NEAR tail at ~73% (campaign #1 9/12, campaign #2 10/14) — the residual IS crackable via permuter best-output + creative source forms (do{}while(0) wrap, ternary-flag, compound-expr inline, decl-order, region-diff). The reg-coloring tail is NOT a hard ceiling; it is a permuter grind. Campaign #3 (14 fresh NEARs) running. Of the 92: ~30 NEARs still have ready decodes (campaign fuel) + ~13 staged non-matching-C + a few genuinely-hard (PutFaceOnBackGround 800663C tried 60+ forms, Event0F_CounterOps 800DE3C, RegisterTsaWithOffset 80D19DC = fe8u-own non-matching todo, 80A6FF0 basic-block-ordering ceiling).
+  - CAMPAIGN #2 (+10, one batch, byte-perfect combined): BlitU8TileMapData (8001508, decl-order+s8 6-byte fix), SlotQueuePop (800D808, read-head-before-decrement), StartEventWarpAnim (8021A2C, free -mjp-promote), sub_80356C8 (sprite-strip, decl-order+pre-load temp+shifted-domain), sub_8085DDC=EvCheck0B_AREA (free -mjp-promote), sub_80A3018 (prep-item text, &i<=4 loop-reversal block), sub_80A34F0 (BG2 row-fill), sub_80A3DC8, sub_80A6AFC (bit-packing leaf), sub_80A4428 (divination text starter). LESSON re-confirmed: re-measure flagged reg-pressure NEARs with -mjp-promote BEFORE the permuter — several are free exact matches.
   - +8 RECOVERED from stranded worktree branches: 3D rotation-matrix cluster (sub_8015188/D0/18), ekrBattleEnding
     pair (sub_805601C/8056078), worldmap event handlers EventB6/C4/BC (sub_800CC7C/CF5C/CDB0).
   - 🚨 **INTEGRATOR PROCESS LESSON (cost ~+8 nearly-missed): scan ALL `worktree-*` branches for committed-but-unpushed
