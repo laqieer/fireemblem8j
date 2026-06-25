@@ -69,6 +69,20 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
     an agbcc spill/high-reg-count tiebreak the permuter can't reach): **Event18_ColorFade (sub_800E1FC)** (JP s8
     start/size, 204B exact, JP spills r+g to a 4-word frame; permuter plateau 980@8k), **EventA8_WmUnitMoveFree
     (sub_800C994)** (JP s16 args, 8B delta = one extra callee-saved high reg kept live across Proc_Find/GmMu_SetPosition).
+  - 🟧 **SPILL-SLOT / REG-ROTATION NEAR backlog (STRATEGIC: needs a stronger reg-alloc tool, NOT more default permuter).**
+    A growing class of reconstructs that are **100% structurally correct** (exact size + all-but-N-bytes byte-0) but blocked
+    by an agbcc frame-layout/stack-slot/register-rotation tiebreak the **default decomp-permuter randomizer plateaus on**
+    (never reaches 0). VALIDATED, worktrees PRESERVED for a future pass:
+    • **ClassStatsDisplay_Loop (sub_80B8B28)** — reconstruct done (drop GetClassReelName + 32B buf, inline classReelEnt
+      deref, (u8*) cast, drop null-guard; frame 0x30→0x10); residual = 6B cyclic rotation of 3 spill slots
+      ([sp,#4]/[sp,#8]/[sp,#0xc]); 14 source variants + 15k permuter @ plateau 5. Worktree /home/laqieer/fe8j-wt-class.
+    • **AdjustNewUnitPosition (sub_807C8DC)** — exact 139-instr; 3-register loop-counter rotation; plateau 485/825.
+      Worktree /home/laqieer/fe8j-wt-anup (+ _permwork/AdjustNewUnitPosition.best485.c).
+    **UNLOCK = the transmuter** (agbcc+Thumb+Claude-Code-in-the-loop permuter rewrite, github.com/macabeus/transmuter,
+    flagged in memory for EXACTLY this reg-alloc NEAR backlog) OR a PERM-macro register-hint profile OR a 100k+
+    differently-seeded run. Register pins make BODY swaps WORSE (don't). When N such NEARs accumulate, deploy the
+    transmuter as a batch — it's the highest-leverage move for the spill/rotation tail. Do NOT keep throwing 15k
+    default-permuter runs at individual ones (proven to plateau).
   - ⚠️ **cfbind BUG to fix before carving EventA8: `cfbind_eventscr_gmap.tsv:21` binds `StartGmapAutoMu_Type1` to
     GARBAGE 0x07E72DA4 — correct = 0x080C818C** (Type0@0x080C8130 +0x5C; matches asm `.set sub_80C818C`). Latent
     (no carved code refs it yet) but WILL link-fail/mis-bind the EventA8 carve. Fix via additive zfix last-wins.
