@@ -10,9 +10,10 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.83%** (8343/8528 funcs) → **~185 functions genuinely unmatched**
+- **MATCHING-C: 97.84%** (8344/8528 funcs) → **~184 functions genuinely unmatched**
   - +EfxDrsmmoyaMain (sub_80705E8, JP-only efx reconstruct, hand-closed no permuter: if/else timer order +
-    per-branch PlaySFX duplication + state3@0x10 load-schedule).
+    per-branch PlaySFX duplication + state3@0x10 load-schedule). +SioBat_SetupLoop (sub_8045EEC, fe8u sio_bat.c +
+    JP msgids 0x6D3/4/5 + JP hoists EndLinkArenaButtonSpriteDraw to the Proc_Find==NULL path = the no-r7 frame).
   - +StartEventBattle (sub_8012038, local-prototype-shadow fix for isBallista s8 — NO shared-header edit;
     re-land of the earlier CI-breaking attempt) +ply_memacc (sub_80D60E8, verbatim fe8u m4a under old_agbcc;
     the 41B "residual" was 100% standalone reloc/veneer noise, byte-identical in-tree).
@@ -35,7 +36,18 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
       UnitList_PutRow, HandleTurnRecordText, OpAnimFaceMontageBegin, Event1B_TEXTSHOW, StartEventBattle (re-land
       LOCAL-prototype, NOT shared-header), Tactician_InitScreen, ClassIntro_Init, Guide_MainLoop, GmapScreen2_Loop,
       WriteNewGameSave, PrepareBattleGraphicsMaybe (+266B, huge), AgbMain, SioBat_SetupLoop, ClassStatsDisplay_Loop, …
-    - **+~156 UNNAMED sub_** (no fe8u name) = a separate fingerprint-harvest vein.
+    - **+~169 UNNAMED sub_** (no fe8u name): TRIAGED (D2026-06-25) — **≈0 clean-carve yield.** 66 leaf (un-fingerprintable),
+      34 weak (1 callee), 69 fingerprintable but dominated by COLLISIONS (high-Jaccard match names a fe8u func ALREADY
+      carved in JP at another addr; the sub_ is a region-different sibling sharing generic helpers) + non-distinctive
+      callees (BG_EnableSyncByMask/SetBlendConfig/PutText) + size-mismatch (JP 1.5-2.3× larger = divergent). ONE recon
+      lead: sub_8046924 (LinkArenaTeamBuild_Init family, DrawChapterTitleStr→StrEx swap). callee-fingerprint IDs the
+      SUBSYSTEM, not portable identity. → reconstruct-dominated, NOT a harvest.
+  - 🏁 **STRATEGIC MILESTONE (D2026-06-25): the matching-C frontier is at its FLOOR for ports + levers.** Empirically
+    floored, ALL = 0 new carves: free-carve, int-widen, cast-signedness, cross-jump knob, reg-order knob, unnamed-sub
+    fingerprint. **The ONLY remaining path to 100% is RECONSTRUCT (hand-decompile the JP-divergent/JP-only source shape)
+    + PERMUTER (reg-alloc/schedule residuals).** Do NOT run more identification/lever sweeps. Highest-confidence
+    reconstruct vein = PROC-NAME-STRING self-identifying JP-only procs (efx spawners proved this; link-arena/name-entry/
+    augury subsystems next) + the decoded medium reconstructs. The remaining ~185 is a reconstruct backlog (multi-session).
     - **cross-jump/reg-save-order/reg-pressure knobs = ALL empirically ZERO yield (D277), do NOT pursue.**
     Harness: /tmp/cjtest/ (bucket.sh, classify2.py, retrunc.sh) — byte-diff is the oracle, re-trunc count is not.
   - ⚡ **CRITICAL RULE (D2026-06-25, verified): re-measure every NEAR with `-mjp-promote` BEFORE classifying.**
