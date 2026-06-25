@@ -131,3 +131,16 @@ crackable only by (a) LONG decomp-permuter runs (millions of iters / days — th
 plateaued; lucky seeds may still hit 0), or (b) reproducing the original IS-build agbcc reg-allocator. NOT by
 flags. Single-TU test harness: `cpp $CPPFLAGS src/F.c | iconv -f UTF-8 -t CP932 | tools/agbcc/bin/agbcc
 $CC1FLAGS <flag> -o /tmp/t.s; as; objcopy -O binary -j .text; cmp -l vs the assembled oracle .text`.
+
+## 8. -fno-gcse — a NEW lever for table-base-in-loop reg eviction (D285)
+For functions that read a const lookup table (SIN/COS gSinLookup, msgid/sprite tables) or a common
+subexpression INSIDE a loop, agbcc's GCSE pass HOISTS the table base-address into a callee-saved register,
+which EVICTS the live struct/proc pointer to a different reg or to a stack spill -> a function-wide coloring
+divergence from the JP build (which reloads the table base from the literal pool on each use). `-fno-gcse`
+disables that hoist, reloading per-use like the JP build. VERIFIED: sub_800A34C (Catmull-Rom spline, reads a
+table in the eval loop) goes 0x258 (+0x10 over) -> EXACT 0x248 size with -fno-gcse; sub_80A2E64 (sprite
+rotator reading gSinLookup/COS) 199==199 instr exact. (Both still have a residual COLORING rotation on top of
+the now-exact size — -fno-gcse fixes the GCSE-eviction axis, not every coloring choice.) Apply per-TU like
+-mjp-promote: `src/<fn>.o: CC1FLAGS += -fno-gcse`. NOTE: -mjp-promote and -fno-gcse can CONFLICT (mjp-promote
+strips the s16 sign-extend moves that -fno-gcse needs for 80A2E64) — try each alone and combined. Add this to
+the all-levers re-examination toolset (re-run the spill-NEARs WITH -fno-gcse before declaring a ceiling).
