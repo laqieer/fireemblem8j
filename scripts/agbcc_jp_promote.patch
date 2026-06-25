@@ -38,35 +38,82 @@ index 5119688..26ed210 100755
  #endif
  
        /* Let machine desc say which reg (if any) the parm arrives in.
+diff --git a/gcc/thumb.c b/gcc/thumb.c
+index f773ec0..3649c41 100755
+--- a/gcc/thumb.c
++++ b/gcc/thumb.c
+@@ -800,6 +800,13 @@ thumb_function_prologue(FILE *f, int frame_size)
+         int mask = live_regs_mask & 0xff;
+         int next_hi_reg;
+ 
++        if (TARGET_JP_REGORDER)
++        {
++            for (next_hi_reg = 8; next_hi_reg < 13; next_hi_reg++)
++                if (regs_ever_live[next_hi_reg] && !call_used_regs[next_hi_reg])
++                    break;
++        }
++        else
+         for (next_hi_reg = 12; next_hi_reg > 7; next_hi_reg--)
+         {
+             if (regs_ever_live[next_hi_reg] && !call_used_regs[next_hi_reg])
+@@ -826,12 +833,22 @@ thumb_function_prologue(FILE *f, int frame_size)
+                                 reg_names[next_hi_reg]);
+                     high_regs_pushed--;
+                     if (high_regs_pushed)
++                    {
++                        if (TARGET_JP_REGORDER)
++                            for (next_hi_reg++; next_hi_reg < 13; next_hi_reg++)
++                            {
++                                if (regs_ever_live[next_hi_reg]
++                                    && !call_used_regs[next_hi_reg])
++                                    break;
++                            }
++                        else
+                         for (next_hi_reg--; next_hi_reg > 7; next_hi_reg--)
+                         {
+                             if (regs_ever_live[next_hi_reg]
+                                 && !call_used_regs[next_hi_reg])
+                                 break;
+                         }
++                    }
+                     else
+                     {
+                         mask &= ~((1 << regno) - 1);
 diff --git a/gcc/thumb.h b/gcc/thumb.h
-index 9911f76..2a109c9 100755
+index 9911f76..93a9ca3 100755
 --- a/gcc/thumb.h
 +++ b/gcc/thumb.h
-@@ -42,6 +42,7 @@ Boston, MA 02111-1307, USA.  */
+@@ -42,6 +42,9 @@ Boston, MA 02111-1307, USA.  */
  
  /* Nonzero if all call instructions should be indirect.  */
  #define ARM_FLAG_LONG_CALLS	(0x10000) /* same as in arm.h */
 +#define ARM_FLAG_JP_PROMOTE	(0x20000)
++#define ARM_FLAG_JP_NOCROSSJUMP	(0x40000)
++#define ARM_FLAG_JP_REGORDER	(0x80000)
  
  
  /* Run-time compilation parameters selecting different hardware/software subsets.  */
-@@ -50,6 +51,7 @@ extern int target_flags;
+@@ -50,6 +53,9 @@ extern int target_flags;
  #define TARGET_THUMB_INTERWORK	(target_flags & ARM_FLAG_THUMB)
  
  #define TARGET_LONG_CALLS		(target_flags & ARM_FLAG_LONG_CALLS)
 +#define TARGET_JP_PROMOTE	(target_flags & ARM_FLAG_JP_PROMOTE)
++#define TARGET_JP_NOCROSSJUMP	(target_flags & ARM_FLAG_JP_NOCROSSJUMP)
++#define TARGET_JP_REGORDER	(target_flags & ARM_FLAG_JP_REGORDER)
  
  /* SUBTARGET_SWITCHES is used to add flags on a per-config basis. */
  #ifndef SUBTARGET_SWITCHES
-@@ -63,6 +65,7 @@ extern int target_flags;
+@@ -63,6 +69,9 @@ extern int target_flags;
    {"long-calls",		ARM_FLAG_LONG_CALLS,		\
     "Generate all call instructions as indirect calls"},		\
    {"no-long-calls",	       -ARM_FLAG_LONG_CALLS, ""},	\
 +  {"jp-promote",		ARM_FLAG_JP_PROMOTE, ""},	\
++  {"jp-nocrossjump",		ARM_FLAG_JP_NOCROSSJUMP, ""},	\
++  {"jp-regorder",		ARM_FLAG_JP_REGORDER, ""},	\
    SUBTARGET_SWITCHES						\
    {"",                          TARGET_DEFAULT}         	\
  }
-@@ -346,7 +349,7 @@ do {									\
+@@ -346,7 +355,7 @@ do {									\
    if (GET_MODE_CLASS (MODE) == MODE_INT		\
        && GET_MODE_SIZE (MODE) < 4)		\
      {						\
@@ -75,7 +122,7 @@ index 9911f76..2a109c9 100755
        (MODE) = SImode;				\
      }						\
  }
-@@ -623,6 +626,7 @@ int thumb_shiftable_const ();
+@@ -623,6 +632,7 @@ int thumb_shiftable_const ();
  
  /* Passing Arguments on the stack */
  
@@ -83,3 +130,16 @@ index 9911f76..2a109c9 100755
  #define PROMOTE_PROTOTYPES 1
  
  #define ACCUMULATE_OUTGOING_ARGS 1
+diff --git a/gcc/toplev.c b/gcc/toplev.c
+index ac8e21b..9c85422 100755
+--- a/gcc/toplev.c
++++ b/gcc/toplev.c
+@@ -3140,7 +3140,7 @@ rest_of_compilation(tree decl)
+ 
+     if (optimize > 0)
+     {
+-        TIMEVAR(jump_time, jump_optimize(insns, JUMP_CROSS_JUMP,
++        TIMEVAR(jump_time, jump_optimize(insns, TARGET_JP_NOCROSSJUMP ? !JUMP_CROSS_JUMP : JUMP_CROSS_JUMP,
+                                          JUMP_NOOP_MOVES,
+                                          !JUMP_AFTER_REGSCAN));
+ 
