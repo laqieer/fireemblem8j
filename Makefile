@@ -259,6 +259,10 @@ src/Loop6C_efxMagicQUAKE.o: CC1FLAGS += -mjp-promote
 src/UnitKakudaiMain.o: CC1FLAGS += -mjp-promote
 src/ParseBattleHitToBanimCmd.o: CC1FLAGS += -mjp-promote
 src/StartEventBattle.o: CC1FLAGS += -mjp-promote
+src/ColorFadeSetupFromBlack.o: CC1FLAGS += -mjp-promote
+src/ColorFadeSetupFromColorToBlack.o: CC1FLAGS += -mjp-promote
+src/ColorFadeSetupFromColorToWhite.o: CC1FLAGS += -mjp-promote
+src/ColorFadeSetupFromWhite.o: CC1FLAGS += -mjp-promote
 
 CPPFLAGS := -I tools/agbcc/include -iquote include -iquote . -nostdinc -undef
 ASFLAGS  := -mcpu=arm7tdmi -mthumb-interwork -I include -I .
