@@ -1,0 +1,3 @@
+gMultiBootParam	03004EB0	data	sub_80489C8 NEEDS_ALIAS
+gMultiBootImagep	03004E10	data	sub_80489C8 NEEDS_ALIAS
+gMultiBootImageSize	03004EAC	data	sub_80489C8 NEEDS_ALIAS
