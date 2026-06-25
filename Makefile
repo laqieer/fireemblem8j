@@ -67,6 +67,7 @@ src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSo
 # promotion behavior: s8/s16-hold form (signedness preserved) and/or
 # declaration-order arg extension (PROMOTE_FUNCTION_ARGS). One flag, one agbcc.
 src/PutUnitSpriteIconsOam.o: CC1FLAGS += -mjp-promote
+src/GMapScreen_UpdateScroll.o: CC1FLAGS += -mjp-promote
 src/sub_8032CBC.o: CC1FLAGS += -mjp-promote
 src/PrepareSineWaveScanlineBufExt.o: CC1FLAGS += -mjp-promote
 src/sub_8085DDC.o: CC1FLAGS += -mjp-promote
