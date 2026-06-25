@@ -1,0 +1,163 @@
+#include "global.h"
+
+#include "bmlib.h"
+#include "hardware.h"
+#include "bmsave.h"
+#include "uiutils.h"
+#include "bmudisp.h"
+#include "bmio.h"
+#include "prepscreen.h"
+
+#include "constants/msg.h"
+
+#include "sio.h"
+#include "sio_core.h"
+
+extern struct Font Font_0;
+extern struct Text gSioTexts[];
+
+//! FE8U = 0x080469C4
+void LinkArenaTeamBuild_Init(struct SioTermProc * proc)
+{
+    int permuter, permuter2;
+    int i;
+    struct PlaySt playSt;
+    u8 flags[4];
+    int local_38;
+    u8 r1;
+
+    local_38 = 0;
+
+    ClearSioBG();
+    InitSioBG();
+
+    StartMuralBackgroundExt(proc, 0, 0x10, 4, 0);
+
+    Decompress(Img_TacticianSelObj, OBJ_CHR_ADDR(0x240));
+
+    SetTextFont(&Font_0);
+    InitSystemTextFont();
+    ResetTextFont();
+
+    StartLinkArenaButtonSpriteDraw(192, 16, proc);
+
+    InitText(&gSioTexts[0], 24);
+    InitText(&gSioTexts[1], 24);
+
+    PutSioText(MSG_6D7, 0); // "Select data to build a team with."
+    PutSioText(MSG_6D8, 1); // "Saved data will not be changed."
+
+    proc->unk_4c = -1;
+
+    for (i = 2; i >= 0; i--)
+    {
+        flags[i] = 0;
+
+        if (IsSaveValid(i))
+        {
+            ReadGameSavePlaySt(i, &playSt);
+            proc->unk_2c[i] = GetChapterTitleExtra(&playSt);
+
+            r1 = playSt.chapterStateBits;
+            permuter2 = 0x40;
+
+            permuter2 &= r1;
+            if (permuter2)
+            {
+                flags[i] |= 4;
+            }
+
+            if (playSt.config.controller == 0)
+            {
+                if (playSt.chapterModeIndex == 1)
+                {
+                    flags[i] |= 0x10;
+                }
+
+                if (playSt.chapterModeIndex == 2)
+                {
+                    flags[i] |= 0x20;
+                }
+
+                if (playSt.chapterModeIndex == 3)
+                {
+                    flags[i] |= 0x40;
+                }
+            }
+            else
+            {
+                if (playSt.chapterModeIndex == 3)
+                {
+                    flags[i] |= 0x40;
+                }
+                else
+                {
+                    flags[i] |= 0x20;
+                }
+            }
+
+            if (IsGameNotFirstChapter(&playSt))
+            {
+                proc->unk_38[i] = proc->unk_2c[i];
+            }
+            else
+            {
+                proc->unk_38[i] = -1;
+            }
+
+            if (proc->unk_38[i] != -1)
+            {
+                if (local_38 == 0)
+                {
+                    proc->unk_50 = i;
+                    local_38 = 1;
+                }
+                else
+                {
+                    proc->unk_4c = i;
+                }
+            }
+        }
+        else
+        {
+            proc->unk_2c[i] = proc->unk_38[i] = -1;
+        }
+    }
+
+    if (proc->unk_4c == -1)
+    {
+        proc->unk_4c = proc->unk_50;
+        proc->unk_48 = proc->unk_50;
+    }
+    else
+    {
+        proc->unk_48 = proc->unk_4c;
+    }
+
+    PutChapterTitleBG(0x1a0);
+
+    for (i = 0; i < 3; i++)
+    {
+        permuter = 4;
+
+        if (proc->unk_38[i] == -1)
+        {
+            flags[i] |= 2;
+        }
+
+        ApplyChapterTitlePal(flags[i] | 1, i + 4);
+        ApplyChapterTitlePal(flags[i], i + 7);
+        DrawChapterTitleBG(TILEMAP_LOCATED(gBG1TilemapBuffer, 3, (3 + i * permuter) + 1), i + 4);
+        PutChapterTitleGfx(((0x800 * (u32)i + 0x4400) & 0x1FFFF) / 0x20, proc->unk_2c[i]);
+        DrawChapterTitleStr(TILEMAP_LOCATED(gBG0TilemapBuffer, 3, (3 + i * permuter) + 2), i + 7);
+    }
+
+    SetWinEnable(0, 0, 0);
+
+    StartLinkArenaTitleBanner(proc, 1, 0);
+    SetLinkArenaUiBlendAndWindowOff();
+
+    BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT | BG3_SYNC_BIT);
+
+    return;
+}
