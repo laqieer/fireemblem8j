@@ -10,7 +10,20 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.90%** (8349/8528 funcs) → **~179 functions genuinely unmatched**
+- **MATCHING-C: 97.95%** (8353/8528 funcs) → **~175 functions genuinely unmatched**
+  - +ColorFadeSetup×4 (sub_80017EC/8001870/80018F0/8001974, +4 from one recipe).
+  - 💡 **`short`-PARAM-PROMOTION + PROTO-HIDE technique (colorfade-worker, reusable):** for a u8/s8-param func whose
+    residual is the base-load-vs-arg-extension SCHEDULING order (JP loads the loop-invariant global base BEFORE
+    zero-extending the param; agbcc zexts first) — declare the param `short` (not u8/s8) so PROMOTE_FUNCTION_ARGS
+    (-mjp-promote) reorders the base load ahead of the arg extension → JP prologue. The shared-header proto is u8,
+    so HIDE it for this TU via the rename-macro idiom (`#define Fn Fn_u8_proto_hidden` around the includes, `#undef`
+    — same as StartEventBattle, NO header edit) + split the store through a temp. (u8-cast/register-pin/plain-reorder
+    all FAIL — confirmed.) The permuter finds it embedded in a noisy best-output; extract the deterministic fix.
+  - 🔬 **TWO-CLASS spill distinction (seb-worker): PRESSURE vs SLOT-ORDER.** carve BIGGER than JP (extra push) =
+    spill-PRESSURE → the split-the-final-write lever REMOVES a register and matches (efxLuce). carve EXACT-size with a
+    rotated `[sp,#N]` slot assignment = spill-SLOT-ORDER (agbcc assign_stack_local numbering, INVARIANT to C source,
+    default permuter plateaus, NO C-level fix exists) → transmuter-only. ClassStatsDisplay_Loop is SLOT-ORDER (6B 3-slot
+    rotation). Diagnostic: bigger=pressure(try split lever), exact-size-rotated-[sp,#N]=slot-order(transmuter batch).
   - +LinkArenaTeamBuild_Init (sub_8046924, verbatim fe8u sio_term.c, msgid -0x75 shift; "Str→StrEx" was a
     gbadisasm naming artifact). +sub_8048F78 (JP-only SIO text-draw leaf, from-scratch, 26/26 identical).
   - 🟢 **PRODUCTIVE VEIN: JP-only small wrappers/leaves** (the size-match harness EXCLUDES these — no fe8u row to
