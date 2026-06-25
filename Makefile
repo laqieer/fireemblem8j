@@ -2558,7 +2558,13 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_bldyLut_10_ref.s \
                            asm/dat_worldmap_gmapunit_p5.s
 ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o)) $(GENERATED_S:.s=.o)
-ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS)
+# SRC_S_OBJECTS: hand-written real-source assembly under src/ (e.g. libagbsyscall.s,
+# the BIOS svc wrappers), like fe8u's src/*.s. Use git ls-files so the COMMITTED
+# sources are picked up but the generated src/<fn>.s intermediates (from the src/*.c
+# compile pipeline, uncommitted) are NOT double-counted. These count as matching-C.
+SRC_S_FILES := $(shell git ls-files 'src/*.s' 2>/dev/null)
+SRC_S_OBJECTS := $(SRC_S_FILES:.s=.o)
+ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS)
 
 # --- NON_MATCHING staging (D26): readable C that DOCUMENTS a region-different
 # function whose byte source is still asm/<fn>.s. PROVE-BUILDS ONLY -- NEVER
@@ -2650,6 +2656,10 @@ ghidra-cp:
 # the source for one-time asset re-extraction (scripts/extract_*). `make` builds with it absent.
 
 $(ASM_OBJECTS): %.o: %.s
+	$(AS) $(ASFLAGS) -g $< -o $@
+
+# Hand-written real-source assembly under src/ (libagbsyscall, BIOS svc wrappers).
+$(SRC_S_OBJECTS): %.o: %.s
 	$(AS) $(ASFLAGS) -g $< -o $@
 
 #### Sound asset rules (Phase 1 Music) ####

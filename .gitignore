@@ -34,6 +34,9 @@ sound/**/*.bin
 # Compiler-generated assembly (agbcc emits src/x.s next to src/x.c).
 # Hand-written assembly lives in asm/ and is tracked.
 src/*.s
+# ...except hand-written real-source assembly TUs (like fe8u's src/*.s): the BIOS
+# syscall wrappers. These are COMMITTED sources, not generated, and count as matching-C.
+!src/libagbsyscall.s
 src/data/*.s
 src/data/map/*.s
 src/data/**/*.s

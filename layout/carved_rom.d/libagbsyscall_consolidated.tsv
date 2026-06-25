@@ -1,0 +1,1 @@
+0D6364	0D63E0	src/libagbsyscall.o(.text.libagbsyscall)	libagbsyscall: BIOS syscall wrappers consolidated to real source (like fe8u)
