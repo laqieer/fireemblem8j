@@ -17,6 +17,18 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
     match — but they byte-match from a faithful from-scratch decode). Cheap carve fuel. The **0x08048xxx SIO band**
     (sub_8048AC4/CD8/BAC/D74/C08/C7C — Proc_Start/teardown/cursor/help-popup handlers, mostly all-named) is queued
     to sio-worker. msgid-shift (-0x75) is the consistent JP link-arena/sio const pattern.
+  - 🟢 **AUGURY/占い JP-only leaf vein (0x080A2xxx–0x080A4xxx, IsDivinationPortrait*/CgText*):** productive, like the
+    SIO text-draws. ⭐ **sub_80A462C** (28 instr, ALL named, ZERO struct ambiguity — near-certain byte-match, recon-worker
+    on it): proc->unk_2c=0x7B1 msgid; StartCgText(...,VRAM 0x06011000,...); GetCgTextFlags|0x0004004E→SetCgTextFlags.
+    DEFER-band next-most-tractable (need a few binds/struct trace): sub_80490C8 (SIO score time-display, 2 digit-extractor
+    binds sub_80D637C/74 + 2 sprite-table aliases), sub_80491B8 (score-display loop, carve after 80490C8). AVOID (deep
+    IDA struct): sub_80487D8 (multiboot, MultiBootParam@0x03004EB0 + ~25 syms), sub_8048DC0 (digit renderer).
+  - 🛠 **REG-COLORING NEAR backlog → TRANSMUTER DEPLOYED (task #15).** Region-same PORTS now hit a 1-2 register-coloring
+    ceiling on nearly every one (exact size + ~99% structural, blocked by a scratch-reg renumber the default permuter
+    can't reach): AiAttemptStealActionWithinMovement (sub_803DAF0, r3→r4, /tmp/aiattemptsteal_best.c — EASIEST), Event0F_CounterOps
+    (r4↔r5), ClassStatsDisplay_Loop, AdjustNewUnitPosition, HandleTurnRecordText, GmapScreen2_Loop, Event18_ColorFade.
+    transmuter-worker is evaluating the transmuter on the AiAttemptSteal single-register case; if it cracks → batch-clear
+    the backlog (+7). **Stop hand-grinding region-same ports — carve JP-divergent reconstructs + JP-only leaves instead.**
   - +efxLuceBGCOL spawner+loop pair (sub_8067040/8067160, JP-only efx; `int terminator` not s16; 6 data binds).
   - 💡 **KEY TECHNIQUE (seb-worker, efxLuceBGCOL): the default permuter FINDS the unlocking source mutation even when
     its SCORE never reaches 0.** The score-N best-output's source diff often contains the mutation (e.g. splitting
