@@ -1,1 +1,1 @@
-001508	001570	asm/sub_8001508.o(.text.sub_8001508)	sub_8001508 region-different gbadisasm descriptive asm
+001508	001570	src/BlitU8TileMapData.o(.text)	BlitU8TileMapData (permuter: hand-decomp + ySize-before-xSize statement order under -mjp-promote)

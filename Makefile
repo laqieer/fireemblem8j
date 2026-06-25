@@ -78,6 +78,7 @@ src/EkrDragonBodyAnimeMain.o: CC1FLAGS += -mjp-promote
 src/sub_8021A94.o: CC1FLAGS += -mjp-promote
 src/muctrl_0807CA10.o: CC1FLAGS += -mjp-promote
 src/bmunit_08017E7C.o: CC1FLAGS += -mjp-promote
+src/BlitU8TileMapData.o: CC1FLAGS += -mjp-promote
 src/TsaModifyFirstPalReverse.o: CC1FLAGS += -mjp-promote
 src/EfxTmCpyExt.o: CC1FLAGS += -mjp-promote
 src/efxLunaOBJ_Loop_C.o: CC1FLAGS += -mjp-promote
