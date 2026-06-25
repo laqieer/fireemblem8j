@@ -1,0 +1,4 @@
+gUnk_080DFD46	080DFD46	data	sub_8055F40 stored ptr (still in baserom)
+gUnk_085E3CD4	085E3CD4	data	sub_8055F40 stored ptr (still in baserom)
+gGfx_0878F150	0878F150	data	sub_8055F40 LZ77 gfx src (still in baserom)
+gPal_08794944	08794944	data	sub_8055F40 CpuFastSet pal src (still in baserom)
