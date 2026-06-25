@@ -2848,3 +2848,4 @@ check:
 .SECONDARY:
 src/sub_80707BC.o: CC1FLAGS += -mjp-promote
 src/eventscr_0800DD9C.o: CC1FLAGS += -mjp-promote
+src/sub_800E11C.o: CC1FLAGS += -mjp-promote
