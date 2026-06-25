@@ -10,7 +10,9 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.82%** (8342/8528 funcs) → **~186 functions genuinely unmatched**
+- **MATCHING-C: 97.83%** (8343/8528 funcs) → **~185 functions genuinely unmatched**
+  - +EfxDrsmmoyaMain (sub_80705E8, JP-only efx reconstruct, hand-closed no permuter: if/else timer order +
+    per-branch PlaySFX duplication + state3@0x10 load-schedule).
   - +StartEventBattle (sub_8012038, local-prototype-shadow fix for isBallista s8 — NO shared-header edit;
     re-land of the earlier CI-breaking attempt) +ply_memacc (sub_80D60E8, verbatim fe8u m4a under old_agbcc;
     the 41B "residual" was 100% standalone reloc/veneer noise, byte-identical in-tree).
