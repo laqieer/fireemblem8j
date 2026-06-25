@@ -5,7 +5,6 @@ AiCouldReachByBirdsEyeDistance	0803ACB0	thumb	cp_0803E2F4_0803E284
 FillMovementAndRangeMapForItem	0803B560	thumb	cp_0803E2F4_0803E284
 gBmMapSize	0202E4D0	data	cp_0803E2F4_0803E284
 MapAddInRange	0801A798	thumb	cp_0803E2F4_0803EDDC
-AiAttemptStealActionWithinMovement	0803DAF0	thumb	cp_0803E2F4_0803EDDC
 AiSetDecision	08039C98	thumb	cp_0803E2F4_0803EDDC
 GetItemMinRange	08017414	thumb	cp_0803E2F4_0803EDDC
 AreUnitsAllied	08024D3C	thumb	cp_0803E2F4_0803EDDC
