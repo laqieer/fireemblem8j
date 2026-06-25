@@ -4,17 +4,16 @@
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
 ## State (HEAD clean, `make compare` → OK, self-contained YES)
-- **HEAD `619c27a58`** (run `git rev-parse --short HEAD`). **main GREEN, self-contained 100%.**
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.78% (8339/8528, ~189 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.36% (structurally capped ~96%).
-- This session banked **+116 net matching-C** (8219→8339) via the engine below, kept docs current, fixed CI (StartEventBattle shared-header revert), corrected garbage cfbind addrs. Latest: **ekrGaugeMain + LoadUnit MERGED** (619c27a58).
-- 🔑 **KEY INSIGHT (act on this): ekrGaugeMain's NEAR was NOT a config-ceiling.** Its "extra `adds r4,r0,#0` after an `s16 >>3` asr" — the exact shape I'd filed under permuter-unreachable "config-ceiling" — was cracked by **int-local-widen** (`s32 r4` not `s16` folds the shift into the register). So **a SUBSET of the asrs/lsrs-cascade 'config-ceiling' NEARs are lever-fixable**, NOT permuter-only. A full-tail re-triage vs the lever toolkit is IN FLIGHT (`retriage-researcher`) to size the genuine-ceiling bucket honestly BEFORE any deep jp_agbcc patch investment.
+- **HEAD `1743681d8`** (run `git rev-parse --short HEAD`). **main GREEN, self-contained 100%.**
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.85% (8345/8528, ~183 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.36% (structurally capped ~96%).
+- This session banked **+8 net matching-C** (8337→8345): ekrGaugeMain, LoadUnit, BattleAIS_ExecCommands, StartEventBattle (local-prototype-shadow), ply_memacc (m4a old_agbcc), EfxDrsmmoyaMain (JP-only efx), SioBat_SetupLoop (msgid subs), StrInsertTact (SJIS). All gated + CI-green. **`docs/frontier.md` is the current SSoT for the full bucket map.**
+- 🏁 **STRATEGIC MILESTONE: matching-C is at its FLOOR for ports + ALL batch/lever approaches** (free-carve, int-widen, cast, both agbcc knobs, unnamed-sub fingerprint — every one empirically =0, 4× confirmed). **The ONLY path to 100% is RECONSTRUCT + PERMUTER, one function at a time.** Do NOT re-run lever/identification/knob sweeps (all proven 0 — see D277 + frontier milestone).
+- 🔑 **TWO PRODUCTIVE RECONSTRUCT VEINS opened this session:** (1) **SJIS/text** — JP copies 2-byte Shift-JIS chars where fe8u copies 1 byte; the natural `*dst++=*src++` idiom matches JP reg-alloc (StrInsertTact; recon-worker mining more). (2) **proc-name-string self-ID** — JP-only ProcScr procs identified by their embedded name string in ROM (efxLuce/efxDrsmmoya proved it; archaeologist scouting link-arena/name-entry/augury).
+- 🟧 **SPILL-SLOT/REG-ROTATION NEAR backlog** (structurally-correct reconstructs blocked by an agbcc frame-layout tiebreak the DEFAULT permuter plateaus on): ClassStatsDisplay_Loop (/home/laqieer/fe8j-wt-class), AdjustNewUnitPosition (/home/laqieer/fe8j-wt-anup), Event18_ColorFade. **UNLOCK = the transmuter** (reg-alloc-aware permuter, task #15, queued) — deploy as a BATCH when N accumulate; do NOT keep throwing 15k default runs.
 
-## IN-FLIGHT (background, dispatched this session)
-- **recon-worker** (carve-worker, worktree) — carving **BattleAIS_ExecCommands (sub_80599F8)** reconstruct → pushes `feat/BattleAIS_ExecCommands` for integration.
-- **retriage-researcher** (carve-researcher, read-only) — re-triaging ~189 remaining NEARs vs full lever toolkit, returning a RANKED carve-recipe list + bucket counts. Output drives the next worker batch.
-
-## ✅ ekrGaugeMain (sub_8051FB8) + LoadUnit (sub_801786C) — DONE (619c27a58)
-ekrGaugeMain: int-local-widen `s32 r4` cracked the asrs-cascade extra-mov NEAR; cfbind fixed via additive last-wins `zfix_ekrGaugeMain.tsv` (`gBanimWtaBonus→0203E1D0` + bound gEkrgauge_0/1/5 + gUnk_Banim_Ekrbattle_1..5; left gBanimmisc_2/3/4/7 + gEkrgauge_2/3/4 unbound as real data-TU defs). Gated `make clean && make compare`. LoadUnit: reconstruct, JP earlier build omits the Shadowshot/Stone secondary-weapon block + inlines GetUnitMaxHp/SetUnitHp via local `static inline`.
+## IN-FLIGHT (background fleet, dispatched this session)
+- **seb-worker** → efxLuceBGCOL pair (sub_8067040 + sub_8067160, JP-only efx) · **sio-worker** → HandleTurnRecordText (sub_80BC2A4, msgid subs) · **colorfade-worker** → ColorFadeSetup×4 (one permuter → +4) · **recon-worker** → SJIS/text vein hunt · **anup-worker** → sub_8046924 (link-arena reconstruct) · **archaeologist** → proc-name string-scan (final analysis pass).
+- Integrate each pushed `feat/` branch serially: forced-clean gate for new TUs, full `make clean && make compare` + CI watch for old_agbcc/cfbind/shared-type/m4a/layout changes.
 
 ## DETACHED PERMUTERS still running (may have cracked a NEAR late)
 Check `nonmatchings/<Fn>/output-0-*` for a zero-score solution before deferring these:
