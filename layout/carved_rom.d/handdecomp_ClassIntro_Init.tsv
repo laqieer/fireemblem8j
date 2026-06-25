@@ -1,0 +1,1 @@
+0B77A4	0B79D8	src/ClassIntro_Init.o(.text)	handdecomp: ClassIntro_Init (JP region-diff; LOCAL OpInfoEnterProcJ struct letterProcs@0x34/iconProc@0x5C/classReelEnt@0x64, reelStr@8/nameLength@0xC, count*28 layout, US opinfo.c)

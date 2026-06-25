@@ -1,0 +1,3 @@
+gUnkData_96	08AB8084	data	(ClassIntro_Init ApplyPalette src; residual rom data)
+gOpinfo_1	08AB0024	data	(ClassIntro_Init class-reel glyph font table; residual rom data)
+gUnkData_ClassIntroBgConfig	081F58C4	data	(ClassIntro_Init bgConfig 12xu16 SetupBackgrounds source; residual rom data)
