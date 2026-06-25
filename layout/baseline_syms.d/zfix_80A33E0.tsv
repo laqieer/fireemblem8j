@@ -1,0 +1,2 @@
+sub_8000D68	08000D68	thumb	sub_80A33E0 CpuSet-like copy (NEEDS_ALIAS)
+sPalLut_081F5664	081F5664	data	sub_80A33E0 palette-ptr LUT (NEEDS_ALIAS, shared rodata gap)
