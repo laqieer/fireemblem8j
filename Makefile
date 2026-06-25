@@ -221,6 +221,9 @@ endif
 CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -ffix-debug-line -g
 # agb_sram fast-SRAM routines byte-match only at -O1 (same as fe8u's `src/agb_sram.o`).
 src/ReadSramFast_Core.o src/WriteSramFast.o: CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -O1 -fhex-asm -ffix-debug-line -g
+# quorem (newlib dtoa libc): compiled non-interwork (libc was built without
+# -mthumb-interwork), so the epilogue is a direct `pop {pc}` not `pop{lr};bx`.
+src/quorem.o: CC1FLAGS := -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -ffix-debug-line -g
 # Spline_SetupChannels: JP defers s16 arg sign-extension (PROMOTE) vs eager US.
 src/spline_0800BA5C.o: CC1FLAGS += -mjp-promote
 src/spline_0800B4F0.o: CC1FLAGS += -mjp-promote
