@@ -10,7 +10,7 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 98.66%** (8414/8528 funcs) → **~114 functions unmatched** 🎉 (+77 net session). Triage workflow: of 206 still-asm, 153 carveable / ~9-20 residual. Carve-leaves workflow: +44 JP-only leaves (45 byte-matched, 53 turned out reg-coloring NEARs).
+- **MATCHING-C: 98.70%** (8417/8528 funcs) → **~111 unmatched** (+80 net session). Reconstruct workflow: +3 (Title_Loop_LightExplosionFx/XMapTransfer_0/sub_800B4F0); the other 52 reconstructs + 53 leaf-NEARs = the REG-COLORING/spill-slot RESIDUAL (well-decoded, source-form-invariant to the obvious forms — the permuter source-mutation grind, NOT a compiler knob: JP+US share agbcc so the diff is SOURCE not compiler).
   - +8 RECOVERED from stranded worktree branches: 3D rotation-matrix cluster (sub_8015188/D0/18), ekrBattleEnding
     pair (sub_805601C/8056078), worldmap event handlers EventB6/C4/BC (sub_800CC7C/CF5C/CDB0).
   - 🚨 **INTEGRATOR PROCESS LESSON (cost ~+8 nearly-missed): scan ALL `worktree-*` branches for committed-but-unpushed
