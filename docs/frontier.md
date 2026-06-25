@@ -10,7 +10,13 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.85%** (8345/8528 funcs) → **~183 functions genuinely unmatched**
+- **MATCHING-C: 97.88%** (8347/8528 funcs) → **~181 functions genuinely unmatched**
+  - +efxLuceBGCOL spawner+loop pair (sub_8067040/8067160, JP-only efx; `int terminator` not s16; 6 data binds).
+  - 💡 **KEY TECHNIQUE (seb-worker, efxLuceBGCOL): the default permuter FINDS the unlocking source mutation even when
+    its SCORE never reaches 0.** The score-N best-output's source diff often contains the mutation (e.g. splitting
+    `x=(v&m)|b` into two statements to drop a spill) that, applied to clean source, byte-matches. So **extract the
+    permuter best-output MUTATION, apply to clean source, byte-diff is the oracle** — don't require the permuter to
+    self-reach 0. This REOPENS the spill-slot NEAR backlog (seb-worker testing it on ClassStatsDisplay best-5).
   - +StrInsertTact (sub_800A118, Shift-JIS reconstruct: JP copies 2-byte SJIS chars where fe8u copies 1 byte;
     the natural `*dst++=*src++` pointer idiom colors source→r5/dest→r4 to match JP — a PRODUCTIVE new text vein).
   - +EfxDrsmmoyaMain (sub_80705E8, JP-only efx reconstruct, hand-closed no permuter: if/else timer order +
