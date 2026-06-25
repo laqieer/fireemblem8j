@@ -26,16 +26,21 @@ Even the 'self-cert leaves' (EfxAdvanceFrameLut + AddAttr2dBitMap) match the fe8
 
 ### (a) agbcc config-ceiling NEARs — HIGHEST-LEVERAGE UNLOCK (do this first)
 Functions that match the **fe8u ELF but not the JP ROM** via **register-save-ORDER** / **cross-jump-MERGE** /
-**register-PRESSURE-r7**. **`-mjp-promote` AND the decomp-permuter CANNOT crack these** — proven:
-- **AddAttr2dBitMap** — 2-halfword diff, permuter stuck **104k iters**, no zero.
-- **EfxAdvanceFrameLut** — cross-jump / tail-merge.
-- **SioBat_SetupLoop** — **+48B**, an extra callee-saved r7 (register pressure).
+**register-PRESSURE-r7**.
+- 🟩 **cross-jump: DONE as a config knob, but it is NOT a class.** Shipped `-mjp-nocrossjump` (commit
+  3eda1d23d, bit 0x40000, gates jump_optimize cross_jump OFF at toplev.c:3143; default-OFF byte-identical;
+  full make compare verified). **Empirical bucket-sizing (5 scans + compile-and-diff) = exactly ONE FE8J
+  function: EfxAdvanceFrameLut (sub_8056890)** — and it's MULTI-FACTOR (knob is necessary-not-sufficient:
+  also needs the JP source-merge = return signed `iframe`, drop the u16-uframe split + `register asm("r6")`
+  pin + lsl/asr tail; + -mjp-promote + a tiny reg-alloc residual). recon-worker is carving it now → `feat/
+  EfxAdvanceFrameLut`. **DO NOT scope a cross-jump sweep — there is no class behind the one-off.**
+- 🟥 **register-PRESSURE-r7 (SioBat_SetupLoop +48B, AddAttr2dBitMap 2-halfword): ALGORITHMIC** — agbcc
+  allocator qsort/find_reg, NOT a clean thumb.h flag (archaeologist Class-3 verdict). Leave to reconstruction.
 **Do NOT keep throwing multi-hour permuter runs at this class** (one run burned ~7h for 0).
-**PATH (likely unlocks a whole class):** extend the jp_agbcc patch — **`scripts/build_jp_agbcc.sh` +
-`scripts/agbcc_jp_promote.patch`** — with NEW `thumb.h` config knobs for **save-order / cross-jump /
-reg-pressure** (analogous to how PROMOTE_MODE + PROMOTE_FUNCTION_ARGS dissolved the s8/s16-hold and
-arg-order subclasses — see memory `jp-agbcc-config-ceiling` and `docs/agbcc_codegen_levers.md`). This is a
-TOOLCHAIN investigation, not a per-function grind.
+**REFUTED:** the "extend the patch → unlocks a WHOLE class" thesis held for PROMOTE (s8/s16-hold + arg-order)
+but NOT for cross-jump (one-off) or reg-pressure (algorithmic). The genuine-ceiling tail is **SMALL and
+dominated by int-widen-fixable + reconstruct**, not config-knob-forceable (see memory `jp-agbcc-config-ceiling`
+D2026-06-25). **HIGHEST-LEVERAGE NOW: the int-widen vein** (retriage-researcher sizing it) + reconstructs.
 
 ### (b) Reconstructs (carveable — rebuild from gbadisasm behavior, not a fe8u port)
 The fe8u port is a structural mismatch; rebuild from the gbadisasm behavior (often a first-compile match).
