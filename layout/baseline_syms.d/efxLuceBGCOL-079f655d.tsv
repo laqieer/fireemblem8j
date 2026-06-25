@@ -1,0 +1,6 @@
+ProcScr_efxLuceBGCOL	08601A10	data	efxLuceBGCOL proc script (JP)
+FrameConf_efxLuceBGCOL	080E35F6	data	efxLuceBGCOL frame config (JP)
+Img_efxLuceBG	087778F0	data	efxLuceBG bg gfx (JP)
+TsaLut_efxLuceBG	087792E8	data	efxLuceBG tsa/pal lut (JP)
+Map_efxLuceBG	08779308	data	efxLuceBG bg map (JP)
+unk_efxLucePalBuf	020228AA	data	efxLuceBGCOL palette work buffer EWRAM (JP)
