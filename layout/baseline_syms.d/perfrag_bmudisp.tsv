@@ -8,5 +8,4 @@ gSMSSyncFlag	0203A4C8	data	bmudisp_080267A0
 AddUnitSprite	08027310	thumb	bmudisp_08027144
 GetUnitDisplayedSpritePalette	080270E0	thumb	bmudisp_08027144
 gSMSHandleIt	0203A4C4	data	bmudisp_08027144
-PutUnitSpriteIconsOam	0802758C	thumb	bmudisp_08027348
 gObject_16x32	085B8D04	data	bmudisp_08027348

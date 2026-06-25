@@ -1,0 +1,6 @@
+sPoisonIconSprites	085C3E18	data	PutUnitSpriteIconsOam icon-frame tables
+sSleepIconSprites	085C3CD4	data	PutUnitSpriteIconsOam icon-frame tables
+sBerserkIconSprites	085C3D38	data	PutUnitSpriteIconsOam icon-frame tables
+sSilenceIconSprites	085C3D78	data	PutUnitSpriteIconsOam icon-frame tables
+sSprite_Bmudisp_0	085C3E48	data	PutUnitSpriteIconsOam rescue-attack icon
+sRescuePalLutTemplate	080DC940	data	PutUnitSpriteIconsOam rescuePalLut memcpy template (6B)
