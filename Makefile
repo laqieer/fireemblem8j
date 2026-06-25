@@ -79,6 +79,7 @@ src/banim-ekrdragon-utils_08072974.o: CC1FLAGS += -mjp-promote
 src/banim-ekrgauge_08051FB8.o: CC1FLAGS += -mjp-promote
 src/banim-main.o: CC1FLAGS += -mjp-promote
 src/eventscr_0801060C.o: CC1FLAGS += -mjp-promote
+src/EventA8_WmUnitMoveFree.o: CC1FLAGS += -mjp-promote
 src/sub_80106A0.o: CC1FLAGS += -mjp-promote
 src/uichapterstatus_0809020C.o: CC1FLAGS += -mjp-promote
 src/EkrDragonBodyAnimeMain.o: CC1FLAGS += -mjp-promote

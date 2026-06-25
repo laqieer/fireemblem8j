@@ -18,4 +18,3 @@ GmMu_StartFadeIn	080C31F8	thumb	EventA3_WmShowUnitFaded
 GmMu_StartFadeOut	080C3218	thumb	EventA4_WmHideUnitFaded
 StartWmPlaceDot	080C7D78	thumb	EventBB_
 StartGmapAutoMu_Type0	080C8130	thumb	EventA9_WmUnitMovePaths
-StartGmapAutoMu_Type1	07E72DA4	thumb	EventA8_WmUnitMoveFree
