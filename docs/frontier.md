@@ -10,7 +10,13 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.88%** (8347/8528 funcs) → **~181 functions genuinely unmatched**
+- **MATCHING-C: 97.90%** (8349/8528 funcs) → **~179 functions genuinely unmatched**
+  - +LinkArenaTeamBuild_Init (sub_8046924, verbatim fe8u sio_term.c, msgid -0x75 shift; "Str→StrEx" was a
+    gbadisasm naming artifact). +sub_8048F78 (JP-only SIO text-draw leaf, from-scratch, 26/26 identical).
+  - 🟢 **PRODUCTIVE VEIN: JP-only small wrappers/leaves** (the size-match harness EXCLUDES these — no fe8u row to
+    match — but they byte-match from a faithful from-scratch decode). Cheap carve fuel. The **0x08048xxx SIO band**
+    (sub_8048AC4/CD8/BAC/D74/C08/C7C — Proc_Start/teardown/cursor/help-popup handlers, mostly all-named) is queued
+    to sio-worker. msgid-shift (-0x75) is the consistent JP link-arena/sio const pattern.
   - +efxLuceBGCOL spawner+loop pair (sub_8067040/8067160, JP-only efx; `int terminator` not s16; 6 data binds).
   - 💡 **KEY TECHNIQUE (seb-worker, efxLuceBGCOL): the default permuter FINDS the unlocking source mutation even when
     its SCORE never reaches 0.** The score-N best-output's source diff often contains the mutation (e.g. splitting
