@@ -10,10 +10,16 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.78%** (8339/8528 funcs) → **~189 functions genuinely unmatched**
+- **MATCHING-C: 97.80%** (8340/8528 funcs) → **~188 functions genuinely unmatched**
   - +ekrGaugeMain (int-local-widen `s32 r4` cracked the asrs-cascade extra-mov NEAR — a SUBSET of the
     "config-ceiling" NEARs are int-widen-fixable, NOT permuter-only; cfbind zfix) +LoadUnit
     (reconstruct: JP earlier build omits the Shadowshot/Stone secondary-weapon block).
+  - +BattleAIS_ExecCommands (JP sub_80599F8 reconstruct; gbadisasm-split 3 stubs→1; JP earlier build:
+    C03 clears debuff on `anim` only not the 4× gAnims loop, C07 Pierce omits the FROZEN-unfreeze block).
+  - 🔧 **CROSS-JUMP KNOB shipping:** the 3rd "genuine-ceiling" class (cross-jump/tail-merge) is now a
+    forceable agbcc thumb.h config flag `-mjp-nocrossjump` (bit 0x40000, toplev.c:3143) — validated
+    default-safe + proven to un-merge identical tails. Combined patch in scripts/agbcc_jp_promote.patch;
+    first target EfxAdvanceFrameLut (sub_8056890). REFINES the "config-ceiling unreachable" claim again.
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
