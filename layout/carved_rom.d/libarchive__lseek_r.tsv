@@ -1,0 +1,1 @@
+0DA940	0DA970	*libc.a:lseekr.o(.text)	_lseek_r lib-link
