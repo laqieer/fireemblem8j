@@ -218,6 +218,7 @@ src/ReadSramFast_Core.o src/WriteSramFast.o: CC1FLAGS := -mthumb-interwork -Wimp
 src/spline_0800BA5C.o: CC1FLAGS += -mjp-promote
 src/spline_0800B4F0.o: CC1FLAGS += -mjp-promote
 src/spline_0800B6C0.o: CC1FLAGS += -mjp-promote
+src/sub_800C224.o: CC1FLAGS += -mjp-promote
 src/eventscr_0800F4D0.o: CC1FLAGS += -mjp-promote
 src/eventscr_0800F41C.o: CC1FLAGS += -mjp-promote
 # LoadUnit_0: JP sign-extends s8 quiet/d params (asrs) vs eager-zero-extend US.
