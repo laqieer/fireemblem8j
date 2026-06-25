@@ -7393,3 +7393,22 @@ exact JP bytes regardless of library object size. **Remaining ~23:** `sub_80D524
 **INTEGRATOR NOTE:** campaign #5 workers repeatedly leaked carve attempts into the SHARED main tree (deleted
 asm/sub_80A6B90.s + a stray frag pointing at a non-existent src/.o); restore via `git checkout HEAD -- <asm> <frag>`
 + rm the stray BEFORE any main-tree make compare, and keep commits scoped (the stray was never committed).
+
+## D283 — Honest matching-C metric: denominator = true JP function total, not the US count
+**Date:** 2026-06-25. **Trigger:** user — "fix the metrics calculation to reflect the honest progress of jp version."
+**Bug:** `scripts/calcprogress.py` axis 2 computed `func_done / US_FUNCTIONS` with `US_FUNCTIONS = 8528` (the
+US ROM's function count). JP has region-different + JP-only functions the US ROM lacks, so the US count is too
+small a denominator: the axis read **99.99% (8527/8528)** while ~125 JP functions were still descriptive asm, and
+would have hit 100% with functions still uncompiled (and `final_goal_oracle.sh` gates "done" on all axes == 100%).
+**Fix:** denominator = the TRUE JP function total `func_done + func_asm` where `func_asm` = exported (uppercase-T)
+function-entry symbols across the asm/*.o objects still placed in `.text`. NOT per-object (undercounts multi-fn
+library blobs — `m4a_1.o` is 33 ARM fns, `arm.o` 15, `arm_call.o` 5) and NOT per-label (gbadisasm marks every
+internal branch target a `_<hex>` local label — a 2,936-byte fn emits ~200). Added a `GBADISASM_LABEL` (`_<hex>`)
+filter to `internal()`, which ALSO removed 23 such internal labels that were wrongly inflating the src numerator
+(they sat in two hand-carved asm-source TUs, `call_via.o` + `unitlistscreen_08094208.o`). **Result:** honest
+**98.55% (8508/8633, 125 still asm)** vs the old inflated 99.99%. **Adversarially verified** (decomp-verifier):
+strictly more conservative (numerator unchanged-or-lower, denominator larger), `matched + unmatched == total`,
+no div-by-zero, 100% reachable only at func_asm==0, build (`make compare`) unaffected (metric-only script). The
+code-BYTE axis (95.93% in src) was already honest and is unchanged. **Rationale:** the project's whole premise is
+an HONEST scorecard (docs/decomp-completion-standard.md); a denominator that lets the % read ~100% while real JP
+functions remain as asm violates that. This makes the goal harder and truthful, the opposite of score-gaming.
