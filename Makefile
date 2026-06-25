@@ -66,6 +66,7 @@ src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSo
 # -mjp-promote per-TU overrides — functions that only byte-match under the JP
 # promotion behavior: s8/s16-hold form (signedness preserved) and/or
 # declaration-order arg extension (PROMOTE_FUNCTION_ARGS). One flag, one agbcc.
+src/sub_8085DDC.o: CC1FLAGS += -mjp-promote
 src/muctrl_0807C178.o: CC1FLAGS += -mjp-promote
 src/NewEfxDarkGradoOBJ01piece.o: CC1FLAGS += -mjp-promote
 src/NewEfxHitQuake.o: CC1FLAGS += -mjp-promote
