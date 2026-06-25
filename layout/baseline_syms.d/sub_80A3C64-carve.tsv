@@ -1,0 +1,3 @@
+sub_8006710	08006710	thumb	sub_80A3C64 callee
+sub_80913FC	080913FC	thumb	sub_80A3C64 callee
+gUnk_088582BC	088582BC	data	sub_80A3C64 augury entry table (0x34 stride)
