@@ -61,7 +61,7 @@ CC1_OLD := tools/agbcc/bin/old_agbcc$(EXE)
 # only byte-match under old_agbcc (same as fe8u's `src/m4a.o: CC1 := CC1_OLD`).
 src/ClearModM.o src/m4aSongNumStart.o src/m4aSongNumStop.o \
 src/m4aSongNumContinue.o src/m4aSongNumStartOrChange.o \
-src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSound.o src/m4aSoundMode.o src/MPlayContinue.o src/MPlayFadeOut.o src/m4aMPlayFadeOutTemporarily.o src/m4aMPlayFadeIn.o src/m4aMPlayImmInit.o src/m4aSoundVSyncOff.o src/m4aSoundVSyncOn.o src/MPlayStart.o src/FadeOutBody.o src/TrkVolPitSet.o src/CgbOscOff.o src/CgbModVol.o src/m4aMPlayTempoControl.o src/m4aMPlayModDepthSet.o src/m4aMPlayLFOSpeedSet.o src/ply_xwave.o src/ply_memacc.o: CC1 := $(CC1_OLD)
+src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSound.o src/m4aSoundMode.o src/MPlayContinue.o src/MPlayFadeOut.o src/m4aMPlayFadeOutTemporarily.o src/m4aMPlayFadeIn.o src/m4aMPlayImmInit.o src/m4aSoundVSyncOff.o src/m4aSoundVSyncOn.o src/MPlayStart.o src/FadeOutBody.o src/TrkVolPitSet.o src/CgbOscOff.o src/CgbModVol.o src/m4aMPlayTempoControl.o src/m4aMPlayModDepthSet.o src/m4aMPlayLFOSpeedSet.o src/ply_xwave.o src/ply_memacc.o src/fflush.o: CC1 := $(CC1_OLD)
 
 # -mjp-promote per-TU overrides — functions that only byte-match under the JP
 # promotion behavior: s8/s16-hold form (signedness preserved) and/or
@@ -224,6 +224,8 @@ src/ReadSramFast_Core.o src/WriteSramFast.o: CC1FLAGS := -mthumb-interwork -Wimp
 # quorem (newlib dtoa libc): compiled non-interwork (libc was built without
 # -mthumb-interwork), so the epilogue is a direct `pop {pc}` not `pop{lr};bx`.
 src/quorem.o: CC1FLAGS := -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -ffix-debug-line -g
+# fflush (newlib libc.a fflush.o): old_agbcc codegen + non-interwork `pop {pc}` epilogue.
+src/fflush.o: CC1FLAGS := -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -ffix-debug-line -g
 # Spline_SetupChannels: JP defers s16 arg sign-extension (PROMOTE) vs eager US.
 src/spline_0800BA5C.o: CC1FLAGS += -mjp-promote
 src/spline_0800B4F0.o: CC1FLAGS += -mjp-promote
