@@ -1,1 +1,1 @@
-021C28	021C70	asm/sub_8021C28.o(.text.sub_8021C28)	sub_8021C28 region-different gbadisasm descriptive asm
+021C28	021C70	src/sub_8021C28.o(.text)	handdecomp: sub_8021C28 (permuter NEAR reconstruct)
