@@ -1,0 +1,1 @@
+0D9188	0D91C8	*libc.a:fwalk.o(.text)	fwalk.o whole object from libc.a (newlib _fwalk, JP devirt = _call_via_r8 veneer)
