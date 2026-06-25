@@ -27,13 +27,15 @@ Even the 'self-cert leaves' (EfxAdvanceFrameLut + AddAttr2dBitMap) match the fe8
 ### (a) agbcc config-ceiling NEARs — HIGHEST-LEVERAGE UNLOCK (do this first)
 Functions that match the **fe8u ELF but not the JP ROM** via **register-save-ORDER** / **cross-jump-MERGE** /
 **register-PRESSURE-r7**.
-- 🟩 **cross-jump: DONE as a config knob, but it is NOT a class.** Shipped `-mjp-nocrossjump` (commit
-  3eda1d23d, bit 0x40000, gates jump_optimize cross_jump OFF at toplev.c:3143; default-OFF byte-identical;
-  full make compare verified). **Empirical bucket-sizing (5 scans + compile-and-diff) = exactly ONE FE8J
-  function: EfxAdvanceFrameLut (sub_8056890)** — and it's MULTI-FACTOR (knob is necessary-not-sufficient:
-  also needs the JP source-merge = return signed `iframe`, drop the u16-uframe split + `register asm("r6")`
-  pin + lsl/asr tail; + -mjp-promote + a tiny reg-alloc residual). recon-worker is carving it now → `feat/
-  EfxAdvanceFrameLut`. **DO NOT scope a cross-jump sweep — there is no class behind the one-off.**
+- 🟥 **cross-jump: shipped as a config knob but ZERO FE8J yield — DO NOT USE.** Shipped `-mjp-nocrossjump`
+  (commit 3eda1d23d, bit 0x40000, gates jump_optimize cross_jump OFF at toplev.c:3143; default-OFF
+  byte-identical; full make compare + CI green). **Empirical compile-and-diff over all 16 nonmatchings/ +
+  5 asm scans: the knob NEVER reduces the diff (5 WORSE, 11 no-change, 0 improved); it makes EfxAdvanceFrameLut
+  WORSE (128→138).** JP is ALREADY the merged/cross-jumped form, so the knob (which separates tails) can only
+  diverge. **Never add `-mjp-nocrossjump` to any TU's CC1FLAGS.** Kept as harmless default-OFF dormant infra
+  (revert deferred to cleanup — see D277). EfxAdvanceFrameLut (sub_8056890) is a RECONSTRUCT (promote-only +
+  source-merge to return signed `iframe` + reg-alloc lever), NOT a knob carve — recon-worker on it → `feat/
+  EfxAdvanceFrameLut` (NEAR-risk, Class-3 reg-alloc).
 - 🟥 **register-PRESSURE-r7 (SioBat_SetupLoop +48B, AddAttr2dBitMap 2-halfword): ALGORITHMIC** — agbcc
   allocator qsort/find_reg, NOT a clean thumb.h flag (archaeologist Class-3 verdict). Leave to reconstruction.
 **Do NOT keep throwing multi-hour permuter runs at this class** (one run burned ~7h for 0).
