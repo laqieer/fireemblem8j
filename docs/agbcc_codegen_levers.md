@@ -114,3 +114,20 @@ Reclaim hit rate: **17 of ~142 classified dead-ends** (lsr/asr 31 + reg-alloc 93
 scheduling 36, minus overlap) recovered to byte-0; the rest split between the
 unsolved patterns above (provisional — mark UNSOLVED, not DEADEND) and genuine
 region-different behavior (different US source).
+
+## 7. agbcc reg-alloc FLAG MATRIX does NOT crack the spill-decision NEAR class (D284, tested)
+The remaining ~42 Thumb NEARs (Event18_ColorFade 800E1FC, AdjustNewUnitPosition 807C8DC, 80CAEF4, 806A41C,
+800A34C/594, 80A2E64/3528, etc.) are byte-CLOSE reconstructs whose only residual is agbcc choosing a different
+register-allocation / SPILL decision than the JP ROM's original build (e.g. JP anchors proc to ip + spills 2
+color locals to stack; agbcc-here pins proc to a callee-saved r7 + spills 1). HYPOTHESIS tested: a per-TU agbcc
+optimization flag controls this. RESULT (Event18_ColorFade, 204B, base residual 95 differing bytes): NONE of the
+11 combos helped — `-fcaller-saves` (95, no change), `-fno-regmove` (105 worse), `-fforce-mem` (95),
+`-ffixed-r7` (96), `-fcall-used-r7` (95), `-ffixed-r7 -ffixed-r8` (185 worse), `-fcall-used-r7 -fcall-used-r8`
+(176), `-fcall-saved-ip` (169), `old_agbcc` (152), `old_agbcc -mjp-promote` (105). The flags either no-op or
+make it worse; 95 is the floor. CONCLUSION: the spill-decision residual is NOT a forceable per-TU flag — it is a
+genuine reg-allocator-internal difference. It is a SOURCE-reconstruction problem (the original JP C source
+structure differs from the reconstruction in a way the permuter's mutation neighborhood may or may not reach),
+crackable only by (a) LONG decomp-permuter runs (millions of iters / days — the workers capped at 30-60k and
+plateaued; lucky seeds may still hit 0), or (b) reproducing the original IS-build agbcc reg-allocator. NOT by
+flags. Single-TU test harness: `cpp $CPPFLAGS src/F.c | iconv -f UTF-8 -t CP932 | tools/agbcc/bin/agbcc
+$CC1FLAGS <flag> -o /tmp/t.s; as; objcopy -O binary -j .text; cmp -l vs the assembled oracle .text`.
