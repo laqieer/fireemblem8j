@@ -10,7 +10,12 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.95%** (8353/8528 funcs) → **~175 functions genuinely unmatched**
+- **MATCHING-C: 97.97%** (8355/8528 funcs) → **~173 functions genuinely unmatched**
+  - +sub_8048AC4 + sub_8048BAC (JP-only SIO start/teardown leaves, from-scratch). The JP-only LEAF veins
+    (SIO/efx/augury helpers — NOT proc functions, which are all carved) are the productive +matching-C now.
+  - ⚠️ stale-base merge note: workers branched before a prior merge produce a feat branch whose diff-vs-main
+    shows the intervening carves as "deleted" — the 3-WAY MERGE keeps both sides' independent additions
+    (verified: ColorFade preserved + SIO added). Safe for independent new-TU carves; VERIFY no regression on merge.
   - +ColorFadeSetup×4 (sub_80017EC/8001870/80018F0/8001974, +4 from one recipe).
   - 💡 **`short`-PARAM-PROMOTION + PROTO-HIDE technique (colorfade-worker, reusable):** for a u8/s8-param func whose
     residual is the base-load-vs-arg-extension SCHEDULING order (JP loads the loop-invariant global base BEFORE
