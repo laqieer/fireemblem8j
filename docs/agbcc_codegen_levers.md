@@ -144,3 +144,35 @@ the now-exact size — -fno-gcse fixes the GCSE-eviction axis, not every colorin
 -mjp-promote: `src/<fn>.o: CC1FLAGS += -fno-gcse`. NOTE: -mjp-promote and -fno-gcse can CONFLICT (mjp-promote
 strips the s16 sign-extend moves that -fno-gcse needs for 80A2E64) — try each alone and combined. Add this to
 the all-levers re-examination toolset (re-run the spill-NEARs WITH -fno-gcse before declaring a ceiling).
+
+## 9. The FULL spill/reg-alloc lever set (D286, agbcc-source-verified) — corrects §7
+agbcc source (../fireemblem8u/.deps/agbcc/gcc/) confirms: NO instruction scheduler (so -fschedule-insns* are
+no-ops); reg choice is driven by the PRIORITY formula `floor_log2(n_refs)*n_refs*size/live_length` (higher=wins
+a hard reg first) + COPY-PREFERENCES (set_preference) + r0->r7 ascending scan, NOT by REG_ALLOC_ORDER (undefined
+for thumb) and NOT by -ffixed/-fcall-used masks (confirmed dead — D284 was right those no-op). Caller-save vs
+callee-save/spill is decided by `CALLER_SAVE_PROFITABLE = 4*CALLS < REFS` (regs.h:201).
+UNTESTED-IN-D284 FLAGS (now tried on the 6 staged spill-NEARs — they REDUCE residual but did NOT reach 0 on
+these specific fns; still worth a per-TU probe on others): `-Os` (swaps PRE for classic-GCSE+code-hoisting, a
+different redundancy/live-range model), `-fno-caller-saves` (D284 only tried the no-op -fcaller-saves; the OFF
+direction forces callee-saved/spill), `-fno-strict-aliasing` (shortens reg lifetimes), `-fno-expensive-optimizations`.
+Best combo seen: 80A2E64 -fno-gcse -fno-caller-saves 364->297. THE REAL LEVERS for the residual coloring are
+SOURCE-LEVEL (reach the IR the flag matrix can't):
+  (a) cut/add the live pointer's REFERENCE COUNT (cache a field `int v=p->f;` to touch p fewer times -> flips
+      4*CALLS<REFS and the priority formula) — the #1 source idiom per agbcc source.
+  (b) shorten/lengthen a value's LIVE RANGE (sink the loser's def, hoist the winner's) — pri ∝ 1/live_length.
+  (c) COPY-PREFERENCE steering: `int t = arg;` early ties t's allocno to that arg's hard reg (controls r4-vs-r5).
+  (d) fe8u's PROVEN idiom (../fireemblem8u/src/spline.c, the matched twin family for 800A34C): name pointer
+      locals AFTER their target register (`s16 *r8; u32 **sl;`) so decl-order colors them, + selective
+      `register int x asm("rN")` pins ONLY where natural coloring fails (blind pins make it WORSE — verified
+      CheckCanSummon 7->74). For 80A3528 the oracle keeps the tilemap base in low r4/r5/r6 (the `u16 *tm` idiom).
+  (e) `&x` (addressable -> forced to stack) or `volatile` (per-use reload) on the local JP keeps spilled — a
+      scalpel alternative to -fno-gcse.
+Per-NEAR probe order (cheapest first): -Os, -fno-caller-saves, -fno-strict-aliasing x {-mjp-promote,-fno-gcse};
+then source idioms (a)-(e); then the permuter; the linked make compare is the only oracle.
+
+## 10. decomp.me scratches posted (D286) — community matching enabled
+The 6 hardest spill-NEARs are public decomp.me scratches (platform=gba, compiler=agbcc; the 2 -mjp-promote ones
+show a ~2-instr delta since stock decomp.me agbcc lacks the fork flag):
+  sub_800A34C  https://decomp.me/scratch/5sdMe   Event18_ColorFade https://decomp.me/scratch/WmsgZ
+  AdjustNewUnitPosition https://decomp.me/scratch/FtYfC   sub_80A2E64 https://decomp.me/scratch/3IquK
+  sub_80A3528  https://decomp.me/scratch/0I8PP   sub_80CAEF4 https://decomp.me/scratch/kKWJ0
