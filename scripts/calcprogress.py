@@ -14,7 +14,9 @@ non-inflated numbers:
 
   1. BUILD SELF-CONTAINMENT  = (ROM - baserom.gba incbin bytes) / 16,777,216
      The single ungameable number (from scripts/check_selfcontained.py). ~17%.
-  2. MATCHING-C FUNCTIONS    = matching-C funcs in src/*.o / 8,528.  ~25.6%.
+  2. MATCHING-C FUNCTIONS    = decompiled funcs (src/*.o + libc/libgcc) / TRUE JP
+     function total (decompiled + still-as-asm objects), NOT the US count -- so the
+     % can't read ~100% while JP functions remain as descriptive asm.
      (gbadisasm descriptive asm is DISASSEMBLY, not decompilation -- NOT counted.)
   3. EXTRACTED DATA          = genuinely-extracted asset bytes (C structs / PNG)
      / real data total.  ~0.12%.  (named `.incbin "baserom"` is NOT extraction.)
@@ -43,8 +45,12 @@ import check_selfcontained as sc  # noqa: E402
 
 ROM_SIZE = sc.ROM_SIZE  # 16,777,216
 
-# Authoritative denominators from the US decomp (../fireemblem8u, `sh scripts/calcrom.sh`).
-# Functions: 8,528 US-target functions is the honest "100%" for the C axis.
+# US reference function count (../fireemblem8u, `sh scripts/calcrom.sh`). Kept ONLY
+# as a cross-reference -- it is NOT the matching-C denominator. JP has region-different
+# and JP-only functions the US ROM lacks, so using the US count understated the JP
+# remainder (the % read ~100% while dozens of JP functions were still descriptive asm).
+# The honest denominator is the TRUE JP function total = funcs + func_lib + func_asm,
+# computed below, so 100% is reached only when ZERO functions remain as asm.
 US_FUNCTIONS = 8528
 # JP code region [0x08000000, 0x080DC134): used only for the portal `code` byte metric.
 CODE_REGION = (0x08000000, 0x080DC134)
@@ -88,6 +94,7 @@ def read_manifest(name):
 code_src = code_asm = code_lib = 0  # .text bytes by source kind (lib = libc.a/libgcc.a)
 data_src = data_asm = data_lib = 0  # .data/.rodata bytes by source kind (lib = archives)
 objs = set()
+asm_text_objs = set()  # distinct asm/*.o objects still placed in .text (= still-asm funcs)
 for r in read_manifest("carved_rom"):
     start, end, sec = int(r[0], 16), int(r[1], 16), r[2]
     size = end - start
@@ -107,6 +114,8 @@ for r in read_manifest("carved_rom"):
             code_lib += size
         else:
             code_asm += size
+            if obj:
+                asm_text_objs.add(obj)
     elif secname.startswith((".rodata", ".data")):
         if is_src:
             data_src += size
@@ -144,8 +153,14 @@ def nm(obj):
     return syms
 
 
+# gbadisasm marks every internal branch target with a `_<hexaddr>` local label; these
+# are NOT functions and must not be counted as still-asm function entries.
+GBADISASM_LABEL = re.compile(r"^_[0-9A-Fa-f]{6,8}$")
+
+
 def internal(name):
-    return name.startswith((".", "$", "__")) or name == "gcc2_compiled."
+    return (name.startswith((".", "$", "__")) or name == "gcc2_compiled."
+            or GBADISASM_LABEL.match(name) is not None)
 
 
 # --- matching-C functions (axis 2): text symbols compiled from src/*.o ---
@@ -229,7 +244,24 @@ self_bytes = ROM_SIZE - dep_bytes
 selfcontain_pct = pct(self_bytes, ROM_SIZE)
 
 func_done = funcs + func_lib          # decompiled (src) + linked from real-source library
-func_pct = pct(func_done, US_FUNCTIONS)
+# Still-as-descriptive-asm FUNCTIONS: count exported (uppercase-T) function-entry
+# symbols across the asm/*.o code objects still placed in .text -- NOT per-object and
+# NOT per-label. Per-object would undercount the few multi-function library blobs
+# (asm/m4a_1.o alone is 33 ARM functions, asm/arm.o 15, asm/arm_call.o 5); per-label
+# would wildly OVERcount because gbadisasm marks every internal branch target a `_hex`
+# local label (a 2,936-byte function emits ~200) -- those are filtered by internal().
+# Counting the global-T entries gives the true per-function tail (a couple of ROM-header
+# entry labels marginally over- and one newlib static helper under-count, ~offsetting).
+func_asm = 0
+for obj in sorted(asm_text_objs):
+    for typ, name in nm(obj):
+        if not internal(name) and typ == "T":
+            func_asm += 1
+# HONEST denominator = the TRUE JP function total (decompiled + still-asm), NOT the US
+# count. As a function moves asm->src the numerator rises and func_asm falls by the same
+# amount, so the total is stable and the % reaches 100% only at func_asm == 0.
+func_total = func_done + func_asm
+func_pct = pct(func_done, func_total)
 
 # Real data total = all data the linked ROM accounts for (extracted-to-source +
 # real-source library + still-as-incbin/descriptive-asm). NOT data_src (tautology).
@@ -248,8 +280,9 @@ out.append(f"1. BUILD SELF-CONTAINMENT : {selfcontain_pct:6.2f}%  "
            f"({self_bytes}/{ROM_SIZE} bytes from source; "
            f"{dep_bytes} still .incbin baserom)  -> target 100%")
 out.append(f"2. MATCHING-C FUNCTIONS   : {func_pct:6.2f}%  "
-           f"({func_done}/{US_FUNCTIONS} funcs done = {funcs} compiled from src/*.c "
-           f"+ {func_lib} linked from libc/libgcc; gbadisasm asm NOT counted)  -> target 100%")
+           f"({func_done}/{func_total} JP funcs done = {funcs} compiled from src/*.c "
+           f"+ {func_lib} linked from libc/libgcc; {func_asm} still descriptive asm; "
+           f"gbadisasm asm NOT counted)  -> target 100%")
 out.append(f"3. EXTRACTED DATA         : {data_pct:6.2f}%  "
            f"({data_src}/{data_total} bytes in C/PNG assets; "
            f"named .incbin is NOT extraction)  -> target 100%")
@@ -294,14 +327,14 @@ if data_lib:
 out.append(f"{data_asm} bytes of data in data ({pct(data_asm, data_total):.4f}%)")
 out.append(f"0 bytes of data in banim (0.0000%)")
 out.append(f"0 bytes of data in sound (0.0000%)")
-out.append(f"{US_FUNCTIONS} functions in total, {func_done} functions ({func_pct:.4f}%) have been decompiled.")
-out.append("0 functions are marked as unmatched.")
+out.append(f"{func_total} functions in total, {func_done} functions ({func_pct:.4f}%) have been decompiled.")
+out.append(f"{func_asm} functions are marked as unmatched.")
 
 # (c) C-decompiled (NON-matching): readable staging C in src/nonmatching/*.c (D26).
 # Reported on its OWN line so it does NOT inflate any axis above -- these functions
 # are DOCUMENTED, NOT byte-matched (their bytes still come from asm/<fn>.s).
 nonmatch_c = len(glob.glob("src/nonmatching/*.c"))
 out.append(f"{nonmatch_c} functions staged as non-matching C "
-           f"({pct(nonmatch_c, US_FUNCTIONS):.4f}% of {US_FUNCTIONS}) -- documented, NOT byte-matched.")
+           f"({pct(nonmatch_c, func_total):.4f}% of {func_total}) -- documented, NOT byte-matched.")
 
 sys.stdout.write("\n".join(out) + "\n")
