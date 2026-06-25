@@ -4,12 +4,17 @@
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
 ## State (HEAD clean, `make compare` → OK, self-contained YES)
-- **HEAD `a82f84903`** (run `git rev-parse --short HEAD`). **main GREEN + CI GREEN, self-contained 100%.**
-- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.76% (8337/8528, ~191 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.36% (structurally capped ~96%).
-- This session banked **+114 net matching-C** (8219→8337; from the 8150 baseline that is **+187**) via the engine below, kept docs current, fixed CI (StartEventBattle shared-header revert), and corrected 3 garbage cfbind addrs. The clean-recipe vein is **EXHAUSTED** — the tail is the 3-bucket frontier below. The in-flight worker's ekrBattleInRoundIdle + SaveMenuExtrasMenuLoop are now MERGED (no pending feat/* branches).
+- **HEAD `619c27a58`** (run `git rev-parse --short HEAD`). **main GREEN, self-contained 100%.**
+- BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 97.78% (8339/8528, ~189 left)** · EXTRACTED-DATA 100% (of measured set) · NAMED 85.36% (structurally capped ~96%).
+- This session banked **+116 net matching-C** (8219→8339) via the engine below, kept docs current, fixed CI (StartEventBattle shared-header revert), corrected garbage cfbind addrs. Latest: **ekrGaugeMain + LoadUnit MERGED** (619c27a58).
+- 🔑 **KEY INSIGHT (act on this): ekrGaugeMain's NEAR was NOT a config-ceiling.** Its "extra `adds r4,r0,#0` after an `s16 >>3` asr" — the exact shape I'd filed under permuter-unreachable "config-ceiling" — was cracked by **int-local-widen** (`s32 r4` not `s16` folds the shift into the register). So **a SUBSET of the asrs/lsrs-cascade 'config-ceiling' NEARs are lever-fixable**, NOT permuter-only. A full-tail re-triage vs the lever toolkit is IN FLIGHT (`retriage-researcher`) to size the genuine-ceiling bucket honestly BEFORE any deep jp_agbcc patch investment.
 
-## ⚠️ NEXT CARVEABLE TARGET — ekrGaugeMain (sub_8051FB8), addrs already decoded
-A prior worker fully decoded this corrupt-cfbind field-writer but deferred it as a reg-alloc NEAR (JP frame 0x124 vs agbcc 0x118, `asrs r4,r0,#0x13` direct-write vs agbcc's `asrs;adds r4` extra-mov cascade — only ~10 insns apart under `-mjp-promote`). **Decoded fixes (apply via additive last-wins `zfix_ekrGaugeMain.tsv`, NOT editing the shared cfbind row):** `gBanimMaxHP 0x68504652`(garbage)→**0x0203E1AC**; `gBanimWtaBonus 0x0203E1D8`(wrong)→**0x0203E1D0**. gBanimmisc_2/3/4/7 + gEkrgauge_2/3/4 are REAL data-TU defs (do NOT bind). Needs `-mjp-promote` + a local `EkrGauge_BuildHpBarGfx` proto + a permuter/reg-pin pass for the asrs-cascade. **cfbind change → gate with `make clean && make compare`** + `gh run list` (CI lesson below).
+## IN-FLIGHT (background, dispatched this session)
+- **recon-worker** (carve-worker, worktree) — carving **BattleAIS_ExecCommands (sub_80599F8)** reconstruct → pushes `feat/BattleAIS_ExecCommands` for integration.
+- **retriage-researcher** (carve-researcher, read-only) — re-triaging ~189 remaining NEARs vs full lever toolkit, returning a RANKED carve-recipe list + bucket counts. Output drives the next worker batch.
+
+## ✅ ekrGaugeMain (sub_8051FB8) + LoadUnit (sub_801786C) — DONE (619c27a58)
+ekrGaugeMain: int-local-widen `s32 r4` cracked the asrs-cascade extra-mov NEAR; cfbind fixed via additive last-wins `zfix_ekrGaugeMain.tsv` (`gBanimWtaBonus→0203E1D0` + bound gEkrgauge_0/1/5 + gUnk_Banim_Ekrbattle_1..5; left gBanimmisc_2/3/4/7 + gEkrgauge_2/3/4 unbound as real data-TU defs). Gated `make clean && make compare`. LoadUnit: reconstruct, JP earlier build omits the Shadowshot/Stone secondary-weapon block + inlines GetUnitMaxHp/SetUnitHp via local `static inline`.
 
 ## DETACHED PERMUTERS still running (may have cracked a NEAR late)
 Check `nonmatchings/<Fn>/output-0-*` for a zero-score solution before deferring these:
