@@ -38,6 +38,7 @@ src/*.s
 # syscall wrappers. These are COMMITTED sources, not generated, and count as matching-C.
 !src/libagbsyscall.s
 !src/call_via.s
+!src/agbsyscall_80D5244.s
 src/data/*.s
 src/data/map/*.s
 src/data/**/*.s

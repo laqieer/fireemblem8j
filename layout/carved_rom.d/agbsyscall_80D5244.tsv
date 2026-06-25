@@ -1,0 +1,1 @@
+0D5244	0D5248	src/agbsyscall_80D5244.o(.text.agbsyscall_80D5244)	lone BIOS svc 0x2A wrapper reproduced as real source
