@@ -68,6 +68,7 @@ src/m4aSongNumStartOrContinue.o src/m4aSoundInit.o src/MPlayExtender.o src/CgbSo
 # declaration-order arg extension (PROMOTE_FUNCTION_ARGS). One flag, one agbcc.
 src/PrepareSineWaveScanlineBufExt.o: CC1FLAGS += -mjp-promote
 src/sub_8085DDC.o: CC1FLAGS += -mjp-promote
+src/sub_80B3564.o: CC1FLAGS += -mjp-promote
 src/muctrl_0807C178.o: CC1FLAGS += -mjp-promote
 src/NewEfxDarkGradoOBJ01piece.o: CC1FLAGS += -mjp-promote
 src/NewEfxHitQuake.o: CC1FLAGS += -mjp-promote
