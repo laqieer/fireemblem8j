@@ -1,0 +1,3 @@
+gArenaUnitRecord	02014FD0	data	link-arena unpacked record (sub_80A7150)
+gArenaReadCursor	02014EF8	data	link-arena read cursor (sub_80A7150)
+gArenaReadCursorCopy	02014F24	data	link-arena read cursor snapshot (sub_80A7150)
