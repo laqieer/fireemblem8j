@@ -16,10 +16,23 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
     (reconstruct: JP earlier build omits the Shadowshot/Stone secondary-weapon block).
   - +BattleAIS_ExecCommands (JP sub_80599F8 reconstruct; gbadisasm-split 3 stubs→1; JP earlier build:
     C03 clears debuff on `anim` only not the 4× gAnims loop, C07 Pierce omits the FROZEN-unfreeze block).
-  - 🔧 **CROSS-JUMP KNOB shipping:** the 3rd "genuine-ceiling" class (cross-jump/tail-merge) is now a
-    forceable agbcc thumb.h config flag `-mjp-nocrossjump` (bit 0x40000, toplev.c:3143) — validated
-    default-safe + proven to un-merge identical tails. Combined patch in scripts/agbcc_jp_promote.patch;
-    first target EfxAdvanceFrameLut (sub_8056890). REFINES the "config-ceiling unreachable" claim again.
+  - +BattleAIS_ExecCommands (JP sub_80599F8 reconstruct; gbadisasm-split 3 stubs→1).
+  - 🗺 **EMPIRICAL FRONTIER MAP (D2026-06-25, validated full-TU compile+byte-diff harness over the 33 named
+    still-asm funcs that have a fe8u source).** HONEST bucket counts — **the lever veins are EXHAUSTED for the
+    named set; remaining yield is reconstruct + permuter + the unnamed-sub harvest:**
+    - **free-carve (0-real-diff) = 0.** int-widen = **0** (the re-truncation-count heuristic gave 9 FALSE
+      positives; BYTE-DIFF is the only oracle; int-widen only helps a TIGHT near-match where truncation is the
+      SOLE residual — ekrGaugeMain was the one historical win and was already tight). cast-signedness = 0.
+    - **permuter ≈ 11** (reg-renumber/schedule): AddAttr2dBitMap (reg-save-order, algorithmic), PutFaceOnBackGround,
+      Event0E_STAL, Event0F_CounterOps, AdjustNewUnitPosition, GMapScreen_UpdateScroll, 4× ColorFadeSetupFrom*
+      (r0↔r2 pool-reg, likely ONE shared fix), **ply_memacc (m4a → try `CC1 := old_agbcc` FIRST: drops 100→41B)**.
+    - **reconstruct ≈ 22** (the bulk of named yield): StrInsertTact, EventA8_WmUnitMoveFree, PutUnitSpriteIconsOam,
+      UnitList_PutRow, HandleTurnRecordText, OpAnimFaceMontageBegin, Event1B_TEXTSHOW, StartEventBattle (re-land
+      LOCAL-prototype, NOT shared-header), Tactician_InitScreen, ClassIntro_Init, Guide_MainLoop, GmapScreen2_Loop,
+      WriteNewGameSave, PrepareBattleGraphicsMaybe (+266B, huge), AgbMain, SioBat_SetupLoop, ClassStatsDisplay_Loop, …
+    - **+~156 UNNAMED sub_** (no fe8u name) = a separate fingerprint-harvest vein.
+    - **cross-jump/reg-save-order/reg-pressure knobs = ALL empirically ZERO yield (D277), do NOT pursue.**
+    Harness: /tmp/cjtest/ (bucket.sh, classify2.py, retrunc.sh) — byte-diff is the oracle, re-trunc count is not.
 - 🛠 **SCALING METHOD (this session, +44): parallel carve-researchers → serial integration.**
   Dispatch 3-5 `carve-researcher` agents (read-only) in ONE message, each producing a complete
   build-ready recipe (verbatim fe8u C, all `#include`s grepped from JP `include/`, callee/data
