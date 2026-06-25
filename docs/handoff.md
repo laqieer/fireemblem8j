@@ -33,9 +33,11 @@ Functions that match the **fe8u ELF but not the JP ROM** via **register-save-ORD
   5 asm scans: the knob NEVER reduces the diff (5 WORSE, 11 no-change, 0 improved); it makes EfxAdvanceFrameLut
   WORSE (128→138).** JP is ALREADY the merged/cross-jumped form, so the knob (which separates tails) can only
   diverge. **Never add `-mjp-nocrossjump` to any TU's CC1FLAGS.** Kept as harmless default-OFF dormant infra
-  (revert deferred to cleanup — see D277). EfxAdvanceFrameLut (sub_8056890) is a RECONSTRUCT (promote-only +
-  source-merge to return signed `iframe` + reg-alloc lever), NOT a knob carve — recon-worker on it → `feat/
-  EfxAdvanceFrameLut` (NEAR-risk, Class-3 reg-alloc).
+  (revert deferred to cleanup — see D277). `-mjp-regorder` is ALSO empirically zero (worsens its own exemplar
+  AddAttr2dBitMap 10→12). **EfxAdvanceFrameLut (sub_8056890) = CONFIRMED CEILING, do NOT retry:** the JP-shape
+  reconstruct (single signed `int` frame, return it directly) reaches 136B vs JP 132B but 2 residual diffs
+  (load-order reg-alloc tiebreak 0B + cross-jump tail-merge +4B) are unreachable by any lever. Leave as the
+  stub (best reconstruct saved /tmp/efxadvance_best_reconstruct.c).
 - 🟥 **register-PRESSURE-r7 (SioBat_SetupLoop +48B, AddAttr2dBitMap 2-halfword): ALGORITHMIC** — agbcc
   allocator qsort/find_reg, NOT a clean thumb.h flag (archaeologist Class-3 verdict). Leave to reconstruction.
 **Do NOT keep throwing multi-hour permuter runs at this class** (one run burned ~7h for 0).

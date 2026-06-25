@@ -7279,8 +7279,13 @@ build C03/C07 divergences). Each gated full `make clean && make compare` OK + CI
   "four separate beq" is a normal `||` disjunction into that shared return, not separate tails. So the knob (which
   SEPARATES tails) can only diverge. EfxAdvanceFrameLut's real diff is REGISTER ALLOCATION (Class-3 algorithmic),
   carveable only as a reconstruct (source-merge to return signed `iframe` + -mjp-promote + int-widen/permuter).
-- register-PRESSURE-r7 = ALGORITHMIC (allocator qsort/find_reg, no clean flag). register-save-ORDER = unsized
-  (expected ~zero).
+- register-save-ORDER (`-mjp-regorder`) = also empirically ZERO: tested on its OWN exemplar AddAttr2dBitMap
+  (sub_8001570) it makes the diff WORSE (10→12) — the knob flips the prologue push-cache loop, but the real
+  diff is the arg→high-reg body saves (`mov ip,r6; mov r8,r2`) emitted by the allocator, not the prologue.
+  register-PRESSURE-r7 = ALGORITHMIC (allocator qsort/find_reg, no clean flag). **All 3 ceiling-class knobs
+  now empirically closed; only `-mjp-promote` (s8/s16-hold + arg-order) was ever a real class.** EfxAdvanceFrameLut
+  confirmed a genuine ceiling: a JP-shape reconstruct reaches 136B vs JP 132B but 2 residual diffs (load-order
+  reg-alloc tiebreak 0B + cross-jump tail-merge +4B) are unreachable by any lever — leave as the gbadisasm stub.
 
 **Decision.** (1) KEEP commit 3eda1d23d as harmless default-OFF documented dormant infra — reverting costs a full
 agbcc rebuild + CI cycle for ZERO matching-C gain; it is CI-green and byte-identical default-OFF. **Do NOT apply
