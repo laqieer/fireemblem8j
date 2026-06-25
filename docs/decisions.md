@@ -7253,3 +7253,39 @@ only instruction selection, ordering, and register allocation change. Concrete p
  Intelligent Systems shipped — not "expected" correct but *proven* identical to the shipped, tested game.
  Combined with default-OFF (the ~8082 non-flag TUs are provably untouched) and per-TU opt-in, a flag that
  ever produced different-but-wrong bytes would FAIL `make compare`; it passes on every carve.
+
+## D277 — the 3rd "ceiling class" (cross-jump) IS a forceable knob but has ZERO FE8J yield; matching-C 97.71→97.80%
+
+**Context.** Continuing the D276 thesis that "agbcc ceiling" classes are thumb-config knobs. The D2026-06-24
+note named 3 still-open classes (register-save-ORDER, cross-jump/tail-merge, register-PRESSURE-r7) as the
+"highest-leverage unlock — extend the patch could dissolve a whole class." This session tested that empirically.
+
+**Session matching-C gains (+3 net, 8337→8340, 97.80%):** ekrGaugeMain (sub_8051FB8 — int-local-widen `s32 r4`
+cracked the asrs-cascade extra-mov NEAR; cfbind zfix), LoadUnit (sub_801786C reconstruct, JP earlier build omits
+the Shadowshot/Stone block), BattleAIS_ExecCommands (sub_80599F8 reconstruct, gbadisasm 3-stub→1; JP earlier
+build C03/C07 divergences). Each gated full `make clean && make compare` OK + CI green.
+
+**Cross-jump knob — shipped, validated, but empirically ZERO yield (the thesis is REFUTED for this class).**
+- A compiler-archaeology agent built a throwaway agbcc and confirmed cross-jump/tail-merge is gated by ONE arg
+  of `jump_optimize` at `toplev.c:3143`. Shipped `-mjp-nocrossjump` (bit 0x40000) + the low-yield `-mjp-regorder`
+  (bit 0x80000) as a combined patch into `scripts/agbcc_jp_promote.patch` (commit 3eda1d23d). Validated:
+  compiles clean, **default-OFF byte-identical** (full make clean&&compare OK + CI green), and the knob provably
+  un-merges identical tails on a toy.
+- **BUT empirical bucket-sizing (compile each candidate's near-match C with `-mjp-promote` vs
+  `-mjp-promote -mjp-nocrossjump`, byte-diff both vs the JP reference, over all 16 `nonmatchings/` near-matches
+  + 5 asm-shape scans over all 406 code-asm + 240 sub_*.s) found: `-mjp-nocrossjump` NEVER reduces the diff —
+  5 WORSE, 11 no-change, 0 improved.** Even the flagship "exemplar" EfxAdvanceFrameLut (sub_8056890) goes 128→138
+  diffs WORSE with the knob: JP is ALREADY the cross-jumped/MERGED form (shared `_08056900: adds r0,r3,#0`); the
+  "four separate beq" is a normal `||` disjunction into that shared return, not separate tails. So the knob (which
+  SEPARATES tails) can only diverge. EfxAdvanceFrameLut's real diff is REGISTER ALLOCATION (Class-3 algorithmic),
+  carveable only as a reconstruct (source-merge to return signed `iframe` + -mjp-promote + int-widen/permuter).
+- register-PRESSURE-r7 = ALGORITHMIC (allocator qsort/find_reg, no clean flag). register-save-ORDER = unsized
+  (expected ~zero).
+
+**Decision.** (1) KEEP commit 3eda1d23d as harmless default-OFF documented dormant infra — reverting costs a full
+agbcc rebuild + CI cycle for ZERO matching-C gain; it is CI-green and byte-identical default-OFF. **Do NOT apply
+`-mjp-nocrossjump` to any TU (it makes NEARs worse).** (2) **The "extend-the-patch-unlocks-a-whole-class" thesis
+held for the PROMOTE knobs (D276/b/c) but is REFUTED for cross-jump (no bucket) and reg-pressure (algorithmic).**
+The genuine-ceiling tail is SMALL and dominated by **int-local-widen-fixable + reconstruct**, NOT config knobs.
+**Highest-leverage going forward = the int-widen lever vein + reconstructs, NOT more compiler knobs.** (3) Lesson:
+confirm real-target BYTE-yield before shipping toolchain infra, not just synthetic-toy proof.
