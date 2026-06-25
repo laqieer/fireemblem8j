@@ -7356,3 +7356,24 @@ each other. **Lib-link lesson:** a newlib fn currently wired as `asm/sub_X.o(.te
 newlib object byte-matches the JP build (calloc/fwalk did; fvwrite did NOT — version-divergent). make compare
 is the oracle. **Remaining 69:** ~14 NEARs in campaign #4 + the hard NEARs + ~10 unknown (IDA) + ~32 BIOS/libgcc
 veneers + ~4 hard. Trajectory holds toward ~99.5%+.
+
+## D281 — Veneer bucket is recoverable, not a floor: +21 (libagbsyscall consolidation + vsprintf); matching-C 99.27→99.52%
+**Date:** 2026-06-25. **Context:** the remaining ~62 included ~32 "BIOS/libgcc veneers" long treated as an
+un-carveable floor (the `80D5xxx`/`80D6xxx` cluster). Investigation (calcprogress counts any T-sym in src/*.o
++ *libc.a/*libgcc.a links as done; fe8u produces these from `src/libagbsyscall.s` + `*libc.a:vsprintf.o`)
+proved most are recoverable. **Decision & result:** (1) consolidated the ~20 BIOS svc wrappers (ArcTan2,
+BgAffineSet, CpuFastSet, CpuSet, Div, DivArm, DivRem, JP-only sub_80D6384, HuffUnComp, LZ77UnComp{Vram,Wram},
+MultiBoot, ObjAffineSet, RLUnComp{Vram,Wram}, SoftReset, SoundBias{Reset,Set}, Sqrt, VBlankIntrWait) into ONE
+real-source `src/libagbsyscall.s` like fe8u — svc bodies are region-same (svc numbers universal), SoftReset
+reuses its proven 24-byte incbin. This required a Makefile enhancement: assemble committed `src/*.s` via
+`SRC_S_FILES := $(shell git ls-files 'src/*.s')` (so generated `.c`->`.s` intermediates are NOT double-counted)
++ a `.gitignore` `!src/libagbsyscall.s` exception. (2) lib-linked `vsprintf` from libc.a (carved_rom.d frag ->
+`*libc.a:vsprintf.o(.text)`). **NOT recoverable:** `_call_via_rX` — the JP region is 0x38 but the stock libgcc
+`_call_via_rX.o` .text is 0x3c (4-byte divergence); linking it shifts everything. Verified BEFORE attempting,
+avoiding a failed gate. **GOTCHA (cost 3 gates, now a standing rule):** a hand-asm TU using
+`.section .text.NAME` must be referenced in carved_rom.d as `src/X.o(.text.NAME)`, NOT `(.text)` — the latter
+matches the empty default `.text` (0 bytes), silently letting the real bytes fall through to a catch-all,
+growing the ROM and reflowing the whole layout (first-diff appears far from the edit, e.g. 0x08000B28). **Build-
+system change → cold `make clean && make compare` gate (running).** **Remaining 41:** ~10 unknown reconstructs
+(carve workflow staged), ~13 Class-3 reg-coloring NEARs (low permuter yield), ~11 `_call_via` (floor) +
+sub_80D5244, ~3 hard NEARs, ~4 confirmed-hard. The genuine asymptotic floor is now ~15-20, not 62.
