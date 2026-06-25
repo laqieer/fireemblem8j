@@ -7377,3 +7377,19 @@ growing the ROM and reflowing the whole layout (first-diff appears far from the 
 system change → cold `make clean && make compare` gate (running).** **Remaining 41:** ~10 unknown reconstructs
 (carve workflow staged), ~13 Class-3 reg-coloring NEARs (low permuter yield), ~11 `_call_via` (floor) +
 sub_80D5244, ~3 hard NEARs, ~4 confirmed-hard. The genuine asymptotic floor is now ~15-20, not 62.
+
+## D282 — _call_via veneers reconstructed as hand-asm (+12); the "veneer floor" is fully dissolved; matching-C 99.59→99.73%
+**Date:** 2026-06-25. **Context:** D281 recovered the BIOS syscalls but flagged `_call_via_rX` as a floor
+because the stock libgcc `_call_via_rX.o` (.text 0x3c) does not fit the JP region (0x38). **Correction/decision:**
+that only rules out the LIB-LINK; the veneers are trivial `bx rN; nop` (4 bytes each) and reproduce byte-exactly
+as hand-asm real source `src/call_via.s` (`.section .text.call_via`, referenced in carved_rom.d as
+`src/call_via.o(.text.call_via)` per the D281 section-name rule), dropping the 11 individual asm stubs. +12
+matching-C (the 11 named veneers sub_80D65BC/_call_via_r1..r9/_call_via_sl, the trailing fp/ip/sp blob stays
+`.byte`). **Lesson:** "not lib-linkable" != "not recoverable" — for any small region-same runtime stub, the
+hand-asm-src technique (committed `src/*.s` via the D281 Makefile rule + `.gitignore` exception) reproduces the
+exact JP bytes regardless of library object size. **Remaining ~23:** `sub_80D5244` (svc 0x2A, foldable),
+~13-18 Class-3 reg-coloring NEARs (campaign #5 attempting 14), ~4 confirmed-hard (800663C PutFaceOnBackGround,
+800DE3C Event0F_CounterOps, 80D19DC RegisterTsaWithOffset=fe8u-own non-matching, __sfvwrite=newlib-version).
+**INTEGRATOR NOTE:** campaign #5 workers repeatedly leaked carve attempts into the SHARED main tree (deleted
+asm/sub_80A6B90.s + a stray frag pointing at a non-existent src/.o); restore via `git checkout HEAD -- <asm> <frag>`
++ rm the stray BEFORE any main-tree make compare, and keep commits scoped (the stray was never committed).
