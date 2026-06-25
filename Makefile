@@ -2833,3 +2833,4 @@ check:
 # .4bpp.lz) instead of letting make treat them as deletable intermediates and
 # rebuild them on every invocation.
 .SECONDARY:
+src/sub_80707BC.o: CC1FLAGS += -mjp-promote

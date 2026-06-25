@@ -1,7 +1,7 @@
 sub_8012E84	08012E84	thumb	sub_8067884 callee (NEEDS_ALIAS)
 sub_8073820	08073820	thumb	sub_8067884 callee (NEEDS_ALIAS)
-sub_80D636C	080D636C	thumb	sub_8067884 CpuFastSet-like (NEEDS_ALIAS)
 sub_8002DE4	08002DE4	thumb	sub_8067884 Proc_Delete-like (NEEDS_ALIAS)
 gBuf_020165C8	020165C8	data	sub_8067884 source buffer (NEEDS_ALIAS)
 gBuf_020228A8	020228A8	data	sub_8067884 staging buffer (NEEDS_ALIAS)
 gCounter_0201774C	0201774C	data	sub_8067884 counter (NEEDS_ALIAS)
+sub_80D636C	080D636C	thumb	CpuFastSet-ish helper (sub_8067884 carve)
