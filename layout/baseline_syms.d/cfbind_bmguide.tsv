@@ -20,4 +20,4 @@ gProcScr_GuideEntryListRedraw_Initial	08BABBEC	data	Guide_MainLoop
 gProcScr_GuideCategoryRedraw	08BABB8C	data	Guide_MainLoop
 GuideList_ScrollUp	081D588E	thumb	Guide_MainLoop
 GuideList_ScrollDown	080D3554	thumb	Guide_MainLoop
-gProcScr_GuideDetailsRedraw	0202BCEC	data	Guide_MainLoop
+gProcScr_GuideDetailsRedraw	08BABC8C	data	Guide_MainLoop
