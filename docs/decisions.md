@@ -7315,3 +7315,24 @@ Continue batches of ~14 over the ~30 NEARs that still have decodes; only ~3-4 ar
 800663C 60+ forms, Event0F_CounterOps 800DE3C, RegisterTsaWithOffset 80D19DC = fe8u-own non-matching todo, 80A6FF0
 basic-block-ordering). **Integrator discipline:** verify each branch's `-mjp-promote` Makefile line survives the
 `-X ours` merge (overlap-drop trap) and `rm src/<f>.o` to defeat the stale-.o trap before the gate.
+
+## D279 — Permuter campaign #3 (+10) crosses 99%; triage surfaces 55-fn carveable reservoir; matching-C 98.92→99.04%
+**Date:** 2026-06-25. **Context:** continuing the D278 permuter-campaign grind. **Campaign #3** ran 14 worktree
+agents over fresh NEARs → **10/14 matched** (800E574, 80106A0, 8021C28, 8022140, 8022200, 80491B8, 8049274,
+8049364, 8056984, 8084678), integrated byte-perfect in one `-X ours` batch → **99.04% (8446/8528)**.
+**Key finding — the "NEAR" tag from the first-pass decode is unreliable:** several campaign-#3 targets were NOT
+reg-coloring ceilings at all but MISLABELED reconstructs — 800E574 = EventText_StartBoxDialogueMsg with the JP
+build's entire else-branch omitted (matched with no permuter), 8021C28 = a JP-only ProcScr slot (0x085C3978,
+absent from US) mis-modeled on a 5-arg sibling. SOP: when an agent picks up a "reg-coloring NEAR," it should
+first re-derive identity from the asm + fe8u, because ~30% are actually free reconstruct/omit-block matches.
+**Parallel discovery — the 55-fn reservoir:** a 6-agent READ-ONLY triage of the 73 still-asm functions that had
+NO permuter decode (i.e. were never analyzed) classified **55 as carveable** (22 fe8u-port reconstructs, 29
+leaf-binds, 4 clean) + 5 reg-coloring + 10 unknown + 3 data + the rest BIOS/libgcc veneers. This was the largest
+single carveable vein found this session and it was hiding in plain sight — the permuter campaigns had been
+working only the pre-decoded NEARs. **Decision:** run a CARVE workflow (8 worktree workers) over the 55, recipes
+in /tmp/carve_recipes2/. Includes the `_calloc_r` newlib LIB-LINK (ldscript `*libc.a:callocr.o(.text)` swap, no C).
+**Integrator-process lesson (cost: near-miss):** worktree agents whose shell `cd`s to /home/laqieer/fireemblem8j
+land in the SHARED main checkout, not their worktree — two agents left stray edits/staged-deletions in main;
+ALWAYS `git status --short` main before integrating a campaign and clean strays. **Rationale:** 100% remains
+reachable; remaining 82 = 55 carveable (workflow running) + ~6 true NEARs + 10 unknown + ~32 BIOS/libgcc veneers
+("linked" bucket) + ~4 hard. Trajectory: carve workflow (+~35-45) → ~99.5%+, then mop up NEARs/unknowns/veneers.
