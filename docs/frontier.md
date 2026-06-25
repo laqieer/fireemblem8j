@@ -41,12 +41,17 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
     DEFER-band next-most-tractable (need a few binds/struct trace): sub_80490C8 (SIO score time-display, 2 digit-extractor
     binds sub_80D637C/74 + 2 sprite-table aliases), sub_80491B8 (score-display loop, carve after 80490C8). AVOID (deep
     IDA struct): sub_80487D8 (multiboot, MultiBootParam@0x03004EB0 + ~25 syms), sub_8048DC0 (digit renderer).
-  - 🛠 **REG-COLORING NEAR backlog → TRANSMUTER DEPLOYED (task #15).** Region-same PORTS now hit a 1-2 register-coloring
-    ceiling on nearly every one (exact size + ~99% structural, blocked by a scratch-reg renumber the default permuter
-    can't reach): AiAttemptStealActionWithinMovement (sub_803DAF0, r3→r4, /tmp/aiattemptsteal_best.c — EASIEST), Event0F_CounterOps
-    (r4↔r5), ClassStatsDisplay_Loop, AdjustNewUnitPosition, HandleTurnRecordText, GmapScreen2_Loop, Event18_ColorFade.
-    transmuter-worker is evaluating the transmuter on the AiAttemptSteal single-register case; if it cracks → batch-clear
-    the backlog (+7). **Stop hand-grinding region-same ports — carve JP-divergent reconstructs + JP-only leaves instead.**
+  - 🟥 **REG-COLORING NEAR backlog = LIKELY GENUINE RESIDUAL (transmuter INFEASIBLE — do NOT re-try it).** Region-same
+    PORTS hit a 1-2 register-coloring / spill-slot-order ceiling: agbcc colors a scratch reg / numbers a stack slot
+    differently than the JP build, and NO C-source form flips it (source-invariant; default permuter scores byte-exact
+    but plateaus, levers/pins tried). Members: AiAttemptStealActionWithinMovement (sub_803DAF0, ~50 diffs incl. s8 rankTmp
+    rep), Event0F_CounterOps (r4↔r5), ClassStatsDisplay_Loop (3-slot rotation), AdjustNewUnitPosition (3-reg rotation),
+    OpAnimFaceMontageBegin (JP's redundant adds), HandleTurnRecordText, GmapScreen2_Loop, Event18_ColorFade.
+    **TRANSMUTER PROVEN INFEASIBLE (task #15):** its objdiff scorer is REGISTER-BLIND BY DESIGN (`movs r3`==`movs r4`,
+    no byte-exact mode) → false-greens every reg-coloring case (score 0 while bytes differ). These stay on byte-exact
+    decomp-permuter + agbcc-codegen-levers (exhausted) — treat as the likely-permanent residual. **DO NOT hand-grind
+    region-same ports; DECODE-but-don't-grind (save for a future deeper agbcc-reg-alloc-config attempt), carve JP-only
+    leaves + JP-divergent reconstructs instead — that's where ALL the remaining +matching-C is.**
   - +efxLuceBGCOL spawner+loop pair (sub_8067040/8067160, JP-only efx; `int terminator` not s16; 6 data binds).
   - 💡 **KEY TECHNIQUE (seb-worker, efxLuceBGCOL): the default permuter FINDS the unlocking source mutation even when
     its SCORE never reaches 0.** The score-N best-output's source diff often contains the mutation (e.g. splitting
