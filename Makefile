@@ -2866,3 +2866,5 @@ src/sub_800E11C.o: CC1FLAGS += -mjp-promote
 src/sub_800DC40.o: CC1FLAGS += -mjp-promote
 
 src/sub_800B88C.o: CC1FLAGS += -mjp-promote
+
+src/efxLunaSCR_Loop.o: CC1FLAGS += -mjp-promote
