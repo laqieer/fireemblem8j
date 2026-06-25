@@ -1,0 +1,3 @@
+gUnk_020229EA	020229EA	data	(sub_80A46F8 src; JP-only EWRAM hword snapshot)
+m4aSongNumStart	080D4EF4	thumb	(sub_80A46F8 callee)
+gPlayStBytes	0202BCEC	data	(sub_80A46F8; byte overlay of gPlaySt for +0x41 config read)
