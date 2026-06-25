@@ -10,7 +10,10 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.80%** (8340/8528 funcs) → **~188 functions genuinely unmatched**
+- **MATCHING-C: 97.82%** (8342/8528 funcs) → **~186 functions genuinely unmatched**
+  - +StartEventBattle (sub_8012038, local-prototype-shadow fix for isBallista s8 — NO shared-header edit;
+    re-land of the earlier CI-breaking attempt) +ply_memacc (sub_80D60E8, verbatim fe8u m4a under old_agbcc;
+    the 41B "residual" was 100% standalone reloc/veneer noise, byte-identical in-tree).
   - +ekrGaugeMain (int-local-widen `s32 r4` cracked the asrs-cascade extra-mov NEAR — a SUBSET of the
     "config-ceiling" NEARs are int-widen-fixable, NOT permuter-only; cfbind zfix) +LoadUnit
     (reconstruct: JP earlier build omits the Shadowshot/Stone secondary-weapon block).
