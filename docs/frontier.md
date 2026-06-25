@@ -10,7 +10,14 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.97%** (8355/8528 funcs) → **~173 functions genuinely unmatched**
+- **MATCHING-C: 98.07%** (8363/8528 funcs) → **~165 functions genuinely unmatched** 🎉 crossed 98%
+  - +8 RECOVERED from stranded worktree branches: 3D rotation-matrix cluster (sub_8015188/D0/18), ekrBattleEnding
+    pair (sub_805601C/8056078), worldmap event handlers EventB6/C4/BC (sub_800CC7C/CF5C/CDB0).
+  - 🚨 **INTEGRATOR PROCESS LESSON (cost ~+8 nearly-missed): scan ALL `worktree-*` branches for committed-but-unpushed
+    carves, not just `origin/feat/*`.** Workers commit incrementally to their OWN worktree branch and only push at
+    batch-end (or not at all) — `git worktree list` + `git log origin/main..<branch>` finds the stranded carves.
+    Filter REAL recoveries (the branch's dropped `asm/sub_*.s` is STILL on main) from DUPS (already deleted on main =
+    already carved via another route; ~25 stale leftover worktrees were dups). Re-scan periodically as the fleet carves.
   - +sub_8048AC4 + sub_8048BAC (JP-only SIO start/teardown leaves, from-scratch). The JP-only LEAF veins
     (SIO/efx/augury helpers — NOT proc functions, which are all carved) are the productive +matching-C now.
   - ⚠️ stale-base merge note: workers branched before a prior merge produce a feat branch whose diff-vs-main
