@@ -21,7 +21,9 @@
 0DEE88	0DEEB0	src/SioMenu_GetItemHelpText.o(.rodata)	SioMenu_GetItemHelpText linkMenuMsgLut[10] (embedded table)
 0DEEB0	0DEEBC	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap4r)	gap4 remainder
 0DEEBC	0DEED0	src/SioMenu_End.o(.rodata)	SioMenu_End SioMenuProcLut[5] template
-0DEED0	0DF2E0	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap4b)	df4_misc_lo region-diff data (1040 B, gap4b after SioMenuProcLut)
+0DEED0	0DF1F8	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap4b)	df4_misc_lo region-diff data (gap4b head, before LAPhaseIntro_Init rodata)
+0DF1F8	0DF228	src/LAPhaseIntro_Init.o(.rodata)	LAPhaseIntro_Init local ptr-array rodata (3x16B: gUnknown_080DF1F8/0DF208/0DF218)
+0DF228	0DF2E0	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap4b2)	df4_misc_lo region-diff data (gap4b tail, after LAPhaseIntro_Init rodata)
 0DF388	0DFBE4	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap5)	df4_misc_lo region-diff data (2140 B, long-tail gap)
 0DFBEF	0DFE9C	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap6)	df4_misc_lo region-diff data (685 B, long-tail gap)
 0E1870	0E262C	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap7)	df4_misc_lo region-diff data (3516 B, long-tail gap)

@@ -1,0 +1,1 @@
+04E038	04E110	src/LAPhaseIntro_Init.o(.text)	handdecomp: LAPhaseIntro_Init (JP sub_804E038; fe8u sio_uiutils.c port; JP divergence Copy2dChr dst=BG_CHR_ADDR(0x140) reuse + (2,3) vs fe8u (0x14C,3,3))
