@@ -10,7 +10,9 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
 
 ## Current state (2026-06-24)
 - BUILD SELF-CONTAINMENT: 100%
-- **MATCHING-C: 97.84%** (8344/8528 funcs) → **~184 functions genuinely unmatched**
+- **MATCHING-C: 97.85%** (8345/8528 funcs) → **~183 functions genuinely unmatched**
+  - +StrInsertTact (sub_800A118, Shift-JIS reconstruct: JP copies 2-byte SJIS chars where fe8u copies 1 byte;
+    the natural `*dst++=*src++` pointer idiom colors source→r5/dest→r4 to match JP — a PRODUCTIVE new text vein).
   - +EfxDrsmmoyaMain (sub_80705E8, JP-only efx reconstruct, hand-closed no permuter: if/else timer order +
     per-branch PlaySFX duplication + state3@0x10 load-schedule). +SioBat_SetupLoop (sub_8045EEC, fe8u sio_bat.c +
     JP msgids 0x6D3/4/5 + JP hoists EndLinkArenaButtonSpriteDraw to the Proc_Find==NULL path = the no-r7 frame).
@@ -54,10 +56,14 @@ ground truth whenever an axis moves. Stale frontier data caused real wasted work
     The frontier's per-function byte-gaps were measured against PLAIN agbcc and are STALE — `-mjp-promote`
     collapses the asr/lsr/s8-s16 sign-extension cascade, routinely turning a "30-40-byte reg-alloc ceiling" into
     a 0-6-instr permuter residual. PROVEN: **AdjustNewUnitPosition (sub_807C8DC)** plain=161 instr →
-    -mjp-promote=**139 = EXACT JP length** (~3-instr load-schedule residual → permuter, not a ceiling — anup-worker
-    carving). GMapScreen_UpdateScroll plain=295→260 (6 over). So the "permuter ≈ 11" are mostly TRACTABLE small
-    residuals after promote, not hopeless. (int-widen+cast add nothing beyond promote — promote already does the
-    signedness work; that's why those buckets are 0.)
+    -mjp-promote=**139 = EXACT JP length**. GMapScreen_UpdateScroll plain=295→260 (6 over). So promote collapses
+    the STALE plain-agbcc gaps — but ⚠️ EXACT-LENGTH ≠ tractable: the residual is often a reg-COLORING ceiling, not
+    a small schedule fix. **AdjustNewUnitPosition (sub_807C8DC) = CONFIRMED reg-coloring CEILING** (anup-worker): exact
+    139-instr length but the 49B residual is a 3-register loop rotation (body callee-saved reg-SWAP, the genuine-ceiling
+    class) — source reorders ZERO effect, permuter plateau 485/825, register-pins make body swaps WORSE. Needs a
+    stronger reg-alloc permuter profile (transmuter). So "permuter ≈ 11" splits into tractable-schedule (ColorFade×4
+    style) vs reg-COLORING-ceiling (AdjustNewUnitPosition style) — re-measure tells you length, not winnability.
+    (int-widen+cast add nothing beyond promote — promote already does the signedness work; that's why those buckets are 0.)
   - 🟥 **CONFIRMED reg-PRESSURE (Class-3) ceilings — do NOT retry as reconstructs** (recon-worker verified: after
     the s8/s16 signedness fix + -mjp-promote they reach EXACT JP size + 99% structural match, but the residual is
     an agbcc spill/high-reg-count tiebreak the permuter can't reach): **Event18_ColorFade (sub_800E1FC)** (JP s8
