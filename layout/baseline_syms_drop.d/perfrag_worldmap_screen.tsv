@@ -3,3 +3,4 @@ gWorldmapGmap_3
 GMapScreenVSync_RequestFullCopy
 GMapScreen_ApplyTilePalettes
 GMapScreen_FillBg3TileIndices
+GMapScreen_UpdateScroll

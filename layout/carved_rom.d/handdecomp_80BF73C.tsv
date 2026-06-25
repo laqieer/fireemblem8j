@@ -1,0 +1,1 @@
+0BF73C	0BF950	src/GMapScreen_UpdateScroll.o(.text)	GMapScreen_UpdateScroll (handdecomp: region-diff -> matching C via mjp-promote + r5%0x28 split + a-local clamp + add-operand-order)
