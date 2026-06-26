@@ -4,8 +4,38 @@ Standing instructions. Work autonomously; do not wait for human input.
 
 **Final goal:** `make compare` ends with `fireemblem8.gba: OK` built entirely
 from real decompiled source — the raw-ROM incbin in `asm/baserom.s` fully
-replaced. Signal completion ONLY when that is achieved by outputting the
-promise phrase `FE8J_FINAL_GOAL_DONE`.
+replaced — AND the ROM is fully **shiftable** (no hardcoded absolute pointers in
+data; every pointer is a relocated symbol reference). Signal completion ONLY when
+all six axes (`scripts/calcprogress.py`) are met, by outputting the promise
+phrase `FE8J_FINAL_GOAL_DONE`.
+
+## CURRENT PRIORITY FRONTIER — SHIFTABILITY (axis #5, D296)
+
+The largest remaining frontier is NOT the 31 asm functions — it is the **11,149
+hardcoded absolute ROM pointers** still baked into raw-incbin data (`make compare`
+is byte-perfect but the ROM is only ~44% shiftable; a real decomp must relocate
+every pointer or it crashes when sections shift). Track + drive this every tick:
+
+- **Audit:** `python3 scripts/audit_pointers.py [--metrics]` (axes #5/#6). 0 dangling.
+- **Safe auto-lever (run first each tick):** `python3 scripts/repoint_table.py
+  --auto-safe && make compare`. Converts every table whose every ROM-range word
+  resolves to an EXACT symbol boundary into `(u32)&Sym` references (byte-identical
+  via .word relocations; the alias form dodges typed-header conflicts). Commit if OK.
+  *Currently exhausted (0)* — re-runs catch tables newly exposed by splitting/Track B.
+- **Track B (the bulk — 8,930 INTERIOR + 2,219 mixed-EXACT):** pointers into
+  un-split blobs. Two routes, both make-compare-gated and byte-exact:
+  (a) **fe8u-structured port** — the table has a typed struct in fe8u
+      (`../fireemblem8u/src/**`); port the definition, repoint US→JP symbols. Also
+      retires axis #6 (editability) + improves naming. Best for event/proc/struct data.
+  (b) **blob-split** — split the pointed-to blob at each target offset to create a
+      boundary label (the labels fe8u has ARE these offsets), turning INTERIOR→EXACT,
+      then `--auto-safe`. Mechanical, no fe8u needed, but touches the carved_rom
+      manifest/ldscript — do ONE blob at a time, `make compare` after each (split
+      regressions are a known trap; see memory `data-extraction-typed-incbin`).
+- **NEVER auto-convert an INTERIOR word blind** (a non-pointer struct field
+  coincidentally in 0x08xxxxxx range would be relocated wrongly — byte-exact now,
+  crashes on shift; make compare can't catch it). Only EXACT auto-converts; INTERIOR
+  needs structure (fe8u) or a real split-label. See D296.
 
 ## When orchestrating background agents (P9 wave mode) — DO THIS EVERY TICK FIRST
 
