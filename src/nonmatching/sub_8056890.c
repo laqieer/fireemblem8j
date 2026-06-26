@@ -21,7 +21,14 @@
  *      this build routes time -> r1 directly and count -> r0 -> r6 (tied to the
  *      `--*ptime` decrement path wanting time in r0). Same insn count, reg-only.
  * Both are exactly what decomp-permuter's branch/temp/reorder passes flip.
- * Graduate via permuter -> move to src/, add the perfrag row, drop asm. */
+ * Graduate via permuter -> move to src/, add the perfrag row, drop asm.
+ *
+ * NEGATIVE RESULT (2026-06-26): tried the EXACT fe8u banim-ekrutils.c form — the
+ * `register u32 r6 asm("r6")` pin + dual load (`uframe`=u16 AND `iframe`=int both
+ * = lut[count*2], return uframe) + Yoda `-1==iframe` conditions. Against the JP ROM
+ * it is 117/132 differing (WORSE than this unified-int base's 87/132). So the JP build
+ * does NOT use the fe8u source shape here; this base is the better permuter starting
+ * point. Don't re-try the r6-pin/dual-load form. */
 #include "global.h"
 #include "proc.h"
 #include "hardware.h"
