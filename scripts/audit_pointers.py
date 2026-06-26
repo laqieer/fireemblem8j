@@ -103,19 +103,34 @@ def classify(ptr, addrs, addr2name, addr2size):
             return ("INTERIOR", name, off)
     return ("DANGLING", name, off)
 
+_ASM_INCBIN_BINS = None
+def _asm_incbin_bins():
+    """Residual .bin basenames incbin'd by an asm/*.s file. Used only for the
+    'no _ref .c' case below. NB: a de-pointered table keeps its asm placeholder
+    (the excluded DATA_INCBIN_ASM_EXCLUDE incbin), so this set is consulted ONLY
+    when there is no _ref .c -- the _ref .c branch authoritatively decides those."""
+    global _ASM_INCBIN_BINS
+    if _ASM_INCBIN_BINS is None:
+        out = subprocess.run(
+            ["grep", "-rhoE", r'data/residual/[A-Za-z0-9_.]+\.bin',
+             os.path.join(ROOT, "asm")],
+            capture_output=True, text=True, errors="replace").stdout
+        _ASM_INCBIN_BINS = set(os.path.basename(m) for m in out.split())
+    return _ASM_INCBIN_BINS
+
 def is_live_raw(binpath):
-    """A residual .bin is 'live raw data' only if its bytes still enter the
-    link verbatim. Once repoint_table.py rewrites the _ref .c to symbol
-    references (no INCBIN), the .bin is orphaned -> its pointers are relocated,
-    so it must NOT be counted as un-relocated debt."""
-    name = os.path.basename(binpath)[:-4]  # strip .bin
-    cpath = os.path.join(ROOT, "src", "data", name + "_ref",
-                         "dat_%s_ref.c" % name)
+    """A residual .bin is 'live raw data' (un-relocated debt) iff its raw bytes
+    still enter the link. Authoritative per source-of-truth:
+      - _ref .c exists  -> raw iff it still INCBINs (de-pointered .c uses .4byte).
+      - no _ref .c       -> raw iff incbin'd in a live asm/*.s. Tables already
+        provided as a relocated struct elsewhere (gClassData via data_classes.c)
+        have an EMPTY asm placeholder -> not in the set -> correctly excluded."""
+    name = os.path.basename(binpath)[:-4]
+    cpath = os.path.join(ROOT, "src", "data", name + "_ref", "dat_%s_ref.c" % name)
     if os.path.exists(cpath):
         with open(cpath, "r", errors="replace") as f:
-            txt = f.read()
-        return "INCBIN" in txt  # still raw iff it INCBINs; de-pointered iff not
-    return True  # no _ref .c -> assume still live via asm incbin
+            return "INCBIN" in f.read()
+    return os.path.basename(binpath) in _asm_incbin_bins()
 
 def main():
     if not os.path.exists(ELF):
@@ -175,12 +190,7 @@ GFX_HINTS = ("Map", "Tile", "Object", "Chr", "Pal", "Gfx", "Img", "Sprite",
              "Anim", "OBJ", "_gf", "Reel", "Portrait", "Icon")
 
 def live_raw_bin(binpath):
-    name = os.path.basename(binpath)[:-4]
-    cpath = os.path.join(ROOT, "src", "data", name + "_ref", "dat_%s_ref.c" % name)
-    if os.path.exists(cpath):
-        with open(cpath, "r", errors="replace") as f:
-            return "INCBIN" in f.read()
-    return True
+    return is_live_raw(binpath)
 
 def count_relocated_data_ptrs():
     """ABS32 relocations RESIDING in data sections (.rodata/.data) across src/*.o

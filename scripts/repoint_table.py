@@ -121,7 +121,7 @@ def find_wrapper(name):
         cpath = None
     return cpath, binp, section
 
-def emit_c(name, binp, section, addrs, by_addr, safe_only=False):
+def emit_c(name, binp, section, addrs, by_addr, safe_only=False, allowed=None):
     """Emit the table as a top-level __asm__ block: `.4byte sym (+off)` for each
     pointer word, `.4byte 0xNNN` for data words. Pure asm needs NO C declaration
     of any referenced symbol, so it NEVER conflicts with a typed header decl and
@@ -138,6 +138,7 @@ def emit_c(name, binp, section, addrs, by_addr, safe_only=False):
     lines = []
     nptr = ndata = nskip = 0
     for i in range(nwords):
+        O = i * 4
         v = struct.unpack_from("<I", b, i * 4)[0]
         if ROM_LO <= v < ROM_HI:
             r = resolve(v, addrs, by_addr)
@@ -155,6 +156,13 @@ def emit_c(name, binp, section, addrs, by_addr, safe_only=False):
                 nskip += 1; continue
             if safe_only and is_func:
                 lines.append('"\\t.4byte 0x%08X\\n"  /* fn-ptr: left raw */' % v)
+                nskip += 1; continue
+            # fe8u-gated mode: convert a ROM-range word ONLY if `allowed(O)` confirms
+            # this byte-offset is a real pointer slot (fe8u relocation), OR the word
+            # resolves EXACT (off==0 -- a constant never equals a symbol's exact start,
+            # so always safe). Everything else is a coincidental constant -> leave raw.
+            if allowed is not None and not (allowed(O) or off == 0):
+                lines.append('"\\t.4byte 0x%08X\\n"  /* not a fe8u ptr slot: raw */' % v)
                 nskip += 1; continue
             if off:
                 lines.append('"\\t.4byte %s + 0x%X\\n"' % (sym, off))
@@ -224,6 +232,52 @@ def select_auto_safe(addrs, by_addr):
     names.sort(reverse=True)
     return names
 
+def derive_stride(offs):
+    """Given fe8u's pointer byte-offsets, derive (stride S, sub-offsets set) for a
+    fixed-stride struct array: O is a pointer slot iff (O % S) in subs. Lets us
+    extrapolate past US's last record to JP-divergent extra records (more units/
+    glyphs). Returns (None, set()) if no clean fixed stride (variable-length data)."""
+    offs = sorted(set(offs))
+    n = len(offs)
+    if n < 2:
+        return None, set()
+    span = offs[-1]
+    cand = sorted({offs[i] - offs[j] for i in range(n) for j in range(i) if offs[i] - offs[j] > 0})
+    for S in cand:
+        subs = set(o % S for o in offs)
+        if len(subs) * (span // S + 2) > n * 4:
+            continue  # too many sub-offsets -> not a clean record stride
+        pred = set()
+        k = 0
+        while k * S <= span:
+            for s in subs:
+                v = k * S + s
+                if v <= span:
+                    pred.add(v)
+            k += 1
+        if pred == set(offs):   # the (S, subs) pattern reconstructs fe8u's offsets EXACTLY
+            return S, subs
+    return None, set()
+
+def fe8u_allowed(name):
+    """Build the `allowed(offset)->bool` gate from fe8u's relocation oracle.
+    A JP word at byte-offset O is a confirmed pointer slot iff O is a fe8u pointer
+    offset, OR (within a JP-divergent extra record) O matches the struct's pointer
+    sub-offset pattern. Returns None if fe8u has no data (caller -> EXACT-only)."""
+    try:
+        import fe8u_ptr_offsets as _F
+        fe = _F.ptr_offsets(name)
+    except Exception:
+        fe = None
+    if not fe:
+        return None
+    feset = set(fe)
+    S, subs = derive_stride(fe)
+    last = fe[-1]
+    if S:
+        return lambda O: (O in feset) or (O > last and (O % S) in subs)
+    return lambda O: O in feset
+
 def table_density(binp, addrs, by_addr):
     """Return (nptr, nwords, all_resolve). A pointer-DENSE table (high
     nptr/nwords) is definitionally a pointer table -- a non-pointer constant
@@ -270,7 +324,18 @@ def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     check = "--check" in sys.argv
     safe_only = "--safe-only" in sys.argv
+    fe8u_safe = "--fe8u-safe" in sys.argv
     addrs, by_addr = load_syms()
+    if fe8u_safe and not args:
+        # all live (still-INCBIN) residual tables with a _ref .c wrapper
+        for binp in sorted(glob.glob(os.path.join(RESID, "*.bin"))):
+            name = os.path.basename(binp)[:-4]
+            cpath, _, _ = find_wrapper(name)
+            if cpath and os.path.exists(cpath):
+                with open(cpath, "r", errors="replace") as f:
+                    if "INCBIN" in f.read():
+                        args.append(name)
+        print("fe8u-safe: %d candidate tables" % len(args))
     if "--auto-safe" in sys.argv:
         sel = select_auto_safe(addrs, by_addr)
         print("auto-safe: %d tables, %d pointers" % (len(sel), sum(n for n, _ in sel)))
@@ -293,22 +358,35 @@ def main():
             return
     if not args:
         sys.exit(__doc__)
+    nconv = 0
     for name in args:
         cpath, binp, section = find_wrapper(name)
         if not os.path.exists(binp):
             print("SKIP %s: no .bin (%s)" % (name, binp)); continue
         if cpath is None:
             print("SKIP %s: no _ref .c wrapper found" % name); continue
-        c, stats = emit_c(name, binp, section, addrs, by_addr, safe_only)
+        allowed = None
+        if fe8u_safe:
+            allowed = fe8u_allowed(name)
+            if allowed is None:
+                allowed = (lambda O: False)   # no fe8u data -> EXACT-only (off==0) fallback
+        c, stats = emit_c(name, binp, section, addrs, by_addr, safe_only, allowed)
         if c is None:
             print("SKIP %s: %s" % (name, stats)); continue
         if check:
             print("=== %s (%s) ===" % (name, stats))
             print(c[:1500])
         else:
+            # in fe8u-safe mode, skip writing tables where nothing converted (0 ptr)
+            if fe8u_safe and ("ptr=0 " in stats):
+                continue
             with open(cpath, "w") as f:
                 f.write(c)
-            print("WROTE %s (%s) -> %s" % (name, stats, cpath))
+            nconv += 1
+            if not fe8u_safe:
+                print("WROTE %s (%s) -> %s" % (name, stats, cpath))
+    if fe8u_safe:
+        print("fe8u-safe: wrote %d tables" % nconv)
 
 if __name__ == "__main__":
     main()
