@@ -7558,3 +7558,27 @@ local-alloc.c's `qty` handling), add the flag default-OFF (so the ~8500 matching
 be the priority formula, not a simple order flip) + breakage risk if the gate leaks. **Until then the only
 mechanisms are the permuter (stochastic, plateaued) and decomp.me (community).** The build is byte-perfect +
 self-contained (the project's real goal); matching-C is at a genuine, fully-diagnosed agbcc-allocator floor.
+
+## D290b — ATTEMPTED the root lever (built a patched agbcc); EXPERIMENTALLY proved the floor is upstream of the allocator
+**Date:** 2026-06-26. **Action (not just analysis):** cloned pret/agbcc @ da598c1d (the pinned commit), applied the
+existing -mjp-promote/-regorder patch, ADDED a gated `-mjp-allocorder` flag (ARM_FLAG bit 0x100000) that flips
+local-alloc.c's `qty_compare_1` tie-break (`return TARGET_JP_ALLOCORDER ? q2 - q1 : q1 - q2`), and FULLY REBUILT
+agbcc (build.sh -> agbcc + libgcc.a + libc.a, ~6 min, clean). Tested on RegisterTsaWithOffset (the canonical 6-byte
+i/dst r2<->r3 swap): `-mjp-promote` = 6-byte diff, `-mjp-promote -mjp-allocorder` = **STILL 6-byte diff**,
++`-mjp-regorder` = still 6. **RESULT:** the tie-break flip does NOTHING, because i and dst do NOT tie -- they have
+DIFFERENT `QTY_CMP_PRI` priorities, so qty_compare returns on the priority term and never reaches the tie-break.
+**ROOT CAUSE, now experimentally pinned:** the priority formula itself --
+`QTY_CMP_PRI(q) = (int)((double)(floor_log2(qty_n_refs[q]) * qty_n_refs[q] * qty_size[q]) / (qty_death[q] -
+qty_birth[q]) * 10000)` -- is IDENTICAL GCC-2.x source (not patched, not patchable to help without breaking the
+8500 matching TUs). So the r2<->r3 difference is NOT in local-alloc.c at all; it is in the INPUTS to that formula
+(`qty_n_refs` = REG_N_REFS from flow analysis, and `qty_birth/qty_death` = the live-range from local-alloc's
+lifetime scan), which are produced by the UPSTREAM passes (flow.c/cse.c/loop.c). This reconstructed pret/agbcc
+computes a slightly different IR (n_refs / live-length) for i vs dst than the JP ROM's original agbcc did, and the
+identical allocator faithfully colors that different IR differently. The upstream passes ARE flag-gated
+(-fno-gcse/-fno-strength-reduce/-fno-cse-*), and those were already swept with no effect -- so the residual is a
+genuine GCC-VERSION IR difference (the JP agbcc was a marginally different GCC build), NOT an allocator-order knob.
+**CONCLUSION:** the 34-function floor is now experimentally proven to be a compiler-version IR residual upstream of
+a byte-identical register allocator -- crackable only by matching the exact JP agbcc's earlier-pass behavior (a far
+deeper RE effort than any flag) or the permuter's stochastic source mutation (which perturbs the IR and is the
+right tool, running + plateaued). The -mjp-allocorder patch is NOT committed (it's a no-op for this class; kept in
+/tmp/agbcc_src for the record). This is the definitive exhaustion of the deterministic toolchain lever.
