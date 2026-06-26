@@ -62,3 +62,29 @@ PutWMFaceOnBg) are already carved to `src/`.
 **Takeaway:** even the closest (Event0F_CounterOps=75) is a plateaued ceiling after
 hundreds of thousands of permuter iterations — the remainder is genuine agbcc codegen
 ceilings, not unexplored levers. Progress is wall-clock permuter time + community.
+
+## Authoritative `-mjp-promote` byte-gaps (2026-06-26) — the closest functions are SMALL scheduling NEARs
+
+The earlier standalone gaps above lacked `-mjp-promote`; re-measuring the permuter
+`base.c` files **with the flag the fleet actually uses** (`compile.sh` has it) reveals
+several are much closer than the "ceiling" framing implied — and the residuals are
+**instruction-scheduling/ordering**, not pervasive register-coloring:
+
+| fn | `-mjp-promote` gap | residual character |
+|---|---|---|
+| **AddAttr2dBitMap** | **10/224** (size-exact) | pure instruction ORDERING — 3 sites: two `mov` swapped (0x26), an `adds r2,r1,#0` scheduled late (0xa4), a nop placement (0xde) |
+| **PutFaceOnBackGround** | **22/176** (size-exact) | small, mostly ordering |
+| Event0F_CounterOps | 48/180 (size-exact) | reg-coloring + cross-jump |
+| sub_80D17C8 | 114/124 | |
+| sub_80BB240 | 123/232 | |
+| sub_80A3300 | 160/224 | |
+| sub_80A730C | 164/200 | |
+
+Tested and ruled out on these: the two built-but-unwired custom agbcc flags
+**`-mjp-nocrossjump`** and **`-mjp-regorder`** — both same-or-WORSE than `-mjp-promote`
+alone on every function (nocrossjump notably hurt PutFaceOnBackGround 22→67 and
+sub_80BB240 +44 tail). And **manual source reordering** of AddAttr2dBitMap (swap
+`_src`/`dst` init, hoist `++_src`, split the `i` loop init) does NOT close the 10 —
+agbcc's scheduler picks the order from deeper structure, so this is the **permuter's**
+domain (it explores schedule space systematically). These two are the best near-term
+permuter/community targets — genuinely 10–22 bytes away, not ceilings.
