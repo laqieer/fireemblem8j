@@ -7582,3 +7582,29 @@ a byte-identical register allocator -- crackable only by matching the exact JP a
 deeper RE effort than any flag) or the permuter's stochastic source mutation (which perturbs the IR and is the
 right tool, running + plateaued). The -mjp-allocorder patch is NOT committed (it's a no-op for this class; kept in
 /tmp/agbcc_src for the record). This is the definitive exhaustion of the deterministic toolchain lever.
+
+## D292 — Complete decomp.me-integrated decompilation workflow (check-before-decomp, integrate-matches, post-near, account-auth)
+**Date:** 2026-06-26. **Decision (user-requested):** a closed-loop decomp.me policy so we never re-derive a
+function the community already matched, and so every unmatched function ends up either carved or publicly posted
+with its nearest C. Tooling under `scripts/tools/decompme/`:
+- **registry.tsv** — `fn<TAB>slug<TAB>name`; the 19 FE8J scratches posted so far.
+- **decomp_status.py** — the DECISION TREE. For each still-asm fn:
+  - POSTED + our scratch score==0 → **INTEGRATE** (pull source, carve).
+  - POSTED + a family FORK score==0 → **INTEGRATE_FORK** (pull the fork's source, carve).
+  - POSTED + unmatched anywhere → **DECOMP_THEN_UPDATE** (reconstruct/permute; if we match, carve + fork-with-
+    solution to mark the scratch solved — anonymous scratches CANNOT be PATCHed, so "update" = a matched fork).
+  - NOT_POSTED → **DECOMP_THEN_POST** (reconstruct; if MATCH carve and do NOT post; else post a new scratch with
+    the nearest C). Network-tolerant: API error on a posted fn → POSTED_UNKNOWN/RETRY (treat as unmatched).
+- **integrate_matched.sh <slug>** — pulls a score==0 scratch's source_code+flags for the integrator to carve
+  (refuses if score!=0). Used for INTEGRATE / INTEGRATE_FORK.
+- **new_scratch.sh** — now supports AUTHENTICATED posting under a user account. decomp.me uses Django session
+  auth (no API key). It sources `~/.config/fe8j-decomp/decompme.env` (gitignored, chmod 600, OUTSIDE the repo,
+  like discord.env) for `DECOMPME_SESSION` (sessionid cookie) + `DECOMPME_CSRF` (csrftoken cookie + X-CSRFToken
+  header). When set, scratches are owned by the user (claimable/updatable); absent → anonymous (default). The
+  secret is read ONLY from that file, never argv/chat/commit; `.gitignore` guards `decompme.env`.
+**Workflow order (the loop / a decomp session runs):** (1) `decomp_status.py` over all still-asm → integrate any
+MATCHED/FORK_MATCHED FIRST (free wins). (2) For DECOMP_* fns, reconstruct (fe8j-reconstruct-bareasm workflow) →
+permuter. (3) On a byte-match: carve + make compare OK; if the fn was POSTED, fork-with-solution; if NOT_POSTED,
+do nothing (solved locally, no post needed). (4) On a NEAR for a NOT_POSTED fn: post the nearest C. (5) The
+autonomous poll also runs `decomp_status.py` each cycle so a community match is integrated the moment it appears.
+This wires strategy-5 (community) into the same loop as the permuter (compute) — both feed the integrator.

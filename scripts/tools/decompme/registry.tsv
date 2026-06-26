@@ -1,0 +1,21 @@
+# fn<TAB>slug<TAB>name  — decomp.me scratches for FE8J still-asm functions.
+# Maintained by the decomp.me workflow (scripts/tools/decompme/decomp_status.py).
+sub_800A34C	5sdMe	sub_800A34C
+sub_800E1FC	WmsgZ	Event18_ColorFade
+sub_807C8DC	FtYfC	AdjustNewUnitPosition
+sub_80A2E64	3IquK	sub_80A2E64
+sub_80A3528	0I8PP	sub_80A3528
+sub_80CAEF4	kKWJ0	sub_80CAEF4
+sub_8001570	az2Co	AddAttr2dBitMap
+sub_80A3300	UbRNK	sub_80A3300
+sub_80A6E4C	fFDjv	sub_80A6E4C
+sub_80A730C	34H33	sub_80A730C
+sub_80A73D4	vnbyw	sub_80A73D4
+sub_80BB240	k5Eb8	sub_80BB240
+sub_80BCD74	Km1Oj	sub_80BCD74
+sub_80D17C8	TwXsX	sub_80D17C8
+sub_800DE3C	aNjcw	Event0F_CounterOps
+sub_8056890	HbXuD	EfxAdvanceFrameLut
+sub_8084CE4	KKFDx	sub_8084CE4
+sub_800663C	jK5bE	PutFaceOnBackGround
+sub_80D19DC	ZA4ER	RegisterTsaWithOffset

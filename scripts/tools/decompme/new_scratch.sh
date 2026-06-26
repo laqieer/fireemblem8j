@@ -33,6 +33,38 @@ set -euo pipefail
 readonly API_BASE="${DECOMPME_API_BASE:-https://decomp.me/api}"
 readonly SITE_BASE="${DECOMPME_SITE_BASE:-https://decomp.me}"
 
+# ---- Optional authenticated posting (post under YOUR decomp.me account) ----
+# decomp.me uses Django session auth. To own/update scratches, supply your
+# session cookie via a SECRET, GITIGNORED env file (never on the command line,
+# never committed, never echoed):
+#
+#   # in your OWN terminal (so the secret never enters a chat transcript):
+#   mkdir -p ~/.config/fe8j-decomp && umask 077
+#   cat > ~/.config/fe8j-decomp/decompme.env <<'X'
+#   DECOMPME_SESSION=<sessionid cookie from decomp.me, logged in>
+#   DECOMPME_CSRF=<csrftoken cookie from decomp.me>   # needed for the POST CSRF check
+#   X
+#   chmod 600 ~/.config/fe8j-decomp/decompme.env
+#
+# Get both from your browser: DevTools -> Application -> Cookies -> decomp.me
+# -> copy the `sessionid` and `csrftoken` values. When set, scratches are owned
+# by you (claimable, updatable). When ABSENT, posting stays anonymous (default).
+readonly DECOMPME_ENV="${DECOMPME_ENV:-$HOME/.config/fe8j-decomp/decompme.env}"
+if [ -f "$DECOMPME_ENV" ]; then
+    # shellcheck disable=SC1090
+    . "$DECOMPME_ENV"
+fi
+# Browser-ish headers (Cloudflare) + optional auth. Built as an array so the
+# secret never appears in argv of any other process.
+auth_headers=(-H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36" -H "Referer: $SITE_BASE/")
+if [ -n "${DECOMPME_SESSION:-}" ]; then
+    _cookie="sessionid=${DECOMPME_SESSION}"
+    [ -n "${DECOMPME_CSRF:-}" ] && _cookie="${_cookie}; csrftoken=${DECOMPME_CSRF}"
+    auth_headers+=(-H "Cookie: ${_cookie}")
+    [ -n "${DECOMPME_CSRF:-}" ] && auth_headers+=(-H "X-CSRFToken: ${DECOMPME_CSRF}")
+    printf '>>> AUTHENTICATED post (using your decomp.me session) — scratches will be owned by you\n' >&2
+fi
+
 die() {
     printf 'error: %s\n' "$1" >&2
     exit 1
@@ -171,6 +203,7 @@ http_code="$(
     curl -sS --max-time 60 \
         -X POST "$API_BASE/scratch" \
         -H "Content-Type: application/json" \
+        "${auth_headers[@]}" \
         --data-binary @"$body_file" \
         -o "$tmp_resp" \
         -w "%{http_code}"
