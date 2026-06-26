@@ -410,20 +410,13 @@ def fe8u_allowed(name):
         b = open(binp, "rb").read()
         rom = [i * 4 for i in range(len(b) // 4)
                if ROM_LO <= struct.unpack_from("<I", b, i * 4)[0] < ROM_HI]
-        try:
-            rel = _F.ptr_offsets_at_jp(jp, len(b))
-        except Exception:
-            rel = None
-        if not rel:
-            return None
-        relset = set(rel)
-        # SHIFT-CONFIRMED: enough JP pointers aligning with fe8u offsets proves the
-        # region shift; convert ONLY fe8u-pointer offsets, leave coincidental raw.
         if not rom:
             return None
-        aligned = sum(1 for o in rom if o in relset)
-        if aligned == len(rom) or (aligned >= 3 and aligned >= 0.5 * len(rom)):
-            return lambda O: O in relset
+        # PER-WORD fe8u oracle (precise, spans symbol boundaries), shift-confirmed
+        # by >=3 corroborating relocations.
+        ptr_offs = set(O for O in rom if _F.fe8u_ptr_at_jp(jp + O) is True)
+        if len(ptr_offs) >= 3 or (ptr_offs and len(ptr_offs) == len(rom)):
+            return lambda O: O in ptr_offs
         return None
     feset = set(fe)
     S, subs = derive_stride(fe)
