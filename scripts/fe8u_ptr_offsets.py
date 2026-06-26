@@ -133,7 +133,10 @@ def _load_us_index():
             if ROM_LO <= ad < ROM_HI:
                 a2n.setdefault(ad, p[2])
     addrs = sorted(a2n)
-    anchors = []
+    # JP->US shift anchors. PRECISE source: every symbol name shared between the
+    # JP build and fe8u (25k+ anchors) gives an exact per-symbol shift -- far finer
+    # than the 7.7k-entry us_jp_funcmap. Union both; shared-name wins on overlap.
+    anchors = {}
     fm = os.path.join(ROOT, "layout", "us_jp_funcmap.tsv")
     if os.path.exists(fm):
         for l in open(fm, errors="replace"):
@@ -142,11 +145,32 @@ def _load_us_index():
             p = l.split("\t")
             if len(p) >= 2:
                 try:
-                    anchors.append((int(p[0], 16), int(p[1], 16)))
+                    anchors[int(p[0], 16)] = int(p[1], 16)
                 except ValueError:
                     pass
-    anchors.sort()
-    _US_IDX = (addrs, a2n, anchors, [a for a, _ in anchors])
+    jp_elf = os.path.join(ROOT, "fireemblem8.elf")
+    if os.path.exists(jp_elf):
+        out2 = subprocess.run(["arm-none-eabi-nm", jp_elf],
+                              capture_output=True, text=True, errors="replace").stdout
+        jp_a = {}
+        for l in out2.splitlines():
+            p = l.split()
+            if len(p) == 3:
+                try:
+                    ad = int(p[0], 16)
+                except ValueError:
+                    continue
+                if ROM_LO <= ad < ROM_HI:
+                    jp_a.setdefault(p[2], ad)
+        # invert a2n (US addr->name) to name->US addr
+        n2a = {}
+        for ad, nm in a2n.items():
+            n2a.setdefault(nm, ad)
+        for nm, jad in jp_a.items():
+            if nm in n2a:
+                anchors[jad] = n2a[nm]
+    anch = sorted(anchors.items())
+    _US_IDX = (addrs, a2n, anch, [a for a, _ in anch])
     return _US_IDX
 
 def ptr_offsets_at_jp(jp_addr, blob_len):

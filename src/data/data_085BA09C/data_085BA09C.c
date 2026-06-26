@@ -4,4 +4,18 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 data_085BA09C[] __attribute__((section(".data.residue.085BA09C"))) = INCBIN_U8("data/residual/data_085BA09C.bin");
+__asm__(
+"\t.section .data.residue.085BA09C, \"aw\", %progbits\n"
+"\t.global data_085BA09C\n"
+"data_085BA09C:\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte ItemGot_DisplayLePopup + 0x1\n"
+"\t.4byte 0x0000000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte ItemGot_GotLeItem + 0x1\n"
+"\t.4byte 0x0000000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);  /* de-pointered slice data_085BA09C: ptr=2 data=8 skip=0 */
