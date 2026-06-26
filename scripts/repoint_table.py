@@ -50,9 +50,9 @@ def load_syms():
         try: addr = int(a_s, 16)
         except ValueError: continue
         if not (ROM_LO <= addr < ROM_HI): continue
-        if typ in ("U", "u", "a", "A", "N"): continue
+        if (not typ.isupper()) or typ in ("U", "A", "N"): continue  # globals only (linkable extern)
         if not IDENT.match(name): continue   # skip .gcc2_compiled., $t, $d mapping syms
-        is_func = typ in ("t", "T")
+        is_func = typ == "T"
         cur = by_addr.get(addr)
         if cur is None or _rank(name) < _rank(cur[0]):
             by_addr[addr] = (name, max(size, cur[1] if cur else 0), is_func or (cur[2] if cur else False))
@@ -125,13 +125,18 @@ def emit_c(name, binp, section, addrs, by_addr, safe_only=False):
     c.append("")
     c.append("/* De-pointered from data/residual/%s.bin by scripts/repoint_table.py." % name)
     c.append(" * Pointer words are emitted as relocatable symbol references so the ROM")
-    c.append(" * is SHIFTABLE; byte-identical to baserom (gated by `make compare`). */")
+    c.append(" * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).")
+    c.append(" *")
+    c.append(" * Defined under a private name + published as a type-less assembler")
+    c.append(" * alias so a typed header declaration (struct Foo NAME[];) does not")
+    c.append(" * conflict -- the data bytes (.word relocations) are byte-identical. */")
     c.append("")
     c.extend(ext_lines)
     c.append("")
-    c.append("SECTION(\"%s\") const u32 %s[] = {" % (section, name))
+    c.append("SECTION(\"%s\") static const u32 %s__shift[] = {" % (section, name))
     c.extend(lines)
     c.append("};")
+    c.append("__asm__(\".global %s\\n\\t.set %s, %s__shift\\n\");" % (name, name, name))
     c.append("")
     stats = "ptr=%d data=%d skip=%d" % (nptr, ndata, nskip)
     return "\n".join(c), stats

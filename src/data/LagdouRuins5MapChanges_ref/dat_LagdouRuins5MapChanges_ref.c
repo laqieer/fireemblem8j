@@ -1,7 +1,36 @@
 #include "global.h"
 
-/* Migrated from asm/dat_LagdouRuins5MapChanges_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/LagdouRuins5MapChanges.bin by scripts/repoint_table.py.
+ * Pointer words are emitted as relocatable symbol references so the ROM
+ * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
+ *
+ * Defined under a private name + published as a type-less assembler
+ * alias so a typed header declaration (struct Foo NAME[];) does not
+ * conflict -- the data bytes (.word relocations) are byte-identical. */
 
-SECTION(".rodata.dat_LagdouRuins5MapChanges_ref") u8 LagdouRuins5MapChanges[] = INCBIN_U8("data/residual/LagdouRuins5MapChanges.bin");
+extern const u8 UnitDef_Ruin5Ally[];
+extern const u8 data_08A5DE70[];
+extern const u8 frontier_df4_menu_005_A5FFAD[];
+extern const u8 gUidebug_2[];
+
+SECTION(".rodata.dat_LagdouRuins5MapChanges_ref") static const u32 LagdouRuins5MapChanges__shift[] = {
+    (u32)&data_08A5DE70 + 0x60,
+    (u32)&data_08A5DE70 + 0x88,
+    (u32)&data_08A5DE70 + 0x8C,
+    (u32)&data_08A5DE70 + 0xB4,
+    (u32)&data_08A5DE70 + 0xD0,
+    (u32)&data_08A5DE70 + 0xD4,
+    (u32)&data_08A5DE70 + 0xD8,
+    (u32)&data_08A5DE70 + 0xDC,
+    (u32)&gUidebug_2 + 0x664,
+    (u32)&frontier_df4_menu_005_A5FFAD + 0x78,
+    (u32)&UnitDef_Ruin5Ally,
+    (u32)&UnitDef_Ruin5Ally,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+};
+__asm__(".global LagdouRuins5MapChanges\n\t.set LagdouRuins5MapChanges, LagdouRuins5MapChanges__shift\n");

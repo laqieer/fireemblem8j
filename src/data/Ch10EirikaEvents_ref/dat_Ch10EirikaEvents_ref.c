@@ -1,7 +1,49 @@
 #include "global.h"
 
-/* Migrated from asm/dat_Ch10EirikaEvents_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/Ch10EirikaEvents.bin by scripts/repoint_table.py.
+ * Pointer words are emitted as relocatable symbol references so the ROM
+ * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
+ *
+ * Defined under a private name + published as a type-less assembler
+ * alias so a typed header declaration (struct Foo NAME[];) does not
+ * conflict -- the data bytes (.word relocations) are byte-identical. */
 
-SECTION(".rodata.dat_Ch10EirikaEvents_ref") u8 Ch10EirikaEvents[] = INCBIN_U8("data/residual/Ch10EirikaEvents.bin");
+extern const u8 EventListScr_Ch10a_Character[];
+extern const u8 EventListScr_Ch10a_Location[];
+extern const u8 EventScr_Ch10a_BeginningScene[];
+extern const u8 EventScr_Ch10a_EndingScene[];
+extern const u8 UnitDef_Ch10AEnemy_7[];
+extern const u8 UnitDef_Ch10AEnemy_8[];
+extern const u8 UnitDef_Ch10AEnemy_9[];
+extern const u8 UnitDef_Event_Ch10aAlly[];
+extern const u8 data_0890D234[];
+extern const u8 data_0890D554[];
+extern const u8 data_0890D874[];
+extern const u8 data_08A5B2B4[];
+extern const u8 data_08A5B3A8[];
+extern const u8 frontier_df4_menu_005_A5FFAD[];
+extern const u8 gUidebug_2[];
+
+SECTION(".rodata.dat_Ch10EirikaEvents_ref") static const u32 Ch10EirikaEvents__shift[] = {
+    (u32)&data_08A5B2B4,
+    (u32)&EventListScr_Ch10a_Character,
+    (u32)&EventListScr_Ch10a_Location,
+    (u32)&data_08A5B3A8,
+    (u32)&data_08A5B3A8 + 0x1C,
+    (u32)&data_08A5B3A8 + 0x20,
+    (u32)&data_08A5B3A8 + 0x24,
+    (u32)&data_08A5B3A8 + 0x28,
+    (u32)&gUidebug_2 + 0x333,
+    (u32)&frontier_df4_menu_005_A5FFAD + 0x3B,
+    (u32)&UnitDef_Event_Ch10aAlly,
+    (u32)&UnitDef_Event_Ch10aAlly,
+    (u32)&data_0890D234,
+    (u32)&data_0890D554,
+    (u32)&data_0890D874,
+    (u32)&UnitDef_Ch10AEnemy_7,
+    (u32)&UnitDef_Ch10AEnemy_8,
+    (u32)&UnitDef_Ch10AEnemy_9,
+    (u32)&EventScr_Ch10a_BeginningScene,
+    (u32)&EventScr_Ch10a_EndingScene,
+};
+__asm__(".global Ch10EirikaEvents\n\t.set Ch10EirikaEvents, Ch10EirikaEvents__shift\n");

@@ -58,7 +58,9 @@ def load_elf_symbols(elf):
             continue
         if not (ROM_LO <= addr < ROM_HI):
             continue
-        if typ in ("U", "u", "a", "A", "N"):  # undefined / absolute / debug
+        # Only GLOBAL definitions are linkable as a C `extern` reference target.
+        # nm: uppercase = global/external; exclude U (undef) / A (abs) / N (debug).
+        if (not typ.isupper()) or typ in ("U", "A", "N"):
             continue
         if not IDENT.match(name):  # skip .gcc2_compiled., $t/$d mapping symbols
             continue

@@ -1,7 +1,43 @@
 #include "global.h"
 
-/* Migrated from asm/dat_Ch2Events_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/Ch2Events.bin by scripts/repoint_table.py.
+ * Pointer words are emitted as relocatable symbol references so the ROM
+ * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
+ *
+ * Defined under a private name + published as a type-less assembler
+ * alias so a typed header declaration (struct Foo NAME[];) does not
+ * conflict -- the data bytes (.word relocations) are byte-identical. */
 
-SECTION(".rodata.dat_Ch2Events_ref") u8 Ch2Events[] = INCBIN_U8("data/residual/Ch2Events.bin");
+extern const u8 EventListScr_Ch2_Location[];
+extern const u8 EventListScr_Ch2_Tutorial[];
+extern const u8 EventScr_Ch2_BeginningScene[];
+extern const u8 EventScr_Ch2_EndingScene[];
+extern const u8 UnitDef_Event_Ch2Ally[];
+extern const u8 data_08A5A910[];
+extern const u8 data_08A5A9B4[];
+extern const u8 frontier_df4_menu_005_A5FFAD[];
+extern const u8 gUidebug_2[];
+
+SECTION(".rodata.dat_Ch2Events_ref") static const u32 Ch2Events__shift[] = {
+    (u32)&data_08A5A910,
+    (u32)&data_08A5A910 + 0x28,
+    (u32)&EventListScr_Ch2_Location,
+    (u32)&data_08A5A9B4,
+    (u32)&data_08A5A9B4 + 0x1C,
+    (u32)&data_08A5A9B4 + 0x20,
+    (u32)&data_08A5A9B4 + 0x24,
+    (u32)&EventListScr_Ch2_Tutorial,
+    (u32)&gUidebug_2 + 0x314,
+    (u32)&frontier_df4_menu_005_A5FFAD + 0x28,
+    (u32)&UnitDef_Event_Ch2Ally,
+    (u32)&UnitDef_Event_Ch2Ally,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&EventScr_Ch2_BeginningScene,
+    (u32)&EventScr_Ch2_EndingScene,
+};
+__asm__(".global Ch2Events\n\t.set Ch2Events, Ch2Events__shift\n");
