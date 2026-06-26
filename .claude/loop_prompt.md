@@ -9,33 +9,35 @@ data; every pointer is a relocated symbol reference). Signal completion ONLY whe
 all six axes (`scripts/calcprogress.py`) are met, by outputting the promise
 phrase `FE8J_FINAL_GOAL_DONE`.
 
-## CURRENT PRIORITY FRONTIER — SHIFTABILITY (axis #5, D296)
+## CURRENT PRIORITY FRONTIER — SHIFTABILITY (axis #5, D296/D297/D299)
 
-The largest remaining frontier is NOT the 31 asm functions — it is the **11,149
-hardcoded absolute ROM pointers** still baked into raw-incbin data (`make compare`
-is byte-perfect but the ROM is only ~44% shiftable; a real decomp must relocate
-every pointer or it crashes when sections shift). Track + drive this every tick:
+A real decomp must relocate every pointer or it crashes when sections shift.
+Honest state: **67.88% literal / 69.02% real shiftable; 5,238 REAL hardcoded
+pointers remain** (`scripts/audit_pointers.py --metrics`). 0 dangling.
 
-- **Audit:** `python3 scripts/audit_pointers.py [--metrics]` (axes #5/#6). 0 dangling.
-- **Safe auto-levers (run first each tick, both EXHAUSTED now):**
-  `repoint_table.py --auto-safe` (every ROM-range word resolves EXACT) and
-  `--auto-dense --frac=0.5` (pointer-dense tables). Both emit a pure `__asm__`
-  block of `.4byte sym` (no C decl -> no header conflict). Commit if make compare OK.
-- **The CORRECTNESS gate is fe8u, NOT byte-exactness** (D297). `make compare` only
-  catches function-target mistakes (thumb bit -> +1 byte); a DATA-field coincidental
-  constant (a `struct UnitDefinition` AI/flag word that happens to be 0x08xxxxxx) is
-  byte-exact now but a SILENT crash-on-shift. So:
-  - SAFE to bulk-convert: EXACT words; pure pointer arrays; fe8u `Type *NAME[]`
-    array-of-pointers (every slot is a pointer; JP filling a US-NULL slot is benign).
-  - NOT safe on density alone: struct arrays (`struct UnitDefinition[]`,
-    `struct ClassData[]`) -> convert ONLY fe8u-confirmed pointer offsets via
-    `scripts/fe8u_ptr_offsets.py <NAME>` (reads fe8u .o relocations = the pointer
-    slots). The converter already refuses INTERIOR-into-function (off>1).
-- **Track B (the bulk — ~9,681 left, struct-array + generic blobs):** for each
-  table, get fe8u's pointer offsets (`fe8u_ptr_offsets.py`), handle the struct
-  STRIDE + JP divergence, convert only those slots, `make compare`. OR full
-  fe8u-structured port (also retires axis #6 editability + naming). Per-table,
-  multi-session. NEVER bulk-convert a struct array on density (D297).
+- **TWO HARD RULES (do not relearn these):**
+  1. **Effectiveness, not just make compare (D299).** `make compare` OK does NOT
+     mean a de-pointering worked. Every `asm/dat_*.s` that incbins residual data
+     is an EXCLUDED placeholder; editing it is a DEAD no-op that still passes.
+     De-point the LINKED source (`src/data/<name>_ref/dat_<name>_ref.c` or the
+     sliced `src/data/<name>/<name>.c`), and VERIFY the relocated count rose
+     (`audit_pointers.py` hardcoded fell). The converter now skips the asm path.
+  2. **fe8u is the correctness gate, not byte-exactness (D297).** make compare
+     catches only function-target thumb-bit mistakes; a DATA-field coincidental
+     constant in ROM range is byte-exact now but a SILENT crash-on-shift. Convert
+     ONLY at fe8u-confirmed pointer offsets (`scripts/fe8u_ptr_offsets.py`), never
+     on density. The `--fe8u-safe` mode does this for `_ref` tables + extends to
+     un-named `data_<JPaddr>` via region-shift address mapping with offset-
+     alignment self-validation.
+- **Lever (run, then VERIFY hardcoded fell):** `repoint_table.py --fe8u-safe`
+  (handles `_ref` tables). Commit only if make compare OK AND the auditor's
+  hardcoded count actually dropped.
+- **The bulk (~4,990 real) is in sliced `src/data/<name>/<name>.c` tables**
+  (`INCBIN_U8(bin, off, len)` sub-symbols, mostly un-named `data_*`). NEXT
+  MECHANISM TO BUILD: a sliced-source rewriter — for each sub-symbol convert its
+  slice to `.4byte` gated by that sub-symbol's fe8u offsets (named) or per-slice
+  `data_<JPaddr+off>` address mapping (un-named); rewrite the LINKED .c, not asm.
+  Then the JP-divergent EventScr bytecode. Per-table, multi-session.
 
 ## When orchestrating background agents (P9 wave mode) — DO THIS EVERY TICK FIRST
 
