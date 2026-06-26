@@ -340,9 +340,9 @@ def emit_true_debt():
         t = open(cf, errors="replace").read()
         for m in _re.finditer(r'u8\s+(\w+)\s*\[\s*\]\s*__attribute__\(\(section\("([^"]+)"\)\)\)'
                               r'\s*=\s*INCBIN_U8\("data/residual/([A-Za-z0-9_.]+\.bin)"'
-                              r'(?:\s*,\s*(\d+)\s*,\s*(\d+))?\)', t):
+                              r'(?:\s*,\s*(0[xX][0-9A-Fa-f]+|\d+)\s*,\s*(0[xX][0-9A-Fa-f]+|\d+))?\)', t):
             sym, sec, binn, off, ln = m.groups()
-            smap.setdefault(binn, []).append((sym, sec, int(off) if off else 0, ln))
+            smap.setdefault(binn, []).append((sym, sec, int(off, 0) if off else 0, ln))
     # PER-WORD fe8u oracle: for each hardcoded word, find its JP address (from the
     # sliced sub-symbol's .data.residue.<ADDR> section, or a data_<addr> name) and
     # ask fe8u whether it relocates there. Precise (spans symbol boundaries).
@@ -367,10 +367,13 @@ def emit_true_debt():
             O = i * 4; jp = None
             if slices:
                 for (sym, sec, off, ln) in slices:
-                    ln = int(ln) if ln else len(d) - off
+                    ln = int(ln, 0) if ln else len(d) - off
                     if off <= O < off + ln:
+                        # the bin maps to the section's residue base, so the word at
+                        # bin-offset O is simply at base + O (the earlier `+ (O-off)`
+                        # under-counted off>0 slices by their bin offset).
                         mm = _re.search(r'residue\.([0-9A-Fa-f]{6,8})', sec)
-                        if mm: jp = int(mm.group(1), 16) + (O - off)
+                        if mm: jp = int(mm.group(1), 16) + O
                         break
             elif nm:
                 jp = int(nm.group(1), 16) + O
