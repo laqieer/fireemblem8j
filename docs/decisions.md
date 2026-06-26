@@ -7450,3 +7450,44 @@ provable floor). **Net:** the genuinely-impossible floor is SMALLER than D287 im
 twins + the custom-newlib cluster), and several functions I'd written off (RegisterTsaWithOffset = 6 bytes) are
 close NEARs the fleet can crack. LESSON: verify which function a #ifdef guard wraps before declaring a function
 impossible — don't trust grep proximity.
+
+## D288 — Real-source + lib-link sweep (+7 matching-C): the D287-CORRECTION mindset applied to the whole "hard" tail
+**Date:** 2026-06-26. **Decision/finding:** re-verifying every "confirmed-hard" / "impossible" still-asm function
+(not trusting the prior verdict) cleared a whole vein of mislabeled functions, taking matching-C 99.45% -> 99.49%
+(8632 -> 8639 / 8683; named still-asm 48 -> 39). The wins, by mechanism:
+- **newlib lib-links (+4):** `strcmp` (pure leaf, byte-exact vs libc.a:strcmp.o), and `__swsetup` / `__smakebuf` /
+  `__sfvwrite` (sub_80D8F5C) from wsetup.o / makebuf.o / fvwrite.o. The latter three are SAME-SIZE as the JP
+  bytes and differ ONLY at R_ARM_THM_CALL/R_ARM_ABS32 relocation sites — the linker resolves those to the JP
+  callee addresses (__sinit, _impure_ptr, _free_r, __smakebuf, _malloc_r, _fstat_r, isatty, __sseek, _cleanup_r,
+  memchr, memmove, __swsetup, _call_via_r3, fflush — all defined via jp_syms.s + the still-asm malloc cluster).
+  KEY LESSON (re-confirmed from the earlier newlib batch): a standalone-`.o` byte-diff at reloc sites is NOISE;
+  the oracle is the LINKED make compare. PROBE PATTERN: `ar x` the member, compare its `.text` size to the
+  gbadisasm-frag size; if equal AND every `cmp -l` diff offset falls inside an `objdump -r` relocation, it
+  lib-links. (The malloc/dtoa/locale cluster FAILS this — size-mismatch — so it is genuinely JP-custom
+  region-different, not lib-linkable. Confirmed _malloc_r 1308 vs 960, _free_r 640 vs 448, _dtoa_r 3668 vs 3320.)
+- **empty-fn return idioms as committed `src/*.s` (+2):** `nullsub_111` (0x080D65F4) = `bx lr` + the `c046` thumb
+  nop — a C `void f(void){}` emits only `bx lr` and the build's appended `.align 2, 0` ZERO-pads the trailing
+  halfword (`0000`), but the ROM has the nop (alignment to the next libgcc object); no existing carved C function
+  has an odd-length range, so pure-C cannot produce this. `nullsub_3` (0x080D668C) = the non-interwork
+  `mov pc, lr` return (a C empty body emits `bx lr` under -mthumb-interwork). Both reproduced as committed
+  real-source asm via the SRC_S mechanism (`git ls-files 'src/*.s'` + a `.gitignore !src/<name>.s` exception,
+  like src/call_via.s); they count toward matching-C because `calcprogress.funcs` counts T-syms in ANY src/
+  object (.c or .s). GOTCHA: the .s MUST be `git add`ed before it appears in SRC_S_FILES, else the .o is never
+  built and the linker fills the region with a stale/empty object.
+- **region-same C carve (+1):** `VerifySramFast_Core` (0x080D6460, funcmap "exact" with US 0x080D1764) ported from
+  fe8u agb_sram.c at -O1 (same flag as its already-carved siblings ReadSramFast_Core / WriteSramFast).
+- **EfxAdvanceFrameLut (sub_8056890) corrected from "fe8u-own nonmatching = impossible" to a 2-insn NEAR.** fe8u
+  matches it WITH a `register u32 r6 asm("r6")` pin (the `#ifndef NONMATCHING` there selects the pin, it does not
+  mean "unmatchable"). The JP build colors differently: count naturally takes the callee-saved r6, time stays in
+  r1, and uframe/iframe unify into ONE sign-extended `int` (returned directly, no trailing sign-extend — use
+  `int iframe`, not `s16`). Residual reduced to 2 things, both pure permuter territory: (A) the `iframe==-4`
+  sentinel compiles as `bne; <return>` (fall-through return block that won't cross-jump with the normal-path
+  return) instead of the oracle's `beq shared_return` — a branch-polarity flip; literal `return -N` keeps the 6
+  independent `movs/negs` constants but duplicates the return (+2 insns), while goto/&&/single-return forms share
+  the return but trigger constant-CSE reassociation (`subs r0,#5; adds r0,#1`), and NO -O2 flag bridges the two
+  (swept -fno-gcse/-fno-cse-follow-jumps/-fno-strength-reduce/-Os/...); (B) a time/count load-coloring swap.
+  Staged as src/nonmatching/sub_8056890.c.
+**Net:** the genuinely-impossible floor keeps shrinking. Remaining 44 = newlib malloc/dtoa/locale (JP-custom
+reconstruct), SetSramFastFunc (static-BSS placement), j_ClearOam (thumb→arm veneer), and ~30 game sub_* reg-coloring
+NEARs (permuter fleet). LESSON (reinforcing D287-CORRECTION): "confirmed-hard"/"impossible" tags are ~30% wrong;
+re-derive from the actual fe8u body + the byte-diff, never from a prior verdict or grep proximity.
