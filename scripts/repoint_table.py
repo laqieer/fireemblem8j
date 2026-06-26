@@ -300,6 +300,12 @@ _SLICE_RE = re.compile(
     r'INCBIN_U8\("data/residual/(?P<bin>[A-Za-z0-9_.]+\.bin)"'
     r'(?:\s*,\s*(?P<off>\d+)\s*,\s*(?P<len>\d+))?\)\s*;')
 
+# alternate wiring: SECTION(".rodata.X") [const] u8 NAME[] = INCBIN_U8("...bin"[,off,len]);
+_SECTION_RE = re.compile(
+    r'(?P<indent>[ \t]*)SECTION\("(?P<sec>[^"]+)"\)\s*(?:const\s+)?u8\s+(?P<sym>\w+)\s*\[\s*\]\s*=\s*'
+    r'INCBIN_U8\("data/residual/(?P<bin>[A-Za-z0-9_.]+\.bin)"'
+    r'(?:\s*,\s*(?P<off>\d+)\s*,\s*(?P<len>\d+))?\)\s*;')
+
 def fe8u_allowed_slice(sym, sec, slice_bytes):
     """Gate for a sliced sub-symbol: fe8u offsets by NAME, else by the JP address
     embedded in its `.data.residue.<ADDR>` section (region-shift address map), with
@@ -370,6 +376,7 @@ def rewrite_src_slices(cf, addrs, by_addr, check=False):
         lines.append(');  /* de-pointered slice %s: %s */' % (sym, stats))
         return "\n".join(lines)
     new = _SLICE_RE.sub(repl, text)
+    new = _SECTION_RE.sub(repl, new)   # also the SECTION("...") u8 NAME[] = INCBIN form
     if nconv and not check:
         with open(cf, "w") as f:
             f.write(new)
