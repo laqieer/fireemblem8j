@@ -2,7 +2,13 @@
  * gbadisasm descriptive asm; carved_rom places those bytes). This C DOCUMENTS the
  * reconstruction and is NOT in make-compare: compiled only by `make nonmatching`.
  * Residual = agbcc spill-decision/reg-coloring vs the JP build (see
- * /tmp/longperm/800A34C/residual.txt); near-match build flags: // FLAGS: -fno-gcse   (REQUIRED — plain -O2 = 0x258/604B (+20); -fno-gcse = 0x248/584B EXACT).
+ * /tmp/longperm/800A34C/residual.txt); near-match build flags: // FLAGS: -fno-gcse
+ * (gives the right SIZE 0x248/584B, but NOT exact — a 2026-06-26 carve attempt
+ * measured 534/584 bytes differing vs ROM: the reconstruction's codegen diverges
+ * heavily from the JP build, so this is a deep reg-alloc/structure residual, NOT a
+ * near-carve. The earlier "EXACT" note was wrong; make compare is the only oracle.
+ * Callee sub_80D6378 (fixed-pt >>12 mul) is still baseline-incbin: bind it via a
+ * baseline_syms thumb entry @0x080D6378 before any future carve.)
  * Graduate via permuter/lever -> move to src/, flip the carved_rom row, drop asm. */
 // sub_800A34C: JP-only Catmull-Rom / natural-cubic-spline 2D evaluator (no fe8u twin).
 // Reconstructed from asm + IDA. sub_800A194 = Thomas-algorithm coeff solve; sub_80D6378 =
