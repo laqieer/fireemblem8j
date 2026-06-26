@@ -1,7 +1,37 @@
 #include "global.h"
 
-/* Migrated from asm/dat_UnitDef_Ch4NPC_1_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/UnitDef_Ch4NPC_1.bin by scripts/repoint_table.py.
+ * Pointer words are emitted as relocatable symbol references so the ROM
+ * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
+ *
+ * Defined under a private name + published as a type-less assembler
+ * alias so a typed header declaration (struct Foo NAME[];) does not
+ * conflict -- the data bytes (.word relocations) are byte-identical. */
 
-SECTION(".rodata.dat_UnitDef_Ch4NPC_1_ref") u8 UnitDef_Ch4NPC_1[] = INCBIN_U8("data/residual/UnitDef_Ch4NPC_1.bin");
+extern const u8 REDA_Ch4NPC_1_DOZLA[];
+extern const u8 REDA_Ch4NPC_1_LARACHEL[];
+extern const u8 REDA_Ch4NPC_1_RENNAC[];
+
+SECTION(".rodata.dat_UnitDef_Ch4NPC_1_ref") static const u32 UnitDef_Ch4NPC_1__shift[] = {
+    0x0B014B19,
+    0x0200014E,
+    (u32)&REDA_Ch4NPC_1_LARACHEL,
+    0x0000004C,
+    0x00000000,
+    0x0B01431A,
+    0x0100014E,
+    (u32)&REDA_Ch4NPC_1_DOZLA,
+    0x00000021,
+    0x00000000,
+    0x0B01331C,
+    0x0100018E,
+    (u32)&REDA_Ch4NPC_1_RENNAC,
+    0x00000003,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+};
+__asm__(".global UnitDef_Ch4NPC_1\n\t.set UnitDef_Ch4NPC_1, UnitDef_Ch4NPC_1__shift\n");

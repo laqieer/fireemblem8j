@@ -23,7 +23,7 @@ Usage:
     repoint_table.py --safe-only <name>...    # skip any word whose target is a Thumb function
                                               # (avoids the thumb-bit relocation hazard)
 """
-import os, sys, struct, bisect, subprocess, re
+import os, sys, struct, bisect, subprocess, re, glob
 
 ROM_LO, ROM_HI = 0x08000000, 0x09000000
 IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")  # valid C identifier (skip .gcc2_compiled., $t, ...)
@@ -141,13 +141,64 @@ def emit_c(name, binp, section, addrs, by_addr, safe_only=False):
     stats = "ptr=%d data=%d skip=%d" % (nptr, ndata, nskip)
     return "\n".join(c), stats
 
+def table_is_safe(binp, addrs, by_addr):
+    """A residual table is SAFE to auto-repoint iff every in-ROM-range word
+    resolves EXACT (to a symbol boundary, offset 0). EXACT-resolving words are
+    high-confidence pointers (a non-pointer constant essentially never equals a
+    symbol's exact start address); non-ROM words stay literal data. Any INTERIOR
+    word (mid-object) is ambiguous -> route to fe8u-structured porting, not auto.
+    Returns (safe, nptr) ; safe=False if 0 pointers or any interior/dangling."""
+    try:
+        with open(binp, "rb") as f:
+            b = f.read()
+    except OSError:
+        return (False, 0)
+    if len(b) == 0 or len(b) % 4:
+        return (False, 0)
+    nptr = 0
+    for i in range(len(b) // 4):
+        v = struct.unpack_from("<I", b, i * 4)[0]
+        if v == 0:
+            continue
+        if ROM_LO <= v < ROM_HI:
+            r = resolve(v, addrs, by_addr)
+            if r is None or r[1] != 0:   # dangling or interior -> unsafe
+                return (False, 0)
+            nptr += 1
+        # else: ordinary data word, fine
+    return (nptr > 0, nptr)
+
+def select_auto_safe(addrs, by_addr):
+    names = []
+    for binp in sorted(glob.glob(os.path.join(RESID, "*.bin"))):
+        name = os.path.basename(binp)[:-4]
+        cpath, _, _ = find_wrapper(name)
+        if not (cpath and os.path.exists(cpath)):
+            continue
+        with open(cpath, "r", errors="replace") as f:
+            if "INCBIN" not in f.read():
+                continue  # already de-pointered
+        safe, nptr = table_is_safe(binp, addrs, by_addr)
+        if safe:
+            names.append((nptr, name))
+    names.sort(reverse=True)
+    return names
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     check = "--check" in sys.argv
     safe_only = "--safe-only" in sys.argv
+    addrs, by_addr = load_syms()
+    if "--auto-safe" in sys.argv:
+        sel = select_auto_safe(addrs, by_addr)
+        print("auto-safe: %d tables, %d pointers" % (len(sel), sum(n for n, _ in sel)))
+        args = [name for _, name in sel]
+        if check:
+            for n, name in sel:
+                print("  %5d  %s" % (n, name))
+            return
     if not args:
         sys.exit(__doc__)
-    addrs, by_addr = load_syms()
     for name in args:
         cpath, binp, section = find_wrapper(name)
         if not os.path.exists(binp):
