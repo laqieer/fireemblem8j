@@ -45,3 +45,4 @@
 080E1D9A	rom	src/banim-efxmagic-fire.o(.rodata)	banim-efxmagic-fire .rodata region-diff (incbin)
 080E1D0E	rom	src/banim-efxmagic-thunder.o(.rodata)	banim-efxmagic-thunder .rodata region-diff (incbin)
 085FF6C0	rom	src/banim-efxmagic-thunder.o(.data)	banim-efxmagic-thunder .data region-diff (incbin)
+03002A10	iwram	src/agb_sram.o(.bss)	agb_sram: verifySramFast_Work@03002A10, readSramFast_Work@03002AB0

@@ -34,5 +34,11 @@ SECTIONS
         *(.note*)
         *(.ARM.attributes)
         *(.glue_7) *(.glue_7t)
+        /* Dead duplicate constant-pool agbcc emits for SetSramFastFunc's 8+
+           symbol-address loads (.LC0-.LC9 in .rodata): GAS re-inlines those
+           constants as pc-relative pools in .text (which byte-match the JP
+           ROM's inline pools), leaving this .rodata copy orphaned and
+           unreferenced. The JP ROM has no separate .rodata for it. */
+        src/agb_sram.o(.rodata)
     }
 }

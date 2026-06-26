@@ -307,7 +307,7 @@
 0D2B94	0D2C48	src/classchg-postconfirm.o(.text)	classchg-postconfirm(run): ClassChgPostConfirmGetUnit, ExecClassChgReal
 0D2F88	0D344C	src/bmguide.o(.text)	bmguide(run): ClearGuideCategoryTilemap, GuideMenuRefresh_SyncBg1, GuideMenuRefresh_SyncBg0Bg1...
 0D5E9C	0D5FE0	src/m4a.o(.text)	m4a(run): m4aMPlayVolumeControl, m4aMPlayPitchControl, m4aMPlayPanpotControl
-0D6548	0D6588	src/agb_sram.o(.text)	agb_sram(run): WriteAndVerifySramFast
+0D64AC	0D6588	src/agb_sram.o(.text)	agb_sram(run): SetSramFastFunc, WriteAndVerifySramFast
 0DC134	0DC144	src/rng.o(.rodata)	rng: InitRN seed table
 0DC15C	0DC3DC	src/data/trig_rodata/dat_trig_rodata.o(.rodata.dat_trig_rodata)	dat_trig_rodata region-same shifted (0KB)
 0DC650	0DC684	src/bmitem.o(.rodata)	bmitem .rodata
