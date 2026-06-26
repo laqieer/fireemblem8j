@@ -11,7 +11,6 @@ gImg_UiSpinningArrow_Horizontal	08A99270	data	unitlistscreen_080929D0
 gSortedUnitsBuf	0200D3E0	data	unitlistscreen_08092E20
 UnitList_AddUnit	08092E20	thumb	unitlistscreen_08092F30
 RegisterSioPid	080975CC	thumb	unitlistscreen_080934BC
-UnitList_PutRow	080945E8	thumb	unitlistscreen_080934BC
 IsCharacterForceDeployed	080976D0	thumb	unitlistscreen_08093560
 RemoveSioPid	080975F4	thumb	unitlistscreen_08093560
 UnitList_TogglePrepDeployState	08093604	thumb	unitlistscreen_08093744
