@@ -298,49 +298,39 @@ def emit_true_debt():
                               r'(?:\s*,\s*(\d+)\s*,\s*(\d+))?\)', t):
             sym, sec, binn, off, ln = m.groups()
             smap.setdefault(binn, []).append((sym, sec, int(off) if off else 0, ln))
-    us_addrs, a2n, anchors, ajp = F._load_us_index()
-    def fe_raw_nonptr(jp, O):
-        i = bisect.bisect_right(ajp, jp) - 1
-        if i < 0: return False
-        us = jp + O + (anchors[i][1] - anchors[i][0])
-        j = bisect.bisect_right(us_addrs, us) - 1
-        if j < 0: return False
-        offs = F.ptr_offsets(a2n[us_addrs[j]])
-        return offs is None or (us - us_addrs[j]) not in set(offs)
-    coinc = real = bcoinc = bunk = 0
+    # PER-WORD fe8u oracle: for each hardcoded word, find its JP address (from the
+    # sliced sub-symbol's .data.residue.<ADDR> section, or a data_<addr> name) and
+    # ask fe8u whether it relocates there. Precise (spans symbol boundaries).
+    real = coinc = bunk = 0
     for b in glob.glob(os.path.join(RESID, "*.bin")):
         if not is_live_raw(b): continue
         name = os.path.basename(b)[:-4]
         if gfx.search(name): continue
         d = open(b, "rb").read()
         slices = smap.get(name + ".bin")
+        nm = _re.match(r'(?:data|gUnkData|gap)_([0-9A-Fa-f]{6,8})$', name)
         for i in range(len(d) // 4):
             v = struct.unpack_from("<I", d, i * 4)[0]
             if not (ROM_LO <= v < ROM_HI): continue
-            O = i * 4; fe = None; rel = None; jp = None
+            O = i * 4; jp = None
             if slices:
                 for (sym, sec, off, ln) in slices:
                     ln = int(ln) if ln else len(d) - off
                     if off <= O < off + ln:
-                        fe = F.ptr_offsets(sym)
                         mm = _re.search(r'residue\.([0-9A-Fa-f]{6,8})', sec)
-                        jp = int(mm.group(1), 16) if mm else None
-                        if fe is None and jp:
-                            try: fe = F.ptr_offsets_at_jp(jp, ln)
-                            except Exception: fe = None
-                        if fe is not None: rel = O - off
+                        if mm: jp = int(mm.group(1), 16) + (O - off)
                         break
-            if fe is not None:
-                if rel in set(fe): real += 1
-                else: coinc += 1
-            elif jp is not None and fe_raw_nonptr(jp, O - (off if slices else 0)):
-                bcoinc += 1
-            else:
-                bunk += 1
+            elif nm:
+                jp = int(nm.group(1), 16) + O
+            r = F.fe8u_ptr_at_jp(jp) if jp is not None else None
+            if r is True: real += 1
+            elif r is False: coinc += 1
+            else: bunk += 1
+    bcoinc = coinc
     true_debt = real + bunk
-    print("== TRUE real-pointer debt (fe8u-classified) ==")
+    print("== TRUE real-pointer debt (fe8u per-word classification) ==")
     print(f"  fe8u-confirmed coincidental (NOT a pointer)        : {coinc}")
-    print(f"  fe8u-blind but fe8u has the data raw -> coincidental: {bcoinc}")
+    print(f"  (above includes fe8u-has-data-raw cases)")
     print(f"  fe8u-confirmed REAL pointer still raw (convertible) : {real}")
     print(f"  fe8u-blind UNKNOWN (JP-only / no anchor)            : {bunk}")
     print(f"  => TRUE real-pointer debt (real + unknown)         : {true_debt}")
