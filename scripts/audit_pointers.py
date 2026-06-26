@@ -436,25 +436,48 @@ def emit_true_debt():
     asset_re = _re.compile(r'Img|Tsa|Pal|Chr|Gfx|Sprite|Anim|banim|Map|Tile|Portrait|'
                            r'Icon|_gf|OBJ|Reel|Sheet|BG|Frames|Obj|Lz|Comp|song|wave|'
                            r'sound|DirectSound|^pad_|^gap_|frontier_', _re.I)
-    blind_func = blind_asset = blind_data = blind_exact = blind_unres = 0
+    # rom-header / ROM-base target: nothing stores a DATA pointer into the cartridge
+    # header -- this is the UnitDef record-start case (packed {pid,jid,leader,bitfield};
+    # bitfield byte 0x08 makes the u32 read 0x080000xx, nearest sym = rom_header).
+    romhdr_re = _re.compile(r'^rom_header|^RomHeader|^gCartridge|^AgbMain')
+    # a word whose containing blob is a gap_/code region carries literal-pool pointers
+    # (real, but belong to the CODE-decompilation axis -- they relocate when the
+    # surrounding Thumb function is decompiled, not via data de-pointering).
+    code_re = _re.compile(r'^gap_|^pad_')
+    # struct UnitDefinition (stride 0x14) has exactly ONE pointer: redas @ 0x08. A
+    # ROM-range word in a UnitDef_* table at any other offset (mod 0x14) is a packed
+    # field (pid/jid/bitfield/coords/items/ai) that coincidentally reads 0x08xxxxxx --
+    # provably not a pointer (positive struct evidence). A real redas (O%0x14==0x08)
+    # stays classified as real.
+    udef_re = _re.compile(r'^g?UnitDef')
+    blind_func = blind_asset = blind_hdr = blind_code = blind_udef = blind_data = blind_exact = blind_unres = 0
+    real_data = []
     for (n, O, jp, v) in blindhits:
         kind, sym, off = classify(v, elfaddrs, _a2n, _a2s)
-        if kind == "EXACT": blind_exact += 1
+        if kind == "EXACT": blind_exact += 1; real_data.append((n, O, v, sym, off))
         elif kind == "DANGLING": blind_unres += 1
         elif sym in _fn: blind_func += 1
+        elif romhdr_re.search(sym): blind_hdr += 1
+        elif udef_re.search(n) and (O % 0x14) != 0x08: blind_udef += 1
         elif asset_re.search(sym): blind_asset += 1
-        else: blind_data += 1
-    struct_coinc = coinc + blind_func + blind_asset
-    ambiguous = blind_data + blind_exact + blind_unres
-    print("== TRUE real-pointer debt (fe8u oracle + structural classification) ==")
-    print(f"  fe8u-confirmed coincidental (NOT a pointer)          : {coinc}")
-    print(f"  fe8u-blind, FUNC-interior (coincidental)             : {blind_func}")
-    print(f"  fe8u-blind, ASSET-interior gfx/sound/pad (coincidental): {blind_asset}")
-    print(f"  => coincidental constants (never relocatable)        : {struct_coinc}")
-    print(f"  fe8u-confirmed REAL pointer still raw (convertible)   : {real}")
-    print(f"  fe8u-blind DATA-interior, ambiguous (per-table RE)    : {ambiguous}")
-    print(f"  => REAL real-pointer debt: {real} confirmed + <={ambiguous} ambiguous "
-          f"(spot-checks: ~all coincidental)")
+        elif code_re.search(n): blind_code += 1
+        else: blind_data += 1; real_data.append((n, O, v, sym, off))
+    struct_coinc = coinc + blind_func + blind_asset + blind_hdr + blind_udef
+    # completion gate: confirmed-real + unclassified DATA-pointer debt (code-axis excluded)
+    gate = real + blind_data + blind_exact + blind_unres
+    print("== SHIFTABILITY true debt (fe8u oracle + structural classification) ==")
+    print(f"  raw 0x08xxxxxx words classified                      : {len(blindhits)+coinc+real}")
+    print(f"  coincidental constants (never relocatable)           : {struct_coinc}")
+    print(f"     fe8u-confirmed {coinc} + FUNC-interior {blind_func} + "
+          f"ASSET-interior {blind_asset} + ROM-header {blind_hdr} + UnitDef-field {blind_udef}")
+    print(f"  CODE-axis literal pools (relocate on code decomp)    : {blind_code}")
+    print(f"  fe8u-confirmed REAL data ptr still raw (convertible)  : {real}")
+    print(f"  unclassified DATA-interior / EXACT / dangling        : {blind_data + blind_exact + blind_unres}")
+    print(f"  => COMPLETION GATE (confirmed-real + unclassified)    : {gate}")
+    if "--gate" in sys.argv:
+        print("  -- residual real/unclassified DATA-pointer words --")
+        for (n, O, v, sym, off) in real_data:
+            print(f"     {n} off=0x{O:X} val=0x{v:08X} -> {sym}+0x{off:X}")
 
 
 if __name__ == "__main__":
