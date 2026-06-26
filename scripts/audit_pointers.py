@@ -131,6 +131,33 @@ def is_live_raw(binpath):
     elsewhere (gClassData via data_classes.c) drop out automatically."""
     return os.path.basename(binpath) in _srcdata_incbin_bins()
 
+_INCBIN_RANGES = None
+def incbin_ranges(binname):
+    """The byte ranges of a .bin that are STILL INCBIN'd (raw) in src/data -- a
+    table can be PARTIALLY de-pointered (some sub-symbols rewritten to .4byte
+    blocks, others still INCBIN), so counting the whole file double-counts the
+    converted slices against the relocated total. Returns [(off, len), ...] or
+    [(0, filesize)] for a whole-file INCBIN."""
+    global _INCBIN_RANGES
+    if _INCBIN_RANGES is None:
+        _INCBIN_RANGES = {}
+        out = subprocess.run(
+            ["grep", "-rhoE",
+             r'INCBIN_U[0-9]+\("data/residual/[A-Za-z0-9_.]+\.bin"(\s*,\s*[0-9]+\s*,\s*[0-9]+)?',
+             os.path.join(ROOT, "src", "data")],
+            capture_output=True, text=True, errors="replace").stdout
+        for line in out.splitlines():
+            m = re.search(r'data/residual/([A-Za-z0-9_.]+\.bin)"(?:\s*,\s*(\d+)\s*,\s*(\d+))?', line)
+            if not m:
+                continue
+            bn = m.group(1)
+            if m.group(2) is not None:
+                _INCBIN_RANGES.setdefault(bn, []).append((int(m.group(2)), int(m.group(3))))
+            else:
+                _INCBIN_RANGES.setdefault(bn, "WHOLE")
+    r = _INCBIN_RANGES.get(binname)
+    return r
+
 def main():
     if not os.path.exists(ELF):
         sys.exit(f"ELF not found: {ELF} (run `make` first)")
@@ -146,8 +173,17 @@ def main():
         with open(path, "rb") as f:
             b = f.read()
         n = len(b) // 4
+        # only count words in byte ranges STILL INCBIN'd (raw); partially de-pointered
+        # tables have some slices already converted to .4byte (counted as relocated).
+        rngs = incbin_ranges(os.path.basename(path))
+        def is_raw(off):
+            if rngs == "WHOLE" or rngs is None:
+                return True
+            return any(o <= off < o + ln for (o, ln) in rngs)
         c = {"EXACT": 0, "INTERIOR": 0, "DANGLING": 0}
         for i in range(n):
+            if not is_raw(i * 4):
+                continue
             v = struct.unpack_from("<I", b, i * 4)[0]
             if ROM_LO <= v < ROM_HI:
                 kind, _, _ = classify(v, addrs, addr2name, addr2size)
