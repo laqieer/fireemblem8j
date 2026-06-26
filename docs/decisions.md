@@ -7525,3 +7525,36 @@ splits), but ~20 members of effort for +1 tracked still-asm (it DOES properly de
 subsystem, currently mislabeled as data). DEFERRED behind the game sub_* NEARs (permuter). The 31 remaining game
 sub_* are register-coloring NEARs (EfxAdvanceFrameLut/RegisterTsaWithOffset proven 2-6 B residuals) -- permuter
 compute-time, not levers.
+
+## D290 — the 34-function floor is fully traced to the agbcc local register-allocator; the root lever is research-grade
+**Date:** 2026-06-26. **Diagnosis (definitive, byte-verified):** after this session cleared the entire
+newlib/libgcc subsystem (+18, 99.45%->99.61%, D289), the 34 remaining still-asm functions are ALL game sub_*
+register-COLORING residuals, and I have now traced them to their exact root cause and exhausted every tractable
+lever against them:
+- **Source levers** (idioms, decl-order, branch-polarity goto/&&/literal forms, reference-count, live-range,
+  register-named locals): tested per-function -> large reg-coloring residuals remain (e.g. Event0F_CounterOps
+  permuter-best source = 28-byte diff under -mjp-promote; EfxAdvanceFrameLut = a 2-insn branch-polarity +
+  load-coloring residual; RegisterTsaWithOffset = a 6-byte i/dst r2<->r3 swap).
+- **Register pins** (`register T x asm("rN")`): reconfirmed the coloring ceiling (the swap cascades).
+- **Toolchain knobs** (the agbcc_jp_promote.patch flags): -mjp-promote is already applied where it helps;
+  **-mjp-nocrossjump** only gates jump_optimize's cross_jump (tail-merging) and goes the WRONG direction on the
+  merged-return class (EfxAdvanceFrameLut 67->73 insns), which is why its author never landed that carve;
+  **-mjp-regorder** only reorders the PROLOGUE high-reg PUSH list (thumb.c:thumb_function_prologue, r8-r12
+  ascending vs descending) -- it does NOT touch the actual register ALLOCATION. Batch-tested all combos on every
+  staged + closest function: none reach 0.
+- **Permuter** (decomp-permuter, stochastic source mutation): running the whole session; PLATEAUED (Event0F=75,
+  PutFaceOnBackGround=105, AddAttr2dBitMap=120, AdjustNewUnitPosition=185, never 0).
+**ROOT CAUSE:** the JP ROM's original agbcc colored low registers (r2/r3 tie-breaks, callee-saved r4-r7
+assignment) differently from this reconstructed pret/agbcc. The decision lives in GCC-2.x's
+local-alloc.c/global.c (the priority formula floor_log2(n_refs)*n_refs*size/live_length, the pseudo processing
+order, and REG_ALLOC_ORDER) -- NOT in the prologue (-mjp-regorder) or jump (-mjp-nocrossjump) passes the existing
+patch touches. **THE ROOT LEVER (research-grade, NOT attempted):** extend scripts/agbcc_jp_promote.patch with a
+gated flag (e.g. -mjp-allocorder, bit 0x100000) that flips local-alloc.c's hard-register assignment order /
+REG_ALLOC_ORDER to reproduce the JP allocator, then per-TU CC1FLAGS like -mjp-promote. This requires: clone
+github.com/pret/agbcc (the pinned commit in build_jp_agbcc.sh), study the GCC-2.x register allocator, find the
+exact decision that flips i<->dst (likely the order pseudos are sorted by priority, or the SCC copy-preference in
+local-alloc.c's `qty` handling), add the flag default-OFF (so the ~8500 matching TUs are byte-unchanged), rebuild
+(~10 min), and validate on RegisterTsaWithOffset/EfxAdvanceFrameLut/Event0F. Uncertain outcome (the residual may
+be the priority formula, not a simple order flip) + breakage risk if the gate leaks. **Until then the only
+mechanisms are the permuter (stochastic, plateaued) and decomp.me (community).** The build is byte-perfect +
+self-contained (the project's real goal); matching-C is at a genuine, fully-diagnosed agbcc-allocator floor.
