@@ -1,0 +1,1 @@
+0DA36C	0DA3C8	*libc.a:strcmp.o(.text)	strcmp lib-link (newlib word-at-a-time; byte-verified vs JP)
