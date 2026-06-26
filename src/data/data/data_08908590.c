@@ -20,4 +20,23 @@ u8 REDA_Ch1_8[] __attribute__((section(".data.residue.089085F8"))) = INCBIN_U8("
 u8 REDA_Ch1_9[] __attribute__((section(".data.residue.08908600"))) = INCBIN_U8("data/residual/data_08908590.bin", 112, 8);
 u8 REDA_Ch1_NpcCavalier[] __attribute__((section(".data.residue.08908608"))) = INCBIN_U8("data/residual/data_08908590.bin", 120, 24);
 u8 REDA_Ch1_NpcMercenary[] __attribute__((section(".data.residue.08908620"))) = INCBIN_U8("data/residual/data_08908590.bin", 144, 8);
-u8 UnitDef_Event_Ch1Ally[] __attribute__((section(".data.residue.08908628"))) = INCBIN_U8("data/residual/data_08908590.bin", 152, 60);
+__asm__(
+"\t.section .data.residue.08908628, \"aw\", %progbits\n"
+"\t.global UnitDef_Event_Ch1Ally\n"
+"UnitDef_Event_Ch1Ally:\n"
+"\t.4byte 0x08010201\n"
+"\t.4byte 0x0100024E\n"
+"\t.4byte REDA_Ch1Ally_Eirika\n"
+"\t.4byte 0x00006C09\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x08010702\n"
+"\t.4byte 0x0100024E\n"
+"\t.4byte REDA_Ch1Ally_Seth\n"
+"\t.4byte 0x006C1703\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);  /* de-pointered slice UnitDef_Event_Ch1Ally: ptr=2 data=11 skip=2 */

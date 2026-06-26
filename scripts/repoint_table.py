@@ -169,13 +169,16 @@ def rewrite_asm_inplace(asm_path, name, binp, addrs, by_addr, safe_only, allowed
     return stats, stats
 
 def emit_words(name, binp, addrs, by_addr, safe_only=False, allowed=None):
-    """Core: turn each 4-byte word of the .bin into an asm directive string --
-    `.4byte sym (+off)` for a confirmed pointer, `.4byte 0xNN` for data/raw.
-    Returns (directives, stats) or (None, err). Shared by the C-wrapper and the
-    in-place asm rewriter. Byte-identical to baserom by construction (each
-    `.4byte sym` relocates to sym's address == the original bytes)."""
+    """Read the whole .bin and turn each 4-byte word into an asm directive."""
     with open(binp, "rb") as f:
         b = f.read()
+    return emit_words_bytes(b, addrs, by_addr, safe_only, allowed)
+
+def emit_words_bytes(b, addrs, by_addr, safe_only=False, allowed=None):
+    """Core: turn each 4-byte word of `b` into an asm directive string --
+    `.4byte sym (+off)` for a confirmed pointer, `.4byte 0xNN` for data/raw.
+    Returns (directives, stats) or (None, err). Shared by the whole-.bin path and
+    the sliced src/data INCBIN_U8(bin, off, len) sub-symbol path."""
     if len(b) % 4 != 0:
         return None, "size not 4-aligned (%d)" % len(b)
     out = []
@@ -232,6 +235,88 @@ def emit_c(name, binp, section, addrs, by_addr, safe_only=False, allowed=None):
     c.append(");")
     c.append("")
     return "\n".join(c), stats
+
+_SLICE_RE = re.compile(
+    r'(?P<indent>[ \t]*)(?:const\s+)?u8\s+(?P<sym>\w+)\s*\[\s*\]\s*'
+    r'__attribute__\(\(section\("(?P<sec>[^"]+)"\)\)\)\s*=\s*'
+    r'INCBIN_U8\("data/residual/(?P<bin>[A-Za-z0-9_.]+\.bin)"'
+    r'(?:\s*,\s*(?P<off>\d+)\s*,\s*(?P<len>\d+))?\)\s*;')
+
+def fe8u_allowed_slice(sym, sec, slice_bytes):
+    """Gate for a sliced sub-symbol: fe8u offsets by NAME, else by the JP address
+    embedded in its `.data.residue.<ADDR>` section (region-shift address map), with
+    STRICT full-alignment self-validation (every ROM-range word at a fe8u offset)."""
+    try:
+        import fe8u_ptr_offsets as _F
+        fe = _F.ptr_offsets(sym)
+    except Exception:
+        fe = None
+    if fe:
+        feset = set(fe); S, subs = derive_stride(fe); last = fe[-1]
+        if S:
+            return lambda O: (O in feset) or (O > last and (O % S) in subs)
+        return lambda O: O in feset
+    m = re.search(r'\.(?:data|rodata)\.residue\.([0-9A-Fa-f]{6,8})', sec)
+    if not m:
+        return None
+    jp = int(m.group(1), 16)
+    rom = [i * 4 for i in range(len(slice_bytes) // 4)
+           if ROM_LO <= struct.unpack_from("<I", slice_bytes, i * 4)[0] < ROM_HI]
+    if not rom:
+        return None
+    try:
+        import fe8u_ptr_offsets as _F
+        rel = _F.ptr_offsets_at_jp(jp, len(slice_bytes))
+    except Exception:
+        rel = None
+    if not rel:
+        return None
+    relset = set(rel)
+    if any(o not in relset for o in rom):   # not fully aligned -> wrong shift / divergent -> skip
+        return None
+    return lambda O: O in relset
+
+def rewrite_src_slices(cf, addrs, by_addr, check=False):
+    """De-point a LINKED src/data/<x>/<x>.c: replace each `u8 SUB[] __attribute__
+    ((section(S))) = INCBIN_U8(bin, off, len);` whose slice fe8u confirms has
+    pointers with a __asm__ block of `.4byte sym` relocations. Sub-symbols with no
+    fe8u-confirmed pointers are left as INCBIN. Returns (#converted, #ptrs)."""
+    with open(cf, "r", errors="replace") as f:
+        text = f.read()
+    nconv = nptr_total = 0
+    def repl(m):
+        nonlocal nconv, nptr_total
+        sym, sec, binn = m.group("sym"), m.group("sec"), m.group("bin")
+        binp = os.path.join(RESID, binn)
+        if not os.path.exists(binp):
+            return m.group(0)
+        b = open(binp, "rb").read()
+        off = int(m.group("off")) if m.group("off") else 0
+        ln = int(m.group("len")) if m.group("len") else len(b) - off
+        sl = b[off:off + ln]
+        if len(sl) % 4:
+            return m.group(0)
+        allowed = fe8u_allowed_slice(sym, sec, sl)
+        if allowed is None:
+            return m.group(0)
+        words, stats = emit_words_bytes(sl, addrs, by_addr, False, allowed)
+        if words is None or stats.startswith("ptr=0 "):
+            return m.group(0)
+        flags = 'aw' if ".data" in sec else 'a'
+        nconv += 1
+        nptr_total += int(re.search(r"ptr=(\d+)", stats).group(1))
+        lines = ['__asm__(',
+                 '"\\t.section %s, \\"%s\\", %%progbits\\n"' % (sec, flags),
+                 '"\\t.global %s\\n"' % sym,
+                 '"%s:\\n"' % sym]
+        lines += ['"\\t%s\\n"' % w for w in words]
+        lines.append(');  /* de-pointered slice %s: %s */' % (sym, stats))
+        return "\n".join(lines)
+    new = _SLICE_RE.sub(repl, text)
+    if nconv and not check:
+        with open(cf, "w") as f:
+            f.write(new)
+    return nconv, nptr_total
 
 def table_is_safe(binp, addrs, by_addr):
     """A residual table is SAFE to auto-repoint iff every in-ROM-range word
@@ -395,6 +480,18 @@ def main():
     safe_only = "--safe-only" in sys.argv
     fe8u_safe = "--fe8u-safe" in sys.argv
     addrs, by_addr = load_syms()
+    if "--src-slices" in sys.argv:
+        # de-point the LINKED sliced src/data/<x>/<x>.c INCBIN_U8 sub-symbols
+        files = sorted(glob.glob(os.path.join(ROOT, "src", "data", "*", "*.c")))
+        tot_t = tot_p = 0
+        for cf in files:
+            nc, npx = rewrite_src_slices(cf, addrs, by_addr, check)
+            if nc:
+                tot_t += nc; tot_p += npx
+                if check:
+                    print("  %-60s +%d subsyms, %d ptrs" % (os.path.relpath(cf, ROOT), nc, npx))
+        print("src-slices: %d sub-symbols de-pointered, %d pointers" % (tot_t, tot_p))
+        return
     asm_only = "--asm" in sys.argv  # restrict fe8u-safe to asm-incbin tables
     if fe8u_safe and not args:
         # all live raw residual tables: still-INCBIN _ref .c OR incbin'd in asm

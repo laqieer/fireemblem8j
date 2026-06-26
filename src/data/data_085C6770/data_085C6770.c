@@ -4,8 +4,76 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 sProcScr_StatusHealEffect_OverlayBg[] __attribute__((section(".data.residue.085C6770"))) = INCBIN_U8("data/residual/data_085C6770.bin", 0, 24);
-u8 sProcScr_StatusHealEffect_BlendedSprite[] __attribute__((section(".data.residue.085C6788"))) = INCBIN_U8("data/residual/data_085C6770.bin", 24, 32);
-u8 sProcScr_StatusHealEffect_BlendAnim[] __attribute__((section(".data.residue.085C67A8"))) = INCBIN_U8("data/residual/data_085C6770.bin", 56, 48);
-u8 sProcScr_StatusHealEffect_PalAnim[] __attribute__((section(".data.residue.085C67D8"))) = INCBIN_U8("data/residual/data_085C6770.bin", 104, 32);
-u8 sProcScr_StatusHealEffect[] __attribute__((section(".data.residue.085C67F8"))) = INCBIN_U8("data/residual/data_085C6770.bin", 136, 56);
+__asm__(
+"\t.section .data.residue.085C6770, \"aw\", %progbits\n"
+"\t.global sProcScr_StatusHealEffect_OverlayBg\n"
+"sProcScr_StatusHealEffect_OverlayBg:\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte StatusHealEffect_OverlayBg_Init + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte StatusHealEffect_OverlayBg_Loop + 0x1\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);  /* de-pointered slice sProcScr_StatusHealEffect_OverlayBg: ptr=2 data=4 skip=0 */
+__asm__(
+"\t.section .data.residue.085C6788, \"aw\", %progbits\n"
+"\t.global sProcScr_StatusHealEffect_BlendedSprite\n"
+"sProcScr_StatusHealEffect_BlendedSprite:\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte StatusHealEffect_BlendedSprite_Init + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte StatusHealEffect_BlendedSprite_Loop + 0x1\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte StatusHealEffect_BlendedSprite_Finish + 0x1\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);  /* de-pointered slice sProcScr_StatusHealEffect_BlendedSprite: ptr=3 data=5 skip=0 */
+__asm__(
+"\t.section .data.residue.085C67A8, \"aw\", %progbits\n"
+"\t.global sProcScr_StatusHealEffect_BlendAnim\n"
+"sProcScr_StatusHealEffect_BlendAnim:\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte StatusHealEffect_BlendSpriteAnim_InitIn + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte StatusHealEffect_BlendSpriteAnim_Loop + 0x1\n"
+"\t.4byte 0x0020000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte StatusHealEffect_BlendSpriteAnim_InitOut + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte StatusHealEffect_BlendSpriteAnim_Loop + 0x1\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);  /* de-pointered slice sProcScr_StatusHealEffect_BlendAnim: ptr=4 data=8 skip=0 */
+__asm__(
+"\t.section .data.residue.085C67D8, \"aw\", %progbits\n"
+"\t.global sProcScr_StatusHealEffect_PalAnim\n"
+"sProcScr_StatusHealEffect_PalAnim:\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte StatusHealEffect_PalSpriteAnim_Init + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte StatusHealEffect_PalSpriteAnim_LoopIn + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte StatusHealEffect_PalSpriteAnim_LoopOut + 0x1\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);  /* de-pointered slice sProcScr_StatusHealEffect_PalAnim: ptr=3 data=5 skip=0 */
+__asm__(
+"\t.section .data.residue.085C67F8, \"aw\", %progbits\n"
+"\t.global sProcScr_StatusHealEffect\n"
+"sProcScr_StatusHealEffect:\n"
+"\t.4byte 0x00000005\n"
+"\t.4byte sProcScr_StatusHealEffect_OverlayBg\n"
+"\t.4byte 0x00000005\n"
+"\t.4byte sProcScr_StatusHealEffect_BlendedSprite\n"
+"\t.4byte 0x00000005\n"
+"\t.4byte sProcScr_StatusHealEffect_BlendAnim\n"
+"\t.4byte 0x00000005\n"
+"\t.4byte sProcScr_StatusHealEffect_PalAnim\n"
+"\t.4byte 0x0042000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte StatusHealEffect_Finish + 0x1\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);  /* de-pointered slice sProcScr_StatusHealEffect: ptr=5 data=9 skip=0 */
