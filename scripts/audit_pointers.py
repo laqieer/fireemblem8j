@@ -182,6 +182,10 @@ def main():
         print()
         emit_metrics(grand)
 
+    if "--true-debt" in sys.argv:
+        print()
+        emit_true_debt()
+
 
 # ---- formal tracked metrics (axes #5 SHIFTABILITY and #6 ASSET EDITABILITY) ----
 
@@ -274,6 +278,72 @@ def emit_metrics(unrelocated):
     print(f"     - structured/logic-class (should be typed C): {struct_b} bytes, {struct_n} blobs")
     print(f"     - graphics/anim-class (legit binary, like fe8u .4bpp/.bin): {gfx_b} bytes, {gfx_n} blobs")
     print("The headline target is ungameable: 0 hardcoded pointers, 0 opaque structured blobs.")
+
+
+def emit_true_debt():
+    """Definitive classification of every remaining hardcoded ROM-range word via
+    the fe8u oracle, to separate the TRUE real-pointer debt from the coincidental
+    constants the byte-level auditor cannot distinguish (a 0x08xxxxxx stat/flag
+    field is not a pointer and can never be relocated). Slow (per-word fe8u). """
+    import bisect, re as _re
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import fe8u_ptr_offsets as F
+    gfx = _re.compile(r'Img|Tsa|Pal|Chr|Gfx|Sprite|Anim|banim|Map|Tile|Portrait|'
+                      r'Icon|_gf|OBJ|Reel|Sheet|BG|Frames|Obj|Menu|Lz|Comp|song|wave|sound', _re.I)
+    smap = {}
+    for cf in glob.glob(os.path.join(ROOT, "src", "data", "*", "*.c")):
+        t = open(cf, errors="replace").read()
+        for m in _re.finditer(r'u8\s+(\w+)\s*\[\s*\]\s*__attribute__\(\(section\("([^"]+)"\)\)\)'
+                              r'\s*=\s*INCBIN_U8\("data/residual/([A-Za-z0-9_.]+\.bin)"'
+                              r'(?:\s*,\s*(\d+)\s*,\s*(\d+))?\)', t):
+            sym, sec, binn, off, ln = m.groups()
+            smap.setdefault(binn, []).append((sym, sec, int(off) if off else 0, ln))
+    us_addrs, a2n, anchors, ajp = F._load_us_index()
+    def fe_raw_nonptr(jp, O):
+        i = bisect.bisect_right(ajp, jp) - 1
+        if i < 0: return False
+        us = jp + O + (anchors[i][1] - anchors[i][0])
+        j = bisect.bisect_right(us_addrs, us) - 1
+        if j < 0: return False
+        offs = F.ptr_offsets(a2n[us_addrs[j]])
+        return offs is None or (us - us_addrs[j]) not in set(offs)
+    coinc = real = bcoinc = bunk = 0
+    for b in glob.glob(os.path.join(RESID, "*.bin")):
+        if not is_live_raw(b): continue
+        name = os.path.basename(b)[:-4]
+        if gfx.search(name): continue
+        d = open(b, "rb").read()
+        slices = smap.get(name + ".bin")
+        for i in range(len(d) // 4):
+            v = struct.unpack_from("<I", d, i * 4)[0]
+            if not (ROM_LO <= v < ROM_HI): continue
+            O = i * 4; fe = None; rel = None; jp = None
+            if slices:
+                for (sym, sec, off, ln) in slices:
+                    ln = int(ln) if ln else len(d) - off
+                    if off <= O < off + ln:
+                        fe = F.ptr_offsets(sym)
+                        mm = _re.search(r'residue\.([0-9A-Fa-f]{6,8})', sec)
+                        jp = int(mm.group(1), 16) if mm else None
+                        if fe is None and jp:
+                            try: fe = F.ptr_offsets_at_jp(jp, ln)
+                            except Exception: fe = None
+                        if fe is not None: rel = O - off
+                        break
+            if fe is not None:
+                if rel in set(fe): real += 1
+                else: coinc += 1
+            elif jp is not None and fe_raw_nonptr(jp, O - (off if slices else 0)):
+                bcoinc += 1
+            else:
+                bunk += 1
+    true_debt = real + bunk
+    print("== TRUE real-pointer debt (fe8u-classified) ==")
+    print(f"  fe8u-confirmed coincidental (NOT a pointer)        : {coinc}")
+    print(f"  fe8u-blind but fe8u has the data raw -> coincidental: {bcoinc}")
+    print(f"  fe8u-confirmed REAL pointer still raw (convertible) : {real}")
+    print(f"  fe8u-blind UNKNOWN (JP-only / no anchor)            : {bunk}")
+    print(f"  => TRUE real-pointer debt (real + unknown)         : {true_debt}")
 
 
 if __name__ == "__main__":
