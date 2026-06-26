@@ -144,6 +144,15 @@ def emit_c(name, binp, section, addrs, by_addr, safe_only=False):
             if r is None:
                 lines.append('"\\t.4byte 0x%08X\\n"' % v); ndata += 1; continue
             sym, off, is_func = r
+            # SAFETY: a word resolving INTERIOR into a function's code (off>1) is
+            # never a real pointer -- it's a coincidental constant whose value
+            # happens to fall in ROM range (e.g. a UnitDefinition AI/flag field).
+            # Converting it would (a) be semantically wrong and (b) flip the thumb
+            # bit -> +1 byte diff. Leave it raw. Legit fn pointers hit the function
+            # start (off=0) or carry the thumb bit (off=1).
+            if is_func and off > 1:
+                lines.append('"\\t.4byte 0x%08X\\n"  /* coincidental const into fn: raw */' % v)
+                nskip += 1; continue
             if safe_only and is_func:
                 lines.append('"\\t.4byte 0x%08X\\n"  /* fn-ptr: left raw */' % v)
                 nskip += 1; continue
