@@ -31,11 +31,30 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ELF = os.path.join(ROOT, "fireemblem8.elf")
 RESID = os.path.join(ROOT, "data", "residual")
 
+_STT_FUNC = None
+def stt_func_names():
+    """Names of GENUINE STT_FUNC symbols (readelf type FUNC). nm's 'T' conflates
+    these with text-section DATA -- but only a real STT_FUNC makes `ld` OR in the
+    Thumb bit on a `.4byte sym` relocation. Knowing which lets us emit the correct
+    thumb-adjusted form for function pointers."""
+    global _STT_FUNC
+    if _STT_FUNC is None:
+        out = subprocess.run(["arm-none-eabi-readelf", "--syms", ELF],
+                             capture_output=True, text=True, errors="replace").stdout
+        s = set()
+        for line in out.splitlines():
+            p = line.split()
+            if len(p) >= 8 and p[3] == "FUNC":
+                s.add(p[7])
+        _STT_FUNC = s
+    return _STT_FUNC
+
 def load_syms():
     """addr-sorted symbols from the linked ELF, with size and 'is-function'."""
     out = subprocess.check_output(
         ["arm-none-eabi-nm", "-S", "--defined-only", ELF],
         text=True, errors="replace")
+    func_names = stt_func_names()
     by_addr = {}   # addr -> (name, size, is_func)
     for line in out.splitlines():
         p = line.split()
@@ -52,7 +71,7 @@ def load_syms():
         if not (ROM_LO <= addr < ROM_HI): continue
         if (not typ.isupper()) or typ in ("U", "A", "N"): continue  # globals only (linkable extern)
         if not IDENT.match(name): continue   # skip .gcc2_compiled., $t, $d mapping syms
-        is_func = typ == "T"
+        is_func = name in func_names   # genuine STT_FUNC (ld ORs the Thumb bit), not nm 'T'
         cur = by_addr.get(addr)
         if cur is None or _rank(name) < _rank(cur[0]):
             by_addr[addr] = (name, max(size, cur[1] if cur else 0), is_func or (cur[2] if cur else False))
@@ -211,8 +230,13 @@ def emit_words_bytes(b, addrs, by_addr, safe_only=False, allowed=None):
             # THUMB-BIT GUARD (universal): a function target stored EVEN (v&1==0)
             # would become odd via `.4byte func` (ld sets the Thumb bit) -> +1 byte
             # mismatch. Leave it raw -- can't reproduce the even value as a function
-            # reloc. (FE8 stores most fn-ptrs odd, which match; this catches the rest.)
-            if is_func and (v & 1) == 0:
+            # reloc.) THUMB/ARM GUARD: a `.4byte func` against a genuine STT_FUNC
+            # gets the Thumb bit ORed in by ld for a THUMB function but NOT for an
+            # ARM one -- and the two can't be cheaply told apart -- so a fn reloc
+            # can't be reliably made byte-exact. Leave genuine functions raw. (Data
+            # symbols mistyped 'T' by nm are correctly NON-func via STT, so they DO
+            # convert here -- the win: even-valued data pointers no longer over-skip.)
+            if is_func:
                 out.append(".4byte 0x%08X" % v); nskip += 1; continue
             out.append(".4byte %s + 0x%X" % (sym, off) if off else ".4byte %s" % sym)
             nptr += 1
