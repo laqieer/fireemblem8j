@@ -388,26 +388,73 @@ def emit_true_debt():
             print(f"  {n}  off={O}  jp=0x{jp:08X}")
     if "--list-blind" in sys.argv:
         addrs, a2n, a2s = load_elf_symbols(ELF)
+        # STT_FUNC name set: a word pointing into a function's INTERIOR (off>0, into
+        # code) is structurally a coincidental constant, never a real data pointer.
+        fnames = set()
+        ro = subprocess.run(["arm-none-eabi-readelf", "-sW", ELF],
+                            capture_output=True, text=True, errors="replace").stdout
+        for ln in ro.splitlines():
+            p = ln.split()
+            if len(p) >= 8 and p[3] == "FUNC":
+                fnames.add(p[7])
+        _asset = _re.compile(r'Img|Tsa|Pal|Chr|Gfx|Sprite|Anim|banim|Map|Tile|Portrait|'
+                             r'Icon|_gf|OBJ|Reel|Sheet|BG|Frames|Obj|Lz|Comp|song|wave|'
+                             r'sound|DirectSound|^pad_|^gap_|frontier_', _re.I)
         from collections import Counter as _C
-        kc = _C(); per = _C()
-        print("== fe8u-blind words: symbol resolution ==")
+        kc = _C(); amb = []
+        print("== fe8u-blind words: structural classification ==")
         for (n, O, jp, v) in blindhits:
             kind, sym, off = classify(v, addrs, a2n, a2s)
-            kc[kind] += 1
-            if kind != "DANGLING":
-                per[n] += 1
+            if kind == "EXACT": cat = "EXACT (real ptr)"
+            elif kind == "DANGLING": cat = "unresolved"
+            elif sym in fnames: cat = "FUNC-interior (coincidental)"
+            elif _asset.search(sym): cat = "ASSET-interior (coincidental)"
+            else: cat = "DATA-interior (ambiguous)"; amb.append((n, O, v, sym, off))
+            kc[cat] += 1
         print("  total fe8u-blind: %d" % len(blindhits))
-        for k, c in kc.most_common(): print("   %-10s %d" % (k, c))
-        print("  top files (resolvable EXACT/INTERIOR):")
-        for k, c in per.most_common(12): print("   %4d  %s" % (c, k))
-    bcoinc = coinc
-    true_debt = real + bunk
-    print("== TRUE real-pointer debt (fe8u per-word classification) ==")
-    print(f"  fe8u-confirmed coincidental (NOT a pointer)        : {coinc}")
-    print(f"  (above includes fe8u-has-data-raw cases)")
-    print(f"  fe8u-confirmed REAL pointer still raw (convertible) : {real}")
-    print(f"  fe8u-blind UNKNOWN (JP-only / no anchor)            : {bunk}")
-    print(f"  => TRUE real-pointer debt (real + unknown)         : {true_debt}")
+        for k, c in kc.most_common(): print("   %-32s %d" % (k, c))
+        print("  DATA-interior (ambiguous) words:")
+        for (n, O, v, sym, off) in amb:
+            print(f"   {n} off=0x{O:X} val=0x{v:08X} -> {sym}+0x{off:X}")
+    # Structurally sub-classify the fe8u-blind bucket. A word whose value points into
+    # the INTERIOR of a function (off>0, into code) is a coincidental constant -- never
+    # a real data pointer (airtight). The remainder (DATA-interior) is ambiguous; per-
+    # table spot checks (UnitDef level bitfields, gSinLookup, gap filler, the gUnkData_*
+    # 18-21KB blobs whose sparse 0x08xx words hit random Img/banim/pad interiors) show
+    # it is dominated by coincidental constants, but it is not exhaustively RE-proven.
+    elfaddrs, _a2n, _a2s = load_elf_symbols(ELF)
+    _fn = set()
+    _ro = subprocess.run(["arm-none-eabi-readelf", "-sW", ELF],
+                         capture_output=True, text=True, errors="replace").stdout
+    for ln in _ro.splitlines():
+        p = ln.split()
+        if len(p) >= 8 and p[3] == "FUNC":
+            _fn.add(p[7])
+    # interior-of-an-asset: a word pointing INTO (off>0) a graphics/sound/anim/pad/
+    # carved-blob symbol is a coincidental constant -- you never store a pointer to the
+    # middle of a sprite sheet, sound sample, or padding (same logic as FUNC-interior).
+    asset_re = _re.compile(r'Img|Tsa|Pal|Chr|Gfx|Sprite|Anim|banim|Map|Tile|Portrait|'
+                           r'Icon|_gf|OBJ|Reel|Sheet|BG|Frames|Obj|Lz|Comp|song|wave|'
+                           r'sound|DirectSound|^pad_|^gap_|frontier_', _re.I)
+    blind_func = blind_asset = blind_data = blind_exact = blind_unres = 0
+    for (n, O, jp, v) in blindhits:
+        kind, sym, off = classify(v, elfaddrs, _a2n, _a2s)
+        if kind == "EXACT": blind_exact += 1
+        elif kind == "DANGLING": blind_unres += 1
+        elif sym in _fn: blind_func += 1
+        elif asset_re.search(sym): blind_asset += 1
+        else: blind_data += 1
+    struct_coinc = coinc + blind_func + blind_asset
+    ambiguous = blind_data + blind_exact + blind_unres
+    print("== TRUE real-pointer debt (fe8u oracle + structural classification) ==")
+    print(f"  fe8u-confirmed coincidental (NOT a pointer)          : {coinc}")
+    print(f"  fe8u-blind, FUNC-interior (coincidental)             : {blind_func}")
+    print(f"  fe8u-blind, ASSET-interior gfx/sound/pad (coincidental): {blind_asset}")
+    print(f"  => coincidental constants (never relocatable)        : {struct_coinc}")
+    print(f"  fe8u-confirmed REAL pointer still raw (convertible)   : {real}")
+    print(f"  fe8u-blind DATA-interior, ambiguous (per-table RE)    : {ambiguous}")
+    print(f"  => REAL real-pointer debt: {real} confirmed + <={ambiguous} ambiguous "
+          f"(spot-checks: ~all coincidental)")
 
 
 if __name__ == "__main__":
