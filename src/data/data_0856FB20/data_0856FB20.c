@@ -4,4 +4,18 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 data_0856FB20[] __attribute__((section(".data.residue.0856FB20"))) = INCBIN_U8("data/residual/data_0856FB20.bin");
+__asm__(
+"\t.section .data.residue.0856FB20, \"aw\", %progbits\n"
+"\t.global data_0856FB20\n"
+"data_0856FB20:\n"
+"\t.4byte 0x00140001\n"
+"\t.4byte voicegroup033\n"
+"\t.4byte song317_se_btl_class_light_body1_1\n"
+"\t.4byte 0x4BBB00BC\n"
+"\t.4byte 0x7FBE14BD\n"
+"\t.4byte 0x987F3CE3\n"
+"\t.4byte 0x000000B1\n"
+"\t.4byte 0x00140001\n"
+"\t.4byte voicegroup033\n"
+"\t.4byte 0x0856FB2C\n"
+);  /* de-pointered slice data_0856FB20: ptr=3 data=6 skip=1 */

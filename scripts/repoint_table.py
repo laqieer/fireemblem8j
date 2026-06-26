@@ -376,7 +376,8 @@ def rewrite_src_slices(cf, addrs, by_addr, check=False):
             return m.group(0)
         allowed = fe8u_allowed_slice(sym, sec, sl)
         if allowed is None:
-            return m.group(0)
+            allowed = (lambda O: False)   # no fe8u corroboration -> still convert
+                                          # EXACT words (emit_words: off==0 always safe)
         words, stats = emit_words_bytes(sl, addrs, by_addr, False, allowed)
         if words is None or stats.startswith("ptr=0 "):
             return m.group(0)
