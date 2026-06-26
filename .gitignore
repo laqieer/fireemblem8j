@@ -42,6 +42,7 @@ src/*.s
 !src/m4a_1.s
 !src/arm.s
 !src/arm_call.s
+!src/j_ClearOam.s
 !src/nullsub_111.s
 !src/nullsub_3.s
 src/data/*.s
