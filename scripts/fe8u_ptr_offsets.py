@@ -195,6 +195,27 @@ def fe8u_ptr_at_jp(jp_addr):
         return False
     return (us - us_addrs[j]) in set(offs)
 
+def fe8u_ptr_at_jp_strict(jp_addr):
+    """Per-WORD shift-confirmed oracle: only trust the region shift if the nearest
+    precise anchors BELOW and ABOVE this address AGREE on it (uniform shift = exact,
+    not a region boundary). Then a single fe8u relocation at the shifted address is
+    safe -- no corroboration count needed. True iff shift confirmed AND fe8u relocates."""
+    import bisect as _bi
+    us_addrs, a2n, anchors, ajp = _load_us_index()
+    if len(anchors) < 2:
+        return False
+    i = _bi.bisect_right(ajp, jp_addr) - 1
+    if i < 0 or i + 1 >= len(anchors):
+        return False
+    if (anchors[i][1] - anchors[i][0]) != (anchors[i + 1][1] - anchors[i + 1][0]):
+        return False
+    us = jp_addr + (anchors[i][1] - anchors[i][0])
+    j = _bi.bisect_right(us_addrs, us) - 1
+    if j < 0:
+        return False
+    offs = ptr_offsets(a2n[us_addrs[j]])
+    return offs is not None and (us - us_addrs[j]) in set(offs)
+
 def ptr_offsets_at_jp(jp_addr, blob_len):
     """For an un-named blob at JP `jp_addr` of `blob_len` bytes, return the pointer
     byte-offsets (relative to the blob) that fe8u relocates -- by shifting to the US

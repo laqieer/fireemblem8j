@@ -208,6 +208,12 @@ def emit_words_bytes(b, addrs, by_addr, safe_only=False, allowed=None):
                     out.append(".4byte 0x%08X" % v); nskip += 1; continue
                 if safe_only and is_func:
                     out.append(".4byte 0x%08X" % v); nskip += 1; continue
+            # THUMB-BIT GUARD (universal): a function target stored EVEN (v&1==0)
+            # would become odd via `.4byte func` (ld sets the Thumb bit) -> +1 byte
+            # mismatch. Leave it raw -- can't reproduce the even value as a function
+            # reloc. (FE8 stores most fn-ptrs odd, which match; this catches the rest.)
+            if is_func and (v & 1) == 0:
+                out.append(".4byte 0x%08X" % v); nskip += 1; continue
             out.append(".4byte %s + 0x%X" % (sym, off) if off else ".4byte %s" % sym)
             nptr += 1
         else:
@@ -268,10 +274,11 @@ def fe8u_allowed_slice(sym, sec, slice_bytes):
     # per-slice offset set (a slice can span a fe8u symbol boundary -> missed ptrs).
     import fe8u_ptr_offsets as _F
     ptr_offs = set(O for O in rom if _F.fe8u_ptr_at_jp(jp + O) is True)
-    # SHIFT-CONFIRMED: >=3 corroborating relocations (or all) prove the region shift;
-    # convert exactly those fe8u-relocated words, leave coincidental neighbours raw.
+    ok = set(O for O in rom if _F.fe8u_ptr_at_jp_strict(jp + O) is True)
     if len(ptr_offs) >= 3 or (ptr_offs and len(ptr_offs) == len(rom)):
-        return lambda O: O in ptr_offs
+        ok |= ptr_offs
+    if ok:
+        return lambda O: O in ok
     return None
 
 def rewrite_src_slices(cf, addrs, by_addr, check=False):
