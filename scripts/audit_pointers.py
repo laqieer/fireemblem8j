@@ -141,18 +141,27 @@ def incbin_ranges(binname):
     global _INCBIN_RANGES
     if _INCBIN_RANGES is None:
         _INCBIN_RANGES = {}
+        # off/len may be HEX (0x108) or decimal. A decimal-only [0-9]+ mis-parsed a
+        # hex-offset sliced INCBIN as a WHOLE-file incbin -> counted already-converted
+        # __asm__-block words as still-raw (verified vs the linker: those offsets DO
+        # carry R_ARM_ABS32 relocations). Accept 0x.. | decimal, parse with int(x, 0).
+        # grep -E is POSIX ERE: NO (?:...) non-capturing groups (they break the pattern
+        # so the optional offset group never matches -> false WHOLE). Use a plain hex/dec
+        # char class for grep; the precise re.search below extracts/validates the numbers.
         out = subprocess.run(
             ["grep", "-rhoE",
-             r'INCBIN_U[0-9]+\("data/residual/[A-Za-z0-9_.]+\.bin"(\s*,\s*[0-9]+\s*,\s*[0-9]+)?',
+             r'INCBIN_U[0-9]+\("data/residual/[A-Za-z0-9_.]+\.bin"'
+             r'(\s*,\s*[0-9A-Fa-fxX]+\s*,\s*[0-9A-Fa-fxX]+)?',
              os.path.join(ROOT, "src", "data")],
             capture_output=True, text=True, errors="replace").stdout
         for line in out.splitlines():
-            m = re.search(r'data/residual/([A-Za-z0-9_.]+\.bin)"(?:\s*,\s*(\d+)\s*,\s*(\d+))?', line)
+            m = re.search(r'data/residual/([A-Za-z0-9_.]+\.bin)"(?:\s*,\s*(0[xX][0-9A-Fa-f]+|\d+)'
+                          r'\s*,\s*(0[xX][0-9A-Fa-f]+|\d+))?', line)
             if not m:
                 continue
             bn = m.group(1)
             if m.group(2) is not None:
-                _INCBIN_RANGES.setdefault(bn, []).append((int(m.group(2)), int(m.group(3))))
+                _INCBIN_RANGES.setdefault(bn, []).append((int(m.group(2), 0), int(m.group(3), 0)))
             else:
                 _INCBIN_RANGES.setdefault(bn, "WHOLE")
     r = _INCBIN_RANGES.get(binname)
