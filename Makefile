@@ -226,6 +226,9 @@ src/ReadSramFast_Core.o src/WriteSramFast.o: CC1FLAGS := -mthumb-interwork -Wimp
 # quorem (newlib dtoa libc): compiled non-interwork (libc was built without
 # -mthumb-interwork), so the epilogue is a direct `pop {pc}` not `pop{lr};bx`.
 src/quorem.o: CC1FLAGS := -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -ffix-debug-line -g
+# sub_80A6C60 (JP-only augury bit-packing): JP build used -Os codegen (2 callee-saved
+# regs, FC8 base held in r8, EEC reloaded per-use) — only -Os yields the byte-match.
+src/sub_80A6C60.o: CC1FLAGS := -mthumb-interwork -Wimplicit -Wparentheses -Werror -Os -fhex-asm -ffix-debug-line -g
 # fflush (newlib libc.a fflush.o): old_agbcc codegen + non-interwork `pop {pc}` epilogue.
 src/fflush.o: CC1FLAGS := -Wimplicit -Wparentheses -Werror -O2 -fhex-asm -ffix-debug-line -g
 # Spline_SetupChannels: JP defers s16 arg sign-extension (PROMOTE) vs eager US.
