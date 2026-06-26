@@ -84,7 +84,17 @@ Tested and ruled out on these: the two built-but-unwired custom agbcc flags
 **`-mjp-nocrossjump`** and **`-mjp-regorder`** — both same-or-WORSE than `-mjp-promote`
 alone on every function (nocrossjump notably hurt PutFaceOnBackGround 22→67 and
 sub_80BB240 +44 tail). And **manual source reordering** of AddAttr2dBitMap (swap
-`_src`/`dst` init, hoist `++_src`, split the `i` loop init) does NOT close the 10 —
-agbcc's scheduler picks the order from deeper structure, so this is the **permuter's**
-domain (it explores schedule space systematically). These two are the best near-term
-permuter/community targets — genuinely 10–22 bytes away, not ceilings.
+`_src`/`dst` init, hoist `++_src`, split the `i` loop init) does NOT close the 10.
+
+**DECISIVE (permuter has PLATEAUED — these are NOT "converging"):** the permute.log
+score history proves the permuter is stuck. AddAttr2dBitMap hit its best (obj 120 = the
+10 bytes) in the FIRST half of **839,821 iterations** and never beat it again over the
+second ~420K; sub_8084CE4 identically plateaued at 795 over 787,880 samples. So
+decomp-permuter **cannot reach** these residuals via source mutation — the 10 bytes are
+codegen-order (the prologue `mov ip,r6`/`mov r8,r2` save-order is agbcc register-save
+codegen, not source-controlled; site 2/3 are scheduler). **Implication 1:** more permuter
+wall-clock will NOT crack the plateaued ones — they are at the permuter ceiling, needing a
+new agbcc-internals lever (none found: all stock + 3 custom flags tested) or community.
+**Implication 2:** reallocating fleet compute between plateaued targets is zero-EV — do
+NOT churn the fleet for it. The honest path for these is decomp.me community (all posted
+owned) or a future agbcc codegen patch, NOT compute-time.
