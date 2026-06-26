@@ -443,19 +443,13 @@ def main():
             if allowed is None:
                 allowed = (lambda O: False)   # no fe8u data -> EXACT-only (off==0) fallback
         if cpath is None:
-            # asm-incbin table: rewrite the single incbin line in place
-            asm_path = asm_file_for(name)
-            if asm_path is None:
-                print("SKIP %s: no _ref .c and no asm incbin" % name); continue
-            res, stats = rewrite_asm_inplace(asm_path, name, binp, addrs, by_addr,
-                                             safe_only, allowed, check, skip_zero=fe8u_safe)
-            if res is None or res == "SKIP0":
-                if res is None:
-                    print("SKIP %s: %s" % (name, stats))
-                continue
-            nconv += 1
-            if not fe8u_safe:
-                print("WROTE(asm) %s (%s) -> %s" % (name, stats, asm_path))
+            # D299: every asm/dat_*.s that incbins residual data is an EXCLUDED
+            # placeholder (DATA_INCBIN_ASM_EXCLUDE) -- the symbol is LINKED from
+            # src/data/<name>/<name>.c. Editing the asm file is a DEAD no-op that
+            # still passes make compare but de-points NOTHING. Skip it. The correct
+            # mechanism is the sliced src/data INCBIN_U8 rewriter (TODO), gated by
+            # effectiveness verification against the linker object list.
+            print("SKIP %s: asm-placeholder is excluded (de-point src/data instead -- D299)" % name)
             continue
         c, stats = emit_c(name, binp, section, addrs, by_addr, safe_only, allowed)
         if c is None:
