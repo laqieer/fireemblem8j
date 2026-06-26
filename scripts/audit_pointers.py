@@ -338,7 +338,7 @@ def emit_true_debt():
     # sliced sub-symbol's .data.residue.<ADDR> section, or a data_<addr> name) and
     # ask fe8u whether it relocates there. Precise (spans symbol boundaries).
     real = coinc = bunk = 0
-    for b in glob.glob(os.path.join(RESID, "*.bin")):
+    for b in glob.glob(os.path.join(ROOT, "data", "residual", "*.bin")):
         if not is_live_raw(b): continue
         name = os.path.basename(b)[:-4]
         if gfx.search(name): continue
