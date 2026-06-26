@@ -79,6 +79,37 @@ def resolve(ptr, addrs, by_addr):
         return (name, off, is_func)
     return None  # dangling
 
+_HDR_ARRAYS = None
+def header_array_symbols():
+    """Identifiers declared as arrays (`name[`) anywhere in include/*.h. Emitting
+    our own `extern const u8 name[];` for one of these conflicts with the header's
+    typed array decl (e.g. `struct Glyph *TextGlyphs_System[]`). Since global.h
+    already pulls those headers in, we simply skip our extern and let the header's
+    declaration satisfy `(u32)&name` (valid for any array element type)."""
+    global _HDR_ARRAYS
+    if _HDR_ARRAYS is not None:
+        return _HDR_ARRAYS
+    syms = set()
+    # only an `extern ... NAME[` global array declaration conflicts -- NOT struct
+    # fields, local arrays, or `arr[i]` usage. Require `extern` on the line.
+    rx = re.compile(r"\b([A-Za-z_][A-Za-z0-9_]*)\s*\[")
+    for dp, _, fs in os.walk(os.path.join(ROOT, "include")):
+        for f in fs:
+            if not f.endswith(".h"):
+                continue
+            try:
+                with open(os.path.join(dp, f), "r", errors="replace") as fh:
+                    for line in fh:
+                        if "extern" not in line:
+                            continue
+                        # last identifier before a '[' on the extern line = the array name
+                        for m in rx.finditer(line):
+                            syms.add(m.group(1))
+            except OSError:
+                pass
+    _HDR_ARRAYS = syms
+    return syms
+
 def find_wrapper(name):
     """Locate the residual .c wrapper + .bin + section for <name>."""
     cdir = os.path.join(ROOT, "src", "data", name + "_ref")
@@ -91,12 +122,19 @@ def find_wrapper(name):
     return cpath, binp, section
 
 def emit_c(name, binp, section, addrs, by_addr, safe_only=False):
+    """Emit the table as a top-level __asm__ block: `.4byte sym (+off)` for each
+    pointer word, `.4byte 0xNNN` for data words. Pure asm needs NO C declaration
+    of any referenced symbol, so it NEVER conflicts with a typed header decl and
+    never hits an undeclared-symbol error regardless of what global.h pulls in --
+    GAS emits an undefined reference the linker resolves (with the Thumb bit for
+    STT_FUNC syms, matching FE8's odd-stored function pointers). Byte-identical to
+    baserom by construction (each .4byte sym relocates to sym's address == the
+    original bytes); `make compare` is the oracle."""
     with open(binp, "rb") as f:
         b = f.read()
     if len(b) % 4 != 0:
         return None, "size not 4-aligned (%d)" % len(b)
     nwords = len(b) // 4
-    externs = {}   # symname -> True
     lines = []
     nptr = ndata = nskip = 0
     for i in range(nwords):
@@ -104,39 +142,32 @@ def emit_c(name, binp, section, addrs, by_addr, safe_only=False):
         if ROM_LO <= v < ROM_HI:
             r = resolve(v, addrs, by_addr)
             if r is None:
-                lines.append("    0x%08X," % v); ndata += 1; continue
+                lines.append('"\\t.4byte 0x%08X\\n"' % v); ndata += 1; continue
             sym, off, is_func = r
             if safe_only and is_func:
-                lines.append("    0x%08X,  /* fn-ptr: left raw (thumb-bit) */" % v)
+                lines.append('"\\t.4byte 0x%08X\\n"  /* fn-ptr: left raw */' % v)
                 nskip += 1; continue
-            externs[sym] = is_func
             if off:
-                lines.append("    (u32)&%s + 0x%X," % (sym, off))
+                lines.append('"\\t.4byte %s + 0x%X\\n"' % (sym, off))
             else:
-                lines.append("    (u32)&%s," % sym)
+                lines.append('"\\t.4byte %s\\n"' % sym)
             nptr += 1
         else:
-            lines.append("    0x%08X," % v); ndata += 1
-    ext_lines = []
-    for sym in sorted(externs):
-        ext_lines.append("extern const u8 %s[];" % sym)
+            lines.append('"\\t.4byte 0x%08X\\n"' % v); ndata += 1
     c = []
     c.append("#include \"global.h\"")
     c.append("")
     c.append("/* De-pointered from data/residual/%s.bin by scripts/repoint_table.py." % name)
-    c.append(" * Pointer words are emitted as relocatable symbol references so the ROM")
-    c.append(" * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).")
-    c.append(" *")
-    c.append(" * Defined under a private name + published as a type-less assembler")
-    c.append(" * alias so a typed header declaration (struct Foo NAME[];) does not")
-    c.append(" * conflict -- the data bytes (.word relocations) are byte-identical. */")
+    c.append(" * Pointer words are relocatable symbol references (.4byte sym) so the ROM is")
+    c.append(" * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a")
+    c.append(" * pure asm block so no typed header decl of the referenced symbols can conflict. */")
     c.append("")
-    c.extend(ext_lines)
-    c.append("")
-    c.append("SECTION(\"%s\") static const u32 %s__shift[] = {" % (section, name))
+    c.append("__asm__(")
+    c.append('"\\t.section %s, \\"a\\", %%progbits\\n"' % section)
+    c.append('"\\t.global %s\\n"' % name)
+    c.append('"%s:\\n"' % name)
     c.extend(lines)
-    c.append("};")
-    c.append("__asm__(\".global %s\\n\\t.set %s, %s__shift\\n\");" % (name, name, name))
+    c.append(");")
     c.append("")
     stats = "ptr=%d data=%d skip=%d" % (nptr, ndata, nskip)
     return "\n".join(c), stats
@@ -184,6 +215,48 @@ def select_auto_safe(addrs, by_addr):
     names.sort(reverse=True)
     return names
 
+def table_density(binp, addrs, by_addr):
+    """Return (nptr, nwords, all_resolve). A pointer-DENSE table (high
+    nptr/nwords) is definitionally a pointer table -- a non-pointer constant
+    coincidentally in ROM-range is implausible when the majority of words
+    already resolve as pointers. Used by --auto-dense (a safe bulk lever for
+    the INTERIOR backlog beyond the EXACT-only --auto-safe)."""
+    try:
+        with open(binp, "rb") as f:
+            b = f.read()
+    except OSError:
+        return (0, 0, False)
+    if len(b) == 0 or len(b) % 4:
+        return (0, 0, False)
+    nwords = len(b) // 4
+    nptr = 0
+    all_resolve = True
+    for i in range(nwords):
+        v = struct.unpack_from("<I", b, i * 4)[0]
+        if v == 0:
+            continue
+        if ROM_LO <= v < ROM_HI:
+            if resolve(v, addrs, by_addr) is None:
+                all_resolve = False
+            nptr += 1
+    return (nptr, nwords, all_resolve)
+
+def select_auto_dense(addrs, by_addr, frac=0.5):
+    names = []
+    for binp in sorted(glob.glob(os.path.join(RESID, "*.bin"))):
+        name = os.path.basename(binp)[:-4]
+        cpath, _, _ = find_wrapper(name)
+        if not (cpath and os.path.exists(cpath)):
+            continue
+        with open(cpath, "r", errors="replace") as f:
+            if "INCBIN" not in f.read():
+                continue
+        nptr, nwords, ok = table_density(binp, addrs, by_addr)
+        if ok and nptr and nwords and (nptr / nwords) >= frac:
+            names.append((nptr, name))
+    names.sort(reverse=True)
+    return names
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     check = "--check" in sys.argv
@@ -192,6 +265,18 @@ def main():
     if "--auto-safe" in sys.argv:
         sel = select_auto_safe(addrs, by_addr)
         print("auto-safe: %d tables, %d pointers" % (len(sel), sum(n for n, _ in sel)))
+        args = [name for _, name in sel]
+        if check:
+            for n, name in sel:
+                print("  %5d  %s" % (n, name))
+            return
+    if "--auto-dense" in sys.argv:
+        frac = 0.5
+        for a in sys.argv:
+            if a.startswith("--frac="):
+                frac = float(a.split("=", 1)[1])
+        sel = select_auto_dense(addrs, by_addr, frac)
+        print("auto-dense(frac>=%.2f): %d tables, %d pointers" % (frac, len(sel), sum(n for n, _ in sel)))
         args = [name for _, name in sel]
         if check:
             for n, name in sel:

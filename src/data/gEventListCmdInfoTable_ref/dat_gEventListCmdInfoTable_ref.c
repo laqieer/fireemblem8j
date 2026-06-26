@@ -1,7 +1,46 @@
 #include "global.h"
 
-/* Migrated from asm/dat_gEventListCmdInfoTable_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/gEventListCmdInfoTable.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_gEventListCmdInfoTable_ref") u8 gEventListCmdInfoTable[] = INCBIN_U8("data/residual/gEventListCmdInfoTable.bin");
+__asm__(
+"\t.section .rodata.dat_gEventListCmdInfoTable_ref, \"a\", %progbits\n"
+"\t.global gEventListCmdInfoTable\n"
+"gEventListCmdInfoTable:\n"
+"\t.4byte EvCheck00_Always + 0x1\n"
+"\t.4byte 0x00000001\n"
+"\t.4byte EvCheck01_AFEV + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte EvCheck02_TURN + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte EvCheck03_CHAR + 0x1\n"
+"\t.4byte 0x00000004\n"
+"\t.4byte EvCheck04_CHARASM + 0x1\n"
+"\t.4byte 0x00000004\n"
+"\t.4byte EvCheck05_LOCA + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte EvCheck06_VILL + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte EvCheck07_CHES + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte EvCheck08_DOOR + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte EvCheck09_ + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte EvCheck0A_SHOP + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte sub_8085DDC + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte sub_8085E4C + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte sub_8085E50 + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte EvCheck0E_ + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte EvCheck0F_ + 0x1\n"
+"\t.4byte 0x00000004\n"
+"\t.4byte EvCheck10_ + 0x1\n"
+"\t.4byte 0x00000004\n"
+);
