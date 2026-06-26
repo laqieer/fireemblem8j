@@ -1,0 +1,3 @@
+0D91C8	0D9234	*libc.a:locale.o(.text)	locale.o lib-link: _setlocale_r/_localeconv_r/setlocale/localeconv (newlib, byte-verified)
+577444	57747E	*libc.a:locale.o(.rodata)	locale.o .rodata: lconv struct + "."/""/"C" strings
+BB8A78	BB8A8C	*libc.a:locale.o(.data)	locale.o .data: __mb_cur_max/lc_ctype/last_lc_ctype
