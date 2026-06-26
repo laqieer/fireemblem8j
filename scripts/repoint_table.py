@@ -272,9 +272,13 @@ def fe8u_allowed_slice(sym, sec, slice_bytes):
     if not rel:
         return None
     relset = set(rel)
-    if any(o not in relset for o in rom):   # not fully aligned -> wrong shift / divergent -> skip
-        return None
-    return lambda O: O in relset
+    # SHIFT-CONFIRMED relaxation (slice path): enough JP pointers aligning with
+    # fe8u offsets proves the region shift; convert ONLY fe8u-pointer offsets,
+    # leave coincidental neighbours raw. (Strict-full over-rejected whole slices.)
+    aligned = sum(1 for o in rom if o in relset)
+    if aligned == len(rom) or (aligned >= 3 and aligned >= 0.5 * len(rom)):
+        return lambda O: O in relset
+    return None
 
 def rewrite_src_slices(cf, addrs, by_addr, check=False):
     """De-point a LINKED src/data/<x>/<x>.c: replace each `u8 SUB[] __attribute__
@@ -419,12 +423,14 @@ def fe8u_allowed(name):
         if not rel:
             return None
         relset = set(rel)
-        # SAFETY: require FULL alignment -- every JP pointer-shaped word is a fe8u
-        # pointer slot. Confirms the region shift is exactly right and there are no
-        # coincidental constants at non-pointer offsets. Else skip (return None).
-        if not rom or any(o not in relset for o in rom):
+        # SHIFT-CONFIRMED: enough JP pointers aligning with fe8u offsets proves the
+        # region shift; convert ONLY fe8u-pointer offsets, leave coincidental raw.
+        if not rom:
             return None
-        return lambda O: O in relset
+        aligned = sum(1 for o in rom if o in relset)
+        if aligned == len(rom) or (aligned >= 3 and aligned >= 0.5 * len(rom)):
+            return lambda O: O in relset
+        return None
     feset = set(fe)
     S, subs = derive_stride(fe)
     last = fe[-1]

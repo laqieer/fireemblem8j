@@ -4,4 +4,35 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 data_085FC458[] __attribute__((section(".data.residue.085FC458"))) = INCBIN_U8("data/residual/data_085FC458.bin");
+__asm__(
+"\t.section .data.residue.085FC458, \"aw\", %progbits\n"
+"\t.global data_085FC458\n"
+"data_085FC458:\n"
+"\t.4byte data_085FC068 + 0x1\n"
+"\t.4byte AnimSprite_EkrBaseKaiten_2 + 0x1\n"
+"\t.4byte AnimSprite_EkrBaseKaiten_3 + 0x1\n"
+"\t.4byte AnimSprite_EkrBaseKaiten_4 + 0x1\n"
+"\t.4byte AnimSprite_EkrBaseKaiten_5 + 0x1\n"
+"\t.4byte AnimSprite_EkrBaseKaiten_6 + 0x1\n"
+"\t.4byte AnimSprite_EkrBaseKaiten_7 + 0x1\n"
+"\t.4byte AnimSprite_EkrBaseKaiten_8 + 0x1\n"
+"\t.4byte 0x80000000\n"
+"\t.4byte 0x085FC35D\n"
+"\t.4byte 0x085FC2A9\n"
+"\t.4byte 0x085FC249\n"
+"\t.4byte 0x085FC195\n"
+"\t.4byte 0x085FC141\n"
+"\t.4byte 0x085FC0D5\n"
+"\t.4byte 0x085FC08D\n"
+"\t.4byte 0x085FC069\n"
+"\t.4byte 0x80000000\n"
+"\t.4byte 0x40000000\n"
+"\t.4byte 0xFFF00000\n"
+"\t.4byte 0x0000FFF8\n"
+"\t.4byte 0x40000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0000FFF8\n"
+"\t.4byte 0x00000001\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);  /* de-pointered slice data_085FC458: ptr=8 data=11 skip=8 */

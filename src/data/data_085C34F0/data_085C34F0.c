@@ -4,4 +4,28 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 data_085C34F0[] __attribute__((section(".data.residue.085C34F0"))) = INCBIN_U8("data/residual/data_085C34F0.bin");
+__asm__(
+"\t.section .data.residue.085C34F0, \"aw\", %progbits\n"
+"\t.global data_085C34F0\n"
+"data_085C34F0:\n"
+"\t.4byte 0x0000000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte ProcShowMapChange_MoveCamera + 0x1\n"
+"\t.4byte 0x00000008\n"
+"\t.4byte data_085C2980 + 0x48\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte ProcShowMapChange_UpdateGame + 0x1\n"
+"\t.4byte 0x00000014\n"
+"\t.4byte DoesBMXFADEExist + 0x1\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0000000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte 0x0801F55D\n"
+"\t.4byte 0x00000014\n"
+"\t.4byte 0x080096C1\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);  /* de-pointered slice data_085C34F0: ptr=4 data=14 skip=2 */
