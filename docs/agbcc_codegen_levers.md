@@ -176,3 +176,16 @@ show a ~2-instr delta since stock decomp.me agbcc lacks the fork flag):
   sub_800A34C  https://decomp.me/scratch/5sdMe   Event18_ColorFade https://decomp.me/scratch/WmsgZ
   AdjustNewUnitPosition https://decomp.me/scratch/FtYfC   sub_80A2E64 https://decomp.me/scratch/3IquK
   sub_80A3528  https://decomp.me/scratch/0I8PP   sub_80CAEF4 https://decomp.me/scratch/kKWJ0
+
+## 11. decomp.me scratches — round 2 (the next-tier reg-coloring NEARs)
+8 more posted (14 total). Note: decomp.me's STOCK agbcc rejects -mjp-promote (the repo's fork flag), so the
+7 -mjp-promote ones are reference-only there (target+near-match C, ~1-3 instr residual documented in each desc);
+only sub_80BCD74 (PERMUTER_FLAGS=none) compiles + diffs live (1855/11300, a genuine community-iterable near).
+  AddAttr2dBitMap https://decomp.me/scratch/az2Co   sub_80A3300 https://decomp.me/scratch/UbRNK
+  sub_80A6E4C https://decomp.me/scratch/fFDjv        sub_80A730C https://decomp.me/scratch/34H33
+  sub_80A73D4 https://decomp.me/scratch/vnbyw        sub_80BB240 https://decomp.me/scratch/k5Eb8
+  sub_80BCD74 https://decomp.me/scratch/Km1Oj        sub_80D17C8 https://decomp.me/scratch/TwXsX
+LIMITATION for community help: decomp.me stock agbcc has no -mjp-promote; to let outsiders match the
+-mjp-promote functions, the fork flag would need upstreaming to decomp.me's agbcc, OR re-derive those functions
+without needing -mjp-promote (harder). The genuine reg-coloring floor (~38 fns) is being ground by the local
+permuter fleet (16-fn) + these scratches; remaining path = compute-time + community, deterministic levers done.
