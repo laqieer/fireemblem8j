@@ -234,10 +234,9 @@ def emit_words_bytes(b, addrs, by_addr, safe_only=False, allowed=None):
     `.4byte sym (+off)` for a confirmed pointer, `.4byte 0xNN` for data/raw.
     Returns (directives, stats) or (None, err). Shared by the whole-.bin path and
     the sliced src/data INCBIN_U8(bin, off, len) sub-symbol path."""
-    if len(b) % 4 != 0:
-        return None, "size not 4-aligned (%d)" % len(b)
     out = []
     nptr = ndata = nskip = 0
+    tail = b[len(b) - (len(b) % 4):] if len(b) % 4 else b""  # non-4-aligned trailing bytes
     for i in range(len(b) // 4):
         O = i * 4
         v = struct.unpack_from("<I", b, i * 4)[0]
@@ -282,6 +281,8 @@ def emit_words_bytes(b, addrs, by_addr, safe_only=False, allowed=None):
             nptr += 1
         else:
             out.append(".4byte 0x%08X" % v); ndata += 1
+    for byte in tail:   # non-4-aligned trailing bytes -> .byte (preserve exact layout)
+        out.append(".byte 0x%02X" % byte); ndata += 1
     return out, "ptr=%d data=%d skip=%d" % (nptr, ndata, nskip)
 
 def emit_c(name, binp, section, addrs, by_addr, safe_only=False, allowed=None):
@@ -369,8 +370,7 @@ def rewrite_src_slices(cf, addrs, by_addr, check=False):
         off = int(m.group("off")) if m.group("off") else 0
         ln = int(m.group("len")) if m.group("len") else len(b) - off
         sl = b[off:off + ln]
-        if len(sl) % 4:
-            return m.group(0)
+        # emit_words_bytes handles non-4-aligned tails (.byte); no skip needed.
         allowed = fe8u_allowed_slice(sym, sec, sl)
         if allowed is None:
             allowed = (lambda O: False)   # no fe8u corroboration -> still convert
