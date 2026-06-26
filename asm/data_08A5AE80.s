@@ -9,30 +9,4 @@
 	.section .data.residue.08A5AE80, "a", %progbits
 	.global data_08A5AE80
 data_08A5AE80:
-	@ de-pointered (scripts/repoint_table.py): ptr=4 data=21 skip=1
-	.4byte 0x00000002
-	.4byte 0x08A64CA8
-	.4byte 0x00000004
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000006
-	.4byte EventScr_Ch6_1
-	.4byte 0x0010120B
-	.4byte 0x00000005
-	.4byte 0x00000001
-	.4byte 0x0020110B
-	.4byte 0x00000000
-	.4byte 0x00030001
-	.4byte EventScr_Ch6_EndingScene
-	.4byte 0x00000002
-	.4byte 0x0007000B
-	.4byte EventScr_Ch6_0
-	.4byte 0x0E1B0918
-	.4byte 0x00000001
-	.4byte data_085B9EE8
-	.4byte 0x00000065
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.incbin "data/residual/data_08A5AE80.bin"

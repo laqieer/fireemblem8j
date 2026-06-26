@@ -9,16 +9,4 @@
 	.section .data.residue.08A60A28, "a", %progbits
 	.global EventScr_9EE8F0
 EventScr_9EE8F0:
-	@ de-pointered (scripts/repoint_table.py): ptr=2 data=10 skip=0
-	.4byte 0xFFFF0321
-	.4byte 0x00000C41
-	.4byte 0x0000000C
-	.4byte 0x00000D40
-	.4byte DisplayMapClearMapAnim + 0x1
-	.4byte 0x00320620
-	.4byte 0xFFFF2A21
-	.4byte 0x00000D40
-	.4byte StartRetreatProcessing + 0x1
-	.4byte 0x00000121
-	.4byte 0x00000820
-	.4byte 0x00000120
+	.incbin "data/residual/data_08A60A28.bin"

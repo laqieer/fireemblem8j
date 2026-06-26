@@ -7,87 +7,15 @@
 	.section .data.residue.08A62AFC, "a", %progbits
 	.global EventScr_Ch2Tutorial6
 EventScr_Ch2Tutorial6:
-	@ de-pointered (scripts/repoint_table.py): ptr=3 data=21 skip=0
-	.4byte 0x00010B41
-	.4byte EventScr_Ch2Tutorial7
-	.4byte 0x00070228
-	.4byte 0x00000120
-	.4byte 0x00001120
-	.4byte 0x00000B40
-	.4byte EventScr_Ch2_4
-	.4byte 0x00B80229
-	.4byte 0x00070228
-	.4byte 0x00000120
-	.4byte 0x00001A23
-	.4byte 0x000B0540
-	.4byte 0xFFFFFFFF
-	.4byte 0x093B1B20
-	.4byte 0x00001D20
-	.4byte 0x00001B22
-	.4byte 0x00053B25
-	.4byte 0x003C0E20
-	.4byte 0x00003B22
-	.4byte 0x00020B41
-	.4byte EventScr_Ch2Tutorial8
-	.4byte 0x40003D20
-	.4byte 0x00070228
-	.4byte 0x00000120
+	.incbin "data/residual/data_08A62AFC.bin", 0x0, 0x10
 
 	.section .data.residue.08A62B0C, "a", %progbits
 	.global EventScr_Ch2Tutorial7
 EventScr_Ch2Tutorial7:
-	@ de-pointered (scripts/repoint_table.py): ptr=3 data=21 skip=0
-	.4byte 0x00010B41
-	.4byte EventScr_Ch2Tutorial7
-	.4byte 0x00070228
-	.4byte 0x00000120
-	.4byte 0x00001120
-	.4byte 0x00000B40
-	.4byte EventScr_Ch2_4
-	.4byte 0x00B80229
-	.4byte 0x00070228
-	.4byte 0x00000120
-	.4byte 0x00001A23
-	.4byte 0x000B0540
-	.4byte 0xFFFFFFFF
-	.4byte 0x093B1B20
-	.4byte 0x00001D20
-	.4byte 0x00001B22
-	.4byte 0x00053B25
-	.4byte 0x003C0E20
-	.4byte 0x00003B22
-	.4byte 0x00020B41
-	.4byte EventScr_Ch2Tutorial8
-	.4byte 0x40003D20
-	.4byte 0x00070228
-	.4byte 0x00000120
+	.incbin "data/residual/data_08A62AFC.bin", 0x10, 0x18
 
 	.section .data.residue.08A62B24, "a", %progbits
 	.global EventScr_Ch2_4
 EventScr_Ch2_4:
-	@ de-pointered (scripts/repoint_table.py): ptr=3 data=21 skip=0
-	.4byte 0x00010B41
-	.4byte EventScr_Ch2Tutorial7
-	.4byte 0x00070228
-	.4byte 0x00000120
-	.4byte 0x00001120
-	.4byte 0x00000B40
-	.4byte EventScr_Ch2_4
-	.4byte 0x00B80229
-	.4byte 0x00070228
-	.4byte 0x00000120
-	.4byte 0x00001A23
-	.4byte 0x000B0540
-	.4byte 0xFFFFFFFF
-	.4byte 0x093B1B20
-	.4byte 0x00001D20
-	.4byte 0x00001B22
-	.4byte 0x00053B25
-	.4byte 0x003C0E20
-	.4byte 0x00003B22
-	.4byte 0x00020B41
-	.4byte EventScr_Ch2Tutorial8
-	.4byte 0x40003D20
-	.4byte 0x00070228
-	.4byte 0x00000120
+	.incbin "data/residual/data_08A62AFC.bin", 0x28, 0x38
 

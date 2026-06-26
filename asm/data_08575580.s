@@ -9,10 +9,4 @@
 	.section .data.residue.08575580, "a", %progbits
 	.global data_08575580
 data_08575580:
-	@ de-pointered (scripts/repoint_table.py): ptr=5 data=1 skip=0
-	.4byte 0x00140004
-	.4byte voicegroup038
-	.4byte song944_btl_snr_magic2_2_1
-	.4byte song944_btl_snr_magic2_2_2
-	.4byte song944_btl_snr_magic2_2_3
-	.4byte song944_btl_snr_magic2_2_4
+	.incbin "data/residual/data_08575580.bin"

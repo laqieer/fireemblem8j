@@ -9,10 +9,4 @@
 	.section .data.residue.0856FC7C, "a", %progbits
 	.global data_0856FC7C
 data_0856FC7C:
-	@ de-pointered (scripts/repoint_table.py): ptr=5 data=1 skip=0
-	.4byte 0x00140004
-	.4byte voicegroup038
-	.4byte song319_bmp_evt_15_1_1
-	.4byte song319_bmp_evt_15_1_2
-	.4byte song319_bmp_evt_15_1_3
-	.4byte song319_bmp_evt_15_1_4
+	.incbin "data/residual/data_0856FC7C.bin"

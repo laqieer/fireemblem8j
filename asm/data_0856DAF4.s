@@ -9,7 +9,4 @@
 	.section .data.residue.0856DAF4, "a", %progbits
 	.global data_0856DAF4
 data_0856DAF4:
-	@ de-pointered (scripts/repoint_table.py): ptr=2 data=1 skip=0
-	.4byte 0x00340001
-	.4byte voicegroup031
-	.4byte song143_se_bmp_colosseum1_2_1
+	.incbin "data/residual/data_0856DAF4.bin"

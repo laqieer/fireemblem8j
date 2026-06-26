@@ -9,22 +9,4 @@
 	.section .data.residue.08575F70, "a", %progbits
 	.global data_08575F70
 data_08575F70:
-	@ de-pointered (scripts/repoint_table.py): ptr=5 data=11 skip=2
-	.4byte 0x00140002
-	.4byte voicegroup038
-	.4byte song954_bmp_gog_attack5_2_1
-	.4byte song954_bmp_gog_attack5_2_2
-	.4byte 0x64BE4BBB
-	.4byte 0x00BC08BD
-	.4byte 0xA07F40EF
-	.4byte 0x000000B1
-	.4byte 0x00140001
-	.4byte voicegroup031
-	.4byte 0x08575F80
-	.4byte 0x78BE4BBB
-	.4byte 0x00BC05BD
-	.4byte 0x8C7F3CDB
-	.4byte 0x000000B1
-	.4byte 0x00140001
-	.4byte voicegroup037
-	.4byte 0x08575F9C
+	.incbin "data/residual/data_08575F70.bin"

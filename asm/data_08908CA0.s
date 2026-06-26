@@ -7,58 +7,7 @@
 	.section .data.residue.08908CA0, "a", %progbits
 	.global UnitDef_Ch3NPC
 UnitDef_Ch3NPC:
-	@ de-pointered (scripts/repoint_table.py): ptr=1 data=50 skip=0
-	.4byte 0x12000D09
-	.4byte 0x01000140
-	.4byte data_08908958 + 0x19C
-	.4byte 0x006C6B01
-	.4byte 0x00080506
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x0001014E
-	.4byte 0x0000FFFF
-	.4byte 0x0001014F
-	.4byte 0x0000FFFF
-	.4byte 0x0001014D
-	.4byte 0x0000FFFF
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x0D6B0B6B
-	.4byte 0x0000008E
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x0D6B4F40
-	.4byte 0x000000CF
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x0D00351D
-	.4byte 0x0000014E
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x0D002169
-	.4byte 0x0000014D
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x0D6B2A44
-	.4byte 0x0000014F
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.incbin "data/residual/data_08908CA0.bin", 0x0, 0x28
 
 	.section .data.residue.08908CC8, "a", %progbits
 	.global REDA_Ch3Enemy_2_RIEV

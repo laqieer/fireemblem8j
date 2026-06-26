@@ -103,34 +103,33 @@ def classify(ptr, addrs, addr2name, addr2size):
             return ("INTERIOR", name, off)
     return ("DANGLING", name, off)
 
-_ASM_INCBIN_BINS = None
-def _asm_incbin_bins():
-    """Residual .bin basenames incbin'd by an asm/*.s file. Used only for the
-    'no _ref .c' case below. NB: a de-pointered table keeps its asm placeholder
-    (the excluded DATA_INCBIN_ASM_EXCLUDE incbin), so this set is consulted ONLY
-    when there is no _ref .c -- the _ref .c branch authoritatively decides those."""
-    global _ASM_INCBIN_BINS
-    if _ASM_INCBIN_BINS is None:
+_SRCDATA_INCBIN_BINS = None
+def _srcdata_incbin_bins():
+    """Residual .bin basenames still INCBIN'd by a LINKED source. Only src/data/
+    objects are linked for residual data (every asm/dat_*.s is an EXCLUDED
+    placeholder via DATA_INCBIN_ASM_EXCLUDE -- editing one does NOT change the
+    ROM, a trap that previously fooled this metric). A .bin is raw debt iff its
+    bytes enter the link verbatim = it is INCBIN'd by a linked src/data .c."""
+    global _SRCDATA_INCBIN_BINS
+    if _SRCDATA_INCBIN_BINS is None:
         out = subprocess.run(
-            ["grep", "-rhoE", r'data/residual/[A-Za-z0-9_.]+\.bin',
-             os.path.join(ROOT, "asm")],
+            ["grep", "-rhoE", r'(INCBIN_U[0-9]+|\.incbin)\s*\(?\s*"data/residual/[A-Za-z0-9_.]+\.bin',
+             os.path.join(ROOT, "src", "data")],
             capture_output=True, text=True, errors="replace").stdout
-        _ASM_INCBIN_BINS = set(os.path.basename(m) for m in out.split())
-    return _ASM_INCBIN_BINS
+        bins = set()
+        for line in out.splitlines():
+            m = re.search(r'data/residual/([A-Za-z0-9_.]+\.bin)', line)
+            if m:
+                bins.add(m.group(1))
+        _SRCDATA_INCBIN_BINS = bins
+    return _SRCDATA_INCBIN_BINS
 
 def is_live_raw(binpath):
     """A residual .bin is 'live raw data' (un-relocated debt) iff its raw bytes
-    still enter the link. Authoritative per source-of-truth:
-      - _ref .c exists  -> raw iff it still INCBINs (de-pointered .c uses .4byte).
-      - no _ref .c       -> raw iff incbin'd in a live asm/*.s. Tables already
-        provided as a relocated struct elsewhere (gClassData via data_classes.c)
-        have an EMPTY asm placeholder -> not in the set -> correctly excluded."""
-    name = os.path.basename(binpath)[:-4]
-    cpath = os.path.join(ROOT, "src", "data", name + "_ref", "dat_%s_ref.c" % name)
-    if os.path.exists(cpath):
-        with open(cpath, "r", errors="replace") as f:
-            return "INCBIN" in f.read()
-    return os.path.basename(binpath) in _asm_incbin_bins()
+    enter the link = it is INCBIN'd by a LINKED src/data source. De-pointered
+    tables (.c rewritten to .4byte) and tables provided as relocated structs
+    elsewhere (gClassData via data_classes.c) drop out automatically."""
+    return os.path.basename(binpath) in _srcdata_incbin_bins()
 
 def main():
     if not os.path.exists(ELF):

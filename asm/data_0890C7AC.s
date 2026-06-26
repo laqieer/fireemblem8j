@@ -9,14 +9,4 @@
 	.section .data.residue.0890C7AC, "a", %progbits
 	.global data_0890C7AC
 data_0890C7AC:
-	@ de-pointered (scripts/repoint_table.py): ptr=1 data=9 skip=0
-	.4byte 0x0D0040C5
-	.4byte 0x010000C6
-	.4byte data_0890C0A4 + 0xD0
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.incbin "data/residual/data_0890C7AC.bin"

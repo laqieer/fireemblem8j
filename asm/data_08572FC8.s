@@ -9,33 +9,4 @@
 	.section .data.residue.08572FC8, "a", %progbits
 	.global data_08572FC8
 data_08572FC8:
-	@ de-pointered (scripts/repoint_table.py): ptr=1 data=25 skip=3
-	.4byte 0x00140001
-	.4byte 0x08202E20
-	.4byte song737_h_misty_af_1
-	.4byte 0x4BBB00BC
-	.4byte 0x0CC133BD
-	.4byte 0x3CF312BE
-	.4byte 0x13BE827F
-	.4byte 0x16811481
-	.4byte 0x1A811881
-	.4byte 0x1F811C81
-	.4byte 0x26812381
-	.4byte 0x2E812B81
-	.4byte 0x38813381
-	.4byte 0x43813E81
-	.4byte 0x4B814981
-	.4byte 0x814A9086
-	.4byte 0x81458148
-	.4byte 0x813F8141
-	.4byte 0x8138813B
-	.4byte 0x81328135
-	.4byte 0x812B812E
-	.4byte 0x81228126
-	.4byte 0x811A811F
-	.4byte 0x81128115
-	.4byte 0x8107810C
-	.4byte 0xB1008103
-	.4byte 0x00140001
-	.4byte 0x08202E20
-	.4byte 0x08572FD4
+	.incbin "data/residual/data_08572FC8.bin"

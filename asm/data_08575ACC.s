@@ -9,17 +9,4 @@
 	.section .data.residue.08575ACC, "a", %progbits
 	.global data_08575ACC
 data_08575ACC:
-	@ de-pointered (scripts/repoint_table.py): ptr=6 data=6 skip=1
-	.4byte 0x00140004
-	.4byte voicegroup038
-	.4byte song947_mon_mao_magic1_2_1
-	.4byte song947_mon_mao_magic1_2_2
-	.4byte song947_mon_mao_magic1_2_3
-	.4byte song947_mon_mao_magic1_2_4
-	.4byte 0x63BE4BBB
-	.4byte 0x00BC5ABD
-	.4byte 0xB07F3CFF
-	.4byte 0x000000B1
-	.4byte 0x00140001
-	.4byte voicegroup038
-	.4byte 0x08575AE4
+	.incbin "data/residual/data_08575ACC.bin"

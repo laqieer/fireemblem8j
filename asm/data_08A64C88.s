@@ -9,18 +9,4 @@
 	.section .data.residue.08A64C88, "a", %progbits
 	.global data_08A64C88
 data_08A64C88:
-	@ de-pointered (scripts/repoint_table.py): ptr=1 data=12 skip=1
-	.4byte 0x00001A23
-	.4byte 0x000B0540
-	.4byte 0xFFFFFFFF
-	.4byte 0x09B61B20
-	.4byte 0x00001D20
-	.4byte 0x00001B22
-	.4byte 0x00C10229
-	.4byte 0x00000120
-	.4byte 0x00020540
-	.4byte UnitDef_Ch6Enemy_0
-	.4byte 0x00000A40
-	.4byte 0x08A603D4
-	.4byte 0x00070228
-	.4byte 0x00000120
+	.incbin "data/residual/data_08A64C88.bin"

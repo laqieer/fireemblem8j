@@ -9,13 +9,4 @@
 	.section .data.residue.0855F8C0, "a", %progbits
 	.global data_0855F8C0
 data_0855F8C0:
-	@ de-pointered (scripts/repoint_table.py): ptr=7 data=1 skip=1
-	.4byte 0x940A0007
-	.4byte 0x0820F8E8
-	.4byte song061_bgm_sys_fase_cp_1
-	.4byte song061_bgm_sys_fase_cp_2
-	.4byte song061_bgm_sys_fase_cp_3
-	.4byte song061_bgm_sys_fase_cp_4
-	.4byte song061_bgm_sys_fase_cp_5
-	.4byte song061_bgm_sys_fase_cp_6
-	.4byte song061_bgm_sys_fase_cp_7
+	.incbin "data/residual/data_0855F8C0.bin"

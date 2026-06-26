@@ -9,24 +9,4 @@
 	.section .data.residue.0890915C, "a", %progbits
 	.global data_0890915C
 data_0890915C:
-	@ de-pointered (scripts/repoint_table.py): ptr=3 data=17 skip=0
-	.4byte 0x10004413
-	.4byte 0x03000289
-	.4byte REDA_Ch4Ally_1_ARTUR
-	.4byte 0x00006C3F
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte _RestoreBgm
-	.4byte 0x010002C1
-	.4byte REDA_Ch4Ally_2_LUTE
-	.4byte 0x00006C38
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.incbin "data/residual/data_0890915C.bin"

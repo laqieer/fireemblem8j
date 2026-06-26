@@ -9,7 +9,4 @@
 	.section .data.residue.08566BCC, "a", %progbits
 	.global data_08566BCC
 data_08566BCC:
-	@ de-pointered (scripts/repoint_table.py): ptr=1 data=1 skip=1
-	.4byte 0x800A0001
-	.4byte 0x08213AE8
-	.4byte song071_y_wind_3_1
+	.incbin "data/residual/data_08566BCC.bin"

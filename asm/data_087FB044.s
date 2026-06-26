@@ -9,8 +9,4 @@
 	.section .data.residue.087FB044, "a", %progbits
 	.global data_087FB044
 data_087FB044:
-	@ de-pointered (scripts/repoint_table.py): ptr=3 data=1 skip=0
-	.4byte AnimSprite_EfxMaohFlashEyeFire1Obj_7 + 0x2
-	.4byte AnimSprite_EfxMaohFlashEyeFire1Obj_8 + 0x2
-	.4byte AnimSprite_EfxMaohFlashEyeFire1Obj_12 + 0x2
-	.4byte 0x80000000
+	.incbin "data/residual/data_087FB044.bin"

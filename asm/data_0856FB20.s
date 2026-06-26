@@ -9,14 +9,4 @@
 	.section .data.residue.0856FB20, "a", %progbits
 	.global data_0856FB20
 data_0856FB20:
-	@ de-pointered (scripts/repoint_table.py): ptr=3 data=6 skip=1
-	.4byte 0x00140001
-	.4byte voicegroup033
-	.4byte song317_se_btl_class_light_body1_1
-	.4byte 0x4BBB00BC
-	.4byte 0x7FBE14BD
-	.4byte 0x987F3CE3
-	.4byte 0x000000B1
-	.4byte 0x00140001
-	.4byte voicegroup033
-	.4byte 0x0856FB2C
+	.incbin "data/residual/data_0856FB20.bin"
