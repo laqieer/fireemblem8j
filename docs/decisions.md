@@ -7491,3 +7491,37 @@ impossible — don't trust grep proximity.
 reconstruct), SetSramFastFunc (static-BSS placement), j_ClearOam (thumb→arm veneer), and ~30 game sub_* reg-coloring
 NEARs (permuter fleet). LESSON (reinforcing D287-CORRECTION): "confirmed-hard"/"impossible" tags are ~30% wrong;
 re-derive from the actual fe8u body + the byte-diff, never from a prior verdict or grep proximity.
+
+## D289 — newlib locale + malloc clusters lib-link (+8): "region-different newlib" was a measurement artifact
+**Date:** 2026-06-26. **Finding/decision:** the remaining "JP-custom region-different newlib" cluster
+(_malloc_r/_free_r/setlocale/localeconv/...) that D288 + prior notes called a hard reconstruct is actually STOCK
+newlib, lib-linkable from tools/agbcc/lib/libc.a — the "size mismatch" that hid it was comparing a WHOLE archive
+member to a SINGLE function's gbadisasm frag (e.g. locale.o is 108 B = all 4 locale fns, not the 24-B setlocale).
+Carried matching-C 99.52% -> 99.60% (8641 -> 8647 / 8682; named still-asm now all game sub_* + _dtoa_r).
+- **locale.o (+4):** setlocale/localeconv/_setlocale_r/_localeconv_r are contiguous at 0x080D91C8-0x080D9234. Lib-link
+  with 3 sections placed at the JP addresses (like fe8u): .text@0x080D91C8, .rodata@0x08577444 (the static lconv
+  struct with internal pointers to '.'/''+the "."/""/"C" strings), .data@0x08BB8A78 (__mb_cur_max=1, lc_ctype=
+  last_lc_ctype="C"). Replaced the hand-carved src/sub_80D9204.c (=_localeconv_r). Data plumbing: split the
+  data_0857742E residue around the .rodata hole (22-B head + 2-B tail), shrank data_08BB8A74 24->4 B (just the
+  _impure_ptr value), dropped the duplicate __mb_cur_max baseline alias (jp_syms.s is REGENERATED from
+  layout/baseline_syms.d/, so edit the .d frag, not jp_syms.s).
+- **malloc core (+4):** mallocr.o (malloc_extend_top+_malloc_r, 0x0D9310-0x0D982C) + freer.o (_free_r+
+  _malloc_trim_r, 0x0D8CDC-0x0D8F5C). mallocr.o(.data)@0x08BB8A8C = __malloc_av_ bins(1032 B) + 6 malloc globals.
+  KEY DEBUG: the unlinked mallocr.o(.data) showed 1024 "diff" bytes vs the JP ROM, but those are the
+  self-referential __malloc_av_ bin pointers (UNRESOLVED relocs); LINKED at 0x08BB8A8C it is byte-IDENTICAL --
+  so the "__malloc_av_ region-diff" placeholder carve was just the stock data with unresolved pointers. Removed the
+  src/data/__malloc_av__ref placeholder (its object DEFINES __malloc_av_ even with no placement frag -> a
+  multiple-definition link error until deleted), shrank the data_08BB8E94 residue head by 0x3C (the globals, now in
+  .data), aliased __malloc_lock/__malloc_unlock -> nullsub_7/nullsub_8 (0x0D9960/0x0D9964).
+**REUSABLE PROBE (the lib-link oracle):** a member lib-links iff, after LINKING it standalone at the candidate JP
+addresses (a 5-line ld script with the section VMAs + the external symbol = absolute defs), the section bytes diff
+the JP ROM by 0. NEVER judge from the unlinked .o (relocs read as noise). Section sizes from `objdump -h`; the
+contiguity check is `member.text size == (next_still_asm_addr - first_fn_addr)`.
+**REMAINING newlib = _dtoa_r (dtoa.o):** blocked on 23 callees currently RAW INCBIN (not counted as still-asm) --
+the mprec Bigint cluster (_Balloc/_Bfree/_multiply/_d2b/_lshift/_pow5mult/__mcmp/__mdiff/_i2b/_hi0bits @
+0x080D99xx-0x080DA0xx) + the libgcc soft-float cluster (__adddf3/__subdf3/__muldf3/__divdf3/__fixdfsi/__floatsidf/
+the __cmpdf2 family @ 0x080DAExx-0x080DB6xx). Lib-linkable as a batch (mprec.o + ~12 libgcc.a fp members + incbin
+splits), but ~20 members of effort for +1 tracked still-asm (it DOES properly decompile the whole float/dtoa
+subsystem, currently mislabeled as data). DEFERRED behind the game sub_* NEARs (permuter). The 31 remaining game
+sub_* are register-coloring NEARs (EfxAdvanceFrameLut/RegisterTsaWithOffset proven 2-6 B residuals) -- permuter
+compute-time, not levers.
