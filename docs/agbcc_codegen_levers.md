@@ -189,3 +189,13 @@ LIMITATION for community help: decomp.me stock agbcc has no -mjp-promote; to let
 -mjp-promote functions, the fork flag would need upstreaming to decomp.me's agbcc, OR re-derive those functions
 without needing -mjp-promote (harder). The genuine reg-coloring floor (~38 fns) is being ground by the local
 permuter fleet (16-fn) + these scratches; remaining path = compute-time + community, deterministic levers done.
+
+### decomp.me scratches posted 2026-06-26 (this session's reconstructed/permuter-base NEARs; checked: NO community-fork match yet)
+  Event0F_CounterOps   https://decomp.me/scratch/aNjcw   (decomp.me score 620)
+  PutFaceOnBackGround  https://decomp.me/scratch/jK5bE   (decomp.me score 245, closest)
+  RegisterTsaWithOffset https://decomp.me/scratch/ZA4ER  (decomp.me score 2700; 6-byte local diff)
+  EfxAdvanceFrameLut   https://decomp.me/scratch/HbXuD   (decomp.me score 735; 2-insn residual)
+  sub_8084CE4          https://decomp.me/scratch/KKFDx   (decomp.me score 4121)
+  CHECK-BEFORE-REWORK (D291): before reworking any posted fn, query
+  `GET decomp.me/api/scratch/<slug>/family` for a score-0 fork (a community match) and integrate it
+  instead of re-deriving. As of this posting, all 19 FE8J scratches' families have NO score-0 member.
