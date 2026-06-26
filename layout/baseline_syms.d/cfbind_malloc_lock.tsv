@@ -1,0 +1,2 @@
+__malloc_lock	080D9960	thumb	= nullsub_7 (newlib malloc lock stub)
+__malloc_unlock	080D9964	thumb	= nullsub_8 (newlib malloc unlock stub)

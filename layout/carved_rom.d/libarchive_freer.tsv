@@ -1,0 +1,1 @@
+0D8CDC	0D8F5C	*libc.a:freer.o(.text)	freer.o lib-link: _free_r + _malloc_trim_r (newlib)

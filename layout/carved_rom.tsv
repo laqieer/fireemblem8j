@@ -1513,7 +1513,6 @@ BABAB4	BABAF4	src/classchg-postconfirm.o(.data)	classchg-postconfirm .data
 BABAF4	BABAF8	src/bmguide.o(.data)	bmguide .data
 BABE04	BB08B4	src/data/B12A60/dat_data_B12A60.o(.rodata.dat_data_B12A60)	dat_data_B12A60 region-same shifted (18KB)
 BB8788	BB8A74	src/data/impure_data_ref/dat_impure_data_ref.o(.rodata.dat_impure_data_ref)	impure_data region-diff (funcmap code-ref, 0KB)
-BB8A8C	BB8E94	src/data/__malloc_av__ref/dat___malloc_av__ref.o(.rodata.dat___malloc_av__ref)	__malloc_av_ region-diff (funcmap code-ref, 1KB)
 C00000	C00008	src/banim_data.o(.data.banim_array_len)	banim_number
 C00008	C01928	src/banim_data.o(.data.banim_array)	banim_data
 C02000	E47180	src/data/banimdata/data_banim.o(.data.data_banim)	data_banim battle-anim assets (2324 KB, region-same)

@@ -1,0 +1,2 @@
+0D9310	0D982C	*libc.a:mallocr.o(.text)	mallocr.o lib-link: malloc_extend_top + _malloc_r (newlib)
+BB8A8C	BB8ED0	*libc.a:mallocr.o(.data)	mallocr.o .data: __malloc_av_ bins + malloc globals (newlib, byte-verified linked)
