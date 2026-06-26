@@ -218,4 +218,21 @@ fi
 slug="$(python3 -c 'import json,sys; print(json.load(sys.stdin).get("slug",""))' < "$tmp_resp")"
 [ -n "$slug" ] || die "created scratch but no slug in response: $(cat "$tmp_resp")"
 
+# ---- Claim ownership (if authenticated) ----------------------------------
+# decomp.me creates scratches ANONYMOUS and returns a claim_token; the logged-in
+# user must claim it to become the owner. Do that here when a session is set.
+if [ -n "${DECOMPME_SESSION:-}" ]; then
+    claim_token="$(python3 -c 'import json,sys; print(json.load(sys.stdin).get("claim_token","") or "")' < "$tmp_resp")"
+    if [ -n "$claim_token" ]; then
+        claim_resp="$(curl -sS --max-time 30 -X POST "$API_BASE/scratch/$slug/claim" \
+            -H "Content-Type: application/json" "${auth_headers[@]}" \
+            --data "{\"token\":\"$claim_token\"}" 2>/dev/null || true)"
+        if printf '%s' "$claim_resp" | grep -q '"success":[[:space:]]*true'; then
+            printf '    claimed -> owned by your account\n' >&2
+        else
+            printf '    warning: claim did not confirm (scratch is anonymous): %s\n' "$claim_resp" >&2
+        fi
+    fi
+fi
+
 printf '%s/scratch/%s\n' "$SITE_BASE" "$slug"
