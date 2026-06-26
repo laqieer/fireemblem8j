@@ -358,10 +358,20 @@ met.
 | **Matching-C functions** | matching-C funcs ÷ 8,528 | ~~**25.6%** (2,187)~~ → **95.44% (8139)** (current) | 100% (FE8U: 99.777%) |
 | **Extracted data** | extracted-asset bytes ÷ data bytes (real `dataTotal`, **not** `data_bytes`) | ~~**~0.12%**~~ → **100% of measured set** (current) | 100% |
 | **Named symbols** | named ÷ total labels (no overflow) | ~~**~59%**~~ → **85.23%** (current) | 100% (FE8U: 0 `sub_`/`nullsub`) |
+| **Shiftability** (D296) | relocated data pointers ÷ (relocated + hardcoded) | **43.79%** (8,685 / 19,834) | 100% — **0 hardcoded absolute pointers** (`audit_pointers.py` → 0) |
+| **Asset editability** (D296) | structured/logic data in typed source ÷ structured data bytes | opaque structured raw-incbin = **746 KB** | 100% — **0 opaque structured blobs** (graphics `.bin` exempt) |
 
-_(Row values updated to ground truth from `scripts/calcprogress.py`. Struck-through values are the historical snapshots from when this doc was written. See `docs/frontier.md` for what remains.)_
+_(Row values updated to ground truth from `scripts/calcprogress.py` / `scripts/audit_pointers.py --metrics`. Struck-through values are the historical snapshots from when this doc was written. See `docs/frontier.md` for what remains.)_
 
-Until all four reach 100% **and** the self-contained build passes with `make compare`
+**A byte-perfect ROM is necessary but NOT sufficient.** Axes #5–#6 (D296) are part
+of the final goal: a real decomp must be **shiftable** (no hardcoded absolute
+pointers — the linker relocates every pointer, so the rebuilt game survives any
+section shift instead of jumping to garbage) and **editable** (logic data as typed
+C, not opaque `u8[] = INCBIN` blobs). The completion oracle is therefore: all six
+axes at target **AND** `make compare` → `OK` **AND** `scripts/audit_pointers.py`
+reports **0** un-relocated pointers.
+
+Until all six reach target **and** the self-contained build passes with `make compare`
 → `OK`, FE8J is an **in-progress** decompilation. The single number that matters most
 for true completion is matching-C at 100%, because it is the only one that cannot be
 gamed by relabeling: **every function must compile to exact bytes.**
