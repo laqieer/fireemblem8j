@@ -9,4 +9,10 @@
 	.section .data.residue.08575C4C, "a", %progbits
 	.global data_08575C4C
 data_08575C4C:
-	.incbin "data/residual/data_08575C4C.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=5 data=1 skip=0
+	.4byte 0x00140004
+	.4byte voicegroup038
+	.4byte song950_mon_gog_magic1_1
+	.4byte song950_mon_gog_magic1_2
+	.4byte song950_mon_gog_magic1_3
+	.4byte song950_mon_gog_magic1_4

@@ -9,4 +9,7 @@
 	.section .data.residue.085734E8, "a", %progbits
 	.global data_085734E8
 data_085734E8:
-	.incbin "data/residual/data_085734E8.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=1 data=1 skip=1
+	.4byte 0x00140001
+	.4byte 0x08202E20
+	.4byte song752_h_btl_dragon_shake_01_1

@@ -9,4 +9,22 @@
 	.section .data.residue.08A5D1E8, "a", %progbits
 	.global data_08A5D1E8
 data_08A5D1E8:
-	.incbin "data/residual/data_08A5D1E8.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=6 data=0 skip=12
+	.4byte 0x08A5D180
+	.4byte 0x08A5D184
+	.4byte 0x08A5D1D0
+	.4byte 0x08A5D1D4
+	.4byte 0x08A5D1D8
+	.4byte 0x08A5D1DC
+	.4byte 0x08A5FCB5
+	.4byte 0x08A60014
+	.4byte 0x0891CF68
+	.4byte 0x0891CF68
+	.4byte UnitDef_Ch17BAlly_1
+	.4byte UnitDef_Ch17BAlly_2
+	.4byte UnitDef_Ch17BAlly_3
+	.4byte UnitDef_Ch17BEnemy_6
+	.4byte UnitDef_Ch17BEnemy_7
+	.4byte UnitDef_Ch17BEnemy_8
+	.4byte 0x08A6F0E4
+	.4byte 0x08A6F124

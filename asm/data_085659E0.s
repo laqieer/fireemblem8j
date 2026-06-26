@@ -9,4 +9,42 @@
 	.section .data.residue.085659E0, "a", %progbits
 	.global data_085659E0
 data_085659E0:
-	.incbin "data/residual/data_085659E0.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=4 data=34 skip=0
+	.4byte 0x866848D4
+	.4byte 0x863F8644
+	.4byte 0x8638863C
+	.4byte 0x863F863C
+	.4byte 0x86488644
+	.4byte 0x863F8644
+	.4byte 0x8638863C
+	.4byte 0x863F863C
+	.4byte 0xB3B48644
+	.4byte song070_agbfe3_bgm_ed_after_4_038
+	.4byte 0x5659E0B3
+	.4byte 0xB0B0B008
+	.4byte 0x59BDB3B0
+	.4byte 0xE0B30856
+	.4byte 0xB3085659
+	.4byte song070_agbfe3_bgm_ed_after_4_038
+	.4byte 0x5659E0B3
+	.4byte 0x59BDB308
+	.4byte 0xE0B30856
+	.4byte 0xB3085659
+	.4byte song070_agbfe3_bgm_ed_after_4_038
+	.4byte 0x5659E0B3
+	.4byte 0xBE0EBD08
+	.4byte 0xEE1DBF31
+	.4byte 0xEEB06846
+	.4byte 0xE6A8EEB0
+	.4byte 0x46EE9844
+	.4byte 0xEEB0EEB0
+	.4byte 0xEEB044B0
+	.4byte 0xB0A049A0
+	.4byte 0xA85846B0
+	.4byte 0xEE9841E6
+	.4byte 0xB0B0B046
+	.4byte 0x6043B0B0
+	.4byte 0x98A03EA0
+	.4byte 0x3E9843E6
+	.4byte 0xB2984398
+	.4byte song070_agbfe3_bgm_ed_after_4_B1

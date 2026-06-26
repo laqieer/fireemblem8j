@@ -9,4 +9,39 @@
 	.section .data.residue.0856D9D0, "a", %progbits
 	.global data_0856D9D0
 data_0856D9D0:
-	.incbin "data/residual/data_0856D9D0.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=4 data=30 skip=1
+	.4byte 0x00140002
+	.4byte voicegroup031
+	.4byte song141_se_bmp_unlock1_1_1
+	.4byte song141_se_bmp_unlock1_1_2
+	.4byte 0x4BBB00BC
+	.4byte 0x02C557BD
+	.4byte 0x0AC21EC4
+	.4byte 0x3CCF20BE
+	.4byte 0x21BE847F
+	.4byte 0x24822282
+	.4byte 0x2A822782
+	.4byte 0x32822E82
+	.4byte 0x3D823782
+	.4byte 0x4A824382
+	.4byte 0x59825182
+	.4byte 0x6B826282
+	.4byte 0x7F827482
+	.4byte 0x827E988C
+	.4byte 0x82738278
+	.4byte 0x8268826D
+	.4byte 0x825D8262
+	.4byte 0x82528257
+	.4byte 0x8247824C
+	.4byte 0x3CBE8241
+	.4byte 0x98989898
+	.4byte 0x56DA2EB2
+	.4byte 0x3CCE8808
+	.4byte 0x98989890
+	.4byte 0x98989898
+	.4byte 0x98989898
+	.4byte 0x98989898
+	.4byte 0x000000B1
+	.4byte 0x00330001
+	.4byte voicegroup031
+	.4byte 0x0856D9E0

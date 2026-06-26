@@ -9,4 +9,5 @@
 	.section .data.residue.08BB8A74, "a", %progbits
 	.global data_08BB8A74
 data_08BB8A74:
-	.incbin "data/residual/data_08BB8A74.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=1 data=0 skip=0
+	.4byte impure_data

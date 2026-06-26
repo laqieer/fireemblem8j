@@ -9,4 +9,27 @@
 	.section .data.residue.08553430, "a", %progbits
 	.global data_08553430
 data_08553430:
-	.incbin "data/residual/data_08553430.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=3 data=15 skip=5
+	.4byte 0xD8682DD5
+	.4byte 0xD5864436
+	.4byte 0xD586682D
+	.4byte 0x2686D586
+	.4byte 0x8CD59874
+	.4byte 0x268C7024
+	.4byte 0x2AD28C74
+	.4byte 0x302A8444
+	.4byte 0x843C2A84
+	.4byte 0x3401B3B4
+	.4byte 0x18B30855
+	.4byte 0xB3085534
+	.4byte data_08553430
+	.4byte 0x5532C9B2
+	.4byte 0x0000B108
+	.4byte 0x940A0006
+	.4byte frontier_df3_voicegroup_007_20AD40
+	.4byte 0x08552B44
+	.4byte 0x08552D3A
+	.4byte 0x08552E04
+	.4byte 0x08552FF3
+	.4byte 0x085531FC
+	.4byte song037_agbfe3_bgm_evt_start_6

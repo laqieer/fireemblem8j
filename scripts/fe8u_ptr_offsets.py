@@ -44,49 +44,74 @@ def fe8u_obj_for(name):
                     _OBJ_INDEX.setdefault(p[2], (cur, int(p[0], 16), p[1]))
     return _OBJ_INDEX.get(name)
 
+_OBJ_CACHE = {}
+def _obj_ptr_offsets(obj):
+    """Map EVERY data symbol in `obj` -> its pointer byte-offsets, in ONE pass
+    (3 subprocess calls per .o instead of per-symbol). Cached: an .o with N
+    pointer tables (e.g. all UnitDef in events.o) is processed once, not N times."""
+    if obj in _OBJ_CACHE:
+        return _OBJ_CACHE[obj]
+    import bisect as _bi
+    from collections import defaultdict
+    # nm -S: addr size type name (size + addr-within-section)
+    nm = subprocess.run(["arm-none-eabi-nm", "-S", obj], capture_output=True,
+                        text=True, errors="replace").stdout
+    info = {}   # name -> (addr, size)
+    for line in nm.splitlines():
+        p = line.split()
+        if len(p) == 4:
+            try: info[p[3]] = (int(p[0], 16), int(p[1], 16))
+            except ValueError: pass
+    # objdump -t: name -> section
+    td = subprocess.run(["arm-none-eabi-objdump", "-t", obj], capture_output=True,
+                        text=True, errors="replace").stdout
+    sec_of = {}
+    for line in td.splitlines():
+        parts = line.split()
+        if not parts:
+            continue
+        name = parts[-1]
+        for tok in parts:
+            if tok.startswith(".rodata") or tok.startswith(".data"):
+                sec_of[name] = tok; break
+    # per-section sorted (addr, addr+size, name) for symbols we know sizes for
+    sec_syms = defaultdict(list)
+    for name, (addr, size) in info.items():
+        sec = sec_of.get(name)
+        if sec and size:
+            sec_syms[sec].append((addr, addr + size, name))
+    for sec in sec_syms:
+        sec_syms[sec].sort()
+    starts = {sec: [a for a, _, _ in lst] for sec, lst in sec_syms.items()}
+    # objdump -r: relocations -> attribute each to its containing symbol
+    rels = subprocess.run(["arm-none-eabi-objdump", "-r", obj], capture_output=True,
+                          text=True, errors="replace").stdout
+    res = defaultdict(set)
+    cursec = None
+    for line in rels.splitlines():
+        if line.startswith("RELOCATION RECORDS FOR ["):
+            cursec = line.split("[", 1)[1].rstrip("]:")
+        elif cursec in sec_syms and "R_ARM_ABS32" in line:
+            try:
+                O = int(line.split()[0], 16)
+            except ValueError:
+                continue
+            lst = sec_syms[cursec]
+            i = _bi.bisect_right(starts[cursec], O) - 1
+            if i >= 0:
+                a0, a1, nm_ = lst[i]
+                if a0 <= O < a1:
+                    res[nm_].add(O - a0)
+    _OBJ_CACHE[obj] = {k: sorted(v) for k, v in res.items()}
+    return _OBJ_CACHE[obj]
+
 def ptr_offsets(name):
     """Return sorted list of pointer byte-offsets within `name`, or None."""
     info = fe8u_obj_for(name)
     if info is None:
         return None
-    obj, sym_off, typ = info
-    # symbol's section: from nm -S we'd get size; get size + section via readelf
-    # find the section the symbol lives in and its size
-    out = subprocess.run(["arm-none-eabi-nm", "-S", obj], capture_output=True,
-                         text=True, errors="replace").stdout
-    size = None
-    for line in out.splitlines():
-        p = line.split()
-        if len(p) == 4 and p[3] == name:
-            size = int(p[1], 16); break
-    # which section? use objdump -t
-    secout = subprocess.run(["arm-none-eabi-objdump", "-t", obj],
-                            capture_output=True, text=True, errors="replace").stdout
-    section = None
-    for line in secout.splitlines():
-        if (" " + name) in (" " + line) and line.strip().endswith(name):
-            parts = line.split()
-            # format: addr flags section ... size name  -> section is 3rd-ish col
-            for tok in parts:
-                if tok.startswith(".rodata") or tok.startswith(".data") or tok == ".text":
-                    section = tok; break
-    # relocations residing in that section, within [sym_off, sym_off+size)
-    rels = subprocess.run(["arm-none-eabi-objdump", "-r", obj],
-                          capture_output=True, text=True, errors="replace").stdout
-    offs = []
-    in_sec = False
-    for line in rels.splitlines():
-        if line.startswith("RELOCATION RECORDS FOR ["):
-            sec = line.split("[", 1)[1].rstrip("]:")
-            in_sec = (section is None) or (sec == section)
-        elif in_sec and "R_ARM_ABS32" in line:
-            try:
-                roff = int(line.split()[0], 16)
-            except ValueError:
-                continue
-            if size is None or (sym_off <= roff < sym_off + size):
-                offs.append(roff - sym_off)
-    return sorted(set(offs)) if offs else None
+    offs = _obj_ptr_offsets(info[0]).get(name)
+    return offs if offs else None
 
 def jp_converted_offsets(name):
     """Offsets the JP repointer would convert = ROM-range words in the .bin."""

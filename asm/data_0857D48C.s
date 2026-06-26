@@ -9,4 +9,40 @@
 	.section .data.residue.0857D48C, "a", %progbits
 	.global data_0857D48C
 data_0857D48C:
-	.incbin "data/residual/data_0857D48C.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=1 data=34 skip=1
+	.4byte 0x0858459C
+	.4byte 0x00000682
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x000003F0
+	.4byte 0x00000EAC
+	.4byte 0x00003BEB
+	.4byte 0x00000FEB
+	.4byte 0x000003AC
+	.4byte 0x00000EF0
+	.4byte 0x00003ACC
+	.4byte 0x00003AFB
+	.4byte 0x00000EAB
+	.4byte 0x000003FC
+	.4byte 0x00000000
+	.4byte gFontgrp_359
+	.4byte 0x00000682
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x000000F0
+	.4byte 0x000003AC
+	.4byte 0x000003AC
+	.4byte 0x00000EAB
+	.4byte 0x000003AC
+	.4byte 0x000003AC
+	.4byte 0x000003AC
+	.4byte 0x00000FAC
+	.4byte 0x00003BAC
+	.4byte 0x00000EAC
+	.4byte 0x000003F0
+	.4byte 0x00000000

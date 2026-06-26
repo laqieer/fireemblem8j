@@ -9,4 +9,7 @@
 	.section .data.residue.0856A370, "a", %progbits
 	.global data_0856A370
 data_0856A370:
-	.incbin "data/residual/data_0856A370.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=2 data=1 skip=0
+	.4byte 0x00140001
+	.4byte voicegroup031
+	.4byte song080_h_evt_hubuki_s_1

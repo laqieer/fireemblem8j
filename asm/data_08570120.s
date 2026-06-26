@@ -9,4 +9,12 @@
 	.section .data.residue.08570120, "a", %progbits
 	.global data_08570120
 data_08570120:
-	.incbin "data/residual/data_08570120.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=7 data=1 skip=0
+	.4byte 0x00140006
+	.4byte voicegroup038
+	.4byte song320_bmp_evt_20b_1_1
+	.4byte song320_bmp_evt_20b_1_2
+	.4byte song320_bmp_evt_20b_1_3
+	.4byte song320_bmp_evt_20b_1_4
+	.4byte song320_bmp_evt_20b_1_5
+	.4byte song320_bmp_evt_20b_1_6

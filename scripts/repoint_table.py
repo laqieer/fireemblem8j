@@ -121,56 +121,94 @@ def find_wrapper(name):
         cpath = None
     return cpath, binp, section
 
-def emit_c(name, binp, section, addrs, by_addr, safe_only=False, allowed=None):
-    """Emit the table as a top-level __asm__ block: `.4byte sym (+off)` for each
-    pointer word, `.4byte 0xNNN` for data words. Pure asm needs NO C declaration
-    of any referenced symbol, so it NEVER conflicts with a typed header decl and
-    never hits an undeclared-symbol error regardless of what global.h pulls in --
-    GAS emits an undefined reference the linker resolves (with the Thumb bit for
-    STT_FUNC syms, matching FE8's odd-stored function pointers). Byte-identical to
-    baserom by construction (each .4byte sym relocates to sym's address == the
-    original bytes); `make compare` is the oracle."""
+_ASM_INCBIN_MAP = None
+def asm_file_for(name):
+    """The asm/*.s that incbins data/residual/<name>.bin (multi-symbol files)."""
+    global _ASM_INCBIN_MAP
+    if _ASM_INCBIN_MAP is None:
+        _ASM_INCBIN_MAP = {}
+        out = subprocess.run(
+            ["grep", "-rlE", r'\.incbin "data/residual/', os.path.join(ROOT, "asm")],
+            capture_output=True, text=True, errors="replace").stdout
+        for path in out.split():
+            with open(path, "r", errors="replace") as f:
+                for line in f:
+                    m = re.search(r'\.incbin "data/residual/([A-Za-z0-9_.]+)\.bin"', line)
+                    if m:
+                        _ASM_INCBIN_MAP.setdefault(m.group(1), path)
+    return _ASM_INCBIN_MAP.get(name)
+
+def rewrite_asm_inplace(asm_path, name, binp, addrs, by_addr, safe_only, allowed,
+                        check=False, skip_zero=False):
+    """Replace the single `.incbin "data/residual/<name>.bin"` line in a
+    (possibly multi-symbol) asm file with the de-pointered `.4byte` directives.
+    Surgical: only that one line changes; sibling symbols are untouched."""
+    words, stats = emit_words(name, binp, addrs, by_addr, safe_only, allowed)
+    if words is None:
+        return None, stats
+    if skip_zero and stats.startswith("ptr=0 "):
+        return "SKIP0", stats   # nothing to relocate -> leave the incbin as-is
+    needle = '.incbin "data/residual/%s.bin"' % name
+    with open(asm_path, "r", errors="replace") as f:
+        src = f.readlines()
+    new = []
+    hit = False
+    for line in src:
+        if needle in line and not hit:
+            indent = line[:len(line) - len(line.lstrip())] or "\t"
+            new.append("%s@ de-pointered (scripts/repoint_table.py): %s\n" % (indent, stats))
+            new.extend("%s%s\n" % (indent, w) for w in words)
+            hit = True
+        else:
+            new.append(line)
+    if not hit:
+        return None, "incbin line not found in %s" % asm_path
+    if not check:
+        with open(asm_path, "w") as f:
+            f.writelines(new)
+    return stats, stats
+
+def emit_words(name, binp, addrs, by_addr, safe_only=False, allowed=None):
+    """Core: turn each 4-byte word of the .bin into an asm directive string --
+    `.4byte sym (+off)` for a confirmed pointer, `.4byte 0xNN` for data/raw.
+    Returns (directives, stats) or (None, err). Shared by the C-wrapper and the
+    in-place asm rewriter. Byte-identical to baserom by construction (each
+    `.4byte sym` relocates to sym's address == the original bytes)."""
     with open(binp, "rb") as f:
         b = f.read()
     if len(b) % 4 != 0:
         return None, "size not 4-aligned (%d)" % len(b)
-    nwords = len(b) // 4
-    lines = []
+    out = []
     nptr = ndata = nskip = 0
-    for i in range(nwords):
+    for i in range(len(b) // 4):
         O = i * 4
         v = struct.unpack_from("<I", b, i * 4)[0]
         if ROM_LO <= v < ROM_HI:
             r = resolve(v, addrs, by_addr)
             if r is None:
-                lines.append('"\\t.4byte 0x%08X\\n"' % v); ndata += 1; continue
+                out.append(".4byte 0x%08X" % v); ndata += 1; continue
             sym, off, is_func = r
-            # SAFETY: a word resolving INTERIOR into a function's code (off>1) is
-            # never a real pointer -- it's a coincidental constant whose value
-            # happens to fall in ROM range (e.g. a UnitDefinition AI/flag field).
-            # Converting it would (a) be semantically wrong and (b) flip the thumb
-            # bit -> +1 byte diff. Leave it raw. Legit fn pointers hit the function
-            # start (off=0) or carry the thumb bit (off=1).
+            # SAFETY: INTERIOR into a function's code (off>1) is never a pointer --
+            # a coincidental constant. Leave raw (also avoids a thumb-bit +1 diff).
             if is_func and off > 1:
-                lines.append('"\\t.4byte 0x%08X\\n"  /* coincidental const into fn: raw */' % v)
-                nskip += 1; continue
+                out.append(".4byte 0x%08X" % v); nskip += 1; continue
             if safe_only and is_func:
-                lines.append('"\\t.4byte 0x%08X\\n"  /* fn-ptr: left raw */' % v)
-                nskip += 1; continue
-            # fe8u-gated mode: convert a ROM-range word ONLY if `allowed(O)` confirms
-            # this byte-offset is a real pointer slot (fe8u relocation), OR the word
-            # resolves EXACT (off==0 -- a constant never equals a symbol's exact start,
-            # so always safe). Everything else is a coincidental constant -> leave raw.
+                out.append(".4byte 0x%08X" % v); nskip += 1; continue
+            # fe8u-gated: convert ONLY if allowed(O) confirms the byte-offset is a
+            # pointer slot, OR the word resolves EXACT (off==0, always safe).
             if allowed is not None and not (allowed(O) or off == 0):
-                lines.append('"\\t.4byte 0x%08X\\n"  /* not a fe8u ptr slot: raw */' % v)
-                nskip += 1; continue
-            if off:
-                lines.append('"\\t.4byte %s + 0x%X\\n"' % (sym, off))
-            else:
-                lines.append('"\\t.4byte %s\\n"' % sym)
+                out.append(".4byte 0x%08X" % v); nskip += 1; continue
+            out.append(".4byte %s + 0x%X" % (sym, off) if off else ".4byte %s" % sym)
             nptr += 1
         else:
-            lines.append('"\\t.4byte 0x%08X\\n"' % v); ndata += 1
+            out.append(".4byte 0x%08X" % v); ndata += 1
+    return out, "ptr=%d data=%d skip=%d" % (nptr, ndata, nskip)
+
+def emit_c(name, binp, section, addrs, by_addr, safe_only=False, allowed=None):
+    """Wrap emit_words in a top-level __asm__ block (for the _ref .c wrappers)."""
+    words, stats = emit_words(name, binp, addrs, by_addr, safe_only, allowed)
+    if words is None:
+        return None, stats
     c = []
     c.append("#include \"global.h\"")
     c.append("")
@@ -183,10 +221,9 @@ def emit_c(name, binp, section, addrs, by_addr, safe_only=False, allowed=None):
     c.append('"\\t.section %s, \\"a\\", %%progbits\\n"' % section)
     c.append('"\\t.global %s\\n"' % name)
     c.append('"%s:\\n"' % name)
-    c.extend(lines)
+    c.extend('"\\t%s\\n"' % w for w in words)
     c.append(");")
     c.append("")
-    stats = "ptr=%d data=%d skip=%d" % (nptr, ndata, nskip)
     return "\n".join(c), stats
 
 def table_is_safe(binp, addrs, by_addr):
@@ -326,15 +363,20 @@ def main():
     safe_only = "--safe-only" in sys.argv
     fe8u_safe = "--fe8u-safe" in sys.argv
     addrs, by_addr = load_syms()
+    asm_only = "--asm" in sys.argv  # restrict fe8u-safe to asm-incbin tables
     if fe8u_safe and not args:
-        # all live (still-INCBIN) residual tables with a _ref .c wrapper
+        # all live raw residual tables: still-INCBIN _ref .c OR incbin'd in asm
         for binp in sorted(glob.glob(os.path.join(RESID, "*.bin"))):
             name = os.path.basename(binp)[:-4]
             cpath, _, _ = find_wrapper(name)
             if cpath and os.path.exists(cpath):
+                if asm_only:
+                    continue
                 with open(cpath, "r", errors="replace") as f:
                     if "INCBIN" in f.read():
                         args.append(name)
+            elif asm_file_for(name):
+                args.append(name)
         print("fe8u-safe: %d candidate tables" % len(args))
     if "--auto-safe" in sys.argv:
         sel = select_auto_safe(addrs, by_addr)
@@ -363,13 +405,26 @@ def main():
         cpath, binp, section = find_wrapper(name)
         if not os.path.exists(binp):
             print("SKIP %s: no .bin (%s)" % (name, binp)); continue
-        if cpath is None:
-            print("SKIP %s: no _ref .c wrapper found" % name); continue
         allowed = None
         if fe8u_safe:
             allowed = fe8u_allowed(name)
             if allowed is None:
                 allowed = (lambda O: False)   # no fe8u data -> EXACT-only (off==0) fallback
+        if cpath is None:
+            # asm-incbin table: rewrite the single incbin line in place
+            asm_path = asm_file_for(name)
+            if asm_path is None:
+                print("SKIP %s: no _ref .c and no asm incbin" % name); continue
+            res, stats = rewrite_asm_inplace(asm_path, name, binp, addrs, by_addr,
+                                             safe_only, allowed, check, skip_zero=fe8u_safe)
+            if res is None or res == "SKIP0":
+                if res is None:
+                    print("SKIP %s: %s" % (name, stats))
+                continue
+            nconv += 1
+            if not fe8u_safe:
+                print("WROTE(asm) %s (%s) -> %s" % (name, stats, asm_path))
+            continue
         c, stats = emit_c(name, binp, section, addrs, by_addr, safe_only, allowed)
         if c is None:
             print("SKIP %s: %s" % (name, stats)); continue
@@ -377,7 +432,6 @@ def main():
             print("=== %s (%s) ===" % (name, stats))
             print(c[:1500])
         else:
-            # in fe8u-safe mode, skip writing tables where nothing converted (0 ptr)
             if fe8u_safe and ("ptr=0 " in stats):
                 continue
             with open(cpath, "w") as f:

@@ -9,4 +9,56 @@
 	.section .data.residue.085C2980, "a", %progbits
 	.global data_085C2980
 data_085C2980:
-	.incbin "data/residual/data_085C2980.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=1 data=40 skip=11
+	.4byte 0x80000001
+	.4byte 0x004C0000
+	.4byte 0x80000001
+	.4byte 0x004D0000
+	.4byte 0x80FF0001
+	.4byte 0x004D0000
+	.4byte 0x80000001
+	.4byte 0x004E0000
+	.4byte 0x80000001
+	.4byte 0x004F0000
+	.4byte 0x80010001
+	.4byte 0x004F0000
+	.4byte data_085C2980
+	.4byte 0x085C2988
+	.4byte 0x085C2990
+	.4byte 0x085C2998
+	.4byte 0x085C29A0
+	.4byte 0x085C29A8
+	.4byte 0x00000001
+	.4byte 0x080DC600
+	.4byte 0x0000000E
+	.4byte 0x00000000
+	.4byte 0x00000002
+	.4byte 0x08015C39
+	.4byte 0x00000003
+	.4byte 0x08015CBD
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000003
+	.4byte 0x08015F4D
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000004
+	.4byte 0x08016149
+	.4byte 0x00000003
+	.4byte 0x080160ED
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x000004C6
+	.4byte 0x000004A3
+	.4byte 0x000004A4
+	.4byte 0x000004A5
+	.4byte 0x000004A6
+	.4byte 0x000004AA
+	.4byte 0x000004AB
+	.4byte 0x000004AC
+	.4byte 0x000004AD
+	.4byte 0x000004A7
+	.4byte 0x000004A8
+	.4byte 0x000004A9
+	.4byte 0x00000000
+	.4byte 0x000004A9

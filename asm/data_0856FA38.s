@@ -9,4 +9,30 @@
 	.section .data.residue.0856FA38, "a", %progbits
 	.global data_0856FA38
 data_0856FA38:
-	.incbin "data/residual/data_0856FA38.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=5 data=18 skip=3
+	.4byte 0x00140001
+	.4byte voicegroup033
+	.4byte song312_se_btl_eclipse1_1_1
+	.4byte 0x4BBB00BC
+	.4byte 0x70BE10BD
+	.4byte 0x987F3CCF
+	.4byte 0x98989898
+	.4byte 0xB190CE88
+	.4byte 0x00140001
+	.4byte voicegroup033
+	.4byte 0x0856FA44
+	.4byte 0x4BBB00BC
+	.4byte 0x7FBE11BD
+	.4byte 0x987F3CFF
+	.4byte 0x98989898
+	.4byte 0x000000B1
+	.4byte 0x00140001
+	.4byte voicegroup033
+	.4byte 0x0856FA64
+	.4byte 0x4BBB00BC
+	.4byte 0x7FBE12BD
+	.4byte 0x987F3CFF
+	.4byte 0xB1989898
+	.4byte 0x00140001
+	.4byte voicegroup033
+	.4byte 0x0856FA84

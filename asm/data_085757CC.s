@@ -9,4 +9,10 @@
 	.section .data.residue.085757CC, "a", %progbits
 	.global data_085757CC
 data_085757CC:
-	.incbin "data/residual/data_085757CC.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=5 data=1 skip=0
+	.4byte 0x00140004
+	.4byte voicegroup038
+	.4byte song946_mon_mao_magic1_1_1
+	.4byte song946_mon_mao_magic1_1_2
+	.4byte song946_mon_mao_magic1_1_3
+	.4byte song946_mon_mao_magic1_1_4

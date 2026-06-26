@@ -9,4 +9,12 @@
 	.section .data.residue.0855F708, "a", %progbits
 	.global data_0855F708
 data_0855F708:
-	.incbin "data/residual/data_0855F708.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=6 data=1 skip=1
+	.4byte 0x940A0006
+	.4byte 0x0820F2E8
+	.4byte song060_bgm_sys_fase_pl_1
+	.4byte song060_bgm_sys_fase_pl_2
+	.4byte song060_bgm_sys_fase_pl_3
+	.4byte song060_bgm_sys_fase_pl_4
+	.4byte song060_bgm_sys_fase_pl_5
+	.4byte song060_bgm_sys_fase_pl_6

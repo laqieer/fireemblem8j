@@ -9,4 +9,34 @@
 	.section .data.residue.08574898, "a", %progbits
 	.global data_08574898
 data_08574898:
-	.incbin "data/residual/data_08574898.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=4 data=25 skip=1
+	.4byte 0x00140002
+	.4byte voicegroup038
+	.4byte song894_mon_mao_attack3_1
+	.4byte song894_mon_mao_attack3_2
+	.4byte 0x4BBB00BC
+	.4byte 0x7FBE07BD
+	.4byte 0x98483CE7
+	.4byte 0x4C3C82D1
+	.4byte 0x503CD082
+	.4byte 0x543CD181
+	.4byte 0x583CD282
+	.4byte 0x643CD183
+	.4byte 0x6C3CD082
+	.4byte 0x643CD181
+	.4byte 0x825C3C82
+	.4byte 0x81543CD0
+	.4byte 0x86483CDE
+	.4byte 0xD182D189
+	.4byte 0x4C3CD082
+	.4byte 0xD282D181
+	.4byte 0xD183503C
+	.4byte 0xD082583C
+	.4byte 0xD181603C
+	.4byte 0x3C82643C
+	.4byte 0x3CD0826C
+	.4byte 0x3CDD8174
+	.4byte 0x00B18E7F
+	.4byte 0x00140001
+	.4byte voicegroup037
+	.4byte 0x085748A8

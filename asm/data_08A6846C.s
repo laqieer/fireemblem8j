@@ -9,4 +9,52 @@
 	.section .data.residue.08A6846C, "a", %progbits
 	.global data_08A6846C
 data_08A6846C:
-	.incbin "data/residual/data_08A6846C.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=1 data=41 skip=6
+	.4byte 0x00261220
+	.4byte 0x00012C41
+	.4byte 0x08910A34
+	.4byte 0x00003020
+	.4byte 0x00101720
+	.4byte 0x00023B21
+	.4byte 0x003C0E20
+	.4byte 0x00003B22
+	.4byte 0x00020540
+	.4byte 0x00000049
+	.4byte 0x00000A40
+	.4byte 0x08A60420
+	.4byte 0x0AD81B20
+	.4byte 0x00001D20
+	.4byte 0x00041721
+	.4byte 0x00001B22
+	.4byte 0x15172620
+	.4byte 0x00002220
+	.4byte 0x00012C40
+	.4byte 0x08910C60
+	.4byte 0x00003020
+	.4byte 0x00101720
+	.4byte 0x00573242
+	.4byte 0x00000000
+	.4byte 0x00020540
+	.4byte 0x00000057
+	.4byte 0xFFFF2F48
+	.4byte 0x1215FFFD
+	.4byte 0x00000A40
+	.4byte EventScr_UnitWarpIN
+	.4byte 0x00573B21
+	.4byte 0x003C0E20
+	.4byte 0x00003B22
+	.4byte 0x00020540
+	.4byte 0x00000049
+	.4byte 0x00000A40
+	.4byte 0x08A60420
+	.4byte 0x0AD91B20
+	.4byte 0x00001D20
+	.4byte 0x00101721
+	.4byte 0x00001B22
+	.4byte 0x0057342F
+	.4byte 0x00012C40
+	.4byte 0x08910F94
+	.4byte 0x00003020
+	.4byte 0x00000A40
+	.4byte 0x085B9DBC
+	.4byte 0x00000120
