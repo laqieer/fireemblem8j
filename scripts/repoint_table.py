@@ -272,15 +272,12 @@ def emit_words_bytes(b, addrs, by_addr, safe_only=False, allowed=None):
             # can't be reliably made byte-exact. Leave genuine functions raw. (Data
             # symbols mistyped 'T' by nm are correctly NON-func via STT, so they DO
             # convert here -- the win: even-valued data pointers no longer over-skip.)
-            if is_func:
-                # genuine STT_FUNC. ld ORs the Thumb bit for a THUMB function
-                # (.4byte func -> funcaddr|1) but NOT for ARM. Emit the addend that
-                # reproduces v: Thumb -> off-1 (since funcaddr|1 = funcaddr+1), ARM -> off.
-                a = (off - 1) if is_thumb_addr(v - off) else off
-                if a == 0:   out.append(".4byte %s" % sym)
-                elif a > 0:  out.append(".4byte %s + 0x%X" % (sym, a))
-                else:        out.append(".4byte %s - 0x%X" % (sym, -a))
-                nptr += 1; continue
+            # ld quirk: `.4byte func` (addend 0) ORs the Thumb bit (-> func|1) but
+            # `.4byte func + off` (off!=0) does NOT (-> func+off). So a function ptr
+            # reproduces exactly for any off>=1; only off==0 (ptr to a Thumb fn's even
+            # start) is unreproducible -> leave raw.
+            if is_func and off == 0:
+                out.append(".4byte 0x%08X" % v); nskip += 1; continue
             out.append(".4byte %s + 0x%X" % (sym, off) if off else ".4byte %s" % sym)
             nptr += 1
         else:
