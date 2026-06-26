@@ -1,7 +1,67 @@
 #include "global.h"
 
-/* Migrated from asm/dat_UnitDef_Event_Ch7Ally_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/UnitDef_Event_Ch7Ally.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_UnitDef_Event_Ch7Ally_ref") u8 UnitDef_Event_Ch7Ally[] = INCBIN_U8("data/residual/UnitDef_Event_Ch7Ally.bin");
+__asm__(
+"\t.section .rodata.dat_UnitDef_Event_Ch7Ally_ref, \"a\", %progbits\n"
+"\t.global UnitDef_Event_Ch7Ally\n"
+"UnitDef_Event_Ch7Ally:\n"
+"\t.4byte 0x38000201\n"
+"\t.4byte 0x01000440\n"
+"\t.4byte REDA_Ch6_1\n"
+"\t.4byte 0x00006C09\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x28000903\n"
+"\t.4byte 0x01000400\n"
+"\t.4byte REDA_Ch6_2\n"
+"\t.4byte 0x00006C14\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x08001A08\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x01000440\n"
+"\t.4byte REDA_Ch6_3\n"
+"\t.4byte 0x00006C2D\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x18004505\n"
+"\t.4byte 0x01000400\n"
+"\t.4byte REDA_Ch6_4\n"
+"\t.4byte 0x0000004B\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x20003F0A\n"
+"\t.4byte 0x01000480\n"
+"\t.4byte REDA_Ch7_0\n"
+"\t.4byte 0x0000281F\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x08000702\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x01000400\n"
+"\t.4byte REDA_Ch7_1\n"
+"\t.4byte 0x006C1703\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x10000D09\n"
+"\t.4byte 0x010004C0\n"
+"\t.4byte REDA_Ch7_2\n"
+"\t.4byte 0x00006B01\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x10004806\n"
+"\t.4byte 0x01000480\n"
+"\t.4byte REDA_Ch7_3\n"
+"\t.4byte 0x00006C15\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x08000504\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000440\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x006C1401\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x08004413\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x000004C0\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0000003F\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);

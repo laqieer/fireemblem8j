@@ -1,7 +1,46 @@
 #include "global.h"
 
-/* Migrated from asm/dat_gProcScr_ChapterIntroTitleOnly_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/gProcScr_ChapterIntroTitleOnly.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_gProcScr_ChapterIntroTitleOnly_ref") u8 gProcScr_ChapterIntroTitleOnly[] = INCBIN_U8("data/residual/gProcScr_ChapterIntroTitleOnly.bin");
+__asm__(
+"\t.section .rodata.dat_gProcScr_ChapterIntroTitleOnly_ref, \"a\", %progbits\n"
+"\t.global gProcScr_ChapterIntroTitleOnly\n"
+"gProcScr_ChapterIntroTitleOnly:\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte BMapDispSuspend + 0x1\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte ChapterIntroTitle_InitBgImg + 0x1\n"
+"\t.4byte 0x00000005\n"
+"\t.4byte 0x085C3570\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000002\n"
+"\t.4byte StartMidFadeFromBlack + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte WaitForFade + 0x1\n"
+"\t.4byte 0x00630018\n"
+"\t.4byte sub_8020D78 + 0x1\n"
+"\t.4byte 0x00B4000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0063000B\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte StartMidFadeToBlack + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte WaitForFade + 0x1\n"
+"\t.4byte 0x03E7000B\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte ChapterIntroTitle_ResetBg + 0x1\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte ChapterIntro_InitCameraYPos + 0x1\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte BMapDispResume + 0x1\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte ChapterIntroTitle_End + 0x1\n"
+"\t.4byte 0x0000000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);

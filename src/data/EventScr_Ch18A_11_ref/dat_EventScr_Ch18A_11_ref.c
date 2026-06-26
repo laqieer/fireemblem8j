@@ -1,7 +1,83 @@
 #include "global.h"
 
-/* Migrated from asm/dat_EventScr_Ch18A_11_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/EventScr_Ch18A_11.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_EventScr_Ch18A_11_ref") u8 EventScr_Ch18A_11[] = INCBIN_U8("data/residual/EventScr_Ch18A_11.bin");
+__asm__(
+"\t.section .rodata.dat_EventScr_Ch18A_11_ref, \"a\", %progbits\n"
+"\t.global EventScr_Ch18A_11\n"
+"EventScr_Ch18A_11:\n"
+"\t.4byte 0x00491220\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x0000004C\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00001920\n"
+"\t.4byte 0x00010540\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte 0x00000C41\n"
+"\t.4byte 0x0001000C\n"
+"\t.4byte 0x0B3A1B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x7FFF1324\n"
+"\t.4byte 0x00001C20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x002C1220\n"
+"\t.4byte 0x00001C20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00010920\n"
+"\t.4byte 0x00000820\n"
+"\t.4byte 0x0B3B1B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x7FFF1324\n"
+"\t.4byte 0x00001C20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x002C1220\n"
+"\t.4byte 0x00001C20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00010820\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x7FFF1324\n"
+"\t.4byte 0x00101721\n"
+"\t.4byte 0x00002220\n"
+"\t.4byte 0x00101720\n"
+"\t.4byte 0x00012C41\n"
+"\t.4byte UnitDef_Ch18AMixed\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00491220\n"
+"\t.4byte 0x00C03B21\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00003B22\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x0000004C\n"
+"\t.4byte 0x00030540\n"
+"\t.4byte 0x00000B3C\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x0F0C2628\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x1B002620\n"
+"\t.4byte 0x000F3B21\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00003B22\n"
+"\t.4byte 0x00251220\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x0000004C\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x0B3D1B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x00101721\n"
+"\t.4byte 0x0000342B\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x085B9DBC\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00080229\n"
+"\t.4byte 0x000A0229\n"
+"\t.4byte 0x000C0229\n"
+"\t.4byte 0x000E0229\n"
+"\t.4byte 0x00070228\n"
+"\t.4byte 0x00000120\n"
+);

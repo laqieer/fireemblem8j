@@ -1,7 +1,32 @@
 #include "global.h"
 
-/* Migrated from asm/dat_ProcScr_LinkArenaPhaseIntro_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/ProcScr_LinkArenaPhaseIntro.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_ProcScr_LinkArenaPhaseIntro_ref") u8 ProcScr_LinkArenaPhaseIntro[] = INCBIN_U8("data/residual/ProcScr_LinkArenaPhaseIntro.bin");
+__asm__(
+"\t.section .rodata.dat_ProcScr_LinkArenaPhaseIntro_ref, \"a\", %progbits\n"
+"\t.global ProcScr_LinkArenaPhaseIntro\n"
+"ProcScr_LinkArenaPhaseIntro:\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte LAPhaseIntro_Init + 0x1\n"
+"\t.4byte 0x0000000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000005\n"
+"\t.4byte gProcScr_PhaseIntroText\n"
+"\t.4byte 0x00000005\n"
+"\t.4byte gProcScr_PhaseIntroSquares\n"
+"\t.4byte 0x00000005\n"
+"\t.4byte gProcScr_PhaseIntroBlendBox\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte PhaseIntro_InitDisp + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte PhaseIntro_WaitForEnd + 0x1\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte LAPhaseIntro_StartBgm + 0x1\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte LAPhaseIntro_End + 0x1\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);

@@ -1,7 +1,73 @@
 #include "global.h"
 
-/* Migrated from asm/dat_EventScr_Ch14A_0_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/EventScr_Ch14A_0.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_EventScr_Ch14A_0_ref") u8 EventScr_Ch14A_0[] = INCBIN_U8("data/residual/EventScr_Ch14A_0.bin");
+__asm__(
+"\t.section .rodata.dat_EventScr_Ch14A_0_ref, \"a\", %progbits\n"
+"\t.global EventScr_Ch14A_0\n"
+"EventScr_Ch14A_0:\n"
+"\t.4byte 0x07092628\n"
+"\t.4byte 0x00012C40\n"
+"\t.4byte 0x08910694\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00533B21\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00003B22\n"
+"\t.4byte 0x00261220\n"
+"\t.4byte 0x00001A20\n"
+"\t.4byte 0x0A461B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x00002F41\n"
+"\t.4byte 0x00CB0053\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00082F42\n"
+"\t.4byte 0x000200CB\n"
+"\t.4byte 0x00002F42\n"
+"\t.4byte 0x00010052\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00533B21\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00003B22\n"
+"\t.4byte 0x00001A20\n"
+"\t.4byte 0x0A471B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x00002F42\n"
+"\t.4byte 0x00000052\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00002F41\n"
+"\t.4byte 0x00CB0053\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00CB342F\n"
+"\t.4byte 0x00100E20\n"
+"\t.4byte 0x00002F40\n"
+"\t.4byte 0x08090053\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00533B21\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00003B22\n"
+"\t.4byte 0x00001A20\n"
+"\t.4byte 0x0A481B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x00002F41\n"
+"\t.4byte 0x00400053\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x0040342F\n"
+"\t.4byte 0x00002F40\n"
+"\t.4byte 0x0B110053\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x0053342F\n"
+"\t.4byte 0x06092628\n"
+"\t.4byte 0x00002F40\n"
+"\t.4byte 0x05090052\n"
+"\t.4byte 0x00012C40\n"
+"\t.4byte UnitDef_Ch14AEnemy_6\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00070228\n"
+"\t.4byte 0x00000120\n"
+);

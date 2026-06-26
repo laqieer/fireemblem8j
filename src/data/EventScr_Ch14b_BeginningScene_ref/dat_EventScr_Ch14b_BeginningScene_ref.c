@@ -1,7 +1,111 @@
 #include "global.h"
 
-/* Migrated from asm/dat_EventScr_Ch14b_BeginningScene_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/EventScr_Ch14b_BeginningScene.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_EventScr_Ch14b_BeginningScene_ref") u8 EventScr_Ch14b_BeginningScene[] = INCBIN_U8("data/residual/EventScr_Ch14b_BeginningScene.bin");
+__asm__(
+"\t.section .rodata.dat_EventScr_Ch14b_BeginningScene_ref, \"a\", %progbits\n"
+"\t.global EventScr_Ch14b_BeginningScene\n"
+"EventScr_Ch14b_BeginningScene:\n"
+"\t.4byte 0x00012C40\n"
+"\t.4byte 0x0891B3BC\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00533420\n"
+"\t.4byte 0x00012C40\n"
+"\t.4byte 0x0891BA74\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x15002620\n"
+"\t.4byte 0x00002220\n"
+"\t.4byte 0x00251220\n"
+"\t.4byte 0x00101720\n"
+"\t.4byte 0x00012C41\n"
+"\t.4byte 0x0891B984\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00010540\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x000F3428\n"
+"\t.4byte 0x00010540\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00023428\n"
+"\t.4byte 0x00002C42\n"
+"\t.4byte 0x0891B9C0\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00010540\n"
+"\t.4byte 0xFFFFFFFF\n"
+"\t.4byte 0x000F3428\n"
+"\t.4byte 0x00010540\n"
+"\t.4byte 0xFFFFFFFF\n"
+"\t.4byte 0x00023428\n"
+"\t.4byte 0x000F3B21\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00003B22\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x00000049\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x0ADA1B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x7FFF1324\n"
+"\t.4byte 0x00101721\n"
+"\t.4byte 0x00002220\n"
+"\t.4byte 0x00002620\n"
+"\t.4byte 0x00101720\n"
+"\t.4byte 0x00403242\n"
+"\t.4byte 0x00000017\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x00000040\n"
+"\t.4byte 0xFFFF2F48\n"
+"\t.4byte 0x0205FFFD\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte EventScr_UnitWarpIN\n"
+"\t.4byte 0x00403B21\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00003B22\n"
+"\t.4byte 0x002E1220\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x00000049\n"
+"\t.4byte 0x00030540\n"
+"\t.4byte 0x00000ADB\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x00000040\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte EventScr_UnitWarpOUT\n"
+"\t.4byte 0x0040342F\n"
+"\t.4byte 0x00002F42\n"
+"\t.4byte 0x00030066\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00002F41\n"
+"\t.4byte 0x00530066\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00012C40\n"
+"\t.4byte 0x0891B718\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00533421\n"
+"\t.4byte 0x0066342F\n"
+"\t.4byte 0x00101721\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x085B9DBC\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x070C2628\n"
+"\t.4byte 0x00101720\n"
+"\t.4byte 0x00261220\n"
+"\t.4byte 0x00012C40\n"
+"\t.4byte 0x0891B768\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00013421\n"
+"\t.4byte 0x00013B21\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00003B22\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x00000049\n"
+"\t.4byte 0x00030540\n"
+"\t.4byte 0x00000ADD\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00070228\n"
+"\t.4byte 0x00000120\n"
+);

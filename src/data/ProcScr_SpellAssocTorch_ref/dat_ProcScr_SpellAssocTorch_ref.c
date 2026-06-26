@@ -1,7 +1,30 @@
 #include "global.h"
 
-/* Migrated from asm/dat_ProcScr_SpellAssocTorch_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/ProcScr_SpellAssocTorch.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_ProcScr_SpellAssocTorch_ref") u8 ProcScr_SpellAssocTorch[] = INCBIN_U8("data/residual/ProcScr_SpellAssocTorch.bin");
+__asm__(
+"\t.section .rodata.dat_ProcScr_SpellAssocTorch_ref, \"a\", %progbits\n"
+"\t.global ProcScr_SpellAssocTorch\n"
+"ProcScr_SpellAssocTorch:\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnim_AnimateSubjectIdle + 0x1\n"
+"\t.4byte 0x001E000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnimCallSpellAssocTorch + 0x1\n"
+"\t.4byte 0x0002000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0064000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x000A000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnim_SubjectResetAnim + 0x1\n"
+"\t.4byte 0x001E000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);

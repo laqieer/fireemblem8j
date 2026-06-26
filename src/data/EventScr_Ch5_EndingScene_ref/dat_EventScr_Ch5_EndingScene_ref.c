@@ -1,7 +1,68 @@
 #include "global.h"
 
-/* Migrated from asm/dat_EventScr_Ch5_EndingScene_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/EventScr_Ch5_EndingScene.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_EventScr_Ch5_EndingScene_ref") u8 EventScr_Ch5_EndingScene[] = INCBIN_U8("data/residual/EventScr_Ch5_EndingScene.bin");
+__asm__(
+"\t.section .rodata.dat_EventScr_Ch5_EndingScene_ref, \"a\", %progbits\n"
+"\t.global EventScr_Ch5_EndingScene\n"
+"EventScr_Ch5_EndingScene:\n"
+"\t.4byte 0x00101721\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x00000020\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte EventScr_StrictLoadUniqueAlly\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x0000000A\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x000D3322\n"
+"\t.4byte 0x00000C40\n"
+"\t.4byte 0x0000000C\n"
+"\t.4byte 0x00311220\n"
+"\t.4byte 0x09891B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00010920\n"
+"\t.4byte 0x00000820\n"
+"\t.4byte 0x00321220\n"
+"\t.4byte 0x098A1B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00010820\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x00080321\n"
+"\t.4byte 0x00020C40\n"
+"\t.4byte 0x0000000C\n"
+"\t.4byte 0x00090321\n"
+"\t.4byte 0x00020C40\n"
+"\t.4byte 0x0000000C\n"
+"\t.4byte 0x000A0321\n"
+"\t.4byte 0x00020C40\n"
+"\t.4byte 0x0000000C\n"
+"\t.4byte 0x000B0321\n"
+"\t.4byte 0x00020C40\n"
+"\t.4byte 0x0000000C\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x0000000A\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x098B1B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x085B9D24\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00030540\n"
+"\t.4byte 0x00000068\n"
+"\t.4byte 0x00003720\n"
+"\t.4byte 0x00020820\n"
+"\t.4byte 0x00DB0229\n"
+"\t.4byte 0x00BD0229\n"
+"\t.4byte 0x00BB0229\n"
+"\t.4byte 0x00CC0229\n"
+"\t.4byte 0x00EA0229\n"
+"\t.4byte 0x00052A22\n"
+"\t.4byte 0x0000A640\n"
+"\t.4byte 0x00080000\n"
+"\t.4byte 0x00000120\n"
+);

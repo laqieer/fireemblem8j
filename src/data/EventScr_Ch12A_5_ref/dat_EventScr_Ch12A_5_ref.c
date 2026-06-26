@@ -1,7 +1,30 @@
 #include "global.h"
 
-/* Migrated from asm/dat_EventScr_Ch12A_5_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/EventScr_Ch12A_5.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_EventScr_Ch12A_5_ref") u8 EventScr_Ch12A_5[] = INCBIN_U8("data/residual/EventScr_Ch12A_5.bin");
+__asm__(
+"\t.section .rodata.dat_EventScr_Ch12A_5_ref, \"a\", %progbits\n"
+"\t.global EventScr_Ch12A_5\n"
+"EventScr_Ch12A_5:\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte UnitDef_Ch12AEnemy_5\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A603AC\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x0890ED4C\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A603D4\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00020540\n"
+"\t.4byte data_0890ECE8\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A603AC\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00020540\n"
+"\t.4byte UnitDef_Ch12AEnemy_3\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A603AC\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00070228\n"
+"\t.4byte 0x00000120\n"
+);

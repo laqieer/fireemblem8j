@@ -1,7 +1,65 @@
 #include "global.h"
 
-/* Migrated from asm/dat_EventScr_Prologue_BeginningScene_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/EventScr_Prologue_BeginningScene.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_EventScr_Prologue_BeginningScene_ref") u8 EventScr_Prologue_BeginningScene[] = INCBIN_U8("data/residual/EventScr_Prologue_BeginningScene.bin");
+__asm__(
+"\t.section .rodata.dat_EventScr_Prologue_BeginningScene_ref, \"a\", %progbits\n"
+"\t.global EventScr_Prologue_BeginningScene\n"
+"EventScr_Prologue_BeginningScene:\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte EventScr_Prologue_RenaisThroneCutscene\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte data_08A612F4\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte EventScr_CallOnTutorialMode\n"
+"\t.4byte 0x00001927\n"
+"\t.4byte 0x00000C41\n"
+"\t.4byte 0x0000000C\n"
+"\t.4byte 0x00000D40\n"
+"\t.4byte BmGuideTextSetAllGreen + 0x1\n"
+"\t.4byte 0x00000820\n"
+"\t.4byte 0x00080229\n"
+"\t.4byte 0x00012C40\n"
+"\t.4byte 0x0890819C\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00010540\n"
+"\t.4byte 0x0000000D\n"
+"\t.4byte 0x00023425\n"
+"\t.4byte 0x00013B21\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00003B22\n"
+"\t.4byte 0x00001520\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x00000025\n"
+"\t.4byte 0x00030540\n"
+"\t.4byte 0x000008CD\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00001521\n"
+"\t.4byte 0x00182F40\n"
+"\t.4byte 0x04040002\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00023B21\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00003B22\n"
+"\t.4byte 0x00001A20\n"
+"\t.4byte 0x08CE1B20\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x08A613B4\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000A40\n"
+"\t.4byte EventScr_CallOnTutorialMode\n"
+"\t.4byte 0x00002F48\n"
+"\t.4byte 0x05040001\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte EventScr_Prologue_GiveRapier\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte data_08A611DC\n"
+"\t.4byte 0x00070228\n"
+"\t.4byte 0x00000120\n"
+);

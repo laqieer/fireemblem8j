@@ -1,7 +1,62 @@
 #include "global.h"
 
-/* Migrated from asm/dat_UnitDef_Ch16AAlly_5_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/UnitDef_Ch16AAlly_5.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_UnitDef_Ch16AAlly_5_ref") u8 UnitDef_Ch16AAlly_5[] = INCBIN_U8("data/residual/UnitDef_Ch16AAlly_5.bin");
+__asm__(
+"\t.section .rodata.dat_UnitDef_Ch16AAlly_5_ref, \"a\", %progbits\n"
+"\t.global UnitDef_Ch16AAlly_5\n"
+"UnitDef_Ch16AAlly_5:\n"
+"\t.4byte 0x6000010F\n"
+"\t.4byte 0x040001CE\n"
+"\t.4byte frontier_df3_unitdef_b_011_911AFC\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x60000201\n"
+"\t.4byte 0x020001CE\n"
+"\t.4byte 0x08911B1C\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x60000702\n"
+"\t.4byte 0x020001CE\n"
+"\t.4byte 0x08911B2C\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x60003C1E\n"
+"\t.4byte 0x010001CE\n"
+"\t.4byte 0x08911B3C\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x60004B19\n"
+"\t.4byte 0x010001CE\n"
+"\t.4byte 0x08911B44\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x60001B0B\n"
+"\t.4byte 0x010001CE\n"
+"\t.4byte 0x08911B4C\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x60000510\n"
+"\t.4byte 0x010001CE\n"
+"\t.4byte 0x08911B54\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x60000511\n"
+"\t.4byte 0x0100020E\n"
+"\t.4byte 0x08911B5C\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x60000504\n"
+"\t.4byte 0x0100020E\n"
+"\t.4byte 0x08911B64\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);

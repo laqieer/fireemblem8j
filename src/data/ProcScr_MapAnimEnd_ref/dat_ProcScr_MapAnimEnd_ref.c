@@ -1,7 +1,50 @@
 #include "global.h"
 
-/* Migrated from asm/dat_ProcScr_MapAnimEnd_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/ProcScr_MapAnimEnd.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_ProcScr_MapAnimEnd_ref") u8 ProcScr_MapAnimEnd[] = INCBIN_U8("data/residual/ProcScr_MapAnimEnd.bin");
+__asm__(
+"\t.section .rodata.dat_ProcScr_MapAnimEnd_ref, \"a\", %progbits\n"
+"\t.global ProcScr_MapAnimEnd\n"
+"ProcScr_MapAnimEnd:\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnim_DisplayDeathQuote + 0x1\n"
+"\t.4byte 0x00000014\n"
+"\t.4byte BattleEventEngineExists + 0x1\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnim_DisplayDeathFade + 0x1\n"
+"\t.4byte 0x00000008\n"
+"\t.4byte 0x08A13308\n"  /* coincidental const into fn: raw */
+"\t.4byte 0x00000002\n"
+"\t.4byte EndMapAnimInfoWindow + 0x1\n"
+"\t.4byte 0x0001000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnim_StoleItemPopup + 0x1\n"
+"\t.4byte 0x0000000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnim_DisplayExpBar + 0x1\n"
+"\t.4byte 0x0000000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte DisplayWpnBrokePopup + 0x1\n"
+"\t.4byte 0x0008000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte DisplayWRankUpPopup + 0x1\n"
+"\t.4byte 0x0000000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnim_MoveCameraOntoSubject + 0x1\n"
+"\t.4byte 0x0002000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte UnlockGame + 0x1\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnim_Cleanup + 0x1\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);

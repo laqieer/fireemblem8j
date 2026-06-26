@@ -1,7 +1,34 @@
 #include "global.h"
 
-/* Migrated from asm/dat_ProcScr_SpellAssocElixir_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/ProcScr_SpellAssocElixir.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_ProcScr_SpellAssocElixir_ref") u8 ProcScr_SpellAssocElixir[] = INCBIN_U8("data/residual/ProcScr_SpellAssocElixir.bin");
+__asm__(
+"\t.section .rodata.dat_ProcScr_SpellAssocElixir_ref, \"a\", %progbits\n"
+"\t.global ProcScr_SpellAssocElixir\n"
+"ProcScr_SpellAssocElixir:\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnim_AnimateSubjectIdle + 0x1\n"
+"\t.4byte 0x001E000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnimCallSpellAssocElixir + 0x1\n"
+"\t.4byte 0x001E000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnim_BeginRoundSpecificAnims + 0x1\n"
+"\t.4byte 0x001E000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte MapAnim_WaitForHPToEndChangingMaybe + 0x1\n"
+"\t.4byte 0x000A000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte MapAnim_SubjectResetAnim + 0x1\n"
+"\t.4byte 0x001E000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);
