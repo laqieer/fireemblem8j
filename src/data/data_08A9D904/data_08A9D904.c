@@ -104,9 +104,9 @@ __asm__(
 "\t.4byte 0x08948030\n"
 "\t.4byte 0x80504008\n"
 "\t.4byte 0x00000898\n"
-"\t.4byte 0x08A9DA38\n"
-"\t.4byte 0x08A9DA4C\n"
-"\t.4byte 0x08A9DA5A\n"
+"\t.4byte data_08A9D978 + 0xC0\n"
+"\t.4byte data_08A9D978 + 0xD4\n"
+"\t.4byte data_08A9D978 + 0xE2\n"
 "\t.4byte 0x03020100\n"
 "\t.4byte 0x00010203\n"
 );  /* de-pointered slice data_08A9D978: ptr=7 data=47 skip=13 */
