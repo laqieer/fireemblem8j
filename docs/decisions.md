@@ -7792,3 +7792,41 @@ is the correctness gate for these. Do NOT bulk-convert struct arrays on density.
 State: 38.51% -> 51.19% shiftable this session (-2,514 hardcoded pointers retired
 byte-exact: pure-pointer + all-EXACT + fe8u-verified dense). Proven-safe automatic
 levers are now exhausted; the rest is fe8u-oracle-gated struct-array work.
+
+## D298 — fe8u reloc oracle: provably-safe completion engine for axis #5 (2026-06-26)
+
+The density heuristic (D297) cannot bulk-convert struct arrays safely. The
+solution: the **fe8u relocation oracle** (`scripts/fe8u_ptr_offsets.py`). fe8u
+shares the game data layout with JP, so fe8u's compiled .o relocations give the
+EXACT byte-offsets that are pointers within each table. `repoint_table.py
+--fe8u-safe` converts a JP table ONLY at those offsets (+ EXACT-resolving words,
+always safe), with stride extrapolation for JP-divergent extra records (more
+units/glyphs). Self-validating: on gClassData, 847 of 862 ROM-range words sit
+exactly at fe8u pointer offsets and convert; the 15 that don't are coincidental
+stat/growth constants and stay raw. Handles both `_ref` .c wrappers and asm-incbin
+tables (surgical single-line rewrite, sibling symbols untouched). Per-object
+cache (process each fe8u .o once) -> ~400 tables in 2.7s.
+
+Key fixes this session:
+- METRIC ACCURACY: liveness now excludes orphaned `.bin` of tables already
+  provided as relocated structs (gClassData via data_classes.c had 850 ABS32
+  relocations but its .bin was counted as 862 "hardcoded"). Overcount ~3,000.
+- is_func IS UNRELIABLE for gating: many FE8 data symbols are typed 'T' (text-
+  classified section), so the density-mode `is_func && off>1` guard wrongly
+  skipped real UnitDefinition data pointers (offset 0x8 -> data_..+164). In
+  fe8u-safe mode the oracle is authoritative; the heuristic applies only to
+  density mode and only for genuine function names (not data_ placeholders).
+- REAL vs literal debt (axis 5b): graphics/sound coincidental constants
+  (0x08xxxxxx pixel/sample bytes) are NOT pointers and never relocatable;
+  reported separately so the real-debt number is honest.
+
+Result: shiftability ~38% -> 80.44% literal / 82.03% real this session; hardcoded
+12,195(overcounted)/~9,700(real) -> 2,838 (2,556 real). make compare green
+throughout. ~13 commits.
+
+Remaining ~2,556 real debt: (a) un-named generic `data_*` blobs -- fe8u can't gate
+by NAME, so the next lever maps `data_<JPaddr>` -> US addr (region shift from
+us_jp_funcmap anchors) -> fe8u symbol -> offsets, gated by JP/fe8u offset-
+alignment self-validation (misalignment = skip, so safe); (b) JP-divergent
+EventScr bytecode (parse the event-command format for pointer args). Both are
+per-table, multi-session. NEVER bulk-convert struct arrays on density (D297).
