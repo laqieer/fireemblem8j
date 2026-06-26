@@ -93,7 +93,7 @@ __asm__(
 "\t.4byte UnitDef_Event_PrologueGradoCavalry\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00012C40\n"
-"\t.4byte 0x0890837C\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08908354 + 0x28\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00C53B21\n"
 "\t.4byte 0x003C0E20\n"
@@ -122,7 +122,7 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x000008C7\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x000D0540\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00010540\n"
@@ -155,7 +155,7 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x000008C8\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x00012C40\n"
 "\t.4byte UnitDef_Event_PrologueValterGroup\n"
 "\t.4byte 0x00003020\n"
@@ -173,7 +173,7 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x000008C9\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x00002F42\n"
 "\t.4byte 0x00000045\n"
 "\t.4byte 0x00003020\n"

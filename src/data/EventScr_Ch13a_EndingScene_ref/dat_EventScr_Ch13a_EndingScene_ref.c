@@ -19,7 +19,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000023\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x0A361B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00010920\n"
@@ -27,7 +27,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000023\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x0A371B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00010820\n"
@@ -55,7 +55,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000023\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x0A391B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
@@ -63,7 +63,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000023\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x00311420\n"
 "\t.4byte 0x00210E20\n"
 "\t.4byte 0x001A3322\n"
@@ -73,7 +73,7 @@ __asm__(
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x085B9D24\n"  /* coincidental const into fn: raw */
+"\t.4byte data_085B9BBC + 0x168\n"
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x00001388\n"
 "\t.4byte 0x00003721\n"
@@ -91,7 +91,7 @@ __asm__(
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x085B9D24\n"  /* coincidental const into fn: raw */
+"\t.4byte data_085B9BBC + 0x168\n"
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x00001388\n"
 "\t.4byte 0x00003721\n"
@@ -116,11 +116,11 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x000F2520\n"
 "\t.4byte 0x00012C40\n"
-"\t.4byte 0x0890FFB8\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_unitdef_b_000_90F678 + 0x940\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00041720\n"
 "\t.4byte 0x00012C40\n"
-"\t.4byte 0x0890FFE0\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_unitdef_b_000_90F678 + 0x968\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00010540\n"
 "\t.4byte 0x00000005\n"
@@ -131,13 +131,13 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000049\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x002E1220\n"
 "\t.4byte 0x0A3E1B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603FC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xA8\n"
 "\t.4byte 0x000D0540\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00010540\n"

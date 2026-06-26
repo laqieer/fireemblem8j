@@ -10,7 +10,7 @@ __asm__(
 "\t.global gProcScr_BKSEL\n"
 "gProcScr_BKSEL:\n"
 "\t.4byte 0x00000001\n"
-"\t.4byte 0x080DCCFC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_080DCCB2 + 0x4A\n"
 "\t.4byte 0x00000004\n"
 "\t.4byte BattleForecast_OnEnd + 0x1\n"
 "\t.4byte 0x00000002\n"

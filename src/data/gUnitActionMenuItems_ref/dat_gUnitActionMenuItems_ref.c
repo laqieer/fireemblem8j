@@ -9,7 +9,7 @@ __asm__(
 "\t.section .rodata.dat_gUnitActionMenuItems_ref, \"a\", %progbits\n"
 "\t.global gUnitActionMenuItems\n"
 "gUnitActionMenuItems:\n"
-"\t.4byte 0x080DCBD0\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x25C\n"
 "\t.4byte 0x064D060B\n"
 "\t.4byte 0x00004E00\n"
 "\t.4byte UnitActionMenu_CanSeize + 0x1\n"
@@ -18,7 +18,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCBC8\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x254\n"
 "\t.4byte 0x0641060C\n"
 "\t.4byte 0x00004F00\n"
 "\t.4byte AttackCommandUsability + 0x1\n"
@@ -27,7 +27,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte DisplayUnitStandingAttackRange + 0x1\n"
 "\t.4byte HideMoveRangeGraphicsWrapper + 0x1\n"
-"\t.4byte 0x080DCBC8\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x254\n"
 "\t.4byte 0x0641060C\n"
 "\t.4byte 0x00005000\n"
 "\t.4byte AttackBallistaCommandUsability + 0x1\n"
@@ -36,7 +36,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte DisplayUnitStandingAttackRange + 0x1\n"
 "\t.4byte HideMoveRangeGraphicsWrapper + 0x1\n"
-"\t.4byte 0x080DCBC0\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x24C\n"
 "\t.4byte 0x0642060D\n"
 "\t.4byte 0x00005100\n"
 "\t.4byte StaffCommandUsability + 0x1\n"
@@ -45,7 +45,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte StaffCommandRange + 0x1\n"
 "\t.4byte HideMoveRangeGraphicsWrapper2 + 0x1\n"
-"\t.4byte 0x080DCBB8\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x244\n"
 "\t.4byte 0x06580000\n"
 "\t.4byte 0x00005204\n"
 "\t.4byte RideCommandUsability + 0x1\n"
@@ -54,7 +54,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCBAC\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x238\n"
 "\t.4byte 0x06590000\n"
 "\t.4byte 0x00005304\n"
 "\t.4byte ExitCommandUsability + 0x1\n"
@@ -63,7 +63,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCBA0\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x22C\n"
 "\t.4byte 0x0644060E\n"
 "\t.4byte 0x00005400\n"
 "\t.4byte PlayCommandUsability + 0x1\n"
@@ -72,7 +72,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB98\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x224\n"
 "\t.4byte 0x0643060F\n"
 "\t.4byte 0x00005500\n"
 "\t.4byte DanceCommandUsability + 0x1\n"
@@ -81,7 +81,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB90\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x21C\n"
 "\t.4byte 0x06450610\n"
 "\t.4byte 0x00005600\n"
 "\t.4byte StealCommandUsability + 0x1\n"
@@ -90,7 +90,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB88\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x214\n"
 "\t.4byte 0x065F061E\n"
 "\t.4byte 0x00005700\n"
 "\t.4byte SummonCommandUsability + 0x1\n"
@@ -99,7 +99,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB80\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x20C\n"
 "\t.4byte 0x065F061E\n"
 "\t.4byte 0x00005800\n"
 "\t.4byte YobimaCommandUsability + 0x1\n"
@@ -108,7 +108,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB74\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x200\n"
 "\t.4byte 0x0660061E\n"
 "\t.4byte 0x00005900\n"
 "\t.4byte PickCommandUsability + 0x1\n"
@@ -117,7 +117,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB6C\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x1F8\n"
 "\t.4byte 0x064B0611\n"
 "\t.4byte 0x00005A00\n"
 "\t.4byte TalkCommandUsability + 0x1\n"
@@ -126,7 +126,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB64\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x1F0\n"
 "\t.4byte 0x06E80612\n"
 "\t.4byte 0x00005B00\n"
 "\t.4byte SupportCommandUsability + 0x1\n"
@@ -135,7 +135,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB5C\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x1E8\n"
 "\t.4byte 0x064C0613\n"
 "\t.4byte 0x00005C00\n"
 "\t.4byte VisitCommandUsability + 0x1\n"
@@ -144,7 +144,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB54\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x1E0\n"
 "\t.4byte 0x06500614\n"
 "\t.4byte 0x00005D00\n"
 "\t.4byte ChestCommandUsability + 0x1\n"
@@ -153,7 +153,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB4C\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x1D8\n"
 "\t.4byte 0x064E0615\n"
 "\t.4byte 0x00005E00\n"
 "\t.4byte DoorCommandUsability + 0x1\n"
@@ -162,7 +162,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB40\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x1CC\n"
 "\t.4byte 0x06510616\n"
 "\t.4byte 0x00005F00\n"
 "\t.4byte ArmoryCommandUsability + 0x1\n"
@@ -171,7 +171,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB34\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x1C0\n"
 "\t.4byte 0x06520617\n"
 "\t.4byte 0x00006000\n"
 "\t.4byte VendorCommandUsability + 0x1\n"
@@ -180,7 +180,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB28\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x1B4\n"
 "\t.4byte 0x06530618\n"
 "\t.4byte 0x00006100\n"
 "\t.4byte SecretShopCommandUsability + 0x1\n"
@@ -189,7 +189,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB1C\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x1A8\n"
 "\t.4byte 0x06540619\n"
 "\t.4byte 0x00006200\n"
 "\t.4byte ArenaCommandUsability + 0x1\n"
@@ -198,7 +198,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB14\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x1A0\n"
 "\t.4byte 0x0646061A\n"
 "\t.4byte 0x00006300\n"
 "\t.4byte RescueUsability + 0x1\n"
@@ -207,7 +207,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCB08\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x194\n"
 "\t.4byte 0x0647061B\n"
 "\t.4byte 0x00006400\n"
 "\t.4byte DropUsability + 0x1\n"
@@ -216,7 +216,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCAFC\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x188\n"
 "\t.4byte 0x0649061C\n"
 "\t.4byte 0x00006504\n"
 "\t.4byte TakeUsability + 0x1\n"
@@ -225,7 +225,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCAF0\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x17C\n"
 "\t.4byte 0x0648061D\n"
 "\t.4byte 0x00006604\n"
 "\t.4byte GiveUsability + 0x1\n"
@@ -234,7 +234,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCAE4\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x170\n"
 "\t.4byte 0x0655061E\n"
 "\t.4byte 0x00006700\n"
 "\t.4byte ItemCommandUsability + 0x1\n"
@@ -243,7 +243,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCADC\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x168\n"
 "\t.4byte 0x0656061F\n"
 "\t.4byte 0x00006804\n"
 "\t.4byte ItemSubMenu_IsTradeAvailable + 0x1\n"
@@ -252,7 +252,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCAD0\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x15C\n"
 "\t.4byte 0x06570620\n"
 "\t.4byte 0x00006904\n"
 "\t.4byte SupplyUsability + 0x1\n"
@@ -261,7 +261,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCAC8\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x154\n"
 "\t.4byte 0x06400622\n"
 "\t.4byte 0x00006B00\n"
 "\t.4byte MenuAlwaysEnabled + 0x1\n"

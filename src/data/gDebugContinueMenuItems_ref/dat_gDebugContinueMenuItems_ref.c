@@ -9,7 +9,7 @@ __asm__(
 "\t.section .rodata.dat_gDebugContinueMenuItems_ref, \"a\", %progbits\n"
 "\t.global gDebugContinueMenuItems\n"
 "gDebugContinueMenuItems:\n"
-"\t.4byte 0x080DCA20\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0xAC\n"
 "\t.4byte 0x00000002\n"
 "\t.4byte 0x00000A00\n"
 "\t.4byte MenuAlwaysEnabled + 0x1\n"
@@ -18,7 +18,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCA10\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x9C\n"
 "\t.4byte 0x00000003\n"
 "\t.4byte 0x00000B00\n"
 "\t.4byte DebugContinueMenu_IsContinueChapterAvailable + 0x1\n"
@@ -27,7 +27,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCA04\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x90\n"
 "\t.4byte 0x00000631\n"
 "\t.4byte 0x00000C00\n"
 "\t.4byte DebugContinueMenu_IsManualContinueAvailable + 0x1\n"
@@ -36,7 +36,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DC9F0\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x7C\n"
 "\t.4byte 0x00000005\n"
 "\t.4byte 0x00000D00\n"
 "\t.4byte MenuAlwaysEnabled + 0x1\n"

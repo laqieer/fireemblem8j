@@ -16,12 +16,12 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x08000201\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x0300000B\n"
-"\t.4byte 0x08911FE4\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_unitdef_b_014_911FCC + 0x18\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x08000702\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x0400000B\n"
-"\t.4byte 0x08911FFC\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_unitdef_b_014_911FCC + 0x30\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"

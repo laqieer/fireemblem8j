@@ -12,19 +12,19 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte UnitDef_Ch11BEnemy_4\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603AC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x58\n"
 "\t.4byte 0x00020540\n"
-"\t.4byte 0x089187FC\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_unitdef_b_030_918784 + 0x78\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603D4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x80\n"
 "\t.4byte 0x00020540\n"
-"\t.4byte 0x08918838\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_unitdef_b_030_918784 + 0xB4\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603D4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x80\n"
 "\t.4byte 0x00020540\n"
-"\t.4byte 0x08918874\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_unitdef_b_030_918784 + 0xF0\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603D4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x80\n"
 "\t.4byte 0x00070228\n"
 "\t.4byte 0x00000120\n"
 );

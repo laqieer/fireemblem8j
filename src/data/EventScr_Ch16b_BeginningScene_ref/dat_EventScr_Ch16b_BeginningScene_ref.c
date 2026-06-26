@@ -16,19 +16,19 @@ __asm__(
 "\t.4byte 0x000E0229\n"
 "\t.4byte 0x00000120\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A69AB8\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x3E4\n"
 "\t.4byte 0x001F2A21\n"
 "\t.4byte 0x00000120\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A69D90\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x6BC\n"
 "\t.4byte 0x00000120\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A69DB8\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x6E4\n"
 "\t.4byte 0x00000120\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A69DE0\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x70C\n"
 "\t.4byte 0x00000120\n"
 "\t.4byte 0x00020540\n"
-"\t.4byte 0x0891C438\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_unitdef_b_042_91C230 + 0x208\n"
 "\t.4byte 0x00000A40\n"
 );

@@ -13,7 +13,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x0000001E\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x09141B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
@@ -21,14 +21,14 @@ __asm__(
 "\t.4byte 0x00002220\n"
 "\t.4byte 0x00101720\n"
 "\t.4byte 0x00012C40\n"
-"\t.4byte 0x08908994\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08908958 + 0x3C\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x7FFF1324\n"
 "\t.4byte 0x00012C40\n"
 "\t.4byte UnitDef_Ch2Enemy_0\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00012C40\n"
-"\t.4byte 0x08908A34\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08908958 + 0xDC\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x003C0E22\n"
 "\t.4byte 0x001A1220\n"
@@ -52,7 +52,7 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x00000916\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x00473B21\n"
 "\t.4byte 0x003C0E20\n"
 "\t.4byte 0x00003B22\n"
@@ -76,7 +76,7 @@ __asm__(
 "\t.4byte 0x06E23A40\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00012C40\n"
-"\t.4byte 0x089089BC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08908958 + 0x64\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00010540\n"
 "\t.4byte 0x00000005\n"
@@ -89,9 +89,9 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x00000918\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x00020540\n"
-"\t.4byte 0x08A628C8\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A62808 + 0xC0\n"
 "\t.4byte 0x00000A40\n"
 "\t.4byte EventScr_CallOnTutorialMode\n"
 "\t.4byte 0x00002C40\n"
@@ -115,7 +115,7 @@ __asm__(
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x00020540\n"
-"\t.4byte 0x08A628E8\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A62808 + 0xE0\n"
 "\t.4byte 0x00000A40\n"
 "\t.4byte EventScr_CallOnTutorialMode\n"
 "\t.4byte 0x00053B21\n"

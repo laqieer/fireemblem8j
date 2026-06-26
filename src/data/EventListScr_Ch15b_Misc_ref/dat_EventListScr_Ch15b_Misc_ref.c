@@ -10,7 +10,7 @@ __asm__(
 "\t.global EventListScr_Ch15b_Misc\n"
 "EventListScr_Ch15b_Misc:\n"
 "\t.4byte 0x000B000B\n"
-"\t.4byte 0x08A6EE94\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_eventscr_ch_014_A6EDFC + 0x98\n"
 "\t.4byte 0x03080000\n"
 "\t.4byte 0x000C000B\n"
 "\t.4byte frontier_df3_eventscr_ch_015_A6EF04\n"
@@ -19,7 +19,7 @@ __asm__(
 "\t.4byte frontier_df3_eventscr_ch_015_A6EF04\n"
 "\t.4byte 0x160D1201\n"
 "\t.4byte 0x000B000B\n"
-"\t.4byte 0x08A6EE94\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_eventscr_ch_014_A6EDFC + 0x98\n"
 "\t.4byte 0x15150E0E\n"
 "\t.4byte 0x00000001\n"
 "\t.4byte data_085B9EE8\n"
@@ -34,7 +34,7 @@ __asm__(
 "\t.4byte EventListScr_Ch15b_Location\n"
 "\t.4byte EventListScr_Ch15b_Misc\n"
 "\t.4byte 0x08A5CF40\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5CF44\n"  /* coincidental const into fn: raw */
+"\t.4byte EventListScr_Ch15b_Misc + 0x44\n"
 "\t.4byte 0x08A5CF48\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x08A5CF4C\n"  /* coincidental const into fn: raw */
 "\t.4byte gUidebug_2 + 0x4E3\n"

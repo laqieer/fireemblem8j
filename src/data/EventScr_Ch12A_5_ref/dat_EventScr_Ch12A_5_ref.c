@@ -12,19 +12,19 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte UnitDef_Ch12AEnemy_5\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603AC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x58\n"
 "\t.4byte 0x00020540\n"
-"\t.4byte 0x0890ED4C\n"  /* coincidental const into fn: raw */
+"\t.4byte data_0890ECE8 + 0x64\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603D4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x80\n"
 "\t.4byte 0x00020540\n"
 "\t.4byte data_0890ECE8\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603AC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x58\n"
 "\t.4byte 0x00020540\n"
 "\t.4byte UnitDef_Ch12AEnemy_3\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603AC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x58\n"
 "\t.4byte 0x00070228\n"
 "\t.4byte 0x00000120\n"
 );

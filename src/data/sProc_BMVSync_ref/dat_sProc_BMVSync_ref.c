@@ -18,9 +18,9 @@ __asm__(
 "\t.4byte 0x0000000B\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x0802FFAD\n"  /* coincidental const into fn: raw */
+"\t.4byte ExecNightmareStaffEffect + 0xD\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x0802FFF5\n"  /* coincidental const into fn: raw */
+"\t.4byte ExecNightmareStaffEffect + 0x55\n"
 "\t.4byte 0x00000002\n"
 "\t.4byte SyncUnitSpriteSheet + 0x1\n"
 "\t.4byte 0x00000002\n"

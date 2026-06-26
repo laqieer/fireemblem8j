@@ -13,14 +13,14 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x0000001E\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x094B1B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000025\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x094C1B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
@@ -87,7 +87,7 @@ __asm__(
 "\t.4byte 0x00000A40\n"
 "\t.4byte EventScr_CallOnTutorialMode\n"
 "\t.4byte 0x00020540\n"
-"\t.4byte 0x08A63800\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A6378C + 0x74\n"
 "\t.4byte 0x00000A40\n"
 "\t.4byte EventScr_CallOnTutorialMode\n"
 "\t.4byte 0x00070228\n"

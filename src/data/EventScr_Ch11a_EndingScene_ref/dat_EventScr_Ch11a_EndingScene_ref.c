@@ -13,7 +13,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x0000003B\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x00193322\n"
 "\t.4byte 0x00000C40\n"
 "\t.4byte 0x0000000C\n"
@@ -66,7 +66,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000001\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x00001520\n"
 "\t.4byte 0x0A0F1B20\n"
 "\t.4byte 0x00001D20\n"
@@ -92,7 +92,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000025\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x0A101B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00281220\n"
@@ -100,7 +100,7 @@ __asm__(
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603FC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xA8\n"
 "\t.4byte 0x00002F40\n"
 "\t.4byte 0x000D0017\n"
 "\t.4byte 0x00003020\n"
@@ -130,7 +130,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000025\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x0A111B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00261220\n"
@@ -138,7 +138,7 @@ __asm__(
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603FC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xA8\n"
 "\t.4byte 0x00002F42\n"
 "\t.4byte 0x00030043\n"
 "\t.4byte 0x00003020\n"

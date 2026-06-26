@@ -32,7 +32,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00030001\n"
-"\t.4byte 0x08A6BFF0\n"
+"\t.4byte frontier_df3_eventscr_ch_005_A6B460 + 0xB90\n"
 "\t.4byte 0x00000002\n"
 "\t.4byte 0x00000001\n"
 "\t.4byte data_085B9EE8\n"

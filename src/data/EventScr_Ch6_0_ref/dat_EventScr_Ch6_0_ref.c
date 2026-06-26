@@ -52,7 +52,7 @@ __asm__(
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x00040820\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A6030C\n"  /* coincidental const into fn: raw */
+"\t.4byte UnitDef_Ch14BAlly_7 + 0x1C\n"
 "\t.4byte 0x00630820\n"
 "\t.4byte 0x00070228\n"
 "\t.4byte 0x00000120\n"

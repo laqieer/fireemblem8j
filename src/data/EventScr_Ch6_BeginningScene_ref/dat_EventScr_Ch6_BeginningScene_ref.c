@@ -13,13 +13,13 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000022\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x09A41B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x7FFF1326\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603FC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xA8\n"
 "\t.4byte 0x00090228\n"
 "\t.4byte 0x00012C41\n"
 "\t.4byte data_0890AA3C\n"
@@ -52,7 +52,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000022\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x09A51B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00261220\n"
@@ -62,19 +62,19 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000022\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x09A61B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000022\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x09A71B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603FC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xA8\n"
 "\t.4byte 0xFFFF2F40\n"
 "\t.4byte 0x051400FB\n"
 "\t.4byte 0x00020540\n"
@@ -106,7 +106,7 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x000009A8\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x003C0E20\n"
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x000000F9\n"
@@ -135,7 +135,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000027\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x09A91B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
@@ -145,6 +145,6 @@ __asm__(
 "\t.4byte 0x00000A40\n"
 "\t.4byte EventScr_CallOnTutorialMode\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x085B9DBC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_085B9BBC + 0x200\n"
 "\t.4byte 0x00000120\n"
 );

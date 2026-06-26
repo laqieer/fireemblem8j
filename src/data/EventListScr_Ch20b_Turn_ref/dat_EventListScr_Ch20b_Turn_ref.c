@@ -10,7 +10,7 @@ __asm__(
 "\t.global EventListScr_Ch20b_Turn\n"
 "EventListScr_Ch20b_Turn:\n"
 "\t.4byte 0x000D0002\n"
-"\t.4byte 0x08A6FBAC\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_eventscr_ch_020_A6FB9C + 0x10\n"
 "\t.4byte 0x0000FF01\n"
 "\t.4byte 0x000B0002\n"
 "\t.4byte EventScr_Ch20B_1\n"

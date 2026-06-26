@@ -9,7 +9,7 @@ __asm__(
 "\t.section .rodata.dat_gYesNoSelectionMenuItems_ref, \"a\", %progbits\n"
 "\t.global gYesNoSelectionMenuItems\n"
 "gYesNoSelectionMenuItems:\n"
-"\t.4byte 0x080DCAA0\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x12C\n"
 "\t.4byte 0x000007BB\n"
 "\t.4byte 0x00003200\n"
 "\t.4byte MenuAlwaysEnabled + 0x1\n"
@@ -18,7 +18,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DCA98\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x124\n"
 "\t.4byte 0x000007BC\n"
 "\t.4byte 0x00003300\n"
 "\t.4byte MenuAlwaysEnabled + 0x1\n"

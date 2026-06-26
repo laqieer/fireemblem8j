@@ -23,7 +23,7 @@ __asm__(
 "\t.4byte 0x00000820\n"
 "\t.4byte 0x00080229\n"
 "\t.4byte 0x00012C40\n"
-"\t.4byte 0x0890819C\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_banim_b_073_907F78 + 0x224\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00010540\n"
 "\t.4byte 0x0000000D\n"
@@ -37,7 +37,7 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x000008CD\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x00001521\n"
 "\t.4byte 0x00182F40\n"
 "\t.4byte 0x04040002\n"
@@ -50,7 +50,7 @@ __asm__(
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x00020540\n"
-"\t.4byte 0x08A613B4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A612F4 + 0xC0\n"
 "\t.4byte 0x00000A40\n"
 "\t.4byte EventScr_CallOnTutorialMode\n"
 "\t.4byte 0x00002F48\n"

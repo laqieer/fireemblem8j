@@ -16,7 +16,7 @@ __asm__(
 "\t.4byte 0x00000002\n"
 "\t.4byte MapAnim_DisplayDeathFade + 0x1\n"
 "\t.4byte 0x00000008\n"
-"\t.4byte 0x08A13308\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_banim_b_083_A13256 + 0xB2\n"
 "\t.4byte 0x00000002\n"
 "\t.4byte EndMapAnimInfoWindow + 0x1\n"
 "\t.4byte 0x0001000E\n"

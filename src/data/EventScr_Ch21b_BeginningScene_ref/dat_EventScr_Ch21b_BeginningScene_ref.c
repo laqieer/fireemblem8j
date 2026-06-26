@@ -10,7 +10,7 @@ __asm__(
 "\t.global EventScr_Ch21b_BeginningScene\n"
 "EventScr_Ch21b_BeginningScene:\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A6B58C\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_eventscr_ch_005_A6B460 + 0x12C\n"
 "\t.4byte 0x00000120\n"
 "\t.4byte 0x00000A40\n"
 "\t.4byte UnitDef_Ch21BEnemy_1\n"

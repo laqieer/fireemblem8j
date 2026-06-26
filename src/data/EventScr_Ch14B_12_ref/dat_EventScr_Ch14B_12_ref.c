@@ -12,11 +12,11 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte UnitDef_Ch14BEnemy_8\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603D4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x80\n"
 "\t.4byte 0x00020540\n"
 "\t.4byte UnitDef_Ch14BEnemy_9\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603D4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x80\n"
 "\t.4byte 0x00010F23\n"
 "\t.4byte 0x00100221\n"
 "\t.4byte 0x00010F20\n"

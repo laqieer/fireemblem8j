@@ -36,7 +36,7 @@ __asm__(
 "\t.4byte 0x00021723\n"
 "\t.4byte 0x00002220\n"
 "\t.4byte 0x00012C40\n"
-"\t.4byte 0x08915C14\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_unitdef_b_023_91512C + 0xAE8\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00021722\n"
 "\t.4byte 0x00012C41\n"

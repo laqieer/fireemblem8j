@@ -17,7 +17,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x0000000D\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x0A931B20\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x00001B22\n"

@@ -53,10 +53,10 @@ __asm__(
 "\t.4byte EventScr_Ch15B_18\n"
 "\t.4byte 0x15170F16\n"
 "\t.4byte 0x0019000B\n"
-"\t.4byte 0x08A6EB68\n"  /* coincidental const into fn: raw */
+"\t.4byte EventScr_Ch14b_EndingScene + 0x1BC\n"
 "\t.4byte 0x150E110B\n"
 "\t.4byte 0x0019000B\n"
-"\t.4byte 0x08A6EB68\n"  /* coincidental const into fn: raw */
+"\t.4byte EventScr_Ch14b_EndingScene + 0x1BC\n"
 "\t.4byte 0x15150E0F\n"
 "\t.4byte 0x001B000B\n"
 "\t.4byte EventScr_Ch15B_22\n"
@@ -69,18 +69,18 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x08A5CC40\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5CC80\n"  /* coincidental const into fn: raw */
+"\t.4byte Ch14EphraimMapChanges + 0x50\n"
+"\t.4byte data_08A5CC68 + 0x18\n"
 "\t.4byte EventListScr_Ch14b_Location\n"
-"\t.4byte 0x08A5CD64\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5CE04\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5CE08\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5CE0C\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5CE10\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5FCB2\n"  /* not a fe8u ptr slot: raw */
-"\t.4byte 0x08A60011\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x0891B2CC\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x0891B2CC\n"  /* coincidental const into fn: raw */
+"\t.4byte EventListScr_Ch14b_Location + 0x40\n"
+"\t.4byte EventListScr_Ch14b_Location + 0xE0\n"
+"\t.4byte EventListScr_Ch14b_Location + 0xE4\n"
+"\t.4byte EventListScr_Ch14b_Location + 0xE8\n"
+"\t.4byte EventListScr_Ch14b_Location + 0xEC\n"
+"\t.4byte gUidebug_2 + 0x4E2\n"
+"\t.4byte frontier_df4_menu_005_A5FFAD + 0x64\n"
+"\t.4byte frontier_df3_unitdef_b_037_91AC38 + 0x694\n"
+"\t.4byte frontier_df3_unitdef_b_037_91AC38 + 0x694\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
@@ -96,10 +96,10 @@ __asm__(
 "\t.4byte EventScr_Ch16B_3\n"
 "\t.4byte 0x0000FF01\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A6EE7C\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_eventscr_ch_014_A6EDFC + 0x80\n"
 "\t.4byte 0x00000010\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A6EE64\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_eventscr_ch_014_A6EDFC + 0x68\n"
 "\t.4byte 0x00000006\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"

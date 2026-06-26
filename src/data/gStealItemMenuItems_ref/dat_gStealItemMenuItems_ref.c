@@ -9,7 +9,7 @@ __asm__(
 "\t.section .rodata.dat_gStealItemMenuItems_ref, \"a\", %progbits\n"
 "\t.global gStealItemMenuItems\n"
 "gStealItemMenuItems:\n"
-"\t.4byte 0x080DC9EC\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x78\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00001F00\n"
 "\t.4byte StealItemMenuCommand_Usability + 0x1\n"
@@ -18,7 +18,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DC9EC\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x78\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00002000\n"
 "\t.4byte StealItemMenuCommand_Usability + 0x1\n"
@@ -27,7 +27,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DC9EC\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x78\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00002100\n"
 "\t.4byte StealItemMenuCommand_Usability + 0x1\n"
@@ -36,7 +36,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DC9EC\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x78\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00002200\n"
 "\t.4byte StealItemMenuCommand_Usability + 0x1\n"
@@ -45,7 +45,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DC9EC\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x78\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00002300\n"
 "\t.4byte StealItemMenuCommand_Usability + 0x1\n"

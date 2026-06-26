@@ -40,7 +40,7 @@ __asm__(
 "\t.4byte 0x00000001\n"
 "\t.4byte 0x00120F03\n"
 "\t.4byte 0x0000000A\n"
-"\t.4byte 0x08A5FAB6\n"
+"\t.4byte gUidebug_2 + 0x2E6\n"
 "\t.4byte 0x0018071A\n"
 "\t.4byte 0x00000007\n"
 "\t.4byte 0x0000005E\n"

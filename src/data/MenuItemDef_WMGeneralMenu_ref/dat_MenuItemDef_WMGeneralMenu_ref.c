@@ -9,7 +9,7 @@ __asm__(
 "\t.section .rodata.dat_MenuItemDef_WMGeneralMenu_ref, \"a\", %progbits\n"
 "\t.global MenuItemDef_WMGeneralMenu\n"
 "MenuItemDef_WMGeneralMenu:\n"
-"\t.4byte 0x081F64EC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_081F64C0 + 0x2C\n"
 "\t.4byte 0x066205D7\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte MenuAlwaysEnabled + 0x1\n"
@@ -18,7 +18,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x081F64E4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_081F64C0 + 0x24\n"
 "\t.4byte 0x066305D8\n"
 "\t.4byte 0x00000100\n"
 "\t.4byte MenuAlwaysEnabled + 0x1\n"
@@ -27,7 +27,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x081F64DC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_081F64C0 + 0x1C\n"
 "\t.4byte 0x066805D9\n"
 "\t.4byte 0x00000200\n"
 "\t.4byte MapMenu_IsGuideCommandAvailable + 0x1\n"
@@ -36,7 +36,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x081F64D4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_081F64C0 + 0x14\n"
 "\t.4byte 0x066405DA\n"
 "\t.4byte 0x00000300\n"
 "\t.4byte MenuAlwaysEnabled + 0x1\n"
@@ -45,7 +45,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x081F64CC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_081F64C0 + 0xC\n"
 "\t.4byte 0x063F05DB\n"
 "\t.4byte 0x00000400\n"
 "\t.4byte MenuAlwaysEnabled + 0x1\n"

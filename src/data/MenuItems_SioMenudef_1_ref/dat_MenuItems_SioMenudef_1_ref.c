@@ -9,7 +9,7 @@ __asm__(
 "\t.section .rodata.dat_MenuItems_SioMenudef_1_ref, \"a\", %progbits\n"
 "\t.global MenuItems_SioMenudef_1\n"
 "MenuItems_SioMenudef_1:\n"
-"\t.4byte 0x080DF2DC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_080DF228 + 0xB4\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000300\n"
 "\t.4byte SioWeaponSelectMenu_Usability + 0x1\n"
@@ -18,7 +18,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DF2DC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_080DF228 + 0xB4\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000400\n"
 "\t.4byte SioWeaponSelectMenu_Usability + 0x1\n"
@@ -27,7 +27,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DF2DC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_080DF228 + 0xB4\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000500\n"
 "\t.4byte SioWeaponSelectMenu_Usability + 0x1\n"
@@ -36,7 +36,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DF2DC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_080DF228 + 0xB4\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000600\n"
 "\t.4byte SioWeaponSelectMenu_Usability + 0x1\n"
@@ -45,7 +45,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x080DF2DC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_080DF228 + 0xB4\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000700\n"
 "\t.4byte SioWeaponSelectMenu_Usability + 0x1\n"

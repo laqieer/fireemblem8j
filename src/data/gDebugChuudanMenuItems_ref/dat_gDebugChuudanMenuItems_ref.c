@@ -9,7 +9,7 @@ __asm__(
 "\t.section .rodata.dat_gDebugChuudanMenuItems_ref, \"a\", %progbits\n"
 "\t.global gDebugChuudanMenuItems\n"
 "gDebugChuudanMenuItems:\n"
-"\t.4byte 0x080DC9EC\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df4_misc_lo_001_0DC974 + 0x78\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000800\n"
 "\t.4byte MenuAlwaysEnabled + 0x1\n"

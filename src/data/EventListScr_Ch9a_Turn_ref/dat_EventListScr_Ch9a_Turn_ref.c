@@ -10,28 +10,28 @@ __asm__(
 "\t.global EventListScr_Ch9a_Turn\n"
 "EventListScr_Ch9a_Turn:\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A662B8\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A661E0 + 0xD8\n"
 "\t.4byte 0x00000005\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A66204\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A661E0 + 0x24\n"
 "\t.4byte 0x00000003\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A6621C\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A661E0 + 0x3C\n"
 "\t.4byte 0x00000004\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A661EC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A661E0 + 0xC\n"
 "\t.4byte 0x00000002\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A6624C\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A661E0 + 0x6C\n"
 "\t.4byte 0x00000003\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A66234\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A661E0 + 0x54\n"
 "\t.4byte 0x00000004\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A66264\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A661E0 + 0x84\n"
 "\t.4byte 0x00000005\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A6627C\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A661E0 + 0x9C\n"
 "\t.4byte 0x00000005\n"
 "\t.4byte 0x00000002\n"
 "\t.4byte EventScr_Ch9A_4\n"

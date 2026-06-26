@@ -14,7 +14,7 @@ __asm__(
 "\t.4byte 0x00000002\n"
 "\t.4byte ChapterIntroTitle_InitBgImg + 0x1\n"
 "\t.4byte 0x00000005\n"
-"\t.4byte 0x085C3570\n"  /* coincidental const into fn: raw */
+"\t.4byte data_085C3560 + 0x10\n"
 "\t.4byte 0x00000002\n"
 "\t.4byte StartMidFadeFromBlack + 0x1\n"
 "\t.4byte 0x00000003\n"

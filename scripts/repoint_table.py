@@ -104,6 +104,21 @@ def load_syms():
 def _rank(n):
     return 2 if n.startswith(("data_", "gap_", "sub_", "byte_", "off_", "unk_", "j_", "nullsub")) else 0
 
+_NAME2ADDR = None
+def _elf_name2addr():
+    """name -> JP address (linked ELF), for any symbol incl de-pointered block labels."""
+    global _NAME2ADDR
+    if _NAME2ADDR is None:
+        out = subprocess.run(["arm-none-eabi-nm", ELF], capture_output=True,
+                             text=True, errors="replace").stdout
+        _NAME2ADDR = {}
+        for line in out.splitlines():
+            p = line.split()
+            if len(p) == 3:
+                try: _NAME2ADDR.setdefault(p[2], int(p[0], 16))
+                except ValueError: pass
+    return _NAME2ADDR
+
 def resolve(ptr, addrs, by_addr):
     """Return (symname, offset, is_func) for the symbol covering ptr, or None."""
     i = bisect.bisect_right(addrs, ptr) - 1
@@ -409,6 +424,58 @@ def table_is_safe(binp, addrs, by_addr):
         # else: ordinary data word, fine
     return (nptr > 0, nptr)
 
+def reprocess_asm_block(cf, addrs, by_addr, check=False):
+    """Re-process raw `.4byte 0xNNN` literals STUCK in already-de-pointered __asm__
+    blocks: earlier passes left ROM-range words raw (skip=N) before the converter
+    learned to handle them (Thumb/ARM function pointers, fe8u-confirmed slots). For
+    each block (`.section <sec>` / `NAME:` / `.4byte ...`), word i sits at NAME+i*4
+    so its JP address = NAME's ELF addr + i*4. Convert a raw literal iff it resolves
+    EXACT (off==0) or fe8u confirms a pointer there; emit via emit_words' relocation
+    forms. Byte-exact (gated by make compare)."""
+    import fe8u_ptr_offsets as _F
+    name2addr = _elf_name2addr()
+    with open(cf, "r", errors="replace") as f:
+        lines = f.readlines()
+    out = []
+    i = 0
+    nconv = 0
+    label_re = re.compile(r'^"(\w+):\\n"')
+    raw_re = re.compile(r'^(\s*)"\\t\.4byte (0x[0-9A-Fa-f]{8})\\n"(.*)$')
+    base = None; widx = 0
+    for line in lines:
+        ml = label_re.match(line.strip())
+        if ml:
+            base = name2addr.get(ml.group(1)); widx = 0
+            out.append(line); continue
+        mr = raw_re.match(line.rstrip("\n"))
+        if mr and base is not None:
+            v = int(mr.group(2), 16)
+            O = widx * 4; widx += 1   # this .4byte IS one word
+            if ROM_LO <= v < ROM_HI:
+                r = resolve(v, addrs, by_addr)
+                exact = r and r[1] == 0
+                try:
+                    conf = _F.fe8u_ptr_at_jp(base + O) is True
+                except Exception:
+                    conf = False
+                # SKIP genuine functions: the ld Thumb-bit behaviour on an ABS32
+                # reloc is inconsistent across symbols (a $t-mapped fn here did NOT
+                # get the bit), so a fn reloc can't be made reliably byte-exact.
+                # Data pointers (the vast majority) convert cleanly.
+                if r and (exact or conf) and not r[2]:
+                    sym, off = r[0], r[1]
+                    rel = ".4byte %s + 0x%X" % (sym, off) if off else ".4byte %s" % sym
+                    out.append('%s"\\t%s\\n"\n' % (mr.group(1), rel)); nconv += 1; continue
+            out.append(line); continue
+        # a non-raw `.4byte sym` directive is also one word -> advance the index
+        if base is not None and re.match(r'^\s*"\\t\.4byte ', line):
+            widx += 1
+        out.append(line)
+    if nconv and not check:
+        with open(cf, "w") as f:
+            f.writelines(out)
+    return nconv
+
 def select_auto_safe(addrs, by_addr):
     names = []
     for binp in sorted(glob.glob(os.path.join(RESID, "*.bin"))):
@@ -539,6 +606,18 @@ def main():
     safe_only = "--safe-only" in sys.argv
     fe8u_safe = "--fe8u-safe" in sys.argv
     addrs, by_addr = load_syms()
+    if "--reprocess" in sys.argv:
+        # re-process raw .4byte literals stuck in already-de-pointered __asm__ blocks
+        files = (sorted(glob.glob(os.path.join(ROOT, "src", "data", "*", "*.c"))) +
+                 sorted(glob.glob(os.path.join(ROOT, "src", "data", "*_ref", "*.c"))))
+        tot = 0
+        for cf in files:
+            try:
+                tot += reprocess_asm_block(cf, addrs, by_addr, check)
+            except Exception as e:
+                print("  ERR %s: %s" % (cf, e))
+        print("reprocess: %d stuck literals converted" % tot)
+        return
     if "--src-slices" in sys.argv:
         # de-point the LINKED sliced src/data/<x>/<x>.c INCBIN_U8 sub-symbols
         files = sorted(glob.glob(os.path.join(ROOT, "src", "data", "*", "*.c")))

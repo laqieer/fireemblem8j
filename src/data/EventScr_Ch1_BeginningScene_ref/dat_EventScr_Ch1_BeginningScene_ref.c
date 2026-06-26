@@ -22,7 +22,7 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x000008E9\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x00012C40\n"
 "\t.4byte data_08908790\n"
 "\t.4byte 0x00003020\n"
@@ -37,7 +37,7 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x000008EA\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x00002F40\n"
 "\t.4byte 0x03020046\n"
 "\t.4byte 0x00003020\n"
@@ -106,7 +106,7 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x000008EC\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x00001B22\n"
 "\t.4byte 0x00012C41\n"
 "\t.4byte UnitDef_Event_Ch1Ally\n"

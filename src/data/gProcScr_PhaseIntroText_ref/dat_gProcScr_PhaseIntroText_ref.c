@@ -16,7 +16,7 @@ __asm__(
 "\t.4byte 0x00000002\n"
 "\t.4byte PhaseIntroText_PutText + 0x1\n"
 "\t.4byte 0x00000005\n"
-"\t.4byte 0x085C3368\n"  /* coincidental const into fn: raw */
+"\t.4byte obj_Phasechangefx_0 + 0x20\n"
 "\t.4byte 0x00000003\n"
 "\t.4byte PhaseIntroText_InLoop + 0x1\n"
 "\t.4byte 0x001E000E\n"

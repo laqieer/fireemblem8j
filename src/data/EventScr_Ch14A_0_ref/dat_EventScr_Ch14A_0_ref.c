@@ -11,7 +11,7 @@ __asm__(
 "EventScr_Ch14A_0:\n"
 "\t.4byte 0x07092628\n"
 "\t.4byte 0x00012C40\n"
-"\t.4byte 0x08910694\n"  /* coincidental const into fn: raw */
+"\t.4byte frontier_df3_unitdef_b_003_91066C + 0x28\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00533B21\n"
 "\t.4byte 0x003C0E20\n"
