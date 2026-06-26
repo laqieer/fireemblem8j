@@ -7857,3 +7857,26 @@ effectiveness against the linker's actual object list, and gate the metric on th
 LINKED source, never on any file that merely exists. The asm-table tables remain
 to do via the CORRECT mechanism: rewrite the linked `src/data/<name>/<name>.c`
 sliced INCBIN sub-symbols (each gated by its own fe8u offsets).
+
+## D302 — target-name cross-check oracle: ~92 more pointers rigorously recoverable (2026-06-26)
+
+The remaining shift-ambiguous fe8u-confirmed words (anchors below/above disagree on
+the region shift, so the strict gate refuses them) can be RIGOROUSLY confirmed by a
+shift-INDEPENDENT check: `scripts/fe8u_ptr_offsets.py:fe8u_reloc_target_at_jp(jp)`
+returns the symbol fe8u relocates TO at the corresponding position; if the JP
+pointer's own target (`resolve(v).name`) equals it, the pointer is a confirmed real
+pointer -- a wrong region shift cannot produce a name match. VALIDATED:
+`data_08908590+0xA0 -> REDA_Ch1Ally_Eirika` matches fe8u exactly; ~92 such words
+across ~13 sliced tables are confirmable this way. Integration edge case (deferred):
+these words sit in sub-symbol-sliced tables where the per-sub-symbol slice gate
+isn't isolating them; the converter needs to apply the cross-check per containing
+sub-symbol (or a `--reprocess` pass over already-partially-de-pointered .c). NOT a
+correctness gap -- the mechanism is proven; it is the immediate next lever.
+
+Session arc (verified, make compare green throughout): data-pointer shiftability
+~44% -> ~94% of REAL pointers (relocated 7,639 -> 13,296, +5,657). Remaining ~711
+real: ~92 cross-check-confirmable (next) + shift-ambiguous + fe8u-blind JP-only
+(per-table RE). Levers/forms built: fe8u per-word oracle, 25.7k shared-ELF anchors,
+STT_FUNC + Thumb/ARM relocation, _ref/__attribute__/SECTION INCBIN forms, target-name
+cross-check oracle. Effectiveness ALWAYS verified against the linker, never make
+compare alone (D299).

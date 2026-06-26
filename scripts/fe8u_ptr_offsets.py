@@ -87,22 +87,27 @@ def _obj_ptr_offsets(obj):
     rels = subprocess.run(["arm-none-eabi-objdump", "-r", obj], capture_output=True,
                           text=True, errors="replace").stdout
     res = defaultdict(set)
+    tgt = defaultdict(dict)   # symname -> {offset: target_symbol_name}
     cursec = None
     for line in rels.splitlines():
         if line.startswith("RELOCATION RECORDS FOR ["):
             cursec = line.split("[", 1)[1].rstrip("]:")
         elif cursec in sec_syms and "R_ARM_ABS32" in line:
+            parts = line.split()
             try:
-                O = int(line.split()[0], 16)
+                O = int(parts[0], 16)
             except ValueError:
                 continue
+            target = parts[2].split("+")[0] if len(parts) >= 3 else None
             lst = sec_syms[cursec]
             i = _bi.bisect_right(starts[cursec], O) - 1
             if i >= 0:
                 a0, a1, nm_ = lst[i]
                 if a0 <= O < a1:
                     res[nm_].add(O - a0)
-    _OBJ_CACHE[obj] = {k: sorted(v) for k, v in res.items()}
+                    if target:
+                        tgt[nm_][O - a0] = target
+    _OBJ_CACHE[obj] = ({k: sorted(v) for k, v in res.items()}, dict(tgt))
     return _OBJ_CACHE[obj]
 
 def ptr_offsets(name):
@@ -110,8 +115,31 @@ def ptr_offsets(name):
     info = fe8u_obj_for(name)
     if info is None:
         return None
-    offs = _obj_ptr_offsets(info[0]).get(name)
+    offs = _obj_ptr_offsets(info[0])[0].get(name)
     return offs if offs else None
+
+def fe8u_reloc_target_at_jp(jp_addr):
+    """The fe8u symbol NAME that fe8u's relocation at this JP address points to
+    (after the region shift), or None. Used for the shift-INDEPENDENT target-name
+    cross-check: if the JP pointer's own target == this, the pointer is confirmed
+    real (a wrong shift wouldn't yield a name match)."""
+    import bisect as _bi
+    us_addrs, a2n, anchors, ajp = _load_us_index()
+    if not anchors:
+        return None
+    i = _bi.bisect_right(ajp, jp_addr) - 1
+    if i < 0:
+        return None
+    us = jp_addr + (anchors[i][1] - anchors[i][0])
+    j = _bi.bisect_right(us_addrs, us) - 1
+    if j < 0:
+        return None
+    sym = a2n[us_addrs[j]]
+    info = fe8u_obj_for(sym)
+    if info is None:
+        return None
+    tgtmap = _obj_ptr_offsets(info[0])[1].get(sym)
+    return tgtmap.get(us - us_addrs[j]) if tgtmap else None
 
 # --- address-based mapping: un-named JP data_<addr> blobs -> fe8u via region shift ---
 _US_IDX = None
