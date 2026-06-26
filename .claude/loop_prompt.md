@@ -17,25 +17,25 @@ is byte-perfect but the ROM is only ~44% shiftable; a real decomp must relocate
 every pointer or it crashes when sections shift). Track + drive this every tick:
 
 - **Audit:** `python3 scripts/audit_pointers.py [--metrics]` (axes #5/#6). 0 dangling.
-- **Safe auto-lever (run first each tick):** `python3 scripts/repoint_table.py
-  --auto-safe && make compare`. Converts every table whose every ROM-range word
-  resolves to an EXACT symbol boundary into `(u32)&Sym` references (byte-identical
-  via .word relocations; the alias form dodges typed-header conflicts). Commit if OK.
-  *Currently exhausted (0)* — re-runs catch tables newly exposed by splitting/Track B.
-- **Track B (the bulk — 8,930 INTERIOR + 2,219 mixed-EXACT):** pointers into
-  un-split blobs. Two routes, both make-compare-gated and byte-exact:
-  (a) **fe8u-structured port** — the table has a typed struct in fe8u
-      (`../fireemblem8u/src/**`); port the definition, repoint US→JP symbols. Also
-      retires axis #6 (editability) + improves naming. Best for event/proc/struct data.
-  (b) **blob-split** — split the pointed-to blob at each target offset to create a
-      boundary label (the labels fe8u has ARE these offsets), turning INTERIOR→EXACT,
-      then `--auto-safe`. Mechanical, no fe8u needed, but touches the carved_rom
-      manifest/ldscript — do ONE blob at a time, `make compare` after each (split
-      regressions are a known trap; see memory `data-extraction-typed-incbin`).
-- **NEVER auto-convert an INTERIOR word blind** (a non-pointer struct field
-  coincidentally in 0x08xxxxxx range would be relocated wrongly — byte-exact now,
-  crashes on shift; make compare can't catch it). Only EXACT auto-converts; INTERIOR
-  needs structure (fe8u) or a real split-label. See D296.
+- **Safe auto-levers (run first each tick, both EXHAUSTED now):**
+  `repoint_table.py --auto-safe` (every ROM-range word resolves EXACT) and
+  `--auto-dense --frac=0.5` (pointer-dense tables). Both emit a pure `__asm__`
+  block of `.4byte sym` (no C decl -> no header conflict). Commit if make compare OK.
+- **The CORRECTNESS gate is fe8u, NOT byte-exactness** (D297). `make compare` only
+  catches function-target mistakes (thumb bit -> +1 byte); a DATA-field coincidental
+  constant (a `struct UnitDefinition` AI/flag word that happens to be 0x08xxxxxx) is
+  byte-exact now but a SILENT crash-on-shift. So:
+  - SAFE to bulk-convert: EXACT words; pure pointer arrays; fe8u `Type *NAME[]`
+    array-of-pointers (every slot is a pointer; JP filling a US-NULL slot is benign).
+  - NOT safe on density alone: struct arrays (`struct UnitDefinition[]`,
+    `struct ClassData[]`) -> convert ONLY fe8u-confirmed pointer offsets via
+    `scripts/fe8u_ptr_offsets.py <NAME>` (reads fe8u .o relocations = the pointer
+    slots). The converter already refuses INTERIOR-into-function (off>1).
+- **Track B (the bulk — ~9,681 left, struct-array + generic blobs):** for each
+  table, get fe8u's pointer offsets (`fe8u_ptr_offsets.py`), handle the struct
+  STRIDE + JP divergence, convert only those slots, `make compare`. OR full
+  fe8u-structured port (also retires axis #6 editability + naming). Per-table,
+  multi-session. NEVER bulk-convert a struct array on density (D297).
 
 ## When orchestrating background agents (P9 wave mode) — DO THIS EVERY TICK FIRST
 

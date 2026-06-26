@@ -7754,3 +7754,41 @@ pointer LUTs via repoint_table.py, batched, make-compare-gated, orphaned .bin pr
 (fe8u-structured): struct arrays + event/proc data ported from fe8u typed defs (also retires the
 editability debt + improves naming). Single integrator owns the make-compare oracle; workers carve
 in isolation. JP divergence to handle: text-ID offsets + localized UI tables.
+
+## D297 — de-pointer safety taxonomy: the coincidental-constant boundary (2026-06-26)
+
+Driving axis #5 (shiftability) toward 0, the density heuristic (`--auto-dense`,
+convert every ROM-range word in a >=F-pointer-dense table) hit a byte mismatch at
+frac>=0.25 — CAUGHT by `make compare`. Root cause: `UnitDef_Ch4Ally_0+0x3C =
+0x08004806` is a `struct UnitDefinition` AI/flag DATA field that coincidentally
+falls in the ROM window and resolved INTERIOR into `TextPrint_OnLoop+0x4E`
+(mid-function); `.4byte` set the thumb bit -> +1 byte. A unit-def field pointing
+into code is nonsense — it is the coincidental-constant risk, visible ONLY because
+the target was a function (a DATA target would be byte-exact now and a SILENT
+latent shift-bug). Reverted; committed state stays green at 51.19% shiftable.
+
+**Safety taxonomy (what auto-converts safely vs what needs the fe8u oracle):**
+- EXACT (off=0): real pointer (a constant never equals a symbol's exact start). SAFE.
+- pure pointer array (every word ptr-or-NULL): SAFE.
+- fe8u `Type *NAME[]` array-of-pointers (TextGlyphs `struct Glyph *[]`): every word
+  is a pointer slot -> SAFE even where JP fills a US-NULL slot with a real pointer
+  (a benign JP divergence: JP kana glyphs where US has NULL).
+- DENSE non-array tables / struct arrays (`struct UnitDefinition[]`,
+  `struct ClassData[]`): NOT provably safe — a 0x08xxxxxx-valued DATA field is a
+  coincidental constant. Convert ONLY the fe8u-confirmed pointer offsets.
+- INTERIOR-into-function (is_func, off>1): a coincidental constant, never a pointer.
+  Hardened: the converter now leaves it raw.
+
+**The oracle:** `scripts/fe8u_ptr_offsets.py <NAME>` reads fe8u's `.o` relocations
+to return the exact byte-offsets fe8u relocates as pointers — the provably-correct
+gate for struct-array tables (fe8u shares the game data layout; JP-divergent tables
+fall back to EXACT-only). This is the engine for SAFE completion of the remaining
+~9,681 interior pointers (struct-array + generic blobs); it needs stride/divergence
+handling per struct-array and is a multi-session, per-table program, not a one-shot
+sweep. `make compare` only catches function-target mistakes (thumb bit), NOT
+data-target coincidental constants — so the fe8u oracle, not byte-exactness alone,
+is the correctness gate for these. Do NOT bulk-convert struct arrays on density.
+
+State: 38.51% -> 51.19% shiftable this session (-2,514 hardcoded pointers retired
+byte-exact: pure-pointer + all-EXACT + fe8u-verified dense). Proven-safe automatic
+levers are now exhausted; the rest is fe8u-oracle-gated struct-array work.
