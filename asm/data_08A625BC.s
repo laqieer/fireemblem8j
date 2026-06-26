@@ -24,5 +24,17 @@ EventScr_Ch2_Turn1Player:
 	.section .data.residue.08A625D4, "a", %progbits
 	.global EventScr_Ch2_Turn2Player
 EventScr_Ch2_Turn2Player:
-	.incbin "data/residual/data_08A625BC.bin", 0x18, 0x18
+	@ de-pointered (scripts/repoint_table.py): ptr=3 data=8 skip=1
+	.4byte 0x00020540
+	.4byte 0x08A62908
+	.4byte 0x00000A40
+	.4byte EventScr_CallOnTutorialMode
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00020540
+	.4byte EventScr_Ch2_5
+	.4byte 0x00000A40
+	.4byte EventScr_CallOnTutorialMode
+	.4byte 0x00070228
+	.4byte 0x00000120
 

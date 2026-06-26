@@ -1,7 +1,36 @@
 #include "global.h"
 
-/* Migrated from asm/dat_EventScr_GiveTreasureToLuckyDog_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/EventScr_GiveTreasureToLuckyDog.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_EventScr_GiveTreasureToLuckyDog_ref") u8 EventScr_GiveTreasureToLuckyDog[] = INCBIN_U8("data/residual/EventScr_GiveTreasureToLuckyDog.bin");
+__asm__(
+"\t.section .rodata.dat_EventScr_GiveTreasureToLuckyDog_ref, \"a\", %progbits\n"
+"\t.global EventScr_GiveTreasureToLuckyDog\n"
+"EventScr_GiveTreasureToLuckyDog:\n"
+"\t.4byte 0xFFFF3327\n"
+"\t.4byte 0x00070540\n"
+"\t.4byte 0x0000000D\n"
+"\t.4byte 0x00000C40\n"
+"\t.4byte 0x0007000C\n"
+"\t.4byte 0x00070540\n"
+"\t.4byte 0x00000033\n"
+"\t.4byte 0x00000C40\n"
+"\t.4byte 0x0007000C\n"
+"\t.4byte 0x00640420\n"
+"\t.4byte 0x00010C45\n"
+"\t.4byte 0x000C0002\n"
+"\t.4byte 0x00000820\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte data_085B9BBC + 0x168\n"
+"\t.4byte 0xFFFF3720\n"
+"\t.4byte 0x000C0540\n"
+"\t.4byte 0x00000001\n"
+"\t.4byte 0x00020920\n"
+"\t.4byte 0x00010820\n"
+"\t.4byte 0x000C0540\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00020820\n"
+"\t.4byte 0x00000120\n"
+);

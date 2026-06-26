@@ -1,7 +1,58 @@
 #include "global.h"
 
-/* Migrated from asm/dat_EventScr_Ch10B_0_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/EventScr_Ch10B_0.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_EventScr_Ch10B_0_ref") u8 EventScr_Ch10B_0[] = INCBIN_U8("data/residual/EventScr_Ch10B_0.bin");
+__asm__(
+"\t.section .rodata.dat_EventScr_Ch10B_0_ref, \"a\", %progbits\n"
+"\t.global EventScr_Ch10B_0\n"
+"EventScr_Ch10B_0:\n"
+"\t.4byte 0x00141220\n"
+"\t.4byte 0x0B0F2628\n"
+"\t.4byte 0x000F0E20\n"
+"\t.4byte 0x00012C40\n"
+"\t.4byte frontier_df3_unitdef_b_027_917600 + 0x208\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x0043342F\n"
+"\t.4byte 0x0B133B20\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00003B22\n"
+"\t.4byte 0x00001520\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x00000017\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte data_08A60354 + 0xCC\n"
+"\t.4byte 0x0A7A1B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x00101721\n"
+"\t.4byte 0x00002220\n"
+"\t.4byte 0x0044342F\n"
+"\t.4byte 0x00101720\n"
+"\t.4byte 0x00012C40\n"
+"\t.4byte frontier_df3_unitdef_b_027_917600 + 0x230\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x0044342F\n"
+"\t.4byte 0x00012C40\n"
+"\t.4byte frontier_df3_unitdef_b_027_917600 + 0x258\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00012C40\n"
+"\t.4byte frontier_df3_unitdef_b_026_916D14 + 0x5B8\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x00433B21\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00003B22\n"
+"\t.4byte 0x00001A20\n"
+"\t.4byte 0x0A7B1B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x00001521\n"
+"\t.4byte 0x00102F40\n"
+"\t.4byte 0x0E170043\n"
+"\t.4byte 0x00003020\n"
+"\t.4byte 0x0043342F\n"
+"\t.4byte 0x00070228\n"
+"\t.4byte 0x00000120\n"
+);

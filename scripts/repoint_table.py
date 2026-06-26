@@ -188,16 +188,23 @@ def emit_words(name, binp, addrs, by_addr, safe_only=False, allowed=None):
             if r is None:
                 out.append(".4byte 0x%08X" % v); ndata += 1; continue
             sym, off, is_func = r
-            # SAFETY: INTERIOR into a function's code (off>1) is never a pointer --
-            # a coincidental constant. Leave raw (also avoids a thumb-bit +1 diff).
-            if is_func and off > 1:
-                out.append(".4byte 0x%08X" % v); nskip += 1; continue
-            if safe_only and is_func:
-                out.append(".4byte 0x%08X" % v); nskip += 1; continue
-            # fe8u-gated: convert ONLY if allowed(O) confirms the byte-offset is a
-            # pointer slot, OR the word resolves EXACT (off==0, always safe).
-            if allowed is not None and not (allowed(O) or off == 0):
-                out.append(".4byte 0x%08X" % v); nskip += 1; continue
+            if allowed is not None:
+                # fe8u-gated: the relocation oracle is AUTHORITATIVE. Convert iff
+                # this byte-offset is a confirmed pointer slot OR resolves EXACT
+                # (off==0, always safe). Trust it over the is_func heuristic below
+                # -- many FE8 data symbols are typed 'T' (text-classified section),
+                # so is_func is unreliable; fe8u already proved the slot is a ptr.
+                if not (allowed(O) or off == 0):
+                    out.append(".4byte 0x%08X" % v); nskip += 1; continue
+            else:
+                # density/non-fe8u mode: heuristic guards. INTERIOR into a function's
+                # code (off>1) is never a pointer -- a coincidental constant. Leave
+                # raw (also avoids a thumb-bit +1 diff). NB only trust is_func here
+                # for a GENUINE function name (not a data_ placeholder mistyped T).
+                if is_func and off > 1 and not sym.startswith(("data_", "gap_", "byte_", "off_", "unk_")):
+                    out.append(".4byte 0x%08X" % v); nskip += 1; continue
+                if safe_only and is_func:
+                    out.append(".4byte 0x%08X" % v); nskip += 1; continue
             out.append(".4byte %s + 0x%X" % (sym, off) if off else ".4byte %s" % sym)
             nptr += 1
         else:

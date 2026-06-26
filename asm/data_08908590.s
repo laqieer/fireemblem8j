@@ -65,12 +65,118 @@ REDA_Ch1Ally_Eirika:
 	.section .data.residue.08908598, "a", %progbits
 	.global REDA_Ch1Ally_Seth
 REDA_Ch1Ally_Seth:
-	.incbin "data/residual/data_08908590.bin", 0x8, 0x8
+	@ de-pointered (scripts/repoint_table.py): ptr=2 data=49 skip=2
+	.4byte 0x0000024C
+	.4byte 0x00000000
+	.4byte 0x0000020D
+	.4byte 0x00000000
+	.4byte 0x00018142
+	.4byte 0x0000FFFF
+	.4byte 0x00018181
+	.4byte 0x0010FFFF
+	.4byte 0x00018203
+	.4byte 0x0010FFFE
+	.4byte 0x00018183
+	.4byte 0x0000FFFE
+	.4byte 0x000181C2
+	.4byte 0x0020FFFF
+	.4byte 0x46018201
+	.4byte 0x0000FFFF
+	.4byte 0x46018203
+	.4byte 0x0000FFFF
+	.4byte 0x46018242
+	.4byte 0x0000FFFF
+	.4byte 0x00000045
+	.4byte 0x00000000
+	.4byte 0x00000046
+	.4byte 0x0000FFFF
+	.4byte 0x0000020D
+	.4byte 0x0000FFFF
+	.4byte 0x0000024D
+	.4byte 0x0000FFFF
+	.4byte 0x0000024C
+	.4byte 0x0000FFFF
+	.4byte 0x000000C2
+	.4byte 0x0000FFFF
+	.4byte 0x000000C0
+	.4byte 0x0000FFFF
+	.4byte 0x00000000
+	.4byte 0x0000FFFF
+	.4byte 0xC1000082
+	.4byte 0x00000000
+	.4byte 0x08010201
+	.4byte 0x0100024E
+	.4byte REDA_Ch1Ally_Eirika
+	.4byte 0x00006C09
+	.4byte 0x00000000
+	.4byte 0x08010702
+	.4byte 0x0100024E
+	.4byte REDA_Ch1Ally_Seth
+	.4byte 0x006C1703
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
 
 	.section .data.residue.089085A0, "a", %progbits
 	.global REDA_Ch1_0
 REDA_Ch1_0:
-	.incbin "data/residual/data_08908590.bin", 0x10, 0x8
+	@ de-pointered (scripts/repoint_table.py): ptr=2 data=49 skip=2
+	.4byte 0x0000024C
+	.4byte 0x00000000
+	.4byte 0x0000020D
+	.4byte 0x00000000
+	.4byte 0x00018142
+	.4byte 0x0000FFFF
+	.4byte 0x00018181
+	.4byte 0x0010FFFF
+	.4byte 0x00018203
+	.4byte 0x0010FFFE
+	.4byte 0x00018183
+	.4byte 0x0000FFFE
+	.4byte 0x000181C2
+	.4byte 0x0020FFFF
+	.4byte 0x46018201
+	.4byte 0x0000FFFF
+	.4byte 0x46018203
+	.4byte 0x0000FFFF
+	.4byte 0x46018242
+	.4byte 0x0000FFFF
+	.4byte 0x00000045
+	.4byte 0x00000000
+	.4byte 0x00000046
+	.4byte 0x0000FFFF
+	.4byte 0x0000020D
+	.4byte 0x0000FFFF
+	.4byte 0x0000024D
+	.4byte 0x0000FFFF
+	.4byte 0x0000024C
+	.4byte 0x0000FFFF
+	.4byte 0x000000C2
+	.4byte 0x0000FFFF
+	.4byte 0x000000C0
+	.4byte 0x0000FFFF
+	.4byte 0x00000000
+	.4byte 0x0000FFFF
+	.4byte 0xC1000082
+	.4byte 0x00000000
+	.4byte 0x08010201
+	.4byte 0x0100024E
+	.4byte REDA_Ch1Ally_Eirika
+	.4byte 0x00006C09
+	.4byte 0x00000000
+	.4byte 0x08010702
+	.4byte 0x0100024E
+	.4byte REDA_Ch1Ally_Seth
+	.4byte 0x006C1703
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
 
 	.section .data.residue.089085A8, "a", %progbits
 	.global REDA_Ch1_1

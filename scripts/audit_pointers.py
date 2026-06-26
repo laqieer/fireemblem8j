@@ -193,13 +193,16 @@ def live_raw_bin(binpath):
     return is_live_raw(binpath)
 
 def count_relocated_data_ptrs():
-    """ABS32 relocations RESIDING in data sections (.rodata/.data) across src/*.o
-    -- the already-shiftable data pointers (the 'done' side of axis #5)."""
+    """ABS32 relocations RESIDING in data sections (.rodata/.data) across the
+    committed objects (src/ AND asm/) -- the already-shiftable data pointers (the
+    'done' side of axis #5). asm/ is included because de-pointered asm-incbin
+    tables emit their .4byte relocations into asm/*.o."""
     objs = []
-    for dp, _, fs in os.walk(os.path.join(ROOT, "src")):
-        for f in fs:
-            if f.endswith(".o"):
-                objs.append(os.path.join(dp, f))
+    for root in (os.path.join(ROOT, "src"), os.path.join(ROOT, "asm")):
+        for dp, _, fs in os.walk(root):
+            for f in fs:
+                if f.endswith(".o"):
+                    objs.append(os.path.join(dp, f))
     total = 0
     for i in range(0, len(objs), 400):
         out = subprocess.run(["arm-none-eabi-objdump", "-r"] + objs[i:i+400],

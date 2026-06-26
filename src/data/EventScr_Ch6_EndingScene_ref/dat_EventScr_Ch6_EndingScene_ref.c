@@ -1,7 +1,51 @@
 #include "global.h"
 
-/* Migrated from asm/dat_EventScr_Ch6_EndingScene_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/EventScr_Ch6_EndingScene.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_EventScr_Ch6_EndingScene_ref") u8 EventScr_Ch6_EndingScene[] = INCBIN_U8("data/residual/EventScr_Ch6_EndingScene.bin");
+__asm__(
+"\t.section .rodata.dat_EventScr_Ch6_EndingScene_ref, \"a\", %progbits\n"
+"\t.global EventScr_Ch6_EndingScene\n"
+"EventScr_Ch6_EndingScene:\n"
+"\t.4byte 0x7FFF1322\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x00000022\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte data_08A60354 + 0xCC\n"
+"\t.4byte 0x00FA3322\n"
+"\t.4byte 0x00000C40\n"
+"\t.4byte 0x0000000C\n"
+"\t.4byte 0x00FB3322\n"
+"\t.4byte 0x00000C40\n"
+"\t.4byte 0x0000000C\n"
+"\t.4byte 0x00F93322\n"
+"\t.4byte 0x00000C40\n"
+"\t.4byte 0x0000000C\n"
+"\t.4byte 0x00311220\n"
+"\t.4byte 0x09B21B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x7FFF1324\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte data_085B9BBC + 0x168\n"
+"\t.4byte 0x00030540\n"
+"\t.4byte 0x00000066\n"
+"\t.4byte 0x00013720\n"
+"\t.4byte 0x00000820\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x002B1220\n"
+"\t.4byte 0x09B31B20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x7FFF1326\n"
+"\t.4byte 0x003C0E20\n"
+"\t.4byte 0x00321326\n"
+"\t.4byte 0x00001C20\n"
+"\t.4byte 0x00001D20\n"
+"\t.4byte 0x00001B22\n"
+"\t.4byte 0x00D40229\n"
+"\t.4byte 0x00C10229\n"
+"\t.4byte 0x00082A21\n"
+"\t.4byte 0x00000120\n"
+);

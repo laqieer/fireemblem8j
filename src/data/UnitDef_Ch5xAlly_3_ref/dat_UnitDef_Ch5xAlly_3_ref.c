@@ -1,7 +1,32 @@
 #include "global.h"
 
-/* Migrated from asm/dat_UnitDef_Ch5xAlly_3_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/UnitDef_Ch5xAlly_3.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_UnitDef_Ch5xAlly_3_ref") u8 UnitDef_Ch5xAlly_3[] = INCBIN_U8("data/residual/UnitDef_Ch5xAlly_3.bin");
+__asm__(
+"\t.section .rodata.dat_UnitDef_Ch5xAlly_3_ref, \"a\", %progbits\n"
+"\t.global UnitDef_Ch5xAlly_3\n"
+"UnitDef_Ch5xAlly_3:\n"
+"\t.4byte 0x0800010F\n"
+"\t.4byte 0x03000109\n"
+"\t.4byte data_0890A480 + 0x14\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x08000510\n"
+"\t.4byte 0x03000109\n"
+"\t.4byte data_0890A480 + 0x2C\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x08000511\n"
+"\t.4byte 0x02000109\n"
+"\t.4byte data_0890A480 + 0x44\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);

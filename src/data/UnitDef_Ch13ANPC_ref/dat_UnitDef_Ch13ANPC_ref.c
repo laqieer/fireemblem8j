@@ -1,7 +1,52 @@
 #include "global.h"
 
-/* Migrated from asm/dat_UnitDef_Ch13ANPC_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/UnitDef_Ch13ANPC.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_UnitDef_Ch13ANPC_ref") u8 UnitDef_Ch13ANPC[] = INCBIN_U8("data/residual/UnitDef_Ch13ANPC.bin");
+__asm__(
+"\t.section .rodata.dat_UnitDef_Ch13ANPC_ref, \"a\", %progbits\n"
+"\t.global UnitDef_Ch13ANPC\n"
+"UnitDef_Ch13ANPC:\n"
+"\t.4byte 0x130007C8\n"
+"\t.4byte 0x01000014\n"
+"\t.4byte data_0890ECE8 + 0x188\n"
+"\t.4byte 0x00000017\n"
+"\t.4byte 0x00090000\n"
+"\t.4byte 0x130005CD\n"
+"\t.4byte 0x01000013\n"
+"\t.4byte data_0890ECE8 + 0x190\n"
+"\t.4byte 0x00000014\n"
+"\t.4byte 0x00090000\n"
+"\t.4byte 0x130005CD\n"
+"\t.4byte 0x01000013\n"
+"\t.4byte data_0890ECE8 + 0x198\n"
+"\t.4byte 0x00000014\n"
+"\t.4byte 0x00090000\n"
+"\t.4byte 0x130005CD\n"
+"\t.4byte 0x01000015\n"
+"\t.4byte data_0890ECE8 + 0x1A0\n"
+"\t.4byte 0x00000014\n"
+"\t.4byte 0x00090000\n"
+"\t.4byte 0x130005CD\n"
+"\t.4byte 0x01000016\n"
+"\t.4byte data_0890ECE8 + 0x1A8\n"
+"\t.4byte 0x00000014\n"
+"\t.4byte 0x00090000\n"
+"\t.4byte 0x0B001DCD\n"
+"\t.4byte 0x01000013\n"
+"\t.4byte data_0890ECE8 + 0x1B0\n"
+"\t.4byte 0x0000002D\n"
+"\t.4byte 0x00090F00\n"
+"\t.4byte 0x0B001DCD\n"
+"\t.4byte 0x01000015\n"
+"\t.4byte data_0890ECE8 + 0x1B8\n"
+"\t.4byte 0x0000002D\n"
+"\t.4byte 0x00090F00\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);

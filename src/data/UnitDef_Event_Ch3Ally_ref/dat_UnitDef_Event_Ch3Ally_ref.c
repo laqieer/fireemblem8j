@@ -1,7 +1,62 @@
 #include "global.h"
 
-/* Migrated from asm/dat_UnitDef_Event_Ch3Ally_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/UnitDef_Event_Ch3Ally.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_UnitDef_Event_Ch3Ally_ref") u8 UnitDef_Event_Ch3Ally[] = INCBIN_U8("data/residual/UnitDef_Event_Ch3Ally.bin");
+__asm__(
+"\t.section .rodata.dat_UnitDef_Event_Ch3Ally_ref, \"a\", %progbits\n"
+"\t.global UnitDef_Event_Ch3Ally\n"
+"UnitDef_Event_Ch3Ally:\n"
+"\t.4byte 0x08000201\n"
+"\t.4byte 0x010002C0\n"
+"\t.4byte data_08908958 + 0x104\n"
+"\t.4byte 0x006C6C09\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x08004505\n"
+"\t.4byte 0x01000300\n"
+"\t.4byte data_08908958 + 0x10C\n"
+"\t.4byte 0x0000004B\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x08003D07\n"
+"\t.4byte 0x01000280\n"
+"\t.4byte data_08908958 + 0x114\n"
+"\t.4byte 0x00006C2C\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x10004806\n"
+"\t.4byte 0x01000300\n"
+"\t.4byte data_08908958 + 0x11C\n"
+"\t.4byte 0x00006C15\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x28000903\n"
+"\t.4byte 0x01000280\n"
+"\t.4byte data_08908958 + 0x124\n"
+"\t.4byte 0x00000014\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x08000504\n"
+"\t.4byte 0x010002C0\n"
+"\t.4byte data_08908958 + 0x12C\n"
+"\t.4byte 0x00001401\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x08001A08\n"
+"\t.4byte 0x01000280\n"
+"\t.4byte data_08908958 + 0x134\n"
+"\t.4byte 0x00006C2D\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x08000702\n"
+"\t.4byte 0x01000300\n"
+"\t.4byte data_08908958 + 0x13C\n"
+"\t.4byte 0x006C1703\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x20003F0A\n"
+"\t.4byte 0x01000280\n"
+"\t.4byte data_08908958 + 0x144\n"
+"\t.4byte 0x0000001F\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);

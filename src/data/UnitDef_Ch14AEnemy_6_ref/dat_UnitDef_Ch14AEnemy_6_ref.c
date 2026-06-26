@@ -1,7 +1,47 @@
 #include "global.h"
 
-/* Migrated from asm/dat_UnitDef_Ch14AEnemy_6_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/UnitDef_Ch14AEnemy_6.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_UnitDef_Ch14AEnemy_6_ref") u8 UnitDef_Ch14AEnemy_6[] = INCBIN_U8("data/residual/UnitDef_Ch14AEnemy_6.bin");
+__asm__(
+"\t.section .rodata.dat_UnitDef_Ch14AEnemy_6_ref, \"a\", %progbits\n"
+"\t.global UnitDef_Ch14AEnemy_6\n"
+"UnitDef_Ch14AEnemy_6:\n"
+"\t.4byte 0x75000980\n"
+"\t.4byte 0x010002C8\n"
+"\t.4byte frontier_df3_unitdef_b_000_90F678 + 0x9E0\n"
+"\t.4byte 0x00000016\n"
+"\t.4byte 0x00090303\n"
+"\t.4byte 0x65000984\n"
+"\t.4byte 0x010022C9\n"
+"\t.4byte frontier_df3_unitdef_b_000_90F678 + 0x9E8\n"
+"\t.4byte 0x00000095\n"
+"\t.4byte 0x00090303\n"
+"\t.4byte 0x65000980\n"
+"\t.4byte 0x010002CA\n"
+"\t.4byte frontier_df3_unitdef_b_000_90F678 + 0x9F0\n"
+"\t.4byte 0x00000014\n"
+"\t.4byte 0x00090303\n"
+"\t.4byte 0x1D001B80\n"
+"\t.4byte 0x000002C9\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0000002F\n"
+"\t.4byte 0x00090300\n"
+"\t.4byte 0x65003F80\n"
+"\t.4byte 0x010002C8\n"
+"\t.4byte frontier_df3_unitdef_b_000_90F678 + 0x9F8\n"
+"\t.4byte 0x00000028\n"
+"\t.4byte 0x00090300\n"
+"\t.4byte 0x65003F80\n"
+"\t.4byte 0x010002CA\n"
+"\t.4byte frontier_df3_unitdef_b_000_90F678 + 0xA00\n"
+"\t.4byte 0x00000028\n"
+"\t.4byte 0x00090300\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);
