@@ -348,6 +348,7 @@ def emit_true_debt():
     # ask fe8u whether it relocates there. Precise (spans symbol boundaries).
     real = coinc = bunk = 0
     realhits = []  # (name, off, jp) of fe8u-confirmed-real still-raw words
+    blindhits = []  # (name, off, jp, value) of fe8u-blind still-raw words
     for b in glob.glob(os.path.join(ROOT, "data", "residual", "*.bin")):
         if not is_live_raw(b): continue
         name = os.path.basename(b)[:-4]
@@ -380,11 +381,25 @@ def emit_true_debt():
             r = F.fe8u_ptr_at_jp(jp) if jp is not None else None
             if r is True: real += 1; realhits.append((name, O, jp))
             elif r is False: coinc += 1
-            else: bunk += 1
+            else: bunk += 1; blindhits.append((name, O, jp, v))
     if "--list-real" in sys.argv:
         print("== fe8u-confirmed REAL still-raw words (convertible) ==")
         for (n, O, jp) in realhits:
             print(f"  {n}  off={O}  jp=0x{jp:08X}")
+    if "--list-blind" in sys.argv:
+        addrs, a2n, a2s = load_elf_symbols(ELF)
+        from collections import Counter as _C
+        kc = _C(); per = _C()
+        print("== fe8u-blind words: symbol resolution ==")
+        for (n, O, jp, v) in blindhits:
+            kind, sym, off = classify(v, addrs, a2n, a2s)
+            kc[kind] += 1
+            if kind != "DANGLING":
+                per[n] += 1
+        print("  total fe8u-blind: %d" % len(blindhits))
+        for k, c in kc.most_common(): print("   %-10s %d" % (k, c))
+        print("  top files (resolvable EXACT/INTERIOR):")
+        for k, c in per.most_common(12): print("   %4d  %s" % (c, k))
     bcoinc = coinc
     true_debt = real + bunk
     print("== TRUE real-pointer debt (fe8u per-word classification) ==")
