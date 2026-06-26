@@ -7880,3 +7880,20 @@ real: ~92 cross-check-confirmable (next) + shift-ambiguous + fe8u-blind JP-only
 STT_FUNC + Thumb/ARM relocation, _ref/__attribute__/SECTION INCBIN forms, target-name
 cross-check oracle. Effectiveness ALWAYS verified against the linker, never make
 compare alone (D299).
+
+## D302-CORRECTION — target-name cross-check is UNPROVEN, not "~92 recoverable" (2026-06-26)
+
+Integrity correction to D302: I overstated. An isolated test matched
+(`data_08908590+0xA0 -> REDA_Ch1Ally_Eirika`), but a systematic per-sub-symbol pass
+over the same .c found **0** convertible words -- an inconsistency (likely a
+base-address discrepancy between the `.bin`-name VMA used in the isolated test and
+the per-sub-symbol nm address). So the "~92 confirmable" figure is a measurement
+artifact of the isolated test's base, NOT a proven recoverable set. The cross-check
+mechanism (`fe8u_reloc_target_at_jp`) is conceptually sound and the oracle is
+committed, but it is NOT yet demonstrated to convert any additional pointer. Do not
+count on it until the base-address inconsistency is resolved and a real conversion
+passes make compare. Honest remaining real-pointer debt is the per-word-fe8u figure
+(~711), with NO confirmed quick win beyond it -- the rest is shift-ambiguous /
+fe8u-blind JP-only data needing per-table RE. The verified session result stands:
+~44% -> ~94% of REAL pointers relocated (relocated 7,639 -> 13,296), all gated by
+the linker.
