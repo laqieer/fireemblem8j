@@ -7608,3 +7608,45 @@ permuter. (3) On a byte-match: carve + make compare OK; if the fn was POSTED, fo
 do nothing (solved locally, no post needed). (4) On a NEAR for a NOT_POSTED fn: post the nearest C. (5) The
 autonomous poll also runs `decomp_status.py` each cycle so a community match is integrated the moment it appears.
 This wires strategy-5 (community) into the same loop as the permuter (compute) — both feed the integrator.
+
+## D293 — Stale-triage sweep: rom_header decompiled + GetUnitItemSlot carved + honest-metric fix (2026-06-26)
+
+**Context.** Driving toward 100% matching-C. The scorecard read 99.61% (8647/8681,
+"34 still asm"). Re-deriving the ground-truth still-asm set from the `carved_rom`
+manifest (not the stale 173-entry nm scan over all `asm/*.o`, most of which are
+superseded) showed the real set is 33 objects / 34 functions — and that 2 of the
+"34" were stale miscounts, not genuine decomp targets.
+
+**Decisions.**
+1. **`asm/rom_header.s` → `src/rom_header.s`** (fe8u parity). The GBA cartridge
+   header was the last hand-written, committed real-source asm still living under
+   `asm/` (fe8u keeps it in `src/`). The D281 `SRC_S_FILES := git ls-files 'src/*.s'`
+   rule picks it up; repointed the one `layout/carved_rom.tsv` object path. `Init`
+   (the `b crt0` entry stub) is now a matching-C function. make compare stays OK;
+   self-containment unchanged.
+2. **calcprogress honest-metric fix.** The src-side `funcs` counter counts both
+   local `t` and global `T` symbols; the asm-side `func_asm` counter counts only
+   global `T`. rom_header defines 11 `RomHeader*` cartridge-header DATA labels
+   (`.byte`/`.ascii`/`.space`: Nintendo logo, game title, code, maker, checksum, …)
+   as local `t` plus 2 globals (`Init`, `RomHeaderNintendoLogo`). So moving the file
+   asm→src would have inflated the function total by 10 (data labels counted as
+   "functions"). Fixed by excluding `RomHeader*` from the function census in
+   `internal()` — these are header DATA, not functions, on either side. The
+   denominator is now move-invariant: 8680 (was 8681; the −1 is the Nintendo-logo
+   data label no longer miscounted). This is a correctness fix that makes the metric
+   MORE honest (total goes down, opposite of gaming).
+3. **`GetUnitItemSlot` (sub_8016DD4) carved.** The last stranded-`bmitem` residual:
+   a region-same (US-shifted) Thumb function lazily left as a descriptive incbin.
+   Hand-decomp from fe8u `bmitem.c` (3-line item-slot scan, GetItemIndex extern-inline
+   idiom, mirroring the sibling GetUnitItemHealAmount carve). Byte-perfect.
+
+**Net:** 99.61% → 99.64% (8649/8680), 34 → 31 still-asm, +2 real functions.
+
+**GOTCHA logged.** The `// FLAGS: ... EXACT` annotations in `src/nonmatching/*.c`
+headers are NOT trustworthy. `sub_800A34C`'s header claimed `-fno-gcse = 0x248/584B
+EXACT`; a real carve attempt linked, produced the right size, but measured **534/584
+bytes differing** vs ROM (totally different codegen — a deep reg-alloc/structure
+residual, not a near). The earlier "EXACT" was an optimistic agent report. Corrected
+the header. **make compare is the only oracle** — re-confirmed the long-standing rule.
+Also: the still-incbin callee `sub_80D6378` (fixed-point >>12 multiply @0x080D6378)
+needs a `baseline_syms` thumb binding before any sub_800A34C carve.
