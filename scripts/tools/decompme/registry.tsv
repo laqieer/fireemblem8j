@@ -19,3 +19,14 @@ sub_8056890	HbXuD	EfxAdvanceFrameLut
 sub_8084CE4	KKFDx	sub_8084CE4
 sub_800663C	jK5bE	PutFaceOnBackGround
 sub_80D19DC	ZA4ER	RegisterTsaWithOffset
+sub_80D1844	VzzCC	LoadClassNameInClassReelFont
+sub_800FAD0	eZzgG	sub_800FAD0
+sub_800A594	Sp10a	sub_800A594
+sub_800E5CC	OqAJ4	Event1B_TEXTSHOW
+sub_80A6D34	9myLi	sub_80A6D34
+sub_80A390C	xYHce	sub_80A390C
+sub_807D3BC	J1ka1	SelectSummonPos
+sub_800FF08	jeBp5	sub_800FF08
+sub_80A6F1C	h2W8F	sub_80A6F1C
+sub_80B8B28	mOclN	ClassStatsDisplay_Loop
+sub_80C05C8	R7AaX	GmapScreen2_Loop
