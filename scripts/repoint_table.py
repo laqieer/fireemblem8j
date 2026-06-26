@@ -336,10 +336,19 @@ def fe8u_allowed_slice(sym, sec, slice_bytes):
         if S:
             return lambda O: (O in feset) or (O > last and (O % S) in subs)
         return lambda O: O in feset
-    m = re.search(r'\.(?:data|rodata)\.residue\.([0-9A-Fa-f]{6,8})', sec)
-    if not m:
-        return None
-    jp = int(m.group(1), 16)
+    # JP base of THIS slice: prefer the address encoded in the sub-symbol name
+    # (data_085BA2FC -> 0x085BA2FC), which already includes the slice's bin offset.
+    # The section name carries only the PARENT base (.data.residue.085BA1F4 ->
+    # 0x085BA1F4), so for an off>0 slice (e.g. INCBIN(bin, 0x108, ..)) it probes fe8u
+    # at the wrong addresses and strands the slice's real pointers.
+    sm = re.search(r'_([0-9A-Fa-f]{6,8})$', sym)
+    if sm and ROM_LO <= int(sm.group(1), 16) < ROM_HI:
+        jp = int(sm.group(1), 16)
+    else:
+        m = re.search(r'\.(?:data|rodata)\.residue\.([0-9A-Fa-f]{6,8})', sec)
+        if not m:
+            return None
+        jp = int(m.group(1), 16)
     rom = [i * 4 for i in range(len(slice_bytes) // 4)
            if ROM_LO <= struct.unpack_from("<I", slice_bytes, i * 4)[0] < ROM_HI]
     if not rom:
