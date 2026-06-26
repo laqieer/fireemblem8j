@@ -173,6 +173,28 @@ def _load_us_index():
     _US_IDX = (addrs, a2n, anch, [a for a, _ in anch])
     return _US_IDX
 
+def fe8u_ptr_at_jp(jp_addr):
+    """Per-WORD oracle: does fe8u relocate (= treat as a pointer) the word at this
+    JP address, after shifting to its US address via the nearest precise anchor?
+    True = real pointer, False = fe8u has the data but not as a pointer (coincidental),
+    None = no fe8u symbol there. More precise than the per-slice offset set (a slice
+    can span a fe8u symbol boundary)."""
+    import bisect as _bi
+    us_addrs, a2n, anchors, ajp = _load_us_index()
+    if not anchors:
+        return None
+    i = _bi.bisect_right(ajp, jp_addr) - 1
+    if i < 0:
+        return None
+    us = jp_addr + (anchors[i][1] - anchors[i][0])
+    j = _bi.bisect_right(us_addrs, us) - 1
+    if j < 0:
+        return None
+    offs = ptr_offsets(a2n[us_addrs[j]])
+    if offs is None:
+        return False
+    return (us - us_addrs[j]) in set(offs)
+
 def ptr_offsets_at_jp(jp_addr, blob_len):
     """For an un-named blob at JP `jp_addr` of `blob_len` bytes, return the pointer
     byte-offsets (relative to the blob) that fe8u relocates -- by shifting to the US

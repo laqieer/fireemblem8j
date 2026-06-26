@@ -264,20 +264,14 @@ def fe8u_allowed_slice(sym, sec, slice_bytes):
            if ROM_LO <= struct.unpack_from("<I", slice_bytes, i * 4)[0] < ROM_HI]
     if not rom:
         return None
-    try:
-        import fe8u_ptr_offsets as _F
-        rel = _F.ptr_offsets_at_jp(jp, len(slice_bytes))
-    except Exception:
-        rel = None
-    if not rel:
-        return None
-    relset = set(rel)
-    # SHIFT-CONFIRMED relaxation (slice path): enough JP pointers aligning with
-    # fe8u offsets proves the region shift; convert ONLY fe8u-pointer offsets,
-    # leave coincidental neighbours raw. (Strict-full over-rejected whole slices.)
-    aligned = sum(1 for o in rom if o in relset)
-    if aligned == len(rom) or (aligned >= 3 and aligned >= 0.5 * len(rom)):
-        return lambda O: O in relset
+    # PER-WORD oracle: does fe8u relocate the word at (jp + O)? More precise than the
+    # per-slice offset set (a slice can span a fe8u symbol boundary -> missed ptrs).
+    import fe8u_ptr_offsets as _F
+    ptr_offs = set(O for O in rom if _F.fe8u_ptr_at_jp(jp + O) is True)
+    # SHIFT-CONFIRMED: >=3 corroborating relocations (or all) prove the region shift;
+    # convert exactly those fe8u-relocated words, leave coincidental neighbours raw.
+    if len(ptr_offs) >= 3 or (ptr_offs and len(ptr_offs) == len(rom)):
+        return lambda O: O in ptr_offs
     return None
 
 def rewrite_src_slices(cf, addrs, by_addr, check=False):
