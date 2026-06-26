@@ -617,12 +617,74 @@ def select_auto_dense(addrs, by_addr, frac=0.5):
     names.sort(reverse=True)
     return names
 
+GLYPH_STRIDE = 0x48  # struct Glyph: sjisNext(4)+sjisByte1(1)+width(1)+pad(2)+bitmap[16](64)
+
+def rewrite_glyph_table(cf, addrs, by_addr, check=False):
+    """De-point a gFontgrp_* Glyph table. struct Glyph has exactly ONE pointer --
+    sjisNext at offset 0 (the Shift-JIS next-glyph linked-list link), record stride
+    0x48. Convert each sjisNext slot (offset 0 mod 0x48) that is a ROM-range pointer
+    resolving INTERIOR-within-size or EXACT to a non-function symbol -> the target
+    glyph lives inside the resolved symbol's object, so `.4byte sym+off` shifts
+    correctly. Bitmap/metadata words are NEVER converted (coincidental pixel data).
+    Returns #pointers converted; byte-exact (gated by make compare)."""
+    with open(cf, "r", errors="replace") as f:
+        text = f.read()
+    m = _SECTION_RE.search(text)
+    if not m or not m.group("sym").startswith("gFontgrp_"):
+        return 0
+    sym, sec, binn = m.group("sym"), m.group("sec"), m.group("bin")
+    binp = os.path.join(RESID, binn)
+    if not os.path.exists(binp):
+        return 0
+    b = open(binp, "rb").read()
+    if len(b) % 4 != 0 or len(b) < 4:
+        return 0
+    out = []
+    nconv = 0
+    for i in range(len(b) // 4):
+        O = i * 4
+        v = struct.unpack_from("<I", b, O)[0]
+        if O % GLYPH_STRIDE == 0 and ROM_LO <= v < ROM_HI:
+            r = resolve(v, addrs, by_addr)   # None if dangling (off >= size)
+            if r is not None and not r[2]:   # not a function (sjisNext -> glyph data)
+                s, off, _ = r
+                out.append(".4byte %s + 0x%X" % (s, off) if off else ".4byte %s" % s)
+                nconv += 1
+                continue
+        out.append(".4byte 0x%08X" % v)
+    if not nconv or check:
+        return nconv
+    c = ['#include "global.h"', '',
+         '/* De-pointered gFontgrp Glyph table: struct Glyph.sjisNext (offset 0, record',
+         ' * stride 0x48) is the Shift-JIS next-glyph pointer -> emitted as a .4byte sym',
+         ' * relocation so the JP font linked list is shiftable. Bitmap/metadata words kept',
+         ' * raw (coincidental). Byte-identical to baserom (gated by make compare). */',
+         '', '__asm__(',
+         '"\\t.section %s, \\"a\\", %%progbits\\n"' % sec,
+         '"\\t.global %s\\n"' % sym,
+         '"%s:\\n"' % sym]
+    c += ['"\\t%s\\n"' % w for w in out]
+    c += [');', '']
+    with open(cf, "w") as f:
+        f.write("\n".join(c))
+    return nconv
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     check = "--check" in sys.argv
     safe_only = "--safe-only" in sys.argv
     fe8u_safe = "--fe8u-safe" in sys.argv
     addrs, by_addr = load_syms()
+    if "--glyphs" in sys.argv:
+        # de-point gFontgrp_* Glyph tables (Shift-JIS sjisNext pointer at offset 0)
+        files = sorted(glob.glob(os.path.join(ROOT, "src", "data", "*_ref", "*.c")))
+        tot = ntab = 0
+        for cf in files:
+            n = rewrite_glyph_table(cf, addrs, by_addr, check)
+            if n:
+                tot += n; ntab += 1
+        print("glyphs: %d gFontgrp tables de-pointered, %d sjisNext pointers" % (ntab, tot))
+        return
     if "--reprocess" in sys.argv:
         # re-process raw .4byte literals stuck in already-de-pointered __asm__ blocks
         files = (sorted(glob.glob(os.path.join(ROOT, "src", "data", "*", "*.c"))) +

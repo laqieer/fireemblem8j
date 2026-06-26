@@ -1,7 +1,30 @@
 #include "global.h"
 
-/* Migrated from asm/dat_gFontgrp_323_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered gFontgrp Glyph table: struct Glyph.sjisNext (offset 0, record
+ * stride 0x48) is the Shift-JIS next-glyph pointer -> emitted as a .4byte sym
+ * relocation so the JP font linked list is shiftable. Bitmap/metadata words kept
+ * raw (coincidental). Byte-identical to baserom (gated by make compare). */
 
-SECTION(".rodata.dat_gFontgrp_323_ref") u8 gFontgrp_323[] = INCBIN_U8("data/residual/gFontgrp_323.bin");
+__asm__(
+"\t.section .rodata.dat_gFontgrp_323_ref, \"a\", %progbits\n"
+"\t.global gFontgrp_323\n"
+"gFontgrp_323:\n"
+"\t.4byte frontier_df3_fontgrp_se_004_57FF94 + 0x8B8\n"
+"\t.4byte 0x00000882\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000FC0\n"
+"\t.4byte 0x00003AB0\n"
+"\t.4byte 0x0000EBEC\n"
+"\t.4byte 0x0000EBEB\n"
+"\t.4byte 0x0000EBEB\n"
+"\t.4byte 0x0000EBEB\n"
+"\t.4byte 0x0000EBEB\n"
+"\t.4byte 0x00003BEB\n"
+"\t.4byte 0x00000EAC\n"
+"\t.4byte 0x000003F0\n"
+"\t.4byte 0x00000000\n"
+);
