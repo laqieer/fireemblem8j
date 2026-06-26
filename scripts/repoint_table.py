@@ -23,9 +23,10 @@ Usage:
     repoint_table.py --safe-only <name>...    # skip any word whose target is a Thumb function
                                               # (avoids the thumb-bit relocation hazard)
 """
-import os, sys, struct, bisect, subprocess
+import os, sys, struct, bisect, subprocess, re
 
 ROM_LO, ROM_HI = 0x08000000, 0x09000000
+IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")  # valid C identifier (skip .gcc2_compiled., $t, ...)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ELF = os.path.join(ROOT, "fireemblem8.elf")
 RESID = os.path.join(ROOT, "data", "residual")
@@ -50,6 +51,7 @@ def load_syms():
         except ValueError: continue
         if not (ROM_LO <= addr < ROM_HI): continue
         if typ in ("U", "u", "a", "A", "N"): continue
+        if not IDENT.match(name): continue   # skip .gcc2_compiled., $t, $d mapping syms
         is_func = typ in ("t", "T")
         cur = by_addr.get(addr)
         if cur is None or _rank(name) < _rank(cur[0]):

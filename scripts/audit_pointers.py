@@ -21,7 +21,9 @@ classifies each:
 Headline metric = un-relocated pointer words remaining. Target: 0.
 This is ungameable: it reads the bytes that actually land in the ROM.
 """
-import os, sys, struct, glob, subprocess, bisect
+import os, sys, struct, glob, subprocess, bisect, re
+
+IDENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")  # valid C identifier
 
 ROM_LO, ROM_HI = 0x08000000, 0x09000000
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -57,6 +59,8 @@ def load_elf_symbols(elf):
         if not (ROM_LO <= addr < ROM_HI):
             continue
         if typ in ("U", "u", "a", "A", "N"):  # undefined / absolute / debug
+            continue
+        if not IDENT.match(name):  # skip .gcc2_compiled., $t/$d mapping symbols
             continue
         # prefer a "nicer" name over a generic data_/gap_/sub_ placeholder,
         # but keep an entry for every address either way
@@ -157,6 +161,73 @@ def main():
         for npt, c, sz, name in per_file:
             if c["DANGLING"] == 0 and c["INTERIOR"] == 0:
                 print(f"  {npt:>5}  {sz:>7}B  {name}")
+
+    if "--metrics" in sys.argv:
+        print()
+        emit_metrics(grand)
+
+
+# ---- formal tracked metrics (axes #5 SHIFTABILITY and #6 ASSET EDITABILITY) ----
+
+GFX_HINTS = ("Map", "Tile", "Object", "Chr", "Pal", "Gfx", "Img", "Sprite",
+             "Anim", "OBJ", "_gf", "Reel", "Portrait", "Icon")
+
+def live_raw_bin(binpath):
+    name = os.path.basename(binpath)[:-4]
+    cpath = os.path.join(ROOT, "src", "data", name + "_ref", "dat_%s_ref.c" % name)
+    if os.path.exists(cpath):
+        with open(cpath, "r", errors="replace") as f:
+            return "INCBIN" in f.read()
+    return True
+
+def count_relocated_data_ptrs():
+    """ABS32 relocations RESIDING in data sections (.rodata/.data) across src/*.o
+    -- the already-shiftable data pointers (the 'done' side of axis #5)."""
+    objs = []
+    for dp, _, fs in os.walk(os.path.join(ROOT, "src")):
+        for f in fs:
+            if f.endswith(".o"):
+                objs.append(os.path.join(dp, f))
+    total = 0
+    for i in range(0, len(objs), 400):
+        out = subprocess.run(["arm-none-eabi-objdump", "-r"] + objs[i:i+400],
+                             capture_output=True, text=True, errors="replace").stdout
+        in_data = False
+        for line in out.splitlines():
+            if line.startswith("RELOCATION RECORDS FOR ["):
+                sec = line.split("[", 1)[1].rstrip("]:")
+                in_data = (".rodata" in sec or ".data" in sec) and ".text" not in sec
+            elif in_data and "R_ARM_ABS32" in line:
+                total += 1
+    return total
+
+def emit_metrics(unrelocated):
+    # axis #5 SHIFTABILITY
+    relocated = count_relocated_data_ptrs()
+    total_ptr = relocated + unrelocated
+    shift_pct = (100.0 * relocated / total_ptr) if total_ptr else 100.0
+    # axis #6 ASSET EDITABILITY (opaque raw-incbin data bytes)
+    opaque_bytes = opaque_files = gfx_b = gfx_n = struct_b = struct_n = 0
+    for binp in glob.glob(os.path.join(ROOT, "data", "residual", "*.bin")):
+        if not live_raw_bin(binp):
+            continue
+        sz = os.path.getsize(binp)
+        opaque_bytes += sz; opaque_files += 1
+        base = os.path.basename(binp)
+        if any(k in base for k in GFX_HINTS):
+            gfx_b += sz; gfx_n += 1
+        else:
+            struct_b += sz; struct_n += 1
+    print("== TRACKED METRICS: SHIFTABILITY (#5) + ASSET EDITABILITY (#6) ==")
+    print(f"5. SHIFTABILITY (data ptrs) : {shift_pct:6.2f}%  "
+          f"({relocated}/{total_ptr} data pointers are relocatable symbol refs; "
+          f"{unrelocated} still hardcoded absolute ROM addresses)  -> target 100% (0 hardcoded)")
+    print(f"6. ASSET EDITABILITY        :  opaque raw-incbin data = {opaque_bytes} bytes "
+          f"in {opaque_files} blobs  -> target: only irreducible binary assets")
+    print(f"     - structured/logic-class (should be typed C): {struct_b} bytes, {struct_n} blobs")
+    print(f"     - graphics/anim-class (legit binary, like fe8u .4bpp/.bin): {gfx_b} bytes, {gfx_n} blobs")
+    print("The headline target is ungameable: 0 hardcoded pointers, 0 opaque structured blobs.")
+
 
 if __name__ == "__main__":
     main()

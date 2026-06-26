@@ -294,6 +294,46 @@ out.append(f"3. EXTRACTED DATA         : {data_pct:6.2f}%  "
 out.append(f"4. NAMED SYMBOLS          : {named_pct:6.2f}%  "
            f"({sym_named}/{sym_total} labels named; "
            f"{sym_placeholder} sub_/data_/nullsub_/sheet placeholders)  -> target 100%")
+
+# === Axes 5-6: shiftability + asset editability (the "real decomp" axes) =====
+# A byte-perfect ROM is necessary but NOT sufficient: a decomp must also be
+# SHIFTABLE (no hardcoded absolute pointers -> the linker relocates everything)
+# and EDITABLE (logic data as typed C, not opaque raw-incbin blobs). Both are
+# owned by scripts/audit_pointers.py; here we surface the fast, ungameable
+# headlines (full % via `audit_pointers.py --metrics`).
+import subprocess as _sp, glob as _glob
+def _shiftability_headline():
+    try:
+        o = _sp.run([sys.executable, os.path.join(os.path.dirname(__file__),
+                     "audit_pointers.py")], capture_output=True, text=True, timeout=120).stdout
+        for ln in o.splitlines():
+            if "un-relocated ROM-pointer words remaining" in ln:
+                return int(ln.split(":")[1].strip())
+    except Exception:
+        pass
+    return None
+def _opaque_data_bytes():
+    GFX = ("Map","Tile","Object","Chr","Pal","Gfx","Img","Sprite","Anim","OBJ","_gf","Reel","Portrait","Icon")
+    opaque = struct_b = 0
+    for binp in _glob.glob(os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "residual", "*.bin")):
+        name = os.path.basename(binp)[:-4]
+        cpath = os.path.join(os.path.dirname(os.path.dirname(__file__)), "src", "data", name + "_ref", "dat_%s_ref.c" % name)
+        if os.path.exists(cpath):
+            with open(cpath, errors="replace") as f:
+                if "INCBIN" not in f.read():
+                    continue
+        sz = os.path.getsize(binp); opaque += sz
+        if not any(k in os.path.basename(binp) for k in GFX):
+            struct_b += sz
+    return opaque, struct_b
+_unreloc = _shiftability_headline()
+_opaque, _struct_opaque = _opaque_data_bytes()
+if _unreloc is not None:
+    out.append(f"5. SHIFTABILITY (data ptrs): {('0 hardcoded' if _unreloc==0 else str(_unreloc)+' hardcoded'):>13}  "
+               f"absolute ROM pointers still in raw data  -> target 0 "
+               f"(full % via audit_pointers.py --metrics)")
+out.append(f"6. ASSET EDITABILITY      : {_struct_opaque} bytes of structured data still opaque "
+           f"raw-incbin (of {_opaque} total)  -> target 0 (typed C); graphics .bin exempt")
 out.append("The #1 number is the only ungameable one: remove baserom.gba and see "
            "if `make` still builds.  See docs/decomp-completion-standard.md.")
 out.append("")
