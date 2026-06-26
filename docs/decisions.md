@@ -7684,3 +7684,27 @@ frontier. No source form, flag, compiler patch, or permuter path reaches them th
 posted under laqieer) or future external insight. Honest state: **99.64% (8649/8680)**.
 Do NOT churn the permuter fleet for these (plateaued = zero-EV) and do NOT re-attempt the
 flags/reorderings (measured dead). See docs/nonmatching_bytegaps.md for the full table.
+
+## D295 — decomp.me community path is toolchain-limited for -mjp-promote functions (2026-06-26)
+
+While setting up the decomp.me community-matching path (strategy 5), discovered a hard
+constraint: **decomp.me runs STOCK agbcc; the JP build's near-matches for many of the 31
+remaining functions depend on this repo's CUSTOM `-mjp-promote` agbcc patch** (built by
+scripts/build_jp_agbcc.sh, not upstream). A scratch carrying `-mjp-promote` in its flags
+FAILS to compile on decomp.me → score = max_score (e.g. AddAttr2dBitMap/ABitG = 11200/11200,
+a broken scratch, not a near-match).
+
+Implication: for the `-mjp-promote`-dependent functions (AddAttr2dBitMap, Event18_ColorFade,
+AdjustNewUnitPosition, EfxAdvanceFrameLut, and others whose JP codegen needs PROMOTE_MODE/
+PROMOTE_FUNCTION_ARGS), decomp.me **cannot reproduce the JP bytes with any source** — stock
+agbcc lacks the flag — so they are unmatchable there regardless of the C. The community path
+is only viable for functions matchable under STOCK agbcc. The promote-dependent set is
+solvable only with this repo's toolchain (permuter, which has plateaued — see D294) or an
+upstream/decomp.me agbcc that adds the promote behavior.
+
+This bounds the realistic routes to 100% for the remaining 31:
+  1. our custom-agbcc permuter — PLATEAUED on the measured-close ones (D294), and
+  2. a future agbcc reg-alloc/codegen advance — the D290 IR wall (not a simple knob).
+Neither is a single-session lever. Honest state remains 99.64% (8649/8680).
+The scratches stay posted/owned for any contributor who clones this repo's agbcc; the
+broken-on-stock state is inherent to the toolchain mismatch, not a posting error.
