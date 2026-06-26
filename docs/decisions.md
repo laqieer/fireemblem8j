@@ -7650,3 +7650,37 @@ residual, not a near). The earlier "EXACT" was an optimistic agent report. Corre
 the header. **make compare is the only oracle** — re-confirmed the long-standing rule.
 Also: the still-incbin callee `sub_80D6378` (fixed-point >>12 multiply @0x080D6378)
 needs a `baseline_syms` thumb binding before any sub_800A34C carve.
+
+## D294 — Closed the last avenue: agbcc prologue/alloc patch can't reach the residuals (2026-06-26)
+
+Exhaustive verification that the 31 still-asm matching-C residuals are beyond every
+lever available this session — traced to the source level, not asserted.
+
+**The closest function, AddAttr2dBitMap (sub_8001570), measured to the instruction:**
+with `-mjp-promote` it is **10/224 bytes** (size-exact), and the 10 bytes are pure
+codegen-order at 3 sites: (1) prologue `mov ip,r6`/`mov r8,r2` save-order swapped,
+(2) an `adds r2,r1,#0` scheduled late, (3) a nop placement. Verified by disasm.
+
+**Why it can't be closed:**
+- **Permuter: PLATEAUED, not converging.** `nonmatchings/AddAttr2dBitMap/permute.log`:
+  best obj=120 (=the 10 bytes) was hit in the FIRST half of 839,821 iterations and never
+  beaten across the next ~420K. sub_8084CE4 identically stuck at 795 over 787,880. So
+  decomp-permuter cannot reach these via source mutation — more wall-clock won't help.
+- **All agbcc flags tested:** stock (`-fno-gcse`/`-fno-strength-reduce`/`-Os`/...) plus
+  the three custom `-m` flags in the binary: `jp-promote` (used), and the two
+  built-but-unwired ones — `jp-nocrossjump` and `jp-regorder` — both same-or-worse on
+  every close function.
+- **The agbcc-patch avenue is the D290 wall.** `jp-regorder` patches
+  `thumb_function_prologue`'s high-register PUSH order; the residual is the register
+  ALLOCATOR's body low→high mov-order (a different site). D290 already proved that
+  order comes from the allocation IR inputs (n_refs/live-length), not a tie-break or
+  `REG_ALLOC_ORDER` knob (a custom `-mjp-allocorder` agbcc was a no-op). Re-confirmed.
+- **Manual source reordering** of AddAttr2dBitMap (swap `_src`/`dst`, hoist `++_src`,
+  split `i` init) does not close the 10.
+
+**Conclusion:** the remaining 31 sit at the irreducible agbcc register-allocation/codegen
+frontier. No source form, flag, compiler patch, or permuter path reaches them this session
+(each tested, not assumed). The only remaining routes are decomp.me community (all 30
+posted under laqieer) or future external insight. Honest state: **99.64% (8649/8680)**.
+Do NOT churn the permuter fleet for these (plateaued = zero-EV) and do NOT re-attempt the
+flags/reorderings (measured dead). See docs/nonmatching_bytegaps.md for the full table.
