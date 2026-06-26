@@ -1,0 +1,1 @@
+0D9234	0D9310	*libc.a:makebuf.o(.text)	__smakebuf lib-link (newlib; relocs resolve to JP callee addrs)
