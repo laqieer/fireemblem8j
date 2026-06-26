@@ -459,12 +459,14 @@ def reprocess_asm_block(cf, addrs, by_addr, check=False):
                     conf = _F.fe8u_ptr_at_jp(base + O) is True
                 except Exception:
                     conf = False
-                # SKIP genuine functions: the ld Thumb-bit behaviour on an ABS32
-                # reloc is inconsistent across symbols (a $t-mapped fn here did NOT
-                # get the bit), so a fn reloc can't be made reliably byte-exact.
-                # Data pointers (the vast majority) convert cleanly.
-                if r and (exact or conf) and not r[2]:
-                    sym, off = r[0], r[1]
+                if r and (exact or conf):
+                    sym, off, is_func = r
+                    # ld quirk: `.4byte func` (addend 0) ORs the Thumb bit (-> func|1);
+                    # `.4byte func + A` with A!=0 does NOT (-> func+A). So for a function
+                    # `.4byte func + off` reproduces v exactly for any off>=1, but off==0
+                    # (a pointer to a Thumb fn's even start) is unreproducible -> skip it.
+                    if is_func and off == 0:
+                        out.append(line); continue
                     rel = ".4byte %s + 0x%X" % (sym, off) if off else ".4byte %s" % sym
                     out.append('%s"\\t%s\\n"\n' % (mr.group(1), rel)); nconv += 1; continue
             out.append(line); continue

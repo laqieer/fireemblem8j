@@ -25,7 +25,7 @@ __asm__(
 "\t.4byte 0x00000002\n"
 "\t.4byte PikeTrapSpriteAnim_Init + 0x1\n"
 "\t.4byte 0x00000014\n"
-"\t.4byte 0x080096C1\n"
+"\t.4byte APProc_Exists + 0x1\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 );  /* de-pointered slice data_085C34F0: ptr=4 data=14 skip=2 */
