@@ -2880,3 +2880,4 @@ src/sub_800B88C.o: CC1FLAGS += -mjp-promote
 src/efxLunaSCR_Loop.o: CC1FLAGS += -mjp-promote
 
 src/UnitList_PutRow.o: CC1FLAGS += -mjp-promote
+src/sub_8048FC0.o: CC1FLAGS += -fno-strength-reduce
