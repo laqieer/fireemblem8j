@@ -7830,3 +7830,30 @@ us_jp_funcmap anchors) -> fe8u symbol -> offsets, gated by JP/fe8u offset-
 alignment self-validation (misalignment = skip, so safe); (b) JP-divergent
 EventScr bytecode (parse the event-command format for pointer args). Both are
 per-table, multi-session. NEVER bulk-convert struct arrays on density (D297).
+
+## D299 — INTEGRITY CORRECTION: asm-incbin de-pointering was DEAD (2026-06-26)
+
+The D298 "asm-incbin" fe8u-safe batches were INEFFECTIVE and the reported numbers
+INFLATED. Root cause: EVERY `asm/dat_*.s` that incbins residual data is an EXCLUDED
+placeholder (DATA_INCBIN_ASM_EXCLUDE); the residual symbols are actually linked from
+`src/data/<name>/<name>.c` (sliced `INCBIN_U8("…bin", off, len)` sub-symbols). All
+165 asm edits changed dead files (zero effect on the ROM -- make compare stayed OK
+because the bytes never moved), yet the auditor's asm-incbin liveness was FOOLED
+into marking those tables de-pointered, inflating the figure to "82.98%".
+
+Verified against ground truth (the `arm-none-eabi-ld` object list from the build):
+0 of the 165 edited asm .o are linked. The HONEST figure is **67.88% literal /
+69.02% real** (5,523 hardcoded, 5,238 real) -- matched exactly by counting .bin
+INCBIN'd by a LINKED src/data source.
+
+Corrections: reverted all 165 dead asm edits; `is_live_raw` now = "INCBIN'd by a
+linked src/data .c" (asm is never linked for residual data, so it can never fool
+the metric again). Real progress this session is the EFFECTIVE `_ref` de-pointering:
+~44% -> 67.88% (~4,031 pointers genuinely relocated, make compare green).
+
+LESSON: byte-exactness (make compare OK) does NOT prove a de-pointering is
+EFFECTIVE -- editing an excluded placeholder is a no-op that still passes. Verify
+effectiveness against the linker's actual object list, and gate the metric on the
+LINKED source, never on any file that merely exists. The asm-table tables remain
+to do via the CORRECT mechanism: rewrite the linked `src/data/<name>/<name>.c`
+sliced INCBIN sub-symbols (each gated by its own fe8u offsets).
