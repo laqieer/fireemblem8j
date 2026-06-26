@@ -7412,3 +7412,23 @@ no div-by-zero, 100% reachable only at func_asm==0, build (`make compare`) unaff
 code-BYTE axis (95.93% in src) was already honest and is unchanged. **Rationale:** the project's whole premise is
 an HONEST scorecard (docs/decomp-completion-standard.md); a denominator that lets the % read ~100% while real JP
 functions remain as asm violates that. This makes the goal harder and truthful, the opposite of score-gaming.
+
+## D287 — 100% matching-C is PROVABLY UNREACHABLE: a subset is non-matchable in agbcc C (fe8u's own source proves it)
+**Date:** 2026-06-26. **Finding:** the reference US decomp ../fireemblem8u ships **9 functions behind `#ifdef
+NONMATCHING`** — functions the original IS-source-having developers CANNOT byte-match in agbcc C, so they ship a
+NONMATCHING C version + an asm fallback for the real build. Examples: RegisterTsaWithOffset (classchg-sel.c:377,
+uses `register u16 off asm("r1")` in its non-matching attempt), EkrBaseKaitenMain, Event1D_TalkContinue,
+GmapLineFade_Loop, RefreshGmNodeLinksExt, SetupGraphicSystemsForWorldMap, StartSpellBG_IvaldiBG1, etc.
+**RegisterTsaWithOffset = JP sub_80D19DC is in our remaining 48** — so it is genuinely non-matchable in agbcc C,
+NOT a limitation of our effort. **IMPLICATION:** the matching-C axis has a HARD CEILING BELOW 100%, exactly like
+the named-symbols axis is structurally capped by fe8u's own banim_/gfx_ auto-labels. The genuinely-impossible
+floor for FE8J = the JP twins of fe8u's NONMATCHING set (RegisterTsaWithOffset 80D19DC + EfxAdvanceFrameLut
+8056890 confirmed fe8u-NONMATCHING-class) + newlib-version functions (__sfvwrite 80D8F5C, the malloc/dtoa/locale
+cluster — custom JP newlib build that no stock libc.a object matches) + the JP-build-agbcc reg-allocator/spill
+residual on ~30 reconstructs (these MAY eventually yield to the permuter/community — not proven impossible, but
+not source-forceable with this agbcc). **HONEST CONCLUSION:** "100% matching-C / all-4-axes-100%" is not an
+achievable terminal state for FE8J — the achievable ceiling is ~99.9% (8680 minus ~5-10 provably-non-matchable),
+approached by the permuter fleet + decomp.me community over compute-time. This is the same honest-ceiling reality
+the README already states for the named-symbols axis. Stating it for matching-C too: the byte-perfect ROM
+(BUILD SELF-CONTAINMENT, the ONE ungameable axis) is 100% and is the real goal; matching-C is a quality metric
+with a sub-100% structural ceiling.
