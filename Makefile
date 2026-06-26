@@ -74,6 +74,7 @@ src/sub_8085DDC.o: CC1FLAGS += -mjp-promote
 src/sub_80B3564.o: CC1FLAGS += -mjp-promote
 src/muctrl_0807C178.o: CC1FLAGS += -mjp-promote
 src/NewEfxDarkGradoOBJ01piece.o: CC1FLAGS += -mjp-promote
+src/StartSubSpell_efxNaglfarOBJ.o: CC1FLAGS += -mjp-promote
 src/NewEfxHitQuake.o: CC1FLAGS += -mjp-promote
 src/banim-ekrdragon-utils_08072974.o: CC1FLAGS += -mjp-promote
 src/banim-ekrgauge_08051FB8.o: CC1FLAGS += -mjp-promote

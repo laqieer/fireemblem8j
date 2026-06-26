@@ -1,0 +1,4 @@
+AnimScr_efxNaglfarOBJ_Table	080E3EC4	data	StartSubSpell_efxNaglfarOBJ scr table (NEEDS_ALIAS)
+gUnknown_080E3EF4	080E3EF4	data	StartSubSpell_efxNaglfarOBJ pos0 offset LUT (NEEDS_ALIAS)
+gUnknown_080E3F08	080E3F08	data	StartSubSpell_efxNaglfarOBJ pos1 offset LUT (NEEDS_ALIAS)
+ProcScr_efxNaglfarOBJ	08602888	data	StartSubSpell_efxNaglfarOBJ proc script (NEEDS_ALIAS)
