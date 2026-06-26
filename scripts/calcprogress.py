@@ -157,9 +157,14 @@ def nm(obj):
 # are NOT functions and must not be counted as still-asm function entries.
 GBADISASM_LABEL = re.compile(r"^_[0-9A-Fa-f]{6,8}$")
 
-
+# The GBA cartridge header (src/rom_header.s, like fe8u) labels each header DATA field
+# -- RomHeaderNintendoLogo (the logo bytes), RomHeaderGameTitle/GameCode/MakerCode,
+# RomHeaderChecksum, ... -- all of which are `.byte`/`.ascii`/`.space` DATA, not
+# functions. Only `Init` (the `b crt0` entry stub) is a real function there. Exclude
+# the `RomHeader*` data labels from the function census so the count is stable whether
+# the header lives in asm/ or src/ (and never inflates the matching-C denominator).
 def internal(name):
-    return (name.startswith((".", "$", "__")) or name == "gcc2_compiled."
+    return (name.startswith((".", "$", "__", "RomHeader")) or name == "gcc2_compiled."
             or GBADISASM_LABEL.match(name) is not None)
 
 
