@@ -303,15 +303,23 @@ out.append(f"4. NAMED SYMBOLS          : {named_pct:6.2f}%  "
 # headlines (full % via `audit_pointers.py --metrics`).
 import subprocess as _sp, glob as _glob
 def _shiftability_headline():
+    """Returns (literal_raw_count, completion_gate). The literal raw-0x08xxxxxx count
+    is NOT the completion invariant (it is dominated by coincidental constants that can
+    never be relocated -- D304); the GATE (fe8u-confirmed-real + unclassified real-
+    pointer debt, via --true-debt) is the honest target-0 number."""
+    literal = gate = None
     try:
         o = _sp.run([sys.executable, os.path.join(os.path.dirname(__file__),
-                     "audit_pointers.py")], capture_output=True, text=True, timeout=120).stdout
+                     "audit_pointers.py"), "--true-debt"],
+                    capture_output=True, text=True, timeout=300).stdout
         for ln in o.splitlines():
             if "un-relocated ROM-pointer words remaining" in ln:
-                return int(ln.split(":")[1].strip())
+                literal = int(ln.split(":")[1].strip())
+            elif "COMPLETION GATE" in ln:
+                gate = int(ln.split(":")[1].strip())
     except Exception:
         pass
-    return None
+    return literal, gate
 def _opaque_data_bytes():
     GFX = ("Map","Tile","Object","Chr","Pal","Gfx","Img","Sprite","Anim","OBJ","_gf","Reel","Portrait","Icon")
     opaque = struct_b = 0
@@ -326,12 +334,16 @@ def _opaque_data_bytes():
         if not any(k in os.path.basename(binp) for k in GFX):
             struct_b += sz
     return opaque, struct_b
-_unreloc = _shiftability_headline()
+_unreloc, _gate = _shiftability_headline()
 _opaque, _struct_opaque = _opaque_data_bytes()
-if _unreloc is not None:
-    out.append(f"5. SHIFTABILITY (data ptrs): {('0 hardcoded' if _unreloc==0 else str(_unreloc)+' hardcoded'):>13}  "
-               f"absolute ROM pointers still in raw data  -> target 0 "
-               f"(full % via audit_pointers.py --metrics)")
+if _gate is not None:
+    out.append(f"5. SHIFTABILITY (data ptrs): gate {('0' if _gate==0 else str(_gate)):>5} real/unclassified "
+               f"data pointers un-relocated  -> target 0  "
+               f"({_unreloc} raw 0x08xxxxxx words incl. coincidental constants; "
+               f"details via audit_pointers.py --true-debt --gate)")
+elif _unreloc is not None:
+    out.append(f"5. SHIFTABILITY (data ptrs): {('0 hardcoded' if _unreloc==0 else str(_unreloc)+' raw'):>13}  "
+               f"raw 0x08xxxxxx words (gate via audit_pointers.py --true-debt)")
 out.append(f"6. ASSET EDITABILITY      : {_struct_opaque} bytes of structured data still opaque "
            f"raw-incbin (of {_opaque} total)  -> target 0 (typed C); graphics .bin exempt")
 out.append("The #1 number is the only ungameable one: remove baserom.gba and see "
