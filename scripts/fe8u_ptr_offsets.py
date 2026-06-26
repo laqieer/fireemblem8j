@@ -113,6 +113,70 @@ def ptr_offsets(name):
     offs = _obj_ptr_offsets(info[0]).get(name)
     return offs if offs else None
 
+# --- address-based mapping: un-named JP data_<addr> blobs -> fe8u via region shift ---
+_US_IDX = None
+def _load_us_index():
+    """(sorted US addrs, addr->name from fe8u.elf, JP->US shift anchors)."""
+    global _US_IDX
+    if _US_IDX is not None:
+        return _US_IDX
+    elf = subprocess.run(["arm-none-eabi-nm", os.path.join(FE8U, "fireemblem8.elf")],
+                         capture_output=True, text=True, errors="replace").stdout
+    a2n = {}
+    for l in elf.splitlines():
+        p = l.split()
+        if len(p) == 3:
+            try:
+                ad = int(p[0], 16)
+            except ValueError:
+                continue
+            if ROM_LO <= ad < ROM_HI:
+                a2n.setdefault(ad, p[2])
+    addrs = sorted(a2n)
+    anchors = []
+    fm = os.path.join(ROOT, "layout", "us_jp_funcmap.tsv")
+    if os.path.exists(fm):
+        for l in open(fm, errors="replace"):
+            if l.startswith("#"):
+                continue
+            p = l.split("\t")
+            if len(p) >= 2:
+                try:
+                    anchors.append((int(p[0], 16), int(p[1], 16)))
+                except ValueError:
+                    pass
+    anchors.sort()
+    _US_IDX = (addrs, a2n, anchors, [a for a, _ in anchors])
+    return _US_IDX
+
+def ptr_offsets_at_jp(jp_addr, blob_len):
+    """For an un-named blob at JP `jp_addr` of `blob_len` bytes, return the pointer
+    byte-offsets (relative to the blob) that fe8u relocates -- by shifting to the US
+    address (nearest us_jp_funcmap anchor) and reading the covering fe8u symbol's
+    relocations. Returns None if no clean mapping. Caller MUST self-validate by
+    checking the JP blob's ROM-range words actually sit at these offsets (a wrong
+    region shift yields non-aligned offsets -> skip)."""
+    import bisect as _bi
+    addrs, a2n, anchors, ajp = _load_us_index()
+    if not anchors:
+        return None
+    i = _bi.bisect_right(ajp, jp_addr) - 1
+    if i < 0:
+        return None
+    shift = anchors[i][1] - anchors[i][0]
+    us = jp_addr + shift
+    j = _bi.bisect_right(addrs, us) - 1
+    if j < 0:
+        return None
+    sym_us = addrs[j]
+    name = a2n[sym_us]
+    offs = ptr_offsets(name)
+    if not offs:
+        return None
+    base = us - sym_us            # blob's offset within the fe8u symbol
+    rel = [o - base for o in offs if 0 <= o - base < blob_len]
+    return rel if rel else None
+
 def jp_converted_offsets(name):
     """Offsets the JP repointer would convert = ROM-range words in the .bin."""
     binp = os.path.join(ROOT, "data", "residual", name + ".bin")

@@ -314,7 +314,32 @@ def fe8u_allowed(name):
     except Exception:
         fe = None
     if not fe:
-        return None
+        # un-named generic blob: try the address mapping (data_<JPaddr>), gated by
+        # a STRICT self-validation -- every JP ROM-range word must sit at a fe8u
+        # offset (a wrong region shift or JP divergence fails this -> skip).
+        m = re.match(r"^(?:data|gUnkData|gap)_([0-9A-Fa-f]{6,8})$", name)
+        if not m:
+            return None
+        jp = int(m.group(1), 16)
+        binp = os.path.join(RESID, name + ".bin")
+        if not os.path.exists(binp):
+            return None
+        b = open(binp, "rb").read()
+        rom = [i * 4 for i in range(len(b) // 4)
+               if ROM_LO <= struct.unpack_from("<I", b, i * 4)[0] < ROM_HI]
+        try:
+            rel = _F.ptr_offsets_at_jp(jp, len(b))
+        except Exception:
+            rel = None
+        if not rel:
+            return None
+        relset = set(rel)
+        # SAFETY: require FULL alignment -- every JP pointer-shaped word is a fe8u
+        # pointer slot. Confirms the region shift is exactly right and there are no
+        # coincidental constants at non-pointer offsets. Else skip (return None).
+        if not rom or any(o not in relset for o in rom):
+            return None
+        return lambda O: O in relset
     feset = set(fe)
     S, subs = derive_stride(fe)
     last = fe[-1]

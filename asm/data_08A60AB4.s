@@ -9,4 +9,12 @@
 	.section .data.residue.08A60AB4, "a", %progbits
 	.global EventScr_WholeTowerClear
 EventScr_WholeTowerClear:
-	.incbin "data/residual/data_08A60AB4.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=3 data=5 skip=0
+	.4byte 0x00000D40
+	.4byte DisplayCongratulationsMapAnim + 0x1
+	.4byte 0x00000D40
+	.4byte sub_8038320 + 0x1
+	.4byte 0x00000D40
+	.4byte UnlockPostgameAllyByClearCount + 0x1
+	.4byte 0xFFFF2A21
+	.4byte 0x00000120

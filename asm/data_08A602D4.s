@@ -9,4 +9,11 @@
 	.section .data.residue.08A602D4, "a", %progbits
 	.global EventScr_UnTriggerIfNotUnit
 EventScr_UnTriggerIfNotUnit:
-	.incbin "data/residual/data_08A602D4.bin"
+	@ de-pointered (scripts/repoint_table.py): ptr=1 data=6 skip=0
+	.4byte 0x00002E21
+	.4byte 0x00000C40
+	.4byte 0x0002000C
+	.4byte 0x00000A40
+	.4byte UnitDef_Ch14BAlly_7 + 0x1C
+	.4byte 0x00000820
+	.4byte 0x00000120

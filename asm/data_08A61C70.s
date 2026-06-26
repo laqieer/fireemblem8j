@@ -223,7 +223,74 @@ EventScr_Ch1_Loca_Visit1:
 	.section .data.residue.08A61CDC, "a", %progbits
 	.global EventScr_Ch1_Loca_Visit2
 EventScr_Ch1_Loca_Visit2:
-	.incbin "data/residual/data_08A61C70.bin", 0x6C, 0x28
+	@ de-pointered (scripts/repoint_table.py): ptr=2 data=58 skip=7
+	.4byte 0x00001520
+	.4byte 0x00001A20
+	.4byte 0x08FA1B20
+	.4byte 0x00001D20
+	.4byte 0x00001B22
+	.4byte 0x00001521
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00001520
+	.4byte 0x00001A20
+	.4byte 0x08F91B20
+	.4byte 0x00001D20
+	.4byte 0x00001B22
+	.4byte 0x00001521
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00001120
+	.4byte 0x00001520
+	.4byte 0x00020540
+	.4byte 0x00000000
+	.4byte 0x00030540
+	.4byte 0x000008FB
+	.4byte 0x00000A40
+	.4byte 0x08A60448
+	.4byte 0x00001521
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00001520
+	.4byte 0x00020540
+	.4byte 0x00000000
+	.4byte 0x00030540
+	.4byte 0x000008FC
+	.4byte 0x00000A40
+	.4byte 0x08A60448
+	.4byte 0x00001521
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00020540
+	.4byte 0x00000001
+	.4byte 0x00000A40
+	.4byte EventScr_UnTriggerIfNotUnit
+	.4byte 0x000B0221
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00001520
+	.4byte 0x00020540
+	.4byte UnitDef_Event_Ch1EnemyReinforce
+	.4byte 0x00000A40
+	.4byte 0x08A603AC
+	.4byte 0x00833B21
+	.4byte 0x003C0E20
+	.4byte 0x00003B22
+	.4byte 0x00001A20
+	.4byte 0x08F41B20
+	.4byte 0x00001D20
+	.4byte 0x00001B22
+	.4byte 0x00001521
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00001A23
+	.4byte 0x000B0540
+	.4byte 0xFFFFFFFF
+	.4byte 0x08FD1B20
+	.4byte 0x00001D20
+	.4byte 0x00001B22
+	.4byte 0x00BA0229
+	.4byte 0x00000120
 
 	.section .data.residue.08A61D04, "a", %progbits
 	.global EventScr_Ch1_Misc_Area
