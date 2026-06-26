@@ -7708,3 +7708,49 @@ This bounds the realistic routes to 100% for the remaining 31:
 Neither is a single-session lever. Honest state remains 99.64% (8649/8680).
 The scratches stay posted/owned for any contributor who clones this repo's agbcc; the
 broken-on-stock state is inherent to the toolchain mismatch, not a posting error.
+
+## D296 — SHIFTABILITY is decomp axis #5; de-pointer all raw-incbin tables via (u32)&sym (2026-06-26)
+
+**Fork raised by the project owner:** carved data kept as raw `.bin`/INCBIN bakes in absolute
+0x08xxxxxx ROM pointers the linker cannot relocate. On any rebuild that shifts a section, those
+pointers dangle → the game jumps to garbage. A byte-perfect ROM is necessary but NOT sufficient;
+a real decomp must be SHIFTABLE (every dereferenced pointer is a symbol reference) and EDITABLE
+(logic data as typed C, not opaque blobs). The legacy "EXTRACTED DATA = 100%" axis counts named
+.incbin as done and is blind to both.
+
+**Audit (ungameable, scripts/audit_pointers.py):** 12,248 hardcoded ROM-pointer words across 1,231
+live residual .bin, **0 DANGLING** — every pointer target already has an ELF symbol. So the whole
+de-pointering program is MECHANICAL, not RE: 3,167 EXACT (point at a symbol boundary) +
+9,081 INTERIOR (point inside a known object → `sym + offset`). Shiftability today = 7,639 relocated
+/ 19,834 total data pointers = **38.51%**. Asset-editability debt = 1.06 MB opaque raw-incbin, of
+which 759 KB is structured/logic data that should be typed C (303 KB is legit graphics binary).
+
+**Decision — approach (validated end-to-end, not assumed):** rewrite each residual `_ref` .c from
+`INCBIN_U8("…bin")` into `const u32 NAME[] = { (u32)&Sym (+0xOFF), … }`. agbcc lowers `(u32)&sym`
+to a `.word sym` relocation, so the output is BYTE-IDENTICAL to baserom (make compare stays OK)
+yet fully relocated by the linker. Only the .c *content* changes — ldscript/section/symbol/object
+path are untouched, so no build wiring moves. Proven on gWMPathData (53 ptrs → named
+gWorldmapPath_*/Sprite_* refs; make compare OK; self-contained 100%; auditor 12,248 → 12,195).
+Function pointers resolve correctly: FE8 stores them odd (thumb bit set) and ld sets bit 0 of a
+Thumb STT_FUNC symbol, so `(u32)&func` reproduces the odd address. `make compare` is the byte-exact
+safety net for every table.
+
+**Coincidental-constant risk + mitigation:** the only failure mode make compare does NOT catch is a
+non-pointer struct field whose value is coincidentally in [0x08000000,0x09000000) — byte-exact now,
+but would shift wrongly later. Mitigation tiers: (1) PURE pointer tables (every word ROM-range) =
+zero risk, auto-repoint freely; (2) STRUCT arrays = cross-reference fe8u's typed definition (the
+owner's "check fe8u" directive) to convert only the known pointer field offsets; (3) heuristic
+guard — an EXACT-resolving word is essentially always a real pointer (constants don't hit symbol
+boundaries); (4) the repointer reports converted slots for verifier/fe8u review before banking
+struct tables. Naming is DECOUPLED: shiftability references whatever symbol exists at the target
+(even data_08XXXXXX); pretty names improve axis #4 separately.
+
+**Metrics (per owner request, now tracked):** axis #5 SHIFTABILITY and #6 ASSET EDITABILITY in
+scripts/calcprogress.py (fast headlines) + scripts/audit_pointers.py --metrics (full %). Both
+ungameable: target 0 hardcoded pointers, 0 opaque structured blobs. README scorecard updated.
+
+**Next phase:** fan out the de-pointering. Track A (safe/auto): pure pointer tables + function-
+pointer LUTs via repoint_table.py, batched, make-compare-gated, orphaned .bin pruned. Track B
+(fe8u-structured): struct arrays + event/proc data ported from fe8u typed defs (also retires the
+editability debt + improves naming). Single integrator owns the make-compare oracle; workers carve
+in isolation. JP divergence to handle: text-ID offsets + localized UI tables.
