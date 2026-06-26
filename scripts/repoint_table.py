@@ -49,6 +49,27 @@ def stt_func_names():
         _STT_FUNC = s
     return _STT_FUNC
 
+_THUMB_MAP = None
+def is_thumb_addr(addr):
+    """Is code at `addr` Thumb? From the ARM/Thumb mapping symbols ($t/$a): the
+    nearest mapping symbol at-or-below addr decides. ld ORs the Thumb bit into a
+    .4byte reloc only for a THUMB STT_FUNC, so we need this to emit the right form."""
+    global _THUMB_MAP
+    if _THUMB_MAP is None:
+        out = subprocess.run(["arm-none-eabi-readelf", "--syms", "--wide", ELF],
+                             capture_output=True, text=True, errors="replace").stdout
+        m = []
+        for line in out.splitlines():
+            p = line.split()
+            if len(p) >= 8 and p[7] in ("$t", "$a"):
+                try: m.append((int(p[1], 16), p[7] == "$t"))
+                except ValueError: pass
+        m.sort()
+        _THUMB_MAP = (m, [a for a, _ in m])
+    mp, keys = _THUMB_MAP
+    i = bisect.bisect_right(keys, addr) - 1
+    return mp[i][1] if i >= 0 else True   # default Thumb (most FE8 code is Thumb)
+
 def load_syms():
     """addr-sorted symbols from the linked ELF, with size and 'is-function'."""
     out = subprocess.check_output(
@@ -237,7 +258,14 @@ def emit_words_bytes(b, addrs, by_addr, safe_only=False, allowed=None):
             # symbols mistyped 'T' by nm are correctly NON-func via STT, so they DO
             # convert here -- the win: even-valued data pointers no longer over-skip.)
             if is_func:
-                out.append(".4byte 0x%08X" % v); nskip += 1; continue
+                # genuine STT_FUNC. ld ORs the Thumb bit for a THUMB function
+                # (.4byte func -> funcaddr|1) but NOT for ARM. Emit the addend that
+                # reproduces v: Thumb -> off-1 (since funcaddr|1 = funcaddr+1), ARM -> off.
+                a = (off - 1) if is_thumb_addr(v - off) else off
+                if a == 0:   out.append(".4byte %s" % sym)
+                elif a > 0:  out.append(".4byte %s + 0x%X" % (sym, a))
+                else:        out.append(".4byte %s - 0x%X" % (sym, -a))
+                nptr += 1; continue
             out.append(".4byte %s + 0x%X" % (sym, off) if off else ".4byte %s" % sym)
             nptr += 1
         else:
