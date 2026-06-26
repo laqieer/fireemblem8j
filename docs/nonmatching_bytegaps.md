@@ -31,3 +31,34 @@ has cracked none, corroborating.
 decomp.me community. The 22 still-asm without a base are big region-different
 reconstructions (e.g. `sub_8057F80`/PrepareBattleGraphicsMaybe = 2936 B) or have a live
 permuter. See [`frontier.md`](frontier.md).
+
+## Live permuter best-score state (2026-06-26, from `nonmatchings/<fn>/output-<score>-*`)
+
+decomp-permuter objective units (compile+byte-objective; **0 = match**, lower = closer).
+These are the closest-first priority for permuter compute / manual mining. **Verified
+no unintegrated matches** — the only score-0 logs (CheckCanSummon, ComputeBattleUnitAttack,
+PutWMFaceOnBg) are already carved to `src/`.
+
+| still-asm fn | best score | note |
+|---|---|---|
+| Event0F_CounterOps | **75** | closest; plateaued 75 over 753K+ iters = cross-jump ceiling (the score-75 best already applied the drop-`do/while(0)`+split-`+1` mining mutations — source-mutation-invariant residual) |
+| PutFaceOnBackGround | 105 | "tried 60+ forms" ceiling |
+| AddAttr2dBitMap | 120 | |
+| AdjustNewUnitPosition | 185 | reg-coloring ceiling (iy/ix/yCur rotation, source-reorder-invariant) |
+| sub_80D17C8 | 255 | |
+| sub_80A3300 | 315 | |
+| sub_80A730C | 360 | |
+| sub_80BB240 | 540 | |
+| Event18_ColorFade | 780 | |
+| sub_8084CE4 | 795 | (the "8-byte" header claim is wrong) |
+| sub_80BCD74 | 990 | |
+| sub_80A6E4C | 1440 | |
+| sub_80CAEF4 | 2555 | |
+| sub_80A3528 | 2590 | |
+| sub_80A2E64 | 4045 | |
+| sub_80A73D4 | 4835 | |
+| sub_800A34C | 10155 | far (matches the 536/584 byte measurement) |
+
+**Takeaway:** even the closest (Event0F_CounterOps=75) is a plateaued ceiling after
+hundreds of thousands of permuter iterations — the remainder is genuine agbcc codegen
+ceilings, not unexplored levers. Progress is wall-clock permuter time + community.
