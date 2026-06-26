@@ -1,0 +1,2 @@
+0D7C98	0D8AEC	*libc.a:dtoa.o(.text)	dtoa.o lib-link: quorem + _dtoa_r (newlib; deps via mprec.o/dp-bit.o)
+577430	577442	*libc.a:dtoa.o(.rodata)	dtoa.o .rodata: "Infinity"/"NaN"/"0" strings

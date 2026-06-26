@@ -1,3 +1,4 @@
-# carve_incbin_residue.py descriptive residue incbin (split around locale.o(.rodata))
-57742E	577444	src/data/data_0857742E/data_0857742E.o(.data.residue.0857742E)	residue head (Infinity/NaN strings, 22 B)
-57747E	577480	src/data/data_0857742E/data_0857742E.o(.data.residue.0857747E)	residue tail (2 B, after locale.o .rodata)
+# residue decomposed around dtoa.o(.rodata)@0x577430 + locale.o(.rodata)@0x577444
+57742E	577430	src/data/data_0857742E/data_0857742E.o(.data.residue.0857742E)	residue gap (2 B)
+577442	577444	src/data/data_0857742E/data_0857742E.o(.data.residue.08577442)	residue gap (2 B)
+57747E	577480	src/data/data_0857742E/data_0857742E.o(.data.residue.0857747E)	residue gap (2 B, after locale.o .rodata)
