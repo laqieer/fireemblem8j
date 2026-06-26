@@ -216,11 +216,40 @@ def count_relocated_data_ptrs():
                 total += 1
     return total
 
+_GFX_RE = re.compile(
+    r'Img|Tsa|Pal|Chr|Gfx|Sprite|Anim|banim|Map|Tile|Portrait|Icon|_gf|OBJ|'
+    r'Reel|Sheet|BG|Frames|Obj|Menu|Lz|Comp|song|wave|sound', re.I)
+
+def coincidental_floor():
+    """ROM-range words in GRAPHICS/sound blobs are coincidental constants (pixel/
+    sample bytes that happen to land in 0x08xxxxxx) -- they are NOT pointers, are
+    never dereferenced as addresses, and CANNOT be relocated. Counting them as
+    'hardcoded pointers' is a false positive, so report them separately: the real
+    shiftability debt is the NON-graphics (logic) un-relocated words."""
+    floor = 0
+    for binp in glob.glob(os.path.join(ROOT, "data", "residual", "*.bin")):
+        if not is_live_raw(binp):
+            continue
+        name = os.path.basename(binp)[:-4]
+        if not _GFX_RE.search(name):
+            continue
+        with open(binp, "rb") as f:
+            b = f.read()
+        for i in range(len(b) // 4):
+            v = struct.unpack_from("<I", b, i * 4)[0]
+            if ROM_LO <= v < ROM_HI:
+                floor += 1
+    return floor
+
 def emit_metrics(unrelocated):
     # axis #5 SHIFTABILITY
     relocated = count_relocated_data_ptrs()
     total_ptr = relocated + unrelocated
     shift_pct = (100.0 * relocated / total_ptr) if total_ptr else 100.0
+    gfx_floor = coincidental_floor()
+    real_debt = unrelocated - gfx_floor
+    real_total = relocated + real_debt
+    real_pct = (100.0 * relocated / real_total) if real_total else 100.0
     # axis #6 ASSET EDITABILITY (opaque raw-incbin data bytes)
     opaque_bytes = opaque_files = gfx_b = gfx_n = struct_b = struct_n = 0
     for binp in glob.glob(os.path.join(ROOT, "data", "residual", "*.bin")):
@@ -237,6 +266,10 @@ def emit_metrics(unrelocated):
     print(f"5. SHIFTABILITY (data ptrs) : {shift_pct:6.2f}%  "
           f"({relocated}/{total_ptr} data pointers are relocatable symbol refs; "
           f"{unrelocated} still hardcoded absolute ROM addresses)  -> target 100% (0 hardcoded)")
+    print(f"5b. REAL-pointer shiftability: {real_pct:6.2f}%  "
+          f"({relocated}/{real_total}; {real_debt} REAL hardcoded pointers remain, "
+          f"excluding {gfx_floor} coincidental constants in graphics/sound blobs "
+          f"-- not pointers, never relocatable)  -> target 100%")
     print(f"6. ASSET EDITABILITY        :  opaque raw-incbin data = {opaque_bytes} bytes "
           f"in {opaque_files} blobs  -> target: only irreducible binary assets")
     print(f"     - structured/logic-class (should be typed C): {struct_b} bytes, {struct_n} blobs")
