@@ -1,1 +1,1 @@
-016DD4	016DFC	asm/stranded_bmitem.o(.text.s_08016DD4)	bmitem:GetUnitItemSlot region-same Thumb (descriptive incbin)
+016DD4	016DFC	src/GetUnitItemSlot.o(.text)	bmitem:GetUnitItemSlot (region-same, handdecomp from fe8u bmitem.c)
