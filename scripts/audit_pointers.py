@@ -338,6 +338,7 @@ def emit_true_debt():
     # sliced sub-symbol's .data.residue.<ADDR> section, or a data_<addr> name) and
     # ask fe8u whether it relocates there. Precise (spans symbol boundaries).
     real = coinc = bunk = 0
+    realhits = []  # (name, off, jp) of fe8u-confirmed-real still-raw words
     for b in glob.glob(os.path.join(ROOT, "data", "residual", "*.bin")):
         if not is_live_raw(b): continue
         name = os.path.basename(b)[:-4]
@@ -345,7 +346,13 @@ def emit_true_debt():
         d = open(b, "rb").read()
         slices = smap.get(name + ".bin")
         nm = _re.match(r'(?:data|gUnkData|gap)_([0-9A-Fa-f]{6,8})$', name)
+        # match the main scan's word set: only bytes STILL INCBIN'd (raw)
+        rngs = incbin_ranges(os.path.basename(b))
+        def _is_raw(off, _r=rngs):
+            if _r == "WHOLE" or _r is None: return True
+            return any(o <= off < o + ln for (o, ln) in _r)
         for i in range(len(d) // 4):
+            if not _is_raw(i * 4): continue
             v = struct.unpack_from("<I", d, i * 4)[0]
             if not (ROM_LO <= v < ROM_HI): continue
             O = i * 4; jp = None
@@ -359,9 +366,13 @@ def emit_true_debt():
             elif nm:
                 jp = int(nm.group(1), 16) + O
             r = F.fe8u_ptr_at_jp(jp) if jp is not None else None
-            if r is True: real += 1
+            if r is True: real += 1; realhits.append((name, O, jp))
             elif r is False: coinc += 1
             else: bunk += 1
+    if "--list-real" in sys.argv:
+        print("== fe8u-confirmed REAL still-raw words (convertible) ==")
+        for (n, O, jp) in realhits:
+            print(f"  {n}  off={O}  jp=0x{jp:08X}")
     bcoinc = coinc
     true_debt = real + bunk
     print("== TRUE real-pointer debt (fe8u per-word classification) ==")

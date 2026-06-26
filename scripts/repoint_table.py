@@ -307,17 +307,20 @@ def emit_c(name, binp, section, addrs, by_addr, safe_only=False, allowed=None):
     c.append("")
     return "\n".join(c), stats
 
+# off/len may be HEX (0x74) or decimal -- parse both with int(x, 0). An earlier
+# decimal-only \d+ silently never matched the hex-offset sliced tables (a whole class).
+_NUM = r'(?:0[xX][0-9A-Fa-f]+|\d+)'
 _SLICE_RE = re.compile(
     r'(?P<indent>[ \t]*)(?:const\s+)?u8\s+(?P<sym>\w+)\s*\[\s*\]\s*'
     r'__attribute__\(\(section\("(?P<sec>[^"]+)"\)\)\)\s*=\s*'
     r'INCBIN_U8\("data/residual/(?P<bin>[A-Za-z0-9_.]+\.bin)"'
-    r'(?:\s*,\s*(?P<off>\d+)\s*,\s*(?P<len>\d+))?\)\s*;')
+    r'(?:\s*,\s*(?P<off>' + _NUM + r')\s*,\s*(?P<len>' + _NUM + r'))?\)\s*;')
 
 # alternate wiring: SECTION(".rodata.X") [const] u8 NAME[] = INCBIN_U8("...bin"[,off,len]);
 _SECTION_RE = re.compile(
     r'(?P<indent>[ \t]*)SECTION\("(?P<sec>[^"]+)"\)\s*(?:const\s+)?u8\s+(?P<sym>\w+)\s*\[\s*\]\s*=\s*'
     r'INCBIN_U8\("data/residual/(?P<bin>[A-Za-z0-9_.]+\.bin)"'
-    r'(?:\s*,\s*(?P<off>\d+)\s*,\s*(?P<len>\d+))?\)\s*;')
+    r'(?:\s*,\s*(?P<off>' + _NUM + r')\s*,\s*(?P<len>' + _NUM + r'))?\)\s*;')
 
 def fe8u_allowed_slice(sym, sec, slice_bytes):
     """Gate for a sliced sub-symbol: fe8u offsets by NAME, else by the JP address
@@ -344,12 +347,17 @@ def fe8u_allowed_slice(sym, sec, slice_bytes):
     # PER-WORD oracle: does fe8u relocate the word at (jp + O)? More precise than the
     # per-slice offset set (a slice can span a fe8u symbol boundary -> missed ptrs).
     import fe8u_ptr_offsets as _F
+    # Per-word fe8u confirmation IS the corroboration: a word converts only if BOTH
+    # fe8u relocates at its mapped JP addr (this oracle) AND its value resolves to a
+    # real JP ELF symbol (emit_words_bytes gate) -- two independent signals. make
+    # compare gates byte-exactness. This matches the auditor's own "convertible"
+    # definition (audit_pointers --true-debt uses the same fe8u_ptr_at_jp per word),
+    # closing the converter<->auditor gap of 107 stranded real pointers. The earlier
+    # >=3-per-slice threshold was an over-conservative heuristic, not a correctness
+    # requirement; it stranded real pointers in low-corroboration (short / mixed) slices.
     ptr_offs = set(O for O in rom if _F.fe8u_ptr_at_jp(jp + O) is True)
-    ok = set(O for O in rom if _F.fe8u_ptr_at_jp_strict(jp + O) is True)
-    if len(ptr_offs) >= 3 or (ptr_offs and len(ptr_offs) == len(rom)):
-        ok |= ptr_offs
-    if ok:
-        return lambda O: O in ok
+    if ptr_offs:
+        return lambda O: O in ptr_offs
     return None
 
 def rewrite_src_slices(cf, addrs, by_addr, check=False):
@@ -367,8 +375,8 @@ def rewrite_src_slices(cf, addrs, by_addr, check=False):
         if not os.path.exists(binp):
             return m.group(0)
         b = open(binp, "rb").read()
-        off = int(m.group("off")) if m.group("off") else 0
-        ln = int(m.group("len")) if m.group("len") else len(b) - off
+        off = int(m.group("off"), 0) if m.group("off") else 0
+        ln = int(m.group("len"), 0) if m.group("len") else len(b) - off
         sl = b[off:off + ln]
         # emit_words_bytes handles non-4-aligned tails (.byte); no skip needed.
         allowed = fe8u_allowed_slice(sym, sec, sl)
