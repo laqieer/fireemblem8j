@@ -7432,3 +7432,21 @@ approached by the permuter fleet + decomp.me community over compute-time. This i
 the README already states for the named-symbols axis. Stating it for matching-C too: the byte-perfect ROM
 (BUILD SELF-CONTAINMENT, the ONE ungameable axis) is 100% and is the real goal; matching-C is a quality metric
 with a sub-100% structural ceiling.
+
+## D287-CORRECTION — RegisterTsaWithOffset IS matchable (6-byte NEAR); D287's specific claim was a mis-read
+**Date:** 2026-06-26. **Correction:** D287 claimed RegisterTsaWithOffset (JP sub_80D19DC) is non-matchable
+because fe8u "ships it with #ifdef NONMATCHING" — that was a GREP MIS-ATTRIBUTION. The `#ifdef NONMATCHING` at
+classchg-sel.c:377 belongs to a DIFFERENT, later function; RegisterTsaWithOffset itself (lines 156-178) is clean
+matching C (a TSA blit loop). Porting it to JP: with the correct struct (Struct_8A30978 = {u8 a; u8 b; u16
+longBuffer[0x4B2]}, longBuffer at +2) + -mjp-promote it is SIZE-EXACT, and source idioms reduce the residual
+18 -> 9 (dst=_dst+i*32 BEFORE j=jrange) -> 6 (register u16 *src asm("r4")). The final 6-byte residual is a clean
+i/dst r2<->r3 swap that pins cascade on — pure permuter territory; launched on the fleet (nonmatchings/
+RegisterTsaWithOffset, base near-match staged). So it is a 6-byte NEAR, NOT impossible. **The ACTUAL fe8u
+#ifdef-NONMATCHING functions are:** EkrMyr_WaitForReturnEnd, Event1B_TEXTSHOW, GenerateRandomonsterMergeConf,
+GmapLineFade_Init, LoadBattleSpritesForBranchScreen, NewEkrBaseKaiten, RemoveGmPath, WorldMap_MuWalkLoop,
+efxIvaldi_Loop_Main — of these the JP twins LoadBattleSpritesForBranchScreen (sub_80D1D1C), Event1B_TEXTSHOW
+(sub_800E5CC), efxIvaldi_Loop_Main are in our remaining set and ARE genuinely non-matchable in agbcc C (the
+provable floor). **Net:** the genuinely-impossible floor is SMALLER than D287 implied (~3-5 fe8u-NONMATCHING JP
+twins + the custom-newlib cluster), and several functions I'd written off (RegisterTsaWithOffset = 6 bytes) are
+close NEARs the fleet can crack. LESSON: verify which function a #ifdef guard wraps before declaring a function
+impossible — don't trust grep proximity.
