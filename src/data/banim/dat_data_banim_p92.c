@@ -13,10 +13,10 @@ SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_47[] 
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_48[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_48.bin");
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_49[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_49.bin");
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_50[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_50.bin");
-SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_51[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_51.bin");
-SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_52[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_52.bin");
+SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_51[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Front_51.4bpp");
+SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_52[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Front_52.4bpp");
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_53[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_53.bin");
-SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_54[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_54.bin");
+SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_54[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Front_54.4bpp");
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_55[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_55.bin");
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_56[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_56.bin");
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_57[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_57.bin");
