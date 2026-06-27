@@ -444,6 +444,13 @@ def emit_true_debt():
     # (real, but belong to the CODE-decompilation axis -- they relocate when the
     # surrounding Thumb function is decompiled, not via data de-pointering).
     code_re = _re.compile(r'^gap_|^pad_')
+    # blobs POSITIVELY identified as graphics/tilemap (fe8u annotation + JP usage) whose
+    # name doesn't match the gfx regex -> their 0x08xxxxxx words are coincidental pixel/
+    # tile constants, same as any Img_/Chr_ blob. Evidence per blob:
+    #   gUnkData_85, gUnkData_91 : fe8u variables.h annotates `// gfx`
+    #   gUnkData_47             : chapter-title background gfx (PutChapterTitleBGAlt)
+    #   gUnkData_26             : tilemap -- CallARM_FillTileRect(gBG2TilemapBuffer, .., ..)
+    GFX_BLOBS = {"gUnkData_85", "gUnkData_91", "gUnkData_47", "gUnkData_26"}
     # struct UnitDefinition (stride 0x14) has exactly ONE pointer: redas @ 0x08. A
     # ROM-range word in a UnitDef_* table at any other offset (mod 0x14) is a packed
     # field (pid/jid/bitfield/coords/items/ai) that coincidentally reads 0x08xxxxxx --
@@ -468,6 +475,7 @@ def emit_true_debt():
         elif sym in _fn and off == 1: blind_data += 1; real_data.append((n, O, v, sym, off))
         elif sym in _fn: blind_func += 1
         elif asset_re.search(sym): blind_asset += 1
+        elif n in GFX_BLOBS: blind_asset += 1   # word in a fe8u-confirmed gfx/tilemap blob
         elif code_re.search(n): blind_code += 1
         else: blind_data += 1; real_data.append((n, O, v, sym, off))
     struct_coinc = coinc + blind_func + blind_asset + blind_hdr + blind_udef
