@@ -485,8 +485,16 @@ def emit_true_debt():
         elif code_re.search(n): blind_code += 1
         else: blind_data += 1; real_data.append((n, O, v, sym, off))
     struct_coinc = coinc + blind_func + blind_asset + blind_hdr + blind_udef
+    # BLIND SPOT (found 2026-06-27): raw `.4byte 0x08xxxxxx` literals stuck in already-
+    # de-pointered __asm__ blocks are NOT in any live .bin range, so the loop above never
+    # saw them. Scan src/ for them and classify structurally (no fe8u: per-literal JP addr
+    # is involved). NB this still cannot see pointers inside COMPRESSED data (Huffman text,
+    # LZ77 banim/gfx) -- those need decompression+typed-asset extraction, see D306.
+    stuck_real, stuck_coinc = _scan_stuck_asm_literals(elfaddrs, _a2n, _a2s, _fn, asset_re,
+                                                       romhdr_re)
+    struct_coinc += stuck_coinc
     # completion gate: confirmed-real + unclassified DATA-pointer debt (code-axis excluded)
-    gate = real + blind_data + blind_exact + blind_unres
+    gate = real + blind_data + blind_exact + blind_unres + len(stuck_real)
     print("== SHIFTABILITY true debt (fe8u oracle + structural classification) ==")
     print(f"  raw 0x08xxxxxx words classified                      : {len(blindhits)+coinc+real}")
     print(f"  coincidental constants (never relocatable)           : {struct_coinc}")
@@ -495,11 +503,52 @@ def emit_true_debt():
     print(f"  CODE-axis literal pools (relocate on code decomp)    : {blind_code}")
     print(f"  fe8u-confirmed REAL data ptr still raw (convertible)  : {real}")
     print(f"  unclassified DATA-interior / EXACT / dangling        : {blind_data + blind_exact + blind_unres}")
+    print(f"  stuck .4byte literals in __asm__ blocks, REAL         : {len(stuck_real)}  "
+          f"(auditor-blind until 2026-06-27)")
     print(f"  => COMPLETION GATE (confirmed-real + unclassified)    : {gate}")
+    print(f"  NOTE: this gate still cannot count pointers inside COMPRESSED data (Huffman")
+    print(f"  text, LZ77 banim/gfx) -- those need typed-asset extraction (D306), not .4byte.")
     if "--gate" in sys.argv:
-        print("  -- residual real/unclassified DATA-pointer words --")
+        print("  -- residual real/unclassified DATA-pointer words (.bin) --")
         for (n, O, v, sym, off) in real_data:
             print(f"     {n} off=0x{O:X} val=0x{v:08X} -> {sym}+0x{off:X}")
+        print("  -- real pointers stuck in __asm__ .4byte literals --")
+        from collections import Counter as _C2
+        for f, c in _C2(f for (f, v, s, o, k) in stuck_real).most_common(20):
+            print(f"     {c:4d}  {f}")
+
+
+def _scan_stuck_asm_literals(addrs, a2n, a2s, fn, asset_re, romhdr_re):
+    """Scan src/ for raw `.4byte 0x08xxxxxx` literals stuck in __asm__ blocks (the .bin
+    auditor is blind to these -- the table no longer INCBINs its .bin). Classify each
+    structurally: EXACT / thumb-fn (off==1) / self-referential interior = REAL;
+    func-interior(off>1) / asset-interior / rom-header / dangling = coincidental; other
+    data-interior = REAL (conservative). Returns (real_list, coinc_count)."""
+    real = []; coinc = 0
+    try:
+        files = subprocess.run(["grep", "-rlE", r'\.4byte 0x08[0-9A-Fa-f]{6}',
+                                os.path.join(ROOT, "src")],
+                               capture_output=True, text=True).stdout.split()
+    except Exception:
+        return real, coinc
+    for cf in files:
+        if not cf.endswith(".c"):
+            continue   # the linked source is the .c; .s are excluded placeholders
+        base = os.path.basename(cf)[:-2]
+        try:
+            txt = open(cf, errors="replace").read()
+        except Exception:
+            continue
+        for m in re.finditer(r'\.4byte (0x08[0-9A-Fa-f]{6})\b', txt):
+            v = int(m.group(1), 16)
+            kind, sym, off = classify(v, addrs, a2n, a2s)
+            if kind == "DANGLING": coinc += 1; continue
+            if off == 0: real.append((base, v, sym, off, "EXACT")); continue
+            if sym in fn and off == 1: real.append((base, v, sym, off, "THUMBFN")); continue
+            if sym in fn: coinc += 1; continue
+            if romhdr_re.search(sym) or asset_re.search(sym): coinc += 1; continue
+            real.append((base, v, sym, off, "DATA-int"))
+    return real, coinc
 
 
 if __name__ == "__main__":
