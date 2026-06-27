@@ -50,7 +50,7 @@ __asm__(
 "\t.4byte 0x1C368C50\n"
 "\t.4byte 0x8EB3B48C\n"
 "\t.4byte 0xB30853D3\n"
-"\t.4byte 0x0853D3A3\n"
+"\t.4byte data_0853D31C + 0x87\n"
 "\t.4byte 0x4C32ED98\n"
 "\t.4byte 0xE78CDBA4\n"
 "\t.4byte 0xE7A0E798\n"

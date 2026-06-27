@@ -14,7 +14,7 @@ __asm__(
 "\t.4byte data_08908958 + 0x104\n"
 "\t.4byte 0x006C6C09\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x08004505\n"
+"\t.4byte SpriteText_DrawBackground + 0x1\n"
 "\t.4byte 0x01000300\n"
 "\t.4byte data_08908958 + 0x10C\n"
 "\t.4byte 0x0000004B\n"

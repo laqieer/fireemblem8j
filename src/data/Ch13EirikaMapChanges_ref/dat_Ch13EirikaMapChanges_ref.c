@@ -17,7 +17,7 @@ __asm__(
 "\t.4byte 0x08A5B700\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x08A5B704\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x08A5B708\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5FB1A\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte gUidebug_2 + 0x34A\n"
 "\t.4byte 0x08A5FFED\n"  /* coincidental const into fn: raw */
 "\t.4byte UnitDef_Event_Ch13aAlly\n"
 "\t.4byte UnitDef_Event_Ch13aAlly\n"
@@ -91,7 +91,7 @@ __asm__(
 "\t.4byte 0x0000001D\n"
 "\t.4byte 0x00140516\n"
 "\t.4byte 0x0000000A\n"
-"\t.4byte 0x08A5F964\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte gUidebug_2 + 0x194\n"
 "\t.4byte 0x00180404\n"
 "\t.4byte 0x00000007\n"
 "\t.4byte 0x0000005C\n"

@@ -45,7 +45,7 @@ __asm__(
 "\t.4byte 0x00000005\n"
 "\t.4byte frontier_df4_uistuff_026_5C3618\n"
 "\t.4byte 0x00000003\n"
-"\t.4byte 0x080204C1\n"
+"\t.4byte ChapterIntro_PutDecalSprite_Loop + 0x1\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 );  /* de-pointered slice data_085C3560: ptr=6 data=33 skip=1 */

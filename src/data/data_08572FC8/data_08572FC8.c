@@ -36,5 +36,5 @@ __asm__(
 "\t.4byte 0xB1008103\n"
 "\t.4byte 0x00140001\n"
 "\t.4byte 0x08202E20\n"
-"\t.4byte 0x08572FD4\n"
+"\t.4byte data_08572FC8 + 0xC\n"
 );  /* de-pointered slice data_08572FC8: ptr=1 data=25 skip=3 */

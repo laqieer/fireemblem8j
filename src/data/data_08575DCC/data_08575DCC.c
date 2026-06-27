@@ -33,5 +33,5 @@ __asm__(
 "\t.4byte 0x0000B1CE\n"
 "\t.4byte 0x00140001\n"
 "\t.4byte voicegroup038\n"
-"\t.4byte 0x08575DDC\n"
+"\t.4byte data_08575DCC + 0x10\n"
 );  /* de-pointered slice data_08575DCC: ptr=4 data=21 skip=1 */

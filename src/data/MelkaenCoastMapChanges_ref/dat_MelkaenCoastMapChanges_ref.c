@@ -9,14 +9,14 @@ __asm__(
 "\t.section .rodata.dat_MelkaenCoastMapChanges_ref, \"a\", %progbits\n"
 "\t.global MelkaenCoastMapChanges\n"
 "MelkaenCoastMapChanges:\n"
-"\t.4byte 0x08A5E528\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5E52C\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5E530\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5E534\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5E550\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5E554\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5E558\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5E55C\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A5E3B8 + 0x170\n"
+"\t.4byte data_08A5E3B8 + 0x174\n"
+"\t.4byte data_08A5E3B8 + 0x178\n"
+"\t.4byte data_08A5E3B8 + 0x17C\n"
+"\t.4byte data_08A5E3B8 + 0x198\n"
+"\t.4byte data_08A5E3B8 + 0x19C\n"
+"\t.4byte data_08A5E3B8 + 0x1A0\n"
+"\t.4byte data_08A5E3B8 + 0x1A4\n"
 "\t.4byte 0x08A5FFAF\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x08A600A4\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x08924050\n"  /* coincidental const into fn: raw */

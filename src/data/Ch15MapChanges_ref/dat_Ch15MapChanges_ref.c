@@ -17,7 +17,7 @@ __asm__(
 "\t.4byte 0x08A5BB18\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x08A5BB1C\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x08A5BB20\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5FB34\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte gUidebug_2 + 0x364\n"
 "\t.4byte 0x08A5FFF5\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x08910B70\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x08910B70\n"  /* coincidental const into fn: raw */

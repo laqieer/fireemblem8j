@@ -13,15 +13,15 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000800\n"
 "\t.4byte MenuAlwaysEnabled + 0x1\n"
-"\t.4byte 0x0801C14D\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte DebugChargeMenu_Draw + 0x1\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x0801C1F1\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte DebugChargeMenu_Idle + 0x1\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x080DC9EC\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000900\n"
-"\t.4byte 0x080501BD\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte MenuAlwaysEnabled + 0x1\n"
 "\t.4byte DebugChargeMenu_Draw + 0x1\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte DebugChargeMenu_Idle + 0x1\n"

@@ -19,7 +19,7 @@ __asm__(
 "\t.4byte 0x0007000C\n"
 "\t.4byte 0x00000D40\n"
 "\t.4byte WriteSuspendPlayerIdle + 0x1\n"
-"\t.4byte 0x08201B21\n"  /* coincidental const into fn: raw */
+"\t.4byte voicegroup031 + 0x285\n"
 "\t.4byte 0x00001D20\n"
 "\t.4byte 0x7FFF1324\n"
 "\t.4byte 0x00041721\n"

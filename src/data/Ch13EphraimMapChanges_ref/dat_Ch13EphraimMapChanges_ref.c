@@ -112,7 +112,7 @@ __asm__(
 "\t.4byte 0x00000057\n"
 "\t.4byte 0x0014120F\n"
 "\t.4byte 0x0000000A\n"
-"\t.4byte 0x08A5FA42\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte gUidebug_2 + 0x272\n"
 "\t.4byte 0x00180F04\n"
 "\t.4byte 0x00000007\n"
 "\t.4byte 0x0000001D\n"

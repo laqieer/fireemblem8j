@@ -9,15 +9,15 @@ __asm__(
 "\t.section .rodata.dat_Ch18MapChanges_ref, \"a\", %progbits\n"
 "\t.global Ch18MapChanges\n"
 "Ch18MapChanges:\n"
-"\t.4byte 0x08A5BE28\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5BE68\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5BE6C\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5BE70\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5BEBC\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5BEC0\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5BEC4\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5BEC8\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5FB3C\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte data_08A5BDD8 + 0x50\n"
+"\t.4byte data_08A5BDD8 + 0x90\n"
+"\t.4byte data_08A5BDD8 + 0x94\n"
+"\t.4byte data_08A5BDD8 + 0x98\n"
+"\t.4byte data_08A5BDD8 + 0xE4\n"
+"\t.4byte data_08A5BDD8 + 0xE8\n"
+"\t.4byte data_08A5BDD8 + 0xEC\n"
+"\t.4byte data_08A5BDD8 + 0xF0\n"
+"\t.4byte gUidebug_2 + 0x36C\n"
 "\t.4byte 0x08A5FFFD\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x0891350C\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x0891350C\n"  /* coincidental const into fn: raw */
@@ -77,7 +77,7 @@ __asm__(
 "\t.4byte 0x00000001\n"
 "\t.4byte 0x00120F03\n"
 "\t.4byte 0x0000000A\n"
-"\t.4byte 0x08A5F9D8\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte gUidebug_2 + 0x208\n"
 "\t.4byte 0x0018071A\n"
 "\t.4byte 0x00000007\n"
 "\t.4byte 0x0000005E\n"

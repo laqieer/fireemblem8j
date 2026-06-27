@@ -86,10 +86,10 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x0000000A\n"
-"\t.4byte 0x08A5F9A4\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte gUidebug_2 + 0x1D4\n"
 "\t.4byte 0x00171401\n"
 "\t.4byte 0x0000000A\n"
-"\t.4byte 0x08A5F9BE\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte gUidebug_2 + 0x1EE\n"
 "\t.4byte 0x0016020C\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00030001\n"
@@ -100,7 +100,7 @@ __asm__(
 "\t.4byte 0x09160011\n"
 "\t.4byte 0x000F000B\n"
 "\t.4byte 0x08A69EBC\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08100009\n"  /* coincidental const into fn: raw */
+"\t.4byte data_080ED67C + 0x1298D\n"
 "\t.4byte 0x000F000B\n"
 "\t.4byte 0x08A69EBC\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x10130A0F\n"

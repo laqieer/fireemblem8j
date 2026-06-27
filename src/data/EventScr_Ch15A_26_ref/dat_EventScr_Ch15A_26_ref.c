@@ -80,7 +80,7 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x0000003B\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60420\n"
+"\t.4byte data_08A60354 + 0xCC\n"
 "\t.4byte 0x002B1220\n"
 "\t.4byte 0x0AEB1B20\n"
 "\t.4byte 0x00001D20\n"

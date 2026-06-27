@@ -36,10 +36,13 @@ def stt_func_names():
     """Names of GENUINE STT_FUNC symbols (readelf type FUNC). nm's 'T' conflates
     these with text-section DATA -- but only a real STT_FUNC makes `ld` OR in the
     Thumb bit on a `.4byte sym` relocation. Knowing which lets us emit the correct
-    thumb-adjusted form for function pointers."""
+    thumb-adjusted form for function pointers.
+    IMPORTANT: use --wide to avoid truncated symbol names (readelf without --wide
+    truncates long names to 'Name[...]', so 'StartLockingFadeFromWhite' would appear
+    as 'StartLockingFade[...]' and be missed -> wrong is_func=False for that symbol)."""
     global _STT_FUNC
     if _STT_FUNC is None:
-        out = subprocess.run(["arm-none-eabi-readelf", "--syms", ELF],
+        out = subprocess.run(["arm-none-eabi-readelf", "--syms", "--wide", ELF],
                              capture_output=True, text=True, errors="replace").stdout
         s = set()
         for line in out.splitlines():
@@ -439,20 +442,31 @@ def table_is_safe(binp, addrs, by_addr):
         # else: ordinary data word, fine
     return (nptr > 0, nptr)
 
+_ASSET_RE_REPROCESS = re.compile(
+    r'Img|Tsa|Pal|Chr|Gfx|Sprite|Anim|banim|Map|Tile|Portrait|'
+    r'Icon|_gf|OBJ|Reel|Sheet|BG|Frames|Obj|Lz|Comp|song|wave|'
+    r'sound|DirectSound|^pad_|^gap_|frontier_', re.I)
+_ROMHDR_RE_REPROCESS = re.compile(r'^rom_header|^RomHeader|^gCartridge|^AgbMain')
+
+
 def reprocess_asm_block(cf, addrs, by_addr, check=False):
     """Re-process raw `.4byte 0xNNN` literals STUCK in already-de-pointered __asm__
     blocks: earlier passes left ROM-range words raw (skip=N) before the converter
     learned to handle them (Thumb/ARM function pointers, fe8u-confirmed slots). For
     each block (`.section <sec>` / `NAME:` / `.4byte ...`), word i sits at NAME+i*4
-    so its JP address = NAME's ELF addr + i*4. Convert a raw literal iff it resolves
-    EXACT (off==0) or fe8u confirms a pointer there; emit via emit_words' relocation
-    forms. Byte-exact (gated by make compare)."""
+    so its JP address = NAME's ELF addr + i*4. Convert a raw literal iff:
+      - it resolves EXACT (off==0) to a non-Thumb-fn symbol, OR
+      - fe8u confirms a pointer there (oracle), OR
+      - it resolves to a THUMB fn at off==1 (`.4byte func+0x1` is byte-exact: ld does
+        NOT re-add the Thumb bit for addend!=0), OR
+      - it resolves DATA-INTERIOR (off>0 into a non-function, non-asset, non-header
+        symbol) -- these are real data self-pointers / interior struct pointers.
+    Byte-exact (gated by make compare)."""
     import fe8u_ptr_offsets as _F
     name2addr = _elf_name2addr()
     with open(cf, "r", errors="replace") as f:
         lines = f.readlines()
     out = []
-    i = 0
     nconv = 0
     label_re = re.compile(r'^"(\w+):\\n"')
     raw_re = re.compile(r'^(\s*)"\\t\.4byte (0x[0-9A-Fa-f]{8})\\n"(.*)$')
@@ -473,7 +487,7 @@ def reprocess_asm_block(cf, addrs, by_addr, check=False):
                     conf = _F.fe8u_ptr_at_jp(base + O) is True
                 except Exception:
                     conf = False
-                if r and (exact or conf):
+                if r:
                     sym, off, is_func = r
                     # ld quirk: `.4byte func` (addend 0) ORs the Thumb bit (-> func|1);
                     # `.4byte func + A` with A!=0 does NOT (-> func+A). So for a function
@@ -481,8 +495,22 @@ def reprocess_asm_block(cf, addrs, by_addr, check=False):
                     # (a pointer to a Thumb fn's even start) is unreproducible -> skip it.
                     if is_func and off == 0:
                         out.append(line); continue
-                    rel = ".4byte %s + 0x%X" % (sym, off) if off else ".4byte %s" % sym
-                    out.append('%s"\\t%s\\n"\n' % (mr.group(1), rel)); nconv += 1; continue
+                    # Decide whether this ROM-range word is a real pointer:
+                    #  (a) fe8u oracle or EXACT (off==0) -> always real (non-fn case handled above)
+                    #  (b) Thumb fn off==1 -> real Thumb function pointer (bit 0 = Thumb flag)
+                    #  (c) FUNC-interior (off>1) -> coincidental constant (code bytes), skip
+                    #  (d) ASSET-interior -> coincidental pixel/sample data, skip
+                    #  (e) ROM-header target -> packed UnitDef field, skip
+                    #  (f) DATA-interior (off>0, non-func, non-asset, non-header) -> real
+                    is_real = (exact or conf
+                               or (is_func and off == 1)
+                               or (not is_func
+                                   and off > 0
+                                   and not _ASSET_RE_REPROCESS.search(sym)
+                                   and not _ROMHDR_RE_REPROCESS.search(sym)))
+                    if is_real:
+                        rel = ".4byte %s + 0x%X" % (sym, off) if off else ".4byte %s" % sym
+                        out.append('%s"\\t%s\\n"\n' % (mr.group(1), rel)); nconv += 1; continue
             out.append(line); continue
         # a non-raw `.4byte sym` directive is also one word -> advance the index
         if base is not None and re.match(r'^\s*"\\t\.4byte ', line):
