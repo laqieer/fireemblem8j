@@ -84,7 +84,7 @@ u8 Img_MapAnimRepairfx[] = INCBIN_U8("graphics/misc_gfx/Img_MapAnimRepairfx.bin.
 
 u8 Tsa_MapAnim_1[] = INCBIN_U8("graphics/misc_gfx/Tsa_MapAnim_1.bin");
 
-u16 ApConf_MapAnimSleep[] = INCBIN_U16("graphics/misc/ApConf_MapAnimSleep.4bpp");
+u16 ApConf_MapAnimSleep[] = INCBIN_U16("data/residual/ApConf_MapAnimSleep.bin");
 
 u8 Img_MapAnimBerserkfx[] = INCBIN_U8("graphics/misc_gfx/Img_MapAnimBerserkfx.bin.lz");
 
