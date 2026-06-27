@@ -9,31 +9,31 @@ data; every pointer is a relocated symbol reference). Signal completion ONLY whe
 all six axes (`scripts/calcprogress.py`) are met, by outputting the promise
 phrase `FE8J_FINAL_GOAL_DONE`.
 
-## SHIFTABILITY (axis #5) — COMPLETE (D304/D305, user-ratified 2026-06-27)
+## CURRENT PRIORITY FRONTIER — fe8u-STYLE TYPED ASSET EXTRACTION (axes #5+#6 together, D306)
 
-**DONE.** relocated 7,639 → 14,383; **real-pointer gate = 0**
-(`scripts/audit_pointers.py --true-debt --gate`). Every fe8u-confirmed + structurally-
-identifiable real data pointer is a relocation (gFontgrp SJIS sjisNext list +234,
-event scripts, ProcScrs, impure_data reent, all `_ref`/sliced tables). Completion
-criterion is the **gate**, NOT the literal raw-`0x08xxxxxx` count — the literal is
-unreachable-to-0 (coincidental constants: graphics pixels, packed bitfields, sine/sound
-data; relocating them corrupts shift). D305 user-ratified gate=0 = complete.
+**Axis #5 is NOT complete (D305 "gate=0" RETRACTED by D306).** The inline-asm
+`__asm__ { .4byte sym }` de-pointering (relocated 7,639 → 14,383) was a byte-exact
+*interim patch*, not the real goal, and it left blind spots: (a) **364 real pointers
+stuck in `.4byte 0x08xxxxxx` literals** in __asm__ blocks (`audit_pointers.py
+--true-debt --gate` now counts them), and (b) **pointers inside COMPRESSED data**
+(Huffman text, LZ77 banim/gfx) that no `0x08`-word scan can see and no `.4byte` can fix.
 
-- **Do NOT re-open this as a frontier.** If revisiting: the authoritative metric is
-  `--true-debt --gate` (fe8u oracle + positive-evidence structural classification), not
-  the literal `--metrics` count. The two HARD RULES still hold (D299 effectiveness:
-  de-point LINKED source not excluded asm placeholders, verify the relocated count rose
-  via the LINKER; D297 fe8u is the correctness gate, never convert on density).
-- **Only real pointers left = 5 literal-pool entries in one undecompiled Thumb function**
-  (`gap_000B1030`) → these are the **code-decompilation axis**, relocate when that code
-  is carved. Not a data-shiftability task.
+**The correct approach (user-directed): extract each region to its proper fe8u asset
+type, NOT inline-asm.** Pointers then become symbolic by construction (shiftable) AND
+the data is editable AND compressed assets work (re-compressed from source). Most assets
+are SHARED with fe8u → reuse/re-point; the main JP-specific delta is **text** (text-id
+offset + UI localization). Per type:
+- **Text**: fe8u message-text system (JP Huffman `CompressedText_MSG` + `gMsgHuffmanTable`).
+- **Graphics**: `.4bpp`/`.gbagfx` (LZ77 at build), reuse fe8u.
+- **Battle-anim scripts**: fe8u `banim/` (`animscr_*.s`, `banim_*_modes.bin`, `*_motion`).
+  JP has 224 raw `AnimScr_*`/`AnimSpr_*` blobs to extract this way.
+- **Maps / music / SFX**: fe8u map data / m4a song data.
 
-## CURRENT PRIORITY FRONTIER — ASSET EDITABILITY (axis #6) + remaining code
-
-Axis #5 done; the open axes are **#6 asset editability** (structured/logic raw-incbin
-→ typed C; ~679 KB structured blobs remain, graphics `.bin` exempt — `audit_pointers.py
---metrics` line 6) and the **~31 still-asm functions** (code decomp; permuter +
-reconstruction). See `docs/frontier.md`.
+Method: for each region, identify its TYPE + fe8u counterpart (check `../fireemblem8u`),
+extract/re-point to the fe8u asset (decompress compressed ones), keep `make compare` OK.
+The two HARD RULES still hold (D299: edit LINKED source, verify via the LINKER; D297:
+fe8u is the correctness gate). Also retire the 364 stuck-literal real pointers as their
+tables get properly typed. See `docs/frontier.md` + the `data-extractor` agent.
 
 ## When orchestrating background agents (P9 wave mode) — DO THIS EVERY TICK FIRST
 

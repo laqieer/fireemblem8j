@@ -358,7 +358,7 @@ met.
 | **Matching-C functions** | matching-C funcs ÷ 8,528 | ~~**25.6%** (2,187)~~ → **95.44% (8139)** (current) | 100% (FE8U: 99.777%) |
 | **Extracted data** | extracted-asset bytes ÷ data bytes (real `dataTotal`, **not** `data_bytes`) | ~~**~0.12%**~~ → **100% of measured set** (current) | 100% |
 | **Named symbols** | named ÷ total labels (no overflow) | ~~**~59%**~~ → **85.23%** (current) | 100% (FE8U: 0 `sub_`/`nullsub`) |
-| **Shiftability** (D296/D304/D305) | relocated data pointers vs. **real-pointer debt** (fe8u oracle + positive-evidence structural classification) | ~~43.79%~~ → **COMPLETE: 14,383 relocated; real-pointer gate = 0** (current) | **0 real un-relocated data pointers** (`audit_pointers.py --true-debt --gate` → 0). The literal raw-`0x08xxxxxx` count is NOT the target — it is dominated by coincidental constants (graphics pixels, packed bitfields, sine/sound data) that are not pointers (D304); user-ratified D305. |
+| **Shiftability** (D296/D304/**D306**) | relocated data pointers vs. **real-pointer debt** (fe8u oracle + structural classification) | ~~43.79%~~ → ~~"complete/gate=0" (D305, RETRACTED)~~ → **14,383 relocated; honest gate = 364 + unmeasured compressed** (current) | **0 real un-relocated pointers, achieved via fe8u-style typed asset extraction (D306)** — NOT inline-asm `.4byte`. The D305 "gate=0/complete" was retracted (D306): the auditor was blind to (a) 364 real pointers stuck in `__asm__` `.4byte` literals, and (b) pointers inside COMPRESSED data (Huffman text, LZ77 banim/gfx) that no `0x08`-word scan can see. True completion = extract every region to its proper fe8u asset type (text/gfx/anim-script/map/music), where pointers are symbolic by construction. |
 | **Asset editability** (D296) | structured/logic data in typed source ÷ structured data bytes | opaque structured raw-incbin = **746 KB** | 100% — **0 opaque structured blobs** (graphics `.bin` exempt) |
 
 _(Row values updated to ground truth from `scripts/calcprogress.py` / `scripts/audit_pointers.py --metrics`. Struck-through values are the historical snapshots from when this doc was written. See `docs/frontier.md` for what remains.)_
@@ -371,17 +371,20 @@ C, not opaque `u8[] = INCBIN` blobs). The completion oracle is therefore: all si
 axes at target **AND** `make compare` → `OK` **AND** the shiftability **real-pointer
 gate** (`scripts/audit_pointers.py --true-debt --gate`) reports **0**.
 
-> **D305 (user-ratified, 2026-06-27):** axis #5's completion criterion is the
-> **real-pointer gate = 0**, NOT a literal `0x08xxxxxx`-word count of 0. The literal
-> count is mathematically unreachable: a GBA ROM's data legitimately contains
-> thousands of non-pointer constants that fall in the `0x08000000–0x09000000` range
-> (graphics pixels, packed unit-stat bitfields, sine-table values, sound samples).
-> "Relocating" them would corrupt the shifted game. The gate counts only
-> **fe8u-confirmed-real + unclassified** real-pointer debt, every word classified by
-> positive evidence (fe8u relocation oracle + struct layout). **Axis #5 = COMPLETE**
-> (gate = 0); the only un-relocated real pointers left are 5 literal-pool entries
-> inside one undecompiled Thumb function — they belong to the code-decompilation axis
-> and relocate when that code is carved.
+> **D305 (2026-06-27) — RETRACTED by D306.** D305 ratified "gate = 0 = axis #5
+> complete", but that gate was measured by an auditor with two blind spots: it never
+> scanned the 364 real pointers stuck in `__asm__` `.4byte` literals, and it
+> fundamentally cannot see pointers inside COMPRESSED data (Huffman text, LZ77
+> banim/gfx). Honest gate = 364 + unmeasured compressed. **Axis #5 is NOT complete.**
+>
+> **D306 (2026-06-27, user-directed):** the still-true part of D305 stands — a literal
+> `0x08`-word count of 0 is the wrong invariant (coincidental constants permanently
+> occupy the ROM range). But completion is NOT inline-asm `.4byte` de-pointering; it is
+> **fe8u-style typed asset extraction by type** (text/gfx/anim-script/map/music),
+> reusing fe8u where shared (JP delta = text-id offset + UI localization). Done that
+> way, every pointer — including those now hidden in compressed blobs — becomes a
+> symbolic, relocatable reference, and the data is editable. Axes #5 and #6 are the
+> same job; track completion as axis #6.
 
 Until all six reach target **and** the self-contained build passes with `make compare`
 → `OK`, FE8J is an **in-progress** decompilation. The single number that matters most

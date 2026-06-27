@@ -8021,3 +8021,47 @@ Thumb function's literal pool (`gap_000B1030`) — they belong to the **code-dec
 axis** and become relocations when that code is carved. 2,573 + 283 gfx-floor raw words
 are coincidental constants (never relocatable). Asset-editability (axis #6) is unaffected
 and remains open (structured raw-incbin → typed C).
+
+## D306 — RETRACT "axis #5 complete"; realign to fe8u-style TYPED ASSET extraction (user-directed)
+
+**Date context:** 2026-06-27. Supersedes the D305 "complete" status.
+
+**Trigger:** the user asked "are you sure no real pointer missed?" and "did you miss
+pointers in compressed data such as battle animation assembly scripts?", and directed:
+*"asset shiftability is not to convert all binary data to C with inline assembly — the
+data should be extracted to corresponding original game assets according to their types
+(texts, graphics, assembly scripts, maps, music…); check fe8u, most game assets are
+reusable, the main difference is texts (text-id offset + UI localization)."*
+
+**Three confirmed blind spots in the D296–D305 de-pointering approach:**
+1. **Stuck `.4byte 0x08xxxxxx` literals in __asm__ blocks** — the auditor only scanned
+   live `.bin` INCBIN ranges, so it never saw literals in already-de-pointered blocks.
+   Structural classification finds **364 REAL pointers** there (exact, thumb-fn, self-
+   referential tables like `data_0856CC9C`). Fixed `audit_pointers.py` (D306 commit);
+   honest gate = **364, not 0**. **The D305 "gate=0 / complete" claim is RETRACTED** — it
+   was measured with a hole in the net; the user's ratification rested on flawed data.
+2. **Pointers inside COMPRESSED data** — Huffman message text (`CompressedText_MSG` +
+   `gMsgHuffmanTable`) and LZ77 banim/gfx. A `0x08`-word scan fundamentally cannot see
+   them, and a `.4byte sym` relocation cannot fix an opaque compressed blob. They need
+   decompression + typed-asset extraction. UNMEASURED by any current tool.
+3. **Wrong form.** `__asm__ { .4byte sym }` is a byte-exact shiftability *patch*, not
+   asset extraction; it produces nothing editable and cannot apply to compressed assets.
+
+**Decision (realignment):** the correct path for axes #5+#6 together is **fe8u-parity
+typed asset extraction by type**, NOT inline-asm de-pointering:
+- **Text** → fe8u message-text system; JP delta = text IDs (offset) + JP content + UI
+  localization. This is THE main JP-specific difference.
+- **Graphics** → `.4bpp`/`.gbagfx` INCBIN (LZ77-compressed at build), reuse fe8u.
+- **Battle-anim scripts** → fe8u's `banim/` representation (`animscr_*.s`,
+  `banim_*_modes.bin`, `*_motion`); reuse fe8u where shared.
+- **Maps / music / SFX** → fe8u map data / m4a song data.
+Pointers become symbolic *by construction* (relocatable + shiftable) AND the data is
+editable AND compression is handled (re-compressed from real source). Most assets are
+shared with fe8u → re-point from fe8u; only text/UI is JP-specific.
+
+**Status:** axis #5 (shiftability) is **NOT complete** — its true completion is the
+asset-extraction program below. The `__asm__` de-pointering done so far (relocated 7,639
+→ 14,383) remains a valid, byte-exact interim that removes the *visible* raw-`.bin`
+pointer debt, but the residual = 364 stuck-literal real pointers + the unmeasured
+compressed-asset pointers, all of which are properly retired by typed-asset extraction.
+Reopen axis #5 as part of axis #6; do NOT report it complete.
