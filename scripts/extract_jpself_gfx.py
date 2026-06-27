@@ -30,7 +30,11 @@ for binp in sorted(glob.glob("data/residual/*.bin")):
     # get the raw 4bpp (decompress if LZ)
     comp = is_lz(d)
     if comp:
-        if gg(binp, "/tmp/_j.4bpp") or not os.path.exists("/tmp/_j.4bpp"): skipped += 1; continue
+        # gbagfx infers the op from the EXTENSION: a .lz input decompresses, but passing
+        # the .bin directly would NOT. Copy to a .lz name first.
+        if os.path.exists("/tmp/_j.4bpp"): os.remove("/tmp/_j.4bpp")
+        shutil.copy(binp, "/tmp/_j.lz")
+        if gg("/tmp/_j.lz", "/tmp/_j.4bpp") or not os.path.exists("/tmp/_j.4bpp"): skipped += 1; continue
         src4 = "/tmp/_j.4bpp"
     else:
         shutil.copy(binp, "/tmp/_j.4bpp"); src4 = "/tmp/_j.4bpp"
@@ -41,7 +45,7 @@ for binp in sorted(glob.glob("data/residual/*.bin")):
     if not comp:
         if sha("/tmp/_j2.4bpp") == orig: ext = ".4bpp"
     else:
-        for md in (0, 1, 2, 3):
+        for md in range(0, 16):
             gg("/tmp/_j2.4bpp", "/tmp/_j2.lz", "-mindist", str(md))
             if sha("/tmp/_j2.lz") == orig: ext = ".4bpp.lz"; mindist = md; break
     if ext is None: skipped += 1; continue

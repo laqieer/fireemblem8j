@@ -4,7 +4,7 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_banim_p225") u16 Img_ExcaliburBg1[] = INCBIN_U16("data/residual/Img_ExcaliburBg1.bin");
+SECTION(".rodata.dat_data_banim_p225") u16 Img_ExcaliburBg1[] = INCBIN_U16("graphics/reuse/Img_ExcaliburBg1.4bpp.lz");
 SECTION(".rodata.dat_data_banim_p225") u16 Pal_ExcaliburBg1[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/0072E64C_Pal_ExcaliburBg1.gbapal");
 SECTION(".rodata.dat_data_banim_p225") u16 Tsa_ExcaliburBg1[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/0072E7EC_Tsa_ExcaliburBg1.map.bin.lz");
 SECTION(".rodata.dat_data_banim_p225") u16 Img_ExcaliburBg2[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/0072E998_Img_ExcaliburBg2.4bpp.lz");

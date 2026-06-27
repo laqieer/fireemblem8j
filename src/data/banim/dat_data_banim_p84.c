@@ -4,7 +4,7 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_banim_p84") u16 Img_Banim_1[] = INCBIN_U16("data/residual/Img_Banim_1.bin");
+SECTION(".rodata.dat_data_banim_p84") u16 Img_Banim_1[] = INCBIN_U16("graphics/reuse/Img_Banim_1.4bpp.lz");
 SECTION(".rodata.dat_data_banim_p84") u16 Img_Banim_2[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/0061B65C_Img_0861B65C.4bpp.lz");
 SECTION(".rodata.dat_data_banim_p84") u16 Img_Banim_3[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/0061BDAC_Img_0861BDAC.4bpp.lz");
 SECTION(".rodata.dat_data_banim_p84") u16 Img_Banim_4[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/0061C770_Img_0861C770.4bpp.lz");
