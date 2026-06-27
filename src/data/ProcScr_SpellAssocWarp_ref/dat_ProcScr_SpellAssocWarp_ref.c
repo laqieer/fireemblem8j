@@ -1,70 +1,35 @@
 #include "global.h"
+#include "proc.h"
+#include "mapanim.h"
 
-/* De-pointered from data/residual/ProcScr_SpellAssocWarp.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
-
-__asm__(
-"\t.section .rodata.dat_ProcScr_SpellAssocWarp_ref, \"a\", %progbits\n"
-"\t.global ProcScr_SpellAssocWarp\n"
-"ProcScr_SpellAssocWarp:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveCameraOnTarget + 0x1\n"
-"\t.4byte 0x0002000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_AnimateSubjectIdle + 0x1\n"
-"\t.4byte 0x001E000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SpellWarpStartFlashy + 0x1\n"
-"\t.4byte 0x000A000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SpellWarpStartFlashFade + 0x1\n"
-"\t.4byte 0x0014000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SpellWarpStartExplosion + 0x1\n"
-"\t.4byte 0x0002000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SpellWarpMuHide + 0x1\n"
-"\t.4byte 0x0008000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SpellWarpSetNewPosition + 0x1\n"
-"\t.4byte 0x001E000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SpellWarpMoveCamera + 0x1\n"
-"\t.4byte 0x0002000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SpellWarpStartImplosion + 0x1\n"
-"\t.4byte 0x0028000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SpellWarpStartFlashyAtNewPos + 0x1\n"
-"\t.4byte 0x000A000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SpellWarpMuShow + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SpellWarpEndFlashFade + 0x1\n"
-"\t.4byte 0x0010000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x000A000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveCameraOnSubject + 0x1\n"
-"\t.4byte 0x0002000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_SubjectResetAnim + 0x1\n"
-"\t.4byte 0x001E000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd ProcScr_SpellAssocWarp[] __attribute__((section(".rodata.dat_ProcScr_SpellAssocWarp_ref"))) = {
+    PROC_CALL(MapAnim_MoveCameraOnTarget),
+    PROC_SLEEP(0x2),
+    PROC_CALL(MapAnim_AnimateSubjectIdle),
+    PROC_SLEEP(0x1E),
+    PROC_CALL(SpellWarpStartFlashy),
+    PROC_SLEEP(0xA),
+    PROC_CALL(SpellWarpStartFlashFade),
+    PROC_SLEEP(0x14),
+    PROC_CALL(SpellWarpStartExplosion),
+    PROC_SLEEP(0x2),
+    PROC_CALL(SpellWarpMuHide),
+    PROC_SLEEP(0x8),
+    PROC_CALL(SpellWarpSetNewPosition),
+    PROC_SLEEP(0x1E),
+    PROC_CALL(SpellWarpMoveCamera),
+    PROC_SLEEP(0x2),
+    PROC_CALL(SpellWarpStartImplosion),
+    PROC_SLEEP(0x28),
+    PROC_CALL(SpellWarpStartFlashyAtNewPos),
+    PROC_SLEEP(0xA),
+    PROC_CALL(SpellWarpMuShow),
+    PROC_CALL(SpellWarpEndFlashFade),
+    PROC_SLEEP(0x10),
+    PROC_SLEEP(0xA),
+    PROC_CALL(MapAnim_MoveCameraOnSubject),
+    PROC_SLEEP(0x2),
+    PROC_CALL(MapAnim_SubjectResetAnim),
+    PROC_SLEEP(0x1E),
+    PROC_END,
+};
