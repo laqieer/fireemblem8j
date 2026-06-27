@@ -3010,3 +3010,73 @@ graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_2.map.bin.lz: LZ_FLAGS :
 graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_3.map.bin.lz: LZ_FLAGS := -mindist 1
 graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_4.map.bin.lz: LZ_FLAGS := -mindist 1
 
+src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p761.o: \
+  graphics/banim/efxlvupfx/Tsa10_EfxLvupBG.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa11_EfxLvupBG.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa1_EfxLvupBG.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa1_EfxLvupBG2.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa2_EfxLvupBG.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa2_EfxLvupBG2.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa3_EfxLvupBG.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa3_EfxLvupBG2.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa4_EfxLvupBG.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa4_EfxLvupBG2.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa5_EfxLvupBG.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa5_EfxLvupBG2.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa6_EfxLvupBG.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa6_EfxLvupBG2.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa7_EfxLvupBG.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa8_EfxLvupBG.map.bin.lz \
+  graphics/banim/efxlvupfx/Tsa9_EfxLvupBG.map.bin.lz
+
+
+src/data/banim_efxhitobj/dat_banim_efxhitobj.o: \
+  graphics/banim/efxhitobj/Tsa1_EfxPierceNormalEffectBG.map.bin.lz \
+  graphics/banim/efxhitobj/Tsa2_EfxPierceNormalEffectBG.map.bin.lz \
+  graphics/banim/efxhitobj/Tsa3_EfxPierceNormalEffectBG.map.bin.lz \
+  graphics/banim/efxhitobj/Tsa4_EfxPierceNormalEffectBG.map.bin.lz \
+  graphics/banim/efxhitobj/Tsa5_EfxPierceNormalEffectBG.map.bin.lz \
+  graphics/banim/efxhitobj/Tsa6_EfxPierceNormalEffectBG.map.bin.lz \
+  graphics/banim/efxhitobj/Tsa7_EfxPierceNormalEffectBG.map.bin.lz \
+  graphics/banim/efxhitobj/Tsa8_EfxPierceNormalEffectBG.map.bin.lz \
+  graphics/banim/efxhitobj/Tsa9_EfxPierceNormalEffectBG.map.bin.lz \
+  graphics/banim/dragonfx/Tsa_87932EC.map.bin.lz \
+  graphics/banim/efxhitobj/TsaL_EfxPierceCriticalEffectBG.map.bin.lz \
+  graphics/banim/efxhitobj/TsaR_EfxPierceCriticalEffectBG.map.bin.lz
+
+
+src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p756.o: \
+  graphics/banim/efxbattle/TsaConf_BanimTmA1.map.bin \
+  graphics/banim/efxbattle/TsaConf_BanimTmA2.map.bin \
+  graphics/banim/efxbattle/TsaConf_BanimTmA3.map.bin \
+  graphics/banim/efxbattle/TsaConf_BanimTmA4.map.bin
+
+
+src/data/banimmisc/dat_data_banimmisc.o: \
+  graphics/banim/misc/Tsa_EkrExpBar.map.bin \
+  graphics/banim/misc/Tsa_EkrPopup.map.bin.lz
+
+
+graphics/banim/efxhitobj/Tsa1_EfxPierceNormalEffectBG.map.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/banim/efxhitobj/Tsa2_EfxPierceNormalEffectBG.map.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/banim/efxhitobj/Tsa3_EfxPierceNormalEffectBG.map.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/banim/efxhitobj/Tsa4_EfxPierceNormalEffectBG.map.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/banim/efxhitobj/Tsa5_EfxPierceNormalEffectBG.map.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/banim/efxhitobj/Tsa6_EfxPierceNormalEffectBG.map.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/banim/efxhitobj/Tsa7_EfxPierceNormalEffectBG.map.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/banim/efxhitobj/Tsa8_EfxPierceNormalEffectBG.map.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/banim/efxhitobj/Tsa9_EfxPierceNormalEffectBG.map.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/banim/dragonfx/Tsa_87932EC.map.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/banim/efxhitobj/TsaL_EfxPierceCriticalEffectBG.map.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/banim/efxhitobj/TsaR_EfxPierceCriticalEffectBG.map.bin.lz: LZ_FLAGS := -mindist 2
