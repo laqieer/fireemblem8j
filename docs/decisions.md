@@ -8065,3 +8065,26 @@ asset-extraction program below. The `__asm__` de-pointering done so far (relocat
 pointer debt, but the residual = 364 stuck-literal real pointers + the unmeasured
 compressed-asset pointers, all of which are properly retired by typed-asset extraction.
 Reopen axis #5 as part of axis #6; do NOT report it complete.
+
+## D307 — P10 parallel P9-team execution toward the final goal (Copilot-validated)
+
+**Date context:** 2026-06-27. User (P10 directive): stop serial hand-extraction +
+stop asking which lane first; decide and drive, fan the work to parallel P9 tech-lead
+teams, consult Copilot CLI for strategy, never block.
+
+**Strategy (Copilot-validated): 5 workstreams, isolated worktree workers, ONE serial
+integrator, FIFO merge queue (low-risk asset/data first, region-diff functions last).**
+- **A. Asset extraction** (axis #6): TSA tilemaps, 8bpp, remaining non-4bpp graphics →
+  editable fe8u-reused assets. Proven method: copy fe8u .png/.tsa.bin/.gbapal source,
+  repoint INCBIN, verify byte-identical (gbagfx round-trip), D299 effectiveness gate.
+- **B. Battle-anim scripts** → fe8u banim/ form.
+- **C. Shiftability** (axis #5): relocate the 364 stuck `.4byte 0x08xxxxxx` literals.
+- **D. Typed data/struct** → typed C, field-width-proven.
+- **E. Region-diff functions** (axis #2): the 31 still-asm (permuter/reconstruct).
+
+**Concurrency contract:** workers in PRIVATE worktrees/branches only; one atomic batch
+per branch; verify byte-identical + local make compare; push for the integrator.
+Workers NEVER commit shared generated files (ldscript.txt, asm/baserom.s, jp_syms.s, the
+INCBIN dep map) — the integrator regenerates (gen_data_incbin_deps.py) + runs the single
+authoritative make compare + commits/pushes. Non-overlapping file ownership per worker.
+Integrator: fresh rebase → regen → make compare → merge or hard-reject with the diff.
