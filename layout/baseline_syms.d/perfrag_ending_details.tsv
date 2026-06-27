@@ -20,3 +20,4 @@ Tsa_EndingFin	08AC6CD8	data	ending_details_080BC0F4
 HandleTurnRecordText	080BC2A4	thumb	ending_details_080BC590
 gEndingDetailBuf	02000000	data	ending_details_080BCECC
 GetPidDefeatedEndingString	080BB240	thumb	ending_details_080BBD80
+gpDefeatedEndingLocString	08AC059C	data	ending_details_sub_80BB240
