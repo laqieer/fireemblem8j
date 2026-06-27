@@ -903,7 +903,6 @@ src/data/gFontgrp_363_ref/dat_gFontgrp_363_ref.o: data/residual/gFontgrp_363.bin
 src/data/gFontgrp_364_ref/dat_gFontgrp_364_ref.o: data/residual/gFontgrp_364.bin
 src/data/gMPlayTable_ref/dat_gMPlayTable_ref.o: data/sound/gMPlayTable.bin
 src/data/gSoundRoomTable_ref/dat_gSoundRoomTable_ref.o: data/sound/gSoundRoomTable.bin
-src/data/gSupportTalkList_ref/dat_gSupportTalkList_ref.o: data/residual/gSupportTalkList.bin
 src/data/gap/gap_00003080.o: data/residual/gap_00003080.bin
 src/data/gap/gap_00003240.o: data/residual/gap_00003240.bin
 src/data/gap/gap_00006274.o: data/residual/gap_00006274.bin
