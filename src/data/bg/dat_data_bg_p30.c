@@ -5,4 +5,4 @@
  */
 
 SECTION(".rodata.dat_data_bg_p30") u8 bg_Fort_Sunset_map[] = INCBIN_U8("data/residual/bg_Fort_Sunset_map.bin");
-SECTION(".rodata.dat_data_bg_p30") u8 bg_Fort_Sunset_palette[] = INCBIN_U8("data/residual/bg_Fort_Sunset_palette.bin");
+SECTION(".rodata.dat_data_bg_p30") u8 bg_Fort_Sunset_palette[] = INCBIN_U8("graphics/reuse/bg_Fort_Sunset_palette.gbapal");

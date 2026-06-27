@@ -8,6 +8,6 @@ SECTION(".rodata.dat_generic_icon") u8 gGenericIcon_0[] = INCBIN_U8("graphics/re
 SECTION(".rodata.dat_generic_icon") u8 gGenericIcon_1[] = INCBIN_U8("graphics/reuse/gGenericIcon_1.4bpp");
 SECTION(".rodata.dat_generic_icon") u8 gGenericIcon_2[] = INCBIN_U8("graphics/reuse/gGenericIcon_2.4bpp");
 SECTION(".rodata.dat_generic_icon") u8 gGenericIcon_3[] = INCBIN_U8("graphics/reuse/gGenericIcon_3.4bpp");
-SECTION(".rodata.dat_generic_icon") u8 gGenericIcon_4[] = INCBIN_U8("data/residual/gGenericIcon_4.bin");
+SECTION(".rodata.dat_generic_icon") u8 gGenericIcon_4[] = INCBIN_U8("graphics/reuse/gGenericIcon_4.gbapal");
 SECTION(".rodata.dat_generic_icon") u8 gGenericIcon_5[] = INCBIN_U8("data/residual/gGenericIcon_5.bin");
 SECTION(".rodata.dat_generic_icon") u8 gGenericIcon_6[] = INCBIN_U8("data/residual/gGenericIcon_6.bin");

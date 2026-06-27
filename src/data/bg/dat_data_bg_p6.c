@@ -5,4 +5,4 @@
  */
 
 SECTION(".rodata.dat_data_bg_p6") u8 bg_Port_map[] = INCBIN_U8("data/residual/bg_Port_map.bin");
-SECTION(".rodata.dat_data_bg_p6") u8 bg_Port_palette[] = INCBIN_U8("data/residual/bg_Port_palette.bin");
+SECTION(".rodata.dat_data_bg_p6") u8 bg_Port_palette[] = INCBIN_U8("graphics/reuse/bg_Port_palette.gbapal");
