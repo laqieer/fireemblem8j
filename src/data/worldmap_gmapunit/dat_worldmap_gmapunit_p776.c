@@ -4,20 +4,203 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_16[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_16.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_17[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_17.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_18[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_18.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_19[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_19.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_20[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_20.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_21[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_21.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_22[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_22.bin");
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_16\n"
+"AnimSprite_EkrBaseKaiten_16:\n"
+"	.short 0x0000, 0x4000, 0x0000, -16, -11, 0\n"
+"	.short 0x0000, 0x4000, 0x0000, 0, -11, 0\n"
+"	.short 0x0000, 0x4000, 0x0000, 16, -11, 0\n"
+"	.short 0x0000, 0x4000, 0x0000, 32, -11, 0\n"
+"	.short 0x0000, 0x4000, 0x0000, -32, -11, 0\n"
+"	.short 0x0000, 0x4000, 0x0000, -48, -11, 0\n"
+"	.short 0x0000, 0x4000, 0x0011, -72, -11, 0\n"
+"	.short 0x8000, 0x0000, 0x0013, -56, -11, 0\n"
+"	.short 0x0000, 0x5000, 0x0011, 56, -11, 0\n"
+"	.short 0x8000, 0x1000, 0x0013, 48, -11, 0\n"
+"	.short 0x4000, 0x0000, 0x0014, -72, 5, 0\n"
+"	.short 0x4000, 0x1000, 0x0014, 56, 5, 0\n"
+"	.short 0x4000, 0x0000, 0x0015, -56, 5, 0\n"
+"	.short 0x4000, 0x0000, 0x0015, -40, 5, 0\n"
+"	.short 0x4000, 0x0000, 0x0015, -24, 5, 0\n"
+"	.short 0x4000, 0x0000, 0x0015, -8, 5, 0\n"
+"	.short 0x4000, 0x0000, 0x0015, 8, 5, 0\n"
+"	.short 0x4000, 0x0000, 0x0015, 24, 5, 0\n"
+"	.short 0x4000, 0x0000, 0x0015, 40, 5, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_17\n"
+"AnimSprite_EkrBaseKaiten_17:\n"
+"	.short 0x0000, 0x0000, 0x0011, 0, -8, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_18\n"
+"AnimSprite_EkrBaseKaiten_18:\n"
+"	.short 0x0000, 0x4000, 0x0000, -8, -16, 0\n"
+"	.short 0x0000, 0x4000, 0x0000, -8, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_19\n"
+"AnimSprite_EkrBaseKaiten_19:\n"
+"	.short 0x4000, 0x0000, 0x0034, -8, -4, 0\n"
+"	.short 0x0000, 0x4000, 0x0017, -8, 4, 0\n"
+"	.short 0x0000, 0x7000, 0x0017, -7, -20, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_20\n"
+"AnimSprite_EkrBaseKaiten_20:\n"
+"	.short 0x0000, 0x4000, 0x0040, -15, -16, 0\n"
+"	.short 0x8000, 0x0000, 0x0042, 1, -16, 0\n"
+"	.short 0x4000, 0x3000, 0x0043, -7, -24, 0\n"
+"	.short 0x0000, 0x3000, 0x0045, -15, -24, 0\n"
+"	.short 0x0000, 0x4000, 0x0040, -10, 0, 0\n"
+"	.short 0x8000, 0x0000, 0x0042, 6, 0, 0\n"
+"	.short 0x4000, 0x0000, 0x0043, -10, 16, 0\n"
+"	.short 0x0000, 0x0000, 0x0045, 6, 16, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_21\n"
+"AnimSprite_EkrBaseKaiten_21:\n"
+"	.short 0x0000, 0x4000, 0x0049, -14, -12, 0\n"
+"	.short 0x8000, 0x0000, 0x004B, 2, -12, 0\n"
+"	.short 0x0000, 0x4000, 0x0046, -22, -28, 0\n"
+"	.short 0x8000, 0x0000, 0x0048, -6, -28, 0\n"
+"	.short 0x0000, 0x7000, 0x0046, 6, 12, 0\n"
+"	.short 0x8000, 0x3000, 0x0048, -2, 12, 0\n"
+"	.short 0x0000, 0x7000, 0x0049, -2, -4, 0\n"
+"	.short 0x8000, 0x3000, 0x004B, -10, -4, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_22\n"
+"AnimSprite_EkrBaseKaiten_22:\n"
+"	.short 0x0000, 0x4000, 0x004D, -16, -16, 0\n"
+"	.short 0x0000, 0x4000, 0x004D, 0, 0, 0\n"
+"	.short 0x0000, 0x0000, 0x006D, -8, 0, 0\n"
+"	.short 0x0000, 0x0000, 0x004E, 0, -8, 0\n"
+"	.short 0x0000, 0x0000, 0x006F, -16, 0, 0\n"
+"	.short 0x0000, 0x0000, 0x006F, -8, 8, 0\n"
+"	.short 0x4000, 0x0000, 0x004F, -32, -24, 0\n"
+"	.short 0x0000, 0x0000, 0x006D, -24, -16, 0\n"
+"	.short 0x0000, 0x0000, 0x006F, -24, -8, 0\n"
+"	.short 0x0000, 0x0000, 0x006F, -32, -16, 0\n"
+"	.short 0x8000, 0x0000, 0x004C, 16, 16, 0\n"
+"	.short 0x0000, 0x0000, 0x004E, 16, 8, 0\n"
+"	.short 0x0000, 0x0000, 0x004E, -16, -24, 0\n"
+"	.short 0x0000, 0x0000, 0x006D, 8, 16, 0\n"
+"	.short 0x0000, 0x0000, 0x006F, 8, 24, 0\n"
+"	.short 0x0000, 0x0000, 0x006F, 0, 16, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
 SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_23[] = INCBIN_U8("graphics/reuse/AnimSprite_EkrBaseKaiten_23.4bpp");
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_24[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_24.bin");
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_24\n"
+"AnimSprite_EkrBaseKaiten_24:\n"
+"	.short 0x4000, 0x8000, 0x0094, -60, -22, 0\n"
+"	.short 0x0000, 0x4000, 0x0098, -28, -22, 0\n"
+"	.short 0x4000, 0x8000, 0x009A, -28, -6, 0\n"
+"	.short 0x0000, 0x4000, 0x005E, 44, 2, 0\n"
+"	.short 0x4000, 0x0000, 0x009E, 44, 18, 0\n"
+"	.short 0x4000, 0x0000, 0x00BE, -12, -14, 0\n"
+"	.short 0x4000, 0x0000, 0x00AC, -52, -6, 0\n"
+"	.short 0x0000, 0x0000, 0x00AE, -36, -6, 0\n"
+"	.short 0x0000, 0x4000, 0x0098, 4, -13, 0\n"
+"	.short 0x4000, 0x8000, 0x009A, 4, 3, 0\n"
+"	.short 0x4000, 0x0000, 0x00BE, 20, -5, 0\n"
+"	.short 0x8000, 0x0000, 0x009D, 36, 5, 0\n"
+"	.short 0x0000, 0x0000, 0x00BF, 36, -3, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
 SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_25[] = INCBIN_U8("graphics/reuse/AnimSprite_EkrBaseKaiten_25.4bpp");
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_26[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_26.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_27[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_27.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_28[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_28.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_29[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_29.bin");
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_26\n"
+"AnimSprite_EkrBaseKaiten_26:\n"
+"	.short 0x4000, 0x1000, 0x0034, -7, -4, 0\n"
+"	.short 0x0000, 0x5000, 0x0017, -7, 4, 0\n"
+"	.short 0x0000, 0x6000, 0x0017, -8, -20, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_27\n"
+"AnimSprite_EkrBaseKaiten_27:\n"
+"	.short 0x0000, 0x5000, 0x0040, -1, -16, 0\n"
+"	.short 0x8000, 0x1000, 0x0042, -9, -16, 0\n"
+"	.short 0x4000, 0x2000, 0x0043, -9, -24, 0\n"
+"	.short 0x0000, 0x2000, 0x0045, 7, -24, 0\n"
+"	.short 0x0000, 0x5000, 0x0040, -6, 0, 0\n"
+"	.short 0x8000, 0x1000, 0x0042, -14, 0, 0\n"
+"	.short 0x4000, 0x1000, 0x0043, -6, 16, 0\n"
+"	.short 0x0000, 0x1000, 0x0045, -14, 16, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_28\n"
+"AnimSprite_EkrBaseKaiten_28:\n"
+"	.short 0x0000, 0x5000, 0x0049, -1, -12, 0\n"
+"	.short 0x8000, 0x1000, 0x004B, -9, -12, 0\n"
+"	.short 0x0000, 0x5000, 0x0046, 7, -28, 0\n"
+"	.short 0x8000, 0x1000, 0x0048, -1, -28, 0\n"
+"	.short 0x0000, 0x6000, 0x0046, -21, 12, 0\n"
+"	.short 0x8000, 0x2000, 0x0048, -5, 12, 0\n"
+"	.short 0x0000, 0x6000, 0x0049, -13, -4, 0\n"
+"	.short 0x8000, 0x2000, 0x004B, 3, -4, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_29\n"
+"AnimSprite_EkrBaseKaiten_29:\n"
+"	.short 0x0000, 0x5000, 0x004D, -1, -16, 0\n"
+"	.short 0x0000, 0x5000, 0x004D, -17, 0, 0\n"
+"	.short 0x0000, 0x1000, 0x006D, -1, 0, 0\n"
+"	.short 0x0000, 0x1000, 0x004E, -9, -8, 0\n"
+"	.short 0x0000, 0x1000, 0x006F, 7, 0, 0\n"
+"	.short 0x0000, 0x1000, 0x006F, -1, 8, 0\n"
+"	.short 0x4000, 0x1000, 0x004F, 15, -24, 0\n"
+"	.short 0x0000, 0x1000, 0x006D, 15, -16, 0\n"
+"	.short 0x0000, 0x1000, 0x006F, 15, -8, 0\n"
+"	.short 0x0000, 0x1000, 0x006F, 23, -16, 0\n"
+"	.short 0x8000, 0x1000, 0x004C, -25, 16, 0\n"
+"	.short 0x0000, 0x1000, 0x004E, -25, 8, 0\n"
+"	.short 0x0000, 0x1000, 0x004E, 7, -24, 0\n"
+"	.short 0x0000, 0x1000, 0x006D, -17, 16, 0\n"
+"	.short 0x0000, 0x1000, 0x006F, -17, 24, 0\n"
+"	.short 0x0000, 0x1000, 0x006F, -9, 16, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
 SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_30[] = INCBIN_U8("graphics/reuse/AnimSprite_EkrBaseKaiten_30.4bpp");
-SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_31[] = INCBIN_U8("data/residual/AnimSprite_EkrBaseKaiten_31.bin");
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p776, \"a\", %progbits\n"
+"	.global AnimSprite_EkrBaseKaiten_31\n"
+"AnimSprite_EkrBaseKaiten_31:\n"
+"	.short 0x4000, 0x9000, 0x0094, 29, -22, 0\n"
+"	.short 0x0000, 0x5000, 0x0098, 13, -22, 0\n"
+"	.short 0x4000, 0x9000, 0x009A, -3, -6, 0\n"
+"	.short 0x0000, 0x5000, 0x005E, -59, 2, 0\n"
+"	.short 0x4000, 0x1000, 0x009E, -59, 18, 0\n"
+"	.short 0x4000, 0x1000, 0x00BE, -3, -14, 0\n"
+"	.short 0x4000, 0x1000, 0x00AC, 37, -6, 0\n"
+"	.short 0x0000, 0x1000, 0x00AE, 29, -6, 0\n"
+"	.short 0x0000, 0x5000, 0x0098, -19, -13, 0\n"
+"	.short 0x4000, 0x9000, 0x009A, -35, 3, 0\n"
+"	.short 0x4000, 0x1000, 0x00BE, -35, -5, 0\n"
+"	.short 0x8000, 0x1000, 0x009D, -43, 5, 0\n"
+"	.short 0x0000, 0x1000, 0x00BF, -43, -3, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
 SECTION(".rodata.dat_worldmap_gmapunit_p776") u8 AnimSprite_EkrBaseKaiten_32[] = INCBIN_U8("graphics/reuse/AnimSprite_EkrBaseKaiten_32.4bpp");

@@ -4,7 +4,69 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_banim_p166") u8 AnimSprite_EfxMshield_33[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_33.bin");
-SECTION(".rodata.dat_data_banim_p166") u8 AnimSprite_EfxMshield_34[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_34.bin");
-SECTION(".rodata.dat_data_banim_p166") u8 AnimSprite_EfxMshield_35[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_35.bin");
-SECTION(".rodata.dat_data_banim_p166") u8 AnimSprite_EfxMshield_36[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_36.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p166, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMshield_33\n"
+"AnimSprite_EfxMshield_33:\n"
+"	.short 0x0000, 0x0000, 0x0014, -31, -28, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -36, -24, 0\n"
+"	.short 0x0000, 0x0000, 0x0015, -33, -19, 0\n"
+"	.short 0x0000, 0x0000, 0x0015, -25, -16, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -25, -31, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -9, -36, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -1, -38, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, 6, -40, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, 14, -42, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, 22, -44, 0\n"
+"	.short 0x0000, 0x0000, 0x0015, 26, -49, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -17, -34, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p166, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMshield_34\n"
+"AnimSprite_EfxMshield_34:\n"
+"	.short 0x0000, 0x0000, 0x0014, -36, -24, 0\n"
+"	.short 0x0000, 0x0000, 0x0015, -33, -19, 0\n"
+"	.short 0x0000, 0x0000, 0x0015, -25, -16, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -31, -28, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -25, -31, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -9, -36, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -1, -38, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, 6, -40, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, 14, -42, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, 22, -44, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -17, -34, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p166, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMshield_35\n"
+"AnimSprite_EfxMshield_35:\n"
+"	.short 0x0000, 0x0000, 0x0015, -33, -19, 0\n"
+"	.short 0x0000, 0x0000, 0x0015, -25, -16, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -36, -24, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -31, -28, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -25, -31, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -9, -36, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -1, -38, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, 6, -40, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, 14, -42, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -17, -34, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p166, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMshield_36\n"
+"AnimSprite_EfxMshield_36:\n"
+"	.short 0x0000, 0x0000, 0x0015, -25, -16, 0\n"
+"	.short 0x0000, 0x0000, 0x0015, -33, -19, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -36, -24, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -31, -28, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -25, -31, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -9, -36, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -1, -38, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, 6, -40, 0\n"
+"	.short 0x0000, 0x0000, 0x0014, -17, -34, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);

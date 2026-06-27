@@ -4,7 +4,39 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1030") u8 AnimSprite_EfxChill_R_4[] = INCBIN_U8("data/residual/AnimSprite_EfxChill_R_4.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1030") u8 AnimSprite_EfxChill_R_5[] = INCBIN_U8("data/residual/AnimSprite_EfxChill_R_5.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1030") u8 AnimSprite_EfxChill_R_6[] = INCBIN_U8("data/residual/AnimSprite_EfxChill_R_6.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1030") u8 AnimSprite_EfxChill_R_7[] = INCBIN_U8("data/residual/AnimSprite_EfxChill_R_7.bin");
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p1030, \"a\", %progbits\n"
+"	.global AnimSprite_EfxChill_R_4\n"
+"AnimSprite_EfxChill_R_4:\n"
+"	.short 0x8000, 0x8000, 0x0020, 0, -16, 0\n"
+"	.short 0x8000, 0x4000, 0x0022, 16, -16, 0\n"
+"	.short 0x0000, 0x0000, 0x0000, 7, -24, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p1030, \"a\", %progbits\n"
+"	.global AnimSprite_EfxChill_R_5\n"
+"AnimSprite_EfxChill_R_5:\n"
+"	.short 0x8000, 0x8000, 0x0020, -16, -16, 0\n"
+"	.short 0x8000, 0x4000, 0x0022, 0, -16, 0\n"
+"	.short 0x0000, 0x0000, 0x0000, -9, -24, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p1030, \"a\", %progbits\n"
+"	.global AnimSprite_EfxChill_R_6\n"
+"AnimSprite_EfxChill_R_6:\n"
+"	.short 0x8000, 0x8000, 0x0020, 8, -16, 0\n"
+"	.short 0x8000, 0x4000, 0x0022, 24, -16, 0\n"
+"	.short 0x0000, 0x0000, 0x0000, 15, -24, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p1030, \"a\", %progbits\n"
+"	.global AnimSprite_EfxChill_R_7\n"
+"AnimSprite_EfxChill_R_7:\n"
+"	.short 0x8000, 0x8000, 0x0020, -24, -16, 0\n"
+"	.short 0x8000, 0x4000, 0x0022, -8, -16, 0\n"
+"	.short 0x0000, 0x0000, 0x0000, -17, -24, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
