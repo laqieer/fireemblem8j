@@ -8088,3 +8088,27 @@ Workers NEVER commit shared generated files (ldscript.txt, asm/baserom.s, jp_sym
 INCBIN dep map) — the integrator regenerates (gen_data_incbin_deps.py) + runs the single
 authoritative make compare + commits/pushes. Non-overlapping file ownership per worker.
 Integrator: fresh rebase → regen → make compare → merge or hard-reject with the diff.
+
+## D308 — Honest "all axes complete" definition (Copilot-validated)
+
+**Date context:** 2026-06-27. P10 user directive: drive ALL axes to completion. Two axes
+have hard reference-parity ceilings below literal 100%. Copilot-validated definition:
+
+- **#1 build self-containment** → literal 100% (DONE).
+- **#2 matching-C** → match every FEASIBLE function in C; the residual region-different/
+  JP-only functions are kept as descriptive asm ONLY after an ADVERSARIAL VERIFIER record
+  proves each is a genuine agbcc/codegen wall (like fe8u ships its own NONMATCHING fns).
+  Literal 100% is aspirational (a transmuter/permuter breakthrough or TU reshape may still
+  close them) but not required for an honest complete decomp once residuals are proven
+  irreducible. DO NOT call a function irreducible without the verifier record.
+- **#3 extracted data** → literal 100% (DONE).
+- **#4 named symbols** → name all semantically/fe8u-parity-nameable symbols; the ~1700
+  banim/gfx/snd auto asset-SHEET labels that fe8u ALSO leaves unnamed are a documented
+  CONVENTION FLOOR, not a defect. Literal 100% is only legitimate if the metric EXCLUDES
+  those conventionally-unnamed generated labels — NEVER by fabricating names to game the
+  counter.
+- **#5 shiftability** → gate 0 (current residual 1 resolves via #2 _RestoreBgm decomp).
+- **#6 asset editability** → 0 opaque structured raw-incbin.
+
+**Completion = reference-parity (vs fe8u) + documented, verifier-proven residuals.** The
+parallel P9 teams (D307) drive each axis to this max; the integrator gates on make compare.
