@@ -67,9 +67,52 @@ SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGFinish_7[] = INCBIN_U1
 SECTION(".rodata.dat_data_banim_p206") u16 Tsa_efxGorgonBGFinish_8[] = INCBIN_U16("graphics/banim/_us/banim/assets/tsa/006FE81C_Tsa_086FE81C.map.bin.lz");
 SECTION(".rodata.dat_data_banim_p206") u16 Img_NaglfarSprites_A[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006FE938_Img_NaglfarSprites_A.4bpp.lz");
 SECTION(".rodata.dat_data_banim_p206") u16 Pal_NaglfarSprites_A[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/006FE938_Img_NaglfarSprites_A.gbapal");
-SECTION(".rodata.dat_data_banim_p206") u8 AnimSprite_NaglfarSprites_A_0[] = INCBIN_U8("data/residual/AnimSprite_NaglfarSprites_A_0.bin");
-SECTION(".rodata.dat_data_banim_p206") u8 AnimSprite_NaglfarSprites_A_1[] = INCBIN_U8("data/residual/AnimSprite_NaglfarSprites_A_1.bin");
-SECTION(".rodata.dat_data_banim_p206") u8 AnimSprite_Banim_49[] = INCBIN_U8("data/residual/AnimSprite_Banim_49.bin");
-SECTION(".rodata.dat_data_banim_p206") u8 AnimSprite_efxNaglfarOBJ_0[] = INCBIN_U8("data/residual/AnimSprite_efxNaglfarOBJ_0.bin");
-SECTION(".rodata.dat_data_banim_p206") u8 AnimSprite_efxNaglfarOBJ_1[] = INCBIN_U8("data/residual/AnimSprite_efxNaglfarOBJ_1.bin");
-SECTION(".rodata.dat_data_banim_p206") u8 AnimSprite_efxNaglfarOBJ_2[] = INCBIN_U8("data/residual/AnimSprite_efxNaglfarOBJ_2.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p206, \"a\", %progbits\n"
+"	.global AnimSprite_NaglfarSprites_A_0\n"
+"AnimSprite_NaglfarSprites_A_0:\n"
+"	.short 0x0000, 0x8000, 0x0000, -25, -38, 0\n"
+"	.short 0x8000, 0x8000, 0x0004, 7, -38, 0\n"
+"	.short 0x0000, 0x8000, 0x0006, -20, -6, 0\n"
+"	.short 0x8000, 0x8000, 0x000A, 12, -6, 0\n"
+"	.short 0x4000, 0x0000, 0x0072, -12, 26, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p206, \"a\", %progbits\n"
+"	.global AnimSprite_NaglfarSprites_A_1\n"
+"AnimSprite_NaglfarSprites_A_1:\n"
+"	.short 0x0000, 0x8000, 0x000C, -24, -16, 0\n"
+"	.short 0x8000, 0x8000, 0x0010, 8, -16, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p206, \"a\", %progbits\n"
+"	.global AnimSprite_Banim_49\n"
+"AnimSprite_Banim_49:\n"
+"	.short 0x4000, 0x8000, 0x0012, -16, -16, 0\n"
+"	.short 0x4000, 0x4000, 0x0052, -16, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p206, \"a\", %progbits\n"
+"	.global AnimSprite_efxNaglfarOBJ_0\n"
+"AnimSprite_efxNaglfarOBJ_0:\n"
+"	.short 0x0000, 0x4000, 0x0016, -8, -8, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p206, \"a\", %progbits\n"
+"	.global AnimSprite_efxNaglfarOBJ_1\n"
+"AnimSprite_efxNaglfarOBJ_1:\n"
+"	.short 0x0000, 0x0000, 0x0074, -8, -8, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p206, \"a\", %progbits\n"
+"	.global AnimSprite_efxNaglfarOBJ_2\n"
+"AnimSprite_efxNaglfarOBJ_2:\n"
+"	.short 0x0000, 0xB000, 0x000C, -8, -16, 0\n"
+"	.short 0x8000, 0xB000, 0x0010, -24, -16, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);

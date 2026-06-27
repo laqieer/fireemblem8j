@@ -4,29 +4,350 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right1[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right1.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right2[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right2.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right3[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right3.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right4[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right4.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right1\n"
+"AnimSprite_FirebreathOBJ_Right1:\n"
+"	.short 0x0000, 0x1000, 0x0064, -24, -8, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right2\n"
+"AnimSprite_FirebreathOBJ_Right2:\n"
+"	.short 0x0000, 0x5000, 0x0000, -16, -10, 0\n"
+"	.short 0x0000, 0x1000, 0x0063, -24, -4, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right3\n"
+"AnimSprite_FirebreathOBJ_Right3:\n"
+"	.short 0x0000, 0x5000, 0x0002, 6, -15, 0\n"
+"	.short 0x8000, 0x1000, 0x0004, -2, -15, 0\n"
+"	.short 0x4000, 0x1000, 0x0042, 6, 1, 0\n"
+"	.short 0x0000, 0x1000, 0x0044, -2, 1, 0\n"
+"	.short 0x0000, 0x5000, 0x0000, -14, -10, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right4\n"
+"AnimSprite_FirebreathOBJ_Right4:\n"
+"	.short 0x0000, 0xB000, 0x0005, 22, -9, 0\n"
+"	.short 0x0000, 0x7000, 0x0002, 11, -5, 0\n"
+"	.short 0x8000, 0x3000, 0x0004, 3, -5, 0\n"
+"	.short 0x4000, 0x3000, 0x0042, 11, -13, 0\n"
+"	.short 0x0000, 0x3000, 0x0044, 3, -13, 0\n"
+"	.short 0x0000, 0x7000, 0x0000, -6, 2, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
 SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right5[] = INCBIN_U8("graphics/reuse/AnimSprite_FirebreathOBJ_Right5.4bpp");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right6[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right6.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right7[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right7.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right8[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right8.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right9[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right9.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right10[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right10.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right11[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right11.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right12[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right12.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right13[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right13.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right14[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right14.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right15[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right15.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right16[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right16.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right17[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right17.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right18[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right18.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right19[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right19.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right20[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right20.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right21[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right21.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right22[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right22.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right6\n"
+"AnimSprite_FirebreathOBJ_Right6:\n"
+"	.short 0x0000, 0x9000, 0x0005, 9, -19, 0\n"
+"	.short 0x0000, 0x9000, 0x000D, 45, -25, 0\n"
+"	.short 0x0000, 0x5000, 0x0000, -4, -11, 0\n"
+"	.short 0x0000, 0x9000, 0x0009, 20, -8, 0\n"
+"	.short 0x0000, 0x1000, 0x0064, -16, -2, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right7\n"
+"AnimSprite_FirebreathOBJ_Right7:\n"
+"	.short 0x0001, 0xFFFF, 0xFEBF, 0x0000, 0x0000, 0x0141\n"
+"	.short 0x0000, 0x9000, 0x0005, 28, -16, 0\n"
+"	.short 0x0000, 0x9000, 0x0011, 64, -25, 0\n"
+"	.short 0x0000, 0x5000, 0x0002, 17, -9, 0\n"
+"	.short 0x8000, 0x1000, 0x0004, 9, -9, 0\n"
+"	.short 0x4000, 0x1000, 0x0042, 17, 7, 0\n"
+"	.short 0x0000, 0x1000, 0x0044, 9, 7, 0\n"
+"	.short 0x0100, 0x8000, 0x000D, 40, -3, 0\n"
+"	.short 0x0000, 0x5000, 0x0000, -12, -6, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right8\n"
+"AnimSprite_FirebreathOBJ_Right8:\n"
+"	.short 0x0001, 0xFFFF, 0xFE92, 0x0000, 0x0000, 0x016E\n"
+"	.short 0x0000, 0x5000, 0x0002, 10, -2, 0\n"
+"	.short 0x8000, 0x1000, 0x0004, 2, -2, 0\n"
+"	.short 0x4000, 0x1000, 0x0042, 10, 14, 0\n"
+"	.short 0x0000, 0x1000, 0x0044, 2, 14, 0\n"
+"	.short 0x0000, 0x9000, 0x0015, 68, -23, 0\n"
+"	.short 0x0000, 0x9000, 0x0005, 18, -22, 0\n"
+"	.short 0x0100, 0x8000, 0x0011, 36, -3, 0\n"
+"	.short 0x0000, 0x5000, 0x0002, 46, -26, 0\n"
+"	.short 0x8000, 0x1000, 0x0004, 38, -26, 0\n"
+"	.short 0x4000, 0x1000, 0x0042, 46, -10, 0\n"
+"	.short 0x0000, 0x1000, 0x0044, 38, -10, 0\n"
+"	.short 0x0000, 0x5000, 0x0000, -11, -3, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right9\n"
+"AnimSprite_FirebreathOBJ_Right9:\n"
+"	.short 0x0000, 0x5000, 0x0002, 16, 0, 0\n"
+"	.short 0x8000, 0x1000, 0x0004, 8, 0, 0\n"
+"	.short 0x4000, 0x1000, 0x0042, 16, 16, 0\n"
+"	.short 0x0000, 0x1000, 0x0044, 8, 16, 0\n"
+"	.short 0x0000, 0x9000, 0x0019, 84, -39, 0\n"
+"	.short 0x0000, 0x9000, 0x0009, 25, -17, 0\n"
+"	.short 0x0000, 0x9000, 0x0005, 46, -24, 0\n"
+"	.short 0x0000, 0x1000, 0x0063, -13, 1, 0\n"
+"	.short 0x0000, 0x9000, 0x0011, 68, -7, 0\n"
+"	.short 0x0000, 0x5000, 0x0000, 4, -10, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right10\n"
+"AnimSprite_FirebreathOBJ_Right10:\n"
+"	.short 0x0001, 0xFFFF, 0xFE00, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x0000, 0x9000, 0x0005, 22, -7, 0\n"
+"	.short 0x0000, 0x9000, 0x000D, 38, -25, 0\n"
+"	.short 0x0000, 0x9000, 0x0005, 56, -34, 0\n"
+"	.short 0x0000, 0x5000, 0x0000, -2, -7, 0\n"
+"	.short 0x0000, 0x5000, 0x0000, 6, -2, 0\n"
+"	.short 0x0000, 0x5000, 0x0002, 65, 3, 0\n"
+"	.short 0x8000, 0x1000, 0x0004, 57, 3, 0\n"
+"	.short 0x4000, 0x1000, 0x0042, 65, 19, 0\n"
+"	.short 0x0000, 0x1000, 0x0044, 57, 19, 0\n"
+"	.short 0x0100, 0x8000, 0x0009, 11, -23, 0\n"
+"	.short 0x0000, 0xB000, 0x0019, 86, -15, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right11\n"
+"AnimSprite_FirebreathOBJ_Right11:\n"
+"	.short 0x0002, 0xFFFF, 0xFE92, 0x0000, 0x0000, 0x016E\n"
+"	.short 0x0002, 0xFFFF, 0xFE00, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x0000, 0xB000, 0x0009, 39, -30, 0\n"
+"	.short 0x0000, 0xB000, 0x0011, 53, -8, 0\n"
+"	.short 0x0000, 0x7000, 0x0002, 17, 2, 0\n"
+"	.short 0x8000, 0x3000, 0x0004, 9, 2, 0\n"
+"	.short 0x4000, 0x3000, 0x0042, 17, -6, 0\n"
+"	.short 0x0000, 0x3000, 0x0044, 9, -6, 0\n"
+"	.short 0x0000, 0x7000, 0x0002, 37, -6, 0\n"
+"	.short 0x8000, 0x3000, 0x0004, 29, -6, 0\n"
+"	.short 0x4000, 0x3000, 0x0042, 37, -14, 0\n"
+"	.short 0x0000, 0x3000, 0x0044, 29, -14, 0\n"
+"	.short 0x0000, 0x7000, 0x0002, 81, -24, 0\n"
+"	.short 0x8000, 0x3000, 0x0004, 73, -24, 0\n"
+"	.short 0x4000, 0x3000, 0x0042, 81, -32, 0\n"
+"	.short 0x0000, 0x3000, 0x0044, 73, -32, 0\n"
+"	.short 0x0100, 0x8000, 0x0009, 83, -16, 0\n"
+"	.short 0x0000, 0x7000, 0x0000, -4, -3, 0\n"
+"	.short 0x0100, 0x8200, 0x000D, 29, -3, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right12\n"
+"AnimSprite_FirebreathOBJ_Right12:\n"
+"	.short 0x0002, 0xFFFF, 0xFE92, 0x0000, 0x0000, 0x016E\n"
+"	.short 0x0002, 0xFFFF, 0xFE00, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x0000, 0xB000, 0x000D, 44, -29, 0\n"
+"	.short 0x0000, 0xB000, 0x0015, 60, -13, 0\n"
+"	.short 0x0000, 0xB000, 0x0005, 12, -13, 0\n"
+"	.short 0x0000, 0xB000, 0x0005, 60, -23, 0\n"
+"	.short 0x0000, 0xB000, 0x0005, 85, -34, 0\n"
+"	.short 0x0100, 0x8000, 0x000D, -159, -4, 0\n"
+"	.short 0x0000, 0x1000, 0x0064, -20, 2, 0\n"
+"	.short 0x0000, 0x7000, 0x0000, -4, -4, 0\n"
+"	.short 0x0100, 0x8200, 0x0011, 38, -1, 0\n"
+"	.short 0x0000, 0x3000, 0x0064, 28, -21, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right13\n"
+"AnimSprite_FirebreathOBJ_Right13:\n"
+"	.short 0x0000, 0xB000, 0x0005, 25, -8, 0\n"
+"	.short 0x0000, 0xB000, 0x0011, 49, -24, 0\n"
+"	.short 0x0000, 0xB000, 0x0019, 65, -7, 0\n"
+"	.short 0x0000, 0xB000, 0x0009, 81, -21, 0\n"
+"	.short 0x0000, 0x1000, 0x0064, 5, 8, 0\n"
+"	.short 0x0000, 0x5000, 0x0000, -11, 0, 0\n"
+"	.short 0x0000, 0x7000, 0x0000, 9, -3, 0\n"
+"	.short 0x0000, 0x3000, 0x0063, 35, -20, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right14\n"
+"AnimSprite_FirebreathOBJ_Right14:\n"
+"	.short 0x0001, 0xFFFF, 0xFE00, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x0000, 0xB000, 0x0019, 74, -4, 0\n"
+"	.short 0x0000, 0xB000, 0x0015, 58, -33, 0\n"
+"	.short 0x0000, 0xB000, 0x0009, 33, -6, 0\n"
+"	.short 0x0000, 0x1000, 0x0063, -12, 4, 0\n"
+"	.short 0x0000, 0x3000, 0x0063, 17, 5, 0\n"
+"	.short 0x0000, 0x7000, 0x0002, 5, 1, 0\n"
+"	.short 0x8000, 0x3000, 0x0004, -3, 1, 0\n"
+"	.short 0x4000, 0x3000, 0x0042, 5, -7, 0\n"
+"	.short 0x0000, 0x3000, 0x0044, -3, -7, 0\n"
+"	.short 0x0100, 0x8000, 0x0009, 12, -20, 0\n"
+"	.short 0x0000, 0x3000, 0x0064, 43, -23, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right15\n"
+"AnimSprite_FirebreathOBJ_Right15:\n"
+"	.short 0x0002, 0xFFFF, 0xFE92, 0x0000, 0x0000, 0x016E\n"
+"	.short 0x0002, 0xFFFF, 0xFE00, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x0000, 0xB000, 0x0019, 63, -31, 0\n"
+"	.short 0x0000, 0xB000, 0x000D, 37, -8, 0\n"
+"	.short 0x0000, 0x7000, 0x0002, 71, 17, 0\n"
+"	.short 0x8000, 0x3000, 0x0004, 63, 17, 0\n"
+"	.short 0x4000, 0x3000, 0x0042, 71, 9, 0\n"
+"	.short 0x0000, 0x3000, 0x0044, 63, 9, 0\n"
+"	.short 0x0000, 0x7000, 0x0000, -7, 1, 0\n"
+"	.short 0x0000, 0x7000, 0x0002, 10, -2, 0\n"
+"	.short 0x8000, 0x3000, 0x0004, 2, -2, 0\n"
+"	.short 0x4000, 0x3000, 0x0042, 10, -10, 0\n"
+"	.short 0x0000, 0x3000, 0x0044, 2, -10, 0\n"
+"	.short 0x0000, 0x3000, 0x0064, 25, -5, 0\n"
+"	.short 0x0100, 0x8000, 0x0009, 8, -4, 0\n"
+"	.short 0x0100, 0x8200, 0x000D, 17, -29, 0\n"
+"	.short 0x0000, 0x3000, 0x0062, 49, -27, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right16\n"
+"AnimSprite_FirebreathOBJ_Right16:\n"
+"	.short 0x0002, 0xFFFF, 0xFE92, 0x0000, 0x0000, 0x016E\n"
+"	.short 0x0002, 0xFFFF, 0xFE00, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x8000, 0x9000, 0x001D, 93, -4, 0\n"
+"	.short 0x8000, 0x5000, 0x001F, 85, -4, 0\n"
+"	.short 0x8000, 0x1000, 0x0040, 77, -4, 0\n"
+"	.short 0x8000, 0x1000, 0x0041, 77, 12, 0\n"
+"	.short 0x0000, 0x9000, 0x0011, 45, -19, 0\n"
+"	.short 0x0000, 0x9000, 0x0015, -159, -9, 0\n"
+"	.short 0x0000, 0x9000, 0x0005, 81, -27, 0\n"
+"	.short 0x0000, 0x5000, 0x0002, 6, -10, 0\n"
+"	.short 0x8000, 0x1000, 0x0004, -2, -10, 0\n"
+"	.short 0x4000, 0x1000, 0x0042, 6, 6, 0\n"
+"	.short 0x0000, 0x1000, 0x0044, -2, 6, 0\n"
+"	.short 0x0000, 0x9000, 0x0005, 17, -8, 0\n"
+"	.short 0x0000, 0x1000, 0x0062, 45, 17, 0\n"
+"	.short 0x0100, 0x8000, 0x000D, 21, -29, 0\n"
+"	.short 0x0100, 0x8200, 0x0011, 37, 9, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right17\n"
+"AnimSprite_FirebreathOBJ_Right17:\n"
+"	.short 0x0002, 0xFFFF, 0xFE92, 0x0000, 0x0000, 0x016E\n"
+"	.short 0x0002, 0xFFFF, 0xFE00, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x0000, 0x9000, 0x0015, 43, -16, 0\n"
+"	.short 0x0000, 0x9000, 0x0005, 1, -16, 0\n"
+"	.short 0x0000, 0x9000, 0x0009, 33, 2, 0\n"
+"	.short 0x0000, 0x9000, 0x0009, 78, -29, 0\n"
+"	.short 0x0100, 0x8000, 0x0015, 21, -29, 0\n"
+"	.short 0x0100, 0x8200, 0x0011, 52, 12, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right18\n"
+"AnimSprite_FirebreathOBJ_Right18:\n"
+"	.short 0x0001, 0xFFFF, 0xFE00, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x0000, 0x5000, 0x0000, 31, 4, 0\n"
+"	.short 0x0000, 0x9000, 0x0019, 54, -22, 0\n"
+"	.short 0x0000, 0x9000, 0x0009, 12, -19, 0\n"
+"	.short 0x0000, 0x9000, 0x000D, 61, -2, 0\n"
+"	.short 0x0000, 0x9000, 0x000D, 88, -33, 0\n"
+"	.short 0x0000, 0x1000, 0x0064, 46, -16, 0\n"
+"	.short 0x0000, 0x9000, 0x0019, 38, -33, 0\n"
+"	.short 0x0100, 0x8000, 0x0015, 82, 8, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right19\n"
+"AnimSprite_FirebreathOBJ_Right19:\n"
+"	.short 0x0001, 0xFFFF, 0xFE00, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x8000, 0x9000, 0x001D, 78, -20, 0\n"
+"	.short 0x8000, 0x5000, 0x001F, 70, -20, 0\n"
+"	.short 0x8000, 0x1000, 0x0040, 62, -20, 0\n"
+"	.short 0x8000, 0x1000, 0x0041, 62, -4, 0\n"
+"	.short 0x0000, 0x5000, 0x0002, 38, -1, 0\n"
+"	.short 0x8000, 0x1000, 0x0004, 30, -1, 0\n"
+"	.short 0x4000, 0x1000, 0x0042, 38, 15, 0\n"
+"	.short 0x0000, 0x1000, 0x0044, 30, 15, 0\n"
+"	.short 0x0000, 0x9000, 0x000D, 16, -19, 0\n"
+"	.short 0x0000, 0x9000, 0x0011, 72, 0, 0\n"
+"	.short 0x0000, 0x9000, 0x0011, 89, -34, 0\n"
+"	.short 0x0000, 0x1000, 0x0063, 50, -19, 0\n"
+"	.short 0x0100, 0x8000, 0x0019, 96, 8, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right20\n"
+"AnimSprite_FirebreathOBJ_Right20:\n"
+"	.short 0x0000, 0x9000, 0x0005, 45, -3, 0\n"
+"	.short 0x0000, 0x9000, 0x0011, 26, -21, 0\n"
+"	.short 0x0000, 0x9000, 0x0015, 83, -4, 0\n"
+"	.short 0x0000, 0x9000, 0x0015, 88, -35, 0\n"
+"	.short 0x0000, 0x1000, 0x0064, 64, -24, 0\n"
+"	.short 0x0000, 0x5000, 0x0000, 56, -16, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right21\n"
+"AnimSprite_FirebreathOBJ_Right21:\n"
+"	.short 0x0000, 0x9000, 0x0009, 62, -5, 0\n"
+"	.short 0x0000, 0x9000, 0x0019, 80, -13, 0\n"
+"	.short 0x0000, 0x9000, 0x0019, 88, -39, 0\n"
+"	.short 0x0000, 0x9000, 0x0015, 36, -23, 0\n"
+"	.short 0x0000, 0x1000, 0x0062, 72, -28, 0\n"
+"	.short 0x0000, 0x5000, 0x0000, 69, -19, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right22\n"
+"AnimSprite_FirebreathOBJ_Right22:\n"
+"	.short 0x0001, 0xFFFF, 0xFE00, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x0000, 0x9000, 0x0019, 48, -25, 0\n"
+"	.short 0x0000, 0x9000, 0x000D, 78, -7, 0\n"
+"	.short 0x0100, 0x8000, 0x0009, 72, -32, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
 SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right23[] = INCBIN_U8("graphics/reuse/AnimSprite_FirebreathOBJ_Right23.4bpp");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right24[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right24.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right25[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right25.bin");
-SECTION(".rodata.dat_data_banim_p29") u8 AnimSprite_FirebreathOBJ_Right26[] = INCBIN_U8("data/residual/AnimSprite_FirebreathOBJ_Right26.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right24\n"
+"AnimSprite_FirebreathOBJ_Right24:\n"
+"	.short 0x0000, 0x9000, 0x0015, 66, -18, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right25\n"
+"AnimSprite_FirebreathOBJ_Right25:\n"
+"	.short 0x0000, 0x9000, 0x0019, 80, -21, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p29, \"a\", %progbits\n"
+"	.global AnimSprite_FirebreathOBJ_Right26\n"
+"AnimSprite_FirebreathOBJ_Right26:\n"
+"	.short 0x8000, 0x9000, 0x001D, 104, -24, 0\n"
+"	.short 0x8000, 0x5000, 0x001F, 96, -24, 0\n"
+"	.short 0x8000, 0x1000, 0x0040, 88, -24, 0\n"
+"	.short 0x8000, 0x1000, 0x0041, 88, -8, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);

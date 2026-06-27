@@ -4,42 +4,343 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_2[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_2.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_3[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_3.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_4[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_4.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_5[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_5.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_6[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_6.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_2\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_2:\n"
+"	.short 0x0002, 0xFFFF, 0x00FC, 0x002C, 0xFFD4, 0x00FC\n"
+"	.short 0x0002, 0xFFFF, 0x00F0, 0xFFA8, 0x0058, 0x00F0\n"
+"	.short 0x0100, 0x8000, 0x0000, 47, -34, 0\n"
+"	.short 0x0100, 0x8200, 0x0004, 48, -27, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_3\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_3:\n"
+"	.short 0x0003, 0xFFFF, 0x00F0, 0x0057, 0xFFA9, 0x00F0\n"
+"	.short 0x0003, 0xFFFF, 0x00FC, 0x002C, 0xFFD4, 0x00FC\n"
+"	.short 0x0003, 0xFFFF, 0x00C3, 0xFF5B, 0x00A5, 0x00C3\n"
+"	.short 0x0100, 0x8000, 0x0000, 43, -36, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, 40, -32, 0\n"
+"	.short 0x0100, 0x8400, 0x0004, 42, -23, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_4\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_4:\n"
+"	.short 0x0003, 0xFFFF, 0x00F0, 0x0057, 0xFFA9, 0x00F0\n"
+"	.short 0x0003, 0xFFFF, 0x00FC, 0x002C, 0xFFD4, 0x00FC\n"
+"	.short 0x0003, 0xFFFF, 0x00B5, 0xFF26, 0x00DA, 0x00B5\n"
+"	.short 0x0100, 0x8000, 0x0000, 40, -38, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, 35, -32, 0\n"
+"	.short 0x0100, 0x8400, 0x0004, 39, -18, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_5\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_5:\n"
+"	.short 0x0003, 0xFFFF, 0x00DD, 0x007F, 0xFF81, 0x00DD\n"
+"	.short 0x0003, 0xFFFF, 0x008D, 0xFF0A, 0x00F6, 0x008D\n"
+"	.short 0x0003, 0xFFFF, 0x0117, 0x0031, 0xFFCF, 0x0117\n"
+"	.short 0x0100, 0x8000, 0x0000, 38, -41, 0\n"
+"	.short 0x0100, 0x8200, 0x0004, 37, -14, 0\n"
+"	.short 0x0100, 0x8400, 0x0000, 32, -33, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_6\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_6:\n"
+"	.short 0x0004, 0xFFFF, 0x00C4, 0x00A4, 0xFF5C, 0x00C4\n"
+"	.short 0x0004, 0xFFFF, 0x013C, 0x0037, 0xFFC9, 0x013C\n"
+"	.short 0x0004, 0xFFFF, 0x0060, 0xFEF5, 0x010B, 0x0060\n"
+"	.short 0x0004, 0xFFFF, 0x01AC, 0x0000, 0x0000, 0x01AC\n"
+"	.short 0x0100, 0x8000, 0x0000, 34, -45, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, 28, -34, 0\n"
+"	.short 0x0100, 0x8400, 0x0004, 35, -11, 0\n"
+"	.short 0x0100, 0x8600, 0x0008, 22, -25, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
 SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_7[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Back_7.4bpp");
 SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_8[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Back_8.4bpp");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_9[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_9.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_9\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_9:\n"
+"	.short 0x0002, 0xFFFF, 0x0188, 0x0148, 0xFEB8, 0x0188\n"
+"	.short 0x0002, 0xFFFF, 0x00F0, 0xFFA8, 0x0058, 0x00F0\n"
+"	.short 0x4000, 0x8000, 0x000C, -19, -25, 0\n"
+"	.short 0x0000, 0x8000, 0x0000, 11, -66, 0\n"
+"	.short 0x0100, 0x8000, 0x0000, 2, -46, 0\n"
+"	.short 0x0100, 0x8200, 0x0004, 18, 6, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
 SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_10[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Back_10.4bpp");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_11[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_11.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_11\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_11:\n"
+"	.short 0x0003, 0xFFFF, 0x0073, 0xFF36, 0x00CA, 0x0073\n"
+"	.short 0x0003, 0xFFFF, 0xFF6D, 0x0195, 0xFE6B, 0xFF6D\n"
+"	.short 0x0003, 0xFFFF, 0x00C4, 0x00A4, 0xFF5C, 0x00C4\n"
+"	.short 0x0100, 0x8000, 0x0000, -9, -50, 0\n"
+"	.short 0x0000, 0x4000, 0x0010, 1, -39, 0\n"
+"	.short 0x8000, 0x0000, 0x0012, 17, -39, 0\n"
+"	.short 0x4000, 0x0000, 0x0050, 1, -23, 0\n"
+"	.short 0x0000, 0x0000, 0x0052, 17, -23, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, -5, -63, 0\n"
+"	.short 0x0100, 0x8400, 0x0004, -2, -3, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
 SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_12[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Back_12.4bpp");
 SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_13[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Back_13.4bpp");
 SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_14[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Back_14.4bpp");
 SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_15[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Back_15.4bpp");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_16[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_16.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_16\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_16:\n"
+"	.short 0x0003, 0xFFFF, 0x0056, 0xFF10, 0x00F0, 0x0056\n"
+"	.short 0x0003, 0xFFFF, 0xFFA8, 0x01F8, 0xFF04, 0xFFD4\n"
+"	.short 0x0003, 0xFFFF, 0xFEE9, 0x0031, 0xFFCF, 0xFEE9\n"
+"	.short 0x0000, 0x8000, 0x0008, -16, -15, 0\n"
+"	.short 0x0100, 0x8000, 0x0000, 10, -19, 0\n"
+"	.short 0x0100, 0x8200, 0x0004, -6, -65, 0\n"
+"	.short 0x0100, 0x8400, 0x0004, -2, 1, 0\n"
+"	.short 0x8000, 0xB000, 0x0010, -56, -19, 0\n"
+"	.short 0x8000, 0x7000, 0x0012, -64, -19, 0\n"
+"	.short 0x0000, 0x8000, 0x0008, -67, -42, 0\n"
+"	.short 0x4000, 0x0000, 0x007E, -35, -41, 0\n"
+"	.short 0x4000, 0x0000, 0x005E, -19, -42, 0\n"
+"	.short 0x4000, 0x1000, 0x005E, -49, -40, 0\n"
+"	.short 0x0000, 0x8000, 0x0008, -61, -42, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
 SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_17[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Back_17.4bpp");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_18[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_18.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_19[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_19.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_20[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_20.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_21[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_21.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_22[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_22.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_23[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_23.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_24[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_24.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_25[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_25.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_26[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_26.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_27[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_27.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_28[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_28.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_29[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_29.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_30[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_30.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_31[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_31.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_32[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_32.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_33[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_33.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_34[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_34.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_35[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_35.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_36[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_36.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_37[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_37.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_38[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_38.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_39[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_39.bin");
-SECTION(".rodata.dat_data_banim_p89") u8 AnimSprite_EfxAlacaliburOBJ_Back_40[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Back_40.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_18\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_18:\n"
+"	.short 0x0003, 0xFFFF, 0x0056, 0xFF10, 0x00F0, 0x0056\n"
+"	.short 0x0003, 0xFFFF, 0x003F, 0x0168, 0xFE98, 0x003F\n"
+"	.short 0x0003, 0xFFFF, 0xFFC9, 0xFEC4, 0xFF04, 0x002C\n"
+"	.short 0x0100, 0x8000, 0x0000, -3, 12, 0\n"
+"	.short 0x0100, 0x8200, 0x0004, 4, -17, 0\n"
+"	.short 0x0100, 0x8400, 0x0004, -3, -60, 0\n"
+"	.short 0x0000, 0x8000, 0x0008, -48, -15, 0\n"
+"	.short 0x4000, 0x2000, 0x005E, -43, -23, 0\n"
+"	.short 0x4000, 0x2000, 0x005E, -36, -20, 0\n"
+"	.short 0x0000, 0x8000, 0x0008, -58, -42, 0\n"
+"	.short 0x4000, 0x1000, 0x005E, -43, -40, 0\n"
+"	.short 0x4000, 0x0000, 0x005E, -27, -41, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_19\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_19:\n"
+"	.short 0x0004, 0xFFFF, 0x006D, 0xFED3, 0x012D, 0x006D\n"
+"	.short 0x0004, 0xFFFF, 0x007D, 0x0157, 0xFEA9, 0x007D\n"
+"	.short 0x0004, 0xFFFF, 0x0141, 0x0000, 0x0000, 0x0141\n"
+"	.short 0x0004, 0xFFFF, 0xFFD3, 0xFF04, 0x00FC, 0xFFD3\n"
+"	.short 0x0100, 0x8000, 0x0000, -8, 26, 0\n"
+"	.short 0x0100, 0x8200, 0x0004, -3, -27, 0\n"
+"	.short 0x0100, 0x8400, 0x0013, -59, -15, 0\n"
+"	.short 0x0100, 0x8600, 0x0000, 2, -44, 0\n"
+"	.short 0x4000, 0x1000, 0x001E, -37, -21, 0\n"
+"	.short 0x4000, 0x0000, 0x001E, -17, -19, 0\n"
+"	.short 0x4000, 0x0000, 0x001E, -37, -24, 0\n"
+"	.short 0x4000, 0x0000, 0x003E, -30, -19, 0\n"
+"	.short 0x0000, 0x8000, 0x0013, -51, -40, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_20\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_20:\n"
+"	.short 0x0004, 0xFFFF, 0x00B7, 0x013C, 0xFEC4, 0x00B7\n"
+"	.short 0x0004, 0xFFFF, 0x0200, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x0004, 0xFFFF, 0xFFD3, 0xFF04, 0x00FC, 0xFFD3\n"
+"	.short 0x0004, 0xFFFF, 0x0092, 0xFE6B, 0x0195, 0x0092\n"
+"	.short 0x0100, 0x8000, 0x0004, -11, -41, 0\n"
+"	.short 0x0100, 0x8200, 0x0013, -68, -15, 0\n"
+"	.short 0x0100, 0x8400, 0x0000, 6, -29, 0\n"
+"	.short 0x0100, 0x8600, 0x0004, -11, 29, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_21\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_21:\n"
+"	.short 0x0002, 0xFFFF, 0x00CE, 0x00F5, 0xFF0B, 0x00CE\n"
+"	.short 0x0002, 0xFFFF, 0xFFD3, 0xFF04, 0x00FC, 0xFFD3\n"
+"	.short 0x0100, 0x8000, 0x0004, -17, -49, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, 11, -9, 0\n"
+"	.short 0x4000, 0x3000, 0x001E, -22, -15, 0\n"
+"	.short 0x4000, 0x2000, 0x007E, -4, -14, 0\n"
+"	.short 0x4000, 0x2000, 0x005E, 12, -13, 0\n"
+"	.short 0x4000, 0x3000, 0x005E, -20, -15, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_22\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_22:\n"
+"	.short 0x0002, 0xFFFF, 0x00CE, 0x00F5, 0xFF0B, 0x00CE\n"
+"	.short 0x0002, 0xFFFF, 0xFFD3, 0xFF04, 0x00FC, 0xFFD3\n"
+"	.short 0x0100, 0x8000, 0x0004, -23, -57, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, 13, 5, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_23\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_23:\n"
+"	.short 0x0002, 0xFFFF, 0x0118, 0x00EB, 0xFF15, 0x0118\n"
+"	.short 0x0002, 0xFFFF, 0xFFC8, 0xFEC5, 0x013B, 0xFFC8\n"
+"	.short 0x0100, 0x8000, 0x0004, -27, -64, 0\n"
+"	.short 0x0100, 0x8200, 0x0004, 15, 8, 0\n"
+"	.short 0x4000, 0x0000, 0x001E, 35, -10, 0\n"
+"	.short 0x4000, 0x1000, 0x001E, 19, -10, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_24\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_24:\n"
+"	.short 0x0002, 0xFFFF, 0x01BB, 0x00FF, 0xFF01, 0x01BB\n"
+"	.short 0x0002, 0xFFFF, 0xFFA6, 0xFE08, 0x01F8, 0xFFA6\n"
+"	.short 0x0100, 0x8000, 0x0004, -32, -68, 0\n"
+"	.short 0x0100, 0x8200, 0x0004, 15, 15, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_25\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_25:\n"
+"	.short 0x0000, 0x8000, 0x0000, 56, -56, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_26\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_26:\n"
+"	.short 0x0001, 0xFFFF, 0x00DD, 0xFF80, 0x0080, 0x00DD\n"
+"	.short 0x0100, 0x8000, 0x0000, 50, -53, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_27\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_27:\n"
+"	.short 0x0001, 0xFFFF, 0x00DD, 0xFF80, 0x0080, 0x00DD\n"
+"	.short 0x0100, 0x8000, 0x0000, 42, -46, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_28\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_28:\n"
+"	.short 0x0001, 0xFFFF, 0x0172, 0xFF29, 0x0080, 0x00DD\n"
+"	.short 0x0100, 0x8000, 0x0000, 37, -40, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_29\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_29:\n"
+"	.short 0x0001, 0xFFFF, 0xFE45, 0x0100, 0xFF80, 0xFF23\n"
+"	.short 0x0100, 0x8000, 0x0004, 40, -43, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_30\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_30:\n"
+"	.short 0x0001, 0xFFFF, 0xFF0B, 0x008E, 0xFF72, 0xFF0B\n"
+"	.short 0x0100, 0x8000, 0x0004, 50, -50, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_31\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_31:\n"
+"	.short 0x0001, 0xFFFF, 0xFEEB, 0x00A0, 0xFF60, 0xFEEB\n"
+"	.short 0x0100, 0x8000, 0x0004, 60, -59, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_32\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_32:\n"
+"	.short 0x0001, 0xFFFF, 0xFE8E, 0x00D6, 0xFF2A, 0xFE8E\n"
+"	.short 0x0100, 0x8000, 0x0004, 70, -68, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_33\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_33:\n"
+"	.short 0x0001, 0xFFFF, 0xFEEB, 0x00A0, 0xFF60, 0xFEEB\n"
+"	.short 0x0100, 0x8000, 0x0004, 81, -78, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_34\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_34:\n"
+"	.short 0x0001, 0xFFFF, 0xFF0B, 0x008E, 0xFF72, 0xFF0B\n"
+"	.short 0x0100, 0x8000, 0x0004, 91, -87, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_35\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_35:\n"
+"	.short 0x0001, 0xFFFF, 0xFE8E, 0x00D6, 0xFF80, 0xFF23\n"
+"	.short 0x0100, 0x8000, 0x0004, 96, -90, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_36\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_36:\n"
+"	.short 0x0001, 0xFFFF, 0x0172, 0xFF29, 0x0080, 0x00DD\n"
+"	.short 0x0100, 0x8000, 0x0000, 93, -82, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_37\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_37:\n"
+"	.short 0x0001, 0xFFFF, 0x00C3, 0xFF5B, 0x00A5, 0x00C3\n"
+"	.short 0x0100, 0x8000, 0x0000, 88, -77, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_38\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_38:\n"
+"	.short 0x0001, 0xFFFF, 0x00C3, 0xFF5B, 0x00A5, 0x00C3\n"
+"	.short 0x0100, 0x8000, 0x0000, 83, -66, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_39\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_39:\n"
+"	.short 0x0001, 0xFFFF, 0x00C3, 0xFF5B, 0x00A5, 0x00C3\n"
+"	.short 0x0100, 0x8000, 0x0000, 74, -52, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p89, \"a\", %progbits\n"
+"	.global AnimSprite_EfxAlacaliburOBJ_Back_40\n"
+"AnimSprite_EfxAlacaliburOBJ_Back_40:\n"
+"	.short 0x0001, 0xFFFF, 0x00C3, 0xFF5B, 0x00A5, 0x00C3\n"
+"	.short 0x0100, 0x8000, 0x0000, 65, -40, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);

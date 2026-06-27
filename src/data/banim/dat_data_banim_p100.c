@@ -4,14 +4,111 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_banim_p100") u8 AnimSprite_EfxMistyRainObj4_1[] = INCBIN_U8("data/residual/AnimSprite_EfxMistyRainObj4_1.bin");
-SECTION(".rodata.dat_data_banim_p100") u8 AnimSprite_EfxMistyRainObj4_2[] = INCBIN_U8("data/residual/AnimSprite_EfxMistyRainObj4_2.bin");
-SECTION(".rodata.dat_data_banim_p100") u8 AnimSprite_EfxMistyRainObj4_3[] = INCBIN_U8("data/residual/AnimSprite_EfxMistyRainObj4_3.bin");
-SECTION(".rodata.dat_data_banim_p100") u8 AnimSprite_EfxMistyRainObj4_4[] = INCBIN_U8("data/residual/AnimSprite_EfxMistyRainObj4_4.bin");
-SECTION(".rodata.dat_data_banim_p100") u8 AnimSprite_EfxMistyRainObj4_5[] = INCBIN_U8("data/residual/AnimSprite_EfxMistyRainObj4_5.bin");
-SECTION(".rodata.dat_data_banim_p100") u8 AnimSprite_EfxMistyRainObj4_6[] = INCBIN_U8("data/residual/AnimSprite_EfxMistyRainObj4_6.bin");
-SECTION(".rodata.dat_data_banim_p100") u8 AnimSprite_EfxMistyRainObj4_7[] = INCBIN_U8("data/residual/AnimSprite_EfxMistyRainObj4_7.bin");
-SECTION(".rodata.dat_data_banim_p100") u8 AnimSprite_EfxMistyRainObj4_8[] = INCBIN_U8("data/residual/AnimSprite_EfxMistyRainObj4_8.bin");
-SECTION(".rodata.dat_data_banim_p100") u8 AnimSprite_EfxMistyRainObj4_9[] = INCBIN_U8("data/residual/AnimSprite_EfxMistyRainObj4_9.bin");
-SECTION(".rodata.dat_data_banim_p100") u8 AnimSprite_EfxMistyRainObj4_10[] = INCBIN_U8("data/residual/AnimSprite_EfxMistyRainObj4_10.bin");
-SECTION(".rodata.dat_data_banim_p100") u8 AnimSprite_EfxMistyRainObj4_11[] = INCBIN_U8("data/residual/AnimSprite_EfxMistyRainObj4_11.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p100, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMistyRainObj4_1\n"
+"AnimSprite_EfxMistyRainObj4_1:\n"
+"	.short 0x0002, 0xFFFF, 0x0505, 0x0000, 0x0000, 0x0505\n"
+"	.short 0x0002, 0xFFFF, 0xFAFB, 0x0000, 0x0000, 0x0505\n"
+"	.short 0x0100, 0x8000, 0x0000, -20, 0, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, -13, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p100, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMistyRainObj4_2\n"
+"AnimSprite_EfxMistyRainObj4_2:\n"
+"	.short 0x0002, 0xFFFF, 0x035E, 0x0000, 0x0000, 0x035E\n"
+"	.short 0x0002, 0xFFFF, 0xFCA2, 0x0000, 0x0000, 0x035E\n"
+"	.short 0x0100, 0x8000, 0x0000, -21, 0, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, -12, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p100, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMistyRainObj4_3\n"
+"AnimSprite_EfxMistyRainObj4_3:\n"
+"	.short 0x0002, 0xFFFF, 0x0282, 0x0000, 0x0000, 0x0282\n"
+"	.short 0x0002, 0xFFFF, 0xFD7E, 0x0000, 0x0000, 0x0282\n"
+"	.short 0x0100, 0x8000, 0x0000, -23, 0, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, -10, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p100, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMistyRainObj4_4\n"
+"AnimSprite_EfxMistyRainObj4_4:\n"
+"	.short 0x0002, 0xFFFF, 0x0200, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x0002, 0xFFFF, 0xFE00, 0x0000, 0x0000, 0x0200\n"
+"	.short 0x0100, 0x8000, 0x0000, -24, 0, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, -9, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p100, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMistyRainObj4_5\n"
+"AnimSprite_EfxMistyRainObj4_5:\n"
+"	.short 0x0002, 0xFFFF, 0x01AC, 0x0000, 0x0000, 0x01AC\n"
+"	.short 0x0002, 0xFFFF, 0xFE51, 0x0000, 0x0000, 0x01AF\n"
+"	.short 0x0100, 0x8000, 0x0000, -26, 0, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, -7, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p100, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMistyRainObj4_6\n"
+"AnimSprite_EfxMistyRainObj4_6:\n"
+"	.short 0x0002, 0xFFFF, 0x016E, 0x0000, 0x0000, 0x016E\n"
+"	.short 0x0002, 0xFFFF, 0xFE92, 0x0000, 0x0000, 0x016E\n"
+"	.short 0x0100, 0x8000, 0x0000, -28, 0, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, -5, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p100, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMistyRainObj4_7\n"
+"AnimSprite_EfxMistyRainObj4_7:\n"
+"	.short 0x0002, 0xFFFF, 0x0141, 0x0000, 0x0000, 0x0141\n"
+"	.short 0x0002, 0xFFFF, 0xFEBF, 0x0000, 0x0000, 0x0141\n"
+"	.short 0x0100, 0x8000, 0x0000, -29, 0, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, -4, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p100, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMistyRainObj4_8\n"
+"AnimSprite_EfxMistyRainObj4_8:\n"
+"	.short 0x0002, 0xFFFF, 0x011C, 0x0000, 0x0000, 0x011C\n"
+"	.short 0x0002, 0xFFFF, 0xFEE4, 0x0000, 0x0000, 0x011C\n"
+"	.short 0x0100, 0x8000, 0x0000, -31, 0, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, -2, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p100, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMistyRainObj4_9\n"
+"AnimSprite_EfxMistyRainObj4_9:\n"
+"	.short 0x0002, 0xFFFF, 0x0113, 0x0000, 0x0000, 0x0113\n"
+"	.short 0x0002, 0xFFFF, 0xFEED, 0x0000, 0x0000, 0x0113\n"
+"	.short 0x0100, 0x8000, 0x0000, -31, 0, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, -2, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p100, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMistyRainObj4_10\n"
+"AnimSprite_EfxMistyRainObj4_10:\n"
+"	.short 0x0002, 0xFFFF, 0x010D, 0x0000, 0x0000, 0x010D\n"
+"	.short 0x0002, 0xFFFF, 0xFEF3, 0x0000, 0x0000, 0x010D\n"
+"	.short 0x0100, 0x8000, 0x0000, -32, 0, 0\n"
+"	.short 0x0100, 0x8200, 0x0000, -1, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p100, \"a\", %progbits\n"
+"	.global AnimSprite_EfxMistyRainObj4_11\n"
+"AnimSprite_EfxMistyRainObj4_11:\n"
+"	.short 0x0000, 0x8000, 0x0000, -32, 0, 0\n"
+"	.short 0x0000, 0x9000, 0x0000, 0, 0, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);

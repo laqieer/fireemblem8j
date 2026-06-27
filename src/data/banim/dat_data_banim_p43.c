@@ -14,7 +14,35 @@ SECTION(".rodata.dat_data_banim_p43") u16 Img_EfxSunakemuriOBJ[] = INCBIN_U16("g
 SECTION(".rodata.dat_data_banim_p43") u16 Pal_EfxSunakemuriOBJ1[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/EfxSunakemuriOBJ1.gbapal");
 SECTION(".rodata.dat_data_banim_p43") u16 Pal_EfxSunakemuriOBJ2[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/EfxSunakemuriOBJ2.gbapal");
 SECTION(".rodata.dat_data_banim_p43") u16 Pal_EfxSunakemuriOBJ3[] = INCBIN_U16("graphics/banim/_us/banim/assets/img/EfxSunakemuriOBJ3.gbapal");
-SECTION(".rodata.dat_data_banim_p43") u8 AnimSprite_EfxSunakemuriOBJ1_R_1[] = INCBIN_U8("data/residual/AnimSprite_EfxSunakemuriOBJ1_R_1.bin");
-SECTION(".rodata.dat_data_banim_p43") u8 AnimSprite_EfxSunakemuriOBJ1_R_2[] = INCBIN_U8("data/residual/AnimSprite_EfxSunakemuriOBJ1_R_2.bin");
-SECTION(".rodata.dat_data_banim_p43") u8 AnimSprite_EfxSunakemuriOBJ1_R_3[] = INCBIN_U8("data/residual/AnimSprite_EfxSunakemuriOBJ1_R_3.bin");
-SECTION(".rodata.dat_data_banim_p43") u8 AnimSprite_EfxSunakemuriOBJ1_R_4[] = INCBIN_U8("data/residual/AnimSprite_EfxSunakemuriOBJ1_R_4.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p43, \"a\", %progbits\n"
+"	.global AnimSprite_EfxSunakemuriOBJ1_R_1\n"
+"AnimSprite_EfxSunakemuriOBJ1_R_1:\n"
+"	.short 0x0000, 0x8000, 0x0000, -16, -8, 0\n"
+"	.short 0x8000, 0x8000, 0x0004, 16, -8, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p43, \"a\", %progbits\n"
+"	.global AnimSprite_EfxSunakemuriOBJ1_R_2\n"
+"AnimSprite_EfxSunakemuriOBJ1_R_2:\n"
+"	.short 0x0000, 0x8000, 0x0006, -13, -8, 0\n"
+"	.short 0x8000, 0x4000, 0x000A, 19, -8, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p43, \"a\", %progbits\n"
+"	.global AnimSprite_EfxSunakemuriOBJ1_R_3\n"
+"AnimSprite_EfxSunakemuriOBJ1_R_3:\n"
+"	.short 0x0000, 0x8000, 0x000B, -16, -8, 0\n"
+"	.short 0x8000, 0x8000, 0x000F, 16, -8, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p43, \"a\", %progbits\n"
+"	.global AnimSprite_EfxSunakemuriOBJ1_R_4\n"
+"AnimSprite_EfxSunakemuriOBJ1_R_4:\n"
+"	.short 0x0000, 0x8000, 0x0011, -7, -8, 0\n"
+"	.short 0x8000, 0x4000, 0x0015, 25, -8, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);

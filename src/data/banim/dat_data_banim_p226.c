@@ -5,9 +5,75 @@
  */
 
 SECTION(".rodata.dat_data_banim_p226") u16 Pal_ExcaliburSprites[] = INCBIN_U16("graphics/banim/_us/banim/assets/pal/00730780_Pal_ExcaliburSprites.gbapal");
-SECTION(".rodata.dat_data_banim_p226") u8 AnimSprite_EfxExcalibur_1[] = INCBIN_U8("data/residual/AnimSprite_EfxExcalibur_1.bin");
-SECTION(".rodata.dat_data_banim_p226") u8 AnimSprite_EfxExcalibur_2[] = INCBIN_U8("data/residual/AnimSprite_EfxExcalibur_2.bin");
-SECTION(".rodata.dat_data_banim_p226") u8 AnimSprite_EfxExcalibur_3[] = INCBIN_U8("data/residual/AnimSprite_EfxExcalibur_3.bin");
-SECTION(".rodata.dat_data_banim_p226") u8 AnimSprite_EfxExcalibur_4[] = INCBIN_U8("data/residual/AnimSprite_EfxExcalibur_4.bin");
-SECTION(".rodata.dat_data_banim_p226") u8 AnimSprite_EfxExcalibur_5[] = INCBIN_U8("data/residual/AnimSprite_EfxExcalibur_5.bin");
-SECTION(".rodata.dat_data_banim_p226") u8 AnimSprite_EfxExcalibur_6[] = INCBIN_U8("data/residual/AnimSprite_EfxExcalibur_6.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p226, \"a\", %progbits\n"
+"	.global AnimSprite_EfxExcalibur_1\n"
+"AnimSprite_EfxExcalibur_1:\n"
+"	.short 0x0003, 0xFFFF, 0x006E, 0xFFC0, 0x0040, 0x006E\n"
+"	.short 0x0003, 0xFFFF, 0x008E, 0x0000, 0x0000, 0x008E\n"
+"	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x0100\n"
+"	.short 0x0300, 0x8000, 0x0000, -41, -25, 0\n"
+"	.short 0x0300, 0x8200, 0x0010, -18, -32, 0\n"
+"	.short 0x0300, 0x8400, 0x000C, -32, -33, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p226, \"a\", %progbits\n"
+"	.global AnimSprite_EfxExcalibur_2\n"
+"AnimSprite_EfxExcalibur_2:\n"
+"	.short 0x0003, 0xFFFF, 0x006E, 0xFFC0, 0x0040, 0x006E\n"
+"	.short 0x0003, 0xFFFF, 0x008E, 0x0000, 0x0000, 0x008E\n"
+"	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x0100\n"
+"	.short 0x0300, 0x8000, 0x0000, -47, -19, 0\n"
+"	.short 0x0300, 0x8200, 0x0010, -12, -35, 0\n"
+"	.short 0x0300, 0x8400, 0x000C, -32, -35, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p226, \"a\", %progbits\n"
+"	.global AnimSprite_EfxExcalibur_3\n"
+"AnimSprite_EfxExcalibur_3:\n"
+"	.short 0x0003, 0xFFFF, 0x0078, 0xFFD4, 0x002C, 0x0078\n"
+"	.short 0x0003, 0xFFFF, 0x008E, 0x0000, 0x0000, 0x008E\n"
+"	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x0100\n"
+"	.short 0x0300, 0x8000, 0x0000, -53, -16, 0\n"
+"	.short 0x0300, 0x8200, 0x0010, -4, -37, 0\n"
+"	.short 0x0300, 0x8400, 0x000C, -32, -37, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p226, \"a\", %progbits\n"
+"	.global AnimSprite_EfxExcalibur_4\n"
+"AnimSprite_EfxExcalibur_4:\n"
+"	.short 0x0003, 0xFFFF, 0x007D, 0xFFEA, 0x0016, 0x007D\n"
+"	.short 0x0003, 0xFFFF, 0x008B, 0x0018, 0xFFE8, 0x008B\n"
+"	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x00C5\n"
+"	.short 0x0300, 0x8000, 0x0000, -57, -16, 0\n"
+"	.short 0x0300, 0x8200, 0x0010, 1, -38, 0\n"
+"	.short 0x0300, 0x8400, 0x000C, -33, -39, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p226, \"a\", %progbits\n"
+"	.global AnimSprite_EfxExcalibur_5\n"
+"AnimSprite_EfxExcalibur_5:\n"
+"	.short 0x0003, 0xFFFF, 0x007E, 0x0016, 0xFFEA, 0x007E\n"
+"	.short 0x0003, 0xFFFF, 0x0085, 0x0030, 0xFFD0, 0x0085\n"
+"	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x008E\n"
+"	.short 0x0300, 0x8000, 0x0000, -65, -16, 0\n"
+"	.short 0x0300, 0x8200, 0x0010, 6, -36, 0\n"
+"	.short 0x0300, 0x8400, 0x000C, -33, -43, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p226, \"a\", %progbits\n"
+"	.global AnimSprite_EfxExcalibur_6\n"
+"AnimSprite_EfxExcalibur_6:\n"
+"	.short 0x0003, 0xFFFF, 0x006E, 0x003F, 0xFFC1, 0x006E\n"
+"	.short 0x0003, 0xFFFF, 0x0080, 0x0000, 0x0000, 0x0080\n"
+"	.short 0x0003, 0xFFFF, 0xFF86, 0xFFBA, 0xFFC1, 0x006E\n"
+"	.short 0x0300, 0x8000, 0x0000, -72, -22, 0\n"
+"	.short 0x0300, 0x8200, 0x000C, -33, -49, 0\n"
+"	.short 0x0300, 0x8400, 0x0008, 11, -34, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);

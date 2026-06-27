@@ -4,4 +4,19 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1004") u8 AnimSprite_Banim_50[] = INCBIN_U8("data/residual/AnimSprite_Banim_50.bin");
+__asm__(
+"	.section .rodata.dat_worldmap_gmapunit_p1004, \"a\", %progbits\n"
+"	.global AnimSprite_Banim_50\n"
+"AnimSprite_Banim_50:\n"
+"	.short 0x8000, 0x8000, 0x0000, -16, -120, 0\n"
+"	.short 0x8000, 0x4000, 0x0002, 0, -120, 0\n"
+"	.short 0x8000, 0x8000, 0x0003, 0, -88, 0\n"
+"	.short 0x8000, 0x8000, 0x0005, 0, -56, 0\n"
+"	.short 0x8000, 0x8000, 0x0007, 0, -24, 0\n"
+"	.short 0x8000, 0x7000, 0x0012, 32, -24, 0\n"
+"	.short 0x8000, 0xB000, 0x0013, 24, -56, 0\n"
+"	.short 0x8000, 0xB000, 0x0016, 16, -88, 0\n"
+"	.short 0x8000, 0xB000, 0x0018, 16, -120, 0\n"
+"	.short 0x8000, 0x7000, 0x0015, 16, -56, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);

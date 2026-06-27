@@ -4,66 +4,625 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_1[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_1.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_2[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_2.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_3[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_3.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_4[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_4.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_5[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_5.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_6[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_6.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_7[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_7.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_8[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_8.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_9[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_9.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_10[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_10.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_11[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_11.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_12[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_12.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_13[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_13.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_14[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_14.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_15[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_15.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_16[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_16.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_17[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_17.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_18[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_18.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_19[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_19.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_20[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_20.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_21[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_21.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_22[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_22.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_23[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_23.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_24[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_24.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_25[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_25.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_26[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_26.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_27[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_27.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_28[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_28.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_29[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_29.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_30[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_30.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_31[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_31.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_32[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_32.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_33[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_33.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_34[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_34.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_35[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_35.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_36[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_36.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_37[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_37.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_38[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_38.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_39[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_39.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_40[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_40.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_41[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_41.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_42[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_42.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_43[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_43.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_44[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_44.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_45[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_45.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_46[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_46.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_47[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_47.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_48[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_48.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_49[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_49.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_50[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_50.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_51[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_51.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_52[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_52.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_53[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_53.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_54[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_54.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_55[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_55.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_56[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_56.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_57[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_57.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_58[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_58.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_59[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_59.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_60[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_60.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_61[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_61.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_62[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_62.bin");
-SECTION(".rodata.dat_data_banim_p40") u8 AnimSprite_YushaSpinShield4_63[] = INCBIN_U8("data/residual/AnimSprite_YushaSpinShield4_63.bin");
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_1\n"
+"AnimSprite_YushaSpinShield4_1:\n"
+"	.short 0x0000, 0xB000, 0x001C, 0, -51, 0\n"
+"	.short 0x0000, 0x7000, 0x003A, 9, -37, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_2\n"
+"AnimSprite_YushaSpinShield4_2:\n"
+"	.short 0x0002, 0xFFFF, 0x00F7, 0xFFBF, 0xFFBF, 0xFF09\n"
+"	.short 0x0002, 0xFFFF, 0x00FC, 0xFFD4, 0xFFD4, 0xFF04\n"
+"	.short 0x0100, 0x8000, 0x001C, -1, -54, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 8, -40, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_3\n"
+"AnimSprite_YushaSpinShield4_3:\n"
+"	.short 0x0002, 0xFFFF, 0x00A4, 0xFF3D, 0xFF3D, 0xFF5C\n"
+"	.short 0x0002, 0xFFFF, 0x00A1, 0xFF3A, 0xFF3A, 0xFF5F\n"
+"	.short 0x0100, 0x8000, 0x001C, -1, -56, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 12, -43, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_4\n"
+"AnimSprite_YushaSpinShield4_4:\n"
+"	.short 0x0002, 0xFFFF, 0x0058, 0xFF10, 0xFF10, 0xFFA8\n"
+"	.short 0x0002, 0xFFFF, 0x007C, 0xFF21, 0xFF21, 0xFF84\n"
+"	.short 0x0100, 0x8000, 0x001C, -1, -58, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 13, -47, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_5\n"
+"AnimSprite_YushaSpinShield4_5:\n"
+"	.short 0x0002, 0xFFFF, 0xFFBF, 0xFF09, 0xFF09, 0x0041\n"
+"	.short 0x0002, 0xFFFF, 0xFF99, 0xFF16, 0xFF16, 0x0067\n"
+"	.short 0x0100, 0x8000, 0x001C, 0, -60, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 16, -54, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_6\n"
+"AnimSprite_YushaSpinShield4_6:\n"
+"	.short 0x0002, 0xFFFF, 0xFF6E, 0xFF2E, 0xFF2E, 0x0092\n"
+"	.short 0x0002, 0xFFFF, 0xFF56, 0xFF42, 0xFF42, 0x00AA\n"
+"	.short 0x0100, 0x8000, 0x001C, 0, -62, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 14, -58, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_7\n"
+"AnimSprite_YushaSpinShield4_7:\n"
+"	.short 0x0002, 0xFFFF, 0xFF19, 0xFF94, 0xFF94, 0x00E7\n"
+"	.short 0x0002, 0xFFFF, 0xFF21, 0xFF84, 0xFF84, 0x00DF\n"
+"	.short 0x0100, 0x8000, 0x001C, 1, -64, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 12, -63, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_8\n"
+"AnimSprite_YushaSpinShield4_8:\n"
+"	.short 0x0000, 0x9000, 0x001C, 2, -66, 0\n"
+"	.short 0x0000, 0x5000, 0x003A, 10, -64, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_9\n"
+"AnimSprite_YushaSpinShield4_9:\n"
+"	.short 0x0002, 0xFFFF, 0xFF10, 0x0057, 0x0057, 0x00F0\n"
+"	.short 0x0002, 0xFFFF, 0xFF17, 0x0068, 0x0068, 0x00E9\n"
+"	.short 0x0100, 0x8000, 0x001C, 1, -68, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 6, -67, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_10\n"
+"AnimSprite_YushaSpinShield4_10:\n"
+"	.short 0x0002, 0xFFFF, 0xFF52, 0x00BB, 0x00BB, 0x00AE\n"
+"	.short 0x0002, 0xFFFF, 0xFF3C, 0x00A4, 0x00A4, 0x00C4\n"
+"	.short 0x0100, 0x8000, 0x001C, 2, -71, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 6, -67, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_11\n"
+"AnimSprite_YushaSpinShield4_11:\n"
+"	.short 0x0002, 0xFFFF, 0xFFA9, 0x00F0, 0x00F0, 0x0057\n"
+"	.short 0x0002, 0xFFFF, 0xFF55, 0x00BE, 0x00BE, 0x00AB\n"
+"	.short 0x0100, 0x8000, 0x001C, 2, -74, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 4, -68, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_12\n"
+"AnimSprite_YushaSpinShield4_12:\n"
+"	.short 0x0002, 0xFFFF, 0x0042, 0x00F7, 0x00F7, 0xFFBE\n"
+"	.short 0x0002, 0xFFFF, 0xFFE6, 0x00FE, 0x00FE, 0x001A\n"
+"	.short 0x0100, 0x8000, 0x001C, 2, -76, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 3, -66, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_13\n"
+"AnimSprite_YushaSpinShield4_13:\n"
+"	.short 0x0002, 0xFFFF, 0x0092, 0x00D1, 0x00D1, 0xFF6E\n"
+"	.short 0x0002, 0xFFFF, 0x007F, 0x00DD, 0x00DD, 0xFF81\n"
+"	.short 0x0100, 0x8000, 0x001C, 2, -79, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 4, -67, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_14\n"
+"AnimSprite_YushaSpinShield4_14:\n"
+"	.short 0x0002, 0xFFFF, 0x00DD, 0x0080, 0x0080, 0xFF23\n"
+"	.short 0x0002, 0xFFFF, 0x00DF, 0x007C, 0x007C, 0xFF21\n"
+"	.short 0x0100, 0x8000, 0x001C, 2, -81, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 6, -66, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_15\n"
+"AnimSprite_YushaSpinShield4_15:\n"
+"	.short 0x0002, 0xFFFF, 0x00FF, 0x0000, 0x0000, 0xFF01\n"
+"	.short 0x0002, 0xFFFF, 0x00FF, 0xFFF4, 0xFFF4, 0xFF01\n"
+"	.short 0x0100, 0x8000, 0x001C, 2, -83, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 10, -67, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_16\n"
+"AnimSprite_YushaSpinShield4_16:\n"
+"	.short 0x0002, 0xFFFF, 0x00F0, 0xFFA9, 0xFFA9, 0xFF10\n"
+"	.short 0x0002, 0xFFFF, 0x00FC, 0xFFD4, 0xFFD4, 0xFF04\n"
+"	.short 0x0100, 0x8000, 0x001C, 3, -86, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 13, -71, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_17\n"
+"AnimSprite_YushaSpinShield4_17:\n"
+"	.short 0x0002, 0xFFFF, 0x00A4, 0xFF3D, 0xFF3D, 0xFF5C\n"
+"	.short 0x0002, 0xFFFF, 0x00A1, 0xFF3A, 0xFF3A, 0xFF5F\n"
+"	.short 0x0100, 0x8000, 0x001C, 3, -88, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 16, -75, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_18\n"
+"AnimSprite_YushaSpinShield4_18:\n"
+"	.short 0x0002, 0xFFFF, 0x0058, 0xFF10, 0xFF10, 0xFFA8\n"
+"	.short 0x0002, 0xFFFF, 0x007C, 0xFF21, 0xFF21, 0xFF84\n"
+"	.short 0x0100, 0x8000, 0x001C, 3, -91, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 17, -80, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_19\n"
+"AnimSprite_YushaSpinShield4_19:\n"
+"	.short 0x0002, 0xFFFF, 0xFFAA, 0xFF10, 0xFF10, 0x0056\n"
+"	.short 0x0002, 0xFFFF, 0xFF99, 0xFF16, 0xFF16, 0x0067\n"
+"	.short 0x0100, 0x8000, 0x001C, 3, -94, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 18, -89, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_20\n"
+"AnimSprite_YushaSpinShield4_20:\n"
+"	.short 0x0002, 0xFFFF, 0xFF5C, 0xFF3C, 0xFF3C, 0x00A4\n"
+"	.short 0x0002, 0xFFFF, 0xFF56, 0xFF42, 0xFF42, 0x00AA\n"
+"	.short 0x0100, 0x8000, 0x001C, 3, -95, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 16, -91, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_21\n"
+"AnimSprite_YushaSpinShield4_21:\n"
+"	.short 0x0002, 0xFFFF, 0xFF19, 0xFF94, 0xFF94, 0x00E7\n"
+"	.short 0x0002, 0xFFFF, 0xFF21, 0xFF84, 0xFF84, 0x00DF\n"
+"	.short 0x0100, 0x8000, 0x001C, 4, -96, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 15, -94, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_22\n"
+"AnimSprite_YushaSpinShield4_22:\n"
+"	.short 0x0000, 0x9000, 0x001C, 4, -98, 0\n"
+"	.short 0x0000, 0x5000, 0x003A, 12, -96, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_23\n"
+"AnimSprite_YushaSpinShield4_23:\n"
+"	.short 0x0002, 0xFFFF, 0xFF10, 0x0057, 0x0057, 0x00F0\n"
+"	.short 0x0002, 0xFFFF, 0xFF17, 0x0068, 0x0068, 0x00E9\n"
+"	.short 0x0100, 0x8000, 0x001C, 4, -100, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 10, -99, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_24\n"
+"AnimSprite_YushaSpinShield4_24:\n"
+"	.short 0x0002, 0xFFFF, 0xFF5C, 0x00C4, 0x00C4, 0x00A4\n"
+"	.short 0x0002, 0xFFFF, 0xFF3C, 0x00A4, 0x00A4, 0x00C4\n"
+"	.short 0x0100, 0x8000, 0x001C, 5, -102, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 8, -99, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_25\n"
+"AnimSprite_YushaSpinShield4_25:\n"
+"	.short 0x0002, 0xFFFF, 0xFFBE, 0x00F7, 0x00F7, 0x0042\n"
+"	.short 0x0002, 0xFFFF, 0xFF55, 0x00BE, 0x00BE, 0x00AB\n"
+"	.short 0x0100, 0x8000, 0x001C, 5, -102, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 7, -96, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_26\n"
+"AnimSprite_YushaSpinShield4_26:\n"
+"	.short 0x0002, 0xFFFF, 0x006B, 0x00E8, 0x00E8, 0xFF95\n"
+"	.short 0x0002, 0xFFFF, 0x007F, 0x00DD, 0x00DD, 0xFF81\n"
+"	.short 0x0100, 0x8000, 0x001C, 5, -102, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 7, -90, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_27\n"
+"AnimSprite_YushaSpinShield4_27:\n"
+"	.short 0x0002, 0xFFFF, 0x00A4, 0x00C4, 0x00C4, 0xFF5C\n"
+"	.short 0x0002, 0xFFFF, 0x00DF, 0x007C, 0x007C, 0xFF21\n"
+"	.short 0x0100, 0x8000, 0x001C, 6, -104, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 9, -91, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_28\n"
+"AnimSprite_YushaSpinShield4_28:\n"
+"	.short 0x0002, 0xFFFF, 0x00F0, 0x0057, 0x0057, 0xFF10\n"
+"	.short 0x0002, 0xFFFF, 0x00DF, 0x007C, 0x007C, 0xFF21\n"
+"	.short 0x0100, 0x8000, 0x001C, 6, -105, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 12, -91, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_29\n"
+"AnimSprite_YushaSpinShield4_29:\n"
+"	.short 0x0002, 0xFFFF, 0x00FC, 0x002C, 0x002C, 0xFF04\n"
+"	.short 0x0002, 0xFFFF, 0x00F9, 0x0039, 0x0039, 0xFF07\n"
+"	.short 0x0100, 0x8000, 0x001C, 6, -105, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 13, -90, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_30\n"
+"AnimSprite_YushaSpinShield4_30:\n"
+"	.short 0x0002, 0xFFFF, 0x00FC, 0xFFD4, 0xFFD4, 0xFF04\n"
+"	.short 0x0002, 0xFFFF, 0x00FF, 0xFFF4, 0xFFF4, 0xFF01\n"
+"	.short 0x0100, 0x8000, 0x001C, 7, -106, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 16, -92, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_31\n"
+"AnimSprite_YushaSpinShield4_31:\n"
+"	.short 0x0002, 0xFFFF, 0x00F0, 0xFFA9, 0xFFA9, 0xFF10\n"
+"	.short 0x0002, 0xFFFF, 0x00FC, 0xFFD4, 0xFFD4, 0xFF04\n"
+"	.short 0x0100, 0x8000, 0x001C, 7, -107, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 17, -93, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_32\n"
+"AnimSprite_YushaSpinShield4_32:\n"
+"	.short 0x0002, 0xFFFF, 0x00DD, 0xFF81, 0xFF81, 0xFF23\n"
+"	.short 0x0002, 0xFFFF, 0x00EB, 0xFF9D, 0xFF9D, 0xFF15\n"
+"	.short 0x0100, 0x8000, 0x001C, 8, -107, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 20, -93, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_33\n"
+"AnimSprite_YushaSpinShield4_33:\n"
+"	.short 0x0002, 0xFFFF, 0x00C4, 0xFF5C, 0xFF5C, 0xFF3C\n"
+"	.short 0x0002, 0xFFFF, 0x00A1, 0xFF3A, 0xFF3A, 0xFF5F\n"
+"	.short 0x0100, 0x8000, 0x001C, 8, -107, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 20, -94, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_34\n"
+"AnimSprite_YushaSpinShield4_34:\n"
+"	.short 0x0002, 0xFFFF, 0x0080, 0xFF23, 0xFF23, 0xFF80\n"
+"	.short 0x0002, 0xFFFF, 0x00A1, 0xFF3A, 0xFF3A, 0xFF5F\n"
+"	.short 0x0100, 0x8000, 0x001C, 8, -108, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 21, -96, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_35\n"
+"AnimSprite_YushaSpinShield4_35:\n"
+"	.short 0x0002, 0xFFFF, 0x0058, 0xFF10, 0xFF10, 0xFFA8\n"
+"	.short 0x0002, 0xFFFF, 0x007C, 0xFF21, 0xFF21, 0xFF84\n"
+"	.short 0x0100, 0x8000, 0x001C, 9, -108, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 23, -97, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_36\n"
+"AnimSprite_YushaSpinShield4_36:\n"
+"	.short 0x0002, 0xFFFF, 0x0000, 0xFF01, 0xFF01, 0x0000\n"
+"	.short 0x0002, 0xFFFF, 0xFFC3, 0xFF08, 0xFF08, 0x003D\n"
+"	.short 0x0100, 0x8000, 0x001C, 9, -109, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 23, -101, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_37\n"
+"AnimSprite_YushaSpinShield4_37:\n"
+"	.short 0x0002, 0xFFFF, 0xFFD5, 0xFF04, 0xFF04, 0x002B\n"
+"	.short 0x0002, 0xFFFF, 0xFFC3, 0xFF08, 0xFF08, 0x003D\n"
+"	.short 0x0100, 0x8000, 0x001C, 9, -109, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 24, -101, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_38\n"
+"AnimSprite_YushaSpinShield4_38:\n"
+"	.short 0x0002, 0xFFFF, 0xFFAA, 0xFF10, 0xFF10, 0x0056\n"
+"	.short 0x0002, 0xFFFF, 0xFF99, 0xFF16, 0xFF16, 0x0067\n"
+"	.short 0x0100, 0x8000, 0x001C, 10, -108, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 24, -102, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_39\n"
+"AnimSprite_YushaSpinShield4_39:\n"
+"	.short 0x0002, 0xFFFF, 0xFF5C, 0xFF3C, 0xFF3C, 0x00A4\n"
+"	.short 0x0002, 0xFFFF, 0xFF56, 0xFF42, 0xFF42, 0x00AA\n"
+"	.short 0x0100, 0x8000, 0x001C, 10, -108, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 24, -105, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_40\n"
+"AnimSprite_YushaSpinShield4_40:\n"
+"	.short 0x0002, 0xFFFF, 0xFF2F, 0xFF6D, 0xFF6D, 0x00D1\n"
+"	.short 0x0002, 0xFFFF, 0xFF21, 0xFF84, 0xFF84, 0x00DF\n"
+"	.short 0x0100, 0x8000, 0x001C, 10, -108, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 22, -105, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_41\n"
+"AnimSprite_YushaSpinShield4_41:\n"
+"	.short 0x0002, 0xFFFF, 0xFF0D, 0xFFB1, 0xFFB1, 0x00F3\n"
+"	.short 0x0002, 0xFFFF, 0xFF21, 0xFF84, 0xFF84, 0x00DF\n"
+"	.short 0x0100, 0x8000, 0x001C, 11, -108, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 21, -106, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_42\n"
+"AnimSprite_YushaSpinShield4_42:\n"
+"	.short 0x0002, 0xFFFF, 0xFF05, 0xFFD3, 0xFFD3, 0x00FB\n"
+"	.short 0x0002, 0xFFFF, 0xFF07, 0xFFC6, 0xFFC6, 0x00F9\n"
+"	.short 0x0100, 0x8000, 0x001C, 11, -108, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 20, -107, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_43\n"
+"AnimSprite_YushaSpinShield4_43:\n"
+"	.short 0x0002, 0xFFFF, 0xFF04, 0x002C, 0x002C, 0x00FC\n"
+"	.short 0x0002, 0xFFFF, 0xFF06, 0x0035, 0x0035, 0x00FA\n"
+"	.short 0x0100, 0x8000, 0x001C, 11, -109, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 18, -109, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_44\n"
+"AnimSprite_YushaSpinShield4_44:\n"
+"	.short 0x0002, 0xFFFF, 0xFF10, 0x0057, 0x0057, 0x00F0\n"
+"	.short 0x0002, 0xFFFF, 0xFF06, 0x0035, 0x0035, 0x00FA\n"
+"	.short 0x0100, 0x8000, 0x001C, 12, -109, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 17, -108, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_45\n"
+"AnimSprite_YushaSpinShield4_45:\n"
+"	.short 0x0002, 0xFFFF, 0xFF23, 0x007F, 0x007F, 0x00DD\n"
+"	.short 0x0002, 0xFFFF, 0xFF17, 0x0068, 0x0068, 0x00E9\n"
+"	.short 0x0100, 0x8000, 0x001C, 12, -109, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 17, -107, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_46\n"
+"AnimSprite_YushaSpinShield4_46:\n"
+"	.short 0x0001, 0xFFFF, 0xFF3C, 0x00A4, 0x00A4, 0x00C4\n"
+"	.short 0x0100, 0x8000, 0x001C, 13, -109, 0\n"
+"	.short 0x0100, 0x4000, 0x003A, 17, -107, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_47\n"
+"AnimSprite_YushaSpinShield4_47:\n"
+"	.short 0x0002, 0xFFFF, 0xFF6E, 0x00D1, 0x00D1, 0x0092\n"
+"	.short 0x0002, 0xFFFF, 0xFF55, 0x00BE, 0x00BE, 0x00AB\n"
+"	.short 0x0100, 0x8000, 0x001C, 13, -109, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 16, -105, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_48\n"
+"AnimSprite_YushaSpinShield4_48:\n"
+"	.short 0x0002, 0xFFFF, 0xFFA9, 0x00F0, 0x00F0, 0x0057\n"
+"	.short 0x0002, 0xFFFF, 0xFF80, 0x00DD, 0x00DD, 0x0080\n"
+"	.short 0x0100, 0x8000, 0x001C, 14, -109, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 15, -104, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_49\n"
+"AnimSprite_YushaSpinShield4_49:\n"
+"	.short 0x0002, 0xFFFF, 0x0000, 0x00FF, 0x00FF, 0x0000\n"
+"	.short 0x0002, 0xFFFF, 0xFFE6, 0x00FE, 0x00FE, 0x001A\n"
+"	.short 0x0100, 0x8000, 0x001C, 14, -109, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 14, -100, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_50\n"
+"AnimSprite_YushaSpinShield4_50:\n"
+"	.short 0x0002, 0xFFFF, 0x0042, 0x00F7, 0x00F7, 0xFFBE\n"
+"	.short 0x0002, 0xFFFF, 0xFFE6, 0x00FE, 0x00FE, 0x001A\n"
+"	.short 0x0100, 0x8000, 0x001C, 15, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 17, -100, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_51\n"
+"AnimSprite_YushaSpinShield4_51:\n"
+"	.short 0x0001, 0xFFFF, 0x007F, 0x00DD, 0x00DD, 0xFF81\n"
+"	.short 0x0100, 0x8000, 0x001C, 15, -110, 0\n"
+"	.short 0x0100, 0x4000, 0x003A, 17, -99, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_52\n"
+"AnimSprite_YushaSpinShield4_52:\n"
+"	.short 0x0002, 0xFFFF, 0x00B4, 0x00B5, 0x00B5, 0xFF4C\n"
+"	.short 0x0002, 0xFFFF, 0x00DF, 0x007C, 0x007C, 0xFF21\n"
+"	.short 0x0100, 0x8000, 0x001C, 15, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 18, -96, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_53\n"
+"AnimSprite_YushaSpinShield4_53:\n"
+"	.short 0x0002, 0xFFFF, 0x00D1, 0x0093, 0x0093, 0xFF2F\n"
+"	.short 0x0002, 0xFFFF, 0x00DF, 0x007C, 0x007C, 0xFF21\n"
+"	.short 0x0100, 0x8000, 0x001C, 16, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 19, -96, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_54\n"
+"AnimSprite_YushaSpinShield4_54:\n"
+"	.short 0x0002, 0xFFFF, 0x00E7, 0x006C, 0x006C, 0xFF19\n"
+"	.short 0x0002, 0xFFFF, 0x00DF, 0x007C, 0x007C, 0xFF21\n"
+"	.short 0x0100, 0x8000, 0x001C, 16, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 21, -95, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_55\n"
+"AnimSprite_YushaSpinShield4_55:\n"
+"	.short 0x0002, 0xFFFF, 0x00FC, 0x002C, 0x002C, 0xFF04\n"
+"	.short 0x0002, 0xFFFF, 0x00F1, 0x0053, 0x0053, 0xFF0F\n"
+"	.short 0x0100, 0x8000, 0x001C, 17, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 23, -96, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_56\n"
+"AnimSprite_YushaSpinShield4_56:\n"
+"	.short 0x0002, 0xFFFF, 0x00FC, 0xFFD4, 0xFFD4, 0xFF04\n"
+"	.short 0x0002, 0xFFFF, 0x00FF, 0xFFF4, 0xFFF4, 0xFF01\n"
+"	.short 0x0100, 0x8000, 0x001C, 17, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 26, -95, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_57\n"
+"AnimSprite_YushaSpinShield4_57:\n"
+"	.short 0x0002, 0xFFFF, 0x00F0, 0xFFA9, 0xFFA9, 0xFF10\n"
+"	.short 0x0002, 0xFFFF, 0x00FC, 0xFFD4, 0xFFD4, 0xFF04\n"
+"	.short 0x0100, 0x8000, 0x001C, 18, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 29, -95, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_58\n"
+"AnimSprite_YushaSpinShield4_58:\n"
+"	.short 0x0002, 0xFFFF, 0x00D1, 0xFF6E, 0xFF6E, 0xFF2F\n"
+"	.short 0x0002, 0xFFFF, 0x00A1, 0xFF3A, 0xFF3A, 0xFF5F\n"
+"	.short 0x0100, 0x8000, 0x001C, 18, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 30, -96, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_59\n"
+"AnimSprite_YushaSpinShield4_59:\n"
+"	.short 0x0002, 0xFFFF, 0x00A4, 0xFF3D, 0xFF3D, 0xFF5C\n"
+"	.short 0x0002, 0xFFFF, 0x00A1, 0xFF3A, 0xFF3A, 0xFF5F\n"
+"	.short 0x0100, 0x8000, 0x001C, 18, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 31, -97, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_60\n"
+"AnimSprite_YushaSpinShield4_60:\n"
+"	.short 0x0002, 0xFFFF, 0x0080, 0xFF23, 0xFF23, 0xFF80\n"
+"	.short 0x0002, 0xFFFF, 0x007C, 0xFF21, 0xFF21, 0xFF84\n"
+"	.short 0x0100, 0x8000, 0x001C, 18, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 32, -98, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_61\n"
+"AnimSprite_YushaSpinShield4_61:\n"
+"	.short 0x0002, 0xFFFF, 0x0042, 0xFF09, 0xFF09, 0xFFBE\n"
+"	.short 0x0002, 0xFFFF, 0x007C, 0xFF21, 0xFF21, 0xFF84\n"
+"	.short 0x0100, 0x8000, 0x001C, 19, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 34, -100, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_62\n"
+"AnimSprite_YushaSpinShield4_62:\n"
+"	.short 0x0002, 0xFFFF, 0x0000, 0xFF01, 0xFF01, 0x0000\n"
+"	.short 0x0002, 0xFFFF, 0xFFDD, 0xFF03, 0xFF03, 0x0023\n"
+"	.short 0x0100, 0x8000, 0x001C, 20, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 36, -102, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
+__asm__(
+"	.section .rodata.dat_data_banim_p40, \"a\", %progbits\n"
+"	.global AnimSprite_YushaSpinShield4_63\n"
+"AnimSprite_YushaSpinShield4_63:\n"
+"	.short 0x0002, 0xFFFF, 0xFFD5, 0xFF04, 0xFF04, 0x002B\n"
+"	.short 0x0002, 0xFFFF, 0xFFDD, 0xFF03, 0xFF03, 0x0023\n"
+"	.short 0x0100, 0x8000, 0x001C, 21, -110, 0\n"
+"	.short 0x0100, 0x4200, 0x003A, 36, -103, 0\n"
+"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
+);
