@@ -1,32 +1,33 @@
 #!/usr/bin/env python3
-"""D306 batch: extract JP residual graphics blobs that are byte-identical to a fe8u asset
-WITH a .png source, into editable PNG assets (reusing fe8u's source). For each: copy
-fe8u's .png (JP-named) into graphics/reuse/, re-point the INCBIN from data/residual/*.bin
-to the built .4bpp. Caller then regenerates the dep map + clean-builds; make compare is
-the gate. Only handles the .4bpp (graphics) case (palettes/.lz have different rules).
-Usage: extract_reuse_png.py [N]   (N = max assets this run, default 20)"""
+"""D306 batch: extract JP residual graphics/palette blobs byte-identical to a fe8u asset
+(.4bpp / .4bpp.lz / .gbapal) that HAS a .png source, into editable PNG assets reusing
+fe8u's source. Copies fe8u's .png (JP-named) to graphics/reuse/, re-points the INCBIN to
+the built artifact (.4bpp / .4bpp.lz / .gbapal). Caller regen deps + clean-builds; make
+compare gates byte-identity; remove the .bin to prove D299 effectiveness.
+Usage: extract_reuse_png.py [N]"""
 import glob, os, hashlib, subprocess, re, sys, shutil
 
-ROOT = "."; FE8U = "../fireemblem8u"
-LIMIT = int(sys.argv[1]) if len(sys.argv) > 1 else 20
+FE8U = "../fireemblem8u"
+LIMIT = int(sys.argv[1]) if len(sys.argv) > 1 else 50
 
 def sha(p):
     try: return hashlib.sha1(open(p, "rb").read()).hexdigest()
     except Exception: return None
 
-# fe8u index: hash -> .4bpp path that HAS a .png source
+# fe8u index: hash -> (png_source, built_ext) for each reusable asset kind
 idx = {}
-for f in glob.glob(FE8U + "/graphics/**/*.4bpp", recursive=True):
-    if os.path.exists(f[:-5] + ".png"):
-        h = sha(f)
-        if h: idx.setdefault(h, f)
+for ext in (".4bpp",):  # .4bpp.lz/.gbapal need per-asset compression/palette flags -- see D306
+    for f in glob.glob(FE8U + "/graphics/**/*" + ext, recursive=True):
+        base = f[:-len(ext)]
+        if os.path.exists(base + ".png"):
+            h = sha(f)
+            if h: idx.setdefault(h, (base + ".png", ext))
 
-# JP INCBIN sites: symbol .bin -> (cfile, incbin_macro)
 sites = {}
 for cf in glob.glob("src/data/**/*.c", recursive=True):
     t = open(cf, errors="replace").read()
-    for m in re.finditer(r'INCBIN_U(\d+)\("data/residual/([A-Za-z0-9_.]+\.bin)"\)', t):
-        sites[m.group(2)] = (cf, "INCBIN_U" + m.group(1))
+    for m in re.finditer(r'(INCBIN_U\d+)\("data/residual/([A-Za-z0-9_.]+\.bin)"\)', t):
+        sites[m.group(2)] = (cf, m.group(1))
 
 os.makedirs("graphics/reuse", exist_ok=True)
 done = []
@@ -37,18 +38,17 @@ for binp in sorted(glob.glob("data/residual/*.bin")):
     h = sha(binp)
     if h not in idx: continue
     name = bn[:-4]
-    png_src = idx[h][:-5] + ".png"
     jp_png = "graphics/reuse/%s.png" % name
     if os.path.exists(jp_png): continue
+    png_src, ext = idx[h]
     shutil.copy(png_src, jp_png)
     cf, macro = sites[bn]
     t = open(cf, errors="replace").read()
     t2 = t.replace('%s("data/residual/%s")' % (macro, bn),
-                   '%s("graphics/reuse/%s.4bpp")' % (macro, name))
+                   '%s("graphics/reuse/%s%s")' % (macro, name, ext))
     if t2 == t:
         os.remove(jp_png); continue
     open(cf, "w").write(t2)
-    done.append((name, cf))
-print("extracted %d reuse PNG assets:" % len(done))
-for name, cf in done:
-    print("  %-40s <- %s" % (name, os.path.basename(cf)))
+    done.append((name, ext))
+print("extracted %d reuse assets (%s)" %
+      (len(done), ", ".join(sorted({e for _, e in done}))))
