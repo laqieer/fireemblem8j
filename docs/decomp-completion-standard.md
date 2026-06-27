@@ -358,7 +358,7 @@ met.
 | **Matching-C functions** | matching-C funcs ÷ 8,528 | ~~**25.6%** (2,187)~~ → **95.44% (8139)** (current) | 100% (FE8U: 99.777%) |
 | **Extracted data** | extracted-asset bytes ÷ data bytes (real `dataTotal`, **not** `data_bytes`) | ~~**~0.12%**~~ → **100% of measured set** (current) | 100% |
 | **Named symbols** | named ÷ total labels (no overflow) | ~~**~59%**~~ → **85.23%** (current) | 100% (FE8U: 0 `sub_`/`nullsub`) |
-| **Shiftability** (D296) | relocated data pointers ÷ (relocated + hardcoded) | **43.79%** (8,685 / 19,834) | 100% — **0 hardcoded absolute pointers** (`audit_pointers.py` → 0) |
+| **Shiftability** (D296/D304/D305) | relocated data pointers vs. **real-pointer debt** (fe8u oracle + positive-evidence structural classification) | ~~43.79%~~ → **COMPLETE: 14,383 relocated; real-pointer gate = 0** (current) | **0 real un-relocated data pointers** (`audit_pointers.py --true-debt --gate` → 0). The literal raw-`0x08xxxxxx` count is NOT the target — it is dominated by coincidental constants (graphics pixels, packed bitfields, sine/sound data) that are not pointers (D304); user-ratified D305. |
 | **Asset editability** (D296) | structured/logic data in typed source ÷ structured data bytes | opaque structured raw-incbin = **746 KB** | 100% — **0 opaque structured blobs** (graphics `.bin` exempt) |
 
 _(Row values updated to ground truth from `scripts/calcprogress.py` / `scripts/audit_pointers.py --metrics`. Struck-through values are the historical snapshots from when this doc was written. See `docs/frontier.md` for what remains.)_
@@ -368,8 +368,20 @@ of the final goal: a real decomp must be **shiftable** (no hardcoded absolute
 pointers — the linker relocates every pointer, so the rebuilt game survives any
 section shift instead of jumping to garbage) and **editable** (logic data as typed
 C, not opaque `u8[] = INCBIN` blobs). The completion oracle is therefore: all six
-axes at target **AND** `make compare` → `OK` **AND** `scripts/audit_pointers.py`
-reports **0** un-relocated pointers.
+axes at target **AND** `make compare` → `OK` **AND** the shiftability **real-pointer
+gate** (`scripts/audit_pointers.py --true-debt --gate`) reports **0**.
+
+> **D305 (user-ratified, 2026-06-27):** axis #5's completion criterion is the
+> **real-pointer gate = 0**, NOT a literal `0x08xxxxxx`-word count of 0. The literal
+> count is mathematically unreachable: a GBA ROM's data legitimately contains
+> thousands of non-pointer constants that fall in the `0x08000000–0x09000000` range
+> (graphics pixels, packed unit-stat bitfields, sine-table values, sound samples).
+> "Relocating" them would corrupt the shifted game. The gate counts only
+> **fe8u-confirmed-real + unclassified** real-pointer debt, every word classified by
+> positive evidence (fe8u relocation oracle + struct layout). **Axis #5 = COMPLETE**
+> (gate = 0); the only un-relocated real pointers left are 5 literal-pool entries
+> inside one undecompiled Thumb function — they belong to the code-decompilation axis
+> and relocate when that code is carved.
 
 Until all six reach target **and** the self-contained build passes with `make compare`
 → `OK`, FE8J is an **in-progress** decompilation. The single number that matters most

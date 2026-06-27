@@ -312,11 +312,14 @@ def _shiftability_headline():
         o = _sp.run([sys.executable, os.path.join(os.path.dirname(__file__),
                      "audit_pointers.py"), "--true-debt"],
                     capture_output=True, text=True, timeout=300).stdout
+        import re as _re2
         for ln in o.splitlines():
             if "un-relocated ROM-pointer words remaining" in ln:
-                literal = int(ln.split(":")[1].strip())
+                m = _re2.search(r":\s*(\d+)", ln)
+                if m: literal = int(m.group(1))
             elif "COMPLETION GATE" in ln:
-                gate = int(ln.split(":")[1].strip())
+                m = _re2.search(r":\s*(\d+)", ln)
+                if m: gate = int(m.group(1))
     except Exception:
         pass
     return literal, gate

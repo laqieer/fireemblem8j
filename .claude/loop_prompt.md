@@ -9,35 +9,31 @@ data; every pointer is a relocated symbol reference). Signal completion ONLY whe
 all six axes (`scripts/calcprogress.py`) are met, by outputting the promise
 phrase `FE8J_FINAL_GOAL_DONE`.
 
-## CURRENT PRIORITY FRONTIER — SHIFTABILITY (axis #5, D296/D297/D299)
+## SHIFTABILITY (axis #5) — COMPLETE (D304/D305, user-ratified 2026-06-27)
 
-A real decomp must relocate every pointer or it crashes when sections shift.
-Honest state: **67.88% literal / 69.02% real shiftable; 5,238 REAL hardcoded
-pointers remain** (`scripts/audit_pointers.py --metrics`). 0 dangling.
+**DONE.** relocated 7,639 → 14,383; **real-pointer gate = 0**
+(`scripts/audit_pointers.py --true-debt --gate`). Every fe8u-confirmed + structurally-
+identifiable real data pointer is a relocation (gFontgrp SJIS sjisNext list +234,
+event scripts, ProcScrs, impure_data reent, all `_ref`/sliced tables). Completion
+criterion is the **gate**, NOT the literal raw-`0x08xxxxxx` count — the literal is
+unreachable-to-0 (coincidental constants: graphics pixels, packed bitfields, sine/sound
+data; relocating them corrupts shift). D305 user-ratified gate=0 = complete.
 
-- **TWO HARD RULES (do not relearn these):**
-  1. **Effectiveness, not just make compare (D299).** `make compare` OK does NOT
-     mean a de-pointering worked. Every `asm/dat_*.s` that incbins residual data
-     is an EXCLUDED placeholder; editing it is a DEAD no-op that still passes.
-     De-point the LINKED source (`src/data/<name>_ref/dat_<name>_ref.c` or the
-     sliced `src/data/<name>/<name>.c`), and VERIFY the relocated count rose
-     (`audit_pointers.py` hardcoded fell). The converter now skips the asm path.
-  2. **fe8u is the correctness gate, not byte-exactness (D297).** make compare
-     catches only function-target thumb-bit mistakes; a DATA-field coincidental
-     constant in ROM range is byte-exact now but a SILENT crash-on-shift. Convert
-     ONLY at fe8u-confirmed pointer offsets (`scripts/fe8u_ptr_offsets.py`), never
-     on density. The `--fe8u-safe` mode does this for `_ref` tables + extends to
-     un-named `data_<JPaddr>` via region-shift address mapping with offset-
-     alignment self-validation.
-- **Lever (run, then VERIFY hardcoded fell):** `repoint_table.py --fe8u-safe`
-  (handles `_ref` tables). Commit only if make compare OK AND the auditor's
-  hardcoded count actually dropped.
-- **The bulk (~4,990 real) is in sliced `src/data/<name>/<name>.c` tables**
-  (`INCBIN_U8(bin, off, len)` sub-symbols, mostly un-named `data_*`). NEXT
-  MECHANISM TO BUILD: a sliced-source rewriter — for each sub-symbol convert its
-  slice to `.4byte` gated by that sub-symbol's fe8u offsets (named) or per-slice
-  `data_<JPaddr+off>` address mapping (un-named); rewrite the LINKED .c, not asm.
-  Then the JP-divergent EventScr bytecode. Per-table, multi-session.
+- **Do NOT re-open this as a frontier.** If revisiting: the authoritative metric is
+  `--true-debt --gate` (fe8u oracle + positive-evidence structural classification), not
+  the literal `--metrics` count. The two HARD RULES still hold (D299 effectiveness:
+  de-point LINKED source not excluded asm placeholders, verify the relocated count rose
+  via the LINKER; D297 fe8u is the correctness gate, never convert on density).
+- **Only real pointers left = 5 literal-pool entries in one undecompiled Thumb function**
+  (`gap_000B1030`) → these are the **code-decompilation axis**, relocate when that code
+  is carved. Not a data-shiftability task.
+
+## CURRENT PRIORITY FRONTIER — ASSET EDITABILITY (axis #6) + remaining code
+
+Axis #5 done; the open axes are **#6 asset editability** (structured/logic raw-incbin
+→ typed C; ~679 KB structured blobs remain, graphics `.bin` exempt — `audit_pointers.py
+--metrics` line 6) and the **~31 still-asm functions** (code decomp; permuter +
+reconstruction). See `docs/frontier.md`.
 
 ## When orchestrating background agents (P9 wave mode) — DO THIS EVERY TICK FIRST
 

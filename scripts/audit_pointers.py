@@ -206,7 +206,13 @@ def main():
     per_file.sort(key=lambda r: r[0], reverse=True)
     grand = tot["EXACT"] + tot["INTERIOR"] + tot["DANGLING"]
     print("== SHIFTABILITY AUDIT (axis #5) ==")
-    print(f"un-relocated ROM-pointer words remaining : {grand}")
+    print("COMPLETION CRITERION (D305, user-ratified): the REAL-POINTER GATE")
+    print("  (`audit_pointers.py --true-debt --gate`) = 0, NOT the literal count below.")
+    print("  The literal raw-0x08xxxxxx count is unreachable-to-0: a GBA ROM legitimately")
+    print("  holds non-pointer constants in 0x08000000-0x09000000 (gfx pixels, packed")
+    print("  bitfields, sine/sound data) -- relocating them would corrupt the shifted game.")
+    print(f"un-relocated ROM-pointer words remaining : {grand}   (RAW word count incl. "
+          f"coincidental constants -- NOT the completion gate; see --true-debt --gate)")
     print(f"  EXACT    (-> .4byte SYM)        : {tot['EXACT']}")
     print(f"  INTERIOR (-> SYM + offset)      : {tot['INTERIOR']}")
     print(f"  DANGLING (needs a label first)  : {tot['DANGLING']}")

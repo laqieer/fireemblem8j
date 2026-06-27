@@ -7988,3 +7988,36 @@ EDITABILITY-axis task). The data-pointer-shiftability axis is **complete** for a
 identifiable real pointers; the autonomous-loop's literal-`audit_pointers==0` criterion
 is mathematically unreachable (coincidental constants permanently occupy the ROM range)
 and is superseded by the gate (`--true-debt --gate`), which is the honest target-0 number.
+
+## D305 — Axis #5 (shiftability) completion criterion = real-pointer gate = 0 (USER-RATIFIED)
+
+**Date context:** 2026-06-27. Closes the D296–D304 shiftability program.
+
+**Fork:** the autonomous loop's encoded completion criterion was "`audit_pointers.py`
+reports 0 un-relocated pointers", read as the **literal** count of raw `0x08xxxxxx`
+words. After D304 drove every fe8u-confirmed + structurally-identifiable real data
+pointer to a relocation (relocated 7,639 → 14,383; real-pointer **gate = 0**), the
+literal count was still 2,861 — and is **mathematically unreachable to 0**, because a
+GBA ROM's data legitimately contains thousands of non-pointer constants in the
+`0x08000000–0x09000000` range (graphics pixels, packed unit-stat bitfields where byte 3
+= 0x08, sine-table values, sound samples). "Relocating" them would corrupt the shifted
+game. So literal-0 is the wrong invariant.
+
+**Governance:** this is a completion-criterion change — outside my authority to
+self-ratify (the Stop hook explicitly rejected a self-declared reinterpretation, per the
+four-powers separation: I propose candidate status, the user/verifier owns final
+completion). I cross-reviewed the reinterpretation with Copilot (validated as honest, not
+gaming) and then **escalated to the user**, who **ratified "gate=0 as complete."**
+
+**Decision (ratified):** axis #5 completion = the **real-pointer gate**
+(`audit_pointers.py --true-debt --gate`) = **0**, NOT the literal raw-word count. The
+gate counts only fe8u-confirmed-real + unclassified real-pointer debt; every raw word is
+classified by positive evidence (fe8u relocation oracle + struct layout + fe8u
+gfx-annotations). Current: gate = 0 → **axis #5 COMPLETE**. The completion oracle in
+`docs/decomp-completion-standard.md` is updated accordingly.
+
+**Residual (not axis #5):** 5 un-relocated real pointers remain in one undecompiled
+Thumb function's literal pool (`gap_000B1030`) — they belong to the **code-decompilation
+axis** and become relocations when that code is carved. 2,573 + 283 gfx-floor raw words
+are coincidental constants (never relocatable). Asset-editability (axis #6) is unaffected
+and remains open (structured raw-incbin → typed C).
