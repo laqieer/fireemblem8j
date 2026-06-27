@@ -1,0 +1,22 @@
+# D307 naming: drop redundant sub_<addr> aliases from jp_syms.s
+# These sub_<addr> entries in cfbind_unnamed_*.tsv are redundant because
+# the real US name is already defined in src/ or another baseline_syms fragment.
+# No C/asm code calls these sub_ labels directly (verified).
+# Dropping the alias removes the placeholder from calcprogress axis #4.
+sub_800E064
+sub_803780C
+sub_807571C
+sub_802B2FC
+sub_80BF2B8
+sub_80CF90C
+sub_801B674
+sub_8066084
+sub_807CF7C
+sub_80861E0
+sub_8010994
+sub_80AEC20
+sub_807D380
+sub_801A09C
+sub_805C170
+sub_80936B0
+sub_8024608
