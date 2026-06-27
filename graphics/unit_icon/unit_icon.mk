@@ -111,3 +111,67 @@ asm/dat_const_data_unit_icon_move_p99.o: graphics/unit_icon/move/unit_icon_move_
 asm/dat_const_data_unit_icon_move_p100.o: graphics/unit_icon/move/unit_icon_move_Tent_sheet.4bpp.lz
 asm/dat_const_data_unit_icon_move_p101.o: graphics/unit_icon/move/unit_icon_move_Pontifex_sheet.4bpp.lz
 asm/dat_const_data_unit_icon_move_p102.o: graphics/unit_icon/move/unit_icon_move_Fallen_Peer_sheet.4bpp.lz
+
+# --- unit_icon/move batch 3: 14 region-different sheets (D307) ----------------
+# These require -num_tiles N (from fe8u graphics_file_rules.mk) to reproduce the
+# original compressed data byte-identically. mindist 2 in all cases.
+MOVEUNITGFXDIR_D307 := graphics/unit_icon/move
+
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Ephraim_Master_Lord_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 241
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Eirika_Master_Lord_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 241
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Hero_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 241
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Hero_F_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 241
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Swordmaster_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 241
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Swordmaster_F_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 241
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Bishop_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 241
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Bishop_F_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 241
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Journeyman_T2_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 241
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_General_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 242
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Wyvern_Lord_F_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 242
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Wyvern_Knight_F_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 242
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Cyclops_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 242
+$(MOVEUNITGFXDIR_D307)/unit_icon_move_Draco_Zombie_sheet.4bpp: %.4bpp: %.png
+	$(GBAGFX) $< $@ -num_tiles 242
+
+graphics/unit_icon/move/unit_icon_move_Ephraim_Master_Lord_sheet.4bpp.lz: LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_Eirika_Master_Lord_sheet.4bpp.lz:  LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_Hero_sheet.4bpp.lz:                LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_Hero_F_sheet.4bpp.lz:              LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_Swordmaster_sheet.4bpp.lz:         LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_Swordmaster_F_sheet.4bpp.lz:       LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_Bishop_sheet.4bpp.lz:              LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_Bishop_F_sheet.4bpp.lz:            LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_Journeyman_T2_sheet.4bpp.lz:       LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_General_sheet.4bpp.lz:             LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_Wyvern_Lord_F_sheet.4bpp.lz:       LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_Wyvern_Knight_F_sheet.4bpp.lz:     LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_Cyclops_sheet.4bpp.lz:             LZ_FLAGS := -mindist 2
+graphics/unit_icon/move/unit_icon_move_Draco_Zombie_sheet.4bpp.lz:        LZ_FLAGS := -mindist 2
+
+asm/dat_const_data_unit_icon_move_p2.o:  graphics/unit_icon/move/unit_icon_move_Ephraim_Master_Lord_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p3.o:  graphics/unit_icon/move/unit_icon_move_Eirika_Master_Lord_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p7.o:  graphics/unit_icon/move/unit_icon_move_General_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p13.o: graphics/unit_icon/move/unit_icon_move_Hero_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p14.o: graphics/unit_icon/move/unit_icon_move_Hero_F_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p17.o: graphics/unit_icon/move/unit_icon_move_Swordmaster_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p18.o: graphics/unit_icon/move/unit_icon_move_Swordmaster_F_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p26.o: graphics/unit_icon/move/unit_icon_move_Wyvern_Lord_F_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p29.o: graphics/unit_icon/move/unit_icon_move_Wyvern_Knight_F_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p36.o: graphics/unit_icon/move/unit_icon_move_Bishop_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p37.o: graphics/unit_icon/move/unit_icon_move_Bishop_F_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p45.o: graphics/unit_icon/move/unit_icon_move_Journeyman_T2_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p71.o: graphics/unit_icon/move/unit_icon_move_Cyclops_sheet.4bpp.lz
+asm/dat_const_data_unit_icon_move_p83.o: graphics/unit_icon/move/unit_icon_move_Draco_Zombie_sheet.4bpp.lz

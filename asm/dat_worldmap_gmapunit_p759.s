@@ -17,10 +17,10 @@ Pal_ArenaBattleBg_C:
 	.incbin "graphics/gmapunit/Pal_ArenaBattleBg_C.gbapal"
 	.global gEfxlvupfx_1
 gEfxlvupfx_1:
-	.incbin "data/residual/gEfxlvupfx_1.bin"
+	.incbin "graphics/reuse/gEfxlvupfx_1.4bpp.lz"
 	.global gEfxlvupfx_2
 gEfxlvupfx_2:
-	.incbin "data/residual/gEfxlvupfx_2.bin"
+	.incbin "graphics/reuse/gEfxlvupfx_2.4bpp"
 	.global gEfxlvupfx_3
 gEfxlvupfx_3:
 	.incbin "data/residual/gEfxlvupfx_3.bin"
