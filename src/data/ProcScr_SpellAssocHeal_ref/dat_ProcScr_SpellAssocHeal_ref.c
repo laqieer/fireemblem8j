@@ -1,38 +1,19 @@
 #include "global.h"
+#include "proc.h"
+#include "mapanim.h"
 
-/* De-pointered from data/residual/ProcScr_SpellAssocHeal.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
-
-__asm__(
-"\t.section .rodata.dat_ProcScr_SpellAssocHeal_ref, \"a\", %progbits\n"
-"\t.global ProcScr_SpellAssocHeal\n"
-"ProcScr_SpellAssocHeal:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveCameraOnTarget + 0x1\n"
-"\t.4byte 0x0002000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_AnimateSubjectIdle + 0x1\n"
-"\t.4byte 0x001E000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnimCallSpellAssocHeal + 0x1\n"
-"\t.4byte 0x001E000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_BeginRoundSpecificAnims + 0x1\n"
-"\t.4byte 0x001E000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte MapAnim_WaitForHPToEndChangingMaybe + 0x1\n"
-"\t.4byte 0x000A000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_SubjectResetAnim + 0x1\n"
-"\t.4byte 0x001E000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd ProcScr_SpellAssocHeal[] __attribute__((section(".rodata.dat_ProcScr_SpellAssocHeal_ref"))) = {
+    PROC_CALL(MapAnim_MoveCameraOnTarget),
+    PROC_SLEEP(0x2),
+    PROC_CALL(MapAnim_AnimateSubjectIdle),
+    PROC_SLEEP(0x1E),
+    PROC_CALL(MapAnimCallSpellAssocHeal),
+    PROC_SLEEP(0x1E),
+    PROC_CALL(MapAnim_BeginRoundSpecificAnims),
+    PROC_SLEEP(0x1E),
+    PROC_REPEAT(MapAnim_WaitForHPToEndChangingMaybe),
+    PROC_SLEEP(0xA),
+    PROC_CALL(MapAnim_SubjectResetAnim),
+    PROC_SLEEP(0x1E),
+    PROC_END,
+};

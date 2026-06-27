@@ -1,38 +1,33 @@
 #include "global.h"
+#include "proc.h"
 
-/* De-pointered from data/residual/gProcScr_TrapDamageDisplay.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+extern void TrapDamageDisplay_Init(ProcPtr proc);
+extern void TrapDamageDisplay_Check(ProcPtr proc);
+extern void TrapDamageDisplay_Watch(ProcPtr proc);
+extern void TrapDamageDisplay_Display(ProcPtr proc);
+extern void FinishDamageDisplay(ProcPtr proc);
+extern void TrapDamageDisplay_Next(ProcPtr proc);
 
-__asm__(
-"\t.section .rodata.dat_gProcScr_TrapDamageDisplay_ref, \"a\", %progbits\n"
-"\t.global gProcScr_TrapDamageDisplay\n"
-"gProcScr_TrapDamageDisplay:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte TrapDamageDisplay_Init + 0x1\n"
-"\t.4byte 0x0000000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte TrapDamageDisplay_Check + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte TrapDamageDisplay_Watch + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte TrapDamageDisplay_Display + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte FinishDamageDisplay + 0x1\n"
-"\t.4byte 0x0001000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte TrapDamageDisplay_Next + 0x1\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd gProcScr_TrapDamageDisplay[] __attribute__((section(".rodata.dat_gProcScr_TrapDamageDisplay_ref"))) = {
+    PROC_CALL(TrapDamageDisplay_Init),
+
+PROC_LABEL(0),
+    PROC_SLEEP(0),
+
+    PROC_CALL(TrapDamageDisplay_Check),
+
+    PROC_CALL(TrapDamageDisplay_Watch),
+    PROC_SLEEP(0),
+
+    PROC_CALL(TrapDamageDisplay_Display),
+    PROC_SLEEP(0),
+
+    PROC_CALL(FinishDamageDisplay),
+
+PROC_LABEL(1),
+    PROC_CALL(TrapDamageDisplay_Next),
+
+    PROC_GOTO(0),
+
+    PROC_END,
+};
