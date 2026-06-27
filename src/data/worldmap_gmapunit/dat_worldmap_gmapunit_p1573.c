@@ -26,5 +26,5 @@ u16 gPal_UnkData_0[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573
 u8 gUnkData_43[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U8("graphics/reuse/gUnkData_43.4bpp");
 u8 gUnkData_44[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U8("graphics/reuse/gUnkData_44.4bpp");
 u8 gUnkData_45[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U8("graphics/reuse/gUnkData_45.4bpp");
-u8 gUnkData_46[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U8("data/residual/gUnkData_46.bin");
+u16 gUnkData_46[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = { 0x39F3, 0x0443, 0x3E11, 0x52D7, 0x4A98, 0x290A, 0x5F3D, 0x520E, 0x677D, 0x296A, 0x31AC, 0x39EE, 0x4230, 0x4A52, 0x5294, 0x5AD6, 0x6318, 0x2109, 0x3E11, 0x52D7, 0x5AD6, 0x212A, 0x6F7B, 0x520E, 0x52D8, 0x0CA3, 0x10C4, 0x1906, 0x2148, 0x296A, 0x31AC, 0x39CE, 0x4210, 0x0443, 0x3E11, 0x52D7, 0x5AD6, 0x212A, 0x6F7B };
 u16 gPal_UnkData_1[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U16("graphics/gmapunit/gPal_UnkData_1.gbapal");

@@ -5,7 +5,7 @@
  */
 
 extern u8 g085A0EA0_motion[1] __attribute__((alias("gUnkData_2")));
-u16 gUnkData_2[] __attribute__((section(".rodata.dat_anim_085A0EA0"))) = INCBIN_U16("data/residual/gUnkData_2.bin");
+u16 gUnkData_2[] __attribute__((section(".rodata.dat_anim_085A0EA0"))) = { 0x0004, 0x0012 };
 u8 g085A0EA0_frame_list[] __attribute__((section(".rodata.dat_anim_085A0EA0"))) = INCBIN_U8("data/residual/g085A0EA0_frame_list.bin");
 u8 g085A0EA0_anim_list[] __attribute__((section(".rodata.dat_anim_085A0EA0"))) = INCBIN_U8("data/residual/g085A0EA0_anim_list.bin");
 u8 g085A0EA0_frame_0[] __attribute__((section(".rodata.dat_anim_085A0EA0"))) = INCBIN_U8("data/residual/g085A0EA0_frame_0.bin");
