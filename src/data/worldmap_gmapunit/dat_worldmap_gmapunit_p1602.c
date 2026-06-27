@@ -6,7 +6,7 @@
 
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_67[] = INCBIN_U8("data/residual/gUnkData_67.bin");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_68[] = INCBIN_U8("data/residual/gUnkData_68.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_69[] = INCBIN_U8("data/residual/gUnkData_69.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_69[] = INCBIN_U8("graphics/reuse/gUnkData_69.4bpp.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_70[] = INCBIN_U8("data/residual/gUnkData_70.bin");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 Tsa_PrepItemScreen[] = INCBIN_U8("graphics/gmapunit/Tsa_PrepItemScreen.bin.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 Tsa_UnkData_4[] = INCBIN_U8("graphics/gmapunit/Tsa_UnkData_4.bin.lz");

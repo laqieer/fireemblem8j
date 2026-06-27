@@ -4,11 +4,11 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_banim_efxhitobj") u16 Img_EfxPierceCriticalEffectBG[] = INCBIN_U16("data/residual/Img_EfxPierceCriticalEffectBG.bin");
+SECTION(".rodata.dat_banim_efxhitobj") u16 Img_EfxPierceCriticalEffectBG[] = INCBIN_U16("graphics/reuse/Img_EfxPierceCriticalEffectBG.4bpp.lz");
 SECTION(".rodata.dat_banim_efxhitobj") u16 Pal_EfxPierceCriticalEffectBG[] = INCBIN_U16("data/residual/Pal_EfxPierceCriticalEffectBG.bin");
 SECTION(".rodata.dat_banim_efxhitobj") u16 TsaL_EfxPierceCriticalEffectBG[] = INCBIN_U16("data/residual/TsaL_EfxPierceCriticalEffectBG.bin");
 SECTION(".rodata.dat_banim_efxhitobj") u16 TsaR_EfxPierceCriticalEffectBG[] = INCBIN_U16("data/residual/TsaR_EfxPierceCriticalEffectBG.bin");
-SECTION(".rodata.dat_banim_efxhitobj") u16 Img_EfxPierceNormalEffectBG[] = INCBIN_U16("data/residual/Img_EfxPierceNormalEffectBG.bin");
+SECTION(".rodata.dat_banim_efxhitobj") u16 Img_EfxPierceNormalEffectBG[] = INCBIN_U16("graphics/reuse/Img_EfxPierceNormalEffectBG.4bpp.lz");
 SECTION(".rodata.dat_banim_efxhitobj") u16 Pal_EfxPierceNormalEffectBG[] = INCBIN_U16("data/residual/Pal_EfxPierceNormalEffectBG.bin");
 SECTION(".rodata.dat_banim_efxhitobj") u16 Tsa1_EfxPierceNormalEffectBG[] = INCBIN_U16("data/residual/Tsa1_EfxPierceNormalEffectBG.bin");
 SECTION(".rodata.dat_banim_efxhitobj") u16 Tsa2_EfxPierceNormalEffectBG[] = INCBIN_U16("data/residual/Tsa2_EfxPierceNormalEffectBG.bin");

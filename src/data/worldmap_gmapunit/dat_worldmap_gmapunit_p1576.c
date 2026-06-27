@@ -4,4 +4,4 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1576") u8 chap_title_blank[] = INCBIN_U8("data/residual/chap_title_blank.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1576") u8 chap_title_blank[] = INCBIN_U8("graphics/reuse/chap_title_blank.4bpp.lz");

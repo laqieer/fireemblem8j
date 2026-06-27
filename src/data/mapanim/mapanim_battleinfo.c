@@ -52,17 +52,17 @@ u16 CONST_DATA Pal_MapAnimPureWater[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAni
 
 u16 CONST_DATA Pal_MapAnimAntitoxin[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimAntitoxin.bin");
 
-u8 CONST_DATA gMapanimBattleinfo_2[] = INCBIN_U8("data/residual/gMapanimBattleinfo_2.bin");
+u8 CONST_DATA gMapanimBattleinfo_2[] = INCBIN_U8("graphics/reuse/gMapanimBattleinfo_2.4bpp.lz");
 
-u8 CONST_DATA gMapanimBattleinfo_3[] = INCBIN_U8("data/residual/gMapanimBattleinfo_3.bin");
+u8 CONST_DATA gMapanimBattleinfo_3[] = INCBIN_U8("graphics/reuse/gMapanimBattleinfo_3.4bpp.lz");
 
-u8 CONST_DATA gMapanimBattleinfo_4[] = INCBIN_U8("data/residual/gMapanimBattleinfo_4.bin");
+u8 CONST_DATA gMapanimBattleinfo_4[] = INCBIN_U8("graphics/reuse/gMapanimBattleinfo_4.4bpp.lz");
 
 u16 CONST_DATA Pal_MapAnimBerserkfx_1[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimBerserkfx_1.bin");
 
 u16 CONST_DATA Pal_MapAnimBerserkfx_2[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimBerserkfx_2.gbapal");
 
-u8 CONST_DATA gMapanimBattleinfo_5[] = INCBIN_U8("data/residual/gMapanimBattleinfo_5.bin");
+u8 CONST_DATA gMapanimBattleinfo_5[] = INCBIN_U8("graphics/reuse/gMapanimBattleinfo_5.4bpp.lz");
 
 u8 CONST_DATA Img_MapAnimTorchfx[] = INCBIN_U8("graphics/misc_gfx/Img_MapAnimTorchfx.bin.lz");
 

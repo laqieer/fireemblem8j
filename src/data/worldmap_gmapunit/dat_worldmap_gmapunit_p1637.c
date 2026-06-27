@@ -10,5 +10,5 @@ SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_1[] = INCBIN_U8
 SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_2[] = INCBIN_U8("data/residual/gMenuSoundroom_2.bin");
 SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 Img_SoundRoomVolumeGraph[] = INCBIN_U8("graphics/gmapunit/Img_SoundRoomVolumeGraph.bin.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1637") u16 Pal_SoundRoomVolumeGraph[] = INCBIN_U16("graphics/gmapunit/Pal_SoundRoomVolumeGraph.gbapal");
-SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_3[] = INCBIN_U8("data/residual/gMenuSoundroom_3.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_3[] = INCBIN_U8("graphics/reuse/gMenuSoundroom_3.4bpp.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_4[] = INCBIN_U8("data/residual/gMenuSoundroom_4.bin");

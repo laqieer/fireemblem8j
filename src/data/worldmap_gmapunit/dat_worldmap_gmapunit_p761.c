@@ -4,9 +4,9 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p761") u16 Img5_EfxLvupBG[] = INCBIN_U16("data/residual/Img5_EfxLvupBG.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p761") u16 Img6_EfxLvupBG[] = INCBIN_U16("data/residual/Img6_EfxLvupBG.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p761") u16 Img7_EfxLvupBG[] = INCBIN_U16("data/residual/Img7_EfxLvupBG.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p761") u16 Img5_EfxLvupBG[] = INCBIN_U16("graphics/reuse/Img5_EfxLvupBG.4bpp.lz");
+SECTION(".rodata.dat_worldmap_gmapunit_p761") u16 Img6_EfxLvupBG[] = INCBIN_U16("graphics/reuse/Img6_EfxLvupBG.4bpp.lz");
+SECTION(".rodata.dat_worldmap_gmapunit_p761") u16 Img7_EfxLvupBG[] = INCBIN_U16("graphics/reuse/Img7_EfxLvupBG.4bpp.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p761") u16 Pal_EfxLvupBG[] = INCBIN_U16("graphics/gmapunit/Pal_EfxLvupBG.gbapal");
 SECTION(".rodata.dat_worldmap_gmapunit_p761") u16 Tsa1_EfxLvupBG[] = INCBIN_U16("data/residual/Tsa1_EfxLvupBG.bin");
 SECTION(".rodata.dat_worldmap_gmapunit_p761") u16 Tsa2_EfxLvupBG[] = INCBIN_U16("data/residual/Tsa2_EfxLvupBG.bin");

@@ -7,9 +7,9 @@
 u16 gUnkData_35[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U16("graphics/reuse/gUnkData_35.4bpp");
 u16 gUnkData_36[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U16("graphics/reuse/gUnkData_36.4bpp");
 u16 gUnkData_37[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U16("graphics/reuse/gUnkData_37.4bpp");
-u8 gUnkData_38[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U8("data/residual/gUnkData_38.bin");
+u8 gUnkData_38[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U8("graphics/reuse/gUnkData_38.4bpp.lz");
 u8 gUnkData_39[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U8("graphics/reuse/gUnkData_39.4bpp");
-u8 gUnkData_40[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U8("data/residual/gUnkData_40.bin");
+u8 gUnkData_40[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U8("graphics/reuse/gUnkData_40.4bpp.lz");
 u8 gUnkData_41[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U8("graphics/reuse/gUnkData_41.4bpp");
 u8 gUnkData_42[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U8("data/residual/gUnkData_42.bin");
 u8 Img_StatscreenBG[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p1573"))) = INCBIN_U8("graphics/gmapunit/Img_StatscreenBG.bin.lz");

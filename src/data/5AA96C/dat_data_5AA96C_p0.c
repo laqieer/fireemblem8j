@@ -4,4 +4,4 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_5AA96C_p0") u8 gUnkData_5[] = INCBIN_U8("data/residual/gUnkData_5.bin");
+SECTION(".rodata.dat_data_5AA96C_p0") u8 gUnkData_5[] = INCBIN_U8("graphics/reuse/gUnkData_5.4bpp.lz");
