@@ -456,9 +456,17 @@ def emit_true_debt():
         kind, sym, off = classify(v, elfaddrs, _a2n, _a2s)
         if kind == "EXACT": blind_exact += 1; real_data.append((n, O, v, sym, off))
         elif kind == "DANGLING": blind_unres += 1
-        elif sym in _fn: blind_func += 1
+        # a word in a UnitDef_* table at a non-redas offset is a packed field
+        # (pid/jid/bitfield/coords/items/ai), coincidental REGARDLESS of what it resolves
+        # to -- must take precedence over the func+1 rule (a packed byte run can equal
+        # func+1 by chance). Likewise the cart header.
         elif romhdr_re.search(sym): blind_hdr += 1
         elif udef_re.search(n) and (O % 0x14) != 0x08: blind_udef += 1
+        # func+1 is a REAL thumb function pointer (the +1 is the Thumb bit, D303), not a
+        # coincidental mid-code constant -- it is convertible (.4byte func+1). Only off>1
+        # into a function's body is coincidental.
+        elif sym in _fn and off == 1: blind_data += 1; real_data.append((n, O, v, sym, off))
+        elif sym in _fn: blind_func += 1
         elif asset_re.search(sym): blind_asset += 1
         elif code_re.search(n): blind_code += 1
         else: blind_data += 1; real_data.append((n, O, v, sym, off))

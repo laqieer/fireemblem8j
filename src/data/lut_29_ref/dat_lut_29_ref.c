@@ -4,13 +4,38 @@
  * is unreferenced; the only consumer (SubtitleHelp_Loop.c) uses the descriptive
  * alias SubtitleHelp_TextShowLut, so define the bytes directly under that name. */
 
-SECTION(".rodata.dat_lut_29_ref") const u8 SubtitleHelp_TextShowLut[] = INCBIN_U8("data/residual/lut.29.bin", 0, 0x48);
+/* De-pointered ProcScr SubtitleHelp_TextShowLut: proc callback fn pointers
+ * (SubtitleHelp_OnEnd/Init/Loop, thumb-bit +0x1) + a data ref (data_080DCCB2+0x2E,
+ * interior-within-size) -> relocations so the proc script is shiftable. */
+__asm__(
+"\t.section .rodata.dat_lut_29_ref, \"a\", %progbits\n"
+"\t.global SubtitleHelp_TextShowLut\n"
+"SubtitleHelp_TextShowLut:\n"
+"\t.4byte 0x94929190\n"
+"\t.4byte 0x009C9996\n"
+"\t.4byte 0x00000001\n"
+"\t.4byte data_080DCCB2 + 0x2E\n"
+"\t.4byte 0x00000015\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000004\n"
+"\t.4byte SubtitleHelp_OnEnd + 0x1\n"
+"\t.4byte 0x0000000E\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000002\n"
+"\t.4byte SubtitleHelp_Init + 0x1\n"
+"\t.4byte 0x00000003\n"
+"\t.4byte SubtitleHelp_Loop + 0x1\n"
+"\t.4byte 0x00000010\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x92908F8E\n"
+"\t.4byte 0x009A9794\n"
+);
 __asm__(
 "\t.section .rodata.dat_lut_29_ref, \"a\", %progbits\n"
 "\t.global data_085C66D8\n"
 "data_085C66D8:\n"
 "\t.4byte 0x00000001\n"
-"\t.4byte 0x080DCCE0\n"
+"\t.4byte data_080DCCB2 + 0x2E\n"
 "\t.4byte 0x00000015\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x0000000E\n"
@@ -18,9 +43,9 @@ __asm__(
 "\t.4byte 0x00000002\n"
 "\t.4byte sub_8035650 + 0x1\n"
 "\t.4byte 0x00000003\n"
-"\t.4byte 0x080357BD\n"
+"\t.4byte sub_80357BC + 0x1\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x080355A1\n"
+"\t.4byte SubtitleHelp_OnEnd + 0x1\n"
 "\t.4byte 0x0008000E\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
