@@ -21,7 +21,7 @@ __asm__(
 "\t.4byte UnitDef_Ch21BEnemy_0\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x085B9DBC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_085B9BBC + 0x200\n"
 "\t.4byte 0x000B0229\n"
 "\t.4byte 0x000C0229\n"
 "\t.4byte 0x000D0229\n"

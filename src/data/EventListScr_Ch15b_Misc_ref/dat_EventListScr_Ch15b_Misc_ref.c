@@ -29,14 +29,14 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x08A5CE64\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5CE98\n"  /* coincidental const into fn: raw */
+"\t.4byte EventListScr_Ch14b_Location + 0x140\n"
+"\t.4byte EventListScr_Ch14b_Location + 0x174\n"
 "\t.4byte EventListScr_Ch15b_Location\n"
 "\t.4byte EventListScr_Ch15b_Misc\n"
-"\t.4byte 0x08A5CF40\n"  /* coincidental const into fn: raw */
+"\t.4byte EventListScr_Ch15b_Misc + 0x40\n"
 "\t.4byte EventListScr_Ch15b_Misc + 0x44\n"
-"\t.4byte 0x08A5CF48\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5CF4C\n"  /* coincidental const into fn: raw */
+"\t.4byte EventListScr_Ch15b_Misc + 0x48\n"
+"\t.4byte EventListScr_Ch15b_Misc + 0x4C\n"
 "\t.4byte gUidebug_2 + 0x4E3\n"
 "\t.4byte 0x08A60012\n"  /* coincidental const into fn: raw */
 "\t.4byte UnitDef_Ch15BAlly_0\n"

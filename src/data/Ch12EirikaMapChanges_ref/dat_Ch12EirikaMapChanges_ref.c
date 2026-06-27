@@ -9,14 +9,14 @@ __asm__(
 "\t.section .rodata.dat_Ch12EirikaMapChanges_ref, \"a\", %progbits\n"
 "\t.global Ch12EirikaMapChanges\n"
 "Ch12EirikaMapChanges:\n"
-"\t.4byte 0x08A5B574\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5B590\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5B594\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5B5BC\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5B5FC\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5B600\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5B604\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5B608\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A5B56C + 0x8\n"
+"\t.4byte data_08A5B56C + 0x24\n"
+"\t.4byte data_08A5B56C + 0x28\n"
+"\t.4byte data_08A5B56C + 0x50\n"
+"\t.4byte data_08A5B56C + 0x90\n"
+"\t.4byte data_08A5B56C + 0x94\n"
+"\t.4byte data_08A5B56C + 0x98\n"
+"\t.4byte data_08A5B56C + 0x9C\n"
 "\t.4byte gUidebug_2 + 0x349\n"
 "\t.4byte 0x08A5FFEC\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x0890E6E4\n"  /* coincidental const into fn: raw */

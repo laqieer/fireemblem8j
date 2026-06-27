@@ -30,87 +30,87 @@ __asm__(
 "\t.4byte EventScr_Ch14a_BeginningScene\n"
 "\t.4byte frontier_df4_menu_010_A67EEC\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A68814\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x148\n"
 "\t.4byte 0x00000503\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A6882C\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x160\n"
 "\t.4byte 0x00000504\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A68844\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x178\n"
 "\t.4byte 0x00000908\n"
 "\t.4byte 0x00000002\n"
 "\t.4byte EventScr_Ch15A_0\n"
 "\t.4byte 0x00800002\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A6885C\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x190\n"
 "\t.4byte 0x00000008\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte 0x08A68874\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x1A8\n"
 "\t.4byte 0x00000604\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x000D0003\n"
-"\t.4byte 0x08A68750\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x84\n"
 "\t.4byte 0x00000F01\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x000D0003\n"
-"\t.4byte 0x08A68750\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x84\n"
 "\t.4byte 0x0000010F\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x000E0003\n"
-"\t.4byte 0x08A68774\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0xA8\n"
 "\t.4byte 0x0000020F\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x000E0003\n"
-"\t.4byte 0x08A68774\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0xA8\n"
 "\t.4byte 0x00000F02\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x000F0003\n"
-"\t.4byte 0x08A68794\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0xC8\n"
 "\t.4byte 0x0000100F\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x000F0003\n"
-"\t.4byte 0x08A68794\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0xC8\n"
 "\t.4byte 0x00000F10\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00100003\n"
-"\t.4byte 0x08A687B4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0xE8\n"
 "\t.4byte 0x0000110F\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00100003\n"
-"\t.4byte 0x08A687B4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0xE8\n"
 "\t.4byte 0x00000F11\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00110003\n"
-"\t.4byte 0x08A687D4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x108\n"
 "\t.4byte 0x00000B0F\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00110003\n"
-"\t.4byte 0x08A687D4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x108\n"
 "\t.4byte 0x00000F0B\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00120003\n"
-"\t.4byte 0x08A687F4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x128\n"
 "\t.4byte 0x00000E1D\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00120003\n"
-"\t.4byte 0x08A687F4\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x128\n"
 "\t.4byte 0x00001D0E\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000006\n"
-"\t.4byte 0x08A686C4\n"  /* coincidental const into fn: raw */
+"\t.4byte EventScr_Ch15A_26 + 0x13C\n"
 "\t.4byte 0x00100E01\n"
 "\t.4byte 0x00000005\n"
 "\t.4byte 0x00000001\n"
 "\t.4byte 0x00200D01\n"
 "\t.4byte 0x0000000A\n"
-"\t.4byte 0x08A5F986\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte gUidebug_2 + 0x1B6\n"
 "\t.4byte 0x00170408\n"
 "\t.4byte 0x00000005\n"
-"\t.4byte 0x08A68700\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x34\n"
 "\t.4byte 0x00100611\n"
 "\t.4byte 0x00000005\n"
-"\t.4byte 0x08A68728\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x5C\n"
 "\t.4byte 0x00100D05\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00030001\n"
@@ -141,10 +141,10 @@ __asm__(
 "\t.4byte EventScr_Ch15A_21\n"
 "\t.4byte 0x15170F16\n"
 "\t.4byte 0x001A000B\n"
-"\t.4byte 0x08A6888C\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x1C0\n"
 "\t.4byte 0x150E110B\n"
 "\t.4byte 0x001A000B\n"
-"\t.4byte 0x08A6888C\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A686CC + 0x1C0\n"
 "\t.4byte 0x15150E0F\n"
 "\t.4byte 0x001C000B\n"
 "\t.4byte EventScr_Ch15A_25\n"

@@ -9,14 +9,14 @@ __asm__(
 "\t.section .rodata.dat_LagdouRuins6MapChanges_ref, \"a\", %progbits\n"
 "\t.global LagdouRuins6MapChanges\n"
 "LagdouRuins6MapChanges:\n"
-"\t.4byte 0x08A5DFA0\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5DFF8\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5DFFC\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5E00C\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5E028\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5E02C\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5E030\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x08A5E034\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A5DF98 + 0x8\n"
+"\t.4byte data_08A5DF98 + 0x60\n"
+"\t.4byte data_08A5DF98 + 0x64\n"
+"\t.4byte data_08A5DF98 + 0x74\n"
+"\t.4byte data_08A5DF98 + 0x90\n"
+"\t.4byte data_08A5DF98 + 0x94\n"
+"\t.4byte data_08A5DF98 + 0x98\n"
+"\t.4byte data_08A5DF98 + 0x9C\n"
 "\t.4byte gUidebug_2 + 0x6E3\n"
 "\t.4byte 0x08A60026\n"  /* coincidental const into fn: raw */
 "\t.4byte UnitDef_Ruin6Ally\n"
@@ -56,7 +56,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000005\n"
-"\t.4byte 0x08A5F8DA\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte gUidebug_2 + 0x10A\n"
 "\t.4byte 0x00140B05\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000001\n"

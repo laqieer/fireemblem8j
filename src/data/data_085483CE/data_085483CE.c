@@ -68,7 +68,7 @@ __asm__(
 "\t.4byte 0x8449B308\n"
 "\t.4byte 0x54B30854\n"
 "\t.4byte 0xB2085484\n"
-"\t.4byte 0x0854846F\n"
+"\t.4byte data_085483CE + 0xA1\n"
 "\t.4byte 0x000700B1\n"
 "\t.4byte 0x1988940A\n"
 "\t.4byte 0x745C0821\n"

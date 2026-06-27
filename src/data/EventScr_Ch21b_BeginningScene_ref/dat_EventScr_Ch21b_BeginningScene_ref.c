@@ -17,7 +17,7 @@ __asm__(
 "\t.4byte 0x00002A24\n"
 "\t.4byte 0x00000120\n"
 "\t.4byte 0x00000D40\n"
-"\t.4byte 0x08087F19\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte InitTowerDungeonState + 0x1\n"
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000A40\n"

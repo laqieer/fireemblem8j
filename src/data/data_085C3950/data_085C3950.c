@@ -23,7 +23,7 @@ __asm__(
 "\t.4byte 0x00000002\n"
 "\t.4byte sub_8021AFC + 0x1\n"
 "\t.4byte 0x00000003\n"
-"\t.4byte 0x08021B99\n"
+"\t.4byte sub_8021B98 + 0x1\n"
 "\t.4byte 0x00000002\n"
 "\t.4byte sub_8021C10 + 0x1\n"
 "\t.4byte 0x00000000\n"

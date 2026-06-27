@@ -20,10 +20,10 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x00000AF6\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x00001521\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x085B9D24\n"  /* coincidental const into fn: raw */
+"\t.4byte data_085B9BBC + 0x168\n"
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x00000088\n"
 "\t.4byte 0xFFFF3720\n"
@@ -35,7 +35,7 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x00000AF7\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x00001521\n"
 "\t.4byte 0x00070228\n"
 "\t.4byte 0x00000120\n"
@@ -45,7 +45,7 @@ __asm__(
 "\t.4byte 0x00030540\n"
 "\t.4byte 0x00000AF8\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A60448\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0xF4\n"
 "\t.4byte 0x00001521\n"
 "\t.4byte 0x00070228\n"
 "\t.4byte 0x00000120\n"
@@ -93,13 +93,13 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x0891B7B8\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603AC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x58\n"
 "\t.4byte 0x00070228\n"
 "\t.4byte 0x00000120\n"
 "\t.4byte 0x00020540\n"
 "\t.4byte 0x0891B7F4\n"  /* coincidental const into fn: raw */
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603AC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x58\n"
 "\t.4byte 0x00070228\n"
 "\t.4byte 0x00000120\n"
 "\t.4byte 0x00020540\n"
@@ -111,13 +111,13 @@ __asm__(
 "\t.4byte 0x00020540\n"
 "\t.4byte UnitDef_Ch15BEnemy_5\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603AC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x58\n"
 "\t.4byte 0x00070228\n"
 "\t.4byte 0x00000120\n"
 "\t.4byte 0x00020540\n"
 "\t.4byte frontier_df3_unitdef_b_038_91B948\n"
 "\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A603AC\n"  /* coincidental const into fn: raw */
+"\t.4byte data_08A60354 + 0x58\n"
 "\t.4byte 0x00070228\n"
 "\t.4byte 0x00000120\n"
 "\t.4byte 0x00020540\n"

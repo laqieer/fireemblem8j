@@ -51,5 +51,5 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte EventListScr_Ch17b_Turn\n"
-"\t.4byte 0x08A5D17C\n"  /* coincidental const into fn: raw */
+"\t.4byte EventListScr_Ch17b_Turn + 0x40\n"
 );

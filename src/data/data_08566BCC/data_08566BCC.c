@@ -9,6 +9,6 @@ __asm__(
 "\t.global data_08566BCC\n"
 "data_08566BCC:\n"
 "\t.4byte 0x800A0001\n"
-"\t.4byte 0x08213AE8\n"
+"\t.4byte data_08213A10 + 0xD8\n"
 "\t.4byte song071_y_wind_3_1\n"
 );  /* de-pointered slice data_08566BCC: ptr=1 data=1 skip=1 */

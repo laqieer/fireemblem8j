@@ -10,19 +10,19 @@ __asm__(
 "\t.global EventListScr_Ch14b_Location\n"
 "EventListScr_Ch14b_Location:\n"
 "\t.4byte 0x00000006\n"
-"\t.4byte 0x08A6E9C0\n"  /* coincidental const into fn: raw */
+"\t.4byte EventScr_Ch14b_EndingScene + 0x14\n"
 "\t.4byte 0x00100E01\n"
 "\t.4byte 0x00000005\n"
 "\t.4byte 0x00000001\n"
 "\t.4byte 0x00200D01\n"
 "\t.4byte 0x0000000A\n"
-"\t.4byte 0x08A5FA64\n"  /* not a fe8u ptr slot: raw */
+"\t.4byte gUidebug_2 + 0x294\n"
 "\t.4byte 0x00170408\n"
 "\t.4byte 0x00000005\n"
-"\t.4byte 0x08A6E9FC\n"  /* coincidental const into fn: raw */
+"\t.4byte EventScr_Ch14b_EndingScene + 0x50\n"
 "\t.4byte 0x00100611\n"
 "\t.4byte 0x00000005\n"
-"\t.4byte 0x08A6EA24\n"  /* coincidental const into fn: raw */
+"\t.4byte EventScr_Ch14b_EndingScene + 0x78\n"
 "\t.4byte 0x00100D05\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00030001\n"

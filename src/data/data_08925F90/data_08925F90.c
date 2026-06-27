@@ -33,7 +33,7 @@ __asm__(
 "\t.4byte 0x0000FFFF\n"
 "\t.4byte 0x0B010140\n"
 "\t.4byte 0x00000001\n"
-"\t.4byte 0x08004505\n"
+"\t.4byte SpriteText_DrawBackground + 0x1\n"
 "\t.4byte 0x00000084\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
