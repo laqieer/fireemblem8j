@@ -5,7 +5,7 @@
  */
 
 SECTION(".rodata.dat_data_5B65C0_p0") const u8 gUiFrameImage[] = INCBIN_U8("data/residual/gUiFrameImage.bin");
-SECTION(".rodata.dat_data_5B65C0_p0") const u16 gUiFramePaletteA[] = INCBIN_U16("data/residual/gUiFramePaletteA.bin");
-SECTION(".rodata.dat_data_5B65C0_p0") const u16 gUiFramePaletteB[] = INCBIN_U16("data/residual/gUiFramePaletteB.bin");
-SECTION(".rodata.dat_data_5B65C0_p0") const u16 gUiFramePaletteC[] = INCBIN_U16("data/residual/gUiFramePaletteC.bin");
+SECTION(".rodata.dat_data_5B65C0_p0") const u16 gUiFramePaletteA[] = INCBIN_U16("graphics/reuse/gUiFramePaletteA.4bpp");
+SECTION(".rodata.dat_data_5B65C0_p0") const u16 gUiFramePaletteB[] = INCBIN_U16("graphics/reuse/gUiFramePaletteB.4bpp");
+SECTION(".rodata.dat_data_5B65C0_p0") const u16 gUiFramePaletteC[] = INCBIN_U16("graphics/reuse/gUiFramePaletteC.4bpp");
 SECTION(".rodata.dat_data_5B65C0_p0") const u16 gUiFramePaletteD[] = INCBIN_U16("data/residual/gUiFramePaletteD.bin");

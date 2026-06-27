@@ -38,7 +38,7 @@ u16 CONST_DATA Img_LinkArenaWarpFx[] = INCBIN_U16("graphics/misc_gfx/Img_LinkAre
 
 u16 CONST_DATA Pal_LinkArenaWarpFx[] = INCBIN_U16("graphics/misc_gfx/Pal_LinkArenaWarpFx.bin");
 
-u16 CONST_DATA gMapanimBattleinfo_0[] = INCBIN_U16("data/residual/gMapanimBattleinfo_0.bin");
+u16 CONST_DATA gMapanimBattleinfo_0[] = INCBIN_U16("graphics/reuse/gMapanimBattleinfo_0.4bpp");
 
 u8 Img_MapAnimBerserkfx_1[] = INCBIN_U8("graphics/misc_gfx/Img_MapAnimBerserkfx_1.bin.lz");
 
@@ -46,7 +46,7 @@ u16 Pal_MapAnimBerserkfx_0[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimBerserkf
 
 u8 CONST_DATA Img_MapAnimAntitoxinPureWater[] = INCBIN_U8("graphics/misc_gfx/Img_MapAnimAntitoxinPureWater.bin.lz");
 
-u16 CONST_DATA gMapanimBattleinfo_1[] = INCBIN_U16("data/residual/gMapanimBattleinfo_1.bin");
+u16 CONST_DATA gMapanimBattleinfo_1[] = INCBIN_U16("graphics/reuse/gMapanimBattleinfo_1.4bpp");
 
 u16 CONST_DATA Pal_MapAnimPureWater[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimPureWater.bin");
 

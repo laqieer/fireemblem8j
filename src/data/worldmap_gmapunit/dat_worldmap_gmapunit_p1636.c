@@ -6,4 +6,4 @@
 
 SECTION(".rodata.dat_worldmap_gmapunit_p1636") u8 gMenuMainObjs_2[] = INCBIN_U8("data/residual/gMenuMainObjs_2.bin");
 SECTION(".rodata.dat_worldmap_gmapunit_p1636") u8 gMenuMainObjs_3[] = INCBIN_U8("data/residual/gMenuMainObjs_3.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1636") u8 gMenuMainObjs_4[] = INCBIN_U8("data/residual/gMenuMainObjs_4.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1636") u8 gMenuMainObjs_4[] = INCBIN_U8("graphics/reuse/gMenuMainObjs_4.4bpp");

@@ -5,4 +5,4 @@
  */
 
 SECTION(".rodata.dat_worldmap_gmapunit_p1634") u8 Pal_DifficultyMenuObjs[] = INCBIN_U8("graphics/gmapunit/Pal_DifficultyMenuObjs.gbapal");
-SECTION(".rodata.dat_worldmap_gmapunit_p1634") u8 gMenuMainObjs_0[] = INCBIN_U8("data/residual/gMenuMainObjs_0.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1634") u8 gMenuMainObjs_0[] = INCBIN_U8("graphics/reuse/gMenuMainObjs_0.4bpp");
