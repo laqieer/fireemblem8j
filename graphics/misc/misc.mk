@@ -20,3 +20,36 @@ graphics/misc/Img_MenuScrollBar.4bpp.lz: LZ_FLAGS := -mindist 2
 # asm/dat_worldmap_gmapunit_p1598.o .incbins the REBUILT .4bpp.lz (not baserom), so
 # it must be regenerated from the committed PNG before the asm is assembled.
 asm/dat_worldmap_gmapunit_p1598.o: graphics/misc/Img_MenuScrollBar.4bpp.lz
+
+src/data/mapanim/mapanim_monster_gorgon.o: \
+  graphics/misc/Tsa10_MonsterStoneMapAnimfx.tsa.bin.lz \
+  graphics/misc/Tsa1_MonsterStoneMapAnimfx.tsa.bin.lz \
+  graphics/misc/Tsa2_MonsterStoneMapAnimfx.tsa.bin.lz \
+  graphics/misc/Tsa3_MonsterStoneMapAnimfx.tsa.bin.lz \
+  graphics/misc/Tsa4_MonsterStoneMapAnimfx.tsa.bin.lz \
+  graphics/misc/Tsa5_MonsterStoneMapAnimfx.tsa.bin.lz \
+  graphics/misc/Tsa6_MonsterStoneMapAnimfx.tsa.bin.lz \
+  graphics/misc/Tsa7_MonsterStoneMapAnimfx.tsa.bin.lz \
+  graphics/misc/Tsa8_MonsterStoneMapAnimfx.tsa.bin.lz \
+  graphics/misc/Tsa9_MonsterStoneMapAnimfx.tsa.bin.lz
+
+
+graphics/misc/Tsa10_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/misc/Tsa1_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/misc/Tsa2_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/misc/Tsa3_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/misc/Tsa4_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/misc/Tsa5_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/misc/Tsa6_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/misc/Tsa7_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/misc/Tsa8_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
+
+graphics/misc/Tsa9_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
