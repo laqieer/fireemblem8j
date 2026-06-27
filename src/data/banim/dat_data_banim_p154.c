@@ -5,7 +5,7 @@
  */
 
 SECTION(".rodata.dat_data_banim_p154") u8 AnimSprite_EfxSleepOBJ2_59[] = INCBIN_U8("data/residual/AnimSprite_EfxSleepOBJ2_59.bin");
-SECTION(".rodata.dat_data_banim_p154") u8 AnimSprite_EfxSleepOBJ2_60[] = INCBIN_U8("data/residual/AnimSprite_EfxSleepOBJ2_60.bin");
+SECTION(".rodata.dat_data_banim_p154") u8 AnimSprite_EfxSleepOBJ2_60[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxSleepOBJ2_60.4bpp");
 SECTION(".rodata.dat_data_banim_p154") u8 AnimSprite_EfxSleepOBJ2_61[] = INCBIN_U8("data/residual/AnimSprite_EfxSleepOBJ2_61.bin");
 SECTION(".rodata.dat_data_banim_p154") u8 AnimSprite_EfxSleepOBJ2_62[] = INCBIN_U8("data/residual/AnimSprite_EfxSleepOBJ2_62.bin");
 SECTION(".rodata.dat_data_banim_p154") u8 AnimSprite_EfxSleepOBJ2_63[] = INCBIN_U8("data/residual/AnimSprite_EfxSleepOBJ2_63.bin");

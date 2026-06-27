@@ -4,4 +4,4 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_bg_p39") u8 bg_Volcano_palette[] = INCBIN_U8("data/residual/bg_Volcano_palette.bin");
+SECTION(".rodata.dat_data_bg_p39") u8 bg_Volcano_palette[] = INCBIN_U8("graphics/reuse/bg_Volcano_palette.4bpp");

@@ -5,4 +5,4 @@
  */
 
 SECTION(".rodata.dat_data_bg_p12") u8 bg_Castle_Bright_palette[] = INCBIN_U8("graphics/reuse/bg_Castle_Bright_palette.gbapal");
-SECTION(".rodata.dat_data_bg_p12") u8 bg_Castle_Dark_palette[] = INCBIN_U8("data/residual/bg_Castle_Dark_palette.bin");
+SECTION(".rodata.dat_data_bg_p12") u8 bg_Castle_Dark_palette[] = INCBIN_U8("graphics/reuse/bg_Castle_Dark_palette.4bpp");

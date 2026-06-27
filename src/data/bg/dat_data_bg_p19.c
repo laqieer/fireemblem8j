@@ -5,4 +5,4 @@
  */
 
 SECTION(".rodata.dat_data_bg_p19") u8 bg_Grass_Plains_2_map[] = INCBIN_U8("data/residual/bg_Grass_Plains_2_map.bin");
-SECTION(".rodata.dat_data_bg_p19") u8 bg_Grass_Plains_2_palette[] = INCBIN_U8("data/residual/bg_Grass_Plains_2_palette.bin");
+SECTION(".rodata.dat_data_bg_p19") u8 bg_Grass_Plains_2_palette[] = INCBIN_U8("graphics/reuse/bg_Grass_Plains_2_palette.4bpp");

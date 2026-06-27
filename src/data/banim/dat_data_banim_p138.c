@@ -4,6 +4,6 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_banim_p138") u8 AnimSprite_EfxRestOBJ_25[] = INCBIN_U8("data/residual/AnimSprite_EfxRestOBJ_25.bin");
+SECTION(".rodata.dat_data_banim_p138") u8 AnimSprite_EfxRestOBJ_25[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxRestOBJ_25.4bpp");
 SECTION(".rodata.dat_data_banim_p138") u8 AnimSprite_EfxRestOBJ_26[] = INCBIN_U8("data/residual/AnimSprite_EfxRestOBJ_26.bin");
 SECTION(".rodata.dat_data_banim_p138") u8 AnimSprite_EfxRestOBJ_27[] = INCBIN_U8("data/residual/AnimSprite_EfxRestOBJ_27.bin");

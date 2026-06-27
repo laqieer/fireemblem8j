@@ -5,6 +5,6 @@
  */
 
 SECTION(".rodata.dat_data_banim_p129") u8 AnimSprite_EfxReblowOBJ_R_82[] = INCBIN_U8("data/residual/AnimSprite_EfxReblowOBJ_R_82.bin");
-SECTION(".rodata.dat_data_banim_p129") u8 AnimSprite_EfxReblowOBJ_R_83[] = INCBIN_U8("data/residual/AnimSprite_EfxReblowOBJ_R_83.bin");
-SECTION(".rodata.dat_data_banim_p129") u8 AnimSprite_EfxReblowOBJ_R_84[] = INCBIN_U8("data/residual/AnimSprite_EfxReblowOBJ_R_84.bin");
+SECTION(".rodata.dat_data_banim_p129") u8 AnimSprite_EfxReblowOBJ_R_83[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxReblowOBJ_R_83.4bpp");
+SECTION(".rodata.dat_data_banim_p129") u8 AnimSprite_EfxReblowOBJ_R_84[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxReblowOBJ_R_84.4bpp");
 SECTION(".rodata.dat_data_banim_p129") u8 AnimSprite_EfxReblowOBJ_R_85[] = INCBIN_U8("data/residual/AnimSprite_EfxReblowOBJ_R_85.bin");

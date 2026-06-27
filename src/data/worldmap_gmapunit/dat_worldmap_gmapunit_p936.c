@@ -5,4 +5,4 @@
  */
 
 SECTION(".rodata.dat_worldmap_gmapunit_p936") u8 AnimSprite_EfxRestOBJ_35[] = INCBIN_U8("data/residual/AnimSprite_EfxRestOBJ_35.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p936") u8 AnimSprite_EfxRestOBJ_36[] = INCBIN_U8("data/residual/AnimSprite_EfxRestOBJ_36.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p936") u8 AnimSprite_EfxRestOBJ_36[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxRestOBJ_36.4bpp");

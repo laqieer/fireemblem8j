@@ -5,4 +5,4 @@
  */
 
 SECTION(".rodata.dat_data_bg_p11") u8 bg_Throne_Normal_palette[] = INCBIN_U8("graphics/reuse/bg_Throne_Normal_palette.gbapal");
-SECTION(".rodata.dat_data_bg_p11") u8 bg_Throne_Flashback_palette[] = INCBIN_U8("data/residual/bg_Throne_Flashback_palette.bin");
+SECTION(".rodata.dat_data_bg_p11") u8 bg_Throne_Flashback_palette[] = INCBIN_U8("graphics/reuse/bg_Throne_Flashback_palette.4bpp");

@@ -4,7 +4,7 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_66[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_66.bin");
+SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_66[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxMshield_66.4bpp");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_67[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_67.bin");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_68[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_68.bin");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_69[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_69.bin");
@@ -15,7 +15,7 @@ SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_73[] = INCBIN_U8
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_74[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_74.bin");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_75[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_75.bin");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_76[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_76.bin");
-SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_77[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_77.bin");
+SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_77[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxMshield_77.4bpp");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_78[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_78.bin");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_79[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_79.bin");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_80[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_80.bin");
@@ -38,7 +38,7 @@ SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_96[] = INCBIN_U8
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_97[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_97.bin");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_98[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_98.bin");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_99[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_99.bin");
-SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_100[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_100.bin");
+SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_100[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxMshield_100.4bpp");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_101[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_101.bin");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_102[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_102.bin");
 SECTION(".rodata.dat_data_banim_p171") u8 AnimSprite_EfxMshield_103[] = INCBIN_U8("data/residual/AnimSprite_EfxMshield_103.bin");

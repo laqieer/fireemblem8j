@@ -18,12 +18,12 @@ SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_52[] 
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_53[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_53.bin");
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_54[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Front_54.4bpp");
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_55[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_55.bin");
-SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_56[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_56.bin");
-SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_57[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_57.bin");
-SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_58[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_58.bin");
-SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_59[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_59.bin");
+SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_56[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Front_56.4bpp");
+SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_57[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Front_57.4bpp");
+SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_58[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Front_58.4bpp");
+SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_59[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Front_59.4bpp");
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_60[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_60.bin");
-SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_61[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_61.bin");
+SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_61[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxAlacaliburOBJ_Front_61.4bpp");
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_62[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_62.bin");
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_63[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_63.bin");
 SECTION(".rodata.dat_data_banim_p92") u8 AnimSprite_EfxAlacaliburOBJ_Front_64[] = INCBIN_U8("data/residual/AnimSprite_EfxAlacaliburOBJ_Front_64.bin");

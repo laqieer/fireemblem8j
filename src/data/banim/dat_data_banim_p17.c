@@ -49,7 +49,7 @@ u8 AnimSprite_Banim_26[] __attribute__((section(".rodata.dat_data_banim_p17"))) 
 u8 AnimSprite_EfxSongObj2_0[] __attribute__((section(".rodata.dat_data_banim_p17"))) = INCBIN_U8("data/residual/AnimSprite_EfxSongObj2_0.bin");
 u8 AnimSprite_EfxSongObj2_1[] __attribute__((section(".rodata.dat_data_banim_p17"))) = INCBIN_U8("data/residual/AnimSprite_EfxSongObj2_1.bin");
 u8 AnimSprite_EfxSongObj2_2[] __attribute__((section(".rodata.dat_data_banim_p17"))) = INCBIN_U8("data/residual/AnimSprite_EfxSongObj2_2.bin");
-u8 AnimSprite_EfxSongObj2_3[] __attribute__((section(".rodata.dat_data_banim_p17"))) = INCBIN_U8("data/residual/AnimSprite_EfxSongObj2_3.bin");
+u8 AnimSprite_EfxSongObj2_3[] __attribute__((section(".rodata.dat_data_banim_p17"))) = INCBIN_U8("graphics/reuse/AnimSprite_EfxSongObj2_3.4bpp");
 u8 AnimSprite_EfxSongObj2_4[] __attribute__((section(".rodata.dat_data_banim_p17"))) = INCBIN_U8("data/residual/AnimSprite_EfxSongObj2_4.bin");
 u8 AnimSprite_EfxSongObj2_5[] __attribute__((section(".rodata.dat_data_banim_p17"))) = INCBIN_U8("data/residual/AnimSprite_EfxSongObj2_5.bin");
 u8 AnimSprite_EfxSongObj2_6[] __attribute__((section(".rodata.dat_data_banim_p17"))) = INCBIN_U8("data/residual/AnimSprite_EfxSongObj2_6.bin");
