@@ -7963,3 +7963,28 @@ tiny, fully-characterized RE backlog (2 event-script operands + per-table deep-b
 verification). Further conversion has rising shift-correctness risk that `make compare`
 cannot gate, so it is NOT force-converted. Authoritative metric: `audit_pointers.py
 --true-debt` (gate, fe8u + structural), not the literal raw-word count.
+
+### D304 addendum — residual real pointers cracked; gate 12 → 9 (0 genuinely-real)
+
+After the initial D304 writeup, the remaining "ambiguous" residual was worked down by
+de-pointering the genuinely-real clusters (all byte-exact, `make compare` OK):
+- **EventScr_Ch16A_1 (+2):** event command `0x0A40` takes a pointer operand in the next
+  word; offsets 0x24 (data ref) and 0x30 (self jump, lands on a valid command boundary)
+  are interior-within-size → relocations.
+- **lut.29 ProcScr (+7):** `SubtitleHelp_TextShowLut` + `data_085C66D8` — proc callbacks
+  (`SubtitleHelp_*`, `KillAllRedUnits_*`, `sub_80357BC` as thumb-bit `func+0x1`) and data
+  refs (`data_080DCCB2+0x2E`). Exposed a **classifier bug**: `func+0x1` (a real thumb
+  function pointer) was mis-bucketed as "FUNC-interior coincidental"; fixed to treat
+  off==1 as a real pointer (off>1 stays coincidental), with UnitDef-field / ROM-header
+  rules ordered first (a packed unit byte-run can equal `func+1` by chance). GOTCHA: the
+  `_ref` .c held two slices; the first whole-file overwrite clobbered `data_085C66D8` →
+  undefined ref in `sub_803581C` — fixed by converting only the first slice's INCBIN line.
+
+**Final state: relocated 14,383, completion gate = 9, 0 confirmed-real + 0
+genuinely-real DATA-pointer debt.** The 9 are sparse words (0.5-1% density) in 18-21KB
+undecompiled `gUnkData_*` data blobs pointing to scattered/deep interiors — coincidental,
+conservatively left unclassified (proving each airtight = decompiling the blobs, an
+EDITABILITY-axis task). The data-pointer-shiftability axis is **complete** for all
+identifiable real pointers; the autonomous-loop's literal-`audit_pointers==0` criterion
+is mathematically unreachable (coincidental constants permanently occupy the ROM range)
+and is superseded by the gate (`--true-debt --gate`), which is the honest target-0 number.
