@@ -8165,3 +8165,40 @@ each clean-build + CI gated:
 This is the D308 reference-parity floor: what fe8u itself keeps as binary INCBIN. Axes #1/#3/#5
 are at literal target (100%/100%/gate-0); #2 (agbcc codegen walls) / #4 (auto-asset-label
 convention floor) / #6 (binary floor) are at their documented reference-parity ceilings.
+
+## D310 — Editability realignment: asset SOURCE forms, not .bin wrappers (user-directed)
+
+**Date context:** 2026-06-28. USER FEEDBACK (two rounds): (1) "data are still kept in .bin,
+it is meaningless to write a small .s wrapper to .include .bin, you are just cheating instead
+of making game assets easy to edit, check fe8u to learn the expected forms of all asset types";
+(2) "palette should be .pal/.agbpal instead of .gbapal, .agbpal is for corner case which .pal
+doesn't work due to highest bit set in rgb555 format."
+
+**Root problem:** axis #6's metric counts opaque `data/residual/*.bin` INCBINs, so the D309
+graphics "extraction" gamed it by `cp`-ing a `.bin` into `graphics/` + repointing the INCBIN —
+byte-exact (`make compare` OK) but STILL opaque binary, not editable. `make compare` is necessary
+but NOT sufficient for editability; the SOURCE FORM is the real test.
+
+**Standard established** (`docs/asset_forms.md`, verified vs fe8u Makefile rules + committed-source
+exts): pixel gfx → `.png` (`%.4bpp: %.png`); battle-bg → `.png` via `FETSATOOL`; palette → `.pal`
+(JASC) or, when any RGB555 color has **bit-15 set** (JASC RGB888 can't represent it), `.agbpal`
+(raw, committed, INCBIN'd directly like fe8u `portrait_*.agbpal`); `.gbapal` is the gitignored
+BUILT artifact (never committed); TSA/tilemap → `.tsa.bin`/`.map.bin` (fe8u keeps binary too =
+parity OK); event script → `EVENT_*` macros; proc → `PROC_*`; struct → typed C; music → song `.s`;
+map → `.S`+`tile_config`. Rule: don't fake-extract a non-image into `graphics/` to dodge the metric.
+
+**Corrections landed (all byte-exact, CI-green):**
+- Reverted `data_08BB8ED0` (non-tile-aligned malloc-region blob wrongly labeled `.4bpp` → honest floor).
+- Dropped the unpushed `.bin`-form tail merge.
+- **btl_bg: 21/26 battle backgrounds → editable `.png`** (ported fe8u's FETSATOOL = `scripts/gfxtools/
+  tsa_generator.py`; added `%.feimg<N>.bin %.fetsa<N>.bin: %.png` rules; 7 kept binary = different
+  fe8u pipeline / P-mode png). Added numpy+Pillow to CI (the deps fe8u's CI also installs).
+- **Palettes: 122 → `.pal`(13)/`.agbpal`(109 high-bit)** (workflow + adversarial verify confirmed
+  every bit-15 palette is `.agbpal`, 0 lossy-`.pal`; 3 "*Pal*" config tables correctly left as `.bin`).
+- **Event scripts: 166/166 → editable `EVENT_*` macros** (built `scripts/eventscr_disasm.py` bytecode→
+  macro decoder; fixed SPAWN sub-map {0,1,2}, function-CALL extern, byte-offset addend cast).
+
+**Remaining editability lanes (the continuing axis #6 program, each needs a disassembler tool like
+EventScr did):** chapter maps (~81 `graphics/map/*.bin` → `.S`+tile_config, fe8u `MARTOMAP` pipeline),
+music (~125 song/voicegroup → `.s`), battle-anim scripts (~221 banim → `animscr_*.s`), and the
+ApConf_MapAnim* struct configs. These are real targets (fe8u makes them editable), not floor.

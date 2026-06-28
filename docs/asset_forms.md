@@ -13,7 +13,8 @@
 | Asset type | Editable SOURCE (commit this) | Built artifact (gitignored, INCBIN'd) | fe8u rule / proof |
 |---|---|---|---|
 | **Pixel graphics** (1/4/8bpp tiles) | **`.png`** (open in any image editor) | `.4bpp` / `.4bpp.lz` | `%.4bpp: %.png` ; `%.lz: %` |
-| **Palette** | **`.pal`** (JASC text) or `.png` | `.gbapal` | `%.gbapal: %.pal` ; `%.gbapal: %.png` |
+| **Palette** (no bit-15) | **`.pal`** (JASC text) or `.png` | `.gbapal` (gitignored) | `%.gbapal: %.pal` ; `%.gbapal: %.png` |
+| **Palette** (RGB555 bit-15 set) | **`.agbpal`** (raw RGB555, committed; INCBIN'd directly) | — | JASC `.pal` is RGB888 → loses bit 15; `.agbpal` preserves it (fe8u `portrait_*.agbpal`) |
 | **TSA tilemap** | **`.tsa.bin`** (binary — fe8u keeps it binary too) | `.tsa.bin.lz` | committed source in fe8u (no build rule) |
 | **BG/anim tilemap** | **`.map.bin`** (binary — fe8u keeps it binary) | `.map.bin.lz` | committed source in fe8u |
 | **Chapter map** | **`.S` + `tile_config.inc`** or `.mar` | `.bin` | `graphics/map/%.bin: %.S` ; `%.bin: %.mar` |
