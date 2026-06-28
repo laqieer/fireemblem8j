@@ -27,3 +27,13 @@ Tractability order (full per-recipe detail in the D307/W3 triage report):
 WIRING: carved fns drop their baseline alias from layout/baseline_syms.d/ (else multiple-def);
 add NEEDS_ALIAS data entries (gClassReelNameTable etc.); fix cfbind garbage StartGmapAutoMu_Type1
 (07E72DA4 -> 080C818C) before any EventA8 carve. make compare is the ONLY oracle.
+
+## PERMUTER WALL RECORDS (D307/W17 adversarial-verifier, D308) — confirmed irreducible
+- **Event1B_TEXTSHOW** (356B): 50,879 permuter iters, best 35, **6-byte residual** = agbcc
+  RTL reg-alloc wall (u16 zero-extend via r0→r1 temp vs JP direct r3→r1). NOT source-fixable.
+- **sub_8084CE4** (120B): ~1.1M iters, best 795, **8-byte residual** = agbcc hoists the 0xff
+  mask into a 3rd hi-reg (extra push/pop) vs JP inline `movs;ands` per iter. Structural wall.
+- **sub_80A73D4** (256B): base 7290 → best 4070, deep reg-coloring wall.
+These 3 + the W14-verified walls (sub_80BB240 80B, sub_800FF08 261B, sub_80BCD74 no-analog)
+are kept as descriptive asm (fe8u-NONMATCHING-equivalent). Axis #2 literal-100% needs a
+transmuter/compiler breakthrough (D277 proved transmuter infeasible for reg-coloring).
