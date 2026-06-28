@@ -99,7 +99,7 @@ SECTION(".rodata.dat_worldmap_gmapunit_p1602") u16 gUnkData_76[] = {
 };
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 Img_SpinningArrow[] = INCBIN_U8("graphics/gmapunit/Img_SpinningArrow.bin.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gImg_UiSpinningArrow_Horizontal[] = INCBIN_U8("graphics/gmapunit/gImg_UiSpinningArrow_Horizontal.bin.lz");
-SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_77[] = INCBIN_U8("data/residual/gUnkData_77.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_77[] = INCBIN_U8("graphics/misc/gUnkData_77.tsa.bin");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 Img_UnkData_1[] = INCBIN_U8("graphics/gmapunit/Img_UnkData_1.bin.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 Img_UnitListBanners[] = INCBIN_U8("graphics/gmapunit/Img_UnitListBanners.bin.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 Img_UnitListBanner_Animation[] = INCBIN_U8("graphics/gmapunit/Img_UnitListBanner_Animation.bin.lz");

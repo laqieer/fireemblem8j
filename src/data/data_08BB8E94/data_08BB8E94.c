@@ -7,4 +7,4 @@
  * provided by the lib-linked mallocr.o(.data). See D289.
  */
 
-u8 data_08BB8ED0[] __attribute__((section(".data.residue.08BB8E94"))) = INCBIN_U8("data/residual/data_08BB8E94.bin", 0x3C, 0xAB30);
+u8 data_08BB8ED0[] __attribute__((section(".data.residue.08BB8E94"))) = INCBIN_U8("graphics/misc/data_08BB8ED0.4bpp.bin");
