@@ -2777,10 +2777,13 @@ $(RESIDUAL_OBJS): $(RESIDUAL_BINS)
 # Mirrors ../fireemblem8u Makefile lines 293-303. Per-asset --flip_y_indexes /
 # --blank_tile_index / --pop_last_tile overrides live in graphics/btl_bg/btl_bg.mk
 # (the same per-asset rules ../fireemblem8u keeps in graphics_file_rules.mk).
-%.feimg1.bin %.fetsa1.bin: %.png ; $(FETSATOOL) $< $*.feimg1.bin $*.fetsa1.bin
-%.feimg2.bin %.fetsa2.bin: %.png ; $(FETSATOOL) $< $*.feimg2.bin $*.fetsa2.bin
-%.feimg3.bin %.fetsa3.bin: %.png ; $(FETSATOOL) $< $*.feimg3.bin $*.fetsa3.bin
-%.feimg4.bin %.fetsa4.bin: %.png ; $(FETSATOOL) $< $*.feimg4.bin $*.fetsa4.bin
+# `&:` grouped target (GNU make 4.3+): BOTH outputs come from ONE FETSATOOL run, so
+# `make -j` never invokes the rule twice concurrently for the .feimg/.fetsa pair (which
+# raced -> "Failed to read *.feimg3.bin" intermittently in parallel CI builds).
+%.feimg1.bin %.fetsa1.bin &: %.png ; $(FETSATOOL) $< $*.feimg1.bin $*.fetsa1.bin
+%.feimg2.bin %.fetsa2.bin &: %.png ; $(FETSATOOL) $< $*.feimg2.bin $*.fetsa2.bin
+%.feimg3.bin %.fetsa3.bin &: %.png ; $(FETSATOOL) $< $*.feimg3.bin $*.fetsa3.bin
+%.feimg4.bin %.fetsa4.bin &: %.png ; $(FETSATOOL) $< $*.feimg4.bin $*.fetsa4.bin
 
 # .fk: FE "fake compression" -- a 4-byte LE header (total-size<<8, low byte 0 =
 # uncompressed) followed by the raw bytes verbatim. Portrait tilesets (and similar
