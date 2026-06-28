@@ -8202,3 +8202,32 @@ map → `.S`+`tile_config`. Rule: don't fake-extract a non-image into `graphics/
 EventScr did):** chapter maps (~81 `graphics/map/*.bin` → `.S`+tile_config, fe8u `MARTOMAP` pipeline),
 music (~125 song/voicegroup → `.s`), battle-anim scripts (~221 banim → `animscr_*.s`), and the
 ApConf_MapAnim* struct configs. These are real targets (fe8u makes them editable), not floor.
+
+## D311 — Music editability = dedicated scripted song-region pass (deferred, not ad-hoc)
+
+**Date context:** 2026-06-28. After the D310 editability realignment (graphics/palettes/
+scripts/maps all in editable fe8u source forms), the remaining lane is MUSIC. Independent
+researcher scope (verified byte-exact):
+
+- **Audio is fe8u-REUSABLE, proven:** regenerated JP song001 from fe8u
+  `sound/songs/midi/song001_*.mid` with fe8u's `songs.mk` flags (`-E -G000 -R020 -P010
+  -V051`), linked at the JP address (voicegroup000@0x081F7120) → **0 diff vs baserom,
+  identical sha1**. Voicegroups differ from fe8u ONLY at `R_ARM_ABS32` sample-pointer
+  reloc offsets (instrument bytes 100% identical). **Zero JP-divergent content floor** —
+  every divergence is a JP↔US base-shift relocation, never different music.
+- **Tooling already present + built:** `tools/mid2agb`, `tools/aif2pcm`, `include/MPlayDef.s`.
+  **PCM samples already DONE** (439/439 `.aif`, D31/D32).
+- **The real blocker = ldscript UN-TILING (D35):** the parallel-carving glue shredded each
+  song/voicegroup into ~4+ named fragments (`snd_song<NNN>_*`) with UNRELATED residue
+  (`data_*`, `frontier_df4_font_cc.gapN`) tiled BETWEEN the fragments in `ldscript.txt`.
+  Making music editable = replace the N tiled fragments + their interleaved fillers with
+  ONE `mid2agb`-built `.s` per song linked at the JP base — ~589 songs + 61 voicegroups +
+  the `gSongTable`. Voicegroups/gSongTable are the struct-POINTER-ARRAY ceiling: editable
+  form is fe8u `.s` with symbolic pointer labels (NOT typed INCBIN).
+
+**DECISION:** do NOT drive music ad-hoc interleaved with general carving — the residue tiled
+between song fragments is owned by other carve lanes; touching it risks the shared glue +
+main. It is the right candidate for a **dedicated, scripted song-region regeneration pass**
+(one generator emits per-song `.o` + rewrites the song/voicegroup/table ldscript block
+atomically, `make compare` per song), run as its own focused lane. Documented as the remaining
+specialized editability lane. Ref `docs/sound.md` (D31–D35).
