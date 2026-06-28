@@ -1,34 +1,33 @@
 #include "global.h"
+#include "proc.h"
+#include "bmio.h"
+#include "bmlib.h"
 
-/* De-pointered from data/residual/ProcScr_SioPostBattle.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+extern void SioPostBattle_Init(ProcPtr proc);
+extern void FadeInBlackSpeed20(ProcPtr proc);
+extern void Clear_UnkData_0(ProcPtr proc);
+extern void SioPostBattle_Loop_Main(ProcPtr proc);
+extern void SioPostBattle_AwaitAPress(ProcPtr proc);
+extern void Set_UnkData_0(ProcPtr proc);
+extern void FadeOutBlackSpeed20Locking(ProcPtr proc);
 
-__asm__(
-"\t.section .rodata.dat_ProcScr_SioPostBattle_ref, \"a\", %progbits\n"
-"\t.global ProcScr_SioPostBattle\n"
-"ProcScr_SioPostBattle:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SioPostBattle_Init + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte FadeInBlackSpeed20 + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte Clear_UnkData_0 + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte SioPostBattle_Loop_Main + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte SioPostBattle_AwaitAPress + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte Set_UnkData_0 + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte FadeOutBlackSpeed20Locking + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BMapVSync_Start + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd ProcScr_SioPostBattle[] __attribute__((section(".rodata.dat_ProcScr_SioPostBattle_ref"))) = {
+    PROC_CALL(SioPostBattle_Init),
+
+    PROC_CALL(FadeInBlackSpeed20),
+    PROC_YIELD,
+
+    PROC_CALL(Clear_UnkData_0),
+
+    PROC_REPEAT(SioPostBattle_Loop_Main),
+    PROC_REPEAT(SioPostBattle_AwaitAPress),
+
+    PROC_CALL(Set_UnkData_0),
+
+    PROC_CALL(FadeOutBlackSpeed20Locking),
+    PROC_YIELD,
+
+    PROC_CALL(BMapVSync_Start),
+
+    PROC_END,
+};

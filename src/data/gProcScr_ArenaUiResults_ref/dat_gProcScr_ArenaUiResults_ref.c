@@ -1,72 +1,56 @@
 #include "global.h"
+#include "proc.h"
+#include "bm.h"
+#include "bmio.h"
+#include "bmlib.h"
 
-/* De-pointered from data/residual/gProcScr_ArenaUiResults.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+extern void ArenaUi_StartPartialLock(ProcPtr proc);
+extern char frontier_df4_menu_038_ABCD24[];
+extern void ArenaUi_Init(ProcPtr proc);
+extern void ArenaUi_ResultsDialogue(ProcPtr proc);
+extern void ArenaUi_ShowGoldBoxOnVictoryOrDraw(ProcPtr proc);
+extern void ArenaUi_UpdatePlayerUnitAfterBattle(ProcPtr proc);
+extern void ArenaUi_OnEnd(ProcPtr proc);
 
-__asm__(
-"\t.section .rodata.dat_gProcScr_ArenaUiResults_ref, \"a\", %progbits\n"
-"\t.global gProcScr_ArenaUiResults\n"
-"gProcScr_ArenaUiResults:\n"
-"\t.4byte 0x0001000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte ArenaUi_StartPartialLock + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte LockGame + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BMapDispSuspend + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000005\n"
-"\t.4byte frontier_df4_menu_038_ABCD24\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte ArenaUi_Init + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte FadeInBlackSpeed20 + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte ArenaUi_ResultsDialogue + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte ArenaUi_ShowGoldBoxOnVictoryOrDraw + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0002000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000009\n"
-"\t.4byte frontier_df4_menu_038_ABCD24\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00020018\n"
-"\t.4byte _FadeBgmOut + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte FadeOutBlackSpeed20Locking + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte ArenaUi_UpdatePlayerUnitAfterBattle + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte ArenaUi_OnEnd + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte ResetDialogueScreen + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BMapDispResume + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshBMapGraphics + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMapSongBgm + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMidFadeFromBlack + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte UnlockGame + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd gProcScr_ArenaUiResults[] __attribute__((section(".rodata.dat_gProcScr_ArenaUiResults_ref"))) = {
+PROC_LABEL(1),
+    PROC_CALL(ArenaUi_StartPartialLock),
+
+    PROC_CALL(LockGame),
+    PROC_CALL(BMapDispSuspend),
+    PROC_SLEEP(0),
+
+    PROC_START_CHILD((struct ProcCmd*)frontier_df4_menu_038_ABCD24),
+
+    PROC_CALL(ArenaUi_Init),
+
+    PROC_CALL(FadeInBlackSpeed20),
+    PROC_SLEEP(0),
+
+    PROC_CALL(ArenaUi_ResultsDialogue),
+    PROC_SLEEP(0),
+
+    PROC_CALL(ArenaUi_ShowGoldBoxOnVictoryOrDraw),
+    PROC_SLEEP(0),
+
+PROC_LABEL(2),
+    PROC_SLEEP(1),
+
+    PROC_END_EACH((struct ProcCmd*)frontier_df4_menu_038_ABCD24),
+    PROC_SLEEP(0),
+
+    PROC_CALL_ARG(_FadeBgmOut, 2),
+    PROC_CALL(FadeOutBlackSpeed20Locking),
+    PROC_SLEEP(0),
+
+    PROC_CALL(ArenaUi_UpdatePlayerUnitAfterBattle),
+    PROC_CALL(ArenaUi_OnEnd),
+    PROC_CALL(ResetDialogueScreen),
+    PROC_CALL(BMapDispResume),
+    PROC_CALL(RefreshBMapGraphics),
+    PROC_CALL(StartMapSongBgm),
+    PROC_CALL(StartMidFadeFromBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_CALL(UnlockGame),
+    PROC_END,
+};

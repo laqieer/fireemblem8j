@@ -1,50 +1,37 @@
 #include "global.h"
+#include "proc.h"
+#include "bm.h"
 
-/* De-pointered from data/residual/ProcScr_MapAnimEnd.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+extern void MapAnim_DisplayDeathQuote(ProcPtr proc);
+extern int BattleEventEngineExists(ProcPtr proc);
+extern void MapAnim_DisplayDeathFade(ProcPtr proc);
+extern struct ProcCmd ProcScr_MuDeathFade[];
+extern void EndMapAnimInfoWindow(ProcPtr proc);
+extern void MapAnim_StoleItemPopup(ProcPtr proc);
+extern void MapAnim_DisplayExpBar(ProcPtr proc);
+extern void DisplayWpnBrokePopup(ProcPtr proc);
+extern void DisplayWRankUpPopup(ProcPtr proc);
+extern void MapAnim_MoveCameraOntoSubject(ProcPtr proc);
+extern void MapAnim_Cleanup(ProcPtr proc);
 
-__asm__(
-"\t.section .rodata.dat_ProcScr_MapAnimEnd_ref, \"a\", %progbits\n"
-"\t.global ProcScr_MapAnimEnd\n"
-"ProcScr_MapAnimEnd:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_DisplayDeathQuote + 0x1\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte BattleEventEngineExists + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_DisplayDeathFade + 0x1\n"
-"\t.4byte 0x00000008\n"
-"\t.4byte frontier_df4_banim_b_083_A13256 + 0xB2\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte EndMapAnimInfoWindow + 0x1\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_StoleItemPopup + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_DisplayExpBar + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte DisplayWpnBrokePopup + 0x1\n"
-"\t.4byte 0x0008000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte DisplayWRankUpPopup + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveCameraOntoSubject + 0x1\n"
-"\t.4byte 0x0002000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte UnlockGame + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_Cleanup + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd ProcScr_MapAnimEnd[] __attribute__((section(".rodata.dat_ProcScr_MapAnimEnd_ref"))) = {
+    PROC_CALL(MapAnim_DisplayDeathQuote),
+    PROC_WHILE(BattleEventEngineExists),
+    PROC_CALL(MapAnim_DisplayDeathFade),
+    PROC_WHILE_EXISTS(ProcScr_MuDeathFade),
+    PROC_CALL(EndMapAnimInfoWindow),
+    PROC_SLEEP(1),
+    PROC_CALL(MapAnim_StoleItemPopup),
+    PROC_SLEEP(0),
+    PROC_CALL(MapAnim_DisplayExpBar),
+    PROC_SLEEP(0),
+    PROC_CALL(DisplayWpnBrokePopup),
+    PROC_SLEEP(8),
+    PROC_CALL(DisplayWRankUpPopup),
+    PROC_SLEEP(0),
+    PROC_CALL(MapAnim_MoveCameraOntoSubject),
+    PROC_SLEEP(2),
+    PROC_CALL(UnlockGame),
+    PROC_CALL(MapAnim_Cleanup),
+    PROC_END,
+};

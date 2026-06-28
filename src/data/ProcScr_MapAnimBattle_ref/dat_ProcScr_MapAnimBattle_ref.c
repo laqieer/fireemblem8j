@@ -1,54 +1,39 @@
 #include "global.h"
+#include "proc.h"
+#include "bm.h"
 
-/* De-pointered from data/residual/ProcScr_MapAnimBattle.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+extern void MapAnim_PrepareBattleTalk(ProcPtr proc);
+extern void MapAnim_MoveCameraOntoSubject(ProcPtr proc);
+extern void MapAnim_CallBattleQuoteEvents(ProcPtr proc);
+extern int BattleEventEngineExists(ProcPtr proc);
+extern void SetBattleMuPalette(ProcPtr proc);
+extern void SetupBattleMOVEUNITs(ProcPtr proc);
+extern void MapAnim_InitInfoBox(ProcPtr proc);
+extern void MapAnim_PrepareNextBattleRound(ProcPtr proc);
+extern void MapAnim_DisplayRoundAnim(ProcPtr proc);
+extern void MapAnim_ShowPoisonEffectIfAny(ProcPtr proc);
 
-__asm__(
-"\t.section .rodata.dat_ProcScr_MapAnimBattle_ref, \"a\", %progbits\n"
-"\t.global ProcScr_MapAnimBattle\n"
-"ProcScr_MapAnimBattle:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte LockGame + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_PrepareBattleTalk + 0x1\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveCameraOntoSubject + 0x1\n"
-"\t.4byte 0x0002000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_CallBattleQuoteEvents + 0x1\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte BattleEventEngineExists + 0x1\n"
-"\t.4byte 0x0005000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SetBattleMuPalette + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SetupBattleMOVEUNITs + 0x1\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_InitInfoBox + 0x1\n"
-"\t.4byte 0x000F000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte MapAnim_PrepareNextBattleRound + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_DisplayRoundAnim + 0x1\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_ShowPoisonEffectIfAny + 0x1\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0005000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd ProcScr_MapAnimBattle[] __attribute__((section(".rodata.dat_ProcScr_MapAnimBattle_ref"))) = {
+    PROC_CALL(LockGame),
+    PROC_CALL(MapAnim_PrepareBattleTalk),
+    PROC_SLEEP(1),
+    PROC_CALL(MapAnim_MoveCameraOntoSubject),
+    PROC_SLEEP(2),
+    PROC_CALL(MapAnim_CallBattleQuoteEvents),
+    PROC_WHILE(BattleEventEngineExists),
+    PROC_SLEEP(5),
+    PROC_CALL(SetBattleMuPalette),
+    PROC_CALL(SetupBattleMOVEUNITs),
+    PROC_SLEEP(1),
+    PROC_CALL(MapAnim_InitInfoBox),
+    PROC_SLEEP(0xF),
+
+PROC_LABEL(0),
+    PROC_REPEAT(MapAnim_PrepareNextBattleRound),
+    PROC_CALL(MapAnim_DisplayRoundAnim),
+    PROC_SLEEP(1),
+    PROC_CALL(MapAnim_ShowPoisonEffectIfAny),
+    PROC_SLEEP(1),
+    PROC_SLEEP(5),
+    PROC_GOTO(0),
+};

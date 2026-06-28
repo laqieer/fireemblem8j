@@ -1,58 +1,35 @@
 #include "global.h"
+#include "proc.h"
 
-/* De-pointered from data/residual/ProcScr_MapAnimDefaultItemEffect.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+extern void MapAnim_BeginSubjectFastAnim(ProcPtr proc);
+extern void MapAnim_MoveSubjectsTowardsTarget(ProcPtr proc);
+extern void MapAnim_MoveCameraOnTarget(ProcPtr proc);
+extern void MapAnim_BeginRoundSpecificAnims(ProcPtr proc);
+extern void MapAnim_WaitForHPToEndChangingMaybe(ProcPtr proc);
+extern void MapAnim_MoveSubjectsAwayFromTarget(ProcPtr proc);
 
-__asm__(
-"\t.section .rodata.dat_ProcScr_MapAnimDefaultItemEffect_ref, \"a\", %progbits\n"
-"\t.global ProcScr_MapAnimDefaultItemEffect\n"
-"ProcScr_MapAnimDefaultItemEffect:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_BeginSubjectFastAnim + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveSubjectsTowardsTarget + 0x1\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveSubjectsTowardsTarget + 0x1\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveSubjectsTowardsTarget + 0x1\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveSubjectsTowardsTarget + 0x1\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveCameraOnTarget + 0x1\n"
-"\t.4byte 0x0002000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_BeginRoundSpecificAnims + 0x1\n"
-"\t.4byte 0x0008000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte MapAnim_WaitForHPToEndChangingMaybe + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveSubjectsAwayFromTarget + 0x1\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveSubjectsAwayFromTarget + 0x1\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveSubjectsAwayFromTarget + 0x1\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MapAnim_MoveSubjectsAwayFromTarget + 0x1\n"
-"\t.4byte 0x0014000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd ProcScr_MapAnimDefaultItemEffect[] __attribute__((section(".rodata.dat_ProcScr_MapAnimDefaultItemEffect_ref"))) = {
+    PROC_CALL(MapAnim_BeginSubjectFastAnim),
+    PROC_CALL(MapAnim_MoveSubjectsTowardsTarget),
+    PROC_SLEEP(1),
+    PROC_CALL(MapAnim_MoveSubjectsTowardsTarget),
+    PROC_SLEEP(1),
+    PROC_CALL(MapAnim_MoveSubjectsTowardsTarget),
+    PROC_SLEEP(1),
+    PROC_CALL(MapAnim_MoveSubjectsTowardsTarget),
+    PROC_SLEEP(1),
+    PROC_CALL(MapAnim_MoveCameraOnTarget),
+    PROC_SLEEP(2),
+    PROC_CALL(MapAnim_BeginRoundSpecificAnims),
+    PROC_SLEEP(8),
+    PROC_REPEAT(MapAnim_WaitForHPToEndChangingMaybe),
+    PROC_CALL(MapAnim_MoveSubjectsAwayFromTarget),
+    PROC_SLEEP(1),
+    PROC_CALL(MapAnim_MoveSubjectsAwayFromTarget),
+    PROC_SLEEP(1),
+    PROC_CALL(MapAnim_MoveSubjectsAwayFromTarget),
+    PROC_SLEEP(1),
+    PROC_CALL(MapAnim_MoveSubjectsAwayFromTarget),
+    PROC_SLEEP(0x14),
+    PROC_END,
+};

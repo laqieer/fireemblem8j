@@ -1,44 +1,41 @@
 #include "global.h"
+#include "proc.h"
 
-/* De-pointered from data/residual/gProcScr_BKSEL.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+extern u8 data_080DCCB2[];
+extern void BattleForecast_OnEnd(ProcPtr proc);
+extern void ClearBg0Bg1(ProcPtr proc);
+extern void BattleForecast_Init(ProcPtr proc);
+extern int MapEventEngineExists_(ProcPtr proc);
+extern void BattleForecast_OnNewBattle(ProcPtr proc);
+extern void BattleForecast_LoopSlideIn(ProcPtr proc);
+extern void StartBattleForecastTutorialEvent(ProcPtr proc);
+extern void BattleForecast_LoopDisplay(ProcPtr proc);
+extern void BattleForecast_LoopSlideOut(ProcPtr proc);
 
-__asm__(
-"\t.section .rodata.dat_gProcScr_BKSEL_ref, \"a\", %progbits\n"
-"\t.global gProcScr_BKSEL\n"
-"gProcScr_BKSEL:\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte data_080DCCB2 + 0x4A\n"
-"\t.4byte 0x00000004\n"
-"\t.4byte BattleForecast_OnEnd + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte ClearBg0Bg1 + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BattleForecast_Init + 0x1\n"
-"\t.4byte 0x0000000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte MapEventEngineExists_ + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BattleForecast_OnNewBattle + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte BattleForecast_LoopSlideIn + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartBattleForecastTutorialEvent + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte BattleForecast_LoopDisplay + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte BattleForecast_LoopSlideOut + 0x1\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0001000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte BattleForecast_LoopSlideOut + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd gProcScr_BKSEL[] __attribute__((section(".rodata.dat_gProcScr_BKSEL_ref"))) = {
+    PROC_NAME((const char*)(data_080DCCB2 + 0x4A)),
+
+    PROC_SET_END_CB(BattleForecast_OnEnd),
+
+    PROC_CALL(ClearBg0Bg1),
+    PROC_SLEEP(0),
+
+    PROC_CALL(BattleForecast_Init),
+
+PROC_LABEL(0),
+    PROC_WHILE(MapEventEngineExists_),
+    PROC_CALL(BattleForecast_OnNewBattle),
+
+    PROC_REPEAT(BattleForecast_LoopSlideIn),
+
+    PROC_CALL(StartBattleForecastTutorialEvent),
+
+    PROC_REPEAT(BattleForecast_LoopDisplay),
+    PROC_REPEAT(BattleForecast_LoopSlideOut),
+
+    PROC_GOTO(0),
+
+PROC_LABEL(1),
+    PROC_REPEAT(BattleForecast_LoopSlideOut),
+    PROC_END,
+};
