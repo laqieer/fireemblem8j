@@ -1,140 +1,123 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch5x_BeginningScene.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch5x_BeginningScene.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch5x_BeginningScene_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch5x_BeginningScene\n"
-"EventScr_Ch5x_BeginningScene:\n"
-"\t.4byte 0x00000D40\n"
-"\t.4byte HandleCh5xUnits_Start + 0x1\n"
-"\t.4byte 0x002E1220\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x0004000A\n"
-"\t.4byte 0x00082520\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x05E93A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0x04093B20\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x0004000B\n"
-"\t.4byte 0x00092520\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Ch5xEnemy_1\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x00433242\n"
-"\t.4byte 0x00000A0A\n"
-"\t.4byte 0x00102F40\n"
-"\t.4byte 0x040A0043\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00102F40\n"
-"\t.4byte 0x0309004D\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00102F40\n"
-"\t.4byte 0x020A0043\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00102F40\n"
-"\t.4byte 0x030A004D\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x004D3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x09971B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x7FFF1324\n"
-"\t.4byte 0x0000342A\n"
-"\t.4byte 0x0000342C\n"
-"\t.4byte 0x0000342B\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x000C0014\n"
-"\t.4byte 0x00072520\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte UnitDef_Ch5xAlly_1\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x000F3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000002D\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x00251220\n"
-"\t.4byte 0x09981B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x0000342A\n"
-"\t.4byte 0x0000342C\n"
-"\t.4byte 0x0000342B\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00070009\n"
-"\t.4byte 0x00082520\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte UnitDef_Ch5xAlly_2\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x000F3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000002C\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x00000999\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xF4\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x0409000F\n"
-"\t.4byte 0x00080E22\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x05090010\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x05080011\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x06080042\n"
-"\t.4byte 0x00080E22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x0000342A\n"
-"\t.4byte 0x0000342C\n"
-"\t.4byte 0x0000342B\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x0007000E\n"
-"\t.4byte 0x00052520\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte frontier_df4_banim_b_075_90A050\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x006A3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x099A1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x12002620\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Event_Ch5xAlly\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x000F3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000015\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x099B1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x7FFF1322\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 HandleCh5xUnits_Start[];
+extern const u8 UnitDef_Ch5xEnemy_1[];
+extern const u8 UnitDef_Ch5xAlly_1[];
+extern const u8 data_08A60354[];
+extern const u8 UnitDef_Ch5xAlly_2[];
+extern const u8 frontier_df4_banim_b_075_90A050[];
+extern const u8 UnitDef_Event_Ch5xAlly[];
+
+SECTION(".rodata.dat_EventScr_Ch5x_BeginningScene_ref") EventListScr EventScr_Ch5x_BeginningScene[] = {
+    ASMC((u8 *)HandleCh5xUnits_Start + 1)
+    MUSC(0x2E)
+    SVAL(EVT_SLOT_B, 0x4000A)
+    LOMA(8)
+    FADU(0x10)
+    BROWNBOXTEXT(0x5E9, 8, 8)
+    CURSOR_AT(9, 4)
+    STAL(0x3C)
+    CURE
+    FADI(0x10)
+    SVAL(EVT_SLOT_B, 0x4000B)
+    LOMA(9)
+    LOAD1(1, UnitDef_Ch5xEnemy_1)
+    ENUN
+    FADU(0x10)
+    SPAWN_ENEMY(0x43, 0xA, 0xA)
+    MOVE(0x10, 0x43, 0xA, 4)
+    ENUN
+    MOVE(0x10, 0x4D, 9, 3)
+    ENUN
+    MOVE(0x10, 0x43, 0xA, 2)
+    ENUN
+    MOVE(0x10, 0x4D, 0xA, 3)
+    ENUN
+    CURSOR_CHAR(0x4D)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0x997)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    EvtBgmFadeIn(0x7FFF, 4)
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_B, 0xC0014)
+    LOMA(7)
+    LOAD2(1, UnitDef_Ch5xAlly_1)
+    ENUN
+    FADU(0x10)
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x2D)
+    CALL((u8 *)data_08A60354 + 0xCC)
+    MUSC(0x25)
+    TEXTSHOW(0x998)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_B, 0x70009)
+    LOMA(8)
+    FADU(0x10)
+    LOAD2(1, UnitDef_Ch5xAlly_2)
+    ENUN
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x2C)
+    SVAL(EVT_SLOT_3, 0x999)
+    CALL((u8 *)data_08A60354 + 0xF4)
+    MOVE(0, 0xF, 9, 4)
+    STAL2(8)
+    MOVE(0, 0x10, 9, 5)
+    MOVE(0, 0x11, 8, 5)
+    MOVE(0, 0x42, 8, 6)
+    STAL2(8)
+    FADI(0x10)
+    ENUN
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_B, 0x7000E)
+    LOMA(5)
+    LOAD1(1, frontier_df4_banim_b_075_90A050)
+    ENUN
+    FADU(0x10)
+    CURSOR_CHAR(0x6A)
+    STAL(0x3C)
+    CURE
+    TEXTSHOW(0x99A)
+    TEXTEND
+    REMA
+    CAMERA(0, 0x12)
+    LOAD1(1, UnitDef_Event_Ch5xAlly)
+    ENUN
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x15)
+    CALL((u8 *)data_08A60354 + 0xCC)
+    TEXTSHOW(0x99B)
+    TEXTEND
+    REMA
+    EvtBgmFadeIn(0x7FFF, 2)
+    ENDA
+};
+

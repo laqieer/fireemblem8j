@@ -1,31 +1,33 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_SuspendPrompt.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_SuspendPrompt.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_SuspendPrompt_ref, \"a\", %progbits\n"
-"\t.global EventScr_SuspendPrompt\n"
-"EventScr_SuspendPrompt:\n"
-"\t.4byte 0x00041020\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x081F1B20\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00070540\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000C41\n"
-"\t.4byte 0x0007000C\n"
-"\t.4byte 0x00000D40\n"
-"\t.4byte WriteSuspendPlayerIdle + 0x1\n"
-"\t.4byte voicegroup031 + 0x285\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x7FFF1324\n"
-"\t.4byte 0x00041721\n"
-"\t.4byte 0x00002A20\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 voicegroup031[];
+
+SECTION(".rodata.dat_EventScr_SuspendPrompt_ref") EventListScr EventScr_SuspendPrompt[] = {
+    EVBIT_MODIFY(4)
+    TEXTSTART
+    TEXTSHOW(0x81F)
+    TEXTEND
+    SVAL(EVT_SLOT_7, 1)
+    BNE(0, 0xC, 7)
+    ASMC(WriteSuspendPlayerIdle)
+    EVENT_WORD_SYM(voicegroup031 + 0x285)
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(4)
+    MNTS(0)
+    LABEL(0)
+    REMA
+    EVBIT_T(7)
+    ENDA
+};
+
