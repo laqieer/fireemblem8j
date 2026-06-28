@@ -1,6 +1,6 @@
 #include "global.h"
 
-/* Migrated from asm/data_08FE0000.s (region-same graphics, single section).
+/* Migrated from asm/data_08FE0000.s (secondary ARM/Thumb executable image (multiboot/download-play child) -- NOT graphics; de-pointered with real relocations (.4byte Init, rom_header_080000C0)).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
