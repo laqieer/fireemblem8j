@@ -1,99 +1,81 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch21A_8.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch21A_8.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch21A_8_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch21A_8\n"
-"EventScr_Ch21A_8:\n"
-"\t.4byte 0x00001A21\n"
-"\t.4byte 0x004F2140\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00021723\n"
-"\t.4byte 0x001A2140\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00021722\n"
-"\t.4byte 0x002C1326\n"
-"\t.4byte 0x01963A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0x00001920\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte 0x00000C41\n"
-"\t.4byte 0x0001000C\n"
-"\t.4byte 0x0B7A1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00010920\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x0B7B1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00010820\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x7FFF1328\n"
-"\t.4byte 0x00021723\n"
-"\t.4byte 0x00002220\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte frontier_df3_unitdef_b_023_91512C + 0xAE8\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00021722\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte UnitDef_Ch21AAlly_1\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00102F40\n"
-"\t.4byte 0x140B0000\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00003B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001920\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte 0x000A0C41\n"
-"\t.4byte 0x0001000C\n"
-"\t.4byte 0x00441220\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x0B7C1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x000B0920\n"
-"\t.4byte 0x000A0820\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x0B7E1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x000B0820\n"
-"\t.4byte 0x00001860\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x7FFF1326\n"
-"\t.4byte 0x0A061862\n"
-"\t.4byte 0x00800008\n"
-"\t.4byte 0x00800080\n"
-"\t.4byte 0x011D1862\n"
-"\t.4byte 0x00000004\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000040\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_UnitFlushingOUT\n"
-"\t.4byte 0x0040342F\n"
-"\t.4byte 0x001E0E20\n"
-"\t.4byte 0x006C3242\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x011D1862\n"
-"\t.4byte 0x01000000\n"
-"\t.4byte 0x01000100\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000006C\n"
-"\t.4byte 0xFFFF2F48\n"
-"\t.4byte 0x120BFFFD\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_UnitFlushingIN\n"
-"\t.4byte 0x0A061862\n"
-"\t.4byte 0x01000008\n"
-"\t.4byte 0x01000100\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 frontier_df3_unitdef_b_023_91512C[];
+extern const u8 UnitDef_Ch21AAlly_1[];
+extern const u8 EventScr_UnitFlushingOUT[];
+extern const u8 EventScr_UnitFlushingIN[];
+
+SECTION(".rodata.dat_EventScr_Ch21A_8_ref") EventListScr EventScr_Ch21A_8[] = {
+    REMOVEPORTRAITS
+    BACG(0x4F)
+    FAWI(2)
+    BACG(0x1A)
+    FAWU(2)
+    EvtBgmFadeIn(0x2C, 6)
+    BROWNBOXTEXT(0x196, 8, 8)
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0, 0xC, 1)
+    TEXTSHOW(0xB7A)
+    TEXTEND
+    GOTO(1)
+    LABEL(0)
+    TEXTSHOW(0xB7B)
+    TEXTEND
+    LABEL(1)
+    REMA
+    EvtBgmFadeIn(0x7FFF, 8)
+    FAWI(2)
+    CLEAN
+    LOAD1(1, (u8 *)frontier_df3_unitdef_b_023_91512C + 0xAE8)
+    ENUN
+    FAWU(2)
+    LOAD2(1, UnitDef_Ch21AAlly_1)
+    ENUN
+    MOVE(0x10, 0, 0xB, 0x14)
+    ENUN
+    CURSOR_CHAR(0)
+    STAL(0x3C)
+    CURE
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0xA, 0xC, 1)
+    MUSC(0x44)
+    TEXTSTART
+    TEXTSHOW(0xB7C)
+    TEXTEND
+    REMA
+    GOTO(0xB)
+    LABEL(0xA)
+    TEXTSTART
+    TEXTSHOW(0xB7E)
+    TEXTEND
+    REMA
+    LABEL(0xB)
+    STARTFADE
+    EvtBgmFadeIn(0x7FFF, 6)
+    EvtColorFadeSetup(6, 0xA, 8, 0x80, 0x80, 0x80)
+    EvtColorFadeSetup(0x1D, 1, 4, 0, 0, 0)
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(EventScr_UnitFlushingOUT)
+    DISA(0x40)
+    STAL(0x1E)
+    SPAWN_ENEMY(0x6C, 0, 0)
+    EvtColorFadeSetup(0x1D, 1, 0, 0x100, 0x100, 0x100)
+    SVAL(EVT_SLOT_2, 0x6C)
+    MOVE_CLOSEST(0xFFFF, 0xFFFD, 0xB, 0x12)
+    CALL(EventScr_UnitFlushingIN)
+    EvtColorFadeSetup(6, 0xA, 8, 0x100, 0x100, 0x100)
+    ENDA
+};
+

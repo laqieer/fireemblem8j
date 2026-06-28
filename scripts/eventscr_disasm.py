@@ -24,6 +24,38 @@ import sys, re, os
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+def _load_function_symbols():
+    """Names declared as functions in include/functions.h.  A reloc target that
+    is one of these is a CODE pointer: the EAstdlib macro casts (EventListScr)(func)
+    so the function designator itself supplies the Thumb bit (the `+ 0x1` addend in
+    the raw asm) and functions.h (via global.h) already declares it -- emitting a
+    second `extern const u8 SYM[];` would re-declare it as a different kind of symbol
+    (agbcc error).  So for these we emit the bare name and suppress the extern."""
+    names = set()
+    path = os.path.join(REPO, "include", "functions.h")
+    try:
+        txt = open(path, encoding="utf-8").read()
+    except OSError:
+        return names
+    # match C prototypes:  <ret> Name(  ...  );   (one decl per logical line)
+    for m in re.finditer(r'\b([A-Za-z_]\w*)\s*\(', txt):
+        names.add(m.group(1))
+    # drop obvious non-function macro/keyword captures
+    names.discard("if"); names.discard("for"); names.discard("while")
+    names.discard("switch"); names.discard("return"); names.discard("sizeof")
+    return names
+
+FUNCTION_SYMS = _load_function_symbols()
+
+def _sym_base_addend(reloc):
+    """Split a reloc operand `BASE [+ ADDEND]` -> (base, addend_int_or_None)."""
+    m = re.match(r'\s*([A-Za-z_]\w*)\s*(?:\+\s*(0x[0-9A-Fa-f]+|\d+))?\s*$', reloc)
+    if not m:
+        return None, None
+    base = m.group(1)
+    add = int(m.group(2), 0) if m.group(2) else None
+    return base, add
+
 # ---------------------------------------------------------------------------
 # 1. Parse the __asm__ block: ordered list of (kind, value) where kind is
 #    'word' (int) or 'sym' (str, a relocation .4byte SYM).
@@ -246,7 +278,21 @@ TABLE = {
 }
 
 def render_word_operand(v, reloc):
-    return reloc if reloc else hx(v)
+    if not reloc:
+        return hx(v)
+    base, add = _sym_base_addend(reloc)
+    # A function reloc carries the Thumb bit as `+ 0x1`; the EAstdlib macro casts
+    # (EventListScr)(func), so the bare function name already supplies that bit.
+    if base in FUNCTION_SYMS and add == 1:
+        return base
+    # A reloc addend in the raw asm is a BYTE offset.  When the base symbol is an
+    # `EventListScr[]` array (the self-symbol, or another EventScr_* script -- 4-byte
+    # elements), bare C pointer arithmetic `BASE + N` would scale N by sizeof(element)
+    # = 4.  Cast to a byte pointer so `+ N` stays a byte offset.  (For `const u8[]`
+    # externs `(u8 *)BASE + N` is identical to `BASE + N`, so the cast is harmless.)
+    if base is not None and add not in (None, 0):
+        return f"(u8 *){base} + {hx(add)}"
+    return reloc
 
 def decode(items):
     flat = []
@@ -341,7 +387,7 @@ def try_macro(cmd, length, sub, arg0, extra, nwords):
         if rl is None:
             x = ev & 0xFF; y = (ev >> 8) & 0xFF
             if (ev >> 16) == 0:
-                nm = {0:"SPAWN_ALLY",2:"SPAWN_NPC",4:"SPAWN_ENEMY"}.get(sub)
+                nm = {0:"SPAWN_ALLY",1:"SPAWN_NPC",2:"SPAWN_ENEMY"}.get(sub)
                 if nm: return f"{nm}({hx(arg0)}, {hx(x)}, {hx(y)})"
                 return f"EvtLoadSingleUnit({hx(sub)}, {hx(arg0)}, {hx(x)}, {hx(y)})"
     if cmd == POPUP and nwords == 2 and sub == 0:
@@ -433,6 +479,11 @@ def collect_externs(items, self_sym):
         if base == self_sym or base in seen:
             continue
         seen.add(base)
+        # Function reloc targets are declared in functions.h (via global.h); a
+        # second `extern const u8 SYM[];` would re-declare them as a different
+        # kind of symbol (agbcc error).  Skip them.
+        if base in FUNCTION_SYMS:
+            continue
         names.append(base)
     return names
 
