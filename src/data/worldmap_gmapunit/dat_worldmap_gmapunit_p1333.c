@@ -1,12 +1,42 @@
 #include "global.h"
+#include "bmunit.h"
 
 /* Migrated from asm/dat_worldmap_gmapunit_p1333.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1333") u8 UnitDef_Ch9AEnemy_2[] = INCBIN_U8("data/residual/UnitDef_Ch9AEnemy_2.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1333") u8 UnitDef_Ch9AEnemy_3[] = INCBIN_U8("data/residual/UnitDef_Ch9AEnemy_3.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1333") u8 UnitDef_Ch9AEnemy_4[] = INCBIN_U8("data/residual/UnitDef_Ch9AEnemy_4.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1333") u8 UnitDef_Ch9AEnemy_5[] = INCBIN_U8("data/residual/UnitDef_Ch9AEnemy_5.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1333") u8 UnitDef_Ch9AEnemy_6[] = INCBIN_U8("data/residual/UnitDef_Ch9AEnemy_6.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1333") u8 UnitDef_Ch9AEnemy_7[] = INCBIN_U8("data/residual/UnitDef_Ch9AEnemy_7.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1333") struct UnitDefinition UnitDef_Ch9AEnemy_2[] =
+{
+    { .charIndex=0xA7, .classIndex=0x42, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x5, .items={0x1F,0x00,0x00,0x00}, .ai={0x03,0x04,0x09,0x00} },
+    {0},
+};
+SECTION(".rodata.dat_worldmap_gmapunit_p1333") struct UnitDefinition UnitDef_Ch9AEnemy_3[] =
+{
+    { .charIndex=0xA7, .classIndex=0xF, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x7, .items={0x01,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0xA7, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x4, .items={0x38,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    {0},
+};
+SECTION(".rodata.dat_worldmap_gmapunit_p1333") struct UnitDefinition UnitDef_Ch9AEnemy_4[] =
+{
+    { .charIndex=0xA7, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x7, .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0xA7, .classIndex=0xF, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x4, .items={0x01,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    {0},
+};
+SECTION(".rodata.dat_worldmap_gmapunit_p1333") struct UnitDefinition UnitDef_Ch9AEnemy_5[] =
+{
+    { .charIndex=0xA7, .classIndex=0x3F, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0xE, .yPosition=0x17, .items={0x1F,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0xA7, .classIndex=0x3F, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x11, .yPosition=0x17, .items={0x20,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    {0},
+};
+SECTION(".rodata.dat_worldmap_gmapunit_p1333") struct UnitDefinition UnitDef_Ch9AEnemy_6[] =
+{
+    { .charIndex=0xA7, .classIndex=0x19, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0xE, .yPosition=0x17, .items={0x2D,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0xA7, .classIndex=0x19, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x11, .yPosition=0x17, .items={0x2D,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    {0},
+};
+SECTION(".rodata.dat_worldmap_gmapunit_p1333") struct UnitDefinition UnitDef_Ch9AEnemy_7[] =
+{
+    { .charIndex=0xA7, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x11, .yPosition=0x17, .itemDrop=0x1, .items={0x3A,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0xA7, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0xE, .yPosition=0x17, .items={0x38,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    {0},
+};

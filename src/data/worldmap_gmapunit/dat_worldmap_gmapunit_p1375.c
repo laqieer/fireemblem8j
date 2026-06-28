@@ -1,10 +1,29 @@
 #include "global.h"
+#include "bmunit.h"
 
 /* Migrated from asm/dat_worldmap_gmapunit_p1375.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1375") u8 UnitDef_Ch12BEnemy_5[] = INCBIN_U8("data/residual/UnitDef_Ch12BEnemy_5.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1375") u8 UnitDef_Ch12BEnemy_6[] = INCBIN_U8("data/residual/UnitDef_Ch12BEnemy_6.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1375") u8 UnitDef_Ch12BEnemy_7[] = INCBIN_U8("data/residual/UnitDef_Ch12BEnemy_7.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1375") u8 UnitDef_Ch12BEnemy_8[] = INCBIN_U8("data/residual/UnitDef_Ch12BEnemy_8.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1375") struct UnitDefinition UnitDef_Ch12BEnemy_5[] =
+{
+    { .charIndex=0x80, .classIndex=0x19, .autolevel=0x1, .allegiance=0x2, .level=0xA, .xPosition=0x14, .yPosition=0x17, .items={0x2D,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0xF, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0x14, .yPosition=0x15, .items={0x01,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    {0},
+};
+SECTION(".rodata.dat_worldmap_gmapunit_p1375") struct UnitDefinition UnitDef_Ch12BEnemy_6[] =
+{
+    { .charIndex=0xB0, .classIndex=0x58, .autolevel=0x1, .allegiance=0x2, .level=0x9, .yPosition=0xA, .items={0x8B,0x00,0x00,0x00}, .ai={0x00,0x00,0x0C,0x00} },
+    {0},
+};
+SECTION(".rodata.dat_worldmap_gmapunit_p1375") struct UnitDefinition UnitDef_Ch12BEnemy_7[] =
+{
+    { .charIndex=0xB0, .classIndex=0x58, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x14, .yPosition=0xA, .items={0x8B,0x00,0x00,0x00}, .ai={0x00,0x00,0x0C,0x00} },
+    {0},
+};
+SECTION(".rodata.dat_worldmap_gmapunit_p1375") struct UnitDefinition UnitDef_Ch12BEnemy_8[] =
+{
+    { .charIndex=0xAC, .classIndex=0x54, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0x10, .items={0x01,0x00,0x00,0x00}, .ai={0x00,0x00,0x0C,0x00} },
+    { .charIndex=0xAC, .classIndex=0x54, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0x12, .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x00,0x0C,0x00} },
+    {0},
+};

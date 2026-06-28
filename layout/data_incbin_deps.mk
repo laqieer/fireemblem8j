@@ -25,37 +25,9 @@ src/data/PopupScr_ItemStolen_ref/dat_PopupScr_ItemStolen_ref.o: data/residual/Po
 src/data/PopupScr_ItemWasPilfered_ref/dat_PopupScr_ItemWasPilfered_ref.o: data/residual/PopupScr_ItemWasPilfered.bin
 src/data/PopupScr_StoleItem_ref/dat_PopupScr_StoleItem_ref.o: data/residual/PopupScr_StoleItem.bin
 src/data/PopupScr_WpnBroken_ref/dat_PopupScr_WpnBroken_ref.o: data/residual/PopupScr_WpnBroken.bin
-src/data/UnitDef_Ch10AEnemy_0_ref/dat_UnitDef_Ch10AEnemy_0_ref.o: data/residual/UnitDef_Ch10AEnemy_0.bin
-src/data/UnitDef_Ch10AEnemy_1_ref/dat_UnitDef_Ch10AEnemy_1_ref.o: data/residual/UnitDef_Ch10AEnemy_1.bin
-src/data/UnitDef_Ch10AEnemy_7_ref/dat_UnitDef_Ch10AEnemy_7_ref.o: data/residual/UnitDef_Ch10AEnemy_7.bin
-src/data/UnitDef_Ch10AEnemy_8_ref/dat_UnitDef_Ch10AEnemy_8_ref.o: data/residual/UnitDef_Ch10AEnemy_8.bin
-src/data/UnitDef_Ch10AEnemy_9_ref/dat_UnitDef_Ch10AEnemy_9_ref.o: data/residual/UnitDef_Ch10AEnemy_9.bin
 src/data/UnitDef_Ch14BAlly_7_ref/dat_UnitDef_Ch14BAlly_7_ref.o: data/residual/UnitDef_Ch14BAlly_7.bin
-src/data/UnitDef_Ch15BAlly_0_ref/dat_UnitDef_Ch15BAlly_0_ref.o: data/residual/UnitDef_Ch15BAlly_0.bin
-src/data/UnitDef_Ch16AEnemy_0_ref/dat_UnitDef_Ch16AEnemy_0_ref.o: data/residual/UnitDef_Ch16AEnemy_0.bin
-src/data/UnitDef_Ch16BEnemy_0_ref/dat_UnitDef_Ch16BEnemy_0_ref.o: data/residual/UnitDef_Ch16BEnemy_0.bin
-src/data/UnitDef_Ch17BAlly_1_ref/dat_UnitDef_Ch17BAlly_1_ref.o: data/residual/UnitDef_Ch17BAlly_1.bin
-src/data/UnitDef_Ch17BAlly_2_ref/dat_UnitDef_Ch17BAlly_2_ref.o: data/residual/UnitDef_Ch17BAlly_2.bin
-src/data/UnitDef_Ch17BAlly_3_ref/dat_UnitDef_Ch17BAlly_3_ref.o: data/residual/UnitDef_Ch17BAlly_3.bin
-src/data/UnitDef_Ch17BEnemy_6_ref/dat_UnitDef_Ch17BEnemy_6_ref.o: data/residual/UnitDef_Ch17BEnemy_6.bin
-src/data/UnitDef_Ch17BEnemy_7_ref/dat_UnitDef_Ch17BEnemy_7_ref.o: data/residual/UnitDef_Ch17BEnemy_7.bin
-src/data/UnitDef_Ch17BEnemy_8_ref/dat_UnitDef_Ch17BEnemy_8_ref.o: data/residual/UnitDef_Ch17BEnemy_8.bin
-src/data/UnitDef_Ch18AEnemy_0_ref/dat_UnitDef_Ch18AEnemy_0_ref.o: data/residual/UnitDef_Ch18AEnemy_0.bin
 src/data/UnitDef_Ch18BAlly_2_ref/dat_UnitDef_Ch18BAlly_2_ref.o: data/residual/UnitDef_Ch18BAlly_2.bin
-src/data/UnitDef_Ch18BEnemy_0_ref/dat_UnitDef_Ch18BEnemy_0_ref.o: data/residual/UnitDef_Ch18BEnemy_0.bin
-src/data/UnitDef_Ch19BEnemy_0_ref/dat_UnitDef_Ch19BEnemy_0_ref.o: data/residual/UnitDef_Ch19BEnemy_0.bin
-src/data/UnitDef_Ch21BEnemy_0_ref/dat_UnitDef_Ch21BEnemy_0_ref.o: data/residual/UnitDef_Ch21BEnemy_0.bin
 src/data/UnitDef_Ch21BEnemy_1_ref/dat_UnitDef_Ch21BEnemy_1_ref.o: data/residual/UnitDef_Ch21BEnemy_1.bin
-src/data/UnitDef_Ch4Enemy_3_ref/dat_UnitDef_Ch4Enemy_3_ref.o: data/residual/UnitDef_Ch4Enemy_3.bin
-src/data/UnitDef_Ch4Enemy_4_ref/dat_UnitDef_Ch4Enemy_4_ref.o: data/residual/UnitDef_Ch4Enemy_4.bin
-src/data/UnitDef_Ch4Enemy_5_ref/dat_UnitDef_Ch4Enemy_5_ref.o: data/residual/UnitDef_Ch4Enemy_5.bin
-src/data/UnitDef_Ch6Enemy_1_ref/dat_UnitDef_Ch6Enemy_1_ref.o: data/residual/UnitDef_Ch6Enemy_1.bin
-src/data/UnitDef_Ch6Enemy_2_ref/dat_UnitDef_Ch6Enemy_2_ref.o: data/residual/UnitDef_Ch6Enemy_2.bin
-src/data/UnitDef_Ch6Enemy_3_ref/dat_UnitDef_Ch6Enemy_3_ref.o: data/residual/UnitDef_Ch6Enemy_3.bin
-src/data/UnitDef_Ch9AEnemy_1_ref/dat_UnitDef_Ch9AEnemy_1_ref.o: data/residual/UnitDef_Ch9AEnemy_1.bin
-src/data/UnitDef_RuinEnemy_22_ref/dat_UnitDef_RuinEnemy_22_ref.o: data/residual/UnitDef_RuinEnemy_22.bin
-src/data/UnitDef_RuinEnemy_31_ref/dat_UnitDef_RuinEnemy_31_ref.o: data/residual/UnitDef_RuinEnemy_31.bin
-src/data/UnitDef_TowerEnemy_8_ref/dat_UnitDef_TowerEnemy_8_ref.o: data/residual/UnitDef_TowerEnemy_8.bin
 src/data/anim_085A0EA0/dat_anim_085A0EA0.o: data/residual/g085A0EA0_anim_0.bin data/residual/g085A0EA0_anim_1.bin data/residual/g085A0EA0_anim_list.bin data/residual/g085A0EA0_frame_0.bin data/residual/g085A0EA0_frame_1.bin data/residual/g085A0EA0_frame_2.bin data/residual/g085A0EA0_frame_3.bin data/residual/g085A0EA0_frame_4.bin data/residual/g085A0EA0_frame_5.bin data/residual/g085A0EA0_frame_6.bin data/residual/g085A0EA0_frame_list.bin
 src/data/anim_arrow_trap/dat_anim_arrow_trap.o: data/residual/SpriteAnim_ArrowTrap_anim_0.bin data/residual/SpriteAnim_ArrowTrap_anim_list.bin data/residual/SpriteAnim_ArrowTrap_frame_0.bin data/residual/SpriteAnim_ArrowTrap_frame_1.bin data/residual/SpriteAnim_ArrowTrap_frame_10.bin data/residual/SpriteAnim_ArrowTrap_frame_11.bin data/residual/SpriteAnim_ArrowTrap_frame_12.bin data/residual/SpriteAnim_ArrowTrap_frame_13.bin data/residual/SpriteAnim_ArrowTrap_frame_14.bin data/residual/SpriteAnim_ArrowTrap_frame_15.bin data/residual/SpriteAnim_ArrowTrap_frame_16.bin data/residual/SpriteAnim_ArrowTrap_frame_17.bin data/residual/SpriteAnim_ArrowTrap_frame_18.bin data/residual/SpriteAnim_ArrowTrap_frame_2.bin data/residual/SpriteAnim_ArrowTrap_frame_3.bin data/residual/SpriteAnim_ArrowTrap_frame_4.bin data/residual/SpriteAnim_ArrowTrap_frame_5.bin data/residual/SpriteAnim_ArrowTrap_frame_6.bin data/residual/SpriteAnim_ArrowTrap_frame_7.bin data/residual/SpriteAnim_ArrowTrap_frame_8.bin data/residual/SpriteAnim_ArrowTrap_frame_9.bin data/residual/SpriteAnim_ArrowTrap_frame_list.bin data/residual/SpriteAnim_ArrowTrap_motion.bin
 src/data/anim_fire_trap/dat_anim_fire_trap.o: data/residual/SpriteAnim_FireTrap.bin
@@ -1042,70 +1014,8 @@ src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1117.o: data/residual/gEkrdrag
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1118.o: data/residual/gEkrdragonDemonkingobj_array1_1.bin data/residual/gEkrdragonDemonkingobj_array2_1.bin data/residual/gEkrdragonDemonkingobj_array3.bin data/residual/gEkrdragonDemonkingobj_array4.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p114.o: data/residual/song015_agbfe3_bgm_map_pl9_6_B1.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p118.o: data/residual/song017_agbfe3_bgm_map_pl6_3_B1.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1311.o: data/residual/UnitDef_Event_PrologueThroneRoomUnits.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1319.o: data/residual/UnitDef_Event_Ch4Ally.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1320.o: data/residual/UnitDef_Ch4Enemy_0.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1323.o: data/residual/UnitDef_Ch5xAlly_1.bin data/residual/UnitDef_Ch5xEnemy_1.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1325.o: data/residual/UnitDef_Ch5xEnemy_2.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1326.o: data/residual/UnitDef_Ch6Mixed.bin data/residual/UnitDef_Event_Ch6Ally.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1331.o: data/residual/UnitDef_Ch8Mixed.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1332.o: data/residual/UnitDef_Event_Ch9aAlly.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1333.o: data/residual/UnitDef_Ch9AEnemy_2.bin data/residual/UnitDef_Ch9AEnemy_3.bin data/residual/UnitDef_Ch9AEnemy_4.bin data/residual/UnitDef_Ch9AEnemy_5.bin data/residual/UnitDef_Ch9AEnemy_6.bin data/residual/UnitDef_Ch9AEnemy_7.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1334.o: data/residual/UnitDef_Ch9AEnemy_11.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1335.o: data/residual/UnitDef_Ch9AAlly_2.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1336.o: data/residual/UnitDef_Event_Ch10aAlly.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1337.o: data/residual/UnitDef_Ch10AEnemy_2.bin data/residual/UnitDef_Ch10ANPC.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p134.o: data/residual/song020_agbfe3_bgm_map_cp2_2_012.bin data/residual/song020_agbfe3_bgm_map_cp2_2_B1.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1341.o: data/residual/UnitDef_Event_Ch13aAlly.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1347.o: data/residual/UnitDef_Event_Ch14aAlly.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1351.o: data/residual/REDA_Ch14AMixed_1_CAELLACH.bin data/residual/REDA_Ch14AMixed_1_ISMAIRE.bin data/residual/REDA_Ch14AMixed_1_LYON.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1352.o: data/residual/UnitDef_Ch16AEnemy_1.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1358.o: data/residual/UnitDef_Ch17AAlly_0.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1359.o: data/residual/UnitDef_Ch18AAlly_1.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1360.o: data/residual/UnitDef_Ch19AAlly_0.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1361.o: data/residual/UnitDef_Ch19ANPC_1.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1363.o: data/residual/UnitDef_Ch21AAlly_0.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1365.o: data/residual/UnitDef_Ch9BEnemy_4.bin data/residual/UnitDef_Ch9BEnemy_5.bin data/residual/UnitDef_Ch9BEnemy_6.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1370.o: data/residual/UnitDef_Ch11BAlly_0.bin data/residual/UnitDef_Ch11BEnemy_0.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1371.o: data/residual/UnitDef_Ch11BEnemy_1.bin data/residual/UnitDef_Ch11BEnemy_2.bin data/residual/UnitDef_Ch11BEnemy_3.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1374.o: data/residual/UnitDef_Ch12BAlly_0.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1375.o: data/residual/UnitDef_Ch12BEnemy_5.bin data/residual/UnitDef_Ch12BEnemy_6.bin data/residual/UnitDef_Ch12BEnemy_7.bin data/residual/UnitDef_Ch12BEnemy_8.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1376.o: data/residual/UnitDef_Ch13BEnemy_6.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1377.o: data/residual/UnitDef_Ch14BAlly_0.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1379.o: data/residual/UnitDef_Ch14BAlly_2.bin data/residual/UnitDef_Ch14BMixed.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1383.o: data/residual/UnitDef_Ch16BEnemy_5.bin data/residual/UnitDef_Ch16BEnemy_6.bin data/residual/UnitDef_Ch16BEnemy_7.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1384.o: data/residual/UnitDef_Ch17BAlly_0.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1385.o: data/residual/UnitDef_Ch18BAlly_1.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1386.o: data/residual/UnitDef_Ch19BAlly.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1387.o: data/residual/UnitDef_Ch19BAlly_2.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1388.o: data/residual/UnitDef_Ch19BNPC_1.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1389.o: data/residual/UnitDef_Ch21BAlly.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1390.o: data/residual/UnitDef_Tower1Ally.bin data/residual/UnitDef_TowerEnemy_0.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1391.o: data/residual/UnitDef_Tower2Ally.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1392.o: data/residual/UnitDef_Tower3Ally.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1393.o: data/residual/UnitDef_Tower4Ally.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1394.o: data/residual/UnitDef_Tower5Ally.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1395.o: data/residual/UnitDef_Tower6Ally.bin data/residual/UnitDef_TowerEnemy_6.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1396.o: data/residual/UnitDef_Tower7Ally.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1397.o: data/residual/UnitDef_Tower8Ally.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1398.o: data/residual/UnitDef_Ruin1Ally.bin data/residual/UnitDef_RuinEnemy_0.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1399.o: data/residual/UnitDef_Ruin2Ally.bin data/residual/UnitDef_RuinEnemy_1.bin data/residual/UnitDef_RuinEnemy_2.bin data/residual/UnitDef_RuinEnemy_3.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1400.o: data/residual/UnitDef_Ruin3Ally.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1401.o: data/residual/UnitDef_RuinEnemy_5.bin data/residual/UnitDef_RuinEnemy_6.bin data/residual/UnitDef_RuinEnemy_7.bin data/residual/UnitDef_RuinEnemy_8.bin data/residual/UnitDef_RuinEnemy_9.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1402.o: data/residual/UnitDef_Ruin4Ally.bin data/residual/UnitDef_RuinEnemy_10.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1403.o: data/residual/UnitDef_Ruin5Ally.bin data/residual/UnitDef_RuinEnemy_11.bin data/residual/UnitDef_RuinEnemy_12.bin data/residual/UnitDef_RuinEnemy_13.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1404.o: data/residual/UnitDef_Ruin6Ally.bin data/residual/UnitDef_RuinEnemy_14.bin data/residual/UnitDef_RuinEnemy_15.bin data/residual/UnitDef_RuinEnemy_16.bin data/residual/UnitDef_RuinEnemy_17.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1407.o: data/residual/UnitDef_Ruin7Ally.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1408.o: data/residual/UnitDef_RuinEnemy_23.bin data/residual/UnitDef_RuinEnemy_24.bin data/residual/UnitDef_RuinEnemy_25.bin data/residual/UnitDef_RuinEnemy_26.bin data/residual/UnitDef_RuinEnemy_27.bin data/residual/UnitDef_RuinEnemy_28.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1409.o: data/residual/UnitDef_Ruin8Ally.bin data/residual/UnitDef_RuinEnemy_30.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1410.o: data/residual/UnitDef_Ruin9Ally.bin data/residual/UnitDef_RuinEnemy_32.bin data/residual/UnitDef_RuinEnemy_33.bin data/residual/UnitDef_RuinEnemy_34.bin data/residual/UnitDef_RuinEnemy_35.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1411.o: data/residual/UnitDef_Ruin10Ally.bin data/residual/UnitDef_RuinEnemy_37.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1412.o: data/residual/UnitDef_MelkaenCoastMixed.bin data/residual/UnitDef_UnusedAlly.bin data/residual/UnitDef_UnusedEnemy.bin data/residual/UnitDef_UnusedEnemy_1.bin data/residual/UnitDef_UnusedMixed.bin data/residual/UnitDef_UnusedMixed_0.bin data/residual/UnitDef_UnusedMixed_1.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1413.o: data/residual/UnitDef_UnusedAlly_1.bin data/residual/UnitDef_UnusedAlly_2.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1414.o: data/residual/UnitDef_UnusedAlly_3.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1415.o: data/residual/UnitDef_UnusedAlly_5.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1417.o: data/residual/UnitDef_UnusedAlly_19.bin data/residual/UnitDef_UnusedAlly_20.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1418.o: data/residual/UnitDef_UnusedAlly_10.bin data/residual/UnitDef_UnusedAlly_11.bin data/residual/UnitDef_UnusedAlly_12.bin data/residual/UnitDef_UnusedAlly_13.bin data/residual/UnitDef_UnusedAlly_14.bin data/residual/UnitDef_UnusedAlly_15.bin data/residual/UnitDef_UnusedAlly_16.bin data/residual/UnitDef_UnusedAlly_17.bin data/residual/UnitDef_UnusedAlly_8.bin data/residual/UnitDef_UnusedAlly_9.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1471.o: data/residual/MuSoundScr_Dog.bin data/residual/MuSoundScr_Gorgon.bin data/residual/MuSoundScr_Mogall.bin data/residual/MuSoundScr_Skeleton.bin data/residual/MuSoundScr_Spider.bin data/residual/MuSoundScr_Unused2.bin data/residual/MuSoundScr_Zombie.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p151.o: data/residual/song021_agbfe3_bgm_map_cp3_5_B1.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1519.o: graphics/gmapunit/Img_TalkBubble.bin.lz graphics/gmapunit/Img_TalkBubbleOpening_A.bin.lz graphics/gmapunit/Img_TalkBubbleOpening_B.bin.lz graphics/gmapunit/Img_TalkBubbleOpening_C.bin.lz graphics/gmapunit/Img_TalkBubbleOpening_D.bin.lz graphics/gmapunit/Img_TalkBubbleOpening_E.bin.lz graphics/gmapunit/Pal_TalkBubble.gbapal
