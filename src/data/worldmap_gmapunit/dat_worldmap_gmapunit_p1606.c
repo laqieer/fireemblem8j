@@ -5,4 +5,4 @@
  */
 
 SECTION(".rodata.dat_worldmap_gmapunit_p1606") u8 gUnkData_80[] = INCBIN_U8("data/residual/gUnkData_80.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1606") u8 gTsa_SupportSubScreen[] = INCBIN_U8("data/residual/gTsa_SupportSubScreen.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1606") u8 gTsa_SupportSubScreen[] = INCBIN_U8("graphics/misc_gfx2/gTsa_SupportSubScreen.bin.lz");

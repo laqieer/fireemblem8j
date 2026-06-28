@@ -4,6 +4,6 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_bg_p17") u8 bg_Plain_1_map[] = INCBIN_U8("data/residual/bg_Plain_1_map.bin");
+SECTION(".rodata.dat_data_bg_p17") u8 bg_Plain_1_map[] = INCBIN_U8("graphics/gfx_data_bg/bg_Plain_1_map.bin");
 SECTION(".rodata.dat_data_bg_p17") u8 bg_Plain_1_palette[] = INCBIN_U8("graphics/reuse/bg_Plain_1_palette.gbapal");
 SECTION(".rodata.dat_data_bg_p17") u8 bg_Plain_1_Sunset_palette[] = INCBIN_U8("graphics/reuse/bg_Plain_1_Sunset_palette.4bpp");
