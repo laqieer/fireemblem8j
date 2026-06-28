@@ -1,32 +1,24 @@
 #include "global.h"
+#include "proc.h"
 
-/* De-pointered from data/residual/ProcScr_LinkArenaPhaseIntro.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+extern void LAPhaseIntro_Init(ProcPtr proc);
+extern struct ProcCmd gProcScr_PhaseIntroText[];
+extern struct ProcCmd gProcScr_PhaseIntroSquares[];
+extern struct ProcCmd gProcScr_PhaseIntroBlendBox[];
+extern void PhaseIntro_InitDisp(ProcPtr proc);
+extern void PhaseIntro_WaitForEnd(ProcPtr proc);
+extern void LAPhaseIntro_StartBgm(ProcPtr proc);
+extern void LAPhaseIntro_End(ProcPtr proc);
 
-__asm__(
-"\t.section .rodata.dat_ProcScr_LinkArenaPhaseIntro_ref, \"a\", %progbits\n"
-"\t.global ProcScr_LinkArenaPhaseIntro\n"
-"ProcScr_LinkArenaPhaseIntro:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte LAPhaseIntro_Init + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000005\n"
-"\t.4byte gProcScr_PhaseIntroText\n"
-"\t.4byte 0x00000005\n"
-"\t.4byte gProcScr_PhaseIntroSquares\n"
-"\t.4byte 0x00000005\n"
-"\t.4byte gProcScr_PhaseIntroBlendBox\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PhaseIntro_InitDisp + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte PhaseIntro_WaitForEnd + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte LAPhaseIntro_StartBgm + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte LAPhaseIntro_End + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd ProcScr_LinkArenaPhaseIntro[] __attribute__((section(".rodata.dat_ProcScr_LinkArenaPhaseIntro_ref"))) = {
+    PROC_CALL(LAPhaseIntro_Init),
+    PROC_SLEEP(0),
+    PROC_START_CHILD(gProcScr_PhaseIntroText),
+    PROC_START_CHILD(gProcScr_PhaseIntroSquares),
+    PROC_START_CHILD(gProcScr_PhaseIntroBlendBox),
+    PROC_CALL(PhaseIntro_InitDisp),
+    PROC_REPEAT(PhaseIntro_WaitForEnd),
+    PROC_CALL(LAPhaseIntro_StartBgm),
+    PROC_CALL(LAPhaseIntro_End),
+    PROC_END,
+};

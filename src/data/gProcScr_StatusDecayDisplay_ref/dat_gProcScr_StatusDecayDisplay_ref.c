@@ -1,34 +1,26 @@
 #include "global.h"
+#include "proc.h"
 
-/* De-pointered from data/residual/gProcScr_StatusDecayDisplay.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+extern void StatusDecayDisplay_Init(ProcPtr proc);
+extern void MassEffectDisplay_Check(ProcPtr proc);
+extern void MassEffectDisplay_Watch(ProcPtr proc);
+extern void StatusDecayDisplay_Display(ProcPtr proc);
+extern void StatusDecayDisplay_Next(ProcPtr proc);
 
-__asm__(
-"\t.section .rodata.dat_gProcScr_StatusDecayDisplay_ref, \"a\", %progbits\n"
-"\t.global gProcScr_StatusDecayDisplay\n"
-"gProcScr_StatusDecayDisplay:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StatusDecayDisplay_Init + 0x1\n"
-"\t.4byte 0x0000000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MassEffectDisplay_Check + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte MassEffectDisplay_Watch + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StatusDecayDisplay_Display + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0001000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StatusDecayDisplay_Next + 0x1\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd gProcScr_StatusDecayDisplay[] __attribute__((section(".rodata.dat_gProcScr_StatusDecayDisplay_ref"))) = {
+    PROC_CALL(StatusDecayDisplay_Init),
+
+PROC_LABEL(0),
+    PROC_CALL(MassEffectDisplay_Check),
+    PROC_CALL(MassEffectDisplay_Watch),
+    PROC_SLEEP(0),
+
+    PROC_CALL(StatusDecayDisplay_Display),
+    PROC_SLEEP(0),
+
+PROC_LABEL(1),
+    PROC_CALL(StatusDecayDisplay_Next),
+    PROC_GOTO(0),
+
+    PROC_END,
+};

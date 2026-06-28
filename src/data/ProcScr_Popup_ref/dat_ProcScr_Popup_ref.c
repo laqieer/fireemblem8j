@@ -1,36 +1,26 @@
 #include "global.h"
+#include "proc.h"
 
-/* De-pointered from data/residual/ProcScr_Popup.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+extern void PopupProc_GfxClear(ProcPtr proc);
+extern void PopupProc_Init(ProcPtr proc);
+extern void PopupProc_PrepareGfx(ProcPtr proc);
+extern void PopupProc_MaybeSetVolume(ProcPtr proc);
+extern void PopupProc_PlaySound(ProcPtr proc);
+extern void PopupProc_GfxDraw(ProcPtr proc);
+extern void PopupProc_WaitForPress(ProcPtr proc);
+extern void PopupProc_MaybeResetVolume(ProcPtr proc);
 
-__asm__(
-"\t.section .rodata.dat_ProcScr_Popup_ref, \"a\", %progbits\n"
-"\t.global ProcScr_Popup\n"
-"ProcScr_Popup:\n"
-"\t.4byte 0x00000004\n"
-"\t.4byte PopupProc_GfxClear + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PopupProc_Init + 0x1\n"
-"\t.4byte 0x000A000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PopupProc_PrepareGfx + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PopupProc_MaybeSetVolume + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PopupProc_PlaySound + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PopupProc_GfxDraw + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte PopupProc_WaitForPress + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PopupProc_MaybeResetVolume + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd ProcScr_Popup[] __attribute__((section(".rodata.dat_ProcScr_Popup_ref"))) = {
+    PROC_SET_END_CB(PopupProc_GfxClear),
+    PROC_CALL(PopupProc_Init),
+    PROC_SLEEP(0xA),
+    PROC_CALL(PopupProc_PrepareGfx),
+    PROC_CALL(PopupProc_MaybeSetVolume),
+    PROC_SLEEP(0),
+    PROC_CALL(PopupProc_PlaySound),
+    PROC_CALL(PopupProc_GfxDraw),
+    PROC_REPEAT(PopupProc_WaitForPress),
+    PROC_CALL(PopupProc_MaybeResetVolume),
+    PROC_SLEEP(0),
+    PROC_END,
+};

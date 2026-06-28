@@ -1,30 +1,21 @@
 #include "global.h"
+#include "proc.h"
 
-/* De-pointered from data/residual/ProcScr_LASurrender_HandleUnitDeaths.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+extern void LAUnitDeaths_Init(ProcPtr proc);
+extern void LAUnitDeaths_FindNextAndStart(ProcPtr proc);
+extern void LAUnitDeaths_EndMu(ProcPtr proc);
+extern void LAUnitDeaths_OnEnd(ProcPtr proc);
 
-__asm__(
-"\t.section .rodata.dat_ProcScr_LASurrender_HandleUnitDeaths_ref, \"a\", %progbits\n"
-"\t.global ProcScr_LASurrender_HandleUnitDeaths\n"
-"ProcScr_LASurrender_HandleUnitDeaths:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte LAUnitDeaths_Init + 0x1\n"
-"\t.4byte 0x0000000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte LAUnitDeaths_FindNextAndStart + 0x1\n"
-"\t.4byte 0x0020000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte LAUnitDeaths_EndMu + 0x1\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0001000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte LAUnitDeaths_OnEnd + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd ProcScr_LASurrender_HandleUnitDeaths[] __attribute__((section(".rodata.dat_ProcScr_LASurrender_HandleUnitDeaths_ref"))) = {
+    PROC_CALL(LAUnitDeaths_Init),
+
+PROC_LABEL(0),
+    PROC_CALL(LAUnitDeaths_FindNextAndStart),
+    PROC_SLEEP(0x20),
+    PROC_CALL(LAUnitDeaths_EndMu),
+    PROC_GOTO(0),
+
+PROC_LABEL(1),
+    PROC_CALL(LAUnitDeaths_OnEnd),
+    PROC_END,
+};
