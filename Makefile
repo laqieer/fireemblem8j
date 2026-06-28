@@ -220,6 +220,13 @@ PYTHON  ?= python3
 # instead of committed binary blobs. Needs python3 + numpy + Pillow.
 FETSATOOL  := $(PYTHON) scripts/gfxtools/tsa_generator.py
 
+# MARTOMAP (ported from ../fireemblem8u/scripts/mar_to_map.py): turns an editable
+# chapter-map layout (.mar grid + .json metatile/dimension metadata) into the
+# ROM's flat map tilemap (.bin), which the %.lz rule then compresses for incbin.
+# Makes the 63 chapter maps build from editable sources instead of committed
+# binary blobs (D309). Tile configs build from .S via the graphics/map/%.bin rule.
+MARTOMAP   := $(PYTHON) scripts/mar_to_map.py
+
 ifeq ($(UNAME),Darwin)
   SHASUM := shasum
 else
@@ -2763,6 +2770,11 @@ $(RESIDUAL_OBJS): $(RESIDUAL_BINS)
 # sources via a chain of implicit rules.
 %.png: ;
 %.pal: ;
+# Committed editable map sources (D309): .mar/.json chapter-map layouts and .S tile
+# configs have no recipe so make treats them as leaves (never tries to regenerate a
+# committed source via an implicit chain).
+%.mar: ;
+graphics/map/%.S: ;
 
 %.1bpp: %.png  ; $(GBAGFX) $< $@
 %.4bpp: %.png  ; $(GBAGFX) $< $@
@@ -2771,6 +2783,28 @@ $(RESIDUAL_OBJS): $(RESIDUAL_BINS)
 %.gbapal: %.png ; $(GBAGFX) $< $@
 %.lz: % ; $(GBAGFX) $< $@ $(LZ_FLAGS)
 %.rl: % ; $(GBAGFX) $< $@
+
+# Chapter map tilemaps (D309): an editable layout (.mar grid + .json metadata under
+# graphics/map/layout/) is converted by MARTOMAP into the ROM's flat map .bin, which
+# the %.lz rule then compresses for incbin. The 63 chapter maps build from these
+# editable sources instead of committed binary blobs. The .bin lands at top-level
+# graphics/map/ (not graphics/map/layout/) so it matches the JP INCBIN_U8 paths
+# ("graphics/map/<name>.bin.lz") that const_data_chapter_maps already references.
+# (../fireemblem8u keeps the .bin in layout/ next to the .mar; JP's incbins point at
+# graphics/map/ so the rule output dir differs from fe8u -- intentional.)
+graphics/map/%.bin: graphics/map/layout/%.mar
+	$(MARTOMAP) $< $@
+
+# Map tileset configuration (D309): assemble the editable .S (metatile/terrain
+# macros, includes graphics/map/tile_config.inc + terrains.inc) to a flat binary,
+# which the %.lz rule then compresses for incbin. Mirrors ../fireemblem8u Makefile
+# lines 319-322. The 11 TileConfiguration*.bin build from these instead of committed
+# blobs. A TileConfiguration name has a .S but no .mar, and a chapter-map name has a
+# .mar but no .S, so the two graphics/map/%.bin pattern rules never both apply to the
+# same target (no ambiguous double-match).
+graphics/map/%.bin: graphics/map/%.S graphics/map/tile_config.inc graphics/map/terrains.inc
+	$(AS) $(ASFLAGS) -g $< -o $(@:.bin=.o)
+	$(OBJCOPY) -O binary $(@:.bin=.o) $@
 
 # TSA battle-background graphics: an editable .png is converted by FETSATOOL into
 # the ROM's deduplicated tile image (.feimg<N>.bin) + tilemap (.fetsa<N>.bin).

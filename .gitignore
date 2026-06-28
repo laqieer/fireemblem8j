@@ -50,8 +50,21 @@
 # AIFF (.aif) under sound/direct_sound_samples/; the raw GBA PCM blob (.bin) is
 # REGENERATED from it by `sound/%.bin: sound/%.aif` (tools/aif2pcm) and must never
 # be committed. baserom.gba is not in this build chain. (Scoped to sound/ so the
-# graphics/map *.bin tilemaps -- which ARE committed -- are unaffected.)
+# graphics/map *.bin -- the editable-source ones are ignored separately below, the
+# 7 ObjectType blobs stay committed -- are unaffected.)
 sound/**/*.bin
+
+# Chapter map + tileset-config tilemaps (D309). The COMMITTED editable sources are
+# graphics/map/layout/<name>.mar + .json (63 chapter maps, built by MARTOMAP) and
+# graphics/map/<name>.S + tile_config.inc + terrains.inc (11 tile configs, built by
+# as+objcopy). The flat .bin they produce is a build artifact and must never be
+# committed (mirrors ../fireemblem8u's graphics/map/layout/*.bin +
+# graphics/map/*TileConfiguration*.bin ignores, adapted to JP's flat .bin layout).
+# Every *Map*.bin has a .mar source; the 7 *ObjectType*.bin are LZ'd gfx with no
+# editable source and STAY committed (not matched by these globs). The .bin.lz is
+# already covered by the *.lz rule above.
+graphics/map/*Map*.bin
+graphics/map/*TileConfiguration*.bin
 
 # Compiler-generated assembly (agbcc emits src/x.s next to src/x.c).
 # Hand-written assembly lives in asm/ and is tracked.
