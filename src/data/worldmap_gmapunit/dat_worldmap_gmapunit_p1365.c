@@ -1,9 +1,26 @@
 #include "global.h"
+#include "bmunit.h"
 
 /* Migrated from asm/dat_worldmap_gmapunit_p1365.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1365") u8 UnitDef_Ch9BEnemy_4[] = INCBIN_U8("data/residual/UnitDef_Ch9BEnemy_4.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1365") u8 UnitDef_Ch9BEnemy_5[] = INCBIN_U8("data/residual/UnitDef_Ch9BEnemy_5.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1365") u8 UnitDef_Ch9BEnemy_6[] = INCBIN_U8("data/residual/UnitDef_Ch9BEnemy_6.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1365") struct UnitDefinition UnitDef_Ch9BEnemy_4[] =
+{
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x3, .yPosition=0x14, .items={0x45,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    {0},
+};
+SECTION(".rodata.dat_worldmap_gmapunit_p1365") struct UnitDefinition UnitDef_Ch9BEnemy_5[] =
+{
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0xE, .items={0x1C,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0xF, .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    {0},
+};
+SECTION(".rodata.dat_worldmap_gmapunit_p1365") struct UnitDefinition UnitDef_Ch9BEnemy_6[] =
+{
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x18, .yPosition=0xF, .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x00,0x0A,0x00} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x18, .yPosition=0x10, .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x00,0x0A,0x00} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x18, .yPosition=0x11, .items={0x1C,0x00,0x00,0x00}, .ai={0x00,0x00,0x0A,0x00} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x18, .yPosition=0x4, .items={0x03,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    {0},
+};

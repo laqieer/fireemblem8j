@@ -1,8 +1,25 @@
 #include "global.h"
+#include "bmunit.h"
 
 /* Migrated from asm/dat_worldmap_gmapunit_p1395.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1395") u8 UnitDef_TowerEnemy_6[] = INCBIN_U8("data/residual/UnitDef_TowerEnemy_6.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1395") u8 UnitDef_Tower6Ally[] = INCBIN_U8("data/residual/UnitDef_Tower6Ally.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1395") struct UnitDefinition UnitDef_TowerEnemy_6[] =
+{
+    { .charIndex=0xAA, .autolevel=0x1, .allegiance=0x2, .level=0xA, .xPosition=0x6, .yPosition=0xE, .genMonster=0x1, .sumFlag=0x1, .ai={0x00,0x00,0x0C,0x00} },
+    { .charIndex=0xAA, .autolevel=0x1, .allegiance=0x2, .level=0xA, .xPosition=0xE, .yPosition=0x9, .genMonster=0x1, .ai={0x00,0x00,0x0C,0x00} },
+    {0},
+};
+SECTION(".rodata.dat_worldmap_gmapunit_p1395") struct UnitDefinition UnitDef_Tower6Ally[] =
+{
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x14, .yPosition=0x14, .items={0x17,0x04,0x6C,0x00} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x11, .yPosition=0x15, .items={0x17,0x04,0x6C,0x00} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x11, .yPosition=0x13, .items={0x17,0x04,0x6C,0x00} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x13, .yPosition=0x12, .items={0x17,0x04,0x6C,0x00} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x13, .yPosition=0x13, .items={0x17,0x04,0x6C,0x00} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x12, .yPosition=0x14, .items={0x17,0x04,0x6C,0x00} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x12, .yPosition=0x12, .items={0x17,0x04,0x6C,0x00} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x13, .yPosition=0x15, .items={0x17,0x04,0x6C,0x00} },
+    {0},
+};
