@@ -1,68 +1,62 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch5_EndingScene.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch5_EndingScene.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch5_EndingScene_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch5_EndingScene\n"
-"EventScr_Ch5_EndingScene:\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000020\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_StrictLoadUniqueAlly\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000000A\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x000D3322\n"
-"\t.4byte 0x00000C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00311220\n"
-"\t.4byte 0x09891B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00010920\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x00321220\n"
-"\t.4byte 0x098A1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00010820\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00080321\n"
-"\t.4byte 0x00020C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00090321\n"
-"\t.4byte 0x00020C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000A0321\n"
-"\t.4byte 0x00020C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0321\n"
-"\t.4byte 0x00020C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000000A\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x098B1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_085B9BBC + 0x168\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x00000068\n"
-"\t.4byte 0x00003720\n"
-"\t.4byte 0x00020820\n"
-"\t.4byte 0x00DB0229\n"
-"\t.4byte 0x00BD0229\n"
-"\t.4byte 0x00BB0229\n"
-"\t.4byte 0x00CC0229\n"
-"\t.4byte 0x00EA0229\n"
-"\t.4byte 0x00052A22\n"
-"\t.4byte 0x0000A640\n"
-"\t.4byte 0x00080000\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 EventScr_StrictLoadUniqueAlly[];
+extern const u8 data_08A60354[];
+extern const u8 data_085B9BBC[];
+
+SECTION(".rodata.dat_EventScr_Ch5_EndingScene_ref") EventListScr EventScr_Ch5_EndingScene[] = {
+    FADI(0x10)
+    SVAL(EVT_SLOT_2, 0x20)
+    CALL(EventScr_StrictLoadUniqueAlly)
+    SVAL(EVT_SLOT_2, 0xA)
+    CALL(data_08A60354 + 0xCC)
+    CHECK_ALIVE(0xD)
+    BEQ(0, 0xC, 0)
+    MUSC(0x31)
+    TEXTSHOW(0x989)
+    TEXTEND
+    GOTO(1)
+    LABEL(0)
+    MUSC(0x32)
+    TEXTSHOW(0x98A)
+    TEXTEND
+    LABEL(1)
+    REMA
+    CHECK_EVENTID(8)
+    BEQ(2, 0xC, 0)
+    CHECK_EVENTID(9)
+    BEQ(2, 0xC, 0)
+    CHECK_EVENTID(0xA)
+    BEQ(2, 0xC, 0)
+    CHECK_EVENTID(0xB)
+    BEQ(2, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0xA)
+    CALL(data_08A60354 + 0xCC)
+    TEXTSHOW(0x98B)
+    TEXTEND
+    REMA
+    CALL(data_085B9BBC + 0x168)
+    SVAL(EVT_SLOT_3, 0x68)
+    GIVEITEMTO(0)
+    LABEL(2)
+    ENUT(0xDB)
+    ENUT(0xBD)
+    ENUT(0xBB)
+    ENUT(0xCC)
+    ENUT(0xEA)
+    MNC2(5)
+    EVENT_WORD(0x0000A640)
+    EVENT_WORD(0x00080000)
+    ENDA
+};
+

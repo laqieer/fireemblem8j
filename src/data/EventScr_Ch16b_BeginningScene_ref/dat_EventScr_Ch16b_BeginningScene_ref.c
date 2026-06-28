@@ -1,34 +1,33 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch16b_BeginningScene.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch16b_BeginningScene.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch16b_BeginningScene_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch16b_BeginningScene\n"
-"EventScr_Ch16b_BeginningScene:\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte frontier_df3_unitdef_b_042_91C230\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte 0x08A69704\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x000E0229\n"
-"\t.4byte 0x00000120\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x3E4\n"
-"\t.4byte 0x001F2A21\n"
-"\t.4byte 0x00000120\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x6BC\n"
-"\t.4byte 0x00000120\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x6E4\n"
-"\t.4byte 0x00000120\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x70C\n"
-"\t.4byte 0x00000120\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte frontier_df3_unitdef_b_042_91C230 + 0x208\n"
-"\t.4byte 0x00000A40\n"
-);
+extern const u8 frontier_df3_unitdef_b_042_91C230[];
+extern const u8 frontier_df3_eventscr_ch_001_A696D4[];
+
+SECTION(".rodata.dat_EventScr_Ch16b_BeginningScene_ref") EventListScr EventScr_Ch16b_BeginningScene[] = {
+    SVAL(EVT_SLOT_2, frontier_df3_unitdef_b_042_91C230)
+    CALL(0x8A69704)
+    ENUT(0xE)
+    ENDA
+    CALL(frontier_df3_eventscr_ch_001_A696D4 + 0x3E4)
+    MNCH(0x1F)
+    ENDA
+    CALL(frontier_df3_eventscr_ch_001_A696D4 + 0x6BC)
+    ENDA
+    CALL(frontier_df3_eventscr_ch_001_A696D4 + 0x6E4)
+    ENDA
+    CALL(frontier_df3_eventscr_ch_001_A696D4 + 0x70C)
+    ENDA
+    SVAL(EVT_SLOT_2, frontier_df3_unitdef_b_042_91C230 + 0x208)
+    EVENT_WORD(0x00000A40)
+};
+
