@@ -1,31 +1,48 @@
 #include "global.h"
+#include "bmunit.h"
+#include "constants/characters.h"
+#include "constants/classes.h"
+#include "constants/items.h"
 
-/* Migrated from asm/data_0890915C.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+/* Typed UnitDefinition[] table (was a de-pointered .4byte blob).
+ * Byte-identical to fe8u UnitDef_Ch4Ally_1 ++ UnitDef_Ch4Ally_2.
+ * The REDA move-script symbols are defined as u8[] in data_08908DBC.c.
  */
+extern u8 REDA_Ch4Ally_1_ARTUR[];
+extern u8 REDA_Ch4Ally_2_LUTE[];
 
-__asm__(
-"\t.section .data.residue.0890915C, \"aw\", %progbits\n"
-"\t.global data_0890915C\n"
-"data_0890915C:\n"
-"\t.4byte 0x10004413\n"
-"\t.4byte 0x03000289\n"
-"\t.4byte REDA_Ch4Ally_1_ARTUR\n"
-"\t.4byte 0x00006C3F\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0800260C\n"
-"\t.4byte 0x010002C1\n"
-"\t.4byte REDA_Ch4Ally_2_LUTE\n"
-"\t.4byte 0x00006C38\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);  /* de-pointered slice data_0890915C: ptr=2 data=17 skip=1 */
+SECTION(".data.residue.0890915C")
+struct UnitDefinition data_0890915C[] = {
+    /* UnitDef_Ch4Ally_1 */
+    {
+        .charIndex = CHARACTER_ARTUR,
+        .classIndex = CLASS_MONK,
+        .allegiance = FACTION_ID_BLUE,
+        .level = 2,
+        .xPosition = 9,
+        .yPosition = 10,
+        .redaCount = 3,
+        .redas = REDA_Ch4Ally_1_ARTUR,
+        .items = {
+            ITEM_LIGHT_LIGHTNING,
+            ITEM_VULNERARY,
+        },
+    },
+    { 0 },
+    /* UnitDef_Ch4Ally_2 */
+    {
+        .charIndex = CHARACTER_LUTE,
+        .classIndex = CLASS_MAGE_F,
+        .allegiance = FACTION_ID_BLUE,
+        .level = 1,
+        .xPosition = 1,
+        .yPosition = 11,
+        .redaCount = 1,
+        .redas = REDA_Ch4Ally_2_LUTE,
+        .items = {
+            ITEM_ANIMA_FIRE,
+            ITEM_VULNERARY,
+        },
+    },
+    { 0 },
+};
