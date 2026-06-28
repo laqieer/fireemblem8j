@@ -49,7 +49,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential binutils-arm-none-eabi libpng-dev
-          python3 -m pip install ttp requests
+          # numpy + Pillow are required by the TSA/graphics generators (scripts/gfxtools/
+          # tsa_generator.py = FETSATOOL) that build the battle-bg .feimg3/.fetsa3 from the
+          # editable .png sources -- same deps fe8u's CI installs. The make-compare byte gate
+          # is unchanged; this only lets CI build the editable-source tool.
+          python3 -m pip install ttp requests numpy Pillow
 
       - name: Install agbcc (with the -mjp-promote flag, D276c)
         # Applies scripts/agbcc_jp_promote.patch BEFORE ./build.sh, so the toolchain
