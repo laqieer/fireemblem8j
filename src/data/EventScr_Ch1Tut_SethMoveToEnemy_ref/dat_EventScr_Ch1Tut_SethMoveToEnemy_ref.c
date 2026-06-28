@@ -1,47 +1,38 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch1Tut_SethMoveToEnemy.bin by scripts/repoint_table.py.
- * Pointer words are emitted as relocatable symbol references so the ROM
- * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
- *
- * Defined under a private name + published as a type-less assembler
- * alias so a typed header declaration (struct Foo NAME[];) does not
- * conflict -- the data bytes (.word relocations) are byte-identical. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch1Tut_SethMoveToEnemy.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 EventScr_Ch1Tut_BeforeSethMoveToEnemy[];
-extern const u8 EventScr_Ch1Tut_SethMoveToEnemy[];
 extern const u8 EventScr_Tutorial_Exec0[];
 
-SECTION(".rodata.dat_EventScr_Ch1Tut_SethMoveToEnemy_ref") static const u32 EventScr_Ch1Tut_SethMoveToEnemy__shift[] = {
-    0x00070228,
-    0x000D0540,
-    0x00000000,
-    0x00010540,
-    0x00000002,
-    0x00000721,
-    0x00010540,
-    0x00060009,
-    0x00000721,
-    0x00010540,
-    0x00000910,
-    0x00000721,
-    0x00010540,
-    0x00080008,
-    0x00000721,
-    0x00010540,
-    0x0000090F,
-    0x00000721,
-    0x00010540,
-    0x00080008,
-    0x00000721,
-    0x00010540,
-    (u32)&EventScr_Ch1Tut_BeforeSethMoveToEnemy,
-    0x00000721,
-    0x00010540,
-    (u32)&EventScr_Ch1Tut_SethMoveToEnemy,
-    0x00000721,
-    0x00000A40,
-    (u32)&EventScr_Tutorial_Exec0,
-    0x00000120,
+SECTION(".rodata.dat_EventScr_Ch1Tut_SethMoveToEnemy_ref") EventListScr EventScr_Ch1Tut_SethMoveToEnemy[] = {
+    EVBIT_T(7)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 2)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x60009)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x910)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x80008)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x90F)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x80008)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, EventScr_Ch1Tut_BeforeSethMoveToEnemy)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, EventScr_Ch1Tut_SethMoveToEnemy)
+    SENQUEUE1
+    CALL(EventScr_Tutorial_Exec0)
+    ENDA
 };
-__asm__(".global EventScr_Ch1Tut_SethMoveToEnemy\n\t.set EventScr_Ch1Tut_SethMoveToEnemy, EventScr_Ch1Tut_SethMoveToEnemy__shift\n");
+

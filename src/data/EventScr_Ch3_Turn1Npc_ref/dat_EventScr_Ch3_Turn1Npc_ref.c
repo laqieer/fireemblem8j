@@ -1,38 +1,39 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch3_Turn1Npc.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch3_Turn1Npc.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch3_Turn1Npc_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch3_Turn1Npc\n"
-"EventScr_Ch3_Turn1Npc:\n"
-"\t.4byte 0x00002620\n"
-"\t.4byte 0x000F0E20\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Ch3NPC\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x000F1220\n"
-"\t.4byte 0x00093B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x09521B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte data_08A6378C + 0x38\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_CallOnTutorialMode\n"
-"\t.4byte 0x00002F48\n"
-"\t.4byte 0x04020009\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte data_08A6378C + 0x58\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_CallOnTutorialMode\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 UnitDef_Ch3NPC[];
+extern const u8 data_08A6378C[];
+extern const u8 EventScr_CallOnTutorialMode[];
+
+SECTION(".rodata.dat_EventScr_Ch3_Turn1Npc_ref") EventListScr EventScr_Ch3_Turn1Npc[] = {
+    CAMERA(0, 0)
+    STAL(0xF)
+    LOAD1(1, UnitDef_Ch3NPC)
+    ENUN
+    MUSC(0xF)
+    CURSOR_CHAR(9)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0x952)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, data_08A6378C + 0x38)
+    CALL(EventScr_CallOnTutorialMode)
+    MOVE_CLOSEST(0, 9, 2, 4)
+    ENUN
+    SVAL(EVT_SLOT_2, data_08A6378C + 0x58)
+    CALL(EventScr_CallOnTutorialMode)
+    EVBIT_T(7)
+    ENDA
+};
+

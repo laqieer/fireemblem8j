@@ -1,41 +1,35 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch1Tut_TradeSelectGalliamIdle2.bin by scripts/repoint_table.py.
- * Pointer words are emitted as relocatable symbol references so the ROM
- * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
- *
- * Defined under a private name + published as a type-less assembler
- * alias so a typed header declaration (struct Foo NAME[];) does not
- * conflict -- the data bytes (.word relocations) are byte-identical. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch1Tut_TradeSelectGalliamIdle2.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 EventScr_Ch1Tut_TradeSelectGalliamEnd[];
-extern const u8 EventScr_Ch1Tut_TradeSelectGalliamIdle2[];
 extern const u8 EventScr_Tutorial_Exec1[];
 
-SECTION(".rodata.dat_EventScr_Ch1Tut_TradeSelectGalliamIdle2_ref") static const u32 EventScr_Ch1Tut_TradeSelectGalliamIdle2__shift[] = {
-    0x00070228,
-    0x00001120,
-    0x000D0540,
-    0x00000000,
-    0x00010540,
-    0x00020008,
-    0x00000721,
-    0x00010540,
-    0x00000000,
-    0x00000721,
-    0x00010540,
-    0x00000000,
-    0x00000721,
-    0x00010540,
-    (u32)&EventScr_Ch1Tut_TradeSelectGalliamEnd,
-    0x00000721,
-    0x00010540,
-    (u32)&EventScr_Ch1Tut_TradeSelectGalliamIdle2,
-    0x00000721,
-    0x00000A40,
-    (u32)&EventScr_Tutorial_Exec1,
-    0xFDFF3D20,
-    0x010A1120,
-    0x00000120,
+SECTION(".rodata.dat_EventScr_Ch1Tut_TradeSelectGalliamIdle2_ref") EventListScr EventScr_Ch1Tut_TradeSelectGalliamIdle2[] = {
+    EVBIT_T(7)
+    IGNORE_KEYS(0)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x20008)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, EventScr_Ch1Tut_TradeSelectGalliamEnd)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, EventScr_Ch1Tut_TradeSelectGalliamIdle2)
+    SENQUEUE1
+    CALL(EventScr_Tutorial_Exec1)
+    DISABLEOPTIONS(0xFDFF)
+    IGNORE_KEYS(0x10A)
+    ENDA
 };
-__asm__(".global EventScr_Ch1Tut_TradeSelectGalliamIdle2\n\t.set EventScr_Ch1Tut_TradeSelectGalliamIdle2, EventScr_Ch1Tut_TradeSelectGalliamIdle2__shift\n");
+

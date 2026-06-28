@@ -1,29 +1,29 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch15B_18.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch15B_18.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch15B_18_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch15B_18\n"
-"EventScr_Ch15B_18:\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte UnitDef_Ch14BAlly_7\n"
-"\t.4byte 0xFFFF3328\n"
-"\t.4byte 0x00C20620\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x00000048\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_GiveTreasureToLuckyDog\n"
-"\t.4byte 0x819E0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte UnitDef_Ch14BAlly_7 + 0x1C\n"
-"\t.4byte 0x819E0820\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 UnitDef_Ch14BAlly_7[];
+extern const u8 EventScr_GiveTreasureToLuckyDog[];
+
+SECTION(".rodata.dat_EventScr_Ch15B_18_ref") EventListScr EventScr_Ch15B_18[] = {
+    SVAL(EVT_SLOT_2, 0)
+    CALL(UnitDef_Ch14BAlly_7)
+    CHECK_LUCK(0xFFFF)
+    SADD(EVT_SLOT_2, EVT_SLOT_C, EVT_SLOT_0)
+    SVAL(EVT_SLOT_3, 0x48)
+    CALL(EventScr_GiveTreasureToLuckyDog)
+    BNE(0x819E, 0xC, 0)
+    CALL(UnitDef_Ch14BAlly_7 + 0x1C)
+    LABEL(0x819E)
+    EVBIT_T(7)
+    ENDA
+};
+

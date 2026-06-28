@@ -1,65 +1,61 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Prologue_BeginningScene.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Prologue_BeginningScene.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Prologue_BeginningScene_ref, \"a\", %progbits\n"
-"\t.global EventScr_Prologue_BeginningScene\n"
-"EventScr_Prologue_BeginningScene:\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_Prologue_RenaisThroneCutscene\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte data_08A612F4\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_CallOnTutorialMode\n"
-"\t.4byte 0x00001927\n"
-"\t.4byte 0x00000C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00000D40\n"
-"\t.4byte BmGuideTextSetAllGreen + 0x1\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x00080229\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte frontier_df4_banim_b_073_907F78 + 0x224\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x0000000D\n"
-"\t.4byte 0x00023425\n"
-"\t.4byte 0x00013B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001520\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000025\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x000008CD\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xF4\n"
-"\t.4byte 0x00001521\n"
-"\t.4byte 0x00182F40\n"
-"\t.4byte 0x04040002\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00023B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x08CE1B20\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte data_08A612F4 + 0xC0\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_CallOnTutorialMode\n"
-"\t.4byte 0x00002F48\n"
-"\t.4byte 0x05040001\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_Prologue_GiveRapier\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A611DC\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 EventScr_Prologue_RenaisThroneCutscene[];
+extern const u8 data_08A612F4[];
+extern const u8 EventScr_CallOnTutorialMode[];
+extern const u8 BmGuideTextSetAllGreen[];
+extern const u8 frontier_df4_banim_b_073_907F78[];
+extern const u8 data_08A60354[];
+extern const u8 EventScr_Prologue_GiveRapier[];
+extern const u8 data_08A611DC[];
+
+SECTION(".rodata.dat_EventScr_Prologue_BeginningScene_ref") EventListScr EventScr_Prologue_BeginningScene[] = {
+    CALL(EventScr_Prologue_RenaisThroneCutscene)
+    SVAL(EVT_SLOT_2, data_08A612F4)
+    CALL(EventScr_CallOnTutorialMode)
+    CHECK_TUTORIAL
+    BNE(0, 0xC, 0)
+    ASMC(BmGuideTextSetAllGreen + 0x1)
+    LABEL(0)
+    ENUT(8)
+    LOAD1(1, frontier_df4_banim_b_073_907F78 + 0x224)
+    ENUN
+    SVAL(EVT_SLOT_1, 0xD)
+    SET_HP(2)
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    MUSI
+    SVAL(EVT_SLOT_2, 0x25)
+    SVAL(EVT_SLOT_3, 0x8CD)
+    CALL(data_08A60354 + 0xF4)
+    MUNO
+    MOVE(0x18, 2, 4, 4)
+    ENUN
+    CURSOR_CHAR(2)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0x8CE)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, data_08A612F4 + 0xC0)
+    CALL(EventScr_CallOnTutorialMode)
+    MOVE_CLOSEST(0, 1, 4, 5)
+    ENUN
+    CALL(EventScr_Prologue_GiveRapier)
+    CALL(data_08A611DC)
+    EVBIT_T(7)
+    ENDA
+};
+

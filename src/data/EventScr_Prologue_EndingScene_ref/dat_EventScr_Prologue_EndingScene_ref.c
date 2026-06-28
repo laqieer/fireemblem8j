@@ -1,34 +1,37 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Prologue_EndingScene.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Prologue_EndingScene.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Prologue_EndingScene_ref, \"a\", %progbits\n"
-"\t.global EventScr_Prologue_EndingScene\n"
-"EventScr_Prologue_EndingScene:\n"
-"\t.4byte 0x00311220\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000025\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x08D81B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00E00229\n"
-"\t.4byte 0x00E10229\n"
-"\t.4byte 0x00B70229\n"
-"\t.4byte 0x00B40229\n"
-"\t.4byte 0x00B50229\n"
-"\t.4byte 0x00DC0229\n"
-"\t.4byte 0x00B90229\n"
-"\t.4byte 0x00C20229\n"
-"\t.4byte 0x00C30229\n"
-"\t.4byte 0x00E70229\n"
-"\t.4byte 0x00C90229\n"
-"\t.4byte 0x00012A22\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 data_08A60354[];
+
+SECTION(".rodata.dat_EventScr_Prologue_EndingScene_ref") EventListScr EventScr_Prologue_EndingScene[] = {
+    MUSC(0x31)
+    SVAL(EVT_SLOT_2, 0x25)
+    CALL(data_08A60354 + 0xCC)
+    TEXTSHOW(0x8D8)
+    TEXTEND
+    FADI(0x10)
+    REMA
+    ENUT(0xE0)
+    ENUT(0xE1)
+    ENUT(0xB7)
+    ENUT(0xB4)
+    ENUT(0xB5)
+    ENUT(0xDC)
+    ENUT(0xB9)
+    ENUT(0xC2)
+    ENUT(0xC3)
+    ENUT(0xE7)
+    ENUT(0xC9)
+    MNC2(1)
+    ENDA
+};
+

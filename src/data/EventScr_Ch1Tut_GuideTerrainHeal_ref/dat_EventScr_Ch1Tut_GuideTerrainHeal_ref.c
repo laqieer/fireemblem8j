@@ -1,28 +1,30 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch1Tut_GuideTerrainHeal.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch1Tut_GuideTerrainHeal.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch1Tut_GuideTerrainHeal_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch1Tut_GuideTerrainHeal\n"
-"EventScr_Ch1Tut_GuideTerrainHeal:\n"
-"\t.4byte 0x00001120\n"
-"\t.4byte 0x07073B24\n"
-"\t.4byte 0x02073B24\n"
-"\t.4byte 0x02023B24\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A23\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0xFFFFFFFF\n"
-"\t.4byte 0x09021B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00CE0229\n"
-"\t.4byte 0x02003D20\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+SECTION(".rodata.dat_EventScr_Ch1Tut_GuideTerrainHeal_ref") EventListScr EventScr_Ch1Tut_GuideTerrainHeal[] = {
+    IGNORE_KEYS(0)
+    CURSOR_FLASHING(7, 7)
+    CURSOR_FLASHING(7, 2)
+    CURSOR_FLASHING(2, 2)
+    STAL(0x3C)
+    CURE
+    TUTORIALTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0xFFFFFFFF)
+    TEXTSHOW(0x902)
+    TEXTEND
+    REMA
+    ENUT(0xCE)
+    DISABLEOPTIONS(0x200)
+    EVBIT_T(7)
+    ENDA
+};
+

@@ -1,113 +1,92 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch8_11.bin by scripts/repoint_table.py.
- * Pointer words are emitted as relocatable symbol references so the ROM
- * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
- *
- * Defined under a private name + published as a type-less assembler
- * alias so a typed header declaration (struct Foo NAME[];) does not
- * conflict -- the data bytes (.word relocations) are byte-identical. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch8_11.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 EventScr_9EEA58[];
 extern const u8 UnitDef_Ch9AEnemy_11[];
 
-SECTION(".rodata.dat_EventScr_Ch8_11_ref") static const u32 EventScr_Ch8_11__shift[] = {
-    0x00270620,
-    0x00380620,
-    0x00490620,
-    0x00020540,
-    0x0002000F,
-    0x00000A40,
-    (u32)&EventScr_9EEA58,
-    0x00002720,
-    0x00012C40,
-    (u32)&UnitDef_Ch9AEnemy_11,
-    0x00003020,
-    0x00101720,
-    0x006B3B21,
-    0x003C0E20,
-    0x00003B22,
-    0x00720620,
-    0x00001A20,
-    0xFFFF1B20,
-    0x00001D20,
-    0x00001B22,
-    0x00102F40,
-    0x0A0D0069,
-    0x00102F40,
-    0x0A0F0043,
-    0x00102F40,
-    0x050D0053,
-    0x000D0540,
-    0x00000000,
-    0x00010540,
-    0x00010151,
-    0x00000721,
-    0x00010540,
-    0x00000000,
-    0x00000721,
-    0x00010540,
-    0x0001014F,
-    0x00000721,
-    0x00010540,
-    0x00000000,
-    0x00000721,
-    0x00002F43,
-    0x00000057,
-    0x00003020,
-    0x0069342F,
-    0x0043342F,
-    0x006B3B21,
-    0x003C0E20,
-    0x00003B22,
-    0x00820620,
-    0x00001A20,
-    0xFFFF1B20,
-    0x00001D20,
-    0x00001B22,
-    0x00102F40,
-    0x0A0D0053,
-    0x00102F40,
-    0x0A0F0057,
-    0x00102F40,
-    0x050F0044,
-    0x000D0540,
-    0x00000000,
-    0x00010540,
-    0x0001014B,
-    0x00000721,
-    0x00010540,
-    0x00000000,
-    0x00000721,
-    0x00010540,
-    0x0001014D,
-    0x00000721,
-    0x00010540,
-    0x00000000,
-    0x00000721,
-    0x00002F43,
-    0x0000001D,
-    0x00003020,
-    0x0053342F,
-    0x0057342F,
-    0x006B3B21,
-    0x003C0E20,
-    0x00003B22,
-    0x00920620,
-    0x00001A20,
-    0xFFFF1B20,
-    0x00001D20,
-    0x00001B22,
-    0x00102F40,
-    0x0A0D001D,
-    0x00102F40,
-    0x0A0F0044,
-    0x000F0E22,
-    0x00101721,
-    0x00003020,
-    0x0000342A,
-    0x0000342C,
-    0x0000342B,
-    0x00000120,
+SECTION(".rodata.dat_EventScr_Ch8_11_ref") EventListScr EventScr_Ch8_11[] = {
+    SADD(EVT_SLOT_7, EVT_SLOT_2, EVT_SLOT_0)
+    SADD(EVT_SLOT_8, EVT_SLOT_3, EVT_SLOT_0)
+    SADD(EVT_SLOT_9, EVT_SLOT_4, EVT_SLOT_0)
+    SVAL(EVT_SLOT_2, 0x2000F)
+    CALL(EventScr_9EEA58)
+    TILECHANGE(0)
+    LOAD1(1, UnitDef_Ch9AEnemy_11)
+    ENUN
+    FADU(0x10)
+    CURSOR_CHAR(0x6B)
+    STAL(0x3C)
+    CURE
+    SADD(EVT_SLOT_2, EVT_SLOT_7, EVT_SLOT_0)
+    TEXTSTART
+    TEXTSHOW(0xFFFF)
+    TEXTEND
+    REMA
+    MOVE(0x10, 0x69, 0xD, 0xA)
+    MOVE(0x10, 0x43, 0xF, 0xA)
+    MOVE(0x10, 0x53, 0xD, 5)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x10151)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x1014F)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    MOVE_DEFINED(0x57)
+    ENUN
+    DISA(0x69)
+    DISA(0x43)
+    CURSOR_CHAR(0x6B)
+    STAL(0x3C)
+    CURE
+    SADD(EVT_SLOT_2, EVT_SLOT_8, EVT_SLOT_0)
+    TEXTSTART
+    TEXTSHOW(0xFFFF)
+    TEXTEND
+    REMA
+    MOVE(0x10, 0x53, 0xD, 0xA)
+    MOVE(0x10, 0x57, 0xF, 0xA)
+    MOVE(0x10, 0x44, 0xF, 5)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x1014B)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x1014D)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    MOVE_DEFINED(0x1D)
+    ENUN
+    DISA(0x53)
+    DISA(0x57)
+    CURSOR_CHAR(0x6B)
+    STAL(0x3C)
+    CURE
+    SADD(EVT_SLOT_2, EVT_SLOT_9, EVT_SLOT_0)
+    TEXTSTART
+    TEXTSHOW(0xFFFF)
+    TEXTEND
+    REMA
+    MOVE(0x10, 0x1D, 0xD, 0xA)
+    MOVE(0x10, 0x44, 0xF, 0xA)
+    STAL2(0xF)
+    FADI(0x10)
+    ENUN
+    CLEA
+    CLEE
+    CLEN
+    ENDA
 };
-__asm__(".global EventScr_Ch8_11\n\t.set EventScr_Ch8_11, EventScr_Ch8_11__shift\n");
+

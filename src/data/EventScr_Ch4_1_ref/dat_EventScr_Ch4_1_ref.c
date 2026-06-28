@@ -1,92 +1,83 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch4_1.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch4_1.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch4_1_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch4_1\n"
-"EventScr_Ch4_1:\n"
-"\t.4byte 0x00311220\n"
-"\t.4byte 0x000C3320\n"
-"\t.4byte 0x000A0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x00133322\n"
-"\t.4byte 0x00000C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000096D\n"
-"\t.4byte 0x00010920\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000096E\n"
-"\t.4byte 0x00010820\n"
-"\t.4byte 0xFFFF1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte data_0890915C + 0x28\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x000A0820\n"
-"\t.4byte 0x00321220\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000001E\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x00133322\n"
-"\t.4byte 0x000B0C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000C3322\n"
-"\t.4byte 0x000B0C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000096F\n"
-"\t.4byte 0x000C0920\n"
-"\t.4byte 0x000B0820\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000970\n"
-"\t.4byte 0x000C0820\n"
-"\t.4byte 0xFFFF1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x7FFF1324\n"
-"\t.4byte 0x00002220\n"
-"\t.4byte 0x07072628\n"
-"\t.4byte 0x0000342A\n"
-"\t.4byte 0x0000342C\n"
-"\t.4byte 0x0000342B\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte data_089092B0\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Ch4NPC_1\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x002A1220\n"
-"\t.4byte 0x00193B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000001E\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x09711B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00D20229\n"
-"\t.4byte 0x00BB0229\n"
-"\t.4byte 0x00BE0229\n"
-"\t.4byte 0x00BF0229\n"
-"\t.4byte 0x00E60229\n"
-"\t.4byte 0x00CD0229\n"
-"\t.4byte 0x00062A21\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 data_08A60354[];
+extern const u8 data_0890915C[];
+extern const u8 data_089092B0[];
+extern const u8 UnitDef_Ch4NPC_1[];
+
+SECTION(".rodata.dat_EventScr_Ch4_1_ref") EventListScr EventScr_Ch4_1[] = {
+    MUSC(0x31)
+    CHECK_EXISTS(0xC)
+    BNE(0xA, 0xC, 0)
+    SVAL(EVT_SLOT_2, 2)
+    CALL(data_08A60354 + 0xCC)
+    CHECK_ALIVE(0x13)
+    BEQ(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x96D)
+    GOTO(1)
+    LABEL(0)
+    SVAL(EVT_SLOT_2, 0x96E)
+    LABEL(1)
+    TEXTSHOW(0xFFFF)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    LOAD1(1, data_0890915C + 0x28)
+    ENUN
+    LABEL(0xA)
+    MUSC(0x32)
+    SVAL(EVT_SLOT_2, 0x1E)
+    CALL(data_08A60354 + 0xCC)
+    CHECK_ALIVE(0x13)
+    BEQ(0xB, 0xC, 0)
+    CHECK_ALIVE(0xC)
+    BEQ(0xB, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x96F)
+    GOTO(0xC)
+    LABEL(0xB)
+    SVAL(EVT_SLOT_2, 0x970)
+    LABEL(0xC)
+    TEXTSHOW(0xFFFF)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    EvtBgmFadeIn(0x7FFF, 4)
+    CLEAN
+    CAMERA2(7, 7)
+    CLEA
+    CLEE
+    CLEN
+    LOAD2(1, data_089092B0)
+    ENUN
+    FADU(0x10)
+    LOAD1(1, UnitDef_Ch4NPC_1)
+    ENUN
+    MUSC(0x2A)
+    CURSOR_CHAR(0x19)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x1E)
+    CALL(data_08A60354 + 0xCC)
+    TEXTSHOW(0x971)
+    TEXTEND
+    REMA
+    ENUT(0xD2)
+    ENUT(0xBB)
+    ENUT(0xBE)
+    ENUT(0xBF)
+    ENUT(0xE6)
+    ENUT(0xCD)
+    MNCH(6)
+    ENDA
+};
+

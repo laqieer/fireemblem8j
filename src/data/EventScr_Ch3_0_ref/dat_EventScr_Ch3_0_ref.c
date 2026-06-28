@@ -1,61 +1,52 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch3_0.bin by scripts/repoint_table.py.
- * Pointer words are emitted as relocatable symbol references so the ROM
- * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
- *
- * Defined under a private name + published as a type-less assembler
- * alias so a typed header declaration (struct Foo NAME[];) does not
- * conflict -- the data bytes (.word relocations) are byte-identical. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch3_0.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 EventScr_FormatFlashingCursor[];
 
-SECTION(".rodata.dat_EventScr_Ch3_0_ref") static const u32 EventScr_Ch3_0__shift[] = {
-    0x07072628,
-    0x000F0E20,
-    0x000D0540,
-    0x00000000,
-    0x00010540,
-    0x00030002,
-    0x00000721,
-    0x00010540,
-    0x000A0006,
-    0x00000721,
-    0x00010540,
-    0x0005000A,
-    0x00000721,
-    0x00000A40,
-    (u32)&EventScr_FormatFlashingCursor,
-    0x003C0E20,
-    0x00003B22,
-    0x00001A20,
-    0x094D1B20,
-    0x00001D20,
-    0x00001B22,
-    0x0A072628,
-    0x000F0E20,
-    0x000D0540,
-    0x00000000,
-    0x00010540,
-    0x00090004,
-    0x00000721,
-    0x00010540,
-    0x000C0004,
-    0x00000721,
-    0x00010540,
-    0x00080008,
-    0x00000721,
-    0x00000A40,
-    (u32)&EventScr_FormatFlashingCursor,
-    0x003C0E20,
-    0x00003B22,
-    0x00001A23,
-    0x000B0540,
-    0xFFFFFFFF,
-    0x095B1B20,
-    0x00001D20,
-    0x00001B22,
-    0x00D30229,
-    0x00000120,
+SECTION(".rodata.dat_EventScr_Ch3_0_ref") EventListScr EventScr_Ch3_0[] = {
+    CAMERA2(7, 7)
+    STAL(0xF)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x30002)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xA0006)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x5000A)
+    SENQUEUE1
+    CALL(EventScr_FormatFlashingCursor)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0x94D)
+    TEXTEND
+    REMA
+    CAMERA2(7, 0xA)
+    STAL(0xF)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x90004)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xC0004)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x80008)
+    SENQUEUE1
+    CALL(EventScr_FormatFlashingCursor)
+    STAL(0x3C)
+    CURE
+    TUTORIALTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0xFFFFFFFF)
+    TEXTSHOW(0x95B)
+    TEXTEND
+    REMA
+    ENUT(0xD3)
+    ENDA
 };
-__asm__(".global EventScr_Ch3_0\n\t.set EventScr_Ch3_0, EventScr_Ch3_0__shift\n");
+

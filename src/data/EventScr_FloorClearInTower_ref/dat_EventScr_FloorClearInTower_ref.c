@@ -1,35 +1,36 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_FloorClearInTower.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_FloorClearInTower.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_FloorClearInTower_ref, \"a\", %progbits\n"
-"\t.global EventScr_FloorClearInTower\n"
-"EventScr_FloorClearInTower:\n"
-"\t.4byte 0x00041020\n"
-"\t.4byte 0x00000D40\n"
-"\t.4byte DisplayMapClearMapAnim + 0x1\n"
-"\t.4byte 0x00001A23\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0xFFFFFFFF\n"
-"\t.4byte 0x08BF1B20\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00070540\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000C40\n"
-"\t.4byte 0x0007000C\n"
-"\t.4byte 0xFFFF2A21\n"
-"\t.4byte 0x00000D40\n"
-"\t.4byte StartRetreatProcessing + 0x1\n"
-"\t.4byte 0x00010920\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x00320620\n"
-"\t.4byte 0xFFFF2A23\n"
-"\t.4byte 0x00000D40\n"
-"\t.4byte UnlockPostgameAllyByEnemyCount + 0x1\n"
-"\t.4byte 0x00010820\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 DisplayMapClearMapAnim[];
+extern const u8 StartRetreatProcessing[];
+extern const u8 UnlockPostgameAllyByEnemyCount[];
+
+SECTION(".rodata.dat_EventScr_FloorClearInTower_ref") EventListScr EventScr_FloorClearInTower[] = {
+    EVBIT_MODIFY(4)
+    ASMC(DisplayMapClearMapAnim + 0x1)
+    TUTORIALTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0xFFFFFFFF)
+    TEXTSHOW(0x8BF)
+    TEXTEND
+    SVAL(EVT_SLOT_7, 1)
+    BEQ(0, 0xC, 7)
+    MNCH(0xFFFF)
+    ASMC(StartRetreatProcessing + 0x1)
+    GOTO(1)
+    LABEL(0)
+    SADD(EVT_SLOT_2, EVT_SLOT_3, EVT_SLOT_0)
+    MNC3(0xFFFF)
+    ASMC(UnlockPostgameAllyByEnemyCount + 0x1)
+    LABEL(1)
+    ENDA
+};
+

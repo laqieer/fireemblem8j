@@ -1,44 +1,40 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch2_Village1.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch2_Village1.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch2_Village1_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch2_Village1\n"
-"EventScr_Ch2_Village1:\n"
-"\t.4byte 0x00001120\n"
-"\t.4byte 0x00002E21\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000C41\n"
-"\t.4byte 0x0001000C\n"
-"\t.4byte 0x00001520\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x00000929\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xF4\n"
-"\t.4byte 0x00001521\n"
-"\t.4byte 0x00010920\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x00001520\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x0000092A\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xF4\n"
-"\t.4byte 0x00001521\n"
-"\t.4byte 0x00010820\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_085B9BBC + 0x168\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x00000076\n"
-"\t.4byte 0xFFFF3720\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 data_08A60354[];
+extern const u8 data_085B9BBC[];
+
+SECTION(".rodata.dat_EventScr_Ch2_Village1_ref") EventListScr EventScr_Ch2_Village1[] = {
+    IGNORE_KEYS(0)
+    CHECK_ACTIVE
+    SVAL(EVT_SLOT_1, 1)
+    BNE(0, 0xC, 1)
+    MUSI
+    SVAL(EVT_SLOT_2, 2)
+    SVAL(EVT_SLOT_3, 0x929)
+    CALL(data_08A60354 + 0xF4)
+    MUNO
+    GOTO(1)
+    LABEL(0)
+    MUSI
+    SVAL(EVT_SLOT_2, 2)
+    SVAL(EVT_SLOT_3, 0x92A)
+    CALL(data_08A60354 + 0xF4)
+    MUNO
+    LABEL(1)
+    CALL(data_085B9BBC + 0x168)
+    SVAL(EVT_SLOT_3, 0x76)
+    GIVEITEMTO(0xFFFF)
+    EVBIT_T(7)
+    ENDA
+};
+

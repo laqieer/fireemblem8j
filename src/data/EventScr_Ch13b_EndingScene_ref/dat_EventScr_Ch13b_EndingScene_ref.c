@@ -1,44 +1,46 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch13b_EndingScene.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch13b_EndingScene.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch13b_EndingScene_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch13b_EndingScene\n"
-"EventScr_Ch13b_EndingScene:\n"
-"\t.4byte 0x7FFF1324\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x0000342A\n"
-"\t.4byte 0x0000342C\n"
-"\t.4byte 0x0000342B\n"
-"\t.4byte 0x0D0E2628\n"
-"\t.4byte 0x00002B22\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte frontier_df3_unitdef_b_033_9191E0 + 0x7AC\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte frontier_df3_unitdef_b_033_9191E0 + 0x7AC\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x001E3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00321220\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000002C\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x0AB31B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x0000342A\n"
-"\t.4byte 0x0000342C\n"
-"\t.4byte 0x0000342B\n"
-"\t.4byte 0x00750229\n"
-"\t.4byte 0x001B2A21\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 frontier_df3_unitdef_b_033_9191E0[];
+extern const u8 data_08A60354[];
+
+SECTION(".rodata.dat_EventScr_Ch13b_EndingScene_ref") EventListScr EventScr_Ch13b_EndingScene[] = {
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    CAMERA2(0xE, 0xD)
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, frontier_df3_unitdef_b_033_9191E0 + 0x7AC)
+    ENUN
+    FADU(0x10)
+    LOAD2(1, frontier_df3_unitdef_b_033_9191E0 + 0x7AC)
+    ENUN
+    CURSOR_CHAR(0x1E)
+    STAL(0x3C)
+    CURE
+    MUSC(0x32)
+    SVAL(EVT_SLOT_2, 0x2C)
+    CALL(data_08A60354 + 0xCC)
+    TEXTSHOW(0xAB3)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    ENUT(0x75)
+    MNCH(0x1B)
+    ENDA
+};
+

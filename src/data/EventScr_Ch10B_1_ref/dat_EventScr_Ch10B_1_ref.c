@@ -1,33 +1,33 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch10B_1.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch10B_1.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch10B_1_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch10B_1\n"
-"EventScr_Ch10B_1:\n"
-"\t.4byte 0x000E3320\n"
-"\t.4byte 0x00000C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000E3325\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000C40\n"
-"\t.4byte 0x0001000C\n"
-"\t.4byte 0x00141220\n"
-"\t.4byte 0x000E2621\n"
-"\t.4byte 0x000F0E20\n"
-"\t.4byte 0x000E3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x0A7C1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+SECTION(".rodata.dat_EventScr_Ch10B_1_ref") EventListScr EventScr_Ch10B_1[] = {
+    CHECK_EXISTS(0xE)
+    BEQ(0, 0xC, 0)
+    CHECK_ALLEGIANCE(0xE)
+    SVAL(EVT_SLOT_1, 0)
+    BEQ(0, 0xC, 1)
+    MUSC(0x14)
+    CAMERA_CAHR(0xE)
+    STAL(0xF)
+    CURSOR_CHAR(0xE)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xA7C)
+    TEXTEND
+    REMA
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+};
+

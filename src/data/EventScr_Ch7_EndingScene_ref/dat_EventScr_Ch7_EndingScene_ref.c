@@ -1,93 +1,77 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch7_EndingScene.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch7_EndingScene.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch7_EndingScene_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch7_EndingScene\n"
-"EventScr_Ch7_EndingScene:\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00442520\n"
-"\t.4byte 0x0000342A\n"
-"\t.4byte 0x0000342C\n"
-"\t.4byte 0x0000342B\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x00531220\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x1B8\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00013B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x09C51B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00002F42\n"
-"\t.4byte 0x00010002\n"
-"\t.4byte 0x00002F42\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x1F4\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00423B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001520\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000015\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x000009C6\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xF4\n"
-"\t.4byte 0x00001521\n"
-"\t.4byte 0x00002F42\n"
-"\t.4byte 0x00000042\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x00090042\n"
-"\t.4byte 0x000D0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000109\n"
-"\t.4byte 0x00000721\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000721\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000009\n"
-"\t.4byte 0x00000721\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000721\n"
-"\t.4byte 0x00002F43\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x000D0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x0000010A\n"
-"\t.4byte 0x00000721\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000721\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x0000000A\n"
-"\t.4byte 0x00000721\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000721\n"
-"\t.4byte 0x00002F43\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte 0x00080E22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00D50229\n"
-"\t.4byte 0x00092A21\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 frontier_df4_banim_b_076_90B4DC[];
+extern const u8 data_08A60354[];
+
+SECTION(".rodata.dat_EventScr_Ch7_EndingScene_ref") EventListScr EventScr_Ch7_EndingScene[] = {
+    FADI(0x10)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x44)
+    CLEA
+    CLEE
+    CLEN
+    FADU(0x10)
+    MUSC(0x53)
+    LOAD2(1, frontier_df4_banim_b_076_90B4DC + 0x1B8)
+    ENUN
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0x9C5)
+    TEXTEND
+    REMA
+    MOVE_1STEP(0, 2, 1)
+    MOVE_1STEP(0, 1, 0)
+    LOAD2(1, frontier_df4_banim_b_076_90B4DC + 0x1F4)
+    ENUN
+    ENUN
+    CURSOR_CHAR(0x42)
+    STAL(0x3C)
+    CURE
+    MUSI
+    SVAL(EVT_SLOT_2, 0x15)
+    SVAL(EVT_SLOT_3, 0x9C6)
+    CALL(data_08A60354 + 0xF4)
+    MUNO
+    MOVE_1STEP(0, 0x42, 0)
+    ENUN
+    MOVE(0, 0x42, 9, 0)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x109)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 9)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    MOVE_DEFINED(1)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x10A)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xA)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    MOVE_DEFINED(2)
+    STAL2(8)
+    FADI(0x10)
+    ENUN
+    ENUT(0xD5)
+    MNCH(9)
+    ENDA
+};
+

@@ -1,95 +1,86 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch3_BeginningScene.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch3_BeginningScene.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch3_BeginningScene_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch3_BeginningScene\n"
-"EventScr_Ch3_BeginningScene:\n"
-"\t.4byte 0x00251220\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000001E\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x094B1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000025\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x094C1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x00002220\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Ch3Enemy_0\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte UnitDef_Event_Ch3Ally\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte EventScr_Ch3_0\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_CallOnTutorialMode\n"
-"\t.4byte 0x00001927\n"
-"\t.4byte 0x00000C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00083B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x094E1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte EventScr_Ch3_5\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_CallOnTutorialMode\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_MoveUnitS2ToLeader\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x00002C40\n"
-"\t.4byte UnitDef_Event_Ch3Ally\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00001927\n"
-"\t.4byte 0x00010C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00020920\n"
-"\t.4byte 0x00010820\n"
-"\t.4byte 0xFFFF2F40\n"
-"\t.4byte 0x09030008\n"
-"\t.4byte 0x00020820\n"
-"\t.4byte 0x00482621\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x00001927\n"
-"\t.4byte 0x000A0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00131220\n"
-"\t.4byte 0x00483B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x09501B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x000A0820\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte data_08A6378C\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_CallOnTutorialMode\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte data_08A6378C + 0x74\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_CallOnTutorialMode\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 data_08A60354[];
+extern const u8 UnitDef_Ch3Enemy_0[];
+extern const u8 UnitDef_Event_Ch3Ally[];
+extern const u8 EventScr_Ch3_0[];
+extern const u8 EventScr_CallOnTutorialMode[];
+extern const u8 EventScr_Ch3_5[];
+extern const u8 EventScr_MoveUnitS2ToLeader[];
+extern const u8 data_08A6378C[];
+
+SECTION(".rodata.dat_EventScr_Ch3_BeginningScene_ref") EventListScr EventScr_Ch3_BeginningScene[] = {
+    MUSC(0x25)
+    SVAL(EVT_SLOT_2, 0x1E)
+    CALL(data_08A60354 + 0xCC)
+    TEXTSHOW(0x94B)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, 0x25)
+    CALL(data_08A60354 + 0xCC)
+    TEXTSHOW(0x94C)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CLEAN
+    LOAD1(1, UnitDef_Ch3Enemy_0)
+    ENUN
+    FADU(0x10)
+    LOAD2(1, UnitDef_Event_Ch3Ally)
+    ENUN
+    SVAL(EVT_SLOT_2, EventScr_Ch3_0)
+    CALL(EventScr_CallOnTutorialMode)
+    CHECK_TUTORIAL
+    BNE(0, 0xC, 0)
+    CURSOR_CHAR(8)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0x94E)
+    TEXTEND
+    REMA
+    LABEL(0)
+    SVAL(EVT_SLOT_2, EventScr_Ch3_5)
+    CALL(EventScr_CallOnTutorialMode)
+    SVAL(EVT_SLOT_2, 2)
+    CALL(EventScr_MoveUnitS2ToLeader)
+    FADI(0x10)
+    LOAD1(0, UnitDef_Event_Ch3Ally)
+    ENUN
+    CHECK_TUTORIAL
+    BNE(1, 0xC, 0)
+    GOTO(2)
+    LABEL(1)
+    MOVE(0xFFFF, 8, 3, 9)
+    LABEL(2)
+    CAMERA_CAHR(0x48)
+    FADU(0x10)
+    CHECK_TUTORIAL
+    BNE(0xA, 0xC, 0)
+    MUSC(0x13)
+    CURSOR_CHAR(0x48)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0x950)
+    TEXTEND
+    REMA
+    LABEL(0xA)
+    SVAL(EVT_SLOT_2, data_08A6378C)
+    CALL(EventScr_CallOnTutorialMode)
+    SVAL(EVT_SLOT_2, data_08A6378C + 0x74)
+    CALL(EventScr_CallOnTutorialMode)
+    EVBIT_T(7)
+    ENDA
+};
+

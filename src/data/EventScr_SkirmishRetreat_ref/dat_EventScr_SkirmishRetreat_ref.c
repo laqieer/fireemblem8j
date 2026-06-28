@@ -1,36 +1,35 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_SkirmishRetreat.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_SkirmishRetreat.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_SkirmishRetreat_ref, \"a\", %progbits\n"
-"\t.global EventScr_SkirmishRetreat\n"
-"EventScr_SkirmishRetreat:\n"
-"\t.4byte 0x00041020\n"
-"\t.4byte 0x00001A23\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0xFFFFFFFF\n"
-"\t.4byte 0x08BE1B20\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00070540\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000C41\n"
-"\t.4byte 0x0007000C\n"
-"\t.4byte 0x7FFF1324\n"
-"\t.4byte 0x00041721\n"
-"\t.4byte 0xFFFF2A21\n"
-"\t.4byte 0x00001926\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000C41\n"
-"\t.4byte 0x0001000C\n"
-"\t.4byte 0x00000D40\n"
-"\t.4byte StartRetreatProcessing + 0x1\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 StartRetreatProcessing[];
+
+SECTION(".rodata.dat_EventScr_SkirmishRetreat_ref") EventListScr EventScr_SkirmishRetreat[] = {
+    EVBIT_MODIFY(4)
+    TUTORIALTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0xFFFFFFFF)
+    TEXTSHOW(0x8BE)
+    TEXTEND
+    SVAL(EVT_SLOT_7, 1)
+    BNE(0, 0xC, 7)
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(4)
+    MNCH(0xFFFF)
+    CHECK_SKIRMISH
+    SVAL(EVT_SLOT_1, 1)
+    BNE(0, 0xC, 1)
+    ASMC(StartRetreatProcessing + 0x1)
+    LABEL(0)
+    REMA
+    EVBIT_T(7)
+    ENDA
+};
+
