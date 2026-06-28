@@ -9,5 +9,5 @@ SECTION(".rodata.dat_battle_forecast") u8 gBattleForecast_1[] = INCBIN_U8("data/
 SECTION(".rodata.dat_battle_forecast") u16 gTSA_BattleForecastStandard[] = INCBIN_U16("graphics/battle_forecast/gTSA_BattleForecastStandard.tsa.bin");
 SECTION(".rodata.dat_battle_forecast") u16 gTSA_BattleForecastExtended[] = INCBIN_U16("graphics/battle_forecast/gTSA_BattleForecastExtended.tsa.bin");
 SECTION(".rodata.dat_battle_forecast") u16 gBattleForecast_x2x4Gfx[] = INCBIN_U16("graphics/reuse/gBattleForecast_x2x4Gfx.4bpp.lz");
-SECTION(".rodata.dat_battle_forecast") u16 gBattleForecast_x2x4Pal[] = INCBIN_U16("data/residual/gBattleForecast_x2x4Pal.bin");
+SECTION(".rodata.dat_battle_forecast") u16 gBattleForecast_x2x4Pal[] = INCBIN_U16("graphics/battle_forecast/gBattleForecast_x2x4Pal.gbapal");
 SECTION(".rodata.dat_battle_forecast") u8 gBattleForecast_2[] = INCBIN_U8("data/residual/gBattleForecast_2.bin");

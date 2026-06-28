@@ -5,11 +5,11 @@
  */
 
 SECTION(".rodata.dat_banim_efxhitobj") u16 Img_EfxPierceCriticalEffectBG[] = INCBIN_U16("graphics/reuse/Img_EfxPierceCriticalEffectBG.4bpp.lz");
-SECTION(".rodata.dat_banim_efxhitobj") u16 Pal_EfxPierceCriticalEffectBG[] = INCBIN_U16("data/residual/Pal_EfxPierceCriticalEffectBG.bin");
+SECTION(".rodata.dat_banim_efxhitobj") u16 Pal_EfxPierceCriticalEffectBG[] = INCBIN_U16("graphics/banim/efxhitobj/Pal_EfxPierceCriticalEffectBG.gbapal");
 SECTION(".rodata.dat_banim_efxhitobj") u16 TsaL_EfxPierceCriticalEffectBG[] = INCBIN_U16("graphics/banim/efxhitobj/TsaL_EfxPierceCriticalEffectBG.map.bin.lz");
 SECTION(".rodata.dat_banim_efxhitobj") u16 TsaR_EfxPierceCriticalEffectBG[] = INCBIN_U16("graphics/banim/efxhitobj/TsaR_EfxPierceCriticalEffectBG.map.bin.lz");
 SECTION(".rodata.dat_banim_efxhitobj") u16 Img_EfxPierceNormalEffectBG[] = INCBIN_U16("graphics/reuse/Img_EfxPierceNormalEffectBG.4bpp.lz");
-SECTION(".rodata.dat_banim_efxhitobj") u16 Pal_EfxPierceNormalEffectBG[] = INCBIN_U16("data/residual/Pal_EfxPierceNormalEffectBG.bin");
+SECTION(".rodata.dat_banim_efxhitobj") u16 Pal_EfxPierceNormalEffectBG[] = INCBIN_U16("graphics/banim/efxhitobj/Pal_EfxPierceNormalEffectBG.gbapal");
 SECTION(".rodata.dat_banim_efxhitobj") u16 Tsa1_EfxPierceNormalEffectBG[] = INCBIN_U16("graphics/banim/efxhitobj/Tsa1_EfxPierceNormalEffectBG.map.bin.lz");
 SECTION(".rodata.dat_banim_efxhitobj") u16 Tsa2_EfxPierceNormalEffectBG[] = INCBIN_U16("graphics/banim/efxhitobj/Tsa2_EfxPierceNormalEffectBG.map.bin.lz");
 SECTION(".rodata.dat_banim_efxhitobj") u16 Tsa3_EfxPierceNormalEffectBG[] = INCBIN_U16("graphics/banim/efxhitobj/Tsa3_EfxPierceNormalEffectBG.map.bin.lz");
