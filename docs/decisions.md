@@ -8112,3 +8112,56 @@ have hard reference-parity ceilings below literal 100%. Copilot-validated defini
 
 **Completion = reference-parity (vs fe8u) + documented, verifier-proven residuals.** The
 parallel P9 teams (D307) drive each axis to this max; the integrator gates on make compare.
+
+## D309 — Axis #5 COMPLETE (gate 0); axis #6 550→~120 KB via orphan-cleanup + typed-asset extraction
+
+**Date context:** 2026-06-28. P10 CTO session continuing the all-axes drive. Parallel P9
+worktree-worker fleet + single serial integrator (me), every push CI-gated to green.
+
+**Axis #5 SHIFTABILITY → gate 0 = COMPLETE (verified).** The user-ratified criterion
+(D305) `audit_pointers.py --true-debt --gate` = 0 is MET. The last stuck pointer was
+`data_0890915C` line `.4byte 0x0800260C` — NOT a pointer: it is the first word of a
+`struct UnitDefinition` entry (charIndex/classIndex/level-bitfield; the high byte 0x08 is
+the level/allegiance bitfield). FIX = convert that `__asm__ .4byte` blob to a typed
+`struct UnitDefinition[4]` C initializer (= fe8u `UnitDef_Ch4Ally_1`+`_2`, byte-exact,
+make compare OK diff 0): the coincidental 0x08-word becomes typed bitfields, the real
+`redas` pointers become `.redas = REDA_Ch4Ally_*` relocations. **Dual-win pattern: typing
+a UnitDef blob removes BOTH the false-positive stuck-pointer (axis #5) AND the opacity
+(axis #6).** The 5 "CODE-axis literal pools" are not in the gate (they relocate when their
+Thumb fn is decompiled — a #2 item). The gate was NEVER closed by editing the auditor
+(that would be manufacturing success) — only by changing the data representation, with
+make compare as the oracle.
+
+**Axis #6 ASSET EDITABILITY: 550 KB → ~120 KB opaque (struct_b) this session.** Four levers,
+each clean-build + CI gated:
+1. **Orphan cleanup (−318 KB, the biggest lever — NOT new extraction).** 842 `data/residual/*.bin`
+   were DEAD leftovers from earlier carve passes — already typed-C (e.g. `gCharacterData`/
+   `gClassData` are `struct CharacterData[]`/`ClassData[]`) or already-extracted-to-graphics
+   (`btl_bg_*_tiles.bin` == `graphics/btl_bg/*.feimg3.bin.lz` byte-identical). Detection:
+   a .bin is orphan if its ONLY INCBIN reference is in a `DATA_INCBIN_ASM_EXCLUDE` (non-linked)
+   asm file — the live symbol is provided by the carved `src/data/*.c`. PROVEN dead by full
+   `make clean && make compare` OK. (357 conservative pass + 485 refined-via-exclude-list pass.)
+2. **Graphics extraction (Lane A, 61 blobs).** gFontgrp/gTsa/gTSA tilemaps, gBanimmisc,
+   bg_*_map, gConstDataBanimekrdk palette, gEfxlvupfx_3 → typed `graphics/` assets via gbagfx.
+3. **TSA-family + 4bpp (Lane C, 17 blobs).** 16 `gUnkData_*` byte-identical to fe8u
+   `graphics/misc/*.tsa.bin` (copy + repoint with fe8u base type) + `data_08BB8E94` 4bpp body.
+4. **UnitDef typing (155 tables, −35.6 KB).** All redaCount=0 `UnitDef_*` (redas=0) decoded
+   from their 20-byte `struct UnitDefinition` entries into designated-initializer C (raw-hex
+   field values; byte-exact via make compare). fe8u types these (events_udefs.c) → reference-parity.
+   3 tables with non-zero redas correctly left as INCBIN (their pointer targets need separate carving).
+   A final tail pass extracts the ~31 small uncompressed-gfx/palette/round-trippable-LZ blobs +
+   `gEfxlvupfx_0` (struct AnimSpriteData).
+
+**Axis #6 irreducible floor (~115–120 KB), fe8u-parity-exempt, classified (read-only researchers):**
+- **data_08XXXXXX generic (~86 KB, 94% floor):** region-different compressed graphics (named by
+  JP address), sequential index/coord tables, struct-pointer arrays (the D99 ceiling), and
+  zero/padding/`*fill*` regions (fe8u also `*fill*`s these; JP addrs resolve to fe8u fill or no
+  symbol). Only ~5.6 % (≈4.8 KB, 31 tiny blobs) is cleanly extractable — handled by the tail pass.
+- **sound (~12.5 KB):** m4a song/voicegroup/MPlay data — binary like fe8u.
+- **banim (~9 KB):** compressed battle-anim — binary like fe8u.
+- Small TSA/struct-pointer residuals (gMenuSoundroom/gEndingDetails are already-typed TSA gfx; the
+  270 gFontgrp glyph-descriptor structs are the embedded-pointer ceiling).
+
+This is the D308 reference-parity floor: what fe8u itself keeps as binary INCBIN. Axes #1/#3/#5
+are at literal target (100%/100%/gate-0); #2 (agbcc codegen walls) / #4 (auto-asset-label
+convention floor) / #6 (binary floor) are at their documented reference-parity ceilings.
