@@ -1,7 +1,61 @@
 #include "global.h"
 
-/* Migrated from asm/dat_worldmap_gmapunit_p1652.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* De-pointered from data/residual/EventScrWM_MessedEventscr_52.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1652") u8 EventScrWM_MessedEventscr_52[] = INCBIN_U8("data/residual/EventScrWM_MessedEventscr_52.bin");
+__asm__(
+"\t.section .rodata.dat_worldmap_gmapunit_p1652, \"a\", %progbits\n"
+"\t.global EventScrWM_MessedEventscr_52\n"
+"EventScrWM_MessedEventscr_52:\n"
+"\t.4byte 0x00011020\n"
+"\t.4byte 0x0000C360\n"
+"\t.4byte 0x00010000\n"
+"\t.4byte 0x00000005\n"
+"\t.4byte 0x00008540\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00009D40\n"
+"\t.4byte 0x00000005\n"
+"\t.4byte 0x0000B240\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0000B320\n"
+"\t.4byte 0x00001020\n"
+"\t.4byte 0x0000A640\n"
+"\t.4byte 0x00050000\n"
+"\t.4byte 0x0000A140\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0000A980\n"
+"\t.4byte 0x00040000\n"
+"\t.4byte 0x00040005\n"
+"\t.4byte 0x0000FFFE\n"
+"\t.4byte 0x0000AC40\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0000A980\n"
+"\t.4byte 0x00040000\n"
+"\t.4byte 0x00030004\n"
+"\t.4byte 0x0000FFFE\n"
+"\t.4byte 0x00008780\n"
+"\t.4byte 0xFFFFFFFF\n"
+"\t.4byte 0x00780001\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0000AC40\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0000A980\n"
+"\t.4byte 0x00040000\n"
+"\t.4byte 0x00020003\n"
+"\t.4byte 0x0000FFFE\n"
+"\t.4byte 0x0000AC40\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0000A980\n"
+"\t.4byte 0x00040000\n"
+"\t.4byte 0x00010002\n"
+"\t.4byte 0x0000FFFE\n"
+"\t.4byte 0x0000AC40\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00008920\n"
+"\t.4byte 0x0000A640\n"
+"\t.4byte 0x00010000\n"
+"\t.4byte 0x0000C120\n"
+"\t.4byte 0x00000120\n"
+);

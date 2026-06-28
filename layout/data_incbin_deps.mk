@@ -17,23 +17,6 @@ src/data/Ap_WmHightLightMap6_ref/dat_Ap_WmHightLightMap6_ref.o: data/residual/Ap
 src/data/B12A60/dat_data_B12A60.o: graphics/misc_gfx2/Img_CommGameBgScreen.bin.lz graphics/misc_gfx2/Img_UnkData_2.bin.lz graphics/misc_gfx2/Pal_CommGameBgScreenInShop.gbapal graphics/misc_gfx2/Pal_UnkData_2.gbapal graphics/misc_gfx2/Tsa_UnkData_5.bin.lz
 src/data/Ch9Events_ref/dat_Ch9Events_ref.o: data/residual/Ch9Events.bin
 src/data/EventListScr_Ch15b_Location_ref/dat_EventListScr_Ch15b_Location_ref.o: data/residual/EventListScr_Ch15b_Location.bin
-src/data/EventScr_9EEA58_ref/dat_EventScr_9EEA58_ref.o: data/residual/EventScr_9EEA58.bin
-src/data/EventScr_Ch10B_1_ref/dat_EventScr_Ch10B_1_ref.o: data/residual/EventScr_Ch10B_1.bin
-src/data/EventScr_Ch10B_2_ref/dat_EventScr_Ch10B_2_ref.o: data/residual/EventScr_Ch10B_2.bin
-src/data/EventScr_Ch11B_1_ref/dat_EventScr_Ch11B_1_ref.o: data/residual/EventScr_Ch11B_1.bin
-src/data/EventScr_Ch1Tut_GuideTerrainHeal_ref/dat_EventScr_Ch1Tut_GuideTerrainHeal_ref.o: data/residual/EventScr_Ch1Tut_GuideTerrainHeal.bin
-src/data/EventScr_Ch1Tut_OnBeginning_ref/dat_EventScr_Ch1Tut_OnBeginning_ref.o: data/residual/EventScr_Ch1Tut_OnBeginning.bin
-src/data/EventScr_Ch2_10_ref/dat_EventScr_Ch2_10_ref.o: data/residual/EventScr_Ch2_10.bin
-src/data/EventScr_Ch2_8_ref/dat_EventScr_Ch2_8_ref.o: data/residual/EventScr_Ch2_8.bin
-src/data/EventScr_Ch3_5_ref/dat_EventScr_Ch3_5_ref.o: data/residual/EventScr_Ch3_5.bin
-src/data/EventScr_Ch4_10_ref/dat_EventScr_Ch4_10_ref.o: data/residual/EventScr_Ch4_10.bin
-src/data/EventScr_Ch5_10_ref/dat_EventScr_Ch5_10_ref.o: data/residual/EventScr_Ch5_10.bin
-src/data/EventScr_Ch5_11_ref/dat_EventScr_Ch5_11_ref.o: data/residual/EventScr_Ch5_11.bin
-src/data/EventScr_MapSupportConversation_ref/dat_EventScr_MapSupportConversation_ref.o: data/residual/EventScr_MapSupportConversation.bin
-src/data/EventScr_Prologue_OneEnemyLeft_ref/dat_EventScr_Prologue_OneEnemyLeft_ref.o: data/residual/EventScr_Prologue_OneEnemyLeft.bin
-src/data/EventScr_Ruin_54_ref/dat_EventScr_Ruin_54_ref.o: data/residual/EventScr_Ruin_54.bin
-src/data/EventScr_Ruin_56_ref/dat_EventScr_Ruin_56_ref.o: data/residual/EventScr_Ruin_56.bin
-src/data/EventScr_Ruin_58_ref/dat_EventScr_Ruin_58_ref.o: data/residual/EventScr_Ruin_58.bin
 src/data/Img_WmHightLightMap7_ref/dat_Img_WmHightLightMap7_ref.o: graphics/misc_gfx3/Img_WmHightLightMap7.bin.lz
 src/data/ObjectType9_ref/dat_ObjectType9_ref.o: data/residual/ObjectType9.bin
 src/data/PopupScr_GotGold_ref/dat_PopupScr_GotGold_ref.o: data/residual/PopupScr_GotGold.bin
@@ -1151,7 +1134,6 @@ src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1638.o: graphics/gmapunit/Img_
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1639.o: data/residual/gMenuStatus_0.bin graphics/gmapunit/Img_MenuStatus_0.bin.lz graphics/gmapunit/Img_SysBlackBox.bin.lz graphics/gmapunit/Pal_MenuStatus_0.gbapal
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1643.o: data/residual/sSprite_ClassDisplay_B.bin data/residual/sSprite_ClassDisplay_C.bin data/residual/sSprite_ClassDisplay_D.bin data/residual/sSprite_ClassDisplay_E.bin data/residual/sSprite_ClassDisplay_F.bin data/residual/sSprite_ClassDisplay_G.bin data/residual/sSprite_ClassDisplay_H.bin data/residual/sSprite_ClassDisplay_I.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1644.o: data/residual/sSprite_ClassDisplay_L.bin data/residual/sSprite_ClassDisplay_M.bin data/residual/sSprite_ClassDisplay_N.bin data/residual/sSprite_ClassDisplay_P.bin data/residual/sSprite_ClassDisplay_R.bin data/residual/sSprite_ClassDisplay_S.bin data/residual/sSprite_ClassDisplay_T.bin data/residual/sSprite_ClassDisplay_V.bin data/residual/sSprite_ClassDisplay_W.bin data/residual/sSprite_ClassDisplay_Z.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1652.o: data/residual/EventScrWM_MessedEventscr_52.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1655.o: data/residual/gCharacterEndingDefeatLut.bin data/residual/gSoloEndingBattleDispConf.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p173.o: data/residual/song027_agbfe3_bgm_btl_boss1_3.bin data/residual/song027_agbfe3_bgm_btl_boss1_3_B1.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p184.o: data/residual/song030_agbfe3_bgm_btl_boss5_1.bin data/residual/song030_agbfe3_bgm_btl_boss5_1_B1.bin
