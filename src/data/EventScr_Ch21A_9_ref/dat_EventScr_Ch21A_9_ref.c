@@ -1,42 +1,36 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch21A_9.bin by scripts/repoint_table.py.
- * Pointer words are emitted as relocatable symbol references so the ROM
- * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
- *
- * Defined under a private name + published as a type-less assembler
- * alias so a typed header declaration (struct Foo NAME[];) does not
- * conflict -- the data bytes (.word relocations) are byte-identical. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch21A_9.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 EventScr_UnitWarpOUT[];
 
-SECTION(".rodata.dat_EventScr_Ch21A_9_ref") static const u32 EventScr_Ch21A_9__shift[] = {
-    0x00001860,
-    0x00000000,
-    0x00000000,
-    0x0A061862,
-    0x00000004,
-    0x00000000,
-    0x001E0E20,
-    0x00022F42,
-    0x00030040,
-    0x00003020,
-    0x001E0E22,
-    0x00020540,
-    0x00000040,
-    0x00000A40,
-    (u32)&EventScr_UnitWarpOUT,
-    0x0040342F,
-    0x00001A20,
-    0x0B871B20,
-    0x00001D20,
-    0x00001B22,
-    0x00001A24,
-    0x000B0540,
-    0x00800018,
-    0x0B881B20,
-    0x00001D20,
-    0x00001B22,
-    0x00000120,
+SECTION(".rodata.dat_EventScr_Ch21A_9_ref") EventListScr EventScr_Ch21A_9[] = {
+    STARTFADE
+    EvtColorFadeSetup(6, 0xA, 4, 0, 0, 0)
+    STAL(0x1E)
+    MOVE_1STEP(2, 0x40, 3)
+    ENUN
+    STAL2(0x1E)
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(EventScr_UnitWarpOUT)
+    DISA(0x40)
+    TEXTSTART
+    TEXTSHOW(0xB87)
+    TEXTEND
+    REMA
+    SOLOTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0x800018)
+    TEXTSHOW(0xB88)
+    TEXTEND
+    REMA
+    ENDA
 };
-__asm__(".global EventScr_Ch21A_9\n\t.set EventScr_Ch21A_9, EventScr_Ch21A_9__shift\n");
+

@@ -1,40 +1,41 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch6_2.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch6_2.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch6_2_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch6_2\n"
-"EventScr_Ch6_2:\n"
-"\t.4byte 0x00002220\n"
-"\t.4byte 0x08072628\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x00111220\n"
-"\t.4byte 0x00013B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000022\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x09AA1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00093322\n"
-"\t.4byte 0x00000C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x09AB1B21\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00001A23\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0xFFFFFFFF\n"
-"\t.4byte 0x09B51B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00D40229\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 data_08A60354[];
+
+SECTION(".rodata.dat_EventScr_Ch6_2_ref") EventListScr EventScr_Ch6_2[] = {
+    CLEAN
+    CAMERA2(7, 8)
+    FADU(0x10)
+    MUSC(0x11)
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x22)
+    CALL(data_08A60354 + 0xCC)
+    TEXTSHOW(0x9AA)
+    TEXTEND
+    CHECK_ALIVE(9)
+    BEQ(0, 0xC, 0)
+    EvtTextShow2(0x9AB)
+    TEXTEND
+    LABEL(0)
+    REMA
+    TUTORIALTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0xFFFFFFFF)
+    TEXTSHOW(0x9B5)
+    TEXTEND
+    REMA
+    ENUT(0xD4)
+    ENDA
+};
+

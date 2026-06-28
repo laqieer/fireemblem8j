@@ -1,73 +1,68 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch14A_0.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch14A_0.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch14A_0_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch14A_0\n"
-"EventScr_Ch14A_0:\n"
-"\t.4byte 0x07092628\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte frontier_df3_unitdef_b_003_91066C + 0x28\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00533B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00261220\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x0A461B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00002F41\n"
-"\t.4byte 0x00CB0053\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00082F42\n"
-"\t.4byte 0x000200CB\n"
-"\t.4byte 0x00002F42\n"
-"\t.4byte 0x00010052\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00533B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x0A471B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00002F42\n"
-"\t.4byte 0x00000052\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00002F41\n"
-"\t.4byte 0x00CB0053\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00CB342F\n"
-"\t.4byte 0x00100E20\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x08090053\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00533B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x0A481B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00002F41\n"
-"\t.4byte 0x00400053\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x0040342F\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x0B110053\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x0053342F\n"
-"\t.4byte 0x06092628\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x05090052\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Ch14AEnemy_6\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 frontier_df3_unitdef_b_003_91066C[];
+extern const u8 UnitDef_Ch14AEnemy_6[];
+
+SECTION(".rodata.dat_EventScr_Ch14A_0_ref") EventListScr EventScr_Ch14A_0[] = {
+    CAMERA2(9, 7)
+    LOAD1(1, frontier_df3_unitdef_b_003_91066C + 0x28)
+    ENUN
+    CURSOR_CHAR(0x53)
+    STAL(0x3C)
+    CURE
+    MUSC(0x26)
+    TEXTSTART
+    TEXTSHOW(0xA46)
+    TEXTEND
+    REMA
+    MOVEONTO(0, 0x53, 0xCB)
+    ENUN
+    MOVE_1STEP(8, 0xCB, 2)
+    MOVE_1STEP(0, 0x52, 1)
+    ENUN
+    CURSOR_CHAR(0x53)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xA47)
+    TEXTEND
+    REMA
+    MOVE_1STEP(0, 0x52, 0)
+    ENUN
+    MOVEONTO(0, 0x53, 0xCB)
+    ENUN
+    DISA(0xCB)
+    STAL(0x10)
+    MOVE(0, 0x53, 9, 8)
+    ENUN
+    CURSOR_CHAR(0x53)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xA48)
+    TEXTEND
+    REMA
+    MOVEONTO(0, 0x53, 0x40)
+    ENUN
+    DISA(0x40)
+    MOVE(0, 0x53, 0x11, 0xB)
+    ENUN
+    DISA(0x53)
+    CAMERA2(9, 6)
+    MOVE(0, 0x52, 9, 5)
+    LOAD1(1, UnitDef_Ch14AEnemy_6)
+    ENUN
+    EVBIT_T(7)
+    ENDA
+};
+

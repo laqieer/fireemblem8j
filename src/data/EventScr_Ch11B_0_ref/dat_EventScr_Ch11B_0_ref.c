@@ -1,39 +1,42 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch11B_0.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch11B_0.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch11B_0_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch11B_0\n"
-"EventScr_Ch11B_0:\n"
-"\t.4byte 0x00111220\n"
-"\t.4byte 0x000F2621\n"
-"\t.4byte 0x000F3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000000D\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x0A931B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x00002721\n"
-"\t.4byte 0x00012720\n"
-"\t.4byte 0x00002220\n"
-"\t.4byte 0x09092628\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Ch11BEnemy_1\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Ch11BEnemy_2\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 data_08A60354[];
+extern const u8 UnitDef_Ch11BEnemy_1[];
+extern const u8 UnitDef_Ch11BEnemy_2[];
+
+SECTION(".rodata.dat_EventScr_Ch11B_0_ref") EventListScr EventScr_Ch11B_0[] = {
+    MUSC(0x11)
+    CAMERA_CAHR(0xF)
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0xD)
+    CALL(data_08A60354 + 0xCC)
+    TEXTSHOW(0xA93)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    TILEREVERT(0)
+    TILECHANGE(1)
+    CLEAN
+    CAMERA2(9, 9)
+    TEXTSTART
+    LOAD1(1, UnitDef_Ch11BEnemy_1)
+    ENUN
+    LOAD1(1, UnitDef_Ch11BEnemy_2)
+    ENUN
+    FADU(0x10)
+    EVBIT_T(7)
+    ENDA
+};
+

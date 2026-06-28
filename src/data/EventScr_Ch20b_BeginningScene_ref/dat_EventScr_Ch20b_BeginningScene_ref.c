@@ -1,29 +1,32 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch20b_BeginningScene.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch20b_BeginningScene.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch20b_BeginningScene_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch20b_BeginningScene\n"
-"EventScr_Ch20b_BeginningScene:\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_Ch21A_8\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0000006C\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_UnitWarpOUT\n"
-"\t.4byte 0x006C342F\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Ch21BEnemy_0\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_085B9BBC + 0x200\n"
-"\t.4byte 0x000B0229\n"
-"\t.4byte 0x000C0229\n"
-"\t.4byte 0x000D0229\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 EventScr_Ch21A_8[];
+extern const u8 EventScr_UnitWarpOUT[];
+extern const u8 UnitDef_Ch21BEnemy_0[];
+extern const u8 data_085B9BBC[];
+
+SECTION(".rodata.dat_EventScr_Ch20b_BeginningScene_ref") EventListScr EventScr_Ch20b_BeginningScene[] = {
+    CALL(EventScr_Ch21A_8)
+    SVAL(EVT_SLOT_2, 0x6C)
+    CALL(EventScr_UnitWarpOUT)
+    DISA(0x6C)
+    FADI(0x10)
+    LOAD1(1, UnitDef_Ch21BEnemy_0)
+    ENUN
+    CALL(data_085B9BBC + 0x200)
+    ENUT(0xB)
+    ENUT(0xC)
+    ENUT(0xD)
+    ENDA
+};
+

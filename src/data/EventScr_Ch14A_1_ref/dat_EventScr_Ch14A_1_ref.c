@@ -1,44 +1,35 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch14A_1.bin by scripts/repoint_table.py.
- * Pointer words are emitted as relocatable symbol references so the ROM
- * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
- *
- * Defined under a private name + published as a type-less assembler
- * alias so a typed header declaration (struct Foo NAME[];) does not
- * conflict -- the data bytes (.word relocations) are byte-identical. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch14A_1.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 data_08A60BE4[];
 
-SECTION(".rodata.dat_EventScr_Ch14A_1_ref") static const u32 EventScr_Ch14A_1__shift[] = {
-    0x00020540,
-    0x00000009,
-    0x00030540,
-    0x0000001C,
-    0x00040540,
-    0x000026FC,
-    0x000D0540,
-    0x00000000,
-    0x00010540,
-    0x00000A59,
-    0x00000721,
-    0x00010540,
-    0x00000A5A,
-    0x00000721,
-    0x00010540,
-    0x00000A5C,
-    0x00000721,
-    0x00010540,
-    0x00000A5D,
-    0x00000721,
-    0x00010540,
-    0x00000A5E,
-    0x00000721,
-    0x00010540,
-    0x00000A5B,
-    0x00000721,
-    0x00000A40,
-    (u32)&data_08A60BE4,
-    0x00000120,
+SECTION(".rodata.dat_EventScr_Ch14A_1_ref") EventListScr EventScr_Ch14A_1[] = {
+    SVAL(EVT_SLOT_2, 9)
+    SVAL(EVT_SLOT_3, 0x1C)
+    SVAL(EVT_SLOT_4, 0x26FC)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0xA59)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xA5A)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xA5C)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xA5D)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xA5E)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xA5B)
+    SENQUEUE1
+    CALL(data_08A60BE4)
+    ENDA
 };
-__asm__(".global EventScr_Ch14A_1\n\t.set EventScr_Ch14A_1, EventScr_Ch14A_1__shift\n");
+

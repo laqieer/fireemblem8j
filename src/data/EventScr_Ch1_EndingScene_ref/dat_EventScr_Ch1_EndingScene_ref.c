@@ -1,41 +1,43 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch1_EndingScene.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch1_EndingScene.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch1_EndingScene_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch1_EndingScene\n"
-"EventScr_Ch1_EndingScene:\n"
-"\t.4byte 0x00311220\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000039\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x00033322\n"
-"\t.4byte 0x00000C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x08F71B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00010920\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x08F81B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00010820\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x00BA0229\n"
-"\t.4byte 0x00CF0229\n"
-"\t.4byte 0x00CE0229\n"
-"\t.4byte 0x00B60229\n"
-"\t.4byte 0x00D70229\n"
-"\t.4byte 0x00D60229\n"
-"\t.4byte 0x00C70229\n"
-"\t.4byte 0x00C80229\n"
-"\t.4byte 0x00DD0229\n"
-"\t.4byte 0x00023421\n"
-"\t.4byte 0x00382A21\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 data_08A60354[];
+
+SECTION(".rodata.dat_EventScr_Ch1_EndingScene_ref") EventListScr EventScr_Ch1_EndingScene[] = {
+    MUSC(0x31)
+    SVAL(EVT_SLOT_2, 0x39)
+    CALL(data_08A60354 + 0xCC)
+    CHECK_ALIVE(3)
+    BEQ(0, 0xC, 0)
+    TEXTSHOW(0x8F7)
+    TEXTEND
+    GOTO(1)
+    LABEL(0)
+    TEXTSHOW(0x8F8)
+    TEXTEND
+    LABEL(1)
+    REMA
+    FADI(0x10)
+    ENUT(0xBA)
+    ENUT(0xCF)
+    ENUT(0xCE)
+    ENUT(0xB6)
+    ENUT(0xD7)
+    ENUT(0xD6)
+    ENUT(0xC7)
+    ENUT(0xC8)
+    ENUT(0xDD)
+    REVEAL(2)
+    MNCH(0x38)
+    ENDA
+};
+

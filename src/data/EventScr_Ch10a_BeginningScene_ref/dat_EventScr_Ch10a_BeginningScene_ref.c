@@ -1,141 +1,122 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch10a_BeginningScene.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch10a_BeginningScene.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch10a_BeginningScene_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch10a_BeginningScene\n"
-"EventScr_Ch10a_BeginningScene:\n"
-"\t.4byte 0x002E1220\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x0002000F\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_9EEA58\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte frontier_df4_banim_b_077_90DB94 + 0x34\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x00102F42\n"
-"\t.4byte 0x00030069\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x006B3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x09EC1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x0000342A\n"
-"\t.4byte 0x0000342C\n"
-"\t.4byte 0x0000342B\n"
-"\t.4byte 0x0B092628\n"
-"\t.4byte 0x00022D20\n"
-"\t.4byte 0x00002B22\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte frontier_df4_banim_b_077_90DB94 + 0xD4\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x000D0007\n"
-"\t.4byte 0xFFFF2720\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x00002720\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte frontier_df4_banim_b_077_90DB94 + 0xD4\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00002721\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte frontier_df4_banim_b_077_90DB94 + 0x110\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00693B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000011\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x000009ED\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xF4\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte frontier_df4_banim_b_077_90DB94 + 0x138\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00001520\n"
-"\t.4byte 0x00433B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000011\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x09EE1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00101721\n"
-"\t.4byte 0x0000342A\n"
-"\t.4byte 0x0000342C\n"
-"\t.4byte 0x0000342B\n"
-"\t.4byte 0x00002D20\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00100007\n"
-"\t.4byte 0x000B2520\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Ch10ANPC\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Ch10AEnemy_0\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte UnitDef_Ch10AEnemy_1\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0x2C\n"
-"\t.4byte 0x00101720\n"
-"\t.4byte 0x000B3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00261220\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000039\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x000009EF\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xF4\n"
-"\t.4byte 0x00002620\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte data_0890D0CC\n"
-"\t.4byte 0x00200E22\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00013428\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00023428\n"
-"\t.4byte 0x00002C42\n"
-"\t.4byte UnitDef_Ch10AAlly_1\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0xFFFFFFFF\n"
-"\t.4byte 0x00013428\n"
-"\t.4byte 0x00010540\n"
-"\t.4byte 0xFFFFFFFF\n"
-"\t.4byte 0x00023428\n"
-"\t.4byte 0x00013B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000025\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x09F01B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_085B9BBC + 0x200\n"
-"\t.4byte 0x000D0229\n"
-"\t.4byte 0x000E0229\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 EventScr_9EEA58[];
+extern const u8 frontier_df4_banim_b_077_90DB94[];
+extern const u8 data_08A60354[];
+extern const u8 UnitDef_Ch10ANPC[];
+extern const u8 UnitDef_Ch10AEnemy_0[];
+extern const u8 UnitDef_Ch10AEnemy_1[];
+extern const u8 data_0890D0CC[];
+extern const u8 UnitDef_Ch10AAlly_1[];
+extern const u8 data_085B9BBC[];
+
+SECTION(".rodata.dat_EventScr_Ch10a_BeginningScene_ref") EventListScr EventScr_Ch10a_BeginningScene[] = {
+    MUSC(0x2E)
+    SVAL(EVT_SLOT_2, 0x2000F)
+    CALL(EventScr_9EEA58)
+    LOAD1(1, frontier_df4_banim_b_077_90DB94 + 0x34)
+    ENUN
+    FADU(0x10)
+    MOVE_1STEP(0x10, 0x69, 3)
+    ENUN
+    CURSOR_CHAR(0x6B)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0x9EC)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    CAMERA2(9, 0xB)
+    UNIT_COLORS(2)
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, frontier_df4_banim_b_077_90DB94 + 0xD4)
+    ENUN
+    SVAL(EVT_SLOT_B, 0xD0007)
+    TILECHANGE(0xFFFF)
+    FADU(0x10)
+    TILECHANGE(0)
+    LOAD2(1, frontier_df4_banim_b_077_90DB94 + 0xD4)
+    ENUN
+    TILEREVERT(0)
+    LOAD2(1, frontier_df4_banim_b_077_90DB94 + 0x110)
+    ENUN
+    CURSOR_CHAR(0x69)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x11)
+    SVAL(EVT_SLOT_3, 0x9ED)
+    CALL(data_08A60354 + 0xF4)
+    LOAD2(1, frontier_df4_banim_b_077_90DB94 + 0x138)
+    ENUN
+    MUSI
+    CURSOR_CHAR(0x43)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x11)
+    CALL(data_08A60354 + 0xCC)
+    TEXTSHOW(0x9EE)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    UNIT_COLORS(0)
+    SVAL(EVT_SLOT_B, 0x100007)
+    LOMA(0xB)
+    LOAD1(1, UnitDef_Ch10ANPC)
+    ENUN
+    LOAD1(1, UnitDef_Ch10AEnemy_0)
+    ENUN
+    SVAL(EVT_SLOT_2, UnitDef_Ch10AEnemy_1)
+    SVAL(EVT_SLOT_3, 1)
+    CALL(data_08A60354 + 0x2C)
+    FADU(0x10)
+    CURSOR_CHAR(0xB)
+    STAL(0x3C)
+    CURE
+    MUSC(0x26)
+    SVAL(EVT_SLOT_2, 0x39)
+    SVAL(EVT_SLOT_3, 0x9EF)
+    CALL(data_08A60354 + 0xF4)
+    CAMERA(0, 0)
+    LOAD2(1, data_0890D0CC)
+    STAL2(0x20)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(1)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(2)
+    LOAD3(0, UnitDef_Ch10AAlly_1)
+    ENUN
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(1)
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(2)
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x25)
+    CALL(data_08A60354 + 0xCC)
+    TEXTSHOW(0x9F0)
+    TEXTEND
+    REMA
+    CALL(data_085B9BBC + 0x200)
+    ENUT(0xD)
+    ENUT(0xE)
+    ENDA
+};
+

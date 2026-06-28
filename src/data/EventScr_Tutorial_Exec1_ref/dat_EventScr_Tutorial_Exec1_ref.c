@@ -1,49 +1,47 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Tutorial_Exec1.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Tutorial_Exec1.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Tutorial_Exec1_ref, \"a\", %progbits\n"
-"\t.global EventScr_Tutorial_Exec1\n"
-"EventScr_Tutorial_Exec1:\n"
-"\t.4byte 0x00003C20\n"
-"\t.4byte 0x000B0722\n"
-"\t.4byte 0x00000C41\n"
-"\t.4byte 0x000B000C\n"
-"\t.4byte 0x00000D40\n"
-"\t.4byte PlayPhaseForcePressAButtonInRangeDisp + 0x1\n"
-"\t.4byte 0x000C0722\n"
-"\t.4byte 0x000C0722\n"
-"\t.4byte 0x00020722\n"
-"\t.4byte 0x00040B41\n"
-"\t.4byte 0xFFFFFFFF\n"
-"\t.4byte 0x000C0540\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00020920\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0xFFFF3C21\n"
-"\t.4byte 0xFFFF2620\n"
-"\t.4byte 0xFFFF3B24\n"
-"\t.4byte 0x00080E23\n"
-"\t.4byte 0x00001A23\n"
-"\t.4byte 0x00020722\n"
-"\t.4byte 0x000B0722\n"
-"\t.4byte 0x00010C40\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte 0xFFFF1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00010820\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x000C0722\n"
-"\t.4byte 0x00020722\n"
-"\t.4byte 0x00030B41\n"
-"\t.4byte 0xFFFFFFFF\n"
-"\t.4byte 0x000C0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00020820\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 PlayPhaseForcePressAButtonInRangeDisp[];
+
+SECTION(".rodata.dat_EventScr_Tutorial_Exec1_ref") EventListScr EventScr_Tutorial_Exec1[] = {
+    CHECK_CURSOR
+    SDEQUEUE(0xB)
+    BNE(0, 0xC, 0xB)
+    ASMC(PlayPhaseForcePressAButtonInRangeDisp + 0x1)
+    SDEQUEUE(0xC)
+    SDEQUEUE(0xC)
+    SDEQUEUE(2)
+    EvtEnqueueConditionalTutCall(0xFFFFFFFF, 4)
+    SVAL(EVT_SLOT_C, 1)
+    GOTO(2)
+    LABEL(0)
+    SET_CURSOR(0xFF, 0xFF)
+    CAMERA(0xFF, 0xFF)
+    CURSOR_FLASHING(0xFF, 0xFF)
+    STAL3(8)
+    TUTORIALTEXTBOXSTART
+    SDEQUEUE(2)
+    SDEQUEUE(0xB)
+    BEQ(1, 2, 0)
+    TEXTSHOW(0xFFFF)
+    TEXTEND
+    REMA
+    LABEL(1)
+    CURE
+    SDEQUEUE(0xC)
+    SDEQUEUE(2)
+    EvtEnqueueConditionalTutCall(0xFFFFFFFF, 3)
+    SVAL(EVT_SLOT_C, 0)
+    LABEL(2)
+    ENDA
+};
+

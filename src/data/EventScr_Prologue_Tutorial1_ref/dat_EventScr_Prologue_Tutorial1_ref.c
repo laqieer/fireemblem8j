@@ -1,41 +1,35 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Prologue_Tutorial1.bin by scripts/repoint_table.py.
- * Pointer words are emitted as relocatable symbol references so the ROM
- * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
- *
- * Defined under a private name + published as a type-less assembler
- * alias so a typed header declaration (struct Foo NAME[];) does not
- * conflict -- the data bytes (.word relocations) are byte-identical. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Prologue_Tutorial1.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 EventScr_Prologue_Tutorial1[];
-extern const u8 EventScr_Tutorial_Exec1[];
 extern const u8 data_08A614C0[];
+extern const u8 EventScr_Tutorial_Exec1[];
 
-SECTION(".rodata.dat_EventScr_Prologue_Tutorial1_ref") static const u32 EventScr_Prologue_Tutorial1__shift[] = {
-    0x00070228,
-    0x00001120,
-    0x000D0540,
-    0x00000000,
-    0x00010540,
-    0x00050004,
-    0x00000721,
-    0x00010540,
-    0x000008DC,
-    0x00000721,
-    0x00010540,
-    0x00080058,
-    0x00000721,
-    0x00010540,
-    (u32)&data_08A614C0,
-    0x00000721,
-    0x00010540,
-    (u32)&EventScr_Prologue_Tutorial1,
-    0x00000721,
-    0x00000A40,
-    (u32)&EventScr_Tutorial_Exec1,
-    0xFFFB3D20,
-    0x010A1120,
-    0x00000120,
+SECTION(".rodata.dat_EventScr_Prologue_Tutorial1_ref") EventListScr EventScr_Prologue_Tutorial1[] = {
+    EVBIT_T(7)
+    IGNORE_KEYS(0)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x50004)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x8DC)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x80058)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, data_08A614C0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, EventScr_Prologue_Tutorial1)
+    SENQUEUE1
+    CALL(EventScr_Tutorial_Exec1)
+    DISABLEOPTIONS(0xFFFB)
+    IGNORE_KEYS(0x10A)
+    ENDA
 };
-__asm__(".global EventScr_Prologue_Tutorial1\n\t.set EventScr_Prologue_Tutorial1, EventScr_Prologue_Tutorial1__shift\n");
+

@@ -1,30 +1,34 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch5_5.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch5_5.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch5_5_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch5_5\n"
-"EventScr_Ch5_5:\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte EventScr_Ch5_10\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_CallOnTutorialMode\n"
-"\t.4byte 0x00131220\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte frontier_df4_banim_b_074_909DE8\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0x58\n"
-"\t.4byte 0x100E3B20\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x09851B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 EventScr_Ch5_10[];
+extern const u8 EventScr_CallOnTutorialMode[];
+extern const u8 frontier_df4_banim_b_074_909DE8[];
+extern const u8 data_08A60354[];
+
+SECTION(".rodata.dat_EventScr_Ch5_5_ref") EventListScr EventScr_Ch5_5[] = {
+    SVAL(EVT_SLOT_2, EventScr_Ch5_10)
+    CALL(EventScr_CallOnTutorialMode)
+    MUSC(0x13)
+    SVAL(EVT_SLOT_2, frontier_df4_banim_b_074_909DE8)
+    CALL(data_08A60354 + 0x58)
+    CURSOR_AT(0xE, 0x10)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0x985)
+    TEXTEND
+    REMA
+    EVBIT_T(7)
+    ENDA
+};
+

@@ -1,59 +1,52 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch6_0.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch6_0.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch6_0_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch6_0\n"
-"EventScr_Ch6_0:\n"
-"\t.4byte 0x00F93322\n"
-"\t.4byte 0x00630C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00F93640\n"
-"\t.4byte 0x06040918\n"
-"\t.4byte 0x00040C40\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x000000B0\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte EventScr_UnTriggerIfNotUnit\n"
-"\t.4byte 0x00181220\n"
-"\t.4byte 0x00F92621\n"
-"\t.4byte 0x00F93B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020420\n"
-"\t.4byte 0x00070540\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00010C40\n"
-"\t.4byte 0x0007000C\n"
-"\t.4byte 0x00070540\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte 0x00020C40\n"
-"\t.4byte 0x0007000C\n"
-"\t.4byte 0x00000820\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x000009AC\n"
-"\t.4byte 0x00030920\n"
-"\t.4byte 0x00010820\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x000009AD\n"
-"\t.4byte 0x00030920\n"
-"\t.4byte 0x00020820\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x000009AE\n"
-"\t.4byte 0x00030820\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0xFFFF1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00040820\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte UnitDef_Ch14BAlly_7 + 0x1C\n"
-"\t.4byte 0x00630820\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 EventScr_UnTriggerIfNotUnit[];
+extern const u8 UnitDef_Ch14BAlly_7[];
+
+SECTION(".rodata.dat_EventScr_Ch6_0_ref") EventListScr EventScr_Ch6_0[] = {
+    CHECK_ALIVE(0xF9)
+    BEQ(0x63, 0xC, 0)
+    CHECK_INAREA(0xF9, 0x18, 9, 4, 6)
+    BEQ(4, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0xB0)
+    CALL(EventScr_UnTriggerIfNotUnit)
+    MUSC(0x18)
+    CAMERA_CAHR(0xF9)
+    CURSOR_CHAR(0xF9)
+    STAL(0x3C)
+    CURE
+    RANDOMNUMBER(2)
+    SVAL(EVT_SLOT_7, 1)
+    BEQ(1, 0xC, 7)
+    SVAL(EVT_SLOT_7, 2)
+    BEQ(2, 0xC, 7)
+    LABEL(0)
+    SVAL(EVT_SLOT_2, 0x9AC)
+    GOTO(3)
+    LABEL(1)
+    SVAL(EVT_SLOT_2, 0x9AD)
+    GOTO(3)
+    LABEL(2)
+    SVAL(EVT_SLOT_2, 0x9AE)
+    LABEL(3)
+    TEXTSTART
+    TEXTSHOW(0xFFFF)
+    TEXTEND
+    REMA
+    LABEL(4)
+    CALL(UnitDef_Ch14BAlly_7 + 0x1C)
+    LABEL(0x63)
+    EVBIT_T(7)
+    ENDA
+};
+

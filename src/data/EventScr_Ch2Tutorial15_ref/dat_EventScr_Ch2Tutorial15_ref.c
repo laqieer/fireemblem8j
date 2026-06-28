@@ -1,40 +1,34 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch2Tutorial15.bin by scripts/repoint_table.py.
- * Pointer words are emitted as relocatable symbol references so the ROM
- * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
- *
- * Defined under a private name + published as a type-less assembler
- * alias so a typed header declaration (struct Foo NAME[];) does not
- * conflict -- the data bytes (.word relocations) are byte-identical. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch2Tutorial15.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 EventScr_Ch2Tutorial15[];
 extern const u8 EventScr_Ch2Tutorial16[];
 extern const u8 EventScr_Tutorial_Exec1[];
 
-SECTION(".rodata.dat_EventScr_Ch2Tutorial15_ref") static const u32 EventScr_Ch2Tutorial15__shift[] = {
-    0x00070228,
-    0x00001120,
-    0x000D0540,
-    0x00000000,
-    0x00010540,
-    0x00040009,
-    0x00000721,
-    0x00010540,
-    0x00000000,
-    0x00000721,
-    0x00010540,
-    0x00000000,
-    0x00000721,
-    0x00010540,
-    (u32)&EventScr_Ch2Tutorial16,
-    0x00000721,
-    0x00010540,
-    (u32)&EventScr_Ch2Tutorial15,
-    0x00000721,
-    0x00000A40,
-    (u32)&EventScr_Tutorial_Exec1,
-    0x010A1120,
-    0x00000120,
+SECTION(".rodata.dat_EventScr_Ch2Tutorial15_ref") EventListScr EventScr_Ch2Tutorial15[] = {
+    EVBIT_T(7)
+    IGNORE_KEYS(0)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x40009)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, EventScr_Ch2Tutorial16)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, EventScr_Ch2Tutorial15)
+    SENQUEUE1
+    CALL(EventScr_Tutorial_Exec1)
+    IGNORE_KEYS(0x10A)
+    ENDA
 };
-__asm__(".global EventScr_Ch2Tutorial15\n\t.set EventScr_Ch2Tutorial15, EventScr_Ch2Tutorial15__shift\n");
+

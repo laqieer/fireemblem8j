@@ -1,135 +1,111 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ch8_BeginningScene.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ch8_BeginningScene.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ch8_BeginningScene_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ch8_BeginningScene\n"
-"EventScr_Ch8_BeginningScene:\n"
-"\t.4byte 0x00251220\n"
-"\t.4byte 0x00012C41\n"
-"\t.4byte UnitDef_Ch8Ally_1\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00423B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000015\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x09C91B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x7FFF1324\n"
-"\t.4byte 0x00001C20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xA8\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Ch8Enemy_3\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x004D3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00261220\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x09CA1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x001E0E20\n"
-"\t.4byte 0x00423424\n"
-"\t.4byte 0x00423B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x13140042\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00100014\n"
-"\t.4byte 0x00002F42\n"
-"\t.4byte 0x0001FFFE\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x0F140042\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00100015\n"
-"\t.4byte 0x00002F42\n"
-"\t.4byte 0x0000FFFE\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x0A130042\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x0042342F\n"
-"\t.4byte 0x004D3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000015\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x000009CB\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xF4\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00100013\n"
-"\t.4byte 0x00002F42\n"
-"\t.4byte 0x0000FFFE\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x0E13004D\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00100012\n"
-"\t.4byte 0x00002F42\n"
-"\t.4byte 0x0001FFFE\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x0E13004D\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x004D3B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00001A20\n"
-"\t.4byte 0x09CC1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00150014\n"
-"\t.4byte 0x00AB1620\n"
-"\t.4byte 0xFFFF2720\n"
-"\t.4byte 0x00002F40\n"
-"\t.4byte 0x0A13004D\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00100013\n"
-"\t.4byte 0x00102F40\n"
-"\t.4byte 0x0B13FFFE\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00100014\n"
-"\t.4byte 0x00102F40\n"
-"\t.4byte 0x0B14FFFE\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x0000342C\n"
-"\t.4byte 0x00012C40\n"
-"\t.4byte UnitDef_Ch8Enemy_0\n"
-"\t.4byte 0x00003020\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte UnitDef_Ch8Enemy_4\n"
-"\t.4byte 0x00030540\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0x2C\n"
-"\t.4byte 0x00013B21\n"
-"\t.4byte 0x003C0E20\n"
-"\t.4byte 0x00003B22\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000015\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_08A60354 + 0xCC\n"
-"\t.4byte 0x09CD1B20\n"
-"\t.4byte 0x00001D20\n"
-"\t.4byte 0x00001B22\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte data_085B9BBC + 0x200\n"
-"\t.4byte 0x000C0229\n"
-"\t.4byte 0x00000120\n"
-);
+extern const u8 UnitDef_Ch8Ally_1[];
+extern const u8 data_08A60354[];
+extern const u8 UnitDef_Ch8Enemy_3[];
+extern const u8 UnitDef_Ch8Enemy_0[];
+extern const u8 UnitDef_Ch8Enemy_4[];
+extern const u8 data_085B9BBC[];
+
+SECTION(".rodata.dat_EventScr_Ch8_BeginningScene_ref") EventListScr EventScr_Ch8_BeginningScene[] = {
+    MUSC(0x25)
+    LOAD2(1, UnitDef_Ch8Ally_1)
+    ENUN
+    CURSOR_CHAR(0x42)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x15)
+    CALL(data_08A60354 + 0xCC)
+    TEXTSHOW(0x9C9)
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 4)
+    TEXTCONT
+    TEXTEND
+    CALL(data_08A60354 + 0xA8)
+    LOAD1(1, UnitDef_Ch8Enemy_3)
+    ENUN
+    CURSOR_CHAR(0x4D)
+    STAL(0x3C)
+    CURE
+    MUSC(0x26)
+    TEXTSTART
+    TEXTSHOW(0x9CA)
+    TEXTEND
+    REMA
+    STAL(0x1E)
+    CUSE(0x42)
+    CURSOR_CHAR(0x42)
+    STAL(0x3C)
+    CURE
+    MOVE(0, 0x42, 0x14, 0x13)
+    SVAL(EVT_SLOT_B, 0x100014)
+    MOVE_1STEP(0, 0xFFFE, 1)
+    ENUN
+    MOVE(0, 0x42, 0x14, 0xF)
+    ENUN
+    SVAL(EVT_SLOT_B, 0x100015)
+    MOVE_1STEP(0, 0xFFFE, 0)
+    MOVE(0, 0x42, 0x13, 0xA)
+    ENUN
+    DISA(0x42)
+    CURSOR_CHAR(0x4D)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x15)
+    SVAL(EVT_SLOT_3, 0x9CB)
+    CALL(data_08A60354 + 0xF4)
+    SVAL(EVT_SLOT_B, 0x100013)
+    MOVE_1STEP(0, 0xFFFE, 0)
+    ENUN
+    MOVE(0, 0x4D, 0x13, 0xE)
+    ENUN
+    SVAL(EVT_SLOT_B, 0x100012)
+    MOVE_1STEP(0, 0xFFFE, 1)
+    ENUN
+    MOVE(0, 0x4D, 0x13, 0xE)
+    ENUN
+    CURSOR_CHAR(0x4D)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0x9CC)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_B, 0x150014)
+    SOUN(0xAB)
+    TILECHANGE(0xFFFF)
+    MOVE(0, 0x4D, 0x13, 0xA)
+    SVAL(EVT_SLOT_B, 0x100013)
+    MOVE(0x10, 0xFFFE, 0x13, 0xB)
+    SVAL(EVT_SLOT_B, 0x100014)
+    MOVE(0x10, 0xFFFE, 0x14, 0xB)
+    ENUN
+    CLEE
+    LOAD1(1, UnitDef_Ch8Enemy_0)
+    ENUN
+    SVAL(EVT_SLOT_2, UnitDef_Ch8Enemy_4)
+    SVAL(EVT_SLOT_3, 1)
+    CALL(data_08A60354 + 0x2C)
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x15)
+    CALL(data_08A60354 + 0xCC)
+    TEXTSHOW(0x9CD)
+    TEXTEND
+    REMA
+    CALL(data_085B9BBC + 0x200)
+    ENUT(0xC)
+    ENDA
+};
+

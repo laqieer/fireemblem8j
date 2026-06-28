@@ -1,413 +1,316 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* De-pointered from data/residual/EventScr_Ruin_54.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Converted from ../../../../../../tmp/orig_EventScr_Ruin_54.c by scripts/eventscr_disasm.py (D309).
+ * Editable EAstdlib macro form; expands byte-identical to baserom
+ * (gated by `make compare`).  EVENT_WORD/EVENT_WORD_SYM = raw escape
+ * for command/operand shapes without a friendly macro yet. */
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-__asm__(
-"\t.section .rodata.dat_EventScr_Ruin_54_ref, \"a\", %progbits\n"
-"\t.global EventScr_Ruin_54\n"
-"EventScr_Ruin_54:\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80820C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00002520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00E83A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80820820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80830C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00012520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00E93A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80830820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80840C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00022520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00EA3A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80840820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80850C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00032520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00EB3A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80850820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80860C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00042520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00EC3A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80860820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80870C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00062520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00EE3A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80870820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80880C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00072520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00EF3A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80880820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80890C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00082520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00F03A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80890820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x808A0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00092520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00F13A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x808A0820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x808B0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x000A2520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00F23A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x808B0820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x808C0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x000B2520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00F33A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x808C0820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x808D0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x000C2520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00F43A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x808D0820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x808E0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x000D2520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00F53A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x808E0820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x808F0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x000E2520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00F63A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x808F0820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80900C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x000F2520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00F73A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80900820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80910C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00102520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00F83A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80910820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80920C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00112520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00F93A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80920820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80930C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00122520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00FA3A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80930820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80940C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00132520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00FB3A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80940820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80950C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00142520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00FC3A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80950820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80960C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00152520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00FD3A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80960820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80970C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00172520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x00FF3A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80970820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80980C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00182520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x01003A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80980820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80990C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00192520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x01013A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80990820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x809A0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x001A2520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x01023A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x809A0820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x809B0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x001B2520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x01033A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x809B0820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x809C0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x001C2520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x01043A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x809C0820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x809D0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x001D2520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x01053A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x809D0820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x809E0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x001E2520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x01063A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x809E0820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x809F0C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x001F2520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x01073A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x809F0820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80A00C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00202520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x01083A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80A00820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80A10C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00212520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x01093A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80A10820\n"
-"\t.4byte 0x00020320\n"
-"\t.4byte 0x80A20C41\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00222520\n"
-"\t.4byte 0x00401720\n"
-"\t.4byte 0x010A3A41\n"
-"\t.4byte 0x00080008\n"
-"\t.4byte 0xFFFF0E21\n"
-"\t.4byte 0x00401721\n"
-"\t.4byte 0x80A20820\n"
-"\t.4byte 0x000B0540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x003C2520\n"
-"\t.4byte 0x00000120\n"
-);
+SECTION(".rodata.dat_EventScr_Ruin_54_ref") EventListScr EventScr_Ruin_54[] = {
+    FADI(0x40)
+    CHECK_EVBIT(2)
+    BNE(0x8082, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0)
+    FADU(0x40)
+    BROWNBOXTEXT(0xE8, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8082)
+    CHECK_EVBIT(2)
+    BNE(0x8083, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(1)
+    FADU(0x40)
+    BROWNBOXTEXT(0xE9, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8083)
+    CHECK_EVBIT(2)
+    BNE(0x8084, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(2)
+    FADU(0x40)
+    BROWNBOXTEXT(0xEA, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8084)
+    CHECK_EVBIT(2)
+    BNE(0x8085, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(3)
+    FADU(0x40)
+    BROWNBOXTEXT(0xEB, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8085)
+    CHECK_EVBIT(2)
+    BNE(0x8086, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(4)
+    FADU(0x40)
+    BROWNBOXTEXT(0xEC, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8086)
+    CHECK_EVBIT(2)
+    BNE(0x8087, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(6)
+    FADU(0x40)
+    BROWNBOXTEXT(0xEE, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8087)
+    CHECK_EVBIT(2)
+    BNE(0x8088, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(7)
+    FADU(0x40)
+    BROWNBOXTEXT(0xEF, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8088)
+    CHECK_EVBIT(2)
+    BNE(0x8089, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(8)
+    FADU(0x40)
+    BROWNBOXTEXT(0xF0, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8089)
+    CHECK_EVBIT(2)
+    BNE(0x808A, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(9)
+    FADU(0x40)
+    BROWNBOXTEXT(0xF1, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x808A)
+    CHECK_EVBIT(2)
+    BNE(0x808B, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0xA)
+    FADU(0x40)
+    BROWNBOXTEXT(0xF2, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x808B)
+    CHECK_EVBIT(2)
+    BNE(0x808C, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0xB)
+    FADU(0x40)
+    BROWNBOXTEXT(0xF3, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x808C)
+    CHECK_EVBIT(2)
+    BNE(0x808D, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0xC)
+    FADU(0x40)
+    BROWNBOXTEXT(0xF4, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x808D)
+    CHECK_EVBIT(2)
+    BNE(0x808E, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0xD)
+    FADU(0x40)
+    BROWNBOXTEXT(0xF5, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x808E)
+    CHECK_EVBIT(2)
+    BNE(0x808F, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0xE)
+    FADU(0x40)
+    BROWNBOXTEXT(0xF6, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x808F)
+    CHECK_EVBIT(2)
+    BNE(0x8090, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0xF)
+    FADU(0x40)
+    BROWNBOXTEXT(0xF7, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8090)
+    CHECK_EVBIT(2)
+    BNE(0x8091, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x10)
+    FADU(0x40)
+    BROWNBOXTEXT(0xF8, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8091)
+    CHECK_EVBIT(2)
+    BNE(0x8092, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x11)
+    FADU(0x40)
+    BROWNBOXTEXT(0xF9, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8092)
+    CHECK_EVBIT(2)
+    BNE(0x8093, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x12)
+    FADU(0x40)
+    BROWNBOXTEXT(0xFA, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8093)
+    CHECK_EVBIT(2)
+    BNE(0x8094, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x13)
+    FADU(0x40)
+    BROWNBOXTEXT(0xFB, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8094)
+    CHECK_EVBIT(2)
+    BNE(0x8095, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x14)
+    FADU(0x40)
+    BROWNBOXTEXT(0xFC, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8095)
+    CHECK_EVBIT(2)
+    BNE(0x8096, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x15)
+    FADU(0x40)
+    BROWNBOXTEXT(0xFD, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8096)
+    CHECK_EVBIT(2)
+    BNE(0x8097, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x17)
+    FADU(0x40)
+    BROWNBOXTEXT(0xFF, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8097)
+    CHECK_EVBIT(2)
+    BNE(0x8098, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x18)
+    FADU(0x40)
+    BROWNBOXTEXT(0x100, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8098)
+    CHECK_EVBIT(2)
+    BNE(0x8099, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x19)
+    FADU(0x40)
+    BROWNBOXTEXT(0x101, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x8099)
+    CHECK_EVBIT(2)
+    BNE(0x809A, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x1A)
+    FADU(0x40)
+    BROWNBOXTEXT(0x102, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x809A)
+    CHECK_EVBIT(2)
+    BNE(0x809B, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x1B)
+    FADU(0x40)
+    BROWNBOXTEXT(0x103, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x809B)
+    CHECK_EVBIT(2)
+    BNE(0x809C, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x1C)
+    FADU(0x40)
+    BROWNBOXTEXT(0x104, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x809C)
+    CHECK_EVBIT(2)
+    BNE(0x809D, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x1D)
+    FADU(0x40)
+    BROWNBOXTEXT(0x105, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x809D)
+    CHECK_EVBIT(2)
+    BNE(0x809E, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x1E)
+    FADU(0x40)
+    BROWNBOXTEXT(0x106, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x809E)
+    CHECK_EVBIT(2)
+    BNE(0x809F, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x1F)
+    FADU(0x40)
+    BROWNBOXTEXT(0x107, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x809F)
+    CHECK_EVBIT(2)
+    BNE(0x80A0, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x20)
+    FADU(0x40)
+    BROWNBOXTEXT(0x108, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x80A0)
+    CHECK_EVBIT(2)
+    BNE(0x80A1, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x21)
+    FADU(0x40)
+    BROWNBOXTEXT(0x109, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x80A1)
+    CHECK_EVBIT(2)
+    BNE(0x80A2, 0xC, 0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x22)
+    FADU(0x40)
+    BROWNBOXTEXT(0x10A, 8, 8)
+    STAL1(0xFFFF)
+    FADI(0x40)
+    LABEL(0x80A2)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x3C)
+    ENDA
+};
+
