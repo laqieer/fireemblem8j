@@ -139,3 +139,28 @@ asm/dat_data_btl_bg.o: \
   graphics/btl_bg/btl_bg_49.gbapal.lz \
   graphics/btl_bg/btl_bg_50.gbapal.lz
 
+
+# --- D309: per-asset FETSATOOL overrides (from ../fireemblem8u/graphics_file_rules.mk) ---
+# These 7 btl_bg need extra flags to round-trip the JP ROM's .feimg3/.fetsa3 bytes
+# byte-for-byte from the editable .png. The remaining converted btl_bg use the
+# generic %.feimg3.bin %.fetsa3.bin: %.png rule in the top-level Makefile.
+graphics/btl_bg/btl_bg_1.feimg3.bin graphics/btl_bg/btl_bg_1.fetsa3.bin: graphics/btl_bg/btl_bg_1.png
+	$(FETSATOOL) $< graphics/btl_bg/btl_bg_1.feimg3.bin graphics/btl_bg/btl_bg_1.fetsa3.bin --flip_y_indexes=375,376,377,378,385,386,387,388,389
+
+graphics/btl_bg/btl_bg_10.feimg3.bin graphics/btl_bg/btl_bg_10.fetsa3.bin: graphics/btl_bg/btl_bg_10.png
+	$(FETSATOOL) $< graphics/btl_bg/btl_bg_10.feimg3.bin graphics/btl_bg/btl_bg_10.fetsa3.bin --flip_y_indexes=375,376,377,378,385,386,388,389
+
+graphics/btl_bg/btl_bg_13.feimg3.bin graphics/btl_bg/btl_bg_13.fetsa3.bin: graphics/btl_bg/btl_bg_13.png
+	$(FETSATOOL) $< graphics/btl_bg/btl_bg_13.feimg3.bin graphics/btl_bg/btl_bg_13.fetsa3.bin --flip_y_indexes=50,375,376,377,378,379,380,381,382,383,384,386,387,388,389,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419
+
+graphics/btl_bg/btl_bg_32.feimg3.bin graphics/btl_bg/btl_bg_32.fetsa3.bin: graphics/btl_bg/btl_bg_32.png
+	$(FETSATOOL) $< graphics/btl_bg/btl_bg_32.feimg3.bin graphics/btl_bg/btl_bg_32.fetsa3.bin --flip_y_indexes=195,225,255
+
+graphics/btl_bg/btl_bg_47.feimg3.bin graphics/btl_bg/btl_bg_47.fetsa3.bin: graphics/btl_bg/btl_bg_47.png
+	$(FETSATOOL) $< graphics/btl_bg/btl_bg_47.feimg3.bin graphics/btl_bg/btl_bg_47.fetsa3.bin --flip_y_indexes=15,16,17,18,19,20,21,22,23,24,25,26,27,28,29
+
+graphics/btl_bg/btl_bg_56.feimg3.bin graphics/btl_bg/btl_bg_56.fetsa3.bin: graphics/btl_bg/btl_bg_56.png
+	$(FETSATOOL) $< graphics/btl_bg/btl_bg_56.feimg3.bin graphics/btl_bg/btl_bg_56.fetsa3.bin --blank_tile_index=298 --pop_last_tile
+
+graphics/btl_bg/btl_bg_57.feimg3.bin graphics/btl_bg/btl_bg_57.fetsa3.bin: graphics/btl_bg/btl_bg_57.png
+	$(FETSATOOL) $< graphics/btl_bg/btl_bg_57.feimg3.bin graphics/btl_bg/btl_bg_57.fetsa3.bin --blank_tile_index=305 --pop_last_tile

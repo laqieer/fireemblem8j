@@ -214,6 +214,12 @@ PAL2GBAPAL := $(GBAGFX)
 
 PYTHON  ?= python3
 
+# FETSATOOL (ported from ../fireemblem8u/scripts/gfxtools/tsa_generator.py): turns
+# a committed btl_bg .png into the ROM's TSA-encoded tiles (.feimg<N>.bin) +
+# tilemap (.fetsa<N>.bin) so battle backgrounds build from an EDITABLE image
+# instead of committed binary blobs. Needs python3 + numpy + Pillow.
+FETSATOOL  := $(PYTHON) scripts/gfxtools/tsa_generator.py
+
 ifeq ($(UNAME),Darwin)
   SHASUM := shasum
 else
@@ -2766,6 +2772,16 @@ $(RESIDUAL_OBJS): $(RESIDUAL_BINS)
 %.lz: % ; $(GBAGFX) $< $@ $(LZ_FLAGS)
 %.rl: % ; $(GBAGFX) $< $@
 
+# TSA battle-background graphics: an editable .png is converted by FETSATOOL into
+# the ROM's deduplicated tile image (.feimg<N>.bin) + tilemap (.fetsa<N>.bin).
+# Mirrors ../fireemblem8u Makefile lines 293-303. Per-asset --flip_y_indexes /
+# --blank_tile_index / --pop_last_tile overrides live in graphics/btl_bg/btl_bg.mk
+# (the same per-asset rules ../fireemblem8u keeps in graphics_file_rules.mk).
+%.feimg1.bin %.fetsa1.bin: %.png ; $(FETSATOOL) $< $*.feimg1.bin $*.fetsa1.bin
+%.feimg2.bin %.fetsa2.bin: %.png ; $(FETSATOOL) $< $*.feimg2.bin $*.fetsa2.bin
+%.feimg3.bin %.fetsa3.bin: %.png ; $(FETSATOOL) $< $*.feimg3.bin $*.fetsa3.bin
+%.feimg4.bin %.fetsa4.bin: %.png ; $(FETSATOOL) $< $*.feimg4.bin $*.fetsa4.bin
+
 # .fk: FE "fake compression" -- a 4-byte LE header (total-size<<8, low byte 0 =
 # uncompressed) followed by the raw bytes verbatim. Portrait tilesets (and similar
 # graphics) are marked compressed in the ROM but stored raw under this header. The
@@ -2854,6 +2870,7 @@ clean:
 	# wrongly nuke it and break the build. Falls back to nothing outside a git tree.
 	@git clean -Xf -- 'graphics/**/*.1bpp' 'graphics/**/*.4bpp' 'graphics/**/*.8bpp' \
 		'graphics/**/*.gbapal' 'graphics/**/*.lz' 'graphics/**/*.rl' 'graphics/**/*.fk' 'graphics/**/*.4bpp.h' \
+		'graphics/**/*.feimg*.bin' 'graphics/**/*.fetsa*.bin' \
 		'graphics/*.1bpp' 'graphics/*.4bpp' 'graphics/*.8bpp' 'graphics/*.gbapal' \
 		'graphics/*.lz' 'graphics/*.rl' 'graphics/*.fk' 'graphics/*.4bpp.h' >/dev/null 2>&1 || true
 	# Sound build intermediates (committed source is .aif; .bin rebuilt by aif2pcm).

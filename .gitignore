@@ -24,6 +24,28 @@
 *.fk
 *.4bpp.h
 
+# TSA battle-background intermediates (D309). The editable source is the .png;
+# FETSATOOL regenerates these byte-for-byte (mirrors ../fireemblem8u which also
+# gitignores *.feimg*.bin / *.fetsa*.bin). The 7 btl_bg whose fe8u .png is stored
+# in a different (4bpp+map) form do NOT round-trip via FETSATOOL, so their .bin
+# stay COMMITTED and are re-included below.
+*.feimg*.bin
+*.fetsa*.bin
+!graphics/btl_bg/btl_bg_14.feimg3.bin
+!graphics/btl_bg/btl_bg_14.fetsa3.bin
+!graphics/btl_bg/btl_bg_27.feimg3.bin
+!graphics/btl_bg/btl_bg_27.fetsa3.bin
+!graphics/btl_bg/btl_bg_33.feimg3.bin
+!graphics/btl_bg/btl_bg_33.fetsa3.bin
+!graphics/btl_bg/btl_bg_55.feimg3.bin
+!graphics/btl_bg/btl_bg_55.fetsa3.bin
+!graphics/btl_bg/btl_bg_58.feimg3.bin
+!graphics/btl_bg/btl_bg_58.fetsa3.bin
+!graphics/btl_bg/btl_bg_59.feimg3.bin
+!graphics/btl_bg/btl_bg_59.fetsa3.bin
+!graphics/btl_bg/btl_bg_60.feimg3.bin
+!graphics/btl_bg/btl_bg_60.fetsa3.bin
+
 # Sound build intermediates (Phase 1 Music). The COMMITTED source is the editable
 # AIFF (.aif) under sound/direct_sound_samples/; the raw GBA PCM blob (.bin) is
 # REGENERATED from it by `sound/%.bin: sound/%.aif` (tools/aif2pcm) and must never
