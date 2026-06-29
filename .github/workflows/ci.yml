@@ -61,13 +61,15 @@ jobs:
         # to stock; the Makefile enables it per-TU for the JP-promotion functions).
         run: bash scripts/build_jp_agbcc.sh
 
-      - name: Setup asset toolchain (gbagfx/bin2c/preproc/aif2pcm)
+      - name: Setup asset toolchain (gbagfx/bin2c/preproc/aif2pcm/mid2agb)
         run: |
           git clone --depth 1 https://github.com/laqieer/fireemblem8u.git ../fireemblem8u || true
           scripts/tools/gbagfx/setup.sh
           scripts/tools/bin2c/setup.sh
           scripts/tools/preproc/setup.sh
           scripts/tools/aif2pcm/setup.sh
+          # mid2agb builds the editable .mid songs (D311); already-vendored setup, just wire it into CI
+          scripts/tools/mid2agb/setup.sh
 
       # ---- THE byte-perfect, self-contained gate (baserom.gba ABSENT) ----
       - name: Build from source + byte-match (make compare, no baserom)
