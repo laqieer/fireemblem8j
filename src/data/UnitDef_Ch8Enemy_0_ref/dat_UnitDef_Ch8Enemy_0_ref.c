@@ -1,152 +1,42 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Ch8Enemy_0.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Typed from data/residual/UnitDef_Ch8Enemy_0.bin (axis #6 editability, fe8u events_udefs.c parity).
+ * Each 20-byte struct UnitDefinition entry decoded from the residual table; the
+ * redas reinforcement pointer is kept as a relocatable symbol reference so the ROM
+ * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
+ */
 
-__asm__(
-"\t.section .rodata.dat_UnitDef_Ch8Enemy_0_ref, \"a\", %progbits\n"
-"\t.global UnitDef_Ch8Enemy_0\n"
-"UnitDef_Ch8Enemy_0:\n"
-"\t.4byte 0x0C000B4D\n"
-"\t.4byte 0x0100008A\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x24C\n"
-"\t.4byte 0x00001C17\n"
-"\t.4byte 0x00090303\n"
-"\t.4byte 0x35000980\n"
-"\t.4byte 0x01000113\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x254\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x45000980\n"
-"\t.4byte 0x010000D4\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x25C\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x45000980\n"
-"\t.4byte 0x010000D2\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x264\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x3D000980\n"
-"\t.4byte 0x01000154\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x26C\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x45000980\n"
-"\t.4byte 0x01000152\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x274\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x35000980\n"
-"\t.4byte 0x01000181\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x27C\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x45004E80\n"
-"\t.4byte 0x01000149\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x284\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x3D000980\n"
-"\t.4byte 0x0100014A\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x28C\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x45000980\n"
-"\t.4byte 0x01002294\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x294\n"
-"\t.4byte 0x00006A16\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x35001380\n"
-"\t.4byte 0x01000293\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x29C\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x45004E80\n"
-"\t.4byte 0x01000447\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x2A4\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x45000F80\n"
-"\t.4byte 0x01000280\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x2AC\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x3D000F80\n"
-"\t.4byte 0x01000400\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x2B4\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x45004E80\n"
-"\t.4byte 0x01000447\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x2BC\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x35002D80\n"
-"\t.4byte 0x01000242\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x2C4\n"
-"\t.4byte 0x00000045\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x45000980\n"
-"\t.4byte 0x01000447\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x2CC\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x3D001980\n"
-"\t.4byte 0x01000293\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x2D4\n"
-"\t.4byte 0x0000002E\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x35001980\n"
-"\t.4byte 0x01000408\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x2DC\n"
-"\t.4byte 0x0000002D\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x45001980\n"
-"\t.4byte 0x010001C3\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x2E4\n"
-"\t.4byte 0x00000034\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x35002580\n"
-"\t.4byte 0x01000201\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x2EC\n"
-"\t.4byte 0x00000039\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x45001980\n"
-"\t.4byte 0x010000C5\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x2F4\n"
-"\t.4byte 0x00000034\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x35001980\n"
-"\t.4byte 0x0100008F\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x2FC\n"
-"\t.4byte 0x00000034\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x45002D80\n"
-"\t.4byte 0x01000290\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x304\n"
-"\t.4byte 0x00000045\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x3D004E80\n"
-"\t.4byte 0x0100014B\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x30C\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x35004E80\n"
-"\t.4byte 0x010002D4\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x314\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x45004E80\n"
-"\t.4byte 0x010002D3\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x31C\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+extern const u8 frontier_df4_banim_b_076_90B4DC[];
+SECTION(".rodata.dat_UnitDef_Ch8Enemy_0_ref") struct UnitDefinition UnitDef_Ch8Enemy_0[] =
+{
+    { .charIndex=0x4D, .classIndex=0xB, .allegiance=0x2, .level=0x1, .xPosition=0xA, .yPosition=0x2, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x24C), .items={0x17,0x1C,0x00,0x00}, .ai={0x03,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x13, .yPosition=0x4, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x254), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x14, .yPosition=0x3, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x25C), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x12, .yPosition=0x3, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x264), .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x7, .xPosition=0x14, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x26C), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x12, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x274), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x1, .yPosition=0x6, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x27C), .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x9, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x284), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x7, .xPosition=0xA, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x28C), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x14, .yPosition=0xA, .itemDrop=0x1, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x294), .items={0x16,0x6A,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x13, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x13, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x29C), .items={0x01,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x7, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x2A4), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0xF, .autolevel=0x1, .allegiance=0x2, .level=0x8, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x2AC), .items={0x03,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0xF, .autolevel=0x1, .allegiance=0x2, .level=0x7, .yPosition=0x10, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x2B4), .items={0x03,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x7, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x2BC), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x2, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x2C4), .items={0x45,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x7, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x2CC), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x19, .autolevel=0x1, .allegiance=0x2, .level=0x7, .xPosition=0x13, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x2D4), .items={0x2E,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x19, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x8, .yPosition=0x10, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x2DC), .items={0x2D,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x19, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x3, .yPosition=0x7, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x2E4), .items={0x34,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x1, .yPosition=0x8, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x2EC), .items={0x39,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x19, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x5, .yPosition=0x3, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x2F4), .items={0x34,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x19, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0xF, .yPosition=0x2, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x2FC), .items={0x34,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x10, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x304), .items={0x45,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0x7, .xPosition=0xB, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x30C), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x14, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x314), .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x13, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x31C), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    {0},
+};

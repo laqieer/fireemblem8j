@@ -1,52 +1,22 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Ch13ANPC.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Typed from data/residual/UnitDef_Ch13ANPC.bin (axis #6 editability, fe8u events_udefs.c parity).
+ * Each 20-byte struct UnitDefinition entry decoded from the residual table; the
+ * redas reinforcement pointer is kept as a relocatable symbol reference so the ROM
+ * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
+ */
 
-__asm__(
-"\t.section .rodata.dat_UnitDef_Ch13ANPC_ref, \"a\", %progbits\n"
-"\t.global UnitDef_Ch13ANPC\n"
-"UnitDef_Ch13ANPC:\n"
-"\t.4byte 0x130007C8\n"
-"\t.4byte 0x01000014\n"
-"\t.4byte data_0890ECE8 + 0x188\n"
-"\t.4byte 0x00000017\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x130005CD\n"
-"\t.4byte 0x01000013\n"
-"\t.4byte data_0890ECE8 + 0x190\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x130005CD\n"
-"\t.4byte 0x01000013\n"
-"\t.4byte data_0890ECE8 + 0x198\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x130005CD\n"
-"\t.4byte 0x01000015\n"
-"\t.4byte data_0890ECE8 + 0x1A0\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x130005CD\n"
-"\t.4byte 0x01000016\n"
-"\t.4byte data_0890ECE8 + 0x1A8\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x0B001DCD\n"
-"\t.4byte 0x01000013\n"
-"\t.4byte data_0890ECE8 + 0x1B0\n"
-"\t.4byte 0x0000002D\n"
-"\t.4byte 0x00090F00\n"
-"\t.4byte 0x0B001DCD\n"
-"\t.4byte 0x01000015\n"
-"\t.4byte data_0890ECE8 + 0x1B8\n"
-"\t.4byte 0x0000002D\n"
-"\t.4byte 0x00090F00\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+extern const u8 data_0890ECE8[];
+SECTION(".rodata.dat_UnitDef_Ch13ANPC_ref") struct UnitDefinition UnitDef_Ch13ANPC[] =
+{
+    { .charIndex=0xC8, .classIndex=0x7, .autolevel=0x1, .allegiance=0x1, .level=0x2, .xPosition=0x14, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890ECE8 + 0x188), .items={0x17,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0xCD, .classIndex=0x5, .autolevel=0x1, .allegiance=0x1, .level=0x2, .xPosition=0x13, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890ECE8 + 0x190), .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0xCD, .classIndex=0x5, .autolevel=0x1, .allegiance=0x1, .level=0x2, .xPosition=0x13, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890ECE8 + 0x198), .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0xCD, .classIndex=0x5, .autolevel=0x1, .allegiance=0x1, .level=0x2, .xPosition=0x15, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890ECE8 + 0x1A0), .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0xCD, .classIndex=0x5, .autolevel=0x1, .allegiance=0x1, .level=0x2, .xPosition=0x16, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890ECE8 + 0x1A8), .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0xCD, .classIndex=0x1D, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x13, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890ECE8 + 0x1B0), .items={0x2D,0x00,0x00,0x00}, .ai={0x00,0x0F,0x09,0x00} },
+    { .charIndex=0xCD, .classIndex=0x1D, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x15, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890ECE8 + 0x1B8), .items={0x2D,0x00,0x00,0x00}, .ai={0x00,0x0F,0x09,0x00} },
+    {0},
+};

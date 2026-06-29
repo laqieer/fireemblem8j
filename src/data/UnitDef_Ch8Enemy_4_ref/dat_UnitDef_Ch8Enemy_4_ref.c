@@ -1,42 +1,20 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Ch8Enemy_4.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Typed from data/residual/UnitDef_Ch8Enemy_4.bin (axis #6 editability, fe8u events_udefs.c parity).
+ * Each 20-byte struct UnitDefinition entry decoded from the residual table; the
+ * redas reinforcement pointer is kept as a relocatable symbol reference so the ROM
+ * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
+ */
 
-__asm__(
-"\t.section .rodata.dat_UnitDef_Ch8Enemy_4_ref, \"a\", %progbits\n"
-"\t.global UnitDef_Ch8Enemy_4\n"
-"UnitDef_Ch8Enemy_4:\n"
-"\t.4byte 0x3D003F80\n"
-"\t.4byte 0x01000447\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x39C\n"
-"\t.4byte 0x00000020\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x3D002580\n"
-"\t.4byte 0x000000C7\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000039\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x3D002580\n"
-"\t.4byte 0x000000CD\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000039\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x45002D80\n"
-"\t.4byte 0x00000080\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000045\n"
-"\t.4byte 0x00090300\n"
-"\t.4byte 0x3D000F80\n"
-"\t.4byte 0x01000293\n"
-"\t.4byte frontier_df4_banim_b_076_90B4DC + 0x3A4\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+extern const u8 frontier_df4_banim_b_076_90B4DC[];
+SECTION(".rodata.dat_UnitDef_Ch8Enemy_4_ref") struct UnitDefinition UnitDef_Ch8Enemy_4[] =
+{
+    { .charIndex=0x80, .classIndex=0x3F, .autolevel=0x1, .allegiance=0x2, .level=0x7, .xPosition=0x7, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x39C), .items={0x20,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0x7, .xPosition=0x7, .yPosition=0x3, .items={0x39,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0x7, .xPosition=0xD, .yPosition=0x3, .items={0x39,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0x8, .yPosition=0x2, .items={0x45,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0xF, .autolevel=0x1, .allegiance=0x2, .level=0x7, .xPosition=0x13, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_076_90B4DC + 0x3A4), .items={0x03,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    {0},
+};

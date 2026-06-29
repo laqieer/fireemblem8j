@@ -1,37 +1,20 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Ch4NPC_1.bin by scripts/repoint_table.py.
- * Pointer words are emitted as relocatable symbol references so the ROM
- * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
- *
- * Defined under a private name + published as a type-less assembler
- * alias so a typed header declaration (struct Foo NAME[];) does not
- * conflict -- the data bytes (.word relocations) are byte-identical. */
+/* Typed from data/residual/UnitDef_Ch4NPC_1.bin (axis #6 editability, fe8u events_udefs.c parity).
+ * Each 20-byte struct UnitDefinition entry decoded from the residual table; the
+ * redas reinforcement pointer is kept as a relocatable symbol reference so the ROM
+ * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
+ */
 
 extern const u8 REDA_Ch4NPC_1_DOZLA[];
 extern const u8 REDA_Ch4NPC_1_LARACHEL[];
 extern const u8 REDA_Ch4NPC_1_RENNAC[];
-
-SECTION(".rodata.dat_UnitDef_Ch4NPC_1_ref") static const u32 UnitDef_Ch4NPC_1__shift[] = {
-    0x0B014B19,
-    0x0200014E,
-    (u32)&REDA_Ch4NPC_1_LARACHEL,
-    0x0000004C,
-    0x00000000,
-    0x0B01431A,
-    0x0100014E,
-    (u32)&REDA_Ch4NPC_1_DOZLA,
-    0x00000021,
-    0x00000000,
-    0x0B01331C,
-    0x0100018E,
-    (u32)&REDA_Ch4NPC_1_RENNAC,
-    0x00000003,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
+SECTION(".rodata.dat_UnitDef_Ch4NPC_1_ref") struct UnitDefinition UnitDef_Ch4NPC_1[] =
+{
+    { .charIndex=0x19, .classIndex=0x4B, .leaderCharIndex=0x1, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0xE, .yPosition=0x5, .redaCount=0x2, .redas=(const struct REDA *)REDA_Ch4NPC_1_LARACHEL, .items={0x4C,0x00,0x00,0x00} },
+    { .charIndex=0x1A, .classIndex=0x43, .leaderCharIndex=0x1, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0xE, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)REDA_Ch4NPC_1_DOZLA, .items={0x21,0x00,0x00,0x00} },
+    { .charIndex=0x1C, .classIndex=0x33, .leaderCharIndex=0x1, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0xE, .yPosition=0x6, .redaCount=0x1, .redas=(const struct REDA *)REDA_Ch4NPC_1_RENNAC, .items={0x03,0x00,0x00,0x00} },
+    {0},
 };
-__asm__(".global UnitDef_Ch4NPC_1\n\t.set UnitDef_Ch4NPC_1, UnitDef_Ch4NPC_1__shift\n");
