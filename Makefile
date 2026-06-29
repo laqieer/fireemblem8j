@@ -2589,7 +2589,17 @@ ASM_OBJECTS := $(filter-out $(DATA_INCBIN_ASM_EXCLUDE:.s=.o),$(ASM_S_FILES:.s=.o
 # compile pipeline, uncommitted) are NOT double-counted. These count as matching-C.
 SRC_S_FILES := $(shell git ls-files 'src/*.s' 2>/dev/null)
 SRC_S_OBJECTS := $(SRC_S_FILES:.s=.o)
-ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS)
+
+# --- D311 editable music: per-song mid2agb .s built from committed .mid ---------
+# Each song is the descriptive m4a-bytecode .s that mid2agb emits from the original
+# FE8 .mid; assembled and linked at its JP song address (with its voicegroup symbol
+# bound to the JP voicegroup address via baseline_syms) it reproduces the JP ROM
+# song body byte-for-byte (docs/sound.md, D311). sound/songs.mk holds the per-song
+# mid2agb flags (one `%.s: %.mid` rule per converted song).
+include sound/songs.mk
+SONG_MIDS := $(wildcard sound/songs/midi/*.mid)
+SONG_OBJECTS := $(SONG_MIDS:.mid=.o)
+ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS)
 
 # --- NON_MATCHING staging (D26): readable C that DOCUMENTS a region-different
 # function whose byte source is still asm/<fn>.s. PROVE-BUILDS ONLY -- NEVER
@@ -2686,6 +2696,14 @@ $(ASM_OBJECTS): %.o: %.s
 # Hand-written real-source assembly under src/ (libagbsyscall, BIOS svc wrappers).
 $(SRC_S_OBJECTS): %.o: %.s
 	$(AS) $(ASFLAGS) -g $< -o $@
+
+# D311 song objects: the mid2agb-generated .s (built by the per-song %.s: %.mid
+# rules in sound/songs.mk) assembled with MPlayDef.s on the include path (ASFLAGS
+# already has -I include). The .s is a generated intermediate; keep it (do not
+# auto-delete) so a clean tree shows the descriptive assembly form.
+$(SONG_OBJECTS): %.o: %.s
+	$(AS) $(ASFLAGS) -g $< -o $@
+.PRECIOUS: sound/songs/midi/%.s
 
 #### Sound asset rules (Phase 1 Music) ####
 # MINIMAL, FLAGGED addition: turn committed AIFF (.aif) sample source into the
@@ -2899,6 +2917,10 @@ clean:
 	find asm src -name '*.o' -type f -delete
 	$(RM) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(DATA_INCBIN_CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
 	$(RM) $(NONMATCH_CFILES:.c=.s)
+	# D311 editable music: the song .o and the mid2agb-generated .s are gitignored
+	# build outputs (the committed source is the .mid). Remove them so a clean tree
+	# rebuilds them from the .mid via the sound/songs.mk %.s: %.mid rule.
+	$(RM) $(SONG_OBJECTS) $(SONG_MIDS:.mid=.s)
 	# Regenerated asset build intermediates (committed source is PNG/.pal; these
 	# are rebuilt by the %.4bpp/%.lz/... rules). Delete ONLY gitignored ones --
 	# `git clean -Xf` removes solely ignored files, so a COMMITTED asset such as

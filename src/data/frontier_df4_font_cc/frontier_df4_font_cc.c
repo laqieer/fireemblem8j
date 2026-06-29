@@ -4,13 +4,12 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 frontier_df4_font_cc_000_5355F1[] __attribute__((section(".data.frontier_df4_font_cc.gap0"))) = INCBIN_U8("graphics/frontier_df4_font_cc/frontier_df4_font_cc_000_5355F1.bin");
-u8 frontier_df4_font_cc_001_535AFA[] __attribute__((section(".data.frontier_df4_font_cc.gap1"))) = INCBIN_U8("graphics/frontier_df4_font_cc/frontier_df4_font_cc_001_535AFA.bin");
-u8 frontier_df4_font_cc_002_5360A6[] __attribute__((section(".data.frontier_df4_font_cc.gap2"))) = INCBIN_U8("graphics/frontier_df4_font_cc/frontier_df4_font_cc_002_5360A6.bin");
-u8 frontier_df4_font_cc_003_5364D3[] __attribute__((section(".data.frontier_df4_font_cc.gap3"))) = INCBIN_U8("graphics/frontier_df4_font_cc/frontier_df4_font_cc_003_5364D3.bin");
-u8 frontier_df4_font_cc_004_536C96[] __attribute__((section(".data.frontier_df4_font_cc.gap4"))) = INCBIN_U8("graphics/frontier_df4_font_cc/frontier_df4_font_cc_004_536C96.bin");
-u8 frontier_df4_font_cc_005_53710A[] __attribute__((section(".data.frontier_df4_font_cc.gap5"))) = INCBIN_U8("graphics/frontier_df4_font_cc/frontier_df4_font_cc_005_53710A.bin");
-u8 frontier_df4_font_cc_006_53763A[] __attribute__((section(".data.frontier_df4_font_cc.gap6"))) = INCBIN_U8("graphics/frontier_df4_font_cc/frontier_df4_font_cc_006_53763A.bin");
+/* D311 editable music: gap0..gap5 were song001/song002 internal bytes mislabeled as
+ * font_cc residue; they are now reproduced by the mid2agb song objects, so they are
+ * removed here (un-tiled). gap6 was SPLIT: its first 0x112 bytes (0x53763A..0x53774C)
+ * belonged to song002's tail and are now in song002.o; only its non-song remainder
+ * (0x53774C..0x537960, 0x214 bytes) stays here. */
+u8 frontier_df4_font_cc_006_53774C[] __attribute__((section(".data.frontier_df4_font_cc.gap6"))) = INCBIN_U8("graphics/frontier_df4_font_cc/frontier_df4_font_cc_006_53774C.bin");
 u8 frontier_df4_font_cc_007_537A2D[] __attribute__((section(".data.frontier_df4_font_cc.gap7"))) = INCBIN_U8("graphics/frontier_df4_font_cc/frontier_df4_font_cc_007_537A2D.bin");
 u8 frontier_df4_font_cc_008_539966[] __attribute__((section(".data.frontier_df4_font_cc.gap8"))) = INCBIN_U8("graphics/frontier_df4_font_cc/frontier_df4_font_cc_008_539966.bin");
 u8 frontier_df4_font_cc_009_53AAFB[] __attribute__((section(".data.frontier_df4_font_cc.gap9"))) = INCBIN_U8("graphics/frontier_df4_font_cc/frontier_df4_font_cc_009_53AAFB.bin");
