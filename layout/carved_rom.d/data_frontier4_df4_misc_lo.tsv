@@ -12,7 +12,6 @@
 0DC608	0DC630	src/GetItemDisplayRangeString.o(.rodata)	GetItemDisplayRangeString rangeTextIdLookup[10] (embedded table)
 0DC630	0DC650	src/GetItemDisplayRankString.o(.rodata)	GetItemDisplayRankString rankTextIdLookup[8] (embedded table)
 0DC96C	0DC974	src/BattleCheckTriangleAttack.o(.rodata)	BattleCheckTriangleAttack local lut[8] (gap1 split)
-0DC974	0DCC90	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap1)	gap1 remainder (796 B)
 0DCDD0	0DCDD8	src/AiFindBestAdjacentPositionByFunc.o(.rodata)	AiFindBestAdjacentPositionByFunc adjacencyLut[8] (gap2a split)
 0DCDD8	0DCE48	src/AiScript_Exec.o(.rodata)	AiScript_Exec funcLut[] template (28 AiScriptCmd ptrs)
 0DD358	0DD35B	src/AiAttemptBallistaCombat.o(.rodata)	AiAttemptBallistaCombat(run): ballistaItemIds[3] = {35 36 37}
