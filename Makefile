@@ -203,6 +203,10 @@ src/cp_0803E2F4_0803F7BC.o: CC1FLAGS += -mjp-promote
 # regions build from source instead of `.incbin "baserom.gba"`. See
 # docs/tools/{gbagfx,bin2c,preproc}.md.
 GBAGFX     := tools/gbagfx/gbagfx$(EXE)
+# Exported so the BA1 compressing linker's compressor.py subprocess
+# (scripts/compressor.py reads $GBAGFX) uses the same gbagfx as the rest of the
+# build, even under `make GBAGFX=...` overrides. Mirrors ../fireemblem8u.
+export GBAGFX
 BIN2C      := tools/bin2c/bin2c$(EXE)
 PREPROC    := tools/preproc/preproc$(EXE)
 # Sound toolchain (Phase 1 Music): aif2pcm (AIFF -> raw GBA PCM sample) and
@@ -211,6 +215,11 @@ AIF2PCM    := tools/aif2pcm/aif2pcm$(EXE)
 MID2AGB    := tools/mid2agb/mid2agb$(EXE)
 # gbagfx converts both tiles and palettes; PAL2GBAPAL aliases it for the .pal rule.
 PAL2GBAPAL := $(GBAGFX)
+
+# scaninc (vendored from ../fireemblem8u/tools/scaninc): scans a .s/.c for its
+# .include/#include deps so editing an .inc rebuilds the dependent object. Used by
+# the banim/%.o rule (BA1) to track include/banim_*.inc edits.
+SCANINC    := tools/scaninc/scaninc$(EXE)
 
 PYTHON  ?= python3
 
@@ -1729,7 +1738,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_Ch2Events_ref.s \
                            asm/dat_Ch1Events_ref.s \
                            asm/dat_data_5AA96C_p0.s \
-                           asm/data_banim.s \
                            asm/direct_sound_data.s \
                            asm/data_data_banim_terrain.s \
                            asm/data_banim_pal.s \
@@ -2593,7 +2601,17 @@ VOICEGROUP_OBJECTS := $(VOICEGROUP_S:.s=.o)
 # with editable source -- baserom.gba is NOT in this chain (docs/sound.md, D312).
 SONG_TABLE_OBJECTS := sound/song_table.o sound/songs/dummy_song.o
 
-ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS) $(VOICEGROUP_OBJECTS) $(SONG_TABLE_OBJECTS)
+# BA1 battle-animation pipeline (fe8u-parity): a SINGLE pre-linked + per-resource
+# LZ-compressed blob built from editable banim/*_motion.s + graphics/banim/*.png +
+# *.agbpal by scripts/arm_compressing_linker.py (linker_script_banim.txt). It is
+# placed at the JP banim base 0x08C02000 by ldscript.txt (carved_rom.tsv row) AND
+# its symbol table is fed back into the final ROM link via -R $(BANIM_OBJECT).sym.o
+# (the rest of the ROM references banim_*_script / sheet symbols). This replaces
+# the opaque src/data/banimdata/data_banim.c INCBIN-of-.lz/.bin form with the
+# editable .s source. baserom.gba is NOT in this chain.
+BANIM_OBJECT := banim/data_banim.o
+
+ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS) $(VOICEGROUP_OBJECTS) $(SONG_TABLE_OBJECTS) $(BANIM_OBJECT)
 
 # --- NON_MATCHING staging (D26): readable C that DOCUMENTS a region-different
 # function whose byte source is still asm/<fn>.s. PROVE-BUILDS ONLY -- NEVER
@@ -2707,6 +2725,40 @@ $(VOICEGROUP_OBJECTS): %.o: %.s
 # D312 song table + dummy_song placeholder: committed descriptive .s assembled
 # with m4a.inc / MPlayDef.s on the include path (ASFLAGS already has -I . -I include).
 $(SONG_TABLE_OBJECTS): %.o: %.s
+	$(AS) $(ASFLAGS) -g $< -o $@
+
+#### Battle animation recipes (BA1, fe8u-parity) ####
+# The compressing linker lays every banim resource end-to-end at base 0x08C02000
+# in linker_script_banim.txt order, LZ-compressing per the `>lz` flag, and emits
+# one ELF object (banim/data_banim.o) + its symbols-only sidecar (.sym.o). Its
+# prerequisites are produced dynamically by the `-m` mode (every `obj` field of the
+# linker script: the sheet .4bpp.lz, .agbpal.lz, oam .bin.lz, motion .o, modes .bin)
+# so make builds each via its own pattern rule first. Mirrors ../fireemblem8u.
+$(BANIM_OBJECT): $(shell $(PYTHON) ./scripts/arm_compressing_linker.py -t linker_script_banim.txt -m)
+	$(PYTHON) ./scripts/arm_compressing_linker.py -o $@ -t linker_script_banim.txt -b 0x8c02000 -l $(LD) --objcopy $(OBJCOPY) -c ./scripts/compressor.py
+
+# Extract a flat section from an assembled motion object (one objcopy per section).
+# Three separate pattern rules -- NOT a grouped target: each objcopy -j emits a
+# single file, so make runs the right one(s) on demand. Mirrors ../fireemblem8u.
+%_modes.bin: %_motion.o
+	$(OBJCOPY) -O binary -j .data.modes $< $@
+
+%_oam_l.bin: %_motion.o
+	$(OBJCOPY) -O binary -j .data.oam_l $< $@
+
+%_oam_r.bin: %_motion.o
+	$(OBJCOPY) -O binary -j .data.oam_r $< $@
+
+# Assemble a banim motion .s; scaninc tracks the three .include "../include/banim_*.inc"
+# so editing a macro rebuilds the motion objects. (-I "" so the relative ../include
+# path in the .s resolves; ASFLAGS already carries -I include -I .)
+ifeq ($(NODEP),1)
+banim/%.o:    banim_dep :=
+else
+banim/%.o:    banim_dep = $(shell $(SCANINC) -I include -I "" banim/$*.s)
+endif
+.SECONDEXPANSION:
+banim/%.o: banim/%.s $$(banim_dep)
 	$(AS) $(ASFLAGS) -g $< -o $@
 
 #### Sound asset rules (Phase 1 Music) ####
@@ -2904,7 +2956,7 @@ check-nonmatching:
 	$(PYTHON) scripts/check_nonmatching.py
 
 $(ELF): $(ALL_OBJECTS) $(LDSCRIPT)
-	$(LD) --no-check-sections -T $(LDSCRIPT) -Map $(MAP) -o $@ $(ALL_OBJECTS) -L tools/agbcc/lib -lc -lgcc
+	$(LD) --no-check-sections -T $(LDSCRIPT) -Map $(MAP) -o $@ $(ALL_OBJECTS) -R $(BANIM_OBJECT).sym.o -L tools/agbcc/lib -lc -lgcc
 
 %.gba: %.elf
 	$(OBJCOPY) --strip-debug -O binary --pad-to 0x9000000 --gap-fill=0xff $< $@
@@ -2939,6 +2991,12 @@ clean:
 	# Sound build intermediates (committed source is .aif; .bin rebuilt by aif2pcm).
 	# Gitignored, so `git clean -Xf` removes only them and never a committed .aif.
 	@git clean -Xf -- 'sound/**/*.bin' >/dev/null 2>&1 || true
+	# BA1 battle-animation intermediates: the motion .o, the objcopy-extracted
+	# .bin (oam_l/oam_r/modes) + their .lz, and the compressing-linker outputs
+	# banim/data_banim.o(.sym.o). All gitignored (committed source is banim/*.s),
+	# so `git clean -Xf` removes only them and never a committed *_motion.s.
+	# (The top-level `find asm src -name '*.o'` above does NOT reach banim/.)
+	@git clean -Xf -- 'banim/*.o' 'banim/*.bin' 'banim/*.lz' 'banim/*.bak' >/dev/null 2>&1 || true
 
 # Fast repo-consistency lint (no toolchain / no ROM needed): every object the build links
 # has a git-tracked source. Catches the "layout row without a committed .s/.c" class that

@@ -46,6 +46,16 @@
 !graphics/btl_bg/btl_bg_60.feimg3.bin
 !graphics/btl_bg/btl_bg_60.fetsa3.bin
 
+# Battle-animation compressing-linker intermediates (BA1). The COMMITTED editable
+# sources are banim/*_motion.s (OAM/script/modes macros) + graphics/banim/*.png +
+# graphics/banim/*.agbpal. The motion .s is assembled to banim/*_motion.o and its
+# sections objcopy-extracted to banim/*_oam_l.bin / *_oam_r.bin / *_modes.bin, then
+# LZ-compressed and folded by scripts/arm_compressing_linker.py into the single
+# banim/data_banim.o (+ .sym.o). All of these are build artifacts (the .o/.lz are
+# already covered above); the extracted .bin must never be committed. mirrors
+# ../fireemblem8u's `banim/*.bin` ignore. baserom.gba is not in this build chain.
+banim/*.bin
+
 # Sound build intermediates (Phase 1 Music). The COMMITTED source is the editable
 # AIFF (.aif) under sound/direct_sound_samples/; the raw GBA PCM blob (.bin) is
 # REGENERATED from it by `sound/%.bin: sound/%.aif` (tools/aif2pcm) and must never
@@ -247,6 +257,12 @@ src/_diag_*
 # scripts + docs/tools/{aif2pcm,mid2agb}.md are tracked; the binaries are not.
 /tools/aif2pcm
 /tools/mid2agb
+
+# scaninc (BA1 battle-animation include-dep scanner): built locally into the
+# gitignored tools/scaninc/ from pret upstream / ../fireemblem8u via
+# scripts/tools/scaninc/setup.sh. The setup script + docs/tools/scaninc.md are
+# tracked; the C++ source it stages and the built binary are not.
+/tools/scaninc
 
 # Scheduler lock (transient local state; was accidentally tracked)
 /.claude/scheduled_tasks.lock

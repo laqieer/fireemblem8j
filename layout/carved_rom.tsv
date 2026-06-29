@@ -1350,7 +1350,7 @@ BABE04	BB08B4	src/data/B12A60/dat_data_B12A60.o(.rodata.dat_data_B12A60)	dat_dat
 BB8788	BB8A74	src/data/impure_data_ref/dat_impure_data_ref.o(.rodata.dat_impure_data_ref)	impure_data region-diff (funcmap code-ref, 0KB)
 C00000	C00008	src/banim_data.o(.data.banim_array_len)	banim_number
 C00008	C01928	src/banim_data.o(.data.banim_array)	banim_data
-C02000	E47180	src/data/banimdata/data_banim.o(.data.data_banim)	data_banim battle-anim assets (2324 KB, region-same)
+C02000	E47180	banim/data_banim.o(.data)	data_banim battle-anim assets (2324 KB, region-same; BA1 compressing-linker from editable banim/*.s)
 EE0000	EE0008	src/banim_terrain_data.o(.data.banim_terrain_head)	banim_terrain head
 EE0008	EE0AD0	src/banim_terrain_data.o(.data.banim_terrain_ptr_table)	battle_terrain_table
 EE0C00	EF2F18	src/data/data_data_banim_terrain/data_data_banim_terrain.o(.data_data_banim_terrain)	data_data_banim_terrain region-same (72KB)
