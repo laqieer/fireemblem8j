@@ -3,13 +3,13 @@
 @ src/data/mapanim/mapanim_nightmare.o: region-same content at JP 0x08a22f08 (US 0x089b2880, shift -0x-70688); incbin baserom.gba
 	.global Img_ManimBarrierBgfx
 Img_ManimBarrierBgfx:
-	.incbin "graphics/misc_gfx/Img_ManimBarrierBgfx.bin.lz"
+	.incbin "graphics/misc_gfx/Img_ManimBarrierBgfx.4bpp.lz"
 	.global Tsa_Mapnightmare
 Tsa_Mapnightmare:
 	.incbin "graphics/misc_gfx/Tsa_Mapnightmare.bin"
 	.global Img_NightMareMapAnimfx
 Img_NightMareMapAnimfx:
-	.incbin "graphics/misc_gfx/Img_NightMareMapAnimfx.bin.lz"
+	.incbin "graphics/misc_gfx/Img_NightMareMapAnimfx.4bpp.lz"
 	.global Pal_NightMareMapAnimfx
 Pal_NightMareMapAnimfx:
 	.incbin "graphics/misc_gfx/Pal_NightMareMapAnimfx.gbapal"

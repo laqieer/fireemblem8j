@@ -8,8 +8,8 @@
  * The per-variable section attribute below overrides the CONST_DATA section.
  */
 
-SECTION(".rodata.dat_gGfx_OpSubtitle_00_ref") u8 gGfx_OpSubtitle_00[] = INCBIN_U8("graphics/misc_gfx3/gGfx_OpSubtitle_00.bin.lz");
-SECTION(".rodata.dat_gGfx_OpSubtitle_01_ref") u8 gGfx_OpSubtitle_01[] = INCBIN_U8("graphics/misc_gfx3/gGfx_OpSubtitle_01.bin.lz");
+SECTION(".rodata.dat_gGfx_OpSubtitle_00_ref") u8 gGfx_OpSubtitle_00[] = INCBIN_U8("graphics/misc_gfx3/gGfx_OpSubtitle_00.4bpp.lz");
+SECTION(".rodata.dat_gGfx_OpSubtitle_01_ref") u8 gGfx_OpSubtitle_01[] = INCBIN_U8("graphics/misc_gfx3/gGfx_OpSubtitle_01.4bpp.lz");
 SECTION(".rodata.dat_gGfx_OpSubtitle_02_ref") u8 gGfx_OpSubtitle_02[] = INCBIN_U8("graphics/misc_gfx2/gGfx_OpSubtitle_02.bin.lz");
 SECTION(".rodata.dat_gGfx_OpSubtitle_03_ref") u8 gGfx_OpSubtitle_03[] = INCBIN_U8("graphics/misc_gfx2/gGfx_OpSubtitle_03.bin.lz");
 SECTION(".rodata.dat_gGfx_OpSubtitle_04_ref") u8 gGfx_OpSubtitle_04[] = INCBIN_U8("graphics/misc_gfx2/gGfx_OpSubtitle_04.bin.lz");

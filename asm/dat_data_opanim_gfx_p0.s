@@ -2,7 +2,7 @@
 @ src/data/data_opanim_gfx.o: region-same content at JP 0x08b4bba0 (US 0x08ab21d8, shift -0xFFF66638); EXTRACTED to graphics/opanim/ except 10 FE-format (.feimg/.fetsa) symbol(s) still incbin baserom.gba (need FETSATOOL)
 	.global Img_OpAnimWorldMap
 Img_OpAnimWorldMap:
-	.incbin "graphics/misc_gfx/Img_OpAnimWorldMap.bin.lz"
+	.incbin "graphics/misc_gfx/Img_OpAnimWorldMap.4bpp.lz"
 	.global Tsa_OpAnimWorldMap
 Tsa_OpAnimWorldMap:
 	.incbin "graphics/misc_gfx/Tsa_OpAnimWorldMap.bin.lz"
@@ -41,13 +41,13 @@ gOpanimGfx_0:
 	.incbin "graphics/opanim/OpAnimGenericCharacterBGUnusedPal2.gbapal"
 	.global Img_OpAnimEphraim
 Img_OpAnimEphraim:
-	.incbin "graphics/misc_gfx/Img_OpAnimEphraim.bin.lz"
+	.incbin "graphics/misc_gfx/Img_OpAnimEphraim.4bpp.lz"
 	.global Tsa_OpAnimEphraim
 Tsa_OpAnimEphraim:
 	.incbin "graphics/misc_gfx/Tsa_OpAnimEphraim.bin.lz"
 	.global Img_OpAnimEphraimBlur1
 Img_OpAnimEphraimBlur1:
-	.incbin "graphics/misc_gfx/Img_OpAnimEphraimBlur1.bin.lz"
+	.incbin "graphics/misc_gfx/Img_OpAnimEphraimBlur1.4bpp.lz"
 	.global Tsa_OpAnimEphraimBlur1
 Tsa_OpAnimEphraimBlur1:
 	.incbin "graphics/misc_gfx/Tsa_OpAnimEphraimBlur1.bin.lz"

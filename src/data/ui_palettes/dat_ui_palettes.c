@@ -5,8 +5,8 @@
  */
 
 SECTION(".rodata.dat_ui_palettes") u16 gPal_MiscUiGraphics[] = INCBIN_U16("graphics/misc_gfx/gPal_MiscUiGraphics.gbapal");
-SECTION(".rodata.dat_ui_palettes") u8 gImg_UiCursorHandTop[] = INCBIN_U8("graphics/misc_gfx/gImg_UiCursorHandTop.bin.lz");
-SECTION(".rodata.dat_ui_palettes") u8 gImg_UiCursorHandBottom[] = INCBIN_U8("graphics/misc_gfx/gImg_UiCursorHandBottom.bin.lz");
+SECTION(".rodata.dat_ui_palettes") u8 gImg_UiCursorHandTop[] = INCBIN_U8("graphics/misc_gfx/gImg_UiCursorHandTop.4bpp.lz");
+SECTION(".rodata.dat_ui_palettes") u8 gImg_UiCursorHandBottom[] = INCBIN_U8("graphics/misc_gfx/gImg_UiCursorHandBottom.4bpp.lz");
 SECTION(".rodata.dat_ui_palettes") u16 gPal_MapSprite[] = INCBIN_U16("graphics/misc_gfx/gPal_MapSprite.gbapal");
 SECTION(".rodata.dat_ui_palettes") u8 unit_icon_pal_enemy[] = INCBIN_U8("graphics/misc_gfx/unit_icon_pal_enemy.gbapal");
 SECTION(".rodata.dat_ui_palettes") u8 unit_icon_pal_npc[] = INCBIN_U8("graphics/misc_gfx/unit_icon_pal_npc.gbapal");

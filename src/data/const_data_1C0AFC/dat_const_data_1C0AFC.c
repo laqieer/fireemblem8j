@@ -5,7 +5,7 @@
  */
 
 SECTION(".rodata.dat_const_data_1C0AFC") u16 gPal_StoneShatterAnim[] = INCBIN_U16("graphics/misc_gfx3/gPal_StoneShatterAnim.gbapal");
-SECTION(".rodata.dat_const_data_1C0AFC") u8 gImg_StoneShatterAnim[] = INCBIN_U8("graphics/misc_gfx3/gImg_StoneShatterAnim.bin.lz");
+SECTION(".rodata.dat_const_data_1C0AFC") u8 gImg_StoneShatterAnim[] = INCBIN_U8("graphics/misc_gfx3/gImg_StoneShatterAnim.4bpp.lz");
 SECTION(".rodata.dat_const_data_1C0AFC") u8 gTsa_StoneShatter_0[] = INCBIN_U8("graphics/stone_shatter/gTsa_StoneShatter_0.tsa.bin");
 SECTION(".rodata.dat_const_data_1C0AFC") u8 gTsa_StoneShatter_1[] = INCBIN_U8("graphics/stone_shatter/gTsa_StoneShatter_1.tsa.bin");
 SECTION(".rodata.dat_const_data_1C0AFC") u8 gTsa_StoneShatter_2[] = INCBIN_U8("graphics/stone_shatter/gTsa_StoneShatter_2.tsa.bin");
