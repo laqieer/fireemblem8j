@@ -485,8 +485,10 @@
 212C60	212EA0	sound/voicegroups/voicegroup083.o(.rodata.voicegroup083)	voicegroup083 editable voice_* macro table (D311, fe8u-ported)
 212EA0	21329C	sound/voicegroups/voicegroup084.o(.rodata.voicegroup084)	voicegroup084 editable voice_* macro table (D311, fe8u-ported)
 21329C	213A10	sound/voicegroups/voicegroup085.o(.rodata.voicegroup085)	voicegroup085 editable voice_* macro table (D311, fe8u-ported)
-213B84	214004	src/data/voicegroup092_ref/dat_voicegroup092_ref.o(.rodata.dat_voicegroup092_ref)	voicegroup092 region-diff (funcmap code-ref, 1KB)
-2140B4	214120	src/data/gMPlayTable_ref/dat_gMPlayTable_ref.o(.rodata.dat_gMPlayTable_ref)	gMPlayTable region-diff (funcmap code-ref, 0KB)
+213B84	213E00	src/data/voicegroup092_ref/dat_voicegroup092_ref.o(.rodata.dat_voicegroup092_ref)	voicegroup092 region-diff (funcmap code-ref, 636B; keysplit_tables split out to sound/keysplit_tables.s)
+213E00	214004	sound/keysplit_tables.o(.rodata.keysplit_tables)	keysplit_tables editable .s (region-same, fe8u-ported; S1)
+214004	2140B4	sound/programmable_wave_data.o(.rodata.programmable_wave_data)	programmable_wave_data wave000-010 .incbin .pcm (region-same, fe8u-ported; S1)
+2140B4	214120	sound/music_player_table.o(.rodata.gMPlayTable)	gMPlayTable symbolic music_player .s (fe8u-ported; S1)
 216064	534E80	src/data/sound_pcm/direct_sound_data.o(.rodata.direct_sound_data)	direct_sound_data M4A samples (region-same, shifted)
 577648	577688	src/data/sMusicProc4Script_ref/dat_sMusicProc4Script_ref.o(.rodata.dat_sMusicProc4Script_ref)	sMusicProc4Script region-diff (funcmap code-ref, 0KB)
 5776F0	577EF0	src/fontgrp.o(.data)	fontgrp .data

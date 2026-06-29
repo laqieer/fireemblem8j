@@ -1296,7 +1296,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_ObjectType9_ref.s \
                            asm/dat_data_bg_p40.s \
                            asm/dat_worldmap_gmapunit_p791.s \
-                           asm/dat_gMPlayTable_ref.s \
                            asm/dat_data_bg_p41.s \
                            asm/dat_UnitDef_Ch9AMixed_1_ref.s \
                            asm/dat_UnitDef_Ch9AMixed_0_ref.s \
@@ -2059,7 +2058,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/data_08540B63.s \
                            asm/data_0853D31C.s \
                            asm/data_0853518C.s \
-                           asm/data_08214004.s \
                            asm/data_08213A10.s \
                            asm/data_081F6D00.s \
                            asm/data_081F66A4.s \
@@ -2593,7 +2591,19 @@ VOICEGROUP_OBJECTS := $(VOICEGROUP_S:.s=.o)
 # with editable source -- baserom.gba is NOT in this chain (docs/sound.md, D312).
 SONG_TABLE_OBJECTS := sound/song_table.o sound/songs/dummy_song.o
 
-ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS) $(VOICEGROUP_OBJECTS) $(SONG_TABLE_OBJECTS)
+# --- S1 editable m4a engine tables: fe8u-style descriptive .s (was opaque .bin) ----
+# sound/music_player_table.s   -- gMPlayTable rodata as symbolic `music_player` macro
+#   entries (gMPlayInfo_* from baseline_syms + gMPlayTrack_* .bss it defines at the JP
+#   base 0x03001DE0 via layout/carved_ram.d) -- replaces data/sound/gMPlayTable.bin.
+# sound/programmable_wave_data.s -- the 11 programmable-wave samples (wave000-010)
+#   .incbin'd from sound/programmable_wave_samples/*.pcm (region-same, fe8u-ported) --
+#   replaces the data_08214004 residue incbin.
+# sound/keysplit_tables.s      -- the (FE8-unused) keysplit byte table, region-same,
+#   ported verbatim from fe8u -- split out of the old voicegroup092_ref .bin.
+# All three are committed editable source; baserom.gba is NOT in this chain.
+M4A_TABLE_OBJECTS := sound/music_player_table.o sound/programmable_wave_data.o sound/keysplit_tables.o
+
+ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS) $(VOICEGROUP_OBJECTS) $(SONG_TABLE_OBJECTS) $(M4A_TABLE_OBJECTS)
 
 # --- NON_MATCHING staging (D26): readable C that DOCUMENTS a region-different
 # function whose byte source is still asm/<fn>.s. PROVE-BUILDS ONLY -- NEVER
@@ -2709,6 +2719,12 @@ $(VOICEGROUP_OBJECTS): %.o: %.s
 $(SONG_TABLE_OBJECTS): %.o: %.s
 	$(AS) $(ASFLAGS) -g $< -o $@
 
+# S1 m4a engine tables: music_player_table.s (.include asm/macros/m4a.inc),
+# programmable_wave_data.s (.incbin .pcm), keysplit_tables.s. Committed descriptive
+# .s assembled with the include path already set in ASFLAGS (-I . -I include).
+$(M4A_TABLE_OBJECTS): %.o: %.s
+	$(AS) $(ASFLAGS) -g $< -o $@
+
 #### Sound asset rules (Phase 1 Music) ####
 # MINIMAL, FLAGGED addition: turn committed AIFF (.aif) sample source into the
 # raw GBA direct-sound PCM blob (.bin) the ROM contains, via the vendored
@@ -2743,7 +2759,7 @@ asm/direct_sound_data.o: $(DIRECT_SOUND_BINS)
 # rebuild when one of its blobs changes, so depend on the full set.
 SOUND_DATA_BINS := $(wildcard data/sound/*.bin)
 $(patsubst %.s,%.o,$(wildcard asm/snd_song*.s asm/snd_banim_efxsound_data_*.s \
-	asm/dat_voicegroup*_ref.s asm/dat_gMPlayTable_ref.s \
+	asm/dat_voicegroup*_ref.s \
 	asm/dat_gMPlayJumpTableTemplate_ref.s asm/dat_gSoundRoomTable_ref.s \
 	asm/frontier_df3_voicegroup.s asm/frontier_df4_voice.s \
 	asm/stranded_m4a.s asm/stranded_soundwrapper.s \

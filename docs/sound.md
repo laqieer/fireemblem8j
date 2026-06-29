@@ -6,7 +6,8 @@ JP ROM splits into four classes, in ROM order:
 | Class | JP range | bytes | source representation | status |
 |---|---|---|---|---|
 | m4a engine tables | 0x081F6ED0.. | ~0.5 KB | C / `.s` (`gScaleTable`, …) | named incbin (`dat_m4a_tables.s`) |
-| voicegroups + prog-wave + `gMPlayTable` | 0x081F7470..0x082140B4 | ~118 KB | `.s` (`voice_*` macros) | partly named incbin |
+| voicegroups | 0x081F7470..0x08213E00 | ~118 KB | `.s` (`voice_*` macros) | partly named incbin |
+| keysplit + prog-wave + `gMPlayTable` | 0x08213E00..0x08214120 | ~1.4 KB | editable `.s` (fe8u-form) | **EDITABLE ✅ (S1)** |
 | `gSongTable` + song bodies | 0x082140B4..0x08216064 + 0x08534E80.. | ~120 KB | `gSongTable` `.s` + `.mid` via mid2agb | named incbin (`snd_song*.s`) |
 | **direct-sound PCM samples** | **0x08216064..0x08534E80** | **3,272,220 (3.12 MB)** | **`.aif` via aif2pcm** | **EXTRACTED ✅** |
 
@@ -66,6 +67,34 @@ baserom.gba is no longer in the sound build chain.
 `scripts/sound/reroot_sound_incbin.py` does the extraction + `.s` rewrite; the
 Makefile adds one flagged dependency block (`SOUND_DATA_BINS`). **0 sound
 `.incbin "baserom.gba"` remain.**
+
+## S1 — m4a engine tables converted from opaque `.bin` to editable fe8u-form `.s`
+
+The three m4a-engine tables fe8u ships as editable `.s` were converted from their
+fe8j opaque `.bin`/INCBIN form (`M4A_TABLE_OBJECTS` in the Makefile):
+
+- **`sound/music_player_table.s`** — `gMPlayTable` @0x082140B4 (was
+  `data/sound/gMPlayTable.bin` via `dat_gMPlayTable_ref`). Now the symbolic
+  `music_player <gMPlayInfo_*>, <gMPlayTrack_*>, <numTracks>, <flag>` macro array
+  (fe8u-form). `gMPlayInfo_*` resolve from `baseline_syms` (JP EWRAM addrs);
+  `gMPlayTrack_*` are the `.bss` track buffers this `.s` defines, placed at the JP
+  base **0x03001DE0** by `layout/carved_ram.d/s1_m4a_music_player_table.tsv` so the
+  9 contiguous track symbols (0xC30 total, ending exactly at `agb_sram.o(.bss)`)
+  land at their JP addresses. The 108-byte rodata re-links byte-identical.
+- **`sound/programmable_wave_data.s`** — the 11 programmable-wave samples
+  (`wave000_sinewave`..`wave010_square25_e1`) @0x08214004, `.incbin`'d from
+  `sound/programmable_wave_samples/*.pcm` (region-same — the 176-byte JP residue is
+  byte-identical to fe8u's concatenated PCM). Replaces the `data_08214004` residue
+  incbin; `wave008/009/010` (referenced by voicegroup030) are now real `.s` globals
+  (the `baseline_syms` aliases were dropped).
+- **`sound/keysplit_tables.s`** — the (FE8-unused) keysplit byte table @0x08213E00,
+  516 bytes, **region-same** (verbatim from fe8u). It was previously lumped into the
+  1152-byte `voicegroup092_ref.bin`; that `.bin` is now split — the real
+  region-different voicegroup092 keeps its first 636 bytes as committed `.bin`, the
+  keysplit tail became this editable `.s`.
+
+All three are committed source; baserom.gba is not in this chain. `make compare`
+gates the byte-exactness.
 
 **Proven self-contained.** With `baserom.gba` removed, every re-rooted sound object
 (`snd_song*`, `dat_voicegroup*_ref`, `dat_m4a_tables`, `frontier_df3_voicegroup`,

@@ -1,0 +1,6 @@
+# S1 m4a engine tables: gMPlayTrack_* track buffers (.bss, NOLOAD) defined by
+# sound/music_player_table.s. Placed at the JP base 0x03001DE0 so the 9 contiguous
+# gMPlayTrack_BGM1..SE7_EVT symbols (TRACK_SIZE*numTracks each, 0xC30 total) resolve
+# to their JP addresses -- which gMPlayTable (rodata) references. The range ends at
+# 0x03002A10, exactly where agb_sram.o(.bss) begins (no overlap). NOLOAD: no ROM bytes.
+03001DE0	iwram	sound/music_player_table.o(.bss)	gMPlayTrack_* m4a track buffers (S1)
