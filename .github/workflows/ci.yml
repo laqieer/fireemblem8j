@@ -70,6 +70,9 @@ jobs:
           scripts/tools/aif2pcm/setup.sh
           # mid2agb builds the editable .mid songs (D311); already-vendored setup, just wire it into CI
           scripts/tools/mid2agb/setup.sh
+          # scaninc scans banim/*_motion.s include deps for the battle-animation
+          # compressing-linker pipeline (BA1); builds from pret upstream source.
+          scripts/tools/scaninc/setup.sh
 
       # ---- THE byte-perfect, self-contained gate (baserom.gba ABSENT) ----
       - name: Build from source + byte-match (make compare, no baserom)

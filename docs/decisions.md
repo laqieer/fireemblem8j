@@ -8296,3 +8296,60 @@ mapped the remaining frontier toward all-axes completion. GO drives launched (D3
 .mid/.s), #5=gate 0 — literal/effective complete. #2≈99.7–99.9% (5–10 agbcc walls), #4≈86–87%
 (convention floor), #6 = all major asset types editable + the documented voice/song-tail ceilings.
 This is D308 reference-parity completion, not a defect.
+
+## D313 — Battle animation (BA1): port fe8u's compressing-linker pipeline (BYTE-MATCH, full)
+
+**Date context:** asset-editability epic, lane BA1 (the highest-risk, long-pole unit).
+Goal: replace the opaque battle-animation blob form (an INCBIN of pre-compressed
+`.lz`/`.bin`) with fe8u's **editable** `.s` source + compressing-linker pipeline.
+
+**Pre-state (what fe8j actually had — corrected the epic's hypothesis):** the
+battle-anim data was already a single contiguous `.data.data_banim` section, built
+by `src/data/banimdata/data_banim.c` = 1475 `INCBIN_U8` lines pulling already-built
+intermediates: `graphics/banim/*.4bpp.lz` + `*.agbpal.lz` (from committed PNG/agbpal
+— already editable), and `data/banim/banim_*_oam_l/oam_r/motion_o/modes_bin.bin` (804
+committed binaries = the compressing-linker *output*, not editable). So the misses
+were exactly those 804 oam/script/modes binaries, whose fe8u source is the 201
+`banim/*_motion.s` macro files. (The epic's feared `dat_data_banim_p*.s` AnimSprite
+residuals at 0x0860xxxx are a SEPARATE efx-sprite region, NOT the banim pipeline —
+left untouched.)
+
+**JP banim base = 0x08C02000 — identical to fe8u** (not a different offset). Confirmed
+from `layout/carved_rom.tsv` (`C02000 E47180 …data_banim…`) and a byte extract of the
+ROM region.
+
+**Feasibility PROVEN before wiring (the gate decision):** ran fe8u's
+`scripts/arm_compressing_linker.py -b 0x8c02000` over the JP tree (201 motion `.s` +
+JP PNG/agbpal) and `cmp`'d the resulting `.data` against the ROM region
+`0xC02000..0xE47180` -> **byte-identical, all 2,380,160 bytes** (0 divergent). Also
+confirmed: JP `data_banim.c` INCBIN order has **0 positional diffs** vs fe8u's
+`linker_script_banim.txt` (1475 entries) — the JP layout IS fe8u's compressing-linker
+output. No per-file LZ `-mindist` override was needed (banim sheets use gbagfx's
+default; the two DemonLight `-mindist 3` overrides are a separate non-banim region).
+**No documented floor / no divergent subset — full byte-match.**
+
+**Decision (validated, implemented):**
+- Copy fe8u `scripts/arm_compressing_linker.py`, `scripts/compressor.py`,
+  `linker_script_banim.txt`, the 201 `banim/*_motion.s`. (`include/banim_*.inc` were
+  already committed in fe8j, byte-identical to fe8u.) Vendor `scaninc` via a new
+  `scripts/tools/scaninc/setup.sh` (builds from pret upstream / US prebuilt fallback),
+  wired into CI like the other asset tools.
+- Makefile: `BANIM_OBJECT := banim/data_banim.o` + its `arm_compressing_linker.py …
+  -b 0x8c02000` rule (prereqs via the script's `-m` mode), the `banim/%.o` scaninc
+  rule, the `%_oam_l/oam_r.bin` / `%_modes.bin` objcopy-extract rules; add
+  `$(BANIM_OBJECT)` to `ALL_OBJECTS` and `-R $(BANIM_OBJECT).sym.o` to the final ROM link.
+- `layout/carved_rom.tsv`: swap `src/data/banimdata/data_banim.o(.data.data_banim)` ->
+  `banim/data_banim.o(.data)` at the same 0xC02000 (gen_layout places it there).
+- Delete `src/data/banimdata/data_banim.c` + the 804 `data/banim/banim_*_bin.bin` +
+  the stale `graphics/banim/banim.mk`. Regenerate `data_incbin_deps.mk`. `.gitignore`
+  ignores the `banim/*.bin` / `*.o` / `*.lz` intermediates (mirrors fe8u); only the 201
+  `*_motion.s` sources are committed.
+
+**Gotcha fixed:** the `banim/%.o` scaninc dep must call `$(SCANINC) … banim/$*.s` (not
+`$*.s`) — for the `banim/%.o` pattern make's `$*` stem drops the `banim/` dir, so the
+fe8u-verbatim `$*.s` form silently fails to open the file (harmless empty-deps, but
+defeats `.inc`-edit tracking). The byte oracle (`make compare`) is unaffected either way.
+
+**Result:** `make compare` -> `fireemblem8.gba: OK` (sha1 7da0456…). Battle animation is
+now built from editable `.s` macros, fe8u-parity. No `make compare` weakening; no new
+`.incbin "baserom.gba"`.
