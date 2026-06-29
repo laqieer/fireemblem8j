@@ -8231,3 +8231,30 @@ main. It is the right candidate for a **dedicated, scripted song-region regenera
 (one generator emits per-song `.o` + rewrites the song/voicegroup/table ldscript block
 atomically, `make compare` per song), run as its own focused lane. Documented as the remaining
 specialized editability lane. Ref `docs/sound.md` (D31–D35).
+
+## D311 addendum — Music lane: 72 songs + 30 voicegroups editable (self-contained); ceilings documented
+
+**2026-06-29.** The music editability lane (D311) is substantially complete, all CI-green + self-contained:
+- **72/72 fragmented JP songs → editable `.mid`** (`gen_d311_songs.py`: reads gSongTable spans, mid2agb
+  from fe8u `.mid`, re-carves straddling residue remnants into 33 COMMITTED `.bin` — self-contained, NOT
+  baserom auto-incbin). Plus the mid2agb tool wired into CI.
+- **30 named voicegroups → editable `.s`** (fe8u `voice_*` macro tables, symbolic `DirectSoundData_*`/
+  voicegroup-chain pointers resolving to JP addrs). 439 PCM samples already `.aif` (D31).
+
+**Documented remaining music ceilings (NOT quick wins, honest):**
+- **gSongTable** (@0x08214120, 1000 entries / ~594 song symbols): only the 72 BGM songs are decompiled;
+  the ~520 SFX/voice "songs" are not, so the `song <label>` macro can't resolve them. Stays a committed
+  self-contained `.bin` until the SFX songs are decompiled. Genuine struct-pointer-array ceiling.
+- **11 unnamed `frontier_df3_voicegroup` gap blobs** (~76 KB): interleaved unnamed voicegroups; splitting
+  needs RE of the JP voicegroup-table boundaries (no JP symbol map). Self-contained `.bin`.
+- **voicegroup035, voicegroup092**: region-different from fe8u (different sizes) — can't port verbatim.
+
+**THE LESSON (3 local-pass-CI-fail this session, now hardened in [[always-watch-ci-after-push]]):** asset/
+layout/tool changes need ALL THREE CI-equivalent checks LOCALLY before push — (a) parallel `make -jN`
+(multi-output rule races, fix `&:`), (b) tool-set-up-in-CI (mid2agb/FETSATOOL), (c) no-baserom build
+(self-containment; `make compare` with baserom present does NOT catch gen_layout baserom auto-incbins).
+
+**Editability axis #6 is now COMPREHENSIVE** — every major asset type in its editable fe8u source form:
+graphics→.png, palettes→.pal/.agbpal, event scripts→EVENT macros, proc→PROC macros, struct→typed C,
+maps→.mar/.S, music→.mid/.s. Remaining = documented ceilings (above) + fe8u-parity binary floor
+(TSA/.map.bin tilemaps, compressed region-diff gfx — binary in fe8u too).
