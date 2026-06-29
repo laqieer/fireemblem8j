@@ -119,8 +119,8 @@ def read_rows(path):
 
 del_src_objs = set()        # 'src/data/.../X' (no ext) of objs to delete (fully consumed)
 prune_df4_arrays = set()    # df4 gapK sections fully consumed -> drop INCBIN line
-df4_remnants = {}           # gapK -> (rs, re) remnant interval (re-carve .bin + repoint)
-data08_remnants = {}        # objpath -> (rs, re, origstart, secname) for de-pointered residue
+df4_remnants = {}           # gapK -> [(rs, re), ...] remnant intervals (re-carve .bin + repoint)
+data08_remnants = {}        # objpath -> ([(rs,re),...], origstart, secname) de-pointered residue
 song_frag_dirs = set()      # snd_song* dirs fully consumed
 
 manifest_files = ["layout/carved_rom.tsv"] + \
@@ -136,9 +136,12 @@ for mf in manifest_files:
         s, e, sec, note = rec
         if not overlaps_any(s, e):
             newlines.append(raw); continue
+        # The non-song remnant of this residue row may be SPLIT into MULTIPLE
+        # disjoint intervals when 2+ song spans land inside one residue object
+        # (common once all ~588 songs are un-tiled). Carve EACH interval into its
+        # own committed .bin + manifest row so byte coverage stays exact + self-
+        # contained (never let gen_layout baserom-auto-incbin the gap).
         rem = remnants(s, e)
-        if len(rem) > 1:
-            sys.exit("UNEXPECTED multi-remnant straddle %06X-%06X %s" % (s, e, sec))
         m = re.search(r"(src/data/[\w/]+)\.o\(([^)]*)\)", sec)
         if not m:
             # song .o rows from a prior run, or anything else overlapping -> drop & regen
@@ -154,18 +157,18 @@ for mf in manifest_files:
             if not rem:
                 prune_df4_arrays.add(gapname)
             else:
-                rs, re_ = rem[0]
-                df4_remnants[gapname] = (rs, re_)
-                newlines.append("%06X\t%06X\t%s\t%s" % (rs, re_, sec, note))
+                df4_remnants[gapname] = list(rem)
+                for rs, re_ in rem:
+                    newlines.append("%06X\t%06X\t%s\t%s" % (rs, re_, sec, note))
             changed = True
             continue
         # de-pointered residue data_08ADDR object
         if not rem:
             del_src_objs.add(objpath)  # fully consumed
         else:
-            rs, re_ = rem[0]
-            data08_remnants[objpath] = (rs, re_, s, secname)
-            newlines.append("%06X\t%06X\t%s\t%s" % (rs, re_, sec, note))
+            data08_remnants[objpath] = (list(rem), s, secname)
+            for rs, re_ in rem:
+                newlines.append("%06X\t%06X\t%s\t%s" % (rs, re_, sec, note))
         changed = True
     if changed:
         open(mf, "w").write("\n".join(newlines) + "\n")
@@ -184,10 +187,14 @@ def carve_bin(path, rs, re_):
     open(path, "wb").write(data[rs:re_])
 
 # --- re-carve df4_font_cc gaps: drop fully-consumed arrays, repoint remnant arrays ---
+# Idempotent + multi-interval safe: each affected gap's INCBIN line(s) are
+# REPLACED at the first occurrence by exactly one line per remnant interval; any
+# further pre-existing lines for that same gap (from a prior run) are dropped.
 if prune_df4_arrays or df4_remnants:
     os.makedirs(DF4_GFX, exist_ok=True)
     lines = open(DF4_C).read().splitlines(keepends=True)
     kept = []
+    emitted_gaps = set()
     for ln in lines:
         m = re.search(r'\.data\.frontier_df4_font_cc\.(gap\d+)"', ln)
         if not m or "INCBIN" not in ln:
@@ -196,39 +203,47 @@ if prune_df4_arrays or df4_remnants:
         if gapname in prune_df4_arrays:
             continue  # fully consumed by songs
         if gapname in df4_remnants:
-            rs, re_ = df4_remnants[gapname]
+            if gapname in emitted_gaps:
+                continue  # already emitted this gap's intervals at first occurrence
+            emitted_gaps.add(gapname)
             idx = int(gapname[3:])
-            var = "frontier_df4_font_cc_%03d_%06X" % (idx, rs)
-            binf = "%s/frontier_df4_font_cc_%03d_%06X.bin" % (DF4_GFX, idx, rs)
-            carve_bin(binf, rs, re_)
-            kept.append(
-                'u8 %s[] __attribute__((section(".data.frontier_df4_font_cc.%s"))) = '
-                'INCBIN_U8("%s");\n' % (var, gapname, binf))
+            for rs, re_ in df4_remnants[gapname]:
+                var = "frontier_df4_font_cc_%03d_%06X" % (idx, rs)
+                binf = "%s/frontier_df4_font_cc_%03d_%06X.bin" % (DF4_GFX, idx, rs)
+                carve_bin(binf, rs, re_)
+                kept.append(
+                    'u8 %s[] __attribute__((section(".data.frontier_df4_font_cc.%s"))) = '
+                    'INCBIN_U8("%s");\n' % (var, gapname, binf))
             continue
         kept.append(ln)
     open(DF4_C, "w").write("".join(kept))
-    print("df4: pruned %d arrays, re-carved %d remnant arrays"
-          % (len(prune_df4_arrays), len(df4_remnants)))
+    print("df4: pruned %d arrays, re-carved %d remnant gaps (%d intervals)"
+          % (len(prune_df4_arrays), len(df4_remnants),
+             sum(len(v) for v in df4_remnants.values())))
 
 # --- replace de-pointered residue objects (data_08ADDR) that straddle: clean INCBIN ---
+# Multi-interval safe: a residue object split by 2+ songs gets one INCBIN var per
+# surviving remnant interval, in address order, all committed .bin (self-contained).
 data08_aliases = {}  # sym -> origstart (file offset; +0x08000000 = VMA base)
-for objpath, (rs, re_, origstart, secname) in sorted(data08_remnants.items()):
+for objpath, (intervals, origstart, secname) in sorted(data08_remnants.items()):
     sym = os.path.basename(objpath)               # data_08ADDR
     cdir = os.path.dirname(objpath)
     bindir = cdir.replace("src/data", "graphics", 1)
     os.makedirs(bindir, exist_ok=True)
-    binf = "%s/%s_%06X.bin" % (bindir, sym, rs)
-    carve_bin(binf, rs, re_)
-    var = "%s_%06X" % (sym, rs)
     with open(objpath + ".c", "w") as f:
         f.write("#include \"global.h\"\n\n")
-        f.write("/* D311: %s straddled a song boundary; its head [%06X,%06X) is now\n"
-                " * provided by the song .o. Only the non-song remnant [%06X,%06X) stays here,\n"
-                " * as a committed INCBIN (self-contained). The original symbol %s is bound to\n"
+        f.write("/* D311: %s straddled %d song boundary(ies); the song-covered head(s) are\n"
+                " * now provided by song .o(s). Only the non-song remnant interval(s) stay here,\n"
+                " * as committed INCBIN(s) (self-contained). The original symbol %s is bound to\n"
                 " * its JP absolute address via a baseline alias so external +off refs resolve. */\n"
-                % (sym, origstart, rs, rs, re_, sym))
-        f.write('u8 %s[] __attribute__((section("%s"))) = INCBIN_U8("%s");\n'
-                % (var, secname, binf))
+                % (sym, len(intervals), sym))
+        for rs, re_ in intervals:
+            binf = "%s/%s_%06X.bin" % (bindir, sym, rs)
+            carve_bin(binf, rs, re_)
+            var = "%s_%06X" % (sym, rs)
+            f.write("/* remnant [%06X,%06X) */\n" % (rs, re_))
+            f.write('u8 %s[] __attribute__((section("%s"))) = INCBIN_U8("%s");\n'
+                    % (var, secname, binf))
     spath = objpath + ".s"
     if os.path.exists(spath):
         os.remove(spath)
@@ -253,6 +268,24 @@ for objpath in sorted(del_src_objs):
         removed_objs += 1
 print("removed %d dirs, %d residue objects" % (removed_dirs, removed_objs))
 
+# --- prune orphaned remnant .bin files (re-runs shrink remnants -> stale names) ---
+# Only D311-generated remnant bins (df4_font_cc_NNN_ADDR.bin, data_08ADDR_ADDR.bin,
+# dat_worldmap_gmapunit_pNN_ADDR.bin) are candidates; keep a bin iff some committed
+# .c still INCBINs it. Never touch non-remnant assets.
+referenced = set()
+for c in glob.glob("src/data/**/*.c", recursive=True):
+    for m in re.finditer(r'INCBIN_U\d+\("([^"]+)"\)', open(c, errors="replace").read()):
+        referenced.add(os.path.normpath(m.group(1)))
+orphan_pats = (re.compile(r"frontier_df4_font_cc_\d+_[0-9A-Fa-f]+\.bin$"),
+               re.compile(r"data_[0-9A-Fa-f]+_[0-9A-Fa-f]+\.bin$"),
+               re.compile(r"dat_\w+_p\d+_[0-9A-Fa-f]+\.bin$"))
+pruned_bins = 0
+for b in glob.glob("graphics/**/*.bin", recursive=True):
+    base = os.path.basename(b)
+    if any(p.search(base) for p in orphan_pats) and os.path.normpath(b) not in referenced:
+        os.remove(b); pruned_bins += 1
+print("pruned %d orphaned remnant .bin files" % pruned_bins)
+
 # --- symbols already defined elsewhere (must NOT be re-bound -> multiple-def) ---
 already = set()
 for bf in ["layout/baseline_syms.tsv"] + glob.glob("layout/baseline_syms.d/*.tsv"):
@@ -268,6 +301,11 @@ for c in glob.glob("src/data/**/*.c", recursive=True):
         already.add(m.group(1))
     for m in re.finditer(r"\.global\s+(\w+)", t):
         already.add(m.group(1))
+# voicegroups already EDITABLE as committed source (sound/voicegroups/*.s define the
+# symbol) must NOT also be aliased -> multiple definition. Scan their .global decls.
+for s_ in glob.glob("sound/voicegroups/*.s"):
+    for m in re.finditer(r"\.global\s+(\w+)", open(s_, errors="replace").read()):
+        already.add(m.group(1))
 for n, name, flags, s, e, tone, g in songs:
     already.add(name)
 
@@ -280,12 +318,19 @@ for n, name, flags, s, e, tone, g in songs:
     vg_lines[sym] = "%s\t%08X\tdata\tD311 voicegroup -G%s" % (sym, tone, g)
 
 # --- data_08ADDR self-ref aliases (the rewritten INCBIN no longer defines them) ---
+# The alias must bind the symbol's CANONICAL base address. A data_08XXXXXX symbol
+# encodes its true VMA in its name (0x08XXXXXX) -- the manifest row's start may have
+# been pre-shrunk by an earlier (non-song) carve, so do NOT use origstart for these
+# (an external `.4byte data_08XXXXXX + off` ref would then resolve wrong: this was a
+# real 1-byte ROM diff). Fall back to origstart only for non-data_08 symbols.
 alias_lines = []
 for sym, origstart in sorted(data08_aliases.items()):
     if sym in already:
         continue
+    m = re.match(r"data_08([0-9A-Fa-f]{6})$", sym)
+    addr = (0x08000000 | int(m.group(1), 16)) if m else (origstart + 0x08000000)
     alias_lines.append("%s\t%08X\tdata\tD311 residue-base alias (straddled song)"
-                       % (sym, origstart + 0x08000000))
+                       % (sym, addr))
 
 with open("layout/baseline_syms.d/d311-music.tsv", "w") as f:
     f.write("# D311 editable .mid music: voicegroup tone-table bindings + residue\n")
@@ -318,5 +363,22 @@ for n, name, flags, s, e, tone, g in songs:
         shutil.copy(src, dst)
     copied += 1
 print("midi present:", copied, "of", len(songs))
+
+# --- drop any midi NOT wired this run (e.g. a fe8u song whose JP gSongTable entry
+# has 0 tracks -> no track payload to carve; its header stays as residue/df4 data).
+# An unwired .mid would make SONG_OBJECTS (wildcard *.mid) demand a mid2agb rule that
+# songs.mk doesn't provide -> "No rule to make target songNNN.s". ---
+wired_names = {name for n, name, flags, s, e, tone, g in songs}
+unwired = 0
+for mid in glob.glob("sound/songs/midi/*.mid"):
+    if os.path.basename(mid)[:-4] not in wired_names:
+        os.remove(mid); unwired += 1
+print("dropped %d unwired midi(s)" % unwired)
+
+# --- regen the INCBIN->asset dep map (df4/data08 .c changed which .bin they pull in;
+# the committed layout/data_incbin_deps.mk must track the new remnant .bin names or a
+# clean parallel build fails with "No rule to make target ...remnant.bin"). ---
+import subprocess
+subprocess.run([sys.executable, "scripts/gen_data_incbin_deps.py"], check=True)
 
 print("DONE: %d songs wired" % len(songs))
