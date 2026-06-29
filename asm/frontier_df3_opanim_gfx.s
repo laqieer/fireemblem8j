@@ -15,7 +15,7 @@ frontier_df3_opanim_gfx_000_B75860:
 @ df3_opanim_gfx region-different data, JP 0x08b79ebc..0x08b7affc (4416 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_df3_opanim_gfx_001_B79EBC
 frontier_df3_opanim_gfx_001_B79EBC:
-	.incbin "graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_001_B79EBC.bin"
+	.incbin "graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_001_B79EBC.4bpp"
 
 	.section .data.frontier_df3_opanim_gfx.gap2, "a", %progbits
 @ df3_opanim_gfx region-different data, JP 0x08b7f118..0x08b839f4 (18652 B); table-pinned (not code-named), byte-perfect incbin.

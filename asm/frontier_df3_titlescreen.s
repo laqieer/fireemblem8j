@@ -21,4 +21,4 @@ frontier_df3_titlescreen_001_B48D38:
 @ df3_titlescreen region-different data, JP 0x08b4b200..0x08b4bba0 (2464 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_df3_titlescreen_002_B4B200
 frontier_df3_titlescreen_002_B4B200:
-	.incbin "graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_002_B4B200.bin"
+	.incbin "graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_002_B4B200.4bpp"
