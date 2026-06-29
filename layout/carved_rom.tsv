@@ -531,13 +531,6 @@
 5C3AE0	5C3B10	src/bmmenu.o(.data)	bmmenu .data
 5C3B4C	5C3C9C	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p702.o(.rodata.dat_worldmap_gmapunit_p702)	dat_worldmap_gmapunit_p702 region-same per-sym shifted (0KB)
 5C4104	5C411C	src/bmtrade.o(.data)	bmtrade .data
-5C4320	5C43F8	src/data/gDebugClearMenuItems_ref/dat_gDebugClearMenuItems_ref.o(.rodata.dat_gDebugClearMenuItems_ref)	gDebugClearMenuItems region-diff (funcmap code-ref, 0KB)
-5C43F8	5C4440	src/data/gDebugChuudanMenuItems_ref/dat_gDebugChuudanMenuItems_ref.o(.rodata.dat_gDebugChuudanMenuItems_ref)	gDebugChuudanMenuItems region-diff (funcmap code-ref, 0KB)
-5C4464	5C4518	src/data/gDebugContinueMenuItems_ref/dat_gDebugContinueMenuItems_ref.o(.rodata.dat_gDebugContinueMenuItems_ref)	gDebugContinueMenuItems region-diff (funcmap code-ref, 0KB)
-5C4680	5C4758	src/data/gItemUseMenuItems_ref/dat_gItemUseMenuItems_ref.o(.rodata.dat_gItemUseMenuItems_ref)	gItemUseMenuItems region-diff (funcmap code-ref, 0KB)
-5C4758	5C4830	src/data/gStealItemMenuItems_ref/dat_gStealItemMenuItems_ref.o(.rodata.dat_gStealItemMenuItems_ref)	gStealItemMenuItems region-diff (funcmap code-ref, 0KB)
-5C4A28	5C4A94	src/data/gYesNoSelectionMenuItems_ref/dat_gYesNoSelectionMenuItems_ref.o(.rodata.dat_gYesNoSelectionMenuItems_ref)	gYesNoSelectionMenuItems region-diff (funcmap code-ref, 0KB)
-5C4F14	5C534C	src/data/gUnitActionMenuItems_ref/dat_gUnitActionMenuItems_ref.o(.rodata.dat_gUnitActionMenuItems_ref)	gUnitActionMenuItems region-diff (funcmap code-ref, 1KB)
 5C5A48	5C5B58	src/data/TileAnimations2_ref/dat_TileAnimations2_ref.o(.rodata.dat_TileAnimations2_ref)	TileAnimations2 region-diff (funcmap code-ref, 0KB)
 5C5BD8	5C5CE0	src/data/TileAnimations3_ref/dat_TileAnimations3_ref.o(.rodata.dat_TileAnimations3_ref)	TileAnimations3 region-diff (funcmap code-ref, 0KB)
 5C5D98	5C5DE8	src/data/sProc_BMVSync_ref/dat_sProc_BMVSync_ref.o(.rodata.dat_sProc_BMVSync_ref)	sProc_BMVSync region-diff (funcmap code-ref, 0KB)
@@ -579,8 +572,6 @@
 5D4310	5D4358	src/data/ProcScr_LASurrender_HandleUnitDeaths_ref/dat_ProcScr_LASurrender_HandleUnitDeaths_ref.o(.rodata.dat_ProcScr_LASurrender_HandleUnitDeaths_ref)	ProcScr_LASurrender_HandleUnitDeaths region-diff (funcmap code-ref, 0KB)
 5D48C8	5D48E0	src/sio_mu.o(.data)	sio_mu .data
 5D4C0C	5D4C5C	src/data/ProcScr_LinkArenaPhaseIntro_ref/dat_ProcScr_LinkArenaPhaseIntro_ref.o(.rodata.dat_ProcScr_LinkArenaPhaseIntro_ref)	ProcScr_LinkArenaPhaseIntro region-diff (funcmap code-ref, 0KB)
-5D4C94	5D4D00	src/data/MenuItems_SioMenudef_0_ref/dat_MenuItems_SioMenudef_0_ref.o(.rodata.dat_MenuItems_SioMenudef_0_ref)	MenuItems_SioMenudef_0 region-diff (funcmap code-ref, 0KB)
-5D4D00	5D4DD8	src/data/MenuItems_SioMenudef_1_ref/dat_MenuItems_SioMenudef_1_ref.o(.rodata.dat_MenuItems_SioMenudef_1_ref)	MenuItems_SioMenudef_1 region-diff (funcmap code-ref, 0KB)
 5D4EB0	5D53FC	src/data/5AA96C/dat_data_5AA96C_p0.o(.rodata.dat_data_5AA96C_p0)	dat_data_5AA96C_p0 region-same per-sym shifted (1KB)
 5D68B4	5D737C	src/data/5AA96C/dat_data_5AA96C_p1.o(.rodata.dat_data_5AA96C_p1)	dat_data_5AA96C_p1 region-same per-sym shifted (2KB)
 5D7C6C	5D8048	src/data/5AA96C/dat_data_5AA96C_p2.o(.rodata.dat_data_5AA96C_p2)	dat_data_5AA96C_p2 region-same per-sym shifted (0KB)

@@ -8296,3 +8296,37 @@ mapped the remaining frontier toward all-axes completion. GO drives launched (D3
 .mid/.s), #5=gate 0 — literal/effective complete. #2≈99.7–99.9% (5–10 agbcc walls), #4≈86–87%
 (convention floor), #6 = all major asset types editable + the documented voice/song-tail ceilings.
 This is D308 reference-parity completion, not a defect.
+
+## D-2026-06-29 — Epic C1: menu string pool + tables → editable C (menu_def.c)
+
+**Decision.** Converted the 8 menu tables (gDebugClearMenuItems, gDebugChuudanMenuItems,
+gDebugContinueMenuItems, gItemUseMenuItems, gStealItemMenuItems, gYesNoSelectionMenuItems,
+gUnitActionMenuItems, MenuItems_SioMenudef_0/1) from inline-asm `.4byte sym+off` pointer
+files (`src/data/*_ref/`) into a single typed `src/menu_def.c` (fe8u parity), and decoded the
+shared Shift-JIS string pool at ROM 0x080DC974 from a raw INCBIN
+(`frontier_df4_misc_lo_001_0DC974`, gap1 of frontier_df4_misc_lo.o) into **editable Shift-JIS
+C literals** (axis #6 editability).
+
+**Key analysis / why this shape.**
+- The strings live in ONE hand-packed 796 B pool at fixed addr 0x080DC974 (12 B binary header
+  + 59 null-terminated Shift-JIS strings with 4-byte alignment padding + a 0x78 B MAPTASK
+  binary tail). The pool is SHARED: besides the 8 in-scope tables it is also referenced by 2
+  out-of-scope tables (`data_085C4518`=gDebugMenuItems, `data_085C4830`=SendToConvoy) via
+  `frontier_df4_misc_lo_001_0DC974 + 0xNN`. So I kept the pool as ONE symbol (same name) but
+  re-defined it from `.asciz "日本語"` literals + `.byte`/`.space` (header/tail/padding) in a
+  `menu_def.c` `__asm__` block pinned at 0x080DC974 — out-of-scope refs keep resolving; bytes
+  match exactly (verified: pool .o section == baserom[0x0DC974:+0x31C], 0 relocs).
+- All 59 strings round-trip glibc `iconv UTF-8↔CP932` losslessly (verified), and none contain
+  byte 0x5C/0x22, so plain `.asciz "utf8"` is safe through cpp→iconv→agbcc. No `\xNN` needed.
+- Tables emitted as typed `const struct MenuItemDef[]` with `.name` = per-string label
+  (`gMenuStr_0NN`, also defined in the pool block) so each string is an editable literal at its
+  pinned addr. Function-pointer fields cast `(void*)Func` (fe8u MISMATCHED_SIGNATURE pattern):
+  bare names hit `-Werror` "incompatible pointer type"; `(void*)Func` emits identical
+  `.word Func` reloc. Thumb +1 bit is automatic — compiled-C callees are `.thumb_func` and
+  baseline `thumb`-typed syms are emitted `.set Name, addr+1` by gen_layout, so `.word Name`
+  resolves odd = matches the old asm `Name + 0x1`.
+
+**Wiring.** Deleted 8 `src/data/*_ref/` dirs + 8 `asm/dat_*_ref.s` stubs + their
+DATA_INCBIN_ASM_EXCLUDE entries + 9 carved_rom.tsv rows; removed the pool INCBIN line +
+manifest row + data_incbin_deps token + the now-unused `_0DC96C.bin`; added
+`layout/carved_rom.d/menu_def.tsv` (1 pool row + 9 table rows). Gated on `make compare`.

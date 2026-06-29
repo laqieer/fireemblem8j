@@ -941,7 +941,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_UnitDef_Event_PrologueValterGroup_ref.s \
                            asm/dat_EventScr_Prologue_TutMessageTurn2_ref.s \
                            asm/dat_EventScr_Prologue_TutEirikaAttack_ref.s \
-                           asm/dat_gYesNoSelectionMenuItems_ref.s \
                            asm/dat_gCharacterEndingTitleLut_ref.s \
                            asm/dat_const_data_unit_icon_move_p3.s \
                            asm/dat_ProcScr_SpellAssocUnlock_ref.s \
@@ -963,7 +962,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_gProcScr_PhaseIntroText_ref.s \
                            asm/dat_gProcScr_ArenaUiResults_ref.s \
                            asm/dat_gEfxSelfThunderBGFrames_ref.s \
-                           asm/dat_gDebugContinueMenuItems_ref.s \
                            asm/dat_ProcScr_SpellAssocTorch_ref.s \
                            asm/dat_ProcScr_SpellAssocSleep_ref.s \
                            asm/dat_FinalChapterMap2Changes_ref.s \
@@ -974,12 +972,9 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_EventScr_Ch1Tut_ChooseSethTurn1_ref.s \
                            asm/dat_gProcScr_SSPageNumCtrl_ref.s \
                            asm/dat_gEventListCmdInfoTable_ref.s \
-                           asm/dat_gDebugChuudanMenuItems_ref.s \
                            asm/dat_ProcScr_SpellAssocWarp_ref.s \
                            asm/dat_ProcScr_SpellAssocMend_ref.s \
                            asm/dat_ProcScr_SpellAssocHeal_ref.s \
-                           asm/dat_MenuItems_SioMenudef_1_ref.s \
-                           asm/dat_MenuItems_SioMenudef_0_ref.s \
                            asm/dat_MenuItemDef_WMNodeMenu_ref.s \
                            asm/dat_MenuItemDef_RouteSplit_ref.s \
                            asm/dat_MelkaenCoastMapChanges_ref.s \
@@ -1020,8 +1015,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_EventScr_Ch18b_BeginningScene_ref.s \
                            asm/dat_EventScr_Ch16b_BeginningScene_ref.s \
                            asm/dat_unit_icon_move_table_ref.s \
-                           asm/dat_gUnitActionMenuItems_ref.s \
-                           asm/dat_gDebugClearMenuItems_ref.s \
                            asm/dat_gClassReelOrderedLut_ref.s \
                            asm/dat_const_data_unit_icon_move_p17.s \
                            asm/dat_UnitDef_TowerEnemy_8_ref.s \
@@ -1057,7 +1050,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_particles_fx_p0.s \
                            asm/dat_data_bg_p21.s \
                            asm/dat_EventListScr_Ch10a_Character_ref.s \
-                           asm/dat_gStealItemMenuItems_ref.s \
                            asm/dat_UnitDef_Ch9BEnemy_3_ref.s \
                            asm/dat_UnitDef_Ch9AEnemy_0_ref.s \
                            asm/dat_PopupScr_ItemStolen_ref.s \
@@ -1092,7 +1084,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_EventListScr_Ch9a_Location_ref.s \
                            asm/dat_EventListScr_Ch8_Character_ref.s \
                            asm/dat_EventListScr_Ch1_Character_ref.s \
-                           asm/dat_gItemUseMenuItems_ref.s \
                            asm/dat_const_data_unit_icon_move_p36.s \
                            asm/dat_const_data_unit_icon_move_p14.s \
                            asm/dat_EventScr_Ch19A_11_ref.s \
