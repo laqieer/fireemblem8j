@@ -8296,3 +8296,32 @@ mapped the remaining frontier toward all-axes completion. GO drives launched (D3
 .mid/.s), #5=gate 0 — literal/effective complete. #2≈99.7–99.9% (5–10 agbcc walls), #4≈86–87%
 (convention floor), #6 = all major asset types editable + the documented voice/song-tail ceilings.
 This is D308 reference-parity completion, not a defect.
+
+## D313 — Asset-editability + shiftability EPIC (fe8u-parity "fix all .bin misses")
+
+**2026-06-29 (user-driven `/batch` epic, ultracode).** User directed a comprehensive push to
+make EVERY fe8j asset editable in its fe8u SOURCE form, using fe8u as the ground-truth oracle:
+**for each committed `.bin`, if fe8u builds it from a more-editable source (`.png`/`.s`/`.mid`/
+`.aif`/typed C) it is a MISS to fix; if fe8u also commits binary it is legitimate FLOOR.** Plus
+port fe8u's shiftability-validation harness (PRs #745/#744).
+
+**Audit (4,901 fe8j `.bin`):** ~1,919 MISS + 180 deferred + 1,829 floor. Categories →
+12 work units (full plan: `docs/epic_asset_editability_shiftability.md`):
+- U0 reproducible `.bin` form-audit script (`scripts/audit_bin_forms.py` → `docs/bin_audit.md`).
+- A: graphics → `.png` (G1-G4, ~486 image `.bin`; README "pixel-gfx done" was INCOMPLETE).
+- B: **battle-anim pipeline (BA1)** — port fe8u's `linker_script_banim.txt` + `$(BANIM_OBJECT)`
+  `arm_compressing_linker.py` pipeline; replace ~1,481 `data/banim`/`AnimSprite` `.bin` with
+  202 editable `banim/*.s`. Highest-risk lane (JP banim region at a different offset, partitioned).
+- C: sound — m4a tables → `.s` (S1: music_player_table/programmable_wave/keysplit), voicegroup
+  tail (S2). D: menu strings → `menu_def.c` literals (C1). E: UnitDef residuals → typed C (UD1).
+- F: **FE6 SIO payload built FROM SOURCE via the `mgfembp` git submodule** (F1) — NOT a committed
+  `.bin`; canonical fe8u wiring is in history `0ff24f9c`/`bbe919f4~1` (local fe8u's prebuilt blob
+  is a Docker-only fallback). See [[fe8j-fe6sio-payload-mgfembp]].
+- G: shiftcheck harness (V1) — port `scripts/shiftcheck/` (5-layer: build-addr/reloc/offset/
+  diff-shift/mGBA) + `make shiftcheck` + CI.
+
+**DECISION:** execute as 12 parallel worktree-worker units, integrator-serialized through one
+`make compare` gate; U0 first (miss-tracker), BA1 the long-pole. DEFERRED: ApConf/gUnkData/opaque
+(~180, needs RE). FLOOR (don't fake-extract): TSA/`.map.bin`/`.aif`/`efx*`/compressed region-diff.
+This epic plan persisted to `docs/` first (survives the long run); see
+[[epic-plan-persist-to-docs]].
