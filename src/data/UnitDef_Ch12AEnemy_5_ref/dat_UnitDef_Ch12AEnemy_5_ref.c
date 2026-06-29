@@ -1,32 +1,18 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Ch12AEnemy_5.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Typed from data/residual/UnitDef_Ch12AEnemy_5.bin (axis #6 editability, fe8u events_udefs.c parity).
+ * Each 20-byte struct UnitDefinition entry decoded from the residual table; the
+ * redas reinforcement pointer is kept as a relocatable symbol reference so the ROM
+ * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
+ */
 
-__asm__(
-"\t.section .rodata.dat_UnitDef_Ch12AEnemy_5_ref, \"a\", %progbits\n"
-"\t.global UnitDef_Ch12AEnemy_5\n"
-"UnitDef_Ch12AEnemy_5:\n"
-"\t.4byte 0x4D005BB3\n"
-"\t.4byte 0x01000540\n"
-"\t.4byte frontier_df4_banim_b_078_90E58C + 0x118\n"
-"\t.4byte 0x000000B1\n"
-"\t.4byte 0x000C0000\n"
-"\t.4byte 0x4D005BB3\n"
-"\t.4byte 0x01000580\n"
-"\t.4byte frontier_df4_banim_b_078_90E58C + 0x120\n"
-"\t.4byte 0x000000B1\n"
-"\t.4byte 0x000C0000\n"
-"\t.4byte 0x4D005BB3\n"
-"\t.4byte 0x010005C0\n"
-"\t.4byte frontier_df4_banim_b_078_90E58C + 0x128\n"
-"\t.4byte 0x000000B1\n"
-"\t.4byte 0x000C0000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+extern const u8 frontier_df4_banim_b_078_90E58C[];
+SECTION(".rodata.dat_UnitDef_Ch12AEnemy_5_ref") struct UnitDefinition UnitDef_Ch12AEnemy_5[] =
+{
+    { .charIndex=0xB3, .classIndex=0x5B, .autolevel=0x1, .allegiance=0x2, .level=0x9, .yPosition=0x15, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_078_90E58C + 0x118), .items={0xB1,0x00,0x00,0x00}, .ai={0x00,0x00,0x0C,0x00} },
+    { .charIndex=0xB3, .classIndex=0x5B, .autolevel=0x1, .allegiance=0x2, .level=0x9, .yPosition=0x16, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_078_90E58C + 0x120), .items={0xB1,0x00,0x00,0x00}, .ai={0x00,0x00,0x0C,0x00} },
+    { .charIndex=0xB3, .classIndex=0x5B, .autolevel=0x1, .allegiance=0x2, .level=0x9, .yPosition=0x17, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df4_banim_b_078_90E58C + 0x128), .items={0xB1,0x00,0x00,0x00}, .ai={0x00,0x00,0x0C,0x00} },
+    {0},
+};

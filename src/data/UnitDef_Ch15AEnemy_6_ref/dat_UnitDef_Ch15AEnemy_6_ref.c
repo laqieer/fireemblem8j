@@ -1,62 +1,24 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Ch15AEnemy_6.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Typed from data/residual/UnitDef_Ch15AEnemy_6.bin (axis #6 editability, fe8u events_udefs.c parity).
+ * Each 20-byte struct UnitDefinition entry decoded from the residual table; the
+ * redas reinforcement pointer is kept as a relocatable symbol reference so the ROM
+ * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
+ */
 
-__asm__(
-"\t.section .rodata.dat_UnitDef_Ch15AEnemy_6_ref, \"a\", %progbits\n"
-"\t.global UnitDef_Ch15AEnemy_6\n"
-"UnitDef_Ch15AEnemy_6:\n"
-"\t.4byte 0x25000780\n"
-"\t.4byte 0x01000480\n"
-"\t.4byte frontier_df3_unitdef_b_005_9109A8 + 0x168\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte 0x00091200\n"
-"\t.4byte 0x75000580\n"
-"\t.4byte 0x010004C0\n"
-"\t.4byte frontier_df3_unitdef_b_005_9109A8 + 0x170\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x75000580\n"
-"\t.4byte 0x01000440\n"
-"\t.4byte frontier_df3_unitdef_b_005_9109A8 + 0x178\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x6D003F80\n"
-"\t.4byte 0x01000440\n"
-"\t.4byte frontier_df3_unitdef_b_005_9109A8 + 0x180\n"
-"\t.4byte 0x00000020\n"
-"\t.4byte 0x00091200\n"
-"\t.4byte 0x6D003F80\n"
-"\t.4byte 0x01000480\n"
-"\t.4byte frontier_df3_unitdef_b_005_9109A8 + 0x188\n"
-"\t.4byte 0x00000020\n"
-"\t.4byte 0x00091200\n"
-"\t.4byte 0x6D000F80\n"
-"\t.4byte 0x01000500\n"
-"\t.4byte frontier_df3_unitdef_b_005_9109A8 + 0x190\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x6D002580\n"
-"\t.4byte 0x000004C0\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000038\n"
-"\t.4byte 0x00091200\n"
-"\t.4byte 0x75002580\n"
-"\t.4byte 0x00000440\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00006D39\n"
-"\t.4byte 0x00091200\n"
-"\t.4byte 0x6D002580\n"
-"\t.4byte 0x01000400\n"
-"\t.4byte frontier_df3_unitdef_b_005_9109A8 + 0x198\n"
-"\t.4byte 0x00000038\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+extern const u8 frontier_df3_unitdef_b_005_9109A8[];
+SECTION(".rodata.dat_UnitDef_Ch15AEnemy_6_ref") struct UnitDefinition UnitDef_Ch15AEnemy_6[] =
+{
+    { .charIndex=0x80, .classIndex=0x7, .autolevel=0x1, .allegiance=0x2, .level=0x4, .yPosition=0x12, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_005_9109A8 + 0x168), .items={0x03,0x00,0x00,0x00}, .ai={0x00,0x12,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0xE, .yPosition=0x13, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_005_9109A8 + 0x170), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0xE, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_005_9109A8 + 0x178), .items={0x16,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x3F, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_005_9109A8 + 0x180), .items={0x20,0x00,0x00,0x00}, .ai={0x00,0x12,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x3F, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x12, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_005_9109A8 + 0x188), .items={0x20,0x00,0x00,0x00}, .ai={0x00,0x12,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0xF, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x14, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_005_9109A8 + 0x190), .items={0x03,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x13, .items={0x38,0x00,0x00,0x00}, .ai={0x00,0x12,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0xE, .yPosition=0x11, .items={0x39,0x6D,0x00,0x00}, .ai={0x00,0x12,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x10, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_005_9109A8 + 0x198), .items={0x38,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    {0},
+};

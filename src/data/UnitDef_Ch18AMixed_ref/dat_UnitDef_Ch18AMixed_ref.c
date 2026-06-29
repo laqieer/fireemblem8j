@@ -1,52 +1,22 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Ch18AMixed.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Typed from data/residual/UnitDef_Ch18AMixed.bin (axis #6 editability, fe8u events_udefs.c parity).
+ * Each 20-byte struct UnitDefinition entry decoded from the residual table; the
+ * redas reinforcement pointer is kept as a relocatable symbol reference so the ROM
+ * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
+ */
 
-__asm__(
-"\t.section .rodata.dat_UnitDef_Ch18AMixed_ref, \"a\", %progbits\n"
-"\t.global UnitDef_Ch18AMixed\n"
-"UnitDef_Ch18AMixed:\n"
-"\t.4byte 0x4B004EC0\n"
-"\t.4byte 0x01000580\n"
-"\t.4byte frontier_df3_unitdef_b_018_912AD4 + 0x960\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x4800010F\n"
-"\t.4byte 0x01000580\n"
-"\t.4byte frontier_df3_unitdef_b_018_912AD4 + 0x968\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x48000201\n"
-"\t.4byte 0x010005C0\n"
-"\t.4byte frontier_df3_unitdef_b_018_912AD4 + 0x970\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x48003C1E\n"
-"\t.4byte 0x01000580\n"
-"\t.4byte frontier_df3_unitdef_b_018_912AD4 + 0x978\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x08001B0B\n"
-"\t.4byte 0x010005C0\n"
-"\t.4byte frontier_df3_unitdef_b_018_912AD4 + 0x980\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x08004B19\n"
-"\t.4byte 0x01000600\n"
-"\t.4byte frontier_df3_unitdef_b_018_912AD4 + 0x988\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x48000702\n"
-"\t.4byte 0x01000580\n"
-"\t.4byte frontier_df3_unitdef_b_018_912AD4 + 0x990\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+extern const u8 frontier_df3_unitdef_b_018_912AD4[];
+SECTION(".rodata.dat_UnitDef_Ch18AMixed_ref") struct UnitDefinition UnitDef_Ch18AMixed[] =
+{
+    { .charIndex=0xC0, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x1, .level=0x9, .yPosition=0x16, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_018_912AD4 + 0x960) },
+    { .charIndex=0xF, .classIndex=0x1, .level=0x9, .yPosition=0x16, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_018_912AD4 + 0x968) },
+    { .charIndex=0x1, .classIndex=0x2, .level=0x9, .yPosition=0x17, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_018_912AD4 + 0x970) },
+    { .charIndex=0x1E, .classIndex=0x3C, .level=0x9, .yPosition=0x16, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_018_912AD4 + 0x978) },
+    { .charIndex=0xB, .classIndex=0x1B, .level=0x1, .yPosition=0x17, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_018_912AD4 + 0x980) },
+    { .charIndex=0x19, .classIndex=0x4B, .level=0x1, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_018_912AD4 + 0x988) },
+    { .charIndex=0x2, .classIndex=0x7, .level=0x9, .yPosition=0x16, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_018_912AD4 + 0x990) },
+    {0},
+};

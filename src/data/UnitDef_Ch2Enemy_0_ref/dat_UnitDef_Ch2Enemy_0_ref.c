@@ -1,47 +1,21 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Ch2Enemy_0.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Typed from data/residual/UnitDef_Ch2Enemy_0.bin (axis #6 editability, fe8u events_udefs.c parity).
+ * Each 20-byte struct UnitDefinition entry decoded from the residual table; the
+ * redas reinforcement pointer is kept as a relocatable symbol reference so the ROM
+ * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
+ */
 
-__asm__(
-"\t.section .rodata.dat_UnitDef_Ch2Enemy_0_ref, \"a\", %progbits\n"
-"\t.global UnitDef_Ch2Enemy_0\n"
-"UnitDef_Ch2Enemy_0:\n"
-"\t.4byte 0x1D00418E\n"
-"\t.4byte 0x01000389\n"
-"\t.4byte data_08908790 + 0x64\n"
-"\t.4byte 0x0000001F\n"
-"\t.4byte 0x00091100\n"
-"\t.4byte 0x0D00198E\n"
-"\t.4byte 0x010001CE\n"
-"\t.4byte data_08908790 + 0x6C\n"
-"\t.4byte 0x0000002D\n"
-"\t.4byte 0x00091200\n"
-"\t.4byte 0x24004147\n"
-"\t.4byte 0x0100020E\n"
-"\t.4byte data_08908790 + 0x74\n"
-"\t.4byte 0x0000001F\n"
-"\t.4byte 0x00090400\n"
-"\t.4byte 0x1D00418E\n"
-"\t.4byte 0x01002286\n"
-"\t.4byte data_08908790 + 0x7C\n"
-"\t.4byte 0x00006C1F\n"
-"\t.4byte 0x00091200\n"
-"\t.4byte 0x1D00418E\n"
-"\t.4byte 0x01000387\n"
-"\t.4byte data_08908790 + 0x84\n"
-"\t.4byte 0x0000001F\n"
-"\t.4byte 0x00090000\n"
-"\t.4byte 0x1500418E\n"
-"\t.4byte 0x010001CE\n"
-"\t.4byte data_08908790 + 0x8C\n"
-"\t.4byte 0x0000001F\n"
-"\t.4byte 0x00091100\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+extern const u8 data_08908790[];
+SECTION(".rodata.dat_UnitDef_Ch2Enemy_0_ref") struct UnitDefinition UnitDef_Ch2Enemy_0[] =
+{
+    { .charIndex=0x8E, .classIndex=0x41, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x9, .yPosition=0xE, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908790 + 0x64), .items={0x1F,0x00,0x00,0x00}, .ai={0x00,0x11,0x09,0x00} },
+    { .charIndex=0x8E, .classIndex=0x19, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0xE, .yPosition=0x7, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908790 + 0x6C), .items={0x2D,0x00,0x00,0x00}, .ai={0x00,0x12,0x09,0x00} },
+    { .charIndex=0x47, .classIndex=0x41, .allegiance=0x2, .level=0x4, .xPosition=0xE, .yPosition=0x8, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908790 + 0x74), .items={0x1F,0x00,0x00,0x00}, .ai={0x00,0x04,0x09,0x00} },
+    { .charIndex=0x8E, .classIndex=0x41, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x6, .yPosition=0xA, .itemDrop=0x1, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908790 + 0x7C), .items={0x1F,0x6C,0x00,0x00}, .ai={0x00,0x12,0x09,0x00} },
+    { .charIndex=0x8E, .classIndex=0x41, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x7, .yPosition=0xE, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908790 + 0x84), .items={0x1F,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0x8E, .classIndex=0x41, .autolevel=0x1, .allegiance=0x2, .level=0x2, .xPosition=0xE, .yPosition=0x7, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908790 + 0x8C), .items={0x1F,0x00,0x00,0x00}, .ai={0x00,0x11,0x09,0x00} },
+    {0},
+};

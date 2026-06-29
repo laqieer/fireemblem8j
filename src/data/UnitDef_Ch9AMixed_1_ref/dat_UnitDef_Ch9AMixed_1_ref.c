@@ -1,32 +1,18 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Ch9AMixed_1.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Typed from data/residual/UnitDef_Ch9AMixed_1.bin (axis #6 editability, fe8u events_udefs.c parity).
+ * Each 20-byte struct UnitDefinition entry decoded from the residual table; the
+ * redas reinforcement pointer is kept as a relocatable symbol reference so the ROM
+ * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
+ */
 
-__asm__(
-"\t.section .rodata.dat_UnitDef_Ch9AMixed_1_ref, \"a\", %progbits\n"
-"\t.global UnitDef_Ch9AMixed_1\n"
-"UnitDef_Ch9AMixed_1:\n"
-"\t.4byte 0x08000702\n"
-"\t.4byte 0x01000196\n"
-"\t.4byte data_0890C0A4 + 0xD8\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x08000201\n"
-"\t.4byte 0x00000195\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0D003FA7\n"
-"\t.4byte 0x00000216\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+extern const u8 data_0890C0A4[];
+SECTION(".rodata.dat_UnitDef_Ch9AMixed_1_ref") struct UnitDefinition UnitDef_Ch9AMixed_1[] =
+{
+    { .charIndex=0x2, .classIndex=0x7, .level=0x1, .xPosition=0x16, .yPosition=0x6, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890C0A4 + 0xD8) },
+    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0x15, .yPosition=0x6 },
+    { .charIndex=0xA7, .classIndex=0x3F, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0x16, .yPosition=0x8 },
+    {0},
+};
