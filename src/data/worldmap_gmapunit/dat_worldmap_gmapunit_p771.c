@@ -4,7 +4,7 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p771") u8 Img_EkrLvupNumBig[] = INCBIN_U8("graphics/gmapunit/Img_EkrLvupNumBig.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p771") u8 Img_EkrLvupNumBig[] = INCBIN_U8("graphics/gmapunit/Img_EkrLvupNumBig.4bpp");
 __asm__(
 "	.section .rodata.dat_worldmap_gmapunit_p771, \"a\", %progbits\n"
 "	.global AnimSprite_LvupStatup_1\n"

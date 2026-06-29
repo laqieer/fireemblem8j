@@ -5,4 +5,4 @@
  */
 
 SECTION(".rodata.dat_worldmap_gmapunit_p1600") u8 gUnkData_66[] = INCBIN_U8("graphics/reuse/gUnkData_66.4bpp.lz");
-SECTION(".rodata.dat_worldmap_gmapunit_p1600") u8 Img_SysBrownBox[] = INCBIN_U8("graphics/gmapunit/Img_SysBrownBox.bin.lz");
+SECTION(".rodata.dat_worldmap_gmapunit_p1600") u8 Img_SysBrownBox[] = INCBIN_U8("graphics/gmapunit/Img_SysBrownBox.4bpp.lz");

@@ -2,7 +2,7 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08aaf350 (US 0x08a2e5ec, shift -0xFFF7F29C); incbin baserom.gba
 	.global Img_MenuStatus_0
 Img_MenuStatus_0:
-	.incbin "graphics/gmapunit/Img_MenuStatus_0.bin.lz"
+	.incbin "graphics/gmapunit/Img_MenuStatus_0.4bpp.lz"
 	.global gMenuStatus_0
 gMenuStatus_0:
 	.incbin "data/residual/gMenuStatus_0.bin"
@@ -11,4 +11,4 @@ Pal_MenuStatus_0:
 	.incbin "graphics/gmapunit/Pal_MenuStatus_0.gbapal"
 	.global Img_SysBlackBox
 Img_SysBlackBox:
-	.incbin "graphics/gmapunit/Img_SysBlackBox.bin.lz"
+	.incbin "graphics/gmapunit/Img_SysBlackBox.4bpp.lz"

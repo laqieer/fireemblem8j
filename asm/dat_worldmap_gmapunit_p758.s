@@ -2,7 +2,7 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x085e52f8 (US 0x085bb0c8, shift -0xFFFD5DD0); incbin baserom.gba
 	.global Img_LvupApfx
 Img_LvupApfx:
-	.incbin "graphics/gmapunit/Img_LvupApfx.bin.lz"
+	.incbin "graphics/gmapunit/Img_LvupApfx.4bpp.lz"
 	.global Pal_LvupApfx
 Pal_LvupApfx:
 	.incbin "graphics/gmapunit/Pal_LvupApfx.gbapal"

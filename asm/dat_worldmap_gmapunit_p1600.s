@@ -5,4 +5,4 @@ gUnkData_66:
 	.incbin "data/residual/gUnkData_66.bin"
 	.global Img_SysBrownBox
 Img_SysBrownBox:
-	.incbin "graphics/gmapunit/Img_SysBrownBox.bin.lz"
+	.incbin "graphics/gmapunit/Img_SysBrownBox.4bpp.lz"

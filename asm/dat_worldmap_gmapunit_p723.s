@@ -2,7 +2,7 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x085cf274 (US 0x085a5a60, shift -0xFFFD67EC); incbin baserom.gba
 	.global Img_EventWarp
 Img_EventWarp:
-	.incbin "graphics/gmapunit/Img_EventWarp.bin.lz"
+	.incbin "graphics/gmapunit/Img_EventWarp.4bpp.lz"
 	.global Pal_EventWarp
 Pal_EventWarp:
 	.incbin "graphics/gmapunit/Pal_EventWarp.gbapal"
@@ -20,7 +20,7 @@ Tsa_PlayerRankFog:
 	.incbin "graphics/gmapunit/Tsa_PlayerRankFog.bin"
 	.global Img_DanceringFx
 Img_DanceringFx:
-	.incbin "graphics/gmapunit/Img_DanceringFx.bin.lz"
+	.incbin "graphics/gmapunit/Img_DanceringFx.4bpp.lz"
 	.global Tsa_DanceringFx
 Tsa_DanceringFx:
 	.incbin "graphics/gmapunit/Tsa_DanceringFx.bin.lz"
