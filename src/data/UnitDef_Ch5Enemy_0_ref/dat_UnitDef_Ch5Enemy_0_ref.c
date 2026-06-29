@@ -1,12 +1,12 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Ch5Enemy_0.bin by scripts/repoint_table.py.
- * Pointer words are emitted as relocatable symbol references so the ROM
- * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
- *
- * Defined under a private name + published as a type-less assembler
- * alias so a typed header declaration (struct Foo NAME[];) does not
- * conflict -- the data bytes (.word relocations) are byte-identical. */
+/* Typed from data/residual/UnitDef_Ch5Enemy_0.bin (axis #6 editability, fe8u events_udefs.c parity).
+ * Each 20-byte struct UnitDefinition entry decoded from the residual table; the
+ * redas reinforcement pointer is kept as a relocatable symbol reference so the ROM
+ * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
+ */
 
 extern const u8 REDA_Ch5Enemy_0_0[];
 extern const u8 REDA_Ch5Enemy_0_1[];
@@ -15,47 +15,14 @@ extern const u8 REDA_Ch5Enemy_0_3[];
 extern const u8 REDA_Ch5Enemy_0_4[];
 extern const u8 REDA_Ch5Enemy_0_5[];
 extern const u8 REDA_Ch5Enemy_0_6[];
-
-SECTION(".rodata.dat_UnitDef_Ch5Enemy_0_ref") static const u32 UnitDef_Ch5Enemy_0__shift[] = {
-    0x4400094A,
-    0x0100000D,
-    (u32)&REDA_Ch5Enemy_0_0,
-    0x0000001C,
-    0x00090303,
-    0x35004E80,
-    0x0100000C,
-    (u32)&REDA_Ch5Enemy_0_1,
-    0x00000014,
-    0x00090300,
-    0x2D003F80,
-    0x0100000A,
-    (u32)&REDA_Ch5Enemy_0_2,
-    0x0000001F,
-    0x00090300,
-    0x2D003F80,
-    0x0100000A,
-    (u32)&REDA_Ch5Enemy_0_3,
-    0x0000001F,
-    0x00090300,
-    0x35004E80,
-    0x0100000D,
-    (u32)&REDA_Ch5Enemy_0_4,
-    0x00000014,
-    0x00090300,
-    0x2D004E80,
-    0x0100000C,
-    (u32)&REDA_Ch5Enemy_0_5,
-    0x00000014,
-    0x00090000,
-    0x2D004E80,
-    0x0100000A,
-    (u32)&REDA_Ch5Enemy_0_6,
-    0x00000014,
-    0x00090000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
+SECTION(".rodata.dat_UnitDef_Ch5Enemy_0_ref") struct UnitDefinition UnitDef_Ch5Enemy_0[] =
+{
+    { .charIndex=0x4A, .classIndex=0x9, .allegiance=0x2, .level=0x8, .xPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)REDA_Ch5Enemy_0_0, .items={0x1C,0x00,0x00,0x00}, .ai={0x03,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0xC, .redaCount=0x1, .redas=(const struct REDA *)REDA_Ch5Enemy_0_1, .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x3F, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)REDA_Ch5Enemy_0_2, .items={0x1F,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x3F, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)REDA_Ch5Enemy_0_3, .items={0x1F,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)REDA_Ch5Enemy_0_4, .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x03,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xC, .redaCount=0x1, .redas=(const struct REDA *)REDA_Ch5Enemy_0_5, .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    { .charIndex=0x80, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)REDA_Ch5Enemy_0_6, .items={0x14,0x00,0x00,0x00}, .ai={0x00,0x00,0x09,0x00} },
+    {0},
 };
-__asm__(".global UnitDef_Ch5Enemy_0\n\t.set UnitDef_Ch5Enemy_0, UnitDef_Ch5Enemy_0__shift\n");

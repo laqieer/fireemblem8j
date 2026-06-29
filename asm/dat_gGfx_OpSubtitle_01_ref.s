@@ -3,4 +3,4 @@
 @ regenerated from layout/carved_rom.tsv (CI consistency: e5499b2 deleted the .s but kept the row)
 	.global gGfx_OpSubtitle_01
 gGfx_OpSubtitle_01:
-	.incbin "graphics/misc_gfx3/gGfx_OpSubtitle_01.bin.lz"
+	.incbin "graphics/misc_gfx3/gGfx_OpSubtitle_01.4bpp.lz"

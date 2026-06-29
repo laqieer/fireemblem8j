@@ -15,7 +15,7 @@ __asm__(
 "\t.4byte 0x00000008\n"
 "\t.4byte gProcScr_BKSEL\n"
 "\t.4byte 0x00000008\n"
-"\t.4byte data_085C2980 + 0x48\n"
+"\t.4byte ProcScr_CamMove\n"  /* shiftcheck: was data_085C2980 + 0x48 (== &ProcScr_CamMove); byte-identical, now relocatable */
 "\t.4byte 0x00000002\n"
 "\t.4byte BackToAttackMenu_RestartMenu + 0x1\n"
 "\t.4byte 0x00000002\n"

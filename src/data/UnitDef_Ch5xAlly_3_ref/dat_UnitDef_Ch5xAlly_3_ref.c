@@ -1,32 +1,18 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Ch5xAlly_3.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Typed from data/residual/UnitDef_Ch5xAlly_3.bin (axis #6 editability, fe8u events_udefs.c parity).
+ * Each 20-byte struct UnitDefinition entry decoded from the residual table; the
+ * redas reinforcement pointer is kept as a relocatable symbol reference so the ROM
+ * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
+ */
 
-__asm__(
-"\t.section .rodata.dat_UnitDef_Ch5xAlly_3_ref, \"a\", %progbits\n"
-"\t.global UnitDef_Ch5xAlly_3\n"
-"UnitDef_Ch5xAlly_3:\n"
-"\t.4byte 0x0800010F\n"
-"\t.4byte 0x03000109\n"
-"\t.4byte data_0890A480 + 0x14\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x08000510\n"
-"\t.4byte 0x03000109\n"
-"\t.4byte data_0890A480 + 0x2C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x08000511\n"
-"\t.4byte 0x02000109\n"
-"\t.4byte data_0890A480 + 0x44\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+extern const u8 data_0890A480[];
+SECTION(".rodata.dat_UnitDef_Ch5xAlly_3_ref") struct UnitDefinition UnitDef_Ch5xAlly_3[] =
+{
+    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0x9, .yPosition=0x4, .redaCount=0x3, .redas=(const struct REDA *)((const u8 *)data_0890A480 + 0x14) },
+    { .charIndex=0x10, .classIndex=0x5, .level=0x1, .xPosition=0x9, .yPosition=0x4, .redaCount=0x3, .redas=(const struct REDA *)((const u8 *)data_0890A480 + 0x2C) },
+    { .charIndex=0x11, .classIndex=0x5, .level=0x1, .xPosition=0x9, .yPosition=0x4, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)data_0890A480 + 0x44) },
+    {0},
+};

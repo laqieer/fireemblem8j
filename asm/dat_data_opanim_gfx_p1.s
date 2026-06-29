@@ -11,19 +11,19 @@ Tsa_OpAnimEirika:
 	.incbin "graphics/misc_gfx/Tsa_OpAnimEirika.bin.lz"
 	.global Img_OpAnimEirikaBlur1
 Img_OpAnimEirikaBlur1:
-	.incbin "graphics/misc_gfx/Img_OpAnimEirikaBlur1.bin.lz"
+	.incbin "graphics/misc_gfx/Img_OpAnimEirikaBlur1.4bpp.lz"
 	.global Tsa_OpAnimEirikaBlur1
 Tsa_OpAnimEirikaBlur1:
 	.incbin "graphics/misc_gfx/Tsa_OpAnimEirikaBlur1.bin.lz"
 	.global Img_OpAnimEirikaBlur2
 Img_OpAnimEirikaBlur2:
-	.incbin "graphics/misc_gfx/Img_OpAnimEirikaBlur2.bin.lz"
+	.incbin "graphics/misc_gfx/Img_OpAnimEirikaBlur2.4bpp.lz"
 	.global Tsa_OpAnimEirikaBlur2
 Tsa_OpAnimEirikaBlur2:
 	.incbin "graphics/misc_gfx/Tsa_OpAnimEirikaBlur2.bin.lz"
 	.global Img_OpAnimEirikaBlur3
 Img_OpAnimEirikaBlur3:
-	.incbin "graphics/misc_gfx/Img_OpAnimEirikaBlur3.bin.lz"
+	.incbin "graphics/misc_gfx/Img_OpAnimEirikaBlur3.4bpp.lz"
 	.global Tsa_OpAnimEirikaBlur3
 Tsa_OpAnimEirikaBlur3:
 	.incbin "graphics/misc_gfx/Tsa_OpAnimEirikaBlur3.bin.lz"

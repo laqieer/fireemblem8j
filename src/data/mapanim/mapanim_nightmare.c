@@ -1,10 +1,10 @@
 #include "global.h"
 
-u8 Img_ManimBarrierBgfx[] = INCBIN_U8("graphics/misc_gfx/Img_ManimBarrierBgfx.bin.lz");
+u8 Img_ManimBarrierBgfx[] = INCBIN_U8("graphics/misc_gfx/Img_ManimBarrierBgfx.4bpp.lz");
 
 u8 Tsa_Mapnightmare[] = INCBIN_U8("graphics/misc_gfx/Tsa_Mapnightmare.bin");
 
-u16 Img_NightMareMapAnimfx[] = INCBIN_U16("graphics/misc_gfx/Img_NightMareMapAnimfx.bin.lz");
+u16 Img_NightMareMapAnimfx[] = INCBIN_U16("graphics/misc_gfx/Img_NightMareMapAnimfx.4bpp.lz");
 
 u16 Pal_NightMareMapAnimfx[] = INCBIN_U16("graphics/misc_gfx/Pal_NightMareMapAnimfx.gbapal");
 

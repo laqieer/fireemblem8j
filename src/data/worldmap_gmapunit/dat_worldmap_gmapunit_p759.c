@@ -4,7 +4,7 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p759") u8 Img_ArenaBattleBg[] = INCBIN_U8("graphics/gmapunit/Img_ArenaBattleBg.bin.lz");
+SECTION(".rodata.dat_worldmap_gmapunit_p759") u8 Img_ArenaBattleBg[] = INCBIN_U8("graphics/gmapunit/Img_ArenaBattleBg.4bpp.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p759") u8 Tsa_ArenaBattleBg[] = INCBIN_U8("graphics/gmapunit/Tsa_ArenaBattleBg.bin.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p759") u16 Pal_ArenaBattleBg_A[] = INCBIN_U16("graphics/gmapunit/Pal_ArenaBattleBg_A.gbapal");
 SECTION(".rodata.dat_worldmap_gmapunit_p759") u16 Pal_ArenaBattleBg_B[] = INCBIN_U16("graphics/gmapunit/Pal_ArenaBattleBg_B.gbapal");

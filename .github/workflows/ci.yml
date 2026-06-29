@@ -29,6 +29,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0   # upload-progress.py needs the commit timestamp + hash
+          submodules: recursive   # mgfembp (FE6 SIO payload) builds from source (F1)
 
       # ---- Fast repo-consistency gates (seconds, no toolchain, fail early) ----
       - name: Self-containment metric (0 baserom incbins — blocking)
@@ -48,7 +49,11 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential binutils-arm-none-eabi libpng-dev
+          # bash + libpng-dev are also needed by the mgfembp submodule sub-build (F1):
+          # it builds its own agbcc (tools/install_agbcc.sh is a bash script) and its own
+          # gbagfx (#include <png.h>) to produce the FE6 SIO multiboot payload from source.
+          # iconv is provided by glibc (the mgfembp C pipeline pipes through `iconv`).
+          sudo apt-get install -y build-essential binutils-arm-none-eabi libpng-dev bash
           # numpy + Pillow are required by the TSA/graphics generators (scripts/gfxtools/
           # tsa_generator.py = FETSATOOL) that build the battle-bg .feimg3/.fetsa3 from the
           # editable .png sources -- same deps fe8u's CI installs. The make-compare byte gate
@@ -70,6 +75,9 @@ jobs:
           scripts/tools/aif2pcm/setup.sh
           # mid2agb builds the editable .mid songs (D311); already-vendored setup, just wire it into CI
           scripts/tools/mid2agb/setup.sh
+          # scaninc scans banim/*_motion.s include deps for the battle-animation
+          # compressing-linker pipeline (BA1); builds from pret upstream source.
+          scripts/tools/scaninc/setup.sh
 
       # ---- THE byte-perfect, self-contained gate (baserom.gba ABSENT) ----
       - name: Build from source + byte-match (make compare, no baserom)
@@ -78,6 +86,17 @@ jobs:
         # a successful build PROVES self-containment and the sha1 PROVES byte-identity
         # to the JP ROM. One step = the old `make compare` + `Self-contained build`.
         run: make compare
+
+      # ---- Shiftability gate (scripts/shiftcheck/, D313) ----
+      - name: Shiftability validation (make shiftcheck — blocking)
+        # Reuses the objects make compare just built: relinks ONCE with --emit-relocs
+        # and runs the static layers (build-system address audit + reloc-coverage scan
+        # + cross-resource offset scan). Fails on any HIGH-confidence hardcoded ROM
+        # pointer (a raw 0x08xxxxxx literal that would break a layout shift). Never
+        # touches the matching build / $(ROM). Layer-2 differential shift is N/A to
+        # fe8j's packed layout and intentionally excluded (see scripts/shiftcheck/
+        # README.md and docs/decisions.md D313).
+        run: make shiftcheck
 
       # ---- Progress reports (non-blocking, reuse the built objects) ----
       - name: Compute progress

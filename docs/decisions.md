@@ -8296,3 +8296,224 @@ mapped the remaining frontier toward all-axes completion. GO drives launched (D3
 .mid/.s), #5=gate 0 — literal/effective complete. #2≈99.7–99.9% (5–10 agbcc walls), #4≈86–87%
 (convention floor), #6 = all major asset types editable + the documented voice/song-tail ceilings.
 This is D308 reference-parity completion, not a defect.
+
+## D313 — Asset-editability + shiftability EPIC (fe8u-parity "fix all .bin misses")
+
+**2026-06-29 (user-driven `/batch` epic, ultracode).** User directed a comprehensive push to
+make EVERY fe8j asset editable in its fe8u SOURCE form, using fe8u as the ground-truth oracle:
+**for each committed `.bin`, if fe8u builds it from a more-editable source (`.png`/`.s`/`.mid`/
+`.aif`/typed C) it is a MISS to fix; if fe8u also commits binary it is legitimate FLOOR.** Plus
+port fe8u's shiftability-validation harness (PRs #745/#744).
+
+**Audit (4,901 fe8j `.bin`):** ~1,919 MISS + 180 deferred + 1,829 floor. Categories →
+12 work units (full plan: `docs/epic_asset_editability_shiftability.md`):
+- U0 reproducible `.bin` form-audit script (`scripts/audit_bin_forms.py` → `docs/bin_audit.md`).
+- A: graphics → `.png` (G1-G4, ~486 image `.bin`; README "pixel-gfx done" was INCOMPLETE).
+- B: **battle-anim pipeline (BA1)** — port fe8u's `linker_script_banim.txt` + `$(BANIM_OBJECT)`
+  `arm_compressing_linker.py` pipeline; replace ~1,481 `data/banim`/`AnimSprite` `.bin` with
+  202 editable `banim/*.s`. Highest-risk lane (JP banim region at a different offset, partitioned).
+- C: sound — m4a tables → `.s` (S1: music_player_table/programmable_wave/keysplit), voicegroup
+  tail (S2). D: menu strings → `menu_def.c` literals (C1). E: UnitDef residuals → typed C (UD1).
+- F: **FE6 SIO payload built FROM SOURCE via the `mgfembp` git submodule** (F1) — NOT a committed
+  `.bin`; canonical fe8u wiring is in history `0ff24f9c`/`bbe919f4~1` (local fe8u's prebuilt blob
+  is a Docker-only fallback). See [[fe8j-fe6sio-payload-mgfembp]].
+- G: shiftcheck harness (V1) — port `scripts/shiftcheck/` (5-layer: build-addr/reloc/offset/
+  diff-shift/mGBA) + `make shiftcheck` + CI.
+
+**DECISION:** execute as 12 parallel worktree-worker units, integrator-serialized through one
+`make compare` gate; U0 first (miss-tracker), BA1 the long-pole. DEFERRED: ApConf/gUnkData/opaque
+(~180, needs RE). FLOOR (don't fake-extract): TSA/`.map.bin`/`.aif`/`efx*`/compressed region-diff.
+This epic plan persisted to `docs/` first (survives the long run); see
+[[epic-plan-persist-to-docs]].
+
+## D314 — Battle animation (BA1): port fe8u's compressing-linker pipeline (BYTE-MATCH, full)
+
+**Date context:** asset-editability epic, lane BA1 (the highest-risk, long-pole unit).
+Goal: replace the opaque battle-animation blob form (an INCBIN of pre-compressed
+`.lz`/`.bin`) with fe8u's **editable** `.s` source + compressing-linker pipeline.
+
+**Pre-state (what fe8j actually had — corrected the epic's hypothesis):** the
+battle-anim data was already a single contiguous `.data.data_banim` section, built
+by `src/data/banimdata/data_banim.c` = 1475 `INCBIN_U8` lines pulling already-built
+intermediates: `graphics/banim/*.4bpp.lz` + `*.agbpal.lz` (from committed PNG/agbpal
+— already editable), and `data/banim/banim_*_oam_l/oam_r/motion_o/modes_bin.bin` (804
+committed binaries = the compressing-linker *output*, not editable). So the misses
+were exactly those 804 oam/script/modes binaries, whose fe8u source is the 201
+`banim/*_motion.s` macro files. (The epic's feared `dat_data_banim_p*.s` AnimSprite
+residuals at 0x0860xxxx are a SEPARATE efx-sprite region, NOT the banim pipeline —
+left untouched.)
+
+**JP banim base = 0x08C02000 — identical to fe8u** (not a different offset). Confirmed
+from `layout/carved_rom.tsv` (`C02000 E47180 …data_banim…`) and a byte extract of the
+ROM region.
+
+**Feasibility PROVEN before wiring (the gate decision):** ran fe8u's
+`scripts/arm_compressing_linker.py -b 0x8c02000` over the JP tree (201 motion `.s` +
+JP PNG/agbpal) and `cmp`'d the resulting `.data` against the ROM region
+`0xC02000..0xE47180` -> **byte-identical, all 2,380,160 bytes** (0 divergent). Also
+confirmed: JP `data_banim.c` INCBIN order has **0 positional diffs** vs fe8u's
+`linker_script_banim.txt` (1475 entries) — the JP layout IS fe8u's compressing-linker
+output. No per-file LZ `-mindist` override was needed (banim sheets use gbagfx's
+default; the two DemonLight `-mindist 3` overrides are a separate non-banim region).
+**No documented floor / no divergent subset — full byte-match.**
+
+**Decision (validated, implemented):**
+- Copy fe8u `scripts/arm_compressing_linker.py`, `scripts/compressor.py`,
+  `linker_script_banim.txt`, the 201 `banim/*_motion.s`. (`include/banim_*.inc` were
+  already committed in fe8j, byte-identical to fe8u.) Vendor `scaninc` via a new
+  `scripts/tools/scaninc/setup.sh` (builds from pret upstream / US prebuilt fallback),
+  wired into CI like the other asset tools.
+- Makefile: `BANIM_OBJECT := banim/data_banim.o` + its `arm_compressing_linker.py …
+  -b 0x8c02000` rule (prereqs via the script's `-m` mode), the `banim/%.o` scaninc
+  rule, the `%_oam_l/oam_r.bin` / `%_modes.bin` objcopy-extract rules; add
+  `$(BANIM_OBJECT)` to `ALL_OBJECTS` and `-R $(BANIM_OBJECT).sym.o` to the final ROM link.
+- `layout/carved_rom.tsv`: swap `src/data/banimdata/data_banim.o(.data.data_banim)` ->
+  `banim/data_banim.o(.data)` at the same 0xC02000 (gen_layout places it there).
+- Delete `src/data/banimdata/data_banim.c` + the 804 `data/banim/banim_*_bin.bin` +
+  the stale `graphics/banim/banim.mk`. Regenerate `data_incbin_deps.mk`. `.gitignore`
+  ignores the `banim/*.bin` / `*.o` / `*.lz` intermediates (mirrors fe8u); only the 201
+  `*_motion.s` sources are committed.
+
+**Gotcha fixed:** the `banim/%.o` scaninc dep must call `$(SCANINC) … banim/$*.s` (not
+`$*.s`) — for the `banim/%.o` pattern make's `$*` stem drops the `banim/` dir, so the
+fe8u-verbatim `$*.s` form silently fails to open the file (harmless empty-deps, but
+defeats `.inc`-edit tracking). The byte oracle (`make compare`) is unaffected either way.
+
+**Result:** `make compare` -> `fireemblem8.gba: OK` (sha1 7da0456…). Battle animation is
+now built from editable `.s` macros, fe8u-parity. No `make compare` weakening; no new
+`.incbin "baserom.gba"`.
+## D315 — Epic C1: menu string pool + tables → editable C (menu_def.c)
+
+**Decision.** Converted the 8 menu tables (gDebugClearMenuItems, gDebugChuudanMenuItems,
+gDebugContinueMenuItems, gItemUseMenuItems, gStealItemMenuItems, gYesNoSelectionMenuItems,
+gUnitActionMenuItems, MenuItems_SioMenudef_0/1) from inline-asm `.4byte sym+off` pointer
+files (`src/data/*_ref/`) into a single typed `src/menu_def.c` (fe8u parity), and decoded the
+shared Shift-JIS string pool at ROM 0x080DC974 from a raw INCBIN
+(`frontier_df4_misc_lo_001_0DC974`, gap1 of frontier_df4_misc_lo.o) into **editable Shift-JIS
+C literals** (axis #6 editability).
+
+**Key analysis / why this shape.**
+- The strings live in ONE hand-packed 796 B pool at fixed addr 0x080DC974 (12 B binary header
+  + 59 null-terminated Shift-JIS strings with 4-byte alignment padding + a 0x78 B MAPTASK
+  binary tail). The pool is SHARED: besides the 8 in-scope tables it is also referenced by 2
+  out-of-scope tables (`data_085C4518`=gDebugMenuItems, `data_085C4830`=SendToConvoy) via
+  `frontier_df4_misc_lo_001_0DC974 + 0xNN`. So I kept the pool as ONE symbol (same name) but
+  re-defined it from `.asciz "日本語"` literals + `.byte`/`.space` (header/tail/padding) in a
+  `menu_def.c` `__asm__` block pinned at 0x080DC974 — out-of-scope refs keep resolving; bytes
+  match exactly (verified: pool .o section == baserom[0x0DC974:+0x31C], 0 relocs).
+- All 59 strings round-trip glibc `iconv UTF-8↔CP932` losslessly (verified), and none contain
+  byte 0x5C/0x22, so plain `.asciz "utf8"` is safe through cpp→iconv→agbcc. No `\xNN` needed.
+- Tables emitted as typed `const struct MenuItemDef[]` with `.name` = per-string label
+  (`gMenuStr_0NN`, also defined in the pool block) so each string is an editable literal at its
+  pinned addr. Function-pointer fields cast `(void*)Func` (fe8u MISMATCHED_SIGNATURE pattern):
+  bare names hit `-Werror` "incompatible pointer type"; `(void*)Func` emits identical
+  `.word Func` reloc. Thumb +1 bit is automatic — compiled-C callees are `.thumb_func` and
+  baseline `thumb`-typed syms are emitted `.set Name, addr+1` by gen_layout, so `.word Name`
+  resolves odd = matches the old asm `Name + 0x1`.
+
+**Wiring.** Deleted 8 `src/data/*_ref/` dirs + 8 `asm/dat_*_ref.s` stubs + their
+DATA_INCBIN_ASM_EXCLUDE entries + 9 carved_rom.tsv rows; removed the pool INCBIN line +
+manifest row + data_incbin_deps token + the now-unused `_0DC96C.bin`; added
+`layout/carved_rom.d/menu_def.tsv` (1 pool row + 9 table rows). Gated on `make compare`.
+## D316 — Voicegroup tail (S2): all 93 voicegroups now editable `.s` (the "11 blob" ceiling dissolved)
+
+**2026-06-29.** The epic-asset-editability S2 unit converted the last 7 still-binary
+voicegroups to `sound/voicegroups/voicegroupNNN.s` `voice_*` macro tables, taking the
+editable count **86 → 93 (000-092 complete)**. The prior "11 unnamed voicegroup gap blobs
+(need RE)" + "2 region-diff voicegroups" ceiling (D311 addendum / D312 frontier) was largely
+**dissolved**, not a real wall:
+
+- **vg035, vg092** — were `dat_voicegroupNNN_ref` INCBIN of a committed `.bin`. Decoded
+  directly. vg092 has a 516-byte trailing **uniform-byte filler** region (post-table padding,
+  not a voice table) emitted as `.byte`; vg035 has a 3-byte partial-entry tail.
+- **vg036, vg076, vg077, vg078** — were *embedded inside* `frontier_df3_voicegroup_001` /
+  `frontier_df4_voice_002` carve-residue blobs (only the start was aliased; the rest opaque).
+  Located by the residue symbols; the **076/077/078 inter-voicegroup boundaries were recovered
+  from the fe8u per-voicegroup entry counts** (792+576+1152 B = the 2520 B blob exactly →
+  region-same structure). The blobs were split: voicegroup rows replace the gap rows in
+  `layout/carved_rom.d/*.tsv`; the df3 prefix residue stays as a length-limited
+  `INCBIN_U8(..., 0, 537)`.
+- **vg086** — was the `data_08213A10` `__asm__` `.4byte` literal block (already source, but
+  not in `voice_*` form): 17 `voice_square_1` + 1 `voice_keysplit_all voicegroup086`.
+
+**Method:** an ELF-symbol oracle (`nm fireemblem8.elf` → address→`DirectSoundData_*`/`voicegroup*`)
+drove a 12-byte-per-entry `voice_*` decoder; every embedded pointer resolved (**0 unresolved**),
+and each `.s` was **round-trip byte-verified** (assemble at JP base + objcopy vs the original
+bytes) *before* build wiring. The keysplit self/sibling references (vg077→vg077/078, vg086→vg086)
+match fe8u's identical structure. Carved-alias suppression used the parallel-safe
+`layout/baseline_syms_drop.d/d312-voicegroups2.tsv` drop fragment (not a d311-music.tsv edit).
+Gate: `make compare` OK + **clean no-baserom -j4 build sha1 = 7da0456…** (100% self-contained).
+
+**Honest floor (correct, NOT a miss):** 2 `frontier_df3_voicegroup` blobs stay `.bin` because
+neither is a voice table — `_000_1F70E8` (56 B) is a 12-entry pointer/keysplit array into
+0x080D62xx, and the `_001` prefix (537 B @0x202C07) is the 3-byte-**misaligned** tail of the
+vg035 region (the odd carve boundary splits a `voice_directsound` entry, so the prefix can't
+start on a 12-byte voice-entry boundary). Documented in `docs/sound.md`.
+## D317 — Shiftability harness (V1): static-only gate; Layer-2 differential-shift N/A on a packed ROM (Copilot-validated)
+
+**2026-06-29.** Ported fe8u's `scripts/shiftcheck/` (PR #745) into fe8j as the shiftability
+validator (`make shiftcheck`). fe8j previously had only `scripts/audit_pointers.py` (gate 0);
+this adds the relinked-with-`--emit-relocs` reloc-coverage scan + cross-resource-offset scan +
+build-system address audit.
+
+**FORK — Layer-2 differential-shift (`gen_shifted_ldscript.py`/`diff_shift.py`) is structurally
+infeasible on fe8j's layout, by design of the incbin-baseline methodology:**
+- fe8u injects `. += SHIFT;` after `src/crt0.o(.text);` to slide the tail into the SLACK that
+  exists before the first absolute pin `. = 0x08C00000;`. fe8j's generated `ldscript.txt` has
+  (1) **no crt0** (first object is `src/rom_header.o(.text)` @0x08000000); (2) the `.rom` body
+  is **packed 100% to the full 16 MB** (0x08000000..0x09000000) — zero slack, every byte is a
+  carved object (no remaining baserom incbin); (3) **no `. = 0x08C00000;`-style pins** in the
+  sequential body — instead a TAIL of 248 NOLOAD overlay sections at absolute addresses (e.g.
+  `.bss_37 0x08A73D7C (NOLOAD) : { src/uichapterstatus.o(.data) }`) that declare region-diff
+  symbol addresses WITHOUT emitting bytes (backing bytes live in the sequential body). A uniform
+  `. += S` shift would (a) overflow the 16 MB cart and (b) desync those absolute overlays from
+  their backing bytes.
+
+**DECISION (Copilot-validated, session 2026-06-29):**
+1. **`make shiftcheck` gate = Layer 0 + Layer 1 + Layer 1b** = `shiftcheck-build` (build-system
+   address audit) + `shiftcheck-static` (reloc-coverage) + `shiftcheck-offsets`
+   (cross-resource offset). These three are layout-agnostic (read ROM + relocs-ELF + map) and
+   work unchanged. This is the CI gate.
+2. **`shiftcheck-diff` (Layer 2) is a separate, NON-gating target**, documented as not applicable
+   to fe8j's fully-packed/no-slack layout (a differential shift needs unused address space + a
+   stable absolute-pin boundary; fe8j has neither, and its absolute NOLOAD overlays would become
+   invalid if the sequential body moved). Pursuing shrink-and-shift/trailing-window would test an
+   artificial topology, not byte-neutral `make compare` behavior — rejected. `shiftcheck-run`
+   (Layer 3, mGBA) likewise non-gating.
+3. **`_classify.py` PIN changed `0x08C00000` → `0x09000000` (ROM_HI)** so the 24 real fe8j carved
+   placements above 0x08C00000 (banim_data, data_banim, pads) are still SCANNED, not silenced as
+   "pinned" — fe8j has no pinned-block-with-slack concept; the whole ROM is shiftability-relevant.
+4. **`OBJECTS_LST := objects.lst`** added (fe8j links via `$(ALL_OBJECTS)` directly, not a
+   response file); a generated rule (`echo $(ALL_OBJECTS) > $@`) feeds `emit_relocs_link.sh`.
+   `emit_relocs_link.sh` adapted to fe8j's link line (`--no-check-sections`, `-L tools/agbcc/lib`,
+   no `-R $(BANIM_OBJECT)`); `BANIM_OBJECT`/`--banim-ldscript` dropped (no banim linker script on
+   main yet — wire when BA1 lands).
+
+`make compare` stays OK (the harness never touches `$(ROM)`/`$(ELF)`/`compare`; any de-pointer
+fix is byte-neutral).
+
+**Two harness fixes the fe8j port required (found running it; code-review-confirmed):**
+5. **`$(OBJECTS_LST)` must use `$(file >$@,...)`, not `@echo ... > $@`.** fe8j's
+   `$(ALL_OBJECTS)` is ~8,898 objects / ~290 KB; `echo` via `/bin/sh -c` overflows
+   `MAX_ARG_STRLEN` (128 KiB) → "Argument list too long" (the exact wall the `clean:`
+   comment documents). GNU make's `$(file ...)` writes directly without a shell.
+6. **`scan_offsets.py` must skip section-symbol-collapse relocations by the fe8j
+   section-symbol naming.** fe8u skips bases in `SECTION_SYMS={"ROM",...}`; fe8j names
+   its sections `.rom` and `.bss_<N>` (NOLOAD overlays), which `nm` does NOT emit as
+   symbols, so 11,114 relocs collapse onto `.rom`/`.bss_N` and 5,231 read as false
+   "cross-resource" HIGH. Fix: also skip any base name starting with `.` (all fe8j
+   section symbols do; no real fe8j global does). This dropped HIGH 5,231 → 8.
+
+**8 real HIGH cross-resource offsets found and fixed (byte-neutral, `make compare` OK).**
+These are the fe8u `gOpinfo_1`/`Img_LimitViewSquares+0x280` class: a stored ProcScr
+pointer written `Base + hardcoded_offset` whose value lands at the START of a different
+resource, so the relocation tracks the wrong symbol. Rewrote each inline-asm `.4byte
+Base + off` → `.4byte TargetSym` (identical word, now relocatable):
+- `data_085C2980 + 0x48` → `ProcScr_CamMove` (5 entries across data_085B8EEC ×2 /
+  data_085C3B10 / data_085C34F0 / data_085E0698)
+- `sPageSlideOffsetLut + 0x28` → `gProcScr_SSGlowyBlendCtrl` (2 in data_08A72A80)
+- `data_08855D58 + 0x40` → `ProcScr_EkrdragonDemonkingobj_2` (1 in data_08855D58)
+
+**Final `make shiftcheck` result: 0 HIGH in all gating layers** (Layer 0 PASS;
+Layer 1b 0 HIGH; Layer 1 0 HIGH-CONFIDENCE), exit 0. `make compare` = OK
+(7da0456...). Recorded in the V1 PR.

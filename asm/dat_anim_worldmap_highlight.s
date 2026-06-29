@@ -5,7 +5,7 @@ Pal_WmHighLightNationMap:
 	.incbin "graphics/misc_gfx3/Pal_WmHighLightNationMap.gbapal"
 	.global Img_WmHightLightMapFrecia
 Img_WmHightLightMapFrecia:
-	.incbin "graphics/misc_gfx3/Img_WmHightLightMapFrecia.bin.lz"
+	.incbin "graphics/misc_gfx3/Img_WmHightLightMapFrecia.4bpp.lz"
 	.global Ap_WmHightLightMapFrecia
 Ap_WmHightLightMapFrecia:
 	.global Ap_WmHightLightMapFrecia_motion
@@ -31,7 +31,7 @@ Ap_WmHightLightMapFrecia_anim_1:
 	.incbin "data/residual/Ap_WmHightLightMapFrecia_anim_1.bin"
 	.global Img_WmHightLightMap2
 Img_WmHightLightMap2:
-	.incbin "graphics/misc_gfx3/Img_WmHightLightMap2.bin.lz"
+	.incbin "graphics/misc_gfx3/Img_WmHightLightMap2.4bpp.lz"
 	.global Ap_WmHightLightMap2
 Ap_WmHightLightMap2:
 	.global Ap_WmHightLightMap2_motion

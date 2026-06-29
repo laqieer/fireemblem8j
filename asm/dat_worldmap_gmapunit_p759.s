@@ -2,7 +2,7 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x085e63b8 (US 0x085bc188, shift -0xFFFD5DD0); incbin baserom.gba
 	.global Img_ArenaBattleBg
 Img_ArenaBattleBg:
-	.incbin "graphics/gmapunit/Img_ArenaBattleBg.bin.lz"
+	.incbin "graphics/gmapunit/Img_ArenaBattleBg.4bpp.lz"
 	.global Tsa_ArenaBattleBg
 Tsa_ArenaBattleBg:
 	.incbin "graphics/gmapunit/Tsa_ArenaBattleBg.bin.lz"

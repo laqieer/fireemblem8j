@@ -203,6 +203,10 @@ src/cp_0803E2F4_0803F7BC.o: CC1FLAGS += -mjp-promote
 # regions build from source instead of `.incbin "baserom.gba"`. See
 # docs/tools/{gbagfx,bin2c,preproc}.md.
 GBAGFX     := tools/gbagfx/gbagfx$(EXE)
+# Exported so the BA1 compressing linker's compressor.py subprocess
+# (scripts/compressor.py reads $GBAGFX) uses the same gbagfx as the rest of the
+# build, even under `make GBAGFX=...` overrides. Mirrors ../fireemblem8u.
+export GBAGFX
 BIN2C      := tools/bin2c/bin2c$(EXE)
 PREPROC    := tools/preproc/preproc$(EXE)
 # Sound toolchain (Phase 1 Music): aif2pcm (AIFF -> raw GBA PCM sample) and
@@ -211,6 +215,11 @@ AIF2PCM    := tools/aif2pcm/aif2pcm$(EXE)
 MID2AGB    := tools/mid2agb/mid2agb$(EXE)
 # gbagfx converts both tiles and palettes; PAL2GBAPAL aliases it for the .pal rule.
 PAL2GBAPAL := $(GBAGFX)
+
+# scaninc (vendored from ../fireemblem8u/tools/scaninc): scans a .s/.c for its
+# .include/#include deps so editing an .inc rebuilds the dependent object. Used by
+# the banim/%.o rule (BA1) to track include/banim_*.inc edits.
+SCANINC    := tools/scaninc/scaninc$(EXE)
 
 PYTHON  ?= python3
 
@@ -941,7 +950,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_UnitDef_Event_PrologueValterGroup_ref.s \
                            asm/dat_EventScr_Prologue_TutMessageTurn2_ref.s \
                            asm/dat_EventScr_Prologue_TutEirikaAttack_ref.s \
-                           asm/dat_gYesNoSelectionMenuItems_ref.s \
                            asm/dat_gCharacterEndingTitleLut_ref.s \
                            asm/dat_const_data_unit_icon_move_p3.s \
                            asm/dat_ProcScr_SpellAssocUnlock_ref.s \
@@ -963,7 +971,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_gProcScr_PhaseIntroText_ref.s \
                            asm/dat_gProcScr_ArenaUiResults_ref.s \
                            asm/dat_gEfxSelfThunderBGFrames_ref.s \
-                           asm/dat_gDebugContinueMenuItems_ref.s \
                            asm/dat_ProcScr_SpellAssocTorch_ref.s \
                            asm/dat_ProcScr_SpellAssocSleep_ref.s \
                            asm/dat_FinalChapterMap2Changes_ref.s \
@@ -974,12 +981,9 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_EventScr_Ch1Tut_ChooseSethTurn1_ref.s \
                            asm/dat_gProcScr_SSPageNumCtrl_ref.s \
                            asm/dat_gEventListCmdInfoTable_ref.s \
-                           asm/dat_gDebugChuudanMenuItems_ref.s \
                            asm/dat_ProcScr_SpellAssocWarp_ref.s \
                            asm/dat_ProcScr_SpellAssocMend_ref.s \
                            asm/dat_ProcScr_SpellAssocHeal_ref.s \
-                           asm/dat_MenuItems_SioMenudef_1_ref.s \
-                           asm/dat_MenuItems_SioMenudef_0_ref.s \
                            asm/dat_MenuItemDef_WMNodeMenu_ref.s \
                            asm/dat_MenuItemDef_RouteSplit_ref.s \
                            asm/dat_MelkaenCoastMapChanges_ref.s \
@@ -1020,8 +1024,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_EventScr_Ch18b_BeginningScene_ref.s \
                            asm/dat_EventScr_Ch16b_BeginningScene_ref.s \
                            asm/dat_unit_icon_move_table_ref.s \
-                           asm/dat_gUnitActionMenuItems_ref.s \
-                           asm/dat_gDebugClearMenuItems_ref.s \
                            asm/dat_gClassReelOrderedLut_ref.s \
                            asm/dat_const_data_unit_icon_move_p17.s \
                            asm/dat_UnitDef_TowerEnemy_8_ref.s \
@@ -1057,7 +1059,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_particles_fx_p0.s \
                            asm/dat_data_bg_p21.s \
                            asm/dat_EventListScr_Ch10a_Character_ref.s \
-                           asm/dat_gStealItemMenuItems_ref.s \
                            asm/dat_UnitDef_Ch9BEnemy_3_ref.s \
                            asm/dat_UnitDef_Ch9AEnemy_0_ref.s \
                            asm/dat_PopupScr_ItemStolen_ref.s \
@@ -1092,7 +1093,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_EventListScr_Ch9a_Location_ref.s \
                            asm/dat_EventListScr_Ch8_Character_ref.s \
                            asm/dat_EventListScr_Ch1_Character_ref.s \
-                           asm/dat_gItemUseMenuItems_ref.s \
                            asm/dat_const_data_unit_icon_move_p36.s \
                            asm/dat_const_data_unit_icon_move_p14.s \
                            asm/dat_EventScr_Ch19A_11_ref.s \
@@ -1233,8 +1233,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p251.s \
                            asm/dat_worldmap_gmapunit_p230.s \
                            asm/dat_worldmap_gmapunit_p1652.s \
-                           asm/dat_voicegroup092_ref.s \
-                           asm/dat_voicegroup035_ref.s \
                            asm/dat_worldmap_gmapunit_p763.s \
                            asm/dat_worldmap_gmapunit_p762.s \
                            asm/dat_worldmap_gmapunit_p460.s \
@@ -1729,7 +1727,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_Ch2Events_ref.s \
                            asm/dat_Ch1Events_ref.s \
                            asm/dat_data_5AA96C_p0.s \
-                           asm/data_banim.s \
                            asm/direct_sound_data.s \
                            asm/data_data_banim_terrain.s \
                            asm/data_banim_pal.s \
@@ -2060,7 +2057,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/data_0853D31C.s \
                            asm/data_0853518C.s \
                            asm/data_08214004.s \
-                           asm/data_08213A10.s \
                            asm/data_081F6D00.s \
                            asm/data_081F66A4.s \
                            asm/data_081F64C0.s \
@@ -2593,7 +2589,30 @@ VOICEGROUP_OBJECTS := $(VOICEGROUP_S:.s=.o)
 # with editable source -- baserom.gba is NOT in this chain (docs/sound.md, D312).
 SONG_TABLE_OBJECTS := sound/song_table.o sound/songs/dummy_song.o
 
-ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS) $(VOICEGROUP_OBJECTS) $(SONG_TABLE_OBJECTS)
+# BA1 battle-animation pipeline (fe8u-parity): a SINGLE pre-linked + per-resource
+# LZ-compressed blob built from editable banim/*_motion.s + graphics/banim/*.png +
+# *.agbpal by scripts/arm_compressing_linker.py (linker_script_banim.txt). It is
+# placed at the JP banim base 0x08C02000 by ldscript.txt (carved_rom.tsv row) AND
+# its symbol table is fed back into the final ROM link via -R $(BANIM_OBJECT).sym.o
+# (the rest of the ROM references banim_*_script / sheet symbols). This replaces
+# the opaque src/data/banimdata/data_banim.c INCBIN-of-.lz/.bin form with the
+# editable .s source. baserom.gba is NOT in this chain.
+BANIM_OBJECT := banim/data_banim.o
+
+
+# --- S1 editable m4a engine tables: fe8u-style descriptive .s (was opaque .bin) ----
+# sound/music_player_table.s   -- gMPlayTable rodata as symbolic `music_player` macro
+#   entries (gMPlayInfo_* from baseline_syms + gMPlayTrack_* .bss it defines at the JP
+#   base 0x03001DE0 via layout/carved_ram.d) -- replaces data/sound/gMPlayTable.bin.
+# sound/programmable_wave_data.s -- the 11 programmable-wave samples (wave000-010)
+#   .incbin'd from sound/programmable_wave_samples/*.pcm (region-same, fe8u-ported) --
+#   replaces the data_08214004 residue incbin.
+# sound/keysplit_tables.s      -- the (FE8-unused) keysplit byte table, region-same,
+#   ported verbatim from fe8u -- split out of the old voicegroup092_ref .bin.
+# All three are committed editable source; baserom.gba is NOT in this chain.
+M4A_TABLE_OBJECTS := sound/music_player_table.o sound/programmable_wave_data.o sound/keysplit_tables.o
+
+ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS) $(VOICEGROUP_OBJECTS) $(SONG_TABLE_OBJECTS) $(BANIM_OBJECT) $(M4A_TABLE_OBJECTS)
 
 # --- NON_MATCHING staging (D26): readable C that DOCUMENTS a region-different
 # function whose byte source is still asm/<fn>.s. PROVE-BUILDS ONLY -- NEVER
@@ -2612,6 +2631,70 @@ all: $(ROM)
 # `make compare` is the build's only test: SHA-1 of the built ROM vs the original.
 compare: $(ROM)
 	$(SHASUM) -c checksum.sha1
+
+#### Shiftability harness (scripts/shiftcheck/) ####
+# Detects hardcoded pointers (raw absolute addresses that bypass the symbol system)
+# which would break if the ROM layout shifted. Entirely separate from the matching
+# build: never touches $(ROM)/$(ELF)/compare. See scripts/shiftcheck/README.md.
+#
+# fe8j vs fe8u (D313): the CI gate is the STATIC layers only (build-addr audit +
+# reloc-coverage + cross-resource offset). fe8u's Layer-2 differential shift is NOT
+# applicable to fe8j's fully-packed, no-slack, absolute-NOLOAD-overlay ldscript, so
+# shiftcheck-diff is a separate non-gating target (it exits with a clear "no slack"
+# message). fe8j has no separate banim linker script on main yet, so fe8u's
+# --banim-ldscript / BANIM_OBJECT plumbing is dropped (wire it when BA1 lands).
+RELOCS_ELF   := fireemblem8_relocs.elf
+SHIFTDIR     := build/shiftcheck
+SHIFT        ?= 0x40000
+SHIFT2       ?= 0x80000
+SHIFTCHECK   := scripts/shiftcheck
+# fe8j links $(ALL_OBJECTS) directly (no response file in the $(ELF) rule); the
+# harness drives the relink through a generated response file so its command line
+# cannot overflow the shell arg limit with ~8k objects.
+OBJECTS_LST  := objects.lst
+
+# Write the object list with GNU make's $(file ...) function, NOT `echo ... > $@`:
+# fe8j's $(ALL_OBJECTS) expands to ~8900 objects / ~290 KB, which overflows the
+# shell's single-argument limit (MAX_ARG_STRLEN, 128 KiB) and dies with "Argument
+# list too long" -- the exact wall the `clean:` rule comment below documents.
+# $(file ...) writes directly (no shell), so it is immune. Needs GNU make >= 4.0.
+$(OBJECTS_LST): $(ALL_OBJECTS)
+	$(file >$@,$(ALL_OBJECTS))
+	@echo "wrote $@ ($(words $(ALL_OBJECTS)) objects)"
+
+# Layer 0: audit hardcoded addresses in the build system (Makefile/ldscript).
+shiftcheck-build:
+	$(PYTHON) $(SHIFTCHECK)/scan_build_addrs.py --makefile Makefile \
+	    --ldscript $(LDSCRIPT)
+
+# Layer 1: relink with --emit-relocs, then flag ROM-pointer words with no relocation.
+$(RELOCS_ELF): $(ALL_OBJECTS) $(OBJECTS_LST) $(LDSCRIPT) $(BANIM_OBJECT)
+	LD='$(LD)' OBJECTS_LST='$(OBJECTS_LST)' \
+	    $(SHIFTCHECK)/emit_relocs_link.sh $@ $(LDSCRIPT) -q -R $(BANIM_OBJECT).sym.o
+
+shiftcheck-static: $(RELOCS_ELF) $(ROM) $(MAP)
+	$(PYTHON) $(SHIFTCHECK)/scan_relocs.py --elf $(RELOCS_ELF) --gba $(ROM) \
+	    --map $(MAP) --ref-elf $(ELF) --prefix $(PREFIX) \
+	    --allowlist $(SHIFTCHECK)/allowlist.txt
+
+# Layer 1b: flag relocations against the WRONG base symbol -- a stored pointer written
+# "ResourceA + hardcoded offset" that lands in a different resource B (breaks if A is resized).
+shiftcheck-offsets: $(RELOCS_ELF) $(ROM) $(MAP)
+	$(PYTHON) $(SHIFTCHECK)/scan_offsets.py --elf $(RELOCS_ELF) --gba $(ROM) \
+	    --map $(MAP) --ref-elf $(ELF) --prefix $(PREFIX)
+
+# Layer 2: differential two-shift build (NON-gating; not applicable to fe8j's packed
+# ROM -- exits with a clear "no slack" message). Kept for documentation parity.
+shiftcheck-diff: $(ROM) $(MAP) $(OBJECTS_LST)
+	LD='$(LD)' OBJCOPY='$(OBJCOPY)' OBJECTS_LST='$(OBJECTS_LST)' \
+	    $(PYTHON) $(SHIFTCHECK)/diff_shift.py --base-gba $(ROM) --ldscript $(LDSCRIPT) \
+	    --map $(MAP) --ref-elf $(ELF) --prefix $(PREFIX) --shifts $(SHIFT),$(SHIFT2) \
+	    --outdir $(SHIFTDIR) --allowlist $(SHIFTCHECK)/allowlist.txt
+
+# The CI gate (no emulator): build-system audit + reloc scan + cross-resource offsets.
+shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets
+
+.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-diff
 
 # The carve glue (ldscript.txt + asm/baserom.s + asm/jp_syms.s) is GENERATED from
 # the layout/ manifests and is gitignored, so the build regenerates it whenever a
@@ -2707,6 +2790,46 @@ $(VOICEGROUP_OBJECTS): %.o: %.s
 # D312 song table + dummy_song placeholder: committed descriptive .s assembled
 # with m4a.inc / MPlayDef.s on the include path (ASFLAGS already has -I . -I include).
 $(SONG_TABLE_OBJECTS): %.o: %.s
+	$(AS) $(ASFLAGS) -g $< -o $@
+
+#### Battle animation recipes (BA1, fe8u-parity) ####
+# The compressing linker lays every banim resource end-to-end at base 0x08C02000
+# in linker_script_banim.txt order, LZ-compressing per the `>lz` flag, and emits
+# one ELF object (banim/data_banim.o) + its symbols-only sidecar (.sym.o). Its
+# prerequisites are produced dynamically by the `-m` mode (every `obj` field of the
+# linker script: the sheet .4bpp.lz, .agbpal.lz, oam .bin.lz, motion .o, modes .bin)
+# so make builds each via its own pattern rule first. Mirrors ../fireemblem8u.
+$(BANIM_OBJECT): $(shell $(PYTHON) ./scripts/arm_compressing_linker.py -t linker_script_banim.txt -m)
+	$(PYTHON) ./scripts/arm_compressing_linker.py -o $@ -t linker_script_banim.txt -b 0x8c02000 -l $(LD) --objcopy $(OBJCOPY) -c ./scripts/compressor.py
+
+# Extract a flat section from an assembled motion object (one objcopy per section).
+# Three separate pattern rules -- NOT a grouped target: each objcopy -j emits a
+# single file, so make runs the right one(s) on demand. Mirrors ../fireemblem8u.
+%_modes.bin: %_motion.o
+	$(OBJCOPY) -O binary -j .data.modes $< $@
+
+%_oam_l.bin: %_motion.o
+	$(OBJCOPY) -O binary -j .data.oam_l $< $@
+
+%_oam_r.bin: %_motion.o
+	$(OBJCOPY) -O binary -j .data.oam_r $< $@
+
+# Assemble a banim motion .s; scaninc tracks the three .include "../include/banim_*.inc"
+# so editing a macro rebuilds the motion objects. (-I "" so the relative ../include
+# path in the .s resolves; ASFLAGS already carries -I include -I .)
+ifeq ($(NODEP),1)
+banim/%.o:    banim_dep :=
+else
+banim/%.o:    banim_dep = $(shell $(SCANINC) -I include -I "" banim/$*.s)
+endif
+.SECONDEXPANSION:
+banim/%.o: banim/%.s $$(banim_dep)
+	$(AS) $(ASFLAGS) -g $< -o $@
+
+# S1 m4a engine tables: music_player_table.s (.include asm/macros/m4a.inc),
+# programmable_wave_data.s (.incbin .pcm), keysplit_tables.s. Committed descriptive
+# .s assembled with the include path already set in ASFLAGS (-I . -I include).
+$(M4A_TABLE_OBJECTS): %.o: %.s
 	$(AS) $(ASFLAGS) -g $< -o $@
 
 #### Sound asset rules (Phase 1 Music) ####
@@ -2806,6 +2929,41 @@ graphics/map/%.S: ;
 %.lz: % ; $(GBAGFX) $< $@ $(LZ_FLAGS)
 %.rl: % ; $(GBAGFX) $< $@
 
+# --- FE6 SIO multiboot payload, built from source (mgfembp submodule) ----------
+# asm/fe6sio.s (the FE8J link-arena FE6 SIO routines + ROM header) incbins
+# fe6sio_payload.bin.lz: the LZ77-compressed FE6 multiboot program FE8 sends to a
+# linked FE6 cartridge over SIO. fireemblem8u builds this payload FROM SOURCE via
+# the mgfembp git submodule (StanHash/mgfembp, "Mysterious Gba Fire Emblem
+# MultiBoot Payload") rather than committing the opaque blob -- so baserom.gba
+# stays out of this chain and the payload is editable. mgfembp builds with its own
+# agbcc variant (fetched by its installer) into mgfembp/mgfembp.bin
+# (sha1 8a81a47d88f6b0a3f91c49784b9f7b317382abac, region-invariant); gbagfx then
+# LZ-compresses it (-mindist 1, the original compressor's minimum match distance)
+# to exactly the JP ROM's bytes. The explicit fe6sio_payload.bin.lz rule overrides
+# the generic %.lz pattern so it sources mgfembp.bin, not a committed .bin.
+#
+# C_INCLUDE_PATH is unset for the sub-build: the build image exports it to point at
+# agbcc's newlib headers for the main ROM compile, but it leaks into the host-gcc
+# build of mgfembp's own tools (embed, gbagfx), pulling newlib's <stdio.h> and
+# breaking the link against the host libc. mgfembp supplies agbcc headers via -I
+# itself. CPP=cpp because arm-none-eabi-cpp may be absent.
+mgfembp/tools/agbcc/bin/agbcc:
+	cd mgfembp && env -u C_INCLUDE_PATH bash tools/install_agbcc.sh
+
+mgfembp/mgfembp.bin: mgfembp/tools/agbcc/bin/agbcc FORCE
+	env -u C_INCLUDE_PATH $(MAKE) -C mgfembp CPP=cpp PREFIX="$(PREFIX)" tools
+	env -u C_INCLUDE_PATH $(MAKE) -C mgfembp CPP=cpp PREFIX="$(PREFIX)" mgfembp.bin
+
+fe6sio_payload.bin.lz: mgfembp/mgfembp.bin
+	$(GBAGFX) $< $@ -mindist 1
+
+# asm/fe6sio.o incbins the freshly-built payload, so it must rebuild when the
+# payload changes (the asm has no other recipe-level dependency on it).
+asm/fe6sio.o: fe6sio_payload.bin.lz
+
+FORCE:
+.PHONY: FORCE
+
 # Chapter map tilemaps (D309): an editable layout (.mar grid + .json metadata under
 # graphics/map/layout/) is converted by MARTOMAP into the ROM's flat map .bin, which
 # the %.lz rule then compresses for incbin. The 63 chapter maps build from these
@@ -2904,7 +3062,7 @@ check-nonmatching:
 	$(PYTHON) scripts/check_nonmatching.py
 
 $(ELF): $(ALL_OBJECTS) $(LDSCRIPT)
-	$(LD) --no-check-sections -T $(LDSCRIPT) -Map $(MAP) -o $@ $(ALL_OBJECTS) -L tools/agbcc/lib -lc -lgcc
+	$(LD) --no-check-sections -T $(LDSCRIPT) -Map $(MAP) -o $@ $(ALL_OBJECTS) -R $(BANIM_OBJECT).sym.o -L tools/agbcc/lib -lc -lgcc
 
 %.gba: %.elf
 	$(OBJCOPY) --strip-debug -O binary --pad-to 0x9000000 --gap-fill=0xff $< $@
@@ -2921,6 +3079,10 @@ clean:
 	find asm src -name '*.o' -type f -delete
 	$(RM) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(DATA_INCBIN_CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
 	$(RM) $(NONMATCH_CFILES:.c=.s)
+	# Shiftability harness artifacts (scripts/shiftcheck/): the relinked relocs ELF +
+	# its map, the link response file, and the shifted-build scratch dir.
+	$(RM) $(RELOCS_ELF) $(RELOCS_ELF:.elf=.map) $(OBJECTS_LST)
+	$(RM) -r $(SHIFTDIR)
 	# D311 editable music: the song .o and the mid2agb-generated .s are gitignored
 	# build outputs (the committed source is the .mid). Remove them so a clean tree
 	# rebuilds them from the .mid via the sound/songs.mk %.s: %.mid rule.
@@ -2939,6 +3101,12 @@ clean:
 	# Sound build intermediates (committed source is .aif; .bin rebuilt by aif2pcm).
 	# Gitignored, so `git clean -Xf` removes only them and never a committed .aif.
 	@git clean -Xf -- 'sound/**/*.bin' >/dev/null 2>&1 || true
+	# BA1 battle-animation intermediates: the motion .o, the objcopy-extracted
+	# .bin (oam_l/oam_r/modes) + their .lz, and the compressing-linker outputs
+	# banim/data_banim.o(.sym.o). All gitignored (committed source is banim/*.s),
+	# so `git clean -Xf` removes only them and never a committed *_motion.s.
+	# (The top-level `find asm src -name '*.o'` above does NOT reach banim/.)
+	@git clean -Xf -- 'banim/*.o' 'banim/*.bin' 'banim/*.lz' 'banim/*.bak' >/dev/null 2>&1 || true
 
 # Fast repo-consistency lint (no toolchain / no ROM needed): every object the build links
 # has a git-tracked source. Catches the "layout row without a committed .s/.c" class that

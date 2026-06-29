@@ -3,7 +3,7 @@
 @ src/data/mapanim/mapanim_monster_gorgon.o: region-same content at JP 0x08a27128 (US 0x089b6aa0, shift -0x-70688); incbin baserom.gba
 	.global Img_MonsterStoneMapAnimfx
 Img_MonsterStoneMapAnimfx:
-	.incbin "graphics/misc_gfx/Img_MonsterStoneMapAnimfx.bin.lz"
+	.incbin "graphics/misc_gfx/Img_MonsterStoneMapAnimfx.4bpp.lz"
 	.global Pal_MonsterStoneMapAnimfx
 Pal_MonsterStoneMapAnimfx:
 	.incbin "graphics/misc_gfx/Pal_MonsterStoneMapAnimfx.gbapal"
@@ -39,7 +39,7 @@ Tsa10_MonsterStoneMapAnimfx:
 	.incbin "data/residual/Tsa10_MonsterStoneMapAnimfx.bin"
 	.global Img_GorgonHatchCloud
 Img_GorgonHatchCloud:
-	.incbin "graphics/misc_gfx/Img_GorgonHatchCloud.bin.lz"
+	.incbin "graphics/misc_gfx/Img_GorgonHatchCloud.4bpp.lz"
 	.global Pal_GorgonHatchCloud
 Pal_GorgonHatchCloud:
 	.incbin "graphics/misc_gfx/Pal_GorgonHatchCloud.gbapal"

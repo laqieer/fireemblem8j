@@ -14,7 +14,7 @@ TsaConf_BanimTmA4:
 	.incbin "data/residual/TsaConf_BanimTmA4.bin"
 	.global Img_NODAMGEMIS
 Img_NODAMGEMIS:
-	.incbin "graphics/gmapunit/Img_NODAMGEMIS.bin.lz"
+	.incbin "graphics/gmapunit/Img_NODAMGEMIS.4bpp.lz"
 	.global Pal_Efxbattle_0
 Pal_Efxbattle_0:
 	.incbin "graphics/gmapunit/Pal_Efxbattle_0.gbapal"

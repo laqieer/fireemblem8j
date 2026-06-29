@@ -8,4 +8,4 @@ SECTION(".rodata.dat_worldmap_gmapunit_p751") const u16 gLegacyUiFrameDPalette[]
 SECTION(".rodata.dat_worldmap_gmapunit_p751") const u16 gUiBarPaletteD[] = INCBIN_U16("graphics/gmapunit/gUiBarPaletteD.gbapal");
 SECTION(".rodata.dat_worldmap_gmapunit_p751") const u8 gUnkUiFrameImage[] = INCBIN_U8("graphics/reuse/gUnkUiFrameImage.4bpp.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p751") const u16 gUnkUiFramePalettes[] = INCBIN_U16("graphics/gmapunit/gUnkUiFramePalettes.gbapal");
-SECTION(".rodata.dat_worldmap_gmapunit_p751") u8 Img_SysGrayBox[] = INCBIN_U8("graphics/gmapunit/Img_SysGrayBox.bin.lz");
+SECTION(".rodata.dat_worldmap_gmapunit_p751") u8 Img_SysGrayBox[] = INCBIN_U8("graphics/gmapunit/Img_SysGrayBox.4bpp.lz");

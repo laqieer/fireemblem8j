@@ -6,7 +6,7 @@ gPal_StoneShatterAnim:
 	.incbin "graphics/misc_gfx3/gPal_StoneShatterAnim.gbapal"
 	.global gImg_StoneShatterAnim
 gImg_StoneShatterAnim:
-	.incbin "graphics/misc_gfx3/gImg_StoneShatterAnim.bin.lz"
+	.incbin "graphics/misc_gfx3/gImg_StoneShatterAnim.4bpp.lz"
 	.global gTsa_StoneShatter_0
 gTsa_StoneShatter_0:
 	.incbin "data/residual/gTsa_StoneShatter_0.bin"

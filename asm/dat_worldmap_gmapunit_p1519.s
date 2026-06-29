@@ -2,22 +2,22 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08a5a35c (US 0x089e8238, shift -0xFFF8DEDC); incbin baserom.gba
 	.global Img_TalkBubble
 Img_TalkBubble:
-	.incbin "graphics/gmapunit/Img_TalkBubble.bin.lz"
+	.incbin "graphics/gmapunit/Img_TalkBubble.4bpp.lz"
 	.global Img_TalkBubbleOpening_E
 Img_TalkBubbleOpening_E:
-	.incbin "graphics/gmapunit/Img_TalkBubbleOpening_E.bin.lz"
+	.incbin "graphics/gmapunit/Img_TalkBubbleOpening_E.4bpp.lz"
 	.global Img_TalkBubbleOpening_D
 Img_TalkBubbleOpening_D:
-	.incbin "graphics/gmapunit/Img_TalkBubbleOpening_D.bin.lz"
+	.incbin "graphics/gmapunit/Img_TalkBubbleOpening_D.4bpp.lz"
 	.global Img_TalkBubbleOpening_C
 Img_TalkBubbleOpening_C:
-	.incbin "graphics/gmapunit/Img_TalkBubbleOpening_C.bin.lz"
+	.incbin "graphics/gmapunit/Img_TalkBubbleOpening_C.4bpp.lz"
 	.global Img_TalkBubbleOpening_B
 Img_TalkBubbleOpening_B:
-	.incbin "graphics/gmapunit/Img_TalkBubbleOpening_B.bin.lz"
+	.incbin "graphics/gmapunit/Img_TalkBubbleOpening_B.4bpp.lz"
 	.global Img_TalkBubbleOpening_A
 Img_TalkBubbleOpening_A:
-	.incbin "graphics/gmapunit/Img_TalkBubbleOpening_A.bin.lz"
+	.incbin "graphics/gmapunit/Img_TalkBubbleOpening_A.4bpp.lz"
 	.global Pal_TalkBubble
 Pal_TalkBubble:
 	.incbin "graphics/gmapunit/Pal_TalkBubble.gbapal"

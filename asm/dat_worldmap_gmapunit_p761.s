@@ -47,7 +47,7 @@ Tsa11_EfxLvupBG:
 	.incbin "data/residual/Tsa11_EfxLvupBG.bin"
 	.global Img_EfxLvupBG2
 Img_EfxLvupBG2:
-	.incbin "graphics/gmapunit/Img_EfxLvupBG2.bin.lz"
+	.incbin "graphics/gmapunit/Img_EfxLvupBG2.4bpp.lz"
 	.global Pal_EfxLvupBG2
 Pal_EfxLvupBG2:
 	.incbin "graphics/gmapunit/Pal_EfxLvupBG2.gbapal"
@@ -74,7 +74,7 @@ Tsa6_EfxLvupBG2:
 	.incbin "data/residual/Tsa6_EfxLvupBG2.bin"
 	.global Img_EfxLvupOBJ2
 Img_EfxLvupOBJ2:
-	.incbin "graphics/gmapunit/Img_EfxLvupOBJ2.bin.lz"
+	.incbin "graphics/gmapunit/Img_EfxLvupOBJ2.4bpp.lz"
 	.global AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_0
 AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_0:
 	.incbin "data/residual/AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_0.bin"

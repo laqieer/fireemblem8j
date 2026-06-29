@@ -18,11 +18,9 @@ frontier_df4_misc_lo_000a_0DC3DC:
 frontier_df4_misc_lo_000b_0DC41C:
 	.incbin "graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin"
 
-	.section .data.frontier_df4_misc_lo.gap1, "a", %progbits
-@ df4_misc_lo region-different data, JP 0x080dc96c..0x080dcc90 (804 B); long-tail data gap (no .text in window), byte-perfect incbin.
-	.global frontier_df4_misc_lo_001_0DC96C
-frontier_df4_misc_lo_001_0DC96C:
-	.incbin "graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_001_0DC96C.bin"
+@ Was gap1 (frontier_df4_misc_lo_001_0DC96C incbin); the 0DC974 menu string pool is
+@ now editable Shift-JIS literals in src/menu_def.c (axis #6 C1). This descriptive .s
+@ is excluded from the build (DATA_INCBIN_ASM_EXCLUDE); the .c provides the symbols.
 
 	.section .data.frontier_df4_misc_lo.gap2a, "a", %progbits
 @ df4_misc_lo region-different data, JP 0x080dcdd0..0x080dce48 (120 B); long-tail data gap (no .text in window), byte-perfect incbin.

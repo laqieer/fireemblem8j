@@ -23,7 +23,7 @@ gUnkData_71:
 	.incbin "data/residual/gUnkData_71.bin"
 	.global Img_PrepItemUseScreen
 Img_PrepItemUseScreen:
-	.incbin "graphics/gmapunit/Img_PrepItemUseScreen.bin.lz"
+	.incbin "graphics/gmapunit/Img_PrepItemUseScreen.4bpp.lz"
 	.global Tsa_PrepItemUseScreen
 Tsa_PrepItemUseScreen:
 	.incbin "graphics/gmapunit/Tsa_PrepItemUseScreen.bin.lz"
@@ -44,22 +44,22 @@ gUnkData_76:
 	.incbin "data/residual/gUnkData_76.bin"
 	.global Img_SpinningArrow
 Img_SpinningArrow:
-	.incbin "graphics/gmapunit/Img_SpinningArrow.bin.lz"
+	.incbin "graphics/gmapunit/Img_SpinningArrow.4bpp.lz"
 	.global gImg_UiSpinningArrow_Horizontal
 gImg_UiSpinningArrow_Horizontal:
-	.incbin "graphics/gmapunit/gImg_UiSpinningArrow_Horizontal.bin.lz"
+	.incbin "graphics/gmapunit/gImg_UiSpinningArrow_Horizontal.4bpp.lz"
 	.global gUnkData_77
 gUnkData_77:
 	.incbin "data/residual/gUnkData_77.bin"
 	.global Img_UnkData_1
 Img_UnkData_1:
-	.incbin "graphics/gmapunit/Img_UnkData_1.bin.lz"
+	.incbin "graphics/gmapunit/Img_UnkData_1.4bpp.lz"
 	.global Img_UnitListBanners
 Img_UnitListBanners:
-	.incbin "graphics/gmapunit/Img_UnitListBanners.bin.lz"
+	.incbin "graphics/gmapunit/Img_UnitListBanners.4bpp.lz"
 	.global Img_UnitListBanner_Animation
 Img_UnitListBanner_Animation:
-	.incbin "graphics/gmapunit/Img_UnitListBanner_Animation.bin.lz"
+	.incbin "graphics/gmapunit/Img_UnitListBanner_Animation.4bpp.lz"
 	.global Pal_UnkData_1
 Pal_UnkData_1:
 	.incbin "graphics/gmapunit/Pal_UnkData_1.gbapal"
@@ -68,4 +68,4 @@ gUnkData_78:
 	.incbin "data/residual/gUnkData_78.bin"
 	.global Img_PrepTextShadow
 Img_PrepTextShadow:
-	.incbin "graphics/gmapunit/Img_PrepTextShadow.bin.lz"
+	.incbin "graphics/gmapunit/Img_PrepTextShadow.4bpp.lz"

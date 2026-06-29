@@ -1,0 +1,11 @@
+# Menu tables + string pool decoded to editable C (axis #6). gen by C1.
+0DC974	0DCC90	src/menu_def.o(.rodata.menu_def_pool)	menu string pool: editable Shift-JIS literals (was frontier_df4_misc_lo gap1 INCBIN; axis #6)
+5C4320	5C43F8	src/menu_def.o(.rodata.menu_def.gDebugClearMenuItems)	gDebugClearMenuItems menu table (typed struct, axis #6 editability)
+5C43F8	5C4440	src/menu_def.o(.rodata.menu_def.gDebugChuudanMenuItems)	gDebugChuudanMenuItems menu table (typed struct, axis #6 editability)
+5C4464	5C4518	src/menu_def.o(.rodata.menu_def.gDebugContinueMenuItems)	gDebugContinueMenuItems menu table (typed struct, axis #6 editability)
+5C4680	5C4758	src/menu_def.o(.rodata.menu_def.gItemUseMenuItems)	gItemUseMenuItems menu table (typed struct, axis #6 editability)
+5C4758	5C4830	src/menu_def.o(.rodata.menu_def.gStealItemMenuItems)	gStealItemMenuItems menu table (typed struct, axis #6 editability)
+5C4A28	5C4A94	src/menu_def.o(.rodata.menu_def.gYesNoSelectionMenuItems)	gYesNoSelectionMenuItems menu table (typed struct, axis #6 editability)
+5C4F14	5C534C	src/menu_def.o(.rodata.menu_def.gUnitActionMenuItems)	gUnitActionMenuItems menu table (typed struct, axis #6 editability)
+5D4C94	5D4D00	src/menu_def.o(.rodata.menu_def.MenuItems_SioMenudef_0)	MenuItems_SioMenudef_0 menu table (typed struct, axis #6 editability)
+5D4D00	5D4DD8	src/menu_def.o(.rodata.menu_def.MenuItems_SioMenudef_1)	MenuItems_SioMenudef_1 menu table (typed struct, axis #6 editability)

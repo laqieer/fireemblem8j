@@ -21,7 +21,7 @@ __asm__(
 "\t.4byte 0x00000003\n"
 "\t.4byte EkrDemonkingObj_RevealLoop + 0x1\n"
 "\t.4byte 0x00000008\n"
-"\t.4byte data_08855D58 + 0x40\n"
+"\t.4byte ProcScr_EkrdragonDemonkingobj_2\n"  /* shiftcheck: was data_08855D58 + 0x40 (== &ProcScr_EkrdragonDemonkingobj_2); byte-identical, now relocatable */
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000002\n"

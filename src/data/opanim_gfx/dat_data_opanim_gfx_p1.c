@@ -7,11 +7,11 @@
 SECTION(".rodata.dat_data_opanim_gfx_p1") u16 Pal_OpAnimEphraimBlur[] = INCBIN_U16("graphics/opanim/OpAnimEphraim.gbapal");
 SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Img_OpAnimEirika[] = INCBIN_U8("graphics/misc_gfx/Pal_OpAnimEphraimBlur.bin.lz");
 SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Tsa_OpAnimEirika[] = INCBIN_U8("graphics/misc_gfx/Tsa_OpAnimEirika.bin.lz");
-SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Img_OpAnimEirikaBlur1[] = INCBIN_U8("graphics/misc_gfx/Img_OpAnimEirikaBlur1.bin.lz");
+SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Img_OpAnimEirikaBlur1[] = INCBIN_U8("graphics/misc_gfx/Img_OpAnimEirikaBlur1.4bpp.lz");
 SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Tsa_OpAnimEirikaBlur1[] = INCBIN_U8("graphics/misc_gfx/Tsa_OpAnimEirikaBlur1.bin.lz");
-SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Img_OpAnimEirikaBlur2[] = INCBIN_U8("graphics/misc_gfx/Img_OpAnimEirikaBlur2.bin.lz");
+SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Img_OpAnimEirikaBlur2[] = INCBIN_U8("graphics/misc_gfx/Img_OpAnimEirikaBlur2.4bpp.lz");
 SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Tsa_OpAnimEirikaBlur2[] = INCBIN_U8("graphics/misc_gfx/Tsa_OpAnimEirikaBlur2.bin.lz");
-SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Img_OpAnimEirikaBlur3[] = INCBIN_U8("graphics/misc_gfx/Img_OpAnimEirikaBlur3.bin.lz");
+SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Img_OpAnimEirikaBlur3[] = INCBIN_U8("graphics/misc_gfx/Img_OpAnimEirikaBlur3.4bpp.lz");
 SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Tsa_OpAnimEirikaBlur3[] = INCBIN_U8("graphics/misc_gfx/Tsa_OpAnimEirikaBlur3.bin.lz");
 SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Img_OpAnimEirikaClose1[] = INCBIN_U8("graphics/opanim/OpAnimEirikaClose1.4bpp.lz");
 SECTION(".rodata.dat_data_opanim_gfx_p1") u8 Img_OpAnimEirikaClose2[] = INCBIN_U8("graphics/opanim/OpAnimEirikaClose2.4bpp.lz");

@@ -6,7 +6,8 @@ JP ROM splits into four classes, in ROM order:
 | Class | JP range | bytes | source representation | status |
 |---|---|---|---|---|
 | m4a engine tables | 0x081F6ED0.. | ~0.5 KB | C / `.s` (`gScaleTable`, …) | named incbin (`dat_m4a_tables.s`) |
-| voicegroups + prog-wave + `gMPlayTable` | 0x081F7470..0x082140B4 | ~118 KB | `.s` (`voice_*` macros) | partly named incbin |
+| voicegroups | 0x081F7470..0x08213E00 | ~118 KB | `.s` (`voice_*` macros) | partly named incbin |
+| keysplit + prog-wave + `gMPlayTable` | 0x08213E00..0x08214120 | ~1.4 KB | editable `.s` (fe8u-form) | **EDITABLE ✅ (S1)** |
 | `gSongTable` + song bodies | 0x082140B4..0x08216064 + 0x08534E80.. | ~120 KB | `gSongTable` `.s` + `.mid` via mid2agb | named incbin (`snd_song*.s`) |
 | **direct-sound PCM samples** | **0x08216064..0x08534E80** | **3,272,220 (3.12 MB)** | **`.aif` via aif2pcm** | **EXTRACTED ✅** |
 
@@ -66,6 +67,34 @@ baserom.gba is no longer in the sound build chain.
 `scripts/sound/reroot_sound_incbin.py` does the extraction + `.s` rewrite; the
 Makefile adds one flagged dependency block (`SOUND_DATA_BINS`). **0 sound
 `.incbin "baserom.gba"` remain.**
+
+## S1 — m4a engine tables converted from opaque `.bin` to editable fe8u-form `.s`
+
+The three m4a-engine tables fe8u ships as editable `.s` were converted from their
+fe8j opaque `.bin`/INCBIN form (`M4A_TABLE_OBJECTS` in the Makefile):
+
+- **`sound/music_player_table.s`** — `gMPlayTable` @0x082140B4 (was
+  `data/sound/gMPlayTable.bin` via `dat_gMPlayTable_ref`). Now the symbolic
+  `music_player <gMPlayInfo_*>, <gMPlayTrack_*>, <numTracks>, <flag>` macro array
+  (fe8u-form). `gMPlayInfo_*` resolve from `baseline_syms` (JP EWRAM addrs);
+  `gMPlayTrack_*` are the `.bss` track buffers this `.s` defines, placed at the JP
+  base **0x03001DE0** by `layout/carved_ram.d/s1_m4a_music_player_table.tsv` so the
+  9 contiguous track symbols (0xC30 total, ending exactly at `agb_sram.o(.bss)`)
+  land at their JP addresses. The 108-byte rodata re-links byte-identical.
+- **`sound/programmable_wave_data.s`** — the 11 programmable-wave samples
+  (`wave000_sinewave`..`wave010_square25_e1`) @0x08214004, `.incbin`'d from
+  `sound/programmable_wave_samples/*.pcm` (region-same — the 176-byte JP residue is
+  byte-identical to fe8u's concatenated PCM). Replaces the `data_08214004` residue
+  incbin; `wave008/009/010` (referenced by voicegroup030) are now real `.s` globals
+  (the `baseline_syms` aliases were dropped).
+- **`sound/keysplit_tables.s`** — the (FE8-unused) keysplit byte table @0x08213E00,
+  516 bytes, **region-same** (verbatim from fe8u). It was previously lumped into the
+  1152-byte `voicegroup092_ref.bin`; that `.bin` is now split — the real
+  region-different voicegroup092 keeps its first 636 bytes as committed `.bin`, the
+  keysplit tail became this editable `.s`.
+
+All three are committed source; baserom.gba is not in this chain. `make compare`
+gates the byte-exactness.
 
 **Proven self-contained.** With `baserom.gba` removed, every re-rooted sound object
 (`snd_song*`, `dat_voicegroup*_ref`, `dat_m4a_tables`, `frontier_df3_voicegroup`,
@@ -150,8 +179,48 @@ Path to source: port `asm/macros/music_voice.inc`, then for each voicegroup writ
 a `voicegroupNNN.s` whose `voice_*` macro args reproduce the JP bytes (the macro
 expansions are deterministic; verify with `make compare`). This is mechanical but
 per-voicegroup work (~93 voicegroups, ~118 KB). It is a real naming + structure
-win but **not** a large self-containment number. Currently 32/93 are carved as
-named incbin (`dat_voicegroupNNN_ref.s`); the rest are still in `asm/baserom.s`.
+win but **not** a large self-containment number.
+
+**Status (S2, 2026-06-29): all 93 voicegroups (000-092) are now editable
+`sound/voicegroups/voicegroupNNN.s` `voice_*` macro tables.** The S2 batch
+converted the last 7 that were still opaque committed data:
+
+| voicegroup | was | JP region | how resolved |
+| --- | --- | --- | --- |
+| 035 | `dat_voicegroup035_ref` INCBIN of `voicegroup035.bin` | 0x08202AE4..0x08202C07 | 24 `voice_*` entries + a 3-byte partial-entry tail (the carve boundary splits a `voice_directsound` mid-entry into the next region) |
+| 036 | inside `frontier_df3_voicegroup_001_202C07` blob | 0x08202E20..0x082031D4 | blob split: prefix residue stays incbin, vg036 = 79 `voice_*` entries |
+| 076 | inside `frontier_df4_voice_002_211988` blob | 0x08211988..0x08211CA0 | blob split into 3 voicegroups; vg076 = 66 entries (region-same entry count vs fe8u) |
+| 077 | same blob | 0x08211CA0..0x08211EE0 | 48 entries; the two `voice_keysplit_all voicegroup077/078` self/sibling references match fe8u vg077 exactly |
+| 078 | same blob | 0x08211EE0..0x08212360 | 96 entries |
+| 086 | `data_08213A10` `__asm__` `.4byte` literal block | 0x08213A10..0x08213AE8 | 17 `voice_square_1` + 1 `voice_keysplit_all voicegroup086` (self-ref); matches fe8u vg086 |
+| 092 | `dat_voicegroup092_ref` INCBIN of `voicegroup092.bin` | 0x08213B84..0x08214004 | 53 `voice_*` entries + a 516-byte trailing uniform-byte filler region (emitted as `.byte`; it is post-table padding, not a voice table) |
+
+All 7 round-trip byte-exact (every embedded `DirectSoundData_*` / `voicegroup*`
+pointer resolves to its JP symbol; **0 unresolved**). The blob-embedded ones
+(036/076/077/078/086) were located by their `frontier_*`/`data_*` carve-residue
+symbols; the inter-voicegroup boundaries for 076/077/078 were recovered from the
+fe8u per-voicegroup entry counts (792 + 576 + 1152 B = the 2520 B blob exactly).
+
+#### Documented floor (left as self-contained committed data — genuinely NOT a voicegroup)
+
+Two `frontier_df3_voicegroup` blobs remain binary, and they are **correct floor**,
+not misses — neither is a `voice_*` instrument table:
+
+- `frontier_df3_voicegroup_000_1F70E8.bin` (56 B, 0x081F70E8): a **12-entry
+  pointer table** (`.4byte` pointers into 0x080D62xx) + 2 zero words. It is a
+  keysplit/sample-pointer array, not a voice table — there is no `voice_*` macro
+  form for it. Stays as the typed INCBIN in `src/data/frontier_df3_voicegroup/`.
+- `frontier_df3_voicegroup_001_202C07.bin` **prefix** (537 B, 0x08202C07..0x08202E20):
+  the 3-byte-**misaligned** tail of the voicegroup035 region. The JP carve boundary
+  at the odd address 0x08202C07 splits a `voice_directsound` entry across the
+  region edge, so the prefix bytes do not start on a 12-byte voice-entry boundary
+  and cannot be cleanly expressed as `voice_*` macros at this base. The `.bin`'s
+  vg036 suffix (0x08202E20 on) *is* now the editable `voicegroup036.s`; only this
+  misaligned prefix stays incbin (length-limited `INCBIN_U8(..., 0, 537)`).
+
+`frontier_df4_voice_000/001` are non-voicegroup misc data (gap0/gap1 residue);
+`frontier_df4_voice_003` is `gSongTable` (already from-source since D312). None are
+voicegroups.
 
 ### Song bodies (`snd_song*.s`, ~56 KB carved) — HARD: mid2agb + relocation
 

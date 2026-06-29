@@ -6,15 +6,15 @@
 # graphics/map/extract_chapter_maps.py.
 
 asm/dat_const_data_chapter_maps_p0.o: \
-  graphics/map/ObjectType10.bin.lz \
-  graphics/map/TowerOfValniObjectType.bin.lz
+  graphics/map/ObjectType10.4bpp.lz \
+  graphics/map/TowerOfValniObjectType.4bpp.lz
 
 asm/dat_const_data_chapter_maps_p1.o: \
-  graphics/map/ObjectType4.bin.lz \
-  graphics/map/ObjectType5.bin.lz \
-  graphics/map/ObjectType6.bin.lz \
-  graphics/map/ObjectType7.bin.lz \
-  graphics/map/ObjectType8.bin.lz
+  graphics/map/ObjectType4.4bpp.lz \
+  graphics/map/ObjectType5.4bpp.lz \
+  graphics/map/ObjectType6.4bpp.lz \
+  graphics/map/ObjectType7.4bpp.lz \
+  graphics/map/ObjectType8.4bpp.lz
 
 asm/dat_const_data_chapter_maps_p2.o: \
   graphics/map/AnotherShrinePalette.gbapal \
