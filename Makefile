@@ -2668,9 +2668,9 @@ shiftcheck-build:
 	    --ldscript $(LDSCRIPT)
 
 # Layer 1: relink with --emit-relocs, then flag ROM-pointer words with no relocation.
-$(RELOCS_ELF): $(ALL_OBJECTS) $(OBJECTS_LST) $(LDSCRIPT)
+$(RELOCS_ELF): $(ALL_OBJECTS) $(OBJECTS_LST) $(LDSCRIPT) $(BANIM_OBJECT)
 	LD='$(LD)' OBJECTS_LST='$(OBJECTS_LST)' \
-	    $(SHIFTCHECK)/emit_relocs_link.sh $@ $(LDSCRIPT) -q
+	    $(SHIFTCHECK)/emit_relocs_link.sh $@ $(LDSCRIPT) -q -R $(BANIM_OBJECT).sym.o
 
 shiftcheck-static: $(RELOCS_ELF) $(ROM) $(MAP)
 	$(PYTHON) $(SHIFTCHECK)/scan_relocs.py --elf $(RELOCS_ELF) --gba $(ROM) \
