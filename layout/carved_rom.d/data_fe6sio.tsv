@@ -1,0 +1,4 @@
+# FE6 SIO multiboot block (F1): ARM SIO routines + FE6 ROM header + LZ-compressed
+# FE6 multiboot payload built from source via the mgfembp submodule. Split out of
+# the frontier_df4_tail incbin (which had embedded these bytes as opaque .bin).
+BB310C	BB8788	asm/fe6sio.o(.data)	FE6 SIO routines + ROM header + mgfembp payload (fe6sio_payload.bin.lz)
