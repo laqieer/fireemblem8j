@@ -1234,35 +1234,7 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p230.s \
                            asm/dat_worldmap_gmapunit_p1652.s \
                            asm/dat_voicegroup092_ref.s \
-                           asm/dat_voicegroup085_ref.s \
-                           asm/dat_voicegroup084_ref.s \
-                           asm/dat_voicegroup083_ref.s \
-                           asm/dat_voicegroup082_ref.s \
-                           asm/dat_voicegroup081_ref.s \
-                           asm/dat_voicegroup080_ref.s \
-                           asm/dat_voicegroup079_ref.s \
-                           asm/dat_voicegroup075_ref.s \
-                           asm/dat_voicegroup074_ref.s \
-                           asm/dat_voicegroup070_ref.s \
-                           asm/dat_voicegroup069_ref.s \
-                           asm/dat_voicegroup068_ref.s \
-                           asm/dat_voicegroup065_ref.s \
-                           asm/dat_voicegroup064_ref.s \
-                           asm/dat_voicegroup062_ref.s \
-                           asm/dat_voicegroup059_ref.s \
-                           asm/dat_voicegroup057_ref.s \
-                           asm/dat_voicegroup056_ref.s \
-                           asm/dat_voicegroup049_ref.s \
-                           asm/dat_voicegroup047_ref.s \
-                           asm/dat_voicegroup046_ref.s \
-                           asm/dat_voicegroup038_ref.s \
                            asm/dat_voicegroup035_ref.s \
-                           asm/dat_voicegroup034_ref.s \
-                           asm/dat_voicegroup033_ref.s \
-                           asm/dat_voicegroup032_ref.s \
-                           asm/dat_voicegroup031_ref.s \
-                           asm/dat_voicegroup019_ref.s \
-                           asm/dat_voicegroup018_ref.s \
                            asm/dat_worldmap_gmapunit_p763.s \
                            asm/dat_worldmap_gmapunit_p762.s \
                            asm/dat_worldmap_gmapunit_p460.s \
@@ -1462,8 +1434,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p3.s \
                            asm/dat_data_bg_p8.s \
                            asm/dat_worldmap_gmapunit_p760.s \
-                           asm/dat_voicegroup039_ref.s \
-                           asm/dat_voicegroup037_ref.s \
                            asm/dat_gFontgrp_379_ref.s \
                            asm/dat_gFontgrp_378_ref.s \
                            asm/dat_gFontgrp_377_ref.s \
@@ -2599,7 +2569,20 @@ SRC_S_OBJECTS := $(SRC_S_FILES:.s=.o)
 include sound/songs.mk
 SONG_MIDS := $(wildcard sound/songs/midi/*.mid)
 SONG_OBJECTS := $(SONG_MIDS:.mid=.o)
-ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS)
+
+# --- D311 editable music: voicegroups as fe8u-style voice_* macro tables --------
+# Each sound/voicegroups/voicegroup<NNN>.s is the descriptive voice_* instrument
+# table (ported verbatim from ../fireemblem8u/sound/voicegroups/). Its embedded
+# sample/voicegroup pointers are SYMBOLIC relocations (.4byte DirectSoundData_* /
+# voicegroup*), which the linker resolves to the JP absolute addresses (the JP
+# sample set + voicegroup layout are byte-identical to the US decomp's, so the
+# instrument bytes + resolved pointers reproduce the JP ROM byte-for-byte). This
+# replaces the opaque committed data/sound/voicegroup<NNN>.bin INCBIN with an
+# editable, relocatable source -- baserom.gba is NOT in this chain (docs/sound.md).
+VOICEGROUP_S := $(wildcard sound/voicegroups/*.s)
+VOICEGROUP_OBJECTS := $(VOICEGROUP_S:.s=.o)
+
+ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS) $(VOICEGROUP_OBJECTS)
 
 # --- NON_MATCHING staging (D26): readable C that DOCUMENTS a region-different
 # function whose byte source is still asm/<fn>.s. PROVE-BUILDS ONLY -- NEVER
@@ -2704,6 +2687,11 @@ $(SRC_S_OBJECTS): %.o: %.s
 $(SONG_OBJECTS): %.o: %.s
 	$(AS) $(ASFLAGS) -g $< -o $@
 .PRECIOUS: sound/songs/midi/%.s
+
+# D311 voicegroup objects: the hand-ported voice_* macro tables (committed source,
+# no generated intermediate). music_voice.inc is found via ASFLAGS -I . include path.
+$(VOICEGROUP_OBJECTS): %.o: %.s
+	$(AS) $(ASFLAGS) -g $< -o $@
 
 #### Sound asset rules (Phase 1 Music) ####
 # MINIMAL, FLAGGED addition: turn committed AIFF (.aif) sample source into the
