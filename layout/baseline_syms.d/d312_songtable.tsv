@@ -1,0 +1,9 @@
+# D312 gSongTable: named symbols for the 5 un-decompiled JP-only / placeholder songs
+# referenced by sound/song_table.s. Their bytes stay committed in residue .bin
+# (frontier_df4_font_cc + data_08576124); only the SYMBOL is aliased to the JP addr
+# so song_table.s's `.4byte \label` resolves. These are NOT decompiled (sub-ceiling).
+song089_h_muon	0856CAD8	data	JP-only header-only placeholder song (trackCount 0); bytes in frontier_df4_font_cc.gap78
+song814_mon_gar_critical1	08574370	data	JP-only song (no fe8u .mid); bytes in frontier_df4_font_cc.gap90
+song815_mon_gog_attack2	085743AC	data	JP-only song (no fe8u .mid); bytes in frontier_df4_font_cc.gap90
+song816_mon_gog_attack3	085743E8	data	JP-only song (no fe8u .mid); bytes in frontier_df4_font_cc.gap90
+song962_mon_bgl_attack3	0857617C	data	JP-only song (no fe8u .mid); bytes in data_08576124 residue

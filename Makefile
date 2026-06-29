@@ -2582,7 +2582,18 @@ SONG_OBJECTS := $(SONG_MIDS:.mid=.o)
 VOICEGROUP_S := $(wildcard sound/voicegroups/*.s)
 VOICEGROUP_OBJECTS := $(VOICEGROUP_S:.s=.o)
 
-ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS) $(VOICEGROUP_OBJECTS)
+# --- D312 editable gSongTable: fe8u-style `song <label>,<player>,<unk>` array ----
+# sound/song_table.s is the descriptive m4a `song` macro array (ported verbatim
+# from ../fireemblem8u/sound/song_table.s -- all 1000 entries' labels + fields are
+# byte-identical to the JP table). Each `.4byte \label` is a SYMBOLIC relocation to
+# the per-song header symbol the linker resolves to its JP address (the .mid-built
+# song .o symbols + 6 named aliases for the un-decompiled JP-only / placeholder
+# songs). sound/songs/dummy_song.s is the 4-byte all-zero placeholder header at the
+# end of the table (fe8u-ported). This replaces the opaque gSongTable .bin INCBIN
+# with editable source -- baserom.gba is NOT in this chain (docs/sound.md, D312).
+SONG_TABLE_OBJECTS := sound/song_table.o sound/songs/dummy_song.o
+
+ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS) $(VOICEGROUP_OBJECTS) $(SONG_TABLE_OBJECTS)
 
 # --- NON_MATCHING staging (D26): readable C that DOCUMENTS a region-different
 # function whose byte source is still asm/<fn>.s. PROVE-BUILDS ONLY -- NEVER
@@ -2691,6 +2702,11 @@ $(SONG_OBJECTS): %.o: %.s
 # D311 voicegroup objects: the hand-ported voice_* macro tables (committed source,
 # no generated intermediate). music_voice.inc is found via ASFLAGS -I . include path.
 $(VOICEGROUP_OBJECTS): %.o: %.s
+	$(AS) $(ASFLAGS) -g $< -o $@
+
+# D312 song table + dummy_song placeholder: committed descriptive .s assembled
+# with m4a.inc / MPlayDef.s on the include path (ASFLAGS already has -I . -I include).
+$(SONG_TABLE_OBJECTS): %.o: %.s
 	$(AS) $(ASFLAGS) -g $< -o $@
 
 #### Sound asset rules (Phase 1 Music) ####
