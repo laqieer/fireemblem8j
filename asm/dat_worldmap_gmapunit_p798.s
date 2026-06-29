@@ -2,7 +2,7 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08604ed4 (US 0x085da7ac, shift -0xFFFD58D8); incbin baserom.gba
 	.global Img_EfxArrowOBJ
 Img_EfxArrowOBJ:
-	.incbin "graphics/gmapunit/Img_EfxArrowOBJ.bin.lz"
+	.incbin "graphics/gmapunit/Img_EfxArrowOBJ.4bpp.lz"
 	.global AnimSprite_EfxArrowObj1
 AnimSprite_EfxArrowObj1:
 	.global Obj_EfxArrowOBJ

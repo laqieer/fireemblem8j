@@ -2,7 +2,7 @@
 @ src/worldmap_gmapunit.o: region-same content at JP 0x08a9cb04 (US 0x08a1fbd8, shift -0xFFF830D4); incbin baserom.gba
 	.global gGfx_MinimapTiles
 gGfx_MinimapTiles:
-	.incbin "graphics/gmapunit/gGfx_MinimapTiles.bin.lz"
+	.incbin "graphics/gmapunit/gGfx_MinimapTiles.4bpp.lz"
 	.global gPal_MinimapTiles
 gPal_MinimapTiles:
 	.incbin "graphics/gmapunit/gPal_MinimapTiles.gbapal"

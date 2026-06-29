@@ -5,4 +5,4 @@ AP_DrawPreparationsBanner:
 	.incbin "data/residual/AP_DrawPreparationsBanner.bin"
 	.global Img_PrepFunds
 Img_PrepFunds:
-	.incbin "graphics/gmapunit/Img_PrepFunds.bin.lz"
+	.incbin "graphics/gmapunit/Img_PrepFunds.4bpp.lz"

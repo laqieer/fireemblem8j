@@ -14,7 +14,7 @@ gMenuSoundroom_2:
 	.incbin "data/residual/gMenuSoundroom_2.bin"
 	.global Img_SoundRoomVolumeGraph
 Img_SoundRoomVolumeGraph:
-	.incbin "graphics/gmapunit/Img_SoundRoomVolumeGraph.bin.lz"
+	.incbin "graphics/gmapunit/Img_SoundRoomVolumeGraph.4bpp.lz"
 	.global Pal_SoundRoomVolumeGraph
 Pal_SoundRoomVolumeGraph:
 	.incbin "graphics/gmapunit/Pal_SoundRoomVolumeGraph.gbapal"

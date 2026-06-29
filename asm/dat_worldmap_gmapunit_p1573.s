@@ -26,7 +26,7 @@ gUnkData_42:
 	.incbin "data/residual/gUnkData_42.bin"
 	.global Img_StatscreenBG
 Img_StatscreenBG:
-	.incbin "graphics/gmapunit/Img_StatscreenBG.bin.lz"
+	.incbin "graphics/gmapunit/Img_StatscreenBG.4bpp.lz"
 	.global Tsa_StatscreenBG
 Tsa_StatscreenBG:
 	.incbin "graphics/gmapunit/Tsa_StatscreenBG.bin.lz"
@@ -35,7 +35,7 @@ Pal_StatscreenBG:
 	.incbin "graphics/gmapunit/Pal_StatscreenBG.gbapal"
 	.global Img_StatscreenHalo
 Img_StatscreenHalo:
-	.incbin "graphics/gmapunit/Img_StatscreenHalo.bin.lz"
+	.incbin "graphics/gmapunit/Img_StatscreenHalo.4bpp.lz"
 	.global Tsa_StatscreenHalo
 Tsa_StatscreenHalo:
 	.incbin "graphics/gmapunit/Tsa_StatscreenHalo.bin.lz"
@@ -44,10 +44,10 @@ Pal_StatscreenHalo:
 	.incbin "graphics/gmapunit/Pal_StatscreenHalo.gbapal"
 	.global Img_ConfigUiSprites
 Img_ConfigUiSprites:
-	.incbin "graphics/gmapunit/Img_ConfigUiSprites.bin.lz"
+	.incbin "graphics/gmapunit/Img_ConfigUiSprites.4bpp.lz"
 	.global Img_ConfigUiIcons
 Img_ConfigUiIcons:
-	.incbin "graphics/gmapunit/Img_ConfigUiIcons.bin.lz"
+	.incbin "graphics/gmapunit/Img_ConfigUiIcons.4bpp.lz"
 	.global Tsa_ConfigUiFrame
 Tsa_ConfigUiFrame:
 	.incbin "graphics/gmapunit/Tsa_ConfigUiFrame.bin.lz"

@@ -14,4 +14,4 @@ gUnkUiFramePalettes:
 	.incbin "data/residual/gUnkUiFramePalettes.bin"
 	.global Img_SysGrayBox
 Img_SysGrayBox:
-	.incbin "graphics/gmapunit/Img_SysGrayBox.bin.lz"
+	.incbin "graphics/gmapunit/Img_SysGrayBox.4bpp.lz"
