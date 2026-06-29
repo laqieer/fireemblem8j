@@ -1,2 +1,2 @@
 # carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-213A10	213AE8	src/data/data_08213A10/data_08213A10.o(.data.residue.08213A10)	descriptive raw ROM data (372 B, byte-completeness D29)
+213A10	213AE8	sound/voicegroups/voicegroup086.o(.rodata.voicegroup086)	voicegroup086 editable voice_* macro table (S2, fe8u-ported; was data_08213A10 residue)
