@@ -2849,6 +2849,41 @@ graphics/map/%.S: ;
 %.lz: % ; $(GBAGFX) $< $@ $(LZ_FLAGS)
 %.rl: % ; $(GBAGFX) $< $@
 
+# --- FE6 SIO multiboot payload, built from source (mgfembp submodule) ----------
+# asm/fe6sio.s (the FE8J link-arena FE6 SIO routines + ROM header) incbins
+# fe6sio_payload.bin.lz: the LZ77-compressed FE6 multiboot program FE8 sends to a
+# linked FE6 cartridge over SIO. fireemblem8u builds this payload FROM SOURCE via
+# the mgfembp git submodule (StanHash/mgfembp, "Mysterious Gba Fire Emblem
+# MultiBoot Payload") rather than committing the opaque blob -- so baserom.gba
+# stays out of this chain and the payload is editable. mgfembp builds with its own
+# agbcc variant (fetched by its installer) into mgfembp/mgfembp.bin
+# (sha1 8a81a47d88f6b0a3f91c49784b9f7b317382abac, region-invariant); gbagfx then
+# LZ-compresses it (-mindist 1, the original compressor's minimum match distance)
+# to exactly the JP ROM's bytes. The explicit fe6sio_payload.bin.lz rule overrides
+# the generic %.lz pattern so it sources mgfembp.bin, not a committed .bin.
+#
+# C_INCLUDE_PATH is unset for the sub-build: the build image exports it to point at
+# agbcc's newlib headers for the main ROM compile, but it leaks into the host-gcc
+# build of mgfembp's own tools (embed, gbagfx), pulling newlib's <stdio.h> and
+# breaking the link against the host libc. mgfembp supplies agbcc headers via -I
+# itself. CPP=cpp because arm-none-eabi-cpp may be absent.
+mgfembp/tools/agbcc/bin/agbcc:
+	cd mgfembp && env -u C_INCLUDE_PATH bash tools/install_agbcc.sh
+
+mgfembp/mgfembp.bin: mgfembp/tools/agbcc/bin/agbcc FORCE
+	env -u C_INCLUDE_PATH $(MAKE) -C mgfembp CPP=cpp PREFIX="$(PREFIX)" tools
+	env -u C_INCLUDE_PATH $(MAKE) -C mgfembp CPP=cpp PREFIX="$(PREFIX)" mgfembp.bin
+
+fe6sio_payload.bin.lz: mgfembp/mgfembp.bin
+	$(GBAGFX) $< $@ -mindist 1
+
+# asm/fe6sio.o incbins the freshly-built payload, so it must rebuild when the
+# payload changes (the asm has no other recipe-level dependency on it).
+asm/fe6sio.o: fe6sio_payload.bin.lz
+
+FORCE:
+.PHONY: FORCE
+
 # Chapter map tilemaps (D309): an editable layout (.mar grid + .json metadata under
 # graphics/map/layout/) is converted by MARTOMAP into the ROM's flat map .bin, which
 # the %.lz rule then compresses for incbin. The 63 chapter maps build from these
