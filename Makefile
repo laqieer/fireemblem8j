@@ -2632,6 +2632,70 @@ all: $(ROM)
 compare: $(ROM)
 	$(SHASUM) -c checksum.sha1
 
+#### Shiftability harness (scripts/shiftcheck/) ####
+# Detects hardcoded pointers (raw absolute addresses that bypass the symbol system)
+# which would break if the ROM layout shifted. Entirely separate from the matching
+# build: never touches $(ROM)/$(ELF)/compare. See scripts/shiftcheck/README.md.
+#
+# fe8j vs fe8u (D313): the CI gate is the STATIC layers only (build-addr audit +
+# reloc-coverage + cross-resource offset). fe8u's Layer-2 differential shift is NOT
+# applicable to fe8j's fully-packed, no-slack, absolute-NOLOAD-overlay ldscript, so
+# shiftcheck-diff is a separate non-gating target (it exits with a clear "no slack"
+# message). fe8j has no separate banim linker script on main yet, so fe8u's
+# --banim-ldscript / BANIM_OBJECT plumbing is dropped (wire it when BA1 lands).
+RELOCS_ELF   := fireemblem8_relocs.elf
+SHIFTDIR     := build/shiftcheck
+SHIFT        ?= 0x40000
+SHIFT2       ?= 0x80000
+SHIFTCHECK   := scripts/shiftcheck
+# fe8j links $(ALL_OBJECTS) directly (no response file in the $(ELF) rule); the
+# harness drives the relink through a generated response file so its command line
+# cannot overflow the shell arg limit with ~8k objects.
+OBJECTS_LST  := objects.lst
+
+# Write the object list with GNU make's $(file ...) function, NOT `echo ... > $@`:
+# fe8j's $(ALL_OBJECTS) expands to ~8900 objects / ~290 KB, which overflows the
+# shell's single-argument limit (MAX_ARG_STRLEN, 128 KiB) and dies with "Argument
+# list too long" -- the exact wall the `clean:` rule comment below documents.
+# $(file ...) writes directly (no shell), so it is immune. Needs GNU make >= 4.0.
+$(OBJECTS_LST): $(ALL_OBJECTS)
+	$(file >$@,$(ALL_OBJECTS))
+	@echo "wrote $@ ($(words $(ALL_OBJECTS)) objects)"
+
+# Layer 0: audit hardcoded addresses in the build system (Makefile/ldscript).
+shiftcheck-build:
+	$(PYTHON) $(SHIFTCHECK)/scan_build_addrs.py --makefile Makefile \
+	    --ldscript $(LDSCRIPT)
+
+# Layer 1: relink with --emit-relocs, then flag ROM-pointer words with no relocation.
+$(RELOCS_ELF): $(ALL_OBJECTS) $(OBJECTS_LST) $(LDSCRIPT)
+	LD='$(LD)' OBJECTS_LST='$(OBJECTS_LST)' \
+	    $(SHIFTCHECK)/emit_relocs_link.sh $@ $(LDSCRIPT) -q
+
+shiftcheck-static: $(RELOCS_ELF) $(ROM) $(MAP)
+	$(PYTHON) $(SHIFTCHECK)/scan_relocs.py --elf $(RELOCS_ELF) --gba $(ROM) \
+	    --map $(MAP) --ref-elf $(ELF) --prefix $(PREFIX) \
+	    --allowlist $(SHIFTCHECK)/allowlist.txt
+
+# Layer 1b: flag relocations against the WRONG base symbol -- a stored pointer written
+# "ResourceA + hardcoded offset" that lands in a different resource B (breaks if A is resized).
+shiftcheck-offsets: $(RELOCS_ELF) $(ROM) $(MAP)
+	$(PYTHON) $(SHIFTCHECK)/scan_offsets.py --elf $(RELOCS_ELF) --gba $(ROM) \
+	    --map $(MAP) --ref-elf $(ELF) --prefix $(PREFIX)
+
+# Layer 2: differential two-shift build (NON-gating; not applicable to fe8j's packed
+# ROM -- exits with a clear "no slack" message). Kept for documentation parity.
+shiftcheck-diff: $(ROM) $(MAP) $(OBJECTS_LST)
+	LD='$(LD)' OBJCOPY='$(OBJCOPY)' OBJECTS_LST='$(OBJECTS_LST)' \
+	    $(PYTHON) $(SHIFTCHECK)/diff_shift.py --base-gba $(ROM) --ldscript $(LDSCRIPT) \
+	    --map $(MAP) --ref-elf $(ELF) --prefix $(PREFIX) --shifts $(SHIFT),$(SHIFT2) \
+	    --outdir $(SHIFTDIR) --allowlist $(SHIFTCHECK)/allowlist.txt
+
+# The CI gate (no emulator): build-system audit + reloc scan + cross-resource offsets.
+shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets
+
+.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-diff
+
 # The carve glue (ldscript.txt + asm/baserom.s + asm/jp_syms.s) is GENERATED from
 # the layout/ manifests and is gitignored, so the build regenerates it whenever a
 # manifest changes -- the monolith <name>.tsv OR any per-task fragment under
@@ -3015,6 +3079,10 @@ clean:
 	find asm src -name '*.o' -type f -delete
 	$(RM) $(ROM) $(ELF) $(MAP) $(CFILES:.c=.s) $(DATA_INCBIN_CFILES:.c=.s) $(GENERATED_S) $(LDSCRIPT)
 	$(RM) $(NONMATCH_CFILES:.c=.s)
+	# Shiftability harness artifacts (scripts/shiftcheck/): the relinked relocs ELF +
+	# its map, the link response file, and the shifted-build scratch dir.
+	$(RM) $(RELOCS_ELF) $(RELOCS_ELF:.elf=.map) $(OBJECTS_LST)
+	$(RM) -r $(SHIFTDIR)
 	# D311 editable music: the song .o and the mid2agb-generated .s are gitignored
 	# build outputs (the committed source is the .mid). Remove them so a clean tree
 	# rebuilds them from the .mid via the sound/songs.mk %.s: %.mid rule.

@@ -8420,3 +8420,71 @@ neither is a voice table — `_000_1F70E8` (56 B) is a 12-entry pointer/keysplit
 0x080D62xx, and the `_001` prefix (537 B @0x202C07) is the 3-byte-**misaligned** tail of the
 vg035 region (the odd carve boundary splits a `voice_directsound` entry, so the prefix can't
 start on a 12-byte voice-entry boundary). Documented in `docs/sound.md`.
+## D313 — Shiftability harness (V1): static-only gate; Layer-2 differential-shift N/A on a packed ROM (Copilot-validated)
+
+**2026-06-29.** Ported fe8u's `scripts/shiftcheck/` (PR #745) into fe8j as the shiftability
+validator (`make shiftcheck`). fe8j previously had only `scripts/audit_pointers.py` (gate 0);
+this adds the relinked-with-`--emit-relocs` reloc-coverage scan + cross-resource-offset scan +
+build-system address audit.
+
+**FORK — Layer-2 differential-shift (`gen_shifted_ldscript.py`/`diff_shift.py`) is structurally
+infeasible on fe8j's layout, by design of the incbin-baseline methodology:**
+- fe8u injects `. += SHIFT;` after `src/crt0.o(.text);` to slide the tail into the SLACK that
+  exists before the first absolute pin `. = 0x08C00000;`. fe8j's generated `ldscript.txt` has
+  (1) **no crt0** (first object is `src/rom_header.o(.text)` @0x08000000); (2) the `.rom` body
+  is **packed 100% to the full 16 MB** (0x08000000..0x09000000) — zero slack, every byte is a
+  carved object (no remaining baserom incbin); (3) **no `. = 0x08C00000;`-style pins** in the
+  sequential body — instead a TAIL of 248 NOLOAD overlay sections at absolute addresses (e.g.
+  `.bss_37 0x08A73D7C (NOLOAD) : { src/uichapterstatus.o(.data) }`) that declare region-diff
+  symbol addresses WITHOUT emitting bytes (backing bytes live in the sequential body). A uniform
+  `. += S` shift would (a) overflow the 16 MB cart and (b) desync those absolute overlays from
+  their backing bytes.
+
+**DECISION (Copilot-validated, session 2026-06-29):**
+1. **`make shiftcheck` gate = Layer 0 + Layer 1 + Layer 1b** = `shiftcheck-build` (build-system
+   address audit) + `shiftcheck-static` (reloc-coverage) + `shiftcheck-offsets`
+   (cross-resource offset). These three are layout-agnostic (read ROM + relocs-ELF + map) and
+   work unchanged. This is the CI gate.
+2. **`shiftcheck-diff` (Layer 2) is a separate, NON-gating target**, documented as not applicable
+   to fe8j's fully-packed/no-slack layout (a differential shift needs unused address space + a
+   stable absolute-pin boundary; fe8j has neither, and its absolute NOLOAD overlays would become
+   invalid if the sequential body moved). Pursuing shrink-and-shift/trailing-window would test an
+   artificial topology, not byte-neutral `make compare` behavior — rejected. `shiftcheck-run`
+   (Layer 3, mGBA) likewise non-gating.
+3. **`_classify.py` PIN changed `0x08C00000` → `0x09000000` (ROM_HI)** so the 24 real fe8j carved
+   placements above 0x08C00000 (banim_data, data_banim, pads) are still SCANNED, not silenced as
+   "pinned" — fe8j has no pinned-block-with-slack concept; the whole ROM is shiftability-relevant.
+4. **`OBJECTS_LST := objects.lst`** added (fe8j links via `$(ALL_OBJECTS)` directly, not a
+   response file); a generated rule (`echo $(ALL_OBJECTS) > $@`) feeds `emit_relocs_link.sh`.
+   `emit_relocs_link.sh` adapted to fe8j's link line (`--no-check-sections`, `-L tools/agbcc/lib`,
+   no `-R $(BANIM_OBJECT)`); `BANIM_OBJECT`/`--banim-ldscript` dropped (no banim linker script on
+   main yet — wire when BA1 lands).
+
+`make compare` stays OK (the harness never touches `$(ROM)`/`$(ELF)`/`compare`; any de-pointer
+fix is byte-neutral).
+
+**Two harness fixes the fe8j port required (found running it; code-review-confirmed):**
+5. **`$(OBJECTS_LST)` must use `$(file >$@,...)`, not `@echo ... > $@`.** fe8j's
+   `$(ALL_OBJECTS)` is ~8,898 objects / ~290 KB; `echo` via `/bin/sh -c` overflows
+   `MAX_ARG_STRLEN` (128 KiB) → "Argument list too long" (the exact wall the `clean:`
+   comment documents). GNU make's `$(file ...)` writes directly without a shell.
+6. **`scan_offsets.py` must skip section-symbol-collapse relocations by the fe8j
+   section-symbol naming.** fe8u skips bases in `SECTION_SYMS={"ROM",...}`; fe8j names
+   its sections `.rom` and `.bss_<N>` (NOLOAD overlays), which `nm` does NOT emit as
+   symbols, so 11,114 relocs collapse onto `.rom`/`.bss_N` and 5,231 read as false
+   "cross-resource" HIGH. Fix: also skip any base name starting with `.` (all fe8j
+   section symbols do; no real fe8j global does). This dropped HIGH 5,231 → 8.
+
+**8 real HIGH cross-resource offsets found and fixed (byte-neutral, `make compare` OK).**
+These are the fe8u `gOpinfo_1`/`Img_LimitViewSquares+0x280` class: a stored ProcScr
+pointer written `Base + hardcoded_offset` whose value lands at the START of a different
+resource, so the relocation tracks the wrong symbol. Rewrote each inline-asm `.4byte
+Base + off` → `.4byte TargetSym` (identical word, now relocatable):
+- `data_085C2980 + 0x48` → `ProcScr_CamMove` (5 entries across data_085B8EEC ×2 /
+  data_085C3B10 / data_085C34F0 / data_085E0698)
+- `sPageSlideOffsetLut + 0x28` → `gProcScr_SSGlowyBlendCtrl` (2 in data_08A72A80)
+- `data_08855D58 + 0x40` → `ProcScr_EkrdragonDemonkingobj_2` (1 in data_08855D58)
+
+**Final `make shiftcheck` result: 0 HIGH in all gating layers** (Layer 0 PASS;
+Layer 1b 0 HIGH; Layer 1 0 HIGH-CONFIDENCE), exit 0. `make compare` = OK
+(7da0456...). Recorded in the V1 PR.

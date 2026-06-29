@@ -11,6 +11,11 @@
 .dep/
 .deps/
 
+# Shiftability harness outputs (scripts/shiftcheck/ -- make shiftcheck): the shifted
+# -build scratch dir + the ld response file. (fireemblem8_relocs.elf/.map are *.elf/*.map.)
+build/shiftcheck/
+/objects.lst
+
 # Asset build intermediates (Phase 0). The COMMITTED source is the editable
 # PNG / JASC .pal under graphics/; these are REGENERATED from it by the Makefile's
 # gbagfx rules (%.4bpp: %.png, %.lz: %, %.gbapal: %.pal, ...) and must never be

@@ -11,7 +11,7 @@ __asm__(
 "\t.4byte 0x00000001\n"
 "\t.4byte frontier_df4_misc_lo_000a_0DC3DC + 0x18\n"
 "\t.4byte 0x00000008\n"
-"\t.4byte data_085C2980 + 0x48\n"
+"\t.4byte ProcScr_CamMove\n"  /* shiftcheck: was data_085C2980 + 0x48 (== &ProcScr_CamMove); byte-identical, now relocatable */
 "\t.4byte 0x0000000E\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000002\n"
@@ -25,7 +25,7 @@ __asm__(
 "\t.4byte 0x00000001\n"
 "\t.4byte frontier_df4_misc_lo_000a_0DC3DC + 0x18\n"
 "\t.4byte 0x00000008\n"
-"\t.4byte data_085C2980 + 0x48\n"
+"\t.4byte ProcScr_CamMove\n"  /* shiftcheck: was data_085C2980 + 0x48 (== &ProcScr_CamMove); byte-identical, now relocatable */
 "\t.4byte 0x0001000E\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000002\n"
