@@ -4,4 +4,6 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 data_086AAE60[] __attribute__((section(".data.residue.086AAE60"))) = INCBIN_U8("data/residual/data_086AAE60.bin");
+/* D312 ID: byte-identical (300 B, whole symbol; unique single occurrence in the
+ * fe8u ROM) to fe8u AnimSprite_EfxRestOBJ_28. Byte-neutral rename; section unchanged => same ROM bytes. */
+u8 AnimSprite_EfxRestOBJ_28[] __attribute__((section(".data.residue.086AAE60"))) = INCBIN_U8("data/residual/data_086AAE60.bin");
