@@ -85,17 +85,52 @@ object is placed at the JP address. So the `.mid` → mid2agb → assemble → l
 **does** reconstruct the JP song. The voicegroup-pointer in the song header is why
 voicegroups must be named symbols at their JP addresses for the readable form.
 
-**Why the readable form (mid2agb `.mid` / `voice_*` macros) is DEFERRED, not done.**
-The live build uses the *parallel-carving glue* ldscript: each song is **split into
-~4 named fragments at its self-pointer boundaries** and interleaved with **232
-non-sound objects** (frontier_*, `data_*` residue, dat_*) tiled across the song
-address region. Full mid2agb integration means **un-tiling** that region — replacing
-the 97 song fragments + their residue fillers with single per-song `.o` linked at
-fixed addresses — which restructures the ldscript glue and **touches non-sound files
-owned by the parallel final-sweep agent** (high regression risk to the glue this
-round). The committed-`.bin` re-root achieves the hard self-containment goal now,
-sound-files-only and byte-neutral; the `.mid`/`voice_*` readability is the right
-later polish once the song region can be un-tiled safely. See D35.
+**D311 — editable `.mid` song form: PROTOTYPE byte-exact (song001 + song002).**
+The readable mid2agb form is now wired and proven for the first two songs. Each is
+built from the committed FE8 `.mid` (`sound/songs/midi/songNNN_*.mid`) by a per-song
+`%.s: %.mid` rule in `sound/songs.mk` (the exact FE8 flags `-E -G<vg> -R020 -P010
+-V<vol>`), assembled with `MPlayDef.s` (`-I include`), and linked at the JP song
+address. With the voicegroup symbol bound to its JP address (read live from the
+song-header tone pointer; `voicegroup000=0x081F7120`, `voicegroup001=0x081F7720` in
+`layout/baseline_syms.d/d311-music.tsv`) the song body's `R_ARM_ABS32` self-pointer
+relocations resolve to the JP-absolute values, and the output is **byte-identical to
+the JP ROM** (song001 = 4320 B at 0x08534E80, song002 = 6124 B at 0x08535F60;
+`make clean && make compare` → `OK`, twice).
+
+*The un-tiling / residue-recarving mechanism (now established).* A song's true ROM
+span is `[song_start, song_start + sizeof(mid2agb output))`. Every object whose bytes
+fall in that span is the song's OWN internal bytes mislabeled — the `snd_songNNN_*`
+fragments, the `data_<addr>` residue objects (these carry the song's track-pointer
+`.4byte data_<addr>` self-relocations), `frontier_df4_font_cc.gapK` sections, and
+even a `dat_worldmap_gmapunit_pNN` single-symbol object. To un-tile a song:
+1. Replace all of the song's fragment + residue + gap manifest rows with ONE row
+   `sound/songs/midi/songNNN_*.o(.rodata)` spanning `[song_start, song_end)`.
+2. DELETE the now-redundant fragment `src/data/snd_songNNN_*/` dirs and the
+   fully-consumed standalone residue objects (`src/data/data_<addr>/`, the misnamed
+   `dat_worldmap_gmapunit_pNN`) — their `.o` is gitignored but the `.c` is committed;
+   leaving the `.c` re-links the bytes at the 0x09000000 catch-all and overflows ROM.
+3. A `frontier_df4_font_cc.gapK` that **straddles** the song boundary must be SPLIT:
+   shrink its manifest start to `song_end`, and regenerate its `.bin` to drop the
+   leading song bytes (e.g. song002's tail consumed the first 0x112 B of gap6, so
+   gap6 became `0x53774C..0x537960`, a fresh 0x214-B `.bin`).
+`scripts/gen_layout.py` auto-fills any uncovered address with a baserom incbin, so
+the single song row leaves NO gap and the region stays self-contained.
+
+*Scalability — all 70 currently-fragmented JP songs are clean to un-tile.* A scan of
+the manifest shows every fragmented song's `[min_frag, max_frag]` span contains ONLY
+its own song + fontcc/residue/worldmap objects (zero genuinely-foreign objects
+interleaved), so the mechanism generalises. The generator (next phase) reads the
+per-song flags from `../fireemblem8u/songs.mk`, reads each song's voicegroup address
+from the JP song-header tone pointer in `baserom.gba`, runs mid2agb, computes the
+true span from the output size, and emits the manifest/residue edits above. Remaining
+scale-up: the 61 not-yet-named voicegroups (`voicegroupNNN.s` with JP sample
+pointers), `gSongTable` (`song_table.s`), and the songs still in raw baserom incbin.
+
+**Historical note (superseded by D311 above).** Before D311 the songs were carried as
+committed `.bin` fragments tiled across the parallel-carving ldscript; full mid2agb
+integration was deferred because un-tiling was thought to touch non-sound glue. The
+prototype shows the edits are confined to the song's own fragment/residue objects
+plus a single boundary-gap split — sound-region-local and byte-neutral. See D35, D311.
 
 ---
 

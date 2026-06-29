@@ -270,3 +270,7 @@ docs/refs/discord/
 docs/refs/discord_findings/
 docs/refs/session_artifacts/
 decompme.env
+
+# D311 editable music: the per-song mid2agb .s is a GENERATED build intermediate
+# (rebuilt from the committed .mid by sound/songs.mk). Only the .mid is source.
+sound/songs/midi/*.s
