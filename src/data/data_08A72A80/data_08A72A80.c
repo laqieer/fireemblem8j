@@ -30,7 +30,7 @@ __asm__(
 "\t.4byte 0x00000002\n"
 "\t.4byte StatScreen_Display + 0x1\n"
 "\t.4byte 0x00000005\n"
-"\t.4byte sPageSlideOffsetLut + 0x28\n"
+"\t.4byte gProcScr_SSGlowyBlendCtrl\n"  /* shiftcheck: was sPageSlideOffsetLut + 0x28 (== &gProcScr_SSGlowyBlendCtrl); byte-identical, now relocatable */
 "\t.4byte 0x00000005\n"
 "\t.4byte gProcScr_SSPageNameCtrl\n"
 "\t.4byte 0x00000005\n"
@@ -54,7 +54,7 @@ __asm__(
 "\t.4byte 0x0002000E\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000009\n"
-"\t.4byte sPageSlideOffsetLut + 0x28\n"
+"\t.4byte gProcScr_SSGlowyBlendCtrl\n"  /* shiftcheck: was sPageSlideOffsetLut + 0x28 (== &gProcScr_SSGlowyBlendCtrl); byte-identical, now relocatable */
 "\t.4byte 0x00000002\n"
 "\t.4byte StatScreen_OnClose + 0x1\n"
 "\t.4byte 0x00000002\n"

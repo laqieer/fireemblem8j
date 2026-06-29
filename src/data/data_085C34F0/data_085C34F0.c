@@ -13,7 +13,7 @@ __asm__(
 "\t.4byte 0x00000002\n"
 "\t.4byte ProcShowMapChange_MoveCamera + 0x1\n"
 "\t.4byte 0x00000008\n"
-"\t.4byte data_085C2980 + 0x48\n"
+"\t.4byte ProcScr_CamMove\n"  /* shiftcheck: was data_085C2980 + 0x48 (== &ProcScr_CamMove); byte-identical, now relocatable */
 "\t.4byte 0x00000002\n"
 "\t.4byte ProcShowMapChange_UpdateGame + 0x1\n"
 "\t.4byte 0x00000014\n"

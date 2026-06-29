@@ -79,6 +79,17 @@ jobs:
         # to the JP ROM. One step = the old `make compare` + `Self-contained build`.
         run: make compare
 
+      # ---- Shiftability gate (scripts/shiftcheck/, D313) ----
+      - name: Shiftability validation (make shiftcheck — blocking)
+        # Reuses the objects make compare just built: relinks ONCE with --emit-relocs
+        # and runs the static layers (build-system address audit + reloc-coverage scan
+        # + cross-resource offset scan). Fails on any HIGH-confidence hardcoded ROM
+        # pointer (a raw 0x08xxxxxx literal that would break a layout shift). Never
+        # touches the matching build / $(ROM). Layer-2 differential shift is N/A to
+        # fe8j's packed layout and intentionally excluded (see scripts/shiftcheck/
+        # README.md and docs/decisions.md D313).
+        run: make shiftcheck
+
       # ---- Progress reports (non-blocking, reuse the built objects) ----
       - name: Compute progress
         run: python3 scripts/calcprogress.py | tee progress.txt
