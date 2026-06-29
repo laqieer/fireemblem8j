@@ -39,7 +39,6 @@ def sound_files():
         "asm/snd_banim_efxsound_data_*.s",
         "asm/dat_voicegroup*_ref.s",
         "asm/dat_m4a_tables.s",
-        "asm/dat_gMPlayTable_ref.s",
         "asm/dat_gMPlayJumpTableTemplate_ref.s",
         "asm/dat_gSoundRoomTable_ref.s",
         "asm/frontier_df3_voicegroup.s",
