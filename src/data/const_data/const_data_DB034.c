@@ -7,9 +7,9 @@
 
 #define SECTION_DB034 __attribute__((section(".rodata.dat_const_data_DB034_gf")))
 
-SECTION_DB034 const u8 Img_ConstDataDB034_0[] = INCBIN_U8("graphics/misc_gfx2/Img_ConstDataDB034_0.bin.lz");
-SECTION_DB034 const u8 Img_ConstDataDB034_1[] = INCBIN_U8("graphics/misc_gfx2/Img_ConstDataDB034_1.bin.lz");
-SECTION_DB034 const u8 Img_ConstDataDB034_2[] = INCBIN_U8("graphics/misc_gfx2/Img_ConstDataDB034_2.bin.lz");
-SECTION_DB034 const u8 Img_ConstDataDB034_3[] = INCBIN_U8("graphics/misc_gfx2/Img_ConstDataDB034_3.bin.lz");
-SECTION_DB034 const u8 Img_ConstDataDB034_4[] = INCBIN_U8("graphics/misc_gfx2/Img_ConstDataDB034_4.bin.lz");
+SECTION_DB034 const u8 Img_ConstDataDB034_0[] = INCBIN_U8("graphics/misc_gfx2/Img_ConstDataDB034_0.4bpp.lz");
+SECTION_DB034 const u8 Img_ConstDataDB034_1[] = INCBIN_U8("graphics/misc_gfx2/Img_ConstDataDB034_1.4bpp.lz");
+SECTION_DB034 const u8 Img_ConstDataDB034_2[] = INCBIN_U8("graphics/misc_gfx2/Img_ConstDataDB034_2.4bpp.lz");
+SECTION_DB034 const u8 Img_ConstDataDB034_3[] = INCBIN_U8("graphics/misc_gfx2/Img_ConstDataDB034_3.4bpp.lz");
+SECTION_DB034 const u8 Img_ConstDataDB034_4[] = INCBIN_U8("graphics/misc_gfx2/Img_ConstDataDB034_4.4bpp.lz");
 SECTION_DB034 const u16 Pal_NewEkrBaseKaiten[] = INCBIN_U16("graphics/misc_gfx2/Pal_NewEkrBaseKaiten.gbapal");
