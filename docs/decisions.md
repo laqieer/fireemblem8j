@@ -8297,7 +8297,36 @@ mapped the remaining frontier toward all-axes completion. GO drives launched (D3
 (convention floor), #6 = all major asset types editable + the documented voice/song-tail ceilings.
 This is D308 reference-parity completion, not a defect.
 
-## D313 — Battle animation (BA1): port fe8u's compressing-linker pipeline (BYTE-MATCH, full)
+## D313 — Asset-editability + shiftability EPIC (fe8u-parity "fix all .bin misses")
+
+**2026-06-29 (user-driven `/batch` epic, ultracode).** User directed a comprehensive push to
+make EVERY fe8j asset editable in its fe8u SOURCE form, using fe8u as the ground-truth oracle:
+**for each committed `.bin`, if fe8u builds it from a more-editable source (`.png`/`.s`/`.mid`/
+`.aif`/typed C) it is a MISS to fix; if fe8u also commits binary it is legitimate FLOOR.** Plus
+port fe8u's shiftability-validation harness (PRs #745/#744).
+
+**Audit (4,901 fe8j `.bin`):** ~1,919 MISS + 180 deferred + 1,829 floor. Categories →
+12 work units (full plan: `docs/epic_asset_editability_shiftability.md`):
+- U0 reproducible `.bin` form-audit script (`scripts/audit_bin_forms.py` → `docs/bin_audit.md`).
+- A: graphics → `.png` (G1-G4, ~486 image `.bin`; README "pixel-gfx done" was INCOMPLETE).
+- B: **battle-anim pipeline (BA1)** — port fe8u's `linker_script_banim.txt` + `$(BANIM_OBJECT)`
+  `arm_compressing_linker.py` pipeline; replace ~1,481 `data/banim`/`AnimSprite` `.bin` with
+  202 editable `banim/*.s`. Highest-risk lane (JP banim region at a different offset, partitioned).
+- C: sound — m4a tables → `.s` (S1: music_player_table/programmable_wave/keysplit), voicegroup
+  tail (S2). D: menu strings → `menu_def.c` literals (C1). E: UnitDef residuals → typed C (UD1).
+- F: **FE6 SIO payload built FROM SOURCE via the `mgfembp` git submodule** (F1) — NOT a committed
+  `.bin`; canonical fe8u wiring is in history `0ff24f9c`/`bbe919f4~1` (local fe8u's prebuilt blob
+  is a Docker-only fallback). See [[fe8j-fe6sio-payload-mgfembp]].
+- G: shiftcheck harness (V1) — port `scripts/shiftcheck/` (5-layer: build-addr/reloc/offset/
+  diff-shift/mGBA) + `make shiftcheck` + CI.
+
+**DECISION:** execute as 12 parallel worktree-worker units, integrator-serialized through one
+`make compare` gate; U0 first (miss-tracker), BA1 the long-pole. DEFERRED: ApConf/gUnkData/opaque
+(~180, needs RE). FLOOR (don't fake-extract): TSA/`.map.bin`/`.aif`/`efx*`/compressed region-diff.
+This epic plan persisted to `docs/` first (survives the long run); see
+[[epic-plan-persist-to-docs]].
+
+## D314 — Battle animation (BA1): port fe8u's compressing-linker pipeline (BYTE-MATCH, full)
 
 **Date context:** asset-editability epic, lane BA1 (the highest-risk, long-pole unit).
 Goal: replace the opaque battle-animation blob form (an INCBIN of pre-compressed
@@ -8353,7 +8382,7 @@ defeats `.inc`-edit tracking). The byte oracle (`make compare`) is unaffected ei
 **Result:** `make compare` -> `fireemblem8.gba: OK` (sha1 7da0456…). Battle animation is
 now built from editable `.s` macros, fe8u-parity. No `make compare` weakening; no new
 `.incbin "baserom.gba"`.
-## D-2026-06-29 — Epic C1: menu string pool + tables → editable C (menu_def.c)
+## D315 — Epic C1: menu string pool + tables → editable C (menu_def.c)
 
 **Decision.** Converted the 8 menu tables (gDebugClearMenuItems, gDebugChuudanMenuItems,
 gDebugContinueMenuItems, gItemUseMenuItems, gStealItemMenuItems, gYesNoSelectionMenuItems,
@@ -8386,7 +8415,7 @@ C literals** (axis #6 editability).
 DATA_INCBIN_ASM_EXCLUDE entries + 9 carved_rom.tsv rows; removed the pool INCBIN line +
 manifest row + data_incbin_deps token + the now-unused `_0DC96C.bin`; added
 `layout/carved_rom.d/menu_def.tsv` (1 pool row + 9 table rows). Gated on `make compare`.
-## S2 — Voicegroup tail: all 93 voicegroups now editable `.s` (the "11 blob" ceiling dissolved)
+## D316 — Voicegroup tail (S2): all 93 voicegroups now editable `.s` (the "11 blob" ceiling dissolved)
 
 **2026-06-29.** The epic-asset-editability S2 unit converted the last 7 still-binary
 voicegroups to `sound/voicegroups/voicegroupNNN.s` `voice_*` macro tables, taking the
@@ -8420,7 +8449,7 @@ neither is a voice table — `_000_1F70E8` (56 B) is a 12-entry pointer/keysplit
 0x080D62xx, and the `_001` prefix (537 B @0x202C07) is the 3-byte-**misaligned** tail of the
 vg035 region (the odd carve boundary splits a `voice_directsound` entry, so the prefix can't
 start on a 12-byte voice-entry boundary). Documented in `docs/sound.md`.
-## D313 — Shiftability harness (V1): static-only gate; Layer-2 differential-shift N/A on a packed ROM (Copilot-validated)
+## D317 — Shiftability harness (V1): static-only gate; Layer-2 differential-shift N/A on a packed ROM (Copilot-validated)
 
 **2026-06-29.** Ported fe8u's `scripts/shiftcheck/` (PR #745) into fe8j as the shiftability
 validator (`make shiftcheck`). fe8j previously had only `scripts/audit_pointers.py` (gate 0);
