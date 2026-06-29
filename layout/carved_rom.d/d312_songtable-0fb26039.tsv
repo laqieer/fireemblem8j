@@ -1,0 +1,2 @@
+214120	216060	sound/song_table.o(.rodata.gSongTable)	gSongTable editable `song` macro array (D312, fe8u-ported)
+216060	216064	sound/songs/dummy_song.o(.rodata.dummy_song)	dummy_song 4-byte placeholder header (D312, fe8u-ported)
