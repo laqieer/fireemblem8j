@@ -12,7 +12,7 @@
 
 extern const u8 data_08A60354[];
 extern const u8 data_0890915C[];
-extern const u8 data_089092B0[];
+extern const u8 UnitDef_Ch4Ally_3[]; /* was data_089092B0 (D312 rename) */
 extern const u8 UnitDef_Ch4NPC_1[];
 
 SECTION(".rodata.dat_EventScr_Ch4_1_ref") EventListScr EventScr_Ch4_1[] = {
@@ -57,7 +57,7 @@ SECTION(".rodata.dat_EventScr_Ch4_1_ref") EventListScr EventScr_Ch4_1[] = {
     CLEA
     CLEE
     CLEN
-    LOAD2(1, data_089092B0)
+    LOAD2(1, UnitDef_Ch4Ally_3)
     ENUN
     FADU(0x10)
     LOAD1(1, UnitDef_Ch4NPC_1)
