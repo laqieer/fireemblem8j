@@ -8,6 +8,29 @@
 **Keep this current.** Refresh the numbers from `scripts/calcprogress.py` and the target lists from
 ground truth whenever an axis moves. Stale frontier data caused real wasted work (see "Pitfall" below).
 
+## Current state (2026-06-29) — D313 asset-editability + shiftability EPIC landed (CI-green on main)
+
+A 12-unit `/batch` epic (D313, full plan `docs/epic_asset_editability_shiftability.md`)
+integrated to main (PR #52, `make compare` OK + `make shiftcheck` 0 HIGH + clean CI):
+- **Axis #6 editability — major advance.** ~480 misc/bg/chap-title/gmapunit pixel
+  images → `.png` (G1-G4); **battle animation → 201 editable `banim/*_motion.s`** via
+  the ported fe8u compressing-linker pipeline (`scripts/arm_compressing_linker.py` +
+  `linker_script_banim.txt`, full byte-match, replacing 804 opaque `data/banim/*.bin`);
+  **all 93 voicegroups → `.s`** (S2); m4a tables (`music_player_table`/`programmable_wave`/
+  `keysplit`) → editable `.s` (S1); **menu string pools → `src/menu_def.c` literals** (C1);
+  **82 more `UnitDef_Ch*` → typed `struct UnitDefinition[]`** (UD1, now 237 total); FE6 SIO
+  payload built **from source via the `mgfembp` submodule** (F1, not a committed blob).
+  Reproducible **`.bin`-form miss-tracker**: `scripts/audit_bin_forms.py` → `docs/bin_audit.md`.
+- **Axis #5 shiftability — now has shifted-rebuild VALIDATION**, not just the pointer
+  auditor: ported fe8u PR #745's `scripts/shiftcheck/` (5-layer: build-addr audit →
+  `--emit-relocs` reloc scan → cross-resource offset → differential two-shift), `make
+  shiftcheck` wired as a blocking CI step, **0 HIGH**; 8 real cross-resource pointers
+  de-pointered (incl. 8 menu-string pool ptrs found during integration).
+- **Remaining axis-#6 ceilings (unchanged):** gSongTable (~520 SFX/voice songs), 2
+  `frontier_df3_voicegroup` non-voice floor blobs, the fe8u-parity binary floor
+  (TSA/`.map.bin`, compressed region-diff gfx, m4a sample data), and the DEFERRED
+  ApConf/gUnkData opaque (~180, needs RE — tracked in `docs/bin_audit.md`).
+
 ## Current state (2026-06-28)
 - BUILD SELF-CONTAINMENT: 100%
 - **SHIFTABILITY (axis #5): gate = 0 ✅ COMPLETE (D309, verified).** `scripts/audit_pointers.py --true-debt --gate` = 0 — the user-ratified criterion is met. The last stuck `.4byte 0x0800260C` literal (in `data_0890915C`) was a coincidental `struct UnitDefinition` bitfield word, not a pointer; fixed by typing that blob as `struct UnitDefinition[4]` (= fe8u `UnitDef_Ch4Ally_1`+`_2`, byte-exact). ~14,800 relocated. The 5 remaining "CODE-axis literal pools" are NOT in the gate — they relocate when their Thumb fn is decompiled (a #2/code-axis item). Historical context below.
