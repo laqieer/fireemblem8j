@@ -1,0 +1,5 @@
+# D312 voicegroups2: programmable-wave sample pointers referenced by voicegroup030.s
+# (JP wave samples live in the data_08214004 residue incbin; named here as data aliases).
+wave008_se_triangle_1	08214084	data	D312 vg030 programmable_wave sample
+wave009_se_triangle_2	08214094	data	D312 vg030 programmable_wave sample
+wave010_square25_e1	082140A4	data	D312 vg030 programmable_wave sample

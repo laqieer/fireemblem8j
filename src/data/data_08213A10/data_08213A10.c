@@ -2,6 +2,8 @@
 
 /* Migrated from asm/data_08213A10.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+ * Truncated at 0x213AE8: bytes 0x213AE8-0x213B84 are now the editable
+ * sound/voicegroups/voicegroup087-091.s tables (D312).
  */
 
 __asm__(
@@ -60,45 +62,6 @@ __asm__(
 "\t.4byte 0x00000002\n"
 "\t.4byte 0x000F0000\n"
 "\t.4byte 0x00000080\n"
-"\t.4byte data_08213A10\n"
+"\t.4byte 0x08213A10\n"
 "\t.4byte 0x00000000\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_se_wind_3_e3_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_se_wind_3_e3_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_bird_1_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_bird_2_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_bird_3_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_yougan_1_e_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_hibashira_1_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_yoru_1_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_yoru_2_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_yoru_3_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_boat_2_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_sail_1_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-"\t.4byte 0x00003C00\n"
-"\t.4byte DirectSoundData_y_sail_2_13k8b\n"
-"\t.4byte 0x00FF00FF\n"
-);  /* de-pointered slice data_08213A10: ptr=14 data=79 skip=0 */
+);
