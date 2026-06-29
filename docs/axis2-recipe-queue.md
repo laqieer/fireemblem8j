@@ -37,3 +37,11 @@ add NEEDS_ALIAS data entries (gClassReelNameTable etc.); fix cfbind garbage Star
 These 3 + the W14-verified walls (sub_80BB240 80B, sub_800FF08 261B, sub_80BCD74 no-analog)
 are kept as descriptive asm (fe8u-NONMATCHING-equivalent). Axis #2 literal-100% needs a
 transmuter/compiler breakthrough (D277 proved transmuter infeasible for reg-coloring).
+
+## D312 — Event0F_CounterOps (sub_800DE3C): asr-fix → 1-swap NEAR (permuter candidate)
+fe8u eventscr.c:476 body + the real JP divergence FIXED: COUNTER_SET uses an ARITHMETIC shift
+(`asrs r3,r0,#0x18`) not the US logical shift — port as `newValue = (s16)argument >> 8`. With
+that, the body byte-matches the JP target (size 0xB4, exact `mov ip,r2` prologue) EXCEPT a single
+clean **r4↔r5** swap (JP: subcode-copy in r5 / shift in r4; agbcc colors inverted). `-mjp-promote`
+on. register-pin `register u32 shift asm("r4")` moved shift to r4 but broke the prologue (worse).
+The tightest NEAR in the #2 set → strong 1-shot permuter target with the asr-fixed body.
