@@ -2602,7 +2602,20 @@ SONG_TABLE_OBJECTS := sound/song_table.o sound/songs/dummy_song.o
 # editable .s source. baserom.gba is NOT in this chain.
 BANIM_OBJECT := banim/data_banim.o
 
-ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS) $(VOICEGROUP_OBJECTS) $(SONG_TABLE_OBJECTS) $(BANIM_OBJECT)
+
+# --- S1 editable m4a engine tables: fe8u-style descriptive .s (was opaque .bin) ----
+# sound/music_player_table.s   -- gMPlayTable rodata as symbolic `music_player` macro
+#   entries (gMPlayInfo_* from baseline_syms + gMPlayTrack_* .bss it defines at the JP
+#   base 0x03001DE0 via layout/carved_ram.d) -- replaces data/sound/gMPlayTable.bin.
+# sound/programmable_wave_data.s -- the 11 programmable-wave samples (wave000-010)
+#   .incbin'd from sound/programmable_wave_samples/*.pcm (region-same, fe8u-ported) --
+#   replaces the data_08214004 residue incbin.
+# sound/keysplit_tables.s      -- the (FE8-unused) keysplit byte table, region-same,
+#   ported verbatim from fe8u -- split out of the old voicegroup092_ref .bin.
+# All three are committed editable source; baserom.gba is NOT in this chain.
+M4A_TABLE_OBJECTS := sound/music_player_table.o sound/programmable_wave_data.o sound/keysplit_tables.o
+
+ALL_OBJECTS := $(C_OBJECTS) $(DATA_INCBIN_OBJECTS) $(ASM_OBJECTS) $(SRC_S_OBJECTS) $(SONG_OBJECTS) $(VOICEGROUP_OBJECTS) $(SONG_TABLE_OBJECTS) $(BANIM_OBJECT) $(M4A_TABLE_OBJECTS)
 
 # --- NON_MATCHING staging (D26): readable C that DOCUMENTS a region-different
 # function whose byte source is still asm/<fn>.s. PROVE-BUILDS ONLY -- NEVER
@@ -2750,6 +2763,12 @@ banim/%.o:    banim_dep = $(shell $(SCANINC) -I include -I "" banim/$*.s)
 endif
 .SECONDEXPANSION:
 banim/%.o: banim/%.s $$(banim_dep)
+	$(AS) $(ASFLAGS) -g $< -o $@
+
+# S1 m4a engine tables: music_player_table.s (.include asm/macros/m4a.inc),
+# programmable_wave_data.s (.incbin .pcm), keysplit_tables.s. Committed descriptive
+# .s assembled with the include path already set in ASFLAGS (-I . -I include).
+$(M4A_TABLE_OBJECTS): %.o: %.s
 	$(AS) $(ASFLAGS) -g $< -o $@
 
 #### Sound asset rules (Phase 1 Music) ####

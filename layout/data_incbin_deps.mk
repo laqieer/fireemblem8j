@@ -367,7 +367,6 @@ src/data/const_data_unit_icon_move/dat_const_data_unit_icon_move_p97.o: graphics
 src/data/const_data_unit_icon_move/dat_const_data_unit_icon_move_p98.o: graphics/unit_icon/move/unit_icon_move_Unk77_sheet.4bpp.lz
 src/data/const_data_unit_icon_move/dat_const_data_unit_icon_move_p99.o: graphics/unit_icon/move/unit_icon_move_Fallen_Prince_sheet.4bpp.lz
 src/data/data/data_08048798.o: data/residual/data_08048798.bin
-src/data/data/data_08214004.o: data/residual/data_08214004.bin
 src/data/data/data_08576124.o: graphics/data/data_08576124_576150.bin
 src/data/data/data_08594374.o: data/residual/data_08594374.bin
 src/data/data/data_08595474.o: data/residual/data_08595474.bin
@@ -794,7 +793,6 @@ src/data/gCharacterEndingTitleLut_ref/dat_gCharacterEndingTitleLut_ref.o: data/r
 src/data/gFontgrp_362_ref/dat_gFontgrp_362_ref.o: data/residual/gFontgrp_362.bin
 src/data/gFontgrp_363_ref/dat_gFontgrp_363_ref.o: data/residual/gFontgrp_363.bin
 src/data/gFontgrp_364_ref/dat_gFontgrp_364_ref.o: data/residual/gFontgrp_364.bin
-src/data/gMPlayTable_ref/dat_gMPlayTable_ref.o: data/sound/gMPlayTable.bin
 src/data/gSoundRoomTable_ref/dat_gSoundRoomTable_ref.o: data/sound/gSoundRoomTable.bin
 src/data/gap/gap_00003080.o: data/residual/gap_00003080.bin
 src/data/gap/gap_00003240.o: data/residual/gap_00003240.bin
