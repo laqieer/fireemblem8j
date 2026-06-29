@@ -8386,3 +8386,37 @@ C literals** (axis #6 editability).
 DATA_INCBIN_ASM_EXCLUDE entries + 9 carved_rom.tsv rows; removed the pool INCBIN line +
 manifest row + data_incbin_deps token + the now-unused `_0DC96C.bin`; added
 `layout/carved_rom.d/menu_def.tsv` (1 pool row + 9 table rows). Gated on `make compare`.
+## S2 — Voicegroup tail: all 93 voicegroups now editable `.s` (the "11 blob" ceiling dissolved)
+
+**2026-06-29.** The epic-asset-editability S2 unit converted the last 7 still-binary
+voicegroups to `sound/voicegroups/voicegroupNNN.s` `voice_*` macro tables, taking the
+editable count **86 → 93 (000-092 complete)**. The prior "11 unnamed voicegroup gap blobs
+(need RE)" + "2 region-diff voicegroups" ceiling (D311 addendum / D312 frontier) was largely
+**dissolved**, not a real wall:
+
+- **vg035, vg092** — were `dat_voicegroupNNN_ref` INCBIN of a committed `.bin`. Decoded
+  directly. vg092 has a 516-byte trailing **uniform-byte filler** region (post-table padding,
+  not a voice table) emitted as `.byte`; vg035 has a 3-byte partial-entry tail.
+- **vg036, vg076, vg077, vg078** — were *embedded inside* `frontier_df3_voicegroup_001` /
+  `frontier_df4_voice_002` carve-residue blobs (only the start was aliased; the rest opaque).
+  Located by the residue symbols; the **076/077/078 inter-voicegroup boundaries were recovered
+  from the fe8u per-voicegroup entry counts** (792+576+1152 B = the 2520 B blob exactly →
+  region-same structure). The blobs were split: voicegroup rows replace the gap rows in
+  `layout/carved_rom.d/*.tsv`; the df3 prefix residue stays as a length-limited
+  `INCBIN_U8(..., 0, 537)`.
+- **vg086** — was the `data_08213A10` `__asm__` `.4byte` literal block (already source, but
+  not in `voice_*` form): 17 `voice_square_1` + 1 `voice_keysplit_all voicegroup086`.
+
+**Method:** an ELF-symbol oracle (`nm fireemblem8.elf` → address→`DirectSoundData_*`/`voicegroup*`)
+drove a 12-byte-per-entry `voice_*` decoder; every embedded pointer resolved (**0 unresolved**),
+and each `.s` was **round-trip byte-verified** (assemble at JP base + objcopy vs the original
+bytes) *before* build wiring. The keysplit self/sibling references (vg077→vg077/078, vg086→vg086)
+match fe8u's identical structure. Carved-alias suppression used the parallel-safe
+`layout/baseline_syms_drop.d/d312-voicegroups2.tsv` drop fragment (not a d311-music.tsv edit).
+Gate: `make compare` OK + **clean no-baserom -j4 build sha1 = 7da0456…** (100% self-contained).
+
+**Honest floor (correct, NOT a miss):** 2 `frontier_df3_voicegroup` blobs stay `.bin` because
+neither is a voice table — `_000_1F70E8` (56 B) is a 12-entry pointer/keysplit array into
+0x080D62xx, and the `_001` prefix (537 B @0x202C07) is the 3-byte-**misaligned** tail of the
+vg035 region (the odd carve boundary splits a `voice_directsound` entry, so the prefix can't
+start on a 12-byte voice-entry boundary). Documented in `docs/sound.md`.

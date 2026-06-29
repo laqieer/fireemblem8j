@@ -1233,8 +1233,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p251.s \
                            asm/dat_worldmap_gmapunit_p230.s \
                            asm/dat_worldmap_gmapunit_p1652.s \
-                           asm/dat_voicegroup092_ref.s \
-                           asm/dat_voicegroup035_ref.s \
                            asm/dat_worldmap_gmapunit_p763.s \
                            asm/dat_worldmap_gmapunit_p762.s \
                            asm/dat_worldmap_gmapunit_p460.s \
@@ -2059,7 +2057,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/data_0853D31C.s \
                            asm/data_0853518C.s \
                            asm/data_08214004.s \
-                           asm/data_08213A10.s \
                            asm/data_081F6D00.s \
                            asm/data_081F66A4.s \
                            asm/data_081F64C0.s \
