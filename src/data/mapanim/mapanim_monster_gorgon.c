@@ -1,6 +1,6 @@
 #include "global.h"
 
-u8 Img_MonsterStoneMapAnimfx[] = INCBIN_U8("graphics/misc_gfx/Img_MonsterStoneMapAnimfx.bin.lz");
+u8 Img_MonsterStoneMapAnimfx[] = INCBIN_U8("graphics/misc_gfx/Img_MonsterStoneMapAnimfx.4bpp.lz");
 
 u16 Pal_MonsterStoneMapAnimfx[] = INCBIN_U16("graphics/misc_gfx/Pal_MonsterStoneMapAnimfx.gbapal");
 
@@ -24,7 +24,7 @@ u8 Tsa9_MonsterStoneMapAnimfx[] = INCBIN_U8("graphics/misc/Tsa9_MonsterStoneMapA
 
 u8 Tsa10_MonsterStoneMapAnimfx[] = INCBIN_U8("graphics/misc/Tsa10_MonsterStoneMapAnimfx.tsa.bin.lz");
 
-u16 Img_GorgonHatchCloud[] = INCBIN_U16("graphics/misc_gfx/Img_GorgonHatchCloud.bin.lz");
+u16 Img_GorgonHatchCloud[] = INCBIN_U16("graphics/misc_gfx/Img_GorgonHatchCloud.4bpp.lz");
 
 u16 Pal_GorgonHatchCloud[] = INCBIN_U16("graphics/misc_gfx/Pal_GorgonHatchCloud.gbapal");
 

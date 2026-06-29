@@ -8,7 +8,7 @@ gPal_Titlescreen_0:
 	.incbin "graphics/misc_gfx/gPal_Titlescreen_0.gbapal"
 	.global gGfx_Titlescreen_0
 gGfx_Titlescreen_0:
-	.incbin "graphics/misc_gfx/gGfx_Titlescreen_0.bin.lz"
+	.incbin "graphics/misc_gfx/gGfx_Titlescreen_0.4bpp.lz"
 	.global gTsa_Titlescreen_0
 gTsa_Titlescreen_0:
 	.incbin "data/residual/gTsa_Titlescreen_0.bin"
@@ -17,7 +17,7 @@ gPal_Titlescreen_1:
 	.incbin "graphics/misc_gfx/gPal_Titlescreen_1.gbapal"
 	.global gGfx_Titlescreen_1
 gGfx_Titlescreen_1:
-	.incbin "graphics/misc_gfx/gGfx_Titlescreen_1.bin.lz"
+	.incbin "graphics/misc_gfx/gGfx_Titlescreen_1.4bpp.lz"
 	.global gTsa_Titlescreen_1
 gTsa_Titlescreen_1:
 	.incbin "data/residual/gTsa_Titlescreen_1.bin"
@@ -26,7 +26,7 @@ gPal_Titlescreen_2:
 	.incbin "graphics/misc_gfx/gPal_Titlescreen_2.gbapal"
 	.global gGfx_Titlescreen_2
 gGfx_Titlescreen_2:
-	.incbin "graphics/misc_gfx/gGfx_Titlescreen_2.bin.lz"
+	.incbin "graphics/misc_gfx/gGfx_Titlescreen_2.4bpp.lz"
 	.global gTsa_Titlescreen_2
 gTsa_Titlescreen_2:
 	.incbin "data/residual/gTsa_Titlescreen_2.bin"

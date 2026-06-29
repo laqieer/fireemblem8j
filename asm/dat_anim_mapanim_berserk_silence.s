@@ -35,10 +35,10 @@ ApConf_MapAnimBerserkfx_anim_0:
 	.incbin "data/residual/ApConf_MapAnimBerserkfx_anim_0.bin"
 	.global Img_ManimSilenceObjfx
 Img_ManimSilenceObjfx:
-	.incbin "graphics/misc_gfx3/Img_ManimSilenceObjfx.bin.lz"
+	.incbin "graphics/misc_gfx3/Img_ManimSilenceObjfx.4bpp.lz"
 	.global Img_ManimSilenceBgfx
 Img_ManimSilenceBgfx:
-	.incbin "graphics/misc_gfx3/Img_ManimSilenceBgfx.bin.lz"
+	.incbin "graphics/misc_gfx3/Img_ManimSilenceBgfx.4bpp.lz"
 	.global Pal_ManimSilencefx
 Pal_ManimSilencefx:
 	.incbin "graphics/misc_gfx3/Pal_ManimSilencefx.gbapal"

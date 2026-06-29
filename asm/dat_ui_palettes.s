@@ -5,10 +5,10 @@ gPal_MiscUiGraphics:
 	.incbin "graphics/misc_gfx/gPal_MiscUiGraphics.gbapal"
 	.global gImg_UiCursorHandTop
 gImg_UiCursorHandTop:
-	.incbin "graphics/misc_gfx/gImg_UiCursorHandTop.bin.lz"
+	.incbin "graphics/misc_gfx/gImg_UiCursorHandTop.4bpp.lz"
 	.global gImg_UiCursorHandBottom
 gImg_UiCursorHandBottom:
-	.incbin "graphics/misc_gfx/gImg_UiCursorHandBottom.bin.lz"
+	.incbin "graphics/misc_gfx/gImg_UiCursorHandBottom.4bpp.lz"
 	.global gPal_MapSprite
 gPal_MapSprite:
 	.incbin "graphics/misc_gfx/gPal_MapSprite.gbapal"

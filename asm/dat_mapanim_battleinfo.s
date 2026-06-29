@@ -3,7 +3,7 @@
 @ src/data/mapanim/mapanim_battleinfo.o: region-same content at JP 0x08a1db88 (US 0x089ad500, shift -0x-70688); incbin baserom.gba
 	.global Img_MapBattleInfoBox
 Img_MapBattleInfoBox:
-	.incbin "graphics/misc_gfx/Img_MapBattleInfoBox.bin.lz"
+	.incbin "graphics/misc_gfx/Img_MapBattleInfoBox.4bpp.lz"
 	.global Pal_MapBattleInfoBlue
 Pal_MapBattleInfoBlue:
 	.incbin "graphics/misc_gfx/Pal_MapBattleInfoBlue.gbapal"
@@ -27,34 +27,34 @@ Tsa_MapBattleBoxGfx3:
 	.incbin "graphics/misc_gfx/Tsa_MapBattleBoxGfx3.bin.lz"
 	.global Img_MapBattleInfoHpBar
 Img_MapBattleInfoHpBar:
-	.incbin "graphics/misc_gfx/Img_MapBattleInfoHpBar.bin.lz"
+	.incbin "graphics/misc_gfx/Img_MapBattleInfoHpBar.4bpp.lz"
 	.global Img_MapBattleInfoNum
 Img_MapBattleInfoNum:
-	.incbin "graphics/misc_gfx/Img_MapBattleInfoNum.bin.lz"
+	.incbin "graphics/misc_gfx/Img_MapBattleInfoNum.4bpp.lz"
 	.global Tsa_ShopWindows
 Tsa_ShopWindows:
 	.incbin "graphics/misc_gfx/Tsa_ShopWindows.bin.lz"
 	.global Img_ShopGoldBox
 Img_ShopGoldBox:
-	.incbin "graphics/misc_gfx/Img_ShopGoldBox.bin.lz"
+	.incbin "graphics/misc_gfx/Img_ShopGoldBox.4bpp.lz"
 	.global Img_WallBreakAnim
 Img_WallBreakAnim:
-	.incbin "graphics/misc_gfx/Img_WallBreakAnim.bin.lz"
+	.incbin "graphics/misc_gfx/Img_WallBreakAnim.4bpp.lz"
 	.global Pal_WallBreakAnim
 Pal_WallBreakAnim:
 	.incbin "graphics/misc_gfx/Pal_WallBreakAnim.gbapal"
 	.global Img_GmapSoguSprites
 Img_GmapSoguSprites:
-	.incbin "graphics/misc_gfx/Img_GmapSoguSprites.bin.lz"
+	.incbin "graphics/misc_gfx/Img_GmapSoguSprites.4bpp.lz"
 	.global Img_PoisonAnim
 Img_PoisonAnim:
-	.incbin "graphics/misc_gfx/Img_PoisonAnim.bin.lz"
+	.incbin "graphics/misc_gfx/Img_PoisonAnim.4bpp.lz"
 	.global Pal_PoisonAnim
 Pal_PoisonAnim:
 	.incbin "graphics/misc_gfx/Pal_PoisonAnim.gbapal"
 	.global Img_LinkArenaWarpFx
 Img_LinkArenaWarpFx:
-	.incbin "graphics/misc_gfx/Img_LinkArenaWarpFx.bin.lz"
+	.incbin "graphics/misc_gfx/Img_LinkArenaWarpFx.4bpp.lz"
 	.global Pal_LinkArenaWarpFx
 Pal_LinkArenaWarpFx:
 	.incbin "graphics/misc_gfx/Pal_LinkArenaWarpFx.bin"
@@ -63,13 +63,13 @@ gMapanimBattleinfo_0:
 	.incbin "data/residual/gMapanimBattleinfo_0.bin"
 	.global Img_MapAnimBerserkfx_1
 Img_MapAnimBerserkfx_1:
-	.incbin "graphics/misc_gfx/Img_MapAnimBerserkfx_1.bin.lz"
+	.incbin "graphics/misc_gfx/Img_MapAnimBerserkfx_1.4bpp.lz"
 	.global Pal_MapAnimBerserkfx_0
 Pal_MapAnimBerserkfx_0:
 	.incbin "graphics/misc_gfx/Pal_MapAnimBerserkfx_0.bin"
 	.global Img_MapAnimAntitoxinPureWater
 Img_MapAnimAntitoxinPureWater:
-	.incbin "graphics/misc_gfx/Img_MapAnimAntitoxinPureWater.bin.lz"
+	.incbin "graphics/misc_gfx/Img_MapAnimAntitoxinPureWater.4bpp.lz"
 	.global gMapanimBattleinfo_1
 gMapanimBattleinfo_1:
 	.incbin "data/residual/gMapanimBattleinfo_1.bin"
@@ -99,19 +99,19 @@ gMapanimBattleinfo_5:
 	.incbin "data/residual/gMapanimBattleinfo_5.bin"
 	.global Img_MapAnimTorchfx
 Img_MapAnimTorchfx:
-	.incbin "graphics/misc_gfx/Img_MapAnimTorchfx.bin.lz"
+	.incbin "graphics/misc_gfx/Img_MapAnimTorchfx.4bpp.lz"
 	.global Pal_MapAnimTorchfx
 Pal_MapAnimTorchfx:
 	.incbin "graphics/misc_gfx/Pal_MapAnimTorchfx.bin"
 	.global Img_MapAnimUnlockObjfx
 Img_MapAnimUnlockObjfx:
-	.incbin "graphics/misc_gfx/Img_MapAnimUnlockObjfx.bin.lz"
+	.incbin "graphics/misc_gfx/Img_MapAnimUnlockObjfx.4bpp.lz"
 	.global Pal_MapAnimUnlockObjfx
 Pal_MapAnimUnlockObjfx:
 	.incbin "graphics/misc_gfx/Pal_MapAnimUnlockObjfx.bin"
 	.global Img_MapAnimUnlockBgfx
 Img_MapAnimUnlockBgfx:
-	.incbin "graphics/misc_gfx/Img_MapAnimUnlockBgfx.bin.lz"
+	.incbin "graphics/misc_gfx/Img_MapAnimUnlockBgfx.4bpp.lz"
 	.global Pal_MapAnimUnlockObjfx_Unk
 Pal_MapAnimUnlockObjfx_Unk:
 	.incbin "graphics/misc_gfx/Pal_MapAnimUnlockObjfx_Unk.bin"
@@ -123,7 +123,7 @@ Tsa_MapAnim_0:
 	.incbin "graphics/misc_gfx/Tsa_MapAnim_0.bin"
 	.global Img_MapAnimRepairfx
 Img_MapAnimRepairfx:
-	.incbin "graphics/misc_gfx/Img_MapAnimRepairfx.bin.lz"
+	.incbin "graphics/misc_gfx/Img_MapAnimRepairfx.4bpp.lz"
 	.global Tsa_MapAnim_1
 Tsa_MapAnim_1:
 	.incbin "graphics/misc_gfx/Tsa_MapAnim_1.bin"
@@ -132,7 +132,7 @@ ApConf_MapAnimSleep:
 	.incbin "data/residual/ApConf_MapAnimSleep.bin"
 	.global Img_MapAnimBerserkfx
 Img_MapAnimBerserkfx:
-	.incbin "graphics/misc_gfx/Img_MapAnimBerserkfx.bin.lz"
+	.incbin "graphics/misc_gfx/Img_MapAnimBerserkfx.4bpp.lz"
 	.global Pal_MapAnimBerserkfx
 Pal_MapAnimBerserkfx:
 	.incbin "graphics/misc_gfx/Pal_MapAnimBerserkfx.gbapal"
