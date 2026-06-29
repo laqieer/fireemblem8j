@@ -1,2 +1,43 @@
-voicegroup000	081F7120	data	D311 song001 tone-table (mid2agb -G000)
-voicegroup001	081F7720	data	D311 song002 tone-table (mid2agb -G001)
+# D311 editable .mid music: voicegroup tone-table bindings + residue
+# base-address aliases for objects whose head a song .o now provides.
+voicegroup000	081F7120	data	D311 voicegroup -G000
+voicegroup001	081F7720	data	D311 voicegroup -G001
+voicegroup005	081F8F20	data	D311 voicegroup -G005
+voicegroup006	081F9520	data	D311 voicegroup -G006
+voicegroup008	081FA120	data	D311 voicegroup -G008
+voicegroup009	081FA3A8	data	D311 voicegroup -G009
+voicegroup010	081FA9A8	data	D311 voicegroup -G010
+voicegroup014	081FC1A8	data	D311 voicegroup -G014
+voicegroup015	081FC520	data	D311 voicegroup -G015
+voicegroup017	081FD120	data	D311 voicegroup -G017
+voicegroup020	081FE320	data	D311 voicegroup -G020
+voicegroup022	081FEF14	data	D311 voicegroup -G022
+voicegroup023	081FF2E0	data	D311 voicegroup -G023
+voicegroup026	0820021C	data	D311 voicegroup -G026
+voicegroup028	082008A0	data	D311 voicegroup -G028
+voicegroup029	08200EA0	data	D311 voicegroup -G029
+voicegroup030	082014A0	data	D311 voicegroup -G030
+voicegroup036	08202E20	data	D311 voicegroup -G036
+voicegroup040	082038C4	data	D311 voicegroup -G040
+voicegroup041	08203EC4	data	D311 voicegroup -G041
+voicegroup042	082044C4	data	D311 voicegroup -G042
+voicegroup043	08204AC4	data	D311 voicegroup -G043
+voicegroup044	082050C4	data	D311 voicegroup -G044
+voicegroup048	082068C4	data	D311 voicegroup -G048
+voicegroup052	082080C4	data	D311 voicegroup -G052
+voicegroup054	08208CC4	data	D311 voicegroup -G054
+voicegroup055	082092C4	data	D311 voicegroup -G055
+voicegroup058	0820A398	data	D311 voicegroup -G058
+voicegroup060	0820AD40	data	D311 voicegroup -G060
+voicegroup061	0820B340	data	D311 voicegroup -G061
+voicegroup066	0820CEE8	data	D311 voicegroup -G066
+voicegroup072	0820F2E8	data	D311 voicegroup -G072
+voicegroup073	0820F8E8	data	D311 voicegroup -G073
+voicegroup076	08211988	data	D311 voicegroup -G076
+voicegroup089	08213B24	data	D311 voicegroup -G089
+data_08572E14	08572E14	data	D311 residue-base alias (straddled song)
+data_08575ACC	08575ACC	data	D311 residue-base alias (straddled song)
+data_08575DCC	08575DCC	data	D311 residue-base alias (straddled song)
+data_08576124	08576124	data	D311 residue-base alias (straddled song)
+data_0857656C	0857656C	data	D311 residue-base alias (straddled song)
+data_085772B4	085772B4	data	D311 residue-base alias (straddled song)
