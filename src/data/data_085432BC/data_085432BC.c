@@ -1,0 +1,7 @@
+#include "global.h"
+
+/* Migrated from asm/data_085432BC.s (region-same graphics, single section).
+ * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+ */
+
+u8 data_085432BC[] __attribute__((section(".data.residue.085432BC"))) = INCBIN_U8("data/residual/data_085432BC.bin");
