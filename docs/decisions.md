@@ -8258,3 +8258,41 @@ layout/tool changes need ALL THREE CI-equivalent checks LOCALLY before push — 
 graphics→.png, palettes→.pal/.agbpal, event scripts→EVENT macros, proc→PROC macros, struct→typed C,
 maps→.mar/.S, music→.mid/.s. Remaining = documented ceilings (above) + fe8u-parity binary floor
 (TSA/.map.bin tilemaps, compressed region-diff gfx — binary in fe8u too).
+
+## D312 — Verified frontier scout + honest irreducible ceilings (ultracode, adversarial)
+
+**2026-06-29.** A 3-lane scout→adversarial-verify→synthesize workflow (wf_01f79194, 7 agents)
+mapped the remaining frontier toward all-axes completion. GO drives launched (D312 workers):
+
+**GO (driving now):**
+- **#6 song extraction (517 SFX/voice songs → editable `.mid`)** — the largest opaque axis;
+  mechanism PROVEN at 72 BGM (`gen_d311_songs.py`), 517 verified-tractable, self-contained.
+  New tooling: generalize the multi-remnant-straddle re-carve (the 517-song span splits residue
+  objects into >1 remnant; the BGM path only hit single-remnant). gSongTable→`song_table.s`
+  deferred (gated on all 594 labels resolving).
+- **#2 reconstructs** — Event0F_CounterOps (sub_800DE3C, s8-clamp/shifted-domain twin),
+  sub_80A390C, sub_80A73D4 (JP-divergent, hand-reconstructable). Each +1 #2; the latter two
+  name 2 of #4's honest names as a byproduct (NOT guess-rename).
+
+**HONEST IRREDUCIBLE CEILINGS (document per D308 — literal 100% unreachable here):**
+- **Axis #4 caps at ~87.3% (NOT 100%).** Floor = **1,612 `banim_`/`gfx_`/`nullsub_` auto
+  asset-sheet labels** (74.2% of the 2172 placeholders) that fe8u ITSELF leaves unnamed by the
+  identical auto-dump convention, + ~337 JP-divergent mid-data blobs with no honest US-parity
+  name. Naming these = fabrication (disallowed, per [[named-axis-ceiling]]). Adversarial verify
+  REFUTED even the 3 "fingerprint" subs (fingerprint_identify returns 0 unique IDs → guesses);
+  the only honest #4 gains are the #2-reconstruct byproducts + ~40 low-data fe8u-parity.
+  Breakdown of 2172: banim_ 1583, data_ 452, sub_ 108 (88 alias-shims + 20 asm bodies), gfx_ 28, nullsub_ 1.
+- **Axis #2 likely <100%:** 1 declared WALL (sub_80D19DC RegisterTsaWithOffset = fe8u-OWN
+  nonmatching, no matching C exists) + ~4–9 reg-coloring permuter-NEARs the permuter is
+  register-blind to. Honest agbcc-inexpressible count ≈ 5–10 of 30. Two reconstruct targets
+  (sub_800A34C, sub_80CAEF4) already ship as `src/nonmatching/*.c` (agbcc spill/coloring).
+- **Axis #6 voice ceiling:** 11 unnamed `frontier_df3_voicegroup` gap blobs + 2 region-diff
+  voicegroups (~118 KB @0x081F7470) stay raw-incbin/.bin (separate `voice_*` RE; songs only
+  need their address aliased, so they don't block song extraction).
+- **Axis #6 song tail:** 5 JP-only/index-mismatch songs (idx 0/814/815/816/962) have no fe8u
+  `.mid` → need from-stream reconstruct or stay incbin alias; these BLOCK `song_table.s`.
+
+**Net honest end-state target:** #1=100%, #3≈100% (from-source; C/PNG counter understates
+.mid/.s), #5=gate 0 — literal/effective complete. #2≈99.7–99.9% (5–10 agbcc walls), #4≈86–87%
+(convention floor), #6 = all major asset types editable + the documented voice/song-tail ceilings.
+This is D308 reference-parity completion, not a defect.
