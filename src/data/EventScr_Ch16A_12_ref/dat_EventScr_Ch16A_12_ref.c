@@ -22,6 +22,7 @@ extern const u8 StartMapEventcallFx2[];
 extern const u8 UnitDef_Ch16AAlly_15[];
 extern const u8 EventScr_Ch16A_1[];
 extern const u8 frontier_df3_unitdef_b_016_912198[];
+extern const u8 frontier_df3_unitdef_b_016_912198_residue[];
 extern const u8 data_085B9BBC[];
 extern const u8 frontier_df3_unitdef_b_010_9119D0[];
 extern const u8 UnitDef_Ch16AAlly_3[];
@@ -193,7 +194,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_12_ref") EventListScr EventScr_Ch16A_12[] = 
     FADI(0x10)
     CLEAN
     FADU(4)
-    LOAD2(1, frontier_df3_unitdef_b_016_912198 + 0x14)
+    LOAD2(1, frontier_df3_unitdef_b_016_912198_residue)
     ENUN
     SOUN(0xB1)
     TILECHANGE(0)

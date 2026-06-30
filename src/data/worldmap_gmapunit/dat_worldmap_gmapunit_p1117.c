@@ -1,8 +1,29 @@
 #include "global.h"
 
-/* Migrated from asm/dat_worldmap_gmapunit_p1117.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+/* Ekrdragon demon-king OBJ pixel-shuffle step tables (s16 row/col deltas) ported
+ * from fe8u src/banim-ekrdragon-demonkingobj.c. array1 is region-same; array2 is
+ * region-DIFFERENT only in a trailing 0 alignment pad (JP 22 B / 11 s16 vs fe8u
+ * 20 B / 10 s16) -> appended. Byte-identical to the JP ROM blobs formerly at
+ * 0x08855F4C (were data/residual/gEkrdragonDemonkingobj_array{1,2}.bin), verified
+ * by `make compare`.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1117") u8 gEkrdragonDemonkingobj_array1[] = INCBIN_U8("data/residual/gEkrdragonDemonkingobj_array1.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1117") u8 gEkrdragonDemonkingobj_array2[] = INCBIN_U8("data/residual/gEkrdragonDemonkingobj_array2.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1117") s16 gEkrdragonDemonkingobj_array1[] = {
+    0x0028, 0x0000, 0x0002, 0x0000, 0x0002, 0x0000, (s16)0xFFFE, 0x0000,
+    (s16)0xFFFE, 0x0000, 0x0002, 0x0000, 0x0002, 0x0000, (s16)0xFFFE, 0x0000,
+    (s16)0xFFFE, 0x0000, 0x0002, 0x0000, 0x0002, 0x0000, (s16)0xFFFE, 0x0000,
+    (s16)0xFFFE, 0x0000, 0x0002, 0x0000, 0x0002, 0x0000, (s16)0xFFFE, 0x0000,
+    (s16)0xFFFE, 0x0000, 0x0002, 0x0000, 0x0002, 0x0000, (s16)0xFFFE, 0x0000,
+    (s16)0xFFFE, 0x0000, 0x0002, 0x0000, 0x0002, 0x0000, (s16)0xFFFE, 0x0000,
+    (s16)0xFFFE, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, (s16)0xFFFF, 0x0000,
+    (s16)0xFFFF, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, (s16)0xFFFF, 0x0000,
+    (s16)0xFFFF, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, (s16)0xFFFF, 0x0000,
+    (s16)0xFFFF, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, (s16)0xFFFF, 0x0000,
+    (s16)0xFFFF
+};
+
+SECTION(".rodata.dat_worldmap_gmapunit_p1117") s16 gEkrdragonDemonkingobj_array2[] = {
+    0x0005, 0x0002, 0x0002, (s16)0xFFFE, (s16)0xFFFE, 0x0001, 0x0001, (s16)0xFFFF,
+    (s16)0xFFFF, 0,
+    0 /* JP-only trailing alignment pad */
+};

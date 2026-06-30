@@ -32,27 +32,27 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 1607 | 52.0% |
-| **FLOOR** | 1071 | 34.7% |
-| **UNCERTAIN** | 410 | 13.3% |
-| **TOTAL** | 3088 | 100.0% |
+| **MISS** | 642 | 32.4% |
+| **FLOOR** | 978 | 49.4% |
+| **UNCERTAIN** | 361 | 18.2% |
+| **TOTAL** | 1981 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
 | Category | Verdict | Count (this run) | fe8u editable form |
 |---|---|---:|---|
-| battle-anim | MISS | 291 | fe8u 202 editable banim/*.s (compressing linker) |
-| pixel-gfx | MISS | 270 | fe8u graphics/**/*.png |
-| sound-m4a-tables | MISS | 488 | fe8u sound/music_player_table.s etc. |
-| voicegroup-tail | MISS | 5 | fe8u sound/voicegroups/*.s (documented ceiling) |
-| menu-strings | MISS | 166 | fe8u C literals (src/menu_def.c) |
-| unitdef-residuals | MISS | 354 | fe8u src/events_udefs.c typed C |
-| map-tilemaps | MISS | 33 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
-| TSA/.map.bin | FLOOR | 922 | fe8u keeps TSA/tilemaps binary too |
+| battle-anim | MISS | 194 | fe8u 202 editable banim/*.s (compressing linker) |
+| pixel-gfx | MISS | 231 | fe8u graphics/**/*.png |
+| sound-m4a-tables | MISS | 1 | fe8u sound/music_player_table.s etc. |
+| voicegroup-tail | MISS | 4 | fe8u sound/voicegroups/*.s (documented ceiling) |
+| menu-strings | MISS | 137 | fe8u C literals (src/menu_def.c) |
+| unitdef-residuals | MISS | 46 | fe8u src/events_udefs.c typed C |
+| map-tilemaps | MISS | 29 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
+| TSA/.map.bin | FLOOR | 829 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 410 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 361 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -63,21 +63,21 @@ under MISS, asserted by the self-test guards below).
 
 **MISS spot checks** (fe8u ships an editable source):
 
-- `data/banim/Img_DemonLightBg_Close_1.bin` → **MISS** (battle-anim) — proof: fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s)
 - `data/residual/Ch10EphraimMapChanges.bin` → **MISS** (map-tilemaps) — proof: fe8u src/data/map/change/Ch10EphraimMapChanges.json
-- `data/residual/EventListScr_Ch10a_Character.bin` → **MISS** (unitdef-residuals) — proof: fe8u src/events/*.c (EVENT_* / PROC_* macros)
+- `data/residual/EventListScr_Ch15b_Location.bin` → **MISS** (unitdef-residuals) — proof: fe8u src/events/*.c (EVENT_* / PROC_* macros)
 - `data/residual/MenuItems_SioMenudef_0.bin` → **MISS** (menu-strings) — proof: fe8u C string literals (src/menu_def.c parity)
 - `data/residual/gBattleForecast_0.bin` → **MISS** (pixel-gfx) — proof: fe8u preview/tsa/misc/gBattleForecast_0.png
 - `data/residual/rom_header_080000C0.bin` → **MISS** (sound-m4a-tables) — proof: fe8u src/rom_header.s
+- `data/sound/frontier_df3_voicegroup_000_1F70E8.bin` → **MISS** (voicegroup-tail) — proof: fe8u sound/voicegroups/*.s (voicegroup tail; documented ceiling)
 
 **FLOOR spot checks** (fe8u also keeps binary):
 
-- `data/banim/Tsa_DemonLightBg_Close_1.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin)
+- `data/residual/gMenuSoundroom_0.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u also keeps binary: graphics/misc/gMenuSoundroom_0.tsa.bin
 - `graphics/banim/efxbattle/TsaConf_BanimTmA1.map.bin` → **FLOOR** (efx-effect-bins) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
 - `graphics/opanim/OpAnimCharacterBG.map.bin` → **FLOOR** (opanim-tilemaps) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
-- `data/banim/Tsa_DemonLightBg_Close_10.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin)
-- `data/banim/Tsa_DemonLightBg_Close_11.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin)
-- `data/banim/Tsa_DemonLightBg_Close_12.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin)
+- `data/residual/gTsa_OpSubtitle_03.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps TSA tilemaps binary (*.tsa.bin / *.map.bin)
+- `data/residual/gTsa_OpSubtitle_05.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps TSA tilemaps binary (*.tsa.bin / *.map.bin)
+- `graphics/banim/_us/banim/assets/tsa/005DD518_Tsa_BreathBgBase.map.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
 
 **Self-test guards** (the script exits non-zero if any fail):
 
@@ -87,109 +87,12 @@ under MISS, asserted by the self-test guards below).
 - `graphics/banim/efx*` effect bins are classified **FLOOR**.
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 
-## MISS (1607) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (642) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>1607 entries</summary>
+<details><summary>642 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
-| `data/banim/Img_DemonLightBg_Close_1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_10.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_11.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_12.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_13.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_14.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_15.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_16.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_17.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_18.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_19.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_2.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_20.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_21.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_22.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_23.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_24.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_25.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_26.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_27.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_28.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_29.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_3.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_30.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_31.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_32.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_4.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_5.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_6.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_7.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_8.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Close_9.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_10.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_11.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_12.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_13.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_14.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_15.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_16.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_17.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_18.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_19.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_2.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_20.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_21.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_22.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_23.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_24.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_25.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_26.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_27.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_28.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_29.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_3.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_30.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_31.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_32.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_4.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_5.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_6.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_7.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_8.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_DemonLightBg_Far_9.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkill1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkill10.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkill2.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkill3.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkill4.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkill5.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkill6.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkill7.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkill8.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkill9.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkillA.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkillB.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkillC.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkillD.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkillE.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Img_EfxSkillF.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkill1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkill10.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkill2.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkill3.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkill4.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkill5.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkill6.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkill7.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkill8.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkill9.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkillA.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkillB.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkillC.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkillD.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkillE.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/Pal_EfxSkillF.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/residual/AnimScr_NaglfarBG4.bin` | battle-anim | fe8u banim/animscr_*.s (battle-anim script macros) |
 | `data/residual/Ch10EphraimMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch10EphraimMapChanges.json |
 | `data/residual/Ch11EirikaMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch11EirikaMapChanges.json |
 | `data/residual/Ch11EphraimMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch11EphraimMapChanges.json |
@@ -205,173 +108,7 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/Ch19MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch19MapChanges.json |
 | `data/residual/Ch20MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch20MapChanges.json |
 | `data/residual/Ch9EphMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch9EphMapChanges.json |
-| `data/residual/EventListScr_Ch10a_Character.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch10a_Location.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch14b_Location.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
 | `data/residual/EventListScr_Ch15b_Location.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch15b_Misc.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch16b_Location.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch17b_Turn.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch18b_Misc.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch18b_Turn.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch19b_Turn.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch1_Character.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch20b_Turn.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch2_Location.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch2_Tutorial.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch5_Location.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch8_Character.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch9a_Location.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Ch9a_Turn.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventListScr_Prologue_Tutorial.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch10A_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch10A_13.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch10A_8.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch10B_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch10a_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch10a_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch11B_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch11B_2.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch11B_6.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch11a_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch12A_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch12A_5.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch12B_1.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch13A_3.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch13A_4.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch13B_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch13B_1.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch13a_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch13b_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch14A_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch14A_1.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch14A_8.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch14B_12.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch14B_2.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch14b_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch14b_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15A_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15A_17.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15A_18.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15A_19.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15A_20.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15A_21.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15A_22.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15A_23.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15A_24.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15A_25.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15A_26.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15B_14.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15B_15.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15B_16.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15B_17.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15B_18.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15B_19.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15B_20.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15B_21.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch15B_22.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch16A_11.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch16A_12.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch16A_9.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch16B_3.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch16B_5.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch16b_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch18A_11.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch18b_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch19A_11.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch1Tut_BeforeSethMoveToEnemy.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch1Tut_ChooseSethTurn1.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch1Tut_EirikaVisitHouseIdle1.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch1Tut_EirikaVisitHouseIdle2.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch1Tut_EirikaVisitHouseInit.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch1Tut_SethMoveToEnemy.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch1Tut_TradeSelectGalliamIdle1.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch1Tut_TradeSelectGalliamIdle2.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch1_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch1_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch1_Turn_AllyReinforceArrive.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch20B_1.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch20B_2.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch20b_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch21A_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch21A_8.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch21A_9.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch21b_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch21b_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial11.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial12.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial14.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial15.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial18.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial2.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial21.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial22.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial23.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial24.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial27.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial28.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial4.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial5.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial8.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2Tutorial9.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch2_Village1.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch3_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch3_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch3_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch3_Turn1Npc.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch4_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch4_1.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch4_2.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch4_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch5_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch5_5.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch5_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch5_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch5x_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch5x_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch6_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch6_1.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch6_2.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch6_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch6_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch7_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch7_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch8_0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch8_10.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch8_11.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch8_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch9A_2.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch9A_4.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch9B_9.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch9a_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ch9a_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_FloorClearInTower.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_GiveTreasureToLuckyDog.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Prologue_BeginningScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Prologue_EndingScene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Prologue_GiveRapier.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Prologue_RenaisThroneCutscene.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Prologue_TutEirikaAttack.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Prologue_TutMessageTurn2.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Prologue_Tutorial0.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Prologue_Tutorial1.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Prologue_Tutorial4.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Prologue_TutorialA.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Prologue_TutorialB.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ruin_60.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ruin_62.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ruin_64.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ruin_66.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ruin_68.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ruin_70.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ruin_72.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ruin_74.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Ruin_76.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_SkirmishRetreat.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_SuspendPrompt.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/EventScr_Tutorial_Exec1.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
 | `data/residual/FinalChapterMap2Changes.bin` | map-tilemaps | fe8u src/data/map/change/FinalChapterMap2Changes.json |
 | `data/residual/LagdouRuins2MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/LagdouRuins2MapChanges.json |
 | `data/residual/LagdouRuins3MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/LagdouRuins3MapChanges.json |
@@ -389,14 +126,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/MuSoundScr_Spider.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
 | `data/residual/MuSoundScr_Unused2.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
 | `data/residual/MuSoundScr_Zombie.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/Obj_EfxArrowOBJ.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_EventShinningCursor.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_SmallBrownNameBoxe1.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_SmallBrownNameBoxe2.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_SmallBrownNameBoxe3.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_SmallBrownNameBoxe4.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_SmallBrownNameBoxe5.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_SmallBrownNameBoxe6.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/ObjectType9.bin` | map-tilemaps | fe8u graphics/map/ObjectType9.png |
 | `data/residual/PopupScr_GotGold.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
 | `data/residual/PopupScr_GotItem.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
@@ -404,40 +133,11 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/PopupScr_ItemWasPilfered.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
 | `data/residual/PopupScr_StoleItem.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
 | `data/residual/PopupScr_WpnBroken.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/SpritAnim_MineFx_anim_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpritAnim_MineFx_anim_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpritAnim_MineFx_frame_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpritAnim_MineFx_frame_1.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpritAnim_MineFx_frame_2.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpritAnim_MineFx_frame_3.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpritAnim_MineFx_frame_4.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpritAnim_MineFx_frame_5.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpritAnim_MineFx_frame_6.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpritAnim_MineFx_frame_7.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpritAnim_MineFx_frame_8.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpritAnim_MineFx_frame_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpritAnim_MineFx_motion.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/TileAnimations1.bin` | map-tilemaps | fe8u src/data/map/obj_anim/TileAnimations1.json |
 | `data/residual/TileAnimations2.bin` | map-tilemaps | fe8u src/data/map/obj_anim/TileAnimations2.json |
 | `data/residual/TileAnimations3.bin` | map-tilemaps | fe8u src/data/map/obj_anim/TileAnimations3.json |
 | `data/residual/TowerOfValni6MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/TowerOfValni6MapChanges.json |
 | `data/residual/TowerOfValni7MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/TowerOfValni7MapChanges.json |
-| `data/residual/UnitDef_Ch14BAlly_7.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch18BAlly_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch21BEnemy_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_Ch1Enemy.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_Ch1EnemyReinforce.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_Ch2Ally.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_Ch3Ally.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_Ch5Ally.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_Ch5xAlly.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_Ch7Ally.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_Ch8Ally.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_PrologueEnemy.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_PrologueEscapees.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_PrologueGradoCavalry.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_PrologueGradoShamans.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Event_PrologueValterGroup.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
 | `data/residual/gBattleForecast_0.bin` | pixel-gfx | fe8u preview/tsa/misc/gBattleForecast_0.png |
 | `data/residual/gBattleForecast_1.bin` | pixel-gfx | fe8u preview/tsa/misc/gBattleForecast_1.png |
 | `data/residual/gBattleForecast_2.bin` | pixel-gfx | fe8u preview/tsa/misc/gBattleForecast_2.png |
@@ -463,12 +163,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/gEfxmagicGleipnir_5.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gEfxmagicGleipnir_6.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gEfxmisc_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrdragonDemonkingobj_array1.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrdragonDemonkingobj_array1_1.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrdragonDemonkingobj_array2.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrdragonDemonkingobj_array2_1.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrdragonDemonkingobj_array3.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrdragonDemonkingobj_array4.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gEkrgauge_10.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gEkrgauge_11.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gEkrgauge_2.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
@@ -479,63 +173,11 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/gEkrgauge_8.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gEkrgauge_9.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gEndingDetails_0.bin` | pixel-gfx | fe8u preview/tsa/misc/gEndingDetails_0.png |
-| `data/residual/gFontgrp_103.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_116.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_17.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_18.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_19.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_20.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_21.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_218.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_22.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_222.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_225.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_23.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_24.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_25.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_257.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_269.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_32.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_33.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_335.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_337.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_338.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_340.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_346.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_35.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_36.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_360.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_362.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_363.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_364.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_44.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_45.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_50.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_64.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_68.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_71.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gFontgrp_89.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gGenericIcon_6.bin` | pixel-gfx | fe8u graphics/**/*.png (named gfx) |
 | `data/residual/gMapanimLevelup_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gMenuSoundroom_1.bin` | pixel-gfx | fe8u preview/tsa/misc/gMenuSoundroom_1.png |
 | `data/residual/gMenuSoundroom_2.bin` | pixel-gfx | fe8u preview/tsa/misc/gMenuSoundroom_2.png |
 | `data/residual/gMenuSoundroom_4.bin` | pixel-gfx | fe8u preview/tsa/misc/gMenuSoundroom_4.png |
-| `data/residual/gSprite_Face64x96.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_Face64x96_Flipped.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_Face80x72.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_Face80x72_Flipped.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_Face96x72.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_Face96x72_Flipped.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_Face96x96.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_Face96x96_Flipped.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_SavemenuData_17.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_SavemenuData_18.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_SavemenuData_19.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_SavemenuData_20.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_SavemenuData_21.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_SavemenuData_22.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_TalkTextBack.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/gSprite_TalkTextFront.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/gTitlescreen_0.bin` | pixel-gfx | fe8u graphics/**/*.png (named gfx) |
 | `data/residual/gTitlescreen_1.bin` | pixel-gfx | fe8u graphics/**/*.png (named gfx) |
 | `data/residual/gUnkData_15.bin` | pixel-gfx | fe8u preview/tsa/misc/gUnkData_15.png |
@@ -550,546 +192,11 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/gUnkData_92.bin` | pixel-gfx | fe8u preview/tsa/misc/gUnkData_92.png |
 | `data/residual/gWorldmapMinimap_1.bin` | pixel-gfx | fe8u preview/tsa/misc/gWorldmapMinimap_1.png |
 | `data/residual/gWorldmapMinimap_2.bin` | pixel-gfx | fe8u preview/tsa/misc/gWorldmapMinimap_2.png |
-| `data/residual/gWorldmapSprite_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_11.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_12.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_14.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_15.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_16.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_17.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_19.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_2.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_20.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_21.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_22.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_23.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_24.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_25.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_26.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_27.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_28.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_29.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_3.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_30.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_32.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_33.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_4.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_5.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_6.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_7.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_8.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gWorldmapSprite_9.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/rom_header_080000C0.bin` | sound-m4a-tables | fe8u src/rom_header.s |
-| `data/residual/sSprite_ClassDisplay_B.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_C.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_D.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_E.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_F.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_G.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_H.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_I.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_L.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_M.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_N.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_P.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_R.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_S.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_T.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_V.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_W.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/sSprite_ClassDisplay_Z.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/song002_agbfe3_bgm_op_theme_i_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song002_agbfe3_bgm_op_theme_i.mid |
-| `data/residual/song003_agbfe3_bgm_pro_first_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song003_agbfe3_bgm_pro_first.mid |
-| `data/residual/song003_agbfe3_bgm_pro_first_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song008_agbfe3_bgm_wmap_05_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song008_agbfe3_bgm_wmap_05.mid |
-| `data/residual/song008_agbfe3_bgm_wmap_05_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song008_agbfe3_bgm_wmap_05_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song008_agbfe3_bgm_wmap_05.mid |
-| `data/residual/song009_agbfe3_bgm_map_pl2_3_018.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song009_agbfe3_bgm_map_pl2_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song011_agbfe3_bgm_map_pl4_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song012_agbfe3_bgm_map_pl11_5_024.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song012_agbfe3_bgm_map_pl11_5_025.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song012_agbfe3_bgm_map_pl11_5_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song013_agbfe3_bgm_map_pl12_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song013_agbfe3_bgm_map_pl12_3_008.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song013_agbfe3_bgm_map_pl12_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song015_agbfe3_bgm_map_pl9_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song015_agbfe3_bgm_map_pl9_6_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song017_agbfe3_bgm_map_pl6_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song020_agbfe3_bgm_map_cp2_2_012.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song020_agbfe3_bgm_map_cp2_2_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song021_agbfe3_bgm_map_cp3_5_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song022_agbfe3_bgm_map_cp5_2_001.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song022_agbfe3_bgm_map_cp5_2_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song027_agbfe3_bgm_btl_boss1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song027_agbfe3_bgm_btl_boss1.mid |
-| `data/residual/song027_agbfe3_bgm_btl_boss1_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song030_agbfe3_bgm_btl_boss5_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song030_agbfe3_bgm_btl_boss5.mid |
-| `data/residual/song030_agbfe3_bgm_btl_boss5_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song034_agbfe3_bgm_btl_staff_b_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song034_agbfe3_bgm_btl_staff_b.mid |
-| `data/residual/song036_agbfe3_bgm_evt_advance_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song036_agbfe3_bgm_evt_advance.mid |
-| `data/residual/song036_agbfe3_bgm_evt_advance_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song039_agbfe3_bgm_evt_yorokobi_4_008.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song039_agbfe3_bgm_evt_yorokobi_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song040_agbfe3_bgm_evt_04_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song047_agbfe3_bgm_evt_05_6_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song049_agbfe3_bgm_evt_win_good_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song049_agbfe3_bgm_evt_win_good.mid |
-| `data/residual/song049_agbfe3_bgm_evt_win_good_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song049_agbfe3_bgm_evt_win_good_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song049_agbfe3_bgm_evt_win_good.mid |
-| `data/residual/song049_agbfe3_bgm_evt_win_good_6_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song051_agbfe3_bgm_theme_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song051_agbfe3_bgm_theme.mid |
-| `data/residual/song051_agbfe3_bgm_theme_1_005.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song051_agbfe3_bgm_theme_1_006.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song051_agbfe3_bgm_theme_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song051_agbfe3_bgm_theme_5_004.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song051_agbfe3_bgm_theme_5_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song065_agbfe3_bgm_ed_epilogue_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song065_agbfe3_bgm_ed_epilogue.mid |
-| `data/residual/song065_agbfe3_bgm_ed_epilogue_7.bin` | sound-m4a-tables | fe8u sound/songs/midi/song065_agbfe3_bgm_ed_epilogue.mid |
-| `data/residual/song065_agbfe3_bgm_ed_epilogue_7_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song066_agbfe3_bgm_ed_staff_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song066_agbfe3_bgm_ed_staff.mid |
-| `data/residual/song066_agbfe3_bgm_ed_staff_1_003.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song069_agbfe3_bgm_evt_last_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song069_agbfe3_bgm_evt_last.mid |
-| `data/residual/song069_agbfe3_bgm_evt_last_5_015.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song069_agbfe3_bgm_evt_last_5_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song069_agbfe3_bgm_evt_last_7.bin` | sound-m4a-tables | fe8u sound/songs/midi/song069_agbfe3_bgm_evt_last.mid |
-| `data/residual/song069_agbfe3_bgm_evt_last_7_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song070_agbfe3_bgm_ed_after_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song070_agbfe3_bgm_ed_after.mid |
-| `data/residual/song070_agbfe3_bgm_ed_after_4_038.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song070_agbfe3_bgm_ed_after_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song071_y_wind_3_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song071_y_wind_3.mid |
-| `data/residual/song071_y_wind_3_1_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song072_y_jounai_2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song072_y_jounai_2.mid |
-| `data/residual/song072_y_jounai_2_1_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song074_y_yoru_3_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song074_y_yoru_3.mid |
-| `data/residual/song075_y_boat_03_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song075_y_boat_03.mid |
-| `data/residual/song079_h_evt_sabaku_s_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song079_h_evt_sabaku_s.mid |
-| `data/residual/song081_h_sinden_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song081_h_sinden.mid |
-| `data/residual/song085_agbfe3_bgm_btl_boss5_2_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song085_agbfe3_bgm_btl_boss5_2_2_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s + songs/midi/*.mid |
-| `data/residual/song092_se_ff_item_lost1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song092_se_ff_item_lost1.mid |
-| `data/residual/song092_se_ff_item_lost1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song092_se_ff_item_lost1.mid |
-| `data/residual/song092_se_ff_item_lost1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song092_se_ff_item_lost1.mid |
-| `data/residual/song092_se_ff_item_lost1_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song092_se_ff_item_lost1.mid |
-| `data/residual/song109_se_sys_game_start4_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song109_se_sys_game_start4.mid |
-| `data/residual/song109_se_sys_game_start4_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song109_se_sys_game_start4.mid |
-| `data/residual/song109_se_sys_game_start4_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song109_se_sys_game_start4.mid |
-| `data/residual/song140_se_bmp_reserve2_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song140_se_bmp_reserve2_1.mid |
-| `data/residual/song141_se_bmp_unlock1_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song141_se_bmp_unlock1_1.mid |
-| `data/residual/song141_se_bmp_unlock1_1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song141_se_bmp_unlock1_1.mid |
-| `data/residual/song143_se_bmp_colosseum1_2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song143_se_bmp_colosseum1_2.mid |
-| `data/residual/song144_se_sys_chapter_start1_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song144_se_sys_chapter_start1_1.mid |
-| `data/residual/song144_se_sys_chapter_start1_1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song144_se_sys_chapter_start1_1.mid |
-| `data/residual/song179_se_bmp_item_torch1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song179_se_bmp_item_torch1.mid |
-| `data/residual/song179_se_bmp_item_torch1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song179_se_bmp_item_torch1.mid |
-| `data/residual/song184_se_bmp_area_open1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song184_se_bmp_area_open1.mid |
-| `data/residual/song184_se_bmp_area_open1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song184_se_bmp_area_open1.mid |
-| `data/residual/song216_se_btl_special_hit1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song216_se_btl_special_hit1.mid |
-| `data/residual/song249_se_btl_berserk2_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song249_se_btl_berserk2_1.mid |
-| `data/residual/song256_se_btl_purge2_2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song256_se_btl_purge2_2.mid |
-| `data/residual/song259_se_btl_hammerne2_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song259_se_btl_hammerne2_1.mid |
-| `data/residual/song276_se_btl_reserve2_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song276_se_btl_reserve2_1.mid |
-| `data/residual/song312_se_btl_eclipse1_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song312_se_btl_eclipse1_1.mid |
-| `data/residual/song317_se_btl_class_light_body1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song317_se_btl_class_light_body1.mid |
-| `data/residual/song737_h_misty_af_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song737_h_misty_af.mid |
-| `data/residual/song740_btl_sam_magic1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song740_btl_sam_magic1.mid |
-| `data/residual/song740_btl_sam_magic1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song740_btl_sam_magic1.mid |
-| `data/residual/song890_mon_mao_attack2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song890_mon_mao_attack2.mid |
-| `data/residual/song890_mon_mao_attack2_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song890_mon_mao_attack2.mid |
-| `data/residual/song894_mon_mao_attack3_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song894_mon_mao_attack3.mid |
-| `data/residual/song894_mon_mao_attack3_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song894_mon_mao_attack3.mid |
-| `data/residual/song941_btl_bgl_attack7_2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song941_btl_bgl_attack7_2.mid |
-| `data/residual/song941_btl_bgl_attack7_2_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song941_btl_bgl_attack7_2.mid |
-| `data/residual/song941_btl_bgl_attack7_2_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song941_btl_bgl_attack7_2.mid |
-| `data/residual/song953_mon_gog_attack5_2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song953_mon_gog_attack5_2.mid |
-| `data/residual/song953_mon_gog_attack5_2_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song953_mon_gog_attack5_2.mid |
-| `data/residual/song954_bmp_gog_attack5_2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song954_bmp_gog_attack5_2.mid |
-| `data/residual/song954_bmp_gog_attack5_2_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song954_bmp_gog_attack5_2.mid |
-| `data/residual/song963_mon_bgl_attack4_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song963_mon_bgl_attack4.mid |
-| `data/residual/song964_mon_bgl_attack5_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song964_mon_bgl_attack5.mid |
-| `data/residual/song964_mon_bgl_attack5_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song964_mon_bgl_attack5.mid |
-| `data/residual/song976_btl_critical_dmg2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song976_btl_critical_dmg2.mid |
-| `data/residual/song976_btl_critical_dmg2_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song976_btl_critical_dmg2.mid |
-| `data/residual/song979_btl_evl_magic1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song979_btl_evl_magic1.mid |
-| `data/residual/song979_btl_evl_magic1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song979_btl_evl_magic1.mid |
-| `data/sound/CgbModVol.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/CgbOscOff.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/CheckEfxSoundSeExist.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ChnVolSetAsm.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/FadeOutBody.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/GetCurrentBgmSong.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/IsBgmPlaying.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/MPlayContinue.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/MPlayFadeOut.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/MPlayJumpTableCopy.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/MPlayMain.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/MPlayStart.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/RealClearChain.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/RegisterEfxSoundSeExist.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/SoundMain.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/SoundMainBTM.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/SoundMainRAM.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/Sound_ForceChangeBgm.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/Sound_SetDefaultMaxNumChannels.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/TrackStop.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/TrkVolPitSet.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/UnregisterEfxSoundSeExist.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/clear_modM.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
 | `data/sound/frontier_df3_voicegroup_000_1F70E8.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s (voicegroup tail; documented ceiling) |
 | `data/sound/frontier_df3_voicegroup_001_202C07.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s (voicegroup tail; documented ceiling) |
 | `data/sound/frontier_df4_voice_000_1F578C.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s / direct_sound_data.s |
 | `data/sound/frontier_df4_voice_001_1F67BC.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s / direct_sound_data.s |
-| `data/sound/frontier_df4_voice_003_214120.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s / direct_sound_data.s |
-| `data/sound/gMPlayJumpTableTemplate.bin` | sound-m4a-tables | fe8u sound/*.s (named m4a/sound table) |
-| `data/sound/ply_bend.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_bendr.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_endtie.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_fine.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_goto.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_keysh.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_lfodl.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_lfos.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_mod.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_modt.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_note.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_pan.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_patt.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_pend.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_port.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_prio.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_rept.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_tempo.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_tune.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_voice.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_vol.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_xiecl.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_xiecv.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
-| `data/sound/ply_xwave.bin` | sound-m4a-tables | fe8u sound/programmable_wave_data.s |
-| `data/sound/song001_agbfe3_bgm_opening_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song001_agbfe3_bgm_opening.mid |
-| `data/sound/song001_agbfe3_bgm_opening_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song001_agbfe3_bgm_opening.mid |
-| `data/sound/song001_agbfe3_bgm_opening_2_003.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song001_agbfe3_bgm_opening_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song001_agbfe3_bgm_opening.mid |
-| `data/sound/song001_agbfe3_bgm_opening_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song001_agbfe3_bgm_opening.mid |
-| `data/sound/song001_agbfe3_bgm_opening_4_003.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song001_agbfe3_bgm_opening_4_004.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song001_agbfe3_bgm_opening_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song001_agbfe3_bgm_opening.mid |
-| `data/sound/song001_agbfe3_bgm_opening_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song001_agbfe3_bgm_opening.mid |
-| `data/sound/song001_agbfe3_bgm_opening_7.bin` | sound-m4a-tables | fe8u sound/songs/midi/song001_agbfe3_bgm_opening.mid |
-| `data/sound/song001_agbfe3_bgm_opening_7_004.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song001_agbfe3_bgm_opening_7_005.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song002_agbfe3_bgm_op_theme_i.mid |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_2_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song002_agbfe3_bgm_op_theme_i.mid |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_4_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song002_agbfe3_bgm_op_theme_i.mid |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_7_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_8.bin` | sound-m4a-tables | fe8u sound/songs/midi/song002_agbfe3_bgm_op_theme_i.mid |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_8_011.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_8_012.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_8_013.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_8_014.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_8_015.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song002_agbfe3_bgm_op_theme_i_8_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song006_agbfe3_bgm_wmap_03_2_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song006_agbfe3_bgm_wmap_03_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song006_agbfe3_bgm_wmap_03.mid |
-| `data/sound/song006_agbfe3_bgm_wmap_03_3_000.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song006_agbfe3_bgm_wmap_03_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song007_agbfe3_bgm_wmap_04_4_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song007_agbfe3_bgm_wmap_04_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song007_agbfe3_bgm_wmap_04.mid |
-| `data/sound/song007_agbfe3_bgm_wmap_04_5_022.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song007_agbfe3_bgm_wmap_04_5_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song009_agbfe3_bgm_map_pl2_6_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song009_agbfe3_bgm_map_pl2_7.bin` | sound-m4a-tables | fe8u sound/songs/midi/song009_agbfe3_bgm_map_pl2.mid |
-| `data/sound/song009_agbfe3_bgm_map_pl2_7_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song010_agbfe3_bgm_map_pl3_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song010_agbfe3_bgm_map_pl3.mid |
-| `data/sound/song010_agbfe3_bgm_map_pl3_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song010_agbfe3_bgm_map_pl3_2_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song010_agbfe3_bgm_map_pl3_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song010_agbfe3_bgm_map_pl3.mid |
-| `data/sound/song010_agbfe3_bgm_map_pl3_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song010_agbfe3_bgm_map_pl3_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song010_agbfe3_bgm_map_pl3_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song010_agbfe3_bgm_map_pl3.mid |
-| `data/sound/song010_agbfe3_bgm_map_pl3_4_042.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song010_agbfe3_bgm_map_pl3_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song011_agbfe3_bgm_map_pl4_6_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song011_agbfe3_bgm_map_pl4_7.bin` | sound-m4a-tables | fe8u sound/songs/midi/song011_agbfe3_bgm_map_pl4.mid |
-| `data/sound/song011_agbfe3_bgm_map_pl4_7_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song012_agbfe3_bgm_map_pl11_5_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song012_agbfe3_bgm_map_pl11_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song012_agbfe3_bgm_map_pl11.mid |
-| `data/sound/song012_agbfe3_bgm_map_pl11_6_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song013_agbfe3_bgm_map_pl12_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song013_agbfe3_bgm_map_pl12_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song013_agbfe3_bgm_map_pl12.mid |
-| `data/sound/song013_agbfe3_bgm_map_pl12_4_036.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song013_agbfe3_bgm_map_pl12_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song013_agbfe3_bgm_map_pl12_6_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song013_agbfe3_bgm_map_pl12_7.bin` | sound-m4a-tables | fe8u sound/songs/midi/song013_agbfe3_bgm_map_pl12.mid |
-| `data/sound/song013_agbfe3_bgm_map_pl12_7_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song014_agbfe3_bgm_map_pl5_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song014_agbfe3_bgm_map_pl5_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song014_agbfe3_bgm_map_pl5.mid |
-| `data/sound/song014_agbfe3_bgm_map_pl5_4_010.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song014_agbfe3_bgm_map_pl5_4_011.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song014_agbfe3_bgm_map_pl5_4_012.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song014_agbfe3_bgm_map_pl5_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song015_agbfe3_bgm_map_pl9_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song015_agbfe3_bgm_map_pl9_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song015_agbfe3_bgm_map_pl9.mid |
-| `data/sound/song015_agbfe3_bgm_map_pl9_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song017_agbfe3_bgm_map_pl6_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song017_agbfe3_bgm_map_pl6.mid |
-| `data/sound/song017_agbfe3_bgm_map_pl6_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song017_agbfe3_bgm_map_pl6_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song017_agbfe3_bgm_map_pl6_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song017_agbfe3_bgm_map_pl6.mid |
-| `data/sound/song017_agbfe3_bgm_map_pl6_4_009.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song017_agbfe3_bgm_map_pl6_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song019_agbfe3_bgm_map_cp1_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song019_agbfe3_bgm_map_cp1_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song019_agbfe3_bgm_map_cp1.mid |
-| `data/sound/song019_agbfe3_bgm_map_cp1_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song020_agbfe3_bgm_map_cp2.mid |
-| `data/sound/song020_agbfe3_bgm_map_cp2_1_013.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_4_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song020_agbfe3_bgm_map_cp2.mid |
-| `data/sound/song020_agbfe3_bgm_map_cp2_5_001.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_5_002.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_5_003.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_5_004.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_5_005.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_5_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_5_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song020_agbfe3_bgm_map_cp2.mid |
-| `data/sound/song020_agbfe3_bgm_map_cp2_6_000.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_6_004.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_6_005.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_6_013.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song020_agbfe3_bgm_map_cp2_6_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song021_agbfe3_bgm_map_cp3_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song021_agbfe3_bgm_map_cp3.mid |
-| `data/sound/song021_agbfe3_bgm_map_cp3_1_012.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song021_agbfe3_bgm_map_cp3_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song021_agbfe3_bgm_map_cp3_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song021_agbfe3_bgm_map_cp3_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song021_agbfe3_bgm_map_cp3.mid |
-| `data/sound/song021_agbfe3_bgm_map_cp3_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song022_agbfe3_bgm_map_cp5_4_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song022_agbfe3_bgm_map_cp5_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song022_agbfe3_bgm_map_cp5.mid |
-| `data/sound/song022_agbfe3_bgm_map_cp5_5_013.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song022_agbfe3_bgm_map_cp5_5_014.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song022_agbfe3_bgm_map_cp5_5_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song023_agbfe3_bgm_map_cp4_2_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song023_agbfe3_bgm_map_cp4_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song023_agbfe3_bgm_map_cp4.mid |
-| `data/sound/song023_agbfe3_bgm_map_cp4_3_008.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song023_agbfe3_bgm_map_cp4_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song024_agbfe3_bgm_map_cp8_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song024_agbfe3_bgm_map_cp8_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song024_agbfe3_bgm_map_cp8.mid |
-| `data/sound/song024_agbfe3_bgm_map_cp8_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song024_agbfe3_bgm_map_cp8_4_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song024_agbfe3_bgm_map_cp8_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song024_agbfe3_bgm_map_cp8.mid |
-| `data/sound/song024_agbfe3_bgm_map_cp8_5_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song027_agbfe3_bgm_btl_boss1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song027_agbfe3_bgm_btl_boss1.mid |
-| `data/sound/song027_agbfe3_bgm_btl_boss1_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song029_agbfe3_bgm_btl_boss4_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song029_agbfe3_bgm_btl_boss4.mid |
-| `data/sound/song029_agbfe3_bgm_btl_boss4_1_008.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song029_agbfe3_bgm_btl_boss4_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song029_agbfe3_bgm_btl_boss4_2_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song029_agbfe3_bgm_btl_boss4_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song029_agbfe3_bgm_btl_boss4.mid |
-| `data/sound/song029_agbfe3_bgm_btl_boss4_3_010.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song029_agbfe3_bgm_btl_boss4_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song030_agbfe3_bgm_btl_boss5_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song030_agbfe3_bgm_btl_boss5_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song030_agbfe3_bgm_btl_boss5.mid |
-| `data/sound/song030_agbfe3_bgm_btl_boss5_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song034_agbfe3_bgm_btl_staff_b_1_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song034_agbfe3_bgm_btl_staff_b_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song034_agbfe3_bgm_btl_staff_b.mid |
-| `data/sound/song035_agbfe3_bgm_btl_class_chg_2_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song035_agbfe3_bgm_btl_class_chg_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song035_agbfe3_bgm_btl_class_chg.mid |
-| `data/sound/song035_agbfe3_bgm_btl_class_chg_4_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song035_agbfe3_bgm_btl_class_chg_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song035_agbfe3_bgm_btl_class_chg.mid |
-| `data/sound/song035_agbfe3_bgm_btl_class_chg_5_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song035_agbfe3_bgm_btl_class_chg_5_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song035_agbfe3_bgm_btl_class_chg_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song035_agbfe3_bgm_btl_class_chg.mid |
-| `data/sound/song035_agbfe3_bgm_btl_class_chg_6_007.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song035_agbfe3_bgm_btl_class_chg_6_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song037_agbfe3_bgm_evt_start_5_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song037_agbfe3_bgm_evt_start_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song037_agbfe3_bgm_evt_start.mid |
-| `data/sound/song037_agbfe3_bgm_evt_start_6_014.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song037_agbfe3_bgm_evt_start_6_015.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song037_agbfe3_bgm_evt_start_6_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song038_agbfe3_bgm_evt_enemy_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song038_agbfe3_bgm_evt_enemy.mid |
-| `data/sound/song038_agbfe3_bgm_evt_enemy_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song038_agbfe3_bgm_evt_enemy_2_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song038_agbfe3_bgm_evt_enemy_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song038_agbfe3_bgm_evt_enemy.mid |
-| `data/sound/song038_agbfe3_bgm_evt_enemy_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song038_agbfe3_bgm_evt_enemy_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song038_agbfe3_bgm_evt_enemy_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song038_agbfe3_bgm_evt_enemy.mid |
-| `data/sound/song038_agbfe3_bgm_evt_enemy_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song038_agbfe3_bgm_evt_enemy_5_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song038_agbfe3_bgm_evt_enemy_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song038_agbfe3_bgm_evt_enemy.mid |
-| `data/sound/song038_agbfe3_bgm_evt_enemy_6_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song039_agbfe3_bgm_evt_yorokobi_6_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song039_agbfe3_bgm_evt_yorokobi_7.bin` | sound-m4a-tables | fe8u sound/songs/midi/song039_agbfe3_bgm_evt_yorokobi.mid |
-| `data/sound/song039_agbfe3_bgm_evt_yorokobi_7_012.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song039_agbfe3_bgm_evt_yorokobi_7_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song044_agbfe3_bgm_evt_lyon_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song044_agbfe3_bgm_evt_lyon_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song044_agbfe3_bgm_evt_lyon.mid |
-| `data/sound/song044_agbfe3_bgm_evt_lyon_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song044_agbfe3_bgm_evt_lyon_4_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song044_agbfe3_bgm_evt_lyon_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song044_agbfe3_bgm_evt_lyon.mid |
-| `data/sound/song044_agbfe3_bgm_evt_lyon_5_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song045_agbfe3_bgm_evt_lyon2_4_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song045_agbfe3_bgm_evt_lyon2_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song045_agbfe3_bgm_evt_lyon2.mid |
-| `data/sound/song045_agbfe3_bgm_evt_lyon2_5_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song046_agbfe3_bgm_evt_enemy2_2_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song046_agbfe3_bgm_evt_enemy2_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song046_agbfe3_bgm_evt_enemy2.mid |
-| `data/sound/song046_agbfe3_bgm_evt_enemy2_3_001.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song046_agbfe3_bgm_evt_enemy2_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song053_agbfe3_bgm_shop_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song053_agbfe3_bgm_shop.mid |
-| `data/sound/song053_agbfe3_bgm_shop_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song056_agbfe3_bgm_togijyo_info_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song056_agbfe3_bgm_togijyo_info_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song056_agbfe3_bgm_togijyo_info.mid |
-| `data/sound/song056_agbfe3_bgm_togijyo_info_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song058_agbfe3_bgm_ff_togijyo_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song058_agbfe3_bgm_ff_togijyo.mid |
-| `data/sound/song058_agbfe3_bgm_ff_togijyo_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song058_agbfe3_bgm_ff_togijyo.mid |
-| `data/sound/song058_agbfe3_bgm_ff_togijyo_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song058_agbfe3_bgm_ff_togijyo.mid |
-| `data/sound/song058_agbfe3_bgm_ff_togijyo_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song058_agbfe3_bgm_ff_togijyo.mid |
-| `data/sound/song059_agbfe3_bgm_ff_loop_5_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song059_agbfe3_bgm_ff_loop_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song059_agbfe3_bgm_ff_loop.mid |
-| `data/sound/song059_agbfe3_bgm_ff_loop_6_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song060_bgm_sys_fase_pl_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song060_bgm_sys_fase_pl.mid |
-| `data/sound/song060_bgm_sys_fase_pl_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song060_bgm_sys_fase_pl.mid |
-| `data/sound/song060_bgm_sys_fase_pl_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song060_bgm_sys_fase_pl.mid |
-| `data/sound/song060_bgm_sys_fase_pl_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song060_bgm_sys_fase_pl.mid |
-| `data/sound/song060_bgm_sys_fase_pl_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song060_bgm_sys_fase_pl.mid |
-| `data/sound/song060_bgm_sys_fase_pl_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song060_bgm_sys_fase_pl.mid |
-| `data/sound/song061_bgm_sys_fase_cp_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song061_bgm_sys_fase_cp.mid |
-| `data/sound/song061_bgm_sys_fase_cp_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song061_bgm_sys_fase_cp.mid |
-| `data/sound/song061_bgm_sys_fase_cp_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song061_bgm_sys_fase_cp.mid |
-| `data/sound/song061_bgm_sys_fase_cp_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song061_bgm_sys_fase_cp.mid |
-| `data/sound/song061_bgm_sys_fase_cp_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song061_bgm_sys_fase_cp.mid |
-| `data/sound/song061_bgm_sys_fase_cp_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song061_bgm_sys_fase_cp.mid |
-| `data/sound/song061_bgm_sys_fase_cp_7.bin` | sound-m4a-tables | fe8u sound/songs/midi/song061_bgm_sys_fase_cp.mid |
-| `data/sound/song062_agbfe3_bgm_gameover_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song062_agbfe3_bgm_gameover.mid |
-| `data/sound/song062_agbfe3_bgm_gameover_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song062_agbfe3_bgm_gameover.mid |
-| `data/sound/song062_agbfe3_bgm_gameover_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song062_agbfe3_bgm_gameover.mid |
-| `data/sound/song062_agbfe3_bgm_gameover_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song062_agbfe3_bgm_gameover.mid |
-| `data/sound/song062_agbfe3_bgm_gameover_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song062_agbfe3_bgm_gameover.mid |
-| `data/sound/song066_agbfe3_bgm_ed_staff_5_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song066_agbfe3_bgm_ed_staff_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song066_agbfe3_bgm_ed_staff.mid |
-| `data/sound/song066_agbfe3_bgm_ed_staff_6_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song067_agbfe3_bgm_op_theme_7_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song067_agbfe3_bgm_op_theme_8.bin` | sound-m4a-tables | fe8u sound/songs/midi/song067_agbfe3_bgm_op_theme.mid |
-| `data/sound/song067_agbfe3_bgm_op_theme_8_002.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song067_agbfe3_bgm_op_theme_8_003.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song067_agbfe3_bgm_op_theme_8_004.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song067_agbfe3_bgm_op_theme_8_005.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song067_agbfe3_bgm_op_theme_8_006.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song067_agbfe3_bgm_op_theme_8_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song069_agbfe3_bgm_evt_last_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song069_agbfe3_bgm_evt_last.mid |
-| `data/sound/song069_agbfe3_bgm_evt_last_1_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song069_agbfe3_bgm_evt_last_2_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song069_agbfe3_bgm_evt_last_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song069_agbfe3_bgm_evt_last.mid |
-| `data/sound/song069_agbfe3_bgm_evt_last_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song070_agbfe3_bgm_ed_after_2_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song070_agbfe3_bgm_ed_after_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song070_agbfe3_bgm_ed_after.mid |
-| `data/sound/song070_agbfe3_bgm_ed_after_3_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song070_agbfe3_bgm_ed_after_4_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song070_agbfe3_bgm_ed_after_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song070_agbfe3_bgm_ed_after.mid |
-| `data/sound/song070_agbfe3_bgm_ed_after_5_054.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song070_agbfe3_bgm_ed_after_5_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song070_agbfe3_bgm_ed_after_5_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song070_agbfe3_bgm_ed_after_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song070_agbfe3_bgm_ed_after.mid |
-| `data/sound/song070_agbfe3_bgm_ed_after_6_038.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song070_agbfe3_bgm_ed_after_6_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song073_y_doukutu_4_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song073_y_doukutu_4.mid |
-| `data/sound/song073_y_doukutu_4_1_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song073_y_doukutu_4_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song073_y_doukutu_4.mid |
-| `data/sound/song076_h_se_bird_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song080_h_evt_hubuki_s_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song080_h_evt_hubuki_s.mid |
-| `data/sound/song085_agbfe3_bgm_btl_boss5_2_3_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song085_agbfe3_bgm_btl_boss5_2_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song085_agbfe3_bgm_btl_boss5_2.mid |
-| `data/sound/song085_agbfe3_bgm_btl_boss5_2_4_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song086_agbfe3_bgm_ed_staff_2_5_B2.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song086_agbfe3_bgm_ed_staff_2_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song086_agbfe3_bgm_ed_staff_2.mid |
-| `data/sound/song086_agbfe3_bgm_ed_staff_2_6_B1.bin` | sound-m4a-tables | fe8u sound/songs/mml/*.s (built from .mid) |
-| `data/sound/song145_se_sys_chapter_start1_2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song145_se_sys_chapter_start1_2.mid |
-| `data/sound/song145_se_sys_chapter_start1_2_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song145_se_sys_chapter_start1_2.mid |
-| `data/sound/song145_se_sys_chapter_start1_2_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song145_se_sys_chapter_start1_2.mid |
-| `data/sound/song290_se_btl_fimbul1_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song290_se_btl_fimbul1_1.mid |
-| `data/sound/song319_bmp_evt_15_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song319_bmp_evt_15_1.mid |
-| `data/sound/song319_bmp_evt_15_1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song319_bmp_evt_15_1.mid |
-| `data/sound/song319_bmp_evt_15_1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song319_bmp_evt_15_1.mid |
-| `data/sound/song319_bmp_evt_15_1_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song319_bmp_evt_15_1.mid |
-| `data/sound/song320_bmp_evt_20b_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song320_bmp_evt_20b_1.mid |
-| `data/sound/song320_bmp_evt_20b_1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song320_bmp_evt_20b_1.mid |
-| `data/sound/song320_bmp_evt_20b_1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song320_bmp_evt_20b_1.mid |
-| `data/sound/song320_bmp_evt_20b_1_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song320_bmp_evt_20b_1.mid |
-| `data/sound/song320_bmp_evt_20b_1_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song320_bmp_evt_20b_1.mid |
-| `data/sound/song320_bmp_evt_20b_1_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song320_bmp_evt_20b_1.mid |
-| `data/sound/song321_bmp_evt_20b_2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song321_bmp_evt_20b_2.mid |
-| `data/sound/song321_bmp_evt_20b_2_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song321_bmp_evt_20b_2.mid |
-| `data/sound/song321_bmp_evt_20b_2_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song321_bmp_evt_20b_2.mid |
-| `data/sound/song321_bmp_evt_20b_2_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song321_bmp_evt_20b_2.mid |
-| `data/sound/song321_bmp_evt_20b_2_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song321_bmp_evt_20b_2.mid |
-| `data/sound/song322_mon_mao_die1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song322_mon_mao_die1.mid |
-| `data/sound/song322_mon_mao_die1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song322_mon_mao_die1.mid |
-| `data/sound/song322_mon_mao_die1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song322_mon_mao_die1.mid |
-| `data/sound/song322_mon_mao_die1_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song322_mon_mao_die1.mid |
-| `data/sound/song322_mon_mao_die1_5.bin` | sound-m4a-tables | fe8u sound/songs/midi/song322_mon_mao_die1.mid |
-| `data/sound/song322_mon_mao_die1_6.bin` | sound-m4a-tables | fe8u sound/songs/midi/song322_mon_mao_die1.mid |
-| `data/sound/song617_se_bmp_map25_saint_light1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song617_se_bmp_map25_saint_light1.mid |
-| `data/sound/song617_se_bmp_map25_saint_light1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song617_se_bmp_map25_saint_light1.mid |
-| `data/sound/song723_btl_dance2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song723_btl_dance2.mid |
-| `data/sound/song723_btl_dance2_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song723_btl_dance2.mid |
-| `data/sound/song725_bmp_dance2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song725_bmp_dance2.mid |
-| `data/sound/song725_bmp_dance2_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song725_bmp_dance2.mid |
-| `data/sound/song752_h_btl_dragon_shake_01_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song752_h_btl_dragon_shake_01.mid |
-| `data/sound/song753_h_btl_dragon_scream_01_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song753_h_btl_dragon_scream_01.mid |
-| `data/sound/song753_h_btl_dragon_scream_01_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song753_h_btl_dragon_scream_01.mid |
-| `data/sound/song754_h_btl_dragon_bress_01_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song754_h_btl_dragon_bress_01.mid |
-| `data/sound/song754_h_btl_dragon_bress_01_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song754_h_btl_dragon_bress_01.mid |
-| `data/sound/song754_h_btl_dragon_bress_01_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song754_h_btl_dragon_bress_01.mid |
-| `data/sound/song755_h_btl_dragon_out_01_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song755_h_btl_dragon_out_01.mid |
-| `data/sound/song755_h_btl_dragon_out_01_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song755_h_btl_dragon_out_01.mid |
-| `data/sound/song755_h_btl_dragon_out_01_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song755_h_btl_dragon_out_01.mid |
-| `data/sound/song790_sys_chapter_start_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song790_sys_chapter_start.mid |
-| `data/sound/song790_sys_chapter_start_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song790_sys_chapter_start.mid |
-| `data/sound/song790_sys_chapter_start_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song790_sys_chapter_start.mid |
-| `data/sound/song790_sys_chapter_start_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song790_sys_chapter_start.mid |
-| `data/sound/song896_mon_mao_appear1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song896_mon_mao_appear1.mid |
-| `data/sound/song896_mon_mao_appear1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song896_mon_mao_appear1.mid |
-| `data/sound/song896_mon_mao_appear1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song896_mon_mao_appear1.mid |
-| `data/sound/song900_bmp_bos_nightmare1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song900_bmp_bos_nightmare1.mid |
-| `data/sound/song900_bmp_bos_nightmare1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song900_bmp_bos_nightmare1.mid |
-| `data/sound/song900_bmp_bos_nightmare1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song900_bmp_bos_nightmare1.mid |
-| `data/sound/song940_btl_bgl_attack7_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song940_btl_bgl_attack7_1.mid |
-| `data/sound/song940_btl_bgl_attack7_1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song940_btl_bgl_attack7_1.mid |
-| `data/sound/song940_btl_bgl_attack7_1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song940_btl_bgl_attack7_1.mid |
-| `data/sound/song943_btl_snr_magic2_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song943_btl_snr_magic2_1.mid |
-| `data/sound/song943_btl_snr_magic2_1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song943_btl_snr_magic2_1.mid |
-| `data/sound/song943_btl_snr_magic2_1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song943_btl_snr_magic2_1.mid |
-| `data/sound/song943_btl_snr_magic2_1_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song943_btl_snr_magic2_1.mid |
-| `data/sound/song944_btl_snr_magic2_2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song944_btl_snr_magic2_2.mid |
-| `data/sound/song944_btl_snr_magic2_2_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song944_btl_snr_magic2_2.mid |
-| `data/sound/song944_btl_snr_magic2_2_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song944_btl_snr_magic2_2.mid |
-| `data/sound/song944_btl_snr_magic2_2_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song944_btl_snr_magic2_2.mid |
-| `data/sound/song946_mon_mao_magic1_1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song946_mon_mao_magic1_1.mid |
-| `data/sound/song946_mon_mao_magic1_1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song946_mon_mao_magic1_1.mid |
-| `data/sound/song946_mon_mao_magic1_1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song946_mon_mao_magic1_1.mid |
-| `data/sound/song946_mon_mao_magic1_1_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song946_mon_mao_magic1_1.mid |
-| `data/sound/song947_mon_mao_magic1_2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song947_mon_mao_magic1_2.mid |
-| `data/sound/song947_mon_mao_magic1_2_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song947_mon_mao_magic1_2.mid |
-| `data/sound/song947_mon_mao_magic1_2_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song947_mon_mao_magic1_2.mid |
-| `data/sound/song947_mon_mao_magic1_2_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song947_mon_mao_magic1_2.mid |
-| `data/sound/song950_mon_gog_magic1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song950_mon_gog_magic1.mid |
-| `data/sound/song950_mon_gog_magic1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song950_mon_gog_magic1.mid |
-| `data/sound/song950_mon_gog_magic1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song950_mon_gog_magic1.mid |
-| `data/sound/song950_mon_gog_magic1_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song950_mon_gog_magic1.mid |
-| `data/sound/song951_mon_gog_attack1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song951_mon_gog_attack1.mid |
-| `data/sound/song951_mon_gog_attack1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song951_mon_gog_attack1.mid |
-| `data/sound/song959_btl_mon_call1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song959_btl_mon_call1.mid |
-| `data/sound/song959_btl_mon_call1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song959_btl_mon_call1.mid |
-| `data/sound/song967_mon_bgl_attack7_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song967_mon_bgl_attack7.mid |
-| `data/sound/song967_mon_bgl_attack7_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song967_mon_bgl_attack7.mid |
-| `data/sound/song967_mon_bgl_attack7_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song967_mon_bgl_attack7.mid |
-| `data/sound/song980_btl_evl_magic2_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song980_btl_evl_magic2.mid |
-| `data/sound/song980_btl_evl_magic2_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song980_btl_evl_magic2.mid |
-| `data/sound/song980_btl_evl_magic2_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song980_btl_evl_magic2.mid |
-| `data/sound/song980_btl_evl_magic2_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song980_btl_evl_magic2.mid |
-| `data/sound/song981_btl_mon_magic1_1.bin` | sound-m4a-tables | fe8u sound/songs/midi/song981_btl_mon_magic1.mid |
-| `data/sound/song981_btl_mon_magic1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song981_btl_mon_magic1.mid |
-| `data/sound/song981_btl_mon_magic1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song981_btl_mon_magic1.mid |
-| `data/sound/song981_btl_mon_magic1_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song981_btl_mon_magic1.mid |
 | `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_004_7738F0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_005_774CB8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_006_774F30.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -1209,27 +316,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_ending/frontier_df3_ending_000_AC1BC0.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df3_ending/frontier_df3_ending_001_AC3AA8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df3_ending/frontier_df3_ending_002_AC50A4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_000_A69464.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_001_A696D4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_002_A6A06C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_003_A6AA20.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_004_A6AE28.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_005_A6B460.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_006_A6C078.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_007_A6C8CC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_008_A6CD00.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_009_A6D3F8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_010_A6D524.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_011_A6D850.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_012_A6DE0C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_013_A6E680.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_014_A6EDFC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_015_A6EF04.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_016_A6EFD8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_017_A6F47C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_019_A6FB48.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_020_A6FB9C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_021_A6FC48.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_000_57E884.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_001_57F604.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_002_57FACC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
@@ -1246,26 +332,19 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_000_B44B40.bin` | pixel-gfx | fe8u graphics/titlescreen/*.png |
 | `graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_001_B48D38.bin` | pixel-gfx | fe8u graphics/titlescreen/*.png |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_000_90F678.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_001_91020C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_002_9105E0.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_003_91066C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_004_91075C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_005_9109A8.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_006_911070.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_007_911200.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_008_9117C8.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_009_91187C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_010_9119D0.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_011_911AFC.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_012_911C34.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_013_911E38.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_014_911FCC.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_015_91206C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_016_912198.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_017_912480.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_018_912AD4.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_019_913958.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_020_9148F4.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_021_914BD8.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_022_915038.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_023_91512C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
@@ -1285,12 +364,9 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_037_91AC38.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_038_91B948.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_039_91BED4.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_040_91BF9C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_041_91C104.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_042_91C230.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_043_91D314.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_044_91D878.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_045_91DC24.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_046_91DFD0.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_047_91E280.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_048_91E7A8.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
@@ -1298,27 +374,14 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_050_91EE14.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_051_91F300.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_052_91F89C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_053_91FAF4.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_054_91FD38.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_055_91FE20.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_056_920140.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_057_92042C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_058_920698.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_059_920AD0.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_060_921140.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_061_9212BC.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_062_9218FC.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_063_921E38.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_064_921F00.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_065_922388.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_066_92275C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_067_922B08.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_068_922FCC.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_069_9233F8.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_070_923510.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_071_92395C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_072_923AD8.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_073_923F38.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_000_5E0E94.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_001_5E37CC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_002_5E3AD4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -1438,13 +501,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_menu/frontier_df4_menu_003_A5E6CC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_004_A5F770.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_006_A65504.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_007_A657D4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_008_A66F88.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_009_A67660.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_010_A67EEC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_011_A71268.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_012_A71CC4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_013_A72408.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_014_A72BF0.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_015_A73900.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
@@ -1523,7 +579,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_023_5B9454.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_024_5C1D30.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_025_5C2E50.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_026_5C3618.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_027_5C3C9C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_028_5C411C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_029_5C4A94.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
@@ -1586,24 +641,15 @@ under MISS, asserted by the self-test guards below).
 | `graphics/gfx_data_bg/gfx_data_bg_102_bg_Blank_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gmapunit/Tsa_ArenaBattleBg.bin` | battle-anim | fe8u preview/tsa/banim/efxlvupfx/Tsa_ArenaBattleBg.png |
 | `graphics/gmapunit/Tsa_ConfigUiFrame.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_ConfigUiFrame.png |
-| `graphics/gmapunit/Tsa_DanceringFx.bin` | pixel-gfx | fe8u graphics/misc/Tsa_DanceringFx.png |
-| `graphics/gmapunit/Tsa_EventWarp.bin` | pixel-gfx | fe8u graphics/misc/Tsa_EventWarp.png |
 | `graphics/gmapunit/Tsa_PlayerRankFog.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_PlayerRankFog.png |
 | `graphics/gmapunit/Tsa_PrepItemScreen.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_PrepItemScreen.png |
 | `graphics/gmapunit/Tsa_PrepItemUseScreen.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_PrepItemUseScreen.png |
 | `graphics/gmapunit/Tsa_SilenceBg_2.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Tsa_StatscreenBG.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gmapunit/Tsa_StatscreenEquipedWeaponHighlight.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Tsa_StatscreenEquipmentBG.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Tsa_StatscreenHalo.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gmapunit/Tsa_TerrainMapUi_Labels.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_TerrainMapUi_Labels.png |
 | `graphics/gmapunit/Tsa_UnkData_1.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_1.png |
 | `graphics/gmapunit/Tsa_UnkData_3.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_3.png |
 | `graphics/gmapunit/Tsa_UnkData_4.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_4.png |
-| `graphics/mapanim/TileAnimationsUnused3_frame_7.pal.bin` | map-tilemaps | fe8u graphics/map/TileAnimationsUnused3_frame_7.pal |
-| `graphics/mapanim/TileAnimationsUnused4_frame_11.pal.bin` | map-tilemaps | fe8u graphics/map/TileAnimationsUnused4_frame_11.pal |
-| `graphics/mapanim/TileAnimationsUnused4_frame_4.pal.bin` | map-tilemaps | fe8u graphics/map/TileAnimationsUnused4_frame_4.pal |
-| `graphics/mapanim/TileAnimationsUnused4_frame_9.pal.bin` | map-tilemaps | fe8u graphics/map/TileAnimationsUnused4_frame_9.pal |
 | `graphics/misc_gfx/Pal_LinkArenaWarpFx.bin` | pixel-gfx | fe8u graphics/misc/Pal_LinkArenaWarpFx.agbpal |
 | `graphics/misc_gfx/Pal_MapAnimAntitoxin.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimAntitoxin.agbpal |
 | `graphics/misc_gfx/Pal_MapAnimBerserkfx_0.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimBerserkfx.pal |
@@ -1659,15 +705,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/misc_gfx/Tsa_NightMareMapAnimfx7.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx7.png |
 | `graphics/misc_gfx/Tsa_NightMareMapAnimfx8.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx8.png |
 | `graphics/misc_gfx/Tsa_NightMareMapAnimfx9.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx9.png |
-| `graphics/misc_gfx/Tsa_OpAnimEirika.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Tsa_OpAnimEirikaBlur1.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Tsa_OpAnimEirikaBlur2.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Tsa_OpAnimEirikaBlur3.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Tsa_OpAnimEphraim.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Tsa_OpAnimEphraimBlur1.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Tsa_OpAnimGenericCharacterBG.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Tsa_OpAnimWorldMap.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Tsa_OpAnimWorldMapFog.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx/Tsa_ShopWindows.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_ShopWindows.png |
 | `graphics/misc_gfx/gTsa_TitleDemonKing.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx/gTsa_TitleDragonForeground.bin` | pixel-gfx | fe8u graphics/misc/*.png |
@@ -1680,7 +717,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/misc_gfx2/Tsa_EndingFin.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_EndingFin.png |
 | `graphics/misc_gfx2/Tsa_EventGmap.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_EventGmap.png |
 | `graphics/misc_gfx2/Tsa_GameOverFx.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_GameOverFx.png |
-| `graphics/misc_gfx2/Tsa_LightRune.bin` | pixel-gfx | fe8u graphics/misc/Tsa_LightRune.png |
 | `graphics/misc_gfx2/Tsa_LinkArenaPostBattleBg.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_LinkArenaPostBattleBg.png |
 | `graphics/misc_gfx2/Tsa_SaveMenuBG.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_SaveMenuBG.png |
 | `graphics/misc_gfx2/Tsa_SioResultRankings.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_SioResultRankings.png |
@@ -1699,96 +735,15 @@ under MISS, asserted by the self-test guards below).
 | `graphics/misc_gfx2/gTsa_OpSubtitle_04.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx2/gTsa_SupportSubScreen.bin` | pixel-gfx | fe8u preview/tsa/misc/gTsa_SupportSubScreen.png |
 | `graphics/misc_gfx2/gTsa_WorldmapMinimap_0.bin` | pixel-gfx | fe8u preview/tsa/misc/gTsa_WorldmapMinimap_0.png |
-| `graphics/misc_gfx3/Tsa_IntelligentSystems.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 
 </details>
 
-## FLOOR (1071) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (978) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>1071 entries</summary>
+<details><summary>978 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
-| `data/banim/Tsa_DemonLightBg_Close_1.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_10.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_11.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_12.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_13.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_14.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_15.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_16.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_17.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_18.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_19.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_2.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_20.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_21.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_22.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_23.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_24.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_25.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_26.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_27.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_28.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_29.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_3.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_30.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_31.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_32.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_4.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_5.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_6.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_7.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_8.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Close_9.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_1.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_10.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_11.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_12.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_13.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_14.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_15.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_16.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_17.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_18.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_19.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_2.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_20.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_21.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_22.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_23.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_24.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_25.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_26.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_27.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_28.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_29.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_3.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_30.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_31.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_32.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_4.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_5.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_6.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_7.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_8.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_DemonLightBg_Far_9.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkill1.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkill10.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkill2.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkill3.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkill4.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkill5.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkill6.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkill7.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkill8.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkill9.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkillA.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkillB.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkillC.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkillD.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkillE.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
-| `data/banim/Tsa_EfxSkillF.bin` | TSA/.map.bin | fe8u keeps banim TSA tilemaps binary (graphics/banim/assets/tsa/*.map.bin) |
 | `data/residual/gMenuSoundroom_0.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gMenuSoundroom_0.tsa.bin |
 | `data/residual/gTsa_OpSubtitle_03.bin` | TSA/.map.bin | fe8u keeps TSA tilemaps binary (*.tsa.bin / *.map.bin) |
 | `data/residual/gTsa_OpSubtitle_05.bin` | TSA/.map.bin | fe8u keeps TSA tilemaps binary (*.tsa.bin / *.map.bin) |
@@ -2488,19 +1443,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/ending_cg/cg_7.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/ending_cg/cg_8.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/ending_cg/cg_9.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_10.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_11.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_12.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_13.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_14.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_15.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_3.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_4.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_5.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_6.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_7.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_8.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/fontgrp/gFontgrp_9.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/gmapunit/Tsa_UnkData_2.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/Tsa_UnkData_2.tsa.bin |
 | `graphics/mapanim/Tsa_Mapeventcall_0.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/mapanim/Tsa_Mapeventcall_1.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
@@ -2783,29 +1725,12 @@ under MISS, asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (410) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (361) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>410 entries</summary>
+<details><summary>361 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
-| `data/residual/AP_DrawPreparationsBanner.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ap_WmHightLightMap2_anim_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMap2_anim_1.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMap2_anim_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMap2_frame_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMap2_frame_1.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMap2_frame_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMap2_motion.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMap3.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMap6.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMapFrecia_anim_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMapFrecia_anim_1.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMapFrecia_anim_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMapFrecia_frame_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMapFrecia_frame_1.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMapFrecia_frame_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/Ap_WmHightLightMapFrecia_motion.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/Ch10EirikaEvents.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/Ch16EphraimEventData.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/Ch19EphraimEventData.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
@@ -2831,7 +1756,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/REDA_Ch14AMixed_1_ISMAIRE.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/REDA_Ch14AMixed_1_LYON.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/SoftReset.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Sprite_0.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/TextGlyphs_Special.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/TextGlyphs_System.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/TextGlyphs_Talk.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
@@ -2908,7 +1832,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_085BA10C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085C4440.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085C6A20.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_085CBFA4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085D30F8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085E3724.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085F1568.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -3097,28 +2020,12 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_08B3E1C8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08B3E688.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08B3E86C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08B65D08.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08B6BD34.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08B6EE04.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08B7229C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08B755D4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08BAB2DC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08BB8ED0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08C01928.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08EE0AD0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08EF86C8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08FFF000.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/g085A0EA0_anim_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/g085A0EA0_anim_1.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/g085A0EA0_anim_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/g085A0EA0_frame_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/g085A0EA0_frame_1.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/g085A0EA0_frame_2.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/g085A0EA0_frame_3.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/g085A0EA0_frame_4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/g085A0EA0_frame_5.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/g085A0EA0_frame_6.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/g085A0EA0_frame_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gAnimCharaPalConfig.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gAnimCharaPalConfigUnused.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gAnimCharaPalIt.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
@@ -3143,7 +2050,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/gSomeSMSLookupTable_0.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gStealItemMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gTacticianTextConf.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/gTalkFaceHPosLut.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gUnitActionMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gUnkData_102.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gUnkData_103.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -3184,19 +2090,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/unit_icon_move_Bard_motion.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/unit_icon_move_Dancer_motion.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/unit_icon_move_table.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/ld_r3_tp_adr_i.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/m4aMPlayFadeIn.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/m4aMPlayFadeOutTemporarily.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/m4aMPlayImmInit.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/m4aMPlayLFOSpeedSet.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/m4aMPlayModDepthSet.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/m4aMPlayStop.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/m4aMPlayTempoControl.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/m4aSoundMode.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/m4aSoundVSync.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/m4aSoundVSyncOff.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/m4aSoundVSyncOn.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/sound/umul3232H32.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/data/data_08576124_576150.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/data_085772B4/data_085772B4_577378.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 
@@ -3204,4 +2097,4 @@ under MISS, asserted by the self-test guards below).
 
 ---
 
-_Regenerate: `python3 scripts/audit_bin_forms.py`. Oracle: `../../../../fireemblem8u`._
+_Regenerate: `python3 scripts/audit_bin_forms.py`. Oracle: `../fireemblem8u`._

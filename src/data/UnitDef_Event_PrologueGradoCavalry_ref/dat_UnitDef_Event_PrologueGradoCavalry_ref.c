@@ -1,47 +1,22 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Event_PrologueGradoCavalry.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Typed from the de-pointered UnitDef_Event_PrologueGradoCavalry word stream (axis #6 editability,
+ * fe8u events_udefs.c parity). Each 20-byte struct UnitDefinition entry is
+ * decoded per include/bmunit.h; the redas reinforcement pointer is kept as a
+ * relocatable symbol reference so the ROM stays SHIFTABLE. Byte-identical to
+ * baserom (gated by `make compare`). */
 
-__asm__(
-"\t.section .rodata.dat_UnitDef_Event_PrologueGradoCavalry_ref, \"a\", %progbits\n"
-"\t.global UnitDef_Event_PrologueGradoCavalry\n"
-"UnitDef_Event_PrologueGradoCavalry:\n"
-"\t.4byte 0x0C003583\n"
-"\t.4byte 0x0100028A\n"
-"\t.4byte data_08908228 + 0x48\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0C003583\n"
-"\t.4byte 0x01000290\n"
-"\t.4byte data_08908228 + 0x50\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0C000784\n"
-"\t.4byte 0x0100028A\n"
-"\t.4byte data_08908228 + 0x58\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0C000784\n"
-"\t.4byte 0x01000290\n"
-"\t.4byte data_08908228 + 0x60\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0C002985\n"
-"\t.4byte 0x0100028A\n"
-"\t.4byte data_08908228 + 0x68\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0C002985\n"
-"\t.4byte 0x01000290\n"
-"\t.4byte data_08908228 + 0x70\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+extern const u8 data_08908228[];
+
+SECTION(".rodata.dat_UnitDef_Event_PrologueGradoCavalry_ref") struct UnitDefinition UnitDef_Event_PrologueGradoCavalry[] =
+{
+    { .charIndex=0x83, .classIndex=0x35, .allegiance=0x2, .level=0x1, .xPosition=0xA, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x48) },
+    { .charIndex=0x83, .classIndex=0x35, .allegiance=0x2, .level=0x1, .xPosition=0x10, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x50) },
+    { .charIndex=0x84, .classIndex=0x7, .allegiance=0x2, .level=0x1, .xPosition=0xA, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x58) },
+    { .charIndex=0x84, .classIndex=0x7, .allegiance=0x2, .level=0x1, .xPosition=0x10, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x60) },
+    { .charIndex=0x85, .classIndex=0x29, .allegiance=0x2, .level=0x1, .xPosition=0xA, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x68) },
+    { .charIndex=0x85, .classIndex=0x29, .allegiance=0x2, .level=0x1, .xPosition=0x10, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x70) },
+    {0},
+};

@@ -8638,3 +8638,46 @@ make -j4 compare` = OK (sha1 7da0456035366aa18414faa79d8fe7649f03c1ed);
 EXACT-to-structured raw literals masked. Two code-review passes (one flagged the
 still-raw-table objection above → addressed by the off>=1 guard + dual-oracle validation).
 Copilot CLI consult timed out (no output) — decided + logged per the autonomy mandate.
+
+## D321 — Waves 6-7 (more decodes) + HONEST RETRACTION of the D319/D308 "reference-parity end-state"
+
+**2026-06-30.** The user re-scoped the goal to a strict invariant: **"no `.bin` kept if it
+is not `.bin` in fe8u."** This exposed that D319's "reference parity for every TRACTABLE
+asset / ~3088 is the irreducible floor" claim was **OVERSTATED** — a verification Workflow
+(wave 6) proved **~981 real fe8u-editable misses remained**: I had wrongly floored the 176
+banim `Img_*`/`Pal_*`/`Tsa_*` (PNG-derived in fe8u) and the `gFontgrp` color LUTs. Retracting
+the end-state claim; the honest position is below.
+
+**Wave 6 (PR #75, CI-green):** orphan-`.bin` cleanup + `gFontgrp` LUT decode + the verification
+pass. Tracked `.bin` **3088 → 2183**.
+
+**Wave 7 (PRs #76-79 + an integration fix, this session, CI-pending):** four disjoint
+worktree decode-workers through one clean `make compare` + `make shiftcheck` gate. Tracked
+`.bin` **2183 → 1981** (−202):
+- **#76** 112 `data/residual/song*.bin` — proven dead pre-D311 cruft (the `.mid` build already
+  reproduces every byte; all 112 fall inside the placed `.mid`-built song span, byte-identical,
+  already link-excluded). fe8u commits **no** `song*.bin`. Deleted (+68 dead asm).
+- **#77** 29 frontier event/proc blobs → `EventListScr[]` / `ProcCmd[]` macros.
+- **#78** 35 banim AP-anim/gfx → AP-motion `.s` + typed C OAM arrays + 6 `.png` (gbagfx LZ
+  round-trip); correctly LEFT genuine-JP-LZ / TSA / index blobs as floor (not faked).
+- **#79** 26: 50 `frontier_df3_unitdef_b` slices → typed `struct UnitDefinition[]` (23 `.bin`
+  deleted; tails with un-carved REDA arrays stay byte-identical `_residue` INCBIN) + 3
+  mislabeled "UnitDef" tables decoded as event scripts.
+- **Integration fix (3 shiftcheck HIGH):** #79 left 3 event-script loads as `SYM + <table_size>`
+  (`LOAD1`/`LOAD2`/`SVAL`), resolving to the START of the adjacent `_residue` INCBIN (a separate
+  resource → `[A] HIGH` cross-resource offset). Replaced each with a direct `_residue` symbol
+  reference (same address, byte-identical). `make compare` stayed OK; shiftcheck 3 HIGH → 0.
+
+**HONEST floor accounting (no spin).** The regenerated `scripts/audit_bin_forms.py` (name-class
+heuristic) reports of the 1981 `.bin`: **MISS 642 / FLOOR 978 / UNCERTAIN 361**. The **642 MISS
+is an UPPER BOUND, not a work-list** — it flags any blob with an editable fe8u *twin* WITHOUT
+verifying bit-exact round-trippability. The wave-7 per-blob triage showed much of the banim/gfx
+tail it would flag is **compressed-no-bit-exact-recompressor** floor (gbagfx decompresses but
+recompress ≠ ROM bytes — the documented `frontier_chap_title.mk` ceiling). The careful verified
+floor is **~159 firm** (≈92 compressed-no-roundtrip + ≈66 JP-opaque-no-fe8u-type + 1 code-axis)
+**plus ~67 soft** struct-pointer cascade (reducible only after the referenced asset subtree is
+carved+named first — a cascade-depth wall, not a type wall). **Next step (not done):** a
+verification pass that splits the heuristic's 642 into *bit-exact-reducible* (real remaining work)
+vs *heuristic-false-positive floor*, so the true remaining work-list — and the true distance to
+the strict goal — is known. The goal is **not** yet reached; the prior "terminal state" framing
+is withdrawn. `make shiftcheck` = 0 HIGH and `make compare` = OK throughout.

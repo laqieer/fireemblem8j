@@ -33,4 +33,16 @@ LABEL(0x1)
     ENDA
 };
 
-SECTION(".rodata.dat_worldmap_gmapunit_p684") u16 Obj_EventShinningCursor[] = INCBIN_U16("data/residual/Obj_EventShinningCursor.bin");
+/* Editable typed u16[] OAM array ported from fe8u src/eventscr.c. Region-DIFFERENT
+ * from fe8u only in a trailing 0x0000 alignment pad (JP 28 B / 14 u16 vs fe8u
+ * 26 B / 13 u16); byte-identical to the JP ROM blob formerly at
+ * data/residual/Obj_EventShinningCursor.bin, verified by `make compare`. Layout
+ * #0 is the OAM entry count; each following triple is an OAM attr0/attr1/attr2. */
+SECTION(".rodata.dat_worldmap_gmapunit_p684") u16 Obj_EventShinningCursor[] = {
+    4,
+    0x0, 0x01FF, 0x0,
+    0x0, 0x1008, 0x0,
+    0x9, 0x21FF, 0x0,
+    0x9, 0x3008, 0x0,
+    0x0 /* JP-only trailing alignment pad */
+};
