@@ -8558,3 +8558,32 @@ JP `.bin`): 88/88 MATCH, 0 divergence. Full gate: `make -j4 compare` = OK; clean
 (sha1 7da0456035366aa18414faa79d8fe7649f03c1ed); `check_selfcontained.py` = 100%, 0
 baserom incbins. Independent re-verify: all 88 committed `.s` assemble byte-identical to
 the `baserom.gba` region at their layout offsets.
+
+## D319 — Asset-editability reference-parity END-STATE (epic + 4 carve waves) + axis-5 closeout
+
+**2026-06-30.** After D313, four triage-driven carve waves brought axis #6 to fe8u
+editable-source parity for every TRACTABLE asset. PRs #55-68, all CI-green on main; tracked
+`.bin` 4901→3088. **Mechanism (reusable):** each wave = a read-only triage Workflow classifies
+the remaining `.bin` (verifying region-same byte-exactness vs fe8u + the editable source form)
+into convertible / floor / needs-RE, then ~3-4 disjoint worktree carve-workers execute the
+verified recipes, and the integrator merges serially through one clean `make compare` +
+`make shiftcheck` gate. The triage-before-carve discipline avoided wasting workers on floor (the
+project's cardinal sin); the audit script `scripts/audit_bin_forms.py` is the reproducible oracle.
+
+**Converted (byte-verified region-same):** AnimSprite(101)→typed C; ApConf/ApHandle 17 objects/
+316 .bin→`ap.inc` macros; ANIMSCR(30)→macros; REDA(147 runs)→`struct REDA[]`; OAM/sprite tables
+(41)→typed C; unit_icon_move(88)→`.s`; worldmap/AP-anim(3 TUs)→`.s`; m4a + sound tables→`.s`/typed
+C; ~530 pixel images→`.png`; menu pools→`menu_def.c`.
+
+**HONEST END-STATE (D308 reference parity).** The remaining ~3088 `.bin` is the irreducible
+floor (~260: TSA/`.map.bin`/compressed-region-diff/PCM/JP-font-bitmap/struct-ptr ceiling — all
+binary in fe8u too) + deep-RE/code-axis (~119: ~99 bespoke one-off data tables + ~20 Thumb
+`gap_*` bodies = the #2 axis). Above-parity polish (EventListScr `EvtList*` macros, REDA-naming)
+deferred. This is at/above fe8u editable-source parity for every non-floor asset — the
+editability axis terminal state.
+
+**Axis-5 closeout.** The wave `.s`/`__asm__` data exposed 23 raw `.4byte 0x08xxxxxx` pointers in
+`__asm__` literals (`make shiftcheck`-blind but real per `audit_pointers.py --true-debt --gate`);
+de-pointered to `.4byte Sym` (gate → 0). The authoritative shiftability validation
+`make shiftcheck` (D317 harness) stayed 0 HIGH throughout. See [[fe8j-worker-stay-in-worktree]],
+[[fe8j-integration-worktree-tooling]] for the carve-fleet operational lessons.
