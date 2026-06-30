@@ -949,7 +949,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_const_data_unit_icon_move_p26.s \
                            asm/dat_const_data_unit_icon_move_p18.s \
                            asm/dat_UnitDef_Event_PrologueEscapees_ref.s \
-                           asm/dat_EventListScr_Prologue_Tutorial_ref.s \
                            asm/dat_worldmap_gmapunit_p1600.s \
                            asm/dat_ProcScr_SioPostBattle_ref.s \
                            asm/dat_ProcScr_MapAnimBattle_ref.s \
@@ -994,7 +993,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_Ch12EirikaMapChanges_ref.s \
                            asm/dat_particles_fx_p0.s \
                            asm/dat_data_bg_p21.s \
-                           asm/dat_EventListScr_Ch10a_Character_ref.s \
                            asm/dat_UnitDef_Ch9BEnemy_3_ref.s \
                            asm/dat_UnitDef_Ch9AEnemy_0_ref.s \
                            asm/dat_PopupScr_ItemStolen_ref.s \
@@ -1003,10 +1001,7 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_bg_p23.s \
                            asm/dat_const_data_unit_icon_move_p37.s \
                            asm/dat_EventScr_Ch1Tut_OnBeginning_ref.s \
-                           asm/dat_EventListScr_Ch16b_Location_ref.s \
                            asm/dat_EventListScr_Ch15b_Location_ref.s \
-                           asm/dat_EventListScr_Ch14b_Location_ref.s \
-                           asm/dat_EventListScr_Ch10a_Location_ref.s \
                            asm/dat_gTacticianTextConf_ref.s \
                            asm/dat_UnitDef_Ch8Enemy_8_ref.s \
                            asm/dat_UnitDef_Ch8Enemy_0_ref.s \
@@ -1023,16 +1018,10 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1311.s \
                            asm/dat_const_data_unit_icon_move_p71.s \
                            asm/dat_const_data_unit_icon_move_p7.s \
-                           asm/dat_EventListScr_Ch9a_Location_ref.s \
-                           asm/dat_EventListScr_Ch8_Character_ref.s \
-                           asm/dat_EventListScr_Ch1_Character_ref.s \
                            asm/dat_const_data_unit_icon_move_p36.s \
                            asm/dat_const_data_unit_icon_move_p14.s \
                            asm/dat_titlescreen.s \
                            asm/dat_data_bg_p16.s \
-                           asm/dat_EventListScr_Ch5_Location_ref.s \
-                           asm/dat_EventListScr_Ch2_Tutorial_ref.s \
-                           asm/dat_EventListScr_Ch2_Location_ref.s \
                            asm/dat_gSupportTalkList_ref.s \
                            asm/dat_data_bg_p6.s \
                            asm/dat_UnitDef_Ch4NPC_0_ref.s \
@@ -1056,12 +1045,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_anim_mapanim_statgain.s \
                            asm/dat_TowerOfValni7MapChanges_ref.s \
                            asm/dat_TowerOfValni6MapChanges_ref.s \
-                           asm/dat_EventListScr_Ch20b_Turn_ref.s \
-                           asm/dat_EventListScr_Ch19b_Turn_ref.s \
-                           asm/dat_EventListScr_Ch18b_Turn_ref.s \
-                           asm/dat_EventListScr_Ch18b_Misc_ref.s \
-                           asm/dat_EventListScr_Ch17b_Turn_ref.s \
-                           asm/dat_EventListScr_Ch15b_Misc_ref.s \
                            asm/dat_worldmap_gmapunit_p305.s \
                            asm/dat_worldmap_gmapunit_p197.s \
                            asm/dat_gProcScr_BKSEL_ref.s \
@@ -1085,7 +1068,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_LagdouRuins8MapChanges_ref.s \
                            asm/dat_LagdouRuins5MapChanges_ref.s \
                            asm/dat_LagdouRuins3MapChanges_ref.s \
-                           asm/dat_EventListScr_Ch9a_Turn_ref.s \
                            asm/dat_sProc_BMVSync_ref.s \
                            asm/dat_ProcScr_Popup_ref.s \
                            asm/dat_worldmap_gmapunit_p251.s \
