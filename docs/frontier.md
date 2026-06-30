@@ -8,50 +8,41 @@
 **Keep this current.** Refresh the numbers from `scripts/calcprogress.py` and the target lists from
 ground truth whenever an axis moves. Stale frontier data caused real wasted work (see "Pitfall" below).
 
-## Current state (2026-06-30) — asset-editability at fe8u REFERENCE PARITY (epic + 4 carve waves; D319)
+## Current state (2026-06-30) — asset-editability waves 6-7 landed; strict goal NOT yet reached (D321)
 
-After the D313 epic, four triage-driven carve waves (read-only triage Workflow → parallel
-worktree carve-workers → serial integrator → CI gate; PRs #55-68, all CI-green on main) brought
-the asset-editability axis (#6) to fe8u editable-source parity for every **tractable** asset.
-`make compare` OK (sha1 `7da0456…`), `make shiftcheck` 0 HIGH, self-containment 100%. Tracked
-committed `.bin`: 4901 → 3088.
+The goal is the strict invariant **"no `.bin` kept if it is not `.bin` in fe8u."** D319's earlier
+"reference-parity end-state / ~3088 is the floor" claim was **RETRACTED** (D321): a wave-6
+verification pass proved ~981 real fe8u-editable misses still remained (the 176 banim
+`Img_*`/`Pal_*`/`Tsa_*` are PNG-derived in fe8u; the `gFontgrp` LUTs were decodable). Two more
+waves since: `make compare` OK (sha1 `7da0456…`), `make shiftcheck` 0 HIGH, self-containment 100%.
+Tracked committed `.bin`: **4901 → 3088 (waves 1-5) → 2183 (wave 6, PR #75) → 1981 (wave 7, PRs
+#76-79 + fix)**.
 
-**Converted to editable fe8u source form (waves 2-4, byte-verified region-same):** 101
-`AnimSprite_*` → typed C `struct AnimSpriteData[]`; 17 AP map-anim/trap objects (316 `.bin`) →
-`ap.inc` macro `.s`; 30 ANIMSCR pointer-lists → `ANIMSCR_FORCE_SPRITE` macros; 147 frontier REDA
-runs → named `struct REDA[]` (editable + shiftable); 41 OAM sprite/object-list tables
-(Face/ClassDisplay/Savemenu/TalkText/OamObjectList) → typed C; 88 unit-icon move tables → `.s`;
-3 worldmap/AP-anim TUs (gWorldmapSprite/MineFx/WmHightLight) → `.s`; m4a tables + sound tables →
-`.s`/typed C; ~530 pixel images → `.png`; menu pools → `menu_def.c`.
+**Wave 7 converted (byte-verified, one clean `make compare` + `make shiftcheck` gate):** 112
+`data/residual/song*.bin` dead pre-D311 cruft deleted (the `.mid` build already reproduces every
+byte; fe8u commits no `song*.bin`); 29 frontier event/proc blobs → `EventListScr[]`/`ProcCmd[]`
+macros; 35 banim AP-anim/gfx → AP-motion `.s` + typed C OAM + 6 `.png` (gbagfx LZ round-trip); 50
+`frontier_df3_unitdef_b` slices → typed `struct UnitDefinition[]` (tails with un-carved REDA stay
+byte-identical `_residue` INCBIN) + 3 mislabeled tables decoded as event scripts. **Integration
+fix:** 3 shiftcheck `[A] HIGH` (a `SYM + <table_size>` load reaching a `_residue` START) →
+direct `_residue` symbol reference (byte-identical).
 
-**The irreducible residual (D308 reference-parity floor — NOT a defect),** per the reproducible
-`scripts/audit_bin_forms.py` → `docs/bin_audit.md` (re-run post-wave): the remaining ~3088 `.bin`
-is dominated by **~260 fe8u-parity binary FLOOR** (TSA `.tsa.bin` + `.map.bin` tilemaps, compressed
-region-diff gfx with no proven bit-exact recompressor, raw PCM, JP-unique 2bpp font bitmaps, the
-struct-pointer-array ceiling, alignment pad — fe8u itself ships these binary) + **~119 deep-RE /
-code-axis** (~99 bespoke one-off data tables needing per-blob RE; ~20 `gap_*.bin` that are **Thumb
-function bodies** belonging on the matching-C/#2 axis). Documented music ceilings (D311/D312):
-gSongTable's ~520 SFX/voice songs, 2 region-diff voicegroup floor blobs. Above-fe8u-parity polish
-deferred (not blocking): EventListScr → `EvtList*` macros (fe8u ships raw asm), REDA-naming for
-~13 region-diff UnitDef.
+**HONEST floor accounting — the 642 is an UPPER BOUND, not a work-list.** The regenerated
+`scripts/audit_bin_forms.py` (a name-class heuristic) classifies the 1981 `.bin` as **MISS 642 /
+FLOOR 978 / UNCERTAIN 361**. The 642 MISS flags any blob that *has* an editable fe8u twin WITHOUT
+verifying bit-exact round-trippability — so it over-counts: the wave-7 per-blob triage showed much
+of the banim/gfx tail it would flag is **compressed-no-bit-exact-recompressor** floor (gbagfx
+decompresses but recompress ≠ ROM bytes — the documented `frontier_chap_title.mk` ceiling). The
+careful verified floor is **~159 firm** (≈92 compressed-no-roundtrip + ≈66 JP-opaque-no-fe8u-type
++ 1 code-axis) **plus ~67 soft** struct-pointer cascade (reducible only after the referenced asset
+subtree is carved+named first). **NEXT STEP (open):** a verification pass splitting the heuristic's
+642 MISS into *bit-exact-reducible* (real remaining work) vs *heuristic-false-positive floor* — only
+then is the true distance to the strict goal known. The goal is **not** reached.
 
 **Shiftability (#5):** `make shiftcheck` (the ported fe8u PR-#745 5-layer harness, D317) is the
-authoritative validation = **0 HIGH** (held throughout). The conservative `audit_pointers.py
---true-debt --gate` had re-grown to **495** — a **classification gap, not new pointer debt**: the
-D309 fake-graphics revert renamed the 43 KB `data_08BB8ED0` malloc blob from a gfx `.4bpp.bin`
-(coincidental by regex) to an opaque `data/residual/*.bin`, so its 260 interior words (plus ~30
-other de-hinted blobs) were re-counted "real". Restored to **gate 0** (D320/wave5) by: (a)
-de-pointering the **2 genuinely-real** tables (`ProcScr_ManimShiftingSineWaveScanlineBuf` fn-ptr
-pair + a debug-menu pointer block) to `.4byte Sym`; (b) fixing the auditor with **evidence-based**
-classification (a word reaching the *interior* of a blob whose object emits **zero** relocations
-is coincidental — proven by the linker reloc table, not a name regex; cross-validated: 0 of 1741
-reclassified words relocate in the fe8u oracle, off==0 real-pointers never masked). The 23
-named `__asm__` `.4byte` literals were **all coincidental** (EvtTextShow msgids, OAM/sprite data,
-multiboot child-image ARM words, map-change tile data) — correctly classified, **not** fabricated
-as symbol refs.
-
-**This is the D308 reference-parity end-state for editability:** at or above fe8u editable-source
-parity for every non-floor asset; what remains is the documented floor + cascading-RE/code backlog.
+authoritative validation = **0 HIGH** (held throughout waves 6-7, incl. the residue-pointer fix).
+The conservative `audit_pointers.py --true-debt --gate` was restored to **0** at D320/wave5
+(495 was a classification gap from the D309 `data_08BB8ED0` blob rename, not real pointer debt).
 
 ## Current state (2026-06-29) — D313 asset-editability + shiftability EPIC landed (CI-green on main)
 
