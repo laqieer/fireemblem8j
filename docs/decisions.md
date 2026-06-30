@@ -8718,3 +8718,28 @@ verifying byte-exactness independently, committing `feat/wave8-typedc`, then int
 **Goal status.** Strict "no `.bin` unless `.bin` in fe8u" is **NOT** reached. ≈190 reducible
 remain (battle-anim → `banim/*.s`+`.png`; unitdef REDA tails) + the documented JP-LZ/JP-opaque/
 TSA floor. Deferred to wave 9. `make compare` OK + `make shiftcheck` 0 HIGH throughout.
+
+## D323 — Strict-goal distance: empirical MISS reducible(260)/irreducible(58) split + the JP-LZ blocker
+
+**Context.** Autopilot objective "strict goal reached" (no `.bin` unless `.bin` in fe8u
+≈ audit MISS→0). Needed to know the TRUE distance and whether it is reachable.
+
+**Method / finding.** Per-file probe of all 318 MISS `.bin`: header byte + `tools/gbagfx/gbagfx`
+decompress → recompress `-mindist 1..12` round-trip vs the ROM blob. Result:
+- **58 IRREDUCIBLE (JP-LZ floor):** byte0=0x10 LZ blobs (battle-anim 47, pixel-gfx 8, menu-strings
+  3) where fe8u has the `.png` but **0/58 reproduce JP bytes at any `-mindist`**. The JP ROM's LZ
+  encoder is a different, less-optimal match-finder than gbagfx greedy (e.g. aurabg3_004: JP=5064 B
+  sits between gbagfx md4=5052 and md5=5076 — unreachable). Earlier "JP-LZ" claims used the wrong
+  gbagfx flag (`-search`, which gbagfx ignores); this re-test with the correct `-mindist` is
+  decisive.
+- **260 REDUCIBLE (raw, structural carve):** MapChanges 29, unitdef REDA tails 52, banim raw
+  OAM/anim/pointer tables 146, pixel-gfx 9, menu-strings 19, voicegroup 4, sound 1.
+
+**Decision.** The strict goal MISS=0 is **blocked on two fronts**: (a) ~260 deep byte-exact carves
+(multi-wave), and (b) a **bit-exact JP LZ recompressor** for the 58 (RE of the IS/SDK match
+heuristic — a tooling project, out of scope for a single carve wave). It is NOT a one-session goal.
+
+**Action (wave 9, in progress).** Drive the reducible 260 down lane-by-lane via isolated
+carve-workers (MapChanges + unitdef REDA first), each gated by `make compare` OK + `make shiftcheck`
+0 HIGH, integrated one at a time. Document the JP-LZ floor as the residual irreducible blocker until
+a JP recompressor exists. Strict goal NOT yet reached.
