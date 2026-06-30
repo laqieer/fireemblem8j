@@ -8,17 +8,25 @@
  * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
  */
 
-extern const u8 frontier_df3_unitdef_b_011_911AFC[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_5_0[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_5_1[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_5_2[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_5_3[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_5_4[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_5_5[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_5_6[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_5_7[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_5_8[];
 SECTION(".rodata.dat_UnitDef_Ch16AAlly_5_ref") struct UnitDefinition UnitDef_Ch16AAlly_5[] =
 {
-    { .charIndex=0xF, .classIndex=0x1, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x4, .redas=(const struct REDA *)frontier_df3_unitdef_b_011_911AFC },
-    { .charIndex=0x1, .classIndex=0x2, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_011_911AFC + 0x20) },
-    { .charIndex=0x2, .classIndex=0x7, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_011_911AFC + 0x30) },
-    { .charIndex=0x1E, .classIndex=0x3C, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_011_911AFC + 0x40) },
-    { .charIndex=0x19, .classIndex=0x4B, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_011_911AFC + 0x48) },
-    { .charIndex=0xB, .classIndex=0x1B, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_011_911AFC + 0x50) },
-    { .charIndex=0x10, .classIndex=0x5, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_011_911AFC + 0x58) },
-    { .charIndex=0x11, .classIndex=0x5, .level=0xC, .xPosition=0xE, .yPosition=0x8, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_011_911AFC + 0x60) },
-    { .charIndex=0x4, .classIndex=0x5, .level=0xC, .xPosition=0xE, .yPosition=0x8, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_011_911AFC + 0x68) },
+    { .charIndex=0xF, .classIndex=0x1, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x4, .redas=REDAs_UnitDef_Ch16AAlly_5_0 },
+    { .charIndex=0x1, .classIndex=0x2, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x2, .redas=REDAs_UnitDef_Ch16AAlly_5_1 },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x2, .redas=REDAs_UnitDef_Ch16AAlly_5_2 },
+    { .charIndex=0x1E, .classIndex=0x3C, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x1, .redas=REDAs_UnitDef_Ch16AAlly_5_3 },
+    { .charIndex=0x19, .classIndex=0x4B, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x1, .redas=REDAs_UnitDef_Ch16AAlly_5_4 },
+    { .charIndex=0xB, .classIndex=0x1B, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x1, .redas=REDAs_UnitDef_Ch16AAlly_5_5 },
+    { .charIndex=0x10, .classIndex=0x5, .level=0xC, .xPosition=0xE, .yPosition=0x7, .redaCount=0x1, .redas=REDAs_UnitDef_Ch16AAlly_5_6 },
+    { .charIndex=0x11, .classIndex=0x5, .level=0xC, .xPosition=0xE, .yPosition=0x8, .redaCount=0x1, .redas=REDAs_UnitDef_Ch16AAlly_5_7 },
+    { .charIndex=0x4, .classIndex=0x5, .level=0xC, .xPosition=0xE, .yPosition=0x8, .redaCount=0x1, .redas=REDAs_UnitDef_Ch16AAlly_5_8 },
     {0},
 };

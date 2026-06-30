@@ -8,12 +8,15 @@
  * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
  */
 
-extern const u8 frontier_df3_unitdef_b_019_913958[];
+extern struct REDA REDAs_UnitDef_Ch19ANPC_3_0[];
+extern struct REDA REDAs_UnitDef_Ch19ANPC_3_1[];
+extern struct REDA REDAs_UnitDef_Ch19ANPC_3_2[];
+extern struct REDA REDAs_UnitDef_Ch19ANPC_3_3[];
 SECTION(".rodata.dat_UnitDef_Ch19ANPC_3_ref") struct UnitDefinition UnitDef_Ch19ANPC_3[] =
 {
-    { .charIndex=0xC8, .classIndex=0x7A, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x8, .yPosition=0xE, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_019_913958 + 0xE04) },
-    { .charIndex=0xCD, .classIndex=0x9, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x9, .yPosition=0xC, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_019_913958 + 0xE0C) },
-    { .charIndex=0xCD, .classIndex=0x9, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x8, .yPosition=0xC, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_019_913958 + 0xE1C) },
-    { .charIndex=0xCD, .classIndex=0xB, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x9, .yPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_019_913958 + 0xE2C) },
+    { .charIndex=0xC8, .classIndex=0x7A, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x8, .yPosition=0xE, .redaCount=0x1, .redas=REDAs_UnitDef_Ch19ANPC_3_0 },
+    { .charIndex=0xCD, .classIndex=0x9, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x9, .yPosition=0xC, .redaCount=0x2, .redas=REDAs_UnitDef_Ch19ANPC_3_1 },
+    { .charIndex=0xCD, .classIndex=0x9, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x8, .yPosition=0xC, .redaCount=0x2, .redas=REDAs_UnitDef_Ch19ANPC_3_2 },
+    { .charIndex=0xCD, .classIndex=0xB, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x9, .yPosition=0xD, .redaCount=0x1, .redas=REDAs_UnitDef_Ch19ANPC_3_3 },
     {0},
 };
