@@ -47,6 +47,33 @@ build/shiftcheck/
 !graphics/btl_bg/btl_bg_59.fetsa3.bin
 !graphics/btl_bg/btl_bg_60.fetsa3.bin
 
+# Statscreen TSAs (wave-6, axis #6). The COMMITTED editable source is the .tmap
+# tilemap (fireemblem8u graphics/statscreen/*.tmap); scripts/tmap2tsa.py
+# regenerates these .bin byte-for-byte (per-file --width/--height in the Makefile
+# rule), and the generic %.lz rule then produces the committed-into-ROM .bin.lz.
+# The .bin is a build artifact and must never be committed. (Tsa_Statscreen-
+# EquipedWeaponHighlight.bin stays committed -- 2 trailing pad bytes the standard
+# tmap2tsa output omits, so it has no byte-exact .tmap source.)
+graphics/gmapunit/Tsa_StatscreenBG.bin
+graphics/gmapunit/Tsa_StatscreenHalo.bin
+graphics/gmapunit/Tsa_StatscreenEquipmentBG.bin
+
+# OpAnim / IntelligentSystems TSAs (wave-6, axis #6). The COMMITTED editable source
+# is the .png (graphics/opanim/OpAnim*.png + graphics/misc_gfx{,3}/{OpAnim*,
+# IntelligentSystems}.png); FETSATOOL regenerates these Tsa_*.bin byte-for-byte
+# (per-asset flags in the Makefile rule), and the generic %.lz rule produces the
+# committed-into-ROM .bin.lz. The Tsa_*.bin is a build artifact, never committed.
+graphics/misc_gfx/Tsa_OpAnimEirika.bin
+graphics/misc_gfx/Tsa_OpAnimEirikaBlur1.bin
+graphics/misc_gfx/Tsa_OpAnimEirikaBlur2.bin
+graphics/misc_gfx/Tsa_OpAnimEirikaBlur3.bin
+graphics/misc_gfx/Tsa_OpAnimEphraim.bin
+graphics/misc_gfx/Tsa_OpAnimEphraimBlur1.bin
+graphics/misc_gfx/Tsa_OpAnimGenericCharacterBG.bin
+graphics/misc_gfx/Tsa_OpAnimWorldMap.bin
+graphics/misc_gfx/Tsa_OpAnimWorldMapFog.bin
+graphics/misc_gfx3/Tsa_IntelligentSystems.bin
+
 # Battle-animation compressing-linker intermediates (BA1). The COMMITTED editable
 # sources are banim/*_motion.s (OAM/script/modes macros) + graphics/banim/*.png +
 # graphics/banim/*.agbpal. The motion .s is assembled to banim/*_motion.o and its
