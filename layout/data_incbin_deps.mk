@@ -412,7 +412,7 @@ src/data/data_085BA10C/data_085BA10C.o: data/residual/data_085BA10C.bin
 src/data/data_085C4440/data_085C4440.o: data/residual/data_085C4440.bin
 src/data/data_085C6A20/data_085C6A20.o: data/residual/data_085C6A20.bin
 src/data/data_085CBE64/data_085CBE64.o: graphics/misc_gfx2/Pal_PikeTrap.gbapal
-src/data/data_085CBFA4/data_085CBFA4.o: data/residual/data_085CBFA4.bin
+src/data/data_085CBFA4/data_085CBFA4.o: graphics/reuse/data_085CBFA4.4bpp.lz
 src/data/data_085D30F8/data_085D30F8.o: data/residual/data_085D30F8.bin
 src/data/data_085E3724/data_085E3724.o: data/residual/data_085E3724.bin
 src/data/data_085F1568/data_085F1568.o: data/residual/data_085F1568.bin
@@ -597,11 +597,11 @@ src/data/data_08B25710/data_08B25710.o: data/residual/data_08B25710.bin
 src/data/data_08B3E1C8/data_08B3E1C8.o: data/residual/data_08B3E1C8.bin
 src/data/data_08B3E688/data_08B3E688.o: data/residual/data_08B3E688.bin
 src/data/data_08B3E86C/data_08B3E86C.o: data/residual/data_08B3E86C.bin
-src/data/data_08B65D08/data_08B65D08.o: data/residual/data_08B65D08.bin
-src/data/data_08B6BD34/data_08B6BD34.o: data/residual/data_08B6BD34.bin
-src/data/data_08B6EE04/data_08B6EE04.o: data/residual/data_08B6EE04.bin
-src/data/data_08B7229C/data_08B7229C.o: data/residual/data_08B7229C.bin
-src/data/data_08B755D4/data_08B755D4.o: data/residual/data_08B755D4.bin
+src/data/data_08B65D08/data_08B65D08.o: graphics/reuse/data_08B65D08.4bpp.lz
+src/data/data_08B6BD34/data_08B6BD34.o: graphics/reuse/data_08B6BD34.4bpp.lz
+src/data/data_08B6EE04/data_08B6EE04.o: graphics/reuse/data_08B6EE04.4bpp.lz
+src/data/data_08B7229C/data_08B7229C.o: graphics/reuse/data_08B7229C.4bpp.lz
+src/data/data_08B755D4/data_08B755D4.o: graphics/reuse/data_08B755D4.4bpp.lz
 src/data/data_08B8A7B0/data_08B8A7B0.o: graphics/reuse/data_08B8A7B0.gbapal
 src/data/data_08B8B490/data_08B8B490.o: graphics/reuse/data_08B8B490.gbapal
 src/data/data_08BAB2DC/data_08BAB2DC.o: data/residual/data_08BAB2DC.bin
