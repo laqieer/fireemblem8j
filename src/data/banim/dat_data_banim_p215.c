@@ -4,7 +4,24 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_data_banim_p215") u8 AnimScr_NaglfarBG4[] = INCBIN_U8("data/residual/AnimScr_NaglfarBG4.bin");
+/* AnimScr_NaglfarBG4: JP-only background anim script (6 ANFMT .4byte words, no
+ * fe8u counterpart). Made source-editable as raw .4byte ANFMT words (the OBJ
+ * sprite frames in this file already use the inline __asm__ form). Each word's
+ * high bit (ANFMT_NOT_FORCESPRITE, 0x80000000) is clear, so these are
+ * force-sprite / sprite-data words; the leading 0 + trailing 0,0 bracket the run.
+ * Byte-identical to the former data/residual/AnimScr_NaglfarBG4.bin, verified by
+ * `make compare`. */
+__asm__(
+"	.section .rodata.dat_data_banim_p215, \"a\", %progbits\n"
+"	.global AnimScr_NaglfarBG4\n"
+"AnimScr_NaglfarBG4:\n"
+"	.4byte 0x00000000\n"
+"	.4byte 0x001C0064\n"
+"	.4byte 0x0000FFC4\n"
+"	.4byte 0x00000001\n"
+"	.4byte 0x00000000\n"
+"	.4byte 0x00000000\n"
+);
 __asm__(
 "	.section .rodata.dat_data_banim_p215, \"a\", %progbits\n"
 "	.global AnimSpr_NaglfarOBJ_0\n"
