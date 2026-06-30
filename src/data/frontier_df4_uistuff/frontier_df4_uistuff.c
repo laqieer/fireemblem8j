@@ -92,7 +92,19 @@ struct ProcCmd frontier_df4_uistuff_026_5C3618[] __attribute__((section(".data.f
     PROC_REPEAT((ProcFunc)0x08020F01),
     PROC_END,
 };
-u8 data_085C37D8[] __attribute__((section(".data.frontier_df4_uistuff.gap26"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_026_5C3618.bin", 0x1C0, 0x58);
+struct ProcCmd data_085C37D8[] __attribute__((section(".data.frontier_df4_uistuff.gap26"))) = {
+    PROC_SET_END_CB((ProcFunc)0x080211CD),
+    PROC_CALL((ProcFunc)0x08020FB9),
+    PROC_CALL((ProcFunc)0x0807B4B9),
+    PROC_START_CHILD((const struct ProcCmd*)0x085C37C0),
+    PROC_REPEAT((ProcFunc)0x080210ED),
+    PROC_CALL((ProcFunc)0x08021121),
+    PROC_REPEAT((ProcFunc)0x0802112D),
+    PROC_LABEL(0x63),
+    PROC_CALL((ProcFunc)0x08021169),
+    PROC_REPEAT((ProcFunc)0x080211A1),
+    PROC_END,
+};
 u8 frontier_df4_uistuff_027_5C3C9C[] __attribute__((section(".data.frontier_df4_uistuff.gap27"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_027_5C3C9C.bin");
 u8 frontier_df4_uistuff_028_5C411C[] __attribute__((section(".data.frontier_df4_uistuff.gap28"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_028_5C411C.bin");
 u8 frontier_df4_uistuff_029_5C4A94[] __attribute__((section(".data.frontier_df4_uistuff.gap29"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_029_5C4A94.bin");
