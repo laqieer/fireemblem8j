@@ -1,0 +1,2 @@
+# unit-icon move motion table -> editable fe8u .s (wave4; byte-verified region-same)
+1EA8F8	1EAA50	src/data/unit_icon_move_motion/unit_icon_move_Deathgoyle_motion.o(.rodata.unit_icon_move_Deathgoyle_motion)	unit_icon_move_Deathgoyle_motion editable AP-motion source (region-same, 344 B; was data_081EA8F8)

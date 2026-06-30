@@ -8517,3 +8517,44 @@ Base + off` → `.4byte TargetSym` (identical word, now relocatable):
 **Final `make shiftcheck` result: 0 HIGH in all gating layers** (Layer 0 PASS;
 Layer 1b 0 HIGH; Layer 1 0 HIGH-CONFIDENCE), exit 0. `make compare` = OK
 (7da0456...). Recorded in the V1 PR.
+
+## D318 — Epic wave4: 88 unit-icon move (AP) motion tables → editable `.s`
+
+**Context.** The unit-icon "move" animation tables (the AP-motion data the
+`unit_icon_move_table` shift-array points at, one per class) were still opaque
+`INCBIN` wrappers: `src/data/data_<ADDR>/data_<ADDR>.c` → `data/residual/data_<ADDR>.bin`,
+referenced as `data_<ADDR>` by `unit_icon_move_table__shift`. `make compare` passed,
+but a `.bin` blob is **not** editable (axis #6 / asset-editability discipline) — it is
+the same INCBIN-of-a-`.bin` "miss" the epic targets.
+
+**Decision.** Convert all 88 region-same blobs to fe8u's editable AP-motion `.s`
+source form (the `.2byte (frame_list-motion),(anim_list-motion)` header + `_frame_list`/
+`_anim_list` offset macros + per-frame `.2byte 1,0xE0,0x81F0,0,0` OAM-attr words),
+ported verbatim from `../fireemblem8u/src/data/unit_icon/const_data_unit_icon_move.s`.
+The `0x81F0`-type words are OAM attr1/attr2 data, **not** pointers, so there is no
+struct-pointer ceiling and the tables stay fully shiftable.
+
+**Mechanism.**
+- New editable sources `src/data/unit_icon_move_motion/unit_icon_move_<Class>_motion.s`
+  (one per class), each in its own `.rodata.unit_icon_move_<Class>_motion` section,
+  picked up by `SRC_S_FILES := $(shell git ls-files 'src/*.s')`. Added a `.gitignore`
+  negation `!src/data/unit_icon_move_motion/*.s` (the dir is otherwise covered by the
+  `src/data/**/*.s` ignore that masks generated `.c`→`.s` intermediates).
+- New layout fragments `layout/carved_rom.d/unit_icon_move_<Class>_motion.tsv` placing
+  each at its exact JP ROM offset (copied from the old `data_<ADDR>.tsv` ranges).
+- Repointed `unit_icon_move_table__shift` `&data_<ADDR>` → `&unit_icon_move_<Class>_motion`
+  in `src/data/unit_icon_move_table_ref/dat_unit_icon_move_table_ref.c` (the `.word Sym`
+  is byte-identical and relocatable). Class mapping derived from the `(sheet, motion)`
+  pairing in the shift table, cross-checked against fe8u `src/unit_icon_move_data.c`
+  (all 109 table rows: motion-class == sheet-class, all are fe8u self-motion pairs).
+- Deleted the 88 `data_<ADDR>.c`/`.bin`/`asm/.s`/old-`.tsv` artifacts and removed the 88
+  `asm/data_<ADDR>.s` lines from `DATA_INCBIN_ASM_EXCLUDE`. Regenerated
+  `layout/data_incbin_deps.mk` (`scripts/gen_data_incbin_deps.py`) and `docs/bin_audit.md`
+  (`scripts/audit_bin_forms.py`) — 0 stale references to the deleted blobs.
+
+**Gate.** Per-blob byte oracle BEFORE wiring (assemble standalone, `cmp` rodata vs the
+JP `.bin`): 88/88 MATCH, 0 divergence. Full gate: `make -j4 compare` = OK; clean
+`make clean && make banim/data_banim.o && make -j4 compare` = OK
+(sha1 7da0456035366aa18414faa79d8fe7649f03c1ed); `check_selfcontained.py` = 100%, 0
+baserom incbins. Independent re-verify: all 88 committed `.s` assemble byte-identical to
+the `baserom.gba` region at their layout offsets.

@@ -8,94 +8,94 @@
  * alias so a typed header declaration (struct Foo NAME[];) does not
  * conflict -- the data bytes (.word relocations) are byte-identical. */
 
-extern const u8 data_081B3734[];
-extern const u8 data_081B4084[];
-extern const u8 data_081B4C6C[];
-extern const u8 data_081B583C[];
-extern const u8 data_081B62E4[];
-extern const u8 data_081B6DE0[];
-extern const u8 data_081B782C[];
-extern const u8 data_081B8438[];
-extern const u8 data_081B8E14[];
-extern const u8 data_081B9ADC[];
-extern const u8 data_081BA3D8[];
-extern const u8 data_081BAC98[];
-extern const u8 data_081BB74C[];
-extern const u8 data_081BC22C[];
-extern const u8 data_081BCB74[];
-extern const u8 data_081BD510[];
-extern const u8 data_081BDEB4[];
-extern const u8 data_081BE898[];
-extern const u8 data_081BF1A0[];
-extern const u8 data_081BFB18[];
-extern const u8 data_081C0434[];
-extern const u8 data_081C5810[];
-extern const u8 data_081C6724[];
-extern const u8 data_081C7680[];
-extern const u8 data_081C8020[];
-extern const u8 data_081C8A44[];
-extern const u8 data_081C9510[];
-extern const u8 data_081CA04C[];
-extern const u8 data_081CAAB0[];
-extern const u8 data_081CB584[];
-extern const u8 data_081CBF48[];
-extern const u8 data_081CC8FC[];
-extern const u8 data_081CD240[];
-extern const u8 data_081CDC7C[];
-extern const u8 data_081CE5F0[];
-extern const u8 data_081CEF00[];
-extern const u8 data_081CF484[];
-extern const u8 data_081CFF44[];
-extern const u8 data_081D07F8[];
-extern const u8 data_081D10F4[];
-extern const u8 data_081D1A40[];
-extern const u8 data_081D28EC[];
-extern const u8 data_081D33A4[];
-extern const u8 data_081D3CF8[];
-extern const u8 data_081D485C[];
-extern const u8 data_081D51E4[];
-extern const u8 data_081D5C6C[];
-extern const u8 data_081D67AC[];
-extern const u8 data_081D6FF0[];
-extern const u8 data_081D7910[];
-extern const u8 data_081D90A8[];
-extern const u8 data_081D9F94[];
-extern const u8 data_081DA858[];
-extern const u8 data_081DB354[];
-extern const u8 data_081DBEB4[];
-extern const u8 data_081DD57C[];
-extern const u8 data_081DDF10[];
-extern const u8 data_081DE63C[];
-extern const u8 data_081E287C[];
-extern const u8 data_081E314C[];
-extern const u8 data_081E3958[];
-extern const u8 data_081E4370[];
-extern const u8 data_081E4E20[];
-extern const u8 data_081E5A34[];
-extern const u8 data_081E6488[];
-extern const u8 data_081E6F28[];
-extern const u8 data_081E77E0[];
-extern const u8 data_081E8124[];
-extern const u8 data_081E8A58[];
-extern const u8 data_081E8FAC[];
-extern const u8 data_081E9C6C[];
-extern const u8 data_081EA8F8[];
-extern const u8 data_081EB814[];
-extern const u8 data_081EE82C[];
-extern const u8 data_081EEE80[];
-extern const u8 data_081EF574[];
-extern const u8 data_081EFD00[];
-extern const u8 data_081F04B4[];
-extern const u8 data_081F0CF0[];
-extern const u8 data_081F153C[];
-extern const u8 data_081F1F10[];
-extern const u8 data_081F25BC[];
-extern const u8 data_081F2D20[];
-extern const u8 data_081F3358[];
-extern const u8 data_081F3844[];
-extern const u8 data_081F3D80[];
-extern const u8 data_081F42F8[];
-extern const u8 data_081F4A20[];
+extern const u8 unit_icon_move_Ephraim_Lord_motion[];
+extern const u8 unit_icon_move_Eirika_Lord_motion[];
+extern const u8 unit_icon_move_Ephraim_Master_Lord_motion[];
+extern const u8 unit_icon_move_Eirika_Master_Lord_motion[];
+extern const u8 unit_icon_move_Cavalier_motion[];
+extern const u8 unit_icon_move_Paladin_motion[];
+extern const u8 unit_icon_move_Armor_Knight_motion[];
+extern const u8 unit_icon_move_General_motion[];
+extern const u8 unit_icon_move_Thief_motion[];
+extern const u8 unit_icon_move_Manakete_motion[];
+extern const u8 unit_icon_move_Mercenary_motion[];
+extern const u8 unit_icon_move_Mercenary_F_motion[];
+extern const u8 unit_icon_move_Hero_motion[];
+extern const u8 unit_icon_move_Hero_F_motion[];
+extern const u8 unit_icon_move_Myrmidon_motion[];
+extern const u8 unit_icon_move_Myrmidon_F_motion[];
+extern const u8 unit_icon_move_Swordmaster_motion[];
+extern const u8 unit_icon_move_Swordmaster_F_motion[];
+extern const u8 unit_icon_move_Assassin_motion[];
+extern const u8 unit_icon_move_Assassin_F_motion[];
+extern const u8 unit_icon_move_Archer_motion[];
+extern const u8 unit_icon_move_Wyvern_Lord_F_motion[];
+extern const u8 unit_icon_move_Wyvern_Knight_motion[];
+extern const u8 unit_icon_move_Wyvern_Knight_F_motion[];
+extern const u8 unit_icon_move_Mage_motion[];
+extern const u8 unit_icon_move_Mage_F_motion[];
+extern const u8 unit_icon_move_Sage_motion[];
+extern const u8 unit_icon_move_Sage_F_motion[];
+extern const u8 unit_icon_move_Mage_Knight_motion[];
+extern const u8 unit_icon_move_Mage_Knight_F_motion[];
+extern const u8 unit_icon_move_Bishop_motion[];
+extern const u8 unit_icon_move_Bishop_F_motion[];
+extern const u8 unit_icon_move_Shaman_motion[];
+extern const u8 unit_icon_move_Druid_motion[];
+extern const u8 unit_icon_move_Summoner_motion[];
+extern const u8 unit_icon_move_Rogue_motion[];
+extern const u8 unit_icon_move_Gorgonegg2_motion[];
+extern const u8 unit_icon_move_Great_Knight_motion[];
+extern const u8 unit_icon_move_Recruit_T1_motion[];
+extern const u8 unit_icon_move_Journeyman_T2_motion[];
+extern const u8 unit_icon_move_Pupil_T2_motion[];
+extern const u8 unit_icon_move_Manakete_2_motion[];
+extern const u8 unit_icon_move_Manakete_Myrrh_motion[];
+extern const u8 unit_icon_move_Fighter_motion[];
+extern const u8 unit_icon_move_Warrior_motion[];
+extern const u8 unit_icon_move_Brigand_motion[];
+extern const u8 unit_icon_move_Pirate_motion[];
+extern const u8 unit_icon_move_Berserker_motion[];
+extern const u8 unit_icon_move_Monk_motion[];
+extern const u8 unit_icon_move_Priest_motion[];
+extern const u8 unit_icon_move_Pegasus_Knight_motion[];
+extern const u8 unit_icon_move_Falcon_Knight_motion[];
+extern const u8 unit_icon_move_Cleric_motion[];
+extern const u8 unit_icon_move_Troubadour_motion[];
+extern const u8 unit_icon_move_Valkyrie_motion[];
+extern const u8 unit_icon_move_Soldier_motion[];
+extern const u8 unit_icon_move_Necromancer_motion[];
+extern const u8 unit_icon_move_Fleet_motion[];
+extern const u8 unit_icon_move_Wight_Bow_motion[];
+extern const u8 unit_icon_move_Bael_motion[];
+extern const u8 unit_icon_move_Elder_Bael_motion[];
+extern const u8 unit_icon_move_Cyclops_motion[];
+extern const u8 unit_icon_move_Mauthedoog_motion[];
+extern const u8 unit_icon_move_Gwyllgi_motion[];
+extern const u8 unit_icon_move_Tarvos_motion[];
+extern const u8 unit_icon_move_Maelduin_motion[];
+extern const u8 unit_icon_move_Mogall_motion[];
+extern const u8 unit_icon_move_Arch_Mogall_motion[];
+extern const u8 unit_icon_move_Gorgon_motion[];
+extern const u8 unit_icon_move_Gorgonegg_motion[];
+extern const u8 unit_icon_move_Gargoyle_motion[];
+extern const u8 unit_icon_move_Deathgoyle_motion[];
+extern const u8 unit_icon_move_Draco_Zombie_motion[];
+extern const u8 unit_icon_move_Blst_Long_Empty_motion[];
+extern const u8 unit_icon_move_Blst_Used_Empty_motion[];
+extern const u8 unit_icon_move_Blst_Killer_Empty_motion[];
+extern const u8 unit_icon_move_Civilian_M1_motion[];
+extern const u8 unit_icon_move_Civilian_F1_motion[];
+extern const u8 unit_icon_move_Civilian_M2_motion[];
+extern const u8 unit_icon_move_Civilian_F2_motion[];
+extern const u8 unit_icon_move_Peer_motion[];
+extern const u8 unit_icon_move_Queen_motion[];
+extern const u8 unit_icon_move_Prince_motion[];
+extern const u8 unit_icon_move_Queen_2_motion[];
+extern const u8 unit_icon_move_Unk77_motion[];
+extern const u8 unit_icon_move_Fallen_Prince_motion[];
+extern const u8 unit_icon_move_Tent_motion[];
+extern const u8 unit_icon_move_Pontifex_motion[];
 extern const u8 frontier_df3_const_unit_ic_000_1C0D80[];
 extern const u8 frontier_df3_const_unit_ic_001_1C2B4C[];
 extern const u8 frontier_df4_misc_lo_018_1DEF84[];
@@ -203,55 +203,55 @@ extern const u8 unit_icon_move_Wyvern_Lord_F_sheet[];
 
 SECTION(".rodata.dat_unit_icon_move_table_ref") static const u32 unit_icon_move_table__shift[] = {
     (u32)&unit_icon_move_Ephraim_Lord_sheet,
-    (u32)&data_081B3734,
+    (u32)&unit_icon_move_Ephraim_Lord_motion,
     (u32)&unit_icon_move_Eirika_Lord_sheet,
-    (u32)&data_081B4084,
+    (u32)&unit_icon_move_Eirika_Lord_motion,
     (u32)&unit_icon_move_Ephraim_Master_Lord_sheet,
-    (u32)&data_081B4C6C,
+    (u32)&unit_icon_move_Ephraim_Master_Lord_motion,
     (u32)&unit_icon_move_Eirika_Master_Lord_sheet,
-    (u32)&data_081B583C,
+    (u32)&unit_icon_move_Eirika_Master_Lord_motion,
     (u32)&unit_icon_move_Cavalier_sheet,
-    (u32)&data_081B62E4,
+    (u32)&unit_icon_move_Cavalier_motion,
     (u32)&unit_icon_move_Cavalier_sheet,
-    (u32)&data_081B62E4,
+    (u32)&unit_icon_move_Cavalier_motion,
     (u32)&unit_icon_move_Paladin_sheet,
-    (u32)&data_081B6DE0,
+    (u32)&unit_icon_move_Paladin_motion,
     (u32)&unit_icon_move_Paladin_sheet,
-    (u32)&data_081B6DE0,
+    (u32)&unit_icon_move_Paladin_motion,
     (u32)&unit_icon_move_Armor_Knight_sheet,
-    (u32)&data_081B782C,
+    (u32)&unit_icon_move_Armor_Knight_motion,
     (u32)&unit_icon_move_Armor_Knight_sheet,
-    (u32)&data_081B782C,
+    (u32)&unit_icon_move_Armor_Knight_motion,
     (u32)&unit_icon_move_General_sheet,
-    (u32)&data_081B8438,
+    (u32)&unit_icon_move_General_motion,
     (u32)&unit_icon_move_General_sheet,
-    (u32)&data_081B8438,
+    (u32)&unit_icon_move_General_motion,
     (u32)&unit_icon_move_Thief_sheet,
-    (u32)&data_081B8E14,
+    (u32)&unit_icon_move_Thief_motion,
     (u32)&unit_icon_move_Manakete_sheet,
-    (u32)&data_081B9ADC,
+    (u32)&unit_icon_move_Manakete_motion,
     (u32)&unit_icon_move_Mercenary_sheet,
-    (u32)&data_081BA3D8,
+    (u32)&unit_icon_move_Mercenary_motion,
     (u32)&unit_icon_move_Mercenary_F_sheet,
-    (u32)&data_081BAC98,
+    (u32)&unit_icon_move_Mercenary_F_motion,
     (u32)&unit_icon_move_Hero_sheet,
-    (u32)&data_081BB74C,
+    (u32)&unit_icon_move_Hero_motion,
     (u32)&unit_icon_move_Hero_F_sheet,
-    (u32)&data_081BC22C,
+    (u32)&unit_icon_move_Hero_F_motion,
     (u32)&unit_icon_move_Myrmidon_sheet,
-    (u32)&data_081BCB74,
+    (u32)&unit_icon_move_Myrmidon_motion,
     (u32)&unit_icon_move_Myrmidon_F_sheet,
-    (u32)&data_081BD510,
+    (u32)&unit_icon_move_Myrmidon_F_motion,
     (u32)&unit_icon_move_Swordmaster_sheet,
-    (u32)&data_081BDEB4,
+    (u32)&unit_icon_move_Swordmaster_motion,
     (u32)&unit_icon_move_Swordmaster_F_sheet,
-    (u32)&data_081BE898,
+    (u32)&unit_icon_move_Swordmaster_F_motion,
     (u32)&unit_icon_move_Assassin_sheet,
-    (u32)&data_081BF1A0,
+    (u32)&unit_icon_move_Assassin_motion,
     (u32)&unit_icon_move_Assassin_F_sheet,
-    (u32)&data_081BFB18,
+    (u32)&unit_icon_move_Assassin_F_motion,
     (u32)&unit_icon_move_Archer_sheet,
-    (u32)&data_081C0434,
+    (u32)&unit_icon_move_Archer_motion,
     (u32)&unit_icon_move_Archer_F_sheet,
     (u32)&frontier_df3_const_unit_ic_000_1C0D80,
     (u32)&frontier_df3_const_unit_ic_000_1C0D80 + 0x158,
@@ -267,101 +267,101 @@ SECTION(".rodata.dat_unit_icon_move_table_ref") static const u32 unit_icon_move_
     (u32)&frontier_df3_const_unit_ic_001_1C2B4C + 0x1008,
     (u32)&frontier_df3_const_unit_ic_001_1C2B4C + 0x1D58,
     (u32)&unit_icon_move_Wyvern_Lord_F_sheet,
-    (u32)&data_081C5810,
+    (u32)&unit_icon_move_Wyvern_Lord_F_motion,
     (u32)&unit_icon_move_Wyvern_Knight_sheet,
-    (u32)&data_081C6724,
+    (u32)&unit_icon_move_Wyvern_Knight_motion,
     (u32)&unit_icon_move_Wyvern_Knight_F_sheet,
-    (u32)&data_081C7680,
+    (u32)&unit_icon_move_Wyvern_Knight_F_motion,
     (u32)&unit_icon_move_Wyvern_Knight_F_sheet,
-    (u32)&data_081C7680,
+    (u32)&unit_icon_move_Wyvern_Knight_F_motion,
     (u32)&unit_icon_move_Mage_sheet,
-    (u32)&data_081C8020,
+    (u32)&unit_icon_move_Mage_motion,
     (u32)&unit_icon_move_Mage_F_sheet,
-    (u32)&data_081C8A44,
+    (u32)&unit_icon_move_Mage_F_motion,
     (u32)&unit_icon_move_Sage_sheet,
-    (u32)&data_081C9510,
+    (u32)&unit_icon_move_Sage_motion,
     (u32)&unit_icon_move_Sage_F_sheet,
-    (u32)&data_081CA04C,
+    (u32)&unit_icon_move_Sage_F_motion,
     (u32)&unit_icon_move_Mage_Knight_sheet,
-    (u32)&data_081CAAB0,
+    (u32)&unit_icon_move_Mage_Knight_motion,
     (u32)&unit_icon_move_Mage_Knight_F_sheet,
-    (u32)&data_081CB584,
+    (u32)&unit_icon_move_Mage_Knight_F_motion,
     (u32)&unit_icon_move_Bishop_sheet,
-    (u32)&data_081CBF48,
+    (u32)&unit_icon_move_Bishop_motion,
     (u32)&unit_icon_move_Bishop_F_sheet,
-    (u32)&data_081CC8FC,
+    (u32)&unit_icon_move_Bishop_F_motion,
     (u32)&unit_icon_move_Shaman_sheet,
-    (u32)&data_081CD240,
+    (u32)&unit_icon_move_Shaman_motion,
     (u32)&unit_icon_move_Shaman_sheet,
-    (u32)&data_081CD240,
+    (u32)&unit_icon_move_Shaman_motion,
     (u32)&unit_icon_move_Druid_sheet,
-    (u32)&data_081CDC7C,
+    (u32)&unit_icon_move_Druid_motion,
     (u32)&unit_icon_move_Druid_sheet,
-    (u32)&data_081CDC7C,
+    (u32)&unit_icon_move_Druid_motion,
     (u32)&unit_icon_move_Summoner_sheet,
-    (u32)&data_081CE5F0,
+    (u32)&unit_icon_move_Summoner_motion,
     (u32)&unit_icon_move_Summoner_sheet,
-    (u32)&data_081CE5F0,
+    (u32)&unit_icon_move_Summoner_motion,
     (u32)&unit_icon_move_Rogue_sheet,
-    (u32)&data_081CEF00,
+    (u32)&unit_icon_move_Rogue_motion,
     (u32)&unit_icon_move_Gorgonegg2_sheet,
-    (u32)&data_081CF484,
+    (u32)&unit_icon_move_Gorgonegg2_motion,
     (u32)&unit_icon_move_Great_Knight_sheet,
-    (u32)&data_081CFF44,
+    (u32)&unit_icon_move_Great_Knight_motion,
     (u32)&unit_icon_move_Great_Knight_sheet,
-    (u32)&data_081CFF44,
+    (u32)&unit_icon_move_Great_Knight_motion,
     (u32)&unit_icon_move_Recruit_T1_sheet,
-    (u32)&data_081D07F8,
+    (u32)&unit_icon_move_Recruit_T1_motion,
     (u32)&unit_icon_move_Journeyman_T2_sheet,
-    (u32)&data_081D10F4,
+    (u32)&unit_icon_move_Journeyman_T2_motion,
     (u32)&unit_icon_move_Pupil_T2_sheet,
-    (u32)&data_081D1A40,
+    (u32)&unit_icon_move_Pupil_T2_motion,
     (u32)&unit_icon_move_Recruit_T1_sheet,
-    (u32)&data_081D07F8,
+    (u32)&unit_icon_move_Recruit_T1_motion,
     (u32)&unit_icon_move_Manakete_2_sheet,
-    (u32)&data_081D28EC,
+    (u32)&unit_icon_move_Manakete_2_motion,
     (u32)&unit_icon_move_Manakete_Myrrh_sheet,
-    (u32)&data_081D33A4,
+    (u32)&unit_icon_move_Manakete_Myrrh_motion,
     (u32)&unit_icon_move_Journeyman_T2_sheet,
-    (u32)&data_081D10F4,
+    (u32)&unit_icon_move_Journeyman_T2_motion,
     (u32)&unit_icon_move_Pupil_T2_sheet,
-    (u32)&data_081D1A40,
+    (u32)&unit_icon_move_Pupil_T2_motion,
     (u32)&unit_icon_move_Fighter_sheet,
-    (u32)&data_081D3CF8,
+    (u32)&unit_icon_move_Fighter_motion,
     (u32)&unit_icon_move_Warrior_sheet,
-    (u32)&data_081D485C,
+    (u32)&unit_icon_move_Warrior_motion,
     (u32)&unit_icon_move_Brigand_sheet,
-    (u32)&data_081D51E4,
+    (u32)&unit_icon_move_Brigand_motion,
     (u32)&unit_icon_move_Pirate_sheet,
-    (u32)&data_081D5C6C,
+    (u32)&unit_icon_move_Pirate_motion,
     (u32)&unit_icon_move_Berserker_sheet,
-    (u32)&data_081D67AC,
+    (u32)&unit_icon_move_Berserker_motion,
     (u32)&unit_icon_move_Monk_sheet,
-    (u32)&data_081D6FF0,
+    (u32)&unit_icon_move_Monk_motion,
     (u32)&unit_icon_move_Priest_sheet,
-    (u32)&data_081D7910,
+    (u32)&unit_icon_move_Priest_motion,
     (u32)&unit_icon_move_Bard_sheet,
     (u32)&unit_icon_move_Bard_motion,
     (u32)&unit_icon_move_Recruit_T1_sheet,
-    (u32)&data_081D07F8,
+    (u32)&unit_icon_move_Recruit_T1_motion,
     (u32)&unit_icon_move_Pegasus_Knight_sheet,
-    (u32)&data_081D90A8,
+    (u32)&unit_icon_move_Pegasus_Knight_motion,
     (u32)&unit_icon_move_Falcon_Knight_sheet,
-    (u32)&data_081D9F94,
+    (u32)&unit_icon_move_Falcon_Knight_motion,
     (u32)&unit_icon_move_Cleric_sheet,
-    (u32)&data_081DA858,
+    (u32)&unit_icon_move_Cleric_motion,
     (u32)&unit_icon_move_Troubadour_sheet,
-    (u32)&data_081DB354,
+    (u32)&unit_icon_move_Troubadour_motion,
     (u32)&unit_icon_move_Valkyrie_sheet,
-    (u32)&data_081DBEB4,
+    (u32)&unit_icon_move_Valkyrie_motion,
     (u32)&unit_icon_move_Dancer_sheet,
     (u32)&unit_icon_move_Dancer_motion,
     (u32)&unit_icon_move_Soldier_sheet,
-    (u32)&data_081DD57C,
+    (u32)&unit_icon_move_Soldier_motion,
     (u32)&unit_icon_move_Necromancer_sheet,
-    (u32)&data_081DDF10,
+    (u32)&unit_icon_move_Necromancer_motion,
     (u32)&unit_icon_move_Fleet_sheet,
-    (u32)&data_081DE63C,
+    (u32)&unit_icon_move_Fleet_motion,
     (u32)&unit_icon_move_Phantom_sheet,
     (u32)&frontier_df4_misc_lo_018_1DEF84,
     (u32)&frontier_df4_misc_lo_018_1DEF84 + 0x158,
@@ -375,35 +375,35 @@ SECTION(".rodata.dat_unit_icon_move_table_ref") static const u32 unit_icon_move_
     (u32)&frontier_df4_misc_lo_019_1E140C + 0x158,
     (u32)&frontier_df4_misc_lo_019_1E140C + 0xA48,
     (u32)&unit_icon_move_Wight_Bow_sheet,
-    (u32)&data_081E287C,
+    (u32)&unit_icon_move_Wight_Bow_motion,
     (u32)&unit_icon_move_Bael_sheet,
-    (u32)&data_081E314C,
+    (u32)&unit_icon_move_Bael_motion,
     (u32)&unit_icon_move_Elder_Bael_sheet,
-    (u32)&data_081E3958,
+    (u32)&unit_icon_move_Elder_Bael_motion,
     (u32)&unit_icon_move_Cyclops_sheet,
-    (u32)&data_081E4370,
+    (u32)&unit_icon_move_Cyclops_motion,
     (u32)&unit_icon_move_Mauthedoog_sheet,
-    (u32)&data_081E4E20,
+    (u32)&unit_icon_move_Mauthedoog_motion,
     (u32)&unit_icon_move_Gwyllgi_sheet,
-    (u32)&data_081E5A34,
+    (u32)&unit_icon_move_Gwyllgi_motion,
     (u32)&unit_icon_move_Tarvos_sheet,
-    (u32)&data_081E6488,
+    (u32)&unit_icon_move_Tarvos_motion,
     (u32)&unit_icon_move_Maelduin_sheet,
-    (u32)&data_081E6F28,
+    (u32)&unit_icon_move_Maelduin_motion,
     (u32)&unit_icon_move_Mogall_sheet,
-    (u32)&data_081E77E0,
+    (u32)&unit_icon_move_Mogall_motion,
     (u32)&unit_icon_move_Arch_Mogall_sheet,
-    (u32)&data_081E8124,
+    (u32)&unit_icon_move_Arch_Mogall_motion,
     (u32)&unit_icon_move_Gorgon_sheet,
-    (u32)&data_081E8A58,
+    (u32)&unit_icon_move_Gorgon_motion,
     (u32)&unit_icon_move_Gorgonegg_sheet,
-    (u32)&data_081E8FAC,
+    (u32)&unit_icon_move_Gorgonegg_motion,
     (u32)&unit_icon_move_Gargoyle_sheet,
-    (u32)&data_081E9C6C,
+    (u32)&unit_icon_move_Gargoyle_motion,
     (u32)&unit_icon_move_Deathgoyle_sheet,
-    (u32)&data_081EA8F8,
+    (u32)&unit_icon_move_Deathgoyle_motion,
     (u32)&unit_icon_move_Draco_Zombie_sheet,
-    (u32)&data_081EB814,
+    (u32)&unit_icon_move_Draco_Zombie_motion,
     (u32)&unit_icon_move_Demon_King_sheet,
     (u32)&frontier_df4_misc_lo_020_1EC9E0,
     (u32)&frontier_df4_misc_lo_020_1EC9E0 + 0x158,
@@ -413,48 +413,48 @@ SECTION(".rodata.dat_unit_icon_move_table_ref") static const u32 unit_icon_move_
     (u32)&frontier_df4_misc_lo_020_1EC9E0 + 0x1118,
     (u32)&frontier_df4_misc_lo_020_1EC9E0 + 0x17A0,
     (u32)&unit_icon_move_Blst_Long_Empty_sheet,
-    (u32)&data_081EE82C,
+    (u32)&unit_icon_move_Blst_Long_Empty_motion,
     (u32)&unit_icon_move_Blst_Used_Empty_sheet,
-    (u32)&data_081EEE80,
+    (u32)&unit_icon_move_Blst_Used_Empty_motion,
     (u32)&unit_icon_move_Blst_Killer_Empty_sheet,
-    (u32)&data_081EF574,
+    (u32)&unit_icon_move_Blst_Killer_Empty_motion,
     (u32)&unit_icon_move_Civilian_M1_sheet,
-    (u32)&data_081EFD00,
+    (u32)&unit_icon_move_Civilian_M1_motion,
     (u32)&unit_icon_move_Civilian_F1_sheet,
-    (u32)&data_081F04B4,
+    (u32)&unit_icon_move_Civilian_F1_motion,
     (u32)&unit_icon_move_Civilian_M2_sheet,
-    (u32)&data_081F0CF0,
+    (u32)&unit_icon_move_Civilian_M2_motion,
     (u32)&unit_icon_move_Civilian_F2_sheet,
-    (u32)&data_081F153C,
+    (u32)&unit_icon_move_Civilian_F2_motion,
     (u32)&unit_icon_move_Civilian_M2_sheet,
-    (u32)&data_081F0CF0,
+    (u32)&unit_icon_move_Civilian_M2_motion,
     (u32)&unit_icon_move_Civilian_F2_sheet,
-    (u32)&data_081F153C,
+    (u32)&unit_icon_move_Civilian_F2_motion,
     (u32)&unit_icon_move_Peer_sheet,
-    (u32)&data_081F1F10,
+    (u32)&unit_icon_move_Peer_motion,
     (u32)&unit_icon_move_Queen_sheet,
-    (u32)&data_081F25BC,
+    (u32)&unit_icon_move_Queen_motion,
     (u32)&unit_icon_move_Prince_sheet,
-    (u32)&data_081F2D20,
+    (u32)&unit_icon_move_Prince_motion,
     (u32)&unit_icon_move_Queen_2_sheet,
-    (u32)&data_081F3358,
+    (u32)&unit_icon_move_Queen_2_motion,
     (u32)&unit_icon_move_Unk77_sheet,
-    (u32)&data_081F3844,
+    (u32)&unit_icon_move_Unk77_motion,
     (u32)&unit_icon_move_Fallen_Prince_sheet,
-    (u32)&data_081F3D80,
+    (u32)&unit_icon_move_Fallen_Prince_motion,
     (u32)&unit_icon_move_Tent_sheet,
-    (u32)&data_081F42F8,
+    (u32)&unit_icon_move_Tent_motion,
     (u32)&unit_icon_move_Pontifex_sheet,
-    (u32)&data_081F4A20,
+    (u32)&unit_icon_move_Pontifex_motion,
     (u32)&unit_icon_move_Fallen_Peer_sheet,
     (u32)&frontier_df4_misc_lo_021_1F4F60,
     (u32)&unit_icon_move_Cyclops_sheet,
-    (u32)&data_081E4370,
+    (u32)&unit_icon_move_Cyclops_motion,
     (u32)&unit_icon_move_Elder_Bael_sheet,
-    (u32)&data_081E3958,
+    (u32)&unit_icon_move_Elder_Bael_motion,
     (u32)&unit_icon_move_Journeyman_T2_sheet,
-    (u32)&data_081D10F4,
+    (u32)&unit_icon_move_Journeyman_T2_motion,
     (u32)&unit_icon_move_Pupil_T2_sheet,
-    (u32)&data_081D1A40,
+    (u32)&unit_icon_move_Pupil_T2_motion,
 };
 __asm__(".global unit_icon_move_table\n\t.set unit_icon_move_table, unit_icon_move_table__shift\n");
