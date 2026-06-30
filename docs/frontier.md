@@ -8,6 +8,41 @@
 **Keep this current.** Refresh the numbers from `scripts/calcprogress.py` and the target lists from
 ground truth whenever an axis moves. Stale frontier data caused real wasted work (see "Pitfall" below).
 
+## Current state (2026-06-30) — asset-editability at fe8u REFERENCE PARITY (epic + 4 carve waves; D319)
+
+After the D313 epic, four triage-driven carve waves (read-only triage Workflow → parallel
+worktree carve-workers → serial integrator → CI gate; PRs #55-68, all CI-green on main) brought
+the asset-editability axis (#6) to fe8u editable-source parity for every **tractable** asset.
+`make compare` OK (sha1 `7da0456…`), `make shiftcheck` 0 HIGH, self-containment 100%. Tracked
+committed `.bin`: 4901 → 3088.
+
+**Converted to editable fe8u source form (waves 2-4, byte-verified region-same):** 101
+`AnimSprite_*` → typed C `struct AnimSpriteData[]`; 17 AP map-anim/trap objects (316 `.bin`) →
+`ap.inc` macro `.s`; 30 ANIMSCR pointer-lists → `ANIMSCR_FORCE_SPRITE` macros; 147 frontier REDA
+runs → named `struct REDA[]` (editable + shiftable); 41 OAM sprite/object-list tables
+(Face/ClassDisplay/Savemenu/TalkText/OamObjectList) → typed C; 88 unit-icon move tables → `.s`;
+3 worldmap/AP-anim TUs (gWorldmapSprite/MineFx/WmHightLight) → `.s`; m4a tables + sound tables →
+`.s`/typed C; ~530 pixel images → `.png`; menu pools → `menu_def.c`.
+
+**The irreducible residual (D308 reference-parity floor — NOT a defect),** per the reproducible
+`scripts/audit_bin_forms.py` → `docs/bin_audit.md` (re-run post-wave): the remaining ~3088 `.bin`
+is dominated by **~260 fe8u-parity binary FLOOR** (TSA `.tsa.bin` + `.map.bin` tilemaps, compressed
+region-diff gfx with no proven bit-exact recompressor, raw PCM, JP-unique 2bpp font bitmaps, the
+struct-pointer-array ceiling, alignment pad — fe8u itself ships these binary) + **~119 deep-RE /
+code-axis** (~99 bespoke one-off data tables needing per-blob RE; ~20 `gap_*.bin` that are **Thumb
+function bodies** belonging on the matching-C/#2 axis). Documented music ceilings (D311/D312):
+gSongTable's ~520 SFX/voice songs, 2 region-diff voicegroup floor blobs. Above-fe8u-parity polish
+deferred (not blocking): EventListScr → `EvtList*` macros (fe8u ships raw asm), REDA-naming for
+~13 region-diff UnitDef.
+
+**Shiftability (#5):** `make shiftcheck` (the ported fe8u PR-#745 5-layer harness, D317) is the
+authoritative validation = **0 HIGH**. The conservative `audit_pointers.py --true-debt --gate`
+exposed 23 `__asm__`-literal residuals (raw `.4byte 0x08xxxxxx` the reloc-scan is blind to),
+de-pointered to `.4byte Sym` (gate → 0) as the axis-5 closeout (D319/wave5).
+
+**This is the D308 reference-parity end-state for editability:** at or above fe8u editable-source
+parity for every non-floor asset; what remains is the documented floor + cascading-RE/code backlog.
+
 ## Current state (2026-06-29) — D313 asset-editability + shiftability EPIC landed (CI-green on main)
 
 A 12-unit `/batch` epic (D313, full plan `docs/epic_asset_editability_shiftability.md`)
