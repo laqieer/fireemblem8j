@@ -8,11 +8,13 @@
  * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
  */
 
-extern const u8 frontier_df3_unitdef_b_014_911FCC[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_13_0[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_13_1[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_13_2[];
 SECTION(".rodata.dat_UnitDef_Ch16AAlly_13_ref") struct UnitDefinition UnitDef_Ch16AAlly_13[] =
 {
-    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0xB, .redaCount=0x3, .redas=(const struct REDA *)frontier_df3_unitdef_b_014_911FCC },
-    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0xB, .redaCount=0x3, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_014_911FCC + 0x18) },
-    { .charIndex=0x2, .classIndex=0x7, .level=0x1, .xPosition=0xB, .redaCount=0x4, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_014_911FCC + 0x30) },
+    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0xB, .redaCount=0x3, .redas=REDAs_UnitDef_Ch16AAlly_13_0 },
+    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0xB, .redaCount=0x3, .redas=REDAs_UnitDef_Ch16AAlly_13_1 },
+    { .charIndex=0x2, .classIndex=0x7, .level=0x1, .xPosition=0xB, .redaCount=0x4, .redas=REDAs_UnitDef_Ch16AAlly_13_2 },
     {0},
 };
