@@ -1,20 +1,97 @@
 #include "global.h"
 
-/* Migrated from asm/dat_anim_mine_fx.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+/* Worldmap mine spark AP animation (region-same with fe8u).
+ * Ported from fe8u src/data/ui/anim_mine_fx.s as an editable self-referential
+ * AP-anim table (label-relative offsets); section/symbol order preserved,
+ * replacing the prior 13 opaque INCBIN sub-blobs. (axis #6, byte-neutral)
  */
 
 extern u16 SpritAnim_MineFx[1] __attribute__((alias("SpritAnim_MineFx_motion")));
-u8 SpritAnim_MineFx_motion[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_motion.bin");
-u8 SpritAnim_MineFx_frame_list[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_frame_list.bin");
-u8 SpritAnim_MineFx_anim_list[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_anim_list.bin");
-u8 SpritAnim_MineFx_frame_0[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_frame_0.bin");
-u8 SpritAnim_MineFx_frame_1[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_frame_1.bin");
-u8 SpritAnim_MineFx_frame_2[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_frame_2.bin");
-u8 SpritAnim_MineFx_frame_3[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_frame_3.bin");
-u8 SpritAnim_MineFx_frame_4[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_frame_4.bin");
-u8 SpritAnim_MineFx_frame_5[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_frame_5.bin");
-u8 SpritAnim_MineFx_frame_6[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_frame_6.bin");
-u8 SpritAnim_MineFx_frame_7[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_frame_7.bin");
-u8 SpritAnim_MineFx_frame_8[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_frame_8.bin");
-u8 SpritAnim_MineFx_anim_0[] __attribute__((section(".rodata.dat_anim_mine_fx"))) = INCBIN_U8("data/residual/SpritAnim_MineFx_anim_0.bin");
+
+__asm__(
+"\t.section .rodata.dat_anim_mine_fx, \"a\", %progbits\n"
+"\t.align 2\n"
+"\n"
+"\t.global SpritAnim_MineFx_motion\n"
+"\tSpritAnim_MineFx_motion:\n"
+"\t.2byte (SpritAnim_MineFx_frame_list - SpritAnim_MineFx_motion), (SpritAnim_MineFx_anim_list - SpritAnim_MineFx_motion) @ header\n"
+"\n"
+"\t.global SpritAnim_MineFx_frame_list\n"
+"\tSpritAnim_MineFx_frame_list: @ +$4\n"
+"\t.2byte (SpritAnim_MineFx_frame_0 - SpritAnim_MineFx_frame_list)\n"
+"\t.2byte (SpritAnim_MineFx_frame_1 - SpritAnim_MineFx_frame_list)\n"
+"\t.2byte (SpritAnim_MineFx_frame_2 - SpritAnim_MineFx_frame_list)\n"
+"\t.2byte (SpritAnim_MineFx_frame_3 - SpritAnim_MineFx_frame_list)\n"
+"\t.2byte (SpritAnim_MineFx_frame_4 - SpritAnim_MineFx_frame_list)\n"
+"\t.2byte (SpritAnim_MineFx_frame_5 - SpritAnim_MineFx_frame_list)\n"
+"\t.2byte (SpritAnim_MineFx_frame_6 - SpritAnim_MineFx_frame_list)\n"
+"\t.2byte (SpritAnim_MineFx_frame_7 - SpritAnim_MineFx_frame_list)\n"
+"\t.2byte (SpritAnim_MineFx_frame_8 - SpritAnim_MineFx_frame_list)\n"
+"\n"
+"\t.global SpritAnim_MineFx_anim_list\n"
+"\tSpritAnim_MineFx_anim_list: @ +$16\n"
+"\t.2byte (SpritAnim_MineFx_anim_0 - SpritAnim_MineFx_anim_list)\n"
+"\n"
+"\t.global SpritAnim_MineFx_frame_0\n"
+"\tSpritAnim_MineFx_frame_0: @ +$18\n"
+"\t.2byte 1 @ oam entries\n"
+"\t.2byte 0xF8, 0x41F8, 0x0 @ OAM Data #0\n"
+"\n"
+"\t.global SpritAnim_MineFx_frame_1\n"
+"\tSpritAnim_MineFx_frame_1: @ +$20\n"
+"\t.2byte 1 @ oam entries\n"
+"\t.2byte 0xF8, 0x41F8, 0x2 @ OAM Data #0\n"
+"\n"
+"\t.global SpritAnim_MineFx_frame_2\n"
+"\tSpritAnim_MineFx_frame_2: @ +$28\n"
+"\t.2byte 1 @ oam entries\n"
+"\t.2byte 0xF8, 0x41F8, 0x4 @ OAM Data #0\n"
+"\n"
+"\t.global SpritAnim_MineFx_frame_3\n"
+"\tSpritAnim_MineFx_frame_3: @ +$30\n"
+"\t.2byte 1 @ oam entries\n"
+"\t.2byte 0xF8, 0x41F8, 0x6 @ OAM Data #0\n"
+"\n"
+"\t.global SpritAnim_MineFx_frame_4\n"
+"\tSpritAnim_MineFx_frame_4: @ +$38\n"
+"\t.2byte 1 @ oam entries\n"
+"\t.2byte 0xF8, 0x41F8, 0x8 @ OAM Data #0\n"
+"\n"
+"\t.global SpritAnim_MineFx_frame_5\n"
+"\tSpritAnim_MineFx_frame_5: @ +$40\n"
+"\t.2byte 1 @ oam entries\n"
+"\t.2byte 0xF8, 0x41F8, 0xA @ OAM Data #0\n"
+"\n"
+"\t.global SpritAnim_MineFx_frame_6\n"
+"\tSpritAnim_MineFx_frame_6: @ +$48\n"
+"\t.2byte 1 @ oam entries\n"
+"\t.2byte 0xF8, 0x41F8, 0xC @ OAM Data #0\n"
+"\n"
+"\t.global SpritAnim_MineFx_frame_7\n"
+"\tSpritAnim_MineFx_frame_7: @ +$50\n"
+"\t.2byte 1 @ oam entries\n"
+"\t.2byte 0xF7, 0x41F8, 0x0 @ OAM Data #0\n"
+"\n"
+"\t.global SpritAnim_MineFx_frame_8\n"
+"\tSpritAnim_MineFx_frame_8: @ +$58\n"
+"\t.2byte 1 @ oam entries\n"
+"\t.2byte 0xF6, 0x41F8, 0x0 @ OAM Data #0\n"
+"\n"
+"\t.global SpritAnim_MineFx_anim_0\n"
+"\tSpritAnim_MineFx_anim_0: @ +$60\n"
+"\t.2byte  3,  0\n"
+"\t.2byte  3,  7\n"
+"\t.2byte  6,  8\n"
+"\t.2byte  3,  7\n"
+"\t.2byte  2,  0\n"
+"\t.2byte  2,  1\n"
+"\t.2byte  2,  2\n"
+"\t.2byte  2,  3\n"
+"\t.2byte  2,  4\n"
+"\t.2byte  3,  5\n"
+"\t.2byte  3,  6\n"
+"\n"
+"\t.2byte 0, 1 @ kill animated object\n"
+"\n"
+"\t.byte 0x00, 0x00, 0xFF, 0xFF  @ trailing anim data not decoded by apdump\n"
+);
