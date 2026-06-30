@@ -32,16 +32,16 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 285 | 15.1% |
-| **FLOOR** | 1128 | 59.8% |
-| **UNCERTAIN** | 473 | 25.1% |
-| **TOTAL** | 1886 | 100.0% |
+| **MISS** | 275 | 14.7% |
+| **FLOOR** | 1128 | 60.1% |
+| **UNCERTAIN** | 473 | 25.2% |
+| **TOTAL** | 1876 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
 | Category | Verdict | Count (this run) | fe8u editable form |
 |---|---|---:|---|
-| battle-anim | MISS | 193 | fe8u 202 editable banim/*.s (compressing linker) |
+| battle-anim | MISS | 183 | fe8u 202 editable banim/*.s (compressing linker) |
 | pixel-gfx | MISS | 17 | fe8u graphics/**/*.png |
 | sound-m4a-tables | MISS | 1 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 4 | fe8u sound/voicegroups/*.s (documented ceiling) |
@@ -90,9 +90,9 @@ under MISS, asserted by the self-test guards below).
 - `graphics/banim/efx*` effect bins are classified **FLOOR**.
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 
-## MISS (285) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (275) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>285 entries</summary>
+<details><summary>275 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -305,20 +305,10 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_031_69EBD8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_032_6A5EDC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_033_6A819C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_034_6A9534.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_035_6AB184.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_036_6AB520.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_037_6AC820.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_039_6ADB74.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_040_6AF038.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_041_6B0C88.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_042_6B1024.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_043_6B1690.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_044_6B64CC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_045_6BB2EC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_046_6BC4BC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_047_6BCF9C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_048_6CF20C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_049_6D00A8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_050_6D3478.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_051_6E0CF4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
