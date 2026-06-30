@@ -8582,11 +8582,17 @@ binary in fe8u too) + deep-RE/code-axis (~119: ~99 bespoke one-off data tables +
 deferred. This is at/above fe8u editable-source parity for every non-floor asset — the
 editability axis terminal state.
 
-**Axis-5 closeout.** The wave `.s`/`__asm__` data exposed 23 raw `.4byte 0x08xxxxxx` pointers in
-`__asm__` literals (`make shiftcheck`-blind but real per `audit_pointers.py --true-debt --gate`);
-de-pointered to `.4byte Sym` (gate → 0). The authoritative shiftability validation
-`make shiftcheck` (D317 harness) stayed 0 HIGH throughout. See [[fe8j-worker-stay-in-worktree]],
-[[fe8j-integration-worktree-tooling]] for the carve-fleet operational lessons.
+**Axis-5 closeout (full account in D320).** The conservative `audit_pointers.py --true-debt
+--gate` had re-grown to **495** during the waves — a **classification gap, not real pointer
+debt** (the D309 `data_08BB8ED0` malloc-blob rename from a gfx `.4bpp.bin` to opaque
+`data/residual/*.bin` re-counted its 260 coincidental interior words as "real"). Restored to
+**gate 0** by de-pointering the 2 genuinely-real tables (a ProcScr fn-ptr pair + a debug-menu
+block) + an **evidence-based** auditor fix (`structureless_opaque_syms()`: a word into a
+zero-relocation blob's interior is coincidental, proven by the linker reloc table — cross-validated
+0/1741 reclassified relocate in the fe8u oracle). The 23 named `__asm__` `.4byte` literals turned
+out **all coincidental** (msgids/OAM/multiboot/tile data) — correctly classified, NOT fabricated.
+`make shiftcheck` (D317 harness) — the authoritative validation — stayed 0 HIGH throughout. See
+[[fe8j-worker-stay-in-worktree]], [[fe8j-integration-worktree-tooling]] for carve-fleet lessons.
 
 ## D320 — Axis #5 shiftability gate re-closed (495 → 0); classification gap from the D309 blob rename
 

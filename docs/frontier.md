@@ -36,9 +36,19 @@ deferred (not blocking): EventListScr → `EvtList*` macros (fe8u ships raw asm)
 ~13 region-diff UnitDef.
 
 **Shiftability (#5):** `make shiftcheck` (the ported fe8u PR-#745 5-layer harness, D317) is the
-authoritative validation = **0 HIGH**. The conservative `audit_pointers.py --true-debt --gate`
-exposed 23 `__asm__`-literal residuals (raw `.4byte 0x08xxxxxx` the reloc-scan is blind to),
-de-pointered to `.4byte Sym` (gate → 0) as the axis-5 closeout (D319/wave5).
+authoritative validation = **0 HIGH** (held throughout). The conservative `audit_pointers.py
+--true-debt --gate` had re-grown to **495** — a **classification gap, not new pointer debt**: the
+D309 fake-graphics revert renamed the 43 KB `data_08BB8ED0` malloc blob from a gfx `.4bpp.bin`
+(coincidental by regex) to an opaque `data/residual/*.bin`, so its 260 interior words (plus ~30
+other de-hinted blobs) were re-counted "real". Restored to **gate 0** (D320/wave5) by: (a)
+de-pointering the **2 genuinely-real** tables (`ProcScr_ManimShiftingSineWaveScanlineBuf` fn-ptr
+pair + a debug-menu pointer block) to `.4byte Sym`; (b) fixing the auditor with **evidence-based**
+classification (a word reaching the *interior* of a blob whose object emits **zero** relocations
+is coincidental — proven by the linker reloc table, not a name regex; cross-validated: 0 of 1741
+reclassified words relocate in the fe8u oracle, off==0 real-pointers never masked). The 23
+named `__asm__` `.4byte` literals were **all coincidental** (EvtTextShow msgids, OAM/sprite data,
+multiboot child-image ARM words, map-change tile data) — correctly classified, **not** fabricated
+as symbol refs.
 
 **This is the D308 reference-parity end-state for editability:** at or above fe8u editable-source
 parity for every non-floor asset; what remains is the documented floor + cascading-RE/code backlog.
