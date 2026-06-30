@@ -12,8 +12,6 @@ src/data/A01CC4/dat_data_A01CC4_2.o: graphics/misc_gfx2/Img_GameOverText.4bpp.lz
 src/data/A01CC4/dat_data_A01CC4_p2.o: graphics/misc_gfx2/Img_ChapterIntroFog.4bpp.lz graphics/misc_gfx2/Img_PlayerRankFog.4bpp.lz graphics/misc_gfx2/Pal_PlayerRankFog.gbapal
 src/data/A2EEF0/dat_data_A2EEF0_p0.o: data/residual/gUnkData_89.bin data/residual/gUnkData_92.bin graphics/misc/gUnkData_84.tsa.bin graphics/misc/gUnkData_86.tsa.bin graphics/reuse/gUnkData_81.4bpp.lz graphics/reuse/gUnkData_82.4bpp graphics/reuse/gUnkData_83.4bpp.lz graphics/reuse/gUnkData_85.4bpp.lz graphics/reuse/gUnkData_87.4bpp graphics/reuse/gUnkData_88.4bpp.lz graphics/reuse/gUnkData_90.4bpp graphics/reuse/gUnkData_91.4bpp.lz
 src/data/AA6BFA/dat_data_AA6BFA.o: graphics/reuse/gUnkData_100.4bpp graphics/reuse/gUnkData_101.4bpp
-src/data/Ap_WmHightLightMap3_ref/dat_Ap_WmHightLightMap3_ref.o: data/residual/Ap_WmHightLightMap3.bin
-src/data/Ap_WmHightLightMap6_ref/dat_Ap_WmHightLightMap6_ref.o: data/residual/Ap_WmHightLightMap6.bin
 src/data/B12A60/dat_data_B12A60.o: graphics/misc_gfx2/Img_CommGameBgScreen.4bpp.lz graphics/misc_gfx2/Img_UnkData_2.4bpp.lz graphics/misc_gfx2/Pal_CommGameBgScreenInShop.gbapal graphics/misc_gfx2/Pal_UnkData_2.gbapal graphics/misc_gfx2/Tsa_UnkData_5.bin.lz
 src/data/Ch9Events_ref/dat_Ch9Events_ref.o: data/residual/Ch9Events.bin
 src/data/EventListScr_Ch15b_Location_ref/dat_EventListScr_Ch15b_Location_ref.o: data/residual/EventListScr_Ch15b_Location.bin
@@ -28,7 +26,6 @@ src/data/PopupScr_WpnBroken_ref/dat_PopupScr_WpnBroken_ref.o: data/residual/Popu
 src/data/UnitDef_Ch14BAlly_7_ref/dat_UnitDef_Ch14BAlly_7_ref.o: data/residual/UnitDef_Ch14BAlly_7.bin
 src/data/UnitDef_Ch18BAlly_2_ref/dat_UnitDef_Ch18BAlly_2_ref.o: data/residual/UnitDef_Ch18BAlly_2.bin
 src/data/UnitDef_Ch21BEnemy_1_ref/dat_UnitDef_Ch21BEnemy_1_ref.o: data/residual/UnitDef_Ch21BEnemy_1.bin
-src/data/anim_085A0EA0/dat_anim_085A0EA0.o: data/residual/g085A0EA0_anim_0.bin data/residual/g085A0EA0_anim_1.bin data/residual/g085A0EA0_anim_list.bin data/residual/g085A0EA0_frame_0.bin data/residual/g085A0EA0_frame_1.bin data/residual/g085A0EA0_frame_2.bin data/residual/g085A0EA0_frame_3.bin data/residual/g085A0EA0_frame_4.bin data/residual/g085A0EA0_frame_5.bin data/residual/g085A0EA0_frame_6.bin data/residual/g085A0EA0_frame_list.bin
 src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight.o: graphics/misc_gfx3/Img_WmHightLightMap2.4bpp.lz graphics/misc_gfx3/Img_WmHightLightMapFrecia.4bpp.lz graphics/misc_gfx3/Pal_WmHighLightNationMap.gbapal
 src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight_p5.o: graphics/misc_gfx3/Img_WmHightLightMap4.4bpp.lz
 src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight_p7.o: graphics/misc_gfx3/Img_WmHightLightMap5.4bpp.lz
@@ -107,7 +104,7 @@ src/data/banim/dat_data_banim_p206.o: graphics/banim/_us/banim/assets/img/006EB8
 src/data/banim/dat_data_banim_p208.o: graphics/banim/_us/banim/assets/img/006FF5EC_Img_NaglfarSprites_B.4bpp.lz graphics/banim/_us/banim/assets/pal/006FFD3C_Pal_NaglfarSprites_B.gbapal
 src/data/banim/dat_data_banim_p21.o: graphics/reuse/AnimSprite_EfxBindingBlade_Right14.4bpp graphics/reuse/AnimSprite_EfxBindingBlade_Right16.4bpp graphics/reuse/AnimSprite_EfxBindingBlade_Right22.4bpp graphics/reuse/AnimSprite_EfxBindingBlade_Right5.4bpp graphics/reuse/AnimSprite_EfxBindingBlade_Right7.4bpp graphics/reuse/AnimSprite_EfxBindingBlade_Right8.4bpp
 src/data/banim/dat_data_banim_p213.o: graphics/banim/_us/banim/assets/img/00700404_Img_NaglfarBg1_A.4bpp.lz graphics/banim/_us/banim/assets/img/00700404_Img_NaglfarBg1_A.gbapal graphics/banim/_us/banim/assets/img/00701660_Img_08701660.4bpp.lz graphics/banim/_us/banim/assets/img/007020CC_Img_087020CC.4bpp.lz graphics/banim/_us/banim/assets/img/00702D98_Img_08702D98.4bpp.lz graphics/banim/_us/banim/assets/img/00703BCC_Img_08703BCC.4bpp.lz graphics/banim/_us/banim/assets/img/00704E90_Img_08704E90.4bpp.lz graphics/banim/_us/banim/assets/img/00706388_Img_08706388.4bpp.lz graphics/banim/_us/banim/assets/img/007079EC_Img_087079EC.4bpp.lz graphics/banim/_us/banim/assets/img/00708DA0_Img_08708DA0.4bpp.lz graphics/banim/_us/banim/assets/img/00709FA8_Img_08709FA8.4bpp.lz graphics/banim/_us/banim/assets/img/0070B060_Img_0870B060.4bpp.lz graphics/banim/_us/banim/assets/img/0070C014_Img_0870C014.4bpp.lz graphics/banim/_us/banim/assets/img/0070CDF0_Img_0870CDF0.4bpp.lz graphics/banim/_us/banim/assets/img/0070DBCC_Img_0870DBCC.4bpp.lz graphics/banim/_us/banim/assets/img/0070E894_Img_0870E894.4bpp.lz graphics/banim/_us/banim/assets/img/0070F524_Img_0870F524.4bpp.lz graphics/banim/_us/banim/assets/img/00710218_Img_08710218.4bpp.lz graphics/banim/_us/banim/assets/img/00713558_Img_08713558.4bpp.lz graphics/banim/_us/banim/assets/img/00714E64_Img_08714E64.4bpp.lz graphics/banim/_us/banim/assets/img/00716710_Img_08716710.4bpp.lz graphics/banim/_us/banim/assets/img/00717E78_Img_08717E78.4bpp.lz graphics/banim/_us/banim/assets/img/00717E78_Img_08717E78.gbapal graphics/banim/_us/banim/assets/pal/00710DB8_Pal_08710DB8.gbapal graphics/banim/_us/banim/assets/pal/00710DD8_Pal_08710DD8.gbapal graphics/banim/_us/banim/assets/pal/00710DF8_Pal_08710DF8.gbapal graphics/banim/_us/banim/assets/pal/00710E18_Pal_08710E18.gbapal graphics/banim/_us/banim/assets/pal/00710E38_Pal_08710E38.gbapal graphics/banim/_us/banim/assets/pal/00710E58_Pal_08710E58.gbapal graphics/banim/_us/banim/assets/pal/00710E78_Pal_08710E78.gbapal graphics/banim/_us/banim/assets/pal/00710E98_Pal_08710E98.gbapal graphics/banim/_us/banim/assets/pal/00710EB8_Pal_08710EB8.gbapal graphics/banim/_us/banim/assets/pal/00710ED8_Pal_08710ED8.gbapal graphics/banim/_us/banim/assets/pal/00710EF8_Pal_08710EF8.gbapal graphics/banim/_us/banim/assets/pal/00710F18_Pal_08710F18.gbapal graphics/banim/_us/banim/assets/pal/00710F38_Pal_08710F38.gbapal graphics/banim/_us/banim/assets/pal/00710F58_Pal_08710F58.gbapal graphics/banim/_us/banim/assets/pal/00710F78_Pal_08710F78.gbapal graphics/banim/_us/banim/assets/pal/00710F98_Pal_08710F98.gbapal graphics/banim/_us/banim/assets/tsa/007013C0_Tsa_NaglfarBg1_A.map.bin.lz graphics/banim/_us/banim/assets/tsa/00710FB8_Tsa_08710FB8.map.bin.lz graphics/banim/_us/banim/assets/tsa/007111E0_Tsa_087111E0.map.bin.lz graphics/banim/_us/banim/assets/tsa/00711438_Tsa_08711438.map.bin.lz graphics/banim/_us/banim/assets/tsa/007116A4_Tsa_087116A4.map.bin.lz graphics/banim/_us/banim/assets/tsa/007118FC_Tsa_087118FC.map.bin.lz graphics/banim/_us/banim/assets/tsa/00711B6C_Tsa_08711B6C.map.bin.lz graphics/banim/_us/banim/assets/tsa/00711DD8_Tsa_08711DD8.map.bin.lz graphics/banim/_us/banim/assets/tsa/0071203C_Tsa_0871203C.map.bin.lz graphics/banim/_us/banim/assets/tsa/007122A4_Tsa_087122A4.map.bin.lz graphics/banim/_us/banim/assets/tsa/0071250C_Tsa_0871250C.map.bin.lz graphics/banim/_us/banim/assets/tsa/0071276C_Tsa_0871276C.map.bin.lz graphics/banim/_us/banim/assets/tsa/007129C0_Tsa_087129C0.map.bin.lz graphics/banim/_us/banim/assets/tsa/00712C14_Tsa_08712C14.map.bin.lz graphics/banim/_us/banim/assets/tsa/00712E6C_Tsa_08712E6C.map.bin.lz graphics/banim/_us/banim/assets/tsa/007130B4_Tsa_087130B4.map.bin.lz graphics/banim/_us/banim/assets/tsa/00713310_Tsa_08713310.map.bin.lz
-src/data/banim/dat_data_banim_p215.o: data/residual/AnimScr_NaglfarBG4.bin graphics/reuse/AnimSpr_NaglfarOBJ_21.4bpp graphics/reuse/AnimSpr_NaglfarOBJ_3.4bpp
+src/data/banim/dat_data_banim_p215.o: graphics/reuse/AnimSpr_NaglfarOBJ_21.4bpp graphics/reuse/AnimSpr_NaglfarOBJ_3.4bpp
 src/data/banim/dat_data_banim_p216.o: graphics/reuse/AnimSpr_DarkBreathOBJ_22.4bpp graphics/reuse/AnimSpr_DarkBreathOBJ_4.4bpp
 src/data/banim/dat_data_banim_p218.o: graphics/banim/_us/banim/assets/img/007246D8_Img_FireBreathBg.4bpp.lz graphics/banim/_us/banim/assets/img/007246D8_Img_FireBreathBg.gbapal graphics/banim/_us/banim/assets/pal/00725DAC_Pal_08725DAC.gbapal graphics/banim/_us/banim/assets/pal/00726FF4_Pal_ShineBg_08726FF4.gbapal graphics/banim/_us/banim/assets/pal/00727C48_Pal_ShineBg2.gbapal graphics/banim/_us/banim/assets/tsa/00725AF0_Tsa_FireBreathBg.map.bin.lz graphics/banim/_us/banim/assets/tsa/007270B4_Tsa_ShineBg1_Left.map.bin.lz graphics/banim/_us/banim/assets/tsa/00727510_Tsa_ShineBg1_Right.map.bin.lz graphics/reuse/Img_ShineBg1.4bpp.lz graphics/reuse/Img_ShineBg2.4bpp.lz
 src/data/banim/dat_data_banim_p222.o: graphics/banim/_us/banim/assets/tsa/0072974C_Tsa_LunaBg1_A.map.bin.lz
@@ -414,7 +411,7 @@ src/data/data_085BA10C/data_085BA10C.o: data/residual/data_085BA10C.bin
 src/data/data_085C4440/data_085C4440.o: data/residual/data_085C4440.bin
 src/data/data_085C6A20/data_085C6A20.o: data/residual/data_085C6A20.bin
 src/data/data_085CBE64/data_085CBE64.o: graphics/misc_gfx2/Pal_PikeTrap.gbapal
-src/data/data_085CBFA4/data_085CBFA4.o: data/residual/data_085CBFA4.bin
+src/data/data_085CBFA4/data_085CBFA4.o: graphics/reuse/data_085CBFA4.4bpp.lz
 src/data/data_085D30F8/data_085D30F8.o: data/residual/data_085D30F8.bin
 src/data/data_085E3724/data_085E3724.o: data/residual/data_085E3724.bin
 src/data/data_085F1568/data_085F1568.o: data/residual/data_085F1568.bin
@@ -599,11 +596,11 @@ src/data/data_08B25710/data_08B25710.o: data/residual/data_08B25710.bin
 src/data/data_08B3E1C8/data_08B3E1C8.o: data/residual/data_08B3E1C8.bin
 src/data/data_08B3E688/data_08B3E688.o: data/residual/data_08B3E688.bin
 src/data/data_08B3E86C/data_08B3E86C.o: data/residual/data_08B3E86C.bin
-src/data/data_08B65D08/data_08B65D08.o: data/residual/data_08B65D08.bin
-src/data/data_08B6BD34/data_08B6BD34.o: data/residual/data_08B6BD34.bin
-src/data/data_08B6EE04/data_08B6EE04.o: data/residual/data_08B6EE04.bin
-src/data/data_08B7229C/data_08B7229C.o: data/residual/data_08B7229C.bin
-src/data/data_08B755D4/data_08B755D4.o: data/residual/data_08B755D4.bin
+src/data/data_08B65D08/data_08B65D08.o: graphics/reuse/data_08B65D08.4bpp.lz
+src/data/data_08B6BD34/data_08B6BD34.o: graphics/reuse/data_08B6BD34.4bpp.lz
+src/data/data_08B6EE04/data_08B6EE04.o: graphics/reuse/data_08B6EE04.4bpp.lz
+src/data/data_08B7229C/data_08B7229C.o: graphics/reuse/data_08B7229C.4bpp.lz
+src/data/data_08B755D4/data_08B755D4.o: graphics/reuse/data_08B755D4.4bpp.lz
 src/data/data_08B8A7B0/data_08B8A7B0.o: graphics/reuse/data_08B8A7B0.gbapal
 src/data/data_08B8B490/data_08B8B490.o: graphics/reuse/data_08B8B490.gbapal
 src/data/data_08BAB2DC/data_08BAB2DC.o: data/residual/data_08BAB2DC.bin
@@ -720,8 +717,6 @@ src/data/unit_icon/const_data_unit_icon_wait.o: graphics/unit_icon/wait/unit_ico
 src/data/worldmap/worldmap_gmap.o: graphics/misc_gfx2/Img_GmapCastleNodes.4bpp.lz graphics/misc_gfx2/Img_GmapNodes.4bpp.lz graphics/misc_gfx2/gWorldmapGmap_0.4bpp graphics/misc_gfx2/gWorldmapGmap_1.4bpp graphics/misc_gfx2/gWorldmapGmap_2.4bpp graphics/misc_gfx2/gWorldmapGmap_3.4bpp.lz
 src/data/worldmap_gmap/dat_worldmap_gmap_p1.o: graphics/misc_gfx2/gGfx_GMapPI_ShopIcons.4bpp.lz graphics/misc_gfx2/gPal_GMapPI_ShopIcons.gbapal graphics/misc_gfx2/gPal_WorldmapGmap_0.gbapal
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1056.o: graphics/reuse/AnimSprite_Tri_13.4bpp
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1117.o: data/residual/gEkrdragonDemonkingobj_array1.bin data/residual/gEkrdragonDemonkingobj_array2.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1118.o: data/residual/gEkrdragonDemonkingobj_array1_1.bin data/residual/gEkrdragonDemonkingobj_array2_1.bin data/residual/gEkrdragonDemonkingobj_array3.bin data/residual/gEkrdragonDemonkingobj_array4.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1351.o: data/residual/REDA_Ch14AMixed_1_CAELLACH.bin data/residual/REDA_Ch14AMixed_1_ISMAIRE.bin data/residual/REDA_Ch14AMixed_1_LYON.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1471.o: data/residual/MuSoundScr_Dog.bin data/residual/MuSoundScr_Gorgon.bin data/residual/MuSoundScr_Mogall.bin data/residual/MuSoundScr_Skeleton.bin data/residual/MuSoundScr_Spider.bin data/residual/MuSoundScr_Unused2.bin data/residual/MuSoundScr_Zombie.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1519.o: graphics/gmapunit/Img_TalkBubble.4bpp.lz graphics/gmapunit/Img_TalkBubbleOpening_A.4bpp.lz graphics/gmapunit/Img_TalkBubbleOpening_B.4bpp.lz graphics/gmapunit/Img_TalkBubbleOpening_C.4bpp.lz graphics/gmapunit/Img_TalkBubbleOpening_D.4bpp.lz graphics/gmapunit/Img_TalkBubbleOpening_E.4bpp.lz graphics/gmapunit/Pal_TalkBubble.gbapal
@@ -735,12 +730,10 @@ src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1582.o: graphics/misc_gfx2/gTS
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1598.o: graphics/misc/Img_MenuScrollBar.4bpp.lz
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1599.o: graphics/gmapunit/Pal_SpinningArrow.gbapal graphics/gmapunit/Tsa_UnkData_1.bin graphics/gmapunit/Tsa_UnkData_2.bin graphics/gmapunit/Tsa_UnkData_3.bin graphics/reuse/gUnkData_61.4bpp.lz graphics/reuse/gUnkData_62.4bpp.lz graphics/reuse/gUnkData_63.4bpp.lz graphics/reuse/gUnkData_64.4bpp
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1600.o: graphics/gmapunit/Img_SysBrownBox.4bpp.lz graphics/reuse/gUnkData_66.4bpp.lz
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1601.o: data/residual/AP_DrawPreparationsBanner.bin graphics/gmapunit/Img_PrepFunds.4bpp.lz
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1602.o: data/residual/gUnkData_67.bin data/residual/gUnkData_68.bin data/residual/gUnkData_70.bin data/residual/gUnkData_71.bin data/residual/gUnkData_72.bin data/residual/gUnkData_73.bin graphics/gmapunit/Img_PrepItemUseScreen.4bpp.lz graphics/gmapunit/Img_PrepTextShadow.4bpp.lz graphics/gmapunit/Img_SpinningArrow.4bpp.lz graphics/gmapunit/Img_UnitListBanner_Animation.4bpp.lz graphics/gmapunit/Img_UnitListBanners.4bpp.lz graphics/gmapunit/Img_UnkData_1.4bpp.lz graphics/gmapunit/Pal_UnkData_1.gbapal graphics/gmapunit/Tsa_PrepItemScreen.bin.lz graphics/gmapunit/Tsa_PrepItemUseScreen.bin.lz graphics/gmapunit/Tsa_UnkData_4.bin.lz graphics/gmapunit/gImg_UiSpinningArrow_Horizontal.4bpp.lz graphics/misc/gUnkData_77.tsa.bin graphics/reuse/gUnkData_69.4bpp.lz graphics/reuse/gUnkData_74.4bpp graphics/reuse/gUnkData_75.4bpp graphics/reuse/gUnkData_78.4bpp
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1605.o: graphics/gmapunit/Img_PrepWindow.4bpp.lz
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1606.o: data/residual/gUnkData_80.bin graphics/misc_gfx2/gTsa_SupportSubScreen.bin.lz
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1621.o: graphics/gmapunit/gGfx_MinimapTiles.4bpp.lz graphics/gmapunit/gPal_MinimapTiles.gbapal graphics/gmapunit/gPal_Minimap_0.gbapal
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1628.o: data/residual/Obj_SmallBrownNameBoxe1.bin data/residual/Obj_SmallBrownNameBoxe2.bin data/residual/Obj_SmallBrownNameBoxe3.bin data/residual/Obj_SmallBrownNameBoxe4.bin data/residual/Obj_SmallBrownNameBoxe5.bin data/residual/Obj_SmallBrownNameBoxe6.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1634.o: graphics/gmapunit/Pal_DifficultyMenuObjs.gbapal graphics/reuse/gMenuMainObjs_0.4bpp
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1636.o: graphics/reuse/gMenuMainObjs_2.4bpp.lz graphics/reuse/gMenuMainObjs_3.4bpp.lz graphics/reuse/gMenuMainObjs_4.4bpp
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1637.o: data/residual/gMenuMainObjs_5.bin data/residual/gMenuSoundroom_0.bin data/residual/gMenuSoundroom_1.bin data/residual/gMenuSoundroom_2.bin data/residual/gMenuSoundroom_4.bin graphics/gmapunit/Img_SoundRoomVolumeGraph.4bpp.lz graphics/gmapunit/Pal_SoundRoomVolumeGraph.gbapal graphics/reuse/gMenuSoundroom_3.4bpp.lz
@@ -749,7 +742,6 @@ src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1639.o: graphics/gmapunit/Img_
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1655.o: data/residual/gCharacterEndingDefeatLut.bin data/residual/gSoloEndingBattleDispConf.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p3.o: data/residual/gWorldmapPath_20.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p5.o: data/residual/chance_lut.3.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p684.o: data/residual/Obj_EventShinningCursor.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p7.o: data/residual/WmMonsterGenerateRates_EphraimMode.bin data/residual/WmMonsterGenerateRates_XmapEphraim.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p702.o: data/residual/gBmudisp_0.bin data/residual/gSomeSMSLookupTable_0.bin data/residual/sSlotToChrLut.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p723.o: graphics/gmapunit/Img_DanceringFx.4bpp.lz graphics/gmapunit/Img_EventWarp.4bpp.lz graphics/gmapunit/Pal_DanceringFx.gbapal graphics/gmapunit/Pal_EventWarp.gbapal graphics/gmapunit/Tsa_DanceringFx.4bpp.lz graphics/gmapunit/Tsa_EventWarp.4bpp.lz graphics/gmapunit/Tsa_PlayerRankFog.bin graphics/reuse/gParticlesFx_6.4bpp.lz graphics/reuse/gParticlesFx_7.4bpp
@@ -775,7 +767,7 @@ src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p792.o: data/residual/gEfxmagic
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p793.o: data/residual/gEfxmagicCrimsoneye_0.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p794.o: data/residual/gEfxmagicCrimsoneye_1.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p795.o: data/residual/gEfxmisc_0.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p798.o: data/residual/Obj_EfxArrowOBJ.bin graphics/gmapunit/Img_EfxArrowOBJ.4bpp.lz
+src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p798.o: graphics/gmapunit/Img_EfxArrowOBJ.4bpp.lz
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p851.o: graphics/reuse/AnimSprite_EfxMantBatabata5_R_4.4bpp
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p852.o: graphics/reuse/AnimSprite_EfxMantBatabata5_L_4.4bpp
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p936.o: graphics/reuse/AnimSprite_EfxRestOBJ_36.4bpp
@@ -787,3 +779,4 @@ src/data/worldmap_minimap/dat_worldmap_minimap_p3.o: graphics/misc_gfx2/Img_Even
 src/data/worldmap_skirmish/dat_worldmap_skirmish.o: graphics/misc_gfx2/Img_WorldMapPlaceDot.4bpp.lz graphics/misc_gfx2/Pal_WmPlaceDot_Highlight.gbapal graphics/misc_gfx2/Pal_WmPlaceDot_Standard.gbapal graphics/reuse/gWorldmapSkirmish_0.4bpp.lz
 src/data/anim_mapanim_berserk_silence/dat_anim_mapanim_berserk_silence.o: graphics/misc_gfx3/Img_ManimSilenceBgfx.4bpp.lz graphics/misc_gfx3/Img_ManimSilenceObjfx.4bpp.lz graphics/misc_gfx3/Pal_ManimSilencefx.gbapal
 src/data/anim_mapanim_objects/dat_anim_mapanim_objects.o: graphics/mapanim/Img_MapAnimMISS.4bpp.lz graphics/mapanim/Img_MapAnimNODAMAGE.4bpp.lz graphics/mapanim/Pal_MapAnimManaketeMu.gbapal graphics/mapanim/gGfx_ArenaBuildingFront.4bpp.lz graphics/mapanim/gPal_ArenaBuildingFront.gbapal graphics/mapanim/gTsa_ArenaBuildingFront.tsa.bin
+src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1601.o: graphics/gmapunit/Img_PrepFunds.4bpp.lz
