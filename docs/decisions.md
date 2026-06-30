@@ -8559,7 +8559,7 @@ JP `.bin`): 88/88 MATCH, 0 divergence. Full gate: `make -j4 compare` = OK; clean
 baserom incbins. Independent re-verify: all 88 committed `.s` assemble byte-identical to
 the `baserom.gba` region at their layout offsets.
 
-## D319 — Axis #5 shiftability gate re-closed (495 → 0) after the wave-2/3/4 regressions
+## D320 — Axis #5 shiftability gate re-closed (495 → 0) after the wave-2/3/4 regressions
 
 **2026-06-30.** The asset-editability waves (D312-D318) re-grew the
 `audit_pointers.py --true-debt --gate` from 0 (D309) to **495** — NOT 23 as the
