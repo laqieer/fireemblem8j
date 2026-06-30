@@ -27,8 +27,13 @@ round-trip + header probe splits those 318 into:
   are deep but tractable byte-exact carves — multi-wave (the orchestrator's deferred wave-9+).
 
 **So MISS=0 (strict goal) is blocked on BOTH** (a) ~260 deep carves AND (b) a JP-LZ recompressor for
-the 58. **Wave 9 (in progress):** carve-workers on MapChanges (29) + unitdef REDA (52). The strict
-goal is NOT reached; `make compare` OK + `make shiftcheck` 0 HIGH are held on every banked lane.
+the 58. **Wave 9 (LANDED, −33 `.bin`: 1919 → 1886, MISS 318 → 285):** (1) the "MapChanges" lane was
+a misattribution — 28 `data/residual/Ch*MapChanges.bin`/`TileAnimations*.bin` are chapter EVENT DATA
+already de-pointered into shiftable `src/data/*_ref/dat_*_ref.c` (`.4byte` symbol refs); the `.bin`
+were orphans referenced only by excluded asm stubs → deleted (byte-neutral). (2) `frontier_df3_unitdef_b`
+REDA cascade: 31 REDA runs carved into named `struct REDA[]`, 5 `.bin` eliminated; 2 region-different
++ ~38 UnitDefinition-table residues remain (need the recursive unit-table-typing chain — deferred).
+The strict goal is NOT reached; `make compare` OK + `make shiftcheck` 0 HIGH held on every banked lane.
 
 ## Current state (2026-06-30) — asset-editability WAVE 8 landed + the 642-MISS heuristic split (D322)
 
