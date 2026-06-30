@@ -1,4 +1,6 @@
 #include "global.h"
+#include "anime.h"
+#include "gba_sprites.h"
 
 /* Migrated from asm/dat_banim_ekrdragonfx_1.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
@@ -78,11 +80,49 @@ SECTION(".rodata.dat_banim_ekrdragonfx_1") u8 Tsa_Ekrdragonfx_35[] = INCBIN_U8("
 SECTION(".rodata.dat_banim_ekrdragonfx_1") u8 Tsa_Ekrdragonfx_36[] = INCBIN_U8("graphics/banim/_us/banim/dragonfx/Tsa_87A4E0C.map.bin.lz");
 SECTION(".rodata.dat_banim_ekrdragonfx_1") u16 Img_DemonLightSprites_EyeFlash[] = INCBIN_U16("graphics/banim/_us/banim/dragonfx/Img_DemonLightSprites_EyeFlash.4bpp.lz");
 SECTION(".rodata.dat_banim_ekrdragonfx_1") u16 Pal_DemonLightSprites_EyeFlash[] = INCBIN_U16("graphics/banim/_us/banim/dragonfx/Pal_DemonLightSprites_EyeFlash.gbapal");
-SECTION(".rodata.dat_banim_ekrdragonfx_1") u8 AnimSprite_Ekrdragonfx0_0[] = INCBIN_U8("data/banim/AnimSprite_Ekrdragonfx0_0.bin");
-SECTION(".rodata.dat_banim_ekrdragonfx_1") u8 AnimSprite_Ekrdragonfx0_1[] = INCBIN_U8("data/banim/AnimSprite_Ekrdragonfx0_1.bin");
-SECTION(".rodata.dat_banim_ekrdragonfx_1") u8 AnimSprite_Ekrdragonfx0_2[] = INCBIN_U8("data/banim/AnimSprite_Ekrdragonfx0_2.bin");
-SECTION(".rodata.dat_banim_ekrdragonfx_1") u8 AnimSprite_Ekrdragonfx0_3[] = INCBIN_U8("data/banim/AnimSprite_Ekrdragonfx0_3.bin");
-SECTION(".rodata.dat_banim_ekrdragonfx_1") u8 AnimSprite_Ekrdragonfx0_4[] = INCBIN_U8("data/banim/AnimSprite_Ekrdragonfx0_4.bin");
-SECTION(".rodata.dat_banim_ekrdragonfx_1") u8 AnimSprite_Ekrdragonfx0_5[] = INCBIN_U8("data/banim/AnimSprite_Ekrdragonfx0_5.bin");
-SECTION(".rodata.dat_banim_ekrdragonfx_1") u8 AnimSprite_Ekrdragonfx0_6[] = INCBIN_U8("data/banim/AnimSprite_Ekrdragonfx0_6.bin");
-SECTION(".rodata.dat_banim_ekrdragonfx_1") u8 AnimSprite_Ekrdragonfx0_7[] = INCBIN_U8("data/banim/AnimSprite_Ekrdragonfx0_7.bin");
+SECTION(".rodata.dat_banim_ekrdragonfx_1") struct AnimSpriteData AnimSprite_Ekrdragonfx0_0[] =
+{
+    { .header = (u32)(ATTR0_WIDE) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x0000, 0, 0 } } },
+    ANIM_SPRITE_END,
+};
+SECTION(".rodata.dat_banim_ekrdragonfx_1") struct AnimSpriteData AnimSprite_Ekrdragonfx0_1[] =
+{
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x0002, 8, 0 } } },
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x0023, 0, 16 } } },
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x0003, 16, 0 } } },
+    ANIM_SPRITE_END,
+};
+SECTION(".rodata.dat_banim_ekrdragonfx_1") struct AnimSpriteData AnimSprite_Ekrdragonfx0_2[] =
+{
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x0004, 8, 0 } } },
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x0006, 0, 16 } } },
+    ANIM_SPRITE_END,
+};
+SECTION(".rodata.dat_banim_ekrdragonfx_1") struct AnimSpriteData AnimSprite_Ekrdragonfx0_3[] =
+{
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x0026, 0, 16 } } },
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x0007, 8, 0 } } },
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x0009, 24, 8 } } },
+    ANIM_SPRITE_END,
+};
+SECTION(".rodata.dat_banim_ekrdragonfx_1") struct AnimSpriteData AnimSprite_Ekrdragonfx0_4[] =
+{
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x000A, 8, 8 } } },
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x000B, 16, 16 } } },
+    ANIM_SPRITE_END,
+};
+SECTION(".rodata.dat_banim_ekrdragonfx_1") struct AnimSpriteData AnimSprite_Ekrdragonfx0_5[] =
+{
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x0029, 8, 8 } } },
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x000D, 16, 16 } } },
+    ANIM_SPRITE_END,
+};
+SECTION(".rodata.dat_banim_ekrdragonfx_1") struct AnimSpriteData AnimSprite_Ekrdragonfx0_6[] =
+{
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x000F, 24, 16 } } },
+    ANIM_SPRITE_END,
+};
+SECTION(".rodata.dat_banim_ekrdragonfx_1") struct AnimSpriteData AnimSprite_Ekrdragonfx0_7[] =
+{
+    ANIM_SPRITE_END,
+};
