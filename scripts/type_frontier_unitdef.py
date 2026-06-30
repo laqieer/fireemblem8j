@@ -42,12 +42,20 @@ def load_map():
     return sym2addr, addr2syms
 
 def reda_starts(addr2syms):
+    """Map each ROM address that begins a carved REDA array to its symbol name. We
+    resolve a record's redas word ONLY to an exact match here, so if two distinct REDA
+    symbols share one address (an alias) the chosen name would be ambiguous; refuse
+    rather than silently pick one (make compare can't catch a right-address/wrong-name
+    reference)."""
     out = {}
     for a, ns in addr2syms.items():
-        for n in ns:
-            if n.startswith("REDAs_UnitDef_") or n.startswith("REDA_"):
-                out[a] = n
-                break
+        cands = [n for n in ns if n.startswith("REDAs_UnitDef_") or n.startswith("REDA_")]
+        if not cands:
+            continue
+        if len(cands) > 1:
+            raise SystemExit(
+                f"ambiguous REDA symbols at {a:#010x}: {cands} -- refusing to guess")
+        out[a] = cands[0]
     return out
 
 DECL_RE = re.compile(
@@ -161,17 +169,14 @@ def main():
         # Inject forward extern declarations for every referenced REDA symbol so records
         # that reference an array defined later in the file (or in another TU) compile.
         # Symbols already defined non-extern later in this file are still legal to
-        # pre-declare extern. Skip the cross-TU ones already prototyped in eventcall.h.
-        local_defs = set(re.findall(r'struct REDA (\w+)\[\]', new_src))
+        # pre-declare extern. The cross-TU REDA_* class is covered by eventcall.h below;
+        # we forward-declare the REDAs_UnitDef_* class (same-file or other TU) ourselves.
         ext_syms = sorted(s for s in referenced if s.startswith("REDAs_UnitDef_"))
         decls = "".join(f"extern struct REDA {s}[];\n" for s in ext_syms)
-        # add includes + extern block right after the existing include lines
+        # add includes right after the existing include lines
         inc_anchor = '#include "muctrl.h"\n'
         add_inc = '#include "bmunit.h"\n#include "eventcall.h"\n'
         new_src = new_src.replace(inc_anchor, inc_anchor + add_inc, 1)
-        # place extern decls after the file's leading comment block (after the includes)
-        new_src = new_src.replace(inc_anchor + add_inc,
-                                  inc_anchor + add_inc, 1)
         # insert extern decls just before the first symbol definition line
         first_def = re.search(r'^(?:static\s+|const\s+|u8 |struct (?:REDA|UnitDefinition) )', new_src, re.M)
         if first_def:

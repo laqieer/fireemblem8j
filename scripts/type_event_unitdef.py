@@ -34,13 +34,15 @@ def load_map(path="fireemblem8.map"):
 SYM2ADDR = load_map()
 
 def resolve_literal(expr):
-    """Resolve a `SYM` / `SYM + 0xNN` expression to its literal address value using the
-    linker map. Used for NON-redas field words that the de-pointerer wrongly relocated
-    (e.g. a byte3==0x08 read as a SpriteText_DrawBackground+1 code pointer)."""
-    m = re.fullmatch(r'(\w+)\s*\+\s*(0x[0-9A-Fa-f]+|\d+)', expr.strip())
+    """Resolve a `SYM` / `SYM + 0xNN` expression (optionally behind a `(u32)&` / `(u32)`
+    cast) to its literal address value using the linker map. Used for NON-redas field
+    words that the de-pointerer wrongly relocated (e.g. a byte3==0x08 read as a
+    SpriteText_DrawBackground+1 code pointer)."""
+    e = re.sub(r'^\(u32\)\s*&?', '', expr.strip())
+    m = re.fullmatch(r'(\w+)\s*\+\s*(0x[0-9A-Fa-f]+|\d+)', e)
     if m and m.group(1) in SYM2ADDR:
         return SYM2ADDR[m.group(1)] + int(m.group(2), 0)
-    m = re.fullmatch(r'(\w+)', expr.strip())
+    m = re.fullmatch(r'(\w+)', e)
     if m and m.group(1) in SYM2ADDR:
         return SYM2ADDR[m.group(1)]
     return None
@@ -181,6 +183,11 @@ def main():
             blob_refs.add(sym)
         else:
             reda_refs.add(sym)
+    # A base symbol referenced both as `&SYM` (reda) and `SYM + addend` (blob) would get
+    # two incompatible extern decls; that should never happen for a real table, so refuse.
+    overlap = reda_refs & blob_refs
+    if overlap:
+        raise SystemExit(f"{name}: symbol(s) used as both REDA array and data blob: {sorted(overlap)}")
     reda_refs = sorted(reda_refs)
     blob_refs = sorted(blob_refs)
     out = []
