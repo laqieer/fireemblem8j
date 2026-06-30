@@ -32,10 +32,10 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 318 | 16.6% |
-| **FLOOR** | 1128 | 58.8% |
-| **UNCERTAIN** | 473 | 24.6% |
-| **TOTAL** | 1919 | 100.0% |
+| **MISS** | 290 | 15.3% |
+| **FLOOR** | 1128 | 59.7% |
+| **UNCERTAIN** | 473 | 25.0% |
+| **TOTAL** | 1891 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -47,7 +47,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | voicegroup-tail | MISS | 4 | fe8u sound/voicegroups/*.s (documented ceiling) |
 | menu-strings | MISS | 22 | fe8u C literals (src/menu_def.c) |
 | unitdef-residuals | MISS | 52 | fe8u src/events_udefs.c typed C |
-| map-tilemaps | MISS | 29 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
+| map-tilemaps | MISS | 1 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | TSA/.map.bin | FLOOR | 979 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
@@ -63,7 +63,7 @@ under MISS, asserted by the self-test guards below).
 
 **MISS spot checks** (fe8u ships an editable source):
 
-- `data/residual/Ch10EphraimMapChanges.bin` → **MISS** (map-tilemaps) — proof: fe8u src/data/map/change/Ch10EphraimMapChanges.json
+- `data/residual/ObjectType9.bin` → **MISS** (map-tilemaps) — proof: fe8u graphics/map/ObjectType9.png
 - `data/residual/gEfxlvupfx_0.bin` → **MISS** (unitdef-residuals) — proof: fe8u typed C table / gfx (worldmap/mapanim/menu data)
 - `data/residual/gTitlescreen_0.bin` → **MISS** (pixel-gfx) — proof: fe8u graphics/**/*.png (named gfx)
 - `data/residual/rom_header_080000C0.bin` → **MISS** (sound-m4a-tables) — proof: fe8u src/rom_header.s
@@ -90,41 +90,13 @@ under MISS, asserted by the self-test guards below).
 - `graphics/banim/efx*` effect bins are classified **FLOOR**.
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 
-## MISS (318) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (290) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>318 entries</summary>
+<details><summary>290 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
-| `data/residual/Ch10EphraimMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch10EphraimMapChanges.json |
-| `data/residual/Ch11EirikaMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch11EirikaMapChanges.json |
-| `data/residual/Ch11EphraimMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch11EphraimMapChanges.json |
-| `data/residual/Ch12EirikaMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch12EirikaMapChanges.json |
-| `data/residual/Ch12EphraimMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch12EphraimMapChanges.json |
-| `data/residual/Ch13EirikaMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch13EirikaMapChanges.json |
-| `data/residual/Ch13EphraimMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch13EphraimMapChanges.json |
-| `data/residual/Ch14EirikaMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch14EirikaMapChanges.json |
-| `data/residual/Ch14EphraimMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch14EphraimMapChanges.json |
-| `data/residual/Ch15MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch15MapChanges.json |
-| `data/residual/Ch16MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch16MapChanges.json |
-| `data/residual/Ch18MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch18MapChanges.json |
-| `data/residual/Ch19MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch19MapChanges.json |
-| `data/residual/Ch20MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch20MapChanges.json |
-| `data/residual/Ch9EphMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch9EphMapChanges.json |
-| `data/residual/FinalChapterMap2Changes.bin` | map-tilemaps | fe8u src/data/map/change/FinalChapterMap2Changes.json |
-| `data/residual/LagdouRuins2MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/LagdouRuins2MapChanges.json |
-| `data/residual/LagdouRuins3MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/LagdouRuins3MapChanges.json |
-| `data/residual/LagdouRuins5MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/LagdouRuins5MapChanges.json |
-| `data/residual/LagdouRuins6MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/LagdouRuins6MapChanges.json |
-| `data/residual/LagdouRuins7MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/LagdouRuins7MapChanges.json |
-| `data/residual/LagdouRuins8MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/LagdouRuins8MapChanges.json |
-| `data/residual/MelkaenCoastMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/MelkaenCoastMapChanges.json |
 | `data/residual/ObjectType9.bin` | map-tilemaps | fe8u graphics/map/ObjectType9.png |
-| `data/residual/TileAnimations1.bin` | map-tilemaps | fe8u src/data/map/obj_anim/TileAnimations1.json |
-| `data/residual/TileAnimations2.bin` | map-tilemaps | fe8u src/data/map/obj_anim/TileAnimations2.json |
-| `data/residual/TileAnimations3.bin` | map-tilemaps | fe8u src/data/map/obj_anim/TileAnimations3.json |
-| `data/residual/TowerOfValni6MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/TowerOfValni6MapChanges.json |
-| `data/residual/TowerOfValni7MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/TowerOfValni7MapChanges.json |
 | `data/residual/gEfxlvupfx_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gTitlescreen_0.bin` | pixel-gfx | fe8u graphics/**/*.png (named gfx) |
 | `data/residual/gTitlescreen_1.bin` | pixel-gfx | fe8u graphics/**/*.png (named gfx) |

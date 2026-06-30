@@ -890,7 +890,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_gEfxSelfThunderBGFrames_ref.s \
                            asm/dat_ProcScr_SpellAssocTorch_ref.s \
                            asm/dat_ProcScr_SpellAssocSleep_ref.s \
-                           asm/dat_FinalChapterMap2Changes_ref.s \
                            asm/dat_const_data_unit_icon_move_p29.s \
                            asm/dat_gProcScr_SSPageNumCtrl_ref.s \
                            asm/dat_gEventListCmdInfoTable_ref.s \
@@ -899,20 +898,12 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_ProcScr_SpellAssocHeal_ref.s \
                            asm/dat_MenuItemDef_WMNodeMenu_ref.s \
                            asm/dat_MenuItemDef_RouteSplit_ref.s \
-                           asm/dat_MelkaenCoastMapChanges_ref.s \
-                           asm/dat_LagdouRuins7MapChanges_ref.s \
-                           asm/dat_LagdouRuins6MapChanges_ref.s \
-                           asm/dat_LagdouRuins2MapChanges_ref.s \
                            asm/dat_const_data_unit_icon_move_p45.s \
                            asm/dat_const_data_unit_icon_move_p26.s \
                            asm/dat_const_data_unit_icon_move_p18.s \
                            asm/dat_worldmap_gmapunit_p1600.s \
                            asm/dat_ProcScr_SioPostBattle_ref.s \
                            asm/dat_ProcScr_MapAnimBattle_ref.s \
-                           asm/dat_Ch13EphraimMapChanges_ref.s \
-                           asm/dat_Ch12EphraimMapChanges_ref.s \
-                           asm/dat_Ch11EphraimMapChanges_ref.s \
-                           asm/dat_Ch10EphraimMapChanges_ref.s \
                            asm/dat_const_data_unit_icon_move_p83.s \
                            asm/dat_sMusicProc4Script_ref.s \
                            asm/dat_unit_icon_move_table_ref.s \
@@ -945,9 +936,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_UnitDef_Ch10AEnemy_3_ref.s \
                            asm/dat_UnitDef_Ch10AEnemy_0_ref.s \
                            asm/dat_ProcScr_WorldMapMain_ref.s \
-                           asm/dat_Ch14EirikaMapChanges_ref.s \
-                           asm/dat_Ch13EirikaMapChanges_ref.s \
-                           asm/dat_Ch12EirikaMapChanges_ref.s \
                            asm/dat_particles_fx_p0.s \
                            asm/dat_data_bg_p21.s \
                            asm/dat_UnitDef_Ch9BEnemy_3_ref.s \
@@ -989,34 +977,20 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_EventScr_Ch11B_1_ref.s \
                            asm/dat_EventScr_Ch10B_2_ref.s \
                            asm/dat_EventScr_Ch10B_1_ref.s \
-                           asm/dat_Ch9EphMapChanges_ref.s \
                            asm/dat_const_data_unit_icon_move_p13.s \
-                           asm/dat_TileAnimations3_ref.s \
-                           asm/dat_TileAnimations2_ref.s \
                            asm/dat_EventScr_Ch5_10_ref.s \
                            asm/dat_EventScr_Ch2_10_ref.s \
                            asm/dat_EventScr_9EEA58_ref.s \
                            asm/dat_anim_mapanim_statgain.s \
-                           asm/dat_TowerOfValni7MapChanges_ref.s \
-                           asm/dat_TowerOfValni6MapChanges_ref.s \
                            asm/dat_gProcScr_BKSEL_ref.s \
                            asm/dat_gClassReelData_ref.s \
                            asm/dat_anim_mapanim_torch.s \
-                           asm/dat_Ch20MapChanges_ref.s \
-                           asm/dat_Ch19MapChanges_ref.s \
-                           asm/dat_Ch18MapChanges_ref.s \
-                           asm/dat_Ch16MapChanges_ref.s \
-                           asm/dat_Ch15MapChanges_ref.s \
                            asm/dat_anim_player_rank_fog.s \
-                           asm/dat_LagdouRuins8MapChanges_ref.s \
-                           asm/dat_LagdouRuins5MapChanges_ref.s \
-                           asm/dat_LagdouRuins3MapChanges_ref.s \
                            asm/dat_sProc_BMVSync_ref.s \
                            asm/dat_ProcScr_Popup_ref.s \
                            asm/dat_worldmap_gmapunit_p1652.s \
                            asm/dat_worldmap_gmapunit_p763.s \
                            asm/dat_worldmap_gmapunit_p762.s \
-                           asm/dat_Ch14EphraimMapChanges_ref.s \
                            asm/dat_gGameOptions_ref.s \
                            asm/dat___malloc_av__ref.s \
                            asm/dat_worldmap_gmapunit_p1007.s \
@@ -1055,7 +1029,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_Ch20EphraimEventData_ref.s \
                            asm/dat_Ch19EphraimEventData_ref.s \
                            asm/dat_Ch16EphraimEventData_ref.s \
-                           asm/dat_Ch11EirikaMapChanges_ref.s \
                            asm/dat_impure_data_ref.s \
                            asm/dat_gWMPathData_ref.s \
                            asm/dat_ObjectType9_ref.s \
@@ -1162,7 +1135,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1335.s \
                            asm/dat_worldmap_gmapunit_p1320.s \
                            asm/dat_data_bg_p3.s \
-                           asm/dat_TileAnimations1_ref.s \
                            asm/dat_EventScr_Ch5_11_ref.s \
                            asm/dat_EventScr_Ch4_10_ref.s \
                            asm/dat_Ch9EirikaEvents_ref.s \
