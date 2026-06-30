@@ -8,25 +8,25 @@
 @ banim_aurabg3 region-different data, JP 0x0876e98c..0x0876fe78 (5356 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_aurabg3_000_76E98C
 frontier_banim_aurabg3_000_76E98C:
-	.incbin "graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_000_76E98C.bin.lz"
+	.incbin "graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_000_76E98C.4bpp.lz"
 
 	.section .data.frontier_banim_aurabg3.gap1, "a", %progbits
 @ banim_aurabg3 region-different data, JP 0x0876fe78..0x08771224 (5036 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_aurabg3_001_76FE78
 frontier_banim_aurabg3_001_76FE78:
-	.incbin "graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_001_76FE78.bin.lz"
+	.incbin "graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_001_76FE78.4bpp.lz"
 
 	.section .data.frontier_banim_aurabg3.gap2, "a", %progbits
 @ banim_aurabg3 region-different data, JP 0x08771224..0x087725d4 (5040 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_aurabg3_002_771224
 frontier_banim_aurabg3_002_771224:
-	.incbin "graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_002_771224.bin.lz"
+	.incbin "graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_002_771224.4bpp.lz"
 
 	.section .data.frontier_banim_aurabg3.gap3, "a", %progbits
 @ banim_aurabg3 region-different data, JP 0x087725d4..0x087738f0 (4892 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_aurabg3_003_7725D4
 frontier_banim_aurabg3_003_7725D4:
-	.incbin "graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_003_7725D4.bin.lz"
+	.incbin "graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_003_7725D4.4bpp.lz"
 
 	.section .data.frontier_banim_aurabg3.gap4, "a", %progbits
 @ banim_aurabg3 region-different data, JP 0x087738f0..0x08774cb8 (5064 B); table-pinned (not code-named), byte-perfect incbin.

@@ -45,7 +45,7 @@ frontier_df3_banim_mid_005_6533B0:
 @ df3_banim_mid region-different data, JP 0x08654dfc..0x08656058 (4700 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_df3_banim_mid_006_654DFC
 frontier_df3_banim_mid_006_654DFC:
-	.incbin "graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_006_654DFC.bin.lz"
+	.incbin "graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_006_654DFC.4bpp.lz"
 
 	.section .data.frontier_df3_banim_mid.gap7, "a", %progbits
 @ df3_banim_mid region-different data, JP 0x08656ea8..0x08656ec8 (32 B); table-pinned (not code-named), byte-perfect incbin.
