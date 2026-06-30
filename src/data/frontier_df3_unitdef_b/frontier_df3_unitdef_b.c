@@ -1184,7 +1184,42 @@ struct UnitDefinition frontier_df3_unitdef_b_034_919A90[] __attribute__((section
     { .charIndex=0xB0, .classIndex=0x6, .autolevel=0x1, .allegiance=0x2, .level=0xC, .xPosition=0x11, .yPosition=0x7, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x12, 0xC} },
     {0},
 };
-u8 frontier_df3_unitdef_b_034_919A90_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_034_919A90.bin", 2340, 72);
+struct REDA REDAs_UnitDef_Ch14BEnemy_2_RENNAC[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 27, .y = 4, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_3_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 1, .y = 19, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_3_1[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 1, .y = 20, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_4_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 1, .y = 19, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_4_1[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 1, .y = 20, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_5_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 2, .y = 19, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_5_1[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 2, .y = 20, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_6_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 1, .y = 6, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_6_1[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 1, .y = 7, .b = 0xffff },
+};
 struct REDA REDAs_UnitDef_Ch14BEnemy_8_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
 {
     { .x = 10, .y = 3, .b = 0xffff },
@@ -1209,7 +1244,46 @@ struct REDA REDAs_UnitDef_Ch14BEnemy_9_2[] __attribute__((section(".data.frontie
 {
     { .x = 18, .y = 5, .b = 0xffff },
 };
-static const u8 frontier_df3_unitdef_b_034_919A90_tail[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_034_919A90.bin", 2460, 80);
+struct REDA REDAs_UnitDef_Ch14BEnemy_10_SOLDIER_83[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 14, .y = 5, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BNPC_MESSENGER[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 14, .y = 7, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_11_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 27, .y = 19, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_11_1[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 27, .y = 20, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_12_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 27, .y = 19, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_12_1[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 27, .y = 20, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_13_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 27, .y = 19, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_13_1[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 27, .y = 20, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_14_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 27, .y = 6, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_Ch14BEnemy_14_1[] __attribute__((section(".data.frontier_df3_unitdef_b.gap34"))) =
+{
+    { .x = 27, .y = 7, .b = 0xffff },
+};
 struct UnitDefinition frontier_df3_unitdef_b_035_91A580[] __attribute__((section(".data.frontier_df3_unitdef_b.gap35"))) =
 {
     { .charIndex=0x6B, .classIndex=0xB, .allegiance=0x2, .level=0xD, .xPosition=0xE, .yPosition=0x2, .itemDrop=0x1, .items={0x1D, 0x65}, .ai={0x3, 0x3, 0x9} },
@@ -1511,7 +1585,22 @@ struct UnitDefinition frontier_df3_unitdef_b_054_91FD38[] __attribute__((section
 {
     {0},
 };
-u8 frontier_df3_unitdef_b_054_91FD38_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap54"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_054_91FD38.bin", 20, 32);
+struct REDA REDAs_UnitDef_TowerEnemy_2_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap54"))) =
+{
+    { .x = 5, .y = 14, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_TowerEnemy_2_1[] __attribute__((section(".data.frontier_df3_unitdef_b.gap54"))) =
+{
+    { .x = 3, .y = 14, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_TowerEnemy_2_2[] __attribute__((section(".data.frontier_df3_unitdef_b.gap54"))) =
+{
+    { .x = 4, .y = 17, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_TowerEnemy_2_3[] __attribute__((section(".data.frontier_df3_unitdef_b.gap54"))) =
+{
+    { .x = 5, .y = 16, .b = 0xffff },
+};
 struct UnitDefinition frontier_df3_unitdef_b_055_91FE20[] __attribute__((section(".data.frontier_df3_unitdef_b.gap55"))) =
 {
     { .charIndex=0x5F, .classIndex=0x5E, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0x4, .yPosition=0x4, .items={0x29}, .ai={0x0, 0x3, 0xC} },
@@ -1573,7 +1662,10 @@ struct UnitDefinition frontier_df3_unitdef_b_056_920140[] __attribute__((section
     {0},
     {0},
 };
-u8 frontier_df3_unitdef_b_056_920140_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap56"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_056_920140.bin", 560, 8);
+struct REDA REDAs_UnitDef_TowerEnemy_4_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap56"))) =
+{
+    { .x = 9, .y = 6, .b = 0xffff },
+};
 struct UnitDefinition frontier_df3_unitdef_b_057_92042C[] __attribute__((section(".data.frontier_df3_unitdef_b.gap57"))) =
 {
     { .charIndex=0x5F, .classIndex=0x5C, .autolevel=0x1, .allegiance=0x2, .level=0x2, .xPosition=0xA, .yPosition=0x1, .items={0xB2}, .ai={0x0, 0x3, 0xC} },
@@ -1670,7 +1762,30 @@ struct UnitDefinition frontier_df3_unitdef_b_059_920AD0[] __attribute__((section
     {0},
     {0},
 };
-u8 frontier_df3_unitdef_b_059_920AD0_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap59"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_059_920AD0.bin", 780, 48);
+struct REDA REDAs_UnitDef_TowerEnemy_9_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap59"))) =
+{
+    { .x = 5, .y = 13, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_TowerEnemy_9_1[] __attribute__((section(".data.frontier_df3_unitdef_b.gap59"))) =
+{
+    { .x = 3, .y = 13, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_TowerEnemy_10_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap59"))) =
+{
+    { .x = 14, .y = 18, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_TowerEnemy_10_1[] __attribute__((section(".data.frontier_df3_unitdef_b.gap59"))) =
+{
+    { .x = 12, .y = 18, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_TowerEnemy_11_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap59"))) =
+{
+    { .x = 21, .y = 13, .b = 0xffff },
+};
+struct REDA REDAs_UnitDef_TowerEnemy_11_1[] __attribute__((section(".data.frontier_df3_unitdef_b.gap59"))) =
+{
+    { .x = 19, .y = 13, .b = 0xffff },
+};
 struct UnitDefinition frontier_df3_unitdef_b_060_921140[] __attribute__((section(".data.frontier_df3_unitdef_b.gap60"))) =
 {
     {0},
@@ -1795,7 +1910,10 @@ struct UnitDefinition frontier_df3_unitdef_b_068_922FCC[] __attribute__((section
     { .charIndex=0xB8, .classIndex=0x11, .autolevel=0x1, .allegiance=0x2, .level=0x11, .xPosition=0xC, .yPosition=0x2, .genMonster=0x1, .ai={0x0, 0x0, 0xC} },
     {0},
 };
-u8 frontier_df3_unitdef_b_068_922FCC_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap68"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_068_922FCC.bin", 260, 8);
+struct REDA REDAs_UnitDef_RuinEnemy_29_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap68"))) =
+{
+    { .x = 22, .y = 23, .b = 0xffff },
+};
 struct UnitDefinition frontier_df3_unitdef_b_069_9233F8[] __attribute__((section(".data.frontier_df3_unitdef_b.gap69"))) =
 {
     {0},
