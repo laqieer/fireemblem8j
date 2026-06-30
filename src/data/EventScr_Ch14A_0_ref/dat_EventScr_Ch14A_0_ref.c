@@ -11,11 +11,12 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 frontier_df3_unitdef_b_003_91066C[];
+extern const u8 frontier_df3_unitdef_b_003_91066C_residue[];
 extern const u8 UnitDef_Ch14AEnemy_6[];
 
 SECTION(".rodata.dat_EventScr_Ch14A_0_ref") EventListScr EventScr_Ch14A_0[] = {
     CAMERA2(9, 7)
-    LOAD1(1, frontier_df3_unitdef_b_003_91066C + 0x28)
+    LOAD1(1, frontier_df3_unitdef_b_003_91066C_residue)
     ENUN
     CURSOR_CHAR(0x53)
     STAL(0x3C)

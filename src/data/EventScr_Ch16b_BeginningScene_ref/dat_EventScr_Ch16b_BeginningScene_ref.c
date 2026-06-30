@@ -11,6 +11,7 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 frontier_df3_unitdef_b_042_91C230[];
+extern const u8 frontier_df3_unitdef_b_042_91C230_residue[];
 extern const u8 frontier_df3_eventscr_ch_001_A696D4[];
 
 SECTION(".rodata.dat_EventScr_Ch16b_BeginningScene_ref") EventListScr EventScr_Ch16b_BeginningScene[] = {
@@ -27,7 +28,7 @@ SECTION(".rodata.dat_EventScr_Ch16b_BeginningScene_ref") EventListScr EventScr_C
     ENDA
     CALL(frontier_df3_eventscr_ch_001_A696D4 + 0x70C)
     ENDA
-    SVAL(EVT_SLOT_2, frontier_df3_unitdef_b_042_91C230 + 0x208)
+    SVAL(EVT_SLOT_2, frontier_df3_unitdef_b_042_91C230_residue)
     EVENT_WORD(0x00000A40)
 };
 
