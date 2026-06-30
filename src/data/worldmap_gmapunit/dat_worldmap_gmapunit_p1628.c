@@ -1,12 +1,75 @@
 #include "global.h"
 
-/* Migrated from asm/dat_worldmap_gmapunit_p1628.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+/* Worldmap small-brown-name-box OAM object frames (6 rotation/position variants).
+ * Editable typed u16[] OAM arrays ported from fe8u src/sysutil.c
+ * (Obj_SmallBrownNameBoxe1..e6). Region-same: byte-identical to the JP ROM blobs
+ * formerly at 0x08A9DBCC (were data/residual/Obj_SmallBrownNameBoxe*.bin),
+ * verified by `make compare`. Layout #0 is the OAM entry count; each following
+ * triple is an OAM attr0/attr1/attr2.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1628") u8 Obj_SmallBrownNameBoxe1[] = INCBIN_U8("data/residual/Obj_SmallBrownNameBoxe1.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1628") u8 Obj_SmallBrownNameBoxe2[] = INCBIN_U8("data/residual/Obj_SmallBrownNameBoxe2.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1628") u8 Obj_SmallBrownNameBoxe3[] = INCBIN_U8("data/residual/Obj_SmallBrownNameBoxe3.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1628") u8 Obj_SmallBrownNameBoxe4[] = INCBIN_U8("data/residual/Obj_SmallBrownNameBoxe4.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1628") u8 Obj_SmallBrownNameBoxe5[] = INCBIN_U8("data/residual/Obj_SmallBrownNameBoxe5.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1628") u8 Obj_SmallBrownNameBoxe6[] = INCBIN_U8("data/residual/Obj_SmallBrownNameBoxe6.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1628") u16 Obj_SmallBrownNameBoxe1[] = {
+    9,
+    0x4000, 0x4000, 0x0000,
+    0x4000, 0x4020, 0x0001,
+    0x4000, 0x4040, 0x0001,
+    0x4004, 0x4000, 0x0005,
+    0x4004, 0x4020, 0x0006,
+    0x4004, 0x4040, 0x0006,
+    0x400C, 0x4000, 0x000A,
+    0x400C, 0x4020, 0x000B,
+    0x400C, 0x4040, 0x000B
+};
+
+SECTION(".rodata.dat_worldmap_gmapunit_p1628") u16 Obj_SmallBrownNameBoxe2[] = {
+    9,
+    0x4000, 0x4000, 0x0001,
+    0x4000, 0x4020, 0x0001,
+    0x4000, 0x5040, 0x0000,
+    0x4004, 0x4000, 0x0006,
+    0x4004, 0x4020, 0x0006,
+    0x4004, 0x5040, 0x0005,
+    0x400C, 0x4000, 0x000B,
+    0x400C, 0x4020, 0x000B,
+    0x400C, 0x5040, 0x000A
+};
+
+SECTION(".rodata.dat_worldmap_gmapunit_p1628") u16 Obj_SmallBrownNameBoxe3[] = {
+    9,
+    0x4000, 0x6000, 0x000a,
+    0x4000, 0x6020, 0x000b,
+    0x4000, 0x6040, 0x000b,
+    0x4008, 0x4000, 0x0005,
+    0x4008, 0x4020, 0x0006,
+    0x4008, 0x4040, 0x0006,
+    0x400c, 0x6000, 0x0000,
+    0x400c, 0x6020, 0x0001,
+    0x400c, 0x6040, 0x0001
+};
+
+SECTION(".rodata.dat_worldmap_gmapunit_p1628") u16 Obj_SmallBrownNameBoxe4[] = {
+    9,
+    0x4000, 0x6000, 0x000b,
+    0x4000, 0x6020, 0x000b,
+    0x4000, 0x7040, 0x000a,
+    0x4008, 0x4000, 0x0006,
+    0x4008, 0x4020, 0x0006,
+    0x4008, 0x5040, 0x0005,
+    0x400c, 0x6000, 0x0001,
+    0x400c, 0x6020, 0x0001,
+    0x400c, 0x7040, 0x0000
+};
+
+SECTION(".rodata.dat_worldmap_gmapunit_p1628") u16 Obj_SmallBrownNameBoxe5[] = {
+    3,
+    0x4000, 0x4000, 0x0001,
+    0x4004, 0x4000, 0x0006,
+    0x400C, 0x4000, 0x000B
+};
+
+SECTION(".rodata.dat_worldmap_gmapunit_p1628") u16 Obj_SmallBrownNameBoxe6[] = {
+    3,
+    0x4000, 0x6000, 0x000b,
+    0x4008, 0x4000, 0x0006,
+    0x400c, 0x6000, 0x0001
+};

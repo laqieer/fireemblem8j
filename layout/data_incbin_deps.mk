@@ -736,7 +736,6 @@ src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1602.o: data/residual/gUnkData
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1605.o: graphics/gmapunit/Img_PrepWindow.4bpp.lz
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1606.o: data/residual/gUnkData_80.bin graphics/misc_gfx2/gTsa_SupportSubScreen.bin.lz
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1621.o: graphics/gmapunit/gGfx_MinimapTiles.4bpp.lz graphics/gmapunit/gPal_MinimapTiles.gbapal graphics/gmapunit/gPal_Minimap_0.gbapal
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1628.o: data/residual/Obj_SmallBrownNameBoxe1.bin data/residual/Obj_SmallBrownNameBoxe2.bin data/residual/Obj_SmallBrownNameBoxe3.bin data/residual/Obj_SmallBrownNameBoxe4.bin data/residual/Obj_SmallBrownNameBoxe5.bin data/residual/Obj_SmallBrownNameBoxe6.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1634.o: graphics/gmapunit/Pal_DifficultyMenuObjs.gbapal graphics/reuse/gMenuMainObjs_0.4bpp
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1636.o: graphics/reuse/gMenuMainObjs_2.4bpp.lz graphics/reuse/gMenuMainObjs_3.4bpp.lz graphics/reuse/gMenuMainObjs_4.4bpp
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1637.o: data/residual/gMenuMainObjs_5.bin data/residual/gMenuSoundroom_0.bin data/residual/gMenuSoundroom_1.bin data/residual/gMenuSoundroom_2.bin data/residual/gMenuSoundroom_4.bin graphics/gmapunit/Img_SoundRoomVolumeGraph.4bpp.lz graphics/gmapunit/Pal_SoundRoomVolumeGraph.gbapal graphics/reuse/gMenuSoundroom_3.4bpp.lz
@@ -745,7 +744,6 @@ src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1639.o: graphics/gmapunit/Img_
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1655.o: data/residual/gCharacterEndingDefeatLut.bin data/residual/gSoloEndingBattleDispConf.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p3.o: data/residual/gWorldmapPath_20.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p5.o: data/residual/chance_lut.3.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p684.o: data/residual/Obj_EventShinningCursor.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p7.o: data/residual/WmMonsterGenerateRates_EphraimMode.bin data/residual/WmMonsterGenerateRates_XmapEphraim.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p702.o: data/residual/gBmudisp_0.bin data/residual/gSomeSMSLookupTable_0.bin data/residual/sSlotToChrLut.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p723.o: graphics/gmapunit/Img_DanceringFx.4bpp.lz graphics/gmapunit/Img_EventWarp.4bpp.lz graphics/gmapunit/Pal_DanceringFx.gbapal graphics/gmapunit/Pal_EventWarp.gbapal graphics/gmapunit/Tsa_DanceringFx.4bpp.lz graphics/gmapunit/Tsa_EventWarp.4bpp.lz graphics/gmapunit/Tsa_PlayerRankFog.bin graphics/reuse/gParticlesFx_6.4bpp.lz graphics/reuse/gParticlesFx_7.4bpp
