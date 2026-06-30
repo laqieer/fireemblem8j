@@ -8587,3 +8587,48 @@ editability axis terminal state.
 de-pointered to `.4byte Sym` (gate → 0). The authoritative shiftability validation
 `make shiftcheck` (D317 harness) stayed 0 HIGH throughout. See [[fe8j-worker-stay-in-worktree]],
 [[fe8j-integration-worktree-tooling]] for the carve-fleet operational lessons.
+
+## D320 — Axis #5 shiftability gate re-closed (495 → 0); classification gap from the D309 blob rename
+
+**2026-06-30.** A fresh measurement found `audit_pointers.py --true-debt --gate` = **495**,
+not the 0 D319's axis-5 closeout reported (and not the 23 the hand-off brief assumed — that
+was only the stuck-`__asm__`-literal sub-count). Root cause was a CLASSIFICATION GAP, not new
+real pointer debt: D309's honest "revert fake-graphics extraction" renamed the 43 KB
+malloc-region blob from `data_08BB8ED0.4bpp.bin` (matched the gfx regex → its 260 interior
+words classified coincidental) to the opaque `data/residual/data_08BB8ED0.bin` (plain `data_*`
+name → no longer matched → 260 words re-counted as REAL). Same gap for ~30 other opaque
+graphics/save blobs whose names lost their asset hint.
+
+**Two-part fix, both non-gaming (make compare the oracle):**
+1. **De-pointered the 2 GENUINELY-real pointer tables** (real shiftability fixes):
+   `data_08A15984` = `ProcScr_ManimShiftingSineWaveScanlineBuf` (2 Thumb fn ptrs →
+   `.4byte sub_80848F0 + 1` / `ManimShiftingSineWaveScanlineBuf_Loop + 1`); and
+   `data_080DC684` = debug-menu data block (3 internal pointer arrays → `.4byte
+   data_080DC68C/70C + off`; the strings stay raw INCBIN, named for DebugMenu_*Draw).
+   GOTCHA: data_080DC684's object base is ROM 0x080DC68C (first 8 bytes are
+   `CanUnitMove.o(.rodata)` lut) — the slices index from .bin file-offset 8; emitting the
+   whole .bin from offset 0 added 8 bytes and shifted the region (caught by make compare).
+2. **Extended the auditor's positive-evidence classification** (`structureless_opaque_syms()`):
+   a word resolving into the INTERIOR (off>=1) of — or held BY — a *structureless opaque blob*
+   (an object that emits ZERO `.data`/`.rodata` relocations, proving it has no internal
+   pointers) is a coincidental constant, same logic as the existing FUNC-/ASSET-interior rules
+   but driven by the linker's own reloc table instead of a name regex. Reclassified the
+   TEXTSHOW msgid words (`0x08XX1B20` = EvtTextShow cmd 0x1B20 + JP msgid), OAM/sprite words,
+   the multiboot child-image ARM words, the map-change tile data (REDA/frontier interiors),
+   and the 456 opaque-blob-interior `.bin` words. **Safety (vs the valid "an un-de-pointered
+   REAL table also has no reloc" objection, raised in code-review):** the rule fires only for
+   off>=1 (interiors); a real pointer always targets a structured-table START (off==0) and is
+   NEVER masked — and a de-pointered table emits a reloc so it drops OUT of the opaque set
+   (data_080DC68C/70C/08A15984 verified excluded). A real *intra-blob* table (interior
+   targets) is independently cleared by the fe8u oracle (0 of the 1741 reclassified words
+   relocate in the US decomp — e.g. the data_08606D84 "ascending self-refs" are
+   Img_BoltingBg battle-anim/TSA data, fe8u keeps the region raw) AND `make shiftcheck`
+   (0 HIGH coherent tables; classes them [D] BLOB-INTERNAL self-references).
+
+**Gate.** `make -j4 compare` = OK; clean `make clean && make banim/data_banim.o &&
+make -j4 compare` = OK (sha1 7da0456035366aa18414faa79d8fe7649f03c1ed);
+`audit_pointers.py --true-debt --gate` = **0**; `make shiftcheck` = 0 HIGH;
+`check_selfcontained.py` = 100%. Cross-checks: 0 fe8u-confirmed-real and 0
+EXACT-to-structured raw literals masked. Two code-review passes (one flagged the
+still-raw-table objection above → addressed by the off>=1 guard + dual-oracle validation).
+Copilot CLI consult timed out (no output) — decided + logged per the autonomy mandate.
