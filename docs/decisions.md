@@ -8558,3 +8558,45 @@ JP `.bin`): 88/88 MATCH, 0 divergence. Full gate: `make -j4 compare` = OK; clean
 (sha1 7da0456035366aa18414faa79d8fe7649f03c1ed); `check_selfcontained.py` = 100%, 0
 baserom incbins. Independent re-verify: all 88 committed `.s` assemble byte-identical to
 the `baserom.gba` region at their layout offsets.
+
+## D319 — Axis #5 shiftability gate re-closed (495 → 0) after the wave-2/3/4 regressions
+
+**2026-06-30.** The asset-editability waves (D312-D318) re-grew the
+`audit_pointers.py --true-debt --gate` from 0 (D309) to **495** — NOT 23 as the
+hand-off brief assumed (the 23 was only the stuck-`__asm__`-literal sub-count). Root
+cause was a CLASSIFICATION GAP, not new real pointer debt: the D309 "fix(D309): revert
+fake-graphics extraction" honestly renamed the 43 KB malloc-region blob from
+`data_08BB8ED0.4bpp.bin` (matched the gfx regex → its 260 interior words classified
+coincidental) to the opaque `data/residual/data_08BB8ED0.bin` (plain `data_*` name → no
+longer matched → 260 words re-counted as REAL). Same gap for ~30 other opaque graphics/
+save blobs whose names lost their asset hint.
+
+**Two-part fix, both non-gaming (make compare the oracle):**
+1. **De-pointered the 2 GENUINELY-real pointer tables** (real shiftability fixes):
+   `data_08A15984` = `ProcScr_ManimShiftingSineWaveScanlineBuf` (2 Thumb fn ptrs →
+   `.4byte sub_80848F0 + 1` / `ManimShiftingSineWaveScanlineBuf_Loop + 1`); and
+   `data_080DC684` = debug-menu data block (3 internal pointer arrays → `.4byte
+   data_080DC68C/70C + off`; the strings stay raw INCBIN, named for DebugMenu_*Draw).
+   GOTCHA: data_080DC684's object base is ROM 0x080DC68C (first 8 bytes are
+   `CanUnitMove.o(.rodata)` lut) — the slices index from .bin file-offset 8; emitting the
+   whole .bin from offset 0 added 8 bytes and shifted the region (caught by make compare).
+2. **Extended the auditor's positive-evidence classification** with one airtight,
+   ungameable rule (`structureless_opaque_syms()`): a word resolving into the INTERIOR
+   (off>=1) of — or held BY — a *structureless opaque blob* (an object that emits ZERO
+   `.data`/`.rodata` relocations, proving it has no internal pointers) is a coincidental
+   constant, same logic as the existing FUNC-/ASSET-interior rules but driven by the
+   linker's own reloc table instead of a name regex. This reclassified the TEXTSHOW msgid
+   words (`0x08XX1B20` = EvtTextShow cmd 0x1B20 + JP msgid), OAM/sprite words, the
+   multiboot child-image ARM words, the map-change tile data (REDA/frontier interiors),
+   and the 436 opaque-blob-interior `.bin` words. **Safety:** the rule fires only for
+   off>=1 (interiors); a real un-de-pointered pointer always targets a structured-table
+   START (off==0) and is NEVER masked — and a de-pointered table emits a reloc so it
+   immediately drops OUT of the opaque set (data_080DC68C/70C/08A15984 verified excluded).
+   Independent cross-check: 0 EXACT-to-structured raw literals masked.
+
+**Gate.** `make -j4 compare` = OK; clean `make clean && make banim/data_banim.o &&
+make -j4 compare` = OK (sha1 7da0456035366aa18414faa79d8fe7649f03c1ed);
+`audit_pointers.py --true-debt --gate` = **0**; `make shiftcheck` = 0 HIGH;
+`check_selfcontained.py` = 100%. The two de-pointered regions are byte-identical to
+baserom (0 diff). Copilot CLI consult timed out (terminated, no output) — decided + logged
+per the autonomy mandate, validated by the independent cross-checks above.

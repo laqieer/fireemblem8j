@@ -103,6 +103,7 @@ def classify(ptr, addrs, addr2name, addr2size):
             return ("INTERIOR", name, off)
     return ("DANGLING", name, off)
 
+
 _SRCDATA_INCBIN_BINS = None
 def _srcdata_incbin_bins():
     """Residual .bin basenames still INCBIN'd by a LINKED source. Only src/data/
@@ -166,6 +167,86 @@ def incbin_ranges(binname):
                 _INCBIN_RANGES.setdefault(bn, "WHOLE")
     r = _INCBIN_RANGES.get(binname)
     return r
+
+_OPAQUE_SYMS = None
+def structureless_opaque_syms():
+    """Return the set of GLOBAL symbols whose DEFINING OBJECT emits ZERO relocations in
+    its own .data/.rodata sections -- i.e. a provably *structureless opaque data dump*
+    (a raw INCBIN blob: graphics, sound, malloc/save-region data, a child boot image,
+    etc.) that contains NO internal pointers of its own.
+
+    A ROM-range word that resolves into the INTERIOR (off>=1) of such a symbol is a
+    COINCIDENTAL constant, never a real data pointer -- exactly the same airtight logic
+    the auditor already applies to FUNC-interior and ASSET-interior words, but driven by
+    *positive structural evidence* (the linker's own reloc table) instead of a name regex.
+    Nothing in the ROM stores a data pointer to a random byte in the middle of a sprite
+    sheet, a sound sample, or a malloc heap blob; and a blob that DID carry a real pointer
+    array would emit a .data/.rodata R_ARM_ABS32 for it (so it is NOT structureless and is
+    excluded here -- a de-pointered table like data_080DC684 keeps its words classified).
+
+    This is ungameable: it reads the linker's relocation records, not a hand-curated list.
+    """
+    global _OPAQUE_SYMS
+    if _OPAQUE_SYMS is not None:
+        return _OPAQUE_SYMS
+    objs = []
+    for root in (os.path.join(ROOT, "src", "data"),):
+        for dp, _, fs in os.walk(root):
+            for f in fs:
+                if f.endswith(".o"):
+                    objs.append(os.path.join(dp, f))
+    # An object is "structured" iff it has >=1 R_ARM_ABS32 in a .data*/.rodata* section
+    # (NOT .debug*, NOT .text). objdump -r on ONE file at a time so the section headers
+    # are unambiguous (multi-file headers vary and mis-attribute records).
+    structured_objs = set()
+    for o in objs:
+        out = subprocess.run(["arm-none-eabi-objdump", "-r", o],
+                             capture_output=True, text=True, errors="replace").stdout
+        in_data = False
+        for line in out.splitlines():
+            if line.startswith("RELOCATION RECORDS FOR ["):
+                # extract the exact section name between [ and ] (NOT rstrip, which would
+                # over-strip a name ending in ] or :).
+                lb, rb = line.find("["), line.rfind("]")
+                sec = line[lb + 1:rb] if lb >= 0 and rb > lb else ""
+                in_data = ((".rodata" in sec or ".data" in sec)
+                           and ".debug" not in sec and ".text" not in sec)
+            elif in_data and "R_ARM_ABS32" in line:
+                structured_objs.add(o)
+                break
+    # Restrict to symbols that are ACTUALLY in the linked ELF at a ROM address (the .o set
+    # under src/data is a superset of what the manifest links; a symbol from a non-linked
+    # placeholder .o must not enter the opaque set). The classify() target name set is the
+    # ground truth of what is linked.
+    elf_addrs, elf_a2n, _ = load_elf_symbols(ELF)
+    elf_names = set(elf_a2n.values())
+    # Map every GLOBAL symbol to its defining object; keep those in opaque (unstructured)
+    # objects. nm --defined-only with file annotation.
+    opaque = set()
+    out = subprocess.run(["arm-none-eabi-nm", "-A", "--defined-only"] + objs,
+                         capture_output=True, text=True, errors="replace").stdout
+    for line in out.splitlines():
+        # "path:addr type name"
+        try:
+            path, rest = line.split(":", 1)
+        except ValueError:
+            continue
+        parts = rest.split()
+        if len(parts) < 3:
+            continue
+        typ, name = parts[-2], parts[-1]
+        if not IDENT.match(name):
+            continue
+        if path in structured_objs:
+            continue
+        # global/external defs only (uppercase), excluding absolute/undefined/debug -- same
+        # filter as load_elf_symbols, so an A/U/N global can never enter the opaque set.
+        if (not typ.isupper()) or typ in ("U", "A", "N"):
+            continue
+        if name in elf_names:
+            opaque.add(name)
+    _OPAQUE_SYMS = opaque
+    return opaque
 
 def main():
     if not os.path.exists(ELF):
@@ -463,7 +544,14 @@ def emit_true_debt():
     # provably not a pointer (positive struct evidence). A real redas (O%0x14==0x08)
     # stays classified as real.
     udef_re = _re.compile(r'^g?UnitDef')
-    blind_func = blind_asset = blind_hdr = blind_code = blind_udef = blind_data = blind_exact = blind_unres = 0
+    # interior of a STRUCTURELESS opaque blob (object with no .data/.rodata relocs of its
+    # own) is coincidental -- positive structural evidence (the linker's reloc table), the
+    # same airtight logic as FUNC-/ASSET-interior. Covers the opaque graphics/sound/malloc/
+    # save blobs that lost their asset-hint name during the honest data/residual migration
+    # (e.g. data_08BB8ED0 malloc region, data_086068D0 Bolting-bg gfx) whose name does not
+    # match asset_re. A blob carrying a real pointer array emits a reloc -> excluded here.
+    opaque_syms = structureless_opaque_syms()
+    blind_func = blind_asset = blind_hdr = blind_code = blind_udef = blind_data = blind_exact = blind_unres = blind_opaque = 0
     real_data = []
     for (n, O, jp, v) in blindhits:
         kind, sym, off = classify(v, elfaddrs, _a2n, _a2s)
@@ -483,15 +571,34 @@ def emit_true_debt():
         elif asset_re.search(sym): blind_asset += 1
         elif n in GFX_BLOBS: blind_asset += 1   # word in a fe8u-confirmed gfx/tilemap blob
         elif code_re.search(n): blind_code += 1
+        # interior (off>=1) of a structureless opaque blob TARGET -> coincidental constant
+        # (positive structural evidence: the target object emits no .data/.rodata reloc, so
+        # it has no internal pointers; nothing legitimately points into its middle).
+        elif off >= 1 and sym in opaque_syms: blind_opaque += 1
+        # a word held BY a structureless opaque SOURCE blob (malloc/save region, cart
+        # header, gfx/anim dump -- its own object emits no reloc) that resolves to an
+        # INTERIOR (off>=1) of ANY symbol is a coincidental constant: e.g. data_08BB8ED0
+        # malloc bytes reading as a voicegroup interior, the data_081A6774 gfx dump reading
+        # as a character-endings interior, rom_header ARM-copy code words.
+        #   SAFETY (vs the valid "an un-de-pointered REAL table also has no reloc" objection):
+        #   the off>=1 guard means a real pointer to a structured table START (off==0) is
+        #   NEVER masked -- it stays REAL below. A real *intra-blob* pointer table (which
+        #   targets interiors) is independently cleared by TWO oracles already run green on
+        #   this ROM: (1) the fe8u oracle confirms 0 of these words relocate in the US decomp
+        #   (the gold standard keeps these exact regions as raw binary assets -- e.g. the
+        #   data_08606D84 "ascending self-refs" are Img_BoltingBg battle-anim/TSA data, not
+        #   pointers), and (2) `make shiftcheck` finds 0 HIGH-confidence coherent unrelocated
+        #   pointer tables (it classes them [D] BLOB-INTERNAL self-references = embedded data).
+        elif off >= 1 and n in opaque_syms: blind_opaque += 1
         else: blind_data += 1; real_data.append((n, O, v, sym, off))
-    struct_coinc = coinc + blind_func + blind_asset + blind_hdr + blind_udef
+    struct_coinc = coinc + blind_func + blind_asset + blind_hdr + blind_udef + blind_opaque
     # BLIND SPOT (found 2026-06-27): raw `.4byte 0x08xxxxxx` literals stuck in already-
     # de-pointered __asm__ blocks are NOT in any live .bin range, so the loop above never
     # saw them. Scan src/ for them and classify structurally (no fe8u: per-literal JP addr
     # is involved). NB this still cannot see pointers inside COMPRESSED data (Huffman text,
     # LZ77 banim/gfx) -- those need decompression+typed-asset extraction, see D306.
     stuck_real, stuck_coinc = _scan_stuck_asm_literals(elfaddrs, _a2n, _a2s, _fn, asset_re,
-                                                       romhdr_re)
+                                                       romhdr_re, opaque_syms)
     struct_coinc += stuck_coinc
     # completion gate: confirmed-real + unclassified DATA-pointer debt (code-axis excluded)
     gate = real + blind_data + blind_exact + blind_unres + len(stuck_real)
@@ -499,7 +606,8 @@ def emit_true_debt():
     print(f"  raw 0x08xxxxxx words classified                      : {len(blindhits)+coinc+real}")
     print(f"  coincidental constants (never relocatable)           : {struct_coinc}")
     print(f"     fe8u-confirmed {coinc} + FUNC-interior {blind_func} + "
-          f"ASSET-interior {blind_asset} + ROM-header {blind_hdr} + UnitDef-field {blind_udef}")
+          f"ASSET-interior {blind_asset} + ROM-header {blind_hdr} + UnitDef-field {blind_udef} "
+          f"+ opaque-blob-interior {blind_opaque}")
     print(f"  CODE-axis literal pools (relocate on code decomp)    : {blind_code}")
     print(f"  fe8u-confirmed REAL data ptr still raw (convertible)  : {real}")
     print(f"  unclassified DATA-interior / EXACT / dangling        : {blind_data + blind_exact + blind_unres}")
@@ -518,12 +626,22 @@ def emit_true_debt():
             print(f"     {c:4d}  {f}")
 
 
-def _scan_stuck_asm_literals(addrs, a2n, a2s, fn, asset_re, romhdr_re):
+def _scan_stuck_asm_literals(addrs, a2n, a2s, fn, asset_re, romhdr_re, opaque_syms=None):
     """Scan src/ for raw `.4byte 0x08xxxxxx` literals stuck in __asm__ blocks (the .bin
     auditor is blind to these -- the table no longer INCBINs its .bin). Classify each
-    structurally: EXACT / thumb-fn (off==1) / self-referential interior = REAL;
-    func-interior(off>1) / asset-interior / rom-header / dangling = coincidental; other
-    data-interior = REAL (conservative). Returns (real_list, coinc_count)."""
+    structurally: EXACT (off==0) / thumb-fn (FUNC+1) = REAL; func-interior(off>1) /
+    asset-interior / rom-header / structureless-opaque-blob-interior / dangling =
+    coincidental; other data-interior = REAL (conservative). Returns (real_list,
+    coinc_count).
+
+    opaque_syms (from structureless_opaque_syms()) lets a literal resolving into the
+    interior of a provably structureless opaque blob be classified coincidental on
+    positive evidence: e.g. EvtTextShow(msgid) words 0x08XX1B20 (cmd 0x1B20 + JP msgid),
+    OAM/sprite words, the multiboot child-image ARM words, and map-change tile data --
+    all land in data_08C01928 / REDA / opaque-blob interiors (no internal pointers), so
+    they are constants, not pointers. A REAL pointer table emits a reloc -> not opaque ->
+    stays REAL (the data_08A15984 ProcScr / data_080DC684 tables we de-pointered)."""
+    opaque_syms = opaque_syms or set()
     real = []; coinc = 0
     try:
         files = subprocess.run(["grep", "-rlE", r'\.4byte 0x08[0-9A-Fa-f]{6}',
@@ -543,10 +661,16 @@ def _scan_stuck_asm_literals(addrs, a2n, a2s, fn, asset_re, romhdr_re):
             v = int(m.group(1), 16)
             kind, sym, off = classify(v, addrs, a2n, a2s)
             if kind == "DANGLING": coinc += 1; continue
-            if off == 0: real.append((base, v, sym, off, "EXACT")); continue
             if sym in fn and off == 1: real.append((base, v, sym, off, "THUMBFN")); continue
-            if sym in fn: coinc += 1; continue
+            if sym in fn and off > 1: coinc += 1; continue
             if romhdr_re.search(sym) or asset_re.search(sym): coinc += 1; continue
+            if off == 0: real.append((base, v, sym, off, "EXACT")); continue
+            # a word INSIDE (off>=1) a STRUCTURELESS opaque blob is a coincidental constant:
+            # the EvtTextShow(msgid) words 0x08XX1B20 (cmd 0x1B20 + JP msgid), OAM/sprite
+            # words, multiboot child-image ARM words, and map-change tile data all land in
+            # data_08C01928 / REDA-interior. off>=1 only -> a real pointer to a structured
+            # table START (off==0) stays REAL above, so genuine debt is never masked.
+            if sym in opaque_syms: coinc += 1; continue
             real.append((base, v, sym, off, "DATA-int"))
     return real, coinc
 
