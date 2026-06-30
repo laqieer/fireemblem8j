@@ -1,12 +1,65 @@
 #include "global.h"
+#include "ctc.h"
 
 /* Migrated from asm/dat_worldmap_gmapunit_p1624.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+ * gSprite_SavemenuData_* OAM object-lists ported VERBATIM from fe8u src/savemenu_data.c
+ * as editable typed-C (u16 OAM arrays); byte-identical to the original .bin.
+ * Each symbol kept in the original section/order.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1624") u8 gSprite_SavemenuData_17[] = INCBIN_U8("data/residual/gSprite_SavemenuData_17.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1624") u8 gSprite_SavemenuData_18[] = INCBIN_U8("data/residual/gSprite_SavemenuData_18.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1624") u8 gSprite_SavemenuData_19[] = INCBIN_U8("data/residual/gSprite_SavemenuData_19.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1624") u8 gSprite_SavemenuData_20[] = INCBIN_U8("data/residual/gSprite_SavemenuData_20.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1624") u8 gSprite_SavemenuData_21[] = INCBIN_U8("data/residual/gSprite_SavemenuData_21.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1624") u8 gSprite_SavemenuData_22[] = INCBIN_U8("data/residual/gSprite_SavemenuData_22.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1624") u16 gSprite_SavemenuData_17[] =
+{
+    3,
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32, OAM2_CHR(0x2C0) + OAM2_LAYER(2),
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32 + OAM1_X(64), OAM2_CHR(0x2C8) + OAM2_LAYER(2),
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32 + OAM1_X(128), OAM2_CHR(0x2D0) + OAM2_LAYER(2),
+};
+
+SECTION(".rodata.dat_worldmap_gmapunit_p1624") u16 gSprite_SavemenuData_18[] =
+{
+    3,
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32 + OAM1_AFFINE_ID(1), OAM2_CHR(0x2C0) + OAM2_LAYER(2),
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32 + OAM1_AFFINE_ID(1) + OAM1_X(64), OAM2_CHR(0x2C8) + OAM2_LAYER(2),
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32 + OAM1_AFFINE_ID(1) + OAM1_X(128), OAM2_CHR(0x2D0) + OAM2_LAYER(2),
+};
+
+SECTION(".rodata.dat_worldmap_gmapunit_p1624") u16 gSprite_SavemenuData_19[] =
+{
+    3,
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32 + OAM1_AFFINE_ID(2), OAM2_CHR(0x2C0) + OAM2_LAYER(2),
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32 + OAM1_AFFINE_ID(2) + OAM1_X(64), OAM2_CHR(0x2C8) + OAM2_LAYER(2),
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32 + OAM1_AFFINE_ID(2) + OAM1_X(128), OAM2_CHR(0x2D0) + OAM2_LAYER(2),
+};
+
+SECTION(".rodata.dat_worldmap_gmapunit_p1624") u16 gSprite_SavemenuData_20[] =
+{
+    6,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16, OAM2_CHR(0x340) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(32), OAM2_CHR(0x344) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(64), OAM2_CHR(0x348) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(96), OAM2_CHR(0x34C) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(128), OAM2_CHR(0x350) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(160), OAM2_CHR(0x354) + OAM2_LAYER(2),
+};
+
+SECTION(".rodata.dat_worldmap_gmapunit_p1624") u16 gSprite_SavemenuData_21[] =
+{
+    6,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_AFFINE_ID(1), OAM2_CHR(0x380) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_AFFINE_ID(1) + OAM1_X(32), OAM2_CHR(0x384) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_AFFINE_ID(1) + OAM1_X(64), OAM2_CHR(0x388) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_AFFINE_ID(1) + OAM1_X(96), OAM2_CHR(0x38C) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_AFFINE_ID(1) + OAM1_X(128), OAM2_CHR(0x390) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_AFFINE_ID(1) + OAM1_X(160), OAM2_CHR(0x394) + OAM2_LAYER(2),
+};
+
+SECTION(".rodata.dat_worldmap_gmapunit_p1624") u16 gSprite_SavemenuData_22[] =
+{
+    6,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_AFFINE_ID(2), OAM2_CHR(0x3C0) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_AFFINE_ID(2) + OAM1_X(32), OAM2_CHR(0x3C4) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_AFFINE_ID(2) + OAM1_X(64), OAM2_CHR(0x3C8) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_AFFINE_ID(2) + OAM1_X(96), OAM2_CHR(0x3CC) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_AFFINE_ID(2) + OAM1_X(128), OAM2_CHR(0x3D0) + OAM2_LAYER(2),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_AFFINE_ID(2) + OAM1_X(160), OAM2_CHR(0x3D4) + OAM2_LAYER(2),
+};
