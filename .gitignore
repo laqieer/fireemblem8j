@@ -143,6 +143,9 @@ src/data/**/*.s
 # source replacing the Ap_WmHightLightMap*.bin INCBIN wrappers (axis #6, wave7).
 !src/data/Ap_WmHightLightMap3_ref/*.s
 !src/data/Ap_WmHightLightMap6_ref/*.s
+# ...and the prep-screen funds-banner AP-motion table (AP_DrawPreparationsBanner,
+# JP-only) interleaved with Img_PrepFunds.4bpp.lz, like fe8u's interleaved AP .s.
+!src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1601.s
 # NON_MATCHING staging (D26): the readable C in src/nonmatching/*.c is tracked,
 # but the agbcc .s intermediate from `make nonmatching` is a build artifact.
 src/nonmatching/*.s
