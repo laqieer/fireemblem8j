@@ -758,7 +758,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_banim_p111.s \
                            asm/dat_data_banim_p110.s \
                            asm/dat_worldmap_gmapunit_p895.s \
-                           asm/dat_worldmap_gmapunit_p270.s \
                            asm/dat_worldmap_gmapunit_p1410.s \
                            asm/dat_worldmap_gmapunit_p1404.s \
                            asm/dat_data_banim_p133.s \
@@ -766,7 +765,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1401.s \
                            asm/dat_worldmap_gmapunit_p781.s \
                            asm/dat_data_banim_p82.s \
-                           asm/dat_worldmap_gmapunit_p375.s \
                            asm/dat_worldmap_gmapunit_p751.s \
                            asm/dat_worldmap_skirmish.s \
                            asm/dat_worldmap_gmapunit_p754.s \
@@ -776,21 +774,16 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_const_data_unit_icon_move_p58.s \
                            asm/dat_data_5B65C0_p0.s \
                            asm/dat_const_data_unit_icon_move_p63.s \
-                           asm/dat_worldmap_gmapunit_p90.s \
                            asm/dat_worldmap_gmapunit_p1375.s \
-                           asm/dat_worldmap_gmapunit_p334.s \
-                           asm/dat_worldmap_gmapunit_p325.s \
                            asm/dat_worldmap_gmapunit_p1403.s \
                            asm/dat_worldmap_gmapunit_p1399.s \
                            asm/dat_data_5AA96C_p1.s \
-                           asm/dat_worldmap_gmapunit_p386.s \
                            asm/dat_data_banim_p149.s \
                            asm/dat_worldmap_gmapunit_p1639.s \
                            asm/dat_worldmap_gmapunit_p785.s \
                            asm/dat_worldmap_gmapunit_p783.s \
                            asm/dat_worldmap_gmapunit_p775.s \
                            asm/dat_worldmap_gmapunit_p684.s \
-                           asm/dat_worldmap_gmapunit_p638.s \
                            asm/dat_banim_ekrtriangle_1.s \
                            asm/dat_worldmap_gmapunit_p1351.s \
                            asm/dat_data_banim_p169.s \
@@ -801,57 +794,30 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_banim_ekrtriangle_7.s \
                            asm/dat_worldmap_gmapunit_p1383.s \
                            asm/dat_worldmap_gmapunit_p1371.s \
-                           asm/dat_worldmap_gmapunit_p228.s \
                            asm/dat_worldmap_gmapunit_p1365.s \
-                           asm/dat_worldmap_gmapunit_p264.s \
-                           asm/dat_worldmap_gmapunit_p260.s \
                            asm/dat_sProcScr_DungeonRecord_UpdateNewRecordValues_ref.s \
                            asm/dat_worldmap_gmapunit_p7.s \
-                           asm/dat_worldmap_gmapunit_p311.s \
-                           asm/dat_worldmap_gmapunit_p210.s \
                            asm/dat_data_bg_p17.s \
-                           asm/dat_worldmap_gmapunit_p423.s \
                            asm/dat_worldmap_gmapunit_p830.s \
-                           asm/dat_worldmap_gmapunit_p96.s \
-                           asm/dat_worldmap_gmapunit_p184.s \
-                           asm/dat_worldmap_gmapunit_p173.s \
-                           asm/dat_worldmap_gmapunit_p153.s \
-                           asm/dat_worldmap_gmapunit_p134.s \
-                           asm/dat_worldmap_gmapunit_p66.s \
-                           asm/dat_worldmap_gmapunit_p29.s \
-                           asm/dat_worldmap_gmapunit_p313.s \
                            asm/dat_worldmap_gmapunit_p828.s \
-                           asm/dat_worldmap_gmapunit_p328.s \
                            asm/dat_banim_ekrdragonfx_10.s \
                            asm/dat_worldmap_node_data_gf.s \
                            asm/dat_worldmap_gmapunit_p1636.s \
                            asm/dat_worldmap_gmapunit_p1117.s \
                            asm/dat_worldmap_gmapunit_p1037.s \
                            asm/dat_worldmap_gmapunit_p702.s \
-                           asm/dat_worldmap_gmapunit_p58.s \
                            asm/dat_worldmap_gmapunit_p946.s \
-                           asm/dat_worldmap_gmapunit_p431.s \
                            asm/dat_data_banim_p150.s \
                            asm/dat_anim_trap_gas.s \
                            asm/dat_worldmap_gmapunit_p758.s \
                            asm/dat_ProcScr_LASurrender_HandleUnitDeaths_ref.s \
-                           asm/dat_worldmap_gmapunit_p661.s \
-                           asm/dat_worldmap_gmapunit_p648.s \
-                           asm/dat_worldmap_gmapunit_p647.s \
-                           asm/dat_worldmap_gmapunit_p436.s \
                            asm/dat_data_bg_p10.s \
-                           asm/dat_worldmap_gmapunit_p419.s \
                            asm/dat_worldmap_gmapunit_p1655.s \
                            asm/dat_worldmap_gmapunit_p1549.s \
-                           asm/dat_worldmap_gmapunit_p655.s \
-                           asm/dat_worldmap_gmapunit_p633.s \
-                           asm/dat_worldmap_gmapunit_p629.s \
                            asm/dat_worldmap_gmapunit_p1058.s \
                            asm/dat_data_bg_p5.s \
                            asm/dat_worldmap_gmapunit_p936.s \
                            asm/dat_worldmap_gmapunit_p753.s \
-                           asm/dat_worldmap_gmapunit_p664.s \
-                           asm/dat_worldmap_gmapunit_p559.s \
                            asm/dat_data_banim_p167.s \
                            asm/dat_data_banim_p139.s \
                            asm/dat_ProcScr_MapAnimDefaultItemEffect_ref.s \
@@ -1024,10 +990,7 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_EventScr_Ch10B_2_ref.s \
                            asm/dat_EventScr_Ch10B_1_ref.s \
                            asm/dat_Ch9EphMapChanges_ref.s \
-                           asm/dat_worldmap_gmapunit_p369.s \
-                           asm/dat_worldmap_gmapunit_p368.s \
                            asm/dat_const_data_unit_icon_move_p13.s \
-                           asm/dat_worldmap_gmapunit_p517.s \
                            asm/dat_TileAnimations3_ref.s \
                            asm/dat_TileAnimations2_ref.s \
                            asm/dat_EventScr_Ch5_10_ref.s \
@@ -1036,8 +999,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_anim_mapanim_statgain.s \
                            asm/dat_TowerOfValni7MapChanges_ref.s \
                            asm/dat_TowerOfValni6MapChanges_ref.s \
-                           asm/dat_worldmap_gmapunit_p305.s \
-                           asm/dat_worldmap_gmapunit_p197.s \
                            asm/dat_gProcScr_BKSEL_ref.s \
                            asm/dat_gClassReelData_ref.s \
                            asm/dat_anim_mapanim_torch.s \
@@ -1046,26 +1007,15 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_Ch18MapChanges_ref.s \
                            asm/dat_Ch16MapChanges_ref.s \
                            asm/dat_Ch15MapChanges_ref.s \
-                           asm/dat_worldmap_gmapunit_p92.s \
-                           asm/dat_worldmap_gmapunit_p151.s \
-                           asm/dat_worldmap_gmapunit_p118.s \
-                           asm/dat_worldmap_gmapunit_p114.s \
-                           asm/dat_worldmap_gmapunit_p111.s \
-                           asm/dat_worldmap_gmapunit_p81.s \
-                           asm/dat_worldmap_gmapunit_p24.s \
                            asm/dat_anim_player_rank_fog.s \
                            asm/dat_LagdouRuins8MapChanges_ref.s \
                            asm/dat_LagdouRuins5MapChanges_ref.s \
                            asm/dat_LagdouRuins3MapChanges_ref.s \
                            asm/dat_sProc_BMVSync_ref.s \
                            asm/dat_ProcScr_Popup_ref.s \
-                           asm/dat_worldmap_gmapunit_p251.s \
-                           asm/dat_worldmap_gmapunit_p230.s \
                            asm/dat_worldmap_gmapunit_p1652.s \
                            asm/dat_worldmap_gmapunit_p763.s \
                            asm/dat_worldmap_gmapunit_p762.s \
-                           asm/dat_worldmap_gmapunit_p460.s \
-                           asm/dat_worldmap_gmapunit_p422.s \
                            asm/dat_Ch14EphraimMapChanges_ref.s \
                            asm/dat_gGameOptions_ref.s \
                            asm/dat___malloc_av__ref.s \
@@ -1074,8 +1024,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1005.s \
                            asm/dat_worldmap_gmapunit_p784.s \
                            asm/dat_worldmap_gmapunit_p780.s \
-                           asm/dat_worldmap_gmapunit_p486.s \
-                           asm/dat_worldmap_gmapunit_p60.s \
                            asm/dat_UnitDef_Ch21BEnemy_1_ref.s \
                            asm/dat_UnitDef_Ch19BEnemy_8_ref.s \
                            asm/dat_UnitDef_Ch16AMixed_1_ref.s \
@@ -1108,10 +1056,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_Ch19EphraimEventData_ref.s \
                            asm/dat_Ch16EphraimEventData_ref.s \
                            asm/dat_Ch11EirikaMapChanges_ref.s \
-                           asm/dat_worldmap_gmapunit_p513.s \
-                           asm/dat_worldmap_gmapunit_p488.s \
-                           asm/dat_worldmap_gmapunit_p478.s \
-                           asm/dat_worldmap_gmapunit_p418.s \
                            asm/dat_impure_data_ref.s \
                            asm/dat_gWMPathData_ref.s \
                            asm/dat_ObjectType9_ref.s \
@@ -1142,13 +1086,10 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_UnitDef_Ch14BAlly_7_ref.s \
                            asm/dat_UnitDef_Ch10AAlly_1_ref.s \
                            asm/dat_FinalEphraimEvents1_ref.s \
-                           asm/dat_worldmap_gmapunit_p654.s \
-                           asm/dat_worldmap_gmapunit_p483.s \
                            asm/dat_worldmap_gmapunit_p1548.s \
                            asm/dat_worldmap_gmapunit_p1347.s \
                            asm/dat_worldmap_gmapunit_p1341.s \
                            asm/dat_worldmap_gmapunit_p1336.s \
-                           asm/dat_worldmap_gmapunit_p363.s \
                            asm/dat_UnitDef_Ch9AAlly_0_ref.s \
                            asm/dat_UnitDef_Ch8Enemy_4_ref.s \
                            asm/dat_UnitDef_Ch8Enemy_3_ref.s \
@@ -1172,7 +1113,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_UnitDef_Ch11AMixed_ref.s \
                            asm/dat_worldmap_gmapunit_p1539.s \
                            asm/dat_worldmap_gmapunit_p1332.s \
-                           asm/dat_worldmap_gmapunit_p344.s \
                            asm/dat_worldmap_gmapunit_p1319.s \
                            asm/dat_UnitDef_Ch8Ally_1_ref.s \
                            asm/dat_UnitDef_Ch8Ally_0_ref.s \
@@ -1188,7 +1128,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1352.s \
                            asm/dat_worldmap_gmapunit_p1334.s \
                            asm/dat_worldmap_gmapunit_p790.s \
-                           asm/dat_worldmap_gmapunit_p342.s \
                            asm/dat_data_bg_p38.s \
                            asm/dat_data_bg_p35.s \
                            asm/dat_data_bg_p33.s \
@@ -1211,8 +1150,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1325.s \
                            asm/dat_worldmap_gmapunit_p1004.s \
                            asm/dat_data_bg_p4.s \
-                           asm/dat_worldmap_gmapunit_p557.s \
-                           asm/dat_worldmap_gmapunit_p343.s \
                            asm/dat_data_bg_p36.s \
                            asm/dat_worldmap_gmapunit_p1397.s \
                            asm/dat_worldmap_gmapunit_p1396.s \
@@ -1225,7 +1162,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1335.s \
                            asm/dat_worldmap_gmapunit_p1320.s \
                            asm/dat_data_bg_p3.s \
-                           asm/dat_worldmap_gmapunit_p356.s \
                            asm/dat_TileAnimations1_ref.s \
                            asm/dat_EventScr_Ch5_11_ref.s \
                            asm/dat_EventScr_Ch4_10_ref.s \
@@ -1234,9 +1170,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1400.s \
                            asm/dat_worldmap_gmapunit_p1389.s \
                            asm/dat_worldmap_gmapunit_p1386.s \
-                           asm/dat_worldmap_gmapunit_p365.s \
-                           asm/dat_worldmap_gmapunit_p351.s \
-                           asm/dat_worldmap_gmapunit_p341.s \
                            asm/dat_data_bg_p27.s \
                            asm/dat_data_bg_p18.s \
                            asm/dat_worldmap_gmapunit_p1576.s \
@@ -2167,7 +2100,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/data_08A66080.s \
                            asm/data_08A63894.s \
                            asm/dat_data_banim_p19.s \
-                           asm/dat_worldmap_gmapunit_p275.s \
                            asm/data_08B25710.s \
                            asm/dat_classchg_data.s \
                            asm/dat_worldmap_gmapunit_p1572.s \
