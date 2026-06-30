@@ -25,9 +25,6 @@ src/data/PopupScr_ItemStolen_ref/dat_PopupScr_ItemStolen_ref.o: data/residual/Po
 src/data/PopupScr_ItemWasPilfered_ref/dat_PopupScr_ItemWasPilfered_ref.o: data/residual/PopupScr_ItemWasPilfered.bin
 src/data/PopupScr_StoleItem_ref/dat_PopupScr_StoleItem_ref.o: data/residual/PopupScr_StoleItem.bin
 src/data/PopupScr_WpnBroken_ref/dat_PopupScr_WpnBroken_ref.o: data/residual/PopupScr_WpnBroken.bin
-src/data/UnitDef_Ch14BAlly_7_ref/dat_UnitDef_Ch14BAlly_7_ref.o: data/residual/UnitDef_Ch14BAlly_7.bin
-src/data/UnitDef_Ch18BAlly_2_ref/dat_UnitDef_Ch18BAlly_2_ref.o: data/residual/UnitDef_Ch18BAlly_2.bin
-src/data/UnitDef_Ch21BEnemy_1_ref/dat_UnitDef_Ch21BEnemy_1_ref.o: data/residual/UnitDef_Ch21BEnemy_1.bin
 src/data/anim_085A0EA0/dat_anim_085A0EA0.o: data/residual/g085A0EA0_anim_0.bin data/residual/g085A0EA0_anim_1.bin data/residual/g085A0EA0_anim_list.bin data/residual/g085A0EA0_frame_0.bin data/residual/g085A0EA0_frame_1.bin data/residual/g085A0EA0_frame_2.bin data/residual/g085A0EA0_frame_3.bin data/residual/g085A0EA0_frame_4.bin data/residual/g085A0EA0_frame_5.bin data/residual/g085A0EA0_frame_6.bin data/residual/g085A0EA0_frame_list.bin
 src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight.o: graphics/misc_gfx3/Img_WmHightLightMap2.4bpp.lz graphics/misc_gfx3/Img_WmHightLightMapFrecia.4bpp.lz graphics/misc_gfx3/Pal_WmHighLightNationMap.gbapal
 src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight_p5.o: graphics/misc_gfx3/Img_WmHightLightMap4.4bpp.lz

@@ -1,8 +1,41 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
 
-/* Region-different data (JP 0x08a6c000, read from a funcmap-aligned code literal;
- * US 0x088cb448). Its bytes do not decode as a clean array of struct UnitDefinition
- * (the would-be `redas` words are not pointers into a REDA pool), so unlike the other
- * UnitDef_Ch* tables it is NOT typed; kept as a byte-identical INCBIN. */
+/* MISLABELED as struct UnitDefinition UnitDef_Ch21BEnemy_1 (JP 0x08a6c000, read from a
+ * funcmap-aligned code literal) -- the bytes are actually an EVENT SCRIPT, not a unit
+ * placement table (the would-be `redas` words are not REDA pointers). Decoded to the
+ * editable EAstdlib EventListScr macro form by scripts/eventscr_disasm.py; expands
+ * byte-identical to baserom (gated by `make compare`). The public symbol name is kept
+ * (eventcall.h still prototypes it as struct UnitDefinition[] -- a separate TU; the
+ * linker only sees the byte-identical object). */
 
-SECTION(".rodata.dat_UnitDef_Ch21BEnemy_1_ref") u8 UnitDef_Ch21BEnemy_1[] = INCBIN_U8("data/residual/UnitDef_Ch21BEnemy_1.bin");
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
+
+SECTION(".rodata.dat_UnitDef_Ch21BEnemy_1_ref") EventListScr UnitDef_Ch21BEnemy_1[] = {
+    MUSC(0x41)
+    SVAL(EVT_SLOT_2, 0x4E)
+    CALL(0x8A60420)
+    TEXTSHOW(0xBB5)
+    TEXTEND
+    REMA
+    CHECK_ALIVE(0x22)
+    BEQ(0, 0xC, 0)
+    CHECK_ALIVE(0x21)
+    BEQ(0, 0xC, 0)
+    CHECK_ALIVE(6)
+    BEQ(0, 0xC, 0)
+    CHECK_ALIVE(5)
+    BEQ(0, 0xC, 0)
+    CHECK_ALIVE(3)
+    BEQ(0, 0xC, 0)
+    TEXTSHOW(0xBB6)
+    TEXTEND
+    REMA
+    LABEL(0)
+    CHECK_ALIVE(0x20)
+    BEQ(1, 0xC, 0)
+};
+
