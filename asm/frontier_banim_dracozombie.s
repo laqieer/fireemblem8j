@@ -14,19 +14,19 @@ frontier_banim_dracozombie_000_77BBB8:
 @ banim_dracozombie region-different data, JP 0x0877bc6c..0x0877ca18 (3500 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_dracozombie_001_77BC6C
 frontier_banim_dracozombie_001_77BC6C:
-	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_001_77BC6C.bin.lz"
+	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_001_77BC6C.4bpp.lz"
 
 	.section .data.frontier_banim_dracozombie.gap2, "a", %progbits
 @ banim_dracozombie region-different data, JP 0x0877ca18..0x0877dbcc (4532 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_dracozombie_002_77CA18
 frontier_banim_dracozombie_002_77CA18:
-	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_002_77CA18.bin.lz"
+	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_002_77CA18.4bpp.lz"
 
 	.section .data.frontier_banim_dracozombie.gap3, "a", %progbits
 @ banim_dracozombie region-different data, JP 0x0877dbcc..0x0877eab4 (3816 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_dracozombie_003_77DBCC
 frontier_banim_dracozombie_003_77DBCC:
-	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_003_77DBCC.bin.lz"
+	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_003_77DBCC.4bpp.lz"
 
 	.section .data.frontier_banim_dracozombie.gap4, "a", %progbits
 @ banim_dracozombie region-different data, JP 0x0877eab4..0x0877f654 (2976 B); table-pinned (not code-named), byte-perfect incbin.
@@ -116,49 +116,49 @@ frontier_banim_dracozombie_017_78048C:
 @ banim_dracozombie region-different data, JP 0x08781cbc..0x087832b4 (5624 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_dracozombie_018_781CBC
 frontier_banim_dracozombie_018_781CBC:
-	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_018_781CBC.bin.lz"
+	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_018_781CBC.4bpp.lz"
 
 	.section .data.frontier_banim_dracozombie.gap19, "a", %progbits
 @ banim_dracozombie region-different data, JP 0x087832b4..0x087844f0 (4668 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_dracozombie_019_7832B4
 frontier_banim_dracozombie_019_7832B4:
-	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_019_7832B4.bin.lz"
+	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_019_7832B4.4bpp.lz"
 
 	.section .data.frontier_banim_dracozombie.gap20, "a", %progbits
 @ banim_dracozombie region-different data, JP 0x087844f0..0x08785c08 (5912 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_dracozombie_020_7844F0
 frontier_banim_dracozombie_020_7844F0:
-	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_020_7844F0.bin.lz"
+	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_020_7844F0.4bpp.lz"
 
 	.section .data.frontier_banim_dracozombie.gap21, "a", %progbits
 @ banim_dracozombie region-different data, JP 0x08785c08..0x087875a0 (6552 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_dracozombie_021_785C08
 frontier_banim_dracozombie_021_785C08:
-	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_021_785C08.bin.lz"
+	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_021_785C08.4bpp.lz"
 
 	.section .data.frontier_banim_dracozombie.gap22, "a", %progbits
 @ banim_dracozombie region-different data, JP 0x087875a0..0x08788cc4 (5924 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_dracozombie_022_7875A0
 frontier_banim_dracozombie_022_7875A0:
-	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_022_7875A0.bin.lz"
+	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_022_7875A0.4bpp.lz"
 
 	.section .data.frontier_banim_dracozombie.gap23, "a", %progbits
 @ banim_dracozombie region-different data, JP 0x08788cc4..0x0878a0d0 (5132 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_dracozombie_023_788CC4
 frontier_banim_dracozombie_023_788CC4:
-	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_023_788CC4.bin.lz"
+	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_023_788CC4.4bpp.lz"
 
 	.section .data.frontier_banim_dracozombie.gap24, "a", %progbits
 @ banim_dracozombie region-different data, JP 0x0878a0d0..0x0878af74 (3748 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_dracozombie_024_78A0D0
 frontier_banim_dracozombie_024_78A0D0:
-	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_024_78A0D0.bin.lz"
+	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_024_78A0D0.4bpp.lz"
 
 	.section .data.frontier_banim_dracozombie.gap25, "a", %progbits
 @ banim_dracozombie region-different data, JP 0x0878af74..0x0878be1c (3752 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_banim_dracozombie_025_78AF74
 frontier_banim_dracozombie_025_78AF74:
-	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_025_78AF74.bin.lz"
+	.incbin "graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_025_78AF74.4bpp.lz"
 
 	.section .data.frontier_banim_dracozombie.gap26, "a", %progbits
 @ banim_dracozombie region-different data, JP 0x0878be1c..0x0878cea8 (4236 B); table-pinned (not code-named), byte-perfect incbin.
