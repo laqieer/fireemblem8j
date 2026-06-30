@@ -215,6 +215,10 @@ AIF2PCM    := tools/aif2pcm/aif2pcm$(EXE)
 MID2AGB    := tools/mid2agb/mid2agb$(EXE)
 # gbagfx converts both tiles and palettes; PAL2GBAPAL aliases it for the .pal rule.
 PAL2GBAPAL := $(GBAGFX)
+# tmap2tsa (vendored from ../fireemblem8u/scripts): turns an editable .tmap tilemap
+# into the ROM's .bin TSA (width/height-prefixed, line-reversed). Used by the
+# explicit graphics/gmapunit/Tsa_Statscreen*.bin rules below.
+TMAP2TSA   := scripts/tmap2tsa.py
 
 # scaninc (vendored from ../fireemblem8u/tools/scaninc): scans a .s/.c for its
 # .include/#include deps so editing an .inc rebuilds the dependent object. Used by
@@ -2554,6 +2558,19 @@ graphics/map/%.S: ;
 %.lz: % ; $(GBAGFX) $< $@ $(LZ_FLAGS)
 %.rl: % ; $(GBAGFX) $< $@
 
+# Statscreen TSAs built from editable .tmap tilemaps (fireemblem8u source), not
+# committed .bin blobs. Per-file --width/--height (zero-based) match the ROM TSA
+# dimensions; tmap2tsa output is byte-identical to the JP ROM (gated by make
+# compare). The %.bin.lz chain then LZ-compresses these via the generic %.lz rule.
+graphics/gmapunit/Tsa_StatscreenBG.bin: %.bin: %.tmap
+	$(TMAP2TSA) $< $@ --width 29 --height 19
+
+graphics/gmapunit/Tsa_StatscreenHalo.bin: %.bin: %.tmap
+	$(TMAP2TSA) $< $@ --width 17 --height 6
+
+graphics/gmapunit/Tsa_StatscreenEquipmentBG.bin: %.bin: %.tmap
+	$(TMAP2TSA) $< $@ --width 15 --height 5
+
 # --- FE6 SIO multiboot payload, built from source (mgfembp submodule) ----------
 # asm/fe6sio.s (the FE8J link-arena FE6 SIO routines + ROM header) incbins
 # fe6sio_payload.bin.lz: the LZ77-compressed FE6 multiboot program FE8 sends to a
@@ -2624,6 +2641,45 @@ graphics/map/%.bin: graphics/map/%.S graphics/map/tile_config.inc graphics/map/t
 %.feimg3.bin %.fetsa3.bin &: %.png ; $(FETSATOOL) $< $*.feimg3.bin $*.fetsa3.bin
 %.feimg4.bin %.fetsa4.bin &: %.png ; $(FETSATOOL) $< $*.feimg4.bin $*.fetsa4.bin
 
+# OpAnim / IntelligentSystems TSA tilemaps, built from editable .png source via
+# FETSATOOL (fireemblem8u graphics_file_rules.mk per-asset rules). These keep the
+# JP Tsa_<name>.bin output name (the INCBIN target is the <name>.bin.lz produced by
+# the generic %.lz rule), so the image-output arg names a throwaway .feimg<N>.bin
+# only to select the dedup method (4 for OpAnim, 2 for IntelligentSystems). The
+# per-asset --insert_indexes / --flip_y_indexes / --num_tiles flags are
+# load-bearing (the generic %.fetsa4 rule's no-flag output does NOT byte-match);
+# tmap output is byte-identical to the JP ROM (gated by make compare). The matching
+# .feimg<N>.bin image side is the separate Img_<name> PNG chain (already built).
+graphics/misc_gfx/Tsa_OpAnimWorldMap.bin: graphics/opanim/OpAnimWorldMap.png
+	$(FETSATOOL) $< $(@D)/Tsa_OpAnimWorldMap.feimg4.bin $@ --insert_indexes=0:23,511:1
+
+graphics/misc_gfx/Tsa_OpAnimWorldMapFog.bin: graphics/opanim/OpAnimWorldMapFog.png
+	$(FETSATOOL) $< $(@D)/Tsa_OpAnimWorldMapFog.feimg4.bin $@ --blank_tile_index=255
+
+graphics/misc_gfx/Tsa_OpAnimGenericCharacterBG.bin: graphics/misc_gfx/OpAnimGenericCharacterBG.png
+	$(FETSATOOL) $< $(@D)/Tsa_OpAnimGenericCharacterBG.feimg4.bin $@ --num_tiles=256 --insert_indexes=213:1 --padding=-1 --flip_y_indexes=16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,88,89,90,123,126,127,144,158,176,179,180,208,209,210,211,212,213,214,215,216,217,218,272,274,275,287,306,307,308,309,315,316,317,319,338,340,345,383,401,405,406,432,434,435,436,438,442,444,445,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,504,506,560,561,562,563,564,565,566,567,568,569,572,573,574,575,606,624,625,626,627,628,629,630,631,632,633,634,635,636,637,638,639
+
+graphics/misc_gfx/Tsa_OpAnimEphraim.bin: graphics/opanim/OpAnimEphraim.png
+	$(FETSATOOL) $< $(@D)/Tsa_OpAnimEphraim.feimg4.bin $@ --num_tiles=256 --insert_indexes=133:1
+
+graphics/misc_gfx/Tsa_OpAnimEphraimBlur1.bin: graphics/misc_gfx/OpAnimEphraimBlur1.png
+	$(FETSATOOL) $< $(@D)/Tsa_OpAnimEphraimBlur1.feimg4.bin $@ --num_tiles=256 --insert_indexes=149:1
+
+graphics/misc_gfx/Tsa_OpAnimEirika.bin: graphics/opanim/OpAnimEirika.png
+	$(FETSATOOL) $< $(@D)/Tsa_OpAnimEirika.feimg4.bin $@ --num_tiles=256 --insert_indexes=114:1
+
+graphics/misc_gfx/Tsa_OpAnimEirikaBlur1.bin: graphics/misc_gfx/OpAnimEirikaBlur1.png
+	$(FETSATOOL) $< $(@D)/Tsa_OpAnimEirikaBlur1.feimg4.bin $@ --num_tiles=256 --insert_indexes=119:1
+
+graphics/misc_gfx/Tsa_OpAnimEirikaBlur2.bin: graphics/misc_gfx/OpAnimEirikaBlur2.png
+	$(FETSATOOL) $< $(@D)/Tsa_OpAnimEirikaBlur2.feimg4.bin $@ --num_tiles=256 --insert_indexes=136:1
+
+graphics/misc_gfx/Tsa_OpAnimEirikaBlur3.bin: graphics/misc_gfx/OpAnimEirikaBlur3.png
+	$(FETSATOOL) $< $(@D)/Tsa_OpAnimEirikaBlur3.feimg4.bin $@ --num_tiles=256 --insert_indexes=161:1
+
+graphics/misc_gfx3/Tsa_IntelligentSystems.bin: graphics/misc_gfx3/IntelligentSystems.png
+	$(FETSATOOL) $< $(@D)/Tsa_IntelligentSystems.feimg2.bin $@
+
 # .fk: FE "fake compression" -- a 4-byte LE header (total-size<<8, low byte 0 =
 # uncompressed) followed by the raw bytes verbatim. Portrait tilesets (and similar
 # graphics) are marked compressed in the ROM but stored raw under this header. The
@@ -2651,6 +2707,11 @@ GRAPHICS_MK := $(shell find graphics -name '*.mk' 2>/dev/null)
 -include $(GRAPHICS_MK)
 # src/data INCBIN objects -> their generated assets (clean-build ordering); see scripts/gen_data_incbin_deps.py
 -include layout/data_incbin_deps.mk
+
+# dat_fontgrp_data generates its 13 colour LUTs from this header via macros (it has
+# no INCBIN, so gen_data_incbin_deps.py does not track it); name the #include so an
+# edit to the LUT source triggers an incremental rebuild.
+src/data/fontgrp_data/dat_fontgrp_data.o: src/data/fonts/color_lookup_tables.h
 
 # DATA_INCBIN: src/data/**/*.c (any subdirectory, excluding map/) compiled with
 # preproc first so INCBIN_U8/INCBIN_U16/INCBIN_U32 expand into .incbin directives
