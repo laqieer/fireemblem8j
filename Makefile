@@ -1544,42 +1544,13 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/direct_sound_data.s \
                            asm/data_data_banim_terrain.s \
                            asm/data_banim_pal.s \
-                           asm/snd_song002_agbfe3_bgm_op_theme_i_7.s \
-                           asm/snd_song067_agbfe3_bgm_op_theme_7.s \
-                           asm/snd_song020_agbfe3_bgm_map_cp2_8.s \
-                           asm/snd_song020_agbfe3_bgm_map_cp2_10.s \
-                           asm/snd_song014_agbfe3_bgm_map_pl5_5.s \
-                           asm/snd_song061_bgm_sys_fase_cp.s \
-                           asm/snd_song037_agbfe3_bgm_evt_start_7.s \
-                           asm/snd_song060_bgm_sys_fase_pl.s \
-                           asm/snd_song022_agbfe3_bgm_map_cp5_5.s \
-                           asm/snd_song320_bmp_evt_20b_1.s \
-                           asm/snd_song062_agbfe3_bgm_gameover.s \
-                           asm/snd_song322_mon_mao_die1.s \
-                           asm/snd_song035_agbfe3_bgm_btl_class_chg_5.s \
-                           asm/snd_song039_agbfe3_bgm_evt_yorokobi_6.s \
-                           asm/snd_song046_agbfe3_bgm_evt_enemy2_2.s \
                            asm/frontier_fontgrp_ui.s \
-                           asm/snd_song029_agbfe3_bgm_btl_boss4_4.s \
                            asm/frontier_ending_cg.s \
-                           asm/snd_song070_agbfe3_bgm_ed_after_8.s \
-                           asm/snd_song070_agbfe3_bgm_ed_after_7.s \
-                           asm/snd_song013_agbfe3_bgm_map_pl12_6.s \
-                           asm/snd_song058_agbfe3_bgm_ff_togijyo.s \
-                           asm/snd_song321_bmp_evt_20b_2.s \
                            asm/data_085D1F2C.s \
-                           asm/snd_song023_agbfe3_bgm_map_cp4_3.s \
-                           asm/snd_song017_agbfe3_bgm_map_pl6_4.s \
-                           asm/snd_song010_agbfe3_bgm_map_pl3_4.s \
-                           asm/snd_song007_agbfe3_bgm_wmap_04_6.s \
-                           asm/snd_song006_agbfe3_bgm_wmap_03_3.s \
-                           asm/snd_song001_agbfe3_bgm_opening_3.s \
-                           asm/snd_song001_agbfe3_bgm_opening_1.s \
                            asm/data_085D30F8.s \
                            asm/data_08A61EAC.s \
                            asm/frontier_map_ch9events.s \
                            asm/data_08A5A6AD.s \
-                           asm/snd_song790_sys_chapter_start.s \
                            asm/data_08A61264.s \
                            asm/data_08908704.s \
                            asm/data_08577608.s \
@@ -1589,15 +1560,10 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/rom_header_080000C0.s \
                            asm/data_08A634E8.s \
                            asm/data_08A60AB4.s \
-                           asm/snd_song947_mon_mao_magic1_2.s \
-                           asm/snd_song946_mon_mao_magic1_1.s \
-                           asm/snd_song944_btl_snr_magic2_2.s \
-                           asm/snd_song943_btl_snr_magic2_1.s \
                            asm/data_08A62EDC.s \
                            asm/data_08A62C34.s \
                            asm/data_08A62A14.s \
                            asm/data_0890C914.s \
-                           asm/snd_song035_agbfe3_bgm_btl_class_chg_4.s \
                            asm/data_08A710FC.s \
                            asm/data_08A7239C.s \
                            asm/data_08A7230C.s \
@@ -1885,7 +1851,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/data_080DCCB2.s \
                            asm/data_080DC8B0.s \
                            asm/data_080DC684.s \
-                           asm/snd_song056_agbfe3_bgm_togijyo_info_3.s \
                            asm/data_08BB8A74.s \
                            asm/data_08B8B490.s \
                            asm/data_08B8A7B0.s \
@@ -2087,67 +2052,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/data_08A5D0E4.s \
                            asm/data_085F14DC.s \
                            asm/data_085BA00C.s \
-                           asm/snd_song981_btl_mon_magic1.s \
-                           asm/snd_song980_btl_evl_magic2.s \
-                           asm/snd_song950_mon_gog_magic1.s \
-                           asm/snd_song085_agbfe3_bgm_btl_boss5_2_3.s \
-                           asm/snd_song145_se_sys_chapter_start1_2.s \
-                           asm/snd_song086_agbfe3_bgm_ed_staff_2_5.s \
-                           asm/snd_song029_agbfe3_bgm_btl_boss4_0.s \
-                           asm/snd_song045_agbfe3_bgm_evt_lyon2_4.s \
-                           asm/snd_song038_agbfe3_bgm_evt_enemy_6.s \
-                           asm/snd_song038_agbfe3_bgm_evt_enemy_3.s \
-                           asm/snd_song038_agbfe3_bgm_evt_enemy_2.s \
-                           asm/snd_song030_agbfe3_bgm_btl_boss5_3.s \
-                           asm/snd_song319_bmp_evt_15_1.s \
-                           asm/snd_song754_h_btl_dragon_bress_01.s \
-                           asm/snd_song070_agbfe3_bgm_ed_after_4.s \
-                           asm/snd_song069_agbfe3_bgm_evt_last_2.s \
-                           asm/snd_song066_agbfe3_bgm_ed_staff_5.s \
-                           asm/snd_song044_agbfe3_bgm_evt_lyon_4.s \
-                           asm/snd_song044_agbfe3_bgm_evt_lyon_3.s \
-                           asm/snd_song013_agbfe3_bgm_map_pl12_9.s \
-                           asm/snd_song012_agbfe3_bgm_map_pl11_7.s \
-                           asm/snd_song021_agbfe3_bgm_map_cp3_0.s \
-                           asm/snd_song020_agbfe3_bgm_map_cp2_0.s \
-                           asm/snd_song059_agbfe3_bgm_ff_loop_5.s \
-                           asm/snd_song024_agbfe3_bgm_map_cp8_7.s \
-                           asm/snd_song024_agbfe3_bgm_map_cp8_6.s \
-                           asm/snd_song019_agbfe3_bgm_map_cp1_3.s \
-                           asm/snd_song015_agbfe3_bgm_map_pl9_4.s \
-                           asm/snd_song011_agbfe3_bgm_map_pl4_7.s \
-                           asm/snd_song010_agbfe3_bgm_map_pl3_3.s \
-                           asm/snd_song009_agbfe3_bgm_map_pl2_8.s \
-                           asm/snd_song001_agbfe3_bgm_opening_0.s \
-                           asm/snd_song755_h_btl_dragon_out_01.s \
-                           asm/snd_song900_bmp_bos_nightmare1.s \
-                           asm/snd_song940_btl_bgl_attack7_1.s \
-                           asm/snd_song967_mon_bgl_attack7.s \
-                           asm/snd_song896_mon_mao_appear1.s \
-                           asm/snd_song035_agbfe3_bgm_btl_class_chg_2.s \
-                           asm/snd_song617_se_bmp_map25_saint_light1.s \
-                           asm/snd_song034_agbfe3_bgm_btl_staff_b_1.s \
-                           asm/snd_song002_agbfe3_bgm_op_theme_i_4.s \
-                           asm/snd_song002_agbfe3_bgm_op_theme_i_2.s \
-                           asm/snd_song753_h_btl_dragon_scream_01.s \
-                           asm/snd_song038_agbfe3_bgm_evt_enemy_0.s \
-                           asm/snd_song027_agbfe3_bgm_btl_boss1_0.s \
-                           asm/snd_song069_agbfe3_bgm_evt_last_0.s \
-                           asm/snd_song017_agbfe3_bgm_map_pl6_0.s \
-                           asm/snd_song010_agbfe3_bgm_map_pl3_0.s \
-                           asm/snd_song053_agbfe3_bgm_shop_0.s \
-                           asm/snd_song951_mon_gog_attack1.s \
-                           asm/snd_song959_btl_mon_call1.s \
-                           asm/snd_song073_y_doukutu_4_p1.s \
-                           asm/snd_song725_bmp_dance2.s \
-                           asm/snd_song723_btl_dance2.s \
-                           asm/snd_song002_agbfe3_bgm_op_theme_i_0.s \
-                           asm/snd_song752_h_btl_dragon_shake_01.s \
-                           asm/snd_song001_agbfe3_bgm_opening_2.s \
-                           asm/snd_song290_se_btl_fimbul1_1.s \
-                           asm/snd_song080_h_evt_hubuki_s.s \
-                           asm/snd_song073_y_doukutu_4_p0.s \
-                           asm/snd_song076_h_se_bird_p2.s \
                            asm/gap_001F70E5.s \
                            asm/gap_000D2AD0.s \
                            asm/gap_000C532C.s \
@@ -2247,7 +2151,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/data_08A67B00.s \
                            asm/data_08A64FA0.s \
                            asm/dat_particles_fx.s \
-                           asm/snd_song021_agbfe3_bgm_map_cp3_3.s \
                            asm/data_08A62734.s \
                            asm/data_08A61F60.s \
                            asm/data_085C33C0.s \
