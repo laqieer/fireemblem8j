@@ -1,37 +1,21 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Event_PrologueValterGroup.bin by scripts/repoint_table.py.
- * Pointer words are emitted as relocatable symbol references so the ROM
- * is SHIFTABLE; byte-identical to baserom (gated by `make compare`).
- *
- * Defined under a private name + published as a type-less assembler
- * alias so a typed header declaration (struct Foo NAME[];) does not
- * conflict -- the data bytes (.word relocations) are byte-identical. */
+/* Typed from the de-pointered UnitDef_Event_PrologueValterGroup word stream (axis #6 editability,
+ * fe8u events_udefs.c parity). Each 20-byte struct UnitDefinition entry is
+ * decoded per include/bmunit.h; the redas reinforcement pointer is kept as a
+ * relocatable symbol reference so the ROM stays SHIFTABLE. Byte-identical to
+ * baserom (gated by `make compare`). */
 
-extern const u8 REDA_PrologueValterGroup0[];
-extern const u8 REDA_PrologueValterGroup2[];
-extern const u8 REDA_PrologueValterGroup3[];
+extern struct REDA REDA_PrologueValterGroup0[];
+extern struct REDA REDA_PrologueValterGroup2[];
+extern struct REDA REDA_PrologueValterGroup3[];
 
-SECTION(".rodata.dat_UnitDef_Event_PrologueValterGroup_ref") static const u32 UnitDef_Event_PrologueValterGroup__shift[] = {
-    0x2C002345,
-    0x0200014E,
-    (u32)&REDA_PrologueValterGroup0,
-    0x00000017,
-    0x00000000,
-    0x0D001F80,
-    0x0100010E,
-    (u32)&REDA_PrologueValterGroup2,
-    0x00000000,
-    0x00000000,
-    0x0D001F80,
-    0x0100018E,
-    (u32)&REDA_PrologueValterGroup3,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
-    0x00000000,
+SECTION(".rodata.dat_UnitDef_Event_PrologueValterGroup_ref") struct UnitDefinition UnitDef_Event_PrologueValterGroup[] =
+{
+    { .charIndex=0x45, .classIndex=0x23, .allegiance=0x2, .level=0x5, .xPosition=0xE, .yPosition=0x5, .redaCount=0x2, .redas=REDA_PrologueValterGroup0, .items={0x17} },
+    { .charIndex=0x80, .classIndex=0x1F, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0xE, .yPosition=0x4, .redaCount=0x1, .redas=REDA_PrologueValterGroup2 },
+    { .charIndex=0x80, .classIndex=0x1F, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0xE, .yPosition=0x6, .redaCount=0x1, .redas=REDA_PrologueValterGroup3 },
+    {0},
 };
-__asm__(".global UnitDef_Event_PrologueValterGroup\n\t.set UnitDef_Event_PrologueValterGroup, UnitDef_Event_PrologueValterGroup__shift\n");

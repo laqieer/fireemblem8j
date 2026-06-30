@@ -1,32 +1,21 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Event_PrologueEscapees.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Typed from the de-pointered UnitDef_Event_PrologueEscapees word stream (axis #6 editability,
+ * fe8u events_udefs.c parity). Each 20-byte struct UnitDefinition entry is
+ * decoded per include/bmunit.h; the redas reinforcement pointer is kept as a
+ * relocatable symbol reference so the ROM stays SHIFTABLE. Byte-identical to
+ * baserom (gated by `make compare`). */
 
-__asm__(
-"\t.section .rodata.dat_UnitDef_Event_PrologueEscapees_ref, \"a\", %progbits\n"
-"\t.global UnitDef_Event_PrologueEscapees\n"
-"UnitDef_Event_PrologueEscapees:\n"
-"\t.4byte 0x08000702\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x020000C9\n"
-"\t.4byte REDA_PrologueEscapees0\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x08000504\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x020000C9\n"
-"\t.4byte REDA_PrologueEscapees2\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x08000201\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x01000146\n"
-"\t.4byte REDA_PrologueEscapees4\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+extern struct REDA REDA_PrologueEscapees0[];
+extern struct REDA REDA_PrologueEscapees2[];
+extern struct REDA REDA_PrologueEscapees4[];
+
+SECTION(".rodata.dat_UnitDef_Event_PrologueEscapees_ref") struct UnitDefinition UnitDef_Event_PrologueEscapees[] =
+{
+    { .charIndex=0x2, .classIndex=0x7, .level=0x1, .xPosition=0x9, .yPosition=0x3, .redaCount=0x2, .redas=REDA_PrologueEscapees0, .items={0x3} },
+    { .charIndex=0x4, .classIndex=0x5, .level=0x1, .xPosition=0x9, .yPosition=0x3, .redaCount=0x2, .redas=REDA_PrologueEscapees2 },
+    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0x6, .yPosition=0x5, .redaCount=0x1, .redas=REDA_PrologueEscapees4 },
+    {0},
+};

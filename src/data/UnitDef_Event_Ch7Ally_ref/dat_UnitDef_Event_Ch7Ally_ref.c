@@ -1,67 +1,33 @@
 #include "global.h"
+#include "bmunit.h"
+#include "muctrl.h"
 
-/* De-pointered from data/residual/UnitDef_Event_Ch7Ally.bin by scripts/repoint_table.py.
- * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
- * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
- * pure asm block so no typed header decl of the referenced symbols can conflict. */
+/* Typed from the de-pointered UnitDef_Event_Ch7Ally word stream (axis #6 editability,
+ * fe8u events_udefs.c parity). Each 20-byte struct UnitDefinition entry is
+ * decoded per include/bmunit.h; the redas reinforcement pointer is kept as a
+ * relocatable symbol reference so the ROM stays SHIFTABLE. Byte-identical to
+ * baserom (gated by `make compare`). */
 
-__asm__(
-"\t.section .rodata.dat_UnitDef_Event_Ch7Ally_ref, \"a\", %progbits\n"
-"\t.global UnitDef_Event_Ch7Ally\n"
-"UnitDef_Event_Ch7Ally:\n"
-"\t.4byte 0x38000201\n"
-"\t.4byte 0x01000440\n"
-"\t.4byte REDA_Ch6_1\n"
-"\t.4byte 0x00006C09\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x28000903\n"
-"\t.4byte 0x01000400\n"
-"\t.4byte REDA_Ch6_2\n"
-"\t.4byte 0x00006C14\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x08001A08\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x01000440\n"
-"\t.4byte REDA_Ch6_3\n"
-"\t.4byte 0x00006C2D\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x18004505\n"
-"\t.4byte 0x01000400\n"
-"\t.4byte REDA_Ch6_4\n"
-"\t.4byte 0x0000004B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x20003F0A\n"
-"\t.4byte 0x01000480\n"
-"\t.4byte REDA_Ch7_0\n"
-"\t.4byte 0x0000281F\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x08000702\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x01000400\n"
-"\t.4byte REDA_Ch7_1\n"
-"\t.4byte 0x006C1703\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x10000D09\n"
-"\t.4byte 0x010004C0\n"
-"\t.4byte REDA_Ch7_2\n"
-"\t.4byte 0x00006B01\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x10004806\n"
-"\t.4byte 0x01000480\n"
-"\t.4byte REDA_Ch7_3\n"
-"\t.4byte 0x00006C15\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x08000504\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x00000440\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x006C1401\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x08004413\n"  /* coincidental const into fn: raw */
-"\t.4byte 0x000004C0\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000003F\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+extern struct REDA REDA_Ch6_1[];
+extern struct REDA REDA_Ch6_2[];
+extern struct REDA REDA_Ch6_3[];
+extern struct REDA REDA_Ch6_4[];
+extern struct REDA REDA_Ch7_0[];
+extern struct REDA REDA_Ch7_1[];
+extern struct REDA REDA_Ch7_2[];
+extern struct REDA REDA_Ch7_3[];
+
+SECTION(".rodata.dat_UnitDef_Event_Ch7Ally_ref") struct UnitDefinition UnitDef_Event_Ch7Ally[] =
+{
+    { .charIndex=0x1, .classIndex=0x2, .level=0x7, .yPosition=0x11, .redaCount=0x1, .redas=REDA_Ch6_1, .items={0x9, 0x6C} },
+    { .charIndex=0x3, .classIndex=0x9, .level=0x5, .yPosition=0x10, .redaCount=0x1, .redas=REDA_Ch6_2, .items={0x14, 0x6C} },
+    { .charIndex=0x8, .classIndex=0x1A, .level=0x1, .yPosition=0x11, .redaCount=0x1, .redas=REDA_Ch6_3, .items={0x2D, 0x6C} },
+    { .charIndex=0x5, .classIndex=0x45, .level=0x3, .yPosition=0x10, .redaCount=0x1, .redas=REDA_Ch6_4, .items={0x4B} },
+    { .charIndex=0xA, .classIndex=0x3F, .level=0x4, .yPosition=0x12, .redaCount=0x1, .redas=REDA_Ch7_0, .items={0x1F, 0x28} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0x1, .yPosition=0x10, .redaCount=0x1, .redas=REDA_Ch7_1, .items={0x3, 0x17, 0x6C} },
+    { .charIndex=0x9, .classIndex=0xD, .level=0x2, .yPosition=0x13, .redaCount=0x1, .redas=REDA_Ch7_2, .items={0x1, 0x6B} },
+    { .charIndex=0x6, .classIndex=0x48, .level=0x2, .yPosition=0x12, .redaCount=0x1, .redas=REDA_Ch7_3, .items={0x15, 0x6C} },
+    { .charIndex=0x4, .classIndex=0x5, .level=0x1, .yPosition=0x11, .items={0x1, 0x14, 0x6C} },
+    { .charIndex=0x13, .classIndex=0x44, .level=0x1, .yPosition=0x13, .items={0x3F} },
+    {0},
+};
