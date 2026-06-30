@@ -32,27 +32,27 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 642 | 32.4% |
-| **FLOOR** | 978 | 49.4% |
-| **UNCERTAIN** | 361 | 18.2% |
-| **TOTAL** | 1981 | 100.0% |
+| **MISS** | 318 | 16.6% |
+| **FLOOR** | 1128 | 58.8% |
+| **UNCERTAIN** | 473 | 24.6% |
+| **TOTAL** | 1919 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
 | Category | Verdict | Count (this run) | fe8u editable form |
 |---|---|---:|---|
-| battle-anim | MISS | 194 | fe8u 202 editable banim/*.s (compressing linker) |
-| pixel-gfx | MISS | 231 | fe8u graphics/**/*.png |
+| battle-anim | MISS | 193 | fe8u 202 editable banim/*.s (compressing linker) |
+| pixel-gfx | MISS | 17 | fe8u graphics/**/*.png |
 | sound-m4a-tables | MISS | 1 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 4 | fe8u sound/voicegroups/*.s (documented ceiling) |
-| menu-strings | MISS | 137 | fe8u C literals (src/menu_def.c) |
-| unitdef-residuals | MISS | 46 | fe8u src/events_udefs.c typed C |
+| menu-strings | MISS | 22 | fe8u C literals (src/menu_def.c) |
+| unitdef-residuals | MISS | 52 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 29 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
-| TSA/.map.bin | FLOOR | 829 | fe8u keeps TSA/tilemaps binary too |
+| TSA/.map.bin | FLOOR | 979 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 361 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 473 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -64,32 +64,35 @@ under MISS, asserted by the self-test guards below).
 **MISS spot checks** (fe8u ships an editable source):
 
 - `data/residual/Ch10EphraimMapChanges.bin` → **MISS** (map-tilemaps) — proof: fe8u src/data/map/change/Ch10EphraimMapChanges.json
-- `data/residual/EventListScr_Ch15b_Location.bin` → **MISS** (unitdef-residuals) — proof: fe8u src/events/*.c (EVENT_* / PROC_* macros)
-- `data/residual/MenuItems_SioMenudef_0.bin` → **MISS** (menu-strings) — proof: fe8u C string literals (src/menu_def.c parity)
-- `data/residual/gBattleForecast_0.bin` → **MISS** (pixel-gfx) — proof: fe8u preview/tsa/misc/gBattleForecast_0.png
+- `data/residual/gEfxlvupfx_0.bin` → **MISS** (unitdef-residuals) — proof: fe8u typed C table / gfx (worldmap/mapanim/menu data)
+- `data/residual/gTitlescreen_0.bin` → **MISS** (pixel-gfx) — proof: fe8u graphics/**/*.png (named gfx)
 - `data/residual/rom_header_080000C0.bin` → **MISS** (sound-m4a-tables) — proof: fe8u src/rom_header.s
 - `data/sound/frontier_df3_voicegroup_000_1F70E8.bin` → **MISS** (voicegroup-tail) — proof: fe8u sound/voicegroups/*.s (voicegroup tail; documented ceiling)
+- `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_004_7738F0.bin` → **MISS** (battle-anim) — proof: fe8u banim/*.png + banim/*.s
 
 **FLOOR spot checks** (fe8u also keeps binary):
 
-- `data/residual/gMenuSoundroom_0.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u also keeps binary: graphics/misc/gMenuSoundroom_0.tsa.bin
+- `data/residual/gBattleForecast_0.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u also keeps binary: graphics/misc/gBattleForecast_0.tsa.bin
 - `graphics/banim/efxbattle/TsaConf_BanimTmA1.map.bin` → **FLOOR** (efx-effect-bins) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
 - `graphics/opanim/OpAnimCharacterBG.map.bin` → **FLOOR** (opanim-tilemaps) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
-- `data/residual/gTsa_OpSubtitle_03.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps TSA tilemaps binary (*.tsa.bin / *.map.bin)
-- `data/residual/gTsa_OpSubtitle_05.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps TSA tilemaps binary (*.tsa.bin / *.map.bin)
-- `graphics/banim/_us/banim/assets/tsa/005DD518_Tsa_BreathBgBase.map.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
+- `data/residual/gBattleForecast_1.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u also keeps binary: graphics/misc/gBattleForecast_1.tsa.bin
+- `data/residual/gBattleForecast_2.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u also keeps binary: graphics/misc/gBattleForecast_2.tsa.bin
+- `data/residual/gEndingDetails_0.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u also keeps binary: graphics/misc/gEndingDetails_0.tsa.bin
 
 **Self-test guards** (the script exits non-zero if any fail):
 
 - `frontier_chap_title_*` is classified **MISS** (chapter-title gfx → fe8u `.png`), not FLOOR.
 - `frontier_df4_misc_lo_*` is classified **MISS** (string pools → fe8u C literals), not FLOOR.
 - `*.tsa.bin` and `*.map.bin` are classified **FLOOR** (fe8u keeps them binary).
+- `Tsa_`/`gTsa_`-named and `*_map.bin` blobs are classified **FLOOR** (TSA/tilemaps; fe8u keeps them binary even when the fe8j extractor dropped the `.tsa.bin` suffix — bug #1).
+- `graphics/gfx_data_bg/*_map.bin` BG tilemaps are classified **FLOOR** (→ fe8u `bg_*.tsa.bin`).
+- `graphics/frontier_df4_uistuff/*` is classified **UNCERTAIN** (JP-divergent UI table, no fe8u twin — not a string-pool MISS; bug #2).
 - `graphics/banim/efx*` effect bins are classified **FLOOR**.
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 
-## MISS (642) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (318) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>642 entries</summary>
+<details><summary>318 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -108,7 +111,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/Ch19MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch19MapChanges.json |
 | `data/residual/Ch20MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch20MapChanges.json |
 | `data/residual/Ch9EphMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch9EphMapChanges.json |
-| `data/residual/EventListScr_Ch15b_Location.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
 | `data/residual/FinalChapterMap2Changes.bin` | map-tilemaps | fe8u src/data/map/change/FinalChapterMap2Changes.json |
 | `data/residual/LagdouRuins2MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/LagdouRuins2MapChanges.json |
 | `data/residual/LagdouRuins3MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/LagdouRuins3MapChanges.json |
@@ -117,81 +119,15 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/LagdouRuins7MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/LagdouRuins7MapChanges.json |
 | `data/residual/LagdouRuins8MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/LagdouRuins8MapChanges.json |
 | `data/residual/MelkaenCoastMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/MelkaenCoastMapChanges.json |
-| `data/residual/MenuItems_SioMenudef_0.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) |
-| `data/residual/MenuItems_SioMenudef_1.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) |
-| `data/residual/MuSoundScr_Dog.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/MuSoundScr_Gorgon.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/MuSoundScr_Mogall.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/MuSoundScr_Skeleton.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/MuSoundScr_Spider.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/MuSoundScr_Unused2.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/MuSoundScr_Zombie.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
 | `data/residual/ObjectType9.bin` | map-tilemaps | fe8u graphics/map/ObjectType9.png |
-| `data/residual/PopupScr_GotGold.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/PopupScr_GotItem.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/PopupScr_ItemStolen.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/PopupScr_ItemWasPilfered.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/PopupScr_StoleItem.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
-| `data/residual/PopupScr_WpnBroken.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
 | `data/residual/TileAnimations1.bin` | map-tilemaps | fe8u src/data/map/obj_anim/TileAnimations1.json |
 | `data/residual/TileAnimations2.bin` | map-tilemaps | fe8u src/data/map/obj_anim/TileAnimations2.json |
 | `data/residual/TileAnimations3.bin` | map-tilemaps | fe8u src/data/map/obj_anim/TileAnimations3.json |
 | `data/residual/TowerOfValni6MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/TowerOfValni6MapChanges.json |
 | `data/residual/TowerOfValni7MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/TowerOfValni7MapChanges.json |
-| `data/residual/gBattleForecast_0.bin` | pixel-gfx | fe8u preview/tsa/misc/gBattleForecast_0.png |
-| `data/residual/gBattleForecast_1.bin` | pixel-gfx | fe8u preview/tsa/misc/gBattleForecast_1.png |
-| `data/residual/gBattleForecast_2.bin` | pixel-gfx | fe8u preview/tsa/misc/gBattleForecast_2.png |
-| `data/residual/gBattleparse_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gBattleparse_1.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gBattleparse_2.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gBattleparse_3.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gBattleparse_4.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gBattleparse_5.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gBattleparse_6.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gBattleparse_7.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gBattleparse_8.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gBattleparse_9.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEfxSelfThunderBGFrames.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gEfxlvupfx_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEfxmagicCrimsoneye_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEfxmagicCrimsoneye_1.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEfxmagicGleipnir_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEfxmagicGleipnir_1.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEfxmagicGleipnir_2.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEfxmagicGleipnir_3.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEfxmagicGleipnir_4.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEfxmagicGleipnir_5.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEfxmagicGleipnir_6.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEfxmisc_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrgauge_10.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrgauge_11.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrgauge_2.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrgauge_3.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrgauge_4.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrgauge_6.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrgauge_7.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrgauge_8.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEkrgauge_9.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gEndingDetails_0.bin` | pixel-gfx | fe8u preview/tsa/misc/gEndingDetails_0.png |
-| `data/residual/gGenericIcon_6.bin` | pixel-gfx | fe8u graphics/**/*.png (named gfx) |
-| `data/residual/gMapanimLevelup_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMenuSoundroom_1.bin` | pixel-gfx | fe8u preview/tsa/misc/gMenuSoundroom_1.png |
-| `data/residual/gMenuSoundroom_2.bin` | pixel-gfx | fe8u preview/tsa/misc/gMenuSoundroom_2.png |
-| `data/residual/gMenuSoundroom_4.bin` | pixel-gfx | fe8u preview/tsa/misc/gMenuSoundroom_4.png |
 | `data/residual/gTitlescreen_0.bin` | pixel-gfx | fe8u graphics/**/*.png (named gfx) |
 | `data/residual/gTitlescreen_1.bin` | pixel-gfx | fe8u graphics/**/*.png (named gfx) |
-| `data/residual/gUnkData_15.bin` | pixel-gfx | fe8u preview/tsa/misc/gUnkData_15.png |
-| `data/residual/gUnkData_67.bin` | pixel-gfx | fe8u preview/tsa/misc/gUnkData_67.png |
-| `data/residual/gUnkData_68.bin` | pixel-gfx | fe8u preview/tsa/misc/gUnkData_68.png |
-| `data/residual/gUnkData_70.bin` | pixel-gfx | fe8u preview/tsa/misc/gUnkData_70.png |
-| `data/residual/gUnkData_71.bin` | pixel-gfx | fe8u preview/tsa/misc/gUnkData_71.png |
-| `data/residual/gUnkData_72.bin` | pixel-gfx | fe8u preview/tsa/misc/gUnkData_72.png |
-| `data/residual/gUnkData_73.bin` | pixel-gfx | fe8u preview/tsa/misc/gUnkData_73.png |
-| `data/residual/gUnkData_80.bin` | pixel-gfx | fe8u preview/tsa/misc/gUnkData_80.png |
-| `data/residual/gUnkData_89.bin` | pixel-gfx | fe8u preview/tsa/misc/gUnkData_89.png |
-| `data/residual/gUnkData_92.bin` | pixel-gfx | fe8u preview/tsa/misc/gUnkData_92.png |
-| `data/residual/gWorldmapMinimap_1.bin` | pixel-gfx | fe8u preview/tsa/misc/gWorldmapMinimap_1.png |
-| `data/residual/gWorldmapMinimap_2.bin` | pixel-gfx | fe8u preview/tsa/misc/gWorldmapMinimap_2.png |
 | `data/residual/rom_header_080000C0.bin` | sound-m4a-tables | fe8u src/rom_header.s |
 | `data/sound/frontier_df3_voicegroup_000_1F70E8.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s (voicegroup tail; documented ceiling) |
 | `data/sound/frontier_df3_voicegroup_001_202C07.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s (voicegroup tail; documented ceiling) |
@@ -299,89 +235,65 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_005_6533B0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_008_657A78.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_009_6587E0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df3_btl_bg/frontier_df3_btl_bg_000_7B40A8.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
-| `graphics/frontier_df3_btl_bg/frontier_df3_btl_bg_001_7B6E50.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
 | `graphics/frontier_df3_btl_bg/frontier_df3_btl_bg_002_7B83B8.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
 | `graphics/frontier_df3_const_unit_ic/frontier_df3_const_unit_ic_000_1C0D80.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
 | `graphics/frontier_df3_const_unit_ic/frontier_df3_const_unit_ic_001_1C2B4C.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_000_5D367C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_001_5D3EA8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_002_5D4358.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_003_5D48E0.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_004_5D4C5C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_005_5D4DD8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_006_5D53FC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_007_5D737C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_009_5D8A8C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_ending/frontier_df3_ending_000_AC1BC0.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_ending/frontier_df3_ending_001_AC3AA8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_ending/frontier_df3_ending_002_AC50A4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_000_57E884.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_001_57F604.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_002_57FACC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_003_57FD0C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_004_57FF94.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_005_580B1C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_006_5814AC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_007_581A04.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_008_582A54.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_009_582F1C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_000_B75860.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
 | `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_002_B7F118.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
 | `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_003_B864A8.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
 | `graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_000_B44B40.bin` | pixel-gfx | fe8u graphics/titlescreen/*.png |
 | `graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_001_B48D38.bin` | pixel-gfx | fe8u graphics/titlescreen/*.png |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_000_90F678.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_003_91066C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_004_91075C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_005_9109A8.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_006_911070.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_007_911200.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_009_91187C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_012_911C34.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_013_911E38.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_015_91206C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_016_912198.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_017_912480.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_018_912AD4.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_019_913958.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_021_914BD8.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_022_915038.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_023_91512C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_024_915E08.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_025_9163BC.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_026_916D14.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_027_917600.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_028_9178F8.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_029_9184F0.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_030_918784.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_031_918C90.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_032_91908C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_033_9191E0.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_034_919A90.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_035_91A580.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_036_91AB20.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_037_91AC38.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_038_91B948.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_039_91BED4.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_041_91C104.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_042_91C230.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_043_91D314.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_046_91DFD0.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_047_91E280.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_048_91E7A8.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_049_91E988.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_050_91EE14.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_051_91F300.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_052_91F89C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_054_91FD38.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_055_91FE20.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_056_920140.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_057_92042C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_059_920AD0.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_060_921140.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_068_922FCC.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_070_923510.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_000_90F678.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_003_91066C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_004_91075C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_005_9109A8.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_006_911070.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_007_911200.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_009_91187C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_012_911C34.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_013_911E38.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_015_91206C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_016_912198.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_017_912480.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_018_912AD4.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_019_913958.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_021_914BD8.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_022_915038.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_023_91512C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_024_915E08.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_025_9163BC.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_026_916D14.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_027_917600.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_028_9178F8.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_029_9184F0.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_030_918784.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_031_918C90.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_032_91908C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_033_9191E0.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_034_919A90.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_035_91A580.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_036_91AB20.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_037_91AC38.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_038_91B948.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_039_91BED4.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_041_91C104.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_042_91C230.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_043_91D314.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_046_91DFD0.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_047_91E280.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_048_91E7A8.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_049_91E988.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_050_91EE14.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_051_91F300.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_052_91F89C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_054_91FD38.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_055_91FE20.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_056_920140.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_057_92042C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_059_920AD0.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_060_921140.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_068_922FCC.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
+| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_070_923510.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_000_5E0E94.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_001_5E37CC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_002_5E3AD4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -475,59 +387,8 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_083_A13256.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_084_A13880.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_085_A13CD0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_ending/frontier_df4_ending_000_AC059C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_001_AC0B90.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_002_AC16C8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_003_AC718C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_005_ACEB54.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_007_AD0CFC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_010_B1E5FC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_012_B25A78.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_013_B26374.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_015_B3B3D4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_016_B3EBE4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_017_B3F024.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_018_B3F7BC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_021_BAB754.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_font_cc/frontier_df4_font_cc_078_56CAD8.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
 | `graphics/frontier_df4_font_cc/frontier_df4_font_cc_090_574344.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_000_A149D4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_002_A5D648.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_003_A5E6CC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_004_A5F770.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_013_A72408.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_014_A72BF0.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_015_A73900.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_016_A74CEC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_018_A92B38.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_019_A934EC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_020_A9454C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_025_A9C020.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_026_A9CF7C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_028_A9E244.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_029_AA3860.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_030_AA71D4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_031_AA9F98.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_032_AAAC4C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_033_AAEB40.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_034_AAF9EC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_035_AB0830.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_036_AB0D18.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_038_ABCD24.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_039_AC00A8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000a_0DC3DC.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_002a_0DCDD0.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
@@ -546,207 +407,44 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_014_0E8F58.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_017_1B1878.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_018_1DEF84.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_019_1E140C.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_020_1EC9E0.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_021_1F4F60.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_tail/frontier_df4_tail_000_BABAF8.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
 | `graphics/frontier_df4_tail/frontier_df4_tail_001_BB08B4.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_000_57A504.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_001_57B23C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_002_57BF74.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_003_57CC64.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_004_57CF7C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_005_57DFCC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_006_57E4DC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_008_5946F4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_009_594B2C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_010_595B34.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_011_59662C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_012_596F74.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_013_5987EC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_014_598E64.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_015_599BE4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_016_59A2EC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_017_59A574.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_018_59B0FC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_019_59BA8C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_020_59BFE4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_021_59D034.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_022_5B90D8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_023_5B9454.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_024_5C1D30.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_025_5C2E50.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_027_5C3C9C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_028_5C411C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_029_5C4A94.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_030_5C534C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_031_5C5DE8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_032_5C6084.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_033_5C6AD4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_034_5C6E08.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_035_5CDF84.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_038_5D32D8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_ending_cg/frontier_ending_cg_000_B27970.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_fontgrp_ui/frontier_fontgrp_ui_000_59D4FC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_map_ch9events/frontier_map_ch9events_000_1598A0.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
-| `graphics/frontier_map_objtype/frontier_map_objtype_000_17B398.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
-| `graphics/frontier_map_objtype/frontier_map_objtype_001_181610.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
-| `graphics/frontier_map_objtype/frontier_map_objtype_002_188888.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
-| `graphics/gfx_data_bg/bg_Cell_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/bg_Fort_Sunset_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/bg_Grass_Plains_2_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/bg_Grass_Plains_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/bg_Normal_Village_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/bg_Plain_1_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/bg_Plain_2_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/bg_Port_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/bg_Stream_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_001_bg_House_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_003_bg_Caer_Pelyn_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_007_bg_Village_Clear_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_012_bg_Fireplace_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_015_bg_Castle_Interior_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_018_bg_Grado_Chamber_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_020_bg_Throne_Normal_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_022_bg_Throne_Normal_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_024_bg_Castle_Bright_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_026_bg_Garden_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_028_bg_Manse_Back_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_030_bg_Cell_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_033_bg_Plain_1_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_035_bg_Grass_Plains_2_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_045_bg_Passage_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_050_bg_Stone_Chamber_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_052_bg_Renais_Chamber_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_054_bg_White_Chamber_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_059_bg_Black_Temple_Outside_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_061_bg_Black_Temple_Inside_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_065_bg_convo2_00_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_070_bg_convo2_03_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_075_bg_convo2_08_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_077_bg_convo2_09_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_081_bg_convo2_12_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_083_bg_convo2_13_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_085_bg_convo2_15_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_087_bg_convo2_16_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_091_bg_convo2_19_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_094_bg_convo2_21_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_096_bg_convo2_22_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_098_bg_convo2_23_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_100_bg_convo2_24_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_102_bg_Blank_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Tsa_ArenaBattleBg.bin` | battle-anim | fe8u preview/tsa/banim/efxlvupfx/Tsa_ArenaBattleBg.png |
-| `graphics/gmapunit/Tsa_ConfigUiFrame.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_ConfigUiFrame.png |
-| `graphics/gmapunit/Tsa_PlayerRankFog.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_PlayerRankFog.png |
-| `graphics/gmapunit/Tsa_PrepItemScreen.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_PrepItemScreen.png |
-| `graphics/gmapunit/Tsa_PrepItemUseScreen.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_PrepItemUseScreen.png |
-| `graphics/gmapunit/Tsa_SilenceBg_2.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Tsa_StatscreenEquipedWeaponHighlight.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Tsa_TerrainMapUi_Labels.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_TerrainMapUi_Labels.png |
-| `graphics/gmapunit/Tsa_UnkData_1.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_1.png |
-| `graphics/gmapunit/Tsa_UnkData_3.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_3.png |
-| `graphics/gmapunit/Tsa_UnkData_4.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_4.png |
-| `graphics/misc_gfx/Pal_LinkArenaWarpFx.bin` | pixel-gfx | fe8u graphics/misc/Pal_LinkArenaWarpFx.agbpal |
-| `graphics/misc_gfx/Pal_MapAnimAntitoxin.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimAntitoxin.agbpal |
-| `graphics/misc_gfx/Pal_MapAnimBerserkfx_0.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimBerserkfx.pal |
-| `graphics/misc_gfx/Pal_MapAnimBerserkfx_1.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimBerserkfx.pal |
-| `graphics/misc_gfx/Pal_MapAnimPureWater.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimPureWater.agbpal |
-| `graphics/misc_gfx/Pal_MapAnimTorchfx.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimTorchfx.agbpal |
-| `graphics/misc_gfx/Pal_MapAnimUnlockObjfx.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimUnlockObjfx.agbpal |
-| `graphics/misc_gfx/Pal_MapAnimUnlockObjfx_Unk.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimUnlockObjfx_Unk.agbpal |
-| `graphics/misc_gfx/Tsa_GorgonHatchCloud_A.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_GorgonHatchCloud_A.png |
-| `graphics/misc_gfx/Tsa_GorgonHatchCloud_B.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_GorgonHatchCloud_B.png |
-| `graphics/misc_gfx/Tsa_GorgonHatchCloud_C.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_GorgonHatchCloud_C.png |
-| `graphics/misc_gfx/Tsa_GorgonHatchCloud_D.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_GorgonHatchCloud_D.png |
-| `graphics/misc_gfx/Tsa_GorgonHatchCloud_E.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_GorgonHatchCloud_E.png |
-| `graphics/misc_gfx/Tsa_GorgonHatchCloud_F.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_GorgonHatchCloud_F.png |
-| `graphics/misc_gfx/Tsa_GorgonHatchCloud_G.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_GorgonHatchCloud_G.png |
-| `graphics/misc_gfx/Tsa_MapAnimUnlockBgfx.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_MapAnimUnlockBgfx.png |
-| `graphics/misc_gfx/Tsa_MapAnim_0.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_MapAnim_0.png |
-| `graphics/misc_gfx/Tsa_MapAnim_1.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_MapAnim_1.png |
-| `graphics/misc_gfx/Tsa_MapBattleBoxGfx1.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_MapBattleBoxGfx1.png |
-| `graphics/misc_gfx/Tsa_MapBattleBoxGfx2.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_MapBattleBoxGfx2.png |
-| `graphics/misc_gfx/Tsa_MapBattleBoxGfx3.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_MapBattleBoxGfx3.png |
-| `graphics/misc_gfx/Tsa_Mapnightmare.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_Mapnightmare.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx1.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx1.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx10.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx10.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx11.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx11.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx12.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx12.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx13.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx13.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx14.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx14.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx15.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx15.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx16.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx16.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx17.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx17.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx18.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx18.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx19.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx19.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx2.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx2.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx20.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx20.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx21.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx21.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx22.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx22.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx23.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx23.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx24.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx24.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx25.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx25.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx26.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx26.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx27.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx27.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx28.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx28.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx29.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx29.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx3.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx3.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx30.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx30.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx31.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx31.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx32.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx32.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx33.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx33.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx4.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx4.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx5.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx5.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx6.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx6.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx7.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx7.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx8.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx8.png |
-| `graphics/misc_gfx/Tsa_NightMareMapAnimfx9.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_NightMareMapAnimfx9.png |
-| `graphics/misc_gfx/Tsa_ShopWindows.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_ShopWindows.png |
-| `graphics/misc_gfx/gTsa_TitleDemonKing.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gTsa_TitleDragonForeground.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gTsa_TitleMainBackground.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gTsa_Titlescreen_0.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gTsa_Titlescreen_1.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gTsa_Titlescreen_2.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Tsa_CharacterEnding_BottomBorder.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_CharacterEnding_BottomBorder.png |
-| `graphics/misc_gfx2/Tsa_CharacterEnding_TopBorder.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_CharacterEnding_TopBorder.png |
-| `graphics/misc_gfx2/Tsa_EndingFin.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_EndingFin.png |
-| `graphics/misc_gfx2/Tsa_EventGmap.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_EventGmap.png |
-| `graphics/misc_gfx2/Tsa_GameOverFx.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_GameOverFx.png |
-| `graphics/misc_gfx2/Tsa_LinkArenaPostBattleBg.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_LinkArenaPostBattleBg.png |
-| `graphics/misc_gfx2/Tsa_SaveMenuBG.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_SaveMenuBG.png |
-| `graphics/misc_gfx2/Tsa_SioResultRankings.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_SioResultRankings.png |
-| `graphics/misc_gfx2/Tsa_StaffReelEnt_0.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_StaffReelEnt_0.png |
-| `graphics/misc_gfx2/Tsa_StaffReelEnt_1.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_StaffReelEnt_1.png |
-| `graphics/misc_gfx2/Tsa_StaffReelEnt_2.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_StaffReelEnt_2.png |
-| `graphics/misc_gfx2/Tsa_StaffReelEnt_3.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_StaffReelEnt_3.png |
-| `graphics/misc_gfx2/Tsa_StaffReelEnt_4.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_StaffReelEnt_4.png |
-| `graphics/misc_gfx2/Tsa_StaffReelEnt_5.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_StaffReelEnt_5.png |
-| `graphics/misc_gfx2/Tsa_StaffReelEnt_8.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_StaffReelEnt_8.png |
-| `graphics/misc_gfx2/Tsa_StaffReelEnt_9.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_StaffReelEnt_9.png |
-| `graphics/misc_gfx2/Tsa_UnkData_0.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_0.png |
-| `graphics/misc_gfx2/Tsa_UnkData_5.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_5.png |
-| `graphics/misc_gfx2/gTsa_OpSubtitle_00.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/gTsa_OpSubtitle_01.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/gTsa_OpSubtitle_04.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/gTsa_SupportSubScreen.bin` | pixel-gfx | fe8u preview/tsa/misc/gTsa_SupportSubScreen.png |
-| `graphics/misc_gfx2/gTsa_WorldmapMinimap_0.bin` | pixel-gfx | fe8u preview/tsa/misc/gTsa_WorldmapMinimap_0.png |
 
 </details>
 
-## FLOOR (978) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (1128) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>978 entries</summary>
+<details><summary>1128 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
+| `data/residual/gBattleForecast_0.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gBattleForecast_0.tsa.bin |
+| `data/residual/gBattleForecast_1.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gBattleForecast_1.tsa.bin |
+| `data/residual/gBattleForecast_2.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gBattleForecast_2.tsa.bin |
+| `data/residual/gEndingDetails_0.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gEndingDetails_0.tsa.bin |
 | `data/residual/gMenuSoundroom_0.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gMenuSoundroom_0.tsa.bin |
-| `data/residual/gTsa_OpSubtitle_03.bin` | TSA/.map.bin | fe8u keeps TSA tilemaps binary (*.tsa.bin / *.map.bin) |
-| `data/residual/gTsa_OpSubtitle_05.bin` | TSA/.map.bin | fe8u keeps TSA tilemaps binary (*.tsa.bin / *.map.bin) |
+| `data/residual/gMenuSoundroom_1.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gMenuSoundroom_1.tsa.bin |
+| `data/residual/gMenuSoundroom_2.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gMenuSoundroom_2.tsa.bin |
+| `data/residual/gMenuSoundroom_4.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gMenuSoundroom_4.tsa.bin |
+| `data/residual/gTsa_OpSubtitle_03.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `data/residual/gTsa_OpSubtitle_05.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `data/residual/gUnkData_15.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_15.tsa.bin |
+| `data/residual/gUnkData_67.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_67.tsa.bin |
+| `data/residual/gUnkData_68.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_68.tsa.bin |
+| `data/residual/gUnkData_70.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_70.tsa.bin |
+| `data/residual/gUnkData_71.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_71.tsa.bin |
+| `data/residual/gUnkData_72.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_72.tsa.bin |
+| `data/residual/gUnkData_73.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_73.tsa.bin |
+| `data/residual/gUnkData_80.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_80.tsa.bin |
+| `data/residual/gUnkData_89.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_89.tsa.bin |
+| `data/residual/gUnkData_92.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_92.tsa.bin |
+| `data/residual/gWorldmapMinimap_1.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gWorldmapMinimap_1.tsa.bin |
+| `data/residual/gWorldmapMinimap_2.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gWorldmapMinimap_2.tsa.bin |
 | `graphics/banim/_us/banim/assets/tsa/005DD518_Tsa_BreathBgBase.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/_us/banim/assets/tsa/005DDAF4_Tsa_085DDAF4.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/_us/banim/assets/tsa/005E64D8_Tsa_085E64D8.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
@@ -1319,73 +1017,73 @@ under MISS, asserted by the self-test guards below).
 | `graphics/banim/_us/banim/assets/tsa/00755DE0_Tsa_08755DE0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/_us/banim/assets/tsa/00755E94_Tsa_08755E94.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/_us/banim/assets/tsa/00755F3C_Tsa_08755F3C.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87932EC.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_8793384.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_8793494.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87935B0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87936C0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87937D0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87938EC.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_8799818.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_8799ABC.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_8799D64.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_879A008.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_879A2A8.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_879A444.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_879A6A0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_879A87C.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_879A9E8.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_879AB10.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A18F0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A19EC.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A1B68.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A1D74.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A1F9C.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A2134.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A2384.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A2584.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A2748.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A28A8.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A29DC.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A2AE8.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A2BE4.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A2CCC.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A2DB8.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A4A88.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A4B68.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A4C44.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A4D2C.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_87A4E0C.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_2.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_3.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_4.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_2.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_3.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_4.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_2.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_3.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_4.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_5.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_6.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_7.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_2.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_3.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_4.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_5.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_6.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_7.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg_2.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/dragonfx/Tsa_87932EC.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87932EC.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_8793384.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_8793494.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87935B0.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87936C0.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87937D0.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87938EC.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_8799818.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_8799ABC.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_8799D64.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_879A008.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_879A2A8.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_879A444.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_879A6A0.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_879A87C.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_879A9E8.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_879AB10.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A18F0.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A19EC.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A1B68.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A1D74.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A1F9C.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A2134.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A2384.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A2584.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A2748.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A28A8.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A29DC.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A2AE8.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A2BE4.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A2CCC.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A2DB8.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A4A88.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A4B68.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A4C44.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A4D2C.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_87A4E0C.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_0.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_1.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_2.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_3.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_4.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_0.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_1.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_2.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_3.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Far_4.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_0.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_1.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_2.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_3.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_4.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_5.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_6.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Close_7.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_0.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_1.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_2.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_3.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_4.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_5.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_6.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg4_Far_7.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg_0.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg_1.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg_2.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/dragonfx/Tsa_87932EC.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/banim/efxbattle/TsaConf_BanimTmA1.map.bin` | efx-effect-bins | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/efxbattle/TsaConf_BanimTmA2.map.bin` | efx-effect-bins | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/efxbattle/TsaConf_BanimTmA3.map.bin` | efx-effect-bins | fe8u keeps .map.bin binary (TSA/tilemap) |
@@ -1419,14 +1117,14 @@ under MISS, asserted by the self-test guards below).
 | `graphics/banim/efxlvupfx/Tsa8_EfxLvupBG.map.bin` | efx-effect-bins | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/efxlvupfx/Tsa9_EfxLvupBG.map.bin` | efx-effect-bins | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/efxlvupfx/gEfxlvupfx_3.map.bin` | efx-effect-bins | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/misc/Tsa_EkrExpBar.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/banim/misc/Tsa_EkrPopup.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `graphics/banim/misc/Tsa_EkrExpBar.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/banim/misc/Tsa_EkrPopup.map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/banim/misc/gBanimmisc_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/misc/gBanimmisc_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/misc/gBanimmisc_2.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/misc/gBanimmisc_5.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/battle_forecast/gTSA_BattleForecastExtended.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/battle_forecast/gTSA_BattleForecastStandard.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/battle_forecast/gTSA_BattleForecastExtended.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/battle_forecast/gTSA_BattleForecastStandard.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/btl_bg/btl_bg_14.fetsa3.bin` | TSA/.map.bin | fe8u keeps .fetsa3.bin binary (TSA/tilemap) |
 | `graphics/btl_bg/btl_bg_27.fetsa3.bin` | TSA/.map.bin | fe8u keeps .fetsa3.bin binary (TSA/tilemap) |
 | `graphics/btl_bg/btl_bg_33.fetsa3.bin` | TSA/.map.bin | fe8u keeps .fetsa3.bin binary (TSA/tilemap) |
@@ -1443,25 +1141,79 @@ under MISS, asserted by the self-test guards below).
 | `graphics/ending_cg/cg_7.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/ending_cg/cg_8.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/ending_cg/cg_9.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/gmapunit/Tsa_UnkData_2.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/Tsa_UnkData_2.tsa.bin |
-| `graphics/mapanim/Tsa_Mapeventcall_0.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_1.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_10.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_11.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_12.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_13.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_14.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_15.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_16.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_17.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_2.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_3.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_4.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_5.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_6.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_7.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_8.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/Tsa_Mapeventcall_9.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/gfx_data_bg/bg_Cell_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/bg_Fort_Sunset_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/bg_Grass_Plains_2_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/bg_Grass_Plains_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/bg_Normal_Village_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/bg_Plain_1_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/bg_Plain_2_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/bg_Port_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/bg_Stream_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_001_bg_House_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_003_bg_Caer_Pelyn_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_007_bg_Village_Clear_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_012_bg_Fireplace_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_015_bg_Castle_Interior_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_018_bg_Grado_Chamber_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_020_bg_Throne_Normal_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_022_bg_Throne_Normal_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_024_bg_Castle_Bright_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_026_bg_Garden_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_028_bg_Manse_Back_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_030_bg_Cell_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_033_bg_Plain_1_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_035_bg_Grass_Plains_2_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_045_bg_Passage_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_050_bg_Stone_Chamber_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_052_bg_Renais_Chamber_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_054_bg_White_Chamber_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_059_bg_Black_Temple_Outside_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_061_bg_Black_Temple_Inside_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_065_bg_convo2_00_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_070_bg_convo2_03_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_075_bg_convo2_08_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_077_bg_convo2_09_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_081_bg_convo2_12_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_083_bg_convo2_13_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_085_bg_convo2_15_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_087_bg_convo2_16_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_091_bg_convo2_19_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_094_bg_convo2_21_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_096_bg_convo2_22_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_098_bg_convo2_23_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_100_bg_convo2_24_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gfx_data_bg/gfx_data_bg_102_bg_Blank_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gmapunit/Tsa_ArenaBattleBg.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gmapunit/Tsa_ConfigUiFrame.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gmapunit/Tsa_PlayerRankFog.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gmapunit/Tsa_PrepItemScreen.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gmapunit/Tsa_PrepItemUseScreen.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gmapunit/Tsa_SilenceBg_2.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gmapunit/Tsa_StatscreenEquipedWeaponHighlight.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gmapunit/Tsa_TerrainMapUi_Labels.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gmapunit/Tsa_UnkData_1.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gmapunit/Tsa_UnkData_2.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gmapunit/Tsa_UnkData_3.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/gmapunit/Tsa_UnkData_4.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_0.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_1.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_10.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_11.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_12.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_13.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_14.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_15.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_16.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_17.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_2.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_3.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_4.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_5.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_6.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_7.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_8.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/mapanim/Tsa_Mapeventcall_9.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/mapanim/gMapanimEventcall_135.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/mapanim/gMapanimEventcall_136.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/mapanim/gMapanimEventcall_137.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
@@ -1552,7 +1304,7 @@ under MISS, asserted by the self-test guards below).
 | `graphics/mapanim/gMapanimEventcall_290.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/mapanim/gMapanimEventcall_291.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/mapanim/gMapanimEventcall_292.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/mapanim/gTsa_ArenaBuildingFront.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/mapanim/gTsa_ArenaBuildingFront.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc/Tsa10_MonsterStoneMapAnimfx.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/Tsa1_MonsterStoneMapAnimfx.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/Tsa2_MonsterStoneMapAnimfx.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
@@ -1579,18 +1331,95 @@ under MISS, asserted by the self-test guards below).
 | `graphics/misc/gUnkData_77.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_84.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_86.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/misc_gfx2/Tsa_EkrTriPegagusLeftBG1.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/ui/Tsa_EkrTriPegagusLeftBG1.map.bin |
-| `graphics/misc_gfx2/Tsa_EkrTriPegagusLeftBG2.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/ui/Tsa_EkrTriPegagusLeftBG2.map.bin |
-| `graphics/misc_gfx2/Tsa_EkrTriPegagusLeftBG3.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/ui/Tsa_EkrTriPegagusLeftBG3.map.bin |
-| `graphics/misc_gfx2/Tsa_EkrTriPegagusRightBG1.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/ui/Tsa_EkrTriPegagusRightBG1.map.bin |
-| `graphics/misc_gfx2/Tsa_EkrTriPegagusRightBG2.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/ui/Tsa_EkrTriPegagusRightBG2.map.bin |
-| `graphics/misc_gfx2/Tsa_EkrTriPegagusRightBG3.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/ui/Tsa_EkrTriPegagusRightBG3.map.bin |
-| `graphics/misc_gfx2/gTSA_GoalBox_OneLine.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/misc_gfx2/gTSA_GoalBox_TwoLines.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/misc_gfx2/gTSA_MinimugBox.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/misc_gfx2/gTSA_TerrainBox.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/misc_gfx2/gTSA_UnitInfoWindow.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/misc_gfx2/gTsa_UnkData_0.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc_gfx/Tsa_GorgonHatchCloud_A.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_GorgonHatchCloud_B.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_GorgonHatchCloud_C.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_GorgonHatchCloud_D.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_GorgonHatchCloud_E.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_GorgonHatchCloud_F.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_GorgonHatchCloud_G.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_MapAnimUnlockBgfx.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_MapAnim_0.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_MapAnim_1.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_MapBattleBoxGfx1.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_MapBattleBoxGfx2.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_MapBattleBoxGfx3.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_Mapnightmare.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx1.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx10.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx11.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx12.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx13.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx14.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx15.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx16.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx17.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx18.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx19.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx2.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx20.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx21.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx22.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx23.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx24.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx25.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx26.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx27.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx28.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx29.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx3.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx30.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx31.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx32.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx33.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx4.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx5.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx6.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx7.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx8.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_NightMareMapAnimfx9.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/Tsa_ShopWindows.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/gTsa_TitleDemonKing.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/gTsa_TitleDragonForeground.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/gTsa_TitleMainBackground.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/gTsa_Titlescreen_0.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/gTsa_Titlescreen_1.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx/gTsa_Titlescreen_2.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_CharacterEnding_BottomBorder.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_CharacterEnding_TopBorder.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_EkrTriPegagusLeftBG1.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_EkrTriPegagusLeftBG2.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_EkrTriPegagusLeftBG3.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_EkrTriPegagusRightBG1.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_EkrTriPegagusRightBG2.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_EkrTriPegagusRightBG3.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_EndingFin.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_EventGmap.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_GameOverFx.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_LinkArenaPostBattleBg.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_SaveMenuBG.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_SioResultRankings.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_StaffReelEnt_0.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_StaffReelEnt_1.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_StaffReelEnt_2.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_StaffReelEnt_3.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_StaffReelEnt_4.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_StaffReelEnt_5.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_StaffReelEnt_8.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_StaffReelEnt_9.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_UnkData_0.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/Tsa_UnkData_5.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTSA_GoalBox_OneLine.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTSA_GoalBox_TwoLines.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTSA_MinimugBox.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTSA_TerrainBox.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTSA_UnitInfoWindow.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTsa_OpSubtitle_00.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTsa_OpSubtitle_01.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTsa_OpSubtitle_04.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTsa_SupportSubScreen.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTsa_UnkData_0.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTsa_WorldmapMinimap_0.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/opanim/OpAnimCharacterBG.map.bin` | opanim-tilemaps | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/opanim/OpAnimEirikaClose1.map.bin` | opanim-tilemaps | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/opanim/OpAnimEirikaClose2.map.bin` | opanim-tilemaps | fe8u keeps .map.bin binary (TSA/tilemap) |
@@ -1707,27 +1536,27 @@ under MISS, asserted by the self-test guards below).
 | `graphics/opanim/opanim97.map.bin` | opanim-tilemaps | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/opanim/opanim98.map.bin` | opanim-tilemaps | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/opanim/opanim99.map.bin` | opanim-tilemaps | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `graphics/player_interface/gTSA_UnitInfoWindow.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_0.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_1.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_10.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_11.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_12.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_13.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_2.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_3.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_4.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_5.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_6.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_7.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_8.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
-| `graphics/stone_shatter/gTsa_StoneShatter_9.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/player_interface/gTSA_UnitInfoWindow.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_0.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_1.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_10.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_11.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_12.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_13.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_2.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_3.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_4.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_5.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_6.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_7.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_8.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/stone_shatter/gTsa_StoneShatter_9.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 
 </details>
 
-## UNCERTAIN (361) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (473) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>361 entries</summary>
+<details><summary>473 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -2092,6 +1921,118 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/unit_icon_move_table.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/data/data_08576124_576150.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/data_085772B4/data_085772B4_577378.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
+| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_000_5D367C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_001_5D3EA8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_002_5D4358.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_003_5D48E0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_004_5D4C5C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_005_5D4DD8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_006_5D53FC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_007_5D737C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_009_5D8A8C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_ending/frontier_df3_ending_000_AC1BC0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_ending/frontier_df3_ending_001_AC3AA8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_ending/frontier_df3_ending_002_AC50A4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_000_57E884.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_001_57F604.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_002_57FACC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_003_57FD0C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_004_57FF94.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_005_580B1C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_006_5814AC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_007_581A04.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_008_582A54.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_009_582F1C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_000_AC059C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_001_AC0B90.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_002_AC16C8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_003_AC718C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_005_ACEB54.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_007_AD0CFC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_010_B1E5FC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_012_B25A78.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_013_B26374.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_015_B3B3D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_016_B3EBE4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_017_B3F024.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_018_B3F7BC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_021_BAB754.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_000_A149D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_002_A5D648.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_003_A5E6CC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_004_A5F770.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_013_A72408.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_014_A72BF0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_015_A73900.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_016_A74CEC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_018_A92B38.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_019_A934EC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_020_A9454C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_025_A9C020.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_026_A9CF7C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_028_A9E244.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_029_AA3860.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_030_AA71D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_031_AA9F98.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_032_AAAC4C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_033_AAEB40.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_034_AAF9EC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_035_AB0830.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_036_AB0D18.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_038_ABCD24.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_039_AC00A8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_000_57A504.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_001_57B23C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_002_57BF74.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_003_57CC64.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_004_57CF7C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_005_57DFCC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_006_57E4DC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_008_5946F4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_009_594B2C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_010_595B34.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_011_59662C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_012_596F74.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_013_5987EC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_014_598E64.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_015_599BE4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_016_59A2EC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_017_59A574.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_018_59B0FC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_019_59BA8C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_020_59BFE4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_021_59D034.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_022_5B90D8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_023_5B9454.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_024_5C1D30.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_025_5C2E50.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_027_5C3C9C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_028_5C411C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_029_5C4A94.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_030_5C534C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_031_5C5DE8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_032_5C6084.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_033_5C6AD4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_034_5C6E08.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_035_5CDF84.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_038_5D32D8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_ending_cg/frontier_ending_cg_000_B27970.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_fontgrp_ui/frontier_fontgrp_ui_000_59D4FC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 
 </details>
 
