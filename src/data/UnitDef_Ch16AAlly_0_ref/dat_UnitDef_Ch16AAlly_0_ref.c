@@ -8,11 +8,11 @@
  * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
  */
 
-extern const u8 frontier_df3_unitdef_b_007_911200[];
+extern struct REDA REDAs_UnitDef_Ch16AAlly_0_0[];
 SECTION(".rodata.dat_UnitDef_Ch16AAlly_0_ref") struct UnitDefinition UnitDef_Ch16AAlly_0[] =
 {
     { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0xC, .yPosition=0x5 },
     { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0xE, .yPosition=0x5 },
-    { .charIndex=0x2, .classIndex=0x7, .level=0x1, .xPosition=0xD, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_007_911200 + 0xC8) },
+    { .charIndex=0x2, .classIndex=0x7, .level=0x1, .xPosition=0xD, .yPosition=0xB, .redaCount=0x1, .redas=REDAs_UnitDef_Ch16AAlly_0_0 },
     {0},
 };

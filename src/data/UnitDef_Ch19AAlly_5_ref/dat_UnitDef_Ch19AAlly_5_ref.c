@@ -8,13 +8,17 @@
  * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
  */
 
-extern const u8 frontier_df3_unitdef_b_022_915038[];
+extern struct REDA REDAs_UnitDef_Ch19AAlly_5_0[];
+extern struct REDA REDAs_UnitDef_Ch19AAlly_5_1[];
+extern struct REDA REDAs_UnitDef_Ch19AAlly_5_2[];
+extern struct REDA REDAs_UnitDef_Ch19AAlly_5_3[];
+extern struct REDA REDAs_UnitDef_Ch19AAlly_5_4[];
 SECTION(".rodata.dat_UnitDef_Ch19AAlly_5_ref") struct UnitDefinition UnitDef_Ch19AAlly_5[] =
 {
-    { .charIndex=0x19, .classIndex=0x4B, .level=0x1, .xPosition=0x7, .yPosition=0x8, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_022_915038 + 0x8) },
-    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0x6, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_022_915038 + 0x10) },
-    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0x8, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_022_915038 + 0x18) },
-    { .charIndex=0x1E, .classIndex=0x3C, .level=0x1, .xPosition=0x6, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_022_915038 + 0x20) },
-    { .charIndex=0xB, .classIndex=0x1B, .level=0x1, .xPosition=0x8, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)frontier_df3_unitdef_b_022_915038 + 0x28) },
+    { .charIndex=0x19, .classIndex=0x4B, .level=0x1, .xPosition=0x7, .yPosition=0x8, .redaCount=0x1, .redas=REDAs_UnitDef_Ch19AAlly_5_0 },
+    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0x6, .yPosition=0x9, .redaCount=0x1, .redas=REDAs_UnitDef_Ch19AAlly_5_1 },
+    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0x8, .yPosition=0x9, .redaCount=0x1, .redas=REDAs_UnitDef_Ch19AAlly_5_2 },
+    { .charIndex=0x1E, .classIndex=0x3C, .level=0x1, .xPosition=0x6, .yPosition=0x9, .redaCount=0x1, .redas=REDAs_UnitDef_Ch19AAlly_5_3 },
+    { .charIndex=0xB, .classIndex=0x1B, .level=0x1, .xPosition=0x8, .yPosition=0x9, .redaCount=0x1, .redas=REDAs_UnitDef_Ch19AAlly_5_4 },
     {0},
 };

@@ -14,7 +14,7 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00102520\n"
 "\t.4byte 0x00002C40\n"
-"\t.4byte frontier_df3_unitdef_b_007_911200 + 0x190\n"
+"\t.4byte frontier_df3_unitdef_b_007_911200_tail\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00012C40\n"
 "\t.4byte UnitDef_Ch16AEnemy_0\n"
