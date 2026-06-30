@@ -3,52 +3,52 @@
 @ src/data/banim-ekrdragonfx.o: region-same content at JP 0x087fb94c (US 0x087a73f4, shift -0x-54558); incbin baserom.gba
 	.global Img_DemonLightBg_Close_1
 Img_DemonLightBg_Close_1:
-	.incbin "data/banim/Img_DemonLightBg_Close_1.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_1.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_2
 Img_DemonLightBg_Close_2:
-	.incbin "data/banim/Img_DemonLightBg_Close_2.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_2.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_3
 Img_DemonLightBg_Close_3:
-	.incbin "data/banim/Img_DemonLightBg_Close_3.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_3.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_4
 Img_DemonLightBg_Close_4:
-	.incbin "data/banim/Img_DemonLightBg_Close_4.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_4.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_5
 Img_DemonLightBg_Close_5:
-	.incbin "data/banim/Img_DemonLightBg_Close_5.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_5.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_6
 Img_DemonLightBg_Close_6:
-	.incbin "data/banim/Img_DemonLightBg_Close_6.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_6.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_7
 Img_DemonLightBg_Close_7:
-	.incbin "data/banim/Img_DemonLightBg_Close_7.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_7.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_8
 Img_DemonLightBg_Close_8:
-	.incbin "data/banim/Img_DemonLightBg_Close_8.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_8.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_9
 Img_DemonLightBg_Close_9:
-	.incbin "data/banim/Img_DemonLightBg_Close_9.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_9.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_10
 Img_DemonLightBg_Close_10:
-	.incbin "data/banim/Img_DemonLightBg_Close_10.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_10.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_11
 Img_DemonLightBg_Close_11:
-	.incbin "data/banim/Img_DemonLightBg_Close_11.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_11.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_12
 Img_DemonLightBg_Close_12:
-	.incbin "data/banim/Img_DemonLightBg_Close_12.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_12.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_13
 Img_DemonLightBg_Close_13:
-	.incbin "data/banim/Img_DemonLightBg_Close_13.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_13.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_14
 Img_DemonLightBg_Close_14:
-	.incbin "data/banim/Img_DemonLightBg_Close_14.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_14.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_15
 Img_DemonLightBg_Close_15:
-	.incbin "data/banim/Img_DemonLightBg_Close_15.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_15.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_16
 Img_DemonLightBg_Close_16:
-	.incbin "data/banim/Img_DemonLightBg_Close_16.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_16.feimg1.bin.lz"
 	.global Pal_DemonLightBg_Close_1
 Pal_DemonLightBg_Close_1:
 	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_1.gbapal"
@@ -99,100 +99,100 @@ Pal_DemonLightBg_Close_16:
 	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_16.gbapal"
 	.global Tsa_DemonLightBg_Close_1
 Tsa_DemonLightBg_Close_1:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_1.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_1.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_2
 Tsa_DemonLightBg_Close_2:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_2.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_2.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_3
 Tsa_DemonLightBg_Close_3:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_3.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_3.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_4
 Tsa_DemonLightBg_Close_4:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_4.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_4.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_5
 Tsa_DemonLightBg_Close_5:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_5.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_5.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_6
 Tsa_DemonLightBg_Close_6:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_6.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_6.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_7
 Tsa_DemonLightBg_Close_7:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_7.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_7.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_8
 Tsa_DemonLightBg_Close_8:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_8.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_8.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_9
 Tsa_DemonLightBg_Close_9:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_9.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_9.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_10
 Tsa_DemonLightBg_Close_10:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_10.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_10.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_11
 Tsa_DemonLightBg_Close_11:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_11.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_11.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_12
 Tsa_DemonLightBg_Close_12:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_12.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_12.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_13
 Tsa_DemonLightBg_Close_13:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_13.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_13.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_14
 Tsa_DemonLightBg_Close_14:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_14.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_14.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_15
 Tsa_DemonLightBg_Close_15:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_15.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_15.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_16
 Tsa_DemonLightBg_Close_16:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_16.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_16.fetsa1.bin.lz"
 	.global Img_DemonLightBg_Close_17
 Img_DemonLightBg_Close_17:
-	.incbin "data/banim/Img_DemonLightBg_Close_17.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_17.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_18
 Img_DemonLightBg_Close_18:
-	.incbin "data/banim/Img_DemonLightBg_Close_18.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_18.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_19
 Img_DemonLightBg_Close_19:
-	.incbin "data/banim/Img_DemonLightBg_Close_19.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_19.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_20
 Img_DemonLightBg_Close_20:
-	.incbin "data/banim/Img_DemonLightBg_Close_20.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_20.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_21
 Img_DemonLightBg_Close_21:
-	.incbin "data/banim/Img_DemonLightBg_Close_21.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_21.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_22
 Img_DemonLightBg_Close_22:
-	.incbin "data/banim/Img_DemonLightBg_Close_22.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_22.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_23
 Img_DemonLightBg_Close_23:
-	.incbin "data/banim/Img_DemonLightBg_Close_23.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_23.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_24
 Img_DemonLightBg_Close_24:
-	.incbin "data/banim/Img_DemonLightBg_Close_24.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_24.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_25
 Img_DemonLightBg_Close_25:
-	.incbin "data/banim/Img_DemonLightBg_Close_25.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_25.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_26
 Img_DemonLightBg_Close_26:
-	.incbin "data/banim/Img_DemonLightBg_Close_26.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_26.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_27
 Img_DemonLightBg_Close_27:
-	.incbin "data/banim/Img_DemonLightBg_Close_27.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_27.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_28
 Img_DemonLightBg_Close_28:
-	.incbin "data/banim/Img_DemonLightBg_Close_28.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_28.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_29
 Img_DemonLightBg_Close_29:
-	.incbin "data/banim/Img_DemonLightBg_Close_29.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_29.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_30
 Img_DemonLightBg_Close_30:
-	.incbin "data/banim/Img_DemonLightBg_Close_30.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_30.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_31
 Img_DemonLightBg_Close_31:
-	.incbin "data/banim/Img_DemonLightBg_Close_31.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_31.feimg1.bin.lz"
 	.global Img_DemonLightBg_Close_32
 Img_DemonLightBg_Close_32:
-	.incbin "data/banim/Img_DemonLightBg_Close_32.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_32.feimg1.bin.lz"
 	.global Pal_DemonLightBg_Close_17
 Pal_DemonLightBg_Close_17:
 	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_17.gbapal"
@@ -243,52 +243,52 @@ Pal_DemonLightBg_Close_32:
 	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Close_32.gbapal"
 	.global Tsa_DemonLightBg_Close_17
 Tsa_DemonLightBg_Close_17:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_17.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_17.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_18
 Tsa_DemonLightBg_Close_18:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_18.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_18.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_19
 Tsa_DemonLightBg_Close_19:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_19.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_19.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_20
 Tsa_DemonLightBg_Close_20:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_20.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_20.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_21
 Tsa_DemonLightBg_Close_21:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_21.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_21.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_22
 Tsa_DemonLightBg_Close_22:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_22.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_22.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_23
 Tsa_DemonLightBg_Close_23:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_23.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_23.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_24
 Tsa_DemonLightBg_Close_24:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_24.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_24.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_25
 Tsa_DemonLightBg_Close_25:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_25.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_25.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_26
 Tsa_DemonLightBg_Close_26:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_26.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_26.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_27
 Tsa_DemonLightBg_Close_27:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_27.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_27.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_28
 Tsa_DemonLightBg_Close_28:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_28.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_28.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_29
 Tsa_DemonLightBg_Close_29:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_29.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_29.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_30
 Tsa_DemonLightBg_Close_30:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_30.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_30.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_31
 Tsa_DemonLightBg_Close_31:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_31.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_31.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Close_32
 Tsa_DemonLightBg_Close_32:
-	.incbin "data/banim/Tsa_DemonLightBg_Close_32.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Close_32.fetsa1.bin.lz"
 	.global Img_DemonLightBg_0
 Img_DemonLightBg_0:
 	.incbin "graphics/banim/_us/banim/dragonfx/Img_087C5190.4bpp.lz"
@@ -408,52 +408,52 @@ Tsa_DemonLightBg3_Close_4:
 	.incbin "graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg3_Close_4.map.bin.lz"
 	.global Img_DemonLightBg_Far_1
 Img_DemonLightBg_Far_1:
-	.incbin "data/banim/Img_DemonLightBg_Far_1.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_1.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_2
 Img_DemonLightBg_Far_2:
-	.incbin "data/banim/Img_DemonLightBg_Far_2.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_2.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_3
 Img_DemonLightBg_Far_3:
-	.incbin "data/banim/Img_DemonLightBg_Far_3.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_3.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_4
 Img_DemonLightBg_Far_4:
-	.incbin "data/banim/Img_DemonLightBg_Far_4.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_4.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_5
 Img_DemonLightBg_Far_5:
-	.incbin "data/banim/Img_DemonLightBg_Far_5.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_5.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_6
 Img_DemonLightBg_Far_6:
-	.incbin "data/banim/Img_DemonLightBg_Far_6.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_6.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_7
 Img_DemonLightBg_Far_7:
-	.incbin "data/banim/Img_DemonLightBg_Far_7.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_7.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_8
 Img_DemonLightBg_Far_8:
-	.incbin "data/banim/Img_DemonLightBg_Far_8.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_8.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_9
 Img_DemonLightBg_Far_9:
-	.incbin "data/banim/Img_DemonLightBg_Far_9.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_9.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_10
 Img_DemonLightBg_Far_10:
-	.incbin "data/banim/Img_DemonLightBg_Far_10.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_10.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_11
 Img_DemonLightBg_Far_11:
-	.incbin "data/banim/Img_DemonLightBg_Far_11.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_11.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_12
 Img_DemonLightBg_Far_12:
-	.incbin "data/banim/Img_DemonLightBg_Far_12.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_12.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_13
 Img_DemonLightBg_Far_13:
-	.incbin "data/banim/Img_DemonLightBg_Far_13.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_13.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_14
 Img_DemonLightBg_Far_14:
-	.incbin "data/banim/Img_DemonLightBg_Far_14.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_14.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_15
 Img_DemonLightBg_Far_15:
-	.incbin "data/banim/Img_DemonLightBg_Far_15.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_15.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_16
 Img_DemonLightBg_Far_16:
-	.incbin "data/banim/Img_DemonLightBg_Far_16.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_16.feimg1.bin.lz"
 	.global Pal_DemonLightBg_Far_1
 Pal_DemonLightBg_Far_1:
 	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_1.gbapal"
@@ -504,100 +504,100 @@ Pal_DemonLightBg_Far_16:
 	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_16.gbapal"
 	.global Tsa_DemonLightBg_Far_1
 Tsa_DemonLightBg_Far_1:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_1.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_1.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_2
 Tsa_DemonLightBg_Far_2:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_2.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_2.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_3
 Tsa_DemonLightBg_Far_3:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_3.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_3.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_4
 Tsa_DemonLightBg_Far_4:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_4.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_4.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_5
 Tsa_DemonLightBg_Far_5:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_5.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_5.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_6
 Tsa_DemonLightBg_Far_6:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_6.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_6.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_7
 Tsa_DemonLightBg_Far_7:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_7.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_7.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_8
 Tsa_DemonLightBg_Far_8:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_8.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_8.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_9
 Tsa_DemonLightBg_Far_9:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_9.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_9.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_10
 Tsa_DemonLightBg_Far_10:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_10.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_10.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_11
 Tsa_DemonLightBg_Far_11:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_11.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_11.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_12
 Tsa_DemonLightBg_Far_12:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_12.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_12.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_13
 Tsa_DemonLightBg_Far_13:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_13.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_13.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_14
 Tsa_DemonLightBg_Far_14:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_14.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_14.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_15
 Tsa_DemonLightBg_Far_15:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_15.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_15.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_16
 Tsa_DemonLightBg_Far_16:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_16.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_16.fetsa1.bin.lz"
 	.global Img_DemonLightBg_Far_17
 Img_DemonLightBg_Far_17:
-	.incbin "data/banim/Img_DemonLightBg_Far_17.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_17.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_18
 Img_DemonLightBg_Far_18:
-	.incbin "data/banim/Img_DemonLightBg_Far_18.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_18.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_19
 Img_DemonLightBg_Far_19:
-	.incbin "data/banim/Img_DemonLightBg_Far_19.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_19.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_20
 Img_DemonLightBg_Far_20:
-	.incbin "data/banim/Img_DemonLightBg_Far_20.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_20.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_21
 Img_DemonLightBg_Far_21:
-	.incbin "data/banim/Img_DemonLightBg_Far_21.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_21.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_22
 Img_DemonLightBg_Far_22:
-	.incbin "data/banim/Img_DemonLightBg_Far_22.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_22.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_23
 Img_DemonLightBg_Far_23:
-	.incbin "data/banim/Img_DemonLightBg_Far_23.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_23.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_24
 Img_DemonLightBg_Far_24:
-	.incbin "data/banim/Img_DemonLightBg_Far_24.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_24.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_25
 Img_DemonLightBg_Far_25:
-	.incbin "data/banim/Img_DemonLightBg_Far_25.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_25.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_26
 Img_DemonLightBg_Far_26:
-	.incbin "data/banim/Img_DemonLightBg_Far_26.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_26.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_27
 Img_DemonLightBg_Far_27:
-	.incbin "data/banim/Img_DemonLightBg_Far_27.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_27.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_28
 Img_DemonLightBg_Far_28:
-	.incbin "data/banim/Img_DemonLightBg_Far_28.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_28.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_29
 Img_DemonLightBg_Far_29:
-	.incbin "data/banim/Img_DemonLightBg_Far_29.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_29.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_30
 Img_DemonLightBg_Far_30:
-	.incbin "data/banim/Img_DemonLightBg_Far_30.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_30.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_31
 Img_DemonLightBg_Far_31:
-	.incbin "data/banim/Img_DemonLightBg_Far_31.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_31.feimg1.bin.lz"
 	.global Img_DemonLightBg_Far_32
 Img_DemonLightBg_Far_32:
-	.incbin "data/banim/Img_DemonLightBg_Far_32.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_32.feimg1.bin.lz"
 	.global Pal_DemonLightBg_Far_17
 Pal_DemonLightBg_Far_17:
 	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_17.gbapal"
@@ -648,52 +648,52 @@ Pal_DemonLightBg_Far_32:
 	.incbin "graphics/banim/_us/efxdragon/DemonLightBg_Far_32.gbapal"
 	.global Tsa_DemonLightBg_Far_17
 Tsa_DemonLightBg_Far_17:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_17.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_17.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_18
 Tsa_DemonLightBg_Far_18:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_18.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_18.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_19
 Tsa_DemonLightBg_Far_19:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_19.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_19.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_20
 Tsa_DemonLightBg_Far_20:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_20.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_20.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_21
 Tsa_DemonLightBg_Far_21:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_21.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_21.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_22
 Tsa_DemonLightBg_Far_22:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_22.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_22.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_23
 Tsa_DemonLightBg_Far_23:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_23.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_23.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_24
 Tsa_DemonLightBg_Far_24:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_24.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_24.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_25
 Tsa_DemonLightBg_Far_25:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_25.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_25.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_26
 Tsa_DemonLightBg_Far_26:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_26.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_26.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_27
 Tsa_DemonLightBg_Far_27:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_27.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_27.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_28
 Tsa_DemonLightBg_Far_28:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_28.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_28.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_29
 Tsa_DemonLightBg_Far_29:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_29.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_29.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_30
 Tsa_DemonLightBg_Far_30:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_30.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_30.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_31
 Tsa_DemonLightBg_Far_31:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_31.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_31.fetsa1.bin.lz"
 	.global Tsa_DemonLightBg_Far_32
 Tsa_DemonLightBg_Far_32:
-	.incbin "data/banim/Tsa_DemonLightBg_Far_32.bin"
+	.incbin "graphics/efxdragon/DemonLightBg_Far_32.fetsa1.bin.lz"
 	.global Img_DemonLightBg_1
 Img_DemonLightBg_1:
 	.incbin "graphics/banim/_us/banim/dragonfx/Img_087EA72C.4bpp.lz"
