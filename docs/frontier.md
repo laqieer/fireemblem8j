@@ -33,6 +33,9 @@ already de-pointered into shiftable `src/data/*_ref/dat_*_ref.c` (`.4byte` symbo
 were orphans referenced only by excluded asm stubs → deleted (byte-neutral). (2) `frontier_df3_unitdef_b`
 REDA cascade: 31 REDA runs carved into named `struct REDA[]`, 5 `.bin` eliminated; 2 region-different
 + ~38 UnitDefinition-table residues remain (need the recursive unit-table-typing chain — deferred).
+**Wave 10 (LANDED, −10 `.bin`: 1886 → 1876, MISS 285 → 275):** 10 raw `frontier_df4_banim_b` OAM tables
+→ typed `struct AnimSpriteData[]` (pointer-free, byte-exact). The remaining ~52 raw banim there are
+pointer-coupled (need an atomic whole-object relocation — in progress); 29 are JP-LZ floor.
 The strict goal is NOT reached; `make compare` OK + `make shiftcheck` 0 HIGH held on every banked lane.
 
 ## Current state (2026-06-30) — asset-editability WAVE 8 landed + the 642-MISS heuristic split (D322)
