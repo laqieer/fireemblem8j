@@ -8,9 +8,9 @@
 asm/dat_data_opanim_gfx_p0.o: \
   graphics/misc_gfx/Img_OpAnimEphraim.4bpp.lz \
   graphics/misc_gfx/Img_OpAnimEphraimBlur1.4bpp.lz \
+  graphics/misc_gfx/Img_OpAnimGenericCharacterBG.4bpp.lz \
   graphics/misc_gfx/Img_OpAnimWorldMap.4bpp.lz \
-  graphics/misc_gfx/Pal_OpAnimWorldMap.bin.lz \
-  graphics/misc_gfx/Pal_OpAnimWorldMapFog.bin.lz \
+  graphics/misc_gfx/Img_OpAnimWorldMapFog.4bpp.lz \
   graphics/misc_gfx/Tsa_OpAnimEphraim.bin.lz \
   graphics/misc_gfx/Tsa_OpAnimEphraimBlur1.bin.lz \
   graphics/misc_gfx/Tsa_OpAnimGenericCharacterBG.bin.lz \
@@ -21,7 +21,7 @@ asm/dat_data_opanim_gfx_p1.o: \
   graphics/misc_gfx/Img_OpAnimEirikaBlur1.4bpp.lz \
   graphics/misc_gfx/Img_OpAnimEirikaBlur2.4bpp.lz \
   graphics/misc_gfx/Img_OpAnimEirikaBlur3.4bpp.lz \
-  graphics/misc_gfx/Pal_OpAnimEphraimBlur.bin.lz \
+  graphics/misc_gfx/Img_OpAnimEirika.4bpp.lz \
   graphics/misc_gfx/Tsa_OpAnimEirika.bin.lz \
   graphics/misc_gfx/Tsa_OpAnimEirikaBlur1.bin.lz \
   graphics/misc_gfx/Tsa_OpAnimEirikaBlur2.bin.lz \
