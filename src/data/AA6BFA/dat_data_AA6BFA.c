@@ -1,14 +1,111 @@
 #include "global.h"
 
 /* Migrated from asm/dat_data_AA6BFA.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+ * gUnkData_100/101 stay INCBIN (raw 4bpp gfx, reused from fe8u). gUnkData_102..107
+ * are OAM secondary-object lists ported VERBATIM from fe8u src/data/data_AA6BFA.c as
+ * editable typed-C (struct OamObjectList); byte-identical to the original .bin.
+ * Each symbol kept in the original section/order.
  */
+
+/* A single secondary-OAM object as consumed by PutSpriteExt / CallARM_PushToSecondaryOAM. */
+struct OamObject
+{
+    u16 oam0;
+    u16 oam1;
+    u16 oam2;
+} __attribute__((packed));
+
+/* A sprite object list: a count followed by `count` packed OAM objects. */
+struct OamObjectList
+{
+    u16 count;
+    struct OamObject objects[0];
+} __attribute__((packed));
 
 SECTION(".rodata.dat_data_AA6BFA") u16 gUnkData_100[] = INCBIN_U16("graphics/reuse/gUnkData_100.4bpp");
 SECTION(".rodata.dat_data_AA6BFA") u16 gUnkData_101[] = INCBIN_U16("graphics/reuse/gUnkData_101.4bpp");
-SECTION(".rodata.dat_data_AA6BFA") u16 gUnkData_102[] = INCBIN_U16("data/residual/gUnkData_102.bin");
-SECTION(".rodata.dat_data_AA6BFA") u16 gUnkData_103[] = INCBIN_U16("data/residual/gUnkData_103.bin");
-SECTION(".rodata.dat_data_AA6BFA") u16 gUnkData_104[] = INCBIN_U16("data/residual/gUnkData_104.bin");
-SECTION(".rodata.dat_data_AA6BFA") u16 gUnkData_105[] = INCBIN_U16("data/residual/gUnkData_105.bin");
-SECTION(".rodata.dat_data_AA6BFA") u16 gUnkData_106[] = INCBIN_U16("data/residual/gUnkData_106.bin");
-SECTION(".rodata.dat_data_AA6BFA") u16 gUnkData_107[] = INCBIN_U16("data/residual/gUnkData_107.bin");
+
+SECTION(".rodata.dat_data_AA6BFA") struct OamObjectList gUnkData_102 =
+{
+    2,
+    {
+        { 0x0000, 0xC000, 0x03C0 },
+        { 0x8000, 0xC040, 0x03C0 },
+    },
+};
+
+SECTION(".rodata.dat_data_AA6BFA") struct OamObjectList gUnkData_103 =
+{
+    7,
+    {
+        { 0x4000, 0xC000, 0x03C0 },
+        { 0x0000, 0x8040, 0x03C0 },
+        { 0x8000, 0x8060, 0x03C0 },
+        { 0x4020, 0x8000, 0x03C0 },
+        { 0x4020, 0x8020, 0x03C0 },
+        { 0x4020, 0x8040, 0x03C0 },
+        { 0x0020, 0x4060, 0x03C0 },
+    },
+};
+
+SECTION(".rodata.dat_data_AA6BFA") struct OamObjectList gUnkData_104 =
+{
+    3,
+    {
+        { 0x0000, 0xC000, 0x03C0 },
+        { 0x4040, 0x8000, 0x03C0 },
+        { 0x4040, 0x8020, 0x03C0 },
+    },
+};
+
+SECTION(".rodata.dat_data_AA6BFA") struct OamObjectList gUnkData_105 =
+{
+    8,
+    {
+        { 0x8000, 0xC000, 0x03C0 },
+        { 0x8000, 0x8020, 0x03C0 },
+        { 0x8020, 0x8020, 0x03C0 },
+        { 0x8000, 0x4030, 0x03C0 },
+        { 0x8020, 0x4030, 0x03C0 },
+        { 0x4040, 0x8000, 0x03C0 },
+        { 0x0040, 0x4020, 0x03C0 },
+        { 0x8040, 0x0030, 0x03C0 },
+    },
+};
+
+SECTION(".rodata.dat_data_AA6BFA") struct OamObjectList gUnkData_106 =
+{
+    9,
+    {
+        { 0x4000, 0xC000, 0x03C0 },
+        { 0x4000, 0xC040, 0x03C0 },
+        { 0x4000, 0xC080, 0x03C0 },
+        { 0x4020, 0x8000, 0x03C0 },
+        { 0x4020, 0x8020, 0x03C0 },
+        { 0x4020, 0x8040, 0x03C0 },
+        { 0x4020, 0x8060, 0x03C0 },
+        { 0x4020, 0x8080, 0x03C0 },
+        { 0x4020, 0x80A0, 0x03C0 },
+    },
+};
+
+SECTION(".rodata.dat_data_AA6BFA") struct
+{
+    u16 count;
+    struct OamObject objects[8];
+    u16 terminator;
+} __attribute__((packed)) gUnkData_107 =
+{
+    8,
+    {
+        { 0x0000, 0xC000, 0x03C0 },
+        { 0x8000, 0xC040, 0x03C0 },
+        { 0x8000, 0x8060, 0x03C0 },
+        { 0x8020, 0x8060, 0x03C0 },
+        { 0x4040, 0x8000, 0x03C0 },
+        { 0x4040, 0x8020, 0x03C0 },
+        { 0x4040, 0x8040, 0x03C0 },
+        { 0x0040, 0x4060, 0x03C0 },
+    },
+    0x0000,
+};

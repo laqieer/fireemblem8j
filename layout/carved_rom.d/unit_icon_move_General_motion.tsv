@@ -1,0 +1,2 @@
+# unit-icon move motion table -> editable fe8u .s (wave4; byte-verified region-same)
+1B8438	1B8598	src/data/unit_icon_move_motion/unit_icon_move_General_motion.o(.rodata.unit_icon_move_General_motion)	unit_icon_move_General_motion editable AP-motion source (region-same, 352 B; was data_081B8438)

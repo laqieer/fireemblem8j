@@ -32,27 +32,27 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 3251 | 66.3% |
-| **FLOOR** | 1071 | 21.9% |
-| **UNCERTAIN** | 579 | 11.8% |
-| **TOTAL** | 4901 | 100.0% |
+| **MISS** | 1607 | 52.0% |
+| **FLOOR** | 1071 | 34.7% |
+| **UNCERTAIN** | 410 | 13.3% |
+| **TOTAL** | 3088 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
 | Category | Verdict | Count (this run) | fe8u editable form |
 |---|---|---:|---|
-| battle-anim | MISS | 1225 | fe8u 202 editable banim/*.s (compressing linker) |
-| pixel-gfx | MISS | 607 | fe8u graphics/**/*.png |
-| sound-m4a-tables | MISS | 494 | fe8u sound/music_player_table.s etc. |
-| voicegroup-tail | MISS | 8 | fe8u sound/voicegroups/*.s (documented ceiling) |
-| menu-strings | MISS | 171 | fe8u C literals (src/menu_def.c) |
-| unitdef-residuals | MISS | 706 | fe8u src/events_udefs.c typed C |
-| map-tilemaps | MISS | 40 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
+| battle-anim | MISS | 291 | fe8u 202 editable banim/*.s (compressing linker) |
+| pixel-gfx | MISS | 270 | fe8u graphics/**/*.png |
+| sound-m4a-tables | MISS | 488 | fe8u sound/music_player_table.s etc. |
+| voicegroup-tail | MISS | 5 | fe8u sound/voicegroups/*.s (documented ceiling) |
+| menu-strings | MISS | 166 | fe8u C literals (src/menu_def.c) |
+| unitdef-residuals | MISS | 354 | fe8u src/events_udefs.c typed C |
+| map-tilemaps | MISS | 33 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | TSA/.map.bin | FLOOR | 922 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 579 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 410 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -63,7 +63,7 @@ under MISS, asserted by the self-test guards below).
 
 **MISS spot checks** (fe8u ships an editable source):
 
-- `data/banim/AnimSprite_DemoKingTunkFace_1.bin` → **MISS** (battle-anim) — proof: fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s)
+- `data/banim/Img_DemonLightBg_Close_1.bin` → **MISS** (battle-anim) — proof: fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s)
 - `data/residual/Ch10EphraimMapChanges.bin` → **MISS** (map-tilemaps) — proof: fe8u src/data/map/change/Ch10EphraimMapChanges.json
 - `data/residual/EventListScr_Ch10a_Character.bin` → **MISS** (unitdef-residuals) — proof: fe8u src/events/*.c (EVENT_* / PROC_* macros)
 - `data/residual/MenuItems_SioMenudef_0.bin` → **MISS** (menu-strings) — proof: fe8u C string literals (src/menu_def.c parity)
@@ -87,113 +87,12 @@ under MISS, asserted by the self-test guards below).
 - `graphics/banim/efx*` effect bins are classified **FLOOR**.
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 
-## MISS (3251) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (1607) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>3251 entries</summary>
+<details><summary>1607 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
-| `data/banim/AnimSprite_DemoKingTunkFace_1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_DemoKingTunkFace_2.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_DemoKingTunkFace_3.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_DemoKingTunkFace_4.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_10.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_11.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_12.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_13.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_14.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_15.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_16.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_17.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_18.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_19.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_2.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_20.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_21.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_22.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_23.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_24.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_25.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_26.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_27.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_28.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_29.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_3.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_30.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_31.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_4.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_5.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_6.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_7.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_8.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxClasschgObjDrop_9.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_10.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_11.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_12.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_2.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_3.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_4.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_5.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_6.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_7.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_8.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire1Obj_9.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_10.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_11.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_12.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_2.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_3.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_4.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_5.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_6.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_7.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_8.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEyeFire2Obj1_9.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_10.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_11.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_12.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_13.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_2.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_3.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_4.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_5.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_6.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_7.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_8.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashEye_9.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_10.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_11.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_12.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_13.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_2.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_3.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_4.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_5.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_6.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_7.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_8.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_EfxMaohFlashThunderObj_9.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx0_0.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx0_1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx0_2.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx0_3.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx0_4.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx0_5.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx0_6.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx0_7.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx1_0.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx1_1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx1_2.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx1_3.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx1_4.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx1_5.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx1_6.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/AnimSprite_Ekrdragonfx1_7.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
 | `data/banim/Img_DemonLightBg_Close_1.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
 | `data/banim/Img_DemonLightBg_Close_10.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
 | `data/banim/Img_DemonLightBg_Close_11.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
@@ -290,810 +189,6 @@ under MISS, asserted by the self-test guards below).
 | `data/banim/Pal_EfxSkillD.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
 | `data/banim/Pal_EfxSkillE.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
 | `data/banim/Pal_EfxSkillF.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_arcf_ar1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_arcf_ar1_2_motion_o.bin` | battle-anim | fe8u banim/banim_arcf_ar1_2_motion.s |
-| `data/banim/banim_arcf_ar1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_arcf_ar1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_arcf_ar1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_arcf_ar1_motion_o.bin` | battle-anim | fe8u banim/banim_arcf_ar1_motion.s |
-| `data/banim/banim_arcf_ar1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_arcf_ar1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_arcm_ar1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_arcm_ar1_2_motion_o.bin` | battle-anim | fe8u banim/banim_arcm_ar1_2_motion.s |
-| `data/banim/banim_arcm_ar1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_arcm_ar1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_arcm_ar1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_arcm_ar1_motion_o.bin` | battle-anim | fe8u banim/banim_arcm_ar1_motion.s |
-| `data/banim/banim_arcm_ar1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_arcm_ar1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_armm_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_armm_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_armm_sp1_2_motion.s |
-| `data/banim/banim_armm_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_armm_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_armm_sp1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_armm_sp1_3_motion_o.bin` | battle-anim | fe8u banim/banim_armm_sp1_3_motion.s |
-| `data/banim/banim_armm_sp1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_armm_sp1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_armm_sp1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_armm_sp1_4_motion_o.bin` | battle-anim | fe8u banim/banim_armm_sp1_4_motion.s |
-| `data/banim/banim_armm_sp1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_armm_sp1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_armm_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_armm_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_armm_sp1_motion.s |
-| `data/banim/banim_armm_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_armm_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_asnm_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_asnm_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_asnm_sw1_2_motion.s |
-| `data/banim/banim_asnm_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_asnm_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_asnm_sw1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_asnm_sw1_3_motion_o.bin` | battle-anim | fe8u banim/banim_asnm_sw1_3_motion.s |
-| `data/banim/banim_asnm_sw1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_asnm_sw1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_asnm_sw1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_asnm_sw1_4_motion_o.bin` | battle-anim | fe8u banim/banim_asnm_sw1_4_motion.s |
-| `data/banim/banim_asnm_sw1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_asnm_sw1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_asnm_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_asnm_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_asnm_sw1_motion.s |
-| `data/banim/banim_asnm_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_asnm_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bae_at1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bae_at1_2_motion_o.bin` | battle-anim | fe8u banim/banim_bae_at1_2_motion.s |
-| `data/banim/banim_bae_at1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bae_at1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bae_at1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bae_at1_motion_o.bin` | battle-anim | fe8u banim/banim_bae_at1_motion.s |
-| `data/banim/banim_bae_at1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bae_at1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_banm_ax1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_banm_ax1_2_motion_o.bin` | battle-anim | fe8u banim/banim_banm_ax1_2_motion.s |
-| `data/banim/banim_banm_ax1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_banm_ax1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_banm_ax1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_banm_ax1_3_motion_o.bin` | battle-anim | fe8u banim/banim_banm_ax1_3_motion.s |
-| `data/banim/banim_banm_ax1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_banm_ax1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_banm_ax1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_banm_ax1_motion_o.bin` | battle-anim | fe8u banim/banim_banm_ax1_motion.s |
-| `data/banim/banim_banm_ax1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_banm_ax1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bgl_mg1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bgl_mg1_2_motion_o.bin` | battle-anim | fe8u banim/banim_bgl_mg1_2_motion.s |
-| `data/banim/banim_bgl_mg1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bgl_mg1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bgl_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bgl_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_bgl_mg1_motion.s |
-| `data/banim/banim_bgl_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bgl_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bisf_mg1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bisf_mg1_2_motion_o.bin` | battle-anim | fe8u banim/banim_bisf_mg1_2_motion.s |
-| `data/banim/banim_bisf_mg1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bisf_mg1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bisf_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bisf_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_bisf_mg1_motion.s |
-| `data/banim/banim_bisf_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bisf_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bism_mg1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bism_mg1_2_motion_o.bin` | battle-anim | fe8u banim/banim_bism_mg1_2_motion.s |
-| `data/banim/banim_bism_mg1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bism_mg1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bism_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bism_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_bism_mg1_motion.s |
-| `data/banim/banim_bism_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bism_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bos_at1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bos_at1_2_motion_o.bin` | battle-anim | fe8u banim/banim_bos_at1_2_motion.s |
-| `data/banim/banim_bos_at1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bos_at1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bos_at1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bos_at1_motion_o.bin` | battle-anim | fe8u banim/banim_bos_at1_motion.s |
-| `data/banim/banim_bos_at1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bos_at1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bram_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bram_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_bram_sw1_2_motion.s |
-| `data/banim/banim_bram_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bram_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bram_sw1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bram_sw1_3_motion_o.bin` | battle-anim | fe8u banim/banim_bram_sw1_3_motion.s |
-| `data/banim/banim_bram_sw1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bram_sw1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bram_sw1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bram_sw1_4_motion_o.bin` | battle-anim | fe8u banim/banim_bram_sw1_4_motion.s |
-| `data/banim/banim_bram_sw1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bram_sw1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bram_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bram_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_bram_sw1_motion.s |
-| `data/banim/banim_bram_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_bram_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_brsm_ax1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_brsm_ax1_2_motion_o.bin` | battle-anim | fe8u banim/banim_brsm_ax1_2_motion.s |
-| `data/banim/banim_brsm_ax1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_brsm_ax1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_brsm_ax1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_brsm_ax1_3_motion_o.bin` | battle-anim | fe8u banim/banim_brsm_ax1_3_motion.s |
-| `data/banim/banim_brsm_ax1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_brsm_ax1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_brsm_ax1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_brsm_ax1_motion_o.bin` | battle-anim | fe8u banim/banim_brsm_ax1_motion.s |
-| `data/banim/banim_brsm_ax1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_brsm_ax1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_cer_at1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_cer_at1_motion_o.bin` | battle-anim | fe8u banim/banim_cer_at1_motion.s |
-| `data/banim/banim_cer_at1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_cer_at1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_cyc_ax1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_cyc_ax1_2_motion_o.bin` | battle-anim | fe8u banim/banim_cyc_ax1_2_motion.s |
-| `data/banim/banim_cyc_ax1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_cyc_ax1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_cyc_ax1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_cyc_ax1_3_motion_o.bin` | battle-anim | fe8u banim/banim_cyc_ax1_3_motion.s |
-| `data/banim/banim_cyc_ax1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_cyc_ax1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_cyc_ax1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_cyc_ax1_motion_o.bin` | battle-anim | fe8u banim/banim_cyc_ax1_motion.s |
-| `data/banim/banim_cyc_ax1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_cyc_ax1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_danf_da1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_danf_da1_motion_o.bin` | battle-anim | fe8u banim/banim_danf_da1_motion.s |
-| `data/banim/banim_danf_da1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_danf_da1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drkm_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drkm_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_drkm_sp1_2_motion.s |
-| `data/banim/banim_drkm_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drkm_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drkm_sp1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drkm_sp1_3_motion_o.bin` | battle-anim | fe8u banim/banim_drkm_sp1_3_motion.s |
-| `data/banim/banim_drkm_sp1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drkm_sp1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drkm_sp1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drkm_sp1_4_motion_o.bin` | battle-anim | fe8u banim/banim_drkm_sp1_4_motion.s |
-| `data/banim/banim_drkm_sp1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drkm_sp1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drkm_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drkm_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_drkm_sp1_motion.s |
-| `data/banim/banim_drkm_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drkm_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_drmm_sp1_2_motion.s |
-| `data/banim/banim_drmm_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_3_motion_o.bin` | battle-anim | fe8u banim/banim_drmm_sp1_3_motion.s |
-| `data/banim/banim_drmm_sp1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_4_motion_o.bin` | battle-anim | fe8u banim/banim_drmm_sp1_4_motion.s |
-| `data/banim/banim_drmm_sp1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_5_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_5_motion_o.bin` | battle-anim | fe8u banim/banim_drmm_sp1_5_motion.s |
-| `data/banim/banim_drmm_sp1_5_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_5_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_6_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_6_motion_o.bin` | battle-anim | fe8u banim/banim_drmm_sp1_6_motion.s |
-| `data/banim/banim_drmm_sp1_6_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_6_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_drmm_sp1_motion.s |
-| `data/banim/banim_drmm_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drmm_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_druf_mg1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_druf_mg1_2_motion_o.bin` | battle-anim | fe8u banim/banim_druf_mg1_2_motion.s |
-| `data/banim/banim_druf_mg1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_druf_mg1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_druf_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_druf_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_druf_mg1_motion.s |
-| `data/banim/banim_druf_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_druf_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drum_mg1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drum_mg1_2_motion_o.bin` | battle-anim | fe8u banim/banim_drum_mg1_2_motion.s |
-| `data/banim/banim_drum_mg1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drum_mg1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drum_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drum_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_drum_mg1_motion.s |
-| `data/banim/banim_drum_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drum_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drz_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drz_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_drz_mg1_motion.s |
-| `data/banim/banim_drz_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_drz_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fakf_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fakf_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_fakf_sp1_2_motion.s |
-| `data/banim/banim_fakf_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fakf_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fakf_sp1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fakf_sp1_3_motion_o.bin` | battle-anim | fe8u banim/banim_fakf_sp1_3_motion.s |
-| `data/banim/banim_fakf_sp1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fakf_sp1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fakf_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fakf_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_fakf_sp1_motion.s |
-| `data/banim/banim_fakf_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fakf_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fifd_he1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fifd_he1_motion_o.bin` | battle-anim | fe8u banim/banim_fifd_he1_motion.s |
-| `data/banim/banim_fifd_he1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fifd_he1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fifd_hk1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fifd_hk1_motion_o.bin` | battle-anim | fe8u banim/banim_fifd_hk1_motion.s |
-| `data/banim/banim_fifd_hk1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fifd_hk1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fifd_mg1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fifd_mg1_2_motion_o.bin` | battle-anim | fe8u banim/banim_fifd_mg1_2_motion.s |
-| `data/banim/banim_fifd_mg1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fifd_mg1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fifd_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fifd_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_fifd_mg1_motion.s |
-| `data/banim/banim_fifd_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_fifd_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_figm_ax1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_figm_ax1_2_motion_o.bin` | battle-anim | fe8u banim/banim_figm_ax1_2_motion.s |
-| `data/banim/banim_figm_ax1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_figm_ax1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_figm_ax1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_figm_ax1_3_motion_o.bin` | battle-anim | fe8u banim/banim_figm_ax1_3_motion.s |
-| `data/banim/banim_figm_ax1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_figm_ax1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_figm_ax1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_figm_ax1_motion_o.bin` | battle-anim | fe8u banim/banim_figm_ax1_motion.s |
-| `data/banim/banim_figm_ax1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_figm_ax1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_forf_ar1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_forf_ar1_motion_o.bin` | battle-anim | fe8u banim/banim_forf_ar1_motion.s |
-| `data/banim/banim_forf_ar1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_forf_ar1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_forf_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_forf_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_forf_sw1_2_motion.s |
-| `data/banim/banim_forf_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_forf_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_forf_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_forf_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_forf_sw1_motion.s |
-| `data/banim/banim_forf_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_forf_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_form_ar1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_form_ar1_motion_o.bin` | battle-anim | fe8u banim/banim_form_ar1_motion.s |
-| `data/banim/banim_form_ar1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_form_ar1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_form_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_form_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_form_sw1_2_motion.s |
-| `data/banim/banim_form_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_form_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_form_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_form_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_form_sw1_motion.s |
-| `data/banim/banim_form_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_form_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gar_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gar_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_gar_sp1_2_motion.s |
-| `data/banim/banim_gar_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gar_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gar_sp1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gar_sp1_3_motion_o.bin` | battle-anim | fe8u banim/banim_gar_sp1_3_motion.s |
-| `data/banim/banim_gar_sp1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gar_sp1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gar_sp1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gar_sp1_4_motion_o.bin` | battle-anim | fe8u banim/banim_gar_sp1_4_motion.s |
-| `data/banim/banim_gar_sp1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gar_sp1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gar_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gar_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_gar_sp1_motion.s |
-| `data/banim/banim_gar_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gar_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_2_motion_o.bin` | battle-anim | fe8u banim/banim_genm_al1_2_motion.s |
-| `data/banim/banim_genm_al1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_3_motion_o.bin` | battle-anim | fe8u banim/banim_genm_al1_3_motion.s |
-| `data/banim/banim_genm_al1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_4_motion_o.bin` | battle-anim | fe8u banim/banim_genm_al1_4_motion.s |
-| `data/banim/banim_genm_al1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_5_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_5_motion_o.bin` | battle-anim | fe8u banim/banim_genm_al1_5_motion.s |
-| `data/banim/banim_genm_al1_5_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_5_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_6_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_6_motion_o.bin` | battle-anim | fe8u banim/banim_genm_al1_6_motion.s |
-| `data/banim/banim_genm_al1_6_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_6_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_7_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_7_motion_o.bin` | battle-anim | fe8u banim/banim_genm_al1_7_motion.s |
-| `data/banim/banim_genm_al1_7_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_7_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_8_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_8_motion_o.bin` | battle-anim | fe8u banim/banim_genm_al1_8_motion.s |
-| `data/banim/banim_genm_al1_8_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_8_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_motion_o.bin` | battle-anim | fe8u banim/banim_genm_al1_motion.s |
-| `data/banim/banim_genm_al1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_al1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_genm_sw1_2_motion.s |
-| `data/banim/banim_genm_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_genm_sw1_motion.s |
-| `data/banim/banim_genm_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_genm_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gog_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gog_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_gog_mg1_motion.s |
-| `data/banim/banim_gog_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_gog_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_ax1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_ax1_2_motion_o.bin` | battle-anim | fe8u banim/banim_grkm_ax1_2_motion.s |
-| `data/banim/banim_grkm_ax1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_ax1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_ax1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_ax1_3_motion_o.bin` | battle-anim | fe8u banim/banim_grkm_ax1_3_motion.s |
-| `data/banim/banim_grkm_ax1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_ax1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_ax1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_ax1_4_motion_o.bin` | battle-anim | fe8u banim/banim_grkm_ax1_4_motion.s |
-| `data/banim/banim_grkm_ax1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_ax1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_ax1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_ax1_motion_o.bin` | battle-anim | fe8u banim/banim_grkm_ax1_motion.s |
-| `data/banim/banim_grkm_ax1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_ax1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_grkm_sp1_2_motion.s |
-| `data/banim/banim_grkm_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_grkm_sp1_motion.s |
-| `data/banim/banim_grkm_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_grkm_sw1_2_motion.s |
-| `data/banim/banim_grkm_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sw1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sw1_3_motion_o.bin` | battle-anim | fe8u banim/banim_grkm_sw1_3_motion.s |
-| `data/banim/banim_grkm_sw1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sw1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sw1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sw1_4_motion_o.bin` | battle-anim | fe8u banim/banim_grkm_sw1_4_motion.s |
-| `data/banim/banim_grkm_sw1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sw1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_grkm_sw1_motion.s |
-| `data/banim/banim_grkm_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_grkm_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lomf_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lomf_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_lomf_sw1_2_motion.s |
-| `data/banim/banim_lomf_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lomf_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lomf_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lomf_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_lomf_sw1_motion.s |
-| `data/banim/banim_lomf_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lomf_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lomm_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lomm_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_lomm_sp1_2_motion.s |
-| `data/banim/banim_lomm_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lomm_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lomm_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lomm_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_lomm_sp1_motion.s |
-| `data/banim/banim_lomm_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lomm_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorf_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorf_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_lorf_sw1_2_motion.s |
-| `data/banim/banim_lorf_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorf_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorf_sw1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorf_sw1_3_motion_o.bin` | battle-anim | fe8u banim/banim_lorf_sw1_3_motion.s |
-| `data/banim/banim_lorf_sw1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorf_sw1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorf_sw1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorf_sw1_4_motion_o.bin` | battle-anim | fe8u banim/banim_lorf_sw1_4_motion.s |
-| `data/banim/banim_lorf_sw1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorf_sw1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorf_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorf_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_lorf_sw1_motion.s |
-| `data/banim/banim_lorf_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorf_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorm_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorm_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_lorm_sp1_2_motion.s |
-| `data/banim/banim_lorm_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorm_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorm_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorm_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_lorm_sp1_motion.s |
-| `data/banim/banim_lorm_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_lorm_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_magf_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_magf_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_magf_mg1_motion.s |
-| `data/banim/banim_magf_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_magf_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_magm_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_magm_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_magm_mg1_motion.s |
-| `data/banim/banim_magm_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_magm_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ar1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ar1_motion_o.bin` | battle-anim | fe8u banim/banim_mcd_ar1_motion.s |
-| `data/banim/banim_mcd_ar1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ar1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_2_motion_o.bin` | battle-anim | fe8u banim/banim_mcd_ax1_2_motion.s |
-| `data/banim/banim_mcd_ax1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_3_motion_o.bin` | battle-anim | fe8u banim/banim_mcd_ax1_3_motion.s |
-| `data/banim/banim_mcd_ax1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_4_motion_o.bin` | battle-anim | fe8u banim/banim_mcd_ax1_4_motion.s |
-| `data/banim/banim_mcd_ax1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_5_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_5_motion_o.bin` | battle-anim | fe8u banim/banim_mcd_ax1_5_motion.s |
-| `data/banim/banim_mcd_ax1_5_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_5_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_6_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_6_motion_o.bin` | battle-anim | fe8u banim/banim_mcd_ax1_6_motion.s |
-| `data/banim/banim_mcd_ax1_6_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_6_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_motion_o.bin` | battle-anim | fe8u banim/banim_mcd_ax1_motion.s |
-| `data/banim/banim_mcd_ax1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mcd_ax1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mdg_at1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mdg_at1_motion_o.bin` | battle-anim | fe8u banim/banim_mdg_at1_motion.s |
-| `data/banim/banim_mdg_at1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mdg_at1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_merm_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_merm_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_merm_sw1_2_motion.s |
-| `data/banim/banim_merm_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_merm_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_merm_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_merm_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_merm_sw1_motion.s |
-| `data/banim/banim_merm_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_merm_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mf_mi1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mf_mi1_motion_o.bin` | battle-anim | fe8u banim/banim_mf_mi1_motion.s |
-| `data/banim/banim_mf_mi1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mf_mi1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mgkf_mg1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mgkf_mg1_2_motion_o.bin` | battle-anim | fe8u banim/banim_mgkf_mg1_2_motion.s |
-| `data/banim/banim_mgkf_mg1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mgkf_mg1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mgkf_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mgkf_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_mgkf_mg1_motion.s |
-| `data/banim/banim_mgkf_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mgkf_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mgkm_mg1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mgkm_mg1_2_motion_o.bin` | battle-anim | fe8u banim/banim_mgkm_mg1_2_motion.s |
-| `data/banim/banim_mgkm_mg1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mgkm_mg1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mgkm_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mgkm_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_mgkm_mg1_motion.s |
-| `data/banim/banim_mgkm_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_mgkm_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_monm_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_monm_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_monm_mg1_motion.s |
-| `data/banim/banim_monm_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_monm_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_myrf_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_myrf_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_myrf_sw1_2_motion.s |
-| `data/banim/banim_myrf_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_myrf_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_myrf_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_myrf_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_myrf_sw1_motion.s |
-| `data/banim/banim_myrf_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_myrf_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_myrm_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_myrm_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_myrm_sw1_2_motion.s |
-| `data/banim/banim_myrm_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_myrm_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_myrm_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_myrm_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_myrm_sw1_motion.s |
-| `data/banim/banim_myrm_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_myrm_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_necm_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_necm_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_necm_mg1_motion.s |
-| `data/banim/banim_necm_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_necm_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_necm_ro1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_necm_ro1_motion_o.bin` | battle-anim | fe8u banim/banim_necm_ro1_motion.s |
-| `data/banim/banim_necm_ro1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_necm_ro1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_paif_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_paif_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_paif_sw1_2_motion.s |
-| `data/banim/banim_paif_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_paif_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_paif_sw1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_paif_sw1_3_motion_o.bin` | battle-anim | fe8u banim/banim_paif_sw1_3_motion.s |
-| `data/banim/banim_paif_sw1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_paif_sw1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_paif_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_paif_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_paif_sw1_motion.s |
-| `data/banim/banim_paif_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_paif_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pakm_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pakm_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_pakm_sw1_2_motion.s |
-| `data/banim/banim_pakm_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pakm_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pakm_sw1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pakm_sw1_3_motion_o.bin` | battle-anim | fe8u banim/banim_pakm_sw1_3_motion.s |
-| `data/banim/banim_pakm_sw1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pakm_sw1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pakm_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pakm_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_pakm_sw1_motion.s |
-| `data/banim/banim_pakm_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pakm_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbfm_ax1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbfm_ax1_2_motion_o.bin` | battle-anim | fe8u banim/banim_pbfm_ax1_2_motion.s |
-| `data/banim/banim_pbfm_ax1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbfm_ax1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbfm_ax1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbfm_ax1_3_motion_o.bin` | battle-anim | fe8u banim/banim_pbfm_ax1_3_motion.s |
-| `data/banim/banim_pbfm_ax1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbfm_ax1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbfm_ax1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbfm_ax1_motion_o.bin` | battle-anim | fe8u banim/banim_pbfm_ax1_motion.s |
-| `data/banim/banim_pbfm_ax1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbfm_ax1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbmm_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbmm_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_pbmm_mg1_motion.s |
-| `data/banim/banim_pbmm_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbmm_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbrf_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbrf_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_pbrf_sp1_2_motion.s |
-| `data/banim/banim_pbrf_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbrf_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbrf_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbrf_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_pbrf_sp1_motion.s |
-| `data/banim/banim_pbrf_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pbrf_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pekf_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pekf_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_pekf_sp1_2_motion.s |
-| `data/banim/banim_pekf_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pekf_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pekf_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pekf_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_pekf_sp1_motion.s |
-| `data/banim/banim_pekf_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pekf_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pirm_ax1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pirm_ax1_2_motion_o.bin` | battle-anim | fe8u banim/banim_pirm_ax1_2_motion.s |
-| `data/banim/banim_pirm_ax1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pirm_ax1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pirm_ax1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pirm_ax1_3_motion_o.bin` | battle-anim | fe8u banim/banim_pirm_ax1_3_motion.s |
-| `data/banim/banim_pirm_ax1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pirm_ax1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pirm_ax1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pirm_ax1_motion_o.bin` | battle-anim | fe8u banim/banim_pirm_ax1_motion.s |
-| `data/banim/banim_pirm_ax1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_pirm_ax1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_prif_ro1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_prif_ro1_2_motion_o.bin` | battle-anim | fe8u banim/banim_prif_ro1_2_motion.s |
-| `data/banim/banim_prif_ro1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_prif_ro1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_prif_ro1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_prif_ro1_motion_o.bin` | battle-anim | fe8u banim/banim_prif_ro1_motion.s |
-| `data/banim/banim_prif_ro1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_prif_ro1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_prim_ro1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_prim_ro1_2_motion_o.bin` | battle-anim | fe8u banim/banim_prim_ro1_2_motion.s |
-| `data/banim/banim_prim_ro1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_prim_ro1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_prim_ro1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_prim_ro1_motion_o.bin` | battle-anim | fe8u banim/banim_prim_ro1_motion.s |
-| `data/banim/banim_prim_ro1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_prim_ro1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_rogm_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_rogm_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_rogm_sw1_2_motion.s |
-| `data/banim/banim_rogm_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_rogm_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_rogm_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_rogm_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_rogm_sw1_motion.s |
-| `data/banim/banim_rogm_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_rogm_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sagf_mg1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sagf_mg1_2_motion_o.bin` | battle-anim | fe8u banim/banim_sagf_mg1_2_motion.s |
-| `data/banim/banim_sagf_mg1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sagf_mg1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sagf_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sagf_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_sagf_mg1_motion.s |
-| `data/banim/banim_sagf_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sagf_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sagm_mg1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sagm_mg1_2_motion_o.bin` | battle-anim | fe8u banim/banim_sagm_mg1_2_motion.s |
-| `data/banim/banim_sagm_mg1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sagm_mg1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sagm_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sagm_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_sagm_mg1_motion.s |
-| `data/banim/banim_sagm_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sagm_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_shaf_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_shaf_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_shaf_mg1_motion.s |
-| `data/banim/banim_shaf_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_shaf_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sham_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sham_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_sham_mg1_motion.s |
-| `data/banim/banim_sham_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sham_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_ska_ar1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_ska_ar1_2_motion_o.bin` | battle-anim | fe8u banim/banim_ska_ar1_2_motion.s |
-| `data/banim/banim_ska_ar1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_ska_ar1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_ska_ar1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_ska_ar1_motion_o.bin` | battle-anim | fe8u banim/banim_ska_ar1_motion.s |
-| `data/banim/banim_ska_ar1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_ska_ar1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_sks_sp1_2_motion.s |
-| `data/banim/banim_sks_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_sks_sp1_motion.s |
-| `data/banim/banim_sks_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_sks_sw1_2_motion.s |
-| `data/banim/banim_sks_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_3_motion_o.bin` | battle-anim | fe8u banim/banim_sks_sw1_3_motion.s |
-| `data/banim/banim_sks_sw1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_4_motion_o.bin` | battle-anim | fe8u banim/banim_sks_sw1_4_motion.s |
-| `data/banim/banim_sks_sw1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_5_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_5_motion_o.bin` | battle-anim | fe8u banim/banim_sks_sw1_5_motion.s |
-| `data/banim/banim_sks_sw1_5_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_5_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_6_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_6_motion_o.bin` | battle-anim | fe8u banim/banim_sks_sw1_6_motion.s |
-| `data/banim/banim_sks_sw1_6_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_6_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_sks_sw1_motion.s |
-| `data/banim/banim_sks_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sks_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_smnm_ro1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_smnm_ro1_2_motion_o.bin` | battle-anim | fe8u banim/banim_smnm_ro1_2_motion.s |
-| `data/banim/banim_smnm_ro1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_smnm_ro1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_smnm_ro1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_smnm_ro1_motion_o.bin` | battle-anim | fe8u banim/banim_smnm_ro1_motion.s |
-| `data/banim/banim_smnm_ro1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_smnm_ro1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_snif_ar1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_snif_ar1_2_motion_o.bin` | battle-anim | fe8u banim/banim_snif_ar1_2_motion.s |
-| `data/banim/banim_snif_ar1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_snif_ar1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_snif_ar1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_snif_ar1_motion_o.bin` | battle-anim | fe8u banim/banim_snif_ar1_motion.s |
-| `data/banim/banim_snif_ar1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_snif_ar1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_snim_ar1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_snim_ar1_2_motion_o.bin` | battle-anim | fe8u banim/banim_snim_ar1_2_motion.s |
-| `data/banim/banim_snim_ar1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_snim_ar1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_snim_ar1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_snim_ar1_motion_o.bin` | battle-anim | fe8u banim/banim_snim_ar1_motion.s |
-| `data/banim/banim_snim_ar1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_snim_ar1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokf_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokf_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_sokf_sp1_2_motion.s |
-| `data/banim/banim_sokf_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokf_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokf_sp1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokf_sp1_3_motion_o.bin` | battle-anim | fe8u banim/banim_sokf_sp1_3_motion.s |
-| `data/banim/banim_sokf_sp1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokf_sp1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokf_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokf_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_sokf_sp1_motion.s |
-| `data/banim/banim_sokf_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokf_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokm_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokm_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_sokm_sp1_2_motion.s |
-| `data/banim/banim_sokm_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokm_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokm_sp1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokm_sp1_3_motion_o.bin` | battle-anim | fe8u banim/banim_sokm_sp1_3_motion.s |
-| `data/banim/banim_sokm_sp1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokm_sp1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokm_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokm_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_sokm_sp1_motion.s |
-| `data/banim/banim_sokm_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_sokm_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_solm_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_solm_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_solm_sp1_2_motion.s |
-| `data/banim/banim_solm_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_solm_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_solm_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_solm_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_solm_sp1_motion.s |
-| `data/banim/banim_solm_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_solm_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_stam_ar1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_stam_ar1_motion_o.bin` | battle-anim | fe8u banim/banim_stam_ar1_motion.s |
-| `data/banim/banim_stam_ar1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_stam_ar1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_swmf_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_swmf_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_swmf_sw1_2_motion.s |
-| `data/banim/banim_swmf_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_swmf_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_swmf_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_swmf_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_swmf_sw1_motion.s |
-| `data/banim/banim_swmf_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_swmf_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_swmm_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_swmm_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_swmm_sw1_2_motion.s |
-| `data/banim/banim_swmm_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_swmm_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_swmm_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_swmm_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_swmm_sw1_motion.s |
-| `data/banim/banim_swmm_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_swmm_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_thim_sw1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_thim_sw1_2_motion_o.bin` | battle-anim | fe8u banim/banim_thim_sw1_2_motion.s |
-| `data/banim/banim_thim_sw1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_thim_sw1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_thim_sw1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_thim_sw1_motion_o.bin` | battle-anim | fe8u banim/banim_thim_sw1_motion.s |
-| `data/banim/banim_thim_sw1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_thim_sw1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_trof_ro1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_trof_ro1_2_motion_o.bin` | battle-anim | fe8u banim/banim_trof_ro1_2_motion.s |
-| `data/banim/banim_trof_ro1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_trof_ro1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_trof_ro1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_trof_ro1_motion_o.bin` | battle-anim | fe8u banim/banim_trof_ro1_motion.s |
-| `data/banim/banim_trof_ro1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_trof_ro1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_valf_mg1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_valf_mg1_2_motion_o.bin` | battle-anim | fe8u banim/banim_valf_mg1_2_motion.s |
-| `data/banim/banim_valf_mg1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_valf_mg1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_valf_mg1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_valf_mg1_motion_o.bin` | battle-anim | fe8u banim/banim_valf_mg1_motion.s |
-| `data/banim/banim_valf_mg1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_valf_mg1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_warm_ar1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_warm_ar1_motion_o.bin` | battle-anim | fe8u banim/banim_warm_ar1_motion.s |
-| `data/banim/banim_warm_ar1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_warm_ar1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_warm_ax1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_warm_ax1_2_motion_o.bin` | battle-anim | fe8u banim/banim_warm_ax1_2_motion.s |
-| `data/banim/banim_warm_ax1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_warm_ax1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_warm_ax1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_warm_ax1_3_motion_o.bin` | battle-anim | fe8u banim/banim_warm_ax1_3_motion.s |
-| `data/banim/banim_warm_ax1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_warm_ax1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_warm_ax1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_warm_ax1_motion_o.bin` | battle-anim | fe8u banim/banim_warm_ax1_motion.s |
-| `data/banim/banim_warm_ax1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_warm_ax1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_wykm_sp1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_wykm_sp1_2_motion_o.bin` | battle-anim | fe8u banim/banim_wykm_sp1_2_motion.s |
-| `data/banim/banim_wykm_sp1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_wykm_sp1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_wykm_sp1_3_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_wykm_sp1_3_motion_o.bin` | battle-anim | fe8u banim/banim_wykm_sp1_3_motion.s |
-| `data/banim/banim_wykm_sp1_3_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_wykm_sp1_3_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_wykm_sp1_4_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_wykm_sp1_4_motion_o.bin` | battle-anim | fe8u banim/banim_wykm_sp1_4_motion.s |
-| `data/banim/banim_wykm_sp1_4_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_wykm_sp1_4_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_wykm_sp1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_wykm_sp1_motion_o.bin` | battle-anim | fe8u banim/banim_wykm_sp1_motion.s |
-| `data/banim/banim_wykm_sp1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_wykm_sp1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_zom_at1_2_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_zom_at1_2_motion_o.bin` | battle-anim | fe8u banim/banim_zom_at1_2_motion.s |
-| `data/banim/banim_zom_at1_2_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_zom_at1_2_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_zom_at1_modes_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_zom_at1_motion_o.bin` | battle-anim | fe8u banim/banim_zom_at1_motion.s |
-| `data/banim/banim_zom_at1_oam_l_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
-| `data/banim/banim_zom_at1_oam_r_bin.bin` | battle-anim | fe8u banim/*.s (compressing-linker; graphics/banim/*.png + banim/*.s) |
 | `data/residual/AnimScr_NaglfarBG4.bin` | battle-anim | fe8u banim/animscr_*.s (battle-anim script macros) |
 | `data/residual/Ch10EphraimMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch10EphraimMapChanges.json |
 | `data/residual/Ch11EirikaMapChanges.bin` | map-tilemaps | fe8u src/data/map/change/Ch11EirikaMapChanges.json |
@@ -1296,152 +391,12 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/MuSoundScr_Zombie.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
 | `data/residual/Obj_EfxArrowOBJ.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/Obj_EventShinningCursor.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_anim_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_anim_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_1.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_10.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_11.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_12.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_2.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_3.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_4.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_5.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_6.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_7.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_8.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_9.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_frame_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_MapAnimMISS_motion.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_anim_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_anim_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_frame_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_frame_1.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_frame_2.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_frame_3.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_frame_4.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_frame_5.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_frame_6.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_frame_7.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_frame_8.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_frame_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_PoisonAnim_motion.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/Obj_SmallBrownNameBoxe1.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/Obj_SmallBrownNameBoxe2.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/Obj_SmallBrownNameBoxe3.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/Obj_SmallBrownNameBoxe4.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/Obj_SmallBrownNameBoxe5.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/Obj_SmallBrownNameBoxe6.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_anim_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_anim_1.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_anim_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_1.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_10.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_11.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_12.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_13.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_14.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_15.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_16.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_17.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_18.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_19.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_2.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_20.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_21.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_22.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_23.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_24.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_25.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_26.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_27.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_28.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_29.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_3.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_30.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_31.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_32.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_33.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_34.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_35.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_36.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_37.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_38.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_39.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_4.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_40.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_41.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_42.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_43.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_44.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_45.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_46.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_47.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_48.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_49.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_5.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_6.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_7.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_8.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_9.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_frame_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_2_motion.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_anim_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_anim_1.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_anim_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_1.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_10.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_11.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_12.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_13.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_14.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_15.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_16.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_17.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_18.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_19.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_2.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_20.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_21.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_22.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_23.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_24.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_25.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_26.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_27.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_28.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_29.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_3.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_30.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_31.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_32.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_33.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_34.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_35.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_36.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_37.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_38.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_39.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_4.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_40.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_41.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_42.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_43.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_44.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_45.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_46.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_47.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_48.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_49.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_5.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_6.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_7.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_8.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_9.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_frame_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/Obj_WallBreakAnim_motion.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/ObjectType9.bin` | map-tilemaps | fe8u graphics/map/ObjectType9.png |
 | `data/residual/PopupScr_GotGold.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
 | `data/residual/PopupScr_GotItem.bin` | unitdef-residuals | fe8u src/events/*.c (EVENT_* / PROC_* macros) |
@@ -1462,153 +417,14 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/SpritAnim_MineFx_frame_8.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/SpritAnim_MineFx_frame_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/SpritAnim_MineFx_motion.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_anim_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_anim_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_1.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_10.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_11.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_12.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_13.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_14.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_15.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_16.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_17.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_18.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_2.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_3.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_4.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_5.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_6.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_7.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_8.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_9.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_frame_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ArrowTrap_motion.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_FireTrap.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_GasTrapHorizontal.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_GasTrapVertical.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_ManimStatGain.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_PikeTrap.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_PlayerRankFog.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_anim_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_anim_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_1.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_10.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_11.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_12.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_13.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_14.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_15.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_16.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_17.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_18.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_19.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_2.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_20.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_21.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_22.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_23.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_3.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_4.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_5.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_6.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_7.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_8.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_9.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_frame_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/SpriteAnim_WorldmapSkirmish_motion.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/TileAnimations1.bin` | map-tilemaps | fe8u src/data/map/obj_anim/TileAnimations1.json |
 | `data/residual/TileAnimations2.bin` | map-tilemaps | fe8u src/data/map/obj_anim/TileAnimations2.json |
 | `data/residual/TileAnimations3.bin` | map-tilemaps | fe8u src/data/map/obj_anim/TileAnimations3.json |
 | `data/residual/TowerOfValni6MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/TowerOfValni6MapChanges.json |
 | `data/residual/TowerOfValni7MapChanges.bin` | map-tilemaps | fe8u src/data/map/change/TowerOfValni7MapChanges.json |
-| `data/residual/UnitDef_Ch10AAlly_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch10AEnemy_3.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch10AEnemy_4.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch10AEnemy_5.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch10AEnemy_6.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch10BEnemy_7.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch10BMixed_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch11AEnemy_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch11AEnemy_3.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch11AEnemy_4.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch11AEnemy_5.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch11AMixed.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch11BEnemy_4.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch12AEnemy_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch12AEnemy_3.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch12AEnemy_5.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch12BEnemy_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch12BEnemy_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch12BEnemy_4.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch13AEnemy_3.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch13AEnemy_9.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch13ANPC.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch14AEnemy_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch14AEnemy_4.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch14AEnemy_6.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
 | `data/residual/UnitDef_Ch14BAlly_7.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch14BEnemy_8.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch14BEnemy_9.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch15AAlly_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch15AEnemy_6.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch15BEnemy_4.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch15BEnemy_5.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16AAlly_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16AAlly_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16AAlly_13.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16AAlly_15.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16AAlly_3.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16AAlly_4.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16AAlly_5.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16AAlly_8.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16AEnemy_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16AEnemy_3.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16AEnemy_4.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16AMixed_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16BEnemy_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch16BEnemy_4.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch17AAlly_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch18AMixed.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
 | `data/residual/UnitDef_Ch18BAlly_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch19AAlly_5.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch19ANPC_3.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch19BEnemy_8.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch21AAlly_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch21AMixed.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
 | `data/residual/UnitDef_Ch21BEnemy_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch21BMixed.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch2Enemy_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch3Enemy_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch3Enemy_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch4Ally_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch4Enemy_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch4Enemy_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch4NPC_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch4NPC_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch5Enemy_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch5Enemy_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch5xAlly_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch5xAlly_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch5xAlly_3.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch5xEnemy_3.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch6Enemy_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch8Ally_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch8Ally_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch8Enemy_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch8Enemy_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch8Enemy_2.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch8Enemy_3.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch8Enemy_4.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch8Enemy_8.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch9AAlly_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch9AEnemy_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch9AEnemy_8.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch9AMixed_0.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch9AMixed_1.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
-| `data/residual/UnitDef_Ch9BEnemy_3.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
 | `data/residual/UnitDef_Event_Ch1Enemy.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
 | `data/residual/UnitDef_Event_Ch1EnemyReinforce.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
 | `data/residual/UnitDef_Event_Ch2Ally.bin` | unitdef-residuals | fe8u src/events_udefs.c (typed struct UnitDefinition[]) |
@@ -1699,66 +515,8 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/gFontgrp_68.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gFontgrp_71.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gFontgrp_89.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gGenericIcon_5.bin` | pixel-gfx | fe8u graphics/**/*.png (named gfx) |
 | `data/residual/gGenericIcon_6.bin` | pixel-gfx | fe8u graphics/**/*.png (named gfx) |
 | `data/residual/gMapanimLevelup_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_anim_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_anim_1.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_anim_2.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_anim_3.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_anim_list.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_0.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_1.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_10.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_11.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_12.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_13.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_14.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_15.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_16.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_17.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_18.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_19.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_2.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_20.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_21.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_22.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_23.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_24.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_25.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_26.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_27.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_28.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_29.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_3.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_30.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_31.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_32.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_33.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_34.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_35.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_36.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_37.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_38.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_39.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_4.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_40.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_41.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_42.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_43.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_44.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_45.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_46.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_47.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_48.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_49.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_5.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_6.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_7.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_8.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_9.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_frame_list.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/gMapanimTorchfx_motion.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gMenuSoundroom_1.bin` | pixel-gfx | fe8u preview/tsa/misc/gMenuSoundroom_1.png |
 | `data/residual/gMenuSoundroom_2.bin` | pixel-gfx | fe8u preview/tsa/misc/gMenuSoundroom_2.png |
 | `data/residual/gMenuSoundroom_4.bin` | pixel-gfx | fe8u preview/tsa/misc/gMenuSoundroom_4.png |
@@ -1821,22 +579,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/gWorldmapSprite_7.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gWorldmapSprite_8.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
 | `data/residual/gWorldmapSprite_9.bin` | unitdef-residuals | fe8u typed C table / gfx (worldmap/mapanim/menu data) |
-| `data/residual/obj_MapAnimNODAMAGE_anim_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_anim_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_0.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_1.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_10.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_11.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_2.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_3.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_4.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_5.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_6.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_7.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_8.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_9.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_frame_list.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
-| `data/residual/obj_MapAnimNODAMAGE_motion.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/rom_header_080000C0.bin` | sound-m4a-tables | fe8u src/rom_header.s |
 | `data/residual/sSprite_ClassDisplay_B.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
 | `data/residual/sSprite_ClassDisplay_C.bin` | unitdef-residuals | fe8u typed struct AnimSpriteData[] / sprite anim C |
@@ -1995,15 +737,8 @@ under MISS, asserted by the self-test guards below).
 | `data/sound/frontier_df3_voicegroup_001_202C07.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s (voicegroup tail; documented ceiling) |
 | `data/sound/frontier_df4_voice_000_1F578C.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s / direct_sound_data.s |
 | `data/sound/frontier_df4_voice_001_1F67BC.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s / direct_sound_data.s |
-| `data/sound/frontier_df4_voice_002_211988.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s / direct_sound_data.s |
 | `data/sound/frontier_df4_voice_003_214120.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s / direct_sound_data.s |
-| `data/sound/gBanimSongIDs1.bin` | sound-m4a-tables | fe8u sound/*.s (named m4a/sound table) |
-| `data/sound/gBanimSongIDs2.bin` | sound-m4a-tables | fe8u sound/*.s (named m4a/sound table) |
-| `data/sound/gBanimSongIDs3.bin` | sound-m4a-tables | fe8u sound/*.s (named m4a/sound table) |
-| `data/sound/gBanimSongIDs4.bin` | sound-m4a-tables | fe8u sound/*.s (named m4a/sound table) |
 | `data/sound/gMPlayJumpTableTemplate.bin` | sound-m4a-tables | fe8u sound/*.s (named m4a/sound table) |
-| `data/sound/gMPlayTable.bin` | sound-m4a-tables | fe8u sound/music_player_table.s |
-| `data/sound/gSoundRoomTable.bin` | sound-m4a-tables | fe8u sound/*.s (named m4a/sound table) |
 | `data/sound/ply_bend.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
 | `data/sound/ply_bendr.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
 | `data/sound/ply_endtie.bin` | sound-m4a-tables | fe8u src/m4a.c + src/m4a_1.s (m4a engine, code axis) |
@@ -2355,19 +1090,6 @@ under MISS, asserted by the self-test guards below).
 | `data/sound/song981_btl_mon_magic1_2.bin` | sound-m4a-tables | fe8u sound/songs/midi/song981_btl_mon_magic1.mid |
 | `data/sound/song981_btl_mon_magic1_3.bin` | sound-m4a-tables | fe8u sound/songs/midi/song981_btl_mon_magic1.mid |
 | `data/sound/song981_btl_mon_magic1_4.bin` | sound-m4a-tables | fe8u sound/songs/midi/song981_btl_mon_magic1.mid |
-| `data/sound/voicegroup035.bin` | voicegroup-tail | fe8u sound/voicegroups/voicegroup035.s |
-| `data/sound/voicegroup092.bin` | voicegroup-tail | fe8u sound/voicegroups/voicegroup092.s |
-| `graphics/btl_bg/btl_bg_14.feimg3.bin` | pixel-gfx | fe8u graphics/btl_bg/btl_bg_14.png |
-| `graphics/btl_bg/btl_bg_27.feimg3.bin` | pixel-gfx | fe8u graphics/btl_bg/btl_bg_27.png |
-| `graphics/btl_bg/btl_bg_33.feimg3.bin` | pixel-gfx | fe8u graphics/btl_bg/btl_bg_33.png |
-| `graphics/btl_bg/btl_bg_55.feimg3.bin` | pixel-gfx | fe8u graphics/btl_bg/btl_bg_55.png |
-| `graphics/btl_bg/btl_bg_58.feimg3.bin` | pixel-gfx | fe8u graphics/btl_bg/btl_bg_58.png |
-| `graphics/btl_bg/btl_bg_59.feimg3.bin` | pixel-gfx | fe8u graphics/btl_bg/btl_bg_59.png |
-| `graphics/btl_bg/btl_bg_60.feimg3.bin` | pixel-gfx | fe8u graphics/btl_bg/btl_bg_60.png |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_000_76E98C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_001_76FE78.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_002_771224.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_003_7725D4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_004_7738F0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_005_774CB8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_006_774F30.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -2421,9 +1143,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_054_77AA5E.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_055_77AACA.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_000_77BBB8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_001_77BC6C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_002_77CA18.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_003_77DBCC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_004_77EAB4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_005_77F654.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_006_77F710.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -2438,14 +1157,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_015_780250.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_016_780378.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_017_78048C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_018_781CBC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_019_7832B4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_020_7844F0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_021_785C08.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_022_7875A0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_023_788CC4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_024_78A0D0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_025_78AF74.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_026_78BE1C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_027_78CEA8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_028_78D004.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -2461,121 +1172,7 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_038_794D78.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_039_795198.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_040_7955B8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_chap_title/frontier_chap_title_000_A7E188.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_001_A7E504.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_002_A7E800.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_003_A7EB7C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_004_A7EF88.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_005_A7F360.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_006_A7F754.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_007_A7FAA4.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_008_A7FE84.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_009_A8021C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_010_A80584.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_011_A808BC.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_012_A80CA0.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_013_A81068.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_014_A813F8.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_015_A81774.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_016_A81B1C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_017_A81F28.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_018_A82294.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_019_A8258C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_020_A829B4.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_021_A82D58.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_022_A8306C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_023_A833D4.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_024_A8383C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_025_A83C0C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_026_A83F64.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_027_A8436C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_028_A84720.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_029_A84BFC.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_030_A84F64.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_031_A852E8.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_032_A85670.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_033_A859E4.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_034_A85D6C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_035_A860F4.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_036_A86460.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_037_A867E4.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_038_A86B60.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_039_A86EF8.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_040_A8729C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_041_A8765C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_042_A87A14.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_043_A87DBC.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_044_A88174.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_045_A88530.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_046_A888D0.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_047_A88C8C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_048_A89048.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_049_A89428.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_050_A89710.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_051_A899E8.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_052_A89CD8.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_053_A89F80.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_054_A8A260.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_055_A8A5A0.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_056_A8A85C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_057_A8AB8C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_058_A8AE74.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_059_A8B168.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_060_A8B39C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_061_A8B5DC.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_062_A8B7F0.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
 | `graphics/frontier_chap_title/frontier_chap_title_063_A8BB88.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_064_A8BFB0.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_065_A8C0EC.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_066_A8C1E4.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_067_A8C308.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_068_A8C424.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_069_A8C534.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_070_A8C734.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_071_A8C854.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_072_A8C974.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_073_A8CA74.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_074_A8CB94.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_075_A8CCAC.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_076_A8CDF8.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_077_A8CF14.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_078_A8D064.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_079_A8D1B0.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_080_A8D2F4.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_081_A8D430.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_082_A8D574.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_083_A8D6AC.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_084_A8D7F4.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_085_A8D948.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_086_A8DAB0.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_087_A8DBFC.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_088_A8DE6C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_089_A8E080.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_090_A8E2EC.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_091_A8E600.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_092_A8E8C8.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_093_A8EAF8.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_094_A8ED30.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_095_A8EFFC.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_096_A8F28C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_097_A8F4CC.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_098_A8F6F8.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_099_A8F9C0.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_100_A8FC68.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_101_A8FEC0.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_102_A900FC.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_103_A90378.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_104_A9065C.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_105_A90898.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_106_A90A98.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_107_A90D84.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_108_A90FF0.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_109_A911D0.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_110_A91418.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_111_A91760.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_112_A919F8.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_113_A91C28.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_chap_title/frontier_chap_title_114_A91F08.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
 | `graphics/frontier_chap_title/frontier_chap_title_115_A92170.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
 | `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_000_7463DC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_001_74F150.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -2583,9 +1180,7 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_003_754840.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_004_7557C4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_005_756454.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_006_756F38.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_007_758E68.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_008_75CEFC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_009_75D570.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_010_75DE94.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_011_761780.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -2595,7 +1190,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_003_651C6C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_004_652948.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_005_6533B0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_006_654DFC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_008_657A78.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_009_6587E0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_btl_bg/frontier_df3_btl_bg_000_7B40A8.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
@@ -2647,12 +1241,10 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_008_582A54.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df3_fontgrp_se/frontier_df3_fontgrp_se_009_582F1C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_000_B75860.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
-| `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_001_B79EBC.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
 | `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_002_B7F118.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
 | `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_003_B864A8.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
 | `graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_000_B44B40.bin` | pixel-gfx | fe8u graphics/titlescreen/*.png |
 | `graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_001_B48D38.bin` | pixel-gfx | fe8u graphics/titlescreen/*.png |
-| `graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_002_B4B200.bin` | pixel-gfx | fe8u graphics/titlescreen/*.png |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_000_90F678.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_001_91020C.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_002_9105E0.bin` | pixel-gfx | fe8u graphics/**/*.png (unitdef portrait gfx) |
@@ -2730,10 +1322,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_000_5E0E94.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_001_5E37CC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_002_5E3AD4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_a/frontier_df4_banim_a_003_5E4570.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_a/frontier_df4_banim_a_004_5E4E84.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_a/frontier_df4_banim_a_005_5EA510.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_a/frontier_df4_banim_a_006_5EBF04.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_007_5F1C3C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_008_5FE7D8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_009_5FF000.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -2767,7 +1355,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_022_665FB0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_023_6719A8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_024_67E9B8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_025_67F520.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_026_683C80.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_027_6870D4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_028_69697C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -2780,7 +1367,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_035_6AB184.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_036_6AB520.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_037_6AC820.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_038_6AD478.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_039_6ADB74.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_040_6AF038.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_041_6B0C88.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -2799,7 +1385,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_054_716918.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_055_7179EC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_056_7657CC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_057_79A108.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_058_79F83C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_059_79FCB0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_060_7A8B10.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -2831,14 +1416,12 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_ending/frontier_df4_ending_001_AC0B90.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_002_AC16C8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_003_AC718C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_004_ACC378.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_005_ACEB54.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_007_AD0CFC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_010_B1E5FC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_011_B24D0C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_012_B25A78.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_013_B26374.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
@@ -2846,8 +1429,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_ending/frontier_df4_ending_016_B3EBE4.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_017_B3F024.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_018_B3F7BC.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_019_B8B998.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_020_BAA2E0.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_021_BAB754.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_font_cc/frontier_df4_font_cc_078_56CAD8.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
 | `graphics/frontier_df4_font_cc/frontier_df4_font_cc_090_574344.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
@@ -2893,7 +1474,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_menu/frontier_df4_menu_039_AC00A8.bin` | menu-strings | fe8u graphics/**/*.png or C literals (frontier UI/gfx) |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000a_0DC3DC.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_001_0DC96C.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_002a_0DCDD0.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_002b_0DD358.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_003_0DE85C.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
@@ -2970,121 +1550,40 @@ under MISS, asserted by the self-test guards below).
 | `graphics/gfx_data_bg/bg_Plain_2_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/bg_Port_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/bg_Stream_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_000_bg_House_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_001_bg_House_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_002_bg_Caer_Pelyn_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_003_bg_Caer_Pelyn_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_004_bg_Normal_Village_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_006_bg_Village_Clear_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_007_bg_Village_Clear_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_011_bg_Fireplace_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_012_bg_Fireplace_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_014_bg_Castle_Interior_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_015_bg_Castle_Interior_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_016_bg_Grado_Chamber_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_017_bg_Grado_Chamber_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_018_bg_Grado_Chamber_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_019_bg_Throne_Normal_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_020_bg_Throne_Normal_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_021_bg_Throne_Normal_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_022_bg_Throne_Normal_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_023_bg_Castle_Bright_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_024_bg_Castle_Bright_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_025_bg_Garden_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_026_bg_Garden_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_027_bg_Manse_Back_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_028_bg_Manse_Back_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_029_bg_Cell_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_030_bg_Cell_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_032_bg_Plain_1_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_033_bg_Plain_1_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_034_bg_Grass_Plains_2_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_035_bg_Grass_Plains_2_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_036_bg_Plain_2_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_037_bg_Plain_2_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_040_bg_Forest_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_041_bg_Town_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_042_bg_Castle_Back_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_044_bg_Passage_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_045_bg_Passage_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_048_bg_Stone_Chamber_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_049_bg_Stone_Chamber_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_050_bg_Stone_Chamber_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_051_bg_Renais_Chamber_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_052_bg_Renais_Chamber_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_053_bg_White_Chamber_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_054_bg_White_Chamber_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_058_bg_Black_Temple_Outside_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_059_bg_Black_Temple_Outside_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_060_bg_Black_Temple_Inside_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_061_bg_Black_Temple_Inside_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_064_bg_convo2_00_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_065_bg_convo2_00_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_069_bg_convo2_03_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_070_bg_convo2_03_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_072_bg_convo2_06_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_074_bg_convo2_08_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_075_bg_convo2_08_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_076_bg_convo2_09_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_077_bg_convo2_09_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_080_bg_convo2_12_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_081_bg_convo2_12_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_082_bg_convo2_13_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_083_bg_convo2_13_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_084_bg_convo2_15_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_085_bg_convo2_15_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_086_bg_convo2_16_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_087_bg_convo2_16_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_090_bg_convo2_19_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_091_bg_convo2_19_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_093_bg_convo2_21_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_094_bg_convo2_21_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_095_bg_convo2_22_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_096_bg_convo2_22_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_097_bg_convo2_23_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_098_bg_convo2_23_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_099_bg_convo2_24_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_100_bg_convo2_24_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gfx_data_bg/gfx_data_bg_101_bg_convo2_25_tiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gfx_data_bg/gfx_data_bg_102_bg_Blank_map.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Img_ArenaBattleBg.bin` | battle-anim | fe8u graphics/banim/efxlvupfx/Img_ArenaBattleBg.png |
-| `graphics/gmapunit/Img_BanimArcherMBallistaIntro.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Img_ChapterStatusSelectorSprite.bin` | pixel-gfx | fe8u graphics/misc/Img_ChapterStatusSelectorSprite.png |
-| `graphics/gmapunit/Img_ConfigUiIcons.bin` | pixel-gfx | fe8u graphics/misc/Img_ConfigUiIcons.png |
-| `graphics/gmapunit/Img_ConfigUiSprites.bin` | pixel-gfx | fe8u graphics/misc/Img_ConfigUiSprites.png |
-| `graphics/gmapunit/Img_DanceringFx.bin` | pixel-gfx | fe8u graphics/misc/Img_DanceringFx.png |
-| `graphics/gmapunit/Img_EfxArrowOBJ.bin` | pixel-gfx | fe8u graphics/efxmagic/Img_EfxArrowOBJ.png |
-| `graphics/gmapunit/Img_EfxLvupBG2.bin` | battle-anim | fe8u graphics/banim/efxlvupfx/Img_EfxLvupBG2.png |
-| `graphics/gmapunit/Img_EfxLvupOBJ2.bin` | battle-anim | fe8u graphics/banim/efxlvupfx/Img_EfxLvupOBJ2.png |
-| `graphics/gmapunit/Img_EkrLvupNumBig.bin` | pixel-gfx | fe8u graphics/misc/Img_EkrLvupNumBig.png |
-| `graphics/gmapunit/Img_EventWarp.bin` | pixel-gfx | fe8u graphics/misc/Img_EventWarp.png |
-| `graphics/gmapunit/Img_LvupApfx.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Img_MenuStatus_0.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Img_MineFx.bin` | pixel-gfx | fe8u graphics/misc/Img_MineFx.png |
-| `graphics/gmapunit/Img_NODAMGEMIS.bin` | battle-anim | fe8u graphics/banim/efxbattle/Img_NODAMGEMIS.png |
-| `graphics/gmapunit/Img_PlayStatusSprites.bin` | pixel-gfx | fe8u graphics/misc/Img_PlayStatusSprites.png |
-| `graphics/gmapunit/Img_PrepFunds.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Img_PrepItemUseScreen.bin` | pixel-gfx | fe8u graphics/misc/Img_PrepItemUseScreen.png |
-| `graphics/gmapunit/Img_PrepTextShadow.bin` | pixel-gfx | fe8u graphics/misc/Img_PrepTextShadow.png |
-| `graphics/gmapunit/Img_PrepWindow.bin` | pixel-gfx | fe8u graphics/misc/Img_PrepWindow.png |
-| `graphics/gmapunit/Img_SoundRoomVolumeGraph.bin` | pixel-gfx | fe8u graphics/misc/Img_SoundRoomVolumeGraph.png |
-| `graphics/gmapunit/Img_SpinningArrow.bin` | pixel-gfx | fe8u graphics/misc/Img_SpinningArrow.png |
-| `graphics/gmapunit/Img_StatscreenBG.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Img_StatscreenEquipmentText.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Img_StatscreenHalo.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Img_StatscreenObjs.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/Img_SysBlackBox.bin` | pixel-gfx | fe8u graphics/misc/Img_SysBlackBox.png |
-| `graphics/gmapunit/Img_SysBrownBox.bin` | pixel-gfx | fe8u graphics/sysutils/Img_SysBrownBox.png |
-| `graphics/gmapunit/Img_SysGrayBox.bin` | pixel-gfx | fe8u graphics/sysutils/Img_SysGrayBox.png |
-| `graphics/gmapunit/Img_TalkBubble.bin` | pixel-gfx | fe8u graphics/misc/Img_TalkBubble.png |
-| `graphics/gmapunit/Img_TalkBubbleOpening_A.bin` | pixel-gfx | fe8u graphics/misc/Img_TalkBubbleOpening_A.png |
-| `graphics/gmapunit/Img_TalkBubbleOpening_B.bin` | pixel-gfx | fe8u graphics/misc/Img_TalkBubbleOpening_B.png |
-| `graphics/gmapunit/Img_TalkBubbleOpening_C.bin` | pixel-gfx | fe8u graphics/misc/Img_TalkBubbleOpening_C.png |
-| `graphics/gmapunit/Img_TalkBubbleOpening_D.bin` | pixel-gfx | fe8u graphics/misc/Img_TalkBubbleOpening_D.png |
-| `graphics/gmapunit/Img_TalkBubbleOpening_E.bin` | pixel-gfx | fe8u graphics/misc/Img_TalkBubbleOpening_E.png |
-| `graphics/gmapunit/Img_UnitListBanner_Animation.bin` | pixel-gfx | fe8u graphics/misc/Img_UnitListBanner_Animation.png |
-| `graphics/gmapunit/Img_UnitListBanners.bin` | pixel-gfx | fe8u graphics/misc/Img_UnitListBanners.png |
-| `graphics/gmapunit/Img_UnkData_1.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
 | `graphics/gmapunit/Tsa_ArenaBattleBg.bin` | battle-anim | fe8u preview/tsa/banim/efxlvupfx/Tsa_ArenaBattleBg.png |
 | `graphics/gmapunit/Tsa_ConfigUiFrame.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_ConfigUiFrame.png |
 | `graphics/gmapunit/Tsa_DanceringFx.bin` | pixel-gfx | fe8u graphics/misc/Tsa_DanceringFx.png |
@@ -3101,61 +1600,10 @@ under MISS, asserted by the self-test guards below).
 | `graphics/gmapunit/Tsa_UnkData_1.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_1.png |
 | `graphics/gmapunit/Tsa_UnkData_3.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_3.png |
 | `graphics/gmapunit/Tsa_UnkData_4.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_4.png |
-| `graphics/gmapunit/gGfx_HelpTextBox.bin` | pixel-gfx | fe8u graphics/misc/gGfx_HelpTextBox.png |
-| `graphics/gmapunit/gGfx_HelpTextBox2.bin` | pixel-gfx | fe8u graphics/misc/gGfx_HelpTextBox2.png |
-| `graphics/gmapunit/gGfx_HelpTextBox3.bin` | pixel-gfx | fe8u graphics/misc/gGfx_HelpTextBox3.png |
-| `graphics/gmapunit/gGfx_HelpTextBox4.bin` | pixel-gfx | fe8u graphics/misc/gGfx_HelpTextBox4.png |
-| `graphics/gmapunit/gGfx_HelpTextBox5.bin` | pixel-gfx | fe8u graphics/misc/gGfx_HelpTextBox5.png |
-| `graphics/gmapunit/gGfx_MinimapTiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/gGfx_PlayerInterfaceFontTiles.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/gGfx_PlayerInterfaceNumbers.bin` | pixel-gfx | fe8u graphics/**/*.png (BG/unit tile gfx) |
-| `graphics/gmapunit/gGfx_YellowTextBox.bin` | pixel-gfx | fe8u graphics/misc/gGfx_YellowTextBox.png |
-| `graphics/gmapunit/gGfx_YellowTextBox2.bin` | pixel-gfx | fe8u graphics/misc/gGfx_YellowTextBox2.png |
-| `graphics/gmapunit/gGfx_YellowTextBox3.bin` | pixel-gfx | fe8u graphics/misc/gGfx_YellowTextBox3.png |
-| `graphics/gmapunit/gGfx_YellowTextBox4.bin` | pixel-gfx | fe8u graphics/misc/gGfx_YellowTextBox4.png |
-| `graphics/gmapunit/gGfx_YellowTextBox5.bin` | pixel-gfx | fe8u graphics/misc/gGfx_YellowTextBox5.png |
-| `graphics/gmapunit/gImg_UiSpinningArrow_Horizontal.bin` | pixel-gfx | fe8u graphics/misc/gImg_UiSpinningArrow_Horizontal.png |
-| `graphics/map/ObjectType10.bin` | map-tilemaps | fe8u graphics/map/ObjectType10.png |
-| `graphics/map/ObjectType4.bin` | map-tilemaps | fe8u graphics/map/ObjectType4.png |
-| `graphics/map/ObjectType5.bin` | map-tilemaps | fe8u graphics/map/ObjectType5.png |
-| `graphics/map/ObjectType6.bin` | map-tilemaps | fe8u graphics/map/ObjectType6.png |
-| `graphics/map/ObjectType7.bin` | map-tilemaps | fe8u graphics/map/ObjectType7.png |
-| `graphics/map/ObjectType8.bin` | map-tilemaps | fe8u graphics/map/ObjectType8.png |
-| `graphics/map/TowerOfValniObjectType.bin` | map-tilemaps | fe8u graphics/map/TowerOfValniObjectType.png |
 | `graphics/mapanim/TileAnimationsUnused3_frame_7.pal.bin` | map-tilemaps | fe8u graphics/map/TileAnimationsUnused3_frame_7.pal |
 | `graphics/mapanim/TileAnimationsUnused4_frame_11.pal.bin` | map-tilemaps | fe8u graphics/map/TileAnimationsUnused4_frame_11.pal |
 | `graphics/mapanim/TileAnimationsUnused4_frame_4.pal.bin` | map-tilemaps | fe8u graphics/map/TileAnimationsUnused4_frame_4.pal |
 | `graphics/mapanim/TileAnimationsUnused4_frame_9.pal.bin` | map-tilemaps | fe8u graphics/map/TileAnimationsUnused4_frame_9.pal |
-| `graphics/misc_gfx/Img_GmapSoguSprites.bin` | pixel-gfx | fe8u graphics/misc/Img_GmapSoguSprites.png |
-| `graphics/misc_gfx/Img_GorgonHatchCloud.bin` | pixel-gfx | fe8u graphics/misc/Img_GorgonHatchCloud.png |
-| `graphics/misc_gfx/Img_LinkArenaWarpFx.bin` | pixel-gfx | fe8u graphics/misc/Img_LinkArenaWarpFx.png |
-| `graphics/misc_gfx/Img_ManimBarrierBgfx.bin` | pixel-gfx | fe8u graphics/misc/Img_ManimBarrierBgfx.png |
-| `graphics/misc_gfx/Img_MapAnimAntitoxinPureWater.bin` | pixel-gfx | fe8u graphics/misc/Img_MapAnimAntitoxinPureWater.png |
-| `graphics/misc_gfx/Img_MapAnimBerserkfx.bin` | pixel-gfx | fe8u graphics/misc/Img_MapAnimBerserkfx.png |
-| `graphics/misc_gfx/Img_MapAnimBerserkfx_1.bin` | pixel-gfx | fe8u graphics/misc/Img_MapAnimBerserkfx.png |
-| `graphics/misc_gfx/Img_MapAnimRepairfx.bin` | pixel-gfx | fe8u graphics/misc/Img_MapAnimRepairfx.png |
-| `graphics/misc_gfx/Img_MapAnimTorchfx.bin` | pixel-gfx | fe8u graphics/misc/Img_MapAnimTorchfx.png |
-| `graphics/misc_gfx/Img_MapAnimUnlockBgfx.bin` | pixel-gfx | fe8u graphics/misc/Img_MapAnimUnlockBgfx.png |
-| `graphics/misc_gfx/Img_MapAnimUnlockObjfx.bin` | pixel-gfx | fe8u graphics/misc/Img_MapAnimUnlockObjfx.png |
-| `graphics/misc_gfx/Img_MapBattleInfoBox.bin` | pixel-gfx | fe8u graphics/misc/Img_MapBattleInfoBox.png |
-| `graphics/misc_gfx/Img_MapBattleInfoHpBar.bin` | pixel-gfx | fe8u graphics/misc/Img_MapBattleInfoHpBar.png |
-| `graphics/misc_gfx/Img_MapBattleInfoNum.bin` | pixel-gfx | fe8u graphics/misc/Img_MapBattleInfoNum.png |
-| `graphics/misc_gfx/Img_MonsterStoneMapAnimfx.bin` | pixel-gfx | fe8u graphics/misc/Img_MonsterStoneMapAnimfx.png |
-| `graphics/misc_gfx/Img_NightMareMapAnimfx.bin` | pixel-gfx | fe8u graphics/misc/Img_NightMareMapAnimfx.png |
-| `graphics/misc_gfx/Img_OpAnimEirikaBlur1.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Img_OpAnimEirikaBlur2.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Img_OpAnimEirikaBlur3.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Img_OpAnimEphraim.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Img_OpAnimEphraimBlur1.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Img_OpAnimWorldMap.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Img_PhaseChangeEnemy.bin` | pixel-gfx | fe8u graphics/misc/Img_PhaseChangeEnemy.png |
-| `graphics/misc_gfx/Img_PhaseChangeOther.bin` | pixel-gfx | fe8u graphics/misc/Img_PhaseChangeOther.png |
-| `graphics/misc_gfx/Img_PhaseChangePlayer.bin` | pixel-gfx | fe8u graphics/misc/Img_PhaseChangePlayer.png |
-| `graphics/misc_gfx/Img_PhaseChangeSquares.bin` | pixel-gfx | fe8u graphics/misc/Img_PhaseChangeSquares.png |
-| `graphics/misc_gfx/Img_PhaseChangeUnk.bin` | pixel-gfx | fe8u graphics/misc/Img_PhaseChangeUnk.png |
-| `graphics/misc_gfx/Img_PoisonAnim.bin` | pixel-gfx | fe8u graphics/misc/Img_PoisonAnim.png |
-| `graphics/misc_gfx/Img_ShopGoldBox.bin` | pixel-gfx | fe8u graphics/misc/Img_ShopGoldBox.png |
-| `graphics/misc_gfx/Img_WallBreakAnim.bin` | pixel-gfx | fe8u graphics/misc/Img_WallBreakAnim.png |
 | `graphics/misc_gfx/Pal_LinkArenaWarpFx.bin` | pixel-gfx | fe8u graphics/misc/Pal_LinkArenaWarpFx.agbpal |
 | `graphics/misc_gfx/Pal_MapAnimAntitoxin.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimAntitoxin.agbpal |
 | `graphics/misc_gfx/Pal_MapAnimBerserkfx_0.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimBerserkfx.pal |
@@ -3164,9 +1612,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/misc_gfx/Pal_MapAnimTorchfx.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimTorchfx.agbpal |
 | `graphics/misc_gfx/Pal_MapAnimUnlockObjfx.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimUnlockObjfx.agbpal |
 | `graphics/misc_gfx/Pal_MapAnimUnlockObjfx_Unk.bin` | pixel-gfx | fe8u graphics/misc/Pal_MapAnimUnlockObjfx_Unk.agbpal |
-| `graphics/misc_gfx/Pal_OpAnimEphraimBlur.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Pal_OpAnimWorldMap.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/Pal_OpAnimWorldMapFog.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx/Tsa_GorgonHatchCloud_A.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_GorgonHatchCloud_A.png |
 | `graphics/misc_gfx/Tsa_GorgonHatchCloud_B.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_GorgonHatchCloud_B.png |
 | `graphics/misc_gfx/Tsa_GorgonHatchCloud_C.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_GorgonHatchCloud_C.png |
@@ -3224,80 +1669,12 @@ under MISS, asserted by the self-test guards below).
 | `graphics/misc_gfx/Tsa_OpAnimWorldMap.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx/Tsa_OpAnimWorldMapFog.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx/Tsa_ShopWindows.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_ShopWindows.png |
-| `graphics/misc_gfx/gGfx_TitleDemonKing.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gGfx_TitleDragonForeground.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gGfx_TitleLargeGlowingOrb.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gGfx_TitleMainBackground_1.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gGfx_TitleMainBackground_2.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gGfx_TitleSmallLightBubbles.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gGfx_Titlescreen_0.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gGfx_Titlescreen_1.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gGfx_Titlescreen_2.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx/gImg_UiCursorHandBottom.bin` | pixel-gfx | fe8u graphics/misc/gImg_UiCursorHandBottom.png |
-| `graphics/misc_gfx/gImg_UiCursorHandTop.bin` | pixel-gfx | fe8u graphics/misc/gImg_UiCursorHandTop.png |
 | `graphics/misc_gfx/gTsa_TitleDemonKing.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx/gTsa_TitleDragonForeground.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx/gTsa_TitleMainBackground.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx/gTsa_Titlescreen_0.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx/gTsa_Titlescreen_1.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx/gTsa_Titlescreen_2.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_99E1A4.bin` | pixel-gfx | fe8u graphics/misc/Img_99E1A4.png |
-| `graphics/misc_gfx2/Img_99ED44.bin` | pixel-gfx | fe8u graphics/misc/Img_99ED44.png |
-| `graphics/misc_gfx2/Img_99F7D4.bin` | pixel-gfx | fe8u graphics/misc/Img_99F7D4.png |
-| `graphics/misc_gfx2/Img_9A0154.bin` | pixel-gfx | fe8u graphics/misc/Img_9A0154.png |
-| `graphics/misc_gfx2/Img_9A0864.bin` | pixel-gfx | fe8u graphics/misc/Img_9A0864.png |
-| `graphics/misc_gfx2/Img_ArrowTrap.bin` | pixel-gfx | fe8u graphics/misc/Img_ArrowTrap.png |
-| `graphics/misc_gfx2/Img_ChapterIntroFog.bin` | pixel-gfx | fe8u graphics/misc/Img_ChapterIntroFog.png |
-| `graphics/misc_gfx2/Img_CharacterEndingMenu.bin` | pixel-gfx | fe8u graphics/misc/Img_CharacterEndingMenu.png |
-| `graphics/misc_gfx2/Img_CommGameBgScreen.bin` | pixel-gfx | fe8u graphics/misc/Img_CommGameBgScreen.png |
-| `graphics/misc_gfx2/Img_Congratulations.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_ConstDataDB034_0.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_ConstDataDB034_1.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_ConstDataDB034_2.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_ConstDataDB034_3.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_ConstDataDB034_4.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_EventGmap.bin` | pixel-gfx | fe8u graphics/misc/Img_EventGmap.png |
-| `graphics/misc_gfx2/Img_FinScreen.bin` | pixel-gfx | fe8u graphics/misc/Img_FinScreen.png |
-| `graphics/misc_gfx2/Img_FireTrap.bin` | pixel-gfx | fe8u graphics/misc/Img_FireTrap.png |
-| `graphics/misc_gfx2/Img_GameOverText.bin` | pixel-gfx | fe8u graphics/misc/Img_GameOverText.png |
-| `graphics/misc_gfx2/Img_GasTrapHorizontal.bin` | pixel-gfx | fe8u graphics/misc/Img_GasTrapHorizontal.png |
-| `graphics/misc_gfx2/Img_GasTrapVertical.bin` | pixel-gfx | fe8u graphics/misc/Img_GasTrapVertical.png |
-| `graphics/misc_gfx2/Img_GmapCastleNodes.bin` | pixel-gfx | fe8u graphics/misc/Img_GmapCastleNodes.png |
-| `graphics/misc_gfx2/Img_GmapNodes.bin` | pixel-gfx | fe8u graphics/misc/Img_GmapNodes.png |
-| `graphics/misc_gfx2/Img_LightRune.bin` | pixel-gfx | fe8u graphics/misc/Img_LightRune.png |
-| `graphics/misc_gfx2/Img_LinkArenaActiveBannerFx.bin` | pixel-gfx | fe8u graphics/misc/Img_LinkArenaActiveBannerFx.png |
-| `graphics/misc_gfx2/Img_LinkArenaPlayerBanners.bin` | pixel-gfx | fe8u graphics/misc/Img_LinkArenaPlayerBanners.png |
-| `graphics/misc_gfx2/Img_LinkArenaPostBattleBg.bin` | pixel-gfx | fe8u graphics/misc/Img_LinkArenaPostBattleBg.png |
-| `graphics/misc_gfx2/Img_LinkArenaRankIcons.bin` | pixel-gfx | fe8u graphics/misc/Img_LinkArenaRankIcons.png |
-| `graphics/misc_gfx2/Img_LinkArena_FogUnitPlaceholder.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_MainMenuBgFog.bin` | pixel-gfx | fe8u graphics/misc/Img_MainMenuBgFog.png |
-| `graphics/misc_gfx2/Img_ManimLevelUpStatGain.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_ManimLevelUpStatGainDigits.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_ManimLevelUpText.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_MapClear.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_PikeTrap.bin` | pixel-gfx | fe8u graphics/misc/Img_PikeTrap.png |
-| `graphics/misc_gfx2/Img_PlayerRankFog.bin` | pixel-gfx | fe8u graphics/misc/Img_PlayerRankFog.png |
-| `graphics/misc_gfx2/Img_SaveMenuBG.bin` | pixel-gfx | fe8u graphics/misc/Img_SaveMenuBG.png |
-| `graphics/misc_gfx2/Img_StaffReelEnt_0.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_StaffReelEnt_1.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_StaffReelEnt_2.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_StaffReelEnt_3.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_StaffReelEnt_4.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_StaffReelEnt_5.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_StaffReelEnt_6.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_StaffReelEnt_8.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_StaffReelEnt_9.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_TriGenerialAxeAtkOBJ.bin` | pixel-gfx | fe8u graphics/efxbattle/Img_TriGenerialAxeAtkOBJ.png |
-| `graphics/misc_gfx2/Img_TriGenerialAxeOBJ.bin` | pixel-gfx | fe8u graphics/efxbattle/Img_TriGenerialAxeOBJ.png |
-| `graphics/misc_gfx2/Img_TriGenerialHandAxeAtkOBJ.bin` | pixel-gfx | fe8u graphics/efxbattle/Img_TriGenerialHandAxeAtkOBJ.png |
-| `graphics/misc_gfx2/Img_TriGenerialHandAxeOBJ.bin` | pixel-gfx | fe8u graphics/efxbattle/Img_TriGenerialHandAxeOBJ.png |
-| `graphics/misc_gfx2/Img_TriGenerialLanceAtkOBJ.bin` | pixel-gfx | fe8u graphics/efxbattle/Img_TriGenerialLanceAtkOBJ.png |
-| `graphics/misc_gfx2/Img_TriGenerialLanceOBJ.bin` | pixel-gfx | fe8u graphics/efxbattle/Img_TriGenerialLanceOBJ.png |
-| `graphics/misc_gfx2/Img_TriKnightAtkOBJ.bin` | pixel-gfx | fe8u graphics/efxbattle/Img_TriKnightAtkOBJ.png |
-| `graphics/misc_gfx2/Img_TriKnightOBJ.bin` | pixel-gfx | fe8u graphics/efxbattle/Img_TriKnightOBJ.png |
-| `graphics/misc_gfx2/Img_UnkData_0.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_UnkData_2.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/Img_WorldMapPlaceDot.bin` | pixel-gfx | fe8u graphics/misc/Img_WorldMapPlaceDot.png |
 | `graphics/misc_gfx2/Tsa_CharacterEnding_BottomBorder.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_CharacterEnding_BottomBorder.png |
 | `graphics/misc_gfx2/Tsa_CharacterEnding_TopBorder.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_CharacterEnding_TopBorder.png |
 | `graphics/misc_gfx2/Tsa_EndingFin.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_EndingFin.png |
@@ -3317,33 +1694,12 @@ under MISS, asserted by the self-test guards below).
 | `graphics/misc_gfx2/Tsa_StaffReelEnt_9.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_StaffReelEnt_9.png |
 | `graphics/misc_gfx2/Tsa_UnkData_0.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_0.png |
 | `graphics/misc_gfx2/Tsa_UnkData_5.bin` | pixel-gfx | fe8u preview/tsa/misc/Tsa_UnkData_5.png |
-| `graphics/misc_gfx2/gGfx_BrownTextBox.bin` | pixel-gfx | fe8u graphics/misc/gGfx_BrownTextBox.png |
-| `graphics/misc_gfx2/gGfx_GMapPI_LevelNums.bin` | pixel-gfx | fe8u graphics/misc/gGfx_GMapPI_LevelNums.png |
-| `graphics/misc_gfx2/gGfx_GMapPI_ShopIcons.bin` | pixel-gfx | fe8u graphics/misc/gGfx_GMapPI_ShopIcons.png |
-| `graphics/misc_gfx2/gGfx_OpSubtitle_02.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/gGfx_OpSubtitle_03.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/gGfx_OpSubtitle_04.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/gGfx_OpSubtitle_06.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/gGfx_UnkData_0.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx2/gImg_WorldmapMinimap_0.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx2/gTsa_OpSubtitle_00.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx2/gTsa_OpSubtitle_01.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx2/gTsa_OpSubtitle_04.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx2/gTsa_SupportSubScreen.bin` | pixel-gfx | fe8u preview/tsa/misc/gTsa_SupportSubScreen.png |
 | `graphics/misc_gfx2/gTsa_WorldmapMinimap_0.bin` | pixel-gfx | fe8u preview/tsa/misc/gTsa_WorldmapMinimap_0.png |
-| `graphics/misc_gfx3/Img_IntelligentSystems.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx3/Img_ManimSilenceBgfx.bin` | pixel-gfx | fe8u graphics/misc/Img_ManimSilenceBgfx.png |
-| `graphics/misc_gfx3/Img_ManimSilenceObjfx.bin` | pixel-gfx | fe8u graphics/misc/Img_ManimSilenceObjfx.png |
-| `graphics/misc_gfx3/Img_TriPegasusKnightBG.bin` | pixel-gfx | fe8u graphics/efxbattle/Img_TriPegasusKnightBG.png |
-| `graphics/misc_gfx3/Img_WmHightLightMap2.bin` | pixel-gfx | fe8u graphics/misc/Img_WmHightLightMap2.png |
-| `graphics/misc_gfx3/Img_WmHightLightMap4.bin` | pixel-gfx | fe8u graphics/misc/Img_WmHightLightMap4.png |
-| `graphics/misc_gfx3/Img_WmHightLightMap5.bin` | pixel-gfx | fe8u graphics/misc/Img_WmHightLightMap5.png |
-| `graphics/misc_gfx3/Img_WmHightLightMap7.bin` | pixel-gfx | fe8u graphics/misc/Img_WmHightLightMap7.png |
-| `graphics/misc_gfx3/Img_WmHightLightMapFrecia.bin` | pixel-gfx | fe8u graphics/misc/*.png |
 | `graphics/misc_gfx3/Tsa_IntelligentSystems.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx3/gGfx_OpSubtitle_00.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx3/gGfx_OpSubtitle_01.bin` | pixel-gfx | fe8u graphics/misc/*.png |
-| `graphics/misc_gfx3/gImg_StoneShatterAnim.bin` | pixel-gfx | fe8u graphics/misc/gImg_StoneShatterAnim.png |
 
 </details>
 
@@ -4427,59 +2783,13 @@ under MISS, asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (579) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (410) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>579 entries</summary>
+<details><summary>410 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
 | `data/residual/AP_DrawPreparationsBanner.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/ApConf_ManimSilencefx_anim_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_anim_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_1.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_10.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_11.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_12.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_13.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_2.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_3.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_5.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_6.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_7.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_9.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_frame_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_ManimSilencefx_motion.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimBerserkfx_anim_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimBerserkfx_anim_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimBerserkfx_frame_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimBerserkfx_frame_1.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimBerserkfx_frame_2.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimBerserkfx_frame_3.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimBerserkfx_frame_4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimBerserkfx_frame_5.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimBerserkfx_frame_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimBerserkfx_motion.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimTorchfx_anim_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimTorchfx_anim_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimTorchfx_frame_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimTorchfx_frame_1.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimTorchfx_frame_2.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimTorchfx_frame_3.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimTorchfx_frame_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapAnimTorchfx_motion.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApConf_MapanimTorchAnim_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApHandle_GmapSoguSprites_anim_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApHandle_GmapSoguSprites_anim_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApHandle_GmapSoguSprites_frame_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApHandle_GmapSoguSprites_frame_1.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApHandle_GmapSoguSprites_frame_2.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApHandle_GmapSoguSprites_frame_3.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApHandle_GmapSoguSprites_frame_4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApHandle_GmapSoguSprites_frame_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/ApHandle_GmapSoguSprites_motion.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/Ap_WmHightLightMap2_anim_0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/Ap_WmHightLightMap2_anim_1.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/Ap_WmHightLightMap2_anim_list.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -4545,100 +2855,11 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_0819EADC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_081A00C8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_081A6774.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081B3734.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081B4084.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081B4C6C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081B583C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081B62E4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081B6DE0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081B782C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081B8438.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081B8E14.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081B9ADC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081BA3D8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081BAC98.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081BB74C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081BC22C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081BCB74.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081BD510.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081BDEB4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081BE898.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081BF1A0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081BFB18.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081C0434.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081C5810.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081C6724.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081C7680.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081C8020.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081C8A44.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081C9510.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081CA04C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081CAAB0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081CB584.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081CBF48.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081CC8FC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081CD240.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081CDC7C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081CE5F0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081CEF00.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081CF484.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081CFF44.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D07F8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D10F4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D1A40.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D28EC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D33A4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D3CF8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D485C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D51E4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D5C6C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D67AC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D6FF0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D7910.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D90A8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081D9F94.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081DA858.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081DB354.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081DBEB4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081DD57C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081DDF10.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081DE63C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E287C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E314C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E3958.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E4370.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E4E20.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E5A34.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E6488.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E6F28.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E77E0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E8124.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E8A58.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E8FAC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081E9C6C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081EA8F8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081EB814.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081EE82C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081EEE80.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081EF574.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081EFD00.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081F04B4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081F0CF0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081F153C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081F1F10.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081F25BC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081F2D20.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081F3358.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081F3844.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081F3D80.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081F42F8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_081F4A20.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_081F5BF4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_081F64C0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_081F65C0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_081F66A4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_081F6D00.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08214004.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085432BC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085472FA.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0854C2B5.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -4687,11 +2908,9 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_085BA10C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085C4440.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085C6A20.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_085CBE64.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085CBFA4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085D30F8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085E3724.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_085F14DC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085F1568.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085F3338.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085FC068.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -4701,37 +2920,21 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_085FE490.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085FEC28.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085FEDD8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08604A8C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08604E24.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086068D0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08606B24.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08606D84.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08606FE4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08607184.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08607220.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08607B7C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0860D254.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0860DEB4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0860E028.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0860E1CC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0860E394.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0860E538.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0860E820.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0860EA7C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0860F5FC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_086101B4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08610D90.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086114F8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08612134.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08613A6C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08616558.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0861CCC0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0861E2E8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0861E38C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0861E430.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0861E4D4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0861E578.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0861E61C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0861E7B0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0861E944.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0861EAF0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -4742,15 +2945,9 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_0861F580.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0861F7FC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08620BB8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_086215FC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08622128.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08624C8C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08625014.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08630AD8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086314EC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08631BAC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0863230C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_086329CC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08636008.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08636294.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086371AC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -4760,15 +2957,10 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_0864CAC8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08659FFC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0865A268.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0865A404.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0865A694.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086724CC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086730D0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0867B54C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0867E3B4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0867E6BC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_086834CC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08689354.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0869BFF0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0869C14C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086A01E0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -4792,7 +2984,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_086B8608.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086B87AC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086B8D40.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_086B9E8C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086BA1E4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086BAB74.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086BB064.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -4824,8 +3015,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_0877B9B4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_087A2494.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_087A2554.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_087A8668.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_087A89EC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_087AEA64.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_087E1718.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0885612C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -4904,7 +3093,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_08A9CA34.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08AAF6DC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08AB0B48.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08B1E998.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08B25710.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08B3E1C8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08B3E688.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -4950,7 +3138,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/gLunaBgScrollOffsets.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gMPlayJumpTableTemplate.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gMenuMainObjs_5.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/gMenuStatus_0.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gPromoJidLut.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gSoloEndingBattleDispConf.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gSomeSMSLookupTable_0.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |

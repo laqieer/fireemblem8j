@@ -11,7 +11,7 @@ src/data/99D6DC/dat_data_99D6DC.o: graphics/misc_gfx2/Img_99E1A4.4bpp.lz graphic
 src/data/A01CC4/dat_data_A01CC4_2.o: graphics/misc_gfx2/Img_GameOverText.4bpp.lz graphics/misc_gfx2/Pal_GameOverText1.gbapal graphics/misc_gfx2/Pal_GameOverText2.gbapal graphics/misc_gfx2/Tsa_GameOverFx.bin graphics/misc_gfx2/gGfx_UnkData_0.4bpp.lz graphics/misc_gfx2/gTsa_UnkData_0.tsa.bin graphics/reuse/gUnkData_47.4bpp.lz
 src/data/A01CC4/dat_data_A01CC4_p2.o: graphics/misc_gfx2/Img_ChapterIntroFog.4bpp.lz graphics/misc_gfx2/Img_PlayerRankFog.4bpp.lz graphics/misc_gfx2/Pal_PlayerRankFog.gbapal
 src/data/A2EEF0/dat_data_A2EEF0_p0.o: data/residual/gUnkData_89.bin data/residual/gUnkData_92.bin graphics/misc/gUnkData_84.tsa.bin graphics/misc/gUnkData_86.tsa.bin graphics/reuse/gUnkData_81.4bpp.lz graphics/reuse/gUnkData_82.4bpp graphics/reuse/gUnkData_83.4bpp.lz graphics/reuse/gUnkData_85.4bpp.lz graphics/reuse/gUnkData_87.4bpp graphics/reuse/gUnkData_88.4bpp.lz graphics/reuse/gUnkData_90.4bpp graphics/reuse/gUnkData_91.4bpp.lz
-src/data/AA6BFA/dat_data_AA6BFA.o: data/residual/gUnkData_102.bin data/residual/gUnkData_103.bin data/residual/gUnkData_104.bin data/residual/gUnkData_105.bin data/residual/gUnkData_106.bin data/residual/gUnkData_107.bin graphics/reuse/gUnkData_100.4bpp graphics/reuse/gUnkData_101.4bpp
+src/data/AA6BFA/dat_data_AA6BFA.o: graphics/reuse/gUnkData_100.4bpp graphics/reuse/gUnkData_101.4bpp
 src/data/Ap_WmHightLightMap3_ref/dat_Ap_WmHightLightMap3_ref.o: data/residual/Ap_WmHightLightMap3.bin
 src/data/Ap_WmHightLightMap6_ref/dat_Ap_WmHightLightMap6_ref.o: data/residual/Ap_WmHightLightMap6.bin
 src/data/B12A60/dat_data_B12A60.o: graphics/misc_gfx2/Img_CommGameBgScreen.4bpp.lz graphics/misc_gfx2/Img_UnkData_2.4bpp.lz graphics/misc_gfx2/Pal_CommGameBgScreenInShop.gbapal graphics/misc_gfx2/Pal_UnkData_2.gbapal graphics/misc_gfx2/Tsa_UnkData_5.bin.lz
@@ -29,11 +29,10 @@ src/data/UnitDef_Ch14BAlly_7_ref/dat_UnitDef_Ch14BAlly_7_ref.o: data/residual/Un
 src/data/UnitDef_Ch18BAlly_2_ref/dat_UnitDef_Ch18BAlly_2_ref.o: data/residual/UnitDef_Ch18BAlly_2.bin
 src/data/UnitDef_Ch21BEnemy_1_ref/dat_UnitDef_Ch21BEnemy_1_ref.o: data/residual/UnitDef_Ch21BEnemy_1.bin
 src/data/anim_085A0EA0/dat_anim_085A0EA0.o: data/residual/g085A0EA0_anim_0.bin data/residual/g085A0EA0_anim_1.bin data/residual/g085A0EA0_anim_list.bin data/residual/g085A0EA0_frame_0.bin data/residual/g085A0EA0_frame_1.bin data/residual/g085A0EA0_frame_2.bin data/residual/g085A0EA0_frame_3.bin data/residual/g085A0EA0_frame_4.bin data/residual/g085A0EA0_frame_5.bin data/residual/g085A0EA0_frame_6.bin data/residual/g085A0EA0_frame_list.bin
-src/data/anim_mine_fx/dat_anim_mine_fx.o: data/residual/SpritAnim_MineFx_anim_0.bin data/residual/SpritAnim_MineFx_anim_list.bin data/residual/SpritAnim_MineFx_frame_0.bin data/residual/SpritAnim_MineFx_frame_1.bin data/residual/SpritAnim_MineFx_frame_2.bin data/residual/SpritAnim_MineFx_frame_3.bin data/residual/SpritAnim_MineFx_frame_4.bin data/residual/SpritAnim_MineFx_frame_5.bin data/residual/SpritAnim_MineFx_frame_6.bin data/residual/SpritAnim_MineFx_frame_7.bin data/residual/SpritAnim_MineFx_frame_8.bin data/residual/SpritAnim_MineFx_frame_list.bin data/residual/SpritAnim_MineFx_motion.bin
-src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight.o: data/residual/Ap_WmHightLightMap2_anim_0.bin data/residual/Ap_WmHightLightMap2_anim_1.bin data/residual/Ap_WmHightLightMap2_anim_list.bin data/residual/Ap_WmHightLightMap2_frame_0.bin data/residual/Ap_WmHightLightMap2_frame_1.bin data/residual/Ap_WmHightLightMap2_frame_list.bin data/residual/Ap_WmHightLightMap2_motion.bin data/residual/Ap_WmHightLightMapFrecia_anim_0.bin data/residual/Ap_WmHightLightMapFrecia_anim_1.bin data/residual/Ap_WmHightLightMapFrecia_anim_list.bin data/residual/Ap_WmHightLightMapFrecia_frame_0.bin data/residual/Ap_WmHightLightMapFrecia_frame_1.bin data/residual/Ap_WmHightLightMapFrecia_frame_list.bin data/residual/Ap_WmHightLightMapFrecia_motion.bin graphics/misc_gfx3/Img_WmHightLightMap2.4bpp.lz graphics/misc_gfx3/Img_WmHightLightMapFrecia.4bpp.lz graphics/misc_gfx3/Pal_WmHighLightNationMap.gbapal
+src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight.o: graphics/misc_gfx3/Img_WmHightLightMap2.4bpp.lz graphics/misc_gfx3/Img_WmHightLightMapFrecia.4bpp.lz graphics/misc_gfx3/Pal_WmHighLightNationMap.gbapal
 src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight_p5.o: graphics/misc_gfx3/Img_WmHightLightMap4.4bpp.lz
 src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight_p7.o: graphics/misc_gfx3/Img_WmHightLightMap5.4bpp.lz
-src/data/anim_worldmap_sprite/dat_anim_worldmap_sprite.o: data/residual/Sprite_0.bin data/residual/gWorldmapSprite_0.bin data/residual/gWorldmapSprite_11.bin data/residual/gWorldmapSprite_12.bin data/residual/gWorldmapSprite_14.bin data/residual/gWorldmapSprite_15.bin data/residual/gWorldmapSprite_16.bin data/residual/gWorldmapSprite_17.bin data/residual/gWorldmapSprite_19.bin data/residual/gWorldmapSprite_2.bin data/residual/gWorldmapSprite_20.bin data/residual/gWorldmapSprite_21.bin data/residual/gWorldmapSprite_22.bin data/residual/gWorldmapSprite_23.bin data/residual/gWorldmapSprite_24.bin data/residual/gWorldmapSprite_25.bin data/residual/gWorldmapSprite_26.bin data/residual/gWorldmapSprite_27.bin data/residual/gWorldmapSprite_28.bin data/residual/gWorldmapSprite_29.bin data/residual/gWorldmapSprite_3.bin data/residual/gWorldmapSprite_30.bin data/residual/gWorldmapSprite_32.bin data/residual/gWorldmapSprite_33.bin data/residual/gWorldmapSprite_4.bin data/residual/gWorldmapSprite_5.bin data/residual/gWorldmapSprite_6.bin data/residual/gWorldmapSprite_7.bin data/residual/gWorldmapSprite_8.bin data/residual/gWorldmapSprite_9.bin graphics/reuse/gWorldmapSprite_1.4bpp graphics/reuse/gWorldmapSprite_10.4bpp graphics/reuse/gWorldmapSprite_13.4bpp graphics/reuse/gWorldmapSprite_18.4bpp graphics/reuse/gWorldmapSprite_31.4bpp graphics/worldmap/Img_GmapPath.4bpp.lz graphics/worldmap/gImg_WorldmapNodeRevealEffect.4bpp.lz graphics/worldmap/gPal_WorldmapNodeRevealEffect.gbapal
+src/data/anim_worldmap_sprite/dat_anim_worldmap_sprite.o: graphics/reuse/gWorldmapSprite_1.4bpp graphics/reuse/gWorldmapSprite_10.4bpp graphics/reuse/gWorldmapSprite_13.4bpp graphics/reuse/gWorldmapSprite_18.4bpp graphics/reuse/gWorldmapSprite_31.4bpp graphics/worldmap/Img_GmapPath.4bpp.lz graphics/worldmap/gImg_WorldmapNodeRevealEffect.4bpp.lz graphics/worldmap/gPal_WorldmapNodeRevealEffect.gbapal
 src/data/banim/dat_data_banim_p0.o: graphics/banim/_us/efxmagic/Img_EfxTeonoOBJ.4bpp.lz graphics/banim/_us/efxmagic/Img_EfxTeonoOBJ.gbapal
 src/data/banim/dat_data_banim_p102.o: graphics/banim/_us/banim/assets/img/0062E7DC_Img_NosferatuBg_B.4bpp.lz graphics/banim/_us/banim/assets/img/0062F384_Img_NosferatuBg_C.4bpp.lz graphics/banim/_us/banim/assets/img/0062FEDC_Img_NosferatuBg_D.4bpp.lz graphics/banim/_us/banim/assets/img/00630990_Img_NosferatuBg_E.4bpp.lz graphics/banim/_us/banim/assets/img/00631460_Img_NosferatuBg_F.4bpp.lz graphics/banim/_us/banim/assets/img/00632124_Img_NosferatuBg_G.4bpp.lz graphics/banim/_us/banim/assets/img/00632A28_Img_NosferatuBg_H.4bpp.lz graphics/banim/_us/banim/assets/img/00632F7C_Img_NosferatuBg_I.4bpp.lz graphics/banim/_us/banim/assets/img/00633894_Img_NosferatuBg_J.4bpp.lz graphics/banim/_us/banim/assets/img/006344C8_Img_NosferatuBg_K.4bpp.lz graphics/banim/_us/banim/assets/img/0063516C_Img_NosferatuBg_L.4bpp.lz graphics/banim/_us/banim/assets/img/00635D60_Img_NosferatuBg_M.4bpp.lz
 src/data/banim/dat_data_banim_p103.o: graphics/banim/_us/banim/assets/tsa/00636660_Tsa_08636660.map.bin.lz
@@ -380,94 +379,6 @@ src/data/data_080ED67C/data_080ED67C.o: data/residual/data_080ED67C.bin
 src/data/data_0819EADC/data_0819EADC.o: data/residual/data_0819EADC.bin
 src/data/data_081A00C8/data_081A00C8.o: data/residual/data_081A00C8.bin
 src/data/data_081A6774/data_081A6774.o: data/residual/data_081A6774.bin
-src/data/data_081B3734/data_081B3734.o: data/residual/data_081B3734.bin
-src/data/data_081B4084/data_081B4084.o: data/residual/data_081B4084.bin
-src/data/data_081B4C6C/data_081B4C6C.o: data/residual/data_081B4C6C.bin
-src/data/data_081B583C/data_081B583C.o: data/residual/data_081B583C.bin
-src/data/data_081B62E4/data_081B62E4.o: data/residual/data_081B62E4.bin
-src/data/data_081B6DE0/data_081B6DE0.o: data/residual/data_081B6DE0.bin
-src/data/data_081B782C/data_081B782C.o: data/residual/data_081B782C.bin
-src/data/data_081B8438/data_081B8438.o: data/residual/data_081B8438.bin
-src/data/data_081B8E14/data_081B8E14.o: data/residual/data_081B8E14.bin
-src/data/data_081B9ADC/data_081B9ADC.o: data/residual/data_081B9ADC.bin
-src/data/data_081BA3D8/data_081BA3D8.o: data/residual/data_081BA3D8.bin
-src/data/data_081BAC98/data_081BAC98.o: data/residual/data_081BAC98.bin
-src/data/data_081BB74C/data_081BB74C.o: data/residual/data_081BB74C.bin
-src/data/data_081BC22C/data_081BC22C.o: data/residual/data_081BC22C.bin
-src/data/data_081BCB74/data_081BCB74.o: data/residual/data_081BCB74.bin
-src/data/data_081BD510/data_081BD510.o: data/residual/data_081BD510.bin
-src/data/data_081BDEB4/data_081BDEB4.o: data/residual/data_081BDEB4.bin
-src/data/data_081BE898/data_081BE898.o: data/residual/data_081BE898.bin
-src/data/data_081BF1A0/data_081BF1A0.o: data/residual/data_081BF1A0.bin
-src/data/data_081BFB18/data_081BFB18.o: data/residual/data_081BFB18.bin
-src/data/data_081C0434/data_081C0434.o: data/residual/data_081C0434.bin
-src/data/data_081C5810/data_081C5810.o: data/residual/data_081C5810.bin
-src/data/data_081C6724/data_081C6724.o: data/residual/data_081C6724.bin
-src/data/data_081C7680/data_081C7680.o: data/residual/data_081C7680.bin
-src/data/data_081C8020/data_081C8020.o: data/residual/data_081C8020.bin
-src/data/data_081C8A44/data_081C8A44.o: data/residual/data_081C8A44.bin
-src/data/data_081C9510/data_081C9510.o: data/residual/data_081C9510.bin
-src/data/data_081CA04C/data_081CA04C.o: data/residual/data_081CA04C.bin
-src/data/data_081CAAB0/data_081CAAB0.o: data/residual/data_081CAAB0.bin
-src/data/data_081CB584/data_081CB584.o: data/residual/data_081CB584.bin
-src/data/data_081CBF48/data_081CBF48.o: data/residual/data_081CBF48.bin
-src/data/data_081CC8FC/data_081CC8FC.o: data/residual/data_081CC8FC.bin
-src/data/data_081CD240/data_081CD240.o: data/residual/data_081CD240.bin
-src/data/data_081CDC7C/data_081CDC7C.o: data/residual/data_081CDC7C.bin
-src/data/data_081CE5F0/data_081CE5F0.o: data/residual/data_081CE5F0.bin
-src/data/data_081CEF00/data_081CEF00.o: data/residual/data_081CEF00.bin
-src/data/data_081CF484/data_081CF484.o: data/residual/data_081CF484.bin
-src/data/data_081CFF44/data_081CFF44.o: data/residual/data_081CFF44.bin
-src/data/data_081D07F8/data_081D07F8.o: data/residual/data_081D07F8.bin
-src/data/data_081D10F4/data_081D10F4.o: data/residual/data_081D10F4.bin
-src/data/data_081D1A40/data_081D1A40.o: data/residual/data_081D1A40.bin
-src/data/data_081D28EC/data_081D28EC.o: data/residual/data_081D28EC.bin
-src/data/data_081D33A4/data_081D33A4.o: data/residual/data_081D33A4.bin
-src/data/data_081D3CF8/data_081D3CF8.o: data/residual/data_081D3CF8.bin
-src/data/data_081D485C/data_081D485C.o: data/residual/data_081D485C.bin
-src/data/data_081D51E4/data_081D51E4.o: data/residual/data_081D51E4.bin
-src/data/data_081D5C6C/data_081D5C6C.o: data/residual/data_081D5C6C.bin
-src/data/data_081D67AC/data_081D67AC.o: data/residual/data_081D67AC.bin
-src/data/data_081D6FF0/data_081D6FF0.o: data/residual/data_081D6FF0.bin
-src/data/data_081D7910/data_081D7910.o: data/residual/data_081D7910.bin
-src/data/data_081D90A8/data_081D90A8.o: data/residual/data_081D90A8.bin
-src/data/data_081D9F94/data_081D9F94.o: data/residual/data_081D9F94.bin
-src/data/data_081DA858/data_081DA858.o: data/residual/data_081DA858.bin
-src/data/data_081DB354/data_081DB354.o: data/residual/data_081DB354.bin
-src/data/data_081DBEB4/data_081DBEB4.o: data/residual/data_081DBEB4.bin
-src/data/data_081DD57C/data_081DD57C.o: data/residual/data_081DD57C.bin
-src/data/data_081DDF10/data_081DDF10.o: data/residual/data_081DDF10.bin
-src/data/data_081DE63C/data_081DE63C.o: data/residual/data_081DE63C.bin
-src/data/data_081E287C/data_081E287C.o: data/residual/data_081E287C.bin
-src/data/data_081E314C/data_081E314C.o: data/residual/data_081E314C.bin
-src/data/data_081E3958/data_081E3958.o: data/residual/data_081E3958.bin
-src/data/data_081E4370/data_081E4370.o: data/residual/data_081E4370.bin
-src/data/data_081E4E20/data_081E4E20.o: data/residual/data_081E4E20.bin
-src/data/data_081E5A34/data_081E5A34.o: data/residual/data_081E5A34.bin
-src/data/data_081E6488/data_081E6488.o: data/residual/data_081E6488.bin
-src/data/data_081E6F28/data_081E6F28.o: data/residual/data_081E6F28.bin
-src/data/data_081E77E0/data_081E77E0.o: data/residual/data_081E77E0.bin
-src/data/data_081E8124/data_081E8124.o: data/residual/data_081E8124.bin
-src/data/data_081E8A58/data_081E8A58.o: data/residual/data_081E8A58.bin
-src/data/data_081E8FAC/data_081E8FAC.o: data/residual/data_081E8FAC.bin
-src/data/data_081E9C6C/data_081E9C6C.o: data/residual/data_081E9C6C.bin
-src/data/data_081EA8F8/data_081EA8F8.o: data/residual/data_081EA8F8.bin
-src/data/data_081EB814/data_081EB814.o: data/residual/data_081EB814.bin
-src/data/data_081EE82C/data_081EE82C.o: data/residual/data_081EE82C.bin
-src/data/data_081EEE80/data_081EEE80.o: data/residual/data_081EEE80.bin
-src/data/data_081EF574/data_081EF574.o: data/residual/data_081EF574.bin
-src/data/data_081EFD00/data_081EFD00.o: data/residual/data_081EFD00.bin
-src/data/data_081F04B4/data_081F04B4.o: data/residual/data_081F04B4.bin
-src/data/data_081F0CF0/data_081F0CF0.o: data/residual/data_081F0CF0.bin
-src/data/data_081F153C/data_081F153C.o: data/residual/data_081F153C.bin
-src/data/data_081F1F10/data_081F1F10.o: data/residual/data_081F1F10.bin
-src/data/data_081F25BC/data_081F25BC.o: data/residual/data_081F25BC.bin
-src/data/data_081F2D20/data_081F2D20.o: data/residual/data_081F2D20.bin
-src/data/data_081F3358/data_081F3358.o: data/residual/data_081F3358.bin
-src/data/data_081F3844/data_081F3844.o: data/residual/data_081F3844.bin
-src/data/data_081F3D80/data_081F3D80.o: data/residual/data_081F3D80.bin
-src/data/data_081F42F8/data_081F42F8.o: data/residual/data_081F42F8.bin
-src/data/data_081F4A20/data_081F4A20.o: data/residual/data_081F4A20.bin
 src/data/data_081F5BF4/data_081F5BF4.o: data/residual/data_081F5BF4.bin
 src/data/data_081F64C0/data_081F64C0.o: data/residual/data_081F64C0.bin
 src/data/data_081F65C0/data_081F65C0.o: data/residual/data_081F65C0.bin
@@ -834,20 +745,15 @@ src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1602.o: data/residual/gUnkData
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1605.o: graphics/gmapunit/Img_PrepWindow.4bpp.lz
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1606.o: data/residual/gUnkData_80.bin graphics/misc_gfx2/gTsa_SupportSubScreen.bin.lz
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1621.o: graphics/gmapunit/gGfx_MinimapTiles.4bpp.lz graphics/gmapunit/gPal_MinimapTiles.gbapal graphics/gmapunit/gPal_Minimap_0.gbapal
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1624.o: data/residual/gSprite_SavemenuData_17.bin data/residual/gSprite_SavemenuData_18.bin data/residual/gSprite_SavemenuData_19.bin data/residual/gSprite_SavemenuData_20.bin data/residual/gSprite_SavemenuData_21.bin data/residual/gSprite_SavemenuData_22.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1628.o: data/residual/Obj_SmallBrownNameBoxe1.bin data/residual/Obj_SmallBrownNameBoxe2.bin data/residual/Obj_SmallBrownNameBoxe3.bin data/residual/Obj_SmallBrownNameBoxe4.bin data/residual/Obj_SmallBrownNameBoxe5.bin data/residual/Obj_SmallBrownNameBoxe6.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1634.o: graphics/gmapunit/Pal_DifficultyMenuObjs.gbapal graphics/reuse/gMenuMainObjs_0.4bpp
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1636.o: graphics/reuse/gMenuMainObjs_2.4bpp.lz graphics/reuse/gMenuMainObjs_3.4bpp.lz graphics/reuse/gMenuMainObjs_4.4bpp
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1637.o: data/residual/gMenuMainObjs_5.bin data/residual/gMenuSoundroom_0.bin data/residual/gMenuSoundroom_1.bin data/residual/gMenuSoundroom_2.bin data/residual/gMenuSoundroom_4.bin graphics/gmapunit/Img_SoundRoomVolumeGraph.4bpp.lz graphics/gmapunit/Pal_SoundRoomVolumeGraph.gbapal graphics/reuse/gMenuSoundroom_3.4bpp.lz
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1638.o: graphics/gmapunit/Img_ChapterStatusSelectorSprite.4bpp.lz graphics/gmapunit/Img_PlayStatusSprites.4bpp.lz graphics/gmapunit/Pal_PlayStatusSprites.gbapal
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1639.o: graphics/gmapunit/Img_MenuStatus_0.4bpp.lz graphics/gmapunit/Img_SysBlackBox.4bpp.lz graphics/gmapunit/Pal_MenuStatus_0.gbapal graphics/misc/gMenuStatus_0.gbapal
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1643.o: data/residual/sSprite_ClassDisplay_B.bin data/residual/sSprite_ClassDisplay_C.bin data/residual/sSprite_ClassDisplay_D.bin data/residual/sSprite_ClassDisplay_E.bin data/residual/sSprite_ClassDisplay_F.bin data/residual/sSprite_ClassDisplay_G.bin data/residual/sSprite_ClassDisplay_H.bin data/residual/sSprite_ClassDisplay_I.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1644.o: data/residual/sSprite_ClassDisplay_L.bin data/residual/sSprite_ClassDisplay_M.bin data/residual/sSprite_ClassDisplay_N.bin data/residual/sSprite_ClassDisplay_P.bin data/residual/sSprite_ClassDisplay_R.bin data/residual/sSprite_ClassDisplay_S.bin data/residual/sSprite_ClassDisplay_T.bin data/residual/sSprite_ClassDisplay_V.bin data/residual/sSprite_ClassDisplay_W.bin data/residual/sSprite_ClassDisplay_Z.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1655.o: data/residual/gCharacterEndingDefeatLut.bin data/residual/gSoloEndingBattleDispConf.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p3.o: data/residual/gWorldmapPath_20.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p5.o: data/residual/chance_lut.3.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p676.o: data/residual/gSprite_Face64x96.bin data/residual/gSprite_Face64x96_Flipped.bin data/residual/gSprite_Face80x72.bin data/residual/gSprite_Face80x72_Flipped.bin data/residual/gSprite_Face96x72.bin data/residual/gSprite_Face96x72_Flipped.bin data/residual/gSprite_Face96x96.bin data/residual/gSprite_Face96x96_Flipped.bin
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p680.o: data/residual/gSprite_TalkTextBack.bin data/residual/gSprite_TalkTextFront.bin data/residual/gTalkFaceHPosLut.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p684.o: data/residual/Obj_EventShinningCursor.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p7.o: data/residual/WmMonsterGenerateRates_EphraimMode.bin data/residual/WmMonsterGenerateRates_XmapEphraim.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p702.o: data/residual/gBmudisp_0.bin data/residual/gSomeSMSLookupTable_0.bin data/residual/sSlotToChrLut.bin
