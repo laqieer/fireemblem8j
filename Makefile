@@ -921,7 +921,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_ProcScr_SpellAssocTorch_ref.s \
                            asm/dat_ProcScr_SpellAssocSleep_ref.s \
                            asm/dat_FinalChapterMap2Changes_ref.s \
-                           asm/dat_gMPlayJumpTableTemplate_ref.s \
                            asm/dat_const_data_unit_icon_move_p29.s \
                            asm/dat_gProcScr_SSPageNumCtrl_ref.s \
                            asm/dat_gEventListCmdInfoTable_ref.s \
