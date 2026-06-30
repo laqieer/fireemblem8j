@@ -160,7 +160,7 @@ frontier_df4_banim_b_024_67E9B8:
 @ df4_banim_b region-different data, JP 0x0867f520..0x08680738 (4632 B); long-tail data gap (no .text in window), byte-perfect incbin.
 	.global frontier_df4_banim_b_025_67F520
 frontier_df4_banim_b_025_67F520:
-	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_025_67F520.bin.lz"
+	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_025_67F520.4bpp.lz"
 
 	.section .data.frontier_df4_banim_b.gap26, "a", %progbits
 @ df4_banim_b region-different data, JP 0x08683c80..0x08686bb8 (12088 B); long-tail data gap (no .text in window), byte-perfect incbin.
@@ -238,7 +238,7 @@ frontier_df4_banim_b_037_6AC820:
 @ df4_banim_b region-different data, JP 0x086ad478..0x086ad998 (1312 B); long-tail data gap (no .text in window), byte-perfect incbin.
 	.global frontier_df4_banim_b_038_6AD478
 frontier_df4_banim_b_038_6AD478:
-	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_038_6AD478.bin.lz"
+	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_038_6AD478.4bpp.lz"
 
 	.section .data.frontier_df4_banim_b.gap39, "a", %progbits
 @ df4_banim_b region-different data, JP 0x086adb74..0x086ae148 (1492 B); long-tail data gap (no .text in window), byte-perfect incbin.
@@ -352,7 +352,7 @@ frontier_df4_banim_b_056_7657CC:
 @ df4_banim_b region-different data, JP 0x0879a108..0x0879b220 (4376 B); long-tail data gap (no .text in window), byte-perfect incbin.
 	.global frontier_df4_banim_b_057_79A108
 frontier_df4_banim_b_057_79A108:
-	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_057_79A108.bin.lz"
+	.incbin "graphics/frontier_df4_banim_b/frontier_df4_banim_b_057_79A108.4bpp.lz"
 
 	.section .data.frontier_df4_banim_b.gap58, "a", %progbits
 @ df4_banim_b region-different data, JP 0x0879f83c..0x0879fa88 (588 B); long-tail data gap (no .text in window), byte-perfect incbin.

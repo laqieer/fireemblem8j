@@ -45,7 +45,7 @@ frontier_df3_banim_aura_005_756454:
 @ df3_banim_aura region-different data, JP 0x08756f38..0x08758194 (4700 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_df3_banim_aura_006_756F38
 frontier_df3_banim_aura_006_756F38:
-	.incbin "graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_006_756F38.bin.lz"
+	.incbin "graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_006_756F38.4bpp.lz"
 
 	.section .data.frontier_df3_banim_aura.gap7, "a", %progbits
 @ df3_banim_aura region-different data, JP 0x08758e68..0x0875ae34 (8140 B); table-pinned (not code-named), byte-perfect incbin.
@@ -57,7 +57,7 @@ frontier_df3_banim_aura_007_758E68:
 @ df3_banim_aura region-different data, JP 0x0875cefc..0x0875d358 (1116 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_df3_banim_aura_008_75CEFC
 frontier_df3_banim_aura_008_75CEFC:
-	.incbin "graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_008_75CEFC.bin.lz"
+	.incbin "graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_008_75CEFC.4bpp.lz"
 
 	.section .data.frontier_df3_banim_aura.gap9, "a", %progbits
 @ df3_banim_aura region-different data, JP 0x0875d570..0x0875d618 (168 B); table-pinned (not code-named), byte-perfect incbin.

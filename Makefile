@@ -1184,7 +1184,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_EventScr_Ch2_10_ref.s \
                            asm/dat_EventScr_9EEA58_ref.s \
                            asm/dat_anim_mapanim_statgain.s \
-                           asm/dat_gSoundRoomTable_ref.s \
                            asm/dat_TowerOfValni7MapChanges_ref.s \
                            asm/dat_TowerOfValni6MapChanges_ref.s \
                            asm/dat_EventListScr_Ch20b_Turn_ref.s \
@@ -2400,7 +2399,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/snd_song896_mon_mao_appear1.s \
                            asm/snd_song035_agbfe3_bgm_btl_class_chg_2.s \
                            asm/snd_song617_se_bmp_map25_saint_light1.s \
-                           asm/snd_banim_efxsound_data_0.s \
                            asm/snd_song034_agbfe3_bgm_btl_staff_b_1.s \
                            asm/snd_song002_agbfe3_bgm_op_theme_i_4.s \
                            asm/snd_song002_agbfe3_bgm_op_theme_i_2.s \
@@ -2867,7 +2865,7 @@ asm/direct_sound_data.o: $(DIRECT_SOUND_BINS)
 SOUND_DATA_BINS := $(wildcard data/sound/*.bin)
 $(patsubst %.s,%.o,$(wildcard asm/snd_song*.s asm/snd_banim_efxsound_data_*.s \
 	asm/dat_voicegroup*_ref.s asm/dat_gMPlayTable_ref.s \
-	asm/dat_gMPlayJumpTableTemplate_ref.s asm/dat_gSoundRoomTable_ref.s \
+	asm/dat_gMPlayJumpTableTemplate_ref.s \
 	asm/frontier_df3_voicegroup.s asm/frontier_df4_voice.s \
 	asm/stranded_m4a.s asm/stranded_soundwrapper.s \
 	asm/stranded_banim-efxsound.s)): $(SOUND_DATA_BINS)

@@ -164,3 +164,32 @@ graphics/btl_bg/btl_bg_56.feimg3.bin graphics/btl_bg/btl_bg_56.fetsa3.bin: graph
 
 graphics/btl_bg/btl_bg_57.feimg3.bin graphics/btl_bg/btl_bg_57.fetsa3.bin: graphics/btl_bg/btl_bg_57.png
 	$(FETSATOOL) $< graphics/btl_bg/btl_bg_57.feimg3.bin graphics/btl_bg/btl_bg_57.fetsa3.bin --blank_tile_index=305 --pop_last_tile
+
+# --- wave-2 (axis #6): 7 region-same btl_bg whose fe8u source is a plain linear
+# 4bpp tile-strip .png (NOT a TSA screen-image). gbagfx png->4bpp reproduces the
+# JP ROM's .feimg3.bin tiles byte-for-byte (proven cmp == committed .bin for all
+# 7). These target-specific rules OVERRIDE the generic FETSATOOL `%.feimg3.bin
+# %.fetsa3.bin &: %.png` pattern (FETSATOOL would dedup/build a tilemap, which is
+# not how these were stored in the ROM). gbagfx infers bit depth from the OUTPUT
+# extension, so it cannot write `.feimg3.bin` directly -- build a `.4bpp`
+# intermediate (generic %.4bpp: %.png rule) and copy. The paired .fetsa3.bin
+# tilemap has no editable fe8u source and STAYS a committed binary leaf (FLOOR;
+# mirrors fe8u keeping .map.bin). The .feimg3.bin.lz INCBIN chain is unchanged.
+graphics/btl_bg/btl_bg_14.feimg3.bin: graphics/btl_bg/btl_bg_14.4bpp ; cp $< $@
+graphics/btl_bg/btl_bg_27.feimg3.bin: graphics/btl_bg/btl_bg_27.4bpp ; cp $< $@
+graphics/btl_bg/btl_bg_33.feimg3.bin: graphics/btl_bg/btl_bg_33.4bpp ; cp $< $@
+graphics/btl_bg/btl_bg_55.feimg3.bin: graphics/btl_bg/btl_bg_55.4bpp ; cp $< $@
+graphics/btl_bg/btl_bg_58.feimg3.bin: graphics/btl_bg/btl_bg_58.4bpp ; cp $< $@
+graphics/btl_bg/btl_bg_59.feimg3.bin: graphics/btl_bg/btl_bg_59.4bpp ; cp $< $@
+graphics/btl_bg/btl_bg_60.feimg3.bin: graphics/btl_bg/btl_bg_60.4bpp ; cp $< $@
+# The paired .fetsa3.bin is a COMMITTED leaf (no editable source). A no-recipe
+# rule stops make from regenerating it via the generic FETSATOOL `%.feimg3.bin
+# %.fetsa3.bin &: %.png` pattern (the now-committed .png made it a candidate; the
+# JP tilemap layout is not what FETSATOOL would synthesize, so it must NOT run).
+graphics/btl_bg/btl_bg_14.fetsa3.bin: ;
+graphics/btl_bg/btl_bg_27.fetsa3.bin: ;
+graphics/btl_bg/btl_bg_33.fetsa3.bin: ;
+graphics/btl_bg/btl_bg_55.fetsa3.bin: ;
+graphics/btl_bg/btl_bg_58.fetsa3.bin: ;
+graphics/btl_bg/btl_bg_59.fetsa3.bin: ;
+graphics/btl_bg/btl_bg_60.fetsa3.bin: ;

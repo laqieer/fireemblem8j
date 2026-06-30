@@ -1,4 +1,6 @@
 #include "global.h"
+#include "anime.h"
+#include "gba_sprites.h"
 
 /* Migrated from asm/dat_banim_ekrdragonfx_9.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
@@ -283,5 +285,36 @@ SECTION(".rodata.dat_banim_ekrdragonfx_9") u16 Pal_Ekrdragonfx_2[] = INCBIN_U16(
 SECTION(".rodata.dat_banim_ekrdragonfx_9") u16 Tsa_DemonLightBg_0[] = INCBIN_U16("graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg_0.map.bin.lz");
 SECTION(".rodata.dat_banim_ekrdragonfx_9") u16 Tsa_DemonLightBg_1[] = INCBIN_U16("graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg_1.map.bin.lz");
 SECTION(".rodata.dat_banim_ekrdragonfx_9") u16 Tsa_DemonLightBg_2[] = INCBIN_U16("graphics/banim/_us/banim/dragonfx/Tsa_DemonLightBg_2.map.bin.lz");
-SECTION(".rodata.dat_banim_ekrdragonfx_9") u8 AnimSprite_DemoKingTunkFace_1[] = INCBIN_U8("data/banim/AnimSprite_DemoKingTunkFace_1.bin");
-SECTION(".rodata.dat_banim_ekrdragonfx_9") u8 AnimSprite_DemoKingTunkFace_2[] = INCBIN_U8("data/banim/AnimSprite_DemoKingTunkFace_2.bin");
+SECTION(".rodata.dat_banim_ekrdragonfx_9") struct AnimSpriteData AnimSprite_DemoKingTunkFace_1[] =
+{
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_64) << 16), .as = { .object = { 0x0000, -20, -72 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x0004, 12, -72 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x0084, 12, -40 } } },
+    { .header = (u32)(ATTR0_WIDE) | ((u32)(ATTR1_SIZE_32) << 16), .as = { .object = { 0x0007, -20, -88 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_32) << 16), .as = { .object = { 0x0047, -44, -88 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x0049, -28, -88 } } },
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x00C7, -44, -56 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x00C9, -28, -56 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_32) << 16), .as = { .object = { 0x0025, -60, -96 } } },
+    { .header = (u32)(ATTR0_WIDE) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x00A5, -60, -64 } } },
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_32) << 16), .as = { .object = { 0x004A, 20, -80 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x004E, 52, -80 } } },
+    { .header = (u32)(ATTR0_WIDE) | ((u32)(ATTR1_SIZE_32) << 16), .as = { .object = { 0x00CA, 20, -48 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x00CE, 52, -48 } } },
+    ANIM_SPRITE_END,
+};
+SECTION(".rodata.dat_banim_ekrdragonfx_9") struct AnimSpriteData AnimSprite_DemoKingTunkFace_2[] =
+{
+    { .header = (u32)(ATTR0_WIDE) | ((u32)(ATTR1_SIZE_32) << 16), .as = { .object = { 0x0019, -20, -88 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_64) << 16), .as = { .object = { 0x000F, -20, -72 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x0013, 12, -72 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x0093, 12, -40 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_64) << 16), .as = { .object = { 0x0014, -60, -104 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x0018, -28, -104 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x0098, -28, -72 } } },
+    { .header = (u32)(ATTR0_SQUARE) | ((u32)(ATTR1_SIZE_32) << 16), .as = { .object = { 0x0059, 20, -80 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_16) << 16), .as = { .object = { 0x005D, 52, -80 } } },
+    { .header = (u32)(ATTR0_WIDE) | ((u32)(ATTR1_SIZE_32) << 16), .as = { .object = { 0x00D9, 20, -48 } } },
+    { .header = (u32)(ATTR0_TALL) | ((u32)(ATTR1_SIZE_8) << 16), .as = { .object = { 0x00DD, 52, -48 } } },
+    ANIM_SPRITE_END,
+};

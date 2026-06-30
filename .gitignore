@@ -31,24 +31,20 @@ build/shiftcheck/
 
 # TSA battle-background intermediates (D309). The editable source is the .png;
 # FETSATOOL regenerates these byte-for-byte (mirrors ../fireemblem8u which also
-# gitignores *.feimg*.bin / *.fetsa*.bin). The 7 btl_bg whose fe8u .png is stored
-# in a different (4bpp+map) form do NOT round-trip via FETSATOOL, so their .bin
-# stay COMMITTED and are re-included below.
+# gitignores *.feimg*.bin / *.fetsa*.bin). The 7 btl_bg below are a plain linear
+# 4bpp tile-strip in the ROM (not a TSA screen-image): their fe8u .png rebuilds
+# the .feimg3.bin tiles byte-for-byte via gbagfx (wave-2, axis #6), so the
+# .feimg3.bin is now a generated artifact (.png is the committed editable
+# source). Only the paired .fetsa3.bin tilemap -- which has no editable fe8u
+# source -- stays COMMITTED (re-included below; FLOOR, mirrors fe8u's .map.bin).
 *.feimg*.bin
 *.fetsa*.bin
-!graphics/btl_bg/btl_bg_14.feimg3.bin
 !graphics/btl_bg/btl_bg_14.fetsa3.bin
-!graphics/btl_bg/btl_bg_27.feimg3.bin
 !graphics/btl_bg/btl_bg_27.fetsa3.bin
-!graphics/btl_bg/btl_bg_33.feimg3.bin
 !graphics/btl_bg/btl_bg_33.fetsa3.bin
-!graphics/btl_bg/btl_bg_55.feimg3.bin
 !graphics/btl_bg/btl_bg_55.fetsa3.bin
-!graphics/btl_bg/btl_bg_58.feimg3.bin
 !graphics/btl_bg/btl_bg_58.fetsa3.bin
-!graphics/btl_bg/btl_bg_59.feimg3.bin
 !graphics/btl_bg/btl_bg_59.fetsa3.bin
-!graphics/btl_bg/btl_bg_60.feimg3.bin
 !graphics/btl_bg/btl_bg_60.fetsa3.bin
 
 # Battle-animation compressing-linker intermediates (BA1). The COMMITTED editable
@@ -98,6 +94,20 @@ src/*.s
 src/data/*.s
 src/data/map/*.s
 src/data/**/*.s
+# ...except hand-written AP (sprite/object animation) definition sources: these
+# replace the opaque INCBIN-of-.bin wrappers with editable include/ap.inc macro
+# .s source (axis #6). They are COMMITTED sources (no .c twin generates them).
+!src/data/anim_arrow_trap/dat_anim_arrow_trap.s
+!src/data/anim_fire_trap/dat_anim_fire_trap.s
+!src/data/anim_pike_trap/dat_anim_pike_trap.s
+!src/data/anim_trap_gas/dat_anim_trap_gas.s
+!src/data/anim_player_rank_fog/dat_anim_player_rank_fog.s
+!src/data/anim_worldmap_skirmish/dat_anim_worldmap_skirmish.s
+!src/data/anim_mapanim_statgain/dat_anim_mapanim_statgain.s
+!src/data/anim_mapanim_berserk_silence/dat_anim_mapanim_berserk_silence.s
+!src/data/anim_mapanim_torch/dat_anim_mapanim_torch.s
+!src/data/anim_mapanim_torchfx/dat_anim_mapanim_torchfx.s
+!src/data/anim_mapanim_objects/dat_anim_mapanim_objects.s
 # NON_MATCHING staging (D26): the readable C in src/nonmatching/*.c is tracked,
 # but the agbcc .s intermediate from `make nonmatching` is a build artifact.
 src/nonmatching/*.s

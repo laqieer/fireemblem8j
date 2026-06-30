@@ -4,10 +4,10 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 frontier_banim_aurabg3_000_76E98C[] __attribute__((section(".data.frontier_banim_aurabg3.gap0"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_000_76E98C.bin.lz");
-u8 frontier_banim_aurabg3_001_76FE78[] __attribute__((section(".data.frontier_banim_aurabg3.gap1"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_001_76FE78.bin.lz");
-u8 frontier_banim_aurabg3_002_771224[] __attribute__((section(".data.frontier_banim_aurabg3.gap2"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_002_771224.bin.lz");
-u8 frontier_banim_aurabg3_003_7725D4[] __attribute__((section(".data.frontier_banim_aurabg3.gap3"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_003_7725D4.bin.lz");
+u8 frontier_banim_aurabg3_000_76E98C[] __attribute__((section(".data.frontier_banim_aurabg3.gap0"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_000_76E98C.4bpp.lz");
+u8 frontier_banim_aurabg3_001_76FE78[] __attribute__((section(".data.frontier_banim_aurabg3.gap1"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_001_76FE78.4bpp.lz");
+u8 frontier_banim_aurabg3_002_771224[] __attribute__((section(".data.frontier_banim_aurabg3.gap2"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_002_771224.4bpp.lz");
+u8 frontier_banim_aurabg3_003_7725D4[] __attribute__((section(".data.frontier_banim_aurabg3.gap3"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_003_7725D4.4bpp.lz");
 u8 frontier_banim_aurabg3_004_7738F0[] __attribute__((section(".data.frontier_banim_aurabg3.gap4"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_004_7738F0.bin");
 u8 frontier_banim_aurabg3_005_774CB8[] __attribute__((section(".data.frontier_banim_aurabg3.gap5"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_005_774CB8.bin.lz");
 u8 frontier_banim_aurabg3_006_774F30[] __attribute__((section(".data.frontier_banim_aurabg3.gap6"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_006_774F30.bin.lz");
