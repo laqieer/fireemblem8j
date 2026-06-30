@@ -8,6 +8,33 @@
 **Keep this current.** Refresh the numbers from `scripts/calcprogress.py` and the target lists from
 ground truth whenever an axis moves. Stale frontier data caused real wasted work (see "Pitfall" below).
 
+## Strict-goal distance — EMPIRICAL reducible/irreducible split of MISS (2026-06-30, D323)
+
+Goal: *"no `.bin` kept unless it is also `.bin` in fe8u"* ≈ audit **MISS → 0**. Post-wave-8 the
+corrected classifier reports **MISS 318**. A per-file `tools/gbagfx/gbagfx` `-mindist 1..12`
+round-trip + header probe splits those 318 into:
+
+- **58 IRREDUCIBLE — JP-LZ floor (HARD BLOCKER).** byte0=0x10 GBA-LZ77 blobs (battle-anim 47,
+  pixel-gfx 8 incl. chap_title, menu-strings 3) where fe8u commits the same sheet as `.png`, but
+  **0 of 58 reproduce the JP bytes at ANY `-mindist`** — the JP ROM used a different (less-optimal)
+  LZ match-finder than gbagfx's greedy longest-match (e.g. aurabg3_004: JP 5064 B; gbagfx md4=5052,
+  md5=5076 — JP size is unreachable). **Reaching MISS=0 for these REQUIRES a bit-exact JP LZ
+  recompressor** (reverse-engineer IS/SDK match heuristic) — a separate RE project, not a carve.
+- **260 REDUCIBLE via structural carving** (raw, non-LZ): MapChanges 29 (→ typed-C via
+  `gen_data_map_change.py` + JP tile fixups), `frontier_df3_unitdef_b` REDA-residue tails 52
+  (→ named `struct REDA[]` cascade), battle-anim raw OAM/anim/frame/pointer tables 146 (→ `.s`
+  ANIM_SPRITE / typed-C), pixel-gfx 9, menu-strings 19, voicegroup 4 (RE-ceiling), sound 1. These
+  are deep but tractable byte-exact carves — multi-wave (the orchestrator's deferred wave-9+).
+
+**So MISS=0 (strict goal) is blocked on BOTH** (a) ~260 deep carves AND (b) a JP-LZ recompressor for
+the 58. **Wave 9 (LANDED, −33 `.bin`: 1919 → 1886, MISS 318 → 285):** (1) the "MapChanges" lane was
+a misattribution — 28 `data/residual/Ch*MapChanges.bin`/`TileAnimations*.bin` are chapter EVENT DATA
+already de-pointered into shiftable `src/data/*_ref/dat_*_ref.c` (`.4byte` symbol refs); the `.bin`
+were orphans referenced only by excluded asm stubs → deleted (byte-neutral). (2) `frontier_df3_unitdef_b`
+REDA cascade: 31 REDA runs carved into named `struct REDA[]`, 5 `.bin` eliminated; 2 region-different
++ ~38 UnitDefinition-table residues remain (need the recursive unit-table-typing chain — deferred).
+The strict goal is NOT reached; `make compare` OK + `make shiftcheck` 0 HIGH held on every banked lane.
+
 ## Current state (2026-06-30) — asset-editability WAVE 8 landed + the 642-MISS heuristic split (D322)
 
 Wave 8 integrated through one clean `make compare` + `make shiftcheck` gate (byte-exact, sha1
