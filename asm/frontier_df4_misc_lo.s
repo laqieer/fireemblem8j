@@ -124,13 +124,15 @@ frontier_df4_misc_lo_016_1A4C88:
 @ Split for src/chapterdata.o(.rodata) at 0x081b2c80 (chapter internalName string pool).
 	.global frontier_df4_misc_lo_017_1B1878
 frontier_df4_misc_lo_017_1B1878:
-	.incbin "graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_017_1B1878.bin", 0, 5128
+@ Decoded to editable .asciz/.space literals (unit-class internal-name + staff-credits
+@ string pool) in src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.c; raw .bin removed.
+@ This excluded snapshot keeps only the symbol/section markers.
 
 	.section .data.frontier_df4_misc_lo.gap17b, "a", %progbits
 @ df4_misc_lo region-different data, JP 0x081b2d81..0x081b2d84 (3 B); tail after chapterdata string pool.
 	.global frontier_df4_misc_lo_017b_1B2D81
 frontier_df4_misc_lo_017b_1B2D81:
-	.incbin "graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_017_1B1878.bin", 5385, 3
+@ Decoded with gap17 above (3 zero bytes); see frontier_df4_misc_lo.c. Raw .bin removed.
 
 	.section .data.frontier_df4_misc_lo.gap18, "a", %progbits
 @ df4_misc_lo region-different data, JP 0x081def84..0x081e0b90 (7180 B); long-tail data gap (no .text in window), byte-perfect incbin.
