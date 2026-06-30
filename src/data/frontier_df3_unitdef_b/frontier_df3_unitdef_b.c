@@ -207,7 +207,7 @@ struct REDA REDAs_UnitDef_Ch16AAlly_4_5[] __attribute__((section(".data.frontier
     { .x = 11, .y = 4, .b = 0xffff },
     { .x = 11, .y = 11, .flags = 0x10, .a = 0x1e, .b = 0xffff, .delayFrames = 30 },
 };
-static const u8 frontier_df3_unitdef_b_007_911200_tail[] __attribute__((section(".data.frontier_df3_unitdef_b.gap7"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_007_911200.bin", 400, 240);
+const u8 frontier_df3_unitdef_b_007_911200_tail[] __attribute__((section(".data.frontier_df3_unitdef_b.gap7"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_007_911200.bin", 400, 240);
 u8 frontier_df3_unitdef_b_008_9117C8[] __attribute__((section(".data.frontier_df3_unitdef_b.gap8"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_008_9117C8.bin");
 u8 frontier_df3_unitdef_b_009_91187C[] __attribute__((section(".data.frontier_df3_unitdef_b.gap9"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_009_91187C.bin");
 u8 frontier_df3_unitdef_b_010_9119D0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap10"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_010_9119D0.bin");
@@ -288,7 +288,7 @@ struct REDA REDAs_UnitDef_Ch16AMixed_1_3[] __attribute__((section(".data.frontie
     { .x = 4, .y = 3, .a = 0x2, .b = 0xffff },
     { .x = 6, .y = 3, .b = 0xffff },
 };
-static const u8 frontier_df3_unitdef_b_013_911E38_tail[] __attribute__((section(".data.frontier_df3_unitdef_b.gap13"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_013_911E38.bin", 244, 60);
+const u8 frontier_df3_unitdef_b_013_911E38_tail[] __attribute__((section(".data.frontier_df3_unitdef_b.gap13"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_013_911E38.bin", 244, 60);
 struct REDA REDAs_UnitDef_Ch16AAlly_13_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap14"))) =
 {
     { .x = 11, .y = 5, .flags = 0x10, .a = 0x2 },
