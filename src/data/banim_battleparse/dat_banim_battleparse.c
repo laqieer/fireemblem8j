@@ -1,16 +1,88 @@
 #include "global.h"
 
-/* Migrated from asm/dat_banim_battleparse.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+#include "ekrbattle.h"
 
-SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_0[] = INCBIN_U16("data/residual/gBattleparse_0.bin");
-SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_1[] = INCBIN_U16("data/residual/gBattleparse_1.bin");
-SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_2[] = INCBIN_U16("data/residual/gBattleparse_2.bin");
-SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_3[] = INCBIN_U16("data/residual/gBattleparse_3.bin");
-SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_4[] = INCBIN_U16("data/residual/gBattleparse_4.bin");
-SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_5[] = INCBIN_U16("data/residual/gBattleparse_5.bin");
-SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_6[] = INCBIN_U16("data/residual/gBattleparse_6.bin");
-SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_7[] = INCBIN_U16("data/residual/gBattleparse_7.bin");
-SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_8[] = INCBIN_U16("data/residual/gBattleparse_8.bin");
-SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_9[] = INCBIN_U16("data/residual/gBattleparse_9.bin");
+/* Battle-hit -> banim round lookup tables, ported from ../fireemblem8u
+ * src/banim-battleparse.c (region-same). Indexed by EKR_DISTANCE_*; each value is
+ * the ANIM_ROUND_* to play. Byte-identical to the former INCBINs of
+ * data/residual/gBattleparse_*.bin (same section/order). */
+
+SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_0[EKR_DISTANCE_MAX] = {
+    [EKR_DISTANCE_CLOSE]       = ANIM_ROUND_HIT_CLOSE,
+    [EKR_DISTANCE_FAR]         = ANIM_ROUND_NONCRIT_FAR,
+    [EKR_DISTANCE_FARFAR]      = ANIM_ROUND_NONCRIT_FAR,
+    [EKR_DISTANCE_MONOCOMBAT]  = ANIM_ROUND_HIT_CLOSE,
+    [EKR_DISTANCE_PROMOTION]   = ANIM_ROUND_HIT_CLOSE
+};
+
+SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_1[EKR_DISTANCE_MAX] = {
+    [EKR_DISTANCE_CLOSE]       = ANIM_ROUND_MISS_CLOSE,
+    [EKR_DISTANCE_FAR]         = ANIM_ROUND_NONCRIT_FAR,
+    [EKR_DISTANCE_FARFAR]      = ANIM_ROUND_NONCRIT_FAR,
+    [EKR_DISTANCE_MONOCOMBAT]  = ANIM_ROUND_MISS_CLOSE,
+    [EKR_DISTANCE_PROMOTION]   = ANIM_ROUND_MISS_CLOSE
+};
+
+SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_2[EKR_DISTANCE_MAX] = {
+    [EKR_DISTANCE_CLOSE]       = ANIM_ROUND_CRIT_CLOSE,
+    [EKR_DISTANCE_FAR]         = ANIM_ROUND_CRIT_FAR,
+    [EKR_DISTANCE_FARFAR]      = ANIM_ROUND_CRIT_FAR,
+    [EKR_DISTANCE_MONOCOMBAT]  = ANIM_ROUND_CRIT_CLOSE,
+    [EKR_DISTANCE_PROMOTION]   = ANIM_ROUND_CRIT_CLOSE
+};
+
+SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_3[EKR_DISTANCE_MAX] = {
+    [EKR_DISTANCE_CLOSE]       = ANIM_ROUND_TAKING_MISS_CLOSE,
+    [EKR_DISTANCE_FAR]         = ANIM_ROUND_TAKING_MISS_FAR,
+    [EKR_DISTANCE_FARFAR]      = ANIM_ROUND_TAKING_MISS_FAR,
+    [EKR_DISTANCE_MONOCOMBAT]  = ANIM_ROUND_TAKING_MISS_CLOSE,
+    [EKR_DISTANCE_PROMOTION]   = ANIM_ROUND_TAKING_MISS_CLOSE
+};
+
+SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_4[EKR_DISTANCE_MAX] = {
+    [EKR_DISTANCE_CLOSE]       = ANIM_ROUND_TAKING_HIT_CLOSE,
+    [EKR_DISTANCE_FAR]         = ANIM_ROUND_TAKING_HIT_FAR,
+    [EKR_DISTANCE_FARFAR]      = ANIM_ROUND_TAKING_HIT_FAR,
+    [EKR_DISTANCE_MONOCOMBAT]  = ANIM_ROUND_TAKING_HIT_CLOSE,
+    [EKR_DISTANCE_PROMOTION]   = ANIM_ROUND_TAKING_HIT_CLOSE
+};
+
+SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_5[EKR_DISTANCE_MAX] = {
+    [EKR_DISTANCE_CLOSE]       = ANIM_ROUND_NONCRIT_FAR,
+    [EKR_DISTANCE_FAR]         = ANIM_ROUND_NONCRIT_FAR,
+    [EKR_DISTANCE_FARFAR]      = ANIM_ROUND_NONCRIT_FAR,
+    [EKR_DISTANCE_MONOCOMBAT]  = ANIM_ROUND_HIT_CLOSE,
+    [EKR_DISTANCE_PROMOTION]   = ANIM_ROUND_HIT_CLOSE
+};
+
+SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_6[EKR_DISTANCE_MAX] = {
+    [EKR_DISTANCE_CLOSE]       = ANIM_ROUND_CRIT_FAR,
+    [EKR_DISTANCE_FAR]         = ANIM_ROUND_CRIT_FAR,
+    [EKR_DISTANCE_FARFAR]      = ANIM_ROUND_CRIT_FAR,
+    [EKR_DISTANCE_MONOCOMBAT]  = ANIM_ROUND_CRIT_CLOSE,
+    [EKR_DISTANCE_PROMOTION]   = ANIM_ROUND_CRIT_CLOSE
+};
+
+SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_7[EKR_DISTANCE_MAX] = {
+    [EKR_DISTANCE_CLOSE]       = ANIM_ROUND_HIT_CLOSE,
+    [EKR_DISTANCE_FAR]         = ANIM_ROUND_HIT_CLOSE,
+    [EKR_DISTANCE_FARFAR]      = ANIM_ROUND_HIT_CLOSE,
+    [EKR_DISTANCE_MONOCOMBAT]  = ANIM_ROUND_INVALID,
+    [EKR_DISTANCE_PROMOTION]   = ANIM_ROUND_INVALID
+};
+
+SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_8[EKR_DISTANCE_MAX] = {
+    [EKR_DISTANCE_CLOSE]       = ANIM_ROUND_NONCRIT_FAR,
+    [EKR_DISTANCE_FAR]         = ANIM_ROUND_NONCRIT_FAR,
+    [EKR_DISTANCE_FARFAR]      = ANIM_ROUND_NONCRIT_FAR,
+    [EKR_DISTANCE_MONOCOMBAT]  = ANIM_ROUND_INVALID,
+    [EKR_DISTANCE_PROMOTION]   = ANIM_ROUND_INVALID
+};
+
+SECTION(".rodata.dat_banim_battleparse") const u16 gBattleparse_9[EKR_DISTANCE_MAX] = {
+    [EKR_DISTANCE_CLOSE]       = ANIM_ROUND_CRIT_FAR,
+    [EKR_DISTANCE_FAR]         = ANIM_ROUND_CRIT_FAR,
+    [EKR_DISTANCE_FARFAR]      = ANIM_ROUND_CRIT_FAR,
+    [EKR_DISTANCE_MONOCOMBAT]  = ANIM_ROUND_INVALID,
+    [EKR_DISTANCE_PROMOTION]   = ANIM_ROUND_INVALID
+};

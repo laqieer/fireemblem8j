@@ -1,7 +1,32 @@
 #include "global.h"
 
-/* Migrated from asm/dat_worldmap_gmapunit_p794.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* Crimson Eye spell sprite scale/offset factors, ported from ../fireemblem8u
+ * src/banim-efxmagic-crimsoneye.c (region-same). s8 pairs.
+ * Byte-identical to the former INCBIN of data/residual/gEfxmagicCrimsoneye_1.bin. */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p794") u8 gEfxmagicCrimsoneye_1[] = INCBIN_U8("data/residual/gEfxmagicCrimsoneye_1.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p794") s8 gEfxmagicCrimsoneye_1[] =
+{
+    0, 30, -2, 30, -4, 30, -6, 29,
+    -8, 29, -10, 28, -12, 27, -14, 26,
+    -16, 25, -18, 24, -19, 23, -21, 22,
+    -22, 20, -24, 18, -25, 17, -26, 15,
+    -27, 13, -28, 11, -29, 9, -29, 7,
+    -30, 5, -30, 3, -30, 1, -30, -1,
+    -30, -3, -30, -5, -29, -7, -29, -9,
+    -28, -11, -27, -13, -26, -15, -25, -17,
+    -24, -18, -22, -20, -21, -22, -19, -23,
+    -18, -24, -16, -25, -14, -26, -12, -27,
+    -10, -28, -8, -29, -6, -29, -4, -30,
+    -2, -30, 0, -30, 2, -30, 4, -30,
+    6, -29, 8, -29, 10, -28, 12, -27,
+    14, -26, 16, -25, 18, -24, 19, -23,
+    21, -22, 22, -20, 24, -18, 25, -17,
+    26, -15, 27, -13, 28, -11, 29, -9,
+    29, -7, 30, -5, 30, -3, 30, -1,
+    30, 1, 30, 3, 30, 5, 29, 7,
+    29, 9, 28, 11, 27, 13, 26, 15,
+    25, 17, 24, 18, 22, 20, 21, 22,
+    19, 23, 18, 24, 16, 25, 14, 26,
+    12, 27, 10, 28, 8, 29, 6, 29,
+    4, 30, 2, 30,
+};
