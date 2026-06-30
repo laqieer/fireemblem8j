@@ -8681,3 +8681,40 @@ verification pass that splits the heuristic's 642 into *bit-exact-reducible* (re
 vs *heuristic-false-positive floor*, so the true remaining work-list — and the true distance to
 the strict goal — is known. The goal is **not** yet reached; the prior "terminal state" framing
 is withdrawn. `make shiftcheck` = 0 HIGH and `make compare` = OK throughout.
+
+## D322 — Wave 8: 62 `.bin` → editable source + the 642-MISS heuristic split (verified ~190 reducible)
+
+**Context.** Wave 7 left an explicit open next step (D321): split the
+`scripts/audit_bin_forms.py` 642-MISS heuristic into truly-reducible vs
+heuristic-false-positive floor, since 642 is a name-class UPPER BOUND that does not
+verify bit-exact round-trippability. Wave 8 (3 parallel carve workers + 4 read-only
+verifiers) closes that, and lands the first reducible lanes.
+
+**Decision / outcome.** Integrated `integrate/wave8` through one clean
+`make compare` + `make shiftcheck` gate (byte-exact sha1 `7da0456…`, 0 HIGH):
+
+- **−62 tracked `.bin` (1981 → 1919):** w8-typedc 45 `data/residual/*.bin` INCBIN →
+  typed-C (byte-neutral; `PopupScr_*` use a JP popup opcode enum in `include/popup.h`
+  that drops US `ITEM_STR_CAP`/`ITEM_STR`); w8-pixelgfx 6 `.png` + 8 `.agbpal` (PR #81);
+  w8-strings `internalName` `.asciz` + 2 orphan rm (PR #82).
+- **642-MISS split (the open D321 step):** 4 verifiers (`docs/bin_verification_wave8.md`)
+  → **~190 truly reducible** + ~48 at-parity (`.bin.lz`-decompressed) + ~330–400 genuine
+  floor (TSA ~185 + JP-LZ ~58 + voicegroup 4 + JP-opaque ~60).
+- **4 classifier bugs fixed** so MISS reflects real work: (#1) fe8u `preview/**/*.png`
+  are non-build renders → excluded from the editable index, + TSA-by-name guard
+  (`Tsa_`/`gTsa_`/`*_map.bin`) → ~150 TSA MISS→FLOOR; (#2) loose `frontier_*` catch-all
+  tightened → JP-opaque UI/font/ending/CG → UNCERTAIN (real string pools only
+  `frontier_df4_misc_lo`); (#4) `frontier_df3_unitdef_b` relabeled unitdef DATA lane.
+  Regenerated `docs/bin_audit.md`: **MISS 318 / FLOOR 1128 / UNCERTAIN 473** (was 642).
+  Still-heuristic: the battle-anim 193 MISS retains ~48 at-parity + ~55 JP-LZ floor
+  (bug #3 needs per-file gbagfx round-trip) — the honest true-split is in
+  `docs/bin_verification_wave8.md`.
+
+**Process note (takeover).** The driving Claude orchestrator + all 3 workers died mid-flight
+on `API Error: 400 Not a valid API key`. w8-typedc died BEFORE running its own
+`make compare`; its work was uncommitted+unverified in the shared worktree. Recovered by
+verifying byte-exactness independently, committing `feat/wave8-typedc`, then integrating.
+
+**Goal status.** Strict "no `.bin` unless `.bin` in fe8u" is **NOT** reached. ≈190 reducible
+remain (battle-anim → `banim/*.s`+`.png`; unitdef REDA tails) + the documented JP-LZ/JP-opaque/
+TSA floor. Deferred to wave 9. `make compare` OK + `make shiftcheck` 0 HIGH throughout.

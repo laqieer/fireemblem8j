@@ -8,6 +8,41 @@
 **Keep this current.** Refresh the numbers from `scripts/calcprogress.py` and the target lists from
 ground truth whenever an axis moves. Stale frontier data caused real wasted work (see "Pitfall" below).
 
+## Current state (2026-06-30) — asset-editability WAVE 8 landed + the 642-MISS heuristic split (D322)
+
+Wave 8 integrated through one clean `make compare` + `make shiftcheck` gate (byte-exact, sha1
+`7da0456…`, **0 HIGH**): **tracked committed `.bin` 1981 → 1919 (−62).**
+
+- **w8-typedc (−45):** 45 `data/residual/*.bin` INCBINs → typed-C inside their existing
+  `src/data/**/*.c` (byte-neutral, no layout change): `PopupScr_*`(6, JP popup opcode enum in
+  `include/popup.h` — drops US `ITEM_STR_CAP`/`ITEM_STR`, shifts opcodes ≥3 down 2 to match
+  `ParsePopupInstAndGetLen.c`), `MuSoundScr_*`(7), `gBattleparse_0..9`(10), `gEfx*`(11),
+  `gEkrgauge_*`(9), `gMapanimLevelup_0`, `EventListScr_Ch15b_Location`.
+- **w8-pixelgfx (−14):** 6 pixel-gfx → `.png` + 8 palettes → `.agbpal` (PR #81, CI-green).
+- **w8-strings (−3):** `frontier_df4_misc_lo` `internalName` pool → `.asciz` + 2 orphan
+  `MenuItems_SioMenudef_*` removed (PR #82).
+
+**The wave-7 "open next step" (split the 642-MISS heuristic) is now DONE.** Four read-only
+verifiers (`docs/bin_verification_wave8.md`) split the heuristic MISS into **~190 truly reducible**
++ ~48 at-parity (`.bin.lz`-decompressed, gbagfx recompresses byte-exact) + ~330–400 genuine floor
+(TSA ~185, JP-LZ ~58, voicegroup 4, JP-opaque/Link-Arena ~60). The four `scripts/audit_bin_forms.py`
+classifier bugs that inflated MISS were fixed (D322): **bug #1** — fe8u `preview/**/*.png` are
+non-build RENDER previews (not in its Makefile), so they were excluded from the editable index +
+a TSA-by-name guard added (`Tsa_`/`gTsa_`/`*_map.bin`), reclassifying ~150 TSA tilemaps MISS→FLOOR
+(their real fe8u source is the `*.tsa.bin` floor); **bug #2** — the loose `frontier_*` catch-all
+was tightened so JP-divergent UI/font/ending/CG/data tables → UNCERTAIN, not menu-strings MISS
+(real string pools are only `frontier_df4_misc_lo`); **bug #4** — `frontier_df3_unitdef_b` relabeled
+to the unitdef DATA lane (REDA/typed-C), not "portrait gfx". The regenerated `docs/bin_audit.md`
+now reads **MISS 318 / FLOOR 1128 / UNCERTAIN 473** (was the inflated 642). Residual MISS minus the
+still-heuristic battle-anim over-count (~126 at-parity+floor, bug #3 — needs per-file gbagfx
+round-trip) ≈ the verified **~190 reducible**. Axes (`scripts/calcprogress.py`): self-containment
+**100%**, matching-C **99.65%**, extracted-data **79.91%**, named-symbols **95.33%**.
+
+**Strict goal "no `.bin` unless it is `.bin` in fe8u" is NOT yet reached.** Remaining real work ≈
+**190** (battle-anim residuals → `banim/*.s` ANIM_SPRITE + `.png`; `frontier_df3_unitdef_b` REDA
+tails → named `struct REDA[]` + typed `UnitDefinition[]`) **+ the documented JP-LZ/JP-opaque/TSA
+floor** (much of it fe8u-binary-parity). Deferred to wave 9.
+
 ## Current state (2026-06-30) — asset-editability waves 6-7 landed; strict goal NOT yet reached (D321)
 
 The goal is the strict invariant **"no `.bin` kept if it is not `.bin` in fe8u."** D319's earlier
