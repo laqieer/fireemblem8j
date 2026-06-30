@@ -1,28 +1,4746 @@
 #include "global.h"
+#include "event.h"
+#include "eventinfo.h"
+#include "EAstdlib.h"
+#define EVENT_WORD(w)      (EventListScr)(w),
+#define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 /* Migrated from asm/frontier_df3_eventscr_ch.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 frontier_df3_eventscr_ch_000_A69464[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap0"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_000_A69464.bin");
-u8 frontier_df3_eventscr_ch_001_A696D4[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap1"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_001_A696D4.bin");
-u8 frontier_df3_eventscr_ch_002_A6A06C[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap2"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_002_A6A06C.bin");
-u8 frontier_df3_eventscr_ch_003_A6AA20[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap3"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_003_A6AA20.bin");
-u8 frontier_df3_eventscr_ch_004_A6AE28[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap4"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_004_A6AE28.bin");
-u8 frontier_df3_eventscr_ch_005_A6B460[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap5"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_005_A6B460.bin");
-u8 frontier_df3_eventscr_ch_006_A6C078[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap6"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_006_A6C078.bin");
-u8 frontier_df3_eventscr_ch_007_A6C8CC[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap7"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_007_A6C8CC.bin");
-u8 frontier_df3_eventscr_ch_008_A6CD00[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap8"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_008_A6CD00.bin");
-u8 frontier_df3_eventscr_ch_009_A6D3F8[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap9"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_009_A6D3F8.bin");
-u8 frontier_df3_eventscr_ch_010_A6D524[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap10"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_010_A6D524.bin");
-u8 frontier_df3_eventscr_ch_011_A6D850[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap11"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_011_A6D850.bin");
-u8 frontier_df3_eventscr_ch_012_A6DE0C[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap12"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_012_A6DE0C.bin");
-u8 frontier_df3_eventscr_ch_013_A6E680[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap13"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_013_A6E680.bin");
-u8 frontier_df3_eventscr_ch_014_A6EDFC[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap14"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_014_A6EDFC.bin");
-u8 frontier_df3_eventscr_ch_015_A6EF04[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap15"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_015_A6EF04.bin");
-u8 frontier_df3_eventscr_ch_016_A6EFD8[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap16"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_016_A6EFD8.bin");
-u8 frontier_df3_eventscr_ch_017_A6F47C[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap17"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_017_A6F47C.bin");
+EventListScr frontier_df3_eventscr_ch_000_A69464[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap0"))) = {
+    EVENT_WORD(0x00000002)
+    BNE(0, 0xC, 1)
+    TUTORIALTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0xFFFFFFFF)
+    TEXTSHOW(0xB1B)
+    TEXTEND
+    REMA
+    CALL(0x8A694D4)
+    CALL(0x8A69554)
+    GOTO(1)
+    LABEL(0)
+    TUTORIALTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0xFFFFFFFF)
+    TEXTSHOW(0xB1C)
+    TEXTEND
+    REMA
+    CALL(0x8A69554)
+    CALL(0x8A694D4)
+    LABEL(1)
+    FAWI(0x10)
+    ENDA
+    TUTORIALTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0xFFFFFFFF)
+    TEXTSHOW(0xB1D)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_7, 1)
+    BNE(0, 0xC, 7)
+    FADI(0x10)
+    CALL(0x85B9D48)
+    PROM(1, 4, 0x98)
+    EVBIT_MODIFY(4)
+    REMOVEPORTRAITS
+    BACG(0x4F)
+    STARTFADE
+    EvtColorFadeSetup(6, 0xA, 0, 0x200, 0x200, 0x200)
+    FADU(0x10)
+    GOTO(1)
+    LABEL(0)
+    CALL(0x8A695D4)
+    LABEL(1)
+    ENDA
+    TUTORIALTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0xFFFFFFFF)
+    TEXTSHOW(0xB1E)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_7, 1)
+    BNE(0, 0xC, 7)
+    FADI(0x10)
+    CALL(0x85B9D48)
+    PROM(0xF, 3, 0x99)
+    EVBIT_MODIFY(4)
+    REMOVEPORTRAITS
+    BACG(0x4F)
+    STARTFADE
+    EvtColorFadeSetup(6, 0xA, 0, 0x200, 0x200, 0x200)
+    FADU(0x10)
+    GOTO(1)
+    LABEL(0)
+    CALL(0x8A69608)
+    LABEL(1)
+    ENDA
+    CALL(0x85B9D24)
+    SVAL(EVT_SLOT_3, 0x98)
+    GIVEITEMTO(1)
+    EVBIT_MODIFY(4)
+    TUTORIALTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0xFFFFFFFF)
+    TEXTSHOW(0xB1F)
+    TEXTEND
+    REMA
+    ENDA
+    CALL(0x85B9D24)
+    SVAL(EVT_SLOT_3, 0x99)
+    GIVEITEMTO(0xF)
+    EVBIT_MODIFY(4)
+    TUTORIALTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0xFFFFFFFF)
+    TEXTSHOW(0xB20)
+    TEXTEND
+    REMA
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89118A4)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0x8F)
+    SVAL(EVT_SLOT_1, 0x10303)
+    CHAI(0x90)
+    ENUF(0xC)
+    EVBIT_T(7)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_001_A696D4[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap1"))) = {
+    SVAL(EVT_SLOT_2, 0x89118CC)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8912480)
+    CALL(0x8A69704)
+    ENUT(0xE)
+    ENDA
+    EvtBgmFadeIn(0x2C, 6)
+    SADD(EVT_SLOT_A, EVT_SLOT_2, EVT_SLOT_0)
+    REMOVEPORTRAITS
+    BACG(0x4F)
+    FAWI(2)
+    BACG(0x14)
+    FAWU(2)
+    BROWNBOXTEXT(0x197, 8, 8)
+    TEXTSHOW(0xB21)
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 8)
+    FAWI(2)
+    REMA
+    BACG(0x2C)
+    MUSC(0x52)
+    FAWU(2)
+    TEXTSHOW(0xB22)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CALL(0x8A69910)
+    CAMERA2(0xD, 0xB)
+    SADD(EVT_SLOT_2, EVT_SLOT_A, EVT_SLOT_0)
+    LOAD1(1, 0xFFFFFFFF)
+    ENUN
+    MOVE(0xFFFF, 0x40, 0, 0)
+    FADU(0x10)
+    LOAD1(1, 0x8912688)
+    ENUN
+    CURSOR_CHAR(0xF7)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x1F)
+    SVAL(EVT_SLOT_3, 0xB24)
+    CALL(0x8A60448)
+    CAMERA2(0xB, 0xF)
+    LOAD2(1, 0x89129E4)
+    ENUN
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x1F)
+    CALL(0x8A60420)
+    TEXTSHOW(0xB25)
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 1)
+    TEXTCONT
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CLEAN
+    FADU(0x10)
+    SVAL(EVT_SLOT_2, 0x40)
+    MOVE_CLOSEST(0xFFFF, 0xFFFD, 8, 0xE)
+    CALL(0x8A60630)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0, 0xC, 1)
+    SVAL(EVT_SLOT_2, 0x1F)
+    CALL(0x8A60420)
+    TEXTSHOW(0xB26)
+    TEXTEND
+    MUSC(0x2D)
+    TEXTCONT
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 1)
+    TEXTCONT
+    TEXTEND
+    MUSC(0x26)
+    TEXTCONT
+    TEXTEND
+    CALL(0x8A603FC)
+    GOTO(1)
+    LABEL(0)
+    SVAL(EVT_SLOT_2, 0x1F)
+    CALL(0x8A60420)
+    TEXTSHOW(0xB27)
+    TEXTEND
+    MUSC(0x2D)
+    TEXTCONT
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 1)
+    TEXTCONT
+    TEXTEND
+    MUSC(0x26)
+    TEXTCONT
+    TEXTEND
+    CALL(0x8A603FC)
+    LABEL(1)
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60654)
+    CAMERA2(0xF, 6)
+    SVAL(EVT_SLOT_2, 0x40)
+    MOVE_CLOSEST(0xFFFF, 0xFFFD, 0x14, 6)
+    CALL(0x8A60630)
+    CALL(0x85B9DBC)
+    ENDA
+    CLEA
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0, 0xC, 1)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x11)
+    GOTO(1)
+    LABEL(0)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x1E)
+    LABEL(1)
+    MUSC(0x26)
+    CAMERA2(7, 8)
+    FADU(0x10)
+    TEXTSTART
+    TEXTSHOW(0xB23)
+    TEXTEND
+    REMA
+    LOAD1(1, 0x8912840)
+    ENUN
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x1701)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x10F00)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x6401)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SENQUEUE1
+    FIGHT_MAP(0xC0, 0x8D, 0, 0)
+    DISA(0xC0)
+    KILL(0xC1)
+    DISA_IF(0xC1)
+    KILL(0xC1)
+    DISA_IF(0xC1)
+    KILL(0xC1)
+    DISA_IF(0xC1)
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    CAMERA2(0xD, 0xB)
+    FADU(0x10)
+    LOAD1(1, 0x89128F4)
+    ENUN
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x500)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x16401)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SENQUEUE1
+    FIGHT_MAP(0xC0, 0x8D, 0, 0)
+    DISA(0xC0)
+    KILL(0xC1)
+    DISA_IF(0xC1)
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    CAMERA2(0xF, 6)
+    FADU(0x10)
+    LOAD1(1, 0x8912958)
+    ENUN
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x16401)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SENQUEUE1
+    FIGHT_MAP(0xC0, 0x8D, 0, 0)
+    DISA(0xC0)
+    KILL(0xC1)
+    DISA_IF(0xC1)
+    KILL(0xC1)
+    DISA_IF(0xC1)
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    ENDA
+    CALL(0x8A69AB8)
+    MNCH(0x12)
+    ENDA
+    SVAL(EVT_SLOT_7, 0)
+    CHECK_ALIVE(0x21)
+    BEQ(0, 0xC, 0)
+    CHECK_ALIVE(0xF6)
+    BEQ(0, 0xC, 0)
+    CHECK_ALIVE(0xF7)
+    BEQ(0, 0xC, 0)
+    CHECK_ALIVE(0xF4)
+    BEQ(0, 0xC, 0)
+    CHECK_ALIVE(0xF5)
+    BEQ(0, 0xC, 0)
+    SVAL(EVT_SLOT_7, 1)
+    LABEL(0)
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(0x10)
+    SVAL(EVT_SLOT_2, 0x21)
+    CALL(0x8A605D8)
+    CLEA
+    CLEE
+    CLEN
+    CAMERA2(0xB, 8)
+    FADU(0x10)
+    SPAWN_ENEMY(0x40, 0, 0)
+    SVAL(EVT_SLOT_2, 0x40)
+    MOVE_CLOSEST(0xFFFF, 0xFFFD, 0xC, 7)
+    CALL(0x8A60630)
+    STAL(0x10)
+    MOVE_1STEP(4, 0x40, 2)
+    ENUN
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    MUSC(0x2D)
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0xA, 0xC, 1)
+    SVAL(EVT_SLOT_2, 0xB2E)
+    GOTO(0xB)
+    LABEL(0xA)
+    SVAL(EVT_SLOT_2, 0xB30)
+    LABEL(0xB)
+    TEXTSTART
+    TEXTSHOW(0xFFFF)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x424C)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x428C)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x100000)
+    SENQUEUE1
+    MOVE_DEFINED(0x40)
+    STAL2(0x1E)
+    LOAD2(1, 0x8912A5C)
+    ENUN
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x1F)
+    CALL(0x8A60420)
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0x14, 0xC, 1)
+    TEXTSHOW(0xB2F)
+    TEXTEND
+    GOTO(0x15)
+    LABEL(0x14)
+    TEXTSHOW(0xB31)
+    TEXTEND
+    LABEL(0x15)
+    REMA
+    CALL(0x8A603FC)
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60654)
+    DISA(0x40)
+    MOVE_1STEP(0, 0xF, 2)
+    ENUN
+    EvtBgmFadeIn(0x7FFF, 4)
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    MUSC(0x26)
+    TEXTSTART
+    TEXTSHOW(0xB32)
+    TEXTEND
+    REMA
+    FADI(4)
+    SVAL(EVT_SLOT_2, 0x28)
+    CALL(0x8A60420)
+    MUSI
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0x1E, 0xC, 1)
+    TEXTSHOW(0xB33)
+    TEXTEND
+    GOTO(0x1F)
+    LABEL(0x1E)
+    TEXTSHOW(0xB34)
+    TEXTEND
+    LABEL(0x1F)
+    REMA
+    MUNO
+    CALL(0x85B9D24)
+    SVAL(EVT_SLOT_3, 0x94)
+    GIVEITEMTO(0)
+    CALL(0x85B9D24)
+    SVAL(EVT_SLOT_3, 0x8E)
+    GIVEITEMTO(0)
+    BEQ(0x34, 7, 0)
+    MUSC(0x26)
+    STAL(0x32)
+    MUSI
+    SVAL(EVT_SLOT_2, 0x28)
+    CALL(0x8A60420)
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0x32, 0xC, 1)
+    TEXTSHOW(0xB35)
+    TEXTEND
+    GOTO(0x33)
+    LABEL(0x32)
+    TEXTSHOW(0xB36)
+    TEXTEND
+    LABEL(0x33)
+    REMA
+    MUNO
+    CALL(0x85B9D24)
+    SVAL(EVT_SLOT_3, 0x55)
+    GIVEITEMTO(0)
+    LABEL(0x34)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xB37)
+    TEXTEND
+    REMA
+    MURE(2)
+    CUSA(0x21)
+    EVBIT_T(7)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xB38)
+    TEXTEND
+    REMA
+    MURE(2)
+    CUSA(0x21)
+    EVBIT_T(7)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xB39)
+    TEXTEND
+    REMA
+    MURE(2)
+    CUSA(0x21)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8912700)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891278C)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89127C8)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8912804)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    COUNTER_SET(0, 5)
+    ENUF(0xE)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8912750)
+    CALL(0x8A603AC)
+    COUNTER_DEC(0)
+    ENUF(0xE)
+    COUNTER_CHECK(0)
+    BNE(0, 0xC, 0)
+    ENUT(0xE)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0xC0013)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xE0011)
+    SENQUEUE1
+    SVAL(EVT_SLOT_2, 0x11200)
+    CALL(0x8A607B4)
+    SVAL(EVT_SLOT_1, 0xD0012)
+    SENQUEUE1
+    SVAL(EVT_SLOT_2, 0x10E00)
+    CALL(0x8A607B4)
+    EVBIT_T(7)
+    ENDA
+    LOAD1(1, 0x89135E8)
+    ENUN
+    SVAL(EVT_SLOT_2, 0x89139D0)
+    SVAL(EVT_SLOT_3, 1)
+    CALL(0x8A60380)
+    CALL(0x8A69F50)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_002_A6A06C[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap2"))) = {
+    MUSC(0x49)
+    FADI(0x10)
+    CAMERA2(0xE, 0xE)
+    CLEA
+    CLEE
+    CLEN
+    LOAD2(1, 0x89138CC)
+    ENUN
+    FADU(0x10)
+    SPAWN_ENEMY(0x40, 0, 0)
+    SVAL(EVT_SLOT_2, 0x40)
+    MOVE_CLOSEST(0xFFFF, 0xFFFD, 0x12, 0xB)
+    CALL(0x8A60630)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB3E)
+    TEXTEND
+    REMA
+    MOVE_1STEP(0, 1, 1)
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60654)
+    MOVE(0, 1, 0x10, 0xD)
+    STAL2(0x10)
+    MOVE(0, 0xF, 0xE, 0xD)
+    ENUN
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB3F)
+    TEXTEND
+    REMA
+    MOVE(0, 1, 0x12, 9)
+    STAL2(0x14)
+    FADI(0x10)
+    ENUN
+    CAMERA(0x16, 0)
+    MOVE(0, 1, 0x10, 4)
+    FADU(0x10)
+    ENUN
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    EvtBgmFadeIn(0x2C, 4)
+    TEXTSTART
+    TEXTSHOW(0xB40)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, 0x40)
+    MOVE_CLOSEST(0xFFFF, 0xFFFD, 0x13, 4)
+    CALL(0x8A60630)
+    MOVE_1STEP(0, 1, 1)
+    ENUN
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB41)
+    TEXTEND
+    REMA
+    MOVE_1STEP(0x10, 1, 1)
+    ENUN
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB42)
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 2)
+    TEXTCONT
+    TEXTEND
+    MUSC(0x2D)
+    TEXTCONT
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60654)
+    SVAL(EVT_SLOT_2, 0x40)
+    MOVE_CLOSEST(0xFFFF, 0xFFFD, 0x13, 1)
+    CALL(0x8A60630)
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60CF0)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB43)
+    TEXTEND
+    REMA
+    EvtBgmFadeIn(0x7FFF, 6)
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60654)
+    LOAD2(1, 0x8913958)
+    ENUN
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    MUSC(0x32)
+    TEXTSTART
+    TEXTSHOW(0xB44)
+    TEXTEND
+    REMA
+    FADI(4)
+    SVAL(EVT_SLOT_2, 0x4C)
+    CALL(0x8A60420)
+    TEXTSHOW(0xB4A)
+    TEXTEND
+    REMA
+    MNCH(0x13)
+    ENDA
+    CHECK_EVENTID(6)
+    BEQ(0, 0xC, 0)
+    ENUT(3)
+    CALL(0x8A6A06C)
+    ENDB
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(8)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8913A5C)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xA)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8913A98)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8913AD4)
+    CALL(0x8A603D4)
+    SVAL(EVT_SLOT_2, 0x8913B24)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xE)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8913B4C)
+    CALL(0x8A603D4)
+    SVAL(EVT_SLOT_2, 0x8913B88)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8914AE8)
+    SVAL(EVT_SLOT_3, 0x8914B24)
+    SVAL(EVT_SLOT_4, 0x89148F4)
+    CALL(0x8A6A3E0)
+    EVBIT_T(7)
+    ENDA
+    SADD(EVT_SLOT_9, EVT_SLOT_3, EVT_SLOT_0)
+    SADD(EVT_SLOT_A, EVT_SLOT_4, EVT_SLOT_0)
+    MUSC(0x24)
+    LOAD1(1, 0xFFFFFFFF)
+    ENUN
+    EvtChangeFogVision(0, 0)
+    FADU(0x10)
+    LOAD2(1, 0x8914DCC)
+    ENUN
+    CURSOR_CHAR(0x19)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB4B)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x10311)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x10291)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    MOVE_DEFINED(0x19)
+    ENUN
+    MOVE_1STEP(0x10, 1, 3)
+    MOVE_1STEP(0x10, 0xF, 3)
+    ENUN
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB4C)
+    TEXTEND
+    FADI(4)
+    REMA
+    FADU(4)
+    CURSOR_CHAR(0xC8)
+    STAL(0x3C)
+    CURE
+    TEXTSHOW(0xB4D)
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 6)
+    FADI(4)
+    REMA
+    CLEA
+    EvtChangeFogVision(0, 0xFFFF)
+    REMOVEPORTRAITS
+    BACG(0x13)
+    FADU(4)
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0, 0xC, 1)
+    TEXTSHOW(0xB4E)
+    TEXTEND
+    MUSC(0x29)
+    TEXTCONT
+    TEXTEND
+    GOTO(2)
+    LABEL(0)
+    CHECK_ALIVE(0x22)
+    BEQ(1, 0xC, 0)
+    TEXTSHOW(0xB4F)
+    TEXTEND
+    MUSC(0x29)
+    TEXTCONT
+    TEXTEND
+    GOTO(2)
+    LABEL(1)
+    TEXTSHOW(0xB50)
+    TEXTEND
+    MUSC(0x29)
+    TEXTCONT
+    TEXTEND
+    LABEL(2)
+    REMA
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(0x10)
+    CLEAN
+    CAMERA(0, 0x18)
+    UNIT_COLORS(3)
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, 0x8914E44)
+    ENUN
+    LOAD1(1, 0x8914E6C)
+    ENUN
+    FADU(0x10)
+    LOAD2(1, 0x8914E44)
+    ENUN
+    CURSOR_CHAR(0xCE)
+    STAL(0x3C)
+    CURE
+    MUSC(0x2E)
+    TEXTSTART
+    TEXTSHOW(0xB51)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, 0x57)
+    MOVE_CLOSEST(0xFFFF, 0xFFFD, 8, 0x15)
+    CALL(0x8A60630)
+    SVAL(EVT_SLOT_2, 0x8D)
+    MOVE_CLOSEST(0xFFFF, 0xFFFD, 6, 0x15)
+    CALL(0x8A60630)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x16400)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SENQUEUE1
+    FIGHT_MAP(0x8D, 0xCE, 0, 0)
+    DISA(0xCE)
+    TEXTSTART
+    TEXTSHOW(0xB52)
+    TEXTEND
+    REMA
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(0x10)
+    UNIT_COLORS(0)
+    CLEE
+    CAMERA2(0x10, 0xB)
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, 0x8914EA8)
+    ENUN
+    FADU(0x10)
+    LOAD2(1, 0x8914F0C)
+    ENUN
+    CURSOR_CHAR(0xC0)
+    STAL(0x3C)
+    CURE
+    MUSC(0x26)
+    TEXTSTART
+    TEXTSHOW(0xB53)
+    TEXTEND
+    REMA
+    MOVE(0, 0xC0, 0x10, 0x11)
+    ENUN
+    DISA(0xC0)
+    LOAD2(1, 0x8914EA8)
+    ENUN
+    CURSOR_CHAR(2)
+    STAL(0x3C)
+    CURE
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0xA, 0xC, 1)
+    TEXTSTART
+    TEXTSHOW(0xB54)
+    TEXTEND
+    REMA
+    GOTO(0xB)
+    LABEL(0xA)
+    TEXTSTART
+    TEXTSHOW(0xB55)
+    TEXTEND
+    REMA
+    LABEL(0xB)
+    FADI(0x10)
+    CLEA
+    SADD(EVT_SLOT_2, EVT_SLOT_9, EVT_SLOT_0)
+    LOAD1(1, 0xFFFFFFFF)
+    ENUN
+    SADD(EVT_SLOT_2, EVT_SLOT_A, EVT_SLOT_0)
+    LOAD1(1, 0xFFFFFFFF)
+    ENUN
+    CALL(0x85B9DBC)
+    CAMERA(0, 0x18)
+    MUSC(0x18)
+    FADU(0x10)
+    TEXTSTART
+    TEXTSHOW(0xB56)
+    TEXTEND
+    REMA
+    ENDA
+    CAMERA_CAHR(1)
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    MUSC(0x11)
+    SVAL(EVT_SLOT_2, 0x10)
+    SVAL(EVT_SLOT_3, 0xB57)
+    CALL(0x8A60448)
+    EVBIT_T(7)
+    ENDA
+    CALL(0x8A6A76C)
+    MNCH(0x14)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_003_A6AA20[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap3"))) = {
+    SVAL(EVT_SLOT_2, 0x8914BD8)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8914C00)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BEQ(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x8914C28)
+    CALL(0x8A603AC)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BNE(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x8914C64)
+    CALL(0x8A603AC)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BEQ(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x8914CA0)
+    CALL(0x8A603AC)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BNE(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x8914CDC)
+    CALL(0x8A603AC)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8914D18)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8914D7C)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89153D8)
+    CALL(0x8A6ABAC)
+    LOAD1(1, 0x89153D8)
+    ENUN
+    LOAD1(1, 0x8915784)
+    ENUN
+    SVAL(EVT_SLOT_2, 0x89157AC)
+    SVAL(EVT_SLOT_3, 1)
+    CALL(0x8A60380)
+    CALL(0x85B9DBC)
+    ENUT(0xA)
+    ENUT(0xC)
+    ENUT(0xE)
+    ENUT(0x10)
+    ENDA
+    SADD(EVT_SLOT_A, EVT_SLOT_2, EVT_SLOT_0)
+    LOAD1(1, 0x8915B1C)
+    ENUN
+    FADU(0x10)
+    MUSC(0x2D)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x4B)
+    CALL(0x8A60420)
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0, 0xC, 1)
+    TEXTSHOW(0xB69)
+    TEXTEND
+    GOTO(1)
+    LABEL(0)
+    TEXTSHOW(0xB6A)
+    TEXTEND
+    LABEL(1)
+    REMA
+    EvtBgmFadeIn(0x7FFF, 6)
+    FADI(4)
+    CLEAN
+    CAMERA(0x1D, 0x14)
+    MUSC(0x4D)
+    FADU(4)
+    LOAD2(1, 0x8915B44)
+    ENUN
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x4B)
+    CALL(0x8A60420)
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(2, 0xC, 1)
+    TEXTSHOW(0xB6B)
+    TEXTEND
+    MUSC(0x26)
+    TEXTCONT
+    TEXTEND
+    GOTO(3)
+    LABEL(2)
+    TEXTSHOW(0xB6C)
+    TEXTEND
+    MUSC(0x26)
+    TEXTCONT
+    TEXTEND
+    LABEL(3)
+    REMA
+    FADI(0x10)
+    CLEAN
+    CAMERA2(0xB, 0xC)
+    SADD(EVT_SLOT_2, EVT_SLOT_A, EVT_SLOT_0)
+    LOAD1(1, 0xFFFFFFFF)
+    ENUN
+    LOAD1(1, 0x8915784)
+    ENUN
+    REMU(0x41)
+    FADU(0x10)
+    STAL(0xF)
+    STARTFADE
+    EvtColorFadeSetup(6, 0xA, 8, 0x80, 0x80, 0x80)
+    BREAKSTONE(0x41)
+    EvtColorFadeSetup(6, 0xA, 8, 0x100, 0x100, 0x100)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x4B)
+    SVAL(EVT_SLOT_3, 0xB6D)
+    CALL(0x8A60448)
+    MOVE(0x10, 0x40, 0xB, 0xB)
+    ENUN
+    DISA(0x40)
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    ENDA
+    CAMERA2_CAHR(0x57)
+    MUSC(0x15)
+    CURSOR_CHAR(0x57)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB6E)
+    TEXTEND
+    REMA
+    EVBIT_T(7)
+    ENDA
+    CALL(0x8A6ADB0)
+    MUSC(0x2D)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x4E)
+    CALL(0x8A60420)
+    TEXTSHOW(0xB76)
+    TEXTEND
+    FADI(0x10)
+    REMA
+    MNC2(0x15)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_004_A6AE28[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap4"))) = {
+    EVENT_WORD(0x0001000C)
+    TEXTSHOW(0xB74)
+    TEXTEND
+    GOTO(1)
+    LABEL(0)
+    TEXTSHOW(0xB75)
+    TEXTEND
+    LABEL(1)
+    REMA
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_B, 0x12000C)
+    LOMA(0x15)
+    FADU(0x10)
+    LOAD1(1, 0x8915C14)
+    ENUN
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BNE(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x89157FC)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x8915838)
+    CALL(0x8A603D4)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BEQ(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x8915860)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x891589C)
+    CALL(0x8A603D4)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    COUNTER_SET(0, 3)
+    ENUF(0xA)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89158C4)
+    CALL(0x8A603AC)
+    COUNTER_DEC(0)
+    ENUF(0xA)
+    COUNTER_CHECK(0)
+    BNE(0, 0xC, 0)
+    ENUT(0xA)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xC)
+    COUNTER_SET(1, 6)
+    EVBIT_T(7)
+    ENDA
+    ENUF(0xC)
+    COUNTER_CHECK(1)
+    SVAL(EVT_SLOT_7, 5)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 3)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 1)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_2, 0x8915900)
+    CALL(0x8A603AC)
+    COUNTER_CHECK(1)
+    BNE(0, 0xC, 0)
+    ENUT(0xC)
+    LABEL(0)
+    COUNTER_DEC(1)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xE)
+    COUNTER_SET(2, 6)
+    EVBIT_T(7)
+    ENDA
+    ENUF(0xE)
+    COUNTER_CHECK(2)
+    SVAL(EVT_SLOT_7, 5)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 3)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 1)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_2, 0x8915950)
+    CALL(0x8A603AC)
+    COUNTER_CHECK(2)
+    BNE(0, 0xC, 0)
+    ENUT(0xE)
+    LABEL(0)
+    COUNTER_DEC(2)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0x10)
+    COUNTER_SET(3, 0xD)
+    EVBIT_T(7)
+    ENDA
+    ENUF(0x10)
+    COUNTER_CHECK(3)
+    SVAL(EVT_SLOT_7, 0xB)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 0xA)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 8)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 7)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 5)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 4)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 2)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 1)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_2, 0x89159A0)
+    CALL(0x8A603AC)
+    COUNTER_CHECK(3)
+    BNE(0, 0xC, 0)
+    ENUT(0x10)
+    LABEL(0)
+    COUNTER_DEC(3)
+    EVBIT_T(7)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BNE(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x89159F0)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x8915A40)
+    CALL(0x8A603D4)
+    SVAL(EVT_SLOT_2, 0x8915A7C)
+    CALL(0x8A603D4)
+    SVAL(EVT_SLOT_2, 0x8915AA4)
+    CALL(0x8A603D4)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8915ACC)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    CALL(0x8A6B224)
+    CURSOR_CHAR(0x6C)
+    STAL(0x3C)
+    CURE
+    MUSC(0x2D)
+    TEXTSTART
+    TEXTSHOW(0xB7D)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, 0x6C)
+    CALL(0x8A60654)
+    DISA(0x6C)
+    FADI(0x10)
+    LOAD1(1, 0x8915E08)
+    ENUN
+    CALL(0x85B9DBC)
+    ENUT(0xB)
+    ENUT(0xC)
+    ENUT(0xD)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_005_A6B460[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap5"))) = {
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xB)
+    COUNTER_SET(0, 1)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89160EC)
+    CALL(0x8A603AC)
+    COUNTER_DEC(0)
+    ENUF(0xB)
+    COUNTER_CHECK(0)
+    BNE(0, 0xC, 0)
+    ENUT(0xB)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xC)
+    COUNTER_SET(1, 1)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8916164)
+    CALL(0x8A603AC)
+    COUNTER_DEC(1)
+    ENUF(0xC)
+    COUNTER_CHECK(1)
+    BNE(0, 0xC, 0)
+    ENUT(0xC)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xD)
+    COUNTER_SET(2, 0xA)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89161C8)
+    CALL(0x8A603AC)
+    COUNTER_DEC(2)
+    ENUF(0xD)
+    COUNTER_CHECK(2)
+    BNE(0, 0xC, 0)
+    ENUT(0xD)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0xB1)
+    EVBIT_T(7)
+    ENDA
+    CALL(0x8A6B58C)
+    ENDA
+    STARTFADE
+    EvtColorFadeSetup(6, 0xA, 0, 0, 0, 0)
+    FADU(0x80)
+    SOLOTEXTBOXSTART
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0, 0xC, 1)
+    SVAL(EVT_SLOT_B, 0x680030)
+    TEXTSHOW(0xB89)
+    TEXTEND
+    GOTO(1)
+    LABEL(0)
+    SVAL(EVT_SLOT_B, 0x680028)
+    TEXTSHOW(0xB8A)
+    TEXTEND
+    LABEL(1)
+    REMA
+    CHECK_EVBIT(2)
+    BNE(2, 0xC, 0)
+    EVBIT_MODIFY(1)
+    ASMC(0x8081BB9)
+    LOAD1(1, 0x8916580)
+    ENUN
+    EvtColorFadeSetup(6, 0xA, 8, 0x100, 0x100, 0x100)
+    MUSC(0x2F)
+    ASMC(0x8082001)
+    EVBIT_MODIFY(0)
+    GOTO(3)
+    LABEL(2)
+    MUSC(0x2F)
+    LOAD1(1, 0x8916580)
+    ENUN
+    LABEL(3)
+    CAMERA2(0xB, 0xA)
+    LOAD1(0, 0x891642C)
+    ENUN
+    CURSOR_CHAR(0)
+    STAL(0x3C)
+    CURE
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0xA, 0xC, 1)
+    TEXTSTART
+    TEXTSHOW(0xB8B)
+    TEXTEND
+    REMA
+    GOTO(0xB)
+    LABEL(0xA)
+    TEXTSTART
+    TEXTSHOW(0xB8C)
+    TEXTEND
+    REMA
+    LABEL(0xB)
+    CAMERA2(0xB, 0xF)
+    LOAD2(1, 0x8916468)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(1)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(0xF)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(0x19)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(2)
+    LOAD3(0, 0x89164A4)
+    ENUN
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(1)
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(0xF)
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(0x19)
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(2)
+    CURSOR_CHAR(0)
+    STAL(0x3C)
+    CURE
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0xC, 0xC, 1)
+    TEXTSTART
+    TEXTSHOW(0xB8D)
+    TEXTEND
+    REMA
+    GOTO(0xD)
+    LABEL(0xC)
+    TEXTSTART
+    TEXTSHOW(0xB8E)
+    TEXTEND
+    REMA
+    LABEL(0xD)
+    MUSC(0x45)
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0xE, 0xC, 1)
+    CHECK_ALIVE(0xF)
+    BEQ(0x8095, 0xC, 0)
+    CHECK_DEPLOYED(0xF)
+    BEQ(0x8095, 0xC, 0)
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB90)
+    TEXTEND
+    REMA
+    LABEL(0x8095)
+    GOTO(0xF)
+    LABEL(0xE)
+    CHECK_ALIVE(1)
+    BEQ(0x8099, 0xC, 0)
+    CHECK_DEPLOYED(1)
+    BEQ(0x8099, 0xC, 0)
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB8F)
+    TEXTEND
+    REMA
+    LABEL(0x8099)
+    LABEL(0xF)
+    CHECK_ALIVE(2)
+    BEQ(0x809C, 0xC, 0)
+    CHECK_DEPLOYED(2)
+    BEQ(0x809C, 0xC, 0)
+    CURSOR_CHAR(2)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB91)
+    TEXTEND
+    REMA
+    LABEL(0x809C)
+    CHECK_ALIVE(0x11)
+    BEQ(0x809D, 0xC, 0)
+    CHECK_DEPLOYED(0x11)
+    BEQ(0x809D, 0xC, 0)
+    CURSOR_CHAR(0x11)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB9E)
+    TEXTEND
+    REMA
+    LABEL(0x809D)
+    CHECK_ALIVE(0x10)
+    BEQ(0x809E, 0xC, 0)
+    CHECK_DEPLOYED(0x10)
+    BEQ(0x809E, 0xC, 0)
+    CURSOR_CHAR(0x10)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB9F)
+    TEXTEND
+    REMA
+    LABEL(0x809E)
+    CHECK_ALIVE(4)
+    BEQ(0x809F, 0xC, 0)
+    CHECK_DEPLOYED(4)
+    BEQ(0x809F, 0xC, 0)
+    CURSOR_CHAR(4)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB92)
+    TEXTEND
+    REMA
+    LABEL(0x809F)
+    CHECK_ALIVE(0xB)
+    BEQ(0x80A1, 0xC, 0)
+    CHECK_DEPLOYED(0xB)
+    BEQ(0x80A1, 0xC, 0)
+    CURSOR_CHAR(0xB)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBA1)
+    TEXTEND
+    REMA
+    LABEL(0x80A1)
+    CHECK_ALIVE(0x22)
+    BEQ(0x80A2, 0xC, 0)
+    CHECK_DEPLOYED(0x22)
+    BEQ(0x80A2, 0xC, 0)
+    CURSOR_CHAR(0x22)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBA0)
+    TEXTEND
+    REMA
+    LABEL(0x80A2)
+    CHECK_ALIVE(6)
+    BEQ(0x80A3, 0xC, 0)
+    CHECK_DEPLOYED(6)
+    BEQ(0x80A3, 0xC, 0)
+    CURSOR_CHAR(6)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB95)
+    TEXTEND
+    REMA
+    LABEL(0x80A3)
+    CHECK_ALIVE(0x21)
+    BEQ(0x80A4, 0xC, 0)
+    CHECK_DEPLOYED(0x21)
+    BEQ(0x80A4, 0xC, 0)
+    CURSOR_CHAR(0x21)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBAF)
+    TEXTEND
+    REMA
+    LABEL(0x80A4)
+    CHECK_ALIVE(3)
+    BEQ(0x80A5, 0xC, 0)
+    CHECK_DEPLOYED(3)
+    BEQ(0x80A5, 0xC, 0)
+    CURSOR_CHAR(3)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB93)
+    TEXTEND
+    REMA
+    LABEL(0x80A5)
+    CHECK_ALIVE(5)
+    BEQ(0x80A6, 0xC, 0)
+    CHECK_DEPLOYED(5)
+    BEQ(0x80A6, 0xC, 0)
+    CURSOR_CHAR(5)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB94)
+    TEXTEND
+    REMA
+    LABEL(0x80A6)
+    CHECK_ALIVE(0x1D)
+    BEQ(0x80A8, 0xC, 0)
+    CHECK_DEPLOYED(0x1D)
+    BEQ(0x80A8, 0xC, 0)
+    CURSOR_CHAR(0x1D)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBAC)
+    TEXTEND
+    REMA
+    LABEL(0x80A8)
+    CHECK_ALIVE(0x1F)
+    BEQ(0x80A9, 0xC, 0)
+    CHECK_DEPLOYED(0x1F)
+    BEQ(0x80A9, 0xC, 0)
+    CURSOR_CHAR(0x1F)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBAE)
+    TEXTEND
+    REMA
+    LABEL(0x80A9)
+    CHECK_ALIVE(0xD)
+    BEQ(0x80AA, 0xC, 0)
+    CHECK_DEPLOYED(0xD)
+    BEQ(0x80AA, 0xC, 0)
+    CURSOR_CHAR(0xD)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB9C)
+    TEXTEND
+    REMA
+    LABEL(0x80AA)
+    CHECK_ALIVE(0xE)
+    BEQ(0x80AB, 0xC, 0)
+    CHECK_DEPLOYED(0xE)
+    BEQ(0x80AB, 0xC, 0)
+    CURSOR_CHAR(0xE)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBA9)
+    TEXTEND
+    REMA
+    LABEL(0x80AB)
+    CHECK_ALIVE(0x12)
+    BEQ(0x80AC, 0xC, 0)
+    CHECK_DEPLOYED(0x12)
+    BEQ(0x80AC, 0xC, 0)
+    CURSOR_CHAR(0x12)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBAA)
+    TEXTEND
+    REMA
+    LABEL(0x80AC)
+    CHECK_ALIVE(0x14)
+    BEQ(0x80AE, 0xC, 0)
+    CHECK_DEPLOYED(0x14)
+    BEQ(0x80AE, 0xC, 0)
+    CURSOR_CHAR(0x14)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBA2)
+    TEXTEND
+    REMA
+    LABEL(0x80AE)
+    CHECK_ALIVE(0x15)
+    BEQ(0x80AF, 0xC, 0)
+    CHECK_DEPLOYED(0x15)
+    BEQ(0x80AF, 0xC, 0)
+    CURSOR_CHAR(0x15)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBA3)
+    TEXTEND
+    REMA
+    LABEL(0x80AF)
+    CHECK_ALIVE(0x16)
+    BEQ(0x80B0, 0xC, 0)
+    CHECK_DEPLOYED(0x16)
+    BEQ(0x80B0, 0xC, 0)
+    CURSOR_CHAR(0x16)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBA4)
+    TEXTEND
+    REMA
+    LABEL(0x80B0)
+    CHECK_ALIVE(0x20)
+    BEQ(0x80B1, 0xC, 0)
+    CHECK_DEPLOYED(0x20)
+    BEQ(0x80B1, 0xC, 0)
+    CURSOR_CHAR(0x20)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB9D)
+    TEXTEND
+    REMA
+    LABEL(0x80B1)
+    CHECK_ALIVE(0x17)
+    BEQ(0x80B3, 0xC, 0)
+    CHECK_DEPLOYED(0x17)
+    BEQ(0x80B3, 0xC, 0)
+    CURSOR_CHAR(0x17)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBA5)
+    TEXTEND
+    REMA
+    LABEL(0x80B3)
+    CHECK_ALIVE(0x18)
+    BEQ(0x80B4, 0xC, 0)
+    CHECK_DEPLOYED(0x18)
+    BEQ(0x80B4, 0xC, 0)
+    CURSOR_CHAR(0x18)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBA6)
+    TEXTEND
+    REMA
+    LABEL(0x80B4)
+    CHECK_ALIVE(0x1E)
+    BEQ(0x80B5, 0xC, 0)
+    CHECK_DEPLOYED(0x1E)
+    BEQ(0x80B5, 0xC, 0)
+    CURSOR_CHAR(0x1E)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBAD)
+    TEXTEND
+    REMA
+    LABEL(0x80B5)
+    CHECK_ALIVE(0xA)
+    BEQ(0x80B7, 0xC, 0)
+    CHECK_DEPLOYED(0xA)
+    BEQ(0x80B7, 0xC, 0)
+    CURSOR_CHAR(0xA)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB96)
+    TEXTEND
+    REMA
+    LABEL(0x80B7)
+    CHECK_ALIVE(7)
+    BEQ(0x80B8, 0xC, 0)
+    CHECK_DEPLOYED(7)
+    BEQ(0x80B8, 0xC, 0)
+    CURSOR_CHAR(7)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB97)
+    TEXTEND
+    REMA
+    LABEL(0x80B8)
+    CHECK_ALIVE(9)
+    BEQ(0x80B9, 0xC, 0)
+    CHECK_DEPLOYED(9)
+    BEQ(0x80B9, 0xC, 0)
+    CURSOR_CHAR(9)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB98)
+    TEXTEND
+    REMA
+    LABEL(0x80B9)
+    CHECK_ALIVE(8)
+    BEQ(0x80BA, 0xC, 0)
+    CHECK_DEPLOYED(8)
+    BEQ(0x80BA, 0xC, 0)
+    CURSOR_CHAR(8)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB99)
+    TEXTEND
+    REMA
+    LABEL(0x80BA)
+    CHECK_ALIVE(0x13)
+    BEQ(0x80BB, 0xC, 0)
+    CHECK_DEPLOYED(0x13)
+    BEQ(0x80BB, 0xC, 0)
+    CURSOR_CHAR(0x13)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB9A)
+    TEXTEND
+    REMA
+    LABEL(0x80BB)
+    CHECK_ALIVE(0xC)
+    BEQ(0x80BC, 0xC, 0)
+    CHECK_DEPLOYED(0xC)
+    BEQ(0x80BC, 0xC, 0)
+    CURSOR_CHAR(0xC)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB9B)
+    TEXTEND
+    REMA
+    LABEL(0x80BC)
+    CHECK_ALIVE(0x19)
+    BEQ(0x80BE, 0xC, 0)
+    CHECK_DEPLOYED(0x19)
+    BEQ(0x80BE, 0xC, 0)
+    CURSOR_CHAR(0x19)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBA7)
+    TEXTEND
+    REMA
+    LABEL(0x80BE)
+    CHECK_ALIVE(0x1A)
+    BEQ(0x80BF, 0xC, 0)
+    CHECK_DEPLOYED(0x1A)
+    BEQ(0x80BF, 0xC, 0)
+    CURSOR_CHAR(0x1A)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBA8)
+    TEXTEND
+    REMA
+    LABEL(0x80BF)
+    CHECK_ALIVE(0x1C)
+    BEQ(0x80C0, 0xC, 0)
+    CHECK_DEPLOYED(0x1C)
+    BEQ(0x80C0, 0xC, 0)
+    CURSOR_CHAR(0x1C)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xBAB)
+    TEXTEND
+    REMA
+    LABEL(0x80C0)
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0x10, 0xC, 1)
+    CHECK_ALIVE(1)
+    BEQ(0x80C4, 0xC, 0)
+    CHECK_DEPLOYED(1)
+    BEQ(0x80C4, 0xC, 0)
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB8F)
+    TEXTEND
+    REMA
+    LABEL(0x80C4)
+    GOTO(0x11)
+    LABEL(0x10)
+    CHECK_ALIVE(0xF)
+    BEQ(0x80C8, 0xC, 0)
+    CHECK_DEPLOYED(0xF)
+    BEQ(0x80C8, 0xC, 0)
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB90)
+    TEXTEND
+    REMA
+    LABEL(0x80C8)
+    LABEL(0x11)
+    CAMERA2(0xB, 6)
+    SOLOTEXTBOXSTART
+    SVAL(EVT_SLOT_B, 0x68001C)
+    TEXTSHOW(0xBB0)
+    TEXTEND
+    CAMERA2(0xB, 0xA)
+    ASMC2(0x80827B5)
+    CURSOR_CHAR(0)
+    STAL(0x3C)
+    CURE
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(0x12, 0xC, 1)
+    TEXTSTART
+    TEXTSHOW(0xBB1)
+    TEXTEND
+    REMA
+    GOTO(0x13)
+    LABEL(0x12)
+    TEXTSTART
+    TEXTSHOW(0xBB2)
+    TEXTEND
+    REMA
+    LABEL(0x13)
+    SVAL(EVT_SLOT_2, 0x19)
+    CALL(0x8A604F4)
+    SVAL(EVT_SLOT_2, 2)
+    CALL(0x8A604F4)
+    EVBIT_T(7)
+    ENDA
+    CALL(0x8A6C000)
+    MNC4
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_006_A6C078[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap6"))) = {
+    CHECK_ALIVE(0x14)
+    BEQ(1, 0xC, 0)
+    CHECK_ALIVE(0x16)
+    BEQ(1, 0xC, 0)
+    CHECK_ALIVE(0x15)
+    BEQ(1, 0xC, 0)
+    TEXTSHOW(0xBB7)
+    TEXTEND
+    REMA
+    LABEL(1)
+    CHECK_ALIVE(0xD)
+    BEQ(2, 0xC, 0)
+    CHECK_ALIVE(0x12)
+    BEQ(2, 0xC, 0)
+    CHECK_ALIVE(0x1D)
+    BEQ(2, 0xC, 0)
+    CHECK_ALIVE(0xE)
+    BEQ(2, 0xC, 0)
+    CHECK_ALIVE(0x1F)
+    BEQ(2, 0xC, 0)
+    TEXTSHOW(0xBB8)
+    TEXTEND
+    REMA
+    LABEL(2)
+    CHECK_ALIVE(0x1A)
+    BEQ(3, 0xC, 0)
+    CHECK_ALIVE(0x1C)
+    BEQ(3, 0xC, 0)
+    TEXTSHOW(0xBB9)
+    TEXTEND
+    REMA
+    LABEL(3)
+    CHECK_ALIVE(0x17)
+    BEQ(4, 0xC, 0)
+    CHECK_ALIVE(0x18)
+    BEQ(4, 0xC, 0)
+    TEXTSHOW(0xBBA)
+    TEXTEND
+    REMA
+    LABEL(4)
+    CHECK_ALIVE(0xA)
+    BEQ(5, 0xC, 0)
+    CHECK_ALIVE(7)
+    BEQ(5, 0xC, 0)
+    CHECK_ALIVE(9)
+    BEQ(5, 0xC, 0)
+    CHECK_ALIVE(8)
+    BEQ(5, 0xC, 0)
+    CHECK_ALIVE(0x13)
+    BEQ(5, 0xC, 0)
+    CHECK_ALIVE(0xC)
+    BEQ(5, 0xC, 0)
+    TEXTSHOW(0xBBB)
+    TEXTEND
+    REMA
+    LABEL(5)
+    CHECK_ALIVE(4)
+    BEQ(6, 0xC, 0)
+    CHECK_ALIVE(0x11)
+    BEQ(6, 0xC, 0)
+    CHECK_ALIVE(0x10)
+    BEQ(6, 0xC, 0)
+    TEXTSHOW(0xBBC)
+    TEXTEND
+    REMA
+    LABEL(6)
+    CHECK_MODE
+    SVAL(EVT_SLOT_1, 2)
+    BNE(7, 0xC, 1)
+    TEXTSHOW(0xBBD)
+    TEXTEND
+    GOTO(8)
+    LABEL(7)
+    TEXTSHOW(0xBBE)
+    TEXTEND
+    LABEL(8)
+    FADI(4)
+    REMA
+    REVEAL(0x19)
+    REVEAL(2)
+    ENDA
+    MUSC(0x2E)
+    SVAL(EVT_SLOT_2, 0xA5F)
+    SVAL(EVT_SLOT_3, 0xA60)
+    SVAL(EVT_SLOT_4, 0xA61)
+    CALL(0x8A65D68)
+    CAMERA2(0x13, 9)
+    FADU(0x10)
+    LOAD1(1, 0x8916E68)
+    ENUN
+    CURSOR_CHAR(0x1D)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x11)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA62)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_B, 0xA0012)
+    LOMA(0x17)
+    LOAD1(1, 0x89168A0)
+    ENUN
+    LOAD1(1, 0x8916D78)
+    ENUN
+    SVAL(EVT_SLOT_B, 0x3000C)
+    TILECHANGE(0xFFFF)
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADU(0x10)
+    LOAD2(1, 0x8916D14)
+    ENUN
+    CURSOR_CHAR(0x5A)
+    STAL(0x3C)
+    CURE
+    MUSC(0x25)
+    SVAL(EVT_SLOT_2, 0x3B)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA63)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_2, 0x33)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA64)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CLEAN
+    CAMERA(0, 0)
+    LOAD1(1, 0x89168A0)
+    ENUN
+    EvtSetLoadUnitNoREDA
+    LOAD1(1, 0x8916D50)
+    ENUN
+    FADU(0x10)
+    SVAL(EVT_SLOT_1, 1)
+    SET_STATE(0xF)
+    LOAD3(0, 0x89167B0)
+    ENUN
+    DISA(0x83)
+    LOAD1(1, 0x8916D50)
+    ENUN
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    LOAD1(1, 0x89168A0)
+    ENUN
+    LOAD1(1, 0x8916D78)
+    ENUN
+    CAMERA2(0x11, 0xA)
+    FADU(0x10)
+    CURSOR_CHAR(0x83)
+    STAL(0x3C)
+    CURE
+    MUSC(0x2E)
+    SVAL(EVT_SLOT_2, 0x3B)
+    SVAL(EVT_SLOT_3, 0xA65)
+    CALL(0x8A60448)
+    MOVE_1STEP(0x10, 0x5A, 2)
+    ENUN
+    CURSOR_CHAR(0x5A)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x3B)
+    SVAL(EVT_SLOT_3, 0xA66)
+    CALL(0x8A60448)
+    MOVE_1STEP(0x10, 0x5A, 3)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x256)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x216)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    MOVE_DEFINED(0x12)
+    ENUN
+    CURSOR_CHAR(0x12)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x3B)
+    SVAL(EVT_SLOT_3, 0xA67)
+    CALL(0x8A60448)
+    MOVE_1STEP(8, 0x12, 2)
+    ENUN
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x10215)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x10295)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x10296)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    MOVE_DEFINED(0x83)
+    ENUN
+    CURSOR_CHAR(0x12)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x3B)
+    SVAL(EVT_SLOT_3, 0xA68)
+    CALL(0x8A60448)
+    MOVE(0x10, 0x83, 0x17, 0xF)
+    MOVE(0x10, 0x12, 0x17, 0xF)
+    LOAD1(1, 0x8916AF8)
+    STAL2(0x1E)
+    FADI(0x10)
+    ENUN
+    CLEA
+    CLEE
+    CLEN
+    LOAD1(1, 0x89168A0)
+    ENUN
+    LOAD1(1, 0x8916AF8)
+    ENUN
+    LOAD1(1, 0x8916B84)
+    ENUN
+    CALL(0x85B9DBC)
+    MUSC(0xC)
+    CAMERA2(8, 4)
+    FADU(0x10)
+    LOAD1(1, 0x8916BC0)
+    ENUN
+    SVAL(EVT_SLOT_B, 0x3000C)
+    TILEREVERT(0xFFFF)
+    CURSOR_CHAR(0x22)
+    STAL(0x3C)
+    CURE
+    MUSI
+    SVAL(EVT_SLOT_2, 0x1D)
+    SVAL(EVT_SLOT_3, 0xA69)
+    CALL(0x8A60448)
+    MUNO
+    ENUT(0x12)
+    ENUT(0xC)
+    ENUT(0x10)
+    ENUT(0xE)
+    EVBIT_T(7)
+    ENDA
+    MUSC(0x31)
+    SVAL(EVT_SLOT_2, 0x3B)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA6D)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    SVAL(EVT_SLOT_2, 0x12)
+    CALL(0x8A606F4)
+    CLEAN
+    CAMERA2(0x11, 9)
+    CLEA
+    CLEE
+    CLEN
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, 0x8916DB4)
+    ENUN
+    FADU(0x10)
+    LOAD2(1, 0x8916DB4)
+    ENUN
+    MOVE_1STEP(0x10, 0xF, 2)
+    ENUN
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x3B)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA6E)
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 2)
+    TEXTCONT
+    TEXTEND
+    MUSC(0x32)
+    TEXTCONT
+    TEXTEND
+    REMA
+    FADI(4)
+    SVAL(EVT_SLOT_2, 0x33)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA6F)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, 0x1E)
+    CALL(0x8A60420)
+    MUSI
+    TEXTSHOW(0xA70)
+    TEXTEND
+    REMA
+    EvtBgmFadeIn(0x7FFF, 4)
+    SVAL(EVT_SLOT_2, 0x2000F)
+    CALL(0x8A60B90)
+    LOAD1(1, 0x8916EE8)
+    ENUN
+    MUSC(0x2E)
+    FADU(0x10)
+    TILECHANGE(0)
+    LOAD1(1, 0x8916F24)
+    ENUN
+    CURSOR_CHAR(0x6B)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xA71)
+    TEXTEND
+    REMA
+    ENUT(0x71)
+    MNCH(0x18)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xA73)
+    TEXTEND
+    REMA
+    MURE(2)
+    CUSA(0x12)
+    EVBIT_T(7)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xA72)
+    TEXTEND
+    SOUN(0x2D9)
+    TEXTCONT
+    TEXTEND
+    REMA
+    MURE(2)
+    CUSA(0x12)
+    EVBIT_T(7)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xA74)
+    TEXTEND
+    REMA
+    MURE(2)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0x81)
+    COUNTER_SET(0, 1)
+    ENUF(0x12)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8916BFC)
+    CALL(0x8A603D4)
+    COUNTER_DEC(0)
+    ENUF(0x12)
+    COUNTER_CHECK(0)
+    BNE(0, 0xC, 0)
+    ENUT(0x12)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    COUNTER_SET(1, 2)
+    ENUF(0xC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8916C4C)
+    CALL(0x8A603D4)
+    COUNTER_DEC(1)
+    ENUF(0xC)
+    COUNTER_CHECK(1)
+    BNE(0, 0xC, 0)
+    ENUT(0xC)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    COUNTER_SET(2, 2)
+    ENUF(0x10)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8916C74)
+    CALL(0x8A603AC)
+    COUNTER_DEC(2)
+    ENUF(0x10)
+    COUNTER_CHECK(2)
+    BNE(0, 0xC, 0)
+    ENUT(0x10)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_007_A6C8CC[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap7"))) = {
+    SVAL(EVT_SLOT_2, 0x8916CB0)
+    CALL(0x8A603AC)
+    COUNTER_DEC(3)
+    ENUF(0xE)
+    COUNTER_CHECK(3)
+    BNE(0, 0xC, 0)
+    ENUT(0xE)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    MUSC(0x25)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x4C)
+    FADU(0x10)
+    LOAD2(1, 0x891823C)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(0xF)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(2)
+    LOAD3(0, 0x8918188)
+    ENUN
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(0xF)
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(2)
+    CURSOR_CHAR(0xCC)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x24)
+    SVAL(EVT_SLOT_3, 0xA75)
+    CALL(0x8A60448)
+    MUSI
+    EARTHQUAKE_START(0, 1)
+    STAL(0x78)
+    EARTHQUAKE_END
+    MOVE_1STEP(0, 2, 2)
+    ENUN
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x24)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA76)
+    TEXTEND
+    REMA
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_B, 0xE000C)
+    LOMA(0x18)
+    UNIT_COLORS(0x222)
+    LOAD1(1, 0x89172F4)
+    ENUN
+    LOAD1(1, 0x891763C)
+    ENUN
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, 0x89176A0)
+    ENUN
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, 0x89176C8)
+    ENUN
+    FADU(0x10)
+    CURSOR_CHAR(0x1D)
+    STAL(0x3C)
+    CURE
+    MUSC(0x2E)
+    SVAL(EVT_SLOT_2, 0xC)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA77)
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 2)
+    TEXTCONT
+    TEXTEND
+    MUSC(0x26)
+    TEXTCONT
+    TEXTEND
+    CALL(0x8A603FC)
+    CLEN
+    UNIT_COLORS(0x22)
+    LOAD1(1, 0x8917484)
+    ENUN
+    CURSOR_CHAR(0x44)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xA78)
+    TEXTEND
+    REMA
+    LOAD2(1, 0x89176A0)
+    LOAD2(1, 0x89176C8)
+    ENUN
+    LOAD1(1, 0x8917240)
+    ENUN
+    FADI(0x10)
+    UNIT_COLORS(0)
+    CLEA
+    CLEE
+    CLEN
+    LOAD1(1, 0x89172F4)
+    ENUN
+    LOAD1(1, 0x8917218)
+    ENUN
+    LOAD1(1, 0x8917240)
+    ENUN
+    LOAD1(1, 0x8917524)
+    ENUN
+    LOAD1(1, 0x8917484)
+    ENUN
+    SVAL(EVT_SLOT_2, 0x8917420)
+    SVAL(EVT_SLOT_3, 1)
+    CALL(0x8A60380)
+    CAMERA(0x16, 0)
+    FADU(0x10)
+    LOAD2(1, 0x8917718)
+    STAL2(0x20)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(0xF)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(2)
+    LOAD3(0, 0x8917754)
+    ENUN
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(0xF)
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(2)
+    CURSOR_CHAR(2)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x24)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA79)
+    TEXTEND
+    REMA
+    CALL(0x85B9DBC)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_008_A6CD00[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap8"))) = {
+    SVAL(EVT_SLOT_7, 0)
+    CHECK_ALIVE(0x89)
+    BEQ(0, 0xC, 0)
+    CHECK_ALIVE(0x8A)
+    BEQ(0, 0xC, 0)
+    CHECK_ALIVE(0x8B)
+    BEQ(0, 0xC, 0)
+    SVAL(EVT_SLOT_7, 1)
+    LABEL(0)
+    CHECK_EVENTID(2)
+    BNE(1, 0xC, 0)
+    MUSC(0x2E)
+    CAMERA_CAHR(0x5B)
+    CURSOR_CHAR(0x5B)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x17)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA81)
+    TEXTEND
+    REMA
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(0x10)
+    CLEAN
+    SVAL(EVT_SLOT_2, 0xE)
+    CALL(0x8A606F4)
+    CLEE
+    FADU(0x10)
+    CAMERA_CAHR(0xF)
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    MUSC(0x31)
+    SVAL(EVT_SLOT_2, 0x24)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA82)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    GOTO(2)
+    LABEL(1)
+    MUSC(0x31)
+    FADI(0x10)
+    LABEL(2)
+    MUSC(0x31)
+    SVAL(EVT_SLOT_2, 0x1D)
+    CALL(0x8A605D8)
+    CLEA
+    CLEE
+    CLEN
+    CLEAN
+    CAMERA2(0xF, 0xC)
+    FADU(0x10)
+    CURSOR_AT(0x12, 0xD)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x17)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA83)
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 4)
+    TEXTCONT
+    TEXTEND
+    MUSC(0x28)
+    TEXTCONT
+    TEXTEND
+    BEQ(3, 7, 0)
+    EvtTextShow2(0xA84)
+    TEXTEND
+    REMA
+    CALL(0x85B9D24)
+    SVAL(EVT_SLOT_3, 0x65)
+    GIVEITEMTO(0x1D)
+    LABEL(3)
+    REMA
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(0x10)
+    CLEAN
+    CAMERA(0, 0x13)
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, 0x8917880)
+    ENUN
+    FADU(0x10)
+    CURSOR_CHAR(2)
+    STAL(0x3C)
+    CURE
+    MUSC(0x24)
+    SVAL(EVT_SLOT_2, 0xC)
+    SVAL(EVT_SLOT_3, 0xA85)
+    CALL(0x8A60448)
+    CLEN
+    LOAD2(1, 0x8917880)
+    ENUN
+    CURSOR_CHAR(0x19)
+    STAL(0x3C)
+    CURE
+    MUSS(0x2A)
+    STAL(0x21)
+    SVAL(EVT_SLOT_2, 0xC)
+    SVAL(EVT_SLOT_3, 0xA86)
+    CALL(0x8A60448)
+    MURE(4)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x10387)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x10347)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x1034F)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0)
+    SENQUEUE1
+    MOVE_DEFINED(0x19)
+    STAL2(0x32)
+    SVAL(EVT_SLOT_D, 0)
+    MOVE(0x10, 0x1A, 0xF, 0xD)
+    MOVE(0x10, 0x1C, 0xF, 0xD)
+    ENUN
+    LOAD2(1, 0x89178F8)
+    ENUN
+    CURSOR_CHAR(2)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0xC)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA87)
+    TEXTEND
+    REMA
+    ENUT(0x72)
+    MNCH(0x19)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xA88)
+    TEXTEND
+    REMA
+    MURE(2)
+    CUSA(0x1D)
+    EVBIT_T(7)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xA89)
+    TEXTEND
+    REMA
+    MURE(2)
+    CUSA(0xE)
+    EVBIT_T(7)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xA8A)
+    TEXTEND
+    REMA
+    MURE(2)
+    CUSA(0xE)
+    EVBIT_T(7)
+    ENDA
+    MUSI
+    SVAL(EVT_SLOT_2, 2)
+    SVAL(EVT_SLOT_3, 0xA8B)
+    CALL(0x8A60448)
+    MUNO
+    CALL(0x85B9D24)
+    SVAL(EVT_SLOT_3, 0x56)
+    GIVEITEMTO(0xFFFF)
+    EVBIT_T(7)
+    ENDA
+    MUSI
+    SVAL(EVT_SLOT_2, 2)
+    SVAL(EVT_SLOT_3, 0xA8C)
+    CALL(0x8A60448)
+    MUNO
+    CALL(0x85B9D24)
+    SVAL(EVT_SLOT_3, 0x64)
+    GIVEITEMTO(0xFFFF)
+    EVBIT_T(7)
+    ENDA
+    MUSI
+    SVAL(EVT_SLOT_2, 0)
+    SVAL(EVT_SLOT_3, 0xA8D)
+    CALL(0x8A60448)
+    MUNO
+    EVBIT_T(7)
+    ENDA
+    MUSI
+    SVAL(EVT_SLOT_2, 0)
+    SVAL(EVT_SLOT_3, 0xA8E)
+    CALL(0x8A60448)
+    MUNO
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89174E8)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    CALL(0x8A6CCB0)
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0xE)
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0x83)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8917574)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x8917600)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    MUSC(0x2E)
+    EvtChangeFogVision(0, 0)
+    SVAL(EVT_SLOT_2, 0x2000F)
+    CALL(0x8A60B90)
+    LOAD1(1, 0x89189F0)
+    ENUN
+    FADU(0x10)
+    SPAWN_ENEMY(0x44, 0xE, 9)
+    ENUN
+    TILECHANGE(0)
+    MOVE(0x10, 0x44, 0xE, 5)
+    ENUN
+    CURSOR_CHAR(0x44)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xA8F)
+    TEXTEND
+    REMA
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x3E)
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, 0x8918784)
+    ENUN
+    MUSC(0x4B)
+    FADU(4)
+    STAL(0xF)
+    CURSOR_CHAR(0x1E)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0xD)
+    SVAL(EVT_SLOT_3, 0xA90)
+    CALL(0x8A60448)
+    LOAD2(1, 0x89187C0)
+    ENUN
+    CURSOR_CHAR(2)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0xD)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA91)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CLEAN
+    EvtChangeFogVision(0, 0xFFFF)
+    TILECHANGE(0)
+    LOAD1(1, 0x8918414)
+    ENUN
+    SPAWN_ENEMY(0x57, 0x10, 0xD)
+    FADU(0x10)
+    CAMERA(0x14, 0x12)
+    CURSOR_CHAR(0x57)
+    STAL(0x3C)
+    CURE
+    MUSC(0x26)
+    TEXTSTART
+    TEXTSHOW(0xA92)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, 0x57)
+    CALL(0x8A60654)
+    DISA(0x57)
+    CALL(0x85B9DBC)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_009_A6D3F8[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap9"))) = {
+    MUSC(0x31)
+    SVAL(EVT_SLOT_2, 0xD)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA97)
+    TEXTEND
+    FADI(4)
+    REMA
+    FADU(0x10)
+    TEXTSHOW(0xA98)
+    TEXTEND
+    CHECK_ALIVE(0x1A)
+    BEQ(0, 0xC, 0)
+    EvtTextShow2(0xA99)
+    TEXTEND
+    LABEL(0)
+    REMA
+    FADI(0x10)
+    SVAL(EVT_SLOT_2, 0x19)
+    CALL(0x8A605D8)
+    SVAL(EVT_SLOT_2, 0x1A)
+    CALL(0x8A605D8)
+    ENUT(0x73)
+    MNC2(0x19)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xA9A)
+    TEXTEND
+    REMA
+    MURE(2)
+    CUSA(0x19)
+    EVBIT_T(7)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xA9B)
+    TEXTEND
+    REMA
+    MURE(2)
+    CUSA(0x1A)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89186F8)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_010_A6D524[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap10"))) = {
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0xB0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89188C4)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x8918900)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8918964)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x89189A0)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0xB9)
+    SVAL(EVT_SLOT_1, 0x11200)
+    CHAI(0xBA)
+    SVAL(EVT_SLOT_1, 0x10B00)
+    CHAI(0xB1)
+    EVBIT_T(7)
+    ENDA
+    MUSC(0x24)
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, 0x89191E0)
+    ENUN
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, 0x8919230)
+    ENUN
+    FADU(0x10)
+    CURSOR_CHAR(2)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0xD)
+    CALL(0x8A60420)
+    TEXTSHOW(0xA9C)
+    TEXTEND
+    FADI(4)
+    REMA
+    CLEAN
+    CAMERA2(7, 7)
+    FADU(0x10)
+    LOAD1(1, 0x8919258)
+    ENUN
+    CURSOR_CHAR(0x17)
+    STAL(0x3C)
+    CURE
+    MUSI
+    SVAL(EVT_SLOT_2, 0xC)
+    SVAL(EVT_SLOT_3, 0xA9D)
+    CALL(0x8A60448)
+    MOVE(0x10, 0x17, 8, 0xC)
+    ENUN
+    DISA(0x17)
+    CURSOR_CHAR(0x18)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xA9E)
+    TEXTEND
+    REMA
+    MOVE(0x10, 0x18, 5, 5)
+    ENUN
+    DISA(0x18)
+    FADI(0x10)
+    MUNO
+    CAMERA2(7, 0x11)
+    FADU(0x10)
+    MOVE_1STEP(8, 0x1E, 3)
+    ENUN
+    CURSOR_CHAR(0x1E)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0xD)
+    SVAL(EVT_SLOT_3, 0xA9F)
+    CALL(0x8A60448)
+    EvtBgmFadeIn(0x7FFF, 4)
+    LOAD2(1, 0x89191E0)
+    ENUN
+    DISA(0x1E)
+    LOAD1(1, 0x8918C90)
+    LOAD2(1, 0x8919230)
+    ENUN
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    MUSC(0x25)
+    SVAL(EVT_SLOT_2, 0xD)
+    CALL(0x8A60420)
+    TEXTSHOW(0xAA0)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    DISA(0x40)
+    CALL(0x85B9DBC)
+    ENDA
+    MUSC(0x14)
+    CAMERA(0x14, 0)
+    CURSOR_CHAR(0x53)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xAA1)
+    TEXTEND
+    REMA
+    EVBIT_T(7)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_011_A6D850[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap11"))) = {
+    MUSC(0x31)
+    FADI(0x10)
+    SVAL(EVT_SLOT_A, 0)
+    CHECK_EXISTS(0x16)
+    BEQ(0, 0xC, 0)
+    CHECK_ALLEGIANCE(0x16)
+    SVAL(EVT_SLOT_1, 0)
+    BEQ(1, 0xC, 1)
+    CHECK_ALIVE(0x18)
+    BEQ(0, 0xC, 0)
+    SVAL(EVT_SLOT_A, 1)
+    SVAL(EVT_SLOT_2, 0x16)
+    CALL(0x8A605D8)
+    GOTO(1)
+    LABEL(0)
+    SVAL(EVT_SLOT_2, 0x16)
+    CALL(0x8A606F4)
+    LABEL(1)
+    CLEA
+    CLEE
+    CLEN
+    CAMERA(0x14, 0)
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, 0x8919294)
+    ENUN
+    FADU(0x10)
+    LOAD2(1, 0x8919294)
+    ENUN
+    CURSOR_CHAR(2)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xAA4)
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(4)
+    REMA
+    CAMERA2(0xD, 0xD)
+    MUSC(0x4B)
+    FADU(0x10)
+    LOAD2(1, 0x89192D0)
+    ENUN
+    CURSOR_CHAR(0x1E)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0xC)
+    SVAL(EVT_SLOT_3, 0xAA5)
+    CALL(0x8A60448)
+    IGNORE_KEYS(1)
+    MOVE(0x10, 0x1E, 0x14, 0xC)
+    FADI(4)
+    IGNORE_KEYS(0)
+    ENUN
+    DISA(0x1E)
+    CAMERA(0x14, 0)
+    FADU(4)
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0xC)
+    CALL(0x8A60420)
+    TEXTSHOW(0xAA6)
+    TEXTEND
+    MUSC(0x32)
+    TEXTCONT
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(4)
+    REMA
+    BEQ(0xA, 0xA, 0)
+    MUSC(0x31)
+    SVAL(EVT_SLOT_2, 0xC)
+    CALL(0x8A60420)
+    TEXTSHOW(0xAA7)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    LABEL(0xA)
+    ENUT(0x74)
+    MNCH(0x1A)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xAA8)
+    TEXTEND
+    REMA
+    MURE(2)
+    CUSA(0x16)
+    EVBIT_T(7)
+    ENDA
+    MUSS(0x30)
+    STAL(0x21)
+    SVAL(EVT_SLOT_2, 0)
+    SVAL(EVT_SLOT_3, 0xAA9)
+    CALL(0x8A60448)
+    MURE(2)
+    SVAL(EVT_SLOT_2, 0x8918F88)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    MUSI
+    SVAL(EVT_SLOT_2, 0xE)
+    SVAL(EVT_SLOT_3, 0xAAA)
+    CALL(0x8A60448)
+    MUNO
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8919118)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8919154)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891917C)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89191A4)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    MUSC(0x53)
+    LOAD2(1, 0x8919838)
+    ENUN
+    DISA(0x1E)
+    CURSOR_AT(0x11, 0xD)
+    STAL(0x3C)
+    CURE
+    MUSI
+    SVAL(EVT_SLOT_2, 2)
+    CALL(0x8A60420)
+    TEXTSHOW(0xAAB)
+    TEXTEND
+    MUSC(0x2B)
+    TEXTCONT
+    TEXTEND
+    FADI(4)
+    REMA
+    SVAL(EVT_SLOT_2, 2)
+    CALL(0x8A60420)
+    TEXTSHOW(0xAAC)
+    TEXTEND
+    MUSC(0x29)
+    TEXTCONT
+    TEXTEND
+    MUSC(0x25)
+    TEXTCONT
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CLEAN
+    CAMERA2(0xC, 0xC)
+    LOAD1(1, 0x891948C)
+    ENUN
+    FADU(0x10)
+    LOAD1(1, 0x8919464)
+    ENUN
+    CURSOR_CHAR(0x44)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xAAD)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CAMERA(0, 0)
+    FADU(0x10)
+    LOAD2(1, 0x8919860)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(0xF)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(2)
+    SVAL(EVT_SLOT_1, 0)
+    SET_STATE(0x19)
+    LOAD3(0, 0x89198B0)
+    ENUN
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(0xF)
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(2)
+    SVAL(EVT_SLOT_1, 0xFFFFFFFF)
+    SET_STATE(0x19)
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x2C)
+    CALL(0x8A60420)
+    TEXTSHOW(0xAAE)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    LOAD1(1, 0x89199C8)
+    ENUN
+    CALL(0x85B9DBC)
+    CAMERA(0x15, 0)
+    MUSC(0x25)
+    FADU(0x10)
+    LOAD1(1, 0x8919748)
+    ENUN
+    CURSOR_CHAR(0x14)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x25)
+    CALL(0x8A60420)
+    TEXTSHOW(0xAAF)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    CLEAN
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, 0x8919964)
+    ENUN
+    FADU(0x10)
+    EVBIT_T(9)
+    LOAD2(1, 0x8919964)
+    ENUN
+    EVBIT_F(9)
+    CURSOR_CHAR(0x1E)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x2C)
+    CALL(0x8A60420)
+    TEXTSHOW(0xAB0)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    DISA(0x1E)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_012_A6DE0C[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap12"))) = {
+    MUSS(0x30)
+    STAL(0x21)
+    TEXTSTART
+    TEXTSHOW(0xAB6)
+    TEXTEND
+    REMA
+    MURE(2)
+    EVBIT_T(7)
+    ENDA
+    MUSI
+    TEXTSTART
+    TEXTSHOW(0xAB7)
+    TEXTEND
+    REMA
+    MUNO
+    EVBIT_T(7)
+    ENDA
+    MUSI
+    TEXTSTART
+    TEXTSHOW(0xAB8)
+    TEXTEND
+    REMA
+    MUNO
+    EVBIT_T(7)
+    ENDA
+    MUSI
+    SVAL(EVT_SLOT_2, 2)
+    SVAL(EVT_SLOT_3, 0xAB9)
+    CALL(0x8A60448)
+    MUNO
+    CALL(0x85B9D24)
+    SVAL(EVT_SLOT_3, 0x59)
+    GIVEITEMTO(0xFFFF)
+    EVBIT_T(7)
+    ENDA
+    MUSI
+    SVAL(EVT_SLOT_2, 2)
+    SVAL(EVT_SLOT_3, 0xABA)
+    CALL(0x8A60448)
+    MUNO
+    CALL(0x85B9D24)
+    SVAL(EVT_SLOT_3, 0x61)
+    GIVEITEMTO(0xFFFF)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8919784)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89197AC)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89197D4)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8919810)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0x80)
+    EVBIT_T(7)
+    ENDA
+    MUSC(0x4D)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x3F)
+    FADU(0x10)
+    LOAD2(1, 0x891AD78)
+    ENUN
+    MOVE_1STEP(8, 0xF, 3)
+    ENUN
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xABB)
+    TEXTEND
+    FAWI(2)
+    REMA
+    REMOVEPORTRAITS
+    BACG(0x14)
+    EvtBgmFadeIn(0x2C, 8)
+    FAWU(2)
+    BROWNBOXTEXT(0x197, 8, 8)
+    TEXTSHOW(0xABC)
+    TEXTEND
+    REMA
+    EvtBgmFadeIn(0x7FFF, 8)
+    FAWI(2)
+    CLEAN
+    EvtBgmFadeIn(0x4D, 6)
+    FAWU(2)
+    MOVE_1STEP(8, 0x1E, 3)
+    ENUN
+    TEXTSTART
+    TEXTSHOW(0xABD)
+    TEXTEND
+    CHECK_EVBIT(3)
+    BNE(0, 0xC, 0)
+    EARTHQUAKE_START(0, 1)
+    STAL(0x78)
+    EARTHQUAKE_END
+    TEXTCONT
+    TEXTEND
+    LABEL(0)
+    REMA
+    MOVE(8, 0xF, 0xA, 4)
+    STAL2(0x10)
+    MOVE(8, 2, 0xA, 4)
+    MOVE(8, 0x1E, 0xA, 4)
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(0x10)
+    ENUN
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_B, 0x2000F)
+    LOMA(0x1B)
+    LOAD1(1, 0x891A580)
+    ENUN
+    FADU(4)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xABE)
+    TEXTEND
+    REMA
+    SOUN(0xB1)
+    TILECHANGE(0)
+    LOAD1(1, 0x891AB20)
+    ENUN
+    CURSOR_CHAR(0x83)
+    STAL(0x3C)
+    CURE
+    MUSC(0x2E)
+    TEXTSTART
+    TEXTSHOW(0xABF)
+    TEXTEND
+    REMA
+    MOVE(0, 0x83, 0xE, 9)
+    ENUN
+    TILEREVERT(0)
+    DISA(0x83)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xAC0)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60654)
+    DISA(0x40)
+    FADI(0x10)
+    LOAD1(1, 0x891A5BC)
+    ENUN
+    CALL(0x85B9DBC)
+    ENUT(0xD)
+    ENUT(0x10)
+    ENDA
+    CURSOR_CHAR(0x1C)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xAC1)
+    TEXTEND
+    REMA
+    ENDA
+    EvtBgmFadeIn(0x7FFF, 4)
+    FADI(0x10)
+    SVAL(EVT_SLOT_2, 0x1C)
+    CALL(0x8A606F4)
+    CLEA
+    CLEE
+    CLEN
+    TILECHANGE(0)
+    CAMERA2(0xE, 4)
+    LOAD2(1, 0x891AB48)
+    ENUN
+    FADU(0x10)
+    STARTFADE
+    EvtColorFadeSetup(6, 0xA, 4, 0x80, 0x80, 0x80)
+    EvtColorFadeSetup(0x1D, 1, 2, 0, 0, 0)
+    SOUN(0xD6)
+    SVAL(EVT_SLOT_2, 0x6B)
+    CALL(0x8A606B0)
+    DISA(0x6B)
+    EvtColorFadeSetup(6, 0xA, 8, 0x100, 0x100, 0x100)
+    ENDFADE
+    MOVE_1STEP(0x10, 0xF, 3)
+    ENUN
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xAC6)
+    TEXTEND
+    REMA
+    MOVE(0x10, 0xF, 0xE, 0xA)
+    STAL2(0x20)
+    MOVE(0x10, 2, 0xF, 0xA)
+    STAL2(0x10)
+    FADI(0x10)
+    ENUN
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x46)
+    LOAD1(1, 0x891AEE4)
+    ENUN
+    FADU(0x10)
+    LOAD2(1, 0x891AEA8)
+    ENUN
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x16)
+    CALL(0x8A60420)
+    TEXTSHOW(0xAC7)
+    TEXTEND
+    MUSC(0x2D)
+    TEXTCONT
+    TEXTEND
+    REMA
+    CALL(0x8A603FC)
+    EvtBgmFadeIn(0x7FFF, 2)
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60654)
+    DISA(0x40)
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xAC8)
+    TEXTEND
+    REMA
+    LOAD2(1, 0x891AF0C)
+    ENUN
+    CURSOR_CHAR(0xC0)
+    STAL(0x3C)
+    CURE
+    MUSC(0x32)
+    TEXTSTART
+    TEXTSHOW(0xAC9)
+    TEXTEND
+    REMA
+    LOAD2(1, 0x891AF34)
+    STAL2(0xF)
+    FADI(0x10)
+    ENUN
+    CLEA
+    CLEE
+    CLEN
+    CAMERA(0x1A, 0xD)
+    EvtSetLoadUnitNoREDA
+    LOAD2(1, 0x891AF84)
+    ENUN
+    FADU(0x10)
+    LOAD2(1, 0x891AF84)
+    ENUN
+    SOUN(0xB1)
+    TILECHANGE(0)
+    LOAD2(1, 0x891AFE8)
+    ENUN
+    STAL(0xF)
+    CAMERA(0x1A, 0)
+    MOVE_1STEP(8, 0x1F, 2)
+    ENUN
+    CURSOR_CHAR(0x1F)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x1D)
+    CALL(0x8A60420)
+    TEXTSHOW(0xACA)
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 8)
+    FAWI(2)
+    REMA
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x4B)
+    UNIT_COLORS(4)
+    LOAD2(1, 0x891B0C4)
+    ENUN
+    FAWU(2)
+    BROWNBOXTEXT(0x195, 8, 8)
+    LOAD2(1, 0x891B09C)
+    ENUN
+    CURSOR_CHAR(0x1F)
+    STAL(0x3C)
+    CURE
+    EvtBgmFadeIn(0x2D, 6)
+    SVAL(EVT_SLOT_2, 0x44)
+    SVAL(EVT_SLOT_3, 0xACB)
+    CALL(0x8A60448)
+    LOAD2(1, 0x891B100)
+    ENUN
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x44)
+    SVAL(EVT_SLOT_3, 0xACC)
+    CALL(0x8A60448)
+    LOAD2(1, 0x891B13C)
+    ENUN
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60CF0)
+    CURSOR_CHAR(0x1F)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x44)
+    CALL(0x8A60420)
+    TEXTSHOW(0xACD)
+    TEXTEND
+    REMA
+    EvtBgmFadeIn(0x7FFF, 8)
+    FAWI(2)
+    CLEA
+    CLEE
+    CLEN
+    UNIT_COLORS(0)
+    SVAL(EVT_SLOT_B, 0x1A)
+    LOMA(0x46)
+    TILECHANGE(0)
+    LOAD2(1, 0x891AF84)
+    ENUN
+    LOAD2(1, 0x891AFE8)
+    ENUN
+    MOVE_1STEP(0xFFFF, 0x1F, 2)
+    EvtBgmFadeIn(0x32, 6)
+    FAWU(2)
+    CURSOR_CHAR(0x1F)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x1D)
+    CALL(0x8A60420)
+    TEXTSHOW(0xACE)
+    TEXTEND
+    FADI(0x10)
+    REMA
+    CLEA
+    CLEE
+    CLEN
+    LOAD1(1, 0x891A904)
+    ENUN
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x4D)
+    FADU(0x10)
+    LOAD2(1, 0x891B164)
+    ENUN
+    CURSOR_CHAR(0x1F)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x43)
+    CALL(0x8A60420)
+    TEXTSHOW(0xACF)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, 0x43)
+    CALL(0x8A60420)
+    TEXTSHOW(0xAD0)
+    TEXTEND
+    REMA
+    CALL(0x85B9D24)
+    SVAL(EVT_SLOT_3, 0x4A)
+    GIVEITEMTO(0xF)
+    CALL(0x85B9D24)
+    SVAL(EVT_SLOT_3, 0x93)
+    GIVEITEMTO(0xF)
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    SVAL(EVT_SLOT_B, 0x4000E)
+    LOMA(0x1B)
+    TILECHANGE(0)
+    LOAD2(1, 0x891AB98)
+    ENUN
+    MUSC(0x26)
+    FADU(0x10)
+    LOAD2(1, 0x891AC38)
+    ENUN
+    CURSOR_CHAR(0xCC)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xAD1)
+    TEXTEND
+    REMA
+    FADI(0x10)
+    ENUT(0x76)
+    MNCH(0x1C)
+    ENDA
+    CALL(0x8A682C4)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_013_A6E680[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap13"))) = {
+    SVAL(EVT_SLOT_2, 0x891A92C)
+    CALL(0x8A603AC)
+    CALL(0x8A6E12C)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891A954)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x891AC60)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891A990)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x891AC9C)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891A9CC)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x891ACD8)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891AA08)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x891AD14)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    COUNTER_SET(0, 2)
+    CHECK_TUTORIAL
+    BNE(0, 0xC, 0)
+    CHECK_HARD
+    BEQ(0, 0xC, 0)
+    COUNTER_SET(0, 4)
+    LABEL(0)
+    ENUF(0xD)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891AA44)
+    CALL(0x8A603AC)
+    COUNTER_DEC(0)
+    ENUF(0xD)
+    COUNTER_CHECK(0)
+    BNE(0, 0xC, 0)
+    ENUT(0xD)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891AA80)
+    CALL(0x8A603D4)
+    SVAL(EVT_SLOT_2, 0x891AAD0)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    COUNTER_SET(1, 1)
+    ENUF(0x10)
+    EVBIT_T(7)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_014_A6EDFC[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap14"))) = {
+    CALL(0x8A68B78)
+    SVAL(EVT_SLOT_B, 0)
+    LOMA(0x1D)
+    LOAD1(0, 0x8911390)
+    ENUN
+    LOAD1(1, 0x891BBDC)
+    ENUN
+    SVAL(EVT_SLOT_2, 0x891C08C)
+    SVAL(EVT_SLOT_3, 1)
+    CALL(0x8A60380)
+    CALL(0x85B9DBC)
+    ENUT(0xE)
+    ENUT(0xD)
+    ENDA
+    CALL(0x8A68F3C)
+    MNCH(0x1E)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891C03C)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891C064)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0x90)
+    COUNTER_SET(0, 1)
+    ENUF(0xE)
+    EVBIT_T(7)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_015_A6EF04[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap15"))) = {
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0x8F)
+    SVAL(EVT_SLOT_1, 0x10303)
+    CHAI(0x91)
+    COUNTER_SET(1, 1)
+    ENUF(0xD)
+    EVBIT_T(7)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_016_A6EFD8[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap16"))) = {
+    EVENT_WORD(0x08A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891C4C4)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891C500)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891C53C)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    COUNTER_SET(0, 5)
+    ENUF(0xE)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891C488)
+    CALL(0x8A603AC)
+    COUNTER_DEC(0)
+    ENUF(0xE)
+    COUNTER_CHECK(0)
+    BNE(0, 0xC, 0)
+    ENUT(0xE)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0xC0013)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xE0011)
+    SENQUEUE1
+    SVAL(EVT_SLOT_2, 0x11200)
+    CALL(0x8A607B4)
+    SVAL(EVT_SLOT_1, 0xD0012)
+    SENQUEUE1
+    SVAL(EVT_SLOT_2, 0x10E00)
+    CALL(0x8A607B4)
+    EVBIT_T(7)
+    ENDA
+    LOAD1(1, 0x891D044)
+    ENUN
+    SVAL(EVT_SLOT_2, 0x891D38C)
+    SVAL(EVT_SLOT_3, 1)
+    CALL(0x8A60380)
+    CALL(0x8A69F50)
+    ENUT(8)
+    ENUT(0xA)
+    ENUT(0xC)
+    ENUT(0xE)
+    ENDA
+    MUSC(0x49)
+    FADI(0x10)
+    CLEA
+    CLEE
+    CLEN
+    CAMERA2(0xE, 0xE)
+    LOAD2(1, 0x891D288)
+    ENUN
+    FADU(0x10)
+    SPAWN_ENEMY(0x40, 0, 0)
+    SVAL(EVT_SLOT_2, 0x40)
+    MOVE_CLOSEST(0xFFFF, 0xFFFD, 0x12, 0xB)
+    CALL(0x8A60630)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB3E)
+    TEXTEND
+    REMA
+    MOVE_1STEP(0, 0xF, 1)
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60654)
+    DISA(0x40)
+    MOVE_1STEP(0, 1, 1)
+    MOVE(0, 0xF, 0x12, 9)
+    STAL2(0x14)
+    FADI(0x10)
+    ENUN
+    CAMERA(0x16, 0)
+    SPAWN_ENEMY(0x40, 0x13, 1)
+    MOVE(0, 0xF, 0x13, 4)
+    FADU(0x10)
+    ENUN
+    MUSC(0x2D)
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB45)
+    TEXTEND
+    REMA
+    MOVE_1STEP(0, 0xF, 3)
+    ENUN
+    EVENT_WORD(0x000F4620)
+    STAL(0x1E)
+    EVENT_WORD(0x0000462F)
+    CURSOR_CHAR(0xF)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB46)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60654)
+    SVAL(EVT_SLOT_2, 0x40)
+    MOVE_CLOSEST(0xFFFF, 0xFFFD, 0x13, 2)
+    CALL(0x8A60630)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB47)
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60CF0)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB48)
+    TEXTEND
+    EvtBgmFadeIn(0x7FFF, 2)
+    TEXTCONT
+    TEXTEND
+    MUSC(0x2C)
+    TEXTCONT
+    TEXTEND
+    REMA
+    EvtBgmFadeIn(0x7FFF, 6)
+    SVAL(EVT_SLOT_2, 0x40)
+    CALL(0x8A60654)
+    LOAD2(1, 0x891D314)
+    ENUN
+    CURSOR_CHAR(1)
+    STAL(0x3C)
+    CURE
+    TEXTSTART
+    TEXTSHOW(0xB49)
+    TEXTEND
+    MUSC(0x32)
+    TEXTCONT
+    TEXTEND
+    REMA
+    SVAL(EVT_SLOT_2, 0x4C)
+    CALL(0x8A60420)
+    TEXTSHOW(0xB4A)
+    TEXTEND
+    REMA
+    MNCH(0x20)
+    ENDA
+    CHECK_EVENTID(6)
+    BEQ(0, 0xC, 0)
+    ENUT(3)
+    CALL(0x8A6F124)
+    ENDB
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(8)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891D418)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xA)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891D454)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891D490)
+    CALL(0x8A603D4)
+    SVAL(EVT_SLOT_2, 0x891D4E0)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xE)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891D508)
+    CALL(0x8A603D4)
+    SVAL(EVT_SLOT_2, 0x891D544)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_017_A6F47C[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap17"))) = {
+    EVENT_WORD(0x00000010)
+    SVAL(EVT_SLOT_3, 0xB58)
+    CALL(0x8A60448)
+    EVBIT_T(7)
+    ENDA
+    CALL(0x8A6A76C)
+    MNCH(0x21)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891E474)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891E49C)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BEQ(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x891E4C4)
+    CALL(0x8A603AC)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BNE(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x891E500)
+    CALL(0x8A603AC)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BEQ(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x891E53C)
+    CALL(0x8A603AC)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BNE(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x891E578)
+    CALL(0x8A603AC)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891E5B4)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891E618)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891EC0C)
+    CALL(0x8A6ABAC)
+    LOAD1(1, 0x891EC0C)
+    ENUN
+    LOAD1(1, 0x891EFB8)
+    ENUN
+    SVAL(EVT_SLOT_2, 0x891F3DC)
+    SVAL(EVT_SLOT_3, 1)
+    CALL(0x8A60380)
+    CALL(0x85B9DBC)
+    ENUT(0xA)
+    ENUT(0xC)
+    ENUT(0xE)
+    ENUT(0x10)
+    ENDA
+    CALL(0x8A6AD44)
+    ENDA
+    CALL(0x8A6ADB0)
+    STAL(0x1E)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    FAWI(2)
+    EvtBgmFadeIn(0x2C, 8)
+    REMOVEPORTRAITS
+    BACG(0x14)
+    FAWU(2)
+    BROWNBOXTEXT(0x195, 8, 8)
+    TEXTSHOW(0xB77)
+    TEXTEND
+    REMA
+    FAWI(0x10)
+    REMOVEPORTRAITS
+    BACG(0x12)
+    FAWU(0x10)
+    TEXTSHOW(0xB78)
+    TEXTEND
+    REMA
+    EvtBgmFadeIn(0x7FFF, 8)
+    FAWI(2)
+    CLEAN
+    FAWU(2)
+    MUSC(0x2D)
+    CURSOR_CHAR(0x40)
+    STAL(0x3C)
+    CURE
+    SVAL(EVT_SLOT_2, 0x4E)
+    CALL(0x8A60420)
+    TEXTSHOW(0xB79)
+    TEXTEND
+    FADI(0x10)
+    REMA
+    MNC2(0x22)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BNE(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x891EFE0)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x891F01C)
+    CALL(0x8A603D4)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BEQ(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x891F044)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x891F080)
+    CALL(0x8A603D4)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    COUNTER_SET(0, 3)
+    ENUF(0xA)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891F0A8)
+    CALL(0x8A603AC)
+    COUNTER_DEC(0)
+    ENUF(0xA)
+    COUNTER_CHECK(0)
+    BNE(0, 0xC, 0)
+    ENUT(0xA)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xC)
+    COUNTER_SET(1, 6)
+    EVBIT_T(7)
+    ENDA
+    ENUF(0xC)
+    COUNTER_CHECK(1)
+    SVAL(EVT_SLOT_7, 5)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 3)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 1)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_2, 0x891F0E4)
+    CALL(0x8A603AC)
+    COUNTER_CHECK(1)
+    BNE(0, 0xC, 0)
+    ENUT(0xC)
+    LABEL(0)
+    COUNTER_DEC(1)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0xE)
+    COUNTER_SET(2, 6)
+    EVBIT_T(7)
+    ENDA
+    ENUF(0xE)
+    COUNTER_CHECK(2)
+    SVAL(EVT_SLOT_7, 5)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 3)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 1)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_2, 0x891F134)
+    CALL(0x8A603AC)
+    COUNTER_CHECK(2)
+    BNE(0, 0xC, 0)
+    ENUT(0xE)
+    LABEL(0)
+    COUNTER_DEC(2)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    ENUF(0x10)
+    COUNTER_SET(3, 0xD)
+    EVBIT_T(7)
+    ENDA
+    ENUF(0x10)
+    COUNTER_CHECK(3)
+    SVAL(EVT_SLOT_7, 0xB)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 0xA)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 8)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 7)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 5)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 4)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 2)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_7, 1)
+    BEQ(0, 0xC, 7)
+    SVAL(EVT_SLOT_2, 0x891F184)
+    CALL(0x8A603AC)
+    COUNTER_CHECK(3)
+    BNE(0, 0xC, 0)
+    ENUT(0x10)
+    LABEL(0)
+    COUNTER_DEC(3)
+    EVBIT_T(7)
+    ENDA
+    CHECK_TURNS
+    SVAL(EVT_SLOT_1, 1)
+    SAND(EVT_SLOT_C, EVT_SLOT_C, EVT_SLOT_1)
+    BNE(0, 0xC, 0)
+    SVAL(EVT_SLOT_2, 0x891F1D4)
+    CALL(0x8A603AC)
+    SVAL(EVT_SLOT_2, 0x891F224)
+    CALL(0x8A603D4)
+    SVAL(EVT_SLOT_2, 0x891F260)
+    CALL(0x8A603D4)
+    SVAL(EVT_SLOT_2, 0x891F288)
+    CALL(0x8A603D4)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891F2B0)
+    CALL(0x8A603D4)
+    EVBIT_T(7)
+    ENDA
+};
 u8 frontier_df3_eventscr_ch_018_A6FAE4[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap18"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_018_A6FAE4.gbapal");
-u8 frontier_df3_eventscr_ch_019_A6FB48[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap19"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_019_A6FB48.bin");
-u8 frontier_df3_eventscr_ch_020_A6FB9C[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap20"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_020_A6FB9C.bin");
-u8 frontier_df3_eventscr_ch_021_A6FC48[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap21"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_021_A6FC48.bin");
+EventListScr frontier_df3_eventscr_ch_019_A6FB48[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap19"))) = {
+    ENUF(0xC)
+    COUNTER_SET(1, 1)
+    EVBIT_T(7)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_020_A6FB9C[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap20"))) = {
+    ENUF(0xD)
+    COUNTER_SET(2, 0xA)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x891F978)
+    CALL(0x8A603AC)
+    COUNTER_DEC(2)
+    ENUF(0xD)
+    COUNTER_CHECK(2)
+    BNE(0, 0xC, 0)
+    ENUT(0xD)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0xB1)
+    EVBIT_T(7)
+    ENDA
+};
+EventListScr frontier_df3_eventscr_ch_021_A6FC48[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap21"))) = {
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x891FBD0)
+    ENUN
+    CALL(0x85B9DBC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x71)
+    SVAL(EVT_SLOT_3, 0x24)
+    CALL(0x8A60A28)
+    SVAL(EVT_SLOT_2, 0x24)
+    SVAL(EVT_SLOT_3, 0x25)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x891FE20)
+    ENUN
+    CALL(0x85B9DBC)
+    ENUT(8)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x72)
+    SVAL(EVT_SLOT_3, 0x24)
+    CALL(0x8A60A28)
+    SVAL(EVT_SLOT_2, 0x24)
+    SVAL(EVT_SLOT_3, 0x26)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0xB9)
+    SVAL(EVT_SLOT_1, 0x11200)
+    CHAI(0xBA)
+    ENUF(8)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8920028)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x8920140)
+    ENUN
+    CALL(0x85B9DBC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x67)
+    CALL(0x8A602BC)
+    SVAL(EVT_SLOT_2, 0x73)
+    SVAL(EVT_SLOT_3, 0x24)
+    CALL(0x8A60A28)
+    SVAL(EVT_SLOT_2, 0x24)
+    SVAL(EVT_SLOT_3, 0x27)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x892042C)
+    ENUN
+    CALL(0x85B9DBC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x74)
+    SVAL(EVT_SLOT_3, 0x24)
+    CALL(0x8A60A28)
+    SVAL(EVT_SLOT_2, 0x24)
+    SVAL(EVT_SLOT_3, 0x28)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x8920698)
+    ENUN
+    CALL(0x85B9DBC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x75)
+    SVAL(EVT_SLOT_3, 0x24)
+    CALL(0x8A60A28)
+    SVAL(EVT_SLOT_2, 0x24)
+    SVAL(EVT_SLOT_3, 0x29)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89209E0)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x8920AD0)
+    ENUN
+    CALL(0x85B9DBC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x69)
+    CALL(0x8A602BC)
+    SVAL(EVT_SLOT_2, 0x76)
+    SVAL(EVT_SLOT_3, 0x24)
+    CALL(0x8A60A28)
+    SVAL(EVT_SLOT_2, 0x24)
+    SVAL(EVT_SLOT_3, 0x2A)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x8920EC0)
+    ENUN
+    CALL(0x85B9DBC)
+    ENUT(0xC)
+    ENUT(0xD)
+    ENUT(0xE)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x77)
+    SVAL(EVT_SLOT_3, 0x24)
+    CALL(0x8A60A28)
+    SVAL(EVT_SLOT_2, 0x24)
+    SVAL(EVT_SLOT_3, 0x2B)
+    CALL(0x8A60A58)
+    ENDA
+    CHECK_EXISTS(0xAA)
+    BEQ(0, 0xC, 0)
+    CALL(0x8A6030C)
+    LABEL(0)
+    CAMERA(9, 0x10)
+    TILECHANGE(0)
+    EVBIT_T(7)
+    ENDA
+    CHECK_EXISTS(0xAC)
+    BEQ(1, 0xC, 0)
+    CALL(0x8A6030C)
+    LABEL(1)
+    CAMERA(0x11, 0xD)
+    TILECHANGE(1)
+    EVBIT_T(7)
+    ENDA
+    CHECK_EXISTS(0xB0)
+    BEQ(2, 0xC, 0)
+    CALL(0x8A6030C)
+    LABEL(2)
+    CAMERA(0x17, 4)
+    TILECHANGE(2)
+    ENUF(0xC)
+    EVBIT_T(7)
+    ENDA
+    CHECK_EXISTS(0xB3)
+    BEQ(3, 0xC, 0)
+    CALL(0x8A6030C)
+    LABEL(3)
+    CAMERA(0xC, 0)
+    TILECHANGE(3)
+    ENUF(0xD)
+    EVBIT_T(7)
+    ENDA
+    CHECK_EXISTS(0xB7)
+    BEQ(4, 0xC, 0)
+    CALL(0x8A6030C)
+    LABEL(4)
+    CAMERA(5, 0)
+    TILECHANGE(4)
+    ENUF(0xE)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8921154)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8921190)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89211CC)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x89212BC)
+    ENUN
+    CALL(0x85B9DBC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x6E)
+    CALL(0x8A602BC)
+    SVAL(EVT_SLOT_2, 0x24)
+    CALL(0x8A60AB4)
+    ENDA
+    ASMC(0x8087F25)
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x89215C8)
+    ENUN
+    CALL(0x85B9DBC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x2E)
+    SVAL(EVT_SLOT_3, 0x2F)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8921910)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x892194C)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0xB9)
+    SVAL(EVT_SLOT_1, 0x11200)
+    CHAI(0xBA)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x8921A3C)
+    ENUN
+    CALL(0x85B9DBC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x2E)
+    SVAL(EVT_SLOT_3, 0x30)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    SVAL(EVT_SLOT_1, 0x10000)
+    CHAI(0xB9)
+    SVAL(EVT_SLOT_1, 0x11200)
+    CHAI(0xBA)
+    SVAL(EVT_SLOT_1, 0x10E06)
+    CHAI(0xBD)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x8921F00)
+    ENUN
+    CALL(0x85B9DBC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x2E)
+    SVAL(EVT_SLOT_3, 0x31)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89222AC)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89222D4)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8922310)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8922338)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8922360)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x8922478)
+    ENUN
+    CALL(0x85B9DBC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8922770)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8922798)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x2E)
+    SVAL(EVT_SLOT_3, 0x32)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x8922888)
+    ENUN
+    CALL(0x85B9DBC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x68)
+    CALL(0x8A602BC)
+    SVAL(EVT_SLOT_2, 0x2E)
+    SVAL(EVT_SLOT_3, 0x33)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8922B1C)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8922B44)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8922B6C)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x8922C70)
+    ENUN
+    CALL(0x85B9DBC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x2E)
+    SVAL(EVT_SLOT_3, 0x34)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8922FE0)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x892301C)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8923058)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8923094)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x89231C8)
+    ENUN
+    CALL(0x85B9DBC)
+    ENUT(8)
+    ENUT(0xA)
+    ENUT(0xC)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x6A)
+    CALL(0x8A602BC)
+    SVAL(EVT_SLOT_2, 0x2E)
+    SVAL(EVT_SLOT_3, 0x35)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x892340C)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8923434)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8923470)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8923498)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    COUNTER_SET(0, 3)
+    ENUF(8)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89234C0)
+    CALL(0x8A603AC)
+    COUNTER_DEC(0)
+    ENUF(8)
+    COUNTER_CHECK(0)
+    BNE(0, 0xC, 0)
+    ENUT(8)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    COUNTER_SET(1, 3)
+    ENUF(0xA)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89234E8)
+    CALL(0x8A603AC)
+    COUNTER_DEC(1)
+    ENUF(0xA)
+    COUNTER_CHECK(1)
+    BNE(0, 0xC, 0)
+    ENUT(0xA)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    COUNTER_SET(2, 5)
+    ENUF(0xC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8923510)
+    CALL(0x8A603AC)
+    COUNTER_DEC(2)
+    ENUF(0xC)
+    COUNTER_CHECK(2)
+    BNE(0, 0xC, 0)
+    ENUT(0xC)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8923538)
+    CALL(0x8A603AC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A60960)
+    SVAL(EVT_SLOT_D, 0)
+    SVAL(EVT_SLOT_1, 0x32)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0x19)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 0xF)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    SVAL(EVT_SLOT_1, 5)
+    SENQUEUE1
+    CALL(0x8A60984)
+    LOAD1(1, 0x8923628)
+    ENUN
+    CALL(0x85B9DBC)
+    ENUT(8)
+    ENUT(0xA)
+    ENUT(0xC)
+    ENUT(0xE)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x2E)
+    SVAL(EVT_SLOT_3, 0x36)
+    CALL(0x8A60A58)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    COUNTER_SET(3, 2)
+    ENUF(8)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8923970)
+    CALL(0x8A603AC)
+    COUNTER_DEC(3)
+    ENUF(8)
+    COUNTER_CHECK(3)
+    BNE(0, 0xC, 0)
+    ENUT(8)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    COUNTER_SET(4, 2)
+    ENUF(0xA)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x8923998)
+    CALL(0x8A603AC)
+    COUNTER_DEC(4)
+    ENUF(0xA)
+    COUNTER_CHECK(4)
+    BNE(0, 0xC, 0)
+    ENUT(0xA)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    COUNTER_SET(5, 2)
+    ENUF(0xC)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89239C0)
+    CALL(0x8A603AC)
+    COUNTER_DEC(5)
+    ENUF(0xC)
+    COUNTER_CHECK(5)
+    BNE(0, 0xC, 0)
+    ENUT(0xC)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0)
+    CALL(0x8A602F0)
+    SVAL(EVT_SLOT_1, 0x10300)
+    CHAI(0xBD)
+    COUNTER_SET(6, 4)
+    ENUF(0xE)
+    EVBIT_T(7)
+    ENDA
+    SVAL(EVT_SLOT_2, 0x89239FC)
+    CALL(0x8A603AC)
+    COUNTER_DEC(6)
+    ENUF(0xE)
+    COUNTER_CHECK(6)
+    BNE(0, 0xC, 0)
+    ENUT(0xE)
+    LABEL(0)
+    EVBIT_T(7)
+    ENDA
+};
