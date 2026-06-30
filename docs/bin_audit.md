@@ -32,10 +32,10 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 290 | 15.3% |
-| **FLOOR** | 1128 | 59.7% |
-| **UNCERTAIN** | 473 | 25.0% |
-| **TOTAL** | 1891 | 100.0% |
+| **MISS** | 285 | 15.1% |
+| **FLOOR** | 1128 | 59.8% |
+| **UNCERTAIN** | 473 | 25.1% |
+| **TOTAL** | 1886 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -46,7 +46,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | sound-m4a-tables | MISS | 1 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 4 | fe8u sound/voicegroups/*.s (documented ceiling) |
 | menu-strings | MISS | 22 | fe8u C literals (src/menu_def.c) |
-| unitdef-residuals | MISS | 52 | fe8u src/events_udefs.c typed C |
+| unitdef-residuals | MISS | 47 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 1 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | TSA/.map.bin | FLOOR | 979 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
@@ -90,9 +90,9 @@ under MISS, asserted by the self-test guards below).
 - `graphics/banim/efx*` effect bins are classified **FLOOR**.
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 
-## MISS (290) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (285) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>290 entries</summary>
+<details><summary>285 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -242,7 +242,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_031_918C90.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_032_91908C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_033_9191E0.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_034_919A90.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_035_91A580.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_036_91AB20.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_037_91AC38.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
@@ -258,13 +257,9 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_050_91EE14.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_051_91F300.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_052_91F89C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_054_91FD38.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_055_91FE20.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_056_920140.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_057_92042C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_059_920AD0.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_060_921140.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_068_922FCC.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_070_923510.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_000_5E0E94.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_001_5E37CC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
