@@ -827,23 +827,16 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_banim_ekrdragonfx_10.s \
                            asm/dat_worldmap_node_data_gf.s \
                            asm/dat_worldmap_gmapunit_p1636.s \
-                           asm/dat_EventScr_Ch1Tut_TradeSelectGalliamIdle2_ref.s \
-                           asm/dat_EventScr_Ch1Tut_TradeSelectGalliamIdle1_ref.s \
                            asm/dat_worldmap_gmapunit_p1117.s \
                            asm/dat_worldmap_gmapunit_p1037.s \
                            asm/dat_worldmap_gmapunit_p702.s \
                            asm/dat_worldmap_gmapunit_p58.s \
-                           asm/dat_EventScr_Prologue_RenaisThroneCutscene_ref.s \
                            asm/dat_worldmap_gmapunit_p946.s \
-                           asm/dat_EventScr_Ch1_Turn_AllyReinforceArrive_ref.s \
-                           asm/dat_EventScr_Ch1Tut_EirikaVisitHouseIdle2_ref.s \
-                           asm/dat_EventScr_Ch1Tut_EirikaVisitHouseIdle1_ref.s \
                            asm/dat_worldmap_gmapunit_p431.s \
                            asm/dat_data_banim_p150.s \
                            asm/dat_anim_trap_gas.s \
                            asm/dat_worldmap_gmapunit_p758.s \
                            asm/dat_ProcScr_LASurrender_HandleUnitDeaths_ref.s \
-                           asm/dat_EventScr_Ch1Tut_EirikaVisitHouseInit_ref.s \
                            asm/dat_worldmap_gmapunit_p661.s \
                            asm/dat_worldmap_gmapunit_p648.s \
                            asm/dat_worldmap_gmapunit_p647.s \
@@ -869,7 +862,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_bg_p11.s \
                            asm/dat_UnitDef_Event_Ch1EnemyReinforce_ref.s \
                            asm/dat_EventScr_MapSupportConversation_ref.s \
-                           asm/dat_EventScr_Ch1Tut_SethMoveToEnemy_ref.s \
                            asm/dat_data_bg_p34.s \
                            asm/dat_gProcScr_GorgonEggHatchDisplay_ref.s \
                            asm/dat_gProcScr_ChapterIntroTitleOnly_ref.s \
@@ -877,21 +869,14 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_EventScr_Prologue_OneEnemyLeft_ref.s \
                            asm/dat_data_bg_p9.s \
                            asm/dat_worldmap_gmapunit_p1417.s \
-                           asm/dat_EventScr_Prologue_EndingScene_ref.s \
-                           asm/dat_EventScr_Ch14b_BeginningScene_ref.s \
-                           asm/dat_EventScr_Ch10a_BeginningScene_ref.s \
                            asm/dat_data_bg_p15.s \
                            asm/dat_worldmap_gmapunit_p1582.s \
                            asm/dat_worldmap_gmapunit_p1601.s \
                            asm/dat_data_bg_p19.s \
                            asm/dat_data_bg_p12.s \
-                           asm/dat_EventScr_Ch1Tut_BeforeSethMoveToEnemy_ref.s \
                            asm/dat_worldmap_gmapunit_p1413.s \
                            asm/dat_gProcScr_PoisonDamageDisplay_ref.s \
                            asm/dat_data_bg_p2.s \
-                           asm/dat_EventScr_Prologue_GiveRapier_ref.s \
-                           asm/dat_EventScr_Ch9a_BeginningScene_ref.s \
-                           asm/dat_EventScr_Ch5x_BeginningScene_ref.s \
                            asm/dat_worldmap_gmapunit_p1634.s \
                            asm/dat_worldmap_minimap_p0.s \
                            asm/dat_worldmap_gmapunit_p1370.s \
@@ -904,17 +889,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_ProcScr_SpellAssocNightMare_ref.s \
                            asm/dat_ProcScr_SpellAssocAntitoxin_ref.s \
                            asm/dat_ProcScr_LinkArenaPhaseIntro_ref.s \
-                           asm/dat_EventScr_Prologue_TutorialA_ref.s \
-                           asm/dat_EventScr_Prologue_Tutorial4_ref.s \
-                           asm/dat_EventScr_Prologue_Tutorial0_ref.s \
-                           asm/dat_EventScr_Ch8_BeginningScene_ref.s \
-                           asm/dat_EventScr_Ch7_BeginningScene_ref.s \
-                           asm/dat_EventScr_Ch6_BeginningScene_ref.s \
-                           asm/dat_EventScr_Ch5_BeginningScene_ref.s \
-                           asm/dat_EventScr_Ch4_BeginningScene_ref.s \
-                           asm/dat_EventScr_Ch3_BeginningScene_ref.s \
-                           asm/dat_EventScr_Ch2_BeginningScene_ref.s \
-                           asm/dat_EventScr_Ch1_BeginningScene_ref.s \
                            asm/dat_worldmap_gmapunit_p1411.s \
                            asm/dat_worldmap_gmapunit_p1395.s \
                            asm/dat_worldmap_gmapunit_p1390.s \
@@ -924,12 +898,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1326.s \
                            asm/dat_worldmap_gmapunit_p1323.s \
                            asm/dat_gProcScr_TrapDamageDisplay_ref.s \
-                           asm/dat_EventScr_FloorClearInTower_ref.s \
-                           asm/dat_EventScr_Ch21b_EndingScene_ref.s \
-                           asm/dat_EventScr_Ch13b_EndingScene_ref.s \
-                           asm/dat_EventScr_Ch13a_EndingScene_ref.s \
-                           asm/dat_EventScr_Ch11a_EndingScene_ref.s \
-                           asm/dat_EventScr_Ch10a_EndingScene_ref.s \
                            asm/dat_data_bg_p20.s \
                            asm/dat_worldmap_gmapunit_p1398.s \
                            asm/dat_worldmap_gmapunit_p1337.s \
@@ -942,14 +910,10 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_ProcScr_SpellAssocBerserk_ref.s \
                            asm/dat_ProcScr_SpellAssocBarrier_ref.s \
                            asm/dat_MenuItemDef_WMGeneralMenu_ref.s \
-                           asm/dat_EventScr_Ch9a_EndingScene_ref.s \
-                           asm/dat_EventScr_Ch5x_EndingScene_ref.s \
                            asm/dat_data_bg_p30.s \
                            asm/dat_const_data_unit_icon_move_p2.s \
                            asm/dat_worldmap_gmapunit_p1056.s \
                            asm/dat_UnitDef_Event_PrologueValterGroup_ref.s \
-                           asm/dat_EventScr_Prologue_TutMessageTurn2_ref.s \
-                           asm/dat_EventScr_Prologue_TutEirikaAttack_ref.s \
                            asm/dat_gCharacterEndingTitleLut_ref.s \
                            asm/dat_const_data_unit_icon_move_p3.s \
                            asm/dat_ProcScr_SpellAssocUnlock_ref.s \
@@ -959,14 +923,8 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_ProcScr_SpellAssocElixir_ref.s \
                            asm/dat_ProcScr_EggDmgMapEffect1_ref.s \
                            asm/dat_PopupScr_ItemWasPilfered_ref.s \
-                           asm/dat_EventScr_SkirmishRetreat_ref.s \
-                           asm/dat_EventScr_Ch7_EndingScene_ref.s \
-                           asm/dat_EventScr_Ch6_EndingScene_ref.s \
-                           asm/dat_EventScr_Ch3_EndingScene_ref.s \
-                           asm/dat_EventScr_Ch2_EndingScene_ref.s \
                            asm/dat_worldmap_gmapunit_p1606.s \
                            asm/dat_worldmap_gmapunit_p1560.s \
-                           asm/dat_EventScr_Prologue_BeginningScene_ref.s \
                            asm/dat_gProcScr_SSPageNameCtrl_ref.s \
                            asm/dat_gProcScr_PhaseIntroText_ref.s \
                            asm/dat_gProcScr_ArenaUiResults_ref.s \
@@ -974,11 +932,8 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_ProcScr_SpellAssocTorch_ref.s \
                            asm/dat_ProcScr_SpellAssocSleep_ref.s \
                            asm/dat_FinalChapterMap2Changes_ref.s \
-                           asm/dat_EventScr_Tutorial_Exec1_ref.s \
                            asm/dat_gMPlayJumpTableTemplate_ref.s \
                            asm/dat_const_data_unit_icon_move_p29.s \
-                           asm/dat_EventScr_GiveTreasureToLuckyDog_ref.s \
-                           asm/dat_EventScr_Ch1Tut_ChooseSethTurn1_ref.s \
                            asm/dat_gProcScr_SSPageNumCtrl_ref.s \
                            asm/dat_gEventListCmdInfoTable_ref.s \
                            asm/dat_ProcScr_SpellAssocWarp_ref.s \
@@ -990,15 +945,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_LagdouRuins7MapChanges_ref.s \
                            asm/dat_LagdouRuins6MapChanges_ref.s \
                            asm/dat_LagdouRuins2MapChanges_ref.s \
-                           asm/dat_EventScr_SuspendPrompt_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial28_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial27_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial24_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial23_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial18_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial15_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial14_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial12_ref.s \
                            asm/dat_const_data_unit_icon_move_p45.s \
                            asm/dat_const_data_unit_icon_move_p26.s \
                            asm/dat_const_data_unit_icon_move_p18.s \
@@ -1007,22 +953,12 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1600.s \
                            asm/dat_ProcScr_SioPostBattle_ref.s \
                            asm/dat_ProcScr_MapAnimBattle_ref.s \
-                           asm/dat_EventScr_Ch3_Turn1Npc_ref.s \
-                           asm/dat_EventScr_Ch2_Village1_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial9_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial5_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial4_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial2_ref.s \
                            asm/dat_Ch13EphraimMapChanges_ref.s \
                            asm/dat_Ch12EphraimMapChanges_ref.s \
                            asm/dat_Ch11EphraimMapChanges_ref.s \
                            asm/dat_Ch10EphraimMapChanges_ref.s \
                            asm/dat_const_data_unit_icon_move_p83.s \
                            asm/dat_sMusicProc4Script_ref.s \
-                           asm/dat_EventScr_Ch21b_BeginningScene_ref.s \
-                           asm/dat_EventScr_Ch20b_BeginningScene_ref.s \
-                           asm/dat_EventScr_Ch18b_BeginningScene_ref.s \
-                           asm/dat_EventScr_Ch16b_BeginningScene_ref.s \
                            asm/dat_unit_icon_move_table_ref.s \
                            asm/dat_gClassReelOrderedLut_ref.s \
                            asm/dat_const_data_unit_icon_move_p17.s \
@@ -1066,8 +1002,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_Ap_WmHightLightMap3_ref.s \
                            asm/dat_data_bg_p23.s \
                            asm/dat_const_data_unit_icon_move_p37.s \
-                           asm/dat_EventScr_Prologue_TutorialB_ref.s \
-                           asm/dat_EventScr_Prologue_Tutorial1_ref.s \
                            asm/dat_EventScr_Ch1Tut_OnBeginning_ref.s \
                            asm/dat_EventListScr_Ch16b_Location_ref.s \
                            asm/dat_EventListScr_Ch15b_Location_ref.s \
@@ -1089,37 +1023,11 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1311.s \
                            asm/dat_const_data_unit_icon_move_p71.s \
                            asm/dat_const_data_unit_icon_move_p7.s \
-                           asm/dat_EventScr_Ch14b_EndingScene_ref.s \
                            asm/dat_EventListScr_Ch9a_Location_ref.s \
                            asm/dat_EventListScr_Ch8_Character_ref.s \
                            asm/dat_EventListScr_Ch1_Character_ref.s \
                            asm/dat_const_data_unit_icon_move_p36.s \
                            asm/dat_const_data_unit_icon_move_p14.s \
-                           asm/dat_EventScr_Ch19A_11_ref.s \
-                           asm/dat_EventScr_Ch18A_11_ref.s \
-                           asm/dat_EventScr_Ch16A_12_ref.s \
-                           asm/dat_EventScr_Ch16A_11_ref.s \
-                           asm/dat_EventScr_Ch15B_22_ref.s \
-                           asm/dat_EventScr_Ch15B_21_ref.s \
-                           asm/dat_EventScr_Ch15B_20_ref.s \
-                           asm/dat_EventScr_Ch15B_19_ref.s \
-                           asm/dat_EventScr_Ch15B_18_ref.s \
-                           asm/dat_EventScr_Ch15B_17_ref.s \
-                           asm/dat_EventScr_Ch15B_16_ref.s \
-                           asm/dat_EventScr_Ch15B_15_ref.s \
-                           asm/dat_EventScr_Ch15B_14_ref.s \
-                           asm/dat_EventScr_Ch15A_26_ref.s \
-                           asm/dat_EventScr_Ch15A_25_ref.s \
-                           asm/dat_EventScr_Ch15A_24_ref.s \
-                           asm/dat_EventScr_Ch15A_23_ref.s \
-                           asm/dat_EventScr_Ch15A_22_ref.s \
-                           asm/dat_EventScr_Ch15A_21_ref.s \
-                           asm/dat_EventScr_Ch15A_20_ref.s \
-                           asm/dat_EventScr_Ch15A_19_ref.s \
-                           asm/dat_EventScr_Ch15A_18_ref.s \
-                           asm/dat_EventScr_Ch15A_17_ref.s \
-                           asm/dat_EventScr_Ch14B_12_ref.s \
-                           asm/dat_EventScr_Ch10A_13_ref.s \
                            asm/dat_titlescreen.s \
                            asm/dat_data_bg_p16.s \
                            asm/dat_EventListScr_Ch5_Location_ref.s \
@@ -1129,57 +1037,19 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_bg_p6.s \
                            asm/dat_UnitDef_Ch4NPC_0_ref.s \
                            asm/dat_PopupScr_GotItem_ref.s \
-                           asm/dat_EventScr_Ruin_76_ref.s \
-                           asm/dat_EventScr_Ruin_74_ref.s \
-                           asm/dat_EventScr_Ruin_72_ref.s \
-                           asm/dat_EventScr_Ruin_70_ref.s \
-                           asm/dat_EventScr_Ruin_68_ref.s \
-                           asm/dat_EventScr_Ruin_66_ref.s \
-                           asm/dat_EventScr_Ruin_64_ref.s \
-                           asm/dat_EventScr_Ruin_62_ref.s \
-                           asm/dat_EventScr_Ruin_60_ref.s \
                            asm/dat_EventScr_Ruin_58_ref.s \
                            asm/dat_EventScr_Ruin_56_ref.s \
                            asm/dat_EventScr_Ruin_54_ref.s \
-                           asm/dat_EventScr_Ch21A_8_ref.s \
-                           asm/dat_EventScr_Ch21A_0_ref.s \
-                           asm/dat_EventScr_Ch16B_5_ref.s \
-                           asm/dat_EventScr_Ch16B_3_ref.s \
-                           asm/dat_EventScr_Ch16A_9_ref.s \
-                           asm/dat_EventScr_Ch15A_0_ref.s \
-                           asm/dat_EventScr_Ch14B_2_ref.s \
-                           asm/dat_EventScr_Ch14A_8_ref.s \
-                           asm/dat_EventScr_Ch14A_1_ref.s \
-                           asm/dat_EventScr_Ch14A_0_ref.s \
-                           asm/dat_EventScr_Ch13B_1_ref.s \
-                           asm/dat_EventScr_Ch13B_0_ref.s \
-                           asm/dat_EventScr_Ch13A_4_ref.s \
-                           asm/dat_EventScr_Ch13A_3_ref.s \
-                           asm/dat_EventScr_Ch12B_1_ref.s \
-                           asm/dat_EventScr_Ch12A_5_ref.s \
-                           asm/dat_EventScr_Ch12A_0_ref.s \
-                           asm/dat_EventScr_Ch11B_6_ref.s \
-                           asm/dat_EventScr_Ch11B_2_ref.s \
                            asm/dat_EventScr_Ch11B_1_ref.s \
-                           asm/dat_EventScr_Ch11B_0_ref.s \
                            asm/dat_EventScr_Ch10B_2_ref.s \
                            asm/dat_EventScr_Ch10B_1_ref.s \
-                           asm/dat_EventScr_Ch10B_0_ref.s \
-                           asm/dat_EventScr_Ch10A_8_ref.s \
-                           asm/dat_EventScr_Ch10A_0_ref.s \
                            asm/dat_Ch9EphMapChanges_ref.s \
                            asm/dat_worldmap_gmapunit_p369.s \
                            asm/dat_worldmap_gmapunit_p368.s \
                            asm/dat_const_data_unit_icon_move_p13.s \
                            asm/dat_worldmap_gmapunit_p517.s \
-                           asm/dat_EventScr_Ch5_EndingScene_ref.s \
-                           asm/dat_EventScr_Ch1_EndingScene_ref.s \
                            asm/dat_TileAnimations3_ref.s \
                            asm/dat_TileAnimations2_ref.s \
-                           asm/dat_EventScr_Ch9B_9_ref.s \
-                           asm/dat_EventScr_Ch9A_2_ref.s \
-                           asm/dat_EventScr_Ch8_11_ref.s \
-                           asm/dat_EventScr_Ch8_10_ref.s \
                            asm/dat_EventScr_Ch5_10_ref.s \
                            asm/dat_EventScr_Ch2_10_ref.s \
                            asm/dat_EventScr_9EEA58_ref.s \
@@ -1197,14 +1067,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_gProcScr_BKSEL_ref.s \
                            asm/dat_gClassReelData_ref.s \
                            asm/dat_anim_mapanim_torch.s \
-                           asm/dat_EventScr_Ch8_0_ref.s \
-                           asm/dat_EventScr_Ch6_1_ref.s \
-                           asm/dat_EventScr_Ch6_0_ref.s \
-                           asm/dat_EventScr_Ch5_5_ref.s \
-                           asm/dat_EventScr_Ch5_0_ref.s \
-                           asm/dat_EventScr_Ch4_2_ref.s \
-                           asm/dat_EventScr_Ch4_1_ref.s \
-                           asm/dat_EventScr_Ch4_0_ref.s \
                            asm/dat_Ch20MapChanges_ref.s \
                            asm/dat_Ch19MapChanges_ref.s \
                            asm/dat_Ch18MapChanges_ref.s \
@@ -1223,9 +1085,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_LagdouRuins8MapChanges_ref.s \
                            asm/dat_LagdouRuins5MapChanges_ref.s \
                            asm/dat_LagdouRuins3MapChanges_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial22_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial21_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial11_ref.s \
                            asm/dat_EventListScr_Ch9a_Turn_ref.s \
                            asm/dat_sProc_BMVSync_ref.s \
                            asm/dat_ProcScr_Popup_ref.s \
@@ -1241,7 +1100,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_UnitDef_Event_Ch5Ally_ref.s \
                            asm/dat_UnitDef_Event_Ch3Ally_ref.s \
                            asm/dat_UnitDef_Event_Ch2Ally_ref.s \
-                           asm/dat_EventScr_Ch2Tutorial8_ref.s \
                            asm/dat_Ch14EphraimMapChanges_ref.s \
                            asm/dat_gGameOptions_ref.s \
                            asm/dat___malloc_av__ref.s \
@@ -1373,9 +1231,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_UnitDef_Ch4NPC_1_ref.s \
                            asm/dat_UnitDef_Ch13ANPC_ref.s \
                            asm/dat_PopupScr_GotGold_ref.s \
-                           asm/dat_EventScr_Ch21A_9_ref.s \
-                           asm/dat_EventScr_Ch20B_2_ref.s \
-                           asm/dat_EventScr_Ch20B_1_ref.s \
                            asm/dat_EventScr_Ch16A_1_ref.s \
                            asm/dat_Ch10EirikaEvents_ref.s \
                            asm/dat_worldmap_gmapunit_p1387.s \
@@ -1406,7 +1261,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_bg_p3.s \
                            asm/dat_worldmap_gmapunit_p356.s \
                            asm/dat_TileAnimations1_ref.s \
-                           asm/dat_EventScr_Ch9A_4_ref.s \
                            asm/dat_EventScr_Ch5_11_ref.s \
                            asm/dat_EventScr_Ch4_10_ref.s \
                            asm/dat_Ch9EirikaEvents_ref.s \
@@ -1423,9 +1277,7 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1559.s \
                            asm/dat_worldmap_gmapunit_p1331.s \
                            asm/dat_PrologueEvents_ref.s \
-                           asm/dat_EventScr_Ch6_2_ref.s \
                            asm/dat_EventScr_Ch3_5_ref.s \
-                           asm/dat_EventScr_Ch3_0_ref.s \
                            asm/dat_EventScr_Ch2_8_ref.s \
                            asm/dat_data_bg_p1.s \
                            asm/dat_worldmap_gmapunit_p3.s \
