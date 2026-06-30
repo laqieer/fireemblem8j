@@ -98,6 +98,20 @@ src/*.s
 src/data/*.s
 src/data/map/*.s
 src/data/**/*.s
+# ...except hand-written AP (sprite/object animation) definition sources: these
+# replace the opaque INCBIN-of-.bin wrappers with editable include/ap.inc macro
+# .s source (axis #6). They are COMMITTED sources (no .c twin generates them).
+!src/data/anim_arrow_trap/dat_anim_arrow_trap.s
+!src/data/anim_fire_trap/dat_anim_fire_trap.s
+!src/data/anim_pike_trap/dat_anim_pike_trap.s
+!src/data/anim_trap_gas/dat_anim_trap_gas.s
+!src/data/anim_player_rank_fog/dat_anim_player_rank_fog.s
+!src/data/anim_worldmap_skirmish/dat_anim_worldmap_skirmish.s
+!src/data/anim_mapanim_statgain/dat_anim_mapanim_statgain.s
+!src/data/anim_mapanim_berserk_silence/dat_anim_mapanim_berserk_silence.s
+!src/data/anim_mapanim_torch/dat_anim_mapanim_torch.s
+!src/data/anim_mapanim_torchfx/dat_anim_mapanim_torchfx.s
+!src/data/anim_mapanim_objects/dat_anim_mapanim_objects.s
 # NON_MATCHING staging (D26): the readable C in src/nonmatching/*.c is tracked,
 # but the agbcc .s intermediate from `make nonmatching` is a build artifact.
 src/nonmatching/*.s
