@@ -146,6 +146,10 @@ src/data/**/*.s
 # ...and the prep-screen funds-banner AP-motion table (AP_DrawPreparationsBanner,
 # JP-only) interleaved with Img_PrepFunds.4bpp.lz, like fe8u's interleaved AP .s.
 !src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1601.s
+# ...and the warp/prep unit-swap cursor AP-motion table (gUnkData_2 / g085A0EA0):
+# region-same with fe8u src/data/ui/anim_085A0EA0.s, replaces the 11 split
+# g085A0EA0_*.bin INCBINs with the editable macro .s.
+!src/data/anim_085A0EA0/dat_anim_085A0EA0.s
 # NON_MATCHING staging (D26): the readable C in src/nonmatching/*.c is tracked,
 # but the agbcc .s intermediate from `make nonmatching` is a build artifact.
 src/nonmatching/*.s
