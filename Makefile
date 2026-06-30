@@ -611,7 +611,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_banim_p63.s \
                            asm/dat_banim_ekrskill_p0.s \
                            asm/dat_data_banim_p21.s \
-                           asm/dat_anim_worldmap_sprite.s \
                            asm/dat_data_banim_p62.s \
                            asm/dat_data_banim_p29.s \
                            asm/dat_data_banim_p28.s \
@@ -677,7 +676,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_banim_p218.s \
                            asm/dat_data_banim_p170.s \
                            asm/dat_worldmap_gmapunit_p778.s \
-                           asm/dat_worldmap_gmapunit_p1644.s \
                            asm/dat_data_banim_p25.s \
                            asm/dat_data_banim_p23.s \
                            asm/dat_worldmap_gmapunit_p1418.s \
@@ -690,7 +688,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p774.s \
                            asm/dat_fontgrp_data.s \
                            asm/dat_data_banim_p119.s \
-                           asm/dat_worldmap_gmapunit_p676.s \
                            asm/dat_banim_ekrdragonfx_2.s \
                            asm/dat_banim_ekrdragonfx_8.s \
                            asm/dat_banim_ekrdragonfx_7.s \
@@ -700,7 +697,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_banim_ekrtriangle_9.s \
                            asm/dat_data_titlescreen.s \
                            asm/dat_data_banim_p244.s \
-                           asm/dat_worldmap_gmapunit_p1643.s \
                            asm/dat_banim_battleparse.s \
                            asm/dat_worldmap_gmapunit_p759.s \
                            asm/dat_data_banim_p226.s \
@@ -726,7 +722,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p849.s \
                            asm/dat_data_banim_p234.s \
                            asm/dat_worldmap_gmapunit_p1628.s \
-                           asm/dat_worldmap_gmapunit_p1624.s \
                            asm/dat_worldmap_gmapunit_p1599.s \
                            asm/dat_worldmap_gmapunit_p1471.s \
                            asm/dat_data_banim_p203.s \
@@ -804,7 +799,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1371.s \
                            asm/dat_worldmap_gmapunit_p228.s \
                            asm/dat_worldmap_gmapunit_p1365.s \
-                           asm/dat_worldmap_gmapunit_p680.s \
                            asm/dat_worldmap_gmapunit_p264.s \
                            asm/dat_worldmap_gmapunit_p260.s \
                            asm/dat_sProcScr_DungeonRecord_UpdateNewRecordValues_ref.s \
@@ -860,7 +854,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_EventScr_Ch1Tut_GuideTerrainHeal_ref.s \
                            asm/dat_worldmap_gmapunit_p960.s \
                            asm/dat_data_bg_p11.s \
-                           asm/dat_UnitDef_Event_Ch1EnemyReinforce_ref.s \
                            asm/dat_EventScr_MapSupportConversation_ref.s \
                            asm/dat_data_bg_p34.s \
                            asm/dat_gProcScr_GorgonEggHatchDisplay_ref.s \
@@ -883,7 +876,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_gProcScr_TerrainHealDisplay_ref.s \
                            asm/dat_gProcScr_StatusDecayDisplay_ref.s \
                            asm/dat_data_bg_p14.s \
-                           asm/dat_UnitDef_Event_PrologueEnemy_ref.s \
                            asm/dat_ProcScr_SpellAssocVulenrary_ref.s \
                            asm/dat_ProcScr_SpellAssocPureWater_ref.s \
                            asm/dat_ProcScr_SpellAssocNightMare_ref.s \
@@ -902,8 +894,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1398.s \
                            asm/dat_worldmap_gmapunit_p1337.s \
                            asm/dat_data_banim_p162.s \
-                           asm/dat_UnitDef_Event_PrologueGradoShamans_ref.s \
-                           asm/dat_UnitDef_Event_PrologueGradoCavalry_ref.s \
                            asm/dat_ProcScr_SpellAssocSilence_ref.s \
                            asm/dat_ProcScr_SpellAssocRestore_ref.s \
                            asm/dat_ProcScr_SpellAssocRecover_ref.s \
@@ -913,7 +903,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_bg_p30.s \
                            asm/dat_const_data_unit_icon_move_p2.s \
                            asm/dat_worldmap_gmapunit_p1056.s \
-                           asm/dat_UnitDef_Event_PrologueValterGroup_ref.s \
                            asm/dat_gCharacterEndingTitleLut_ref.s \
                            asm/dat_const_data_unit_icon_move_p3.s \
                            asm/dat_ProcScr_SpellAssocUnlock_ref.s \
@@ -948,7 +937,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_const_data_unit_icon_move_p45.s \
                            asm/dat_const_data_unit_icon_move_p26.s \
                            asm/dat_const_data_unit_icon_move_p18.s \
-                           asm/dat_UnitDef_Event_PrologueEscapees_ref.s \
                            asm/dat_worldmap_gmapunit_p1600.s \
                            asm/dat_ProcScr_SioPostBattle_ref.s \
                            asm/dat_ProcScr_MapAnimBattle_ref.s \
@@ -1063,8 +1051,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p81.s \
                            asm/dat_worldmap_gmapunit_p24.s \
                            asm/dat_anim_player_rank_fog.s \
-                           asm/dat_UnitDef_Event_Ch5xAlly_ref.s \
-                           asm/dat_UnitDef_Event_Ch1Enemy_ref.s \
                            asm/dat_LagdouRuins8MapChanges_ref.s \
                            asm/dat_LagdouRuins5MapChanges_ref.s \
                            asm/dat_LagdouRuins3MapChanges_ref.s \
@@ -1077,11 +1063,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p762.s \
                            asm/dat_worldmap_gmapunit_p460.s \
                            asm/dat_worldmap_gmapunit_p422.s \
-                           asm/dat_UnitDef_Event_Ch8Ally_ref.s \
-                           asm/dat_UnitDef_Event_Ch7Ally_ref.s \
-                           asm/dat_UnitDef_Event_Ch5Ally_ref.s \
-                           asm/dat_UnitDef_Event_Ch3Ally_ref.s \
-                           asm/dat_UnitDef_Event_Ch2Ally_ref.s \
                            asm/dat_Ch14EphraimMapChanges_ref.s \
                            asm/dat_gGameOptions_ref.s \
                            asm/dat___malloc_av__ref.s \
@@ -2254,8 +2235,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_anim_worldmap_skirmish.s \
                            asm/dat_anim_mapanim_berserk_silence.s \
                            asm/dat_anim_arrow_trap.s \
-                           asm/dat_anim_worldmap_highlight.s \
-                           asm/dat_anim_mine_fx.s \
                            asm/dat_data_banim_p134.s \
                            asm/dat_anim_085A0EA0.s \
                            asm/data_08A64420.s \
