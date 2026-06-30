@@ -1,19 +1,14 @@
 #include "global.h"
 
-/* Migrated from asm/dat_fontgrp_data.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* 2bpp->4bpp colour-conversion LUTs (gFontgrp_3..15). These were previously
+ * INCBIN'd from graphics/fontgrp/gFontgrp_N.tsa.bin, but they are not tilemaps:
+ * each is a 256-entry u16 table that expands a packed 2bpp source byte into four
+ * 4bpp pixels via a per-table COLOR_CONVERT(). Generated from real source
+ * (fe8u src/data/fonts/color_lookup_tables.h) instead of opaque binaries; the
+ * macro output is byte-identical to the JP ROM (gated by `make compare`).
+ *
+ * FONTGRP_LUT pins each array to the named subsection the JP ldscript expects so
+ * placement is byte-identical (fe8u relies on whole-object placement instead). */
 
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_3[] = INCBIN_U16("graphics/fontgrp/gFontgrp_3.tsa.bin");
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_4[] = INCBIN_U16("graphics/fontgrp/gFontgrp_4.tsa.bin");
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_5[] = INCBIN_U16("graphics/fontgrp/gFontgrp_5.tsa.bin");
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_6[] = INCBIN_U16("graphics/fontgrp/gFontgrp_6.tsa.bin");
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_7[] = INCBIN_U16("graphics/fontgrp/gFontgrp_7.tsa.bin");
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_8[] = INCBIN_U16("graphics/fontgrp/gFontgrp_8.tsa.bin");
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_9[] = INCBIN_U16("graphics/fontgrp/gFontgrp_9.tsa.bin");
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_10[] = INCBIN_U16("graphics/fontgrp/gFontgrp_10.tsa.bin");
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_11[] = INCBIN_U16("graphics/fontgrp/gFontgrp_11.tsa.bin");
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_12[] = INCBIN_U16("graphics/fontgrp/gFontgrp_12.tsa.bin");
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_13[] = INCBIN_U16("graphics/fontgrp/gFontgrp_13.tsa.bin");
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_14[] = INCBIN_U16("graphics/fontgrp/gFontgrp_14.tsa.bin");
-SECTION(".rodata.dat_fontgrp_data") u16 gFontgrp_15[] = INCBIN_U16("graphics/fontgrp/gFontgrp_15.tsa.bin");
+#define FONTGRP_LUT SECTION(".rodata.dat_fontgrp_data")
+#include "src/data/fonts/color_lookup_tables.h"

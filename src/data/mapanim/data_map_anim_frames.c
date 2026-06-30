@@ -88,19 +88,29 @@ SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused3_frame_3[] =
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused3_frame_4[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused3_frame_4.gbapal");
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused3_frame_5[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused3_frame_5.gbapal");
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused3_frame_6[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused3_frame_6.gbapal");
-SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused3_frame_7[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused3_frame_7.pal.bin");
+SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused3_frame_7[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused3_frame_7.gbapal");
+/* 2-byte inter-symbol filler the JP ROM has after frame_7 (fe8u emits it as a
+ * bare `.hword 0x4AB3` between the two glyph palettes). Kept as a typed source
+ * literal so the .gbapal stays a clean editable palette, not a padded blob. */
+SECTION(".rodata.dat_data_map_anim_frames") static const u8 TileAnimationsUnused3_frame_7_pad[] = { 0xB3, 0x4A };
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_0[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_0.gbapal");
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_1[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_1.gbapal");
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_2[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_2.gbapal");
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_3[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_3.gbapal");
-SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_4[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_4.pal.bin");
+SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_4[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_4.gbapal");
+SECTION(".rodata.dat_data_map_anim_frames") static const u8 TileAnimationsUnused4_frame_4_pad[] = { 0xB3, 0x4A };
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_5[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_5.gbapal");
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_6[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_6.gbapal");
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_7[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_7.gbapal");
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_8[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_8.gbapal");
-SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_9[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_9.pal.bin");
+SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_9[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_9.gbapal");
+SECTION(".rodata.dat_data_map_anim_frames") static const u8 TileAnimationsUnused4_frame_9_pad[] = { 0xB3, 0x4A };
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_10[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_10.gbapal");
-SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_11[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_11.pal.bin");
+SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused4_frame_11[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused4_frame_11.gbapal");
+/* 2-byte alignment pad after the last Unused4 frame (fe8u emits `.align 2, 0`
+ * before TileAnimationsUnused5_frame_0). frame_11's .gbapal is 6 bytes, so the
+ * running offset is odd here; these zeros realign the next palette to 2. */
+SECTION(".rodata.dat_data_map_anim_frames") static const u8 TileAnimationsUnused4_frame_11_pad[] = { 0x00, 0x00 };
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused5_frame_0[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused5_frame_0.gbapal");
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused5_frame_1[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused5_frame_1.gbapal");
 SECTION(".rodata.dat_data_map_anim_frames") u8 TileAnimationsUnused5_frame_2[] = INCBIN_U8("graphics/mapanim/TileAnimationsUnused5_frame_2.gbapal");
