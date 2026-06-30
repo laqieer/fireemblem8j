@@ -3,20 +3,21 @@
 
 #include "global.h"
 
+/* JP popup opcode enum: unlike the US build it has no ITEM_STR_CAP / ITEM_STR,
+ * so every opcode from UNIT_NAME onward is two lower than its US counterpart.
+ * Must match the switch in src/ParsePopupInstAndGetLen.c and src/GeneratePopupText.c. */
 enum popup_opcode_index {
     POPUP_OP_END,              /* 00 */
     POPUP_OP_SPACE,            /* 01 */
     POPUP_OP_ITEM_NAME,        /* 02 */
-    POPUP_OP_ITEM_STR_CAP,     /* 03 */
-    POPUP_OP_ITEM_STR,         /* 04 */
-    POPUP_OP_UNIT_NAME,        /* 05 */
-    POPUP_OP_MSG,              /* 06 */
-    POPUP_OP_STR,              /* 07 */
-    POPUP_OP_COLOR,            /* 08 */
-    POPUP_OP_ITEM_ICON,        /* 09 */
-    POPUP_OP_WTYPE_ICON,       /* 0A */
-    POPUP_OP_NUM,              /* 0B */
-    POPUP_OP_SOUND,            /* 0C */
+    POPUP_OP_UNIT_NAME,        /* 03 */
+    POPUP_OP_MSG,              /* 04 */
+    POPUP_OP_STR,              /* 05 */
+    POPUP_OP_COLOR,            /* 06 */
+    POPUP_OP_ITEM_ICON,        /* 07 */
+    POPUP_OP_WTYPE_ICON,       /* 08 */
+    POPUP_OP_NUM,              /* 09 */
+    POPUP_OP_SOUND,            /* 0A */
 };
 
 struct PopupInstruction {
@@ -27,8 +28,6 @@ struct PopupInstruction {
 #define POPUP_END               {POPUP_OP_END, 0}
 #define POPUP_SPACE(len)        {POPUP_OP_SPACE, len}
 #define POPUP_ITEM_NAME         {POPUP_OP_ITEM_NAME, 0}
-#define POPUP_ITEM_STR_CAP      {POPUP_OP_ITEM_STR_CAP, 0}
-#define POPUP_ITEM_STR          {POPUP_OP_ITEM_STR, 0}
 #define POPUP_UNIT_NAME         {POPUP_OP_UNIT_NAME, 0}
 #define POPUP_MSG(msg)          {POPUP_OP_MSG, msg}
 #define POPUP_STR(ptr)          {POPUP_OP_STR, ((uintptr_t)ptr)}

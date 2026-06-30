@@ -36,21 +36,21 @@ u16 CONST_DATA Pal_PoisonAnim[] = INCBIN_U16("graphics/misc_gfx/Pal_PoisonAnim.g
 
 u16 CONST_DATA Img_LinkArenaWarpFx[] = INCBIN_U16("graphics/misc_gfx/Img_LinkArenaWarpFx.4bpp.lz");
 
-u16 CONST_DATA Pal_LinkArenaWarpFx[] = INCBIN_U16("graphics/misc_gfx/Pal_LinkArenaWarpFx.bin");
+u16 CONST_DATA Pal_LinkArenaWarpFx[] = INCBIN_U16("graphics/misc_gfx/Pal_LinkArenaWarpFx.agbpal");
 
 u16 CONST_DATA gMapanimBattleinfo_0[] = INCBIN_U16("graphics/reuse/gMapanimBattleinfo_0.4bpp");
 
 u8 Img_MapAnimBerserkfx_1[] = INCBIN_U8("graphics/misc_gfx/Img_MapAnimBerserkfx_1.4bpp.lz");
 
-u16 Pal_MapAnimBerserkfx_0[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimBerserkfx_0.bin");
+u16 Pal_MapAnimBerserkfx_0[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimBerserkfx_0.agbpal");
 
 u8 CONST_DATA Img_MapAnimAntitoxinPureWater[] = INCBIN_U8("graphics/misc_gfx/Img_MapAnimAntitoxinPureWater.4bpp.lz");
 
 u16 CONST_DATA gMapanimBattleinfo_1[] = INCBIN_U16("graphics/reuse/gMapanimBattleinfo_1.4bpp");
 
-u16 CONST_DATA Pal_MapAnimPureWater[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimPureWater.bin");
+u16 CONST_DATA Pal_MapAnimPureWater[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimPureWater.agbpal");
 
-u16 CONST_DATA Pal_MapAnimAntitoxin[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimAntitoxin.bin");
+u16 CONST_DATA Pal_MapAnimAntitoxin[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimAntitoxin.agbpal");
 
 u8 CONST_DATA gMapanimBattleinfo_2[] = INCBIN_U8("graphics/reuse/gMapanimBattleinfo_2.4bpp.lz");
 
@@ -58,7 +58,7 @@ u8 CONST_DATA gMapanimBattleinfo_3[] = INCBIN_U8("graphics/reuse/gMapanimBattlei
 
 u8 CONST_DATA gMapanimBattleinfo_4[] = INCBIN_U8("graphics/reuse/gMapanimBattleinfo_4.4bpp.lz");
 
-u16 CONST_DATA Pal_MapAnimBerserkfx_1[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimBerserkfx_1.bin");
+u16 CONST_DATA Pal_MapAnimBerserkfx_1[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimBerserkfx_1.agbpal");
 
 u16 CONST_DATA Pal_MapAnimBerserkfx_2[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimBerserkfx_2.gbapal");
 
@@ -66,15 +66,15 @@ u8 CONST_DATA gMapanimBattleinfo_5[] = INCBIN_U8("graphics/reuse/gMapanimBattlei
 
 u8 CONST_DATA Img_MapAnimTorchfx[] = INCBIN_U8("graphics/misc_gfx/Img_MapAnimTorchfx.4bpp.lz");
 
-u16 CONST_DATA Pal_MapAnimTorchfx[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimTorchfx.bin");
+u16 CONST_DATA Pal_MapAnimTorchfx[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimTorchfx.agbpal");
 
 u8 Img_MapAnimUnlockObjfx[] = INCBIN_U8("graphics/misc_gfx/Img_MapAnimUnlockObjfx.4bpp.lz");
 
-u16 Pal_MapAnimUnlockObjfx[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimUnlockObjfx.bin");
+u16 Pal_MapAnimUnlockObjfx[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimUnlockObjfx.agbpal");
 
 u8 Img_MapAnimUnlockBgfx[] = INCBIN_U8("graphics/misc_gfx/Img_MapAnimUnlockBgfx.4bpp.lz");
 
-u16 Pal_MapAnimUnlockObjfx_Unk[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimUnlockObjfx_Unk.bin");
+u16 Pal_MapAnimUnlockObjfx_Unk[] = INCBIN_U16("graphics/misc_gfx/Pal_MapAnimUnlockObjfx_Unk.agbpal");
 
 u8 Tsa_MapAnimUnlockBgfx[] = INCBIN_U8("graphics/misc_gfx/Tsa_MapAnimUnlockBgfx.bin");
 

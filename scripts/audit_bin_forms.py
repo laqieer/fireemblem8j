@@ -169,9 +169,17 @@ NAME_CLASS_RULES = [
     (re.compile(r"(^|/)graphics/frontier_[^/]*banim"),
      "MISS", "fe8u banim/*.png + banim/*.s"),
     (re.compile(r"(^|/)graphics/frontier_df3_unitdef_b/"),
-     "MISS", "fe8u graphics/**/*.png (unitdef portrait gfx)"),
-    (re.compile(r"(^|/)graphics/frontier_[^/]*(menu|uistuff|ending|eventscr|fontgrp|data_)"),
-     "MISS", "fe8u graphics/**/*.png or C literals (frontier UI/gfx)"),
+     "MISS", "fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx)"),
+    # frontier event-script blobs (MISS) -> EVENT_* macros in C.
+    (re.compile(r"(^|/)graphics/frontier_[^/]*eventscr"),
+     "MISS", "fe8u src/events/*.c (EVENT_* macros; frontier event script)"),
+    # frontier JP-divergent UI / font-group / ending / CG tables (UNCERTAIN): they
+    # reached the name-class step precisely because NO fe8u editable twin exists
+    # (JP-only multiplayer/menu/font/CG assets). The prior loose catch-all
+    # mislabeled all ~112 as menu-strings MISS; the real string pools are ONLY in
+    # frontier_df4_misc_lo (handled above). fe8u form unknown -> DEFERRED. (bug #2)
+    (re.compile(r"(^|/)graphics/frontier_[^/]*(menu|uistuff|ending|fontgrp|data_)"),
+     "UNCERTAIN", "fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE)"),
     # any remaining frontier_* graphics image blob
     (re.compile(r"(^|/)graphics/frontier_"),
      "MISS", "fe8u graphics/**/*.png (frontier image region)"),
@@ -317,7 +325,16 @@ def build_fe8u_index(fe8u_files):
         b = os.path.basename(f)
         stem, ext = os.path.splitext(b)
         is_bin = b.endswith(".bin")
-        is_editable = (ext.lower() in EDITABLE_EXTS or "/src/data/" in ("/" + f)) and not is_bin
+        # fe8u `preview/**/*.png` are non-build RENDER previews (not referenced by
+        # its Makefile) — NOT the build source. They must NOT count as an editable
+        # twin, else TSA/tilemap .bin (whose real fe8u source is the `*.tsa.bin`
+        # FLOOR form) get mislabeled MISS via a coincidental preview .png basename
+        # match. See docs/bin_verification_wave8.md (classifier bug #1).
+        is_render = ("/" + f).startswith("/preview/") or "/preview/" in ("/" + f)
+        is_editable = (
+            (ext.lower() in EDITABLE_EXTS or "/src/data/" in ("/" + f))
+            and not is_bin and not is_render
+        )
         idx[stem].append((f, ext.lower(), is_editable, is_bin))
         inner, inner_ext = os.path.splitext(stem)     # Foo.tsa -> Foo
         if inner_ext:
@@ -330,6 +347,18 @@ def build_fe8u_index(fe8u_files):
 # --------------------------------------------------------------------------- #
 def classify(path, fe8u_idx):
     """Return (category, proof, category_label)."""
+    base = os.path.basename(path)
+    # 0. TSA / tilemap by NAME -> FLOOR. fe8u keeps every TSA/tilemap binary as
+    #    `*.tsa.bin` / `*.map.bin`. The fe8j extractor named these with a
+    #    `Tsa_`/`gTsa_` PREFIX or a `_map` suffix and DROPPED the `.tsa.bin`
+    #    suffix the basename-match relies on; without this guard they
+    #    coincidentally match a tile-sheet `.png` twin (the real source is the
+    #    separate `.tsa.bin`) and get mislabeled MISS. See
+    #    docs/bin_verification_wave8.md (classifier bug #1).
+    if re.match(r"g?Tsa_", base, re.IGNORECASE) or base.endswith("_map.bin"):
+        return ("FLOOR",
+                "fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`)",
+                "TSA/.map.bin")
     # 1. FLOOR by suffix (fe8u keeps TSA/tilemaps binary). Label is directory-aware
     #    so the plan's efx / opanim sub-buckets stay visible even though those
     #    files happen to carry the .map.bin suffix.
@@ -632,6 +661,9 @@ SELF_TEST_NOTES = [
     "`frontier_chap_title_*` is classified **MISS** (chapter-title gfx → fe8u `.png`), not FLOOR.",
     "`frontier_df4_misc_lo_*` is classified **MISS** (string pools → fe8u C literals), not FLOOR.",
     "`*.tsa.bin` and `*.map.bin` are classified **FLOOR** (fe8u keeps them binary).",
+    "`Tsa_`/`gTsa_`-named and `*_map.bin` blobs are classified **FLOOR** (TSA/tilemaps; fe8u keeps them binary even when the fe8j extractor dropped the `.tsa.bin` suffix — bug #1).",
+    "`graphics/gfx_data_bg/*_map.bin` BG tilemaps are classified **FLOOR** (→ fe8u `bg_*.tsa.bin`).",
+    "`graphics/frontier_df4_uistuff/*` is classified **UNCERTAIN** (JP-divergent UI table, no fe8u twin — not a string-pool MISS; bug #2).",
     "`graphics/banim/efx*` effect bins are classified **FLOOR**.",
     "`data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).",
 ]
@@ -653,6 +685,10 @@ def run_self_tests(by_path):
     expect("graphics/frontier_df4_misc_lo/", "MISS")
     expect(".tsa.bin", "FLOOR")
     expect(".map.bin", "FLOOR")
+    expect("/Tsa_", "FLOOR")            # bug #1: TSA by name -> FLOOR
+    expect("_map.bin", "FLOOR")         # bug #1: tilemaps -> FLOOR
+    expect("graphics/gfx_data_bg/", "FLOOR")
+    expect("graphics/frontier_df4_uistuff/", "UNCERTAIN")  # bug #2
     expect("graphics/banim/efx", "FLOOR")
     expect("data/sound/gMPlayTable.bin", "MISS")
     return failures

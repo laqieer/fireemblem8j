@@ -1,7 +1,18 @@
 #include "global.h"
 
-/* Migrated from asm/dat_PopupScr_ItemStolen_ref.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+#include "fontgrp.h"
+#include "popup.h"
 
-SECTION(".rodata.dat_PopupScr_ItemStolen_ref") u8 PopupScr_ItemStolen[] = INCBIN_U8("data/residual/PopupScr_ItemStolen.bin");
+/* JP popup definition (region-different layout vs US). Opcodes follow the JP enum
+ * in include/popup.h. Byte-identical to the former INCBIN of PopupScr_ItemStolen.bin. */
+
+SECTION(".rodata.dat_PopupScr_ItemStolen_ref") struct PopupInstruction PopupScr_ItemStolen[] = {
+    POPUP_SOUND(0x5C),
+    POPUP_COLOR(TEXT_COLOR_SYSTEM_BLUE),
+    POPUP_ITEM_ICON,
+    POPUP_ITEM_NAME,
+    POPUP_SPACE(3),
+    POPUP_COLOR(TEXT_COLOR_SYSTEM_WHITE),
+    POPUP_MSG(0x809),
+    POPUP_END,
+};
