@@ -12,8 +12,6 @@ src/data/A01CC4/dat_data_A01CC4_2.o: graphics/misc_gfx2/Img_GameOverText.4bpp.lz
 src/data/A01CC4/dat_data_A01CC4_p2.o: graphics/misc_gfx2/Img_ChapterIntroFog.4bpp.lz graphics/misc_gfx2/Img_PlayerRankFog.4bpp.lz graphics/misc_gfx2/Pal_PlayerRankFog.gbapal
 src/data/A2EEF0/dat_data_A2EEF0_p0.o: data/residual/gUnkData_89.bin data/residual/gUnkData_92.bin graphics/misc/gUnkData_84.tsa.bin graphics/misc/gUnkData_86.tsa.bin graphics/reuse/gUnkData_81.4bpp.lz graphics/reuse/gUnkData_82.4bpp graphics/reuse/gUnkData_83.4bpp.lz graphics/reuse/gUnkData_85.4bpp.lz graphics/reuse/gUnkData_87.4bpp graphics/reuse/gUnkData_88.4bpp.lz graphics/reuse/gUnkData_90.4bpp graphics/reuse/gUnkData_91.4bpp.lz
 src/data/AA6BFA/dat_data_AA6BFA.o: graphics/reuse/gUnkData_100.4bpp graphics/reuse/gUnkData_101.4bpp
-src/data/Ap_WmHightLightMap3_ref/dat_Ap_WmHightLightMap3_ref.o: data/residual/Ap_WmHightLightMap3.bin
-src/data/Ap_WmHightLightMap6_ref/dat_Ap_WmHightLightMap6_ref.o: data/residual/Ap_WmHightLightMap6.bin
 src/data/B12A60/dat_data_B12A60.o: graphics/misc_gfx2/Img_CommGameBgScreen.4bpp.lz graphics/misc_gfx2/Img_UnkData_2.4bpp.lz graphics/misc_gfx2/Pal_CommGameBgScreenInShop.gbapal graphics/misc_gfx2/Pal_UnkData_2.gbapal graphics/misc_gfx2/Tsa_UnkData_5.bin.lz
 src/data/Ch9Events_ref/dat_Ch9Events_ref.o: data/residual/Ch9Events.bin
 src/data/EventListScr_Ch15b_Location_ref/dat_EventListScr_Ch15b_Location_ref.o: data/residual/EventListScr_Ch15b_Location.bin
