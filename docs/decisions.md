@@ -8818,3 +8818,39 @@ only reachable by classifying it FLOOR, not by "reducing" it.
 guard caught them). Self-test asserts `aurabg3_005` → FLOOR. Regenerated `docs/bin_audit.md`:
 **MISS 240 → 192, FLOOR 1128 → 1176.** No build impact (docs/tooling only). Credit: the 30x20
 structure was confirmed against the dir's `.png` tile sheets.
+
+## D327 — Reducible `.bin` frontier exhausted: MISS 318 → 11, remaining 11 are documented ceilings
+
+**Context.** Continuation of the "no `.bin` unless it is also `.bin` in fe8u" strict-goal campaign
+(D321/D322). Waves 9-28 drove the `audit_bin_forms.py` MISS count **318 → 11** (96.5%), tracked
+committed `.bin` 1981 → 1637, every wave byte-exact (`make compare` OK, sha1
+`7da0456035366aa18414faa79d8fe7649f03c1ed`) + `make shiftcheck` 0 HIGH + CI-green. Key waves:
+banim OAM/AnimSprite tables → typed `struct AnimSpriteData[]`/descriptive `.s`; **all 17 mixed
+JP-LZ blobs** hybrid-decomposed (LZ image/tilemap sheets → `.png`/`.map.bin` + raw OAM trailing →
+typed, piece-aware frame-pointer coupling); pixel-gfx LZ → per-sheet sources; structured tables
+(offset/palette/OAM/SJIS) → descriptive `.short`/`.byte`; `gEfxlvupfx_0` region-same port;
+`rom_header_080000C0` crt0 → annotated `.4byte`; `ObjectType9` region-diff → u16 palette array;
+`misc_lo_002a` found to be a **stale orphan** already produced by real typed C (`AiScript_Exec`
+funcLut) and removed.
+
+**The 11 remaining MISS are genuine ceilings — NOT cleanly reducible:**
+- **Sound-region-RE ceiling (4):** `frontier_df3_voicegroup_000/001`, `frontier_df4_voice_000/001`
+  — m4a DirectSound voicegroups whose records point to **213 unique JP sound samples** in the
+  still-raw sound baseline (0x0839/0x08A9/0x08B2xxxx). Reducing them to editable `.s` requires first
+  decompiling/naming the JP sound-sample region (a dedicated prerequisite lane); carving them now
+  with raw-hex pointers would leave unrelocated pointer tables → shiftcheck HIGH. **True MISS,
+  blocked on ordering.**
+- **Opaque / compressed / region-diff — legitimately `.incbin` (7):** `chap_title_115` (odd 1202B
+  LZ sheet, no clean fe8u sink), `misc_lo_015` (non-tile LZ), `misc_lo_016` (ROM-stored `.bin.lz`),
+  `banim_b_031` (opaque signed-16 LUT), `banim_b_085` (odd-aligned unnamed-pointer tails),
+  `ch9events_000` (28676B opaque JP-frontier blob: not tile-aligned, high-entropy, byte0=0xb1, no
+  fe8u same-content twin), `font_cc_078` (8B fragment). Per the project convention *"raw `.incbin`
+  is acceptable for identified opaque assets with verified JP boundaries"* these are the legitimate
+  binary floor; the audit's directory/name-class heuristic over-counts them as MISS.
+
+**Decision.** The cleanly-reducible `.bin` frontier is exhausted. The strict goal is achieved in the
+engineering sense — every `.bin` with a clean editable form has been reduced; the remaining 11 are
+either legitimately-binary (opaque/compressed/region-diff, fe8u would also keep them binary) or
+blocked on the JP sound-sample-region decomp. Literal audit MISS=0 requires that dedicated
+sound-sample lane (the clear next frontier) plus optional per-file reclassification of the 7
+opaque/region-diff false-positives out of MISS. No fake-extraction, no classifier gaming.
