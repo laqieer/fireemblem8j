@@ -3,6 +3,15 @@
 # raw -> verbatim .bin. Fresh JP-ROM extraction. Oracle: make compare.
 
 asm/frontier_df4_banim_b.o: \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_053a_7059C4.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_08705B7C.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_08705D48.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_08705F2C.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_08706114.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_087062C8.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_08706480.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_0870664C.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_08706818.4bpp.lz \
   graphics/frontier_df4_banim_b/frontier_df4_banim_b_082a_A12AC0.4bpp.lz \
   graphics/frontier_df4_banim_b/data_08A12E44.4bpp.lz \
   graphics/frontier_df4_banim_b/frontier_df4_banim_b_051a_6E0CF4.4bpp.lz \
@@ -323,3 +332,14 @@ graphics/frontier_df4_banim_b/frontier_df4_banim_b_014c_623A04.map.bin.lz: LZ_FL
 graphics/frontier_df4_banim_b/frontier_df4_banim_b_014d_623ABC.map.bin.lz: LZ_FLAGS := -mindist 1
 
 graphics/frontier_df4_banim_b/frontier_df4_banim_b_064c_7CF5D8.map.bin.lz: LZ_FLAGS := -mindist 1
+
+# --- mindist pins (hybrid JP-LZ sheets) ---
+
+graphics/frontier_df4_banim_b/frontier_df4_banim_b_053a_7059C4.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_08705B7C.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_08705D48.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_08705F2C.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_08706114.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_087062C8.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_08706480.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_0870664C.map.bin.lz: LZ_FLAGS := -mindist 1
