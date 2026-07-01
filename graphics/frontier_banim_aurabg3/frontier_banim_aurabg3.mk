@@ -4,6 +4,8 @@
 # verbatim .bin incbin'd directly. baserom.gba is out of the build graph. Oracle: make compare.
 
 asm/frontier_banim_aurabg3.o: \
+  graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_028a_777858.map.bin.lz \
+  graphics/frontier_banim_aurabg3/data_087778F0.4bpp.lz \
   graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016a_7767BC.map.bin.lz \
   graphics/frontier_banim_aurabg3/data_08776A34.4bpp.lz \
   graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_004_7738F0.4bpp.lz \
@@ -40,3 +42,5 @@ asm/frontier_banim_aurabg3.o: \
 # --- mindist pins (hybrid JP-LZ sheets) ---
 
 graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016a_7767BC.map.bin.lz: LZ_FLAGS := -mindist 1
+
+graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_028a_777858.map.bin.lz: LZ_FLAGS := -mindist 1
