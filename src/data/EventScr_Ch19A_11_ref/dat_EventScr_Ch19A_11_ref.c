@@ -12,6 +12,7 @@
 
 extern const u8 data_08A60354[];
 extern const u8 frontier_df3_unitdef_b_022_915038[];
+extern const u8 frontier_df3_unitdef_b_022_915038_tail_p1[];
 extern const u8 UnitDef_Ch19AAlly_5[];
 extern const u8 frontier_df3_unitdef_b_023_91512C[];
 extern const u8 frontier_df3_unitdef_b_021_914BD8[];
@@ -56,7 +57,7 @@ SECTION(".rodata.dat_EventScr_Ch19A_11_ref") EventListScr EventScr_Ch19A_11[] = 
     SVAL(EVT_SLOT_B, 0)
     LOMA(0x48)
     FADU(4)
-    LOAD2(1, frontier_df3_unitdef_b_022_915038 + 0x40)
+    LOAD2(1, frontier_df3_unitdef_b_022_915038_tail_p1)
     ENUN
     SOUN(0xB1)
     TILECHANGE(0)
