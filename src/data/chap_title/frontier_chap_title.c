@@ -195,7 +195,9 @@ __attribute__((section(".data.frontier_chap_title.gap62")))
 u8 frontier_chap_title_062_A8B7F0[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_062_A8B7F0.4bpp.lz");
 
 __attribute__((section(".data.frontier_chap_title.gap63")))
-u8 frontier_chap_title_063_A8BB88[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_063_A8BB88.bin");
+u8 frontier_chap_title_063_A8BB88[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_063a_A8BB88.4bpp.lz");
+__attribute__((section(".data.frontier_chap_title.gap63")))
+u8 frontier_chap_title_063b_A8BFA4[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_063b_A8BFA4.4bpp.lz");
 
 __attribute__((section(".data.frontier_chap_title.gap64")))
 u8 frontier_chap_title_064_A8BFB0[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_064_A8BFB0.4bpp.lz");

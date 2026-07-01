@@ -32,20 +32,20 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 266 | 14.2% |
-| **FLOOR** | 1128 | 60.4% |
-| **UNCERTAIN** | 473 | 25.3% |
-| **TOTAL** | 1867 | 100.0% |
+| **MISS** | 260 | 14.0% |
+| **FLOOR** | 1128 | 60.6% |
+| **UNCERTAIN** | 473 | 25.4% |
+| **TOTAL** | 1861 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
 | Category | Verdict | Count (this run) | fe8u editable form |
 |---|---|---:|---|
-| battle-anim | MISS | 174 | fe8u 202 editable banim/*.s (compressing linker) |
-| pixel-gfx | MISS | 17 | fe8u graphics/**/*.png |
+| battle-anim | MISS | 172 | fe8u 202 editable banim/*.s (compressing linker) |
+| pixel-gfx | MISS | 15 | fe8u graphics/**/*.png |
 | sound-m4a-tables | MISS | 1 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 4 | fe8u sound/voicegroups/*.s (documented ceiling) |
-| menu-strings | MISS | 22 | fe8u C literals (src/menu_def.c) |
+| menu-strings | MISS | 20 | fe8u C literals (src/menu_def.c) |
 | unitdef-residuals | MISS | 47 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 1 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | TSA/.map.bin | FLOOR | 979 | fe8u keeps TSA/tilemaps binary too |
@@ -90,9 +90,9 @@ under MISS, asserted by the self-test guards below).
 - `graphics/banim/efx*` effect bins are classified **FLOOR**.
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 
-## MISS (266) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (260) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>266 entries</summary>
+<details><summary>260 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -187,7 +187,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_038_794D78.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_039_795198.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_040_7955B8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_chap_title/frontier_chap_title_063_A8BB88.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
 | `graphics/frontier_chap_title/frontier_chap_title_115_A92170.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
 | `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_000_7463DC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_001_74F150.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -213,7 +212,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_000_B75860.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
 | `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_002_B7F118.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
 | `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_003_B864A8.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
-| `graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_000_B44B40.bin` | pixel-gfx | fe8u graphics/titlescreen/*.png |
 | `graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_001_B48D38.bin` | pixel-gfx | fe8u graphics/titlescreen/*.png |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_000_90F678.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_003_91066C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
@@ -304,7 +302,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_037_6AC820.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_039_6ADB74.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_042_6B1024.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_049_6D00A8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_050_6D3478.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_051_6E0CF4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_052_6E96D0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -318,7 +315,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_062_7AA39C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_064_7CD474.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_065_7D3984.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_066_7E13A4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_067_84886C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_069_8601B1.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_070_901138.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -351,8 +347,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_010_0E3CD7.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_011_0E4602.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_012_0E6774.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_013_0E7544.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_014_0E8F58.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_018_1DEF84.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |

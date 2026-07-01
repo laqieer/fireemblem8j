@@ -8773,3 +8773,27 @@ integrator gate, and rigorously characterized the irreducible floor.
 This session banked the highest-ROI reducible lanes and the honest floor analysis; the remaining
 path is documented in `docs/frontier.md`. Recommend prioritizing the JP-LZ recompressor RE (unblocks
 58 at once) before the long typed-data carve grind. Strict goal NOT reached.
+
+## D325 — JP-LZ "irreducible" blocker DISSOLVED (D323/D324 correction; credit: user prefix-match insight)
+
+**D323/D324 were WRONG.** They claimed the 58 byte0=0x10 residual `.bin` are gbagfx-irreducible
+and that MISS=0 needs a bit-exact JP LZ recompressor (a research project). That conclusion came from
+a flawed **full-file** `cmp` after recompression. The user's insight: if gbagfx recompresses to `n`
+bytes and the ROM blob is `m>n`, compare the first `n` bytes — a PREFIX match means the extra `m-n`
+are trailing "hidden" data the decompressor ignores.
+
+**Verified:** 58/58 JP-LZ blobs prefix-match gbagfx at `-mindist 1` or `2`. Recursive decomposition
+shows they are **concatenated LZ tile-sheets** (the extractor lumped multiple sheets + trailing into
+one carve-gap): 33/58 fully decompose to LZ sheets, 25 have sheets + a non-LZ trailing. Decompressed
+sizes are standard banim sheet sizes (8192/4096/2048/1200…). **No recompressor is needed** — they
+reduce to `.png` via the existing `png→4bpp→lz` (gbagfx default `-mindist 2`) pipeline.
+
+**Proven + banked (wave 13 Phase 1, −6 `.bin`):** `frontier_df4_banim_b_049` (template) + 5 CLEAN_TILES
+(`chap_title_063`, `df3_titlescreen_000`, `df4_banim_b_066`, `df4_misc_lo_013/014`) fully eliminated →
+PNG. `make compare` OK (sha1 `7da0456…`), `make shiftcheck` 0 HIGH.
+
+**Remaining JP-LZ work (unblocked, no recompressor):** the other ~50 blobs mix whole-tile sheets
+(→ PNG, done for 24 in the deferred Phase-2 branch `feat/wave13-jplz`) with non-tile LZ OAM sheets
+(1200-byte, `.bin.lz`-pattern candidates) + trailing. Fully eliminating a split file needs BOTH the
+image PNG AND the OAM-tail carve (a `.bin.lz`/typed follow-up) so the atomic decomposition doesn't
+raise the path-based MISS count. **Correction stored as repository memory.**
