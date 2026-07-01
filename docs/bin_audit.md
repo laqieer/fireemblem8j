@@ -32,10 +32,10 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 178 | 9.8% |
-| **FLOOR** | 1176 | 64.6% |
-| **UNCERTAIN** | 467 | 25.6% |
-| **TOTAL** | 1821 | 100.0% |
+| **MISS** | 132 | 7.4% |
+| **FLOOR** | 1176 | 66.3% |
+| **UNCERTAIN** | 467 | 26.3% |
+| **TOTAL** | 1775 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -46,7 +46,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | sound-m4a-tables | MISS | 1 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 4 | fe8u sound/voicegroups/*.s (documented ceiling) |
 | menu-strings | MISS | 11 | fe8u C literals (src/menu_def.c) |
-| unitdef-residuals | MISS | 47 | fe8u src/events_udefs.c typed C |
+| unitdef-residuals | MISS | 1 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 1 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | TSA/.map.bin | FLOOR | 1027 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
@@ -91,9 +91,9 @@ under MISS, asserted by the self-test guards below).
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 - 30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).
 
-## MISS (178) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (132) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>178 entries</summary>
+<details><summary>132 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -158,52 +158,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_002_B7F118.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
 | `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_003_B864A8.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
 | `graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_001_B48D38.bin` | pixel-gfx | fe8u graphics/titlescreen/*.png |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_000_90F678.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_003_91066C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_004_91075C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_005_9109A8.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_006_911070.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_007_911200.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_009_91187C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_012_911C34.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_013_911E38.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_015_91206C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_016_912198.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_017_912480.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_018_912AD4.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_019_913958.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_021_914BD8.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_022_915038.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_023_91512C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_024_915E08.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_025_9163BC.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_026_916D14.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_027_917600.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_028_9178F8.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_029_9184F0.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_030_918784.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_031_918C90.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_032_91908C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_033_9191E0.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_035_91A580.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_036_91AB20.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_037_91AC38.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_038_91B948.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_039_91BED4.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_041_91C104.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_042_91C230.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_043_91D314.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_046_91DFD0.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_047_91E280.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_048_91E7A8.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_049_91E988.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_050_91EE14.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_051_91F300.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_052_91F89C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_055_91FE20.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_057_92042C.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_060_921140.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
-| `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_070_923510.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_000_5E0E94.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_003_604F7C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_004_60838C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
