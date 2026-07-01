@@ -3,6 +3,8 @@
 # rebuilt via gbagfx %.lz: %; the rest verbatim .bin. Fresh JP-ROM extraction. Oracle: make compare.
 
 asm/frontier_banim_dracozombie.o: \
+  graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_040a_7955B8.map.bin.lz \
+  graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_040b_7959D8.4bpp.lz \
   graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_001_77BC6C.4bpp.lz \
   graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_002_77CA18.4bpp.lz \
   graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_003_77DBCC.4bpp.lz \

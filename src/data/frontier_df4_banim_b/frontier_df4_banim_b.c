@@ -247,18 +247,18 @@ __asm__(
 "	.4byte Pal_Light, Pal_Light, Pal_Light, Pal_Light, Pal_Light, Pal_Light\n"
 "	.4byte Tsa_Light_0, Tsa_Light_1, frontier_df4_banim_b_019_64C610, frontier_df4_banim_b_019b_64C71C, Tsa_Light_4, Tsa_Light_5\n"
 "	.4byte Tsa_Light_6, Tsa_Light_7, Tsa_Light_8, Tsa_Light_9, Tsa_Light_10, Tsa_Light_11\n"
-"	.4byte Tsa_Light_12, Tsa_Light_13, Tsa_Light_14, frontier_df3_banim_mid_000_64D2B4, frontier_df3_banim_mid_000_64D2B4 + 0x114, frontier_df3_banim_mid_000_64D2B4 + 0x1C4\n"
-"	.4byte frontier_df3_banim_mid_000_64D2B4 + 0x2CC, frontier_df3_banim_mid_000_64D2B4 + 0x408, frontier_df3_banim_mid_000_64D2B4 + 0x57C, frontier_df3_banim_mid_000_64D2B4 + 0x714, frontier_df3_banim_mid_000_64D2B4 + 0x888, frontier_df3_banim_mid_000_64D2B4 + 0x994\n"
-"	.4byte frontier_df3_banim_mid_000_64D2B4 + 0xA68, Tsa_Light_25, Tsa_Light_26, Tsa_Light_27, Tsa_Light_28, Tsa_Light_29\n"
+"	.4byte Tsa_Light_12, Tsa_Light_13, Tsa_Light_14, frontier_df3_banim_mid_000_64D2B4, frontier_df3_banim_mid_000b_64D3C8, frontier_df3_banim_mid_000c_64D478\n"
+"	.4byte frontier_df3_banim_mid_000d_64D580, frontier_df3_banim_mid_000e_64D6BC, frontier_df3_banim_mid_000f_64D830, frontier_df3_banim_mid_000g_64D9C8, frontier_df3_banim_mid_000h_64DB3C, frontier_df3_banim_mid_000i_64DC48\n"
+"	.4byte frontier_df3_banim_mid_000j_64DD1C, Tsa_Light_25, Tsa_Light_26, Tsa_Light_27, Tsa_Light_28, Tsa_Light_29\n"
 "	.4byte Tsa_Light_30, Tsa_Light_31, Tsa_Light_32, 0x00000001, 0x080E4C34, 0x00000003\n"
 "	.4byte 0x080719A9, 0x00000000, 0x00000000, Tsa_Flux_ClassReel_0, Tsa_Flux_ClassReel_1, Tsa_Flux_ClassReel_2\n"
 "	.4byte Tsa_Flux_ClassReel_3, Tsa_Flux_ClassReel_4, Tsa_Flux_ClassReel_5, Tsa_Flux_ClassReel_6, Tsa_Flux_ClassReel_7, Tsa_Flux_ClassReel_8\n"
-"	.4byte Tsa_Flux_ClassReel_9, Tsa_Flux_ClassReel_10, Tsa_Flux_ClassReel_11, frontier_df3_banim_mid_008_657A78, frontier_df3_banim_mid_008_657A78 + 0xA8, frontier_df3_banim_mid_008_657A78 + 0x164\n"
-"	.4byte frontier_df3_banim_mid_008_657A78 + 0x23C, frontier_df3_banim_mid_008_657A78 + 0x31C, Tsa_Flux_ClassReel_17, Tsa_Flux_ClassReel_18, Tsa_Flux_ClassReel_19, Tsa_Flux_ClassReel_20\n"
+"	.4byte Tsa_Flux_ClassReel_9, Tsa_Flux_ClassReel_10, Tsa_Flux_ClassReel_11, frontier_df3_banim_mid_008_657A78, frontier_df3_banim_mid_008b_657B20, frontier_df3_banim_mid_008c_657BDC\n"
+"	.4byte frontier_df3_banim_mid_008d_657CB4, frontier_df3_banim_mid_008e_657D94, Tsa_Flux_ClassReel_17, Tsa_Flux_ClassReel_18, Tsa_Flux_ClassReel_19, Tsa_Flux_ClassReel_20\n"
 "	.4byte Tsa_Flux_ClassReel_21, Tsa_Flux_ClassReel_22, Tsa_Flux_ClassReel_23, Tsa_Flux_ClassReel_24, Tsa_Flux_ClassReel_25, Tsa_Flux_ClassReel_26\n"
-"	.4byte Tsa_Flux_ClassReel_27, frontier_df3_banim_mid_009_6587E0, frontier_df3_banim_mid_009_6587E0 + 0xA0, frontier_df3_banim_mid_009_6587E0 + 0x154, frontier_df3_banim_mid_009_6587E0 + 0x210, frontier_df3_banim_mid_009_6587E0 + 0x2EC\n"
-"	.4byte frontier_df3_banim_mid_009_6587E0 + 0x3D4, frontier_df3_banim_mid_009_6587E0 + 0x4F8, frontier_df3_banim_mid_009_6587E0 + 0x618, frontier_df3_banim_mid_009_6587E0 + 0x724, frontier_df3_banim_mid_009_6587E0 + 0x830, frontier_df3_banim_mid_009_6587E0 + 0x92C\n"
-"	.4byte frontier_df3_banim_mid_009_6587E0 + 0xA2C, frontier_df3_banim_mid_009_6587E0 + 0xB28, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, Img_Flux_ClassReel_0\n"
+"	.4byte Tsa_Flux_ClassReel_27, frontier_df3_banim_mid_009_6587E0, frontier_df3_banim_mid_009b_658880, frontier_df3_banim_mid_009c_658934, frontier_df3_banim_mid_009d_6589F0, frontier_df3_banim_mid_009e_658ACC\n"
+"	.4byte frontier_df3_banim_mid_009f_658BB4, frontier_df3_banim_mid_009g_658CD8, frontier_df3_banim_mid_009h_658DF8, frontier_df3_banim_mid_009i_658F04, frontier_df3_banim_mid_009j_659010, frontier_df3_banim_mid_009k_65910C\n"
+"	.4byte frontier_df3_banim_mid_009l_65920C, frontier_df3_banim_mid_009m_659308, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, Img_Flux_ClassReel_0\n"
 "	.4byte Img_Flux_ClassReel_0, Img_Flux_ClassReel_0, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC\n"
 "	.4byte frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, Img_Flux_ClassReel_2, Img_Flux_ClassReel_2, Img_Flux_ClassReel_2, Img_Flux_ClassReel_2\n"
 "	.4byte Img_Flux_ClassReel_2, Img_Flux_ClassReel_2, Img_Flux_ClassReel_3, Img_Flux_ClassReel_3, Img_Flux_ClassReel_3, Img_Flux_ClassReel_3\n"
@@ -1179,8 +1179,14 @@ __asm__(
     ".short 0x0000,0x0000,0xee59,0x1861,0xeee9,0x1861,0xef61,0x1861\n"
     ".short 0x0000,0x8200\n"
 );
-u8 frontier_df4_banim_b_013_622E28[] __attribute__((section(".data.frontier_df4_banim_b.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_013_622E28.bin");
-u8 frontier_df4_banim_b_014_6238B4[] __attribute__((section(".data.frontier_df4_banim_b.gap14"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_014_6238B4.bin");
+u8 frontier_df4_banim_b_013_622E28[] __attribute__((section(".data.frontier_df4_banim_b.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_013a_622E28.map.bin.lz");
+u8 frontier_df4_banim_b_013b_622ED0[] __attribute__((section(".data.frontier_df4_banim_b.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_013b_622ED0.map.bin.lz");
+u8 frontier_df4_banim_b_013c_622F78[] __attribute__((section(".data.frontier_df4_banim_b.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_013c_622F78.map.bin.lz");
+u8 frontier_df4_banim_b_013d_623030[] __attribute__((section(".data.frontier_df4_banim_b.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_013d_623030.map.bin.lz");
+u8 frontier_df4_banim_b_014_6238B4[] __attribute__((section(".data.frontier_df4_banim_b.gap14"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_014a_6238B4.map.bin.lz");
+u8 frontier_df4_banim_b_014b_62395C[] __attribute__((section(".data.frontier_df4_banim_b.gap14"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_014b_62395C.map.bin.lz");
+u8 frontier_df4_banim_b_014c_623A04[] __attribute__((section(".data.frontier_df4_banim_b.gap14"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_014c_623A04.map.bin.lz");
+u8 frontier_df4_banim_b_014d_623ABC[] __attribute__((section(".data.frontier_df4_banim_b.gap14"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_014d_623ABC.map.bin.lz");
 u8 frontier_df4_banim_b_015_62DC84[] __attribute__((section(".data.frontier_df4_banim_b.gap15"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_015a_62DC84.map.bin.lz");
 u8 frontier_df4_banim_b_015b_62DD30[] __attribute__((section(".data.frontier_df4_banim_b.gap15"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_015b_62DD30.map.bin.lz");
 u8 frontier_df4_banim_b_015c_62DDE8[] __attribute__((section(".data.frontier_df4_banim_b.gap15"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_015c_62DDE8.map.bin.lz");
@@ -3904,7 +3910,9 @@ __asm__(
 "	.4byte 0x087E15D4, 0x087BE740, 0x087BF600, 0x087E1718, 0x087AB004, 0x087AD5B8, 0x087AD4E8, 0x087B2DA8\n"
 "	.4byte 0x087B3EE0, 0x087E1810, 0x087B199C, 0x087B2B6C, 0x087E1910, 0x087C4DD0, 0x087C6354, 0x087E1A08\n"
 );
-u8 frontier_df4_banim_b_064_7CD474[] __attribute__((section(".data.frontier_df4_banim_b.gap64"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_064_7CD474.bin");
+u8 frontier_df4_banim_b_064_7CD474[] __attribute__((section(".data.frontier_df4_banim_b.gap64"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_064a_7CD474.4bpp.lz");
+u8 frontier_df4_banim_b_064b_7CF4E8[] __attribute__((section(".data.frontier_df4_banim_b.gap64"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_064b_7CF4E8.4bpp.lz");
+u8 frontier_df4_banim_b_064c_7CF5D8[] __attribute__((section(".data.frontier_df4_banim_b.gap64"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_064c_7CF5D8.map.bin.lz");
 u8 frontier_df4_banim_b_065_7D3984[] __attribute__((section(".data.frontier_df4_banim_b.gap65"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_065_7D3984.bin.lz");
 u8 frontier_df4_banim_b_066_7E13A4[] __attribute__((section(".data.frontier_df4_banim_b.gap66"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_066a_7E13A4.4bpp.lz");
 u8 frontier_df4_banim_b_066b_7E14E0[] __attribute__((section(".data.frontier_df4_banim_b.gap66"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_066b_7E14E0.4bpp.lz");
