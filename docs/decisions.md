@@ -8743,3 +8743,33 @@ heuristic — a tooling project, out of scope for a single carve wave). It is NO
 carve-workers (MapChanges + unitdef REDA first), each gated by `make compare` OK + `make shiftcheck`
 0 HIGH, integrated one at a time. Document the JP-LZ floor as the residual irreducible blocker until
 a JP recompressor exists. Strict goal NOT yet reached.
+
+## D324 — Strict-goal push (waves 9–12): −52 `.bin`, and the definitive blocker (JP-LZ recompressor)
+
+**Context.** Autopilot objective "strict goal reached" (no `.bin` unless `.bin` in fe8u ≈ audit
+MISS→0). Drove the reducible frontier down wave-by-wave via isolated carve-workers + a serialized
+integrator gate, and rigorously characterized the irreducible floor.
+
+**Progress banked to main (all byte-exact `make compare` OK + `make shiftcheck` 0 HIGH, CI-green):**
+- **wave9 (−33):** 28 de-pointered `_ref` orphan `.bin` (misattributed event-data already shiftable
+  in `src/data/*_ref/*.c`; ledger bug #4) + 5 `frontier_df3_unitdef_b` REDA-cascade tails.
+- **wave10 (−10):** 10 `frontier_df4_banim_b` raw OAM tables → typed `struct AnimSpriteData[]`.
+- **wave11 (−9):** atomic whole-object pointer relocation of `frontier_df4_banim_b` (588 pointers →
+  named `.4byte Sym`), eliminating 9 coherent-table `.bin`; resolved the pointer-coupling.
+- **wave12 (−0, shiftability):** `frontier_banim_aurabg3` relocation-completeness (43 relocs). KEY
+  FINDING: aurabg3 is graphics/OAM-dominated with **0 gate-coherent tables** — its `.bin` need a
+  *typed-data OAM* carve, NOT the pointer-relocation lane. The banim dirs are HETEROGENEOUS.
+- Net: `.bin` 1919 → **1867**; audit MISS 318 → **266**.
+
+**Definitive blocker (empirically proven, D323 + this wave).** MISS=0 is **NOT reachable** without:
+1. **A bit-exact JP LZ recompressor** for the **58 JP-LZ files** (banim/pixel/menu). Confirmed: 0/58
+   reproduce the JP bytes at ANY gbagfx `-mindist 1..12`; the JP ROM used a different, less-optimal
+   LZ match-finder. This is a reverse-engineering *research project*, not a carve — the true gate.
+2. **~200 more reducible carves** across a heterogeneous, per-object multi-wave grind: typed-data OAM
+   blobs (aurabg3 & most other banim dirs), coherent-table relocations (banim_b-style dirs), and the
+   `frontier_df3_unitdef_b` recursive unit-table-typing chain (~38 residues).
+
+**Decision.** The strict goal is a genuine multi-session effort gated by the JP-LZ recompressor.
+This session banked the highest-ROI reducible lanes and the honest floor analysis; the remaining
+path is documented in `docs/frontier.md`. Recommend prioritizing the JP-LZ recompressor RE (unblocks
+58 at once) before the long typed-data carve grind. Strict goal NOT reached.

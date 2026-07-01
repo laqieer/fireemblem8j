@@ -42,7 +42,16 @@ pointer-coupled (need an atomic whole-object relocation — in progress); 29 are
 object is now relocation-complete for its coherent tables; the residual ~30 are scattered/high-entropy
 (gate-ignored) or mixed proc-script/OAM (not fake-carved). Other banim dirs (aurabg3/dracozombie/…)
 remain as independent per-object carve lanes.
-The strict goal is NOT reached; `make compare` OK + `make shiftcheck` 0 HIGH held on every banked lane.
+**Wave 12 (shiftability, −0 `.bin`):** `frontier_banim_aurabg3` relocation-completeness (43 relocs).
+KEY FINDING — the banim dirs are HETEROGENEOUS: aurabg3 is graphics/OAM-dominated with **0
+gate-coherent tables**, so its `.bin` need a *typed-data OAM* carve (not the pointer-relocation lane).
+**Session net (waves 9–12): `.bin` 1919 → 1867 (−52), MISS 318 → 266.**
+
+**DEFINITIVE strict-goal blocker (D324):** MISS=0 needs (1) a **bit-exact JP LZ recompressor** for the
+58 JP-LZ files (0/58 reproduce at any gbagfx `-mindist` — a reverse-engineering research project, the
+true gate) + (2) ~200 more reducible carves (heterogeneous per-object typed-data/relocation lanes +
+the unitdef recursive table-typing chain). Recommend the JP-LZ recompressor RE first (unblocks 58 at
+once). Strict goal NOT reached; `make compare` OK + `make shiftcheck` 0 HIGH held on every banked lane.
 
 ## Current state (2026-06-30) — asset-editability WAVE 8 landed + the 642-MISS heuristic split (D322)
 
