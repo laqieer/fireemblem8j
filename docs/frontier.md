@@ -58,7 +58,7 @@ sheets → PNG; non-tile 1200-byte LZ OAM sheets → `.bin.lz` pattern; +trailin
 reduces only when BOTH its image PNG and its OAM tail are carved (else atomic decomposition raises the
 path-based MISS count); plus the ~146 raw banim OAM tables, unitdef recursive tables, etc. A
 multi-wave carve grind, but NO research-project blocker. Strict goal NOT yet reached; `make compare`
-OK + `make shiftcheck` 0 HIGH held on every banked lane.
+OK + `make shiftcheck` 0 HIGH held on every banked lane. **Wave 14 (LANDED, −20 `.bin`: 1861→1841, MISS 260→240):** 20 raw banim OAM/AnimSprite tables → typed-C `struct AnimSpriteData[]` + `.4byte Sym` (df4_banim_a×10, df3_banim_aura×5, df3_banim_mid×4, dracozombie×1); fixed a Thumb-fn ABS32 off-by-one in `resolve_nm.py` (STT_FUNC pointees non-referenceable).
 
 ## Current state (2026-06-30) — asset-editability WAVE 8 landed + the 642-MISS heuristic split (D322)
 
