@@ -21,10 +21,45 @@ u8 frontier_banim_aurabg3_012_775DDC[] __attribute__((section(".data.frontier_ba
 u8 frontier_banim_aurabg3_013_776054[] __attribute__((section(".data.frontier_banim_aurabg3.gap13"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_013_776054.bin.lz");
 u8 frontier_banim_aurabg3_014_7762CC[] __attribute__((section(".data.frontier_banim_aurabg3.gap14"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_014_7762CC.bin.lz");
 u8 frontier_banim_aurabg3_015_776544[] __attribute__((section(".data.frontier_banim_aurabg3.gap15"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_015_776544.bin.lz");
-u8 frontier_banim_aurabg3_016_7767BC[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016_7767BC.bin", 0x0, 0x278);
-u8 data_08776A34[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016_7767BC.bin", 0x278, 0x560);
-u8 data_08776F94[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016_7767BC.bin", 0x7D8, 0x20);
-u8 data_08776FB4[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016_7767BC.bin", 0x7F8, 0x164);
+u8 frontier_banim_aurabg3_016_7767BC[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016a_7767BC.map.bin.lz");
+u8 data_08776A34[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/data_08776A34.4bpp.lz");
+/* data_08776F94: raw trailing carve (pre-sliced hybrid blob), byte-exact. */
+__asm__(
+"\t.section .data.frontier_banim_aurabg3.gap16, \"aw\", %progbits\n"
+"\t.global data_08776F94\n"
+"data_08776F94:\n"
+"\t.short 0x6398, 0x7FFF, 0x67FF, 0x4FFF, 0x37FF, 0x1FFF, 0x07FF, 0x037F\n"
+"\t.short 0x02FF, 0x027F, 0x01DF, 0x017E, 0x011C, 0x00BA, 0x0078, 0x0016\n"
+);
+/* data_08776FB4: raw trailing carve (pre-sliced hybrid blob), byte-exact. */
+__asm__(
+"\t.section .data.frontier_banim_aurabg3.gap16, \"aw\", %progbits\n"
+"\t.global data_08776FB4\n"
+"data_08776FB4:\n"
+"\t.short 0x0010, 0x0008, 0x0000, 0x0100, 0x0200, 0x0300, 0x0000, 0x0004\n"
+"\t.short 0x0005, 0x0006, 0x0007, 0x0800, 0x0900, 0x0A00, 0x0B00, 0x0000\n"
+"\t.short 0x000C, 0x000D, 0x000E, 0x000F, 0xF0C0, 0xB01F, 0x201F, 0x2100\n"
+"\t.short 0x2200, 0x0000, 0x0023, 0x0024, 0x0025, 0x0026, 0x2700, 0x2800\n"
+"\t.short 0x2900, 0x2A00, 0x0000, 0x002B, 0x002C, 0x002D, 0x002E, 0x2F60\n"
+"\t.short 0x1FF0, 0x1FC0, 0x0040, 0x0041, 0x0042, 0x4300, 0x4400, 0x4500\n"
+"\t.short 0x4600, 0x0000, 0x0047, 0x0048, 0x0049, 0x004A, 0x4B00, 0x4C00\n"
+"\t.short 0x4D00, 0x4E00, 0x003F, 0xF04F, 0xC01F, 0xF01F, 0xF0A5, 0xF0A5\n"
+"\t.short 0x701F, 0xFF1F, 0xA5F0, 0xA5F0, 0x1FF0, 0x1F70, 0xA5F0, 0xA5F0\n"
+"\t.short 0x1FF0, 0x1F70, 0xF0FF, 0xF0A1, 0xF0C1, 0x701F, 0xF01F, 0xF0A1\n"
+"\t.short 0xF0C1, 0x701F, 0xFF1F, 0xA1F0, 0xC1F0, 0x1FF0, 0x1F70, 0x99F0\n"
+"\t.short 0xB9F0, 0x1FF0, 0x1F70, 0xF0FF, 0xF099, 0xF0B9, 0x701F, 0xF01F\n"
+"\t.short 0xF099, 0xF0B9, 0x701F, 0xFF1F, 0x9DF0, 0xBDF0, 0x1FF0, 0xFFF2\n"
+"\t.short 0x9DF0, 0xBDF0, 0x1FF0, 0xFFF2, 0xF0FF, 0xF0BD, 0xF21F, 0xF0FF\n"
+"\t.short 0xF0A5, 0xF0C5, 0xF21F, 0xF0FF, 0xFFA5, 0x1FF0, 0xFFF2, 0xA5F0\n"
+"\t.short 0xC5F0, 0x1FF0, 0xFFF2, 0xA1F0, 0xC1F0, 0xF2FF, 0xF0FF, 0xF0A1\n"
+"\t.short 0xF0C1, 0xF21F, 0xF0FF, 0xF0A1, 0xF0C1, 0xFF1F, 0x99F0, 0xB9F0\n"
+"\t.short 0x1FF0, 0xFFF2, 0x99F0, 0xB9F0, 0x1FF0, 0xFFF2, 0xF0FF, 0xF0B9\n"
+"\t.short 0xF21F, 0xF0FF, 0xF09D, 0xF0BD, 0xF21F, 0xF0FF, 0xFFBD, 0x1FF0\n"
+"\t.short 0xFFF2, 0x9DF0, 0xBDF0, 0x1FF0, 0xFFF2, 0xA5F0, 0xC5F0, 0xF2FF\n"
+"\t.short 0xF0FF, 0xF0A5, 0xF0A5, 0xF21F, 0xF0FF, 0xF0A5, 0xF0C5, 0xFE1F\n"
+"\t.short 0xA1F0, 0xC1F0, 0x1FF0, 0xFFF2, 0xA1F0, 0xC1F0, 0x1FF0, 0x002B\n"
+"\t.short 0x0000, 0x0000\n"
+);
 u8 frontier_banim_aurabg3_017_777118[] __attribute__((section(".data.frontier_banim_aurabg3.gap17"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_017_777118.bin.lz");
 u8 frontier_banim_aurabg3_018_7771B8[] __attribute__((section(".data.frontier_banim_aurabg3.gap18"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_018_7771B8.bin.lz");
 u8 frontier_banim_aurabg3_019_777264[] __attribute__((section(".data.frontier_banim_aurabg3.gap19"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_019_777264.bin.lz");
