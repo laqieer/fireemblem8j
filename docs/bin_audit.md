@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 7 | 0.4% |
-| **FLOOR** | 1381 | 75.2% |
-| **UNCERTAIN** | 449 | 24.4% |
-| **TOTAL** | 1837 | 100.0% |
+| **FLOOR** | 1381 | 75.5% |
+| **UNCERTAIN** | 442 | 24.2% |
+| **TOTAL** | 1830 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -52,7 +52,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 449 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 442 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -1497,9 +1497,9 @@ under MISS, asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (449) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (442) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>449 entries</summary>
+<details><summary>442 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1794,20 +1794,14 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/gCharacterEndingTitleLut.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gClassReelData.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gClassReelOrderedLut.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/gDebugChuudanMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/gDebugClearMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/gDebugContinueMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gExcaliburBgScrollOffsets.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gGfx_OpSubtitle_05.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/gItemUseMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gLunaBgScrollOffsets.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gMenuMainObjs_5.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gPromoJidLut.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gSoloEndingBattleDispConf.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gSomeSMSLookupTable_0.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/gStealItemMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gTacticianTextConf.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/gUnitActionMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gUnkData_102.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gUnkData_103.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gUnkData_104.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1815,7 +1809,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/gUnkData_106.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gUnkData_107.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gWorldmapPath_20.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/gYesNoSelectionMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gap_00003080.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gap_00003240.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gap_00006274.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
