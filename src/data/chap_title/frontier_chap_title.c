@@ -353,4 +353,6 @@ __attribute__((section(".data.frontier_chap_title.gap114")))
 u8 frontier_chap_title_114_A91F08[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_114_A91F08.4bpp.lz");
 
 __attribute__((section(".data.frontier_chap_title.gap115")))
-u8 frontier_chap_title_115_A92170[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_115_A92170.bin");
+u8 frontier_chap_title_115_A92170[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_115a_A92170.4bpp.lz");
+__attribute__((section(".data.frontier_chap_title.gap115")))
+u8 frontier_chap_title_115b_A92410[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_115b_A92410.bin");

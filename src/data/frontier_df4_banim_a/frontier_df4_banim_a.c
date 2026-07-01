@@ -4,7 +4,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 frontier_df4_banim_a_000_5E0E94[] __attribute__((section(".data.frontier_df4_banim_a.gap0"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_000_5E0E94.bin");
+u8 frontier_df4_banim_a_000_5E0E94[] __attribute__((section(".data.frontier_df4_banim_a.gap0"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_000a_5E0E94.4bpp.lz");
+u8 frontier_df4_banim_a_000b_5E1740[] __attribute__((section(".data.frontier_df4_banim_a.gap0"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_000b_5E1740.bin");
 u8 frontier_df4_banim_a_001_5E37CC[] __attribute__((section(".data.frontier_df4_banim_a.gap1"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_001_5E37CC.bin", 0x0, 0x18);
 u8 data_085E37E4[] __attribute__((section(".data.frontier_df4_banim_a.gap1"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_001_5E37CC.bin", 0x18, 0x28);
 u8 data_085E380C[] __attribute__((section(".data.frontier_df4_banim_a.gap1"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_001_5E37CC.bin", 0x40, 0x60);

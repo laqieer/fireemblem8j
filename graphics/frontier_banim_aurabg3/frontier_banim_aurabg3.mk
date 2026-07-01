@@ -4,6 +4,7 @@
 # verbatim .bin incbin'd directly. baserom.gba is out of the build graph. Oracle: make compare.
 
 asm/frontier_banim_aurabg3.o: \
+  graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_004a_7738F0.4bpp.lz \
   graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_000_76E98C.4bpp.lz \
   graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_001_76FE78.4bpp.lz \
   graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_002_771224.4bpp.lz \
