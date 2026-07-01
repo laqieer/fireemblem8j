@@ -36,6 +36,12 @@ REDA cascade: 31 REDA runs carved into named `struct REDA[]`, 5 `.bin` eliminate
 **Wave 10 (LANDED, −10 `.bin`: 1886 → 1876, MISS 285 → 275):** 10 raw `frontier_df4_banim_b` OAM tables
 → typed `struct AnimSpriteData[]` (pointer-free, byte-exact). The remaining ~52 raw banim there are
 pointer-coupled (need an atomic whole-object relocation — in progress); 29 are JP-LZ floor.
+**Wave 11 (LANDED, −9 `.bin`: 1876 → 1867):** atomic whole-object relocation of `frontier_df4_banim_b`
+— 588 embedded pointers across 11 coherent OAM/frame-pointer tables expressed as relocatable
+`.4byte Sym` refs (all resolving to real named globals, 0 invented symbols), 9 `.bin` deleted. The
+object is now relocation-complete for its coherent tables; the residual ~30 are scattered/high-entropy
+(gate-ignored) or mixed proc-script/OAM (not fake-carved). Other banim dirs (aurabg3/dracozombie/…)
+remain as independent per-object carve lanes.
 The strict goal is NOT reached; `make compare` OK + `make shiftcheck` 0 HIGH held on every banked lane.
 
 ## Current state (2026-06-30) — asset-editability WAVE 8 landed + the 642-MISS heuristic split (D322)
