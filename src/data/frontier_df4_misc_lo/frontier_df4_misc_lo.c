@@ -4,7 +4,13 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 frontier_df4_misc_lo_000a_0DC3DC[] __attribute__((section(".data.frontier_df4_misc_lo.gap0a"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000a_0DC3DC.bin");
+__asm__(
+"\t.section .data.frontier_df4_misc_lo.gap0a, \"aw\", %progbits\n"
+"\t.global frontier_df4_misc_lo_000a_0DC3DC\n"
+"frontier_df4_misc_lo_000a_0DC3DC:\n"
+"\t.byte 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46\n"
+"\t.byte 0x00, 0x00, 0x00, 0x00, 0x82, 0x4F, 0x00, 0x00, 0x45, 0x5F, 0x46, 0x41, 0x43, 0x45, 0x00, 0x00\n"
+);
 u8 frontier_df4_misc_lo_000b_0DC43C[] __attribute__((section(".data.frontier_df4_misc_lo.gap0b"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin", 32, 240);
 u8 frontier_df4_misc_lo_000bm_0DC548[] __attribute__((section(".data.frontier_df4_misc_lo.gap0bm"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin", 300, 20);
 u8 frontier_df4_misc_lo_000b1_0DC56C[] __attribute__((section(".data.frontier_df4_misc_lo.gap0b1"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin", 336, 3);
