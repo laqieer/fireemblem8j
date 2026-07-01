@@ -6,4 +6,6 @@
 
 u8 frontier_df3_btl_bg_000_7B40A8[] __attribute__((section(".data.frontier_df3_btl_bg.gap0"))) = INCBIN_U8("graphics/frontier_df3_btl_bg/frontier_df3_btl_bg_000_7B40A8.4bpp.lz");
 u8 frontier_df3_btl_bg_001_7B6E50[] __attribute__((section(".data.frontier_df3_btl_bg.gap1"))) = INCBIN_U8("graphics/frontier_df3_btl_bg/frontier_df3_btl_bg_001_7B6E50.4bpp.lz");
-u8 frontier_df3_btl_bg_002_7B83B8[] __attribute__((section(".data.frontier_df3_btl_bg.gap2"))) = INCBIN_U8("graphics/frontier_df3_btl_bg/frontier_df3_btl_bg_002_7B83B8.bin");
+u8 frontier_df3_btl_bg_002_7B83B8[] __attribute__((section(".data.frontier_df3_btl_bg.gap2"))) = INCBIN_U8("graphics/frontier_df3_btl_bg/frontier_df3_btl_bg_002a_7B83B8.4bpp.lz");
+u8 data_087B9C50[] __attribute__((section(".data.frontier_df3_btl_bg.gap2"))) = INCBIN_U8("graphics/frontier_df3_btl_bg/data_087B9C50.4bpp.lz");
+u8 data_087B9CDC[] __attribute__((section(".data.frontier_df3_btl_bg.gap2"))) = INCBIN_U8("graphics/frontier_df3_btl_bg/data_087B9CDC.map.bin.lz");
