@@ -9,3 +9,6 @@
 #   frontier_df3_btl_bg_000_7B40A8.png  ->  .4bpp -> .4bpp.lz  (16-tile-wide sheet)
 #   frontier_df3_btl_bg_001_7B6E50.png  ->  .4bpp -> .4bpp.lz  (16-tile-wide sheet)
 #   frontier_df3_btl_bg_002_7B83B8.bin  ->  verbatim (tilemap)
+
+# --- mindist pins (pixel-gfx sheets) ---
+graphics/frontier_df3_btl_bg/data_087B9CDC.map.bin.lz: LZ_FLAGS := -mindist 1

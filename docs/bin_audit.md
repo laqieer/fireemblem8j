@@ -32,23 +32,23 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 34 | 1.8% |
-| **FLOOR** | 1380 | 73.4% |
-| **UNCERTAIN** | 467 | 24.8% |
-| **TOTAL** | 1881 | 100.0% |
+| **MISS** | 29 | 1.5% |
+| **FLOOR** | 1381 | 73.6% |
+| **UNCERTAIN** | 467 | 24.9% |
+| **TOTAL** | 1877 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
 | Category | Verdict | Count (this run) | fe8u editable form |
 |---|---|---:|---|
 | battle-anim | MISS | 2 | fe8u 202 editable banim/*.s (compressing linker) |
-| pixel-gfx | MISS | 15 | fe8u graphics/**/*.png |
+| pixel-gfx | MISS | 10 | fe8u graphics/**/*.png |
 | sound-m4a-tables | MISS | 1 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 4 | fe8u sound/voicegroups/*.s (documented ceiling) |
 | menu-strings | MISS | 11 | fe8u C literals (src/menu_def.c) |
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 1 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
-| TSA/.map.bin | FLOOR | 1231 | fe8u keeps TSA/tilemaps binary too |
+| TSA/.map.bin | FLOOR | 1232 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
@@ -91,9 +91,9 @@ under MISS, asserted by the self-test guards below).
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 - 30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).
 
-## MISS (34) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (29) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>34 entries</summary>
+<details><summary>29 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -106,12 +106,8 @@ under MISS, asserted by the self-test guards below).
 | `data/sound/frontier_df4_voice_000_1F578C.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s / direct_sound_data.s |
 | `data/sound/frontier_df4_voice_001_1F67BC.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s / direct_sound_data.s |
 | `graphics/frontier_chap_title/frontier_chap_title_115_A92170.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_df3_btl_bg/frontier_df3_btl_bg_002_7B83B8.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
 | `graphics/frontier_df3_const_unit_ic/frontier_df3_const_unit_ic_000_1C0D80.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
 | `graphics/frontier_df3_const_unit_ic/frontier_df3_const_unit_ic_001_1C2B4C.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
-| `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_000_B75860.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
-| `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_002_B7F118.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
-| `graphics/frontier_df3_opanim_gfx/frontier_df3_opanim_gfx_003_B864A8.bin` | pixel-gfx | fe8u graphics/op_anim/*.png (opanim gfx, not the tilemap floor) |
 | `graphics/frontier_df3_titlescreen/frontier_df3_titlescreen_001_B48D38.bin` | pixel-gfx | fe8u graphics/titlescreen/*.png |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_031_69EBD8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_085_A13CD0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -129,14 +125,13 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_020_1EC9E0.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_021_1F4F60.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_tail/frontier_df4_tail_000_BABAF8.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
-| `graphics/frontier_df4_tail/frontier_df4_tail_001_BB08B4.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
 | `graphics/frontier_map_ch9events/frontier_map_ch9events_000_1598A0.bin` | pixel-gfx | fe8u graphics/**/*.png (frontier image region) |
 
 </details>
 
-## FLOOR (1380) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (1381) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>1380 entries</summary>
+<details><summary>1381 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -950,6 +945,7 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_009k_65910C.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_009l_65920C.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_009m_659308.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
+| `graphics/frontier_df3_btl_bg/data_087B9CDC.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df4_banim_b/data_08705B7C.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df4_banim_b/data_08705D48.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df4_banim_b/data_08705F2C.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
