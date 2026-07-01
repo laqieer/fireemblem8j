@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 7 | 0.4% |
-| **FLOOR** | 1381 | 74.4% |
-| **UNCERTAIN** | 467 | 25.2% |
-| **TOTAL** | 1855 | 100.0% |
+| **FLOOR** | 1381 | 75.2% |
+| **UNCERTAIN** | 449 | 24.4% |
+| **TOTAL** | 1837 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -52,7 +52,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 467 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 449 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -1497,13 +1497,12 @@ under MISS, asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (467) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (449) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>467 entries</summary>
+<details><summary>449 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
-| `data/residual/Ch10EirikaEvents.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/Ch16EphraimEventData.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/Ch19EphraimEventData.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/Ch1Events.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
@@ -1520,17 +1519,11 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/Ch9Events.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/FinalEphraimEvents1.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/JapaneseTerrainNames.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/MenuItemDef_RouteSplit.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/MenuItemDef_WMGeneralMenu.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/MenuItemDef_WMNodeMenu.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/PrologueEvents.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/REDA_Ch14AMixed_1_CAELLACH.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/REDA_Ch14AMixed_1_ISMAIRE.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/REDA_Ch14AMixed_1_LYON.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/SoftReset.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/TextGlyphs_Special.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/TextGlyphs_System.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/TextGlyphs_Talk.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/TrapData_Event_Ruin9_0.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/WmMonsterGenerateRates_EphraimMode.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/WmMonsterGenerateRates_XmapEphraim.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
@@ -1645,7 +1638,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_0863230C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08636008.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08636294.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_086371AC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08645FC4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0864738C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08647830.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1654,13 +1646,10 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_0865A268.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0865A694.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086724CC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_086730D0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0867B54C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0869BFF0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0869C14C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086A01E0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086A0C24.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_086A1CB0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086A25CC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086A2890.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086A2D64.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1707,7 +1696,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_087644A8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08764BF4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0877B894.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0877B9B4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_087A2494.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_087A2554.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_087AEA64.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1809,13 +1797,10 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/gDebugChuudanMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gDebugClearMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gDebugContinueMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/gEventListCmdInfoTable.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gExcaliburBgScrollOffsets.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/gGameOptions.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gGfx_OpSubtitle_05.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gItemUseMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gLunaBgScrollOffsets.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/gMPlayJumpTableTemplate.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gMenuMainObjs_5.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gPromoJidLut.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gSoloEndingBattleDispConf.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
@@ -1829,7 +1814,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/gUnkData_105.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gUnkData_106.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gUnkData_107.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/gWMPathData.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gWorldmapPath_20.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gYesNoSelectionMenuItems.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/gap_00003080.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1857,11 +1841,9 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/pilot_F63820_F63820.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/pilot_F97AC0_F97AC0.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/sMusicProc4Script.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/sProc_BMVSync.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/sSlotToChrLut.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/unit_icon_move_Bard_motion.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/unit_icon_move_Dancer_motion.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/unit_icon_move_table.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/data/data_08576124_576150.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/data_085772B4/data_085772B4_577378.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_000_5D367C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
