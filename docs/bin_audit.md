@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 29 | 1.5% |
-| **FLOOR** | 1380 | 73.6% |
+| **FLOOR** | 1381 | 73.6% |
 | **UNCERTAIN** | 467 | 24.9% |
-| **TOTAL** | 1876 | 100.0% |
+| **TOTAL** | 1877 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -48,7 +48,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | menu-strings | MISS | 11 | fe8u C literals (src/menu_def.c) |
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 1 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
-| TSA/.map.bin | FLOOR | 1231 | fe8u keeps TSA/tilemaps binary too |
+| TSA/.map.bin | FLOOR | 1232 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
@@ -129,9 +129,9 @@ under MISS, asserted by the self-test guards below).
 
 </details>
 
-## FLOOR (1380) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (1381) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>1380 entries</summary>
+<details><summary>1381 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -945,6 +945,7 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_009k_65910C.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_009l_65920C.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_009m_659308.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
+| `graphics/frontier_df3_btl_bg/data_087B9CDC.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df4_banim_b/data_08705B7C.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df4_banim_b/data_08705D48.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df4_banim_b/data_08705F2C.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
