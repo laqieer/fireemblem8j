@@ -47,11 +47,18 @@ KEY FINDING — the banim dirs are HETEROGENEOUS: aurabg3 is graphics/OAM-domina
 gate-coherent tables**, so its `.bin` need a *typed-data OAM* carve (not the pointer-relocation lane).
 **Session net (waves 9–12): `.bin` 1919 → 1867 (−52), MISS 318 → 266.**
 
-**DEFINITIVE strict-goal blocker (D324):** MISS=0 needs (1) a **bit-exact JP LZ recompressor** for the
-58 JP-LZ files (0/58 reproduce at any gbagfx `-mindist` — a reverse-engineering research project, the
-true gate) + (2) ~200 more reducible carves (heterogeneous per-object typed-data/relocation lanes +
-the unitdef recursive table-typing chain). Recommend the JP-LZ recompressor RE first (unblocks 58 at
-once). Strict goal NOT reached; `make compare` OK + `make shiftcheck` 0 HIGH held on every banked lane.
+**JP-LZ blocker DISSOLVED (D325 — corrects the wrong D324 claim):** the 58 byte0=0x10 residual
+`.bin` are NOT irreducible — they are **concatenated LZ tile-sheets** (gbagfx reproduces each sheet
+byte-exact at `-mindist 1/2`; the earlier "0/58 reproduce" was a flawed full-file cmp — a PREFIX
+compare matches, the size gap is over-captured trailing/next-sheet bytes). **No JP LZ recompressor is
+needed.** They reduce to `.png` via the standard `png→4bpp→lz` pipeline. **Wave 13 Phase 1 (LANDED,
+−6 `.bin`: 1867→1861, MISS 266→260):** `frontier_df4_banim_b_049` (template) + 5 CLEAN_TILES fully
+eliminated → PNG. **Remaining strict-goal work (now fully unblocked):** ~50 more JP-LZ blobs (whole-tile
+sheets → PNG; non-tile 1200-byte LZ OAM sheets → `.bin.lz` pattern; +trailing) — a split file fully
+reduces only when BOTH its image PNG and its OAM tail are carved (else atomic decomposition raises the
+path-based MISS count); plus the ~146 raw banim OAM tables, unitdef recursive tables, etc. A
+multi-wave carve grind, but NO research-project blocker. Strict goal NOT yet reached; `make compare`
+OK + `make shiftcheck` 0 HIGH held on every banked lane.
 
 ## Current state (2026-06-30) — asset-editability WAVE 8 landed + the 642-MISS heuristic split (D322)
 
