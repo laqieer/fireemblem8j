@@ -6,10 +6,50 @@
  */
 
 u8 frontier_df4_banim_a_000_5E0E94[] __attribute__((section(".data.frontier_df4_banim_a.gap0"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_000_5E0E94.bin");
-u8 frontier_df4_banim_a_001_5E37CC[] __attribute__((section(".data.frontier_df4_banim_a.gap1"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_001_5E37CC.bin", 0x0, 0x18);
-u8 data_085E37E4[] __attribute__((section(".data.frontier_df4_banim_a.gap1"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_001_5E37CC.bin", 0x18, 0x28);
-u8 data_085E380C[] __attribute__((section(".data.frontier_df4_banim_a.gap1"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_001_5E37CC.bin", 0x40, 0x60);
-u8 data_085E386C[] __attribute__((section(".data.frontier_df4_banim_a.gap1"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_001_5E37CC.bin", 0xA0, 0x240);
+/* multi-slice atomic relocation carve (was several INCBIN_U8 slices of one .bin);
+   every embedded ROM pointer -> .4byte Sym(+addend), byte-exact. make compare is the oracle. */
+__asm__(
+"	.section .data.frontier_df4_banim_a.gap1, \"aw\", %progbits\n"
+"	.global frontier_df4_banim_a_001_5E37CC\n"
+"frontier_df4_banim_a_001_5E37CC:\n"
+"	.4byte 0x00000001, frontier_df4_misc_lo_005_0DF388 + 0x3C, 0x00000003, ekrDispUPMain, 0x00000000, 0x00000000\n"
+"	.global data_085E37E4\n"
+"data_085E37E4:\n"
+"	.4byte 0x00000001, frontier_df4_misc_lo_005_0DF388 + 0x48, 0x00000003, EfxHpBar_DeclineToDeath, 0x00000003, EfxHpBar_MoveCameraOnEnd\n"
+"	.4byte 0x00000003, EfxHpBar_WaitCameraMove, 0x00000000, 0x00000000\n"
+"	.global data_085E380C\n"
+"data_085E380C:\n"
+"	.4byte 0x00000001, frontier_df4_misc_lo_005_0DF388 + 0x54, 0x00000003, EfxHpBarResire_WaitOnCurrentSide, 0x00000003, EfxHpBarResire_SetAnotherSide\n"
+"	.4byte 0x00000003, EfxHpBarResire_DeclineToDeath, 0x00000003, EfxHpBar_MoveCameraOnEnd, 0x00000003, EfxHpBar_WaitCameraMove\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_005_0DF388 + 0x64, 0x00000003, EfxAvoidMain\n"
+"	.4byte 0x00000003, EfxHpBar_MoveCameraOnEnd, 0x00000003, EfxHpBar_WaitCameraMove, 0x00000000, 0x00000000\n"
+"	.global data_085E386C\n"
+"data_085E386C:\n"
+"	.4byte 0x00000001, frontier_df4_misc_lo_005_0DF388 + 0x70, 0x00000003, EfxHPBarLiveMain, 0x00000003, EfxHpBar_MoveCameraOnEnd\n"
+"	.4byte 0x00000003, EfxHpBar_WaitCameraMove, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_005_0DF388 + 0x80\n"
+"	.4byte 0x00000003, EfxNoDamageMain, 0x00000003, EfxHpBar_MoveCameraOnEnd, 0x00000003, EfxHpBar_WaitCameraMove\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_005_0DF388 + 0x8C, 0x00000003, EfxNoDamageYureMain\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000001, gEfxNoDmgBgShakeOff + 0x1C, 0x000A000F, 0x00000000\n"
+"	.4byte 0x00000003, EfxStatusCHGMain, 0x00000003, EfxHpBar_MoveCameraOnEnd, 0x00000003, EfxHpBar_WaitCameraMove\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000001, gEfxNoDmgBgShakeOff + 0x2C, 0x00000003, efxDeadEvent_Loop_A\n"
+"	.4byte 0x00000003, efxDeadEvent_Loop_B, 0x00000003, efxDeadEvent_Loop_C, 0x00000003, efxDeadEvent_Loop_D\n"
+"	.4byte 0x00000003, efxDeadEvent_Loop_E, 0x00000000, 0x00000000, 0x00000001, gEfxNoDmgBgShakeOff + 0x3C\n"
+"	.4byte 0x00000003, efxDead_Loop_A, 0x00000003, efxDead_Loop_B, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, gEfxNoDmgBgShakeOff + 0x44, 0x00000003, EfxDeadPikaMain, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, gEfxNoDmgBgShakeOff + 0x50, 0x00000003, EfxDeadAlphaMain, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, gEfxNoDmgBgShakeOff + 0x60, 0x00000003, EfxDeadDragonAlphaMain, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, gEfxNoDmgBgShakeOff + 0x74, 0x00000003, efxFarAttack_Init, 0x00000003, efxFarAttack_ScrollIn\n"
+"	.4byte 0x00000003, efxFarAttack_ScrollOut, 0x00000000, 0x00000000, 0x00000001, gEfxbattle_6 + 0x132\n"
+"	.4byte 0x00000003, efxQuakePure_Loop, 0x00000000, 0x00000000, gEfxbattle_0, 0x00000000\n"
+"	.4byte gEfxQuakeVecs, 0x00000000, gEfxbattle_1, 0x00000000, gEfxQuakeVecs2, 0x00000000\n"
+"	.4byte gEfxbattle_2, 0x00000000, gEfxbattle_3, 0x00000000, gEfxbattle_4 + 0xB2, 0x00000000\n"
+"	.4byte gEfxbattle_4 + 0xC4, 0x00000000, gEfxbattle_4 + 0xE6, 0x00000000, gEfxbattle_4 + 0xF8, 0x00000000\n"
+"	.4byte gEfxbattle_4 + 0x10A, 0x00000000, gEfxbattle_4 + 0x11C, 0x00000000, gEfxbattle_4 + 0x1D2, 0x00000000\n"
+"	.4byte gEfxbattle_4 + 0x1E4, 0x00000000, gEfxbattle_4 + 0x1F6, 0x00000000, gEfxbattle_4 + 0x208, 0x00000000\n"
+"	.4byte 0x00000001, gEfxbattle_6 + 0x142, 0x00000003, nullsub_53, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, gEfxbattle_6 + 0x152, 0x00000003, efxQuake_Loop, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, gEfxbattle_6 + 0x15E, 0x00000003, efxHitQuake_Loop, 0x00000000, 0x00000000\n"
+);
 /* multi-slice atomic relocation carve (was several INCBIN_U8 slices of one .bin);
    every embedded ROM pointer -> .4byte Sym(+addend), byte-exact. make compare is the oracle. */
 __asm__(
@@ -167,7 +207,41 @@ struct AnimSpriteData frontier_df4_banim_a_007_5F1C3C[] __attribute__((section("
     { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0007, 32, -16 } } },
     ANIM_SPRITE_END,
 };
-u8 frontier_df4_banim_a_008_5FE7D8[] __attribute__((section(".data.frontier_df4_banim_a.gap8"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_008_5FE7D8.bin");
+/* frontier_df4_banim_a_008_5FE7D8: atomic relocation carve (was INCBIN); every embedded ROM
+   pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
+__asm__(
+"	.section .data.frontier_df4_banim_a.gap8, \"aw\", %progbits\n"
+"	.global frontier_df4_banim_a_008_5FE7D8\n"
+"frontier_df4_banim_a_008_5FE7D8:\n"
+"	.4byte data_085FD998 + 0x92, AnimSprite_EkrBaseKaiten_49 + 0x2, AnimSprite_EkrBaseKaiten_73 + 0x2, AnimSprite_EkrBaseKaiten_50 + 0x1, AnimSprite_EkrBaseKaiten_51 + 0x1, AnimSprite_EkrBaseKaiten_52 + 0x1\n"
+"	.4byte AnimSprite_EkrBaseKaiten_53 + 0x1, AnimSprite_EkrBaseKaiten_54 + 0x1, 0x80000000, data_085FD998 + 0x92, AnimSprite_EkrBaseKaiten_55 + 0x2, AnimSprite_EkrBaseKaiten_74 + 0x2\n"
+"	.4byte AnimSprite_EkrBaseKaiten_56 + 0x1, AnimSprite_EkrBaseKaiten_57 + 0x1, data_085FDDAC + 0x1, AnimSprite_EkrBaseKaiten_59 + 0x1, AnimSprite_EkrBaseKaiten_60 + 0x1, 0x80000000\n"
+"	.4byte data_085FD998 + 0x92, AnimSprite_EkrBaseKaiten_61 + 0x2, AnimSprite_EkrBaseKaiten_75 + 0x2, AnimSprite_EkrBaseKaiten_62 + 0x1, AnimSprite_EkrBaseKaiten_63 + 0x1, AnimSprite_EkrBaseKaiten_64 + 0x1\n"
+"	.4byte AnimSprite_EkrBaseKaiten_65 + 0x1, AnimSprite_EkrBaseKaiten_66 + 0x1, 0x80000000, data_085FD998 + 0x92, AnimSprite_EkrBaseKaiten_67 + 0x2, AnimSprite_EkrBaseKaiten_76 + 0x2\n"
+"	.4byte AnimSprite_EkrBaseKaiten_68 + 0x1, AnimSprite_EkrBaseKaiten_69 + 0x1, data_085FE358 + 0x1, AnimSprite_EkrBaseKaiten_71 + 0x1, data_085FE490 + 0x1, 0x80000000\n"
+"	.4byte AnimSprite_EkrBaseKaiten_54 + 0x1, AnimSprite_EkrBaseKaiten_53 + 0x1, AnimSprite_EkrBaseKaiten_52 + 0x1, AnimSprite_EkrBaseKaiten_51 + 0x1, AnimSprite_EkrBaseKaiten_50 + 0x1, AnimSprite_EkrBaseKaiten_73 + 0x2\n"
+"	.4byte AnimSprite_EkrBaseKaiten_49 + 0x2, data_085FD998 + 0x92, 0x80000000, AnimSprite_EkrBaseKaiten_60 + 0x1, AnimSprite_EkrBaseKaiten_59 + 0x1, data_085FDDAC + 0x1\n"
+"	.4byte AnimSprite_EkrBaseKaiten_57 + 0x1, AnimSprite_EkrBaseKaiten_56 + 0x1, AnimSprite_EkrBaseKaiten_74 + 0x2, AnimSprite_EkrBaseKaiten_55 + 0x2, data_085FD998 + 0x92, 0x80000000\n"
+"	.4byte AnimSprite_EkrBaseKaiten_66 + 0x1, AnimSprite_EkrBaseKaiten_65 + 0x1, AnimSprite_EkrBaseKaiten_64 + 0x1, AnimSprite_EkrBaseKaiten_63 + 0x1, AnimSprite_EkrBaseKaiten_62 + 0x1, AnimSprite_EkrBaseKaiten_75 + 0x2\n"
+"	.4byte AnimSprite_EkrBaseKaiten_61 + 0x2, data_085FD998 + 0x92, 0x80000000, data_085FE490 + 0x1, AnimSprite_EkrBaseKaiten_71 + 0x1, data_085FE358 + 0x1\n"
+"	.4byte AnimSprite_EkrBaseKaiten_69 + 0x1, AnimSprite_EkrBaseKaiten_68 + 0x1, AnimSprite_EkrBaseKaiten_76 + 0x2, AnimSprite_EkrBaseKaiten_67 + 0x2, data_085FD998 + 0x92, 0x80000000\n"
+"	.4byte 0x40000000, 0xFFF80000, 0x0000FFF8, 0x00000001, 0x00000000, 0x00000000\n"
+"	.4byte 0x70000000, 0x00000002, 0x00000000, 0x70000000, 0xFFF00004, 0x0000FFF0\n"
+"	.4byte 0x70000000, 0x00000006, 0x0000FFF0, 0x70000000, 0xFFF00008, 0x00000000\n"
+"	.4byte 0x00000001, 0x00000000, 0x00000000, 0x40000000, 0xFFF80000, 0x00000004\n"
+"	.4byte 0x40000000, 0xFFF80000, 0x0000FFF4, 0x00008000, 0x0008000A, 0x0000FFF4\n"
+"	.4byte 0x00008000, 0x0008000A, 0x00000004, 0x10008000, 0xFFF0000A, 0x0000FFF4\n"
+"	.4byte 0x10008000, 0xFFF0000A, 0x00000004, 0x00004000, 0xFFF80000, 0x0000FFEC\n"
+"	.4byte 0x00000000, 0x0008002A, 0x0000FFEC, 0x10000000, 0xFFF0002A, 0x0000FFEC\n"
+"	.4byte 0x00000001, 0x00000000, 0x00000000, 0x90004000, 0x00000043, 0x0000FFF0\n"
+"	.4byte 0x10008000, 0xFFF80047, 0x0000FFF0, 0x10000000, 0xFFF00068, 0x0000FFF8\n"
+"	.4byte 0x90004000, 0xFFF00043, 0x00000000, 0x10008000, 0xFFE80047, 0x00000000\n"
+"	.4byte 0x10000000, 0xFFE00068, 0x00000008, 0x10004000, 0xFFE80060, 0x00000010\n"
+"	.4byte 0x10000000, 0xFFE00062, 0x00000010, 0x10000000, 0xFFF80064, 0x00000010\n"
+"	.4byte 0x10000000, 0x0018001F, 0x0000FFE8, 0x10004000, 0x00080040, 0x0000FFE8\n"
+"	.4byte 0x10000000, 0x00000042, 0x0000FFE8, 0x10000000, 0x00200018, 0x0000FFE8\n"
+"	.4byte 0x00000001, 0x00000000, 0x00000000\n"
+);
 /* multi-slice atomic relocation carve (was several INCBIN_U8 slices of one .bin);
    every embedded ROM pointer -> .4byte Sym(+addend), byte-exact. make compare is the oracle. */
 __asm__(
@@ -595,20 +669,113 @@ __asm__(
 "	.4byte 0x00000003, efxLunaSCR_Loop, 0x00000000, 0x00000000, 0x00000001, Frames_efxLunaBG + 0x12\n"
 "	.4byte 0x00000003, EfxSRankWeaponEffectSCR2Main, 0x00000000, 0x00000000\n"
 );
-u8 frontier_df4_banim_a_013_601630[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x0, 0xD0);
-u8 data_08601700[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0xD0, 0x48);
-u8 data_08601748[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x118, 0x60);
-u8 data_086017A8[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x178, 0x18);
-u8 data_086017C0[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x190, 0x1B8);
-u8 data_08601978[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x348, 0x48);
-u8 data_086019C0[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x390, 0x20);
-u8 data_086019E0[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x3B0, 0x18);
-u8 data_086019F8[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x3C8, 0x48);
-u8 data_08601A40[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x410, 0x128);
-u8 data_08601B68[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x538, 0x30);
-u8 data_08601B98[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x568, 0xD0);
-u8 data_08601C68[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x638, 0x38);
-u8 data_08601CA0[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_013_601630.bin", 0x670, 0x20);
+/* multi-slice atomic relocation carve (was several INCBIN_U8 slices of one .bin);
+   every embedded ROM pointer -> .4byte Sym(+addend), byte-exact. make compare is the oracle. */
+__asm__(
+"	.section .data.frontier_df4_banim_a.gap13, \"aw\", %progbits\n"
+"	.global frontier_df4_banim_a_013_601630\n"
+"frontier_df4_banim_a_013_601630:\n"
+"	.4byte 0x00000001, 0x080E329C, 0x00000004, efxExcaliburBG2_OnEnd, 0x00000003, sub_8065A44\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000001, 0x080E32AC, 0x000A000F, 0x00000000\n"
+"	.4byte 0x00000003, sub_8065AA8, 0x00000000, 0x00000000, 0x00000001, 0x080E32D4\n"
+"	.4byte 0x00000004, efxExcaliburBG3_OnEnd, 0x00000003, sub_8065BF0, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, 0x080E32E4, 0x000A000F, 0x00000000, 0x00000003, sub_8065C54\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000001, 0x080E330C, 0x00000003, efxExcaliburOBJ_Loop\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000001, 0x080E331C, 0x00000003, efxExcaliburBG0_Loop\n"
+"	.4byte 0x00000000, 0x00000000, AnimScr_DarkBreath_Far + 0x6C, Pal_efxExcaliburBG0 + 0x20, 0x00000001, 0x080E3334\n"
+"	.4byte 0x00000003, sub_8065E44, 0x00000000, 0x00000000\n"
+"	.global data_08601700\n"
+"data_08601700:\n"
+"	.4byte 0x00000001, 0x080E3340, 0x00000003, efxGespenstBG_Loop, 0x00000000, 0x00000000\n"
+"	.4byte data_0875F138 + 0x20, data_0875F138 + 0x114, data_0875F138 + 0x208, data_0875F138 + 0x2FC, data_0875F138 + 0x474, data_0875F138 + 0x5EC\n"
+"	.4byte data_0875F138 + 0x764, data_0875F138 + 0x940, data_0875F138 + 0xB1C, data_0875F138 + 0xCF8, data_0875F138 + 0xE94, data_0875F138 + 0x1030\n"
+"	.global data_08601748\n"
+"data_08601748:\n"
+"	.4byte 0x00000001, 0x080E33A4, 0x00000004, sub_80661D0, 0x00000003, sub_80661EC\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000001, 0x080E33B4, 0x00000004, efxGespenstBG4_OnEnd\n"
+"	.4byte 0x00000003, efxGespenstBG4_Loop, 0x00000000, 0x00000000, 0x00000001, 0x080E33C4\n"
+"	.4byte 0x000A000F, 0x00000000, 0x00000003, efxGespenstBGCOL2_Loop, 0x00000000, 0x00000000\n"
+"	.global data_086017A8\n"
+"data_086017A8:\n"
+"	.4byte 0x00000001, 0x080E3428, 0x00000003, sub_8066410, 0x00000000, 0x00000000\n"
+"	.global data_086017C0\n"
+"data_086017C0:\n"
+"	.4byte 0x00000001, 0x080E3438, 0x00000004, sub_80664B8, 0x00000003, sub_80664D0\n"
+"	.4byte 0x0013000E, 0x00000000, 0x00000003, sub_80664EC, 0x0018000E, 0x00000000\n"
+"	.4byte 0x00000003, sub_8066508, 0x0013000E, 0x00000000, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, 0x080E3448, 0x00000003, efxOura_Loop_Main, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, 0x080E3450, 0x00000003, efxOuraBG_Loop, 0x00000000, 0x00000000\n"
+"	.4byte Tsa_AuraBg1_0, Tsa_AuraBg1_1, Tsa_AuraBg1_2, Tsa_AuraBg1_3, Tsa_AuraBg1_4, Tsa_AuraBg1_5\n"
+"	.4byte Tsa_AuraBg1_6, Tsa_AuraBg1_7, Tsa_AuraBg1_8, Tsa_AuraBg1_9, Tsa_AuraBg1_10, data_08764BF4\n"
+"	.4byte Tsa_AuraBg1_12, Tsa_AuraBg1_13, Tsa_AuraBg1_14, Tsa_AuraBg1_15, Tsa_AuraBg1_16, Tsa_AuraBg1_17\n"
+"	.4byte Tsa_AuraBg1_18, Tsa_AuraBg1_19, Tsa_AuraBg1_20, Tsa_AuraBg1_21, Tsa_AuraBg1_22, Tsa_AuraBg1_23\n"
+"	.4byte Tsa_AuraBg1_24, frontier_df4_banim_b_056_7657CC, frontier_df4_banim_b_056_7657CC + 0x104, frontier_df4_banim_b_056_7657CC + 0x208, 0x00000001, 0x080E34D4\n"
+"	.4byte 0x00000004, efxOuraBG2_OnEnd, 0x00000003, efxOuraBG2_Loop, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, 0x080E34E0, 0x000A000F, 0x00000000, 0x00000003, efxOuraBGCOL_Loop\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000001, 0x080E3500, 0x00000003, efxOuraBG3_Loop\n"
+"	.4byte 0x00000000, 0x00000000, frontier_banim_aurabg3_005_774CB8, frontier_banim_aurabg3_006_774F30, frontier_banim_aurabg3_007_7751A8, frontier_banim_aurabg3_008_775420\n"
+"	.4byte frontier_banim_aurabg3_009_775698, frontier_banim_aurabg3_010_775908, frontier_banim_aurabg3_011_775B64, frontier_banim_aurabg3_012_775DDC, frontier_banim_aurabg3_013_776054, frontier_banim_aurabg3_014_7762CC\n"
+"	.4byte frontier_banim_aurabg3_015_776544, frontier_banim_aurabg3_016_7767BC, Img_AuraBg3_0, Img_AuraBg3_1, Img_AuraBg3_2, Img_AuraBg3_3\n"
+"	.4byte Img_AuraBg3_4, Img_AuraBg3_5, Img_AuraBg3_6, frontier_banim_aurabg3_000_76E98C, frontier_banim_aurabg3_001_76FE78, frontier_banim_aurabg3_002_771224\n"
+"	.4byte frontier_banim_aurabg3_003_7725D4, frontier_banim_aurabg3_004_7738F0, 0x00000001, 0x080E3580, 0x00000003, sub_8066B7C\n"
+"	.4byte 0x00000000, 0x00000000\n"
+"	.global data_08601978\n"
+"data_08601978:\n"
+"	.4byte 0x00000001, 0x080E3588, 0x00000003, efxLunaBG_Loop, 0x00000000, 0x00000000\n"
+"	.4byte frontier_banim_aurabg3_017_777118, frontier_banim_aurabg3_018_7771B8, frontier_banim_aurabg3_019_777264, frontier_banim_aurabg3_020_777308, frontier_banim_aurabg3_021_7773B4, frontier_banim_aurabg3_022_777468\n"
+"	.4byte frontier_banim_aurabg3_023_777520, frontier_banim_aurabg3_024_7775CC, frontier_banim_aurabg3_025_777674, frontier_banim_aurabg3_026_77771C, frontier_banim_aurabg3_027_7777BC, frontier_banim_aurabg3_028_777858\n"
+"	.global data_086019C0\n"
+"data_086019C0:\n"
+"	.4byte 0x00000001, 0x080E35C4, 0x00000004, sub_8066E24, 0x00000003, sub_8066E40\n"
+"	.4byte 0x00000000, 0x00000000\n"
+"	.global data_086019E0\n"
+"data_086019E0:\n"
+"	.4byte 0x00000001, 0x080E35D0, 0x00000003, efxReblowOBJ_Loop_B, 0x00000000, 0x00000000\n"
+"	.global data_086019F8\n"
+"data_086019F8:\n"
+"	.4byte 0x00000001, 0x080E35DC, 0x00000003, efxIvaldiWOUT_Loop, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, 0x080E35E8, 0x00000003, efxLuceBGCOL_Loop, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, FrameConf_efxLuceBGCOL + 0x3E, 0x00000003, efxEreshkigal_Loop_Main, 0x00000000, 0x00000000\n"
+"	.global data_08601A40\n"
+"data_08601A40:\n"
+"	.4byte 0x00000001, FrameConf_efxLuceBGCOL + 0x4E, 0x00000003, sub_806749C, 0x0045000E, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000000, 0x000000D0, 0x00000030, 0x00000003, 0x00000400\n"
+"	.4byte 0x000000A0, 0x00000090, 0x00000001, 0x00000800, 0x00000040, 0x00000040\n"
+"	.4byte 0x00000003, 0x00000400, 0x000000C0, 0x00000060, 0x00000001, 0x00000800\n"
+"	.4byte 0x00000080, 0x00000030, 0x00000005, 0x00000400, 0x00000020, 0x00000060\n"
+"	.4byte 0x00000000, 0x00000800, 0x00000050, 0x00000080, 0x00000005, 0x00000400\n"
+"	.4byte 0x000000A0, 0x00000060, 0x00000001, 0x00000800, 0x000000D0, 0x00000030\n"
+"	.4byte 0x00000003, 0x00000400, 0x00000010, 0x00000040, 0x00000000, 0x00000800\n"
+"	.4byte 0x00000040, 0x00000070, 0x00000005, 0x00000400, 0x00000090, 0x00000060\n"
+"	.4byte 0x00000001, 0x00000800, 0x00000050, 0x00000020, 0x00000003, 0x00000400\n"
+"	.4byte data_087A0EF4 + 0xB18, data_087A0EF4 + 0xBF0, data_087A0EF4 + 0xC88, data_087A1C24 + 0x10, data_087A1C24 + 0x80, data_087A1C24 + 0xD0\n"
+"	.4byte 0x00000001, FrameConf_efxLuceBGCOL + 0x62, 0x00000004, efxGorgonOBJ_OnEnd, 0x003B000E, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000000\n"
+"	.global data_08601B68\n"
+"data_08601B68:\n"
+"	.4byte 0x00000001, FrameConf_efxLuceBGCOL + 0x76, 0x00000004, sub_8067600, 0x000D000E, 0x00000000\n"
+"	.4byte 0x00000003, sub_8067618, 0x006E000E, 0x00000000, 0x00000000, 0x00000000\n"
+"	.global data_08601B98\n"
+"data_08601B98:\n"
+"	.4byte 0x00000001, FrameConf_efxLuceBGCOL + 0x8A, 0x00000003, efxHazymoonBG_Loop, 0x00000000, 0x00000000\n"
+"	.4byte frontier_banim_dracozombie_018_781CBC, frontier_banim_dracozombie_018_781CBC, frontier_banim_dracozombie_019_7832B4, frontier_banim_dracozombie_020_7844F0, frontier_banim_dracozombie_021_785C08, frontier_banim_dracozombie_022_7875A0\n"
+"	.4byte frontier_banim_dracozombie_023_788CC4, frontier_banim_dracozombie_024_78A0D0, frontier_banim_dracozombie_025_78AF74, frontier_banim_dracozombie_026_78BE1C, frontier_banim_dracozombie_027_78CEA8, frontier_banim_dracozombie_028_78D004\n"
+"	.4byte frontier_banim_dracozombie_029_78D354, frontier_banim_dracozombie_030_78D6A4, frontier_banim_dracozombie_031_78DAB4, frontier_banim_dracozombie_032_78DF08, frontier_banim_dracozombie_033_78E33C, frontier_banim_dracozombie_034_78E750\n"
+"	.4byte frontier_banim_dracozombie_035_78EAE0, frontier_banim_dracozombie_036_78EE00, 0x00000001, FrameConf_efxLuceBGCOL + 0x14A, 0x00000003, efxSuperdruidBG3_Loop\n"
+"	.4byte 0x00000000, 0x00000000, frontier_banim_dracozombie_040_7955B8 + 0x420, Img_EreshkigalBg3_0, Img_EreshkigalBg3_1, Img_EreshkigalBg3_2\n"
+"	.4byte Img_EreshkigalBg3_3, frontier_df4_banim_b_057_79A108, Img_EreshkigalBg3_5, Img_EreshkigalBg3_6, Img_EreshkigalBg3_7, Img_EreshkigalBg3_8\n"
+"	.4byte Tsa_EreshkigalBg3_0, Tsa_EreshkigalBg3_1, frontier_df4_banim_b_058_79F83C, Tsa_EreshkigalBg3_3, frontier_df4_banim_b_059_79FCB0, frontier_df4_banim_b_059_79FCB0 + 0x250\n"
+"	.4byte frontier_df4_banim_b_059_79FCB0 + 0x4C4, frontier_df4_banim_b_059_79FCB0 + 0x6F0, frontier_df4_banim_b_059_79FCB0 + 0x934, frontier_df4_banim_b_059_79FCB0 + 0xB8C\n"
+"	.global data_08601C68\n"
+"data_08601C68:\n"
+"	.4byte 0x00000001, 0x080E377C, 0x00000003, sub_8067884, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, 0x080E3790, 0x00000004, efxExcaliburBGCOL_OnEnd, 0x000D000E, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000000\n"
+"	.global data_08601CA0\n"
+"data_08601CA0:\n"
+"	.4byte 0x00000001, 0x080E37A4, 0x00000004, efxSuperdruidOBJ2_OnEnd, 0x000D000E, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000000\n"
+);
 /* frontier_df4_banim_a_014_601CD8: atomic relocation carve (was INCBIN); every embedded ROM
    pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
 __asm__(
