@@ -56,7 +56,9 @@ u8 frontier_banim_dracozombie_032_78DF08[] __attribute__((section(".data.frontie
 u8 frontier_banim_dracozombie_033_78E33C[] __attribute__((section(".data.frontier_banim_dracozombie.gap33"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_033_78E33C.bin.lz");
 u8 frontier_banim_dracozombie_034_78E750[] __attribute__((section(".data.frontier_banim_dracozombie.gap34"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_034_78E750.bin.lz");
 u8 frontier_banim_dracozombie_035_78EAE0[] __attribute__((section(".data.frontier_banim_dracozombie.gap35"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_035_78EAE0.bin.lz");
-u8 frontier_banim_dracozombie_036_78EE00[] __attribute__((section(".data.frontier_banim_dracozombie.gap36"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_036_78EE00.bin");
+u8 frontier_banim_dracozombie_036_78EE00[] __attribute__((section(".data.frontier_banim_dracozombie.gap36"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_036a_78EE00.map.bin.lz");
+u8 frontier_banim_dracozombie_036b_78F150[] __attribute__((section(".data.frontier_banim_dracozombie.gap36"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_036b_78F150.4bpp.lz");
+u8 data_08794944[] __attribute__((section(".data.frontier_banim_dracozombie.gap36"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/data_08794944.gbapal");
 u8 frontier_banim_dracozombie_037_794964[] __attribute__((section(".data.frontier_banim_dracozombie.gap37"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_037_794964.bin.lz");
 u8 frontier_banim_dracozombie_038_794D78[] __attribute__((section(".data.frontier_banim_dracozombie.gap38"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_038_794D78.bin.lz");
 u8 frontier_banim_dracozombie_039_795198[] __attribute__((section(".data.frontier_banim_dracozombie.gap39"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_039_795198.bin.lz");

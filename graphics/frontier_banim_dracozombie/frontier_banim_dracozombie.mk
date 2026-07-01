@@ -41,7 +41,13 @@ asm/frontier_banim_dracozombie.o: \
   graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_033_78E33C.bin.lz \
   graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_034_78E750.bin.lz \
   graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_035_78EAE0.bin.lz \
+  graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_036a_78EE00.map.bin.lz \
+  graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_036b_78F150.4bpp.lz \
+  graphics/frontier_banim_dracozombie/data_08794944.gbapal \
   graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_037_794964.bin.lz \
   graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_038_794D78.bin.lz \
   graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_039_795198.bin.lz
 
+
+# --- mindist-1 pins (JP LZ sheets whose 1/2/3 sweep matched at -mindist 1) ---
+graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_036a_78EE00.map.bin.lz: LZ_FLAGS := -mindist 1
