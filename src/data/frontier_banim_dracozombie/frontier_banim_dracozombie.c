@@ -60,4 +60,5 @@ u8 frontier_banim_dracozombie_036_78EE00[] __attribute__((section(".data.frontie
 u8 frontier_banim_dracozombie_037_794964[] __attribute__((section(".data.frontier_banim_dracozombie.gap37"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_037_794964.bin.lz");
 u8 frontier_banim_dracozombie_038_794D78[] __attribute__((section(".data.frontier_banim_dracozombie.gap38"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_038_794D78.bin.lz");
 u8 frontier_banim_dracozombie_039_795198[] __attribute__((section(".data.frontier_banim_dracozombie.gap39"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_039_795198.bin.lz");
-u8 frontier_banim_dracozombie_040_7955B8[] __attribute__((section(".data.frontier_banim_dracozombie.gap40"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_040_7955B8.bin");
+u8 frontier_banim_dracozombie_040_7955B8[] __attribute__((section(".data.frontier_banim_dracozombie.gap40"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_040a_7955B8.map.bin.lz");
+u8 frontier_banim_dracozombie_040b_7959D8[] __attribute__((section(".data.frontier_banim_dracozombie.gap40"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_040b_7959D8.4bpp.lz");

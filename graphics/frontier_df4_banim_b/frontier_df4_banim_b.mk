@@ -3,6 +3,17 @@
 # raw -> verbatim .bin. Fresh JP-ROM extraction. Oracle: make compare.
 
 asm/frontier_df4_banim_b.o: \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_064a_7CD474.4bpp.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_064b_7CF4E8.4bpp.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_064c_7CF5D8.map.bin.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_014a_6238B4.map.bin.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_014b_62395C.map.bin.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_014c_623A04.map.bin.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_014d_623ABC.map.bin.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_013a_622E28.map.bin.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_013b_622ED0.map.bin.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_013c_622F78.map.bin.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_013d_623030.map.bin.lz \
   graphics/frontier_df4_banim_b/frontier_df4_banim_b_056a_7657CC.map.bin.lz \
   graphics/frontier_df4_banim_b/frontier_df4_banim_b_056b_7658D0.map.bin.lz \
   graphics/frontier_df4_banim_b/frontier_df4_banim_b_056c_7659D4.map.bin.lz \
@@ -294,3 +305,15 @@ graphics/frontier_df4_banim_b/frontier_df4_banim_b_037m_6AD1FC.map.bin.lz: LZ_FL
 graphics/frontier_df4_banim_b/frontier_df4_banim_b_056a_7657CC.map.bin.lz: LZ_FLAGS := -mindist 1
 graphics/frontier_df4_banim_b/frontier_df4_banim_b_056b_7658D0.map.bin.lz: LZ_FLAGS := -mindist 1
 graphics/frontier_df4_banim_b/frontier_df4_banim_b_056c_7659D4.map.bin.lz: LZ_FLAGS := -mindist 1
+
+graphics/frontier_df4_banim_b/frontier_df4_banim_b_013a_622E28.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/frontier_df4_banim_b_013b_622ED0.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/frontier_df4_banim_b_013c_622F78.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/frontier_df4_banim_b_013d_623030.map.bin.lz: LZ_FLAGS := -mindist 1
+
+graphics/frontier_df4_banim_b/frontier_df4_banim_b_014a_6238B4.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/frontier_df4_banim_b_014b_62395C.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/frontier_df4_banim_b_014c_623A04.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/frontier_df4_banim_b_014d_623ABC.map.bin.lz: LZ_FLAGS := -mindist 1
+
+graphics/frontier_df4_banim_b/frontier_df4_banim_b_064c_7CF5D8.map.bin.lz: LZ_FLAGS := -mindist 1
