@@ -437,7 +437,6 @@ src/data/data_08620BB8/data_08620BB8.o: data/residual/data_08620BB8.bin
 src/data/data_08630AD8/data_08630AD8.o: data/residual/data_08630AD8.bin
 src/data/data_086314EC/data_086314EC.o: data/residual/data_086314EC.bin
 src/data/data_0863230C/data_0863230C.o: data/residual/data_0863230C.bin
-src/data/data_086371AC/data_086371AC.o: data/residual/data_086371AC.bin
 src/data/data_08645FC4/data_08645FC4.o: data/residual/data_08645FC4.bin
 src/data/data_0864738C/data_0864738C.o: data/residual/data_0864738C.bin
 src/data/data_0864CAC8/data_0864CAC8.o: data/residual/data_0864CAC8.bin
@@ -445,14 +444,11 @@ src/data/data_08659FFC/data_08659FFC.o: data/residual/data_08659FFC.bin
 src/data/data_0865A268/data_0865A268.o: data/residual/data_0865A268.bin
 src/data/data_0865A694/data_0865A694.o: data/residual/data_0865A694.bin
 src/data/data_086724CC/data_086724CC.o: data/residual/data_086724CC.bin
-src/data/data_086730D0/data_086730D0.o: data/residual/data_086730D0.bin
 src/data/data_0867B54C/data_0867B54C.o: data/residual/data_0867B54C.bin
 src/data/data_086834CC/data_086834CC.o: graphics/banim/Pal_FenrirBg.gbapal
 src/data/data_0869BFF0/data_0869BFF0.o: data/residual/data_0869BFF0.bin
-src/data/data_0869C14C/data_0869C14C.o: data/residual/data_0869C14C.bin
 src/data/data_086A01E0/data_086A01E0.o: data/residual/data_086A01E0.bin
 src/data/data_086A0C24/data_086A0C24.o: data/residual/data_086A0C24.bin
-src/data/data_086A1CB0/data_086A1CB0.o: data/residual/data_086A1CB0.bin
 src/data/data_086A25CC/data_086A25CC.o: data/residual/data_086A25CC.bin
 src/data/data_086A2890/data_086A2890.o: data/residual/data_086A2890.bin
 src/data/data_086A2D64/data_086A2D64.o: data/residual/data_086A2D64.bin
@@ -500,7 +496,6 @@ src/data/data_0872CFC4/data_0872CFC4.o: data/residual/data_0872CFC4.bin
 src/data/data_087644A8/data_087644A8.o: data/residual/data_087644A8.bin
 src/data/data_08764BF4/data_08764BF4.o: data/residual/data_08764BF4.bin
 src/data/data_0877B894/data_0877B894.o: data/residual/data_0877B894.bin
-src/data/data_0877B9B4/data_0877B9B4.o: data/residual/data_0877B9B4.bin
 src/data/data_087A2494/data_087A2494.o: data/residual/data_087A2494.bin
 src/data/data_087A2554/data_087A2554.o: data/residual/data_087A2554.bin
 src/data/data_087AEA64/data_087AEA64.o: data/residual/data_087AEA64.bin
