@@ -6,7 +6,21 @@
  */
 
 u8 frontier_df3_banim_aura_000_7463DC[] __attribute__((section(".data.frontier_df3_banim_aura.gap0"))) = INCBIN_U8("graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_000_7463DC.bin");
-u8 frontier_df3_banim_aura_001_74F150[] __attribute__((section(".data.frontier_df3_banim_aura.gap1"))) = INCBIN_U8("graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_001_74F150.bin");
+/* frontier_df3_banim_aura_001_74F150: atomic relocation carve (was INCBIN); every embedded ROM
+   pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
+__asm__(
+"	.section .data.frontier_df3_banim_aura.gap1, \"aw\", %progbits\n"
+"	.global frontier_df3_banim_aura_001_74F150\n"
+"frontier_df3_banim_aura_001_74F150:\n"
+"	.4byte 0x80000000, 0xFF840019, 0x0000FFF4, 0x00000001, 0x00000000, 0x00000000\n"
+"	.4byte 0x80008000, 0xFF81001D, 0x0000FFF2, 0x40008000, 0xFF91001F, 0x0000FFF2\n"
+"	.4byte 0x00008000, 0xFF990040, 0x0000FFF2, 0x00008000, 0xFF990041, 0x00000002\n"
+"	.4byte 0x00000001, 0x00000000, 0x00000000, AnimScr_NaglfarBG4 + 0x2, AnimSpr_NaglfarOBJ_0 + 0x2, AnimSpr_NaglfarOBJ_1 + 0x2\n"
+"	.4byte AnimSpr_NaglfarOBJ_2 + 0x2, AnimSpr_NaglfarOBJ_3 + 0x2, AnimSpr_NaglfarOBJ_4 + 0x2, AnimSpr_NaglfarOBJ_5 + 0x2, AnimSpr_NaglfarOBJ_6 + 0x2, AnimSpr_NaglfarOBJ_7 + 0x2\n"
+"	.4byte AnimSpr_NaglfarOBJ_8 + 0x2, AnimSpr_NaglfarOBJ_9 + 0x2, AnimSpr_NaglfarOBJ_10 + 0x2, AnimSpr_NaglfarOBJ_11 + 0x2, AnimSpr_NaglfarOBJ_12 + 0x2, AnimSpr_NaglfarOBJ_13 + 0x2\n"
+"	.4byte AnimSpr_NaglfarOBJ_14 + 0x2, AnimSpr_NaglfarOBJ_15 + 0x2, AnimSpr_NaglfarOBJ_16 + 0x2, AnimSpr_NaglfarOBJ_17 + 0x2, AnimSpr_NaglfarOBJ_18 + 0x2, AnimSpr_NaglfarOBJ_19 + 0x2\n"
+"	.4byte AnimSpr_NaglfarOBJ_20 + 0x2, AnimSpr_NaglfarOBJ_21 + 0x2, AnimSpr_NaglfarOBJ_22 + 0x2, frontier_df3_banim_aura_001_74F150 + 0x2, frontier_df3_banim_aura_001_74F150 + 0x1A, 0x80000000\n"
+);
 u8 frontier_df3_banim_aura_002_74FD8C[] __attribute__((section(".data.frontier_df3_banim_aura.gap2"))) = INCBIN_U8("graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_002_74FD8C.bin");
 u8 frontier_df3_banim_aura_003_754840[] __attribute__((section(".data.frontier_df3_banim_aura.gap3"))) = INCBIN_U8("graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_003_754840.bin");
 u8 frontier_df3_banim_aura_004_7557C4[] __attribute__((section(".data.frontier_df3_banim_aura.gap4"))) = INCBIN_U8("graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_004_7557C4.bin");
