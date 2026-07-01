@@ -62,9 +62,10 @@ REQUIREMENTS
 
 import os
 import re
+import struct
 import subprocess
 import sys
-from collections import OrderedDict, defaultdict
+from collections import Counter, OrderedDict, defaultdict
 
 # --------------------------------------------------------------------------- #
 # Repo locations                                                              #
@@ -342,6 +343,34 @@ def build_fe8u_index(fe8u_files):
     return idx
 
 
+def _is_screen_tilemap(path):
+    """True if a banim/frontier `.bin` is a 30x20 (600 u16) GBA BG **screen
+    tilemap** (TSA). fe8u keeps every banim/bg tilemap binary
+    (`graphics/banim/assets/tsa/*.map.bin`, `graphics/bg/*.tsa.bin`), so a JP
+    banim screen tilemap is fe8u-FORM-parity FLOOR — it satisfies the strict goal
+    even though it is a raw `.bin`. The fe8j extractor named these generically
+    (`_NNN_ADDR.bin`, no `.tsa.bin` suffix), so neither the suffix guard nor the
+    `Tsa_` name guard catches them; detect by CONTENT. Verified rigorously (D326):
+    exactly 600 u16 tile-attr entries (a 30x20 GBA screen), all tile indices valid
+    (< 1024), a dominant background fill, and <= 4 palettes.
+    """
+    p = "/" + path
+    if "/graphics/frontier_" not in p and "/data/banim/" not in p:
+        return False
+    try:
+        d = open(path, "rb").read()
+    except OSError:
+        return False
+    if len(d) != 1200:                       # 600 u16 == 30x20 screen
+        return False
+    v = struct.unpack("<600H", d)
+    if any((x & 0x3FF) >= 1024 for x in v):  # invalid tile index -> not a tilemap
+        return False
+    fill = Counter(v).most_common(1)[0][1] / 600.0
+    pals = len({(x >> 12) & 0xF for x in v})
+    return fill >= 0.2 and pals <= 4
+
+
 # --------------------------------------------------------------------------- #
 # Classification                                                               #
 # --------------------------------------------------------------------------- #
@@ -358,6 +387,14 @@ def classify(path, fe8u_idx):
     if re.match(r"g?Tsa_", base, re.IGNORECASE) or base.endswith("_map.bin"):
         return ("FLOOR",
                 "fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`)",
+                "TSA/.map.bin")
+    # 0b. Screen tilemap by CONTENT (30x20 u16 TSA) -> FLOOR. fe8u keeps banim/bg
+    #     tilemaps binary; the fe8j extractor named these generically so neither
+    #     the suffix nor the `Tsa_` name guard catches them. See D326.
+    if _is_screen_tilemap(path):
+        return ("FLOOR",
+                "fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary "
+                "(`assets/tsa/*.map.bin`)",
                 "TSA/.map.bin")
     # 1. FLOOR by suffix (fe8u keeps TSA/tilemaps binary). Label is directory-aware
     #    so the plan's efx / opanim sub-buckets stay visible even though those
@@ -666,6 +703,7 @@ SELF_TEST_NOTES = [
     "`graphics/frontier_df4_uistuff/*` is classified **UNCERTAIN** (JP-divergent UI table, no fe8u twin — not a string-pool MISS; bug #2).",
     "`graphics/banim/efx*` effect bins are classified **FLOOR**.",
     "`data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).",
+    "30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).",
 ]
 
 
@@ -691,6 +729,8 @@ def run_self_tests(by_path):
     expect("graphics/frontier_df4_uistuff/", "UNCERTAIN")  # bug #2
     expect("graphics/banim/efx", "FLOOR")
     expect("data/sound/gMPlayTable.bin", "MISS")
+    # D326: verified 30x20 u16 banim screen tilemaps -> FLOOR (fe8u keeps binary)
+    expect("frontier_banim_aurabg3/frontier_banim_aurabg3_005_774CB8.bin", "FLOOR")
     return failures
 
 
