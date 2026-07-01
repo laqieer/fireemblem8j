@@ -15,7 +15,6 @@ src/data/AA6BFA/dat_data_AA6BFA.o: graphics/reuse/gUnkData_100.4bpp graphics/reu
 src/data/B12A60/dat_data_B12A60.o: graphics/misc_gfx2/Img_CommGameBgScreen.4bpp.lz graphics/misc_gfx2/Img_UnkData_2.4bpp.lz graphics/misc_gfx2/Pal_CommGameBgScreenInShop.gbapal graphics/misc_gfx2/Pal_UnkData_2.gbapal graphics/misc_gfx2/Tsa_UnkData_5.bin.lz
 src/data/Ch9Events_ref/dat_Ch9Events_ref.o: data/residual/Ch9Events.bin
 src/data/Img_WmHightLightMap7_ref/dat_Img_WmHightLightMap7_ref.o: graphics/misc_gfx3/Img_WmHightLightMap7.4bpp.lz
-src/data/ObjectType9_ref/dat_ObjectType9_ref.o: data/residual/ObjectType9.bin
 src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight.o: graphics/misc_gfx3/Img_WmHightLightMap2.4bpp.lz graphics/misc_gfx3/Img_WmHightLightMapFrecia.4bpp.lz graphics/misc_gfx3/Pal_WmHighLightNationMap.gbapal
 src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight_p5.o: graphics/misc_gfx3/Img_WmHightLightMap4.4bpp.lz
 src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight_p7.o: graphics/misc_gfx3/Img_WmHightLightMap5.4bpp.lz

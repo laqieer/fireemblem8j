@@ -32,10 +32,10 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 18 | 1.0% |
+| **MISS** | 17 | 0.9% |
 | **FLOOR** | 1381 | 74.0% |
 | **UNCERTAIN** | 467 | 25.0% |
-| **TOTAL** | 1866 | 100.0% |
+| **TOTAL** | 1865 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -47,7 +47,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | voicegroup-tail | MISS | 4 | fe8u sound/voicegroups/*.s (documented ceiling) |
 | menu-strings | MISS | 7 | fe8u C literals (src/menu_def.c) |
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
-| map-tilemaps | MISS | 1 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
+| map-tilemaps | MISS | 0 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | TSA/.map.bin | FLOOR | 1232 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
@@ -63,12 +63,12 @@ under MISS, asserted by the self-test guards below).
 
 **MISS spot checks** (fe8u ships an editable source):
 
-- `data/residual/ObjectType9.bin` → **MISS** (map-tilemaps) — proof: fe8u graphics/map/ObjectType9.png
 - `data/sound/frontier_df3_voicegroup_000_1F70E8.bin` → **MISS** (voicegroup-tail) — proof: fe8u sound/voicegroups/*.s (voicegroup tail; documented ceiling)
 - `graphics/frontier_chap_title/frontier_chap_title_115_A92170.bin` → **MISS** (pixel-gfx) — proof: fe8u graphics/chap_title/*.png (chapter-title images)
 - `graphics/frontier_df4_banim_b/frontier_df4_banim_b_031_69EBD8.bin` → **MISS** (battle-anim) — proof: fe8u banim/*.png + banim/*.s
 - `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_000b_0DC41C.bin` → **MISS** (menu-strings) — proof: fe8u C string literals (src/menu_def.c parity) — string pools
 - `data/sound/frontier_df3_voicegroup_001_202C07.bin` → **MISS** (voicegroup-tail) — proof: fe8u sound/voicegroups/*.s (voicegroup tail; documented ceiling)
+- `data/sound/frontier_df4_voice_000_1F578C.bin` → **MISS** (voicegroup-tail) — proof: fe8u sound/voicegroups/*.s / direct_sound_data.s
 
 **FLOOR spot checks** (fe8u also keeps binary):
 
@@ -91,13 +91,12 @@ under MISS, asserted by the self-test guards below).
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 - 30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).
 
-## MISS (18) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (17) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>18 entries</summary>
+<details><summary>17 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
-| `data/residual/ObjectType9.bin` | map-tilemaps | fe8u graphics/map/ObjectType9.png |
 | `data/sound/frontier_df3_voicegroup_000_1F70E8.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s (voicegroup tail; documented ceiling) |
 | `data/sound/frontier_df3_voicegroup_001_202C07.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s (voicegroup tail; documented ceiling) |
 | `data/sound/frontier_df4_voice_000_1F578C.bin` | voicegroup-tail | fe8u sound/voicegroups/*.s / direct_sound_data.s |
