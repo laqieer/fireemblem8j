@@ -32,16 +32,16 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 178 | 9.8% |
-| **FLOOR** | 1176 | 64.6% |
-| **UNCERTAIN** | 467 | 25.6% |
-| **TOTAL** | 1821 | 100.0% |
+| **MISS** | 138 | 7.7% |
+| **FLOOR** | 1176 | 66.0% |
+| **UNCERTAIN** | 467 | 26.2% |
+| **TOTAL** | 1781 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
 | Category | Verdict | Count (this run) | fe8u editable form |
 |---|---|---:|---|
-| battle-anim | MISS | 99 | fe8u 202 editable banim/*.s (compressing linker) |
+| battle-anim | MISS | 59 | fe8u 202 editable banim/*.s (compressing linker) |
 | pixel-gfx | MISS | 15 | fe8u graphics/**/*.png |
 | sound-m4a-tables | MISS | 1 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 4 | fe8u sound/voicegroups/*.s (documented ceiling) |
@@ -91,9 +91,9 @@ under MISS, asserted by the self-test guards below).
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 - 30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).
 
-## MISS (178) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (138) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>178 entries</summary>
+<details><summary>138 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -109,33 +109,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_004_7738F0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016_7767BC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_028_777858.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_029_779AB6.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_030_779AFE.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_031_779B76.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_032_779C2A.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_033_779D56.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_034_779ED6.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_035_77A2DE.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_036_77A34A.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_037_77A3B6.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_038_77A422.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_039_77A48E.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_040_77A4FA.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_041_77A566.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_042_77A5D2.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_043_77A63E.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_044_77A6AA.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_045_77A6E6.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_046_77A752.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_047_77A7BE.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_048_77A82A.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_049_77A896.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_050_77A902.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_051_77A91A.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_052_77A986.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_053_77A9F2.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_054_77AA5E.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_055_77AACA.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_004_77EAB4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_017_78048C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_026_78BE1C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -205,12 +178,8 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_060_921140.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_070_923510.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_000_5E0E94.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_003_604F7C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_004_60838C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_005_611798.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_006_6123D4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_011_61BE44.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_012_61EC9C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_013_622E28.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_014_6238B4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_015_62DC84.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -230,30 +199,21 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_031_69EBD8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_032_6A5EDC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_033_6A819C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_036_6AB520.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_037_6AC820.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_039_6ADB74.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_042_6B1024.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_050_6D3478.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_051_6E0CF4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_052_6E96D0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_053_7059C4.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_054_716918.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_055_7179EC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_056_7657CC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_059_79FCB0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_060_7A8B10.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_062_7AA39C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_064_7CD474.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_069_8601B1.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_071_903450.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_072_903A50.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_074_909DE8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_075_90A050.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_076_90B4DC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_077_90DB94.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_078_90E58C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_079_90EFAC.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_081_9CF318.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_082_A12AC0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_083_A13256.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
