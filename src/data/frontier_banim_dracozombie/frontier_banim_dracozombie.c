@@ -4,7 +4,21 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 frontier_banim_dracozombie_000_77BBB8[] __attribute__((section(".data.frontier_banim_dracozombie.gap0"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_000_77BBB8.bin");
+/* frontier_banim_dracozombie_000_77BBB8: atomic relocation carve (was INCBIN); every embedded ROM
+   pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
+__asm__(
+"	.section .data.frontier_banim_dracozombie.gap0, \"aw\", %progbits\n"
+"	.global frontier_banim_dracozombie_000_77BBB8\n"
+"frontier_banim_dracozombie_000_77BBB8:\n"
+"	.4byte 0x90008000, 0xFFF40020, 0x0000FFF0, 0x50008000, 0xFFEC0022, 0x0000FFF0\n"
+"	.4byte 0x10000000, 0xFFF50000, 0x0000FFE8, 0x00000001, 0x00000000, 0x00000000\n"
+"	.4byte 0x90008000, 0xFFFC0020, 0x0000FFF0, 0x50008000, 0xFFF40022, 0x0000FFF0\n"
+"	.4byte 0x10000000, 0xFFFD0000, 0x0000FFE8, 0x00000001, 0x00000000, 0x00000000\n"
+"	.4byte AnimScr_EfxChill_R + 0x55, AnimScr_EfxChill_R + 0x85, AnimScr_EfxChill_R + 0x55, AnimScr_EfxChill_R + 0xB5, AnimScr_EfxChill_R + 0x55, AnimSprite_EfxChill_L_4 + 0x1\n"
+"	.4byte AnimScr_EfxChill_R + 0x55, AnimSprite_EfxChill_L_5 + 0x1, frontier_banim_dracozombie_000_77BBB8 + 0x1, AnimSprite_EfxChill_L_6 + 0x1, frontier_banim_dracozombie_000_77BBB8 + 0x31, AnimSprite_EfxChill_L_7 + 0x1\n"
+"	.4byte frontier_banim_dracozombie_000_77BBB8 + 0x1, AnimSprite_EfxChill_L_4 + 0x1, AnimScr_EfxChill_R + 0x55, AnimSprite_EfxChill_L_5 + 0x1, AnimScr_EfxChill_R + 0x55, AnimScr_EfxChill_R + 0x85\n"
+"	.4byte AnimScr_EfxChill_R + 0x55, AnimScr_EfxChill_R + 0xB5, 0x80000000\n"
+);
 u8 frontier_banim_dracozombie_001_77BC6C[] __attribute__((section(".data.frontier_banim_dracozombie.gap1"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_001_77BC6C.4bpp.lz");
 u8 frontier_banim_dracozombie_002_77CA18[] __attribute__((section(".data.frontier_banim_dracozombie.gap2"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_002_77CA18.4bpp.lz");
 u8 frontier_banim_dracozombie_003_77DBCC[] __attribute__((section(".data.frontier_banim_dracozombie.gap3"))) = INCBIN_U8("graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_003_77DBCC.4bpp.lz");
