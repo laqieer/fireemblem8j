@@ -3,6 +3,8 @@
 # rebuilt via gbagfx %.lz: %; the rest verbatim .bin. Fresh JP-ROM extraction. Oracle: make compare.
 
 asm/frontier_banim_dracozombie.o: \
+  graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_017a_78048C.map.bin.lz \
+  graphics/frontier_banim_dracozombie/data_08780574.4bpp.lz \
   graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_004_77EAB4.4bpp.lz \
   graphics/frontier_banim_dracozombie/data_0877F634.gbapal \
   graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_026_78BE1C.4bpp.lz \
@@ -51,3 +53,5 @@ asm/frontier_banim_dracozombie.o: \
 
 # --- mindist-1 pins (JP LZ sheets whose 1/2/3 sweep matched at -mindist 1) ---
 graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_036a_78EE00.map.bin.lz: LZ_FLAGS := -mindist 1
+
+graphics/frontier_banim_dracozombie/frontier_banim_dracozombie_017a_78048C.map.bin.lz: LZ_FLAGS := -mindist 1

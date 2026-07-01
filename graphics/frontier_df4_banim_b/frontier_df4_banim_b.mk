@@ -3,6 +3,10 @@
 # raw -> verbatim .bin. Fresh JP-ROM extraction. Oracle: make compare.
 
 asm/frontier_df4_banim_b.o: \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_082a_A12AC0.4bpp.lz \
+  graphics/frontier_df4_banim_b/data_08A12E44.4bpp.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_051a_6E0CF4.4bpp.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_054a_716918.4bpp.lz \
   graphics/frontier_df4_banim_b/frontier_df4_banim_b_029_69BBC8.4bpp.lz \
   graphics/frontier_df4_banim_b/frontier_df4_banim_b_029b_69BE8C.gbapal \
   graphics/frontier_df4_banim_b/frontier_df4_banim_b_064a_7CD474.4bpp.lz \
