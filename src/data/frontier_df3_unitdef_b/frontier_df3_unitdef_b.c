@@ -232,7 +232,12 @@ struct UnitDefinition frontier_df3_unitdef_b_003_91066C[] __attribute__((section
     { .charIndex=0xCB, .classIndex=0x74, .allegiance=0x1, .level=0x9, .xPosition=0x9, .yPosition=0x5, .ai={0x0, 0x3, 0x9} },
     {0},
 };
-u8 frontier_df3_unitdef_b_003_91066C_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap3"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_003_91066C.bin", 40, 60);
+struct UnitDefinition frontier_df3_unitdef_b_003_91066C_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap3"))) =
+{
+    { .charIndex=0x53, .classIndex=0x11, .autolevel=0x1, .allegiance=0x2, .level=0xC, .xPosition=0x11, .yPosition=0xB, .redaCount=0x2, .redas=(const struct REDA *)frontier_df3_unitdef_b_000_90F678_gap0, .ai={0x3, 0x3, 0x9} },
+    { .charIndex=0x40, .classIndex=0x4F, .autolevel=0x1, .allegiance=0x2, .level=0xC, .xPosition=0x12, .yPosition=0xB, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch14AEnemy_4_2 + 24), .ai={0x3, 0x3, 0x9} },
+    {0},
+};
 u8 frontier_df3_unitdef_b_004_91075C[] __attribute__((section(".data.frontier_df3_unitdef_b.gap4"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_004_91075C.bin");
 struct UnitDefinition frontier_df3_unitdef_b_005_9109A8[] __attribute__((section(".data.frontier_df3_unitdef_b.gap5"))) =
 {
@@ -285,7 +290,19 @@ struct REDA REDAs_UnitDef_Ch15AEnemy_6_6[] __attribute__((section(".data.frontie
     { .x = 1, .y = 16, .b = 0xffff },
 };
 static const u8 frontier_df3_unitdef_b_005_9109A8_tail[] __attribute__((section(".data.frontier_df3_unitdef_b.gap5"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_005_9109A8.bin", 416, 1240);
-u8 frontier_df3_unitdef_b_006_911070[] __attribute__((section(".data.frontier_df3_unitdef_b.gap6"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_006_911070.bin");
+struct UnitDefinition frontier_df3_unitdef_b_006_911070[] __attribute__((section(".data.frontier_df3_unitdef_b.gap6"))) =
+{
+    { .charIndex=0x80, .classIndex=0x48, .autolevel=0x1, .allegiance=0x2, .level=0xD, .xPosition=0x17, .redaCount=0x1, .redas=(const struct REDA *)frontier_df3_unitdef_b_005_9109A8_gap0, .items={0x16}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x48, .autolevel=0x1, .allegiance=0x2, .level=0xD, .xPosition=0x17, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch15AAlly_1_2 + 16), .items={0x16}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x80, .classIndex=0x48, .autolevel=0x1, .allegiance=0x2, .level=0xD, .xPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch15AAlly_1_2 + 24), .items={0x16}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x48, .autolevel=0x1, .allegiance=0x2, .level=0xD, .xPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch15AAlly_1_2 + 32), .items={0x16}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0xD, .xPosition=0xE, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch15AAlly_1_2 + 40), .items={0x45}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0xD, .xPosition=0x10, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch15AAlly_1_2 + 48), .items={0x45}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0xD, .xPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch15AAlly_1_2 + 56), .items={0x45}, .ai={0x0, 0x0, 0x9} },
+    {0},
+};
 u8 frontier_df3_unitdef_b_007_911200[] __attribute__((section(".data.frontier_df3_unitdef_b.gap7"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_007_911200.bin", 0, 120);
 struct REDA REDAs_UnitDef_Ch16AEnemy_2_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap7"))) =
 {
@@ -407,7 +424,15 @@ struct UnitDefinition frontier_df3_unitdef_b_008_9117C8[] __attribute__((section
 {
     {0},
 };
-u8 frontier_df3_unitdef_b_009_91187C[] __attribute__((section(".data.frontier_df3_unitdef_b.gap9"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_009_91187C.bin");
+struct UnitDefinition frontier_df3_unitdef_b_009_91187C[] __attribute__((section(".data.frontier_df3_unitdef_b.gap9"))) =
+{
+    { .charIndex=0x64, .classIndex=0xD, .autolevel=0x1, .allegiance=0x2, .level=0x10, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)frontier_df3_unitdef_b_007_911200_gap0, .items={0x1, 0x6B}, .ai={0x0, 0x5, 0x9} },
+    {0},
+    { .charIndex=0x64, .classIndex=0xD, .autolevel=0x1, .allegiance=0x2, .level=0x10, .xPosition=0x15, .yPosition=0xD, .items={0x1, 0x6B}, .ai={0x0, 0x5, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x2F, .autolevel=0x1, .allegiance=0x2, .level=0x4, .xPosition=0x15, .yPosition=0xA, .items={0x46}, .ai={0x0, 0x3, 0x9} },
+    {0},
+};
 struct UnitDefinition frontier_df3_unitdef_b_010_9119D0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap10"))) =
 {
     { .charIndex=0x19, .classIndex=0x4B, .level=0x1, .xPosition=0xC, .yPosition=0x7 },
@@ -542,7 +567,15 @@ struct REDA REDAs_UnitDef_Ch16AAlly_15_2[] __attribute__((section(".data.frontie
     { .x = 6, .y = 7, .flags = 0x10, .b = 0xffff },
     { .x = 6, .y = 6, .flags = 0x10, .b = 0xffff },
 };
-static const u8 frontier_df3_unitdef_b_015_91206C_tail[] __attribute__((section(".data.frontier_df3_unitdef_b.gap15"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_015_91206C.bin", 172, 48);
+static const struct REDA frontier_df3_unitdef_b_015_91206C_tail[] __attribute__((section(".data.frontier_df3_unitdef_b.gap15"))) =
+{
+    { .x = 6, .y = 4, .flags = 0x10, .b = 0xffff },
+    { .x = 5, .y = 4, .flags = 0x10, .b = 0xffff },
+    { .x = 5, .y = 3, .flags = 0x10, .b = 0xffff },
+    { .x = 9, .y = 3, .flags = 0x10, .b = 0xffff },
+    { .x = 9, .y = 4, .flags = 0x10, .b = 0xffff },
+    { .x = 7, .y = 4, .flags = 0x10, .b = 0xffff },
+};
 struct UnitDefinition frontier_df3_unitdef_b_016_912198[] __attribute__((section(".data.frontier_df3_unitdef_b.gap16"))) =
 {
     {0},
@@ -597,7 +630,58 @@ struct UnitDefinition frontier_df3_unitdef_b_017_912480[] __attribute__((section
     { .charIndex=0x8D, .classIndex=0x43, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x6, .yPosition=0x3, .items={0x21, 0x60}, .ai={0x0, 0x3, 0xA} },
     {0},
 };
-u8 frontier_df3_unitdef_b_017_912480_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap17"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_017_912480.bin", 520, 980);
+struct UnitDefinition frontier_df3_unitdef_b_017_912480_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap17"))) =
+{
+    { .charIndex=0x21, .classIndex=0x49, .allegiance=0x1, .level=0x1, .xPosition=0xD, .yPosition=0x5, .redaCount=0x3, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 292), .items={0x17, 0x1C}, .ai={0x3, 0x3} },
+    { .charIndex=0xF7, .classIndex=0x70, .allegiance=0x1, .level=0x1, .xPosition=0xD, .yPosition=0x5, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 316), .ai={0x0, 0x3} },
+    { .charIndex=0xF6, .classIndex=0x6F, .allegiance=0x1, .level=0x1, .xPosition=0xD, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 332), .ai={0x0, 0x3} },
+    { .charIndex=0xF5, .classIndex=0x6E, .allegiance=0x1, .level=0x1, .xPosition=0xD, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 340), .ai={0x0, 0x3} },
+    { .charIndex=0xF4, .classIndex=0x6D, .allegiance=0x1, .level=0x1, .xPosition=0xD, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 348), .ai={0x0, 0x3} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x2F, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x14, .yPosition=0x6, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 356), .items={0x47}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x2F, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x14, .yPosition=0x6, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 364), .items={0x46}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x2F, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x14, .yPosition=0x6, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 372), .items={0x45}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x40, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x14, .yPosition=0x14, .items={0x21}, .ai={0x0, 0x0, 0xA} },
+    { .charIndex=0x8D, .classIndex=0x40, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x15, .yPosition=0x13, .items={0x21}, .ai={0x0, 0x0, 0xA} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x1F, .autolevel=0x1, .allegiance=0x2, .level=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 380), .items={0x16}, .ai={0x0, 0x0, 0xA} },
+    { .charIndex=0x8D, .classIndex=0x1F, .autolevel=0x1, .allegiance=0x2, .level=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 388), .items={0x16}, .ai={0x0, 0x0, 0xA} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0x10, .yPosition=0x8, .items={0x16}, .ai={0x0, 0x0, 0xA} },
+    { .charIndex=0x8D, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0x10, .yPosition=0x9, .items={0x16}, .ai={0x0, 0x0, 0xA} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x7, .autolevel=0x1, .allegiance=0x2, .level=0x4, .yPosition=0x8, .items={0x4}, .ai={0x0, 0x0, 0xA} },
+    { .charIndex=0x8D, .classIndex=0x35, .autolevel=0x1, .allegiance=0x2, .level=0x4, .yPosition=0x9, .items={0x21}, .ai={0x0, 0x0, 0xA} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x1F, .autolevel=0x1, .allegiance=0x2, .level=0xA, .yPosition=0x8, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 396), .items={0x17}, .ai={0x0, 0x0, 0xA} },
+    { .charIndex=0xC0, .classIndex=0x7, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x4, .yPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 404), .items={0x14} },
+    { .charIndex=0xC1, .classIndex=0x5, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x3, .yPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 412) },
+    { .charIndex=0x8F, .classIndex=0x1F, .autolevel=0x1, .allegiance=0x2, .level=0x10, .yPosition=0x7, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 420), .ai={0x0, 0x12, 0xA} },
+    { .charIndex=0xC1, .classIndex=0x5, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x4, .yPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 428) },
+    { .charIndex=0x8F, .classIndex=0x1F, .autolevel=0x1, .allegiance=0x2, .level=0x10, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 436), .ai={0x0, 0x12, 0xA} },
+    { .charIndex=0xC1, .classIndex=0x5, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x3, .yPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 444) },
+    { .charIndex=0x8F, .classIndex=0x1F, .autolevel=0x1, .allegiance=0x2, .level=0x10, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 452), .ai={0x0, 0x12, 0xA} },
+    {0},
+    { .charIndex=0xC0, .classIndex=0x49, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0xA, .yPosition=0x10, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 460), .items={0x14} },
+    { .charIndex=0x8D, .classIndex=0x27, .autolevel=0x1, .allegiance=0x2, .level=0x7, .xPosition=0xD, .yPosition=0x5, .itemDrop=0x1, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 476), .items={0x3C}, .ai={0x3, 0x3, 0x9} },
+    { .charIndex=0xC1, .classIndex=0x48, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x5, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 492) },
+    { .charIndex=0x8F, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0x11, .xPosition=0xD, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 500), .ai={0x3, 0x3, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x2F, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x14, .yPosition=0x6, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 508), .items={0x46}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8F, .classIndex=0x2F, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x14, .yPosition=0x6, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 516), .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8F, .classIndex=0x2F, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x14, .yPosition=0x6, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 524), .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0xC0, .classIndex=0xB, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x15, .yPosition=0xC, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 532), .items={0x14} },
+    { .charIndex=0xC1, .classIndex=0x9, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x16, .yPosition=0xC, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 540), .items={0x14} },
+    { .charIndex=0xC1, .classIndex=0x9, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x12, .yPosition=0xC, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 548), .items={0x14} },
+    {0},
+    { .charIndex=0xB, .classIndex=0x1B, .level=0x1, .xPosition=0x6, .yPosition=0x14, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 556) },
+    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0x7, .yPosition=0x14, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 564) },
+    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0x8, .yPosition=0x14, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 572) },
+    { .charIndex=0x19, .classIndex=0x4B, .level=0x1, .xPosition=0x7, .yPosition=0x14, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 580) },
+    { .charIndex=0x1E, .classIndex=0x3C, .level=0x3, .xPosition=0x9, .yPosition=0x14, .itemDrop=0x1, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16AAlly_15_2 + 588) },
+    {0},
+};
 struct UnitDefinition frontier_df3_unitdef_b_018_912AD4[] __attribute__((section(".data.frontier_df3_unitdef_b.gap18"))) =
 {
     { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x6, .yPosition=0x11, .items={0x17, 0x4, 0x6C} },
@@ -807,7 +891,56 @@ struct UnitDefinition frontier_df3_unitdef_b_021_914BD8[] __attribute__((section
     { .charIndex=0x8D, .classIndex=0xD, .autolevel=0x1, .allegiance=0x2, .level=0x12, .xPosition=0x1C, .yPosition=0x16, .items={0x1, 0x6B}, .ai={0x0, 0x5, 0x9} },
     {0},
 };
-u8 frontier_df3_unitdef_b_021_914BD8_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap21"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_021_914BD8.bin", 80, 940);
+struct UnitDefinition frontier_df3_unitdef_b_021_914BD8_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap21"))) =
+{
+    { .charIndex=0x8D, .classIndex=0x40, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x1C, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4688), .items={0x21}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x1B, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1C, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4696), .items={0x2F}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x11, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1C, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4704), .items={0x4}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x11, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1C, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4712), .items={0x21}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0xB, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x1C, .yPosition=0x15, .items={0x17}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0xB, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x1C, .yPosition=0x16, .items={0x17}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x40, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1C, .yPosition=0x15, .items={0x21}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x40, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1C, .yPosition=0x16, .items={0x21}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x29, .autolevel=0x1, .allegiance=0x2, .level=0x5, .yPosition=0x18, .items={0x3A}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x40, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1, .yPosition=0x18, .items={0x21}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x7, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x3, .yPosition=0x18, .items={0x17}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x1D, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x2, .yPosition=0x18, .items={0x2F}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x15, .autolevel=0x1, .allegiance=0x2, .level=0x4, .xPosition=0xE, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4720), .items={0x4}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x35, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0xF, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4728), .items={0x21}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x15, .autolevel=0x1, .allegiance=0x2, .level=0x4, .xPosition=0x10, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4736), .items={0x4}, .ai={0x0, 0x12, 0x9} },
+    {0},
+    { .charIndex=0x19, .classIndex=0x4B, .level=0x1, .xPosition=0x10, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4744) },
+    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0xF, .yPosition=0x11, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4752) },
+    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0x11, .yPosition=0x11, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4768) },
+    { .charIndex=0x1E, .classIndex=0x3C, .level=0x1, .xPosition=0x11, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4784) },
+    { .charIndex=0xB, .classIndex=0x1B, .level=0x1, .xPosition=0xF, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4792) },
+    {0},
+    { .charIndex=0xCE, .classIndex=0x9, .level=0x1, .xPosition=0x6, .yPosition=0x14, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4800), .items={0x14} },
+    {0},
+    { .charIndex=0x57, .classIndex=0x2B, .autolevel=0x1, .allegiance=0x2, .level=0x5, .yPosition=0x18, .ai={0x0, 0x3} },
+    { .charIndex=0x8D, .classIndex=0x2F, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1, .yPosition=0x18, .items={0x46}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x19, .classIndex=0x4B, .level=0x1, .xPosition=0x11, .yPosition=0xA },
+    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0x12, .yPosition=0xD, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4808) },
+    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0x12, .yPosition=0xC, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4824) },
+    { .charIndex=0x2, .classIndex=0x7, .level=0x1, .xPosition=0xF, .yPosition=0xF, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4832) },
+    {0},
+    { .charIndex=0xC0, .classIndex=0x5, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x10, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch18AMixed_6 + 4848) },
+    {0},
+    { .charIndex=0xCD, .classIndex=0x9, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x6, .yPosition=0x14 },
+    { .charIndex=0xCD, .classIndex=0x9, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0xB, .yPosition=0x14 },
+    { .charIndex=0x19, .classIndex=0x4B, .level=0x1, .xPosition=0x8, .yPosition=0x15 },
+    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0x7, .yPosition=0x15 },
+    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0x6, .yPosition=0x16 },
+    { .charIndex=0xB, .classIndex=0x1B, .level=0x1, .xPosition=0x9, .yPosition=0x16 },
+    { .charIndex=0x1E, .classIndex=0x3C, .level=0x1, .xPosition=0x3, .yPosition=0x17 },
+    {0},
+};
 u8 frontier_df3_unitdef_b_022_915038[] __attribute__((section(".data.frontier_df3_unitdef_b.gap22"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_022_915038.bin", 0, 8);
 struct REDA REDAs_UnitDef_Ch19AAlly_5_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap22"))) =
 {
@@ -901,7 +1034,32 @@ struct UnitDefinition frontier_df3_unitdef_b_024_915E08[] __attribute__((section
     { .charIndex=0xB9, .classIndex=0x61, .autolevel=0x1, .allegiance=0x2, .level=0x7, .xPosition=0xC, .yPosition=0x3, .items={0xB5, 0xAB}, .ai={0x3, 0x3, 0xC} },
     {0},
 };
-u8 frontier_df3_unitdef_b_024_915E08_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap24"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_024_915E08.bin", 740, 460);
+struct UnitDefinition frontier_df3_unitdef_b_024_915E08_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap24"))) =
+{
+    { .charIndex=0xB8, .classIndex=0x60, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x16, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3036), .items={0xB4}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB8, .classIndex=0x60, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x16, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3044), .items={0xB4}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB8, .classIndex=0x60, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x16, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3052), .items={0xB4}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB8, .classIndex=0x60, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x16, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3060), .items={0xB4}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB8, .classIndex=0x60, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x16, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3068), .items={0xB4}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x6, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3076), .items={0x1E}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x6, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3084), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x6, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3092), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x6, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3100), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xAE, .classIndex=0x3, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xA, .genMonster=0x1, .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAE, .classIndex=0x3, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xB, .genMonster=0x1, .items={0x3}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAE, .classIndex=0x3, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xC, .genMonster=0x1, .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xAA, .classIndex=0x52, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xA, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3108), .items={0xAD}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAA, .classIndex=0x52, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x9, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3116), .items={0xAD}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAA, .classIndex=0x52, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xA, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3124), .items={0xAD}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAA, .classIndex=0x52, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xB, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3132), .items={0xAD}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAA, .classIndex=0x52, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xC, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3140), .items={0xAD}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAB, .classIndex=0x53, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xD, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3148), .items={0xAE}, .ai={0x0, 0x9, 0xC} },
+    { .charIndex=0xAA, .classIndex=0x52, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xD, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19AAlly_5_4 + 3156), .items={0xAD}, .ai={0x0, 0x0, 0xC} },
+    {0},
+};
 u8 frontier_df3_unitdef_b_025_9163BC[] __attribute__((section(".data.frontier_df3_unitdef_b.gap25"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_025_9163BC.bin", 0, 780);
 struct REDA REDAs_UnitDef_Ch9BEnemy_3_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap25"))) =
 {
@@ -959,7 +1117,41 @@ struct REDA REDAs_UnitDef_Ch10BMixed_0_2[] __attribute__((section(".data.frontie
     { .x = 4, .y = 13, .flags = 0x10, .b = 0xffff },
 };
 static const u8 frontier_df3_unitdef_b_026_916D14_tail[] __attribute__((section(".data.frontier_df3_unitdef_b.gap26"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_026_916D14.bin", 1048, 1096);
-u8 frontier_df3_unitdef_b_027_917600[] __attribute__((section(".data.frontier_df3_unitdef_b.gap27"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_027_917600.bin");
+struct UnitDefinition frontier_df3_unitdef_b_027_917600[] __attribute__((section(".data.frontier_df3_unitdef_b.gap27"))) =
+{
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0xA, .xPosition=0x13, .redaCount=0x1, .redas=(const struct REDA *)frontier_df3_unitdef_b_026_916D14_gap0, .items={0x14}, .ai={0x0, 0x12, 0x9} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0xA, .xPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 16), .items={0x14}, .ai={0x0, 0x12, 0x9} },
+    {0},
+    { .charIndex=0x1D, .classIndex=0x35, .autolevel=0x1, .allegiance=0x1, .level=0x5, .xPosition=0xB, .yPosition=0xD, .ai={0x3, 0x3, 0x9, 0x20} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x1, .level=0x5, .xPosition=0xA, .yPosition=0xC, .ai={0x3, 0x3, 0x9, 0x20} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x1, .level=0x5, .xPosition=0x9, .yPosition=0xC, .ai={0x3, 0x3, 0x9, 0x20} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x1, .level=0x5, .xPosition=0xA, .yPosition=0xE, .ai={0x3, 0x3, 0x9, 0x20} },
+    {0},
+    { .charIndex=0x44, .classIndex=0x2A, .level=0x6, .xPosition=0xD, .yPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 24) },
+    {0},
+    { .charIndex=0xE, .classIndex=0x1F, .level=0x4, .xPosition=0xC, .yPosition=0xF, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 32) },
+    { .charIndex=0x66, .classIndex=0x1F, .level=0x4, .xPosition=0xB, .yPosition=0x10, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 40) },
+    { .charIndex=0x67, .classIndex=0x1F, .level=0x4, .xPosition=0xD, .yPosition=0x10, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 48) },
+    {0},
+    { .charIndex=0xF, .classIndex=0x1, .level=0xA, .xPosition=0x11, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 56) },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x11, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 72) },
+    {0},
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x12, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 88), .items={0x17, 0x6C, 0x6C} },
+    { .charIndex=0x22, .classIndex=0x48, .level=0xA, .xPosition=0x13, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 96), .items={0x16, 0x1C, 0x6C} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x13, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 104), .items={0x17, 0x6C, 0x6C} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 112), .items={0x17, 0x6C, 0x6C} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x13, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 120), .items={0x17, 0x6C, 0x6C} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x12, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 128), .items={0x17, 0x6C, 0x6C} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 136), .items={0x17, 0x6C, 0x6C} },
+    { .charIndex=0x2, .classIndex=0x7, .level=0xA, .xPosition=0x13, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 144), .items={0x17, 0x6C, 0x6C} },
+    {0},
+    { .charIndex=0x43, .classIndex=0x23, .autolevel=0x1, .allegiance=0x2, .level=0x8, .xPosition=0x16, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 152), .ai={0x0, 0x3, 0x9} },
+    {0},
+    { .charIndex=0x44, .classIndex=0x50, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0x14, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 160), .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x43, .classIndex=0x23, .autolevel=0x1, .allegiance=0x2, .level=0x4, .xPosition=0x12, .yPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BEnemy_7_5 + 168), .ai={0x3, 0x3, 0x9} },
+    {0},
+};
 u8 frontier_df3_unitdef_b_028_9178F8[] __attribute__((section(".data.frontier_df3_unitdef_b.gap28"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_028_9178F8.bin", 0, 2468);
 struct REDA REDAs_UnitDef_Ch11BEnemy_4_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap28"))) =
 {
@@ -970,7 +1162,12 @@ struct REDA REDAs_UnitDef_Ch11BEnemy_4_1[] __attribute__((section(".data.frontie
     { .x = 1, .y = 10, .b = 0xffff },
 };
 static const u8 frontier_df3_unitdef_b_028_9178F8_tail[] __attribute__((section(".data.frontier_df3_unitdef_b.gap28"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_028_9178F8.bin", 2484, 120);
-u8 frontier_df3_unitdef_b_029_9184F0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap29"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_029_9184F0.bin");
+struct UnitDefinition frontier_df3_unitdef_b_029_9184F0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap29"))) =
+{
+    { .charIndex=0x1A, .classIndex=0x43, .leaderCharIndex=0x19, .allegiance=0x1, .level=0x1, .xPosition=0x14, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BMixed_0_2 + 4464), .items={0x86, 0x6D}, .ai={0x0, 0x3, 0x8} },
+    { .charIndex=0x19, .classIndex=0x4B, .allegiance=0x1, .level=0x3, .xPosition=0x14, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch10BMixed_0_2 + 4472), .items={0x4C, 0x74, 0x6D}, .ai={0xE, 0x3} },
+    {0},
+};
 struct UnitDefinition frontier_df3_unitdef_b_030_918784[] __attribute__((section(".data.frontier_df3_unitdef_b.gap30"))) =
 {
     { .charIndex=0x1E, .classIndex=0x3C, .level=0x1, .xPosition=0x5, .yPosition=0x4 },
@@ -1056,8 +1253,30 @@ struct UnitDefinition frontier_df3_unitdef_b_031_918C90[] __attribute__((section
     { .charIndex=0x80, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0xE, .yPosition=0x9, .items={0x38}, .ai={0x0, 0x3, 0x9} },
     { .charIndex=0x80, .classIndex=0x3F, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0xC, .yPosition=0x4, .items={0x20}, .ai={0x0, 0x3, 0x9} },
 };
-u8 frontier_df3_unitdef_b_031_918C90_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap31"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_031_918C90.bin", 500, 300);
-u8 frontier_df3_unitdef_b_032_91908C[] __attribute__((section(".data.frontier_df3_unitdef_b.gap32"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_032_91908C.bin");
+struct UnitDefinition frontier_df3_unitdef_b_031_918C90_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap31"))) =
+{
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0x1, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch11BEnemy_4_1 + 2008), .items={0x1}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0x1, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch11BEnemy_4_1 + 2016), .items={0x45}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0x1, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch11BEnemy_4_1 + 2024), .items={0x45}, .ai={0x0, 0x3, 0x9} },
+    { .charIndex=0x80, .classIndex=0x19, .autolevel=0x1, .allegiance=0x2, .level=0xA, .xPosition=0x8, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch11BEnemy_4_1 + 2032), .items={0x2D}, .ai={0x0, 0x3, 0x9} },
+    { .charIndex=0x80, .classIndex=0x19, .autolevel=0x1, .allegiance=0x2, .level=0xA, .xPosition=0x8, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch11BEnemy_4_1 + 2040), .items={0x2D}, .ai={0x0, 0x3, 0x9} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0xC, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch11BEnemy_4_1 + 2048), .items={0x14}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0xE, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch11BEnemy_4_1 + 2056), .items={0x14, 0x1C}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0xC, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch11BEnemy_4_1 + 2064), .items={0x45}, .ai={0x0, 0x3, 0x9} },
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0xE, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch11BEnemy_4_1 + 2072), .items={0x45}, .ai={0x0, 0x3, 0x9} },
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0xA, .xPosition=0xC, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch11BEnemy_4_1 + 2080), .items={0x46}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0xB, .xPosition=0xE, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch11BEnemy_4_1 + 2088), .items={0x16}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x19, .autolevel=0x1, .allegiance=0x2, .level=0xA, .xPosition=0x14, .yPosition=0x1A, .items={0x2D}, .ai={0x0, 0x12, 0x9} },
+    {0},
+    { .charIndex=0x18, .classIndex=0x3E, .level=0x1, .xPosition=0x5, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch11BEnemy_4_1 + 2096), .items={0x38, 0x60, 0x6C} },
+    {0},
+};
+struct UnitDefinition frontier_df3_unitdef_b_032_91908C[] __attribute__((section(".data.frontier_df3_unitdef_b.gap32"))) =
+{
+    { .charIndex=0xB0, .classIndex=0x58, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x14, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)frontier_df3_unitdef_b_030_918784_gap0, .items={0x8B}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB0, .classIndex=0x58, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x14, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch12BEnemy_2_2 + 16), .items={0x8B}, .ai={0x0, 0x0, 0xC} },
+    {0},
+};
 struct UnitDefinition frontier_df3_unitdef_b_033_9191E0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap33"))) =
 {
     { .charIndex=0x2, .classIndex=0x7, .level=0x1, .xPosition=0x7, .yPosition=0x13 },
@@ -1334,8 +1553,31 @@ struct UnitDefinition frontier_df3_unitdef_b_035_91A580[] __attribute__((section
     { .charIndex=0x1F, .classIndex=0x2D, .level=0xA, .items={0x45, 0x47, 0x6C} },
     {0},
 };
-u8 frontier_df3_unitdef_b_035_91A580_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap35"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_035_91A580.bin", 940, 340);
-u8 frontier_df3_unitdef_b_036_91AB20[] __attribute__((section(".data.frontier_df3_unitdef_b.gap36"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_036_91AB20.bin");
+struct UnitDefinition frontier_df3_unitdef_b_035_91A580_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap35"))) =
+{
+    { .charIndex=0x1C, .classIndex=0x33, .allegiance=0x2, .level=0x1, .xPosition=0x1C, .yPosition=0xE, .itemDrop=0x1, .redaCount=0x1, .redas=REDAs_UnitDef_Ch14BEnemy_2_RENNAC, .items={0x3, 0x6D, 0x72}, .ai={0x6, 0x5, 0x8} },
+    {0},
+    { .charIndex=0x80, .classIndex=0x3F, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x13, .redaCount=0x1, .redas=REDAs_UnitDef_Ch14BEnemy_3_0, .items={0x20}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x3F, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x14, .redaCount=0x1, .redas=REDAs_UnitDef_Ch14BEnemy_3_1, .items={0x20}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x80, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x13, .redaCount=0x1, .redas=REDAs_UnitDef_Ch14BEnemy_4_0, .items={0x1C}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x14, .redaCount=0x1, .redas=REDAs_UnitDef_Ch14BEnemy_4_1, .items={0x16}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x80, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x13, .redaCount=0x1, .redas=REDAs_UnitDef_Ch14BEnemy_5_0, .items={0x16}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x14, .redaCount=0x1, .redas=REDAs_UnitDef_Ch14BEnemy_5_1, .items={0x16}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x80, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x6, .redaCount=0x1, .redas=REDAs_UnitDef_Ch14BEnemy_6_0, .items={0x3A}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x25, .autolevel=0x1, .allegiance=0x2, .level=0xD, .yPosition=0x7, .redaCount=0x1, .redas=REDAs_UnitDef_Ch14BEnemy_6_1, .items={0x3A}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0xD, .xPosition=0x11, .yPosition=0x12, .items={0x46}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x80, .classIndex=0x2D, .autolevel=0x1, .allegiance=0x2, .level=0xD, .xPosition=0xB, .yPosition=0x12, .items={0x46}, .ai={0x0, 0x0, 0x9} },
+    {0},
+};
+struct UnitDefinition frontier_df3_unitdef_b_036_91AB20[] __attribute__((section(".data.frontier_df3_unitdef_b.gap36"))) =
+{
+    { .charIndex=0x83, .classIndex=0x4E, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0xE, .yPosition=0x9, .redaCount=0x1, .redas=REDAs_UnitDef_Ch14BEnemy_10_SOLDIER_83 },
+    {0},
+};
 u8 frontier_df3_unitdef_b_037_91AC38[] __attribute__((section(".data.frontier_df3_unitdef_b.gap37"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_037_91AC38.bin", 0, 1548);
 struct REDA REDAs_UnitDef_Ch15BEnemy_4_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap37"))) =
 {
@@ -1417,14 +1659,27 @@ struct REDA REDAs_UnitDef_Ch16BEnemy_4_3[] __attribute__((section(".data.frontie
 {
     { .x = 16, .y = 26, .b = 0xffff },
 };
-u8 frontier_df3_unitdef_b_039_91BED4[] __attribute__((section(".data.frontier_df3_unitdef_b.gap39"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_039_91BED4.bin");
+struct UnitDefinition frontier_df3_unitdef_b_039_91BED4[] __attribute__((section(".data.frontier_df3_unitdef_b.gap39"))) =
+{
+    { .charIndex=0x8D, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0xF, .yPosition=0x1B, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch15BEnemy_5_6 + 2064), .items={0x3}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x5, .autolevel=0x1, .allegiance=0x2, .level=0xF, .yPosition=0x1B, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch15BEnemy_5_6 + 2072), .items={0x1C}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    {0},
+};
 struct UnitDefinition frontier_df3_unitdef_b_040_91BF9C[] __attribute__((section(".data.frontier_df3_unitdef_b.gap40"))) =
 {
     { .charIndex=0x8F, .classIndex=0x27, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x15, .yPosition=0xA, .items={0x52, 0x41}, .ai={0x0, 0x0, 0x9} },
     { .charIndex=0x8F, .classIndex=0x27, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x15, .yPosition=0xB, .items={0x52, 0x41}, .ai={0x0, 0x0, 0x9} },
     {0},
 };
-u8 frontier_df3_unitdef_b_041_91C104[] __attribute__((section(".data.frontier_df3_unitdef_b.gap41"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_041_91C104.bin");
+struct REDA frontier_df3_unitdef_b_041_91C104[] __attribute__((section(".data.frontier_df3_unitdef_b.gap41"))) =
+{
+    { .x = 19, .y = 7, .b = 0xffff },
+    { .x = 21, .y = 7, .b = 0xfffe },
+    { .x = 20, .y = 7, .b = 0xffff },
+    { .x = 0, .y = 1, .b = 0xffff },
+    { .x = 1, .y = 0, .b = 0xffff },
+};
 struct UnitDefinition frontier_df3_unitdef_b_042_91C230[] __attribute__((section(".data.frontier_df3_unitdef_b.gap42"))) =
 {
     { .charIndex=0x8D, .classIndex=0x3F, .autolevel=0x1, .allegiance=0x2, .level=0xF, .xPosition=0x3, .yPosition=0x7, .items={0x20}, .ai={0x0, 0xE, 0xA} },
@@ -1455,7 +1710,39 @@ struct UnitDefinition frontier_df3_unitdef_b_042_91C230[] __attribute__((section
     {0},
 };
 u8 frontier_df3_unitdef_b_042_91C230_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap42"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_042_91C230.bin", 520, 3084);
-u8 frontier_df3_unitdef_b_043_91D314[] __attribute__((section(".data.frontier_df3_unitdef_b.gap43"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_043_91D314.bin");
+struct UnitDefinition frontier_df3_unitdef_b_043_91D314[] __attribute__((section(".data.frontier_df3_unitdef_b.gap43"))) =
+{
+    { .charIndex=0x1, .classIndex=0x2, .leaderCharIndex=0x1, .level=0x7, .xPosition=0x12, .yPosition=0xA, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5108) },
+    { .charIndex=0x2, .classIndex=0x7, .leaderCharIndex=0x1, .level=0x7, .xPosition=0x12, .yPosition=0xB, .redaCount=0x3, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5124) },
+    { .charIndex=0xB, .classIndex=0x1B, .leaderCharIndex=0x1, .level=0x7, .xPosition=0x12, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5148) },
+    { .charIndex=0x1E, .classIndex=0x3C, .leaderCharIndex=0x1, .level=0x7, .xPosition=0x13, .yPosition=0xA, .redaCount=0x3, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5156) },
+    { .charIndex=0x19, .classIndex=0x4B, .leaderCharIndex=0x1, .level=0x7, .xPosition=0x12, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5180) },
+    {0},
+    { .charIndex=0xBA, .classIndex=0x62, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0xD, .yPosition=0x3, .items={0xB5, 0xAB}, .ai={0x0, 0x0, 0x4} },
+    { .charIndex=0xBA, .classIndex=0x62, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0xD, .yPosition=0x5, .items={0xB5, 0xAB}, .ai={0x0, 0x0, 0x4} },
+    { .charIndex=0xBA, .classIndex=0x62, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x4, .yPosition=0x1, .items={0xB5, 0xAB}, .ai={0x0, 0x0, 0x4} },
+    { .charIndex=0xBA, .classIndex=0x62, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x2, .xPosition=0x14, .yPosition=0x1A, .items={0xAB}, .ai={0x3, 0x3, 0x4} },
+    { .charIndex=0xBA, .classIndex=0x62, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x8, .yPosition=0x7, .items={0xB5, 0xAB}, .ai={0x0, 0x0, 0x4} },
+    { .charIndex=0xBA, .classIndex=0x62, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x4, .xPosition=0x15, .yPosition=0x5, .items={0xAB, 0xB5}, .ai={0x3, 0x3, 0x4} },
+    {0},
+    { .charIndex=0xB0, .classIndex=0x58, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x10, .xPosition=0x15, .yPosition=0x1B, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5188), .items={0x8B}, .ai={0x0, 0x0, 0x4} },
+    { .charIndex=0xB0, .classIndex=0x58, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x10, .xPosition=0x15, .yPosition=0x1B, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5196), .items={0x8B}, .ai={0x0, 0x0, 0x4} },
+    {0},
+    { .charIndex=0xB0, .classIndex=0x58, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x10, .xPosition=0x16, .yPosition=0x11, .items={0xAF}, .ai={0x0, 0x0, 0x4} },
+    { .charIndex=0xB0, .classIndex=0x58, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x10, .xPosition=0x16, .yPosition=0x10, .items={0x8B}, .ai={0x0, 0x0, 0x4} },
+    {0},
+    { .charIndex=0xB0, .classIndex=0x58, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x10, .xPosition=0xE, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5204), .items={0x8B}, .ai={0x0, 0x0, 0x4} },
+    { .charIndex=0xB0, .classIndex=0x58, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x10, .xPosition=0xE, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5212), .items={0xAF}, .ai={0x0, 0x12, 0x4} },
+    { .charIndex=0xB0, .classIndex=0x58, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x10, .xPosition=0xE, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5220), .items={0x8B}, .ai={0x0, 0x12, 0x4} },
+    {0},
+    { .charIndex=0xBB, .classIndex=0x63, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x11, .xPosition=0x16, .yPosition=0x3, .items={0x15}, .ai={0x0, 0x0, 0x4} },
+    {0},
+    { .charIndex=0xB0, .classIndex=0x58, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x10, .xPosition=0xE, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5228), .items={0x8B}, .ai={0x0, 0x0, 0x4} },
+    { .charIndex=0xB0, .classIndex=0x58, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x10, .xPosition=0xE, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5236), .items={0x8B}, .ai={0x0, 0x0, 0x4} },
+    {0},
+    { .charIndex=0xBB, .classIndex=0x63, .leaderCharIndex=0x56, .autolevel=0x1, .allegiance=0x2, .level=0x11, .xPosition=0x4, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch16BEnemy_4_3 + 5244), .items={0x15}, .ai={0x0, 0x0, 0x4} },
+    {0},
+};
 struct UnitDefinition frontier_df3_unitdef_b_044_91D878[] __attribute__((section(".data.frontier_df3_unitdef_b.gap44"))) =
 {
     { .charIndex=0xBA, .classIndex=0x62, .autolevel=0x1, .allegiance=0x2, .level=0x7, .xPosition=0x15, .yPosition=0xF, .items={0xB5, 0xAB}, .ai={0x0, 0x3, 0xC} },
@@ -1522,8 +1809,57 @@ struct UnitDefinition frontier_df3_unitdef_b_047_91E280[] __attribute__((section
     { .charIndex=0x8D, .classIndex=0xD, .autolevel=0x1, .allegiance=0x2, .level=0x12, .xPosition=0x1C, .yPosition=0x16, .items={0x1, 0x6B}, .ai={0x0, 0x5, 0x9} },
     {0},
 };
-u8 frontier_df3_unitdef_b_047_91E280_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap47"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_047_91E280.bin", 580, 600);
-u8 frontier_df3_unitdef_b_048_91E7A8[] __attribute__((section(".data.frontier_df3_unitdef_b.gap48"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_048_91E7A8.bin");
+struct UnitDefinition frontier_df3_unitdef_b_047_91E280_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap47"))) =
+{
+    { .charIndex=0x8D, .classIndex=0x40, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x1C, .redaCount=0x1, .redas=(const struct REDA *)frontier_df3_unitdef_b_046_91DFD0_residue, .items={0x21}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x1B, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1C, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 8), .items={0x2F}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x11, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1C, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 16), .items={0x4}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x11, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1C, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 24), .items={0x21}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0xB, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x1C, .yPosition=0x15, .items={0x17}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0xB, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x1C, .yPosition=0x16, .items={0x17}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x40, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1C, .yPosition=0x15, .items={0x21}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x40, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1C, .yPosition=0x16, .items={0x21}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x29, .autolevel=0x1, .allegiance=0x2, .level=0x5, .yPosition=0x18, .items={0x3A}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x40, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x1, .yPosition=0x18, .items={0x21}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x7, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x3, .yPosition=0x18, .items={0x17}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x1D, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x2, .yPosition=0x18, .items={0x2F}, .ai={0x0, 0x0, 0x9} },
+    {0},
+    { .charIndex=0x8D, .classIndex=0x15, .autolevel=0x1, .allegiance=0x2, .level=0x4, .xPosition=0xE, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 32), .items={0x4}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x35, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0xF, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 40), .items={0x21}, .ai={0x0, 0x0, 0x9} },
+    { .charIndex=0x8D, .classIndex=0x15, .autolevel=0x1, .allegiance=0x2, .level=0x4, .xPosition=0x10, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 48), .items={0x4}, .ai={0x0, 0x12, 0x9} },
+    {0},
+    { .charIndex=0xC8, .classIndex=0x7A, .leaderCharIndex=0x1, .allegiance=0x1, .level=0x11, .xPosition=0x10, .yPosition=0xA, .ai={0x6, 0x3} },
+    { .charIndex=0xCD, .classIndex=0xB, .leaderCharIndex=0x1, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0xF, .yPosition=0xA, .items={0x21, 0x16}, .ai={0x3, 0x3} },
+    {0},
+    { .charIndex=0x19, .classIndex=0x4B, .level=0x1, .xPosition=0x10, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 56) },
+    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0xF, .yPosition=0x11, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 64) },
+    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0x11, .yPosition=0x11, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 80) },
+    { .charIndex=0x20, .classIndex=0x13, .level=0x1, .xPosition=0xF, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 96) },
+    { .charIndex=0xB, .classIndex=0x1B, .level=0x1, .xPosition=0x11, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 104) },
+    {0},
+};
+struct UnitDefinition frontier_df3_unitdef_b_048_91E7A8[] __attribute__((section(".data.frontier_df3_unitdef_b.gap48"))) =
+{
+    { .charIndex=0x40, .classIndex=0x5, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x10, .yPosition=0x11, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 112) },
+    {0},
+    { .charIndex=0xCD, .classIndex=0x9, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x6, .yPosition=0x14 },
+    { .charIndex=0xCD, .classIndex=0x9, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0xB, .yPosition=0x14 },
+    { .charIndex=0x19, .classIndex=0x4B, .level=0x1, .xPosition=0x8, .yPosition=0x15 },
+    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0x7, .yPosition=0x15 },
+    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0x6, .yPosition=0x16 },
+    { .charIndex=0xB, .classIndex=0x1B, .level=0x1, .xPosition=0x9, .yPosition=0x16 },
+    { .charIndex=0x2, .classIndex=0x7, .level=0x1, .xPosition=0x3, .yPosition=0x17 },
+    {0},
+    { .charIndex=0xC8, .classIndex=0x7A, .allegiance=0x1, .level=0x14, .xPosition=0x8, .yPosition=0xE, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 120) },
+    { .charIndex=0xCD, .classIndex=0x9, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x9, .yPosition=0xC, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 128) },
+    { .charIndex=0xCD, .classIndex=0x9, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x8, .yPosition=0xC, .redaCount=0x2, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 144) },
+    { .charIndex=0xCD, .classIndex=0xB, .autolevel=0x1, .allegiance=0x1, .level=0x1, .xPosition=0x9, .yPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_046_91DFD0_residue + 160) },
+    {0},
+};
 u8 frontier_df3_unitdef_b_049_91E988[] __attribute__((section(".data.frontier_df3_unitdef_b.gap49"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_049_91E988.bin", 0, 192);
 struct REDA REDAs_UnitDef_Ch19BEnemy_8_0[] __attribute__((section(".data.frontier_df3_unitdef_b.gap49"))) =
 {
@@ -1564,7 +1900,45 @@ struct UnitDefinition frontier_df3_unitdef_b_050_91EE14[] __attribute__((section
     { .charIndex=0x41, .classIndex=0x3B, .allegiance=0x2, .level=0x12, .xPosition=0xB, .yPosition=0xB, .items={0x90}, .ai={0x3, 0x3, 0xC} },
     {0},
 };
-u8 frontier_df3_unitdef_b_050_91EE14_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap50"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_050_91EE14.bin", 460, 720);
+struct UnitDefinition frontier_df3_unitdef_b_050_91EE14_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap50"))) =
+{
+    { .charIndex=0xB6, .classIndex=0x5E, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x4, .yPosition=0x10, .redaCount=0x1, .redas=(const struct REDA *)frontier_df3_unitdef_b_049_91E988, .items={0x20}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB6, .classIndex=0x5E, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x4, .yPosition=0x10, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 8), .items={0x2E}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xB6, .classIndex=0x5E, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x4, .yPosition=0x10, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 16), .items={0x20}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0xD, .yPosition=0x7, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 24), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0xD, .yPosition=0x7, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 32), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0xD, .yPosition=0x7, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 40), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xB2, .classIndex=0x5A, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xB, .yPosition=0x1, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 48), .items={0x20}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB2, .classIndex=0x5A, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xB, .yPosition=0x1, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 56), .items={0x20}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x1, .yPosition=0x1, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 64), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x1, .yPosition=0x1, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 72), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x1, .yPosition=0x1, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 80), .items={0x1E}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x4, .yPosition=0x10, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 88), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x4, .yPosition=0x10, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 96), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x4, .yPosition=0x10, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 104), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xB7, .classIndex=0x5F, .autolevel=0x1, .allegiance=0x2, .level=0xF, .xPosition=0xB, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 112), .items={0xB3}, .ai={0x0, 0x3, 0xC} },
+    { .charIndex=0xB7, .classIndex=0x5F, .autolevel=0x1, .allegiance=0x2, .level=0xF, .xPosition=0xB, .yPosition=0xB, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 120), .items={0xB3}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB7, .classIndex=0x5F, .autolevel=0x1, .allegiance=0x2, .level=0xF, .xPosition=0xB, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 128), .items={0xB3}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xB1, .classIndex=0x59, .autolevel=0x1, .allegiance=0x2, .level=0x5, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 136), .items={0x8B}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB1, .classIndex=0x59, .autolevel=0x1, .allegiance=0x2, .level=0x5, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 144), .items={0xB0}, .ai={0x0, 0x12, 0xC} },
+    { .charIndex=0xB1, .classIndex=0x59, .autolevel=0x1, .allegiance=0x2, .level=0x5, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 152), .items={0x8B}, .ai={0x0, 0x12, 0xC} },
+    {0},
+    { .charIndex=0xB4, .classIndex=0x5C, .autolevel=0x1, .allegiance=0x2, .level=0x5, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 160), .items={0xB2}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB1, .classIndex=0x59, .autolevel=0x1, .allegiance=0x2, .level=0x5, .yPosition=0x9, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 168), .items={0x8B}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xB4, .classIndex=0x5C, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x7, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 176), .items={0xB2}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xB4, .classIndex=0x5C, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x6, .yPosition=0x14, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&frontier_df3_unitdef_b_049_91E988 + 184), .items={0xB2}, .ai={0x0, 0x0, 0xC} },
+    {0},
+};
 struct UnitDefinition frontier_df3_unitdef_b_051_91F300[] __attribute__((section(".data.frontier_df3_unitdef_b.gap51"))) =
 {
     { .charIndex=0x40, .classIndex=0x4F, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0xB, .yPosition=0xD },
@@ -1575,7 +1949,32 @@ struct REDA REDAs_UnitDef_Ch21BMixed_0[] __attribute__((section(".data.frontier_
 {
     { .x = 11, .y = 3, .flags = 0x8, .b = 0xffff },
 };
-u8 frontier_df3_unitdef_b_052_91F89C[] __attribute__((section(".data.frontier_df3_unitdef_b.gap52"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_052_91F89C.bin");
+struct UnitDefinition frontier_df3_unitdef_b_052_91F89C[] __attribute__((section(".data.frontier_df3_unitdef_b.gap52"))) =
+{
+    { .charIndex=0xB8, .classIndex=0x60, .autolevel=0x1, .allegiance=0x2, .level=0x6, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2516), .items={0xB4}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB8, .classIndex=0x60, .autolevel=0x1, .allegiance=0x2, .level=0x6, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2524), .items={0xB4}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB8, .classIndex=0x60, .autolevel=0x1, .allegiance=0x2, .level=0x6, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2532), .items={0xB4}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB8, .classIndex=0x60, .autolevel=0x1, .allegiance=0x2, .level=0x6, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2540), .items={0xB4}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB8, .classIndex=0x60, .autolevel=0x1, .allegiance=0x2, .level=0x6, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2548), .items={0xB4}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x16, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2556), .items={0x1E}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x16, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2564), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x16, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2572), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBC, .classIndex=0x64, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x16, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2580), .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xAE, .classIndex=0x3, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xA, .genMonster=0x1, .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAE, .classIndex=0x3, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xB, .genMonster=0x1, .items={0x3}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAE, .classIndex=0x3, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xC, .genMonster=0x1, .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    {0},
+    { .charIndex=0xAA, .classIndex=0x52, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xA, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2588), .items={0xAD}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAA, .classIndex=0x52, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0x9, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2596), .items={0xAD}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAA, .classIndex=0x52, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xA, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2604), .items={0xAD}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAA, .classIndex=0x52, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xB, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2612), .items={0xAD}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAA, .classIndex=0x52, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xC, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2620), .items={0xAD}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAB, .classIndex=0x53, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xD, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2628), .items={0xAE}, .ai={0x0, 0x9, 0xC} },
+    { .charIndex=0xAA, .classIndex=0x52, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xD, .yPosition=0x18, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)&REDAs_UnitDef_Ch19BEnemy_8_2 + 2636), .items={0xAD}, .ai={0x0, 0x0, 0xC} },
+    {0},
+};
 struct UnitDefinition frontier_df3_unitdef_b_053_91FAF4[] __attribute__((section(".data.frontier_df3_unitdef_b.gap53"))) =
 {
     {0},
@@ -1630,7 +2029,14 @@ struct UnitDefinition frontier_df3_unitdef_b_055_91FE20[] __attribute__((section
     { .charIndex=0xB5, .classIndex=0xB, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x3, .yPosition=0x3, .genMonster=0x1, .ai={0x0, 0x3, 0xC} },
     {0},
 };
-u8 frontier_df3_unitdef_b_055_91FE20_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap55"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_055_91FE20.bin", 520, 100);
+struct UnitDefinition frontier_df3_unitdef_b_055_91FE20_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap55"))) =
+{
+    { .charIndex=0xB5, .classIndex=0xB, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x4, .yPosition=0x14, .genMonster=0x1, .redaCount=0x1, .redas=REDAs_UnitDef_TowerEnemy_2_0, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB5, .classIndex=0xB, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x4, .yPosition=0x14, .genMonster=0x1, .redaCount=0x1, .redas=REDAs_UnitDef_TowerEnemy_2_1, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB5, .classIndex=0xB, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x4, .yPosition=0x14, .genMonster=0x1, .redaCount=0x1, .redas=REDAs_UnitDef_TowerEnemy_2_2, .ai={0x0, 0x12, 0xC} },
+    { .charIndex=0xB5, .classIndex=0xB, .autolevel=0x1, .allegiance=0x2, .level=0x6, .xPosition=0x4, .yPosition=0x14, .genMonster=0x1, .redaCount=0x1, .redas=REDAs_UnitDef_TowerEnemy_2_3, .ai={0x0, 0x12, 0xC} },
+    {0},
+};
 struct UnitDefinition frontier_df3_unitdef_b_056_920140[] __attribute__((section(".data.frontier_df3_unitdef_b.gap56"))) =
 {
     { .charIndex=0x5F, .classIndex=0x59, .autolevel=0x1, .allegiance=0x2, .level=0x2, .xPosition=0x2, .yPosition=0x2, .items={0x8B}, .ai={0x0, 0x3, 0xC} },
@@ -1674,7 +2080,26 @@ struct UnitDefinition frontier_df3_unitdef_b_057_92042C[] __attribute__((section
     { .charIndex=0xB3, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x9, .yPosition=0x3, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x12, 0xC} },
     { .charIndex=0xB3, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0xB, .yPosition=0x3, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x12, 0xC} },
 };
-u8 frontier_df3_unitdef_b_057_92042C_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap57"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_057_92042C.bin", 100, 340);
+struct UnitDefinition frontier_df3_unitdef_b_057_92042C_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap57"))) =
+{
+    { .charIndex=0xB3, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x9, .yPosition=0x6, .genMonster=0x1, .sumFlag=0x1, .redaCount=0x1, .redas=REDAs_UnitDef_TowerEnemy_4_0, .ai={0x0, 0x3, 0xC} },
+    { .charIndex=0xB3, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0xB, .yPosition=0x6, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x3, 0xC} },
+    { .charIndex=0xB4, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x3, .yPosition=0xA, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x3, 0xC} },
+    { .charIndex=0xAD, .classIndex=0x4, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x5, .yPosition=0x8, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x3, 0xC} },
+    { .charIndex=0xAC, .classIndex=0x2, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x5, .yPosition=0xA, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAC, .classIndex=0x2, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0xF, .yPosition=0xB, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAD, .classIndex=0x4, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x12, .yPosition=0xB, .genMonster=0x1, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB4, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x12, .yPosition=0x12, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB4, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x11, .yPosition=0x13, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB4, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x2, .yPosition=0x10, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB4, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x2, .yPosition=0xD, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x3, 0xC} },
+    { .charIndex=0xB3, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0xA, .yPosition=0x4, .genMonster=0x1, .sumFlag=0x1, .ai={0x0, 0x3, 0xC} },
+    { .charIndex=0xAC, .classIndex=0x2, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x4, .yPosition=0x12, .genMonster=0x1, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xAB, .classIndex=0x1, .autolevel=0x1, .allegiance=0x2, .level=0x2, .xPosition=0x2, .yPosition=0x7, .genMonster=0x1, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xB4, .classIndex=0x9, .autolevel=0x1, .allegiance=0x2, .level=0x9, .xPosition=0x10, .yPosition=0x7, .genMonster=0x1, .ai={0x0, 0x3, 0xC} },
+    {0},
+    {0},
+};
 struct UnitDefinition frontier_df3_unitdef_b_058_920698[] __attribute__((section(".data.frontier_df3_unitdef_b.gap58"))) =
 {
     { .charIndex=0x5F, .classIndex=0x53, .autolevel=0x1, .allegiance=0x2, .level=0x3, .xPosition=0x6, .yPosition=0xD, .itemDrop=0x1, .items={0xAE, 0x69}, .ai={0x0, 0x3, 0xC} },
@@ -1790,7 +2215,18 @@ struct UnitDefinition frontier_df3_unitdef_b_060_921140[] __attribute__((section
 {
     {0},
 };
-u8 frontier_df3_unitdef_b_060_921140_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap60"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_060_921140.bin", 20, 180);
+struct UnitDefinition frontier_df3_unitdef_b_060_921140_residue[] __attribute__((section(".data.frontier_df3_unitdef_b.gap60"))) =
+{
+    { .charIndex=0xBB, .classIndex=0x63, .autolevel=0x1, .allegiance=0x2, .level=0xC, .xPosition=0x4, .yPosition=0xA, .redaCount=0x1, .redas=REDAs_UnitDef_TowerEnemy_9_0, .items={0x14}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBB, .classIndex=0x63, .autolevel=0x1, .allegiance=0x2, .level=0xC, .xPosition=0x4, .yPosition=0xA, .redaCount=0x1, .redas=REDAs_UnitDef_TowerEnemy_9_1, .items={0x1C}, .ai={0x0, 0x12, 0xC} },
+    {0},
+    { .charIndex=0xBB, .classIndex=0x63, .autolevel=0x1, .allegiance=0x2, .level=0xC, .xPosition=0xD, .yPosition=0xF, .redaCount=0x1, .redas=REDAs_UnitDef_TowerEnemy_10_0, .items={0x16}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBB, .classIndex=0x63, .autolevel=0x1, .allegiance=0x2, .level=0xC, .xPosition=0xD, .yPosition=0xF, .redaCount=0x1, .redas=REDAs_UnitDef_TowerEnemy_10_1, .items={0x95}, .ai={0x0, 0x12, 0xC} },
+    {0},
+    { .charIndex=0xBB, .classIndex=0x63, .autolevel=0x1, .allegiance=0x2, .level=0xC, .xPosition=0x14, .yPosition=0xA, .redaCount=0x1, .redas=REDAs_UnitDef_TowerEnemy_11_0, .items={0x1E}, .ai={0x0, 0x0, 0xC} },
+    { .charIndex=0xBB, .classIndex=0x63, .autolevel=0x1, .allegiance=0x2, .level=0xC, .xPosition=0x14, .yPosition=0xA, .redaCount=0x1, .redas=REDAs_UnitDef_TowerEnemy_11_1, .items={0x18}, .ai={0x0, 0x12, 0xC} },
+    {0},
+};
 struct UnitDefinition frontier_df3_unitdef_b_061_9212BC[] __attribute__((section(".data.frontier_df3_unitdef_b.gap61"))) =
 {
     { .charIndex=0x5F, .classIndex=0x1B, .autolevel=0x1, .allegiance=0x2, .level=0x5, .xPosition=0xB, .yPosition=0x2, .genMonster=0x1, .items={0x29, 0x28}, .ai={0x3, 0x3, 0xC} },
@@ -1918,7 +2354,11 @@ struct UnitDefinition frontier_df3_unitdef_b_069_9233F8[] __attribute__((section
 {
     {0},
 };
-u8 frontier_df3_unitdef_b_070_923510[] __attribute__((section(".data.frontier_df3_unitdef_b.gap70"))) = INCBIN_U8("graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_070_923510.bin");
+struct UnitDefinition frontier_df3_unitdef_b_070_923510[] __attribute__((section(".data.frontier_df3_unitdef_b.gap70"))) =
+{
+    { .charIndex=0xB8, .classIndex=0x10, .autolevel=0x1, .allegiance=0x2, .level=0x13, .xPosition=0x16, .yPosition=0x19, .genMonster=0x1, .redaCount=0x1, .redas=REDAs_UnitDef_RuinEnemy_29_0, .ai={0x0, 0x3, 0xC} },
+    {0},
+};
 struct UnitDefinition frontier_df3_unitdef_b_071_92395C[] __attribute__((section(".data.frontier_df3_unitdef_b.gap71"))) =
 {
     {0},
