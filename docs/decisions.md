@@ -8797,3 +8797,24 @@ PNG. `make compare` OK (sha1 `7da0456…`), `make shiftcheck` 0 HIGH.
 (1200-byte, `.bin.lz`-pattern candidates) + trailing. Fully eliminating a split file needs BOTH the
 image PNG AND the OAM-tail carve (a `.bin.lz`/typed follow-up) so the atomic decomposition doesn't
 raise the path-based MISS count. **Correction stored as repository memory.**
+
+## D326 — 48 banim/bg screen tilemaps reclassified MISS→FLOOR (fe8u-form-parity TSA)
+
+**Finding.** 48 raw `.bin` in `frontier_banim_dracozombie` (24), `frontier_banim_aurabg3` (22),
+`frontier_df4_banim_b` (2) were mislabeled `battle-anim` **MISS** by the path-based classifier.
+Rigorously verified they are **30x20 GBA BG screen tilemaps** (TSA): each is exactly 1200 bytes =
+600 u16 tile-attr entries, all tile indices valid (< 1024, within the dir's 256-tile `.png`
+sheets), a dominant background-fill tile, and <= 4 palettes (e.g. `aurabg3_005`: 600 entries,
+tile 31 fill x360, tiles 0-240 placed once, palette 0, no flip).
+
+**Why FLOOR.** fe8u keeps EVERY banim/bg tilemap **binary** (`graphics/banim/assets/tsa/*.map.bin`,
+`graphics/bg/*.tsa.bin`). A JP banim screen tilemap is therefore fe8u-FORM-parity — it satisfies
+the strict goal *"no `.bin` unless also `.bin` in fe8u"* even as a raw `.bin`. It is
+irreducible-as-editable (no editable source form exists — fe8u keeps it binary too), so MISS=0 is
+only reachable by classifying it FLOOR, not by "reducing" it.
+
+**Fix.** `scripts/audit_bin_forms.py` gained a precise CONTENT detector `_is_screen_tilemap()`
+(the fe8j extractor named these generically, so neither the `.tsa.bin` suffix nor the `Tsa_` name
+guard caught them). Self-test asserts `aurabg3_005` → FLOOR. Regenerated `docs/bin_audit.md`:
+**MISS 240 → 192, FLOOR 1128 → 1176.** No build impact (docs/tooling only). Credit: the 30x20
+structure was confirmed against the dir's `.png` tile sheets.
