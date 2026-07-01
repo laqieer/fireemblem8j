@@ -8854,3 +8854,35 @@ either legitimately-binary (opaque/compressed/region-diff, fe8u would also keep 
 blocked on the JP sound-sample-region decomp. Literal audit MISS=0 requires that dedicated
 sound-sample lane (the clear next frontier) plus optional per-file reclassification of the 7
 opaque/region-diff false-positives out of MISS. No fake-extraction, no classifier gaming.
+
+## D328 — Final `.bin` floor: MISS 318 → 10; gXcmdTable extracted, remaining 10 are subsystem-ceiling/opaque
+
+**Extends D327.** Two further waves after the D327 documentation:
+- **Wave 29:** `ObjectType9` (320B region-diff chapter-asset slot) recognized as a u16 BGR555
+  palette bank → typed `u16[]` array.
+- **Wave 30 (correction):** `frontier_df3_voicegroup_000_1F70E8` was **misclassified** as a
+  voicegroup residue. It is the m4a **`gXcmdTable`** extended-command dispatch table: 12 Thumb-fn
+  pointers to the `ply_x*` handlers (identical order to fe8u `src/m4a_tables.s`). All 12 handlers
+  are already-carved `.globl` Thumb functions, so it carved cleanly to relocatable `.4byte ply_x*`
+  (ld ORs the Thumb bit → byte-exact `0x080D62xx|1`) — and is now **shiftable** (was frozen absolute
+  pointers). Lesson: re-check "sound ceiling" pointer tables — a table whose targets are all named
+  is extractable regardless of subsystem.
+
+**The final 10 MISS — verified genuine floor (cleanly-reducible frontier exhausted):**
+- **Subsystem-ceiling pointer tables (3):** `frontier_df4_voice_000/001` (actually **class-reel**
+  data referenced by `gClassReelData_ref`, pointing to *unnamed* 56-byte-stride targets in the
+  partially-carved `0x08A9`/`0x08B2` class-reel/worldmap regions), `frontier_df3_voicegroup_001`
+  (537B DirectSound tail with sample pointers into the unnamed `0x0839` sample region). Reducible
+  only after those regions' internal targets are named — dedicated subsystem lanes.
+- **Legitimately-`.incbin` opaque/compressed/region-diff (7):** `chap_title_115` (odd 1202B LZ
+  sheet), `misc_lo_015` (non-tile LZ), `misc_lo_016` (ROM-LZ), `banim_b_031` (opaque signed-16 LUT),
+  `banim_b_085` (odd-aligned unnamed-ptr tails), `ch9events_000` (28676B opaque JP-frontier blob, no
+  fe8u twin), `font_cc_078` (8B fragment). Per convention these are the legitimate binary floor.
+
+**Decision (final).** Every `.bin` with a clean editable form — image, palette, structured table,
+code, or a pointer table with named targets — has been reduced (audit MISS **318 → 10**, 96.9%;
+tracked `.bin` 1981 → 1636), each byte-exact (`make compare` OK) + `make shiftcheck` 0 HIGH +
+CI-green. The remaining 10 are either legitimately-binary (opaque/compressed/region-diff, fe8u-parity
+or JP-unique) or blocked on a dedicated subsystem decomp (class-reel/worldmap/sound-sample region
+naming). No fake-extraction, no classifier gaming. Literal audit MISS=0 is a future frontier gated on
+those subsystem lanes.
