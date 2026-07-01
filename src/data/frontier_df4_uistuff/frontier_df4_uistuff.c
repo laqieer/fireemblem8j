@@ -105,7 +105,60 @@ struct ProcCmd data_085C37D8[] __attribute__((section(".data.frontier_df4_uistuf
     PROC_REPEAT((ProcFunc)0x080211A1),
     PROC_END,
 };
-u8 frontier_df4_uistuff_027_5C3C9C[] __attribute__((section(".data.frontier_df4_uistuff.gap27"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_027_5C3C9C.bin");
+/* frontier_df4_uistuff_027_5C3C9C: atomic relocation carve (was INCBIN); every embedded ROM
+   pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
+__asm__(
+"	.section .data.frontier_df4_uistuff.gap27, \"aw\", %progbits\n"
+"	.global frontier_df4_uistuff_027_5C3C9C\n"
+"frontier_df4_uistuff_027_5C3C9C:\n"
+"	.4byte 0x00000001, 0x18640000, 0x00FF0001, 0x18640000, 0x00FE0001, 0x186401FF\n"
+"	.4byte 0x00FD0001, 0x184A41FF, 0x00FC0001, 0x184A41FE, 0x00FB0001, 0x184A41FE\n"
+"	.4byte 0x00FA0001, 0x184A41FD, frontier_df4_uistuff_027_5C3C9C, frontier_df4_uistuff_027_5C3C9C + 0x8, frontier_df4_uistuff_027_5C3C9C + 0x10, frontier_df4_uistuff_027_5C3C9C + 0x18\n"
+"	.4byte frontier_df4_uistuff_027_5C3C9C + 0x20, frontier_df4_uistuff_027_5C3C9C + 0x28, frontier_df4_uistuff_027_5C3C9C + 0x30, 0x40000001, 0x18420000, 0x40010001\n"
+"	.4byte 0x18620001, 0x40010001, 0x18440000, 0x40000001, 0x18420001, 0x40000001\n"
+"	.4byte 0x18620002, 0x40010001, 0x18440000, 0x40000001, 0x184201FF, 0x40010001\n"
+"	.4byte 0x18620001, 0x40010001, 0x18440002, sSleepIconSprites + 0x1C, sSleepIconSprites + 0x24, sSleepIconSprites + 0x2C\n"
+"	.4byte sSleepIconSprites + 0x34, sSleepIconSprites + 0x3C, sSleepIconSprites + 0x44, sSleepIconSprites + 0x4C, sSleepIconSprites + 0x54, sSleepIconSprites + 0x5C\n"
+"	.4byte 0x00010000, 0x00004000, 0x00011866, 0x000040FF, 0x00011846, 0x400000FE\n"
+"	.4byte 0x00001848, sBerserkIconSprites + 0x26, sBerserkIconSprites + 0x2E, sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36\n"
+"	.4byte sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36\n"
+"	.4byte sBerserkIconSprites + 0x2E, sBerserkIconSprites + 0x26, sBerserkIconSprites + 0x24, sBerserkIconSprites + 0x24, sBerserkIconSprites + 0x24, sBerserkIconSprites + 0x24\n"
+"	.4byte sBerserkIconSprites + 0x24, 0x80000002, 0x18400002, 0x000A8003, 0x00021841, 0x100280FF\n"
+"	.4byte 0x80021840, 0x18411008, 0x80FE0002, 0x18400002, 0x000A8001, 0x00021841\n"
+"	.4byte 0x100280FD, 0x80001840, 0x18411008, 0x80FC0001, 0x18400004, 0x80FB0001\n"
+"	.4byte 0x18410004, 0x80FA0001, 0x18400004, 0x80F90001, 0x18411004, sSilenceIconSprites + 0x48\n"
+"	.4byte sSilenceIconSprites + 0x56, sSilenceIconSprites + 0x64, sSilenceIconSprites + 0x72, sSilenceIconSprites + 0x80, sSilenceIconSprites + 0x88, sSilenceIconSprites + 0x90\n"
+"	.4byte sSilenceIconSprites + 0x98, sSilenceIconSprites + 0x98, sBerserkIconSprites + 0x24, sBerserkIconSprites + 0x24, sBerserkIconSprites + 0x24, 0x40000002\n"
+"	.4byte 0x18300000, 0x00000008, 0x00011850, 0x40000400, 0x00010000, 0x80008400\n"
+"	.4byte 0x00010000, 0x80000400, 0x00010000, 0x40000800, 0x00010000, 0x80008800\n"
+"	.4byte 0x00010000, 0x80000800, 0x00000000, 0x00000050, 0x000000A0, 0x000000F0\n"
+"	.4byte 0x000000F1, 0x00000004, 0x080297E1, 0x00000002, 0x08015385, 0x00000008\n"
+"	.4byte ProcScr_CamMove, 0x00000002, 0x08029591, 0x00000008, ProcScr_CamMove, 0x00000003\n"
+"	.4byte 0x08029645, 0x00000002, 0x08029771, 0x0000000E, 0x00000000, 0x00000002\n"
+"	.4byte 0x08015395, 0x0064000C, 0x00000000, 0x0063000B, 0x00000000, 0x00000002\n"
+"	.4byte 0x080297AD, 0x0000000E, 0x00000000, 0x00000002, 0x08015395, 0x0064000B\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000002, 0x08015385, 0x00000002\n"
+"	.4byte 0x08029D25, 0x00000008, ProcScr_CamMove, 0x00000003, 0x08029D7D, 0x00000002\n"
+"	.4byte 0x08029771, 0x0064000C, 0x00000000, 0x0063000B, 0x00000000, 0x00000002\n"
+"	.4byte 0x080297AD, 0x0064000B, 0x00000000, 0x00000002, 0x08015395, 0x00000000\n"
+"	.4byte 0x00000000, 0xFFF10100, 0x010F0200, 0xFFF10201, 0x010F0001, 0xFFF10002\n"
+"	.4byte 0x010F0102, 0xFFF10705, 0x010F0605, 0xFFF10506, 0x010F0706, 0xFFF10607\n"
+"	.4byte 0x010F0507, 0x000000FF, 0x0001000E, 0x00000000, 0x00000002, 0x0802CB55\n"
+"	.4byte 0x00000000, 0x00000000, 0x00090002, 0x000B0002, 0x000D0002, 0x000F0002\n"
+"	.4byte 0x00110002, 0x00090010, 0x000B0010, 0x000D0010, 0x000F0010, 0x00110010\n"
+"	.4byte 0x00000002, 0x0802D2F1, 0x00000003, 0x0802D2F9, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000002, 0x08015385, 0x0000000E, 0x00000000, 0x00000008, ProcScr_CamMove\n"
+"	.4byte 0x00000002, 0x0802D6CD, 0x00000002, 0x0802D219, 0x00000005, gTradeItemDisplayTileLocation + 0x28\n"
+"	.4byte 0x0065000B, 0x00000000, 0x00000002, 0x0802E079, 0x00000016, 0x0802DA35\n"
+"	.4byte 0x0000000E, 0x00000000, 0x0000000B, 0x00000000, 0x00000002, 0x0802D759\n"
+"	.4byte 0x00000003, 0x0802D76D, 0x0001000B, 0x00000000, 0x00000002, 0x0802D851\n"
+"	.4byte 0x00000003, 0x0802D8B9, 0x00000002, 0x0802D9E5, 0x0000000C, 0x00000000\n"
+"	.4byte 0x0002000B, 0x00000000, 0x00000002, 0x0802DA81, 0x00000002, 0x0804F611\n"
+"	.4byte 0x00000002, 0x08015395, 0x00000000, 0x00000000, 0x00000002, 0x0802DA95\n"
+"	.4byte 0x00000003, 0x0802DB3D, 0x00000002, 0x0802DC11, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000004, 0x0802DD09, 0x00000003, 0x0802DD09, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000004, 0x0802DD41, 0x00000003, 0x0802DD41, 0x00000000, 0x00000000\n"
+);
 u8 frontier_df4_uistuff_028_5C411C[] __attribute__((section(".data.frontier_df4_uistuff.gap28"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_028_5C411C.bin");
 u8 frontier_df4_uistuff_029_5C4A94[] __attribute__((section(".data.frontier_df4_uistuff.gap29"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_029_5C4A94.bin");
 u8 frontier_df4_uistuff_030_5C534C[] __attribute__((section(".data.frontier_df4_uistuff.gap30"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_030_5C534C.bin", 0x0, 0x1F8);
