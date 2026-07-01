@@ -1,4 +1,5 @@
 #include "global.h"
+#include "anime.h"
 
 /* Migrated from asm/frontier_df4_banim_a.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
@@ -19,7 +20,79 @@ u8 frontier_df4_banim_a_003_5E4570[] __attribute__((section(".data.frontier_df4_
 u8 frontier_df4_banim_a_004_5E4E84[] __attribute__((section(".data.frontier_df4_banim_a.gap4"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_004_5E4E84.4bpp.lz");
 u8 frontier_df4_banim_a_005_5EA510[] __attribute__((section(".data.frontier_df4_banim_a.gap5"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_005_5EA510.4bpp.lz");
 u8 frontier_df4_banim_a_006_5EBF04[] __attribute__((section(".data.frontier_df4_banim_a.gap6"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_006_5EBF04.4bpp.lz");
-u8 frontier_df4_banim_a_007_5F1C3C[] __attribute__((section(".data.frontier_df4_banim_a.gap7"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_007_5F1C3C.bin");
+struct AnimSpriteData frontier_df4_banim_a_007_5F1C3C[] __attribute__((section(".data.frontier_df4_banim_a.gap7"))) =
+{
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0000, -40, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0001, -32, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0002, -16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, -8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0004, 0, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, 8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0005, 16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0006, 24, -17 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0007, 32, -18 } } },
+    ANIM_SPRITE_END,
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0000, -40, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0001, -32, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0002, -16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, -8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0004, 0, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, 8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0005, 16, -17 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0006, 24, -18 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0007, 32, -17 } } },
+    ANIM_SPRITE_END,
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0000, -40, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0001, -32, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0002, -16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, -8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0004, 0, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, 8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0005, 16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0006, 24, -17 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0007, 32, -16 } } },
+    ANIM_SPRITE_END,
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0000, -40, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0001, -32, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0002, -16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, -8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0004, 0, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, 8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0005, 16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0006, 24, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0007, 32, -17 } } },
+    ANIM_SPRITE_END,
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0000, -40, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0001, -32, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0002, -16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, -8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0004, 0, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, 8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0005, 16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0006, 24, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0007, 32, -18 } } },
+    ANIM_SPRITE_END,
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0000, -40, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0001, -32, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0002, -16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, -8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0004, 0, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, 8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0005, 16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0006, 24, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0007, 32, -17 } } },
+    ANIM_SPRITE_END,
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0000, -40, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0001, -32, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0002, -16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, -8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0004, 0, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0003, 8, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0005, 16, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0006, 24, -16 } } },
+    { .header = (u32)(0x8000) | ((u32)(0x0000) << 16), .as = { .object = { 0x0007, 32, -16 } } },
+    ANIM_SPRITE_END,
+};
 u8 frontier_df4_banim_a_008_5FE7D8[] __attribute__((section(".data.frontier_df4_banim_a.gap8"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_008_5FE7D8.bin");
 u8 frontier_df4_banim_a_009_5FF000[] __attribute__((section(".data.frontier_df4_banim_a.gap9"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_009_5FF000.bin", 0x0, 0x1C0);
 u8 data_085FF1C0[] __attribute__((section(".data.frontier_df4_banim_a.gap9"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_009_5FF000.bin", 0x1C0, 0x78);
