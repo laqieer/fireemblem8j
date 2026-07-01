@@ -2656,7 +2656,43 @@ u8 frontier_df4_banim_b_064_7CD474[] __attribute__((section(".data.frontier_df4_
 u8 frontier_df4_banim_b_065_7D3984[] __attribute__((section(".data.frontier_df4_banim_b.gap65"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_065_7D3984.bin.lz");
 u8 frontier_df4_banim_b_066_7E13A4[] __attribute__((section(".data.frontier_df4_banim_b.gap66"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_066a_7E13A4.4bpp.lz");
 u8 frontier_df4_banim_b_066b_7E14E0[] __attribute__((section(".data.frontier_df4_banim_b.gap66"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_066b_7E14E0.4bpp.lz");
-u8 frontier_df4_banim_b_067_84886C[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = INCBIN_U8("graphics/frontier_df4_banim_b/frontier_df4_banim_b_067_84886C.bin");
+/* frontier_df4_banim_b_067_84886C: atomic relocation carve (was INCBIN); every embedded ROM
+   pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap67, \"aw\", %progbits\n"
+"	.global frontier_df4_banim_b_067_84886C\n"
+"frontier_df4_banim_b_067_84886C:\n"
+"	.4byte AnimSprite_DemoKingTunkFace_3 + 0x2, 0x788487AF, 0x840001D5, 0x80000000, 0x0000000E, 0x00000000\n"
+"	.4byte 0x00000003, 0x080789ED, 0x00000003, 0x08078A05, 0x00000002, 0x08078B05\n"
+"	.4byte 0x00000003, 0x08078A61, 0x00000003, 0x08078ABD, 0x00000003, 0x08078EA5\n"
+"	.4byte 0x00000003, 0x08078BB9, 0x00000003, 0x08078C15, 0x00000003, 0x08078C39\n"
+"	.4byte 0x00000003, 0x08078CC1, 0x00000003, 0x08078D19, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000001, data_080ED67C + 0x40, 0x00000003, 0x08078D55\n"
+"	.4byte 0x00000003, 0x08078DBD, 0x00000000, 0x00000000, 0x00000001, data_080ED67C + 0x54\n"
+"	.4byte 0x00000003, 0x08078E31, 0x00000003, 0x08078E99, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, data_080ED67C + 0x68, 0x00000003, 0x0807949D, 0x00000000, 0x00000000\n"
+"	.4byte Tsa_DemonKingBG1, Tsa_DemonKingBG3, Tsa_DemonKingBG2, 0x00000004, 0x08079055, 0x00000002\n"
+"	.4byte 0x08079031, 0x000C000E, 0x00000000, 0x005A000E, 0x00000000, 0x00000003\n"
+"	.4byte 0x08079075, 0x00000003, 0x08079181, 0x000A000E, 0x00000000, 0x00000003\n"
+"	.4byte 0x08079209, 0x001E000E, 0x00000000, 0x00000003, 0x08079221, 0x0016000E\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000004, 0x08079055, 0x00000002\n"
+"	.4byte 0x08079031, 0x0008000E, 0x00000000, 0x00000003, 0x08079075, 0x00000003\n"
+"	.4byte 0x08079181, 0x000A000E, 0x00000000, 0x00000003, 0x08079209, 0x001E000E\n"
+"	.4byte 0x00000000, 0x00000003, 0x08079221, 0x0016000E, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000004, 0x08079349, 0x00000002, 0x08079329, 0x00000003\n"
+"	.4byte 0x08079369, 0x00000003, 0x080793F1, 0x00000003, 0x080793F5, 0x00000000\n"
+"	.4byte 0x00000000, 0x0001000E, 0x00000000, 0x00000003, 0x08079609, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000001, BnaimFrames_DkMiss + 0x1A, 0x00000003, 0x08079735, 0x00000003\n"
+"	.4byte 0x080797B9, 0x00000000, 0x00000000, 0x0000000E, 0x00000000, 0x00000002\n"
+"	.4byte 0x080797E1, 0x00000005, ProcScr_EkrdragonDemonkingobj_1, 0x00000003, 0x08079809, 0x00000002\n"
+"	.4byte 0x08079885, 0x00000000, 0x00000000, 0x00000001, BnaimFrames_DkMiss + 0x2E, 0x00000004\n"
+"	.4byte 0x08079A9D, 0x00000002, 0x080799C1, 0x00000003, 0x08079A0D, 0x00000003\n"
+"	.4byte 0x08079A91, 0x00000000, 0x00000000, 0x00000001, BnaimFrames_DkMiss + 0x42, 0x00000003\n"
+"	.4byte 0x08079C05, 0x00000003, 0x08079CC1, 0x00000003, 0x08079ECD, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000001, BnaimFrames_DkMiss + 0x52, 0x00000003, 0x08079F11, 0x00000003\n"
+"	.4byte 0x08079F81, 0x00000003, 0x08079FD9, 0x00000003, 0x0807A049, 0x00000000\n"
+"	.4byte 0x00000000\n"
+);
 /* frontier_df4_banim_b_070_901138: atomic relocation carve (was INCBIN); every embedded ROM
    pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
 __asm__(
