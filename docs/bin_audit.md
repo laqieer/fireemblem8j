@@ -32,10 +32,10 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 187 | 10.2% |
-| **FLOOR** | 1176 | 64.1% |
-| **UNCERTAIN** | 473 | 25.8% |
-| **TOTAL** | 1836 | 100.0% |
+| **MISS** | 178 | 9.7% |
+| **FLOOR** | 1176 | 64.4% |
+| **UNCERTAIN** | 473 | 25.9% |
+| **TOTAL** | 1827 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -45,7 +45,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | pixel-gfx | MISS | 15 | fe8u graphics/**/*.png |
 | sound-m4a-tables | MISS | 1 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 4 | fe8u sound/voicegroups/*.s (documented ceiling) |
-| menu-strings | MISS | 20 | fe8u C literals (src/menu_def.c) |
+| menu-strings | MISS | 11 | fe8u C literals (src/menu_def.c) |
 | unitdef-residuals | MISS | 47 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 1 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | TSA/.map.bin | FLOOR | 1027 | fe8u keeps TSA/tilemaps binary too |
@@ -91,9 +91,9 @@ under MISS, asserted by the self-test guards below).
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 - 30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).
 
-## MISS (187) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (178) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>187 entries</summary>
+<details><summary>178 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -266,15 +266,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_002a_0DCDD0.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_002b_0DD358.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_003_0DE85C.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_004_0DEE88.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_005_0DF388.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_006_0DFBEF.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_007_0E1870.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_008_0E2638.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_009_0E37C5.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_010_0E3CD7.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_011_0E4602.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_012_0E6774.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_018_1DEF84.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
