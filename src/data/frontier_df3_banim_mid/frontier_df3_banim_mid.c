@@ -15,7 +15,16 @@ u8 frontier_df3_banim_mid_000g_64D9C8[] __attribute__((section(".data.frontier_d
 u8 frontier_df3_banim_mid_000h_64DB3C[] __attribute__((section(".data.frontier_df3_banim_mid.gap0"))) = INCBIN_U8("graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_000h_64DB3C.map.bin.lz");
 u8 frontier_df3_banim_mid_000i_64DC48[] __attribute__((section(".data.frontier_df3_banim_mid.gap0"))) = INCBIN_U8("graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_000i_64DC48.map.bin.lz");
 u8 frontier_df3_banim_mid_000j_64DD1C[] __attribute__((section(".data.frontier_df3_banim_mid.gap0"))) = INCBIN_U8("graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_000j_64DD1C.map.bin.lz");
-u8 frontier_df3_banim_mid_001_6500B0[] __attribute__((section(".data.frontier_df3_banim_mid.gap1"))) = INCBIN_U8("graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_001_6500B0.bin");
+u8 frontier_df3_banim_mid_001_6500B0[] __attribute__((section(".data.frontier_df3_banim_mid.gap1"))) = INCBIN_U8("graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_001a_6500B0.4bpp.lz");
+/* data_08650674: raw non-LZ trailing carve (was part of hybrid JP-LZ blob), byte-exact. */
+__asm__(
+"\t.section .data.frontier_df3_banim_mid.gap1, \"aw\", %progbits\n"
+"\t.global data_08650674\n"
+"data_08650674:\n"
+"\t.4byte 0x7FFF49B3, 0x7F577FBB, 0x7EAE7F13, 0x7E067E4A, 0x53557DA2, 0x53555355\n"
+"\t.4byte 0x53555355, 0x53555355, 0xFFFF0001, 0xFF8000DD, 0x00DD0080, 0x80000100\n"
+"\t.4byte 0x00380000, 0x0000FFE0, 0x00000001, 0x00000000, 0x00000000\n"
+);
 struct AnimSpriteData frontier_df3_banim_mid_002_651204[] __attribute__((section(".data.frontier_df3_banim_mid.gap2"))) =
 {
     { .header = (u32)(0x0001) | ((u32)0xFFFF << 16), .as = { .affine = { 0x00DD, 0xFF80, 0x0080, 0x00DD } } },
@@ -31,7 +40,7 @@ __asm__(
 "	.4byte AnimSprite_EfxAlacaliburOBJ_Back_69 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_70 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_71 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_72 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_25 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_26 + 0x2\n"
 "	.4byte AnimSprite_EfxAlacaliburOBJ_Back_27 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_28 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_29 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_30 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_31 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_32 + 0x2\n"
 "	.4byte AnimSprite_EfxAlacaliburOBJ_Back_33 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_34 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_35 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_36 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_37 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_38 + 0x2\n"
-"	.4byte AnimSprite_EfxAlacaliburOBJ_Back_39 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_40 + 0x2, frontier_df3_banim_mid_001_6500B0 + 0x5E6, AnimSprite_EfxAlacaliburOBJ_Back_2 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_3 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_4 + 0x1\n"
+"	.4byte AnimSprite_EfxAlacaliburOBJ_Back_39 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_40 + 0x2, data_08650674 + 0x22, AnimSprite_EfxAlacaliburOBJ_Back_2 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_3 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_4 + 0x1\n"
 "	.4byte AnimSprite_EfxAlacaliburOBJ_Back_5 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_6 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_7 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_8 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_9 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_10 + 0x2\n"
 "	.4byte AnimSprite_EfxAlacaliburOBJ_Back_11 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_12 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_13 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_14 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_15 + 0x2, AnimSprite_EfxAlacaliburOBJ_Back_16 + 0x1\n"
 "	.4byte AnimSprite_EfxAlacaliburOBJ_Back_17 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_18 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_19 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_20 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_21 + 0x1, AnimSprite_EfxAlacaliburOBJ_Back_22 + 0x1\n"
