@@ -5,6 +5,8 @@
 # extracted fresh from the JP ROM (region-different). Oracle: make compare.
 
 src/data/chap_title/frontier_chap_title.o: \
+  graphics/frontier_chap_title/frontier_chap_title_063a_A8BB88.4bpp.lz \
+  graphics/frontier_chap_title/frontier_chap_title_063b_A8BFA4.4bpp.lz \
   graphics/frontier_chap_title/frontier_chap_title_000_A7E188.4bpp.lz \
   graphics/frontier_chap_title/frontier_chap_title_001_A7E504.4bpp.lz \
   graphics/frontier_chap_title/frontier_chap_title_002_A7E800.4bpp.lz \

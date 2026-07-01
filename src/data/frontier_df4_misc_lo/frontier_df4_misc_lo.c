@@ -38,8 +38,11 @@ u8 frontier_df4_misc_lo_010b_0E3D78[] __attribute__((section(".data.frontier_df4
 u8 frontier_df4_misc_lo_010c_0E3F3C[] __attribute__((section(".data.frontier_df4_misc_lo.gap10c"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_010_0E3CD7.bin", 613, 1692);
 u8 frontier_df4_misc_lo_011_0E4602[] __attribute__((section(".data.frontier_df4_misc_lo.gap11"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_011_0E4602.bin");
 u8 frontier_df4_misc_lo_012_0E6774[] __attribute__((section(".data.frontier_df4_misc_lo.gap12"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_012_0E6774.bin");
-u8 frontier_df4_misc_lo_013_0E7544[] __attribute__((section(".data.frontier_df4_misc_lo.gap13"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_013_0E7544.bin");
-u8 frontier_df4_misc_lo_014_0E8F58[] __attribute__((section(".data.frontier_df4_misc_lo.gap14"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_014_0E8F58.bin");
+u8 frontier_df4_misc_lo_013_0E7544[] __attribute__((section(".data.frontier_df4_misc_lo.gap13"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_013a_0E7544.4bpp.lz");
+u8 frontier_df4_misc_lo_013b_0E7F34[] __attribute__((section(".data.frontier_df4_misc_lo.gap13"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_013b_0E7F34.4bpp.lz");
+u8 frontier_df4_misc_lo_014_0E8F58[] __attribute__((section(".data.frontier_df4_misc_lo.gap14"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_014a_0E8F58.4bpp.lz");
+u8 frontier_df4_misc_lo_014b_0E9910[] __attribute__((section(".data.frontier_df4_misc_lo.gap14"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_014b_0E9910.4bpp.lz");
+u8 frontier_df4_misc_lo_014c_0EA2DC[] __attribute__((section(".data.frontier_df4_misc_lo.gap14"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_014c_0EA2DC.4bpp.lz");
 u8 frontier_df4_misc_lo_015_19E6EC[] __attribute__((section(".data.frontier_df4_misc_lo.gap15"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin");
 u8 frontier_df4_misc_lo_016_1A4C88[] __attribute__((section(".data.frontier_df4_misc_lo.gap16"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin.lz");
 /* frontier_df4_misc_lo_017_1B1878 (ROM 0x081B1878, 5128 B): the unit-class
