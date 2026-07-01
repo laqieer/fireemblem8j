@@ -12,6 +12,7 @@ extern const u8 EventListScr_Ch19b_Turn[];
 extern const u8 data_08A5D40C[];
 extern const u8 frontier_df3_eventscr_ch_017_A6F47C[];
 extern const u8 frontier_df3_unitdef_b_049_91E988[];
+extern const u8 frontier_df3_unitdef_b_049_91E988_tail_p1[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
@@ -26,8 +27,8 @@ SECTION(".rodata.dat_Ch19EphraimEventData_ref") static const u32 Ch19EphraimEven
     (u32)&data_08A5D40C + 0x54,
     (u32)&gUidebug_2 + 0x649,
     (u32)&frontier_df4_menu_005_A5FFAD + 0x69,
-    (u32)&frontier_df3_unitdef_b_049_91E988 + 0x108,
-    (u32)&frontier_df3_unitdef_b_049_91E988 + 0x108,
+    (u32)&frontier_df3_unitdef_b_049_91E988_tail_p1,
+    (u32)&frontier_df3_unitdef_b_049_91E988_tail_p1,
     0x00000000,
     0x00000000,
     0x00000000,

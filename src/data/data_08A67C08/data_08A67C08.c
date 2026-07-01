@@ -71,7 +71,7 @@ __asm__(
 "\t.4byte 0x004E1220\n"
 "\t.4byte 0x00021722\n"
 "\t.4byte 0x00012C41\n"
-"\t.4byte frontier_df3_unitdef_b_004_91075C + 0x154\n"
+"\t.4byte frontier_df3_unitdef_b_004_91075C_p5\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00023B21\n"
 "\t.4byte 0x003C0E20\n"
