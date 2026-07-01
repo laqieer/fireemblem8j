@@ -146,12 +146,20 @@ def main():
         return
 
     if mode == "emit":
+        # FULL-only by default: a slice that needs a `_residue` split (its tail is an
+        # uncarved REDA array) would turn the table's self-referential REDA pointers into
+        # cross-symbol `_residue + addend` references that `make shiftcheck` flags as
+        # mid-symbol pointer debt. So we only type slices whose ENTIRE body is records
+        # (residue == 0); the rest stay a single INCBIN until their REDAs are carved.
+        full_only = "--with-split" not in sys.argv
         new_src = src
         nconv = 0
         referenced = set()
         for m, qual, name, sec, path, boff, slen, recs in reversed(plan):
             used = len(recs) * UDEF_SIZE
             residue = slen - used
+            if residue > 0 and full_only:
+                continue
             lines = [f'struct UnitDefinition {name}[] __attribute__((section("{sec}"))) =', "{"]
             for rec, rs in recs:
                 if rs:
