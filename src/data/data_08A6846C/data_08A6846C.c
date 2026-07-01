@@ -10,7 +10,7 @@ __asm__(
 "data_08A6846C:\n"
 "\t.4byte 0x00261220\n"
 "\t.4byte 0x00012C41\n"
-"\t.4byte frontier_df3_unitdef_b_005_9109A8 + 0x8C\n"
+"\t.4byte frontier_df3_unitdef_b_005_9109A8_residue_p5\n"
 "\t.4byte 0x00003020\n"
 "\t.4byte 0x00101720\n"
 "\t.4byte 0x00023B21\n"
