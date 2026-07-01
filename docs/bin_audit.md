@@ -32,16 +32,16 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 192 | 10.4% |
-| **FLOOR** | 1176 | 63.9% |
-| **UNCERTAIN** | 473 | 25.7% |
-| **TOTAL** | 1841 | 100.0% |
+| **MISS** | 187 | 10.2% |
+| **FLOOR** | 1176 | 64.1% |
+| **UNCERTAIN** | 473 | 25.8% |
+| **TOTAL** | 1836 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
 | Category | Verdict | Count (this run) | fe8u editable form |
 |---|---|---:|---|
-| battle-anim | MISS | 104 | fe8u 202 editable banim/*.s (compressing linker) |
+| battle-anim | MISS | 99 | fe8u 202 editable banim/*.s (compressing linker) |
 | pixel-gfx | MISS | 15 | fe8u graphics/**/*.png |
 | sound-m4a-tables | MISS | 1 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 4 | fe8u sound/voicegroups/*.s (documented ceiling) |
@@ -91,9 +91,9 @@ under MISS, asserted by the self-test guards below).
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 - 30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).
 
-## MISS (192) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (187) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>192 entries</summary>
+<details><summary>187 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -205,9 +205,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_060_921140.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df3_unitdef_b/frontier_df3_unitdef_b_070_923510.bin` | unitdef-residuals | fe8u typed struct UnitDefinition[] / REDA tables (unitdef data, not gfx) |
 | `graphics/frontier_df4_banim_a/frontier_df4_banim_a_000_5E0E94.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_000_602568.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_001_602FB0.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_002_603894.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_003_604F7C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_004_60838C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_005_611798.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
@@ -248,9 +245,7 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_060_7A8B10.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_062_7AA39C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_064_7CD474.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_067_84886C.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_069_8601B1.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
-| `graphics/frontier_df4_banim_b/frontier_df4_banim_b_070_901138.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_071_903450.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_072_903A50.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_074_909DE8.bin` | battle-anim | fe8u banim/*.png + banim/*.s |
