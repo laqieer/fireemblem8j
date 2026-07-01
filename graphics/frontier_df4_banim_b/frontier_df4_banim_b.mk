@@ -3,6 +3,27 @@
 # raw -> verbatim .bin. Fresh JP-ROM extraction. Oracle: make compare.
 
 asm/frontier_df4_banim_b.o: \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_004a_60838C.4bpp.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_059a_79FCB0.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_0879FF00.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_087A0174.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_087A03A0.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_087A05E4.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_087A083C.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_087A0A80.4bpp.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_053a_7059C4.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_08705B7C.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_08705D48.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_08705F2C.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_08706114.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_087062C8.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_08706480.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_0870664C.map.bin.lz \
+  graphics/frontier_df4_banim_b/data_08706818.4bpp.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_082a_A12AC0.4bpp.lz \
+  graphics/frontier_df4_banim_b/data_08A12E44.4bpp.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_051a_6E0CF4.4bpp.lz \
+  graphics/frontier_df4_banim_b/frontier_df4_banim_b_054a_716918.4bpp.lz \
   graphics/frontier_df4_banim_b/frontier_df4_banim_b_029_69BBC8.4bpp.lz \
   graphics/frontier_df4_banim_b/frontier_df4_banim_b_029b_69BE8C.gbapal \
   graphics/frontier_df4_banim_b/frontier_df4_banim_b_064a_7CD474.4bpp.lz \
@@ -319,3 +340,19 @@ graphics/frontier_df4_banim_b/frontier_df4_banim_b_014c_623A04.map.bin.lz: LZ_FL
 graphics/frontier_df4_banim_b/frontier_df4_banim_b_014d_623ABC.map.bin.lz: LZ_FLAGS := -mindist 1
 
 graphics/frontier_df4_banim_b/frontier_df4_banim_b_064c_7CF5D8.map.bin.lz: LZ_FLAGS := -mindist 1
+
+# --- mindist pins (hybrid JP-LZ sheets) ---
+
+graphics/frontier_df4_banim_b/frontier_df4_banim_b_053a_7059C4.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_08705B7C.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_08705D48.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_08705F2C.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_08706114.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_087062C8.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_08706480.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_0870664C.map.bin.lz: LZ_FLAGS := -mindist 1
+
+graphics/frontier_df4_banim_b/frontier_df4_banim_b_059a_79FCB0.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_0879FF00.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_087A03A0.map.bin.lz: LZ_FLAGS := -mindist 1
+graphics/frontier_df4_banim_b/data_087A05E4.map.bin.lz: LZ_FLAGS := -mindist 1
