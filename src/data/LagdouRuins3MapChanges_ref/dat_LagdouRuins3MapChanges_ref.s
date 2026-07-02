@@ -5,16 +5,16 @@
 	.section .rodata.dat_LagdouRuins3MapChanges_ref, "a", %progbits
 	.global LagdouRuins3MapChanges
 LagdouRuins3MapChanges:
-	.4byte 0x08A5DCF4
-	.4byte 0x08A5DD34
-	.4byte 0x08A5DD38
-	.4byte 0x08A5DD9C
-	.4byte 0x08A5DDB8
-	.4byte 0x08A5DDBC
-	.4byte 0x08A5DDC0
-	.4byte 0x08A5DDC4
+	.4byte LagdouRuins2MapChanges + 0x50
+	.4byte LagdouRuins2MapChanges + 0x90
+	.4byte LagdouRuins2MapChanges + 0x94
+	.4byte LagdouRuins2MapChanges + 0xF8
+	.4byte LagdouRuins2MapChanges + 0x114
+	.4byte LagdouRuins2MapChanges + 0x118
+	.4byte LagdouRuins2MapChanges + 0x11C
+	.4byte LagdouRuins2MapChanges + 0x120
 	.4byte gUidebug_2 + 0x662
-	.4byte 0x08A60023
+	.4byte frontier_df4_menu_005_A5FFAD + 0x76
 	.4byte UnitDef_Ruin3Ally
 	.4byte UnitDef_Ruin3Ally
 	.4byte 0x00000000
@@ -23,13 +23,13 @@ LagdouRuins3MapChanges:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte 0x08A704CC
-	.4byte 0x08A70540
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x884
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x8F8
 	.4byte 0x00000002
-	.4byte 0x08A70648
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xA00
 	.4byte 0x00000004
 	.4byte 0x00000002
-	.4byte 0x08A70660
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xA18
 	.4byte 0x00000908
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -41,7 +41,7 @@ LagdouRuins3MapChanges:
 	.4byte 0x00141A01
 	.4byte 0x00000000
 	.4byte 0x00000001
-	.4byte 0x08A70678
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xA30
 	.4byte 0x00000006
 	.4byte 0x00000001
 	.4byte data_085B9EE8

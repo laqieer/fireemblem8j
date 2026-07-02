@@ -14,7 +14,7 @@ LagdouRuins6MapChanges:
 	.4byte data_08A5DF98 + 0x98
 	.4byte data_08A5DF98 + 0x9C
 	.4byte gUidebug_2 + 0x6E3
-	.4byte 0x08A60026
+	.4byte frontier_df4_menu_005_A5FFAD + 0x79
 	.4byte UnitDef_Ruin6Ally
 	.4byte UnitDef_Ruin6Ally
 	.4byte 0x00000000
@@ -23,31 +23,31 @@ LagdouRuins6MapChanges:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte 0x08A7077C
-	.4byte 0x08A707F0
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xB34
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xBA8
 	.4byte 0x00000002
-	.4byte 0x08A70918
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xCD0
 	.4byte 0x00000403
 	.4byte 0x00000002
-	.4byte 0x08A70930
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xCE8
 	.4byte 0x00000504
 	.4byte 0x00000002
-	.4byte 0x08A70948
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xD00
 	.4byte 0x00000605
 	.4byte 0x00000002
-	.4byte 0x08A70960
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xD18
 	.4byte 0x00000604
 	.4byte 0x00080002
-	.4byte 0x08A70998
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xD50
 	.4byte 0x0000FF01
 	.4byte 0x000A0002
-	.4byte 0x08A709EC
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xDA4
 	.4byte 0x0000FF01
 	.4byte 0x000C0002
-	.4byte 0x08A70A40
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xDF8
 	.4byte 0x0000FF01
 	.4byte 0x00000002
-	.4byte 0x08A70A74
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xE2C
 	.4byte 0x00000A09
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -56,19 +56,19 @@ LagdouRuins6MapChanges:
 	.4byte 0x00140B05
 	.4byte 0x00000000
 	.4byte 0x00000001
-	.4byte 0x08A708EC
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xCA4
 	.4byte 0x00000006
 	.4byte 0x0007000B
-	.4byte 0x08A70978
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xD30
 	.4byte 0x0C060A02
 	.4byte 0x0009000B
-	.4byte 0x08A709CC
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xD84
 	.4byte 0x1518110E
 	.4byte 0x0009000B
-	.4byte 0x08A709CC
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xD84
 	.4byte 0x19181615
 	.4byte 0x000B000B
-	.4byte 0x08A70A20
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xDD8
 	.4byte 0x1914160D
 	.4byte 0x00000001
 	.4byte data_085B9EE8
