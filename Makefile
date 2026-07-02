@@ -1080,7 +1080,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_UnitDef_Ch19ANPC_3_ref.s \
                            asm/dat_UnitDef_Ch18AMixed_ref.s \
                            asm/dat_UnitDef_Ch11AMixed_ref.s \
-                           asm/dat_worldmap_gmapunit_p1539.s \
                            asm/dat_worldmap_gmapunit_p1332.s \
                            asm/dat_worldmap_gmapunit_p1319.s \
                            asm/dat_UnitDef_Ch8Ally_1_ref.s \
