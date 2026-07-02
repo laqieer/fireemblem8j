@@ -1026,9 +1026,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_UnitDef_Ch10BEnemy_7_ref.s \
                            asm/dat_UnitDef_Ch10AEnemy_6_ref.s \
                            asm/dat_UnitDef_Ch10AEnemy_1_ref.s \
-                           asm/dat_Ch20EphraimEventData_ref.s \
-                           asm/dat_Ch19EphraimEventData_ref.s \
-                           asm/dat_Ch16EphraimEventData_ref.s \
                            asm/dat_impure_data_ref.s \
                            asm/dat_gWMPathData_ref.s \
                            asm/dat_ObjectType9_ref.s \
@@ -1058,7 +1055,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_UnitDef_Ch15AAlly_1_ref.s \
                            asm/dat_UnitDef_Ch14BAlly_7_ref.s \
                            asm/dat_UnitDef_Ch10AAlly_1_ref.s \
-                           asm/dat_FinalEphraimEvents1_ref.s \
                            asm/dat_worldmap_gmapunit_p1548.s \
                            asm/dat_worldmap_gmapunit_p1347.s \
                            asm/dat_worldmap_gmapunit_p1341.s \
@@ -1137,7 +1133,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_bg_p3.s \
                            asm/dat_EventScr_Ch5_11_ref.s \
                            asm/dat_EventScr_Ch4_10_ref.s \
-                           asm/dat_Ch9EirikaEvents_ref.s \
                            asm/dat_worldmap_gmapunit_p1407.s \
                            asm/dat_worldmap_gmapunit_p1400.s \
                            asm/dat_worldmap_gmapunit_p1389.s \
@@ -1147,7 +1142,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_worldmap_gmapunit_p1576.s \
                            asm/dat_worldmap_gmapunit_p1559.s \
                            asm/dat_worldmap_gmapunit_p1331.s \
-                           asm/dat_PrologueEvents_ref.s \
                            asm/dat_EventScr_Ch3_5_ref.s \
                            asm/dat_EventScr_Ch2_8_ref.s \
                            asm/dat_data_bg_p1.s \
@@ -1345,9 +1339,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_gFontgrp_102_ref.s \
                            asm/dat_gFontgrp_101_ref.s \
                            asm/dat_gFontgrp_100_ref.s \
-                           asm/dat_Ch8EventData_ref.s \
-                           asm/dat_Ch7EventData_ref.s \
-                           asm/dat_Ch5EventData_ref.s \
                            asm/dat_data_bg_p39.s \
                            asm/dat_data_bg_p32.s \
                            asm/dat_data_banim_p224.s \
@@ -1439,15 +1430,9 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/dat_data_bg_p31.s \
                            asm/dat_data_bg_p26.s \
                            asm/dat_data_bg_p13.s \
-                           asm/dat_Ch5XEvents_ref.s \
                            asm/dat_data_bg_p7.s \
                            asm/dat_trig_rodata.s \
                            asm/dat_Ch9Events_ref.s \
-                           asm/dat_Ch6Events_ref.s \
-                           asm/dat_Ch4Events_ref.s \
-                           asm/dat_Ch3Events_ref.s \
-                           asm/dat_Ch2Events_ref.s \
-                           asm/dat_Ch1Events_ref.s \
                            asm/dat_data_5AA96C_p0.s \
                            asm/direct_sound_data.s \
                            asm/data_data_banim_terrain.s \
