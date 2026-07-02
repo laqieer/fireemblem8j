@@ -2697,5 +2697,6 @@ src/efxLunaSCR_Loop.o: CC1FLAGS += -mjp-promote
 
 src/UnitList_PutRow.o: CC1FLAGS += -mjp-promote
 src/LoadClassReelFontPalette.o: CC1FLAGS += -mjp-promote
+src/ProcCmd_CALL_ROUTINE_ARG.o: CC1FLAGS += -mjp-promote
 src/sub_8048FC0.o: CC1FLAGS += -fno-strength-reduce
 src/sub_801FAA0.o: CC1FLAGS += -fno-strength-reduce
