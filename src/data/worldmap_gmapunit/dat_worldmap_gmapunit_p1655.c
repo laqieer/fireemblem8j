@@ -1,8 +1,48 @@
 #include "global.h"
+#include "ending_details.h"
 
 /* Migrated from asm/dat_worldmap_gmapunit_p1655.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1655") u8 gCharacterEndingDefeatLut[] = INCBIN_U8("data/residual/gCharacterEndingDefeatLut.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1655") u8 gSoloEndingBattleDispConf[] = INCBIN_U8("data/residual/gSoloEndingBattleDispConf.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1655") struct EndingDefeatEnt gCharacterEndingDefeatLut[] = {
+    { 0x01, 0x00 },
+    { 0x0F, 0x00 },
+    { 0x02, 0x02 },
+    { 0x04, 0x00 },
+    { 0x03, 0x00 },
+    { 0x05, 0x00 },
+    { 0x06, 0x00 },
+    { 0x07, 0x00 },
+    { 0x0A, 0x00 },
+    { 0x09, 0x00 },
+    { 0x08, 0x00 },
+    { 0x13, 0x00 },
+    { 0x0C, 0x00 },
+    { 0x20, 0x00 },
+    { 0x0D, 0x00 },
+    { 0x10, 0x00 },
+    { 0x11, 0x00 },
+    { 0x22, 0x00 },
+    { 0x0B, 0x02 },
+    { 0x21, 0x00 },
+    { 0x12, 0x00 },
+    { 0x1D, 0x00 },
+    { 0x1F, 0x00 },
+    { 0x0E, 0x00 },
+    { 0x19, 0x02 },
+    { 0x1A, 0x00 },
+    { 0x1C, 0x00 },
+    { 0x14, 0x00 },
+    { 0x15, 0x00 },
+    { 0x18, 0x00 },
+    { 0x16, 0x00 },
+    { 0x17, 0x00 },
+    { 0x1E, 0x02 },
+    { 0x00, 0x00 },
+};
+/* fe8u: u16 *gSoloEndingBattleDispConf[] = { gEndingTmScratchA..D }; the B/C/D
+ * EWRAM scratch buffers have no fe8j symbol, so emitted as their fixed addresses. */
+SECTION(".rodata.dat_worldmap_gmapunit_p1655") u16 * gSoloEndingBattleDispConf[] = {
+    (u16 *)0x020007A0, (u16 *)0x02000FA0, (u16 *)0x020017A0, (u16 *)0x02001FA0,
+};
