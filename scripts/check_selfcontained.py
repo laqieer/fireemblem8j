@@ -39,7 +39,9 @@ INCBIN_RE = re.compile(
     r'(0x[0-9A-Fa-f]+|\d+)'
 )
 
-SCAN_DIRS = ("asm", "src")
+# Build-input source trees that may contain assembly/C incbins.  Do not scan scripts/:
+# one-time extractors can mention baserom.gba without being linked into the ROM.
+SCAN_DIRS = ("asm", "src", "banim", "sound")
 SCAN_EXTS = (".s", ".c", ".inc")
 
 
