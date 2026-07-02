@@ -1,0 +1,131 @@
+/* Migrated from asm/data_08A686CC.s (region-same graphics, single section).
+ * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+ */
+	.section .data.residue.08A686CC, "aw", %progbits
+	.global data_08A686CC
+data_08A686CC:
+	.4byte 0x00000000
+	.4byte 0x00030540
+	.4byte 0x00000AF6
+	.4byte 0x00000A40
+	.4byte data_08A60354 + 0xF4
+	.4byte 0x00001521
+	.4byte 0x00000A40
+	.4byte data_085B9BBC + 0x168
+	.4byte 0x00030540
+	.4byte 0x00000088
+	.4byte 0xFFFF3720
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00001520
+	.4byte 0x00020540
+	.4byte 0x00000000
+	.4byte 0x00030540
+	.4byte 0x00000AF7
+	.4byte 0x00000A40
+	.4byte data_08A60354 + 0xF4
+	.4byte 0x00001521
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00001520
+	.4byte 0x00020540
+	.4byte 0x00000000
+	.4byte 0x00030540
+	.4byte 0x00000AF8
+	.4byte 0x00000A40
+	.4byte data_08A60354 + 0xF4
+	.4byte 0x00001521
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00271420
+	.4byte 0x00210E20
+	.4byte 0x00001A20
+	.4byte 0x0AEC1B20
+	.4byte 0x00001D20
+	.4byte 0x00001B22
+	.4byte 0x00021421
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00001520
+	.4byte 0x00001A20
+	.4byte 0x0AED1B20
+	.4byte 0x00001D20
+	.4byte 0x00001B22
+	.4byte 0x00001521
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00001520
+	.4byte 0x00001A20
+	.4byte 0x0AEE1B20
+	.4byte 0x00001D20
+	.4byte 0x00001B22
+	.4byte 0x00001521
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00001520
+	.4byte 0x00001A20
+	.4byte 0x0AEF1B20
+	.4byte 0x00001D20
+	.4byte 0x00001B22
+	.4byte 0x00001521
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00001520
+	.4byte 0x00001A20
+	.4byte 0x0AF01B20
+	.4byte 0x00001D20
+	.4byte 0x00001B22
+	.4byte 0x00001521
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00001520
+	.4byte 0x00001A20
+	.4byte 0x0AF11B20
+	.4byte 0x00001D20
+	.4byte 0x00001B22
+	.4byte 0x00001521
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00020540
+	.4byte frontier_df3_unitdef_b_006_911070
+	.4byte 0x00000A40
+	.4byte data_08A60354 + 0x58
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00020540
+	.4byte 0x089110AC
+	.4byte 0x00000A40
+	.4byte data_08A60354 + 0x58
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00020540
+	.4byte 0x089110E8
+	.4byte 0x00000A40
+	.4byte data_08A60354 + 0x58
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00020540
+	.4byte UnitDef_Ch15AEnemy_6
+	.4byte 0x00000A40
+	.4byte data_08A60354 + 0x58
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00020540
+	.4byte frontier_df3_unitdef_b_007_911200 + 0x3C
+	.4byte 0x00000A40
+	.4byte data_08A60354 + 0x58
+	.4byte 0x00070228
+	.4byte 0x00000120
+	.4byte 0x00020540
+	.4byte 0x00000000
+	.4byte 0x00000A40
+	.4byte UnitDef_Ch14BAlly_7
+	.4byte 0x00010540
+	.4byte 0x00010000
+	.4byte 0x00813920
+	.4byte 0x00010540
+	.4byte 0x00011200
+	.4byte 0x00823920
+	.4byte 0x00070228
+	.4byte 0x00000120
+/* de-pointered slice data_08A686CC: ptr=9 data=109 skip=6 */
