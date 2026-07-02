@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 7 | 0.4% |
-| **FLOOR** | 1381 | 76.5% |
-| **UNCERTAIN** | 418 | 23.1% |
-| **TOTAL** | 1806 | 100.0% |
+| **FLOOR** | 1381 | 77.2% |
+| **UNCERTAIN** | 402 | 22.5% |
+| **TOTAL** | 1790 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -52,7 +52,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 418 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 402 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -1497,34 +1497,18 @@ under MISS, asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (418) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (402) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>418 entries</summary>
+<details><summary>402 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
-| `data/residual/Ch16EphraimEventData.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ch19EphraimEventData.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ch1Events.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ch20EphraimEventData.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ch2Events.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ch3Events.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ch4Events.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ch5EventData.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ch5XEvents.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ch6Events.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ch7EventData.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ch8EventData.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/Ch9EirikaEvents.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/Ch9Events.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/FinalEphraimEvents1.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/JapaneseTerrainNames.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/PrologueEvents.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/REDA_Ch14AMixed_1_CAELLACH.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/REDA_Ch14AMixed_1_ISMAIRE.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/REDA_Ch14AMixed_1_LYON.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/SoftReset.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `data/residual/TrapData_Event_Ruin9_0.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/WmMonsterGenerateRates_EphraimMode.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/WmMonsterGenerateRates_XmapEphraim.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/bldyLut.10.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
