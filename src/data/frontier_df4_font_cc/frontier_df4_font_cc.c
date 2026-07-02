@@ -9,7 +9,15 @@
  * removed here (un-tiled). gap6 was SPLIT: its first 0x112 bytes (0x53763A..0x53774C)
  * belonged to song002's tail and are now in song002.o; only its non-song remainder
  * (0x53774C..0x537960, 0x214 bytes) stays here. */
-u8 frontier_df4_font_cc_078_56CAD8[] __attribute__((section(".data.frontier_df4_font_cc.gap78"))) = INCBIN_U8("graphics/frontier_df4_font_cc/frontier_df4_font_cc_078_56CAD8.bin");
+/* gap78 (0x56CAD8) is a 2-word pointer record, not gfx: {0x800A0000, voicegroup001}
+ * (word1 == 0x081F7720 == D311 voicegroup001). Carved to a relocatable .4byte table
+ * so the voicegroup001 pointer stays shiftable (shiftcheck 0 HIGH). */
+__asm__(
+"\t.section .data.frontier_df4_font_cc.gap78, \"aw\", %progbits\n"
+"\t.global frontier_df4_font_cc_078_56CAD8\n"
+"frontier_df4_font_cc_078_56CAD8:\n"
+"\t.4byte 0x800A0000, voicegroup001\n"
+);
 __asm__(
 "\t.section .data.frontier_df4_font_cc.gap90, \"aw\", %progbits\n"
 "\t.global frontier_df4_font_cc_090_574344\n"
