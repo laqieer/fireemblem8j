@@ -685,3 +685,20 @@ fontgrp SJIS fonts (2616 glyphs → typed `struct Glyph[]`, largest extractable)
 
 ## Frontier VERIFIED exhausted (D331, wave 40)
 wave40: 17 fe8u-typed-twin blobs carved (LUTs/REDA/terrain/SoftReset). **audit UNCERTAIN 467->313 across waves 32-40.** Exhaustion verified 3 ways: 0 structured tables, 0 orphans, 0 fe8u-typed-twins (2 remaining named = broken-LZ + region-diff floor). Every .bin with a fe8u editable form is extracted; remaining ~313 = JP-unique opaque/frontier (no fe8u twin, legit incbin) + floor.
+
+## D331 was INCOMPLETE — two categories the 3-angle scan missed (waves 41-42)
+The wave-40 "exhaustion" checked pointer-density, orphans, and fe8u-typed-twins but NOT (a) compressed
+blobs or (b) pointer tables misfiled under `graphics/frontier_df*/`. Both yielded real extractions:
+- **wave41 (PR#122, D332): 19 concatenated JP-LZ (byte0=0x10) frontier blobs → 13 .png + 2 .pal + 18 .map.bin.**
+  UNCERTAIN 313→294. 22 byte0=0x10 skipped genuine (13 trailing-raw non-reducing tails, 7 no-sink sheet sizes,
+  2 invalid-LZ). Compression-header sweep: byte0=0x20 (×11) are INVALID Huffman (low-nibble 0, gbagfx rejects)
+  = opaque structured data floor; 0x02 mostly non-tile data. LESSON: extractability MUST scan compression
+  headers (0x10 LZ, 0x24/0x28 Huff, 0x30 RLE), not just pointer density / symbol twins.
+- **wave42 (PR#12x, D332): 9 mixed data+pointer frontier tables (misfiled in graphics/frontier_df*/) →
+  relocatable `.4byte Sym` word-streams.** menu_020/003/004, uistuff_024/031/032, df3_data_5aa96c_003,
+  df3_ending_000, ending_001. UNCERTAIN 294→285. menu_018 skipped (0 ROM pointers = pure data floor).
+  Fixed an ABS-symbol shiftcheck edge: a reloc `S+addend` is HIGH iff its VALUE equals any symbol start
+  (base irrelevant); ABS/sym_jp globals shadowing a real blob symbol must stay raw literals.
+- **wave43 (READY, low yield): 11 coherent small data/residual pointer tables** (files/wave43_candidates.txt).
+- **Honest remaining floor:** coordinate/affine data, byte0=0x00 opaque (85), invalid-Huffman structured (11),
+  JP-unique frontier data with NO fe8u twin → fe8u would also incbin → satisfies "unless also .bin in fe8u".

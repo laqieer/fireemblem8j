@@ -8973,3 +8973,39 @@ provides no editable form for any of them, so keeping them as `.incbin` does not
 *"no `.bin` unless it is also `.bin` in fe8u"* — extracting them would be fake-extraction (a regression vs
 clean INCBIN) or a deep per-file JP-RE effort (font-graphics tooling / structure identification), not the
 mechanical fe8u-form carving that this epic covers.
+
+## D332
+**Waves 41-42: two extractable categories the D331 "3-angle exhaustion" missed (compressed blobs +
+graphics/-misfiled pointer tables). UNCERTAIN 313 → 285. `make compare` OK + shiftcheck 0 HIGH throughout.**
+
+D331 declared the extractable frontier "verified exhausted 3 ways" (0 structured tables, 0 orphans, 0
+fe8u-typed-twins). That was INCOMPLETE — the scans keyed on pointer density / symbol twins and never checked
+(a) compression headers or (b) pointer tables filed under `graphics/frontier_df*/` (outside the pointer-table
+sweep's dir scope). Re-scanning found both:
+
+- **wave41 (PR#122, main 6f7b340b4):** 19 concatenated JP-LZ (byte0=0x10) frontier blobs decomposed to
+  per-sheet fe8u form (13 `.png` + 2 `.pal` + 18 `.map.bin`, all concat-of-built-`.lz` == original verified
+  before wiring). UNCERTAIN 313→294. 22 byte0=0x10 skipped genuine (13 trailing-raw non-reducing tails, 7
+  no-sink sheet sizes, 2 invalid-LZ). A full compression-header sweep of the 294 residual UNCERTAIN found
+  byte0=0x20 (×11) are **invalid** GBA Huffman (header low-nibble 0, gbagfx rejects both huff and lz) —
+  opaque structured JP data, not compressed; byte0=0x02 are mostly non-tile data. So the compression axis is
+  now clean (only 0x10 LZ was real, and it is assessed).
+
+- **wave42 (this PR):** 9 mixed data+pointer frontier tables misfiled in `graphics/frontier_df*/`
+  (menu_020/003/004, uistuff_024/031/032, df3_data_5aa96c_003, df3_ending_000, ending_001) carved to
+  relocatable `.4byte Sym` word-streams (wave37 pattern). UNCERTAIN 294→285. menu_018 skipped (0 ROM
+  pointers = pure data + IWRAM constants; a hex `.4byte` dump adds no relocation value → left INCBIN floor).
+  Correctness rule reconfirmed from `scan_offsets.py`/`scan_relocs.py`: a reloc `S+addend` is shiftcheck-HIGH
+  iff its VALUE lands on any symbol's START (base irrelevant); an ABS/`sym_jp` global that shadows the real
+  blob symbol is a non-shiftable constant and its self-referential words must stay **raw literals**, not
+  relocations — otherwise they alias a local's start and trip HIGH.
+
+**LESSON (updates D331):** "extractable" must be scanned along THREE independent axes — (1) resolvable-pointer
+density, (2) fe8u editable twin, AND (3) **compression header** (0x10 LZ / 0x24-0x28 Huff / 0x30 RLE) — and
+the pointer scan must cover `graphics/` dirs, not just `data/residual/`. Never declare exhaustion from a
+subset of axes.
+
+**Honest remaining floor after wave42** (and low-yield wave43 = 11 coherent small data/residual pointer
+tables): coordinate/affine/matrix data, byte0=0x00 opaque data (85), invalid-Huffman structured data (11),
+wave41 LZ skips (24), and JP-unique frontier data — all with NO fe8u editable twin, so fe8u would also
+`.incbin` them → they satisfy *"no `.bin` unless it is also `.bin` in fe8u"* as-is.
