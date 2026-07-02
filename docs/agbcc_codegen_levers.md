@@ -199,3 +199,153 @@ permuter fleet (16-fn) + these scratches; remaining path = compute-time + commun
   CHECK-BEFORE-REWORK (D291): before reworking any posted fn, query
   `GET decomp.me/api/scratch/<slug>/family` for a score-0 fork (a community match) and integrate it
   instead of re-deriving. As of this posting, all 19 FE8J scratches' families have NO score-0 member.
+
+## 12. decomp.me match patterns — from TsilaAllaoui's 8 fork matches (D292)
+
+Eight FE8J reg-coloring NEARs (all labelled "agbcc reg-coloring NEAR") were driven to
+**score 0** on decomp.me forks by community matcher **TsilaAllaoui**, then integrated to
+`src/` byte-exact here. Diffing each non-matching parent (proxied from the in-repo
+`src/nonmatching/*` stubs, git history, and the fe8u natural form — the decomp.me parents
+were later overwritten by mark-solved, so the *fork's own explicit constructs* are the
+primary evidence) against its matched fork yields a reusable lever set. These extend
+§1–§9 with a new, more surgical family: **inline-asm constraint scripting** — directly
+commanding agbcc's register allocator / instruction selector without changing behaviour.
+They crack exactly the spill-decision + high-pressure reg-coloring NEARs §7 said flag
+sweeps could not.
+
+The 8 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
+
+| fork (fn) | pins | `=r`/`0` reg-barrier | `+m` mem-barrier | inline-asm | headline lever |
+|---|---|---|---|---|---|
+| jmNW8 `PutFaceOnBackGround`   | 0  | 0 | 0 | 0  | **P8** pure source-shape (hoist+IV+widen) |
+| 9rbYd `EfxAdvanceFrameLut`    | 1  | 0 | 0 | 3  | P7 return-widen + P3 `sub;strh` + P9 blocks |
+| tnBW4 `GetPidDefeatedEnding…` | 5  | 0 | 0 | 5  | P4 pins + **P5** shift-pair sign-extract |
+| JJIdk `sub_80BCD74`           | 2  | 1 | 0 | 2  | **P1** reg-barrier + P5 shift bit-test |
+| cTKJG `Event0F_CounterOps`    | 7  | 0 | 0 | 12 | **P3** instr-scripting + P7 `volatile short` |
+| mbcFD `sub_8084CE4`           | 11 | 0 | 0 | 13 | P4 pins + **P3** stack-arg `ldr` + P10 `&x` |
+| 39OxE `RegisterTsaWithOffset` | 6  | 0 | 0 | 6  | P4 high-reg (r8) + **P6** shifted-domain loop |
+| Qua5T `sub_80CAEF4`           | 34 | 6 | 2 | 34 | **P2** mem-barrier + P1/P4 swarm + goto |
+
+### The levers (checklist — try cleanest first, escalate only if it resists)
+
+**P8 — pure source-shape (try FIRST; the only "clean decomp" fork).** No asm at all.
+Hoist next-iteration pointers/index to explicit temps computed *before* the inner loop,
+and materialise the loop IV, so agbcc schedules + colours the loop like JP:
+```c
+for (i = 0; i < 10; i++) {                for (i = 0; i < 10; i++) {
+    for (j = 0; j < 12; j++) {...}    ->      const u16 *nextSrc = src + 12;   /* hoist */
+    src += 12; dst += 0x20;                    u16 *nextDst = dst + 0x20;
+}                                              int nextI = i + 1;
+                                               for (j = 0; j < 12; j++) {...}
+                                               src = nextSrc; dst = nextDst; i = nextI - 1;
+                                           }
+```
+Combine with **int-local-widen** (§2): copy an `s8`/`s16` param to an `int` up front
+(`int flipped = c;` then test `flipped == 0`). *jmNW8.*
+
+**P7 — return/param-type widening (drop a sign-extend/truncate).** When JP returns the
+value raw (no final `lsl#16;asr#16` / `and`), widen the return or param type so agbcc
+omits the narrowing:
+```c
+s16  f(...) {...}      ->   unsigned int  f(...) {...}   /* 9rbYd: drops trailing sign-ext */
+u8   g(...) {...}      ->   volatile short g(...) {...}  /* cTKJG: drops return truncation  */
+```
+`volatile` on the return type also blocks agbcc from CSE-folding the final store. *9rbYd, cTKJG.*
+
+**P5 — shift-domain signedness / bit-test (no mask, no `and`).** Extract a signed
+sub-field or test a bit with a shift pair instead of a mask, matching JP's `lsl;asr`/`bpl`:
+```c
+chId = tmp & 0x3F;            ->  chId = ((u32)tmp << 0x1a) >> 0x1a;  /* lsl#26;asr#26 signed 6-bit */
+if ((flags & 2) == 0) {...}  ->  flag <<= 0x1e; if (flag >= 0) {...} /* lsl#30;bpl, not and#2;beq */
+```
+This is §1 done at the *use* site via the shift domain. *tnBW4, JJIdk.*
+
+**P6 — shifted-domain loop arithmetic (keep counter as a `<<16` value).** For an `s16`
+loop counter JP holds pre-shifted in a register and decrements by adding the shifted
+step, reproduce the domain instead of letting agbcc re-extend each iteration:
+```c
+while (i > 0xc) { ...; i--; }
+->
+if (i > 0xc) { int jStart = jrange << 16;          /* hold <<16 in a reg (JP: jrange<<16 in ip) */
+  do { ...; j += (0xFFFF0000);  /* decrement in <<16 domain */
+       dec = nextI << 16; i = dec >> 16;           /* re-narrow via lsl#16;asr#16 */
+  } while (i > 0xc); }
+```
+Pairs with a `while`→`if + do/while` rotation. *39OxE (RegisterTsaWithOffset).*
+
+**P4 — hard-register pin swarm, incl. high regs.** When JP colours under high pressure
+(uses r8/r9/sl/ip), pin the locals explicitly (§3, but applied in bulk):
+```c
+register u16 *base asm("r8");  register int jrange asm("r6");  register int count asm("ip");
+```
+Effective but brittle and the least "clean" of the register levers — a single pin can add
+shuffle `mov`s (see §3's regression warning). Reserve for genuinely high-pressure bodies
+where declaration-order (§9) can't reach the coloring. *39OxE, mbcFD, Qua5T, tnBW4, cTKJG.*
+
+**P1 — empty-asm register barrier `asm("" : "=r"(x) : "0"(x));`.** A no-op that forces `x`
+to be *materialised in a register at that program point* and pins its class, creating a
+live-range/scheduling fence without emitting an instruction. Use to stop agbcc hoisting or
+coalescing a value across a point where JP keeps it live:
+```c
+register u8 *ram asm("r0");
+ram = ...;
+asm("" : "=r"(ram) : "0"(ram));   /* fence: ram stays in r0 here, reload not sunk */
+```
+*JJIdk, Qua5T (×6), tnBW4.*
+
+**P2 — empty-asm memory barrier `asm("" : "+m"(a), "+m"(b));`.** Forces the named locals to
+be **spilled to / reloaded from the stack** across the barrier — the decisive tool for the
+*spill-decision NEAR class* §7 declared unreachable by flags. Place it where JP spills:
+```c
+asm("" : "+m"(a), "+m"(b), "+m"(vram));   /* commit a,b,vram to memory here */
+```
+Only Qua5T (4bpp tile deinterleave, extreme pressure) needed it — but it is the direct
+answer to "same instructions, JP spills X and we keep it in a reg." *Qua5T (×2).*
+
+**P3 — inline-asm instruction scripting.** When P1/P4 still won't route a value to the
+right register or emit the exact instruction, write that one instruction inline with
+`"=r"/"r"` constraints (agbcc still allocates the operands). Three proven uses:
+```c
+/* exact stack-arg load order + target regs (Thumb args 5-7 are on the stack): */
+asm("ldr %0,[sp,#0x1c]\n\tldr %1,[sp,#0x20]\n\tldr %2,[sp,#0x24]"
+    : "=r"(addTmp), "=r"(centerTmp), "=r"(scale));            /* mbcFD */
+/* exact decrement-store the C form mis-coloured: */
+asm("sub r0,%0,#1\n\tstrh r0,[%1]" :: "r"(count), "r"(pcount)); /* 9rbYd */
+/* signed-byte extract / merged and+lsl / register move: */
+asm("asr %0,%1,#24" : "=r"(newValue) : "r"(temp));            /* cTKJG: <<16 then asr#24 */
+asm("add %0,%1,#0"  : "=r"(out)      : "r"(d));               /* cTKJG/mbcFD: mov via add#0 */
+```
+*mbcFD, cTKJG, 9rbYd.*
+
+**P9 — block-structure wrappers (`do{...}while(0)`, dead assigns).** Empty or trivial
+blocks create basic-block boundaries that steer cross-jumping / branch polarity — e.g. to
+stop agbcc merging duplicate sentinel `return`s, or to fix which side of a compare falls
+through:
+```c
+if (iframe == -1) { do { return -1; } while (0); }   /* separate BB: no cross-jump merge */
+... do {} while (0); ...                             /* scheduling/branch fence */
+new_var2 = &v; d = d*v; new_var = new_var2;           /* dead copies = live-range boundary */
+```
+*9rbYd, mbcFD.*
+
+**P10 — `&x` addressable-forcing (force a local to the stack).** Taking a local's address
+forces agbcc to give it a stack home instead of a register — a portable alternative to P2
+for a single value (cf. §9(e)): `new_var2 = &v;` makes `v` addressable. *mbcFD.*
+
+### How to run this on a NEAR (escalation order)
+1. **Confirm it's a coloring/spill NEAR** (same instruction *count/opcodes*, regs or spill
+   slots differ) — objdiff / the region `cmp`. If opcodes differ, it's a §1–§9 shape issue.
+2. **P8 + §2 + P7 first** (source-shape only — keeps the decomp clean & portable).
+3. **P5/P6** if the diff is a signed sub-field / re-extended loop counter (shift-domain).
+4. **§9 declaration/first-use order**, then **P4 pins**, for a clean register permutation.
+5. **P1 reg-barrier** to fence a live range; **P3 instruction scripting** to force one exact
+   insn / stack-arg routing; **P2 `+m` mem-barrier** only for a stubborn spill-decision.
+6. `make compare` is the oracle at every step; keep the *smallest* set of asm hacks that
+   reaches OK (prefer removing a hack for a source-shape lever once matched).
+
+**Caveat / provenance.** P1–P3 (inline-asm constraints) are *match-forcing*, not idiomatic
+decomp — they encode the answer rather than discovering the source shape, and are non-portable
+across compilers. Prefer P8/P7/P5/P6 (real source levers) and escalate to asm-constraints only
+for reg-coloring/spill NEARs that resist everything else (Qua5T's extreme pressure is the
+justified end of the spectrum; jmNW8's zero-asm form is the ideal). All eight patterns above
+are credited to **TsilaAllaoui** (decomp.me), whose forks supplied the worked examples.
