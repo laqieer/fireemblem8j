@@ -8947,3 +8947,29 @@ does NOT violate "no `.bin` unless it's `.bin` in fe8u"; fe8u makes no editable 
 JP-LZ slices, ~9 hard tables whose pointers land in unnamed function interiors, and the opaque 43KB residue.
 These need deep per-file RE / font-graphics tooling, not mechanical carving. Every `.bin` with a clear fe8u
 editable form has been extracted.
+
+## D331 — Extractable frontier VERIFIED exhausted (wave 40 + 3-angle scan)
+
+**Wave 40 (#120):** 17 more residual blobs that have a fe8u typed twin → carved to those forms
+(gExcalibur/gLunaBgScrollOffsets s16[], sSlotToChrLut/gBmudisp_0 u16[], gPromoJidLut u8[128][2],
+WmMonsterGenerateRates_* , gCharacterEndingTitleLut/DefeatLut → struct EndingTitle/DefeatEnt[34] with
+JP MSG IDs decoded, REDA_Ch14AMixed_1_* → struct REDA[], JapaneseTerrainNames → SJIS char[408] via iconv,
+gSoloEndingBattleDispConf → EWRAM ptr casts, and **SoftReset → real Thumb asm** in libagbsyscall.s). Skipped
+Ch9Events (region-different: invalid-LZ, 0 script pointers, doesn't match fe8u's struct ChapterEventGroup).
+
+**Result — audit UNCERTAIN 467 → 313 across waves 32-40** (MISS 7, FLOOR 1381).
+
+**Exhaustion verified from THREE independent angles (post-wave40):**
+1. Structured pointer-dense scan (nm enclosing-symbol + total-word-fraction): **0** raw tables remain.
+2. Orphan scan (built-INCBIN vs dead excluded-asm, `.lz`-aware): **0** data/residual orphans remain.
+3. fe8u-typed-twin scan (each named blob's symbol vs fe8u `src/` defs): **0** remain — the only two named
+   blobs with a fe8u def are `gGfx_OpSubtitle_05` (non-standard JP-LZ gbagfx can't decode) and `Ch9Events`
+   (region-different), both correctly left as floor.
+
+**Every `.bin` with a fe8u editable form has been extracted.** The remaining ~313 UNCERTAIN are JP-unique
+with NO fe8u twin — `data_*`/`gap_*` byte-completeness residues, the JP-exclusive `frontier_df4_*` UI blobs
+(hard even-into-code / coincidental-pointer / pure JP data), `pilot_*`, and the 2 floor blobs above. fe8u
+provides no editable form for any of them, so keeping them as `.incbin` does not violate
+*"no `.bin` unless it is also `.bin` in fe8u"* — extracting them would be fake-extraction (a regression vs
+clean INCBIN) or a deep per-file JP-RE effort (font-graphics tooling / structure identification), not the
+mechanical fe8u-form carving that this epic covers.
