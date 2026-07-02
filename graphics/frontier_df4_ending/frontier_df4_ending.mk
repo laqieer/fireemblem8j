@@ -10,3 +10,8 @@ asm/frontier_df4_ending.o: \
   graphics/frontier_df4_ending/frontier_df4_ending_019_B8B998.4bpp.lz \
   graphics/frontier_df4_ending/frontier_df4_ending_020_BAA2E0.4bpp.lz
 
+# wave47: pinned JP-LZ leaves (no-recipe) -- committed exact compressed bytes,
+# not rebuilt from a .bin source (would collide with the generic %.lz: % rule).
+graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin.lz: ;
+graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin.lz: ;
+
