@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 7 | 0.4% |
-| **FLOOR** | 1381 | 78.3% |
-| **UNCERTAIN** | 375 | 21.3% |
-| **TOTAL** | 1763 | 100.0% |
+| **FLOOR** | 1381 | 79.6% |
+| **UNCERTAIN** | 347 | 20.0% |
+| **TOTAL** | 1735 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -52,7 +52,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 375 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 347 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -1497,9 +1497,9 @@ under MISS, asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (375) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (347) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>375 entries</summary>
+<details><summary>347 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1536,7 +1536,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_0857742E.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085775C9.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08579D4C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0857A114.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0857A354.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0857A42C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0857A864.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1546,7 +1545,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_0857D36C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0857DA2C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0857DBDC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0857DCB4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0857E32C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0859137C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08594374.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1560,7 +1558,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_08595864.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0859848C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085985AC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0859A0AC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085B9E14.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085BA10C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_085C4440.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1776,8 +1773,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/gap_00024670.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gap_00024818.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gap_000396D8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/gap_0006E4DC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/gap_0006E79C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gap_0008359C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gap_0009D634.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/gap_000B0664.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1795,7 +1790,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/unit_icon_move_Bard_motion.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `data/residual/unit_icon_move_Dancer_motion.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/data/data_08576124_576150.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_002_5D4358.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_003_5D48E0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_006_5D53FC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_007_5D737C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
@@ -1838,41 +1832,19 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_025_A9C020.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_029_AA3860.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_030_AA71D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_031_AA9F98.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_032_AAAC4C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_033_AAEB40.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_036_AB0D18.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_038_ABCD24.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_039_AC00A8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_000_57A504.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_003_57CC64.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_004_57CF7C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_005_57DFCC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_006_57E4DC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_008_5946F4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_009_594B2C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_010_595B34.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_011_59662C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_012_596F74.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_013_5987EC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_014_598E64.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_015_599BE4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_016_59A2EC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_017_59A574.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_018_59B0FC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_019_59BA8C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_020_59BFE4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_021_59D034.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_024_5C1D30.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_031_5C5DE8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_032_5C6084.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_033_5C6AD4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_034_5C6E08.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_035_5CDF84.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
