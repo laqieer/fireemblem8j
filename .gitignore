@@ -33,6 +33,12 @@ build/shiftcheck/
 # rule in graphics/misc_gfx2/misc_gfx2.mk). Merged from the old truncated
 # gTsa_OpSubtitle_05.bin + 79B head of frontier_df4_ending_016.
 !graphics/misc_gfx2/gTsa_OpSubtitle_05.bin.lz
+# Pinned JP-LZ leaf (wave45 #6): frontier_df4_misc_lo_015's 442B LZ stream is NOT
+# reproducible by gbagfx at any -mindist (JP encoder: 442B vs gbagfx's best 444B),
+# so the exact JP .lz bytes stay COMMITTED (no-recipe pin rule in
+# graphics/frontier_df4_misc_lo/frontier_df4_misc_lo.mk). Split from the old 700B
+# raw .bin (442B LZ + 258B .short tail, now decoded in the .c).
+!graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.lz
 *.4bpp.h
 
 # TSA battle-background intermediates (D309). The editable source is the .png;

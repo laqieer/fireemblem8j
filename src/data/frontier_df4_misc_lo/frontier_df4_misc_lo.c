@@ -1671,7 +1671,43 @@ u8 frontier_df4_misc_lo_013b_0E7F34[] __attribute__((section(".data.frontier_df4
 u8 frontier_df4_misc_lo_014_0E8F58[] __attribute__((section(".data.frontier_df4_misc_lo.gap14"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_014a_0E8F58.4bpp.lz");
 u8 frontier_df4_misc_lo_014b_0E9910[] __attribute__((section(".data.frontier_df4_misc_lo.gap14"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_014b_0E9910.4bpp.lz");
 u8 frontier_df4_misc_lo_014c_0EA2DC[] __attribute__((section(".data.frontier_df4_misc_lo.gap14"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_014c_0EA2DC.4bpp.lz");
-u8 frontier_df4_misc_lo_015_19E6EC[] __attribute__((section(".data.frontier_df4_misc_lo.gap15"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin");
+/* frontier_df4_misc_lo_015_19E6EC (ROM 0x0819E6EC, 700 B): a JP-region asset =
+ * a 442 B LZ77 stream (declen 632 B) immediately followed by a 258 B u16 data
+ * table. The LZ stream is NOT reproducible by gbagfx at any -mindist (the JP ROM
+ * used a tighter encoder: 442 B vs gbagfx's best 444 B), so the exact JP .lz
+ * bytes stay COMMITTED as a no-recipe pin (.gitignore negation + rule in the dir
+ * .mk), mirroring graphics/misc_gfx2/gTsa_OpSubtitle_05.bin.lz (wave44). The
+ * 258 B tail (ROM 0x0819E8A6..0x0819E9A8) is opaque JP data with no ROM pointers,
+ * decoded here to editable .short literals. The base symbol + gap15 section are
+ * preserved so the frontier resource name table's `.4byte
+ * frontier_df4_misc_lo_015_19E6EC` still resolves. */
+u8 frontier_df4_misc_lo_015_19E6EC[] __attribute__((section(".data.frontier_df4_misc_lo.gap15"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.lz");
+u16 frontier_df4_misc_lo_015b_19E8A6[] __attribute__((section(".data.frontier_df4_misc_lo.gap15"))) = {
+    0x0000, 0x2E10, 0x0001, 0x0F00, 0xD00A, 0x4004, 0x4400, 0x0000,
+    0x0048, 0x0B80, 0x0580, 0x0018, 0x3C00, 0x1801, 0x8C00, 0x9005,
+    0x000B, 0x004C, 0x0050, 0x0054, 0x04D0, 0x5001, 0xC004, 0xC400,
+    0xC800, 0x1D00, 0x0C00, 0x9805, 0xBC00, 0x9801, 0x0000, 0x048C,
+    0x0B90, 0x00CC, 0x00D0, 0xD400, 0x5000, 0xD004, 0x8004, 0x080A,
+    0x0084, 0x0A80, 0x1D10, 0x0118, 0x0EC0, 0x1803, 0x0C01, 0x3B00,
+    0x1330, 0x3B10, 0x0084, 0x000A, 0x0C0A, 0x8008, 0x180C, 0x0002,
+    0x01AC, 0x0A00, 0x00A8, 0x905B, 0x0C60, 0x1330, 0x3B10, 0x029C,
+    0x02A4, 0x02A0, 0x0002, 0x9806, 0x8400, 0x1100, 0x060C, 0x9808,
+    0x0400, 0x3006, 0x1013, 0x043B, 0x0703, 0x0030, 0x0688, 0x00DC,
+    0x3053, 0x0C13, 0x0118, 0x03DC, 0x1330, 0x7720, 0xB006, 0x0008,
+    0x0684, 0x0088, 0x1401, 0x8802, 0x0214, 0x0294, 0x0910, 0x2084,
+    0xD013, 0x0404, 0x0018, 0x0418, 0x0008, 0x1801, 0x4800, 0x4080,
+    0x841D, 0x7006, 0x9813, 0x4000, 0x010C, 0x0144, 0x0048, 0x70C9,
+    0x981D, 0x0600, 0x014C, 0x0150, 0x0054, 0x0013, 0x01C5, 0xC402,
+    0xC801, 0x1801, 0x8001, 0x013B, 0xCC04, 0xD001, 0xD401, 0x1300,
+    0x0000,
+};
+/* frontier_df4_misc_lo_016_1A4C88 (ROM 0x081A4C88): LZ77-compressed in ROM,
+ * decompresses to a 1058 B = 529 u16 TSA screen tilemap (every entry is a valid
+ * tile-attr: tile 32..992 <1024, palette 0-1, flip bits — NOT a string pool).
+ * Already in the correct editable form: the decompressed source .bin rebuilds into
+ * ROM byte-exact via the generic %.lz rule. The audit still lists it MISS
+ * "string pool" (path-class misnomer) — an audit-false-MISS; fe8u keeps TSA
+ * tilemaps binary, so there is no further extraction to do here. */
 u8 frontier_df4_misc_lo_016_1A4C88[] __attribute__((section(".data.frontier_df4_misc_lo.gap16"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin.lz");
 /* frontier_df4_misc_lo_017_1B1878 (ROM 0x081B1878, 5128 B): the unit-class
  * INTERNAL-NAME string pool (FE3_DUMMY, CITIZEN, KOIDO_M, EMPTY_NNN, R08...)
