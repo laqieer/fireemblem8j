@@ -5,18 +5,18 @@
 	.section .rodata.dat_Ch16MapChanges_ref, "a", %progbits
 	.global Ch16MapChanges
 Ch16MapChanges:
-	.4byte 0x08A5BB74
-	.4byte 0x08A5BB9C
-	.4byte 0x08A5BBA0
-	.4byte 0x08A5BC04
-	.4byte 0x08A5BC2C
-	.4byte 0x08A5BC30
-	.4byte 0x08A5BC34
-	.4byte 0x08A5BC38
+	.4byte Ch15MapChanges + 0x50
+	.4byte Ch15MapChanges + 0x78
+	.4byte Ch15MapChanges + 0x7C
+	.4byte Ch15MapChanges + 0xE0
+	.4byte Ch15MapChanges + 0x108
+	.4byte Ch15MapChanges + 0x10C
+	.4byte Ch15MapChanges + 0x110
+	.4byte Ch15MapChanges + 0x114
 	.4byte gUidebug_2 + 0x365
-	.4byte 0x08A5FFF6
-	.4byte 0x08911390
-	.4byte 0x08911390
+	.4byte frontier_df4_menu_005_A5FFAD + 0x49
+	.4byte frontier_df3_unitdef_b_007_911200_tail
+	.4byte frontier_df3_unitdef_b_007_911200_tail
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -26,58 +26,58 @@ Ch16MapChanges:
 	.4byte data_08A68B20
 	.4byte data_08A68F2C
 	.4byte 0x000E0002
-	.4byte 0x08A69E88
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x7B4
 	.4byte 0x0000FF01
 	.4byte 0x00000002
-	.4byte 0x08A69E08
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x734
 	.4byte 0x00000004
 	.4byte 0x00000002
-	.4byte 0x08A69E08
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x734
 	.4byte 0x00000006
 	.4byte 0x00000002
-	.4byte 0x08A69E08
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x734
 	.4byte 0x00000008
 	.4byte 0x00000002
-	.4byte 0x08A69E38
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x764
 	.4byte 0x00000004
 	.4byte 0x00000002
-	.4byte 0x08A69E38
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x764
 	.4byte 0x00000006
 	.4byte 0x00000002
-	.4byte 0x08A69E38
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x764
 	.4byte 0x00000008
 	.4byte 0x00000002
-	.4byte 0x08A69E50
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x77C
 	.4byte 0x0000000A
 	.4byte 0x00000002
-	.4byte 0x08A69E50
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x77C
 	.4byte 0x0000000C
 	.4byte 0x00000002
-	.4byte 0x08A69E20
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x74C
 	.4byte 0x00000003
 	.4byte 0x00000002
-	.4byte 0x08A69E20
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x74C
 	.4byte 0x00000005
 	.4byte 0x00000002
-	.4byte 0x08A69E20
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x74C
 	.4byte 0x00000007
 	.4byte 0x00000002
-	.4byte 0x08A69E20
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x74C
 	.4byte 0x00000009
 	.4byte 0x00000002
-	.4byte 0x08A69E20
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x74C
 	.4byte 0x0000000B
 	.4byte 0x00000000
 	.4byte 0x00090003
-	.4byte 0x08A69DB8
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x6E4
 	.4byte 0x00002122
 	.4byte 0x00000000
 	.4byte 0x00090003
-	.4byte 0x08A69D90
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x6BC
 	.4byte 0x0000210B
 	.4byte 0x00000000
 	.4byte 0x00090003
-	.4byte 0x08A69DE0
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x70C
 	.4byte 0x00002106
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -89,16 +89,16 @@ Ch16MapChanges:
 	.4byte 0x0016020C
 	.4byte 0x00000000
 	.4byte 0x00030001
-	.4byte 0x08A69AA8
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x3D4
 	.4byte 0x00000002
 	.4byte 0x000D000B
-	.4byte 0x08A69E68
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x794
 	.4byte 0x09160011
 	.4byte 0x000F000B
-	.4byte 0x08A69EBC
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x7E8
 	.4byte data_080ED67C + 0x1298D
 	.4byte 0x000F000B
-	.4byte 0x08A69EBC
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x7E8
 	.4byte 0x10130A0F
 	.4byte 0x00000001
 	.4byte data_085B9EE8

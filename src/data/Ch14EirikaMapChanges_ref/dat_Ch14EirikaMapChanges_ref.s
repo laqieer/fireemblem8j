@@ -5,16 +5,16 @@
 	.section .rodata.dat_Ch14EirikaMapChanges_ref, "a", %progbits
 	.global Ch14EirikaMapChanges
 Ch14EirikaMapChanges:
-	.4byte 0x08A5B75C
-	.4byte 0x08A5B79C
-	.4byte 0x08A5B7C0
-	.4byte 0x08A5B890
-	.4byte 0x08A5B8C4
-	.4byte 0x08A5B8C8
-	.4byte 0x08A5B8CC
-	.4byte 0x08A5B8D0
+	.4byte Ch13EirikaMapChanges + 0x50
+	.4byte Ch13EirikaMapChanges + 0x90
+	.4byte Ch13EirikaMapChanges + 0xB4
+	.4byte Ch13EirikaMapChanges + 0x184
+	.4byte Ch13EirikaMapChanges + 0x1B8
+	.4byte Ch13EirikaMapChanges + 0x1BC
+	.4byte Ch13EirikaMapChanges + 0x1C0
+	.4byte Ch13EirikaMapChanges + 0x1C4
 	.4byte gUidebug_2 + 0x360
-	.4byte 0x08A5FFF1
+	.4byte frontier_df4_menu_005_A5FFAD + 0x44
 	.4byte UnitDef_Event_Ch14aAlly
 	.4byte UnitDef_Event_Ch14aAlly
 	.4byte 0x00000000

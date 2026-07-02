@@ -14,46 +14,46 @@ Ch18MapChanges:
 	.4byte data_08A5BDD8 + 0xEC
 	.4byte data_08A5BDD8 + 0xF0
 	.4byte gUidebug_2 + 0x36C
-	.4byte 0x08A5FFFD
-	.4byte 0x0891350C
-	.4byte 0x0891350C
-	.4byte 0x08913BB0
-	.4byte 0x08913F5C
-	.4byte 0x08914308
-	.4byte 0x08913C64
-	.4byte 0x08914010
-	.4byte 0x089143BC
-	.4byte 0x08A69F20
+	.4byte frontier_df4_menu_005_A5FFAD + 0x50
+	.4byte frontier_df3_unitdef_b_018_912AD4_tail_p1
+	.4byte frontier_df3_unitdef_b_018_912AD4_tail_p1
+	.4byte frontier_df3_unitdef_b_019_913958 + 0x258
+	.4byte frontier_df3_unitdef_b_019_913958 + 0x604
+	.4byte frontier_df3_unitdef_b_019_913958 + 0x9B0
+	.4byte frontier_df3_unitdef_b_019_913958 + 0x30C
+	.4byte frontier_df3_unitdef_b_019_913958 + 0x6B8
+	.4byte frontier_df3_unitdef_b_019_913958 + 0xA64
+	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x84C
 	.4byte frontier_df3_eventscr_ch_002_A6A06C
 	.4byte 0x00030002
-	.4byte 0x08A6A75C
+	.4byte frontier_df3_eventscr_ch_002_A6A06C + 0x6F0
 	.4byte 0x0000000E
 	.4byte 0x00000002
 	.4byte frontier_df3_eventscr_ch_003_A6AA20
 	.4byte 0x00000006
 	.4byte 0x00000002
-	.4byte 0x08A6AA38
+	.4byte frontier_df3_eventscr_ch_003_A6AA20 + 0x18
 	.4byte 0x00000706
 	.4byte 0x00000002
-	.4byte 0x08A6AA50
+	.4byte frontier_df3_eventscr_ch_003_A6AA20 + 0x30
 	.4byte 0x00000703
 	.4byte 0x00000002
-	.4byte 0x08A6AA84
+	.4byte frontier_df3_eventscr_ch_003_A6AA20 + 0x64
 	.4byte 0x00000804
 	.4byte 0x00000002
-	.4byte 0x08A6AAB8
+	.4byte frontier_df3_eventscr_ch_003_A6AA20 + 0x98
 	.4byte 0x00000C08
 	.4byte 0x00000002
-	.4byte 0x08A6AAEC
+	.4byte frontier_df3_eventscr_ch_003_A6AA20 + 0xCC
 	.4byte 0x00000D09
 	.4byte 0x00000002
-	.4byte 0x08A6AB20
+	.4byte frontier_df3_eventscr_ch_003_A6AA20 + 0x100
 	.4byte 0x00000903
 	.4byte 0x00000002
-	.4byte 0x08A6AB38
+	.4byte frontier_df3_eventscr_ch_003_A6AA20 + 0x118
 	.4byte 0x00000802
 	.4byte 0x00000002
-	.4byte 0x08A6A728
+	.4byte frontier_df3_eventscr_ch_002_A6A06C + 0x6BC
 	.4byte 0x00000001
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -83,7 +83,7 @@ Ch18MapChanges:
 	.4byte 0x00140E1B
 	.4byte 0x00000000
 	.4byte 0x00030001
-	.4byte 0x08A6A75C
+	.4byte frontier_df3_eventscr_ch_002_A6A06C + 0x6F0
 	.4byte 0x00000002
 	.4byte 0x00000001
 	.4byte data_085B9EE8

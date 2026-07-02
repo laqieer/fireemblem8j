@@ -14,17 +14,17 @@ Ch12EirikaMapChanges:
 	.4byte data_08A5B56C + 0x98
 	.4byte data_08A5B56C + 0x9C
 	.4byte gUidebug_2 + 0x349
-	.4byte 0x08A5FFEC
-	.4byte 0x0890E6E4
-	.4byte 0x0890E6E4
+	.4byte frontier_df4_menu_005_A5FFAD + 0x3F
+	.4byte frontier_df4_banim_b_078_90E58C + 0x158
+	.4byte frontier_df4_banim_b_078_90E58C + 0x158
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte 0x08A670BC
-	.4byte 0x08A672E4
+	.4byte frontier_df4_menu_008_A66F88 + 0x134
+	.4byte frontier_df4_menu_008_A66F88 + 0x35C
 	.4byte 0x00030002
 	.4byte EventScr_Ch13a_EndingScene
 	.4byte 0x0000000C

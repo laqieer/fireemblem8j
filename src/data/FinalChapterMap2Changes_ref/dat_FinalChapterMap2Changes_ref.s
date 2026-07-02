@@ -14,44 +14,44 @@ FinalChapterMap2Changes:
 	.4byte data_08A5C25C + 0x80
 	.4byte data_08A5C25C + 0x84
 	.4byte gUidebug_2 + 0x4D4
-	.4byte 0x08A60003
-	.4byte 0x0891642C
-	.4byte 0x0891642C
+	.4byte frontier_df4_menu_005_A5FFAD + 0x56
+	.4byte frontier_df3_unitdef_b_025_9163BC_p14
+	.4byte frontier_df3_unitdef_b_025_9163BC_p14
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte 0x08A6B580
-	.4byte 0x08A6BFF0
+	.4byte frontier_df3_eventscr_ch_005_A6B460 + 0x120
+	.4byte frontier_df3_eventscr_ch_005_A6B460 + 0xB90
 	.4byte 0x000C0002
-	.4byte 0x08A6C814
+	.4byte frontier_df3_eventscr_ch_006_A6C078 + 0x79C
 	.4byte 0x0000FF01
 	.4byte 0x00100002
-	.4byte 0x08A6C858
+	.4byte frontier_df3_eventscr_ch_006_A6C078 + 0x7E0
 	.4byte 0x0000FF01
 	.4byte 0x000E0002
 	.4byte frontier_df3_eventscr_ch_007_A6C8CC
 	.4byte 0x0000FF01
 	.4byte 0x00120002
-	.4byte 0x08A6C7C0
+	.4byte frontier_df3_eventscr_ch_006_A6C078 + 0x748
 	.4byte 0x0000FF01
 	.4byte 0x00000000
 	.4byte 0x00070003
-	.4byte 0x08A6C714
+	.4byte frontier_df3_eventscr_ch_006_A6C078 + 0x69C
 	.4byte 0x0000120F
 	.4byte 0x00000000
 	.4byte 0x00070003
-	.4byte 0x08A6C73C
+	.4byte frontier_df3_eventscr_ch_006_A6C078 + 0x6C4
 	.4byte 0x00001204
 	.4byte 0x00000000
 	.4byte 0x00080003
-	.4byte 0x08A6C770
+	.4byte frontier_df3_eventscr_ch_006_A6C078 + 0x6F8
 	.4byte 0x0000220F
 	.4byte 0x00000000
 	.4byte 0x00080003
-	.4byte 0x08A6C770
+	.4byte frontier_df3_eventscr_ch_006_A6C078 + 0x6F8
 	.4byte 0x00000F22
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -84,16 +84,16 @@ FinalChapterMap2Changes:
 	.4byte 0x00140117
 	.4byte 0x00000000
 	.4byte 0x000F0001
-	.4byte 0x08A6C848
+	.4byte frontier_df3_eventscr_ch_006_A6C078 + 0x7D0
 	.4byte 0x00000011
 	.4byte 0x000D000B
 	.4byte EventScr_Ch9B_9
 	.4byte 0x04180306
 	.4byte 0x000B000B
-	.4byte 0x08A6C7F4
+	.4byte frontier_df3_eventscr_ch_006_A6C078 + 0x77C
 	.4byte 0x14111107
 	.4byte 0x000A000B
-	.4byte 0x08A6C794
+	.4byte frontier_df3_eventscr_ch_006_A6C078 + 0x71C
 	.4byte 0x10070A03
 	.4byte 0x00000001
 	.4byte data_085B9EE8

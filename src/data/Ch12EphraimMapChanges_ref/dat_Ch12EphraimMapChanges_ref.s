@@ -5,16 +5,16 @@
 	.section .rodata.dat_Ch12EphraimMapChanges_ref, "a", %progbits
 	.global Ch12EphraimMapChanges
 Ch12EphraimMapChanges:
-	.4byte 0x08A5C730
-	.4byte 0x08A5C77C
-	.4byte 0x08A5C790
-	.4byte 0x08A5C7C4
-	.4byte 0x08A5C7E0
-	.4byte 0x08A5C7E4
-	.4byte 0x08A5C7E8
-	.4byte 0x08A5C7EC
+	.4byte Ch11EphraimMapChanges + 0x50
+	.4byte Ch11EphraimMapChanges + 0x9C
+	.4byte Ch11EphraimMapChanges + 0xB0
+	.4byte Ch11EphraimMapChanges + 0xE4
+	.4byte Ch11EphraimMapChanges + 0x100
+	.4byte Ch11EphraimMapChanges + 0x104
+	.4byte Ch11EphraimMapChanges + 0x108
+	.4byte Ch11EphraimMapChanges + 0x10C
 	.4byte gUidebug_2 + 0x4DC
-	.4byte 0x08A6000B
+	.4byte frontier_df4_menu_005_A5FFAD + 0x5E
 	.4byte UnitDef_Ch12BAlly_0
 	.4byte UnitDef_Ch12BAlly_0
 	.4byte 0x00000000
@@ -23,19 +23,19 @@ Ch12EphraimMapChanges:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte 0x08A6D5B4
+	.4byte frontier_df3_eventscr_ch_010_A6D524 + 0x90
 	.4byte frontier_df3_eventscr_ch_011_A6D850
 	.4byte 0x00000002
-	.4byte 0x08A6DEE8
+	.4byte frontier_df3_eventscr_ch_012_A6DE0C + 0xDC
 	.4byte 0x00000807
 	.4byte 0x00000002
-	.4byte 0x08A6DF00
+	.4byte frontier_df3_eventscr_ch_012_A6DE0C + 0xF4
 	.4byte 0x00000403
 	.4byte 0x00000002
-	.4byte 0x08A6DF18
+	.4byte frontier_df3_eventscr_ch_012_A6DE0C + 0x10C
 	.4byte 0x00000503
 	.4byte 0x00000002
-	.4byte 0x08A6DF30
+	.4byte frontier_df3_eventscr_ch_012_A6DE0C + 0x124
 	.4byte 0x00000603
 	.4byte 0x00000000
 	.4byte 0x00090003
@@ -47,30 +47,30 @@ Ch12EphraimMapChanges:
 	.4byte 0x00000F14
 	.4byte 0x00000000
 	.4byte 0x000A0003
-	.4byte 0x08A6DE30
+	.4byte frontier_df3_eventscr_ch_012_A6DE0C + 0x24
 	.4byte 0x00001614
 	.4byte 0x00000000
 	.4byte 0x000A0003
-	.4byte 0x08A6DE30
+	.4byte frontier_df3_eventscr_ch_012_A6DE0C + 0x24
 	.4byte 0x00001416
 	.4byte 0x00000000
 	.4byte 0x000B0003
-	.4byte 0x08A6DE50
+	.4byte frontier_df3_eventscr_ch_012_A6DE0C + 0x44
 	.4byte 0x00001815
 	.4byte 0x00000000
 	.4byte 0x000B0003
-	.4byte 0x08A6DE50
+	.4byte frontier_df3_eventscr_ch_012_A6DE0C + 0x44
 	.4byte 0x00001518
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000006
-	.4byte 0x08A6DE70
+	.4byte frontier_df3_eventscr_ch_012_A6DE0C + 0x64
 	.4byte 0x00101204
 	.4byte 0x00000005
 	.4byte 0x00000001
 	.4byte 0x00201104
 	.4byte 0x00000006
-	.4byte 0x08A6DEAC
+	.4byte frontier_df3_eventscr_ch_012_A6DE0C + 0xA0
 	.4byte 0x00100D11
 	.4byte 0x00000005
 	.4byte 0x00000001
@@ -80,7 +80,7 @@ Ch12EphraimMapChanges:
 	.4byte EventScr_Ch13b_EndingScene
 	.4byte 0x00000006
 	.4byte 0x000C0001
-	.4byte 0x08A6DF48
+	.4byte frontier_df3_eventscr_ch_012_A6DE0C + 0x13C
 	.4byte 0x00000002
 	.4byte 0x0007000B
 	.4byte EventScr_Ch13B_0
