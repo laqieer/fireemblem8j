@@ -1,1 +1,1 @@
-0CAEF4	0CB014	asm/sub_80CAEF4.o(.text.sub_80CAEF4)	sub_80CAEF4 region-different gbadisasm descriptive asm
+0CAEF4	0CB014	src/sub_80CAEF4.o(.text)	sub_80CAEF4 (graduated from region-different descriptive asm; JP-only 4bpp tile deinterleave)
