@@ -1952,8 +1952,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/gap_000BD054.s \
                            asm/gap_000BBA3C.s \
                            asm/gap_000B46D4.s \
-                           asm/gap_000B1030.s \
-                           asm/gap_000B0664.s \
                            asm/gap_000AE5A4.s \
                            asm/gap_0009D634.s \
                            asm/gap_0008359C.s \
@@ -1964,15 +1962,11 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/gap_00061FD8.s \
                            asm/gap_000396D8.s \
                            asm/gap_00037E00.s \
-                           asm/gap_00024818.s \
-                           asm/gap_00024670.s \
                            asm/gap_0001BF98.s \
                            asm/gap_0001B9B0.s \
-                           asm/gap_00014818.s \
                            asm/gap_000062C0.s \
                            asm/gap_00006274.s \
                            asm/gap_00003240.s \
-                           asm/gap_00003080.s \
                            asm/gfx_data_bg.s \
                            asm/frontier_df4_font_cc.s \
                            asm/frontier_df3_unitdef_b.s \
@@ -2703,5 +2697,9 @@ src/efxLunaSCR_Loop.o: CC1FLAGS += -mjp-promote
 
 src/UnitList_PutRow.o: CC1FLAGS += -mjp-promote
 src/LoadClassReelFontPalette.o: CC1FLAGS += -mjp-promote
+src/ProcCmd_CALL_ROUTINE_ARG.o: CC1FLAGS += -mjp-promote
+src/StartSqMask.o: CC1FLAGS += -mjp-promote
+src/DrawDifficultySprites_Loop.o: CC1FLAGS += -mjp-promote
+src/PutTmSized.o: CC1FLAGS += -mjp-promote
 src/sub_8048FC0.o: CC1FLAGS += -fno-strength-reduce
 src/sub_801FAA0.o: CC1FLAGS += -fno-strength-reduce
