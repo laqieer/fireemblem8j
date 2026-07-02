@@ -5,9 +5,9 @@
 > state" figures throughout (25.6% matching-C, ~0.12% data, ~17% build
 > self-containment, ~59% named) are **historical snapshots from early in the
 > project**. Current ground-truth figures (from `scripts/calcprogress.py`):
-> matching-C **95.44% (8139 / 8528)**, build self-containment **100%**, extracted
-> data **100% of measured set**, named symbols **85.23%**. For what remains, see
-> `docs/frontier.md`.
+> matching-C **95.44% (8139 / 8528)**, build self-containment **100%**, strict
+> C/PNG extracted data **79.91%**, source-form data **100.00%**, named symbols
+> **85.23%**. For what remains, see `docs/frontier.md`.
 
 
 A prior effort drove the catch-all `asm/baserom.s` to **zero** `.incbin "baserom.gba"`
@@ -35,6 +35,24 @@ and `make` must still emit the byte-identical ROM. FE8U and pokeemerald pass thi
 **FE8J fails it on 83% of the ROM.**
 
 ---
+
+## Current data metric split — strict extraction vs source-form bytes
+
+`python3 scripts/calcprogress.py` intentionally keeps the decomp.dev-compatible
+**EXTRACTED DATA** numerator strict: `src/*.o` C/PNG/charmap/typed data plus
+libc/libgcc data only. That number is currently **79.91%** and should not be
+renamed or inflated.
+
+The companion **SOURCE-FORM DATA** line answers the honest completion question for
+non-`src/` asset roots. It credits only object roots whose Makefile recipes are
+committed editable source with no `baserom.gba` fallback: `banim/data_banim.o`
+from `arm_compressing_linker.py` over `banim/*_motion.s` and `graphics/banim`
+PNG/AGBPAL assets; `sound/songs/midi/*.o` from `mid2agb` over committed `.mid`;
+`sound/voicegroups/*.o` from editable voice macro `.s`; `asm/fe6sio.o` from the
+mgfembp FE6 payload source; and the small descriptive m4a tables.
+`scripts/check_selfcontained.py` is the proof gate: it currently reports 0
+`.incbin "baserom.gba"` directives, so those credited bytes are source-built,
+not hidden ROM incbins.
 
 ## The real completion criterion — "remove `baserom.gba`, `make` still builds byte-perfect"
 

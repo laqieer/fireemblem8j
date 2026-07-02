@@ -18,8 +18,11 @@ non-inflated numbers:
      function total (decompiled + still-as-asm objects), NOT the US count -- so the
      % can't read ~100% while JP functions remain as descriptive asm.
      (gbadisasm descriptive asm is DISASSEMBLY, not decompilation -- NOT counted.)
-  3. EXTRACTED DATA          = genuinely-extracted asset bytes (C structs / PNG)
-     / real data total.  ~0.12%.  (named `.incbin "baserom"` is NOT extraction.)
+  3. EXTRACTED DATA          = strict C/PNG-scoped extracted bytes under src/
+     / real data total.  Named `.incbin "baserom"` is NOT extraction.  This
+     intentionally remains a narrow portal/decomp.dev-compatible number.
+     SOURCE-FORM DATA is surfaced separately: data already built from committed
+     editable source even when the object root is banim/, sound/, or asm/fe6sio.o.
   4. NAMED SYMBOLS           = named labels / total labels, with NO overflow.
      `sub_/data_/nullsub_/banim_/gfx_` auto-placeholders count as UNNAMED.  ~59%.
 
@@ -30,6 +33,7 @@ Prior bugs this fixes (per the audit, docs/decomp-completion-standard.md front d
     every auto-placeholder as documented. FIXED: placeholders are UNNAMED and the
     denominator is the true label total (no value can exceed 100%).
 """
+import collections
 import glob
 import os
 import re
@@ -93,8 +97,47 @@ def read_manifest(name):
 # named `.incbin "baserom.gba"` -- assembled, but NOT decompiled/extracted.
 code_src = code_asm = code_lib = 0  # .text bytes by source kind (lib = libc.a/libgcc.a)
 data_src = data_asm = data_lib = 0  # .data/.rodata bytes by source kind (lib = archives)
+source_form_data = 0
+source_form_data_groups = collections.Counter()
 objs = set()
 asm_text_objs = set()  # distinct asm/*.o objects still placed in .text (= still-asm funcs)
+
+
+def source_form_data_group(obj):
+    """Classify non-src data objects that are already built from editable source.
+
+    The strict EXTRACTED DATA axis deliberately credits only src/*.o C/PNG assets.
+    This supplemental SOURCE-FORM DATA axis credits other object roots only when the
+    Makefile documents a committed editable-source build chain with no baserom.gba
+    fallback:
+      * banim/data_banim.o: arm_compressing_linker from banim/*_motion.s plus
+        graphics/banim PNG/AGBPAL assets.
+      * sound/songs/midi/*.o: mid2agb output from committed .mid files.
+      * sound/voicegroups/*.o: hand-ported voice_* macro .s tables.
+      * asm/fe6sio.o: compressed FE6 multiboot payload from mgfembp source, not
+        the FE8J baserom.
+      * sound/*.o table/wave helpers: descriptive .s or committed PCM assets.
+    Anything unrecognized remains in the residual data bucket.
+    """
+    if obj == "banim/data_banim.o":
+        return "banim/data_banim.o (compressing-linker: banim/*.s + graphics/banim PNG/AGBPAL)"
+    if obj.startswith("sound/songs/midi/"):
+        return "sound/songs/midi/*.o (mid2agb from committed .mid)"
+    if obj.startswith("sound/voicegroups/"):
+        return "sound/voicegroups/*.o (editable voice_* macro .s)"
+    if obj == "asm/fe6sio.o":
+        return "asm/fe6sio.o (FE6 multiboot payload from mgfembp source)"
+    if obj in {"sound/song_table.o", "sound/songs/dummy_song.o"}:
+        return "sound/song_table.o + dummy_song.o (descriptive song table .s)"
+    if obj in {
+        "sound/music_player_table.o",
+        "sound/programmable_wave_data.o",
+        "sound/keysplit_tables.o",
+    }:
+        return "m4a sound tables/waves/keysplit (descriptive .s + committed PCM)"
+    return None
+
+
 for r in read_manifest("carved_rom"):
     start, end, sec = int(r[0], 16), int(r[1], 16), r[2]
     size = end - start
@@ -125,6 +168,10 @@ for r in read_manifest("carved_rom"):
             data_lib += size
         else:
             data_asm += size
+            group = source_form_data_group(obj)
+            if group:
+                source_form_data += size
+                source_form_data_groups[group] += size
     if obj and obj not in ("asm/baserom.o",):
         objs.add(obj)
 for r in read_manifest("carved_ram"):
@@ -186,6 +233,25 @@ for obj in sorted(objs):
 # funcmap, so they count here (only $/. mapping symbols and gcc2_compiled. excluded).
 func_lib = 0
 _lib_members = set()
+_archive_nm_cache = {}
+
+
+def nm_archive_member(arpath, member):
+    """Return nm lines for one archive member without writing a temporary object."""
+    if arpath not in _archive_nm_cache:
+        current = None
+        members = collections.defaultdict(list)
+        out = subprocess.run(["arm-none-eabi-nm", "--defined-only", arpath],
+                             capture_output=True, text=True).stdout.splitlines()
+        for ln in out:
+            if ln.endswith(":") and " " not in ln:
+                current = ln[:-1]
+            elif current:
+                members[current].append(ln)
+        _archive_nm_cache[arpath] = members
+    return _archive_nm_cache[arpath].get(member, [])
+
+
 for obj in sorted(objs):
     m = re.match(r"\*(\S+\.a):(\S+\.o)$", obj)
     if not m:
@@ -195,10 +261,7 @@ for obj in sorted(objs):
     if key in _lib_members or not os.path.exists(arpath):
         continue
     _lib_members.add(key)
-    subprocess.run(["sh", "-c", f"arm-none-eabi-ar p {arpath} {m.group(2)} > /tmp/_cp_lib.o"],
-                   stderr=subprocess.DEVNULL)
-    for ln in subprocess.run(["arm-none-eabi-nm", "--defined-only", "/tmp/_cp_lib.o"],
-                             capture_output=True, text=True).stdout.splitlines():
+    for ln in nm_archive_member(arpath, m.group(2)):
         p = ln.split()
         if len(p) == 3 and p[1] == "T" and not p[2].startswith(("$", ".")) and p[2] != "gcc2_compiled.":
             func_lib += 1
@@ -274,6 +337,9 @@ func_pct = pct(func_done, func_total)
 # the extracted numerator alongside data_src (mirrors code_lib for the code axis).
 data_total = data_src + data_lib + data_asm
 data_pct = pct(data_src + data_lib, data_total)
+source_form_data_done = data_src + data_lib + source_form_data
+source_form_data_residual = max(0, data_total - source_form_data_done)
+source_form_data_pct = pct(source_form_data_done, data_total)
 
 named_pct = pct(sym_named, sym_total)
 
@@ -289,8 +355,20 @@ out.append(f"2. MATCHING-C FUNCTIONS   : {func_pct:6.2f}%  "
            f"+ {func_lib} linked from libc/libgcc; {func_asm} still descriptive asm; "
            f"gbadisasm asm NOT counted)  -> target 100%")
 out.append(f"3. EXTRACTED DATA         : {data_pct:6.2f}%  "
-           f"({data_src}/{data_total} bytes in C/PNG assets; "
+           f"({data_src + data_lib}/{data_total} bytes in strict C/PNG assets "
+           f"({data_src} under src/ + {data_lib} libc/libgcc); "
            f"named .incbin is NOT extraction)  -> target 100%")
+out.append(f"3b. SOURCE-FORM DATA      : {source_form_data_pct:6.2f}%  "
+           f"({source_form_data_done}/{data_total} bytes built from committed editable source; "
+           f"{source_form_data_residual} residual opaque/non-source bytes)  -> target 100%")
+out.append("    source-form breakdown:")
+out.append(f"      {data_src} bytes  src/ C/PNG/charmap/typed data (strict extracted-data numerator)")
+if data_lib:
+    out.append(f"      {data_lib} bytes  libc/libgcc archive data (linked from library source)")
+for group, size in source_form_data_groups.most_common():
+    out.append(f"      {size} bytes  {group}")
+if source_form_data_residual:
+    out.append(f"      {source_form_data_residual} bytes  residual non-src data not yet proven source-form")
 out.append(f"4. NAMED SYMBOLS          : {named_pct:6.2f}%  "
            f"({sym_named}/{sym_total} labels named; "
            f"{sym_placeholder} sub_/data_/nullsub_/sheet placeholders)  -> target 100%")
