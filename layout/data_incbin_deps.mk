@@ -571,7 +571,6 @@ src/data/frontier_ending_cg/frontier_ending_cg.o: graphics/frontier_ending_cg/fr
 src/data/frontier_map_objtype/frontier_map_objtype.o: graphics/frontier_map_objtype/frontier_map_objtype_000_17B398.4bpp.lz graphics/frontier_map_objtype/frontier_map_objtype_001_181610.4bpp.lz graphics/frontier_map_objtype/frontier_map_objtype_002_188888.4bpp.lz
 src/data/gap/gap_00003240.o: data/residual/gap_00003240.bin
 src/data/gap/gap_00006274.o: data/residual/gap_00006274.bin
-src/data/gap/gap_00014818.o: data/residual/gap_00014818.bin
 src/data/gap_000062C0/gap_000062C0.o: data/residual/gap_000062C0.bin
 src/data/gap_0001BF98/gap_0001BF98.o: data/residual/gap_0001BF98.bin
 src/data/gap_000396D8/gap_000396D8.o: data/residual/gap_000396D8.bin
