@@ -572,7 +572,6 @@ src/data/frontier_map_objtype/frontier_map_objtype.o: graphics/frontier_map_objt
 src/data/gap/gap_00003240.o: data/residual/gap_00003240.bin
 src/data/gap/gap_00006274.o: data/residual/gap_00006274.bin
 src/data/gap/gap_00014818.o: data/residual/gap_00014818.bin
-src/data/gap/gap_00024670.o: data/residual/gap_00024670.bin
 src/data/gap/gap_00024818.o: data/residual/gap_00024818.bin
 src/data/gap_000062C0/gap_000062C0.o: data/residual/gap_000062C0.bin
 src/data/gap_0001BF98/gap_0001BF98.o: data/residual/gap_0001BF98.bin
