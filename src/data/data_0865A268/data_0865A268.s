@@ -1,0 +1,48 @@
+/* Wave46: carved from data/residual/data_0865A268.bin to a relocatable .4byte pointer table.
+ * Each embedded ROM pointer is expressed as `Sym + addend` (the linked-ELF symbol
+ * whose range owns the target address); non-pointer words stay literals. Byte-
+ * identical to the original blob, and relocation-complete so the object stays
+ * shiftcheck-clean (0 HIGH) if the pointee resources move. */
+	.section .data.residue.0865A268, "aw", %progbits
+	.global data_0865A268
+data_0865A268:
+	.4byte 0x00000000
+	.4byte 0x0000001F
+	.4byte 0x0000FFF8
+	.4byte 0x00000001
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte AnimSprite_EfxMistyRainObj1_8 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_9 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_10 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_11 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_12 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_13 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_1 + 0x3
+	.4byte AnimSprite_EfxMistyRainObj1_2 + 0x3
+	.4byte AnimSprite_EfxMistyRainObj1_3 + 0x3
+	.4byte AnimSprite_EfxMistyRainObj1_4 + 0x3
+	.4byte AnimSprite_EfxMistyRainObj1_5 + 0x3
+	.4byte AnimSprite_EfxMistyRainObj1_6 + 0x3
+	.4byte AnimSprite_EfxMistyRainObj1_7 + 0x3
+	.4byte 0x80000000
+	.4byte AnimSprite_EfxMistyRainObj1_8 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_9 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_10 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_11 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_12 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_13 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_1 + 0x3
+	.4byte AnimSprite_EfxMistyRainObj1_2 + 0x3
+	.4byte AnimSprite_EfxMistyRainObj1_3 + 0x3
+	.4byte AnimSprite_EfxMistyRainObj1_1 + 0x3
+	.4byte AnimSprite_EfxMistyRainObj1_2 + 0x3
+	.4byte AnimSprite_EfxMistyRainObj1_3 + 0x3
+	.4byte AnimSprite_EfxMistyRainObj1_13 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_12 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_11 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_10 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_9 + 0x2
+	.4byte AnimSprite_EfxMistyRainObj1_8 + 0x2
+	.4byte data_0865A268 + 0x2
+	.4byte 0x80000000

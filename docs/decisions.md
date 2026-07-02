@@ -9083,3 +9083,24 @@ PREVENTION (all landed here):
 RULE (permanent): before posting a scratch, confirm the function is NOT already in `src/`. Whenever a function
 is carved in-repo (or a fork of your scratch reaches score 0), immediately mark your scratch SOLVED with
 `mark_solved.sh`. Run `decomp_status.py` and act on every `DONE`/stale-scratch warning. Respect community time.
+
+## D336
+**Converted all 606 pure-`__asm__`-wrapper `.c` files under `src/data/` to real `.s` assembly sources.**
+
+Many carve waves (42/43/46/48 and earlier migrations) produced `src/data/**/*.c` that only wrapped inline
+`__asm__("...")` with pure assembly directives (`.section`/`.global`/`.short`/`.byte`/`.4byte`/`.asciz`) — e.g.
+`src/data/data_081F6D00/data_081F6D00.c`. That is meaningless C. Per user direction, these are now real `.s`
+sources (built via `SRC_S_OBJECTS = git ls-files 'src/*.s'`, which matches recursively), with per-file
+`.gitignore` negations past the `src/data/**/*.s` intermediate-ignore rule.
+
+Detection: strip comments + `#include`, remove every `__asm__(...);` block; if nothing remains it is a pure
+wrapper (files with real C — structs, arrays, `INCBIN_U*` — are left as `.c`). Verified none use `.incbin`,
+CPP macros, or non-ASCII/UTF-8 (SJIS is raw `.byte`), and `cpp` never expands inside `__asm__` string
+literals, so the emitted assembly — hence the ROM — is byte-identical. `make clean && make compare` → OK,
+`make shiftcheck` 0 HIGH.
+
+Tooling saved for reuse: `scripts/tools/asm_wrapper_to_s.py` (`--list` / `--all --git`). A robust char-level
+parser was required — a first regex version mangled files with inline `/* ... */` comments between `__asm__`
+blocks (leaving raw `\t`/`\n` escapes → assembler errors); the tool now pre-verifies every generated `.s`
+assembles before writing. LESSON: for a mass mechanical refactor, pre-verify each unit and keep the converter
+in-tree, don't run a one-off `/tmp` script.

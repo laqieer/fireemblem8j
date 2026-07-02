@@ -1,0 +1,80 @@
+/* De-pointered from data/residual/Ch19MapChanges.bin by scripts/repoint_table.py.
+ * Pointer words are relocatable symbol references (.4byte sym) so the ROM is
+ * SHIFTABLE; byte-identical to baserom (gated by `make compare`). Emitted as a
+ * pure asm block so no typed header decl of the referenced symbols can conflict. */
+	.section .rodata.dat_Ch19MapChanges_ref, "a", %progbits
+	.global Ch19MapChanges
+Ch19MapChanges:
+	.4byte 0x08A5BF1C
+	.4byte 0x08A5BF98
+	.4byte 0x08A5BF9C
+	.4byte 0x08A5C000
+	.4byte 0x08A5C01C
+	.4byte 0x08A5C020
+	.4byte 0x08A5C024
+	.4byte 0x08A5C028
+	.4byte gUidebug_2 + 0x4CF
+	.4byte 0x08A5FFFE
+	.4byte UnitDef_Ch19AAlly_0
+	.4byte UnitDef_Ch19AAlly_0
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x08A6A3B8
+	.4byte 0x08A6A75C
+	.4byte 0x00000002
+	.4byte 0x08A6AD44
+	.4byte 0x00800001
+	.4byte 0x00000002
+	.4byte 0x08A6AE80
+	.4byte 0x0000150F
+	.4byte 0x00000002
+	.4byte 0x08A6AEC4
+	.4byte 0x00001610
+	.4byte 0x000A0002
+	.4byte 0x08A6AF28
+	.4byte 0x0000FF01
+	.4byte 0x000C0002
+	.4byte 0x08A6AF7C
+	.4byte 0x0000FF01
+	.4byte 0x000E0002
+	.4byte 0x08A6B004
+	.4byte 0x0000FF01
+	.4byte 0x00100002
+	.4byte 0x08A6B08C
+	.4byte 0x0000FF01
+	.4byte 0x00000002
+	.4byte 0x08A6B144
+	.4byte 0x00001D13
+	.4byte 0x00000002
+	.4byte 0x08A6B1A8
+	.4byte 0x00000605
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00030005
+	.4byte 0x00000001
+	.4byte 0x00110B0B
+	.4byte 0x00000000
+	.4byte 0x0009000B
+	.4byte 0x08A6AF08
+	.4byte 0x0D190011
+	.4byte 0x000B000B
+	.4byte 0x08A6AF5C
+	.4byte 0x06100007
+	.4byte 0x000D000B
+	.4byte 0x08A6AFE4
+	.4byte 0x14100F07
+	.4byte 0x000F000B
+	.4byte 0x08A6B06C
+	.4byte 0x0E100707
+	.4byte 0x00000001
+	.4byte data_085B9EE8
+	.4byte 0x00000065
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
