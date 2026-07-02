@@ -9009,3 +9009,24 @@ subset of axes.
 tables): coordinate/affine/matrix data, byte0=0x00 opaque data (85), invalid-Huffman structured data (11),
 wave41 LZ skips (24), and JP-unique frontier data — all with NO fe8u editable twin, so fe8u would also
 `.incbin` them → they satisfy *"no `.bin` unless it is also `.bin` in fe8u"* as-is.
+
+## D333
+**Wave 43 (final mechanical mop-up): 11 coherent small `data/residual` pointer tables → relocatable
+`.4byte`. UNCERTAIN 285 → 274. `make compare` OK + shiftcheck 0 HIGH.** These are small blobs where every
+`0x08xxxxxx`/`0x02xxxxxx` word resolves to a named symbol range (whole-blob `.4byte` carve is provably
+shiftcheck-safe): data_08925DD8, data_08908590, data_08A9A8D4, data_0857AF6C/AE4C/A864/E32C/A42C/A354,
+data_08A607B4, data_089092B0. 11/11 carved, 0 skipped. Two (data_08908590, data_08A607B4) had an
+over-captured tail that lived ONLY in the dead `DATA_INCBIN_ASM_EXCLUDE` asm twin (never in ROM) — the
+`.c` covers only the live head and `make compare` confirmed the deletion byte-neutral.
+
+**This closes the mechanically-carveable frontier.** The three extraction axes (resolvable-pointer density,
+fe8u editable twin, compression header) are now all swept. Remaining UNCERTAIN (274) is genuine JP-unique
+opaque floor with NO fe8u twin: coordinate/affine/matrix data (e.g. data_086CF94C, the data_08606xxx
+quartet), byte0=0x00 opaque data (~85), invalid-Huffman structured data (byte0=0x20, ×11), the wave41 LZ
+skips (trailing-raw / no-sink / invalid-LZ), and JP-exclusive frontier data. fe8u provides no editable form
+for any of these, so keeping them as `.incbin` satisfies *"no `.bin` unless it is also `.bin` in fe8u"* —
+extracting them further would be fake-extraction (a regression vs clean INCBIN) or a deep per-file JP-RE
+effort outside mechanical fe8u-form carving.
+
+**Session cumulative (this takeover): audit MISS 318 → 7, UNCERTAIN 467 → 274; `make compare` byte-exact and
+`make shiftcheck` 0 HIGH on every merged wave; main CI verified green after each merge; 0 PRs left open.**
