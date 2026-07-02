@@ -119,7 +119,7 @@ __asm__(
 "\t.4byte 0x0000000E\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000003\n"
-"\t.4byte gap_000B1030 + 0x1\n"
+"\t.4byte DrawDifficultySprites_Loop + 0x1\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 );  /* de-pointered slice data_08A9DA84: ptr=2 data=6 skip=0 */
