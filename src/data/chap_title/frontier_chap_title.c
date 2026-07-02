@@ -352,5 +352,12 @@ u8 frontier_chap_title_113_A91C28[] = INCBIN_U8("graphics/frontier_chap_title/fr
 __attribute__((section(".data.frontier_chap_title.gap114")))
 u8 frontier_chap_title_114_A91F08[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_114_A91F08.4bpp.lz");
 
+/* frontier_chap_title_115 was a single 932B raw .bin = TWO concatenated JP-LZ sheets.
+   Decomposed (wave45): sheet0 (672B lz -> 1152B, 36 4bpp tiles) -> committed .png ->
+   .4bpp.lz; sheet1 (260B lz -> 1202B, not tile-aligned) -> committed decompressed .bin
+   -> .bin.lz. Both recompress byte-exact via gbagfx default. Same gap115 section (mirrors
+   the _063a/_063b split); _115_A92170 keeps its external ref (frontier_df4_menu). */
 __attribute__((section(".data.frontier_chap_title.gap115")))
-u8 frontier_chap_title_115_A92170[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_115_A92170.bin");
+u8 frontier_chap_title_115_A92170[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_115_A92170.4bpp.lz");
+__attribute__((section(".data.frontier_chap_title.gap115")))
+u8 frontier_chap_title_115b_A92410[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_115b_A92410.bin.lz");

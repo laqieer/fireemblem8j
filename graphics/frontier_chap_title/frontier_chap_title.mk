@@ -120,5 +120,7 @@ src/data/chap_title/frontier_chap_title.o: \
   graphics/frontier_chap_title/frontier_chap_title_111_A91760.4bpp.lz \
   graphics/frontier_chap_title/frontier_chap_title_112_A919F8.4bpp.lz \
   graphics/frontier_chap_title/frontier_chap_title_113_A91C28.4bpp.lz \
-  graphics/frontier_chap_title/frontier_chap_title_114_A91F08.4bpp.lz
+  graphics/frontier_chap_title/frontier_chap_title_114_A91F08.4bpp.lz \
+  graphics/frontier_chap_title/frontier_chap_title_115_A92170.4bpp.lz \
+  graphics/frontier_chap_title/frontier_chap_title_115b_A92410.bin.lz
 
