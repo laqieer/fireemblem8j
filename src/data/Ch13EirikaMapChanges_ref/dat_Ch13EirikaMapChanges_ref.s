@@ -5,24 +5,24 @@
 	.section .rodata.dat_Ch13EirikaMapChanges_ref, "a", %progbits
 	.global Ch13EirikaMapChanges
 Ch13EirikaMapChanges:
-	.4byte 0x08A5B65C
-	.4byte 0x08A5B6A8
-	.4byte 0x08A5B6DC
-	.4byte 0x08A5B6E0
-	.4byte 0x08A5B6FC
-	.4byte 0x08A5B700
-	.4byte 0x08A5B704
-	.4byte 0x08A5B708
+	.4byte Ch12EirikaMapChanges + 0x50
+	.4byte Ch12EirikaMapChanges + 0x9C
+	.4byte Ch12EirikaMapChanges + 0xD0
+	.4byte Ch12EirikaMapChanges + 0xD4
+	.4byte Ch12EirikaMapChanges + 0xF0
+	.4byte Ch12EirikaMapChanges + 0xF4
+	.4byte Ch12EirikaMapChanges + 0xF8
+	.4byte Ch12EirikaMapChanges + 0xFC
 	.4byte gUidebug_2 + 0x34A
-	.4byte 0x08A5FFED
+	.4byte frontier_df4_menu_005_A5FFAD + 0x40
 	.4byte UnitDef_Event_Ch13aAlly
 	.4byte UnitDef_Event_Ch13aAlly
 	.4byte frontier_df3_unitdef_b_000_90F678
-	.4byte 0x0890F934
-	.4byte 0x0890FBF0
-	.4byte 0x0890F740
-	.4byte 0x0890F9FC
-	.4byte 0x0890FCB8
+	.4byte frontier_df3_unitdef_b_000_90F678 + 0x2BC
+	.4byte frontier_df3_unitdef_b_000_90F678 + 0x578
+	.4byte frontier_df3_unitdef_b_000_90F678 + 0xC8
+	.4byte frontier_df3_unitdef_b_000_90F678 + 0x384
+	.4byte frontier_df3_unitdef_b_000_90F678 + 0x640
 	.4byte frontier_df4_menu_009_A67660
 	.4byte EventScr_Ch13a_EndingScene
 	.4byte 0x00000002
@@ -42,7 +42,7 @@ Ch13EirikaMapChanges:
 	.4byte 0x0000FF01
 	.4byte 0x00000000
 	.4byte 0x00080003
-	.4byte 0x08A682C4
+	.4byte frontier_df4_menu_010_A67EEC + 0x3D8
 	.4byte 0x00001C19
 	.4byte 0x00000000
 	.4byte 0x00080003

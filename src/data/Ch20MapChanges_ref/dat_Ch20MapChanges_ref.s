@@ -5,34 +5,34 @@
 	.section .rodata.dat_Ch20MapChanges_ref, "a", %progbits
 	.global Ch20MapChanges
 Ch20MapChanges:
-	.4byte 0x08A5C07C
-	.4byte 0x08A5C0EC
-	.4byte 0x08A5C0F0
-	.4byte 0x08A5C100
-	.4byte 0x08A5C140
-	.4byte 0x08A5C144
-	.4byte 0x08A5C148
-	.4byte 0x08A5C14C
+	.4byte Ch19MapChanges + 0x50
+	.4byte Ch19MapChanges + 0xC0
+	.4byte Ch19MapChanges + 0xC4
+	.4byte Ch19MapChanges + 0xD4
+	.4byte Ch19MapChanges + 0x114
+	.4byte Ch19MapChanges + 0x118
+	.4byte Ch19MapChanges + 0x11C
+	.4byte Ch19MapChanges + 0x120
 	.4byte gUidebug_2 + 0x4D1
-	.4byte 0x08A60000
-	.4byte 0x0891525C
-	.4byte 0x0891525C
+	.4byte frontier_df4_menu_005_A5FFAD + 0x53
+	.4byte frontier_df3_unitdef_b_023_91512C_p34
+	.4byte frontier_df3_unitdef_b_023_91512C_p34
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte 0x08A6AB50
-	.4byte 0x08A6AD70
+	.4byte frontier_df3_eventscr_ch_003_A6AA20 + 0x130
+	.4byte frontier_df3_eventscr_ch_003_A6AA20 + 0x350
 	.4byte 0x000D0002
-	.4byte 0x08A6B528
+	.4byte frontier_df3_eventscr_ch_005_A6B460 + 0xC8
 	.4byte 0x0000FF01
 	.4byte 0x000B0002
-	.4byte 0x08A6B480
+	.4byte frontier_df3_eventscr_ch_005_A6B460 + 0x20
 	.4byte 0x0000FF01
 	.4byte 0x000C0002
-	.4byte 0x08A6B4D4
+	.4byte frontier_df3_eventscr_ch_005_A6B460 + 0x74
 	.4byte 0x0000FF01
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -53,16 +53,16 @@ Ch20MapChanges:
 	.4byte EventScr_Ch21A_0
 	.4byte 0x00000002
 	.4byte 0x000A000B
-	.4byte 0x08A6B508
+	.4byte frontier_df3_eventscr_ch_005_A6B460 + 0xA8
 	.4byte 0x060C050A
 	.4byte 0x0008000B
 	.4byte frontier_df3_eventscr_ch_005_A6B460
 	.4byte 0x0C0B0700
 	.4byte 0x0009000B
-	.4byte 0x08A6B4B4
+	.4byte frontier_df3_eventscr_ch_005_A6B460 + 0x54
 	.4byte 0x0C16070C
 	.4byte 0x000E000B
-	.4byte 0x08A6B55C
+	.4byte frontier_df3_eventscr_ch_005_A6B460 + 0xFC
 	.4byte 0x04150001
 	.4byte 0x00000001
 	.4byte data_085B9EE8

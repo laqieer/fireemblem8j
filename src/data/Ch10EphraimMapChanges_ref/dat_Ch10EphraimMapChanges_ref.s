@@ -5,25 +5,25 @@
 	.section .rodata.dat_Ch10EphraimMapChanges_ref, "a", %progbits
 	.global Ch10EphraimMapChanges
 Ch10EphraimMapChanges:
-	.4byte 0x08A5C4BC
-	.4byte 0x08A5C508
-	.4byte 0x08A5C53C
-	.4byte 0x08A5C5A0
-	.4byte 0x08A5C5BC
-	.4byte 0x08A5C5C0
-	.4byte 0x08A5C5C4
-	.4byte 0x08A5C5C8
+	.4byte Ch9EphMapChanges + 0x50
+	.4byte Ch9EphMapChanges + 0x9C
+	.4byte Ch9EphMapChanges + 0xD0
+	.4byte Ch9EphMapChanges + 0x134
+	.4byte Ch9EphMapChanges + 0x150
+	.4byte Ch9EphMapChanges + 0x154
+	.4byte Ch9EphMapChanges + 0x158
+	.4byte Ch9EphMapChanges + 0x15C
 	.4byte gUidebug_2 + 0x4D8
-	.4byte 0x08A60007
-	.4byte 0x0891713C
-	.4byte 0x0891713C
-	.4byte 0x08917920
-	.4byte 0x08917BC8
-	.4byte 0x08917E70
-	.4byte 0x089179E8
-	.4byte 0x08917C90
-	.4byte 0x08917F38
-	.4byte 0x08A6C900
+	.4byte frontier_df4_menu_005_A5FFAD + 0x5A
+	.4byte frontier_df3_unitdef_b_026_916D14_tail_p1
+	.4byte frontier_df3_unitdef_b_026_916D14_tail_p1
+	.4byte frontier_df3_unitdef_b_028_9178F8 + 0x28
+	.4byte frontier_df3_unitdef_b_028_9178F8 + 0x2D0
+	.4byte frontier_df3_unitdef_b_028_9178F8 + 0x578
+	.4byte frontier_df3_unitdef_b_028_9178F8 + 0xF0
+	.4byte frontier_df3_unitdef_b_028_9178F8 + 0x398
+	.4byte frontier_df3_unitdef_b_028_9178F8 + 0x640
+	.4byte frontier_df3_eventscr_ch_007_A6C8CC + 0x34
 	.4byte frontier_df3_eventscr_ch_008_A6CD00
 	.4byte 0x00000002
 	.4byte EventScr_Ch11B_1
@@ -32,7 +32,7 @@ Ch10EphraimMapChanges:
 	.4byte EventScr_Ch11B_2
 	.4byte 0x00000005
 	.4byte 0x00000002
-	.4byte 0x08A6D4C4
+	.4byte frontier_df3_eventscr_ch_009_A6D3F8 + 0xCC
 	.4byte 0x00000604
 	.4byte 0x00000002
 	.4byte EventScr_Ch11B_6
@@ -44,21 +44,21 @@ Ch10EphraimMapChanges:
 	.4byte EventScr_Ch11B_0
 	.4byte 0x00000002
 	.4byte 0x00000002
-	.4byte 0x08A6D538
+	.4byte frontier_df3_eventscr_ch_010_A6D524 + 0x14
 	.4byte 0x00000004
 	.4byte 0x00000002
-	.4byte 0x08A6D588
+	.4byte frontier_df3_eventscr_ch_010_A6D524 + 0x64
 	.4byte 0x00000005
 	.4byte 0x00000002
-	.4byte 0x08A6D560
+	.4byte frontier_df3_eventscr_ch_010_A6D524 + 0x3C
 	.4byte 0x00000003
 	.4byte 0x00000000
 	.4byte 0x00070003
-	.4byte 0x08A6D474
+	.4byte frontier_df3_eventscr_ch_009_A6D3F8 + 0x7C
 	.4byte 0x0000190F
 	.4byte 0x00000000
 	.4byte 0x00080003
-	.4byte 0x08A6D49C
+	.4byte frontier_df3_eventscr_ch_009_A6D3F8 + 0xA4
 	.4byte 0x00001A19
 	.4byte 0x00000000
 	.4byte 0x00000000

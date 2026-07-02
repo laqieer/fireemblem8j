@@ -5,18 +5,18 @@
 	.section .rodata.dat_Ch15MapChanges_ref, "a", %progbits
 	.global Ch15MapChanges
 Ch15MapChanges:
-	.4byte 0x08A5B924
-	.4byte 0x08A5B970
-	.4byte 0x08A5BA34
-	.4byte 0x08A5BA74
-	.4byte 0x08A5BB14
-	.4byte 0x08A5BB18
-	.4byte 0x08A5BB1C
-	.4byte 0x08A5BB20
+	.4byte Ch14EirikaMapChanges + 0x50
+	.4byte Ch14EirikaMapChanges + 0x9C
+	.4byte Ch14EirikaMapChanges + 0x160
+	.4byte Ch14EirikaMapChanges + 0x1A0
+	.4byte Ch14EirikaMapChanges + 0x240
+	.4byte Ch14EirikaMapChanges + 0x244
+	.4byte Ch14EirikaMapChanges + 0x248
+	.4byte Ch14EirikaMapChanges + 0x24C
 	.4byte gUidebug_2 + 0x364
-	.4byte 0x08A5FFF5
-	.4byte 0x08910B70
-	.4byte 0x08910B70
+	.4byte frontier_df4_menu_005_A5FFAD + 0x48
+	.4byte frontier_df3_unitdef_b_005_9109A8_tail_p1
+	.4byte frontier_df3_unitdef_b_005_9109A8_tail_p1
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -26,7 +26,7 @@ Ch15MapChanges:
 	.4byte data_08A6846C
 	.4byte EventScr_Ch15A_1
 	.4byte 0x00000002
-	.4byte 0x08A6963C
+	.4byte frontier_df3_eventscr_ch_000_A69464 + 0x1D8
 	.4byte 0x0000000C
 	.4byte 0x000C0002
 	.4byte EventScr_Ch16A_9
@@ -62,10 +62,10 @@ Ch15MapChanges:
 	.4byte 0x00140114
 	.4byte 0x00000000
 	.4byte 0x000B000B
-	.4byte 0x08A69654
+	.4byte frontier_df3_eventscr_ch_000_A69464 + 0x1F0
 	.4byte 0x0B150002
 	.4byte 0x000B000B
-	.4byte 0x08A69654
+	.4byte frontier_df3_eventscr_ch_000_A69464 + 0x1F0
 	.4byte 0x160D1201
 	.4byte 0x00000001
 	.4byte data_085B9EE8

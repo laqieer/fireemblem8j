@@ -14,7 +14,7 @@ LagdouRuins2MapChanges:
 	.4byte data_08A5DAE8 + 0x1B4
 	.4byte data_08A5DAE8 + 0x1B8
 	.4byte gUidebug_2 + 0x661
-	.4byte 0x08A60022
+	.4byte frontier_df4_menu_005_A5FFAD + 0x75
 	.4byte UnitDef_Ruin2Ally
 	.4byte UnitDef_Ruin2Ally
 	.4byte 0x00000000
@@ -23,22 +23,22 @@ LagdouRuins2MapChanges:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte 0x08A70400
-	.4byte 0x08A70474
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x7B8
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x82C
 	.4byte 0x00000002
-	.4byte 0x08A7055C
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x914
 	.4byte 0x00000704
 	.4byte 0x00000002
-	.4byte 0x08A70574
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x92C
 	.4byte 0x00000A06
 	.4byte 0x00000002
-	.4byte 0x08A7058C
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x944
 	.4byte 0x00000003
 	.4byte 0x00000002
-	.4byte 0x08A705A4
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x95C
 	.4byte 0x00000002
 	.4byte 0x00000002
-	.4byte 0x08A705BC
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x974
 	.4byte 0x00000002
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -68,7 +68,7 @@ LagdouRuins2MapChanges:
 	.4byte 0x00140311
 	.4byte 0x00000000
 	.4byte 0x00000001
-	.4byte 0x08A70540
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x8F8
 	.4byte 0x00000006
 	.4byte 0x00000001
 	.4byte data_085B9EE8

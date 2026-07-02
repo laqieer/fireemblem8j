@@ -1097,7 +1097,7 @@ __asm__(
     ".4byte 0x00000015\n"
     ".4byte 0x00000000\n"
     ".4byte 0x00000001\n"
-    ".4byte 0x080defa8\n"
+    ".4byte data_080DEF7C + 0x2C\n"
     ".4byte 0x0000000e\n"
     ".4byte 0x00000000\n"
     ".4byte 0x00000002\n"

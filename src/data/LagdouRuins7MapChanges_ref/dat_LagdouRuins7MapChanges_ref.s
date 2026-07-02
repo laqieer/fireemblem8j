@@ -5,16 +5,16 @@
 	.section .rodata.dat_LagdouRuins7MapChanges_ref, "a", %progbits
 	.global LagdouRuins7MapChanges
 LagdouRuins7MapChanges:
-	.4byte 0x08A5E088
-	.4byte 0x08A5E0EC
-	.4byte 0x08A5E0F0
-	.4byte 0x08A5E100
-	.4byte 0x08A5E14C
-	.4byte 0x08A5E150
-	.4byte 0x08A5E154
-	.4byte 0x08A5E158
+	.4byte LagdouRuins6MapChanges + 0x50
+	.4byte LagdouRuins6MapChanges + 0xB4
+	.4byte LagdouRuins6MapChanges + 0xB8
+	.4byte LagdouRuins6MapChanges + 0xC8
+	.4byte LagdouRuins6MapChanges + 0x114
+	.4byte LagdouRuins6MapChanges + 0x118
+	.4byte LagdouRuins6MapChanges + 0x11C
+	.4byte LagdouRuins6MapChanges + 0x120
 	.4byte gUidebug_2 + 0x6E4
-	.4byte 0x08A60027
+	.4byte frontier_df4_menu_005_A5FFAD + 0x7A
 	.4byte UnitDef_Ruin7Ally
 	.4byte UnitDef_Ruin7Ally
 	.4byte 0x00000000
@@ -23,8 +23,8 @@ LagdouRuins7MapChanges:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte 0x08A7086C
-	.4byte 0x08A708EC
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xC24
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xCA4
 	.4byte 0x00000002
 	.4byte EventScr_Ruin_37
 	.4byte 0x0000FF01
@@ -62,16 +62,16 @@ LagdouRuins7MapChanges:
 	.4byte EventScr_Ruin_48
 	.4byte 0x0000FF01
 	.4byte 0x00080002
-	.4byte 0x08A70B4C
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xF04
 	.4byte 0x0000FF01
 	.4byte 0x000A0002
-	.4byte 0x08A70BA0
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xF58
 	.4byte 0x0000FF01
 	.4byte 0x000C0002
-	.4byte 0x08A70BF4
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xFAC
 	.4byte 0x0000FF01
 	.4byte 0x000E0002
-	.4byte 0x08A70C54
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x100C
 	.4byte 0x0000FF01
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -86,22 +86,22 @@ LagdouRuins7MapChanges:
 	.4byte 0x00140C04
 	.4byte 0x00000000
 	.4byte 0x00000001
-	.4byte 0x08A70B10
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xEC8
 	.4byte 0x00000006
 	.4byte 0x000B000B
-	.4byte 0x08A70BD4
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xF8C
 	.4byte 0x0D12080F
 	.4byte 0x000D000B
-	.4byte 0x08A70C28
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xFE0
 	.4byte 0x0713000D
 	.4byte 0x000D000B
-	.4byte 0x08A70C28
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xFE0
 	.4byte 0x060C0007
 	.4byte 0x0007000B
-	.4byte 0x08A70B2C
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xEE4
 	.4byte 0x0E0B0B08
 	.4byte 0x0009000B
-	.4byte 0x08A70B80
+	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0xF38
 	.4byte 0x14130F0D
 	.4byte 0x00000001
 	.4byte data_085B9EE8
