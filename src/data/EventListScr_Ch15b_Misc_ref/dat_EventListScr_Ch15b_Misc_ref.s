@@ -44,4 +44,4 @@ EventListScr_Ch15b_Misc:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte frontier_df3_eventscr_ch_014_A6EDFC
-	.4byte 0x08A6EE54
+	.4byte frontier_df3_eventscr_ch_014_A6EDFC + 0x58
