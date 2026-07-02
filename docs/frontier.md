@@ -681,3 +681,7 @@ The audit MISS metric under-counts extractable .bin (only fe8u-basename matches)
 
 ## Extractable sweep COMPLETE (D330, waves 38-39)
 fontgrp SJIS fonts (2616 glyphs → typed `struct Glyph[]`, largest extractable) + 6 straggler blobs (palette configs/AP motion/menu) carved. **audit UNCERTAIN 467→330** across waves 32-39. Final scan: 0 structured tables, 0 orphans remain — mechanically-extractable frontier exhausted. Remaining ~330 = JP-unique opaque residues (no fe8u twin, legit incbin), broken-LZ, hard ceilings. Every .bin with a clear fe8u editable form is extracted.
+
+
+## Frontier VERIFIED exhausted (D331, wave 40)
+wave40: 17 fe8u-typed-twin blobs carved (LUTs/REDA/terrain/SoftReset). **audit UNCERTAIN 467->313 across waves 32-40.** Exhaustion verified 3 ways: 0 structured tables, 0 orphans, 0 fe8u-typed-twins (2 remaining named = broken-LZ + region-diff floor). Every .bin with a fe8u editable form is extracted; remaining ~313 = JP-unique opaque/frontier (no fe8u twin, legit incbin) + floor.
