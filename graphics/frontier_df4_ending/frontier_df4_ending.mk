@@ -10,8 +10,12 @@ asm/frontier_df4_ending.o: \
   graphics/frontier_df4_ending/frontier_df4_ending_019_B8B998.4bpp.lz \
   graphics/frontier_df4_ending/frontier_df4_ending_020_BAA2E0.4bpp.lz
 
-# wave47: pinned JP-LZ leaves (no-recipe) -- committed exact compressed bytes,
-# not rebuilt from a .bin source (would collide with the generic %.lz: % rule).
-graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin.lz: ;
-graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin.lz: ;
+# wave49: frontier_df4_ending_006's two LZ sheets build from decompressed .bin
+# sources; truncate gbagfx output to the exact JP lengths (508B; 548B incl. 3B pad).
+graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin.lz: graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin
+	$(GBAGFX) $< $@
+	truncate -s 508 $@
+graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin.lz: graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin
+	$(GBAGFX) $< $@
+	truncate -s 548 $@
 

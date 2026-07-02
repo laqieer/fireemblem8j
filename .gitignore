@@ -27,25 +27,6 @@ build/shiftcheck/
 *.lz
 *.rl
 *.fk
-# Pinned JP-LZ leaf (wave44 #4): gTsa_OpSubtitle_05's compressed stream is NOT
-# reproducible by gbagfx at any -mindist (JP used a tighter encoder: 379B vs
-# gbagfx's best 380B), so the exact JP .lz bytes stay COMMITTED (no-recipe pin
-# rule in graphics/misc_gfx2/misc_gfx2.mk). Merged from the old truncated
-# gTsa_OpSubtitle_05.bin + 79B head of frontier_df4_ending_016.
-!graphics/misc_gfx2/gTsa_OpSubtitle_05.bin.lz
-# Pinned JP-LZ leaf (wave45 #6): frontier_df4_misc_lo_015's 442B LZ stream is NOT
-# reproducible by gbagfx at any -mindist (JP encoder: 442B vs gbagfx's best 444B),
-# so the exact JP .lz bytes stay COMMITTED (no-recipe pin rule in
-# graphics/frontier_df4_misc_lo/frontier_df4_misc_lo.mk). Split from the old 700B
-# raw .bin (442B LZ + 258B .short tail, now decoded in the .c).
-!graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.lz
-# Pinned JP-LZ leaves (wave47): frontier_df4_ending_006 is TWO concatenated LZ77
-# u16-table streams (508B + 545B, the 2nd asset referenced by frontier_df4_voice.c
-# as +0x1fc) + 3B pad. Neither recompresses byte-exact via gbagfx, so the exact JP
-# compressed bytes stay COMMITTED (no-recipe pin rules in
-# graphics/frontier_df4_ending/frontier_df4_ending.mk). Split from the old 1056B .bin.
-!graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin.lz
-!graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin.lz
 *.4bpp.h
 
 # TSA battle-background intermediates (D309). The editable source is the .png;
