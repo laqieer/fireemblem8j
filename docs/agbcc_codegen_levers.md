@@ -332,10 +332,29 @@ new_var2 = &v; d = d*v; new_var = new_var2;           /* dead copies = live-rang
 forces agbcc to give it a stack home instead of a register — a portable alternative to P2
 for a single value (cf. §9(e)): `new_var2 = &v;` makes `v` addressable. *mbcFD.*
 
+**P11 — repeated-cast temp reuse / arg-share (materialize-once).** When the *same*
+`(T)cast` sub-expression feeds two consumers — e.g. an array index **and** a call argument —
+hoist it into one named temp and reuse it. agbcc then computes the value once and *keeps it in
+a single register* that it shares into the outgoing arg slot, reproducing the JP's explicit
+"materialize + `adds rArg, rTmp, #0`" arg-staging instruction. This is a **structural** lever
+(it changes the instruction *count* and the function's `.text` size), not just coloring:
+```c
+/* NEAR: agbcc recomputes (s8)pos->x twice and folds the arg (shorter .text) */
+if (gBmMapTerrain[(s8)pos->y][(s8)pos->x]) AiGetClosest(unit, (s8)pos->x, (s8)pos->y, pos);
+/* MATCH: one temp, index + arg share it -> extra materialize/arg-stage insn appears */
+new_var = (s8)pos->x;
+if (gBmMapTerrain[(s8)pos->y][new_var]) AiGetClosest(unit, new_var, (s8)pos->y, pos);
+```
+*Discovered by decomp-permuter on `AdjustNewUnitPosition` (sub_807C8DC): cut the residual
+74→27 bytes and fixed the `.text` length; the last 27 B were an irreducible register-cycle
+(see the field note below). Use this whenever a NEAR's size differs by exactly the width of a
+repeated cast/sub-expression that is both indexed and passed.*
+
 ### How to run this on a NEAR (escalation order)
 1. **Confirm it's a coloring/spill NEAR** (same instruction *count/opcodes*, regs or spill
    slots differ) — objdiff / the region `cmp`. If opcodes differ, it's a §1–§9 shape issue.
-2. **P8 + §2 + P7 first** (source-shape only — keeps the decomp clean & portable).
+2. **P8 + §2 + P7 first** (source-shape only — keeps the decomp clean & portable). If the
+   `.text` *size* differs by the width of a repeated `(T)cast`, apply **P11** (materialize-once).
 3. **P5/P6** if the diff is a signed sub-field / re-extended loop counter (shift-domain).
 4. **§9 declaration/first-use order**, then **P4 pins**, for a clean register permutation.
 5. **P1 reg-barrier** to fence a live range; **P3 instruction scripting** to force one exact
@@ -349,3 +368,26 @@ across compilers. Prefer P8/P7/P5/P6 (real source levers) and escalate to asm-co
 for reg-coloring/spill NEARs that resist everything else (Qua5T's extreme pressure is the
 justified end of the spectrum; jmNW8's zero-asm form is the ideal). All eight patterns above
 are credited to **TsilaAllaoui** (decomp.me), whose forks supplied the worked examples.
+
+### Field application to the still-unmatched registry (D292 Phase 4)
+Applying the above to the ~21 `DECOMP_THEN_UPDATE` registry functions confirmed they are the
+**reg-coloring / spill permuter-floor** — the residue left after the community already ground
+them down. Worked outcomes (decomp-permuter with the FE8J `-mjp-promote` config, `scripts/
+permuter/permute.sh bg … --stop-on-zero`):
+- **sub_807C8DC `AdjustNewUnitPosition`** (308 B, fe8u `muctrl.c` verbatim): `-mjp-promote`
+  gave a 74 B NEAR; the permuter found the **P11** temp-reuse of `(s8)pos->x` → **74→27 B**
+  and fixed `.text` size. The last **27 B are an irreducible `{r2 r3 r4 r5}` register cycle**
+  (outer/inner loop counters `iy`/`ix` want caller-saved r2/r4; agbcc colours them r5/r3).
+  The permuter plateaued there ~50 k iters; §9 decl-order/int-widen are no-ops or regress;
+  P4 pins and P1 barriers **regress** (agbcc materialises `register asm("rN")` locals with
+  shuffle `mov`s rather than allocating there). Left as asm (strong NEAR).
+- **sub_800E1FC `Event18_ColorFade`** (204 B, fe8u `eventscr.c` verbatim): 204/204
+  mnemonic-identical, ~95 B pure register permutation; permuter plateaued ~965. Left as asm.
+- **sub_80D1844 `LoadClassNameInClassReelFont`** (140 B): needs moving-pointer + separate
+  live counter + top-peel simultaneously; no source phrasing forces all three (do-while gets
+  the allocation but agbcc dumps the literal pool inline at the rotated loop entry → 144 B).
+  Best clean form 25/140. Left as asm (permuter target).
+
+**Lesson:** the productive levers on this floor were **source-shape** (P11 here, discovered by
+the permuter) — hard **P4/P1 register pins regress under agbcc** for pure cyclic permutations,
+so a genuine cycle with no nameable temp to re-seat is best left NEAR rather than force-matched.
