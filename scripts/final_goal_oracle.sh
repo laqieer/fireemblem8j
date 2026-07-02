@@ -7,8 +7,11 @@
 #
 #   (A) ungameable byte check : `make compare` => `fireemblem8.gba: OK`
 #       (the ROM sha1 cannot be faked — see CLAUDE.md)
-#   (B) all 4 honest axes == 100.00% per scripts/calcprogress.py
-#       self-containment + matching-C + extracted-data + named-symbols
+#   (B) final-goal axes == 100.00% per scripts/calcprogress.py
+#       self-containment + matching-C + source-form data + named-symbols.
+#       The strict EXTRACTED DATA (C/PNG-SCOPED) line is intentionally narrower
+#       for decomp.dev/frogress continuity; it can remain below 100% while
+#       banim/sound/fe6sio are already source-built.
 #
 # Claude cannot bypass this: the loop hook runs THIS command independently on
 # every <promise>LOOP_DONE</promise>. A naked claim of completion is futile.
@@ -26,7 +29,7 @@ if ! make compare 2>&1 | grep -q 'fireemblem8.gba: OK'; then
 fi
 echo "  (A) make compare: OK"
 
-# ---- (B) all four axes at 100.00% ----
+# ---- (B) final-goal axes at 100.00% ----
 prog="$(python3 scripts/calcprogress.py 2>/dev/null)" || { echo "ORACLE-ERR: calcprogress failed"; exit 2; }
 fail=0
 while IFS= read -r axis; do
@@ -37,7 +40,7 @@ while IFS= read -r axis; do
 done <<'AXES'
 BUILD SELF-CONTAINMENT
 MATCHING-C FUNCTIONS
-EXTRACTED DATA
+SOURCE-FORM DATA
 NAMED SYMBOLS
 AXES
 

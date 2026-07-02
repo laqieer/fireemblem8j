@@ -6,7 +6,7 @@
 > self-containment, ~59% named) are **historical snapshots from early in the
 > project**. Current ground-truth figures (from `scripts/calcprogress.py`):
 > matching-C **95.44% (8139 / 8528)**, build self-containment **100%**, strict
-> C/PNG extracted data **79.91%**, source-form data **100.00%**, named symbols
+> C/PNG extracted data **79.91%**, source-form data **99.26%**, named symbols
 > **85.23%**. For what remains, see `docs/frontier.md`.
 
 
@@ -44,15 +44,17 @@ libc/libgcc data only. That number is currently **79.91%** and should not be
 renamed or inflated.
 
 The companion **SOURCE-FORM DATA** line answers the honest completion question for
-non-`src/` asset roots. It credits only object roots whose Makefile recipes are
+non-`src/` asset roots without pretending opaque raw blobs are editable source.
+It credits only object roots whose Makefile recipes are
 committed editable source with no `baserom.gba` fallback: `banim/data_banim.o`
 from `arm_compressing_linker.py` over `banim/*_motion.s` and `graphics/banim`
 PNG/AGBPAL assets; `sound/songs/midi/*.o` from `mid2agb` over committed `.mid`;
 `sound/voicegroups/*.o` from editable voice macro `.s`; `asm/fe6sio.o` from the
-mgfembp FE6 payload source; and the small descriptive m4a tables.
+mgfembp FE6 payload source; and the small descriptive m4a tables. It subtracts
+the remaining opaque raw-incbin/`.bin` frontier from the source-form numerator.
 `scripts/check_selfcontained.py` is the proof gate: it currently reports 0
-`.incbin "baserom.gba"` directives, so those credited bytes are source-built,
-not hidden ROM incbins.
+`.incbin "baserom.gba"` directives in build-input source trees, so those credited
+bytes are source-built, not hidden ROM incbins.
 
 ## The real completion criterion — "remove `baserom.gba`, `make` still builds byte-perfect"
 

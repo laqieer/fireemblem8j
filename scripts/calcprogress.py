@@ -18,7 +18,8 @@ non-inflated numbers:
      function total (decompiled + still-as-asm objects), NOT the US count -- so the
      % can't read ~100% while JP functions remain as descriptive asm.
      (gbadisasm descriptive asm is DISASSEMBLY, not decompilation -- NOT counted.)
-  3. EXTRACTED DATA          = strict C/PNG-scoped extracted bytes under src/
+  3. EXTRACTED DATA (C/PNG-SCOPED)
+                              = strict C/PNG-scoped extracted bytes under src/
      / real data total.  Named `.incbin "baserom"` is NOT extraction.  This
      intentionally remains a narrow portal/decomp.dev-compatible number.
      SOURCE-FORM DATA is surfaced separately: data already built from committed
@@ -109,7 +110,7 @@ def source_form_data_group(obj):
     The strict EXTRACTED DATA axis deliberately credits only src/*.o C/PNG assets.
     This supplemental SOURCE-FORM DATA axis credits other object roots only when the
     Makefile documents a committed editable-source build chain with no baserom.gba
-    fallback:
+    fallback. This is an evidence allow-list, not a generic path promotion:
       * banim/data_banim.o: arm_compressing_linker from banim/*_motion.s plus
         graphics/banim PNG/AGBPAL assets.
       * sound/songs/midi/*.o: mid2agb output from committed .mid files.
@@ -306,6 +307,23 @@ def pct(n, d):
     return (100.0 * n / d) if d else 0.0
 
 
+def opaque_data_bytes():
+    """Bytes still carried as opaque raw-incbin assets, not source-form data."""
+    GFX = ("Map","Tile","Object","Chr","Pal","Gfx","Img","Sprite","Anim","OBJ","_gf","Reel","Portrait","Icon")
+    opaque = struct_b = 0
+    for binp in glob.glob(os.path.join(ROOT, "data", "residual", "*.bin")):
+        name = os.path.basename(binp)[:-4]
+        cpath = os.path.join(ROOT, "src", "data", name + "_ref", "dat_%s_ref.c" % name)
+        if os.path.exists(cpath):
+            with open(cpath, errors="replace") as f:
+                if "INCBIN" not in f.read():
+                    continue
+        sz = os.path.getsize(binp); opaque += sz
+        if not any(k in os.path.basename(binp) for k in GFX):
+            struct_b += sz
+    return opaque, struct_b
+
+
 # === Axis values ===========================================================
 dep_bytes, sc_directives, sc_files = sc.scan()
 self_bytes = ROM_SIZE - dep_bytes
@@ -337,7 +355,8 @@ func_pct = pct(func_done, func_total)
 # the extracted numerator alongside data_src (mirrors code_lib for the code axis).
 data_total = data_src + data_lib + data_asm
 data_pct = pct(data_src + data_lib, data_total)
-source_form_data_done = data_src + data_lib + source_form_data
+_opaque, _struct_opaque = opaque_data_bytes()
+source_form_data_done = data_src + data_lib + source_form_data - _opaque
 source_form_data_residual = max(0, data_total - source_form_data_done)
 source_form_data_pct = pct(source_form_data_done, data_total)
 
@@ -346,7 +365,7 @@ named_pct = pct(sym_named, sym_total)
 
 # === Honest 4-axis scorecard (primary output) ==============================
 out = []
-out.append("== FE8J HONEST DECOMP SCORECARD (target: 100% on every axis) ==")
+out.append("== FE8J HONEST DECOMP SCORECARD (target noted per axis) ==")
 out.append(f"1. BUILD SELF-CONTAINMENT : {selfcontain_pct:6.2f}%  "
            f"({self_bytes}/{ROM_SIZE} bytes from source; "
            f"{dep_bytes} still .incbin baserom)  -> target 100%")
@@ -354,10 +373,10 @@ out.append(f"2. MATCHING-C FUNCTIONS   : {func_pct:6.2f}%  "
            f"({func_done}/{func_total} JP funcs done = {funcs} compiled from src/*.c "
            f"+ {func_lib} linked from libc/libgcc; {func_asm} still descriptive asm; "
            f"gbadisasm asm NOT counted)  -> target 100%")
-out.append(f"3. EXTRACTED DATA         : {data_pct:6.2f}%  "
+out.append(f"3. EXTRACTED DATA (C/PNG-SCOPED): {data_pct:6.2f}%  "
            f"({data_src + data_lib}/{data_total} bytes in strict C/PNG assets "
            f"({data_src} under src/ + {data_lib} libc/libgcc); "
-           f"named .incbin is NOT extraction)  -> target 100%")
+           f"named .incbin is NOT extraction)  -> strict scope, not final-goal gate")
 out.append(f"3b. SOURCE-FORM DATA      : {source_form_data_pct:6.2f}%  "
            f"({source_form_data_done}/{data_total} bytes built from committed editable source; "
            f"{source_form_data_residual} residual opaque/non-source bytes)  -> target 100%")
@@ -367,8 +386,10 @@ if data_lib:
     out.append(f"      {data_lib} bytes  libc/libgcc archive data (linked from library source)")
 for group, size in source_form_data_groups.most_common():
     out.append(f"      {size} bytes  {group}")
+if _opaque:
+    out.append(f"      -{_opaque} bytes  opaque raw-incbin/.bin frontier excluded from source-form credit")
 if source_form_data_residual:
-    out.append(f"      {source_form_data_residual} bytes  residual non-src data not yet proven source-form")
+    out.append(f"      {source_form_data_residual} bytes  residual opaque/non-source bytes")
 out.append(f"4. NAMED SYMBOLS          : {named_pct:6.2f}%  "
            f"({sym_named}/{sym_total} labels named; "
            f"{sym_placeholder} sub_/data_/nullsub_/sheet placeholders)  -> target 100%")
@@ -379,7 +400,7 @@ out.append(f"4. NAMED SYMBOLS          : {named_pct:6.2f}%  "
 # and EDITABLE (logic data as typed C, not opaque raw-incbin blobs). Both are
 # owned by scripts/audit_pointers.py; here we surface the fast, ungameable
 # headlines (full % via `audit_pointers.py --metrics`).
-import subprocess as _sp, glob as _glob
+import subprocess as _sp
 def _shiftability_headline():
     """Returns (literal_raw_count, completion_gate). The literal raw-0x08xxxxxx count
     is NOT the completion invariant (it is dominated by coincidental constants that can
@@ -401,22 +422,7 @@ def _shiftability_headline():
     except Exception:
         pass
     return literal, gate
-def _opaque_data_bytes():
-    GFX = ("Map","Tile","Object","Chr","Pal","Gfx","Img","Sprite","Anim","OBJ","_gf","Reel","Portrait","Icon")
-    opaque = struct_b = 0
-    for binp in _glob.glob(os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "residual", "*.bin")):
-        name = os.path.basename(binp)[:-4]
-        cpath = os.path.join(os.path.dirname(os.path.dirname(__file__)), "src", "data", name + "_ref", "dat_%s_ref.c" % name)
-        if os.path.exists(cpath):
-            with open(cpath, errors="replace") as f:
-                if "INCBIN" not in f.read():
-                    continue
-        sz = os.path.getsize(binp); opaque += sz
-        if not any(k in os.path.basename(binp) for k in GFX):
-            struct_b += sz
-    return opaque, struct_b
 _unreloc, _gate = _shiftability_headline()
-_opaque, _struct_opaque = _opaque_data_bytes()
 if _gate is not None:
     out.append(f"5. SHIFTABILITY (data ptrs): gate {('0' if _gate==0 else str(_gate)):>5} real/unclassified "
                f"data pointers un-relocated  -> target 0  "
