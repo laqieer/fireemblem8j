@@ -1,1 +1,1 @@
-0BCD74	0BCE68	asm/sub_80BCD74.o(.text.sub_80BCD74)	sub_80BCD74 region-different gbadisasm descriptive asm
+0BCD74	0BCE68	src/sub_80BCD74.o(.text)	sub_80BCD74 (graduated from region-different descriptive asm; referenced by frontier_df4_ending data)

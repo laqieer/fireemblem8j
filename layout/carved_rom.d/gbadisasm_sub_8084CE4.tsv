@@ -1,1 +1,1 @@
-084CE4	084D5C	asm/sub_8084CE4.o(.text.sub_8084CE4)	sub_8084CE4 region-different gbadisasm descriptive asm
+084CE4	084D5C	src/sub_8084CE4.o(.text)	sub_8084CE4 HBlank sine-distortion fill (decomp.me fork mbcFD, score 0)
