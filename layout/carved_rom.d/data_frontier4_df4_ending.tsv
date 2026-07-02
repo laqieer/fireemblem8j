@@ -15,7 +15,7 @@ B25A78	B25F9C	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_
 B26374	B26938	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap13)	df4_ending region-diff data (1476 B, long-tail gap)
 B26A6C	B2759C	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap14)	df4_ending region-diff data (2864 B, long-tail gap)
 B3B3D4	B3B74C	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap15)	df4_ending region-diff data (888 B, long-tail gap)
-B3EBE4	B3EE00	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap16)	df4_ending region-diff data (540 B, long-tail gap)
+B3EC33	B3EE00	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap16)	df4_ending region-diff data (461 B, long-tail gap; head 79B merged into gTsa_OpSubtitle_05 LZ)
 B3F024	B3F690	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap17)	df4_ending region-diff data (1644 B, long-tail gap)
 B3F7BC	B3FCF4	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap18)	df4_ending region-diff data (1336 B, long-tail gap)
 B8B998	B8C43C	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap19)	df4_ending region-diff data (2724 B, long-tail gap)

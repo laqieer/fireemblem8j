@@ -704,3 +704,10 @@ blobs or (b) pointer tables misfiled under `graphics/frontier_df*/`. Both yielde
   head-only carve). This was the LAST mechanically-carveable batch (files/wave43_candidates.txt).
 - **Honest remaining floor:** coordinate/affine data, byte0=0x00 opaque (85), invalid-Huffman structured (11),
   JP-unique frontier data with NO fe8u twin → fe8u would also incbin → satisfies "unless also .bin in fe8u".
+
+## wave44 (DONE, D334): truncated/split JP-LZ mis-carves fixed — the D331/D332 "exhaustion" missed these
+User asked why Ch9Events.bin (and similar) remained. They were split fragments of larger JP-LZ compressed
+graphics streams (Ch9Events = first 80 B of a 28753 B map-gfx stream), misfiled as "invalid-LZ floor" because
+the sweep only gbagfx'd the truncated first fragment. Fixed 4 (gGfx_OpSubtitle_05, gTsa_OpSubtitle_03/05,
+Ch9Events) → merged to .png/.4bpp.lz/.bin.lz (3 recompress byte-exact; gTsa_05 pinned). 8 raw .bin removed,
+MISS 7→6, UNCERTAIN 274→270. Detection rule now: decode the FULL ROM LZ stream, compare consumed len vs .bin size.
