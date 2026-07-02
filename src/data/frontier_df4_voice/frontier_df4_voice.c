@@ -152,7 +152,7 @@ __asm__(
 "	.4byte 0x00000000, 0x00000000, 0x00000400, 0x00003400, gGfx_OpSubtitle_00, gTsa_OpSubtitle_00\n"
 "	.4byte 0x0000014F, gGfx_OpSubtitle_01, gTsa_OpSubtitle_01, 0x00000118, gGfx_OpSubtitle_02, data_08B3E688\n"
 "	.4byte 0x00000078, gGfx_OpSubtitle_03, gTsa_OpSubtitle_03, 0x00000118, gGfx_OpSubtitle_04, gTsa_OpSubtitle_04\n"
-"	.4byte 0x0000014A, gGfx_OpSubtitle_05, gTsa_OpSubtitle_05, 0x0000012C, gGfx_OpSubtitle_06, frontier_df4_ending_016_B3EBE4 + 0x50\n"
+"	.4byte 0x0000014A, gGfx_OpSubtitle_05, gTsa_OpSubtitle_05, 0x0000012C, gGfx_OpSubtitle_06, frontier_df4_ending_016_B3EC33 + 0x1\n"
 "	.4byte 0x000000FA, 0x61726363, 0x7966696D, 0x00000000\n"
 );
 

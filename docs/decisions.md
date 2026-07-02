@@ -9030,3 +9030,29 @@ effort outside mechanical fe8u-form carving.
 
 **Session cumulative (this takeover): audit MISS 318 → 7, UNCERTAIN 467 → 274; `make compare` byte-exact and
 `make shiftcheck` 0 HIGH on every merged wave; main CI verified green after each merge; 0 PRs left open.**
+
+## D334
+**Wave 44: fixed 4 TRUNCATED/SPLIT JP-LZ compressed-graphics mis-carves (user-reported: "why is Ch9Events.bin
+still there?"). 8 raw `.bin` eliminated, MISS 7→6, UNCERTAIN 274→270. `make compare` OK + shiftcheck 0 HIGH.**
+
+Root cause: each was ONE LZ77 compressed-graphics stream carved across 2+ raw `.bin` fragments at a wrong
+boundary; the first fragment alone fails gbagfx (truncated), so the D332 compression sweep misfiled them as
+"invalid-LZ floor". `Ch9Events` was the worst case: US event-table name + 80-byte size copied onto a 28753-byte
+JP compressed MAP-GRAPHICS asset (decompresses to 32768 B, 1024 4bpp tiles); its 28676-byte tail was a
+separate carved `.bin` (`frontier_map_ch9events_000`). Detection: decode the full GBA LZ77 stream from each
+blob's ROM offset and compare the consumed compressed length to the `.bin` size (n<m ⇒ hidden tail).
+
+Fixes (merge fragments → one asset, byte-exact):
+- `gGfx_OpSubtitle_05` (0xB3DBB8, 1777 B→3584) → `.png`→`.4bpp.lz` (recompresses byte-exact); deleted `data_08B3E1C8`.
+- `gTsa_OpSubtitle_03` (0xB3E740, 310 B→1202) → decompressed `.bin`→`.bin.lz`; deleted `data_08B3E86C`.
+- `Ch9Events` (0x159850, 28753 B→32768) → `.png`→`.4bpp.lz`; kept `Ch9Events` symbol so `gChDAsset_107`
+  resolves; merged 2 manifest rows; deleted `frontier_map_ch9events` unit.
+- `gTsa_OpSubtitle_05` (0xB3EAB8, 379 B→1202) → **pinned `.bin.lz`** (genuinely irreproducible: JP 379 B vs
+  gbagfx best 380 B; committed no-recipe leaf + `.gitignore` negation, btl_bg pattern). Its 79-byte LZ tail
+  was the head of `frontier_df4_ending_016_B3EBE4`; split that symbol at +79, remainder → new symbol
+  `_B3EC33`, and repointed the `frontier_df4_voice.c` `+0x50` ref to `_B3EC33 + 0x1` (same address 0xB3EC34).
+
+CORRECTION to my dispatch premise: I claimed none recompress via gbagfx (I had tested raw-bytes→`.lz`); the
+worker found 3/4 recompress byte-exact through the proper `.png`→`.4bpp`→`.lz` pipeline, so only #4 needed
+pinning. LESSON (updates D332/D333): a compression sweep must decode the FULL stream from the ROM offset and
+detect truncated/split assets — do NOT judge extractability by gbagfx-ing the standalone first fragment.

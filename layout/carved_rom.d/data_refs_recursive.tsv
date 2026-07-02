@@ -1,5 +1,5 @@
 # carve_data_refs.py recursive region-different data (parallel-safe fragment)
-159850	1598A0	src/data/Ch9Events_ref/dat_Ch9Events_ref.o(.rodata.dat_Ch9Events_ref)	Ch9Events region-diff (funcmap code-ref, 80 B)
+159850	1608A4	src/data/Ch9Events_ref/dat_Ch9Events_ref.o(.rodata.dat_Ch9Events_ref)	Ch9Events JP-exclusive map gfx 4bpp.lz (1024 tiles; merged frontier_map_ch9events; gChDAsset_107)
 2031D4	203234	sound/voicegroups/voicegroup037.o(.rodata.voicegroup037)	voicegroup037 editable voice_* macro table (D311, fe8u-ported)
 203834	2038C4	sound/voicegroups/voicegroup039.o(.rodata.voicegroup039)	voicegroup039 editable voice_* macro table (D311, fe8u-ported)
 579D6C	579DB4	src/data/gFontgrp_89_ref/dat_gFontgrp_89_ref.o(.rodata.dat_gFontgrp_89_ref)	gFontgrp_89 region-diff (funcmap code-ref, 72 B)

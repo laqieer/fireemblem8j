@@ -208,3 +208,9 @@ asm/dat_worldmap_skirmish.o: \
   graphics/misc_gfx2/Pal_WmPlaceDot_Highlight.gbapal \
   graphics/misc_gfx2/Pal_WmPlaceDot_Standard.gbapal
 
+
+# wave44 #4: gTsa_OpSubtitle_05 is a JP-LZ tilemap whose compressed stream is NOT
+# reproducible by gbagfx at any -mindist (379B JP vs gbagfx's best 380B). The exact
+# JP .lz bytes are committed (see .gitignore negation); this no-recipe rule stops
+# the generic `%.lz: %` pattern from trying to regenerate it from a (nonexistent) .bin.
+graphics/misc_gfx2/gTsa_OpSubtitle_05.bin.lz: ;

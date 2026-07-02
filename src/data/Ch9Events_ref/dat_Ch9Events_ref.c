@@ -4,4 +4,4 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_Ch9Events_ref") u8 Ch9Events[] = INCBIN_U8("data/residual/Ch9Events.bin");
+SECTION(".rodata.dat_Ch9Events_ref") u8 Ch9Events[] = INCBIN_U8("graphics/frontier_map_ch9events/frontier_map_ch9events.4bpp.lz");
