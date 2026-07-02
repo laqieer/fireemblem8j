@@ -1,1 +1,1 @@
-0BB240	0BB328	asm/sub_80BB240.o(.text.sub_80BB240)	sub_80BB240 region-different gbadisasm descriptive asm
+0BB240	0BB328	src/GetPidDefeatedEndingString.o(.text)	GetPidDefeatedEndingString (graduated from sub_80BB240 descriptive asm)
