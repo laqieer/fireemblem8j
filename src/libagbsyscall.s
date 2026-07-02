@@ -106,7 +106,15 @@ RLUnCompWram:
 	.global SoftReset
 	.thumb_func
 SoftReset:
-	.incbin "data/residual/SoftReset.bin"
+	ldr r3, =0x04000208
+	movs r2, #0
+	strb r2, [r3]
+	ldr r1, =0x03007F00
+	mov sp, r1
+	swi #1
+	swi #0
+	.align 2, 0
+	.pool
 
 	.global SoundBiasReset
 	.thumb_func
