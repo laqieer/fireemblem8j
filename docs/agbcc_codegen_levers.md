@@ -381,6 +381,15 @@ permuter/permute.sh bg … --stop-on-zero`):
   The permuter plateaued there ~50 k iters; §9 decl-order/int-widen are no-ops or regress;
   P4 pins and P1 barriers **regress** (agbcc materialises `register asm("rN")` locals with
   shuffle `mov`s rather than allocating there). Left as asm (strong NEAR).
+- **sub_8001570 `AddAttr2dBitMap`** (224 B, fe8u `hardware.c` verbatim, clean leaf): the
+  **closest** — `-mjp-promote` gave 8 B; swapping the inner-loop declaration order
+  `u16 *dst2 = dst;` **before** `const u16 *src = _src + _ix;` matched the loop-setup schedule
+  → **8→2 B**. The last **2 B are an irreducible prologue mov-pair emission order**
+  (`mov ip,r6` [width→_width] vs `mov r8,r2` [height→_height]) — a scheduler tie-break that
+  resisted ~20 source forms (save/decl/compute/multiply order, chained/indirect assigns,
+  dependency tricks), P1/scheduling barriers, 8 `-fno-*`/`-O1` flags (agbcc has **no**
+  `-fno-schedule-insns`), and the permuter (130 k iters, plateaued at 2 B). Left as asm — a
+  clean 2-byte NEAR not worth an asm hack.
 - **sub_800E1FC `Event18_ColorFade`** (204 B, fe8u `eventscr.c` verbatim): 204/204
   mnemonic-identical, ~95 B pure register permutation; permuter plateaued ~965. Left as asm.
 - **sub_80D1844 `LoadClassNameInClassReelFont`** (140 B): needs moving-pointer + separate
@@ -388,6 +397,9 @@ permuter/permute.sh bg … --stop-on-zero`):
   the allocation but agbcc dumps the literal pool inline at the rotated loop entry → 144 B).
   Best clean form 25/140. Left as asm (permuter target).
 
-**Lesson:** the productive levers on this floor were **source-shape** (P11 here, discovered by
-the permuter) — hard **P4/P1 register pins regress under agbcc** for pure cyclic permutations,
-so a genuine cycle with no nameable temp to re-seat is best left NEAR rather than force-matched.
+**Lesson:** the productive levers on this floor were **source-shape** — **P11** (permuter-found)
+on sub_807C8DC and **declaration-order scheduling** (§9) on sub_8001570 each cleared most of the
+residual. What remains is the true floor: **pure register cycles** (no nameable temp to re-seat)
+and **prologue/epilogue mov-pair emission order** — agbcc scheduler tie-breaks that don't
+respond to source, and hard **P4/P1 register pins regress** rather than help. These are best
+left NEAR (or handed to a long permuter run) rather than force-matched with asm constraints.
