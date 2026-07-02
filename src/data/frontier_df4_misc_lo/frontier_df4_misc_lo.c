@@ -1701,6 +1701,13 @@ u16 frontier_df4_misc_lo_015b_19E8A6[] __attribute__((section(".data.frontier_df
     0xC801, 0x1801, 0x8001, 0x013B, 0xCC04, 0xD001, 0xD401, 0x1300,
     0x0000,
 };
+/* frontier_df4_misc_lo_016_1A4C88 (ROM 0x081A4C88): LZ77-compressed in ROM,
+ * decompresses to a 1058 B = 529 u16 TSA screen tilemap (every entry is a valid
+ * tile-attr: tile 32..992 <1024, palette 0-1, flip bits — NOT a string pool).
+ * Already in the correct editable form: the decompressed source .bin rebuilds into
+ * ROM byte-exact via the generic %.lz rule. The audit still lists it MISS
+ * "string pool" (path-class misnomer) — an audit-false-MISS; fe8u keeps TSA
+ * tilemaps binary, so there is no further extraction to do here. */
 u8 frontier_df4_misc_lo_016_1A4C88[] __attribute__((section(".data.frontier_df4_misc_lo.gap16"))) = INCBIN_U8("graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin.lz");
 /* frontier_df4_misc_lo_017_1B1878 (ROM 0x081B1878, 5128 B): the unit-class
  * INTERNAL-NAME string pool (FE3_DUMMY, CITIZEN, KOIDO_M, EMPTY_NNN, R08...)

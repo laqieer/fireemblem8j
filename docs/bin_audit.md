@@ -32,10 +32,10 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 3 | 0.2% |
+| **MISS** | 2 | 0.1% |
 | **FLOOR** | 1398 | 83.7% |
 | **UNCERTAIN** | 270 | 16.2% |
-| **TOTAL** | 1671 | 100.0% |
+| **TOTAL** | 1670 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -45,7 +45,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | pixel-gfx | MISS | 1 | fe8u graphics/**/*.png |
 | sound-m4a-tables | MISS | 0 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 0 | fe8u sound/voicegroups/*.s (documented ceiling) |
-| menu-strings | MISS | 2 | fe8u C literals (src/menu_def.c) |
+| menu-strings | MISS | 1 | fe8u C literals (src/menu_def.c) |
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 0 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | TSA/.map.bin | FLOOR | 1249 | fe8u keeps TSA/tilemaps binary too |
@@ -63,8 +63,7 @@ under MISS, asserted by the self-test guards below).
 
 **MISS spot checks** (fe8u ships an editable source):
 
-- `graphics/frontier_chap_title/frontier_chap_title_115_A92170.bin` → **MISS** (pixel-gfx) — proof: fe8u graphics/chap_title/*.png (chapter-title images)
-- `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin` → **MISS** (menu-strings) — proof: fe8u C string literals (src/menu_def.c parity) — string pools
+- `graphics/frontier_chap_title/frontier_chap_title_115b_A92410.bin` → **MISS** (pixel-gfx) — proof: fe8u graphics/chap_title/*.png (chapter-title images)
 - `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin` → **MISS** (menu-strings) — proof: fe8u C string literals (src/menu_def.c parity) — string pools
 
 **FLOOR spot checks** (fe8u also keeps binary):
@@ -88,14 +87,13 @@ under MISS, asserted by the self-test guards below).
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 - 30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).
 
-## MISS (3) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (2) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>3 entries</summary>
+<details><summary>2 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
-| `graphics/frontier_chap_title/frontier_chap_title_115_A92170.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
+| `graphics/frontier_chap_title/frontier_chap_title_115b_A92410.bin` | pixel-gfx | fe8u graphics/chap_title/*.png (chapter-title images) |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 
 </details>
