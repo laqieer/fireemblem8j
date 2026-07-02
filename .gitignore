@@ -39,6 +39,13 @@ build/shiftcheck/
 # graphics/frontier_df4_misc_lo/frontier_df4_misc_lo.mk). Split from the old 700B
 # raw .bin (442B LZ + 258B .short tail, now decoded in the .c).
 !graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.lz
+# Pinned JP-LZ leaves (wave47): frontier_df4_ending_006 is TWO concatenated LZ77
+# u16-table streams (508B + 545B, the 2nd asset referenced by frontier_df4_voice.c
+# as +0x1fc) + 3B pad. Neither recompresses byte-exact via gbagfx, so the exact JP
+# compressed bytes stay COMMITTED (no-recipe pin rules in
+# graphics/frontier_df4_ending/frontier_df4_ending.mk). Split from the old 1056B .bin.
+!graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin.lz
+!graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin.lz
 *.4bpp.h
 
 # TSA battle-background intermediates (D309). The editable source is the .png;

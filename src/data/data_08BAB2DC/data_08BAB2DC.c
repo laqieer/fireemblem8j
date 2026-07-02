@@ -1,7 +1,10 @@
 #include "global.h"
 
-/* Migrated from asm/data_08BAB2DC.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+/* Wave47: this is the Tsa_GameIntroNintendo TSA tilemap (the "Nintendo" game-intro
+ * logo tilemap; an ABS baseline alias Tsa_GameIntroNintendo sits at this address).
+ * Decomposed from the raw JP-LZ blob into the decompressed 30x20 TSA tilemap
+ * graphics/misc_gfx2/Tsa_GameIntroNintendo.bin (committed) which the %.lz rule
+ * recompresses byte-exact (gbagfx default -mindist). Symbol/section/placement kept.
  */
 
-u8 data_08BAB2DC[] __attribute__((section(".data.residue.08BAB2DC"))) = INCBIN_U8("data/residual/data_08BAB2DC.bin");
+u8 data_08BAB2DC[] __attribute__((section(".data.residue.08BAB2DC"))) = INCBIN_U8("graphics/misc_gfx2/Tsa_GameIntroNintendo.bin.lz");
