@@ -1,7 +1,52 @@
 #include "global.h"
 
-/* Migrated from asm/data_0865A268.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
-
-u8 data_0865A268[] __attribute__((section(".data.residue.0865A268"))) = INCBIN_U8("data/residual/data_0865A268.bin");
+/* Wave46: carved from data/residual/data_0865A268.bin to a relocatable .4byte pointer table.
+ * Each embedded ROM pointer is expressed as `Sym + addend` (the linked-ELF symbol
+ * whose range owns the target address); non-pointer words stay literals. Byte-
+ * identical to the original blob, and relocation-complete so the object stays
+ * shiftcheck-clean (0 HIGH) if the pointee resources move. */
+__asm__(
+"\t.section .data.residue.0865A268, \"aw\", %progbits\n"
+"\t.global data_0865A268\n"
+"data_0865A268:\n"
+"	.4byte 0x00000000\n"
+"	.4byte 0x0000001F\n"
+"	.4byte 0x0000FFF8\n"
+"	.4byte 0x00000001\n"
+"	.4byte 0x00000000\n"
+"	.4byte 0x00000000\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_8 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_9 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_10 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_11 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_12 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_13 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_1 + 0x3\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_2 + 0x3\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_3 + 0x3\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_4 + 0x3\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_5 + 0x3\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_6 + 0x3\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_7 + 0x3\n"
+"	.4byte 0x80000000\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_8 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_9 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_10 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_11 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_12 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_13 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_1 + 0x3\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_2 + 0x3\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_3 + 0x3\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_1 + 0x3\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_2 + 0x3\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_3 + 0x3\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_13 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_12 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_11 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_10 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_9 + 0x2\n"
+"	.4byte AnimSprite_EfxMistyRainObj1_8 + 0x2\n"
+"	.4byte data_0865A268 + 0x2\n"
+"	.4byte 0x80000000\n"
+);
