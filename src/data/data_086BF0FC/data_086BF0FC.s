@@ -1,0 +1,119 @@
+/* Wave46: carved from data/residual/data_086BF0FC.bin to a relocatable .4byte pointer table.
+ * Each embedded ROM pointer is expressed as `Sym + addend` (the linked-ELF symbol
+ * whose range owns the target address); non-pointer words stay literals. Byte-
+ * identical to the original blob, and relocation-complete so the object stays
+ * shiftcheck-clean (0 HIGH) if the pointee resources move. */
+	.section .data.residue.086BF0FC, "aw", %progbits
+	.global data_086BF0FC
+data_086BF0FC:
+	.4byte data_086BB064 + 0x3
+	.4byte data_086BB064 + 0x1B
+	.4byte AnimSprite_EfxMshield_3 + 0x3
+	.4byte AnimSprite_EfxMshield_4 + 0x3
+	.4byte AnimSprite_EfxMshield_5 + 0x3
+	.4byte data_086BB154 + 0x3
+	.4byte data_086BB154 + 0x57
+	.4byte AnimSprite_EfxMshield_8 + 0x3
+	.4byte AnimSprite_EfxMshield_9 + 0x3
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x3
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x87
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x117
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x1B3
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x25B
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x30F
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x3C3
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x477
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x52B
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x5DF
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x693
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x747
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x7FB
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x8AF
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0x963
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0xA17
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0xACB
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0xB7F
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0xC33
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0xCE7
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0xD9B
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0xE4F
+	.4byte frontier_df4_banim_b_045_6BB2EC + 0xF03
+	.4byte AnimSprite_EfxMshield_33 + 0x3
+	.4byte AnimSprite_EfxMshield_34 + 0x3
+	.4byte AnimSprite_EfxMshield_35 + 0x3
+	.4byte AnimSprite_EfxMshield_36 + 0x3
+	.4byte frontier_df4_banim_b_046_6BC4BC + 0x3
+	.4byte frontier_df4_banim_b_046_6BC4BC + 0x6F
+	.4byte frontier_df4_banim_b_046_6BC4BC + 0xDB
+	.4byte frontier_df4_banim_b_046_6BC4BC + 0x153
+	.4byte frontier_df4_banim_b_046_6BC4BC + 0x1D7
+	.4byte frontier_df4_banim_b_046_6BC4BC + 0x267
+	.4byte AnimSprite_EfxMshield_43 + 0x3
+	.4byte AnimSprite_EfxMshield_44 + 0x3
+	.4byte AnimSprite_EfxMshield_46 + 0x3
+	.4byte AnimSprite_EfxMshield_47 + 0x3
+	.4byte AnimSprite_EfxMshield_48 + 0x3
+	.4byte AnimSprite_EfxMshield_50 + 0x3
+	.4byte AnimSprite_EfxMshield_51 + 0x3
+	.4byte AnimSprite_EfxMshield_52 + 0x3
+	.4byte frontier_df4_banim_b_047_6BCF9C + 0x3
+	.4byte frontier_df4_banim_b_047_6BCF9C + 0xFF
+	.4byte AnimSprite_EfxMshield_55 + 0x3
+	.4byte AnimSprite_EfxMshield_56 + 0x3
+	.4byte AnimSprite_EfxMshield_57 + 0x3
+	.4byte AnimSprite_EfxMshield_58 + 0x3
+	.4byte AnimSprite_EfxMshield_59 + 0x3
+	.4byte AnimSprite_EfxMshield_60 + 0x3
+	.4byte AnimSprite_EfxMshield_61 + 0x3
+	.4byte AnimSprite_EfxMshield_62 + 0x3
+	.4byte AnimSprite_EfxMshield_63 + 0x3
+	.4byte AnimSprite_EfxMshield_64 + 0x3
+	.4byte AnimSprite_EfxMshield_65 + 0x3
+	.4byte AnimSprite_EfxMshield_66 + 0x3
+	.4byte AnimSprite_EfxMshield_67 + 0x3
+	.4byte AnimSprite_EfxMshield_68 + 0x3
+	.4byte AnimSprite_EfxMshield_69 + 0x3
+	.4byte AnimSprite_EfxMshield_70 + 0x3
+	.4byte AnimSprite_EfxMshield_71 + 0x3
+	.4byte AnimSprite_EfxMshield_72 + 0x3
+	.4byte AnimSprite_EfxMshield_73 + 0x3
+	.4byte AnimSprite_EfxMshield_74 + 0x3
+	.4byte AnimSprite_EfxMshield_75 + 0x3
+	.4byte AnimSprite_EfxMshield_76 + 0x3
+	.4byte AnimSprite_EfxMshield_77 + 0x3
+	.4byte AnimSprite_EfxMshield_78 + 0x3
+	.4byte AnimSprite_EfxMshield_79 + 0x3
+	.4byte AnimSprite_EfxMshield_80 + 0x3
+	.4byte AnimSprite_EfxMshield_81 + 0x3
+	.4byte AnimSprite_EfxMshield_82 + 0x3
+	.4byte AnimSprite_EfxMshield_83 + 0x3
+	.4byte 0x786BCCDB
+	.4byte 0x84000013
+	.4byte 0x80000000
+	.4byte AnimSprite_EfxMshield_84 + 0x2
+	.4byte AnimSprite_EfxMshield_85 + 0x2
+	.4byte AnimSprite_EfxMshield_86 + 0x2
+	.4byte AnimSprite_EfxMshield_87 + 0x2
+	.4byte AnimSprite_EfxMshield_88 + 0x2
+	.4byte AnimSprite_EfxMshield_89 + 0x2
+	.4byte AnimSprite_EfxMshield_90 + 0x2
+	.4byte AnimSprite_EfxMshield_91 + 0x2
+	.4byte AnimSprite_EfxMshield_92 + 0x2
+	.4byte AnimSprite_EfxMshield_93 + 0x2
+	.4byte AnimSprite_EfxMshield_94 + 0x2
+	.4byte AnimSprite_EfxMshield_95 + 0x2
+	.4byte AnimSprite_EfxMshield_96 + 0x2
+	.4byte AnimSprite_EfxMshield_97 + 0x2
+	.4byte AnimSprite_EfxMshield_98 + 0x2
+	.4byte AnimSprite_EfxMshield_99 + 0x2
+	.4byte AnimSprite_EfxMshield_100 + 0x2
+	.4byte AnimSprite_EfxMshield_101 + 0x2
+	.4byte AnimSprite_EfxMshield_102 + 0x2
+	.4byte AnimSprite_EfxMshield_103 + 0x2
+	.4byte AnimSprite_EfxMshield_104 + 0x2
+	.4byte AnimSprite_EfxMshield_105 + 0x2
+	.4byte AnimSprite_EfxMshield_106 + 0x2
+	.4byte AnimSprite_EfxMshield_107 + 0x2
+	.4byte 0x786BCCDB
+	.4byte 0x84000013
+	.4byte 0x80000000

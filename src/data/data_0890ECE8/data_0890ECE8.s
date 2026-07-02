@@ -1,0 +1,119 @@
+/* Migrated from asm/data_0890ECE8.s (region-same graphics, single section).
+ * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+ */
+	.section .data.residue.0890ECE8, "aw", %progbits
+	.global data_0890ECE8
+data_0890ECE8:
+	.4byte 0x4D0063BB
+	.4byte 0x01000740
+	.4byte frontier_df4_banim_b_078_90E58C + 0x130
+	.4byte 0x0000001E
+	.4byte 0x000C0000
+	.4byte 0x550063BB
+	.4byte 0x01000740
+	.4byte frontier_df4_banim_b_078_90E58C + 0x138
+	.4byte 0x00001C14
+	.4byte 0x000C0000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x550063BB
+	.4byte 0x01000000
+	.4byte frontier_df4_banim_b_078_90E58C + 0x140
+	.4byte 0x00000096
+	.4byte 0x000C0000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x4D0063BB
+	.4byte 0x01000740
+	.4byte frontier_df4_banim_b_078_90E58C + 0x148
+	.4byte 0x00000016
+	.4byte 0x000C1200
+	.4byte 0x4D0063BB
+	.4byte 0x01000740
+	.4byte frontier_df4_banim_b_078_90E58C + 0x150
+	.4byte 0x00000016
+	.4byte 0x000C1200
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000217
+	.4byte 0x0000FFFF
+	.4byte 0x00000215
+	.4byte 0x0000FFFF
+	.4byte 0x0000008B
+	.4byte 0x0000FFFF
+	.4byte 0x000001C1
+	.4byte 0x0000FFFF
+	.4byte 0x00000183
+	.4byte 0x0000FFFF
+	.4byte 0x00000142
+	.4byte 0x0000FFFF
+	.4byte 0x00000242
+	.4byte 0x0000FFFF
+	.4byte 0x00000203
+	.4byte 0x0000FFFF
+	.4byte 0x00000141
+	.4byte 0x0000FFFF
+	.4byte 0x00000241
+	.4byte 0x0000FFFF
+	.4byte 0x000001C2
+	.4byte 0x0000FFFF
+	.4byte 0x00000181
+	.4byte 0x0000FFFF
+	.4byte 0x00000201
+	.4byte 0x0000FFFF
+	.4byte 0x00000301
+	.4byte 0x0000FFFF
+	.4byte 0x00000342
+	.4byte 0x0000FFFF
+	.4byte 0x00000383
+	.4byte 0x0000FFFF
+	.4byte 0x00010397
+	.4byte 0x0000FFFF
+	.4byte 0x0001020A
+	.4byte 0x0000FFFF
+	.4byte 0x0001024A
+	.4byte 0x0000FFFF
+	.4byte 0x000101C9
+	.4byte 0x0000FFFF
+	.4byte 0x00010249
+	.4byte 0x0010FFFF
+	.4byte 0x00010189
+	.4byte 0x0000FFFF
+	.4byte 0x00010288
+	.4byte 0x0000FFFF
+	.4byte 0x00010188
+	.4byte 0x0000FFFF
+	.4byte 0x00010208
+	.4byte 0x0000FFFF
+	.4byte 0x00010248
+	.4byte 0x0000FFFF
+	.4byte 0x00010287
+	.4byte 0x0000FFFF
+	.4byte 0x000101C7
+	.4byte 0x0000FFFF
+	.4byte 0x00010246
+	.4byte 0x0000FFFF
+	.4byte 0x00020094
+	.4byte 0x0000FFFF
+	.4byte 0xC8020052
+	.4byte 0x0000FFFF
+	.4byte 0xC8020053
+	.4byte 0x0010FFFF
+	.4byte 0xC8020055
+	.4byte 0x0010FFFF
+	.4byte 0xC8020056
+	.4byte 0x0000FFFF
+	.4byte 0xC8020013
+	.4byte 0x0010FFFF
+	.4byte 0xC8020015
+	.4byte 0x0010FFFF
+/* de-pointered slice data_0890ECE8: ptr=5 data=107 skip=0 */
