@@ -4,22 +4,94 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 REDA_Ch1Ally_Eirika[] __attribute__((section(".data.residue.08908590"))) = INCBIN_U8("data/residual/data_08908590.bin", 0, 8);
-u8 REDA_Ch1Ally_Seth[] __attribute__((section(".data.residue.08908598"))) = INCBIN_U8("data/residual/data_08908590.bin", 8, 8);
-u8 REDA_Ch1_0[] __attribute__((section(".data.residue.089085A0"))) = INCBIN_U8("data/residual/data_08908590.bin", 16, 8);
-u8 REDA_Ch1_1[] __attribute__((section(".data.residue.089085A8"))) = INCBIN_U8("data/residual/data_08908590.bin", 24, 8);
-u8 REDA_Ch1_2[] __attribute__((section(".data.residue.089085B0"))) = INCBIN_U8("data/residual/data_08908590.bin", 32, 16);
-u8 REDA_Ch1_3[] __attribute__((section(".data.residue.089085C0"))) = INCBIN_U8("data/residual/data_08908590.bin", 48, 8);
-u8 REDA_Ch1_4[] __attribute__((section(".data.residue.089085C8"))) = INCBIN_U8("data/residual/data_08908590.bin", 56, 8);
-u8 REDA_Ch1_5[] __attribute__((section(".data.residue.089085D0"))) = INCBIN_U8("data/residual/data_08908590.bin", 64, 8);
-u8 REDA_Ch1_6[] __attribute__((section(".data.residue.089085D8"))) = INCBIN_U8("data/residual/data_08908590.bin", 72, 8);
-u8 REDA_Ch1_Franz[] __attribute__((section(".data.residue.089085E0"))) = INCBIN_U8("data/residual/data_08908590.bin", 80, 8);
-u8 REDA_Ch1_Gilliam[] __attribute__((section(".data.residue.089085E8"))) = INCBIN_U8("data/residual/data_08908590.bin", 88, 8);
-u8 REDA_Ch1_7[] __attribute__((section(".data.residue.089085F0"))) = INCBIN_U8("data/residual/data_08908590.bin", 96, 8);
-u8 REDA_Ch1_8[] __attribute__((section(".data.residue.089085F8"))) = INCBIN_U8("data/residual/data_08908590.bin", 104, 8);
-u8 REDA_Ch1_9[] __attribute__((section(".data.residue.08908600"))) = INCBIN_U8("data/residual/data_08908590.bin", 112, 8);
-u8 REDA_Ch1_NpcCavalier[] __attribute__((section(".data.residue.08908608"))) = INCBIN_U8("data/residual/data_08908590.bin", 120, 24);
-u8 REDA_Ch1_NpcMercenary[] __attribute__((section(".data.residue.08908620"))) = INCBIN_U8("data/residual/data_08908590.bin", 144, 8);
+__asm__(
+"\t.section .data.residue.08908590, \"aw\", %progbits\n"
+"\t.global REDA_Ch1Ally_Eirika\n"
+"REDA_Ch1Ally_Eirika:\n"
+"\t.4byte 0x0000024C\n"
+"\t.4byte 0x00000000\n"
+"\t.section .data.residue.08908598, \"aw\", %progbits\n"
+"\t.global REDA_Ch1Ally_Seth\n"
+"REDA_Ch1Ally_Seth:\n"
+"\t.4byte 0x0000020D\n"
+"\t.4byte 0x00000000\n"
+"\t.section .data.residue.089085A0, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_0\n"
+"REDA_Ch1_0:\n"
+"\t.4byte 0x00018142\n"
+"\t.4byte 0x0000FFFF\n"
+"\t.section .data.residue.089085A8, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_1\n"
+"REDA_Ch1_1:\n"
+"\t.4byte 0x00018181\n"
+"\t.4byte 0x0010FFFF\n"
+"\t.section .data.residue.089085B0, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_2\n"
+"REDA_Ch1_2:\n"
+"\t.4byte 0x00018203\n"
+"\t.4byte 0x0010FFFE\n"
+"\t.4byte 0x00018183\n"
+"\t.4byte 0x0000FFFE\n"
+"\t.section .data.residue.089085C0, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_3\n"
+"REDA_Ch1_3:\n"
+"\t.4byte 0x000181C2\n"
+"\t.4byte 0x0020FFFF\n"
+"\t.section .data.residue.089085C8, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_4\n"
+"REDA_Ch1_4:\n"
+"\t.4byte 0x46018201\n"
+"\t.4byte 0x0000FFFF\n"
+"\t.section .data.residue.089085D0, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_5\n"
+"REDA_Ch1_5:\n"
+"\t.4byte 0x46018203\n"
+"\t.4byte 0x0000FFFF\n"
+"\t.section .data.residue.089085D8, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_6\n"
+"REDA_Ch1_6:\n"
+"\t.4byte 0x46018242\n"
+"\t.4byte 0x0000FFFF\n"
+"\t.section .data.residue.089085E0, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_Franz\n"
+"REDA_Ch1_Franz:\n"
+"\t.4byte 0x00000045\n"
+"\t.4byte 0x00000000\n"
+"\t.section .data.residue.089085E8, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_Gilliam\n"
+"REDA_Ch1_Gilliam:\n"
+"\t.4byte 0x00000046\n"
+"\t.4byte 0x0000FFFF\n"
+"\t.section .data.residue.089085F0, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_7\n"
+"REDA_Ch1_7:\n"
+"\t.4byte 0x0000020D\n"
+"\t.4byte 0x0000FFFF\n"
+"\t.section .data.residue.089085F8, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_8\n"
+"REDA_Ch1_8:\n"
+"\t.4byte 0x0000024D\n"
+"\t.4byte 0x0000FFFF\n"
+"\t.section .data.residue.08908600, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_9\n"
+"REDA_Ch1_9:\n"
+"\t.4byte 0x0000024C\n"
+"\t.4byte 0x0000FFFF\n"
+"\t.section .data.residue.08908608, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_NpcCavalier\n"
+"REDA_Ch1_NpcCavalier:\n"
+"\t.4byte 0x000000C2\n"
+"\t.4byte 0x0000FFFF\n"
+"\t.4byte 0x000000C0\n"
+"\t.4byte 0x0000FFFF\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x0000FFFF\n"
+"\t.section .data.residue.08908620, \"aw\", %progbits\n"
+"\t.global REDA_Ch1_NpcMercenary\n"
+"REDA_Ch1_NpcMercenary:\n"
+"\t.4byte 0xC1000082\n"
+"\t.4byte 0x00000000\n"
+);
 __asm__(
 "\t.section .data.residue.08908628, \"aw\", %progbits\n"
 "\t.global UnitDef_Event_Ch1Ally\n"
