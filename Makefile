@@ -1953,7 +1953,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/gap_000BBA3C.s \
                            asm/gap_000B46D4.s \
                            asm/gap_000B1030.s \
-                           asm/gap_000B0664.s \
                            asm/gap_000AE5A4.s \
                            asm/gap_0009D634.s \
                            asm/gap_0008359C.s \

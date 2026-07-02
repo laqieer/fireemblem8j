@@ -576,7 +576,6 @@ src/data/gap_0001BF98/gap_0001BF98.o: data/residual/gap_0001BF98.bin
 src/data/gap_000396D8/gap_000396D8.o: data/residual/gap_000396D8.bin
 src/data/gap_0008359C/gap_0008359C.o: data/residual/gap_0008359C.bin
 src/data/gap_0009D634/gap_0009D634.o: data/residual/gap_0009D634.bin
-src/data/gap_000B0664/gap_000B0664.o: data/residual/gap_000B0664.bin
 src/data/gap_000B1030/gap_000B1030.o: data/residual/gap_000B1030.bin
 src/data/gap_000BD054/gap_000BD054.o: data/residual/gap_000BD054.bin
 src/data/gap_000BD0C8/gap_000BD0C8.o: data/residual/gap_000BD0C8.bin
