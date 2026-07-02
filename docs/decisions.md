@@ -8886,3 +8886,41 @@ CI-green. The remaining 10 are either legitimately-binary (opaque/compressed/reg
 or JP-unique) or blocked on a dedicated subsystem decomp (class-reel/worldmap/sound-sample region
 naming). No fake-extraction, no classifier gaming. Literal audit MISS=0 is a future frontier gated on
 those subsystem lanes.
+
+## D329 — Extractable `.bin` sweep (waves 32-37): the audit MISS metric under-counts; UNCERTAIN 467→347
+
+**Trigger.** User: *"still many extractable .bin files left in data/"* — correct: `audit_bin_forms.py` MISS only
+counts `.bin` with a fe8u-basename editable twin, so it MISSED ~150 extractable/removable `.bin` classified
+UNCERTAIN (pointer tables, repoint orphans) in `data/residual/` + `graphics/frontier_*`.
+
+**Reliable extractability signal (matured over the sweep):**
+1. **nm ENCLOSING-symbol containment**, not exact-address: build `[start, start+size)` ranges from
+   `nm -S -n fireemblem8.elf`; a `.bin` word `0x08xxxxxx` is a relocatable pointer if it falls inside a named
+   symbol's range → `.4byte Sym + (target − Sym_start)`. This resolves interior pointers (e.g. Ch4Events +0x28
+   into `data_08A5ABAC`) that exact-match misses.
+2. **Genuine pointer table** = ~all words resolve; **MIXED** = only some (data blob + embedded callbacks) —
+   both carveable (`.4byte Sym+off` for pointers, `.short`/`.byte` for data).
+3. **Exclusions (false positives):** `.map.bin`/`.tsa.bin` tilemaps and `fontgrp` font-pixel data have
+   *coincidental* pointer-looking words; UnitDefinition attribute bitfields likewise. Resolver hardened:
+   FUNC candidates must be Thumb-func STARTS (addend 0, nm even-addr parity) — this correctly SKIPs coincidental
+   words rather than fake-relocating them.
+4. **Orphan test:** a `.bin` INCBIN'd ONLY by dead `DATA_INCBIN_ASM_EXCLUDE`'d asm (not built), with its symbol
+   provided by a built `.c` and its ROM region by a carved object/baseline, is a byte-neutral removal (many were
+   `repoint_table.py` leftovers). `.lz`-aware: `X.bin` is a build source (not orphan) if `X.bin.lz` is INCBIN'd.
+
+**Delivered (all byte-exact, shiftcheck 0 HIGH, CI-green, main verified green after each):**
+- wave32/33 (#111): 26 data/residual pointer tables (20 orphans + 6 carved) + 7 orphan menu tables.
+- wave34 (#112): 24 frontier-UI proc/pointer tables → `.4byte Sym`.
+- wave35 (#113): 16 event-info tables (15 repoint orphans + TrapData carve).
+- wave36 (#114): 27 data/residual orphans + 21 dead asm removed.
+- wave37 (#115): 27 mixed data+pointer tables + 1 orphan; 4 coincidental correctly skipped.
+- **PR #110 (unrelated real bug):** `btl_bg.mk` 7 FETSATOOL rules were plain multi-target → make ran the recipe
+  twice in parallel → race `Failed to read btl_bg_56.fetsa3.bin` → main CI red. Fixed to `&:` grouped targets.
+- **PR #79 completed:** stale (164 behind, unitdef_b superseded by wave17); rebased onto main keeping main's
+  typed `unitdef_b.c` + the `type_frontier_unitdef.py` full-only improvement. Merged (no PR left open).
+
+**Result:** audit **UNCERTAIN 467 → 347** (MISS 7, FLOOR 1381 unchanged). Final scan: **0 raw pure-pointer
+tables and 0 data/residual orphans remain.** The remaining ~347 UNCERTAIN are deeper-RE / floor: opaque
+`data_*`/`gap_*` byte-completeness residues (legitimately incbin), `fontgrp` font-pixel data (font-extraction
+domain), `.map.bin`/`.tsa.bin` tilemaps (FLOOR), JP-frontier data blobs (JP-unique), and ~9 hard tables whose
+pointers land in unnamed function interiors (unrelocatable). The MECHANICALLY-extractable frontier is exhausted.
