@@ -7,4 +7,23 @@
 /* D312 ID: funcmap exact (layout/us_jp_funcmap.tsv) + extern decl in include/eventcall.h
  * + byte-identical (60 B, whole symbol) to fe8u UnitDef_Ch4Ally_3. Byte-neutral rename
  * (u8[] def matches the established UnitDef pattern, cf data_08908CA0); section unchanged. */
-u8 UnitDef_Ch4Ally_3[] __attribute__((section(".data.residue.089092B0"))) = INCBIN_U8("data/residual/data_089092B0.bin");
+__asm__(
+"\t.section .data.residue.089092B0, \"aw\", %progbits\n"
+"\t.global UnitDef_Ch4Ally_3\n"
+"UnitDef_Ch4Ally_3:\n"
+"\t.4byte IrqMain + 0x105\n"
+"\t.4byte 0x00000148\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte DecodeString + 0x1E\n"
+"\t.4byte 0x00000108\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000000\n"
+);

@@ -699,6 +699,8 @@ blobs or (b) pointer tables misfiled under `graphics/frontier_df*/`. Both yielde
   df3_ending_000, ending_001. UNCERTAIN 294→285. menu_018 skipped (0 ROM pointers = pure data floor).
   Fixed an ABS-symbol shiftcheck edge: a reloc `S+addend` is HIGH iff its VALUE equals any symbol start
   (base irrelevant); ABS/sym_jp globals shadowing a real blob symbol must stay raw literals.
-- **wave43 (READY, low yield): 11 coherent small data/residual pointer tables** (files/wave43_candidates.txt).
+- **wave43 (DONE, PR#12x): 11 coherent small data/residual pointer tables → relocatable `.4byte`.**
+  UNCERTAIN 285→274. 11/11 carved (2 had over-captured tails living only in dead excluded-asm → byte-neutral
+  head-only carve). This was the LAST mechanically-carveable batch (files/wave43_candidates.txt).
 - **Honest remaining floor:** coordinate/affine data, byte0=0x00 opaque (85), invalid-Huffman structured (11),
   JP-unique frontier data with NO fe8u twin → fe8u would also incbin → satisfies "unless also .bin in fe8u".
