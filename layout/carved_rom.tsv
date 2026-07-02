@@ -1314,7 +1314,7 @@ B3E378	B3E54C	src/data/op_subtitle/op_subtitle_gfx.o(.rodata.dat_gTsa_OpSubtitle
 B3E54C	B3E688	src/data/op_subtitle/op_subtitle_gfx.o(.rodata.dat_gTsa_OpSubtitle_01_ref)	gTsa_OpSubtitle_01 region-diff (funcmap code-ref, 0KB)
 B3E740	B3E878	src/data/op_subtitle/op_subtitle_gfx.o(.rodata.dat_gTsa_OpSubtitle_03_ref)	gTsa_OpSubtitle_03 tilemap bin.lz (1202B; merged LZ tail data_08B3E86C)
 B3E878	B3EAB8	src/data/op_subtitle/op_subtitle_gfx.o(.rodata.dat_gTsa_OpSubtitle_04_ref)	gTsa_OpSubtitle_04 region-diff (funcmap code-ref, 0KB)
-B3EAB8	B3EBE4	src/data/op_subtitle/op_subtitle_gfx.o(.rodata.dat_gTsa_OpSubtitle_05_ref)	gTsa_OpSubtitle_05 region-diff (funcmap code-ref, 0KB)
+B3EAB8	B3EC33	src/data/op_subtitle/op_subtitle_gfx.o(.rodata.dat_gTsa_OpSubtitle_05_ref)	gTsa_OpSubtitle_05 tilemap bin.lz (dsize 1202; pinned JP-LZ 379B, gbagfx-irreproducible; merged LZ tail from frontier_df4_ending_016)
 B3EE00	B3F024	src/data/titlescreen/dat_titlescreen.o(.rodata.dat_titlescreen)	dat_titlescreen region-same shifted (0KB)
 B3F690	B3F7BC	src/data/AA6BFA/dat_data_AA6BFA.o(.rodata.dat_data_AA6BFA)	dat_data_AA6BFA region-same shifted (0KB)
 B3FCF4	B44B40	src/data/titlescreen/dat_data_titlescreen.o(.rodata.dat_data_titlescreen)	dat_data_titlescreen region-same shifted (19KB)

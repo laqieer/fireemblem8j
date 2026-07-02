@@ -19,4 +19,4 @@ SECTION(".rodata.dat_gTsa_OpSubtitle_00_ref") u8 gTsa_OpSubtitle_00[] = INCBIN_U
 SECTION(".rodata.dat_gTsa_OpSubtitle_01_ref") u8 gTsa_OpSubtitle_01[] = INCBIN_U8("graphics/misc_gfx2/gTsa_OpSubtitle_01.bin.lz");
 SECTION(".rodata.dat_gTsa_OpSubtitle_03_ref") u8 gTsa_OpSubtitle_03[] = INCBIN_U8("graphics/misc_gfx2/gTsa_OpSubtitle_03.bin.lz");
 SECTION(".rodata.dat_gTsa_OpSubtitle_04_ref") u8 gTsa_OpSubtitle_04[] = INCBIN_U8("graphics/misc_gfx2/gTsa_OpSubtitle_04.bin.lz");
-SECTION(".rodata.dat_gTsa_OpSubtitle_05_ref") u8 gTsa_OpSubtitle_05[] = INCBIN_U8("data/residual/gTsa_OpSubtitle_05.bin");
+SECTION(".rodata.dat_gTsa_OpSubtitle_05_ref") u8 gTsa_OpSubtitle_05[] = INCBIN_U8("graphics/misc_gfx2/gTsa_OpSubtitle_05.bin.lz");

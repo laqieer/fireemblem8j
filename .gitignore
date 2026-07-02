@@ -27,6 +27,12 @@ build/shiftcheck/
 *.lz
 *.rl
 *.fk
+# Pinned JP-LZ leaf (wave44 #4): gTsa_OpSubtitle_05's compressed stream is NOT
+# reproducible by gbagfx at any -mindist (JP used a tighter encoder: 379B vs
+# gbagfx's best 380B), so the exact JP .lz bytes stay COMMITTED (no-recipe pin
+# rule in graphics/misc_gfx2/misc_gfx2.mk). Merged from the old truncated
+# gTsa_OpSubtitle_05.bin + 79B head of frontier_df4_ending_016.
+!graphics/misc_gfx2/gTsa_OpSubtitle_05.bin.lz
 *.4bpp.h
 
 # TSA battle-background intermediates (D309). The editable source is the .png;
