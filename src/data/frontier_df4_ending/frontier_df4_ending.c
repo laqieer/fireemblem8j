@@ -224,7 +224,7 @@ __asm__(
 );
 u8 frontier_df4_ending_003_AC718C[] __attribute__((section(".data.frontier_df4_ending.gap3"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_003_AC718C.bin");
 u8 frontier_df4_ending_004_ACC378[] __attribute__((section(".data.frontier_df4_ending.gap4"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_004_ACC378.4bpp.lz");
-u8 frontier_df4_ending_005_ACEB54[] __attribute__((section(".data.frontier_df4_ending.gap5"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_005_ACEB54.bin");
+u8 frontier_df4_ending_005_ACEB54[] __attribute__((section(".data.frontier_df4_ending.gap5"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_005_ACEB54_0.4bpp.lz", "graphics/frontier_df4_ending/frontier_df4_ending_005_ACEB54_1.4bpp.lz");
 u8 frontier_df4_ending_006_AD02D4[] __attribute__((section(".data.frontier_df4_ending.gap6"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4.bin");
 u8 frontier_df4_ending_007_AD0CFC[] __attribute__((section(".data.frontier_df4_ending.gap7"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_007_AD0CFC.bin");
 u8 frontier_df4_ending_008_AD1444[] __attribute__((section(".data.frontier_df4_ending.gap8"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444.bin");
