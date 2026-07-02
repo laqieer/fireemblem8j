@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 7 | 0.4% |
-| **FLOOR** | 1381 | 81.2% |
-| **UNCERTAIN** | 313 | 18.4% |
-| **TOTAL** | 1701 | 100.0% |
+| **FLOOR** | 1399 | 82.3% |
+| **UNCERTAIN** | 294 | 17.3% |
+| **TOTAL** | 1700 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -48,11 +48,11 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | menu-strings | MISS | 2 | fe8u C literals (src/menu_def.c) |
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 0 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
-| TSA/.map.bin | FLOOR | 1232 | fe8u keeps TSA/tilemaps binary too |
+| TSA/.map.bin | FLOOR | 1250 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 313 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 294 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -72,12 +72,12 @@ under MISS, asserted by the self-test guards below).
 
 **FLOOR spot checks** (fe8u also keeps binary):
 
-- `data/residual/gBattleForecast_0.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u also keeps binary: graphics/misc/gBattleForecast_0.tsa.bin
+- `data/residual/data_08613A6C_0.map.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
 - `graphics/banim/efxbattle/TsaConf_BanimTmA1.map.bin` → **FLOOR** (efx-effect-bins) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
 - `graphics/opanim/OpAnimCharacterBG.map.bin` → **FLOOR** (opanim-tilemaps) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
-- `data/residual/gBattleForecast_1.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u also keeps binary: graphics/misc/gBattleForecast_1.tsa.bin
-- `data/residual/gBattleForecast_2.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u also keeps binary: graphics/misc/gBattleForecast_2.tsa.bin
-- `data/residual/gEndingDetails_0.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u also keeps binary: graphics/misc/gEndingDetails_0.tsa.bin
+- `data/residual/data_08613A6C_1.map.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
+- `data/residual/data_08616558_0.map.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
+- `data/residual/data_0861CCC0_0.map.bin` → **FLOOR** (TSA/.map.bin) — proof: fe8u keeps .map.bin binary (TSA/tilemap)
 
 **Self-test guards** (the script exits non-zero if any fail):
 
@@ -107,12 +107,30 @@ under MISS, asserted by the self-test guards below).
 
 </details>
 
-## FLOOR (1381) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (1399) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>1381 entries</summary>
+<details><summary>1399 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
+| `data/residual/data_08613A6C_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_08613A6C_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_08616558_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_0861CCC0_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_08630AD8_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_08636008_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_0864CAC8_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_086724CC_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_086724CC_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_086724CC_2.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_0867B54C_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_0867B54C_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_086AC554_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_086AC554_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_086BAB74_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_086BAB74_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_087644A8_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `data/residual/data_08764BF4_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `data/residual/gBattleForecast_0.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gBattleForecast_0.tsa.bin |
 | `data/residual/gBattleForecast_1.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gBattleForecast_1.tsa.bin |
 | `data/residual/gBattleForecast_2.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gBattleForecast_2.tsa.bin |
@@ -1497,9 +1515,9 @@ under MISS, asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (313) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (294) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>313 entries</summary>
+<details><summary>294 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1578,9 +1596,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_08610D90.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086114F8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08612134.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08613A6C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08616558.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0861CCC0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0861E7B0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0861E944.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0861EAF0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1591,20 +1606,15 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_0861F580.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0861F7FC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08620BB8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08630AD8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086314EC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0863230C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08636008.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08636294.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08645FC4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0864738C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08647830.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0864CAC8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_08659FFC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0865A268.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0865A694.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_086724CC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_0867B54C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0869BFF0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086A01E0.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086A0C24.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1618,7 +1628,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_086A488C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086A8F70.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086AAE60.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_086AC554.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086AEA74.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086B0964.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086B730C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1627,7 +1636,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_086B87AC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086B8D40.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086BA1E4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_086BAB74.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086BB064.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086BB154.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_086BC90C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1651,13 +1659,9 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_0872CC70.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0872CDCC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0872CFC4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_087644A8.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_08764BF4.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0877B894.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_087A2494.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_087A2554.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_087AEA64.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
-| `data/residual/data_087E1718.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0885612C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_0890375C.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
 | `data/residual/data_089038BC.bin` | ApConf/opaque | fe8u form unknown — needs RE (DEFERRED; do not fake-extract) |
@@ -1768,16 +1772,12 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/pilot_F97AC0_F97AC0.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/data/data_08576124_576150.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_003_5D48E0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_006_5D53FC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_007_5D737C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_009_5D8A8C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df3_ending/frontier_df3_ending_000_AC1BC0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df3_ending/frontier_df3_ending_001_AC3AA8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df3_ending/frontier_df3_ending_002_AC50A4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_000_AC059C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_001_AC0B90.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_003_AC718C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_005_ACEB54.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_007_AD0CFC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
@@ -1796,7 +1796,6 @@ under MISS, asserted by the self-test guards below).
 | `graphics/frontier_df4_menu/frontier_df4_menu_018_A92B38.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_020_A9454C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
