@@ -140,6 +140,20 @@ if [ -n "$source_file" ]; then
     [ -f "$source_file" ] || die "source file not found: $source_file"
 fi
 
+# ---- Guard: NEVER post a function already ported to src/ C -----------------
+# Posting a scratch for an already-matched function wastes community effort
+# (someone may re-derive/re-match a solved function). This happened once:
+# sub_80D17C8 was carved in-repo (LoadClassReelFontPalette, D307) yet its stale
+# scratch VAkhM was re-matched by a community member. See docs/decisions.md.
+# Derive the function name from --label (else the asm filename) and refuse if a
+# gbadisasm manifest already points it at a src/ object.
+guard_fn="${label:-$(basename "$asm_file" .s)}"
+guard_root="$(cd "$(dirname "$0")/../../.." && pwd)"
+guard_tsv="$guard_root/layout/carved_rom.d/gbadisasm_${guard_fn}.tsv"
+if [ -f "$guard_tsv" ] && cut -f3 "$guard_tsv" 2>/dev/null | grep -q '^src/'; then
+    die "refusing: $guard_fn is already ported to src/ C ($(cut -f3 "$guard_tsv" | head -1)). Posting an already-matched function wastes community effort — mark any existing scratch solved instead (scripts/tools/decompme/mark_solved.sh)."
+fi
+
 # ---- Build the JSON body safely (python3 handles all escaping) -----------
 # Inputs are passed via environment (not argv), so file contents never appear
 # in the process list. The assembled JSON is written to a temp file and POSTed

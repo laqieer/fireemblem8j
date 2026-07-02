@@ -62,8 +62,29 @@ def still_asm_set():
     return {f for f in fns if not re.match(r"^_[0-9A-Fa-f]{4,}$", f)}
 
 
+def carved_object(fn):
+    """If `fn` has already been ported to real source, return its object path
+    (e.g. 'src/LoadClassReelFontPalette.o'), else None. A function is considered
+    carved when its gbadisasm manifest points at a `src/` object instead of `asm/`
+    (that is how a matched port is wired — see D307). Such functions are correctly
+    absent from the still-asm set, so they must be reported as DONE rather than
+    silently dropped (otherwise a registry scratch for an already-matched function
+    looks 'missing')."""
+    tsv = os.path.join(ROOT, "layout", "carved_rom.d", "gbadisasm_%s.tsv" % fn)
+    if not os.path.exists(tsv):
+        return None
+    for ln in open(tsv):
+        cols = ln.split("\t")
+        if len(cols) >= 3 and cols[2].strip().startswith("src/"):
+            return cols[2].strip()
+    return None
+
+
 def api_get(path):
-    req = urllib.request.Request(API + path, headers={"User-Agent": UA, "Referer": "https://decomp.me/"})
+    req = urllib.request.Request(
+        API + path,
+        headers={"User-Agent": UA, "Referer": "https://decomp.me/", "Accept": "application/json"},
+    )
     with urllib.request.urlopen(req, timeout=25) as r:
         return json.load(r)
 
@@ -82,6 +103,15 @@ def scratch_status(slug):
 
 def decide(fn, reg):
     entry = reg.get(fn)
+    # 0. Already ported to src/ C (matched + carved). Report DONE so a registry
+    #    scratch for it isn't mistaken for missing/unmatched. If it also has a
+    #    matched decomp.me scratch/fork, the scratch can be marked solved.
+    obj = carved_object(fn)
+    if obj:
+        slug = entry["slug"] if entry else None
+        return {"fn": fn, "slug": slug, "state": "ALREADY_CARVED", "action": "DONE",
+                "detail": "already ported to %s (matched); scratch %s (if any) can be marked solved"
+                          % (obj, slug)}
     if not entry:
         return {"fn": fn, "state": "NOT_POSTED", "action": "DECOMP_THEN_POST",
                 "detail": "never posted -> reconstruct; if MATCH carve (no post), else post nearest C"}
@@ -107,7 +137,10 @@ def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     as_json = "--json" in sys.argv
     reg = load_registry()
-    fns = args if args else sorted(still_asm_set())
+    # Include registry functions (not only the still-asm set) so an ALREADY_CARVED
+    # function with a stale scratch is surfaced — a scratch left open for an
+    # already-matched function wastes community effort (someone may re-match it).
+    fns = args if args else sorted(still_asm_set() | set(reg.keys()))
     results = [decide(fn, reg) for fn in fns]
     if as_json:
         print(json.dumps(results, indent=2))
@@ -117,14 +150,23 @@ def main():
     for r in results:
         by_action.setdefault(r["action"], []).append(r)
         flag = "  <<<" if r["action"] in ("INTEGRATE", "INTEGRATE_FORK") else ""
+        if r["action"] == "DONE" and r.get("slug"):
+            flag = "  <== stale scratch: mark solved on decomp.me"
         print("  %-14s %-12s %s%s" % (r["fn"], r["state"], r["action"], flag))
     print("\n-- summary --")
-    for act in ("INTEGRATE", "INTEGRATE_FORK", "DECOMP_THEN_UPDATE", "DECOMP_THEN_POST", "POSTED_UNKNOWN", "RETRY"):
+    for act in ("INTEGRATE", "INTEGRATE_FORK", "DONE", "DECOMP_THEN_UPDATE", "DECOMP_THEN_POST", "POSTED_UNKNOWN", "RETRY"):
         n = len(by_action.get(act, []))
         if n:
             print("  %-18s %d" % (act, n))
     if by_action.get("INTEGRATE") or by_action.get("INTEGRATE_FORK"):
         print("\n  *** ACTIONABLE: a matched scratch/fork exists -> integrate it (free win, no re-derive).")
+    # A DONE function that still has a registry scratch must be closed out so the
+    # community never re-solves it (this happened once: sub_80D17C8 / VAkhM).
+    stale = [r for r in by_action.get("DONE", []) if r.get("slug")]
+    if stale:
+        print("\n  *** STALE SCRATCHES (already carved -> MARK SOLVED on decomp.me to avoid wasting community effort):")
+        for r in stale:
+            print("      %s: scratch %s" % (r["fn"], r["slug"]))
     return 0
 
 

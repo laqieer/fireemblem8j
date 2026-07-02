@@ -9056,3 +9056,30 @@ CORRECTION to my dispatch premise: I claimed none recompress via gbagfx (I had t
 worker found 3/4 recompress byte-exact through the proper `.png`→`.4bpp`→`.lz` pipeline, so only #4 needed
 pinning. LESSON (updates D332/D333): a compression sweep must decode the FULL stream from the ROM offset and
 detect truncated/split assets — do NOT judge extractability by gbagfx-ing the standalone first fragment.
+
+## D335
+**decomp.me hygiene: NEVER leave a scratch open for an already-solved function — it wastes community
+effort. Incident + prevention system.**
+
+INCIDENT: `sub_80D17C8` was ported to real C in-repo as `src/LoadClassReelFontPalette.c` (D307), but its
+decomp.me scratch `VAkhM` stayed OPEN/unmatched. A community member (TsilaAllaoui) then spent effort matching
+it (fork `NZpMu`, score 0) — re-solving a function that was already done. That effort was avoidable.
+
+ROOT CAUSE: (1) `scripts/tools/decompme/decomp_status.py` only scanned the still-asm set, so a registry
+scratch whose function was already carved (its `gbadisasm_<fn>.tsv` points at a `src/` object, not `asm/`)
+was silently dropped — never surfaced as DONE/stale. (2) `new_scratch.sh` had no guard against posting an
+already-carved function. (3) No routine marked a scratch SOLVED when the repo carved its function.
+
+PREVENTION (all landed here):
+- `decomp_status.py`: new `carved_object(fn)` + `ALREADY_CARVED`/`DONE` state; `main()` now unions the
+  registry keys with the still-asm set and prints a "STALE SCRATCHES — MARK SOLVED" warning for any carved
+  function that still has a scratch.
+- `new_scratch.sh`: refuses to post if `gbadisasm_<label>.tsv` already points at a `src/` object.
+- `mark_solved.sh` (new): PATCHes a scratch you own to the matched solution (from a score-0 scratch/fork or a
+  local `.c` + flags), so it compiles to score 0 and is annotated `SOLVED` (crediting the matcher). Used to
+  close `VAkhM` (now score 0, credit: TsilaAllaoui).
+- `registry.tsv`: `sub_80D17C8` annotated DONE (carved).
+
+RULE (permanent): before posting a scratch, confirm the function is NOT already in `src/`. Whenever a function
+is carved in-repo (or a fork of your scratch reaches score 0), immediately mark your scratch SOLVED with
+`mark_solved.sh`. Run `decomp_status.py` and act on every `DONE`/stale-scratch warning. Respect community time.

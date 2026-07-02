@@ -13,7 +13,8 @@ sub_80A730C	0P3Mz	sub_80A730C
 sub_80A73D4	6rBHq	sub_80A73D4
 sub_80BB240	KqnUn	sub_80BB240
 sub_80BCD74	aL39G	sub_80BCD74
-sub_80D17C8	VAkhM	sub_80D17C8
+# DONE (carved in-repo as src/LoadClassReelFontPalette.c, D307; scratch marked SOLVED to avoid wasted community effort):
+# sub_80D17C8	VAkhM	sub_80D17C8
 sub_800DE3C	Wqzj7	Event0F_CounterOps
 sub_8056890	Iz2Wd	EfxAdvanceFrameLut
 sub_8084CE4	TDzRM	sub_8084CE4
