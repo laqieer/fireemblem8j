@@ -8924,3 +8924,26 @@ tables and 0 data/residual orphans remain.** The remaining ~347 UNCERTAIN are de
 `data_*`/`gap_*` byte-completeness residues (legitimately incbin), `fontgrp` font-pixel data (font-extraction
 domain), `.map.bin`/`.tsa.bin` tilemaps (FLOOR), JP-frontier data blobs (JP-unique), and ~9 hard tables whose
 pointers land in unnamed function interiors (unrelocatable). The MECHANICALLY-extractable frontier is exhausted.
+
+## D330 — Extractable sweep completed (waves 38-39): fontgrp fonts + stragglers; frontier verified exhausted
+
+**Extends D329.** After D329's "mechanically-exhausted" claim, the autopilot correctly pushed further and two
+real extractable categories were found and carved:
+- **Wave 38 (#117) — fontgrp SJIS fonts (the largest single extractable, ~170KB):** 11 `graphics/*fontgrp*.bin`
+  blobs are arrays of fe8u's `struct Glyph` (0x48 each: `{sjisNext*, sjisByte1, width, bitmap[16]}`). fe8u commits
+  ZERO font `.bin` (it builds glyphs from `struct Glyph` source), so these were a true extractable. Carved all
+  **2616 glyphs** to typed `struct Glyph[]`, with the Shift-JIS `sjisNext` linked-list (2352 pointers) fully
+  relocated (264 NULL + 2240 blob-internal + 112 external → 5 named). Byte-exact via ld-relocation simulation.
+- **Wave 39 (#118) — stragglers:** 6 blobs → fe8u forms (`gAnimCharaPalConfig/PalIt/PalConfigUnused` u8 config
+  records; `gMenuMainObjs_5` u16 BGR555; `unit_icon_move_Bard/Dancer_motion` AP motion, byte-exact matching
+  fe8u's own committed dump form). Correctly skipped `gGfx_OpSubtitle_05` (non-standard JP-LZ gbagfx can't decode)
+  and `data_08BB8ED0` (43KB high-entropy opaque, no fe8u twin) — not fake-extracted.
+
+**Result — audit UNCERTAIN 467 → 330 across waves 32-39** (MISS 7, FLOOR 1381). **Final verification scan
+(nm enclosing-symbol + total-word-fraction): 0 structured pointer-dense tables and 0 data/residual orphans
+remain.** The mechanically-extractable `.bin` frontier is now genuinely exhausted. The remaining ~330 UNCERTAIN
+are: opaque `data_*`/`gap_*` byte-completeness residues (JP-unique — fe8u has no twin, so keeping them incbin
+does NOT violate "no `.bin` unless it's `.bin` in fe8u"; fe8u makes no editable form of them), broken/non-standard
+JP-LZ slices, ~9 hard tables whose pointers land in unnamed function interiors, and the opaque 43KB residue.
+These need deep per-file RE / font-graphics tooling, not mechanical carving. Every `.bin` with a clear fe8u
+editable form has been extracted.

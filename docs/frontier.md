@@ -677,3 +677,7 @@ These stay as asm by design; do not grind them.
 
 ## Extractable-.bin sweep (D329, waves 32-37) — user "still many extractable .bin in data/"
 The audit MISS metric under-counts extractable .bin (only fe8u-basename matches). nm ENCLOSING-symbol scan found ~150 more: ~105 pointer/mixed tables carved to `.4byte Sym+off` + ~78 orphan .bin removed (repoint_table leftovers, byte-neutral). **audit UNCERTAIN 467→347** (MISS 7, FLOOR 1381). Final scan: 0 raw pure-pointer tables, 0 data/residual orphans remain — mechanically-extractable frontier exhausted. Remaining ~347 UNCERTAIN = opaque data_*/gap_ residues (legit incbin), fontgrp font data (font domain), .map.bin tilemaps (FLOOR), JP-frontier blobs (JP-unique), ~9 hard even-into-code tables. Also fixed main-CI btl_bg parallel-race (#110, &: grouped targets) + completed stale PR #79.
+
+
+## Extractable sweep COMPLETE (D330, waves 38-39)
+fontgrp SJIS fonts (2616 glyphs → typed `struct Glyph[]`, largest extractable) + 6 straggler blobs (palette configs/AP motion/menu) carved. **audit UNCERTAIN 467→330** across waves 32-39. Final scan: 0 structured tables, 0 orphans remain — mechanically-extractable frontier exhausted. Remaining ~330 = JP-unique opaque residues (no fe8u twin, legit incbin), broken-LZ, hard ceilings. Every .bin with a clear fe8u editable form is extracted.
