@@ -569,19 +569,13 @@ src/data/frontier_df4_tail/frontier_df4_tail.o: graphics/frontier_df4_tail/data_
 src/data/frontier_df4_uistuff/frontier_df4_uistuff.o: graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin graphics/frontier_df4_uistuff/frontier_df4_uistuff_034_5C6E08.bin.lz graphics/frontier_df4_uistuff/frontier_df4_uistuff_035_5CDF84.bin graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.bin
 src/data/frontier_ending_cg/frontier_ending_cg.o: graphics/frontier_ending_cg/frontier_ending_cg_000_B27970.bin
 src/data/frontier_map_objtype/frontier_map_objtype.o: graphics/frontier_map_objtype/frontier_map_objtype_000_17B398.4bpp.lz graphics/frontier_map_objtype/frontier_map_objtype_001_181610.4bpp.lz graphics/frontier_map_objtype/frontier_map_objtype_002_188888.4bpp.lz
-src/data/gap/gap_00003080.o: data/residual/gap_00003080.bin
 src/data/gap/gap_00003240.o: data/residual/gap_00003240.bin
 src/data/gap/gap_00006274.o: data/residual/gap_00006274.bin
-src/data/gap/gap_00014818.o: data/residual/gap_00014818.bin
-src/data/gap/gap_00024670.o: data/residual/gap_00024670.bin
-src/data/gap/gap_00024818.o: data/residual/gap_00024818.bin
 src/data/gap_000062C0/gap_000062C0.o: data/residual/gap_000062C0.bin
 src/data/gap_0001BF98/gap_0001BF98.o: data/residual/gap_0001BF98.bin
 src/data/gap_000396D8/gap_000396D8.o: data/residual/gap_000396D8.bin
 src/data/gap_0008359C/gap_0008359C.o: data/residual/gap_0008359C.bin
 src/data/gap_0009D634/gap_0009D634.o: data/residual/gap_0009D634.bin
-src/data/gap_000B0664/gap_000B0664.o: data/residual/gap_000B0664.bin
-src/data/gap_000B1030/gap_000B1030.o: data/residual/gap_000B1030.bin
 src/data/gap_000BD054/gap_000BD054.o: data/residual/gap_000BD054.bin
 src/data/gap_000BD0C8/gap_000BD0C8.o: data/residual/gap_000BD0C8.bin
 src/data/gap_000C31D4/gap_000C31D4.o: data/residual/gap_000C31D4.bin

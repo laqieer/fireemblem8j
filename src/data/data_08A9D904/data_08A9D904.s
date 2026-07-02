@@ -113,7 +113,7 @@ data_08A9DA84:
 	.4byte 0x0000000E
 	.4byte 0x00000000
 	.4byte 0x00000003
-	.4byte gap_000B1030 + 0x1
+	.4byte DrawDifficultySprites_Loop + 0x1
 	.4byte 0x00000000
 	.4byte 0x00000000
 /* de-pointered slice data_08A9DA84: ptr=2 data=6 skip=0 */

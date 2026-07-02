@@ -22,3 +22,5 @@
 024218	0242BC	src/bmmenu_08024218.o(.text)	bmmenu_08024218(run): StealMapSelect_Select
 0248D0	0248FC	src/bmmenu_080248D0.o(.text)	bmmenu_080248D0(run): RideCommandEffect
 024A5C	024AA0	src/bmmenu_08024A5C.o(.text)	bmmenu_08024A5C(run): ItemMenu_Draw1stCommand
+024670	024690	src/bmmenu_08024670.o(.text)	bmmenu_08024670(run): DropSelection_OnConstruction, Selection_DoNothing
+024818	024874	src/bmmenu_08024818.o(.text)	bmmenu_08024818(run): SummonSelection_OnInit, SummonSelection_OnChange, YobimaSelection_OnInit, YobimaSelection_OnChange, PickSelection_OnInit
