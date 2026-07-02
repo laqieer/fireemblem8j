@@ -6,6 +6,9 @@ name: CI
 # it ONCE and folds in every gate. `Backfill decomp progress` stays separate
 # (manual workflow_dispatch only).
 #
+# Progress compute/report/upload run on push-to-main and manual dispatch only;
+# pull_request runs the build-match + shiftability gates only (fast PR checks).
+#
 # NO baserom.gba dependency. The build is self-contained (0 `.incbin "baserom.gba"`),
 # so building from committed source with baserom ABSENT and checking sha1 against
 # checksum.sha1 (7da0456...) is simultaneously the byte-match oracle AND the
@@ -100,19 +103,22 @@ jobs:
 
       # ---- Progress reports (non-blocking, reuse the built objects) ----
       - name: Compute progress
+        if: ${{ github.event_name != 'pull_request' }}
         run: python3 scripts/calcprogress.py | tee progress.txt
 
       - name: Generate decomp.dev report (jp_report)
+        if: ${{ github.event_name != 'pull_request' }}
         run: python3 scripts/gen-report.py progress.txt report.json
 
       - name: Upload decomp.dev report artifact
+        if: ${{ github.event_name != 'pull_request' }}
         uses: actions/upload-artifact@v4
         with:
           name: jp_report
           path: report.json
 
       - name: Publish progress to frogress
-        if: ${{ env.PROGRESS_API_KEY != '' }}
+        if: ${{ github.event_name != 'pull_request' && env.PROGRESS_API_KEY != '' }}
         continue-on-error: true
         run: |
           python3 scripts/upload-progress.py \
