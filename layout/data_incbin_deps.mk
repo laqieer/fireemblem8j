@@ -454,7 +454,6 @@ src/data/data_086B730C/data_086B730C.o: data/residual/data_086B730C.bin
 src/data/data_086B7E10/data_086B7E10.o: data/residual/data_086B7E10.bin
 src/data/data_086B8608/data_086B8608.o: data/residual/data_086B8608.bin
 src/data/data_086B87AC/data_086B87AC.o: data/residual/data_086B87AC.bin
-src/data/data_086B8D40/data_086B8D40.o: data/residual/data_086B8D40.bin
 src/data/data_086BA1E4/data_086BA1E4.o: data/residual/data_086BA1E4.bin
 src/data/data_086BAB74/data_086BAB74.o: data/residual/data_086BAB74_0.map.bin.lz data/residual/data_086BAB74_1.map.bin.lz
 src/data/data_086BB064/data_086BB064.o: data/residual/data_086BB064.bin
