@@ -799,6 +799,10 @@ src/nonmatching/*.s
 # scripts/permuter/setup.sh). permuter_settings.toml + scripts/permuter/ are tracked.
 /tools/decomp-permuter
 /nonmatchings/
+# Local decomp-permuter scratch: candidate <Fn>.c + target <Fn>.s pairs and *.wip
+# experiments (see docs/frontier.md, docs/handoff.md). Never committed -- a matched
+# result is ported into src/ + wired via layout/ fragments, not kept as scratch.
+/_permwork/
 
 # mizuchi: matching-decomp pipeline orchestrator (macabeus/mizuchi), vendored
 # locally via scripts/tools/mizuchi/setup.sh. The setup script + FE8J config
