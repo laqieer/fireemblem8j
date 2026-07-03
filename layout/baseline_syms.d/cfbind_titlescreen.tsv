@@ -1,5 +1,4 @@
 gProcScr_SkipTitleFxKeyListener	08B3EDE8	data	Title_StartSkipFxListener
-gProcScr_TitleScreen	08B3F024	data	StartTitleScreen_FlagFalse
 gProcScr_DrawTitleSprites	08B3EDD0	data	TitleScreenTryJumpIntroAnim
 Title_ClearLightExplosionScratch	080CAEC0	thumb	Title_PrepareLightExplosionFx
 gTitlescreen_1	08B3EE2C	data	DrawTitleLightBubbleSprites
