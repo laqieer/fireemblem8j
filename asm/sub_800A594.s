@@ -2,11 +2,11 @@
 	.set sub_800A34C, 0x0800A34C + 1
 	.set sub_80D6384, 0x080D6384 + 1
 	.section .text.sub_800A594, "ax", %progbits
-@ sub_800A594 @ JP 0x0800A594 - region-different, gbadisasm descriptive asm (D23)
+@ SplineSampleAtTime @ JP 0x0800A594 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800A594
+	.global SplineSampleAtTime
 	.thumb_func
-sub_800A594:
+SplineSampleAtTime:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -3,11 +3,11 @@
 	.set sub_8019174, 0x08019174 + 1
 	.set DivRem, 0x080D637C + 1
 	.section .text.sub_807D3BC, "ax", %progbits
-@ sub_807D3BC @ JP 0x0807D3BC - region-different, gbadisasm descriptive asm (D23)
+@ SelectSummonPos @ JP 0x0807D3BC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_807D3BC
+	.global SelectSummonPos
 	.thumb_func
-sub_807D3BC:
+SelectSummonPos:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

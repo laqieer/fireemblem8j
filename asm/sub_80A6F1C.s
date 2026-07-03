@@ -4,11 +4,11 @@
 	.set sub_80A6D34, 0x080A6D34 + 1
 	.set sub_80D65E0, 0x080D65E0 + 1
 	.section .text.sub_80A6F1C, "ax", %progbits
-@ sub_80A6F1C @ JP 0x080A6F1C - region-different, gbadisasm descriptive asm (D23)
+@ DecodeAndVerifyArenaRecord @ JP 0x080A6F1C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A6F1C
+	.global DecodeAndVerifyArenaRecord
 	.thumb_func
-sub_80A6F1C:
+DecodeAndVerifyArenaRecord:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

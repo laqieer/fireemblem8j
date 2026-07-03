@@ -18,11 +18,11 @@
 	.set sub_80A40A0, 0x080A40A0 + 1
 	.set sub_80D6370, 0x080D6370 + 1
 	.section .text.sub_80A390C, "ax", %progbits
-@ sub_80A390C @ JP 0x080A390C - region-different, gbadisasm descriptive asm (D23)
+@ Augury_InitResultScreen @ JP 0x080A390C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A390C
+	.global Augury_InitResultScreen
 	.thumb_func
-sub_80A390C:
+Augury_InitResultScreen:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sb
 	mov r6, r8

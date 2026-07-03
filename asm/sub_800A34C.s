@@ -3,11 +3,11 @@
 	.set sub_800A194, 0x0800A194 + 1
 	.set sub_80D6378, 0x080D6378 + 1
 	.section .text.sub_800A34C, "ax", %progbits
-@ sub_800A34C @ JP 0x0800A34C - region-different, gbadisasm descriptive asm (D23)
+@ SplineEvalCatmullRom @ JP 0x0800A34C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800A34C
+	.global SplineEvalCatmullRom
 	.thumb_func
-sub_800A34C:
+SplineEvalCatmullRom:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

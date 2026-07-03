@@ -4,11 +4,11 @@
 	.set sub_80A2E4C, 0x080A2E4C + 1
 	.set Div, 0x080D6374 + 1
 	.section .text.sub_80A2E64, "ax", %progbits
-@ sub_80A2E64 @ JP 0x080A2E64 - region-different, gbadisasm descriptive asm (D23)
+@ DivinationRankSpriteUpdate @ JP 0x080A2E64 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A2E64
+	.global DivinationRankSpriteUpdate
 	.thumb_func
-sub_80A2E64:
+DivinationRankSpriteUpdate:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

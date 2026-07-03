@@ -3,11 +3,11 @@
 	.set sub_8012684, 0x08012684 + 1
 	.set Div, 0x080D6374 + 1
 	.section .text.sub_800FAD0, "ax", %progbits
-@ sub_800FAD0 @ JP 0x0800FAD0 - region-different, gbadisasm descriptive asm (D23)
+@ GetUnitDefinitionFormEventScr @ JP 0x0800FAD0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_800FAD0
+	.global GetUnitDefinitionFormEventScr
 	.thumb_func
-sub_800FAD0:
+GetUnitDefinitionFormEventScr:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

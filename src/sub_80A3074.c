@@ -19,7 +19,7 @@ struct Proc80A3074
     /* 39 */ u8 rankOverall;
 };
 
-extern void sub_80A2E64(struct Proc80A3074* proc);
+extern void DivinationRankSpriteUpdate(struct Proc80A3074* proc);
 extern u8 gGfx_A9A39C[];
 extern u16 gPal_A9A4E4[];
 
@@ -39,5 +39,5 @@ void sub_80A3074(struct Proc80A3074* proc)
     Decompress(gGfx_A9A39C, (void*)0x06017000);
     CopyToPaletteBuffer(gPal_A9A4E4, 0xf8 << 2, 0x20);
 
-    StartParallelWorker(sub_80A2E64, proc);
+    StartParallelWorker(DivinationRankSpriteUpdate, proc);
 }
