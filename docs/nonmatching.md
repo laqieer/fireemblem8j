@@ -26,7 +26,7 @@ NON_MATCHING C **unblocks documentation and readability of the remaining
 hard functions WITHOUT ever touching `make compare`**. (For the current count
 of genuinely unmatched functions, see `docs/frontier.md` — the single source of
 truth. The ~5942 figure above is a historical snapshot from when this document
-was written; matching-C is now at 95.44%.) It is an *enhancement*,
+was written; matching-C is now at 99.82%.) It is an *enhancement*,
 not a goal change: CLAUDE.md already accepts descriptive asm as "real source"
 for the final goal. NON_MATCHING C is a staging area for future matching plus
 living documentation of intent — never a byte-match claim.

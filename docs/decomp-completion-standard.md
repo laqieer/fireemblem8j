@@ -5,9 +5,9 @@
 > state" figures throughout (25.6% matching-C, ~0.12% data, ~17% build
 > self-containment, ~59% named) are **historical snapshots from early in the
 > project**. Current ground-truth figures (from `scripts/calcprogress.py`):
-> matching-C **95.44% (8139 / 8528)**, build self-containment **100%**, strict
-> C/PNG extracted data **79.91%**, source-form data **99.26%**, named symbols
-> **85.23%**. For what remains, see `docs/frontier.md`.
+> matching-C **99.82% (8676 / 8692)**, build self-containment **100%**, strict
+> C/PNG extracted data **79.91%**, source-form data **99.31%**, named symbols
+> **95.53%**. For what remains, see `docs/frontier.md`.
 
 
 A prior effort drove the catch-all `asm/baserom.s` to **zero** `.incbin "baserom.gba"`
@@ -375,9 +375,9 @@ met.
 | Axis | Definition (denominator) | FE8J today | Target |
 |---|---|---|---|
 | **Build self-containment** | bytes producible from source ÷ 16,777,216 | ~~**~17%**~~ → **100%** (current) | 100% (self-contained build passes) |
-| **Matching-C functions** | matching-C funcs ÷ 8,528 | ~~**25.6%** (2,187)~~ → **95.44% (8139)** (current) | 100% (FE8U: 99.777%) |
+| **Matching-C functions** | matching-C funcs ÷ 8,692 | ~~**25.6%** (2,187)~~ → **99.82% (8676 / 8692)** (current) | 100% (FE8U: 99.777%) |
 | **Extracted data** | extracted-asset bytes ÷ data bytes (real `dataTotal`, **not** `data_bytes`) | ~~**~0.12%**~~ → **100% of measured set** (current) | 100% |
-| **Named symbols** | named ÷ total labels (no overflow) | ~~**~59%**~~ → **85.23%** (current) | 100% (FE8U: 0 `sub_`/`nullsub`) |
+| **Named symbols** | named ÷ total labels (no overflow) | ~~**~59%**~~ → **95.53%** (current) | 100% (FE8U: 0 `sub_`/`nullsub`) |
 | **Shiftability** (D296/D304/**D306**) | relocated data pointers vs. **real-pointer debt** (fe8u oracle + structural classification) | ~~43.79%~~ → ~~"complete/gate=0" (D305, RETRACTED)~~ → **14,383 relocated; honest gate = 364 + unmeasured compressed** (current) | **0 real un-relocated pointers, achieved via fe8u-style typed asset extraction (D306)** — NOT inline-asm `.4byte`. The D305 "gate=0/complete" was retracted (D306): the auditor was blind to (a) 364 real pointers stuck in `__asm__` `.4byte` literals, and (b) pointers inside COMPRESSED data (Huffman text, LZ77 banim/gfx) that no `0x08`-word scan can see. True completion = extract every region to its proper fe8u asset type (text/gfx/anim-script/map/music), where pointers are symbolic by construction. |
 | **Asset editability** (D296) | structured/logic data in typed source ÷ structured data bytes | opaque structured raw-incbin = **746 KB** | 100% — **0 opaque structured blobs** (graphics `.bin` exempt) |
 

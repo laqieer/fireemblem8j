@@ -9203,3 +9203,81 @@ decompressed and matched against the full fe8u *tracked* corpus, with gbagfx rec
 
 **Byte-exact:** docs/tooling only — no ROM bytes move (`make compare` = `fireemblem8.gba: OK`, `make shiftcheck` =
 0 HIGH).
+
+## D339 — Data metric reframed to SOURCE-FORM (99.31%); strict C/PNG-under-`src/` (79.91%) demoted to a comparison sub-line
+
+**2026-07-03.** The extracted-data axis is republished on an honest source-form basis. `scripts/calcprogress.py`
+axis 3, the `scripts/progress-template.txt` frogress `data` measure, and the README scorecard now headline
+**SOURCE-FORM data = 99.31% (13,840,532 / 13,937,336; 96,804 residual opaque bytes)**. The old strict
+**C/PNG-under-`src/`** counter — **79.91% (11,137,425 / 13,937,336)** — is demoted to a supplemental sub-line and is
+**NOT** the gate.
+
+**Why the strict counter under-counted real extraction.** Not every game asset is stored as C/PNG under `src/`.
+Several object roots are legitimately committed *editable source* that the path-filtered C/PNG counter ignored:
+`banim/data_banim.o` (compressing-linker over `banim/*_motion.s` + `graphics/banim` PNG/AGBPAL),
+`sound/songs/midi/*.o` (mid2agb from committed `.mid`), `sound/voicegroups/*.o`, and `asm/fe6sio.o` (mgfembp).
+Scoring only `src/`-path C/PNG therefore treated all of that extracted, editable data as "unextracted" → a material
+undercount that made real completion look ~20 points lower than it is.
+
+**Decision.** SOURCE-FORM is the honest completion metric and the published headline; the strict C/PNG figure stays
+only as a decomp.dev-style comparison sub-line. This is already landed in `calcprogress.py`
+(`source_form_data` / `source_form_data_pct`, credited via `source_form_data_group()` and netted against
+`opaque_data_bytes()` = the **96,804** opaque floor / asset-editability residual). Future sessions: do NOT "fix" the
+scorecard by re-promoting the 79.91% strict counter — that regresses to the undercount this entry corrects.
+Docs-only / ROM-neutral.
+
+## D340 — Issue #141 (opanim scroll-bg) root-caused + fixed: grayscale-ramp embedded palette mis-bind → real blue palette @`0x08B103D8`; supersedes the "opanim garbage" symptom
+
+**2026-07-03.** Issues **#140 and #141 are both resolved & closed** (#141 was a **REOPEN**). The opanim scroll-bg
+"garbage" was never a tile problem. **Root cause:** a **grayscale-ramp EMBEDDED palette was mis-bound to the tiles**,
+so the correct pixels rendered under the wrong CLUT.
+
+**Fix.** Bound the **real blue palette at `0x08B103D8`** across the **100 bands, byte-safe** (`make compare` stays
+OK; the palette is committed in-ROM as `graphics/opanim/08B103D8.gbapal`). Added a viewable assembled preview
+**`preview/tsa/opanim/OpAnimScrollBg.png` (240×800)** — 100 scroll-bg bands (`opanim1`..`opanim100`), each a
+240×8 GBA-screen-width strip that loops during the opaque animation (`preview/tsa/MANIFEST.tsv` independently
+corroborates the 240×800 dims, the 100-band count, and the `08B103D8.gbapal` binding).
+
+**Supersedes.** Any earlier "opanim garbage" wording recorded the *symptom* only; it is now root-caused + fixed.
+Future sessions should treat #141 as CLOSED and must not re-open on the stale "garbage" description.
+
+## D341 — 6 byte-exact matches break recorded "irreducible wall" claims (axis-2 22→16); matching-C 99.82% (8676/8692); decomp.me SOLVED@0 vs CARVED-IN-REPO rule
+
+**2026-07-03.** Six functions now compile **byte-exact from `src/`** and are removed from the `src/nonmatching/` set,
+moving axis-2 **22→16**: **Event2F_MoveUnit (`sub_800FF08`)**, **Event1B_TEXTSHOW (`sub_800E5CC`)**,
+**ClassStatsDisplay_Loop (`sub_80B8B28`)**, **LoadClassNameInClassReelFont (`sub_80D1844`)**,
+**`sub_80A73D4` (ArenaScoreboard_DrawRecord)**, and **`sub_80A730C` (DrawArenaRosterNames)**.
+
+**Stale "walls" SUPERSEDED (append-note, per `docs/maintenance.md`: "walls are provisional").** `Event1B_TEXTSHOW`,
+`Event2F_MoveUnit`, and `sub_80A730C` **each broke a previously-recorded "irreducible / not source-fixable / N-byte
+residual wall" claim**. Those claims are hereby marked SUPERSEDED — do NOT delete the original entries; this note
+reclassifies them. Abandoning a function on a stale "dead-end" label loses real matches.
+
+**The true remaining boundary.** Matching-C is now **99.82% (8676/8692)**. The **16 remaining** `src/nonmatching/*.c`
+are team-proven **agbcc register-coloring / spill walls** = **permuter-bound (not lever-bound)** — no source lever
+closes them. The sandbox **SIGTERMs long permuter runs**, so their path is **community-fork / permuter-compute**, not
+another in-session lever pass. Do not re-file them as "fixable in `src/`".
+
+**decomp.me rule (record it).** This session **SOLVED 6 scratches @0**. A **`-mjp-promote`** match can **NEVER** reach
+decomp.me **SOLVED@0** — stock agbcc rejects the flag (it is patched in only by `scripts/build_jp_agbcc.sh`), so a
+promote-only function's terminal decomp.me state is the descriptive **CARVED-IN-REPO** scratch name, not SOLVED.
+Treat CARVED-IN-REPO as the success terminal for promote-only matches.
+
+**Infra (folded).** `scripts/parallel/worktree_setup.sh` now provisions the **mgfembp** submodule (copies the source +
+symlinks the warm agbcc build) so gfx/data worktrees build without re-fetching the FE6-SIO payload toolchain; the
+commit-author email was corrected to **`laqieer@126.com`**.
+
+## D342 — Asset QA vs fe8u: 39 extraction mistakes fixed byte-exact; new `docs/asset_fe8u_diff.md`; comparison is BIDIRECTIONAL (fe8u is also fallible)
+
+**2026-07-03.** **39 extraction mistakes fixed byte-exact** — 8px-wide / grayscale strips re-extracted to the correct
+fe8u dims + palette (each still round-trips byte-identical to the ROM, so no ROM bytes move). A new doc
+**`docs/asset_fe8u_diff.md`** classifies the paired corpus: **175 unreasonable / 5 JP-US content / 2323 identical /
+712 JP-unique** (2503 paired PNGs + 712 no-twin).
+
+**KEY methodological decision — the comparison is BIDIRECTIONAL.** fe8u is **also** an AI-assisted / fallible
+extraction, so a JP↔US mismatch is **not** adjudicated by assuming fe8u is the oracle. It is decided by **view +
+code** — whichever side is *code-correct* (matches the ROM's actual tile width / mode / palette wiring) wins,
+independent of which repo it came from. Corollary observed in the corpus: same-form (same dims+mode) shared assets
+are all IDENTICAL, so JP/US divergence is carried by the 712 JP-unique assets, not by pixel diffs on shared-form
+twins. Future asset QA must keep this bidirectional discipline — do not "fix" a code-correct fe8j asset to match a
+mis-extracted fe8u twin.

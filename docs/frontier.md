@@ -3,7 +3,7 @@
 > **This is the SINGLE SOURCE OF TRUTH for what remains.** All other docs (README,
 > CLAUDE.md, strategy/porting/etc.) point here for "the frontier / what's left" and
 > must not fork it. Do **not** read `layout/nofuncmap_*.tsv` as the work list — it is
-> a stale, ~10× inflated classification cache (see "Pitfall" below).
+> a stale, grossly ~240× inflated classification cache (see "Pitfall" below).
 
 **Keep this current.** Refresh the numbers from `scripts/calcprogress.py` and the target lists from
 ground truth whenever an axis moves. Stale frontier data caused real wasted work (see "Pitfall" below).
@@ -61,6 +61,7 @@ multi-wave carve grind, but NO research-project blocker. Strict goal NOT yet rea
 OK + `make shiftcheck` 0 HIGH held on every banked lane. **Wave 14 (LANDED, −20 `.bin`: 1861→1841, MISS 260→240):** 20 raw banim OAM/AnimSprite tables → typed-C `struct AnimSpriteData[]` + `.4byte Sym` (df4_banim_a×10, df3_banim_aura×5, df3_banim_mid×4, dracozombie×1); fixed a Thumb-fn ABS32 off-by-one in `resolve_nm.py` (STT_FUNC pointees non-referenceable). **Wave 16 (audit correction, D326):** 48 banim/bg 30x20 u16 **screen tilemaps** (dracozombie 24, aurabg3 22, df4_banim_b 2) reclassified MISS→FLOOR — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`), so they are fe8u-FORM-parity and satisfy the strict goal as-is. **MISS 240 → 192.** (irreducible-as-editable; MISS=0 requires flooring them, not reducing.) **Wave 15 (LANDED, −5 `.bin`):** 5 more `frontier_df4_banim_b` pointer-table residuals → `.4byte Sym` relocation. **Session cumulative: MISS 318 → 187, `.bin` 1981 → 1836.** Remaining reducible: banim OAM residuals (mostly floor now — tilemaps + 2-aligned small tables), unitdef tables (47), efx name/config pools (misc_lo), pixel-gfx, + 14 frontier menu/ending/UI pointer residuals (next lane). No research blocker. **Wave 18 (LANDED, −6 `.bin`, UNCERTAIN 473→467):** 6 frontier menu/UI pointer-table residuals → `.4byte Sym` relocation (58–100% resolved to named globals). KEY: these were audit-UNCERTAIN (JP-divergent UI), so the strict goal is really **MISS + carveable-UNCERTAIN → 0** (FLOOR=fe8u-parity; the JP-only-opaque UNCERTAIN with unnameable mid-code pointers are de-facto floor). `.bin` 1836→1830. **Wave 19 (LANDED, −9 `.bin`, MISS 187→178):** 9 `frontier_df4_misc_lo` efx name/config pools → editable `.asciz` (~360 effect names) + typed `.byte`/`.4byte` (misc_lo _004-012). `_003` skipped (SJIS glyph char-code table = floor). **Session: MISS 318→178, `.bin` 1981→1821.** **Wave 17 (LANDED, −46 `.bin`, MISS 178→132):** ALL 46 `frontier_df3_unitdef_b` REDA/UnitDefinition residue tails carved to typed `struct REDA[]`/`UnitDefinition[]` (0 residues remain; the entire unitdef_b lane is cleared, incl. 9 external `base+offset` refs rewritten to name sub-arrays for shiftcheck). **Session cumulative: MISS 318→132, `.bin` 1981→1775.** **Wave 20 (LANDED, −40 `.bin`, MISS 132→92):** 40 raw battle-anim AnimSpriteData/anim tables (aurabg3 27 + df4_banim_b 13, 274 relocated pointers) → descriptive `.s` `.short`/`.4byte Sym`. **Session cumulative: MISS 318→92 (71% reduction), `.bin` 1981→1735.** Rule: only relocation-carve when 100% of pointers resolve to named globals (HIGH-neutral). **Wave 22 (LANDED, MISS 92→91):** `gEfxlvupfx_0.bin` (3492B) → typed `struct AnimSpriteData[291]`, region-same with fe8u `banim-efxlvupfx.c`. **Wave 21 (LANDED, −28 blobs, MISS 92→63):** 28 JP-LZ battle-anim blobs fully decomposed into per-sheet fe8u form — image sheets → `.png`+`.pal` (aurabg3/dracozombie/df4_banim_b tile+palette), tilemap sheets → `.map.bin`+build `.map.bin.lz` (FLOOR, fe8u-form parity). Frame-pointer coupling fix: repoint `<blob>+0xoff` → per-sheet symbol (addend 0) to stay HIGH-neutral. FLOOR +173. The remaining 19 JP-LZ blobs have raw non-LZ trailing (need hybrid decompose + typed-C-tail, a follow-up lane). **Session cumulative: MISS 318→63 (80% reduction), `.bin` 1981→1707.** **Wave 23 (LANDED, −12 `.bin`, MISS 63→51):** 12 raw battle-anim df4_banim_b tables carved — 8 relocatable `.4byte Sym`/command tables, _081 class-name pool → `.asciz`, _071 tail + _083 `.short` dumps, _069 orphan dropped; skipped _031 (opaque signed-16 LUT) + _085 (odd-aligned unrelocatable tails) as genuine floor. **Session cumulative: MISS 318→51 (84% reduction), `.bin` 1981→1695.** **Wave 24 (LANDED, −17 blobs, MISS 51→34):** ALL 17 MIXED JP-LZ battle-anim blobs fully eliminated via hybrid decompose — leading LZ image/tilemap sheets → `.png`/`.map.bin`(+`.lz`), raw non-LZ trailing → typed AnimSpriteData/`.short`/`.4byte Sym`. Coupling: external `<blob>+0xoff` frame refs repointed piece-aware (boundary→sheet sym addend 0; mid-trailing→trailing sym+addend). 0 HIGH by construction. FLOOR +31. **Session cumulative: MISS 318→34 (89% reduction), `.bin` 1981→~1670.** **Wave 25 (LANDED, −5, MISS 34→29):** 5 LZ pixel-gfx blobs carved — btl_bg_002 (2 img `.4bpp.lz` + tilemap), opanim_gfx_000/002/003 + df4_tail_001 (img sheets + whole-tile trailing → `.png` uncompressed `.4bpp` + sub-tile `.byte`); chap_title_115 skipped (odd 1202B sheet, no fe8u sink = floor). **Session cumulative: MISS 318→29 (91% reduction).** **Wave 27 (LANDED, MISS 29→28):** rom_header_080000C0 (360B) crt0 boot stub (fe8u src/crt0.s: stack setup + IrqMain dispatcher) carved from raw INCBIN → descriptive annotated .4byte ARM listing, byte-exact, kept in .data.residue. **Session cumulative: MISS 318→28 (91% reduction).** **Wave 26 (LANDED, −10, MISS 28→18):** 10 structured raw tables carved to descriptive `.short`/`.byte` (const_unit_ic 000/001, misc_lo 018/019/020, tail_000, df3_titlescreen_001, misc_lo_000a, gTitlescreen_0/1) keeping base symbol+section for external `&sym+off` refs. **Session cumulative: MISS 318→18 (94% reduction).** **Wave 29 (LANDED, MISS 18→17):** ObjectType9 (320B, region-diff chapter-asset slot 108) = u16 BGR555 color-palette bank → descriptive u16 array. **Session cumulative: MISS 318→17 (95% reduction).** **Wave 28 (LANDED, −6, MISS→11):** 6 misc_lo/font_cc tables carved — misc_lo_021 (5 slices, 28 gMid_*/Pal_PrepWindow relocations), misc_lo_000b/002b (.byte), misc_lo_003 (SJIS u16 → .short), font_cc_090 (.byte); misc_lo_002a was a stale ORPHAN (already produced by real typed C AiScript_Exec funcLut[]) → removed. **Session cumulative: MISS 318→11 (97% reduction).** Remaining 11 = genuine ceilings: voicegroup/voice ×4 (sound-sample-RE), LZ-no-sink ×3 (chap_title_115, misc_lo_015/016), region-diff/opaque ×3 (banim_b_031/_085, ch9events), + 1. Literal MISS=0 needs a dedicated JP sound-sample-naming lane. **Wave 30 (LANDED, MISS 11→10):** voicegroup_000 was misidentified — it is the m4a `gXcmdTable` dispatch table (12 ply_x* Thumb-fn pointers); carved to relocatable `.4byte ply_x*` (byte-exact via ld Thumb-bit OR, now shiftable). **Session cumulative: MISS 318→10 (96.9%).** **Wave 31 (LANDED, MISS 10→7):** the last 3 'sound-ceiling' pointer tables were ALSO extractable — voice_001 (202 ptrs → named worldmap/class-reel syms), voicegroup_001 (41 named DirectSoundData_horse* sample ptrs), voice_000 (records already relocated in typed C; residual slices → .byte/.4byte). Reusable finding: FE8J voice/voicegroup 'ceilings' are not floors — their targets are named. **Session cumulative: MISS 318→7 (97.8%).** Remaining MISS=63: ~31 banim (19 mixed JP-LZ + 12 misc), pixel-gfx 14 (mostly tiny region-diff fragments), menu-strings 11 (SJIS glyph/text ceiling), voicegroup 4 (sound-RE ceiling), rom_header crt0 1, ObjectType9 region-diff 1, +misc.
 
 ## Current state (2026-06-30) — asset-editability WAVE 8 landed + the 642-MISS heuristic split (D322)
+> [Superseded — see CURRENT STATE 2026-07-03 below] Historical snapshot; the axis line here (matching-C 99.65% / extracted-data 79.91% / named 95.33%) is stale — the live six-axis figures are in the authoritative 2026-07-03 table near the end of this doc.
 
 Wave 8 integrated through one clean `make compare` + `make shiftcheck` gate (byte-exact, sha1
 `7da0456…`, **0 HIGH**): **tracked committed `.bin` 1981 → 1919 (−62).**
@@ -96,6 +97,7 @@ tails → named `struct REDA[]` + typed `UnitDefinition[]`) **+ the documented J
 floor** (much of it fe8u-binary-parity). Deferred to wave 9.
 
 ## Current state (2026-06-30) — asset-editability waves 6-7 landed; strict goal NOT yet reached (D321)
+> [Superseded — see CURRENT STATE 2026-07-03 below] Historical snapshot; the MISS/`.bin` figures here predate waves 8-49 — the live axis figures are in the authoritative 2026-07-03 six-axis table near the end of this doc.
 
 The goal is the strict invariant **"no `.bin` kept if it is not `.bin` in fe8u."** D319's earlier
 "reference-parity end-state / ~3088 is the floor" claim was **RETRACTED** (D321): a wave-6
@@ -132,6 +134,7 @@ The conservative `audit_pointers.py --true-debt --gate` was restored to **0** at
 (495 was a classification gap from the D309 `data_08BB8ED0` blob rename, not real pointer debt).
 
 ## Current state (2026-06-29) — D313 asset-editability + shiftability EPIC landed (CI-green on main)
+> [Superseded — see CURRENT STATE 2026-07-03 below] Historical snapshot; the live axis figures are in the authoritative 2026-07-03 six-axis table near the end of this doc.
 
 A 12-unit `/batch` epic (D313, full plan `docs/epic_asset_editability_shiftability.md`)
 integrated to main (PR #52, `make compare` OK + `make shiftcheck` 0 HIGH + clean CI):
@@ -155,6 +158,7 @@ integrated to main (PR #52, `make compare` OK + `make shiftcheck` 0 HIGH + clean
   ApConf/gUnkData opaque (~180, needs RE — tracked in `docs/bin_audit.md`).
 
 ## Current state (2026-06-28)
+> [Superseded — see CURRENT STATE 2026-07-03 below] Historical snapshot; **two** axis lines here are stale: **(1)** MATCHING-C 99.64% / 31 still descriptive asm (live: **99.82% / 16 unmatched**), and **(2)** the SHIFTABILITY (axis #5) gate = 0 ✅ COMPLETE (D309) line just below (live: **gate = 1 (floor)** — the fe8u-confirmed coincidental constant `0x080896ED`). The live figures are in the authoritative 2026-07-03 six-axis table near the end of this doc.
 - BUILD SELF-CONTAINMENT: 100%
 - **SHIFTABILITY (axis #5): gate = 0 ✅ COMPLETE (D309, verified).** `scripts/audit_pointers.py --true-debt --gate` = 0 — the user-ratified criterion is met. The last stuck `.4byte 0x0800260C` literal (in `data_0890915C`) was a coincidental `struct UnitDefinition` bitfield word, not a pointer; fixed by typing that blob as `struct UnitDefinition[4]` (= fe8u `UnitDef_Ch4Ally_1`+`_2`, byte-exact). ~14,800 relocated. The 5 remaining "CODE-axis literal pools" are NOT in the gate — they relocate when their Thumb fn is decompiled (a #2/code-axis item). Historical context below.
 - _Historical (pre-D309):_ relocated 14,383 (from 7,639); honest gate = 364 + unmeasured compressed (D305 'gate=0' RETRACTED by D306). The literal raw-`0x08xxxxxx` count is the WRONG invariant for completion: it is dominated by The literal raw-`0x08xxxxxx` count (2,861) is the WRONG invariant for completion: it is dominated by **coincidental constants** (2,564 — graphics pixels, packed unit-stat bitfields where byte3=0x08, sine-table values, sound samples) that are NOT pointers and CANNOT be relocated (doing so corrupts the shifted game). Authoritative metric: `scripts/audit_pointers.py --true-debt --gate` (fe8u oracle + positive-evidence structural classification), NOT the literal raw count. **Gate = confirmed-real + unclassified DATA-pointer debt = 9**, all sparse words (0.5-1% density) in 18-21KB undecompiled `gUnkData_*` data blobs pointing to scattered/deep (60-130KB) interiors = coincidental, conservatively left unclassified (proving them airtight needs decompiling the blobs = the EDITABILITY axis, not shiftability). D304 fixed 6 real converter/auditor bugs (hex-offset slice regex, per-word gate convergence, slice-base address, auditor `incbin_ranges` hex+ERE, `RESID` crash, `func+1` thumb-fn-ptr mis-classified as coincidental) and de-pointered 6 real-pointer clusters: `impure_data` newlib `_reent` self-pointers (+3), **gFontgrp Shift-JIS `sjisNext` glyph linked-list (+234)** via `--glyphs`, `EventScr_Ch16A_1` event-script command-0x0A40 operands (+2), and `lut.29` ProcScr SubtitleHelp callbacks + data refs (+7). `gap_000B1030`'s "pointers" are a Thumb function's literal pool → code-decompilation axis, not data debt.
@@ -198,6 +202,7 @@ integrated to main (PR #52, `make compare` OK + `make shiftcheck` 0 HIGH + clean
     rotated `[sp,#N]` slot assignment = spill-SLOT-ORDER (agbcc assign_stack_local numbering, INVARIANT to C source,
     default permuter plateaus, NO C-level fix exists) → transmuter-only. ClassStatsDisplay_Loop is SLOT-ORDER (6B 3-slot
     rotation). Diagnostic: bigger=pressure(try split lever), exact-size-rotated-[sp,#N]=slot-order(transmuter batch).
+    > [SUPERSEDED 2026-07-03] ClassStatsDisplay_Loop (sub_80B8B28) is now MATCHED byte-exact in-repo and banked — this SLOT-ORDER / "NO C-level fix exists" / transmuter-only verdict is STALE. This retracts every wall/NEAR/"genuine-residual" mention of the function throughout this log (the REG-COLORING NEAR backlog, the SPILL-SLOT / REG-ROTATION backlog, and the permuter-backlog list mentions below). It is one of the session's 6 byte-exact axis-2 wins (see the authoritative 2026-07-03 block near the end).
   - +LinkArenaTeamBuild_Init (sub_8046924, verbatim fe8u sio_term.c, msgid -0x75 shift; "Str→StrEx" was a
     gbadisasm naming artifact). +sub_8048F78 (JP-only SIO text-draw leaf, from-scratch, 26/26 identical).
   - 🟢 **PRODUCTIVE VEIN: JP-only small wrappers/leaves** (the size-match harness EXCLUDES these — no fe8u row to
@@ -221,6 +226,7 @@ integrated to main (PR #52, `make compare` OK + `make shiftcheck` 0 HIGH + clean
     decomp-permuter + agbcc-codegen-levers (exhausted) — treat as the likely-permanent residual. **DO NOT hand-grind
     region-same ports; DECODE-but-don't-grind (save for a future deeper agbcc-reg-alloc-config attempt), carve JP-only
     leaves + JP-divergent reconstructs instead — that's where ALL the remaining +matching-C is.**
+    > [SUPERSEDED 2026-07-03] ClassStatsDisplay_Loop (sub_80B8B28) has since MATCHED byte-exact in-repo and was banked/removed from the nonmatching set — so for it this "LIKELY GENUINE RESIDUAL / source-invariant / not source-fixable / likely-permanent" wall claim is FALSE. (The block's OTHER members remain in `src/nonmatching/*.c` — see the authoritative 16-function frontier list near the end.)
   - +efxLuceBGCOL spawner+loop pair (sub_8067040/8067160, JP-only efx; `int terminator` not s16; 6 data binds).
   - 💡 **KEY TECHNIQUE (seb-worker, efxLuceBGCOL): the default permuter FINDS the unlocking source mutation even when
     its SCORE never reaches 0.** The score-N best-output's source diff often contains the mutation (e.g. splitting
@@ -292,6 +298,7 @@ integrated to main (PR #52, `make compare` OK + `make shiftcheck` 0 HIGH + clean
     • **ClassStatsDisplay_Loop (sub_80B8B28)** — reconstruct done (drop GetClassReelName + 32B buf, inline classReelEnt
       deref, (u8*) cast, drop null-guard; frame 0x30→0x10); residual = 6B cyclic rotation of 3 spill slots
       ([sp,#4]/[sp,#8]/[sp,#0xc]); 14 source variants + 15k permuter @ plateau 5. Worktree /home/laqieer/fe8j-wt-class.
+      > [SUPERSEDED 2026-07-03] ClassStatsDisplay_Loop (sub_80B8B28) is MATCHED byte-exact in-repo and banked — the "worktrees PRESERVED for a future pass / UNLOCK = the transmuter" plan above is stale for it; no permuter/transmuter pass is needed. (AdjustNewUnitPosition / sub_807C8DC is still open — it is #7 in the authoritative 16-function frontier list near the end.)
     • **AdjustNewUnitPosition (sub_807C8DC)** — exact 139-instr; 3-register loop-counter rotation; plateau 485/825.
       Worktree /home/laqieer/fe8j-wt-anup (+ _permwork/AdjustNewUnitPosition.best485.c).
     **UNLOCK = the transmuter** (agbcc+Thumb+Claude-Code-in-the-loop permuter rewrite, github.com/macabeus/transmuter,
@@ -645,7 +652,7 @@ needs real reconstruction (asm → behavior → idiomatic C → byte-match). Wor
 
 ## How to find REAL targets (ground truth — NOT the stale tsv lists)
 The unmatched frontier = functions whose `.text` still comes from `asm/` (what calcprogress counts):
-- **~432 `asm/sub_*.s` stubs** (region-different gbadisasm code) — the bulk of the real frontier.
+- **16 `asm/sub_*.s` stubs** — the current permuter-bound frontier (see "Code frontier — the 16 permuter-bound functions" later in this doc).
 - plus any named region-diff `.s` and functions still inside the `asm/baserom.s` incbin.
 
 A target is REAL **iff** it is still in `asm/` (a `sub_<H>.s` exists, or still in the baserom incbin)
@@ -653,7 +660,7 @@ and is **not** already a `src/*.c` (including carved-as `src/<module>_<addr>.c`)
 team, **spot-check a sample** — if they're already carved, the list is stale; fix it first.
 
 ### Ground-truth reality check (2026-06-22) — the remainder is HARD, not a sweep
-The 432 `sub_*.s` stubs are **scattered across all ROM regions** (0x080Axxxx:65, 0x0800xxxx:55,
+The 432 `sub_*.s` stubs (2026-06-22 snapshot; the frontier is now **16** — see the authoritative 2026-07-03 six-axis table below) are **scattered across all ROM regions** (0x080Axxxx:65, 0x0800xxxx:55,
 0x080Dxxxx:44, …), **mostly UNNAMED** `sub_<hex>`, and **region-different**. The JP "areas" above
 (sio, name-entry, augury, save) are **already largely carved** under `sub_<addr>`/`module_addr` names
 — so they are a *priority lens*, not a pool of easy named ports. The fe8u-module subsystem-sweep
@@ -665,9 +672,9 @@ frontier** (data is ~94% of ROM; port fe8u `scripts/gfxtools/`).
 
 ### ⚠️ Pitfall (do not repeat)
 `layout/nofuncmap_region_*.tsv` is a **stale, un-pruned classification cache**: it lists ~3,926
-entries but only ~389 are truly unmatched (≈10× inflated; addresses for region-different entries are
+entries but only 16 are truly unmatched (≈240× inflated; addresses for region-different entries are
 also stale/wrong). **Never define a work frontier from it.** Reconcile any scope discrepancy against
-calcprogress (389) before spending team effort. Regenerate via `scripts/classify_nofuncmap.py` if the
+calcprogress (16) before spending team effort. Regenerate via `scripts/classify_nofuncmap.py` if the
 canonical lists are needed, but the `asm/sub_*.s` set is the authoritative remainder.
 
 ## Data frontier (future — data is ~94% of the ROM)
@@ -754,6 +761,65 @@ The .bin count held (these carve real code/pointers out of source-form data, not
   The 3 MISS are documented TSA-tilemap/string-pool floor (audit basename false-positives).
 - **Pointer-debt COMPLETION GATE = 1** (`audit_pointers.py --true-debt --gate`) — the floor; the single residual is
   the fe8u-confirmed coincidental constant above. No real code remains stored as binary data; no function pointers missed.
+
+### Six-axis scorecard refresh (2026-07-03, verbatim from `python3 scripts/calcprogress.py`; supersedes every older "Current state" axis line above)
+| # | Axis | Value | Detail |
+|---|---|---|---|
+| 1 | Build self-containment | **100.00%** | 0 `.incbin "baserom.gba"`; `make` builds the byte-identical ROM with `baserom.gba` absent. The only ungameable number — met. |
+| 2 | Matching-C | **99.82% (8676/8692)** | 8549 `src/*.c` + 127 libc/libgcc real source; **16 still descriptive asm** = the permuter-bound frontier listed below (axis-2 dropped **22 → 16** this session: 6 byte-exact matches banked). |
+| 3 | Extracted data | **source-form 99.31%** (13,840,532 / 13,937,336) | bytes built from committed *editable* source in ANY form (C/PNG + `banim` compressing-linker from `banim/*_motion.s` + `graphics/banim` PNG/AGBPAL, `sound` mid2agb from `.mid`, voicegroup macro `.s`, m4a tables, mgfembp FE6 payload). **96,804 residual opaque bytes.** Supplemental strict C/PNG-under-`src/` subset = **79.91%** (11,137,425 / 13,937,336) — a narrow decomp.dev-style counter that path-filters out the ~20% legit banim/sound source; kept as a sub-line, **NOT** the gate. |
+| 4 | Named symbols | **95.53% (12,323/12,899)** | **576** placeholders; ~1,611 `banim_`/`gfx_`/`snd_` labels are fe8u-auto-named → structurally < 100%. |
+| 5 | Shiftability | **completion gate = 1 (FLOOR)** | `audit_pointers.py --true-debt --gate`; the single residual is the fe8u-confirmed coincidental constant `0x080896ED` in `frontier_df4_misc_lo` — a documented floor false-positive, correctly NOT force-relocated. Consistent with the "COMPLETION GATE = 1" line above. |
+| 6 | Asset editability | **96,804 bytes** opaque raw-incbin | the `.bin` frontier remaining (was ~101,980 last session; −5,176 via the opanim palette fix + 39 asset-QA reshapes). |
+
+### Code frontier — the 16 permuter-bound functions (axis-2 = 22 → 16 this session)
+**6 functions matched byte-exact from `src/` this session and were REMOVED from the nonmatching set** — see the dated
+in-line supersede notes for each: Event2F_MoveUnit (sub_800FF08), Event1B_TEXTSHOW (sub_800E5CC) [both banked by Bravo],
+ClassStatsDisplay_Loop (sub_80B8B28), LoadClassNameInClassReelFont (sub_80D1844), sub_80A73D4 (ArenaScoreboard_DrawRecord),
+sub_80A730C (DrawArenaRosterNames). **Event1B_TEXTSHOW, Event2F_MoveUnit, and sub_80A730C each broke a
+previously-recorded "irreducible wall / not source-fixable" claim.**
+
+> [SUPERSEDED 2026-07-03] LoadClassNameInClassReelFont (sub_80D1844) is MATCHED byte-exact in-repo and banked — any earlier wall/NEAR/"class-reel-font ceiling" framing for it is stale.
+> [SUPERSEDED 2026-07-03] sub_80A73D4 (ArenaScoreboard_DrawRecord) is MATCHED byte-exact in-repo and banked — any earlier Link-Arena "reg-coloring ceiling / not source-fixable" framing for it is stale.
+> [SUPERSEDED 2026-07-03] sub_80A730C (DrawArenaRosterNames) is MATCHED byte-exact in-repo and banked — this breaks the "REG-COLORING NEAR backlog = LIKELY GENUINE RESIDUAL / source-invariant / not source-fixable / likely-permanent residual" wall claim for the region-same Link-Arena ports (the general claim in the REG-COLORING backlog block above).
+
+**The 16 REMAINING functions = the `src/nonmatching/*.c` set (confirmed `ls src/nonmatching/*.c | wc -l` == 16).** Frame these
+as **team-proven agbcc register-coloring / spill-slot-order walls = permuter-bound, NOT lever-bound**: a faithful port + the
+noted flag reaches exact structure/size, but the residual is a whole-function reg-alloc / spill tie-break that no C-source form
+flips (source-invariant). The deterministic lever kit is exhausted for them. The sandbox SIGTERMs long permuter runs, so their
+realistic path is **community-fork / permuter-compute (decomp.me)**, not another lever sweep.
+⚠️ **maintenance.md caveat:** the `// FLAGS: ... EXACT` annotations in these headers are UNRELIABLE — e.g. sub_800A34C's
+`-fno-gcse = EXACT` reproduces the right *size* (0x248) but **536/584 bytes differ**. **`make compare` is the only oracle.**
+
+Per-function (name — one-line blocking-diff seed, from the `src/nonmatching/*.c` header):
+1. **sub_8001570** — AddAttr2dBitMap (mapanim_eventcall); FLAGS `-mjp-promote`; reg-allocator-internal save-order tie-break (levers §7 / D284); a 67k-iter permuter reported "score 0" but that scorer is register-blind (false-green).
+2. **sub_800A34C** — worldmap coeff/segment-search; agbcc whole-function reg-coloring wall; `-fno-gcse` gives EXACT size 0x248 but **536/584 bytes differ** (pts<->coeffA coloring swap) — the unreliable-"EXACT"-annotation example.
+3. **sub_800A594** — sibling of sub_800A34C; spill-decision / reg-coloring wall (JP spills `count`, keeps `pts` in r7 — whole-fn renumber); permuter base 7215 → best 5795 (never near 0).
+4. **sub_800E1FC** — Event18_ColorFade; FLAGS `-mjp-promote`; 204/204 mnemonic-identical, ~95B pure spill/reg-alloc residual (extra spill: red→[sp,#8] vs JP keeps it in sl) — the flagship spill-NEAR (§7).
+5. **sub_800FAD0** — GetUnitDefinitionFormEventScr (fe8u eventscr.c:2376); FLAGS `-mjp-promote`; clean register-permutation NEAR (colors `i` in callee-saved r7 vs JP arg2 in caller-saved).
+6. **sub_8057F80** — PrepareBattleGraphicsMaybe; genuinely region-different (2936B region-diff); a byte match is out of scope (STRETCH-only permuter).
+7. **sub_807C8DC** — AdjustNewUnitPosition; FLAGS `-mjp-promote` (s8 ASR on ix/iy); if-branch register coloring + unit param spilled to r8 (hi reg) → cascading diffs; 3-reg loop-counter rotation.
+8. **sub_807D3BC** — FLAGS `-mjp-promote` (s8); JP takes an extra 4-byte spill slot [sp,#0x84] (spills the outer-loop var) → frame 140 vs 144; permuter base 1695, plateau ~875.
+9. **sub_80A2E64** — Augury/Link-Arena; plain `-O2` (the header's `-fno-gcse` note is WRONG); reg-alloc / IV-scheduling tie-break (spill proc→[sp,#4] or permute r8<->r9 / sl<->r9 / r4<->r5<->r6).
+10. **sub_80A3300** — Augury; sibling of sub_80A2E64; reg-coloring tie-break; canon-diff 27/106 insns, permuter 285 from base 1850 (spill i+1: `sub sp,#12` vs `#8`).
+11. **sub_80A3528** — Augury; FLAGS `-Os` (plain `-O2` byte-identical too); invariant-scheduling + reg-coloring (won't pre-schedule the >0x1f field-offset address adds); a 9797-iter permuter pass did not converge.
+12. **sub_80A390C** — Augury; zero-fills a 0x18-byte `struct GameRankSaveData` scratch (sub_80D6370 = CpuSet); reg-coloring + field-pointer materialization (reg-pressure); <10-byte tail, outside the single-pass permuter budget.
+13. **sub_80A6D34** — Augury/Link-Arena; FLAGS `-O2` (NOT `-mjp-promote`); PURE reg-coloring — the instruction SEQUENCE is identical; decomp-permuter territory.
+14. **sub_80A6E4C** — Augury/Link-Arena; spill-decision / reg-coloring NEAR (§7 / D284); `-O2`: 212B vs 208B JP (4B larger literal pool from extra reg-reloads), 152 differing bytes.
+15. **sub_80A6F1C** — Augury/Link-Arena; FLAGS `-O2`; blocking class = callback-in-a-high-reg via a `_call_viaN` veneer (coloring-only residual); beyond the ~10-byte cheap-permuter window.
+16. **sub_80C05C8** — GmapScreen2_Loop; CLEAN reg-coloring NEAR (structure byte-exact); the SAME C compiles to a MATCHING coloring on the US axis (fe8u's checked-in worldmap_screen2.s + the US ROM MATCH) but a different JP coloring — a genuine agbcc JP-vs-US divergence.
+
+**Augury / Link-Arena subsystem = sub_80A2E64 / sub_80A3300 / sub_80A3528 / sub_80A390C / sub_80A6D34 / sub_80A6E4C / sub_80A6F1C (7 of the 16).**
+
+### Asset-editability / QA wins this session (issues #140 + #141 closed)
+- **#141 opanim scroll-bg palette FIXED (asset-editability win).** The opanim "garbage" scroll background had been decoded
+  against a grayscale-ramp EMBEDDED palette; it is corrected to the real **blue palette at `0x08B103D8`** across 100 bands,
+  byte-safe. A viewable preview `preview/tsa/opanim/OpAnimScrollBg.png` (240×800 assembled bg) was added. **#140 + #141 both
+  resolved & closed.**
+- **Asset-QA vs fe8u.** 39 extraction mistakes fixed byte-exact (8px-wide / grayscale strips reshaped → fe8u dims + palette).
+  The full cross-check lives in **`docs/asset_fe8u_diff.md`** (175 UNREASONABLE extraction mistakes / 5 JP-US content /
+  2323 IDENTICAL / 712 JP-unique) — reference it, do not duplicate. **Bidirectional caveat:** fe8u is ALSO AI-extracted and
+  fallible, so adjudicate each case by view + code, NOT by trusting fe8u blindly.
 
 ## D337 (2026-07-03): remaining .bin frontier declared EFFECTIVELY AT OPAQUE FLOOR
 A read-only scoping pass (`frontier-scope`) re-examined the 226 UNCERTAIN with the full multi-signal extractability

@@ -3,6 +3,14 @@
 **Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
+> **[REFRESH 2026-07-03 — axis snapshot superseded; SSoT = [`frontier.md`](frontier.md).]** Current
+> ground-truth (calcprogress): self-containment **100%**, matching-C **99.82% (8676/8692, 16 still-asm)**,
+> source-form data **99.31%** (strict C/PNG subset 79.91%), named **95.53%**. Since this 2026-06-24
+> handoff, **6 of the NEAR/wall fns named below MATCHED byte-exact in-repo (banked, removed from
+> `src/nonmatching/`)**: Event2F_MoveUnit, Event1B_TEXTSHOW, ClassStatsDisplay_Loop,
+> LoadClassNameInClassReelFont, sub_80A73D4, sub_80A730C. The `## State`/in-flight blocks below are the
+> 2026-06-24 mid-session snapshot (append-only history).
+
 ## State (HEAD clean, `make compare` → OK, self-contained YES)
 - **HEAD `8dbb4a64b`** (run `git rev-parse --short HEAD`). **main GREEN, self-contained 100%.**
 - BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 98.15% (8370/8528, ~158 left)** 🎉 crossed 98% · EXTRACTED-DATA 100% · NAMED 85.36% (capped ~96%).
@@ -11,7 +19,7 @@
 - 🏁 **STRATEGIC MILESTONE: matching-C is at its FLOOR for ports + ALL batch/lever approaches** (free-carve, int-widen, cast, both agbcc knobs, unnamed-sub fingerprint, AND the TRANSMUTER [objdiff register-blind] — every one empirically =0). **The ONLY path to 100% is RECONSTRUCT (JP-only leaves + JP-divergent ports) + the genuine reg-coloring RESIDUAL** (~8-20 ports with a 1-2 register/slot tiebreak no C-source or tool fixes — the likely permanent asymptote; leave as descriptive-asm NEARs). Do NOT re-run lever/knob/transmuter sweeps (all proven 0).
 - ⚙️ **NOW (ultracode): a 14-agent triage Workflow (`fe8j-remaining-triage`) is classifying all 207 still-asm fns into carveable-vs-residual + recipes** → feeds the warm-worktree fleet to carve every carveable one to exhaustion.
 - 🔑 **TWO PRODUCTIVE RECONSTRUCT VEINS opened this session:** (1) **SJIS/text** — JP copies 2-byte Shift-JIS chars where fe8u copies 1 byte; the natural `*dst++=*src++` idiom matches JP reg-alloc (StrInsertTact; recon-worker mining more). (2) **proc-name-string self-ID** — JP-only ProcScr procs identified by their embedded name string in ROM (efxLuce/efxDrsmmoya proved it; archaeologist scouting link-arena/name-entry/augury).
-- 🟧 **SPILL-SLOT/REG-ROTATION NEAR backlog** (structurally-correct reconstructs blocked by an agbcc frame-layout tiebreak the DEFAULT permuter plateaus on): ClassStatsDisplay_Loop (/home/laqieer/fe8j-wt-class), AdjustNewUnitPosition (/home/laqieer/fe8j-wt-anup), Event18_ColorFade. **UNLOCK = the transmuter** (reg-alloc-aware permuter, task #15, queued) — deploy as a BATCH when N accumulate; do NOT keep throwing 15k default runs.
+- 🟧 **SPILL-SLOT/REG-ROTATION NEAR backlog** (structurally-correct reconstructs blocked by an agbcc frame-layout tiebreak the DEFAULT permuter plateaus on): ClassStatsDisplay_Loop (/home/laqieer/fe8j-wt-class), AdjustNewUnitPosition (/home/laqieer/fe8j-wt-anup), Event18_ColorFade. **UNLOCK = the transmuter** (reg-alloc-aware permuter, task #15, queued) — deploy as a BATCH when N accumulate; do NOT keep throwing 15k default runs. — [SUPERSEDED 2026-07-03: ClassStatsDisplay_Loop MATCHED byte-exact in-repo (banked); AdjustNewUnitPosition/Event18_ColorFade still open.]
 
 ## IN-FLIGHT (background fleet, dispatched this session)
 - **seb-worker** → efxLuceBGCOL pair (sub_8067040 + sub_8067160, JP-only efx) · **sio-worker** → HandleTurnRecordText (sub_80BC2A4, msgid subs) · **colorfade-worker** → ColorFadeSetup×4 (one permuter → +4) · **recon-worker** → SJIS/text vein hunt · **anup-worker** → sub_8046924 (link-arena reconstruct) · **archaeologist** → proc-name string-scan (final analysis pass).
@@ -125,7 +133,7 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
   scheduling NEAR — permuter-campaign targets, NOT clean-port dispatch; best-first by byte-distance.
   STILL-PLATEAUED after round 1 — register-pins make body-reg-swaps WORSE):
   - **Event1B_TEXTSHOW** @0x0800E5CC (sub_800E5CC) — **6-byte** evArgument widen-scratch (zero-extend-via-
-    scratch + zeroFlag re-materialize); KEEP the case-3 inline-asm trick. WIP in `_permwork/*.wip`.
+    scratch + zeroFlag re-materialize); KEEP the case-3 inline-asm trick. WIP in `_permwork/*.wip`. — [SUPERSEDED 2026-07-03: MATCHED byte-exact in-repo (`int evArgument`), banked.]
   - **Event0E_STAL** @0x0800DD9C (sub_800DD9C) — ~**10-byte** proc/subcode r3↔r4 swap (a BODY callee-saved
     reg-swap — `register int asm("rN")` pins make it WORSE). WIP in `_permwork/*.wip`.
   - **Event18_ColorFade** @0x0800E1FC (sub_800E1FC) — spill-pattern / frame-size diff.
@@ -156,13 +164,13 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
   sign-domain NEARs deterministically). The 3 STILL-PLATEAUED genuine reg-alloc ceilings (need a stronger
   profile next session, WIPs in `_permwork/*.wip`): **Event0E_STAL** (10B proc/subcode r3↔r4),
   **Event1B_TEXTSHOW** (6B evArgument widen-scratch), **AdjustNewUnitPosition** (base 810→185, 4-way
-  reg perm) — see their entries above. The worktree permuter is parallel-safe (3 workers -j4, no OOM)
+  reg perm) — see their entries above. [— SUPERSEDED 2026-07-03: Event1B_TEXTSHOW since MATCHED byte-exact in-repo, banked; Event0E_STAL/AdjustNewUnitPosition still open.] The worktree permuter is parallel-safe (3 workers -j4, no OOM)
   with the documented import.py-direct + compile.sh `-mjp-promote` two-step plumbing.
 - **HandleTurnRecordText** @sub_80BC2A4 — permuter/codegen-NEAR (44B short): y/textIndex r4/r8-vs-r6/r9
   reg perm + tilemap-col factoring. Codegen-shape NEAR (not a const fix). Permuter campaign target.
 - **ClassStatsDisplay_Loop** @sub_80B8B28 — permuter/codegen-NEAR (one of the 0x80B OpInfo cluster, local-
   struct pattern, NO opinfo.h edit): JP REVERSES the gauge-pip loop + spills i+1/&unk_34/&unk_35 each outer
-  iter, ~121 opcodes diff, permuter base 3885->1450. Needs a loop-direction/spill lever or stronger profile.
+  iter, ~121 opcodes diff, permuter base 3885->1450. Needs a loop-direction/spill lever or stronger profile. — [SUPERSEDED 2026-07-03: MATCHED byte-exact in-repo (banked), removed from `src/nonmatching/`.]
 - **OpInfo cluster — 2/5 DONE (2026-06-24).** **ClassIntro_LoopOut** is DONE (carved via a LOCAL
   OpInfoEnterProcJ workaround struct — JP opinfo procs use local structs, **NEVER edit shared
   `include/opinfo.h`**: iconProc@0x5C/parentProc@0x60/classReelEnt@0x64, letterProcs[10] inline@0x34,
@@ -170,7 +178,7 @@ a clean-port worker on these. They need a reg-alloc lever discovery or a fresh p
   ClassReelEntJ struct + `gOpinfo_0` extern-bind @0x081F5900; several committed syms sit +4 past the
   asm literal because the gfx skip a 4-byte LZ77 header — bind distinct aliases at the TRUE asm addrs;
   `gUnk_4`@0x0200A2D8). STILL REMAINING in the cluster (same local-struct pattern, no opinfo.h edit):
-  **ClassStatsDisplay_Loop** (permuter NEAR — see above), **ClassIntro_Init** (sub_80B77A4, ~11
+  **ClassStatsDisplay_Loop** (permuter NEAR — see above; [SUPERSEDED 2026-07-03: MATCHED byte-exact in-repo, banked]), **ClassIntro_Init** (sub_80B77A4, ~11
   gUnkData data aliases — heavy).
 
 ## Serial-integrator tasks (1-step each, integrator-only — NOT parallel-safe)

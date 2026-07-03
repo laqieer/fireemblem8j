@@ -23,14 +23,15 @@ has cracked none, corroborating.
 | sub_80A2E64 | A2E64..A3018 | 436 | 301/436 | -fno-gcse |
 | sub_80A3528 | A3528..A3898 | 880 | 645/880 | plain -O2 |
 | sub_80CAEF4 | CAEF4..CB014 | 288 | 158/288 | plain agbcc |
-| sub_80D1844 (LoadClassNameInClassReelFont) | D1844..D18D0 | 140 | 84/140 | "35-byte" — optimistic |
+| sub_80D1844 (LoadClassNameInClassReelFont) | D1844..D18D0 | 140 | 84/140 | "35-byte" — optimistic; **[MATCHED 2026-07-03 in-repo, banked]** |
 | RegisterTsaWithOffset (sub_80D19DC) | D19DC..D1A3C | 96 | 91/96 | "6-byte" — FALSE; r8+ip pressure |
 
 **Conclusion:** zero deterministic carves remain among reconstruction bases; the path to
 100% on these is permuter compute-time (machine currently CPU-saturated, load 17.9/16) +
-decomp.me community. The 22 still-asm without a base are big region-different
+decomp.me community. The **16** still-asm without a base are big region-different
 reconstructions (e.g. `sub_8057F80`/PrepareBattleGraphicsMaybe = 2936 B) or have a live
-permuter. See [`frontier.md`](frontier.md).
+permuter. — [SUPERSEDED 2026-07-03: was "22" at this doc's 2026-06-26 measurement; 6 have since
+matched byte-exact in-repo (banked), axis-2 22→16.] See [`frontier.md`](frontier.md).
 
 ## Live permuter best-score state (2026-06-26, from `nonmatchings/<fn>/output-<score>-*`)
 
@@ -47,7 +48,7 @@ PutWMFaceOnBg) are already carved to `src/`.
 | AdjustNewUnitPosition | 185 | reg-coloring ceiling (iy/ix/yCur rotation, source-reorder-invariant) |
 | sub_80D17C8 | 255 | |
 | sub_80A3300 | 315 | |
-| sub_80A730C | 360 | |
+| sub_80A730C | 360 | **[MATCHED 2026-07-03, banked]** |
 | sub_80BB240 | 540 | |
 | Event18_ColorFade | 780 | |
 | sub_8084CE4 | 795 | (the "8-byte" header claim is wrong) |
@@ -56,7 +57,7 @@ PutWMFaceOnBg) are already carved to `src/`.
 | sub_80CAEF4 | 2555 | |
 | sub_80A3528 | 2590 | |
 | sub_80A2E64 | 4045 | |
-| sub_80A73D4 | 4835 | |
+| sub_80A73D4 | 4835 | **[MATCHED 2026-07-03, banked]** |
 | sub_800A34C | 10155 | far (matches the 536/584 byte measurement) |
 
 **Takeaway:** even the closest (Event0F_CounterOps=75) is a plateaued ceiling after
@@ -78,7 +79,7 @@ several are much closer than the "ceiling" framing implied — and the residuals
 | sub_80D17C8 | 114/124 | |
 | sub_80BB240 | 123/232 | |
 | sub_80A3300 | 160/224 | |
-| sub_80A730C | 164/200 | |
+| sub_80A730C | 164/200 | **[MATCHED 2026-07-03, banked]** |
 
 Tested and ruled out on these: the two built-but-unwired custom agbcc flags
 **`-mjp-nocrossjump`** and **`-mjp-regorder`** — both same-or-WORSE than `-mjp-promote`

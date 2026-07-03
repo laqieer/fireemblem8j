@@ -82,10 +82,10 @@ Early bootstrap (now historical):
 
 **Current progress (ground truth from `scripts/calcprogress.py`):**
 
-* **Matching-C functions**: 95.44% (8139 / 8528)
+* **Matching-C functions**: 99.82% (8676 / 8692)
 * **Build self-containment**: 100%
 * **Extracted data**: 100% of the measured set
-* **Named symbols**: 85.23%
+* **Named symbols**: 95.53%
 
 For what remains to be done, see `docs/frontier.md` (single source of truth for
 the remaining work). The per-TU porting recipe is in `docs/porting.md`.

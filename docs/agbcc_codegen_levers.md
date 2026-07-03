@@ -108,7 +108,9 @@ mark UNSOLVED and report the exact differing bytes. See `decomp_agent_playbook.m
   added to the prologue push/epilogue pop (`UpdateLinkArenaMenuScrollBar` — body byte-perfect,
   only the push reg-list differs by 2 bytes).
 - **scratch-register choice**: agbcc picks r0 where JP picks r1 for an internal narrow
-  (`Event1B_TEXTSHOW`).
+  (`Event1B_TEXTSHOW`). — [SUPERSEDED 2026-07-03: `Event1B_TEXTSHOW` MATCHED byte-exact in-repo
+  (`int evArgument` makes stock agbcc reproduce the JP `ldrsh`, residual→0), banked; this example
+  is no longer a live wall, though the r0/r1 scratch-choice pattern itself remains valid.]
 
 Reclaim hit rate: **17 of ~142 classified dead-ends** (lsr/asr 31 + reg-alloc 93 +
 scheduling 36, minus overlap) recovered to byte-0; the rest split between the
@@ -185,6 +187,9 @@ only sub_80BCD74 (PERMUTER_FLAGS=none) compiles + diffs live (1855/11300, a genu
   sub_80A6E4C https://decomp.me/scratch/fFDjv        sub_80A730C https://decomp.me/scratch/34H33
   sub_80A73D4 https://decomp.me/scratch/vnbyw        sub_80BB240 https://decomp.me/scratch/k5Eb8
   sub_80BCD74 https://decomp.me/scratch/Km1Oj        sub_80D17C8 https://decomp.me/scratch/TwXsX
+> [SUPERSEDED 2026-07-03: sub_80A730C (DrawArenaRosterNames) and sub_80A73D4 (ArenaScoreboard_DrawRecord)
+> in this list have since MATCHED byte-exact in-repo (banked, removed from `src/nonmatching/`); their
+> scratches are reference-only now.]
 LIMITATION for community help: decomp.me stock agbcc has no -mjp-promote; to let outsiders match the
 -mjp-promote functions, the fork flag would need upstreaming to decomp.me's agbcc, OR re-derive those functions
 without needing -mjp-promote (harder). The genuine reg-coloring floor (~38 fns) is being ground by the local
@@ -395,7 +400,8 @@ permuter/permute.sh bg … --stop-on-zero`):
 - **sub_80D1844 `LoadClassNameInClassReelFont`** (140 B): needs moving-pointer + separate
   live counter + top-peel simultaneously; no source phrasing forces all three (do-while gets
   the allocation but agbcc dumps the literal pool inline at the rotated loop entry → 144 B).
-  Best clean form 25/140. Left as asm (permuter target).
+  Best clean form 25/140. Left as asm (permuter target). — [SUPERSEDED 2026-07-03: MATCHED
+  byte-exact in-repo (banked), removed from `src/nonmatching/`.]
 
 **Lesson:** the productive levers on this floor were **source-shape** — **P11** (permuter-found)
 on sub_807C8DC and **declaration-order scheduling** (§9) on sub_8001570 each cleared most of the

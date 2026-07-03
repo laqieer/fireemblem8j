@@ -1,5 +1,13 @@
 # Axis #2 (matching-C) — 31 still-asm functions, ranked recipe queue (D307/W3)
 
+> **[SUPERSEDED 2026-07-03 — axis-2 is now 16 still-asm (matching-C 99.82%, 8676/8692); see [`frontier.md`](frontier.md).]**
+> Six queue entries below have since **MATCHED byte-exact in-repo (banked, removed from
+> `src/nonmatching/`)**: Event2F_MoveUnit (sub_800FF08), Event1B_TEXTSHOW (sub_800E5CC),
+> ClassStatsDisplay_Loop (sub_80B8B28), LoadClassNameInClassReelFont (sub_80D1844),
+> sub_80A73D4 (ArenaScoreboard_DrawRecord), sub_80A730C (DrawArenaRosterNames) — each marked
+> `[SUPERSEDED]` inline / in the block at the bottom. The remaining **16** are the team-proven
+> agbcc reg-coloring/spill walls (`src/nonmatching/*.c`), permuter-bound.
+
 Tractability order (full per-recipe detail in the D307/W3 triage report):
 
 ## HIGH-CONFIDENCE RECONSTRUCTS (clear asm body, do first)
@@ -7,7 +15,7 @@ Tractability order (full per-recipe detail in the D307/W3 triage report):
   directly (no GetClassData). Full C in W3 report. +`-mjp-promote`, add `gClassReelNameTable`
   data alias. JP precomputed-class-name-table pattern (shared w/ sub_80D1844).
 - **#8/#30 sub_80A73D4** (256B, divination): sequential PutNumber/PutNumberOrBlank, NO control
-  flow — reconstruct directly from asm. EASIEST augury fn.
+  flow — reconstruct directly from asm. EASIEST augury fn. — [SUPERSEDED 2026-07-03: MATCHED byte-exact in-repo, banked.]
 - **#26 sub_800FAD0** (464B): fe8u eventscr.c NONMATCHING GetUnitDefinitionFormEventScr body +
   JP arg-sign (arg2 u8/lsrs, arg3/4 s8/asrs) + -mjp-promote.
   WIRING: sub_800FAD0 already HAS the `GetUnitDefinitionFormEventScr` baseline alias
@@ -15,17 +23,20 @@ Tractability order (full per-recipe detail in the D307/W3 triage report):
   baseline alias (else multiple-def), not add a new one. (Consistent with src/nonmatching/sub_800FAD0.c line ~44.)
 - **#9 sub_80BB240** (232B): ending_details defeat-text builder, msgids US-0x88, JP callees.
 - **#10 sub_80BCD74** (244B): worldmap path-follow proc, 0x100/0x200 floor-quantize.
-- **#11 sub_800FF08** (384B): Event2F_MoveUnit analog + -mjp-promote (watch subcmd dir order).
+- **#11 sub_800FF08** (384B): Event2F_MoveUnit analog + -mjp-promote (watch subcmd dir order). — [SUPERSEDED 2026-07-03: MATCHED byte-exact in-repo, banked.]
 
 ## PERMUTER NEARs (stochastic; import nonmatching + glabel asm, patch -mjp-promote, run bg)
 - #1 Event1B_TEXTSHOW (9B), #2 Event0F_CounterOps (r4r5 ~10B), #6 EfxAdvanceFrameLut (87/132
   branch-polarity), #7 sub_8084CE4 (8B spill-split lever), #5 LoadClassNameInClassReelFont (35B),
   #4 ClassStatsDisplay_Loop (slot-rotation, extract best-5 mutation from wt).
+  — [SUPERSEDED 2026-07-03: #1 Event1B_TEXTSHOW, #5 LoadClassNameInClassReelFont, #4 ClassStatsDisplay_Loop
+  MATCHED byte-exact in-repo (banked, removed from `src/nonmatching/`); #2/#6/#7 still open.]
 
 ## DEFERRED (plateaued reg-alloc walls / large reconstructs, lowest priority)
 - Event18_ColorFade, RegisterTsaWithOffset, GmapScreen2_Loop, PutFaceOnBackGround,
   AdjustNewUnitPosition, AddAttr2dBitMap, sub_800A34C (spline 534/584), PrepareBattleGraphicsMaybe
   (2936B +266B JP), the augury cluster (sub_80A2E64/3528/390C/3300/6D34/6E4C/6F1C/730C/800A594).
+  — [SUPERSEDED 2026-07-03: the augury `730C` (sub_80A730C) has since MATCHED byte-exact in-repo, banked.]
 
 WIRING: carved fns drop their baseline alias from layout/baseline_syms.d/ (else multiple-def);
 add NEEDS_ALIAS data entries (gClassReelNameTable etc.); fix cfbind garbage StartGmapAutoMu_Type1
@@ -48,6 +59,12 @@ transmuter infeasible for pure reg-coloring).
 - **sub_800FF08** (Event2F_MoveUnit): NOT a wall — matched byte-exact in-repo with `-mjp-promote`.
   decomp.me jeBp5 can't reach 0 only because decomp.me stock agbcc lacks `-mjp-promote` (documented
   there, non-SOLVED). Banked byte-exact.
+- **ClassStatsDisplay_Loop** (sub_80B8B28): the "#4 slot-rotation / permuter base 3885→1450 NEAR"
+  call is RETRACTED — MATCHED byte-exact in-repo 2026-07-03 (banked), removed from `src/nonmatching/`.
+- **LoadClassNameInClassReelFont** (sub_80D1844): the "#5 best clean 25/140 / moving-pointer wall"
+  call is RETRACTED — MATCHED byte-exact in-repo 2026-07-03 (banked), removed from `src/nonmatching/`.
+- **sub_80A730C** (DrawArenaRosterNames): the augury-cluster "permuter NEAR (best 360)" call is
+  RETRACTED — MATCHED byte-exact in-repo 2026-07-03 (banked), removed from `src/nonmatching/`.
 
 ## D312 — Event0F_CounterOps (sub_800DE3C): asr-fix → 1-swap NEAR (permuter candidate)
 fe8u eventscr.c:476 body + the real JP divergence FIXED: COUNTER_SET uses an ARITHMETIC shift

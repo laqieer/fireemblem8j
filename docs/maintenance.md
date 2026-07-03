@@ -23,7 +23,7 @@ else that needs to describe what's left should link to it, never fork it.
 
 ### Do NOT define a frontier from `layout/nofuncmap_*.tsv`
 `layout/nofuncmap_region_*.tsv` is a **stale, un-pruned classification cache**
-(~3,900 entries vs. ~389 truly unmatched ≈ **10× inflated**; addresses for
+(~3,900 entries vs. 16 truly unmatched ≈ **240× inflated**; addresses for
 region-different rows are also stale). It is a diagnostic artifact, **not** the
 work list. Reconcile any scope discrepancy against `scripts/calcprogress.py`
 before spending team effort. See `docs/nofuncmap_classification.md` for what it is.
@@ -56,7 +56,7 @@ Run this before ending any session that moved an axis:
 | Axis | Tool | What it means |
 |---|---|---|
 | Build self-containment | `scripts/check_selfcontained.py` | `make` builds the byte-identical ROM with `baserom.gba` absent — `0 .incbin "baserom.gba"`. The only ungameable number. |
-| Matching-C functions | `scripts/calcprogress.py` | funcs whose bytes come from compiling `src/*.c` (+ libc/libgcc). The remaining ~389 are the real code frontier. |
+| Matching-C functions | `scripts/calcprogress.py` | funcs whose bytes come from compiling `src/*.c` (+ libc/libgcc). The remaining **16** are the real code frontier. |
 | Extracted data | `scripts/calcprogress.py` | genuinely-extracted asset bytes ÷ measured data total. Named `.incbin "baserom.gba"` is **not** extraction. |
 | Named symbols | `scripts/calcprogress.py` | meaningfully-named labels ÷ total. Structurally < 100% (~1,611 `banim_`/`gfx_`/`snd_` asset labels fe8u itself leaves auto-named). |
 

@@ -60,7 +60,8 @@ verifies with a clean, no-baserom, parallel build.
 
 ### Topology / collision
 In-flight work (permuters on `sub_8084CE4`/`sub_80A73D4`, ~30 efx/sio code worktrees) is all
-**code axis** — no overlap. Units below are scoped to **disjoint files/dirs** (and disjoint
+**code axis** — no overlap. [SUPERSEDED 2026-07-03: `sub_80A73D4` has since MATCHED byte-exact
+in-repo (banked); `sub_8084CE4` remains an 8-byte agbcc spill wall.] Units below are scoped to **disjoint files/dirs** (and disjoint
 lines of the shared `layout/data_incbin_deps.mk`/`Makefile`/generated `ldscript.txt`); each PR
 merges independently and the integrator serializes final `make compare` gates.
 
