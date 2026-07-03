@@ -79,7 +79,7 @@ dirty the working tree or risk committing tool state. If you point `outputDir` /
 - `ANTHROPIC_API_KEY` — needed **only** for `run` (the Claude Runner). `index-codebase`
   and `atlas` work without it. A cached Claude Code login is also honored. **Never
   hardcode the key**; the config documents it as an env var only.
-- `tools/agbcc`, `baserom.gba`, `fireemblem8.map` present (same as `make compare`).
+- `tools/agbcc`, `fireemblem8.map` present (same as `make compare`); plus `baserom.gba` for mizuchi's own scoring re-validation loop (optional — `make compare` itself does **not** require `baserom.gba`).
   The compiler script in the config mirrors the Makefile C rule:
   `cpp | iconv UTF-8→CP932 | agbcc … -O2 -fhex-asm | arm-none-eabi-as`,
   plus the trailing `.text` / `.align 2, 0`, then `scripts/apply_patches.py` on the

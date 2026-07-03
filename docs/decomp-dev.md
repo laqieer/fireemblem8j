@@ -61,7 +61,7 @@ do use the `PROGRESS_API_KEY` secret — that is unrelated to decomp.dev.)
 | --- | --- | --- | --- |
 | `decomp-dev.yml` | decomp.dev | none | uploads `jp_report` artifact |
 | `progress.yml` | frogress portal (progress.deco.mp) | `PROGRESS_API_KEY` | POSTs to the frogress API |
-| `compare.yml` | — (byte-match CI) | `BASEROM_URL` | `make compare` |
+| `ci.yml` | — (byte-match CI) | none (build is self-contained; no `BASEROM_URL`) | `make compare` (runs with `baserom.gba` absent) |
 
 All three are independent; `decomp-dev.yml` is the decomp.dev-specific one and is
 self-contained.

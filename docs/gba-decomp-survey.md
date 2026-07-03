@@ -23,7 +23,7 @@
 
 So readers know what is *not* new:
 
-- **Compiler / build:** agbcc (GCC 2.95, C89-era) at `tools/agbcc`; arm-none-eabi binutils; `make compare` as the sha1 oracle against `baserom.gba`.
+- **Compiler / build:** agbcc (GCC 2.95, C89-era) at `tools/agbcc`; arm-none-eabi binutils; `make compare` as the sha1 oracle (`sha1sum -c checksum.sha1`; builds from source, so `baserom.gba` is not required — CI verifies with it absent).
 - **RE tools:** IDA Pro 9.3 + Hex-Rays (MCP), Ghidra (pyghidra-mcp), decomp-permuter (upstream ARM32, plus the owner's `laqieer/decomp-permuter-arm` fork).
 - **Matching:** asm-differ, objdiff (3.7.2 vendored), m2c (arch_arm), coddog, mizuchi (piloted, D12), decomp.me.
 - **Disasm bootstrap:** gbadisasm (laqieer fork in `tools/gbadisasm`, with `fireemblem8.cfg`/`fireemblem8_ida.cfg` auto-generated from an IDA DB) — adopted D23 to mechanically emit build-ready descriptive asm for region-different functions.

@@ -74,9 +74,11 @@ You need the ARM toolchain (`binutils-arm-none-eabi`) and, for C decompilation,
 `agbcc` installed into `tools/agbcc` (same as the US decomp).
 
 ```bash
-# Place your own copy of the original ROM here:
-#   ./baserom.gba   (sha1 7da0456035366aa18414faa79d8fe7649f03c1ed)
-make compare       # builds fireemblem8.gba and verifies the sha1
+# baserom.gba is NOT required: make compare builds fireemblem8.gba entirely from
+# committed source and verifies it with `sha1sum -c checksum.sha1`.
+make compare       # builds fireemblem8.gba from source and verifies the sha1
+# Optional: a local ./baserom.gba (sha1 7da0456035366aa18414faa79d8fe7649f03c1ed) is
+# only for RE/diff tooling (asm-differ/objdiff targets) or one-time asset re-extraction.
 ```
 
 Success ends with:
@@ -89,8 +91,8 @@ fireemblem8.gba: OK
 *only* to verify the result. The **self-contained build** (the achieved end state):
 
 ```bash
-mv baserom.gba /tmp/ && make           # ✅ builds the byte-identical ROM from source ALONE
-mv /tmp/baserom.gba . && make compare   # restore ONLY to verify: sha1 -> OK
+mv baserom.gba /tmp/ && make           # ✅ builds the byte-identical ROM from source ALONE (baserom.gba absent)
+make compare                           # ✅ verifies via `sha1sum -c checksum.sha1` — still no baserom.gba needed
 ```
 
 Check the current self-containment with `python3 scripts/check_selfcontained.py`.
@@ -99,7 +101,7 @@ Check the current self-containment with `python3 scripts/check_selfcontained.py`
 
 | Path             | Purpose                                                        |
 |------------------|----------------------------------------------------------------|
-| `baserom.gba`    | Original JP ROM (you provide; gitignored).                     |
+| `baserom.gba`    | Original JP ROM — optional (you provide; gitignored); only for RE/diff tooling, not the build. |
 | `asm/*.s`        | Carved/descriptive assembly + data. **0 `.incbin "baserom.gba"`** (self-containment is 100%); the bulk is descriptive asm + committed `data/*.bin` references not yet decompiled to C / extracted as named assets — converted to real source as matching-C and extraction progress (see [`docs/frontier.md`](docs/frontier.md)). |
 | `src/`           | Decompiled C (ported/adapted from the US decomp).              |
 | `include/`       | Headers (ported from the US decomp).                           |

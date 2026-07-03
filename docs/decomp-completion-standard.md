@@ -359,8 +359,8 @@ missing piece is the **asset toolchain** (Phase 0), without which Phase 1 cannot
 
 ```
 # Self-contained build gate — baserom.gba is NOT a build input:
-mv baserom.gba /tmp/ && make            # MUST build fireemblem8.gba from source alone
-mv /tmp/baserom.gba . && make compare   # restore ONLY to verify: sha1 -> OK
+mv baserom.gba /tmp/ && make            # MUST build fireemblem8.gba from source alone (baserom.gba absent)
+make compare                            # verifies via `sha1sum -c checksum.sha1` — still no baserom.gba needed
 ```
 
 Concretely, FE8J must reach the FE8U/pokeemerald build graph: remove
