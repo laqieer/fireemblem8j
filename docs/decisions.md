@@ -9281,3 +9281,31 @@ independent of which repo it came from. Corollary observed in the corpus: same-f
 are all IDENTICAL, so JP/US divergence is carried by the 712 JP-unique assets, not by pixel diffs on shared-form
 twins. Future asset QA must keep this bidirectional discipline — do not "fix" a code-correct fe8j asset to match a
 mis-extracted fe8u twin.
+
+## D343 — Code-size metric reframed to SOURCE-FORM (98.59%): libc/libgcc code counted as done (parallel to the D339 data source-form reframe) (2026-07-03)
+
+**Change.** `scripts/calcprogress.py` + `scripts/progress-template.txt` now report the frogress `code` measure as **bytes of code *from source*** = `code_src + code_lib`, mirroring the axis-3 DATA source-form reframe (D339). libc/libgcc `.text` is **real toolchain source** linked exactly like fe8u links it, so counting it as still-asm undercounted the honest figure. (`scripts/gen-report.py` regexes updated to the "from source" wording to match.)
+
+**Numbers (verbatim `python3 scripts/calcprogress.py`, 2026-07-03):**
+- 901,428 total code bytes
+- **888,720 from source = 98.59%** (98.5902%) — the headline
+  - 865,580 = **96.02%** compiled from `src/*.c` (the old src-only headline)
+  - 23,140 = **2.57%** linked from libc/libgcc archives (linked like fe8u)
+- 12,708 = **1.41%** still descriptive asm — the sub-line (byte-heavy: the unmatched tail is disproportionately large functions, so this byte-% legitimately trails the 99.82% function-count).
+
+**Why this is honest, not gaming.** Same rationale as D339: "from source" credits any committed real source form and does NOT credit `.incbin "baserom.gba"` (which is 0 — self-containment is 100%). The function-count axis (99.82%, 8676/8692) is unchanged and remains the primary code-completion axis; this 98.59% is its byte-weighted companion. The strict objdiff "matched code bytes" counter still exists as a narrower point-in-time view (see the disclaimed snapshot in `docs/decomp-completion-standard.md`). README scorecard + `docs/frontier.md` authoritative table updated to publish 98.59%.
+
+## D344 — SHIFTABILITY directive: BOTH code and data confirmed AT FLOOR; genuine dereferenceable pointer debt = 0 (2026-07-03)
+
+**Verdict.** Axis-5 is at its D305-ratified floor on **both** the data and code sides. `python3 scripts/audit_pointers.py --true-debt --gate` = **1**, and that 1 is the single coincidental `.4byte 0x080896ED` literal in `frontier_df4_misc_lo` — an fe8u-confirmed coincidental *constant*, NOT a pointer (dereferencing it corrupts a shifted ROM). All real-pointer classes = 0. **No further de-pointering work is safe.**
+
+**DATA side — the 538 raw `0x08xxxxxx` words in 33 raw `.bin` INCBIN files are coincidental constants, not pointers:**
+- Dense small files are 0% 4-aligned with a full-range high byte: `data_0861F7FC` (36 words / 412 B) and `data_086BFC18` (21 words / 312 B) are **0% 4-byte-aligned**, and their would-be high byte spans the full **0x00–0xFF** range — whereas a real pointer table's high byte is only 0x00/0x02/0x03/0x08. Packed data, not a pointer table.
+- `data_08BB8ED0` (363 words / 43.8 KB, the `.data.residue` section) has non-4-aligned targets scattered across the **entire 0x08001B00–0x08F73169** ROM span — residual/packed data; relocating it corrupts a shifted ROM.
+
+**CODE side — no dereferenceable pointer debt:**
+- Real pointer references in C already use **named externs** (e.g. `src/SubtitleHelp_Loop.c`, `src/StoreNumberHexStringToSmallBuffer.c` explicitly "Reference it as an extern").
+- The **4,526** hex-literal `0x08xxxxxx` hits in `src/*.c` are doc comments, `msg_data.c` Huffman-packed text codepoints, `CpuFastFill` fill patterns, and `@ 0xADDR` asm-label annotations — **none are dereferenceable pointers**.
+- The **348** hardware/RAM casts (0x02–0x07 ranges) are legitimately absolute (MMIO / IWRAM / EWRAM), correctly NOT relocated.
+
+**Conclusion.** Genuine dereferenceable pointer debt = **0**. Axis-5 gate = 1 is a documented coincidental false-positive floor, consistent with D304/D305/D309. The remaining opaque-byte frontier (96,804 bytes) is an *editability* concern (axis-6), not a shiftability concern — any pointers inside still-compressed blobs need typed-asset extraction (D306), not `.4byte` relocation.

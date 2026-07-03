@@ -760,7 +760,7 @@ The .bin count held (these carve real code/pointers out of source-form data, not
 - **`.bin` frontier: MISS=3 / FLOOR=1401 / UNCERTAIN=226** (`FE8U=../fireemblem8u python3 scripts/audit_bin_forms.py`).
   The 3 MISS are documented TSA-tilemap/string-pool floor (audit basename false-positives).
 - **Pointer-debt COMPLETION GATE = 1** (`audit_pointers.py --true-debt --gate`) — the floor; the single residual is
-  the fe8u-confirmed coincidental constant above. No real code remains stored as binary data; no function pointers missed.
+  the fe8u-confirmed coincidental constant above. No real code remains stored as binary data; no function pointers missed. Both the CODE and DATA sides are confirmed at floor (genuine dereferenceable pointer debt = 0) — see decisions.md **D344**.
 
 ### Six-axis scorecard refresh (2026-07-03, verbatim from `python3 scripts/calcprogress.py`; supersedes every older "Current state" axis line above)
 | # | Axis | Value | Detail |
@@ -771,6 +771,8 @@ The .bin count held (these carve real code/pointers out of source-form data, not
 | 4 | Named symbols | **95.53% (12,323/12,899)** | **576** placeholders; ~1,611 `banim_`/`gfx_`/`snd_` labels are fe8u-auto-named → structurally < 100%. |
 | 5 | Shiftability | **completion gate = 1 (FLOOR)** | `audit_pointers.py --true-debt --gate`; the single residual is the fe8u-confirmed coincidental constant `0x080896ED` in `frontier_df4_misc_lo` — a documented floor false-positive, correctly NOT force-relocated. Consistent with the "COMPLETION GATE = 1" line above. |
 | 6 | Asset editability | **96,804 bytes** opaque raw-incbin | the `.bin` frontier remaining (was ~101,980 last session; −5,176 via the opanim palette fix + 39 asset-QA reshapes). |
+
+> **Code-byte companion (frogress/decomp.dev `code` measure, source-form):** **98.59%** (888,720 / 901,428 bytes) = **96.02%** compiled from `src/` + **2.57%** linked from libc/libgcc (counted as done, linked like fe8u); **1.41% = 12,708 bytes** still descriptive asm. This is the byte-weighted view of axis 2 (function-count 99.82%); libc/libgcc code is now credited as real source — parallel to the axis-3 data source-form reframe. Verbatim from `python3 scripts/calcprogress.py`. See decisions.md **D343**.
 
 ### Code frontier — the 16 permuter-bound functions (axis-2 = 22 → 16 this session)
 **6 functions matched byte-exact from `src/` this session and were REMOVED from the nonmatching set** — see the dated
