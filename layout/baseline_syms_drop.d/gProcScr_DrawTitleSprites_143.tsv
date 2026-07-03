@@ -1,0 +1,7 @@
+# #143 shiftability: gProcScr_DrawTitleSprites (@0x08B3EDD0) and
+# gProcScr_SkipTitleFxKeyListener (@0x08B3EDE8) are now real (relocatable)
+# definitions in src/data/gProcScr_DrawTitleSprites_ref/dat_gProcScr_DrawTitleSprites_ref.c;
+# drop the colliding baseline .set entries (from cfbind_titlescreen.tsv) to avoid a
+# multiple-definition of the symbols.
+gProcScr_DrawTitleSprites
+gProcScr_SkipTitleFxKeyListener
