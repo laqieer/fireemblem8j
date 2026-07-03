@@ -454,7 +454,7 @@ jp_code_total = CODE_REGION[1] - CODE_REGION[0]
 # from libc.a/libgcc.a (that is real-source, like fe8u -- reported separately).
 code_not_src = max(0, jp_code_total - code_src - code_lib)
 out.append(f"{jp_code_total} total bytes of code")
-out.append(f"{code_src} bytes of code in src ({pct(code_src, jp_code_total):.4f}%)")
+out.append(f"{code_src + code_lib} bytes of code from source ({pct(code_src + code_lib, jp_code_total):.4f}%)")
 if code_lib:
     out.append(f"{code_lib} bytes of code in libc/libgcc archives ({pct(code_lib, jp_code_total):.4f}%, linked like fe8u)")
 out.append(f"{code_not_src} bytes of code in asm ({pct(code_not_src, jp_code_total):.4f}%)")

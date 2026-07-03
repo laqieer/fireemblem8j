@@ -1,5 +1,5 @@
 {{ code/total }} total bytes of code
-{{ code }} bytes of code in src ({{ ignore }}%)
+{{ code }} bytes of code from source ({{ ignore }}%)
 {{ ignore }} bytes of code in asm ({{ ignore }}%)
 
 {{ symbols/total }} total symbols
