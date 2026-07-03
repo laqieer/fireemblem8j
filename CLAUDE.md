@@ -18,8 +18,10 @@ https://github.com/users/laqieer/projects/3.
 ```bash
 make compare        # build fireemblem8.gba and check sha1 (the only "test")
 ```
-Success: `fireemblem8.gba: OK`. Requires `baserom.gba` locally (sha1
-`7da0456035366aa18414faa79d8fe7649f03c1ed`) and, for C, `tools/agbcc`.
+Success: `fireemblem8.gba: OK`. `baserom.gba` is **not required** — the build is
+self-contained (100%) and verified via `sha1sum -c checksum.sha1`; for C you still
+need `tools/agbcc`. A local `baserom.gba` (sha1
+`7da0456035366aa18414faa79d8fe7649f03c1ed`) is optional, only for RE/diff tooling.
 
 **Never let `make compare` regress.** Every carve-out must keep it `OK`.
 

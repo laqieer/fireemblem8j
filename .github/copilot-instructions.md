@@ -7,10 +7,12 @@ ending in `fireemblem8.gba: OK`.
 
 ## Build and verification commands
 
-- `make compare` builds `fireemblem8.gba` and checks its SHA-1 against
-  `checksum.sha1`. This is the project oracle. It requires a local
-  `baserom.gba` with SHA-1 `7da0456035366aa18414faa79d8fe7649f03c1ed`,
-  `binutils-arm-none-eabi`, and `tools/agbcc`.
+- `make compare` builds `fireemblem8.gba` from committed source and checks its
+  SHA-1 against `checksum.sha1`. This is the project oracle. `baserom.gba` is
+  **NOT required** — the build is self-contained (0 `.incbin "baserom.gba"`, 100%);
+  it needs only `binutils-arm-none-eabi` and, for C, `tools/agbcc`. A local
+  `baserom.gba` (SHA-1 `7da0456035366aa18414faa79d8fe7649f03c1ed`) is optional,
+  used only by RE/diff tooling (asm-differ/objdiff, decomp-permuter, IDA/Ghidra).
 - First-time Ubuntu setup mirrors CI: install `build-essential`,
   `binutils-arm-none-eabi`, and `libpng-dev`, then clone `pret/agbcc` and run
   `./build.sh && ./install.sh ..` so the compiler lands in `tools/agbcc`.
@@ -52,8 +54,10 @@ ending in `fireemblem8.gba: OK`.
   -mthumb-interwork -fhex-asm -> arm-none-eabi-as`, then
   `arm-none-eabi-ld -T ldscript.txt`. Preserve the CP932 conversion when adding
   compiler/permuter tooling.
-- CI `compare.yml` runs `make compare` only when the private `BASEROM_URL` secret
-  is available. `decomp-dev.yml` computes progress from manifests and built
+- CI `ci.yml` runs `make compare` on every push to `main` and pull request, with
+  `baserom.gba` **absent** and no `BASEROM_URL` secret — building from committed
+  source and matching `checksum.sha1` is simultaneously the byte-match and
+  self-containment gate. `decomp-dev.yml` computes progress from manifests and built
   `src/*.o` without needing the ROM.
 
 ## MCP servers
