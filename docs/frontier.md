@@ -711,3 +711,51 @@ graphics streams (Ch9Events = first 80 B of a 28753 B map-gfx stream), misfiled 
 the sweep only gbagfx'd the truncated first fragment. Fixed 4 (gGfx_OpSubtitle_05, gTsa_OpSubtitle_03/05,
 Ch9Events) → merged to .png/.4bpp.lz/.bin.lz (3 recompress byte-exact; gTsa_05 pinned). 8 raw .bin removed,
 MISS 7→6, UNCERTAIN 274→270. Detection rule now: decode the FULL ROM LZ stream, compare consumed len vs .bin size.
+
+## waves 45-49 (DONE): drained the remaining reducible .bin; .lz now BUILT from source
+- **wave45 (PR#126):** multi-signal extractability re-scan (pointer-density + fe8u-twin + compression-header)
+  drained MISS 6→2 (font_cc_078, banim_b_031/085, chap_title_115, misc_lo_015). The 2 residual MISS are
+  content-verified TSA tilemaps mislabeled by the audit's 1200-byte-locked detector = genuine FLOOR.
+- **wave46 (PR#127):** 27 data/residual pointer tables → `.4byte Sym+off`. UNCERTAIN 270→243.
+- **wave47 (PR#128):** decomposed 4 LZ-hybrid blobs; 11 heterogeneous opaque tails skipped (audit-neutral).
+  UNCERTAIN 243→239.
+- **wave48 (PR#129):** 9 string-pool/u16-table residuals → `.asciz`/`.short`; 3 Thumb-code gaps deferred to disasm.
+  UNCERTAIN 239→234.
+- **wave49 (folded into #129): `.lz` must be BUILT from source, never committed.** gbagfx reproduces the JP
+  compressed bytes except a trailing 4-byte-alignment pad (`tools/gbagfx/lz.c:136-143`); the 4 pinned `.lz` were
+  replaced by decompressed sources + build rules that gbagfx-compress then `truncate -s <JP_len>`. 0 committed `.lz`.
+
+## Session PRs #130-#138 (DONE): pointer + code frontier, not .bin count
+The .bin count held (these carve real code/pointers out of source-form data, not raw blobs):
+- **#130** decomp.me stale-scratch prevention (D335). **#131** 606 pure-`__asm__`-wrapper `.c` → real `.s` (D336).
+  **#132** removed redundant `_permwork/`. **#133** honest data metric (`EXTRACTED DATA (C/PNG-SCOPED)` 79.91%
+  kept + new `SOURCE-FORM DATA` 99.26%).
+- **#134 hardptr:** ~1809 hardcoded `0x08XXXXXX` ROM pointers → relocatable `Sym+off` across 28 files;
+  **`audit_pointers.py --true-debt --gate` 100 → 1** (residual 1 = fe8u-confirmed coincidental constant
+  `0x080896ED`, correctly NOT force-relocated).
+- **#135 gap-disasm:** 6 residual `data/residual/gap_*.bin` were real Thumb CODE → disassembled AND decompiled
+  to byte-exact C (`ProcCmd_CALL_ROUTINE_ARG`, `StartSqMask`, `DrawDifficultySprites_Loop`, `PutTmSized`,
+  bmmenu handlers). 6 code-as-data `.bin` eliminated. UNCERTAIN 232→226.
+- **#137 forkinteg:** 8 community-matched decomp.me forks (TsilaAllaoui) → byte-exact C; documented 11 named
+  agbcc match levers **P1-P11** + escalation checklist in `docs/agbcc_codegen_levers.md §12`.
+- **#138 frontier-procscr:** 54 Shop/Arena ProcScr function pointers embedded as raw `.byte` in
+  `frontier_df4_menu_037/038` → relocatable `.4byte Sym+0x1` (coincidental constants + the 038 descriptor
+  table's 72 mostly-coincidental words correctly SKIPPED for a future typed data-extraction task).
+
+## CURRENT STATE (authoritative, 2026-07-03, main 1897e694f — main CI GREEN)
+- **`.bin` frontier: MISS=3 / FLOOR=1401 / UNCERTAIN=226** (`FE8U=../fireemblem8u python3 scripts/audit_bin_forms.py`).
+  The 3 MISS are documented TSA-tilemap/string-pool floor (audit basename false-positives).
+- **Pointer-debt COMPLETION GATE = 1** (`audit_pointers.py --true-debt --gate`) — the floor; the single residual is
+  the fe8u-confirmed coincidental constant above. No real code remains stored as binary data; no function pointers missed.
+
+## D337 (2026-07-03): remaining .bin frontier declared EFFECTIVELY AT OPAQUE FLOOR
+A read-only scoping pass (`frontier-scope`) re-examined the 226 UNCERTAIN with the full multi-signal extractability
+heuristics over a 40-file diverse sample spanning every subsystem group (`data/residual` 190, `frontier_df4_menu` 16,
+`frontier_df4_ending` 12, `frontier_df4_uistuff` 4, others 4):
+- **Bucket A (EXTRACTABLE-NOW) = 0.** No fe8u editable twin, no coherent start-pointer tables, no clean
+  `.png`/`.map.bin` compression wins. 14 files carry a valid LZ prefix but decode with over-captured tails / no fe8u
+  sink → **deep-RE probes only**, NOT a normal extraction wave.
+- **Recommendation: do NOT dispatch another 10-20 file extraction wave.** The mechanically-extractable frontier is
+  exhausted; the remaining 226 are JP-unique opaque residues (legit incbin) + the 14 optional per-file LZ deep-RE
+  probes. The `.bin` axis-1/2/6 objective is effectively met; strict MISS=0 remains gated only on the 3 tilemap-floor
+  audit artifacts + any future JP-LZ deep-RE, not on any tractable carve.
