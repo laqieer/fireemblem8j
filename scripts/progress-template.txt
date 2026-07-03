@@ -8,7 +8,7 @@
 {{ ignore }} symbols undocumented ({{ ignore }}%)
 
 {{ data/total }} total bytes of data
-{{ data }} bytes of data in src ({{ ignore }}%)
+{{ data }} bytes of data from source ({{ ignore }}%)
 {{ ignore }} bytes of data in data ({{ ignore }}%)
 {{ banim }} bytes of data in banim ({{ ignore }}%)
 {{ sound }} bytes of data in sound ({{ ignore }}%)

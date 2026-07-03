@@ -373,13 +373,13 @@ out.append(f"2. MATCHING-C FUNCTIONS   : {func_pct:6.2f}%  "
            f"({func_done}/{func_total} JP funcs done = {funcs} compiled from src/*.c "
            f"+ {func_lib} linked from libc/libgcc; {func_asm} still descriptive asm; "
            f"gbadisasm asm NOT counted)  -> target 100%")
-out.append(f"3. EXTRACTED DATA (C/PNG-SCOPED): {data_pct:6.2f}%  "
-           f"({data_src + data_lib}/{data_total} bytes in strict C/PNG assets "
-           f"({data_src} under src/ + {data_lib} libc/libgcc); "
-           f"named .incbin is NOT extraction)  -> strict scope, not final-goal gate")
-out.append(f"3b. SOURCE-FORM DATA      : {source_form_data_pct:6.2f}%  "
-           f"({source_form_data_done}/{data_total} bytes built from committed editable source; "
+out.append(f"3. EXTRACTED DATA (source-form): {source_form_data_pct:6.2f}%  "
+           f"({source_form_data_done}/{data_total} bytes built from committed editable source "
+           f"in ANY form (src/ C/PNG, banim compressing-linker .s+PNG, sound mid2agb, ...); "
            f"{source_form_data_residual} residual opaque/non-source bytes)  -> target 100%")
+out.append(f"3b. strict C/PNG-under-src subset: {data_pct:6.2f}%  "
+           f"({data_src + data_lib}/{data_total} bytes; a narrow decomp.dev-style counter -- "
+           f"NOT the data gate. Source forms vary, so axis 3 (source-form) is the real metric)")
 out.append("    source-form breakdown:")
 out.append(f"      {data_src} bytes  src/ C/PNG/charmap/typed data (strict extracted-data numerator)")
 if data_lib:
@@ -465,7 +465,7 @@ out.append(f"0 symbols partially documented (0.0000%)")
 out.append(f"{sym_placeholder} symbols undocumented ({pct(sym_placeholder, sym_total):.4f}%)")
 out.append("")
 out.append(f"{data_total} total bytes of data")
-out.append(f"{data_src} bytes of data in src ({pct(data_src, data_total):.4f}%)")
+out.append(f"{source_form_data_done} bytes of data from source ({pct(source_form_data_done, data_total):.4f}%)")
 if data_lib:
     out.append(f"{data_lib} bytes of data in libc/libgcc archives ({pct(data_lib, data_total):.4f}%, linked like fe8u)")
 out.append(f"{data_asm} bytes of data in data ({pct(data_asm, data_total):.4f}%)")
