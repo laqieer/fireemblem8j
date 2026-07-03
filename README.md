@@ -19,6 +19,11 @@ bulk of the work is **re-linking the US C source against the JP ROM's data
 layout** and decompiling the comparatively small set of region-specific code and
 data (text, fonts, menus, save versioning).
 
+## Community & Docs
+
+* [Wiki](https://github.com/laqieer/fireemblem8j/wiki) — project documentation and notes.
+* [Discussions](https://github.com/laqieer/fireemblem8j/discussions) — questions, coordination, and ideas.
+
 ## Goal
 
 **Build the ROM byte-for-byte from committed source with `baserom.gba` removed.**
