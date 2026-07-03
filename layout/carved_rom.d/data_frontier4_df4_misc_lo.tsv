@@ -8,7 +8,9 @@
 0DC55C	0DC56C	src/CopyBgTiles.o(.rodata)	CopyBgTiles bgs[] rodata
 0DC56C	0DC56F	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0b1)	gap tail
 0DC56F	0DC583	src/Event3D_MenuOverride.o(.rodata)	Event3D_MenuOverride(run): UnitMenuOverrideConf[15]+ItemMenuOverrideConf[5]
-0DC583	0DC608	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0b2)	df4_misc_lo region-diff data (before rangeTextIdLookup)
+0DC583	0DC594	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0b2)	df4_misc_lo gap0b2 head (17 B, before gBmlib_0)
+0DC594	0DC5F4	src/data/gBmlib_0/dat_gBmlib_0.o(.rodata.dat_gBmlib_0)	gBmlib_0 fade-kind table[8] typed C, 16 fn-ptrs relocatable (#143)
+0DC5F4	0DC608	src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.o(.data.frontier_df4_misc_lo.gap0b2t)	df4_misc_lo gap0b2 tail (20 B, after gBmlib_0, before rangeTextIdLookup)
 0DC608	0DC630	src/GetItemDisplayRangeString.o(.rodata)	GetItemDisplayRangeString rangeTextIdLookup[10] (embedded table)
 0DC630	0DC650	src/GetItemDisplayRankString.o(.rodata)	GetItemDisplayRankString rankTextIdLookup[8] (embedded table)
 0DC96C	0DC974	src/BattleCheckTriangleAttack.o(.rodata)	BattleCheckTriangleAttack local lut[8] (gap1 split)
