@@ -9129,47 +9129,69 @@ deep-RE project, NOT on any tractable carve. `docs/frontier.md` refreshed to mat
 future typed data-extraction task may revisit the 038 descriptor table (72 mostly-coincidental words) and the 14 LZ
 deep-RE probes, but neither is a blocking carve.
 
-## D338 — D337 correction: `.bin` FLOOR was OVERSTATED by 11 (compressed-JP-with-decompressed-fe8u-source is EXTRACTABLE, not floor) — issue #140
 
-**Date context:** 2026-07-03. Branch `fix/issue140-audit-floor-correction` (DOCS/TOOLING only), based on main `21f4236f0`. Co-authored with Copilot.
+## D338 — HONEST post-extraction floor correction: audit "compressed-vs-decompressed" mis-floor bug fixed + regression-proofed; #140 class extracted; Tier-2 LZ frontier triaged (0 clean extractions)
 
-**Scope guard.** This entry corrects **only** the FLOOR-count overstatement in **D337**. It does **not** delete or rewrite D337, and it does **not** reopen any other D337 conclusion — in particular the settled axis-5 pointer-debt decision (the fe8u-confirmed *coincidental constant* `0x080896ED`) stands unchanged.
+**Supersedes / reconciles** the un-integrated draft D338 on branch `fix/issue140-audit-floor-correction`
+(`499cf4f29`), which correctly diagnosed the bug but reported the *pre-extraction* projection ("MISS=14 / FLOOR=1390,
+all 11 blobs still physically present", against main `21f4236f0`). The #140 extraction has since been integrated
+(`400859fc1`, merged `10529cd42`; base `3feeeb009`), so this is the canonical **post-extraction** entry. It corrects
+ONLY the floor-count overstatement / tool bug; it does **not** reopen the settled axis-5 coincidental pointer-debt
+constant `0x080896ED` (D337 gate = 1, unchanged).
 
-**Root cause — a classification BUG in `scripts/audit_bin_forms.py` (not a data change).** D337 declared the `.bin` frontier "effectively at opaque floor" citing `MISS=3 / FLOOR=1401 / UNCERTAIN=226`. That FLOOR was **overstated by 11**. Classification **Rule 3b** ("FLOOR by fe8u binary basename") floored *any* JP blob whose fe8u twin was a `.bin`, **without** checking whether that fe8u twin is the **decompressed `.tsa.bin`/`.map.bin` SOURCE** from which fe8u's build *generates* the compressed `.lz`. When the JP blob is the **LZ77-compressed derivative** of that decompressed fe8u source, it is **reducible / EXTRACTABLE (a MISS)** — not a floor. Because Rule 3b floored these 11 blobs by basename *before* the D337 `frontier-scope` pass sampled the UNCERTAIN set, the overstatement was invisible to that pass (it audited the 226 UNCERTAIN, never the mis-floored 11).
+**The bug (why D337's floor was overstated).** `scripts/audit_bin_forms.py` floored any JP `.bin` whenever fe8u kept
+a binary twin of the *same basename* — regardless of form. That silently mis-floored the
+**compressed-with-decompressed-fe8u-source** class. Canonical example (verified): JP `gWorldmapMinimap_1` = **260 B
+GBA LZ77** (`0x10` header, `mindist=2`) that decompresses to **1202 B**, byte-equal to the source fe8u commits as
+`graphics/misc/gWorldmapMinimap_1.tsa.bin` (1202 B; fe8u *generates* the `.tsa.bin.lz` from it). The JP blob is thus
+the *extractable compressed* version → it should classify **MISS**, not FLOOR. D337's authoritative
+`MISS=3 / FLOOR=1401` counted this whole class as FLOOR → floor overstated, MISS understated (an honest
+pre-extraction tool would have read **MISS=14 / FLOOR=1390**).
 
-**Hard proof (re-verifiable).** `data/residual/gWorldmapMinimap_1.bin` is 260 B, LZ77 (header byte `0x10`, 24-bit decompressed-size field = 1202). It decompresses — verified with **both** a stdlib LZ77 decoder **and** `tools/gbagfx` — to 1202 B that are **byte-identical** (`cmp` → no diff) to fe8u's committed decompressed source `../fireemblem8u/graphics/misc/gWorldmapMinimap_1.tsa.bin` (1202 B). fe8u's build compresses that `.tsa.bin` into the `.lz`, so the JP blob is a derivative ⇒ MISS, not floor.
+**The mis-floored class = 11 LZ + 9 raw-parity TSA = 20 blobs, now extracted + integrated → legitimately
+fe8u-form-parity FLOOR.** Extraction `400859fc1` re-homed them from `data/residual/*.bin` to `graphics/**`:
+- **11 LZ** (decompressed to source + `LZ_FLAGS -mindist` pin so the build regenerates the exact ROM `.lz`):
+  `gWorldmapMinimap_1` (-> `graphics/misc_gfx2/gTsa_WorldmapMinimap_1.bin`, mindist=2) and
+  `gUnkData_{15,67,68,70,71,72,73,80,89,92}` (-> `graphics/misc/gUnkData_*.tsa.bin`).
+- **9 raw-parity** (byte-identical copy, no `0x10` header): `gWorldmapMinimap_2`, `gBattleForecast_{0,1,2}`,
+  `gEndingDetails_0`, `gMenuSoundroom_{0,1,2,4}` (-> their `graphics/**/*.tsa.bin`).
+Both projects now keep the **same decompressed editable source** -> these 20 are GENUINE FLOOR now (earned by
+extraction; NOT reclassified).
 
-**Fix (principled + GENERAL, not hardcoded to one blob).** Rule 3b now reclassifies a `binonly` basename match to **MISS** iff the JP blob carries a GBA LZ77 (`0x10`) header whose 24-bit size equals the fe8u twin's file size **AND** a full stdlib LZ77 decode reproduces that twin **byte-for-byte** (fails CLOSED on any mismatch — twin unreadable, non-`0x10`, size- or byte-diff ⇒ stays FLOOR). Raw-parity twins (JP already decompressed; no `0x10` header — e.g. `gWorldmapMinimap_2`, `gEndingDetails_0`, `gMenuSoundroom_*`, `gBattleForecast_*`) correctly **stay FLOOR** — no over-reclassification. The script's self-tests assert **both** directions.
+**The tool is now correct + regression-proofed (Rule 3b).** A `.bin` is floored for a same-basename twin only when
+fe8u's twin is the **same raw form**. If fe8u's twin is a *decompressed* `.tsa.bin`/`.map.bin` source and the JP blob
+is the *compressed reducible* version — GBA LZ77 `0x10` header **AND** decoded-size == twin size **AND** full stdlib
+decode == twin bytes — it classifies **MISS** (bucket `lz-compressed-tsa`). The rule **fails closed**: any absent
+twin / non-`0x10` header / size- or byte-mismatch stays FLOOR, so raw-parity twins (no `0x10` header — e.g. the
+extracted `gUnkData_15` @562 B, `gMenuSoundroom_*`) remain GENUINE FLOOR and are not over-reclassified. Regression
+protection is now **live, not decorative**: file-independent helper unit tests (`_lz77_decompress` on a known vector;
+`_is_compressed_derivative` TRUE-path on the `menu_029` leading stream -> `Tsa_MainMenuBgFog.tsa.bin`; fail-closed on
+non-`0x10`) + a live FLOOR-parity assert on the extracted `graphics/misc/gUnkData_15.tsa.bin` — verified to FAIL the
+run (blocking the `.md` write) if the decoder or fail-closed guard regress. (The prior draft asserted on now-deleted
+`data/residual/*.bin`, which the `expect()` helper *silently skips* -> those tests were dead; replaced here.)
 
-**Corrected floor numbers** (`python3 scripts/audit_bin_forms.py`, oracle `../fireemblem8u`):
+**No count delta on this tree — the honest, expected result.** Post-extraction `3feeeb009` with the FIXED tool:
+**MISS=3 / FLOOR=1401 / UNCERTAIN=226** — identical to the buggy baseline. The numerical correction already happened
+*via the extraction*: exactly **14 LZ77 `.bin`** remain and **0** have a decompressed fe8u *basename*-twin (the 11
+that did were extracted), so Rule 3b reclassifies **~0 blobs here**. On this tree the fix is **regression-prevention +
+tool-correctness, not a count delta** — there is no delta to report, and none was manufactured.
 
-| metric | D337 (buggy) | corrected (this run) |
-|---|---:|---:|
-| MISS | 3 | **14** |
-| FLOOR | 1401 | **1390** |
-| UNCERTAIN | 226 | 226 |
-| TOTAL | 1630 | 1630 |
+**Tier-2 triage of the 14 remaining LZ blobs — 0 clean extractions** (refines D337's "14 LZ deep-RE probes"; each
+decompressed and matched against the full fe8u *tracked* corpus, with gbagfx recompression probes):
+- **10 genuinely opaque** (no fe8u content sink, full or leading-stream): `frontier_df4_ending_{007,009,014}`,
+  `frontier_df4_menu_{001,017,024,032,033}`, `frontier_df4_uistuff_{035,036}` -> deep-RE FLOOR.
+- **3 map-layout-identified** (`data_0819EADC`->AnotherShrineMap, `data_081A00C8`->LordsSplitMap,
+  `data_081A6774`->Ch5TownMapPast): decompress byte-exact to fe8u map layouts **and** gbagfx recompresses byte-exact
+  to the original ROM bytes — BUT fe8u's `graphics/map/layout/*.bin` are **git-ignored MARTOMAP intermediates**
+  (committed source = `.mar`+`.json`, built via `%.bin: %.mar ; scripts/mar_to_map.py`). No committed fe8u `.bin`
+  source exists to reach fe8u-form-parity; a raw-`.bin` extract would be a fe8j-invented non-parity form a future
+  MARTOMAP epic must undo -> documented **MARTOMAP-migration candidates**, FLOOR now, NOT forced. (Refines D337:
+  these are *identified* map content, not "opaque".)
+- **1 partial / embedded** `frontier_df4_menu_029` (14388 B): a **multi-asset packed container** — its leading 380 B
+  is byte-exact `gbagfx(graphics/misc/Tsa_MainMenuBgFog.tsa.bin)` (a tracked fe8u source, 2050 B), followed by a
+  second `0x10` LZ stream (-> 14336 B opaque, no sink) + trailing data. It does **not** reduce to a single coherent
+  asset (the leading split is byte-exact-provable, but the ~14 KB opaque multi-stream tail disqualifies a clean
+  reduce) -> documented **segmentation-RE candidate**, FLOOR now, NOT forced.
 
-**The 11 blobs reclassified FLOOR → MISS** (each is `data/residual/<basename>.bin`, an LZ77 blob that decompresses byte-exact to fe8u `graphics/misc/<basename>.tsa.bin`):
-
-| basename | JP compressed blob | fe8u decompressed twin (SOURCE) |
-|---|---|---|
-| `gWorldmapMinimap_1` | `data/residual/gWorldmapMinimap_1.bin` (260B LZ77) | `../fireemblem8u/graphics/misc/gWorldmapMinimap_1.tsa.bin` (1202B) |
-| `gUnkData_15` | `data/residual/gUnkData_15.bin` (116B LZ77) | `../fireemblem8u/graphics/misc/gUnkData_15.tsa.bin` (562B) |
-| `gUnkData_67` | `data/residual/gUnkData_67.bin` (64B LZ77) | `../fireemblem8u/graphics/misc/gUnkData_67.tsa.bin` (114B) |
-| `gUnkData_68` | `data/residual/gUnkData_68.bin` (152B LZ77) | `../fireemblem8u/graphics/misc/gUnkData_68.tsa.bin` (674B) |
-| `gUnkData_70` | `data/residual/gUnkData_70.bin` (240B LZ77) | `../fireemblem8u/graphics/misc/gUnkData_70.tsa.bin` (1202B) |
-| `gUnkData_71` | `data/residual/gUnkData_71.bin` (204B LZ77) | `../fireemblem8u/graphics/misc/gUnkData_71.tsa.bin` (1202B) |
-| `gUnkData_72` | `data/residual/gUnkData_72.bin` (240B LZ77) | `../fireemblem8u/graphics/misc/gUnkData_72.tsa.bin` (1202B) |
-| `gUnkData_73` | `data/residual/gUnkData_73.bin` (64B LZ77) | `../fireemblem8u/graphics/misc/gUnkData_73.tsa.bin` (98B) |
-| `gUnkData_80` | `data/residual/gUnkData_80.bin` (156B LZ77) | `../fireemblem8u/graphics/misc/gUnkData_80.tsa.bin` (842B) |
-| `gUnkData_89` | `data/residual/gUnkData_89.bin` (248B LZ77) | `../fireemblem8u/graphics/misc/gUnkData_89.tsa.bin` (1202B) |
-| `gUnkData_92` | `data/residual/gUnkData_92.bin` (148B LZ77) | `../fireemblem8u/graphics/misc/gUnkData_92.tsa.bin` (182B) |
-
-This set is exactly the P9-verified Tier-1 family (`gWorldmapMinimap_1` + `gUnkData_{15,67,68,70,71,72,73,80,89,92}`).
-
-**Extraction ownership / SEQUENCING.** This branch is **DOCS/TOOLING ONLY — it changes NO ROM bytes** (`make compare` → `fireemblem8.gba: OK`; `make shiftcheck` → 0 HIGH suspects). Because the branch is based on **pre-extraction main**, all 11 blobs are STILL physically present in `data/residual/` here — intentionally, so the corrected audit *demonstrates* their extractability (MISS). The ACTUAL extractions (converting each to the fe8u `.tsa.bin` form and removing the `.bin` from `data/residual/`) land via the **parallel branch `fix/issue140-partial-extract`**. **P10 must re-run `python3 scripts/audit_bin_forms.py` after integrating BOTH branches** for the FINAL post-extraction numbers — at which point these 11 leave the `.bin` set entirely (they convert to the extracted fe8u form) and MISS settles back toward 3.
-
-**Tier-2 triage refinement** (additive to D337's "14 LZ probes, over-captured tails / no fe8u sink"). A read-only triage of the 14 LZ deep-RE probes **confirms 13 have no fe8u content sink** (JP-divergent Link-Arena UI/CG/menu/data; genuine deep-RE FLOOR — decompressed content differs from every fe8u file even where sizes coincide). It also finds **one refinement**: `graphics/frontier_df4_menu/frontier_df4_menu_029_AA3860.bin` — its **leading** 377-byte LZ stream decodes byte-exact (stdlib + gbagfx) to fe8u `graphics/misc/Tsa_MainMenuBgFog.tsa.bin` (2050 B), followed by ~14 KB of over-captured trailing data. It is a **partial/embedded MISS-candidate for a FUTURE extraction** (needs segmentation RE), **not** a clean twin — left UNCERTAIN here (classify, don't force).
-
-**Status:** audit tool fixed + self-tests green; `docs/bin_audit.md` regenerated (MISS 14 / FLOOR 1390 / UNCERTAIN 226). Byte-exact gate held (docs/tooling changed no ROM bytes). **Not pushed, not merged** — P10 owns serialized integration.
+**Byte-exact:** docs/tooling only — no ROM bytes move (`make compare` = `fireemblem8.gba: OK`, `make shiftcheck` =
+0 HIGH).

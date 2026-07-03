@@ -817,9 +817,51 @@ SELF_TEST_NOTES = [
     "`graphics/banim/efx*` effect bins are classified **FLOOR**.",
     "`data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).",
     "30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).",
-    "**D337-correction:** a JP `.bin` that is the LZ77-compressed derivative of fe8u's DECOMPRESSED binary source (`0x10` header, decoded size == twin size, full stdlib decode == twin bytes) is classified **MISS** (extractable) — e.g. `gWorldmapMinimap_1`, `gUnkData_{15,67,68,70,71,72,73,80,89,92}` -> fe8u `graphics/misc/*.tsa.bin`.",
-    "Raw-parity twins (JP already decompressed; no `0x10` header — e.g. `gWorldmapMinimap_2`, `gEndingDetails_0`, `gMenuSoundroom_*`, `gBattleForecast_*`) stay **FLOOR** (genuine floor; not over-reclassified).",
+    "**D337-correction (Rule 3b):** a JP `.bin` that is the LZ77-compressed derivative of fe8u's DECOMPRESSED binary source (`0x10` header, decoded size == twin size, full stdlib decode == twin bytes) is classified **MISS** (extractable), not FLOOR. The historical mis-floored LZ class (`gWorldmapMinimap_1`, `gUnkData_{15,67,68,70,71,72,73,80,89,92}`) has since been EXTRACTED to `graphics/**/*.tsa.bin` (issue #140) and is now fe8u-form-parity **FLOOR**; the rule remains as a fail-closed regression guard (helper-unit-tested below).",
+    "Raw-parity twins (JP already decompressed; no `0x10` header — e.g. the extracted `gUnkData_15`, `gMenuSoundroom_*`, `gBattleForecast_*`, `gEndingDetails_0`) are GENUINE **FLOOR** and are NOT over-reclassified (the rule fails closed on any absent / non-`0x10` / size- or byte-mismatch).",
 ]
+
+
+def _self_test_lz77_helpers():
+    """File-independent (+ two real-file) regression guards for the D337-correction
+    Rule 3b helpers. These run on EVERY invocation regardless of which blobs are
+    present, so the compressed-vs-decompressed rule stays covered even now that the
+    11 originally-reclassified LZ blobs have been extracted out of the .bin set."""
+    fails = []
+    # Known-good GBA BIOS LZ77 (type 0x10) vector: literals "ABC" + a
+    # (len=6, disp=3) back-reference -> "ABCABCABC" (9 bytes).
+    vec = bytes([0x10, 0x09, 0x00, 0x00, 0x10, 0x41, 0x42, 0x43, 0x30, 0x02])
+    if _lz77_header_size(vec) != 9:
+        fails.append("_lz77_header_size(known vector) != 9")
+    if _lz77_decompress(vec) != b"ABCABCABC":
+        fails.append("_lz77_decompress(known vector) != b'ABCABCABC'")
+    # Fails CLOSED on a non-0x10 blob (raw-parity must never look compressed):
+    if _lz77_header_size(b"\x00\x01\x02\x03") is not None:
+        fails.append("_lz77_header_size(non-0x10) should be None")
+    if _lz77_decompress(b"\x00\x01\x02\x03") is not None:
+        fails.append("_lz77_decompress(non-0x10) should be None")
+    # _is_compressed_derivative FALSE-path on a real raw .tsa.bin twin (no 0x10
+    # header) -- the extracted fe8u-form-parity class must stay FLOOR:
+    raw = os.path.join(FE8J, "graphics/misc/gUnkData_15.tsa.bin")
+    if os.path.exists(raw) and _is_compressed_derivative(
+            raw, "graphics/misc/gUnkData_15.tsa.bin"):
+        fails.append("_is_compressed_derivative must be False for a raw "
+                     "(non-0x10) .tsa.bin twin")
+    # _is_compressed_derivative TRUE-path on the one real compressed derivative
+    # left in the tree: menu_029's LEADING LZ stream decodes byte-exact to fe8u
+    # Tsa_MainMenuBgFog.tsa.bin (2050 B). NOTE: classify() does NOT reclassify
+    # menu_029 (no fe8u basename-twin; the ~14 KB opaque tail makes the whole blob
+    # a concatenation -> D338 Tier-2 "partial/embedded"); this only exercises the
+    # decode+size+byte-compare glue. Guarded so a future menu_029 extraction skips.
+    m029 = os.path.join(
+        FE8J, "graphics/frontier_df4_menu/frontier_df4_menu_029_AA3860.bin")
+    twin = "graphics/misc/Tsa_MainMenuBgFog.tsa.bin"
+    if (os.path.exists(m029) and FE8U is not None
+            and os.path.exists(os.path.join(FE8U, twin))
+            and not _is_compressed_derivative(m029, twin)):
+        fails.append("_is_compressed_derivative TRUE-path (menu_029 leading "
+                     "stream -> Tsa_MainMenuBgFog) regressed")
+    return fails
 
 
 def run_self_tests(by_path):
@@ -846,18 +888,18 @@ def run_self_tests(by_path):
     expect("data/sound/gMPlayTable.bin", "MISS")
     # D326: verified 30x20 u16 banim screen tilemaps -> FLOOR (fe8u keeps binary)
     expect("frontier_banim_aurabg3/frontier_banim_aurabg3_005_774CB8.bin", "FLOOR")
-    # D337-correction (Rule 3b compressed-vs-decompressed fix): a JP blob that is
-    # the LZ77-compressed derivative of fe8u's DECOMPRESSED binary source is a
-    # MISS (extractable), NOT floor. Representative reclassified blobs:
-    expect("data/residual/gWorldmapMinimap_1.bin", "MISS")
-    expect("data/residual/gUnkData_70.bin", "MISS")
-    expect("data/residual/gUnkData_15.bin", "MISS")
-    # ...but RAW-PARITY twins (JP already decompressed; no 0x10 LZ header) are
-    # GENUINE FLOOR and must NOT be over-reclassified:
-    expect("data/residual/gWorldmapMinimap_2.bin", "FLOOR")
-    expect("data/residual/gEndingDetails_0.bin", "FLOOR")
-    expect("data/residual/gMenuSoundroom_0.bin", "FLOOR")
-    expect("data/residual/gBattleForecast_0.bin", "FLOOR")
+    # D337-correction (Rule 3b compressed-vs-decompressed fix) — POST-EXTRACTION.
+    # The 11 LZ blobs this rule was written to reclassify (e.g.
+    # data/residual/gUnkData_15.bin) were EXTRACTED to graphics/**/*.tsa.bin
+    # (issue #140), so they are GONE from the .bin set on this tree. Asserting on
+    # those deleted paths would silently skip (see expect() above) and test
+    # NOTHING. Instead: (b) assert a representative EXTRACTED twin is correctly
+    # FLOOR (fe8u-form-parity, no 0x10 header -> the rule must not over-
+    # reclassify it), and (a)+(c) unit-test the LZ77 helpers + both directions of
+    # _is_compressed_derivative (file-independent + two real files) so the rule
+    # stays covered even with 0 live reclassifications here.
+    expect("graphics/misc/gUnkData_15.tsa.bin", "FLOOR")
+    failures.extend(_self_test_lz77_helpers())
     return failures
 
 
