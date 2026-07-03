@@ -9533,7 +9533,7 @@ __asm__(
 "\t.4byte 0x0000000E\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000001\n"
-"\t.4byte gBmlib_0 + 0x60\n"
+"\t.4byte frontier_df4_misc_lo_000b2t_0DC5F4\n"
 "\t.4byte 0x00000015\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x0002000F\n"
