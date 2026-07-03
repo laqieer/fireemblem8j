@@ -519,6 +519,13 @@ DrawGMapPIPanelAtHeight (width 13→12), SioHandleIrq_Serial (0x1288→0x1286), 
   the case-3 inline-asm trick), EventA8_WmUnitMoveFree (sub_800C994, sl/r8-vs-ip/r7 cascade — and it OWNS
   the poisoned-alias fix below), Event0F_CounterOps (sub_800DE3C, r4↔r5). Best permuter targets first:
   Event26 (3B), Event1B (9B), Event0E (10B).
+> [SUPERSEDED 2026-07-03 — Bravo] **Event1B_TEXTSHOW (sub_800E5CC) is MATCHED byte-exact and banked
+> to main** — this RETRACTS every "9B/6B NEAR / KEEP / non-matchable" call for it throughout this log
+> (incl. the earlier "Event1B_TEXTSHOW — 9B", "6B evArgument", and "9-byte ea-zero-extend ... KEEP"
+> mentions). Fix: `int evArgument` (not `short`) makes stock agbcc hold the sign-extension ->
+> reproduces the JP `ldrsh`, residual -> 0. decomp.me OqAJ4 = SOLVED@0. Companion wall-break:
+> **Event2F_MoveUnit (sub_800FF08)** matched byte-exact w/ `-mjp-promote` (scratch jeBp5 documented
+> CARVED-IN-REPO / non-SOLVED — decomp.me stock agbcc lacks the flag).
 
 ### Vein status (2026-06-24) — 0x800–0x808 clean vein
 - **0x800–0x808 clean vein (2026-06-24, +14 more):** carved ApplySepiaToPaletteBuffer,

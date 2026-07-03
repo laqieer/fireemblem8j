@@ -7450,6 +7450,14 @@ provable floor). **Net:** the genuinely-impossible floor is SMALLER than D287 im
 twins + the custom-newlib cluster), and several functions I'd written off (RegisterTsaWithOffset = 6 bytes) are
 close NEARs the fleet can crack. LESSON: verify which function a #ifdef guard wraps before declaring a function
 impossible — don't trust grep proximity.
+> [SUPERSEDED 2026-07-03 — Bravo] The "genuinely non-matchable" call above is RETRACTED for
+> **Event1B_TEXTSHOW (sub_800E5CC)** only: it was matched BYTE-EXACT and banked to main
+> (declaring the arg-read local `int evArgument` instead of `short` makes stock agbcc reproduce
+> the JP `ldrsh` sign-extension, residual -> 0). decomp.me scratch OqAJ4 = SOLVED@0. The OTHER two
+> twins named on that line — LoadBattleSpritesForBranchScreen (sub_80D1D1C) and efxIvaldi_Loop_Main
+> — are NOT addressed by this note (status unchanged). Companion wall-break the same session:
+> **Event2F_MoveUnit (sub_800FF08)** matched byte-exact w/ `-mjp-promote` (scratch jeBp5 is
+> CARVED-IN-REPO / non-SOLVED — decomp.me stock agbcc lacks the flag). Ref: docs/axis2-recipe-queue.md.
 
 ## D288 — Real-source + lib-link sweep (+7 matching-C): the D287-CORRECTION mindset applied to the whole "hard" tail
 **Date:** 2026-06-26. **Decision/finding:** re-verifying every "confirmed-hard" / "impossible" still-asm function
