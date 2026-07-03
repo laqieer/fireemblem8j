@@ -1,0 +1,3 @@
+# TSA preview manifest.
+# preview	confidence	status	tsa_source	tileset	palette	offset	width	height	note	check	check_issue	dropped_pct
+preview/tsa/opanim/OpAnimScrollBg.png	high	ok	N/A (raw 4bpp, no TSA)	graphics/opanim/opanim{1..100}.png	graphics/opanim/08B103D8.gbapal (first 16)	0	30	100	Assembled 240x800 preview of 100 scroll-bg bands (opanim1-100); each band is 240x8 GBA-screen-width; bands loop during opaque animation		0
