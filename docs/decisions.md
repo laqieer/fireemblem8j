@@ -9309,3 +9309,17 @@ mis-extracted fe8u twin.
 - The **348** hardware/RAM casts (0x02–0x07 ranges) are legitimately absolute (MMIO / IWRAM / EWRAM), correctly NOT relocated.
 
 **Conclusion.** Genuine dereferenceable pointer debt = **0**. Axis-5 gate = 1 is a documented coincidental false-positive floor, consistent with D304/D305/D309. The remaining opaque-byte frontier (96,804 bytes) is an *editability* concern (axis-6), not a shiftability concern — any pointers inside still-compressed blobs need typed-asset extraction (D306), not `.4byte` relocation.
+
+## D345 — Shiftability was NOT at floor: opaque `.incbin` proc-script/bmlib tables hid un-relocatable function pointers (a FALSE FLOOR); #143 title→menu unblocked (2026-07-03)
+
+**Corrects D344.** D344 concluded axis-5 (shiftability) was "at floor on both the code and data sides, genuine dereferenceable pointer debt = 0, no further de-pointering safe." That conclusion was **WRONG**. It rested on `scripts/audit_pointers.py --true-debt --gate` and `make shiftcheck`, both of which are **BLIND to raw function pointers embedded inside opaque `.incbin`/`.byte` data**: such pointers carry **no relocation** for the tools to audit, so the tools silently count them as "not debt" when they are in fact un-relocatable pointer debt. This is a **false floor** — the metric reads clean precisely because the pointers are invisible, not because they are absent.
+
+**Evidence (#143).** A +0x40000-shifted FE8J ROM stalled entering the menu. Root cause: two data tables were raw `.incbin` holding raw absolute function-pointer words the linker cannot relocate:
+- `gProcScr_TitleScreen` (JP 0x08B3F024, 360 B) — 45 `struct ProcCmd` entries, **27 fn-pointers** (incl. the `Title_Init` pointer the crash traced to).
+- `gBmlib_0` (JP 0x080DC594, 96 B) — 8 `struct FadeKindEnt`, **16 fn-pointers** (spawn_proc + setup_color_fade).
+
+Both were typed into C so every embedded pointer became a relocatable `R_ARM_ABS32` symbol reference (43 pointers total). `make compare` stayed `fireemblem8.gba: OK` (byte-exact, REGION_SAME vs fe8u); `make shiftcheck` = **0 HIGH** on both sub-checks. This unblocks the shifted-ROM title→menu transition. (A cross-resource `gBmlib_0 + 0x60` residual in `frontier_df4_uistuff`, surfaced only because gBmlib_0 became relocatable, was also repointed to its neighbour's own tail symbol — byte-identical, 0x080DC5F4.)
+
+**Scope of the reopened frontier.** The `gProcScr_*`/`gBmlib_*` family is a genuine, previously-invisible shiftability frontier. After typing these 2, **84 family tables remain raw** (`sym_jp.txt`: 85 `gProcScr_` + 1 `gBmlib_` = 86, minus the 2 now typed). Each is a proc-script / dispatch table whose embedded fn-pointers are un-relocatable until typed. Tracked as a follow-up epic; only carve when 100% of a table's pointers resolve to named globals (HIGH-neutral, byte-exact) as done here.
+
+**Methodological takeaway.** `audit_pointers.py` / `shiftcheck` are necessary but **not sufficient** for the shiftability axis: they cannot see pointers inside opaque incbin. A "gate = 0/1" floor claim holds ONLY for already-typed/visible data. A table is not proven shiftable until its bytes are typed (or confirmed pointer-free). Do not re-assert "axis-5 at floor" while opaque `gProcScr_*`/`gBmlib_*` (or any incbin function-pointer table) remain. The `audit_pointers.py --gate = 1` coincidental-constant floor from D344 is still accurate *for what it measures* — it simply does not measure this class of debt.
