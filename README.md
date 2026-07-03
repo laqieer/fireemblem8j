@@ -24,6 +24,14 @@ data (text, fonts, menus, save versioning).
 * [Wiki](https://github.com/laqieer/fireemblem8j/wiki) — project documentation and notes.
 * [Discussions](https://github.com/laqieer/fireemblem8j/discussions) — questions, coordination, and ideas.
 
+## Used by
+
+Projects powered by this decomp, including its debug-info ELF for `nm -l`/`readelf` tooling:
+
+* [**fe-maps**](https://github.com/laqieer/fe-maps) ([site](https://laqieer.github.io/fe-maps/)) — browsable ROM/RAM data maps extracted from this decomp's ELF.
+* [**FE_GBA_Function_Library**](https://github.com/laqieer/FE_GBA_Function_Library) ([site](https://laqieer.github.io/FE_GBA_Function_Library/)) — cross-game function documentation with per-address signatures and `source:line` links.
+* [**FE-Clib-Decomp**](https://github.com/laqieer/FE-Clib-Decomp) — ROM-hacking linker scripts, `lyn` reference assembly, and Event Assembler defines generated from this decomp's ELF.
+
 ## Goal
 
 **Build the ROM byte-for-byte from committed source with `baserom.gba` removed.**
