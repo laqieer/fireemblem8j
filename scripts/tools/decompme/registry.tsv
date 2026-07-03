@@ -10,7 +10,6 @@ sub_8001570	ABitG	AddAttr2dBitMap
 sub_80A3300	ENay1	sub_80A3300
 sub_80A6E4C	g7FXU	sub_80A6E4C
 sub_80A730C	0P3Mz	sub_80A730C
-sub_80A73D4	6rBHq	sub_80A73D4
 sub_80BB240	KqnUn	sub_80BB240
 sub_80BCD74	aL39G	sub_80BCD74
 # DONE (carved in-repo as src/LoadClassReelFontPalette.c, D307; scratch marked SOLVED to avoid wasted community effort):
@@ -32,6 +31,7 @@ sub_80C05C8	R7AaX	GmapScreen2_Loop
 # DONE (carved in-repo + decomp.me scratch marked SOLVED @ score 0 — Bravo decomp.me-sync 2026-07-03):
 # sub_80B8B28	mOclN	ClassStatsDisplay_Loop  (SOLVED@0)
 # sub_80D1844	VzzCC	LoadClassNameInClassReelFont  (SOLVED@0)
-# NOTE: sub_80A73D4 (6rBHq) is ALSO SOLVED@0 + carved, but its carve manifest is
-#   80A73D4-arena-scoreboard.tsv (not gbadisasm_sub_80A73D4.tsv), so decomp_status can't
-#   auto-detect the carve; left active above to avoid a false NOT_POSTED. Retire once detection is fixed.
+# sub_80A73D4	6rBHq	(SOLVED@0; carved as layout/carved_rom.d/80A73D4-arena-scoreboard.tsv)
+#   Retired from active list: carve manifest is 80A73D4-arena-scoreboard.tsv (not
+#   gbadisasm_sub_80A73D4.tsv), so decomp_status's carved_object() can't auto-detect it;
+#   retiring here (like mOclN/VzzCC) keeps the default sweep from a false INTEGRATE/stale warning.
