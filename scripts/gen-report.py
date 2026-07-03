@@ -13,23 +13,24 @@ The US sibling (../fireemblem8u) takes the same approach with scripts/gen-report
 calcprogress.py (matching scripts/progress-template.txt) emits, among others:
 
     <N> total bytes of code
-    <N> bytes of code in src (<P>%)
+    <N> bytes of code from source (<P>%)
     <N> bytes of code in asm (<P>%)
     <N> total symbols
     <N> symbols documented (<P>%)
     <N> symbols partially documented (<P>%)
     <N> total bytes of data
-    <N> bytes of data in src (<P>%)
+    <N> bytes of data from source (<P>%)
     <N> bytes of data in data (<P>%)
     <N> bytes of data in banim (<P>%)
     <N> bytes of data in sound (<P>%)
     <N> functions in total, <M> functions (<P>%) have been decompiled.
 
-matched_code = bytes of code in src (this decomp builds byte-identical, so code in
-src is matched code); the asm/ remainder is the only unmatched code. matched_data =
-bytes of data in src (data carved out into real objects); the remaining
-data/banim/sound is not yet matched. matched_functions = functions decompiled into
-src.
+matched_code = bytes of code from source (src + libc/libgcc archives, all built
+byte-identical and linked like fe8u, so code from source is matched code); the
+asm/ remainder is the only unmatched code. matched_data = bytes of data from
+source (src objects + banim compressing-linker + sound mid2agb -- every form that
+originates from committed source); the remaining opaque residual is not yet
+matched. matched_functions = functions decompiled into src.
 
 Per the objdiff report.proto, uint64 measures (total_code/matched_code/total_data/
 matched_data) serialize as JSON strings, uint32 measures (total_functions/
@@ -45,7 +46,7 @@ import sys
 
 def parse_and_convert(input_text):
     total_code_match = re.search(r"(\d+)\s+total bytes of code", input_text)
-    src_code_match = re.search(r"(\d+)\s+bytes of code in src \(([\d.]+)%\)", input_text)
+    src_code_match = re.search(r"(\d+)\s+bytes of code from source \(([\d.]+)%\)", input_text)
 
     total_symbols_match = re.search(r"(\d+)\s+total symbols", input_text)
     documented_symbols_match = re.search(
@@ -78,7 +79,7 @@ def parse_and_convert(input_text):
     # Data: total = src + data + banim + sound; matched = bytes carved into src.
     total_data_match = re.search(r"(\d+)\s+total bytes of data", input_text)
     src_data_match = re.search(
-        r"(\d+)\s+bytes of data in src \(([\d.]+)%\)", input_text
+        r"(\d+)\s+bytes of data from source \(([\d.]+)%\)", input_text
     )
     if total_data_match and src_data_match:
         measures["total_data"] = str(int(total_data_match.group(1)))
