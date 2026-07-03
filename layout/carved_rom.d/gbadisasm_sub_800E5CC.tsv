@@ -1,1 +1,1 @@
-00E5CC	00E730	asm/sub_800E5CC.o(.text.sub_800E5CC)	sub_800E5CC region-different gbadisasm descriptive asm
+00E5CC	00E730	src/sub_800E5CC.o(.text)	Event1B_TEXTSHOW (handdecomp, fe8u eventscr.c verbatim)
