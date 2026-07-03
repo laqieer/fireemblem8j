@@ -4,17 +4,17 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_67[] = INCBIN_U8("data/residual/gUnkData_67.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_68[] = INCBIN_U8("data/residual/gUnkData_68.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_67[] = INCBIN_U8("graphics/misc/gUnkData_67.tsa.bin.lz");
+SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_68[] = INCBIN_U8("graphics/misc/gUnkData_68.tsa.bin.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_69[] = INCBIN_U8("graphics/reuse/gUnkData_69.4bpp.lz");
-SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_70[] = INCBIN_U8("data/residual/gUnkData_70.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_70[] = INCBIN_U8("graphics/misc/gUnkData_70.tsa.bin.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 Tsa_PrepItemScreen[] = INCBIN_U8("graphics/gmapunit/Tsa_PrepItemScreen.bin.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 Tsa_UnkData_4[] = INCBIN_U8("graphics/gmapunit/Tsa_UnkData_4.bin.lz");
-SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_71[] = INCBIN_U8("data/residual/gUnkData_71.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_71[] = INCBIN_U8("graphics/misc/gUnkData_71.tsa.bin.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 Img_PrepItemUseScreen[] = INCBIN_U8("graphics/gmapunit/Img_PrepItemUseScreen.4bpp.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 Tsa_PrepItemUseScreen[] = INCBIN_U8("graphics/gmapunit/Tsa_PrepItemUseScreen.bin.lz");
-SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_72[] = INCBIN_U8("data/residual/gUnkData_72.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_73[] = INCBIN_U8("data/residual/gUnkData_73.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_72[] = INCBIN_U8("graphics/misc/gUnkData_72.tsa.bin.lz");
+SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_73[] = INCBIN_U8("graphics/misc/gUnkData_73.tsa.bin.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u16 gUnkData_74[] = INCBIN_U16("graphics/reuse/gUnkData_74.4bpp");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u8 gUnkData_75[] = INCBIN_U8("graphics/reuse/gUnkData_75.4bpp");
 SECTION(".rodata.dat_worldmap_gmapunit_p1602") u16 gUnkData_76[] = {

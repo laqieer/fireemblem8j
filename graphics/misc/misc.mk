@@ -53,3 +53,16 @@ graphics/misc/Tsa7_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
 graphics/misc/Tsa8_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
 
 graphics/misc/Tsa9_MonsterStoneMapAnimfx.tsa.bin.lz: LZ_FLAGS := -mindist 2
+
+# issue140: gUnkData_*/gMenuSoundroom_* (re-homed from data/residual) TSA.lz files.
+# mindist pins verified by decompress->recompress->cmp against original residual bytes.
+graphics/misc/gUnkData_15.tsa.bin.lz: LZ_FLAGS := -mindist 1
+graphics/misc/gUnkData_67.tsa.bin.lz: LZ_FLAGS := -mindist 1
+graphics/misc/gUnkData_68.tsa.bin.lz: LZ_FLAGS := -mindist 1
+graphics/misc/gUnkData_70.tsa.bin.lz: LZ_FLAGS := -mindist 1
+graphics/misc/gUnkData_71.tsa.bin.lz: LZ_FLAGS := -mindist 2
+graphics/misc/gUnkData_72.tsa.bin.lz: LZ_FLAGS := -mindist 2
+graphics/misc/gUnkData_73.tsa.bin.lz: LZ_FLAGS := -mindist 1
+graphics/misc/gUnkData_80.tsa.bin.lz: LZ_FLAGS := -mindist 2
+graphics/misc/gUnkData_89.tsa.bin.lz: LZ_FLAGS := -mindist 1
+graphics/misc/gUnkData_92.tsa.bin.lz: LZ_FLAGS := -mindist 2
