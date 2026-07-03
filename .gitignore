@@ -28,6 +28,7 @@ build/shiftcheck/
 *.rl
 *.fk
 *.4bpp.h
+!graphics/debug_font.4bpp.h
 
 # TSA battle-background intermediates (D309). The editable source is the .png;
 # FETSATOOL regenerates these byte-for-byte (mirrors ../fireemblem8u which also
@@ -111,6 +112,7 @@ src/*.s
 # syscall wrappers. These are COMMITTED sources, not generated, and count as matching-C.
 !src/libagbsyscall.s
 !src/call_via.s
+!src/rom_header.s
 !src/agbsyscall_80D5244.s
 !src/m4a_1.s
 !src/arm.s
