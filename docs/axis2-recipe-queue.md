@@ -10,6 +10,9 @@ Tractability order (full per-recipe detail in the D307/W3 triage report):
   flow — reconstruct directly from asm. EASIEST augury fn.
 - **#26 sub_800FAD0** (464B): fe8u eventscr.c NONMATCHING GetUnitDefinitionFormEventScr body +
   JP arg-sign (arg2 u8/lsrs, arg3/4 s8/asrs) + -mjp-promote.
+  WIRING: sub_800FAD0 already HAS the `GetUnitDefinitionFormEventScr` baseline alias
+  (0800FAD0, layout/baseline_syms.d/Event2C_LoadUnits-0e52685b.tsv) — carving must DROP that
+  baseline alias (else multiple-def), not add a new one. (Consistent with src/nonmatching/sub_800FAD0.c line ~44.)
 - **#9 sub_80BB240** (232B): ending_details defeat-text builder, msgids US-0x88, JP callees.
 - **#10 sub_80BCD74** (244B): worldmap path-follow proc, 0x100/0x200 floor-quantize.
 - **#11 sub_800FF08** (384B): Event2F_MoveUnit analog + -mjp-promote (watch subcmd dir order).
@@ -28,15 +31,23 @@ WIRING: carved fns drop their baseline alias from layout/baseline_syms.d/ (else 
 add NEEDS_ALIAS data entries (gClassReelNameTable etc.); fix cfbind garbage StartGmapAutoMu_Type1
 (07E72DA4 -> 080C818C) before any EventA8 carve. make compare is the ONLY oracle.
 
-## PERMUTER WALL RECORDS (D307/W17 adversarial-verifier, D308) — confirmed irreducible
-- **Event1B_TEXTSHOW** (356B): 50,879 permuter iters, best 35, **6-byte residual** = agbcc
-  RTL reg-alloc wall (u16 zero-extend via r0→r1 temp vs JP direct r3→r1). NOT source-fixable.
+## PERMUTER WALL RECORDS (D307/W17 adversarial-verifier, D308)
+GENUINE agbcc-2.95 codegen walls, kept as descriptive asm (fe8u-NONMATCHING-equivalent):
 - **sub_8084CE4** (120B): ~1.1M iters, best 795, **8-byte residual** = agbcc hoists the 0xff
   mask into a 3rd hi-reg (extra push/pop) vs JP inline `movs;ands` per iter. Structural wall.
-- **sub_80A73D4** (256B): base 7290 → best 4070, deep reg-coloring wall.
-These 3 + the W14-verified walls (sub_80BB240 80B, sub_800FF08 261B, sub_80BCD74 no-analog)
-are kept as descriptive asm (fe8u-NONMATCHING-equivalent). Axis #2 literal-100% needs a
-transmuter/compiler breakthrough (D277 proved transmuter infeasible for reg-coloring).
+- **sub_80BB240** (80B), **sub_80BCD74** (no-analog): W14-verified walls (fe8u-NONMATCHING-equiv).
+Axis #2 literal-100% still needs a transmuter/compiler breakthrough for these (D277 proved
+transmuter infeasible for pure reg-coloring).
+
+### SUPERSEDED — recorded here as "irreducible" but since MATCHED byte-exact (banked to main):
+- **Event1B_TEXTSHOW** (sub_800E5CC): the "best 35 / 6-byte residual / NOT source-fixable" call is
+  RETRACTED — `int evArgument` (not `short`) makes stock agbcc reproduce the JP `ldrsh`, residual→0.
+  Banked commit c74089494; decomp.me OqAJ4 SOLVED@0.
+- **sub_80A73D4**: the "7290→4070 deep reg-coloring wall" call is RETRACTED — reconstructed directly
+  (no control flow; the "EASIEST augury fn" of #8/#30). Banked byte-exact; decomp.me 6rBHq SOLVED@0.
+- **sub_800FF08** (Event2F_MoveUnit): NOT a wall — matched byte-exact in-repo with `-mjp-promote`.
+  decomp.me jeBp5 can't reach 0 only because decomp.me stock agbcc lacks `-mjp-promote` (documented
+  there, non-SOLVED). Banked byte-exact.
 
 ## D312 — Event0F_CounterOps (sub_800DE3C): asr-fix → 1-swap NEAR (permuter candidate)
 fe8u eventscr.c:476 body + the real JP divergence FIXED: COUNTER_SET uses an ARITHMETIC shift
