@@ -34,10 +34,10 @@ SECTION(".rodata.dat_worldmap_gmapunit_p1637") u16 gMenuMainObjs_5[] = {
     0x001E, 0x0008, 0x0000, 0xFFFF, 0x0004, 0x0009, 0x0004, 0x000A, 0x0004, 0x000B, 0x0004, 0x000C,
     0x0000, 0xFFFF,
 };
-SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_0[] = INCBIN_U8("data/residual/gMenuSoundroom_0.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_1[] = INCBIN_U8("data/residual/gMenuSoundroom_1.bin");
-SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_2[] = INCBIN_U8("data/residual/gMenuSoundroom_2.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_0[] = INCBIN_U8("graphics/misc/gMenuSoundroom_0.tsa.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_1[] = INCBIN_U8("graphics/misc/gMenuSoundroom_1.tsa.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_2[] = INCBIN_U8("graphics/misc/gMenuSoundroom_2.tsa.bin");
 SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 Img_SoundRoomVolumeGraph[] = INCBIN_U8("graphics/gmapunit/Img_SoundRoomVolumeGraph.4bpp.lz");
 SECTION(".rodata.dat_worldmap_gmapunit_p1637") u16 Pal_SoundRoomVolumeGraph[] = INCBIN_U16("graphics/gmapunit/Pal_SoundRoomVolumeGraph.gbapal");
 SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_3[] = INCBIN_U8("graphics/reuse/gMenuSoundroom_3.4bpp.lz");
-SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_4[] = INCBIN_U8("data/residual/gMenuSoundroom_4.bin");
+SECTION(".rodata.dat_worldmap_gmapunit_p1637") u8 gMenuSoundroom_4[] = INCBIN_U8("graphics/misc/gMenuSoundroom_4.tsa.bin");

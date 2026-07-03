@@ -178,6 +178,10 @@ graphics/misc_gfx2/gWorldmapGmap_3.4bpp.lz: LZ_FLAGS := -mindist 2
 graphics/misc_gfx2/Img_GmapNodes.4bpp.lz: LZ_FLAGS := -mindist 2
 graphics/misc_gfx2/Img_GmapCastleNodes.4bpp.lz: LZ_FLAGS := -mindist 2
 
+# issue140: gTsa_WorldmapMinimap_1 (LZ-compressed TSA) requires mindist=2 to
+# reproduce byte-identical output vs the JP ROM.
+graphics/misc_gfx2/gTsa_WorldmapMinimap_1.bin.lz: LZ_FLAGS := -mindist 2
+
 # soil-pilot: typed C object replaces asm/dat_worldmap_gmap_p0.s in the layout.
 # It depends on 4 PNG-derived 4bpp files + 2 PNG-derived 4bpp.lz files.
 src/data/worldmap/worldmap_gmap.o: \
