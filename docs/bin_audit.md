@@ -48,6 +48,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | menu-strings | MISS | 2 | fe8u C literals (src/menu_def.c) |
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 0 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
+| lz-compressed-tsa | MISS | 0 | fe8u decompressed *.tsa.bin/*.map.bin source; JP ships the LZ77-compressed derivative (extractable) |
 | TSA/.map.bin | FLOOR | 1252 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
@@ -87,6 +88,8 @@ under MISS, asserted by the self-test guards below).
 - `graphics/banim/efx*` effect bins are classified **FLOOR**.
 - `data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).
 - 30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).
+- **D337-correction:** a JP `.bin` that is the LZ77-compressed derivative of fe8u's DECOMPRESSED binary source (`0x10` header, decoded size == twin size, full stdlib decode == twin bytes) is classified **MISS** (extractable) — e.g. `gWorldmapMinimap_1`, `gUnkData_{15,67,68,70,71,72,73,80,89,92}` -> fe8u `graphics/misc/*.tsa.bin`.
+- Raw-parity twins (JP already decompressed; no `0x10` header — e.g. `gWorldmapMinimap_2`, `gEndingDetails_0`, `gMenuSoundroom_*`, `gBattleForecast_*`) stay **FLOOR** (genuine floor; not over-reclassified).
 
 ## MISS (3) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
@@ -124,26 +127,6 @@ under MISS, asserted by the self-test guards below).
 | `data/residual/data_086BAB74_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `data/residual/data_087644A8_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `data/residual/data_08764BF4_0.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
-| `data/residual/gBattleForecast_0.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gBattleForecast_0.tsa.bin |
-| `data/residual/gBattleForecast_1.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gBattleForecast_1.tsa.bin |
-| `data/residual/gBattleForecast_2.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gBattleForecast_2.tsa.bin |
-| `data/residual/gEndingDetails_0.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gEndingDetails_0.tsa.bin |
-| `data/residual/gMenuSoundroom_0.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gMenuSoundroom_0.tsa.bin |
-| `data/residual/gMenuSoundroom_1.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gMenuSoundroom_1.tsa.bin |
-| `data/residual/gMenuSoundroom_2.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gMenuSoundroom_2.tsa.bin |
-| `data/residual/gMenuSoundroom_4.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gMenuSoundroom_4.tsa.bin |
-| `data/residual/gUnkData_15.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_15.tsa.bin |
-| `data/residual/gUnkData_67.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_67.tsa.bin |
-| `data/residual/gUnkData_68.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_68.tsa.bin |
-| `data/residual/gUnkData_70.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_70.tsa.bin |
-| `data/residual/gUnkData_71.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_71.tsa.bin |
-| `data/residual/gUnkData_72.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_72.tsa.bin |
-| `data/residual/gUnkData_73.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_73.tsa.bin |
-| `data/residual/gUnkData_80.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_80.tsa.bin |
-| `data/residual/gUnkData_89.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_89.tsa.bin |
-| `data/residual/gUnkData_92.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gUnkData_92.tsa.bin |
-| `data/residual/gWorldmapMinimap_1.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gWorldmapMinimap_1.tsa.bin |
-| `data/residual/gWorldmapMinimap_2.bin` | TSA/.map.bin | fe8u also keeps binary: graphics/misc/gWorldmapMinimap_2.tsa.bin |
 | `graphics/banim/_us/banim/assets/tsa/005DD518_Tsa_BreathBgBase.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/_us/banim/assets/tsa/005DDAF4_Tsa_085DDAF4.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/_us/banim/assets/tsa/005E64D8_Tsa_085E64D8.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
@@ -822,6 +805,9 @@ under MISS, asserted by the self-test guards below).
 | `graphics/banim/misc/gBanimmisc_1.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/misc/gBanimmisc_2.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/banim/misc/gBanimmisc_5.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
+| `graphics/battle_forecast/gBattleForecast_0.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/battle_forecast/gBattleForecast_1.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/battle_forecast/gBattleForecast_2.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/battle_forecast/gTSA_BattleForecastExtended.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/battle_forecast/gTSA_BattleForecastStandard.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/btl_bg/btl_bg_14.fetsa3.bin` | TSA/.map.bin | fe8u keeps .fetsa3.bin binary (TSA/tilemap) |
@@ -1267,8 +1253,13 @@ under MISS, asserted by the self-test guards below).
 | `graphics/misc/Tsa7_MonsterStoneMapAnimfx.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/Tsa8_MonsterStoneMapAnimfx.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/Tsa9_MonsterStoneMapAnimfx.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gMenuSoundroom_0.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gMenuSoundroom_1.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gMenuSoundroom_2.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gMenuSoundroom_4.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_13.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_14.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gUnkData_15.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_26.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_42.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_50.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
@@ -1280,9 +1271,18 @@ under MISS, asserted by the self-test guards below).
 | `graphics/misc/gUnkData_56.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_57.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_58.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gUnkData_67.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gUnkData_68.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gUnkData_70.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gUnkData_71.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gUnkData_72.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gUnkData_73.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_77.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gUnkData_80.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_84.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc/gUnkData_86.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gUnkData_89.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/misc/gUnkData_92.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc_gfx/Tsa_GorgonHatchCloud_A.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx/Tsa_GorgonHatchCloud_B.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx/Tsa_GorgonHatchCloud_C.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
@@ -1362,6 +1362,7 @@ under MISS, asserted by the self-test guards below).
 | `graphics/misc_gfx2/Tsa_StaffReelEnt_9.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx2/Tsa_UnkData_0.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx2/Tsa_UnkData_5.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gEndingDetails_0.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/misc_gfx2/gTSA_GoalBox_OneLine.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx2/gTSA_GoalBox_TwoLines.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx2/gTSA_MinimugBox.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
@@ -1376,6 +1377,8 @@ under MISS, asserted by the self-test guards below).
 | `graphics/misc_gfx2/gTsa_SupportSubScreen.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx2/gTsa_UnkData_0.tsa.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/misc_gfx2/gTsa_WorldmapMinimap_0.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTsa_WorldmapMinimap_1.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/misc_gfx2/gTsa_WorldmapMinimap_2.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/opanim/OpAnimCharacterBG.map.bin` | opanim-tilemaps | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/opanim/OpAnimEirikaClose1.map.bin` | opanim-tilemaps | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/opanim/OpAnimEirikaClose2.map.bin` | opanim-tilemaps | fe8u keeps .map.bin binary (TSA/tilemap) |

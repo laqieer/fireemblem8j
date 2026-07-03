@@ -36,9 +36,17 @@ METHOD (reviewable, see the doc header it writes)
                                  is a MISS and the fe8u path is the proof. This is
                                  cross-checked against the ROM symbol via
                                  layout/*.tsv where the basename itself fails.
-      3b. FLOOR by fe8u binary basename — if instead fe8u commits a *.bin with
-                                 that basename, it is FLOOR (the basename proves
-                                 fe8u keeps it binary).
+      3b. FLOOR / MISS by fe8u binary basename — if instead fe8u commits a
+                                 *.bin with that basename it is normally FLOOR (the
+                                 basename proves fe8u keeps it binary). EXCEPTION
+                                 (D337 floor-overstatement fix): if the fe8j blob is
+                                 an LZ77-COMPRESSED derivative of that DECOMPRESSED
+                                 fe8u source (0x10 header, decoded size == twin size,
+                                 full decode == twin bytes) then fe8u builds the
+                                 `.lz` from the `.tsa.bin`/`.map.bin`, so the JP blob
+                                 is reducible / EXTRACTABLE -> MISS, not floor. Raw-
+                                 parity twins (JP already decompressed, no 0x10
+                                 header) stay FLOOR.
       4. MISS / UNCERTAIN by content-type name-class — for fe8j ROM-region-named
                                  blobs (e.g. `frontier_chap_title_NNN_ADDR`,
                                  `Img_*`, banim AnimSprite/Img, UnitDef_*, song*,
@@ -267,6 +275,7 @@ PLAN_CATEGORIES = OrderedDict([
     ("menu-strings",       ("MISS",      "fe8u C literals (src/menu_def.c)")),
     ("unitdef-residuals",  ("MISS",      "fe8u src/events_udefs.c typed C")),
     ("map-tilemaps",       ("MISS",      "fe8u graphics/map/*.S / *.png (MARTOMAP)")),
+    ("lz-compressed-tsa",  ("MISS",      "fe8u decompressed *.tsa.bin/*.map.bin source; JP ships the LZ77-compressed derivative (extractable)")),
     ("TSA/.map.bin",       ("FLOOR",     "fe8u keeps TSA/tilemaps binary too")),
     ("PCM/.aif",           ("FLOOR",     "fe8u direct_sound PCM binary (floor here)")),
     ("opanim-tilemaps",    ("FLOOR",     "fe8u op_anim/opanim tilemaps binary")),
@@ -372,6 +381,97 @@ def _is_screen_tilemap(path):
 
 
 # --------------------------------------------------------------------------- #
+# LZ77 compressed-vs-decompressed detection (Rule 3b — D337 floor-count fix).  #
+#                                                                              #
+# A JP `.bin` that is GBA BIOS LZ77 (type 0x10) compressed AND decodes byte-   #
+# for-byte to fe8u's DECOMPRESSED binary twin is a REDUCIBLE derivative: fe8u  #
+# builds the `.lz` from that `.tsa.bin`/`.map.bin` source, so the JP blob is   #
+# EXTRACTABLE (a MISS), not an opaque floor. Detecting this corrects the D337  #
+# floor OVERSTATEMENT without over-reclassifying raw-parity twins (which carry #
+# no 0x10 header and therefore fail the check -> they stay FLOOR).             #
+# --------------------------------------------------------------------------- #
+def _read_bytes(path):
+    try:
+        with open(path, "rb") as fh:
+            return fh.read()
+    except OSError:
+        return None
+
+
+def _lz77_header_size(data):
+    """24-bit uncompressed size of a GBA BIOS LZ77 (type 0x10) blob, or None if
+    `data` does not start with an 0x10 LZ77 header."""
+    if len(data) < 4 or data[0] != 0x10:
+        return None
+    return data[1] | (data[2] << 8) | (data[3] << 16)
+
+
+def _lz77_decompress(data):
+    """Decode a GBA BIOS LZ77 (type 0x10) stream (stdlib only). Returns the
+    decompressed bytes, or None if the header is not 0x10 or the stream is
+    malformed. Produces exactly the leading, header-declared `size` bytes."""
+    size = _lz77_header_size(data)
+    if size is None:
+        return None
+    out = bytearray()
+    pos = 4
+    n = len(data)
+    while len(out) < size:
+        if pos >= n:
+            return None
+        flags = data[pos]
+        pos += 1
+        for bit in range(8):
+            if len(out) >= size:
+                break
+            if flags & (0x80 >> bit):
+                if pos + 1 >= n:
+                    return None
+                b0 = data[pos]
+                b1 = data[pos + 1]
+                pos += 2
+                length = (b0 >> 4) + 3
+                disp = (((b0 & 0xF) << 8) | b1) + 1
+                if disp > len(out):
+                    return None
+                start = len(out) - disp
+                for k in range(length):
+                    out.append(out[start + k])
+            else:
+                if pos >= n:
+                    return None
+                out.append(data[pos])
+                pos += 1
+    return bytes(out[:size])
+
+
+def _is_compressed_derivative(jp_abspath, fe8u_bin_relpath):
+    """True iff the fe8j `.bin` at `jp_abspath` is an LZ77-compressed derivative of
+    fe8u's DECOMPRESSED binary twin `fe8u_bin_relpath` (relative to FE8U).
+
+    Principled + GENERAL (not tied to any basename): the JP blob must carry a GBA
+    LZ77 (0x10) header whose 24-bit decompressed-size equals the fe8u twin's file
+    size, AND a full stdlib LZ77 decode must reproduce that twin byte-for-byte.
+    Fails CLOSED: an absent/unreadable twin, a non-0x10 blob, a size mismatch, or
+    any decoded-byte difference returns False (the blob stays FLOOR). Raw-parity
+    `.tsa.bin`/`.map.bin` twins (JP already decompressed) carry no 0x10 header, so
+    they are never reclassified."""
+    if FE8U is None:
+        return False
+    jp = _read_bytes(jp_abspath)
+    if jp is None:
+        return False
+    dsize = _lz77_header_size(jp)
+    if dsize is None:
+        return False
+    twin = _read_bytes(os.path.join(FE8U, fe8u_bin_relpath))
+    if twin is None or len(twin) != dsize:
+        return False
+    dec = _lz77_decompress(jp)
+    return dec is not None and dec == twin
+
+
+# --------------------------------------------------------------------------- #
 # Classification                                                               #
 # --------------------------------------------------------------------------- #
 def classify(path, fe8u_idx):
@@ -424,6 +524,19 @@ def classify(path, fe8u_idx):
             return ("MISS", "fe8u %s" % proof, _cat_for_ext(proof))
         if binonly:
             proof = binonly[0][0]
+            # Rule 3b: fe8u ALSO keeps a binary twin of this basename. Normally
+            # that is FLOOR (fe8u keeps the asset binary too). EXCEPTION (D337
+            # floor-overstatement fix): if the fe8j blob is an LZ77-COMPRESSED
+            # derivative of fe8u's DECOMPRESSED binary source (fe8u builds the
+            # `.lz` from that `.tsa.bin`/`.map.bin`), the JP blob is REDUCIBLE ->
+            # MISS (extractable). Confirmed by a full stdlib LZ77 decode == twin
+            # (see _is_compressed_derivative). Raw-parity twins (JP already
+            # decompressed, no 0x10 header) fail this and stay FLOOR.
+            if _is_compressed_derivative(os.path.join(FE8J, path), proof):
+                return ("MISS",
+                        "fe8u %s (fe8j ships the LZ77-compressed derivative; "
+                        "decompresses byte-exact to this fe8u source)" % proof,
+                        "lz-compressed-tsa")
             return ("FLOOR", "fe8u also keeps binary: %s" % proof,
                     "TSA/.map.bin" if proof.endswith((".tsa.bin", ".map.bin"))
                     else "ApConf/opaque")
@@ -704,6 +817,8 @@ SELF_TEST_NOTES = [
     "`graphics/banim/efx*` effect bins are classified **FLOOR**.",
     "`data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).",
     "30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).",
+    "**D337-correction:** a JP `.bin` that is the LZ77-compressed derivative of fe8u's DECOMPRESSED binary source (`0x10` header, decoded size == twin size, full stdlib decode == twin bytes) is classified **MISS** (extractable) — e.g. `gWorldmapMinimap_1`, `gUnkData_{15,67,68,70,71,72,73,80,89,92}` -> fe8u `graphics/misc/*.tsa.bin`.",
+    "Raw-parity twins (JP already decompressed; no `0x10` header — e.g. `gWorldmapMinimap_2`, `gEndingDetails_0`, `gMenuSoundroom_*`, `gBattleForecast_*`) stay **FLOOR** (genuine floor; not over-reclassified).",
 ]
 
 
@@ -731,6 +846,18 @@ def run_self_tests(by_path):
     expect("data/sound/gMPlayTable.bin", "MISS")
     # D326: verified 30x20 u16 banim screen tilemaps -> FLOOR (fe8u keeps binary)
     expect("frontier_banim_aurabg3/frontier_banim_aurabg3_005_774CB8.bin", "FLOOR")
+    # D337-correction (Rule 3b compressed-vs-decompressed fix): a JP blob that is
+    # the LZ77-compressed derivative of fe8u's DECOMPRESSED binary source is a
+    # MISS (extractable), NOT floor. Representative reclassified blobs:
+    expect("data/residual/gWorldmapMinimap_1.bin", "MISS")
+    expect("data/residual/gUnkData_70.bin", "MISS")
+    expect("data/residual/gUnkData_15.bin", "MISS")
+    # ...but RAW-PARITY twins (JP already decompressed; no 0x10 LZ header) are
+    # GENUINE FLOOR and must NOT be over-reclassified:
+    expect("data/residual/gWorldmapMinimap_2.bin", "FLOOR")
+    expect("data/residual/gEndingDetails_0.bin", "FLOOR")
+    expect("data/residual/gMenuSoundroom_0.bin", "FLOOR")
+    expect("data/residual/gBattleForecast_0.bin", "FLOOR")
     return failures
 
 
