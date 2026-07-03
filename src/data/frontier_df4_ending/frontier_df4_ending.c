@@ -817,7 +817,10 @@ __asm__(
     ".4byte 0x152c25d0\n"
     ".4byte 0x000008a7\n"
 );
-u8 frontier_df4_ending_016_B3EC33[] __attribute__((section(".data.frontier_df4_ending.gap16"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_016_B3EC33.bin");
+/* #143: tail 48 B (JP 0x08B3EDD0..0x08B3EE00) typed out as gProcScr_DrawTitleSprites +
+ * gProcScr_SkipTitleFxKeyListener in src/data/gProcScr_DrawTitleSprites_ref; keep only
+ * the 413 B head here so its interior code pointers become R_ARM_ABS32 relocations. */
+u8 frontier_df4_ending_016_B3EC33[] __attribute__((section(".data.frontier_df4_ending.gap16"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_016_B3EC33.bin", 0, 413);
 __asm__(
     ".section .data.frontier_df4_ending.gap17, \"aw\", %progbits\n"
     ".global frontier_df4_ending_017b_B3F18C\n"
