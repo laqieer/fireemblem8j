@@ -9323,3 +9323,20 @@ Both were typed into C so every embedded pointer became a relocatable `R_ARM_ABS
 **Scope of the reopened frontier.** The `gProcScr_*`/`gBmlib_*` family is a genuine, previously-invisible shiftability frontier. After typing these 2, **84 family tables remain raw** (`sym_jp.txt`: 85 `gProcScr_` + 1 `gBmlib_` = 86, minus the 2 now typed). Each is a proc-script / dispatch table whose embedded fn-pointers are un-relocatable until typed. Tracked as a follow-up epic; only carve when 100% of a table's pointers resolve to named globals (HIGH-neutral, byte-exact) as done here.
 
 **Methodological takeaway.** `audit_pointers.py` / `shiftcheck` are necessary but **not sufficient** for the shiftability axis: they cannot see pointers inside opaque incbin. A "gate = 0/1" floor claim holds ONLY for already-typed/visible data. A table is not proven shiftable until its bytes are typed (or confirmed pointer-free). Do not re-assert "axis-5 at floor" while opaque `gProcScr_*`/`gBmlib_*` (or any incbin function-pointer table) remain. The `audit_pointers.py --gate = 1` coincidental-constant floor from D344 is still accurate *for what it measures* — it simply does not measure this class of debt.
+
+## D346 — gba-kit A/B verification: the shiftability-blocker family is 11 opaque tables, NOT 84; most "raw" tables are already de-pointered/shift-safe — refines D345 (2026-07-03)
+
+**Method.** Headless gba-kit (`@gba-kit/gba-node`, a P10 tooling tip) loaded the *actual* +0x40000 shifted ROM and compared, per family table, every ROM-range pointer word against `vanilla + 0x40000`. This reads the real ROM the shift tooling produces → ground-truth "did this pointer relocate", independent of storage form. Harness + captured outputs: `build/issue143-proof/gbakit-harness/` (`verify.mjs`, `blockers.mjs`, `family_blockers.out`).
+
+**Finding (self-consistent: 13 + 62 + 11 = 86).** The `gProcScr_*`/`gBmlib_*` family splits into **13 typed-C** (linker relocations) + **62 de-pointered `.4byte Sym[+1]`** residual `.s` (relocate via the `jp_syms.s` shift) + **11 opaque `.data.residue` INCBIN** tables whose interior pointers are raw bytes. The first two groups (**75 tables**) are ALREADY shift-safe; only the **11** actually break a shifted ROM. The 62 de-pointered ones are the product of frontier Waves 12–31.
+
+**The 11 true shiftability blockers** (residual un-relocated pointer count, targets resolve to real fns):
+- `gProcScr_RedrawConfigHelpText` (61), `gProcScr_DrawConfigUiSprites` (59) — config menu
+- `gProcScr_GuideCategoryRedraw` (58), `gProcScr_GuideEntryListRedraw_Initial` (51), `gProcScr_GuideDetailsRedraw` (39) — guide menu
+- `gProcScr_SupportScreen` (57), `gProcScr_SupportUnitSubScreen` (36) — support viewer
+- `gProcScr_ChapterIntro` (43) — chapter intro (blocks new-game→chapter)
+- `gProcScr_opinfo` (5), `gProcScr_SubtitleHelpDarkener` (3), `gProcScr_CharacterEndings` (1)
+
+**Refines D345.** "84 remain raw" conflated two axes: **typed-C / decomp debt = 73** (86−13 typed) vs **shiftability debt = 11** (the opaque subset). The 62 de-pointered tables need typing for decomp COMPLETENESS but are NOT shiftability blockers. #143's boot→menu fix (`gProcScr_TitleScreen` + `gBmlib_0`) is now in the shift-safe 75.
+
+**Criterion-3 sharpening.** The #143 shifted-ROM proof reached `StartSaveMenu` (title→menu ✓, the exact path #143 crashed on). new-game→chapter is blocked specifically by `gProcScr_ChapterIntro`; the menu sub-screens (config/guide/support) by theirs. These **11** are the precise remaining shiftability worklist — each re-verifiable by re-running the harness after carving (residual→0).
