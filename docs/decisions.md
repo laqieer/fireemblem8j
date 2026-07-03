@@ -9104,3 +9104,27 @@ parser was required — a first regex version mangled files with inline `/* ... 
 blocks (leaving raw `\t`/`\n` escapes → assembler errors); the tool now pre-verifies every generated `.s`
 assembles before writing. LESSON: for a mass mechanical refactor, pre-verify each unit and keep the converter
 in-tree, don't run a one-off `/tmp` script.
+
+## D337
+**Remaining UNCERTAIN `.bin` frontier declared EFFECTIVELY AT OPAQUE FLOOR; no further blind extraction wave.**
+
+After the session's carve batch (PRs #126-#138: waves 45-49 drained MISS 6→3 / UNCERTAIN 270→226, #134 drove the
+pointer-debt completion gate 100→1, #135 turned 6 code-as-data `.bin` into byte-exact C, #138 relocated 54 embedded
+ProcScr pointers), a read-only scoping pass (`frontier-scope`) re-examined the **226 UNCERTAIN** `.bin` with the full
+multi-signal extractability heuristics (compression-header decode, fe8u-twin lookup, pointer-density, content-shape)
+over a 40-file diverse sample spanning every subsystem group (`data/residual` 190, `frontier_df4_menu` 16,
+`frontier_df4_ending` 12, `frontier_df4_uistuff` 4, others 4).
+
+Finding: **bucket A (EXTRACTABLE-NOW) = 0.** No fe8u editable twin, no coherent start-pointer tables, no clean
+`.png`/`.map.bin` compression wins. 14 files carry a valid LZ prefix but decode with over-captured tails / no fe8u
+sink → deep-RE probes only, not a normal wave. No stale/false-positive UNCERTAIN entries found (spot checks still
+INCBIN-backed).
+
+Decision: **do NOT dispatch another 10-20 file extraction wave** — the mechanically-extractable frontier is exhausted.
+The remaining 226 are JP-unique opaque residues (legit incbin) + the 14 optional per-file LZ deep-RE probes. Current
+authoritative state (main `1897e694f`, main CI GREEN): `.bin` MISS=3 / FLOOR=1401 / UNCERTAIN=226; pointer-debt
+completion gate = 1 (the fe8u-confirmed coincidental constant `0x080896ED`). No real code stored as binary data; no
+function pointers missed. Strict MISS=0 remains gated only on the 3 tilemap-floor audit artifacts + any future JP-LZ
+deep-RE project, NOT on any tractable carve. `docs/frontier.md` refreshed to match (single source of truth). A
+future typed data-extraction task may revisit the 038 descriptor table (72 mostly-coincidental words) and the 14 LZ
+deep-RE probes, but neither is a blocking carve.
