@@ -1,6 +1,5 @@
 #include "global.h"
 
-extern void sub_80D636C(const void *src, void *dst, int mode);
 
 void sub_80CAEF4(int a, int b)
 {
@@ -199,7 +198,7 @@ outer_loop:
         i = 3;
 
     copy_loop:
-        sub_80D636C(copySrc, (unsigned char *)0x06010000 + ((idx & mask) << 5), 0x80);
+        CpuFastSet(copySrc, (unsigned char *)0x06010000 + ((idx & mask) << 5), 0x80);
         {
             register int inc asm("r1");
 

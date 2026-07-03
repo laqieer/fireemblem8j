@@ -19,8 +19,7 @@ struct Unk800C224Proc
     /* 3C */ u16 unk_3c;
 };
 
-void sub_80C5628(s16 x, s16 y, s16 * outX, s16 * outY);
-void sub_80C41F0(s16 a, s16 b, s16 c, s16 d, int e, int f);
+void GetWMCenteredCameraPosition(s16 x, s16 y, s16 * outX, s16 * outY);
 
 int sub_800C224(struct Unk800C224Proc * proc)
 {
@@ -42,7 +41,7 @@ int sub_800C224(struct Unk800C224Proc * proc)
     f = sub->unk_0c;
     node = &gWMNodeData[index];
 
-    sub_80C5628(node->x, node->y, &outX, &outY);
+    GetWMCenteredCameraPosition(node->x, node->y, &outX, &outY);
 
     if ((((proc->unk_3c >> 2) & 1) != 0) || (e == 0 && f == 0))
     {
@@ -51,6 +50,6 @@ int sub_800C224(struct Unk800C224Proc * proc)
         return 0;
     }
 
-    sub_80C41F0(a, b, outX, outY, e, f);
+    StartGmScroll(a, b, outX, outY, e, f);
     return 2;
 }

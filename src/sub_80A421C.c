@@ -19,23 +19,21 @@ extern void SetFlag(int);
 extern bool CheckFlag(int);
 extern void ClearFlag(int);
 
-extern int sub_80A2CB0(struct DivinationScreenProc * proc);
-extern void sub_8001ACC(int a);
+extern int GetChapterDivinationPortrait(struct DivinationScreenProc * proc);
 extern int sub_8001BC0(int a);
-extern void sub_80011D0(int a, int b);
-extern void sub_80034C4(void);
-extern void sub_804F8E0(void);
-extern void sub_801569C(void);
-extern void sub_8003508(int a);
-extern void sub_8097CFC(void);
-extern void sub_80048B4(int a);
-extern void sub_80B261C(int a, int b, int c, int d, int e, int f);
-extern void sub_80B269C(int a, int b, int c, int d);
+extern void ResetIconGraphics_(void);
+extern void LoadLegacyUiFrameGraphics(void);
+extern void LoadObjUIGfx(void);
+extern void LoadIconPalettes(int a);
+extern void RestartMuralBackground(void);
+extern void StartGreenText(int a);
+extern void StartSysBrownBox(int a, int b, int c, int d, int e, int f);
+extern void EnableSysBrownBox(int a, int b, int c, int d);
 extern void sub_80A4188(int a, int b);
-extern void sub_8097F30(int a, int b);
-extern void sub_80B1D98(void * func, struct DivinationScreenProc * proc);
-extern void sub_8006710(int a, int b, int c);
-extern void sub_800783C(int a, int b, int c, int d, int e);
+extern void LoadPrepBannerGfx(int a, int b);
+extern void StartParallelWorker(void * func, struct DivinationScreenProc * proc);
+extern void InitTalk(int a, int b, int c);
+extern void StartTalkFace(int a, int b, int c, int d, int e);
 extern void sub_80A4148(struct DivinationScreenProc * proc);
 
 void sub_80A421C(struct DivinationScreenProc * proc)
@@ -43,15 +41,15 @@ void sub_80A421C(struct DivinationScreenProc * proc)
     int r6;
 
     proc;
-    r6 = sub_80A2CB0(proc);
+    r6 = GetChapterDivinationPortrait(proc);
 
     gLCDControlBuffer.dispcnt.mode = 0;
 
-    sub_8001ACC(0);
+    SetupBackgrounds(0);
 
-    sub_80011D0(sub_8001BC0(0), 0);
-    sub_80011D0(sub_8001BC0(1), 0);
-    sub_80011D0(sub_8001BC0(2), 0);
+    BG_Fill((void *)sub_8001BC0(0), 0);
+    BG_Fill((void *)sub_8001BC0(1), 0);
+    BG_Fill((void *)sub_8001BC0(2), 0);
 
     gLCDControlBuffer.bg0cnt.priority = 0;
     gLCDControlBuffer.bg1cnt.priority = 2;
@@ -60,30 +58,30 @@ void sub_80A421C(struct DivinationScreenProc * proc)
 
     ResetFaces();
     ResetText();
-    sub_80034C4();
-    sub_804F8E0();
-    sub_801569C();
+    ResetIconGraphics_();
+    LoadLegacyUiFrameGraphics();
+    LoadObjUIGfx();
 
     BG_SetPosition(0, 4, 0xFFFC);
     BG_SetPosition(1, 0, 0);
     BG_SetPosition(2, 0, 0);
 
-    sub_8003508(4);
-    sub_8097CFC();
+    LoadIconPalettes(4);
+    RestartMuralBackground();
     BG_EnableSyncByMask(7);
-    sub_80048B4((int)proc);
+    StartGreenText((int)proc);
 
     InitText((void *)0x02013580, 8);
 
-    sub_80B261C(0xd, 0xe00, 0xf, 0xc00, 0, (int)proc);
-    sub_80B269C(0, 0x90, 0x10, 0);
+    StartSysBrownBox(0xd, 0xe00, 0xf, 0xc00, 0, (int)proc);
+    EnableSysBrownBox(0, 0x90, 0x10, 0);
     sub_80A4188(0x7000, 1);
 
     proc->unk30 = *(u8 *)((char *)GetROMChapterStruct(gPlaySt.chapterIndex) + 0x80);
 
-    sub_8097F30(0x7800, 2);
-    sub_80B1D98((void *)sub_80A4148, proc);
-    sub_8006710(0x200, 3, 1);
+    LoadPrepBannerGfx(0x7800, 2);
+    StartParallelWorker((void *)sub_80A4148, proc);
+    InitTalk(0x200, 3, 1);
 
     if (gPlaySt.chapterIndex == 0x7d)
     {
@@ -100,5 +98,5 @@ void sub_80A421C(struct DivinationScreenProc * proc)
         Proc_Goto(proc, 4);
     }
 
-    sub_800783C(r6, 0xd4, 0x52, 0x202, 0);
+    StartTalkFace(r6, 0xd4, 0x52, 0x202, 0);
 }

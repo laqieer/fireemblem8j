@@ -12,10 +12,8 @@ struct FillFadeProc
     /* 30 */ s16 unk_30;
 };
 
-extern int sub_8012E84(int a, int b, int c, int d, int e);
-extern void sub_8073820(void * dst, int b, int c, int color);
-extern void sub_80D636C(void * src, void * dst, int words);
-extern void sub_8002DE4(struct FillFadeProc * proc);
+extern int Interpolate(int a, int b, int c, int d, int e);
+extern void EfxPalWhiteInOut(void * dst, int b, int c, int color);
 
 extern u8 gBuf_020165C8[];
 extern u8 gBuf_020228A8[];
@@ -31,16 +29,16 @@ void sub_8067884(struct FillFadeProc * proc)
     else
         m = proc->unk_2c;
 
-    color = sub_8012E84(0, 0, 0x10, m, proc->unk_2e);
-    sub_80D636C(gBuf_020165C8, gBuf_020228A8, 0x100);
-    sub_8073820(gBuf_020228A8, 0, 0x20, color);
+    color = Interpolate(0, 0, 0x10, m, proc->unk_2e);
+    CpuFastSet(gBuf_020165C8, gBuf_020228A8, 0x100);
+    EfxPalWhiteInOut(gBuf_020228A8, 0, 0x20, color);
 
     proc->unk_2c++;
 
     if (proc->unk_2c > proc->unk_30)
     {
-        sub_80D636C(gBuf_020165C8, gBuf_020228A8, 0x100);
+        CpuFastSet(gBuf_020165C8, gBuf_020228A8, 0x100);
         gCounter_0201774C -= 1;
-        sub_8002DE4(proc);
+        Proc_Break(proc);
     }
 }

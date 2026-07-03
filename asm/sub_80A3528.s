@@ -5,7 +5,7 @@
 	.set ResetText, 0x08003BC4 + 1
 	.set SetTextFont, 0x08003C68 + 1
 	.set SetTextFontGlyphs, 0x08003C24 + 1
-	.set sub_80011D0, 0x080011D0 + 1
+	.set BG_Fill, 0x080011D0 + 1
 	.set sub_8004374, 0x08004374 + 1
 	.set sub_8004C84, 0x08004C84 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
@@ -27,7 +27,7 @@ sub_80A3528:
 	ldr r4, _080A36C8 @ =0x02023CA8
 	adds r0, r4, #0
 	movs r1, #0
-	bl sub_80011D0
+	bl BG_Fill
 	movs r0, #0
 	bl SetTextFontGlyphs
 	movs r0, #0

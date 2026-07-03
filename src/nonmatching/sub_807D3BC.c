@@ -19,7 +19,7 @@
  *   count++; (2) if count==0 return -1; (3) zero-fills indices[9]; (4) compacts
  *   the PASSED slots into indices[]; (5) pick = DivRem(AdvanceGetLCGRNValue(),
  *   count+1) - 1; *result = array[indices[pick]]; return 1.
- *   Callees: DivRem=sub_80D637C, CanUnitCrossTerrain=sub_8019174.
+ *   Callees: DivRem=DivRem, CanUnitCrossTerrain=sub_8019174.
  * ============================================================================
  *
  * MATCH STATUS (this reconstruction, v7):  NOT byte-exact.

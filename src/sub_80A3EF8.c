@@ -15,7 +15,7 @@ struct AuguryCursorProc
     /* 4F */ s8 unk_4f;
 };
 
-extern void sub_80B1844(int);
+extern void SetUiSpinningArrowFastMaybe(int);
 
 void sub_80A3EF8(struct AuguryCursorProc * proc)
 {
@@ -23,7 +23,7 @@ void sub_80A3EF8(struct AuguryCursorProc * proc)
 
     if (proc->unk_4f > 0)
     {
-        sub_80B1844(1);
+        SetUiSpinningArrowFastMaybe(1);
 
         if (proc->unk_3c == 2)
         {
@@ -38,7 +38,7 @@ void sub_80A3EF8(struct AuguryCursorProc * proc)
 
     if (proc->unk_4f < 0)
     {
-        sub_80B1844(0);
+        SetUiSpinningArrowFastMaybe(0);
 
         if (proc->unk_3c == 0)
         {

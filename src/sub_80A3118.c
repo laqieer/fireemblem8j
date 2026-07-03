@@ -7,11 +7,11 @@
 extern u8 gUnk_08A9A9E0[];
 extern struct Text gUnk_02013580;
 
-void sub_809AF14(int a, int b);
-void sub_8013008(const void *src, void *dst);
+void PutImg_PrepItemUseUnk(int a, int b);
+void Decompress(const void *src, void *dst);
 void j_TmApplyTsa(void *dst, void *src, int a);
-void sub_80B1F1C(ProcPtr proc);
-void sub_80B1F40(int a, int b);
+void ResetSysHandCursor(ProcPtr proc);
+void DisplaySysHandCursorTextShadow(int a, int b);
 void sub_80A2D48(void);
 void sub_80A3018(void);
 
@@ -21,12 +21,12 @@ void sub_80A3118(ProcPtr proc)
     struct Text *th;
 
     sub_80A2D48();
-    sub_809AF14(0xa0 << 7, 5);
-    sub_8013008(gUnk_08A9A9E0, gGenericBuffer);
+    PutImg_PrepItemUseUnk(0xa0 << 7, 5);
+    Decompress(gUnk_08A9A9E0, gGenericBuffer);
     j_TmApplyTsa(gBG1TilemapBuffer, gGenericBuffer, 0xa5 << 7);
     BG_EnableSyncByMask(0x7);
-    sub_80B1F1C(proc);
-    sub_80B1F40(0xc0 << 3, 1);
+    ResetSysHandCursor(proc);
+    DisplaySysHandCursorTextShadow(0xc0 << 3, 1);
 
     SetWinEnable(0, 0, 0);
     SetWin0Box(0x80, 0x28, 0xe0, 0x98);

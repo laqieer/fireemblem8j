@@ -12,9 +12,9 @@ extern struct ProcCmd ProcScr_SioBattleMapBonus[];
 extern u8 gUnk_02000C00;
 extern const u16 gObject_085D3FF4[];
 
-void sub_8043190(int kind);
-void sub_804F528(int x, int y);
-void sub_8042678(u8 * dst, int n);
+void SioPlaySoundEffect(int kind);
+void DisplayUiHand(int x, int y);
+void SioEmitData(u8 * dst, int n);
 
 struct Sub80494FCInner
 {
@@ -41,11 +41,11 @@ void sub_80494FC(struct Sub80494FCProc * proc)
     PutSprite(4, 0x18, 0x50, gObject_085D3FF4, 0);
     PutSprite(4, 0x30, 0x60, gObject_085D3FF4, 0x10);
 
-    sub_804F528(proc->unk_68 * 0x34 + 0x28, 0x60);
+    DisplayUiHand(proc->unk_68 * 0x34 + 0x28, 0x60);
 
     if (gKeyStatusPtr->newKeys & B_BUTTON)
     {
-        sub_8043190(1);
+        SioPlaySoundEffect(1);
         inner->unk_50 = 2;
 
         TileMap_FillRect(TILEMAP_LOCATED(gBG1TilemapBuffer, 2, 9), 0x10, 6, 0);
@@ -59,7 +59,7 @@ void sub_80494FC(struct Sub80494FCProc * proc)
         if (proc->unk_68 == 1)
         {
             proc->unk_68--;
-            sub_8043190(3);
+            SioPlaySoundEffect(3);
         }
     }
 
@@ -68,7 +68,7 @@ void sub_80494FC(struct Sub80494FCProc * proc)
         if (proc->unk_68 == 0)
         {
             proc->unk_68++;
-            sub_8043190(3);
+            SioPlaySoundEffect(3);
         }
     }
 
@@ -76,7 +76,7 @@ void sub_80494FC(struct Sub80494FCProc * proc)
     {
         if (proc->unk_68 != 0)
         {
-            sub_8043190(1);
+            SioPlaySoundEffect(1);
             inner->unk_50 = 2;
 
             TileMap_FillRect(TILEMAP_LOCATED(gBG1TilemapBuffer, 2, 9), 0x10, 6, 0);
@@ -85,10 +85,10 @@ void sub_80494FC(struct Sub80494FCProc * proc)
         }
         else
         {
-            sub_8043190(2);
+            SioPlaySoundEffect(2);
 
             gUnk_02000C00 = inner->unk_44;
-            sub_8042678(&gUnk_02000C00, 4);
+            SioEmitData(&gUnk_02000C00, 4);
 
             TileMap_FillRect(TILEMAP_LOCATED(gBG1TilemapBuffer, 2, 9), 0x10, 6, 0);
             BG_EnableSyncByMask(BG1_SYNC_BIT);

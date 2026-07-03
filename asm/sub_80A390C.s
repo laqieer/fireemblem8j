@@ -7,11 +7,11 @@
 	.set j_TmApplyTsa, 0x080DC0DC + 1
 	.set strcpy, 0x080D69BC + 1
 	.set sub_80063F8, 0x080063F8 + 1
-	.set sub_8006710, 0x08006710 + 1
+	.set InitTalk, 0x08006710 + 1
 	.set sub_8009FA8, 0x08009FA8 + 1
-	.set sub_8013008, 0x08013008 + 1
+	.set Decompress, 0x08013008 + 1
 	.set sub_8031438, 0x08031438 + 1
-	.set sub_80913FC, 0x080913FC + 1
+	.set StartCgText, 0x080913FC + 1
 	.set sub_8091544, 0x08091544 + 1
 	.set sub_80A33E0, 0x080A33E0 + 1
 	.set sub_80A3528, 0x080A3528 + 1
@@ -234,7 +234,7 @@ _080A3AA8:
 _080A3AB6:
 	mov r0, r8
 	adds r1, r7, #0
-	bl sub_8013008
+	bl Decompress
 	ldr r0, _080A3B60 @ =0x020234A8
 	movs r2, #0xa5
 	lsls r2, r2, #7
@@ -279,7 +279,7 @@ _080A3AB6:
 	movs r0, #0x28
 	movs r1, #0
 	movs r2, #1
-	bl sub_8006710
+	bl InitTalk
 	str r4, [sp]
 	ldr r0, _080A3B68 @ =0x06011000
 	str r0, [sp, #4]
@@ -291,7 +291,7 @@ _080A3AB6:
 	movs r1, #0x13
 	movs r2, #0x12
 	movs r3, #4
-	bl sub_80913FC
+	bl StartCgText
 	ldr r0, _080A3B6C @ =0x000809FE
 	bl SetCgTextFlags
 _080A3B4A:

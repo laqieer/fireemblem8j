@@ -12,11 +12,9 @@ struct AuguryInitProc
 
 extern void ResetText(void);
 
-extern void sub_8001ACC(int a);
-extern void sub_804F8E0(void);
-extern void sub_8001EE4(void);
-extern void sub_80011D0(int a, int b);
-extern void sub_804F0EC(int a, int b, int c, int d, int e);
+extern void LoadLegacyUiFrameGraphics(void);
+extern void EnablePaletteSync(void);
+extern void DrawUiFrame2(int a, int b, int c, int d, int e);
 extern u8 sub_80A723C(int x, int y);
 extern void sub_80A6A30(int a, int b);
 extern void sub_80A6E4C(void * func);
@@ -31,7 +29,7 @@ void sub_80A74D4(struct AuguryInitProc * proc)
     int i;
     struct Text * text;
 
-    sub_8001ACC(0);
+    SetupBackgrounds(0);
     ResetTextFont();
     ResetText();
 
@@ -42,13 +40,13 @@ void sub_80A74D4(struct AuguryInitProc * proc)
     gLCDControlBuffer.bg2cnt.priority = 0;
     gLCDControlBuffer.bg3cnt.priority = 3;
 
-    sub_804F8E0();
-    sub_8001EE4();
+    LoadLegacyUiFrameGraphics();
+    EnablePaletteSync();
 
-    sub_80011D0((int)(void *)0x02022CA8, 0);
-    sub_80011D0((int)(void *)0x020234A8, 0);
-    sub_80011D0((int)(void *)0x02023CA8, 0);
-    sub_80011D0((int)(void *)0x020244A8, 0);
+    BG_Fill((void *)0x02022CA8, 0);
+    BG_Fill((void *)0x020234A8, 0);
+    BG_Fill((void *)0x02023CA8, 0);
+    BG_Fill((void *)0x020244A8, 0);
 
     BG_SetPosition(0, 0, 0);
     BG_SetPosition(1, 0, 0);
@@ -59,7 +57,7 @@ void sub_80A74D4(struct AuguryInitProc * proc)
     gLCDControlBuffer.dispcnt.win1_on = 0;
     gLCDControlBuffer.dispcnt.objWin_on = 0;
 
-    sub_804F0EC(2, 6, 0x1a, 7, 2);
+    DrawUiFrame2(2, 6, 0x1a, 7, 2);
     BG_EnableSyncByMask(0xf);
 
     text = gAuguryTexts_02014EFC;

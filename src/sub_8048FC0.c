@@ -25,8 +25,8 @@ struct Unk8048FC0Data
 
 extern struct Unk8048FC0Data gUnk_02000C04;
 
-void sub_8013008(const void * src, void * dst);
-void sub_8000D68(const void * src, int dest, int size);
+void Decompress(const void * src, void * dst);
+void CopyToPaletteBuffer(const void * src, int dest, int size);
 void sub_8048F24(struct Text * text, int colorId, int index);
 void sub_8048F78(struct Text * text);
 
@@ -34,10 +34,10 @@ void sub_8048FC0(struct Unk8048FC0Proc * proc)
 {
     int i;
 
-    sub_8013008((const void *)0x085DFA68, (void *)0x06012800);
-    sub_8000D68((const void *)0x085E04C4, 0xa0 << 2, 0xc0);
+    Decompress((const void *)0x085DFA68, (void *)0x06012800);
+    CopyToPaletteBuffer((const void *)0x085E04C4, 0xa0 << 2, 0xc0);
     InitSpriteTextFont((struct Font *)0x02000C60, (void *)0x06015000, 0xe);
-    sub_8000D68((const void *)0x085C7420, 0xd0 << 2, 0x20);
+    CopyToPaletteBuffer((const void *)0x085C7420, 0xd0 << 2, 0x20);
     SetTextFontGlyphs(0);
     ResetTextFont();
 

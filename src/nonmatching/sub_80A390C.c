@@ -13,10 +13,10 @@
  *   3. Bit-unpacks the record into the AuguryProc fields (see field map below).
  *   4. Computes the composite letter grade via GetOverallRank(5 category ranks).
  *   5. Decompresses the panel gfx from data_08A9A8D4 -> gGenericBuffer and applies the
- *      TSA to gBG1TilemapBuffer (sub_8013008 = Decompress, j_TmApplyTsa).
+ *      TSA to gBG1TilemapBuffer (Decompress = Decompress, j_TmApplyTsa).
  *   6. Draws the two sub-panels (sub_80A3528 text/values, sub_80A33E0), then, when the
  *      record is valid and carries a portrait, starts the tactician face (sub_80063F8)
- *      and the rank-badge CG (sub_80913FC / SetCgTextFlags).
+ *      and the rank-badge CG (StartCgText / SetCgTextFlags).
  *
  * AuguryProc field map CONFIRMED by this unpack (consumed by carved sibling
  * src/nonmatching/sub_80A3528.c and src/sub_80A3C64.c):
@@ -82,14 +82,14 @@ extern const u8 data_08A9A8D4[]; /* carved panel gfx (region-same) */
 /* Kept as their existing project sub_ spellings so `make nonmatching` sees no
  * duplicate/renamed symbols; annotated with their role for readers. */
 void sub_80D6370(const void *src, void *dst, u32 control);        /* CpuSet          */
-void sub_8013008(const void *src, void *dst);                     /* Decompress      */
+void Decompress(const void *src, void *dst);                     /* Decompress      */
 void j_TmApplyTsa(void *dst, const void *tsa, int base);
 int  sub_80A40A0(int portraitId, int overallRank);                /* validate/select */
 char *sub_8009FA8(int msgId);                                     /* GetStringFromIndex-like */
 void sub_8031438(char *str);                                      /* store tactician name    */
 void sub_80063F8(int a, int msgid, int x, int y, int e);          /* start face      */
-void sub_8006710(int a, int b, int c);
-void sub_80913FC(int a, int b, int c, int d, int e, void *vram, int g, int h);
+void InitTalk(int a, int b, int c);
+void StartCgText(int a, int b, int c, int d, int e, void *vram, int g, int h);
 void sub_8091544(void);
 void EndFaceById(int faceSlot);
 void SetCgTextFlags(int flags);
@@ -157,7 +157,7 @@ void Augury_InitResultScreen(struct AuguryProc *proc)
     }
 
     /* --- draw --- */
-    sub_8013008(data_08A9A8D4, gGenericBuffer);
+    Decompress(data_08A9A8D4, gGenericBuffer);
     j_TmApplyTsa(gBG1TilemapBuffer, gGenericBuffer, 0xA5 << 7);
     sub_80A3528(proc);
     sub_80A33E0(proc);
@@ -169,8 +169,8 @@ void Augury_InitResultScreen(struct AuguryProc *proc)
     {
         sub_80063F8(0, gUnk_088582BC[proc->portraitId - 1].msgid, 0xD8, 0x58, 0x182);
         r5 = sub_80A40A0(proc->portraitId, proc->overallRank);
-        sub_8006710(0x28, 0, 1);
-        sub_80913FC(0x16, 0x13, 0x12, 4, r5, (void *)0x06011000 /* VRAM */, 0xA, 0);
+        InitTalk(0x28, 0, 1);
+        StartCgText(0x16, 0x13, 0x12, 4, r5, (void *)0x06011000 /* VRAM */, 0xA, 0);
         SetCgTextFlags(0x000809FE);
     }
 }

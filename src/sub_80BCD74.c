@@ -25,11 +25,10 @@ struct RankRamUnk
 #define gUnk_0202BCEC (*(struct RankRamUnk *)0x0202BCEC)
 
 extern void sub_80BCD5C(int a, struct GameRankProc *proc);
-extern void sub_8002DE4(struct GameRankProc *proc);
 /* m4aSongNumStart is declared in functions.h (via global.h) as void(u16). */
 
 /* Still-asm callees in the JP tree; bind to their ROM addresses exactly as the
- * original asm/sub_80BCD74.s did (sub_8002DE4 already resolves as a baseline
+ * original asm/sub_80BCD74.s did (Proc_Break already resolves as a baseline
  * global at the same address, so it is omitted here). */
 asm(".set sub_80BCD5C, 0x080BCD5C + 1");
 asm(".set m4aSongNumStart, 0x080D4EF4 + 1");
@@ -78,6 +77,6 @@ void sub_80BCD74(struct GameRankProc *proc)
                 m4aSongNumStart(0x85);
         }
 
-        sub_8002DE4(proc);
+        Proc_Break(proc);
     }
 }

@@ -11,14 +11,13 @@ struct SuspendResumeProc
     /* 2E */ s16 timer;
 };
 
-void sub_8002398(int, int);
-void sub_8002DE4(ProcPtr proc);
+void Proc_Break(ProcPtr proc);
 
 void sub_8009950(struct SuspendResumeProc * proc)
 {
     if (!(gKeyStatusPtr->heldKeys & 8))
     {
-        sub_8002DE4(proc);
+        Proc_Break(proc);
         return;
     }
 
@@ -31,7 +30,7 @@ void sub_8009950(struct SuspendResumeProc * proc)
         }
         else
         {
-            sub_8002398(0x43, 0);
+            StartBgmCore(0x43, 0);
             StartBgmVolumeChange(0, 0xc0, 0x3c, 0);
             Proc_Goto(proc, 4);
         }

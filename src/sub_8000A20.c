@@ -12,7 +12,7 @@
 void StoreIRQToIRAM(void);
 void sub_80A7680(void);
 void sub_80C165C(void);
-void sub_8009E68(void);
+void StartGame(void);
 void sub_80012E4(void);
 void sub_8001BD0(void);
 
@@ -56,7 +56,7 @@ void AgbMain(void)
 
     SetInterrupt_LCDVBlank(OnVBlank);
     sub_80C165C();
-    sub_8009E68();
+    StartGame();
 
     // perform the game loop.
     while (1)

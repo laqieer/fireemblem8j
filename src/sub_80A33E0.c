@@ -13,7 +13,7 @@ struct AuguryPalProc
     /* 3D */ u8 unk_3d;
 };
 
-extern void sub_8000D68(const void * src, int dest, int size);
+extern void CopyToPaletteBuffer(const void * src, int dest, int size);
 
 struct PalLut4
 {
@@ -48,7 +48,7 @@ void sub_80A33E0(struct AuguryPalProc * proc)
         }
     }
 
-    sub_8000D68(palLut.e[idx], 0xA0, 0x20);
+    CopyToPaletteBuffer(palLut.e[idx], 0xA0, 0x20);
 
     if (proc->unk_3b == 0)
     {

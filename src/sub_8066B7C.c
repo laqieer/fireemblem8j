@@ -7,14 +7,14 @@
 #include "hardware.h"
 
 void sub_805C7CC(struct Anim * anim, int b, int c, int d, int e, int f);
-void sub_805CA20(struct Anim * anim, int b, int c);
+void StartSpellThing_MagicQuake(struct Anim * anim, int b, int c);
 void sub_8066CC0(struct Anim * anim);
 void sub_8066D7C(struct Anim * anim, int b);
 void sub_8066E88(struct Anim * anim, int b);
 void sub_8066F04(struct Anim * anim, int b);
 void sub_8066F9C(struct Anim * anim, int b, int c);
 void sub_8067040(struct Anim * anim, int b);
-void sub_8074934(struct Anim * anim);
+void EfxPlayHittedSFX(struct Anim * anim);
 
 void sub_8066B7C(struct ProcEfx * proc)
 {
@@ -61,12 +61,12 @@ void sub_8066B7C(struct ProcEfx * proc)
 
         if (proc->hitted == 0)
         {
-            sub_8074934(anim);
+            EfxPlayHittedSFX(anim);
         }
     }
     else if (proc->timer == duration + 142)
     {
-        sub_805CA20(anim, 0x64, 10);
+        StartSpellThing_MagicQuake(anim, 0x64, 10);
         sub_8066D7C(anim, 0x64);
         sub_805C7CC(anim, 0x50, 0x14, 0x10, 0, 0);
         PlaySFX(0x2C6, 0x100, 120, 0);

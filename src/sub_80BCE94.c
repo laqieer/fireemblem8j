@@ -1,8 +1,8 @@
 #include "global.h"
 
-int sub_800226C();
+int Sound_FadeOutBGM();
 
 void sub_80BCE94(void)
 {
-    sub_800226C(3);
+    Sound_FadeOutBGM(3);
 }

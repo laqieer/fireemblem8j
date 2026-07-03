@@ -1,7 +1,7 @@
 	.syntax unified
 	.set AdvanceGetLCGRNValue, 0x08000CC0 + 1
 	.set sub_8019174, 0x08019174 + 1
-	.set sub_80D637C, 0x080D637C + 1
+	.set DivRem, 0x080D637C + 1
 	.section .text.sub_807D3BC, "ax", %progbits
 @ sub_807D3BC @ JP 0x0807D3BC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -184,7 +184,7 @@ _0807D500:
 _0807D50C:
 	bl AdvanceGetLCGRNValue
 	mov r1, sb
-	bl sub_80D637C
+	bl DivRem
 	subs r0, #1
 	lsls r0, r0, #0x18
 	asrs r0, r0, #0x18

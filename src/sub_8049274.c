@@ -1,8 +1,8 @@
 #include "global.h"
 #include "ctc.h"
 
-extern int sub_8012E84(int a, int b, int c, int d, int e);
-extern void sub_8002DE4(ProcPtr proc);
+extern int Interpolate(int a, int b, int c, int d, int e);
+extern void Proc_Break(ProcPtr proc);
 extern void sub_80490C8(u32 frameTotal);
 
 extern const u16 gObj_8049274_a[];
@@ -32,13 +32,13 @@ void sub_8049274(struct Proc8049274 * proc)
     {
         if (i != proc->count)
         {
-            x = sub_8012E84(5, proc->arrX[i], 0x140, proc->timer, 0x10);
+            x = Interpolate(5, proc->arrX[i], 0x140, proc->timer, 0x10);
             y = proc->arrY[i];
         }
         else
         {
             x = proc->arrX[i];
-            y = sub_8012E84(4, proc->arrY[i], proc->arrY[0], proc->timer, 0x10);
+            y = Interpolate(4, proc->arrY[i], proc->arrY[0], proc->timer, 0x10);
         }
 
         PutSprite(4, x, y, gObj_8049274_a, (proc->oam[i] & 0xF) << 0xC);
@@ -55,7 +55,7 @@ void sub_8049274(struct Proc8049274 * proc)
     if (proc->state == 2)
     {
         proc->timer = 0;
-        sub_8002DE4(proc);
+        Proc_Break(proc);
     }
 
     if (proc->timer <= 0xF)

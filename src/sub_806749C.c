@@ -9,7 +9,6 @@ extern u32 gEfxBgSemaphore;
 extern const u32 gUnk_08601A60[];
 
 void sub_8067514(struct Anim *, int, int, int, int);
-void sub_8002DE4(struct ProcEfxOBJ *);
 
 void sub_806749C(struct ProcEfxOBJ * proc)
 {
@@ -28,7 +27,7 @@ void sub_806749C(struct ProcEfxOBJ * proc)
         if (++proc->terminator > proc->unk48)
         {
             gEfxBgSemaphore--;
-            sub_8002DE4(proc);
+            Proc_Break(proc);
         }
     }
 }

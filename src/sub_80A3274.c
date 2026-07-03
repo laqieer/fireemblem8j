@@ -6,7 +6,7 @@
 // The pointer at 0x085775CC (aka gKeyStatusPtr) is reused here as a config ptr.
 
 extern int sub_80922DC(void);
-extern void sub_8002DE4(ProcPtr proc);
+extern void Proc_Break(ProcPtr proc);
 
 void sub_80A3274(ProcPtr proc)
 {
@@ -14,7 +14,7 @@ void sub_80A3274(ProcPtr proc)
 
     if (!(u8)sub_80922DC())
     {
-        sub_8002DE4(proc);
+        Proc_Break(proc);
         return;
     }
 

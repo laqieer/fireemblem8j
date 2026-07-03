@@ -6,7 +6,7 @@
 
 extern struct SioMessage gUnk_73;
 
-void sub_8002DE4(ProcPtr proc);
+void Proc_Break(ProcPtr proc);
 
 void sub_8048B10(ProcPtr proc)
 {
@@ -42,6 +42,6 @@ void sub_8048B10(ProcPtr proc)
         gSioSt->unk_01E = 0;
 
         Sio_SetSubState(3);
-        sub_8002DE4(proc);
+        Proc_Break(proc);
     }
 }

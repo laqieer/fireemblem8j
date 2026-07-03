@@ -1,7 +1,7 @@
 	.syntax unified
 	.set NextRN_N, 0x08000C58 + 1
 	.set sub_8012684, 0x08012684 + 1
-	.set sub_80D6374, 0x080D6374 + 1
+	.set Div, 0x080D6374 + 1
 	.section .text.sub_800FAD0, "ax", %progbits
 @ sub_800FAD0 @ JP 0x0800FAD0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -66,7 +66,7 @@ _0800FB36:
 	muls r0, r7, r0
 	adds r0, #0x32
 	movs r1, #0x64
-	bl sub_80D6374
+	bl Div
 	lsls r0, r0, #0x10
 	lsrs r3, r0, #0x10
 _0800FB46:

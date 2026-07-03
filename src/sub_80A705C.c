@@ -3,13 +3,12 @@
 #include "variables.h"
 
 extern int sub_80A6AFC(int stream, int ctx, int value, int nbits);
-extern int sub_8000CD8(void);
 
 /* JP-only link-arena / multiplayer record SERIALIZER (0x02014xxx band).
  * Mirror of the deserializer sub_80A7150: snapshots the read cursor, then packs
  * the arena record struct into a packed unit/team record via 17 sequential
  * bit-writes (sub_80A6AFC = write-N-bits). The width=5 field is a fresh RNG
- * sample (sub_8000CD8), not a struct read.
+ * sample (GetGameClock), not a struct read.
  */
 
 struct ArenaUnitRecord
@@ -44,7 +43,7 @@ void sub_80A705C(int ctx, int stream)
     sub_80A6AFC(stream, ctx, gArenaUnitRecord.unk01, 1);
     sub_80A6AFC(stream, ctx, gArenaUnitRecord.unk02, 1);
     sub_80A6AFC(stream, ctx, gArenaUnitRecord.unk0A, 8);
-    sub_80A6AFC(stream, ctx, sub_8000CD8(), 5);
+    sub_80A6AFC(stream, ctx, GetGameClock(), 5);
     sub_80A6AFC(stream, ctx, gArenaUnitRecord.unk03, 3);
     sub_80A6AFC(stream, ctx, gArenaUnitRecord.unk04, 3);
     sub_80A6AFC(stream, ctx, gArenaUnitRecord.unk05, 3);

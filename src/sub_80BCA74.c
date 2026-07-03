@@ -35,20 +35,14 @@ extern u8 gUnk_08AC6C58[];
 extern u8 gUnk_08AC6BF8[];
 extern u8 gUnk_08AC6C18[];
 
-void sub_804F8E0(void);
+void LoadLegacyUiFrameGraphics(void);
 void j_TmApplyTsa(u16 * dst, const void * src, int size);
-void sub_8000D68(const void * src, void * dst, int size);
-void sub_8013008(const void * src, void * dst);
-u8 sub_80BACC8(void);
-u8 sub_80BAD48(void);
-u8 sub_80BA8F8(void);
-u8 sub_80BA9F0(void);
-u8 sub_80BAB54(void);
-u8 sub_80BAA28(void);
-u8 sub_80BAB20(void);
-u32 sub_8000CD8(void);
+void Decompress(const void * src, void * dst);
+u8 GetChapterTacticsRank(void);
+u8 GetChapterSurvivalRank(void);
+u32 GetGameClock(void);
 u32 GetGameTotalTime_unused(void);
-void sub_80B1D98(ProcPtr func, ProcPtr parent);
+void StartParallelWorker(ProcPtr func, ProcPtr parent);
 void sub_80B33E0(const void * a, const void * b, int c, int d, int e, void * f);
 void sub_80BC638(void);
 u8 GetChapterCombatRank(void);
@@ -65,24 +59,24 @@ void sub_80BCA74(struct GameRankProc * proc)
     proc->unk30 = 0;
     proc->unk2c = 0;
 
-    sub_804F8E0();
+    LoadLegacyUiFrameGraphics();
     j_TmApplyTsa((u16 *)0x020234A8, gUnk_08AC718C, 0x80 << 5);
-    sub_8000D68(gUnk_08AC5558, (void *)(0xc0 << 2), 0x40);
-    sub_8013008(gUnk_08AC5598, (void *)0x06011000);
+    CopyToPaletteBuffer(gUnk_08AC5558, (0xc0 << 2), 0x40);
+    Decompress(gUnk_08AC5598, (void *)0x06011000);
 
     for (i = 0; i < 5; i++)
-        sub_8000D68(gUnk_08AC6BD8, (void *)((i + 0x1a) << 5), 0x20);
+        CopyToPaletteBuffer(gUnk_08AC6BD8, ((i + 0x1a) << 5), 0x20);
 
-    sub_8000D68(gUnk_08AC6C58, (void *)(0xf8 << 2), 0x20);
-    sub_8000D68(gUnk_08AC6BF8, (void *)(0xb0 << 2), 0x20);
-    sub_8000D68(gUnk_08AC6C18, (void *)(0xb8 << 2), 0x20);
+    CopyToPaletteBuffer(gUnk_08AC6C58, (0xf8 << 2), 0x20);
+    CopyToPaletteBuffer(gUnk_08AC6BF8, (0xb0 << 2), 0x20);
+    CopyToPaletteBuffer(gUnk_08AC6C18, (0xb8 << 2), 0x20);
     BG_EnableSyncByMask(0xf);
 
     if (gUnk_0202BCEC.flags14 & 0x80)
     {
-        FormatTime(sub_8000CD8() - gUnk_0202BCEC.unk04, &hours, &minutes, &seconds);
-        proc->ranks[0] = sub_80BACC8();
-        proc->ranks[1] = sub_80BAD48();
+        FormatTime(GetGameClock() - gUnk_0202BCEC.unk04, &hours, &minutes, &seconds);
+        proc->ranks[0] = GetChapterTacticsRank();
+        proc->ranks[1] = GetChapterSurvivalRank();
         proc->ranks[2] = GetChapterCombatRank();
         proc->ranks[3] = GetOverallRankFrom3(proc->ranks[0], proc->ranks[1], proc->ranks[2]);
         StartBgm(0x40, NULL);
@@ -90,11 +84,11 @@ void sub_80BCA74(struct GameRankProc * proc)
     else
     {
         FormatTime(GetGameTotalTime_unused(), &hours, &minutes, &seconds);
-        proc->ranks[0] = sub_80BA8F8();
-        proc->ranks[1] = sub_80BA9F0();
-        proc->ranks[2] = sub_80BAB54();
-        proc->ranks[3] = sub_80BAA28();
-        proc->ranks[4] = sub_80BAB20();
+        proc->ranks[0] = GetGameTacticsRank();
+        proc->ranks[1] = GetGameSurvivalRank();
+        proc->ranks[2] = GetGameFundsRank();
+        proc->ranks[3] = GetGameExpRank();
+        proc->ranks[4] = GetGameCombatRank();
         proc->ranks[5] = GetOverallRank(proc->ranks[0], proc->ranks[1], proc->ranks[2],
             proc->ranks[3], proc->ranks[4]);
         StartBgm(0x40, NULL);
@@ -114,6 +108,6 @@ void sub_80BCA74(struct GameRankProc * proc)
         proc->unk40[i] = 0;
     }
 
-    sub_80B1D98(sub_80BC638, proc);
+    StartParallelWorker(sub_80BC638, proc);
     sub_80B33E0(gUnk_08AC6C18, gUnk_08AC6C18 + 0x20, 2, 0x17, 1, proc);
 }

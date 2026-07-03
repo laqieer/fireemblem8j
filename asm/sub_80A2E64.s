@@ -2,7 +2,7 @@
 	.set PutSpriteExt, 0x08005330 + 1
 	.set sub_8002100, 0x08002100 + 1
 	.set sub_80A2E4C, 0x080A2E4C + 1
-	.set sub_80D6374, 0x080D6374 + 1
+	.set Div, 0x080D6374 + 1
 	.section .text.sub_80A2E64, "ax", %progbits
 @ sub_80A2E64 @ JP 0x080A2E64 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -117,7 +117,7 @@ _080A2F26:
 	ldrsh r0, [r1, r2]
 	lsls r0, r0, #4
 	adds r1, r4, #0
-	bl sub_80D6374
+	bl Div
 	adds r6, r0, #0
 	lsls r6, r6, #0x10
 	asrs r6, r6, #0x10
@@ -127,7 +127,7 @@ _080A2F26:
 	rsbs r0, r0, #0
 	lsls r0, r0, #4
 	adds r1, r7, #0
-	bl sub_80D6374
+	bl Div
 	adds r5, r0, #0
 	lsls r5, r5, #0x10
 	asrs r5, r5, #0x10
@@ -136,7 +136,7 @@ _080A2F26:
 	ldrsh r0, [r2, r3]
 	lsls r0, r0, #4
 	adds r1, r4, #0
-	bl sub_80D6374
+	bl Div
 	adds r4, r0, #0
 	lsls r4, r4, #0x10
 	asrs r4, r4, #0x10
@@ -145,7 +145,7 @@ _080A2F26:
 	ldrsh r0, [r1, r2]
 	lsls r0, r0, #4
 	adds r1, r7, #0
-	bl sub_80D6374
+	bl Div
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
 	str r0, [sp]
@@ -166,7 +166,7 @@ _080A2F9C:
 	ldrsh r0, [r3, r1]
 	lsls r0, r0, #4
 	movs r1, #0x20
-	bl sub_80D6374
+	bl Div
 	adds r6, r0, #0
 	lsls r6, r6, #0x10
 	asrs r6, r6, #0x10
@@ -176,7 +176,7 @@ _080A2F9C:
 	rsbs r0, r0, #0
 	lsls r0, r0, #4
 	adds r1, r7, #0
-	bl sub_80D6374
+	bl Div
 	adds r5, r0, #0
 	lsls r5, r5, #0x10
 	asrs r5, r5, #0x10
@@ -185,7 +185,7 @@ _080A2F9C:
 	ldrsh r0, [r1, r2]
 	lsls r0, r0, #4
 	movs r1, #0x20
-	bl sub_80D6374
+	bl Div
 	adds r4, r0, #0
 	lsls r4, r4, #0x10
 	asrs r4, r4, #0x10
@@ -194,7 +194,7 @@ _080A2F9C:
 	ldrsh r0, [r3, r1]
 	lsls r0, r0, #4
 	adds r1, r7, #0
-	bl sub_80D6374
+	bl Div
 	lsls r0, r0, #0x10
 	asrs r0, r0, #0x10
 	str r0, [sp]

@@ -1,5 +1,5 @@
 	.syntax unified
-	.set sub_8000CD8, 0x08000CD8 + 1
+	.set GetGameClock, 0x08000CD8 + 1
 	.set sub_80A6A7C, 0x080A6A7C + 1
 	.set sub_80A6AA8, 0x080A6AA8 + 1
 	.set sub_80A6C20, 0x080A6C20 + 1
@@ -40,7 +40,7 @@ _080A6E62:
 	ldrh r1, [r4, #6]
 	bl sub_80A6C20
 	strh r0, [r4, #2]
-	bl sub_8000CD8
+	bl GetGameClock
 	lsrs r0, r0, #3
 	ldrh r1, [r4, #2]
 	adds r0, r0, r1

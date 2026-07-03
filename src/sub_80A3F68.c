@@ -4,7 +4,7 @@
 #include "face.h"
 
 extern void sub_80A3DC8(int x);
-extern void sub_8002DE4(ProcPtr proc);
+extern void Proc_Break(ProcPtr proc);
 
 struct UnkAugProc
 {
@@ -61,7 +61,7 @@ void sub_80A3F68(struct UnkAugProc* proc)
 
     if (proc->counter == 10)
     {
-        sub_8002DE4((ProcPtr)proc);
+        Proc_Break((ProcPtr)proc);
 
         gLCDControlBuffer.bg0cnt.priority = 1;
         gLCDControlBuffer.bg1cnt.priority = 3;
