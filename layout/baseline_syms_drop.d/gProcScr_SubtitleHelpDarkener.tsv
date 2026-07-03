@@ -1,0 +1,5 @@
+# #143 shiftability: gProcScr_SubtitleHelpDarkener is now a real (relocatable)
+# definition in src/data/bldyLut_10_ref/dat_bldyLut_10_ref.c; drop the baseline
+# .set @0x085C6668 (from autobind_SubtitleHelp_Init.tsv) to avoid a
+# multiple-definition of the symbol.
+gProcScr_SubtitleHelpDarkener
