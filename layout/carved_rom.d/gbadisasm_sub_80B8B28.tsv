@@ -1,1 +1,1 @@
-0B8B28	0B8C64	asm/sub_80B8B28.o(.text.sub_80B8B28)	sub_80B8B28 region-different gbadisasm descriptive asm
+0B8B28	0B8C64	src/ClassStatsDisplay_Loop.o(.text)	ClassStatsDisplay_Loop (graduated from region-different descriptive asm; referenced by frontier_df4_menu data)
