@@ -27,9 +27,26 @@ SECTIONS
     } > rom
 
 @RAM_BODY@
+    /* Retain DWARF debug in the linked ELF so `nm -l` / addr2line map 0x08...
+       addresses back to src/*.c:line (issue #142). The shipped ROM is byte-
+       identical: debug sections are non-ALLOC and the %.gba rule strips them
+       (objcopy --strip-debug -O binary), so `make compare` is unchanged.
+       .debug_info alone is ~413 MB, so at its default VMA 0 it spans across the
+       32M ROM VMA window (0x08000000..0x0A000000). The shiftability harness
+       (scripts/shiftcheck/) filters .map / nm / --emit-relocs entries by ROM
+       address, so a .debug_info address in that window is mis-read as a ROM
+       pointer (=> 50 false-positive HIGH). Base .debug_info at 0x80000000 to
+       keep it clear of the window. The other DWARF sections are each < 6 MB, so
+       at VMA 0 they stay below 0x08000000 and need no explicit base; they are
+       listed only to keep them out of the /DISCARD/ block below. */
+    .debug_info     0x80000000 : { *(.debug_info) }
+    .debug_abbrev   : { *(.debug_abbrev) }
+    .debug_line     : { *(.debug_line) }
+    .debug_str      : { *(.debug_str) }
+    .debug_aranges  : { *(.debug_aranges) }
+    .debug_pubnames : { *(.debug_pubnames) }
     /DISCARD/ :
     {
-        *(.debug*)
         *(.comment)
         *(.note*)
         *(.ARM.attributes)
