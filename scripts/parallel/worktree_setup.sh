@@ -47,6 +47,20 @@ for d in "$MAIN/tools/"*/; do
     ln -sfn "$d" "tools/$name"
 done
 
+# --- mgfembp submodule (FE6 SIO multiboot payload) --------------------------
+# `git worktree add` does NOT check out submodules, so a fresh worktree lacks
+# mgfembp's source AND its (gitignored) prebuilt agbcc variant -> the first
+# `make compare` dies building fe6sio_payload.bin.lz. The network submodule clone
+# is flaky in linked worktrees, so provision from the fully-built main checkout
+# (these gfx/data worktrees never modify mgfembp). Copy the source + warm tools,
+# but SYMLINK the big prebuilt agbcc (read-only, never rebuilt by FE8J) so the
+# payload build stays fast and can't clobber main.
+if [ -d "$MAIN/mgfembp" ] && [ ! -f mgfembp/Makefile ]; then
+    mkdir -p mgfembp/tools
+    ( cd "$MAIN/mgfembp" && tar cf - --exclude=./tools/agbcc --exclude=./build . ) | tar xf - -C mgfembp
+    ln -sfn "$MAIN/mgfembp/tools/agbcc" mgfembp/tools/agbcc
+fi
+
 # --- warm object cache: COPY built objects (do NOT hardlink) -----------------
 # Objects are MUTABLE build outputs: a carve that changes the layout rebuilds
 # asm/baserom.o (and the assembler truncates the output in place), so a hardlink
