@@ -243,6 +243,34 @@ asm/<fn>.s           base.c          src/nonmatching/      nonmatchings/    src/
 
 ---
 
+## Help wanted — decomp.me scratches (start here to match these 16)
+
+These scratches are **work-in-progress starting points**, not solved matches. Use
+them to iterate on the remaining descriptive-asm functions; stock decomp.me may
+show NEAR progress that cannot reach `SOLVED@0` for `-mjp-promote`-style JP
+compiler residuals, so treat each link as a community scratchpad and keep
+`make compare` as the final oracle.
+
+| # | function | name | decomp.me scratch |
+|---:|---|---|---|
+| 1 | `sub_8001570` | AddAttr2dBitMap | https://decomp.me/scratch/ABitG (start here to help match) |
+| 2 | `sub_800A34C` | worldmap coeff/segment-search | https://decomp.me/scratch/ABtKz (start here to help match) |
+| 3 | `sub_800A594` | worldmap coeff/segment-search sibling | https://decomp.me/scratch/Sp10a (start here to help match) |
+| 4 | `sub_800E1FC` | Event18_ColorFade | https://decomp.me/scratch/nlJVc (start here to help match) |
+| 5 | `sub_800FAD0` | GetUnitDefinitionFormEventScr | https://decomp.me/scratch/eZzgG (start here to help match) |
+| 6 | `sub_8057F80` | PrepareBattleGraphicsMaybe | https://decomp.me/scratch/WHtsM (start here to help match) |
+| 7 | `sub_807C8DC` | AdjustNewUnitPosition | https://decomp.me/scratch/taZrH (start here to help match) |
+| 8 | `sub_807D3BC` | SelectSummonPos | https://decomp.me/scratch/J1ka1 (start here to help match) |
+| 9 | `sub_80A2E64` | Augury/Link-Arena | https://decomp.me/scratch/qksQG (start here to help match) |
+| 10 | `sub_80A3300` | Augury | https://decomp.me/scratch/ENay1 (start here to help match) |
+| 11 | `sub_80A3528` | Augury | https://decomp.me/scratch/MaiDT (start here to help match) |
+| 12 | `sub_80A390C` | Augury | https://decomp.me/scratch/xYHce (start here to help match) |
+| 13 | `sub_80A6D34` | Augury/Link-Arena | https://decomp.me/scratch/9myLi (start here to help match) |
+| 14 | `sub_80A6E4C` | Augury/Link-Arena | https://decomp.me/scratch/g7FXU (start here to help match) |
+| 15 | `sub_80A6F1C` | Augury/Link-Arena | https://decomp.me/scratch/h2W8F (start here to help match) |
+| 16 | `sub_80C05C8` | GmapScreen2_Loop | https://decomp.me/scratch/R7AaX (start here to help match) |
+
+
 ## Metrics
 
 The accounting must report three *distinct* numbers and never let documentation

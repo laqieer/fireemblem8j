@@ -68,6 +68,16 @@ porting methodology and **[`docs/frontier.md`](docs/frontier.md) for the single
 source of truth on what remains** (the live, de-inflated work list — do **not**
 read `layout/nofuncmap_*.tsv` as the frontier; it is a stale ~10× classification cache).
 
+## Help decompile
+
+The current contributor frontier is the 16 remaining nonmatching `sub_*`
+functions. Start from the decomp.me scratch table in
+[`docs/nonmatching.md`](docs/nonmatching.md), and use
+[`docs/frontier.md`](docs/frontier.md) as the single source of truth for the live
+function list and blocking notes. These are help-wanted WIP scratches, not solved
+matches; `make compare` remains the final oracle.
+
+
 ## Building
 
 You need the ARM toolchain (`binutils-arm-none-eabi`) and, for C decompilation,
