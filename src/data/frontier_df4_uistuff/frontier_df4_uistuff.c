@@ -1,5 +1,6 @@
 #include "global.h"
 #include "proc.h"
+#include "bmio.h"
 #define PROC_WORDS(op, pa, p) { (op), (pa), (void *)(p) }
 
 /* Migrated from asm/frontier_df4_uistuff.s (region-same graphics, single section).
@@ -9984,55 +9985,91 @@ __asm__(
     ".4byte 0x00000000\n"
     ".4byte 0x00000000\n"
 );
+/* externs for gProcScr_ChapterIntro symbolization (#143) */
+extern void ChapterIntro_Init(ProcPtr proc);
+extern void ChapterIntro_TwinLights_InitAndPlaySe(ProcPtr proc);
+extern void ChapterIntro_TwinLights_Loop(ProcPtr proc);
+extern void ChapterIntro_InitBLDCNT(ProcPtr proc);
+extern void ChapterIntro_DrawChapterTitle(ProcPtr proc);
+extern void ChapterIntro_LightExplosion_Init(ProcPtr proc);
+extern void ChapterIntro_LightExplosion_Loop(ProcPtr proc);
+extern void ChapterIntro_SetBG_0(ProcPtr proc);
+extern void ChapterIntro_InitFogGfx(ProcPtr proc);
+extern void ChapterIntro_BlendFogAlpha_Loop(ProcPtr proc);
+extern void ChapterIntro_TickTimerMaybe(ProcPtr proc);
+extern void ChapterIntro_1(ProcPtr proc);
+extern void ChapterIntro_2(ProcPtr proc);
+extern void ChapterIntro_InitCameraYPos(ProcPtr proc);
+extern void ChapterIntro_InitMapDisplay(ProcPtr proc);
+extern void ChapterIntro_BeginFadeToMap(ProcPtr proc);
+extern void ChapterIntro_LoopFadeToMap(ProcPtr proc);
+extern void ChapterIntro_BeginFadeOut(ProcPtr proc);
+extern void ChapterIntro_LoopFadeOut(ProcPtr proc);
+extern void ChapterIntro_BeginFastFadeToMap(ProcPtr proc);
+extern void ChapterIntro_LoopFastFadeToMap(ProcPtr proc);
+extern void ChapterIntro_End(ProcPtr proc);
+extern void sub_8020D78(ProcPtr proc);
+extern void sub_8020D80(ProcPtr proc);
+extern u8 data_085C3560[];
+extern struct ProcCmd ProcScr_ChapterIntro_LightBurst[];
+extern struct ProcCmd ProcScr_ChapterIntro_RevealDecalSprite[];
+extern struct ProcCmd ProcScr_ChapterIntro_Bg1And3Scroll[];
+
 struct ProcCmd frontier_df4_uistuff_026_5C3618[] __attribute__((section(".data.frontier_df4_uistuff.gap26"))) = {
     PROC_CALL((ProcFunc)0x08020AB5),
     PROC_REPEAT((ProcFunc)0x08020AE1),
     PROC_END,
-    PROC_CALL((ProcFunc)0x080300D5),
-    PROC_CALL((ProcFunc)0x0801FDE9),
+};
+
+struct ProcCmd gProcScr_ChapterIntro[] __attribute__((section(".data.frontier_df4_uistuff.gap26"))) = {
+    PROC_CALL(BMapDispSuspend),                                  /* 5C3630  080300D5 */
+    PROC_CALL(ChapterIntro_Init),                               /* 5C3638  0801FDE9 */
     PROC_SLEEP(0x3C),
-    PROC_START_CHILD((const struct ProcCmd*)0x085C3570),
-    PROC_CALL_ARG((ProcFunc)0x08020D79, 0x1),
-    PROC_CALL((ProcFunc)0x0801FFB5),
-    PROC_REPEAT((ProcFunc)0x0801FFF1),
-    PROC_CALL((ProcFunc)0x080205F1),
-    PROC_START_CHILD((const struct ProcCmd*)0x085C3600),
-    PROC_CALL((ProcFunc)0x08020471),
+    PROC_START_CHILD((struct ProcCmd*)(data_085C3560 + 0x10)),  /* 5C3648  085C3570 */
+    PROC_CALL_ARG(sub_8020D78, 0x1),                            /* 5C3650  08020D79 */
+    PROC_CALL(ChapterIntro_TwinLights_InitAndPlaySe),           /* 5C3658  0801FFB5 */
+    PROC_REPEAT(ChapterIntro_TwinLights_Loop),                  /* 5C3660  0801FFF1 */
+    PROC_CALL(ChapterIntro_InitBLDCNT),                         /* 5C3668  080205F1 */
+    PROC_START_CHILD(ProcScr_ChapterIntro_LightBurst),          /* 5C3670  085C3600 */
+    PROC_CALL(ChapterIntro_DrawChapterTitle),                   /* 5C3678  08020471 */
     PROC_SLEEP(0x1),
-    PROC_CALL((ProcFunc)0x080201A5),
-    PROC_REPEAT((ProcFunc)0x08020271),
-    PROC_CALL((ProcFunc)0x0801FD95),
-    PROC_START_CHILD((const struct ProcCmd*)0x085C3560),
-    PROC_START_CHILD((const struct ProcCmd*)0x085C35E0),
-    PROC_CALL((ProcFunc)0x0802063D),
-    PROC_REPEAT((ProcFunc)0x080206D1),
-    PROC_CALL_ARG((ProcFunc)0x08020D81, 0xA0),
-    PROC_REPEAT((ProcFunc)0x08020D89),
-    PROC_CALL((ProcFunc)0x08020739),
-    PROC_REPEAT((ProcFunc)0x08020785),
-    PROC_END_EACH((const struct ProcCmd*)0x085C3560),
-    PROC_END_EACH((const struct ProcCmd*)0x085C3588),
-    PROC_END_EACH((const struct ProcCmd*)0x085C35E0),
-    PROC_CALL_ARG((ProcFunc)0x08020D79, 0x0),
-    PROC_CALL((ProcFunc)0x08020819),
-    PROC_CALL((ProcFunc)0x08030109),
-    PROC_CALL((ProcFunc)0x08020829),
-    PROC_CALL((ProcFunc)0x08020925),
-    PROC_REPEAT((ProcFunc)0x0802099D),
+    PROC_CALL(ChapterIntro_LightExplosion_Init),                /* 5C3688  080201A5 */
+    PROC_REPEAT(ChapterIntro_LightExplosion_Loop),              /* 5C3690  08020271 */
+    PROC_CALL(ChapterIntro_SetBG_0),                            /* 5C3698  0801FD95 */
+    PROC_START_CHILD((struct ProcCmd*)data_085C3560),           /* 5C36A0  085C3560 */
+    PROC_START_CHILD(ProcScr_ChapterIntro_RevealDecalSprite),   /* 5C36A8  085C35E0 */
+    PROC_CALL(ChapterIntro_InitFogGfx),                         /* 5C36B0  0802063D */
+    PROC_REPEAT(ChapterIntro_BlendFogAlpha_Loop),               /* 5C36B8  080206D1 */
+    PROC_CALL_ARG(sub_8020D80, 0xA0),                           /* 5C36C0  08020D81 */
+    PROC_REPEAT(ChapterIntro_TickTimerMaybe),                   /* 5C36C8  08020D89 */
+    PROC_CALL(ChapterIntro_1),                                  /* 5C36D0  08020739 */
+    PROC_REPEAT(ChapterIntro_2),                                /* 5C36D8  08020785 */
+    PROC_END_EACH((struct ProcCmd*)data_085C3560),              /* 5C36E0  085C3560 */
+    PROC_END_EACH(ProcScr_ChapterIntro_Bg1And3Scroll),          /* 5C36E8  085C3588 */
+    PROC_END_EACH(ProcScr_ChapterIntro_RevealDecalSprite),      /* 5C36F0  085C35E0 */
+    PROC_CALL_ARG(sub_8020D78, 0x0),                            /* 5C36F8  08020D79 */
+    PROC_CALL(ChapterIntro_InitCameraYPos),                     /* 5C3700  08020819 */
+    PROC_CALL(BMapDispResume),                                  /* 5C3708  08030109 */
+    PROC_CALL(ChapterIntro_InitMapDisplay),                     /* 5C3710  08020829 */
+    PROC_CALL(ChapterIntro_BeginFadeToMap),                     /* 5C3718  08020925 */
+    PROC_REPEAT(ChapterIntro_LoopFadeToMap),                    /* 5C3720  0802099D */
     PROC_SLEEP(0x1E),
     PROC_GOTO(0x63),
     PROC_LABEL(0x1),
-    PROC_CALL((ProcFunc)0x08020B41),
-    PROC_REPEAT((ProcFunc)0x08020BA5),
+    PROC_CALL(ChapterIntro_BeginFadeOut),                       /* 5C3740  08020B41 */
+    PROC_REPEAT(ChapterIntro_LoopFadeOut),                      /* 5C3748  08020BA5 */
     PROC_SLEEP(0x3C),
-    PROC_CALL((ProcFunc)0x08020819),
-    PROC_CALL((ProcFunc)0x08030109),
-    PROC_CALL((ProcFunc)0x08020829),
-    PROC_CALL((ProcFunc)0x08020BF9),
-    PROC_REPEAT((ProcFunc)0x08020CF1),
+    PROC_CALL(ChapterIntro_InitCameraYPos),                     /* 5C3758  08020819 */
+    PROC_CALL(BMapDispResume),                                  /* 5C3760  08030109 */
+    PROC_CALL(ChapterIntro_InitMapDisplay),                     /* 5C3768  08020829 */
+    PROC_CALL(ChapterIntro_BeginFastFadeToMap),                 /* 5C3770  08020BF9 */
+    PROC_REPEAT(ChapterIntro_LoopFastFadeToMap),                /* 5C3778  08020CF1 */
     PROC_LABEL(0x63),
-    PROC_CALL((ProcFunc)0x08020DC1),
+    PROC_CALL(ChapterIntro_End),                                /* 5C3788  08020DC1 */
     PROC_END,
+};
+
+struct ProcCmd frontier_df4_uistuff_026b_5C3798[] __attribute__((section(".data.frontier_df4_uistuff.gap26"))) = {
     PROC_CALL((ProcFunc)0x080207F1),
     PROC_CALL((ProcFunc)0x08020829),
     PROC_CALL((ProcFunc)0x08020925),

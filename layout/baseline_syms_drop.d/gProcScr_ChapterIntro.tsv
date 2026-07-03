@@ -1,0 +1,4 @@
+# #143 shiftability: gProcScr_ChapterIntro is now a real (relocatable) definition
+# in src/data/frontier_df4_uistuff/frontier_df4_uistuff.c; drop the baseline .set
+# @0x085C3630 to avoid a multiple-definition of the symbol.
+gProcScr_ChapterIntro
