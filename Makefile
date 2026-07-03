@@ -88,6 +88,7 @@ src/sub_8021A94.o: CC1FLAGS += -mjp-promote
 src/StartEventWarpAnim.o: CC1FLAGS += -mjp-promote
 src/muctrl_0807CA10.o: CC1FLAGS += -mjp-promote
 src/bmunit_08017E7C.o: CC1FLAGS += -mjp-promote
+src/sub_800FF08.o: CC1FLAGS += -mjp-promote
 src/BlitU8TileMapData.o: CC1FLAGS += -mjp-promote
 src/PrintDebugStringFmtAsOBJ.o: CC1FLAGS += -mjp-promote
 src/LoadBattleSpritesForBranchScreen.o: CC1FLAGS += -mjp-promote
