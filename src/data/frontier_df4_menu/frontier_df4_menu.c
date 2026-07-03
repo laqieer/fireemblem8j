@@ -6734,6 +6734,64 @@ __asm__(
     ".4byte frontier_df4_menu_036_AB0D18 + 0x11c\n"
     ".4byte 0x00000801\n"
 );
-u8 frontier_df4_menu_037_AB7144[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin");
-u8 frontier_df4_menu_038_ABCD24[] __attribute__((section(".data.frontier_df4_menu.gap38"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_038_ABCD24.bin");
+/* multi-slice atomic relocation carve of frontier_df4_menu_037_AB7144 (embedded ProcScr @ 0x5650):
+   the graphics prefix [0,0x5650) stays .incbin; the shop/menu ProcScr's 50 func pointers + 2
+   self-ref child-ProcScr pointers (blob+0x5984) become .4byte Sym(+addend). The 11 coincidental
+   ROM-range words in the prefix are NOT pointers (mid-func / mid-data offsets) and stay raw.
+   byte-exact; make compare is the oracle. */
+__asm__(
+"\t.section .data.frontier_df4_menu.gap37, \"aw\", %progbits\n"
+"\t.global frontier_df4_menu_037_AB7144\n"
+"frontier_df4_menu_037_AB7144:\n"
+"\t.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin\", 0, 0x5650\n"
+"\t.4byte LockGame + 0x1, 0x0001000E, 0x00000000, 0xFFFF0018, _FadeBgmOut + 0x1, 0x00000002\n"
+"\t.4byte StartMidFadeToBlack + 0x1, 0x00000003, WaitForFade + 0x1, 0x00000002, BMapDispSuspend + 0x1, 0x00000000\n"
+"\t.4byte 0x00000000, 0x00000002, ResetDialogueScreen + 0x1, 0x00000002, BMapDispResume + 0x1, 0x00000002\n"
+"\t.4byte RefreshBMapGraphics + 0x1, 0x00000002, StartMapSongBgm + 0x1, 0x00000002, StartMidFadeFromBlack + 0x1, 0x00000003\n"
+"\t.4byte WaitForFade + 0x1, 0x00000002, UnlockGame + 0x1, 0x00000000, 0x00000000, 0x00000002\n"
+"\t.4byte StartShopFadeIn + 0x1, 0x0000000E, 0x00000000, 0x00000002, LockGame + 0x1, 0x00000002\n"
+"\t.4byte Shop_Init + 0x1, 0x00000002, Shop_InitBuyState + 0x1, 0x00000005, frontier_df4_menu_037_AB7144 + 0x5984, 0x00000002\n"
+"\t.4byte FadeInBlackSpeed20 + 0x1, 0x0001000E, 0x00000000, 0x00000002, Shop_EntryDialogue + 0x1, 0x0000000B\n"
+"\t.4byte 0x00000000, 0x0001000E, 0x00000000, 0x00000003, Shop_HandleEntryDialoguePrompt + 0x1, 0x0001000B\n"
+"\t.4byte 0x00000000, 0x00000002, Shop_BuyDialogue + 0x1, 0x0002000B, 0x00000000, 0x00000002\n"
+"\t.4byte Shop_InitBuyState + 0x1, 0x0001000E, 0x00000000, 0x00000003, Shop_Loop_BuyKeyHandler + 0x1, 0x00000002\n"
+"\t.4byte Shop_HandleBuyConfirmPrompt + 0x1, 0x0009000C, 0x00000000, 0x0003000B, 0x00000000, 0x00000002\n"
+"\t.4byte Shop_AnythingElseDialogue + 0x1, 0x0002000C, 0x00000000, 0x0004000B, 0x00000000, 0x00000002\n"
+"\t.4byte Shop_SellDialogue + 0x1, 0x0005000B, 0x00000000, 0x00000002, Shop_InitSellState + 0x1, 0x0001000E\n"
+"\t.4byte 0x00000000, 0x00000003, Shop_Loop_SellKeyHandler + 0x1, 0x00000002, Shop_HandleSellConfirmPrompt + 0x1, 0x0002000E\n"
+"\t.4byte 0x00000000, 0x00000002, Shop_SellAnythingElseDialogue + 0x1, 0x0005000C, 0x00000000, 0x0007000B\n"
+"\t.4byte 0x00000000, 0x0002000E, 0x00000000, 0x00000002, Shop_AnythingElseRestartDialogue + 0x1, 0x0000000C\n"
+"\t.4byte 0x00000000, 0x0008000B, 0x00000000, 0x0001000E, 0x00000000, 0x00000002\n"
+"\t.4byte Shop_AnythingElseContinueDialogue + 0x1, 0x0000000C, 0x00000000, 0x0009000B, 0x00000000, 0x00000002\n"
+"\t.4byte Shop_TryAddItemToInventory + 0x1, 0x0000000E, 0x00000000, 0x00000002, Shop_HandleSendToConvoyPrompt + 0x1, 0x0000000E\n"
+"\t.4byte 0x00000000, 0x00000002, Shop_CheckIfConvoyFull + 0x1, 0x00000002, Shop_ConvoyFullDialogue + 0x1, 0x0000000E\n"
+"\t.4byte 0x00000000, 0x0007000C, 0x00000000, 0x000A000B, 0x00000000, 0x00000002\n"
+"\t.4byte Shop_AddItemToConvoy + 0x1, 0x0000000E, 0x00000000, 0x00000002, Shop_SendToConvoyDialogue + 0x1, 0x0000000E\n"
+"\t.4byte 0x00000000, 0x0003000C, 0x00000000, 0x000B000B, 0x00000000, 0x0000000E\n"
+"\t.4byte 0x00000000, 0x00000002, Shop_NoSendToConvoyDialogue + 0x1, 0x0000000E, 0x00000000, 0x0007000C\n"
+"\t.4byte 0x00000000, 0x000D000B, 0x00000000, 0x00000002, Shop_PrepEntryDialogue + 0x1, 0x0000000E\n"
+"\t.4byte 0x00000000, 0x00000003, Shop_Loop_UnkKeyHandler + 0x1, 0x000C000B, 0x00000000, 0x00000002\n"
+"\t.4byte Shop_ExitShopDialogue + 0x1, 0x0001000E, 0x00000000, 0x00020018, _FadeBgmOut + 0x1, 0x00000002\n"
+"\t.4byte FadeOutBlackSpeed20Locking + 0x1, 0x0001000E, 0x00000000, 0x00000002, Shop_OnExit + 0x1, 0x00000009\n"
+"\t.4byte frontier_df4_menu_037_AB7144 + 0x5984, 0x00000002, StartShopFadeOut + 0x1, 0x0000000E, 0x00000000, 0x00000002\n"
+"\t.4byte UnlockGame + 0x1, 0x00000000, 0x00000000, 0x00000003, InitShopBuyStatus + 0x1, 0x00000000\n"
+"\t.4byte 0x00000000, 0x00000003, InitShopSellStatus + 0x1, 0x00000000, 0x00000000, 0x40000006\n"
+"\t.4byte 0x04004000, 0x40204000, 0x40080402, 0x04064000, 0x40204008, 0x40100408\n"
+"\t.4byte 0x040C4000, 0x40204010, 0x0000040E, 0x00000003, GoldBox_OnLoop + 0x1, 0x00000000\n"
+"\t.4byte 0x00000000, 0x00000003, _DisplayShopUiArrows + 0x1\n"
+);
+/* frontier_df4_menu_038_ABCD24: the [0,0x20) arena ProcScr's 2 func pointers (Arena_PlayResultSong,
+   Arena_PlayArenaSong) become .4byte Sym+0x1. The [0x20,end) descriptor table stays .incbin -- it
+   interleaves u16 immediates with sparse pointers and contains PROVEN coincidental ROM-range words
+   (adjacent u16 pairs read as 0x08xx1B20), so a typed extraction is deferred to a dedicated data
+   task. Externally referenced by base+offset (dat_gProcScr_ArenaUiResults_ref, frontier_df4_banim_b);
+   the .global symbol keeps the same address. byte-exact. */
+__asm__(
+"\t.section .data.frontier_df4_menu.gap38, \"aw\", %progbits\n"
+"\t.global frontier_df4_menu_038_ABCD24\n"
+"frontier_df4_menu_038_ABCD24:\n"
+"\t.4byte 0x00000002, Arena_PlayResultSong + 0x1, 0x00D2000E, 0x00000000, 0x00000002, Arena_PlayArenaSong + 0x1\n"
+"\t.4byte 0x00000000, 0x00000000\n"
+"\t.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_038_ABCD24.bin\", 0x20, 0x32A0\n"
+);
 u8 frontier_df4_menu_039_AC00A8[] __attribute__((section(".data.frontier_df4_menu.gap39"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_039_AC00A8.bin");
