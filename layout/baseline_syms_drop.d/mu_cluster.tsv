@@ -1,0 +1,15 @@
+# #143 shiftability: the MU (map-unit) proc-script / state-func cluster is now defined as
+# real, relocatable symbols in src/data/frontier_df4_banim_b/frontier_df4_banim_b.c
+# (gap82 typed struct ProcCmd[]; gap83 pure `.4byte Sym` refs). Drop the baseline .set
+# definitions so the linker uses the carved definitions (avoids multiple-definition).
+ProcScr_MuStepSe
+ProcScr_MuFogBump
+sMuStateFuncs
+ProcScr_Mu
+ProcScr_MuDeathFade
+ProcScr_MuBlink
+ProcScr_MuPixelEffect
+ProcScr_MuRestorePalInfo
+ProcScr_MuCritFlash
+ProcScr_MuHitFlash
+ProcScr_MuCtrl
