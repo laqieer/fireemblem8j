@@ -4,8 +4,8 @@
  * identical to the original blob, and relocation-complete so the object stays
  * shiftcheck-clean (0 HIGH) if the pointee resources move. */
 	.section .data.residue.0861F1B0, "aw", %progbits
-	.global data_0861F1B0
-data_0861F1B0:
+	.global AnimScr_EfxMantBatabata4_L
+AnimScr_EfxMantBatabata4_L:
 	.4byte AnimSprite_EfxMantBatabata4_L_1 + 0x3
 	.4byte AnimSprite_EfxMantBatabata4_L_2 + 0x3
 	.4byte AnimSprite_EfxMantBatabata4_L_3 + 0x3

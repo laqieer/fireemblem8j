@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.085C34F0, "aw", %progbits
-	.global data_085C34F0
-data_085C34F0:
+	.global ProcScr_ShowMapChangeAnim
+ProcScr_ShowMapChangeAnim:
 	.4byte 0x0000000E
 	.4byte 0x00000000
 	.4byte 0x00000002
@@ -24,4 +24,4 @@ data_085C34F0:
 	.4byte APProc_Exists + 0x1
 	.4byte 0x00000000
 	.4byte 0x00000000
-/* de-pointered slice data_085C34F0: ptr=4 data=14 skip=2 */
+/* de-pointered slice ProcScr_ShowMapChangeAnim: ptr=4 data=14 skip=2 */

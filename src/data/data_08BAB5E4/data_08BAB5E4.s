@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.08BAB5E4, "aw", %progbits
-	.global data_08BAB5E4
-data_08BAB5E4:
+	.global Pal_GameIntroNintendo
+Pal_GameIntroNintendo:
 	.4byte 0x000047F4
 	.4byte 0x10840421
 	.4byte 0x294A18C6
@@ -82,4 +82,4 @@ data_08BAB5E4:
 	.4byte PromoMain_OnEnd + 0x1
 	.4byte 0x00000000
 	.4byte 0x00000000
-/* de-pointered slice data_08BAB5E4: ptr=11 data=67 skip=0 */
+/* de-pointered slice Pal_GameIntroNintendo: ptr=11 data=67 skip=0 */

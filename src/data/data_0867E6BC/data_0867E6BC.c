@@ -13,7 +13,7 @@ extern struct AnimSpriteData AnimSprite_EfxHazymoonOBJ2_2_2[];
 extern struct AnimSpriteData AnimSprite_EfxHazymoonOBJ2_2_3[];
 extern struct AnimSpriteData AnimSprite_EfxHazymoonOBJ2_2_4[];
 
-u32 data_0867E6BC[] __attribute__((section(".data.residue.0867E6BC"))) =
+u32 AnimScr_EfxHazymoonOBJ2_1[] __attribute__((section(".data.residue.0867E6BC"))) =
 {
     ANIMSCR_FORCE_SPRITE(AnimSprite_EfxHazymoonOBJ2_2_1, 2),
     ANIMSCR_FORCE_SPRITE(AnimSprite_EfxHazymoonOBJ2_2_2, 2),

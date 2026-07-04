@@ -84,7 +84,7 @@ frontier_df4_voice_000b_1F5898:
  * frontier_df4_ending_* image residuals) interleaved with u16 dim/coord data.
  * Carved from the opaque INCBIN to relocatable .4byte Sym(+off) references so the
  * object is relocation-complete (0 unresolved ROM pointers -> shiftable, 0 HIGH).
- * Base symbol kept: data_08BAB5E4 references it as `frontier_df4_voice_001_1F67BC + 0x52C`. */
+ * Base symbol kept: Pal_GameIntroNintendo references it as `frontier_df4_voice_001_1F67BC + 0x52C`. */
 	.section .data.frontier_df4_voice.gap1, "aw", %progbits
 	.global frontier_df4_voice_001_1F67BC
 frontier_df4_voice_001_1F67BC:

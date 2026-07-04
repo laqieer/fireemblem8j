@@ -7,4 +7,4 @@
  * recompresses byte-exact (gbagfx default -mindist). Symbol/section/placement kept.
  */
 
-u8 data_08BAB2DC[] __attribute__((section(".data.residue.08BAB2DC"))) = INCBIN_U8("graphics/misc_gfx2/Tsa_GameIntroNintendo.bin.lz");
+u8 Tsa_GameIntroNintendo[] __attribute__((section(".data.residue.08BAB2DC"))) = INCBIN_U8("graphics/misc_gfx2/Tsa_GameIntroNintendo.bin.lz");

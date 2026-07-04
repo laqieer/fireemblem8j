@@ -10,7 +10,7 @@
 
 extern struct AnimSpriteData AnimSprite_EkrMainMini_L_Far[];
 
-u32 data_085F14DC[] __attribute__((section(".data.residue.085F14DC"))) =
+u32 AnimScr_EkrMainMini_L_Far[] __attribute__((section(".data.residue.085F14DC"))) =
 {
     ANIMSCR_FORCE_SPRITE(AnimSprite_EkrMainMini_L_Far, 4),
     ANIMSCR_BLOCKED,

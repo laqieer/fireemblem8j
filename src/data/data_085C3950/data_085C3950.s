@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.085C3950, "aw", %progbits
-	.global data_085C3950
-data_085C3950:
+	.global ProcScr_EventWrapAnim
+ProcScr_EventWrapAnim:
 	.4byte 0x0000000E
 	.4byte 0x00000000
 	.4byte 0x00000002
@@ -36,4 +36,4 @@ data_085C3950:
 	.4byte ProcEmitSingleStar_Loop + 0x1
 	.4byte 0x00000000
 	.4byte 0x00000000
-/* de-pointered slice data_085C3950: ptr=9 data=22 skip=1 */
+/* de-pointered slice ProcScr_EventWrapAnim: ptr=9 data=22 skip=1 */
