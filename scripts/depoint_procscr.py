@@ -224,21 +224,21 @@ def parse_sections(path):
         if not im:
             continue
         kind, operand = im.group(1), im.group(2).strip()
-        if kind == "4byte":
-            size = 4
-        elif kind == "short":
-            size = 2
-        elif kind == "byte":
-            size = 1
-        else:  # incbin "file", off, len  -> size = len
+        if kind == "incbin":  # "file", off, len  -> single item, size = len
             parts = [x.strip() for x in operand.split(",")]
             size = int(parts[-1], 0) if len(parts) >= 3 else None
-        # numeric value if pure hex/dec, else None (symbolic)
-        val = None
-        mo = re.fullmatch(r'0x[0-9A-Fa-f]+|\d+', operand)
-        if mo:
-            val = int(operand, 0)
-        cur["items"].append({"line": i, "size": size, "val": val, "text": operand})
+            cur["items"].append({"line": i, "size": size, "val": None, "text": operand})
+            continue
+        # a single .4byte/.short/.byte directive may carry MANY comma-separated
+        # operands (banim blobs pack 6 words per line); emit ONE item per operand
+        # so addresses advance per word, not per source line.
+        esize = {"4byte": 4, "short": 2, "byte": 1}[kind]
+        for tok in operand.split(","):
+            tok = tok.strip()
+            if not tok:
+                continue
+            val = int(tok, 0) if re.fullmatch(r'0x[0-9A-Fa-f]+|\d+', tok) else None
+            cur["items"].append({"line": i, "size": esize, "val": val, "text": tok})
     # assign addresses
     for s in sections:
         a = s["base"]
