@@ -12,13 +12,13 @@ EventListScr_Ch2_Location:
 	.4byte 0x00000001
 	.4byte 0x00200104
 	.4byte 0x000A0006
-	.4byte data_08A62808
+	.4byte EventScr_Ch2_Village2
 	.4byte 0x00100207
 	.4byte 0x000A0005
 	.4byte 0x00000001
 	.4byte 0x00200107
 	.4byte 0x000B0006
-	.4byte data_08A62808 + 0x3C
+	.4byte EventScr_Ch2_Village2 + 0x3C
 	.4byte 0x00100C01
 	.4byte 0x000B0005
 	.4byte 0x00000001

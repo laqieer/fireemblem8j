@@ -13,7 +13,7 @@
 extern const u8 data_08A60354[];
 extern const u8 data_08908958[];
 extern const u8 UnitDef_Ch2Enemy_0[];
-extern const u8 data_08A62808[];
+extern const u8 EventScr_Ch2_Village2[];
 extern const u8 EventScr_CallOnTutorialMode[];
 extern const u8 UnitDef_Event_Ch2Ally[];
 
@@ -80,7 +80,7 @@ SECTION(".rodata.dat_EventScr_Ch2_BeginningScene_ref") EventListScr EventScr_Ch2
     SVAL(EVT_SLOT_2, 0x25)
     SVAL(EVT_SLOT_3, 0x918)
     CALL(data_08A60354 + 0xF4)
-    SVAL(EVT_SLOT_2, data_08A62808 + 0xC0)
+    SVAL(EVT_SLOT_2, EventScr_Ch2_Village2 + 0xC0)
     CALL(EventScr_CallOnTutorialMode)
     LOAD1(0, UnitDef_Event_Ch2Ally)
     ENUN
@@ -100,7 +100,7 @@ SECTION(".rodata.dat_EventScr_Ch2_BeginningScene_ref") EventListScr EventScr_Ch2
     TEXTSHOW(0x91A)
     TEXTEND
     REMA
-    SVAL(EVT_SLOT_2, data_08A62808 + 0xE0)
+    SVAL(EVT_SLOT_2, EventScr_Ch2_Village2 + 0xE0)
     CALL(EventScr_CallOnTutorialMode)
     CURSOR_CHAR(5)
     STAL(0x3C)

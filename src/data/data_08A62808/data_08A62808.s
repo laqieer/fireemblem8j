@@ -1,9 +1,9 @@
-/* Migrated from asm/data_08A62808.s (region-same graphics, single section).
+/* Migrated from asm/EventScr_Ch2_Village2.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.08A62808, "aw", %progbits
-	.global data_08A62808
-data_08A62808:
+	.global EventScr_Ch2_Village2
+EventScr_Ch2_Village2:
 	.4byte 0x00001520
 	.4byte 0x00020540
 	.4byte 0x00000002
@@ -78,7 +78,7 @@ data_08A62808:
 	.4byte 0x003C0E20
 	.4byte 0x00003B22
 	.4byte 0x00020B41
-	.4byte data_08A62808 + 0x134
+	.4byte EventScr_Ch2_Village2 + 0x134
 	.4byte 0x40003D20
 	.4byte 0x00000120
 	.4byte 0x00070228
@@ -106,9 +106,9 @@ data_08A62808:
 	.4byte EventScr_Ch2Tutorial2
 	.4byte 0x00000721
 	.4byte 0x00010540
-	.4byte data_08A62808 + 0x134
+	.4byte EventScr_Ch2_Village2 + 0x134
 	.4byte 0x00000721
 	.4byte 0x00000A40
 	.4byte EventScr_Tutorial_Exec0
 	.4byte 0x00000120
-/* de-pointered slice data_08A62808: ptr=10 data=95 skip=2 */
+/* de-pointered slice EventScr_Ch2_Village2: ptr=10 data=95 skip=2 */

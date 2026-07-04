@@ -11,7 +11,7 @@ data_08A5A910:
 	.4byte EventScr_Ch2_Turn2Player
 	.4byte 0x00000002
 	.4byte 0x00000002
-	.4byte data_08A62808 + 0x78
+	.4byte EventScr_Ch2_Village2 + 0x78
 	.4byte 0x00000003
 	.4byte 0x00000000
 	.4byte 0x00070003

@@ -35,11 +35,11 @@ extern const u8 EventScr_Ch2Tutorial6[];
 extern const u8 EventScr_Ch2Tutorial7[];
 extern const u8 EventScr_Ch2Tutorial8[];
 extern const u8 EventScr_Ch2Tutorial9[];
-extern const u8 data_08A62808[];
+extern const u8 EventScr_Ch2_Village2[];
 extern const u8 data_08A63088[];
 
 SECTION(".rodata.dat_EventListScr_Ch2_Tutorial_ref") static const u32 EventListScr_Ch2_Tutorial__shift[] = {
-    (u32)&data_08A62808 + 0x134,
+    (u32)&EventScr_Ch2_Village2 + 0x134,
     (u32)&EventScr_Ch2Tutorial2,
     (u32)&EventScr_Ch2Tutorial3,
     (u32)&EventScr_Ch2Tutorial4,

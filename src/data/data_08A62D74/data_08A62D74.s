@@ -22,7 +22,7 @@ EventScr_Ch2Tutorial25:
 EventScr_Ch2Tutorial26:
 	.4byte 0x00001120
 	.4byte 0x00020540
-	.4byte data_08A62808 + 0xA0
+	.4byte EventScr_Ch2_Village2 + 0xA0
 	.4byte 0x00000A40
 	.4byte EventScr_CallOnTutorialMode
 	.4byte 0x00003D20
