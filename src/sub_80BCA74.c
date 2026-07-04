@@ -43,8 +43,8 @@ u8 GetChapterSurvivalRank(void);
 u32 GetGameClock(void);
 u32 GetGameTotalTime_unused(void);
 void StartParallelWorker(ProcPtr func, ProcPtr parent);
-void sub_80B33E0(const void * a, const void * b, int c, int d, int e, void * f);
-void sub_80BC638(void);
+void StartMixPalette(const void * a, const void * b, int c, int d, int e, void * f);
+void EndingDetails_PutSprites(struct GameRankProc * proc);
 u8 GetChapterCombatRank(void);
 u8 GetOverallRankFrom3(int a, int b, int c);
 
@@ -108,6 +108,6 @@ void sub_80BCA74(struct GameRankProc * proc)
         proc->unk40[i] = 0;
     }
 
-    StartParallelWorker(sub_80BC638, proc);
-    sub_80B33E0(gUnk_08AC6C18, gUnk_08AC6C18 + 0x20, 2, 0x17, 1, proc);
+    StartParallelWorker(EndingDetails_PutSprites, proc);
+    StartMixPalette(gUnk_08AC6C18, gUnk_08AC6C18 + 0x20, 2, 0x17, 1, proc);
 }

@@ -5,8 +5,6 @@ sub_80BA9F0	080BA9F0	thumb	sub_80BCA74 callee
 sub_80BAB54	080BAB54	thumb	sub_80BCA74 callee
 sub_80BAA28	080BAA28	thumb	sub_80BCA74 callee
 sub_80BAB20	080BAB20	thumb	sub_80BCA74 callee
-sub_80B33E0	080B33E0	thumb	sub_80BCA74 callee
-sub_80BC638	080BC638	thumb	sub_80BCA74 callee
 gUnk_08AC718C	08AC718C	data	sub_80BCA74 gfx/tsa
 gUnk_08AC5558	08AC5558	data	sub_80BCA74 gfx
 gUnk_08AC5598	08AC5598	data	sub_80BCA74 gfx

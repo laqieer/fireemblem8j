@@ -7,7 +7,7 @@
 #include "hardware.h"
 #include "bmlib.h"
 
-void sub_805E0C0(struct Anim * anim);
+void StartSubSpell_efxHurtmutOBJ(struct Anim * anim);
 
 //! JP 0x0805E004 - US-shape efxHurtmut_Loop_Main (name efxHurtmut_Loop_Main already used at JP 0x05D000)
 void sub_805E004(struct ProcEfx * proc)
@@ -25,7 +25,7 @@ void sub_805E004(struct ProcEfx * proc)
     if (proc->timer == duration + 1)
     {
         PlaySFX(0x10D, 0x100, anim->xPosition, 1);
-        sub_805E0C0(anim);
+        StartSubSpell_efxHurtmutOBJ(anim);
 
         NewEfxFlashBgWhite(proc->anim, 6);
 

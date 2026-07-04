@@ -85,7 +85,7 @@ void sub_80D6370(const void *src, void *dst, u32 control);        /* CpuSet     
 void Decompress(const void *src, void *dst);                     /* Decompress      */
 void j_TmApplyTsa(void *dst, const void *tsa, int base);
 int  sub_80A40A0(int portraitId, int overallRank);                /* validate/select */
-char *sub_8009FA8(int msgId);                                     /* GetStringFromIndex-like */
+char *GetStringFromIndex(int msgId);                                     /* GetStringFromIndex-like */
 void sub_8031438(char *str);                                      /* store tactician name    */
 void sub_80063F8(int a, int msgid, int x, int y, int e);          /* start face      */
 void InitTalk(int a, int b, int c);
@@ -135,7 +135,7 @@ void Augury_InitResultScreen(struct AuguryProc *proc)
         }
         else
         {
-            sub_8031438(sub_8009FA8(0x1F1));
+            sub_8031438(GetStringFromIndex(0x1F1));
         }
 
         if (proc->portraitId != 0 && sub_80A40A0(proc->portraitId, proc->overallRank) == 0)

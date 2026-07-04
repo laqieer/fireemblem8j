@@ -26,7 +26,7 @@ extern EWRAM_OVERLAY(0) struct SortedUnitEnt * gSortedUnits[0x40];
 extern EWRAM_OVERLAY(0) struct Text gUnitlistscreen_2[7];
 extern EWRAM_OVERLAY(0) struct Text gUnitlistscreen_3[7][3];
 
-char * sub_801729C(int item);
+char * GetItemName(int item);
 
 //! FE8U = 0x08092FF0
 void UnitList_PutRow(struct UnitListScreenProc * proc, u8 unitNum, u16 * tm, u8 page, s8 putName)
@@ -90,7 +90,7 @@ void UnitList_PutRow(struct UnitListScreenProc * proc, u8 unitNum, u16 * tm, u8 
                 PutDrawText(
                     &gUnitlistscreen_3[row][1], tm + y * 0x20 + 17,
                     inactive ? TEXT_COLOR_SYSTEM_GRAY : TEXT_COLOR_SYSTEM_WHITE, 0, 0,
-                    sub_801729C(GetUnitEquippedWeapon(gSortedUnits[unitNum]->unit)));
+                    GetItemName(GetUnitEquippedWeapon(gSortedUnits[unitNum]->unit)));
                 DrawIcon(
                     tm + y * 0x20 + 15, GetItemIconId(GetUnitEquippedWeapon(gSortedUnits[unitNum]->unit)),
                     TILEREF(0, 4));
@@ -196,7 +196,7 @@ void UnitList_PutRow(struct UnitListScreenProc * proc, u8 unitNum, u16 * tm, u8 
             }
             else
             {
-                char const * name = sub_801729C(GetUnitEquippedWeapon(gSortedUnits[unitNum]->unit));
+                char const * name = GetItemName(GetUnitEquippedWeapon(gSortedUnits[unitNum]->unit));
 
                 PutDrawText(
                     &gUnitlistscreen_3[row][0], tm + y * 0x20 + 10,

@@ -19,9 +19,9 @@ void StartSubSpell_efxGespenstBG4(struct Anim * anim, int a);
 void StartSubSpell_efxGespenstBGCOL2(struct Anim * anim);
 void PlaySFX(int snd, int a, int b, int c);
 void NewEfxFlashBgWhite(struct Anim * anim, int a);
-void sub_805C28C(struct Anim * anim, int a);
+void NewEfxTwobaiRST(struct Anim * anim, int a);
 void StartSubSpell_efxSuperdruidBG3(struct Anim * anim);
-void sub_805C7CC(struct Anim * anim, int a, int b, int c, int d, int e);
+void NewEfxALPHA(struct Anim * anim, int a, int b, int c, int d, int e);
 void StartSubSpell_efxSuperdruidOBJ2(struct Anim * anim);
 
 //! FE8U = 0x080672D0
@@ -86,9 +86,9 @@ void efxEreshkigal_Loop_Main(struct ProcEfx * proc)
     else if (proc->timer == duration + 0xd7)
     {
         NewEfxRestWINH_(proc->anim, 0x46, 1);
-        sub_805C28C(proc->anim, 0x32);
+        NewEfxTwobaiRST(proc->anim, 0x32);
         StartSubSpell_efxSuperdruidBG3(proc->anim);
-        sub_805C7CC(anim, 0x10, 0xa, 0x10, 0, 0);
+        NewEfxALPHA(anim, 0x10, 0xa, 0x10, 0, 0);
     }
     else if (proc->timer == duration + 0xe1)
     {

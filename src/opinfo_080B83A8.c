@@ -64,7 +64,7 @@ extern u16 gOpinfoFramePal[];           /* 0x085E0D94 (ui frame pal) */
 
 /* JP callees not yet declared in headers (bound thumb by their .set addresses). */
 void j_TmApplyTsa(u16* tilemap, const void* tsa, int tileref);
-ProcPtr sub_80B8C64(ProcPtr);
+ProcPtr StartClassStatsDisplay(ProcPtr);
 void InitBanimTerrain(void*);
 void SetBanimTerrainPos(void*, s16, s16, s16, s16);
 void ClassInfoDisplay_ResetWindowBlend(void);
@@ -175,7 +175,7 @@ void ClassInfoDisplay_Init(struct OpInfoClassDisplayProc* proc)
 
     r5 = 0;
 
-    proc->unk_3c = sub_80B8C64(proc);
+    proc->unk_3c = StartClassStatsDisplay(proc);
 
     InitTalk(0x100, 2, 0);
 

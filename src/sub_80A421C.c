@@ -20,7 +20,7 @@ extern bool CheckFlag(int);
 extern void ClearFlag(int);
 
 extern int GetChapterDivinationPortrait(struct DivinationScreenProc * proc);
-extern int sub_8001BC0(int a);
+extern u16 * BG_GetMapBuffer(int a);
 extern void ResetIconGraphics_(void);
 extern void LoadLegacyUiFrameGraphics(void);
 extern void LoadObjUIGfx(void);
@@ -47,9 +47,9 @@ void sub_80A421C(struct DivinationScreenProc * proc)
 
     SetupBackgrounds(0);
 
-    BG_Fill((void *)sub_8001BC0(0), 0);
-    BG_Fill((void *)sub_8001BC0(1), 0);
-    BG_Fill((void *)sub_8001BC0(2), 0);
+    BG_Fill((void *)BG_GetMapBuffer(0), 0);
+    BG_Fill((void *)BG_GetMapBuffer(1), 0);
+    BG_Fill((void *)BG_GetMapBuffer(2), 0);
 
     gLCDControlBuffer.bg0cnt.priority = 0;
     gLCDControlBuffer.bg1cnt.priority = 2;

@@ -62,7 +62,7 @@
  *
  * JP-address callees that gbadisasm left unnamed (asm/.s `.set` lines) resolved
  * to their fe8u names, used below for readability:
- *   sub_8050ABC = SetBanimLinkArenaFlag        sub_8059678 = GetBattleAnimationId
+ *   sub_8050ABC = SetBanimLinkArenaFlag        GetBattleAnimationId = GetBattleAnimationId
  *   sub_8059790 = FilterBattleAnimCharacterPalette   sub_8059034 = ParseBattleHitToBanimCmd
  *   sub_8058E44 = GetSpellAnimId               sub_80598BC = IsItemDisplayedInBattle
  *   sub_8058FE8 = UnsetMapStaffAnim            sub_805BDCC = GetBattleAnimArenaFlag

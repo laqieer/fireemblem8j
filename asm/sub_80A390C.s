@@ -8,7 +8,7 @@
 	.set strcpy, 0x080D69BC + 1
 	.set sub_80063F8, 0x080063F8 + 1
 	.set InitTalk, 0x08006710 + 1
-	.set sub_8009FA8, 0x08009FA8 + 1
+	.set GetStringFromIndex, 0x08009FA8 + 1
 	.set Decompress, 0x08013008 + 1
 	.set sub_8031438, 0x08031438 + 1
 	.set StartCgText, 0x080913FC + 1
@@ -165,7 +165,7 @@ _080A3A28: .4byte 0x0100000C
 _080A3A2C: .4byte 0x001FFFFF
 _080A3A30:
 	ldr r0, _080A3A74 @ =0x000001F1
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	bl sub_8031438
 _080A3A3A:
 	ldrb r0, [r5]

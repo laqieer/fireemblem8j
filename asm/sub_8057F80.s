@@ -18,7 +18,7 @@
 	.set sub_8058E44, 0x08058E44 + 1
 	.set sub_8058FE8, 0x08058FE8 + 1
 	.set sub_8059034, 0x08059034 + 1
-	.set sub_8059678, 0x08059678 + 1
+	.set GetBattleAnimationId, 0x08059678 + 1
 	.set sub_8059790, 0x08059790 + 1
 	.set sub_80598BC, 0x080598BC + 1
 	.set sub_80599A0, 0x080599A0 + 1
@@ -421,7 +421,7 @@ _0805829E:
 	mov r0, sl
 	adds r1, r5, #0
 	mov r3, sp
-	bl sub_8059678
+	bl GetBattleAnimationId
 	ldr r6, _080582D8 @ =0x0203E17E
 	ldr r4, _080582DC @ =0x0203E108
 	strh r0, [r4]
@@ -432,7 +432,7 @@ _0805829E:
 	add r3, sp, #4
 	ldr r0, [sp, #0x18]
 	ldr r1, [sp, #0x1c]
-	bl sub_8059678
+	bl GetBattleAnimationId
 	strh r0, [r4, #2]
 	strh r0, [r6, #2]
 	mov r4, r8
@@ -474,7 +474,7 @@ _08058310:
 	mov r0, sl
 	adds r1, r5, #0
 	mov r3, sp
-	bl sub_8059678
+	bl GetBattleAnimationId
 	ldr r2, _080584F0 @ =0x0203E17E
 	ldr r1, _080584F4 @ =0x0203E108
 	strh r0, [r1]
@@ -495,7 +495,7 @@ _0805832C:
 	add r3, sp, #4
 	ldr r0, [sp, #0x18]
 	ldr r1, [sp, #0x1c]
-	bl sub_8059678
+	bl GetBattleAnimationId
 	ldr r2, _080584F0 @ =0x0203E17E
 	ldr r1, _080584F4 @ =0x0203E108
 	strh r0, [r1, #2]

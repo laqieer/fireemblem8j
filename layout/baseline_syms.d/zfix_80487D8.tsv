@@ -1,7 +1,5 @@
 nullsub_2	0804D148	thumb	sub_80487D8 callee
-sub_80042E0	080042E0	thumb	sub_80487D8 callee
 sub_8003CF8	08003CF8	thumb	sub_80487D8 callee
-sub_8009FA8	08009FA8	thumb	sub_80487D8 callee
 sub_80043B8	080043B8	thumb	sub_80487D8 callee
 gUnk_080DEEE8	080DEEE8	data	sub_80487D8 BG-cfg
 gUnk_085DF388	085DF388	data	sub_80487D8 gfx

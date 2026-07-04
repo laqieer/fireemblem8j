@@ -11,7 +11,7 @@
 #include "uiutils.h"
 #include "constants/characters.h"
 
-int sub_80446E4(u8 * str_buf);
+int StrLen(u8 * str_buf);
 
 //! FE8U = 0x0804470C
 void Tactician_InitScreen(struct ProcTactician * proc)
@@ -95,7 +95,7 @@ void Tactician_InitScreen(struct ProcTactician * proc)
         Tactician_MapNameToConfIndices(proc, str_buf);
         TacticianDrawCharacters(proc);
         str_buf[proc->unk33 * 2 - 2] = '\0';
-        proc->child1->unk40 = sub_80446E4(str_buf) * 9;
+        proc->child1->unk40 = StrLen(str_buf) * 9;
     }
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT | BG3_SYNC_BIT);
 }

@@ -1,8 +1,8 @@
 #include "global.h"
 
-int sub_8003AFC();
+void PrintDebugStringAsOBJ(int a, int b, const char * str);
 
 void sub_8048BDC(void)
 {
-    sub_8003AFC(8, 0x10, 0x080DEF00);
+    PrintDebugStringAsOBJ(8, 0x10, (const char *)0x080DEF00);
 }

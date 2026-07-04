@@ -13,7 +13,7 @@ void EndEkrUnitMainMini(struct AnimBuffer *);
 void ClassChgSel_StartClassBattleSprite(int a, int b, int c, int d, int e);
 void ClassChgSel_SetupBattleTerrain(u32 a, s16 b, s16 c);
 void LoadClassNameInClassReelFont(struct ProcPromoSel *proc);
-u16 sub_8059678(struct Unit *, const struct BattleAnimDef *, u16, u32 *);
+u16 GetBattleAnimationId(struct Unit *, const struct BattleAnimDef *, u16, u32 *);
 
 void LoadBattleSpritesForBranchScreen(struct ProcPromoSel *proc)
 {
@@ -70,7 +70,7 @@ void LoadBattleSpritesForBranchScreen(struct ProcPromoSel *proc)
             copied_unit = *unit;
             copied_unit.pClassData = GetClassData(proc->jid[proc->main_select]);
             battle_anim_ptr = copied_unit.pClassData->pBattleAnimDef;
-            ret = (s16)sub_8059678(&copied_unit, battle_anim_ptr,
+            ret = (s16)GetBattleAnimationId(&copied_unit, battle_anim_ptr,
                 (u16)GetUnitEquippedWeapon(&copied_unit), &battle_anim_id);
             for (i = 0; i <= 6; i++)
             {

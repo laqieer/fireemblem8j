@@ -8,7 +8,7 @@
 	.set BG_Fill, 0x080011D0 + 1
 	.set sub_8004374, 0x08004374 + 1
 	.set sub_8004C84, 0x08004C84 + 1
-	.set sub_8009FA8, 0x08009FA8 + 1
+	.set GetStringFromIndex, 0x08009FA8 + 1
 	.set sub_80A34F0, 0x080A34F0 + 1
 	.section .text.sub_80A3528, "ax", %progbits
 @ sub_80A3528 @ JP 0x080A3528 - region-different, gbadisasm descriptive asm (D23)
@@ -83,7 +83,7 @@ _080A35AA:
 	mov r8, r3
 	subs r3, #4
 	ldm r3!, {r0}
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	ldr r4, _080A36D4 @ =0x02023CAC
 	adds r1, r6, r4
 	movs r2, #5
@@ -100,7 +100,7 @@ _080A35AA:
 	movs r7, #5
 	movs r0, #0x9a
 	lsls r0, r0, #3
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	movs r2, #0x8e
 	lsls r2, r2, #1
 	adds r1, r4, r2
@@ -124,7 +124,7 @@ _080A35AA:
 	movs r2, #0x1e
 	bl PutSpecialChar
 	ldr r0, _080A36D8 @ =0x000004D1
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	movs r2, #0xce
 	lsls r2, r2, #1
 	adds r1, r4, r2
@@ -168,7 +168,7 @@ _080A35AA:
 	movs r1, #2
 	bl sub_8004C84
 	ldr r0, _080A36DC @ =0x000004D2
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	adds r1, r4, #0
 	adds r1, #0x4e
 	str r7, [sp]
@@ -192,7 +192,7 @@ _080A35AA:
 	cmp r0, #0
 	bne _080A36E8
 	ldr r0, _080A36E4 @ =0x000004D3
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	adds r1, r4, #0
 	adds r1, #0x5c
 	str r6, [sp]
@@ -213,7 +213,7 @@ _080A36E0: .4byte 0x08A95524
 _080A36E4: .4byte 0x000004D3
 _080A36E8:
 	ldr r0, _080A3740 @ =0x000004D4
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	adds r1, r4, #0
 	adds r1, #0x5c
 	str r6, [sp]
@@ -224,7 +224,7 @@ _080A36E8:
 	bl sub_8004374
 _080A3700:
 	ldr r0, _080A3744 @ =0x000004D5
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	ldr r4, _080A3748 @ =0x02023D16
 	movs r5, #2
 	str r5, [sp]
@@ -240,7 +240,7 @@ _080A3700:
 	movs r1, #2
 	bl PutNumber
 	ldr r0, _080A374C @ =0x000004D6
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	adds r4, #6
 	str r5, [sp]
 	str r0, [sp, #4]
@@ -267,7 +267,7 @@ _080A375C:
 	lsls r0, r7, #2
 	adds r0, r0, r1
 	ldr r0, [r0]
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	ldr r6, _080A3844 @ =0x02023CAC
 	adds r1, r5, r6
 	movs r2, #5
@@ -293,7 +293,7 @@ _080A375C:
 	ble _080A375C
 	movs r0, #0x9a
 	lsls r0, r0, #3
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	movs r2, #0x8e
 	lsls r2, r2, #1
 	adds r1, r6, r2
@@ -312,7 +312,7 @@ _080A375C:
 	movs r3, #0x14
 	bl sub_80A34F0
 	ldr r0, _080A3848 @ =0x000004D1
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	movs r2, #0xce
 	lsls r2, r2, #1
 	adds r1, r6, r2
@@ -330,7 +330,7 @@ _080A375C:
 	movs r3, #0x14
 	bl sub_80A34F0
 	ldr r0, _080A384C @ =0x000004D2
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	adds r1, r6, #0
 	adds r1, #0x4e
 	mov r2, sb
@@ -352,7 +352,7 @@ _080A375C:
 	cmp r0, #0
 	bne _080A3854
 	ldr r0, _080A3850 @ =0x000004D3
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	adds r1, r6, #0
 	adds r1, #0x5c
 	str r4, [sp]
@@ -370,7 +370,7 @@ _080A384C: .4byte 0x000004D2
 _080A3850: .4byte 0x000004D3
 _080A3854:
 	ldr r0, _080A3894 @ =0x000004D4
-	bl sub_8009FA8
+	bl GetStringFromIndex
 	adds r1, r6, #0
 	adds r1, #0x5c
 	str r4, [sp]

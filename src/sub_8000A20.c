@@ -10,10 +10,10 @@
 #include "bm.h"
 
 void StoreIRQToIRAM(void);
-void sub_80A7680(void);
-void sub_80C165C(void);
+void SramInit(void);
+void GmDataInit(void);
 void StartGame(void);
-void sub_80012E4(void);
+void ExecMainUpdate(void);
 void sub_8001BD0(void);
 
 void AgbMain(void)
@@ -41,7 +41,7 @@ void AgbMain(void)
     ResetKeyStatus(gKeyStatusPtr);
     UpdateKeyStatus(gKeyStatusPtr);
     StoreRoutinesToIRAM();
-    sub_80A7680();
+    SramInit();
     Proc_Init();
     AP_ClearAll();
     InitMus();
@@ -55,13 +55,13 @@ void AgbMain(void)
     Sound_SetDefaultMaxNumChannels();
 
     SetInterrupt_LCDVBlank(OnVBlank);
-    sub_80C165C();
+    GmDataInit();
     StartGame();
 
     // perform the game loop.
     while (1)
     {
-        sub_80012E4();
+        ExecMainUpdate();
         sub_8001BD0();
     };
 }

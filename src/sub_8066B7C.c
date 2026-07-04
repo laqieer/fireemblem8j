@@ -6,7 +6,7 @@
 #include "efxmagic.h"
 #include "hardware.h"
 
-void sub_805C7CC(struct Anim * anim, int b, int c, int d, int e, int f);
+void NewEfxALPHA(struct Anim * anim, int b, int c, int d, int e, int f);
 void StartSpellThing_MagicQuake(struct Anim * anim, int b, int c);
 void sub_8066CC0(struct Anim * anim);
 void sub_8066D7C(struct Anim * anim, int b);
@@ -41,7 +41,7 @@ void sub_8066B7C(struct ProcEfx * proc)
     {
         sub_8067040(anim, 0x72);
         SetBlendConfig(1, 0, 16, 0);
-        sub_805C7CC(anim, 10, 10, 0, 16, 0);
+        NewEfxALPHA(anim, 10, 10, 0, 16, 0);
         PlaySFX(0x2C5, 0x100, 120, 0);
     }
     else if (proc->timer == duration + 76)
@@ -68,7 +68,7 @@ void sub_8066B7C(struct ProcEfx * proc)
     {
         StartSpellThing_MagicQuake(anim, 0x64, 10);
         sub_8066D7C(anim, 0x64);
-        sub_805C7CC(anim, 0x50, 0x14, 0x10, 0, 0);
+        NewEfxALPHA(anim, 0x50, 0x14, 0x10, 0, 0);
         PlaySFX(0x2C6, 0x100, 120, 0);
     }
     else if (proc->timer == duration + 245)

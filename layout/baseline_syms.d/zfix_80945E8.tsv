@@ -1,4 +1,3 @@
-sub_801729C	0801729C	thumb	UnitList_PutRow GetItemName-JP (NEEDS_ALIAS)
 GetUnitRescueName	080190C0	thumb	UnitList_PutRow callee (NEEDS_ALIAS)
 GetUnitStatusName	080190EC	thumb	UnitList_PutRow callee (NEEDS_ALIAS)
 GetUnitSupporterUnit	08028188	thumb	UnitList_PutRow callee (NEEDS_ALIAS)

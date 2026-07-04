@@ -22,13 +22,13 @@ extern struct UnitUsageStats *sub_80A9740(int idx);
 extern int sub_80C086C(int a);
 extern char *sub_80B3564(int a, char *str, int c);
 extern const struct ROMChapterData *GetROMChapterStruct(unsigned chIndex);
-extern int sub_8009FA8(int msgid);
+extern char * GetStringFromIndex(int msgid);
 extern char *sub_80B3538(int a, char *str);
 extern char *AppendCharacter(int character, char *str);
 
 /* The callees below are still undecompiled in the JP tree and are not global
  * linker symbols; bind them to their JP ROM addresses exactly as the original
- * asm/sub_80BB240.s did via .set (CheckPermanentFlag and sub_8009FA8 already
+ * asm/sub_80BB240.s did via .set (CheckPermanentFlag and GetStringFromIndex already
  * resolve as baseline globals at the same addresses, so they are omitted). */
 asm(".set GetPidDefeatType, 0x080BB21C + 1");
 asm(".set sub_80A9740, 0x080A9740 + 1");
@@ -71,7 +71,7 @@ char *GetPidDefeatedEndingString(int pid)
     else
     {
         str = sub_80B3564(chId, str, 1);
-        msg = sub_8009FA8(GetROMChapterStruct(chId)->unk70);
+        msg = (int)GetStringFromIndex(GetROMChapterStruct(chId)->unk70);
     }
 
     str = sub_80B3538(msg, str);
@@ -80,19 +80,19 @@ char *GetPidDefeatedEndingString(int pid)
     switch (type)
     {
         case 0:
-            msg = sub_8009FA8(0x749);
+            msg = (int)GetStringFromIndex(0x749);
             str = sub_80B3538(msg, str);
             break;
         case 1:
-            msg = sub_8009FA8(0x74a);
+            msg = (int)GetStringFromIndex(0x74a);
             str = sub_80B3538(msg, str);
             break;
         case 2:
-            msg = sub_8009FA8(0x74b);
+            msg = (int)GetStringFromIndex(0x74b);
             str = sub_80B3538(msg, str);
             break;
         case 3:
-            msg = sub_8009FA8(0x749);
+            msg = (int)GetStringFromIndex(0x749);
             str = sub_80B3538(msg, str);
             break;
         case 4:
@@ -101,7 +101,7 @@ char *GetPidDefeatedEndingString(int pid)
 
             tmp2 = 0x100;
             asm volatile("" : "=r"(tmp2) : "0"(tmp2));
-            msg = sub_8009FA8(0x7b1);
+            msg = (int)GetStringFromIndex(0x7b1);
             str = sub_80B3538(msg, str);
             break;
         }

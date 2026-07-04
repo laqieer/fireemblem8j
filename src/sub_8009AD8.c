@@ -1,7 +1,7 @@
 #include "global.h"
 #include "proc.h"
 
-void sub_80C165C(void);
+void GmDataInit(void);
 
 struct Proc8009AD8
 {
@@ -14,7 +14,7 @@ void sub_8009AD8(struct Proc8009AD8 *proc)
     switch (proc->unk29)
     {
     case 0:
-        sub_80C165C();
+        GmDataInit();
         /* fallthrough */
     case 1:
     case 2:

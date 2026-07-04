@@ -5,7 +5,7 @@
 #include "bm.h"
 
 extern struct ProcCmd gProcScr_85B9D0C[];
-extern void sub_8012340(struct Unit* unit, u8 b, u8 c);
+extern void EventPromoteUnitExt(struct Unit* unit, u8 b, u8 c);
 
 struct Proc8010CB4Child
 {
@@ -33,7 +33,7 @@ int sub_8010CB4(struct EventEngineProc* proc)
 
     unit = GetUnitStructFromEventParameter(a);
     SetUnitStatus(unit, 0);
-    sub_8012340(unit, (u8)b, (u8)c);
+    EventPromoteUnitExt(unit, (u8)b, (u8)c);
 
     return 2;
 }

@@ -1,6 +1,5 @@
 sub_80A2CB0	080A2CB0	thumb	sub_80A421C callee
 sub_8001ACC	08001ACC	thumb	sub_80A421C callee
-sub_8001BC0	08001BC0	thumb	sub_80A421C callee
 sub_80011D0	080011D0	thumb	sub_80A421C callee
 sub_80034C4	080034C4	thumb	sub_80A421C callee
 sub_804F8E0	0804F8E0	thumb	sub_80A421C callee

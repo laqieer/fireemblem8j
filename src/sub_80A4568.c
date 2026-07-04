@@ -9,11 +9,11 @@ struct Augury80A4568Proc
     /* 2C */ int unk_2C;
 };
 
-int sub_80A2C78(void);
+int GetChapterDivinationTextIdEnding(void);
 
 void sub_80A4568(struct Augury80A4568Proc * proc)
 {
-    proc->unk_2C = sub_80A2C78();
+    proc->unk_2C = GetChapterDivinationTextIdEnding();
     StartCgText(0x16, 0x10, -1, -1, proc->unk_2C, (void *)0x06011000 /* VRAM */, -1, 0);
     SetCgTextFlags(GetCgTextFlags() | 0x0004004E);
 }

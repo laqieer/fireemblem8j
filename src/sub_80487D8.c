@@ -44,8 +44,8 @@ void Decompress(const void * src, void * dst);
 void CopyToPaletteBuffer(const void * src, int dst, int size);
 void j_TmApplyTsa(u16 * tm, const void * tsa, int base);
 void ClearText(struct Text * text);
-int sub_8009FA8(int msgid);
-void sub_80042E0(void);
+char * GetStringFromIndex(int msgid);
+void InitSystemTextFont(void);
 void m4aSoundVSyncOff(void);
 void * memcpy(void * dst, const void * src, unsigned long n);
 
@@ -88,12 +88,12 @@ void sub_80487D8(struct MultiBootSendProc * proc)
     Proc_Start((const struct ProcCmd *)gUnk_085D3EA8, proc);
 
     SetTextFont(&gUnk_0203DB60);
-    sub_80042E0();
+    InitSystemTextFont();
     ResetTextFont();
 
     InitText(&gUnk_0203DD08, 0x18);
     ClearText(&gUnk_0203DD08);
-    Text_InsertDrawString(&gUnk_0203DD08, 0, 0, (const char *)sub_8009FA8(0x62));
+    Text_InsertDrawString(&gUnk_0203DD08, 0, 0, (const char *)GetStringFromIndex(0x62));
     PutText(&gUnk_0203DD08, (u16 *)0x02023136);
 
     BG_EnableSyncByMask(0xB);
