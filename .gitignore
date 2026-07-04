@@ -16,6 +16,11 @@
 build/shiftcheck/
 /objects.lst
 
+# Shift smoke-test runtime artifacts (build_shifted_rom.sh / boot_smoke.sh / play_smoke.sh)
+*.sav
+/fireemblem8_shifted*.gba
+/.boot_smoke_work/
+
 # Asset build intermediates (Phase 0). The COMMITTED source is the editable
 # PNG / JASC .pal under graphics/; these are REGENERATED from it by the Makefile's
 # gbagfx rules (%.4bpp: %.png, %.lz: %, %.gbapal: %.pal, ...) and must never be

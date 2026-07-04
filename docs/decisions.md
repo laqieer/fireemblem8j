@@ -9340,3 +9340,31 @@ Both were typed into C so every embedded pointer became a relocatable `R_ARM_ABS
 **Refines D345.** "84 remain raw" conflated two axes: **typed-C / decomp debt = 73** (86−13 typed) vs **shiftability debt = 11** (the opaque subset). The 62 de-pointered tables need typing for decomp COMPLETENESS but are NOT shiftability blockers. #143's boot→menu fix (`gProcScr_TitleScreen` + `gBmlib_0`) is now in the shift-safe 75.
 
 **Criterion-3 sharpening.** The #143 shifted-ROM proof reached `StartSaveMenu` (title→menu ✓, the exact path #143 crashed on). new-game→chapter is blocked specifically by `gProcScr_ChapterIntro`; the menu sub-screens (config/guide/support) by theirs. These **11** are the precise remaining shiftability worklist — each re-verifiable by re-running the harness after carving (residual→0).
+
+## D347 — Session wind-down: frontier converted to durable GitHub issues (#144/#145/#146); B1/B2 shiftability reframe; CI-consolidation over cron (2026-07-04)
+
+**Context.** An over-long P10 session was wound down; incomplete parallel tracks were converted from
+ephemeral in-flight agent work into durable GitHub issues so nothing is lost across the session boundary.
+The banim `ProcScr_Mu*` / MU state-func cluster carve was harvested from an unpushed local branch,
+verified (`make compare` OK + `make shiftcheck` 0 HIGH), and banked to main (`474a72c6f`).
+
+**B1/B2 reframe (sharpens D345/D346).** The true shiftability frontier is broader than the
+`gProcScr_*`/`gBmlib_*` family. Define **B1 = ALL pointer-bearing degraded assets** (bin/incbin/hex
+holding un-relocatable jump/callback/anim/OAM/event/menu/AI pointers) and **B2 = non-pointer degraded
+assets** (pixels/values, editability-only). Then **A (playable shifted ROM) ⊆ B1**: the game crashes on
+*any* un-relocated pointer, so the D346 "11 opaque proc-script blockers" are one *slice* of B1, not the
+whole thing. Tracked as epic **#145** (fe8u→fe8j asset-form alignment). #143 stays scoped to the
+proc-script critical path (boot→menu done; the 11 menu blockers + non-family residual `ProcScr_*` next).
+
+**CI/Pages decision (supersedes `ae660367d`).** The Pages deploy-race must be fixed by
+**execution-time optimization**, NOT by a `cron` schedule or `cancel-in-progress`. `ae660367d`
+("cancel stale runs") added a 6-hour cron + cancel that re-runs a 39-min duplicate build — rejected.
+Correct fix (issue **#144**): consolidate the Pages build INTO `ci.yml` (one build per push, main-only,
+skip PRs, delete `pages.yml`), and speed up the two slow steps — `gen_pages.py` symbols
+(`nm -l` on the 427 MB debug ELF ≈27 min → `objdump --dwarf=decodedline`+`nm -n` JOIN) and
+`calcprogress.py` (per-object `nm` → one batched invocation; `progress.txt` byte-identical). Revert the
+cron as part of that work.
+
+**Issues opened:** #144 [infra] CI/Pages/metrics perf + cron revert; #145 [epic] asset-form alignment
+(B1/B2); #146 [code] name symbols → 100% via fe8u. #143 updated with a handoff snapshot + the MU landing.
+These four issues are the live roadmap; `docs/handoff.md` (2026-07-04 refresh) points to them.

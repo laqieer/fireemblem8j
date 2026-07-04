@@ -3,6 +3,33 @@
 **Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
+> **[REFRESH 2026-07-04 — live roadmap now tracked as GitHub issues; SSoT for numbers = `calcprogress.py`.]**
+> **HEAD `474a72c6f`, main GREEN** (`make compare` OK + `make shiftcheck` 0 HIGH). This session's work is
+> banked; the remaining frontier is now tracked as durable GitHub issues (read these first next session):
+>
+> - **#143 [epic] True shiftability (the autopilot objective).** A +0x40000 shifted ROM boots → title →
+>   **main menu byte-identical to vanilla**; just banked the `ProcScr_Mu*` / MU state-func cluster
+>   (`474a72c6f`, hex→relocatable typed data in `frontier_df4_banim_b.c`). **False-floor insight (D345):**
+>   `make shiftcheck` reports "floor" but CANNOT see function/data pointers buried in opaque
+>   `.bin`/`.incbin`/hex — a shifted ROM crashes on the first un-relocated one. The precise proc-script
+>   **menu** blocker list (config/guide/support/chapter-intro) is **D346's 11** (re-verify each via the
+>   gba-kit harness, residual→0). Critical path: carve those 11 + other non-family residual `ProcScr_*`,
+>   then re-run boot/play smoke. Reusable shift harness: `/home/laqieer/fe8j-wt-143/`
+>   (`build_shifted_rom.sh`, `boot_smoke.sh`, `play_smoke.sh`) + `build/issue143-proof/gbakit-harness/`.
+> - **#145 [epic] fe8u→fe8j asset-form alignment (the meta-lever).** Reframe: **A (playable shifted ROM) ⊆
+>   B1 (ALL pointer-bearing degraded assets)** — the proc-script family is only ONE slice of B1. B1 =
+>   shiftability-critical (bin/incbin/hex holding un-relocatable jump/callback/anim/OAM/event/menu/AI
+>   pointers) → carve to relocatable typed C; B2 = non-pointer degraded (pixels/values) = editability-only.
+>   Diff fe8u FORMS by symbol name via `layout/us_jp_funcmap.tsv` + `layout/addr_map.tsv` (JP≠US addrs).
+> - **#144 [infra] CI/Pages/metrics perf.** Consolidate Pages INTO `ci.yml` (one build, main-only, skip
+>   PRs, delete `pages.yml`); speed up `gen_pages.py` (`nm -l` 27min → `objdump --dwarf=decodedline`+`nm -n`
+>   JOIN) and `calcprogress.py` (batch nm, `progress.txt` byte-identical). **REVERT the bad cron in
+>   `ae660367d`** — the deploy-race fix is execution-time optimization, NOT `cron`/`cancel-in-progress`.
+> - **#146 [code] Name symbols toward 100%** via fe8u correspondence (byte-neutral; `banim_*` already
+>   carry fe8u's canonical names — do not rename; never invent JP-unique names).
+>
+> See **D345/D346** (false-floor + the 11-blocker family) and **D347** (this session's roadmap + CI decision).
+
 > **[REFRESH 2026-07-03 — axis snapshot superseded; SSoT = [`frontier.md`](frontier.md).]** Current
 > ground-truth (calcprogress): self-containment **100%**, matching-C **99.82% (8676/8692, 16 still-asm)**,
 > source-form data **99.31%** (strict C/PNG subset 79.91%), named **95.53%**. Since this 2026-06-24
