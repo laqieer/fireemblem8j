@@ -92,32 +92,105 @@ def normalize_nm_line(line: str, repo_root: pathlib.Path, elf_path: pathlib.Path
     return FILE_LINE_RE.sub(replace, line.rstrip("\n\r"))
 
 
-def generate_symbols(elf_path: pathlib.Path, symbols_path: pathlib.Path, repo_root: pathlib.Path) -> int:
-    if not elf_path.exists():
-        raise FileNotFoundError(f"ELF not found: {elf_path}")
+# `ADDR TYPE NAME` from `arm-none-eabi-nm -n` (defined symbols carry a hex address;
+# undefined/absolute-format rows without one simply do not match and stay bare).
+NM_SYMBOL_RE = re.compile(r"^([0-9A-Fa-f]+) (\S) (.*)$")
 
-    process = subprocess.Popen(
-        ["arm-none-eabi-nm", "-n", "-l", str(elf_path)],
+# A usable addr2line result: absolute source path + real (>=1) line. This drops the
+# `??:0` / `??:?` "unknown" forms AND quirks like `rom_header.o:?` (relative asm path,
+# unknown line) that `nm -l` also leaves bare -- so only genuine locations are appended.
+RESOLVED_LOCATION_RE = re.compile(r"^/.+:[1-9][0-9]*$")
+
+
+def resolve_lines(elf_path: pathlib.Path, addresses: list[str]) -> list[str]:
+    """Resolve many addresses to `file:line` in ONE `arm-none-eabi-addr2line` process.
+
+    This replaces `nm -l`'s per-symbol DWARF walk -- which on the ~427 MB debug ELF
+    (#142) took ~27 min AND, via the issue's proposed `objdump --dwarf=decodedline`,
+    needs >16 GB (unusable) -- with a single shared-DWARF pass (~90 s, ~2.3 GB) that
+    ALSO resolves data/bss symbols (decodedline is code-only and would drop them,
+    failing the gMainCallback spot-check). Unresolved addresses come back as `??:0` /
+    `??:?`; the caller drops those (bare row). Output is line-for-line parallel to
+    `addresses`.
+
+    This is ADDRESS-BASED resolution (issue #144's explicit "addr->file:line by
+    address" design) and is NOT byte-identical to `nm -l`, which resolves with full
+    symbol context. Measured on this ELF: 45938/46939 symbols (97.9%) match `nm -l`
+    exactly, incl. the spot-check; 1001 (2.1%) differ -- for a function entry addr2line
+    reports the first-statement line where `nm -l` reports the opening `{` line, and for
+    a data/bss address claimed by several CUs, addr2line picks the first-by-address CU
+    where `nm -l` picks the symbol's defining CU. symbols.txt is a fast address-based
+    reference, not authoritative symbol-definition provenance; exact file:line is
+    toolchain(bfd)-version dependent. #144 requires same FORMAT + the spot-check + <2
+    min, not byte identity (that applies only to progress.txt)."""
+    if not addresses:
+        return []
+    result = subprocess.run(
+        ["arm-none-eabi-addr2line", "-e", str(elf_path)],
+        input="".join(a + "\n" for a in addresses),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
     )
-    assert process.stdout is not None
+    if result.returncode != 0:
+        raise subprocess.CalledProcessError(result.returncode, result.args, stderr=result.stderr)
+    lines = result.stdout.splitlines()
+    if len(lines) != len(addresses):
+        raise RuntimeError(
+            f"addr2line returned {len(lines)} lines for {len(addresses)} addresses"
+        )
+    return lines
+
+
+def generate_symbols(elf_path: pathlib.Path, symbols_path: pathlib.Path, repo_root: pathlib.Path) -> int:
+    if not elf_path.exists():
+        raise FileNotFoundError(f"ELF not found: {elf_path}")
+
+    # Fast symbol table (sorted by address, NO -l -- the -l per-symbol DWARF lookup is
+    # the 27-min hotspot). Then resolve every address in one batched addr2line pass and
+    # append the `\tfile:line` suffix (address-based; see resolve_lines for the accepted
+    # differences from nm -l).
+    nm = subprocess.run(
+        ["arm-none-eabi-nm", "-n", str(elf_path)],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    if nm.returncode != 0:
+        raise subprocess.CalledProcessError(nm.returncode, nm.args, stderr=nm.stderr)
+
+    nm_lines = nm.stdout.splitlines()
+    addresses: list[str] = []
+    addr_index: list[int | None] = []
+    for raw_line in nm_lines:
+        match = NM_SYMBOL_RE.match(raw_line)
+        # `nm -l` resolves a symbol through ITS section, so ABSOLUTE symbols (type
+        # `A`/`a` -- no section) never get a file:line. In this decomp most data lives
+        # at fixed JP addresses defined absolutely via the layout manifests, so those
+        # are `A`/`a`; addr2line would resolve them by raw address, which `nm -l` does
+        # not. Only queue non-absolute symbols so the suffix set matches `nm -l`.
+        if match and match.group(2) not in ("A", "a"):
+            addr_index.append(len(addresses))
+            addresses.append("0x" + match.group(1))
+        else:
+            addr_index.append(None)
+
+    locations = resolve_lines(elf_path, addresses)
+
     count = 0
     previous = None
     with symbols_path.open("w", encoding="utf-8", newline="\n") as output:
-        for raw_line in process.stdout:
+        for raw_line, idx in zip(nm_lines, addr_index):
+            if idx is not None:
+                loc = locations[idx]
+                if RESOLVED_LOCATION_RE.match(loc):
+                    raw_line = f"{raw_line}\t{loc}"
             line = normalize_nm_line(raw_line, repo_root, elf_path)
             if line == previous:
                 continue
             output.write(line + "\n")
             previous = line
             count += 1
-
-    stderr = process.stderr.read() if process.stderr is not None else ""
-    rc = process.wait()
-    if rc != 0:
-        raise subprocess.CalledProcessError(rc, process.args, stderr=stderr)
     return count
 
 
