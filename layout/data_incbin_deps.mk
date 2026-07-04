@@ -404,7 +404,7 @@ src/data/data_0863230C/data_0863230C.o: data/residual/data_0863230C.bin
 src/data/data_08645FC4/data_08645FC4.o: data/residual/data_08645FC4.bin
 src/data/data_0864738C/data_0864738C.o: data/residual/data_0864738C.bin
 src/data/data_0864CAC8/data_0864CAC8.o: data/residual/data_0864CAC8_0.map.bin.lz
-src/data/data_08659FFC/data_08659FFC.o: data/residual/data_08659FFC.bin
+src/data/data_08659FFC/data_08659FFC.o: graphics/misc/data_08659FFC.gbapal
 src/data/data_0865A694/data_0865A694.o: data/residual/data_0865A694.bin
 src/data/data_086724CC/data_086724CC.o: data/residual/data_086724CC_0.map.bin.lz data/residual/data_086724CC_1.map.bin.lz data/residual/data_086724CC_2.map.bin.lz
 src/data/data_0867B54C/data_0867B54C.o: data/residual/data_0867B54C_0.map.bin.lz data/residual/data_0867B54C_1.map.bin.lz
@@ -437,7 +437,7 @@ src/data/data_086BDDDC/data_086BDDDC.o: data/residual/data_086BDDDC.bin
 src/data/data_086BFC18/data_086BFC18.o: data/residual/data_086BFC18.bin
 src/data/data_086C0290/data_086C0290.o: data/residual/data_086C0290.bin
 src/data/data_086CF94C/data_086CF94C.o: data/residual/data_086CF94C.bin
-src/data/data_086DF490/data_086DF490.o: data/residual/data_086DF490.bin
+src/data/data_086DF490/data_086DF490.o: graphics/misc/data_086DF490.gbapal
 src/data/data_086E24B4/data_086E24B4.o: data/residual/data_086E24B4.bin
 src/data/data_086E2A84/data_086E2A84.o: data/residual/data_086E2A84.bin
 src/data/data_086E93DC/data_086E93DC.o: graphics/reuse/data_086E93DC.gbapal
@@ -515,8 +515,8 @@ src/data/data_08A721E8/data_08A721E8.o: data/residual/data_08A721E8.bin
 src/data/data_08A72258/data_08A72258.o: data/residual/data_08A72258.bin
 src/data/data_08A7230C/data_08A7230C.o: data/residual/data_08A7230C.bin
 src/data/data_08A7239C/data_08A7239C.o: data/residual/data_08A7239C.bin
-src/data/data_08A964FC/data_08A964FC.o: data/residual/data_08A964FC.bin
-src/data/data_08A97BEC/data_08A97BEC.o: data/residual/data_08A97BEC.bin
+src/data/data_08A964FC/data_08A964FC.o: graphics/misc/data_08A964FC.gbapal
+src/data/data_08A97BEC/data_08A97BEC.o: graphics/misc/data_08A97BEC.gbapal
 src/data/data_08A980D0/data_08A980D0.o: graphics/reuse/data_08A980D0.4bpp
 src/data/data_08A9CA34/data_08A9CA34.o: data/residual/data_08A9CA34.bin
 src/data/data_08AAF6DC/data_08AAF6DC.o: data/residual/data_08AAF6DC.bin
