@@ -36,6 +36,15 @@ import sys
 ADDR_RE = re.compile(r"0x0?8[0-9A-Fa-f]{6}\b")
 # Identifier defined in THIS file:  <type> NAME[] ... = {   (captures the array symbols)
 DEF_RE = re.compile(r"^[A-Za-z_].*\b([A-Za-z_][A-Za-z0-9_]*)\s*\[\]\s*(?:__attribute__|SECTION|=)", re.M)
+# Same, but also captures the leading TYPE so forward decls stay type-correct
+# (a file may mix ``EventListScr NAME[]`` with ``struct ProcCmd NAME[]`` etc.).
+DEF_TYPED_RE = re.compile(
+    r"^([A-Za-z_][A-Za-z0-9_ ]*?)\s+([A-Za-z_][A-Za-z0-9_]*)\s*\[\]\s*"
+    r"(?:__attribute__|SECTION|=)", re.M)
+# Start of an event-script table body -- the ONLY region whose raw-hex operands
+# we rewrite.  We must NOT touch ``struct ProcCmd[]`` arrays, ``INCBIN_*`` lines,
+# or comments elsewhere in the file (they are out of these line ranges).
+EVT_TABLE_START_RE = re.compile(r"^EventListScr\s+[A-Za-z_][A-Za-z0-9_]*\s*\[\]")
 
 MAPPING_NAMES = {"$a", "$t", "$d", ".gcc2_compiled."}
 
@@ -143,17 +152,109 @@ class Resolver:
 
 
 def internal_defs(text):
-    return set(DEF_RE.findall(text))
+    """Map ``name -> C type`` for every ``<type> NAME[] = {...}`` defined in the file.
+
+    The type is preserved so a forward declaration for an intra-file reference
+    matches the real definition (e.g. an ``EventListScr`` script that references a
+    later ``EventListScr`` table, without clashing with a ``struct ProcCmd`` one).
+    """
+    types = {}
+    for typ, name in DEF_TYPED_RE.findall(text):
+        types[name] = typ.strip()
+    # keep any name the looser regex finds even if the typed one missed it
+    for name in DEF_RE.findall(text):
+        types.setdefault(name, "EventListScr")
+    return types
+
+
+def _sub_code_only(line, repl):
+    """Apply ADDR_RE.sub to the code portion of a line, never inside a comment."""
+    c1 = line.find("//")
+    c2 = line.find("/*")
+    cands = [c for c in (c1, c2) if c != -1]
+    if not cands:
+        return ADDR_RE.sub(repl, line)
+    idx = min(cands)
+    return ADDR_RE.sub(repl, line[:idx]) + line[idx:]
+
+
+def sub_event_tables(text, repl):
+    """Rewrite ROM-addr operands ONLY inside ``EventListScr[]`` table bodies.
+
+    Everything else (``struct ProcCmd[]`` arrays, ``INCBIN_*`` lines, comments,
+    stray addresses) is left byte-for-byte unchanged.
+    """
+    out = []
+    inside = False
+    for line in text.split("\n"):
+        if not inside:
+            out.append(line)                       # decl line: no operand to rewrite
+            if EVT_TABLE_START_RE.match(line):
+                inside = True
+        else:
+            if line.startswith("};"):
+                inside = False
+                out.append(line)
+            else:
+                out.append(_sub_code_only(line, repl))
+    return "\n".join(out)
 
 
 def make_ref(name, addend, internal):
-    """C expression giving the byte-exact address, emitting R_ARM_ABS32(name,addend)."""
+    """C expression giving the byte-exact address, emitting R_ARM_ABS32(name,addend).
+
+    For a non-zero addend we always byte-cast (``(u8 *)name + off``): the target's
+    declared element stride may be >1 (e.g. an ``EventListScr[]`` / ``UnitDef[]``
+    header array), so plain ``name + off`` would scale the offset.  ``(u8 *)`` forces
+    stride 1, making the byte offset exact regardless of the symbol's C type.
+    """
     if addend == 0:
         return name
-    if internal:
-        return f"(u8 *)%s + 0x%X" % (name, addend)
-    # external symbols are declared `extern const u8 NAME[]` -> byte arithmetic
-    return f"%s + 0x%X" % (name, addend)
+    return "(u8 *)%s + 0x%X" % (name, addend)
+
+
+def tu_declared(names, file, preproc, cpp, cppflags, include_dirs):
+    """Subset of ``names`` already visible in the *translation unit* of ``file``.
+
+    The reliable signal is the real preprocessor: run ``preproc <file> | cpp
+    <cppflags>`` (exactly the build's front-end) and collect the identifiers it
+    emits.  A name is "already declared" iff it appears there -- i.e. one of the
+    headers the file actually ``#include``s declares it.  We must NOT emit our own
+    ``extern`` for those (it would clash under ``-Werror``); for everything else we
+    do.  ``file`` MUST be the pre-de-pointered original (its raw-hex operands add
+    no identifiers, so presence == a header declaration).
+
+    Falls back to scanning ``include_dirs`` if the preprocessor cannot be run.
+    """
+    try:
+        p1 = subprocess.run(preproc + [file], capture_output=True, text=True, check=True)
+        p2 = subprocess.run(cpp + cppflags + ["-"], input=p1.stdout,
+                            capture_output=True, text=True, check=True)
+        # A symbol is "declared" only if it appears in real C code -- NOT if it
+        # merely shows up inside an inline-asm string literal (e.g.
+        # `"\t.4byte UnitDef_Foo\n"`) or a char literal.  Strip those first, else
+        # asm-only / later-in-file symbols get a false "already declared".
+        src = p2.stdout
+        src = re.sub(r'"(?:\\.|[^"\\\n])*"', " ", src)
+        src = re.sub(r"'(?:\\.|[^'\\\n])*'", " ", src)
+        toks = set(re.findall(r"[A-Za-z_][A-Za-z0-9_]*", src))
+        if toks:
+            return {n for n in names if n in toks}
+    except (OSError, subprocess.CalledProcessError):
+        pass
+    # fallback: scan headers textually (less precise -- may see non-included ones)
+    import os
+    blob = []
+    for d in include_dirs:
+        for root, _, files in os.walk(d):
+            for f in files:
+                if f.endswith((".h", ".hpp")):
+                    try:
+                        blob.append(open(os.path.join(root, f), errors="ignore").read())
+                    except OSError:
+                        pass
+    blob = "\n".join(blob)
+    return {n for n in names if re.search(r"\b" + re.escape(n) + r"\s*[\(\[]", blob)}
 
 
 def main():
@@ -161,14 +262,30 @@ def main():
     ap.add_argument("--elf", required=True)
     ap.add_argument("--file", required=True)
     ap.add_argument("--prefix", default="arm-none-eabi-")
+    ap.add_argument("--include-dir", default="include",
+                    help="header dir(s) (comma-separated) scanned as a FALLBACK "
+                         "to avoid re-declaring symbols already prototyped there")
+    ap.add_argument("--preproc", default="tools/preproc/preproc",
+                    help="preproc binary used to resolve the real translation unit")
+    ap.add_argument("--cpp", default="cc -E",
+                    help="C preprocessor command (front-end after preproc)")
+    ap.add_argument("--cppflags",
+                    default="-I tools/agbcc/include -iquote include -iquote . -nostdinc -undef",
+                    help="flags passed to the C preprocessor")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--write", action="store_true")
     args = ap.parse_args()
 
+    inc_dirs = [d for d in args.include_dir.split(",") if d]
+    preproc_cmd = args.preproc.split()
+    cpp_cmd = args.cpp.split()
+    cppflags = args.cppflags.split()
+
     syms = load_symbols(args.elf, args.prefix)
     R = Resolver(syms)
     text = open(args.file).read()
-    internal = internal_defs(text)
+    internal_types = internal_defs(text)         # name -> C type
+    internal = set(internal_types)
 
     resolved = residual = 0
     kinds = {}
@@ -190,14 +307,21 @@ def main():
         referenced[name] = is_int
         return make_ref(name, addend, is_int)
 
-    new_text = ADDR_RE.sub(repl, text)
+    new_text = sub_event_tables(text, repl)
 
-    # Build extern declarations for external symbols (not defined in this file).
+    # Split references:
+    #  * internal  -> forward-declared with their real in-file type
+    #  * external + already declared in a header -> reference by name, NO decl
+    #  * external + undeclared -> we emit `extern const u8 NAME[];`
     ext = sorted(n for n, isint in referenced.items() if not isint)
     fwd = sorted(n for n, isint in referenced.items() if isint)
+    declared = tu_declared(ext, args.file, preproc_cmd, cpp_cmd, cppflags, inc_dirs)
+    ext_decl = [n for n in ext if n not in declared]
 
     if args.dry_run:
-        print(f"resolved={resolved} residual={residual} unique_ext={len(ext)} internal_refs={len(fwd)}")
+        print(f"resolved={resolved} residual={residual} unique_ext={len(ext)} "
+              f"(header-declared={len(declared)} self-decl={len(ext_decl)}) "
+              f"internal_refs={len(fwd)}")
         print("kinds:", kinds)
         if residual_addrs:
             print("residual addrs:")
@@ -211,10 +335,10 @@ def main():
         if fwd:
             decl_lines.append("/* forward declarations for intra-file table cross-references (#145 shiftability) */")
             for n in fwd:
-                decl_lines.append(f"extern EventListScr {n}[];")
-        if ext:
-            decl_lines.append("/* external targets referenced as relocatable symbols (#145 shiftability) */")
-            for n in ext:
+                decl_lines.append(f"extern {internal_types.get(n, 'EventListScr')} {n}[];")
+        if ext_decl:
+            decl_lines.append("/* external data targets referenced as relocatable symbols (#145 shiftability) */")
+            for n in ext_decl:
                 decl_lines.append(f"extern const u8 {n}[];")
         decl_block = "\n".join(decl_lines) + "\n"
 
@@ -229,7 +353,8 @@ def main():
 
         open(args.file, "w").write(new_text)
         print(f"wrote {args.file}: resolved={resolved} residual={residual} "
-              f"ext_decls={len(ext)} fwd_decls={len(fwd)}")
+              f"ext_self_decls={len(ext_decl)} header_declared={len(declared)} "
+              f"fwd_decls={len(fwd)}")
         print("kinds:", kinds)
         if residual_addrs:
             print("residual (kept raw):", {f"0x{a:08X}": c for a, c in sorted(residual_addrs.items())})
