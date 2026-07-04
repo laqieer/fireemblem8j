@@ -1556,7 +1556,27 @@ __asm__(
     ".4byte 0x0003ffff\n"
     ".4byte 0x00000000\n"
 );
-u8 frontier_df4_uistuff_007_59140C[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin");
+/* #143 shiftability: frontier_df4_uistuff_007_59140C holds 5 interior SELF pointers
+ * (blob+0x5A0/0x1368/0x1950/0x16C8/0x2568) that emitted no relocation. Carve those 5 words
+ * to relocatable .4byte self-refs; all other bytes stay .incbin. byte-exact: base 0x0859140C
+ * + each delta == the vanilla word (0x085919AC/2774/2D5C/2AD4/3974). */
+__asm__(
+"\t.section .data.frontier_df4_uistuff.gap7, \"aw\", %progbits\n"
+"\t.global frontier_df4_uistuff_007_59140C\n"
+"frontier_df4_uistuff_007_59140C:\n"
+"\t.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0, 0x480\n"
+"\t.4byte frontier_df4_uistuff_007_59140C + 0x5A0\n"
+"\t.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x484, 0x44\n"
+"\t.4byte frontier_df4_uistuff_007_59140C + 0x1368\n"
+"\t.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x4CC, 0x1124\n"
+"\t.4byte frontier_df4_uistuff_007_59140C + 0x1950\n"
+"\t.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x15F4, 0x44\n"
+"\t.4byte frontier_df4_uistuff_007_59140C + 0x16C8\n"
+"\t.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x163C, 0x98C\n"
+"\t.4byte frontier_df4_uistuff_007_59140C + 0x2568\n"
+"\t.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x1FCC\n"
+);
+
 __asm__(
     ".section .data.frontier_df4_uistuff.gap8, \"aw\", %progbits\n"
     ".global frontier_df4_uistuff_008_5946F4\n"
