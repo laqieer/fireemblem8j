@@ -29,6 +29,7 @@ the **serial integrator** runs one carve at a time.
 | `claim.py` | Atomic task-claim registry (`claim`/`release`/`beat`/`reap`), so two agents never take the same target. TTL + heartbeat; expired claims are reclaimable. `layout/claims/` is gitignored. |
 | `worktree_setup.sh` | Make a fresh git worktree build-ready: symlink the gitignored read-only input `tools/agbcc` (and, optionally, `baserom.gba` — needed only for asm-differ/objdiff diff workflows, not the build itself) and **copy** a warm `.o` cache (objects are mutable build outputs, so copy — never hardlink/symlink them or a worktree rebuild would corrupt the main repo), so the first `make compare` is the ~0.3s incremental. |
 | `integrate.py` | Serial integrator: merge each ready branch onto an integration branch, `make compare`, **accept** (keep) or **reject** (`reset --hard`, save the diff to `/tmp`). Periodic `make clean && make compare` durability gate. |
+| `reap_worktrees.sh` | Auto-prune finished worktrees: removes every linked worktree whose branch is merged into `origin/main` (+ deletes the merged branch), and KEEPS any with unmerged/uncommitted work for harvest. Dry-run by default; `--apply` to execute. Run it after each integration landing so worktrees never pile up. |
 
 ## Agent workflow (per task)
 
@@ -54,6 +55,8 @@ the **serial integrator** runs one carve at a time.
 git switch -c integration main          # never integrate on main directly
 scripts/parallel/integrate.py <branchA> <branchB> ...        # accept/reject each
 scripts/parallel/integrate.py --durability-every 10 <branch>...   # + clean-rebuild gate
+git switch main && git merge --ff-only integration && git push    # land the green wave
+scripts/parallel/reap_worktrees.sh --apply   # auto-prune the now-merged worktrees + branches
 ```
 
 Because fragments are per-task-unique and the glue isn't committed, the merges are
@@ -62,7 +65,10 @@ back (their diff saved under `/tmp/integrate-reject-*.diff`) and left for the ag
 to fix. Serial is the *safety* property (no racing build, no half-merged manifest)
 and it's cheap because the verify is incremental (~0.3s, decision D7). The periodic
 durability gate catches carves that pass the incremental verify but fail a clean
-rebuild.
+rebuild. **Reap after landing:** `reap_worktrees.sh --apply` is the auto-prune step —
+"task done" = branch merged into `origin/main`, so it safely removes exactly those
+worktrees (keeping any with unmerged/uncommitted work). Safe to run unconditionally,
+on a timer, or by hand from the main worktree.
 
 ## Scale & limits
 

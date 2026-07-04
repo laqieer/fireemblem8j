@@ -38,7 +38,10 @@ integrator, refuse and serialize.
    commits into a mega-iteration; main must keep advancing on cadence, not on completion). Each
    commit message ends with the Co-Authored-By trailer. After a green wave, land work on the public
    branch with a fast-forward only — `git switch main && git merge --ff-only integration && git push`
-   — so you never push a branch that isn't `make compare`-green.
+   — so you never push a branch that isn't `make compare`-green. **Then auto-prune finished trees:**
+   `scripts/parallel/reap_worktrees.sh --apply` removes every worktree whose branch is now merged
+   into `origin/main` (deletes the merged branch too) and KEEPS any with unmerged/uncommitted work
+   for harvest. Run it after each landing so worktrees never pile up (dry-run without `--apply`).
 5. **Reject cleanly.** Mismatch → revert this increment, leave the worker's branch/diff for fixing,
    move to the next. NEVER commit or push a red build. After `git checkout <commit> -- <paths>` or
    any diagnostic that stages files, `git reset` and re-check `git status --short` before committing
