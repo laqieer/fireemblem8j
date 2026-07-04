@@ -10,6 +10,14 @@ extern u8 frontier_df4_voice_000a2_1F5840[];
 extern void DrawGameOptionHelpText(void);
 extern void ConfigSprites_Init(ProcPtr proc);
 extern void DrawConfigUiSprites(ProcPtr proc);
+
+/* #143 shiftability: gProcScr_opinfo (the class-reel intro script) carved from the
+ * tail of frontier_df4_menu_034c_AAFA44[] so its name + 3 code pointers relocate. */
+extern u8 frontier_df4_voice_000b_1F5898[];
+extern void ClassReel_Init(ProcPtr proc);
+extern void ClassReel_Loop(ProcPtr proc);
+extern void ClassReel_FadeOutBGM(void);
+extern void ClassReel_OnEnd(ProcPtr proc);
 #include "event.h"
 #include "eventinfo.h"
 #include "EAstdlib.h"
@@ -5791,7 +5799,17 @@ __asm__(
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x0200F17C\n"
 );
-u8 frontier_df4_menu_021_A95B4E[] __attribute__((section(".data.frontier_df4_menu.gap21"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin");
+/* #143 shiftability: the 0x90E B gap21 blob embedded two proc-script tables
+ * (gProcScr_SupportScreen @A95B70, gProcScr_SupportUnitSubScreen @A95C94) whose
+ * interior pointers were raw un-relocatable words. The two tables are carved into
+ * src/data/ProcScr_uisupport_ref/dat_ProcScr_uisupport_ref.c (own 4-aligned .rodata
+ * sections); the surrounding data stays here as three INCBIN slices. Byte-exact:
+ * 0x22 + 0xE0 + 0x44 + 0x148 + 0x680 = 0x90E. */
+u8 frontier_df4_menu_021_A95B4E[]  __attribute__((section(".data.frontier_df4_menu.gap21")))  = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x0,   0x22);
+/* [0x22,0x102) -> gProcScr_SupportScreen (ref file) */
+u8 frontier_df4_menu_021b_A95C50[] __attribute__((section(".data.frontier_df4_menu.gap21b"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x102, 0x44);
+/* [0x146,0x28E) -> gProcScr_SupportUnitSubScreen (ref file) */
+u8 frontier_df4_menu_021c_A95DDC[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x28E, 0x680);
 u8 frontier_df4_menu_022_A96D18[] __attribute__((section(".data.frontier_df4_menu.gap22"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18_0.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18_1.4bpp.lz");
 u8 frontier_df4_menu_023_A99FA8[] __attribute__((section(".data.frontier_df4_menu.gap23"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin");
 u8 frontier_df4_menu_024_A9AC28[] __attribute__((section(".data.frontier_df4_menu.gap24"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin", 0, 1020);
@@ -6455,15 +6473,17 @@ struct ProcCmd frontier_df4_menu_034c_AAFA44[] __attribute__((section(".data.fro
     PROC_SLEEP(0x0),
     PROC_REPEAT((ProcFunc)0x080B7221),
     PROC_END,
-    PROC_NAME((const char *)0x081F58BC),
-    PROC_SLEEP(0x0),
-    PROC_CALL((ProcFunc)0x080B7431),
-    PROC_REPEAT((ProcFunc)0x080B751D),
-    PROC_LABEL(0x4),
-    PROC_CALL((ProcFunc)0x080B75ED),
+};
+struct ProcCmd gProcScr_opinfo[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = { /* @0x08AAFC54 88B */
+    PROC_NAME(&frontier_df4_voice_000b_1F5898[0x24]), /* 0x081F58BC "opinfo" */
+    PROC_SLEEP(0),
+    PROC_CALL(ClassReel_Init),       /* 0x080B7430 */
+    PROC_REPEAT(ClassReel_Loop),     /* 0x080B751C */
+    PROC_LABEL(4),
+    PROC_CALL(ClassReel_FadeOutBGM), /* 0x080B75EC */
     PROC_SLEEP(0x3C),
-    PROC_LABEL(0x5),
-    PROC_CALL((ProcFunc)0x080B75F9),
+    PROC_LABEL(5),
+    PROC_CALL(ClassReel_OnEnd),      /* 0x080B75F8 */
     PROC_SLEEP(0x1E),
     PROC_END,
 };
