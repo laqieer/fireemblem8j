@@ -1,0 +1,8 @@
+# #143 shiftability: ProcScr_savedraw (@0x08A9D5D4), gProcScr_SaveDrawCursor
+# (@0x08A9D604) and gProcScr_Savedraw_0 (@0x08A9D624) are now real (relocatable)
+# definitions in src/data/ProcScr_savedraw_ref/dat_ProcScr_savedraw_ref.c; drop the
+# colliding baseline .set entries (from layout/baseline_syms.d/cfbind_savedraw.tsv)
+# to avoid a multiple-definition of the symbols.
+ProcScr_savedraw
+gProcScr_SaveDrawCursor
+gProcScr_Savedraw_0
