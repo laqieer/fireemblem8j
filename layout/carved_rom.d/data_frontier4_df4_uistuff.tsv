@@ -1,4 +1,5 @@
 # carve_frontier.py data_gaps long-tail data (parallel-safe fragment)
+
 57A504	57A7D4	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap0)	df4_uistuff region-diff data (720 B, long-tail gap)
 57B23C	57B74C	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap1)	df4_uistuff region-diff data (1296 B, long-tail gap)
 57BF74	57C244	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap2)	df4_uistuff region-diff data (720 B, long-tail gap)
@@ -21,21 +22,55 @@
 59BA8C	59BF9C	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap19)	df4_uistuff region-diff data (1296 B, long-tail gap)
 59BFE4	59CFEC	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap20)	df4_uistuff region-diff data (4104 B, long-tail gap)
 59D034	59D4B4	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap21)	df4_uistuff region-diff data (1152 B, long-tail gap)
-5B90D8	5B9308	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap22)	df4_uistuff region-diff data (560 B, long-tail gap)
-5B9454	5B9DD4	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap23)	df4_uistuff region-diff data (2432 B, long-tail gap)
+5B90D8	5B9168	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap22)	df4_uistuff slice gap22 (head before gProcScr_TalkPause)
+5B9168	5B9188	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_gProcScr_TalkPause_ref)	#148 gProcScr_TalkPause (4 ProcCmd)
+5B9188	5B92D8	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap22b)	df4_uistuff slice gap22b (between TalkPause and TalkOpen)
+5B92D8	5B9308	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_gProcScr_TalkOpen_ref)	#148 gProcScr_TalkOpen (6 ProcCmd)
+5B9454	5B9BBC	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap23)	df4_uistuff slice gap23 (block1 head before data_085B9BBC)
+5B9BBC	5B9CEC	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap23b)	df4_uistuff slice gap23b (data_085B9BBC head before EventDisplayCursor)
+5B9CEC	5B9CFC	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_EventDisplayCursor_ref)	#148 ProcScr_EventDisplayCursor (2 ProcCmd)
+5B9CFC	5B9D0C	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_ScriptBattleDeamon_ref)	#148 ProcScr_ScriptBattleDeamon (2 ProcCmd)
+5B9D0C	5B9DD4	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap23c)	df4_uistuff slice gap23c (data_085B9BBC tail)
 5C1D30	5C2438	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap24)	df4_uistuff region-diff data (1800 B, gap24 before Decompress func_lut)
 5C2438	5C2458	src/Decompress.o(.data)	Decompress func_lut.3 (8 decomp fn ptrs)
-5C2458	5C28B8	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap24b)	df4_uistuff region-diff data (1120 B, gap24b after Decompress func_lut)
-5C2E50	5C3308	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap25)	df4_uistuff region-diff data (1208 B, long-tail gap)
+5C2458	5C2478	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap24b)	df4_uistuff slice gap24b
+5C2478	5C2490	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_SpacialSeTest_ref)	#148 ProcScr_SpacialSeTest (3 ProcCmd)
+5C2490	5C24A8	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_PalFade_ref)	#148 ProcScr_PalFade (3 ProcCmd)
+5C24A8	5C24C8	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_FadeToBlack_ref)	#148 ProcScr_FadeToBlack (4 ProcCmd)
+5C24C8	5C24E8	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_FadeFromBlack_ref)	#148 ProcScr_FadeFromBlack (4 ProcCmd)
+5C24E8	5C2508	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_FadeToWhite_ref)	#148 ProcScr_FadeToWhite (4 ProcCmd)
+5C2508	5C2558	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_FadeFromWhite_ref)	#148 ProcScr_FadeFromWhite (10 ProcCmd)
+5C2558	5C2570	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_TemporaryLock_ref)	#148 ProcScr_TemporaryLock (3 ProcCmd)
+5C2570	5C2578	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap24bb)	df4_uistuff slice gap24bb
+5C2578	5C2580	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_PaletteAnimator_ref)	#148 ProcScr_PaletteAnimator (1 ProcCmd)
+5C2580	5C2590	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_CallDelayed_ref)	#148 ProcScr_CallDelayed (2 ProcCmd)
+5C2590	5C28B8	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap24bc)	df4_uistuff slice gap24bc
+5C2E50	5C2EDC	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap25)	df4_uistuff slice gap25
+5C2EDC	5C2EE4	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_DebugMonitor_ref)	#148 ProcScr_DebugMonitor (1 ProcCmd)
+5C2EE4	5C2F04	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap25b)	df4_uistuff slice gap25b
+5C2F04	5C2F1C	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_gProcScr_DebugStartNameEntry_ref)	#148 gProcScr_DebugStartNameEntry (3 ProcCmd)
+5C2F1C	5C2F58	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap25c)	df4_uistuff slice gap25c
+5C2F58	5C3168	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_gProcScr_PlayerPhase_ref)	#148 gProcScr_PlayerPhase (66 ProcCmd)
+5C3168	5C3298	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap25d)	df4_uistuff slice gap25d
+5C3298	5C32B8	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_gProcScr_ADJUSTSFROMXI_ref)	#148 gProcScr_ADJUSTSFROMXI (4 ProcCmd)
+5C32B8	5C3308	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap25e)	df4_uistuff slice gap25e
 5C3618	5C3830	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap26)	df4_uistuff region-diff data (536 B, long-tail gap)
 5C3C9C	5C4104	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap27)	df4_uistuff region-diff data (1128 B, long-tail gap)
-5C411C	5C4320	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap28)	df4_uistuff region-diff data (516 B, long-tail gap)
+5C411C	5C4280	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap28)	df4_uistuff slice gap28
+5C4280	5C42D0	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_gProcScr_UpdateTraps_ref)	#148 gProcScr_UpdateTraps (10 ProcCmd)
+5C42D0	5C4320	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap28b)	df4_uistuff slice gap28b
 5C4A94	5C4F14	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap29)	df4_uistuff region-diff data (1152 B, long-tail gap)
 5C534C	5C5978	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap30)	df4_uistuff region-diff data (1580 B, long-tail gap)
-5C5DE8	5C6080	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap31)	df4_uistuff region-diff data (664 B, long-tail gap)
+5C5DE8	5C5F4C	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap31)	df4_uistuff slice gap31
+5C5F4C	5C5F74	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_sProcScr_AfterDropAction_ref)	#148 sProcScr_AfterDropAction (5 ProcCmd)
+5C5F74	5C5F9C	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap31b)	df4_uistuff slice gap31b
+5C5F9C	5C6004	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_sProcScr_CombatAction_ref)	#148 sProcScr_CombatAction (13 ProcCmd)
+5C6004	5C6080	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap31c)	df4_uistuff slice gap31c
 5C6084	5C6646	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap32)	df4_uistuff region-diff data (1474 B, long-tail gap)
 5C6AD4	5C6D88	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap33)	df4_uistuff region-diff data (692 B, long-tail gap)
 5C6E08	5C7290	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap34)	df4_uistuff region-diff data (1160 B, long-tail gap)
 5CDF84	5CF274	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap35)	df4_uistuff region-diff data (4848 B, long-tail gap)
 5D14D4	5D1BC8	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap36)	df4_uistuff region-diff data (1780 B, long-tail gap)
-5D32D8	5D3624	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap38)	df4_uistuff region-diff data (844 B, long-tail gap)
+5D32D8	5D351C	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap38)	df4_uistuff slice gap38
+5D351C	5D35DC	src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.o(.rodata.dat_ProcScr_TacticianNameSelection_ref)	#148 ProcScr_TacticianNameSelection (24 ProcCmd)
+5D35DC	5D3624	src/data/frontier_df4_uistuff/frontier_df4_uistuff.o(.data.frontier_df4_uistuff.gap38b)	df4_uistuff slice gap38b
