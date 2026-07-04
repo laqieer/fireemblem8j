@@ -14,9 +14,13 @@
 # GitHub Pages site output (scripts/gen_pages.py -> _site/, deployed by ci.yml; never committed)
 /_site/
 
-# Shiftability harness outputs (scripts/shiftcheck/ -- make shiftcheck): the shifted
-# -build scratch dir + the ld response file. (fireemblem8_relocs.elf/.map are *.elf/*.map.)
-build/shiftcheck/
+# Shiftability harness outputs (scripts/shiftcheck/ -- make shiftcheck -- and
+# scripts/shiftcheck/build_shifted_rom.sh): build/ is purely shift-harness scratch
+# (shiftcheck/, shifted/, shifted-final/, shifted_diff/, shiftcheck_sound_probe/ --
+# .nm/.o/.s intermediates + logs). Nothing under build/ is tracked; the real build
+# writes objects to src/*.o. Ignore the whole scratch root. Plus the ld response file.
+# (fireemblem8_relocs.elf/.map are *.elf/*.map.)
+/build/
 /objects.lst
 
 # Shift smoke-test runtime artifacts (build_shifted_rom.sh / boot_smoke.sh / play_smoke.sh)
