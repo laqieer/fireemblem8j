@@ -14,6 +14,32 @@ extern void DrawConfigUiSprites(ProcPtr proc);
 /* #143 shiftability: gProcScr_opinfo (the class-reel intro script) carved from the
  * tail of frontier_df4_menu_034c_AAFA44[] so its name + 3 code pointers relocate. */
 extern u8 frontier_df4_voice_000b_1F5898[];
+
+/* #143 shiftability: symbolize raw-hex ProcCmd interior code pointers so they
+ * emit R_ARM_ABS32 relocations (shiftable) instead of hardcoded ROM words. */
+extern void BMapDispResume();
+extern void BMapDispSuspend();
+extern void ColFadeIn_Loop();
+extern void ColFadeOut_Init();
+extern void ColFadeOut_Loop();
+extern void Config_HandleExit();
+extern void Config_Init();
+extern void Config_Loop_KeyHandler();
+extern void Config_SetSourceFromPrep();
+extern void Config_SetSourceFromWorldMap();
+extern void EndHelpBox();
+extern void FadeInExists();
+extern void FadeOutExists();
+extern void LockGame();
+extern void NewFadeIn();
+extern void NewFadeOut();
+extern void RefreshBMapGraphics();
+extern void StartFastFadeFromBlack();
+extern void StartFastFadeToBlack();
+extern void UnlockGame();
+extern void WaitForFade();
+extern void nullsub_91();
+
 extern void ClassReel_Init(ProcPtr proc);
 extern void ClassReel_Loop(ProcPtr proc);
 extern void ClassReel_FadeOutBGM(void);
@@ -6471,71 +6497,71 @@ struct ProcCmd gProcScr_DrawConfigUiSprites[] __attribute__((section(".data.fron
     PROC_END,
 };
 struct ProcCmd frontier_df4_menu_034c_AAFA44[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = {
-    PROC_NAME((const char *)0x081F5898),
-    PROC_CALL((ProcFunc)0x08015385),
-    PROC_CALL_ARG((ProcFunc)0x080B2D71, 0x10),
-    PROC_WHILE((ProcFunc)0x080B2D35),
-    PROC_CALL((ProcFunc)0x080300D5),
+    PROC_NAME(&frontier_df4_voice_000b_1F5898[0x0]),
+    PROC_CALL(LockGame),
+    PROC_CALL_ARG(NewFadeOut, 0x10),
+    PROC_WHILE(FadeOutExists),
+    PROC_CALL(BMapDispSuspend),
     PROC_LABEL(0x0),
     PROC_SLEEP(0x0),
-    PROC_CALL((ProcFunc)0x080B6629),
-    PROC_CALL_ARG((ProcFunc)0x080B2D4D, 0x10),
-    PROC_WHILE((ProcFunc)0x080B2D1D),
-    PROC_REPEAT((ProcFunc)0x080B6E25),
-    PROC_CALL((ProcFunc)0x08013E39),
-    PROC_REPEAT((ProcFunc)0x08014121),
-    PROC_CALL((ProcFunc)0x0808B2C9),
-    PROC_CALL_2((ProcFunc)0x080B707D),
-    PROC_CALL((ProcFunc)0x08030109),
-    PROC_CALL((ProcFunc)0x080310F5),
-    PROC_CALL((ProcFunc)0x08013E5D),
-    PROC_REPEAT((ProcFunc)0x08014121),
-    PROC_CALL((ProcFunc)0x08015395),
+    PROC_CALL(Config_Init),
+    PROC_CALL_ARG(NewFadeIn, 0x10),
+    PROC_WHILE(FadeInExists),
+    PROC_REPEAT(Config_Loop_KeyHandler),
+    PROC_CALL(StartFastFadeToBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_CALL(EndHelpBox),
+    PROC_CALL_2(Config_HandleExit),
+    PROC_CALL(BMapDispResume),
+    PROC_CALL(RefreshBMapGraphics),
+    PROC_CALL(StartFastFadeFromBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_CALL(UnlockGame),
     PROC_END,
-    PROC_NAME((const char *)0x081F5898),
-    PROC_CALL((ProcFunc)0x08015385),
+    PROC_NAME(&frontier_df4_voice_000b_1F5898[0x0]),
+    PROC_CALL(LockGame),
     PROC_LABEL(0x0),
     PROC_SLEEP(0x0),
-    PROC_CALL((ProcFunc)0x080B6629),
-    PROC_CALL((ProcFunc)0x080B70C5),
-    PROC_CALL_ARG((ProcFunc)0x080B2D4D, 0x10),
-    PROC_WHILE((ProcFunc)0x080B2D1D),
-    PROC_REPEAT((ProcFunc)0x080B6E25),
-    PROC_CALL((ProcFunc)0x08013E39),
-    PROC_REPEAT((ProcFunc)0x08014121),
-    PROC_CALL((ProcFunc)0x0808B2C9),
-    PROC_CALL_2((ProcFunc)0x080B707D),
-    PROC_CALL((ProcFunc)0x08015395),
+    PROC_CALL(Config_Init),
+    PROC_CALL(Config_SetSourceFromPrep),
+    PROC_CALL_ARG(NewFadeIn, 0x10),
+    PROC_WHILE(FadeInExists),
+    PROC_REPEAT(Config_Loop_KeyHandler),
+    PROC_CALL(StartFastFadeToBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_CALL(EndHelpBox),
+    PROC_CALL_2(Config_HandleExit),
+    PROC_CALL(UnlockGame),
     PROC_END,
-    PROC_NAME((const char *)0x081F5898),
-    PROC_CALL((ProcFunc)0x08015385),
-    PROC_CALL((ProcFunc)0x080300D5),
+    PROC_NAME(&frontier_df4_voice_000b_1F5898[0x0]),
+    PROC_CALL(LockGame),
+    PROC_CALL(BMapDispSuspend),
     PROC_LABEL(0x0),
     PROC_SLEEP(0x0),
-    PROC_CALL((ProcFunc)0x080B6629),
-    PROC_CALL((ProcFunc)0x080B70D9),
-    PROC_CALL((ProcFunc)0x08013E5D),
-    PROC_REPEAT((ProcFunc)0x08014121),
-    PROC_REPEAT((ProcFunc)0x080B6E25),
-    PROC_CALL((ProcFunc)0x08013E39),
-    PROC_REPEAT((ProcFunc)0x08014121),
-    PROC_CALL((ProcFunc)0x0808B2C9),
-    PROC_CALL_2((ProcFunc)0x080B707D),
-    PROC_CALL((ProcFunc)0x08030109),
-    PROC_CALL((ProcFunc)0x080310F5),
-    PROC_CALL((ProcFunc)0x08015395),
+    PROC_CALL(Config_Init),
+    PROC_CALL(Config_SetSourceFromWorldMap),
+    PROC_CALL(StartFastFadeFromBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_REPEAT(Config_Loop_KeyHandler),
+    PROC_CALL(StartFastFadeToBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_CALL(EndHelpBox),
+    PROC_CALL_2(Config_HandleExit),
+    PROC_CALL(BMapDispResume),
+    PROC_CALL(RefreshBMapGraphics),
+    PROC_CALL(UnlockGame),
     PROC_END,
-    PROC_NAME((const char *)0x081F58A4),
+    PROC_NAME(&frontier_df4_voice_000b_1F5898[0xC]),
     PROC_SLEEP(0x2),
-    PROC_CALL((ProcFunc)0x080B70F5),
+    PROC_CALL(ColFadeOut_Init),
     PROC_SLEEP(0x0),
-    PROC_REPEAT((ProcFunc)0x080B7135),
+    PROC_REPEAT(ColFadeOut_Loop),
     PROC_END,
-    PROC_NAME((const char *)0x081F58B0),
+    PROC_NAME(&frontier_df4_voice_000b_1F5898[0x18]),
     PROC_SLEEP(0x2),
-    PROC_CALL((ProcFunc)0x080B7131),
+    PROC_CALL(nullsub_91),
     PROC_SLEEP(0x0),
-    PROC_REPEAT((ProcFunc)0x080B7221),
+    PROC_REPEAT(ColFadeIn_Loop),
     PROC_END,
 };
 struct ProcCmd gProcScr_opinfo[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = { /* @0x08AAFC54 88B */

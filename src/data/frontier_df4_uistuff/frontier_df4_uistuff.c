@@ -3,6 +3,26 @@
 #include "bmio.h"
 #define PROC_WORDS(op, pa, p) { (op), (pa), (void *)(p) }
 
+/* #143 shiftability: symbolize raw-hex ProcCmd interior code pointers so they
+ * emit R_ARM_ABS32 relocations (shiftable) instead of hardcoded ROM words. */
+extern void ChapterIntro_3();
+extern void ChapterIntro_4();
+extern void ChapterIntro_BeginFadeToMap();
+extern void ChapterIntro_InitMapDisplay();
+extern void ChapterIntro_RevealDecalSprite_Init();
+extern void ChapterIntro_RevealDecalSprite_Loop();
+extern void EndAllMus();
+extern void GameOverScreen_BeginFadeOut();
+extern void GameOverScreen_BeginIdle();
+extern void GameOverScreen_End();
+extern void GameOverScreen_Init();
+extern void GameOverScreen_LoopFadeIn();
+extern void GameOverScreen_LoopFadeOut();
+extern void GameOverScreen_LoopIdle();
+extern void GameOverScreen_RandomScroll_Init();
+extern void GameOverScreen_RandomScroll_Loop();
+
+
 /* Migrated from asm/frontier_df4_uistuff.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
@@ -10016,8 +10036,8 @@ extern struct ProcCmd ProcScr_ChapterIntro_RevealDecalSprite[];
 extern struct ProcCmd ProcScr_ChapterIntro_Bg1And3Scroll[];
 
 struct ProcCmd frontier_df4_uistuff_026_5C3618[] __attribute__((section(".data.frontier_df4_uistuff.gap26"))) = {
-    PROC_CALL((ProcFunc)0x08020AB5),
-    PROC_REPEAT((ProcFunc)0x08020AE1),
+    PROC_CALL(ChapterIntro_RevealDecalSprite_Init),
+    PROC_REPEAT(ChapterIntro_RevealDecalSprite_Loop),
     PROC_END,
 };
 
@@ -10070,26 +10090,26 @@ struct ProcCmd gProcScr_ChapterIntro[] __attribute__((section(".data.frontier_df
 };
 
 struct ProcCmd frontier_df4_uistuff_026b_5C3798[] __attribute__((section(".data.frontier_df4_uistuff.gap26"))) = {
-    PROC_CALL((ProcFunc)0x080207F1),
-    PROC_CALL((ProcFunc)0x08020829),
-    PROC_CALL((ProcFunc)0x08020925),
-    PROC_REPEAT((ProcFunc)0x08020E81),
+    PROC_CALL(ChapterIntro_3),
+    PROC_CALL(ChapterIntro_InitMapDisplay),
+    PROC_CALL(ChapterIntro_BeginFadeToMap),
+    PROC_REPEAT(ChapterIntro_4),
     PROC_END,
-    PROC_CALL((ProcFunc)0x08020EC1),
-    PROC_REPEAT((ProcFunc)0x08020F01),
+    PROC_CALL(GameOverScreen_RandomScroll_Init),
+    PROC_REPEAT(GameOverScreen_RandomScroll_Loop),
     PROC_END,
 };
 struct ProcCmd data_085C37D8[] __attribute__((section(".data.frontier_df4_uistuff.gap26"))) = {
-    PROC_SET_END_CB((ProcFunc)0x080211CD),
-    PROC_CALL((ProcFunc)0x08020FB9),
-    PROC_CALL((ProcFunc)0x0807B4B9),
-    PROC_START_CHILD((const struct ProcCmd*)0x085C37C0),
-    PROC_REPEAT((ProcFunc)0x080210ED),
-    PROC_CALL((ProcFunc)0x08021121),
-    PROC_REPEAT((ProcFunc)0x0802112D),
+    PROC_SET_END_CB(GameOverScreen_End),
+    PROC_CALL(GameOverScreen_Init),
+    PROC_CALL(EndAllMus),
+    PROC_START_CHILD(&frontier_df4_uistuff_026b_5C3798[5]),
+    PROC_REPEAT(GameOverScreen_LoopFadeIn),
+    PROC_CALL(GameOverScreen_BeginIdle),
+    PROC_REPEAT(GameOverScreen_LoopIdle),
     PROC_LABEL(0x63),
-    PROC_CALL((ProcFunc)0x08021169),
-    PROC_REPEAT((ProcFunc)0x080211A1),
+    PROC_CALL(GameOverScreen_BeginFadeOut),
+    PROC_REPEAT(GameOverScreen_LoopFadeOut),
     PROC_END,
 };
 /* frontier_df4_uistuff_027_5C3C9C: atomic relocation carve (was INCBIN); every embedded ROM
