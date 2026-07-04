@@ -1,6 +1,15 @@
 #include "global.h"
 #include "proc.h"
 #define PROC_WORDS(op, pa, p) { (op), (pa), (void *)(p) }
+
+/* #143 shiftability: the config help-text + UI-sprite proc scripts at the head of
+ * frontier_df4_menu_034_AAF9EC[] held raw-hex interior code/name pointers. Carved
+ * into named struct ProcCmd[] arrays so those pointers become R_ARM_ABS32
+ * relocations instead of raw un-relocatable words on the +0x40000 shifted ROM. */
+extern u8 frontier_df4_voice_000a2_1F5840[];
+extern void DrawGameOptionHelpText(void);
+extern void ConfigSprites_Init(ProcPtr proc);
+extern void DrawConfigUiSprites(ProcPtr proc);
 #include "event.h"
 #include "eventinfo.h"
 #include "EAstdlib.h"
@@ -6364,18 +6373,22 @@ u8 frontier_df4_menu_031_AA9F98[] __attribute__((section(".data.frontier_df4_men
 u8 frontier_df4_menu_032_AAAC4C[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_032_AAAC4C.bin", 0x0, 0x7F4);
 u8 data_08AAB440[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_032_AAAC4C.bin", 0x7F4, 0x2818);
 u8 frontier_df4_menu_033_AAEB40[] __attribute__((section(".data.frontier_df4_menu.gap33"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_033_AAEB40.bin");
-struct ProcCmd frontier_df4_menu_034_AAF9EC[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = {
-    PROC_NAME((const char *)0x081F5868),
-    PROC_SLEEP(0x1),
-    PROC_CALL((ProcFunc)0x080B63A5),
+struct ProcCmd gProcScr_RedrawConfigHelpText[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = { /* @0x08AAF9EC 32B */
+    PROC_NAME(&frontier_df4_voice_000a2_1F5840[0x28]), /* 0x081F5868 "E_CfExplReWrite" */
+    PROC_SLEEP(1),
+    PROC_CALL(DrawGameOptionHelpText),                 /* 0x080B63A4 */
     PROC_END,
-    PROC_NAME((const char *)0x081F5878),
-    PROC_CALL((ProcFunc)0x080B6541),
-    PROC_LABEL(0x0),
-    PROC_CALL((ProcFunc)0x080B6559),
-    PROC_SLEEP(0x0),
-    PROC_GOTO(0x0),
+};
+struct ProcCmd gProcScr_DrawConfigUiSprites[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = { /* @0x08AAFA0C 56B */
+    PROC_NAME(&frontier_df4_voice_000a2_1F5840[0x38]), /* 0x081F5878 "E_cfObj" */
+    PROC_CALL(ConfigSprites_Init),                     /* 0x080B6540 */
+    PROC_LABEL(0),
+    PROC_CALL(DrawConfigUiSprites),                    /* 0x080B6558 */
+    PROC_YIELD,
+    PROC_GOTO(0),
     PROC_END,
+};
+struct ProcCmd frontier_df4_menu_034c_AAFA44[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = {
     PROC_NAME((const char *)0x081F5898),
     PROC_CALL((ProcFunc)0x08015385),
     PROC_CALL_ARG((ProcFunc)0x080B2D71, 0x10),
