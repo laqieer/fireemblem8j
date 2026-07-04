@@ -8,4 +8,4 @@
  * Symbol/section/placement kept identical for the external reference.
  */
 
-u8 data_08B3E688[] __attribute__((section(".data.residue.08B3E688"))) = INCBIN_U8("graphics/misc_gfx2/gTsa_OpSubtitle_02.bin.lz");
+u8 gTsa_OpSubtitle_02[] __attribute__((section(".data.residue.08B3E688"))) = INCBIN_U8("graphics/misc_gfx2/gTsa_OpSubtitle_02.bin.lz");
