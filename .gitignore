@@ -11,6 +11,9 @@
 .dep/
 .deps/
 
+# GitHub Pages site output (scripts/gen_pages.py -> _site/, deployed by ci.yml; never committed)
+/_site/
+
 # Shiftability harness outputs (scripts/shiftcheck/ -- make shiftcheck): the shifted
 # -build scratch dir + the ld response file. (fireemblem8_relocs.elf/.map are *.elf/*.map.)
 build/shiftcheck/

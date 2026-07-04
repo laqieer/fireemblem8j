@@ -9368,3 +9368,48 @@ cron as part of that work.
 **Issues opened:** #144 [infra] CI/Pages/metrics perf + cron revert; #145 [epic] asset-form alignment
 (B1/B2); #146 [code] name symbols → 100% via fe8u. #143 updated with a handoff snapshot + the MU landing.
 These four issues are the live roadmap; `docs/handoff.md` (2026-07-04 refresh) points to them.
+
+## D348 — #144 implementation: `objdump --dwarf=decodedline` is UNUSABLE (>16 GB); `gen_pages` symbols use batched `addr2line`; `calcprogress` byte-identical; consolidation + cron-revert landed (2026-07-04)
+
+**New evidence supersedes the D347 mechanism (not the goal).** D347 proposed
+`objdump --dwarf=decodedline`+`nm -n` for the `gen_pages.py` symbol speedup. Empirically (memory-guarded
+with `ulimit -v` so a spike could not take down the host), on the 427 MB debug ELF that command **OOMs at
+16 GB with zero output** (`out of memory allocating … after a total of 15.96 GB`) — it eagerly decodes the
+whole `.debug_line` program. It is also `.debug_line`=code-only, so it would leave ALL data/bss symbols
+BARE and thus **fail the issue's own spot-check** (`gMainCallback` is a BSS symbol). Rejected.
+
+**Chosen mechanism: `nm -n` (addresses, 0.17 s) + ONE batched `arm-none-eabi-addr2line` (measured 92 s, 2.3 GB; the `nm -l` baseline took 35 min = ~23x).**
+addr2line shares one DWARF parse across all ~285 k addresses, resolves data/bss too (spot-check
+`gMainCallback → src/hardware.c:17` PASSES), and fits the 16 GB CI runner (and capped WSL2) with wide
+margin. Absolute symbols (type `A`/`a`) get NO suffix, matching real `nm -l` (verified: `nm -l` only
+suffixes `B/b/T/t`); this decomp defines most data at fixed JP addresses as absolute, so the rule matters.
+
+**Fidelity (explicitly accepted, per #144).** This is ADDRESS-based resolution (the design #144 itself
+chose) and is NOT byte-identical to `nm -l` (which uses symbol context): measured **1001/46939 symbols
+(2.1 %) differ, 97.9 % incl. the spot-check are identical** — a function entry resolves to its
+first-statement line where `nm -l` reports the opening `{`; a data/bss address claimed by several CUs
+resolves to the first-by-address CU where `nm -l` picks the defining CU. #144 requires same FORMAT +
+spot-check + <2 min for `symbols.txt`, NOT byte identity (that is required only for `progress.txt`, which
+IS byte-identical — validated by diff). `symbols.txt` is a fast address-based reference, not authoritative
+definition provenance; exact file:line is bfd-version dependent. A faithful `nm -l` reimplementation
+(pyelftools symbol-context DWARF) was rejected: pure-Python parse of a 427 MB
+`.debug_info` is slow + memory-risky with its own fidelity risk, for a fidelity the issue does not require.
+Decision validated with the rubber-duck agent.
+
+**`calcprogress.py` speedup = pure, proven byte-identical.** The per-object `arm-none-eabi-nm` (one process
+per object, the ~5 min hotspot) is batched into a few `nm --defined-only <many objects>` invocations parsed
+per-`path:` block; `progress.txt` is **byte-identical** before/after (diff empty). Missing objects are
+still `make`d first, so the census is unchanged.
+
+**Consolidation + cron revert (as D347 mandated).** Pages generate/deploy folded INTO `ci.yml`
+(one build per push; generate is main-push-only; deploy is a separate least-privilege job —
+`permissions: pages:write,id-token:write`, `environment: github-pages`, `concurrency: group=pages,
+cancel-in-progress=false` to SERIALIZE deploys). PRs run build+compare+shiftcheck only, no deploy.
+`.github/workflows/pages.yml` DELETED (subsumes the bad `ae660367d` cron + `cancel-in-progress:true`).
+Optional `actions/cache` added for `tools/agbcc` (keyed on `build_jp_agbcc.sh`+patch hashes; `make compare`
+still re-verifies every byte, so a stale cache can never silently pass).
+
+**Environment incident.** Two heavy DWARF passes on the 427 MB ELF (`objdump --dwarf` + `nm -l`) run
+concurrently OOM-killed the WSL2 VM (host terminated `vmmem`) — see
+`docs/incident-2026-07-04-wsl2-dwarf-oom.md`. Standing rule: never run two DWARF passes at once on that ELF;
+`nm -n` (no `-l`) is cheap; validate DWARF logic on small targets; `.wslconfig` big-swap + memory-cap fix.

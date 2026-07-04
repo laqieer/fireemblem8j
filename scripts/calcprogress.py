@@ -186,18 +186,71 @@ objs.discard("asm/jp_syms.o")
 objs.discard("asm/baserom.o")
 
 
-def nm(obj):
-    if not os.path.exists(obj):
-        subprocess.run(["make", obj], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    if not os.path.exists(obj):
-        return []
-    out = subprocess.run(["arm-none-eabi-nm", "--defined-only", obj],
-                         capture_output=True, text=True).stdout.splitlines()
+_nm_cache = {}
+
+
+def _nm_parse_symbols(lines):
+    """Parse `arm-none-eabi-nm --defined-only` output into [(type, name), ...].
+    Header lines (`path:`) and blanks split to != 3 fields and are skipped, so a block
+    parses byte-identically whether nm was invoked on one object or many."""
     syms = []
-    for ln in out:
+    for ln in lines:
         p = ln.split()
         if len(p) == 3:
             syms.append((p[1], p[2]))  # (type, name)
+    return syms
+
+
+def nm_prime(obj_list):
+    """Batch `arm-none-eabi-nm --defined-only` over many objects in a FEW invocations
+    instead of one process per object (the ~5-min hotspot in issue #144). Missing
+    objects are `make`d first, exactly like the lazy per-object path, so the resulting
+    symbol lists -- and therefore progress.txt -- are byte-identical, only faster.
+    When nm is given multiple files it prefixes each block with a `path:` header line;
+    a single-file invocation emits none, so that case is handled explicitly."""
+    todo = []
+    for obj in obj_list:
+        if obj in _nm_cache:
+            continue
+        if not os.path.exists(obj):
+            subprocess.run(["make", obj], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if os.path.exists(obj):
+            todo.append(obj)
+        else:
+            _nm_cache[obj] = []
+    CHUNK = 1500  # thousands of ~30-char paths stay far under ARG_MAX (2 MB)
+    for i in range(0, len(todo), CHUNK):
+        chunk = todo[i:i + CHUNK]
+        out = subprocess.run(["arm-none-eabi-nm", "--defined-only", *chunk],
+                             capture_output=True, text=True).stdout.splitlines()
+        chunkset = set(chunk)
+        cur = chunk[0] if len(chunk) == 1 else None  # 1-file nm emits no path header
+        buf = []
+        for ln in out:
+            if ln.endswith(":") and ln[:-1] in chunkset:
+                if cur is not None:
+                    _nm_cache[cur] = _nm_parse_symbols(buf)
+                cur, buf = ln[:-1], []
+            else:
+                buf.append(ln)
+        if cur is not None:
+            _nm_cache[cur] = _nm_parse_symbols(buf)
+    for obj in todo:
+        _nm_cache.setdefault(obj, [])
+
+
+def nm(obj):
+    if obj in _nm_cache:
+        return _nm_cache[obj]
+    if not os.path.exists(obj):
+        subprocess.run(["make", obj], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    if not os.path.exists(obj):
+        _nm_cache[obj] = []
+        return []
+    out = subprocess.run(["arm-none-eabi-nm", "--defined-only", obj],
+                         capture_output=True, text=True).stdout.splitlines()
+    syms = _nm_parse_symbols(out)
+    _nm_cache[obj] = syms
     return syms
 
 
@@ -214,6 +267,14 @@ GBADISASM_LABEL = re.compile(r"^_[0-9A-Fa-f]{6,8}$")
 def internal(name):
     return (name.startswith((".", "$", "__", "RomHeader")) or name == "gcc2_compiled."
             or GBADISASM_LABEL.match(name) is not None)
+
+
+# Prime the nm cache in a FEW batched invocations (issue #144 speedup): resolve every
+# object the two function-census loops below will query -- the src/*.o subset of `objs`
+# (matching-C axis) plus the asm/*.o still-in-.text objects (still-asm axis) -- up front,
+# instead of spawning one `arm-none-eabi-nm` per object. Byte-identical result, ~5min ->
+# seconds; the loops' nm(obj) calls become cache hits.
+nm_prime([o for o in sorted(objs) if o.startswith("src/")] + sorted(asm_text_objs))
 
 
 # --- matching-C functions (axis 2): text symbols compiled from src/*.o ---

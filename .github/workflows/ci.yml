@@ -2,12 +2,13 @@ name: CI
 
 # Single per-commit CI run that REPLACES the old split workflows
 # (make compare + Self-contained build + layout consistency + decomp.dev report +
-# Decomp progress). They duplicated the expensive agbcc+toolchain+build; this runs
-# it ONCE and folds in every gate. `Backfill decomp progress` stays separate
-# (manual workflow_dispatch only).
+# Decomp progress + Pages). They duplicated the expensive agbcc+toolchain+build;
+# this runs it ONCE and folds in every gate + the GitHub Pages generate/deploy.
+# `Backfill decomp progress` stays separate (manual workflow_dispatch only).
 #
-# Progress compute/report/upload run on push-to-main and manual dispatch only;
-# pull_request runs the build-match + shiftability gates only (fast PR checks).
+# Progress compute/report/upload AND Pages generate/deploy run on push-to-main
+# only; pull_request runs the build-match + shiftability gates only (fast PR
+# checks, no Pages deploy). Pages deploy is a separate least-privilege job.
 #
 # NO baserom.gba dependency. The build is self-contained (0 `.incbin "baserom.gba"`),
 # so building from committed source with baserom ABSENT and checking sha1 against
@@ -63,10 +64,23 @@ jobs:
           # is unchanged; this only lets CI build the editable-source tool.
           python3 -m pip install ttp requests numpy Pillow
 
+      - name: Cache agbcc toolchain
+        # tools/agbcc is fully determined by the pinned pret/agbcc commit (embedded in
+        # build_jp_agbcc.sh) + the -mjp-promote patch, so hashing those two files is a
+        # sound cache key. On a hit the compiler is restored and the multi-minute build
+        # below is skipped; `make compare` still re-verifies every byte, so a stale or
+        # bad cache can never silently pass. Bump the key by editing either file.
+        id: cache-agbcc
+        uses: actions/cache@v4
+        with:
+          path: tools/agbcc
+          key: agbcc-${{ runner.os }}-${{ hashFiles('scripts/build_jp_agbcc.sh', 'scripts/agbcc_jp_promote.patch') }}
+
       - name: Install agbcc (with the -mjp-promote flag, D276c)
         # Applies scripts/agbcc_jp_promote.patch BEFORE ./build.sh, so the toolchain
         # is built exactly once with the flag baked in (default-off = byte-identical
         # to stock; the Makefile enables it per-TU for the JP-promotion functions).
+        if: steps.cache-agbcc.outputs.cache-hit != 'true'
         run: bash scripts/build_jp_agbcc.sh
 
       - name: Setup asset toolchain (gbagfx/bin2c/preproc/aif2pcm/mid2agb)
@@ -124,3 +138,44 @@ jobs:
           python3 scripts/upload-progress.py \
             -b "https://progress.deco.mp" -a "$PROGRESS_API_KEY" \
             -p fireemblem8j -v jp -t scripts/progress-template.txt progress.txt
+
+      # ---- GitHub Pages site (main-push only; reuses the ELF + progress.txt above) ----
+      # Consolidated from the old .github/workflows/pages.yml so the expensive
+      # agbcc+toolchain+`make compare` build runs ONCE per commit instead of twice.
+      # PRs run the build + compare + shiftcheck gates above but never generate or
+      # deploy Pages. The actual deploy is a separate least-privilege job below.
+      - name: Generate Pages site
+        if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
+        run: python3 scripts/gen_pages.py
+
+      - name: Upload Pages artifact
+        if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  # ---- Deploy the Pages artifact (main-push only, isolated pages:write token) ----
+  # Separate job so the heavy `ci` job keeps a minimal contents:read token. The
+  # `concurrency: pages` group SERIALIZES deploys (never cancels) -- this is the
+  # correct fix for the deploy race that the reverted cron+cancel-in-progress hack
+  # (ae660367d) tried to paper over. No schedule/cron: one deploy per push.
+  deploy:
+    needs: ci
+    if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
