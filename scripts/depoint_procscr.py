@@ -183,19 +183,38 @@ def extract_ident(text):
 ITEM_RE = re.compile(r'"\s*(?:\\t)?\.(4byte|byte|short|incbin)\s+(.*?)\\n"')
 
 
+def label_base(name):
+    """Derive a blob label's ROM base address from its name (any frontier file).
+
+    Two committed label styles:
+      * `data_08XXXXXX`         -> the FULL absolute address (0x08XXXXXX).
+      * `<prefix>_<seq>_<HEX>`  -> HEX is the offset-from-ROM (e.g.
+        frontier_df3_data_5aa96c_000_5D367C -> ROM + 0x5D367C;
+        frontier_df4_uistuff_022_5B90D8    -> ROM + 0x5B90D8).
+    Returns int base or None.
+    """
+    m = re.fullmatch(r'data_(0[0-9A-Fa-f]{6,7})', name)
+    if m:
+        v = int(m.group(1), 16)
+        return v if v >= ROM else ROM + v
+    m = re.search(r'_([0-9A-Fa-f]{4,7})$', name)
+    if m:
+        try:
+            return ROM + int(m.group(1), 16)
+        except ValueError:
+            return None
+    return None
+
+
 def parse_sections(path):
     """Parse __asm__ blob sections. -> list of dicts {base,name,items:[(line_idx,size,val_or_text,raw)]}."""
     lines = open(path).read().splitlines()
     sections = []
     cur = None
     for i, line in enumerate(lines):
-        m = re.search(r'\.global\s+(frontier_df4_\w+_(\w+))', line)
-        if m and "_" in m.group(1):
-            suffix = m.group(2)
-            try:
-                base = ROM + int(suffix, 16)
-            except ValueError:
-                base = None
+        m = re.search(r'\.global\s+([A-Za-z_]\w*)', line)
+        if m:
+            base = label_base(m.group(1))
             cur = {"name": m.group(1), "base": base, "items": [], "start_line": i}
             sections.append(cur)
             continue

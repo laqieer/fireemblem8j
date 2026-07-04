@@ -1,9 +1,40 @@
 # carve_frontier.py table-pinned region-different data (parallel-safe fragment)
-5D367C	5D3EA0	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap0)	df3_data_5aa96c region-diff data (2084 B, table-pinned)
-5D3EA8	5D4310	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap1)	df3_data_5aa96c region-diff data (1128 B, table-pinned)
+5D367C	5D36A4	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap0)	df3_data_5aa96c slice gap0
+5D36A4	5D376C	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SIOPRA_ref)	#148 ProcScr_SIOPRA
+5D376C	5D3790	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap0b)	df3_data_5aa96c slice gap0b
+5D3790	5D3AA8	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SIOBAT_ref)	#148 ProcScr_SIOBAT
+5D3AA8	5D3C40	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SIOTERM_ref)	#148 ProcScr_SIOTERM
+5D3C40	5D3CA0	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SIORESULT_ref)	#148 ProcScr_SIORESULT
+5D3CA0	5D3D00	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap0c)	df3_data_5aa96c slice gap0c
+5D3D00	5D3D50	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SIO_RuleSettings_ref)	#148 ProcScr_SIO_RuleSettings
+5D3D50	5D3EA0	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap0d)	df3_data_5aa96c slice gap0d
+5D3EA8	5D42F0	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap1)	df3_data_5aa96c slice gap1
+5D42F0	5D4310	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_DrawLinkArenaFogPlaceholders_ref)	#148 ProcScr_DrawLinkArenaFogPlaceholders
 5D4358	5D48C8	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap2)	df3_data_5aa96c region-diff data (1392 B, table-pinned)
-5D48E0	5D4C0C	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap3)	df3_data_5aa96c region-diff data (812 B, table-pinned)
-5D4C5C	5D4C94	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap4)	df3_data_5aa96c region-diff data (56 B, table-pinned)
+5D48E0	5D48F8	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SioMu_0_ref)	#148 ProcScr_SioMu_0
+5D48F8	5D4910	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap3)	df3_data_5aa96c slice gap3
+5D4910	5D4940	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SIOWARP_ref)	#148 ProcScr_SIOWARP
+5D4940	5D49B8	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SIOWARPFX_ref)	#148 ProcScr_SIOWARPFX
+5D49B8	5D49F8	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SioWarpFxPartial_ref)	#148 ProcScr_SioWarpFxPartial
+5D49F8	5D4A10	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_LAButtonSpriteDraw_ref)	#148 ProcScr_LAButtonSpriteDraw
+5D4A10	5D4A24	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap3b)	df3_data_5aa96c slice gap3b
+5D4A24	5D4A44	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_LinkArenaTitleBanner_ref)	#148 ProcScr_LinkArenaTitleBanner
+5D4A44	5D4A64	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap3c)	df3_data_5aa96c slice gap3c
+5D4A64	5D4A7C	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SioMenuItem_ref)	#148 ProcScr_SioMenuItem
+5D4A7C	5D4B1C	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap3d)	df3_data_5aa96c slice gap3d
+5D4B1C	5D4B34	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SioUiutils_0_ref)	#148 ProcScr_SioUiutils_0
+5D4B34	5D4B4C	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_LinkArenaTeamSpriteDraw_ref)	#148 ProcScr_LinkArenaTeamSpriteDraw
+5D4B4C	5D4B68	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap3e)	df3_data_5aa96c slice gap3e
+5D4B68	5D4B80	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_NameEntrySpriteDraw_ref)	#148 ProcScr_NameEntrySpriteDraw
+5D4B80	5D4B8C	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap3f)	df3_data_5aa96c slice gap3f
+5D4B8C	5D4BA4	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_RuleSettingSpriteDraw_Interactive_ref)	#148 ProcScr_RuleSettingSpriteDraw_Interactive
+5D4BA4	5D4BBC	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_RuleSettingSpriteDraw_Static_ref)	#148 ProcScr_RuleSettingSpriteDraw_Static
+5D4BBC	5D4BD4	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SioMenuBurstFx_ref)	#148 ProcScr_SioMenuBurstFx
+5D4BD4	5D4BEC	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap3g)	df3_data_5aa96c slice gap3g
+5D4BEC	5D4C0C	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_LinkArenaMenuScrollBar_ref)	#148 ProcScr_LinkArenaMenuScrollBar
+5D4C5C	5D4C6C	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap4)	df3_data_5aa96c slice gap4 (head)
+5D4C6C	5D4C7C	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_LAVersusSpriteDraw_ref)	#148 ProcScr_LAVersusSpriteDraw (2 ProcCmd)
+5D4C7C	5D4C94	src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.o(.rodata.dat_ProcScr_SioUiutils_1_ref)	#148 ProcScr_SioUiutils_1 (3 ProcCmd)
 5D4DD8	5D4EB0	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap5)	df3_data_5aa96c region-diff data (216 B, table-pinned)
 5D53FC	5D68B4	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap6)	df3_data_5aa96c region-diff data (5304 B, table-pinned)
 5D737C	5D7C6C	src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.o(.data.frontier_df3_data_5aa96c.gap7)	df3_data_5aa96c region-diff data (2288 B, table-pinned)
