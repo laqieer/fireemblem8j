@@ -6103,8 +6103,16 @@ __asm__(
     ".4byte 0x00000000\n"
     ".4byte 0x00000000\n"
 );
-u8 frontier_df4_menu_027_A9D462[] __attribute__((section(".data.frontier_df4_menu.gap27"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x0, 0x226);
-u8 data_08A9D688[] __attribute__((section(".data.frontier_df4_menu.gap27"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x226, 0x1CE);
+/* #143: the 120 B block [0x08A9D5D4, 0x08A9D64C) that held ProcScr_savedraw,
+ * gProcScr_SaveDrawCursor and gProcScr_Savedraw_0 is typed out as struct
+ * ProcCmd[] in src/data/ProcScr_savedraw_ref so its interior code/name pointers
+ * become R_ARM_ABS32 relocations. Keep only the 0x172 B head here; the tail
+ * (0x1EA onward, incl. data_08A9D688) moves to a new gap27c section placed at
+ * 0x08A9D64C, so the carved scripts can sit in their own 4-aligned section
+ * without bumping this 2-aligned (base 0x08A9D462) blob's alignment. */
+u8 frontier_df4_menu_027_A9D462[] __attribute__((section(".data.frontier_df4_menu.gap27"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x0, 0x172);
+u8 frontier_df4_menu_027b_A9D64C[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x1EA, 0x3C);
+u8 data_08A9D688[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x226, 0x1CE);
 __asm__(
     ".section .data.frontier_df4_menu.gap28, \"aw\", %progbits\n"
     ".global frontier_df4_menu_028_A9E244\n"
