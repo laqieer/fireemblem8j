@@ -4193,19 +4193,28 @@ EventListScr frontier_df3_eventscr_ch_017_A6F47C[] __attribute__((section(".data
     EVBIT_T(7)
     ENDA
 };
-/* #143 shiftability: gap18 is a residual event-script fragment (mis-dumped as a
- * .gbapal blob) whose offset-0xC word was a raw un-relocatable pointer to the unit
- * definition UnitDef_Ch14BAlly_7 (a LOAD_UNITS operand). Split the INCBIN around it
- * and emit .4byte <sym> so ld emits an R_ARM_ABS32; the target is STT_OBJECT (even
- * address 0x08A602F0) so no Thumb bit is applied. Byte-exact: 0xC + 4 + 0x10 = 0x20. */
+/* #143 shiftability: gap18 is a 0x20-byte residual event-script fragment (originally
+ * mis-dumped as a .gbapal blob) whose offset-0xC word was a raw un-relocatable pointer
+ * to the unit definition UnitDef_Ch14BAlly_7 (a LOAD_UNITS operand), left stuck by a
+ * +0x40000 shift. Emit the 8 words inline: the 7 non-pointer event-command words as raw
+ * .4byte constants (all < 0x08000000, not addresses) and the pointer as .4byte <sym> so
+ * ld produces an R_ARM_ABS32. Target is STT_OBJECT (even 0x08A602F0 -> no Thumb bit).
+ * Inlined rather than .incbin-split because the source .gbapal is a *generated* file and
+ * a .incbin inside __asm__ is invisible to scaninc's C-mode dep scan (would drop the
+ * build-order dependency); inlining keeps the object self-sufficient. Byte-exact 0x20. */
 __asm__(
 "\t.section .data.frontier_df3_eventscr_ch.gap18, \"aw\", %progbits\n"
 "\t.global frontier_df3_eventscr_ch_018_A6FAE4\n"
 "\t.type frontier_df3_eventscr_ch_018_A6FAE4, %object\n"
 "frontier_df3_eventscr_ch_018_A6FAE4:\n"
-"\t.incbin \"graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_018_A6FAE4.gbapal\", 0x0, 0xC\n"
-"\t.4byte UnitDef_Ch14BAlly_7\n"
-"\t.incbin \"graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_018_A6FAE4.gbapal\", 0x10, 0x10\n"
+"\t.4byte 0x00020540\n"
+"\t.4byte 0x00000000\n"
+"\t.4byte 0x00000A40\n"
+"\t.4byte UnitDef_Ch14BAlly_7\n"   /* 0xA6FAF0: was raw 0x08A602F0 */
+"\t.4byte 0x000B0221\n"
+"\t.4byte 0x01000F21\n"
+"\t.4byte 0x00070228\n"
+"\t.4byte 0x00000120\n"
 "\t.size frontier_df3_eventscr_ch_018_A6FAE4, 0x20\n"
 );
 EventListScr frontier_df3_eventscr_ch_019_A6FB48[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap19"))) = {
