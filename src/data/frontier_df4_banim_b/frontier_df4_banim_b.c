@@ -7467,10 +7467,13 @@ __asm__(
 "	.4byte gMapanimApi_0 + 0x80, gMapanimApi_0 + 0x78, gMapanimApi_0 + 0x70, gMapanimApi_0 + 0x68, gMapanimApi_0 + 0x64, gMapanimApi_0 + 0x60\n"
 "	.4byte gMapanimApi_0 + 0x5C, gMapanimApi_0 + 0x58, gMapanimApi_0 + 0x54, 0x00000000, 0x03004FB0\n"
 );
+extern void EndPlayerPhaseSideWindows(void);
+extern void MADebug_MainLoop(void);
+extern struct ProcCmd ProcScr_MapAnimBattle[];
 struct ProcCmd ProcScr_SIOMAIN2[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
-    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((ProcFunc)0x0808F44D), PROC_SLEEP(0x1),
-    PROC_CALL((void*)((u8*)InitDebugMapAnim + 0x1)), PROC_LABEL(0x0), PROC_CALL((void*)((u8*)MADebug_InitScreen + 0x1)), PROC_REPEAT((ProcFunc)0x0807E9C5),
-    PROC_CALL((void*)((u8*)MADebug_DoBattleAnim + 0x1)), PROC_WHILE_EXISTS((const void*)0x08A13B90), PROC_GOTO(0x0), PROC_END,
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)EndPlayerPhaseSideWindows + 0x1)), PROC_SLEEP(0x1),
+    PROC_CALL((void*)((u8*)InitDebugMapAnim + 0x1)), PROC_LABEL(0x0), PROC_CALL((void*)((u8*)MADebug_InitScreen + 0x1)), PROC_REPEAT((void*)((u8*)MADebug_MainLoop + 0x1)),
+    PROC_CALL((void*)((u8*)MADebug_DoBattleAnim + 0x1)), PROC_WHILE_EXISTS((const void*)ProcScr_MapAnimBattle), PROC_GOTO(0x0), PROC_END,
 };
 struct ProcCmd ProcScr_MapAnimEventBattle[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
     PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)MapAnim_PrepareBattleTalk + 0x1)), PROC_SLEEP(0x1), PROC_SLEEP(0x5),
