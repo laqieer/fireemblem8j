@@ -26,17 +26,14 @@ extern char * GetStringFromIndex(int msgid);
 extern char *sub_80B3538(int a, char *str);
 extern char *AppendCharacter(int character, char *str);
 
-/* The callees below are still undecompiled in the JP tree and are not global
- * linker symbols; bind them to their JP ROM addresses exactly as the original
- * asm/sub_80BB240.s did via .set (CheckPermanentFlag and GetStringFromIndex already
- * resolve as baseline globals at the same addresses, so they are omitted). */
-asm(".set GetPidDefeatType, 0x080BB21C + 1");
-asm(".set sub_80A9740, 0x080A9740 + 1");
-asm(".set sub_80C086C, 0x080C086C + 1");
-asm(".set sub_80B3564, 0x080B3564 + 1");
-asm(".set GetROMChapterStruct, 0x08034520 + 1");
-asm(".set sub_80B3538, 0x080B3538 + 1");
-asm(".set AppendCharacter, 0x080B3558 + 1");
+/* GetPidDefeatType, sub_80B3564, GetROMChapterStruct and AppendCharacter now
+ * resolve as real relocatable globals at the same addresses, so no binding is
+ * needed. The remaining three still-stale names are aliased to their real
+ * relocatable globals (byte-identical here, but shift-safe: an absolute
+ * `.set NAME, 0x08XXXXXX+1` would not relocate under the +0x40000 harness). */
+asm(".set sub_80A9740, GetPidStats");
+asm(".set sub_80C086C, GetWorldMapNodeName");
+asm(".set sub_80B3538, AppendString");
 
 char *GetPidDefeatedEndingString(int pid)
 {
