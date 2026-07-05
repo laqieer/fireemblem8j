@@ -1,2 +1,5 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-5FFB30	5FFB88	src/data/data_085FFB30/data_085FFB30.o(.data.residue.085FFB30)	descriptive raw ROM data (88 B, byte-completeness D29)
+# #148 proc-script carve: data_085FFB30 -> 3 typed struct ProcCmd[] + TsaArray_AircaliburBg (parallel-safe fragment)
+5FFB30	5FFB48	src/data/data_085FFB30/data_085FFB30.o(.rodata.dat_gProcScr_efxAlacaliburBG_ref)	#148 gProcScr_efxAlacaliburBG (3 ProcCmd)
+5FFB48	5FFB50	src/data/data_085FFB30/data_085FFB30.o(.rodata.dat_TsaArray_AircaliburBg_ref)	#148 TsaArray_AircaliburBg (2 TSA ptrs)
+5FFB50	5FFB70	src/data/data_085FFB30/data_085FFB30.o(.rodata.dat_gProcScr_efxAlacaliburBGCOL_ref)	#148 gProcScr_efxAlacaliburBGCOL (4 ProcCmd)
+5FFB70	5FFB88	src/data/data_085FFB30/data_085FFB30.o(.rodata.dat_gProcScr_efxAlacaliburOBJ_ref)	#148 gProcScr_efxAlacaliburOBJ (3 ProcCmd)
