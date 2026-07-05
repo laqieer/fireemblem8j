@@ -49,3 +49,5 @@ ProcScr_EventVerticalQuakefx
 ProcScr_EventQuakefx
 ProcScr_UnitTornOut
 ProcScr_WorldFlush
+gProcScr_Shop
+gProcScr_GoldBox

@@ -1,6 +1,41 @@
 #include "global.h"
 #include "proc.h"
 
+/* #148 gProcScr_Shop / gProcScr_GoldBox externs (gap37, batch 6c). */
+extern u8 frontier_df4_menu_037_AB7144[];
+extern void FadeInBlackSpeed20();
+extern void FadeOutBlackSpeed20Locking();
+extern void GoldBox_OnLoop();
+extern void Shop_AddItemToConvoy();
+extern void Shop_AnythingElseContinueDialogue();
+extern void Shop_AnythingElseDialogue();
+extern void Shop_AnythingElseRestartDialogue();
+extern void Shop_BuyDialogue();
+extern void Shop_CheckIfConvoyFull();
+extern void Shop_ConvoyFullDialogue();
+extern void Shop_EntryDialogue();
+extern void Shop_ExitShopDialogue();
+extern void Shop_HandleBuyConfirmPrompt();
+extern void Shop_HandleEntryDialoguePrompt();
+extern void Shop_HandleSellConfirmPrompt();
+extern void Shop_HandleSendToConvoyPrompt();
+extern void Shop_Init();
+extern void Shop_InitBuyState();
+extern void Shop_InitSellState();
+extern void Shop_Loop_BuyKeyHandler();
+extern void Shop_Loop_SellKeyHandler();
+extern void Shop_Loop_UnkKeyHandler();
+extern void Shop_NoSendToConvoyDialogue();
+extern void Shop_OnExit();
+extern void Shop_PrepEntryDialogue();
+extern void Shop_SellAnythingElseDialogue();
+extern void Shop_SellDialogue();
+extern void Shop_SendToConvoyDialogue();
+extern void Shop_TryAddItemToInventory();
+extern void StartShopFadeIn();
+extern void StartShopFadeOut();
+extern void _FadeBgmOut();
+
 /* #148 proc-script externs (gap20). */
 extern void DisableAllDisplay();
 extern void DrawFundsSprite_Init();
@@ -4642,45 +4677,50 @@ __asm__(
    ROM-range words in the prefix are NOT pointers (mid-func / mid-data offsets) and stay raw.
    byte-exact; make compare is the oracle. */
 __asm__(
-"\t.section .data.frontier_df4_menu.gap37, \"aw\", %progbits\n"
-"\t.global frontier_df4_menu_037_AB7144\n"
+"	.section .data.frontier_df4_menu.gap37, \"aw\", %progbits\n"
+"	.global frontier_df4_menu_037_AB7144\n"
 "frontier_df4_menu_037_AB7144:\n"
 "\t.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin\", 0, 0x5650\n"
-"\t.4byte LockGame + 0x1, 0x0001000E, 0x00000000, 0xFFFF0018, _FadeBgmOut + 0x1, 0x00000002\n"
-"\t.4byte StartMidFadeToBlack + 0x1, 0x00000003, WaitForFade + 0x1, 0x00000002, BMapDispSuspend + 0x1, 0x00000000\n"
-"\t.4byte 0x00000000, 0x00000002, ResetDialogueScreen + 0x1, 0x00000002, BMapDispResume + 0x1, 0x00000002\n"
-"\t.4byte RefreshBMapGraphics + 0x1, 0x00000002, StartMapSongBgm + 0x1, 0x00000002, StartMidFadeFromBlack + 0x1, 0x00000003\n"
-"\t.4byte WaitForFade + 0x1, 0x00000002, UnlockGame + 0x1, 0x00000000, 0x00000000, 0x00000002\n"
-"\t.4byte StartShopFadeIn + 0x1, 0x0000000E, 0x00000000, 0x00000002, LockGame + 0x1, 0x00000002\n"
-"\t.4byte Shop_Init + 0x1, 0x00000002, Shop_InitBuyState + 0x1, 0x00000005, frontier_df4_menu_037_AB7144 + 0x5984, 0x00000002\n"
-"\t.4byte FadeInBlackSpeed20 + 0x1, 0x0001000E, 0x00000000, 0x00000002, Shop_EntryDialogue + 0x1, 0x0000000B\n"
-"\t.4byte 0x00000000, 0x0001000E, 0x00000000, 0x00000003, Shop_HandleEntryDialoguePrompt + 0x1, 0x0001000B\n"
-"\t.4byte 0x00000000, 0x00000002, Shop_BuyDialogue + 0x1, 0x0002000B, 0x00000000, 0x00000002\n"
-"\t.4byte Shop_InitBuyState + 0x1, 0x0001000E, 0x00000000, 0x00000003, Shop_Loop_BuyKeyHandler + 0x1, 0x00000002\n"
-"\t.4byte Shop_HandleBuyConfirmPrompt + 0x1, 0x0009000C, 0x00000000, 0x0003000B, 0x00000000, 0x00000002\n"
-"\t.4byte Shop_AnythingElseDialogue + 0x1, 0x0002000C, 0x00000000, 0x0004000B, 0x00000000, 0x00000002\n"
-"\t.4byte Shop_SellDialogue + 0x1, 0x0005000B, 0x00000000, 0x00000002, Shop_InitSellState + 0x1, 0x0001000E\n"
-"\t.4byte 0x00000000, 0x00000003, Shop_Loop_SellKeyHandler + 0x1, 0x00000002, Shop_HandleSellConfirmPrompt + 0x1, 0x0002000E\n"
-"\t.4byte 0x00000000, 0x00000002, Shop_SellAnythingElseDialogue + 0x1, 0x0005000C, 0x00000000, 0x0007000B\n"
-"\t.4byte 0x00000000, 0x0002000E, 0x00000000, 0x00000002, Shop_AnythingElseRestartDialogue + 0x1, 0x0000000C\n"
-"\t.4byte 0x00000000, 0x0008000B, 0x00000000, 0x0001000E, 0x00000000, 0x00000002\n"
-"\t.4byte Shop_AnythingElseContinueDialogue + 0x1, 0x0000000C, 0x00000000, 0x0009000B, 0x00000000, 0x00000002\n"
-"\t.4byte Shop_TryAddItemToInventory + 0x1, 0x0000000E, 0x00000000, 0x00000002, Shop_HandleSendToConvoyPrompt + 0x1, 0x0000000E\n"
-"\t.4byte 0x00000000, 0x00000002, Shop_CheckIfConvoyFull + 0x1, 0x00000002, Shop_ConvoyFullDialogue + 0x1, 0x0000000E\n"
-"\t.4byte 0x00000000, 0x0007000C, 0x00000000, 0x000A000B, 0x00000000, 0x00000002\n"
-"\t.4byte Shop_AddItemToConvoy + 0x1, 0x0000000E, 0x00000000, 0x00000002, Shop_SendToConvoyDialogue + 0x1, 0x0000000E\n"
-"\t.4byte 0x00000000, 0x0003000C, 0x00000000, 0x000B000B, 0x00000000, 0x0000000E\n"
-"\t.4byte 0x00000000, 0x00000002, Shop_NoSendToConvoyDialogue + 0x1, 0x0000000E, 0x00000000, 0x0007000C\n"
-"\t.4byte 0x00000000, 0x000D000B, 0x00000000, 0x00000002, Shop_PrepEntryDialogue + 0x1, 0x0000000E\n"
-"\t.4byte 0x00000000, 0x00000003, Shop_Loop_UnkKeyHandler + 0x1, 0x000C000B, 0x00000000, 0x00000002\n"
-"\t.4byte Shop_ExitShopDialogue + 0x1, 0x0001000E, 0x00000000, 0x00020018, _FadeBgmOut + 0x1, 0x00000002\n"
-"\t.4byte FadeOutBlackSpeed20Locking + 0x1, 0x0001000E, 0x00000000, 0x00000002, Shop_OnExit + 0x1, 0x00000009\n"
-"\t.4byte frontier_df4_menu_037_AB7144 + 0x5984, 0x00000002, StartShopFadeOut + 0x1, 0x0000000E, 0x00000000, 0x00000002\n"
-"\t.4byte UnlockGame + 0x1, 0x00000000, 0x00000000, 0x00000003, InitShopBuyStatus + 0x1, 0x00000000\n"
-"\t.4byte 0x00000000, 0x00000003, InitShopSellStatus + 0x1, 0x00000000, 0x00000000, 0x40000006\n"
-"\t.4byte 0x04004000, 0x40204000, 0x40080402, 0x04064000, 0x40204008, 0x40100408\n"
-"\t.4byte 0x040C4000, 0x40204010, 0x0000040E, 0x00000003, GoldBox_OnLoop + 0x1, 0x00000000\n"
-"\t.4byte 0x00000000, 0x00000003, _DisplayShopUiArrows + 0x1\n"
+"	.4byte LockGame + 0x1, 0x0001000E, 0x00000000, 0xFFFF0018, _FadeBgmOut + 0x1, 0x00000002\n"
+"	.4byte StartMidFadeToBlack + 0x1, 0x00000003, WaitForFade + 0x1, 0x00000002, BMapDispSuspend + 0x1, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000002, ResetDialogueScreen + 0x1, 0x00000002, BMapDispResume + 0x1, 0x00000002\n"
+"	.4byte RefreshBMapGraphics + 0x1, 0x00000002, StartMapSongBgm + 0x1, 0x00000002, StartMidFadeFromBlack + 0x1, 0x00000003\n"
+"	.4byte WaitForFade + 0x1, 0x00000002, UnlockGame + 0x1, 0x00000000, 0x00000000\n"
+);
+struct ProcCmd gProcScr_Shop[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = {
+    PROC_CALL((void*)((u8*)StartShopFadeIn + 0x1)), PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)Shop_Init + 0x1)),
+    PROC_CALL((void*)((u8*)Shop_InitBuyState + 0x1)), PROC_START_CHILD((void*)((u8*)frontier_df4_menu_037_AB7144 + 0x5984)), PROC_CALL((void*)((u8*)FadeInBlackSpeed20 + 0x1)), PROC_SLEEP(0x1),
+    PROC_CALL((void*)((u8*)Shop_EntryDialogue + 0x1)), PROC_LABEL(0x0), PROC_SLEEP(0x1), PROC_REPEAT((void*)((u8*)Shop_HandleEntryDialoguePrompt + 0x1)),
+    PROC_LABEL(0x1), PROC_CALL((void*)((u8*)Shop_BuyDialogue + 0x1)), PROC_LABEL(0x2), PROC_CALL((void*)((u8*)Shop_InitBuyState + 0x1)),
+    PROC_SLEEP(0x1), PROC_REPEAT((void*)((u8*)Shop_Loop_BuyKeyHandler + 0x1)), PROC_CALL((void*)((u8*)Shop_HandleBuyConfirmPrompt + 0x1)), PROC_GOTO(0x9),
+    PROC_LABEL(0x3), PROC_CALL((void*)((u8*)Shop_AnythingElseDialogue + 0x1)), PROC_GOTO(0x2), PROC_LABEL(0x4),
+    PROC_CALL((void*)((u8*)Shop_SellDialogue + 0x1)), PROC_LABEL(0x5), PROC_CALL((void*)((u8*)Shop_InitSellState + 0x1)), PROC_SLEEP(0x1),
+    PROC_REPEAT((void*)((u8*)Shop_Loop_SellKeyHandler + 0x1)), PROC_CALL((void*)((u8*)Shop_HandleSellConfirmPrompt + 0x1)), PROC_SLEEP(0x2), PROC_CALL((void*)((u8*)Shop_SellAnythingElseDialogue + 0x1)),
+    PROC_GOTO(0x5), PROC_LABEL(0x7), PROC_SLEEP(0x2), PROC_CALL((void*)((u8*)Shop_AnythingElseRestartDialogue + 0x1)),
+    PROC_GOTO(0x0), PROC_LABEL(0x8), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)Shop_AnythingElseContinueDialogue + 0x1)),
+    PROC_GOTO(0x0), PROC_LABEL(0x9), PROC_CALL((void*)((u8*)Shop_TryAddItemToInventory + 0x1)), PROC_SLEEP(0x0),
+    PROC_CALL((void*)((u8*)Shop_HandleSendToConvoyPrompt + 0x1)), PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)Shop_CheckIfConvoyFull + 0x1)), PROC_CALL((void*)((u8*)Shop_ConvoyFullDialogue + 0x1)),
+    PROC_SLEEP(0x0), PROC_GOTO(0x7), PROC_LABEL(0xA), PROC_CALL((void*)((u8*)Shop_AddItemToConvoy + 0x1)),
+    PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)Shop_SendToConvoyDialogue + 0x1)), PROC_SLEEP(0x0), PROC_GOTO(0x3),
+    PROC_LABEL(0xB), PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)Shop_NoSendToConvoyDialogue + 0x1)), PROC_SLEEP(0x0),
+    PROC_GOTO(0x7), PROC_LABEL(0xD), PROC_CALL((void*)((u8*)Shop_PrepEntryDialogue + 0x1)), PROC_SLEEP(0x0),
+    PROC_REPEAT((void*)((u8*)Shop_Loop_UnkKeyHandler + 0x1)), PROC_LABEL(0xC), PROC_CALL((void*)((u8*)Shop_ExitShopDialogue + 0x1)), PROC_SLEEP(0x1),
+    PROC_CALL_ARG((void*)((u8*)_FadeBgmOut + 0x1), 0x2), PROC_CALL((void*)((u8*)FadeOutBlackSpeed20Locking + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)Shop_OnExit + 0x1)),
+    PROC_END_EACH((void*)((u8*)frontier_df4_menu_037_AB7144 + 0x5984)), PROC_CALL((void*)((u8*)StartShopFadeOut + 0x1)), PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)UnlockGame + 0x1)),
+    PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_menu.gap37, \"aw\", %progbits\n"
+"	.4byte 0x00000003, InitShopBuyStatus + 0x1, 0x00000000, 0x00000000, 0x00000003, InitShopSellStatus + 0x1\n"
+"	.4byte 0x00000000, 0x00000000, 0x40000006, 0x04004000, 0x40204000, 0x40080402\n"
+"	.4byte 0x04064000, 0x40204008, 0x40100408, 0x040C4000, 0x40204010, 0x0000040E\n"
+);
+struct ProcCmd gProcScr_GoldBox[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = {
+    PROC_REPEAT((void*)((u8*)GoldBox_OnLoop + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_menu.gap37, \"aw\", %progbits\n"
+"	.4byte 0x00000003, _DisplayShopUiArrows + 0x1\n"
 );
 /* frontier_df4_menu_038_ABCD24: the [0,0x20) arena ProcScr's 2 func pointers (Arena_PlayResultSong,
    Arena_PlayArenaSong) become .4byte Sym+0x1. The [0x20,end) descriptor table stays .incbin -- it
