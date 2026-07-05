@@ -1,2 +1,4 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-A9D904	A9DAA4	src/data/data_08A9D904/data_08A9D904.o(.data.residue.08A9D904)	descriptive raw ROM data (416 B, byte-completeness D29)
+# #148 proc-script carve: data_08A9D904 -> 1 typed struct ProcCmd[] + residue (parallel-safe fragment)
+A9D904	A9D978	src/data/data_08A9D904/data_08A9D904.o(.data.residue.08A9D904)	#148 residue (116 B)
+A9D978	A9DA00	src/data/data_08A9D904/data_08A9D904.o(.rodata.dat_gProcScr_SaveBgUp_ref)	#148 gProcScr_SaveBgUp (17 ProcCmd)
+A9DA00	A9DAA4	src/data/data_08A9D904/data_08A9D904.o(.data.residue.08A9DA00)	#148 residue (164 B)
