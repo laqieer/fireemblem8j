@@ -1,6 +1,12 @@
 #include "global.h"
 #include "proc.h"
 
+/* #148 gProcScr_SoundRoomUi externs (gap28, batch 6f). */
+extern void ExtramenuUnk_Init();
+extern void ExtramenuUnk_LoadGfx();
+extern void ExtramenuUnk_DrawIconLoop();
+extern void nullsub_90();
+
 /* #148 ProcScr_CallExtraMap externs (gap27c, batch 6e). */
 extern u8 SaveDrawCursorYOffsetLut[];
 extern void SaveBgUp_Loop();
@@ -4211,20 +4217,17 @@ __asm__(
     ".4byte 0x80000000\n"
     ".4byte 0x00007800\n"
 );
+struct ProcCmd gProcScr_SoundRoomUi[] __attribute__((section(".data.frontier_df4_menu.gap28"))) = {
+    PROC_CALL(ExtramenuUnk_Init),
+    PROC_CALL(ExtramenuUnk_LoadGfx),
+    PROC_SET_END_CB(nullsub_90),
+    PROC_REPEAT(ExtramenuUnk_DrawIconLoop),
+    PROC_END,
+};
 __asm__(
-    ".section .data.frontier_df4_menu.gap28, \"aw\", %progbits\n"
     ".global data_08A9E4D0\n"
-    "data_08A9E4D0:\n"
-    ".4byte 0x00000002\n"
-    ".4byte ExtramenuUnk_Init\n"
-    ".4byte 0x00000002\n"
-    ".4byte ExtramenuUnk_LoadGfx\n"
-    ".4byte 0x00000004\n"
-    ".4byte nullsub_90\n"
-    ".4byte 0x00000003\n"
-    ".4byte ExtramenuUnk_DrawIconLoop\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
+    ".set data_08A9E4D0, gProcScr_SoundRoomUi\n"
+    ".section .data.frontier_df4_menu.gap28, \"aw\", %progbits\n"
     ".4byte 0x02000968\n"
     ".4byte 0x02000d68\n"
     ".4byte 0x02001168\n"
