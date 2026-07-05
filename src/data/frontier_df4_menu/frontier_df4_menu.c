@@ -3666,7 +3666,31 @@ __asm__(
 /* [0x22,0x102) -> gProcScr_SupportScreen (ref file) */
 u8 frontier_df4_menu_021b_A95C50[] __attribute__((section(".data.frontier_df4_menu.gap21b"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x102, 0x44);
 /* [0x146,0x28E) -> gProcScr_SupportUnitSubScreen (ref file) */
-u8 frontier_df4_menu_021c_A95DDC[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x28E, 0x680);
+/* #143 shiftability: gap21c embeds gUnknown_08A95E20 (ProcScr for sub_80A7650)
+ * whose 7 interior ProcCmd pointer words were raw un-relocatable addresses. Split
+ * the INCBIN blob around each pointer and emit .4byte <FuncSym> so the linker emits
+ * an R_ARM_ABS32 (Thumb bit re-ORed for the FUNC targets). Byte-exact: the .bin base
+ * is ROM 0xA95B4E; slices 0x50+4+4+4+4+4+4+0xC+4+4+4+0x5F4 + 7*4 = 0x680. */
+__asm__(
+"\t.section .data.frontier_df4_menu.gap21c, \"aw\", %progbits\n"
+"\t.global frontier_df4_menu_021c_A95DDC\n"
+"frontier_df4_menu_021c_A95DDC:\n"
+"\t.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin\", 0x28E, 0x50\n"
+"\t.4byte sub_80A74D4\n"            /* 0xA95E2C */
+"\t.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin\", 0x2E2, 0x4\n"
+"\t.4byte StartMidFadeFromBlack\n"  /* 0xA95E34 */
+"\t.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin\", 0x2EA, 0x4\n"
+"\t.4byte WaitForFade\n"            /* 0xA95E3C */
+"\t.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin\", 0x2F2, 0x4\n"
+"\t.4byte nullsub_82\n"             /* 0xA95E44 */
+"\t.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin\", 0x2FA, 0xC\n"
+"\t.4byte StartMidFadeToBlack\n"    /* 0xA95E54 */
+"\t.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin\", 0x30A, 0x4\n"
+"\t.4byte WaitForFade\n"            /* 0xA95E5C */
+"\t.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin\", 0x312, 0x4\n"
+"\t.4byte sub_80A7620\n"            /* 0xA95E64 */
+"\t.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin\", 0x31A, 0x5F4\n"
+);
 u8 frontier_df4_menu_022_A96D18[] __attribute__((section(".data.frontier_df4_menu.gap22"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18_0.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18_1.4bpp.lz");
 u8 frontier_df4_menu_023_A99FA8[] __attribute__((section(".data.frontier_df4_menu.gap23"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin");
 u8 frontier_df4_menu_024_A9AC28[] __attribute__((section(".data.frontier_df4_menu.gap24"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin", 0, 1020);
