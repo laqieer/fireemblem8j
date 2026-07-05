@@ -1,6 +1,22 @@
 #include "global.h"
 #include "proc.h"
 
+/* #148 proc-script externs (batch2 gap14): referenced code/data symbols so the
+ * carved struct ProcCmd tables compile (bytes unchanged -- same R_ARM_ABS32). */
+extern void BoxDialogue_OnClose();
+extern void BoxDialogue_OnIdle();
+extern void BoxDialogue_OnInit();
+extern void HelpBoxDrawstring();
+extern void HelpBoxIntroDrawTexts();
+extern void HelpBoxIntro_bug_0();
+extern void HelpBoxIntro_bug_OnClose();
+extern void HelpBoxIntro_bug_WaitClose();
+extern void HelpBoxSetupstringLines();
+extern void HelpBoxTextScroll_OnLoop();
+extern void MergeBoxDialogue1();
+extern void MergeBoxDialogue2();
+extern void MergeBoxDialogue3();
+
 /* #148 proc-script externs (batch1 gap0+gap13): referenced code/data symbols so the
  * carved struct ProcCmd tables compile (bytes unchanged -- same R_ARM_ABS32). */
 extern void BackgroundSlide_Loop();
@@ -2816,29 +2832,50 @@ __asm__(
 "	.4byte 0x00000000, frontier_chap_title_061_A8B5DC, 0x00000000, 0x00000000, frontier_chap_title_061_A8B5DC, 0x00000000\n"
 "	.4byte 0x00000000, frontier_chap_title_061_A8B5DC, 0x00000000, 0x00000000, frontier_chap_title_058_A8AE74, 0x00000000\n"
 "	.4byte 0x00000000, frontier_chap_title_059_A8B168, 0x00000000, 0x00000000, frontier_chap_title_060_A8B39C, 0x00000000\n"
-"	.4byte 0x00000000, frontier_chap_title_063_A8BB88, 0x00000000, 0x00000000, 0x00000003, HelpBoxTextScroll_OnLoop + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x0000000E, 0x00000000, 0x00000002, HelpBoxDrawOneLineExt + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x0006000E, 0x00000000, 0x00000003, HelpBoxSetupstringLines + 0x1\n"
-"	.4byte 0x00000003, HelpBoxDrawstring + 0x1, 0x00000002, HelpBoxIntroDrawTexts + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000003, HelpBoxIntro_bug_0 + 0x1, 0x00000002, HelpBoxIntro_bug_OnClose + 0x1, 0x00000003, HelpBoxIntro_bug_WaitClose + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x0001000E, 0x00000000, 0x0000000B, 0x00000000\n"
-"	.4byte 0x00000002, HelpBoxMoveCtrl_OnInitBox + 0x1, 0x00000003, HelpBoxMoveCtrl_OnIdle + 0x1, 0x00000002, CloseHelpBox_bug + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000003, HelpBoxLock_OnIdle + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x000007BB, 0x000007BC, 0x0000000E, 0x00000000, 0x00000002, BoxDialogue_OnInit + 0x1\n"
-"	.4byte 0x0000000B, 0x00000000, 0x00000003, BoxDialogue_OnIdle + 0x1, 0x0001000B, 0x00000000\n"
-"	.4byte 0x00000010, 0x00000000, 0x0003000B, 0x00000000, 0x0006000E, 0x00000000\n"
-"	.4byte 0x0002000B, 0x00000000, 0x00000002, BoxDialogue_OnClose + 0x1, 0x000A000E, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000003, MergeBoxDialogue1 + 0x1, 0x00000002, MergeBoxDialogue2 + 0x1\n"
-"	.4byte 0x00000003, MergeBoxDialogue3 + 0x1, 0x00000000, 0x00000000, 0x0000000E, 0x00000000\n"
-"	.4byte 0x00000002, BoxDialogueDrawText_Init + 0x1, 0x0000000B, 0x00000000, 0x00000003, BoxDialogueInterpreter_Main + 0x1\n"
-"	.4byte 0x0002000C, 0x00000000, 0x0001000B, 0x00000000, 0x00000003, BoxDialogueDrawText_WaitIdle + 0x1\n"
-"	.4byte 0x0004000B, 0x00000000, 0x00000003, BoxDialogueDrawText_ScrollLines + 0x1, 0x0000000C, 0x00000000\n"
-"	.4byte 0x0005000B, 0x00000000, 0x00000003, BoxDialogueDrawText_ScrollLines + 0x1, 0x00000002, BoxDialogueDrawText_AfterScroll + 0x1\n"
-"	.4byte 0x0000000C, 0x00000000, 0x0006000B, 0x00000000, 0x00000003, BoxDialogueDrawText_ResizeBox + 0x1\n"
-"	.4byte 0x0000000C, 0x00000000, 0x0002000B, 0x00000000, 0x00000002, BoxDialogueDrawText_Finish + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x0006000E, 0x00000000, 0x00000002, BoxDialogueDrawTextProc_Init + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000010, 0x00000000, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000000, frontier_chap_title_063_A8BB88, 0x00000000, 0x00000000\n"
 );
+struct ProcCmd gProcScr_HelpBoxTextScroll[] __attribute__((section(".data.frontier_df4_menu.gap14"))) = {
+    PROC_REPEAT((void*)((u8*)HelpBoxTextScroll_OnLoop + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_menu.gap14, \"aw\", %progbits\n"
+"	.4byte 0x0000000E, 0x00000000, 0x00000002, HelpBoxDrawOneLineExt + 0x1, 0x00000000, 0x00000000\n"
+);
+struct ProcCmd ProcScr_HelpBoxIntro[] __attribute__((section(".data.frontier_df4_menu.gap14"))) = {
+    PROC_SLEEP(0x6), PROC_REPEAT((void*)((u8*)HelpBoxSetupstringLines + 0x1)), PROC_REPEAT((void*)((u8*)HelpBoxDrawstring + 0x1)), PROC_CALL((void*)((u8*)HelpBoxIntroDrawTexts + 0x1)),
+    PROC_END,
+};
+struct ProcCmd ProcScr_Helpbox_bug_0[] __attribute__((section(".data.frontier_df4_menu.gap14"))) = {
+    PROC_REPEAT((void*)((u8*)HelpBoxIntro_bug_0 + 0x1)), PROC_CALL((void*)((u8*)HelpBoxIntro_bug_OnClose + 0x1)), PROC_REPEAT((void*)((u8*)HelpBoxIntro_bug_WaitClose + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_menu.gap14, \"aw\", %progbits\n"
+"	.4byte 0x0001000E, 0x00000000, 0x0000000B, 0x00000000, 0x00000002, HelpBoxMoveCtrl_OnInitBox + 0x1\n"
+"	.4byte 0x00000003, HelpBoxMoveCtrl_OnIdle + 0x1, 0x00000002, CloseHelpBox_bug + 0x1, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000003, HelpBoxLock_OnIdle + 0x1, 0x00000000, 0x00000000, 0x000007BB, 0x000007BC\n"
+);
+struct ProcCmd gProcScr_BoxDialogue[] __attribute__((section(".data.frontier_df4_menu.gap14"))) = {
+    PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)BoxDialogue_OnInit + 0x1)), PROC_LABEL(0x0), PROC_REPEAT((void*)((u8*)BoxDialogue_OnIdle + 0x1)),
+    PROC_LABEL(0x1), PROC_BLOCK, PROC_LABEL(0x3), PROC_SLEEP(0x6),
+    PROC_LABEL(0x2), PROC_CALL((void*)((u8*)BoxDialogue_OnClose + 0x1)), PROC_SLEEP(0xA), PROC_END,
+};
+struct ProcCmd ProcScr_MergeBoxDialogue[] __attribute__((section(".data.frontier_df4_menu.gap14"))) = {
+    PROC_REPEAT((void*)((u8*)MergeBoxDialogue1 + 0x1)), PROC_CALL((void*)((u8*)MergeBoxDialogue2 + 0x1)), PROC_REPEAT((void*)((u8*)MergeBoxDialogue3 + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_menu.gap14, \"aw\", %progbits\n"
+"	.4byte 0x0000000E, 0x00000000, 0x00000002, BoxDialogueDrawText_Init + 0x1, 0x0000000B, 0x00000000\n"
+"	.4byte 0x00000003, BoxDialogueInterpreter_Main + 0x1, 0x0002000C, 0x00000000, 0x0001000B, 0x00000000\n"
+"	.4byte 0x00000003, BoxDialogueDrawText_WaitIdle + 0x1, 0x0004000B, 0x00000000, 0x00000003, BoxDialogueDrawText_ScrollLines + 0x1\n"
+"	.4byte 0x0000000C, 0x00000000, 0x0005000B, 0x00000000, 0x00000003, BoxDialogueDrawText_ScrollLines + 0x1\n"
+"	.4byte 0x00000002, BoxDialogueDrawText_AfterScroll + 0x1, 0x0000000C, 0x00000000, 0x0006000B, 0x00000000\n"
+"	.4byte 0x00000003, BoxDialogueDrawText_ResizeBox + 0x1, 0x0000000C, 0x00000000, 0x0002000B, 0x00000000\n"
+"	.4byte 0x00000002, BoxDialogueDrawText_Finish + 0x1, 0x00000000, 0x00000000, 0x0006000E, 0x00000000\n"
+"	.4byte 0x00000002, BoxDialogueDrawTextProc_Init + 0x1, 0x00000000, 0x00000000\n"
+);
+struct ProcCmd ProcScr_TalkBoxIdle[] __attribute__((section(".data.frontier_df4_menu.gap14"))) = {
+    PROC_BLOCK, PROC_END,
+};
 __asm__(
     ".section .data.frontier_df4_menu.gap15, \"aw\", %progbits\n"
     ".global frontier_df4_menu_015_A73900\n"

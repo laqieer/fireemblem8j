@@ -6,3 +6,9 @@ ProcScr_GlowCrossExit
 ProcScr_SlidingWallBg
 gProcScr_SSPageSlide
 gProcScr_SSUnitSlide
+gProcScr_HelpBoxTextScroll
+ProcScr_HelpBoxIntro
+ProcScr_Helpbox_bug_0
+gProcScr_BoxDialogue
+ProcScr_MergeBoxDialogue
+ProcScr_TalkBoxIdle
