@@ -7711,3 +7711,10 @@ struct ProcCmd ProcScr_ManimLevelUp[] __attribute__((section(".data.frontier_df4
     PROC_SLEEP(0x3C), PROC_CALL((void*)((u8*)EndManimLevelUpStatGainLabels + 0x1)), PROC_SLEEP(0x1), PROC_REPEAT((void*)((u8*)ManimLevelUp_ScrollOut + 0x1)),
     PROC_CALL((void*)((u8*)ClearManimLevelUpWindow + 0x1)), PROC_CALL((void*)((u8*)ResetDialogueScreen + 0x1)), PROC_SLEEP(0x4), PROC_END,
 };
+/* ProcScr_ManimLevelUpLabelColor (A145E4) is a mid-array entry point at
+   ProcScr_ManimLevelUpStatGainLabel + 0x10 (entry[2]); referenced by
+   src/mapanim_lvupfx.c. Emit as a relocatable alias so it stays shiftable. */
+__asm__(
+"	.global ProcScr_ManimLevelUpLabelColor\n"
+"	.set ProcScr_ManimLevelUpLabelColor, ProcScr_ManimLevelUpStatGainLabel + 0x10\n"
+);
