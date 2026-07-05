@@ -1,2 +1,4 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-5BA36C	5BA470	src/data/data_085BA36C/data_085BA36C.o(.data.residue.085BA36C)	descriptive raw ROM data (260 B, byte-completeness D29)
+# #148 proc-script carve: data_085BA36C -> 2 typed struct ProcCmd[] (earthquake/stoneshatter) + gfx-descriptor tail residue (parallel-safe fragment)
+5BA36C	5BA384	src/data/data_085BA36C/data_085BA36C.o(.rodata.dat_ProcScr_EventEarthQuake_ref)	#148 ProcScr_EventEarthQuake (3 ProcCmd)
+5BA384	5BA3A4	src/data/data_085BA36C/data_085BA36C.o(.rodata.dat_gProcScr_StoneShatterEvent_ref)	#148 gProcScr_StoneShatterEvent (4 ProcCmd)
+5BA3A4	5BA470	src/data/data_085BA36C/data_085BA36C.o(.data.residue.085BA3A4)	#148 StoneShatter gfx descriptor (204 B residue)
