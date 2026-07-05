@@ -195,6 +195,9 @@ extern void MapLatonafx_InitGfx();
 extern void MapSpellAnim_CommonEnd();
 extern void MapSpellAnim_EndWithHBlank();
 extern void MuBlink_OnLoop();
+extern void MuCtr_DelayMoveLoop();
+extern void MuCtr_OnEnd();
+extern void MuCtr_WaitForMoveLoop();
 extern void MuRestorePalInfo_Apply();
 extern void Mu_OnLoop();
 extern void New6C_SummonGfx_FromActionPos();
@@ -7447,22 +7450,15 @@ __asm__(
 );
 /* ProcScr_MuCtrl @0x08A13438 (was data_08A13438): 4 func ptrs symbolized as `.4byte Sym`
    (#143). data_08A13438 kept as an alias label -- referenced by src/sub_807C37C.c. */
+struct ProcCmd ProcScr_MuCtrl[] __attribute__((section(".data.frontier_df4_banim_b.gap83_ctrl"))) = {
+    PROC_NAME((void*)((u8*)gMapanimApi_0 - 0x8)), PROC_SET_END_CB(MuCtr_OnEnd), PROC_SLEEP(0x0), PROC_WHILE(MuCtr_DelayMoveLoop),
+    PROC_LABEL(0x0), PROC_WHILE(MuCtr_WaitForMoveLoop), PROC_WHILE(MuCtr_DelayMoveLoop), PROC_GOTO(0x0),
+    PROC_LABEL(0x1), PROC_END,
+};
+/* data_08A13438: relocatable alias of ProcScr_MuCtrl (referenced by src/sub_807C37C.c). */
 __asm__(
-"	.section .data.frontier_df4_banim_b.gap83_ctrl_asm, \"aw\", %progbits\n"
-"	.global ProcScr_MuCtrl\n"
-"ProcScr_MuCtrl:\n"
 "	.global data_08A13438\n"
-"data_08A13438:\n"
-"	.4byte 0x00000001, gMapanimApi_0 - 0x8\n"
-"	.4byte 0x00000004, MuCtr_OnEnd\n"
-"	.4byte 0x0000000E, 0x00000000\n"
-"	.4byte 0x00000014, MuCtr_DelayMoveLoop\n"
-"	.4byte 0x0000000B, 0x00000000\n"
-"	.4byte 0x00000014, MuCtr_WaitForMoveLoop\n"
-"	.4byte 0x00000014, MuCtr_DelayMoveLoop\n"
-"	.4byte 0x0000000C, 0x00000000\n"
-"	.4byte 0x0001000B, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000000\n"
+"	.set data_08A13438, ProcScr_MuCtrl\n"
 );
 /* frontier_df4_banim_b_084_A13880: map-anim proc-script/command table carve (was INCBIN);
    proc-script/data pointers as .4byte Sym(+addend), STT_FUNC pointers raw hex (ld ORs Thumb bit), byte-exact. */
