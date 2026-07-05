@@ -539,7 +539,8 @@
 5C6080	5C6084	src/bmpatharrowdisp.o(.data)	bmpatharrowdisp .data
 5C6646	5C6668	src/data/bldyLut_10_ref/dat_bldyLut_10_ref.o(.rodata.dat_bldyLut_10_ref)	SubtitleHelpDarkener_BldyLut real lut (34 B, #143)
 5C6668	5C6690	src/data/bldyLut_10_ref/dat_bldyLut_10_ref.o(.rodata.gProcScr_SubtitleHelpDarkener)	gProcScr_SubtitleHelpDarkener proc script[5], 3 fn-ptrs relocatable (#143)
-5C6690	5C6770	src/data/lut_29_ref/dat_lut_29_ref.o(.rodata.dat_lut_29_ref)	lut.29 region-diff (funcmap code-ref, 0KB)
+5C6690	5C6698	src/data/lut_29_ref/dat_lut_29_ref.o(.rodata.dat_lut_29_ref)	SubtitleHelp_TextShowLut show lut (8 B, #148 split)
+5C66D0	5C6770	src/data/lut_29_ref/dat_lut_29_ref.o(.rodata.dat_lut_29_ref_tail)	lut2 (8 B) + data_085C66D8 proc script (160 B, #148 split)
 5C6830	5C6890	src/data/gProcScr_TerrainHealDisplay_ref/dat_gProcScr_TerrainHealDisplay_ref.o(.rodata.dat_gProcScr_TerrainHealDisplay_ref)	gProcScr_TerrainHealDisplay region-diff (funcmap code-ref, 0KB)
 5C6890	5C68F8	src/data/gProcScr_PoisonDamageDisplay_ref/dat_gProcScr_PoisonDamageDisplay_ref.o(.rodata.dat_gProcScr_PoisonDamageDisplay_ref)	gProcScr_PoisonDamageDisplay region-diff (funcmap code-ref, 0KB)
 5C68F8	5C6960	src/data/gProcScr_GorgonEggHatchDisplay_ref/dat_gProcScr_GorgonEggHatchDisplay_ref.o(.rodata.dat_gProcScr_GorgonEggHatchDisplay_ref)	gProcScr_GorgonEggHatchDisplay region-diff (funcmap code-ref, 0KB)

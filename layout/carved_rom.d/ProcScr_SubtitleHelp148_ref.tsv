@@ -1,0 +1,4 @@
+# #148 gProcScr_SubtitleHelp typed struct ProcCmd[] carve (region-same, byte-identical to fe8u).
+# Carved out of the lut_29_ref blob: it was de-pointered and embedded at +8, between the
+# SubtitleHelp_TextShowLut show lut (8 B) and the second show lut + data_085C66D8 proc script.
+5C6698	5C66D0	src/data/ProcScr_SubtitleHelp148_ref/dat_ProcScr_SubtitleHelp148_ref.o(.rodata.dat_ProcScr_SubtitleHelp148_ref)	#148 gProcScr_SubtitleHelp (7 ProcCmd, region-same)

@@ -1,31 +1,26 @@
 /* Migrated from asm/dat_lut_29_ref.s. The GCC label `lut.29` (invalid C identifier)
  * is unreferenced; the only consumer (SubtitleHelp_Loop.c) uses the descriptive
- * alias SubtitleHelp_TextShowLut, so define the bytes directly under that name. */
-/* De-pointered ProcScr SubtitleHelp_TextShowLut: proc callback fn pointers
- * (SubtitleHelp_OnEnd/Init/Loop, thumb-bit +0x1) + a data ref (data_080DCCB2+0x2E,
- * interior-within-size) -> relocations so the proc script is shiftable. */
+ * alias SubtitleHelp_TextShowLut, so define the bytes directly under that name.
+ *
+ * #148: the 56-byte gProcScr_SubtitleHelp proc script that was de-pointered and
+ * embedded here at +8 (between the two show luts) is carved out to a typed
+ * struct ProcCmd[] in src/data/ProcScr_SubtitleHelp148_ref. This file now emits
+ * only the two raw 8-byte show luts + the still-opaque second proc script
+ * data_085C66D8 (consumed by sub_803581C.c), split into two sections so the
+ * typed table can be placed between them by the layout:
+ *   .rodata.dat_lut_29_ref       [5C6690,5C6698)  SubtitleHelp_TextShowLut (8 B lut)
+ *   (gProcScr_SubtitleHelp        [5C6698,5C66D0)  -> the new typed table)
+ *   .rodata.dat_lut_29_ref_tail  [5C66D0,5C6770)  lut2 (8 B) + data_085C66D8 proc
+ * data_085C66D8 keeps its de-pointered fn-ptr relocations; the PROC_NAME data ref
+ * (data_080DCCB2+0x2E, interior-within-size) stays a relocation so it is shiftable. */
 	.section .rodata.dat_lut_29_ref, "a", %progbits
 	.global SubtitleHelp_TextShowLut
 SubtitleHelp_TextShowLut:
 	.4byte 0x94929190
 	.4byte 0x009C9996
-	.4byte 0x00000001
-	.4byte data_080DCCB2 + 0x2E
-	.4byte 0x00000015
-	.4byte 0x00000000
-	.4byte 0x00000004
-	.4byte SubtitleHelp_OnEnd + 0x1
-	.4byte 0x0000000E
-	.4byte 0x00000000
-	.4byte 0x00000002
-	.4byte SubtitleHelp_Init + 0x1
-	.4byte 0x00000003
-	.4byte SubtitleHelp_Loop + 0x1
-	.4byte 0x00000010
-	.4byte 0x00000000
+	.section .rodata.dat_lut_29_ref_tail, "a", %progbits
 	.4byte 0x92908F8E
 	.4byte 0x009A9794
-	.section .rodata.dat_lut_29_ref, "a", %progbits
 	.global data_085C66D8
 data_085C66D8:
 	.4byte 0x00000001
