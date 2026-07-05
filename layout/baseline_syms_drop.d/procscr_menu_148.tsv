@@ -44,3 +44,8 @@ ProcScr_Config_PrepMapMenu
 ProcScr_Config_WorldMap
 ProcScr_ColFadeOut
 ProcScr_ColFadeIn
+ProcScr_EventHorizontalQuakefx
+ProcScr_EventVerticalQuakefx
+ProcScr_EventQuakefx
+ProcScr_UnitTornOut
+ProcScr_WorldFlush
