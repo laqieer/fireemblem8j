@@ -1247,3 +1247,5 @@ SaveMenuSubSelBoxTexts	08A9D64C	data	savemenu sub-select box text-id table
 SlotQueuePop	0800D808	thumb	slot-queue pop (=sub_800D808)
 sProcScr_KOIDOAMM	085C3220	data	KOIDOAMM proc script
 ProcScr_085C3978	085C3978	data
+data_085DFA68	085DFA68	data	sub_8048FC0 Decompress source (sprite-text UI gfx)
+data_085E04C4	085E04C4	data	sub_8048FC0 CopyToPaletteBuffer source (palette)
