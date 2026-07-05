@@ -7384,10 +7384,13 @@ __asm__(
 "	.short 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
 "	.short 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
 );
-/* MU state-func table + proc-scripts carved to relocatable symbol refs (#143 shiftability).
-   gap83 starts 2-aligned (0x08A13256); a typed struct ProcCmd[] would raise the section to
-   4-align and shift every following byte, so the pointers are emitted as pure `.4byte Sym`
-   symbol refs (R_ARM_ABS32, ld ORs the Thumb bit) which keep the section at align 1 -- byte-exact. */
+/* MU state-func table + proc-scripts (#143/#148 shiftability).
+   gap83 starts 2-aligned (0x08A13256); an in-place typed struct ProcCmd[] would raise the
+   whole section to 4-align and shift every following byte. #148 fix: SECTION-SPLIT each proc
+   into its own .gap83_<name> sub-section pinned (via layout/carved_rom.d) to its absolute
+   4-aligned address, with the surrounding sub-word data left as `.4byte`/`.short` asm in
+   adjacent .gap83* sections. ProcScr_Mu/MuBlink/MuRestorePalInfo/MuCtrl are thus typed
+   byte-exact; sMuStateFuncs and the remaining Mu* tables stay as `.4byte Sym` asm. */
 __asm__(
 "	.section .data.frontier_df4_banim_b.gap83, \"aw\", %progbits\n"
 "	.global frontier_df4_banim_b_083_A13256\n"
