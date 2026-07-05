@@ -1,7 +1,7 @@
 #include "global.h"
 #include "proc.h"
 
-/* externs for #148 banim_b carved proc-script pointer targets (relocatable refs) */
+/* #148 externs BEGIN (carved proc-script pointer targets) */
 extern void APProc_Exists();
 extern void AntitoxinPureWaterfx_Init();
 extern void AntitoxinPureWaterfx_Loop();
@@ -109,19 +109,33 @@ extern u8 FrameConf_EfxChillEffectBGCOL[];
 extern u8 FrameConf_EfxMagdhisEffectBG[];
 extern u8 FrameConfig_EfxMagFcastBg4[];
 extern u8 FrameLut_EfxSkill[];
+extern void GenerateSummonUnitDef();
 extern void InitDebugMapAnim();
+extern void LoadSumMonsterFromDK();
 extern void LockGame();
 extern void Loop6C1_EfxLvupBGCOL();
 extern void MADebug_DoBattleAnim();
 extern void MADebug_InitScreen();
+extern void MapAnimEffectAnimator_Init();
+extern void MapAnimEffectAnimator_Loop1();
+extern void MapAnimEffectAnimator_Loop2();
+extern void MapAnimEffect_Unk_2_PlaySe();
 extern void MapAnim_BeginPoisonAnim();
 extern void MapAnim_BeginPoisonAnim2();
+extern void MapAnim_BeginSubjectFastAnim();
 extern void MapAnim_DisplayDeathFade();
 extern void MapAnim_DisplayRoundAnim();
+extern void MapAnim_FreezeSubjectAnim();
 extern void MapAnim_GorgonHatch_Loop();
 extern void MapAnim_InitInfoBox();
+extern void MapAnim_MoveCameraOntoSubject();
+extern void MapAnim_MoveCameraOntoTarget();
+extern void MapAnim_MoveSubjectsAwayFromTarget();
+extern void MapAnim_MoveSubjectsTowardsTarget();
+extern void MapAnim_PlayStealSe();
 extern void MapAnim_PrepareBattleTalk();
 extern void MapAnim_ShowPoisonEffectIfAny();
+extern void MapAnim_StartSubjectDanceAnim();
 extern void MapEventBattle_OnEnd();
 extern void MapEventBattle_SetUpHitData();
 extern void MapInfoBoxShake();
@@ -134,6 +148,7 @@ extern void MapLatonaShiningfx_Start();
 extern void MapLatonafx_Init();
 extern void MapLatonafx_InitGfx();
 extern void MapSpellAnim_CommonEnd();
+extern void New6C_SummonGfx_FromActionPos();
 extern void NightMarefx_End();
 extern void NightMarefx_Loop();
 extern void ProcMAExpBar_FrameAdvance();
@@ -145,13 +160,27 @@ extern void ProcMAExpBar_PlaySound74();
 extern void ProcMapInfoBox_AnimateHp();
 extern void ProcMapInfoBox_OnDraw();
 extern void ProcMapInfoBox_OnEnd();
-extern u8 ProcScr_EkrdragonDemonkingobj_1[];
-extern u8 ProcScr_MuDeathFade[];
+extern struct ProcCmd ProcScr_CritAtkMapEffect[];
+extern struct ProcCmd ProcScr_EggDmgMapEffect1[];
+extern struct ProcCmd ProcScr_EggDmgMapEffect2[];
+extern struct ProcCmd ProcScr_EkrdragonDemonkingobj_1[];
+extern void ProcScr_MapAnimEnd();
+extern struct ProcCmd ProcScr_MuDeathFade[];
+extern void ProcSummonDK_CheckIsEnough();
+extern void ProcSummonDK_InitCounters();
+extern void ProcSummonDK_ResetCounter();
+extern void ProcSummonDK_SelectDownPos();
+extern void ProcSummonDK_SelectLeftPos();
+extern void ProcSummonDK_SelectRightPos();
+extern void ProcSummonDK_SelectUpPos();
 extern void SummonGfxAnim_Cleanup();
 extern void SummonUnitGfx_Init();
 extern void UnlockGame();
 extern void WallBreakAnim_Init();
+extern void WarpFlashy_Init();
+extern void WarpFlashy_Loop();
 extern u8 data_080ED67C[];
+extern u8 data_08A156DC[];
 extern void efxCriricalEffectBGCOLMain();
 extern void efxCriricalEffectBGMain();
 extern void efxCriricalEffectMain();
@@ -193,6 +222,7 @@ extern void sub_807F860();
 extern void x0807E9C5();
 extern void x0808F44D();
 extern u8 x08A13B90[];
+/* #148 externs END */
 
 /* Migrated from asm/frontier_df4_banim_b.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
@@ -7397,40 +7427,48 @@ __asm__(
 "	.section .data.frontier_df4_banim_b.gap84, \"aw\", %progbits\n"
 "	.global frontier_df4_banim_b_084_A13880\n"
 "frontier_df4_banim_b_084_A13880:\n"
-"	.4byte 0x00000002, LockGame + 0x1, 0x00000002, MapAnim_MoveCameraOntoSubject + 0x1, 0x0002000E, 0x00000000\n"
-"	.4byte 0x00000002, MapAnim_InitInfoBox + 0x1, 0x000F000E, 0x00000000, 0x00010006, data_08A156DC + 0x38\n"
-"	.4byte 0x0001000E, 0x00000000, 0x0000000D, ProcScr_MapAnimEnd, 0x00000002, LockGame + 0x1\n"
-"	.4byte 0x00000002, MapAnim_MoveCameraOntoSubject + 0x1, 0x0002000E, 0x00000000, 0x00000002, MapAnim_InitInfoBox + 0x1\n"
-"	.4byte 0x000F000E, 0x00000000, 0x00010006, ProcScr_EggDmgMapEffect1, 0x0001000E, 0x00000000\n"
-"	.4byte 0x00010006, ProcScr_EggDmgMapEffect2, 0x0001000E, 0x00000000, 0x0000000D, ProcScr_MapAnimEnd\n"
-"	.4byte 0x00000002, LockGame + 0x1, 0x00000002, MapAnim_MoveCameraOntoSubject + 0x1, 0x0002000E, 0x00000000\n"
-"	.4byte 0x00000002, MapAnim_InitInfoBox + 0x1, 0x000F000E, 0x00000000, 0x00010006, ProcScr_CritAtkMapEffect\n"
-"	.4byte 0x0001000E, 0x00000000, 0x0000000D, ProcScr_MapAnimEnd, 0x00000002, LockGame + 0x1\n"
-"	.4byte 0x00000002, MapAnim_MoveCameraOntoTarget + 0x1, 0x0002000E, 0x00000000, 0x00000002, MapAnim_MoveCameraOntoSubject + 0x1\n"
-"	.4byte 0x0002000E, 0x00000000, 0x0014000E, 0x00000000, 0x00000002, MapAnim_BeginSubjectFastAnim + 0x1\n"
-"	.4byte 0x00000002, MapAnim_MoveSubjectsTowardsTarget + 0x1, 0x0001000E, 0x00000000, 0x00000002, MapAnim_MoveSubjectsTowardsTarget + 0x1\n"
-"	.4byte 0x0001000E, 0x00000000, 0x00000002, MapAnim_MoveSubjectsTowardsTarget + 0x1, 0x0001000E, 0x00000000\n"
-"	.4byte 0x00000002, MapAnim_MoveSubjectsTowardsTarget + 0x1, 0x0001000E, 0x00000000, 0x00000002, MapAnim_PlayStealSe + 0x1\n"
-"	.4byte 0x0014000E, 0x00000000, 0x00000002, MapAnim_MoveSubjectsAwayFromTarget + 0x1, 0x0001000E, 0x00000000\n"
-"	.4byte 0x00000002, MapAnim_MoveSubjectsAwayFromTarget + 0x1, 0x0001000E, 0x00000000, 0x00000002, MapAnim_MoveSubjectsAwayFromTarget + 0x1\n"
-"	.4byte 0x0001000E, 0x00000000, 0x00000002, MapAnim_MoveSubjectsAwayFromTarget + 0x1, 0x0014000E, 0x00000000\n"
-"	.4byte 0x0000000D, ProcScr_MapAnimEnd, 0x00000002, LockGame + 0x1, 0x00000002, GenerateSummonUnitDef + 0x1\n"
-"	.4byte 0x00000002, New6C_SummonGfx_FromActionPos + 0x1, 0x0005000E, 0x00000000, 0x0000000D, ProcScr_MapAnimEnd\n"
-"	.4byte 0x00000002, LockGame + 0x1, 0x00000002, ProcSummonDK_InitCounters + 0x1, 0x0000000B, 0x00000000\n"
-"	.4byte 0x00000002, ProcSummonDK_SelectDownPos + 0x1, 0x0005000E, 0x00000000, 0x00000002, LoadSumMonsterFromDK + 0x1\n"
-"	.4byte 0x00000002, ProcSummonDK_ResetCounter + 0x1, 0x0005000E, 0x00000000, 0x0003000B, 0x00000000\n"
-"	.4byte 0x00000002, ProcSummonDK_SelectRightPos + 0x1, 0x0005000E, 0x00000000, 0x00000002, LoadSumMonsterFromDK + 0x1\n"
-"	.4byte 0x00000002, ProcSummonDK_ResetCounter + 0x1, 0x0005000E, 0x00000000, 0x0004000B, 0x00000000\n"
-"	.4byte 0x00000002, ProcSummonDK_SelectLeftPos + 0x1, 0x0005000E, 0x00000000, 0x00000002, LoadSumMonsterFromDK + 0x1\n"
-"	.4byte 0x00000002, ProcSummonDK_ResetCounter + 0x1, 0x0005000E, 0x00000000, 0x0005000B, 0x00000000\n"
-"	.4byte 0x00000002, ProcSummonDK_SelectUpPos + 0x1, 0x0005000E, 0x00000000, 0x00000002, LoadSumMonsterFromDK + 0x1\n"
-"	.4byte 0x00000002, ProcSummonDK_ResetCounter + 0x1, 0x0005000E, 0x00000000, 0x0006000B, 0x00000000\n"
-"	.4byte 0x00000002, ProcSummonDK_CheckIsEnough + 0x1, 0x0001000B, 0x00000000, 0x0000000D, ProcScr_MapAnimEnd\n"
-"	.4byte 0x00000002, LockGame + 0x1, 0x00000002, MapAnim_MoveCameraOntoSubject + 0x1, 0x0002000E, 0x00000000\n"
-"	.4byte 0x0014000E, 0x00000000, 0x00000002, MapAnim_StartSubjectDanceAnim + 0x1, 0x0050000E, 0x00000000\n"
-"	.4byte 0x00000002, StartDanceringAnim + 0x1, 0x000A000E, 0x00000000, 0x00000002, MapAnim_FreezeSubjectAnim + 0x1\n"
-"	.4byte 0x0014000E, 0x00000000, 0x0000000D, ProcScr_MapAnimEnd\n"
 );
+struct ProcCmd ProcScr_MapAnimPoisonDmg[] __attribute__((section(".data.frontier_df4_banim_b.gap84"))) = {
+    PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)MapAnim_MoveCameraOntoSubject + 0x1)), PROC_SLEEP(0x2), PROC_CALL((void*)((u8*)MapAnim_InitInfoBox + 0x1)),
+    PROC_SLEEP(0xF), PROC_START_CHILD_BLOCKING((void*)((u8*)data_08A156DC + 0x38)), PROC_SLEEP(0x1), PROC_JUMP(ProcScr_MapAnimEnd),
+};
+struct ProcCmd ProcScr_MapAnimEggDmg[] __attribute__((section(".data.frontier_df4_banim_b.gap84"))) = {
+    PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)MapAnim_MoveCameraOntoSubject + 0x1)), PROC_SLEEP(0x2), PROC_CALL((void*)((u8*)MapAnim_InitInfoBox + 0x1)),
+    PROC_SLEEP(0xF), PROC_START_CHILD_BLOCKING(ProcScr_EggDmgMapEffect1), PROC_SLEEP(0x1), PROC_START_CHILD_BLOCKING(ProcScr_EggDmgMapEffect2),
+    PROC_SLEEP(0x1), PROC_JUMP(ProcScr_MapAnimEnd),
+};
+struct ProcCmd ProcScr_MapAnimCritAtk[] __attribute__((section(".data.frontier_df4_banim_b.gap84"))) = {
+    PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)MapAnim_MoveCameraOntoSubject + 0x1)), PROC_SLEEP(0x2), PROC_CALL((void*)((u8*)MapAnim_InitInfoBox + 0x1)),
+    PROC_SLEEP(0xF), PROC_START_CHILD_BLOCKING(ProcScr_CritAtkMapEffect), PROC_SLEEP(0x1), PROC_JUMP(ProcScr_MapAnimEnd),
+};
+struct ProcCmd ProcScr_MapAnimSteal[] __attribute__((section(".data.frontier_df4_banim_b.gap84"))) = {
+    PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)MapAnim_MoveCameraOntoTarget + 0x1)), PROC_SLEEP(0x2), PROC_CALL((void*)((u8*)MapAnim_MoveCameraOntoSubject + 0x1)),
+    PROC_SLEEP(0x2), PROC_SLEEP(0x14), PROC_CALL((void*)((u8*)MapAnim_BeginSubjectFastAnim + 0x1)), PROC_CALL((void*)((u8*)MapAnim_MoveSubjectsTowardsTarget + 0x1)),
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnim_MoveSubjectsTowardsTarget + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnim_MoveSubjectsTowardsTarget + 0x1)),
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnim_MoveSubjectsTowardsTarget + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnim_PlayStealSe + 0x1)),
+    PROC_SLEEP(0x14), PROC_CALL((void*)((u8*)MapAnim_MoveSubjectsAwayFromTarget + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnim_MoveSubjectsAwayFromTarget + 0x1)),
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnim_MoveSubjectsAwayFromTarget + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnim_MoveSubjectsAwayFromTarget + 0x1)),
+    PROC_SLEEP(0x14), PROC_JUMP(ProcScr_MapAnimEnd),
+};
+struct ProcCmd ProcScr_MapAnimSummon[] __attribute__((section(".data.frontier_df4_banim_b.gap84"))) = {
+    PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)GenerateSummonUnitDef + 0x1)), PROC_CALL((void*)((u8*)New6C_SummonGfx_FromActionPos + 0x1)), PROC_SLEEP(0x5),
+    PROC_JUMP(ProcScr_MapAnimEnd),
+};
+struct ProcCmd ProcScr_MapAnimSumDK[] __attribute__((section(".data.frontier_df4_banim_b.gap84"))) = {
+    PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)ProcSummonDK_InitCounters + 0x1)), PROC_LABEL(0x0), PROC_CALL((void*)((u8*)ProcSummonDK_SelectDownPos + 0x1)),
+    PROC_SLEEP(0x5), PROC_CALL((void*)((u8*)LoadSumMonsterFromDK + 0x1)), PROC_CALL((void*)((u8*)ProcSummonDK_ResetCounter + 0x1)), PROC_SLEEP(0x5),
+    PROC_LABEL(0x3), PROC_CALL((void*)((u8*)ProcSummonDK_SelectRightPos + 0x1)), PROC_SLEEP(0x5), PROC_CALL((void*)((u8*)LoadSumMonsterFromDK + 0x1)),
+    PROC_CALL((void*)((u8*)ProcSummonDK_ResetCounter + 0x1)), PROC_SLEEP(0x5), PROC_LABEL(0x4), PROC_CALL((void*)((u8*)ProcSummonDK_SelectLeftPos + 0x1)),
+    PROC_SLEEP(0x5), PROC_CALL((void*)((u8*)LoadSumMonsterFromDK + 0x1)), PROC_CALL((void*)((u8*)ProcSummonDK_ResetCounter + 0x1)), PROC_SLEEP(0x5),
+    PROC_LABEL(0x5), PROC_CALL((void*)((u8*)ProcSummonDK_SelectUpPos + 0x1)), PROC_SLEEP(0x5), PROC_CALL((void*)((u8*)LoadSumMonsterFromDK + 0x1)),
+    PROC_CALL((void*)((u8*)ProcSummonDK_ResetCounter + 0x1)), PROC_SLEEP(0x5), PROC_LABEL(0x6), PROC_CALL((void*)((u8*)ProcSummonDK_CheckIsEnough + 0x1)),
+    PROC_LABEL(0x1), PROC_JUMP(ProcScr_MapAnimEnd),
+};
+struct ProcCmd ProcScr_MapAnimDance[] __attribute__((section(".data.frontier_df4_banim_b.gap84"))) = {
+    PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)MapAnim_MoveCameraOntoSubject + 0x1)), PROC_SLEEP(0x2), PROC_SLEEP(0x14),
+    PROC_CALL((void*)((u8*)MapAnim_StartSubjectDanceAnim + 0x1)), PROC_SLEEP(0x50), PROC_CALL((void*)((u8*)StartDanceringAnim + 0x1)), PROC_SLEEP(0xA),
+    PROC_CALL((void*)((u8*)MapAnim_FreezeSubjectAnim + 0x1)), PROC_SLEEP(0x14), PROC_JUMP(ProcScr_MapAnimEnd),
+};
 
 /* frontier_df4_banim_b_085_A13CD0: atomic relocation carve (was INCBIN); every embedded ROM pointer in coherent pointer tables expressed as .4byte Sym(+addend), byte-exact. */
 __asm__(
