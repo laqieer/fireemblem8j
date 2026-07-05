@@ -83,7 +83,12 @@
 9CD958	9CDD18	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap80)	df4_banim_b region-diff data (960 B, long-tail gap)
 9CF318	9CFD20	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap81)	df4_banim_b region-diff data (2568 B, long-tail gap)
 A12AC0	A1313A	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap82)	df4_banim_b region-diff data (1658 B, long-tail gap)
-A13256	A13488	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83)	df4_banim_b region-diff data (562 B, long-tail gap)
+A13256	A13320	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83)	frame data + sMuStateFuncs + ProcScr_Mu(asm) + MuDeathFade
+A13320	A13330	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83_blink)	ProcScr_MuBlink struct[2] (section-split)
+A13330	A13380	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83_c)	MuBlink palette lut + ProcScr_MuPixelEffect(asm)
+A13380	A13398	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83_rpi)	ProcScr_MuRestorePalInfo struct[3] (section-split)
+A13398	A13438	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83_d)	ProcScr_MuCritFlash + ProcScr_MuHitFlash(asm)
+A13438	A13488	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83_ctrl_asm)	ProcScr_MuCtrl + data_08A13438(asm)
 A13880	A13B90	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap84)	df4_banim_b region-diff data (784 B, long-tail gap)
 A13CD0	A141F4	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap85)	gap85 part1 (1316 B)
 A141F4	A14209	src/AntitoxinPureWaterfx_Loop.o(.data)	AntitoxinPureWaterfx_Loop lut.3 (gap split)
