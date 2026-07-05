@@ -1,8 +1,4 @@
 	.syntax unified
-	.set GenerateExtendedMovementMapOnRange, 0x0801A108 + 1
-	.set GetUnitMovementCost, 0x08018A60 + 1
-	.set NextRN_N, 0x08000C58 + 1
-	.set sub_803BD70, 0x0803BD70 + 1
 	.section .text.sub_807C8DC, "ax", %progbits
 @ AdjustNewUnitPosition @ JP 0x0807C8DC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -150,7 +146,7 @@ _0807C9D0:
 	adds r0, r3, #0
 	adds r1, r4, #0
 	adds r3, r6, #0
-	bl sub_803BD70
+	bl AiGetUnitClosestValidPosition
 _0807C9FC:
 	add sp, #0x20
 	pop {r3, r4}
