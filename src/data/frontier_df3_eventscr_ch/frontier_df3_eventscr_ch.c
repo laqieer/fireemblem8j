@@ -4193,7 +4193,21 @@ EventListScr frontier_df3_eventscr_ch_017_A6F47C[] __attribute__((section(".data
     EVBIT_T(7)
     ENDA
 };
-u8 frontier_df3_eventscr_ch_018_A6FAE4[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap18"))) = INCBIN_U8("graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_018_A6FAE4.gbapal");
+/* #143 shiftability: gap18 is a residual event-script fragment (mis-dumped as a
+ * .gbapal blob) whose offset-0xC word was a raw un-relocatable pointer to the unit
+ * definition UnitDef_Ch14BAlly_7 (a LOAD_UNITS operand). Split the INCBIN around it
+ * and emit .4byte <sym> so ld emits an R_ARM_ABS32; the target is STT_OBJECT (even
+ * address 0x08A602F0) so no Thumb bit is applied. Byte-exact: 0xC + 4 + 0x10 = 0x20. */
+__asm__(
+"\t.section .data.frontier_df3_eventscr_ch.gap18, \"aw\", %progbits\n"
+"\t.global frontier_df3_eventscr_ch_018_A6FAE4\n"
+"\t.type frontier_df3_eventscr_ch_018_A6FAE4, %object\n"
+"frontier_df3_eventscr_ch_018_A6FAE4:\n"
+"\t.incbin \"graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_018_A6FAE4.gbapal\", 0x0, 0xC\n"
+"\t.4byte UnitDef_Ch14BAlly_7\n"
+"\t.incbin \"graphics/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_018_A6FAE4.gbapal\", 0x10, 0x10\n"
+"\t.size frontier_df3_eventscr_ch_018_A6FAE4, 0x20\n"
+);
 EventListScr frontier_df3_eventscr_ch_019_A6FB48[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap19"))) = {
     ENUF(0xC)
     COUNTER_SET(1, 1)
