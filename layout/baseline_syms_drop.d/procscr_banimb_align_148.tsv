@@ -1,0 +1,10 @@
+# #148 alignment-locked proc scripts, section-split migration.
+# These procs sit at 4-aligned absolute addresses but inside gap sections that
+# START at 2/3-mod-4 offsets, so an in-place typed `struct ProcCmd[]` (4-aligned)
+# would insert a pad byte and shift the ROM tail. The fix: pin each proc cluster to
+# its OWN standalone `.gapN_procs` section at its exact 4-aligned address, with the
+# sub-word leading pad kept in a 1-aligned `.gapN_head` section. Drop the baseline
+# .set definitions so the linker uses the carved typed definitions.
+ProcScr_MapanimStaffeffect_0
+ProcScr_MapAnimEffectAnimator
+ProcScr_MapAnimWarpFlashy

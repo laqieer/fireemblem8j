@@ -7575,16 +7575,22 @@ struct ProcCmd ProcScr_MapAnimAntitoxinPureWaterfx[] __attribute__((section(".da
    pointers kept as literals per this file's idiom (each isolated, not a >=4 coherent table
    -> shiftcheck-neutral). Leading .byte pad reaches the absolute 4-aligned boundary. */
 __asm__(
-"	.section .data.frontier_df4_banim_b.gap85b, \"aw\", %progbits\n"
+"	.section .data.frontier_df4_banim_b.gap85b_head, \"aw\", %progbits\n"
 "	.global frontier_df4_banim_b_085b_A14209\n"
 "frontier_df4_banim_b_085b_A14209:\n"
 "	.byte 0x00, 0x00, 0x00\n"
-"	.4byte 0x0001000E, 0x00000000, 0x00000002, MapAnimEffect_Unk_2_PlaySe + 0x1, 0x0064000E, 0x00000000, 0x00000000, 0x00000000\n"
-"	.4byte 0x0001000E, 0x00000000, 0x00000002, MapAnimEffectAnimator_Init + 0x1, 0x00000003, MapAnimEffectAnimator_Loop1 + 0x1, 0x001E000E, 0x00000000\n"
-"	.4byte 0x00000003, MapAnimEffectAnimator_Loop2 + 0x1, 0x00000002, MapSpellAnim_CommonEnd + 0x1, 0x00000000, 0x00000000, 0x0001000E, 0x00000000\n"
-"	.4byte 0x00000002, WarpFlashy_Init + 0x1, 0x00000003, WarpFlashy_Loop + 0x1, 0x0001000E, 0x00000000, 0x00000002, MapSpellAnim_CommonEnd + 0x1\n"
-"	.4byte 0x00000000, 0x00000000\n"
 );
+struct ProcCmd ProcScr_MapanimStaffeffect_0[] __attribute__((section(".data.frontier_df4_banim_b.gap85b_procs"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnimEffect_Unk_2_PlaySe + 0x1)), PROC_SLEEP(0x64), PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimEffectAnimator[] __attribute__((section(".data.frontier_df4_banim_b.gap85b_procs"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnimEffectAnimator_Init + 0x1)), PROC_REPEAT((void*)((u8*)MapAnimEffectAnimator_Loop1 + 0x1)), PROC_SLEEP(0x1E),
+    PROC_REPEAT((void*)((u8*)MapAnimEffectAnimator_Loop2 + 0x1)), PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimWarpFlashy[] __attribute__((section(".data.frontier_df4_banim_b.gap85b_procs"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)WarpFlashy_Init + 0x1)), PROC_REPEAT((void*)((u8*)WarpFlashy_Loop + 0x1)), PROC_SLEEP(0x1),
+    PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
+};
 __asm__(
 "	.section .data.frontier_df4_banim_b.gap85bb, \"aw\", %progbits\n"
 "	.global frontier_df4_banim_b_085b_A14209_b\n"
