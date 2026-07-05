@@ -9413,3 +9413,66 @@ still re-verifies every byte, so a stale cache can never silently pass).
 concurrently OOM-killed the WSL2 VM (host terminated `vmmem`) — see
 `docs/incident-2026-07-04-wsl2-dwarf-oom.md`. Standing rule: never run two DWARF passes at once on that ELF;
 `nm -n` (no `-l`) is cheap; validate DWARF logic on small targets; `.wslconfig` big-swap + memory-cap fix.
+
+## D349 — Discussion #149: SMT/Z3 equivalence proving for non-matching functions is a confidence tier BELOW byte-match, not an oracle substitute; PoC works on real FE8J THUMB (2026-07-05)
+
+**Context.** Open Discussion #149 (Ideas) asked, from Serentty's MIPS→Z3
+experiment: is proving *functional equivalence* of non-byte-matching decompiled
+functions viable, what is the prior art, and (macabeus) does the prover account
+for **timing** and **MMIO**? FE8J had zero prior symbolic-execution/equivalence
+work. Resolved by building a runnable PoC and a technical write-up rather than
+prose alone (evidence-first project ethos).
+
+**Verdict.** Machine-code equivalence checking is real and demonstrably works on
+FE8J THUMB, but ONLY as a **confidence annotation strictly below byte-match**,
+under an explicit machine/ABI/environment model, and only for the SMT-decidable
+fragment (small, loop-free, leaf, mostly-linear). The oracle stays `make compare`
+(SHA-1). This adds a rung to the existing NON_MATCHING ladder
+(`docs/nonmatching.md`): (1) byte-match = oracle, (2) descriptive asm, (3)
+NON_MATCHING C (bytes still from asm), (4) **SMT equivalence proof = an annotation
+on tier 3**. It never authorises non-matching bytes into the checksum build and is
+NOT on the critical path to 100% `make compare`.
+
+**Timing/MMIO answer (macabeus).** The prover accounts for them only if you put
+them in the *observable*. Three increasing notions: **ABI-functional** (return
+regs + callee-saved/sp restored + RAM final state); **observational** (+ ordered
+volatile **MMIO trace of reads AND writes**: kind/addr/width/value — a write
+later overwritten still had a HW effect, and reads can be side-effectful);
+**cycle-exact** (+ a real GBA timing model: region/wait-states, seq vs non-seq,
+prefetch, DMA/IRQ, alignment — a naive instruction count is NOT this). Timing-
+sensitive routines (IRQ/HBlank/DMA/serial/audio) must NOT be accepted on
+functional/observational equivalence alone; **byte-match remains the only
+practical cycle+MMIO-exactness guarantee**.
+
+**PoC (`scripts/tools/thumb_equiv/`, Python + z3-solver).** Hand-rolled ARMv4T
+THUMB decoder + Z3 symbolic executor (r0–r15, NZCV, byte-addressed memory arrays;
+stack in a separate array so SP scratch is excluded; ROM read-only; addresses in
+`[0x04000000,0x05000000)` = volatile MMIO events). `demo.py`: (A) two byte-diff
+encodings of `x*9` → PROVEN equivalent; (B) add-vs-sub → REFUTED with concrete
+counterexample (soundness); (C/D) same architectural result, different MMIO
+write/read pattern → functional-EQUIV but observational-REFUTED. `real_smoke.py`:
+lifts the ACTUAL ROM bytes of `AiScriptCmd_14_DoNothing`, `GetGameClock`
+(literal-pool load) and `BG0Shaker_Init` and proves each equivalent to a
+byte-different rewrite. Both scripts exit non-zero on an unexpected verdict
+(regression self-tests). Run via `$HOME/z3-venv`.
+
+**Honest limits (documented, not oversold).** One basic block only (no
+branches/loops/`bl`; loops need bounded unrolling or invariants; non-leaf needs
+callee summaries); partial THUMB subset; **nonlinear** mul/division is the classic
+bit-vector-SMT blow-up (symbolic×symbolic `mul` hung the solver — a real ceiling,
+not a silver bullet); no-alias stack/pointer assumption; value-carrying volatile
+reads need a shared read-oracle. Proves equivalence UNDER THE MODEL, not
+unconditionally. For real use, build on a sound lifter (Ghidra P-code / Sail-ARM /
+angr) rather than the hand decoder.
+
+**Prior art cited.** Translation validation (Pnueli/Necula); Alive/Alive2;
+CompCert; superoptimizer verification (Bansal–Aiken, STOKE); sequential
+equivalence checking (EDA); lifters angr/BAP/Miasm/Remill/BINSEC/rev.ng; formal
+ISA semantics Sail-ARM/HOL4/K/SLEIGH-p-code; decomp aids decomp.me/asm-differ/
+objdiff/m2c/permuter (matching/diff aids, NOT SMT proofs). No known matching-decomp
+workflow accepts non-byte-matching C into the checksum build on an SMT proof.
+
+**Deliverables.** `docs/equivalence_proving.md` (full write-up),
+`scripts/tools/thumb_equiv/` (tool + README + self-tests), this entry, and a
+resolution comment on Discussion #149. Zero oracle-path changes → `make compare`
+unaffected. Approach reviewed with the rubber-duck agent.
