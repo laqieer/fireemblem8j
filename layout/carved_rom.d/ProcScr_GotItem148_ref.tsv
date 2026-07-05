@@ -1,0 +1,4 @@
+# #148 ProcScr_GotItem typed struct ProcCmd[] carve (region-same, byte-identical to fe8u).
+# Absorbs the former PopupScr_ItemWasPilfered_ref over-span (8 B @5BA094) + the
+# de-pointered data_085BA09C residue (40 B @5BA09C) into one 48 B typed table.
+5BA094	5BA0C4	src/data/ProcScr_GotItem148_ref/dat_ProcScr_GotItem148_ref.o(.rodata.dat_ProcScr_GotItem148_ref)	#148 ProcScr_GotItem (6 ProcCmd, region-same)

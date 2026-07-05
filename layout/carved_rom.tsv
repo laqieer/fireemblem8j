@@ -508,7 +508,7 @@
 5B9F24	5B9FAC	src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p684.o(.rodata.dat_worldmap_gmapunit_p684)	dat_worldmap_gmapunit_p684 region-same per-sym shifted (0KB)
 5B9FAC	5BA00C	src/data/ProcScr_Popup_ref/dat_ProcScr_Popup_ref.o(.rodata.dat_ProcScr_Popup_ref)	ProcScr_Popup region-diff (funcmap code-ref, 0KB)
 5BA014	5BA054	src/data/PopupScr_GotItem_ref/dat_PopupScr_GotItem_ref.o(.rodata.dat_PopupScr_GotItem_ref)	PopupScr_GotItem region-diff (funcmap code-ref, 0KB)
-5BA054	5BA09C	src/data/PopupScr_ItemWasPilfered_ref/dat_PopupScr_ItemWasPilfered_ref.o(.rodata.dat_PopupScr_ItemWasPilfered_ref)	PopupScr_ItemWasPilfered region-diff (funcmap code-ref, 0KB)
+5BA054	5BA094	src/data/PopupScr_ItemWasPilfered_ref/dat_PopupScr_ItemWasPilfered_ref.o(.rodata.dat_PopupScr_ItemWasPilfered_ref)	PopupScr_ItemWasPilfered region-diff (funcmap code-ref, 0KB)
 5BA134	5BA174	src/data/PopupScr_StoleItem_ref/dat_PopupScr_StoleItem_ref.o(.rodata.dat_PopupScr_StoleItem_ref)	PopupScr_StoleItem region-diff (funcmap code-ref, 0KB)
 5BA174	5BA1B4	src/data/PopupScr_ItemStolen_ref/dat_PopupScr_ItemStolen_ref.o(.rodata.dat_PopupScr_ItemStolen_ref)	PopupScr_ItemStolen region-diff (funcmap code-ref, 0KB)
 5BA1B4	5BA1F4	src/data/PopupScr_WpnBroken_ref/dat_PopupScr_WpnBroken_ref.o(.rodata.dat_PopupScr_WpnBroken_ref)	PopupScr_WpnBroken region-diff (funcmap code-ref, 0KB)
