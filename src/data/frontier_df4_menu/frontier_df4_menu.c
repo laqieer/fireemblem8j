@@ -1,6 +1,10 @@
 #include "global.h"
 #include "proc.h"
 
+/* #148 gProcScr_ClassIntro_FlareFX externs (gap34, batch 6d). */
+extern void ClassIntroFlare_Init();
+extern void ClassIntroFlare_Loop();
+
 /* #148 gProcScr_Shop / gProcScr_GoldBox externs (gap37, batch 6c). */
 extern u8 frontier_df4_menu_037_AB7144[];
 extern void FadeInBlackSpeed20();
@@ -4399,8 +4403,17 @@ __asm__(
 "	.4byte 0x00000000, 0x00000000, 0x00000001, gUnkData_ClassIntroBgConfig + 0x30, 0x0001000E, 0x00000000\n"
 "	.4byte 0x00000002, ClassIntroIcon_Init + 0x1, 0x00000003, ClassIntroIcon_LoopFadeIn + 0x1, 0x00000003, ClassIntroIcon_LoopDisplay + 0x1\n"
 "	.4byte 0x0004000B, 0x00000000, 0x00000003, ClassIntroIcon_LoopFadeOut + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x0001000E, 0x00000000, 0x00000002, ClassIntroFlare_Init + 0x1, 0x00000005, gProcScr_ClassIntro_FlareFX + 0x30\n"
-"	.4byte 0x00000003, ClassIntroFlare_Loop + 0x1, 0x001E000E, 0x00000000, 0x00000000, 0x00000000\n"
+);
+struct ProcCmd gProcScr_ClassIntro_FlareFX[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = {
+    PROC_SLEEP(0x1),
+    PROC_CALL((void*)((u8*)ClassIntroFlare_Init + 0x1)),
+    PROC_START_CHILD((void*)((u8*)gProcScr_ClassIntro_FlareFX + 0x30)),
+    PROC_REPEAT((void*)((u8*)ClassIntroFlare_Loop + 0x1)),
+    PROC_SLEEP(0x1E),
+    PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_menu.gap34, \"aw\", %progbits\n"
 "	.4byte 0x001E000E, 0x00000000, 0x00000002, ClassIntroBurst_Init + 0x1, 0x00000003, ClassIntroBurst_Loop + 0x1\n"
 "	.4byte 0x00000000, 0x00000000, 0x0000000E, 0x00000000, 0x00080018, NewFadeOut + 0x1\n"
 "	.4byte 0x00000014, FadeOutExists + 0x1, 0x00000002, ClassInfoDisplay_Init + 0x1, 0x00000004, ClassInfoDisplay_OnEnd + 0x1\n"
