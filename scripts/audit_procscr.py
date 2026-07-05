@@ -41,7 +41,11 @@ def fe8u_procscr_names():
 def fe8j_typed_defs():
     """name -> set(files) of `struct ProcCmd NAME[]` definitions in fe8j src/."""
     out = collections.defaultdict(set)
-    pat = re.compile(r"struct ProcCmd ([A-Za-z_]\w*)\s*\[\s*\]")
+    # Mirror fe8u_procscr_names(): tolerate the `CONST_DATA`/`const` qualifier that
+    # sits between `struct ProcCmd` and the array name (e.g. `struct ProcCmd
+    # CONST_DATA gProcScr_FaceChibiSpr[]`). Without this, such tables were captured
+    # as name "CONST_DATA" and the real symbol fell through to a false OPAQUE.
+    pat = re.compile(r"struct ProcCmd (?:CONST_DATA |const )?([A-Za-z_]\w*)\s*\[\s*\]")
     for f in glob.glob("src/**/*.c", recursive=True):
         try:
             t = open(f, errors="replace").read()
