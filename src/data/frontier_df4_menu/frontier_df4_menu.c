@@ -1,6 +1,10 @@
 #include "global.h"
 #include "proc.h"
 
+/* #148 ProcScr_CallExtraMap externs (gap27c, batch 6e). */
+extern u8 SaveDrawCursorYOffsetLut[];
+extern void SaveBgUp_Loop();
+
 /* #148 gProcScr_ClassIntro_FlareFX externs (gap34, batch 6d). */
 extern void ClassIntroFlare_Init();
 extern void ClassIntroFlare_Loop();
@@ -4022,15 +4026,17 @@ __asm__(
 "	.4byte SqMask_Loop\n"
 "	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin\", 0x21E, 0x8\n"
 );
+struct ProcCmd ProcScr_CallExtraMap[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
+    PROC_NAME((void*)((u8*)SaveDrawCursorYOffsetLut + 0x23)),
+    PROC_SLEEP(0x1),
+    PROC_REPEAT(SaveBgUp_Loop),
+    PROC_END,
+};
 __asm__(
-"\t.section .data.frontier_df4_menu.gap27c, \"aw\", %progbits\n"
-"\t.global data_08A9D688\n"
-"data_08A9D688:\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin\", 0x226, 0x4\n"
-"	.4byte SaveDrawCursorYOffsetLut + 0x23\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin\", 0x22E, 0xC\n"
-"	.4byte SaveBgUp_Loop\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin\", 0x23E, 0x1B6\n"
+"	.global data_08A9D688\n"
+"	.set data_08A9D688, ProcScr_CallExtraMap\n"
+"	.section .data.frontier_df4_menu.gap27c, \"aw\", %progbits\n"
+"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin\", 0x246, 0x1AE\n"
 );
 __asm__(
     ".section .data.frontier_df4_menu.gap28, \"aw\", %progbits\n"
