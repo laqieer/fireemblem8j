@@ -1,6 +1,199 @@
 #include "global.h"
 #include "proc.h"
 
+/* externs for #148 banim_b carved proc-script pointer targets (relocatable refs) */
+extern void APProc_Exists();
+extern void AntitoxinPureWaterfx_Init();
+extern void AntitoxinPureWaterfx_Loop();
+extern u8 BnaimFrames_DkMiss[];
+extern void DemonKingDeadWhiteOut();
+extern void EfxBlackInOutUnitMain();
+extern void EfxChillAnime_Loop();
+extern void EfxChillEffectBGMain();
+extern void EfxChillEffectMain();
+extern void EfxClasschgBgMain();
+extern void EfxClasschgCloneCallBack();
+extern void EfxClasschgCloneMain();
+extern void EfxClasschgFinMain();
+extern void EfxClasschgOBJDiffusionMain();
+extern void EfxClasschgOBJDropMain();
+extern void EfxClasschgOBJGainMain();
+extern void EfxClasschgRSTMain();
+extern void EfxDanceOBJMain();
+extern void EfxFlashFXMain();
+extern void EfxHurtmutEff00Main();
+extern void EfxKingPikaMain();
+extern void EfxLokmsunaIOBJMain();
+extern void EfxLokmsunaMain();
+extern void EfxLvupBg2Main();
+extern void EfxLvupOBJ2CallBack();
+extern void EfxMagdhisEffectBGMain();
+extern void EfxMagdhisEffectMain();
+extern void EfxMagfcastBGMain();
+extern void EfxMagfcastMain();
+extern void EfxMantBatabata_Loop1();
+extern void EfxMantBatabata_Loop2();
+extern void EfxSRankWeaponEffectBGMain();
+extern void EfxSRankWeaponEffectMain();
+extern void EfxSkillCommonBG_FreezeAnims();
+extern void EfxSkillCommonBG_MoveCamToOther();
+extern void EfxSkillCommonBG_MoveCamToSelf();
+extern void EfxSkillCommonBG_PlaySfx();
+extern void EfxSkillCommonBG_UnfreezeAnims();
+extern void EfxSkillType01BGMain();
+extern void EfxSongOBJ2Main();
+extern void EfxSpecalEffectMain();
+extern void EfxSunakemuriMain();
+extern void EfxSunakemuriOBJMain();
+extern void EfxTriangleQUAKEMain();
+extern void EfxWhiteInOutUnitMain();
+extern void EfxYushaSpinShieldMain();
+extern void EfxleveluphbCallBack();
+extern void EfxleveluphbMain();
+extern void EfxleveluphbNop();
+extern void EfxlvupbgMain();
+extern void EkrClasschgMain();
+extern void EkrClasschgRegisterDone();
+extern void EkrDemoKingAtkMain();
+extern void EkrDemoKingAtkRavager_Init();
+extern void EkrDemoKingAtkRavager_Lunge();
+extern void EkrDemoKingAtkRavager_OnEnd();
+extern void EkrDemoKingAtkRavager_Recoil();
+extern void EkrDemoKingAtkRavager_Settle();
+extern void EkrDemoKingAtkRavager_WaitHit();
+extern void EkrDemoKingBodyShake_Back();
+extern void EkrDemoKingBodyShake_Hold();
+extern void EkrDemoKingBodyShake_Init();
+extern void EkrDemoKingBodyShake_OnEnd();
+extern void EkrDemoKingBodyShake_Out();
+extern void EkrDragonBaseAppearMain();
+extern void EkrDragonBaseAppear_Nop();
+extern void EkrDragonBaseHideMain();
+extern void EkrDragonBaseHide_Nop();
+extern void EkrDragonBodyAnimeMain();
+extern void EkrDragonBodyBlackMain();
+extern void EkrDragonPalFade_Init();
+extern void EkrDragonPalFade_Loop();
+extern void EkrDragonQuakeMain();
+extern void EkrDragonTunkFaceIdle();
+extern void EkrDragonTunkFaceIdle2();
+extern void EkrDragonTunkFaceRegisterAnim();
+extern void EkrDragonTunkFace_OnEnd();
+extern void EkrDragonTunkMain();
+extern void EkrDragonTunk_Nop();
+extern void EkrLvupApfxMain();
+extern void EkrTriArmorKnightObj2Main2();
+extern void EkrTriArmorKnightObjMain();
+extern void EkrTriPegasusKnightBgMain();
+extern void EkrTriPegasusKnightMain();
+extern void EkrTriPegasusKnightObjMain();
+extern void EkrTriangleMain();
+extern void EkrWhiteINOUT_Loop1();
+extern void EkrWhiteINOUT_Loop2();
+extern void EkrWhiteINOUT_Loop3();
+extern void EkrWhiteINOUT_RefrainPalette();
+extern void EkrWhiteOutDelay();
+extern void EkrWhiteOutFadeIn();
+extern void EkrWhiteOutFadeOut();
+extern void EkrWhiteOutOnEnd();
+extern void EkrdragonDemonking_Init();
+extern void EkrdragonDemonking_Loop();
+extern void EkrdragonDemonking_OnEnd();
+extern void EkrsubAnimeEmulatorMain();
+extern void EndMapAnimInfoWindow();
+extern void EobjLvup_RedrawGainLabel();
+extern void EobjLvup_SpawnArrowAndLabel();
+extern void EobjLvup_WaitEndAndClear();
+extern u8 FrameConf_EfxChillEffectBG[];
+extern u8 FrameConf_EfxChillEffectBGCOL[];
+extern u8 FrameConf_EfxMagdhisEffectBG[];
+extern u8 FrameConfig_EfxMagFcastBg4[];
+extern u8 FrameLut_EfxSkill[];
+extern void InitDebugMapAnim();
+extern void LockGame();
+extern void Loop6C1_EfxLvupBGCOL();
+extern void MADebug_DoBattleAnim();
+extern void MADebug_InitScreen();
+extern void MapAnim_BeginPoisonAnim();
+extern void MapAnim_BeginPoisonAnim2();
+extern void MapAnim_DisplayDeathFade();
+extern void MapAnim_DisplayRoundAnim();
+extern void MapAnim_GorgonHatch_Loop();
+extern void MapAnim_InitInfoBox();
+extern void MapAnim_PrepareBattleTalk();
+extern void MapAnim_ShowPoisonEffectIfAny();
+extern void MapEventBattle_OnEnd();
+extern void MapEventBattle_SetUpHitData();
+extern void MapInfoBoxShake();
+extern void MapInfoBox_PrepareForShake();
+extern void MapLatonaShiningfx_End();
+extern void MapLatonaShiningfx_Init();
+extern void MapLatonaShiningfx_Loop1();
+extern void MapLatonaShiningfx_Loop3();
+extern void MapLatonaShiningfx_Start();
+extern void MapLatonafx_Init();
+extern void MapLatonafx_InitGfx();
+extern void MapSpellAnim_CommonEnd();
+extern void NightMarefx_End();
+extern void NightMarefx_Loop();
+extern void ProcMAExpBar_FrameAdvance();
+extern void ProcMAExpBar_InitDisplay();
+extern void ProcMAExpBar_LevelUpIfPossible();
+extern void ProcMAExpBar_OnDraw();
+extern void ProcMAExpBar_OnIncrement();
+extern void ProcMAExpBar_PlaySound74();
+extern void ProcMapInfoBox_AnimateHp();
+extern void ProcMapInfoBox_OnDraw();
+extern void ProcMapInfoBox_OnEnd();
+extern u8 ProcScr_EkrdragonDemonkingobj_1[];
+extern u8 ProcScr_MuDeathFade[];
+extern void SummonGfxAnim_Cleanup();
+extern void SummonUnitGfx_Init();
+extern void UnlockGame();
+extern void WallBreakAnim_Init();
+extern u8 data_080ED67C[];
+extern void efxCriricalEffectBGCOLMain();
+extern void efxCriricalEffectBGMain();
+extern void efxCriricalEffectMain();
+extern void efxDamageMojiEffectOBJMain();
+extern void efxDarkLongMonsBG01_Loop_B();
+extern void efxExcaliburBGCOL_Loop();
+extern void efxGorgonBGFinish_Loop();
+extern void efxHurtmutEff00OBJ_0();
+extern void efxHurtmutEff00OBJ_1();
+extern void efxHurtmutEff00OBJ_2();
+extern void efxHurtmutEff01OBJ_0();
+extern void efxHurtmutEff01OBJ_1();
+extern void efxHurtmutEff01OBJ_2();
+extern void efxNormalEffectMain();
+extern void efxPierceCriticalEffectBGCOLMain();
+extern void efxPierceCriticalEffectBGMain();
+extern void efxPierceCriticalEffectMain();
+extern void efxPierceNormalEffectBGMain();
+extern void efxPierceNormalEffectMain();
+extern void efxYushaSpinShieldOBJ_0();
+extern void efxYushaSpinShieldOBJ_1();
+extern void efxYushaSpinShieldOBJ_2();
+extern void efxYushaSpinShieldOBJ_3();
+extern u8 frontier_df4_banim_b_085_A13CD0[];
+extern u8 frontier_df4_misc_lo_010c_0E3F3C[];
+extern u8 frontier_df4_misc_lo_011_0E4602[];
+extern u8 frontier_df4_misc_lo_012_0E6774[];
+extern u8 gBarfxTileConf3[];
+extern u8 gFrameConfig_efxGorgonBGFinish[];
+extern void nullsub_65();
+extern void sub_806ECB4();
+extern void sub_8070C14();
+extern void sub_80752A4();
+extern void sub_8076F70();
+extern void sub_8077C60();
+extern void sub_807F0FC();
+extern void sub_807F784();
+extern void sub_807F860();
+extern void x0807E9C5();
+extern void x0808F44D();
+extern u8 x08A13B90[];
+
 /* Migrated from asm/frontier_df4_banim_b.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
@@ -116,58 +309,134 @@ __asm__(
 "	.4byte 0x00000000, Tsa_efxGorgonBGFinish_0, Tsa_efxGorgonBGFinish_1, Tsa_efxGorgonBGFinish_2, Tsa_efxGorgonBGFinish_3, Tsa_efxGorgonBGFinish_4\n"
 "	.4byte Tsa_efxGorgonBGFinish_5, Tsa_efxGorgonBGFinish_6, Tsa_efxGorgonBGFinish_7, Tsa_efxGorgonBGFinish_8, Img_efxGorgonBGFinish_0, Img_efxGorgonBGFinish_1\n"
 "	.4byte Img_efxGorgonBGFinish_2, Img_efxGorgonBGFinish_3, Img_efxGorgonBGFinish_4, Img_efxGorgonBGFinish_5, Img_efxGorgonBGFinish_6, Img_efxGorgonBGFinish_7\n"
-"	.4byte Img_efxGorgonBGFinish_8, 0x00000001, gFrameConfig_efxGorgonBGFinish + 0x28, 0x00000003, efxGorgonBGFinish_Loop + 0x1, 0x00000003\n"
-"	.4byte efxDarkLongMonsBG01_Loop_B + 0x1, 0x00000000, 0x00000000, 0x00000002, EfxmagicDemonsurgeFadeBlack_Init + 0x1, 0x00000003\n"
-"	.4byte EfxmagicDemonsurgeFlash_Loop_White + 0x1, 0x00000003, gap_0006E4DC + 0x1, 0x00000003, EfxmagicDemonsurgeFlash_Loop_FadeIn + 0x1, 0x00000002\n"
-"	.4byte EnableKeyComboResetEN + 0x1, 0x00000000, 0x00000000, 0x00000002, EfxmagicDemonsurgeFadeBlack_Init + 0x1, 0x00000003\n"
-"	.4byte gap_0006E79C + 0x1, 0x00000003, gap_0006E4DC + 0x1, 0x00000003, EfxmagicDemonsurgeFlash_Loop_FadeIn + 0x1, 0x00000002\n"
-"	.4byte EnableKeyComboResetEN + 0x1, 0x00000000, 0x00000000, 0x00000001, gFrameConfig_efxGorgonBGFinish + 0x3C, 0x00000003\n"
-"	.4byte efxDamageMojiEffectMain + 0x1, 0x00000000, 0x00000000, 0x00000001, gFrameConfig_efxGorgonBGFinish + 0x50, 0x00000003\n"
-"	.4byte efxDamageMojiEffectOBJMain + 0x1, 0x00000000, 0x00000000, 0x00000001, gFrameConfig_efxGorgonBGFinish + 0x68, 0x00000003\n"
-"	.4byte efxCriricalEffectMain + 0x1, 0x00000000, 0x00000000, 0x00000001, gFrameConfig_efxGorgonBGFinish + 0x7C, 0x00000003\n"
-"	.4byte efxCriricalEffectBGMain + 0x1, 0x00000000, 0x00000000, 0x00000001, gFrameConfig_efxGorgonBGFinish + 0x90, 0x000A000F\n"
-"	.4byte 0x00000000, 0x00000003, efxPierceCriticalEffectBGCOLMain + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_010c_0E3F3C + 0x58C, 0x00000003, efxNormalEffectMain + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_010c_0E3F3C + 0x59C, 0x00000003, sub_806ECB4 + 0x1, 0x00000000, 0x00000000, Tsa1_EfxNormalEffectBG\n"
-"	.4byte Tsa2_EfxNormalEffectBG, Tsa3_EfxNormalEffectBG, Tsa4_EfxNormalEffectBG, Tsa5_EfxNormalEffectBG, Tsa6_EfxNormalEffectBG, Tsa7_EfxNormalEffectBG\n"
-"	.4byte Tsa8_EfxNormalEffectBG, Tsa9_EfxNormalEffectBG, data_08616558, 0x00000001, frontier_df4_misc_lo_010c_0E3F3C + 0x5D8, 0x00000003\n"
-"	.4byte efxPierceCriticalEffectMain + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_010c_0E3F3C + 0x5F0, 0x00000003\n"
-"	.4byte efxPierceCriticalEffectBGMain + 0x1, 0x00000000, 0x00000000\n"
+"	.4byte Img_efxGorgonBGFinish_8\n"
+);
+struct ProcCmd ProcScr_efxGorgonBGFinish[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)gFrameConfig_efxGorgonBGFinish + 0x28)), PROC_REPEAT((void*)((u8*)efxGorgonBGFinish_Loop + 0x1)), PROC_REPEAT((void*)((u8*)efxDarkLongMonsBG01_Loop_B + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap1, \"aw\", %progbits\n"
+"	.4byte 0x00000002, EfxmagicDemonsurgeFadeBlack_Init + 0x1, 0x00000003, EfxmagicDemonsurgeFlash_Loop_White + 0x1, 0x00000003, gap_0006E4DC + 0x1\n"
+"	.4byte 0x00000003, EfxmagicDemonsurgeFlash_Loop_FadeIn + 0x1, 0x00000002, EnableKeyComboResetEN + 0x1, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000002, EfxmagicDemonsurgeFadeBlack_Init + 0x1, 0x00000003, gap_0006E79C + 0x1, 0x00000003, gap_0006E4DC + 0x1\n"
+"	.4byte 0x00000003, EfxmagicDemonsurgeFlash_Loop_FadeIn + 0x1, 0x00000002, EnableKeyComboResetEN + 0x1, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, gFrameConfig_efxGorgonBGFinish + 0x3C, 0x00000003, efxDamageMojiEffectMain + 0x1, 0x00000000, 0x00000000\n"
+);
+struct ProcCmd ProcScr_efxDamageMojiEffectOBJ[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)gFrameConfig_efxGorgonBGFinish + 0x50)), PROC_REPEAT((void*)((u8*)efxDamageMojiEffectOBJMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxCriricalEffect[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)gFrameConfig_efxGorgonBGFinish + 0x68)), PROC_REPEAT((void*)((u8*)efxCriricalEffectMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxCriricalEffectBG[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)gFrameConfig_efxGorgonBGFinish + 0x7C)), PROC_REPEAT((void*)((u8*)efxCriricalEffectBGMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxCriricalEffectBGCOL[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)gFrameConfig_efxGorgonBGFinish + 0x90)), PROC_MARK(0xA), PROC_REPEAT((void*)((u8*)efxPierceCriticalEffectBGCOLMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxNormalEffect[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_010c_0E3F3C + 0x58C)), PROC_REPEAT((void*)((u8*)efxNormalEffectMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxNormalEffectBG[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_010c_0E3F3C + 0x59C)), PROC_REPEAT((void*)((u8*)sub_806ECB4 + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap1, \"aw\", %progbits\n"
+"	.4byte Tsa1_EfxNormalEffectBG, Tsa2_EfxNormalEffectBG, Tsa3_EfxNormalEffectBG, Tsa4_EfxNormalEffectBG, Tsa5_EfxNormalEffectBG, Tsa6_EfxNormalEffectBG\n"
+"	.4byte Tsa7_EfxNormalEffectBG, Tsa8_EfxNormalEffectBG, Tsa9_EfxNormalEffectBG, data_08616558\n"
+);
+struct ProcCmd ProcScr_efxPierceCriticalEffect[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_010c_0E3F3C + 0x5D8)), PROC_REPEAT((void*)((u8*)efxPierceCriticalEffectMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxPierceCriticalEffectBG[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_010c_0E3F3C + 0x5F0)), PROC_REPEAT((void*)((u8*)efxPierceCriticalEffectBGMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap1, \"aw\", %progbits\n"
 "	.global data_0860349C\n"
 "data_0860349C:\n"
 "	.4byte 0x00000001, frontier_df4_misc_lo_010c_0E3F3C + 0x60C, 0x000A000F, 0x00000000, 0x00000003, Loop6C2_EfxLvupBGCOL + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_010c_0E3F3C + 0x66C, 0x00000003, efxPierceNormalEffectMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_010c_0E3F3C + 0x684, 0x00000003, efxPierceNormalEffectBGMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, Tsa1_EfxPierceNormalEffectBG, Tsa2_EfxPierceNormalEffectBG, Tsa3_EfxPierceNormalEffectBG, Tsa4_EfxPierceNormalEffectBG\n"
-"	.4byte Tsa5_EfxPierceNormalEffectBG, Tsa6_EfxPierceNormalEffectBG, Tsa7_EfxPierceNormalEffectBG, Tsa8_EfxPierceNormalEffectBG, Tsa9_EfxPierceNormalEffectBG, TsaA_EfxPierceNormalEffectBG\n"
-"	.4byte 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x2, 0x00000003, EfxYushaSpinShieldMain + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x16, 0x00000003, efxYushaSpinShieldOBJ_0 + 0x1, 0x00000003, efxYushaSpinShieldOBJ_1 + 0x1\n"
-"	.4byte 0x00000003, efxYushaSpinShieldOBJ_2 + 0x1, 0x00000003, efxYushaSpinShieldOBJ_3 + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x2E, 0x00000003, EfxHurtmutEff00Main + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x3E, 0x00000003, efxHurtmutEff00OBJ_0 + 0x1, 0x001A000E, 0x00000000\n"
-"	.4byte 0x00000003, efxHurtmutEff00OBJ_1 + 0x1, 0x0008000E, 0x00000000, 0x00000003, efxHurtmutEff00OBJ_2 + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x52, 0x00000003, efxHurtmutEff01OBJ_0 + 0x1\n"
-"	.4byte 0x003A000E, 0x00000000, 0x00000003, efxHurtmutEff01OBJ_1 + 0x1, 0x0015000E, 0x00000000\n"
-"	.4byte 0x00000003, efxHurtmutEff01OBJ_2 + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x66\n"
-"	.4byte 0x00000003, EfxMagfcastMain + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x72\n"
-"	.4byte 0x00000003, EfxMagfcastBGMain + 0x1, 0x00000000, 0x00000000, frontier_df4_banim_b_011_61BE44, frontier_df4_banim_b_011b_61BEE0\n"
-"	.4byte frontier_df4_banim_b_011c_61BF7C, frontier_df4_banim_b_011d_61C01C, frontier_df4_banim_b_011e_61C0C0, frontier_df4_banim_b_011f_61C174, frontier_df4_banim_b_011g_61C21C, frontier_df4_banim_b_011h_61C2CC\n"
-"	.4byte frontier_df4_banim_b_011i_61C37C, frontier_df4_banim_b_011j_61C434, frontier_df4_banim_b_011k_61C4EC, frontier_df4_banim_b_011l_61C5A0, frontier_df4_banim_b_011m_61C640, frontier_df4_banim_b_011n_61C6F4\n"
-"	.4byte frontier_df4_banim_b_011o_61C7A8, frontier_df4_banim_b_011p_61C85C, frontier_df4_banim_b_011q_61C8FC, frontier_df4_banim_b_011r_61C9B8, Tsa19_EfxMagfcastBG, Tsa20_EfxMagfcastBG\n"
-"	.4byte Tsa21_EfxMagfcastBG, Tsa22_EfxMagfcastBG, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0x24, 0x00000003, EfxSunakemuriMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0x34, 0x00000003, EfxSunakemuriOBJMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0x48, 0x00000003, EfxLokmsunaMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0x54, 0x00000003, EfxLokmsunaIOBJMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0x64, 0x00000003, EfxKingPikaMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0x70, 0x00000003, EfxFlashFXMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0x7C, 0x00000003, EfxSongOBJ2Main + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0x88, 0x00000003, EfxDanceOBJMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0x94, 0x00000003, EfxSpecalEffectMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0xA4, 0x00000003, EfxSRankWeaponEffectMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0xBC, 0x00000003, EfxSRankWeaponEffectBGMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0xD4, 0x00000003, EfxSRankWeaponEffectSCRMain + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, FrameConfig_EfxMagFcastBg4 + 0xEC, 0x00000003, efxExcaliburSCR2_Loop + 0x1\n"
 "	.4byte 0x00000000, 0x00000000\n"
+);
+struct ProcCmd ProcScr_efxPierceNormalEffect[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_010c_0E3F3C + 0x66C)), PROC_REPEAT((void*)((u8*)efxPierceNormalEffectMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxPierceNormalEffectBG[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_010c_0E3F3C + 0x684)), PROC_REPEAT((void*)((u8*)efxPierceNormalEffectBGMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap1, \"aw\", %progbits\n"
+"	.4byte Tsa1_EfxPierceNormalEffectBG, Tsa2_EfxPierceNormalEffectBG, Tsa3_EfxPierceNormalEffectBG, Tsa4_EfxPierceNormalEffectBG, Tsa5_EfxPierceNormalEffectBG, Tsa6_EfxPierceNormalEffectBG\n"
+"	.4byte Tsa7_EfxPierceNormalEffectBG, Tsa8_EfxPierceNormalEffectBG, Tsa9_EfxPierceNormalEffectBG, TsaA_EfxPierceNormalEffectBG\n"
+);
+struct ProcCmd ProcScr_efxYushaSpinShield[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_011_0E4602 + 0x2)), PROC_REPEAT((void*)((u8*)EfxYushaSpinShieldMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxYushaSpinShieldOBJ[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_011_0E4602 + 0x16)), PROC_REPEAT((void*)((u8*)efxYushaSpinShieldOBJ_0 + 0x1)), PROC_REPEAT((void*)((u8*)efxYushaSpinShieldOBJ_1 + 0x1)), PROC_REPEAT((void*)((u8*)efxYushaSpinShieldOBJ_2 + 0x1)),
+    PROC_REPEAT((void*)((u8*)efxYushaSpinShieldOBJ_3 + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxHurtmutEff00[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_011_0E4602 + 0x2E)), PROC_REPEAT((void*)((u8*)EfxHurtmutEff00Main + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxHurtmutEff00OBJ[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_011_0E4602 + 0x3E)), PROC_REPEAT((void*)((u8*)efxHurtmutEff00OBJ_0 + 0x1)), PROC_SLEEP(0x1A), PROC_REPEAT((void*)((u8*)efxHurtmutEff00OBJ_1 + 0x1)),
+    PROC_SLEEP(0x8), PROC_REPEAT((void*)((u8*)efxHurtmutEff00OBJ_2 + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxHurtmutEff01OBJ[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_011_0E4602 + 0x52)), PROC_REPEAT((void*)((u8*)efxHurtmutEff01OBJ_0 + 0x1)), PROC_SLEEP(0x3A), PROC_REPEAT((void*)((u8*)efxHurtmutEff01OBJ_1 + 0x1)),
+    PROC_SLEEP(0x15), PROC_REPEAT((void*)((u8*)efxHurtmutEff01OBJ_2 + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxMagfcast[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_011_0E4602 + 0x66)), PROC_REPEAT((void*)((u8*)EfxMagfcastMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxMagfcastBG[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_011_0E4602 + 0x72)), PROC_REPEAT((void*)((u8*)EfxMagfcastBGMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap1, \"aw\", %progbits\n"
+"	.4byte frontier_df4_banim_b_011_61BE44, frontier_df4_banim_b_011b_61BEE0, frontier_df4_banim_b_011c_61BF7C, frontier_df4_banim_b_011d_61C01C, frontier_df4_banim_b_011e_61C0C0, frontier_df4_banim_b_011f_61C174\n"
+"	.4byte frontier_df4_banim_b_011g_61C21C, frontier_df4_banim_b_011h_61C2CC, frontier_df4_banim_b_011i_61C37C, frontier_df4_banim_b_011j_61C434, frontier_df4_banim_b_011k_61C4EC, frontier_df4_banim_b_011l_61C5A0\n"
+"	.4byte frontier_df4_banim_b_011m_61C640, frontier_df4_banim_b_011n_61C6F4, frontier_df4_banim_b_011o_61C7A8, frontier_df4_banim_b_011p_61C85C, frontier_df4_banim_b_011q_61C8FC, frontier_df4_banim_b_011r_61C9B8\n"
+"	.4byte Tsa19_EfxMagfcastBG, Tsa20_EfxMagfcastBG, Tsa21_EfxMagfcastBG, Tsa22_EfxMagfcastBG\n"
+);
+struct ProcCmd ProcScr_efxSunakemuri[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0x24)), PROC_REPEAT((void*)((u8*)EfxSunakemuriMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxSunakemuriOBJ[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0x34)), PROC_REPEAT((void*)((u8*)EfxSunakemuriOBJMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxLokmsuna[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0x48)), PROC_REPEAT((void*)((u8*)EfxLokmsunaMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxLokmsunaOBJ[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0x54)), PROC_REPEAT((void*)((u8*)EfxLokmsunaIOBJMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxKingPika[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0x64)), PROC_REPEAT((void*)((u8*)EfxKingPikaMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxFlashFX[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0x70)), PROC_REPEAT((void*)((u8*)EfxFlashFXMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxSongOBJ2[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0x7C)), PROC_REPEAT((void*)((u8*)EfxSongOBJ2Main + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxDanceOBJ[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0x88)), PROC_REPEAT((void*)((u8*)EfxDanceOBJMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxSpecalEffect[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0x94)), PROC_REPEAT((void*)((u8*)EfxSpecalEffectMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxSRankWeaponEffect[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0xA4)), PROC_REPEAT((void*)((u8*)EfxSRankWeaponEffectMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxSRankWeaponEffectBG[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0xBC)), PROC_REPEAT((void*)((u8*)EfxSRankWeaponEffectBGMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap1, \"aw\", %progbits\n"
+"	.4byte 0x00000001, FrameConfig_EfxMagFcastBg4 + 0xD4, 0x00000003, EfxSRankWeaponEffectSCRMain + 0x1, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, FrameConfig_EfxMagFcastBg4 + 0xEC, 0x00000003, efxExcaliburSCR2_Loop + 0x1, 0x00000000, 0x00000000\n"
 );
 /* multi-slice atomic relocation carve (was several INCBIN_U8 slices of one .bin);
    every embedded ROM pointer -> .4byte Sym(+addend), byte-exact. make compare is the oracle. */
@@ -175,15 +444,38 @@ __asm__(
 "	.section .data.frontier_df4_banim_b.gap2, \"aw\", %progbits\n"
 "	.global frontier_df4_banim_b_002_603894\n"
 "frontier_df4_banim_b_002_603894:\n"
-"	.4byte 0x00000001, FrameConfig_EfxMagFcastBg4 + 0x108, 0x00000003, EfxMagdhisEffectMain + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000001, FrameConfig_EfxMagFcastBg4 + 0x11C, 0x00000003, EfxMagdhisEffectBGMain + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte Tsa1_EfxMagdhisEffectBG, Tsa2_EfxMagdhisEffectBG, Tsa3_EfxMagdhisEffectBG, Tsa4_EfxMagdhisEffectBG, 0x00000001, FrameConf_EfxMagdhisEffectBG + 0x20\n"
-"	.4byte 0x00000003, EfxMantBatabata_Loop1 + 0x1, 0x00000003, EfxMantBatabata_Loop2 + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000001, FrameConf_EfxMagdhisEffectBG + 0x30, 0x00000003, EfxChillEffectMain + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000001, FrameConf_EfxMagdhisEffectBG + 0x40, 0x00000003, EfxChillEffectBGMain + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte Tsa1_EfxChillEffectBG, Tsa2_EfxChillEffectBG, Tsa3_EfxChillEffectBG, 0x00000001, FrameConf_EfxChillEffectBG + 0xE, 0x000A000F\n"
-"	.4byte 0x00000000, 0x00000003, efxExcaliburBGCOL_Loop + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
-"	.4byte FrameConf_EfxChillEffectBGCOL + 0x4C, 0x00000003, EfxChillAnime_Loop + 0x1, 0x00000000, 0x00000000\n"
+);
+struct ProcCmd ProcScr_efxMagdhisEffect[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0x108)), PROC_REPEAT((void*)((u8*)EfxMagdhisEffectMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxMagdhisEffectBG[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = {
+    PROC_NAME((void*)((u8*)FrameConfig_EfxMagFcastBg4 + 0x11C)), PROC_REPEAT((void*)((u8*)EfxMagdhisEffectBGMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap2, \"aw\", %progbits\n"
+"	.4byte Tsa1_EfxMagdhisEffectBG, Tsa2_EfxMagdhisEffectBG, Tsa3_EfxMagdhisEffectBG, Tsa4_EfxMagdhisEffectBG\n"
+);
+struct ProcCmd ProcScr_efxMantBatabata[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = {
+    PROC_NAME((void*)((u8*)FrameConf_EfxMagdhisEffectBG + 0x20)), PROC_REPEAT((void*)((u8*)EfxMantBatabata_Loop1 + 0x1)), PROC_REPEAT((void*)((u8*)EfxMantBatabata_Loop2 + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxChillEffect[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = {
+    PROC_NAME((void*)((u8*)FrameConf_EfxMagdhisEffectBG + 0x30)), PROC_REPEAT((void*)((u8*)EfxChillEffectMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxChillEffectBG[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = {
+    PROC_NAME((void*)((u8*)FrameConf_EfxMagdhisEffectBG + 0x40)), PROC_REPEAT((void*)((u8*)EfxChillEffectBGMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap2, \"aw\", %progbits\n"
+"	.4byte Tsa1_EfxChillEffectBG, Tsa2_EfxChillEffectBG, Tsa3_EfxChillEffectBG\n"
+);
+struct ProcCmd ProcScr_efxChillEffectBGCOL[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = {
+    PROC_NAME((void*)((u8*)FrameConf_EfxChillEffectBG + 0xE)), PROC_MARK(0xA), PROC_REPEAT((void*)((u8*)efxExcaliburBGCOL_Loop + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxChillAnime[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = {
+    PROC_NAME((void*)((u8*)FrameConf_EfxChillEffectBGCOL + 0x4C)), PROC_REPEAT((void*)((u8*)EfxChillAnime_Loop + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap2, \"aw\", %progbits\n"
 "	.global data_08603968\n"
 "data_08603968:\n"
 "	.4byte 0x00000001, FrameConf_EfxChillEffectBGCOL + 0x5C, 0x00000003, EfxDrsmmoyaMain + 0x1, 0x00000000, 0x00000000\n"
@@ -201,106 +493,116 @@ __asm__(
 "	.global data_08603A18\n"
 "data_08603A18:\n"
 "	.4byte 0x00000001, FrameConf_EfxChillEffectBGCOL + 0x12C, 0x00000003, sub_8070874 + 0x1, 0x00000003, sub_80708B4 + 0x1\n"
-"	.4byte 0x00000003, sub_80708D8 + 0x1, 0x00000000, 0x00000000, 0x00000001, FrameConf_EfxChillEffectBGCOL + 0x140\n"
-"	.4byte 0x00000003, EfxSkillType01BGMain + 0x1, 0x00000000, 0x00000000, Tsa_EfxSkill1, Tsa_EfxSkill2\n"
-"	.4byte Tsa_EfxSkill3, Tsa_EfxSkill4, Tsa_EfxSkill5, Tsa_EfxSkill6, Tsa_EfxSkill7, Tsa_EfxSkill8\n"
-"	.4byte Tsa_EfxSkill9, Tsa_EfxSkillA, Tsa_EfxSkillB, Tsa_EfxSkillC, Tsa_EfxSkillD, Tsa_EfxSkillE\n"
-"	.4byte Tsa_EfxSkillF, Tsa_EfxSkill10, Img_EfxSkill1, Img_EfxSkill2, Img_EfxSkill3, Img_EfxSkill4\n"
-"	.4byte Img_EfxSkill5, Img_EfxSkill6, Img_EfxSkill7, Img_EfxSkill8, Img_EfxSkill9, Img_EfxSkillA\n"
-"	.4byte Img_EfxSkillB, Img_EfxSkillC, Img_EfxSkillD, Img_EfxSkillE, Img_EfxSkillF, Img_EfxSkill10\n"
-"	.4byte Pal_EfxSkill1, Pal_EfxSkill2, Pal_EfxSkill3, Pal_EfxSkill4, Pal_EfxSkill5, Pal_EfxSkill6\n"
-"	.4byte Pal_EfxSkill7, Pal_EfxSkill8, Pal_EfxSkill9, Pal_EfxSkillA, Pal_EfxSkillB, Pal_EfxSkillC\n"
-"	.4byte Pal_EfxSkillD, Pal_EfxSkillE, Pal_EfxSkillF, Pal_EfxSkill10, 0x00000001, FrameLut_EfxSkill + 0x42\n"
-"	.4byte 0x00000003, EfxSkillCommonBG_FreezeAnims + 0x1, 0x00000003, EfxSkillCommonBG_MoveCamToSelf + 0x1, 0x00000003, EfxSkillCommonBG_PlaySfx + 0x1\n"
-"	.4byte 0x00000003, sub_8070C14 + 0x1, 0x00000003, EfxSkillCommonBG_MoveCamToOther + 0x1, 0x00000003, EfxSkillCommonBG_UnfreezeAnims + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, StartClassReelSpellAnimDummy + 0x1, StartClassReelSpellAnimFire + 0x1, StartClassReelSpellAnimThunder + 0x1, StartClassReelSpellAnimHeal + 0x1\n"
-"	.4byte StartClassReelSpellAnimLight + 0x1, StartClassReelSpellAnimFlux + 0x1, StartClassReelSpellAnimMyrrh + 0x1, StartClassReelSpellAnimEvilEye + 0x1, StartClassReelSpellAnimStone + 0x1, 0x00000001\n"
-"	.4byte FrameLut_EfxSkill + 0x56, 0x00000003, efxopFire_Loop_Main + 0x1, 0x0032000E, 0x00000000, 0x00000002\n"
-"	.4byte EndActiveClassReelSpell + 0x1, 0x00000000, 0x00000000, 0x00000001, FrameLut_EfxSkill + 0x62, 0x00000003\n"
-"	.4byte efxopFireBG_Loop + 0x1, 0x00000000, 0x00000000, Tsa_Banim_0, Tsa_Banim_1, Tsa_Banim_2\n"
-"	.4byte Tsa_Banim_3, Tsa_Banim_4, Tsa_Banim_5, Tsa_Banim_6, Tsa_Banim_7, Tsa_Banim_8\n"
-"	.4byte Tsa_Banim_9, Tsa_Banim_10, Tsa_Banim_11, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x456, 0x00000003\n"
-"	.4byte efxopFireOBJ_Loop + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x466, 0x00000003\n"
-"	.4byte efxopThunder_Loop_Main + 0x1, 0x0032000E, 0x00000000, 0x00000002, EndActiveClassReelSpell + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x476, 0x00000003, efxopThunderBG_Loop + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, Tsa_EfxThuderBg1, Tsa_EfxThuderBg2, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x492, 0x000A000F\n"
-"	.4byte 0x00000000, 0x00000003, efxopThunderBGCOL_Loop + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_011_0E4602 + 0x4E6, 0x00000003, efxopThunderOBJ_Loop + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_011_0E4602 + 0x4F6, 0x00000003, efxopLive_Loop_Main + 0x1, 0x0046000E, 0x00000000, 0x00000002\n"
-"	.4byte EndActiveClassReelSpell + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x502, 0x00000003\n"
-"	.4byte efxopLiveBG_Loop + 0x1, 0x00000000, 0x00000000, Tsa_HealSpellBg, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x516\n"
-"	.4byte 0x000A000F, 0x00000000, 0x00000003, efxopLiveBGCOL_Loop + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x56A, 0x00000003, efxopLiveALPHA_Loop_A + 0x1, 0x00000003, efxopLiveALPHA_Loop_B + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x57A, 0x00000003, efxopLiveOBJ_Loop + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x58A, 0x00000003, efxopLightning_Loop_Main + 0x1\n"
-"	.4byte 0x0032000E, 0x00000000, 0x00000002, EndActiveClassReelSpell + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x59A, 0x00000003, efxopLightningBG_Loop + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte Img_Banim_1, Img_Banim_1, Img_Banim_1, Img_Banim_2, Img_Banim_2, Img_Banim_2\n"
-"	.4byte Img_Banim_3, Img_Banim_3, Img_Banim_3, Img_Banim_3, Img_Banim_4, Img_Banim_4\n"
-"	.4byte Img_Banim_4, Img_Banim_5, Img_Banim_5, Img_Banim_5, Img_Light_0, Img_Light_0\n"
-"	.4byte Img_Light_0, Img_Light_0, Img_Light_0, Img_Light_0, Img_Light_0, Img_Light_0\n"
-"	.4byte Img_Light_0, Img_Light_1, Img_Light_1, Img_Light_1, Img_Light_2, Img_Light_2\n"
-"	.4byte Img_Light_2, Img_Light_2, Img_Light_2, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0\n"
-"	.4byte Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0\n"
-"	.4byte Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0\n"
-"	.4byte Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0\n"
-"	.4byte Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Light, Pal_Light\n"
-"	.4byte Pal_Light, Pal_Light, Pal_Light, Pal_Light, Pal_Light, Pal_Light\n"
-"	.4byte Tsa_Light_0, Tsa_Light_1, frontier_df4_banim_b_019_64C610, frontier_df4_banim_b_019b_64C71C, Tsa_Light_4, Tsa_Light_5\n"
-"	.4byte Tsa_Light_6, Tsa_Light_7, Tsa_Light_8, Tsa_Light_9, Tsa_Light_10, Tsa_Light_11\n"
-"	.4byte Tsa_Light_12, Tsa_Light_13, Tsa_Light_14, frontier_df3_banim_mid_000_64D2B4, frontier_df3_banim_mid_000b_64D3C8, frontier_df3_banim_mid_000c_64D478\n"
-"	.4byte frontier_df3_banim_mid_000d_64D580, frontier_df3_banim_mid_000e_64D6BC, frontier_df3_banim_mid_000f_64D830, frontier_df3_banim_mid_000g_64D9C8, frontier_df3_banim_mid_000h_64DB3C, frontier_df3_banim_mid_000i_64DC48\n"
-"	.4byte frontier_df3_banim_mid_000j_64DD1C, Tsa_Light_25, Tsa_Light_26, Tsa_Light_27, Tsa_Light_28, Tsa_Light_29\n"
-"	.4byte Tsa_Light_30, Tsa_Light_31, Tsa_Light_32, 0x00000001, 0x080e4c34, 0x00000003\n"
-"	.4byte efxopMistyrainBG_Loop + 0x1, 0x00000000, 0x00000000, Tsa_Flux_ClassReel_0, Tsa_Flux_ClassReel_1, Tsa_Flux_ClassReel_2\n"
-"	.4byte Tsa_Flux_ClassReel_3, Tsa_Flux_ClassReel_4, Tsa_Flux_ClassReel_5, Tsa_Flux_ClassReel_6, Tsa_Flux_ClassReel_7, Tsa_Flux_ClassReel_8\n"
-"	.4byte Tsa_Flux_ClassReel_9, Tsa_Flux_ClassReel_10, Tsa_Flux_ClassReel_11, frontier_df3_banim_mid_008_657A78, frontier_df3_banim_mid_008b_657B20, frontier_df3_banim_mid_008c_657BDC\n"
-"	.4byte frontier_df3_banim_mid_008d_657CB4, frontier_df3_banim_mid_008e_657D94, Tsa_Flux_ClassReel_17, Tsa_Flux_ClassReel_18, Tsa_Flux_ClassReel_19, Tsa_Flux_ClassReel_20\n"
-"	.4byte Tsa_Flux_ClassReel_21, Tsa_Flux_ClassReel_22, Tsa_Flux_ClassReel_23, Tsa_Flux_ClassReel_24, Tsa_Flux_ClassReel_25, Tsa_Flux_ClassReel_26\n"
-"	.4byte Tsa_Flux_ClassReel_27, frontier_df3_banim_mid_009_6587E0, frontier_df3_banim_mid_009b_658880, frontier_df3_banim_mid_009c_658934, frontier_df3_banim_mid_009d_6589F0, frontier_df3_banim_mid_009e_658ACC\n"
-"	.4byte frontier_df3_banim_mid_009f_658BB4, frontier_df3_banim_mid_009g_658CD8, frontier_df3_banim_mid_009h_658DF8, frontier_df3_banim_mid_009i_658F04, frontier_df3_banim_mid_009j_659010, frontier_df3_banim_mid_009k_65910C\n"
-"	.4byte frontier_df3_banim_mid_009l_65920C, frontier_df3_banim_mid_009m_659308, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, Img_Flux_ClassReel_0\n"
-"	.4byte Img_Flux_ClassReel_0, Img_Flux_ClassReel_0, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC\n"
-"	.4byte frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, Img_Flux_ClassReel_2, Img_Flux_ClassReel_2, Img_Flux_ClassReel_2, Img_Flux_ClassReel_2\n"
-"	.4byte Img_Flux_ClassReel_2, Img_Flux_ClassReel_2, Img_Flux_ClassReel_3, Img_Flux_ClassReel_3, Img_Flux_ClassReel_3, Img_Flux_ClassReel_3\n"
-"	.4byte Img_Flux_ClassReel_4, Img_Flux_ClassReel_4, Img_Flux_ClassReel_4, Img_Flux_ClassReel_4, Img_Flux_ClassReel_4, Img_Flux_ClassReel_4\n"
-"	.4byte Img_Flux_ClassReel_4, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC\n"
-"	.4byte frontier_df3_banim_mid_006_654DFC, Img_Flux_ClassReel_0, Img_Flux_ClassReel_0, Img_Flux_ClassReel_0, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8\n"
-"	.4byte AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x6EE, 0x00000004, efxopMistyrainOBJ_OnEnd + 0x1, 0x00000003\n"
-"	.4byte efxopMistyrainOBJ_Loop_A + 0x1, 0x0020000E, 0x00000000, 0x00000003, efxopMistyrainOBJ_Loop_B + 0x1, 0x000B000E\n"
-"	.4byte 0x00000000, 0x00000003, efxopMistyrainOBJ_Loop_C + 0x1, 0x0016000E, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x702, 0x00000004, efxopMistyrainOBJ_OnEnd + 0x1, 0x00000003\n"
-"	.4byte efxopMistyrainOBJ2_Loop_A + 0x1, 0x000E000E, 0x00000000, 0x00000003, efxopMistyrainOBJ2_Loop_B + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x716, 0x00000003, efxopMistyrain_Loop_Main + 0x1, 0x00AA000E\n"
+"	.4byte 0x00000003, sub_80708D8 + 0x1, 0x00000000, 0x00000000\n"
+);
+struct ProcCmd ProcScr_efxSkillType01BG[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = {
+    PROC_NAME((void*)((u8*)FrameConf_EfxChillEffectBGCOL + 0x140)), PROC_REPEAT((void*)((u8*)EfxSkillType01BGMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap2, \"aw\", %progbits\n"
+"	.4byte Tsa_EfxSkill1, Tsa_EfxSkill2, Tsa_EfxSkill3, Tsa_EfxSkill4, Tsa_EfxSkill5, Tsa_EfxSkill6\n"
+"	.4byte Tsa_EfxSkill7, Tsa_EfxSkill8, Tsa_EfxSkill9, Tsa_EfxSkillA, Tsa_EfxSkillB, Tsa_EfxSkillC\n"
+"	.4byte Tsa_EfxSkillD, Tsa_EfxSkillE, Tsa_EfxSkillF, Tsa_EfxSkill10, Img_EfxSkill1, Img_EfxSkill2\n"
+"	.4byte Img_EfxSkill3, Img_EfxSkill4, Img_EfxSkill5, Img_EfxSkill6, Img_EfxSkill7, Img_EfxSkill8\n"
+"	.4byte Img_EfxSkill9, Img_EfxSkillA, Img_EfxSkillB, Img_EfxSkillC, Img_EfxSkillD, Img_EfxSkillE\n"
+"	.4byte Img_EfxSkillF, Img_EfxSkill10, Pal_EfxSkill1, Pal_EfxSkill2, Pal_EfxSkill3, Pal_EfxSkill4\n"
+"	.4byte Pal_EfxSkill5, Pal_EfxSkill6, Pal_EfxSkill7, Pal_EfxSkill8, Pal_EfxSkill9, Pal_EfxSkillA\n"
+"	.4byte Pal_EfxSkillB, Pal_EfxSkillC, Pal_EfxSkillD, Pal_EfxSkillE, Pal_EfxSkillF, Pal_EfxSkill10\n"
+);
+struct ProcCmd ProcScr_efxSkillCommonBG[] __attribute__((section(".data.frontier_df4_banim_b.gap2"))) = {
+    PROC_NAME((void*)((u8*)FrameLut_EfxSkill + 0x42)), PROC_REPEAT((void*)((u8*)EfxSkillCommonBG_FreezeAnims + 0x1)), PROC_REPEAT((void*)((u8*)EfxSkillCommonBG_MoveCamToSelf + 0x1)), PROC_REPEAT((void*)((u8*)EfxSkillCommonBG_PlaySfx + 0x1)),
+    PROC_REPEAT((void*)((u8*)sub_8070C14 + 0x1)), PROC_REPEAT((void*)((u8*)EfxSkillCommonBG_MoveCamToOther + 0x1)), PROC_REPEAT((void*)((u8*)EfxSkillCommonBG_UnfreezeAnims + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap2, \"aw\", %progbits\n"
+"	.4byte StartClassReelSpellAnimDummy + 0x1, StartClassReelSpellAnimFire + 0x1, StartClassReelSpellAnimThunder + 0x1, StartClassReelSpellAnimHeal + 0x1, StartClassReelSpellAnimLight + 0x1, StartClassReelSpellAnimFlux + 0x1\n"
+"	.4byte StartClassReelSpellAnimMyrrh + 0x1, StartClassReelSpellAnimEvilEye + 0x1, StartClassReelSpellAnimStone + 0x1, 0x00000001, FrameLut_EfxSkill + 0x56, 0x00000003\n"
+"	.4byte efxopFire_Loop_Main + 0x1, 0x0032000E, 0x00000000, 0x00000002, EndActiveClassReelSpell + 0x1, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000001, FrameLut_EfxSkill + 0x62, 0x00000003, efxopFireBG_Loop + 0x1, 0x00000000\n"
+"	.4byte 0x00000000, Tsa_Banim_0, Tsa_Banim_1, Tsa_Banim_2, Tsa_Banim_3, Tsa_Banim_4\n"
+"	.4byte Tsa_Banim_5, Tsa_Banim_6, Tsa_Banim_7, Tsa_Banim_8, Tsa_Banim_9, Tsa_Banim_10\n"
+"	.4byte Tsa_Banim_11, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x456, 0x00000003, efxopFireOBJ_Loop + 0x1, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x466, 0x00000003, efxopThunder_Loop_Main + 0x1, 0x0032000E\n"
 "	.4byte 0x00000000, 0x00000002, EndActiveClassReelSpell + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_011_0E4602 + 0x726, 0x00000003, efxopMyrrh_Loop_Main + 0x1, 0x0032000E, 0x00000000, 0x00000002\n"
-"	.4byte EndActiveClassReelSpell + 0x1, 0x00000000, 0x00000000, 0x00000003, efxopEvilEye_Loop_A + 0x1, 0x0018000E\n"
-"	.4byte 0x00000000, 0x00000003, efxopEvilEye_Loop_B + 0x1, 0x0048000E, 0x00000000, 0x00000002\n"
-"	.4byte EndActiveClassReelSpell + 0x1, 0x00000000, 0x00000000, 0x00000003, efxopEvilEyeBG_Loop + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, Img_EvilEye_0, Img_EvilEye_1, Img_EvilEye_2, Img_EvilEye_3, Img_EvilEye_4\n"
-"	.4byte Img_EvilEye_5, Img_EvilEye_6, Img_EvilEye_7, Img_EvilEye_8, Img_EvilEye_9, Img_EvilEye_10\n"
-"	.4byte Img_EvilEye_11, Img_EvilEye_12, Img_EvilEye_13, Img_EvilEye_14, Img_EvilEye_15, Img_EvilEye_16\n"
-"	.4byte Img_EvilEye_17, Img_EvilEye_18, Img_EvilEye_19, Img_EvilEye_20, Img_EvilEye_21, Img_EvilEye_22\n"
-"	.4byte Img_EvilEye_23, Img_EvilEye_24, Img_EvilEye_25, Tsa_EvilEye_0, Tsa_EvilEye_1, Tsa_EvilEye_2\n"
-"	.4byte Tsa_EvilEye_3, Tsa_EvilEye_4, Tsa_EvilEye_5, Tsa_EvilEye_6, Tsa_EvilEye_7, Tsa_EvilEye_8\n"
-"	.4byte Tsa_EvilEye_9, Tsa_EvilEye_10, Tsa_EvilEye_11, Tsa_EvilEye_12, Tsa_EvilEye_13, Tsa_EvilEye_14\n"
-"	.4byte Tsa_EvilEye_15, Tsa_EvilEye_16, Tsa_EvilEye_17, Tsa_EvilEye_18, Tsa_EvilEye_19, Tsa_EvilEye_20\n"
-"	.4byte Tsa_EvilEye_21, frontier_df4_banim_b_053_7059C4, data_08705B7C, data_08705D48, data_08705F2C, Pal_EvilEye_0\n"
-"	.4byte Pal_EvilEye_1, Pal_EvilEye_2, Pal_EvilEye_3, Pal_EvilEye_4, Pal_EvilEye_5, Pal_EvilEye_6\n"
-"	.4byte Pal_EvilEye_7, Pal_EvilEye_8, Pal_EvilEye_9, Pal_EvilEye_10, Pal_EvilEye_11, Pal_EvilEye_12\n"
-"	.4byte Pal_EvilEye_13, Pal_EvilEye_14, Pal_EvilEye_15, Pal_EvilEye_16, Pal_EvilEye_17, Pal_EvilEye_18\n"
-"	.4byte Pal_EvilEye_19, Pal_EvilEyeBg2_A, Pal_EvilEye_20, Pal_EvilEye_21, Pal_EvilEye_22, Pal_EvilEye_23\n"
-"	.4byte Pal_EvilEye_24, 0x00000003, efxopEvilEyeOBJ_Loop + 0x1, 0x00000000, 0x00000000, 0x00000003\n"
-"	.4byte efxopStone_Loop_A + 0x1, 0x003E000E, 0x00000000, 0x00000003, efxopStone_Loop_B + 0x1, 0x008A000E\n"
-"	.4byte 0x00000000, 0x00000002, EndActiveClassReelSpell + 0x1, 0x00000000, 0x00000000, 0x00000003\n"
-"	.4byte efxopStoneBG_Loop + 0x1, 0x00000000, 0x00000000, Img_Banim_14, Img_Stone_0, Img_Stone_1\n"
-"	.4byte Img_Stone_2, Img_Stone_3, Img_Stone_4, Img_Stone_5, Img_Stone_6, Img_Stone_7\n"
-"	.4byte Img_Stone_8, Img_Stone_9, Img_Stone_10, Img_Stone_11, Img_Stone_12, Img_Stone_13\n"
-"	.4byte Img_Stone_14, Img_Stone_15, Img_Stone_16, Img_Stone_17, Tsa_Stone_0, Tsa_Stone_1\n"
-"	.4byte Tsa_Stone_2, Tsa_Stone_3, Tsa_Stone_4, Tsa_Stone_5, Tsa_Stone_6, Tsa_Stone_7\n"
-"	.4byte Tsa_Stone_8, Tsa_Stone_9, Tsa_Stone_10, Tsa_Stone_11, Tsa_Stone_12, Tsa_Stone_13\n"
-"	.4byte Tsa_Stone_14, Tsa_Stone_15, Tsa_Stone_16, Tsa_Stone_17, Tsa_Stone_18, 0x00000003\n"
-"	.4byte efxopStoneOBJ_Loop + 0x1, 0x00000000, 0x00000000\n"
+"	.4byte frontier_df4_misc_lo_011_0E4602 + 0x476, 0x00000003, efxopThunderBG_Loop + 0x1, 0x00000000, 0x00000000, Tsa_EfxThuderBg1\n"
+"	.4byte Tsa_EfxThuderBg2, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x492, 0x000A000F, 0x00000000, 0x00000003\n"
+"	.4byte efxopThunderBGCOL_Loop + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x4E6, 0x00000003\n"
+"	.4byte efxopThunderOBJ_Loop + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x4F6, 0x00000003\n"
+"	.4byte efxopLive_Loop_Main + 0x1, 0x0046000E, 0x00000000, 0x00000002, EndActiveClassReelSpell + 0x1, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x502, 0x00000003, efxopLiveBG_Loop + 0x1, 0x00000000\n"
+"	.4byte 0x00000000, Tsa_HealSpellBg, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x516, 0x000A000F, 0x00000000\n"
+"	.4byte 0x00000003, efxopLiveBGCOL_Loop + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x56A\n"
+"	.4byte 0x00000003, efxopLiveALPHA_Loop_A + 0x1, 0x00000003, efxopLiveALPHA_Loop_B + 0x1, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x57A, 0x00000003, efxopLiveOBJ_Loop + 0x1, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x58A, 0x00000003, efxopLightning_Loop_Main + 0x1, 0x0032000E, 0x00000000\n"
+"	.4byte 0x00000002, EndActiveClassReelSpell + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x59A\n"
+"	.4byte 0x00000003, efxopLightningBG_Loop + 0x1, 0x00000000, 0x00000000, Img_Banim_1, Img_Banim_1\n"
+"	.4byte Img_Banim_1, Img_Banim_2, Img_Banim_2, Img_Banim_2, Img_Banim_3, Img_Banim_3\n"
+"	.4byte Img_Banim_3, Img_Banim_3, Img_Banim_4, Img_Banim_4, Img_Banim_4, Img_Banim_5\n"
+"	.4byte Img_Banim_5, Img_Banim_5, Img_Light_0, Img_Light_0, Img_Light_0, Img_Light_0\n"
+"	.4byte Img_Light_0, Img_Light_0, Img_Light_0, Img_Light_0, Img_Light_0, Img_Light_1\n"
+"	.4byte Img_Light_1, Img_Light_1, Img_Light_2, Img_Light_2, Img_Light_2, Img_Light_2\n"
+"	.4byte Img_Light_2, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0\n"
+"	.4byte Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0\n"
+"	.4byte Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0\n"
+"	.4byte Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0, Pal_Banim_0\n"
+"	.4byte Pal_Banim_0, Pal_Banim_0, Pal_Light, Pal_Light, Pal_Light, Pal_Light\n"
+"	.4byte Pal_Light, Pal_Light, Pal_Light, Pal_Light, Tsa_Light_0, Tsa_Light_1\n"
+"	.4byte frontier_df4_banim_b_019_64C610, frontier_df4_banim_b_019b_64C71C, Tsa_Light_4, Tsa_Light_5, Tsa_Light_6, Tsa_Light_7\n"
+"	.4byte Tsa_Light_8, Tsa_Light_9, Tsa_Light_10, Tsa_Light_11, Tsa_Light_12, Tsa_Light_13\n"
+"	.4byte Tsa_Light_14, frontier_df3_banim_mid_000_64D2B4, frontier_df3_banim_mid_000b_64D3C8, frontier_df3_banim_mid_000c_64D478, frontier_df3_banim_mid_000d_64D580, frontier_df3_banim_mid_000e_64D6BC\n"
+"	.4byte frontier_df3_banim_mid_000f_64D830, frontier_df3_banim_mid_000g_64D9C8, frontier_df3_banim_mid_000h_64DB3C, frontier_df3_banim_mid_000i_64DC48, frontier_df3_banim_mid_000j_64DD1C, Tsa_Light_25\n"
+"	.4byte Tsa_Light_26, Tsa_Light_27, Tsa_Light_28, Tsa_Light_29, Tsa_Light_30, Tsa_Light_31\n"
+"	.4byte Tsa_Light_32, 0x00000001, 0x080e4c34, 0x00000003, efxopMistyrainBG_Loop + 0x1, 0x00000000\n"
+"	.4byte 0x00000000, Tsa_Flux_ClassReel_0, Tsa_Flux_ClassReel_1, Tsa_Flux_ClassReel_2, Tsa_Flux_ClassReel_3, Tsa_Flux_ClassReel_4\n"
+"	.4byte Tsa_Flux_ClassReel_5, Tsa_Flux_ClassReel_6, Tsa_Flux_ClassReel_7, Tsa_Flux_ClassReel_8, Tsa_Flux_ClassReel_9, Tsa_Flux_ClassReel_10\n"
+"	.4byte Tsa_Flux_ClassReel_11, frontier_df3_banim_mid_008_657A78, frontier_df3_banim_mid_008b_657B20, frontier_df3_banim_mid_008c_657BDC, frontier_df3_banim_mid_008d_657CB4, frontier_df3_banim_mid_008e_657D94\n"
+"	.4byte Tsa_Flux_ClassReel_17, Tsa_Flux_ClassReel_18, Tsa_Flux_ClassReel_19, Tsa_Flux_ClassReel_20, Tsa_Flux_ClassReel_21, Tsa_Flux_ClassReel_22\n"
+"	.4byte Tsa_Flux_ClassReel_23, Tsa_Flux_ClassReel_24, Tsa_Flux_ClassReel_25, Tsa_Flux_ClassReel_26, Tsa_Flux_ClassReel_27, frontier_df3_banim_mid_009_6587E0\n"
+"	.4byte frontier_df3_banim_mid_009b_658880, frontier_df3_banim_mid_009c_658934, frontier_df3_banim_mid_009d_6589F0, frontier_df3_banim_mid_009e_658ACC, frontier_df3_banim_mid_009f_658BB4, frontier_df3_banim_mid_009g_658CD8\n"
+"	.4byte frontier_df3_banim_mid_009h_658DF8, frontier_df3_banim_mid_009i_658F04, frontier_df3_banim_mid_009j_659010, frontier_df3_banim_mid_009k_65910C, frontier_df3_banim_mid_009l_65920C, frontier_df3_banim_mid_009m_659308\n"
+"	.4byte AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, Img_Flux_ClassReel_0, Img_Flux_ClassReel_0, Img_Flux_ClassReel_0\n"
+"	.4byte frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC\n"
+"	.4byte Img_Flux_ClassReel_2, Img_Flux_ClassReel_2, Img_Flux_ClassReel_2, Img_Flux_ClassReel_2, Img_Flux_ClassReel_2, Img_Flux_ClassReel_2\n"
+"	.4byte Img_Flux_ClassReel_3, Img_Flux_ClassReel_3, Img_Flux_ClassReel_3, Img_Flux_ClassReel_3, Img_Flux_ClassReel_4, Img_Flux_ClassReel_4\n"
+"	.4byte Img_Flux_ClassReel_4, Img_Flux_ClassReel_4, Img_Flux_ClassReel_4, Img_Flux_ClassReel_4, Img_Flux_ClassReel_4, frontier_df3_banim_mid_006_654DFC\n"
+"	.4byte frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, frontier_df3_banim_mid_006_654DFC, Img_Flux_ClassReel_0\n"
+"	.4byte Img_Flux_ClassReel_0, Img_Flux_ClassReel_0, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, AnimScr_EfxAlacaliburOBJ_LeftBack + 0xB8, 0x00000001\n"
+"	.4byte frontier_df4_misc_lo_011_0E4602 + 0x6EE, 0x00000004, efxopMistyrainOBJ_OnEnd + 0x1, 0x00000003, efxopMistyrainOBJ_Loop_A + 0x1, 0x0020000E\n"
+"	.4byte 0x00000000, 0x00000003, efxopMistyrainOBJ_Loop_B + 0x1, 0x000B000E, 0x00000000, 0x00000003\n"
+"	.4byte efxopMistyrainOBJ_Loop_C + 0x1, 0x0016000E, 0x00000000, 0x00000000, 0x00000000, 0x00000001\n"
+"	.4byte frontier_df4_misc_lo_011_0E4602 + 0x702, 0x00000004, efxopMistyrainOBJ_OnEnd + 0x1, 0x00000003, efxopMistyrainOBJ2_Loop_A + 0x1, 0x000E000E\n"
+"	.4byte 0x00000000, 0x00000003, efxopMistyrainOBJ2_Loop_B + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
+"	.4byte frontier_df4_misc_lo_011_0E4602 + 0x716, 0x00000003, efxopMistyrain_Loop_Main + 0x1, 0x00AA000E, 0x00000000, 0x00000002\n"
+"	.4byte EndActiveClassReelSpell + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x726, 0x00000003\n"
+"	.4byte efxopMyrrh_Loop_Main + 0x1, 0x0032000E, 0x00000000, 0x00000002, EndActiveClassReelSpell + 0x1, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000003, efxopEvilEye_Loop_A + 0x1, 0x0018000E, 0x00000000, 0x00000003\n"
+"	.4byte efxopEvilEye_Loop_B + 0x1, 0x0048000E, 0x00000000, 0x00000002, EndActiveClassReelSpell + 0x1, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000003, efxopEvilEyeBG_Loop + 0x1, 0x00000000, 0x00000000, Img_EvilEye_0\n"
+"	.4byte Img_EvilEye_1, Img_EvilEye_2, Img_EvilEye_3, Img_EvilEye_4, Img_EvilEye_5, Img_EvilEye_6\n"
+"	.4byte Img_EvilEye_7, Img_EvilEye_8, Img_EvilEye_9, Img_EvilEye_10, Img_EvilEye_11, Img_EvilEye_12\n"
+"	.4byte Img_EvilEye_13, Img_EvilEye_14, Img_EvilEye_15, Img_EvilEye_16, Img_EvilEye_17, Img_EvilEye_18\n"
+"	.4byte Img_EvilEye_19, Img_EvilEye_20, Img_EvilEye_21, Img_EvilEye_22, Img_EvilEye_23, Img_EvilEye_24\n"
+"	.4byte Img_EvilEye_25, Tsa_EvilEye_0, Tsa_EvilEye_1, Tsa_EvilEye_2, Tsa_EvilEye_3, Tsa_EvilEye_4\n"
+"	.4byte Tsa_EvilEye_5, Tsa_EvilEye_6, Tsa_EvilEye_7, Tsa_EvilEye_8, Tsa_EvilEye_9, Tsa_EvilEye_10\n"
+"	.4byte Tsa_EvilEye_11, Tsa_EvilEye_12, Tsa_EvilEye_13, Tsa_EvilEye_14, Tsa_EvilEye_15, Tsa_EvilEye_16\n"
+"	.4byte Tsa_EvilEye_17, Tsa_EvilEye_18, Tsa_EvilEye_19, Tsa_EvilEye_20, Tsa_EvilEye_21, frontier_df4_banim_b_053_7059C4\n"
+"	.4byte data_08705B7C, data_08705D48, data_08705F2C, Pal_EvilEye_0, Pal_EvilEye_1, Pal_EvilEye_2\n"
+"	.4byte Pal_EvilEye_3, Pal_EvilEye_4, Pal_EvilEye_5, Pal_EvilEye_6, Pal_EvilEye_7, Pal_EvilEye_8\n"
+"	.4byte Pal_EvilEye_9, Pal_EvilEye_10, Pal_EvilEye_11, Pal_EvilEye_12, Pal_EvilEye_13, Pal_EvilEye_14\n"
+"	.4byte Pal_EvilEye_15, Pal_EvilEye_16, Pal_EvilEye_17, Pal_EvilEye_18, Pal_EvilEye_19, Pal_EvilEyeBg2_A\n"
+"	.4byte Pal_EvilEye_20, Pal_EvilEye_21, Pal_EvilEye_22, Pal_EvilEye_23, Pal_EvilEye_24, 0x00000003\n"
+"	.4byte efxopEvilEyeOBJ_Loop + 0x1, 0x00000000, 0x00000000, 0x00000003, efxopStone_Loop_A + 0x1, 0x003E000E\n"
+"	.4byte 0x00000000, 0x00000003, efxopStone_Loop_B + 0x1, 0x008A000E, 0x00000000, 0x00000002\n"
+"	.4byte EndActiveClassReelSpell + 0x1, 0x00000000, 0x00000000, 0x00000003, efxopStoneBG_Loop + 0x1, 0x00000000\n"
+"	.4byte 0x00000000, Img_Banim_14, Img_Stone_0, Img_Stone_1, Img_Stone_2, Img_Stone_3\n"
+"	.4byte Img_Stone_4, Img_Stone_5, Img_Stone_6, Img_Stone_7, Img_Stone_8, Img_Stone_9\n"
+"	.4byte Img_Stone_10, Img_Stone_11, Img_Stone_12, Img_Stone_13, Img_Stone_14, Img_Stone_15\n"
+"	.4byte Img_Stone_16, Img_Stone_17, Tsa_Stone_0, Tsa_Stone_1, Tsa_Stone_2, Tsa_Stone_3\n"
+"	.4byte Tsa_Stone_4, Tsa_Stone_5, Tsa_Stone_6, Tsa_Stone_7, Tsa_Stone_8, Tsa_Stone_9\n"
+"	.4byte Tsa_Stone_10, Tsa_Stone_11, Tsa_Stone_12, Tsa_Stone_13, Tsa_Stone_14, Tsa_Stone_15\n"
+"	.4byte Tsa_Stone_16, Tsa_Stone_17, Tsa_Stone_18, 0x00000003, efxopStoneOBJ_Loop + 0x1, 0x00000000\n"
+"	.4byte 0x00000000\n"
 );
 __asm__(
     ".section .data.frontier_df4_banim_b.gap3, \"aw\", %progbits\n"
@@ -5019,189 +5321,243 @@ __asm__(
 "	.4byte EfxDracoZombiePrepareImg + 0x1, 0x00000003, EkrDZ_MonsterFlyIntoScreen + 0x1, 0x00000002, EkrDZ_PrepareBanimfx + 0x1, 0x002D000E\n"
 "	.4byte 0x00000000, 0x0000000B, 0x00000000, 0x00000003, EkrDZ_TriggerPreparedFlag + 0x1, 0x00000003\n"
 "	.4byte EkrDZ_IdleInBattle + 0x1, 0x00000003, EkrDZ_ReloadCustomBg + 0x1, 0x00000003, EkrDZ_ReloadCustomBgAndFadeOut + 0x1, 0x00000003\n"
-"	.4byte EkrDZ_SetDragonStatAttrEndBit + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x7EA, 0x00000003\n"
-"	.4byte EkrDragonQuakeMain + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_011_0E4602 + 0x7FA, 0x00000003\n"
-"	.4byte EkrWhiteINOUT_Loop1 + 0x1, 0x00000003, EkrWhiteINOUT_Loop2 + 0x1, 0x00000003, EkrWhiteINOUT_Loop3 + 0x1, 0x00000003\n"
-"	.4byte EkrWhiteINOUT_RefrainPalette + 0x1, 0x00000000, 0x00000000, 0x0000000E, 0x00000000, 0x00000002\n"
-"	.4byte EkrDragonPalFade_Init + 0x1, 0x00000003, EkrDragonPalFade_Loop + 0x1, 0x00000000, 0x00000000, 0x0ADF0F1F\n"
-"	.4byte 0x0A5D0A9E, 0x0A5D0A1C, 0x0ADF0A9E, 0x00008000, 0x003C000E, 0x00000000\n"
-"	.4byte 0x00000003, EkrMyr_PrepareBanimfx + 0x1, 0x00000003, EkrMyr_WaitForTransform + 0x1, 0x0000000B, 0x00000000\n"
-"	.4byte 0x00000003, EkrMyr_TrigerForPrepared + 0x1, 0x00000003, EkrMyr_InBattleIdle + 0x1, 0x00000003, EkrMyr_ReturnToLoli + 0x1\n"
-"	.4byte 0x00000003, EkrMyr_WaitForReturnEnd + 0x1, 0x00000000, 0x00000000, 0x00000000, 0x00010000\n"
-"	.4byte 0x00010001, 0x00020002, 0x00030003, 0x00040003, 0x00050004, 0x00050005\n"
-"	.4byte 0x00060006, 0x00070006, 0x00070007, 0x00080008, 0x00090008, 0x00090009\n"
-"	.4byte 0x000A000A, 0x000B000A, 0x000B000B, 0x000C000B, 0x000C000C, 0x000D000C\n"
-"	.4byte 0x000D000D, 0x000D000D, 0x000E000E, 0x000E000E, 0x000E000E, 0x000F000F\n"
+"	.4byte EkrDZ_SetDragonStatAttrEndBit + 0x1, 0x00000000, 0x00000000\n"
+);
+struct ProcCmd ProcScr_ekrDragonQuake[] __attribute__((section(".data.frontier_df4_banim_b.gap60"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_011_0E4602 + 0x7EA)), PROC_REPEAT((void*)((u8*)EkrDragonQuakeMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_ekrWhiteINOUT[] __attribute__((section(".data.frontier_df4_banim_b.gap60"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_011_0E4602 + 0x7FA)), PROC_REPEAT((void*)((u8*)EkrWhiteINOUT_Loop1 + 0x1)), PROC_REPEAT((void*)((u8*)EkrWhiteINOUT_Loop2 + 0x1)), PROC_REPEAT((void*)((u8*)EkrWhiteINOUT_Loop3 + 0x1)),
+    PROC_REPEAT((void*)((u8*)EkrWhiteINOUT_RefrainPalette + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_EkrDragon_0[] __attribute__((section(".data.frontier_df4_banim_b.gap60"))) = {
+    PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)EkrDragonPalFade_Init + 0x1)), PROC_REPEAT((void*)((u8*)EkrDragonPalFade_Loop + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap60, \"aw\", %progbits\n"
+"	.4byte 0x0ADF0F1F, 0x0A5D0A9E, 0x0A5D0A1C, 0x0ADF0A9E, 0x00008000, 0x003C000E\n"
+"	.4byte 0x00000000, 0x00000003, EkrMyr_PrepareBanimfx + 0x1, 0x00000003, EkrMyr_WaitForTransform + 0x1, 0x0000000B\n"
+"	.4byte 0x00000000, 0x00000003, EkrMyr_TrigerForPrepared + 0x1, 0x00000003, EkrMyr_InBattleIdle + 0x1, 0x00000003\n"
+"	.4byte EkrMyr_ReturnToLoli + 0x1, 0x00000003, EkrMyr_WaitForReturnEnd + 0x1, 0x00000000, 0x00000000, 0x00000000\n"
+"	.4byte 0x00010000, 0x00010001, 0x00020002, 0x00030003, 0x00040003, 0x00050004\n"
+"	.4byte 0x00050005, 0x00060006, 0x00070006, 0x00070007, 0x00080008, 0x00090008\n"
+"	.4byte 0x00090009, 0x000A000A, 0x000B000A, 0x000B000B, 0x000C000B, 0x000C000C\n"
+"	.4byte 0x000D000C, 0x000D000D, 0x000D000D, 0x000E000E, 0x000E000E, 0x000E000E\n"
 "	.4byte 0x000F000F, 0x000F000F, 0x000F000F, 0x000F000F, 0x000F000F, 0x000F000F\n"
 "	.4byte 0x000F000F, 0x000F000F, 0x000F000F, 0x000F000F, 0x000F000F, 0x000F000F\n"
-"	.4byte 0x000F000F, 0x000E000F, 0x000E000E, 0x000E000E, 0x000D000E, 0x000D000D\n"
-"	.4byte 0x000D000D, 0x000C000C, 0x000C000C, 0x000B000B, 0x000B000B, 0x000A000A\n"
-"	.4byte 0x0009000A, 0x00090009, 0x00080008, 0x00070008, 0x00070007, 0x00060006\n"
-"	.4byte 0x00050006, 0x00050005, 0x00040004, 0x00030003, 0x00020003, 0x00010002\n"
-"	.4byte 0x00010001, 0x00000000, 0xFFFF0000, 0xFFFEFFFF, 0xFFFEFFFE, 0xFFFDFFFD\n"
-"	.4byte 0xFFFCFFFC, 0xFFFBFFFC, 0xFFFAFFFB, 0xFFFAFFFA, 0xFFF9FFF9, 0xFFF8FFF9\n"
-"	.4byte 0xFFF8FFF8, 0xFFF7FFF7, 0xFFF6FFF7, 0xFFF6FFF6, 0xFFF5FFF5, 0xFFF4FFF5\n"
-"	.4byte 0xFFF4FFF4, 0xFFF3FFF4, 0xFFF3FFF3, 0xFFF2FFF3, 0xFFF2FFF2, 0xFFF2FFF2\n"
-"	.4byte 0xFFF1FFF1, 0xFFF1FFF1, 0xFFF1FFF1, 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF0FFF0\n"
+"	.4byte 0x000F000F, 0x000F000F, 0x000E000F, 0x000E000E, 0x000E000E, 0x000D000E\n"
+"	.4byte 0x000D000D, 0x000D000D, 0x000C000C, 0x000C000C, 0x000B000B, 0x000B000B\n"
+"	.4byte 0x000A000A, 0x0009000A, 0x00090009, 0x00080008, 0x00070008, 0x00070007\n"
+"	.4byte 0x00060006, 0x00050006, 0x00050005, 0x00040004, 0x00030003, 0x00020003\n"
+"	.4byte 0x00010002, 0x00010001, 0x00000000, 0xFFFF0000, 0xFFFEFFFF, 0xFFFEFFFE\n"
+"	.4byte 0xFFFDFFFD, 0xFFFCFFFC, 0xFFFBFFFC, 0xFFFAFFFB, 0xFFFAFFFA, 0xFFF9FFF9\n"
+"	.4byte 0xFFF8FFF9, 0xFFF8FFF8, 0xFFF7FFF7, 0xFFF6FFF7, 0xFFF6FFF6, 0xFFF5FFF5\n"
+"	.4byte 0xFFF4FFF5, 0xFFF4FFF4, 0xFFF3FFF4, 0xFFF3FFF3, 0xFFF2FFF3, 0xFFF2FFF2\n"
+"	.4byte 0xFFF2FFF2, 0xFFF1FFF1, 0xFFF1FFF1, 0xFFF1FFF1, 0xFFF0FFF0, 0xFFF0FFF0\n"
 "	.4byte 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF0FFF0\n"
-"	.4byte 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF1FFF0\n"
-"	.4byte 0xFFF1FFF1, 0xFFF1FFF1, 0xFFF2FFF1, 0xFFF2FFF2, 0xFFF2FFF2, 0xFFF3FFF3\n"
-"	.4byte 0xFFF3FFF3, 0xFFF4FFF4, 0xFFF4FFF4, 0xFFF5FFF5, 0xFFF6FFF5, 0xFFF6FFF6\n"
-"	.4byte 0xFFF7FFF7, 0xFFF8FFF7, 0xFFF8FFF8, 0xFFF9FFF9, 0xFFFAFFF9, 0xFFFAFFFA\n"
-"	.4byte 0xFFFBFFFB, 0xFFFCFFFC, 0xFFFDFFFC, 0xFFFEFFFD, 0xFFFEFFFE, 0xFFFFFFFF\n"
-"	.4byte 0x00000000, 0x00010000, 0x00010001, 0x00020002, 0x00030003, 0x00040003\n"
-"	.4byte 0x00050004, 0x00050005, 0x00060006, 0x00070006, 0x00070007, 0x00080008\n"
-"	.4byte 0x00090008, 0x00090009, 0x000A000A, 0x000B000A, 0x000B000B, 0x000C000B\n"
-"	.4byte 0x000C000C, 0x000D000C, 0x000D000D, 0x000D000D, 0x000E000E, 0x000E000E\n"
-"	.4byte 0x000E000E, 0x000F000F, 0x000F000F, 0x000F000F, 0x000F000F, 0x000F000F\n"
-"	.4byte 0x000F000F, 0x000F000F, 0xC000B000, 0xE000D000, 0xB000F000, 0xD000C000\n"
-"	.4byte 0xF000E000, 0x00000001, gBarfxTileConf3 + 0xc, 0x00000003, EkrsubAnimeEmulatorMain + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000001, gAnimSpriteRotScalePosY + 0x20, 0x00000003, Loop6C_efxSoundSE + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000068, 0x0000001B, 0x00000046, 0x0000001B, 0x00000047\n"
-"	.4byte 0x0000001B, 0x00000048, 0x0000001B, 0x00000049, 0x0000001B, 0x0000004A\n"
-"	.4byte 0x0000001B, 0x0000004B, 0x0000001B, 0x0000004C, 0x0000001B, 0x0000004D\n"
-"	.4byte 0x0000001C, 0x0000004E, 0x0000001B, 0x0000004F, 0x0000001B, 0x0000005D\n"
-"	.4byte 0x0000001B, 0x0000005E, 0x0000001B, 0x00000050, 0x0000001B, 0x00000051\n"
-"	.4byte 0x0000001B, 0x00000052, 0x0000001C, 0x0000006A, 0x0000001B, 0x0000005A\n"
-"	.4byte 0x0000001B, 0x0000005B, 0x0000001B, 0x0000005C, 0x0000001B, 0x00000044\n"
-"	.4byte 0x0000001C, 0x0000006B, 0x0000001C, 0x00000053, 0x0000001C, 0x00000043\n"
-"	.4byte 0x0000001C, 0x0000006D, 0x0000001C, 0x00000040, 0x0000001D, 0x00000056\n"
-"	.4byte 0x0000001C, 0x00000057, 0x0000001C, 0x00000041, 0x0000001C, 0x0000006C\n"
-"	.4byte 0x0000001D, 0x000000BE, 0x0000001E, 0xFFFFFFFF, 0xFFFFFFFF\n"
+"	.4byte 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF0FFF0, 0xFFF0FFF0\n"
+"	.4byte 0xFFF1FFF0, 0xFFF1FFF1, 0xFFF1FFF1, 0xFFF2FFF1, 0xFFF2FFF2, 0xFFF2FFF2\n"
+"	.4byte 0xFFF3FFF3, 0xFFF3FFF3, 0xFFF4FFF4, 0xFFF4FFF4, 0xFFF5FFF5, 0xFFF6FFF5\n"
+"	.4byte 0xFFF6FFF6, 0xFFF7FFF7, 0xFFF8FFF7, 0xFFF8FFF8, 0xFFF9FFF9, 0xFFFAFFF9\n"
+"	.4byte 0xFFFAFFFA, 0xFFFBFFFB, 0xFFFCFFFC, 0xFFFDFFFC, 0xFFFEFFFD, 0xFFFEFFFE\n"
+"	.4byte 0xFFFFFFFF, 0x00000000, 0x00010000, 0x00010001, 0x00020002, 0x00030003\n"
+"	.4byte 0x00040003, 0x00050004, 0x00050005, 0x00060006, 0x00070006, 0x00070007\n"
+"	.4byte 0x00080008, 0x00090008, 0x00090009, 0x000A000A, 0x000B000A, 0x000B000B\n"
+"	.4byte 0x000C000B, 0x000C000C, 0x000D000C, 0x000D000D, 0x000D000D, 0x000E000E\n"
+"	.4byte 0x000E000E, 0x000E000E, 0x000F000F, 0x000F000F, 0x000F000F, 0x000F000F\n"
+"	.4byte 0x000F000F, 0x000F000F, 0x000F000F, 0xC000B000, 0xE000D000, 0xB000F000\n"
+"	.4byte 0xD000C000, 0xF000E000\n"
+);
+struct ProcCmd ProcScr_ekrsubAnimeEmulator[] __attribute__((section(".data.frontier_df4_banim_b.gap60"))) = {
+    PROC_NAME((void*)((u8*)gBarfxTileConf3 + 0xc)), PROC_REPEAT((void*)((u8*)EkrsubAnimeEmulatorMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap60, \"aw\", %progbits\n"
+"	.4byte 0x00000001, gAnimSpriteRotScalePosY + 0x20, 0x00000003, Loop6C_efxSoundSE + 0x1, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000068, 0x0000001B, 0x00000046, 0x0000001B, 0x00000047, 0x0000001B\n"
+"	.4byte 0x00000048, 0x0000001B, 0x00000049, 0x0000001B, 0x0000004A, 0x0000001B\n"
+"	.4byte 0x0000004B, 0x0000001B, 0x0000004C, 0x0000001B, 0x0000004D, 0x0000001C\n"
+"	.4byte 0x0000004E, 0x0000001B, 0x0000004F, 0x0000001B, 0x0000005D, 0x0000001B\n"
+"	.4byte 0x0000005E, 0x0000001B, 0x00000050, 0x0000001B, 0x00000051, 0x0000001B\n"
+"	.4byte 0x00000052, 0x0000001C, 0x0000006A, 0x0000001B, 0x0000005A, 0x0000001B\n"
+"	.4byte 0x0000005B, 0x0000001B, 0x0000005C, 0x0000001B, 0x00000044, 0x0000001C\n"
+"	.4byte 0x0000006B, 0x0000001C, 0x00000053, 0x0000001C, 0x00000043, 0x0000001C\n"
+"	.4byte 0x0000006D, 0x0000001C, 0x00000040, 0x0000001D, 0x00000056, 0x0000001C\n"
+"	.4byte 0x00000057, 0x0000001C, 0x00000041, 0x0000001C, 0x0000006C, 0x0000001D\n"
+"	.4byte 0x000000BE, 0x0000001E, 0xFFFFFFFF, 0xFFFFFFFF\n"
 );
 /* frontier_df4_banim_b_061_7A9254: atomic relocation carve (was INCBIN); every embedded ROM pointer in coherent pointer tables expressed as .4byte Sym(+addend), byte-exact. */
 __asm__(
 "	.section .data.frontier_df4_banim_b.gap61, \"aw\", %progbits\n"
 "	.global frontier_df4_banim_b_061_7A9254\n"
 "frontier_df4_banim_b_061_7A9254:\n"
-"	.4byte gBanimSongIDs1\n"
-"	.4byte gBanimSongIDs1 + 0x10\n"
-"	.4byte gBanimSongIDs1 + 0x20\n"
-"	.4byte gBanimSongIDs1 + 0x30\n"
-"	.4byte gBanimSongIDs1 + 0x40\n"
-"	.4byte gBanimSongIDs1 + 0x50\n"
-"	.4byte gBanimSongIDs1 + 0x60\n"
-"	.4byte gBanimSongIDs2\n"
-"	.4byte gBanimSongIDs2 + 0x10\n"
-"	.4byte gBanimSongIDs2 + 0x20\n"
-"	.4byte gBanimSongIDs2 + 0x30\n"
-"	.4byte gBanimSongIDs2 + 0x40\n"
-"	.4byte gBanimSongIDs2 + 0x50\n"
-"	.4byte gBanimSongIDs2 + 0x60\n"
-"	.4byte gBanimSongIDs3\n"
-"	.4byte gBanimSongIDs3 + 0x10\n"
-"	.4byte gBanimSongIDs3 + 0x20\n"
-"	.4byte gBanimSongIDs3 + 0x30\n"
-"	.4byte gBanimSongIDs3 + 0x40\n"
-"	.4byte gBanimSongIDs3 + 0x50\n"
-"	.4byte gBanimSongIDs3 + 0x60\n"
-"	.4byte gBanimSongIDs4\n"
-"	.4byte gBanimSongIDs4 + 0x10\n"
-"	.4byte gBanimSongIDs4 + 0x20\n"
-"	.4byte gBanimSongIDs4 + 0x30\n"
-"	.4byte gBanimSongIDs4 + 0x40\n"
-"	.4byte gBanimSongIDs4 + 0x50\n"
-"	.4byte gBanimSongIDs4 + 0x60\n"
-"	.4byte 0x03390338, 0x03390338, 0x03390338, 0x03390338, 0x03430342, 0x03430342, 0x03430342, 0x03430342\n"
-"	.4byte 0x034D034C, 0x034D034C, 0x034D034C, 0x034D034C, 0x03570356, 0x03570356, 0x03570356, 0x03570356\n"
-"	.4byte 0x03610360, 0x03610360, 0x03610360, 0x03610360, 0x036B036A, 0x036B036A, 0x036B036A, 0x036B036A\n"
-"	.4byte 0x03750374, 0x03750374, 0x03750374, 0x03750374\n"
-"	.4byte gBanimSongTable4 + 0x1C\n"
-"	.4byte gBanimSongTable4 + 0x2C\n"
-"	.4byte gBanimSongTable4 + 0x3C\n"
-"	.4byte gBanimSongTable4 + 0x4C\n"
-"	.4byte gBanimSongTable4 + 0x5C\n"
-"	.4byte gBanimSongTable4 + 0x6C\n"
-"	.4byte gBanimSongTable4 + 0x7C\n"
-"	.4byte 0x033B033A, 0x033B033A, 0x033B033A, 0x033B033A, 0x03450344, 0x03450344, 0x03450344, 0x03450344\n"
-"	.4byte 0x034F034E, 0x034F034E, 0x034F034E, 0x034F034E, 0x03590358, 0x03590358, 0x03590358, 0x03590358\n"
-"	.4byte 0x03630362, 0x03630362, 0x03630362, 0x03630362, 0x036D036C, 0x036D036C, 0x036D036C, 0x036D036C\n"
-"	.4byte 0x03770376, 0x03770376, 0x03770376, 0x03770376\n"
-"	.4byte gBanimSongTable5 + 0x1C\n"
-"	.4byte gBanimSongTable5 + 0x2C\n"
-"	.4byte gBanimSongTable5 + 0x3C\n"
-"	.4byte gBanimSongTable5 + 0x4C\n"
-"	.4byte gBanimSongTable5 + 0x5C\n"
-"	.4byte gBanimSongTable5 + 0x6C\n"
-"	.4byte gBanimSongTable5 + 0x7C\n"
-"	.4byte 0x03350334, 0x03350334, 0x03350334, 0x03350334, 0x033F033E, 0x033F033E, 0x033F033E, 0x033F033E\n"
-"	.4byte 0x03490348, 0x03490348, 0x03490348, 0x03490348, 0x03530352, 0x03530352, 0x03530352, 0x03530352\n"
-"	.4byte 0x035D035C, 0x035D035C, 0x035D035C, 0x035D035C, 0x03670366, 0x03670366, 0x03670366, 0x03670366\n"
-"	.4byte 0x03710370, 0x03710370, 0x03710370, 0x03710370\n"
-"	.4byte gBanimSongTable6 + 0x1C\n"
-"	.4byte gBanimSongTable6 + 0x2C\n"
-"	.4byte gBanimSongTable6 + 0x3C\n"
-"	.4byte gBanimSongTable6 + 0x4C\n"
-"	.4byte gBanimSongTable6 + 0x5C\n"
-"	.4byte gBanimSongTable6 + 0x6C\n"
-"	.4byte gBanimSongTable6 + 0x7C\n"
-"	.4byte 0x03370336, 0x03370336, 0x03370336, 0x03370336, 0x03410340, 0x03410340, 0x03410340, 0x03410340\n"
-"	.4byte 0x034B034A, 0x034B034A, 0x034B034A, 0x034B034A, 0x03550354, 0x03550354, 0x03550354, 0x03550354\n"
-"	.4byte 0x035F035E, 0x035F035E, 0x035F035E, 0x035F035E, 0x03690368, 0x03690368, 0x03690368, 0x03690368\n"
-"	.4byte 0x03730372, 0x03730372, 0x03730372, 0x03730372\n"
-"	.4byte gBanimSongTable7 + 0x1C\n"
-"	.4byte gBanimSongTable7 + 0x2C\n"
-"	.4byte gBanimSongTable7 + 0x3C\n"
-"	.4byte gBanimSongTable7 + 0x4C\n"
-"	.4byte gBanimSongTable7 + 0x5C\n"
-"	.4byte gBanimSongTable7 + 0x6C\n"
-"	.4byte gBanimSongTable7 + 0x7C\n"
-"	.4byte 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x8C, 0x00000004, sub_80752A4 + 0x1, 0x00000003, EkrClasschgMain + 0x1, 0x00000003, EkrClasschgRegisterDone + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x98, 0x00000003, EfxClasschgBgMain + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte Tsa_Ekrdragonfx_0, Tsa_Ekrdragonfx_1, Tsa_Ekrdragonfx_2, Tsa_Ekrdragonfx_3, Tsa_Ekrdragonfx_4, Tsa_Ekrdragonfx_5, Tsa_Ekrdragonfx_6, Tsa_Ekrdragonfx_7\n"
-"	.4byte Tsa_Ekrdragonfx_8, Tsa_Ekrdragonfx_9, Tsa_Ekrdragonfx_10, Tsa_Ekrdragonfx_11, Tsa_Ekrdragonfx_12, Tsa_Ekrdragonfx_13, Tsa_Ekrdragonfx_14, Tsa_Ekrdragonfx_15\n"
-"	.4byte Tsa_Ekrdragonfx_16, Tsa_Ekrdragonfx_17, Tsa_Ekrdragonfx_18, Tsa_Ekrdragonfx_19, Tsa_Ekrdragonfx_20, Tsa_Ekrdragonfx_21, Tsa_Ekrdragonfx_22, Tsa_Ekrdragonfx_23\n"
-"	.4byte Tsa_Ekrdragonfx_24, Tsa_Ekrdragonfx_25, Tsa_Ekrdragonfx_26, Tsa_Ekrdragonfx_27, Tsa_Ekrdragonfx_28, Tsa_Ekrdragonfx_29, Tsa_Ekrdragonfx_30, Tsa_Ekrdragonfx_31\n"
-"	.4byte Tsa_Ekrdragonfx_32, Tsa_Ekrdragonfx_33, Tsa_Ekrdragonfx_34, Tsa_Ekrdragonfx_35, Tsa_Ekrdragonfx_36, Img_Ekrdragonfx_0, Img_Ekrdragonfx_0, Img_Ekrdragonfx_0\n"
-"	.4byte Img_Ekrdragonfx_0, Img_Ekrdragonfx_0, Img_Ekrdragonfx_0, Img_Ekrdragonfx_0, Img_Ekrdragonfx_1, Img_Ekrdragonfx_2, Img_Ekrdragonfx_3, Img_Ekrdragonfx_4\n"
-"	.4byte Img_Ekrdragonfx_5, Img_Ekrdragonfx_6, Img_Ekrdragonfx_7, Img_Ekrdragonfx_8, Img_Ekrdragonfx_9, Img_Ekrdragonfx_10, Img_Ekrdragonfx_11, Img_Ekrdragonfx_12\n"
-"	.4byte Img_Ekrdragonfx_13, Img_Ekrdragonfx_14, Img_Ekrdragonfx_15, Img_Ekrdragonfx_16, Img_Ekrdragonfx_17, Img_Ekrdragonfx_18, Img_Ekrdragonfx_19, Img_Ekrdragonfx_20\n"
-"	.4byte Img_Ekrdragonfx_21, Img_Ekrdragonfx_22, Img_Ekrdragonfx_23, Img_Ekrdragonfx_24, Img_Ekrdragonfx_25, Img_Ekrdragonfx_26, Img_Ekrdragonfx_27, Img_Ekrdragonfx_28\n"
-"	.4byte Img_Ekrdragonfx_29, Img_Ekrdragonfx_30, Pal_Ekrdragonfx_3, Pal_Ekrdragonfx_3, Pal_Ekrdragonfx_3, Pal_Ekrdragonfx_3, Pal_Ekrdragonfx_3, Pal_Ekrdragonfx_3\n"
-"	.4byte Pal_Ekrdragonfx_3, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4\n"
-"	.4byte Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5\n"
-"	.4byte Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5\n"
-"	.4byte Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_6, Pal_Ekrdragonfx_6, Pal_Ekrdragonfx_6, Pal_Ekrdragonfx_6, Pal_Ekrdragonfx_6, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_012_0E6774 + 0x174, 0x00000003, EfxClasschgBGSE00Main + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x188, 0x00000003\n"
-"	.4byte EfxClasschgBGSE01Main + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x19C, 0x0064000E, 0x00000000, 0x00000003\n"
-"	.4byte EfxClasschgOBJGainMain + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x1B0, 0x0064000E, 0x00000000, 0x00000003\n"
-"	.4byte EfxClasschgOBJDropMain + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x1C4, 0x0064000E, 0x00000000, 0x00000003\n"
-"	.4byte EfxClasschgOBJDiffusionMain + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x1DC, 0x00000003, EfxClasschgFinMain + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x1EC, 0x00000004, EfxClasschgCloneCallBack + 0x1, 0x00000003, EfxClasschgCloneMain + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x200, 0x00000003, EfxBlackInOutUnitMain + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_012_0E6774 + 0x214, 0x00000003, EfxWhiteInOutUnitMain + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x228, 0x00000003\n"
-"	.4byte EfxClasschgRSTMain + 0x1, 0x00000000, 0x00000000, 0x00000000, 0x0000000F, 0x00000000, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000000, frontier_df4_menu_014_A72BF0 + 0x628, frontier_df4_menu_014_A72BF0 + 0x62C, gMid_Skl, gMid_Spd, gMid_Lck\n"
-"	.4byte gMid_Def, gMid_Res, gMid_Con, frontier_df4_menu_014_A72BF0 + 0x628, frontier_df4_menu_014_A72BF0 + 0x630, gMid_Skl, gMid_Spd, gMid_Lck\n"
-"	.4byte gMid_Def, gMid_Res, gMid_Con, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x248, 0x00000003, EkrLvup_OnPrepare + 0x1, 0x00000003\n"
-"	.4byte EkrLvup_InitScreen + 0x1, 0x0001000E, 0x00000000, 0x00000003, EkrLvup_InitLevelUpBox + 0x1, 0x00000003, EkrLvup_SetBgs + 0x1, 0x00000003\n"
-"	.4byte EkrLvup_InitPalette + 0x1, 0x00000003, EkrLvup_PutWindowOnScreen + 0x1, 0x00000003, EkrLvup_PrepareApGfx + 0x1, 0x0014000E, 0x00000000, 0x00000003\n"
-"	.4byte EkrLvup_Promo_WindowScroll0 + 0x1, 0x00000003, EkrLvup_Promo_DrawPromoNewClassName + 0x1, 0x00000003, EkrLvup_Promo_WindowScroll1 + 0x1, 0x00000003, EkrLvup_DrawNewLevel + 0x1, 0x00000003\n"
-"	.4byte EkrLvup_InitCounterForMainAnim + 0x1, 0x00000003, EkrLvup_MainAnime + 0x1, 0x00000003, EkrLvup_SetHBlank + 0x1, 0x00000003, EkrLvup_DoNothing + 0x1, 0x00000003\n"
-"	.4byte EkrLvup_PutWindowOffScreen + 0x1, 0x00000003, EkrLvup_ResetScreen + 0x1, 0x00000003, EkrLvup_OnEnd + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_012_0E6774 + 0x254, 0x00000004, nullsub_60 + 0x1, 0x00000003, EfxPartsofScrollMain + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_012_0E6774 + 0x268, 0x00000004, nullsub_61 + 0x1, 0x00000003, EfxPartsofScroll2Main + 0x1, 0x00000000, 0x00000000, 0xFF12FF00\n"
-"	.4byte 0xFF34FF23, 0xFF56FF45, 0xFF78FF67, 0xFF9AFF89, 0xFFBCFFAB, 0xFFDEFFCD, 0xFFEFFFDE, 0x00220011\n"
-"	.4byte 0x00330022, 0x00550044, 0x00770066, 0x00990088, 0x00BB00AA, 0x00DD00CC, 0x010000EE, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_012_0E6774 + 0x27C, 0x00000004, EfxleveluphbCallBack + 0x1, 0x00000003, EfxleveluphbNop + 0x1, 0x00000003, EfxleveluphbMain + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x28C, 0x00000003, EfxlvupbgMain + 0x1, 0x00000000, 0x00000000, Tsa1_EfxLvupBG\n"
-"	.4byte Tsa2_EfxLvupBG, Tsa3_EfxLvupBG, Tsa4_EfxLvupBG, Tsa5_EfxLvupBG, Tsa6_EfxLvupBG, Tsa7_EfxLvupBG, Tsa8_EfxLvupBG, Tsa9_EfxLvupBG\n"
-"	.4byte Tsa10_EfxLvupBG, Tsa11_EfxLvupBG, Img1_EfxLvupBG, Img1_EfxLvupBG, frontier_df4_banim_a_005_5EA510, frontier_df4_banim_a_005_5EA510, Img3_EfxLvupBG, frontier_df4_banim_a_006_5EBF04\n"
-"	.4byte Img5_EfxLvupBG, Img6_EfxLvupBG, Img7_EfxLvupBG, Img7_EfxLvupBG, Img7_EfxLvupBG, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x2C4, 0x00000003\n"
-"	.4byte EfxLvupBg2Main + 0x1, 0x00000000, 0x00000000, Tsa1_EfxLvupBG2, Tsa2_EfxLvupBG2, Tsa3_EfxLvupBG2, Tsa4_EfxLvupBG2, Tsa5_EfxLvupBG2\n"
-"	.4byte Tsa6_EfxLvupBG2, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x2EC, 0x00000004, EfxLvupOBJ2CallBack + 0x1, 0x0018000E, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x2F8, 0x00000003, Loop6C1_EfxLvupBGCOL + 0x1, 0x00000003, efxCriricalEffectBGCOLMain + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000002, sub_8076F70 + 0x1, 0x00000003, EkrLvupApfxMain + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_012_0E6774 + 0x35C, 0x00000003, EobjLvup_SpawnArrowAndLabel + 0x1, 0x00000003, EobjLvup_RedrawGainLabel + 0x1, 0x00000003, EobjLvup_WaitEndAndClear + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x368, 0x00000003, EkrTriangleMain + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_012_0E6774 + 0x374, 0x00000003, EkrTriPegasusKnightMain + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x388, 0x00000003\n"
-"	.4byte EkrTriPegasusKnightBgMain + 0x1, 0x00000000, 0x00000000, Tsa_EkrTriPegagusRightBG1, Tsa_EkrTriPegagusRightBG2, Tsa_EkrTriPegagusRightBG3, Tsa_EkrTriPegagusLeftBG1, Tsa_EkrTriPegagusLeftBG2\n"
-"	.4byte Tsa_EkrTriPegagusLeftBG3, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x3BC, 0x00000003, EkrTriPegasusKnightObjMain + 0x1, 0x00000000, 0x00000000, 0x00000001\n"
-"	.4byte frontier_df4_misc_lo_012_0E6774 + 0x3D4, 0x00000003, EkrTriArmorKnightMain + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x3E8, 0x00000003\n"
-"	.4byte EkrTriArmorKnightObjMain + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x400, 0x00000003, sub_8077C60 + 0x1, 0x00000003\n"
-"	.4byte EkrTriArmorKnightObj2Main2 + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x418, 0x00000003, EfxTriangleQUAKEMain + 0x1, 0x00000000\n"
-"	.4byte 0x00000000\n"
+"	.4byte gBanimSongIDs1, gBanimSongIDs1 + 0x10, gBanimSongIDs1 + 0x20, gBanimSongIDs1 + 0x30, gBanimSongIDs1 + 0x40, gBanimSongIDs1 + 0x50\n"
+"	.4byte gBanimSongIDs1 + 0x60, gBanimSongIDs2, gBanimSongIDs2 + 0x10, gBanimSongIDs2 + 0x20, gBanimSongIDs2 + 0x30, gBanimSongIDs2 + 0x40\n"
+"	.4byte gBanimSongIDs2 + 0x50, gBanimSongIDs2 + 0x60, gBanimSongIDs3, gBanimSongIDs3 + 0x10, gBanimSongIDs3 + 0x20, gBanimSongIDs3 + 0x30\n"
+"	.4byte gBanimSongIDs3 + 0x40, gBanimSongIDs3 + 0x50, gBanimSongIDs3 + 0x60, gBanimSongIDs4, gBanimSongIDs4 + 0x10, gBanimSongIDs4 + 0x20\n"
+"	.4byte gBanimSongIDs4 + 0x30, gBanimSongIDs4 + 0x40, gBanimSongIDs4 + 0x50, gBanimSongIDs4 + 0x60, 0x03390338, 0x03390338\n"
+"	.4byte 0x03390338, 0x03390338, 0x03430342, 0x03430342, 0x03430342, 0x03430342\n"
+"	.4byte 0x034D034C, 0x034D034C, 0x034D034C, 0x034D034C, 0x03570356, 0x03570356\n"
+"	.4byte 0x03570356, 0x03570356, 0x03610360, 0x03610360, 0x03610360, 0x03610360\n"
+"	.4byte 0x036B036A, 0x036B036A, 0x036B036A, 0x036B036A, 0x03750374, 0x03750374\n"
+"	.4byte 0x03750374, 0x03750374, gBanimSongTable4 + 0x1C, gBanimSongTable4 + 0x2C, gBanimSongTable4 + 0x3C, gBanimSongTable4 + 0x4C\n"
+"	.4byte gBanimSongTable4 + 0x5C, gBanimSongTable4 + 0x6C, gBanimSongTable4 + 0x7C, 0x033B033A, 0x033B033A, 0x033B033A\n"
+"	.4byte 0x033B033A, 0x03450344, 0x03450344, 0x03450344, 0x03450344, 0x034F034E\n"
+"	.4byte 0x034F034E, 0x034F034E, 0x034F034E, 0x03590358, 0x03590358, 0x03590358\n"
+"	.4byte 0x03590358, 0x03630362, 0x03630362, 0x03630362, 0x03630362, 0x036D036C\n"
+"	.4byte 0x036D036C, 0x036D036C, 0x036D036C, 0x03770376, 0x03770376, 0x03770376\n"
+"	.4byte 0x03770376, gBanimSongTable5 + 0x1C, gBanimSongTable5 + 0x2C, gBanimSongTable5 + 0x3C, gBanimSongTable5 + 0x4C, gBanimSongTable5 + 0x5C\n"
+"	.4byte gBanimSongTable5 + 0x6C, gBanimSongTable5 + 0x7C, 0x03350334, 0x03350334, 0x03350334, 0x03350334\n"
+"	.4byte 0x033F033E, 0x033F033E, 0x033F033E, 0x033F033E, 0x03490348, 0x03490348\n"
+"	.4byte 0x03490348, 0x03490348, 0x03530352, 0x03530352, 0x03530352, 0x03530352\n"
+"	.4byte 0x035D035C, 0x035D035C, 0x035D035C, 0x035D035C, 0x03670366, 0x03670366\n"
+"	.4byte 0x03670366, 0x03670366, 0x03710370, 0x03710370, 0x03710370, 0x03710370\n"
+"	.4byte gBanimSongTable6 + 0x1C, gBanimSongTable6 + 0x2C, gBanimSongTable6 + 0x3C, gBanimSongTable6 + 0x4C, gBanimSongTable6 + 0x5C, gBanimSongTable6 + 0x6C\n"
+"	.4byte gBanimSongTable6 + 0x7C, 0x03370336, 0x03370336, 0x03370336, 0x03370336, 0x03410340\n"
+"	.4byte 0x03410340, 0x03410340, 0x03410340, 0x034B034A, 0x034B034A, 0x034B034A\n"
+"	.4byte 0x034B034A, 0x03550354, 0x03550354, 0x03550354, 0x03550354, 0x035F035E\n"
+"	.4byte 0x035F035E, 0x035F035E, 0x035F035E, 0x03690368, 0x03690368, 0x03690368\n"
+"	.4byte 0x03690368, 0x03730372, 0x03730372, 0x03730372, 0x03730372, gBanimSongTable7 + 0x1C\n"
+"	.4byte gBanimSongTable7 + 0x2C, gBanimSongTable7 + 0x3C, gBanimSongTable7 + 0x4C, gBanimSongTable7 + 0x5C, gBanimSongTable7 + 0x6C, gBanimSongTable7 + 0x7C\n"
 );
+struct ProcCmd ProcScr_ekrClasschg[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x8C)), PROC_SET_END_CB((void*)((u8*)sub_80752A4 + 0x1)), PROC_REPEAT((void*)((u8*)EkrClasschgMain + 0x1)), PROC_REPEAT((void*)((u8*)EkrClasschgRegisterDone + 0x1)),
+    PROC_END,
+};
+struct ProcCmd ProcScr_efxClasschgBG[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x98)), PROC_REPEAT((void*)((u8*)EfxClasschgBgMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap61, \"aw\", %progbits\n"
+"	.4byte Tsa_Ekrdragonfx_0, Tsa_Ekrdragonfx_1, Tsa_Ekrdragonfx_2, Tsa_Ekrdragonfx_3, Tsa_Ekrdragonfx_4, Tsa_Ekrdragonfx_5\n"
+"	.4byte Tsa_Ekrdragonfx_6, Tsa_Ekrdragonfx_7, Tsa_Ekrdragonfx_8, Tsa_Ekrdragonfx_9, Tsa_Ekrdragonfx_10, Tsa_Ekrdragonfx_11\n"
+"	.4byte Tsa_Ekrdragonfx_12, Tsa_Ekrdragonfx_13, Tsa_Ekrdragonfx_14, Tsa_Ekrdragonfx_15, Tsa_Ekrdragonfx_16, Tsa_Ekrdragonfx_17\n"
+"	.4byte Tsa_Ekrdragonfx_18, Tsa_Ekrdragonfx_19, Tsa_Ekrdragonfx_20, Tsa_Ekrdragonfx_21, Tsa_Ekrdragonfx_22, Tsa_Ekrdragonfx_23\n"
+"	.4byte Tsa_Ekrdragonfx_24, Tsa_Ekrdragonfx_25, Tsa_Ekrdragonfx_26, Tsa_Ekrdragonfx_27, Tsa_Ekrdragonfx_28, Tsa_Ekrdragonfx_29\n"
+"	.4byte Tsa_Ekrdragonfx_30, Tsa_Ekrdragonfx_31, Tsa_Ekrdragonfx_32, Tsa_Ekrdragonfx_33, Tsa_Ekrdragonfx_34, Tsa_Ekrdragonfx_35\n"
+"	.4byte Tsa_Ekrdragonfx_36, Img_Ekrdragonfx_0, Img_Ekrdragonfx_0, Img_Ekrdragonfx_0, Img_Ekrdragonfx_0, Img_Ekrdragonfx_0\n"
+"	.4byte Img_Ekrdragonfx_0, Img_Ekrdragonfx_0, Img_Ekrdragonfx_1, Img_Ekrdragonfx_2, Img_Ekrdragonfx_3, Img_Ekrdragonfx_4\n"
+"	.4byte Img_Ekrdragonfx_5, Img_Ekrdragonfx_6, Img_Ekrdragonfx_7, Img_Ekrdragonfx_8, Img_Ekrdragonfx_9, Img_Ekrdragonfx_10\n"
+"	.4byte Img_Ekrdragonfx_11, Img_Ekrdragonfx_12, Img_Ekrdragonfx_13, Img_Ekrdragonfx_14, Img_Ekrdragonfx_15, Img_Ekrdragonfx_16\n"
+"	.4byte Img_Ekrdragonfx_17, Img_Ekrdragonfx_18, Img_Ekrdragonfx_19, Img_Ekrdragonfx_20, Img_Ekrdragonfx_21, Img_Ekrdragonfx_22\n"
+"	.4byte Img_Ekrdragonfx_23, Img_Ekrdragonfx_24, Img_Ekrdragonfx_25, Img_Ekrdragonfx_26, Img_Ekrdragonfx_27, Img_Ekrdragonfx_28\n"
+"	.4byte Img_Ekrdragonfx_29, Img_Ekrdragonfx_30, Pal_Ekrdragonfx_3, Pal_Ekrdragonfx_3, Pal_Ekrdragonfx_3, Pal_Ekrdragonfx_3\n"
+"	.4byte Pal_Ekrdragonfx_3, Pal_Ekrdragonfx_3, Pal_Ekrdragonfx_3, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4\n"
+"	.4byte Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_4\n"
+"	.4byte Pal_Ekrdragonfx_4, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5\n"
+"	.4byte Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5\n"
+"	.4byte Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_5, Pal_Ekrdragonfx_6, Pal_Ekrdragonfx_6\n"
+"	.4byte Pal_Ekrdragonfx_6, Pal_Ekrdragonfx_6, Pal_Ekrdragonfx_6, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x174, 0x00000003\n"
+"	.4byte EfxClasschgBGSE00Main + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x188, 0x00000003\n"
+"	.4byte EfxClasschgBGSE01Main + 0x1, 0x00000000, 0x00000000\n"
+);
+struct ProcCmd ProcScr_efxClasschgOBJGain[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x19C)), PROC_SLEEP(0x64), PROC_REPEAT((void*)((u8*)EfxClasschgOBJGainMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxClasschgOBJDrop[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x1B0)), PROC_SLEEP(0x64), PROC_REPEAT((void*)((u8*)EfxClasschgOBJDropMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxClasschgOBJDiffusion[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x1C4)), PROC_SLEEP(0x64), PROC_REPEAT((void*)((u8*)EfxClasschgOBJDiffusionMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxClasschgFIN[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x1DC)), PROC_REPEAT((void*)((u8*)EfxClasschgFinMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxClasschgCLONE[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x1EC)), PROC_SET_END_CB((void*)((u8*)EfxClasschgCloneCallBack + 0x1)), PROC_REPEAT((void*)((u8*)EfxClasschgCloneMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxBlackInOutUnit[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x200)), PROC_REPEAT((void*)((u8*)EfxBlackInOutUnitMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxWhiteInOutUnit[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x214)), PROC_REPEAT((void*)((u8*)EfxWhiteInOutUnitMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_efxClasschgRST[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x228)), PROC_REPEAT((void*)((u8*)EfxClasschgRSTMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap61, \"aw\", %progbits\n"
+"	.4byte 0x00000000, 0x0000000F, 0x00000000, 0x00000000, 0x00000000, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000000, frontier_df4_menu_014_A72BF0 + 0x628, frontier_df4_menu_014_A72BF0 + 0x62C, gMid_Skl, gMid_Spd\n"
+"	.4byte gMid_Lck, gMid_Def, gMid_Res, gMid_Con, frontier_df4_menu_014_A72BF0 + 0x628, frontier_df4_menu_014_A72BF0 + 0x630\n"
+"	.4byte gMid_Skl, gMid_Spd, gMid_Lck, gMid_Def, gMid_Res, gMid_Con\n"
+"	.4byte 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x248, 0x00000003, EkrLvup_OnPrepare + 0x1, 0x00000003, EkrLvup_InitScreen + 0x1\n"
+"	.4byte 0x0001000E, 0x00000000, 0x00000003, EkrLvup_InitLevelUpBox + 0x1, 0x00000003, EkrLvup_SetBgs + 0x1\n"
+"	.4byte 0x00000003, EkrLvup_InitPalette + 0x1, 0x00000003, EkrLvup_PutWindowOnScreen + 0x1, 0x00000003, EkrLvup_PrepareApGfx + 0x1\n"
+"	.4byte 0x0014000E, 0x00000000, 0x00000003, EkrLvup_Promo_WindowScroll0 + 0x1, 0x00000003, EkrLvup_Promo_DrawPromoNewClassName + 0x1\n"
+"	.4byte 0x00000003, EkrLvup_Promo_WindowScroll1 + 0x1, 0x00000003, EkrLvup_DrawNewLevel + 0x1, 0x00000003, EkrLvup_InitCounterForMainAnim + 0x1\n"
+"	.4byte 0x00000003, EkrLvup_MainAnime + 0x1, 0x00000003, EkrLvup_SetHBlank + 0x1, 0x00000003, EkrLvup_DoNothing + 0x1\n"
+"	.4byte 0x00000003, EkrLvup_PutWindowOffScreen + 0x1, 0x00000003, EkrLvup_ResetScreen + 0x1, 0x00000003, EkrLvup_OnEnd + 0x1\n"
+"	.4byte 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x254, 0x00000004, nullsub_60 + 0x1\n"
+"	.4byte 0x00000003, EfxPartsofScrollMain + 0x1, 0x00000000, 0x00000000, 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x268\n"
+"	.4byte 0x00000004, nullsub_61 + 0x1, 0x00000003, EfxPartsofScroll2Main + 0x1, 0x00000000, 0x00000000\n"
+"	.4byte 0xFF12FF00, 0xFF34FF23, 0xFF56FF45, 0xFF78FF67, 0xFF9AFF89, 0xFFBCFFAB\n"
+"	.4byte 0xFFDEFFCD, 0xFFEFFFDE, 0x00220011, 0x00330022, 0x00550044, 0x00770066\n"
+"	.4byte 0x00990088, 0x00BB00AA, 0x00DD00CC, 0x010000EE\n"
+);
+struct ProcCmd ProcScr_Efxleveluphb[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x27C)), PROC_SET_END_CB((void*)((u8*)EfxleveluphbCallBack + 0x1)), PROC_REPEAT((void*)((u8*)EfxleveluphbNop + 0x1)), PROC_REPEAT((void*)((u8*)EfxleveluphbMain + 0x1)),
+    PROC_END,
+};
+struct ProcCmd ProcScr_Efxlvupbg[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x28C)), PROC_REPEAT((void*)((u8*)EfxlvupbgMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap61, \"aw\", %progbits\n"
+"	.4byte Tsa1_EfxLvupBG, Tsa2_EfxLvupBG, Tsa3_EfxLvupBG, Tsa4_EfxLvupBG, Tsa5_EfxLvupBG, Tsa6_EfxLvupBG\n"
+"	.4byte Tsa7_EfxLvupBG, Tsa8_EfxLvupBG, Tsa9_EfxLvupBG, Tsa10_EfxLvupBG, Tsa11_EfxLvupBG, Img1_EfxLvupBG\n"
+"	.4byte Img1_EfxLvupBG, frontier_df4_banim_a_005_5EA510, frontier_df4_banim_a_005_5EA510, Img3_EfxLvupBG, frontier_df4_banim_a_006_5EBF04, Img5_EfxLvupBG\n"
+"	.4byte Img6_EfxLvupBG, Img7_EfxLvupBG, Img7_EfxLvupBG, Img7_EfxLvupBG\n"
+);
+struct ProcCmd ProcScr_efxLvupBG2[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x2C4)), PROC_REPEAT((void*)((u8*)EfxLvupBg2Main + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap61, \"aw\", %progbits\n"
+"	.4byte Tsa1_EfxLvupBG2, Tsa2_EfxLvupBG2, Tsa3_EfxLvupBG2, Tsa4_EfxLvupBG2, Tsa5_EfxLvupBG2, Tsa6_EfxLvupBG2\n"
+);
+struct ProcCmd ProcScr_efxLvupOBJ2[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x2EC)), PROC_SET_END_CB((void*)((u8*)EfxLvupOBJ2CallBack + 0x1)), PROC_SLEEP(0x18), PROC_END,
+};
+struct ProcCmd ProcScr_efxLvupBGCOL[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x2F8)), PROC_REPEAT((void*)((u8*)Loop6C1_EfxLvupBGCOL + 0x1)), PROC_REPEAT((void*)((u8*)efxCriricalEffectBGCOLMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_EkrLvupApfx[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_CALL((void*)((u8*)sub_8076F70 + 0x1)), PROC_REPEAT((void*)((u8*)EkrLvupApfxMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_eobjLvup[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x35C)), PROC_REPEAT((void*)((u8*)EobjLvup_SpawnArrowAndLabel + 0x1)), PROC_REPEAT((void*)((u8*)EobjLvup_RedrawGainLabel + 0x1)), PROC_REPEAT((void*)((u8*)EobjLvup_WaitEndAndClear + 0x1)),
+    PROC_END,
+};
+struct ProcCmd ProcScr_ekrTriangle[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x368)), PROC_REPEAT((void*)((u8*)EkrTriangleMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_ekrTriPegasusKnight[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x374)), PROC_REPEAT((void*)((u8*)EkrTriPegasusKnightMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_ekrTriPegasusKnightBG[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x388)), PROC_REPEAT((void*)((u8*)EkrTriPegasusKnightBgMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap61, \"aw\", %progbits\n"
+"	.4byte Tsa_EkrTriPegagusRightBG1, Tsa_EkrTriPegagusRightBG2, Tsa_EkrTriPegagusRightBG3, Tsa_EkrTriPegagusLeftBG1, Tsa_EkrTriPegagusLeftBG2, Tsa_EkrTriPegagusLeftBG3\n"
+);
+struct ProcCmd ProcScr_EkrTriPegasusKnightOBJ[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x3BC)), PROC_REPEAT((void*)((u8*)EkrTriPegasusKnightObjMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap61, \"aw\", %progbits\n"
+"	.4byte 0x00000001, frontier_df4_misc_lo_012_0E6774 + 0x3D4, 0x00000003, EkrTriArmorKnightMain + 0x1, 0x00000000, 0x00000000\n"
+);
+struct ProcCmd ProcScr_EkrTriArmorKnightOBJ[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x3E8)), PROC_REPEAT((void*)((u8*)EkrTriArmorKnightObjMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_EkrTriArmorKnightOBJ2[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x400)), PROC_REPEAT((void*)((u8*)sub_8077C60 + 0x1)), PROC_REPEAT((void*)((u8*)EkrTriArmorKnightObj2Main2 + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_EfxTriangleQUAKE[] __attribute__((section(".data.frontier_df4_banim_b.gap61"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_012_0E6774 + 0x418)), PROC_REPEAT((void*)((u8*)EfxTriangleQUAKEMain + 0x1)), PROC_END,
+};
 __asm__(
     ".section .data.frontier_df4_banim_b.gap62, \"aw\", %progbits\n"
     ".global frontier_df4_banim_b_062_7AA39C\n"
@@ -5328,32 +5684,57 @@ __asm__(
 "	.4byte 0x00000003, EkrDK_BgMovement + 0x1, 0x00000003, EkrDK_PrepareBanimfx + 0x1, 0x00000003, EkrDKHandler_NewDragonAnime + 0x1\n"
 "	.4byte 0x00000003, EkrDK_IdleInBattle + 0x1, 0x00000003, EkrDK_WaitForFadeOut + 0x1, 0x00000003, EkrDK_ReloadTerrainEtc + 0x1\n"
 "	.4byte 0x00000003, EkrDK_ReloadCustomBgAndFadeOut + 0x1, 0x00000003, EkrDK_SetDragonStatusBit3 + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000001, data_080ED67C + 0x40, 0x00000003, EkrDragonBaseHideMain + 0x1\n"
-"	.4byte 0x00000003, EkrDragonBaseHide_Nop + 0x1, 0x00000000, 0x00000000, 0x00000001, data_080ED67C + 0x54\n"
-"	.4byte 0x00000003, EkrDragonBaseAppearMain + 0x1, 0x00000003, EkrDragonBaseAppear_Nop + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000001, data_080ED67C + 0x68, 0x00000003, EkrDragonBodyAnimeMain + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte Tsa_DemonKingBG1, Tsa_DemonKingBG3, Tsa_DemonKingBG2, 0x00000004, EkrDemoKingAtkRavager_OnEnd + 0x1, 0x00000002\n"
-"	.4byte EkrDemoKingAtkRavager_Init + 0x1, 0x000C000E, 0x00000000, 0x005A000E, 0x00000000, 0x00000003\n"
-"	.4byte EkrDemoKingAtkRavager_Lunge + 0x1, 0x00000003, EkrDemoKingAtkRavager_Recoil + 0x1, 0x000A000E, 0x00000000, 0x00000003\n"
-"	.4byte EkrDemoKingAtkRavager_WaitHit + 0x1, 0x001E000E, 0x00000000, 0x00000003, EkrDemoKingAtkRavager_Settle + 0x1, 0x0016000E\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000004, EkrDemoKingAtkRavager_OnEnd + 0x1, 0x00000002\n"
-"	.4byte EkrDemoKingAtkRavager_Init + 0x1, 0x0008000E, 0x00000000, 0x00000003, EkrDemoKingAtkRavager_Lunge + 0x1, 0x00000003\n"
-"	.4byte EkrDemoKingAtkRavager_Recoil + 0x1, 0x000A000E, 0x00000000, 0x00000003, EkrDemoKingAtkRavager_WaitHit + 0x1, 0x001E000E\n"
-"	.4byte 0x00000000, 0x00000003, EkrDemoKingAtkRavager_Settle + 0x1, 0x0016000E, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000004, EkrDemoKingBodyShake_OnEnd + 0x1, 0x00000002, EkrDemoKingBodyShake_Init + 0x1, 0x00000003\n"
-"	.4byte EkrDemoKingBodyShake_Out + 0x1, 0x00000003, EkrDemoKingBodyShake_Hold + 0x1, 0x00000003, EkrDemoKingBodyShake_Back + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0x0001000E, 0x00000000, 0x00000003, EkrDemoKingAtkMain + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000001, BnaimFrames_DkMiss + 0x1A, 0x00000003, EkrDragonBodyBlackMain + 0x1, 0x00000003\n"
-"	.4byte nullsub_65 + 0x1, 0x00000000, 0x00000000, 0x0000000E, 0x00000000, 0x00000002\n"
-"	.4byte EkrdragonDemonking_Init + 0x1, 0x00000005, ProcScr_EkrdragonDemonkingobj_1, 0x00000003, EkrdragonDemonking_Loop + 0x1, 0x00000002\n"
-"	.4byte EkrdragonDemonking_OnEnd + 0x1, 0x00000000, 0x00000000, 0x00000001, BnaimFrames_DkMiss + 0x2E, 0x00000004\n"
-"	.4byte EkrDragonTunkFace_OnEnd + 0x1, 0x00000002, EkrDragonTunkFaceRegisterAnim + 0x1, 0x00000003, EkrDragonTunkFaceIdle + 0x1, 0x00000003\n"
-"	.4byte EkrDragonTunkFaceIdle2 + 0x1, 0x00000000, 0x00000000, 0x00000001, BnaimFrames_DkMiss + 0x42, 0x00000003\n"
-"	.4byte DemonKingDeadWhiteOut + 0x1, 0x00000003, EkrDragonTunkMain + 0x1, 0x00000003, EkrDragonTunk_Nop + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000001, BnaimFrames_DkMiss + 0x52, 0x00000003, EkrWhiteOutFadeIn + 0x1, 0x00000003\n"
-"	.4byte EkrWhiteOutDelay + 0x1, 0x00000003, EkrWhiteOutFadeOut + 0x1, 0x00000003, EkrWhiteOutOnEnd + 0x1, 0x00000000\n"
-"	.4byte 0x00000000\n"
+"	.4byte 0x00000000, 0x00000000\n"
 );
+struct ProcCmd ProcScr_ekrDragonBaseHide[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
+    PROC_NAME((void*)((u8*)data_080ED67C + 0x40)), PROC_REPEAT((void*)((u8*)EkrDragonBaseHideMain + 0x1)), PROC_REPEAT((void*)((u8*)EkrDragonBaseHide_Nop + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_ekrDragonBaseAppear[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
+    PROC_NAME((void*)((u8*)data_080ED67C + 0x54)), PROC_REPEAT((void*)((u8*)EkrDragonBaseAppearMain + 0x1)), PROC_REPEAT((void*)((u8*)EkrDragonBaseAppear_Nop + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_ekrDragonBodyAnime[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
+    PROC_NAME((void*)((u8*)data_080ED67C + 0x68)), PROC_REPEAT((void*)((u8*)EkrDragonBodyAnimeMain + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap67, \"aw\", %progbits\n"
+"	.4byte Tsa_DemonKingBG1, Tsa_DemonKingBG3, Tsa_DemonKingBG2\n"
+);
+struct ProcCmd ProcScr_EkrDemoKingAtkRavagerCritical[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
+    PROC_SET_END_CB((void*)((u8*)EkrDemoKingAtkRavager_OnEnd + 0x1)), PROC_CALL((void*)((u8*)EkrDemoKingAtkRavager_Init + 0x1)), PROC_SLEEP(0xC), PROC_SLEEP(0x5A),
+    PROC_REPEAT((void*)((u8*)EkrDemoKingAtkRavager_Lunge + 0x1)), PROC_REPEAT((void*)((u8*)EkrDemoKingAtkRavager_Recoil + 0x1)), PROC_SLEEP(0xA), PROC_REPEAT((void*)((u8*)EkrDemoKingAtkRavager_WaitHit + 0x1)),
+    PROC_SLEEP(0x1E), PROC_REPEAT((void*)((u8*)EkrDemoKingAtkRavager_Settle + 0x1)), PROC_SLEEP(0x16), PROC_END,
+};
+struct ProcCmd ProcScr_EkrDemoKingAtkRavagerNormal[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
+    PROC_SET_END_CB((void*)((u8*)EkrDemoKingAtkRavager_OnEnd + 0x1)), PROC_CALL((void*)((u8*)EkrDemoKingAtkRavager_Init + 0x1)), PROC_SLEEP(0x8), PROC_REPEAT((void*)((u8*)EkrDemoKingAtkRavager_Lunge + 0x1)),
+    PROC_REPEAT((void*)((u8*)EkrDemoKingAtkRavager_Recoil + 0x1)), PROC_SLEEP(0xA), PROC_REPEAT((void*)((u8*)EkrDemoKingAtkRavager_WaitHit + 0x1)), PROC_SLEEP(0x1E),
+    PROC_REPEAT((void*)((u8*)EkrDemoKingAtkRavager_Settle + 0x1)), PROC_SLEEP(0x16), PROC_END,
+};
+struct ProcCmd ProcScr_EkrDemoKingBodyShake[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
+    PROC_SET_END_CB((void*)((u8*)EkrDemoKingBodyShake_OnEnd + 0x1)), PROC_CALL((void*)((u8*)EkrDemoKingBodyShake_Init + 0x1)), PROC_REPEAT((void*)((u8*)EkrDemoKingBodyShake_Out + 0x1)), PROC_REPEAT((void*)((u8*)EkrDemoKingBodyShake_Hold + 0x1)),
+    PROC_REPEAT((void*)((u8*)EkrDemoKingBodyShake_Back + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_EkrDemoKingAtk[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
+    PROC_SLEEP(0x1), PROC_REPEAT((void*)((u8*)EkrDemoKingAtkMain + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_ekrDragonBodvBlack[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
+    PROC_NAME((void*)((u8*)BnaimFrames_DkMiss + 0x1A)), PROC_REPEAT((void*)((u8*)EkrDragonBodyBlackMain + 0x1)), PROC_REPEAT((void*)((u8*)nullsub_65 + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_EkrdragonDemonking_0[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
+    PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)EkrdragonDemonking_Init + 0x1)), PROC_START_CHILD(ProcScr_EkrdragonDemonkingobj_1), PROC_REPEAT((void*)((u8*)EkrdragonDemonking_Loop + 0x1)),
+    PROC_CALL((void*)((u8*)EkrdragonDemonking_OnEnd + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_ekrDragonTunkFace[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
+    PROC_NAME((void*)((u8*)BnaimFrames_DkMiss + 0x2E)), PROC_SET_END_CB((void*)((u8*)EkrDragonTunkFace_OnEnd + 0x1)), PROC_CALL((void*)((u8*)EkrDragonTunkFaceRegisterAnim + 0x1)), PROC_REPEAT((void*)((u8*)EkrDragonTunkFaceIdle + 0x1)),
+    PROC_REPEAT((void*)((u8*)EkrDragonTunkFaceIdle2 + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_ekrDragonTunk[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
+    PROC_NAME((void*)((u8*)BnaimFrames_DkMiss + 0x42)), PROC_REPEAT((void*)((u8*)DemonKingDeadWhiteOut + 0x1)), PROC_REPEAT((void*)((u8*)EkrDragonTunkMain + 0x1)), PROC_REPEAT((void*)((u8*)EkrDragonTunk_Nop + 0x1)),
+    PROC_END,
+};
+struct ProcCmd ProcScr_ekrWhiteOUT[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
+    PROC_NAME((void*)((u8*)BnaimFrames_DkMiss + 0x52)), PROC_REPEAT((void*)((u8*)EkrWhiteOutFadeIn + 0x1)), PROC_REPEAT((void*)((u8*)EkrWhiteOutDelay + 0x1)), PROC_REPEAT((void*)((u8*)EkrWhiteOutFadeOut + 0x1)),
+    PROC_REPEAT((void*)((u8*)EkrWhiteOutOnEnd + 0x1)), PROC_END,
+};
 /* frontier_df4_banim_b_070_901138: atomic relocation carve (was INCBIN); every embedded ROM
    pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
 __asm__(
@@ -7056,66 +7437,98 @@ __asm__(
 "	.section .data.frontier_df4_banim_b.gap85, \"aw\", %progbits\n"
 "	.global frontier_df4_banim_b_085_A13CD0\n"
 "frontier_df4_banim_b_085_A13CD0:\n"
-"	.4byte 0x002B0005, 0x00310008, 0x00310008, 0x00310008, 0x00310008, 0x00310008, 0x003A0005, 0x00000000\n"
-"	.4byte 0x00000005, 0x00000006, Tsa_MapBattleBoxGfx1, Tsa_MapBattleBoxGfx1, Tsa_MapBattleBoxGfx1, Tsa_MapBattleBoxGfx1, Tsa_MapBattleBoxGfx3, Tsa_MapBattleBoxGfx2\n"
-"	.4byte 0x00000004, ProcMapInfoBox_OnEnd + 0x1, 0x0001000E, 0x00000000, 0x00000002, MapInfoBox_PrepareForShake + 0x1, 0x00000002, ProcMapInfoBox_OnDraw + 0x1\n"
-"	.4byte 0x00000003, MapInfoBoxShake + 0x1, 0x00000003, ProcMapInfoBox_AnimateHp + 0x1, 0x00000000, 0x00000000, 0x020D0006, 0x02140009\n"
-"	.4byte 0x02140009, 0x02140009, 0x02140009, 0x02140009, 0x02140009, 0x02140009, 0x02140009, 0x02140009\n"
-"	.4byte 0x02140009, 0x02140009, 0x021E0006, 0x00000000, 0x00000004, ProcMapInfoBox_OnEnd + 0x1, 0x0001000E, 0x00000000\n"
-"	.4byte 0x00000002, ProcMAExpBar_OnDraw + 0x1, 0x00000002, ProcMAExpBar_InitDisplay + 0x1, 0x00000003, ProcMAExpBar_FrameAdvance + 0x1, 0x0014000E, 0x00000000\n"
-"	.4byte 0x00000002, ProcMAExpBar_PlaySound74 + 0x1, 0x0002000E, 0x00000000, 0x00000003, ProcMAExpBar_OnIncrement + 0x1, 0x0014000E, 0x00000000\n"
-"	.4byte 0x00000002, ProcMapInfoBox_OnEnd + 0x1, 0x0008000E, 0x00000000, 0x00000002, ProcMAExpBar_LevelUpIfPossible + 0x1, 0x0001000E, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000000\n"
-"	.4byte gMapanimApi_0 + 0x4C\n"
-"	.4byte gMapanimApi_0 + 0x44\n"
-"	.4byte gMapanimApi_0 + 0x3C\n"
-"	.4byte gMapanimApi_0 + 0x34\n"
-"	.4byte gMapanimApi_0 + 0x2C\n"
-"	.4byte gMapanimApi_0 + 0x24\n"
-"	.4byte gMapanimApi_0 + 0x1C\n"
-"	.4byte gMapanimApi_0 + 0x14\n"
-"	.4byte gMapanimApi_0 + 0xC\n"
-"	.4byte gMapanimApi_0 + 0x4\n"
-"	.4byte 0x00010909, 0x00010100, 0x02030002, 0x00200002, 0x01030002, 0x00200001, 0x0304010B, 0x00800103\n"
-"	.4byte 0x0405030A, 0x00CE0104, 0x05060409, 0x000A0005, 0x06070505, 0x000A0006, 0x07080605, 0x000A0007\n"
-"	.4byte 0x08090705, 0x000A0008, 0x09000805, 0x000A0009\n"
-"	.4byte gMapanimApi_0 + 0x80\n"
-"	.4byte gMapanimApi_0 + 0x78\n"
-"	.4byte gMapanimApi_0 + 0x70\n"
-"	.4byte gMapanimApi_0 + 0x68\n"
-"	.4byte gMapanimApi_0 + 0x64\n"
-"	.4byte gMapanimApi_0 + 0x60\n"
-"	.4byte gMapanimApi_0 + 0x5C\n"
-"	.4byte gMapanimApi_0 + 0x58\n"
-"	.4byte gMapanimApi_0 + 0x54\n"
-"	.4byte 0x00000000, 0x03004FB0, 0x0001000E, 0x00000000, 0x00000002, LockGame + 0x1, 0x00000002, 0x0808F44D\n"
-"	.4byte 0x0001000E, 0x00000000, 0x00000002, InitDebugMapAnim + 0x1, 0x0000000B, 0x00000000, 0x00000002, MADebug_InitScreen + 0x1\n"
-"	.4byte 0x00000003, 0x0807E9C5, 0x00000002, MADebug_DoBattleAnim + 0x1, 0x00000008, 0x08A13B90, 0x0000000C, 0x00000000\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000002, LockGame + 0x1, 0x00000002, MapAnim_PrepareBattleTalk + 0x1, 0x0001000E, 0x00000000\n"
-"	.4byte 0x0005000E, 0x00000000, 0x00000002, MapAnim_InitInfoBox + 0x1, 0x000F000E, 0x00000000, 0x0000000B, 0x00000000\n"
-"	.4byte 0x00000003, MapEventBattle_SetUpHitData + 0x1, 0x00000002, MapAnim_DisplayRoundAnim + 0x1, 0x0001000E, 0x00000000, 0x00000002, MapAnim_ShowPoisonEffectIfAny + 0x1\n"
-"	.4byte 0x0001000E, 0x00000000, 0x0005000E, 0x00000000, 0x0000000C, 0x00000000, 0x0001000B, 0x00000000\n"
-"	.4byte 0x00000002, MapAnim_DisplayDeathFade + 0x1, 0x00000008, ProcScr_MuDeathFade, 0x00000002, EndMapAnimInfoWindow + 0x1, 0x0001000E, 0x00000000\n"
-"	.4byte 0x00000002, UnlockGame + 0x1, 0x00000002, MapEventBattle_OnEnd + 0x1, 0x00000000, 0x00000000, 0x0001000E, 0x00000000\n"
-"	.4byte 0x00000002, WallBreakAnim_Init + 0x1, 0x00000014, APProc_Exists + 0x1, 0x00000000, 0x00000000, 0x0001000E, 0x00000000\n"
-"	.4byte 0x00000002, MapAnim_BeginPoisonAnim + 0x1, 0x00000014, APProc_Exists + 0x1, 0x00000000, 0x00000000, 0x0001000E, 0x00000000\n"
-"	.4byte 0x00000002, MapAnim_BeginPoisonAnim2 + 0x1, 0x00000014, APProc_Exists + 0x1, 0x00000002, sub_807F0FC + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x0001000E, 0x00000000, 0x00000002, SummonUnitGfx_Init + 0x1, 0x00000003, MapAnim_GorgonHatch_Loop + 0x1, 0x00000002, SummonGfxAnim_Cleanup + 0x1\n"
-"	.4byte 0x0014000E, 0x00000000, 0x00000002, MapSpellAnim_CommonEnd + 0x1, 0x00000000, 0x00000000, Tsa_GorgonHatchCloud_A, Tsa_GorgonHatchCloud_B\n"
-"	.4byte Tsa_GorgonHatchCloud_C, Tsa_GorgonHatchCloud_D, Tsa_GorgonHatchCloud_E, Tsa_GorgonHatchCloud_F, Tsa_GorgonHatchCloud_G, 0x0001000E, 0x00000000, 0x00000002\n"
-"	.4byte MapLatonafx_Init + 0x1, 0x00000003, MapLatonafx_InitGfx + 0x1, 0x00010006, frontier_df4_banim_b_085_A13CD0 + 0x3E0, 0x003C000E, 0x00000000, 0x00000002\n"
-"	.4byte MapSpellAnim_CommonEnd + 0x1, 0x00000000, 0x00000000, 0xFFFF0001, 0x0002FFFE, 0x00010002, 0xFFFEFFFE, 0x00000002\n"
-"	.4byte MapLatonaBlinkingfx_Init + 0x1, 0x00000003, MapLatonaBlinkingfx_Main + 0x1, 0x00000000, 0x00000000, 0x00000004, MapLatonaShiningfx_End + 0x1, 0x00000002\n"
-"	.4byte MapLatonaShiningfx_Init + 0x1, 0x0000000E, 0x00000000, 0x00000002, MapLatonaShiningfx_Start + 0x1, 0x00000003, MapLatonaShiningfx_Loop1 + 0x1, 0x00000003\n"
-"	.4byte sub_807F784 + 0x1, 0x00000003, MapLatonaShiningfx_Loop3 + 0x1, 0x00000000, 0x00000000, 0x0001000E, 0x00000000, 0x00000002\n"
-"	.4byte sub_807F860 + 0x1, 0x00000003, NightMarefx_Loop + 0x1, 0x00000002, NightMarefx_End + 0x1, 0x0001000E, 0x00000000, 0x00000002\n"
-"	.4byte MapSpellAnim_CommonEnd + 0x1, 0x00000000, 0x00000000, Tsa_NightMareMapAnimfx1, Tsa_NightMareMapAnimfx2, Tsa_NightMareMapAnimfx3, Tsa_NightMareMapAnimfx4, Tsa_NightMareMapAnimfx5\n"
-"	.4byte Tsa_NightMareMapAnimfx6, Tsa_NightMareMapAnimfx7, Tsa_NightMareMapAnimfx8, Tsa_NightMareMapAnimfx9, Tsa_NightMareMapAnimfx10, Tsa_NightMareMapAnimfx11, Tsa_NightMareMapAnimfx12, Tsa_NightMareMapAnimfx13\n"
-"	.4byte Tsa_NightMareMapAnimfx14, Tsa_NightMareMapAnimfx15, Tsa_NightMareMapAnimfx16, Tsa_NightMareMapAnimfx17, Tsa_NightMareMapAnimfx18, Tsa_NightMareMapAnimfx19, Tsa_NightMareMapAnimfx20, Tsa_NightMareMapAnimfx21\n"
-"	.4byte Tsa_NightMareMapAnimfx22, Tsa_NightMareMapAnimfx23, Tsa_NightMareMapAnimfx24, Tsa_NightMareMapAnimfx25, Tsa_NightMareMapAnimfx26, Tsa_NightMareMapAnimfx27, Tsa_NightMareMapAnimfx28, Tsa_NightMareMapAnimfx29\n"
-"	.4byte Tsa_NightMareMapAnimfx30, Tsa_NightMareMapAnimfx31, Tsa_NightMareMapAnimfx32, Tsa_NightMareMapAnimfx33, 0x0001000E, 0x00000000, 0x00000002, AntitoxinPureWaterfx_Init + 0x1\n"
-"	.4byte 0x00000003, AntitoxinPureWaterfx_Loop + 0x1, 0x0001000E, 0x00000000, 0x00000002, MapSpellAnim_CommonEnd + 0x1, 0x00000000, 0x00000000\n"
+"	.4byte 0x002B0005, 0x00310008, 0x00310008, 0x00310008, 0x00310008, 0x00310008\n"
+"	.4byte 0x003A0005, 0x00000000, 0x00000005, 0x00000006, Tsa_MapBattleBoxGfx1, Tsa_MapBattleBoxGfx1\n"
+"	.4byte Tsa_MapBattleBoxGfx1, Tsa_MapBattleBoxGfx1, Tsa_MapBattleBoxGfx3, Tsa_MapBattleBoxGfx2\n"
 );
+struct ProcCmd ProcScr_MapBattleInfoBox[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
+    PROC_SET_END_CB((void*)((u8*)ProcMapInfoBox_OnEnd + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapInfoBox_PrepareForShake + 0x1)), PROC_CALL((void*)((u8*)ProcMapInfoBox_OnDraw + 0x1)),
+    PROC_REPEAT((void*)((u8*)MapInfoBoxShake + 0x1)), PROC_REPEAT((void*)((u8*)ProcMapInfoBox_AnimateHp + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap85, \"aw\", %progbits\n"
+"	.4byte 0x020D0006, 0x02140009, 0x02140009, 0x02140009, 0x02140009, 0x02140009\n"
+"	.4byte 0x02140009, 0x02140009, 0x02140009, 0x02140009, 0x02140009, 0x02140009\n"
+"	.4byte 0x021E0006, 0x00000000\n"
+);
+struct ProcCmd ProcScr_MapAnimExpBar[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
+    PROC_SET_END_CB((void*)((u8*)ProcMapInfoBox_OnEnd + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)ProcMAExpBar_OnDraw + 0x1)), PROC_CALL((void*)((u8*)ProcMAExpBar_InitDisplay + 0x1)),
+    PROC_REPEAT((void*)((u8*)ProcMAExpBar_FrameAdvance + 0x1)), PROC_SLEEP(0x14), PROC_CALL((void*)((u8*)ProcMAExpBar_PlaySound74 + 0x1)), PROC_SLEEP(0x2),
+    PROC_REPEAT((void*)((u8*)ProcMAExpBar_OnIncrement + 0x1)), PROC_SLEEP(0x14), PROC_CALL((void*)((u8*)ProcMapInfoBox_OnEnd + 0x1)), PROC_SLEEP(0x8),
+    PROC_CALL((void*)((u8*)ProcMAExpBar_LevelUpIfPossible + 0x1)), PROC_SLEEP(0x1), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap85, \"aw\", %progbits\n"
+"	.4byte gMapanimApi_0 + 0x4C, gMapanimApi_0 + 0x44, gMapanimApi_0 + 0x3C, gMapanimApi_0 + 0x34, gMapanimApi_0 + 0x2C, gMapanimApi_0 + 0x24\n"
+"	.4byte gMapanimApi_0 + 0x1C, gMapanimApi_0 + 0x14, gMapanimApi_0 + 0xC, gMapanimApi_0 + 0x4, 0x00010909, 0x00010100\n"
+"	.4byte 0x02030002, 0x00200002, 0x01030002, 0x00200001, 0x0304010B, 0x00800103\n"
+"	.4byte 0x0405030A, 0x00CE0104, 0x05060409, 0x000A0005, 0x06070505, 0x000A0006\n"
+"	.4byte 0x07080605, 0x000A0007, 0x08090705, 0x000A0008, 0x09000805, 0x000A0009\n"
+"	.4byte gMapanimApi_0 + 0x80, gMapanimApi_0 + 0x78, gMapanimApi_0 + 0x70, gMapanimApi_0 + 0x68, gMapanimApi_0 + 0x64, gMapanimApi_0 + 0x60\n"
+"	.4byte gMapanimApi_0 + 0x5C, gMapanimApi_0 + 0x58, gMapanimApi_0 + 0x54, 0x00000000, 0x03004FB0\n"
+);
+struct ProcCmd ProcScr_SIOMAIN2[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((ProcFunc)0x0808F44D), PROC_SLEEP(0x1),
+    PROC_CALL((void*)((u8*)InitDebugMapAnim + 0x1)), PROC_LABEL(0x0), PROC_CALL((void*)((u8*)MADebug_InitScreen + 0x1)), PROC_REPEAT((ProcFunc)0x0807E9C5),
+    PROC_CALL((void*)((u8*)MADebug_DoBattleAnim + 0x1)), PROC_WHILE_EXISTS((const void*)0x08A13B90), PROC_GOTO(0x0), PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimEventBattle[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
+    PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)MapAnim_PrepareBattleTalk + 0x1)), PROC_SLEEP(0x1), PROC_SLEEP(0x5),
+    PROC_CALL((void*)((u8*)MapAnim_InitInfoBox + 0x1)), PROC_SLEEP(0xF), PROC_LABEL(0x0), PROC_REPEAT((void*)((u8*)MapEventBattle_SetUpHitData + 0x1)),
+    PROC_CALL((void*)((u8*)MapAnim_DisplayRoundAnim + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnim_ShowPoisonEffectIfAny + 0x1)), PROC_SLEEP(0x1),
+    PROC_SLEEP(0x5), PROC_GOTO(0x0), PROC_LABEL(0x1), PROC_CALL((void*)((u8*)MapAnim_DisplayDeathFade + 0x1)),
+    PROC_WHILE_EXISTS(ProcScr_MuDeathFade), PROC_CALL((void*)((u8*)EndMapAnimInfoWindow + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)UnlockGame + 0x1)),
+    PROC_CALL((void*)((u8*)MapEventBattle_OnEnd + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimWallBreak[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)WallBreakAnim_Init + 0x1)), PROC_WHILE((void*)((u8*)APProc_Exists + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_PoisonAnimHandler[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnim_BeginPoisonAnim + 0x1)), PROC_WHILE((void*)((u8*)APProc_Exists + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_PoisonAnim2[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnim_BeginPoisonAnim2 + 0x1)), PROC_WHILE((void*)((u8*)APProc_Exists + 0x1)), PROC_CALL((void*)((u8*)sub_807F0FC + 0x1)),
+    PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimGorgonHatch[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)SummonUnitGfx_Init + 0x1)), PROC_REPEAT((void*)((u8*)MapAnim_GorgonHatch_Loop + 0x1)), PROC_CALL((void*)((u8*)SummonGfxAnim_Cleanup + 0x1)),
+    PROC_SLEEP(0x14), PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap85, \"aw\", %progbits\n"
+"	.4byte Tsa_GorgonHatchCloud_A, Tsa_GorgonHatchCloud_B, Tsa_GorgonHatchCloud_C, Tsa_GorgonHatchCloud_D, Tsa_GorgonHatchCloud_E, Tsa_GorgonHatchCloud_F\n"
+"	.4byte Tsa_GorgonHatchCloud_G\n"
+);
+struct ProcCmd ProcScr_MapLatonafx[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapLatonafx_Init + 0x1)), PROC_REPEAT((void*)((u8*)MapLatonafx_InitGfx + 0x1)), PROC_START_CHILD_BLOCKING((void*)((u8*)frontier_df4_banim_b_085_A13CD0 + 0x3E0)),
+    PROC_SLEEP(0x3C), PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap85, \"aw\", %progbits\n"
+"	.4byte 0xFFFF0001, 0x0002FFFE, 0x00010002, 0xFFFEFFFE, 0x00000002, MapLatonaBlinkingfx_Init + 0x1\n"
+"	.4byte 0x00000003, MapLatonaBlinkingfx_Main + 0x1, 0x00000000, 0x00000000\n"
+);
+struct ProcCmd ProcScr_MapLatonaShiningfx[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
+    PROC_SET_END_CB((void*)((u8*)MapLatonaShiningfx_End + 0x1)), PROC_CALL((void*)((u8*)MapLatonaShiningfx_Init + 0x1)), PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)MapLatonaShiningfx_Start + 0x1)),
+    PROC_REPEAT((void*)((u8*)MapLatonaShiningfx_Loop1 + 0x1)), PROC_REPEAT((void*)((u8*)sub_807F784 + 0x1)), PROC_REPEAT((void*)((u8*)MapLatonaShiningfx_Loop3 + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_NightMarefx[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)sub_807F860 + 0x1)), PROC_REPEAT((void*)((u8*)NightMarefx_Loop + 0x1)), PROC_CALL((void*)((u8*)NightMarefx_End + 0x1)),
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap85, \"aw\", %progbits\n"
+"	.4byte Tsa_NightMareMapAnimfx1, Tsa_NightMareMapAnimfx2, Tsa_NightMareMapAnimfx3, Tsa_NightMareMapAnimfx4, Tsa_NightMareMapAnimfx5, Tsa_NightMareMapAnimfx6\n"
+"	.4byte Tsa_NightMareMapAnimfx7, Tsa_NightMareMapAnimfx8, Tsa_NightMareMapAnimfx9, Tsa_NightMareMapAnimfx10, Tsa_NightMareMapAnimfx11, Tsa_NightMareMapAnimfx12\n"
+"	.4byte Tsa_NightMareMapAnimfx13, Tsa_NightMareMapAnimfx14, Tsa_NightMareMapAnimfx15, Tsa_NightMareMapAnimfx16, Tsa_NightMareMapAnimfx17, Tsa_NightMareMapAnimfx18\n"
+"	.4byte Tsa_NightMareMapAnimfx19, Tsa_NightMareMapAnimfx20, Tsa_NightMareMapAnimfx21, Tsa_NightMareMapAnimfx22, Tsa_NightMareMapAnimfx23, Tsa_NightMareMapAnimfx24\n"
+"	.4byte Tsa_NightMareMapAnimfx25, Tsa_NightMareMapAnimfx26, Tsa_NightMareMapAnimfx27, Tsa_NightMareMapAnimfx28, Tsa_NightMareMapAnimfx29, Tsa_NightMareMapAnimfx30\n"
+"	.4byte Tsa_NightMareMapAnimfx31, Tsa_NightMareMapAnimfx32, Tsa_NightMareMapAnimfx33\n"
+);
+struct ProcCmd ProcScr_MapAnimAntitoxinPureWaterfx[] __attribute__((section(".data.frontier_df4_banim_b.gap85"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)AntitoxinPureWaterfx_Init + 0x1)), PROC_REPEAT((void*)((u8*)AntitoxinPureWaterfx_Loop + 0x1)), PROC_SLEEP(0x1),
+    PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
+};
 /* frontier_df4_banim_b_085b_A14209 / _b: WarpFlashy_Loop gap pre/post anim-command-table
    fragments carved from INCBIN to descriptive .4byte (byte-exact). Scattered Thumb-fn anim
    pointers kept as literals per this file's idiom (each isolated, not a >=4 coherent table

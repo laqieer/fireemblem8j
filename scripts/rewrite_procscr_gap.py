@@ -153,6 +153,7 @@ def regen(tokens, secbase, gap, procs, syms):
         for kk, vv in refs.items():
             allrefs[kk] = 'func' if (vv == 'func' or allrefs.get(kk) == 'func') else 'data'
     starts = set(ranges)
+    carved_names = set(n for (_s2, _e, n, _b) in ranges.values())
     covered = set()
     for s, (s2, e, n, b) in ranges.items():
         a = s
@@ -209,12 +210,15 @@ def regen(tokens, secbase, gap, procs, syms):
             wordbuf.append((t['text'], t['size']))
         elif t['t'] in ('global', 'label'):
             la = t.get('addr')
+            # A CARVED proc's own .global + start-label are provided by the C
+            # struct (agbcc emits .globl NAME + NAME:). Dropping them here avoids
+            # a double-definition when the proc has an explicit in-file asm label
+            # (banim_b gap83), unlike baseline .set-alias procs (banim_a).
+            if t['name'] in carved_names:
+                continue
             if t['t'] == 'label' and la is not None and la in covered and la not in starts:
                 sys.stderr.write("WARN label %s @ 0x%X inside carved proc; DROP\n" % (t['name'], la))
                 continue
-            if t['t'] == 'global':
-                # look ahead is hard; emit global only if its label survives.
-                pass
             ensure_asm()
             flush_wordbuf()
             if t['t'] == 'global':
