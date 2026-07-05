@@ -1,3 +1,4 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
+# #148 proc-script carve: data_085D1EA4 -> 1 typed struct ProcCmd[] + residue (parallel-safe fragment)
 5D1EA4	5D1EBC	src/cp_decide.o(.data)	cp_decide sDecideFuncList (4 decide fns + 2 NULL)
-5D1EBC	5D1F0C	src/data/data_085D1EA4/data_085D1EA4.o(.data.residue.085D1EBC)	descriptive raw ROM data (80 B tail, byte-completeness D29)
+5D1EBC	5D1ED4	src/data/data_085D1EA4/data_085D1EA4.o(.data.residue.085D1EBC)	#148 residue (24 B)
+5D1ED4	5D1F0C	src/data/data_085D1EA4/data_085D1EA4.o(.rodata.dat_gProcScr_CpDecide_ref)	#148 gProcScr_CpDecide (7 ProcCmd)
