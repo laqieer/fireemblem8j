@@ -26,6 +26,25 @@ extern void GuideEntry_RedrawUp(ProcPtr proc);
 extern void GuideEntry_RedrawDown(ProcPtr proc);
 extern void GuideDetailsRedraw_Init(ProcPtr proc);
 extern void GuideDetailsRedraw_Loop(ProcPtr proc);
+
+/* #148: E_Guide1/E_Guide2 proc-script funcs (already relocatable in #143; now the
+ * two tables below are split out as typed struct ProcCmd[] under their fe8u names,
+ * byte-identical, so the last two opaque df4_tail proc scripts are decompiled). */
+extern u8 data_081F6D7C[];
+extern void LockGame(void);
+extern void UnlockGame(void);
+extern void WaitForFade(ProcPtr);
+extern void StartFastFadeToBlack(void);
+extern void StartFastFadeFromBlack(void);
+extern void BMapDispSuspend(void);
+extern void BMapDispResume(void);
+extern void RefreshBMapGraphics(void);
+extern void StartGreenText(ProcPtr parent);
+extern void EndGreenText(void);
+extern void Guide_Init(ProcPtr proc);
+extern void Guide_SetBlend(ProcPtr proc);
+extern void Guide_MainLoop(ProcPtr proc);
+extern void Guide_OnEnd(ProcPtr proc);
 __asm__(
 "\t.section .data.frontier_df4_tail.gap0, \"aw\", %progbits\n"
 "\t.global frontier_df4_tail_000_BABAF8\n"
@@ -60,53 +79,30 @@ struct ProcCmd gProcScr_GuideEntryListRedraw_Down[] __attribute__((section(".dat
 struct ProcCmd gProcScr_GuideDetailsRedraw[] __attribute__((section(".data.frontier_df4_tail.gap0"))) = { /* @0x08BABC8C 40B */
     PROC_NAME(&data_081F6D5C[0xC0]), PROC_SLEEP(1), PROC_CALL(GuideDetailsRedraw_Init), PROC_REPEAT(GuideDetailsRedraw_Loop), PROC_END,
 };
-__asm__(
-"\t.section .data.frontier_df4_tail.gap0, \"aw\", %progbits\n"
-/* ProcScr_E_Guide1 @0x08BABCB4 (184B) #143: interior code/name/script pointers -> .4byte Sym(+delta) relocs */
-"\t.short 0x0001, 0x0000\n\t.4byte data_081F6D7C + 0xB4\n"
-"\t.short 0x0002, 0x0000\n\t.4byte LockGame\n"
-"\t.short 0x0002, 0x0000\n\t.4byte StartFastFadeToBlack\n"
-"\t.short 0x0003, 0x0000\n\t.4byte WaitForFade\n"
-"\t.short 0x0002, 0x0000\n\t.4byte BMapDispSuspend\n"
-"\t.short 0x000E, 0x0000, 0x0000, 0x0000\n"
-"\t.short 0x0002, 0x0000\n\t.4byte Guide_Init\n"
-"\t.short 0x0002, 0x0000\n\t.4byte StartGreenText\n"
-"\t.short 0x0002, 0x0000\n\t.4byte StartFastFadeFromBlack\n"
-"\t.short 0x0003, 0x0000\n\t.4byte WaitForFade\n"
-"\t.short 0x0002, 0x0000\n\t.4byte Guide_SetBlend\n"
-"\t.short 0x0003, 0x0000\n\t.4byte Guide_MainLoop\n"
-"\t.short 0x0002, 0x0000\n\t.4byte StartFastFadeToBlack\n"
-"\t.short 0x0003, 0x0000\n\t.4byte WaitForFade\n"
-"\t.short 0x0002, 0x0000\n\t.4byte EndGreenText\n"
-"\t.short 0x0002, 0x0000\n\t.4byte Guide_OnEnd\n"
-"\t.short 0x000E, 0x0000, 0x0000, 0x0000\n"
-"\t.short 0x0002, 0x0000\n\t.4byte BMapDispResume\n"
-"\t.short 0x0002, 0x0000\n\t.4byte RefreshBMapGraphics\n"
-"\t.short 0x0002, 0x0000\n\t.4byte StartFastFadeFromBlack\n"
-"\t.short 0x0003, 0x0000\n\t.4byte WaitForFade\n"
-"\t.short 0x0002, 0x0000\n\t.4byte UnlockGame\n"
-"\t.short 0x0000, 0x0000, 0x0000, 0x0000\n"
-/* ProcScr_E_Guide2 @0x08BABD6C (152B) #143: interior code/name/script pointers -> .4byte Sym(+delta) relocs */
-"\t.short 0x0001, 0x0000\n\t.4byte data_081F6D7C + 0xB4\n"
-"\t.short 0x0002, 0x0000\n\t.4byte LockGame\n"
-"\t.short 0x0002, 0x0000\n\t.4byte BMapDispSuspend\n"
-"\t.short 0x000E, 0x0000, 0x0000, 0x0000\n"
-"\t.short 0x0002, 0x0000\n\t.4byte Guide_Init\n"
-"\t.short 0x0002, 0x0000\n\t.4byte StartGreenText\n"
-"\t.short 0x0002, 0x0000\n\t.4byte StartFastFadeFromBlack\n"
-"\t.short 0x0003, 0x0000\n\t.4byte WaitForFade\n"
-"\t.short 0x0002, 0x0000\n\t.4byte Guide_SetBlend\n"
-"\t.short 0x0003, 0x0000\n\t.4byte Guide_MainLoop\n"
-"\t.short 0x0002, 0x0000\n\t.4byte StartFastFadeToBlack\n"
-"\t.short 0x0003, 0x0000\n\t.4byte WaitForFade\n"
-"\t.short 0x0002, 0x0000\n\t.4byte EndGreenText\n"
-"\t.short 0x0002, 0x0000\n\t.4byte Guide_OnEnd\n"
-"\t.short 0x000E, 0x0000, 0x0000, 0x0000\n"
-"\t.short 0x0002, 0x0000\n\t.4byte BMapDispResume\n"
-"\t.short 0x0002, 0x0000\n\t.4byte RefreshBMapGraphics\n"
-"\t.short 0x0002, 0x0000\n\t.4byte UnlockGame\n"
-"\t.short 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
+struct ProcCmd ProcScr_E_Guide1[] __attribute__((section(".data.frontier_df4_tail.gap0"))) = { /* @0x08BABCB4 184B #148 */
+    PROC_NAME(&data_081F6D7C[0xB4]),
+    PROC_CALL(LockGame), PROC_CALL(StartFastFadeToBlack), PROC_REPEAT(WaitForFade), PROC_CALL(BMapDispSuspend),
+    PROC_SLEEP(0),
+    PROC_CALL(Guide_Init), PROC_CALL(StartGreenText), PROC_CALL(StartFastFadeFromBlack), PROC_REPEAT(WaitForFade),
+    PROC_CALL(Guide_SetBlend), PROC_REPEAT(Guide_MainLoop),
+    PROC_CALL(StartFastFadeToBlack), PROC_REPEAT(WaitForFade), PROC_CALL(EndGreenText), PROC_CALL(Guide_OnEnd),
+    PROC_SLEEP(0),
+    PROC_CALL(BMapDispResume), PROC_CALL(RefreshBMapGraphics), PROC_CALL(StartFastFadeFromBlack), PROC_REPEAT(WaitForFade),
+    PROC_CALL(UnlockGame),
+    PROC_END,
+};
+struct ProcCmd ProcScr_E_Guide2[] __attribute__((section(".data.frontier_df4_tail.gap0"))) = { /* @0x08BABD6C 152B #148 */
+    PROC_NAME(&data_081F6D7C[0xB4]),
+    PROC_CALL(LockGame), PROC_CALL(BMapDispSuspend),
+    PROC_SLEEP(0),
+    PROC_CALL(Guide_Init), PROC_CALL(StartGreenText), PROC_CALL(StartFastFadeFromBlack), PROC_REPEAT(WaitForFade),
+    PROC_CALL(Guide_SetBlend), PROC_REPEAT(Guide_MainLoop),
+    PROC_CALL(StartFastFadeToBlack), PROC_REPEAT(WaitForFade), PROC_CALL(EndGreenText), PROC_CALL(Guide_OnEnd),
+    PROC_SLEEP(0),
+    PROC_CALL(BMapDispResume), PROC_CALL(RefreshBMapGraphics),
+    PROC_CALL(UnlockGame),
+    PROC_END,
+};
 u8 frontier_df4_tail_001_BB08B4[] __attribute__((section(".data.frontier_df4_tail.gap1"))) = INCBIN_U8("graphics/frontier_df4_tail/frontier_df4_tail_001a_BB08B4.4bpp.lz");
 u8 data_08BB0B98[] __attribute__((section(".data.frontier_df4_tail.gap1"))) = INCBIN_U8("graphics/frontier_df4_tail/data_08BB0B98.4bpp");
 /* data_08BB30F8: raw non-tile trailing remainder (20B), byte-exact. */
