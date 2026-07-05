@@ -39,3 +39,8 @@ ProcScr_PrepItemUseScreen
 ProcScr_PrepItemSupplyScreen
 ProcScr_BmSupplyScreen
 ProcScr_PrepItemListScreen
+ProcScr_Config_Field
+ProcScr_Config_PrepMapMenu
+ProcScr_Config_WorldMap
+ProcScr_ColFadeOut
+ProcScr_ColFadeIn

@@ -4283,7 +4283,7 @@ struct ProcCmd gProcScr_DrawConfigUiSprites[] __attribute__((section(".data.fron
     PROC_GOTO(0),
     PROC_END,
 };
-struct ProcCmd frontier_df4_menu_034c_AAFA44[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = {
+struct ProcCmd ProcScr_Config_Field[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = {
     PROC_NAME(&frontier_df4_voice_000b_1F5898[0x0]),
     PROC_CALL(LockGame),
     PROC_CALL_ARG(NewFadeOut, 0x10),
@@ -4305,6 +4305,8 @@ struct ProcCmd frontier_df4_menu_034c_AAFA44[] __attribute__((section(".data.fro
     PROC_REPEAT(WaitForFade),
     PROC_CALL(UnlockGame),
     PROC_END,
+};
+struct ProcCmd ProcScr_Config_PrepMapMenu[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = {
     PROC_NAME(&frontier_df4_voice_000b_1F5898[0x0]),
     PROC_CALL(LockGame),
     PROC_LABEL(0x0),
@@ -4320,6 +4322,8 @@ struct ProcCmd frontier_df4_menu_034c_AAFA44[] __attribute__((section(".data.fro
     PROC_CALL_2(Config_HandleExit),
     PROC_CALL(UnlockGame),
     PROC_END,
+};
+struct ProcCmd ProcScr_Config_WorldMap[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = {
     PROC_NAME(&frontier_df4_voice_000b_1F5898[0x0]),
     PROC_CALL(LockGame),
     PROC_CALL(BMapDispSuspend),
@@ -4338,12 +4342,16 @@ struct ProcCmd frontier_df4_menu_034c_AAFA44[] __attribute__((section(".data.fro
     PROC_CALL(RefreshBMapGraphics),
     PROC_CALL(UnlockGame),
     PROC_END,
+};
+struct ProcCmd ProcScr_ColFadeOut[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = {
     PROC_NAME(&frontier_df4_voice_000b_1F5898[0xC]),
     PROC_SLEEP(0x2),
     PROC_CALL(ColFadeOut_Init),
     PROC_SLEEP(0x0),
     PROC_REPEAT(ColFadeOut_Loop),
     PROC_END,
+};
+struct ProcCmd ProcScr_ColFadeIn[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = {
     PROC_NAME(&frontier_df4_voice_000b_1F5898[0x18]),
     PROC_SLEEP(0x2),
     PROC_CALL(nullsub_91),
