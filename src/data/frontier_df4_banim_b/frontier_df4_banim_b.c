@@ -6,6 +6,7 @@ extern void APProc_Exists();
 extern void AntitoxinPureWaterfx_Init();
 extern void AntitoxinPureWaterfx_Loop();
 extern u8 BnaimFrames_DkMiss[];
+extern void ClearManimLevelUpWindow();
 extern void DemonKingDeadWhiteOut();
 extern void EfxBlackInOutUnitMain();
 extern void EfxChillAnime_Loop();
@@ -100,6 +101,7 @@ extern void EkrdragonDemonking_Init();
 extern void EkrdragonDemonking_Loop();
 extern void EkrdragonDemonking_OnEnd();
 extern void EkrsubAnimeEmulatorMain();
+extern void EndManimLevelUpStatGainLabels();
 extern void EndMapAnimInfoWindow();
 extern void EobjLvup_RedrawGainLabel();
 extern void EobjLvup_SpawnArrowAndLabel();
@@ -110,16 +112,55 @@ extern u8 FrameConf_EfxMagdhisEffectBG[];
 extern u8 FrameConfig_EfxMagFcastBg4[];
 extern u8 FrameLut_EfxSkill[];
 extern void GenerateSummonUnitDef();
+extern void HideUnitUnlockDoor();
 extern void InitDebugMapAnim();
+extern void InitManimLevelUpWindow();
 extern void LoadSumMonsterFromDK();
 extern void LockGame();
 extern void Loop6C1_EfxLvupBGCOL();
 extern void MADebug_DoBattleAnim();
 extern void MADebug_InitScreen();
+extern void ManimLevelUpLabelColor_Loop();
+extern void ManimLevelUpStatGainLabel_Finish();
+extern void ManimLevelUp_Clear();
+extern void ManimLevelUp_DimBgm();
+extern void ManimLevelUp_EndLevelUpText();
+extern void ManimLevelUp_InitMainScreen();
+extern void ManimLevelUp_PutStatGainLabels();
+extern void ManimLevelUp_RestoreBgm();
+extern void ManimLevelUp_ScrollIn();
+extern void ManimLevelUp_ScrollOut();
+extern void ManimLevelUp_StartLevelUpText();
+extern void MapAnimBarrierfx_Init();
+extern void MapAnimBarrierfx_Loop();
+extern void MapAnimBerserk_Loop();
 extern void MapAnimEffectAnimator_Init();
 extern void MapAnimEffectAnimator_Loop1();
 extern void MapAnimEffectAnimator_Loop2();
+extern void MapAnimEffect_Unk_1_Loop();
 extern void MapAnimEffect_Unk_2_PlaySe();
+extern void MapAnimMonsterStone_Loop1();
+extern void MapAnimMonsterStone_Resetfx();
+extern void MapAnimRepair_Init();
+extern void MapAnimRepair_Init0();
+extern void MapAnimRepair_Loop1();
+extern void MapAnimRepair_Loop2();
+extern void MapAnimRepair_Loop3();
+extern void MapAnimRestore_Init();
+extern void MapAnimRestore_Loop();
+extern void MapAnimSilence_InitGfx();
+extern void MapAnimSilence_InitScreenConf();
+extern void MapAnimSilence_Loop();
+extern void MapAnimSleep_Anim1();
+extern void MapAnimSleep_Anim2();
+extern void MapAnimSleep_Init();
+extern void MapAnimTorch_Init();
+extern void MapAnimTorch_Loop1();
+extern void MapAnimTorch_Loop2();
+extern void MapAnimTorch_ResetHBlank();
+extern void MapAnimUnlock_Init();
+extern void MapAnimUnlock_Loop1();
+extern void MapAnimUnlock_Loop2();
 extern void MapAnim_BeginPoisonAnim();
 extern void MapAnim_BeginPoisonAnim2();
 extern void MapAnim_BeginSubjectFastAnim();
@@ -128,6 +169,9 @@ extern void MapAnim_DisplayRoundAnim();
 extern void MapAnim_FreezeSubjectAnim();
 extern void MapAnim_GorgonHatch_Loop();
 extern void MapAnim_InitInfoBox();
+extern void MapAnim_Init_0();
+extern void MapAnim_Loop1_0();
+extern void MapAnim_Loop2_0();
 extern void MapAnim_MoveCameraOntoSubject();
 extern void MapAnim_MoveCameraOntoTarget();
 extern void MapAnim_MoveSubjectsAwayFromTarget();
@@ -148,8 +192,10 @@ extern void MapLatonaShiningfx_Start();
 extern void MapLatonafx_Init();
 extern void MapLatonafx_InitGfx();
 extern void MapSpellAnim_CommonEnd();
+extern void MapSpellAnim_EndWithHBlank();
 extern void New6C_SummonGfx_FromActionPos();
 extern void NightMarefx_End();
+extern void NightMarefx_Init();
 extern void NightMarefx_Loop();
 extern void ProcMAExpBar_FrameAdvance();
 extern void ProcMAExpBar_InitDisplay();
@@ -175,6 +221,7 @@ extern void ProcSummonDK_SelectRightPos();
 extern void ProcSummonDK_SelectUpPos();
 extern void SummonGfxAnim_Cleanup();
 extern void SummonUnitGfx_Init();
+extern void UnhideUnit();
 extern void UnlockGame();
 extern void WallBreakAnim_Init();
 extern void WarpFlashy_Init();
@@ -219,6 +266,7 @@ extern void sub_8077C60();
 extern void sub_807F0FC();
 extern void sub_807F784();
 extern void sub_807F860();
+extern void sub_80815F4();
 extern void x0807E9C5();
 extern void x0808F44D();
 extern u8 x08A13B90[];
@@ -7592,41 +7640,83 @@ struct ProcCmd ProcScr_MapAnimWarpFlashy[] __attribute__((section(".data.frontie
     PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
 };
 __asm__(
-"	.section .data.frontier_df4_banim_b.gap85bb, \"aw\", %progbits\n"
+"	.section .data.frontier_df4_banim_b.gap85bb_head, \"aw\", %progbits\n"
 "	.global frontier_df4_banim_b_085b_A14209_b\n"
 "frontier_df4_banim_b_085b_A14209_b:\n"
 "	.byte 0x00, 0x00\n"
-"	.4byte 0x0001000E, 0x00000000, 0x00000002, MapAnimTorch_Init + 0x1, 0x001E000E, 0x00000000, 0x00000003, MapAnimTorch_Loop1 + 0x1\n"
-"	.4byte 0x00000003, MapAnimTorch_Loop2 + 0x1, 0x0001000E, 0x00000000, 0x00000002, MapAnimTorch_ResetHBlank + 0x1, 0x00000002, MapSpellAnim_EndWithHBlank + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x0001000E, 0x00000000, 0x00000002, MapAnimBerserk_Loop + 0x1, 0x0078000E, 0x00000000\n"
-"	.4byte 0x00000002, MapSpellAnim_CommonEnd + 0x1, 0x00000000, 0x00000000, 0x0001000E, 0x00000000, 0x00000002, MapAnimRepair_Init0 + 0x1\n"
-"	.4byte 0x00000002, MapAnimRepair_Init + 0x1, 0x00000003, MapAnimRestore_Loop + 0x1, 0x00000003, MapAnimRepair_Loop2 + 0x1, 0x00000003, MapAnimRepair_Loop3 + 0x1\n"
-"	.4byte 0x00000002, MapSpellAnim_CommonEnd + 0x1, 0x00000000, 0x00000000, 0x0001000E, 0x00000000, 0x00000002, MapAnimRepair_Init0 + 0x1\n"
-"	.4byte 0x00000002, MapAnimRestore_Init + 0x1, 0x00000003, MapAnimBarrierfx_Loop + 0x1, 0x00000003, MapAnimRepair_Loop2 + 0x1, 0x00000003, MapAnimRepair_Loop3 + 0x1\n"
-"	.4byte 0x00000002, MapSpellAnim_CommonEnd + 0x1, 0x00000000, 0x00000000, 0x0001000E, 0x00000000, 0x00000002, MapAnimSleep_Init + 0x1\n"
-"	.4byte 0x0032000E, 0x00000000, 0x00000002, MapAnimSleep_Anim1 + 0x1, 0x0032000E, 0x00000000, 0x00000002, MapAnimSleep_Anim2 + 0x1\n"
-"	.4byte 0x00000002, MapSpellAnim_CommonEnd + 0x1, 0x00000000, 0x00000000, 0x0001000E, 0x00000000, 0x00000002, NightMarefx_Init + 0x1\n"
-"	.4byte 0x00000003, MapAnimMonsterStone_Loop1 + 0x1, 0x00000002, MapAnimMonsterStone_Resetfx + 0x1, 0x003C000E, 0x00000000, 0x00000002, MapSpellAnim_CommonEnd + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, Tsa1_MonsterStoneMapAnimfx, Tsa2_MonsterStoneMapAnimfx, Tsa3_MonsterStoneMapAnimfx, Tsa4_MonsterStoneMapAnimfx, Tsa5_MonsterStoneMapAnimfx, Tsa6_MonsterStoneMapAnimfx\n"
-"	.4byte Tsa7_MonsterStoneMapAnimfx, Tsa8_MonsterStoneMapAnimfx, Tsa9_MonsterStoneMapAnimfx, Tsa10_MonsterStoneMapAnimfx, 0x0001000E, 0x00000000, 0x00000002, MapAnim_Init_0 + 0x1\n"
-"	.4byte 0x000A000E, 0x00000000, 0x00000003, MapAnim_Loop1_0 + 0x1, 0x003C000E, 0x00000000, 0x00000003, MapAnim_Loop2_0 + 0x1\n"
-"	.4byte 0x0001000E, 0x00000000, 0x00000002, MapSpellAnim_EndWithHBlank + 0x1, 0x00000000, 0x00000000, 0x08070604, 0x00FF0908\n"
-"	.4byte 0x0001000E, 0x00000000, 0x00000002, MapAnimSilence_InitGfx + 0x1, 0x0032000E, 0x00000000, 0x00000002, MapAnimSilence_InitScreenConf + 0x1\n"
-"	.4byte 0x0028000E, 0x00000000, 0x00000003, MapAnimSilence_Loop + 0x1, 0x00000002, MapSpellAnim_CommonEnd + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x0001000E, 0x00000000, 0x00000002, MapAnimBarrierfx_Init + 0x1, 0x00000003, MapAnimRepair_Loop1 + 0x1, 0x00000002, MapSpellAnim_CommonEnd + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x0001000E, 0x00000000, 0x00000002, MapAnimUnlock_Init + 0x1, 0x00000003, MapAnimUnlock_Loop1 + 0x1\n"
-"	.4byte 0x0050000E, 0x00000000, 0x00000003, MapAnimUnlock_Loop2 + 0x1, 0x0001000E, 0x00000000, 0x00000002, MapSpellAnim_EndWithHBlank + 0x1\n"
-"	.4byte 0x00000002, HideUnitUnlockDoor + 0x1, 0x0004000E, 0x00000000, 0x00000002, UnhideUnit + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000003, MapAnimEffect_Unk_1_Loop + 0x1, 0x00000000, 0x00000000, 0x00000009, gMid_Lv, gMid_Lv, 0x00000401\n"
-"	.4byte frontier_df4_menu_014_A72BF0 + 0x628, frontier_df4_menu_014_A72BF0 + 0x628, 0x00000601, frontier_df4_menu_014_A72BF0 + 0x62C, frontier_df4_menu_014_A72BF0 + 0x630, 0x00000801, gMid_Skl, gMid_Skl\n"
-"	.4byte 0x00000A01, gMid_Spd, gMid_Spd, 0x00000409, gMid_Lck, gMid_Lck, 0x00000609, gMid_Def\n"
-"	.4byte gMid_Def, 0x00000809, gMid_Res, gMid_Res, 0x00000A09, gMid_Con, gMid_Con, 0x0000FFFF\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000004, ManimLevelUpStatGainLabel_Finish + 0x1, 0x00000010, 0x00000000, 0x00000002, sub_80815F4 + 0x1\n"
-"	.4byte 0x00000003, ManimLevelUpLabelColor_Loop + 0x1, 0x00000000, 0x00000000, 0x00000004, ManimLevelUp_Clear + 0x1, 0x0001000E, 0x00000000\n"
-"	.4byte 0x00000002, InitManimLevelUpWindow + 0x1, 0x00000002, ManimLevelUp_DimBgm + 0x1, 0x0000000E, 0x00000000, 0x00000002, ManimLevelUp_StartLevelUpText + 0x1\n"
-"	.4byte 0x0046000E, 0x00000000, 0x00000002, ManimLevelUp_EndLevelUpText + 0x1, 0x0001000E, 0x00000000, 0x00000002, ManimLevelUp_RestoreBgm + 0x1\n"
-"	.4byte 0x0000000E, 0x00000000, 0x00000002, ManimLevelUp_InitMainScreen + 0x1, 0x0000000E, 0x00000000, 0x00000003, ManimLevelUp_ScrollIn + 0x1\n"
-"	.4byte 0x001E000E, 0x00000000, 0x00000003, ManimLevelUp_PutStatGainLabels + 0x1, 0x003C000E, 0x00000000, 0x00000002, EndManimLevelUpStatGainLabels + 0x1\n"
-"	.4byte 0x0001000E, 0x00000000, 0x00000003, ManimLevelUp_ScrollOut + 0x1, 0x00000002, ClearManimLevelUpWindow + 0x1, 0x00000002, ResetDialogueScreen + 0x1\n"
-"	.4byte 0x0004000E, 0x00000000, 0x00000000, 0x00000000\n"
 );
+struct ProcCmd ProcScr_MapAnimTorch[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnimTorch_Init + 0x1)), PROC_SLEEP(0x1E), PROC_REPEAT((void*)((u8*)MapAnimTorch_Loop1 + 0x1)),
+    PROC_REPEAT((void*)((u8*)MapAnimTorch_Loop2 + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnimTorch_ResetHBlank + 0x1)), PROC_CALL((void*)((u8*)MapSpellAnim_EndWithHBlank + 0x1)),
+    PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimBerserk[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnimBerserk_Loop + 0x1)), PROC_SLEEP(0x78), PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)),
+    PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimRepair[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnimRepair_Init0 + 0x1)), PROC_CALL((void*)((u8*)MapAnimRepair_Init + 0x1)), PROC_REPEAT((void*)((u8*)MapAnimRestore_Loop + 0x1)),
+    PROC_REPEAT((void*)((u8*)MapAnimRepair_Loop2 + 0x1)), PROC_REPEAT((void*)((u8*)MapAnimRepair_Loop3 + 0x1)), PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimRestore[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnimRepair_Init0 + 0x1)), PROC_CALL((void*)((u8*)MapAnimRestore_Init + 0x1)), PROC_REPEAT((void*)((u8*)MapAnimBarrierfx_Loop + 0x1)),
+    PROC_REPEAT((void*)((u8*)MapAnimRepair_Loop2 + 0x1)), PROC_REPEAT((void*)((u8*)MapAnimRepair_Loop3 + 0x1)), PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimSleep[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnimSleep_Init + 0x1)), PROC_SLEEP(0x32), PROC_CALL((void*)((u8*)MapAnimSleep_Anim1 + 0x1)),
+    PROC_SLEEP(0x32), PROC_CALL((void*)((u8*)MapAnimSleep_Anim2 + 0x1)), PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimMonsterStone[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)NightMarefx_Init + 0x1)), PROC_REPEAT((void*)((u8*)MapAnimMonsterStone_Loop1 + 0x1)), PROC_CALL((void*)((u8*)MapAnimMonsterStone_Resetfx + 0x1)),
+    PROC_SLEEP(0x3C), PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap85bb_body, \"aw\", %progbits\n"
+"	.4byte Tsa1_MonsterStoneMapAnimfx, Tsa2_MonsterStoneMapAnimfx, Tsa3_MonsterStoneMapAnimfx, Tsa4_MonsterStoneMapAnimfx, Tsa5_MonsterStoneMapAnimfx, Tsa6_MonsterStoneMapAnimfx\n"
+"	.4byte Tsa7_MonsterStoneMapAnimfx, Tsa8_MonsterStoneMapAnimfx, Tsa9_MonsterStoneMapAnimfx, Tsa10_MonsterStoneMapAnimfx\n"
+);
+struct ProcCmd ProcScr_MapAnimEffect_Unk_0[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnim_Init_0 + 0x1)), PROC_SLEEP(0xA), PROC_REPEAT((void*)((u8*)MapAnim_Loop1_0 + 0x1)),
+    PROC_SLEEP(0x3C), PROC_REPEAT((void*)((u8*)MapAnim_Loop2_0 + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapSpellAnim_EndWithHBlank + 0x1)),
+    PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap85bb_body, \"aw\", %progbits\n"
+"	.4byte 0x08070604, 0x00FF0908\n"
+);
+struct ProcCmd ProcScr_MapAnimSilencefx[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnimSilence_InitGfx + 0x1)), PROC_SLEEP(0x32), PROC_CALL((void*)((u8*)MapAnimSilence_InitScreenConf + 0x1)),
+    PROC_SLEEP(0x28), PROC_REPEAT((void*)((u8*)MapAnimSilence_Loop + 0x1)), PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimBarrierfx[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnimBarrierfx_Init + 0x1)), PROC_REPEAT((void*)((u8*)MapAnimRepair_Loop1 + 0x1)), PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)),
+    PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimUnlock[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapAnimUnlock_Init + 0x1)), PROC_REPEAT((void*)((u8*)MapAnimUnlock_Loop1 + 0x1)), PROC_SLEEP(0x50),
+    PROC_REPEAT((void*)((u8*)MapAnimUnlock_Loop2 + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)MapSpellAnim_EndWithHBlank + 0x1)), PROC_CALL((void*)((u8*)HideUnitUnlockDoor + 0x1)),
+    PROC_SLEEP(0x4), PROC_CALL((void*)((u8*)UnhideUnit + 0x1)), PROC_END,
+};
+struct ProcCmd ProcScr_MapAnimEffect_Unk_1[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_REPEAT((void*)((u8*)MapAnimEffect_Unk_1_Loop + 0x1)), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap85bb_body, \"aw\", %progbits\n"
+"	.4byte 0x00000009, gMid_Lv, gMid_Lv, 0x00000401, frontier_df4_menu_014_A72BF0 + 0x628, frontier_df4_menu_014_A72BF0 + 0x628\n"
+"	.4byte 0x00000601, frontier_df4_menu_014_A72BF0 + 0x62C, frontier_df4_menu_014_A72BF0 + 0x630, 0x00000801, gMid_Skl, gMid_Skl\n"
+"	.4byte 0x00000A01, gMid_Spd, gMid_Spd, 0x00000409, gMid_Lck, gMid_Lck\n"
+"	.4byte 0x00000609, gMid_Def, gMid_Def, 0x00000809, gMid_Res, gMid_Res\n"
+"	.4byte 0x00000A09, gMid_Con, gMid_Con, 0x0000FFFF, 0x00000000, 0x00000000\n"
+);
+struct ProcCmd ProcScr_ManimLevelUpStatGainLabel[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_SET_END_CB((void*)((u8*)ManimLevelUpStatGainLabel_Finish + 0x1)), PROC_BLOCK, PROC_CALL((void*)((u8*)sub_80815F4 + 0x1)), PROC_REPEAT((void*)((u8*)ManimLevelUpLabelColor_Loop + 0x1)),
+    PROC_END,
+};
+struct ProcCmd ProcScr_ManimLevelUp[] __attribute__((section(".data.frontier_df4_banim_b.gap85bb_body"))) = {
+    PROC_SET_END_CB((void*)((u8*)ManimLevelUp_Clear + 0x1)), PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)InitManimLevelUpWindow + 0x1)), PROC_CALL((void*)((u8*)ManimLevelUp_DimBgm + 0x1)),
+    PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)ManimLevelUp_StartLevelUpText + 0x1)), PROC_SLEEP(0x46), PROC_CALL((void*)((u8*)ManimLevelUp_EndLevelUpText + 0x1)),
+    PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)ManimLevelUp_RestoreBgm + 0x1)), PROC_SLEEP(0x0), PROC_CALL((void*)((u8*)ManimLevelUp_InitMainScreen + 0x1)),
+    PROC_SLEEP(0x0), PROC_REPEAT((void*)((u8*)ManimLevelUp_ScrollIn + 0x1)), PROC_SLEEP(0x1E), PROC_REPEAT((void*)((u8*)ManimLevelUp_PutStatGainLabels + 0x1)),
+    PROC_SLEEP(0x3C), PROC_CALL((void*)((u8*)EndManimLevelUpStatGainLabels + 0x1)), PROC_SLEEP(0x1), PROC_REPEAT((void*)((u8*)ManimLevelUp_ScrollOut + 0x1)),
+    PROC_CALL((void*)((u8*)ClearManimLevelUpWindow + 0x1)), PROC_CALL((void*)((u8*)ResetDialogueScreen + 0x1)), PROC_SLEEP(0x4), PROC_END,
+};
