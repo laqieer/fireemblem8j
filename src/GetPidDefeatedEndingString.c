@@ -14,7 +14,8 @@ struct ROMChapterData
     /* 70 */ u16 unk70;
 };
 
-#define gpDefeatedEndingLocString (*(char **)0x08AC059C)
+extern u8 frontier_df4_ending_000_AC059C[];
+#define gpDefeatedEndingLocString (*(char **)frontier_df4_ending_000_AC059C)
 
 extern int GetPidDefeatType(int pid);
 extern void CheckPermanentFlag(int flag);
