@@ -1,7 +1,4 @@
 	.syntax unified
-	.set AdvanceGetLCGRNValue, 0x08000CC0 + 1
-	.set sub_8019174, 0x08019174 + 1
-	.set DivRem, 0x080D637C + 1
 	.section .text.sub_807D3BC, "ax", %progbits
 @ SelectSummonPos @ JP 0x0807D3BC - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -94,7 +91,7 @@ _0807D450:
 	ldr r0, _0807D48C @ =0x0203A4E8
 	str r2, [sp, #0x88]
 	str r3, [sp, #0x8c]
-	bl sub_8019174
+	bl CanUnitCrossTerrain
 	ldr r2, [sp, #0x88]
 	ldr r3, [sp, #0x8c]
 	cmp r0, #0

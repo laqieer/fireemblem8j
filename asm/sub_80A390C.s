@@ -1,22 +1,4 @@
 	.syntax unified
-	.set BG_EnableSyncByMask, 0x08001EFC + 1
-	.set EndFaceById, 0x08005660 + 1
-	.set GetOverallRank, 0x080BABF4 + 1
-	.set GetSavedRankData, 0x080A8428 + 1
-	.set SetCgTextFlags, 0x08090CAC + 1
-	.set j_TmApplyTsa, 0x080DC0DC + 1
-	.set strcpy, 0x080D69BC + 1
-	.set sub_80063F8, 0x080063F8 + 1
-	.set InitTalk, 0x08006710 + 1
-	.set GetStringFromIndex, 0x08009FA8 + 1
-	.set Decompress, 0x08013008 + 1
-	.set sub_8031438, 0x08031438 + 1
-	.set StartCgText, 0x080913FC + 1
-	.set sub_8091544, 0x08091544 + 1
-	.set sub_80A33E0, 0x080A33E0 + 1
-	.set sub_80A3528, 0x080A3528 + 1
-	.set sub_80A40A0, 0x080A40A0 + 1
-	.set sub_80D6370, 0x080D6370 + 1
 	.section .text.sub_80A390C, "ax", %progbits
 @ Augury_InitResultScreen @ JP 0x080A390C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -34,7 +16,7 @@ Augury_InitResultScreen:
 	strh r1, [r0]
 	ldr r2, _080A3A28 @ =0x0100000C
 	add r1, sp, #0x10
-	bl sub_80D6370
+	bl CpuSet
 	adds r0, r6, #0
 	adds r0, #0x3c
 	ldrb r1, [r0]
@@ -158,7 +140,7 @@ _080A394A:
 	adds r0, r4, #0
 	bl strcpy
 	adds r0, r4, #0
-	bl sub_8031438
+	bl SetTacticianName
 	b _080A3A3A
 	.align 2, 0
 _080A3A28: .4byte 0x0100000C
@@ -166,7 +148,7 @@ _080A3A2C: .4byte 0x001FFFFF
 _080A3A30:
 	ldr r0, _080A3A74 @ =0x000001F1
 	bl GetStringFromIndex
-	bl sub_8031438
+	bl SetTacticianName
 _080A3A3A:
 	ldrb r0, [r5]
 	cmp r0, #0
@@ -248,7 +230,7 @@ _080A3AB6:
 	bl BG_EnableSyncByMask
 	movs r0, #0
 	bl EndFaceById
-	bl sub_8091544
+	bl EndCgText
 	ldrb r0, [r4]
 	cmp r0, #0
 	beq _080A3B4A
@@ -269,7 +251,7 @@ _080A3AB6:
 	movs r0, #0
 	movs r2, #0xd8
 	movs r3, #0x58
-	bl sub_80063F8
+	bl StartFace2
 	ldrb r0, [r4]
 	adds r1, r6, #0
 	adds r1, #0x39

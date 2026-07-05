@@ -1,7 +1,4 @@
 	.syntax unified
-	.set __udivsi3, 0x080D67D0 + 1
-	.set sub_800A194, 0x0800A194 + 1
-	.set sub_80D6378, 0x080D6378 + 1
 	.section .text.sub_800A34C, "ax", %progbits
 @ SplineEvalCatmullRom @ JP 0x0800A34C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -245,19 +242,19 @@ _0800A440:
 	muls r1, r2, r1
 	movs r0, #0x80
 	lsls r0, r0, #5
-	bl sub_80D6378
+	bl DivArm
 	adds r0, r0, r4
 	mov r1, sb
 	muls r1, r0, r1
 	movs r0, #0x80
 	lsls r0, r0, #5
-	bl sub_80D6378
+	bl DivArm
 	add r0, sl
 	mov r1, sb
 	muls r1, r0, r1
 	movs r0, #0x80
 	lsls r0, r0, #5
-	bl sub_80D6378
+	bl DivArm
 	adds r0, r0, r7
 	ldr r4, [sp, #0x54]
 	str r0, [r4]
@@ -265,19 +262,19 @@ _0800A440:
 	muls r1, r6, r1
 	movs r0, #0x80
 	lsls r0, r0, #5
-	bl sub_80D6378
+	bl DivArm
 	adds r0, r0, r5
 	mov r1, sb
 	muls r1, r0, r1
 	movs r0, #0x80
 	lsls r0, r0, #5
-	bl sub_80D6378
+	bl DivArm
 	add r0, r8
 	mov r1, sb
 	muls r1, r0, r1
 	movs r0, #0x80
 	lsls r0, r0, #5
-	bl sub_80D6378
+	bl DivArm
 	ldr r5, [sp, #0x64]
 	adds r0, r0, r5
 	str r0, [r4, #4]

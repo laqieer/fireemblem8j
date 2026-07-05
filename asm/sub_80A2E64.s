@@ -1,8 +1,4 @@
 	.syntax unified
-	.set PutSpriteExt, 0x08005330 + 1
-	.set sub_8002100, 0x08002100 + 1
-	.set sub_80A2E4C, 0x080A2E4C + 1
-	.set Div, 0x080D6374 + 1
 	.section .text.sub_80A2E64, "ax", %progbits
 @ DivinationRankSpriteUpdate @ JP 0x080A2E64 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -153,7 +149,7 @@ _080A2F26:
 	adds r1, r6, #0
 	adds r2, r5, #0
 	adds r3, r4, #0
-	bl sub_8002100
+	bl SetObjAffine
 	b _080A2FFA
 	.align 2, 0
 _080A2F8C: .4byte 0x08A95478
@@ -202,7 +198,7 @@ _080A2F9C:
 	adds r1, r6, #0
 	adds r2, r5, #0
 	adds r3, r4, #0
-	bl sub_8002100
+	bl SetObjAffine
 _080A2FFA:
 	ldr r2, [sp, #4]
 	mov r8, r2

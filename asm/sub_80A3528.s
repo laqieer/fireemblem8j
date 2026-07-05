@@ -1,15 +1,4 @@
 	.syntax unified
-	.set BG_EnableSyncByMask, 0x08001EFC + 1
-	.set PutNumber, 0x08004A90 + 1
-	.set PutSpecialChar, 0x08004A14 + 1
-	.set ResetText, 0x08003BC4 + 1
-	.set SetTextFont, 0x08003C68 + 1
-	.set SetTextFontGlyphs, 0x08003C24 + 1
-	.set BG_Fill, 0x080011D0 + 1
-	.set sub_8004374, 0x08004374 + 1
-	.set sub_8004C84, 0x08004C84 + 1
-	.set GetStringFromIndex, 0x08009FA8 + 1
-	.set sub_80A34F0, 0x080A34F0 + 1
 	.section .text.sub_80A3528, "ax", %progbits
 @ sub_80A3528 @ JP 0x080A3528 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -47,7 +36,7 @@ sub_80A3528:
 	adds r1, r4, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	adds r0, r5, #0
 	adds r0, #0x3b
 	ldrb r0, [r0]
@@ -92,7 +81,7 @@ _080A35AA:
 	movs r0, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	adds r6, #0x80
 	subs r7, #1
 	cmp r7, #0
@@ -110,7 +99,7 @@ _080A35AA:
 	movs r0, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	movs r3, #0x98
 	lsls r3, r3, #1
 	adds r0, r4, r3
@@ -133,7 +122,7 @@ _080A35AA:
 	movs r0, #0
 	movs r2, #0
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	movs r3, #0xd4
 	lsls r3, r3, #1
 	adds r0, r4, r3
@@ -159,14 +148,14 @@ _080A35AA:
 	ldr r3, [sp, #0xc]
 	ldrb r2, [r3]
 	movs r1, #2
-	bl sub_8004C84
+	bl PutNumber2Digit
 	movs r1, #0xd9
 	lsls r1, r1, #1
 	adds r0, r4, r1
 	ldr r3, [sp, #0x10]
 	ldrb r2, [r3]
 	movs r1, #2
-	bl sub_8004C84
+	bl PutNumber2Digit
 	ldr r0, _080A36DC @ =0x000004D2
 	bl GetStringFromIndex
 	adds r1, r4, #0
@@ -176,7 +165,7 @@ _080A35AA:
 	movs r0, #0
 	movs r2, #3
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	adds r0, r4, #0
 	adds r0, #0x56
 	ldr r2, _080A36E0 @ =0x08A95524
@@ -200,7 +189,7 @@ _080A35AA:
 	movs r0, #0
 	movs r2, #3
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	b _080A3700
 	.align 2, 0
 _080A36C8: .4byte 0x02023CA8
@@ -221,7 +210,7 @@ _080A36E8:
 	movs r0, #0
 	movs r2, #3
 	movs r3, #4
-	bl sub_8004374
+	bl PutDrawText
 _080A3700:
 	ldr r0, _080A3744 @ =0x000004D5
 	bl GetStringFromIndex
@@ -233,7 +222,7 @@ _080A3700:
 	adds r1, r4, #0
 	movs r2, #3
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	adds r0, r4, #4
 	ldr r3, [sp, #0x14]
 	ldrb r2, [r3]
@@ -248,7 +237,7 @@ _080A3700:
 	adds r1, r4, #0
 	movs r2, #3
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	b _080A387C
 	.align 2, 0
 _080A3740: .4byte 0x000004D4
@@ -277,7 +266,7 @@ _080A375C:
 	movs r0, #0
 	movs r2, #1
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	movs r3, #3
 	mov r8, r3
 	str r3, [sp]
@@ -303,7 +292,7 @@ _080A375C:
 	movs r0, #0
 	movs r2, #1
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	mov r3, r8
 	str r3, [sp]
 	movs r0, #0x15
@@ -321,7 +310,7 @@ _080A375C:
 	movs r0, #0
 	movs r2, #1
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	mov r3, r8
 	str r3, [sp]
 	movs r0, #0x15
@@ -339,7 +328,7 @@ _080A375C:
 	movs r0, #0
 	movs r2, #1
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	movs r0, #1
 	str r0, [sp]
 	movs r0, #0xd
@@ -360,7 +349,7 @@ _080A375C:
 	movs r0, #0
 	movs r2, #1
 	movs r3, #0
-	bl sub_8004374
+	bl PutDrawText
 	b _080A386C
 	.align 2, 0
 _080A3840: .4byte 0x08A95438
@@ -378,7 +367,7 @@ _080A3854:
 	movs r0, #0
 	movs r2, #1
 	movs r3, #4
-	bl sub_8004374
+	bl PutDrawText
 _080A386C:
 	movs r0, #4
 	str r0, [sp]

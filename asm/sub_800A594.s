@@ -1,6 +1,4 @@
 	.syntax unified
-	.set sub_800A34C, 0x0800A34C + 1
-	.set sub_80D6384, 0x080D6384 + 1
 	.section .text.sub_800A594, "ax", %progbits
 @ SplineSampleAtTime @ JP 0x0800A594 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -253,7 +251,7 @@ _0800A758:
 	ldr r1, [sp, #0x38]
 	mov r2, r8
 	ldr r3, [sp, #0x30]
-	bl sub_800A34C
+	bl SplineEvalCatmullRom
 	ldr r0, [sp, #0x24]
 	ldr r1, [sp, #0x34]
 	strh r0, [r1]

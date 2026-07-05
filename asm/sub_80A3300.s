@@ -1,5 +1,4 @@
 	.syntax unified
-	.set PutSpriteExt, 0x08005330 + 1
 	.section .text.sub_80A3300, "ax", %progbits
 @ sub_80A3300 @ JP 0x080A3300 - region-different, gbadisasm descriptive asm (D23)
 	.thumb

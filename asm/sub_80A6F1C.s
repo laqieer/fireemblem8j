@@ -1,8 +1,4 @@
 	.syntax unified
-	.set sub_80A6AA8, 0x080A6AA8 + 1
-	.set sub_80A6C20, 0x080A6C20 + 1
-	.set sub_80A6D34, 0x080A6D34 + 1
-	.set sub_80D65E0, 0x080D65E0 + 1
 	.section .text.sub_80A6F1C, "ax", %progbits
 @ DecodeAndVerifyArenaRecord @ JP 0x080A6F1C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -66,7 +62,7 @@ _080A6F82:
 	ldr r4, _080A6FD4 @ =0x02014F28
 	adds r1, r1, r4
 	mov r0, r8
-	bl sub_80D65E0
+	bl _call_via_r9
 	ldr r0, [r5]
 	adds r0, r0, r4
 	ldr r4, _080A6FCC @ =0x02014FC8

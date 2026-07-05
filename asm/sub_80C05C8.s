@@ -1,7 +1,4 @@
 	.syntax unified
-	.set AP_Update, 0x080091AC + 1
-	.set PutSpriteExt, 0x08005330 + 1
-	.set sub_80C0574, 0x080C0574 + 1
 	.section .text.sub_80C05C8, "ax", %progbits
 @ GmapScreen2_Loop @ JP 0x080C05C8 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -83,7 +80,7 @@ _080C062A:
 	adds r1, r7, #0
 	adds r2, r6, #0
 	add r3, sp, #4
-	bl sub_80C0574
+	bl GmapScreen2_GetNodeScreenPos
 	lsls r0, r0, #0x18
 	cmp r0, #0
 	beq _080C06D0

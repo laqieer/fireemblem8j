@@ -1,8 +1,4 @@
 	.syntax unified
-	.set __divsi3, 0x080D65F8 + 1
-	.set __modsi3, 0x080D6690 + 1
-	.set sub_80A6AC0, 0x080A6AC0 + 1
-	.set sub_80A6C20, 0x080A6C20 + 1
 	.section .text.sub_80A6D34, "ax", %progbits
 @ sub_80A6D34 @ JP 0x080A6D34 - region-different, gbadisasm descriptive asm (D23)
 	.thumb

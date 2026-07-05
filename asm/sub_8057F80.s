@@ -1,28 +1,4 @@
 	.syntax unified
-	.set CheckBanimHensei, 0x08078730 + 1
-	.set CheckBattleScripted, 0x080599AC + 1
-	.set GetBanimBackgroundIndex, 0x08058D1C + 1
-	.set GetBanimFactionPalette, 0x080597E4 + 1
-	.set GetBanimTerrainGround, 0x08058BF4 + 1
-	.set GetBattleAnimPreconfType, 0x0802C9D0 + 1
-	.set GetItemAttributes, 0x08017314 + 1
-	.set GetItemIndex, 0x08017294 + 1
-	.set GetROMChapterStruct, 0x08034520 + 1
-	.set GetSelectTargetCount, 0x08050AC8 + 1
-	.set GetSpellAssocCharCount, 0x0807A66C + 1
-	.set IsItemEffectiveAgainst, 0x08016994 + 1
-	.set IsUnitEffectiveAgainst, 0x08016A30 + 1
-	.set ResetEkrDragonStatus, 0x08071FAC + 1
-	.set SetEkrDragonStatusType, 0x08072034 + 1
-	.set sub_8050ABC, 0x08050ABC + 1
-	.set sub_8058E44, 0x08058E44 + 1
-	.set sub_8058FE8, 0x08058FE8 + 1
-	.set sub_8059034, 0x08059034 + 1
-	.set GetBattleAnimationId, 0x08059678 + 1
-	.set sub_8059790, 0x08059790 + 1
-	.set sub_80598BC, 0x080598BC + 1
-	.set sub_80599A0, 0x080599A0 + 1
-	.set sub_805BDCC, 0x0805BDCC + 1
 	.section .text.sub_8057F80, "ax", %progbits
 @ PrepareBattleGraphicsMaybe @ JP 0x08057F80 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -58,13 +34,13 @@ _08057FAE:
 	cmp r0, #0
 	bne _08057FC8
 	movs r0, #0
-	bl sub_8050ABC
+	bl SetBanimLinkArenaFlag
 	b _08057FCE
 	.align 2, 0
 _08057FC4: .4byte 0x0202BCAC
 _08057FC8:
 	movs r0, #1
-	bl sub_8050ABC
+	bl SetBanimLinkArenaFlag
 _08057FCE:
 	ldr r0, _08057FE8 @ =0x0203A4D0
 	ldrh r1, [r0]
@@ -168,7 +144,7 @@ _080580A2:
 	strh r0, [r1, #2]
 	strh r0, [r1]
 	movs r4, #0
-	bl GetSelectTargetCount
+	bl GetBanimLinkArenaFlag
 	cmp r0, #1
 	beq _080580C6
 	cmp r5, #0
@@ -584,7 +560,7 @@ _080583DC:
 	ldr r1, [sp, #8]
 	adds r1, #0x4a
 	ldrh r1, [r1]
-	bl sub_8059790
+	bl FilterBattleAnimCharacterPalette
 	ldr r1, _08058504 @ =0x0203E198
 	str r0, [r1]
 _080583F4:
@@ -597,7 +573,7 @@ _080583F4:
 	ldr r1, [sp, #0xc]
 	adds r1, #0x4a
 	ldrh r1, [r1]
-	bl sub_8059790
+	bl FilterBattleAnimCharacterPalette
 	ldr r1, _08058504 @ =0x0203E198
 	str r0, [r1, #4]
 _0805840E:
@@ -781,7 +757,7 @@ _08058568:
 	ldrsb r0, [r6, r0]
 	strh r0, [r1, #2]
 _08058586:
-	bl sub_8059034
+	bl ParseBattleHitToBanimCmd
 	ldr r0, _080585B0 @ =0x0203E11C
 	movs r1, #0
 	ldrsh r0, [r0, r1]
@@ -808,7 +784,7 @@ _080585B8:
 	ldr r1, [sp, #8]
 	adds r1, #0x4a
 	ldrh r1, [r1]
-	bl sub_8058E44
+	bl GetSpellAnimId
 	ldr r1, _0805865C @ =0x0203E114
 	strh r0, [r1]
 _080585D0:
@@ -821,7 +797,7 @@ _080585D0:
 	ldr r1, [sp, #0xc]
 	adds r1, #0x4a
 	ldrh r1, [r1]
-	bl sub_8058E44
+	bl GetSpellAnimId
 	ldr r1, _0805865C @ =0x0203E114
 	strh r0, [r1, #2]
 _080585EA:
@@ -834,7 +810,7 @@ _080585EA:
 	ldr r0, [sp, #0xc]
 	adds r0, #0x4a
 	ldrh r0, [r0]
-	bl sub_80598BC
+	bl IsItemDisplayedInBattle
 	lsls r0, r0, #0x10
 	cmp r0, #0
 	bne _08058616
@@ -854,7 +830,7 @@ _08058616:
 	adds r1, #0x4a
 	ldrh r2, [r1]
 	movs r1, #0
-	bl sub_8058FE8
+	bl UnsetMapStaffAnim
 _08058628:
 	mov r0, sb
 	cmp r0, #0
@@ -864,7 +840,7 @@ _08058628:
 	adds r1, #0x4a
 	ldrh r2, [r1]
 	movs r1, #1
-	bl sub_8058FE8
+	bl UnsetMapStaffAnim
 _0805863C:
 	ldr r0, _08058668 @ =0x0203E11C
 	movs r1, #0
@@ -1240,7 +1216,7 @@ _080588F4:
 	ldrh r0, [r0]
 	bl GetItemIndex
 _08058904:
-	bl GetSelectTargetCount
+	bl GetBanimLinkArenaFlag
 	cmp r0, #1
 	beq _08058918
 	ldr r0, _08058958 @ =0x0202BCEC
@@ -1337,7 +1313,7 @@ _080589D2:
 	bne _080589E6
 	movs r4, #1
 _080589E6:
-	bl sub_805BDCC
+	bl GetBattleAnimArenaFlag
 	cmp r0, #1
 	bne _080589F0
 	movs r4, #1
@@ -1349,7 +1325,7 @@ _080589F0:
 	bne _080589FE
 	movs r4, #1
 _080589FE:
-	bl sub_80599A0
+	bl SetBattleUnscripted
 	ldr r0, _08058AD0 @ =0x0203E11C
 	movs r1, #0
 	ldrsh r0, [r0, r1]

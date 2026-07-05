@@ -1,7 +1,4 @@
 	.syntax unified
-	.set NextRN_N, 0x08000C58 + 1
-	.set sub_8012684, 0x08012684 + 1
-	.set Div, 0x080D6374 + 1
 	.section .text.sub_800FAD0, "ax", %progbits
 @ GetUnitDefinitionFormEventScr @ JP 0x0800FAD0 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -250,7 +247,7 @@ _0800FC80:
 	cmp r5, #1
 	bne _0800FC8E
 	adds r0, r6, #0
-	bl sub_8012684
+	bl BuildDeployedUnitDefinitionList
 _0800FC8E:
 	adds r0, r6, #0
 	add sp, #0x54

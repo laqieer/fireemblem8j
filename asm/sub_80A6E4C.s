@@ -1,10 +1,4 @@
 	.syntax unified
-	.set GetGameClock, 0x08000CD8 + 1
-	.set sub_80A6A7C, 0x080A6A7C + 1
-	.set sub_80A6AA8, 0x080A6AA8 + 1
-	.set sub_80A6C20, 0x080A6C20 + 1
-	.set sub_80A6C60, 0x080A6C60 + 1
-	.set sub_80D65C8, 0x080D65C8 + 1
 	.section .text.sub_80A6E4C, "ax", %progbits
 @ sub_80A6E4C @ JP 0x080A6E4C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
@@ -30,7 +24,7 @@ _080A6E62:
 	ldr r1, [r5]
 	adds r1, r1, r6
 	mov r0, sp
-	bl sub_80D65C8
+	bl _call_via_r3
 	ldr r0, [sp]
 	bl sub_80A6A7C
 	ldr r4, _080A6F0C @ =0x02014FC8
