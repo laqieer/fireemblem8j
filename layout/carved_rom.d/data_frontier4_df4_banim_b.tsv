@@ -83,7 +83,9 @@
 9CD958	9CDD18	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap80)	df4_banim_b region-diff data (960 B, long-tail gap)
 9CF318	9CFD20	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap81)	df4_banim_b region-diff data (2568 B, long-tail gap)
 A12AC0	A1313A	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap82)	df4_banim_b region-diff data (1658 B, long-tail gap)
-A13256	A13320	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83)	frame data + sMuStateFuncs + ProcScr_Mu(asm) + MuDeathFade
+A13256	A132D0	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83)	frame data + sMuStateFuncs
+A132D0	A132F0	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83_mu)	ProcScr_Mu struct[4] (section-split)
+A132F0	A13320	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83_b)	Mu trailing frame lut + ProcScr_MuDeathFade(asm)
 A13320	A13330	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83_blink)	ProcScr_MuBlink struct[2] (section-split)
 A13330	A13380	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83_c)	MuBlink palette lut + ProcScr_MuPixelEffect(asm)
 A13380	A13398	src/data/frontier_df4_banim_b/frontier_df4_banim_b.o(.data.frontier_df4_banim_b.gap83_rpi)	ProcScr_MuRestorePalInfo struct[3] (section-split)

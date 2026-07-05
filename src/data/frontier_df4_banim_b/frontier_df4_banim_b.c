@@ -120,6 +120,7 @@ extern void LockGame();
 extern void Loop6C1_EfxLvupBGCOL();
 extern void MADebug_DoBattleAnim();
 extern void MADebug_InitScreen();
+extern void MU_OnEnd();
 extern void ManimLevelUpLabelColor_Loop();
 extern void ManimLevelUpStatGainLabel_Finish();
 extern void ManimLevelUp_Clear();
@@ -195,6 +196,7 @@ extern void MapSpellAnim_CommonEnd();
 extern void MapSpellAnim_EndWithHBlank();
 extern void MuBlink_OnLoop();
 extern void MuRestorePalInfo_Apply();
+extern void Mu_OnLoop();
 extern void New6C_SummonGfx_FromActionPos();
 extern void NightMarefx_End();
 extern void NightMarefx_Init();
@@ -7399,10 +7401,12 @@ __asm__(
 "sMuStateFuncs:\n"
 "	.4byte nullsub_68, Mu_OnStateDoNothing, Mu_OnStateMovement, Mu_OnStateSleeping, Mu_OnStateUnk4, Mu_OnStateBump\n"
 "	.4byte Mu_OnStateDoNothing, Mu_OnStateDoNothing\n"
-"	.global ProcScr_Mu\n"
-"ProcScr_Mu:\n"
-"	.4byte 0x00000001, gMapanimApi_0 - 0x14, 0x0004000F, 0x00000000, 0x00000004, MU_OnEnd\n"
-"	.4byte 0x00000003, Mu_OnLoop\n"
+);
+struct ProcCmd ProcScr_Mu[] __attribute__((section(".data.frontier_df4_banim_b.gap83_mu"))) = {
+    PROC_NAME((void*)((u8*)gMapanimApi_0 - 0x14)), PROC_MARK(0x4), PROC_SET_END_CB(MU_OnEnd), PROC_REPEAT(Mu_OnLoop),
+};
+__asm__(
+"	.section .data.frontier_df4_banim_b.gap83_b, \"aw\", %progbits\n"
 "	.short 0x0000, 0x0010, 0x0008, 0x0018, 0x0000, 0x0008\n"
 "	.short 0x0004, 0x0010, 0x0102, 0x0000, 0x0102, 0x0003\n"
 "	.global ProcScr_MuDeathFade\n"
