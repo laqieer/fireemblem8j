@@ -1,31 +1,52 @@
-# sub_8001570 focused CBMC proof
+# sub_8001570 focused CBMC proof attempt
 
-This is the first working m2c-trust CBMC bridge instance.
+This directory now distinguishes the earlier bounded smoke from the corrected
+full-domain attempt.
 
-- raw implementation: `src/nonmatching/sub_8001570.c` included as `impl_AddAttr2dBitMap`
-- raw m2c reference: `m2c_ref_raw.c`
-- mechanical ABI/pointer lowering: `m2c_ref_byteptr_lowered.c`
-  - m2c emits byte-offset pointer arithmetic in C pointer syntax for this function;
-    the lowering changes only pointer carrier types/increments so CBMC checks the
-    intended byte-addressed m2c semantics.
-- harness: `harness_origin_1x1.c`
+## Full-domain harness (current verdict: UNKNOWN timeout@unwind33)
 
-Current proved domain: 1x1 bitmap at origin (`ix=0`, `iy=0`, header width/height
-bytes both zero), arbitrary source pixel and `chr`. All CBMC safety checks and
-unwinding assertions pass with `--unwind 3`. This is a pipeline proof, not yet the
-full 32x32 clipped-domain proof.
+Harness: `harness_full_domain.c`
 
-Command:
+Design:
+- raw reconstruction source included as `impl_AddAttr2dBitMap`;
+- m2c reference generated from `asm/sub_8001570.s` (`m2c_ref_raw.c`), with only
+  mechanical byte-pointer lowering in `m2c_ref_byteptr_lowered.c` so CBMC models
+  m2c's byte-offset pointer arithmetic instead of host-C scaled pointer math;
+- full symbolic inputs: `ix`, `iy`, `chr`, and both source header bytes;
+- source memory is one shared uninitialized `src_oracle[]` array, run with
+  `--arrays-uf-always`, so symbolic source reads are deterministic by address and
+  shared by both sides;
+- destination observable is a 32x32 u16 buffer checked by an arbitrary symbolic
+  index `k` (universal under CBMC nondet semantics), with the compared cell
+  initialized identically on both sides;
+- loop proof obligation: `--unwind 33 --unwinding-assertions`.
+
+Command used for the 20-minute full-domain run:
 
 ```sh
-.cbmc-spike-tools/root/usr/bin/cbmc \
-  scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/harness_origin_1x1.c \
-  -I include -I . --32 --unwind 3 --unwinding-assertions \
+timeout 1200s .cbmc-spike-tools/root/usr/bin/cbmc \
+  scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/harness_full_domain.c \
+  -I include -I . --32 --unwind 33 --unwinding-assertions \
   --bounds-check --pointer-check --pointer-overflow-check --div-by-zero-check \
-  --signed-overflow-check --undefined-shift-check --slice-formula --verbosity 5
+  --signed-overflow-check --undefined-shift-check --arrays-uf-always \
+  --slice-formula --verbosity 5
 ```
 
-Evidence:
+Observed: `rc=124` timeout; no `VERIFICATION SUCCESSFUL` / `VERIFICATION FAILED`
+was emitted. A shorter verbose run reached symbolic execution and SSA conversion
+with 58,229 generated VCCs / 39,226 after simplification, then also timed out
+before a solver verdict. See `cbmc_full_domain_timeout_excerpt.txt`.
 
-- `cbmc_origin_1x1.out`: `VERIFICATION SUCCESSFUL`
-- `cbmc_origin_1x1_mutated.out`: flipped written bit refutes at the final assertion.
+Mutation harness: `harness_full_domain_mutated.c` flips one destination bit after
+`impl_`. It also timed out at 300s before a REFUTED verdict, so the full-domain
+harness has not passed the mutation gate.
+
+Verdict: **UNKNOWN(timeout@unwind33)** for full-domain sub_8001570. Do not count
+as PROVEN.
+
+## Superseded bounded smoke (not a proof)
+
+`harness_origin_1x1.c` proves only the restricted domain `ix=0`, `iy=0`,
+header width/height bytes zero. It is retained as a smoke test for parser/prelude
+plumbing and mutation behavior, but it is not a full-domain equivalence proof and
+is not counted in the N/16 headline.

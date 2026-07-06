@@ -2,43 +2,31 @@
 
 Label for every result: **source-level equivalence trusting m2c (spec) + agbcc (codegen)**.
 
-Headline: **0/16 CBMC-PROVEN via Cam's approach (m2c-trust tier); of which 0 anchored-confirmed on known-equivalent**.
+Headline: **0/16 CBMC-PROVEN full-domain (m2c-trust tier); of which 0 anchored-confirmed on known-equivalent**.
 
 
-## Focused sub_8001570 pipeline proof
+## Focused sub_8001570 full-domain verdict
 
-This session stopped scaling and perfected the first clean anchor enough to get a real CBMC success on a constrained domain.
+Corrected harness: `focused/sub_8001570/harness_full_domain.c`.
 
-Verdict for focused harness: **PROVEN** — source-level equivalence trusting m2c (spec) + agbcc (codegen), for the 1x1-origin domain (`ix=0`, `iy=0`, header width/height bytes = 0), arbitrary pixel and `chr`. This is **not counted as full-function 1/16** because the full 32x32 clipped-domain arbitrary-position proof still times out.
+Verdict: **UNKNOWN(timeout@unwind33)** — source-level equivalence trusting m2c (spec) + agbcc (codegen) was attempted with full symbolic `ix`, `iy`, `chr`, full symbolic source header bytes, shared UF-backed source memory (`--arrays-uf-always`), padded 32x32 destination buffers, arbitrary symbolic observed destination index, and `--unwind 33 --unwinding-assertions`.
 
-Command:
+20-minute command:
 
 ```sh
-.cbmc-spike-tools/root/usr/bin/cbmc \
-  scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/harness_origin_1x1.c \
-  -I include -I . --32 --unwind 3 --unwinding-assertions \
+timeout 1200s .cbmc-spike-tools/root/usr/bin/cbmc \
+  scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/harness_full_domain.c \
+  -I include -I . --32 --unwind 33 --unwinding-assertions \
   --bounds-check --pointer-check --pointer-overflow-check --div-by-zero-check \
-  --signed-overflow-check --undefined-shift-check --slice-formula --verbosity 5
+  --signed-overflow-check --undefined-shift-check --arrays-uf-always \
+  --slice-formula --verbosity 5
 ```
 
-Output summary:
+Observed: `rc=124` timeout; no CBMC verdict. A 120s verbose run reached symex/SSA conversion (`Generated 58229 VCC(s), 39226 remaining after simplification`) and timed out before solving; see `focused/sub_8001570/cbmc_full_domain_timeout_excerpt.txt`.
 
-```text
-[ref_AddAttr2dBitMap.unwind.0] ... SUCCESS
-[ref_AddAttr2dBitMap.unwind.1] ... SUCCESS
-[impl_AddAttr2dBitMap.unwind.1] ... SUCCESS
-[impl_AddAttr2dBitMap.unwind.0] ... SUCCESS
-VERIFICATION SUCCESSFUL
-```
+Mutation gate: `harness_full_domain_mutated.c` also timed out at 300s before REFUTED, so the full-domain harness is **not proven mutation-sensitive**.
 
-Mutation check (`harness_origin_1x1_mutated.c`, flips the written bit after impl):
-
-```text
-[main.assertion.1] ... sub_8001570 arbitrary dst word: FAILURE
-VERIFICATION FAILED
-```
-
-Blocker for full sub_8001570: after the same mechanical m2c byte-pointer lowering, nondet `ix/iy` or arbitrary observed `k` makes CBMC/MiniSAT run past 180-300s even for the 1x1 header. Concrete origin solves in ~11s. Next step is mechanical case-splitting/tile partitioning or a stronger invariant, not scaling to the other 15.
+The earlier `harness_origin_1x1.c` result is now explicitly superseded: it was input-bounded and is only a smoke test, not a proof. Headline remains **0/16 full-domain PROVEN**. Per instruction, scaling to other functions stops here.
 
 ## Trust gate
 

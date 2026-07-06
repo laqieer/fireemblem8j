@@ -1,0 +1,60 @@
+Command: timeout 120s cbmc harness_full_domain.c ... --unwind 33 --arrays-uf-always --verbosity 9
+Result: timeout rc=124 before solver result
+
+Key CBMC progress excerpt:
+Not unwinding loop impl_AddAttr2dBitMap.0 iteration 33 file ./src/nonmatching/sub_8001570.c line 117 function impl_AddAttr2dBitMap thread 0
+Not unwinding loop impl_AddAttr2dBitMap.0 iteration 33 file ./src/nonmatching/sub_8001570.c line 117 function impl_AddAttr2dBitMap thread 0
+Not unwinding loop impl_AddAttr2dBitMap.0 iteration 33 file ./src/nonmatching/sub_8001570.c line 117 function impl_AddAttr2dBitMap thread 0
+Not unwinding loop impl_AddAttr2dBitMap.0 iteration 33 file ./src/nonmatching/sub_8001570.c line 117 function impl_AddAttr2dBitMap thread 0
+Not unwinding loop impl_AddAttr2dBitMap.0 iteration 33 file ./src/nonmatching/sub_8001570.c line 117 function impl_AddAttr2dBitMap thread 0
+Not unwinding loop impl_AddAttr2dBitMap.0 iteration 33 file ./src/nonmatching/sub_8001570.c line 117 function impl_AddAttr2dBitMap thread 0
+Not unwinding loop impl_AddAttr2dBitMap.0 iteration 33 file ./src/nonmatching/sub_8001570.c line 117 function impl_AddAttr2dBitMap thread 0
+Not unwinding loop impl_AddAttr2dBitMap.0 iteration 33 file ./src/nonmatching/sub_8001570.c line 117 function impl_AddAttr2dBitMap thread 0
+Not unwinding loop impl_AddAttr2dBitMap.0 iteration 33 file ./src/nonmatching/sub_8001570.c line 117 function impl_AddAttr2dBitMap thread 0
+Not unwinding loop impl_AddAttr2dBitMap.0 iteration 33 file ./src/nonmatching/sub_8001570.c line 117 function impl_AddAttr2dBitMap thread 0
+Not unwinding loop impl_AddAttr2dBitMap.0 iteration 33 file ./src/nonmatching/sub_8001570.c line 117 function impl_AddAttr2dBitMap thread 0
+Not unwinding loop impl_AddAttr2dBitMap.1 iteration 33 file ./src/nonmatching/sub_8001570.c line 112 function impl_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.0 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 59 function ref_AddAttr2dBitMap thread 0
+Not unwinding loop ref_AddAttr2dBitMap.1 iteration 33 file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/m2c_ref_byteptr_lowered.c line 64 function ref_AddAttr2dBitMap thread 0
+Runtime Symex: 8.4024s
+Generated 58229 VCC(s), 39226 remaining after simplification
+Passing problem to propositional reduction
+converting SSA
+
+20-minute run:
+timeout 1200s cbmc harness_full_domain.c ... --unwind 33 --arrays-uf-always --verbosity 5 -> rc=124 (timeout), no VERIFICATION result emitted before timeout
+
+Mutation run:
+timeout 300s cbmc harness_full_domain_mutated.c ... --unwind 33 --arrays-uf-always --verbosity 5 -> rc=124 (timeout), no REFUTED result emitted before timeout
