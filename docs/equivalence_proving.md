@@ -386,6 +386,17 @@ the byte-match frontier on.
   not "≡ the real bytes", so it is *weaker* on ground-truth fidelity than the
   ARM-vs-ARM check here — unless paired with a verified lifter. A useful *lighter*
   complementary cross-check for individual functions, not a replacement.
+  **Spike outcome (D349 addendum 6):** built end-to-end as the "trust-m2c Bridge A"
+  tier — m2c decompiles the ASM to a spec-C, CBMC proves `reconstruction-C ≡
+  m2c-C` on the observable. The machinery is *sound* (adversarial gate 9/9 +
+  3 region-same functions PROVEN + one bounded-domain proof with mutation
+  REFUTED), but **full-domain BMC does not scale** to the 16: the simplest
+  function (AddAttr2dBitMap) generates ~58k VCCs and times out at 20 min with a
+  correct full-symbolic + loop-bounded + shared-memory-oracle harness → **0/16
+  full-domain PROVEN**. It stays a validated-in-principle complementary tier, not
+  the method that closes the 16; our ARM-vs-ARM SMT + differential + live-state
+  (14/16 formal, 15/16 with live-state) remain stronger and wall-free. See
+  `scripts/tools/thumb_equiv/cbmc_spike/full16/FINDINGS_full16.md`.
 * **angr / BINSEC** (binary symbolic execution) are the right "mature engine"
   answer for this binary-level problem — they replace the hand-rolled THUMB
   lifter/executor with a maintained, ISA-complete one. This is the recommended

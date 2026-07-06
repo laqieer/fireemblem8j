@@ -9652,3 +9652,63 @@ lifter sanity-check reference. Keep prove_nonmatching.py as the trusted prover.
 Revisit only if an angr prototype reproduces the full 12/16 PROVEN set and passes
 the adversarial suite with no false PROVE. make compare unaffected throughout
 (the spike is an isolated venv + isolated dir).
+
+### D349 addendum 6 — CBMC "Cam's approach" full16: sound in principle, does NOT scale to the 16 (0/16 full-domain) (2026-07-06)
+
+Autopilot objective: prove all 16 non-matching functions equal via Camdar's
+proposal — source-level `C ⊨ spec` bounded model checking with CBMC, using m2c
+(ARM/THUMB) to derive the spec-from-ASM and CBMC to prove
+`reconstruction-C ≡ m2c-reference-C` on the observable (the **trust-m2c Bridge A**
+tier: a labelled confidence level trusting m2c for the spec + agbcc for codegen,
+strictly *below* the byte oracle). Isolated work under
+`scripts/tools/thumb_equiv/cbmc_spike/full16/` (CBMC 6.10.0, untracked
+`.cbmc-spike-tools/`); make compare stayed `fireemblem8.gba: OK` throughout.
+
+What was established (positive):
+- The CBMC machinery is **sound**: the adversarial trust gate passes 9/9 with the
+  correct fail-closed verdicts (identical→PROVEN, r0+1→REFUTED, omitted-write→
+  REFUTED, pointer-alias→REFUTED, shared-oracle-same-args→PROVEN, loop→
+  BOUNDED_ONLY_2, unmodeled-pointer→UNKNOWN), and 3 region-same demo functions
+  (GetGameClock/AddTarget/GreenText_OnLoop) prove PROVEN.
+- **m2c decompiles all 16** ARM/THUMB functions to structured C
+  (`generated/reference_c/*_ref.c`).
+- On a **bounded input domain** the simplest function (`sub_8001570`
+  AddAttr2dBitMap) proves PROVEN and its write-mutation REFUTES — the C-vs-C
+  equivalence harness pattern is correct.
+
+Why the objective is **not** met (the wall):
+- **0/16 full-domain PROVEN.** With the *correct* harness — full-symbolic inputs
+  (ix/iy/chr/source-header), a shared uninterpreted-function memory oracle for the
+  source (both sides observe identical memory), a padded 32×32 destination
+  observable, and loop-bounding `--unwind 33 --unwinding-assertions` — CBMC
+  **times out at 20 min with no verdict** on even the simplest function
+  (`Generated 58229 VCC(s), 39226 remaining after simplification`, killed in
+  symex/solve). The mutation gate also timed out, so the full-domain harness is
+  not even proven mutation-sensitive. This is the fundamental **BMC scalability
+  wall** on nested-loop + symbolic-pointer-arithmetic code; four essentially
+  different harness designs (no-bridge → raw-m2c bridge → focused input-bounded →
+  focused loop-bounded+oracle) converge on it.
+- The two forms that *do* terminate are both inadequate as proofs: an
+  input-bounded (1×1) run is a smoke test, not a ∀-proof; and the region-same
+  demos are not the 16.
+- Secondary (not the gating reason): raw m2c output for many of the 16 needs
+  per-function cleanup before it even compiles under CBMC (register temps
+  `var_r5`/`sp24`, raw-address derefs `*((s32*)0x202E4D4)`, missing `strcpy`),
+  and each needs a bespoke complete-observable-write profile or it fail-closes to
+  UNKNOWN. Per-function table in `full16/FINDINGS_full16.md`.
+
+DECISION: **Do not adopt CBMC "Cam's approach" as the method that closes the 16.**
+It is *validated in principle* (sound gate + region-same proofs + one bounded-domain
+proof) and is documented as a complementary tier, but full-domain BMC does not
+scale to these specific functions. The project's existing machine-checked
+equivalence — **12/16 compiler-free ARM-vs-ARM SMT (prove_nonmatching.py) + 2/16
+differential (differential_test.py) + sub_8057F80 via 115/115 mGBA live-state** —
+remains **stronger** (proves ≡ the actual ROM bytes, no lift-to-C trust step) and
+has **no** such scalability wall. Net standing: **14/16 formally + 15/16 counting
+live-state**, with only `sub_80A6F1C` (arena-record codec, modular callback +
+stack-escape) not machine-proven by any method. If more coverage is ever wanted,
+the high-value target is a bespoke attack on `sub_80A6F1C` specifically (shared-
+oracle callback model), NOT scaling CBMC across the redundant 14. make compare
+unaffected (cbmc_spike is isolated). Evidence: commits 87e6d709f, ba116185f,
+222aa0da7, 3ba73272f; `full16/FINDINGS_full16.md`;
+`full16/focused/sub_8001570/harness_full_domain.c` + timeout excerpt.
