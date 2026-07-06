@@ -9589,3 +9589,36 @@ Three concrete outcomes:
 Needs libmgba-dev (0.10.2). make compare unaffected (verified OK) — the harness
 never touches the build path; make compare stays the sole oracle. Full write-up:
 docs/equivalence_proving.md + scripts/tools/thumb_equiv/mgba_capture/README.md.
+
+### D349 addendum 4 — sub_8057F80: don't split, INLINE; drove it to 114/115-writes-equivalent; ABI correction (2026-07-06)
+
+Question raised: "split sub_8057F80.c into 2 source files (1 func each), then
+retry to match?" Answer: **No — the opposite.** Facts: (1) the JP asm at 0x08057F80
+has ZERO calls to GetBanimAllyPositionJ — its logic is INLINED into
+PrepareBattleGraphicsMaybe; (2) the US analog GetBanimAllyPosition is `static
+inline`; (3) the reconstruction wrote plain `static`, so agbcc emitted a standalone
+46-byte helper + a `bl` to it (the two-function .o). Splitting would make the helper
+a PERMANENT separate function — the opposite of the JP's single inlined function.
+The fix is a one-word change `static` -> `static inline`, which collapses it to one
+function and (in the live harness) removes the BIOS fault.
+
+Live-harness validation drove sub_8057F80 from untestable to **115/115 memory
+writes + return matching** the JP function via three fixes: (a) `_pick_symbol`
+size-matched extraction (multi-function .o); (b) `static inline`; (c) five corrupt
+baseline symbols in the auto-generated cfbind_banim-ekrbattleintro.tsv fragment
+(swapped-row copy-paste: gAnimCharaPalConfig's ROM addr 089CDE18 was in
+gBanimIdx_bak's row, etc.) corrected against the JP asm literal pools / sym_jp.txt /
+the uniform -4 EWRAM shift (gBanimIdx_bak->0203E108, gBanimMaxHP->0203E1AC,
+gBanimForceUnitChgDebug->0203E1A0, gAnimCharaPalConfig->089CDE18,
+gAnimCharaPalIt->089CEC18). make compare stays OK (descriptive baseline symbols).
+
+**ABI CORRECTION** (supersedes addendum 3): sub_8057F80 = PrepareBattleGraphicsMaybe
+is a `(void)` function — it pushes then immediately `bl ResetEkrDragonStatus`
+(clobbering r0-r3) without reading incoming args. The r0=0x08011ff1 seen at the call
+is the caller's leftover register garbage, ignored by the void function; it is NOT a
+callback. Addendum 3's "real ABI = callback" was wrong.
+
+Residual: 1 of 115 writes differs — gEkrSpellAnimIndex[POS_R]=0 (target) vs 0xffff
+(reconstruction), a genuine small spell-anim control-flow difference; plus the
+~46-byte codegen/register-coloring size gap for a full byte-match. Both are RE
+follow-ups. sub_8057F80 went from untestable to 114/115-writes-equivalent.

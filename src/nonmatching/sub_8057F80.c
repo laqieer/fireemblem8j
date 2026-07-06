@@ -90,7 +90,7 @@
  * region-different guard: the original select-target count instead of the
  * US link-arena flag.  Kept as a static helper for readability; agbcc inlines
  * small statics anyway. */
-static s16 GetBanimAllyPositionJ(int faction1, int faction2)
+static inline s16 GetBanimAllyPositionJ(int faction1, int faction2)
 {
     int pos = EKR_POS_L;
 

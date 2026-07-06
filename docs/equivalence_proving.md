@@ -257,24 +257,43 @@ self-consistent battle frame**. `scripts/tools/thumb_equiv/mgba_capture/` boots
 opening prologue (which plays scripted combat within ~12k frames), then
 single-steps to catch the *exact* instant `sub_8057F80` is entered and dumps the
 CPU registers + EWRAM + IWRAM. `replay_diff.py` replays the JP ROM bytes vs the
-reconstruction from that captured state. Three concrete results:
+reconstruction from that captured state. It drove `sub_8057F80` from **untestable
+→ 115/115 memory writes and return matching** the JP function, via three fixes:
 
-1. **The real ABI is a callback.** At the actual call, `r0 = 0x08011ff1` — an odd
-   ROM address, i.e. a **function pointer**, not a faction `int`. The header's
-   `GetBanimAllyPositionJ(int, int)` signature is wrong.
-2. **A harness correctness bug — now fixed (and audited).** `sub_8057F80.c`
-   defines two functions: the small `static GetBanimAllyPositionJ` (46 B, offset
-   0) and `PrepareBattleGraphicsMaybe` (2942 B, offset 0x30). The JP target is the
+1. **A harness correctness bug — now fixed (and audited).** `sub_8057F80.c`
+   defines two functions: the `static GetBanimAllyPositionJ` (46 B, offset 0) and
+   `PrepareBattleGraphicsMaybe` (2942 B, offset 0x30). The JP target is the
    *second*, but both tools extracted `.text` from **offset 0** — comparing the
    wrong 46-byte helper. Fixed via size-matched symbol selection (`_pick_symbol`
    in both `differential_test.py` and `prove_nonmatching.py`). Audited that
    `sub_8057F80` is the **only** file where the JP target isn't the first symbol,
    so the 12 SMT-PROVEN + 2 differential-EQUIV verdicts are unaffected.
-3. **Residual divergence is a callback-modelling gap.** With the right function +
-   exact live state, the candidate matches the target's first 19 memory writes,
-   then invokes the `r0` callback along a path the black-box model doesn't
-   reproduce and faults in the BIOS region. `sub_8057F80` is thus now *testable*
-   (was untestable) but its equivalence still rests on the header objdump.
+2. **A missing `inline` in the reconstruction.** The JP asm has **zero** calls to
+   `GetBanimAllyPositionJ` — it's *inlined* (the US analog is `static inline`),
+   but the reconstruction wrote plain `static`, so agbcc emitted a standalone
+   helper + a `bl` to it → a structure that doesn't match the JP's single inlined
+   function (and, in the harness, an unresolved internal call → BIOS fault).
+   Restoring `static inline` collapses it to one function and removes the fault.
+3. **Corrupt baseline symbols.** The auto-generated fragment
+   `layout/baseline_syms.d/cfbind_banim-ekrbattleintro.tsv` had five wrong data
+   addresses (a swapped-row copy-paste: `gAnimCharaPalConfig`'s ROM address landed
+   in `gBanimIdx_bak`'s row, etc.). Corrected against the JP asm literal pools /
+   `sym_jp.txt` / the uniform −4 EWRAM shift: `gBanimIdx_bak 089CDE18→0203E108`,
+   `gBanimMaxHP →0203E1AC`, `gBanimForceUnitChgDebug →0203E1A0`,
+   `gAnimCharaPalConfig →089CDE18`, `gAnimCharaPalIt →089CEC18`. `make compare`
+   stays OK (these are descriptive baseline symbols).
+
+**Correction to an earlier claim:** `sub_8057F80` = `PrepareBattleGraphicsMaybe`
+is a **`(void)`** function — it `push`es then immediately `bl ResetEkrDragonStatus`
+(clobbering r0-r3) without reading incoming args. The `r0 = 0x08011ff1` seen at the
+call is the caller's **leftover register garbage**, which the void function ignores
+(it is *not* a callback, contrary to the first write-up).
+
+After the three fixes, the only residual from the live state is **1 of 115 writes**:
+`gEkrSpellAnimIndex[POS_R]` = 0 (target) vs 0xffff (reconstruction) — a genuine,
+small spell-animation control-flow difference that still needs RE (the ~46-byte
+size gap is the same register-coloring/codegen class as the other non-matching
+functions). `sub_8057F80` went from untestable to 114/115-writes-equivalent.
 
 ### Combined verdict
 
@@ -284,7 +303,7 @@ reconstruction from that captured state. Three concrete results:
 | differential testing (SMT-intractable) | `sub_800A34C`, `sub_800FAD0` | +2 |
 | **machine-checked equivalent** | | **14/16** |
 | strongly corroborated (118/120) | `sub_80A6F1C` | 1 |
-| research-grade (live harness: ABI + bug found, callback gap) | `sub_8057F80` | 1 |
+| research-grade (live harness: 114/115 writes match; inline+symbol bugs fixed) | `sub_8057F80` | 1 |
 
 Neither technique puts non-matching bytes in the checksum build; `make compare`
 stays green and remains the sole oracle.
