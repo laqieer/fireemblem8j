@@ -89,35 +89,35 @@ data_086A488C:
 	.4byte AnimSprite_EfxReblowOBJ_L_25 + 0x2
 	.4byte AnimSprite_EfxReblowOBJ_L_26 + 0x2
 	.4byte 0x386A3BCF
-	.4byte 0x386A345B
-	.4byte 0x386A347F
-	.4byte 0x386A34AF
-	.4byte 0x386A34DF
-	.4byte 0x386A3527
-	.4byte 0x386A356F
-	.4byte 0x386A35B7
-	.4byte 0x386A3617
-	.4byte 0x386A3677
-	.4byte 0x386A36D7
-	.4byte 0x386A3737
-	.4byte 0x386A37AF
-	.4byte 0x386A3827
-	.4byte 0x386A3887
-	.4byte 0x386A3BDB
-	.4byte 0x386A3C53
-	.4byte 0x386A3CA7
-	.4byte 0x386A3CFB
-	.4byte 0x386A3D4F
-	.4byte 0x386A3D97
-	.4byte 0x386A3DDF
-	.4byte 0x386A3E03
-	.4byte 0x386A3E27
-	.4byte 0x386A3E4B
-	.4byte 0x386A3E63
+	.4byte AnimSprite_EfxReblowOBJ_L_1 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_2 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_3 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_4 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_5 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_6 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_7 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_8 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_9 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_10 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_11 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_12 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_13 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_14 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_28 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_29 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_30 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_31 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_32 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_33 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_34 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_35 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_36 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_37 + 0x30000003
+	.4byte AnimSprite_EfxReblowOBJ_L_38 + 0x30000003
 	.4byte AnimSprite_EfxReblowOBJ_L_39 + 0x1
 	.4byte 0x386A3BCF
 	.4byte 0x80000000
-	.4byte 0x186A3E9C
+	.4byte AnimSprite_EfxReblowOBJ_L_41 + 0x10000000
 	.4byte 0x80000000
-	.4byte 0x186A3BD8
+	.4byte AnimSprite_EfxReblowOBJ_L_28 + 0x10000000
 	.4byte 0x80000000

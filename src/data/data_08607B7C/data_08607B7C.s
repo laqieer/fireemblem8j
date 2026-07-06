@@ -24,7 +24,7 @@ data_08607B7C:
 	.4byte AnimSprite_EfxDanceObj_3 + 0x1
 	.4byte AnimSprite_EfxDanceObj_4 + 0x2
 	.4byte AnimSprite_EfxDanceObj_5 + 0x3
-	.4byte 0x786074A6
+	.4byte AnimSprite_EfxDanceObj_6 + 0x70000002
 	.4byte AnimSprite_EfxDanceObj_7 + 0x3
 	.4byte AnimSprite_EfxDanceObj_8 + 0x2
 	.4byte AnimSprite_EfxDanceObj_9 + 0x1

@@ -9,6 +9,6 @@ AnimScr_TriAtkLeft:
 	.4byte AnimSprite_Tri_2 + 0x1
 	.4byte AnimSprite_Tri_3 + 0x1
 	.4byte AnimSprite_Tri_4 + 0x3
-	.4byte 0x287A9F92
+	.4byte AnimSprite_Tri_5 + 0x20000002
 	.4byte 0x80000000
 /* de-pointered slice AnimScr_TriAtkLeft: ptr=5 data=2 skip=0 */

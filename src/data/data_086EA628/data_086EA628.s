@@ -9,7 +9,7 @@ data_086EA628:
 	.4byte 0x00000001
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte 0x186EA364
+	.4byte AnimSprite_EfxStone_1 + 0x10000000
 	.4byte AnimSprite_EfxStone_2 + 0x3
 	.4byte AnimSprite_EfxStone_3 + 0x3
 	.4byte AnimSprite_EfxStone_4 + 0x2
@@ -78,6 +78,6 @@ data_086EA628:
 	.4byte AnimSprite_EfxStone_4 + 0x2
 	.4byte AnimSprite_EfxStone_3 + 0x3
 	.4byte AnimSprite_EfxStone_2 + 0x3
-	.4byte 0x186EA364
+	.4byte AnimSprite_EfxStone_1 + 0x10000000
 	.4byte data_086EA628 + 0x2
 	.4byte 0x80000000

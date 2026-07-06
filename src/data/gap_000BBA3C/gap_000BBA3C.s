@@ -12,14 +12,14 @@ gap_000BBA3C:
 	.4byte 0xFECAF7FF
 	.4byte 0x68204C81
 	.4byte 0xF7452100
-	.4byte 0x6860FBB9
+	.4byte AnimSprite_FirebreathOBJ_Right13 + 0x60000005
 	.4byte 0xF7452100
 	.4byte 0x68A0FBB5
 	.4byte 0xF7452100
 	.4byte 0x68A0FBB1
 	.4byte 0x4D7C497B
 	.4byte 0xF0201C2A
-	.4byte 0x6860FB31
+	.4byte AnimSprite_FirebreathOBJ_Right12 + 0x60000019
 	.4byte 0x1C2A497A
 	.4byte 0xFB2CF020
 	.4byte 0x6B884651
