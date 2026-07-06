@@ -100,9 +100,9 @@ data_085F22B4:
 	.4byte frontier_df4_banim_a_007_5F1C3C + 0x169
 	.4byte frontier_df4_banim_a_007_5F1C3C + 0x1E1
 	.4byte frontier_df4_banim_a_007_5F1C3C + 0x259
-	.4byte 0x785F1F0F
+	.4byte frontier_df4_banim_a_007_5F1C3C + 0x700002D3
 	.4byte 0x84000013
-	.4byte 0x785F1F87
+	.4byte AnimSprite_NoDamage1A + 0x70000003
 	.4byte 0x84000013
 	.4byte 0x80000000
 	.4byte AnimSprite_Miss1 + 0x1
@@ -124,9 +124,9 @@ data_085F22B4:
 	.4byte data_085F22B4 + 0x1
 	.4byte data_085F22B4 + 0x49
 	.4byte data_085F22B4 + 0x91
-	.4byte 0x785F238F
+	.4byte data_085F22B4 + 0x700000DB
 	.4byte 0x84000013
-	.4byte 0x785F1F87
+	.4byte AnimSprite_NoDamage1A + 0x70000003
 	.4byte 0x84000013
 	.4byte 0x80000000
 /* de-pointered slice data_085F22B4: ptr=43 data=82 skip=0 */
