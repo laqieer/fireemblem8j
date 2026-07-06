@@ -3197,8 +3197,12 @@ __asm__(
 "\t.4byte 0x02003DF2, 0x00000000, gMid_Light, 0x02003CEC\n"
 "\t.4byte 0x02003D82, 0x00000000, gMid_Dark, 0x02003CF4\n"
 "\t.4byte 0x02003E02, 0x00000000, gMid_Staff, 0x00000000\n"
-"\t.4byte 0x00000000, 0x00000000, 0x00000000, 0x0808941D\n"
-"\t.4byte 0x080896ED, 0x08089AC5, 0x0808941D, 0x000E000C\n"
+/* #143 shiftability: the stat-screen page-function pointer table (DisplayPage0/1/2)
+ * must be symbol references, not raw 0x0808.. literals, or it cannot relocate under
+ * a ROM shift -> the shifted playtest build BX'd into the injected gap on R-open.
+ * Bare `.4byte Fn` is byte-identical (ld re-ORs the Thumb bit for STT_FUNC). */
+"\t.4byte 0x00000000, 0x00000000, 0x00000000, DisplayPage0\n"
+"\t.4byte DisplayPage1, DisplayPage2, DisplayPage0, 0x000E000C\n"
 "\t.4byte 0x0000000D, 0x00006000, 0x68000000, 0x80000000\n"
 "\t.4byte 0x00007000, 0x78008000, 0x04F60000, 0x04F804F7\n"
 "\t.4byte 0x04FA04F9, 0x04FC04FB, 0x000004FD, 0x00004954\n"
