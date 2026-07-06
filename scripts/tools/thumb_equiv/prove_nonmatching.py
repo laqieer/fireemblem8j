@@ -128,13 +128,35 @@ def _resolve_sym(sym):
     return sym  # unresolved (compared by name, both sides)
 
 
+def _pick_symbol(o, tsize):
+    """A nonmatching .c may define helper statics BEFORE the main function, so
+    the target's twin is not necessarily at .text offset 0. Pick the FUNC symbol
+    whose size is closest to the JP target size; return (offset, size)."""
+    out = subprocess.run(["arm-none-eabi-nm", "--print-size", o],
+                         capture_output=True, text=True).stdout
+    best = None
+    import re
+    for l in out.splitlines():
+        m = re.match(r"^([0-9a-f]+)\s+([0-9a-f]+)\s+[tT]\s+(\S+)", l)
+        if m:
+            off = int(m.group(1), 16); sz = int(m.group(2), 16)
+            if best is None or abs(sz - tsize) < abs(best[1] - tsize):
+                best = (off, sz)
+    return best
+
+
 def candidate_bytes_callmap(fn, vma, size):
     o = os.path.join(NMDIR, fn + ".o")
     binp = f"/tmp/thumb_equiv/{fn}.text.bin"
     os.makedirs("/tmp/thumb_equiv", exist_ok=True)
     subprocess.run(["arm-none-eabi-objcopy", "-O", "binary", "--only-section=.text",
                     o, binp], check=True)
-    code = bytearray(open(binp, "rb").read())
+    text = open(binp, "rb").read()
+    # `size` is the JP target size; select the matching symbol (NOT offset 0,
+    # which may be a helper static), then rebase relocations to it.
+    pick = _pick_symbol(o, size)
+    soff, ssize = pick if pick else (0, len(text))
+    code = bytearray(text[soff:soff + ssize])
     st = symtab()
     callmap = {}
     rel = subprocess.run(["arm-none-eabi-readelf", "-W", "-r", o], capture_output=True, text=True).stdout
@@ -146,7 +168,9 @@ def candidate_bytes_callmap(fn, vma, size):
             continue
         m = re.match(r"^([0-9a-f]{8})\s+[0-9a-f]{8}\s+(\S+)\s+([0-9a-f]{8})\s+(\S+)", l)
         if m and section == ".text":
-            off = int(m.group(1), 16); rtype = m.group(2); sym = m.group(4)
+            off = int(m.group(1), 16) - soff; rtype = m.group(2); sym = m.group(4)
+            if off < 0 or off >= ssize:
+                continue
             addr = vma + off
             if "CALL" in rtype or "JUMP" in rtype:
                 callmap[addr] = _resolve_sym(sym)
@@ -154,7 +178,7 @@ def candidate_bytes_callmap(fn, vma, size):
                 rv = _resolve_sym(sym)
                 if isinstance(rv, int):
                     code[off:off+4] = rv.to_bytes(4, "little")
-    return bytes(code[:size]), callmap
+    return bytes(code), callmap
 
 
 def shared_init():
@@ -436,7 +460,7 @@ def prove(fn, loop_bound=3, verbose=True, time_budget=90, product_cap=4000):
     if not tsize or not csize:
         return "UNKNOWN:no-size"
     tcode, tcall = target_bytes_callmap(vma, tsize)
-    ccode, ccall = candidate_bytes_callmap(fn, vma, csize)
+    ccode, ccall = candidate_bytes_callmap(fn, vma, tsize)
     rom = rom_image()
     regs, data, stack, flags = shared_init()
     oracle = CallOracle()

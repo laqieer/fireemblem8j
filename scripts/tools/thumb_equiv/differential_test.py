@@ -289,13 +289,32 @@ def observable(res, rb):
     return (r0 & mask, writes, r0)         # (masked-ret, writes, raw_r0)
 
 
-def candidate_linked(fn, vma, size):
+def _pick_symbol(o, tsize):
+    """A nonmatching .c may define helper statics BEFORE the main function, so
+    the target's twin is NOT necessarily at .text offset 0.  Pick the FUNC
+    symbol whose size is closest to the JP target size (tsize); return
+    (offset, size)."""
+    out = subprocess.run(["arm-none-eabi-nm", "--print-size", o],
+                         capture_output=True, text=True).stdout
+    best = None
+    for l in out.splitlines():
+        m = re.match(r"^([0-9a-f]+)\s+([0-9a-f]+)\s+[tT]\s+(\S+)", l)
+        if m:
+            off = int(m.group(1), 16); sz = int(m.group(2), 16)
+            if best is None or abs(sz - tsize) < abs(best[1] - tsize):
+                best = (off, sz)
+    return best or (0, tsize)
+
+
+def candidate_linked(fn, vma, tsize):
     o = os.path.join(P.NMDIR, fn + ".o")
     binp = f"/tmp/thumb_equiv/{fn}.ct.bin"
     os.makedirs("/tmp/thumb_equiv", exist_ok=True)
     subprocess.run(["arm-none-eabi-objcopy", "-O", "binary", "--only-section=.text",
                     o, binp], check=True)
-    code = bytearray(open(binp, "rb").read()[:size])
+    text = open(binp, "rb").read()
+    soff, ssize = _pick_symbol(o, tsize)       # the target's twin, not offset 0
+    code = bytearray(text[soff:soff + ssize])
     # append synthetic `_call_via_rN` (= `bx rN`) trampolines right after the
     # candidate so a thumb `bl` can reach them (IWRAM is >4MB away from ROM).
     vbase_off = (len(code) + 3) & ~3
@@ -315,6 +334,9 @@ def candidate_linked(fn, vma, size):
         m = re.match(r"^([0-9a-f]{8})\s+[0-9a-f]{8}\s+(\S+)\s+([0-9a-f]{8})\s+(\S+)", l)
         if m and section == ".text":
             off = int(m.group(1), 16); rtype = m.group(2); sym = m.group(4)
+            off -= soff                            # rebase to the picked function
+            if off < 0 or off >= ssize:            # reloc in another function — skip
+                continue
             rv = P._resolve_sym(sym)
             vn = veneer_reg(sym)
             if vn is not None:
@@ -334,7 +356,7 @@ def candidate_linked(fn, vma, size):
 def diff_test(fn, trials=300, verbose=False):
     vma, tsize, csize = P.func_vma_size(fn)
     rb, kinds = parse_sig(fn)
-    ccode = candidate_linked(fn, vma, csize)
+    ccode = candidate_linked(fn, vma, tsize)
     rng = random.Random(0x1234 ^ (int(fn.replace("sub_", ""), 16)))
     SENTINEL = RET | 1                     # the LR we inject; r0==this ⇒ dead return
     rows = []                              # (reg, stack, target_obs, cand_obs)

@@ -9555,3 +9555,37 @@ candidates resolve every `.text` relocation (audited) so EQUIV is a real
 comparison. This is **testing, not proof** — `make compare` stays the sole oracle
 (unaffected; the tool never touches the build path). Reproduce:
 `$HOME/z3-venv/bin/python scripts/tools/thumb_equiv/differential_test.py`.
+
+### D349 addendum 3 — live game-state harness (mGBA) resolves the sub_8057F80 blocker + fixes a real extraction bug (2026-07-06)
+
+Follow-up to "research sub_8057F80 with a live-state harness". sub_8057F80 reads
+~30 live battle-anim globals and faults on synthetic/black-box input, so neither
+the SMT prover nor the differential tester could reach it. Built
+`scripts/tools/thumb_equiv/mgba_capture/` (capture.c + replay_diff.py): a libmgba
+full-system harness that boots fireemblem8.gba, mashes A to fast-forward into FE8's
+opening prologue (scripted combat within ~12k frames), single-steps to catch the
+EXACT sub_8057F80 entry, and dumps registers + EWRAM + IWRAM; replay_diff.py then
+runs the JP ROM bytes vs the reconstruction from that captured state under Unicorn.
+
+Three concrete outcomes:
+1. **Real ABI = callback.** At the actual call r0=0x08011ff1 — an odd ROM address
+   (a function pointer), not a faction int. The reconstruction header's
+   `GetBanimAllyPositionJ(int, int)` signature is wrong; r0 is a callback.
+2. **Extraction bug found + fixed (audited).** sub_8057F80.c defines TWO functions
+   — static GetBanimAllyPositionJ (46B, offset 0) and PrepareBattleGraphicsMaybe
+   (2942B, offset 0x30); the JP target is the second, but both candidate extractors
+   (differential_test.candidate_linked, prove_nonmatching.candidate_bytes_callmap)
+   read .text from offset 0, comparing the WRONG 46-byte helper. Fixed via
+   size-matched symbol selection (_pick_symbol). Audited: sub_8057F80 is the ONLY
+   file where the JP target isn't the first symbol, so the 12 SMT-PROVEN + 2
+   differential-EQUIV verdicts are all unaffected; the fix does not regress them.
+3. **Residual = callback-modelling gap, not a proven bug.** With the correct
+   function + exact live state, the candidate matches the target's first 19 memory
+   writes, then invokes the r0 callback along a path the black-box Unicorn model
+   doesn't reproduce and faults in the BIOS region. sub_8057F80 is now TESTABLE
+   (was untestable); full resolution needs the callback modelled/replayed. Its
+   equivalence still rests on the block-by-block objdump in its header.
+
+Needs libmgba-dev (0.10.2). make compare unaffected (verified OK) — the harness
+never touches the build path; make compare stays the sole oracle. Full write-up:
+docs/equivalence_proving.md + scripts/tools/thumb_equiv/mgba_capture/README.md.

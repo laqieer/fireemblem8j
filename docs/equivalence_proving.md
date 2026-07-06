@@ -248,6 +248,34 @@ SMT-PROVEN). `sub_8057F80` needs a live battle-anim frame (faults black-box).
 Reproduce with
 `$HOME/z3-venv/bin/python scripts/tools/thumb_equiv/differential_test.py`.
 
+## Third technique — a live game-state harness (`mgba_capture/`)
+
+`sub_8057F80` reads dozens of live `gBanim*`/`gEkr*`/`gBattle*` globals and faults
+on both random and all-zero state — it is only exercisable from a **real,
+self-consistent battle frame**. `scripts/tools/thumb_equiv/mgba_capture/` boots
+`fireemblem8.gba` in **mGBA** (`libmgba`), mashes **A** to fast-forward into FE8's
+opening prologue (which plays scripted combat within ~12k frames), then
+single-steps to catch the *exact* instant `sub_8057F80` is entered and dumps the
+CPU registers + EWRAM + IWRAM. `replay_diff.py` replays the JP ROM bytes vs the
+reconstruction from that captured state. Three concrete results:
+
+1. **The real ABI is a callback.** At the actual call, `r0 = 0x08011ff1` — an odd
+   ROM address, i.e. a **function pointer**, not a faction `int`. The header's
+   `GetBanimAllyPositionJ(int, int)` signature is wrong.
+2. **A harness correctness bug — now fixed (and audited).** `sub_8057F80.c`
+   defines two functions: the small `static GetBanimAllyPositionJ` (46 B, offset
+   0) and `PrepareBattleGraphicsMaybe` (2942 B, offset 0x30). The JP target is the
+   *second*, but both tools extracted `.text` from **offset 0** — comparing the
+   wrong 46-byte helper. Fixed via size-matched symbol selection (`_pick_symbol`
+   in both `differential_test.py` and `prove_nonmatching.py`). Audited that
+   `sub_8057F80` is the **only** file where the JP target isn't the first symbol,
+   so the 12 SMT-PROVEN + 2 differential-EQUIV verdicts are unaffected.
+3. **Residual divergence is a callback-modelling gap.** With the right function +
+   exact live state, the candidate matches the target's first 19 memory writes,
+   then invokes the `r0` callback along a path the black-box model doesn't
+   reproduce and faults in the BIOS region. `sub_8057F80` is thus now *testable*
+   (was untestable) but its equivalence still rests on the header objdump.
+
 ### Combined verdict
 
 | technique | functions | count |
@@ -256,7 +284,7 @@ Reproduce with
 | differential testing (SMT-intractable) | `sub_800A34C`, `sub_800FAD0` | +2 |
 | **machine-checked equivalent** | | **14/16** |
 | strongly corroborated (118/120) | `sub_80A6F1C` | 1 |
-| research-grade (needs live game state) | `sub_8057F80` | 1 |
+| research-grade (live harness: ABI + bug found, callback gap) | `sub_8057F80` | 1 |
 
 Neither technique puts non-matching bytes in the checksum build; `make compare`
 stays green and remains the sole oracle.
