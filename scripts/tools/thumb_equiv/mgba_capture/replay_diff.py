@@ -5,7 +5,8 @@ bytes and the compiled reconstruction, and compare the caller-visible observable
 differential tester can't reach because they read a live, self-consistent battle
 state (e.g. sub_8057F80 = PrepareBattleGraphicsMaybe).
 
-Prereq:  build+run mgba_capture/capture.c to produce /tmp/mgbah/{regs,ewram,iwram}.
+Prereq:  build+run mgba_capture/capture.c to produce
+${MGBA_CAPTURE_DIR:-build/mgba_capture}/{regs,ewram,iwram}.
    gcc capture.c -o capture -I/usr/include -lmgba
    ./capture fireemblem8.gba 08057f80 12100 60000000
 Then:    $HOME/z3-venv/bin/python replay_diff.py sub_8057F80
@@ -21,7 +22,7 @@ from unicorn import UcError, UC_HOOK_MEM_WRITE          # noqa: E402
 from unicorn.arm_const import (UC_ARM_REG_R0, UC_ARM_REG_SP,          # noqa: E402
                                UC_ARM_REG_LR, UC_ARM_REG_PC)
 
-SNAP = "/tmp/mgbah"
+SNAP = os.environ.get("MGBA_CAPTURE_DIR", "build/mgba_capture")
 
 
 def replay(fn):
@@ -62,6 +63,12 @@ def replay(fn):
     cs = c if c[0] == "FAULT" else f"ret={c[0]} writes={len(c[1])}"
     print(f"  TARGET: {ts}")
     print(f"  CAND  : {cs}")
+    if t != c and t[0] != "FAULT" and c[0] != "FAULT":
+        tw = dict(t[1])
+        cw = dict(c[1])
+        for addr in sorted(set(tw) | set(cw)):
+            if tw.get(addr) != cw.get(addr):
+                print(f"    diff {addr:#010x}: target={tw.get(addr)} cand={cw.get(addr)}")
     print("  => " + ("MATCH" if t == c else "DIFF"))
     return t == c
 
@@ -69,6 +76,6 @@ def replay(fn):
 if __name__ == "__main__":
     fns = sys.argv[1:] or ["sub_8057F80"]
     if not os.path.exists(f"{SNAP}/regs.txt"):
-        sys.exit("no capture at /tmp/mgbah — run mgba_capture/capture.c first")
+        sys.exit(f"no capture at {SNAP} — run mgba_capture/capture.c first")
     ok = sum(replay(fn) for fn in fns)
     print(f"\nMATCH: {ok}/{len(fns)}")

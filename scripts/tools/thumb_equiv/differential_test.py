@@ -308,8 +308,9 @@ def _pick_symbol(o, tsize):
 
 def candidate_linked(fn, vma, tsize):
     o = os.path.join(P.NMDIR, fn + ".o")
-    binp = f"/tmp/thumb_equiv/{fn}.ct.bin"
-    os.makedirs("/tmp/thumb_equiv", exist_ok=True)
+    outdir = os.environ.get("THUMB_EQUIV_BUILD_DIR", os.path.join(P.ROOT, "build", "thumb_equiv"))
+    os.makedirs(outdir, exist_ok=True)
+    binp = os.path.join(outdir, f"{fn}.ct.bin")
     subprocess.run(["arm-none-eabi-objcopy", "-O", "binary", "--only-section=.text",
                     o, binp], check=True)
     text = open(binp, "rb").read()
@@ -349,7 +350,8 @@ def candidate_linked(fn, vma, tsize):
                 code[off:off + 4] = struct.pack("<HH", 0xF000 | ((o2 >> 12) & 0x7FF),
                                                 0xF800 | ((o2 >> 1) & 0x7FF))
             elif "ABS32" in rtype:
-                code[off:off + 4] = struct.pack("<I", rv)
+                addend = struct.unpack("<I", code[off:off + 4])[0]
+                code[off:off + 4] = struct.pack("<I", (rv + addend) & 0xFFFFFFFF)
     return bytes(code)
 
 

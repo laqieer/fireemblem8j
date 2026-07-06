@@ -63,8 +63,9 @@ def func_vma_size(fn):
     asm = os.path.join(ROOT, "asm", fn + ".s")
     tsize = None
     if os.path.exists(asm):
-        os.makedirs("/tmp/thumb_equiv", exist_ok=True)
-        to = f"/tmp/thumb_equiv/{fn}.tgt.o"
+        outdir = os.environ.get("THUMB_EQUIV_BUILD_DIR", os.path.join(ROOT, "build", "thumb_equiv"))
+        os.makedirs(outdir, exist_ok=True)
+        to = os.path.join(outdir, f"{fn}.tgt.o")
         r = subprocess.run(["arm-none-eabi-as", "-mthumb", "-mcpu=arm7tdmi",
                             asm, "-o", to], capture_output=True, text=True)
         if r.returncode == 0:

@@ -53,11 +53,10 @@
  *        validation.  This reconstruction reflects the JP (no Myrrh/Demon-King
  *        block) so the control flow matches asm/sub_8057F80.s.
  *
- * BLOCKING DIFF (why byte-match is not pursued): beyond [R1]/[R2]/[R3] the two
- * builds diverge structurally (different callee at the guard sites shifts branch
- * layout, and the missing US tail block re-flows the whole return-value chain +
- * register allocation).  Per P10 strategy this outlier's deliverable is this
- * readable+documented NON_MATCHING C, not a forced byte match.
+ * MATCHING STATUS: live-state replay matches the JP target's caller-visible
+ * writes/return.  With per-target -mjp-promote this compiles to the exact JP
+ * size (0xB78), but remains a small register/stack-coloring near-match rather
+ * than byte-identical C.
  * ------------------------------------------------------------------------------
  *
  * JP-address callees that gbadisasm left unnamed (asm/.s `.set` lines) resolved
@@ -90,18 +89,18 @@
  * region-different guard: the original select-target count instead of the
  * US link-arena flag.  Kept as a static helper for readability; agbcc inlines
  * small statics anyway. */
-static inline s16 GetBanimAllyPositionJ(int faction1, int faction2)
+static inline s16 GetBanimAllyPositionJ(s16 faction1, s16 faction2)
 {
     int pos = EKR_POS_L;
 
     /* [R1] JP guard (US used GetBanimLinkArenaFlag() != true here). */
     if (GetSelectTargetCount() != 1)
     {
-        if (FACTION_ID_BLUE == (s16)faction1)
+        if (FACTION_ID_BLUE == faction1)
             pos = EKR_POS_R;
-        else if (FACTION_ID_RED == (s16)faction1)
+        else if (FACTION_ID_RED == faction1)
             pos = EKR_POS_R;
-        else if (FACTION_ID_GREEN == (s16)faction1 && FACTION_ID_GREEN == faction2)
+        else if (FACTION_ID_GREEN == faction1 && FACTION_ID_GREEN == faction2)
             pos = EKR_POS_R;
     }
 
@@ -113,10 +112,10 @@ bool PrepareBattleGraphicsMaybe(void)
     u16 i;
     u16 pid, jid;
     void * zero;
-    struct Unit * unit_bu1;
-    struct Unit * unit_bu2;
     struct BattleUnit * bu1;
     struct BattleUnit * bu2;
+    struct Unit * unit_bu1;
+    struct Unit * unit_bu2;
     const struct CharacterData * pinfo1;
     const struct CharacterData * pinfo2;
     int usrdefined_enable;
@@ -158,9 +157,10 @@ bool PrepareBattleGraphicsMaybe(void)
     else
     {
         u8 i1 = -0x40 & gBattleActor.unit.index;
-        u16 faction1 = GetBanimFactionPalette(i1);
+        s16 faction1 = GetBanimFactionPalette(i1);
         u8 i2 = -0x40 & gBattleTarget.unit.index;
-        u16 faction2 = GetBanimFactionPalette(i2);
+        s16 faction2 = GetBanimFactionPalette(i2);
+        s16 banim_pos;
 
         if (gBattleStats.config & BATTLE_CONFIG_REFRESH)
             char_cnt = 2;
@@ -171,12 +171,14 @@ bool PrepareBattleGraphicsMaybe(void)
 
         gBanimValid[EKR_POS_L] = gBanimValid[EKR_POS_R] = true;
 
-        if (EKR_POS_R == GetBanimAllyPositionJ(faction1, faction2))
+        banim_pos = GetBanimAllyPositionJ(faction1, faction2);
+
+        if (EKR_POS_R == banim_pos)
         {
             bu1 = gpEkrBattleUnitLeft = &gBattleTarget;
             bu2 = gpEkrBattleUnitRight = &gBattleActor;
 
-            gBanimPositionIsEnemy[POS_L] = true;
+            gBanimPositionIsEnemy[POS_L] = banim_pos;
             gBanimPositionIsEnemy[POS_R] = false;
 
             if (char_cnt == 1)

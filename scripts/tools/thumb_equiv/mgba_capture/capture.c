@@ -14,7 +14,8 @@
  * Build:  gcc capture.c -o capture -I/usr/include -lmgba   (needs libmgba-dev)
  * Usage:  ./capture <rom.gba> <target_hex_addr> [fast_frames] [max_steps]
  *   e.g.  ./capture fireemblem8.gba 08057f80 12100 60000000
- * Output: /tmp/mgbah/{regs.txt,ewram.bin,iwram.bin} + a CAPTURED/NO_HIT line.
+ * Output: ${MGBA_CAPTURE_DIR:-build/mgba_capture}/{regs.txt,ewram.bin,iwram.bin}
+ * + a CAPTURED/NO_HIT line.
  *
  * Determinism: A-mash reaches the same battle every run, so the captured state
  * is reproducible from the committed ROM without shipping a binary snapshot.
@@ -33,17 +34,24 @@
 static struct mCore* core;
 static void nullLog(struct mLogger* l, int c, enum mLogLevel v, const char* f, va_list a) {}
 static struct mLogger g_log = { .log = nullLog };
+static const char* g_outdir;
+
+static FILE* open_out(const char* name, const char* mode) {
+    char path[512];
+    snprintf(path, sizeof(path), "%s/%s", g_outdir, name);
+    return fopen(path, mode);
+}
 
 static void dump(struct ARMCore* cpu, uint32_t target, long step) {
-    FILE* fr = fopen("/tmp/mgbah/regs.txt", "w");
+    FILE* fr = open_out("regs.txt", "w");
     for (int i = 0; i < 16; i++) fprintf(fr, "%08x\n", cpu->gprs[i]);
     fclose(fr);
-    FILE* fe = fopen("/tmp/mgbah/ewram.bin", "wb");
+    FILE* fe = open_out("ewram.bin", "wb");
     for (uint32_t a = 0x02000000; a < 0x02040000; a += 4) {
         uint32_t v = core->busRead32(core, a); fwrite(&v, 4, 1, fe);
     }
     fclose(fe);
-    FILE* fi = fopen("/tmp/mgbah/iwram.bin", "wb");
+    FILE* fi = open_out("iwram.bin", "wb");
     for (uint32_t a = 0x03000000; a < 0x03008000; a += 4) {
         uint32_t v = core->busRead32(core, a); fwrite(&v, 4, 1, fi);
     }
@@ -60,7 +68,8 @@ int main(int argc, char** argv) {
     int fast_to = argc > 3 ? atoi(argv[3]) : 12100;
     long maxstep = argc > 4 ? atol(argv[4]) : 60000000L;
 
-    system("mkdir -p /tmp/mgbah");
+    g_outdir = getenv("MGBA_CAPTURE_DIR");
+    if (!g_outdir) g_outdir = "build/mgba_capture";
     core = mCoreFind(rom);
     if (!core) { fprintf(stderr, "mCoreFind failed\n"); return 2; }
     core->init(core);
