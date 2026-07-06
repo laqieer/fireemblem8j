@@ -638,7 +638,7 @@ __asm__(
 "	.4byte Tsa_Light_14, frontier_df3_banim_mid_000_64D2B4, frontier_df3_banim_mid_000b_64D3C8, frontier_df3_banim_mid_000c_64D478, frontier_df3_banim_mid_000d_64D580, frontier_df3_banim_mid_000e_64D6BC\n"
 "	.4byte frontier_df3_banim_mid_000f_64D830, frontier_df3_banim_mid_000g_64D9C8, frontier_df3_banim_mid_000h_64DB3C, frontier_df3_banim_mid_000i_64DC48, frontier_df3_banim_mid_000j_64DD1C, Tsa_Light_25\n"
 "	.4byte Tsa_Light_26, Tsa_Light_27, Tsa_Light_28, Tsa_Light_29, Tsa_Light_30, Tsa_Light_31\n"
-"	.4byte Tsa_Light_32, 0x00000001, FrameLut_EfxSkill + 0x27E, 0x00000003, efxopMistyrainBG_Loop + 0x1, 0x00000000\n"
+"	.4byte Tsa_Light_32, 0x00000001, FrameConfig_efxopMistyrainBG, 0x00000003, efxopMistyrainBG_Loop + 0x1, 0x00000000\n"
 "	.4byte 0x00000000, Tsa_Flux_ClassReel_0, Tsa_Flux_ClassReel_1, Tsa_Flux_ClassReel_2, Tsa_Flux_ClassReel_3, Tsa_Flux_ClassReel_4\n"
 "	.4byte Tsa_Flux_ClassReel_5, Tsa_Flux_ClassReel_6, Tsa_Flux_ClassReel_7, Tsa_Flux_ClassReel_8, Tsa_Flux_ClassReel_9, Tsa_Flux_ClassReel_10\n"
 "	.4byte Tsa_Flux_ClassReel_11, frontier_df3_banim_mid_008_657A78, frontier_df3_banim_mid_008b_657B20, frontier_df3_banim_mid_008c_657BDC, frontier_df3_banim_mid_008d_657CB4, frontier_df3_banim_mid_008e_657D94\n"

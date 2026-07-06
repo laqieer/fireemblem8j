@@ -321,3 +321,7 @@ struct ProcEfxOBJ * StartCRSubSpell_efxopMistyrainOBJ2(struct Anim * anim, struc
 
     return proc;
 }
+
+// Byte-neutral global alias so shift-safe pointer tables (e.g. banim_b) can
+// reference this frame_config directly (addend 0) instead of FrameLut_EfxSkill+0x27E.
+__asm__(".global FrameConfig_efxopMistyrainBG\n\t.set FrameConfig_efxopMistyrainBG, frames.16\n");
