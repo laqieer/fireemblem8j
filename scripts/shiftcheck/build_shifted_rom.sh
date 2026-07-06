@@ -137,10 +137,25 @@ shift = int(sys.argv[2], 0)
 data = bytearray(path.read_bytes())
 
 patches = [
-    # crt0 opaque residue literal pool: bx AgbMain|thumb. The adjacent
-    # 0x03007FFC IRQ RAM slot is intentionally not shifted.
-    (0x08000220, 0x08000A21, "crt0 AgbMain|thumb literal"),
+    # (Empty.) The crt0 AgbMain|thumb literal (rom_header +0x160) used to be a
+    # raw `.4byte 0x08000A21` needing a manual post-shift patch here; it is now
+    # symbolized as `.4byte AgbMain` in src/data/rom_header_080000C0, so the
+    # shifted re-link already relocates it to 0x08000A21+shift (#143). Verify
+    # instead of patching: assert the re-link produced the shifted value.
 ]
+
+verify = [
+    (0x08000220, 0x08000A21, "crt0 AgbMain|thumb literal (now relink-relocated)"),
+]
+
+for loc, base, name in verify:
+    off = (loc - 0x08000000) + shift
+    got = struct.unpack_from("<I", data, off)[0]
+    if got != base + shift:
+        raise SystemExit(f"{name}: expected relocated 0x{base + shift:08X} at "
+                         f"shifted file offset 0x{off:X}, found 0x{got:08X} "
+                         f"(rom_header AgbMain symbolization regressed?)")
+    print(f"verified {name}: file+0x{off:X} = 0x{got:08X} (relink-relocated)")
 
 for loc, expected, name in patches:
     off = (loc - 0x08000000) + shift
