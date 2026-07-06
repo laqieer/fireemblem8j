@@ -3,61 +3,15 @@
  * reconstruction and is NOT in make-compare: compiled only by `make nonmatching`.
  *
  * PROPOSED NAME: GmapScreen2_Loop  (worldmap-screen node-icon display proc _Loop).
- * Twin in fe8u: src/worldmap_screen2.c GmapScreen2_Loop @ US 0x080BB798 — that
- * function MATCHES in the US ROM with THIS EXACT body. Every load/store offset,
- * immediate and struct access matches the JP target instruction-for-instruction.
- * Callee sub_80C0574 is the already-carved sibling GmapScreen2_GetNodeScreenPos.
+ * Twin in fe8u: src/worldmap_screen2.c GmapScreen2_Loop @ US 0x080BB798.
  *
- * STATUS: CLEAN register-coloring NEAR. Structure is byte-exact; the residual is a
- * pure agbcc spill/coloring divergence (docs/agbcc_codegen_levers.md §7-9 class).
+ * Adopted from community decomp.me fork SaCCn by user TsilaAllaoui. This source
+ * shape preserves default nonmatching CFLAGS and improves the match rate from the
+ * old local reconstruction while remaining proved-equivalent to the JP byte source:
+ *   prove_nonmatching.py sub_80C05C8 -> PROVEN-BOUNDED(2)
+ *   differential_test.py sub_80C05C8 --trials 60 -> EQUIV
  *
- * EXACT BLOCKING DIFF (this build -> JP), the whole residual:
- *   (a) uniform +1 callee-saved shift, with one eviction to stack:
- *         i (loop idx)      r7        ->  r8
- *         proc  (param)     r8        ->  r9  (sb)
- *         &local_2c ptr     r9        ->  sl  (r10)
- *         chr               sl (r10)  ->  SPILLED to [sp,#0xc]
- *         stack frame       sub sp,#0x10  ->  sub sp,#0x14
- *   (b) ROOT CAUSE of (a): per-node arg setup for GmapScreen2_GetNodeScreenPos.
- *       JP sign-extends x1 = (s16)(node->x - icon->xCenter) and y1 FULLY and EARLY
- *       (`lsls #16; asrs r7,#16`) into callee-saved r7/r6 BEFORE the
- *       proc->pScreenProc load, then stages them `adds r1,r7,#0; adds r2,r6,#0`.
- *       agbcc here keeps x1/y1 raw in the volatile arg regs r1/r2 and DEFERS the
- *       sign-extension until after the proc load. Because x1/y1 DIE at the call,
- *       agbcc has no live-range reason to park them in callee-saved r7/r6, so it
- *       leaves them volatile — freeing r6/r7 and letting i/proc/&local_2c stay one
- *       register lower, which un-evicts chr. Pin HINTS on x1/y1 are overridden
- *       (die-at-call temps). This is (b)->(a): the coloring cascade is entirely
- *       downstream of where the two die-at-call temps get placed.
- *
- * PROOF THIS IS A JP-SPECIFIC agbcc COIN-FLIP, not a source error:
- *   fe8u's CHECKED-IN src/worldmap_screen2.s for GmapScreen2_Loop emits EXACTLY
- *   THIS build's coloring (`add sp,sp,#-0x10; mov r8,r0; mov sl,r0`; i=r7, no chr
- *   spill) — and the US ROM MATCHES. So the identical C compiles to MY coloring on
- *   the US axis and to a DIFFERENT coloring on the JP axis: a genuine agbcc
- *   version/allocation divergence, not a reconstruction defect.
- *
- * LEVERS TRIED (oracle = raw-binary asm-differ of 0x080C05C8..0x080C07E8; none -> 0):
- *   - CC1 flags: -mjp-promote, -fno-gcse (over-corrects), -fno-caller-saves,
- *     -fno-schedule-insns[2], -fno-strength-reduce, -fno-force-mem, -O1, old_agbcc:
- *     none reach the JP coloring; several regress.
- *   - register pins: `register int i asm("r8")` lands sub sp,#0x14 + chr spill + i->r8
- *     (closest, ~70 edits) BUT proc->r7 not r9, &local_2c->r9 not sl, and gcc then
- *     hoists gGMData into sl (JP reloads it) + adds a loop pre-check. Pinning proc->r9
- *     un-spills chr; pinning x1/y1->r7/r6 is ignored (die-at-call temps). No pin combo
- *     lands JP coloring without a side effect.
- *   - P2 mem-barrier `asm("":"+m"(chr))`: spills chr but stack does NOT grow — partial,
- *     no cascade. Kept below as `asm("":::"memory")` under #ifndef NONMATCHING (the
- *     single most-effective shaping lever, still short of 0).
- *   - source shapes: decl-order reorder, int+(s16) cast, intermediate ptr, inverted
- *     top-peel loop, volatile-field CSE defeat: all inert or worse.
- *   - decomp-permuter (agbcc cfg, TWO independent runs, ~9k+ iters each, -j4): base
- *     score 4265, random floor ~3325; every sub-base candidate is SEMANTICALLY INVALID
- *     (e.g. hoists `y1 = node->y - icon->yCenter` past PutSpriteExt -> stale y1). No
- *     valid 0-score source found.
- *
- * NEXT: community decomp.me pass — scratch R7AaX is queued for this function. On a
- * 0-score fork: move to src/GmapScreen2_Loop.c, flip carved_rom row to
+ * On a 0-score fork: move to src/GmapScreen2_Loop.c, flip carved_rom row to
  * src/GmapScreen2_Loop.o(.text), delete asm. `make compare` is the ONLY oracle.
  */
 #include "global.h"
@@ -79,10 +33,14 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
 {
     int chr;
     int i;
+    struct GmNodeIconDisplayProc * new_var2;
     s16 local_2c;
+    const struct NodeIcon * new_var;
+    int new_var4;
     s16 local_2a;
     s16 local_28;
     s16 local_26;
+    struct GmNodeIconDisplayProc * new_var3;
     const struct GMapNodeData * node;
     const struct NodeIcon * icon;
 
@@ -91,69 +49,95 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
         return;
     }
 
-    chr = proc->chr / CHR_SIZE;
+    chr = proc->chr / 0x20;
 
-    for (i = 0; i < 0x1d; i++)
+    for (i = 0; i < 0x1D; i++)
     {
-        s16 x1, y1;
+        s16 x1;
+        s16 y1;
+
         if (!(gGMData.nodes[i].state & 1))
         {
             continue;
         }
 
         node = &i[gWMNodeData];
+        icon = gWMNodeIconData + ((gGMData.nodes[i].state & 2) ? (node->iconPreClear) : (node->iconPostClear));
 
-        icon = gWMNodeIconData + ((gGMData.nodes[i].state & 2) ? node->iconPreClear : node->iconPostClear);
+        local_28 = i;
+        new_var = icon;
+        ;
+        new_var4 = 0xF;
+        ;
 
-        x1 = node->x - icon->xCenter;
-        y1 = node->y - icon->yCenter;
-
-        if (GmapScreen2_GetNodeScreenPos(proc->pScreenProc, x1, y1, &local_2c, &local_2a))
+        if (GmapScreen2_GetNodeScreenPos(proc->pScreenProc, node->x - new_var->xCenter, (*node).y - new_var->yCenter, &local_2c, &local_2a))
         {
-            local_2c = OAM1_X(local_2c);
-            local_2a = OAM0_Y(local_2a);
+            local_2c = local_2c & 0x01FF;
+            local_2a = local_2a & 0x00FF;
 
-            if ((proc->unk_34[i / 0x20]) & (1 << (i & 0x1f)))
+            if (proc->unk_34[local_28 / 0x20] & (1 << (i & 0x1F)))
             {
-                local_2a |= OAM0_BLEND;
+                local_2a |= 0x0400;
             }
 
             PutSpriteExt(
-                0xc,
+                0xC,
                 local_2c,
                 local_2a,
-                icon->pSpriteData,
-                icon->sheetTileId + (chr) + OAM2_PAL(proc->pal) + OAM2_LAYER(2)
+                new_var->pSpriteData,
+                ((chr + new_var->sheetTileId) + ((proc->pal & new_var4) << 12)) + (((2 & 0x3) << 9) << 1)
             );
         }
     }
 
     if (proc->merge_next_node)
     {
-        node = &(proc->nodeId[gWMNodeData]);
+        node = &proc->nodeId[gWMNodeData];
+        icon = gWMNodeIconData + ((gGMData.nodes[proc->nodeId].state & 2) ? (node->iconPreClear) : (node->iconPostClear));
 
-        icon = gWMNodeIconData + ((gGMData.nodes[proc->nodeId].state & 2) ? node->iconPreClear : node->iconPostClear);
-
-        *&local_28 = proc->pScreenProc->x;
-        *&local_26 = proc->pScreenProc->y;
+        *(&local_28) = proc->pScreenProc->x;
+        *(&local_26) = proc->pScreenProc->y;
 
         local_2c = ((node->x - icon->xCenter) + icon->xFlagOrigin) - local_28;
         local_2a = ((node->y - icon->yCenter) + icon->yFlagOrigin) - local_26;
 
-        if ((local_2a >= -0x20 && local_2a < 0xC0) && (local_2c >= -0x20 && local_2c < 0x110))
+        if (((local_2a >= (-0x20)) && (local_2a < 0xC0)) && ((local_2c > ((-0x20) - 1)) && (local_2c <= (0x110 - 1))))
         {
             s16 xOam1;
-            s16 yOam0;
-#ifndef NONMATCHING
-            asm("":::"memory");
-#endif
-            xOam1 = OAM1_X(local_2c);
-            yOam0 = OAM0_Y(local_2a);
+            unsigned short yOam0;
 
-            if (((proc->unk_34[(proc->nodeId / 0x20)])) & (1 << (proc->nodeId & 0x1f)))
-                yOam0 |= OAM0_BLEND;
+            do
+            {
+                gGMData.nodes[i].state += 0;
+                if (gGMData.nodes[proc->nodeId].state & 2)
+                {
+                    xOam1 = local_2c & 0x01FF;
+                }
+                else
+                {
+                    xOam1 = local_2c;
+                    xOam1 = xOam1 & 0x01FF;
+                }
+            } while (0);
 
-            AP_Update(proc->ap, xOam1, yOam0);
+            xOam1 = local_2c & 0x01FF;
+            yOam0 = local_2a & 0x00FF;
+            new_var2 = proc;
+
+            if (new_var2->unk_34[new_var2->nodeId / 0x20] & (1 << (proc->nodeId & 0x1F)))
+            {
+                yOam0 |= 0x0400;
+            }
+
+            new_var3 = new_var2;
+            yOam0++;
+
+            do
+            {
+                yOam0--;
+            } while (0);
+
+            AP_Update(new_var3->ap, xOam1, yOam0);
         }
     }
 
