@@ -137,7 +137,7 @@ def candidate_bytes_callmap(fn, vma, size):
     code = bytearray(open(binp, "rb").read())
     st = symtab()
     callmap = {}
-    rel = subprocess.run(["arm-none-eabi-readelf", "-r", o], capture_output=True, text=True).stdout
+    rel = subprocess.run(["arm-none-eabi-readelf", "-W", "-r", o], capture_output=True, text=True).stdout
     section = None
     import re
     for l in rel.splitlines():
@@ -234,40 +234,57 @@ def _reg_rw(hw):
 
 
 def _decode_liveness(rom, addr):
-    """(reads, writes, kind, successors) for the r0-r3 liveness scan; None if the
-    instruction is unrecognised (caller then keeps all args, conservatively)."""
+    """(reads, writes, kind, successors, call_target) for the r0-r3 liveness scan;
+    None if the instruction is unrecognised (caller keeps all args). call_target
+    is the resolved `bl` destination address (for interprocedural narrowing) or
+    None."""
     off = addr - 0x08000000
     if off < 0 or off + 2 > len(rom):
         return None
     hw = int.from_bytes(rom[off:off+2], "little")
     t5, t4, t6 = bits(hw,15,11), bits(hw,15,12), bits(hw,15,10)
-    if t5 in (0b11110, 0b11111):                     # bl (call)
-        return (set(), set(), 'call', [addr + 4])
+    if t5 in (0b11110, 0b11111):                     # bl (call) — decode target
+        tgt = None
+        if off + 4 <= len(rom):
+            h2 = int.from_bytes(rom[off+2:off+4], "little")
+            if bits(h2,15,11) in (0b11111, 0b11101):
+                offhi = bits(hw, 10, 0)
+                if offhi & 0x400:
+                    offhi -= 0x800
+                tgt = (addr + 4 + (offhi << 12) + (bits(h2,10,0) << 1)) & 0xFFFFFFFF
+        return (set(), set(), 'call', [addr + 4], tgt)
     if t4 == 0b1101:                                 # conditional branch
         cc = bits(hw, 11, 8)
         if cc >= 0b1110:
             return None                              # swi (BIOS call) / undef -> conservative
         o = bits(hw, 7, 0); o = o - 256 if o >= 128 else o
-        return (set(), set(), 'branch', [addr + 4 + o * 2, addr + 2])
+        return (set(), set(), 'branch', [addr + 4 + o * 2, addr + 2], None)
     if t5 == 0b11100:                                # unconditional branch
         o = bits(hw, 10, 0); o = o - 2048 if o >= 1024 else o
-        return (set(), set(), 'branch', [addr + 4 + o * 2])
+        return (set(), set(), 'branch', [addr + 4 + o * 2], None)
     rw = _reg_rw(hw)
     if rw is None:
         return None
     reads, writes, kind = rw
-    return (reads, writes, kind, [] if kind == 'return' else [addr + 2])
+    return (reads, writes, kind, [] if kind == 'return' else [addr + 2], None)
 
 
-def callee_arg_regs(rom, entry):
+def callee_arg_regs(rom, entry, _visiting=None, _depth=0):
     """Sound over-approximation of which of r0-r3 a callee reads as inputs.
-    Full-CFG read-before-write analysis over (addr, written-set) states — this
-    lattice is finite so it terminates on loops. Returns {0,1,2,3} (compare all
-    args) if the callee can't be fully analysed (unknown insn / state budget)."""
+    Full-CFG read-before-write over (addr, written-set) states (finite lattice ->
+    terminates). Interprocedural: a `bl T` only consumes T's own argument
+    registers (recursively), not all of r0-r3. Returns {0,1,2,3} when the callee
+    can't be fully/soundly analysed (unknown insn, state/recursion budget, cycle)."""
     if not isinstance(entry, int):
         return {0, 1, 2, 3}
+    entry &= ~1
     if entry in _arg_cache:
         return _arg_cache[entry]
+    if _visiting is None:
+        _visiting = set()
+    if entry in _visiting or _depth > 12:
+        return {0, 1, 2, 3}                          # recursion cycle/too deep -> conservative
+    _visiting = _visiting | {entry}
     args, seen, stack, steps = set(), set(), [(entry, frozenset())], 0
     complete = True
     while stack:
@@ -281,14 +298,15 @@ def callee_arg_regs(rom, entry):
         d = _decode_liveness(rom, addr)
         if d is None:
             complete = False; break
-        reads, writes, kind, succs = d
+        reads, writes, kind, succs, ctgt = d
         for r in reads:
             if r in (0, 1, 2, 3) and r not in written:
                 args.add(r)
         nw = set(written) | {r for r in writes if r in (0, 1, 2, 3)}
         if kind == 'call':
-            for r in (0, 1, 2, 3):
-                if r not in nw:
+            sub = callee_arg_regs(rom, ctgt, _visiting, _depth + 1) if ctgt else {0, 1, 2, 3}
+            for r in sub:
+                if r in (0, 1, 2, 3) and r not in nw:
                     args.add(r)
             nw |= {0, 1, 2, 3}                        # r0-r3 clobbered by the call
         if len(args) == 4:
@@ -298,7 +316,8 @@ def callee_arg_regs(rom, entry):
         for s in succs:
             stack.append((s, frozenset(nw)))
     res = args if complete else {0, 1, 2, 3}
-    _arg_cache[entry] = res
+    if complete:                                     # only cache fully-analysed results
+        _arg_cache[entry] = res
     return res
 
 
@@ -314,15 +333,32 @@ def obs_differ(a, b):
         return z3.BoolVal(True)
     for ca, cb in zip(a.calls, b.calls):
         ta, tb = ca["target"], cb["target"]
-        if isinstance(ta, tuple) and isinstance(tb, tuple):
-            terms.append(ta[1] != tb[1])          # indirect: compare pointer value
-            argset = {0, 1, 2, 3}                 # unknown callee -> all args
-        elif type(ta) == type(tb) and not isinstance(ta, tuple):
-            if ta != tb:                          # int addr or str: must match
+        # Normalise a call target to an address bit-vector (direct int address or
+        # an indirect pointer). Two calls hit the same callee iff their target
+        # addresses match modulo the Thumb bit (a direct `bl F` and an indirect
+        # `bx &F` are the same call). Unresolved string symbols must match by name.
+        def _addr(t):
+            if isinstance(t, tuple):
+                return ('bv', t[1])
+            if isinstance(t, int):
+                return ('bv', z3.BitVecVal(t, 32))
+            return ('name', t)
+        na, nb = _addr(ta), _addr(tb)
+        if na[0] == 'name' or nb[0] == 'name':
+            if ta != tb:
                 return z3.BoolVal(True)
-            argset = callee_arg_regs(rom, ta)     # compare only args the callee reads
+            argset = {0, 1, 2, 3}
         else:
-            return z3.BoolVal(True)               # kind mismatch (direct vs indirect)
+            terms.append((na[1] & ~1) != (nb[1] & ~1))
+            ca_addr = None
+            for t in (ta, tb):
+                if isinstance(t, int):
+                    ca_addr = t; break
+                if isinstance(t, tuple):
+                    sv = z3.simplify(t[1])
+                    if z3.is_bv_value(sv):
+                        ca_addr = sv.as_long() & ~1; break
+            argset = callee_arg_regs(rom, ca_addr) if ca_addr is not None else {0, 1, 2, 3}
         for j in range(4):
             if j in argset:
                 terms.append(ca["args"][j] != cb["args"][j])
