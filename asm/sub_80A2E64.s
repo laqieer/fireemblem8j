@@ -152,10 +152,10 @@ _080A2F26:
 	bl SetObjAffine
 	b _080A2FFA
 	.align 2, 0
-_080A2F8C: .4byte 0x08A95478
+_080A2F8C: .4byte gPrepItemTextMsgIds + 0x40
 _080A2F90: .4byte 0x0000F380
-_080A2F94: .4byte 0x080DC15C
-_080A2F98: .4byte 0x080DC1DC
+_080A2F94: .4byte gSinLookup
+_080A2F98: .4byte gSinLookup + 0x80
 _080A2F9C:
 	ldr r3, _080A3014 @ =0x080DC1DC
 	movs r1, #0
@@ -213,5 +213,5 @@ _080A2FFA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A3014: .4byte 0x080DC1DC
+_080A3014: .4byte gSinLookup + 0x80
 

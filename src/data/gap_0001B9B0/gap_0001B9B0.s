@@ -28,8 +28,8 @@ gap_0001B9B0:
 	.4byte 0xF9CCF7E8
 	.4byte 0xBC702000
 	.4byte 0x4708BC02
-	.4byte 0x085C2EDC
+	.4byte ProcScr_DebugMonitor
 	.4byte data_080DC68C
-	.4byte 0x085C2EFC
+	.4byte gTextIds_OnOff
 	.4byte 0x02022CA8
 /* de-pointered slice gap_0001B9B0: ptr=1 data=25 skip=2 */

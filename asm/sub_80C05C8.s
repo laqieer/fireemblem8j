@@ -53,7 +53,7 @@ _080C05F8:
 	b _080C062A
 	.align 2, 0
 _080C0620: .4byte 0x03005270
-_080C0624: .4byte 0x081F5D7C
+_080C0624: .4byte gWMNodeData
 _080C0628:
 	ldrb r0, [r6, #3]
 _080C062A:
@@ -173,9 +173,9 @@ _080C06D0:
 	ldrb r0, [r6, #2]
 	b _080C0722
 	.align 2, 0
-_080C0710: .4byte 0x081F5C6C
+_080C0710: .4byte gWMNodeIconData
 _080C0714: .4byte 0x000001FF
-_080C0718: .4byte 0x081F5D7C
+_080C0718: .4byte gWMNodeData
 _080C071C: .4byte 0x03005270
 _080C0720:
 	ldrb r0, [r6, #3]
@@ -274,7 +274,7 @@ _080C07CA:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080C07DC: .4byte 0x081F5C6C
+_080C07DC: .4byte gWMNodeIconData
 _080C07E0: .4byte 0x012F0000
 _080C07E4: .4byte 0x000001FF
 

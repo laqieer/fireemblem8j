@@ -98,6 +98,6 @@ rom_header_080000C0:
 	.4byte 0xE169F000	@ +0x154  msr SPSR_fc, r0
 	.4byte 0xE12FFF1E	@ +0x158  bx lr
 	.4byte 0x03007FFC	@ +0x15C  .word INTR_VECTOR (0x03007FFC)
-	.4byte 0x08000A21	@ +0x160  .word AgbMain (0x08000A20 thumb)
+	.4byte AgbMain	@ +0x160  .word AgbMain (0x08000A20 thumb)
 	.4byte 0x03003090	@ +0x164  .word gIRQHandlers (0x03003090)
 	.size rom_header_080000C0, 360
