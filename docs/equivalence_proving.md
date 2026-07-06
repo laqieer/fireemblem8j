@@ -22,6 +22,42 @@ stays `make compare` (SHA-1). Equivalence proving is a **new upper tier of the
 existing NON_MATCHING C ladder** (`docs/nonmatching.md`), not a change to the
 oracle.
 
+## The exact proposition posed to Z3 (the proof obligation)
+
+For a function under test, let **T** = the JP ROM's ARM/THUMB bytes (the
+byte-source in `asm/<fn>.s`) and **C** = the *compiled* reconstruction
+(`src/nonmatching/<fn>.o`, relocations resolved). Both are **machine code** — the
+prover compares *ARM-vs-ARM*, so the ground truth (the actual ROM bytes) is always
+one operand. From a single **symbolic initial state** `σ = (r0..r15, NZCV, memory
+M)` shared by both sides, define the observable of a run as the tuple
+
+&nbsp;&nbsp;`O(P, σ) = ( return value r0[/r1], callee-saved r4–r11 + sp restored,
+the set of data-memory writes {(addr, width, value)}, and the ordered trace of
+external effects — each (call-target, live-args) and each volatile MMIO
+read/write (kind, addr, width, value) )`.
+
+The prover asserts the **negation** of
+
+> **∀ σ.  O(T, σ) = O(C, σ)**
+
+as a quantifier-free bit-vector (QF_BV) formula and asks Z3 for `unsat`
+(⇒ **PROVEN** — no input distinguishes them) or a model (⇒ **REFUTED** — a concrete
+`σ` that does). It is a **bounded** obligation, discharged under an explicit model:
+loops are unrolled to a stated depth *N* (bounded model checking, not an
+inductive proof); every `bl`/`bx` callee is an **uninterpreted function** applied
+*identically* to both sides (so only the args each callee actually reads are
+compared — sound because a summary that havocs external memory can only *fail* to
+prove, never falsely prove); ROM is a read-only immutable array; MMIO is the
+`[0x04000000, 0x05000000)` window with volatile reads modelled as fresh symbols
+from a shared oracle. Two observable strengths are available: **ABI-functional**
+(everything above except the MMIO trace — what a normal C caller relies on) and
+**observational** (also the MMIO read/write trace — macabeus's stronger notion).
+Neither entails cycle-timing equality; `make compare` remains the only guarantee
+of that. Differential testing (`differential_test.py`) checks the *same* `O(·)`
+observable concretely over many random `σ` (testing, not a `∀`-proof), and the
+live-state harness supplies a real, self-consistent `σ` for functions that fault
+on synthetic input.
+
 ## The two questions
 
 ### 1. Prior art (Serentty's question)
@@ -341,6 +377,25 @@ oracle. Realistically, for a project already at 99.82% matching-C with descripti
 asm covering the rest, this is a **readability/confidence enhancement**, not a
 throughput lever — worth having as a documented capability, not worth blocking
 the byte-match frontier on.
+
+**Notes on adjacent tools (community feedback, Camdar):**
+
+* **CBMC** — a strong C/goto-program bounded model checker, but it does **not**
+  ingest ARM machine code. Using it means lifting the ROM target to C first
+  (Ghidra/m2c) and proving *C-vs-C*; that only shows "our C ≡ the decompiled C",
+  not "≡ the real bytes", so it is *weaker* on ground-truth fidelity than the
+  ARM-vs-ARM check here — unless paired with a verified lifter. A useful *lighter*
+  complementary cross-check for individual functions, not a replacement.
+* **angr / BINSEC** (binary symbolic execution) are the right "mature engine"
+  answer for this binary-level problem — they replace the hand-rolled THUMB
+  lifter/executor with a maintained, ISA-complete one. This is the recommended
+  next spike (tracked as option (b) in the discussion) and subsumes the lifter
+  bullet above.
+* **Rupicola / bedrock2** produce proofs, but in the **forward** direction
+  (synthesise verified low-level code *from* Coq specs); they do not verify an
+  *existing* binary/decompilation against C, so they don't fit this
+  reverse/post-facto problem. Backward proof-carrying verification is a
+  VST/Frama-C-class Coq effort requiring a verified ARM semantics.
 
 *Decision logged as D349. PoC validated end-to-end; approach reviewed with the
 rubber-duck agent (MMIO reads, region model, ABI-vs-full-architectural, explicit
