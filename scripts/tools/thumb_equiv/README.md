@@ -108,3 +108,35 @@ per-function results table and the honest frontier.
 Files added: `cfg_exec.py` (CFG symbolic-execution engine), `prove_nonmatching.py`
 (driver + coverage report).
 
+## Differential testing the SMT-intractable functions (`differential_test.py`)
+
+Where a *bounded SMT proof* is intractable (nonlinear fixed-point math, indirect
+callbacks, stack-buffer aliasing, sheer size), concrete **differential testing**
+sidesteps all of them. It runs the JP ROM bytes and the compiled reconstruction
+under a Unicorn THUMB emulator (+ small GBA BIOS/mem model) with **identical
+type-correct random inputs** (parsed from the reconstruction's own C signature)
+and compares the caller-visible observable (return masked to the declared width,
+`void`-omitted; + non-stack memory writes).
+
+```bash
+"$HOME/z3-venv/bin/pip" install unicorn
+$HOME/z3-venv/bin/python differential_test.py                 # all 16
+$HOME/z3-venv/bin/python differential_test.py sub_800FAD0 --trials 200
+```
+
+It is **testing, not proof**; trustworthiness is gated by requiring the 12
+SMT-PROVEN functions to all report `EQUIV`. Soundness safeguards baked in:
+out-of-domain FAULT trials are skipped (never scored, fault-PC never compared);
+a structurally-dead return (`pop {r0}; bx r0`) is detected and only memory
+effects compared; a callback (fn-ptr) arg is never *refuted* (the no-op stub +
+different spill layouts are a harness artifact — `INCONCLUSIVE-CB`, proven by
+`sub_80A6E4C`); `_call_via_rN` linker veneers are synthesised as `bx rN`
+trampolines appended to the candidate; per-function input-domain fixups clamp
+specific random globals identically on both sides.
+
+Result: **+2 machine-checked over SMT → 14/16** — `sub_800A34C` (memory effects;
+dead return) and `sub_800FAD0` (full observable, 200 trials) which SMT could not
+decide. `sub_80A6F1C` = 118/120 in-domain trials identical (`INCONCLUSIVE-CB`);
+`sub_8057F80` needs a live battle-anim frame (research-grade). This never touches
+the build path — `make compare` stays green and remains the sole oracle.
+

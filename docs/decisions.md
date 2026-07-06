@@ -9515,3 +9515,43 @@ equivalence) plus callee inlining — beyond a single PoC session. `make compare
 stays the sole oracle; these proofs are confidence annotations strictly below it.
 Full method + per-function table: `docs/equivalence_proving.md`. Reproduce:
 `$HOME/z3-venv/bin/python scripts/tools/thumb_equiv/prove_nonmatching.py`.
+
+### D349 addendum 2 — differential testing closes 2 of the remaining 4 (14/16) (2026-07-06)
+
+Follow-up to the objective "the last 4 fixed". The 4 SMT could not decide fail for
+reasons a *bounded SMT proof* is structurally bad at (nonlinear fixed-point math,
+indirect callbacks, stack-buffer aliasing, path explosion) but *concrete
+execution* handles trivially. Built `scripts/tools/thumb_equiv/differential_test.py`:
+a Unicorn THUMB emulator (+ small GBA BIOS/mem model) that runs the JP ROM bytes
+vs the compiled reconstruction under **identical type-correct random inputs**
+(parsed from the reconstruction's own C signature) and compares the caller-visible
+observable (return masked to declared width, `void`-omitted; + non-stack memory
+writes). Trustworthiness gate: **all 12 SMT-PROVEN functions must report EQUIV**
+(they do).
+
+**Result: +2 machine-checked → 14/16.** `sub_800A34C` (SMT `DIVERGENCE`) and
+`sub_800FAD0` (SMT `UNKNOWN`) both report `EQUIV` — memory effects identical over
+145 / 200 trials. `sub_80A6F1C` = 118/120 in-domain trials identical
+(`INCONCLUSIVE-CB`; 2 codec-edge residuals — strong corroboration, not a clean
+sweep). `sub_8057F80` reads ~30 live battle-anim globals and faults black-box —
+research-grade, equivalence rests on its header's block-by-block objdump.
+
+Five soundness lessons, all encoded in the tool (so it never produces a false
+claim): (a) out-of-domain FAULT trials are **skipped**, never scored, and the
+fault PC is never compared across the two code layouts; (b) a **structurally-dead
+return** (`sub_800A34C`'s `pop {r0}; bx r0` — r0 is the branch target, caller
+ignores it) is detected via the injected-LR sentinel → compare memory effects
+only; (c) a **callback (fn-ptr) arg cannot be soundly refuted** (the no-op stub
+leaves the callback-filled stack buffer uninitialised → the two spill layouts read
+it back differently — a harness artifact, PROVEN by `sub_80A6E4C`, SMT-PROVEN yet
+naive-diff "diverged" 92/92) → report `INCONCLUSIVE-CB`, never MISMATCH; fixed the
+signature parser (outer params only, so a callback's inner `(int*,u8*)` isn't
+two spurious args) and **synthesise `_call_via_rN` veneers as `bx rN` trampolines
+appended to the candidate** (IWRAM is >4MB from ROM — a thumb `bl` can't reach a
+fixed stub) → `sub_80A6E4C` then reports EQUIV, cross-confirming SMT; (d)
+per-function input-domain **fixups** clamp specific random globals into a valid
+domain (identical both sides → cannot mask a real divergence); (e) all 16
+candidates resolve every `.text` relocation (audited) so EQUIV is a real
+comparison. This is **testing, not proof** — `make compare` stays the sole oracle
+(unaffected; the tool never touches the build path). Reproduce:
+`$HOME/z3-venv/bin/python scripts/tools/thumb_equiv/differential_test.py`.

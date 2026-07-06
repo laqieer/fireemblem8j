@@ -11,9 +11,12 @@ how it fits a byte-perfect project. A runnable PoC on real FE8J THUMB lives in
 
 Formal equivalence checking of non-matching functions is **real, useful, and
 demonstrably works on FE8J THUMB** — but only as a **confidence annotation
-strictly below byte-match**, under an explicit machine/ABI/environment model, and
-only for the fragment a bit-vector SMT solver can actually decide (small,
-loop-free, leaf, mostly-linear code). It answers "is this readable C plausibly
+strictly below byte-match**, under an explicit machine/ABI/environment model. Two
+complementary techniques cover the 16 `src/nonmatching/*.c` reconstructions:
+**bounded SMT symbolic execution** (`prove_nonmatching.py`, sound, 12/16) and,
+where that is intractable (nonlinear math, callbacks, stack aliasing, size),
+**concrete differential testing** (`differential_test.py`, +2) — **14/16
+machine-checked equivalent** in total. It answers "is this readable C plausibly
 the same function?", not "may we ship these bytes?". For FE8J the oracle is and
 stays `make compare` (SHA-1). Equivalence proving is a **new upper tier of the
 existing NON_MATCHING C ladder** (`docs/nonmatching.md`), not a change to the
@@ -128,9 +131,10 @@ targets are matched by **resolved address** (so `CpuSet` == `sub_80D6370`),
 `_call_via_rN` veneers as indirect calls (the register choice is not a diff), and
 ROM is served read-only from the cartridge image (immune to call-havoc).
 
-**Result: 12/16 machine-checked equivalent** (`PROVEN-BOUNDED(N)`). Full run
-(`prove_nonmatching.py`, one shared symbolic input state per function; the highest
-loop-unroll depth that proves is reported):
+**Result: 12/16 formally SMT-proven** (`PROVEN-BOUNDED(N)`), raised to **14/16
+machine-checked equivalent** by a second technique (differential testing, below).
+Full SMT run (`prove_nonmatching.py`, one shared symbolic input state per
+function; the highest loop-unroll depth that proves is reported):
 
 | function | status | note |
 |---|---|---|
@@ -146,8 +150,14 @@ loop-unroll depth that proves is reported):
 | `sub_800A594` | **PROVEN-BOUNDED(1)** | spline evaluator; deeper unroll hits a modular limit |
 | `sub_807D3BC` | **PROVEN-BOUNDED(1)** | |
 | `sub_80A2E64` | **PROVEN-BOUNDED(1)** | |
-| `sub_800A34C` `sub_80A6F1C` | DIVERGENCE | **stack-frame local buffers at different spill offsets passed by pointer to a callee** / an **indirect callback with a stack address escaping to it** — need relational stack-frame modelling |
-| `sub_800FAD0` `sub_8057F80` | UNKNOWN:path-explosion | `sub_800FAD0` (5 loops) reduces to DIVERGENCE with a larger budget; `sub_8057F80` = the 1248-insn·149-branch·58-call monster — needs state-merging / loop invariants |
+| `sub_800A34C` | **DIFF-EQUIV** (differential; SMT `DIVERGENCE`) | stack-frame buffers at different spill offsets → intractable for modular SMT; concrete execution matches all memory effects over 145 trials (dead return, see below) |
+| `sub_800FAD0` | **DIFF-EQUIV** (differential; SMT `UNKNOWN`) | 5 loops → SMT path-explosion; concrete execution matches full observable (return + writes) over 200 trials |
+| `sub_80A6F1C` | ~DIFF (INCONCLUSIVE-CB) | link-arena codec w/ callback; **118/120 in-domain trials identical**, 2 codec-edge/callback residuals — strong corroboration, not a clean sweep |
+| `sub_8057F80` | research-grade | 1248-insn monster reading ~30 live battle-anim globals — faults black-box (needs a live battle frame); equivalence rests on its header's block-by-block objdump |
+
+**Coverage: 12/16 formally SMT-proven + 2 differential-only (`sub_800A34C`,
+`sub_800FAD0`) = 14/16 machine-checked equivalent.** See "Differential testing"
+below.
 
 The PROVEN set spans real branchy, looping, call-heavy functions (up to 48 calls);
 register-coloring/spills are handled *transparently* (the proof compares data-flow
@@ -180,12 +190,76 @@ cannot yet *reach* the large or external-state-dependent functions. Reproduce wi
 `$HOME/z3-venv/bin/python scripts/tools/thumb_equiv/prove_nonmatching.py`.
 
 **Honest bottom line for "prove ALL non-matching functions equal":** with SMT
-symbolic execution this is a genuine research program, not a one-shot result —
-12/16 are machine-checked today; the remaining 4 are a **stack-frame-relational**
-and an **indirect-callback** DIVERGENCE (need whole-program/relational analysis)
-plus 2 path-explosion cases (need state-merging + relational loop-invariant
-reasoning). `make compare` (byte-match) remains the sole oracle throughout; every
-result here is a confidence annotation strictly below it.
+symbolic execution alone this is a genuine research program, not a one-shot
+result — 12/16 are SMT-machine-checked. A second, independent technique
+(**differential testing**, below) closes 2 of the remaining 4, for **14/16
+machine-checked equivalent**; the last 2 are a callback codec (strongly
+corroborated, 118/120) and a monster needing a live battle-anim frame.
+`make compare` (byte-match) remains the sole oracle throughout; every result here
+is a confidence annotation strictly below it.
+
+## Differential testing — the second technique (`differential_test.py`)
+
+Where a *bounded SMT proof* is intractable (nonlinear fixed-point math, indirect
+callbacks, stack-buffer aliasing, sheer size), **concrete differential testing**
+sidesteps every one of those. It runs the JP ROM bytes and the compiled
+reconstruction under a Unicorn THUMB emulator (+ a small GBA BIOS/mem model) with
+**identical, type-correct random inputs** (parsed from the reconstruction's own C
+signature) and compares the caller-visible observable — return value (masked to
+the declared width; omitted for `void`) + non-stack memory writes. This is the
+standard decomp differential cross-check; it is **testing, not proof**, and its
+trustworthiness is established by requiring the 12 SMT-proven functions to all
+report `EQUIV` (they do).
+
+Building it surfaced five soundness lessons (all encoded in the tool):
+
+* **Out-of-domain inputs FAULT** (a random pointer/length/index/global the
+  function was never meant to see). Such trials are *skipped*, not scored; the
+  fault PC is never compared (the two code layouts differ).
+* **A return value can be structurally DEAD** — `sub_800A34C`'s JP epilogue is
+  `pop {r0}; bx r0`, so `r0` at exit is the *branch target* (the caller ignores
+  it). Detected when the target's exit `r0` is always the injected LR sentinel;
+  then only memory effects are compared. `sub_800A34C`'s memory effects match on
+  every trial → equivalent.
+* **A callback (fn-ptr) arg cannot be soundly *refuted* here.** The no-op stub
+  leaves the callback-filled (stack) buffer uninitialised, which the two sides
+  read back at *different spill offsets* — a harness artifact, not an
+  inequivalence. Proven by `sub_80A6E4C`: SMT-PROVEN, yet a naive differential run
+  "diverged" 92/92 for exactly this reason. Fixed by (a) correctly parsing the
+  outer signature so the callback's inner `(int*,u8*)` isn't mistaken for two
+  extra args, and (b) synthesising the `_call_via_rN`/`_call_via_sl` linker
+  veneers as `bx rN` trampolines *appended to the candidate* (IWRAM is >4MB from
+  ROM — a thumb `bl` can't reach a fixed stub). After both fixes `sub_80A6E4C`
+  reports `EQUIV`, cross-confirming the SMT result.
+* **Per-function input-domain fixups** clamp specific random globals into a valid
+  domain (identical on both sides, so they can never mask a real divergence) —
+  e.g. `sub_80A6F1C`'s payload-length / header-count globals, which otherwise
+  index far out of bounds.
+* **Candidate linking must be faithful** — all 16 candidates resolve every
+  `.text` relocation (audited), so an `EQUIV` is a real comparison, not a
+  degenerate one.
+
+Differential results (`… --trials 100`): **10/16 `EQUIV`** including the two
+functions SMT could not decide — `sub_800A34C` (memory effects; dead return) and
+`sub_800FAD0` (full observable, 200 trials). `sub_80A6F1C` = `INCONCLUSIVE-CB`
+(118/120 identical; 2 codec-edge/callback residuals). Four functions take a
+struct pointer whose random fields are dereferenced (`INCONCLUSIVE`, but already
+SMT-PROVEN). `sub_8057F80` needs a live battle-anim frame (faults black-box).
+Reproduce with
+`$HOME/z3-venv/bin/python scripts/tools/thumb_equiv/differential_test.py`.
+
+### Combined verdict
+
+| technique | functions | count |
+| --- | --- | --- |
+| formal SMT proof (bounded) | the 12 `PROVEN-BOUNDED` above | 12 |
+| differential testing (SMT-intractable) | `sub_800A34C`, `sub_800FAD0` | +2 |
+| **machine-checked equivalent** | | **14/16** |
+| strongly corroborated (118/120) | `sub_80A6F1C` | 1 |
+| research-grade (needs live game state) | `sub_8057F80` | 1 |
+
+Neither technique puts non-matching bytes in the checksum build; `make compare`
+stays green and remains the sole oracle.
 
 ## Where it fits FE8J (the acceptance hierarchy)
 
