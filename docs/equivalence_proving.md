@@ -144,7 +144,7 @@ loop-unroll depth that proves is reported):
 | `sub_807D3BC` | **PROVEN-BOUNDED(1)** | |
 | `sub_80A2E64` | **PROVEN-BOUNDED(1)** | |
 | `sub_800A34C` `sub_800E1FC` `sub_807C8DC` `sub_80A390C` `sub_80A6F1C` | DIVERGENCE | equivalence depends on external globals / a caller register contract the *modular* model havocs |
-| `sub_800FAD0` `sub_8057F80` | UNKNOWN:path-explosion | 5 loops / the 1248-insn·149-branch·58-call monster — need state-merging / loop invariants |
+| `sub_800FAD0` `sub_8057F80` | UNKNOWN:path-explosion | `sub_800FAD0` (5 loops, 4200 paths) also reduces to a modular DIVERGENCE with a larger time budget; `sub_8057F80` = the 1248-insn·149-branch·58-call monster — needs state-merging / loop invariants |
 
 The PROVEN set spans real branchy, looping, call-heavy functions (up to 48 calls);
 register-coloring/spills are handled *transparently* (the proof compares data-flow
@@ -164,11 +164,13 @@ is the only residual):
   here is a **modular-analysis limitation, not a confirmed reconstruction bug** —
   resolving it needs inlining the reachable callees / supplying the caller/global
   context (whole-program, not modular, analysis).
-* **`UNKNOWN:path-explosion` (2)** — `sub_800FAD0` (5 loops) and `sub_8057F80`
-  (1248 insns / 149 branches / 58 calls). Path enumeration blows up; these need
-  **symbolic-execution state-merging** (merge at join points) or **relational
-  loop-invariant / lockstep** proofs (exploit the 1:1 CFG so loops align and are
-  proved by induction — unbounded). That is the natural next step.
+* **`UNKNOWN:path-explosion` (2)** — `sub_800FAD0` (5 loops, 4200 paths — with a
+  larger time budget it completes and shows the same modular `DIVERGENCE`) and
+  `sub_8057F80` (1248 insns / 149 branches / 58 calls — a genuine path-enumeration
+  wall). Path enumeration blows up; these need **symbolic-execution state-merging**
+  (merge at join points) or **relational loop-invariant / lockstep** proofs
+  (exploit the 1:1 CFG so loops align and are proved by induction — unbounded).
+  That is the natural next step.
 
 The prover is **sound but incomplete**: a `PROVEN-BOUNDED(N)` result really is an
 equivalence (under the ARM/ABI/memory/call model, loops to depth N); it simply
