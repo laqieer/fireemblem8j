@@ -156,14 +156,17 @@ The other 7 are **not proven** — and, crucially, *not proven ≠ inequivalent*
 is the only residual):
 
 * **`DIVERGENCE` (5)** — the modular model's call summaries **havoc external
-  memory/globals**. These functions' equivalence hinges on external state the
-  modular analysis cannot see: e.g. `sub_80A390C`/`sub_800A34C` read a table base
-  from a global the JP build loads and the reconstruction inlines; `sub_800E1FC`
-  passes an incoming `r3` straight through while the reconstruction re-derives it
-  from a struct deref (equal only under the caller's contract). A `DIVERGENCE`
-  here is a **modular-analysis limitation, not a confirmed reconstruction bug** —
-  resolving it needs inlining the reachable callees / supplying the caller/global
-  context (whole-program, not modular, analysis).
+  memory/globals** and lack **callee signatures**. These functions' equivalence
+  hinges on state the modular analysis cannot see: e.g. `sub_80A390C`/`sub_800A34C`
+  read a table base from a global the JP build loads and the reconstruction
+  inlines; `sub_800E1FC` passes an incoming `r3` straight through while the
+  reconstruction re-derives it from a struct deref (equal only under the caller's
+  contract); `sub_80A6F1C` leaves different dead values in `r0` before calls to a
+  **no-arg PRNG** (`sub_80A6AA8`) — the conservative "compare all of r0–r3 as
+  args" then flags a semantically-irrelevant difference. A `DIVERGENCE` here is a
+  **modular-analysis limitation, not a confirmed reconstruction bug** — resolving
+  it needs callee signatures / inlining the reachable callees / supplying the
+  caller/global context (whole-program, not modular, analysis).
 * **`UNKNOWN:path-explosion` (2)** — `sub_800FAD0` (5 loops, 4200 paths — with a
   larger time budget it completes and shows the same modular `DIVERGENCE`) and
   `sub_8057F80` (1248 insns / 149 branches / 58 calls — a genuine path-enumeration

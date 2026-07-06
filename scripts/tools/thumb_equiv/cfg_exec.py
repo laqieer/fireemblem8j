@@ -110,11 +110,17 @@ class Fn:
         return int.from_bytes(self.code[off:off + 4], "little")
 
     def rom_bytes(self, addr, width):
+        # Prefer the function's OWN bytes (incl. its relocated literal pool) for
+        # in-function addresses; only fall back to the full cartridge image for
+        # addresses OUTSIDE this function (external ROM tables). Reading the shared
+        # ROM for the candidate's own pool would return the *target*'s bytes.
+        if self.base <= addr < self.base + len(self.code):
+            o = addr - self.base
+            return int.from_bytes(self.code[o:o + width], "little")
         if self.rom is not None and self.rom_base <= addr < self.rom_base + len(self.rom):
             o = addr - self.rom_base
             return int.from_bytes(self.rom[o:o + width], "little")
-        o = addr - self.base
-        return int.from_bytes(self.code[o:o + width], "little")
+        return 0
 
 
 class Engine:
