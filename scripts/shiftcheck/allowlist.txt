@@ -7,3 +7,10 @@
 #
 # (Hardware IO 0x04xxxxxx, palette/VRAM/OAM 0x05-0x07, EWRAM/IWRAM 0x02-0x03 are
 #  never flagged: the scan only considers ROM-range 0x08000000-0x09000000 values.)
+
+# ROM base literal 0x08000000 = cartridge/rom-header start. Under the +0x40000
+# post-header shift the header stays at 0x08000000 (the gap is injected AFTER
+# rom_header), so a word equal to the ROM base is PINNED, never a relocatable
+# pointer. Occurs as an event-command data word in
+# src/data/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch.c (#143).
+0x08000000 0x08000001   ROM base (pinned under shift; not a pointer)

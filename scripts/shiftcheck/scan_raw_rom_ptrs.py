@@ -32,6 +32,28 @@ LIT_RE = re.compile(r'\.(?:4byte|word|long)\b([^\n"]*)', re.IGNORECASE)
 HEX_RE = re.compile(r'0x0[89A-Fa-f][0-9A-Fa-f]{6}\b')
 
 
+def load_allowlist(path):
+    """Read [LO, HI) ROM-value ranges of known-legitimate (pinned/constant)
+    words to suppress. Format per line: `0xLO 0xHI  comment`."""
+    ranges = []
+    try:
+        with open(path, encoding="utf-8") as fh:
+            for line in fh:
+                line = line.split("#", 1)[0].split()
+                if len(line) >= 2:
+                    try:
+                        ranges.append((int(line[0], 16), int(line[1], 16)))
+                    except ValueError:
+                        pass
+    except OSError:
+        pass
+    return ranges
+
+
+def in_allowlist(val, ranges):
+    return any(lo <= val < hi for lo, hi in ranges)
+
+
 def load_symbols(elf):
     """address(int) -> (name, kind) for FUNC/OBJECT/NOTYPE symbols with a name."""
     out = subprocess.check_output(
@@ -92,6 +114,7 @@ def main():
         sys.stderr.write("error: %s missing (run `make compare` first)\n" % args.elf)
         return 2
     syms = load_symbols(args.elf)
+    allow = load_allowlist(os.path.join(os.path.dirname(__file__), "allowlist.txt"))
     hits = []
     for f in iter_lit_files():
         try:
@@ -99,11 +122,15 @@ def main():
                 lines = fh.readlines()
         except OSError:
             continue
+        is_asm = f.endswith((".s", ".inc"))
         for i, line in enumerate(lines, 1):
-            for m in LIT_RE.finditer(line):
+            scan = line.split("@", 1)[0] if is_asm else line  # drop asm comment
+            for m in LIT_RE.finditer(scan):
                 for hm in HEX_RE.finditer(m.group(1)):
                     val = int(hm.group(0), 16)
                     if not (ROM_LO <= val < ROM_HI):
+                        continue
+                    if in_allowlist(val, allow):
                         continue
                     r = resolve(val, syms)
                     if r:
