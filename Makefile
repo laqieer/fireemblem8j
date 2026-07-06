@@ -120,6 +120,7 @@ src/AiGetUnitClosestValidPosition.o: CC1FLAGS += -mjp-promote
 src/nonmatching/sub_807C8DC.o: CC1FLAGS += -mjp-promote
 src/nonmatching/sub_807D3BC.o: CC1FLAGS += -mjp-promote
 src/nonmatching/sub_8057F80.o: CC1FLAGS += -mjp-promote
+src/nonmatching/sub_80A2E64.o: CC1FLAGS += -fno-gcse
 src/efxSPDQuake_Loop.o: CC1FLAGS += -mjp-promote
 src/efxLunaOBJ_Loop_D.o: CC1FLAGS += -mjp-promote
 src/efxHazymoonOBJ3_Loop.o: CC1FLAGS += -mjp-promote
