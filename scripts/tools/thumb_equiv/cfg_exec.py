@@ -229,6 +229,8 @@ class Engine:
                 raise LiftError("path budget exceeded")
             if self.deadline and _time.time() > self.deadline:
                 raise LiftError("enumeration timeout")
+            if addr < self.fn.base or addr + 2 > self.fn.base + len(self.fn.code):
+                raise LiftError(f"execution escaped function bounds @ 0x{addr:08x}")
             cnt = st.visits.get(addr, 0) + 1
             if cnt > self.loop_bound:
                 # bound reached: drop this continuation (BMC pruning)

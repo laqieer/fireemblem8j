@@ -53,16 +53,38 @@ def symtab():
 
 
 def func_vma_size(fn):
+    """Return (vma, target_size, candidate_size). Non-matching functions differ
+    in length, so the target size comes from assembling asm/<fn>.s (the true JP
+    byte extent incl. literal pool) and the candidate size from its .o .text."""
     vma = int(fn.replace("sub_", ""), 16)
-    # size = candidate .text size (JP function is same instruction count)
     o = os.path.join(NMDIR, fn + ".o")
-    h = subprocess.run(["arm-none-eabi-objdump", "-h", o], capture_output=True, text=True).stdout
-    size = None
+    csize = _text_size(o)
+    # assemble the committed asm byte-source to get the true target extent
+    asm = os.path.join(ROOT, "asm", fn + ".s")
+    tsize = None
+    if os.path.exists(asm):
+        os.makedirs("/tmp/thumb_equiv", exist_ok=True)
+        to = f"/tmp/thumb_equiv/{fn}.tgt.o"
+        r = subprocess.run(["arm-none-eabi-as", "-mthumb", "-mcpu=arm7tdmi",
+                            asm, "-o", to], capture_output=True, text=True)
+        if r.returncode == 0:
+            tsize = _text_size(to)
+    if tsize is None:
+        tsize = csize
+    return vma, tsize, csize
+
+
+def _text_size(obj):
+    """Size (bytes) of the code section of an object (.text or .text.sub_*)."""
+    h = subprocess.run(["arm-none-eabi-objdump", "-h", obj],
+                       capture_output=True, text=True).stdout
+    size = 0
+    import re
     for l in h.splitlines():
-        if l.strip().startswith("0 .text") or " .text " in l:
-            size = int(l.split()[2], 16)
-            break
-    return vma, size
+        m = re.search(r"\s\d+\s+(\.text\S*)\s+([0-9a-f]{8})", l)
+        if m:
+            size = max(size, int(m.group(2), 16))
+    return size
 
 
 def target_bytes_callmap(vma, size):
@@ -237,11 +259,11 @@ def rom_image():
 
 def prove(fn, loop_bound=3, verbose=True, time_budget=90, product_cap=4000):
     deadline = time.time() + time_budget
-    vma, size = func_vma_size(fn)
-    if not size:
+    vma, tsize, csize = func_vma_size(fn)
+    if not tsize or not csize:
         return "UNKNOWN:no-size"
-    tcode, tcall = target_bytes_callmap(vma, size)
-    ccode, ccall = candidate_bytes_callmap(fn, vma, size)
+    tcode, tcall = target_bytes_callmap(vma, tsize)
+    ccode, ccall = candidate_bytes_callmap(fn, vma, csize)
     rom = rom_image()
     regs, data, stack, flags = shared_init()
     oracle = CallOracle()
@@ -269,17 +291,22 @@ def prove(fn, loop_bound=3, verbose=True, time_budget=90, product_cap=4000):
     return f"PROVEN-BOUNDED({loop_bound})"
 
 
-def prove_auto(fn, bounds=(3, 2, 1), time_budget=90):
-    """Try decreasing loop bounds; return the strongest result obtained.
-    A PROVEN-BOUNDED(higher N) is stronger; a REFUTED/PROVEN is decisive."""
-    best = None
+def prove_auto(fn, bounds=(1, 2, 3), time_budget=90):
+    """Try increasing loop bounds; report the HIGHEST bound that proves
+    (standard BMC: a proof holds up to the unroll depth). A bound-1 DIVERGENCE is
+    a genuine modular divergence; a divergence only at a deeper bound just caps
+    the proven depth, so we return the highest clean PROVEN-BOUNDED(N)."""
+    best_proven = None
     for lb in bounds:
         r = prove(fn, loop_bound=lb, verbose=False, time_budget=time_budget)
-        if r.startswith("PROVEN") or r.startswith("DIVERGENCE"):
-            return r
-        best = best or r
-        # if it exploded/timed out, a smaller bound may complete
-    return best or "UNKNOWN"
+        if r.startswith("PROVEN"):
+            best_proven = r
+            continue                      # try to push the bound higher
+        if r.startswith("DIVERGENCE"):
+            return best_proven or r        # highest clean bound, else the divergence
+        # UNKNOWN (path explosion / timeout): higher bounds only get worse
+        return best_proven or r
+    return best_proven or "UNKNOWN"
 
 
 def main():

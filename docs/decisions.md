@@ -9489,13 +9489,18 @@ call targets matched by **resolved address** so `CpuSet`==`sub_80D6370`;
 `_call_via_rN` veneers = indirect calls; ROM served read-only, immune to
 call-havoc).
 
-**Result: 5/16 `PROVEN-BOUNDED`** (sub_8001570/80A2E64/80A3300/80A6D34/80A6E4C).
-3 `DIVERGENCE` (sub_800A34C/807C8DC/80A390C — equivalence depends on an external
-global table pointer the modular model havocs; NOT a confirmed reconstruction
-bug). 8 `UNKNOWN:path-explosion` (many loops/branches, up to sub_8057F80 =
-1248 insns/149 br/58 calls). The prover is **sound but incomplete**: PROVEN really
-is equivalent (under the ARM/ABI/memory/call model, loops to depth N); it cannot
-yet reach large or external-state-dependent functions.
+**Result: 9/16 `PROVEN-BOUNDED`** (sub_8001570/800A594/807D3BC/80A2E64/80A3300/
+80A3528/80A6D34/80A6E4C/80C05C8; highest proving unroll depth reported). 5
+`DIVERGENCE` (sub_800A34C/800E1FC/807C8DC/80A390C/80A6F1C — equivalence depends on
+an external global/caller register contract the modular model havocs; NOT confirmed
+reconstruction bugs). 2 `UNKNOWN:path-explosion` (sub_800FAD0 = 5 loops; sub_8057F80
+= 1248 insns/149 br/58 calls). Two sound bug fixes drove 5→9: (a) target vs
+candidate sizes differ for non-matching functions — use the true target size from
+assembling `asm/*.s` (candidate size truncated the longer target's epilogue →
+runaway); (b) report the highest loop-unroll depth that proves. The prover is
+**sound but incomplete**: PROVEN really is equivalent (under the ARM/ABI/memory/call
+model, loops to depth N); it cannot yet reach external-state-dependent or
+path-exploding functions.
 
 **"All 16" is a research program, not a one-shot.** The remaining 11 need
 symbolic-execution **state-merging** (avoid path blow-up) and **relational

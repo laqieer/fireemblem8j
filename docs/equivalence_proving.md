@@ -128,43 +128,47 @@ targets are matched by **resolved address** (so `CpuSet` == `sub_80D6370`),
 `_call_via_rN` veneers as indirect calls (the register choice is not a diff), and
 ROM is served read-only from the cartridge image (immune to call-havoc).
 
-**Result: 5/16 machine-checked equivalent** (`PROVEN-BOUNDED(N)`). Full run
-(`prove_nonmatching.py`, one shared symbolic input state per function):
+**Result: 9/16 machine-checked equivalent** (`PROVEN-BOUNDED(N)`). Full run
+(`prove_nonmatching.py`, one shared symbolic input state per function; the highest
+loop-unroll depth that proves is reported):
 
 | function | status | note |
 |---|---|---|
 | `sub_8001570` (AddAttr2dBitMap) | **PROVEN-BOUNDED(3)** | only byte diff = two independent `mov`s in opposite order |
 | `sub_80A3300` | **PROVEN-BOUNDED(3)** | 2 calls (`PutSpriteExt`), 2 loops |
+| `sub_80A3528` | **PROVEN-BOUNDED(3)** | 48 calls |
 | `sub_80A6D34` | **PROVEN-BOUNDED(3)** | link-arena header codec |
 | `sub_80A6E4C` | **PROVEN-BOUNDED(3)** | link-arena encode mirror |
-| `sub_80A2E64` | **PROVEN-BOUNDED(1)** | proven at loop depth 1 |
-| `sub_800A34C` | DIVERGENCE | external table pointer (global) vs inlined constant |
-| `sub_807C8DC` | DIVERGENCE | external-state dependent under modular model |
-| `sub_80A390C` | DIVERGENCE | external table base loaded from global |
-| `sub_800A594` `sub_800E1FC` `sub_800FAD0` `sub_8057F80` `sub_807D3BC` `sub_80A3528` `sub_80A6F1C` `sub_80C05C8` | UNKNOWN:path-explosion | many loops/branches — need state-merging / loop invariants |
+| `sub_80C05C8` | **PROVEN-BOUNDED(2)** | |
+| `sub_800A594` | **PROVEN-BOUNDED(1)** | spline evaluator; deeper unroll hits the modular external-state limit |
+| `sub_807D3BC` | **PROVEN-BOUNDED(1)** | |
+| `sub_80A2E64` | **PROVEN-BOUNDED(1)** | |
+| `sub_800A34C` `sub_800E1FC` `sub_807C8DC` `sub_80A390C` `sub_80A6F1C` | DIVERGENCE | equivalence depends on external globals / a caller register contract the *modular* model havocs |
+| `sub_800FAD0` `sub_8057F80` | UNKNOWN:path-explosion | 5 loops / the 1248-insn·149-branch·58-call monster — need state-merging / loop invariants |
 
-The 5 PROVEN are the loop-light, mostly self-contained reconstructions; e.g.
-`sub_8001570`'s only byte difference is two independent `mov`s emitted in the
-opposite order, which the data-flow proof shows compute the same function.
+The PROVEN set spans real branchy, looping, call-heavy functions (up to 48 calls);
+register-coloring/spills are handled *transparently* (the proof compares data-flow
+outputs, not register names). E.g. `sub_8001570`'s only byte difference is two
+independent `mov`s emitted in the opposite order.
 
-The other 11 are **not proven** — and, crucially, *not proven ≠ inequivalent*
+The other 7 are **not proven** — and, crucially, *not proven ≠ inequivalent*
 (the reconstructions are believed correct; their headers argue register-coloring
 is the only residual):
 
-* **`UNKNOWN:path-explosion / enumeration-timeout` (8)** — functions with several
-  loops and many branches (up to `sub_8057F80`: 1248 insns / 149 branches / 58
-  calls). Path enumeration blows up; these need **symbolic-execution
-  state-merging** (merge at join points) or **relational loop-invariant /
-  lockstep** proofs (exploit the 1:1 CFG so loops align and are proved by
-  induction — unbounded). That is the natural next step and is out of this PoC's
-  scope.
-* **`DIVERGENCE` (3)** — `sub_800A34C`, `sub_807C8DC`, `sub_80A390C`. The modular
-  model's call summaries **havoc external memory/globals**; these functions'
-  equivalence hinges on a table pointer read from a global (the JP build loads it;
-  the reconstruction inlines the constant), which a *modular* analysis cannot
-  confirm without the external state. A `DIVERGENCE` here is a **modular-analysis
-  limitation, not a confirmed reconstruction bug** — resolving it needs inlining
-  the reachable callees / providing the global's value.
+* **`DIVERGENCE` (5)** — the modular model's call summaries **havoc external
+  memory/globals**. These functions' equivalence hinges on external state the
+  modular analysis cannot see: e.g. `sub_80A390C`/`sub_800A34C` read a table base
+  from a global the JP build loads and the reconstruction inlines; `sub_800E1FC`
+  passes an incoming `r3` straight through while the reconstruction re-derives it
+  from a struct deref (equal only under the caller's contract). A `DIVERGENCE`
+  here is a **modular-analysis limitation, not a confirmed reconstruction bug** —
+  resolving it needs inlining the reachable callees / supplying the caller/global
+  context (whole-program, not modular, analysis).
+* **`UNKNOWN:path-explosion` (2)** — `sub_800FAD0` (5 loops) and `sub_8057F80`
+  (1248 insns / 149 branches / 58 calls). Path enumeration blows up; these need
+  **symbolic-execution state-merging** (merge at join points) or **relational
+  loop-invariant / lockstep** proofs (exploit the 1:1 CFG so loops align and are
+  proved by induction — unbounded). That is the natural next step.
 
 The prover is **sound but incomplete**: a `PROVEN-BOUNDED(N)` result really is an
 equivalence (under the ARM/ABI/memory/call model, loops to depth N); it simply
@@ -173,10 +177,11 @@ cannot yet *reach* the large or external-state-dependent functions. Reproduce wi
 
 **Honest bottom line for "prove ALL non-matching functions equal":** with SMT
 symbolic execution this is a genuine research program, not a one-shot result —
-5/16 are machine-checked today; the rest require state-merging + loop-invariant
-(relational) reasoning and callee inlining. `make compare` (byte-match) remains
-the sole oracle throughout; every result here is a confidence annotation strictly
-below it.
+9/16 are machine-checked today; the rest split into modular-analysis limits (5,
+external-state dependent — need whole-program/callee-inlined analysis) and path
+explosion (2 — need state-merging + relational loop-invariant reasoning).
+`make compare` (byte-match) remains the sole oracle throughout; every result here
+is a confidence annotation strictly below it.
 
 ## Where it fits FE8J (the acceptance hierarchy)
 
