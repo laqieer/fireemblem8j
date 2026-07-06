@@ -9489,21 +9489,26 @@ call targets matched by **resolved address** so `CpuSet`==`sub_80D6370`;
 `_call_via_rN` veneers = indirect calls; ROM served read-only, immune to
 call-havoc).
 
-**Result: 9/16 `PROVEN-BOUNDED`** (sub_8001570/800A594/807D3BC/80A2E64/80A3300/
-80A3528/80A6D34/80A6E4C/80C05C8; highest proving unroll depth reported). 5
-`DIVERGENCE` (sub_800A34C/800E1FC/807C8DC/80A390C/80A6F1C — equivalence depends on
-an external global/caller register contract, or on comparing args to no-arg
-callees, that the modular model can't resolve; NOT confirmed reconstruction bugs).
-2 `UNKNOWN:path-explosion` (sub_800FAD0 = 5 loops, reduces to DIVERGENCE with a
-larger budget; sub_8057F80 = 1248 insns/149 br/58 calls). Three sound fixes drove
-5→9: (a) target vs candidate sizes differ for non-matching functions — use the
-true target size from assembling `asm/*.s` (candidate size truncated the longer
-target's epilogue → runaway); (b) a function's own (relocated) literal pool must
-be read from its OWN bytes, not the shared cartridge ROM (which holds the
-*target*'s bytes at that VMA); (c) report the highest loop-unroll depth that
-proves. The prover is **sound but incomplete**: PROVEN really is equivalent (under
-the ARM/ABI/memory/call model, loops to depth N); it cannot yet resolve
-external-state / callee-signature dependence or path explosion.
+**Result: 10/16 `PROVEN-BOUNDED`** (sub_8001570/800A594/807D3BC/80A2E64/80A3300/
+80A3528/80A390C/80A6D34/80A6E4C/80C05C8; highest proving unroll depth reported). 4
+`DIVERGENCE` (sub_800A34C/800E1FC/807C8DC/80A6F1C — equivalence depends on an
+external global, a caller register contract, a stack-frame buffer passed by
+pointer to a callee, or an indirect callback, that the modular model can't
+resolve; NOT confirmed reconstruction bugs). 2 `UNKNOWN:path-explosion`
+(sub_800FAD0 = 5 loops, reduces to DIVERGENCE with a larger budget; sub_8057F80 =
+1248 insns/149 br/58 calls). Four sound fixes drove 5→10: (a) target vs candidate
+sizes differ for non-matching functions — use the true target size from assembling
+`asm/*.s` (candidate size truncated the longer target's epilogue → runaway); (b) a
+function's own (relocated) literal pool must be read from its OWN bytes, not the
+shared cartridge ROM (which holds the *target*'s bytes at that VMA); (c) report the
+highest loop-unroll depth that proves; (d) a **sound full-CFG callee-arg-liveness**
+analysis (read-before-write over the callee's `(addr, written-set)` states,
+terminating; conservative on `svc`/`bx rN`/unknown insns) compares only the args a
+callee actually reads — e.g. `Decompress`'s args are provably `{r0,r1}`, lifting
+`sub_80A390C`. The prover is **sound but incomplete**: PROVEN really is equivalent
+(under the ARM/ABI/memory/call model, loops to depth N); it cannot yet resolve
+stack-frame-relational / indirect-callback / caller-contract dependence or path
+explosion.
 
 **"All 16" is a research program, not a one-shot.** The remaining 11 need
 symbolic-execution **state-merging** (avoid path blow-up) and **relational

@@ -28,7 +28,7 @@ import time
 import z3
 
 import cfg_exec
-from cfg_exec import CallOracle, Engine, Fn, LiftError, State
+from cfg_exec import CallOracle, Engine, Fn, LiftError, State, bits
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 GBA = os.path.join(ROOT, "fireemblem8.gba")
@@ -169,7 +169,141 @@ def mk_state(regs, data, stack, flags):
     return State(dict(regs), dict(flags), data, stack, [], [], [], {})
 
 
+_arg_cache = {}
+
+
+def _reg_rw(hw):
+    """(reads, writes, kind) over r-registers for a data insn; kind in
+    {'normal','return'}; None for branch/call/unknown. WRITES are UNDER-reported
+    when unsure (safe): a dropped arg is always provably dead."""
+    t5, t4, t6, t3 = bits(hw,15,11), bits(hw,15,12), bits(hw,15,10), bits(hw,15,13)
+    if t5 in (0b11110, 0b11111) or t4 == 0b1101 or t5 == 0b11100:
+        return None                                  # bl / branches
+    if t5 == 0b00011:                                # add/sub reg/imm3
+        I, rn, rs, rd = bits(hw,10,10), bits(hw,8,6), bits(hw,5,3), bits(hw,2,0)
+        return (({rs} if I else {rs, rn}), {rd}, 'normal')
+    if t3 == 0b000:                                  # shift imm
+        return ({bits(hw,5,3)}, {bits(hw,2,0)}, 'normal')
+    if t3 == 0b001:                                  # mov/cmp/add/sub imm8
+        op, rd = bits(hw,12,11), bits(hw,10,8)
+        if op == 0: return (set(), {rd}, 'normal')
+        if op == 1: return ({rd}, set(), 'normal')
+        return ({rd}, {rd}, 'normal')
+    if t6 == 0b010000:                               # ALU
+        op, rs, rd = bits(hw,9,6), bits(hw,5,3), bits(hw,2,0)
+        if op in (0x8, 0xA, 0xB): return ({rd, rs}, set(), 'normal')   # tst/cmp/cmn
+        if op in (0x9, 0xF): return ({rs}, {rd}, 'normal')             # neg/mvn
+        return ({rd, rs}, {rd}, 'normal')
+    if t6 == 0b010001:                               # hi-reg / bx
+        op, h1, h2 = bits(hw,9,8), bits(hw,7,7), bits(hw,6,6)
+        rs = bits(hw,5,3) | (h2<<3); rd = bits(hw,2,0) | (h1<<3)
+        if op == 3: return ({rs}, set(), 'return')           # bx (reads target reg)
+        if op == 2: return ({rs}, {rd}, 'normal')
+        if op == 0: return ({rd, rs}, {rd}, 'normal')
+        return ({rd, rs}, set(), 'normal')                   # cmp
+    if t5 == 0b01001:                                # pc-rel load
+        return (set(), {bits(hw,10,8)}, 'normal')
+    if t4 == 0b0101:                                 # load/store reg offset
+        ro, rb, rd = bits(hw,8,6), bits(hw,5,3), bits(hw,2,0)
+        L = bits(hw,11,11) if bits(hw,9,9) == 0 else (1 if bits(hw,11,11) else (0 if bits(hw,10,10)==0 else 1))
+        if L: return ({rb, ro}, {rd}, 'normal')
+        return ({rd, rb, ro}, set(), 'normal')
+    if t3 == 0b011 or t4 == 0b1000:                  # load/store imm word/byte/half
+        L, rb, rd = bits(hw,11,11), bits(hw,5,3), bits(hw,2,0)
+        if L: return ({rb}, {rd}, 'normal')
+        return ({rd, rb}, set(), 'normal')
+    if t4 == 0b1001:                                 # sp-rel load/store
+        L, rd = bits(hw,11,11), bits(hw,10,8)
+        return ((set(), {rd}, 'normal') if L else ({rd}, set(), 'normal'))
+    if t4 == 0b1010:                                 # load address
+        return (set(), {bits(hw,10,8)}, 'normal')
+    if bits(hw,15,8) == 0b10110000:                  # add sp
+        return (set(), set(), 'normal')
+    if t4 == 0b1011 and bits(hw,10,9) == 0b10:       # push/pop
+        L, Rb = bits(hw,11,11), bits(hw,8,8)
+        rlist = {i for i in range(8) if (hw>>i)&1}
+        if not L: return (rlist, set(), 'normal')
+        if Rb: return (set(), rlist, 'return')       # pop {..,pc}
+        return (set(), rlist, 'normal')
+    if t4 == 0b1100:                                 # ldmia/stmia
+        L, rb = bits(hw,11,11), bits(hw,10,8)
+        rlist = {i for i in range(8) if (hw>>i)&1}
+        if L: return ({rb}, rlist | {rb}, 'normal')
+        return (rlist | {rb}, {rb}, 'normal')
+    return None
+
+
+def _decode_liveness(rom, addr):
+    """(reads, writes, kind, successors) for the r0-r3 liveness scan; None if the
+    instruction is unrecognised (caller then keeps all args, conservatively)."""
+    off = addr - 0x08000000
+    if off < 0 or off + 2 > len(rom):
+        return None
+    hw = int.from_bytes(rom[off:off+2], "little")
+    t5, t4, t6 = bits(hw,15,11), bits(hw,15,12), bits(hw,15,10)
+    if t5 in (0b11110, 0b11111):                     # bl (call)
+        return (set(), set(), 'call', [addr + 4])
+    if t4 == 0b1101:                                 # conditional branch
+        cc = bits(hw, 11, 8)
+        if cc >= 0b1110:
+            return None                              # swi (BIOS call) / undef -> conservative
+        o = bits(hw, 7, 0); o = o - 256 if o >= 128 else o
+        return (set(), set(), 'branch', [addr + 4 + o * 2, addr + 2])
+    if t5 == 0b11100:                                # unconditional branch
+        o = bits(hw, 10, 0); o = o - 2048 if o >= 1024 else o
+        return (set(), set(), 'branch', [addr + 4 + o * 2])
+    rw = _reg_rw(hw)
+    if rw is None:
+        return None
+    reads, writes, kind = rw
+    return (reads, writes, kind, [] if kind == 'return' else [addr + 2])
+
+
+def callee_arg_regs(rom, entry):
+    """Sound over-approximation of which of r0-r3 a callee reads as inputs.
+    Full-CFG read-before-write analysis over (addr, written-set) states — this
+    lattice is finite so it terminates on loops. Returns {0,1,2,3} (compare all
+    args) if the callee can't be fully analysed (unknown insn / state budget)."""
+    if not isinstance(entry, int):
+        return {0, 1, 2, 3}
+    if entry in _arg_cache:
+        return _arg_cache[entry]
+    args, seen, stack, steps = set(), set(), [(entry, frozenset())], 0
+    complete = True
+    while stack:
+        addr, written = stack.pop()
+        if (addr, written) in seen:
+            continue
+        seen.add((addr, written))
+        steps += 1
+        if steps > 8000:
+            complete = False; break
+        d = _decode_liveness(rom, addr)
+        if d is None:
+            complete = False; break
+        reads, writes, kind, succs = d
+        for r in reads:
+            if r in (0, 1, 2, 3) and r not in written:
+                args.add(r)
+        nw = set(written) | {r for r in writes if r in (0, 1, 2, 3)}
+        if kind == 'call':
+            for r in (0, 1, 2, 3):
+                if r not in nw:
+                    args.add(r)
+            nw |= {0, 1, 2, 3}                        # r0-r3 clobbered by the call
+        if len(args) == 4:
+            break                                    # all args live; nothing to drop
+        if kind == 'return':
+            continue
+        for s in succs:
+            stack.append((s, frozenset(nw)))
+    res = args if complete else {0, 1, 2, 3}
+    _arg_cache[entry] = res
+    return res
+
+
 def obs_differ(a, b):
+    rom = rom_image()
     terms = []
     terms.append(a.regs[0] != b.regs[0])
     for r in CALLEE_SAVED:
@@ -182,13 +316,16 @@ def obs_differ(a, b):
         ta, tb = ca["target"], cb["target"]
         if isinstance(ta, tuple) and isinstance(tb, tuple):
             terms.append(ta[1] != tb[1])          # indirect: compare pointer value
+            argset = {0, 1, 2, 3}                 # unknown callee -> all args
         elif type(ta) == type(tb) and not isinstance(ta, tuple):
             if ta != tb:                          # int addr or str: must match
                 return z3.BoolVal(True)
+            argset = callee_arg_regs(rom, ta)     # compare only args the callee reads
         else:
             return z3.BoolVal(True)               # kind mismatch (direct vs indirect)
-        for x, y in zip(ca["args"], cb["args"]):
-            terms.append(x != y)
+        for j in range(4):
+            if j in argset:
+                terms.append(ca["args"][j] != cb["args"][j])
     # mmio trace
     if len(a.mmio) != len(b.mmio):
         return z3.BoolVal(True)

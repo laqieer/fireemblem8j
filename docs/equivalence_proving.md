@@ -128,7 +128,7 @@ targets are matched by **resolved address** (so `CpuSet` == `sub_80D6370`),
 `_call_via_rN` veneers as indirect calls (the register choice is not a diff), and
 ROM is served read-only from the cartridge image (immune to call-havoc).
 
-**Result: 9/16 machine-checked equivalent** (`PROVEN-BOUNDED(N)`). Full run
+**Result: 10/16 machine-checked equivalent** (`PROVEN-BOUNDED(N)`). Full run
 (`prove_nonmatching.py`, one shared symbolic input state per function; the highest
 loop-unroll depth that proves is reported):
 
@@ -137,36 +137,37 @@ loop-unroll depth that proves is reported):
 | `sub_8001570` (AddAttr2dBitMap) | **PROVEN-BOUNDED(3)** | only byte diff = two independent `mov`s in opposite order |
 | `sub_80A3300` | **PROVEN-BOUNDED(3)** | 2 calls (`PutSpriteExt`), 2 loops |
 | `sub_80A3528` | **PROVEN-BOUNDED(3)** | 48 calls |
+| `sub_80A390C` | **PROVEN-BOUNDED(3)** | 20 calls; proven once `Decompress`'s args are shown to be {r0,r1} |
 | `sub_80A6D34` | **PROVEN-BOUNDED(3)** | link-arena header codec |
 | `sub_80A6E4C` | **PROVEN-BOUNDED(3)** | link-arena encode mirror |
 | `sub_80C05C8` | **PROVEN-BOUNDED(2)** | |
 | `sub_800A594` | **PROVEN-BOUNDED(1)** | spline evaluator; deeper unroll hits the modular external-state limit |
 | `sub_807D3BC` | **PROVEN-BOUNDED(1)** | |
 | `sub_80A2E64` | **PROVEN-BOUNDED(1)** | |
-| `sub_800A34C` `sub_800E1FC` `sub_807C8DC` `sub_80A390C` `sub_80A6F1C` | DIVERGENCE | equivalence depends on external globals / a caller register contract the *modular* model havocs |
+| `sub_800A34C` `sub_800E1FC` `sub_807C8DC` `sub_80A6F1C` | DIVERGENCE | external global / caller register contract / **stack-frame buffer passed by pointer to a callee** / **indirect callback** — modular limits |
 | `sub_800FAD0` `sub_8057F80` | UNKNOWN:path-explosion | `sub_800FAD0` (5 loops, 4200 paths) also reduces to a modular DIVERGENCE with a larger time budget; `sub_8057F80` = the 1248-insn·149-branch·58-call monster — needs state-merging / loop invariants |
 
 The PROVEN set spans real branchy, looping, call-heavy functions (up to 48 calls);
 register-coloring/spills are handled *transparently* (the proof compares data-flow
 outputs, not register names). E.g. `sub_8001570`'s only byte difference is two
-independent `mov`s emitted in the opposite order.
+independent `mov`s emitted in the opposite order. A **sound full-CFG callee-arg
+liveness** (read-before-write over a callee's `(addr, written-set)` states,
+conservative on `svc`/unknown insns) compares only the args a callee actually
+reads — e.g. `Decompress`'s args are provably `{r0,r1}`, so a dead `r3` the JP
+build happens to set is not a spurious diff; this lifted `sub_80A390C` to PROVEN.
 
-The other 7 are **not proven** — and, crucially, *not proven ≠ inequivalent*
+The other 6 are **not proven** — and, crucially, *not proven ≠ inequivalent*
 (the reconstructions are believed correct; their headers argue register-coloring
 is the only residual):
 
-* **`DIVERGENCE` (5)** — the modular model's call summaries **havoc external
-  memory/globals** and lack **callee signatures**. These functions' equivalence
-  hinges on state the modular analysis cannot see: e.g. `sub_80A390C`/`sub_800A34C`
-  read a table base from a global the JP build loads and the reconstruction
-  inlines; `sub_800E1FC` passes an incoming `r3` straight through while the
-  reconstruction re-derives it from a struct deref (equal only under the caller's
-  contract); `sub_80A6F1C` leaves different dead values in `r0` before calls to a
-  **no-arg PRNG** (`sub_80A6AA8`) — the conservative "compare all of r0–r3 as
-  args" then flags a semantically-irrelevant difference. A `DIVERGENCE` here is a
-  **modular-analysis limitation, not a confirmed reconstruction bug** — resolving
-  it needs callee signatures / inlining the reachable callees / supplying the
-  caller/global context (whole-program, not modular, analysis).
+* **`DIVERGENCE` (4)** — equivalence hinges on state the *modular* model cannot
+  resolve: `sub_800A34C` passes **stack-frame local buffers at different spill
+  offsets** by pointer to a callee that writes through them; `sub_800E1FC` passes
+  an incoming `r3` straight through vs re-deriving it (caller contract);
+  `sub_80A6F1C` uses an **indirect callback** with a stack address escaping to it.
+  A `DIVERGENCE` here is a **modular-analysis limitation, not a confirmed
+  reconstruction bug** — resolving it needs relational stack-frame modelling /
+  callee inlining / whole-program context.
 * **`UNKNOWN:path-explosion` (2)** — `sub_800FAD0` (5 loops, 4200 paths — with a
   larger time budget it completes and shows the same modular `DIVERGENCE`) and
   `sub_8057F80` (1248 insns / 149 branches / 58 calls — a genuine path-enumeration
@@ -182,11 +183,12 @@ cannot yet *reach* the large or external-state-dependent functions. Reproduce wi
 
 **Honest bottom line for "prove ALL non-matching functions equal":** with SMT
 symbolic execution this is a genuine research program, not a one-shot result —
-9/16 are machine-checked today; the rest split into modular-analysis limits (5,
-external-state dependent — need whole-program/callee-inlined analysis) and path
-explosion (2 — need state-merging + relational loop-invariant reasoning).
-`make compare` (byte-match) remains the sole oracle throughout; every result here
-is a confidence annotation strictly below it.
+10/16 are machine-checked today; the rest split into modular-analysis limits (4,
+external-state / stack-frame / indirect-callback dependent — need
+whole-program/callee-inlined/relational analysis) and path explosion (2 — need
+state-merging + relational loop-invariant reasoning). `make compare` (byte-match)
+remains the sole oracle throughout; every result here is a confidence annotation
+strictly below it.
 
 ## Where it fits FE8J (the acceptance hierarchy)
 
