@@ -9622,3 +9622,33 @@ Residual: 1 of 115 writes differs — gEkrSpellAnimIndex[POS_R]=0 (target) vs 0x
 (reconstruction), a genuine small spell-anim control-flow difference; plus the
 ~46-byte codegen/register-coloring size gap for a full byte-match. Both are RE
 follow-ups. sub_8057F80 went from untestable to 114/115-writes-equivalent.
+
+### D349 addendum 5 — angr spike outcome: partial adoption, defer full port (2026-07-06)
+
+Community feedback (Camdar, Discussion #149) suggested a mature engine (CBMC / angr)
+and asked what proposition is posed to Z3. Response: (a) documented the exact proof
+obligation in docs/equivalence_proving.md ("The exact proposition posed to Z3");
+(b) noted CBMC is C/goto-only (lifting the target to C -> weaker ground truth than
+our ARM-vs-ARM check) and Rupicola is forward-only (spec->code, not binary
+verification); (c) ran a SCOPED angr spike (scripts/tools/thumb_equiv/angr_spike/,
+commit 8fbc9fc53), design pre-reviewed by the rubber-duck agent for soundness traps.
+
+Spike evidence (three separated questions):
+- Q1 ISA-completeness: VEX lifts branch/call THUMB our straight-line PoC lifter
+  rejected -> useful as a decoder/lifter reference.
+- Q2 sound proving: an adversarial known-answer suite passed 8/8 (identical->PROVE,
+  r0 vs r0+1->REFUTE, symbolic-address->UNKNOWN, external-call-same-args->PROVE via
+  shared uninterpreted oracle, callee-havoc->not-PROVE) with strict controls
+  (auto_load_libs=False, raw blob, call oracle, cross-product path comparison,
+  concrete PC/SP, inspect hooks forcing symbolic-address concretization to UNKNOWN).
+  BUT real functions did not reproduce the prover's PROVEN (sub_8001570 TIMEOUT,
+  sub_80A3300 UNKNOWN) without porting FE8J-specific memory/callee models.
+- Q3 scaling: no cheap state-merging win on sub_8057F80.
+
+DECISION: **Do not adopt angr as a drop-in prover replacement** (would be a rewrite
+of the hard FE8J modelling, not an engine swap) while the hand-rolled tool already
+covers 12/16 formal + 2 differential. **Adopt VEX/angr partially** as a decoder/
+lifter sanity-check reference. Keep prove_nonmatching.py as the trusted prover.
+Revisit only if an angr prototype reproduces the full 12/16 PROVEN set and passes
+the adversarial suite with no false PROVE. make compare unaffected throughout
+(the spike is an isolated venv + isolated dir).
