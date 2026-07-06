@@ -1,0 +1,247 @@
+
+** Results:
+./build/cbmc_8001570/ref_byteptr.c function ref_AddAttr2dBitMap
+[ref_AddAttr2dBitMap.overflow.1] line 20 arithmetic overflow on signed + in (signed int)*((u8 *)((s8 *)arg1 + 0)) + 1: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.1] line 20 pointer arithmetic: pointer NULL in (s8 *)arg1 + 0: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.2] line 20 pointer arithmetic: pointer invalid in (s8 *)arg1 + 0: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.3] line 20 pointer arithmetic: deallocated dynamic object in (s8 *)arg1 + 0: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.4] line 20 pointer arithmetic: dead object in (s8 *)arg1 + 0: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.5] line 20 pointer arithmetic: pointer outside object bounds in (s8 *)arg1 + 0: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.6] line 20 pointer arithmetic: invalid integer address in (s8 *)arg1 + 0: SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.1] line 20 dereference failure: pointer NULL in *((u8 *)((s8 *)arg1 + 0)): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.2] line 20 dereference failure: pointer invalid in *((u8 *)((s8 *)arg1 + 0)): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.3] line 20 dereference failure: deallocated dynamic object in *((u8 *)((s8 *)arg1 + 0)): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.4] line 20 dereference failure: dead object in *((u8 *)((s8 *)arg1 + 0)): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.5] line 20 dereference failure: pointer outside object bounds in *((u8 *)((s8 *)arg1 + 0)): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.6] line 20 dereference failure: invalid integer address in *((u8 *)((s8 *)arg1 + 0)): SUCCESS
+[ref_AddAttr2dBitMap.overflow.2] line 21 arithmetic overflow on signed + in (signed int)*((u8 *)((s8 *)arg1 + 1)) + 1: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.7] line 21 pointer arithmetic: pointer NULL in (s8 *)arg1 + 1: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.8] line 21 pointer arithmetic: pointer invalid in (s8 *)arg1 + 1: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.9] line 21 pointer arithmetic: deallocated dynamic object in (s8 *)arg1 + 1: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.10] line 21 pointer arithmetic: dead object in (s8 *)arg1 + 1: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.11] line 21 pointer arithmetic: pointer outside object bounds in (s8 *)arg1 + 1: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.12] line 21 pointer arithmetic: invalid integer address in (s8 *)arg1 + 1: SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.7] line 21 dereference failure: pointer NULL in *((u8 *)((s8 *)arg1 + 1)): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.8] line 21 dereference failure: pointer invalid in *((u8 *)((s8 *)arg1 + 1)): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.9] line 21 dereference failure: deallocated dynamic object in *((u8 *)((s8 *)arg1 + 1)): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.10] line 21 dereference failure: dead object in *((u8 *)((s8 *)arg1 + 1)): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.11] line 21 dereference failure: pointer outside object bounds in *((u8 *)((s8 *)arg1 + 1)): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.12] line 21 dereference failure: invalid integer address in *((u8 *)((s8 *)arg1 + 1)): SUCCESS
+[ref_AddAttr2dBitMap.overflow.3] line 26 arithmetic overflow on signed + in (signed int)var_r1 + (signed int)var_r6: SUCCESS
+[ref_AddAttr2dBitMap.overflow.4] line 27 arithmetic overflow on signed - in 0x20 - (signed int)var_r1: SUCCESS
+[ref_AddAttr2dBitMap.overflow.5] line 30 arithmetic overflow on signed - in 0 - (signed int)var_r1: SUCCESS
+[ref_AddAttr2dBitMap.overflow.6] line 31 arithmetic overflow on signed - in (signed int)var_r6 - (signed int)var_r5: SUCCESS
+[ref_AddAttr2dBitMap.overflow.7] line 35 arithmetic overflow on signed + in (signed int)var_r3 + (signed int)var_r2: SUCCESS
+[ref_AddAttr2dBitMap.overflow.8] line 36 arithmetic overflow on signed - in 0x20 - (signed int)var_r3: SUCCESS
+[ref_AddAttr2dBitMap.overflow.9] line 39 arithmetic overflow on signed - in 0 - (signed int)var_r3: SUCCESS
+[ref_AddAttr2dBitMap.overflow.10] line 40 arithmetic overflow on signed - in (signed int)var_r2 - (signed int)var_r4: SUCCESS
+[ref_AddAttr2dBitMap.overflow.11] line 44 arithmetic overflow on signed + in (signed int)var_r4 + (signed int)var_r2: SUCCESS
+[ref_AddAttr2dBitMap.overflow.12] line 44 arithmetic overflow on signed - in (signed int)temp_r8 - ((signed int)var_r4 + (signed int)var_r2): SUCCESS
+[ref_AddAttr2dBitMap.overflow.13] line 44 arithmetic overflow on signed * in ((signed int)temp_r8 - ((signed int)var_r4 + (signed int)var_r2)) * (signed int)temp_ip: SUCCESS
+[ref_AddAttr2dBitMap.overflow.14] line 44 arithmetic overflow on signed * in ((signed int)temp_r8 - ((signed int)var_r4 + (signed int)var_r2)) * (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.13] line 44 pointer arithmetic: pointer NULL in (char *)arg1 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.14] line 44 pointer arithmetic: pointer invalid in (char *)arg1 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.15] line 44 pointer arithmetic: deallocated dynamic object in (char *)arg1 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.16] line 44 pointer arithmetic: dead object in (char *)arg1 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.17] line 44 pointer arithmetic: pointer outside object bounds in (char *)arg1 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.18] line 44 pointer arithmetic: invalid integer address in (char *)arg1 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.19] line 44 pointer arithmetic: pointer NULL in (char *)arg1 + 2 + ((signed int)temp_r8 - ((signed int)var_r4 + (signed int)var_r2)) * (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.20] line 44 pointer arithmetic: pointer invalid in (char *)arg1 + 2 + ((signed int)temp_r8 - ((signed int)var_r4 + (signed int)var_r2)) * (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.21] line 44 pointer arithmetic: deallocated dynamic object in (char *)arg1 + 2 + ((signed int)temp_r8 - ((signed int)var_r4 + (signed int)var_r2)) * (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.22] line 44 pointer arithmetic: dead object in (char *)arg1 + 2 + ((signed int)temp_r8 - ((signed int)var_r4 + (signed int)var_r2)) * (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.23] line 44 pointer arithmetic: pointer outside object bounds in (char *)arg1 + 2 + ((signed int)temp_r8 - ((signed int)var_r4 + (signed int)var_r2)) * (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.24] line 44 pointer arithmetic: invalid integer address in (char *)arg1 + 2 + ((signed int)temp_r8 - ((signed int)var_r4 + (signed int)var_r2)) * (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.overflow.15] line 45 arithmetic overflow on signed + in (signed int)var_r3 + (signed int)var_r2: SUCCESS
+[ref_AddAttr2dBitMap.overflow.16] line 45 arithmetic overflow on signed - in ((signed int)var_r3 + (signed int)var_r2) - 1: SUCCESS
+[ref_AddAttr2dBitMap.overflow.17] line 45 arithmetic overflow on signed shl in ((signed int)var_r3 + (signed int)var_r2) - 1 << 6: SUCCESS
+[ref_AddAttr2dBitMap.overflow.18] line 45 arithmetic overflow on signed * in (signed int)var_r1 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.25] line 45 pointer arithmetic: pointer NULL in (((signed int)var_r3 + (signed int)var_r2) - 1 << 6) + arg0: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.26] line 45 pointer arithmetic: pointer invalid in (((signed int)var_r3 + (signed int)var_r2) - 1 << 6) + arg0: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.27] line 45 pointer arithmetic: deallocated dynamic object in (((signed int)var_r3 + (signed int)var_r2) - 1 << 6) + arg0: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.28] line 45 pointer arithmetic: dead object in (((signed int)var_r3 + (signed int)var_r2) - 1 << 6) + arg0: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.29] line 45 pointer arithmetic: pointer outside object bounds in (((signed int)var_r3 + (signed int)var_r2) - 1 << 6) + arg0: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.30] line 45 pointer arithmetic: invalid integer address in (((signed int)var_r3 + (signed int)var_r2) - 1 << 6) + arg0: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.31] line 45 pointer arithmetic: pointer NULL in (((signed int)var_r3 + (signed int)var_r2) - 1 << 6) + arg0 + (signed int)var_r1 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.32] line 45 pointer arithmetic: pointer invalid in (((signed int)var_r3 + (signed int)var_r2) - 1 << 6) + arg0 + (signed int)var_r1 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.33] line 45 pointer arithmetic: deallocated dynamic object in (((signed int)var_r3 + (signed int)var_r2) - 1 << 6) + arg0 + (signed int)var_r1 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.34] line 45 pointer arithmetic: dead object in (((signed int)var_r3 + (signed int)var_r2) - 1 << 6) + arg0 + (signed int)var_r1 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.35] line 45 pointer arithmetic: pointer outside object bounds in (((signed int)var_r3 + (signed int)var_r2) - 1 << 6) + arg0 + (signed int)var_r1 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.36] line 45 pointer arithmetic: invalid integer address in (((signed int)var_r3 + (signed int)var_r2) - 1 << 6) + arg0 + (signed int)var_r1 * 2: SUCCESS
+[ref_AddAttr2dBitMap.undefined-shift.1] line 45 shift operand is negative in ((signed int)var_r3 + (signed int)var_r2) - 1 << 6: SUCCESS
+[ref_AddAttr2dBitMap.overflow.19] line 46 arithmetic overflow on signed - in (signed int)var_r2 - 1: SUCCESS
+[ref_AddAttr2dBitMap.overflow.20] line 50 arithmetic overflow on signed * in (signed int)var_r5 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.37] line 50 pointer arithmetic: pointer NULL in (char *)var_r7 + (signed int)var_r5 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.38] line 50 pointer arithmetic: pointer invalid in (char *)var_r7 + (signed int)var_r5 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.39] line 50 pointer arithmetic: deallocated dynamic object in (char *)var_r7 + (signed int)var_r5 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.40] line 50 pointer arithmetic: dead object in (char *)var_r7 + (signed int)var_r5 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.41] line 50 pointer arithmetic: pointer outside object bounds in (char *)var_r7 + (signed int)var_r5 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.42] line 50 pointer arithmetic: invalid integer address in (char *)var_r7 + (signed int)var_r5 * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.43] line 51 pointer arithmetic: pointer NULL in var_r2_2 - 0x40: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.44] line 51 pointer arithmetic: pointer invalid in var_r2_2 - 0x40: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.45] line 51 pointer arithmetic: deallocated dynamic object in var_r2_2 - 0x40: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.46] line 51 pointer arithmetic: dead object in var_r2_2 - 0x40: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.47] line 51 pointer arithmetic: pointer outside object bounds in var_r2_2 - 0x40: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.48] line 51 pointer arithmetic: invalid integer address in var_r2_2 - 0x40: SUCCESS
+[ref_AddAttr2dBitMap.overflow.21] line 55 arithmetic overflow on signed + in (signed int)*((u16 *)var_r3_2) + (signed int)(u16)arg4: SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.13] line 55 dereference failure: pointer NULL in *((u16 *)var_r2_2): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.14] line 55 dereference failure: pointer invalid in *((u16 *)var_r2_2): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.15] line 55 dereference failure: deallocated dynamic object in *((u16 *)var_r2_2): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.16] line 55 dereference failure: dead object in *((u16 *)var_r2_2): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.17] line 55 dereference failure: pointer outside object bounds in *((u16 *)var_r2_2): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.18] line 55 dereference failure: invalid integer address in *((u16 *)var_r2_2): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.19] line 55 dereference failure: pointer NULL in *((u16 *)var_r3_2): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.20] line 55 dereference failure: pointer invalid in *((u16 *)var_r3_2): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.21] line 55 dereference failure: deallocated dynamic object in *((u16 *)var_r3_2): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.22] line 55 dereference failure: dead object in *((u16 *)var_r3_2): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.23] line 55 dereference failure: pointer outside object bounds in *((u16 *)var_r3_2): SUCCESS
+[ref_AddAttr2dBitMap.pointer_dereference.24] line 55 dereference failure: invalid integer address in *((u16 *)var_r3_2): SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.49] line 56 pointer arithmetic: pointer NULL in var_r3_2 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.50] line 56 pointer arithmetic: pointer invalid in var_r3_2 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.51] line 56 pointer arithmetic: deallocated dynamic object in var_r3_2 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.52] line 56 pointer arithmetic: dead object in var_r3_2 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.53] line 56 pointer arithmetic: pointer outside object bounds in var_r3_2 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.54] line 56 pointer arithmetic: invalid integer address in var_r3_2 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.55] line 57 pointer arithmetic: pointer NULL in var_r2_2 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.56] line 57 pointer arithmetic: pointer invalid in var_r2_2 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.57] line 57 pointer arithmetic: deallocated dynamic object in var_r2_2 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.58] line 57 pointer arithmetic: dead object in var_r2_2 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.59] line 57 pointer arithmetic: pointer outside object bounds in var_r2_2 + 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.60] line 57 pointer arithmetic: invalid integer address in var_r2_2 + 2: SUCCESS
+[ref_AddAttr2dBitMap.overflow.22] line 58 arithmetic overflow on signed - in (signed int)var_r1_3 - 1: SUCCESS
+[ref_AddAttr2dBitMap.unwind.0] line 59 unwinding assertion loop 0: SUCCESS
+[ref_AddAttr2dBitMap.overflow.23] line 61 arithmetic overflow on signed * in (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.61] line 61 pointer arithmetic: pointer NULL in (char *)var_r7 + (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.62] line 61 pointer arithmetic: pointer invalid in (char *)var_r7 + (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.63] line 61 pointer arithmetic: deallocated dynamic object in (char *)var_r7 + (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.64] line 61 pointer arithmetic: dead object in (char *)var_r7 + (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.65] line 61 pointer arithmetic: pointer outside object bounds in (char *)var_r7 + (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.pointer_arithmetic.66] line 61 pointer arithmetic: invalid integer address in (char *)var_r7 + (signed int)temp_ip * 2: SUCCESS
+[ref_AddAttr2dBitMap.overflow.24] line 63 arithmetic overflow on signed - in var_r0 - 1: SUCCESS
+[ref_AddAttr2dBitMap.unwind.1] line 64 unwinding assertion loop 1: SUCCESS
+
+./src/nonmatching/sub_8001570.c function impl_AddAttr2dBitMap
+[impl_AddAttr2dBitMap.overflow.1] line 76 arithmetic overflow on signed + in (signed int)((u8 *)_src)[0] + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.1] line 76 pointer arithmetic: pointer NULL in (u8 *)_src + 0: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.2] line 76 pointer arithmetic: pointer invalid in (u8 *)_src + 0: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.3] line 76 pointer arithmetic: deallocated dynamic object in (u8 *)_src + 0: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.4] line 76 pointer arithmetic: dead object in (u8 *)_src + 0: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.5] line 76 pointer arithmetic: pointer outside object bounds in (u8 *)_src + 0: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.6] line 76 pointer arithmetic: invalid integer address in (u8 *)_src + 0: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.1] line 76 dereference failure: pointer NULL in ((u8 *)_src)[0]: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.2] line 76 dereference failure: pointer invalid in ((u8 *)_src)[0]: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.3] line 76 dereference failure: deallocated dynamic object in ((u8 *)_src)[0]: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.4] line 76 dereference failure: dead object in ((u8 *)_src)[0]: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.5] line 76 dereference failure: pointer outside object bounds in ((u8 *)_src)[0]: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.6] line 76 dereference failure: invalid integer address in ((u8 *)_src)[0]: SUCCESS
+[impl_AddAttr2dBitMap.overflow.2] line 77 arithmetic overflow on signed + in (signed int)((u8 *)_src)[1] + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.7] line 77 pointer arithmetic: pointer NULL in (u8 *)_src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.8] line 77 pointer arithmetic: pointer invalid in (u8 *)_src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.9] line 77 pointer arithmetic: deallocated dynamic object in (u8 *)_src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.10] line 77 pointer arithmetic: dead object in (u8 *)_src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.11] line 77 pointer arithmetic: pointer outside object bounds in (u8 *)_src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.12] line 77 pointer arithmetic: invalid integer address in (u8 *)_src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.7] line 77 dereference failure: pointer NULL in ((u8 *)_src)[1]: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.8] line 77 dereference failure: pointer invalid in ((u8 *)_src)[1]: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.9] line 77 dereference failure: deallocated dynamic object in ((u8 *)_src)[1]: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.10] line 77 dereference failure: dead object in ((u8 *)_src)[1]: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.11] line 77 dereference failure: pointer outside object bounds in ((u8 *)_src)[1]: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.12] line 77 dereference failure: invalid integer address in ((u8 *)_src)[1]: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.13] line 80 pointer arithmetic: pointer NULL in _src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.14] line 80 pointer arithmetic: pointer invalid in _src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.15] line 80 pointer arithmetic: deallocated dynamic object in _src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.16] line 80 pointer arithmetic: dead object in _src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.17] line 80 pointer arithmetic: pointer outside object bounds in _src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.18] line 80 pointer arithmetic: invalid integer address in _src + 1: SUCCESS
+[impl_AddAttr2dBitMap.overflow.3] line 84 arithmetic overflow on signed + in (signed int)ix + (signed int)width: SUCCESS
+[impl_AddAttr2dBitMap.overflow.4] line 85 arithmetic overflow on signed - in 0x20 - (signed int)ix: SUCCESS
+[impl_AddAttr2dBitMap.overflow.5] line 89 arithmetic overflow on signed unary minus in -((signed int)ix): SUCCESS
+[impl_AddAttr2dBitMap.overflow.6] line 90 arithmetic overflow on signed - in (signed int)width - (signed int)_ix: SUCCESS
+[impl_AddAttr2dBitMap.overflow.7] line 97 arithmetic overflow on signed + in (signed int)iy + (signed int)height: SUCCESS
+[impl_AddAttr2dBitMap.overflow.8] line 98 arithmetic overflow on signed - in 0x20 - (signed int)iy: SUCCESS
+[impl_AddAttr2dBitMap.overflow.9] line 102 arithmetic overflow on signed unary minus in -((signed int)iy): SUCCESS
+[impl_AddAttr2dBitMap.overflow.10] line 103 arithmetic overflow on signed - in (signed int)height - (signed int)_iy: SUCCESS
+[impl_AddAttr2dBitMap.overflow.11] line 109 arithmetic overflow on signed + in (signed int)_iy + (signed int)height: SUCCESS
+[impl_AddAttr2dBitMap.overflow.12] line 109 arithmetic overflow on signed - in (signed int)_height - ((signed int)_iy + (signed int)height): SUCCESS
+[impl_AddAttr2dBitMap.overflow.13] line 109 arithmetic overflow on signed * in (signed int)_width * ((signed int)_height - ((signed int)_iy + (signed int)height)): SUCCESS
+[impl_AddAttr2dBitMap.overflow.14] line 109 arithmetic overflow on signed * in (signed int)_width * ((signed int)_height - ((signed int)_iy + (signed int)height)) * (signed int)2u: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.19] line 109 pointer arithmetic: pointer NULL in _src + (signed int)_width * ((signed int)_height - ((signed int)_iy + (signed int)height)): SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.20] line 109 pointer arithmetic: pointer invalid in _src + (signed int)_width * ((signed int)_height - ((signed int)_iy + (signed int)height)): SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.21] line 109 pointer arithmetic: deallocated dynamic object in _src + (signed int)_width * ((signed int)_height - ((signed int)_iy + (signed int)height)): SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.22] line 109 pointer arithmetic: dead object in _src + (signed int)_width * ((signed int)_height - ((signed int)_iy + (signed int)height)): SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.23] line 109 pointer arithmetic: pointer outside object bounds in _src + (signed int)_width * ((signed int)_height - ((signed int)_iy + (signed int)height)): SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.24] line 109 pointer arithmetic: invalid integer address in _src + (signed int)_width * ((signed int)_height - ((signed int)_iy + (signed int)height)): SUCCESS
+[impl_AddAttr2dBitMap.overflow.15] line 110 arithmetic overflow on signed + in (signed int)iy + (signed int)height: SUCCESS
+[impl_AddAttr2dBitMap.overflow.16] line 110 arithmetic overflow on signed - in ((signed int)iy + (signed int)height) - 1: SUCCESS
+[impl_AddAttr2dBitMap.overflow.17] line 110 arithmetic overflow on signed * in (((signed int)iy + (signed int)height) - 1) * 0x20: SUCCESS
+[impl_AddAttr2dBitMap.overflow.18] line 110 arithmetic overflow on signed * in (((signed int)iy + (signed int)height) - 1) * 0x20 * (signed int)2u: SUCCESS
+[impl_AddAttr2dBitMap.overflow.19] line 110 arithmetic overflow on signed * in (signed int)ix * (signed int)2u: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.25] line 110 pointer arithmetic: pointer NULL in _dst + (((signed int)iy + (signed int)height) - 1) * 0x20: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.26] line 110 pointer arithmetic: pointer invalid in _dst + (((signed int)iy + (signed int)height) - 1) * 0x20: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.27] line 110 pointer arithmetic: deallocated dynamic object in _dst + (((signed int)iy + (signed int)height) - 1) * 0x20: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.28] line 110 pointer arithmetic: dead object in _dst + (((signed int)iy + (signed int)height) - 1) * 0x20: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.29] line 110 pointer arithmetic: pointer outside object bounds in _dst + (((signed int)iy + (signed int)height) - 1) * 0x20: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.30] line 110 pointer arithmetic: invalid integer address in _dst + (((signed int)iy + (signed int)height) - 1) * 0x20: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.31] line 110 pointer arithmetic: pointer NULL in _dst + (((signed int)iy + (signed int)height) - 1) * 0x20 + (signed int)ix: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.32] line 110 pointer arithmetic: pointer invalid in _dst + (((signed int)iy + (signed int)height) - 1) * 0x20 + (signed int)ix: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.33] line 110 pointer arithmetic: deallocated dynamic object in _dst + (((signed int)iy + (signed int)height) - 1) * 0x20 + (signed int)ix: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.34] line 110 pointer arithmetic: dead object in _dst + (((signed int)iy + (signed int)height) - 1) * 0x20 + (signed int)ix: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.35] line 110 pointer arithmetic: pointer outside object bounds in _dst + (((signed int)iy + (signed int)height) - 1) * 0x20 + (signed int)ix: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.36] line 110 pointer arithmetic: invalid integer address in _dst + (((signed int)iy + (signed int)height) - 1) * 0x20 + (signed int)ix: SUCCESS
+[impl_AddAttr2dBitMap.overflow.20] line 112 arithmetic overflow on signed - in (signed int)height - 1: SUCCESS
+[impl_AddAttr2dBitMap.overflow.25] line 112 arithmetic overflow on signed - in i - 1: SUCCESS
+[impl_AddAttr2dBitMap.unwind.1] line 112 unwinding assertion loop 1: SUCCESS
+[impl_AddAttr2dBitMap.overflow.21] line 115 arithmetic overflow on signed * in (signed int)_ix * (signed int)2u: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.37] line 115 pointer arithmetic: pointer NULL in _src + (signed int)_ix: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.38] line 115 pointer arithmetic: pointer invalid in _src + (signed int)_ix: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.39] line 115 pointer arithmetic: deallocated dynamic object in _src + (signed int)_ix: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.40] line 115 pointer arithmetic: dead object in _src + (signed int)_ix: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.41] line 115 pointer arithmetic: pointer outside object bounds in _src + (signed int)_ix: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.42] line 115 pointer arithmetic: invalid integer address in _src + (signed int)_ix: SUCCESS
+[impl_AddAttr2dBitMap.overflow.23] line 117 arithmetic overflow on signed + in j + 1: SUCCESS
+[impl_AddAttr2dBitMap.unwind.0] line 117 unwinding assertion loop 0: SUCCESS
+[impl_AddAttr2dBitMap.overflow.22] line 119 arithmetic overflow on signed + in (signed int)*src + (signed int)chr: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.13] line 119 dereference failure: pointer NULL in *dst2: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.14] line 119 dereference failure: pointer invalid in *dst2: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.15] line 119 dereference failure: deallocated dynamic object in *dst2: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.16] line 119 dereference failure: dead object in *dst2: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.17] line 119 dereference failure: pointer outside object bounds in *dst2: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.18] line 119 dereference failure: invalid integer address in *dst2: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.19] line 119 dereference failure: pointer NULL in *src: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.20] line 119 dereference failure: pointer invalid in *src: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.21] line 119 dereference failure: deallocated dynamic object in *src: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.22] line 119 dereference failure: dead object in *src: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.23] line 119 dereference failure: pointer outside object bounds in *src: SUCCESS
+[impl_AddAttr2dBitMap.pointer_dereference.24] line 119 dereference failure: invalid integer address in *src: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.43] line 120 pointer arithmetic: pointer NULL in src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.44] line 120 pointer arithmetic: pointer invalid in src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.45] line 120 pointer arithmetic: deallocated dynamic object in src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.46] line 120 pointer arithmetic: dead object in src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.47] line 120 pointer arithmetic: pointer outside object bounds in src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.48] line 120 pointer arithmetic: invalid integer address in src + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.49] line 121 pointer arithmetic: pointer NULL in dst2 + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.50] line 121 pointer arithmetic: pointer invalid in dst2 + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.51] line 121 pointer arithmetic: deallocated dynamic object in dst2 + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.52] line 121 pointer arithmetic: dead object in dst2 + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.53] line 121 pointer arithmetic: pointer outside object bounds in dst2 + 1: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.54] line 121 pointer arithmetic: invalid integer address in dst2 + 1: SUCCESS
+[impl_AddAttr2dBitMap.overflow.24] line 124 arithmetic overflow on signed * in (signed int)_width * (signed int)2u: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.55] line 124 pointer arithmetic: pointer NULL in _src + (signed int)_width: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.56] line 124 pointer arithmetic: pointer invalid in _src + (signed int)_width: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.57] line 124 pointer arithmetic: deallocated dynamic object in _src + (signed int)_width: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.58] line 124 pointer arithmetic: dead object in _src + (signed int)_width: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.59] line 124 pointer arithmetic: pointer outside object bounds in _src + (signed int)_width: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.60] line 124 pointer arithmetic: invalid integer address in _src + (signed int)_width: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.61] line 125 pointer arithmetic: pointer NULL in dst - 0x20: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.62] line 125 pointer arithmetic: pointer invalid in dst - 0x20: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.63] line 125 pointer arithmetic: deallocated dynamic object in dst - 0x20: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.64] line 125 pointer arithmetic: dead object in dst - 0x20: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.65] line 125 pointer arithmetic: pointer outside object bounds in dst - 0x20: SUCCESS
+[impl_AddAttr2dBitMap.pointer_arithmetic.66] line 125 pointer arithmetic: invalid integer address in dst - 0x20: SUCCESS
+
+build/cbmc_8001570/harness_byteptr_concrete_one.c function main
+[main.array_bounds.1] line 25 array 'dst_r' upper bound in dst_r[(signed int)((unsigned int)512 + k)]: SUCCESS
+[main.array_bounds.2] line 25 array 'dst_i' upper bound in dst_i[(signed int)((unsigned int)512 + k)]: SUCCESS
+[main.array_bounds.3] line 30 array 'dst_i' upper bound in dst_i[(signed int)((unsigned int)512 + k)]: SUCCESS
+[main.array_bounds.4] line 30 array 'dst_r' upper bound in dst_r[(signed int)((unsigned int)512 + k)]: SUCCESS
+[main.assertion.1] line 30 sub_8001570 arbitrary dst word: SUCCESS
+VERIFICATION SUCCESSFUL

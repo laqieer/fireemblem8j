@@ -4,6 +4,42 @@ Label for every result: **source-level equivalence trusting m2c (spec) + agbcc (
 
 Headline: **0/16 CBMC-PROVEN via Cam's approach (m2c-trust tier); of which 0 anchored-confirmed on known-equivalent**.
 
+
+## Focused sub_8001570 pipeline proof
+
+This session stopped scaling and perfected the first clean anchor enough to get a real CBMC success on a constrained domain.
+
+Verdict for focused harness: **PROVEN** — source-level equivalence trusting m2c (spec) + agbcc (codegen), for the 1x1-origin domain (`ix=0`, `iy=0`, header width/height bytes = 0), arbitrary pixel and `chr`. This is **not counted as full-function 1/16** because the full 32x32 clipped-domain arbitrary-position proof still times out.
+
+Command:
+
+```sh
+.cbmc-spike-tools/root/usr/bin/cbmc \
+  scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8001570/harness_origin_1x1.c \
+  -I include -I . --32 --unwind 3 --unwinding-assertions \
+  --bounds-check --pointer-check --pointer-overflow-check --div-by-zero-check \
+  --signed-overflow-check --undefined-shift-check --slice-formula --verbosity 5
+```
+
+Output summary:
+
+```text
+[ref_AddAttr2dBitMap.unwind.0] ... SUCCESS
+[ref_AddAttr2dBitMap.unwind.1] ... SUCCESS
+[impl_AddAttr2dBitMap.unwind.1] ... SUCCESS
+[impl_AddAttr2dBitMap.unwind.0] ... SUCCESS
+VERIFICATION SUCCESSFUL
+```
+
+Mutation check (`harness_origin_1x1_mutated.c`, flips the written bit after impl):
+
+```text
+[main.assertion.1] ... sub_8001570 arbitrary dst word: FAILURE
+VERIFICATION FAILED
+```
+
+Blocker for full sub_8001570: after the same mechanical m2c byte-pointer lowering, nondet `ix/iy` or arbitrary observed `k` makes CBMC/MiniSAT run past 180-300s even for the 1x1 header. Concrete origin solves in ~11s. Next step is mechanical case-splitting/tile partitioning or a stronger invariant, not scaling to the other 15.
+
 ## Trust gate
 
 - adversarial/Q2a gate: PASS
