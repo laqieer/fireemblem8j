@@ -1,0 +1,68 @@
+#include "scripts/tools/thumb_equiv/cbmc_spike/adversarial/common.h"
+#include "global.h"
+#include "tools/m2c/m2c_macros.h"
+#define PrepareBattleGraphicsMaybe impl_PrepareBattleGraphicsMaybe
+#define subroutine_arg0 impl_subroutine_arg0
+#include "src/nonmatching/sub_8057F80.c"
+#undef subroutine_arg0
+#undef PrepareBattleGraphicsMaybe
+#define PrepareBattleGraphicsMaybe ref_PrepareBattleGraphicsMaybe
+#define subroutine_arg0 ref_subroutine_arg0
+#define CheckBanimHensei refcallee_CheckBanimHensei
+#define CheckBattleScripted refcallee_CheckBattleScripted
+#define FilterBattleAnimCharacterPalette refcallee_FilterBattleAnimCharacterPalette
+#define GetBanimBackgroundIndex refcallee_GetBanimBackgroundIndex
+#define GetBanimFactionPalette refcallee_GetBanimFactionPalette
+#define GetBanimLinkArenaFlag refcallee_GetBanimLinkArenaFlag
+#define GetBanimTerrainGround refcallee_GetBanimTerrainGround
+#define GetBattleAnimArenaFlag refcallee_GetBattleAnimArenaFlag
+#define GetBattleAnimPreconfType refcallee_GetBattleAnimPreconfType
+#define GetBattleAnimationId refcallee_GetBattleAnimationId
+#define GetItemAttributes refcallee_GetItemAttributes
+#define GetItemIndex refcallee_GetItemIndex
+#define GetROMChapterStruct refcallee_GetROMChapterStruct
+#define GetSpellAnimId refcallee_GetSpellAnimId
+#define GetSpellAssocCharCount refcallee_GetSpellAssocCharCount
+#define IsItemDisplayedInBattle refcallee_IsItemDisplayedInBattle
+#define IsItemEffectiveAgainst refcallee_IsItemEffectiveAgainst
+#define IsUnitEffectiveAgainst refcallee_IsUnitEffectiveAgainst
+#define ParseBattleHitToBanimCmd refcallee_ParseBattleHitToBanimCmd
+#define ResetEkrDragonStatus refcallee_ResetEkrDragonStatus
+#define SetBanimArenaFlag refcallee_SetBanimArenaFlag
+#define SetBanimLinkArenaFlag refcallee_SetBanimLinkArenaFlag
+#define SetBattleUnscripted refcallee_SetBattleUnscripted
+#define SetEkrDragonStatusType refcallee_SetEkrDragonStatusType
+#define UnsetMapStaffAnim refcallee_UnsetMapStaffAnim
+s32 ref_subroutine_arg0;
+#include "scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_8057F80_ref.c"
+#undef UnsetMapStaffAnim
+#undef SetEkrDragonStatusType
+#undef SetBattleUnscripted
+#undef SetBanimLinkArenaFlag
+#undef SetBanimArenaFlag
+#undef ResetEkrDragonStatus
+#undef ParseBattleHitToBanimCmd
+#undef IsUnitEffectiveAgainst
+#undef IsItemEffectiveAgainst
+#undef IsItemDisplayedInBattle
+#undef GetSpellAssocCharCount
+#undef GetSpellAnimId
+#undef GetROMChapterStruct
+#undef GetItemIndex
+#undef GetItemAttributes
+#undef GetBattleAnimationId
+#undef GetBattleAnimPreconfType
+#undef GetBattleAnimArenaFlag
+#undef GetBanimTerrainGround
+#undef GetBanimLinkArenaFlag
+#undef GetBanimFactionPalette
+#undef GetBanimBackgroundIndex
+#undef FilterBattleAnimCharacterPalette
+#undef CheckBattleScripted
+#undef CheckBanimHensei
+#undef subroutine_arg0
+#undef PrepareBattleGraphicsMaybe
+int main(void) {
+    ASSERT(0, "UNKNOWN: complete observable model profile not yet generated for sub_8057F80");
+    return 0;
+}

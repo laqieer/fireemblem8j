@@ -1,8 +1,13 @@
 # CBMC full16 findings
-All verdicts are fail-closed and labelled: **source-level equivalence under modeled C semantics, trusting agbcc codegen/ABI**.
-Headline: **0/16 CBMC-PROVEN via Cam's approach**.
+
+Label for every result: **source-level equivalence trusting m2c (spec) + agbcc (codegen)**.
+
+Headline: **0/16 CBMC-PROVEN via Cam's approach (m2c-trust tier); of which 0 anchored-confirmed on known-equivalent**.
+
 ## Trust gate
+
 - adversarial/Q2a gate: PASS
+
 ```text
 CBMC: 6.10.0 (cbmc-6.10.0)
 | case | expected | observed | detail |
@@ -20,32 +25,35 @@ CBMC: 6.10.0 (cbmc-6.10.0)
 | q2a.AddTarget | PROVEN | PROVEN | VERIFICATION SUCCESSFUL |
 | q2a.GreenText_OnLoop | PROVEN | PROVEN | VERIFICATION SUCCESSFUL |
 ```
+
 ## Mutation smoke checks
+
 | case | expected | observed | detail |
 | --- | --- | --- | --- |
 | sub_8001570_mutated_write | REFUTED | REFUTED | [main.assertion.1] line 35 sub_8001570 mutation must refute changed write: FAILURE |
 | sub_80A6F1C_mutated_callback | REFUTED | REFUTED | [main.assertion.1] line 48 sub_80A6F1C mutation must refute callback arg: FAILURE |
 
 ## Per-function verdicts
-| function | verdict | bridge | loop bound | evidence | blocker |
-| --- | --- | --- | --- | --- | --- |
-| `sub_8001570` | UNKNOWN | none | n/a | ARM-vs-ARM PROVEN-BOUNDED(3) | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_800A34C` | UNKNOWN | none | n/a | differential-EQUIV only; ARM-vs-ARM DIVERGENCE | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_800A594` | UNKNOWN | none | n/a | ARM-vs-ARM PROVEN-BOUNDED(1) | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_800E1FC` | UNKNOWN | none | n/a | ARM-vs-ARM PROVEN-BOUNDED(3) | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_800FAD0` | UNKNOWN | none | n/a | differential-EQUIV only; ARM-vs-ARM UNKNOWN/path-explosion | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_8057F80` | UNKNOWN | none | n/a | live harness 114/115 writes; not equivalent | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_807C8DC` | UNKNOWN | none | n/a | ARM-vs-ARM PROVEN-BOUNDED(2) | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_807D3BC` | UNKNOWN | none | n/a | ARM-vs-ARM PROVEN-BOUNDED(1) | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_80A2E64` | UNKNOWN | none | n/a | ARM-vs-ARM PROVEN-BOUNDED(1) | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_80A3300` | UNKNOWN | none | n/a | ARM-vs-ARM PROVEN-BOUNDED(3) | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_80A3528` | UNKNOWN | none | n/a | ARM-vs-ARM PROVEN-BOUNDED(3) | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_80A390C` | UNKNOWN | none | n/a | ARM-vs-ARM PROVEN-BOUNDED(3) | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_80A6D34` | UNKNOWN | none | n/a | ARM-vs-ARM PROVEN-BOUNDED(3) | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_80A6E4C` | UNKNOWN | none | n/a | ARM-vs-ARM PROVEN-BOUNDED(3) | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_80A6F1C` | UNKNOWN | none | n/a | DIVERGENCE/INCONCLUSIVE-CB; callback stack escape | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
-| `sub_80C05C8` | UNKNOWN | none | n/a | ARM-vs-ARM PROVEN-BOUNDED(2) | No validated reference-C and no cfg_exec-derived CBMC observable emitter; fail-closed instead of proving against hand-picked writes. |
 
-## Summary
+| function | verdict | m2c-ran | loop-bound | anchored/extrapolated | evidence | blocker |
+| --- | --- | --- | --- | --- | --- | --- |
+| `sub_8001570` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=AddAttr2dBitMap, lines=68; [main.assertion.1] line 18 UNKNOWN: complete observable model profile not yet generated for sub_8001570: FAILURE; log=build/cbmc_full16/logs/sub_8001570_harness.cbmc.txt | [main.assertion.1] line 18 UNKNOWN: complete observable model profile not yet generated for sub_8001570: FAILURE; log=build/cbmc_full16/logs/sub_8001570_harness.cbmc.txt |
+| `sub_800A34C` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=SplineEvalCatmullRom, lines=121; [main.assertion.1] line 18 UNKNOWN: complete observable model profile not yet generated for sub_800A34C: FAILURE; log=build/cbmc_full16/logs/sub_800A34C_harness.cbmc.txt | [main.assertion.1] line 18 UNKNOWN: complete observable model profile not yet generated for sub_800A34C: FAILURE; log=build/cbmc_full16/logs/sub_800A34C_harness.cbmc.txt |
+| `sub_800A594` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=SplineSampleAtTime, lines=172; file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_800A594_ref.c line 169 function ref_SplineSampleAtTime: failed to find symbol 'sp24'; log=build/cbmc_full16/logs/sub_800A594_harness.cbmc.txt | file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_800A594_ref.c line 169 function ref_SplineSampleAtTime: failed to find symbol 'sp24'; log=build/cbmc_full16/logs/sub_800A594_harness.cbmc.txt |
+| `sub_800E1FC` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=Event18_ColorFade, lines=57; [main.assertion.1] line 22 UNKNOWN: complete observable model profile not yet generated for sub_800E1FC: FAILURE; log=build/cbmc_full16/logs/sub_800E1FC_harness.cbmc.txt | [main.assertion.1] line 22 UNKNOWN: complete observable model profile not yet generated for sub_800E1FC: FAILURE; log=build/cbmc_full16/logs/sub_800E1FC_harness.cbmc.txt |
+| `sub_800FAD0` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=GetUnitDefinitionFormEventScr, lines=128; [main.assertion.1] line 18 UNKNOWN: complete observable model profile not yet generated for sub_800FAD0: FAILURE; log=build/cbmc_full16/logs/sub_800FAD0_harness.cbmc.txt | [main.assertion.1] line 18 UNKNOWN: complete observable model profile not yet generated for sub_800FAD0: FAILURE; log=build/cbmc_full16/logs/sub_800FAD0_harness.cbmc.txt |
+| `sub_8057F80` | UNKNOWN | yes | --unwind 8 + unwinding assertions | extrapolated-hard | m2c ok label=PrepareBattleGraphicsMaybe, lines=506; file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_8057F80_ref.c line 88 function ref_PrepareBattleGraphicsMaybe: in expression '0x10':; log=build/cbmc_full16/logs/sub_8057F80_harness.cbmc.txt | file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_8057F80_ref.c line 88 function ref_PrepareBattleGraphicsMaybe: in expression '0x10':; log=build/cbmc_full16/logs/sub_8057F80_harness.cbmc.txt |
+| `sub_807C8DC` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=AdjustNewUnitPosition, lines=60; file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_807C8DC_ref.c line 35 function ref_AdjustNewUnitPosition: operand of unary * 'temp_r3 + *((s32 *)0x202E4D4)' is not a pointer, but got 's32'; log=build/cbmc_full16/logs/sub_807C8DC_harness.cbmc.txt | file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_807C8DC_ref.c line 35 function ref_AdjustNewUnitPosition: operand of unary * 'temp_r3 + *((s32 *)0x202E4D4)' is not a pointer, but got 's32'; log=build/cbmc_full16/logs/sub_807C8DC_harness.cbmc.txt |
+| `sub_807D3BC` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=SelectSummonPos, lines=100; file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_807D3BC_ref.c line 53 function ref_SelectSummonPos: operand of unary * 'temp_r1_2 + *((s32 *)0x202E4D4)' is not a pointer, but got 's32'; log=build/cbmc_full16/logs/sub_807D3BC_harness.cbmc.txt | file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_807D3BC_ref.c line 53 function ref_SelectSummonPos: operand of unary * 'temp_r1_2 + *((s32 *)0x202E4D4)' is not a pointer, but got 's32'; log=build/cbmc_full16/logs/sub_807D3BC_harness.cbmc.txt |
+| `sub_80A2E64` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=DivinationRankSpriteUpdate, lines=81; file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_80A2E64_ref.c line 46 function ref_DivinationRankSpriteUpdate: operand of unary * 'temp_r3 - 4' is not a pointer, but got 's32'; log=build/cbmc_full16/logs/sub_80A2E64_harness.cbmc.txt | file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_80A2E64_ref.c line 46 function ref_DivinationRankSpriteUpdate: operand of unary * 'temp_r3 - 4' is not a pointer, but got 's32'; log=build/cbmc_full16/logs/sub_80A2E64_harness.cbmc.txt |
+| `sub_80A3300` | UNKNOWN | yes | --unwind 260 + unwinding assertions | anchored-known-equivalent | m2c ok label=sub_80A3300, lines=36; CBMC timeout; log=build/cbmc_full16/logs/sub_80A3300_cbmc.cbmc.txt | CBMC timeout; log=build/cbmc_full16/logs/sub_80A3300_cbmc.cbmc.txt |
+| `sub_80A3528` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=sub_80A3528, lines=91; file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_80A3528_ref.c line 66 function ref_sub_80A3528: operand of unary * 'temp_r3 - 4' is not a pointer, but got 's32'; log=build/cbmc_full16/logs/sub_80A3528_harness.cbmc.txt | file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_80A3528_ref.c line 66 function ref_sub_80A3528: operand of unary * 'temp_r3 - 4' is not a pointer, but got 's32'; log=build/cbmc_full16/logs/sub_80A3528_harness.cbmc.txt |
+| `sub_80A390C` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=Augury_InitResultScreen, lines=113; file ./src/nonmatching/sub_80A390C.c line 133 function impl_Augury_InitResultScreen: function 'strcpy' is not declared; log=build/cbmc_full16/logs/sub_80A390C_harness.cbmc.txt | file ./src/nonmatching/sub_80A390C.c line 133 function impl_Augury_InitResultScreen: function 'strcpy' is not declared; log=build/cbmc_full16/logs/sub_80A390C_harness.cbmc.txt |
+| `sub_80A6D34` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=sub_80A6D34, lines=39; [main.assertion.1] line 20 UNKNOWN: complete observable model profile not yet generated for sub_80A6D34: FAILURE; log=build/cbmc_full16/logs/sub_80A6D34_harness.cbmc.txt | [main.assertion.1] line 20 UNKNOWN: complete observable model profile not yet generated for sub_80A6D34: FAILURE; log=build/cbmc_full16/logs/sub_80A6D34_harness.cbmc.txt |
+| `sub_80A6E4C` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=sub_80A6E4C, lines=36; file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_80A6E4C_ref.c line 28 function ref_sub_80A6E4C: in expression 'var_r5':; log=build/cbmc_full16/logs/sub_80A6E4C_harness.cbmc.txt | file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_80A6E4C_ref.c line 28 function ref_sub_80A6E4C: in expression 'var_r5':; log=build/cbmc_full16/logs/sub_80A6E4C_harness.cbmc.txt |
+| `sub_80A6F1C` | UNKNOWN | yes | --unwind 8 + unwinding assertions | extrapolated-hard | m2c ok label=DecodeAndVerifyArenaRecord, lines=30; file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_80A6F1C_ref.c line 19 function ref_DecodeAndVerifyArenaRecord: in expression 'var_r5':; log=build/cbmc_full16/logs/sub_80A6F1C_harness.cbmc.txt | file ./scripts/tools/thumb_equiv/cbmc_spike/full16/generated/reference_c/sub_80A6F1C_ref.c line 19 function ref_DecodeAndVerifyArenaRecord: in expression 'var_r5':; log=build/cbmc_full16/logs/sub_80A6F1C_harness.cbmc.txt |
+| `sub_80C05C8` | UNKNOWN | yes | --unwind 8 + unwinding assertions | anchored-known-equivalent | m2c ok label=GmapScreen2_Loop, lines=84; [main.assertion.1] line 22 UNKNOWN: complete observable model profile not yet generated for sub_80C05C8: FAILURE; log=build/cbmc_full16/logs/sub_80C05C8_harness.cbmc.txt | [main.assertion.1] line 22 UNKNOWN: complete observable model profile not yet generated for sub_80C05C8: FAILURE; log=build/cbmc_full16/logs/sub_80C05C8_harness.cbmc.txt |
 
-The CBMC harness infrastructure is live and rejects adversarial mutations, but the requested mechanical ASM-spec bridge is still absent for all 16 functions. Reporting PROVEN would require either a validated reference-C file per function (Bridge A) or a cfg_exec-derived CBMC observable with complete write/call footprint (Bridge B). Neither artifact exists yet, so every function remains UNKNOWN under Cam's CBMC approach rather than being false-proven.
+## Notes
+
+The bridge now runs m2c for every function and builds a CBMC C-vs-C harness for every generated reference. A function is still fail-closed unless a complete observable model profile exists for its visible writes/calls. Current generated generic harnesses deliberately assert an UNKNOWN marker when that profile is absent; see `build/cbmc_full16/logs/` for exact CBMC output.
