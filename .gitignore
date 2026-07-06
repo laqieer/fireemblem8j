@@ -10,6 +10,7 @@
 *.d
 .dep/
 .deps/
+/.cbmc-spike-tools/
 
 # GitHub Pages site output (scripts/gen_pages.py -> _site/, deployed by ci.yml; never committed)
 /_site/
