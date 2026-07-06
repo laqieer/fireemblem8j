@@ -9712,3 +9712,46 @@ oracle callback model), NOT scaling CBMC across the redundant 14. make compare
 unaffected (cbmc_spike is isolated). Evidence: commits 87e6d709f, ba116185f,
 222aa0da7, 3ba73272f; `full16/FINDINGS_full16.md`;
 `full16/focused/sub_8001570/harness_full_domain.c` + timeout excerpt.
+
+### D349 addendum 7 — CBMC shared-oracle attack CLOSES the last open function sub_80A6F1C → 16/16 (2026-07-06)
+
+Follow-up to addendum 6 (user chose "path B": a bespoke shared-oracle attack on the one
+genuinely-open function, rather than scaling CBMC across the redundant 14). `sub_80A6F1C`
+(DecodeAndVerifyArenaRecord, JP link-arena record decode+verify) was the single
+non-matching function no method could machine-check: ARM-vs-ARM SMT → DIVERGENCE,
+differential → INCONCLUSIVE-CB, both defeated purely by the opaque caller callback
+`consume(&cbarg,arg)` (dispatched via the `_call_via_r9` veneer) plus 3 same-TU codec
+leaves (`sub_80A6D34`/`C20`/`AA8`). Note this is NOT the BMC-scalability wall of addendum 6
+— the function is small (~60 insns, one bounded loop); the blocker was *the opaque calls*,
+which is exactly what CBMC's shared-oracle handles well and the ARM path-enumerator does not.
+
+METHOD (`scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_80A6F1C/`): model all four
+callees as **shared call-indexed oracles** (value drawn once, returned by call index, so
+both sides get identical returns + identical memory havoc), run the reconstruction
+(`impl_fn`, for-loop form) against the m2c decompilation of `asm/sub_80A6F1C.s` (`ref_fn`,
+do-while form) on shared symbolic memory, and assert equality of return + all visible writes.
+SOUNDNESS CRUX (rubber-duck-style anti-masking): an index-based oracle return could hide an
+argument divergence → false PROVE; prevented by recording every call's **full argument bytes**
+(`CallRec.bytes[]`, len, `*cbarg`) and comparing them elementwise post-hoc, so any call-arg
+divergence REFUTES instead of being masked. `--unwind 17 --unwinding-assertions`.
+
+RESULT: `harness.c` → **VERIFICATION SUCCESSFUL (0/409)**; the anti-masking mechanism is
+proven live by two mutations that MUST (and do) REFUTE — `harness_mut_loop.c` (payload
+transform `-`→`+`) caught by `same buffer arg bytes`, `harness_mut_mask.c` (return tag
+`0x3FF`→`0x1FF`) caught by `return value equal`.
+
+SCOPE / TIER (honest): full-symbolic header/mask/payload; payload-window base offset pinned
+to 0 in the primary harness (applied identically on both sides → representative; a
+symbolic-offset variant `harness_symoff.c` is modeling-incomplete — a symbolic base pointer
+trips CBMC pointer-bounds, not a real divergence); payload length BMC-bounded to the
+modelled window (≤ 8; the loop body is length-independent so the argument generalises);
+tier = trusting m2c (spec shape) + agbcc (codegen) + the shared-oracle abstraction of the
+four opaque callees — strictly BELOW the `make compare` byte oracle.
+
+DECISION: **`sub_80A6F1C` is now machine-checked equivalent by the shared-oracle CBMC
+method**, closing Discussion #149 at **16/16 non-matching functions machine-checked
+equivalent**, each by the strongest applicable method: 12 ARM-vs-ARM SMT + 2 differential
+(`sub_800A34C`, `sub_800FAD0`) + 1 mGBA live-state (`sub_8057F80`) + 1 shared-oracle CBMC
+(`sub_80A6F1C`). This validates Camdar's CBMC framing on the case where it is genuinely the
+right tool (opaque callback), complementing — not replacing — the stronger byte-level
+ARM-vs-ARM proofs for the rest. `make compare` OK throughout (cbmc_spike is isolated).

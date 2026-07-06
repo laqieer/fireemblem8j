@@ -397,6 +397,16 @@ the byte-match frontier on.
   the method that closes the 16; our ARM-vs-ARM SMT + differential + live-state
   (14/16 formal, 15/16 with live-state) remain stronger and wall-free. See
   `scripts/tools/thumb_equiv/cbmc_spike/full16/FINDINGS_full16.md`.
+  **Where CBMC IS the right tool (D349 addendum 7):** the one function no other
+  method could machine-check — `sub_80A6F1C` (opaque caller callback + 3 codec
+  leaves; ARM-vs-ARM → DIVERGENCE, differential → INCONCLUSIVE-CB) — was **PROVEN**
+  by a focused CBMC **shared-oracle** harness (all four callees modelled as shared
+  call-indexed oracles, with full byte-for-byte argument comparison so an
+  index-return can't mask an arg divergence; mutations REFUTE). This is *not* the
+  scalability wall — the function is small; the blocker was the opaque calls, which
+  CBMC's shared-oracle handles and the ARM path-enumerator cannot. That closes
+  Discussion #149 at **16/16 machine-checked equivalent**. See
+  `cbmc_spike/full16/focused/sub_80A6F1C/README.md`.
 * **angr / BINSEC** (binary symbolic execution) are the right "mature engine"
   answer for this binary-level problem — they replace the hand-rolled THUMB
   lifter/executor with a maintained, ISA-complete one. This is the recommended

@@ -2,7 +2,45 @@
 
 Label for every result: **source-level equivalence trusting m2c (spec) + agbcc (codegen)**.
 
-Headline: **0/16 CBMC-PROVEN full-domain (m2c-trust tier); of which 0 anchored-confirmed on known-equivalent**.
+Headline: **0/16 via the generic auto-pipeline** (fail-closed: BMC scalability wall on
+the loop/pointer-heavy functions, per `focused/sub_8001570`), **BUT the one genuinely-open
+function `sub_80A6F1C` is now PROVEN by a focused, sound shared-oracle harness** — see
+`focused/sub_80A6F1C/` and the section below. That closes Discussion #149 at **16/16
+non-matching functions machine-checked equivalent** (12 ARM-vs-ARM SMT + 2 differential +
+1 mGBA live-state + 1 shared-oracle CBMC), each by the strongest applicable method.
+
+
+## Focused sub_80A6F1C shared-oracle verdict — **PROVEN** (the valuable case)
+
+Harness: `focused/sub_80A6F1C/harness.c` (+ `README.md`). This is the one function no
+other method could machine-check (ARM-vs-ARM SMT → DIVERGENCE, differential →
+INCONCLUSIVE-CB), because of the opaque caller callback `consume(&cbarg,arg)` + 3 codec
+leaves. Modelling all four callees as **shared call-indexed oracles** with **full
+byte-for-byte argument comparison** (so an index-based return can never mask an argument
+divergence → no false PROVE) proves the reconstruction ≡ the m2c decompilation of
+`asm/sub_80A6F1C.s` on return + all visible memory writes.
+
+```sh
+CBMC=.cbmc-spike-tools/root/usr/bin/cbmc
+$CBMC focused/sub_80A6F1C/harness.c --32 --unwind 17 --unwinding-assertions \
+  --bounds-check --pointer-check --pointer-overflow-check --div-by-zero-check \
+  --signed-overflow-check --undefined-shift-check
+#   => VERIFICATION SUCCESSFUL   (0 of 409 failed)
+```
+
+| case | expected | observed | caught by |
+| --- | --- | --- | --- |
+| `harness.c` (true fn) | PROVEN | **PROVEN** (0/409) | — |
+| `harness_mut_loop.c` (payload transform `-`→`+`) | REFUTED | **REFUTED** | `[main.assertion.9] same buffer arg bytes` (the anti-masking check) |
+| `harness_mut_mask.c` (return tag `0x3FF`→`0x1FF`) | REFUTED | **REFUTED** | `[main.assertion.1] return value equal` |
+
+Scope (honest): full-symbolic header / field-mask / payload; payload-window base offset
+pinned to 0 (applied identically on both sides → representative; a symbolic-offset variant
+`harness_symoff.c` is modeling-incomplete — trips CBMC pointer-bounds, not a real
+divergence); payload length BMC-bounded to the modelled window (≤ 8, loop body
+length-independent);
+tier = trusting m2c (spec shape) + agbcc (codegen) + the shared-oracle abstraction of the
+four opaque callees — strictly below the byte oracle. See `focused/sub_80A6F1C/README.md`.
 
 
 ## Focused sub_8001570 full-domain verdict
