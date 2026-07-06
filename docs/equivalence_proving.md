@@ -391,11 +391,20 @@ the byte-match frontier on.
   lifter/executor with a maintained, ISA-complete one. This is the recommended
   next spike (tracked as option (b) in the discussion) and subsumes the lifter
   bullet above.
-* **Rupicola / bedrock2** produce proofs, but in the **forward** direction
-  (synthesise verified low-level code *from* Coq specs); they do not verify an
-  *existing* binary/decompilation against C, so they don't fit this
-  reverse/post-facto problem. Backward proof-carrying verification is a
-  VST/Frama-C-class Coq effort requiring a verified ARM semantics.
+* **Rupicola / bedrock2 & relational compilation** — the principled *total-proof*
+  ceiling above this bounded tier, and (per Camdar's correction) **not**
+  forward-only. Relational compilation is parameterized over a source `S`, target
+  `T`, their denotations, and a relation `s ~ t`; instantiating `S := ARMv4T`,
+  `T := C` makes proof-carrying **decompilation** a plain *forward* instance, and
+  the two-place relation can equally be searched as `∃ src. src ~ tgt` for a fixed
+  ROM target (needing lemmas oriented tgt→src — essentially formalising the
+  hand-decompilation rules). The resulting `src ~ tgt` proof is a **∀-total**
+  machine-checked equivalence to the actual bytes, strictly stronger than the
+  bounded-BMC / differential results here. We stay at the pragmatic tier only on
+  cost: it is a proof-assistant formalisation of ARMv4T semantics + the agbcc/C
+  fragment + the decompilation lemmas (a research program, even reusing existing
+  Coq/Sail ARM and CompCert-style C semantics) — worth naming as the real ceiling,
+  not pursued for a project already at 99.82% byte-match.
 
 *Decision logged as D349. PoC validated end-to-end; approach reviewed with the
 rubber-duck agent (MMIO reads, region model, ABI-vs-full-architectural, explicit
