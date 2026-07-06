@@ -9476,3 +9476,31 @@ workflow accepts non-byte-matching C into the checksum build on an SMT proof.
 `scripts/tools/thumb_equiv/` (tool + README + self-tests), this entry, and a
 resolution comment on Discussion #149. Zero oracle-path changes → `make compare`
 unaffected. Approach reviewed with the rubber-duck agent.
+
+### D349 addendum — applying the prover to the unmatched functions (2026-07-05)
+
+Follow-up to the objective "prove all non-matching functions equal". Built
+`scripts/tools/thumb_equiv/cfg_exec.py` (CFG symbolic executor: NZCV flags,
+conditional-branch path forking, bounded loop unrolling, fuller THUMB ISA,
+**sound uninterpreted call summaries**) + `prove_nonmatching.py` (lifts the JP
+ROM bytes vs the compiled `src/nonmatching/*.c` from a shared symbolic input;
+compares return value + callee-saved/sp + data memory + ordered call/MMIO trace;
+call targets matched by **resolved address** so `CpuSet`==`sub_80D6370`;
+`_call_via_rN` veneers = indirect calls; ROM served read-only, immune to
+call-havoc).
+
+**Result: 5/16 `PROVEN-BOUNDED`** (sub_8001570/80A2E64/80A3300/80A6D34/80A6E4C).
+3 `DIVERGENCE` (sub_800A34C/807C8DC/80A390C — equivalence depends on an external
+global table pointer the modular model havocs; NOT a confirmed reconstruction
+bug). 8 `UNKNOWN:path-explosion` (many loops/branches, up to sub_8057F80 =
+1248 insns/149 br/58 calls). The prover is **sound but incomplete**: PROVEN really
+is equivalent (under the ARM/ABI/memory/call model, loops to depth N); it cannot
+yet reach large or external-state-dependent functions.
+
+**"All 16" is a research program, not a one-shot.** The remaining 11 need
+symbolic-execution **state-merging** (avoid path blow-up) and **relational
+loop-invariant / lockstep** proofs (exploit the 1:1 CFG for unbounded loop
+equivalence) plus callee inlining — beyond a single PoC session. `make compare`
+stays the sole oracle; these proofs are confidence annotations strictly below it.
+Full method + per-function table: `docs/equivalence_proving.md`. Reproduce:
+`$HOME/z3-venv/bin/python scripts/tools/thumb_equiv/prove_nonmatching.py`.

@@ -65,3 +65,46 @@ confidence annotation *below* byte-match, never a replacement.
 
 Files: `thumb_lift.py` (decoder + symbolic executor), `equiv.py` (checker),
 `demo.py`, `real_smoke.py`.
+
+## Proving the real non-matching functions (`prove_nonmatching.py`)
+
+`src/nonmatching/*.c` are readable reconstructions whose byte source is
+`asm/*.s` (region-different, "register-coloring wall"), compiled only by
+`make nonmatching` and never in `make compare`. This is exactly Discussion
+#149's scenario: prove each reconstruction equivalent to the JP ROM function.
+
+`cfg_exec.py` extends the straight-line PoC to real functions: full NZCV flags,
+conditional branches (path forking), bounded loop unrolling (BMC), a fuller
+THUMB ISA (`ldrsh/ldrsb`, `ldmia/stmia`, hi-reg ops, push/pop of hi regs), and
+**sound uninterpreted call summaries**. `prove_nonmatching.py` drives it:
+
+```bash
+$HOME/z3-venv/bin/python prove_nonmatching.py            # all src/nonmatching
+$HOME/z3-venv/bin/python prove_nonmatching.py sub_8001570 # one function
+```
+
+For each function it lifts the **JP ROM bytes** (target) and the **compiled
+reconstruction** (candidate, relocations resolved against the ELF) from a
+*shared* symbolic input state and checks that every reachable path pair has
+equal observables: return value, callee-saved regs + sp restored, data memory,
+and the ordered call/MMIO trace. Call targets are compared by **resolved
+address** (so `CpuSet` == `sub_80D6370`), `_call_via_rN` veneers as indirect
+calls (register choice is not a diff), and ROM is served read-only from the
+cartridge image (immune to call-havoc).
+
+Status labels (honest — see review):
+| label | meaning |
+|---|---|
+| `PROVEN-BOUNDED(N)` | all path pairs equivalent, loops unrolled to N (BMC). **Sound**: a PROVEN function really is equivalent under the model. |
+| `DIVERGENCE@..` | a reachable pair differs under the *modular* model. Because the summaries **havoc external memory/globals**, this can appear on a genuinely-equivalent reconstruction whose equivalence depends on external state — it is **not** a confirmed reconstruction bug. |
+| `UNKNOWN:..` | path explosion / enumeration timeout / unsupported insn. Needs state-merging or loop invariants (out of scope). |
+
+The prover is **sound but incomplete**: it confirms equivalence for
+loop-light, mostly-self-contained functions; large multi-loop functions explode
+the path enumeration and functions whose equivalence hinges on external global
+state can only be shown modularly. See `docs/equivalence_proving.md` for the
+per-function results table and the honest frontier.
+
+Files added: `cfg_exec.py` (CFG symbolic-execution engine), `prove_nonmatching.py`
+(driver + coverage report).
+

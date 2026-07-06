@@ -109,6 +109,75 @@ memory model assumes no stack/pointer aliasing, read-only ROM, and a fixed MMIO
 window; value-carrying volatile reads need a shared read-oracle. It proves
 equivalence **under this model**, not unconditionally "for all inputs".
 
+## Applying it to the real FE8J non-matching functions (`prove_nonmatching.py`)
+
+The 16 functions in `src/nonmatching/sub_*.c` are the project's genuinely
+*unmatched* code: readable C reconstructions whose byte source is `asm/sub_*.s`
+(region-different — a whole-function agbcc register-coloring/spill wall), built
+only by `make nonmatching`, never in the oracle. This is exactly Discussion
+#149's target: prove each reconstruction equivalent to the JP ROM function.
+
+`scripts/tools/thumb_equiv/cfg_exec.py` scales the PoC to these: NZCV flags,
+conditional branches (path forking), bounded loop unrolling (BMC), a fuller
+THUMB ISA, and **sound uninterpreted call summaries**. For each function the
+driver lifts the *JP ROM bytes* (target) and the *compiled reconstruction*
+(candidate, relocations resolved) from one **shared** symbolic input state and
+checks every reachable path pair for equal observables (return value,
+callee-saved regs + sp restored, data memory, ordered call/MMIO trace). Call
+targets are matched by **resolved address** (so `CpuSet` == `sub_80D6370`),
+`_call_via_rN` veneers as indirect calls (the register choice is not a diff), and
+ROM is served read-only from the cartridge image (immune to call-havoc).
+
+**Result: 5/16 machine-checked equivalent** (`PROVEN-BOUNDED(N)`). Full run
+(`prove_nonmatching.py`, one shared symbolic input state per function):
+
+| function | status | note |
+|---|---|---|
+| `sub_8001570` (AddAttr2dBitMap) | **PROVEN-BOUNDED(3)** | only byte diff = two independent `mov`s in opposite order |
+| `sub_80A3300` | **PROVEN-BOUNDED(3)** | 2 calls (`PutSpriteExt`), 2 loops |
+| `sub_80A6D34` | **PROVEN-BOUNDED(3)** | link-arena header codec |
+| `sub_80A6E4C` | **PROVEN-BOUNDED(3)** | link-arena encode mirror |
+| `sub_80A2E64` | **PROVEN-BOUNDED(1)** | proven at loop depth 1 |
+| `sub_800A34C` | DIVERGENCE | external table pointer (global) vs inlined constant |
+| `sub_807C8DC` | DIVERGENCE | external-state dependent under modular model |
+| `sub_80A390C` | DIVERGENCE | external table base loaded from global |
+| `sub_800A594` `sub_800E1FC` `sub_800FAD0` `sub_8057F80` `sub_807D3BC` `sub_80A3528` `sub_80A6F1C` `sub_80C05C8` | UNKNOWN:path-explosion | many loops/branches — need state-merging / loop invariants |
+
+The 5 PROVEN are the loop-light, mostly self-contained reconstructions; e.g.
+`sub_8001570`'s only byte difference is two independent `mov`s emitted in the
+opposite order, which the data-flow proof shows compute the same function.
+
+The other 11 are **not proven** — and, crucially, *not proven ≠ inequivalent*
+(the reconstructions are believed correct; their headers argue register-coloring
+is the only residual):
+
+* **`UNKNOWN:path-explosion / enumeration-timeout` (8)** — functions with several
+  loops and many branches (up to `sub_8057F80`: 1248 insns / 149 branches / 58
+  calls). Path enumeration blows up; these need **symbolic-execution
+  state-merging** (merge at join points) or **relational loop-invariant /
+  lockstep** proofs (exploit the 1:1 CFG so loops align and are proved by
+  induction — unbounded). That is the natural next step and is out of this PoC's
+  scope.
+* **`DIVERGENCE` (3)** — `sub_800A34C`, `sub_807C8DC`, `sub_80A390C`. The modular
+  model's call summaries **havoc external memory/globals**; these functions'
+  equivalence hinges on a table pointer read from a global (the JP build loads it;
+  the reconstruction inlines the constant), which a *modular* analysis cannot
+  confirm without the external state. A `DIVERGENCE` here is a **modular-analysis
+  limitation, not a confirmed reconstruction bug** — resolving it needs inlining
+  the reachable callees / providing the global's value.
+
+The prover is **sound but incomplete**: a `PROVEN-BOUNDED(N)` result really is an
+equivalence (under the ARM/ABI/memory/call model, loops to depth N); it simply
+cannot yet *reach* the large or external-state-dependent functions. Reproduce with
+`$HOME/z3-venv/bin/python scripts/tools/thumb_equiv/prove_nonmatching.py`.
+
+**Honest bottom line for "prove ALL non-matching functions equal":** with SMT
+symbolic execution this is a genuine research program, not a one-shot result —
+5/16 are machine-checked today; the rest require state-merging + loop-invariant
+(relational) reasoning and callee inlining. `make compare` (byte-match) remains
+the sole oracle throughout; every result here is a confidence annotation strictly
+below it.
+
 ## Where it fits FE8J (the acceptance hierarchy)
 
 The proposal changes *nothing* about the oracle. It adds a rung to the existing
