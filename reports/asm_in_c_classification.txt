@@ -1,18 +1,15 @@
-Inline __asm__ audit: 1648 blocks in 183 files
+Inline __asm__ audit: 1645 blocks in 183 files
 Per-block counts:
-  PALETTE: 4
-  PROC_SCRIPT: 110
-  GRAPHICS: 1086
-  DATA_TABLE: 347
+  PALETTE: 0
+  PROC_SCRIPT: 113
+  GRAPHICS: 1084
+  DATA_TABLE: 346
   EVENT_SCRIPT: 22
-  SECTION_GLUE: 67
+  SECTION_GLUE: 68
   UNRESOLVED: 12
 Per-file lists:
 
-[PALETTE] 3 files
-  src/data/frontier_banim_aurabg3/frontier_banim_aurabg3.c
-  src/data/frontier_df3_banim_aura/frontier_df3_banim_aura.c
-  src/data/frontier_df4_banim_b/frontier_df4_banim_b.c
+[PALETTE] 0 files
 
 [PROC_SCRIPT] 23 files
   src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.c
