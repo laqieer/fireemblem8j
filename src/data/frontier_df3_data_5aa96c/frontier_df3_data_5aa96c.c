@@ -816,7 +816,7 @@ __asm__(
 "\t.4byte 0x03030303\n"
 "\t.4byte 0x03030303\n"
 "\t.4byte 0x04030303\n"
-"\t.4byte EfxDrsmmoyaMain + 0x1C\n"
+"\t.4byte 0x08070605\n"
 "\t.4byte 0x0000FF09\n"
 );
 __asm__(

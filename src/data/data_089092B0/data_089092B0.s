@@ -7,12 +7,12 @@
 	.section .data.residue.089092B0, "aw", %progbits
 	.global UnitDef_Ch4Ally_3
 UnitDef_Ch4Ally_3:
-	.4byte IrqMain + 0x105
+	.4byte 0x08000201
 	.4byte 0x00000148
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte DecodeString + 0x1E
+	.4byte 0x08000702
 	.4byte 0x00000108
 	.4byte 0x00000000
 	.4byte 0x00000000

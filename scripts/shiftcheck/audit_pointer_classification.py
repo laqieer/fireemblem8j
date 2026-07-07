@@ -51,6 +51,26 @@ def load_symbols(elf):
             name2addr.setdefault(n, a)
             starts.add(a)
             addrs.append(a)
+    # `nm` prints cleared Thumb-function addresses for many symbols, but ABS32
+    # relocations use the ELF symbol value (LSB set for Thumb functions). Use
+    # readelf to recover those expression values so `Sym+off` is evaluated the
+    # same way the linker/assembler emits it.
+    try:
+        rout = subprocess.check_output(["arm-none-eabi-readelf", "-s", elf],
+                                       text=True, errors="replace")
+        for line in rout.splitlines():
+            m = re.match(r"^\s*\d+:\s+([0-9A-Fa-f]{8})\s+\d+\s+FUNC\s+\S+\s+\S+\s+\S+\s+(\S+)$", line)
+            if not m:
+                continue
+            raw = int(m.group(1), 16)
+            n = m.group(2)
+            if ROM_LO <= raw < ROM_HI:
+                name2addr[n] = raw
+                addr2name.setdefault(raw, n)
+                starts.add(raw)
+                addrs.append(raw)
+    except (OSError, subprocess.CalledProcessError):
+        pass
     addrs = sorted(set(addrs))
     return addrs, addr2name, starts, name2addr
 
@@ -103,6 +123,13 @@ def looks_packed(value):
     return MSG_HI_LO <= hi <= MSG_HI_HI and lo < FLAG_LO_MAX
 
 
+def looks_packed_pair(value):
+    """Strong OAM/frame-data tell: two adjacent u16 fields packed into one word."""
+    hi, lo = (value >> 16) & 0xFFFF, value & 0xFFFF
+    return (hi == lo + 1 and (hi & 0xFF00) == (lo & 0xFF00)
+            and (hi >> 8) in {0x04, 0x08, 0x0C})
+
+
 # Resource-type inference from a symbol name prefix — used for the cross-type signal
 # (a talk entry pointing into "banim_drum" graphics is the false-positive tell).
 TYPE_RULES = [
@@ -127,6 +154,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--elf", default=os.path.join(REPO, "fireemblem8.elf"))
     ap.add_argument("--limit", type=int, default=60)
+    ap.add_argument("--fail-on-suspects", action="store_true",
+                    help="exit nonzero when any suspect remains")
     args = ap.parse_args()
     if not os.path.exists(args.elf):
         print(f"need {args.elf} (run `make` first)", file=sys.stderr)
@@ -136,6 +165,16 @@ def main():
 
     # First pass: collect every reference so we can consistency-check each ROM address.
     refs = list(iter_4byte_values())
+    unitdef_files = set()
+    for rel, *_ in refs:
+        if rel in unitdef_files:
+            continue
+        try:
+            with open(os.path.join(REPO, rel), errors="replace") as f:
+                if re.search(r"^UnitDef_", f.read(), re.M):
+                    unitdef_files.add(rel)
+        except OSError:
+            pass
     raw_targets = {}     # addr -> [(rel,ln)]
     sym_targets = {}     # addr -> [(rel,ln,sym,off)]
     for rel, ln, kind, txt, sym, off, is_raw in refs:
@@ -155,6 +194,11 @@ def main():
         if a in starts or (a & 1) == 0:   # even/aligned or a known object start
             rawloc = raw_targets[a][0]
             symloc = sym_targets[a][0]
+            # A UnitDefinition's first packed word can coincidentally equal a real
+            # Thumb callback pointer in an unrelated proc table. That is legal
+            # mixed use, not an inconsistent classification of the same datum.
+            if rawloc[0] in unitdef_files and not re.search(r"^(REDA|UnitDef_)", symloc[2]):
+                continue
             inconsistent.append((f"0x{a:08X}", rawloc, symloc, addr2name.get(a, "?")))
 
     for rel, ln, kind, txt, sym, off, is_raw in refs:
@@ -181,11 +225,24 @@ def main():
             ttype = restype(sym)
             # NOISE FILTER 2 — chapter/event data legitimately references UnitDef tables.
             compatible = {ftype, ttype} <= {"event", "unit"}
+            # Exact resource starts are strong real-pointer evidence (e.g. portrait/bg
+            # palette tables); do not flag them solely because the numeric value also
+            # resembles packed metadata.
+            exact_start = off == 0 and a in starts
+            pair = looks_packed_pair(a) and "banim" in rel
+            unitdef_packed = (rel in unitdef_files and looks_packed(a)
+                              and not re.search(r"^(REDA|UnitDef_)", sym))
             cross = (ftype != "?" and ttype != "?" and ftype != ttype
-                     and not compatible and looks_packed(a))
+                     and not compatible and looks_packed(a) and not exact_start)
             if in_gap:
                 fp_suspects.append((rel, ln, f"{sym}+0x{off:X}",
                                     f"=0x{a:08X} lands in a GAP (no owning object)", "HIGH"))
+            elif pair:
+                fp_suspects.append((rel, ln, f"{sym}+0x{off:X}",
+                                    f"=0x{a:08X} packed adjacent-u16 pair in banim/OAM data", "HIGH"))
+            elif unitdef_packed:
+                fp_suspects.append((rel, ln, f"{sym}+0x{off:X}",
+                                    f"=0x{a:08X} packed UnitDefinition first word", "HIGH"))
             elif cross:
                 fp_suspects.append((rel, ln, f"{sym}+0x{off:X}",
                                     f"=0x{a:08X} CROSS-TYPE {ftype}->{ttype}, packed-looking", "MED"))
@@ -214,6 +271,8 @@ def main():
           f"false-negative(missed-ptr)={len(fn_suspects)}, "
           f"false-positive(mis-id)={len(fp_suspects)}")
     print("Confirm each with (1) source/struct, (2) target meaningfulness, (3) fe8u before editing.")
+    if args.fail_on_suspects and (inconsistent or fn_suspects or fp_suspects):
+        return 1
     return 0
 
 

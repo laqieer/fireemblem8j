@@ -12,7 +12,7 @@ UnitDef_UnusedAlly_4:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte PutNumber2DigitExt + 0x14
+	.4byte 0x08004D15
 	.4byte 0x000000D3
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -27,22 +27,22 @@ UnitDef_UnusedAlly_4:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte IrqMain + 0x105
+	.4byte 0x08000201
 	.4byte 0x0000014F
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte IrqMain + 0x13
+	.4byte 0x0800010F
 	.4byte 0x0000014E
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte SetupBackgrounds + 0x3E
+	.4byte 0x08001B0B
 	.4byte 0x00000190
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte DecodeString + 0x1E
+	.4byte 0x08000702
 	.4byte 0x000001CD
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -52,7 +52,7 @@ UnitDef_UnusedAlly_4:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte StartBgmVolumeChange + 0x96
+	.4byte 0x08002717
 	.4byte 0x0000008F
 	.4byte 0x00000000
 	.4byte 0x00000000
