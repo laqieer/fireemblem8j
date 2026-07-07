@@ -87,8 +87,18 @@ and weaker than the 12 compiler-free ARM proofs, but a real upgrade.
   (DivArm/MulU/UDiv/sub_800A194) as shared call-indexed oracles with **full argument-content
   anti-masking** (ref records args, impl asserts them equal). Mutation (negate `py0` in the
   spline output) → REFUTED. Independently reproduced. commit c58b127b8.
-- **`sub_800FAD0`** — in progress (first attempt was rejected for a degenerate `count ≤ 1`
-  domain; reworking at COUNTMAX=8 with the arg3==TRUE branch covered and a bounded retry loop).
+- **`sub_800FAD0` (GetUnitDefinitionFormEventScr) — PROVEN.** `focused/sub_800FAD0/harness.c`:
+  `** 0 of 354 failed ** VERIFICATION SUCCESSFUL` (`--unwind 24`). ARM-vs-ARM had reported
+  path-explosion (20 calls, 10 loops); CBMC's non-enumerating BMC handles it. `count ∈ [0,4]`
+  fully-symbolic, `arg3` fully-symbolic (the `arg3==TRUE` BuildDeployedUnitDefinitionList
+  branch is covered), the RNG collision/retry loop is **verified** (symbolic odd draws +
+  progress-guaranteeing even draws for bounded termination — not assumed away), `arg2 ≤ 100`
+  (the game percentage). Observable = return + full output buffer + call log (kind/args +
+  Build-call input bytes, anti-masking). Two mutations REFUTE (return value; and a
+  shuffle-logic flip of the `0x40` selected-flag, caught via the Build input). First attempt
+  was rejected for a degenerate `count ≤ 1` domain — this v2 fixes it. Independently
+  reproduced. commit 8eea275b9. (COUNTMAX=8 timed out >300s; 4 is the tractable bound that
+  still exercises multi-unit selection + both reorder passes + collisions.)
 - **`sub_8057F80`** — staged stop-loss spike (204 calls / 658 lines; loop-free).
 
 
