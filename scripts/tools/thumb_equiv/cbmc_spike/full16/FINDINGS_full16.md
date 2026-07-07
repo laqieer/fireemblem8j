@@ -68,6 +68,30 @@ tier (Serentty's taxonomy: byte-match > unbounded > bounded > differential), sti
 m2c + agbcc + the shared-oracle abstraction.
 
 
+## Focused per-function CBMC C-vs-C bounded proofs (upgrading differential/dynamic → bounded-proven)
+
+Beyond `sub_80A6F1C`, the same shared-oracle CBMC C-vs-C method is being applied to the 3
+functions our compiler-free ARM-vs-ARM prover could not close (its path-enumerator's
+DIVERGENCE/path-explosion failures), to lift them from differential/dynamic-only to
+**bounded-proven**. Tier label: `PROVEN-BOUNDED-CBMC-CVC` — bounded, trusting m2c (spec) +
+agbcc (codegen) + the shared-oracle abstraction of callees; strictly below the byte oracle
+and weaker than the 12 compiler-free ARM proofs, but a real upgrade.
+
+- **`sub_800A34C` (SplineEvalCatmullRom) — PROVEN.** `focused/sub_800A34C/harness.c`:
+  `** 0 of 687 failed ** VERIFICATION SUCCESSFUL` (`--unwind 17 --unwinding-assertions
+  --slice-formula`). ARM-vs-ARM had reported DIVERGENCE, diagnosed (diagnose_divergence.py)
+  as a FALSE-POSITIVE: only r0 (the fn is `void`) + the args to its 1 call (stack pointers
+  into its own frame) can-differ; data-memory + callee-saved are always-equal. The CBMC
+  harness compares the real caller-visible output (the 2 s32 written to *arg1) with
+  `count ∈ [2,4]` fully-symbolic points/knots/time (monotonic-knot precondition), all callees
+  (DivArm/MulU/UDiv/sub_800A194) as shared call-indexed oracles with **full argument-content
+  anti-masking** (ref records args, impl asserts them equal). Mutation (negate `py0` in the
+  spline output) → REFUTED. Independently reproduced. commit c58b127b8.
+- **`sub_800FAD0`** — in progress (first attempt was rejected for a degenerate `count ≤ 1`
+  domain; reworking at COUNTMAX=8 with the arg3==TRUE branch covered and a bounded retry loop).
+- **`sub_8057F80`** — staged stop-loss spike (204 calls / 658 lines; loop-free).
+
+
 ## Focused sub_8001570 full-domain verdict
 
 Corrected harness: `focused/sub_8001570/harness_full_domain.c`.
