@@ -868,8 +868,9 @@
 080509D0	0804FC5C	164	masked	GetLinkedTargetsNear
 08050A74	0804FD00	16	masked	GetLinkedTargetsFar
 08050A84	0804FD10	24	exact	GetLinkedTargets
+08050A9C	0804FD28	12	exact	GetSelectTargetCount
 08050AA8	0804FD34	20	masked	GetTarget
-08050AC8	0804FD28	12	exact	GetSelectTargetCount
+08050AC8	0804FD54	12	exact	GetBanimLinkArenaFlag
 08050ECC	08050158	28	masked	ekrBattlePrepareDragonIntro
 08051004	08050290	32	masked	ekrBattle_1
 080510D4	08050360	140	masked	ekrBattleTriggerNewRoundStart

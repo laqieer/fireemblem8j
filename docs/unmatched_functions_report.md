@@ -1,5 +1,18 @@
 # The 16 remaining unmatched functions — understanding report
 
+> **UPDATE 2026-07-07 — now 15.** `#6 PrepareBattleGraphicsMaybe (sub_8057F80)` was
+> **MATCHED byte-exact** (community decomp.me fork
+> [rtMN6](https://decomp.me/scratch/rtMN6)) and graduated to `src/`; `make compare`
+> stays OK, axis-2 → **99.83% (8677/8692), 15 still-asm**. This directly bears out this
+> report's ROI call: sub_8057F80 was rated *"≈NONE ROI / don't attempt (Stretch-only,
+> community/compute)"* — and it was the **community decomp.me path**, not agent effort,
+> that landed it. Integrating it also uncovered a **funcmap misID bug**: the JP guard
+> reads `GetBanimLinkArenaFlag` (0x08050AC8), not `GetSelectTargetCount` — the two are
+> byte-identical `return *global` getters, so `us_jp_funcmap.tsv` had mislabeled
+> 0x08050AC8. There was therefore **no [R1]/[R2] region difference**; the only JP↔US
+> delta is the US-only Manakete/Demon-King tail. The sections below are otherwise
+> as-written (they say "16"); treat #6 as ✅ MATCHED.
+
 > **Purpose of this document.** Understand (not match) the 16 functions whose bytes
 > still come from `asm/*.s` (the `src/nonmatching/*.c` set — axis-2 = 99.82% matching-C,
 > 16 unmatched). For each: does it exist in fe8u? what is it for? what does it do? is
@@ -37,7 +50,7 @@
 | 3 | 0x0800A594 | SplineSampleAtTime | JP-only spline driver | no | **DEAD (root)** | **0** | spill/reg-coloring |
 | 4 | 0x0800E1FC | Event18_ColorFade | event opcode handler | **yes** (eventscr.c:747) | **LIVE** | `gEventLoCmdTable` | ~95 B spill residual |
 | 5 | 0x0800FAD0 | GetUnitDefinitionFormEventScr | event unit loader | **yes** (eventscr.c:2376, NM in fe8u too) | **LIVE** | Event2C_LoadUnits | reg-permutation NEAR |
-| 6 | 0x08057F80 | PrepareBattleGraphicsMaybe | EKR battle-anim gate | **yes** analog (banim-ekrbattleintro.c) | **LIVE** | 2 EkrBattleStarting fns | **genuinely region-different** (2936 vs 3250 B) |
+| 6 | 0x08057F80 | PrepareBattleGraphicsMaybe | EKR battle-anim gate | **yes** analog (banim-ekrbattleintro.c) | **LIVE** | 2 EkrBattleStarting fns | ✅ **MATCHED 2026-07-07** (decomp.me rtMN6); was region-diff-only in the US-only tail |
 | 7 | 0x0807C8DC | AdjustNewUnitPosition | unit placement | **yes** (muctrl.c:475) | **LIVE** | 3 (Move/MuCtr/GenUnit) | if/else branch reg coloring |
 | 8 | 0x0807D3BC | SelectSummonPos | summon positioning | analog only (diff algorithm) | **LIVE** | SelSumPosAndMoveCamera | reg-alloc micro-decision |
 | 9 | 0x080A2E64 | DivinationRankSpriteUpdate | augury result screen | no | **LIVE** | augury proc sub_80A3074 | reg-coloring tie-break |
@@ -564,7 +577,7 @@ is pure metric vanity). Sizes are from the carve manifests.
 | 15 | DecodeAndVerifyArenaRecord (212 B) | **dead** | veneer-reg; never marathoned | High | ~0 (dead) | LOW |
 | 2 | SplineEvalCatmullRom (584 B) | **dead** | 515/600 B; permuter 12025→9115 | **Very High** | ~0 (dead) | **VERY LOW** |
 | 3 | SplineSampleAtTime (500 B) | **dead** | 421/500 B; permuter 7215→5795 | **Very High** | ~0 (dead) | **VERY LOW** |
-| 6 | PrepareBattleGraphicsMaybe (2936 B) | live | **region-different** + 2936 B coloring near | **Stretch** | high bytes / but unreachable | **≈NONE** |
+| 6 | PrepareBattleGraphicsMaybe (2936 B) | live | ✅ **MATCHED** (decomp.me rtMN6, 2026-07-07) | done | +1 (biggest) | **realised via community** |
 
 `*` The two "false-green" NEARs (#1, #9) are blocked by a **permuter tooling bug** (agbcc's
 "invalid zero-score" reports a spurious match), *not* by the function — see below.

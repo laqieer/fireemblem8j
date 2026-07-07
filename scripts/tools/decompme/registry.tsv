@@ -21,7 +21,6 @@ sub_800663C	xKNQn	PutFaceOnBackGround
 sub_80D19DC	VMhPB	RegisterTsaWithOffset
 sub_800FAD0	eZzgG	sub_800FAD0
 sub_800A594	Sp10a	sub_800A594
-sub_8057F80	WHtsM	PrepareBattleGraphicsMaybe
 sub_800E5CC	OqAJ4	Event1B_TEXTSHOW
 sub_80A6D34	9myLi	sub_80A6D34
 sub_80A390C	xYHce	sub_80A390C
