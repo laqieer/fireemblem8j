@@ -22,7 +22,12 @@ def c_hex(n):
 
 def clean_expr(expr):
     expr = re.sub(r'\s+', ' ', expr.strip())
-    return '0' if expr in ('0x00000000', '0x0') else expr
+    if expr in ('0x00000000', '0x0'):
+        return '0'
+    m = re.match(r'^([A-Za-z_]\w*)\s*([+-])\s*(0x[0-9A-Fa-f]+|\d+)$', expr)
+    if m:
+        return f'(void *)((u8 *){m.group(1)} {m.group(2)} {m.group(3)})'
+    return expr
 
 def first_symbol(expr):
     expr = expr.strip()
@@ -243,13 +248,31 @@ def ensure_include(lines):
             return lines[:idx+1]+['#include "proc.h"\n']+lines[idx+1:]
     return ['#include "proc.h"\n']+lines
 
+def symbol_in_headers(sym):
+    pat = re.compile(r'\b%s\b' % re.escape(sym))
+    # global.h always includes these project-wide declaration headers. Ignore comments/placeholders.
+    for name in ['functions.h', 'variables.h']:
+        hp = ROOT / 'include' / name
+        try:
+            for line in hp.read_text(errors='ignore').splitlines():
+                stripped = line.strip()
+                if not stripped or stripped.startswith('//') or stripped.startswith('/*') or '???' in stripped:
+                    continue
+                if pat.search(line):
+                    return True
+        except OSError:
+            pass
+    return False
+
+
 def insert_externs(lines, externs):
     if not externs:
         return lines
-    prefix=''.join(lines).split('__asm__',1)[0]
     existing=''.join(lines)
     decl=[]
     for sym,kind in sorted(externs.items()):
+        if symbol_in_headers(sym):
+            continue
         if kind == 'func': d=f'extern void {sym}();'
         elif kind == 'proc': d=f'extern struct ProcCmd {sym}[];'
         else: d=f'extern u8 {sym}[];'

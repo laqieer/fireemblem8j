@@ -1,6 +1,49 @@
 #include "global.h"
 #include "proc.h"
 
+
+extern void CreditsBlendCG_0();
+extern void CreditsBlendCG_1();
+extern void CreditsBlendCG_2();
+extern void CreditsBlendCG_3();
+extern void CreditsBlendCG_Init();
+extern void CreditsBlendCG_OnEnd();
+extern void EndingCredits_0();
+extern void EndingCredits_AwaitInputForEnd();
+extern void EndingCredits_EndBlendCG();
+extern void EndingCredits_Init();
+extern void EndingCredits_Loop_Main();
+extern void EndingCredits_OnEnd();
+extern void EndingCredits_ShowCopyright();
+extern void FadeInExists();
+extern void FadeOutExists();
+extern void NewFadeIn();
+extern void NewFadeOut();
+extern void OpSubtitle_AwaitTimer2a();
+extern void OpSubtitle_BackupPalette();
+extern void OpSubtitle_BlendFadeInSlide_Loop();
+extern void OpSubtitle_BlendFadeOutSlide_Loop();
+extern void OpSubtitle_ClearTileAndDisableTitleBg2();
+extern void OpSubtitle_FadeInScrollTextPal_Loop();
+extern void OpSubtitle_FadeInSlide_Loop();
+extern void OpSubtitle_FadeOutBgm();
+extern void OpSubtitle_FadeOutSlideAndAdvance_Loop();
+extern void OpSubtitle_FadeOutSlideToTitle_Loop();
+extern void OpSubtitle_FadeOutWholePalette_Loop();
+extern void OpSubtitle_Init();
+extern void OpSubtitle_LoadSlideToBg0();
+extern void OpSubtitle_LoadSlideToBg0AndBg1();
+extern void OpSubtitle_ReloadTitleSlide();
+extern void OpSubtitle_ResetBg1Position();
+extern void OpSubtitle_SetupScrollTextBgs();
+extern void OpSubtitle_SetupTitleBgs();
+extern void StartFastFadeToBlack();
+extern void StartSlowFadeToBlack();
+extern void Subtitle_LightFlareFx_End();
+extern void Subtitle_LightFlareFx_Init();
+extern void Subtitle_LightFlareFx_Loop();
+extern void WaitForFade();
+
 /* Migrated from asm/frontier_df4_ending.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
@@ -165,224 +208,144 @@ u8 frontier_df4_ending_011_B24D0C[] __attribute__((section(".data.frontier_df4_e
 u8 frontier_df4_ending_012_B25A78[] __attribute__((section(".data.frontier_df4_ending.gap12"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_012_B25A78.bin");
 u8 frontier_df4_ending_013_B26374[] __attribute__((section(".data.frontier_df4_ending.gap13"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_013_B26374.bin");
 u8 frontier_df4_ending_014_B26A6C[] __attribute__((section(".data.frontier_df4_ending.gap14"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.bin");
+struct ProcCmd frontier_df4_ending_015_B3B3D4[] SECTION(".data.frontier_df4_ending.gap15") = {
+    PROC_SLEEP(0),
+    PROC_CALL(CreditsBlendCG_Init),
+    PROC_REPEAT(CreditsBlendCG_0),
+    PROC_REPEAT(CreditsBlendCG_1),
+    PROC_REPEAT(CreditsBlendCG_2),
+    PROC_REPEAT(CreditsBlendCG_3),
+    PROC_CALL(CreditsBlendCG_OnEnd),
+    PROC_END,
+};
+
+struct ProcCmd ProcScr_EndingCredits_Init_B3B3D4_0[] SECTION(".data.frontier_df4_ending.gap15") = {
+    PROC_SLEEP(0),
+    PROC_CALL(EndingCredits_Init),
+    PROC_REPEAT(EndingCredits_Loop_Main),
+    PROC_GOTO(1),
+    PROC_LABEL(0),
+    PROC_CALL(EndingCredits_EndBlendCG),
+    PROC_SLEEP(1),
+    PROC_CALL_ARG(NewFadeOut, 0x10),
+    PROC_WHILE(FadeOutExists),
+    PROC_CALL(EndingCredits_0),
+    PROC_SLEEP(1),
+    PROC_CALL(EndingCredits_ShowCopyright),
+    PROC_SLEEP(1),
+    PROC_CALL_ARG(NewFadeIn, 0x10),
+    PROC_WHILE(FadeInExists),
+    PROC_LABEL(1),
+    PROC_REPEAT(EndingCredits_AwaitInputForEnd),
+    PROC_CALL(StartSlowFadeToBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_SLEEP(0x1E),
+    PROC_CALL(EndingCredits_OnEnd),
+    PROC_SLEEP(1),
+    PROC_END,
+};
+
 __asm__(
     ".section .data.frontier_df4_ending.gap15, \"aw\", %progbits\n"
-    ".global frontier_df4_ending_015_B3B3D4\n"
-    "frontier_df4_ending_015_B3B3D4:\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte CreditsBlendCG_Init\n"
-    ".4byte 0x00000003\n"
-    ".4byte CreditsBlendCG_0\n"
-    ".4byte 0x00000003\n"
-    ".4byte CreditsBlendCG_1\n"
-    ".4byte 0x00000003\n"
-    ".4byte CreditsBlendCG_2\n"
-    ".4byte 0x00000003\n"
-    ".4byte CreditsBlendCG_3\n"
-    ".4byte 0x00000002\n"
-    ".4byte CreditsBlendCG_OnEnd\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndingCredits_Init\n"
-    ".4byte 0x00000003\n"
-    ".4byte EndingCredits_Loop_Main\n"
-    ".4byte 0x0001000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndingCredits_EndBlendCG\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00100018\n"
-    ".4byte NewFadeOut\n"
-    ".4byte 0x00000014\n"
-    ".4byte FadeOutExists\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndingCredits_0\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndingCredits_ShowCopyright\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00100018\n"
-    ".4byte NewFadeIn\n"
-    ".4byte 0x00000014\n"
-    ".4byte FadeInExists\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte EndingCredits_AwaitInputForEnd\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartSlowFadeToBlack\n"
-    ".4byte 0x00000003\n"
-    ".4byte WaitForFade\n"
-    ".4byte 0x001e000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndingCredits_OnEnd\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
     ".4byte 0x60000000\n"
     ".4byte 0x00000000\n"
     ".4byte 0x00006800\n"
     ".4byte 0x70008000\n"
     ".4byte 0x80000000\n"
     ".4byte 0x00007800\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Subtitle_LightFlareFx_Init\n"
-    ".4byte 0x00000003\n"
-    ".4byte Subtitle_LightFlareFx_Loop\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Subtitle_LightFlareFx_End\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0024000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte OpSubtitle_ReloadTitleSlide\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
+);
+
+struct ProcCmd ProcScr_Subtitle_LightFlareFx_Init_B3B3D4_1[] SECTION(".data.frontier_df4_ending.gap15") = {
+    PROC_SLEEP(1),
+    PROC_CALL(Subtitle_LightFlareFx_Init),
+    PROC_REPEAT(Subtitle_LightFlareFx_Loop),
+    PROC_SLEEP(1),
+    PROC_CALL(Subtitle_LightFlareFx_End),
+    PROC_END,
+};
+
+struct ProcCmd ProcScr_OpSubtitle_ReloadTitleSlide_B3B3D4_2[] SECTION(".data.frontier_df4_ending.gap15") = {
+    PROC_SLEEP(0),
+    PROC_SLEEP(0x24),
+    PROC_CALL(OpSubtitle_ReloadTitleSlide),
+    PROC_END,
+};
+
+__asm__(
+    ".section .data.frontier_df4_ending.gap15, \"aw\", %progbits\n"
     ".4byte 0x60000000\n"
     ".4byte 0x00000000\n"
     ".4byte 0x00006800\n"
     ".4byte 0x70000000\n"
     ".4byte 0x80000000\n"
     ".4byte 0x00007800\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte OpSubtitle_Init\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00020018\n"
-    ".4byte NewFadeIn\n"
-    ".4byte 0x00000014\n"
-    ".4byte FadeInExists\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_AwaitTimer2a\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte OpSubtitle_LoadSlideToBg0\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_FadeInSlide_Loop\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_AwaitTimer2a\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_FadeOutSlideAndAdvance_Loop\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_AwaitTimer2a\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000005\n"
-    ".4byte gBgConfig_OpSubtitle + 0x18\n"
-    ".4byte 0x00000005\n"
-    ".4byte gBgConfig_OpSubtitle + 0x48\n"
-    ".4byte 0x00000002\n"
-    ".4byte OpSubtitle_SetupScrollTextBgs\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_AwaitTimer2a\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_FadeInScrollTextPal_Loop\n"
-    ".4byte 0x00000002\n"
-    ".4byte OpSubtitle_SetupTitleBgs\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_AwaitTimer2a\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_BlendFadeOutSlide_Loop\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_AwaitTimer2a\n"
-    ".4byte 0x00000002\n"
-    ".4byte OpSubtitle_ClearTileAndDisableTitleBg2\n"
-    ".4byte 0x0002000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte OpSubtitle_LoadSlideToBg0AndBg1\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_BlendFadeInSlide_Loop\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_AwaitTimer2a\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_BlendFadeOutSlide_Loop\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_AwaitTimer2a\n"
-    ".4byte 0x0002000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0004000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_AwaitTimer2a\n"
-    ".4byte 0x00000002\n"
-    ".4byte OpSubtitle_BackupPalette\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_FadeOutWholePalette_Loop\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_AwaitTimer2a\n"
-    ".4byte 0x00000002\n"
-    ".4byte OpSubtitle_LoadSlideToBg0\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_FadeInSlide_Loop\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_AwaitTimer2a\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_FadeOutSlideToTitle_Loop\n"
-    ".4byte 0x00000003\n"
-    ".4byte OpSubtitle_AwaitTimer2a\n"
-    ".4byte 0x0005000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000009\n"
-    ".4byte gBgConfig_OpSubtitle + 0x18\n"
-    ".4byte 0x00000009\n"
-    ".4byte gBgConfig_OpSubtitle + 0x48\n"
-    ".4byte 0x00000002\n"
-    ".4byte OpSubtitle_FadeOutBgm\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartSlowFadeToBlack\n"
-    ".4byte 0x00000003\n"
-    ".4byte WaitForFade\n"
-    ".4byte 0x001e000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0007000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0006000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000009\n"
-    ".4byte gBgConfig_OpSubtitle + 0x18\n"
-    ".4byte 0x00000009\n"
-    ".4byte gBgConfig_OpSubtitle + 0x48\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartFastFadeToBlack\n"
-    ".4byte 0x00000003\n"
-    ".4byte WaitForFade\n"
-    ".4byte 0x000a000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0007000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0007000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte OpSubtitle_ResetBg1Position\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
+);
+
+struct ProcCmd ProcScr_OpSubtitle_Init_B3B3D4_3[] SECTION(".data.frontier_df4_ending.gap15") = {
+    PROC_SLEEP(0),
+    PROC_CALL(OpSubtitle_Init),
+    PROC_SLEEP(1),
+    PROC_CALL_ARG(NewFadeIn, 2),
+    PROC_WHILE(FadeInExists),
+    PROC_REPEAT(OpSubtitle_AwaitTimer2a),
+    PROC_LABEL(0),
+    PROC_CALL(OpSubtitle_LoadSlideToBg0),
+    PROC_REPEAT(OpSubtitle_FadeInSlide_Loop),
+    PROC_REPEAT(OpSubtitle_AwaitTimer2a),
+    PROC_REPEAT(OpSubtitle_FadeOutSlideAndAdvance_Loop),
+    PROC_REPEAT(OpSubtitle_AwaitTimer2a),
+    PROC_GOTO(0),
+    PROC_LABEL(1),
+    PROC_START_CHILD(ProcScr_Subtitle_LightFlareFx_Init_B3B3D4_1),
+    PROC_START_CHILD(ProcScr_OpSubtitle_ReloadTitleSlide_B3B3D4_2),
+    PROC_CALL(OpSubtitle_SetupScrollTextBgs),
+    PROC_REPEAT(OpSubtitle_AwaitTimer2a),
+    PROC_REPEAT(OpSubtitle_FadeInScrollTextPal_Loop),
+    PROC_CALL(OpSubtitle_SetupTitleBgs),
+    PROC_REPEAT(OpSubtitle_AwaitTimer2a),
+    PROC_REPEAT(OpSubtitle_BlendFadeOutSlide_Loop),
+    PROC_REPEAT(OpSubtitle_AwaitTimer2a),
+    PROC_CALL(OpSubtitle_ClearTileAndDisableTitleBg2),
+    PROC_LABEL(2),
+    PROC_CALL(OpSubtitle_LoadSlideToBg0AndBg1),
+    PROC_REPEAT(OpSubtitle_BlendFadeInSlide_Loop),
+    PROC_REPEAT(OpSubtitle_AwaitTimer2a),
+    PROC_REPEAT(OpSubtitle_BlendFadeOutSlide_Loop),
+    PROC_REPEAT(OpSubtitle_AwaitTimer2a),
+    PROC_GOTO(2),
+    PROC_LABEL(4),
+    PROC_REPEAT(OpSubtitle_AwaitTimer2a),
+    PROC_CALL(OpSubtitle_BackupPalette),
+    PROC_REPEAT(OpSubtitle_FadeOutWholePalette_Loop),
+    PROC_REPEAT(OpSubtitle_AwaitTimer2a),
+    PROC_CALL(OpSubtitle_LoadSlideToBg0),
+    PROC_REPEAT(OpSubtitle_FadeInSlide_Loop),
+    PROC_REPEAT(OpSubtitle_AwaitTimer2a),
+    PROC_REPEAT(OpSubtitle_FadeOutSlideToTitle_Loop),
+    PROC_REPEAT(OpSubtitle_AwaitTimer2a),
+    PROC_LABEL(5),
+    PROC_END_EACH(ProcScr_Subtitle_LightFlareFx_Init_B3B3D4_1),
+    PROC_END_EACH(ProcScr_OpSubtitle_ReloadTitleSlide_B3B3D4_2),
+    PROC_CALL(OpSubtitle_FadeOutBgm),
+    PROC_CALL(StartSlowFadeToBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_SLEEP(0x1E),
+    PROC_GOTO(7),
+    PROC_LABEL(6),
+    PROC_END_EACH(ProcScr_Subtitle_LightFlareFx_Init_B3B3D4_1),
+    PROC_END_EACH(ProcScr_OpSubtitle_ReloadTitleSlide_B3B3D4_2),
+    PROC_CALL(StartFastFadeToBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_SLEEP(0xA),
+    PROC_GOTO(7),
+    PROC_LABEL(7),
+    PROC_CALL(OpSubtitle_ResetBg1Position),
+    PROC_SLEEP(1),
+    PROC_END,
+};
+
+__asm__(
+    ".section .data.frontier_df4_ending.gap15, \"aw\", %progbits\n"
     ".4byte 0x7bff398a\n"
     ".4byte 0x6fbd77de\n"
     ".4byte 0x5f5b677c\n"
@@ -392,6 +355,7 @@ __asm__(
     ".4byte 0x152c25d0\n"
     ".4byte 0x000008a7\n"
 );
+
 /* #143: tail 48 B (JP 0x08B3EDD0..0x08B3EE00) typed out as gProcScr_DrawTitleSprites +
  * gProcScr_SkipTitleFxKeyListener in src/data/gProcScr_DrawTitleSprites_ref; keep only
  * the 413 B head here so its interior code pointers become R_ARM_ABS32 relocations. */

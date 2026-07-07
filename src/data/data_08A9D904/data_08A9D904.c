@@ -1,6 +1,10 @@
 #include "global.h"
 #include "proc.h"
 
+
+extern void DrawDifficultySprite_Init();
+extern void DrawDifficultySprites_Loop();
+
 /* #148 proc-script decomp-completeness: data_08A9D904.
  *
  * 1 opaque proc script(s) decoded from the .data.residue.08A9D904
@@ -88,49 +92,47 @@ __asm__(
 
 /* residue [08A9DA00,08A9DAA4) (164 B): byte-identical. */
 __asm__(
-"\t.section .data.residue.08A9DA00, \"aw\", %progbits\n"
-"data_08A9DA00:\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x045C8000\n"
-"\t.4byte 0x40000002\n"
-"\t.4byte 0x0840C000\n"
-"\t.4byte 0xC0404000\n"
-"\t.4byte 0x00030848\n"
-"\t.4byte 0x80104008\n"
-"\t.4byte 0x40080850\n"
-"\t.4byte 0x08548030\n"
-"\t.4byte 0x80504008\n"
-"\t.4byte 0x00020858\n"
-"\t.4byte 0xC0004000\n"
-"\t.4byte 0x40000840\n"
-"\t.4byte 0x0848C040\n"
-"\t.4byte 0x40080003\n"
-"\t.4byte 0x08C08018\n"
-"\t.4byte 0x80384008\n"
-"\t.4byte 0x000808C4\n"
-"\t.4byte 0x08C84058\n"
-"\t.4byte 0x40080002\n"
-"\t.4byte 0x08CA8020\n"
-"\t.4byte 0x80404008\n"
-"\t.4byte 0x000308CE\n"
-"\t.4byte 0x80104008\n"
-"\t.4byte 0x40080890\n"
-"\t.4byte 0x08948030\n"
-"\t.4byte 0x80504008\n"
-"\t.4byte 0x00000898\n"
-"\t.4byte data_08A9D978 + 0xC0\n"
-"\t.4byte data_08A9D978 + 0xD4\n"
-"\t.4byte data_08A9D978 + 0xE2\n"
-"\t.4byte 0x03020100\n"
-"\t.4byte 0x00010203\n"
-"\t.global data_08A9DA84\n"
-"data_08A9DA84:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte DrawDifficultySprite_Init + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte DrawDifficultySprites_Loop + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
+    ".section .data.residue.08A9DA00, \"aw\", %progbits\n"
+    "data_08A9DA00:\n"
+    "	.4byte 0x00000001\n"
+    "	.4byte 0x045C8000\n"
+    "	.4byte 0x40000002\n"
+    "	.4byte 0x0840C000\n"
+    "	.4byte 0xC0404000\n"
+    "	.4byte 0x00030848\n"
+    "	.4byte 0x80104008\n"
+    "	.4byte 0x40080850\n"
+    "	.4byte 0x08548030\n"
+    "	.4byte 0x80504008\n"
+    "	.4byte 0x00020858\n"
+    "	.4byte 0xC0004000\n"
+    "	.4byte 0x40000840\n"
+    "	.4byte 0x0848C040\n"
+    "	.4byte 0x40080003\n"
+    "	.4byte 0x08C08018\n"
+    "	.4byte 0x80384008\n"
+    "	.4byte 0x000808C4\n"
+    "	.4byte 0x08C84058\n"
+    "	.4byte 0x40080002\n"
+    "	.4byte 0x08CA8020\n"
+    "	.4byte 0x80404008\n"
+    "	.4byte 0x000308CE\n"
+    "	.4byte 0x80104008\n"
+    "	.4byte 0x40080890\n"
+    "	.4byte 0x08948030\n"
+    "	.4byte 0x80504008\n"
+    "	.4byte 0x00000898\n"
+    "	.4byte data_08A9D978 + 0xC0\n"
+    "	.4byte data_08A9D978 + 0xD4\n"
+    "	.4byte data_08A9D978 + 0xE2\n"
+    "	.4byte 0x03020100\n"
+    "	.4byte 0x00010203\n"
 );
+
+struct ProcCmd data_08A9DA84[] SECTION(".data.residue.08A9DA00") = {
+    PROC_CALL(DrawDifficultySprite_Init + 0x1),
+    PROC_SLEEP(0),
+    PROC_REPEAT(DrawDifficultySprites_Loop + 0x1),
+    PROC_END,
+};
+

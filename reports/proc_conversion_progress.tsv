@@ -1,0 +1,24 @@
+file	original_PROC_SCRIPT_blocks	remaining_PROC_SCRIPT_classifier_blocks	typed_ProcCmd_arrays_added	PROC_macro_entries_added	per_file_compare	action_or_left_reason
+src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.c	1	1	0	0	OK	LEFT: classifier naming-only/reference file; already typed ProcCmd content or .set glue, no raw local ProcCmd payload to convert
+src/data/ProcScr_menu148_ref/dat_ProcScr_menu148_ref.c	1	1	0	0	OK	LEFT: classifier naming-only/reference file; already typed ProcCmd content or .set glue, no raw local ProcCmd payload to convert
+src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.c	1	1	0	0	OK	LEFT: classifier naming-only/reference file; already typed ProcCmd content or .set glue, no raw local ProcCmd payload to convert
+src/data/banim/dat_data_banim_p215.c	1	1	0	0	OK	LEFT: dry-run decoder found no valid symbolic ProcCmd span; classifier hit is graphics/OAM/AnimScr/scalar data shape
+src/data/data_085B938C/data_085B938C.c	2	0	2	6	OK	CONVERTED valid symbolic ProcCmd span(s) to typed struct ProcCmd; make compare OK per file
+src/data/data_085BA1F4/data_085BA1F4.c	1	1	0	0	OK	LEFT: dry-run decoder found no valid symbolic ProcCmd span in the classifier block
+src/data/data_085C34F0/data_085C34F0.c	1	0	1	6	OK	CONVERTED valid symbolic ProcCmd span(s) to typed struct ProcCmd; make compare OK per file
+src/data/data_085D1EA4/data_085D1EA4.c	1	1	0	0	OK	LEFT: dry-run decoder found no valid symbolic ProcCmd span in the classifier block
+src/data/data_085D1F2C/data_085D1F2C.c	1	1	0	0	OK	LEFT: dry-run decoder found no valid symbolic ProcCmd span in the classifier block
+src/data/data_085E3534/data_085E3534.c	1	0	2	9	OK	CONVERTED valid symbolic ProcCmd span(s) to typed struct ProcCmd; make compare OK per file
+src/data/data_08A9D904/data_08A9D904.c	1	1	1	4	OK	CONVERTED valid symbolic ProcCmd span(s) to typed struct ProcCmd; make compare OK per file; remaining classifier hits are mixed scalar/graphics/OAM tails without valid symbolic ProcCmd spans
+src/data/data_08A9DAB4/data_08A9DAB4.c	2	1	2	7	OK	CONVERTED valid symbolic ProcCmd span(s) to typed struct ProcCmd; make compare OK per file; remaining classifier hits are mixed scalar/graphics/OAM tails without valid symbolic ProcCmd spans
+src/data/data_08A9DCD4/data_08A9DCD4.c	1	0	2	10	OK	CONVERTED valid symbolic ProcCmd span(s) to typed struct ProcCmd; make compare OK per file
+src/data/frontier_banim_aurabg3/frontier_banim_aurabg3.c	1	1	0	0	OK	LEFT: dry-run decoder found no valid symbolic ProcCmd span; classifier hit is graphics/OAM/AnimScr/scalar data shape
+src/data/frontier_df3_banim_aura/frontier_df3_banim_aura.c	4	4	0	0	OK	LEFT: dry-run decoder found no valid symbolic ProcCmd span; classifier hit is graphics/OAM/AnimScr/scalar data shape
+src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.c	8	5	4	43	OK	CONVERTED valid symbolic ProcCmd span(s) to typed struct ProcCmd; make compare OK per file; remaining classifier hits are mixed scalar/graphics/OAM tails without valid symbolic ProcCmd spans
+src/data/frontier_df3_ending/frontier_df3_ending.c	3	3	0	0	OK	LEFT: dry-run decoder found no valid symbolic ProcCmd span; classifier hit is graphics/OAM/AnimScr/scalar data shape
+src/data/frontier_df4_banim_a/frontier_df4_banim_a.c	22	22	0	0	OK	LEFT: dry-run decoder found no valid symbolic ProcCmd span; classifier hit is graphics/OAM/AnimScr/scalar data shape
+src/data/frontier_df4_banim_b/frontier_df4_banim_b.c	25	25	0	0	OK	LEFT: dry-run decoder found no valid symbolic ProcCmd span; classifier hit is graphics/OAM/AnimScr/scalar data shape
+src/data/frontier_df4_ending/frontier_df4_ending.c	2	3	5	101	OK	CONVERTED valid symbolic ProcCmd span(s) to typed struct ProcCmd; make compare OK per file; remaining classifier hits are mixed scalar/graphics/OAM tails without valid symbolic ProcCmd spans
+src/data/frontier_df4_menu/frontier_df4_menu.c	23	24	7	86	OK	CONVERTED valid symbolic ProcCmd span(s) to typed struct ProcCmd; make compare OK per file; remaining classifier hits are mixed scalar/graphics/OAM tails without valid symbolic ProcCmd spans
+src/data/frontier_df4_misc_lo/frontier_df4_misc_lo.c	1	1	0	0	OK	LEFT: dry-run decoder found no valid symbolic ProcCmd span; classifier hit is graphics/OAM/AnimScr/scalar data shape
+src/data/frontier_df4_uistuff/frontier_df4_uistuff.c	9	4	13	225	OK	CONVERTED valid symbolic ProcCmd span(s) to typed struct ProcCmd; make compare OK per file; remaining classifier hits are mixed scalar/graphics/OAM tails without valid symbolic ProcCmd spans

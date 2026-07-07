@@ -1,6 +1,12 @@
 #include "global.h"
 #include "proc.h"
 
+
+extern void SpriteTextScroll_OnIdle();
+extern void SpriteTextScroll_OnInit();
+extern void TalkPutSpriteText_OnEnd();
+extern void TalkPutSpriteText_OnIdle();
+
 /* #148 proc-script decomp-completeness: data_085B938C.
  *
  * 2 opaque proc script(s) decoded from the .data.residue.085B938C
@@ -34,29 +40,20 @@ struct ProcCmd ProcScr_ScreenFlashing[] __attribute__((section(".rodata.dat_Proc
 };
 
 /* residue [085B938C,085B93A4) (24 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.085B938C, \"aw\", %progbits\n"
-"\t.global data_085B938C\n"
-"data_085B938C:\n"
-"\t.4byte 0x00000004\n"
-"\t.4byte TalkPutSpriteText_OnEnd + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte TalkPutSpriteText_OnIdle + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd data_085B938C[] SECTION(".data.residue.085B938C") = {
+    PROC_SET_END_CB(TalkPutSpriteText_OnEnd + 0x1),
+    PROC_REPEAT(TalkPutSpriteText_OnIdle + 0x1),
+    PROC_END,
+};
+
 
 /* residue [085B93BC,085B93D4) (24 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.085B93BC, \"aw\", %progbits\n"
-"data_085B93BC:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SpriteTextScroll_OnInit + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte SpriteTextScroll_OnIdle + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd data_085B93BC[] SECTION(".data.residue.085B93BC") = {
+    PROC_CALL(SpriteTextScroll_OnInit + 0x1),
+    PROC_REPEAT(SpriteTextScroll_OnIdle + 0x1),
+    PROC_END,
+};
+
 
 /* residue [085B93FC,085B943C) (64 B): byte-identical. */
 __asm__(

@@ -1,6 +1,87 @@
 #include "global.h"
 #include "proc.h"
 #include "bmio.h"
+
+extern void AfterItemUse_SetTargetStatus();
+extern void AreKeysHeld();
+extern void BMapDispResume();
+extern void BMapDispSuspend();
+extern void DisplayActiveUnitEffectRange();
+extern void DisplayMapChangeIfFog();
+extern void EnablePrepScreenMenu();
+extern void EndDoubleTradeMenuTutorialHandCursor();
+extern void EndPlayerPhaseSideWindows();
+extern void EndPrepScreen();
+extern void EndPrepScreenMenu_();
+extern void EndTradeMenuTutorialHandCursor();
+extern void EventEngineExists();
+extern void ExecNightmareStaffEffect();
+extern void HideMoveRangeGraphics();
+extern void InitMapChangeGraphicsIfFog();
+extern void InitPrepScreenCursorPosition();
+extern void InitPrepScreenUnitsAndCamera();
+extern void IsSubtitleHelpActive();
+extern void MapPaletteBrightnessFadeExists();
+extern void MapPaletteBrightnessFade_Loop();
+extern void NewPrepScreenTraineePromotionManager();
+extern void Nop_Eventcall_0();
+extern void PostWarpStaff_ExecTrap();
+extern void PostWarpStaff_RefreshMap();
+extern void PrepAtMenuExists();
+extern void PrepHelpPrompt_Init();
+extern void PrepHelpPrompt_Loop();
+extern void PrepScreenMenuExists();
+extern void PrepScreenProc_AddPostgameUnits();
+extern void PrepScreenProc_ApplyBrownBoxPalette();
+extern void PrepScreenProc_Cleanup();
+extern void PrepScreenProc_DimMapImmediate();
+extern void PrepScreenProc_HideEverythingAndUnlockGame();
+extern void PrepScreenProc_InitMapMenu();
+extern void PrepScreenProc_LockGame();
+extern void PrepScreenProc_MapIdle();
+extern void PrepScreenProc_MapMovementLoop();
+extern void PrepScreenProc_RecenterOnActiveUnit();
+extern void PrepScreenProc_RefreshAfterStatScreen();
+extern void PrepScreenProc_RestoreBgmAfterSave();
+extern void PrepScreenProc_SetCameraOnSupply();
+extern void PrepScreenProc_SetupMapIdle();
+extern void PrepScreenProc_StartBrightenMap();
+extern void PrepScreenProc_StartConfigMenu();
+extern void PrepScreenProc_StartDimMap();
+extern void PrepScreenProc_StartMapMenu();
+extern void PrepScreenProc_StartShopScreen();
+extern void PrepScreenProc_UpdateBgm();
+extern void PrepScreenTraineePromotionManagerExists();
+extern void PrepScreen_StartUnitSwap();
+extern void PrepScreen_StartUnitSwapAnim();
+extern void PrepScreen_UnitSwapIdle();
+extern struct ProcCmd ProcScr_CamMove[];
+extern void RefreshBMapGraphics();
+extern void RefreshEntityBmMaps();
+extern void RefreshUnitSprites();
+extern void RenderBmMap();
+extern void SALLYCURSOR_DeploySupplyUnit();
+extern void SALLYCURSOR_RemoveSupplyUnit();
+extern void StartChapterStatusScreen_FromPrep();
+extern void StartFastFadeFromBlack();
+extern void StartFastFadeToBlack();
+extern void StartMidFadeFromBlack();
+extern void StartMidFadeToBlack();
+extern void StartPlayerPhaseSideWindows();
+extern void StartPrepAtMenu();
+extern void StartPrepSaveScreen();
+extern void TalkFaceMove_OnIdle();
+extern void TalkFaceMove_OnInit();
+extern void TalkSkipListener_OnIdle();
+extern void Talk_OnEnd();
+extern void Talk_OnIdle();
+extern void Talk_OnInit();
+extern void UnitInfoWindow_OnLoop();
+extern void WaitEventPromoteDone();
+extern void WaitForFade();
+extern u8 data_080DCCB2[];
+extern void sub_8013844();
+
 #define PROC_WORDS(op, pa, p) { (op), (pa), (void *)(p) }
 
 /* #143 shiftability: symbolize raw-hex ProcCmd interior code pointers so they
@@ -8294,28 +8375,23 @@ __asm__(
     ".4byte 0x000002fb\n"
     ".4byte 0x000bff0b\n"
 );
+struct ProcCmd frontier_df4_uistuff_022_5B90D8[] SECTION(".data.frontier_df4_uistuff.gap22") = {
+    PROC_MARK(5),
+    PROC_REPEAT(TalkSkipListener_OnIdle),
+    PROC_END,
+};
+
+struct ProcCmd ProcScr_Talk_OnEnd_5B90D8_0[] SECTION(".data.frontier_df4_uistuff.gap22") = {
+    PROC_MARK(5),
+    PROC_SET_END_CB(Talk_OnEnd),
+    PROC_SLEEP(1),
+    PROC_CALL(Talk_OnInit),
+    PROC_REPEAT(Talk_OnIdle),
+    PROC_END,
+};
+
 __asm__(
     ".section .data.frontier_df4_uistuff.gap22, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_022_5B90D8\n"
-    "frontier_df4_uistuff_022_5B90D8:\n"
-    ".4byte 0x0005000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte TalkSkipListener_OnIdle\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0005000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000004\n"
-    ".4byte Talk_OnEnd\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Talk_OnInit\n"
-    ".4byte 0x00000003\n"
-    ".4byte Talk_OnIdle\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
     ".4byte 0x00000010\n"
     ".4byte 0x00000000\n"
     ".4byte 0x00000800\n"
@@ -8326,15 +8402,15 @@ __asm__(
     ".4byte 0x00000003\n"
     ".4byte 0x00000800\n"
     ".4byte 0x00000003\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte TalkFaceMove_OnInit\n"
-    ".4byte 0x00000003\n"
-    ".4byte TalkFaceMove_OnIdle\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
 );
+
+struct ProcCmd ProcScr_TalkFaceMove_OnInit_5B90D8_1[] SECTION(".data.frontier_df4_uistuff.gap22") = {
+    PROC_SLEEP(1),
+    PROC_CALL(TalkFaceMove_OnInit),
+    PROC_REPEAT(TalkFaceMove_OnIdle),
+    PROC_END,
+};
+
 __asm__(
     ".section .data.frontier_df4_uistuff.gap22b, \"aw\", %progbits\n"
     ".global frontier_df4_uistuff_022b_5B9188\n"
@@ -8984,14 +9060,13 @@ __asm__(
     ".4byte 0x00000000\n"
     ".4byte 0x00000000\n"
 );
+struct ProcCmd datac_5B9D0C[] SECTION(".data.frontier_df4_uistuff.gap23c") = {
+    PROC_REPEAT(WaitEventPromoteDone),
+    PROC_END,
+};
+
 __asm__(
     ".section .data.frontier_df4_uistuff.gap23c, \"aw\", %progbits\n"
-    ".global datac_5B9D0C\n"
-    "datac_5B9D0C:\n"
-    ".4byte 0x00000003\n"
-    ".4byte WaitEventPromoteDone\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
     ".4byte 0x00070228\n"
     ".4byte 0x00000120\n"
     ".4byte 0x00011020\n"
@@ -9039,6 +9114,7 @@ __asm__(
     ".4byte 0x00002220\n"
     ".4byte 0x00000120\n"
 );
+
 __asm__(
 "\t.section .data.frontier_df4_uistuff.gap24, \"aw\", %progbits\n"
 "\t.global frontier_df4_uistuff_024_5C1D30\n"
@@ -9494,19 +9570,13 @@ __asm__(
 "\t.4byte 0x00000005\n"
 "\t.4byte 0x0000FFFF\n"
 );
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap24b, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_024b_5C2458\n"
-    "frontier_df4_uistuff_024b_5C2458:\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte sub_8013844\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte MapPaletteBrightnessFade_Loop\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd frontier_df4_uistuff_024b_5C2458[] SECTION(".data.frontier_df4_uistuff.gap24b") = {
+    PROC_SLEEP(0),
+    PROC_CALL(sub_8013844),
+    PROC_REPEAT(MapPaletteBrightnessFade_Loop),
+    PROC_END,
+};
+
 __asm__(
     ".section .data.frontier_df4_uistuff.gap24bb, \"aw\", %progbits\n"
     ".global frontier_df4_uistuff_024bb_5C2570\n"
@@ -9875,31 +9945,19 @@ __asm__(
     ".4byte 0x00000000\n"
     ".4byte 0x00000000\n"
 );
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap25e, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_025e_5C32B8\n"
-    "frontier_df4_uistuff_025e_5C32B8:\n"
-    ".4byte 0x00000016\n"
-    ".4byte ConvoyMenuProc_StarMenu\n"
-    ".4byte 0x00000016\n"
-    ".4byte ConvoyMenuProc_MenuEnd\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000016\n"
-    ".4byte ConvoyMenuProc_MaybeStartSelectConvoyItem\n"
-    ".4byte 0x00000016\n"
-    ".4byte ConvoyMenuProc_SendToConvoyReal\n"
-    ".4byte 0x0063000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoyMenuProc_SetupActiveUnit\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoyMenuProc_ExecBootlegPopup\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
+struct ProcCmd frontier_df4_uistuff_025e_5C32B8[] SECTION(".data.frontier_df4_uistuff.gap25e") = {
+    PROC_CALL_2(ConvoyMenuProc_StarMenu),
+    PROC_CALL_2(ConvoyMenuProc_MenuEnd),
+    PROC_SLEEP(1),
+    PROC_CALL_2(ConvoyMenuProc_MaybeStartSelectConvoyItem),
+    PROC_CALL_2(ConvoyMenuProc_SendToConvoyReal),
+    PROC_LABEL(0x63),
+    PROC_CALL(ConvoyMenuProc_SetupActiveUnit),
+    PROC_CALL(ConvoyMenuProc_ExecBootlegPopup),
+    PROC_SLEEP(0),
+    PROC_END,
+};
+
 /* externs for gProcScr_ChapterIntro symbolization (#143) */
 extern void ChapterIntro_Init(ProcPtr proc);
 extern void ChapterIntro_TwinLights_InitAndPlaySe(ProcPtr proc);
@@ -10062,20 +10120,16 @@ __asm__(
 "	.4byte 0x00000004, TradeMenu_TutorialHandCursor_Update + 0x1, 0x00000003, TradeMenu_TutorialHandCursor_Update + 0x1, 0x00000000, 0x00000000\n"
 "	.4byte 0x00000004, TradeMenu_DoubleTutorialHandCursor_Update + 0x1, 0x00000003, TradeMenu_DoubleTutorialHandCursor_Update + 0x1, 0x00000000, 0x00000000\n"
 );
+struct ProcCmd frontier_df4_uistuff_028_5C411C[] SECTION(".data.frontier_df4_uistuff.gap28") = {
+    PROC_WHILE(EventEngineExists),
+    PROC_WHILE(AreKeysHeld),
+    PROC_CALL(EndTradeMenuTutorialHandCursor),
+    PROC_CALL(EndDoubleTradeMenuTutorialHandCursor),
+    PROC_END,
+};
+
 __asm__(
     ".section .data.frontier_df4_uistuff.gap28, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_028_5C411C\n"
-    "frontier_df4_uistuff_028_5C411C:\n"
-    ".4byte 0x00000014\n"
-    ".4byte EventEngineExists\n"
-    ".4byte 0x00000014\n"
-    ".4byte AreKeysHeld\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndTradeMenuTutorialHandCursor\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndDoubleTradeMenuTutorialHandCursor\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
     ".4byte 0x00031020\n"
     ".4byte 0x00070228\n"
     ".4byte 0x00001120\n"
@@ -10156,31 +10210,26 @@ __asm__(
     ".4byte SetTradeMenuTutStatus8\n"
     ".4byte 0x00000120\n"
 );
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap28b, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_028b_5C42D0\n"
-    "frontier_df4_uistuff_028b_5C42D0:\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000016\n"
-    ".4byte PostWarpStaff_ExecTrap\n"
-    ".4byte 0x00000002\n"
-    ".4byte PostWarpStaff_RefreshMap\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte AfterItemUse_SetTargetStatus\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ExecNightmareStaffEffect\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
+
+struct ProcCmd frontier_df4_uistuff_028b_5C42D0[] SECTION(".data.frontier_df4_uistuff.gap28b") = {
+    PROC_SLEEP(0),
+    PROC_CALL_2(PostWarpStaff_ExecTrap),
+    PROC_CALL(PostWarpStaff_RefreshMap),
+    PROC_END,
+};
+
+struct ProcCmd ProcScr_AfterItemUse_SetTargetStatus_5C42D0_0[] SECTION(".data.frontier_df4_uistuff.gap28b") = {
+    PROC_SLEEP(1),
+    PROC_CALL(AfterItemUse_SetTargetStatus),
+    PROC_END,
+};
+
+struct ProcCmd ProcScr_ExecNightmareStaffEffect_5C42D0_1[] SECTION(".data.frontier_df4_uistuff.gap28b") = {
+    PROC_SLEEP(1),
+    PROC_CALL(ExecNightmareStaffEffect),
+    PROC_END,
+};
+
 __asm__(
     ".section .data.frontier_df4_uistuff.gap29, \"aw\", %progbits\n"
     ".global frontier_df4_uistuff_029_5C4A94\n"
@@ -11028,381 +11077,208 @@ __asm__(
 "\t.4byte 0x3AFE3B0A\n"
 "\t.4byte 0x00003AF6\n"
 );
+struct ProcCmd frontier_df4_uistuff_032_5C6084[] SECTION(".data.frontier_df4_uistuff.gap32") = {
+    PROC_CALL(PrepHelpPrompt_Init),
+    PROC_REPEAT(PrepHelpPrompt_Loop),
+    PROC_END,
+};
+
+struct ProcCmd ProcScr_PrepScreenProc_LockGame_5C6084_0[] SECTION(".data.frontier_df4_uistuff.gap32") = {
+    PROC_NAME((void *)((u8 *)data_080DCCB2 + 0x2)),
+    PROC_SLEEP(0x10),
+    PROC_CALL(PrepScreenProc_LockGame),
+    PROC_CALL(PrepScreenProc_AddPostgameUnits),
+    PROC_SLEEP(1),
+    PROC_CALL(PrepScreenProc_HideEverythingAndUnlockGame),
+    PROC_CALL(InitPrepScreenUnitsAndCamera),
+    PROC_SLEEP(1),
+    PROC_CALL(PrepScreenProc_UpdateBgm),
+    PROC_SLEEP(8),
+    PROC_CALL(NewPrepScreenTraineePromotionManager),
+    PROC_WHILE(PrepScreenTraineePromotionManagerExists),
+    PROC_CALL(NewPrepScreenTraineePromotionManager),
+    PROC_WHILE(PrepScreenTraineePromotionManagerExists),
+    PROC_CALL(NewPrepScreenTraineePromotionManager),
+    PROC_WHILE(PrepScreenTraineePromotionManagerExists),
+    PROC_LABEL(2),
+    PROC_CALL(StartPrepAtMenu),
+    PROC_WHILE(PrepAtMenuExists),
+    PROC_SLEEP(0),
+    PROC_CALL(InitPrepScreenCursorPosition),
+    PROC_GOTO(0x32),
+    PROC_LABEL(0x33),
+    PROC_CALL(StartMidFadeToBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_CALL(StartPrepAtMenu),
+    PROC_WHILE(PrepAtMenuExists),
+    PROC_SLEEP(0),
+    PROC_LABEL(0x32),
+    PROC_CALL(RefreshBMapGraphics),
+    PROC_CALL(RefreshEntityBmMaps),
+    PROC_CALL(RenderBmMap),
+    PROC_CALL(RefreshUnitSprites),
+    PROC_CALL(PrepScreenProc_InitMapMenu),
+    PROC_CALL(PrepScreenProc_DimMapImmediate),
+    PROC_CALL(StartMidFadeFromBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_GOTO(0x3D),
+    PROC_LABEL(0),
+    PROC_CALL(PrepScreenProc_StartDimMap),
+    PROC_WHILE(MapPaletteBrightnessFadeExists),
+    PROC_CALL(PrepScreenProc_StartMapMenu),
+    PROC_LABEL(0x3D),
+    PROC_CALL(EnablePrepScreenMenu),
+    PROC_WHILE(PrepScreenMenuExists),
+    PROC_CALL(PrepScreenProc_StartBrightenMap),
+    PROC_WHILE(MapPaletteBrightnessFadeExists),
+    PROC_LABEL(9),
+    PROC_WHILE(IsSubtitleHelpActive),
+    PROC_CALL(RefreshEntityBmMaps),
+    PROC_CALL(RenderBmMap),
+    PROC_CALL(RefreshUnitSprites),
+    PROC_CALL(StartPlayerPhaseSideWindows),
+    PROC_REPEAT(PrepScreenProc_SetupMapIdle),
+    PROC_REPEAT(PrepScreenProc_MapIdle),
+    PROC_LABEL(1),
+    PROC_CALL(HideMoveRangeGraphics),
+    PROC_CALL(EndPlayerPhaseSideWindows),
+    PROC_CALL(DisplayActiveUnitEffectRange),
+    PROC_REPEAT(PrepScreenProc_MapMovementLoop),
+    PROC_GOTO(9),
+    PROC_LABEL(0x35),
+    PROC_CALL(PrepScreenProc_SetCameraOnSupply),
+    PROC_WHILE_EXISTS(ProcScr_CamMove),
+    PROC_CALL(SALLYCURSOR_DeploySupplyUnit),
+    PROC_GOTO(0x34),
+    PROC_LABEL(0x36),
+    PROC_CALL(PrepScreenProc_SetCameraOnSupply),
+    PROC_WHILE_EXISTS(ProcScr_CamMove),
+    PROC_CALL(SALLYCURSOR_RemoveSupplyUnit),
+    PROC_GOTO(0x34),
+    PROC_LABEL(0x34),
+    PROC_CALL(InitMapChangeGraphicsIfFog),
+    PROC_SLEEP(0),
+    PROC_CALL(DisplayMapChangeIfFog),
+    PROC_SLEEP(0x3C),
+    PROC_GOTO(0),
+    PROC_LABEL(5),
+    PROC_CALL(RefreshBMapGraphics),
+    PROC_START_CHILD_BLOCKING(gProcScr_ADJUSTSFROMXI),
+    PROC_GOTO(9),
+    PROC_LABEL(6),
+    PROC_CALL(PrepScreenProc_RefreshAfterStatScreen),
+    PROC_GOTO(1),
+    PROC_LABEL(3),
+    PROC_CALL(EndPlayerPhaseSideWindows),
+    PROC_CALL(PrepScreen_StartUnitSwap),
+    PROC_WHILE_EXISTS(ProcScr_CamMove),
+    PROC_REPEAT(PrepScreen_UnitSwapIdle),
+    PROC_CALL(HideMoveRangeGraphics),
+    PROC_CALL(PrepScreen_StartUnitSwapAnim),
+    PROC_WHILE_EXISTS(ProcScr_CamMove),
+    PROC_WHILE(PrepUnitSwapProcExits),
+    PROC_CALL(InitMapChangeGraphicsIfFog),
+    PROC_CALL(RefreshEntityBmMaps),
+    PROC_CALL(RefreshUnitSprites),
+    PROC_SLEEP(0),
+    PROC_CALL(DisplayMapChangeIfFog),
+    PROC_GOTO(9),
+    PROC_LABEL(4),
+    PROC_CALL(HideMoveRangeGraphics),
+    PROC_WHILE_EXISTS(ProcScr_CamMove),
+    PROC_CALL(PrepScreenProc_RecenterOnActiveUnit),
+    PROC_SLEEP(0),
+    PROC_GOTO(9),
+    PROC_LABEL(0xB),
+    PROC_GOTO(1),
+    PROC_LABEL(0x39),
+    PROC_CALL(StartFastFadeToBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_CALL(BMapDispSuspend),
+    PROC_CALL(EndPrepScreenMenu_),
+    PROC_CALL(PrepScreenProc_StartConfigMenu),
+    PROC_SLEEP(0),
+    PROC_CALL(BMapDispResume),
+    PROC_GOTO(0x3E),
+    PROC_LABEL(0x38),
+    PROC_CALL(StartFastFadeToBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_CALL(BMapDispSuspend),
+    PROC_CALL(EndPrepScreenMenu_),
+    PROC_CALL(StartChapterStatusScreen_FromPrep),
+    PROC_SLEEP(0),
+    PROC_CALL(BMapDispResume),
+    PROC_GOTO(0x3E),
+    PROC_LABEL(0x3B),
+    PROC_CALL(StartFastFadeToBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_CALL(BMapDispSuspend),
+    PROC_CALL(EndPrepScreenMenu_),
+    PROC_CALL(StartPrepSaveScreen),
+    PROC_SLEEP(0),
+    PROC_CALL(BMapDispResume),
+    PROC_CALL(PrepScreenProc_RestoreBgmAfterSave),
+    PROC_GOTO(0x3E),
+    PROC_LABEL(0x37),
+    PROC_CALL(StartMidFadeToBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_CALL(PrepScreenProc_Cleanup),
+    PROC_CALL(Nop_Eventcall_0),
+    PROC_SLEEP(0),
+    PROC_CALL(SyncUnitDeploymentState),
+    PROC_CALL(EndPrepScreen),
+    PROC_BLOCK,
+    PROC_LABEL(0x3E),
+    PROC_CALL(RefreshBMapGraphics),
+    PROC_CALL(RefreshEntityBmMaps),
+    PROC_CALL(RenderBmMap),
+    PROC_CALL(RefreshUnitSprites),
+    PROC_CALL(PrepScreenProc_StartMapMenu),
+    PROC_CALL(PrepScreenProc_DimMapImmediate),
+    PROC_CALL(StartFastFadeFromBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_GOTO(0x3D),
+    PROC_LABEL(0x3C),
+    PROC_CALL(StartMidFadeToBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_CALL(HideMoveRangeGraphics),
+    PROC_CALL(BMapDispSuspend),
+    PROC_CALL(PrepScreenProc_StartShopScreen),
+    PROC_SLEEP(0),
+    PROC_CALL(BMapDispResume),
+    PROC_CALL(RefreshBMapGraphics),
+    PROC_CALL(RefreshEntityBmMaps),
+    PROC_CALL(RenderBmMap),
+    PROC_CALL(RefreshUnitSprites),
+    PROC_CALL(PrepScreenProc_UpdateBgm),
+    PROC_CALL(PrepScreenProc_ApplyBrownBoxPalette),
+    PROC_CALL(StartMidFadeFromBlack),
+    PROC_REPEAT(WaitForFade),
+    PROC_GOTO(9),
+    PROC_LABEL(0x3A),
+    PROC_SLEEP(0),
+    PROC_CALL(PrepScreenProc_StartMapMenu),
+    PROC_GOTO(0x3D),
+    PROC_END,
+};
+
+struct ProcCmd ProcScr_UnitInfoWindow_OnLoop_5C6084_1[] SECTION(".data.frontier_df4_uistuff.gap32") = {
+    PROC_REPEAT(UnitInfoWindow_OnLoop),
+    PROC_END,
+};
+
 __asm__(
-"\t.section .data.frontier_df4_uistuff.gap32, \"aw\", %progbits\n"
-"\t.global frontier_df4_uistuff_032_5C6084\n"
-"frontier_df4_uistuff_032_5C6084:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepHelpPrompt_Init\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte PrepHelpPrompt_Loop\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte data_080DCCB2 + 0x2\n"
-"\t.4byte 0x0010000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_LockGame\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_AddPostgameUnits\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_HideEverythingAndUnlockGame\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte InitPrepScreenUnitsAndCamera\n"
-"\t.4byte 0x0001000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_UpdateBgm\n"
-"\t.4byte 0x0008000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte NewPrepScreenTraineePromotionManager\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte PrepScreenTraineePromotionManagerExists\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte NewPrepScreenTraineePromotionManager\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte PrepScreenTraineePromotionManagerExists\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte NewPrepScreenTraineePromotionManager\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte PrepScreenTraineePromotionManagerExists\n"
-"\t.4byte 0x0002000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartPrepAtMenu\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte PrepAtMenuExists\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte InitPrepScreenCursorPosition\n"
-"\t.4byte 0x0032000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0033000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMidFadeToBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartPrepAtMenu\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte PrepAtMenuExists\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0032000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshBMapGraphics\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshEntityBmMaps\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RenderBmMap\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshUnitSprites\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_InitMapMenu\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_DimMapImmediate\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMidFadeFromBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x003D000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_StartDimMap\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte MapPaletteBrightnessFadeExists\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_StartMapMenu\n"
-"\t.4byte 0x003D000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte EnablePrepScreenMenu\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte PrepScreenMenuExists\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_StartBrightenMap\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte MapPaletteBrightnessFadeExists\n"
-"\t.4byte 0x0009000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte IsSubtitleHelpActive\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshEntityBmMaps\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RenderBmMap\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshUnitSprites\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartPlayerPhaseSideWindows\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte PrepScreenProc_SetupMapIdle\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte PrepScreenProc_MapIdle\n"
-"\t.4byte 0x0001000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte HideMoveRangeGraphics\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte EndPlayerPhaseSideWindows\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte DisplayActiveUnitEffectRange\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte PrepScreenProc_MapMovementLoop\n"
-"\t.4byte 0x0009000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0035000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_SetCameraOnSupply\n"
-"\t.4byte 0x00000008\n"
-"\t.4byte ProcScr_CamMove\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SALLYCURSOR_DeploySupplyUnit\n"
-"\t.4byte 0x0034000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0036000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_SetCameraOnSupply\n"
-"\t.4byte 0x00000008\n"
-"\t.4byte ProcScr_CamMove\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SALLYCURSOR_RemoveSupplyUnit\n"
-"\t.4byte 0x0034000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0034000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte InitMapChangeGraphicsIfFog\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte DisplayMapChangeIfFog\n"
-"\t.4byte 0x003C000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0005000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshBMapGraphics\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte gProcScr_ADJUSTSFROMXI\n"
-"\t.4byte 0x0009000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0006000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_RefreshAfterStatScreen\n"
-"\t.4byte 0x0001000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0003000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte EndPlayerPhaseSideWindows\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreen_StartUnitSwap\n"
-"\t.4byte 0x00000008\n"
-"\t.4byte ProcScr_CamMove\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte PrepScreen_UnitSwapIdle\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte HideMoveRangeGraphics\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreen_StartUnitSwapAnim\n"
-"\t.4byte 0x00000008\n"
-"\t.4byte ProcScr_CamMove\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte PrepUnitSwapProcExits\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte InitMapChangeGraphicsIfFog\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshEntityBmMaps\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshUnitSprites\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte DisplayMapChangeIfFog\n"
-"\t.4byte 0x0009000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0004000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte HideMoveRangeGraphics\n"
-"\t.4byte 0x00000008\n"
-"\t.4byte ProcScr_CamMove\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_RecenterOnActiveUnit\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0009000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x000B000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0001000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0039000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartFastFadeToBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BMapDispSuspend\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte EndPrepScreenMenu_\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_StartConfigMenu\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BMapDispResume\n"
-"\t.4byte 0x003E000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0038000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartFastFadeToBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BMapDispSuspend\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte EndPrepScreenMenu_\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartChapterStatusScreen_FromPrep\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BMapDispResume\n"
-"\t.4byte 0x003E000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x003B000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartFastFadeToBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BMapDispSuspend\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte EndPrepScreenMenu_\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartPrepSaveScreen\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BMapDispResume\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_RestoreBgmAfterSave\n"
-"\t.4byte 0x003E000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0037000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMidFadeToBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_Cleanup\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte Nop_Eventcall_0\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SyncUnitDeploymentState\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte EndPrepScreen\n"
-"\t.4byte 0x00000010\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x003E000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshBMapGraphics\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshEntityBmMaps\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RenderBmMap\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshUnitSprites\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_StartMapMenu\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_DimMapImmediate\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartFastFadeFromBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x003D000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x003C000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMidFadeToBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte HideMoveRangeGraphics\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BMapDispSuspend\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_StartShopScreen\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BMapDispResume\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshBMapGraphics\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshEntityBmMaps\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RenderBmMap\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RefreshUnitSprites\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_UpdateBgm\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_ApplyBrownBoxPalette\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMidFadeFromBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x0009000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x003A000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PrepScreenProc_StartMapMenu\n"
-"\t.4byte 0x003D000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte UnitInfoWindow_OnLoop\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00040000\n"
-"\t.4byte 0x000C0008\n"
-"\t.4byte 0x00140010\n"
-"\t.4byte 0x00440018\n"
-"\t.4byte 0x004C0048\n"
-"\t.4byte 0x00540050\n"
-"\t.byte 0x58\n"
-"\t.byte 0x00\n"
+    ".section .data.frontier_df4_uistuff.gap32, \"aw\", %progbits\n"
+    "	.4byte 0x00040000\n"
+    "	.4byte 0x000C0008\n"
+    "	.4byte 0x00140010\n"
+    "	.4byte 0x00440018\n"
+    "	.4byte 0x004C0048\n"
+    "	.4byte 0x00540050\n"
+    "	.byte 0x58\n"
+    "	.byte 0x00\n"
 );
+
 __asm__(
     ".section .data.frontier_df4_uistuff.gap33, \"aw\", %progbits\n"
     ".global frontier_df4_uistuff_033_5C6AD4\n"

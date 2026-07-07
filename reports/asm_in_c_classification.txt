@@ -1,30 +1,26 @@
-Inline __asm__ audit: 1645 blocks in 183 files
+Inline __asm__ audit: 1637 blocks in 182 files
 Per-block counts:
   PALETTE: 0
-  PROC_SCRIPT: 113
+  PROC_SCRIPT: 101
   GRAPHICS: 1084
-  DATA_TABLE: 346
+  DATA_TABLE: 351
   EVENT_SCRIPT: 22
-  SECTION_GLUE: 68
+  SECTION_GLUE: 67
   UNRESOLVED: 12
 Per-file lists:
 
 [PALETTE] 0 files
 
-[PROC_SCRIPT] 23 files
+[PROC_SCRIPT] 19 files
   src/data/ProcScr_data5aa96c148_ref/dat_ProcScr_data5aa96c148_ref.c
   src/data/ProcScr_menu148_ref/dat_ProcScr_menu148_ref.c
   src/data/ProcScr_uistuff148_ref/dat_ProcScr_uistuff148_ref.c
   src/data/banim/dat_data_banim_p215.c
-  src/data/data_085B938C/data_085B938C.c
   src/data/data_085BA1F4/data_085BA1F4.c
-  src/data/data_085C34F0/data_085C34F0.c
   src/data/data_085D1EA4/data_085D1EA4.c
   src/data/data_085D1F2C/data_085D1F2C.c
-  src/data/data_085E3534/data_085E3534.c
   src/data/data_08A9D904/data_08A9D904.c
   src/data/data_08A9DAB4/data_08A9DAB4.c
-  src/data/data_08A9DCD4/data_08A9DCD4.c
   src/data/frontier_banim_aurabg3/frontier_banim_aurabg3.c
   src/data/frontier_df3_banim_aura/frontier_df3_banim_aura.c
   src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.c

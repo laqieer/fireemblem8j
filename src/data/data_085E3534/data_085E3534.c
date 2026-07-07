@@ -1,6 +1,13 @@
 #include "global.h"
 #include "proc.h"
 
+
+extern void Nop_BanimEkrbattle_0();
+extern void Nop_BanimEkrbattle_1();
+extern void ekrBattleDeamon_Destructor();
+extern void ekrBattleMain();
+extern void ekrBattle_Init();
+
 /* #148 proc-script decomp-completeness: data_085E3534.
  *
  * 2 opaque proc script(s) decoded from the .data.residue.085E3534
@@ -31,29 +38,27 @@ struct ProcCmd ProcScr_ekrGauge[] __attribute__((section(".rodata.dat_ProcScr_ek
 
 /* residue [085E3534,085E3580) (76 B): byte-identical. */
 __asm__(
-"\t.section .data.residue.085E3534, \"aw\", %progbits\n"
-"\t.global data_085E3534\n"
-"data_085E3534:\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte frontier_df4_misc_lo_005_0DF388 + 0x8\n"
-"\t.4byte 0x00000004\n"
-"\t.4byte ekrBattleDeamon_Destructor + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte Nop_BanimEkrbattle_0 + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte frontier_df4_misc_lo_005_0DF388 + 0x18\n"
-"\t.4byte 0x00000004\n"
-"\t.4byte Nop_BanimEkrbattle_1 + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte ekrBattle_Init + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte ekrBattleMain + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
+    ".section .data.residue.085E3534, \"aw\", %progbits\n"
+    "	.global data_085E3534\n"
+    "data_085E3534:\n"
+    "	.4byte 0x00000000\n"
 );
+
+struct ProcCmd ProcScr_ekrBattleDeamon_Destructor_085E3534_0[] SECTION(".data.residue.085E3534") = {
+    PROC_NAME(frontier_df4_misc_lo_005_0DF388 + 0x8),
+    PROC_SET_END_CB(ekrBattleDeamon_Destructor + 0x1),
+    PROC_REPEAT(Nop_BanimEkrbattle_0 + 0x1),
+    PROC_END,
+};
+
+struct ProcCmd ProcScr_Nop_BanimEkrbattle_1_085E3534_1[] SECTION(".data.residue.085E3534") = {
+    PROC_NAME(frontier_df4_misc_lo_005_0DF388 + 0x18),
+    PROC_SET_END_CB(Nop_BanimEkrbattle_1 + 0x1),
+    PROC_REPEAT(ekrBattle_Init + 0x1),
+    PROC_REPEAT(ekrBattleMain + 0x1),
+    PROC_END,
+};
+
 
 /* residue [085E35B0,085E3604) (84 B): byte-identical. */
 __asm__(

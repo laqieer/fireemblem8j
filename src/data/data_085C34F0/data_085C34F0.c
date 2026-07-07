@@ -1,6 +1,11 @@
 #include "global.h"
 #include "proc.h"
 
+
+extern struct ProcCmd ProcScr_CamMove[];
+extern void ProcShowMapChange_MoveCamera();
+extern void ProcShowMapChange_UpdateGame();
+
 /* #148 proc-script decomp-completeness: data_085C34F0.
  *
  * 1 opaque proc script(s) decoded from the .data.residue.085C34F0
@@ -23,20 +28,12 @@ struct ProcCmd ProcScr_PikeTrapAnim[] __attribute__((section(".rodata.dat_ProcSc
 };
 
 /* residue [085C34F0,085C3520) (48 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.085C34F0, \"aw\", %progbits\n"
-"\t.global ProcScr_ShowMapChangeAnim\n"
-"ProcScr_ShowMapChangeAnim:\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte ProcShowMapChange_MoveCamera + 0x1\n"
-"\t.4byte 0x00000008\n"
-"\t.4byte ProcScr_CamMove\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte ProcShowMapChange_UpdateGame + 0x1\n"
-"\t.4byte 0x00000014\n"
-"\t.4byte DoesBMXFADEExist + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd ProcScr_ShowMapChangeAnim[] SECTION(".data.residue.085C34F0") = {
+    PROC_SLEEP(0),
+    PROC_CALL(ProcShowMapChange_MoveCamera + 0x1),
+    PROC_WHILE_EXISTS(ProcScr_CamMove),
+    PROC_CALL(ProcShowMapChange_UpdateGame + 0x1),
+    PROC_WHILE(DoesBMXFADEExist + 0x1),
+    PROC_END,
+};
+

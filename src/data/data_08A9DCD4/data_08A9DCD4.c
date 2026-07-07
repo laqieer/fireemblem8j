@@ -1,6 +1,12 @@
 #include "global.h"
 #include "proc.h"
 
+
+extern void BonusClaimHelp_Init();
+extern void BonusClaimHelp_Loop();
+extern void MixPalette_Loop();
+extern void sub_80B33AC();
+
 /* #148 proc-script decomp-completeness: data_08A9DCD4 (sysutil box/fade scripts).
  *
  * Five opaque proc scripts inside the `.data.residue.08A9DCD4` blob are decoded
@@ -87,28 +93,19 @@ __asm__(
 
 /* Trail [0x08A9DD8C,0x08A9DDDC) (80 B): two un-named scripts (MixPalette +
  * BonusClaimHelp) kept as a relocated `.4byte` slice. */
-__asm__(
-"\t.section .data.residue.08A9DD8C, \"aw\", %progbits\n"
-"\t.global data_08A9DD8C\n"
-"data_08A9DD8C:\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte sub_80B33AC + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte MixPalette_Loop + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BonusClaimHelp_Init + 0x1\n"
-"\t.4byte 0x0008000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte BonusClaimHelp_Loop + 0x1\n"
-"\t.4byte 0x0008000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd data_08A9DD8C[] SECTION(".data.residue.08A9DD8C") = {
+    PROC_SLEEP(0),
+    PROC_CALL(sub_80B33AC + 0x1),
+    PROC_REPEAT(MixPalette_Loop + 0x1),
+    PROC_END,
+};
+
+struct ProcCmd ProcScr_BonusClaimHelp_Init_08A9DD8C_0[] SECTION(".data.residue.08A9DD8C") = {
+    PROC_SLEEP(0),
+    PROC_CALL(BonusClaimHelp_Init + 0x1),
+    PROC_SLEEP(8),
+    PROC_REPEAT(BonusClaimHelp_Loop + 0x1),
+    PROC_SLEEP(8),
+    PROC_END,
+};
+

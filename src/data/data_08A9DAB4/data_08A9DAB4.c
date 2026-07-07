@@ -1,6 +1,12 @@
 #include "global.h"
 #include "proc.h"
 
+
+extern void SysGrayBox_Init();
+extern void SysGrayBox_Loop();
+extern void UiSpinningArrows_Init();
+extern void UiSpinningArrows_Loop();
+
 /* #148 proc-script decomp-completeness: data_08A9DAB4 (sysutil UI proc scripts).
  *
  * Three opaque proc scripts inside the `.data.residue.08A9DAB4` blob are decoded
@@ -43,28 +49,25 @@ struct ProcCmd gProcScr_UiCursorHand[] __attribute__((section(".rodata.dat_gProc
     PROC_END,
 };
 
-__asm__(".global data_08A9DAB4\n.set data_08A9DAB4, gProcScr_UiCursorHand");
-
-/* Lead [0x08A9DAE4,0x08A9DB1C) (56 B): UiSpinningArrows script + data. */
 __asm__(
-"	.section .data.residue.08A9DAE4, \"aw\", %progbits\n"
-"\t.global data_08A9DAE4\n"
-"data_08A9DAE4:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000008\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte 0x00004000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte UiSpinningArrows_Init + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte UiSpinningArrows_Loop + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
+    ".section .data.residue.08A9DAE4, \"aw\", %progbits\n"
+    "	.global data_08A9DAE4\n"
+    "data_08A9DAE4:\n"
+    "	.4byte 0x00000002\n"
+    "	.4byte 0x00000000\n"
+    "	.4byte 0x00000008\n"
+    "	.4byte 0x00010006\n"
+    "	.4byte 0x00004000\n"
+    "	.4byte 0x00000000\n"
 );
+
+struct ProcCmd ProcScr_UiSpinningArrows_Init_08A9DAE4_0[] SECTION(".data.residue.08A9DAE4") = {
+    PROC_CALL(UiSpinningArrows_Init + 0x1),
+    PROC_SLEEP(0),
+    PROC_REPEAT(UiSpinningArrows_Loop + 0x1),
+    PROC_END,
+};
+
 
 struct ProcCmd ProcScr_ParallelFiniteLoop[] __attribute__((section(".rodata.dat_ProcScr_ParallelFiniteLoop_ref"))) = {
     PROC_YIELD,
@@ -112,14 +115,9 @@ __asm__(
 );
 
 /* Trail [0x08A9DBB4,0x08A9DBCC) (24 B): un-named SysGrayBox script. */
-__asm__(
-"\t.section .data.residue.08A9DBB4, \"aw\", %progbits\n"
-"\t.global data_08A9DBB4\n"
-"data_08A9DBB4:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SysGrayBox_Init + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte SysGrayBox_Loop + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+struct ProcCmd data_08A9DBB4[] SECTION(".data.residue.08A9DBB4") = {
+    PROC_CALL(SysGrayBox_Init + 0x1),
+    PROC_REPEAT(SysGrayBox_Loop + 0x1),
+    PROC_END,
+};
+

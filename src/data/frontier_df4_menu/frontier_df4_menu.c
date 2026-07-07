@@ -317,6 +317,46 @@ extern void ClassReel_OnEnd(ProcPtr proc);
 #include "event.h"
 #include "eventinfo.h"
 #include "EAstdlib.h"
+
+
+extern void BonusClaim_ClearItemSentPopup();
+extern void BonusClaim_DrawItemSentPopup();
+extern void BonusClaim_EndSelectTargetSubMenu();
+extern void BonusClaim_Init();
+extern void BonusClaim_Loop_MainKeyHandler();
+extern void BonusClaim_Loop_PopupDisplayTimer();
+extern void BonusClaim_Loop_SelectTargetKeyHandler();
+extern void BonusClaim_OnEnd();
+extern void BonusClaim_StartSelectTargetSubMenu();
+extern void SoundRoomSongChange_FadeOutPrevious();
+extern void SoundRoomSongChange_StartNext();
+extern void VolumeGraphBuffer_Loop();
+extern void nullsub_89();
+extern void sub_80B3E40();
+
+extern void PrepMenu_CtrlLoop();
+extern void PrepMenu_OnEnd();
+extern void PrepMenu_OnInit();
+extern void PrepMenu_ShowActiveHand();
+extern void PrepMenu_ShowFrozenHand();
+extern void SaveMenuPopupHelpBox_Init();
+extern void SaveMenuPopupHelpBox_WaitInput();
+extern void SoundRoomUi_0();
+extern void SoundRoomUi_1();
+extern void SoundRoomUi_2();
+extern void SoundRoomUi_3();
+extern void SoundRoomUi_Init();
+extern void SoundRoomUi_Loop_MainKeyHandler();
+extern void SoundRoomUi_Loop_MainUiSlideIn();
+extern void SoundRoomUi_Loop_MainUiSlideOut();
+extern void SoundRoomUi_Loop_ShufflePlayKeyHandler();
+extern void SoundRoomUi_Loop_ShufflePlayUiSlideIn();
+extern void SoundRoomUi_Loop_ShufflePlayUiSlideOut();
+extern void SoundRoomUi_OnEnd();
+extern void SoundRoomUi_RestartTitleMusic();
+extern void SoundRoom_DrawSprites_Loop();
+extern void sub_80B4F34();
+
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
@@ -3358,33 +3398,20 @@ struct ProcCmd ProcScr_PrepScreenSpriteDraw[] __attribute__((section(".data.fron
 struct ProcCmd ProcScr_PrepScreenMenuDummyItem[] __attribute__((section(".data.frontier_df4_menu.gap19"))) = {
     PROC_BLOCK, PROC_END,
 };
-__asm__(
-    ".section .data.frontier_df4_menu.gap19, \"aw\", %progbits\n"
-    ".global data_08A94430\n"
-    "data_08A94430:\n"
-    ".4byte 0x00000002\n"
-    ".4byte PrepMenu_OnInit\n"
-    ".4byte 0x00000004\n"
-    ".4byte PrepMenu_OnEnd\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte PrepMenu_ShowActiveHand\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte PrepMenu_CtrlLoop\n"
-    ".4byte 0x0002000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte PrepMenu_ShowFrozenHand\n"
-    ".4byte 0x000a000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
+struct ProcCmd data_08A94430[] SECTION(".data.frontier_df4_menu.gap19") = {
+    PROC_CALL(PrepMenu_OnInit),
+    PROC_SET_END_CB(PrepMenu_OnEnd),
+    PROC_SLEEP(0),
+    PROC_LABEL(0),
+    PROC_REPEAT(PrepMenu_ShowActiveHand),
+    PROC_LABEL(1),
+    PROC_REPEAT(PrepMenu_CtrlLoop),
+    PROC_LABEL(2),
+    PROC_REPEAT(PrepMenu_ShowFrozenHand),
+    PROC_LABEL(0xA),
+    PROC_END,
+};
+
 __asm__(
 "	.section .data.frontier_df4_menu.gap20, \"aw\", %progbits\n"
 "	.global frontier_df4_menu_020_A9454C\n"
@@ -3704,19 +3731,17 @@ __asm__(
     ".4byte 0x70008000\n"
     ".4byte 0x80000000\n"
     ".4byte 0x00007800\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SaveMenuPopupHelpBox_Init\n"
-    ".4byte 0x0008000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte SaveMenuPopupHelpBox_WaitInput\n"
-    ".4byte 0x0008000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
 );
+
+struct ProcCmd ProcScr_SaveMenuPopupHelpBox_Init_A9CF7C_0[] SECTION(".data.frontier_df4_menu.gap26") = {
+    PROC_SLEEP(0),
+    PROC_CALL(SaveMenuPopupHelpBox_Init),
+    PROC_SLEEP(8),
+    PROC_REPEAT(SaveMenuPopupHelpBox_WaitInput),
+    PROC_SLEEP(8),
+    PROC_END,
+};
+
 __asm__(
     ".section .data.frontier_df4_menu.gap26, \"aw\", %progbits\n"
     ".global data_08A9CFC4\n"
@@ -4074,98 +4099,67 @@ __asm__(
     "frontier_df4_menu_028_A9E244:\n"
     ".4byte 0x02021188\n"
     ".4byte 0x02021388\n"
-    ".4byte 0x00000002\n"
-    ".4byte SoundRoomSongChange_FadeOutPrevious\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SoundRoomSongChange_StartNext\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x03005400\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte sub_80B3E40\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte nullsub_89\n"
-    ".4byte 0x00000003\n"
-    ".4byte VolumeGraphBuffer_Loop\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
 );
+
+struct ProcCmd ProcScr_SoundRoomSongChange_FadeOutPrevious_A9E244_0[] SECTION(".data.frontier_df4_menu.gap28") = {
+    PROC_CALL(SoundRoomSongChange_FadeOutPrevious),
+    PROC_SLEEP(0),
+    PROC_CALL(SoundRoomSongChange_StartNext),
+    PROC_END,
+};
+
 __asm__(
     ".section .data.frontier_df4_menu.gap28, \"aw\", %progbits\n"
-    ".global data_08A9E2A0\n"
-    "data_08A9E2A0:\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SoundRoomUi_Init\n"
-    ".4byte 0x00040018\n"
-    ".4byte NewFadeIn\n"
-    ".4byte 0x00000014\n"
-    ".4byte FadeInExists\n"
-    ".4byte 0x00000014\n"
-    ".4byte MusicProc4Exists\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte SoundRoomUi_Loop_MainKeyHandler\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SoundRoomUi_0\n"
-    ".4byte 0x00000003\n"
-    ".4byte SoundRoomUi_Loop_MainUiSlideOut\n"
-    ".4byte 0x00000003\n"
-    ".4byte SoundRoomUi_1\n"
-    ".4byte 0x00000002\n"
-    ".4byte SoundRoomUi_2\n"
-    ".4byte 0x00000003\n"
-    ".4byte SoundRoomUi_Loop_MainUiSlideIn\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SoundRoomUi_0\n"
-    ".4byte 0x00000003\n"
-    ".4byte SoundRoomUi_Loop_MainUiSlideOut\n"
-    ".4byte 0x00000002\n"
-    ".4byte SoundRoomUi_3\n"
-    ".4byte 0x00000003\n"
-    ".4byte SoundRoomUi_Loop_ShufflePlayUiSlideIn\n"
-    ".4byte 0x0010000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte SoundRoomUi_Loop_ShufflePlayKeyHandler\n"
-    ".4byte 0x00000003\n"
-    ".4byte SoundRoomUi_Loop_ShufflePlayUiSlideOut\n"
-    ".4byte 0x00000002\n"
-    ".4byte SoundRoomUi_2\n"
-    ".4byte 0x00000003\n"
-    ".4byte SoundRoomUi_Loop_MainUiSlideIn\n"
-    ".4byte 0x0010000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0003000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte SoundRoomUi_RestartTitleMusic\n"
-    ".4byte 0x00040018\n"
-    ".4byte NewFadeOut\n"
-    ".4byte 0x00000014\n"
-    ".4byte FadeOutExists\n"
-    ".4byte 0x00000002\n"
-    ".4byte SoundRoomUi_OnEnd\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
+    ".4byte 0x03005400\n"
+);
+
+struct ProcCmd ProcScr_sub_80B3E40_A9E244_1[] SECTION(".data.frontier_df4_menu.gap28") = {
+    PROC_SLEEP(0),
+    PROC_CALL(sub_80B3E40),
+    PROC_SLEEP(0),
+    PROC_CALL(nullsub_89),
+    PROC_REPEAT(VolumeGraphBuffer_Loop),
+    PROC_END,
+};
+
+struct ProcCmd data_08A9E2A0[] SECTION(".data.frontier_df4_menu.gap28") = {
+    PROC_SLEEP(0),
+    PROC_CALL(SoundRoomUi_Init),
+    PROC_CALL_ARG(NewFadeIn, 4),
+    PROC_WHILE(FadeInExists),
+    PROC_WHILE(MusicProc4Exists),
+    PROC_LABEL(0),
+    PROC_REPEAT(SoundRoomUi_Loop_MainKeyHandler),
+    PROC_LABEL(1),
+    PROC_CALL(SoundRoomUi_0),
+    PROC_REPEAT(SoundRoomUi_Loop_MainUiSlideOut),
+    PROC_REPEAT(SoundRoomUi_1),
+    PROC_CALL(SoundRoomUi_2),
+    PROC_REPEAT(SoundRoomUi_Loop_MainUiSlideIn),
+    PROC_GOTO(0),
+    PROC_LABEL(2),
+    PROC_CALL(SoundRoomUi_0),
+    PROC_REPEAT(SoundRoomUi_Loop_MainUiSlideOut),
+    PROC_CALL(SoundRoomUi_3),
+    PROC_REPEAT(SoundRoomUi_Loop_ShufflePlayUiSlideIn),
+    PROC_SLEEP(0x10),
+    PROC_REPEAT(SoundRoomUi_Loop_ShufflePlayKeyHandler),
+    PROC_REPEAT(SoundRoomUi_Loop_ShufflePlayUiSlideOut),
+    PROC_CALL(SoundRoomUi_2),
+    PROC_REPEAT(SoundRoomUi_Loop_MainUiSlideIn),
+    PROC_SLEEP(0x10),
+    PROC_GOTO(0),
+    PROC_LABEL(3),
+    PROC_REPEAT(SoundRoomUi_RestartTitleMusic),
+    PROC_CALL_ARG(NewFadeOut, 4),
+    PROC_WHILE(FadeOutExists),
+    PROC_CALL(SoundRoomUi_OnEnd),
+    PROC_SLEEP(0),
+    PROC_END,
+};
+
+__asm__(
+    ".section .data.frontier_df4_menu.gap28, \"aw\", %progbits\n"
     ".4byte 0x00000002\n"
     ".4byte 0x05504008\n"
     ".4byte 0x80204000\n"
@@ -4226,14 +4220,17 @@ __asm__(
     ".4byte gSprite_MusicPlayer_Colon + 0x40\n"
     ".4byte gSprite_MusicPlayer_Colon + 0x48\n"
     ".4byte gSprite_MusicPlayer_Colon + 0x50\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte sub_80B4F34\n"
-    ".4byte 0x00000003\n"
-    ".4byte SoundRoom_DrawSprites_Loop\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
+);
+
+struct ProcCmd ProcScr_sub_80B4F34_08A9E2A0_0[] SECTION(".data.frontier_df4_menu.gap28") = {
+    PROC_SLEEP(0),
+    PROC_CALL(sub_80B4F34),
+    PROC_REPEAT(SoundRoom_DrawSprites_Loop),
+    PROC_END,
+};
+
+__asm__(
+    ".section .data.frontier_df4_menu.gap28, \"aw\", %progbits\n"
     ".4byte 0x60000000\n"
     ".4byte 0x00000000\n"
     ".4byte 0x00006800\n"
@@ -4241,6 +4238,7 @@ __asm__(
     ".4byte 0x80000000\n"
     ".4byte 0x00007800\n"
 );
+
 struct ProcCmd gProcScr_SoundRoomUi[] __attribute__((section(".data.frontier_df4_menu.gap28"))) = {
     PROC_CALL(ExtramenuUnk_Init),
     PROC_CALL(ExtramenuUnk_LoadGfx),
@@ -4259,55 +4257,31 @@ __asm__(
     ".4byte 0x02001668\n"
     ".4byte 0x02001368\n"
 );
-__asm__(
-    ".section .data.frontier_df4_menu.gap28, \"aw\", %progbits\n"
-    ".global data_08A9E510\n"
-    "data_08A9E510:\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte BonusClaim_Init\n"
-    ".4byte 0x00080018\n"
-    ".4byte NewFadeIn\n"
-    ".4byte 0x00000014\n"
-    ".4byte FadeInExists\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte BonusClaim_Loop_MainKeyHandler\n"
-    ".4byte 0x0064000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte BonusClaim_StartSelectTargetSubMenu\n"
-    ".4byte 0x00000003\n"
-    ".4byte BonusClaim_Loop_SelectTargetKeyHandler\n"
-    ".4byte 0x00000002\n"
-    ".4byte BonusClaim_EndSelectTargetSubMenu\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte BonusClaim_DrawItemSentPopup\n"
-    ".4byte 0x00000003\n"
-    ".4byte BonusClaim_Loop_PopupDisplayTimer\n"
-    ".4byte 0x00000002\n"
-    ".4byte BonusClaim_ClearItemSentPopup\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0064000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00080018\n"
-    ".4byte NewFadeOut\n"
-    ".4byte 0x00000014\n"
-    ".4byte FadeOutExists\n"
-    ".4byte 0x00000002\n"
-    ".4byte BonusClaim_OnEnd\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
+struct ProcCmd data_08A9E510[] SECTION(".data.frontier_df4_menu.gap28") = {
+    PROC_SLEEP(0),
+    PROC_CALL(BonusClaim_Init),
+    PROC_CALL_ARG(NewFadeIn, 8),
+    PROC_WHILE(FadeInExists),
+    PROC_LABEL(0),
+    PROC_REPEAT(BonusClaim_Loop_MainKeyHandler),
+    PROC_GOTO(0x64),
+    PROC_LABEL(1),
+    PROC_CALL(BonusClaim_StartSelectTargetSubMenu),
+    PROC_REPEAT(BonusClaim_Loop_SelectTargetKeyHandler),
+    PROC_CALL(BonusClaim_EndSelectTargetSubMenu),
+    PROC_GOTO(0),
+    PROC_LABEL(2),
+    PROC_CALL(BonusClaim_DrawItemSentPopup),
+    PROC_REPEAT(BonusClaim_Loop_PopupDisplayTimer),
+    PROC_CALL(BonusClaim_ClearItemSentPopup),
+    PROC_GOTO(0),
+    PROC_LABEL(0x64),
+    PROC_CALL_ARG(NewFadeOut, 8),
+    PROC_WHILE(FadeOutExists),
+    PROC_CALL(BonusClaim_OnEnd),
+    PROC_END,
+};
+
 u8 frontier_df4_menu_029_AA3860[] __attribute__((section(".data.frontier_df4_menu.gap29"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_029_AA3860.bin");
 u8 frontier_df4_menu_030_AA71D4[] __attribute__((section(".data.frontier_df4_menu.gap30"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_030_AA71D4.bin");
 /* Wave47: LZ-hybrid decomposed — 1044B JP-LZ 4bpp sheet (128 tiles, byte-exact
