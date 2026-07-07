@@ -15,6 +15,16 @@
 > sub_800A34C 12152, sub_80A390C 27300. Next free win = re-poll this queue (a new community fork
 > appearing at score 0 is a zero-effort integrate); creating a new match is the compute/permuter
 > path (`register asm("rN")` pins + §5a widen recipe), low-ROI per `docs/unmatched_functions_report.md`.
+>
+> **Applied-lever attempts (post-sub_8057F80, 2026-07-07):** tried the sub_8057F80 register-pin
+> lever on **sub_80C05C8** (GmapScreen2_Loop — the cleanest "structure byte-exact, JP-vs-US
+> coloring divergence" candidate): pinned the two node-coord temps to the ROM's r7/r6 via named
+> `register s16` locals. Result: **WORSE** (252 insns vs 258 baseline vs 268 target) — the r6=node
+> live-range conflict shatters the allocation, confirming the header's "blind/mismatched pins make
+> it worse" and that this is a genuine agbcc JP-vs-US divergence (community fork SaCCn reached
+> PROVEN-BOUNDED(2), not 0). Lever does NOT transfer; sub_80C05C8 stays permuter/community-bound.
+> Lesson for step 4: the pin lever only crosses a **clean permutation** (same insn count, pure
+> register renumber); it cannot add the redundant materialize-then-copy the JP build emitted here.
 
 > **[SUPERSEDED 2026-07-03 — axis-2 is now 16 still-asm (matching-C 99.82%, 8676/8692); see [`frontier.md`](frontier.md).]**
 > Six queue entries below have since **MATCHED byte-exact in-repo (banked, removed from

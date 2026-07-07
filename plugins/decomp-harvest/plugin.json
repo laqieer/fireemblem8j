@@ -1,0 +1,12 @@
+{
+  "name": "fe8j-decomp-harvest",
+  "description": "FE8J decompilation matching loop: harvest decomp.me matches for still-asm functions, integrate byte-exact matches into main, learn and cookbook the agbcc lever, APPLY that lever to same-pattern remaining functions (real make-compare attempts), and update decomp.me scratches.",
+  "version": "1.0.0",
+  "author": { "name": "laqieer" },
+  "license": "MIT",
+  "homepage": "https://github.com/laqieer/fireemblem8j",
+  "repository": "https://github.com/laqieer/fireemblem8j",
+  "keywords": ["fe8j", "decomp", "decomp.me", "matching", "agbcc", "byte-match"],
+  "category": "development",
+  "skills": "skills/"
+}

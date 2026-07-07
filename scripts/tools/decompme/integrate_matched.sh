@@ -15,7 +15,7 @@ if [ "$score" != "0" ]; then
     echo "refusing: scratch $slug score=$score (not a confirmed match); integrate only score==0" >&2
     exit 1
 fi
-printf '%s' "$json" | python3 -c '
+printf '%s' "$json" | OUT="$out" python3 -c '
 import json,sys,os
 d=json.load(sys.stdin); out=os.environ["OUT"]
 open(os.path.join(out,"source.c"),"w").write(d.get("source_code",""))
@@ -24,5 +24,5 @@ open(os.path.join(out,"meta.txt"),"w").write("name=%s\ncompiler=%s\nflags=%s\nsc
   d.get("name"),d.get("compiler"),d.get("compiler_flags"),d.get("score")))
 print("MATCHED source pulled ->", out, "(score 0)")
 print("flags:", d.get("compiler_flags"))
-' OUT="$out"
+'
 echo "Next: carve $out/source.c into src/, make compare -> OK, commit. (integrator owns the oracle)"
