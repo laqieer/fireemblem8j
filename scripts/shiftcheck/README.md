@@ -214,6 +214,9 @@ coherence heuristic misses; `scan_raw_casts.sh` catches it directly.
 - `scan_event_list_ptrs.py` — targeted chapter event-list script-pointer scanner;
   with `--shifted-rom` it proves every decoded EventListScr pointer word tracks
   the +shift instead of staying stale.
+- `scan_talk_table_relocs.py` — rejects false relocations in packed
+  BattleTalk/DefeatTalk metadata words (e.g. flag+msg `0x08D70002`) where adding
+  +shift would mutate message ids instead of relocating a pointer.
 - `gen_shifted_ldscript.py`, `diff_shift.py` — Layer 2 (non-gating; not applicable
   to fe8j's packed/no-slack ROM — kept for documentation and a future shiftable layout).
 - `_classify.py` — shared classifier (Layers 1 and 2 feed it different "relocated"

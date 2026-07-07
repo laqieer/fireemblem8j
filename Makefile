@@ -2203,6 +2203,11 @@ shiftcheck-offsets: $(RELOCS_ELF) $(ROM) $(MAP)
 	$(PYTHON) $(SHIFTCHECK)/scan_offsets.py --elf $(RELOCS_ELF) --gba $(ROM) \
 	    --map $(MAP) --ref-elf $(ELF) --prefix $(PREFIX)
 
+# Layer 1c: reject false relocations in packed talk-table metadata words
+# (u16 flag/msg/chapter pairs that can numerically look like ROM pointers).
+shiftcheck-talk: $(RELOCS_ELF) $(ELF)
+	$(PYTHON) $(SHIFTCHECK)/scan_talk_table_relocs.py --elf $(RELOCS_ELF) --ref-elf $(ELF)
+
 # Layer 2: differential two-shift build (NON-gating; not applicable to fe8j's packed
 # ROM -- exits with a clear "no slack" message). Kept for documentation parity.
 shiftcheck-diff: $(ROM) $(MAP) $(OBJECTS_LST)
@@ -2211,10 +2216,11 @@ shiftcheck-diff: $(ROM) $(MAP) $(OBJECTS_LST)
 	    --map $(MAP) --ref-elf $(ELF) --prefix $(PREFIX) --shifts $(SHIFT),$(SHIFT2) \
 	    --outdir $(SHIFTDIR) --allowlist $(SHIFTCHECK)/allowlist.txt
 
-# The CI gate (no emulator): build-system audit + reloc scan + cross-resource offsets.
-shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets
+# The CI gate (no emulator): build-system audit + reloc scan + cross-resource offsets
+# + packed talk-table false-relocation scan.
+shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk
 
-.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-diff
+.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-diff
 
 # The carve glue (ldscript.txt + asm/baserom.s + asm/jp_syms.s) is GENERATED from
 # the layout/ manifests and is gitignored, so the build regenerates it whenever a
