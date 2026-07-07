@@ -16,7 +16,7 @@ stay raw hex.
 Read-only: prints C + a carve plan; never edits the tree. make compare is the oracle.
 
 Usage:
-    python3 scripts/depoint_procscr.py <file.c> <NAME> <0xADDR> [--section SEC] [--nm /tmp/nm.txt]
+    python3 scripts/depoint_procscr.py <file.c> <NAME> <0xADDR> [--section SEC] [--nm build/nm.txt]
 """
 import argparse
 import os
@@ -256,7 +256,7 @@ def main():
     ap.add_argument("name")
     ap.add_argument("addr")
     ap.add_argument("--section", default=None, help="section attr suffix (default dat_<NAME>_ref)")
-    ap.add_argument("--nm", default="/tmp/nm.txt")
+    ap.add_argument("--nm", default="build/nm.txt")
     ap.add_argument("--limit", type=lambda x: int(x, 0), default=None,
                     help="hard stop addr (default: next named symbol / section end)")
     args = ap.parse_args()

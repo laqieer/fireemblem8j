@@ -39,19 +39,22 @@ def fe8u_procscr_names():
 
 
 def fe8j_typed_defs():
-    """name -> set(files) of `struct ProcCmd NAME[]` definitions in fe8j src/."""
+    """name -> set(files) of typed ProcCmd definitions or relocatable aliases."""
     out = collections.defaultdict(set)
     # Mirror fe8u_procscr_names(): tolerate the `CONST_DATA`/`const` qualifier that
     # sits between `struct ProcCmd` and the array name (e.g. `struct ProcCmd
     # CONST_DATA gProcScr_FaceChibiSpr[]`). Without this, such tables were captured
     # as name "CONST_DATA" and the real symbol fell through to a false OPAQUE.
     pat = re.compile(r"struct ProcCmd (?:CONST_DATA |const )?([A-Za-z_]\w*)\s*\[\s*\]")
+    alias_pat = re.compile(r"\.set\s+((?:g|s)?ProcScr_[A-Za-z_0-9]*)\s*,\s*(?:g|s)?ProcScr_[A-Za-z_0-9]*\s*[+\-]")
     for f in glob.glob("src/**/*.c", recursive=True):
         try:
             t = open(f, errors="replace").read()
         except OSError:
             continue
         for m in pat.finditer(t):
+            out[m.group(1)].add(f)
+        for m in alias_pat.finditer(t):
             out[m.group(1)].add(f)
     return out
 
@@ -140,11 +143,13 @@ def main():
         short = re.sub(r"^src/data/([^/]+)/.*", r"\1", o)
         print(f"  {c:4}  {short}")
 
-    with open("/tmp/procscr_audit.tsv", "w") as fh:
+    out_path = os.path.join(ROOT, "build", "procscr_audit.tsv")
+    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+    with open(out_path, "w") as fh:
         fh.write("name\tstatus\tdetail\n")
         for n, st, d in rows:
             fh.write(f"{n}\t{st}\t{d}\n")
-    print("\n# per-name TSV -> /tmp/procscr_audit.tsv")
+    print(f"\n# per-name TSV -> {out_path}")
 
 
 if __name__ == "__main__":
