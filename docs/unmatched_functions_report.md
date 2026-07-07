@@ -49,21 +49,26 @@
 | 15 | 0x080A6F1C | DecodeAndVerifyArenaRecord | link-arena record codec | no | **DEAD (root)** | **0** | callback-in-high-reg veneer |
 | 16 | 0x080C05C8 | GmapScreen2_Loop | worldmap node icons | **yes** (worldmap_screen2.c) | **LIVE** | ProcScr_GmNodeIconDisplay | clean JP-vs-US coloring divergence |
 
-**Headline results**
-- **14 of 16 are live, actively-reachable game code.** They remain asm purely because of
+**Headline results (12 live / 4 dead)**
+- **12 of 16 are live, actively-reachable game code.** They remain asm purely because of
   agbcc-2.95 register-allocation / spill tie-breaks (permuter-bound), *except* #6
   `PrepareBattleGraphicsMaybe`, which is a **true region difference** (the US localisation
   added a Manakete/Demon-King block + link-arena flag swaps), so a byte match is out of scope.
-- **2 of 16 are unreachable dead code** — each the *root driver* of an otherwise-isolated
-  cluster (its leaf callees are reachable only through it):
-  - **`SplineSampleAtTime` (0x0800A594)** and its only callee chain
-    `SplineEvalCatmullRom (0x0800A34C)` → `sub_800A194`. A JP-only Catmull-Rom 2D spline
-    island with **zero external references**. It is *not* the spline system the game uses
-    (that is fe8u's `spline.c`: `Spline_Ease` ← `GetEasedProgress` ← bmlib timers, all live).
-  - **`DecodeAndVerifyArenaRecord` (0x080A6F1C)** and its only distinct callee
-    `sub_80A6D34` (header decode). This is the **receive/verify half** of the link-arena
-    "通信闘技場" record codec. Its **encode/commit half is live** (`sub_80A6E4C` ← `sub_80A74D4`,
-    reachable from a menu ProcScr), but nothing in the ROM ever invokes the decoder.
+- **4 of 16 are unreachable dead code**, forming **two dead islands** — in each, a *root
+  driver* has zero references anywhere in the ROM, and its callees are reachable only through
+  it (so they are dead-by-transitivity). Two of the four island members are themselves in the
+  16-function set; the spline island also drags in `sub_800A194`, which is not one of the 16:
+  - **Spline island** — `SplineSampleAtTime (0x0800A594)` [root, #3] →
+    `SplineEvalCatmullRom (0x0800A34C)` [#2] → `sub_800A194`. A JP-only Catmull-Rom 2-D spline
+    with **zero external references**. It is *not* the spline system the game uses (that is
+    fe8u's `spline.c`: `Spline_Ease` ← `GetEasedProgress` ← bmlib timers, all live).
+  - **Link-arena decode island** — `DecodeAndVerifyArenaRecord (0x080A6F1C)` [root, #15] →
+    `sub_80A6D34 (header decode)` [#13]. The **receive/verify half** of the link-arena
+    "通信闘技場" record codec. Its **encode/commit half is live** (`sub_80A6E4C` [#14] ←
+    `sub_80A74D4`, reachable from a menu ProcScr), but nothing in the ROM ever invokes the
+    decoder.
+- **Every one of the 16 exists in the ROM as a real, non-stub function body.** "Dead" here
+  means *statically unreferenced*, not empty.
 
 ---
 
