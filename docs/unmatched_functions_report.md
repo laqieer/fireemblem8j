@@ -449,6 +449,79 @@ JP-only DEAD spline island  — no reference anywhere
 
 ---
 
+## Cross-game presence — do the fe8u-absent functions exist in FE6 / FE7J / FE7U?
+
+Ten of the 16 have **no fe8u twin** (the spline pair, the "augury" cluster, the link-arena/
+codec cluster, and `SelectSummonPos` whose fe8u analog is a different algorithm). This section
+checks whether they exist in the other three GBA Fire Emblem games.
+
+**Method.** Cross-game function matches from `../FE_GBA_Function_Library` — Zynel/BinDiff 4.3
+pairwise results **FE8J↔FE7J**, chained **FE7J↔FE6** and **FE7J↔FE7U** — with real names from
+`../fireemblem6j` (`fe6.map`/`fe6.elf`). Every non-trivial verdict was then **verified by
+`objdump` call-structure comparison** (BinDiff's graph-similarity score alone is not trusted:
+two of the ten "matches" turned out spurious).
+
+| FE8J fn (addr) | FE7J | FE7U | FE6 | Verdict / real cross-game identity |
+|---|---|---|---|---|
+| SplineEvalCatmullRom (0800A34C) | 0.37 ✗ | ✗ | ✗ | **FE8J-specific.** BinDiff→FE7J 0805BF80 is *spurious* (see note A). |
+| SplineSampleAtTime (0800A594) | 0.25 ✗ | ✗ | ✗ | **FE8J-specific.** spurious match, same as above. |
+| DivinationRankSpriteUpdate (080A2E64) | **08099E34 (1.00)** | **08099474 (1.00)** | ✗ (0.02) | **PRESENT FE7J+FE7U** (identical: 19/19 BBs, 191/191 insns). = Play-Ranking sprite update. |
+| sub_80A3300 (080A3300) | **0809A324 (1.00)** | **08099968 (1.00)** | ✗ | **PRESENT FE7J+FE7U** (10/10 BBs, 103/103 insns). = Play-Ranking sprite emit. |
+| sub_80A3528 / DrawAuguryResultPanel (080A3528) | 080B92E8 (0.01 ✗) | (0.98 via FE7J) | ✗ | **UNCERTAIN** — likely present but the text-layout draw diverges too much for BinDiff to align (note B). |
+| Augury_InitResultScreen (080A390C) | **0809A9FC (0.97)** | **0809A024 (0.99)** | ✗ | **PRESENT FE7J+FE7U** (17/17 BBs). = Play-Ranking screen init. |
+| sub_80A6D34 (080A6D34) | **0809E4D0 (0.96)** | **0809DAB8 (1.00)** | **08083180 (1.00)** | **PRESENT FE6+FE7J+FE7U.** Password DECODE (secretscreen.c). |
+| sub_80A6E4C (080A6E4C) | **0809E5F0 (0.99)** | **0809DBD8 (1.00)** | **080832A0 = `ModifyPassword` (0.99)** | **PRESENT FE6+FE7J+FE7U.** Password ENCODE — call-structure 1:1 verified (note C). |
+| DecodeAndVerifyArenaRecord (080A6F1C) | **0809E6C0 (0.99)** | **0809DCA8 (1.00)** | **08083378 (1.00)** | **PRESENT FE6+FE7J+FE7U.** Password DECODE+VERIFY (secretscreen.c). |
+| SelectSummonPos (0807D3BC) | 0800B578 (0.01 ✗) | ✗ | ✗ | **FE8-ONLY.** Summoner is an FE8 class; FE7J/FE6 have 0 summon references. spurious match. |
+
+(BinDiff scores are `similarity`; ✗ = no match / spurious. FE7J/FE7U/FE6 decomps have **not
+named** these — they are still `sub_`/`func_fe6_` in those ROMs — but the functions demonstrably
+exist there.)
+
+### The two big cross-game reclassifications
+
+- **The "link-arena record codec" is really the Secret-Screen PASSWORD codec.** All three of
+  `sub_80A6D34/sub_80A6E4C/DecodeAndVerifyArenaRecord` are present near-identically in **FE6,
+  FE7J and FE7U** — the strongest cross-game sharing of any function in this set. In FE6 the
+  encode function is literally named **`ModifyPassword`** (`src/secretscreen.c:245`), and its
+  0xA0-byte work buffer (`Unk_02016924[0xA0]`) is the FE8J `gBuf[0..0x9f]`. **Note C:** FE8J
+  `sub_80A6E4C` and FE6 `ModifyPassword` have a 1:1 call correspondence —
+  `GetGameClock↔GetGameTime`, the nonce/checksum helpers line up, the LCG PRNG `sub_80A6AA8`
+  (×3) **= FE6 `GetSecretScreenRN`**, and both use the same `_call_via_r3` callback veneer. So
+  this cluster is the shared **password / "secret code" serialiser** (encode a record →
+  checksum + LCG-obfuscate + 30-bit interleave; decode = inverse + verify), not a link-arena–
+  specific thing. (It stays *dead on the decode side* only in FE8J — see report #15.)
+- **The "augury / divination result screen" is really the Play-Ranking display.** The cluster
+  `DivinationRankSpriteUpdate / sub_80A3300 / Augury_InitResultScreen` matches FE7J and FE7U at
+  0.97–1.00 with byte-identical basic-block/instruction counts. It reads `GameRankSaveData`; FE6
+  `src/playrank.c` computes the **same five ranks** (`PlayRankGetter_Tactics / Combat / Survival
+  / Experience / Asset(=funds) / Power`) plus clear time and score. FE6's *display* code did not
+  match (0.02) — FE6 renders the ranking differently — but the subsystem is the shared
+  **Total Play Rank** screen. (The FE8J label "augury/divination" appears to be a mis-name.)
+
+### The two FE8J-specific functions
+
+- **Note A — the spline pair is FE8J-specific.** BinDiff pairs `0800A34C/0800A594` with FE7J
+  `0805BF80/0805BF2C` at only 0.25–0.37, which chain to FE6 `EfxAureolaOBJ_Loop /
+  NewEfxAureolaOBJCtrl` at 1.00. That chain is a **red herring**: `objdump` shows FE8J
+  `0800A34C` is pure spline math (`DivArm`×6, `__udivsi3`, the tridiagonal solver
+  `sub_800A194`), whereas FE6 `EfxAureolaOBJ` is a battle-anim effect proc (`BanimSpawnRandB`,
+  `SpawnProc`, `GetAnimPosition`, `Proc_Break`) — functionally unrelated. So the JP-only Catmull-
+  Rom spline island (report #2/#3) has **no genuine FE6/FE7 counterpart**; combined with its
+  dead-code status in FE8J it is a JP-FE8 remnant. (The spline library the game *uses* is
+  fe8u's `spline.c`, present in all games.)
+- **Note B — `SelectSummonPos` is FE8-only.** Summoning (the Summoner class raising Phantoms) is
+  an FE8 feature; FE7J and FE6 contain no summon logic, so there is no counterpart. The 0.01
+  BinDiff "match" is a leftover assignment.
+
+**Bottom line.** Of the ten fe8u-absent functions: **6 are shared engine code** present in the
+other games (the 3 password-codec functions in FE6+FE7J+FE7U; the 3 play-ranking-display
+functions in FE7J+FE7U), **1 is uncertain** (`sub_80A3528` play-ranking draw — probably present
+but unmatchable), and **3 are genuinely FE8J-/FE8-specific** (the two dead spline functions and
+`SelectSummonPos`).
+
+---
+
 ## Appendix — tool
 
 `scripts/tools/find_xrefs.py <hexaddr>…` — ROM-wide caller/reference finder used for this
