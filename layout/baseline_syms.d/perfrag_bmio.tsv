@@ -2,8 +2,8 @@ gChapterDataAssetTable	08907BC8	data	bmio_08030044
 GetPrimaryOAMSize	0800219C	thumb	bmio_08030220
 CallARM_PushToPrimaryOAM	08002B1C	thumb	bmio_08030220
 BMapVSync_OnEnd	00000000	data	bmio_08030344
-BMapVSync_UpdateMapImgAnimations	00000000	data	bmio_08030344
-BMapVSync_UpdateMapPalAnimations	08027348	thumb	bmio_08030344
+BMapVSync_UpdateMapImgAnimations	0802FFAC	thumb	bmio_08030344
+BMapVSync_UpdateMapPalAnimations	0802FFF4	thumb	bmio_08030344
 SyncUnitSpriteSheet	08030B5C	thumb	bmio_08030344
 WfxVSync	08019A00	thumb	bmio_08030344
 BMapVSync_OnLoop	00000000	data	bmio_08030344

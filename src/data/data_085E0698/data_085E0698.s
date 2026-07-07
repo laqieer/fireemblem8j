@@ -33,7 +33,7 @@ data_085E0698:
 	.global data_085E06F8
 data_085E06F8:
 	.4byte 0x00000002
-	.4byte MenuStdHelpBox + 0x1D
+	.4byte Menu_AutoHelpBox_OnInit + 0x1
 	.4byte 0x00000003
 	.4byte Menu_AutoHelpBox_OnLoop + 0x1
 	.4byte 0x00000000

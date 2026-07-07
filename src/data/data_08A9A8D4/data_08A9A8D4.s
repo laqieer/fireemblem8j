@@ -65,9 +65,9 @@ data_08A9A8D4:
 	.4byte 0x39D12BB1
 	.4byte 0x00010014
 	.4byte 0x03000200
-	.4byte TmCopyRect + 0x20
+	.4byte 0x08000400
 	.4byte 0x07012081
-	.4byte DecodeString + 0x20
+	.4byte 0x08000704
 	.4byte 0xC0012004
 	.4byte 0x0DC00DF0
 	.4byte 0x00000006

@@ -259,6 +259,12 @@ def main():
             # correctly under the shift (see commit 7dd9a675d). NOT a false positive.
             if off >= 0x10000000 or a >= ROM_HI:
                 continue
+            # STT_FUNC arbitrary-offset references are the broad false-positive class from
+            # issue #143: a packed data word happens to equal func+off. Legitimate Thumb
+            # callbacks are exact function entries (`func` or `func + 1`); real aliases to
+            # local function starts must be named as that target + 1, not as a mid-function
+            # offset from a different FUNC symbol.
+            func_arbitrary_offset = sym in code_symbols and off not in (0, 1)
             in_gap = own is None or (a - own[0]) > 0x40000
             # CROSS-TYPE: containing file's resource type vs the pointer target's type.
             ftype = restype(rel)
@@ -278,6 +284,9 @@ def main():
             if in_gap:
                 fp_suspects.append((rel, ln, f"{sym}+0x{off:X}",
                                     f"=0x{a:08X} lands in a GAP (no owning object)", "HIGH"))
+            elif func_arbitrary_offset:
+                fp_suspects.append((rel, ln, f"{sym}+0x{off:X}",
+                                    f"STT_FUNC arbitrary offset; use exact callback target or raw packed literal", "HIGH"))
             elif pair:
                 fp_suspects.append((rel, ln, f"{sym}+0x{off:X}",
                                     f"=0x{a:08X} packed adjacent-u16 pair in banim/OAM data", "HIGH"))

@@ -14,9 +14,9 @@ sProc_BMVSync:
 	.4byte 0x0000000B
 	.4byte 0x00000000
 	.4byte 0x00000002
-	.4byte ExecNightmareStaffEffect + 0xD
+	.4byte BMapVSync_UpdateMapImgAnimations + 0x1
 	.4byte 0x00000002
-	.4byte ExecNightmareStaffEffect + 0x55
+	.4byte BMapVSync_UpdateMapPalAnimations + 0x1
 	.4byte 0x00000002
 	.4byte SyncUnitSpriteSheet + 0x1
 	.4byte 0x00000002

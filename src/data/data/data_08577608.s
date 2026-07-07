@@ -13,7 +13,7 @@ data_08577608:
 	.4byte 0x0000000E
 	.4byte 0x00000000
 	.4byte 0x00000003
-	.4byte StartBgmVolumeChange + 0x59
+	.4byte MusicVc_OnLoop + 0x1
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000003

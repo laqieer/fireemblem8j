@@ -12,14 +12,16 @@
  * oracle is `make compare` (sha1).
  */
 
-extern u8 DungeonRecordUi_GotoNextLabel[];
+void AiPhaseInit(struct Proc * proc);
+void AiPhaseBerserkInit(struct Proc * proc);
+void AiPhaseCleanup(struct Proc * proc);
 extern u8 gBmdifficulty_6[];
 
 struct ProcCmd gProcScr_CpPhase[] __attribute__((section(".rodata.dat_gProcScr_CpPhase_ref"))) = {
     PROC_NAME((void *)((u8 *)gBmdifficulty_6 + 0x6C)),
-    PROC_CALL((void *)((u8 *)DungeonRecordUi_GotoNextLabel + 0x1D)),
+    PROC_CALL(AiPhaseInit),
     PROC_YIELD,
-    PROC_CALL((void *)((u8 *)DungeonRecordUi_GotoNextLabel + 0xE9)),
+    PROC_CALL(AiPhaseCleanup),
     PROC_END,
 };
 
@@ -31,11 +33,11 @@ __asm__(
 "\t.4byte 0x00000001\n"
 "\t.4byte gBmdifficulty_6 + 0x78\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte DungeonRecordUi_GotoNextLabel + 0x89\n"
+"\t.4byte AiPhaseBerserkInit + 0x1\n"
 "\t.4byte 0x0000000E\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000002\n"
-"\t.4byte DungeonRecordUi_GotoNextLabel + 0xE9\n"
+"\t.4byte AiPhaseCleanup + 0x1\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000000\n"
 );

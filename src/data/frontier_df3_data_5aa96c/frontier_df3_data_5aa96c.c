@@ -395,7 +395,7 @@ __asm__(
     ".4byte 0x0c0e0101\n"
     ".4byte 0x0d0f0000\n"
     ".4byte 0x0909100e\n"
-    ".4byte GetManimLevelUpBaseStat + 0x9e\n"
+    ".4byte 0x0808110F\n"
     ".4byte 0x07071210\n"
     ".4byte 0x06061311\n"
     ".4byte 0x05050012\n"
