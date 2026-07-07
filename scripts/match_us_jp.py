@@ -148,9 +148,30 @@ print(f"exact matches at SAME address as US: {same}/{len(exact)}")
 os.makedirs("layout", exist_ok=True)
 with open(OUT, "w") as f:
     f.write("# jp_addr\tus_addr\tsize\ttier\tname\n")
+    f.write("# tiers: exact (byte-identical unique), masked (pointers wildcarded,"
+            " unique), fixup (reconciled against the JP ELF by"
+            " scripts/tools/audit_funcmap.py -- corrects coincidental-byte-match"
+            " swaps of tiny accessors). Re-run audit_funcmap.py --fix after regen.\n")
     rows = [(j, u, s, "exact", n) for j, u, s, n in exact] + \
            [(j, u, s, "masked", n) for j, u, s, n in masked]
     rows.sort()
     for j, u, s, tier, n in rows:
         f.write(f"{j:08X}\t{u:08X}\t{s}\t{tier}\t{n}\n")
 print(f"wrote {OUT} ({len(exact)+len(masked)} entries)")
+
+# --- Reconcile against the JP decomp ELF (fixes the coincidental-byte-match class).
+# The exact/masked tiers can pair a US function to the WRONG JP address when the
+# only distinguishing byte is a literal-pool word that coincidentally collides
+# across the region shift (tiny accessors: GetX/GetY, getter/setter pairs). The
+# JP ELF's real carved names are authoritative; audit_funcmap.py --fix rewrites
+# the swapped rows. Re-run automatically here so regeneration stays corrected.
+if os.path.exists("fireemblem8.elf"):
+    import subprocess as _sp
+    _r = _sp.run([sys.executable,
+                  os.path.join(os.path.dirname(__file__), "tools", "audit_funcmap.py"),
+                  "--fix"], capture_output=True, text=True)
+    print(_r.stdout.strip().splitlines()[-1] if _r.stdout.strip()
+          else "(audit_funcmap.py produced no output)")
+else:
+    print("NOTE: fireemblem8.elf absent -> skipped audit_funcmap reconciliation; "
+          "run `python3 scripts/tools/audit_funcmap.py --fix` after building it.")

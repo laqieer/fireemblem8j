@@ -1,4 +1,5 @@
 # jp_addr	us_addr	size	tier	name
+# tiers: exact (byte-identical unique), masked (pointers wildcarded, unique), fixup (reconciled against the JP ELF by scripts/tools/audit_funcmap.py -- corrects coincidental-byte-match swaps of tiny accessors).
 08000234	08000234	208	exact	ColorFadeTick
 08000304	08000304	92	exact	ClearOam
 08000360	08000360	72	exact	Checksum32
@@ -934,8 +935,8 @@
 080598A0	08058A70	28	masked	GetEfxHpModMaybe
 08059954	08058B24	62	masked	EkrCheckAttackRound
 080599AC	08058B7C	26	masked	CheckBattleScripted
-080599D8	08058B98	16	exact	GetEkrHit
-080599E8	08058BA8	16	exact	GetEkrDmg
+080599D8	08058BA8	16	fixup	GetEkrDmg
+080599E8	08058BB8	16	fixup	GetEkrCrit
 0805A670	080598CC	64	masked	AnimScrAdvance
 0805A714	08059970	44	masked	ApplyBanimUniquePalette
 0805A740	0805999C	76	masked	GetBanimPalette
@@ -974,7 +975,7 @@
 0806D3AC	0806B088	36	exact	OnHBlank_0
 08070EA4	0806E8F0	20	masked	ResetClassReelSpell
 08070EF0	0806E93C	12	exact	SetActiveClassReelSpell
-08070EFC	0806E93C	12	exact	SetActiveClassReelSpell
+08070EFC	0806E948	12	fixup	SetActiveCRSpellBgColorProc
 08071FAC	0806F9FC	44	exact	ResetEkrDragonStatus
 08071FF8	0806FA48	12	exact	GetEkrDragonStatusAttr
 08072004	0806FA54	22	exact	AddEkrDragonStatusAttr
@@ -1212,8 +1213,7 @@
 0808B06C	08088DE0	52	masked	StartHelpBox
 0808B0EC	08088E60	60	masked	StartItemHelpBox
 0808B528	0808929C	36	masked	SetHelpBoxInitPosition
-0808B99C	080896D8	36	masked	DrawChapterTitleStr
-0808B99C	080896FC	36	masked	DrawChapterTitleStrEx
+0808B99C	080896FC	36	fixup	DrawChapterTitleStrEx
 0808BA30	08089720	36	masked	DrawChapterTitleBG
 0808C4F0	0808A1E0	32	masked	StartHelpBoxAtPos
 0808C694	0808A384	64	exact	ApplyHelpBoxContentSize_bug
@@ -1299,9 +1299,7 @@
 080A58BC	080A1AE4	136	masked	SupportSubScreen_BackupTilemaps
 080A5944	080A1B6C	34	masked	GetSupportScreenPartnerCount
 080A5FE8	080A221C	88	exact	SupportSubScreen_MakeDimmedObjPalette
-080A76F4	08000D18	16	masked	CheckCanKeyComboReset
-080A76F4	08001C68	16	masked	IsSoftwareReset
-080A76F4	080A2CB0	16	masked	IsSramWorking
+080A76F4	080A2CB0	16	fixup	IsSramWorking
 080A7740	080A2CFC	44	exact	Checksum16
 080A7918	080A2ED4	20	masked	SramOffsetToAddr
 080A792C	080A2EE8	16	masked	SramAddrToOffset
@@ -2589,7 +2587,7 @@
 085C35A0	0859B120	18	exact	gChapterIntroLightXLerpLut
 085C35B2	0859B132	18	exact	gChapterIntroLightYLerpLut
 085C35C4	0859B144	26	exact	Sprite_ChapterIntro_DecalBanner
-085C35E0	0859B160	32	masked	ProcScr_ChapterIntro_PutDecalSprite
+085C35E0	0859B198	32	fixup	ProcScr_ChapterIntro_RevealDecalSprite
 085C3630	0859B1B0	360	masked	gProcScr_ChapterIntro
 085C37D8	0859B358	88	masked	ProcScr_GameOverScreen
 085C3890	0859B410	56	masked	ProcScr_DanceringAnim
@@ -2642,7 +2640,7 @@
 085C4220	0859BD40	96	masked	EventScr_TradeTutDone
 085C4280	0859BDA0	80	masked	gProcScr_UpdateTraps
 085C42D0	0859BDF0	32	masked	ProcScr_PostWarpStaffAction
-085C43F8	0859BF18	108	masked	gDebugChargeMenuItems
+085C43F8	0859C038	108	fixup	gDebugChuudanMenuItems
 085C4680	0859C1A0	216	masked	gItemUseMenuItems
 085C4758	0859C278	216	masked	gStealItemMenuItems
 085C4830	0859C350	252	masked	gConvoyMenuItems
@@ -2661,7 +2659,7 @@
 085C55D4	0859D0F4	36	masked	gYesNoSelectionMenuDef
 085C56D0	0859D1F0	36	masked	gUnitActionMenuDef
 085C5D98	0859D8B8	80	masked	sProc_BMVSync
-085C5DE8	0859D908	80	masked	gProc_MapTask
+085C5DE8	0859D958	80	fixup	sObj_RainParticle1
 085C5E38	0859D958	8	exact	sObj_RainParticle1
 085C5E40	0859D960	8	exact	sObj_RainParticle2
 085C5E54	0859D974	110	exact	sObj_BackgroundClouds
@@ -5452,7 +5450,7 @@
 08A13D48	089A36C0	56	exact	gMapanimExpbar_0
 08A13D80	089A36F8	120	masked	ProcScr_MapAnimExpBar
 08A13E20	089A3798	80	exact	gMapanimDebug_0
-08A13E9C	089A3814	96	masked	ProcScr_MADebug
+08A13E9C	085AA6BC	96	fixup	ProcScr_SIOMAIN2
 08A13EFC	089A3874	176	masked	ProcScr_MapAnimEventBattle
 08A13FEC	089A3964	40	masked	ProcScr_PoisonAnim2
 08A14014	089A398C	56	masked	ProcScr_MapAnimGorgonHatch
@@ -5965,8 +5963,8 @@
 08A5CC80	089EAB5C	164	masked	EventListScr_Ch15b_Character
 08A5CD64	089EAC40	160	masked	EventListScr_Ch15b_Misc
 08A5CE64	089EAD40	52	masked	EventListScr_Ch16b_Turn
-08A5CE9C	089EAD78	100	exact	EventListScr_Ch16b_Location
-08A5CF00	089EADDC	64	masked	EventListScr_Ch16b_Misc
+08A5CE9C	089EAC00	100	fixup	EventListScr_Ch15b_Location
+08A5CF00	089EAC40	64	fixup	EventListScr_Ch15b_Misc
 08A5D514	089EB3F0	76	masked	EventListScr_Ch21b_Misc
 08A5D650	089EB52C	28	masked	EventListScr_Tower1_Location
 08A5D700	089EB5DC	40	masked	EventListScr_Tower2_Misc
@@ -6034,7 +6032,7 @@
 08A60278	089EE140	68	exact	EventScr_CallWithModeCheck
 08A602BC	089EE184	24	exact	EventScr_SetFlagIfPlayedThrough
 08A602D4	089EE19C	28	masked	EventScr_UnTriggerIfNotUnit
-08A602F0	089EE1B8	28	masked	EventScr_UnTriggerIfNotFaction
+08A602F0	088C6AC4	28	fixup	UnitDef_Ch14BAlly_7
 08A6030C	089EE1D4	20	exact	EventScr_EndAndResetTriggEvent
 08A60320	089EE1E8	48	exact	EventScr_LoadUnitWithRestrictionCtrl
 08A60350	089EE218	48	masked	EventScr_LoadUnitForDifferentMode
@@ -6163,7 +6161,7 @@
 08A65830	089F36FC	388	masked	EventScr_Ch8_8
 08A65D68	089F3C34	388	masked	EventScr_Ch8_11
 08A66884	089F4750	88	masked	EventScr_Ch10A_8
-08A6692C	089F2E6C	40	masked	EventScr_Ch7_1
+08A6692C	089F47F8	40	fixup	EventScr_Ch10A_11
 08A6696C	089F4838	148	masked	EventScr_Ch10A_13
 08A66FF0	089F4EBC	36	masked	EventScr_Ch11A_3
 08A67014	089F4EE0	60	masked	EventScr_Ch11A_4
@@ -6193,7 +6191,7 @@
 08A6E770	089FC690	52	masked	EventScr_Ch14B_9
 08A6E7CC	089FC6EC	16	exact	EventScr_Ch14B_11
 08A6E7DC	089FC6FC	68	masked	EventScr_Ch14B_12
-08A6E9AC	089FC8F0	20	masked	EventScr_Ch15b_EndingScene
+08A6E9AC	089FC06C	20	fixup	EventScr_Ch14b_EndingScene
 08A6EDFC	089FCD40	88	masked	EventScr_Ch16b_BeginningScene
 08A6EE54	089FCD98	16	masked	EventScr_Ch16b_EndingScene
 08A6EE94	089FCDD8	44	masked	EventScr_Ch16B_2
@@ -6203,7 +6201,7 @@
 08A6EF98	089FCEDC	16	masked	EventScr_Ch17b_EndingScene
 08A6F0E4	089FD028	64	masked	EventScr_Ch18b_BeginningScene
 08A6F498	089FD3DC	16	masked	EventScr_Ch19b_EndingScene
-08A6FA2C	089FD974	68	masked	EventScr_Ch21b_BeginningScene
+08A6FA2C	089FD51C	68	fixup	EventScr_Ch20b_BeginningScene
 08A6FC9C	089FDBE4	52	masked	EventScr_Tower1_EndingScene
 08A6FD48	089FDC90	52	masked	EventScr_Tower2_EndingScene
 08A6FD7C	089FDCC4	52	masked	EventScr_Tower_0
@@ -6390,8 +6388,6 @@
 08A7E124	08A0AE64	32	exact	Pal_GameOverText1
 08A7E144	08A0AE84	68	exact	Tsa_GameOverFx
 08A84B00	08A10FE0	252	exact	chap_title_blank
-08A84B00	08A16040	252	exact	chap_title_86
-08A84B00	08A1613C	252	exact	chap_title_57
 08A92514	08A167C8	1444	exact	gGfx_PlayerInterfaceFontTiles
 08A92AB8	08A16D6C	128	exact	gGfx_PlayerInterfaceNumbers
 08A930D8	08A1738C	32	exact	gPal_PlayerInterface_Blue
@@ -6592,7 +6588,7 @@
 08A9D8B8	08A20950	38	exact	gSprite_SavemenuData_21
 08A9D8DE	08A20976	38	exact	gSprite_SavemenuData_22
 08A9D964	08A209FC	12	exact	gDifficultymenu_0
-08A9D978	08A20A10	136	masked	ProcScr_NewGameDifficultySelect
+08A9D978	08A2075C	136	fixup	gProcScr_SaveBgUp
 08A9DA16	08A20AAE	20	exact	gSprite_DifficultyMenuSelectModeText
 08A9DA38	08A20AD0	20	exact	gSprite_Difficultymenu_2
 08A9DA4C	08A20AE4	14	exact	gSprite_Difficultymenu_3
@@ -6627,7 +6623,7 @@
 08A9E45E	08A214F6	8	exact	gSprite_Soundroom_8
 08A9E466	08A214FE	8	exact	gSprite_Soundroom_9
 08A9E4B8	08A21550	24	exact	gExtramenuUnk_0
-08A9E4D0	08A21568	40	masked	gExtramenuUnk_1
+08A9E4D0	08A21338	40	fixup	gProcScr_SoundRoomUi
 08A9E510	08A215A8	176	masked	gProcScr_BonusClaim
 08AA2D34	08A25DCC	256	exact	Pal_SaveMenuBG
 08AA2E34	08A25ECC	1204	exact	Tsa_SaveMenuBG
