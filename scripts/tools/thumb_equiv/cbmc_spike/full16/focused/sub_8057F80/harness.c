@@ -76,6 +76,7 @@ static unsigned coi;
 
 static int next_i(void) { unsigned k = ci++; ASSERT(k < 512, "oracle return bound"); return ret_i[k]; }
 static void write_out32(void *p) { unsigned k = coi++; ASSERT(k < 512, "oracle out bound"); if (p) *(u32 *)p = g_out_words[k]; }
+static void write_out16(void *p) { unsigned k = coi++; ASSERT(k < 512, "oracle out bound"); if (p) *(u16 *)p = (u16)g_out_words[k]; }
 
 int CheckBanimHensei(void) { return next_i(); }
 bool CheckBattleScripted(void) { return (bool)next_i(); }
@@ -102,7 +103,7 @@ void SetBanimArenaFlag(int flag) { (void)flag; }
 void SetBanimLinkArenaFlag(int flag) { (void)flag; }
 void SetBattleUnscripted(void) { }
 void SetEkrDragonStatusType(struct Anim *anim, u8 type) { (void)anim; (void)type; }
-void UnsetMapStaffAnim(s16 *out, u16 pos, u16 weapon) { (void)pos; (void)weapon; write_out32(out); }
+void UnsetMapStaffAnim(s16 *out, u16 pos, u16 weapon) { (void)pos; (void)weapon; write_out16(out); }
 
 s32 refcallee_CheckBanimHensei(void) { return next_i(); }
 s8 refcallee_CheckBattleScripted(void) { return (s8)next_i(); }
@@ -128,11 +129,25 @@ M2C_UNK refcallee_SetBanimArenaFlag(s32 flag) { (void)flag; return 0; }
 M2C_UNK refcallee_SetBanimLinkArenaFlag(s32 flag) { (void)flag; return 0; }
 M2C_UNK refcallee_SetBattleUnscripted(void) { return 0; }
 M2C_UNK refcallee_SetEkrDragonStatusType(s32 anim, s32 type) { (void)anim; (void)type; return 0; }
-M2C_UNK refcallee_UnsetMapStaffAnim(s32 out, s32 pos, u16 weapon) { (void)pos; (void)weapon; write_out32((void *)out); return 0; }
+M2C_UNK refcallee_UnsetMapStaffAnim(s32 out, s32 pos, u16 weapon) { (void)pos; (void)weapon; write_out16((void *)out); return 0; }
 
 int main(void) {
+    static struct CharacterData ch[2];
+    static struct ClassData cl[2];
     int r_ref, r_impl;
+
+    gBattleActor.unit.pCharacterData = &ch[0];
+    gBattleActor.unit.pClassData = &cl[0];
+    gBattleTarget.unit.pCharacterData = &ch[1];
+    gBattleTarget.unit.pClassData = &cl[1];
+    ch[0].number = 1;
+    ch[1].number = 1;
+    { int i; for (i = 0; i < 64; i++) { ret_i[i] = nondet_int(); g_out_words[i] = nondet_uint(); } }
+    ci = 0;
+    coi = 0;
     r_ref = ref_PrepareBattleGraphicsMaybe();
+    ci = 0;
+    coi = 0;
     r_impl = impl_PrepareBattleGraphicsMaybe();
     ASSERT(r_ref == r_impl, "return equal");
     return 0;

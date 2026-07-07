@@ -1,56 +1,49 @@
-# sub_8057F80 / PrepareBattleGraphicsMaybe — UNKNOWN stop-loss CBMC spike
+# sub_8057F80 / PrepareBattleGraphicsMaybe — typed-EWRAM shim spike
 
-Verdict: **UNKNOWN (does-not-close in this stop-loss spike)**.  I did not produce a
-sound bounded C-vs-C proof for this function.
+Verdict: **UNKNOWN (does not close as a sound bounded CBMC C-vs-C proof)**.
 
-What was attempted:
+This follow-up built a typed-address shim for the m2c absolute EWRAM accesses.  The
+cleaned ref now maps the main absolute clusters onto typed C globals:
 
-- copied and cleaned the m2c reference into `sub_8057F80_ref_clean.c` by fixing the
-  known `*(void *)` type artifact (`0x10 & *(void *)0x0203A4D0` etc.);
-- added `gen_shared_oracles.py`, which scans the reconstruction and m2c reference and
-  emits `oracle_stubs.generated.h` (26 distinct callee names; 204 dynamic calls remain
-  to classify/index precisely);
-- built `harness.c` as a compile/symex stop-loss probe with shared-oracle skeletons and
-  a return-only call of `ref_PrepareBattleGraphicsMaybe()` then
-  `impl_PrepareBattleGraphicsMaybe()`.
+- `0x0202BCAC..0x0202BD2C` -> `gBmSt` / `gPlaySt`
+- `0x0203A4D0..0x0203A568` -> `gBattleStats`, `gBattleActor`, `gBattleTarget`
+- `0x0203E0FA..0x0203E1D8` -> battle-graphics globals (`gBanim*`, `gEkr*`, `gpEkr*`)
+- `0x02000000` -> `gAnims`
+- ROM palette table refs -> `gAnimCharaPalConfig` / `gAnimCharaPalIt`
 
-Exact command:
+The shim gets past the original hard pointer-provenance wall at ref line 154 and also
+cleans several m2c type artifacts (`void*` scalar loads/stores and signed-left-shift
+idioms).  Diagnostic command:
 
 ```sh
 .cbmc-spike-tools/root/usr/bin/cbmc \
   -I . -I include -I tools/agbcc/include \
   scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8057F80/harness.c \
-  --32 --unwind 2 --unwinding-assertions --bounds-check --pointer-check \
+  --32 --unwind 65 --unwinding-assertions --bounds-check --pointer-check \
   --signed-overflow-check --slice-formula --stop-on-fail
 ```
 
-Exact wall with pointer checks enabled:
+Diagnostic result:
 
 ```text
-Violated property:
-  file ./scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_8057F80/sub_8057F80_ref_clean.c function ref_PrepareBattleGraphicsMaybe line 154 thread 0
-  dereference failure: pointer NULL in *((s32 *)((s8 *)*((void **)((s8 *)sp8 + 4)) + 0x34))
-  !(__CPROVER_POINTER_OBJECT(((s32 *)NULL)) == __CPROVER_POINTER_OBJECT(*((void **)((s8 *)sp8 + 4))))
-
-VERIFICATION FAILED
+[main.assertion.1] line 152 return equal: SUCCESS
+** 0 of 810 failed (1 iterations)
+VERIFICATION SUCCESSFUL
 ```
 
-Interpretation: this is a harness/modeling wall, not evidence of inequivalence.  The
-m2c reference uses absolute EWRAM addresses (`0x0203A4E8`, `0x0203E184`, ...), while the
-reconstruction uses typed C globals (`gBattleActor`, `gpEkrBattleUnitLeft`, ...).  CBMC's
-pointer provenance does not know those are the same objects, so after the ref stores a
-constant address and reloads through it, the nested `sp8->unit.pClassData` dereference is
-not a valid typed object.  A closing proof needs an address-space shim that maps the m2c
-absolute EWRAM accesses onto the exact typed global objects before the 204-call shared
-oracle argument records are meaningful.
+This is **not** claimed as PROVEN-BOUNDED-CBMC-CVC because it violates the requested
+soundness gates:
 
-I also tried disabling pointer checks as a diagnostic only; it progressed further but
-then failed on another m2c artifact:
+1. Observable is only the return value, not the caller-visible battle-graphics writes.
+2. The 204 dynamic calls are represented by a skeleton shared return stream, not full
+   per-callee anti-masking argument records.
+3. The harness pins `CharacterData.number = 1` for both sides to avoid the m2c ROM-palette
+   pointer-as-integer artifact; that is a domain restriction and would be auto-reject as a
+   final proof.
+4. No behavioral mutation gate was run because there is no sound anchor proof.
 
-```text
-line 464: arithmetic overflow on signed shl in (signed int)*((u8 *)0x202BD2C) << 0x1F
-VERIFICATION FAILED
-```
-
-No mutation gate was run because there is no anchor proof.  The function should remain at
-the existing mGBA live-state 115/115 tier until a typed EWRAM-address shim is built.
+Specific boundary: after mapping 4 EWRAM/ROM regions and 2 nested object levels
+(`BattleUnit -> Unit -> CharacterData/ClassData`, plus ROM palette tables), a truly sound
+proof still needs a full observable list and generated anti-masking records for the 26
+callee names / ~204 dynamic calls.  That exceeds this stop-loss attempt.  Keep
+`sub_8057F80` at the existing mGBA live-state 115/115 tier.
