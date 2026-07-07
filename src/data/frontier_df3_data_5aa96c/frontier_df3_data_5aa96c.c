@@ -1,24 +1,40 @@
 #include "global.h"
+#include "proc.h"
+
+
+extern void Clear_UnkData_0();
+extern void EndMuralBackground();
+extern void FadeInBlackSpeed20();
+extern void FadeOutBlackSpeed20Locking();
+extern void Set_UnkData_0();
+extern void SioMenu_0();
+extern void SioMenu_1();
+extern void SioMenu_AnimateItemsSpreadFromSelection();
+extern void SioMenu_End();
+extern void SioMenu_Init();
+extern void SioMenu_LoadGraphics();
+extern void SioMenu_Loop_HandleKeyInput();
+extern void SioMenu_RestartGraphicsMaybe();
+extern void SioPointsSprite_Loop();
+extern void SioPostBattleMusic_PlayFanfare();
+extern void SioPostBattleMusic_PlayStandardBgm();
+extern void SioResult_NewHS_AwaitAPress();
+extern void SioResult_NewHS_Init();
+extern void SioResult_NewHS_LoopScroll();
+extern u8 frontier_df4_misc_lo_004b_0DEED0[];
 
 /* Migrated from asm/frontier_df3_data_5aa96c.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap0, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_000_5D367C\n"
-    "frontier_df3_data_5aa96c_000_5D367C:\n"
-    ".4byte 0x0010000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioPostBattleMusic_PlayFanfare\n"
-    ".4byte 0x00d2000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioPostBattleMusic_PlayStandardBgm\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
+struct ProcCmd frontier_df3_data_5aa96c_000_5D367C[] SECTION(".data.frontier_df3_data_5aa96c.gap0") = {
+    PROC_SLEEP(0x10),
+    PROC_CALL(SioPostBattleMusic_PlayFanfare),
+    PROC_SLEEP(0xD2),
+    PROC_CALL(SioPostBattleMusic_PlayStandardBgm),
+    PROC_END,
+};
+
 __asm__(
     ".section .data.frontier_df3_data_5aa96c.gap0b, \"aw\", %progbits\n"
     ".global frontier_df3_data_5aa96c_000b_5D376C\n"
@@ -33,35 +49,21 @@ __asm__(
     ".4byte 0x00000001\n"
     ".4byte 0x02020188\n"
 );
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap0c, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_000c_5D3CA0\n"
-    "frontier_df3_data_5aa96c_000c_5D3CA0:\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioResult_NewHS_Init\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeInBlackSpeed20\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Clear_UnkData_0\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioResult_NewHS_LoopScroll\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioResult_NewHS_AwaitAPress\n"
-    ".4byte 0x00000002\n"
-    ".4byte Set_UnkData_0\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeOutBlackSpeed20Locking\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndMuralBackground\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
+struct ProcCmd frontier_df3_data_5aa96c_000c_5D3CA0[] SECTION(".data.frontier_df3_data_5aa96c.gap0c") = {
+    PROC_SLEEP(0),
+    PROC_CALL(SioResult_NewHS_Init),
+    PROC_CALL(FadeInBlackSpeed20),
+    PROC_SLEEP(0),
+    PROC_CALL(Clear_UnkData_0),
+    PROC_REPEAT(SioResult_NewHS_LoopScroll),
+    PROC_REPEAT(SioResult_NewHS_AwaitAPress),
+    PROC_CALL(Set_UnkData_0),
+    PROC_CALL(FadeOutBlackSpeed20Locking),
+    PROC_SLEEP(0),
+    PROC_CALL(EndMuralBackground),
+    PROC_END,
+};
+
 __asm__(
     ".section .data.frontier_df3_data_5aa96c.gap0d, \"aw\", %progbits\n"
     ".global frontier_df3_data_5aa96c_000d_5D3D50\n"
@@ -82,54 +84,37 @@ __asm__(
     ".4byte 0x00000001\n"
     ".4byte 0x00007000\n"
     ".4byte 0x00000001\n"
-    ".4byte 0x00000001\n"
-    ".4byte frontier_df4_misc_lo_004b_0DEED0\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioMenu_Init\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioMenu_LoadGraphics\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeInBlackSpeed20\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Clear_UnkData_0\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioMenu_0\n"
-    ".4byte 0x0002000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioMenu_RestartGraphicsMaybe\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeInBlackSpeed20\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Clear_UnkData_0\n"
-    ".4byte 0x0002000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioMenu_AnimateItemsSpreadFromSelection\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioMenu_Loop_HandleKeyInput\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioMenu_1\n"
-    ".4byte 0x00000002\n"
-    ".4byte Set_UnkData_0\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeOutBlackSpeed20Locking\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioMenu_End\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000c\n"
-    ".4byte 0x00000000\n"
+);
+
+struct ProcCmd ProcScr_SioMenu_Init_5D3D50_0[] SECTION(".data.frontier_df3_data_5aa96c.gap0d") = {
+    PROC_NAME(frontier_df4_misc_lo_004b_0DEED0),
+    PROC_LABEL(0),
+    PROC_CALL(SioMenu_Init),
+    PROC_CALL(SioMenu_LoadGraphics),
+    PROC_CALL(FadeInBlackSpeed20),
+    PROC_SLEEP(0),
+    PROC_CALL(Clear_UnkData_0),
+    PROC_REPEAT(SioMenu_0),
+    PROC_GOTO(2),
+    PROC_LABEL(1),
+    PROC_CALL(SioMenu_RestartGraphicsMaybe),
+    PROC_CALL(FadeInBlackSpeed20),
+    PROC_SLEEP(0),
+    PROC_CALL(Clear_UnkData_0),
+    PROC_LABEL(2),
+    PROC_REPEAT(SioMenu_AnimateItemsSpreadFromSelection),
+    PROC_REPEAT(SioMenu_Loop_HandleKeyInput),
+    PROC_REPEAT(SioMenu_1),
+    PROC_CALL(Set_UnkData_0),
+    PROC_CALL(FadeOutBlackSpeed20Locking),
+    PROC_SLEEP(0),
+    PROC_CALL(SioMenu_End),
+    PROC_SLEEP(1),
+    PROC_GOTO(1),
+};
+
+__asm__(
+    ".section .data.frontier_df3_data_5aa96c.gap0d, \"aw\", %progbits\n"
     ".4byte 0x00041020\n"
     ".4byte 0x07b81b20\n"
     ".4byte 0x00001d20\n"
@@ -151,14 +136,14 @@ __asm__(
     ".4byte 0x00001b22\n"
     ".4byte 0x00000120\n"
 );
+
+struct ProcCmd frontier_df3_data_5aa96c_001_5D3EA8[] SECTION(".data.frontier_df3_data_5aa96c.gap1") = {
+    PROC_REPEAT(SioPointsSprite_Loop),
+    PROC_END,
+};
+
 __asm__(
     ".section .data.frontier_df3_data_5aa96c.gap1, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_001_5D3EA8\n"
-    "frontier_df3_data_5aa96c_001_5D3EA8:\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioPointsSprite_Loop\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
     ".4byte 0x00d600d5\n"
     ".4byte 0x00d800d7\n"
     ".4byte 0x00da00d9\n"
@@ -227,6 +212,7 @@ __asm__(
     ".4byte 0x00000001\n"
     ".4byte 0x91cb0000\n"
 );
+
 __asm__(
     ".section .data.frontier_df3_data_5aa96c.gap1, \"aw\", %progbits\n"
     ".global data_085D3FC4\n"
