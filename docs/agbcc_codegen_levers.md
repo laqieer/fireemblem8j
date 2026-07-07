@@ -207,7 +207,7 @@ permuter fleet (16-fn) + these scratches; remaining path = compute-time + commun
 
 ## 12. decomp.me match patterns — from TsilaAllaoui's 8 fork matches (D292)
 
-Eight FE8J reg-coloring NEARs (all labelled "agbcc reg-coloring NEAR") were driven to
+Nine FE8J reg-coloring NEARs (8 by TsilaAllaoui + sub_8057F80) (all labelled "agbcc reg-coloring NEAR") were driven to
 **score 0** on decomp.me forks by community matcher **TsilaAllaoui**, then integrated to
 `src/` byte-exact here. Diffing each non-matching parent (proxied from the in-repo
 `src/nonmatching/*` stubs, git history, and the fe8u natural form — the decomp.me parents
@@ -218,7 +218,7 @@ commanding agbcc's register allocator / instruction selector without changing be
 They crack exactly the spill-decision + high-pressure reg-coloring NEARs §7 said flag
 sweeps could not.
 
-The 8 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
+The 9 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
 
 | fork (fn) | pins | `=r`/`0` reg-barrier | `+m` mem-barrier | inline-asm | headline lever |
 |---|---|---|---|---|---|
@@ -230,6 +230,18 @@ The 8 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scrip
 | mbcFD `sub_8084CE4`           | 11 | 0 | 0 | 13 | P4 pins + **P3** stack-arg `ldr` + P10 `&x` |
 | 39OxE `RegisterTsaWithOffset` | 6  | 0 | 0 | 6  | P4 high-reg (r8) + **P6** shifted-domain loop |
 | Qua5T `sub_80CAEF4`           | 34 | 6 | 2 | 34 | **P2** mem-barrier + P1/P4 swarm + goto |
+| rtMN6 `PrepareBattleGraphicsMaybe` (sub_8057F80, 2936 B) | 2 | 0 | 0 | 0 | **P4** pins (`char_cnt`→r6, `banim_pos`→r4) + **§5a** s16→int widen (+`(s16)` casts) + inline the ally-position helper + decl-order. **Cracked a verdict recorded as "genuinely region-different, byte-match out of scope"** — see the LESSON below. |
+
+**LESSON from rtMN6 (`sub_8057F80`, 2026-07-07): "region-different" ≠ unmatchable — measure it.**
+The function was parked as "genuinely region-different (2936 vs US 3250 B), byte match out of
+scope". That was half-wrong. The size delta is a real region difference (the US-only
+Manakete/Myrrh + Demon-King tail block, absent in JP), but the *rest* is a plain
+whole-function reg-coloring wall that P4 pins + s16-widen crack. **Before writing off a
+larger "region-different" NEAR, align its `bl` sequence 1:1 vs the US `.o` (survey §4.3): if
+the call graph matches except for a localized added/removed block, carve the JP control flow
+and treat the residual as a normal coloring NEAR — the pins recipe applies.** (`sub_8057F80`
+was also the function this repo's ROI note rated "≈NONE / don't attempt"; the community
+decomp.me path landed it, exactly as that note predicted was its only viable route.)
 
 ### The levers (checklist — try cleanest first, escalate only if it resists)
 

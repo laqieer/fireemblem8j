@@ -270,6 +270,60 @@ seconds of work versus a permuter run that may be SIGTERM'd here (D20).
 
 ---
 
+## 7. Pulling & integrating a community (decomp.me) match — and the symbol-mapping gotcha
+
+When a still-asm function reaches **score 0** on decomp.me (our scratch or a community
+fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN6, D…):
+
+1. **Find the matched fork.** `scripts/tools/decompme/registry.tsv` maps `fn → base slug`.
+   Query the family: `GET https://decomp.me/api/scratch/<slug>/family` and pick the member
+   with `score == 0`. **Cloudflare needs a browser UA + `Referer: https://decomp.me/`**
+   header (plain curl gets 403) — `scripts/tools/decompme/integrate_matched.sh <fork>` sets
+   these (extract `source_code`/`context`/`compiler_flags` from the JSON).
+2. **Build the src file with the REAL project headers, not the decomp.me context.** Strip
+   the decomp.me-only scaffolding the author adds to fake a local match: `asm(".set SYM,
+   0x…")` blocks and any trailing `asm(".align 2, 0")` (they are usually flagged "REMOVE in
+   real project"). Replace with the actual `#include`s; keep the `register … asm("rN")` pins.
+3. **Carve + gate.** Add a `layout/carved_rom.d/<addr>-<name>.tsv` handdecomp row
+   (`START<TAB>END<TAB>src/<Name>.o(.text)<TAB>handdecomp: …`), `git rm` the
+   `gbadisasm_<fn>.tsv` row + `asm/<fn>.s` + `src/nonmatching/<fn>.c`. A pre-existing
+   `layout/baseline_syms_drop.d/*<fn>*.tsv` (already dropped because the asm object exported
+   the name) stays valid for the src object — no baseline edit. `make layout && make compare`
+   → OK, then `make shiftcheck` → 0 HIGH.
+
+### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol
+
+decomp.me resolves each `bl` against **its context's** symbol addresses. If the author's
+context maps a callee to the wrong address, the scratch scores 0 *there* but the byte source
+is calling the wrong function — so integrating it verbatim **fails `make compare` by a few
+bytes**. Diagnose and fix:
+
+- **Symptom:** `make compare` FAILS; the *linked* bytes are near-perfect. Extract both and
+  `cmp -l`:
+  ```sh
+  dd if=fireemblem8.gba of=/tmp/mine.bin  bs=1 skip=$((JP-0x8000000)) count=$SIZE
+  dd if=baserom.gba     of=/tmp/tgt.bin   bs=1 skip=$((JP-0x8000000)) count=$SIZE
+  cmp -l /tmp/tgt.bin /tmp/mine.bin | wc -l    # e.g. 3 bytes
+  ```
+  (Compare the LINKED ROM, **not** the unlinked `.o` — its relocations read 0 and give false
+  diffs at every `bl`/pool site.)
+- **Localize:** `objdump -D -b binary -m arm -M force-thumb --adjust-vma=JP …` both at the
+  differing offsets → the diff is a `bl 0xAAAA` (target) vs `bl 0xBBBB` (yours).
+- **Root-cause:** `nm -n fireemblem8.elf` for what's really at `0xAAAA` vs `0xBBBB`. The
+  classic trap is **two byte-identical `return *global` getters** (or `setter`s): the
+  `us_jp_funcmap.tsv` "exact" tier wildcards the literal-pool word, so it cannot tell
+  `GetX`/`GetY` apart and may swap them. **Disambiguate by the RAM global each accessor
+  touches** — the `SetX` that writes `G` pairs with the `GetX` that reads `G`.
+  *(rtMN6 example: the scratch called `GetSelectTargetCount`, but JP 0x08050AC8 is
+  `GetBanimLinkArenaFlag` — reads the link-arena flag 0x0203E0EC set by
+  `SetBanimLinkArenaFlag`; `GetSelectTargetCount` is the sibling at 0x08050A9C reading
+  0x0203E0E8. Repointing the two call sites fixed the 3-byte diff, and the funcmap was
+  corrected.)*
+- **Fix:** repoint the call(s) to the correctly-named symbol; re-`make compare`. Then also
+  **fix the source funcmap row** so the misID doesn't bite the next carve (fix-the-class).
+
+---
+
 ## Quick reference — what's verified vs cited
 
 **Verified against `tools/agbcc` / the Makefile:**

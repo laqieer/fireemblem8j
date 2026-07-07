@@ -1,5 +1,21 @@
 # Axis #2 (matching-C) — 31 still-asm functions, ranked recipe queue (D307/W3)
 
+> **[UPDATE 2026-07-07 — axis-2 is now 15 still-asm (matching-C 99.83%, 8677/8692).]**
+> `PrepareBattleGraphicsMaybe (sub_8057F80)` MATCHED byte-exact via community decomp.me fork
+> **rtMN6** (TsilaAllaoui) and banked — see `docs/agbcc_codegen_levers.md` fork table (row 9) +
+> the "pull & integrate / symbol-mapping gotcha" section in `docs/agbcc-matching-playbook.md §7`.
+>
+> **Community-harvest status (2026-07-07):** `scripts/tools/decompme/decomp_status.py` was run
+> across all still-asm functions. **0 of the 15 have a score-0 decomp.me fork to harvest** — all
+> are `DECOMP_THEN_UPDATE` (posted, unmatched). rtMN6 was the only free win available. Best
+> remaining fork scores (lower = closer): **sub_80A6E4C 300** (fork XOT5k — a `_call_via_rN`
+> veneer-register wall per its `src/nonmatching` header), sub_80C05C8 1410, sub_80A2E64 1945,
+> sub_80A6F1C 2665, sub_80A6D34 3290, sub_80A3528 4070, sub_800E1FC 5281, sub_807C8DC 5841,
+> sub_800A594 7613, sub_807D3BC 8821, sub_80A3300 10700, sub_8001570 11200, sub_800FAD0 11920,
+> sub_800A34C 12152, sub_80A390C 27300. Next free win = re-poll this queue (a new community fork
+> appearing at score 0 is a zero-effort integrate); creating a new match is the compute/permuter
+> path (`register asm("rN")` pins + §5a widen recipe), low-ROI per `docs/unmatched_functions_report.md`.
+
 > **[SUPERSEDED 2026-07-03 — axis-2 is now 16 still-asm (matching-C 99.82%, 8676/8692); see [`frontier.md`](frontier.md).]**
 > Six queue entries below have since **MATCHED byte-exact in-repo (banked, removed from
 > `src/nonmatching/`)**: Event2F_MoveUnit (sub_800FF08), Event1B_TEXTSHOW (sub_800E5CC),
