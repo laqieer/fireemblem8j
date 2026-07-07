@@ -32,7 +32,7 @@ OPCODES = {
     0x0A: ("PROC_BREAK_EACH", "data"),
     0x0B: ("PROC_LABEL", "imm"),
     0x0C: ("PROC_GOTO", "imm"),
-    0x0D: ("PROC_JUMP", "func"),
+    0x0D: ("PROC_JUMP", "data"),
     0x0E: ("PROC_SLEEP", "imm"),
     0x0F: ("PROC_MARK", "imm"),
     0x10: ("PROC_BLOCK", None),

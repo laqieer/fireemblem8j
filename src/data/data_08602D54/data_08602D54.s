@@ -1,15 +1,9 @@
 /* Migrated from asm/data_08602D54.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
-	.section .data.residue.08602D54, "aw", %progbits
-	.global data_08602D54
-data_08602D54:
-	.4byte 0x00000001
-	.4byte frontier_df4_misc_lo_010c_0E3F3C + 0x21C
-	.4byte 0x00000003
-	.4byte efxDarkGradoOBJ01piece_Loop + 0x1
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.section .data.residue.08602D6C, "aw", %progbits
+	.global data_08602D6C
+data_08602D6C:
 	.4byte 0x00000001
 	.4byte frontier_df4_misc_lo_010c_0E3F3C + 0x234
 	.4byte 0x00000003

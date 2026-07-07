@@ -31,24 +31,25 @@ extern void SysBlackBox_Init();
 extern void SysBlackBox_Main();
 extern void SysHandCursor_Init();
 extern void SysHandCursor_Loop();
+extern void UiCursorHand_Init();
+extern void UiCursorHand_Loop();
 
-/* Lead [0x08A9DAB4,0x08A9DB1C) (104 B): UiCursorHand + UiSpinningArrows + data. */
+struct ProcCmd gProcScr_UiCursorHand[] __attribute__((section(".rodata.dat_gProcScr_UiCursorHand_ref"))) = {
+    PROC_CALL(UiCursorHand_Init),
+    PROC_LABEL(0x0),
+    PROC_REPEAT(UiCursorHand_Loop),
+    PROC_LABEL(0x1),
+    PROC_BLOCK,
+    PROC_END,
+};
+
+__asm__(".global data_08A9DAB4\n.set data_08A9DAB4, gProcScr_UiCursorHand");
+
+/* Lead [0x08A9DAE4,0x08A9DB1C) (56 B): UiSpinningArrows script + data. */
 __asm__(
-"\t.section .data.residue.08A9DAB4, \"aw\", %progbits\n"
-"\t.global data_08A9DAB4\n"
-"data_08A9DAB4:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte UiCursorHand_Init + 0x1\n"
-"\t.4byte 0x0000000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte UiCursorHand_Loop + 0x1\n"
-"\t.4byte 0x0001000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000010\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
+"	.section .data.residue.08A9DAE4, \"aw\", %progbits\n"
+"\t.global data_08A9DAE4\n"
+"data_08A9DAE4:\n"
 "\t.4byte 0x00000002\n"
 "\t.4byte 0x00000000\n"
 "\t.4byte 0x00000008\n"

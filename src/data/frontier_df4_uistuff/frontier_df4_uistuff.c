@@ -9926,6 +9926,7 @@ extern void ChapterIntro_End(ProcPtr proc);
 extern void sub_8020D78(ProcPtr proc);
 extern void sub_8020D80(ProcPtr proc);
 extern u8 data_085C3560[];
+extern u8 data_085C3570[];
 extern struct ProcCmd ProcScr_ChapterIntro_LightBurst[];
 extern struct ProcCmd ProcScr_ChapterIntro_RevealDecalSprite[];
 extern struct ProcCmd ProcScr_ChapterIntro_Bg1And3Scroll[];
@@ -9940,7 +9941,7 @@ struct ProcCmd gProcScr_ChapterIntro[] __attribute__((section(".data.frontier_df
     PROC_CALL(BMapDispSuspend),                                  /* 5C3630  080300D5 */
     PROC_CALL(ChapterIntro_Init),                               /* 5C3638  0801FDE9 */
     PROC_SLEEP(0x3C),
-    PROC_START_CHILD((struct ProcCmd*)(data_085C3560 + 0x10)),  /* 5C3648  085C3570 */
+    PROC_START_CHILD((struct ProcCmd*)data_085C3570),            /* 5C3648  085C3570 */
     PROC_CALL_ARG(sub_8020D78, 0x1),                            /* 5C3650  08020D79 */
     PROC_CALL(ChapterIntro_TwinLights_InitAndPlaySe),           /* 5C3658  0801FFB5 */
     PROC_REPEAT(ChapterIntro_TwinLights_Loop),                  /* 5C3660  0801FFF1 */

@@ -5,6 +5,7 @@
 
 extern void ChapterIntroTitle_InitBgImg(ProcPtr proc);
 extern u8 data_085C3560[];
+extern u8 data_085C3570[];
 extern void sub_8020D78(ProcPtr proc);
 extern void ChapterIntroTitle_ResetBg(ProcPtr proc);
 extern void ChapterIntro_InitCameraYPos(ProcPtr proc);
@@ -15,7 +16,7 @@ struct ProcCmd gProcScr_ChapterIntroTitleOnly[] __attribute__((section(".rodata.
 
     PROC_CALL(ChapterIntroTitle_InitBgImg),
 
-    PROC_START_CHILD((struct ProcCmd*)(data_085C3560 + 0x10)),
+    PROC_START_CHILD((struct ProcCmd*)data_085C3570),
 
     PROC_CALL(StartMidFadeFromBlack),
     PROC_REPEAT(WaitForFade),

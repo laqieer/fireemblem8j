@@ -1,17 +1,9 @@
 /* Migrated from asm/data_08601388.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
-	.section .data.residue.08601388, "aw", %progbits
-	.global data_08601388
-data_08601388:
-	.4byte 0x00000001
-	.4byte frontier_df4_misc_lo_008_0E2638 + 0xB28
-	.4byte 0x00000004
-	.4byte sub_8064F58 + 0x1
-	.4byte 0x00000003
-	.4byte efxLunaBG2_Loop + 0x1
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.section .data.residue.086013A8, "aw", %progbits
+	.global data_086013A8
+data_086013A8:
 	.4byte 0x00000001
 	.4byte frontier_df4_misc_lo_008_0E2638 + 0xB34
 	.4byte 0x000A000F

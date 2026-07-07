@@ -1,13 +1,9 @@
 /* Migrated from asm/data_085C3560.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
-	.section .data.residue.085C3560, "aw", %progbits
-	.global data_085C3560
-data_085C3560:
-	.4byte 0x00000003
-	.4byte ChapterIntro_Bg2Scroll_Loop + 0x1
-	.4byte 0x00000000
-	.4byte 0x00000000
+	.section .data.residue.085C3570, "aw", %progbits
+	.global data_085C3570
+data_085C3570:
 	.4byte 0x00000002
 	.4byte ChapterIntro_KeyListen_Init + 0x1
 	.4byte 0x00000003
