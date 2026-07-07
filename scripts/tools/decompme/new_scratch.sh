@@ -114,6 +114,21 @@ while [ "$#" -gt 0 ]; do
     esac
 done
 
+# ---- Sanitize flags for decomp.me ---------------------------------------
+# decomp.me ships the stock pret agbcc, which does NOT know this project's
+# custom `-mjp-promote` option (built by scripts/build_jp_agbcc.sh). A scratch
+# carrying it fails to compile there with "Invalid option `jp-promote'" (#151),
+# so the community can't even start on it. Strip such local-only flags here so a
+# scratch always compiles on decomp.me. (Re-audit anytime with verify_compile.py.)
+sanitized_flags=""
+for _f in $flags; do
+    case "$_f" in
+        -mjp-promote) echo "note: dropping local-only flag $_f (unsupported on decomp.me)" >&2 ;;
+        *)            sanitized_flags="${sanitized_flags:+$sanitized_flags }$_f" ;;
+    esac
+done
+flags="$sanitized_flags"
+
 # ---- Hard opt-in gate (prevents accidental publishing) -------------------
 if [ "${DECOMPME_PUBLISH:-}" != "1" ]; then
     cat >&2 <<'EOF'
