@@ -1233,19 +1233,7 @@ __asm__(
 );
 u8 frontier_df3_banim_aura_011_761780[] __attribute__((section(".data.frontier_df3_banim_aura.gap11"))) = INCBIN_U8("graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_011a_761780.4bpp.lz");
 /* data_08762170: raw trailing carve (pre-sliced hybrid blob), byte-exact. */
-__asm__(
-"\t.section .data.frontier_df3_banim_aura.gap11, \"aw\", %progbits\n"
-"\t.global data_08762170\n"
-"data_08762170:\n"
-"\t.short 0x6398, 0x0842, 0x1063, 0x1885, 0x20A7, 0x28C8, 0x30EA, 0x390C\n"
-"\t.short 0x412D, 0x494F, 0x5191, 0x55D4, 0x5DF7, 0x623A, 0x6A7D, 0x6E9F\n"
-"\t.short 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-"\t.short 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-"\t.short 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-"\t.short 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-"\t.short 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-"\t.short 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
+u8 data_08762170[] __attribute__((section(".data.frontier_df3_banim_aura.gap11"))) = INCBIN_U8("graphics/frontier_df3_banim_aura/data_08762170.gbapal");
 /* data_087621F0: raw trailing carve (pre-sliced hybrid blob), byte-exact. */
 __asm__(
 "\t.section .data.frontier_df3_banim_aura.gap11, \"aw\", %progbits\n"

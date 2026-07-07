@@ -24,13 +24,7 @@ u8 frontier_banim_aurabg3_015_776544[] __attribute__((section(".data.frontier_ba
 u8 frontier_banim_aurabg3_016_7767BC[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/frontier_banim_aurabg3_016a_7767BC.map.bin.lz");
 u8 data_08776A34[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/data_08776A34.4bpp.lz");
 /* data_08776F94: raw trailing carve (pre-sliced hybrid blob), byte-exact. */
-__asm__(
-"\t.section .data.frontier_banim_aurabg3.gap16, \"aw\", %progbits\n"
-"\t.global data_08776F94\n"
-"data_08776F94:\n"
-"\t.short 0x6398, 0x7FFF, 0x67FF, 0x4FFF, 0x37FF, 0x1FFF, 0x07FF, 0x037F\n"
-"\t.short 0x02FF, 0x027F, 0x01DF, 0x017E, 0x011C, 0x00BA, 0x0078, 0x0016\n"
-);
+u8 data_08776F94[] __attribute__((section(".data.frontier_banim_aurabg3.gap16"))) = INCBIN_U8("graphics/frontier_banim_aurabg3/data_08776F94.gbapal");
 /* data_08776FB4: raw trailing carve (pre-sliced hybrid blob), byte-exact. */
 __asm__(
 "\t.section .data.frontier_banim_aurabg3.gap16, \"aw\", %progbits\n"
