@@ -21,6 +21,7 @@ Usage:
 """
 import argparse
 import bisect
+import linecache
 import os
 import re
 import subprocess
@@ -73,6 +74,25 @@ def load_symbols(elf):
         pass
     addrs = sorted(set(addrs))
     return addrs, addr2name, starts, name2addr
+
+
+def load_code_symbols(elf):
+    """Return symbol names that are real code entry points/callbacks."""
+    code = {"IrqMain"}  # ABS vector symbol in this repo, still a code target.
+    try:
+        out = subprocess.check_output(["arm-none-eabi-readelf", "-s", elf],
+                                      text=True, errors="replace")
+    except (OSError, subprocess.CalledProcessError):
+        return code
+
+    for line in out.splitlines():
+        m = re.match(r"^\s*\d+:\s+([0-9A-Fa-f]{8})\s+\d+\s+FUNC\s+\S+\s+\S+\s+\S+\s+(\S+)$", line)
+        if not m:
+            continue
+        a = int(m.group(1), 16)
+        if ROM_LO <= a < ROM_HI:
+            code.add(m.group(2))
+    return code
 
 
 def owning(addrs, addr2name, a):
@@ -130,6 +150,25 @@ def looks_packed_pair(value):
             and (hi >> 8) in {0x04, 0x08, 0x0C})
 
 
+def looks_suspicious_code_ref(rel, ln, sym, value, code_symbols, unitdef_files):
+    """Flag code symbols embedded where nearby fields show packed data, not callbacks."""
+    if sym not in code_symbols or not looks_packed(value):
+        return False
+
+    if rel in unitdef_files:
+        return not re.search(r"^(REDA|UnitDef_)", sym)
+
+    if "banim" not in rel:
+        return False
+
+    line = linecache.getline(os.path.join(REPO, rel), ln)
+    text = line.replace('\\t', ' ').replace('\\n', ' ').replace('"', ' ')
+    # Banim/OAM command streams frequently use 0xFFFF sentinels and adjacent
+    # packed fields. A code symbol immediately following such data is the same
+    # false-positive class as 0x08000201 -> IrqMain+0x105, not a function pointer.
+    return bool(re.search(r"0x[0-9A-Fa-f]*FFFF\s*,\s*" + re.escape(sym) + r"\b", text))
+
+
 # Resource-type inference from a symbol name prefix — used for the cross-type signal
 # (a talk entry pointing into "banim_drum" graphics is the false-positive tell).
 TYPE_RULES = [
@@ -162,6 +201,7 @@ def main():
         return 2
 
     addrs, addr2name, starts, name2addr = load_symbols(args.elf)
+    code_symbols = load_code_symbols(args.elf)
 
     # First pass: collect every reference so we can consistency-check each ROM address.
     refs = list(iter_4byte_values())
@@ -232,6 +272,7 @@ def main():
             pair = looks_packed_pair(a) and "banim" in rel
             unitdef_packed = (rel in unitdef_files and looks_packed(a)
                               and not re.search(r"^(REDA|UnitDef_)", sym))
+            code_packed = looks_suspicious_code_ref(rel, ln, sym, a, code_symbols, unitdef_files)
             cross = (ftype != "?" and ttype != "?" and ftype != ttype
                      and not compatible and looks_packed(a) and not exact_start)
             if in_gap:
@@ -243,6 +284,9 @@ def main():
             elif unitdef_packed:
                 fp_suspects.append((rel, ln, f"{sym}+0x{off:X}",
                                     f"=0x{a:08X} packed UnitDefinition first word", "HIGH"))
+            elif code_packed:
+                fp_suspects.append((rel, ln, f"{sym}+0x{off:X}",
+                                    f"=0x{a:08X} code symbol embedded in packed data row", "HIGH"))
             elif cross:
                 fp_suspects.append((rel, ln, f"{sym}+0x{off:X}",
                                     f"=0x{a:08X} CROSS-TYPE {ftype}->{ttype}, packed-looking", "MED"))
