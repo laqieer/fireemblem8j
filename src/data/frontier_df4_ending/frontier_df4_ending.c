@@ -19,6 +19,13 @@ extern void FadeInExists();
 extern void FadeOutExists();
 extern void NewFadeIn();
 extern void NewFadeOut();
+/* #143: interior code pointers of the carved gProcScr_CharacterEndings below */
+extern void Fin_Init();
+extern void Fin_Loop_KeyListener();
+extern void Fin_InitBlend();
+extern void Fin_Loop_Blend();
+extern void StartFinScreen();
+extern void _FadeBgmOut();
 extern void OpSubtitle_AwaitTimer2a();
 extern void OpSubtitle_BackupPalette();
 extern void OpSubtitle_BlendFadeInSlide_Loop();
@@ -94,14 +101,52 @@ __asm__(
 "	.4byte 0x00000002, gap_000BBA3C + 0x1, 0x00000003, PairedEndingBattleDisp_Loop_SlideIn, 0x0010000E, 0x00000000\n"
 "	.4byte 0x00000002, PairedEndingBattleDisp_InitBlend, 0x00000003, PairedEndingBattleDisp_Loop_Blend, 0x00000000, 0x00000000\n"
 "	.4byte 0x0000000E, 0x00000000, 0x00000002, EndingBattleInitText, 0x00000003, EndingBattleText_Loop\n"
-"	.4byte 0x00000000, 0x00000000, 0x001E000E, 0x00000000, 0x00000002, Fin_Init\n"
-"	.4byte 0x00040018, NewFadeIn, 0x00000014, FadeInExists, 0x0000000B, 0x00000000\n"
-"	.4byte 0x00000003, Fin_Loop_KeyListener, 0x00040018, _FadeBgmOut, 0x00040018, NewFadeOut\n"
-"	.4byte 0x00000014, FadeOutExists, 0x003C000E, 0x00000000, 0x0064000C, 0x00000000\n"
-"	.4byte 0x0001000B, 0x00000000, 0x00040018, NewFadeIn, 0x00000014, FadeInExists\n"
-"	.4byte 0x003C000E, 0x00000000, 0x00000002, Fin_InitBlend, 0x00000003, Fin_Loop_Blend\n"
-"	.4byte 0x0000000C, 0x00000000, 0x0002000B, 0x00000000, 0x00040018, NewFadeOut\n"
-"	.4byte 0x00000014, FadeOutExists, 0x00000002, StartFinScreen, 0x0000000E, 0x00000000\n"
+"	.4byte 0x00000000, 0x00000000\n"
+);
+
+/* #143 shiftability / decomp-completeness: gProcScr_CharacterEndings (JP
+ * 0x08AC0CD0, the script StartCharacterEndings starts via Proc_StartBlocking)
+ * carved in-place out of the fully-symbolized .gap1 .4byte blob into a typed
+ * struct ProcCmd[] -- byte-neutral, every word is the same immediate/reloc, just
+ * re-expressed as a PROC_* macro (the same in-place mechanism #148 used for
+ * ProcScr_WorldMapFaceHolder above). Its 14 interior code pointers were already
+ * R_ARM_ABS32 relocations (Fin_* / fade utilities) so they shift; the remaining
+ * #143 work was to make gProcScr_CharacterEndings ITSELF a real relocatable
+ * object instead of the opaque baseline `.set 0x08AC0CD0` alias (dropped in
+ * layout/baseline_syms_drop.d/gProcScr_CharacterEndings.tsv).
+ *
+ * Region-different from fe8u (whose nearest structural analog is
+ * gProcScr_FinScreen): the JP tail fades out and hands off to StartFinScreen
+ * where US does PROC_LABEL(100); PROC_CALL(Fin_End); PROC_END -- so the label at
+ * +144 is 2 (not 100) and the PROC_GOTO(100) at +80 is a dangling jump present
+ * verbatim in the JP data. */
+struct ProcCmd gProcScr_CharacterEndings[] __attribute__((section(".data.frontier_df4_ending.gap1"))) = {
+    PROC_SLEEP(30),                     /* AC0CD0 */
+    PROC_CALL(Fin_Init),                /* AC0CD8  -> 080BBF5D */
+    PROC_CALL_ARG(NewFadeIn, 4),        /* AC0CE0  -> 080B2D4D */
+    PROC_WHILE(FadeInExists),           /* AC0CE8  -> 080B2D1D */
+    PROC_LABEL(0),                      /* AC0CF0 */
+    PROC_REPEAT(Fin_Loop_KeyListener),  /* AC0CF8  -> 080BBF85 */
+    PROC_CALL_ARG(_FadeBgmOut, 4),      /* AC0D00  -> 08014BF9 */
+    PROC_CALL_ARG(NewFadeOut, 4),       /* AC0D08  -> 080B2D71 */
+    PROC_WHILE(FadeOutExists),          /* AC0D10  -> 080B2D35 */
+    PROC_SLEEP(60),                     /* AC0D18 */
+    PROC_GOTO(100),                     /* AC0D20  (dangling in JP: no label 100) */
+    PROC_LABEL(1),                      /* AC0D28 */
+    PROC_CALL_ARG(NewFadeIn, 4),        /* AC0D30  -> 080B2D4D */
+    PROC_WHILE(FadeInExists),           /* AC0D38  -> 080B2D1D */
+    PROC_SLEEP(60),                     /* AC0D40 */
+    PROC_CALL(Fin_InitBlend),           /* AC0D48  -> 080BBFAD */
+    PROC_REPEAT(Fin_Loop_Blend),        /* AC0D50  -> 080BBFED */
+    PROC_GOTO(0),                       /* AC0D58 */
+    PROC_LABEL(2),                      /* AC0D60 */
+    PROC_CALL_ARG(NewFadeOut, 4),       /* AC0D68  -> 080B2D71 */
+    PROC_WHILE(FadeOutExists),          /* AC0D70  -> 080B2D35 */
+    PROC_CALL(StartFinScreen),          /* AC0D78  -> 080BD02D */
+};
+__asm__(
+"	.section .data.frontier_df4_ending.gap1, \"aw\", %progbits\n"
+"	.4byte 0x0000000E, 0x00000000\n"
 "	.4byte 0x0064000C, 0x00000000, 0x0064000B, 0x00000000, 0x00000002, Fin_End\n"
 "	.4byte 0x00000000, 0x00000000, 0x40000005, 0x00008000, 0x80204000, 0x40000004\n"
 "	.4byte 0x00088040, 0x80604000, 0x8000000C, 0x00100080, 0x40000002, 0x00408000\n"

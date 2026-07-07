@@ -1,0 +1,8 @@
+# #143 shiftability: gProcScr_CharacterEndings is now a real (relocatable)
+# typed `struct ProcCmd[]` definition carved in-place in
+# src/data/frontier_df4_ending/frontier_df4_ending.c (its 176 bytes live in that
+# file's fully-symbolized .data.frontier_df4_ending.gap1 blob @0x08AC0CD0).
+# Drop the opaque baseline .set @0x08AC0CD0 (from
+# layout/baseline_syms.d/cfbind_ending_details.tsv) to avoid a multiple
+# definition of the symbol.
+gProcScr_CharacterEndings
