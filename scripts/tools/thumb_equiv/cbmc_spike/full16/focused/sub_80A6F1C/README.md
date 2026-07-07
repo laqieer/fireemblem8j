@@ -92,3 +92,35 @@ modelled window (the loop body is length-independent, so the argument generalise
 Net effect on Discussion #149: **16/16 non-matching functions now machine-checked
 equivalent**, each by the strongest method that applies — 12 ARM-vs-ARM SMT + 2
 differential + 1 mGBA live-state (`sub_8057F80`) + **this** shared-oracle CBMC proof.
+
+## Unbounded upgrade — cut-point (loop-invariant) proof
+
+Prompted by Serentty (Discussion #149): the bounded harness above BMC-bounds the payload
+length to ≤ 8. `harness_unbounded.c` removes that bound using a **cut point** — a loop
+invariant at the loop head — so the de-obfuscation loop is proven equal for the **full u16
+length domain (0..65535)** with the loop **not unrolled**.
+
+Pipeline (`run_unbounded.sh`): `goto-cc → goto-instrument --apply-loop-contracts → cbmc
+--arrays-uf-always --unwind 1`. `--unwind 1` is *not* a bound here — with loop contracts
+CBMC verifies the loop as base-case + one symbolic inductive step + a `__CPROVER_decreases`
+termination measure, i.e. `1 iterations`.
+
+- **`harness_unbounded.c` → VERIFICATION SUCCESSFUL (0/94, 1 iteration)** — both sides'
+  loop invariants proven (entry + preserved + decreases), the de-obf bytes equal at an
+  arbitrary witness index `k` (⇒ all indices, by universal generalization), and the
+  loop-free epilogue return equal for all inputs.
+- **`harness_unbounded_mut.c` (`-`→`+`) → VERIFICATION FAILED** at the equivalence assert —
+  non-vacuous.
+
+Why this is a full-function unbounded result (decomposition): `sub_80A6F1C` =
+loop-free prologue ; de-obf loop ; loop-free epilogue. The prologue/epilogue contain **no
+loops**, so bounded ≡ unbounded for them (the PROVEN bounded `harness.c` already covers them
+for all inputs); the de-obf loop is the sole length-dependent part, and it is now proven for
+the entire length domain here. Faithfulness: each side is its own function with the real
+body shape (`(x-r)&m` vs `m&(x-r)`), reading/writing **in place**; the loop has no
+cross-iteration data dependence (iteration `i` touches only index `i`), so the per-index
+witness invariant — with an untouched-suffix clause `k>=i ⇒ arg[k]==base[k]` — is exact.
+
+Tier: this is the **unbounded-proven** tier (Serentty's taxonomy: byte-match > unbounded >
+bounded > differential), still trusting m2c (spec) + agbcc (codegen) + the shared-oracle
+abstraction of the opaque callees — below the `make compare` byte oracle.

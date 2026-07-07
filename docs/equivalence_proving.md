@@ -335,14 +335,25 @@ functions). `sub_8057F80` went from untestable to 114/115-writes-equivalent.
 
 | technique | functions | count |
 | --- | --- | --- |
-| formal SMT proof (bounded) | the 12 `PROVEN-BOUNDED` above | 12 |
+| formal SMT proof (bounded, ARM-vs-ARM) | the 12 `PROVEN-BOUNDED` above | 12 |
+| shared-oracle CBMC proof (bounded; **+ unbounded cut-point** for its loop) | `sub_80A6F1C` | +1 |
 | differential testing (SMT-intractable) | `sub_800A34C`, `sub_800FAD0` | +2 |
-| **machine-checked equivalent** | | **14/16** |
-| strongly corroborated (118/120) | `sub_80A6F1C` | 1 |
-| research-grade (live harness: 114/115 writes match; inline+symbol bugs fixed) | `sub_8057F80` | 1 |
+| live-state harness (mGBA, 115/115 writes+ret) | `sub_8057F80` | +1 |
+| **machine-checked equivalent** | | **16/16** |
+
+Confidence tiers (strongest → weakest, all **below** the `make compare` byte oracle),
+following the taxonomy Serentty raised in Discussion #149:
+
+| tier | how | which of the 16 |
+| --- | --- | --- |
+| byte-matching | in `make compare` (SHA-1) | — (these are the non-matching set by definition) |
+| **unbounded-proven** (cut-point / loop-invariant) | CBMC loop contracts, ∀-iterations | `sub_80A6F1C` (de-obf loop, full u16 domain) — first at this tier |
+| bounded-proven (BMC) | `PROVEN-BOUNDED(N)` (ARM-vs-ARM) + bounded CBMC | 12 ARM-vs-ARM + `sub_80A6F1C` (end-to-end, len ≤ 8) |
+| differential / dynamic | differential + mGBA live-state | `sub_800A34C`, `sub_800FAD0`, `sub_8057F80` |
 
 Neither technique puts non-matching bytes in the checksum build; `make compare`
-stays green and remains the sole oracle.
+stays green and remains the sole oracle. See `docs/decisions.md` D349 addenda 6–8 and
+`scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_80A6F1C/` for the unbounded proof.
 
 ## Where it fits FE8J (the acceptance hierarchy)
 

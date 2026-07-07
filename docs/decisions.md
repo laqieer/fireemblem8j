@@ -9755,3 +9755,39 @@ equivalent**, each by the strongest applicable method: 12 ARM-vs-ARM SMT + 2 dif
 (`sub_80A6F1C`). This validates Camdar's CBMC framing on the case where it is genuinely the
 right tool (opaque callback), complementing — not replacing — the stronger byte-level
 ARM-vs-ARM proofs for the rest. `make compare` OK throughout (cbmc_spike is isolated).
+
+### D349 addendum 8 — unbounded (cut-point) proof tier: sub_80A6F1C de-obf loop over the full u16 domain (2026-07-07)
+
+Community question (Serentty, Discussion #149): "Have you looked into unbounded proofs with
+cut points? I have confidence tiers for byte-matching, unbounded-proven, and bounded-proven."
+Honest audit of our stack: **every** prior machine-checked verdict was **bounded or dynamic** —
+`prove_nonmatching.py`/`cfg_exec.py` are BMC by design (label `PROVEN-BOUNDED(N)`, "loops
+unrolled to N"; no invariant/fixpoint), the `sub_80A6F1C` shared-oracle CBMC proof was
+`--unwind`-bounded (len ≤ 8), and the differential/live-state results are Serentty's lowest
+tier. So on his taxonomy our 16 were: 0 unbounded-proven, 13 bounded-proven (12 ARM-BMC + 1
+CBMC-BMC), 3 differential/dynamic.
+
+Response: implemented the **cut-point (loop-invariant) technique** and produced our first
+genuine **unbounded** proof, on `sub_80A6F1C` (the arena-record codec). CBMC supports loop
+contracts via `goto-instrument --apply-loop-contracts`
+(`__CPROVER_loop_invariant`/`__CPROVER_assigns`/`__CPROVER_decreases`); with `--unwind 1` the
+loop is verified as base + one symbolic inductive step + termination — NOT unrolled — so the
+de-obfuscation loop is proven equivalent (reconstruction body `(x-r)&m` vs m2c body `m&(x-r)`)
+for the **full u16 length domain 0..65535**. `__CPROVER_forall` is silently ignored inside
+loop invariants in this CBMC build, so the invariant uses the **arbitrary-fixed-witness**
+method (prove for one symbolic in-range index k ⇒ ∀ indices by generalization), with an
+untouched-suffix clause `k>=i ⇒ arg[k]==base[k]` making the in-place read/write exact (the
+loop has no cross-iteration data dependence). Artifacts in
+`scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_80A6F1C/`: `harness_unbounded.c`
+(**PROVEN 0/94, 1 iteration**), `harness_unbounded_mut.c` (`-`→`+` **REFUTED** — non-vacuous),
+`run_unbounded.sh`.
+
+Full-function coverage by decomposition: `sub_80A6F1C` = loop-free prologue ; de-obf loop ;
+loop-free epilogue; the loop-free parts are proven for all inputs by the existing PROVEN
+bounded harness (bounded ≡ unbounded on loop-free code), and the sole length-dependent part
+(the loop) is now unbounded-proven. DECISION: adopt **unbounded-proven** as a named tier above
+bounded-proven, matching Serentty's taxonomy; `sub_80A6F1C` is the first (and currently only)
+function at that tier. The technique generalizes to the other bounded functions whose loops
+admit a clean invariant (e.g. `sub_8001570`'s 0x20-clamped clip loops) — a documented future
+upgrade, not blocking (the byte oracle remains `make compare`; these are confidence tiers
+below it). `make compare` OK throughout (cbmc_spike is isolated).

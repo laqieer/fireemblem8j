@@ -38,9 +38,34 @@ Scope (honest): full-symbolic header / field-mask / payload; payload-window base
 pinned to 0 (applied identically on both sides → representative; a symbolic-offset variant
 `harness_symoff.c` is modeling-incomplete — trips CBMC pointer-bounds, not a real
 divergence); payload length BMC-bounded to the modelled window (≤ 8, loop body
-length-independent);
+length-independent) **in the primary harness — now lifted to the FULL u16 domain by the
+unbounded cut-point proof below**;
 tier = trusting m2c (spec shape) + agbcc (codegen) + the shared-oracle abstraction of the
 four opaque callees — strictly below the byte oracle. See `focused/sub_80A6F1C/README.md`.
+
+### Unbounded (cut-point) upgrade for sub_80A6F1C — **PROVEN** over the full u16 length domain
+
+Prompted by Serentty (Discussion #149): "unbounded proofs with cut points". The bounded
+harness above BMC-bounds the payload length to ≤ 8; `focused/sub_80A6F1C/harness_unbounded.c`
+removes that bound with a **loop invariant at the loop head (cut point)** — CBMC verifies the
+de-obfuscation loop as base + inductive step + `__CPROVER_decreases` termination (`1
+iterations`, NOT unrolled) for the **full u16 length domain 0..65535**.
+
+```sh
+# focused/sub_80A6F1C/run_unbounded.sh:
+goto-cc -> goto-instrument --apply-loop-contracts -> cbmc --arrays-uf-always --unwind 1
+```
+| harness | verdict | note |
+| --- | --- | --- |
+| `harness_unbounded.c` | **PROVEN** (0/94, 1 iteration) | both loop invariants (entry+preserved+decreases) SUCCESS; de-obf bytes equal at arbitrary witness ⇒ all indices; loop-free epilogue return equal for all inputs |
+| `harness_unbounded_mut.c` (`-`→`+`) | **REFUTED** | fails at the equivalence assert — non-vacuous |
+
+Full-function coverage by decomposition: `sub_80A6F1C` = loop-free prologue ; de-obf loop ;
+loop-free epilogue. The loop-free parts are covered for all inputs by the PROVEN bounded
+`harness.c` (bounded ≡ unbounded on loop-free code); the de-obf loop — the sole
+length-dependent part — is proven for the entire domain here. This is the **unbounded-proven**
+tier (Serentty's taxonomy: byte-match > unbounded > bounded > differential), still trusting
+m2c + agbcc + the shared-oracle abstraction.
 
 
 ## Focused sub_8001570 full-domain verdict
