@@ -16,13 +16,13 @@ EventListScr_Ch16b_Location:
 	.4byte EventScr_Ch16b_BeginningScene + 0x18
 	.4byte 0x00000002
 	.4byte 0x000D000B
-	.4byte 0x08A6F02C
+	.4byte frontier_df3_eventscr_ch_016_A6EFD8 + 0x54
 	.4byte 0x09160011
 	.4byte 0x000F000B
-	.4byte 0x08A6F080
+	.4byte frontier_df3_eventscr_ch_016_A6EFD8 + 0xA8
 	.4byte data_080ED67C + 0x1298D
 	.4byte 0x000F000B
-	.4byte 0x08A6F080
+	.4byte frontier_df3_eventscr_ch_016_A6EFD8 + 0xA8
 	.4byte 0x10130A0F
 	.4byte 0x00000001
 	.4byte data_085B9EE8

@@ -211,6 +211,9 @@ coherence heuristic misses; `scan_raw_casts.sh` catches it directly.
   parameterized (used with `-q` for Layer 1 and with a shifted ldscript for Layer 2).
 - `scan_relocs.py` — Layer 1.
 - `scan_offsets.py` — Layer 1b (cross-resource wrong-base relocations).
+- `scan_event_list_ptrs.py` — targeted chapter event-list script-pointer scanner;
+  with `--shifted-rom` it proves every decoded EventListScr pointer word tracks
+  the +shift instead of staying stale.
 - `gen_shifted_ldscript.py`, `diff_shift.py` — Layer 2 (non-gating; not applicable
   to fe8j's packed/no-slack ROM — kept for documentation and a future shiftable layout).
 - `_classify.py` — shared classifier (Layers 1 and 2 feed it different "relocated"
