@@ -161,7 +161,7 @@ static s32 impl_fn(Side *S, s16 count, u8 arg2, s8 arg3, s8 arg4)
     for (i = 0; i < (u16)count; i++) {
         if (mask_get(loBits, hiBits, i)) {
             S->out[outp] = S->src[i];
-            set_b5(&S->out[outp], (u8)(get_b5(S->out[outp]) | 0x40));
+            set_b5(&S->out[outp], (u8)(get_b5(S->out[outp]) & (u8)~0x40));
             outp++;
         }
     }
@@ -175,7 +175,7 @@ static s32 impl_fn(Side *S, s16 count, u8 arg2, s8 arg3, s8 arg4)
     }
     if (arg3 == TRUE)
         o_BuildDeployedUnitDefinitionList(S);
-    return 0x0203EFB5;
+    return 0x0203EFB4;
 }
 
 static s32 ref_fn(Side *S, s16 arg1, u8 arg2, s8 arg3, s32 arg4)
