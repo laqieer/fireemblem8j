@@ -522,6 +522,83 @@ but unmatchable), and **3 are genuinely FE8J-/FE8-specific** (the two dead splin
 
 ---
 
+## ROI — effort vs value to byte-match the remaining 16
+
+**Framing (why this is enhancement, not obligation).** The project's stated final goal is
+*"every byte of the ROM produced from real source (`src/` C **+ descriptive asm/data**),
+`make compare` → OK"* (CLAUDE.md). Descriptive asm **already counts as real source**, and
+`make compare` is OK with self-containment **100%**. Every one of these 16 also already has a
+**readable, documented `src/nonmatching/*.c` body**. So byte-matching them:
+- does **not** advance the final goal (already met),
+- does **not** add readability/understanding (the C already exists and is committed),
+- only moves the *byte-source* from `asm/` → `src/` and bumps the cosmetic **matching-C axis
+  from 99.82 % → toward 100 %** (each function ≈ **+0.012 %**; all 16 ≈ **+0.18 %**).
+
+**Effort model.** Every one is an **agbcc-2.95 whole-function register-coloring / spill
+tie-break** with the deterministic lever kit **exhausted** (the headers record the full flag
+matrix + register-pin + source-shape attempts). The frontier is explicit: *"Path to 100 % =
+permuter compute-time + community, NOT more deterministic levers."* So the effort is **not
+reasoning-solvable** — it is decomp-permuter compute (millions of iterations / the original IS
+agbcc) or a decomp.me community hit (scratches already posted for all 16). **The sandbox
+SIGTERMs long permuter runs**, so an autonomous agent here is structurally ill-suited to move
+them. Effort tiers below use the documented permuter best-score / residual size.
+
+**Value model.** Uniform **+1 function** on axis-2 for each, weighted by (a) code bytes moved to
+`src/` and (b) whether the function is **live** (dead code has ~0 functional value — matching it
+is pure metric vanity). Sizes are from the carve manifests.
+
+| # | function (size) | live? | residual / permuter best | effort | value | **ROI** |
+|---|---|---|---|---|---|---|
+| 1 | AddAttr2dBitMap (224 B) | live (12 callers, core) | **2 halfwords**; permuter false-green | **Low*** | med | **HIGH** |
+| 16 | GmapScreen2_Loop (544 B) | live | clean coloring; proved-EQUIV; same C matches US | Low–Med | med | **HIGH** |
+| 5 | GetUnitDefinitionFormEventScr (464 B) | live | permuter 480→330 | Med | med | **MED-HIGH** |
+| 9 | DivinationRankSpriteUpdate (436 B) | live | reg-coloring; false-green score-0 | Low–Med* | low–med | **MED-HIGH** |
+| 10 | sub_80A3300 (224 B) | live | canon-diff 27/106; permuter 285 | Med | low–med | MED |
+| 7 | AdjustNewUnitPosition (308 B) | live | 92/308 B; permuter 185 | Med | med | MED |
+| 12 | Augury_InitResultScreen (612 B) | live | 13-insn gap | Med–High | med | MED |
+| 4 | Event18_ColorFade (204 B) | live | ~95 B; permuter 2030→965 | High | low–med | LOW-MED |
+| 14 | sub_80A6E4C password-encode (208 B) | live | 152 B; permuter 2215→1170 | High | low–med | LOW-MED |
+| 8 | SelectSummonPos (392 B) | live | 331/392 B; permuter 1695→875 | High | low–med | LOW |
+| 11 | sub_80A3528 draw-panel (880 B) | live | permuter 8135→2645 | High | med (biggest live) | LOW |
+| 13 | sub_80A6D34 password-decode (280 B) | **dead** | 24 lines; permuter 1320 | High | ~0 (dead) | LOW |
+| 15 | DecodeAndVerifyArenaRecord (212 B) | **dead** | veneer-reg; never marathoned | High | ~0 (dead) | LOW |
+| 2 | SplineEvalCatmullRom (584 B) | **dead** | 515/600 B; permuter 12025→9115 | **Very High** | ~0 (dead) | **VERY LOW** |
+| 3 | SplineSampleAtTime (500 B) | **dead** | 421/500 B; permuter 7215→5795 | **Very High** | ~0 (dead) | **VERY LOW** |
+| 6 | PrepareBattleGraphicsMaybe (2936 B) | live | **region-different** + 2936 B coloring near | **Stretch** | high bytes / but unreachable | **≈NONE** |
+
+`*` The two "false-green" NEARs (#1, #9) are blocked by a **permuter tooling bug** (agbcc's
+"invalid zero-score" reports a spurious match), *not* by the function — see below.
+
+### The single highest-leverage action
+Fix the **decomp-permuter "invalid agbcc zero-score" detection** once (the `#1`/`#9` headers
+both note the permuter reports score-0 candidates that don't actually reproduce the bytes). That
+one-time tooling investment could cheaply validate the **≈2–4 closest NEARs** (#1 AddAttr2dBitMap
+is only *2 halfwords* off; #9, and plausibly #4/#5/#10 which are "clean permutations"). This is
+the only place where bounded agent effort plausibly converts to matches.
+
+### Recommendation (tiered)
+1. **Treat axis-2 as effectively DONE for engineering purposes.** The goal is met; the 16 are a
+   cosmetic tier. Do **not** open a general "match the 16" campaign — it is compute/luck-bound
+   and the sandbox can't run the marathons.
+2. **Only worthwhile targeted work:** the one-time permuter zero-score fix + a short batch over
+   the **~5 close, live NEARs** (#1, #16, #5, #9, #10). Best ROI by far.
+3. **Leave the medium NEARs** (#4, #7, #8, #11, #12, #14) to opportunistic decomp.me community /
+   idle compute — scratches are already posted; agent effort adds little.
+4. **Do NOT spend on:** the **4 dead-code functions** (#2, #3, #13, #15 — matching unreachable
+   code is pure metric vanity, and the spline pair is also the *farthest* from a match), or
+   **#6 PrepareBattleGraphicsMaybe** (region-different 2936 B — a byte match needs a 2936-byte
+   coloring lottery on top of the JP≠US source difference; STRETCH-only).
+
+**Bottom line.** Total prize = **+0.18 % matching-C** (≈ 9 KB of `.text` re-sourced), with **no
+functional or readability gain** (readable C already committed; `make compare` already OK).
+~1.6 KB of that prize is **dead code** and ~2.9 KB is **effectively unmatchable**. The effort is
+**compute-time / community**, which this environment is poorly suited to supply. **Overall ROI is
+LOW**; the rational course is to bank the current state, make the one cheap permuter-tooling fix,
+opportunistically pick off the handful of close live NEARs, and otherwise stop — spending agent
+time on the strict `.bin`/asset frontier (or nothing) beats grinding these.
+
+---
+
 ## Appendix — tool
 
 `scripts/tools/find_xrefs.py <hexaddr>…` — ROM-wide caller/reference finder used for this
