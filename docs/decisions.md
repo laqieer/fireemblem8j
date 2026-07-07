@@ -9791,3 +9791,47 @@ function at that tier. The technique generalizes to the other bounded functions 
 admit a clean invariant (e.g. `sub_8001570`'s 0x20-clamped clip loops) — a documented future
 upgrade, not blocking (the byte oracle remains `make compare`; these are confidence tiers
 below it). `make compare` OK throughout (cbmc_spike is isolated).
+
+### D349 addendum 9 — bounded-proven campaign: 15/16 (sub_800A34C + sub_800FAD0 lifted via CBMC C-vs-C; sub_8057F80 boundary) (2026-07-07)
+
+Goal: push all 16 non-matching functions to at least **bounded-proven** (Serentty's tier).
+Starting point: 13/16 bounded-proven (12 ARM-vs-ARM `PROVEN-BOUNDED` + `sub_80A6F1C` CBMC).
+The 3 holdouts were exactly the ARM-vs-ARM prover's failures. Applied CBMC C-vs-C
+(recon-C vs m2c-of-ASM, callees as shared call-indexed oracles with full argument-content
+anti-masking), labelled `PROVEN-BOUNDED-CBMC-CVC` (bounded, trusts m2c+agbcc — weaker than the
+compiler-free ARM proofs, stronger than differential/dynamic). Rubber-duck-reviewed strategy:
+CBMC C-vs-C uniformly (avoids the ARM-tool stack-pointer-canonicalization soundness minefield);
+staged with a hard stop-loss on the big one.
+
+Results:
+- **`sub_800A34C` (SplineEvalCatmullRom) → bounded-proven.** ARM-vs-ARM DIVERGENCE diagnosed
+  (new tool `scripts/tools/thumb_equiv/diagnose_divergence.py`) as a FALSE-POSITIVE: only r0
+  (the fn is `void`) + its 1 call's args (stack pointers into its own frame) can-differ;
+  data-memory + callee-saved always-equal. CBMC harness compares the caller-visible output
+  (2 s32 at *arg1), `count ∈ [2,4]` full-symbolic pts/knots/time, monotonic-knot precondition,
+  all callees shared-oracle + anti-masking. `harness.c` **0/687 SUCCESSFUL** (independently
+  reproduced), mutation (negate `py0`) REFUTED. commit c58b127b8.
+- **`sub_800FAD0` (GetUnitDefinitionFormEventScr) → bounded-proven.** ARM-vs-ARM path-explosion
+  (20 calls, 10 loops) closed by CBMC's non-enumerating BMC. First attempt REJECTED for a
+  degenerate `count ≤ 1` domain (the "1×1 domain" auto-reject); v2: `count ∈ [0,4]` + `arg3`
+  fully-symbolic (the `arg3==TRUE` branch covered), collision/retry loop VERIFIED (symbolic odd
+  RNG draws + progress-guaranteeing even draws, not assumed away), `arg2 ≤ 100` (game
+  percentage). `harness.c` **0/354 SUCCESSFUL** (reproduced), 2 mutations REFUTE (return +
+  shuffle 0x40-flag). commit 8eea275b9. (COUNTMAX=8 timed out; 4 is the tractable bound.)
+- **`sub_8057F80` (PrepareBattleGraphicsMaybe) → NOT sound-bounded-proven; stays live-state
+  115/115.** 204 calls, 658 lines, loop-free. A typed-EWRAM shim (4 regions, 2 indirection
+  levels) passes the initial pointer-provenance wall, and a return-only check closes (0/810),
+  BUT a *sound* proof (full caller-visible write-set observable + 204-call anti-masking +
+  non-degenerate domain + mutation gate) is a **solver-sink** — narrowing to close is
+  degenerate, the full model blows up. Honest boundary documented in
+  `focused/sub_8057F80/README.md`; commits 81c6807fe, 71aa61957. This function retains the
+  strongest DYNAMIC evidence of all 16 (mGBA live-state 115/115 writes+return from a real
+  battle).
+
+DECISION: **stop at 15/16 bounded-proven** (1 unbounded + 14 bounded) **+ `sub_8057F80` at the
+dynamic/live-state tier**, per the rubber-duck's stop-loss (this function already has 115/115
+live-state; a sound bounded CBMC proof is not tractable without disproportionate modeling).
+The gate discipline held throughout: two would-be "proofs" (FAD0 v1 count≤1, 8057F80
+return-only+number=1) were caught and rejected as degenerate/unsound rather than banked. All
+CBMC work is isolated; `make compare` OK throughout. Verdicts recorded in the nm_proof table
+and `full16/FINDINGS_full16.md`.

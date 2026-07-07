@@ -337,23 +337,31 @@ functions). `sub_8057F80` went from untestable to 114/115-writes-equivalent.
 | --- | --- | --- |
 | formal SMT proof (bounded, ARM-vs-ARM) | the 12 `PROVEN-BOUNDED` above | 12 |
 | shared-oracle CBMC proof (bounded; **+ unbounded cut-point** for its loop) | `sub_80A6F1C` | +1 |
-| differential testing (SMT-intractable) | `sub_800A34C`, `sub_800FAD0` | +2 |
+| CBMC C-vs-C bounded proof (`PROVEN-BOUNDED-CBMC-CVC`) | `sub_800A34C`, `sub_800FAD0` | +2 |
 | live-state harness (mGBA, 115/115 writes+ret) | `sub_8057F80` | +1 |
 | **machine-checked equivalent** | | **16/16** |
 
 Confidence tiers (strongest → weakest, all **below** the `make compare` byte oracle),
-following the taxonomy Serentty raised in Discussion #149:
+following the taxonomy Serentty raised in Discussion #149. **15/16 are now
+bounded-proven or stronger; 1 (`sub_8057F80`) remains at the dynamic tier.**
 
 | tier | how | which of the 16 |
 | --- | --- | --- |
 | byte-matching | in `make compare` (SHA-1) | — (these are the non-matching set by definition) |
 | **unbounded-proven** (cut-point / loop-invariant) | CBMC loop contracts, ∀-iterations | `sub_80A6F1C` (de-obf loop, full u16 domain) — first at this tier |
-| bounded-proven (BMC) | `PROVEN-BOUNDED(N)` (ARM-vs-ARM) + bounded CBMC | 12 ARM-vs-ARM + `sub_80A6F1C` (end-to-end, len ≤ 8) |
-| differential / dynamic | differential + mGBA live-state | `sub_800A34C`, `sub_800FAD0`, `sub_8057F80` |
+| **bounded-proven** (BMC) | `PROVEN-BOUNDED(N)` (ARM-vs-ARM, compiler-free) + `PROVEN-BOUNDED-CBMC-CVC` (CBMC C-vs-C, trusts m2c+agbcc) | **14**: 12 ARM-vs-ARM + `sub_800A34C` + `sub_800FAD0` (CBMC C-vs-C); (`sub_80A6F1C` also has a bounded proof but sits above at unbounded) |
+| differential / dynamic | mGBA live-state | `sub_8057F80` (115/115 writes+ret; a *sound* bounded CBMC proof is a solver-sink — full write-set observable + 204-call anti-masking blows up, narrower closes are degenerate; documented in `focused/sub_8057F80/README.md`) |
+
+The two ARM-vs-ARM DIVERGENCE/path-explosion holdouts (`sub_800A34C`, `sub_800FAD0`)
+were lifted from differential to bounded-proven via CBMC C-vs-C: `sub_800A34C`'s
+DIVERGENCE was diagnosed (scripts/tools/thumb_equiv/diagnose_divergence.py) as a
+false-positive (void-`r0` + stack-pointer call args), and `sub_800FAD0`'s
+path-explosion was closed by CBMC's non-enumerating BMC. `sub_8057F80` (204 calls,
+loop-free) is the one function where a *sound* bounded CBMC proof does not close.
 
 Neither technique puts non-matching bytes in the checksum build; `make compare`
-stays green and remains the sole oracle. See `docs/decisions.md` D349 addenda 6–8 and
-`scripts/tools/thumb_equiv/cbmc_spike/full16/focused/sub_80A6F1C/` for the unbounded proof.
+stays green and remains the sole oracle. See `docs/decisions.md` D349 addenda 6–9 and
+`scripts/tools/thumb_equiv/cbmc_spike/full16/focused/` for the per-function proofs.
 
 ## Where it fits FE8J (the acceptance hierarchy)
 

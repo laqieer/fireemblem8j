@@ -99,7 +99,13 @@ and weaker than the 12 compiler-free ARM proofs, but a real upgrade.
   was rejected for a degenerate `count ≤ 1` domain — this v2 fixes it. Independently
   reproduced. commit 8eea275b9. (COUNTMAX=8 timed out >300s; 4 is the tractable bound that
   still exercises multi-unit selection + both reorder passes + collisions.)
-- **`sub_8057F80`** — staged stop-loss spike (204 calls / 658 lines; loop-free).
+- **`sub_8057F80` (PrepareBattleGraphicsMaybe) — UNKNOWN (stays live-state 115/115 tier).**
+  204 calls / 658 lines, loop-free. A typed-EWRAM shim (`focused/sub_8057F80/`, 4 regions /
+  2 indirection levels) gets past the pointer-provenance wall and a return-only check closes
+  (0/810), but a *sound* proof — full caller-visible write-set observable + 204-call
+  anti-masking + non-degenerate domain + mutation gate — is a **solver-sink** (narrower closes
+  are degenerate, e.g. `CharacterData.number=1`). Honest boundary; this function keeps the
+  strongest dynamic evidence of all 16 (mGBA live-state 115/115). commits 81c6807fe, 71aa61957.
 
 
 ## Focused sub_8001570 full-domain verdict
