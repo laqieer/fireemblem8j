@@ -988,3 +988,4 @@ sound/songs/midi/*.s
 !src/data/data_085985AC/data_085985AC.s
 !src/data/data_08A5A6AD/data_08A5A6AD.s
 !src/data/data_08A63D0C/data_08A63D0C_asm.s
+!src/data/anim_mine_fx/dat_anim_mine_fx.s
