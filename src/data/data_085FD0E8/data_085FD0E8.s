@@ -8,8 +8,8 @@ data_085FD0E8:
 	.4byte AnimSprite_EkrBaseKaiten_11 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_12 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_13 + 0x1
-	.4byte data_085FC638 + 0x1
-	.4byte data_085FC638 + 0xB5
+	.4byte AnimSprite_EkrBaseKaiten_14 + 0x1
+	.4byte AnimSprite_EkrBaseKaiten_15 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_16 + 0x1
 	.4byte 0x80000000
 	.4byte AnimSprite_EkrBaseKaiten_18 + 0x1
@@ -31,8 +31,8 @@ data_085FD0E8:
 	.4byte AnimSprite_EkrBaseKaiten_32 + 0x1
 	.4byte 0x80000000
 	.4byte AnimSprite_EkrBaseKaiten_16 + 0x1
-	.4byte data_085FC638 + 0xB5
-	.4byte data_085FC638 + 0x1
+	.4byte AnimSprite_EkrBaseKaiten_15 + 0x1
+	.4byte AnimSprite_EkrBaseKaiten_14 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_13 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_12 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_11 + 0x1
