@@ -6,12 +6,12 @@
 UnitDef_Ch10AAlly_0:
 	.4byte 0x50000201
 	.4byte 0x01000003
-	.4byte data_0890C9BC + 0x94
+	.4byte REDA_Ch10AAlly_0_EIRIKA
 	.4byte 0x006C6C17
 	.4byte 0x00000000
 	.4byte 0x50000702
 	.4byte 0x01000003
-	.4byte data_0890C9BC + 0x9C
+	.4byte REDA_Ch10AAlly_0_SETH
 	.4byte 0x006C6C17
 	.4byte 0x00000000
 	.4byte 0x00000000

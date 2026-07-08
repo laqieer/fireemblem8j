@@ -12,7 +12,7 @@
 
 extern const u8 EventScr_Ch8_11[];
 extern const u8 UnitDef_Ch9AAlly_2[];
-extern const u8 data_0890C9BC[];
+extern const u8 UnitDef_Ch9AAlly_3[];
 extern const u8 EventScr_LoadUnitForTutorial[];
 extern const u8 EventScr_SetBackground[];
 extern const u8 Event_TextWithBG[];
@@ -43,7 +43,7 @@ SECTION(".rodata.dat_EventScr_Ch9a_BeginningScene_ref") EventListScr EventScr_Ch
     LOAD3(0, UnitDef_Ch9AAlly_2)
     ENUN
     FADU(0x10)
-    LOAD2(1, data_0890C9BC + 0x14)
+    LOAD2(1, UnitDef_Ch9AAlly_3)
     ENUN
     MOVE_1STEP(0, 1, 0)
     ENUN
