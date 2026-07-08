@@ -45,41 +45,39 @@ struct ProcCmd gProcScr_CpPerform[] __attribute__((section(".rodata.dat_gProcScr
 };
 
 /* residue [085D1FAC,085D2034) (136 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.085D1FAC, \"aw\", %progbits\n"
-"data_085D1FAC:\n"
-"\t.4byte 0x0000000A\n"
-"\t.4byte 0x0000005C\n"
-"\t.4byte 0x00000004\n"
-"\t.4byte 0x000006E2\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0xFFFD0000\n"
-"\t.4byte 0xFFFEFFFF\n"
-"\t.4byte 0xFFFE0000\n"
-"\t.4byte 0xFFFE0001\n"
-"\t.4byte 0xFFFFFFFE\n"
-"\t.4byte 0xFFFFFFFF\n"
-"\t.4byte 0xFFFF0000\n"
-"\t.4byte 0xFFFF0001\n"
-"\t.4byte 0xFFFF0002\n"
-"\t.4byte 0x0000FFFD\n"
-"\t.4byte 0x0000FFFE\n"
-"\t.4byte 0x0000FFFF\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte 0x0001FFFE\n"
-"\t.4byte 0x0001FFFF\n"
-"\t.4byte 0x00010000\n"
-"\t.4byte 0x00010001\n"
-"\t.4byte 0x00010002\n"
-"\t.4byte 0x0002FFFF\n"
-"\t.4byte 0x00020000\n"
-"\t.4byte 0x00020001\n"
-"\t.4byte 0x00030000\n"
-"\t.4byte 0x270F270F\n"
-"\t.4byte 0x00372403\n"
-"\t.4byte 0x21372403\n"
-"\t.4byte 0x00000000\n"
-);
+u32 data_085D1FAC[] __attribute__((section(".data.residue.085D1FAC"))) = {
+    0x0000000A,
+    0x0000005C,
+    0x00000004,
+    0x000006E2,
+    0x00000000,
+    0x00000000,
+    0xFFFD0000,
+    0xFFFEFFFF,
+    0xFFFE0000,
+    0xFFFE0001,
+    0xFFFFFFFE,
+    0xFFFFFFFF,
+    0xFFFF0000,
+    0xFFFF0001,
+    0xFFFF0002,
+    0x0000FFFD,
+    0x0000FFFE,
+    0x0000FFFF,
+    0x00000001,
+    0x00000002,
+    0x00000003,
+    0x0001FFFE,
+    0x0001FFFF,
+    0x00010000,
+    0x00010001,
+    0x00010002,
+    0x0002FFFF,
+    0x00020000,
+    0x00020001,
+    0x00030000,
+    0x270F270F,
+    0x00372403,
+    0x21372403,
+    0x00000000,
+};

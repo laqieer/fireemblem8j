@@ -1,6 +1,12 @@
 #include "global.h"
 #include "proc.h"
 
+extern const u8 APProc_OnEnd[];
+extern const u8 APProc_OnUpdate[];
+extern const u8 EventSpriteAnim_End[];
+extern const u8 EventSpriteAnim_Init[];
+extern const u8 EventSpriteAnim_Loop[];
+
 
 extern void SpriteTextScroll_OnIdle();
 extern void SpriteTextScroll_OnInit();
@@ -56,23 +62,21 @@ struct ProcCmd data_085B93BC[] SECTION(".data.residue.085B93BC") = {
 
 
 /* residue [085B93FC,085B943C) (64 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.085B93FC, \"aw\", %progbits\n"
-"data_085B93FC:\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000004\n"
-"\t.4byte EventSpriteAnim_End + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte EventSpriteAnim_Init + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte EventSpriteAnim_Loop + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000004\n"
-"\t.4byte APProc_OnEnd + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte APProc_OnUpdate + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+u32 data_085B93FC[] __attribute__((section(".data.residue.085B93FC"))) = {
+    0x0000000E,
+    0x00000000,
+    0x00000004,
+    (u32)&EventSpriteAnim_End + 0x1,
+    0x00000002,
+    (u32)&EventSpriteAnim_Init + 0x1,
+    0x00000003,
+    (u32)&EventSpriteAnim_Loop + 0x1,
+    0x00000000,
+    0x00000000,
+    0x00000004,
+    (u32)&APProc_OnEnd + 0x1,
+    0x00000003,
+    (u32)&APProc_OnUpdate + 0x1,
+    0x00000000,
+    0x00000000,
+};

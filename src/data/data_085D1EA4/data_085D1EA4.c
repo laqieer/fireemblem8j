@@ -1,6 +1,11 @@
 #include "global.h"
 #include "proc.h"
 
+extern const u8 DecideHealOrEscape[];
+extern const u8 DecideScriptA[];
+extern const u8 DecideScriptB[];
+extern const u8 DecideSpecialItems[];
+
 /* #148 proc-script decomp-completeness: data_085D1EA4.
  *
  * 1 opaque proc script(s) decoded from the .data.residue.085D1EBC
@@ -27,14 +32,11 @@ struct ProcCmd gProcScr_CpDecide[] __attribute__((section(".rodata.dat_gProcScr_
 };
 
 /* residue [085D1EBC,085D1ED4) (24 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.085D1EBC, \"aw\", %progbits\n"
-"\t.global data_085D1EBC\n"
-"data_085D1EBC:\n"
-"\t.4byte DecideSpecialItems + 0x1\n"
-"\t.4byte DecideScriptA + 0x1\n"
-"\t.4byte DecideHealOrEscape + 0x1\n"
-"\t.4byte DecideScriptB + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+u32 data_085D1EBC[] __attribute__((section(".data.residue.085D1EBC"))) = {
+    (u32)&DecideSpecialItems + 0x1,
+    (u32)&DecideScriptA + 0x1,
+    (u32)&DecideHealOrEscape + 0x1,
+    (u32)&DecideScriptB + 0x1,
+    0x00000000,
+    0x00000000,
+};
