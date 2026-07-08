@@ -14,7 +14,11 @@ extern const u8 EventScr_Ch5_EndingScene[];
 extern const u8 UnitDef_Event_Ch5Ally[];
 extern const u8 EventListScr_Ch5_Turn[];
 extern const u8 EventListScr_Ch5_Character[];
-extern const u8 data_08A5AD4C[];
+extern const u8 EventListScr_Ch5_Misc[];
+extern const u8 EventListScr_Ch5_SelectUnit[];
+extern const u8 EventListScr_Ch5_SelectDestination[];
+extern const u8 EventListScr_Ch5_UnitMove[];
+extern const u8 EventListScr_Ch5_Tutorial[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
@@ -22,11 +26,11 @@ SECTION(".rodata.dat_Ch5EventData_ref") static const u32 Ch5EventData__shift[] =
     (u32)&EventListScr_Ch5_Turn,
     (u32)&EventListScr_Ch5_Character,
     (u32)&EventListScr_Ch5_Location,
-    (u32)&data_08A5AD4C,
-    (u32)&data_08A5AD4C + 0x1C,
-    (u32)&data_08A5AD4C + 0x20,
-    (u32)&data_08A5AD4C + 0x24,
-    (u32)&data_08A5AD4C + 0x28,
+    (u32)&EventListScr_Ch5_Misc,
+    (u32)&EventListScr_Ch5_SelectUnit,
+    (u32)&EventListScr_Ch5_SelectDestination,
+    (u32)&EventListScr_Ch5_UnitMove,
+    (u32)&EventListScr_Ch5_Tutorial,
     (u32)&gUidebug_2 + 0x318,
     (u32)&frontier_df4_menu_005_A5FFAD + 0x2C,
     (u32)&UnitDef_Event_Ch5Ally,
