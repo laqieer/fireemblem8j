@@ -39,7 +39,10 @@ the oracle.
    → 0 HIGH, on a clean checkout.
 3. **Build/CI/tooling paths get extra scrutiny** (see `.github/CODEOWNERS`).
 4. **No secrets in the repo.** CI needs no `baserom.gba` and no ROM secret; keep credentials out of
-   source and out of PRs.
+   source and out of PRs. **GitGuardian ggshield** enforces this — a pre-commit hook
+   (`.pre-commit-config.yaml`) and a CI job (`.github/workflows/secret-scan.yml`) scan for hard-coded
+   secrets; the GitGuardian GitHub App additionally scans PRs (incl. forks). See `CONTRIBUTING.md`
+   for the one-time `pre-commit install` + API-key setup.
 
 ## Supported
 
