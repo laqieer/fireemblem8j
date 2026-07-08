@@ -1,2 +1,11 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-90A480	90A504	src/data/data_0890A480/data_0890A480.o(.data.residue.0890A480)	descriptive raw ROM data (132 B, byte-completeness D29)
+# byte-neutral SPLIT of data_0890A480 (132 B) into 10 sub-objects.
+90A480	90A494	src/data/data_0890A480/data_0890A480.o(.data.residue.0890A480)	data_0890A480 (20 B)
+90A494	90A4AC	src/data/data_0890A480/data_0890A480.o(.data.residue.0890A494)	REDA_Ch5xAlly_3_EPHRAIM (24 B)
+90A4AC	90A4C4	src/data/data_0890A480/data_0890A480.o(.data.residue.0890A4AC)	REDA_Ch5xAlly_3_FORDE (24 B)
+90A4C4	90A4D4	src/data/data_0890A480/data_0890A480.o(.data.residue.0890A4C4)	REDA_Ch5xAlly_3_KYLE (16 B)
+90A4D4	90A4DC	src/data/data_0890A480/data_0890A480.o(.data.residue.0890A4D4)	REDA_Ch5xEnemy_3_0 (8 B)
+90A4DC	90A4E4	src/data/data_0890A480/data_0890A480.o(.data.residue.0890A4DC)	REDA_Ch5xEnemy_3_1 (8 B)
+90A4E4	90A4EC	src/data/data_0890A480/data_0890A480.o(.data.residue.0890A4E4)	REDA_Ch5xEnemy_3_2 (8 B)
+90A4EC	90A4F4	src/data/data_0890A480/data_0890A480.o(.data.residue.0890A4EC)	REDA_Ch5xEnemy_3_3 (8 B)
+90A4F4	90A4FC	src/data/data_0890A480/data_0890A480.o(.data.residue.0890A4F4)	REDA_Ch5xEnemy_3_4 (8 B)
+90A4FC	90A504	src/data/data_0890A480/data_0890A480.o(.data.residue.0890A4FC)	REDA_Ch5xEnemy_4_VALTER (8 B)

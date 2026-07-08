@@ -7,7 +7,7 @@
 UnitDef_Ch5xEnemy_4:
 	.4byte 0x0D002343
 	.4byte 0x01000341
-	.4byte data_0890A480 + 0x7C
+	.4byte REDA_Ch5xEnemy_4_VALTER
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
