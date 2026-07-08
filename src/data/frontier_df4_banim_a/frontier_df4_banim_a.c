@@ -68,6 +68,7 @@ extern void efxHazymoonOBJ3RND_OnEnd();
 extern void efxHitQuake_Loop();
 extern void efxLightning_Loop_Main();
 extern void efxLive_Loop_Main();
+extern void efxLuceBGCOL_Loop();
 extern void efxMistyRainBg_Loop();
 extern void efxMistyRainObj2_0();
 extern void efxMistyRainObj2_1();
@@ -1359,7 +1360,23 @@ __asm__(
 "	.global data_086019F8\n"
 "data_086019F8:\n"
 "	.4byte 0x00000001, 0x080E35DC, 0x00000003, efxIvaldiWOUT_Loop, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000001, 0x080E35E8, 0x00000003, efxLuceBGCOL_Loop, 0x00000000, 0x00000000\n"
+);
+/* #143 shiftability: ProcScr_efxLuceBGCOL (JP 0x08601A10) carved in-place from the
+ * fully-symbolized gap13 .4byte blob into a real relocatable typed struct ProcCmd[]
+ * -- byte-neutral (same 24 bytes, same relocs). Its PROC_NAME pointed at the raw
+ * literal 0x080E35E8 (the "efxLuceBGCOL" debug-name string, which has no own symbol),
+ * which did NOT track a +0x40000 ROM shift; re-express it as
+ * frontier_df4_misc_lo_008_0E2638 + 0xFB0 (== 0x080E35E8) so the word becomes an
+ * R_ARM_ABS32 relocation that shifts with the ROM -- exactly like the efxLive /
+ * efxSleep / efxOura / efxExcalibur sibling proc-script carves in this file. The
+ * opaque baseline .set alias @0x08601A10 is dropped in
+ * layout/baseline_syms_drop.d/ProcScr_efxLuceBGCOL.tsv so this real definition wins.
+ * PROC_REPEAT loop pointer already relocated (efxLuceBGCOL_Loop, T); PROC_END is 0. */
+struct ProcCmd ProcScr_efxLuceBGCOL[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = {
+    PROC_NAME((void*)((u8*)frontier_df4_misc_lo_008_0E2638 + 0xFB0)), PROC_REPEAT(efxLuceBGCOL_Loop), PROC_END,
+};
+__asm__(
+"	.section .data.frontier_df4_banim_a.gap13, \"aw\", %progbits\n"
 "	.4byte 0x00000001, FrameConf_efxLuceBGCOL + 0x3E, 0x00000003, efxEreshkigal_Loop_Main, 0x00000000, 0x00000000\n"
 "	.global data_08601A40\n"
 "data_08601A40:\n"

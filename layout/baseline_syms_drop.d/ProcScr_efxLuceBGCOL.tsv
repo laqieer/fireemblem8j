@@ -1,0 +1,8 @@
+# #143 shiftability: ProcScr_efxLuceBGCOL is now a real (relocatable) typed
+# `struct ProcCmd[]` definition carved in-place in
+# src/data/frontier_df4_banim_a/frontier_df4_banim_a.c (its 24 bytes @0x08601A10
+# live in that file's fully-symbolized .data.frontier_df4_banim_a.gap13 blob).
+# Drop the opaque baseline .set @0x08601A10 (from
+# layout/baseline_syms.d/efxLuceBGCOL-079f655d.tsv) to avoid a multiple
+# definition of the symbol.
+ProcScr_efxLuceBGCOL
