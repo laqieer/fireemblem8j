@@ -1,0 +1,16 @@
+# Pre-commit hooks for FE8J. Currently: GitGuardian ggshield secret scanning
+# (see SECURITY.md / CONTRIBUTING.md). Keeps hard-coded secrets out of commits.
+#
+# One-time local setup:
+#   pip install pre-commit ggshield
+#   pre-commit install
+#   ggshield auth login          # or: export GITGUARDIAN_API_KEY=<key from dashboard.gitguardian.com>
+#
+# The same scan also runs in CI (.github/workflows/secret-scan.yml).
+repos:
+  - repo: https://github.com/gitguardian/ggshield
+    rev: v1.52.2
+    hooks:
+      - id: ggshield
+        language_version: python3
+        stages: [pre-commit]
