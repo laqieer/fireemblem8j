@@ -1001,3 +1001,5 @@ sound/songs/midi/*.s
 !src/data/data_08A64FA0/data_08A64FA0_asm.s
 !src/data/data_08855D58/data_08855D58_asm.s
 !src/data/data_08A62134/data_08A62134_asm.s
+!src/data/data_08A642F0/data_08A642F0_asm.s
+!src/data/data_08A61C70/data_08A61C70_asm.s
