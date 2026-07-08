@@ -12,7 +12,10 @@ extern const u8 EventListScr_Ch20b_Turn[];
 extern const u8 EventScr_Ch20b_BeginningScene[];
 extern const u8 EventScr_Ch21b_EndingScene[];
 extern const u8 UnitDef_Ch21BAlly[];
-extern const u8 data_08A5D524[];
+extern const u8 EventListScr_Ch20b_SelectUnit[];
+extern const u8 EventListScr_Ch20b_SelectDestination[];
+extern const u8 EventListScr_Ch20b_UnitMove[];
+extern const u8 EventListScr_Ch20b_Tutorial[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
@@ -21,10 +24,10 @@ SECTION(".rodata.dat_Ch20EphraimEventData_ref") static const u32 Ch20EphraimEven
     (u32)&EventListScr_Ch20b_Turn + 0x28,
     (u32)&EventListScr_Ch20b_Turn + 0x2C,
     (u32)&EventListScr_Ch20b_Turn + 0x60,
-    (u32)&data_08A5D524 + 0x3C,
-    (u32)&data_08A5D524 + 0x40,
-    (u32)&data_08A5D524 + 0x44,
-    (u32)&data_08A5D524 + 0x48,
+    (u32)&EventListScr_Ch20b_SelectUnit,
+    (u32)&EventListScr_Ch20b_SelectDestination,
+    (u32)&EventListScr_Ch20b_UnitMove,
+    (u32)&EventListScr_Ch20b_Tutorial,
     (u32)&gUidebug_2 + 0x64A,
     (u32)&frontier_df4_menu_005_A5FFAD + 0x6A,
     (u32)&UnitDef_Ch21BAlly,

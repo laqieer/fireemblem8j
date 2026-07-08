@@ -1,6 +1,7 @@
-/* Migrated from asm/data_08A5D524.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral partial SPLIT of data_08A5D524: LEAVE prefix + 4 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.08A5D524, "aw", %progbits
 	.global data_08A5D524
 data_08A5D524:
@@ -19,8 +20,20 @@ data_08A5D524:
 	.4byte data_085B9EE8
 	.4byte 0x00000065
 	.4byte 0x00000000
+	.section .data.residue.08A5D560, "aw", %progbits
+	.global EventListScr_Ch20b_SelectUnit
+EventListScr_Ch20b_SelectUnit:
 	.4byte 0x00000000
+	.section .data.residue.08A5D564, "aw", %progbits
+	.global EventListScr_Ch20b_SelectDestination
+EventListScr_Ch20b_SelectDestination:
 	.4byte 0x00000000
+	.section .data.residue.08A5D568, "aw", %progbits
+	.global EventListScr_Ch20b_UnitMove
+EventListScr_Ch20b_UnitMove:
 	.4byte 0x00000000
+	.section .data.residue.08A5D56C, "aw", %progbits
+	.global EventListScr_Ch20b_Tutorial
+EventListScr_Ch20b_Tutorial:
 	.4byte 0x00000000
 /* de-pointered slice data_08A5D524: ptr=5 data=14 skip=0 */
