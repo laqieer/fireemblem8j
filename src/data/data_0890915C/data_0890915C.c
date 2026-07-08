@@ -12,7 +12,7 @@ extern u8 REDA_Ch4Ally_1_ARTUR[];
 extern u8 REDA_Ch4Ally_2_LUTE[];
 
 SECTION(".data.residue.0890915C")
-struct UnitDefinition data_0890915C[] = {
+struct UnitDefinition UnitDef_Ch4Ally_1[] = {
     /* UnitDef_Ch4Ally_1 */
     {
         .charIndex = CHARACTER_ARTUR,
@@ -29,6 +29,10 @@ struct UnitDefinition data_0890915C[] = {
         },
     },
     { 0 },
+};
+
+SECTION(".data.residue.08909184")
+struct UnitDefinition UnitDef_Ch4Ally_2[] = {
     /* UnitDef_Ch4Ally_2 */
     {
         .charIndex = CHARACTER_LUTE,

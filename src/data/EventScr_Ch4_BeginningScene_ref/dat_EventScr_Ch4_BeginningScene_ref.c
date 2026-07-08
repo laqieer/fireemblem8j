@@ -15,7 +15,7 @@ extern const u8 data_08A60354[];
 extern const u8 UnitDef_Ch4Enemy_0[];
 extern const u8 EventScr_Ch4_7[];
 extern const u8 EventScr_CallOnTutorialMode[];
-extern const u8 data_0890915C[];
+extern const u8 UnitDef_Ch4Ally_1[];
 extern const u8 EventScr_Ch4_8[];
 extern const u8 EventScr_Ch4_9[];
 extern const u8 data_085B9BBC[];
@@ -65,7 +65,7 @@ SECTION(".rodata.dat_EventScr_Ch4_BeginningScene_ref") EventListScr EventScr_Ch4
     CLEAN
     CAMERA(0, 0)
     FADU(0x10)
-    LOAD1(1, data_0890915C)
+    LOAD1(1, UnitDef_Ch4Ally_1)
     ENUN
     CURSOR_CHAR(0x13)
     STAL(0x3C)

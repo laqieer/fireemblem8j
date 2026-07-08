@@ -17,7 +17,8 @@ extern const u8 EventScr_Ch3_0[];
 extern const u8 EventScr_CallOnTutorialMode[];
 extern const u8 EventScr_Ch3_5[];
 extern const u8 EventScr_MoveUnitS2ToLeader[];
-extern const u8 data_08A6378C[];
+extern const u8 EventScr_Ch3_1[];
+extern const u8 EventScr_Ch3_4[];
 
 SECTION(".rodata.dat_EventScr_Ch3_BeginningScene_ref") EventListScr EventScr_Ch3_BeginningScene[] = {
     MUSC(0x25)
@@ -76,9 +77,9 @@ SECTION(".rodata.dat_EventScr_Ch3_BeginningScene_ref") EventListScr EventScr_Ch3
     TEXTEND
     REMA
     LABEL(0xA)
-    SVAL(EVT_SLOT_2, data_08A6378C)
+    SVAL(EVT_SLOT_2, EventScr_Ch3_1)
     CALL(EventScr_CallOnTutorialMode)
-    SVAL(EVT_SLOT_2, data_08A6378C + 0x74)
+    SVAL(EVT_SLOT_2, EventScr_Ch3_4)
     CALL(EventScr_CallOnTutorialMode)
     EVBIT_T(7)
     ENDA

@@ -11,7 +11,8 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 UnitDef_Ch3NPC[];
-extern const u8 data_08A6378C[];
+extern const u8 EventScr_Ch3_2[];
+extern const u8 EventScr_Ch3_3[];
 extern const u8 EventScr_CallOnTutorialMode[];
 
 SECTION(".rodata.dat_EventScr_Ch3_Turn1Npc_ref") EventListScr EventScr_Ch3_Turn1Npc[] = {
@@ -27,11 +28,11 @@ SECTION(".rodata.dat_EventScr_Ch3_Turn1Npc_ref") EventListScr EventScr_Ch3_Turn1
     TEXTSHOW(0x952)
     TEXTEND
     REMA
-    SVAL(EVT_SLOT_2, data_08A6378C + 0x38)
+    SVAL(EVT_SLOT_2, EventScr_Ch3_2)
     CALL(EventScr_CallOnTutorialMode)
     MOVE_CLOSEST(0, 9, 2, 4)
     ENUN
-    SVAL(EVT_SLOT_2, data_08A6378C + 0x58)
+    SVAL(EVT_SLOT_2, EventScr_Ch3_3)
     CALL(EventScr_CallOnTutorialMode)
     EVBIT_T(7)
     ENDA

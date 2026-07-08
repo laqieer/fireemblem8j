@@ -11,7 +11,7 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 data_08A60354[];
-extern const u8 data_0890915C[];
+extern const u8 UnitDef_Ch4Ally_2[];
 
 SECTION(".rodata.dat_EventScr_Ch4_2_ref") EventListScr EventScr_Ch4_2[] = {
     MUSS(0x30)
@@ -36,7 +36,7 @@ SECTION(".rodata.dat_EventScr_Ch4_2_ref") EventListScr EventScr_Ch4_2[] = {
     CALL(data_08A60354 + 0xF4)
     LABEL(2)
     MURE(4)
-    LOAD1(1, data_0890915C + 0x28)
+    LOAD1(1, UnitDef_Ch4Ally_2)
     ENUN
     EVBIT_T(7)
     ENDA
