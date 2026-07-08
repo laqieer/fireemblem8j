@@ -2620,7 +2620,7 @@ extern void WallBreakAnim_Init();
 extern void WarpFlashy_Init();
 extern void WarpFlashy_Loop();
 extern u8 data_080ED67C[];
-extern u8 data_08A156DC[];
+extern const u8 ProcScr_PoisonDmgMapEffect[];
 extern void efxCriricalEffectBGCOLMain();
 extern void efxCriricalEffectBGMain();
 extern void efxCriricalEffectMain();
@@ -7459,7 +7459,7 @@ extern const u32 data_08A13438 __attribute__((alias("ProcScr_MuCtrl")));
 extern const u32 frontier_df4_banim_b_084_A13880 __attribute__((alias("ProcScr_MapAnimPoisonDmg")));
 struct ProcCmd ProcScr_MapAnimPoisonDmg[] __attribute__((section(".data.frontier_df4_banim_b.gap84"))) = {
     PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)MapAnim_MoveCameraOntoSubject + 0x1)), PROC_SLEEP(0x2), PROC_CALL((void*)((u8*)MapAnim_InitInfoBox + 0x1)),
-    PROC_SLEEP(0xF), PROC_START_CHILD_BLOCKING((void*)((u8*)data_08A156DC + 0x38)), PROC_SLEEP(0x1), PROC_JUMP(ProcScr_MapAnimEnd),
+    PROC_SLEEP(0xF), PROC_START_CHILD_BLOCKING((void*)((u8*)ProcScr_PoisonDmgMapEffect)), PROC_SLEEP(0x1), PROC_JUMP(ProcScr_MapAnimEnd),
 };
 struct ProcCmd ProcScr_MapAnimEggDmg[] __attribute__((section(".data.frontier_df4_banim_b.gap84"))) = {
     PROC_CALL((void*)((u8*)LockGame + 0x1)), PROC_CALL((void*)((u8*)MapAnim_MoveCameraOntoSubject + 0x1)), PROC_SLEEP(0x2), PROC_CALL((void*)((u8*)MapAnim_InitInfoBox + 0x1)),

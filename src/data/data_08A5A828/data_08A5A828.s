@@ -1,9 +1,10 @@
-/* Migrated from asm/data_08A5A828.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral SPLIT of data_08A5A828 into 6 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.08A5A828, "aw", %progbits
-	.global data_08A5A828
-data_08A5A828:
+	.global EventListScr_Ch1_Location
+EventListScr_Ch1_Location:
 	.4byte 0x00000005
 	.4byte EventScr_Ch1_Loca_Visit1
 	.4byte 0x0010060D
@@ -14,6 +15,9 @@ data_08A5A828:
 	.4byte 0x00000001
 	.4byte 0x00110202
 	.4byte 0x00000000
+	.section .data.residue.08A5A850, "aw", %progbits
+	.global EventListScr_Ch1_Misc
+EventListScr_Ch1_Misc:
 	.4byte 0x00070001
 	.4byte EventScr_Ch1_Misc_DefeatBoss
 	.4byte 0x00000002
@@ -24,9 +28,21 @@ data_08A5A828:
 	.4byte data_085B9EE8
 	.4byte 0x00000065
 	.4byte 0x00000000
+	.section .data.residue.08A5A878, "aw", %progbits
+	.global EventListScr_Ch1_SelectUnit
+EventListScr_Ch1_SelectUnit:
 	.4byte 0x00000000
+	.section .data.residue.08A5A87C, "aw", %progbits
+	.global EventListScr_Ch1_SelectDestination
+EventListScr_Ch1_SelectDestination:
 	.4byte 0x00000000
+	.section .data.residue.08A5A880, "aw", %progbits
+	.global EventListScr_Ch1_UnitMove
+EventListScr_Ch1_UnitMove:
 	.4byte 0x00000000
+	.section .data.residue.08A5A884, "aw", %progbits
+	.global EventListScr_Ch1_Tutorial
+EventListScr_Ch1_Tutorial:
 	.4byte EventScr_Ch1Tut_EirikaVisitHouseIdle1
 	.4byte EventScr_Ch1Tut_EirikaVisitHouseIdle2
 	.4byte EventScr_Ch1Tut_EirikaVisitHouseEnd

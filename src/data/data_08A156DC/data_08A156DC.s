@@ -1,9 +1,10 @@
-/* Migrated from asm/data_08A156DC.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral SPLIT of data_08A156DC into 2 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.08A156DC, "aw", %progbits
-	.global data_08A156DC
-data_08A156DC:
+	.global ProcScr_SpellAssocUnused
+ProcScr_SpellAssocUnused:
 	.4byte 0x00000002
 	.4byte MapAnim_MoveCameraOnTarget + 0x1
 	.4byte 0x0002000E
@@ -18,6 +19,9 @@ data_08A156DC:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
+	.section .data.residue.08A15714, "aw", %progbits
+	.global ProcScr_PoisonDmgMapEffect
+ProcScr_PoisonDmgMapEffect:
 	.4byte 0x00000002
 	.4byte MapAnim_MoveCameraOnTarget + 0x1
 	.4byte 0x0002000E
