@@ -1,0 +1,20 @@
+version: 2
+updates:
+  # Keep GitHub Actions pinned-by-SHA up to date (supply-chain: the main external
+  # code that runs in CI). Dependabot bumps the SHA + the `# vX.Y.Z` comment.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci(deps)"
+
+  # The mgfembp submodule (FE6 SIO payload built from source).
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "deps(submodule)"
