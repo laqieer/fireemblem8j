@@ -1,6 +1,8 @@
 #include "global.h"
 #include "proc.h"
 
+extern u8 frontier_df4_menu_gap27c_4090[];
+
 extern const u8 data_08A9D688[];
 extern const u8 gSprite_SavemenuData_17[];
 extern const u8 gSprite_SavemenuData_18[];
@@ -68,7 +70,7 @@ u32 data_08A9D904[] __attribute__((section(".data.residue.08A9D904"))) = {
     (u32)&data_08A9D688 + 0x186,
     (u32)&data_08A9D688 + 0x19A,
     (u32)&data_08A9D688 + 0x1B4,
-    (u32)&data_08A9D688 + 0x20,
+    (u32)&frontier_df4_menu_gap27c_4090,
     (u32)&data_08A9D688 + 0x3A,
     (u32)&data_08A9D688 + 0x5A,
     (u32)&data_08A9D688 + 0x6E,

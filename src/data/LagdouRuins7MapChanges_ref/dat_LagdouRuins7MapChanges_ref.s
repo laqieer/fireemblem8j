@@ -13,7 +13,7 @@ LagdouRuins7MapChanges:
 	.4byte LagdouRuins6MapChanges + 0x118
 	.4byte LagdouRuins6MapChanges + 0x11C
 	.4byte LagdouRuins6MapChanges + 0x120
-	.4byte gUidebug_2 + 0x6E4
+	.4byte frontier_df4_menu_004_A5F770_1
 	.4byte frontier_df4_menu_005_A5FFAD + 0x7A
 	.4byte UnitDef_Ruin7Ally
 	.4byte UnitDef_Ruin7Ally

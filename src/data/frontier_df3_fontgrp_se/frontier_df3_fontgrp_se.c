@@ -1,6 +1,38 @@
 #include "global.h"
 #include "fontgrp.h"
 
+extern u32 frontier_df4_uistuff_007_59140C_10[];
+extern u32 frontier_df4_uistuff_007_59140C_12[];
+extern u32 frontier_df4_uistuff_007_59140C_14[];
+extern u32 frontier_df4_uistuff_007_59140C_16[];
+extern u32 frontier_df4_uistuff_007_59140C_18[];
+extern u32 frontier_df4_uistuff_007_59140C_2[];
+extern u32 frontier_df4_uistuff_007_59140C_20[];
+extern u32 frontier_df4_uistuff_007_59140C_26[];
+extern u32 frontier_df4_uistuff_007_59140C_28[];
+extern u32 frontier_df4_uistuff_007_59140C_30[];
+extern u32 frontier_df4_uistuff_007_59140C_32[];
+extern u32 frontier_df4_uistuff_007_59140C_34[];
+extern u32 frontier_df4_uistuff_007_59140C_36[];
+extern u32 frontier_df4_uistuff_007_59140C_38[];
+extern u32 frontier_df4_uistuff_007_59140C_4[];
+extern u32 frontier_df4_uistuff_007_59140C_40[];
+extern u32 frontier_df4_uistuff_007_59140C_44[];
+extern u32 frontier_df4_uistuff_007_59140C_46[];
+extern u32 frontier_df4_uistuff_007_59140C_48[];
+extern u32 frontier_df4_uistuff_007_59140C_56[];
+extern u32 frontier_df4_uistuff_007_59140C_6[];
+extern u32 frontier_df4_uistuff_007_59140C_62[];
+extern u32 frontier_df4_uistuff_007_59140C_66[];
+extern u32 frontier_df4_uistuff_007_59140C_68[];
+extern u32 frontier_df4_uistuff_007_59140C_70[];
+extern u32 frontier_df4_uistuff_007_59140C_72[];
+extern u32 frontier_df4_uistuff_007_59140C_74[];
+extern u32 frontier_df4_uistuff_007_59140C_76[];
+extern u32 frontier_df4_uistuff_007_59140C_78[];
+extern u32 frontier_df4_uistuff_007_59140C_8[];
+extern u32 frontier_df4_uistuff_007_59140C_84[];
+
 /* Carved from raw INCBIN to typed struct Glyph[] (fe8u src/data/fonts form).
  * Each glyph is 0x48 bytes; sjisNext is the Shift-JIS linked-list pointer,
  * emitted as a relocatable &sym reference so the font list is shiftable.
@@ -1353,7 +1385,7 @@ struct Glyph frontier_df3_fontgrp_se_007_581A04[] SECTION(".data.frontier_df3_fo
         0x0000EEEC, 0x00036EAC, 0x0003AE6B, 0x0003EEEF,
         0x0000EEEC, 0x00039D9B, 0x0003F3FF, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x318), .sjisByte1 = 0x8C, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_12), .sjisByte1 = 0x8C, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x00000F00, 0x00000EC0,
         0x0000FFBC, 0x0000EAAC, 0x0000EEEC, 0x0000EEEC,
@@ -2661,7 +2693,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0003BBFB, 0x0003BBFB, 0x0003BBFB, 0x0003BBAB,
         0x00036BFB, 0x0000FB0F, 0x00000F00, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x1C20), .sjisByte1 = 0x8F, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_76), .sjisByte1 = 0x8F, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x0003F000, 0x0003AFFC,
         0x0000DAAC, 0x0000FBEC, 0x0003AAAC, 0x0000FBEC,
@@ -4180,7 +4212,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0003BEFB, 0x0003BEFB, 0x0003AAAB, 0x0000FEFC,
         0x00000EC0, 0x00000EC0, 0x00000300, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x990), .sjisByte1 = 0x97, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_38), .sjisByte1 = 0x97, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x0000330C, 0x0003EEFB,
         0x0003BAAC, 0x0000EEF0, 0x0003BAFF, 0x0003BAEB,
@@ -4565,7 +4597,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0003BBFC, 0x0003BBEC, 0x0003B7AB, 0x0003BFEC,
         0x0003BFAC, 0x0000ECDB, 0x0000303C, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x288), .sjisByte1 = 0x8B, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_10), .sjisByte1 = 0x8B, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x00000030, 0x0000FCEC,
         0x0003ABEC, 0x0003BBAB, 0x0003BBEF, 0x0003BAAB,
@@ -5286,7 +5318,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0000FEFC, 0x0000EABB, 0x0000EFBB, 0x0000EABB,
         0x0000EFBB, 0x0003AAAB, 0x0003FFFC, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x25F8), .sjisByte1 = 0x95, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_84), .sjisByte1 = 0x95, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x00000300, 0x0003FEFC,
         0x0003AAAB, 0x0000FEBB, 0x0003A9BB, 0x0003BBAB,
@@ -5440,7 +5472,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x000ECE6B, 0x000ECEBC, 0x000EF9B0, 0x000EEFB0,
         0x000E70EC, 0x0003AC3B, 0x0000F00F, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x10E0), .sjisByte1 = 0x97, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_56), .sjisByte1 = 0x97, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x0000FFFC, 0x0003AAAB,
         0x0000FEFC, 0x0003AAAB, 0x0003BAEB, 0x00039E7B,
@@ -5538,7 +5570,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0003BBAC, 0x0003FCEB, 0x000EEFEF, 0x0003EEEC,
         0x000EF6EC, 0x000DABBB, 0x0003FCCF, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x1638), .sjisByte1 = 0x89, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_70), .sjisByte1 = 0x89, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x00003030, 0x0000EFEC,
         0x0003AAAB, 0x0000EFEC, 0x0003AAB0, 0x0003BF6C,
@@ -5629,7 +5661,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0000FFEB, 0x0003AAEB, 0x0003BEEF, 0x0003AAEC,
         0x0003BEEC, 0x0003AAEC, 0x0000FF3C, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x48), .sjisByte1 = 0x8F, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_2), .sjisByte1 = 0x8F, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x00000C0F, 0x00003B3B,
         0x0000EAEC, 0x0000FAFC, 0x0003AABB, 0x0000FBEC,
@@ -5664,7 +5696,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x000EEEEB, 0x000EAAE7, 0x0003BBEC, 0x0003ABEC,
         0x0003BBEC, 0x0003ABEC, 0x0000FC30, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x1B0), .sjisByte1 = 0x93, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_6), .sjisByte1 = 0x93, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x00000C30, 0x0000FBEC,
         0x0003A9AC, 0x0000EFBB, 0x00003AFF, 0x0000EFB0,
@@ -6070,7 +6102,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0003BFFB, 0x0003BABB, 0x0003BBBB, 0x0003BBBB,
         0x0003BABB, 0x00036FFB, 0x0000F00C, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x1200), .sjisByte1 = 0x91, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_62), .sjisByte1 = 0x91, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x0000FCFC, 0x0003ABAB,
         0x0000EFBB, 0x0003ABAB, 0x0003BBBB, 0x0003ABAB,
@@ -6301,14 +6333,14 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x000EAAAB, 0x0003EEEB, 0x000EEEAB, 0x000EEEFB,
         0x0039A6FB, 0x003BFABB, 0x000C0FCF, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x900), .sjisByte1 = 0x96, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_36), .sjisByte1 = 0x96, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000C30, 0x0003FBEC, 0x0003AAAC,
         0x0000EEEC, 0x0003EEEC, 0x000EAAAB, 0x000EF7EB,
         0x000EFBEC, 0x0003AAAC, 0x0000FBEC, 0x0003AAEC,
         0x0003BDAC, 0x00036BEC, 0x0000FC30, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0xD8), .sjisByte1 = 0x8A, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_4), .sjisByte1 = 0x8A, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x00003FFC, 0x0000EAAC,
         0x0000EFF0, 0x0000EAAC, 0x0000FFEC, 0x0003BFEC,
@@ -6350,7 +6382,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x000EE6AB, 0x0003EE6B, 0x0000EFA7, 0x0000ECEC,
         0x0000ECEC, 0x0000ECEC, 0x00003030, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x7E0), .sjisByte1 = 0x8D, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_32), .sjisByte1 = 0x8D, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x0003FF00, 0x0003AAFF,
         0x0000FBAB, 0x0003AAEC, 0x0003BEEC, 0x0003AAEC,
@@ -6427,7 +6459,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x000EFEBB, 0x000EEEBB, 0x003AAABB, 0x000FEFEB,
         0x000FBBFF, 0x003ACEB0, 0x003F03F0, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x1998), .sjisByte1 = 0x8B, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_74), .sjisByte1 = 0x8B, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x0003300C, 0x000EEC3B,
         0x000EECFB, 0x000EEFBB, 0x000EEEFB, 0x000EFB3B,
@@ -6497,7 +6529,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0000EFAC, 0x0000FAB0, 0x0003BFEC, 0x000EEAAB,
         0x0003FEFC, 0x0003BEEC, 0x0000C330, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x438), .sjisByte1 = 0x8E, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_16), .sjisByte1 = 0x8E, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000F00, 0x000FF6FF, 0x000EAAAB,
         0x000EFFFB, 0x000FFFEF, 0x000EAAAC, 0x000EF9EF,
@@ -6525,7 +6557,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x000EAAAC, 0x000DAAAC, 0x0003BFAC, 0x0003AAAC,
         0x0003BFBB, 0x0003AABB, 0x0000FFCF, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x1F8), .sjisByte1 = 0x94, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_8), .sjisByte1 = 0x94, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00003C0C, 0x0000DB3B, 0x0003AAEC,
         0x0000FFFC, 0x0000EBEB, 0x00003CEC, 0x0000EBEC,
@@ -6735,14 +6767,14 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0000EBBB, 0x0000FABB, 0x0000EFBB, 0x0003B6BB,
         0x0000FFFB, 0x0003AABB, 0x0003FFCF, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x3F0), .sjisByte1 = 0x8B, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_14), .sjisByte1 = 0x8B, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x00003030, 0x0000ECEC,
         0x0003BBFB, 0x000EFD9B, 0x0003ABEC, 0x0000FF7B,
         0x0003ABBB, 0x0003BBAB, 0x0003BBEC, 0x0003BBAB,
         0x0003BB6B, 0x0003ABEF, 0x0003FC30, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x708), .sjisByte1 = 0xE6, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_28), .sjisByte1 = 0xE6, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x0000F00C, 0x0003AFFB,
         0x0003FA6B, 0x000EEEFC, 0x0003FFEB, 0x0003AAFC,
@@ -6931,7 +6963,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x00003BEB, 0x00003BE7, 0x00003BEC, 0x00003BEC,
         0x0003FBEC, 0x000EA7EC, 0x0003FC30, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x480), .sjisByte1 = 0x89, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_18), .sjisByte1 = 0x89, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x0003FFC0, 0x000E9ABC,
         0x000EFBAB, 0x000EFBBB, 0x000E9ABB, 0x0003FFAB,
@@ -6973,7 +7005,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0003ABBB, 0x0003FFBB, 0x000EAA6B, 0x0003EFFB,
         0x000EEEFB, 0x000EEEFB, 0x0003330F, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0xB40), .sjisByte1 = 0x90, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_44), .sjisByte1 = 0x90, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x0003C030, 0x0003BCEC,
         0x00036BEC, 0x0003FBAB, 0x000EABEC, 0x0003BBEC,
@@ -7001,7 +7033,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0003BAEB, 0x0003B6AB, 0x00036F6C, 0x0000FDAB,
         0x0003BB7C, 0x000EEFBB, 0x000F30CF, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x6C0), .sjisByte1 = 0x96, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_26), .sjisByte1 = 0x96, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x00000330, 0x0003FEEF,
         0x000EAAEB, 0x0003BEAB, 0x0003B66B, 0x0003B9AC,
@@ -7022,21 +7054,21 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0003BBBB, 0x0003BBBB, 0x0003BFAB, 0x0003B3BB,
         0x0003B3BB, 0x00036FBB, 0x0000F3CF, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x870), .sjisByte1 = 0x8F, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_34), .sjisByte1 = 0x8F, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x000030FC, 0x0000EFAB,
         0x0003BBBB, 0x000EFDBB, 0x0003AB6B, 0x0003EFBB,
         0x000EA9BB, 0x0003EFBB, 0x000EEE6B, 0x000EEEFB,
         0x000EEDBB, 0x0003EBFB, 0x00003C0F, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x15A8), .sjisByte1 = 0x97, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_66), .sjisByte1 = 0x97, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x00000CFF, 0x0003FBAB,
         0x0003A9FB, 0x0000FE6B, 0x0003ABAB, 0x0000EAAC,
         0x0000EFEC, 0x0000EAAC, 0x0000EFEC, 0x0000EAAC,
         0x0000FBBC, 0x0003A7EB, 0x0003FC3F, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0xB88), .sjisByte1 = 0x93, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_46), .sjisByte1 = 0x93, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x00000300, 0x00003EC0,
         0x0000EAC0, 0x00003EC0, 0x00003EF0, 0x0000EAAC,
@@ -7071,14 +7103,14 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0003EFAB, 0x000EAAFC, 0x0003EFAB, 0x0000EFBB,
         0x0000EFBB, 0x0000EFAB, 0x000033FF, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x750), .sjisByte1 = 0x8D, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_30), .sjisByte1 = 0x8D, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x0000C030, 0x0003BCEC,
         0x000EABBB, 0x0003FBFC, 0x0003BBAB, 0x0003BBEC,
         0x0003BBAB, 0x00039BEC, 0x000E6B9B, 0x000EE9EB,
         0x000EA6AC, 0x000EFEDB, 0x000F033F, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0xC18), .sjisByte1 = 0x89, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_48), .sjisByte1 = 0x89, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x0003FCFC, 0x0003ABAB,
         0x0003BFBC, 0x0003BFBC, 0x00039B9B, 0x0003BFBC,
@@ -7155,7 +7187,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x000066EF, 0x0000EFAB, 0x000367BB, 0x00039BBB,
         0x0003B9BB, 0x0003B66B, 0x0003CFFF, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0xA68), .sjisByte1 = 0x8B, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_40), .sjisByte1 = 0x8B, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x00000030, 0x000FFFEC,
         0x000E9A9B, 0x000EEFBB, 0x000EEABB, 0x0003AFAC,
@@ -7211,7 +7243,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x000EA9AB, 0x0003AFBB, 0x0003ABAB, 0x0003EFBB,
         0x0000EFAB, 0x0000EBBB, 0x0000FCCF, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x1908), .sjisByte1 = 0x92, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_72), .sjisByte1 = 0x92, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x0003FFC0, 0x0003AAFC,
         0x0000FBAB, 0x0003AAEF, 0x0003BEEC, 0x0003AAEC,
@@ -7225,7 +7257,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0003A6AC, 0x0003BEB0, 0x0003BFB0, 0x0003AAAC,
         0x0003BFAC, 0x0003AABB, 0x0003FFCF, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x4C8), .sjisByte1 = 0x97, .width = 0x09,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_20), .sjisByte1 = 0x97, .width = 0x09,
       .bitmap = {
         0x00000000, 0x00000000, 0x0000C030, 0x0003BCEF,
         0x0003BBEB, 0x0003AFAB, 0x0003BCEC, 0x0003BBAB,
@@ -7239,7 +7271,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0003BBAB, 0x0003BBBB, 0x0003BBBB, 0x0003BBBB,
         0x0003BBAB, 0x0003B6FF, 0x0003CFC0, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x1CF8), .sjisByte1 = 0x8B, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_78), .sjisByte1 = 0x8B, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x00000300, 0x0003FEFF,
         0x0003AAAB, 0x0003BFFB, 0x0000FBBC, 0x00003BB0,
@@ -7267,7 +7299,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x0003BBEC, 0x0003BBEC, 0x0003BFAB, 0x0003B0EC,
         0x0003B0EC, 0x0003ACEC, 0x0003F030, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C + 0x15F0), .sjisByte1 = 0x94, .width = 0x08,
+    { .sjisNext = (struct Glyph *)(frontier_df4_uistuff_007_59140C_68), .sjisByte1 = 0x94, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x0000F0C0, 0x0000EFB0,
         0x0000FB6C, 0x0003AA9B, 0x0000FEEF, 0x0000EAAC,
