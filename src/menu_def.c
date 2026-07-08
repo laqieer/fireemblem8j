@@ -23,7 +23,7 @@ extern u8 data_080DF228[]; /* Sio menu label pool (frontier_df4_misc_lo gap4b2) 
 
 /* Pool + label symbols are defined in the .rodata.menu_def_pool asm block
  * below; declare them so the typed tables reference them as constants. */
-extern u8 frontier_df4_misc_lo_001_0DC974[];
+extern const u8 frontier_df4_misc_lo_001_0DC974[];
 extern const char gMenuStr_00C[];
 extern const char gMenuStr_024[];
 extern const char gMenuStr_03C[];
@@ -91,249 +91,86 @@ extern const char gMenuStr_29C[];
  * non-string binary kept as raw bytes. Pinned at 0x080DC974 in the layout
  * manifest so the bytes match; other tables (data_085C4518/data_085C4830)
  * still reference frontier_df4_misc_lo_001_0DC974 + offset. */
-__asm__(
-"\t.section .rodata.menu_def_pool, \"a\", %progbits\n"
-"\t.global frontier_df4_misc_lo_001_0DC974\n"
-"frontier_df4_misc_lo_001_0DC974:\n"
-"\t.byte 0x01, 0x0F, 0x08, 0x08, 0x0F, 0x19, 0x1E, 0x14, 0x0A, 0x00, 0x00, 0x00\n"
-"\t.global gMenuStr_00C\n"
-"gMenuStr_00C:\n"
-"\t.asciz \"　　　　　　　　　了解\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_024\n"
-"gMenuStr_024:\n"
-"\t.asciz \"以後プレイできません\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_03C\n"
-"gMenuStr_03C:\n"
-"\t.asciz \"クリアずみファイルでは\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_054\n"
-"gMenuStr_054:\n"
-"\t.asciz \"しますか？\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_060\n"
-"gMenuStr_060:\n"
-"\t.asciz \"ファイルをクリアずみに\"\n"
-"\t.space 5\n"
-"\t.global gMenuStr_07C\n"
-"gMenuStr_07C:\n"
-"\t.asciz \"　ファイル初期化\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_090\n"
-"gMenuStr_090:\n"
-"\t.asciz \"　手再開\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_09C\n"
-"gMenuStr_09C:\n"
-"\t.asciz \"　どこでも再開\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_0AC\n"
-"gMenuStr_0AC:\n"
-"\t.asciz \"　リリースエントリ\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_0C0\n"
-"gMenuStr_0C0:\n"
-"\t.asciz \"　手中断\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_0CC\n"
-"gMenuStr_0CC:\n"
-"\t.asciz \"　おやすみなさい\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_0E0\n"
-"gMenuStr_0E0:\n"
-"\t.asciz \"　クリアずみ\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_0F0\n"
-"gMenuStr_0F0:\n"
-"\t.asciz \"　周回数\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_0FC\n"
-"gMenuStr_0FC:\n"
-"\t.asciz \"　索敵\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_104\n"
-"gMenuStr_104:\n"
-"\t.asciz \"　天気\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_10C\n"
-"gMenuStr_10C:\n"
-"\t.asciz \"　デブ情報\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_118\n"
-"gMenuStr_118:\n"
-"\t.asciz \"　マップ\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_124\n"
-"gMenuStr_124:\n"
-"\t.asciz \"いいえ\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_12C\n"
-"gMenuStr_12C:\n"
-"\t.asciz \"はい\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_134\n"
-"gMenuStr_134:\n"
-"\t.asciz \"捨てる\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_13C\n"
-"gMenuStr_13C:\n"
-"\t.asciz \"交換\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_144\n"
-"gMenuStr_144:\n"
-"\t.asciz \"装備\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_14C\n"
-"gMenuStr_14C:\n"
-"\t.asciz \"使う\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_154\n"
-"gMenuStr_154:\n"
-"\t.asciz \"　待機\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_15C\n"
-"gMenuStr_15C:\n"
-"\t.asciz \"　輸送隊\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_168\n"
-"gMenuStr_168:\n"
-"\t.asciz \"　交換\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_170\n"
-"gMenuStr_170:\n"
-"\t.asciz \"　持ち物\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_17C\n"
-"gMenuStr_17C:\n"
-"\t.asciz \"　引渡し\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_188\n"
-"gMenuStr_188:\n"
-"\t.asciz \"　引受け\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_194\n"
-"gMenuStr_194:\n"
-"\t.asciz \"　降ろす\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_1A0\n"
-"gMenuStr_1A0:\n"
-"\t.asciz \"　救出\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_1A8\n"
-"gMenuStr_1A8:\n"
-"\t.asciz \"　闘技場\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_1B4\n"
-"gMenuStr_1B4:\n"
-"\t.asciz \"　秘密店\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_1C0\n"
-"gMenuStr_1C0:\n"
-"\t.asciz \"　道具屋\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_1CC\n"
-"gMenuStr_1CC:\n"
-"\t.asciz \"　武器屋\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_1D8\n"
-"gMenuStr_1D8:\n"
-"\t.asciz \"　扉\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_1E0\n"
-"gMenuStr_1E0:\n"
-"\t.asciz \"　宝箱\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_1E8\n"
-"gMenuStr_1E8:\n"
-"\t.asciz \"　訪問\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_1F0\n"
-"gMenuStr_1F0:\n"
-"\t.asciz \"　支援\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_1F8\n"
-"gMenuStr_1F8:\n"
-"\t.asciz \"　話す\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_200\n"
-"gMenuStr_200:\n"
-"\t.asciz \"　かぎ開\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_20C\n"
-"gMenuStr_20C:\n"
-"\t.asciz \"　呼魔\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_214\n"
-"gMenuStr_214:\n"
-"\t.asciz \"　召喚\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_21C\n"
-"gMenuStr_21C:\n"
-"\t.asciz \"　盗む\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_224\n"
-"gMenuStr_224:\n"
-"\t.asciz \"　踊る\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_22C\n"
-"gMenuStr_22C:\n"
-"\t.asciz \"　奏でる\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_238\n"
-"gMenuStr_238:\n"
-"\t.asciz \"　降りる\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_244\n"
-"gMenuStr_244:\n"
-"\t.asciz \"　乗る\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_24C\n"
-"gMenuStr_24C:\n"
-"\t.asciz \"　杖\"\n"
-"\t.space 3\n"
-"\t.global gMenuStr_254\n"
-"gMenuStr_254:\n"
-"\t.asciz \"　攻撃\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_25C\n"
-"gMenuStr_25C:\n"
-"\t.asciz \"　制圧\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_264\n"
-"gMenuStr_264:\n"
-"\t.asciz \"　終了\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_26C\n"
-"gMenuStr_26C:\n"
-"\t.asciz \"　中断\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_274\n"
-"gMenuStr_274:\n"
-"\t.asciz \"　退却\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_27C\n"
-"gMenuStr_27C:\n"
-"\t.asciz \"　設定\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_284\n"
-"gMenuStr_284:\n"
-"\t.asciz \"　戦績\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_28C\n"
-"gMenuStr_28C:\n"
-"\t.asciz \"　辞書\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_294\n"
-"gMenuStr_294:\n"
-"\t.asciz \"　状況\"\n"
-"\t.space 1\n"
-"\t.global gMenuStr_29C\n"
-"gMenuStr_29C:\n"
-"\t.asciz \"　部隊\"\n"
-"\t.space 1\n"
-"\t.byte 0x4D, 0x41, 0x50, 0x54, 0x41, 0x53, 0x4B, 0x00, 0xB0, 0x00, 0xC0, 0x00, 0x00, 0x00, 0xB0, 0x00, 0xD0, 0x00, 0x00, 0x00, 0xB0, 0x00, 0xE0, 0x00, 0x00, 0x00, 0xB0, 0x00, 0xF0, 0x00, 0x00, 0x00, 0xB0, 0x00, 0x00, 0x01, 0x00, 0x00, 0xB0, 0x00, 0x10, 0x01, 0x00, 0x00, 0xF0, 0x00, 0x40, 0x01, 0x01, 0x00, 0xF0, 0x00, 0x50, 0x01, 0x01, 0x00, 0xF0, 0x00, 0x60, 0x01, 0x01, 0x00, 0xF0, 0x00, 0x70, 0x01, 0x01, 0x00, 0xF0, 0x00, 0x80, 0x01, 0x01, 0x00, 0xF0, 0x00, 0x90, 0x01, 0x01, 0x00, 0xF0, 0x00, 0xA0, 0x01, 0x01, 0x00, 0x00, 0x01, 0x00, 0x02, 0x02, 0x00, 0xF0, 0x00, 0x20, 0x02, 0x02, 0x00, 0xE0, 0x00, 0x40, 0x02, 0x02, 0x00, 0x29, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x08, 0x04, 0x01, 0x00\n"
-);
+/* String pool (frontier_df4_misc_lo_001_0DC974, ROM 0x080DC974) -- converted from
+ * inline asm to typed C in place (#152). Japanese labels are editable Shift-JIS
+ * C literals (cpp->iconv UTF-8->CP932->agbcc); each gMenuStr array is sized to fold in
+ * the original .asciz null + .space padding. Header + MAPTASK tail are raw bytes. All
+ * offsets are 4-aligned so agbcc's string .align 2,0 is a no-op; section pinned at
+ * 0x080DC974 in layout/carved_rom.d/menu_def.tsv so bytes match (make compare). */
+const u8 frontier_df4_misc_lo_001_0DC974[] __attribute__((section(".rodata.menu_def_pool"))) = {
+    0x01, 0x0F, 0x08, 0x08, 0x0F, 0x19, 0x1E, 0x14, 0x0A, 0x00, 0x00, 0x00,
+};
+const char gMenuStr_00C[24] __attribute__((section(".rodata.menu_def_pool"))) = "　　　　　　　　　了解";
+const char gMenuStr_024[24] __attribute__((section(".rodata.menu_def_pool"))) = "以後プレイできません";
+const char gMenuStr_03C[24] __attribute__((section(".rodata.menu_def_pool"))) = "クリアずみファイルでは";
+const char gMenuStr_054[12] __attribute__((section(".rodata.menu_def_pool"))) = "しますか？";
+const char gMenuStr_060[28] __attribute__((section(".rodata.menu_def_pool"))) = "ファイルをクリアずみに";
+const char gMenuStr_07C[20] __attribute__((section(".rodata.menu_def_pool"))) = "　ファイル初期化";
+const char gMenuStr_090[12] __attribute__((section(".rodata.menu_def_pool"))) = "　手再開";
+const char gMenuStr_09C[16] __attribute__((section(".rodata.menu_def_pool"))) = "　どこでも再開";
+const char gMenuStr_0AC[20] __attribute__((section(".rodata.menu_def_pool"))) = "　リリースエントリ";
+const char gMenuStr_0C0[12] __attribute__((section(".rodata.menu_def_pool"))) = "　手中断";
+const char gMenuStr_0CC[20] __attribute__((section(".rodata.menu_def_pool"))) = "　おやすみなさい";
+const char gMenuStr_0E0[16] __attribute__((section(".rodata.menu_def_pool"))) = "　クリアずみ";
+const char gMenuStr_0F0[12] __attribute__((section(".rodata.menu_def_pool"))) = "　周回数";
+const char gMenuStr_0FC[8] __attribute__((section(".rodata.menu_def_pool"))) = "　索敵";
+const char gMenuStr_104[8] __attribute__((section(".rodata.menu_def_pool"))) = "　天気";
+const char gMenuStr_10C[12] __attribute__((section(".rodata.menu_def_pool"))) = "　デブ情報";
+const char gMenuStr_118[12] __attribute__((section(".rodata.menu_def_pool"))) = "　マップ";
+const char gMenuStr_124[8] __attribute__((section(".rodata.menu_def_pool"))) = "いいえ";
+const char gMenuStr_12C[8] __attribute__((section(".rodata.menu_def_pool"))) = "はい";
+const char gMenuStr_134[8] __attribute__((section(".rodata.menu_def_pool"))) = "捨てる";
+const char gMenuStr_13C[8] __attribute__((section(".rodata.menu_def_pool"))) = "交換";
+const char gMenuStr_144[8] __attribute__((section(".rodata.menu_def_pool"))) = "装備";
+const char gMenuStr_14C[8] __attribute__((section(".rodata.menu_def_pool"))) = "使う";
+const char gMenuStr_154[8] __attribute__((section(".rodata.menu_def_pool"))) = "　待機";
+const char gMenuStr_15C[12] __attribute__((section(".rodata.menu_def_pool"))) = "　輸送隊";
+const char gMenuStr_168[8] __attribute__((section(".rodata.menu_def_pool"))) = "　交換";
+const char gMenuStr_170[12] __attribute__((section(".rodata.menu_def_pool"))) = "　持ち物";
+const char gMenuStr_17C[12] __attribute__((section(".rodata.menu_def_pool"))) = "　引渡し";
+const char gMenuStr_188[12] __attribute__((section(".rodata.menu_def_pool"))) = "　引受け";
+const char gMenuStr_194[12] __attribute__((section(".rodata.menu_def_pool"))) = "　降ろす";
+const char gMenuStr_1A0[8] __attribute__((section(".rodata.menu_def_pool"))) = "　救出";
+const char gMenuStr_1A8[12] __attribute__((section(".rodata.menu_def_pool"))) = "　闘技場";
+const char gMenuStr_1B4[12] __attribute__((section(".rodata.menu_def_pool"))) = "　秘密店";
+const char gMenuStr_1C0[12] __attribute__((section(".rodata.menu_def_pool"))) = "　道具屋";
+const char gMenuStr_1CC[12] __attribute__((section(".rodata.menu_def_pool"))) = "　武器屋";
+const char gMenuStr_1D8[8] __attribute__((section(".rodata.menu_def_pool"))) = "　扉";
+const char gMenuStr_1E0[8] __attribute__((section(".rodata.menu_def_pool"))) = "　宝箱";
+const char gMenuStr_1E8[8] __attribute__((section(".rodata.menu_def_pool"))) = "　訪問";
+const char gMenuStr_1F0[8] __attribute__((section(".rodata.menu_def_pool"))) = "　支援";
+const char gMenuStr_1F8[8] __attribute__((section(".rodata.menu_def_pool"))) = "　話す";
+const char gMenuStr_200[12] __attribute__((section(".rodata.menu_def_pool"))) = "　かぎ開";
+const char gMenuStr_20C[8] __attribute__((section(".rodata.menu_def_pool"))) = "　呼魔";
+const char gMenuStr_214[8] __attribute__((section(".rodata.menu_def_pool"))) = "　召喚";
+const char gMenuStr_21C[8] __attribute__((section(".rodata.menu_def_pool"))) = "　盗む";
+const char gMenuStr_224[8] __attribute__((section(".rodata.menu_def_pool"))) = "　踊る";
+const char gMenuStr_22C[12] __attribute__((section(".rodata.menu_def_pool"))) = "　奏でる";
+const char gMenuStr_238[12] __attribute__((section(".rodata.menu_def_pool"))) = "　降りる";
+const char gMenuStr_244[8] __attribute__((section(".rodata.menu_def_pool"))) = "　乗る";
+const char gMenuStr_24C[8] __attribute__((section(".rodata.menu_def_pool"))) = "　杖";
+const char gMenuStr_254[8] __attribute__((section(".rodata.menu_def_pool"))) = "　攻撃";
+const char gMenuStr_25C[8] __attribute__((section(".rodata.menu_def_pool"))) = "　制圧";
+const char gMenuStr_264[8] __attribute__((section(".rodata.menu_def_pool"))) = "　終了";
+const char gMenuStr_26C[8] __attribute__((section(".rodata.menu_def_pool"))) = "　中断";
+const char gMenuStr_274[8] __attribute__((section(".rodata.menu_def_pool"))) = "　退却";
+const char gMenuStr_27C[8] __attribute__((section(".rodata.menu_def_pool"))) = "　設定";
+const char gMenuStr_284[8] __attribute__((section(".rodata.menu_def_pool"))) = "　戦績";
+const char gMenuStr_28C[8] __attribute__((section(".rodata.menu_def_pool"))) = "　辞書";
+const char gMenuStr_294[8] __attribute__((section(".rodata.menu_def_pool"))) = "　状況";
+const char gMenuStr_29C[8] __attribute__((section(".rodata.menu_def_pool"))) = "　部隊";
+const u8 gMenuDefPoolMaptask[] __attribute__((section(".rodata.menu_def_pool"))) = {
+    0x4D, 0x41, 0x50, 0x54, 0x41, 0x53, 0x4B, 0x00, 0xB0, 0x00, 0xC0, 0x00,
+    0x00, 0x00, 0xB0, 0x00, 0xD0, 0x00, 0x00, 0x00, 0xB0, 0x00, 0xE0, 0x00,
+    0x00, 0x00, 0xB0, 0x00, 0xF0, 0x00, 0x00, 0x00, 0xB0, 0x00, 0x00, 0x01,
+    0x00, 0x00, 0xB0, 0x00, 0x10, 0x01, 0x00, 0x00, 0xF0, 0x00, 0x40, 0x01,
+    0x01, 0x00, 0xF0, 0x00, 0x50, 0x01, 0x01, 0x00, 0xF0, 0x00, 0x60, 0x01,
+    0x01, 0x00, 0xF0, 0x00, 0x70, 0x01, 0x01, 0x00, 0xF0, 0x00, 0x80, 0x01,
+    0x01, 0x00, 0xF0, 0x00, 0x90, 0x01, 0x01, 0x00, 0xF0, 0x00, 0xA0, 0x01,
+    0x01, 0x00, 0x00, 0x01, 0x00, 0x02, 0x02, 0x00, 0xF0, 0x00, 0x20, 0x02,
+    0x02, 0x00, 0xE0, 0x00, 0x40, 0x02, 0x02, 0x00, 0x29, 0x00, 0x00, 0x00,
+    0x09, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x08, 0x04, 0x01, 0x00,
+};
 
 const struct MenuItemDef gDebugClearMenuItems[] SECTION(".rodata.menu_def.gDebugClearMenuItems") = {
     {gMenuStr_060, 0x63A, 0x0, 0, 0x3, (void *)MenuAlwaysEnabled, NULL, NULL, NULL, NULL, NULL},
