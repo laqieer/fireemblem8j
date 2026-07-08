@@ -106,7 +106,7 @@ extern const u8 UnitDef_TowerEnemy_6[];
 extern const u8 UnitDef_TowerEnemy_8[];
 extern const u8 data_085B9BBC[];
 extern const u8 data_08A60354[];
-extern const u8 data_08A60BE4[];
+extern const u8 EventScr_CallBreakStone[];
 extern const u8 frontier_df3_unitdef_b_007_911200_tail[];
 extern const u8 frontier_df3_unitdef_b_009_91187C[];
 extern const u8 frontier_df3_unitdef_b_017_912480[];
@@ -760,7 +760,7 @@ EventListScr frontier_df3_eventscr_ch_002_A6A06C[] __attribute__((section(".data
     MOVE_CLOSEST(0xFFFF, 0xFFFD, 0x13, 1)
     CALL(EventScr_UnitWarpIN)
     SVAL(EVT_SLOT_2, 0x40)
-    CALL(data_08A60BE4 + 0x10C)
+    CALL(EventScr_CallBreakStone)
     CURSOR_CHAR(0x40)
     STAL(0x3C)
     CURE
@@ -3530,7 +3530,7 @@ EventListScr frontier_df3_eventscr_ch_012_A6DE0C[] __attribute__((section(".data
     LOAD2(1, frontier_df3_unitdef_b_037_91AC38_p27 + 0xA0)
     ENUN
     SVAL(EVT_SLOT_2, 0x40)
-    CALL(data_08A60BE4 + 0x10C)
+    CALL(EventScr_CallBreakStone)
     CURSOR_CHAR(0x1F)
     STAL(0x3C)
     CURE
@@ -3856,7 +3856,7 @@ EventListScr frontier_df3_eventscr_ch_016_A6EFD8[] __attribute__((section(".data
     TEXTEND
     REMA
     SVAL(EVT_SLOT_2, 0x40)
-    CALL(data_08A60BE4 + 0x10C)
+    CALL(EventScr_CallBreakStone)
     CURSOR_CHAR(0x40)
     STAL(0x3C)
     CURE

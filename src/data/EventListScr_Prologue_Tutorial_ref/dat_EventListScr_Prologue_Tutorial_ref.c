@@ -13,15 +13,16 @@ extern const u8 EventScr_Prologue_Tutorial1[];
 extern const u8 EventScr_Prologue_Tutorial4[];
 extern const u8 EventScr_Prologue_TutorialA[];
 extern const u8 EventScr_Prologue_TutorialB[];
-extern const u8 data_08A614C0[];
+extern const u8 EventScr_Prologue_Tutorial2[];
+extern const u8 EventScr_Prologue_Tutorial3[];
 extern const u8 data_08A61624[];
 extern const u8 data_08A618F0[];
 
 SECTION(".rodata.dat_EventListScr_Prologue_Tutorial_ref") static const u32 EventListScr_Prologue_Tutorial__shift[] = {
     (u32)&EventScr_Prologue_Tutorial0,
     (u32)&EventScr_Prologue_Tutorial1,
-    (u32)&data_08A614C0,
-    (u32)&data_08A614C0 + 0x10,
+    (u32)&EventScr_Prologue_Tutorial2,
+    (u32)&EventScr_Prologue_Tutorial3,
     (u32)&EventScr_Prologue_Tutorial4,
     (u32)&data_08A61624,
     (u32)&data_08A61624 + 0x20,

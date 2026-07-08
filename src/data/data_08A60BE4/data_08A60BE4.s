@@ -1,9 +1,10 @@
-/* Migrated from asm/data_08A60BE4.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral SPLIT of data_08A60BE4 into 3 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.08A60BE4, "aw", %progbits
-	.global data_08A60BE4
-data_08A60BE4:
+	.global EventScr_9EEAAC
+EventScr_9EEAAC:
 	.4byte 0x00031020
 	.4byte 0x00001520
 	.4byte 0x00001A20
@@ -23,8 +24,11 @@ data_08A60BE4:
 	.4byte 0x00001D20
 	.4byte 0x00010820
 	.4byte 0x00000A40
-	.4byte data_08A60BE4 + 0x54
+	.4byte EventScr_9EEB00
 	.4byte 0x00000120
+	.section .data.residue.08A60C38, "aw", %progbits
+	.global EventScr_9EEB00
+EventScr_9EEB00:
 	.4byte 0x00001928
 	.4byte 0x00000C45
 	.4byte 0x0004000C
@@ -71,6 +75,9 @@ data_08A60BE4:
 	.4byte 0x00020820
 	.4byte 0x00070228
 	.4byte 0x00000120
+	.section .data.residue.08A60CF0, "aw", %progbits
+	.global EventScr_CallBreakStone
+EventScr_CallBreakStone:
 	.4byte 0x00001860
 	.4byte 0x00000000
 	.4byte 0x00000000

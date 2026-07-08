@@ -11,7 +11,8 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 EventScr_Prologue_RenaisThroneCutscene[];
-extern const u8 data_08A612F4[];
+extern const u8 EventScr_Prologue_EirikaAttacked[];
+extern const u8 EventScr_Prologue_ExecTut[];
 extern const u8 EventScr_CallOnTutorialMode[];
 extern const u8 BmGuideTextSetAllGreen[];
 extern const u8 frontier_df4_banim_b_073_907F78[];
@@ -21,7 +22,7 @@ extern const u8 EventScr_Prologue_ONeillSpawn[];
 
 SECTION(".rodata.dat_EventScr_Prologue_BeginningScene_ref") EventListScr EventScr_Prologue_BeginningScene[] = {
     CALL(EventScr_Prologue_RenaisThroneCutscene)
-    SVAL(EVT_SLOT_2, data_08A612F4)
+    SVAL(EVT_SLOT_2, EventScr_Prologue_EirikaAttacked)
     CALL(EventScr_CallOnTutorialMode)
     CHECK_TUTORIAL
     BNE(0, 0xC, 0)
@@ -49,7 +50,7 @@ SECTION(".rodata.dat_EventScr_Prologue_BeginningScene_ref") EventListScr EventSc
     TEXTSHOW(0x8CE)
     TEXTEND
     REMA
-    SVAL(EVT_SLOT_2, data_08A612F4 + 0xC0)
+    SVAL(EVT_SLOT_2, EventScr_Prologue_ExecTut)
     CALL(EventScr_CallOnTutorialMode)
     MOVE_CLOSEST(0, 1, 4, 5)
     ENUN

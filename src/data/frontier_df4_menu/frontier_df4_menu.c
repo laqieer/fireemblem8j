@@ -948,7 +948,7 @@ extern const u8 UnitDef_Ch12AMixed[];
 extern const u8 UnitDef_Ch12AEnemy_4[];
 extern const u8 data_0890F470[];
 extern const u8 data_08A60354[];
-extern const u8 data_08A60BE4[];
+extern const u8 EventScr_CallBreakStone[];
 extern const u8 frontier_df3_unitdef_b_000_90F678_residue_p1[];
 extern const u8 frontier_df3_unitdef_b_000_90F678_residue_p4[];
 extern const u8 frontier_df3_unitdef_b_004_91075C[];
@@ -2820,7 +2820,7 @@ EventListScr frontier_df4_menu_007_A657D4[] __attribute__((section(".data.fronti
     ENUN
     FADU(0x10)
     SVAL(EVT_SLOT_2, 0x53)
-    CALL((u8 *)data_08A60BE4 + 0x10C)
+    CALL((u8 *)EventScr_CallBreakStone)
     CURSOR_CHAR(0x53)
     STAL(0x3C)
     CURE
@@ -3268,7 +3268,7 @@ EventListScr frontier_df4_menu_010_A67EEC[] __attribute__((section(".data.fronti
     TEXTEND
     REMA
     SVAL(EVT_SLOT_2, 0x53)
-    CALL((u8 *)data_08A60BE4 + 0x10C)
+    CALL((u8 *)EventScr_CallBreakStone)
     MOVE(0x30, 0x40, 6, 3)
     ENUN
     CURSOR_CHAR(0x53)
