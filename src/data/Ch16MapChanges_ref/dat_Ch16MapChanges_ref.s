@@ -23,8 +23,8 @@ Ch16MapChanges:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte data_08A68B20
-	.4byte data_08A68F2C
+	.4byte EventScr_Ch16a_BeginningScene
+	.4byte EventScr_Ch16A_0
 	.4byte 0x000E0002
 	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x7B4
 	.4byte 0x0000FF01

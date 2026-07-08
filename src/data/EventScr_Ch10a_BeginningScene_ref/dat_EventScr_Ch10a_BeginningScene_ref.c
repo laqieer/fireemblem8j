@@ -16,7 +16,7 @@ extern const u8 data_08A60354[];
 extern const u8 UnitDef_Ch10ANPC[];
 extern const u8 UnitDef_Ch10AEnemy_0[];
 extern const u8 UnitDef_Ch10AEnemy_1[];
-extern const u8 data_0890D0CC[];
+extern const u8 UnitDef_Ch10AAlly_0[];
 extern const u8 UnitDef_Ch10AAlly_1[];
 extern const u8 data_085B9BBC[];
 
@@ -94,7 +94,7 @@ SECTION(".rodata.dat_EventScr_Ch10a_BeginningScene_ref") EventListScr EventScr_C
     SVAL(EVT_SLOT_3, 0x9EF)
     CALL(data_08A60354 + 0xF4)
     CAMERA(0, 0)
-    LOAD2(1, data_0890D0CC)
+    LOAD2(1, UnitDef_Ch10AAlly_0)
     STAL2(0x20)
     SVAL(EVT_SLOT_1, 0)
     SET_STATE(1)

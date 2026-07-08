@@ -13,14 +13,14 @@ extern const u8 EventListScr_Ch9a_Turn[];
 extern const u8 EventScr_Ch9a_BeginningScene[];
 extern const u8 EventScr_Ch9a_EndingScene[];
 extern const u8 UnitDef_Event_Ch9aAlly[];
-extern const u8 data_08A5B1C8[];
+extern const u8 EventListScr_Ch9a_Character[];
 extern const u8 data_08A5B238[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
 SECTION(".rodata.dat_Ch9EirikaEvents_ref") static const u32 Ch9EirikaEvents__shift[] = {
     (u32)&EventListScr_Ch9a_Turn,
-    (u32)&data_08A5B1C8,
+    (u32)&EventListScr_Ch9a_Character,
     (u32)&EventListScr_Ch9a_Location,
     (u32)&data_08A5B238,
     (u32)&data_08A5B238 + 0x1C,

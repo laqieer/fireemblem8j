@@ -14,9 +14,9 @@ extern const u8 UnitDef_Ch6Enemy_1[];
 extern const u8 UnitDef_Ch6Enemy_2[];
 extern const u8 UnitDef_Ch6Enemy_3[];
 extern const u8 UnitDef_Event_Ch6Ally[];
-extern const u8 data_0890AAC8[];
-extern const u8 data_0890ADC0[];
-extern const u8 data_0890B0B8[];
+extern const u8 UnitDef_Ch6Ally_1[];
+extern const u8 UnitDef_Ch6Ally_2[];
+extern const u8 UnitDef_Ch6Ally_3[];
 extern const u8 data_08A5AE80[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
@@ -34,9 +34,9 @@ SECTION(".rodata.dat_Ch6Events_ref") static const u32 Ch6Events__shift[] = {
     (u32)&frontier_df4_menu_005_A5FFAD + 0x32,
     (u32)&UnitDef_Event_Ch6Ally,
     (u32)&UnitDef_Event_Ch6Ally,
-    (u32)&data_0890AAC8,
-    (u32)&data_0890ADC0,
-    (u32)&data_0890B0B8,
+    (u32)&UnitDef_Ch6Ally_1,
+    (u32)&UnitDef_Ch6Ally_2,
+    (u32)&UnitDef_Ch6Ally_3,
     (u32)&UnitDef_Ch6Enemy_1,
     (u32)&UnitDef_Ch6Enemy_2,
     (u32)&UnitDef_Ch6Enemy_3,

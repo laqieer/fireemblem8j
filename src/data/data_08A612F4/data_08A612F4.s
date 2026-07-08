@@ -27,7 +27,7 @@ data_08A612F4:
 	.4byte 0x00000000
 	.4byte 0x00000120
 	.4byte 0x00020540
-	.4byte data_08A611DC
+	.4byte EventScr_Prologue_ONeillSpawn
 	.4byte 0x00000A40
 	.4byte EventScr_CallOnTutorialMode
 	.4byte 0x00020540

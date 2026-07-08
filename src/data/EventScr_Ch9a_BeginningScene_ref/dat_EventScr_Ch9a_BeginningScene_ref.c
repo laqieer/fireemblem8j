@@ -16,7 +16,7 @@ extern const u8 data_0890C9BC[];
 extern const u8 data_08A60354[];
 extern const u8 UnitDef_Ch9AAlly_0[];
 extern const u8 UnitDef_Ch9AMixed_0[];
-extern const u8 data_0890C7AC[];
+extern const u8 UnitDef_Ch9AEnemy_10[];
 extern const u8 UnitDef_Ch9AEnemy_0[];
 extern const u8 UnitDef_Ch9AEnemy_1[];
 extern const u8 UnitDef_Event_Ch9aAlly[];
@@ -130,7 +130,7 @@ SECTION(".rodata.dat_EventScr_Ch9a_BeginningScene_ref") EventListScr EventScr_Ch
     REMA
     EvtBgmFadeIn(0x7FFF, 4)
     CAMERA2(0xE, 4)
-    LOAD1(1, data_0890C7AC)
+    LOAD1(1, UnitDef_Ch9AEnemy_10)
     ENUN
     MOVE_1STEP(0, 2, 0)
     ENUN

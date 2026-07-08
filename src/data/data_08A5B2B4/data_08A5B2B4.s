@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.08A5B2B4, "aw", %progbits
-	.global data_08A5B2B4
-data_08A5B2B4:
+	.global EventListScr_Ch10a_Turn
+EventListScr_Ch10a_Turn:
 	.4byte 0x00000002
 	.4byte EventScr_Ch10A_0
 	.4byte 0x00800001
@@ -17,4 +17,4 @@ data_08A5B2B4:
 	.4byte EventScr_Ch10A_14
 	.4byte 0x0080FF01
 	.4byte 0x00000000
-/* de-pointered slice data_08A5B2B4: ptr=4 data=9 skip=0 */
+/* de-pointered slice EventListScr_Ch10a_Turn: ptr=4 data=9 skip=0 */

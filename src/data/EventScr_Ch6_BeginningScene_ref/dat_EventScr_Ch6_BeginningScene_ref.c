@@ -11,7 +11,7 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 data_08A60354[];
-extern const u8 data_0890AA3C[];
+extern const u8 UnitDef_Ch6Ally_0[];
 extern const u8 UnitDef_Ch6Mixed[];
 extern const u8 EventScr_UnitWarpIN[];
 extern const u8 EventScr_UnitWarpOUT[];
@@ -29,7 +29,7 @@ SECTION(".rodata.dat_EventScr_Ch6_BeginningScene_ref") EventListScr EventScr_Ch6
     EvtBgmFadeIn(0x7FFF, 6)
     CALL(data_08A60354 + 0xA8)
     EVBIT_T(9)
-    LOAD2(1, data_0890AA3C)
+    LOAD2(1, UnitDef_Ch6Ally_0)
     ENUN
     EVBIT_F(9)
     CAMERA2(7, 7)

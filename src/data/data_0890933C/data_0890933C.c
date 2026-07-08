@@ -2,7 +2,7 @@
 
 /* Typed C extraction of residual raw-incbin slices from data_0890933C.c. */
 
-u32 data_0890933C[] __attribute__((section(".data.residue.0890933C"))) = {
+u32 UnitDef_Ch4Ally_4[] __attribute__((section(".data.residue.0890933C"))) = {
     0x50010702, 0x00000042, 0x00000000, 0x006D0417,
     0x00000000, 0x50010702, 0x00000081, 0x00000000,
     0x006D0417, 0x00000000, 0x50010702, 0x00000083,

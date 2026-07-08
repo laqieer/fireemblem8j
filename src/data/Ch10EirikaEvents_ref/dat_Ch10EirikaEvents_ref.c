@@ -16,16 +16,16 @@ extern const u8 UnitDef_Ch10AEnemy_7[];
 extern const u8 UnitDef_Ch10AEnemy_8[];
 extern const u8 UnitDef_Ch10AEnemy_9[];
 extern const u8 UnitDef_Event_Ch10aAlly[];
-extern const u8 data_0890D234[];
-extern const u8 data_0890D554[];
-extern const u8 data_0890D874[];
-extern const u8 data_08A5B2B4[];
+extern const u8 UnitDef_Ch10AAlly_2[];
+extern const u8 UnitDef_Ch10AAlly_3[];
+extern const u8 UnitDef_Ch10AAlly_4[];
+extern const u8 EventListScr_Ch10a_Turn[];
 extern const u8 data_08A5B3A8[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
 SECTION(".rodata.dat_Ch10EirikaEvents_ref") static const u32 Ch10EirikaEvents__shift[] = {
-    (u32)&data_08A5B2B4,
+    (u32)&EventListScr_Ch10a_Turn,
     (u32)&EventListScr_Ch10a_Character,
     (u32)&EventListScr_Ch10a_Location,
     (u32)&data_08A5B3A8,
@@ -37,9 +37,9 @@ SECTION(".rodata.dat_Ch10EirikaEvents_ref") static const u32 Ch10EirikaEvents__s
     (u32)&frontier_df4_menu_005_A5FFAD + 0x3B,
     (u32)&UnitDef_Event_Ch10aAlly,
     (u32)&UnitDef_Event_Ch10aAlly,
-    (u32)&data_0890D234,
-    (u32)&data_0890D554,
-    (u32)&data_0890D874,
+    (u32)&UnitDef_Ch10AAlly_2,
+    (u32)&UnitDef_Ch10AAlly_3,
+    (u32)&UnitDef_Ch10AAlly_4,
     (u32)&UnitDef_Ch10AEnemy_7,
     (u32)&UnitDef_Ch10AEnemy_8,
     (u32)&UnitDef_Ch10AEnemy_9,

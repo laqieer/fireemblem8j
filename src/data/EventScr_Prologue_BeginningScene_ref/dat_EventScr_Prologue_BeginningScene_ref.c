@@ -17,7 +17,7 @@ extern const u8 BmGuideTextSetAllGreen[];
 extern const u8 frontier_df4_banim_b_073_907F78[];
 extern const u8 data_08A60354[];
 extern const u8 EventScr_Prologue_GiveRapier[];
-extern const u8 data_08A611DC[];
+extern const u8 EventScr_Prologue_ONeillSpawn[];
 
 SECTION(".rodata.dat_EventScr_Prologue_BeginningScene_ref") EventListScr EventScr_Prologue_BeginningScene[] = {
     CALL(EventScr_Prologue_RenaisThroneCutscene)
@@ -54,7 +54,7 @@ SECTION(".rodata.dat_EventScr_Prologue_BeginningScene_ref") EventListScr EventSc
     MOVE_CLOSEST(0, 1, 4, 5)
     ENUN
     CALL(EventScr_Prologue_GiveRapier)
-    CALL(data_08A611DC)
+    CALL(EventScr_Prologue_ONeillSpawn)
     EVBIT_T(7)
     ENDA
 };

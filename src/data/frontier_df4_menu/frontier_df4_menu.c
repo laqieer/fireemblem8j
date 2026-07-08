@@ -534,7 +534,7 @@ extern const u8 data_08925F90[];
 extern const u8 data_08926134[];
 extern u32 data_08A9548C[];
 extern u32 data_08A95AD8[];
-extern const u8 data_08AB0B48[];
+extern const u8 sSprite_ClassDisplay_A[];
 extern const u8 frontier_chap_title_000_A7E188[];
 extern const u8 frontier_chap_title_001_A7E504[];
 extern const u8 frontier_chap_title_002_A7E800[];
@@ -8059,7 +8059,7 @@ u32 frontier_df4_menu_036_AB0D18[] __attribute__((section(".data.frontier_df4_me
     0x0D160000,
     0x00080001,
     0x0CFE4000,
-    (u32)&data_08AB0B48,
+    (u32)&sSprite_ClassDisplay_A,
     0x00001900,
     (u32)&sSprite_ClassDisplay_B,
     0x00001100,

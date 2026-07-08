@@ -11,14 +11,14 @@
 extern const u8 EventListScr_Ch8_Character[];
 extern const u8 EventScr_Ch8_BeginningScene[];
 extern const u8 UnitDef_Event_Ch8Ally[];
-extern const u8 data_08A5AFE4[];
+extern const u8 EventListScr_Ch8_Turn[];
 extern const u8 data_08A5B090[];
 extern const u8 data_08A652C0[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
 SECTION(".rodata.dat_Ch8EventData_ref") static const u32 Ch8EventData__shift[] = {
-    (u32)&data_08A5AFE4,
+    (u32)&EventListScr_Ch8_Turn,
     (u32)&EventListScr_Ch8_Character,
     (u32)&data_08A5B090,
     (u32)&data_08A5B090 + 0x4C,
