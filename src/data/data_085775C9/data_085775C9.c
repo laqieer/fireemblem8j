@@ -4,7 +4,9 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 data_085775C9[] __attribute__((section(".data.residue.085775C9"))) = INCBIN_U8("data/residual/data_085775C9.bin", 0x0, 0x3);
+u8 data_085775C9[] __attribute__((section(".data.residue.085775C9"))) = {
+    0x00, 0x00, 0x00,
+};
 __asm__(
 "\t.section .data.residue.085775C9, \"aw\", %progbits\n"
 "\t.global data_085775CC\n"

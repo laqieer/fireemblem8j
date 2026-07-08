@@ -4,7 +4,11 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 EventScr_Ch10A_14[] __attribute__((section(".data.residue.08A66A00"))) = INCBIN_U8("data/residual/data_08A66A00.bin", 0, 44);
+u32 EventScr_Ch10A_14[] __attribute__((section(".data.residue.08A66A00"))) = {
+    0x00162621, 0x00163B21, 0x003C0E20, 0x00003B22,
+    0x00141220, 0x00001A20, 0x09F31B20, 0x00001D20,
+    0x00001B22, 0x00070228, 0x00000120,
+};
 __asm__(
 "\t.section .data.residue.08A66A2C, \"aw\", %progbits\n"
 "\t.global EventScr_Ch11a_BeginningScene\n"

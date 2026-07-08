@@ -4,4 +4,6 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 EventScr_Ruin_71[] __attribute__((section(".data.residue.08A72258"))) = INCBIN_U8("data/residual/data_08A72258.bin");
+u32 EventScr_Ruin_71[] __attribute__((section(".data.residue.08A72258"))) = {
+    0x00020540, 0x00000014, 0x00000120,
+};

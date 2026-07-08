@@ -58,6 +58,16 @@ __asm__(
 "\t.4byte 0x00070228\n"
 "\t.4byte 0x00000120\n"
 );  /* de-pointered slice EventScr_Ch4_6: ptr=2 data=4 skip=0 */
-u8 EventScr_Ch4_7[] __attribute__((section(".data.residue.08A63D94"))) = INCBIN_U8("data/residual/data_08A63D0C.bin", 136, 32);
-u8 EventScr_Ch4_8[] __attribute__((section(".data.residue.08A63DB4"))) = INCBIN_U8("data/residual/data_08A63D0C.bin", 168, 36);
-u8 EventScr_Ch4_9[] __attribute__((section(".data.residue.08A63DD8"))) = INCBIN_U8("data/residual/data_08A63D0C.bin", 204, 32);
+u32 EventScr_Ch4_7[] __attribute__((section(".data.residue.08A63D94"))) = {
+    0x00001A23, 0x000B0540, 0xFFFFFFFF, 0x09761B20,
+    0x00001D20, 0x00001B22, 0x00BB0229, 0x00000120,
+};
+u32 EventScr_Ch4_8[] __attribute__((section(".data.residue.08A63DB4"))) = {
+    0x00001A23, 0x000B0540, 0xFFFFFFFF, 0x09771B20,
+    0x00001D20, 0x00001B22, 0x00BE0229, 0x00BF0229,
+    0x00000120,
+};
+u32 EventScr_Ch4_9[] __attribute__((section(".data.residue.08A63DD8"))) = {
+    0x00001A23, 0x000B0540, 0xFFFFFFFF, 0x09781B20,
+    0x00001D20, 0x00001B22, 0x00E60229, 0x00000120,
+};

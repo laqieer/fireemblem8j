@@ -56,4 +56,8 @@ __asm__(
 "\t.4byte 0x00070228\n"
 "\t.4byte 0x00000120\n"
 );  /* de-pointered slice EventScr_Ch1Tut_PostTradeAndItemUseAction: ptr=1 data=10 skip=1 */
-u8 EventScr_Ch1Tut_GuideMsgSeize[] __attribute__((section(".data.residue.08A621C8"))) = INCBIN_U8("data/residual/data_08A62134.bin", 148, 44);
+u32 EventScr_Ch1Tut_GuideMsgSeize[] __attribute__((section(".data.residue.08A621C8"))) = {
+    0x00001A23, 0x000B0540, 0xFFFFFFFF, 0x09051B20,
+    0x00001D20, 0x00001B22, 0x00DD0229, 0x02023B24,
+    0x003C0E20, 0x00003B22, 0x00000120,
+};

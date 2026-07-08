@@ -4,4 +4,6 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 gap_0008359C[] __attribute__((section(".rodata.gap_0008359C"))) = INCBIN_U8("data/residual/gap_0008359C.bin");
+u32 gap_0008359C[] __attribute__((section(".rodata.gap_0008359C"))) = {
+    0x00004770,
+};

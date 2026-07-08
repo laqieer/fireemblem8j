@@ -1,7 +1,13 @@
 #include "global.h"
+#include "anime.h"
 
 /* Migrated from asm/data_085FC068.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 data_085FC068[] __attribute__((section(".data.residue.085FC068"))) = INCBIN_U8("data/residual/data_085FC068.bin");
+struct AnimSpriteData data_085FC068[] __attribute__((section(".data.residue.085FC068"))) =
+{
+    { .header = 0x40000000, .as = { .object = { 0x0000, -16, -8 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0000, 0, -8 } } },
+    ANIM_SPRITE_END,
+};

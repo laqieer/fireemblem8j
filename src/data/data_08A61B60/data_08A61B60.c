@@ -15,4 +15,8 @@ __asm__(
 "\t.4byte 0x00070228\n"
 "\t.4byte 0x00000120\n"
 );  /* de-pointered slice EventScr_Ch1_Turn1Player: ptr=2 data=4 skip=0 */
-u8 EventScr_Ch1_Turn1Enemy[] __attribute__((section(".data.residue.08A61B78"))) = INCBIN_U8("data/residual/data_08A61B60.bin", 24, 40);
+u32 EventScr_Ch1_Turn1Enemy[] __attribute__((section(".data.residue.08A61B78"))) = {
+    0x00131220, 0x00463B21, 0x003C0E20, 0x00003B22,
+    0x00001A20, 0x08F01B20, 0x00001D20, 0x00001B22,
+    0x00070228, 0x00000120,
+};
