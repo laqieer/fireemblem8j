@@ -1,2 +1,2 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-764BF4	764C8C	src/data/data_08764BF4/data_08764BF4.o(.data.residue.08764BF4)	descriptive raw ROM data (152 B, byte-completeness D29)
+# byte-neutral RENAME of data_08764BF4 -> Tsa_AuraBg1_11 (make compare oracle)
+764BF4	764C8C	src/data/data_08764BF4/data_08764BF4.o(.data.residue.08764BF4)	Tsa_AuraBg1_11 (152 B)

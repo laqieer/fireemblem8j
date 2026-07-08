@@ -1,2 +1,4 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-5C3348	5C3378	src/data/data_085C3348/data_085C3348.o(.data.residue.085C3348)	descriptive raw ROM data (48 B, byte-completeness D29)
+# byte-neutral PARTIAL split of data_085C3348: name gProcScr_PhaseIntroUnk (part 1
+# kept as data_085C3348 residual — it overlays the C-defined obj_Phasechangefx_0). make compare oracle
+5C3348	5C3368	src/data/data_085C3348/data_085C3348.o(.data.residue.085C3348)	data_085C3348 (32 B, residual overlay of obj_Phasechangefx_0)
+5C3368	5C3378	src/data/data_085C3348/data_085C3348.o(.data.residue.085C3368)	gProcScr_PhaseIntroUnk (16 B)

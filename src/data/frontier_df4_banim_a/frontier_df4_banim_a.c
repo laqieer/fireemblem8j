@@ -1112,7 +1112,7 @@ extern const u8 data_08754FB4[];
 extern const u8 data_087550C0[];
 extern const u8 data_08755194[];
 extern const u8 data_0875F138[];
-extern const u8 data_08764BF4[];
+extern const u8 Tsa_AuraBg1_11[];
 extern const u8 data_0879FF00[];
 extern const u8 data_087A0174[];
 extern const u8 data_087A03A0[];
@@ -2812,7 +2812,7 @@ struct ProcCmd ProcScr_efxLuna[] __attribute__((section(".data.frontier_df4_bani
 u32 frontier_df4_banim_a_res22[] __attribute__((section(".data.frontier_df4_banim_a.gap13"))) = {
     0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0xE18, 0x00000003, (u32)&efxOuraBG_Loop, 0x00000000, 0x00000000,
     (u32)&Tsa_AuraBg1_0, (u32)&Tsa_AuraBg1_1, (u32)&Tsa_AuraBg1_2, (u32)&Tsa_AuraBg1_3, (u32)&Tsa_AuraBg1_4, (u32)&Tsa_AuraBg1_5,
-    (u32)&Tsa_AuraBg1_6, (u32)&Tsa_AuraBg1_7, (u32)&Tsa_AuraBg1_8, (u32)&Tsa_AuraBg1_9, (u32)&Tsa_AuraBg1_10, (u32)&data_08764BF4,
+    (u32)&Tsa_AuraBg1_6, (u32)&Tsa_AuraBg1_7, (u32)&Tsa_AuraBg1_8, (u32)&Tsa_AuraBg1_9, (u32)&Tsa_AuraBg1_10, (u32)&Tsa_AuraBg1_11,
     (u32)&Tsa_AuraBg1_12, (u32)&Tsa_AuraBg1_13, (u32)&Tsa_AuraBg1_14, (u32)&Tsa_AuraBg1_15, (u32)&Tsa_AuraBg1_16, (u32)&Tsa_AuraBg1_17,
     (u32)&Tsa_AuraBg1_18, (u32)&Tsa_AuraBg1_19, (u32)&Tsa_AuraBg1_20, (u32)&Tsa_AuraBg1_21, (u32)&Tsa_AuraBg1_22, (u32)&Tsa_AuraBg1_23,
     (u32)&Tsa_AuraBg1_24, (u32)&frontier_df4_banim_b_056_7657CC, (u32)&frontier_df4_banim_b_056b_7658D0, (u32)&frontier_df4_banim_b_056c_7659D4, 0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0xE9C,

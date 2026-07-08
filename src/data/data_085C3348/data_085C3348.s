@@ -12,6 +12,9 @@ data_085C3348:
 	.4byte 0x80C00100
 	.4byte 0x81000018
 	.4byte 0x001C80E0
+	.section .data.residue.085C3368, "aw", %progbits
+	.global gProcScr_PhaseIntroUnk
+gProcScr_PhaseIntroUnk:
 	.4byte 0x00000002
 	.4byte PhaseIntroUnk_Init + 0x1
 	.4byte 0x00000003

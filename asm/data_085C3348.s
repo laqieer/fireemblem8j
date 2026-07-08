@@ -9,4 +9,8 @@
 	.section .data.residue.085C3348, "a", %progbits
 	.global data_085C3348
 data_085C3348:
-	.incbin "data/residual/data_085C3348.bin"
+	.incbin "data/residual/data_085C3348.bin", 0x0, 0x20
+	.section .data.residue.085C3368, "a", %progbits
+	.global gProcScr_PhaseIntroUnk
+gProcScr_PhaseIntroUnk:
+	.incbin "data/residual/data_085C3348.bin", 0x20, 0x10
