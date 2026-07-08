@@ -2610,29 +2610,6 @@ u32 frontier_df4_menu_004_A5F770[] __attribute__((section(".data.frontier_df4_me
 u8 frontier_df4_menu_004_A5F770_1[] __attribute__((section(".data.frontier_df4_menu.gap4"))) = {
     0x00, 0x00,
 };
-u8 frontier_df4_menu_005_A5FFAD[] __attribute__((section(".data.frontier_df4_menu.gap5"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin", 0x0, 0x103);
-__asm__(
-"\t.section .data.frontier_df4_menu.gap5, \"aw\", %progbits\n"
-"\t.global data_08A600B0\n"
-"data_08A600B0:\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin\", 0x103, 0xC\n"
-"	.4byte GameOver_FadeOutCurrentBgm\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin\", 0x113, 0xC\n"
-"	.4byte StartSlowFadeToBlack\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin\", 0x123, 0xC\n"
-"	.4byte EndAllMus\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin\", 0x133, 0x4\n"
-"	.4byte SkilGameOverForToturialExtraMap\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin\", 0x13B, 0x4\n"
-"	.4byte sub_8021210\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin\", 0x143, 0x14\n"
-"	.4byte PostGameOverHandler\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin\", 0x15B, 0x14\n"
-"	.4byte AsnycKeyStatus_ButtonB\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin\", 0x173, 0xC\n"
-"	.4byte UnsetKeyIgnoreMask\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin\", 0x183, 0x8\n"
-);
 EventListScr frontier_df4_menu_006_A65504[] __attribute__((section(".data.frontier_df4_menu.gap6"))) = {
     MUSC(0x31)
     SVAL(EVT_SLOT_2, 0xF)
@@ -6791,16 +6768,6 @@ u32 data_08A95AD8[] __attribute__((section(".data.frontier_df4_menu.gap20"))) = 
  * src/data/ProcScr_uisupport_ref/dat_ProcScr_uisupport_ref.c (own 4-aligned .rodata
  * sections); the surrounding data stays here as three INCBIN slices. Byte-exact:
  * 0x22 + 0xE0 + 0x44 + 0x148 + 0x680 = 0x90E. */
-__asm__(
-"\t.section .data.frontier_df4_menu.gap21, \"aw\", %progbits\n"
-"\t.global frontier_df4_menu_021_A95B4E\n"
-"frontier_df4_menu_021_A95B4E:\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin\", 0x0, 0xE\n"
-"	.4byte DrawSupportBannerSprites_Init\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin\", 0x12, 0x4\n"
-"	.4byte DrawSupportBannerSprites_Loop\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin\", 0x1A, 0x8\n"
-);
 /* [0x22,0x102) -> gProcScr_SupportScreen (ref file) */
 u8 frontier_df4_menu_021b_A95C50[] __attribute__((section(".data.frontier_df4_menu.gap21b"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x102, 0x44);
 /* [0x146,0x28E) -> gProcScr_SupportUnitSubScreen (ref file) */
@@ -7157,34 +7124,6 @@ u32 data_08A9CFC4[] __attribute__((section(".data.frontier_df4_menu.gap26"))) = 
  * (0x1EA onward, incl. data_08A9D688) moves to a new gap27c section placed at
  * 0x08A9D64C, so the carved scripts can sit in their own 4-aligned section
  * without bumping this 2-aligned (base 0x08A9D462) blob's alignment. */
-__asm__(
-"\t.section .data.frontier_df4_menu.gap27, \"aw\", %progbits\n"
-"\t.global frontier_df4_menu_027_A9D462\n"
-"frontier_df4_menu_027_A9D462:\n"
-"	.incbin \"graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin\", 0x0, 0x11A\n"
-"	.4byte Sprite_Savedraw_7 + 0xE\n"
-"	.4byte Sprite_Savedraw_7 + 0x16\n"
-"	.4byte Sprite_Savedraw_7 + 0x1E\n"
-"	.4byte Sprite_Savedraw_7 + 0x26\n"
-"	.4byte Sprite_Savedraw_7 + 0x2E\n"
-"	.4byte Sprite_Savedraw_7 + 0x36\n"
-"	.4byte Sprite_Savedraw_7 + 0x3E\n"
-"	.4byte Sprite_Savedraw_7 + 0x46\n"
-"	.4byte Sprite_Savedraw_7 + 0x4E\n"
-"	.4byte Sprite_Savedraw_7 + 0x56\n"
-"	.4byte Sprite_Savedraw_7 + 0x5E\n"
-"	.4byte Sprite_Savedraw_7 + 0x66\n"
-"	.4byte Sprite_Savedraw_7 + 0x6E\n"
-"	.4byte Sprite_Savedraw_7 + 0x76\n"
-"	.4byte Sprite_Savedraw_7 + 0x7E\n"
-"	.4byte Sprite_Savedraw_7 + 0x86\n"
-"	.4byte Sprite_Savedraw_7 + 0x8E\n"
-"	.4byte Sprite_Savedraw_7 + 0x96\n"
-"	.4byte Sprite_Savedraw_7 + 0x9E\n"
-"	.4byte Sprite_Savedraw_7 + 0xA6\n"
-"	.4byte Sprite_Savedraw_7 + 0xAE\n"
-"	.4byte Sprite_Savedraw_7 + 0xB6\n"
-);
 u8 frontier_df4_menu_027b_A9D64C[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_027_A9D462.bin", 0x1EA, 0x20);
 u32 frontier_df4_menu_027b_A9D64C_1[] __attribute__((section(".data.frontier_df4_menu.gap27c"))) = {
     (u32)&SaveDrawCursorYOffsetLut + 0x1B,

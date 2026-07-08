@@ -1008,3 +1008,4 @@ sound/songs/midi/*.s
 !src/data/data_085775C9/data_085775C9.s
 !src/data/frontier_banim_aurabg3/frontier_banim_aurabg3_asm.s
 !src/data/frontier_df4_banim_b/frontier_df4_banim_b_asm.s
+!src/data/frontier_df4_menu/frontier_df4_menu_asm.s

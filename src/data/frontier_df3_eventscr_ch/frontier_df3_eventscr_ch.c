@@ -4200,7 +4200,7 @@ EventListScr frontier_df3_eventscr_ch_017_A6F47C[] __attribute__((section(".data
  * .4byte constants (all < 0x08000000, not addresses) and the pointer as .4byte <sym> so
  * ld produces an R_ARM_ABS32. Target is STT_OBJECT (even 0x08A602F0 -> no Thumb bit).
  * Inlined rather than .incbin-split because the source .gbapal is a *generated* file and
- * a .incbin inside __asm__ is invisible to scaninc's C-mode dep scan (would drop the
+ * a .incbin inside inline-asm is invisible to scaninc's C-mode dep scan (would drop the
  * build-order dependency); inlining keeps the object self-sufficient. Byte-exact 0x20. */
 EventListScr frontier_df3_eventscr_ch_019_A6FB48[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap19"))) = {
     ENUF(0xC)
