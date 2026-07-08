@@ -5882,7 +5882,6 @@ EventListScr_Ch15b_Character = 0x08A5CC80;
 EventListScr_Ch15b_Misc = 0x08A5CD64;
 EventListScr_Ch16b_Location = 0x08A5CE9C;
 EventListScr_Ch16b_Misc = 0x08A5CF00;
-EventListScr_Ch21b_Misc = 0x08A5D514;
 EventListScr_Tower1_Location = 0x08A5D650;
 EventListScr_Tower2_Misc = 0x08A5D700;
 EventListScr_Tower3_Location = 0x08A5D790;
