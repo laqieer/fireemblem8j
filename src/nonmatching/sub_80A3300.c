@@ -1,7 +1,7 @@
-/* NON_MATCHING: byte source is asm/sub_80A3300.s @ JP 0x080A3300 (JP-unique augury/
+/* NON_MATCHING: byte source is asm/PutDivinationRankSprite.s @ JP 0x080A3300 (JP-unique augury/
  * divination rank-sprite OAM emitter; no fe8u twin). This C DOCUMENTS the reconstruction
  * and is NOT in make-compare: compiled only by `make nonmatching`; the carved_rom row
- * still points at asm/sub_80A3300.o so the shipped bytes come from asm.
+ * still points at asm/PutDivinationRankSprite.o so the shipped bytes come from asm.
  *
  * Residual = agbcc reg-coloring tie-break (same class as sibling src/nonmatching/sub_80A2E64.c).
  * Status: canon-diff 27 (of 106 insns), permuter score 285 (from base 1850). The hard spill
@@ -22,8 +22,8 @@
  * Graduate: let tools/decomp-permuter grind from this seed (it is descending), or hand off
  * to decomp.me scratch `UbRNK` when network is available, then move to src/, add the
  * carved_rom.d handdecomp row + gUnk_08A95478 data alias, drop asm/. */
-// sub_80A3300: JP-only divination/augury rank-sprite OAM emitter for DivinationSpriteProc.
-// Reconstructed from asm/sub_80A3300.s (verified vs the ldrsh/ands/pool-load mnemonics).
+// PutDivinationRankSprite: JP-only divination/augury rank-sprite OAM emitter for DivinationSpriteProc.
+// Reconstructed from asm/PutDivinationRankSprite.s (verified vs the ldrsh/ands/pool-load mnemonics).
 // gUnk_08A95478 needs a data-split at 0x08A95478 for the real carve (shared with sub_80A2E64);
 // here it is an extern const u16*const[] alias.
 #include "global.h"
@@ -48,7 +48,7 @@ struct DivinationSpriteProc
     /* 54 */ s16 spriteY;
 };
 
-void sub_80A3300(struct DivinationSpriteProc * proc)
+void PutDivinationRankSprite(struct DivinationSpriteProc * proc)
 {
     int i;
     int col;

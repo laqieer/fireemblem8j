@@ -25,8 +25,8 @@ struct Unk8048FC0Data
 
 extern struct Unk8048FC0Data gUnk_02000C04;
 
-extern const u8 data_085DFA68[];
-extern const u8 data_085E04C4[];
+extern const u8 Img_LinkArenaSpriteText[];
+extern const u8 Pal_LinkArenaSpriteText[];
 
 void Decompress(const void * src, void * dst);
 void CopyToPaletteBuffer(const void * src, int dest, int size);
@@ -37,8 +37,8 @@ void sub_8048FC0(struct Unk8048FC0Proc * proc)
 {
     int i;
 
-    Decompress((const void *)data_085DFA68, (void *)0x06012800);
-    CopyToPaletteBuffer((const void *)data_085E04C4, 0xa0 << 2, 0xc0);
+    Decompress((const void *)Img_LinkArenaSpriteText, (void *)0x06012800);
+    CopyToPaletteBuffer((const void *)Pal_LinkArenaSpriteText, 0xa0 << 2, 0xc0);
     InitSpriteTextFont((struct Font *)0x02000C60, (void *)0x06015000, 0xe);
     CopyToPaletteBuffer((const void *)Pal_Text, 0xd0 << 2, 0x20);
     SetTextFontGlyphs(0);

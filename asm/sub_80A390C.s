@@ -223,7 +223,7 @@ _080A3AB6:
 	adds r1, r7, #0
 	bl j_TmApplyTsa
 	adds r0, r6, #0
-	bl sub_80A3528
+	bl DrawAuguryResultPanel
 	adds r0, r6, #0
 	bl sub_80A33E0
 	movs r0, #7

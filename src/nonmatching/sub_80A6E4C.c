@@ -1,7 +1,7 @@
-/* NON_MATCHING: byte source is asm/sub_80A6E4C.s @ JP 0x080A6E4C (region-different,
+/* NON_MATCHING: byte source is asm/EncodeLinkArenaRecord.s @ JP 0x080A6E4C (region-different,
  * gbadisasm descriptive asm; carved_rom places those bytes). This C DOCUMENTS the
  * reconstruction and is NOT in make-compare: compiled only by `make nonmatching`.
- * Same TU as the MATCHED sub_80A6C60 and reconstructed sub_80A6D34 (link-arena codec).
+ * Same TU as the MATCHED sub_80A6C60 and reconstructed DecodeLinkArenaRecordHeader (link-arena codec).
  *
  * STATUS: structural byte-identical to JP; residual is the agbcc spill-decision /
  * register-coloring NEAR class (docs/agbcc_codegen_levers.md section 7 / D284) —
@@ -28,9 +28,9 @@
  * spill-decision axis. decomp-permuter (-O2, -j4, tuned structural weights): base
  * score 2215 -> plateaued ~1170 over 62k iters (matches the documented 30-60k worker
  * plateau). Graduate via a long/lucky permuter run, then move to src/, flip the
- * carved_rom row (asm/sub_80A6E4C.o -> src/sub_80A6E4C.o) and drop asm/sub_80A6E4C.s.
+ * carved_rom row (asm/EncodeLinkArenaRecord.o -> src/EncodeLinkArenaRecord.o) and drop asm/EncodeLinkArenaRecord.s.
  *
- * sub_80A6E4C: JP-only link-arena ("通信闘技場") record ENCODE/commit stage. Reverse-
+ * EncodeLinkArenaRecord: JP-only link-arena ("通信闘技場") record ENCODE/commit stage. Reverse-
  * clears gBuf[0..0x9f], invokes a caller callback (via _call_via_rN) to emit the
  * payload, seeds a nonce from GetGameClock()>>3, computes two sub_80A6C20 10-bit
  * checksums, LCG-obfuscates the buffer (sub_80A6AA8), interleaves the 30 header bits
@@ -48,7 +48,7 @@ int sub_80A6AA8(void);
 u16 sub_80A6C20(u8 * buf, int len);
 void sub_80A6C60(void);
 
-void sub_80A6E4C(void (*func)(int *, u8 *))
+void EncodeLinkArenaRecord(void (*func)(int *, u8 *))
 {
     int len;
     int i;

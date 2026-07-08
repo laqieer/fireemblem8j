@@ -13,7 +13,7 @@
  *   differential_test.py sub_80A2E64 --trials 60 -> EQUIV
  *
  * gUnk_08A95478 needs a data-split (or alias) at 0x08A95478 for the real carve;
- * it is SHARED with sub_80A3300 -- declare the alias ONCE at integration. */
+ * it is SHARED with PutDivinationRankSprite -- declare the alias ONCE at integration. */
 // sub_80A2E64: JP-only divination/augury rotating rank-sprite OAM animator (no fe8u twin).
 #include "global.h"
 #include "proc.h"

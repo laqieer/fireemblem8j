@@ -13,7 +13,7 @@ DecodeAndVerifyArenaRecord:
 	mov sb, r0
 	movs r0, #0
 	str r0, [sp, #4]
-	bl sub_80A6D34
+	bl DecodeLinkArenaRecordHeader
 	ldr r1, _080A6FC8 @ =0x02014F24
 	ldr r4, _080A6FCC @ =0x02014FC8
 	ldrh r0, [r4]

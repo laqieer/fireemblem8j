@@ -5,7 +5,7 @@
 #include "uisupport.h"
 #include "savemenu.h"
 
-extern u8 data_08A95548[];
+extern u8 ProcScr_Divination[];
 
 void sub_80B4B34(struct SaveMenuProc * proc);
 void sub_80B62A8(struct SaveMenuProc * proc);
@@ -43,7 +43,7 @@ void sub_80AEBAC(struct SaveMenuProc * proc)
         return;
 
     case 8:
-        Proc_StartBlocking((const struct ProcCmd *)data_08A95548, proc);
+        Proc_StartBlocking((const struct ProcCmd *)ProcScr_Divination, proc);
         return;
     }
 }

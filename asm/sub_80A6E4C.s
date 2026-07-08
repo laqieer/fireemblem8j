@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80A6E4C, "ax", %progbits
-@ sub_80A6E4C @ JP 0x080A6E4C - region-different, gbadisasm descriptive asm (D23)
+@ EncodeLinkArenaRecord @ JP 0x080A6E4C - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A6E4C
+	.global EncodeLinkArenaRecord
 	.thumb_func
-sub_80A6E4C:
+EncodeLinkArenaRecord:
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r3, r0, #0

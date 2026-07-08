@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80A3300, "ax", %progbits
-@ sub_80A3300 @ JP 0x080A3300 - region-different, gbadisasm descriptive asm (D23)
+@ PutDivinationRankSprite @ JP 0x080A3300 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A3300
+	.global PutDivinationRankSprite
 	.thumb_func
-sub_80A3300:
+PutDivinationRankSprite:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

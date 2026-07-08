@@ -14,12 +14,12 @@
  *   4. Computes the composite letter grade via GetOverallRank(5 category ranks).
  *   5. Decompresses the panel gfx from data_08A9A8D4 -> gGenericBuffer and applies the
  *      TSA to gBG1TilemapBuffer (Decompress = Decompress, j_TmApplyTsa).
- *   6. Draws the two sub-panels (sub_80A3528 text/values, sub_80A33E0), then, when the
+ *   6. Draws the two sub-panels (DrawAuguryResultPanel text/values, sub_80A33E0), then, when the
  *      record is valid and carries a portrait, starts the tactician face (sub_80063F8)
  *      and the rank-badge CG (StartCgText / SetCgTextFlags).
  *
  * AuguryProc field map CONFIRMED by this unpack (consumed by carved sibling
- * src/nonmatching/sub_80A3528.c and src/sub_80A3C64.c):
+ * src/nonmatching/DrawAuguryResultPanel.c and src/sub_80A3C64.c):
  *   0x34..0x38 rowCounts[5] = {tacticsRank, survivalRank, fundsRank, expRank, combatRank}
  *              (invalid record -> each |= 0xFF, i.e. 0xFF "dash")
  *   0x39 overallRank  = GetOverallRank(rowCounts[0..4])
@@ -93,7 +93,7 @@ void StartCgText(int a, int b, int c, int d, int e, void *vram, int g, int h);
 void sub_8091544(void);
 void EndFaceById(int faceSlot);
 void SetCgTextFlags(int flags);
-void sub_80A3528(struct AuguryProc *proc);
+void DrawAuguryResultPanel(struct AuguryProc *proc);
 void sub_80A33E0(struct AuguryProc *proc);
 
 void Augury_InitResultScreen(struct AuguryProc *proc)
@@ -159,7 +159,7 @@ void Augury_InitResultScreen(struct AuguryProc *proc)
     /* --- draw --- */
     Decompress(data_08A9A8D4, gGenericBuffer);
     j_TmApplyTsa(gBG1TilemapBuffer, gGenericBuffer, 0xA5 << 7);
-    sub_80A3528(proc);
+    DrawAuguryResultPanel(proc);
     sub_80A33E0(proc);
     BG_EnableSyncByMask(7);
     EndFaceById(0);

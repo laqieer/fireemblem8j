@@ -32,7 +32,7 @@ extern u8 gAuguryPal_8A9A4E4[];
 struct PlayStBytes41 { s8 b[0x42]; };
 extern struct PlayStBytes41 gPlayStBytes40;
 
-void sub_80A3300(ProcPtr proc);
+void PutDivinationRankSprite(ProcPtr proc);
 void StartGreenText(ProcPtr proc);
 
 void sub_80A3458(struct Augury80A3458Proc * proc)
@@ -57,7 +57,7 @@ void sub_80A3458(struct Augury80A3458Proc * proc)
 
     gPlayStBytes40.b[0x40] = (gPlayStBytes40.b[0x40] & ~0x60) | 0x20;
 
-    StartParallelWorker(sub_80A3300, proc);
+    StartParallelWorker(PutDivinationRankSprite, proc);
     StartGreenText(proc);
     SetBlendBackdropA(0);
     SetBlendBackdropB(0);

@@ -17,7 +17,7 @@ extern void EnablePaletteSync(void);
 extern void DrawUiFrame2(int a, int b, int c, int d, int e);
 extern u8 sub_80A723C(int x, int y);
 extern void sub_80A6A30(int a, int b);
-extern void sub_80A6E4C(void * func);
+extern void EncodeLinkArenaRecord(void * func);
 extern void sub_80A730C(void * a, void * b);
 extern void sub_80A705C(void);
 
@@ -74,7 +74,7 @@ void sub_80A74D4(struct AuguryInitProc * proc)
     else
     {
         sub_80A6A30(5, 0x11);
-        sub_80A6E4C((void *)sub_80A705C);
+        EncodeLinkArenaRecord((void *)sub_80A705C);
         sub_80A730C((void *)gAuguryTexts_02014EFC, gRom_08A95DDC);
         proc->unk2c = (int)StartMuralBackground((ProcPtr)0, (void *)0, 0xa);
     }

@@ -1,10 +1,10 @@
 	.syntax unified
 	.section .text.sub_80A6D34, "ax", %progbits
-@ sub_80A6D34 @ JP 0x080A6D34 - region-different, gbadisasm descriptive asm (D23)
+@ DecodeLinkArenaRecordHeader @ JP 0x080A6D34 - region-different, gbadisasm descriptive asm (D23)
 	.thumb
-	.global sub_80A6D34
+	.global DecodeLinkArenaRecordHeader
 	.thumb_func
-sub_80A6D34:
+DecodeLinkArenaRecordHeader:
 	push {r4, r5, r6, r7, lr}
 	mov r7, sl
 	mov r6, sb

@@ -1,4 +1,4 @@
-/* NON_MATCHING: byte source is asm/sub_80A3528.s @ JP 0x080A3528 (region-different,
+/* NON_MATCHING: byte source is asm/DrawAuguryResultPanel.s @ JP 0x080A3528 (region-different,
  * gbadisasm descriptive asm; carved_rom places those bytes). This C DOCUMENTS the
  * reconstruction and is NOT in make-compare: compiled only by `make nonmatching`.
  * Residual = agbcc invariant-scheduling / reg-coloring vs the JP build (see blocking
@@ -6,7 +6,7 @@
  * for this function -- confirmed).  Do NOT use -fno-gcse (un-CSEs the base reloads).
  * Graduate via permuter/lever -> move to src/, flip the carved_rom row, drop asm.
  *
- * proposed_name: DrawAuguryResultPanel  (keep struct AuguryProc; or keep sub_80A3528)
+ * proposed_name: DrawAuguryResultPanel  (keep struct AuguryProc; or keep DrawAuguryResultPanel)
  *
  * === STATUS: ~95% carved.  PROLOGUE byte-exact; both LOOP BODIES byte-exact. ===
  * The loop-body induction form was cracked with the "byte-offset cast" idiom
@@ -50,19 +50,19 @@
  *
  * notes_for_P10_integration: to re-wire when a lever cracks it --
  *   objects.lst auto-generates from carved_rom.d (no manual edit);
- *   add carved_rom.d row `0A3528<TAB>0A3898<TAB>src/sub_80A3528.o(.text)<TAB>handdecomp: sub_80A3528`
+ *   add carved_rom.d row `0A3528<TAB>0A3898<TAB>src/DrawAuguryResultPanel.o(.text)<TAB>handdecomp: DrawAuguryResultPanel`
  *     and git rm layout/carved_rom.d/gbadisasm_sub_80A3528.tsv;
  *   add baseline_syms.d aliases gUnknown_08A95524@0x08A95524, gUnknown_08A9553C@0x08A9553C;
  *   gUnknown_08A95438 is the ALREADY-placed sym gPrepItemTextMsgIds (msgid table) -- reuse, do NOT re-alias;
  *   extern void sub_80A34F0(int,int,int,int,int) is the carved sibling (no header);
  *   if -Os add a Makefile CC1FLAGS line mirroring src/sub_80A6C60.o (else -O2 needs none);
- *   git rm asm/sub_80A3528.s. */
+ *   git rm asm/DrawAuguryResultPanel.s. */
 #include "global.h"
 #include "hardware.h"
 #include "fontgrp.h"
 #include "functions.h"
 
-// sub_80A3528: JP-only augury/divination result-panel DRAW (no fe8u twin).
+// DrawAuguryResultPanel: JP-only augury/divination result-panel DRAW (no fe8u twin).
 // Paints the divination title, five rank rows, score, H:MM:SS clear-time,
 // overall-rank icon and win count into the BG2 tilemap.
 struct AuguryProc
@@ -89,7 +89,7 @@ extern const u32 gUnknown_08A9553C[];
 extern const u32 gPrepItemTextMsgIds[5]; // placed data sym @0x08A95438 (was gUnknown_08A95438)
 extern const u32 gUnknown_08A95524[];
 
-void sub_80A3528(struct AuguryProc * proc)
+void DrawAuguryResultPanel(struct AuguryProc * proc)
 {
     int i;
     int row;

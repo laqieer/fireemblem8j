@@ -13,7 +13,7 @@ void sub_8066D7C(struct Anim * anim, int b);
 void sub_8066E88(struct Anim * anim, int b);
 void sub_8066F04(struct Anim * anim, int b);
 void sub_8066F9C(struct Anim * anim, int b, int c);
-void sub_8067040(struct Anim * anim, int b);
+void StartSubSpell_efxLuceBGCOL(struct Anim * anim, int b);
 void EfxPlayHittedSFX(struct Anim * anim);
 
 void sub_8066B7C(struct ProcEfx * proc)
@@ -39,7 +39,7 @@ void sub_8066B7C(struct ProcEfx * proc)
     }
     else if (proc->timer == duration + 26)
     {
-        sub_8067040(anim, 0x72);
+        StartSubSpell_efxLuceBGCOL(anim, 0x72);
         SetBlendConfig(1, 0, 16, 0);
         NewEfxALPHA(anim, 10, 10, 0, 16, 0);
         PlaySFX(0x2C5, 0x100, 120, 0);

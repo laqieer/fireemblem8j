@@ -1,4 +1,4 @@
-/* NON_MATCHING: byte source is asm/sub_80A6D34.s @ JP 0x080A6D34 (region-different,
+/* NON_MATCHING: byte source is asm/DecodeLinkArenaRecordHeader.s @ JP 0x080A6D34 (region-different,
  * JP-only link-arena codec; carved_rom places those bytes). This C DOCUMENTS the
  * reconstruction and is NOT in make-compare: compiled only by `make nonmatching`.
  * near-match build flags: // FLAGS: -O2   (NOT -mjp-promote: no s16 args, verified
@@ -25,9 +25,9 @@
  * (default + tuned-weights runs); compute-bound and re-runnable on uncontended cores.
  *
  * Graduate via permuter/lever -> move to src/, add the -O2 CC1FLAGS line, flip the
- * carved_rom row (0A6D34 -> src/sub_80A6D34.o), drop asm/sub_80A6D34.s.
- * Proposed name: keep sub_80A6D34 (JP link-arena header decode). */
-// sub_80A6D34: JP-only "通信闘技場" (Link-Arena) record-codec header DECODE @ 0x080A6D34.
+ * carved_rom row (0A6D34 -> src/DecodeLinkArenaRecordHeader.o), drop asm/DecodeLinkArenaRecordHeader.s.
+ * Proposed name: keep DecodeLinkArenaRecordHeader (JP link-arena header decode). */
+// DecodeLinkArenaRecordHeader: JP-only "通信闘技場" (Link-Arena) record-codec header DECODE @ 0x080A6D34.
 // Exact inverse of the MATCHED same-TU sibling sub_80A6C60 (which ENCODES the same 30
 // header bits with the identical i%3 / i/3 / i%bits loop). De-obfuscates the packed
 // buffer (subtract rolling checksum, mask to (1<<bits)-1) then de-interleaves 30 bits
@@ -41,7 +41,7 @@ extern u8 gBuf_2014F28[];   /* 0x02014F28 packed buffer */
 u16 sub_80A6C20(u8 * buf, int len);
 void sub_80A6AC0(void);
 
-void sub_80A6D34(void)
+void DecodeLinkArenaRecordHeader(void)
 {
     int i;
     int j;

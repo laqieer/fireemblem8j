@@ -2,13 +2,13 @@
  * JP-only "通信闘技場" (Link-Arena) record codec; carved_rom places those bytes). This
  * C DOCUMENTS the reconstruction and is NOT in make-compare: compiled only by
  * `make nonmatching`.  near-match build flags: // FLAGS: -O2   (matches the whole
- * link-arena codec TU: siblings sub_80A6D34 / sub_80A6E4C are also -O2 residuals).
+ * link-arena codec TU: siblings DecodeLinkArenaRecordHeader / EncodeLinkArenaRecord are also -O2 residuals).
  *
  * Proposed name: DecodeAndVerifyArenaRecord (JP link-arena record DECODE + VERIFY).
- * This is the decode/verify counterpart of the ENCODE mirror sub_80A6E4C and calls
- * the header-DECODE leaf sub_80A6D34 (both same-TU JP-only codec funcs). Semantics
+ * This is the decode/verify counterpart of the ENCODE mirror EncodeLinkArenaRecord and calls
+ * the header-DECODE leaf DecodeLinkArenaRecordHeader (both same-TU JP-only codec funcs). Semantics
  * are proven correct against asm/sub_80A6F1C.s:
- *   1. sub_80A6D34()                         de-interleave the 3 header words
+ *   1. DecodeLinkArenaRecordHeader()                         de-interleave the 3 header words
  *   2. *(int*)0x02014F24 = hdr[0]            SEED the sub_80A6AA8 LCG from hdr word0
  *   3. chk  = sub_80A6C20(payload, hdr[3])   checksum of the STILL-obfuscated payload
  *   4. a    = sub_80A6AA8()                  1st PRNG snapshot (verify tag A)
@@ -22,12 +22,12 @@
  * i.e. "packet valid" iff both 10-bit verify tags in the header reconstruct.
  *
  * ===== EXACT BLOCKING CLASS: callback-in-a-high-reg via `_call_viaN` veneer =====
- * The callback pointer (arg0) MUST stay live ACROSS the sub_80A6D34 call, so agbcc
+ * The callback pointer (arg0) MUST stay live ACROSS the DecodeLinkArenaRecordHeader call, so agbcc
  * parks it in a callee-saved high register and invokes it through a thumb
  * `_call_via_rN` veneer.  The JP build picks r9 (sb) -> `bl _call_via_r9`
  * (0x080D65E0).  agbcc from portable C picks a DIFFERENT high reg -> a DIFFERENT
  * veneer symbol, so the linked bytes differ.  This is the SAME residual class the
- * sibling encode fn sub_80A6E4C documents (it parks its callback in r3 ->
+ * sibling encode fn EncodeLinkArenaRecord documents (it parks its callback in r3 ->
  * `_call_via_r3` @0x080D65C8; veneer table: r5@0D65D0 r6@0D65D4 r7@0D65D8, i.e.
  * base+reg*4, giving r9 = 0x080D65E0).  Two source-shape probes were run:
  *
@@ -44,7 +44,7 @@
  * Neither shape induces agbcc to (spill a,b as clean separate strh slots) AND
  * (color the callback specifically into r9).  That is a GLOBAL allocation decision
  * the JP build made that no source shape induces -- decomp-permuter territory,
- * identical in kind to the sub_80A6D34 plateau. NOT graduated: the linked-byte diff
+ * identical in kind to the DecodeLinkArenaRecordHeader plateau. NOT graduated: the linked-byte diff
  * is well beyond the ~10-byte cheap-permuter window (frame size, push count,
  * spill-vs-hold, veneer register), so no marathon was run.
  *
@@ -57,7 +57,7 @@
 extern int gUnk_02014EF0;   /* (1<<bits)-1 field mask */
 extern int gUnk_02014EF4;   /* header byte count      */
 
-void sub_80A6D34(void);            /* JP link-arena header DECODE (same TU)      */
+void DecodeLinkArenaRecordHeader(void);            /* JP link-arena header DECODE (same TU)      */
 u16 sub_80A6C20(u8 * buf, int len); /* rolling byte checksum                     */
 u16 sub_80A6AA8(void);              /* LCG PRNG seeded from *(int*)0x02014F24     */
 
@@ -73,7 +73,7 @@ int sub_80A6F1C(void (*consume)(int *, u8 *))
 
     cbarg = 0;
 
-    sub_80A6D34();
+    DecodeLinkArenaRecordHeader();
 
     base = (u16 *)0x02014FC8;
     *(int *)0x02014F24 = base[0];
