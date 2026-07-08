@@ -1,2 +1,5 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-A5A9B4	A5A9DC	src/data/data_08A5A9B4/data_08A5A9B4.o(.data.residue.08A5A9B4)	descriptive raw ROM data (40 B, byte-completeness D29)
+# byte-neutral SPLIT of data_08A5A9B4 into 4 named sub-objects (make compare oracle)
+A5A9B4	A5A9D0	src/data/data_08A5A9B4/data_08A5A9B4.o(.data.residue.08A5A9B4)	EventListScr_Ch2_Misc (28 B)
+A5A9D0	A5A9D4	src/data/data_08A5A9B4/data_08A5A9B4.o(.data.residue.08A5A9D0)	EventListScr_Ch2_SelectUnit (4 B)
+A5A9D4	A5A9D8	src/data/data_08A5A9B4/data_08A5A9B4.o(.data.residue.08A5A9D4)	EventListScr_Ch2_SelectDestination (4 B)
+A5A9D8	A5A9DC	src/data/data_08A5A9B4/data_08A5A9B4.o(.data.residue.08A5A9D8)	EventListScr_Ch2_UnitMove (4 B)
