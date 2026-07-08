@@ -1,9 +1,10 @@
-/* Migrated from asm/data_08A64C88.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral SPLIT of data_08A64C88 into 2 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.08A64C88, "aw", %progbits
-	.global data_08A64C88
-data_08A64C88:
+	.global EventScr_Ch6_3
+EventScr_Ch6_3:
 	.4byte 0x00001A23
 	.4byte 0x000B0540
 	.4byte 0xFFFFFFFF
@@ -12,6 +13,9 @@ data_08A64C88:
 	.4byte 0x00001B22
 	.4byte 0x00C10229
 	.4byte 0x00000120
+	.section .data.residue.08A64CA8, "aw", %progbits
+	.global EventScr_Ch6_4
+EventScr_Ch6_4:
 	.4byte 0x00020540
 	.4byte UnitDef_Ch6Enemy_0
 	.4byte 0x00000A40

@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A62340[];
+extern const u8 EventScr_Ch1Tut_AfterSethMoveToEnemy[];
 extern const u8 EventScr_Tutorial_Exec1[];
 
 SECTION(".rodata.dat_EventScr_Ch1Tut_BeforeSethMoveToEnemy_ref") EventListScr EventScr_Ch1Tut_BeforeSethMoveToEnemy[] = {
@@ -23,7 +23,7 @@ SECTION(".rodata.dat_EventScr_Ch1Tut_BeforeSethMoveToEnemy_ref") EventListScr Ev
     SENQUEUE1
     SVAL(EVT_SLOT_1, 0x80008)
     SENQUEUE1
-    SVAL(EVT_SLOT_1, data_08A62340)
+    SVAL(EVT_SLOT_1, EventScr_Ch1Tut_AfterSethMoveToEnemy)
     SENQUEUE1
     SVAL(EVT_SLOT_1, EventScr_Ch1Tut_BeforeSethMoveToEnemy)
     SENQUEUE1

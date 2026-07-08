@@ -11,7 +11,7 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 data_085B9BBC[];
-extern const u8 data_08A618F0[];
+extern const u8 EventScr_Prologue_9EF828[];
 extern const u8 EventScr_CallOnTutorialMode[];
 
 SECTION(".rodata.dat_EventScr_Prologue_GiveRapier_ref") EventListScr EventScr_Prologue_GiveRapier[] = {
@@ -25,7 +25,7 @@ SECTION(".rodata.dat_EventScr_Prologue_GiveRapier_ref") EventListScr EventScr_Pr
     CALL(data_085B9BBC + 0x168)
     SVAL(EVT_SLOT_3, 9)
     GIVEITEMTO(1)
-    SVAL(EVT_SLOT_2, data_08A618F0 + 0x70)
+    SVAL(EVT_SLOT_2, EventScr_Prologue_9EF828)
     CALL(EventScr_CallOnTutorialMode)
     ENDA
 };

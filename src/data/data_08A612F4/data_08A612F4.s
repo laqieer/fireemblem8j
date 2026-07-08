@@ -53,7 +53,7 @@ EventScr_Prologue_Turn2:
 	.global EventScr_Prologue_Turn3
 EventScr_Prologue_Turn3:
 	.4byte 0x00020540
-	.4byte data_08A61624 + 0x124
+	.4byte EventScr_Prologue_OneillSethBattle
 	.4byte 0x00000A40
 	.4byte EventScr_CallOnTutorialMode
 	.4byte 0x00020540

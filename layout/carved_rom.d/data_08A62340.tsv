@@ -1,2 +1,5 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-A62340	A623D8	src/data/data_08A62340/data_08A62340.o(.data.residue.08A62340)	descriptive raw ROM data (152 B, byte-completeness D29)
+# byte-neutral SPLIT of data_08A62340 into 4 named sub-objects (make compare oracle)
+A62340	A62374	src/data/data_08A62340/data_08A62340.o(.data.residue.08A62340)	EventScr_Ch1Tut_AfterSethMoveToEnemy (52 B)
+A62374	A623A8	src/data/data_08A62340/data_08A62340.o(.data.residue.08A62374)	EventScr_Ch1Tut_GuideOnBKSEL (52 B)
+A623A8	A623BC	src/data/data_08A62340/data_08A62340.o(.data.residue.08A623A8)	EventScr_Ch1Tut_AfterSethBattleEirikaVisit (20 B)
+A623BC	A623D8	src/data/data_08A62340/data_08A62340.o(.data.residue.08A623BC)	EventScr_Ch1Tut_MsgOnGuideOption (28 B)

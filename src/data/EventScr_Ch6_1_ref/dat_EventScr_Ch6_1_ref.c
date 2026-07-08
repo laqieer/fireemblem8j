@@ -12,7 +12,7 @@
 
 extern const u8 data_08A60354[];
 extern const u8 data_085B9BBC[];
-extern const u8 data_08A64C88[];
+extern const u8 EventScr_Ch6_3[];
 extern const u8 EventScr_CallOnTutorialMode[];
 
 SECTION(".rodata.dat_EventScr_Ch6_1_ref") EventListScr EventScr_Ch6_1[] = {
@@ -24,7 +24,7 @@ SECTION(".rodata.dat_EventScr_Ch6_1_ref") EventListScr EventScr_Ch6_1[] = {
     CALL(data_085B9BBC + 0x168)
     SVAL(EVT_SLOT_3, 0x6F)
     GIVEITEMTO(0xFFFF)
-    SVAL(EVT_SLOT_2, data_08A64C88)
+    SVAL(EVT_SLOT_2, EventScr_Ch6_3)
     CALL(EventScr_CallOnTutorialMode)
     EVBIT_T(7)
     ENDA

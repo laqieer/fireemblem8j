@@ -1,17 +1,21 @@
-/* Migrated from asm/data_08A63088.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral SPLIT of data_08A63088 into 2 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.08A63088, "aw", %progbits
-	.global data_08A63088
-data_08A63088:
+	.global EventScr_Ch2Tutorial19
+EventScr_Ch2Tutorial19:
 	.4byte 0x00070228
 	.4byte 0x00000D40
 	.4byte PlayPhaseForcePressAButtonInRangeDisp + 0x1
 	.4byte 0xFFFD3D20
 	.4byte 0x00001120
 	.4byte 0x00040B41
-	.4byte data_08A63088 + 0x20
+	.4byte EventScr_Ch2Tutorial20
 	.4byte 0x00000120
+	.section .data.residue.08A630A8, "aw", %progbits
+	.global EventScr_Ch2Tutorial20
+EventScr_Ch2Tutorial20:
 	.4byte 0x00070228
 	.4byte 0x00001120
 	.4byte 0x00001A23

@@ -44,6 +44,6 @@ EventScr_Ch1Tut_PostTradeAndItemUseAction:
 	.4byte 0x00001B22
 	.4byte 0x00003D20
 	.4byte 0x00000A40
-	.4byte data_08A62340 + 0x7C
+	.4byte EventScr_Ch1Tut_MsgOnGuideOption
 	.4byte 0x00070228
 	.4byte 0x00000120

@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A618F0[];
+extern const u8 EventScr_Prologue_TutorialC[];
 extern const u8 EventScr_Tutorial_Exec1[];
 
 SECTION(".rodata.dat_EventScr_Prologue_TutorialB_ref") EventListScr EventScr_Prologue_TutorialB[] = {
@@ -23,7 +23,7 @@ SECTION(".rodata.dat_EventScr_Prologue_TutorialB_ref") EventListScr EventScr_Pro
     SENQUEUE1
     SVAL(EVT_SLOT_1, 0x80058)
     SENQUEUE1
-    SVAL(EVT_SLOT_1, data_08A618F0)
+    SVAL(EVT_SLOT_1, EventScr_Prologue_TutorialC)
     SENQUEUE1
     SVAL(EVT_SLOT_1, EventScr_Prologue_TutorialB)
     SENQUEUE1

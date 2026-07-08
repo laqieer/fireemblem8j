@@ -54,8 +54,8 @@ EventListScr_Ch1_Tutorial:
 	.4byte EventScr_Ch1Tut_PostTradeAndItemUseAction
 	.4byte EventScr_Ch1Tut_SethMoveToEnemy
 	.4byte EventScr_Ch1Tut_BeforeSethMoveToEnemy
-	.4byte data_08A62340
-	.4byte data_08A62340 + 0x34
-	.4byte data_08A62340 + 0x68
+	.4byte EventScr_Ch1Tut_AfterSethMoveToEnemy
+	.4byte EventScr_Ch1Tut_GuideOnBKSEL
+	.4byte EventScr_Ch1Tut_AfterSethBattleEirikaVisit
 	.4byte 0x00000000
 /* de-pointered slice data_08A5A828: ptr=19 data=19 skip=0 */

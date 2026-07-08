@@ -5,7 +5,7 @@
 	.global data_08A5AE80
 data_08A5AE80:
 	.4byte 0x00000002
-	.4byte data_08A64C88 + 0x20
+	.4byte EventScr_Ch6_4
 	.4byte 0x00000004
 	.4byte 0x00000000
 	.4byte 0x00000000
