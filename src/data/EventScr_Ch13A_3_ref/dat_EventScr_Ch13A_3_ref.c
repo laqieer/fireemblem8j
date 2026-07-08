@@ -13,13 +13,13 @@
 extern const u8 UnitDef_Ch13AEnemy_3[];
 extern const u8 EventScr_LoadReinforce[];
 extern const u8 EventScr_LoadReinforceHardMode[];
-extern const u8 data_0890F2E0[];
+extern const u8 UnitDef_Ch13AEnemy_4[];
 
 SECTION(".rodata.dat_EventScr_Ch13A_3_ref") EventListScr EventScr_Ch13A_3[] = {
     MUSC(0x14)
     SVAL(EVT_SLOT_2, UnitDef_Ch13AEnemy_3)
     CALL(EventScr_LoadReinforce)
-    SVAL(EVT_SLOT_2, data_0890F2E0)
+    SVAL(EVT_SLOT_2, UnitDef_Ch13AEnemy_4)
     CALL(EventScr_LoadReinforceHardMode)
     CURSOR_CHAR(0x4F)
     STAL(0x3C)

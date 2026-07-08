@@ -5,7 +5,7 @@
 	.global EventScr_Ch13A_5
 EventScr_Ch13A_5:
 	.4byte 0x00020540
-	.4byte data_0890F2E0 + 0xC8
+	.4byte UnitDef_Ch13AEnemy_7
 	.4byte 0x00000A40
 	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
@@ -15,7 +15,7 @@ EventScr_Ch13A_5:
 	.global EventScr_Ch13A_6
 EventScr_Ch13A_6:
 	.4byte 0x00020540
-	.4byte data_0890F2E0 + 0x104
+	.4byte UnitDef_Ch13AEnemy_8
 	.4byte 0x00000A40
 	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
