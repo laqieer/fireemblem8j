@@ -4,7 +4,7 @@
 /* #148 proc-script decomp-completeness (frontier_df4_menu.c residual-INCBIN blobs).
  *
  * These proc scripts previously existed ONLY as baseline `.set` aliases pointing
- * into opaque `.incbin`+`.4byte` `__asm__` blob sections inside frontier_df4_menu.c
+ * into opaque `.incbin`+`.4byte` inline-asm blob sections inside frontier_df4_menu.c
  * (e.g. data_08A600B0 in `.data.frontier_df4_menu.gap5`) -- i.e. not decompiled,
  * and their opcode/imm words were raw INCBIN bytes (invisible to `make shiftcheck`).
  *

@@ -4,7 +4,7 @@
 /* #148 proc-script decomp-completeness (WAVE 1, frontier_df4_uistuff.c).
  *
  * These proc scripts previously existed ONLY as baseline `.set` aliases pointing
- * into opaque inline-hex `__asm__` INCBIN blobs (`.data.frontier_df4_uistuff.gapN`)
+ * into opaque inline-hex inline-asm INCBIN blobs (`.data.frontier_df4_uistuff.gapN`)
  * inside frontier_df4_uistuff.c -- i.e. not decompiled, and their interior code /
  * child-script pointers were raw un-relocated words (invisible to `make shiftcheck`,
  * a +0x40000 shifted-ROM "false floor").

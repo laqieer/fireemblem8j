@@ -1,7 +1,7 @@
 #include "global.h"
 #include "proc.h"
 
-/* #148 Wave 3 - typed proc-script tables carved from the opaque __asm__ blobs in
+/* #148 Wave 3 - typed proc-script tables carved from the opaque inline-asm blobs in
  * src/data/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c.c (Sio / LinkArena UI).
  * Byte-identical to the original blob words (make compare sha1 is the oracle); placed by
  * layout/carved_rom.d/data_frontier3_df3_data_5aa96c.tsv. Generated via depoint_procscr.py. */
