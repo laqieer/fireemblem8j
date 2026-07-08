@@ -12,7 +12,9 @@
 
 extern const u8 EventScr_SetBackground[];
 extern const u8 Event_TextWithBG[];
-extern const u8 data_08908958[];
+extern const u8 UnitDef_Ch2Ally[];
+extern const u8 UnitDef_Ch2NPC[];
+extern const u8 UnitDef_Ch2Enemy_2[];
 extern const u8 UnitDef_Ch2Enemy_0[];
 extern const u8 EventScr_Ch2_Village2[];
 extern const u8 EventScr_CallOnTutorialMode[];
@@ -28,12 +30,12 @@ SECTION(".rodata.dat_EventScr_Ch2_BeginningScene_ref") EventListScr EventScr_Ch2
     FADI(0x10)
     CLEAN
     FADU(0x10)
-    LOAD1(1, data_08908958 + 0x3C)
+    LOAD1(1, UnitDef_Ch2Ally)
     ENUN
     EvtBgmFadeIn(0x7FFF, 4)
     LOAD1(1, UnitDef_Ch2Enemy_0)
     ENUN
-    LOAD1(1, data_08908958 + 0xDC)
+    LOAD1(1, UnitDef_Ch2Enemy_2)
     ENUN
     STAL2(0x3C)
     MUSC(0x1A)
@@ -71,7 +73,7 @@ SECTION(".rodata.dat_EventScr_Ch2_BeginningScene_ref") EventListScr EventScr_Ch2
     TILECHANGE(0xFFFF)
     SOUN(0x5C)
     NOTIFY(0x6E2, 0)
-    LOAD1(1, data_08908958 + 0x64)
+    LOAD1(1, UnitDef_Ch2NPC)
     ENUN
     SVAL(EVT_SLOT_1, 5)
     SET_HP(7)

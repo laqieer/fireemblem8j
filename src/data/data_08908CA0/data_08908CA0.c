@@ -1,6 +1,6 @@
 #include "global.h"
 
-extern const u8 data_08908958[];
+extern const u8 REDA_Ch3NPC_COLM[];
 
 /* Migrated from asm/data_08908CA0.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
@@ -9,7 +9,7 @@ extern const u8 data_08908958[];
 u32 UnitDef_Ch3NPC[] __attribute__((section(".data.residue.08908CA0"))) = {
     0x12000D09,
     0x01000140,
-    (u32)&data_08908958 + 0x19C,
+    (u32)&REDA_Ch3NPC_COLM,
     0x006C6B01,
     0x00080506,
     0x00000000,

@@ -937,7 +937,7 @@ extern const u8 UnitDef_UnusedAlly[];
 extern const u8 UnitDef_UnusedMixed_0[];
 extern const u8 UnitDef_UnusedMixed_1[];
 extern const u8 data_085B9BBC[];
-extern const u8 data_08908958[];
+extern const u8 UnitDef_LordSplitAlly[];
 extern const u8 UnitDef_Ch8NPC[];
 extern const u8 UnitDef_Ch8Enemy_5[];
 extern const u8 UnitDef_Ch8Enemy_6[];
@@ -3561,7 +3561,7 @@ EventListScr frontier_df4_menu_011_A71268[] __attribute__((section(".data.fronti
     TEXTEND
     REMA
     FADI(0x10)
-    LOAD1(1, data_08908958)
+    LOAD1(1, UnitDef_LordSplitAlly)
     ENUN
     ENUT(0x8A)
     MNCH(2)
