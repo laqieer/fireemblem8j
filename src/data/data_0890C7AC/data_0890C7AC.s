@@ -6,7 +6,7 @@
 UnitDef_Ch9AEnemy_10:
 	.4byte 0x0D0040C5
 	.4byte 0x010000C6
-	.4byte data_0890C0A4 + 0xD0
+	.4byte REDA_Ch9AEnemy_10_FADO
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000

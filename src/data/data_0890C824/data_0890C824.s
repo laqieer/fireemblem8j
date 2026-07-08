@@ -6,7 +6,7 @@
 data_0890C824:
 	.4byte 0x080148CC
 	.4byte 0x0200010C
-	.4byte data_0890C0A4 + 0xE0
+	.4byte REDA_Ch9AAlly_1_MESSENGER
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
