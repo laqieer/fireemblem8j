@@ -3,7 +3,7 @@
 
 extern void PhaseIntroInitText(ProcPtr proc);
 extern void PhaseIntroText_PutText(ProcPtr proc);
-extern u16 obj_Phasechangefx_0[];
+extern struct ProcCmd gProcScr_PhaseIntroUnk[];
 extern void PhaseIntroText_InLoop(ProcPtr proc);
 extern void PhaseIntroText_OutLoop(ProcPtr proc);
 extern void PhaseIntroClearText(ProcPtr proc);
@@ -12,7 +12,7 @@ struct ProcCmd gProcScr_PhaseIntroText[] __attribute__((section(".rodata.dat_gPr
     PROC_CALL(PhaseIntroInitText),
     PROC_SLEEP(6),
     PROC_CALL(PhaseIntroText_PutText),
-    PROC_START_CHILD((struct ProcCmd*)((u8*)obj_Phasechangefx_0 + 0x20)),
+    PROC_START_CHILD(gProcScr_PhaseIntroUnk),
     PROC_REPEAT(PhaseIntroText_InLoop),
     PROC_SLEEP(0x1E),
     PROC_REPEAT(PhaseIntroText_OutLoop),
