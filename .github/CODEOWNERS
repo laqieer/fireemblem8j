@@ -1,0 +1,20 @@
+# Code owners — these paths require @laqieer review before merge.
+# Rationale (SECURITY.md): the `make compare` byte oracle vets the ROM, but NOT code that runs at
+# BUILD or CI time. Changes to the build system, tooling, and CI can execute arbitrary code even
+# while `make compare` stays green, so they get mandatory human review.
+
+# Build system & CI (highest risk — runs code in CI)
+/Makefile                @laqieer
+/.github/                @laqieer
+/scripts/                @laqieer
+/tools/                  @laqieer
+/graphics/**/*.mk        @laqieer
+
+# Layout / manifest glue (drives what gets linked and where)
+/layout/                 @laqieer
+
+# Project governance
+/SECURITY.md             @laqieer
+/CONTRIBUTING.md         @laqieer
+/CODEOWNERS              @laqieer
+/.github/CODEOWNERS      @laqieer
