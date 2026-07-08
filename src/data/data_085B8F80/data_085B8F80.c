@@ -42,18 +42,15 @@ extern void FaceChange_LoadGfx();
 extern void FaceChange_Finish();
 
 /* Lead [0x085B8F80,0x085B8F9C) (28 B): non-pointer gfx/OAM data, byte-identical. */
-__asm__(
-"\t.section .data.residue.085B8F80, \"aw\", %progbits\n"
-"\t.global data_085B8F80\n"
-"data_085B8F80:\n"
-"\t.4byte 0x40000002\n"
-"\t.4byte 0x00008000\n"
-"\t.4byte 0x80004010\n"
-"\t.4byte 0x00020004\n"
-"\t.4byte 0x90004000\n"
-"\t.4byte 0x40100000\n"
-"\t.4byte 0x00049000\n"
-);
+u32 data_085B8F80[] __attribute__((section(".data.residue.085B8F80"))) = {
+    0x40000002,
+    0x00008000,
+    0x80004010,
+    0x00020004,
+    0x90004000,
+    0x40100000,
+    0x00049000,
+};
 
 struct ProcCmd gProcScr_Face_0[] __attribute__((section(".rodata.dat_gProcScr_Face_0_ref"))) = {
     PROC_CALL(FaceBgBlink_Init),

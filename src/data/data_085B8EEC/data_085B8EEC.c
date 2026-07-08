@@ -39,12 +39,10 @@ struct ProcCmd gProcScr_E_FACE_ExtraFrame[] __attribute__((section(".rodata.dat_
 };
 
 /* residue [085B8F5C,085B8F70) (20 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.085B8F5C, \"aw\", %progbits\n"
-"data_085B8F5C:\n"
-"\t.4byte 0x01000404\n"
-"\t.4byte 0x05040302\n"
-"\t.4byte 0x09080706\n"
-"\t.4byte 0x0D0C0B0A\n"
-"\t.4byte 0x00000F0E\n"
-);
+u32 data_085B8F5C[] __attribute__((section(".data.residue.085B8F5C"))) = {
+    0x01000404,
+    0x05040302,
+    0x09080706,
+    0x0D0C0B0A,
+    0x00000F0E,
+};
