@@ -211,7 +211,6 @@ src/data/bg/dat_data_bg_p6.o: graphics/gfx_data_bg/bg_Port_map.bin graphics/reus
 src/data/bg/dat_data_bg_p7.o: graphics/reuse/bg_Ship_palette.gbapal
 src/data/bg/dat_data_bg_p8.o: graphics/reuse/bg_Fireplace_palette.gbapal
 src/data/bg/dat_data_bg_p9.o: graphics/reuse/bg_Castle_Interior_palette.gbapal graphics/reuse/bg_Castle_Night_palette.gbapal
-src/data/bldyLut_10_ref/dat_bldyLut_10_ref.o: data/residual/bldyLut.10.bin
 src/data/btl_bg/dat_data_btl_bg.o: graphics/btl_bg/btl_bg_10.feimg3.bin.lz graphics/btl_bg/btl_bg_10.fetsa3.bin.lz graphics/btl_bg/btl_bg_10.gbapal.lz graphics/btl_bg/btl_bg_11.feimg3.bin.lz graphics/btl_bg/btl_bg_11.fetsa3.bin.lz graphics/btl_bg/btl_bg_11.gbapal.lz graphics/btl_bg/btl_bg_12.feimg3.bin.lz graphics/btl_bg/btl_bg_12.fetsa3.bin.lz graphics/btl_bg/btl_bg_12.gbapal.lz graphics/btl_bg/btl_bg_13.feimg3.bin.lz graphics/btl_bg/btl_bg_13.fetsa3.bin.lz graphics/btl_bg/btl_bg_13.gbapal.lz graphics/btl_bg/btl_bg_14.feimg3.bin.lz graphics/btl_bg/btl_bg_14.fetsa3.bin.lz graphics/btl_bg/btl_bg_14.gbapal.lz graphics/btl_bg/btl_bg_15.feimg3.bin.lz graphics/btl_bg/btl_bg_15.fetsa3.bin.lz graphics/btl_bg/btl_bg_15.gbapal.lz graphics/btl_bg/btl_bg_16.gbapal.lz graphics/btl_bg/btl_bg_17.gbapal.lz graphics/btl_bg/btl_bg_18.gbapal.lz graphics/btl_bg/btl_bg_19.gbapal.lz graphics/btl_bg/btl_bg_20.gbapal.lz graphics/btl_bg/btl_bg_21.gbapal.lz graphics/btl_bg/btl_bg_22.gbapal.lz graphics/btl_bg/btl_bg_23.gbapal.lz graphics/btl_bg/btl_bg_24.gbapal.lz graphics/btl_bg/btl_bg_25.gbapal.lz graphics/btl_bg/btl_bg_26.gbapal.lz graphics/btl_bg/btl_bg_27.feimg3.bin.lz graphics/btl_bg/btl_bg_27.fetsa3.bin.lz graphics/btl_bg/btl_bg_27.gbapal.lz graphics/btl_bg/btl_bg_28.gbapal.lz graphics/btl_bg/btl_bg_29.gbapal.lz graphics/btl_bg/btl_bg_30.gbapal.lz graphics/btl_bg/btl_bg_31.gbapal.lz graphics/btl_bg/btl_bg_32.feimg3.bin.lz graphics/btl_bg/btl_bg_32.fetsa3.bin.lz graphics/btl_bg/btl_bg_32.gbapal.lz graphics/btl_bg/btl_bg_33.feimg3.bin.lz graphics/btl_bg/btl_bg_33.fetsa3.bin.lz graphics/btl_bg/btl_bg_33.gbapal.lz graphics/btl_bg/btl_bg_34.gbapal.lz graphics/btl_bg/btl_bg_35.gbapal.lz graphics/btl_bg/btl_bg_36.gbapal.lz graphics/btl_bg/btl_bg_37.gbapal.lz graphics/btl_bg/btl_bg_38.gbapal.lz graphics/btl_bg/btl_bg_39.gbapal.lz graphics/btl_bg/btl_bg_40.gbapal.lz graphics/btl_bg/btl_bg_41.gbapal.lz graphics/btl_bg/btl_bg_42.gbapal.lz graphics/btl_bg/btl_bg_43.gbapal.lz graphics/btl_bg/btl_bg_44.gbapal.lz graphics/btl_bg/btl_bg_45.feimg3.bin.lz graphics/btl_bg/btl_bg_45.fetsa3.bin.lz graphics/btl_bg/btl_bg_45.gbapal.lz graphics/btl_bg/btl_bg_46.feimg3.bin.lz graphics/btl_bg/btl_bg_46.fetsa3.bin.lz graphics/btl_bg/btl_bg_46.gbapal.lz graphics/btl_bg/btl_bg_47.feimg3.bin.lz graphics/btl_bg/btl_bg_47.fetsa3.bin.lz graphics/btl_bg/btl_bg_47.gbapal.lz graphics/btl_bg/btl_bg_48.gbapal.lz graphics/btl_bg/btl_bg_49.gbapal.lz graphics/btl_bg/btl_bg_50.gbapal.lz
 src/data/btl_bg/data_btl_bg_p0.o: graphics/btl_bg/btl_bg_0.feimg3.bin.lz graphics/btl_bg/btl_bg_0.fetsa3.bin.lz graphics/btl_bg/btl_bg_0.gbapal.lz graphics/btl_bg/btl_bg_1.feimg3.bin.lz
 src/data/btl_bg/data_btl_bg_p1.o: graphics/btl_bg/btl_bg_1.fetsa3.bin.lz graphics/btl_bg/btl_bg_2.feimg3.bin.lz graphics/btl_bg/btl_bg_2.fetsa3.bin.lz graphics/btl_bg/btl_bg_2.gbapal.lz graphics/btl_bg/btl_bg_3.feimg3.bin.lz graphics/btl_bg/btl_bg_3.fetsa3.bin.lz graphics/btl_bg/btl_bg_3.gbapal.lz graphics/btl_bg/btl_bg_4.feimg3.bin.lz graphics/btl_bg/btl_bg_4.fetsa3.bin.lz graphics/btl_bg/btl_bg_4.gbapal.lz graphics/btl_bg/btl_bg_5.feimg3.bin.lz graphics/btl_bg/btl_bg_5.fetsa3.bin.lz graphics/btl_bg/btl_bg_5.gbapal.lz
@@ -332,7 +331,6 @@ src/data/const_data_unit_icon_move/dat_const_data_unit_icon_move_p96.o: graphics
 src/data/const_data_unit_icon_move/dat_const_data_unit_icon_move_p97.o: graphics/unit_icon/move/unit_icon_move_Queen_2_sheet.4bpp.lz
 src/data/const_data_unit_icon_move/dat_const_data_unit_icon_move_p98.o: graphics/unit_icon/move/unit_icon_move_Unk77_sheet.4bpp.lz
 src/data/const_data_unit_icon_move/dat_const_data_unit_icon_move_p99.o: graphics/unit_icon/move/unit_icon_move_Fallen_Prince_sheet.4bpp.lz
-src/data/data/data_08048798.o: data/residual/data_08048798.bin
 src/data/data/data_08576124.o: graphics/data/data_08576124_576150.bin
 src/data/data/data_08594374.o: data/residual/data_08594374.bin
 src/data/data/data_08595474.o: data/residual/data_08595474.bin
@@ -344,18 +342,12 @@ src/data/data/data_08636294.o: data/residual/data_08636294.bin
 src/data/data/data_08663218.o: graphics/reuse/data_08663218.gbapal
 src/data/data/data_08713018.o: graphics/reuse/data_08713018.gbapal
 src/data/data/data_08718440.o: data/residual/data_08718440.bin
-src/data/data/data_08908228.o: data/residual/data_08908228.bin
 src/data/data_080DC104/data_080DC104.o: data/residual/data_080DC104.bin
 src/data/data_080DC144/data_080DC144.o: data/residual/data_080DC144.bin
 src/data/data_080DCDAC/data_080DCDAC.o: data/residual/data_080DCDAC.bin
-src/data/data_080E0008/data_080E0008.o: data/residual/data_080E0008.bin
 src/data/data_0819EADC/data_0819EADC.o: data/residual/data_0819EADC.bin
 src/data/data_081A00C8/data_081A00C8.o: data/residual/data_081A00C8.bin
 src/data/data_081A6774/data_081A6774.o: data/residual/data_081A6774.bin
-src/data/data_081F64C0/data_081F64C0.o: data/residual/data_081F64C0.bin
-src/data/data_081F65C0/data_081F65C0.o: data/residual/data_081F65C0.bin
-src/data/data_081F66A4/data_081F66A4.o: data/residual/data_081F66A4.bin
-src/data/data_0857742E/data_0857742E.o: data/residual/data_0857742E.bin
 src/data/data_085775C9/data_085775C9.o: data/residual/data_085775C9.bin
 src/data/data_08579D4C/data_08579D4C.o: data/residual/data_08579D4C.bin
 src/data/data_0857B1AC/data_0857B1AC.o: data/residual/data_0857B1AC.bin
@@ -379,7 +371,6 @@ src/data/data_085CBFA4/data_085CBFA4.o: graphics/reuse/data_085CBFA4.4bpp.lz
 src/data/data_085E3724/data_085E3724.o: data/residual/data_085E3724.bin
 src/data/data_085F3338/data_085F3338.o: data/residual/data_085F3338.bin
 src/data/data_085FC068/data_085FC068.o: data/residual/data_085FC068.bin
-src/data/data_085FE358/data_085FE358.o: data/residual/data_085FE358.bin
 src/data/data_0860E028/data_0860E028.o: data/residual/data_0860E028.bin
 src/data/data_0860E394/data_0860E394.o: data/residual/data_0860E394.bin
 src/data/data_08613A6C/data_08613A6C.o: data/residual/data_08613A6C_0.map.bin.lz data/residual/data_08613A6C_1.map.bin.lz
@@ -405,11 +396,9 @@ src/data/data_086A3BCC/data_086A3BCC.o: data/residual/data_086A3BCC.bin
 src/data/data_086A3E90/data_086A3E90.o: data/residual/data_086A3E90.bin
 src/data/data_086AC554/data_086AC554.o: data/residual/data_086AC554_0.map.bin.lz data/residual/data_086AC554_1.map.bin.lz
 src/data/data_086B7E10/data_086B7E10.o: data/residual/data_086B7E10.bin
-src/data/data_086B8608/data_086B8608.o: data/residual/data_086B8608.bin
 src/data/data_086B87AC/data_086B87AC.o: data/residual/data_086B87AC.bin
 src/data/data_086BA1E4/data_086BA1E4.o: data/residual/data_086BA1E4.bin
 src/data/data_086BAB74/data_086BAB74.o: data/residual/data_086BAB74_0.map.bin.lz data/residual/data_086BAB74_1.map.bin.lz
-src/data/data_086BB064/data_086BB064.o: data/residual/data_086BB064.bin
 src/data/data_086BCCD8/data_086BCCD8.o: data/residual/data_086BCCD8.bin
 src/data/data_086BFC18/data_086BFC18.o: data/residual/data_086BFC18.bin
 src/data/data_086C0290/data_086C0290.o: data/residual/data_086C0290.bin
@@ -423,20 +412,13 @@ src/data/data_0872C194/data_0872C194.o: data/residual/data_0872C194.bin
 src/data/data_0872CC70/data_0872CC70.o: data/residual/data_0872CC70.bin
 src/data/data_087644A8/data_087644A8.o: data/residual/data_087644A8_0.map.bin.lz
 src/data/data_08764BF4/data_08764BF4.o: data/residual/data_08764BF4_0.map.bin.lz
-src/data/data_0877B894/data_0877B894.o: data/residual/data_0877B894.bin
 src/data/data_087A2494/data_087A2494.o: data/residual/data_087A2494.bin
 src/data/data_087AEA64/data_087AEA64.o: data/residual/data_087AEA64_0.gbapal.lz
 src/data/data_087E1718/data_087E1718.o: data/residual/data_087E1718_0.gbapal.lz
-src/data/data_0885612C/data_0885612C.o: data/residual/data_0885612C.bin
-src/data/data_0890375C/data_0890375C.o: data/residual/data_0890375C.bin
-src/data/data_089084A8/data_089084A8.o: data/residual/data_089084A8.bin
 src/data/data_08908CA0/data_08908CA0.o: data/residual/data_08908CA0.bin
 src/data/data_0890A320/data_0890A320.o: data/residual/data_0890A320.bin
-src/data/data_0890A3D4/data_0890A3D4.o: data/residual/data_0890A3D4.bin
-src/data/data_0890A480/data_0890A480.o: data/residual/data_0890A480.bin
 src/data/data_0890BC70/data_0890BC70.o: data/residual/data_0890BC70.bin
 src/data/data_0890BD24/data_0890BD24.o: data/residual/data_0890BD24.bin
-src/data/data_0890C6A8/data_0890C6A8.o: data/residual/data_0890C6A8.bin
 src/data/data_0890C914/data_0890C914.o: data/residual/data_0890C914.bin
 src/data/data_08925BF8/data_08925BF8.o: data/residual/data_08925BF8.bin
 src/data/data_08925CD4/data_08925CD4.o: data/residual/data_08925CD4.bin
@@ -449,17 +431,13 @@ src/data/data_08A61B60/data_08A61B60.o: data/residual/data_08A61B60.bin
 src/data/data_08A61C70/data_08A61C70.o: data/residual/data_08A61C70.bin
 src/data/data_08A61F60/data_08A61F60.o: data/residual/data_08A61F60.bin
 src/data/data_08A62134/data_08A62134.o: data/residual/data_08A62134.bin
-src/data/data_08A62734/data_08A62734.o: data/residual/data_08A62734.bin
 src/data/data_08A632C8/data_08A632C8.o: data/residual/data_08A632C8.bin
-src/data/data_08A63894/data_08A63894.o: data/residual/data_08A63894.bin
 src/data/data_08A63D0C/data_08A63D0C.o: data/residual/data_08A63D0C.bin
 src/data/data_08A642F0/data_08A642F0.o: data/residual/data_08A642F0.bin
 src/data/data_08A64420/data_08A64420.o: data/residual/data_08A64420.bin
 src/data/data_08A64E30/data_08A64E30.o: data/residual/data_08A64E30.bin
 src/data/data_08A64FA0/data_08A64FA0.o: data/residual/data_08A64FA0.bin
-src/data/data_08A66080/data_08A66080.o: data/residual/data_08A66080.bin
 src/data/data_08A66A00/data_08A66A00.o: data/residual/data_08A66A00.bin
-src/data/data_08A67B00/data_08A67B00.o: data/residual/data_08A67B00.bin
 src/data/data_08A71BF0/data_08A71BF0.o: data/residual/data_08A71BF0.bin
 src/data/data_08A71C60/data_08A71C60.o: data/residual/data_08A71C60.bin
 src/data/data_08A71FC0/data_08A71FC0.o: data/residual/data_08A71FC0.bin
@@ -601,7 +579,6 @@ src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1636.o: graphics/reuse/gMenuMa
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1637.o: graphics/gmapunit/Img_SoundRoomVolumeGraph.4bpp.lz graphics/gmapunit/Pal_SoundRoomVolumeGraph.gbapal graphics/misc/gMenuSoundroom_0.tsa.bin graphics/misc/gMenuSoundroom_1.tsa.bin graphics/misc/gMenuSoundroom_2.tsa.bin graphics/misc/gMenuSoundroom_4.tsa.bin graphics/reuse/gMenuSoundroom_3.4bpp.lz
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1638.o: graphics/gmapunit/Img_ChapterStatusSelectorSprite.4bpp.lz graphics/gmapunit/Img_PlayStatusSprites.4bpp.lz graphics/gmapunit/Pal_PlayStatusSprites.gbapal
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p1639.o: graphics/gmapunit/Img_MenuStatus_0.4bpp.lz graphics/gmapunit/Img_SysBlackBox.4bpp.lz graphics/gmapunit/Pal_MenuStatus_0.gbapal graphics/misc/gMenuStatus_0.gbapal
-src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p5.o: data/residual/chance_lut.3.bin
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p723.o: graphics/gmapunit/Img_DanceringFx.4bpp.lz graphics/gmapunit/Img_EventWarp.4bpp.lz graphics/gmapunit/Pal_DanceringFx.gbapal graphics/gmapunit/Pal_EventWarp.gbapal graphics/gmapunit/Tsa_DanceringFx.4bpp.lz graphics/gmapunit/Tsa_EventWarp.4bpp.lz graphics/gmapunit/Tsa_PlayerRankFog.bin graphics/reuse/gParticlesFx_6.4bpp.lz graphics/reuse/gParticlesFx_7.4bpp
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p724.o: graphics/gmapunit/Img_MineFx.4bpp.lz
 src/data/worldmap_gmapunit/dat_worldmap_gmapunit_p751.o: graphics/gmapunit/Img_SysGrayBox.4bpp.lz graphics/gmapunit/gLegacyUiFrameDPalette.gbapal graphics/gmapunit/gUiBarPaletteD.gbapal graphics/gmapunit/gUnkUiFramePalettes.gbapal graphics/reuse/gUnkUiFrameImage.4bpp.lz

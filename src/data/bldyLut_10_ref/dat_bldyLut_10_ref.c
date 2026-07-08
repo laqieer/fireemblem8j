@@ -14,8 +14,11 @@ extern void SubtitleHelpDarkener_Init(ProcPtr proc);
 extern void SubtitleHelpDarkener_FadeIn(ProcPtr proc);
 extern void SubtitleHelpDarkener_FadeOut(ProcPtr proc);
 
-SECTION(".rodata.dat_bldyLut_10_ref") const u8 SubtitleHelpDarkener_BldyLut[] =
-    INCBIN_U8("data/residual/bldyLut.10.bin", 0, 34);
+SECTION(".rodata.dat_bldyLut_10_ref") const u8 SubtitleHelpDarkener_BldyLut[] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07,
+    0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x07, 0x00, 0x00,
+};
 
 SECTION(".rodata.gProcScr_SubtitleHelpDarkener") struct ProcCmd gProcScr_SubtitleHelpDarkener[] = {
     PROC_END_DUPLICATES,                          /* 5C6668  17 */
