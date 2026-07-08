@@ -49,10 +49,7 @@ struct ProcCmd ProcScr_SysBrownBox[] __attribute__((section(".rodata.dat_ProcScr
 };
 
 /* Byte-neutral external alias: data_08A9DCD4 == ProcScr_SysBrownBox (0x08A9DCD4). */
-__asm__(
-"\t.global data_08A9DCD4\n"
-"\t.set data_08A9DCD4, ProcScr_SysBrownBox\n"
-);
+extern const u32 data_08A9DCD4 __attribute__((alias("ProcScr_SysBrownBox")));
 
 struct ProcCmd ProcScr_SysboxText[] __attribute__((section(".rodata.dat_ProcScr_SysboxText_ref"))) = {
     PROC_YIELD,
@@ -86,10 +83,7 @@ struct ProcCmd ProcScr_BmBgfx[] __attribute__((section(".rodata.dat_ProcScr_BmBg
 };
 
 /* Byte-neutral external alias: data_08A9DD64 == ProcScr_BmBgfx (0x08A9DD64). */
-__asm__(
-"\t.global data_08A9DD64\n"
-"\t.set data_08A9DD64, ProcScr_BmBgfx\n"
-);
+extern const u32 data_08A9DD64 __attribute__((alias("ProcScr_BmBgfx")));
 
 /* Trail [0x08A9DD8C,0x08A9DDDC) (80 B): two un-named scripts (MixPalette +
  * BonusClaimHelp) kept as a relocated `.4byte` slice. */

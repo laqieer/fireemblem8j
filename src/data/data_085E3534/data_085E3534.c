@@ -37,12 +37,9 @@ struct ProcCmd ProcScr_ekrGauge[] __attribute__((section(".rodata.dat_ProcScr_ek
 };
 
 /* residue [085E3534,085E3580) (76 B): byte-identical. */
-__asm__(
-    ".section .data.residue.085E3534, \"aw\", %progbits\n"
-    "	.global data_085E3534\n"
-    "data_085E3534:\n"
-    "	.4byte 0x00000000\n"
-);
+u32 data_085E3534[] __attribute__((section(".data.residue.085E3534"))) = {
+    0x00000000,
+};
 
 struct ProcCmd ProcScr_ekrBattleDeamon_Destructor_085E3534_0[] SECTION(".data.residue.085E3534") = {
     PROC_NAME(frontier_df4_misc_lo_005_0DF388 + 0x8),
@@ -61,28 +58,26 @@ struct ProcCmd ProcScr_Nop_BanimEkrbattle_1_085E3534_1[] SECTION(".data.residue.
 
 
 /* residue [085E35B0,085E3604) (84 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.085E35B0, \"aw\", %progbits\n"
-"data_085E35B0:\n"
-"\t.4byte 0x40004000\n"
-"\t.4byte 0x00000180\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x40004000\n"
-"\t.4byte 0x00200184\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00004000\n"
-"\t.4byte 0x00400188\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0050018A\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00004000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+u32 data_085E35B0[] __attribute__((section(".data.residue.085E35B0"))) = {
+    0x40004000,
+    0x00000180,
+    0x00000000,
+    0x40004000,
+    0x00200184,
+    0x00000000,
+    0x00004000,
+    0x00400188,
+    0x00000000,
+    0x00000000,
+    0x0050018A,
+    0x00000000,
+    0x00000001,
+    0x00000000,
+    0x00000000,
+    0x00004000,
+    0x00000000,
+    0x00000000,
+    0x00000001,
+    0x00000000,
+    0x00000000,
+};

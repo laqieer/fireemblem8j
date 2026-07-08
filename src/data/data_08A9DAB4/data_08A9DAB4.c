@@ -1,6 +1,8 @@
 #include "global.h"
 #include "proc.h"
 
+extern const u8 ParallelWorker_OnLoop[];
+
 
 extern void SysGrayBox_Init();
 extern void SysGrayBox_Loop();
@@ -49,17 +51,14 @@ struct ProcCmd gProcScr_UiCursorHand[] __attribute__((section(".rodata.dat_gProc
     PROC_END,
 };
 
-__asm__(
-    ".section .data.residue.08A9DAE4, \"aw\", %progbits\n"
-    "	.global data_08A9DAE4\n"
-    "data_08A9DAE4:\n"
-    "	.4byte 0x00000002\n"
-    "	.4byte 0x00000000\n"
-    "	.4byte 0x00000008\n"
-    "	.4byte 0x00010006\n"
-    "	.4byte 0x00004000\n"
-    "	.4byte 0x00000000\n"
-);
+u32 data_08A9DAE4[] __attribute__((section(".data.residue.08A9DAE4"))) = {
+    0x00000002,
+    0x00000000,
+    0x00000008,
+    0x00010006,
+    0x00004000,
+    0x00000000,
+};
 
 struct ProcCmd ProcScr_UiSpinningArrows_Init_08A9DAE4_0[] SECTION(".data.residue.08A9DAE4") = {
     PROC_CALL(UiSpinningArrows_Init + 0x1),
@@ -86,17 +85,14 @@ struct ProcCmd ProcScr_SysBlackBox[] __attribute__((section(".rodata.dat_ProcScr
 };
 
 /* Gap [0x08A9DB6C,0x08A9DB84) (24 B): un-named ParallelWorker script. */
-__asm__(
-"\t.section .data.residue.08A9DB6C, \"aw\", %progbits\n"
-"\t.global data_08A9DB6C\n"
-"data_08A9DB6C:\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte ParallelWorker_OnLoop + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+u32 data_08A9DB6C[] __attribute__((section(".data.residue.08A9DB6C"))) = {
+    0x0000000E,
+    0x00000000,
+    0x00000003,
+    (u32)&ParallelWorker_OnLoop + 0x1,
+    0x00000000,
+    0x00000000,
+};
 
 struct ProcCmd ProcScr_SysHandCtrl[] __attribute__((section(".rodata.dat_ProcScr_SysHandCtrl_ref"))) = {
     PROC_CALL(SysHandCursor_Init),
@@ -109,10 +105,7 @@ struct ProcCmd ProcScr_SysHandCtrl[] __attribute__((section(".rodata.dat_ProcScr
 
 /* Byte-neutral external alias: data_08A9DB84 == ProcScr_SysHandCtrl (0x08A9DB84),
  * Proc_Find'd by sub_80B2034.c. */
-__asm__(
-"\t.global data_08A9DB84\n"
-"\t.set data_08A9DB84, ProcScr_SysHandCtrl\n"
-);
+extern const u32 data_08A9DB84 __attribute__((alias("ProcScr_SysHandCtrl")));
 
 /* Trail [0x08A9DBB4,0x08A9DBCC) (24 B): un-named SysGrayBox script. */
 struct ProcCmd data_08A9DBB4[] SECTION(".data.residue.08A9DBB4") = {

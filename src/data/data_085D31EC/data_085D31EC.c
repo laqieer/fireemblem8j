@@ -1,6 +1,9 @@
 #include "global.h"
 #include "proc.h"
 
+extern const u8 Sio_LoadingBlendPulse_Init[];
+extern const u8 Sio_LoadingBlendPulse_Loop[];
+
 /* #148 proc-script decomp-completeness: data_085D31EC (SIO big-transfer scripts).
  *
  * Five proc scripts previously existed ONLY as raw `.4byte` residue words in the
@@ -76,15 +79,12 @@ struct ProcCmd ProcScr_SIOMAIN[] __attribute__((section(".rodata.dat_ProcScr_SIO
 
 /* Tail [0x085D32A4,0x085D32C0): raw EWRAM word (0x02020188) + un-named 3-command
  * proc script (CALL/REPEAT/END) whose two func pointers stay relocated. */
-__asm__(
-"\t.section .data.residue.085D32A4, \"aw\", %progbits\n"
-"\t.global data_085D32A4\n"
-"data_085D32A4:\n"
-"\t.4byte 0x02020188\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte Sio_LoadingBlendPulse_Init + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte Sio_LoadingBlendPulse_Loop + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+u32 data_085D32A4[] __attribute__((section(".data.residue.085D32A4"))) = {
+    0x02020188,
+    0x00000002,
+    (u32)&Sio_LoadingBlendPulse_Init + 0x1,
+    0x00000003,
+    (u32)&Sio_LoadingBlendPulse_Loop + 0x1,
+    0x00000000,
+    0x00000000,
+};
