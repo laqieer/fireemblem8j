@@ -9836,7 +9836,7 @@ return-only+number=1) were caught and rejected as degenerate/unsound rather than
 CBMC work is isolated; `make compare` OK throughout. Verdicts recorded in the nm_proof table
 and `full16/FINDINGS_full16.md`.
 
-## DATA-residue named-symbols SPLIT waves (axis 4: 96.90% → 96.96%)
+## DATA-residue named-symbols SPLIT waves (axis 4: 96.90% → 97.13%)
 
 Byte-neutral SPLIT of SRC-built catch-all `data_<addr>` residue blobs into their
 fe8u-validated constituent sub-objects, gating every batch with a cold `make compare`
@@ -9871,3 +9871,39 @@ Reusable rule: `make compare` proves BYTES only, not name-correctness; before ba
 split, confirm each sub-name (a) is not already `.global` under `asm/` (already-counted trap) and
 (b) has no pre-existing real definition elsewhere (`src/*.c` collision). The split's job is purely
 byte-neutral application of PRE-VALIDATED names.
+
+### Addendum — LIMIT-recipe full-split wave (2026-07-08, axis 4: 96.96% → 97.13%, 12,441/12,809)
+
+Applied the byte-neutral DATA-RESIDUE SPLIT recipe (`/tmp/limit_recipe.md`) as SOLE serial
+integrator, one residue = one hook-gated commit (pre-commit runs `make compare` + `make shiftcheck`;
+never bypassed), + a per-residue cold `make compare` durability gate, ff-merge to `main`, CI-verified
+green after every push. **Landed:** all 12 Group-3 EVENT residues + Batch A (data_08908228+354);
+then the REDA/UnitDef cascade **data_08908790** (18 sub-objects), **data_08908958** (25),
+**data_0890C9BC** (28), **data_0890F2E0** (5 `UnitDefinition[]`), **data_0890A3D4** (4, SPLIT_PARTIAL),
+**data_0890A480** (9, SPLIT_PARTIAL), **data_0890C0A4** (25, SPLIT). Total ~150+ new named
+sub-objects across the wave.
+
+**Two residue-format split tools** (both verify byte-neutrality before writing): `.s` residues
+(`.4byte` stream) split by inserting `.section .data.residue.<PARTADDR>`/`.global`/label at each
+byte offset (NO `.align`); `.c` residues (`u32[]` with `__attribute__((section))`) split into
+multiple named `u32 <name>[]` arrays whose concatenation is asserted == the original word list.
+Cross-residue `.s` refs (`.4byte data_<res> + 0xK`) and `.c` consumers
+(`(struct REDA *)((u8 *)data_<res> + 0xK)`) repointed to the sub-name in the SAME commit; resolved
+`sym_jp.txt` shims deleted (every shim address matched the computed offset EXACTLY — strong
+validation).
+
+**Naming provenance rule reinforced (C0A4).** For the 25-way SPLIT of data_0890C0A4, the recipe's
+character-suffix names (`REDA_Ch9AEnemy_10_FADO`, `REDA_Ch9AAlly_1_MESSENGER`) looked unverifiable
+from the generic UnitDef `charIndex` (0xC5/0xCC = autolevel event units), so before trusting them I
+confirmed **all 25 names are canonically declared in `include/eventcall.h`** — event-scripted units
+whose displayed character is set by the event, not the UnitDef charIndex. Character-name REDAs
+(EIRIKA/TANA/SETH/LARACHEL/DOZLA/RENNAC) were independently cross-checked against
+`include/constants/characters.h` (0x01/0x22/0x02/0x19/0x1A/0x1C). The 4 unreferenced spanned
+entries (Ch9A_0/1/2/3 at +0xB0/+0xC0/+0xC8/+0xE8) are the 2nd/3rd REDAs read by `redaCount≥2`
+consumers — kept as contiguous named sub-objects (address-ordered tsv preserves the multi-entry
+read). **SKIPPED** the MERGE (data_08A5CEDC) and all Group-4 LEAVE per recipe.
+
+**Type-conflict guard (`.c` residues).** The split defines sub-objects as `u32 <name>[]`, while
+`eventcall.h` declares them `struct REDA <name>[]`; verified the consumer `.c` files' include chain
+(`global.h`/`bmunit.h`/`muctrl.h`) does NOT reach `eventcall.h`, so the added `extern const u8
+<name>[]` decls cannot collide in-TU (cross-TU the linker matches by name only — byte-neutral).
