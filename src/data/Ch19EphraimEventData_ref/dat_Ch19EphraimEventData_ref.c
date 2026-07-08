@@ -9,7 +9,11 @@
  * conflict -- the data bytes (.word relocations) are byte-identical. */
 
 extern const u8 EventListScr_Ch19b_Turn[];
-extern const u8 data_08A5D40C[];
+extern const u8 EventListScr_Ch19b_Misc[];
+extern const u8 EventListScr_Ch19b_SelectUnit[];
+extern const u8 EventListScr_Ch19b_SelectDestination[];
+extern const u8 EventListScr_Ch19b_UnitMove[];
+extern const u8 EventListScr_Ch19b_Tutorial[];
 extern const u8 frontier_df3_eventscr_ch_017_A6F47C[];
 extern const u8 frontier_df3_unitdef_b_049_91E988[];
 extern const u8 frontier_df3_unitdef_b_049_91E988_tail_p1[];
@@ -20,11 +24,11 @@ SECTION(".rodata.dat_Ch19EphraimEventData_ref") static const u32 Ch19EphraimEven
     (u32)&EventListScr_Ch19b_Turn,
     (u32)&EventListScr_Ch19b_Turn + 0x70,
     (u32)&EventListScr_Ch19b_Turn + 0x74,
-    (u32)&data_08A5D40C + 0x8,
-    (u32)&data_08A5D40C + 0x48,
-    (u32)&data_08A5D40C + 0x4C,
-    (u32)&data_08A5D40C + 0x50,
-    (u32)&data_08A5D40C + 0x54,
+    (u32)&EventListScr_Ch19b_Misc,
+    (u32)&EventListScr_Ch19b_SelectUnit,
+    (u32)&EventListScr_Ch19b_SelectDestination,
+    (u32)&EventListScr_Ch19b_UnitMove,
+    (u32)&EventListScr_Ch19b_Tutorial,
     (u32)&gUidebug_2 + 0x649,
     (u32)&frontier_df4_menu_005_A5FFAD + 0x69,
     (u32)&frontier_df3_unitdef_b_049_91E988_tail_p1,
