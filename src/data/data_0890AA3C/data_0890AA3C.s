@@ -6,12 +6,12 @@
 UnitDef_Ch6Ally_0:
 	.4byte 0x08000702
 	.4byte 0x05000002
-	.4byte data_0890A6A8 + 0x28
+	.4byte REDA_Ch6Ally_0_SETH
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x08000201
 	.4byte 0x04000002
-	.4byte data_0890A6A8 + 0x50
+	.4byte REDA_Ch6Ally_0_EIRIKA
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000

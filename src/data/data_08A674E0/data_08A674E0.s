@@ -52,7 +52,7 @@ EventScr_Ch12A_1:
 	.4byte data_08A60354 + 0xF4
 	.4byte 0x00090820
 	.4byte 0x00012C40
-	.4byte data_0890EB30
+	.4byte UnitDef_Ch12AAlly_0
 	.4byte 0x00003020
 	.4byte 0x00032720
 	.4byte 0x00021421
@@ -78,7 +78,7 @@ EventScr_Ch12A_3:
 	.4byte 0x00000A40
 	.4byte data_08A60354 + 0x58
 	.4byte 0x00020540
-	.4byte data_0890ECE8 + 0x3C
+	.4byte UnitDef_Ch12AEnemy_7
 	.4byte 0x00000A40
 	.4byte data_08A60354 + 0x80
 	.4byte 0x00070228

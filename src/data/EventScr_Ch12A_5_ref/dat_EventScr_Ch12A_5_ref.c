@@ -12,15 +12,16 @@
 
 extern const u8 UnitDef_Ch12AEnemy_5[];
 extern const u8 data_08A60354[];
-extern const u8 data_0890ECE8[];
+extern const u8 UnitDef_Ch12AEnemy_6[];
+extern const u8 UnitDef_Ch12AEnemy_8[];
 extern const u8 UnitDef_Ch12AEnemy_3[];
 
 SECTION(".rodata.dat_EventScr_Ch12A_5_ref") EventListScr EventScr_Ch12A_5[] = {
     SVAL(EVT_SLOT_2, UnitDef_Ch12AEnemy_5)
     CALL(data_08A60354 + 0x58)
-    SVAL(EVT_SLOT_2, data_0890ECE8 + 0x64)
+    SVAL(EVT_SLOT_2, UnitDef_Ch12AEnemy_8)
     CALL(data_08A60354 + 0x80)
-    SVAL(EVT_SLOT_2, data_0890ECE8)
+    SVAL(EVT_SLOT_2, UnitDef_Ch12AEnemy_6)
     CALL(data_08A60354 + 0x58)
     SVAL(EVT_SLOT_2, UnitDef_Ch12AEnemy_3)
     CALL(data_08A60354 + 0x58)

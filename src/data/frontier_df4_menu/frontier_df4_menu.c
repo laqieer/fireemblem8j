@@ -938,8 +938,14 @@ extern const u8 UnitDef_UnusedMixed_0[];
 extern const u8 UnitDef_UnusedMixed_1[];
 extern const u8 data_085B9BBC[];
 extern const u8 data_08908958[];
-extern const u8 data_0890BDC4[];
-extern const u8 data_0890EB30[];
+extern const u8 UnitDef_Ch8NPC[];
+extern const u8 UnitDef_Ch8Enemy_5[];
+extern const u8 UnitDef_Ch8Enemy_6[];
+extern const u8 UnitDef_Ch8Enemy_7[];
+extern const u8 UnitDef_Ch12AAlly_0[];
+extern const u8 UnitDef_Ch12AAlly_1[];
+extern const u8 UnitDef_Ch12AMixed[];
+extern const u8 UnitDef_Ch12AEnemy_4[];
 extern const u8 data_0890F470[];
 extern const u8 data_08A60354[];
 extern const u8 data_08A60BE4[];
@@ -2739,7 +2745,7 @@ EventListScr frontier_df4_menu_007_A657D4[] __attribute__((section(".data.fronti
     EVENT_WORD(0x00000000)
     SVAL(EVT_SLOT_B, 0x14000C)
     LOMA(0x2B)
-    LOAD1(1, (u8 *)data_0890BDC4 + 0xB0)
+    LOAD1(1, (u8 *)UnitDef_Ch8NPC)
     ENUN
     FADU(0x10)
     BROWNBOXTEXT(0x5FC, 8, 8)
@@ -2747,7 +2753,7 @@ EventListScr frontier_df4_menu_007_A657D4[] __attribute__((section(".data.fronti
     CALL((u8 *)frontier_df4_menu_007_A657D4 + 0x1E0)
     ENDA
     LABEL(0x5F90)
-    LOAD1(1, (u8 *)data_0890BDC4 + 0x128)
+    LOAD1(1, (u8 *)UnitDef_Ch8Enemy_5)
     ENUN
     SVAL(EVT_SLOT_B, 0x14000B)
     MOVE_1STEP(0, 0xFFFE, 2)
@@ -2762,7 +2768,7 @@ EventListScr frontier_df4_menu_007_A657D4[] __attribute__((section(".data.fronti
     MOVE(0, 0xFFFE, 9, 0x16)
     SVAL(EVT_SLOT_B, 0x14000D)
     MOVE(0x10, 0xFFFE, 0xD, 0x15)
-    LOAD1(1, (u8 *)data_0890BDC4 + 0x150)
+    LOAD1(1, (u8 *)UnitDef_Ch8Enemy_6)
     ENUN
     SVAL(EVT_SLOT_D, 0)
     SVAL(EVT_SLOT_1, 0x501)
@@ -2785,7 +2791,7 @@ EventListScr frontier_df4_menu_007_A657D4[] __attribute__((section(".data.fronti
     LOAD1(1, UnitDef_Ch8Enemy_8)
     SVAL(EVT_SLOT_B, 0x130006)
     MOVE(0, 0xFFFE, 7, 0x18)
-    LOAD1(1, (u8 *)data_0890BDC4 + 0x18C)
+    LOAD1(1, (u8 *)UnitDef_Ch8Enemy_7)
     ENUN
     SVAL(EVT_SLOT_D, 0)
     SVAL(EVT_SLOT_1, 0)
@@ -2916,7 +2922,7 @@ EventListScr frontier_df4_menu_008_A66F88[] __attribute__((section(".data.fronti
     EVBIT_T(7)
     ENDA
     MUSC(0x47)
-    LOAD2(1, (u8 *)data_0890EB30 + 0x28)
+    LOAD2(1, (u8 *)UnitDef_Ch12AAlly_1)
     ENUN
     CURSOR_CHAR(1)
     STAL(0x3C)
@@ -2931,7 +2937,7 @@ EventListScr frontier_df4_menu_008_A66F88[] __attribute__((section(".data.fronti
     CAMERA2(0xA, 0x14)
     LOAD1(1, (u8 *)frontier_df4_banim_b_078_90E58C + 0x248)
     ENUN
-    SVAL(EVT_SLOT_2, (u8 *)data_0890EB30 + 0xDC)
+    SVAL(EVT_SLOT_2, (u8 *)UnitDef_Ch12AEnemy_4)
     SVAL(EVT_SLOT_3, 1)
     CALL((u8 *)data_08A60354 + 0x2C)
     CURSOR_CHAR(2)
@@ -2958,7 +2964,7 @@ EventListScr frontier_df4_menu_008_A66F88[] __attribute__((section(".data.fronti
     TEXTEND
     REMA
     CAMERA2(9, 0xB)
-    LOAD2(1, (u8 *)data_0890EB30 + 0xA0)
+    LOAD2(1, (u8 *)UnitDef_Ch12AMixed)
     ENUN
     CURSOR_CHAR(0x18)
     STAL(0x3C)
@@ -3046,7 +3052,7 @@ EventListScr frontier_df4_menu_008_A66F88[] __attribute__((section(".data.fronti
     TEXTEND
     LABEL(1)
     FADI(0x10)
-    LOAD1(1, data_0890EB30)
+    LOAD1(1, UnitDef_Ch12AAlly_0)
     ENUN
     LABEL(2)
     CLEAN

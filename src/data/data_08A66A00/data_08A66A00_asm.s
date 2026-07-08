@@ -6,7 +6,7 @@
 EventScr_Ch11a_BeginningScene:
 	.4byte 0x004D1220
 	.4byte 0x00012C41
-	.4byte data_0890E394
+	.4byte UnitDef_Ch11AAlly_0
 	.4byte 0x00003020
 	.4byte 0x00183B21
 	.4byte 0x003C0E20

@@ -1,2 +1,5 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-90EB30	90EC98	src/data/data_0890EB30/data_0890EB30.o(.data.residue.0890EB30)	descriptive raw ROM data (360 B, byte-completeness D29)
+# byte-neutral SPLIT of data_0890EB30 into 4 named sub-objects (make compare oracle)
+90EB30	90EB58	src/data/data_0890EB30/data_0890EB30.o(.data.residue.0890EB30)	UnitDef_Ch12AAlly_0 (40 B)
+90EB58	90EBD0	src/data/data_0890EB30/data_0890EB30.o(.data.residue.0890EB58)	UnitDef_Ch12AAlly_1 (120 B)
+90EBD0	90EC0C	src/data/data_0890EB30/data_0890EB30.o(.data.residue.0890EBD0)	UnitDef_Ch12AMixed (60 B)
+90EC0C	90EC98	src/data/data_0890EB30/data_0890EB30.o(.data.residue.0890EC0C)	UnitDef_Ch12AEnemy_4 (140 B)

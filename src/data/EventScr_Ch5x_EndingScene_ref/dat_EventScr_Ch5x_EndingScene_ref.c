@@ -16,7 +16,7 @@ extern const u8 UnitDef_Ch5xAlly_0[];
 extern const u8 UnitDef_Ch5xEnemy_2[];
 extern const u8 UnitDef_Ch5xAlly_3[];
 extern const u8 UnitDef_Ch5xEnemy_3[];
-extern const u8 data_0890A6A8[];
+extern const u8 UnitDef_Ch5xEnemy_4[];
 
 SECTION(".rodata.dat_EventScr_Ch5x_EndingScene_ref") EventListScr EventScr_Ch5x_EndingScene[] = {
     ASMC(HandleCh5xUnits_End + 0x1)
@@ -62,7 +62,7 @@ SECTION(".rodata.dat_EventScr_Ch5x_EndingScene_ref") EventListScr EventScr_Ch5x_
     MUSC(0x26)
     LOAD1(1, UnitDef_Ch5xEnemy_3)
     ENUN
-    LOAD1(1, data_0890A6A8)
+    LOAD1(1, UnitDef_Ch5xEnemy_4)
     ENUN
     CURSOR_CHAR(0x43)
     STAL(0x3C)

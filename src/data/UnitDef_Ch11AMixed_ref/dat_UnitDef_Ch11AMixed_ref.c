@@ -8,16 +8,22 @@
  * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
  */
 
-extern const u8 data_0890E394[];
+extern const u8 REDA_Ch11AMixed_0[];
+extern const u8 REDA_Ch11AMixed_1[];
+extern const u8 REDA_Ch11AMixed_2[];
+extern const u8 REDA_Ch11AMixed_3[];
+extern const u8 REDA_Ch11AMixed_4[];
+extern const u8 REDA_Ch11AMixed_5[];
+extern const u8 REDA_Ch11AMixed_6[];
 SECTION(".rodata.dat_UnitDef_Ch11AMixed_ref") struct UnitDefinition UnitDef_Ch11AMixed[] =
 {
     { .charIndex=0x17, .classIndex=0x27, .level=0x1, .xPosition=0xB, .yPosition=0x3 },
-    { .charIndex=0x19, .classIndex=0x4B, .level=0x1, .xPosition=0x8, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890E394 + 0x8C) },
-    { .charIndex=0x2, .classIndex=0x7, .level=0x1, .xPosition=0x6, .yPosition=0x4, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890E394 + 0x94) },
-    { .charIndex=0xB, .classIndex=0x1B, .level=0x1, .xPosition=0x7, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890E394 + 0x9C) },
-    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0x6, .yPosition=0x6, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890E394 + 0xA4) },
-    { .charIndex=0x69, .classIndex=0x21, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0x8, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890E394 + 0xAC), .items={0x04,0x00,0x00,0x00} },
-    { .charIndex=0x80, .classIndex=0x1F, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0x6, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890E394 + 0xB4) },
-    { .charIndex=0x81, .classIndex=0x1F, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0xA, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890E394 + 0xBC) },
+    { .charIndex=0x19, .classIndex=0x4B, .level=0x1, .xPosition=0x8, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_Ch11AMixed_0) },
+    { .charIndex=0x2, .classIndex=0x7, .level=0x1, .xPosition=0x6, .yPosition=0x4, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_Ch11AMixed_1) },
+    { .charIndex=0xB, .classIndex=0x1B, .level=0x1, .xPosition=0x7, .yPosition=0x5, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_Ch11AMixed_2) },
+    { .charIndex=0x1, .classIndex=0x2, .level=0x1, .xPosition=0x6, .yPosition=0x6, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_Ch11AMixed_3) },
+    { .charIndex=0x69, .classIndex=0x21, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0x8, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_Ch11AMixed_4), .items={0x04,0x00,0x00,0x00} },
+    { .charIndex=0x80, .classIndex=0x1F, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0x6, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_Ch11AMixed_5) },
+    { .charIndex=0x81, .classIndex=0x1F, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0xA, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_Ch11AMixed_6) },
     {0},
 };

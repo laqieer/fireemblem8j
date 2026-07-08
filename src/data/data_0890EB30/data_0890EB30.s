@@ -1,9 +1,10 @@
-/* Migrated from asm/data_0890EB30.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral SPLIT of data_0890EB30 into 4 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.0890EB30, "aw", %progbits
-	.global data_0890EB30
-data_0890EB30:
+	.global UnitDef_Ch12AAlly_0
+UnitDef_Ch12AAlly_0:
 	.4byte 0x08013E18
 	.4byte 0x01000305
 	.4byte frontier_df4_banim_b_078_90E58C + 0xA8
@@ -14,6 +15,9 @@ data_0890EB30:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
+	.section .data.residue.0890EB58, "aw", %progbits
+	.global UnitDef_Ch12AAlly_1
+UnitDef_Ch12AAlly_1:
 	.4byte 0x08002717
 	.4byte 0x01000540
 	.4byte frontier_df4_banim_b_078_90E58C + 0xB0
@@ -44,6 +48,9 @@ data_0890EB30:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
+	.section .data.residue.0890EBD0, "aw", %progbits
+	.global UnitDef_Ch12AMixed
+UnitDef_Ch12AMixed:
 	.4byte 0x08013E18
 	.4byte 0x0300014C
 	.4byte frontier_df4_banim_b_078_90E58C + 0xD8
@@ -59,6 +66,9 @@ data_0890EB30:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
+	.section .data.residue.0890EC0C, "aw", %progbits
+	.global UnitDef_Ch12AEnemy_4
+UnitDef_Ch12AEnemy_4:
 	.4byte 0x4D0063BB
 	.4byte 0x0000038D
 	.4byte 0x00000000

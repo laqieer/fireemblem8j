@@ -10,12 +10,13 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_0890BDC4[];
+extern const u8 UnitDef_Ch8Ally_2[];
+extern const u8 UnitDef_Ch8Ally_3[];
 extern const u8 data_08A60354[];
 
 SECTION(".rodata.dat_EventScr_Ch8_10_ref") EventListScr EventScr_Ch8_10[] = {
     CAMERA(0xE, 0x14)
-    LOAD2(1, data_0890BDC4)
+    LOAD2(1, UnitDef_Ch8Ally_2)
     ENUN
     MUSC(0x4C)
     FADU(0x10)
@@ -35,7 +36,7 @@ SECTION(".rodata.dat_EventScr_Ch8_10_ref") EventListScr EventScr_Ch8_10[] = {
     SVAL(EVT_SLOT_B, 0x14000E)
     LOMA(0x4E)
     UNIT_COLORS(4)
-    LOAD2(1, data_0890BDC4 + 0x50)
+    LOAD2(1, UnitDef_Ch8Ally_3)
     ENUN
     EvtBgmFadeIn(0x2C, 8)
     FAWU(2)
@@ -71,7 +72,7 @@ SECTION(".rodata.dat_EventScr_Ch8_10_ref") EventListScr EventScr_Ch8_10[] = {
     SVAL(EVT_SLOT_B, 0x14000E)
     LOMA(6)
     UNIT_COLORS(0)
-    LOAD2(1, data_0890BDC4)
+    LOAD2(1, UnitDef_Ch8Ally_2)
     ENUN
     MUSC(0x4C)
     FAWU(2)

@@ -1604,7 +1604,7 @@ extern const u8 data_0874B298[];
 extern const u8 data_0874C5B4[];
 extern const u8 data_087B9C50[];
 extern const u8 data_087B9CDC[];
-extern const u8 data_0890E394[];
+extern const u8 REDA_Ch11AAlly_1_EWAN[];
 extern const u8 data_08FFF000[];
 extern const u8 efxCrimsonEyeOBJ_Loop_A[];
 extern const u8 efxCrimsonEyeOBJ_Loop_B[];
@@ -7249,7 +7249,7 @@ u32 frontier_df4_banim_b_076_90B4DC[] __attribute__((section(".data.frontier_df4
 /* frontier_df4_banim_b_078_90E58C: banim pointer/command table carve (was INCBIN);
    data/proc-script pointers as .4byte Sym(+addend), STT_FUNC pointers raw hex (ld ORs Thumb bit), byte-exact. */
 u32 frontier_df4_banim_b_078_90E58C[] __attribute__((section(".data.frontier_df4_banim_b.gap78"))) = {
-    0x08003E18, 0x03000281, (u32)&data_0890E394 + 0xdc, 0x00000000, 0x00000000, 0x00000000,
+    0x08003E18, 0x03000281, (u32)&REDA_Ch11AAlly_1_EWAN, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x000005C4, 0x0000FFFF,
     0x0000040F, 0x0000FFFF, 0x000003CE, 0x0000FFFF, 0x00000507, 0x0000FFFF,
     0x000004D1, 0x0000FFFF, 0x00000511, 0x0000FFFF, 0x000003C7, 0x0000FFFF,
