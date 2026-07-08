@@ -1,7 +1,18 @@
 #include "global.h"
 
-/* Migrated from asm/data_08909814.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* Typed C extraction of residual raw-incbin slices from data_08909814.c. */
 
-u8 data_08909814[] __attribute__((section(".data.residue.08909814"))) = INCBIN_U8("data/residual/data_08909814.bin");
+u32 data_08909814[] __attribute__((section(".data.residue.08909814"))) = {
+    0x50010702, 0x00000042, 0x00000000, 0x006D0417,
+    0x00000000, 0x50010702, 0x00000081, 0x00000000,
+    0x006D0417, 0x00000000, 0x50010702, 0x00000083,
+    0x00000000, 0x006D0417, 0x00000000, 0x50010702,
+    0x00000044, 0x00000000, 0x006D0417, 0x00000000,
+    0x50010702, 0x00000003, 0x00000000, 0x006D0417,
+    0x00000000, 0x50010702, 0x00000001, 0x00000000,
+    0x006D0417, 0x00000000, 0x50010702, 0x000000C2,
+    0x00000000, 0x006D0417, 0x00000000, 0x50010702,
+    0x00000040, 0x00000000, 0x006D0417, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000,
+};

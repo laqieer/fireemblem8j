@@ -1,7 +1,16 @@
 #include "global.h"
 
-/* Migrated from asm/data_08A710FC.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* Typed C extraction of residual raw-incbin slices from data_08A710FC.c. */
 
-u8 EventScr_Ruin_46[] __attribute__((section(".data.residue.08A710FC"))) = INCBIN_U8("data/residual/data_08A710FC.bin");
+u32 EventScr_Ruin_46[] __attribute__((section(".data.residue.08A710FC"))) = {
+    0x00001923, 0x00010540, 0x00000003, 0x00000C40,
+    0x0001000C, 0x00001923, 0x00010540, 0x00000007,
+    0x00000C40, 0x0001000C, 0x00001923, 0x00010540,
+    0x0000000B, 0x00000C40, 0x0001000C, 0x00001923,
+    0x00010540, 0x0000000F, 0x00000C40, 0x0001000C,
+    0x00001923, 0x00010540, 0x00000013, 0x00000C40,
+    0x0001000C, 0x00010920, 0x00000820, 0x0F0A2628,
+    0x000F0E20, 0x00BD1620, 0x00042721, 0x060C2628,
+    0x000F0E20, 0x00BD1620, 0x000A2721, 0x00010820,
+    0x00070228, 0x00000120,
+};

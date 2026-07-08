@@ -1,9 +1,21 @@
 #include "global.h"
+#include "anime.h"
 
-/* Migrated from asm/data_086AEA74.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* Typed C extraction of residual raw-incbin slices from data_086AEA74.c. */
 
-/* D312 ID: byte-identical (156 B, whole symbol; unique single occurrence in the
- * fe8u ROM) to fe8u AnimSprite_EfxHammarneOBJ_7. Byte-neutral rename; section unchanged => same ROM bytes. */
-u8 AnimSprite_EfxHammarneOBJ_7[] __attribute__((section(".data.residue.086AEA74"))) = INCBIN_U8("data/residual/data_086AEA74.bin");
+struct AnimSpriteData AnimSprite_EfxHammarneOBJ_7[] __attribute__((section(".data.residue.086AEA74"))) =
+{
+    { .header = 0x10000000, .as = { .object = { 0x001B, 6, -67 } } },
+    { .header = 0x10000000, .as = { .object = { 0x001B, 9, -72 } } },
+    { .header = 0x10000000, .as = { .object = { 0x001B, 11, -78 } } },
+    { .header = 0x10000000, .as = { .object = { 0x001B, 12, -84 } } },
+    { .header = 0x10000000, .as = { .object = { 0x001B, 13, -90 } } },
+    { .header = 0x10000000, .as = { .object = { 0x0019, -22, -56 } } },
+    { .header = 0x10000000, .as = { .object = { 0x0019, -25, -62 } } },
+    { .header = 0x10000000, .as = { .object = { 0x0019, -27, -68 } } },
+    { .header = 0x10000000, .as = { .object = { 0x001A, -26, -87 } } },
+    { .header = 0x10000000, .as = { .object = { 0x001A, -27, -80 } } },
+    { .header = 0x10000000, .as = { .object = { 0x001A, -28, -74 } } },
+    { .header = 0x10000000, .as = { .object = { 0x001C, -19, -51 } } },
+    ANIM_SPRITE_END,
+};

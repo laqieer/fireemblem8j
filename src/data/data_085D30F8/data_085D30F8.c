@@ -1,7 +1,21 @@
 #include "global.h"
 
-/* Migrated from asm/data_085D30F8.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* Typed C extraction of residual raw-incbin slices from data_085D30F8.c. */
 
-u8 data_085D30F8[] __attribute__((section(".data.residue.085D30F8"))) = INCBIN_U8("data/residual/data_085D30F8.bin");
+u32 data_085D30F8[] __attribute__((section(".data.residue.085D30F8"))) = {
+    0x0001FD00, 0x000001FD, 0x0002FE00, 0x0001FE01,
+    0x0001FFFE, 0x0002FFFF, 0x0003FF00, 0x0002FF01,
+    0x0001FF02, 0x000100FD, 0x000200FE, 0x000300FF,
+    0x00030001, 0x00020002, 0x00010003, 0x000101FE,
+    0x000201FF, 0x00030100, 0x00020101, 0x00010102,
+    0x000102FF, 0x00020200, 0x00010201, 0x00010300,
+    0x0000007F, 0xFFFD0000, 0xFFFEFFFF, 0xFFFE0000,
+    0xFFFE0001, 0xFFFFFFFE, 0xFFFFFFFF, 0xFFFF0000,
+    0xFFFF0001, 0xFFFF0002, 0x0000FFFD, 0x0000FFFE,
+    0x0000FFFF, 0x00000001, 0x00000002, 0x00000003,
+    0x0001FFFE, 0x0001FFFF, 0x00010000, 0x00010001,
+    0x00010002, 0x0002FFFF, 0x00020000, 0x00020001,
+    0x00030000, 0x270F270F, 0x0000000A, 0x00000001,
+    0x00000000, 0xFFFFFFFF, 0x00000000, 0x00000000,
+    0x00000001, 0x00000000, 0xFFFFFFFF, 0x0021001E,
+};

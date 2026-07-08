@@ -1,7 +1,23 @@
 #include "global.h"
+#include "anime.h"
 
-/* Migrated from asm/data_086BB154.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* Typed C extraction of residual raw-incbin slices from data_086BB154.c. */
 
-u8 data_086BB154[] __attribute__((section(".data.residue.086BB154"))) = INCBIN_U8("data/residual/data_086BB154.bin");
+struct AnimSpriteData data_086BB154[] __attribute__((section(".data.residue.086BB154"))) =
+{
+    { .header = 0x00000000, .as = { .object = { 0x0014, 21, -95 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0015, 22, -104 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0015, 26, -99 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0014, 14, -93 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0014, 6, -91 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0014, -1, -89 } } },
+    ANIM_SPRITE_END,
+    { .header = 0x00000000, .as = { .object = { 0x0014, 21, -95 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0015, 22, -104 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0015, 26, -99 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0014, 14, -93 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0014, 6, -91 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0014, -1, -89 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0014, -9, -87 } } },
+    ANIM_SPRITE_END,
+};

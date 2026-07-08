@@ -1,7 +1,29 @@
 #include "global.h"
+#include "anime.h"
 
-/* Migrated from asm/data_086A4364.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* Typed C extraction of residual raw-incbin slices from data_086A4364.c. */
 
-u8 data_086A4364[] __attribute__((section(".data.residue.086A4364"))) = INCBIN_U8("data/residual/data_086A4364.bin");
+struct AnimSpriteData data_086A4364[] __attribute__((section(".data.residue.086A4364"))) =
+{
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+    ANIM_SPRITE_END,
+};
