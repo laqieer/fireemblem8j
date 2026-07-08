@@ -38,35 +38,32 @@ extern void HideUnitUnlockDoor();
 extern void UnhideUnit();
 
 /* Lead [0x085BA1F4,0x085BA254) (96 B): non-pointer popup layout data. */
-__asm__(
-"\t.section .data.residue.085BA1F4, \"aw\", %progbits\n"
-"\t.global data_085BA1F4\n"
-"data_085BA1F4:\n"
-"\t.4byte 0x0000000A\n"
-"\t.4byte 0x0000005A\n"
-"\t.4byte 0x00000004\n"
-"\t.4byte 0x00000800\n"
-"\t.4byte 0x00000008\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000004\n"
-"\t.4byte 0x00000801\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000A\n"
-"\t.4byte 0x0000005A\n"
-"\t.4byte 0x00000006\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte 0x00000006\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000004\n"
-"\t.4byte 0x0000080B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+u32 data_085BA1F4[] __attribute__((section(".data.residue.085BA1F4"))) = {
+    0x0000000A,
+    0x0000005A,
+    0x00000004,
+    0x00000800,
+    0x00000008,
+    0x00000000,
+    0x00000004,
+    0x00000801,
+    0x00000000,
+    0x00000000,
+    0x0000000A,
+    0x0000005A,
+    0x00000006,
+    0x00000002,
+    0x00000003,
+    0x00000000,
+    0x00000001,
+    0x00000003,
+    0x00000006,
+    0x00000000,
+    0x00000004,
+    0x0000080B,
+    0x00000000,
+    0x00000000,
+};
 
 struct ProcCmd ProcScr_BrownTextBox[] __attribute__((section(".rodata.dat_ProcScr_BrownTextBox_ref"))) = {
     PROC_YIELD,
@@ -76,25 +73,22 @@ struct ProcCmd ProcScr_BrownTextBox[] __attribute__((section(".rodata.dat_ProcSc
 };
 
 /* Gap [0x085BA274,0x085BA2AC) (56 B): two un-named fade scripts, relocated. */
-__asm__(
-"\t.section .data.residue.085BA274, \"aw\", %progbits\n"
-"\t.global data_085BA274\n"
-"data_085BA274:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BrownTextBox_FadeInInit + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte BrownTextBox_FadeInLoop + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BrownTextBox_FadeOutInit + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte BrownTextBox_FadeOutLoop + 0x1\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BrownTextBox_FadeOutEnd + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+u32 data_085BA274[] __attribute__((section(".data.residue.085BA274"))) = {
+    0x00000002,
+    (u32)&BrownTextBox_FadeInInit + 0x1,
+    0x00000003,
+    (u32)&BrownTextBox_FadeInLoop + 0x1,
+    0x00000000,
+    0x00000000,
+    0x00000002,
+    (u32)&BrownTextBox_FadeOutInit + 0x1,
+    0x00000003,
+    (u32)&BrownTextBox_FadeOutLoop + 0x1,
+    0x00000002,
+    (u32)&BrownTextBox_FadeOutEnd + 0x1,
+    0x00000000,
+    0x00000000,
+};
 
 struct ProcCmd ProcScr_Popup_0[] __attribute__((section(".rodata.dat_ProcScr_Popup_0_ref"))) = {
     PROC_CALL(BrownTextBox_FadeInInit),
@@ -126,7 +120,4 @@ struct ProcCmd ProcScr_ShinningStonefx[] __attribute__((section(".rodata.dat_Pro
 };
 
 /* Byte-neutral external alias: data_085BA2FC == ProcScr_ShinningStonefx. */
-__asm__(
-"\t.global data_085BA2FC\n"
-"\t.set data_085BA2FC, ProcScr_ShinningStonefx\n"
-);
+extern const u32 data_085BA2FC __attribute__((alias("ProcScr_ShinningStonefx")));
