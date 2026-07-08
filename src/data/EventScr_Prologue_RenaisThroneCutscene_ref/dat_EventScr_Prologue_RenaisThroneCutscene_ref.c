@@ -11,7 +11,8 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 UnitDef_Event_PrologueThroneRoomUnits[];
-extern const u8 data_08908354[];
+extern const u8 UnitDef_Event_PrologueMessager[];
+extern const u8 UnitDef_Event_PrologueGradoRoyals[];
 extern const u8 UnitDef_Event_PrologueGradoShamans[];
 extern const u8 UnitDef_Event_PrologueGradoCavalry[];
 extern const u8 UnitDef_Event_PrologueEscapees[];
@@ -26,7 +27,7 @@ SECTION(".rodata.dat_EventScr_Prologue_RenaisThroneCutscene_ref") EventListScr E
     FADU(0x10)
     MUSC(0x26)
     BROWNBOXTEXT(0x5F6, 8, 8)
-    LOAD1(1, data_08908354)
+    LOAD1(1, UnitDef_Event_PrologueMessager)
     ENUN
     CAMERA(0xE, 0)
     CURSOR_CHAR(0xF)
@@ -82,7 +83,7 @@ SECTION(".rodata.dat_EventScr_Prologue_RenaisThroneCutscene_ref") EventListScr E
     ENUN
     LOAD1(1, UnitDef_Event_PrologueGradoCavalry)
     ENUN
-    LOAD1(1, data_08908354 + 0x28)
+    LOAD1(1, UnitDef_Event_PrologueGradoRoyals)
     ENUN
     CURSOR_CHAR(0xC5)
     STAL(0x3C)

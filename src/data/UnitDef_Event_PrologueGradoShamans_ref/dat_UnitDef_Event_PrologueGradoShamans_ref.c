@@ -8,13 +8,16 @@
  * relocatable symbol reference so the ROM stays SHIFTABLE. Byte-identical to
  * baserom (gated by `make compare`). */
 
-extern const u8 data_08908228[];
+extern const u8 REDA_PrologueGradoShamans0[];
+extern const u8 REDA_PrologueGradoShamans1[];
+extern const u8 REDA_PrologueGradoShamans2[];
+extern const u8 REDA_PrologueGradoShamans3[];
 
 SECTION(".rodata.dat_UnitDef_Event_PrologueGradoShamans_ref") struct UnitDefinition UnitDef_Event_PrologueGradoShamans[] =
 {
-    { .charIndex=0x80, .classIndex=0x2D, .allegiance=0x2, .level=0x1, .xPosition=0x5, .yPosition=0x1, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x28) },
-    { .charIndex=0x80, .classIndex=0x2D, .allegiance=0x2, .level=0x1, .xPosition=0x5, .yPosition=0x2, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x30) },
-    { .charIndex=0x80, .classIndex=0x2F, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0x13, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x38) },
-    { .charIndex=0x80, .classIndex=0x2F, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0x14, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x40) },
+    { .charIndex=0x80, .classIndex=0x2D, .allegiance=0x2, .level=0x1, .xPosition=0x5, .yPosition=0x1, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_PrologueGradoShamans0) },
+    { .charIndex=0x80, .classIndex=0x2D, .allegiance=0x2, .level=0x1, .xPosition=0x5, .yPosition=0x2, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_PrologueGradoShamans1) },
+    { .charIndex=0x80, .classIndex=0x2F, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0x13, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_PrologueGradoShamans2) },
+    { .charIndex=0x80, .classIndex=0x2F, .autolevel=0x1, .allegiance=0x2, .level=0x1, .xPosition=0x14, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_PrologueGradoShamans3) },
     {0},
 };

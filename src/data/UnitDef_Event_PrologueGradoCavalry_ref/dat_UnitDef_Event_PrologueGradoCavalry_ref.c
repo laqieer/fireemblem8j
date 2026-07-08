@@ -8,15 +8,20 @@
  * relocatable symbol reference so the ROM stays SHIFTABLE. Byte-identical to
  * baserom (gated by `make compare`). */
 
-extern const u8 data_08908228[];
+extern const u8 REDA_PrologueGradoCavalry0[];
+extern const u8 REDA_PrologueGradoCavalry1[];
+extern const u8 REDA_PrologueGradoCavalry2[];
+extern const u8 REDA_PrologueGradoCavalry3[];
+extern const u8 REDA_PrologueGradoCavalry4[];
+extern const u8 REDA_PrologueGradoCavalry5[];
 
 SECTION(".rodata.dat_UnitDef_Event_PrologueGradoCavalry_ref") struct UnitDefinition UnitDef_Event_PrologueGradoCavalry[] =
 {
-    { .charIndex=0x83, .classIndex=0x35, .allegiance=0x2, .level=0x1, .xPosition=0xA, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x48) },
-    { .charIndex=0x83, .classIndex=0x35, .allegiance=0x2, .level=0x1, .xPosition=0x10, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x50) },
-    { .charIndex=0x84, .classIndex=0x7, .allegiance=0x2, .level=0x1, .xPosition=0xA, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x58) },
-    { .charIndex=0x84, .classIndex=0x7, .allegiance=0x2, .level=0x1, .xPosition=0x10, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x60) },
-    { .charIndex=0x85, .classIndex=0x29, .allegiance=0x2, .level=0x1, .xPosition=0xA, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x68) },
-    { .charIndex=0x85, .classIndex=0x29, .allegiance=0x2, .level=0x1, .xPosition=0x10, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_08908228 + 0x70) },
+    { .charIndex=0x83, .classIndex=0x35, .allegiance=0x2, .level=0x1, .xPosition=0xA, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_PrologueGradoCavalry0) },
+    { .charIndex=0x83, .classIndex=0x35, .allegiance=0x2, .level=0x1, .xPosition=0x10, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_PrologueGradoCavalry1) },
+    { .charIndex=0x84, .classIndex=0x7, .allegiance=0x2, .level=0x1, .xPosition=0xA, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_PrologueGradoCavalry2) },
+    { .charIndex=0x84, .classIndex=0x7, .allegiance=0x2, .level=0x1, .xPosition=0x10, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_PrologueGradoCavalry3) },
+    { .charIndex=0x85, .classIndex=0x29, .allegiance=0x2, .level=0x1, .xPosition=0xA, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_PrologueGradoCavalry4) },
+    { .charIndex=0x85, .classIndex=0x29, .allegiance=0x2, .level=0x1, .xPosition=0x10, .yPosition=0xA, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_PrologueGradoCavalry5) },
     {0},
 };
