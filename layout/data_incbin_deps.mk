@@ -338,7 +338,7 @@ src/data/data/data_08663218.o: graphics/reuse/data_08663218.gbapal
 src/data/data/data_08713018.o: graphics/reuse/data_08713018.gbapal
 src/data/data_0819EADC/data_0819EADC.o: graphics/map/data_0819EADC.bin.lz
 src/data/data_081A00C8/data_081A00C8.o: data/residual/data_081A00C8.bin
-src/data/data_081A6774/data_081A6774.o: data/residual/data_081A6774.bin
+src/data/data_081A6774/data_081A6774.o: graphics/map/data_081A6774.bin.lz
 src/data/data_085C4440/data_085C4440.o: data/residual/data_085C4440.bin
 src/data/data_085CBE64/data_085CBE64.o: graphics/misc_gfx2/Pal_PikeTrap.gbapal
 src/data/data_085CBFA4/data_085CBFA4.o: graphics/reuse/data_085CBFA4.4bpp.lz
