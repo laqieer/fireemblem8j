@@ -997,3 +997,7 @@ sound/songs/midi/*.s
 !src/data/frontier_df3_titlescreen/frontier_df3_titlescreen_asm.s
 !src/data/data_087E1A58/data_087E1A58_asm.s
 !src/data/data_08A60AE8/data_08A60AE8_asm.s
+!src/data/data_08A64420/data_08A64420_asm.s
+!src/data/data_08A64FA0/data_08A64FA0_asm.s
+!src/data/data_08855D58/data_08855D58_asm.s
+!src/data/data_08A62134/data_08A62134_asm.s
