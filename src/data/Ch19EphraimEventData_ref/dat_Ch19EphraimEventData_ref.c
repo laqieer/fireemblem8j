@@ -38,4 +38,4 @@ SECTION(".rodata.dat_Ch19EphraimEventData_ref") static const u32 Ch19EphraimEven
     (u32)&frontier_df3_eventscr_ch_017_A6F47C + 0x15C,
     (u32)&frontier_df3_eventscr_ch_017_A6F47C + 0x1C4,
 };
-__asm__(".global Ch19EphraimEventData\n\t.set Ch19EphraimEventData, Ch19EphraimEventData__shift\n");
+extern const u32 Ch19EphraimEventData __attribute__((alias("Ch19EphraimEventData__shift")));

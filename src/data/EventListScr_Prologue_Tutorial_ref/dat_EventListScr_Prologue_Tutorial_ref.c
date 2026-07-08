@@ -35,4 +35,4 @@ SECTION(".rodata.dat_EventListScr_Prologue_Tutorial_ref") static const u32 Event
     (u32)&data_08A618F0 + 0x44,
     0x00000000,
 };
-__asm__(".global EventListScr_Prologue_Tutorial\n\t.set EventListScr_Prologue_Tutorial, EventListScr_Prologue_Tutorial__shift\n");
+extern const u32 EventListScr_Prologue_Tutorial __attribute__((alias("EventListScr_Prologue_Tutorial__shift")));

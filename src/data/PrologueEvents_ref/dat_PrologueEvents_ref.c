@@ -38,4 +38,4 @@ SECTION(".rodata.dat_PrologueEvents_ref") static const u32 PrologueEvents__shift
     (u32)&EventScr_Prologue_BeginningScene,
     (u32)&EventScr_Prologue_EndingScene,
 };
-__asm__(".global PrologueEvents\n\t.set PrologueEvents, PrologueEvents__shift\n");
+extern const u32 PrologueEvents __attribute__((alias("PrologueEvents__shift")));

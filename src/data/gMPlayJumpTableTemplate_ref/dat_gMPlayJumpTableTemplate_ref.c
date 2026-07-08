@@ -73,4 +73,4 @@ SECTION(".rodata.dat_gMPlayJumpTableTemplate_ref") static const u32 gMPlayJumpTa
     (u32)&RealClearChain + 0x1,
     (u32)&SoundMainBTM + 0x1,
 };
-__asm__(".global gMPlayJumpTableTemplate\n\t.set gMPlayJumpTableTemplate, gMPlayJumpTableTemplate__shift\n");
+extern const u32 gMPlayJumpTableTemplate __attribute__((alias("gMPlayJumpTableTemplate__shift")));

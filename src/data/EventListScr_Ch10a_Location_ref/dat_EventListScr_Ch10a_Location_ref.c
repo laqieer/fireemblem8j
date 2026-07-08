@@ -33,4 +33,4 @@ SECTION(".rodata.dat_EventListScr_Ch10a_Location_ref") static const u32 EventLis
     0x0010080D,
     0x00000000,
 };
-__asm__(".global EventListScr_Ch10a_Location\n\t.set EventListScr_Ch10a_Location, EventListScr_Ch10a_Location__shift\n");
+extern const u32 EventListScr_Ch10a_Location __attribute__((alias("EventListScr_Ch10a_Location__shift")));

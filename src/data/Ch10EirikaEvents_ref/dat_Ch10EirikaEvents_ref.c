@@ -46,4 +46,4 @@ SECTION(".rodata.dat_Ch10EirikaEvents_ref") static const u32 Ch10EirikaEvents__s
     (u32)&EventScr_Ch10a_BeginningScene,
     (u32)&EventScr_Ch10a_EndingScene,
 };
-__asm__(".global Ch10EirikaEvents\n\t.set Ch10EirikaEvents, Ch10EirikaEvents__shift\n");
+extern const u32 Ch10EirikaEvents __attribute__((alias("Ch10EirikaEvents__shift")));

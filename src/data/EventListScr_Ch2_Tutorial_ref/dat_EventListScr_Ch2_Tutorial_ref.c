@@ -71,4 +71,4 @@ SECTION(".rodata.dat_EventListScr_Ch2_Tutorial_ref") static const u32 EventListS
     (u32)&EventScr_Ch2Tutorial30,
     0x00000000,
 };
-__asm__(".global EventListScr_Ch2_Tutorial\n\t.set EventListScr_Ch2_Tutorial, EventListScr_Ch2_Tutorial__shift\n");
+extern const u32 EventListScr_Ch2_Tutorial __attribute__((alias("EventListScr_Ch2_Tutorial__shift")));

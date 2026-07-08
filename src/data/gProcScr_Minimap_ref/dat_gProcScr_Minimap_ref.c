@@ -40,4 +40,4 @@ struct ProcCmd gProcScr_Minimap[] __attribute__((section(".data.residue.08A9CA64
     PROC_END,
 };
 
-__asm__(".global data_08A9CA64\n.set data_08A9CA64, gProcScr_Minimap");
+extern const u32 data_08A9CA64 __attribute__((alias("gProcScr_Minimap")));

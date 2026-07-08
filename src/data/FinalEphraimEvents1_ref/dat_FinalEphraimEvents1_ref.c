@@ -36,4 +36,4 @@ SECTION(".rodata.dat_FinalEphraimEvents1_ref") static const u32 FinalEphraimEven
     (u32)&EventScr_Ch21b_BeginningScene,
     (u32)&EventScr_Ch21b_BeginningScene + 0xC,
 };
-__asm__(".global FinalEphraimEvents1\n\t.set FinalEphraimEvents1, FinalEphraimEvents1__shift\n");
+extern const u32 FinalEphraimEvents1 __attribute__((alias("FinalEphraimEvents1__shift")));

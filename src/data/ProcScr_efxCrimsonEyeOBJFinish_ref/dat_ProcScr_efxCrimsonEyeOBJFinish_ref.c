@@ -10,4 +10,4 @@ struct ProcCmd ProcScr_efxCrimsonEyeOBJFinish[] __attribute__((section(".data.re
     PROC_END,
 };
 
-__asm__(".global data_08602EAC\n.set data_08602EAC, ProcScr_efxCrimsonEyeOBJFinish");
+extern const u32 data_08602EAC __attribute__((alias("ProcScr_efxCrimsonEyeOBJFinish")));

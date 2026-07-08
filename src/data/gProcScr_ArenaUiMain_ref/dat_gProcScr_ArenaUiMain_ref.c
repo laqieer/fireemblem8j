@@ -72,4 +72,4 @@ struct ProcCmd gProcScr_ArenaUiMain[] __attribute__((section(".data.residue.08AB
     PROC_END,
 };
 
-__asm__(".global data_08ABCAD4\n.set data_08ABCAD4, gProcScr_ArenaUiMain");
+extern const u32 data_08ABCAD4 __attribute__((alias("gProcScr_ArenaUiMain")));

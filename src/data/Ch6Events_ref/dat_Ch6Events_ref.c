@@ -43,4 +43,4 @@ SECTION(".rodata.dat_Ch6Events_ref") static const u32 Ch6Events__shift[] = {
     (u32)&EventScr_Ch6_BeginningScene,
     (u32)&EventScr_Ch6_EndingScene,
 };
-__asm__(".global Ch6Events\n\t.set Ch6Events, Ch6Events__shift\n");
+extern const u32 Ch6Events __attribute__((alias("Ch6Events__shift")));

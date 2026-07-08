@@ -10,4 +10,4 @@ struct ProcCmd ProcScr_efxDarkGradoOBJ01piece[] __attribute__((section(".data.re
     PROC_END,
 };
 
-__asm__(".global data_08602D54\n.set data_08602D54, ProcScr_efxDarkGradoOBJ01piece");
+extern const u32 data_08602D54 __attribute__((alias("ProcScr_efxDarkGradoOBJ01piece")));

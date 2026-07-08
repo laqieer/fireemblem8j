@@ -37,4 +37,4 @@ SECTION(".rodata.dat_Ch7EventData_ref") static const u32 Ch7EventData__shift[] =
     (u32)&EventScr_Ch7_BeginningScene,
     (u32)&EventScr_Ch7_EndingScene,
 };
-__asm__(".global Ch7EventData\n\t.set Ch7EventData, Ch7EventData__shift\n");
+extern const u32 Ch7EventData __attribute__((alias("Ch7EventData__shift")));

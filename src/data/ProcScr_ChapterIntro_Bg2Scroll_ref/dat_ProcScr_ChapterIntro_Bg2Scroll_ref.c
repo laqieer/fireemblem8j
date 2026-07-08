@@ -8,4 +8,4 @@ struct ProcCmd ProcScr_ChapterIntro_Bg2Scroll[] __attribute__((section(".data.re
     PROC_END,
 };
 
-__asm__(".global data_085C3560\n.set data_085C3560, ProcScr_ChapterIntro_Bg2Scroll");
+extern const u32 data_085C3560 __attribute__((alias("ProcScr_ChapterIntro_Bg2Scroll")));

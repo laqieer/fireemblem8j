@@ -78,4 +78,4 @@ SECTION(".rodata.dat_gClassReelOrderedLut_ref") static const u32 gClassReelOrder
     (u32)&gClassReelData + 0x32C,
     0x00000000,
 };
-__asm__(".global gClassReelOrderedLut\n\t.set gClassReelOrderedLut, gClassReelOrderedLut__shift\n");
+extern const u32 gClassReelOrderedLut __attribute__((alias("gClassReelOrderedLut__shift")));

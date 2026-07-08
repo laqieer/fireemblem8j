@@ -12,4 +12,4 @@ struct ProcCmd ProcScr_efxLunaBG2[] __attribute__((section(".data.residue.086013
     PROC_END,
 };
 
-__asm__(".global data_08601388\n.set data_08601388, ProcScr_efxLunaBG2");
+extern const u32 data_08601388 __attribute__((alias("ProcScr_efxLunaBG2")));

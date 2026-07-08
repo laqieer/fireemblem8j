@@ -146,4 +146,4 @@ SECTION(".rodata.dat_gEfxSelfThunderBGFrames_ref") static const u32 gEfxSelfThun
     0x00000000,
     0x00000000,
 };
-__asm__(".global gEfxSelfThunderBGFrames\n\t.set gEfxSelfThunderBGFrames, gEfxSelfThunderBGFrames__shift\n");
+extern const u32 gEfxSelfThunderBGFrames __attribute__((alias("gEfxSelfThunderBGFrames__shift")));

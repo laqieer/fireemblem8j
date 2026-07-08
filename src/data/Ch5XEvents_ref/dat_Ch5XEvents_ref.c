@@ -37,4 +37,4 @@ SECTION(".rodata.dat_Ch5XEvents_ref") static const u32 Ch5XEvents__shift[] = {
     (u32)&EventScr_Ch5x_BeginningScene,
     (u32)&EventScr_Ch5x_EndingScene,
 };
-__asm__(".global Ch5XEvents\n\t.set Ch5XEvents, Ch5XEvents__shift\n");
+extern const u32 Ch5XEvents __attribute__((alias("Ch5XEvents__shift")));

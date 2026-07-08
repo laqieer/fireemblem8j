@@ -47,4 +47,4 @@ SECTION(".rodata.dat_EventListScr_Ch10a_Character_ref") static const u32 EventLi
     0x00000000,
     0x00000000,
 };
-__asm__(".global EventListScr_Ch10a_Character\n\t.set EventListScr_Ch10a_Character, EventListScr_Ch10a_Character__shift\n");
+extern const u32 EventListScr_Ch10a_Character __attribute__((alias("EventListScr_Ch10a_Character__shift")));

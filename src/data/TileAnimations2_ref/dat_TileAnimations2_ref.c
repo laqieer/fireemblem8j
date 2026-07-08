@@ -111,4 +111,4 @@ SECTION(".rodata.dat_TileAnimations2_ref") static const u32 TileAnimations2__shi
     0x00000000,
     0x00000000,
 };
-__asm__(".global TileAnimations2\n\t.set TileAnimations2, TileAnimations2__shift\n");
+extern const u32 TileAnimations2 __attribute__((alias("TileAnimations2__shift")));

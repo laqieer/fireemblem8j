@@ -18,4 +18,4 @@ struct ProcCmd gProcScr_Bmmenu_0[] __attribute__((section(".data.residue.085C3B1
     PROC_END,
 };
 
-__asm__(".global data_085C3B10\n.set data_085C3B10, gProcScr_Bmmenu_0");
+extern const u32 data_085C3B10 __attribute__((alias("gProcScr_Bmmenu_0")));

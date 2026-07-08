@@ -33,4 +33,4 @@ SECTION(".rodata.dat_LagdouRuins5MapChanges_ref") static const u32 LagdouRuins5M
     0x00000000,
     0x00000000,
 };
-__asm__(".global LagdouRuins5MapChanges\n\t.set LagdouRuins5MapChanges, LagdouRuins5MapChanges__shift\n");
+extern const u32 LagdouRuins5MapChanges __attribute__((alias("LagdouRuins5MapChanges__shift")));

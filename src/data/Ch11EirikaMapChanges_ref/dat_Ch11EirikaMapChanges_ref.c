@@ -33,4 +33,4 @@ SECTION(".rodata.dat_Ch11EirikaMapChanges_ref") static const u32 Ch11EirikaMapCh
     0x00000000,
     0x00000000,
 };
-__asm__(".global Ch11EirikaMapChanges\n\t.set Ch11EirikaMapChanges, Ch11EirikaMapChanges__shift\n");
+extern const u32 Ch11EirikaMapChanges __attribute__((alias("Ch11EirikaMapChanges__shift")));

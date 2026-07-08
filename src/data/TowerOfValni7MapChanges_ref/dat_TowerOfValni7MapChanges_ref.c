@@ -34,4 +34,4 @@ SECTION(".rodata.dat_TowerOfValni7MapChanges_ref") static const u32 TowerOfValni
     0x00000000,
     0x00000000,
 };
-__asm__(".global TowerOfValni7MapChanges\n\t.set TowerOfValni7MapChanges, TowerOfValni7MapChanges__shift\n");
+extern const u32 TowerOfValni7MapChanges __attribute__((alias("TowerOfValni7MapChanges__shift")));

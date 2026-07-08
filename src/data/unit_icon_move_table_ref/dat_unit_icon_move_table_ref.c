@@ -457,4 +457,4 @@ SECTION(".rodata.dat_unit_icon_move_table_ref") static const u32 unit_icon_move_
     (u32)&unit_icon_move_Pupil_T2_sheet,
     (u32)&unit_icon_move_Pupil_T2_motion,
 };
-__asm__(".global unit_icon_move_table\n\t.set unit_icon_move_table, unit_icon_move_table__shift\n");
+extern const u32 unit_icon_move_table __attribute__((alias("unit_icon_move_table__shift")));

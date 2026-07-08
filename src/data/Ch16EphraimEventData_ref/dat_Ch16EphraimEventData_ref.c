@@ -39,4 +39,4 @@ SECTION(".rodata.dat_Ch16EphraimEventData_ref") static const u32 Ch16EphraimEven
     (u32)&EventScr_Ch16b_BeginningScene,
     (u32)&EventScr_Ch16b_BeginningScene + 0x18,
 };
-__asm__(".global Ch16EphraimEventData\n\t.set Ch16EphraimEventData, Ch16EphraimEventData__shift\n");
+extern const u32 Ch16EphraimEventData __attribute__((alias("Ch16EphraimEventData__shift")));
