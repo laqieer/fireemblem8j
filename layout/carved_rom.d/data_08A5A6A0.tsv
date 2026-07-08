@@ -1,6 +1,14 @@
 # Phase-1 data table: gFlagBitMaskLut (eventinfo.c), JP 0x08A5A6A0, 13 B.
 # Typed C array ported from fireemblem8u (u8 CONST_DATA gFlagBitMaskLut[] = {1<<n}).
 # Region-SAME (pure bitmask LUT) -> bytes byte-match the JP ROM. COMMITTED source.
-# The remaining 115 B of the old D29 residue split off into data_08A5A6AD.
+# The remaining 115 B of the old D29 residue split off into data_08A5A6AD: a 3 B
+# LEAVE (byte-completeness) + 7 named Prologue event lists (make compare oracle).
 A5A6A0	A5A6AD	src/eventinfo.o(.data)	eventinfo: gFlagBitMaskLut (typed C, region-same)
-A5A6AD	A5A720	src/data/data_08A5A6AD/data_08A5A6AD.o(.data.residue.08A5A6AD)	descriptive raw ROM data (115 B; split off for typed gFlagBitMaskLut)
+A5A6AD	A5A6B0	src/data/data_08A5A6AD/data_08A5A6AD.o(.data.residue.08A5A6AD)	data_08A5A6AD (3 B LEAVE, byte-completeness residue)
+A5A6B0	A5A6E4	src/data/data_08A5A6AD/data_08A5A6AD.o(.data.residue.08A5A6B0)	EventListScr_Prologue_Turn (52 B)
+A5A6E4	A5A6E8	src/data/data_08A5A6AD/data_08A5A6AD.o(.data.residue.08A5A6E4)	EventListScr_Prologue_Character (4 B)
+A5A6E8	A5A6EC	src/data/data_08A5A6AD/data_08A5A6AD.o(.data.residue.08A5A6E8)	EventListScr_Prologue_Location (4 B)
+A5A6EC	A5A714	src/data/data_08A5A6AD/data_08A5A6AD.o(.data.residue.08A5A6EC)	EventListScr_Prologue_Misc (40 B)
+A5A714	A5A718	src/data/data_08A5A6AD/data_08A5A6AD.o(.data.residue.08A5A714)	EventListScr_Prologue_SelectUnit (4 B)
+A5A718	A5A71C	src/data/data_08A5A6AD/data_08A5A6AD.o(.data.residue.08A5A718)	EventListScr_Prologue_SelectDestination (4 B)
+A5A71C	A5A720	src/data/data_08A5A6AD/data_08A5A6AD.o(.data.residue.08A5A71C)	EventListScr_Prologue_UnitMove (4 B)

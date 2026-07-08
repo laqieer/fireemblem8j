@@ -11,19 +11,25 @@
 extern const u8 EventListScr_Prologue_Tutorial[];
 extern const u8 EventScr_Prologue_BeginningScene[];
 extern const u8 EventScr_Prologue_EndingScene[];
-extern const u8 data_08A5A6AD[];
+extern const u8 EventListScr_Prologue_Turn[];
+extern const u8 EventListScr_Prologue_Character[];
+extern const u8 EventListScr_Prologue_Location[];
+extern const u8 EventListScr_Prologue_Misc[];
+extern const u8 EventListScr_Prologue_SelectUnit[];
+extern const u8 EventListScr_Prologue_SelectDestination[];
+extern const u8 EventListScr_Prologue_UnitMove[];
 extern const u8 frontier_df4_banim_b_073_907F78[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
 SECTION(".rodata.dat_PrologueEvents_ref") static const u32 PrologueEvents__shift[] = {
-    (u32)&data_08A5A6AD + 0x3,
-    (u32)&data_08A5A6AD + 0x37,
-    (u32)&data_08A5A6AD + 0x3B,
-    (u32)&data_08A5A6AD + 0x3F,
-    (u32)&data_08A5A6AD + 0x67,
-    (u32)&data_08A5A6AD + 0x6B,
-    (u32)&data_08A5A6AD + 0x6F,
+    (u32)&EventListScr_Prologue_Turn,
+    (u32)&EventListScr_Prologue_Character,
+    (u32)&EventListScr_Prologue_Location,
+    (u32)&EventListScr_Prologue_Misc,
+    (u32)&EventListScr_Prologue_SelectUnit,
+    (u32)&EventListScr_Prologue_SelectDestination,
+    (u32)&EventListScr_Prologue_UnitMove,
     (u32)&EventListScr_Prologue_Tutorial,
     (u32)&gUidebug_2 + 0x310,
     (u32)&frontier_df4_menu_005_A5FFAD + 0x24,
