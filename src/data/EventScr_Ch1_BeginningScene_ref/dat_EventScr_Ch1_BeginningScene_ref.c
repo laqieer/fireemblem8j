@@ -12,7 +12,7 @@
 
 extern const u8 UnitDef_Event_Ch1Enemy[];
 extern const u8 Event_TextWithBG[];
-extern const u8 data_08908790[];
+extern const u8 UnitDef_Event_Ch1NPC[];
 extern const u8 EventScr_Ch1Tut_GuideWTA[];
 extern const u8 EventScr_CallOnTutorialMode[];
 extern const u8 UnitDef_Event_Ch1Ally[];
@@ -30,7 +30,7 @@ SECTION(".rodata.dat_EventScr_Ch1_BeginningScene_ref") EventListScr EventScr_Ch1
     SVAL(EVT_SLOT_2, 0x39)
     SVAL(EVT_SLOT_3, 0x8E9)
     CALL(Event_TextWithBG)
-    LOAD1(1, data_08908790)
+    LOAD1(1, UnitDef_Event_Ch1NPC)
     ENUN
     SVAL(EVT_SLOT_B, 0)
     DISA(0xFFFE)

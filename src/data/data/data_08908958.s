@@ -21,7 +21,7 @@ data_08908958:
 	.4byte 0x00000000
 	.4byte 0x08004806
 	.4byte 0x01000040
-	.4byte data_08908790 + 0x94
+	.4byte REDA_Ch2Ally_VANESSA
 	.4byte 0x006C1C15
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -31,12 +31,12 @@ data_08908958:
 	.4byte 0x00000000
 	.4byte 0x0A003D07
 	.4byte 0x0100008B
-	.4byte data_08908790 + 0x9C
+	.4byte REDA_Ch2NPC_ROSS
 	.4byte 0x00006C2C
 	.4byte 0x00000A00
 	.4byte 0x22003F0A
 	.4byte 0x0100008B
-	.4byte data_08908790 + 0xA4
+	.4byte REDA_Ch2NPC_GARCIA
 	.4byte 0x006C281F
 	.4byte 0x00000300
 	.4byte 0x00000000
@@ -46,12 +46,12 @@ data_08908958:
 	.4byte 0x00000000
 	.4byte 0x1500418E
 	.4byte 0x01000240
-	.4byte data_08908790 + 0xAC
+	.4byte REDA_Ch2Enemy_1_0
 	.4byte 0x0000001F
 	.4byte 0x00090400
 	.4byte 0x1D00418E
 	.4byte 0x01000240
-	.4byte data_08908790 + 0xB4
+	.4byte REDA_Ch2Enemy_1_1
 	.4byte 0x0000001F
 	.4byte 0x00090400
 	.4byte 0x00000000
@@ -61,7 +61,7 @@ data_08908958:
 	.4byte 0x00000000
 	.4byte 0x35004148
 	.4byte 0x0100020E
-	.4byte data_08908790 + 0xBC
+	.4byte REDA_Ch2Enemy_2_BAZBA
 	.4byte 0x00000020
 	.4byte 0x00090400
 	.4byte 0x00000000
