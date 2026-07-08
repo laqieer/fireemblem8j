@@ -11,19 +11,26 @@
 extern const u8 EventScr_Ch5x_BeginningScene[];
 extern const u8 EventScr_Ch5x_EndingScene[];
 extern const u8 UnitDef_Event_Ch5xAlly[];
-extern const u8 data_08A5ADC8[];
+extern const u8 EventListScr_Ch5x_Turn[];
+extern const u8 EventListScr_Ch5x_Character[];
+extern const u8 EventListScr_Ch5x_Location[];
+extern const u8 EventListScr_Ch5x_Misc[];
+extern const u8 EventListScr_Ch5x_SelectUnit[];
+extern const u8 EventListScr_Ch5x_SelectDestination[];
+extern const u8 EventListScr_Ch5x_UnitMove[];
+extern const u8 EventListScr_Ch5x_Tutorial[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
 SECTION(".rodata.dat_Ch5XEvents_ref") static const u32 Ch5XEvents__shift[] = {
-    (u32)&data_08A5ADC8,
-    (u32)&data_08A5ADC8 + 0x4,
-    (u32)&data_08A5ADC8 + 0x8,
-    (u32)&data_08A5ADC8 + 0x48,
-    (u32)&data_08A5ADC8 + 0x58,
-    (u32)&data_08A5ADC8 + 0x5C,
-    (u32)&data_08A5ADC8 + 0x60,
-    (u32)&data_08A5ADC8 + 0x64,
+    (u32)&EventListScr_Ch5x_Turn,
+    (u32)&EventListScr_Ch5x_Character,
+    (u32)&EventListScr_Ch5x_Location,
+    (u32)&EventListScr_Ch5x_Misc,
+    (u32)&EventListScr_Ch5x_SelectUnit,
+    (u32)&EventListScr_Ch5x_SelectDestination,
+    (u32)&EventListScr_Ch5x_UnitMove,
+    (u32)&EventListScr_Ch5x_Tutorial,
     (u32)&gUidebug_2 + 0x319,
     (u32)&frontier_df4_menu_005_A5FFAD + 0x2D,
     (u32)&UnitDef_Event_Ch5xAlly,
