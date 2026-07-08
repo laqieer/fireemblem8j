@@ -11,14 +11,9 @@ extern u8 AnimSprite_EfxArrowObj1[1] __attribute__((alias("Obj_EfxArrowOBJ")));
  * frame of 2 sprites + ANIM_SPRITE_END, same .short form as the sibling
  * AnimSprite_EfxArrowObj2/3 below (cf fe8u Obj_EfxArrowOBJ in
  * src/data/banim/data_banim.s). Byte-identical, verified by `make compare`. */
-__asm__(
-"	.section .rodata.dat_worldmap_gmapunit_p798, \"a\", %progbits\n"
-"	.global Obj_EfxArrowOBJ\n"
-"Obj_EfxArrowOBJ:\n"
-"	.short 0x4000, 0x0000, 0x0000, -61, -14, 0\n"
-"	.short 0x0000, 0x0000, 0x0002, -45, -14, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
+const u16 Obj_EfxArrowOBJ[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p798"))) = {
+    0x4000, 0x0000, 0x0000, 0xFFC3, 0xFFF2, 0x0000, 0x0000, 0x0000, 0x0002, 0xFFD3, 0xFFF2, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
+};
 struct AnimSpriteData AnimSprite_EfxArrowObj2[] __attribute__((section(".rodata.dat_worldmap_gmapunit_p798"))) =
 {
     { .header = 0x00004000, .as = { .object = { 0x0000, -93, -14 } } },

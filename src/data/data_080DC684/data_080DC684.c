@@ -88,33 +88,21 @@ __asm__(
 );
 
 /* carved from data_080DC684 [0x64..0x6c) -> Str_DebugPlaythroughCount - 周回数 (0x080DC6E8) */
-__asm__(
-"\t.section .data.residue.080DC684, \"aw\", %progbits\n"
-"\t.global Str_DebugPlaythroughCount\n"
-"Str_DebugPlaythroughCount:\n"
-"\t.byte 0x8e, 0xfc, 0x89, 0xf1, 0x90, 0x94, 0x00, 0x00\n"
-);
+u8 Str_DebugPlaythroughCount[] __attribute__((section(".data.residue.080DC684"))) = {
+    0x8E, 0xFC, 0x89, 0xF1, 0x90, 0x94, 0x00, 0x00,
+};
 /* carved from data_080DC684 [0x6c..0x74) -> Str_DebugPlaythroughTh - 周目  (0x080DC6F0) */
-__asm__(
-"\t.section .data.residue.080DC684, \"aw\", %progbits\n"
-"\t.global Str_DebugPlaythroughTh\n"
-"Str_DebugPlaythroughTh:\n"
-"\t.byte 0x8e, 0xfc, 0x96, 0xda, 0x00, 0x00, 0x00, 0x00\n"
-);
+u8 Str_DebugPlaythroughTh[] __attribute__((section(".data.residue.080DC684"))) = {
+    0x8E, 0xFC, 0x96, 0xDA, 0x00, 0x00, 0x00, 0x00,
+};
 /* carved from data_080DC684 [0x74..0x80) -> data_080DC6F8 */
-__asm__(
-"\t.section .data.residue.080DC684, \"aw\", %progbits\n"
-"\t.global data_080DC6F8\n"
-"data_080DC6F8:\n"
-"\t.byte 0x82, 0xe0, 0x82, 0xa4, 0x82, 0xbe, 0x82, 0xdf, 0x82, 0xdb, 0x00, 0x00\n"
-);
+u8 data_080DC6F8[] __attribute__((section(".data.residue.080DC684"))) = {
+    0x82, 0xE0, 0x82, 0xA4, 0x82, 0xBE, 0x82, 0xDF, 0x82, 0xDB, 0x00, 0x00,
+};
 /* carved from data_080DC684 [0x80..0x88) -> Str_DebugFogState - さく敵 (0x080DC704) */
-__asm__(
-"\t.section .data.residue.080DC684, \"aw\", %progbits\n"
-"\t.global Str_DebugFogState\n"
-"Str_DebugFogState:\n"
-"\t.byte 0x82, 0xb3, 0x82, 0xad, 0x93, 0x47, 0x00, 0x00\n"
-);
+u8 Str_DebugFogState[] __attribute__((section(".data.residue.080DC684"))) = {
+    0x82, 0xB3, 0x82, 0xAD, 0x93, 0x47, 0x00, 0x00,
+};
 
 __asm__(
 "\t.section .data.residue.080DC684, \"aw\", %progbits\n"
