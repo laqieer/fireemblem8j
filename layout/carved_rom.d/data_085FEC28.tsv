@@ -1,2 +1,3 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-5FEC28	5FED30	src/data/data_085FEC28/data_085FEC28.o(.data.residue.085FEC28)	descriptive raw ROM data (264 B, byte-completeness D29)
+# byte-neutral SPLIT of data_085FEC28 into 2 named sub-objects (make compare oracle)
+5FEC28	5FECA0	src/data/data_085FEC28/data_085FEC28.o(.data.residue.085FEC28)	AnimSprite_EkrBaseKaiten_84 (120 B)
+5FECA0	5FED30	src/data/data_085FEC28/data_085FEC28.o(.data.residue.085FECA0)	AnimSprite_EkrBaseKaiten_85 (144 B)

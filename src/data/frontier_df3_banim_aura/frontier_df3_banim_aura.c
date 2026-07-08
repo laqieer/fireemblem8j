@@ -110,7 +110,8 @@ extern const u8 banim_genm_al1_sheet_2[];
 extern const u8 banim_genm_sw1_2_oam_l_bin[];
 extern const u8 btl_bg_3_tiles[];
 extern const u8 data_085D30F8[];
-extern const u8 data_08613A6C[];
+extern const u8 Tsa_DarkBreathBg_10[];
+extern const u8 Tsa_DarkBreathBg_11[];
 extern const u8 gGfx_0878F150[];
 extern const u8 pad_BC3A00[];
 extern const u8 portrait_Villager_Girl_Young_mouth[];
@@ -543,7 +544,7 @@ u32 frontier_df3_banim_aura_002_74FD8C[] __attribute__((section(".data.frontier_
     0xAB170135, 0x803111BA, 0xCCDC3D0D, 0xDD777DDC, 0x4502BD7D, 0x1069327F,
     0x1600177E, 0x8502ECA8, 0xD21610F3, 0x7001F083, 0xF0000001, 0xFF01F001,
     0x01F001F0, 0x01F001F0, 0x01F001F0, 0x01F001F0, 0xF001F0FF, 0xF001F001,
-    0xF001F001, 0xF001F001, 0x01F0C001, 0x00000150, 0x5F4F520E, (u32)&data_08613A6C + 0xB7,
+    0xF001F001, 0xF001F001, 0x01F0C001, 0x00000150, 0x5F4F520E, (u32)&Tsa_DarkBreathBg_10 + 0xB7,
     (u32)&Img_ManimBarrierBgfx + 0x7A1, 0x04611E23, 0x0D810461, 0x052104A1, (u32)&Img_DemonLightBg_Close_25 + 0xCC6, 0x04410881,
     0x00050010, 0x1000F420, 0x02000101, 0x00000300, 0x00050004, 0x00070006,
     0x09000800, 0x0B000A00, 0x000C0000, 0x000E000D, 0x1000000F, 0x12001100,

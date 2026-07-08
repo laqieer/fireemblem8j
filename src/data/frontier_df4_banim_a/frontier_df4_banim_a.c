@@ -1078,14 +1078,21 @@ extern const u8 data_085FD998[];
 extern const u8 AnimSprite_EkrBaseKaiten_58[];
 extern const u8 AnimSprite_EkrBaseKaiten_70[];
 extern const u8 AnimSprite_EkrBaseKaiten_72[];
-extern const u8 data_085FEC28[];
+extern const u8 AnimSprite_EkrBaseKaiten_84[];
+extern const u8 AnimSprite_EkrBaseKaiten_85[];
 extern const u8 AnimSprite_EkrBaseKaiten_87[];
-extern const u8 data_08613A6C[];
+extern const u8 Tsa_DarkBreathBg_10[];
+extern const u8 Tsa_DarkBreathBg_11[];
 extern const u8 data_08636008[];
-extern const u8 data_086724CC[];
-extern const u8 data_0867B54C[];
-extern const u8 data_086AC554[];
-extern const u8 data_086BAB74[];
+extern const u8 Tsa_DivineBg_16[];
+extern const u8 Tsa_DivineBg_17[];
+extern const u8 Tsa_DivineBg_18[];
+extern const u8 Tsa_EclipseBg_B[];
+extern const u8 Tsa_EclipseBg_C[];
+extern const u8 Tsa_SilenceBg_0[];
+extern const u8 Tsa_SilenceBg_1[];
+extern const u8 Tsa_BarrierBg_0[];
+extern const u8 Tsa_BarrierBg_1[];
 extern const u8 data_087548F0[];
 extern const u8 data_087549F8[];
 extern const u8 data_08754B34[];
@@ -2241,10 +2248,10 @@ u32 frontier_df4_banim_a_008_5FE7D8[] __attribute__((section(".data.frontier_df4
 u32 frontier_df4_banim_a_009_5FF000[] __attribute__((section(".data.frontier_df4_banim_a.gap9"))) = {
     (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x122, (u32)&AnimSprite_EkrBaseKaiten_88 + 0x2, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x13A, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x175, (u32)&AnimSprite_EkrBaseKaiten_89 + 0x1, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x1ED,
     (u32)&AnimSprite_EkrBaseKaiten_81 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_82 + 0x1, 0x80000000, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x122, (u32)&AnimSprite_EkrBaseKaiten_88 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_83 + 0x2,
-    (u32)&data_085FEC28 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_90 + 0x1, (u32)&data_085FEC28 + 0x79, (u32)&AnimSprite_EkrBaseKaiten_86 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_87 + 0x1, 0x80000000,
+    (u32)&AnimSprite_EkrBaseKaiten_84 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_90 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_85 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_86 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_87 + 0x1, 0x80000000,
     (u32)&AnimSprite_EkrBaseKaiten_82 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_81 + 0x1, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x1ED, (u32)&AnimSprite_EkrBaseKaiten_89 + 0x1, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x175, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x13A,
-    (u32)&AnimSprite_EkrBaseKaiten_88 + 0x2, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x122, 0x80000000, (u32)&AnimSprite_EkrBaseKaiten_87 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_86 + 0x1, (u32)&data_085FEC28 + 0x79,
-    (u32)&AnimSprite_EkrBaseKaiten_90 + 0x1, (u32)&data_085FEC28 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_83 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_88 + 0x2, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x122, 0x80000000,
+    (u32)&AnimSprite_EkrBaseKaiten_88 + 0x2, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x122, 0x80000000, (u32)&AnimSprite_EkrBaseKaiten_87 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_86 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_85 + 0x1,
+    (u32)&AnimSprite_EkrBaseKaiten_90 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_84 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_83 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_88 + 0x2, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x122, 0x80000000,
     (u32)&StartSpellAnimDummy, (u32)&StartSpellAnimHandAxe, (u32)&StartSpellAnimBindingBlade, (u32)&StartSpellAnimJavelin, (u32)&StartSpellAnimJavelinCavalier, (u32)&StartSpellAnimJavelinSoldier,
     (u32)&StartSpellAnimJavelinPaladin, (u32)&StartSpellAnimJavelinPegasusKnight, (u32)&StartSpellAnimJavelinFalcon, (u32)&StartSpellAnimJavelinWyvernRider, (u32)&StartSpellAnimJavelinWyvernLord, (u32)&StartSpellAnimJavelinGenerial,
     (u32)&StartSpellAnimJavelinUnk, (u32)&StartSpellAnimJavelinPaladinF, (u32)&StartSpellAnimSong, (u32)&StartSpellAnimDance, (u32)&StartSpellAnimBallista, (u32)&StartSpellAnimSilence,
@@ -2369,7 +2376,7 @@ u32 data_085FF628[] __attribute__((section(".data.frontier_df4_banim_a.gap9"))) 
     0x00000001, (u32)&Frames_efxFirebreathBGCOL + 0xFC, 0x00000003, (u32)&efxDarkbreath_Loop_Main, 0x00000000, 0x00000000,
     0x00000001, (u32)&Frames_efxFirebreathBGCOL + 0x10C, 0x00000003, (u32)&efxMshieldBG_Loop, 0x00000000, 0x00000000,
     (u32)&Tsa_DarkBreathBg_0, (u32)&Tsa_DarkBreathBg_1, (u32)&Tsa_DarkBreathBg_2, (u32)&Tsa_DarkBreathBg_3, (u32)&Tsa_DarkBreathBg_4, (u32)&Tsa_DarkBreathBg_5,
-    (u32)&Tsa_DarkBreathBg_6, (u32)&Tsa_DarkBreathBg_7, (u32)&Tsa_DarkBreathBg_8, (u32)&Tsa_DarkBreathBg_9, (u32)&data_08613A6C, (u32)&data_08613A6C + 0xFC,
+    (u32)&Tsa_DarkBreathBg_6, (u32)&Tsa_DarkBreathBg_7, (u32)&Tsa_DarkBreathBg_8, (u32)&Tsa_DarkBreathBg_9, (u32)&Tsa_DarkBreathBg_10, (u32)&Tsa_DarkBreathBg_11,
     0x00000001, (u32)&frontier_df4_misc_lo_007_0E1870 + 0x3C4, 0x000A000F, 0x00000000, 0x00000003, (u32)&sub_805E780,
     0x00000000, 0x00000000,
 };
@@ -2592,8 +2599,8 @@ u32 data_08600594[] __attribute__((section(".data.frontier_df4_banim_a.gap11")))
     (u32)&Img_DivineBg, (u32)&Img_DivineBg, (u32)&Img_DivineBg, (u32)&Img_DivineBg, (u32)&Img_DivineBg, (u32)&Img_DivineBg,
     (u32)&Img_DivineBg, (u32)&Img_DivineBg, (u32)&frontier_df4_banim_b_023_6719A8, (u32)&frontier_df4_banim_b_023b_671A48, (u32)&frontier_df4_banim_b_023c_671AF0, (u32)&frontier_df4_banim_b_023d_671B98,
     (u32)&frontier_df4_banim_b_023e_671C48, (u32)&frontier_df4_banim_b_023f_671D00, (u32)&frontier_df4_banim_b_023g_671DCC, (u32)&frontier_df4_banim_b_023h_671E98, (u32)&frontier_df4_banim_b_023i_671F6C, (u32)&frontier_df4_banim_b_023j_672044,
-    (u32)&frontier_df4_banim_b_023k_672120, (u32)&Tsa_DivineBg_12, (u32)&Tsa_DivineBg_13, (u32)&Tsa_DivineBg_14, (u32)&Tsa_DivineBg_15, (u32)&data_086724CC,
-    (u32)&data_086724CC + 0x9C, (u32)&data_086724CC + 0x138, (u32)&Tsa_DivineBg_19, (u32)&Tsa_DivineBg_20, (u32)&Img_DivineBg, (u32)&Img_DivineBg,
+    (u32)&frontier_df4_banim_b_023k_672120, (u32)&Tsa_DivineBg_12, (u32)&Tsa_DivineBg_13, (u32)&Tsa_DivineBg_14, (u32)&Tsa_DivineBg_15, (u32)&Tsa_DivineBg_16,
+    (u32)&Tsa_DivineBg_17, (u32)&Tsa_DivineBg_18, (u32)&Tsa_DivineBg_19, (u32)&Tsa_DivineBg_20, (u32)&Img_DivineBg, (u32)&Img_DivineBg,
     (u32)&Img_DivineBg, (u32)&Tsa_DivineBg2_0, (u32)&Tsa_DivineBg2_1, (u32)&Tsa_DivineBg2_2, (u32)&Img_DivineBg3_0, (u32)&Img_DivineBg3_0,
     (u32)&Img_DivineBg3_1, (u32)&Img_DivineBg3_2, (u32)&Img_DivineBg3_3, (u32)&Img_DivineBg3_4, (u32)&Img_DivineBg3_5, (u32)&Img_DivineBg3_6,
     (u32)&Img_DivineBg3_7, (u32)&Img_DivineBg3_8, (u32)&Img_DivineBg3_9, (u32)&Img_DivineBg3_10, (u32)&Img_DivineBg3_11, (u32)&Img_DivineBg3_12,
@@ -2608,7 +2615,7 @@ u32 data_08600594[] __attribute__((section(".data.frontier_df4_banim_a.gap11")))
    every embedded ROM pointer -> .4byte Sym(+addend), byte-exact. make compare is the oracle. */
 u32 frontier_df4_banim_a_012_600754[] __attribute__((section(".data.frontier_df4_banim_a.gap12"))) = {
     0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638, 0x00000003, (u32)&sub_806166C, 0x00000000, 0x00000000,
-    (u32)&Tsa_EclipseBg_A, (u32)&data_0867B54C, (u32)&data_0867B54C + 0xA0, (u32)&Tsa_EclipseBg_D, (u32)&Tsa_EclipseBg_E, (u32)&Tsa_EclipseBg_F,
+    (u32)&Tsa_EclipseBg_A, (u32)&Tsa_EclipseBg_B, (u32)&Tsa_EclipseBg_C, (u32)&Tsa_EclipseBg_D, (u32)&Tsa_EclipseBg_E, (u32)&Tsa_EclipseBg_F,
     (u32)&Tsa_EclipseBg_G, (u32)&Tsa_EclipseBg_H, (u32)&Tsa_EclipseBg_I, (u32)&Tsa_EclipseBg_J, (u32)&Tsa_EclipseBg_K, (u32)&Tsa_EclipseBg_L,
     (u32)&Tsa_EclipseBg_M, (u32)&Tsa_EclipseBg_N, (u32)&Tsa_EclipseBg_O, (u32)&Tsa_EclipseBg_P, (u32)&Tsa_EclipseBg_Q, (u32)&Tsa_EclipseBg_R,
     (u32)&Tsa_EclipseBg_S, (u32)&Tsa_EclipseBg_T, (u32)&Tsa_EclipseBg_U, (u32)&Tsa_EclipseBg_V, (u32)&Tsa_EclipseBg_W, (u32)&Tsa_EclipseBg_X,
@@ -2690,7 +2697,7 @@ u32 frontier_df4_banim_a_res19[] __attribute__((section(".data.frontier_df4_bani
 u32 data_08600DB8[] __attribute__((section(".data.frontier_df4_banim_a.gap12"))) = {
     0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0x708, 0x00000003, (u32)&efxSilence_Loop_Main, 0x00000000, 0x00000000,
     0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0x714, 0x00000003, (u32)&efxDarkbreathBG_Loop, 0x00000000, 0x00000000,
-    (u32)&data_086AC554, (u32)&data_086AC554 + 0xFC, (u32)&Tsa_SilenceBg_2, (u32)&frontier_df4_banim_b_037_6AC820, (u32)&frontier_df4_banim_b_037b_6AC908, (u32)&frontier_df4_banim_b_037c_6ACA04,
+    (u32)&Tsa_SilenceBg_0, (u32)&Tsa_SilenceBg_1, (u32)&Tsa_SilenceBg_2, (u32)&frontier_df4_banim_b_037_6AC820, (u32)&frontier_df4_banim_b_037b_6AC908, (u32)&frontier_df4_banim_b_037c_6ACA04,
     (u32)&frontier_df4_banim_b_037d_6ACAEC, (u32)&frontier_df4_banim_b_037e_6ACB84, (u32)&frontier_df4_banim_b_037f_6ACC6C, (u32)&frontier_df4_banim_b_037g_6ACD04, (u32)&frontier_df4_banim_b_037h_6ACDEC, (u32)&frontier_df4_banim_b_037i_6ACEE8,
     (u32)&frontier_df4_banim_b_037j_6ACF80, (u32)&frontier_df4_banim_b_037k_6AD068, (u32)&frontier_df4_banim_b_037l_6AD100, (u32)&frontier_df4_banim_b_037m_6AD1FC, (u32)&Tsa_SilenceBg_16, (u32)&Tsa_SilenceBg_17,
     0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0x76C, 0x00000004, (u32)&efxSilenceOBJ_OnEnd, 0x0028000E, 0x00000000,
@@ -2739,7 +2746,7 @@ u32 data_08601000[] __attribute__((section(".data.frontier_df4_banim_a.gap12")))
 u32 data_08601108[] __attribute__((section(".data.frontier_df4_banim_a.gap12"))) = {
     0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0x95C, 0x00000003, (u32)&efxMshield_Loop_Main, 0x00000000, 0x00000000,
     0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0x968, 0x00000003, (u32)&efxSilenceBG_Loop, 0x00000000, 0x00000000,
-    (u32)&data_086BAB74, (u32)&data_086BAB74 + 0xB8, (u32)&Tsa_BarrierBg_2, (u32)&Tsa_BarrierBg_3, (u32)&Tsa_BarrierBg_4, 0x00000001,
+    (u32)&Tsa_BarrierBg_0, (u32)&Tsa_BarrierBg_1, (u32)&Tsa_BarrierBg_2, (u32)&Tsa_BarrierBg_3, (u32)&Tsa_BarrierBg_4, 0x00000001,
     (u32)&frontier_df4_misc_lo_008_0E2638 + 0xA40, 0x00000004, (u32)&sub_8064568, 0x00DC000E, 0x00000000, 0x00000000,
     0x00000000, 0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0xA50, 0x00000004, (u32)&sub_8064568, 0x006E000E,
     0x00000000, 0x00000000, 0x00000000, 0x00000001, (u32)&frontier_df4_misc_lo_008_0E2638 + 0xA60, 0x00000003,

@@ -1588,7 +1588,11 @@ extern const u8 btl_bg_8_map[];
 extern const u8 btl_bg_8_palette[];
 extern const u8 data_08616558[];
 extern const u8 AnimSprite_EfxMistyRainObj4_12[];
-extern const u8 data_086DF490[];
+extern const u8 Pal_GleipnirBg_Nebula_2[];
+extern const u8 Pal_GleipnirBg_Nebula_3[];
+extern const u8 Pal_GleipnirBg_Nebula_4[];
+extern const u8 Pal_GleipnirBg_Nebula_5[];
+extern const u8 Pal_GleipnirBg_Nebula_6[];
 extern const u8 data_08713018[];
 extern const u8 data_0874687C[];
 extern const u8 data_08746D0C[];
@@ -2723,7 +2727,7 @@ u32 frontier_df4_banim_b_000_602568[] __attribute__((section(".data.frontier_df4
     (u32)&Img_GleipnirBg_Nebula_0, (u32)&Img_GleipnirBg_Nebula_1, (u32)&Img_GleipnirBg_Nebula_2, (u32)&Img_GleipnirBg_Nebula_3, (u32)&Img_GleipnirBg_Nebula_4, (u32)&Img_GleipnirBg_Nebula_5,
     (u32)&Img_GleipnirBg_Nebula_6, (u32)&Img_GleipnirBg_Nebula_7, (u32)&Img_GleipnirBg_Nebula_8, (u32)&Img_GleipnirBg_Nebula_9, (u32)&Img_GleipnirBg_Nebula_10, (u32)&Img_GleipnirBg_Nebula_11,
     (u32)&Img_GleipnirBg_Nebula_12, (u32)&Img_GleipnirBg_Nebula_13, (u32)&Img_GleipnirBg_Nebula_14, (u32)&Img_GleipnirBg_Nebula_15, (u32)&Pal_GleipnirBg_Nebula_0, (u32)&Pal_GleipnirBg_Nebula_1,
-    (u32)&data_086DF490, (u32)&data_086DF490 + 0x20, (u32)&data_086DF490 + 0x40, (u32)&data_086DF490 + 0x60, (u32)&data_086DF490 + 0x80, (u32)&Pal_GleipnirBg_Nebula_7,
+    (u32)&Pal_GleipnirBg_Nebula_2, (u32)&Pal_GleipnirBg_Nebula_3, (u32)&Pal_GleipnirBg_Nebula_4, (u32)&Pal_GleipnirBg_Nebula_5, (u32)&Pal_GleipnirBg_Nebula_6, (u32)&Pal_GleipnirBg_Nebula_7,
     (u32)&Pal_GleipnirBg_Nebula_8, (u32)&Pal_GleipnirBg_Nebula_9, (u32)&Pal_GleipnirBg_Nebula_10, (u32)&Pal_GleipnirBg_Nebula_11, (u32)&Pal_GleipnirBg_Nebula_12, (u32)&Pal_GleipnirBg_Nebula_13,
     (u32)&Pal_GleipnirBg_Nebula_14, (u32)&Pal_GleipnirBg_Nebula_15, (u32)&Pal_GleipnirBg_Fog + 0x20, (u32)&frontier_df4_banim_b_051_6E0CF4, (u32)&Pal_GleipnirBg_Fog, 0x00000001,
     (u32)&gFrameConfig_GleipnirBg_Fog + 0x8, 0x00000003, (u32)&efxDarkGradoBG02_Loop_A + 0x1, 0x000E000E, 0x00000000, 0x00000002,

@@ -4,4 +4,5 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 data_08613A6C[] __attribute__((section(".data.residue.08613A6C"))) = INCBIN_U8("data/residual/data_08613A6C_0.map.bin.lz", "data/residual/data_08613A6C_1.map.bin.lz");
+u16 Tsa_DarkBreathBg_10[] __attribute__((section(".data.residue.08613A6C"))) = INCBIN_U16("data/residual/data_08613A6C_0.map.bin.lz");
+u16 Tsa_DarkBreathBg_11[] __attribute__((section(".data.residue.08613B68"))) = INCBIN_U16("data/residual/data_08613A6C_1.map.bin.lz");
