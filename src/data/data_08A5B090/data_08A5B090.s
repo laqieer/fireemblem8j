@@ -28,7 +28,7 @@ EventListScr_Ch8_Location:
 	.global EventListScr_Ch8_Misc
 EventListScr_Ch8_Misc:
 	.4byte 0x000B000B
-	.4byte data_08A652C0 + 0xA8
+	.4byte EventScr_Ch8_EndingScene + 0xA8
 	.4byte 0x0A0F0005
 	.4byte 0x00000001
 	.4byte data_085B9EE8

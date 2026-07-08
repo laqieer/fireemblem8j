@@ -1,9 +1,9 @@
-/* Migrated from asm/data_08A652C0.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral RENAME of data_08A652C0 -> EventScr_Ch8_EndingScene (whole object, single section).
+ * Directive stream preserved verbatim. make compare is the oracle. */
+
 	.section .data.residue.08A652C0, "aw", %progbits
-	.global data_08A652C0
-data_08A652C0:
+	.global EventScr_Ch8_EndingScene
+EventScr_Ch8_EndingScene:
 	.4byte 0x00311220
 	.4byte 0x00020540
 	.4byte 0x00000015

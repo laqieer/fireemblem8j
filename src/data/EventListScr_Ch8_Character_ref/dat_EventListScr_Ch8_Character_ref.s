@@ -6,35 +6,35 @@
 	.global EventListScr_Ch8_Character
 EventListScr_Ch8_Character:
 	.4byte 0x00070003
-	.4byte data_08A652C0 + 0x2C
+	.4byte EventScr_Ch8_EndingScene + 0x2C
 	.4byte 0x00000F01
 	.4byte 0x00000000
 	.4byte 0x00070003
-	.4byte data_08A652C0 + 0x2C
+	.4byte EventScr_Ch8_EndingScene + 0x2C
 	.4byte 0x0000010F
 	.4byte 0x00000000
 	.4byte 0x00080003
-	.4byte data_08A652C0 + 0x48
+	.4byte EventScr_Ch8_EndingScene + 0x48
 	.4byte 0x0000020F
 	.4byte 0x00000000
 	.4byte 0x00080003
-	.4byte data_08A652C0 + 0x48
+	.4byte EventScr_Ch8_EndingScene + 0x48
 	.4byte 0x00000F02
 	.4byte 0x00000000
 	.4byte 0x00090003
-	.4byte data_08A652C0 + 0x68
+	.4byte EventScr_Ch8_EndingScene + 0x68
 	.4byte 0x00001102
 	.4byte 0x00000000
 	.4byte 0x00090003
-	.4byte data_08A652C0 + 0x68
+	.4byte EventScr_Ch8_EndingScene + 0x68
 	.4byte 0x00000211
 	.4byte 0x00000000
 	.4byte 0x000A0003
-	.4byte data_08A652C0 + 0x88
+	.4byte EventScr_Ch8_EndingScene + 0x88
 	.4byte 0x00001004
 	.4byte 0x00000000
 	.4byte 0x000A0003
-	.4byte data_08A652C0 + 0x88
+	.4byte EventScr_Ch8_EndingScene + 0x88
 	.4byte 0x00000410
 	.4byte 0x00000000
 	.4byte 0x00000000

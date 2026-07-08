@@ -18,7 +18,7 @@ extern const u8 EventListScr_Ch8_SelectUnit[];
 extern const u8 EventListScr_Ch8_SelectDestination[];
 extern const u8 EventListScr_Ch8_UnitMove[];
 extern const u8 EventListScr_Ch8_Tutorial[];
-extern const u8 data_08A652C0[];
+extern const u8 EventScr_Ch8_EndingScene[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
@@ -42,6 +42,6 @@ SECTION(".rodata.dat_Ch8EventData_ref") static const u32 Ch8EventData__shift[] =
     0x00000000,
     0x00000000,
     (u32)&EventScr_Ch8_BeginningScene,
-    (u32)&data_08A652C0,
+    (u32)&EventScr_Ch8_EndingScene,
 };
 extern const u32 Ch8EventData __attribute__((alias("Ch8EventData__shift")));
