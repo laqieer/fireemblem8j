@@ -54,4 +54,4 @@
 77A986	77A9F2	src/data/frontier_banim_aurabg3/frontier_banim_aurabg3.o(.data.frontier_banim_aurabg3.gap52)	banim_aurabg3 region-diff data (108 B, table-pinned)
 77A9F2	77AA5E	src/data/frontier_banim_aurabg3/frontier_banim_aurabg3.o(.data.frontier_banim_aurabg3.gap53)	banim_aurabg3 region-diff data (108 B, table-pinned)
 77AA5E	77AACA	src/data/frontier_banim_aurabg3/frontier_banim_aurabg3.o(.data.frontier_banim_aurabg3.gap54)	banim_aurabg3 region-diff data (108 B, table-pinned)
-77AACA	77ABF4	src/data/frontier_banim_aurabg3/frontier_banim_aurabg3.o(.data.frontier_banim_aurabg3.gap55)	banim_aurabg3 region-diff data (298 B, table-pinned)
+77AACA	77ABF4	src/data/frontier_banim_aurabg3/frontier_banim_aurabg3_asm.o(.data.frontier_banim_aurabg3.gap55)	banim_aurabg3 region-diff data (298 B, table-pinned)
