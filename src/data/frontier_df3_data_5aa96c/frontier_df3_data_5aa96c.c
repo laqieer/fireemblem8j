@@ -1,6 +1,114 @@
 #include "global.h"
 #include "proc.h"
 
+extern const u8 BATTLE_DeleteLinkedMOVEUNIT[];
+extern const u8 BATTLE_GOTO1_IfNobodyIsDead[];
+extern const u8 BattleApplyGameStateUpdates[];
+extern const u8 DirectSoundData_k_brasstrm2_c4_13k[];
+extern const u8 DirectSoundData_kansei1_e5l_13k8b[];
+extern const u8 EndLinkArenaPointsBox[];
+extern const u8 EraseSaveData[];
+extern const u8 LABattleMap_AiPickBestAttack[];
+extern const u8 LABattleMap_AiPickWeakestTeam[];
+extern const u8 LABattleMap_Ai_HandleSurrender[];
+extern const u8 LABattleMap_Ai_PrepareCombatants[];
+extern const u8 LABattleMap_Ai_StartTargetCursor[];
+extern const u8 LABattleMap_Ai_WaitCombatantMu[];
+extern const u8 LABattleMap_ApplyCombatResults[];
+extern const u8 LABattleMap_AwardBonusPoints[];
+extern const u8 LABattleMap_BeginTurn[];
+extern const u8 LABattleMap_CheckNoDamageStall_Loop[];
+extern const u8 LABattleMap_ConfirmTarget[];
+extern const u8 LABattleMap_DetermineAttackRange[];
+extern const u8 LABattleMap_End[];
+extern const u8 LABattleMap_ForecastConfirm_Loop[];
+extern const u8 LABattleMap_ForecastMenu_Init[];
+extern const u8 LABattleMap_ForecastMenu_Loop[];
+extern const u8 LABattleMap_GenerateForecast[];
+extern const u8 LABattleMap_HandleNoDamagePrompt[];
+extern const u8 LABattleMap_HandleSurrenderPrompt[];
+extern const u8 LABattleMap_PrepareCombatantSprites[];
+extern const u8 LABattleMap_ReceiveAttackDeclaration[];
+extern const u8 LABattleMap_ReceiveForecastResponse[];
+extern const u8 LABattleMap_ReceiveTargetSelection[];
+extern const u8 LABattleMap_RecordEliminationAndAdvance[];
+extern const u8 LABattleMap_RecordSurrenderRanking[];
+extern const u8 LABattleMap_RefreshAfterCombat[];
+extern const u8 LABattleMap_Remote_RecordSurrenderRanking[];
+extern const u8 LABattleMap_Remote_SetQuitEndState[];
+extern const u8 LABattleMap_SelectAttacker_Loop[];
+extern const u8 LABattleMap_SelectTarget_Loop[];
+extern const u8 LABattleMap_SetQuitEndState[];
+extern const u8 LABattleMap_StartBonusPointsHelp[];
+extern const u8 LABattleMap_StartCombat[];
+extern const u8 LABattleMap_StartCombatantWarpFx[];
+extern const u8 LABattleMap_StartFactionTurn[];
+extern const u8 LABattleMap_StartForecast[];
+extern const u8 LABattleMap_StartNoDamagePrompt[];
+extern const u8 LABattleMap_StartPointsBox[];
+extern const u8 LABattleMap_StartStatScreen[];
+extern const u8 LABattleMap_StartSurrenderPrompt[];
+extern const u8 LABattleMap_WaitSioSendDrain_Loop[];
+extern const u8 LABattleMap_WarpCombatantsToRoster[];
+extern const u8 LABattle_BeginAnims[];
+extern const u8 LABattle_MarkDeadCombatants[];
+extern const u8 LABattle_StartDeathFades[];
+extern const u8 LAPointsBox_LoadBoxes[];
+extern const u8 LinkArenaBattleMap_Init[];
+extern const u8 LinkArenaBattleMap_InitDisplay[];
+extern const u8 LinkArenaBattleMap_StartSelectedUnitMu[];
+extern const u8 LinkArena_StoreTalkChoice[];
+extern const u8 MenuCancelSelect[];
+extern const u8 MenuItems_SioMenudef_0[];
+extern const u8 MenuItems_SioMenudef_1[];
+extern const u8 PointsNumberMover_AwaitEnd[];
+extern const u8 PointsNumberMover_Init[];
+extern const u8 PointsNumberMover_InitScoreChange[];
+extern const u8 PointsNumberMover_LoopMoveToPointsBox[];
+extern const u8 PointsNumberMover_LoopNumberEmerge[];
+extern const u8 PointsNumberMover_TickScore[];
+extern const u8 PointsSpriteText_LoopIn[];
+extern const u8 PointsSpriteText_LoopOut[];
+extern const u8 ProcScr_LASurrender_HandleUnitDeaths[];
+extern const u8 ProcScr_LinkArenaPhaseIntro[];
+extern const u8 ProcScr_Popup[];
+extern const u8 RefreshBMapGraphics[];
+extern const u8 SioMenu_OnBPress[];
+extern const u8 Sio_BoxTransitionClose_End[];
+extern const u8 Sio_BoxTransitionClose_Loop[];
+extern const u8 Sio_BoxTransitionOpen_End[];
+extern const u8 Sio_BoxTransitionOpen_Loop[];
+extern const u8 Sio_BoxTransition_Init[];
+extern const u8 Sprite_LinkArenaBButton[];
+extern const u8 Sprite_LinkArena_PressStart[];
+extern const u8 Sprite_LinkArena_TeamName[];
+extern const u8 Sprite_NameEntry_PositionIndicator[];
+extern const u8 StartLinkArenaShowPointsAnimated[];
+extern const u8 data_080DEF7C[];
+extern const u8 data_080DF228[];
+extern const u8 gProcScr_BKSEL[];
+extern const u8 gSioUiutils_0[];
+extern const u8 nullsub_48[];
+extern const u8 sub_80487D8[];
+extern const u8 sub_80489C8[];
+extern const u8 sub_8048AC4[];
+extern const u8 sub_8048B10[];
+extern const u8 sub_8048BAC[];
+extern const u8 sub_8048C08[];
+extern const u8 sub_8048C7C[];
+extern const u8 sub_8048CD8[];
+extern const u8 sub_8048D74[];
+extern const u8 sub_8048FC0[];
+extern const u8 sub_80491B8[];
+extern const u8 sub_8049274[];
+extern const u8 sub_8049364[];
+extern const u8 sub_8049460[];
+extern const u8 sub_80494B0[];
+extern const u8 sub_80494C8[];
+extern const u8 sub_80494FC[];
+extern const u8 sub_8049638[];
+extern const u8 sub_8049658[];
+extern const u8 sub_8049C94[];
 
 extern void Clear_UnkData_0();
 extern void EndMuralBackground();
@@ -35,20 +143,10 @@ struct ProcCmd frontier_df3_data_5aa96c_000_5D367C[] SECTION(".data.frontier_df3
     PROC_END,
 };
 
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap0b, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_000b_5D376C\n"
-    "frontier_df3_data_5aa96c_000b_5D376C:\n"
-    ".4byte 0x00007000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00007000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00007000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00007000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x02020188\n"
-);
+u32 frontier_df3_data_5aa96c_000b_5D376C[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap0b"))) = {
+    0x00007000, 0x00000001, 0x00007000, 0x00000001, 0x00007000, 0x00000001,
+    0x00007000, 0x00000001, 0x02020188,
+};
 struct ProcCmd frontier_df3_data_5aa96c_000c_5D3CA0[] SECTION(".data.frontier_df3_data_5aa96c.gap0c") = {
     PROC_SLEEP(0),
     PROC_CALL(SioResult_NewHS_Init),
@@ -64,27 +162,11 @@ struct ProcCmd frontier_df3_data_5aa96c_000c_5D3CA0[] SECTION(".data.frontier_df
     PROC_END,
 };
 
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap0d, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_000d_5D3D50\n"
-    "frontier_df3_data_5aa96c_000d_5D3D50:\n"
-    ".4byte 0x00007000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00007000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00007000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00007000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00007000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00007000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00007000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00007000\n"
-    ".4byte 0x00000001\n"
-);
+u32 frontier_df3_data_5aa96c_000d_5D3D50[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap0d"))) = {
+    0x00007000, 0x00000001, 0x00007000, 0x00000001, 0x00007000, 0x00000001,
+    0x00007000, 0x00000001, 0x00007000, 0x00000001, 0x00007000, 0x00000001,
+    0x00007000, 0x00000001, 0x00007000, 0x00000001,
+};
 
 struct ProcCmd ProcScr_SioMenu_Init_5D3D50_0[] SECTION(".data.frontier_df3_data_5aa96c.gap0d") = {
     PROC_NAME(frontier_df4_misc_lo_004b_0DEED0),
@@ -113,865 +195,183 @@ struct ProcCmd ProcScr_SioMenu_Init_5D3D50_0[] SECTION(".data.frontier_df3_data_
     PROC_GOTO(1),
 };
 
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap0d, \"aw\", %progbits\n"
-    ".4byte 0x00041020\n"
-    ".4byte 0x07b81b20\n"
-    ".4byte 0x00001d20\n"
-    ".4byte 0x00070540\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00000c41\n"
-    ".4byte 0x0007000c\n"
-    ".4byte 0x07b91b21\n"
-    ".4byte 0x00001d20\n"
-    ".4byte 0x00070540\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00000c41\n"
-    ".4byte 0x0007000c\n"
-    ".4byte 0x00000d40\n"
-    ".4byte EraseSaveData\n"
-    ".4byte 0x07ba1b21\n"
-    ".4byte 0x00001d20\n"
-    ".4byte 0x00000820\n"
-    ".4byte 0x00001b22\n"
-    ".4byte 0x00000120\n"
-);
+u32 frontier_df3_data_5aa96c_gap0d_r0[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap0d"))) = {
+    0x00041020, 0x07B81B20, 0x00001D20, 0x00070540, 0x00000001, 0x00000C41,
+    0x0007000C, 0x07B91B21, 0x00001D20, 0x00070540, 0x00000001, 0x00000C41,
+    0x0007000C, 0x00000D40, (u32)&EraseSaveData, 0x07BA1B21, 0x00001D20, 0x00000820,
+    0x00001B22, 0x00000120,
+};
 
 struct ProcCmd frontier_df3_data_5aa96c_001_5D3EA8[] SECTION(".data.frontier_df3_data_5aa96c.gap1") = {
     PROC_REPEAT(SioPointsSprite_Loop),
     PROC_END,
 };
 
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap1, \"aw\", %progbits\n"
-    ".4byte 0x00d600d5\n"
-    ".4byte 0x00d800d7\n"
-    ".4byte 0x00da00d9\n"
-    ".4byte 0x00dc00db\n"
-    ".4byte 0x00de00dd\n"
-    ".4byte 0x00000061\n"
-    ".4byte 0x0002006b\n"
-    ".4byte 0x0004006c\n"
-    ".4byte 0x0006006d\n"
-    ".4byte 0x0008006e\n"
-    ".4byte 0x000a006f\n"
-    ".4byte 0x000c0070\n"
-    ".4byte 0x000e0071\n"
-    ".4byte 0x00100072\n"
-    ".4byte 0x00120073\n"
-    ".4byte 0x00140074\n"
-    ".4byte 0x00160075\n"
-    ".4byte 0x00180076\n"
-    ".4byte 0x001a0077\n"
-    ".4byte 0x001c0078\n"
-    ".4byte 0x001e0079\n"
-    ".4byte 0x0020007a\n"
-    ".4byte 0x0022007b\n"
-    ".4byte 0x0024007c\n"
-    ".4byte 0x0026007d\n"
-    ".4byte 0x0028007e\n"
-    ".4byte 0x002a007f\n"
-    ".4byte 0x002c0080\n"
-    ".4byte 0x002e0081\n"
-    ".4byte 0x00300082\n"
-    ".4byte 0x00320083\n"
-    ".4byte 0x00140084\n"
-    ".4byte 0x00160085\n"
-    ".4byte 0x00220086\n"
-    ".4byte 0x00240087\n"
-    ".4byte 0x00260088\n"
-    ".4byte 0x00280089\n"
-    ".4byte 0x0011008a\n"
-    ".4byte 0x0019008b\n"
-    ".4byte 0x001d008c\n"
-    ".4byte 0x0021008d\n"
-    ".4byte 0x0029008e\n"
-    ".4byte 0x0029008f\n"
-    ".4byte 0x002b0090\n"
-    ".4byte 0x0000006b\n"
-    ".4byte 0x0000006b\n"
-    ".4byte 0x0000006b\n"
-    ".4byte 0x40030007\n"
-    ".4byte 0xa2808000\n"
-    ".4byte 0x80204003\n"
-    ".4byte 0x4003a284\n"
-    ".4byte 0xa2888040\n"
-    ".4byte 0x80604003\n"
-    ".4byte 0x4003a28c\n"
-    ".4byte 0xa2908080\n"
-    ".4byte 0x80a04003\n"
-    ".4byte 0x4003a294\n"
-    ".4byte 0xa29880c0\n"
-    ".4byte 0x40030003\n"
-    ".4byte 0x4140c000\n"
-    ".4byte 0xc0404003\n"
-    ".4byte 0x40034148\n"
-    ".4byte 0x4150c080\n"
-    ".4byte 0x80000001\n"
-    ".4byte 0x91c00000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x91cb0000\n"
-);
+u32 frontier_df3_data_5aa96c_gap1_r1[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap1"))) = {
+    0x00D600D5, 0x00D800D7, 0x00DA00D9, 0x00DC00DB, 0x00DE00DD, 0x00000061,
+    0x0002006B, 0x0004006C, 0x0006006D, 0x0008006E, 0x000A006F, 0x000C0070,
+    0x000E0071, 0x00100072, 0x00120073, 0x00140074, 0x00160075, 0x00180076,
+    0x001A0077, 0x001C0078, 0x001E0079, 0x0020007A, 0x0022007B, 0x0024007C,
+    0x0026007D, 0x0028007E, 0x002A007F, 0x002C0080, 0x002E0081, 0x00300082,
+    0x00320083, 0x00140084, 0x00160085, 0x00220086, 0x00240087, 0x00260088,
+    0x00280089, 0x0011008A, 0x0019008B, 0x001D008C, 0x0021008D, 0x0029008E,
+    0x0029008F, 0x002B0090, 0x0000006B, 0x0000006B, 0x0000006B, 0x40030007,
+    0xA2808000, 0x80204003, 0x4003A284, 0xA2888040, 0x80604003, 0x4003A28C,
+    0xA2908080, 0x80A04003, 0x4003A294, 0xA29880C0, 0x40030003, 0x4140C000,
+    0xC0404003, 0x40034148, 0x4150C080, 0x80000001, 0x91C00000, 0x00000001,
+    0x91CB0000,
+};
 
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap1, \"aw\", %progbits\n"
-    ".global data_085D3FC4\n"
-    "data_085D3FC4:\n"
-    ".4byte 0x00000002\n"
-    ".4byte sub_8048FC0\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_80491B8\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_8049274\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_8049364\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x40000004\n"
-    ".4byte 0xa3408000\n"
-    ".4byte 0x80204000\n"
-    ".4byte 0x4000a344\n"
-    ".4byte 0xa3488040\n"
-    ".4byte 0x80604000\n"
-    ".4byte 0x0000a34c\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap1, \"aw\", %progbits\n"
-    ".global data_085D4010\n"
-    "data_085D4010:\n"
-    ".4byte 0x00000002\n"
-    ".4byte sub_80487D8\n"
-    ".4byte 0x00000004\n"
-    ".4byte sub_8049658\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeInBlackSpeed20\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Clear_UnkData_0\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_80489C8\n"
-    ".4byte 0x00000002\n"
-    ".4byte sub_8048AC4\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_8048B10\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_8048C08\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_8048C7C\n"
-    ".4byte 0x00000002\n"
-    ".4byte Set_UnkData_0\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeOutBlackSpeed20Locking\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte sub_8049460\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeInBlackSpeed20\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Clear_UnkData_0\n"
-    ".4byte 0x0002000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_8048CD8\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_80494B0\n"
-    ".4byte 0x00000002\n"
-    ".4byte sub_80494C8\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_80494FC\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_80494B0\n"
-    ".4byte 0x0002000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0003000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_8048D74\n"
-    ".4byte 0x000a000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_8049638\n"
-    ".4byte 0x00000002\n"
-    ".4byte sub_8048BAC\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LAPointsBox_LoadBoxes\n"
-    ".4byte 0x00000002\n"
-    ".4byte nullsub_48\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0xffffffec\n"
-    ".4byte 0xfffffff0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00000010\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00010001\n"
-    ".4byte 0x00010001\n"
-    ".4byte 0x00010001\n"
-    ".4byte 0x00020002\n"
-    ".4byte 0x00010002\n"
-    ".4byte 0x00010001\n"
-    ".4byte 0x00010001\n"
-    ".4byte 0x00010001\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0003ffff\n"
-    ".4byte 0x00020003\n"
-    ".4byte 0x00010002\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0xffff0000\n"
-    ".4byte 0xfffefffe\n"
-    ".4byte 0xfffdfffd\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte PointsNumberMover_Init\n"
-    ".4byte 0x00000003\n"
-    ".4byte PointsNumberMover_LoopNumberEmerge\n"
-    ".4byte 0x00000003\n"
-    ".4byte PointsNumberMover_LoopMoveToPointsBox\n"
-    ".4byte 0x00000002\n"
-    ".4byte PointsNumberMover_InitScoreChange\n"
-    ".4byte 0x00000003\n"
-    ".4byte PointsNumberMover_TickScore\n"
-    ".4byte 0x00000003\n"
-    ".4byte PointsNumberMover_AwaitEnd\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte sub_8049C94\n"
-    ".4byte 0x00000003\n"
-    ".4byte PointsSpriteText_LoopIn\n"
-    ".4byte 0x00000003\n"
-    ".4byte PointsSpriteText_LoopOut\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x01000203\n"
-    ".4byte 0x01130e0e\n"
-    ".4byte 0x02000d0d\n"
-    ".4byte 0x03010c0c\n"
-    ".4byte 0x04020b0b\n"
-    ".4byte 0x05030a0a\n"
-    ".4byte 0x13130406\n"
-    ".4byte 0x12120507\n"
-    ".4byte 0x11110608\n"
-    ".4byte 0x10100709\n"
-    ".4byte 0x0f0f080a\n"
-    ".4byte 0x090b0404\n"
-    ".4byte 0x0a0c0303\n"
-    ".4byte 0x0b0d0202\n"
-    ".4byte 0x0c0e0101\n"
-    ".4byte 0x0d0f0000\n"
-    ".4byte 0x0909100e\n"
-    ".4byte 0x0808110F\n"
-    ".4byte 0x07071210\n"
-    ".4byte 0x06061311\n"
-    ".4byte 0x05050012\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000008\n"
-    ".4byte gProcScr_BKSEL\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_ForecastMenu_Init\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_ForecastMenu_Loop\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_DetermineAttackRange\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_GenerateForecast\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_ForecastConfirm_Loop\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000005\n"
-    ".4byte 0x03001848\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00000003\n"
-    ".4byte 0x00000004\n"
-    ".4byte 0x000006e3\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000004\n"
-    ".4byte 0x000006e4\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x01000000\n"
-    ".4byte 0x02020201\n"
-    ".4byte 0x03030303\n"
-    ".4byte 0x04040404\n"
-    ".4byte 0x03040404\n"
-    ".4byte 0x02020203\n"
-    ".4byte 0x01010101\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap2, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_002_5D4358\n"
-    "frontier_df3_data_5aa96c_002_5D4358:\n"
-    ".4byte 0x00010e20\n"
-    ".4byte 0x00070228\n"
-    ".4byte 0x00041020\n"
-    ".4byte DirectSoundData_k_brasstrm2_c4_13k + 0x748\n"
-    ".4byte 0x00001d20\n"
-    ".4byte 0x00001b22\n"
-    ".4byte 0x00000d40\n"
-    ".4byte LinkArena_StoreTalkChoice\n"
-    ".4byte 0x00000120\n"
-    ".4byte 0x00010e20\n"
-    ".4byte 0x00070228\n"
-    ".4byte 0x00041020\n"
-    ".4byte DirectSoundData_kansei1_e5l_13k8b + 0x2dc0\n"
-    ".4byte 0x00001d20\n"
-    ".4byte 0x00001b22\n"
-    ".4byte 0x00000d40\n"
-    ".4byte LinkArena_StoreTalkChoice\n"
-    ".4byte 0x00000120\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_CheckNoDamageStall_Loop\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartPointsBox\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_WaitSioSendDrain_Loop\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_SelectAttacker_Loop\n"
-    ".4byte 0x0004000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndLinkArenaPointsBox\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartStatScreen\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LinkArenaBattleMap_InitDisplay\n"
-    ".4byte 0x00000002\n"
-    ".4byte RefreshBMapGraphics\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartSurrenderPrompt\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_HandleSurrenderPrompt\n"
-    ".4byte 0x00010006\n"
-    ".4byte ProcScr_LASurrender_HandleUnitDeaths\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_RecordSurrenderRanking\n"
-    ".4byte 0x0003000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartNoDamagePrompt\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_HandleNoDamagePrompt\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_SetQuitEndState\n"
-    ".4byte 0x0005000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_WaitSioSendDrain_Loop\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_SelectTarget_Loop\n"
-    ".4byte 0x0006000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndLinkArenaPointsBox\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartStatScreen\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LinkArenaBattleMap_InitDisplay\n"
-    ".4byte 0x00000002\n"
-    ".4byte RefreshBMapGraphics\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartPointsBox\n"
-    ".4byte 0x00000002\n"
-    ".4byte LinkArenaBattleMap_StartSelectedUnitMu\n"
-    ".4byte 0x0005000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0007000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_StartForecast\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndLinkArenaPointsBox\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_ConfirmTarget\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartCombatantWarpFx\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_PrepareCombatantSprites\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_StartCombat\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_ApplyCombatResults\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartLinkArenaShowPointsAnimated\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndLinkArenaPointsBox\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_WarpCombatantsToRoster\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_RecordEliminationAndAdvance\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_RefreshAfterCombat\n"
-    ".4byte 0x0008000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartPointsBox\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_ReceiveAttackDeclaration\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_ReceiveTargetSelection\n"
-    ".4byte 0x0002000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0003000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00010006\n"
-    ".4byte ProcScr_LASurrender_HandleUnitDeaths\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000008\n"
-    ".4byte ProcScr_Popup\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_Remote_RecordSurrenderRanking\n"
-    ".4byte 0x0004000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000008\n"
-    ".4byte ProcScr_Popup\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_Remote_SetQuitEndState\n"
-    ".4byte 0x0002000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_ReceiveForecastResponse\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndLinkArenaPointsBox\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartCombatantWarpFx\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_PrepareCombatantSprites\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_StartCombat\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_ApplyCombatResults\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartLinkArenaShowPointsAnimated\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndLinkArenaPointsBox\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_WarpCombatantsToRoster\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_RecordEliminationAndAdvance\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_RefreshAfterCombat\n"
-    ".4byte 0x0005000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartPointsBox\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_AiPickWeakestTeam\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_AiPickBestAttack\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_Ai_StartTargetCursor\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_Ai_PrepareCombatants\n"
-    ".4byte 0x0002000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_Ai_WaitCombatantMu\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndLinkArenaPointsBox\n"
-    ".4byte 0x0004000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0003000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartSurrenderPrompt\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_Ai_HandleSurrender\n"
-    ".4byte 0x0004000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartCombatantWarpFx\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_PrepareCombatantSprites\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_StartCombat\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_ApplyCombatResults\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartLinkArenaShowPointsAnimated\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndLinkArenaPointsBox\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_WarpCombatantsToRoster\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_RecordEliminationAndAdvance\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_RefreshAfterCombat\n"
-    ".4byte 0x0005000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap2, \"aw\", %progbits\n"
-    ".global data_085D4760\n"
-    "data_085D4760:\n"
-    ".4byte 0x00000015\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000001\n"
-    ".4byte data_080DEF7C + 0x2C\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LinkArenaBattleMap_Init\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeInBlackSpeed20\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Clear_UnkData_0\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_BeginTurn\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00010006\n"
-    ".4byte ProcScr_LinkArenaPhaseIntro\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_StartFactionTurn\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_StartBonusPointsHelp\n"
-    ".4byte 0x00000003\n"
-    ".4byte LABattleMap_AwardBonusPoints\n"
-    ".4byte 0x0003000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattleMap_End\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattle_BeginAnims\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte BattleApplyGameStateUpdates\n"
-    ".4byte 0x00000014\n"
-    ".4byte DoesBMXFADEExist\n"
-    ".4byte 0x00000002\n"
-    ".4byte BATTLE_GOTO1_IfNobodyIsDead\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattle_StartDeathFades\n"
-    ".4byte 0x0020000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte BATTLE_DeleteLinkedMOVEUNIT\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte LABattle_MarkDeadCombatants\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap2, \"aw\", %progbits\n"
-    ".global data_085D4858\n"
-    "data_085D4858:\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Sio_BoxTransition_Init\n"
-    ".4byte 0x00000003\n"
-    ".4byte Sio_BoxTransitionOpen_Loop\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Sio_BoxTransitionOpen_End\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap2, \"aw\", %progbits\n"
-    ".global data_085D4890\n"
-    "data_085D4890:\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Sio_BoxTransition_Init\n"
-    ".4byte 0x00000003\n"
-    ".4byte Sio_BoxTransitionClose_Loop\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Sio_BoxTransitionClose_End\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap3, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_003_5D48E0\n"
-    "frontier_df3_data_5aa96c_003_5D48E0:\n"
-"\t.4byte 0x03020100\n"
-"\t.4byte 0x03030303\n"
-"\t.4byte 0x03030303\n"
-"\t.4byte 0x04030303\n"
-"\t.4byte 0x08070605\n"
-"\t.4byte 0x0000FF09\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap3b, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_003b_5D4A10\n"
-    "frontier_df3_data_5aa96c_003b_5D4A10:\n"
-"\t.4byte 0x40000003\n"
-"\t.4byte 0x86008000\n"
-"\t.4byte 0x80204000\n"
-"\t.4byte 0x00008604\n"
-"\t.4byte 0x86084040\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap3c, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_003c_5D4A44\n"
-    "frontier_df3_data_5aa96c_003c_5D4A44:\n"
-"\t.4byte Sprite_LinkArenaBButton + 0x26\n"
-"\t.4byte Sprite_LinkArenaBButton + 0x46\n"
-"\t.4byte Sprite_LinkArenaBButton + 0x66\n"
-"\t.4byte Sprite_LinkArenaBButton + 0x86\n"
-"\t.4byte Sprite_LinkArenaBButton + 0xA6\n"
-"\t.4byte gSioUiutils_0 + 0x8\n"
-"\t.4byte gSioUiutils_0 + 0x16\n"
-"\t.4byte gSioUiutils_0 + 0x2A\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap3d, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_003d_5D4A7C\n"
-    "frontier_df3_data_5aa96c_003d_5D4A7C:\n"
-"\t.4byte 0x40000002\n"
-"\t.4byte 0x82B84000\n"
-"\t.4byte 0x40204000\n"
-"\t.4byte 0x000382BC\n"
-"\t.4byte 0x40004000\n"
-"\t.4byte 0x4000867B\n"
-"\t.4byte 0x867B4020\n"
-"\t.4byte 0x00400000\n"
-"\t.4byte 0x0003867F\n"
-"\t.4byte 0x40004000\n"
-"\t.4byte 0x4000869B\n"
-"\t.4byte 0x869B4020\n"
-"\t.4byte 0x00400000\n"
-"\t.4byte 0x0009869F\n"
-"\t.4byte 0x00004000\n"
-"\t.4byte 0x40003277\n"
-"\t.4byte 0x32780010\n"
-"\t.4byte 0x00204000\n"
-"\t.4byte 0x40003278\n"
-"\t.4byte 0x32780030\n"
-"\t.4byte 0x00404000\n"
-"\t.4byte 0x40003278\n"
-"\t.4byte 0x32780050\n"
-"\t.4byte 0x00604000\n"
-"\t.4byte 0x40003278\n"
-"\t.4byte 0x32780070\n"
-"\t.4byte 0x00804000\n"
-"\t.4byte 0x00003279\n"
-"\t.4byte Sprite_LinkArena_TeamName + 0xE\n"
-"\t.4byte Sprite_LinkArena_TeamName + 0x22\n"
-"\t.4byte 0x40000002\n"
-"\t.4byte 0x3240C000\n"
-"\t.4byte 0x80400000\n"
-"\t.4byte 0x00043248\n"
-"\t.4byte 0x80000000\n"
-"\t.4byte 0x4000324C\n"
-"\t.4byte 0x32904020\n"
-"\t.4byte 0x40204018\n"
-"\t.4byte 0x000032AD\n"
-"\t.4byte 0x324C9040\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap3e, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_003e_5D4B4C\n"
-    "frontier_df3_data_5aa96c_003e_5D4B4C:\n"
-"\t.4byte Sprite_LinkArena_PressStart + 0x28\n"
-"\t.4byte Sprite_LinkArena_PressStart + 0x30\n"
-"\t.4byte Sprite_NameEntry_PositionIndicator + 0x20\n"
-"\t.4byte Sprite_NameEntry_PositionIndicator + 0x18\n"
-"\t.4byte Sprite_NameEntry_PositionIndicator + 0x28\n"
-"\t.4byte Sprite_NameEntry_PositionIndicator + 0x10\n"
-"\t.4byte Sprite_NameEntry_PositionIndicator + 0x8\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap3f, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_003f_5D4B80\n"
-    "frontier_df3_data_5aa96c_003f_5D4B80:\n"
-"\t.4byte Sprite_NameEntry_PositionIndicator + 0x30\n"
-"\t.4byte Sprite_NameEntry_PositionIndicator + 0x38\n"
-"\t.4byte Sprite_NameEntry_PositionIndicator + 0x40\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap3g, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_003g_5D4BD4\n"
-    "frontier_df3_data_5aa96c_003g_5D4BD4:\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x86570000\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x86572000\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x865D0000\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap4, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_004_5D4C5C\n"
-    "frontier_df3_data_5aa96c_004_5D4C5C:\n"
-    ".4byte data_080DF228\n"
-    ".4byte data_080DF228 + 0x8\n"
-    ".4byte data_080DF228 + 0x10\n"
-    ".4byte data_080DF228 + 0x18\n"
-);
-__asm__(
-    ".section .data.frontier_df3_data_5aa96c.gap5, \"aw\", %progbits\n"
-    ".global frontier_df3_data_5aa96c_005_5D4DD8\n"
-    "frontier_df3_data_5aa96c_005_5D4DD8:\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00080210\n"
-    ".4byte 0x00000000\n"
-    ".4byte MenuItems_SioMenudef_0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte SioMenu_OnBPress\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000e0101\n"
-    ".4byte 0x00000000\n"
-    ".4byte MenuItems_SioMenudef_1\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte SioMenu_OnBPress\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000c0201\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_data_5aa96c_005_5D4DD8\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte MenuCancelSelect\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00160201\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_data_5aa96c_005_5D4DD8 + 0x24\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte MenuCancelSelect\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
+u32 data_085D3FC4[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap1"))) = {
+    0x00000002, (u32)&sub_8048FC0, 0x0000000B, 0x00000000, 0x00000003, (u32)&sub_80491B8,
+    0x00000003, (u32)&sub_8049274, 0x00000003, (u32)&sub_8049364, 0x00000000, 0x00000000,
+    0x40000004, 0xA3408000, 0x80204000, 0x4000A344, 0xA3488040, 0x80604000,
+    0x0000A34C,
+};
+u32 data_085D4010[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap1"))) = {
+    0x00000002, (u32)&sub_80487D8, 0x00000004, (u32)&sub_8049658, 0x00000002, (u32)&FadeInBlackSpeed20,
+    0x0000000E, 0x00000000, 0x00000002, (u32)&Clear_UnkData_0, 0x00000003, (u32)&sub_80489C8,
+    0x00000002, (u32)&sub_8048AC4, 0x00000003, (u32)&sub_8048B10, 0x00000003, (u32)&sub_8048C08,
+    0x00000003, (u32)&sub_8048C7C, 0x00000002, (u32)&Set_UnkData_0, 0x00000002, (u32)&FadeOutBlackSpeed20Locking,
+    0x0000000E, 0x00000000, 0x0001000B, 0x00000000, 0x00000002, (u32)&sub_8049460,
+    0x00000002, (u32)&FadeInBlackSpeed20, 0x0000000E, 0x00000000, 0x00000002, (u32)&Clear_UnkData_0,
+    0x0002000B, 0x00000000, 0x00000003, (u32)&sub_8048CD8, 0x00000003, (u32)&sub_80494B0,
+    0x00000002, (u32)&sub_80494C8, 0x00000003, (u32)&sub_80494FC, 0x00000003, (u32)&sub_80494B0,
+    0x0002000C, 0x00000000, 0x0003000B, 0x00000000, 0x00000003, (u32)&sub_8048D74,
+    0x000A000B, 0x00000000, 0x00000003, (u32)&sub_8049638, 0x00000002, (u32)&sub_8048BAC,
+    0x000B000B, 0x00000000, 0x00000000, 0x00000000, 0x00000002, (u32)&LAPointsBox_LoadBoxes,
+    0x00000002, (u32)&nullsub_48, 0x00000000, 0x00000000, 0x00000000, 0xFFFFFFEC,
+    0xFFFFFFF0, 0x00000000, 0x00000000, 0x0000000C, 0x00000010, 0x00000000,
+    0x00000000, 0x00010001, 0x00010001, 0x00010001, 0x00020002, 0x00010002,
+    0x00010001, 0x00010001, 0x00010001, 0x00000000, 0x0003FFFF, 0x00020003,
+    0x00010002, 0x00000000, 0x00000000, 0xFFFF0000, 0xFFFEFFFE, 0xFFFDFFFD,
+    0x00000001, 0x0000000E, 0x00000000, 0x00000002, (u32)&PointsNumberMover_Init, 0x00000003,
+    (u32)&PointsNumberMover_LoopNumberEmerge, 0x00000003, (u32)&PointsNumberMover_LoopMoveToPointsBox, 0x00000002, (u32)&PointsNumberMover_InitScoreChange, 0x00000003,
+    (u32)&PointsNumberMover_TickScore, 0x00000003, (u32)&PointsNumberMover_AwaitEnd, 0x00000000, 0x00000000, 0x0000000E,
+    0x00000000, 0x00000002, (u32)&sub_8049C94, 0x00000003, (u32)&PointsSpriteText_LoopIn, 0x00000003,
+    (u32)&PointsSpriteText_LoopOut, 0x00000000, 0x00000000, 0x01000203, 0x01130E0E, 0x02000D0D,
+    0x03010C0C, 0x04020B0B, 0x05030A0A, 0x13130406, 0x12120507, 0x11110608,
+    0x10100709, 0x0F0F080A, 0x090B0404, 0x0A0C0303, 0x0B0D0202, 0x0C0E0101,
+    0x0D0F0000, 0x0909100E, 0x0808110F, 0x07071210, 0x06061311, 0x05050012,
+    0x0000000B, 0x00000000, 0x00000008, (u32)&gProcScr_BKSEL, 0x0001000E, 0x00000000,
+    0x00000002, (u32)&LABattleMap_ForecastMenu_Init, 0x00000003, (u32)&LABattleMap_ForecastMenu_Loop, 0x00000002, (u32)&LABattleMap_DetermineAttackRange,
+    0x00000003, (u32)&LABattleMap_GenerateForecast, 0x00000003, (u32)&LABattleMap_ForecastConfirm_Loop, 0x0001000B, 0x00000000,
+    0x00000000, 0x00000000, 0x00000005, 0x03001848, 0x00000001, 0x00000003,
+    0x00000004, 0x000006E3, 0x00000000, 0x00000000, 0x00000004, 0x000006E4,
+    0x00000000, 0x00000000, 0x00000000, 0x01000000, 0x02020201, 0x03030303,
+    0x04040404, 0x03040404, 0x02020203, 0x01010101,
+};
+u32 frontier_df3_data_5aa96c_002_5D4358[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap2"))) = {
+    0x00010E20, 0x00070228, 0x00041020, (u32)&DirectSoundData_k_brasstrm2_c4_13k + 0x748, 0x00001D20, 0x00001B22,
+    0x00000D40, (u32)&LinkArena_StoreTalkChoice, 0x00000120, 0x00010E20, 0x00070228, 0x00041020,
+    (u32)&DirectSoundData_kansei1_e5l_13k8b + 0x2dc0, 0x00001D20, 0x00001B22, 0x00000D40, (u32)&LinkArena_StoreTalkChoice, 0x00000120,
+    0x0000000B, 0x00000000, 0x00000003, (u32)&LABattleMap_CheckNoDamageStall_Loop, 0x00000002, (u32)&LABattleMap_StartPointsBox,
+    0x0001000B, 0x00000000, 0x00000003, (u32)&LABattleMap_WaitSioSendDrain_Loop, 0x00000003, (u32)&LABattleMap_SelectAttacker_Loop,
+    0x0004000B, 0x00000000, 0x00000002, (u32)&EndLinkArenaPointsBox, 0x0000000E, 0x00000000,
+    0x00000002, (u32)&LABattleMap_StartStatScreen, 0x0000000E, 0x00000000, 0x00000002, (u32)&LinkArenaBattleMap_InitDisplay,
+    0x00000002, (u32)&RefreshBMapGraphics, 0x0000000C, 0x00000000, 0x0002000B, 0x00000000,
+    0x0001000E, 0x00000000, 0x00000002, (u32)&LABattleMap_StartSurrenderPrompt, 0x0000000E, 0x00000000,
+    0x00000002, (u32)&LABattleMap_HandleSurrenderPrompt, 0x00010006, (u32)&ProcScr_LASurrender_HandleUnitDeaths, 0x0000000E, 0x00000000,
+    0x00000002, (u32)&LABattleMap_RecordSurrenderRanking, 0x0003000B, 0x00000000, 0x0001000E, 0x00000000,
+    0x00000002, (u32)&LABattleMap_StartNoDamagePrompt, 0x0000000E, 0x00000000, 0x00000002, (u32)&LABattleMap_HandleNoDamagePrompt,
+    0x00000002, (u32)&LABattleMap_SetQuitEndState, 0x0005000B, 0x00000000, 0x00000003, (u32)&LABattleMap_WaitSioSendDrain_Loop,
+    0x00000003, (u32)&LABattleMap_SelectTarget_Loop, 0x0006000B, 0x00000000, 0x00000002, (u32)&EndLinkArenaPointsBox,
+    0x0000000E, 0x00000000, 0x00000002, (u32)&LABattleMap_StartStatScreen, 0x0000000E, 0x00000000,
+    0x00000002, (u32)&LinkArenaBattleMap_InitDisplay, 0x00000002, (u32)&RefreshBMapGraphics, 0x00000002, (u32)&LABattleMap_StartPointsBox,
+    0x00000002, (u32)&LinkArenaBattleMap_StartSelectedUnitMu, 0x0005000C, 0x00000000, 0x0007000B, 0x00000000,
+    0x00000003, (u32)&LABattleMap_StartForecast, 0x00000002, (u32)&EndLinkArenaPointsBox, 0x00000002, (u32)&LABattleMap_ConfirmTarget,
+    0x00000002, (u32)&LABattleMap_StartCombatantWarpFx, 0x0000000E, 0x00000000, 0x00000002, (u32)&LABattleMap_PrepareCombatantSprites,
+    0x00000003, (u32)&LABattleMap_StartCombat, 0x00000003, (u32)&LABattleMap_ApplyCombatResults, 0x00000002, (u32)&StartLinkArenaShowPointsAnimated,
+    0x0000000E, 0x00000000, 0x00000002, (u32)&EndLinkArenaPointsBox, 0x00000003, (u32)&LABattleMap_WarpCombatantsToRoster,
+    0x00000003, (u32)&LABattleMap_RecordEliminationAndAdvance, 0x00000002, (u32)&LABattleMap_RefreshAfterCombat, 0x0008000B, 0x00000000,
+    0x00000000, 0x00000000, 0x0000000B, 0x00000000, 0x00000002, (u32)&LABattleMap_StartPointsBox,
+    0x00000003, (u32)&LABattleMap_ReceiveAttackDeclaration, 0x0001000B, 0x00000000, 0x00000003, (u32)&LABattleMap_ReceiveTargetSelection,
+    0x0002000C, 0x00000000, 0x0003000B, 0x00000000, 0x00010006, (u32)&ProcScr_LASurrender_HandleUnitDeaths,
+    0x0000000E, 0x00000000, 0x00000008, (u32)&ProcScr_Popup, 0x00000002, (u32)&LABattleMap_Remote_RecordSurrenderRanking,
+    0x0004000B, 0x00000000, 0x00000008, (u32)&ProcScr_Popup, 0x00000002, (u32)&LABattleMap_Remote_SetQuitEndState,
+    0x0002000B, 0x00000000, 0x00000003, (u32)&LABattleMap_ReceiveForecastResponse, 0x00000002, (u32)&EndLinkArenaPointsBox,
+    0x00000002, (u32)&LABattleMap_StartCombatantWarpFx, 0x0000000E, 0x00000000, 0x00000002, (u32)&LABattleMap_PrepareCombatantSprites,
+    0x00000003, (u32)&LABattleMap_StartCombat, 0x00000003, (u32)&LABattleMap_ApplyCombatResults, 0x00000002, (u32)&StartLinkArenaShowPointsAnimated,
+    0x0000000E, 0x00000000, 0x00000002, (u32)&EndLinkArenaPointsBox, 0x00000003, (u32)&LABattleMap_WarpCombatantsToRoster,
+    0x00000003, (u32)&LABattleMap_RecordEliminationAndAdvance, 0x00000002, (u32)&LABattleMap_RefreshAfterCombat, 0x0005000B, 0x00000000,
+    0x00000000, 0x00000000, 0x00000002, (u32)&LABattleMap_StartPointsBox, 0x0000000E, 0x00000000,
+    0x0000000B, 0x00000000, 0x00000003, (u32)&LABattleMap_AiPickWeakestTeam, 0x0001000B, 0x00000000,
+    0x00000003, (u32)&LABattleMap_AiPickBestAttack, 0x00000002, (u32)&LABattleMap_Ai_StartTargetCursor, 0x0000000E, 0x00000000,
+    0x00000002, (u32)&LABattleMap_Ai_PrepareCombatants, 0x0002000B, 0x00000000, 0x00000003, (u32)&LABattleMap_Ai_WaitCombatantMu,
+    0x00000002, (u32)&EndLinkArenaPointsBox, 0x0004000C, 0x00000000, 0x0003000B, 0x00000000,
+    0x0001000E, 0x00000000, 0x00000002, (u32)&LABattleMap_StartSurrenderPrompt, 0x0000000E, 0x00000000,
+    0x00000002, (u32)&LABattleMap_Ai_HandleSurrender, 0x0004000B, 0x00000000, 0x00000002, (u32)&LABattleMap_StartCombatantWarpFx,
+    0x0000000E, 0x00000000, 0x00000002, (u32)&LABattleMap_PrepareCombatantSprites, 0x00000003, (u32)&LABattleMap_StartCombat,
+    0x00000003, (u32)&LABattleMap_ApplyCombatResults, 0x00000002, (u32)&StartLinkArenaShowPointsAnimated, 0x0000000E, 0x00000000,
+    0x00000002, (u32)&EndLinkArenaPointsBox, 0x00000003, (u32)&LABattleMap_WarpCombatantsToRoster, 0x00000003, (u32)&LABattleMap_RecordEliminationAndAdvance,
+    0x00000002, (u32)&LABattleMap_RefreshAfterCombat, 0x0005000B, 0x00000000, 0x00000000, 0x00000000,
+};
+u32 data_085D4760[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap2"))) = {
+    0x00000015, 0x00000000, 0x00000001, (u32)&data_080DEF7C + 0x2C, 0x0000000E, 0x00000000,
+    0x00000002, (u32)&LinkArenaBattleMap_Init, 0x00000002, (u32)&FadeInBlackSpeed20, 0x0000000E, 0x00000000,
+    0x00000002, (u32)&Clear_UnkData_0, 0x0000000B, 0x00000000, 0x00000002, (u32)&LABattleMap_BeginTurn,
+    0x0001000E, 0x00000000, 0x00010006, (u32)&ProcScr_LinkArenaPhaseIntro, 0x0000000E, 0x00000000,
+    0x00000003, (u32)&LABattleMap_StartFactionTurn, 0x0000000C, 0x00000000, 0x0002000B, 0x00000000,
+    0x00000002, (u32)&LABattleMap_StartBonusPointsHelp, 0x00000003, (u32)&LABattleMap_AwardBonusPoints, 0x0003000B, 0x00000000,
+    0x00000002, (u32)&LABattleMap_End, 0x00000000, 0x00000000, 0x00000002, (u32)&LABattle_BeginAnims,
+    0x0001000E, 0x00000000, 0x00000002, (u32)&BattleApplyGameStateUpdates, 0x00000014, (u32)&DoesBMXFADEExist,
+    0x00000002, (u32)&BATTLE_GOTO1_IfNobodyIsDead, 0x00000002, (u32)&LABattle_StartDeathFades, 0x0020000E, 0x00000000,
+    0x00000002, (u32)&BATTLE_DeleteLinkedMOVEUNIT, 0x0001000B, 0x00000000, 0x00000002, (u32)&LABattle_MarkDeadCombatants,
+    0x00000000, 0x00000000,
+};
+u32 data_085D4858[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap2"))) = {
+    0x0000000E, 0x00000000, 0x00000002, (u32)&Sio_BoxTransition_Init, 0x00000003, (u32)&Sio_BoxTransitionOpen_Loop,
+    0x0001000E, 0x00000000, 0x00000002, (u32)&Sio_BoxTransitionOpen_End, 0x0001000E, 0x00000000,
+    0x00000000, 0x00000000,
+};
+u32 data_085D4890[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap2"))) = {
+    0x0000000E, 0x00000000, 0x00000002, (u32)&Sio_BoxTransition_Init, 0x00000003, (u32)&Sio_BoxTransitionClose_Loop,
+    0x0001000E, 0x00000000, 0x00000002, (u32)&Sio_BoxTransitionClose_End, 0x0001000E, 0x00000000,
+    0x00000000, 0x00000000,
+};
+u32 frontier_df3_data_5aa96c_003_5D48E0[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap3"))) = {
+    0x03020100, 0x03030303, 0x03030303, 0x04030303, 0x08070605, 0x0000FF09,
+};
+u32 frontier_df3_data_5aa96c_003b_5D4A10[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap3b"))) = {
+    0x40000003, 0x86008000, 0x80204000, 0x00008604, 0x86084040,
+};
+u32 frontier_df3_data_5aa96c_003c_5D4A44[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap3c"))) = {
+    (u32)&Sprite_LinkArenaBButton + 0x26, (u32)&Sprite_LinkArenaBButton + 0x46, (u32)&Sprite_LinkArenaBButton + 0x66, (u32)&Sprite_LinkArenaBButton + 0x86, (u32)&Sprite_LinkArenaBButton + 0xA6, (u32)&gSioUiutils_0 + 0x8,
+    (u32)&gSioUiutils_0 + 0x16, (u32)&gSioUiutils_0 + 0x2A,
+};
+u32 frontier_df3_data_5aa96c_003d_5D4A7C[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap3d"))) = {
+    0x40000002, 0x82B84000, 0x40204000, 0x000382BC, 0x40004000, 0x4000867B,
+    0x867B4020, 0x00400000, 0x0003867F, 0x40004000, 0x4000869B, 0x869B4020,
+    0x00400000, 0x0009869F, 0x00004000, 0x40003277, 0x32780010, 0x00204000,
+    0x40003278, 0x32780030, 0x00404000, 0x40003278, 0x32780050, 0x00604000,
+    0x40003278, 0x32780070, 0x00804000, 0x00003279, (u32)&Sprite_LinkArena_TeamName + 0xE, (u32)&Sprite_LinkArena_TeamName + 0x22,
+    0x40000002, 0x3240C000, 0x80400000, 0x00043248, 0x80000000, 0x4000324C,
+    0x32904020, 0x40204018, 0x000032AD, 0x324C9040,
+};
+u32 frontier_df3_data_5aa96c_003e_5D4B4C[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap3e"))) = {
+    (u32)&Sprite_LinkArena_PressStart + 0x28, (u32)&Sprite_LinkArena_PressStart + 0x30, (u32)&Sprite_NameEntry_PositionIndicator + 0x20, (u32)&Sprite_NameEntry_PositionIndicator + 0x18, (u32)&Sprite_NameEntry_PositionIndicator + 0x28, (u32)&Sprite_NameEntry_PositionIndicator + 0x10,
+    (u32)&Sprite_NameEntry_PositionIndicator + 0x8,
+};
+u32 frontier_df3_data_5aa96c_003f_5D4B80[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap3f"))) = {
+    (u32)&Sprite_NameEntry_PositionIndicator + 0x30, (u32)&Sprite_NameEntry_PositionIndicator + 0x38, (u32)&Sprite_NameEntry_PositionIndicator + 0x40,
+};
+u32 frontier_df3_data_5aa96c_003g_5D4BD4[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap3g"))) = {
+    0x00000001, 0x86570000, 0x00000001, 0x86572000, 0x00000001, 0x865D0000,
+};
+u32 frontier_df3_data_5aa96c_004_5D4C5C[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap4"))) = {
+    (u32)&data_080DF228, (u32)&data_080DF228 + 0x8, (u32)&data_080DF228 + 0x10, (u32)&data_080DF228 + 0x18,
+};
+u32 frontier_df3_data_5aa96c_005_5D4DD8[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap5"))) = {
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00080210, 0x00000000, (u32)&MenuItems_SioMenudef_0, 0x00000000, 0x00000000, 0x00000000,
+    (u32)&SioMenu_OnBPress, 0x00000000, 0x00000000, 0x000E0101, 0x00000000, (u32)&MenuItems_SioMenudef_1,
+    0x00000000, 0x00000000, 0x00000000, (u32)&SioMenu_OnBPress, 0x00000000, 0x00000000,
+    0x000C0201, 0x00000000, (u32)&frontier_df3_data_5aa96c_005_5D4DD8, 0x00000000, 0x00000000, 0x00000000,
+    (u32)&MenuCancelSelect, 0x00000000, 0x00000000, 0x00160201, 0x00000000, (u32)&frontier_df3_data_5aa96c_005_5D4DD8 + 0x24,
+    0x00000000, 0x00000000, 0x00000000, (u32)&MenuCancelSelect, 0x00000000, 0x00000000,
+};
 u8 frontier_df3_data_5aa96c_006_5D53FC[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap6"))) = INCBIN_U8("graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_006_5D53FC_0.4bpp.lz", "graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_006_5D53FC_1.4bpp.lz");
 u8 frontier_df3_data_5aa96c_007_5D737C[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap7"))) = INCBIN_U8("graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_007_5D737C_0.4bpp.lz", "graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_007_5D737C_1.4bpp.lz");
 u8 frontier_df3_data_5aa96c_008_5D8048[] __attribute__((section(".data.frontier_df3_data_5aa96c.gap8"))) = INCBIN_U8("graphics/frontier_df3_data_5aa96c/frontier_df3_data_5aa96c_008_5D8048.gbapal");
