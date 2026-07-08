@@ -14,7 +14,11 @@ extern const u8 EventScr_Ch9a_BeginningScene[];
 extern const u8 EventScr_Ch9a_EndingScene[];
 extern const u8 UnitDef_Event_Ch9aAlly[];
 extern const u8 EventListScr_Ch9a_Character[];
-extern const u8 data_08A5B238[];
+extern const u8 EventListScr_Ch9a_Misc[];
+extern const u8 EventListScr_Ch9a_SelectUnit[];
+extern const u8 EventListScr_Ch9a_SelectDestination[];
+extern const u8 EventListScr_Ch9a_UnitMove[];
+extern const u8 EventListScr_Ch9a_Tutorial[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
@@ -22,11 +26,11 @@ SECTION(".rodata.dat_Ch9EirikaEvents_ref") static const u32 Ch9EirikaEvents__shi
     (u32)&EventListScr_Ch9a_Turn,
     (u32)&EventListScr_Ch9a_Character,
     (u32)&EventListScr_Ch9a_Location,
-    (u32)&data_08A5B238,
-    (u32)&data_08A5B238 + 0x1C,
-    (u32)&data_08A5B238 + 0x20,
-    (u32)&data_08A5B238 + 0x24,
-    (u32)&data_08A5B238 + 0x28,
+    (u32)&EventListScr_Ch9a_Misc,
+    (u32)&EventListScr_Ch9a_SelectUnit,
+    (u32)&EventListScr_Ch9a_SelectDestination,
+    (u32)&EventListScr_Ch9a_UnitMove,
+    (u32)&EventListScr_Ch9a_Tutorial,
     (u32)&gUidebug_2 + 0x330,
     (u32)&frontier_df4_menu_005_A5FFAD + 0x38,
     (u32)&UnitDef_Event_Ch9aAlly,
