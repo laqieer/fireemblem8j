@@ -1,371 +1,348 @@
 #include "global.h"
+#include "anime.h"
 
 /* Migrated from asm/dat_data_banim_p81.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-__asm__(
-"	.section .rodata.dat_data_banim_p81, \"a\", %progbits\n"
-"	.global AnimSprite_FimbulvetrOBJ_7\n"
-"AnimSprite_FimbulvetrOBJ_7:\n"
-"	.short 0x0004, 0xFFFF, 0xFF23, 0x0080, 0xFF80, 0xFF23\n"
-"	.short 0x0004, 0xFFFF, 0x00C3, 0xFF5B, 0x00A5, 0x00C3\n"
-"	.short 0x0004, 0xFFFF, 0x0057, 0x00F0, 0xFF10, 0x0057\n"
-"	.short 0x0004, 0xFFFF, 0x00C4, 0x00A4, 0xFF5C, 0x00C4\n"
-"	.short 0x0100, 0x4000, 0x0000, -68, -43, 0\n"
-"	.short 0x0100, 0x4200, 0x0002, 10, -21, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -74, -13, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -1, -54, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -82, -88, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 27, -66, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -97, -55, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -39, -78, 0\n"
-"	.short 0x0000, 0x6000, 0x0006, 32, -36, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -13, -37, 0\n"
-"	.short 0x0000, 0x5000, 0x0006, -98, -24, 0\n"
-"	.short 0x0100, 0x4400, 0x0002, -83, -66, 0\n"
-"	.short 0x0100, 0x4600, 0x0000, 3, -101, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -32, -49, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -42, -37, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, 7, -38, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -57, -81, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -6, -74, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 20, -48, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -83, -38, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
-__asm__(
-"	.section .rodata.dat_data_banim_p81, \"a\", %progbits\n"
-"	.global AnimSprite_FimbulvetrOBJ_8\n"
-"AnimSprite_FimbulvetrOBJ_8:\n"
-"	.short 0x0004, 0xFFFF, 0xFF10, 0x0057, 0xFFA9, 0xFF10\n"
-"	.short 0x0004, 0xFFFF, 0x00DD, 0xFF80, 0x0080, 0x00DD\n"
-"	.short 0x0004, 0xFFFF, 0x0080, 0x00DD, 0xFF23, 0x0080\n"
-"	.short 0x0004, 0xFFFF, 0x00A4, 0x00C4, 0xFF3C, 0x00A4\n"
-"	.short 0x0100, 0x4000, 0x0000, -70, -44, 0\n"
-"	.short 0x0100, 0x4200, 0x0002, 12, -22, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -76, -14, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 1, -55, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -84, -90, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 29, -68, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -99, -57, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -40, -80, 0\n"
-"	.short 0x0000, 0x6000, 0x0006, 34, -38, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -12, -39, 0\n"
-"	.short 0x0000, 0x5000, 0x0006, -100, -25, 0\n"
-"	.short 0x0100, 0x4400, 0x0002, -85, -68, 0\n"
-"	.short 0x0100, 0x4600, 0x0000, 5, -103, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -32, -51, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -42, -38, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, 9, -39, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -57, -81, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -4, -76, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 22, -49, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -85, -39, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
-__asm__(
-"	.section .rodata.dat_data_banim_p81, \"a\", %progbits\n"
-"	.global AnimSprite_FimbulvetrOBJ_9\n"
-"AnimSprite_FimbulvetrOBJ_9:\n"
-"	.short 0x0004, 0xFFFF, 0xFF04, 0x002C, 0xFFD4, 0xFF04\n"
-"	.short 0x0004, 0xFFFF, 0x00F0, 0xFFA8, 0x0058, 0x00F0\n"
-"	.short 0x0004, 0xFFFF, 0x00A4, 0x00C4, 0xFF3C, 0x00A4\n"
-"	.short 0x0004, 0xFFFF, 0x0080, 0x00DD, 0xFF23, 0x0080\n"
-"	.short 0x0100, 0x4000, 0x0000, -72, -45, 0\n"
-"	.short 0x0100, 0x4200, 0x0002, 14, -23, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -78, -15, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 3, -57, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -86, -92, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 31, -70, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -101, -59, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -41, -82, 0\n"
-"	.short 0x0000, 0x6000, 0x0006, 36, -40, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -10, -40, 0\n"
-"	.short 0x0000, 0x5000, 0x0006, -102, -26, 0\n"
-"	.short 0x0100, 0x4400, 0x0002, -86, -69, 0\n"
-"	.short 0x0100, 0x4600, 0x0000, 7, -105, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -32, -52, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -43, -39, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, 11, -40, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -59, -83, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -3, -78, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 24, -51, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -87, -40, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
-__asm__(
-"	.section .rodata.dat_data_banim_p81, \"a\", %progbits\n"
-"	.global AnimSprite_FimbulvetrOBJ_10\n"
-"AnimSprite_FimbulvetrOBJ_10:\n"
-"	.short 0x0004, 0xFFFF, 0xFF01, 0x0000, 0x0000, 0xFF01\n"
-"	.short 0x0004, 0xFFFF, 0x00FB, 0xFFD3, 0x002D, 0x00FB\n"
-"	.short 0x0004, 0xFFFF, 0x00C4, 0x00A4, 0xFF5C, 0x00C4\n"
-"	.short 0x0004, 0xFFFF, 0x0057, 0x00F0, 0xFF10, 0x0057\n"
-"	.short 0x0100, 0x4000, 0x0000, -74, -46, 0\n"
-"	.short 0x0100, 0x4200, 0x0002, 16, -24, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -80, -16, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 5, -59, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -88, -94, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 33, -72, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -103, -60, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -42, -84, 0\n"
-"	.short 0x0000, 0x6000, 0x0006, 38, -41, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -8, -41, 0\n"
-"	.short 0x0000, 0x5000, 0x0006, -104, -27, 0\n"
-"	.short 0x0100, 0x4400, 0x0002, -88, -70, 0\n"
-"	.short 0x0100, 0x4600, 0x0000, 9, -107, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -33, -53, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -44, -40, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, 13, -41, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -61, -85, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -2, -79, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 26, -53, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -89, -41, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
+struct AnimSpriteData AnimSprite_FimbulvetrOBJ_7[] __attribute__((section(".rodata.dat_data_banim_p81"))) =
+{
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF23, 0x0080, 0xFF80, 0xFF23 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00C3, 0xFF5B, 0x00A5, 0x00C3 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x0057, 0x00F0, 0xFF10, 0x0057 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00C4, 0x00A4, 0xFF5C, 0x00C4 } } },
+    { .header = 0x40000100, .as = { .object = { 0x0000, -68, -43 } } },
+    { .header = 0x42000100, .as = { .object = { 0x0002, 10, -21 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -74, -13 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -1, -54 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -82, -88 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 27, -66 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -97, -55 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -39, -78 } } },
+    { .header = 0x60000000, .as = { .object = { 0x0006, 32, -36 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -13, -37 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0006, -98, -24 } } },
+    { .header = 0x44000100, .as = { .object = { 0x0002, -83, -66 } } },
+    { .header = 0x46000100, .as = { .object = { 0x0000, 3, -101 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -32, -49 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -42, -37 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, 7, -38 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -57, -81 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -6, -74 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 20, -48 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -83, -38 } } },
+    ANIM_SPRITE_END,
+};
+struct AnimSpriteData AnimSprite_FimbulvetrOBJ_8[] __attribute__((section(".rodata.dat_data_banim_p81"))) =
+{
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF10, 0x0057, 0xFFA9, 0xFF10 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00DD, 0xFF80, 0x0080, 0x00DD } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x0080, 0x00DD, 0xFF23, 0x0080 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00A4, 0x00C4, 0xFF3C, 0x00A4 } } },
+    { .header = 0x40000100, .as = { .object = { 0x0000, -70, -44 } } },
+    { .header = 0x42000100, .as = { .object = { 0x0002, 12, -22 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -76, -14 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 1, -55 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -84, -90 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 29, -68 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -99, -57 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -40, -80 } } },
+    { .header = 0x60000000, .as = { .object = { 0x0006, 34, -38 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -12, -39 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0006, -100, -25 } } },
+    { .header = 0x44000100, .as = { .object = { 0x0002, -85, -68 } } },
+    { .header = 0x46000100, .as = { .object = { 0x0000, 5, -103 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -32, -51 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -42, -38 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, 9, -39 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -57, -81 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -4, -76 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 22, -49 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -85, -39 } } },
+    ANIM_SPRITE_END,
+};
+struct AnimSpriteData AnimSprite_FimbulvetrOBJ_9[] __attribute__((section(".rodata.dat_data_banim_p81"))) =
+{
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF04, 0x002C, 0xFFD4, 0xFF04 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00F0, 0xFFA8, 0x0058, 0x00F0 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00A4, 0x00C4, 0xFF3C, 0x00A4 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x0080, 0x00DD, 0xFF23, 0x0080 } } },
+    { .header = 0x40000100, .as = { .object = { 0x0000, -72, -45 } } },
+    { .header = 0x42000100, .as = { .object = { 0x0002, 14, -23 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -78, -15 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 3, -57 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -86, -92 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 31, -70 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -101, -59 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -41, -82 } } },
+    { .header = 0x60000000, .as = { .object = { 0x0006, 36, -40 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -10, -40 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0006, -102, -26 } } },
+    { .header = 0x44000100, .as = { .object = { 0x0002, -86, -69 } } },
+    { .header = 0x46000100, .as = { .object = { 0x0000, 7, -105 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -32, -52 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -43, -39 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, 11, -40 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -59, -83 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -3, -78 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 24, -51 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -87, -40 } } },
+    ANIM_SPRITE_END,
+};
+struct AnimSpriteData AnimSprite_FimbulvetrOBJ_10[] __attribute__((section(".rodata.dat_data_banim_p81"))) =
+{
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF01, 0x0000, 0x0000, 0xFF01 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00FB, 0xFFD3, 0x002D, 0x00FB } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00C4, 0x00A4, 0xFF5C, 0x00C4 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x0057, 0x00F0, 0xFF10, 0x0057 } } },
+    { .header = 0x40000100, .as = { .object = { 0x0000, -74, -46 } } },
+    { .header = 0x42000100, .as = { .object = { 0x0002, 16, -24 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -80, -16 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 5, -59 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -88, -94 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 33, -72 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -103, -60 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -42, -84 } } },
+    { .header = 0x60000000, .as = { .object = { 0x0006, 38, -41 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -8, -41 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0006, -104, -27 } } },
+    { .header = 0x44000100, .as = { .object = { 0x0002, -88, -70 } } },
+    { .header = 0x46000100, .as = { .object = { 0x0000, 9, -107 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -33, -53 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -44, -40 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, 13, -41 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -61, -85 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -2, -79 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 26, -53 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -89, -41 } } },
+    ANIM_SPRITE_END,
+};
 SECTION(".rodata.dat_data_banim_p81") u8 AnimSprite_FimbulvetrOBJ_11[] = INCBIN_U8("graphics/reuse/AnimSprite_FimbulvetrOBJ_11.4bpp");
-__asm__(
-"	.section .rodata.dat_data_banim_p81, \"a\", %progbits\n"
-"	.global AnimSprite_FimbulvetrOBJ_12\n"
-"AnimSprite_FimbulvetrOBJ_12:\n"
-"	.short 0x0004, 0xFFFF, 0xFF10, 0xFFA9, 0x0057, 0xFF10\n"
-"	.short 0x0004, 0xFFFF, 0x00FC, 0x002C, 0xFFD4, 0x00FC\n"
-"	.short 0x0004, 0xFFFF, 0x00F0, 0x0057, 0xFFA9, 0x00F0\n"
-"	.short 0x0004, 0xFFFF, 0x0000, 0x00FF, 0xFF01, 0x0000\n"
-"	.short 0x0100, 0x4000, 0x0000, -77, -47, 0\n"
-"	.short 0x0100, 0x4200, 0x0002, 19, -25, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -83, -17, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 8, -62, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -91, -97, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 36, -74, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -106, -63, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -45, -87, 0\n"
-"	.short 0x0000, 0x6000, 0x0006, 41, -42, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -5, -42, 0\n"
-"	.short 0x0000, 0x5000, 0x0006, -107, -28, 0\n"
-"	.short 0x0100, 0x4400, 0x0002, -91, -73, 0\n"
-"	.short 0x0100, 0x4600, 0x0000, 11, -110, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -35, -56, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -47, -43, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, 14, -41, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -64, -88, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -1, -82, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 29, -55, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -92, -42, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
-__asm__(
-"	.section .rodata.dat_data_banim_p81, \"a\", %progbits\n"
-"	.global AnimSprite_FimbulvetrOBJ_13\n"
-"AnimSprite_FimbulvetrOBJ_13:\n"
-"	.short 0x0004, 0xFFFF, 0xFF23, 0xFF81, 0x007F, 0xFF23\n"
-"	.short 0x0004, 0xFFFF, 0x00F0, 0x0057, 0xFFA9, 0x00F0\n"
-"	.short 0x0004, 0xFFFF, 0x00FC, 0x002C, 0xFFD4, 0x00FC\n"
-"	.short 0x0004, 0xFFFF, 0xFFD4, 0x00FC, 0xFF04, 0xFFD4\n"
-"	.short 0x0100, 0x4000, 0x0000, -78, -47, 0\n"
-"	.short 0x0100, 0x4200, 0x0002, 20, -25, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -84, -17, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 9, -63, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -92, -98, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 37, -75, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -107, -64, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -46, -88, 0\n"
-"	.short 0x0000, 0x6000, 0x0006, 42, -42, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -4, -42, 0\n"
-"	.short 0x0000, 0x5000, 0x0006, -108, -28, 0\n"
-"	.short 0x0100, 0x4400, 0x0002, -92, -74, 0\n"
-"	.short 0x0100, 0x4600, 0x0000, 12, -111, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -35, -57, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -48, -43, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, 15, -41, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -65, -89, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 0, -83, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 30, -55, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -93, -42, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
+struct AnimSpriteData AnimSprite_FimbulvetrOBJ_12[] __attribute__((section(".rodata.dat_data_banim_p81"))) =
+{
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF10, 0xFFA9, 0x0057, 0xFF10 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00FC, 0x002C, 0xFFD4, 0x00FC } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00F0, 0x0057, 0xFFA9, 0x00F0 } } },
+    { .header = 0xFFFF0004, .as = { .object = { 0x0000, 255, -255 } } },
+    { .header = 0x40000100, .as = { .object = { 0x0000, -77, -47 } } },
+    { .header = 0x42000100, .as = { .object = { 0x0002, 19, -25 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -83, -17 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 8, -62 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -91, -97 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 36, -74 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -106, -63 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -45, -87 } } },
+    { .header = 0x60000000, .as = { .object = { 0x0006, 41, -42 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -5, -42 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0006, -107, -28 } } },
+    { .header = 0x44000100, .as = { .object = { 0x0002, -91, -73 } } },
+    { .header = 0x46000100, .as = { .object = { 0x0000, 11, -110 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -35, -56 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -47, -43 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, 14, -41 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -64, -88 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -1, -82 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 29, -55 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -92, -42 } } },
+    ANIM_SPRITE_END,
+};
+struct AnimSpriteData AnimSprite_FimbulvetrOBJ_13[] __attribute__((section(".rodata.dat_data_banim_p81"))) =
+{
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF23, 0xFF81, 0x007F, 0xFF23 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00F0, 0x0057, 0xFFA9, 0x00F0 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00FC, 0x002C, 0xFFD4, 0x00FC } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFFD4, 0x00FC, 0xFF04, 0xFFD4 } } },
+    { .header = 0x40000100, .as = { .object = { 0x0000, -78, -47 } } },
+    { .header = 0x42000100, .as = { .object = { 0x0002, 20, -25 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -84, -17 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 9, -63 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -92, -98 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 37, -75 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -107, -64 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -46, -88 } } },
+    { .header = 0x60000000, .as = { .object = { 0x0006, 42, -42 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -4, -42 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0006, -108, -28 } } },
+    { .header = 0x44000100, .as = { .object = { 0x0002, -92, -74 } } },
+    { .header = 0x46000100, .as = { .object = { 0x0000, 12, -111 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -35, -57 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -48, -43 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, 15, -41 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -65, -89 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 0, -83 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 30, -55 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -93, -42 } } },
+    ANIM_SPRITE_END,
+};
 SECTION(".rodata.dat_data_banim_p81") u8 AnimSprite_FimbulvetrOBJ_14[] = INCBIN_U8("graphics/reuse/AnimSprite_FimbulvetrOBJ_14.4bpp");
-__asm__(
-"	.section .rodata.dat_data_banim_p81, \"a\", %progbits\n"
-"	.global AnimSprite_FimbulvetrOBJ_15\n"
-"AnimSprite_FimbulvetrOBJ_15:\n"
-"	.short 0x0004, 0xFFFF, 0xFF5C, 0xFF3D, 0x00C3, 0xFF5C\n"
-"	.short 0x0004, 0xFFFF, 0x00C4, 0x00A4, 0xFF5C, 0x00C4\n"
-"	.short 0x0004, 0xFFFF, 0x00FB, 0xFFD3, 0x002D, 0x00FB\n"
-"	.short 0x0004, 0xFFFF, 0xFF81, 0x00DD, 0xFF23, 0xFF81\n"
-"	.short 0x0100, 0x4000, 0x0000, -80, -46, 0\n"
-"	.short 0x0100, 0x4200, 0x0002, 22, -24, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -86, -16, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 11, -63, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -94, -99, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 39, -76, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -109, -64, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -48, -89, 0\n"
-"	.short 0x0000, 0x6000, 0x0006, 44, -41, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -2, -41, 0\n"
-"	.short 0x0000, 0x5000, 0x0006, -110, -27, 0\n"
-"	.short 0x0100, 0x4400, 0x0002, -94, -74, 0\n"
-"	.short 0x0100, 0x4600, 0x0000, 14, -112, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -36, -58, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -50, -43, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, 17, -40, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -67, -90, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 2, -84, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 32, -55, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -95, -41, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
-__asm__(
-"	.section .rodata.dat_data_banim_p81, \"a\", %progbits\n"
-"	.global AnimSprite_FimbulvetrOBJ_16\n"
-"AnimSprite_FimbulvetrOBJ_16:\n"
-"	.short 0x0004, 0xFFFF, 0xFF80, 0xFF23, 0x00DD, 0xFF80\n"
-"	.short 0x0004, 0xFFFF, 0x00A4, 0x00C4, 0xFF3C, 0x00A4\n"
-"	.short 0x0004, 0xFFFF, 0x00F0, 0xFFA8, 0x0058, 0x00F0\n"
-"	.short 0x0004, 0xFFFF, 0xFF5C, 0x00C4, 0xFF3C, 0xFF5C\n"
-"	.short 0x0100, 0x4000, 0x0000, -81, -45, 0\n"
-"	.short 0x0100, 0x4200, 0x0002, 23, -23, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -87, -15, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 12, -62, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -95, -99, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 40, -75, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -110, -63, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -49, -89, 0\n"
-"	.short 0x0000, 0x6000, 0x0006, 45, -40, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -1, -40, 0\n"
-"	.short 0x0000, 0x5000, 0x0006, -111, -26, 0\n"
-"	.short 0x0100, 0x4400, 0x0002, -95, -73, 0\n"
-"	.short 0x0100, 0x4600, 0x0000, 15, -112, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -37, -58, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -51, -42, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, 18, -39, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -68, -90, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 3, -84, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 33, -54, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -96, -40, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
-__asm__(
-"	.section .rodata.dat_data_banim_p81, \"a\", %progbits\n"
-"	.global AnimSprite_FimbulvetrOBJ_17\n"
-"AnimSprite_FimbulvetrOBJ_17:\n"
-"	.short 0x0004, 0xFFFF, 0xFFA8, 0xFF10, 0x00F0, 0xFFA8\n"
-"	.short 0x0004, 0xFFFF, 0x0080, 0x00DD, 0xFF23, 0x0080\n"
-"	.short 0x0004, 0xFFFF, 0x00DD, 0xFF80, 0x0080, 0x00DD\n"
-"	.short 0x0004, 0xFFFF, 0xFF3D, 0x00A4, 0xFF5C, 0xFF3D\n"
-"	.short 0x0100, 0x4000, 0x0000, -82, -44, 0\n"
-"	.short 0x0100, 0x4200, 0x0002, 24, -22, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -88, -14, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 13, -61, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -96, -99, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 41, -74, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -111, -62, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -50, -89, 0\n"
-"	.short 0x0000, 0x6000, 0x0006, 46, -39, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, 0, -39, 0\n"
-"	.short 0x0000, 0x5000, 0x0006, -112, -25, 0\n"
-"	.short 0x0100, 0x4400, 0x0002, -96, -72, 0\n"
-"	.short 0x0100, 0x4600, 0x0000, 16, -112, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -38, -57, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -52, -41, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, 19, -38, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -69, -90, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 4, -84, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 34, -53, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -97, -39, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
-__asm__(
-"	.section .rodata.dat_data_banim_p81, \"a\", %progbits\n"
-"	.global AnimSprite_FimbulvetrOBJ_18\n"
-"AnimSprite_FimbulvetrOBJ_18:\n"
-"	.short 0x0004, 0xFFFF, 0xFFD3, 0xFF04, 0x00FC, 0xFFD3\n"
-"	.short 0x0004, 0xFFFF, 0x0057, 0x00F0, 0xFF10, 0x0057\n"
-"	.short 0x0004, 0xFFFF, 0x00C3, 0xFF5B, 0x00A5, 0x00C3\n"
-"	.short 0x0004, 0xFFFF, 0xFF23, 0x0080, 0xFF80, 0xFF23\n"
-"	.short 0x0100, 0x4000, 0x0000, -83, -42, 0\n"
-"	.short 0x0100, 0x4200, 0x0002, 25, -20, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -89, -12, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 14, -59, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -97, -98, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 42, -72, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -112, -60, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -51, -88, 0\n"
-"	.short 0x0000, 0x6000, 0x0006, 47, -37, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, 1, -37, 0\n"
-"	.short 0x0000, 0x5000, 0x0006, -113, -23, 0\n"
-"	.short 0x0100, 0x4400, 0x0002, -97, -70, 0\n"
-"	.short 0x0100, 0x4600, 0x0000, 17, -111, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -39, -56, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -53, -39, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, 20, -36, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -70, -89, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 5, -83, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 35, -51, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -98, -37, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
-__asm__(
-"	.section .rodata.dat_data_banim_p81, \"a\", %progbits\n"
-"	.global AnimSprite_FimbulvetrOBJ_19\n"
-"AnimSprite_FimbulvetrOBJ_19:\n"
-"	.short 0x0004, 0xFFFF, 0x0000, 0xFF01, 0x00FF, 0x0000\n"
-"	.short 0x0004, 0xFFFF, 0x002C, 0x00FC, 0xFF04, 0x002C\n"
-"	.short 0x0004, 0xFFFF, 0x00A4, 0xFF3C, 0x00C4, 0x00A4\n"
-"	.short 0x0004, 0xFFFF, 0xFF10, 0x0057, 0xFFA9, 0xFF10\n"
-"	.short 0x0100, 0x4000, 0x0000, -84, -40, 0\n"
-"	.short 0x0100, 0x4200, 0x0002, 26, -18, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -90, -10, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 15, -57, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -98, -97, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 43, -70, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -113, -58, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -52, -87, 0\n"
-"	.short 0x0000, 0x6000, 0x0006, 48, -35, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, 2, -35, 0\n"
-"	.short 0x0000, 0x5000, 0x0006, -114, -21, 0\n"
-"	.short 0x0100, 0x4400, 0x0002, -98, -68, 0\n"
-"	.short 0x0100, 0x4600, 0x0000, 18, -110, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -40, -55, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -54, -37, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, 20, -36, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -71, -88, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 6, -82, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 36, -49, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -99, -35, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
-__asm__(
-"	.section .rodata.dat_data_banim_p81, \"a\", %progbits\n"
-"	.global AnimSprite_FimbulvetrOBJ_20\n"
-"AnimSprite_FimbulvetrOBJ_20:\n"
-"	.short 0x0004, 0xFFFF, 0x002B, 0xFF04, 0x00FC, 0x002B\n"
-"	.short 0x0004, 0xFFFF, 0x0000, 0x00FF, 0xFF01, 0x0000\n"
-"	.short 0x0004, 0xFFFF, 0x007F, 0xFF22, 0x00DE, 0x007F\n"
-"	.short 0x0004, 0xFFFF, 0xFF04, 0x002C, 0xFFD4, 0xFF04\n"
-"	.short 0x0100, 0x4000, 0x0000, -85, -38, 0\n"
-"	.short 0x0100, 0x4200, 0x0002, 27, -16, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -91, -8, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 16, -55, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -99, -95, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 44, -68, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -114, -56, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, -53, -85, 0\n"
-"	.short 0x0000, 0x6000, 0x0006, 49, -33, 0\n"
-"	.short 0x0000, 0x4000, 0x0006, 3, -33, 0\n"
-"	.short 0x0000, 0x5000, 0x0006, -115, -19, 0\n"
-"	.short 0x0100, 0x4400, 0x0002, -99, -66, 0\n"
-"	.short 0x0100, 0x4600, 0x0000, 19, -109, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -41, -54, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -55, -35, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, 21, -34, 0\n"
-"	.short 0x0000, 0x0000, 0x0004, -72, -86, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 7, -81, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, 37, -47, 0\n"
-"	.short 0x0000, 0x0000, 0x0005, -100, -33, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
+struct AnimSpriteData AnimSprite_FimbulvetrOBJ_15[] __attribute__((section(".rodata.dat_data_banim_p81"))) =
+{
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF5C, 0xFF3D, 0x00C3, 0xFF5C } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00C4, 0x00A4, 0xFF5C, 0x00C4 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00FB, 0xFFD3, 0x002D, 0x00FB } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF81, 0x00DD, 0xFF23, 0xFF81 } } },
+    { .header = 0x40000100, .as = { .object = { 0x0000, -80, -46 } } },
+    { .header = 0x42000100, .as = { .object = { 0x0002, 22, -24 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -86, -16 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 11, -63 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -94, -99 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 39, -76 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -109, -64 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -48, -89 } } },
+    { .header = 0x60000000, .as = { .object = { 0x0006, 44, -41 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -2, -41 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0006, -110, -27 } } },
+    { .header = 0x44000100, .as = { .object = { 0x0002, -94, -74 } } },
+    { .header = 0x46000100, .as = { .object = { 0x0000, 14, -112 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -36, -58 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -50, -43 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, 17, -40 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -67, -90 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 2, -84 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 32, -55 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -95, -41 } } },
+    ANIM_SPRITE_END,
+};
+struct AnimSpriteData AnimSprite_FimbulvetrOBJ_16[] __attribute__((section(".rodata.dat_data_banim_p81"))) =
+{
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF80, 0xFF23, 0x00DD, 0xFF80 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00A4, 0x00C4, 0xFF3C, 0x00A4 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00F0, 0xFFA8, 0x0058, 0x00F0 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF5C, 0x00C4, 0xFF3C, 0xFF5C } } },
+    { .header = 0x40000100, .as = { .object = { 0x0000, -81, -45 } } },
+    { .header = 0x42000100, .as = { .object = { 0x0002, 23, -23 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -87, -15 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 12, -62 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -95, -99 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 40, -75 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -110, -63 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -49, -89 } } },
+    { .header = 0x60000000, .as = { .object = { 0x0006, 45, -40 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -1, -40 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0006, -111, -26 } } },
+    { .header = 0x44000100, .as = { .object = { 0x0002, -95, -73 } } },
+    { .header = 0x46000100, .as = { .object = { 0x0000, 15, -112 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -37, -58 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -51, -42 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, 18, -39 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -68, -90 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 3, -84 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 33, -54 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -96, -40 } } },
+    ANIM_SPRITE_END,
+};
+struct AnimSpriteData AnimSprite_FimbulvetrOBJ_17[] __attribute__((section(".rodata.dat_data_banim_p81"))) =
+{
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFFA8, 0xFF10, 0x00F0, 0xFFA8 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x0080, 0x00DD, 0xFF23, 0x0080 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00DD, 0xFF80, 0x0080, 0x00DD } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF3D, 0x00A4, 0xFF5C, 0xFF3D } } },
+    { .header = 0x40000100, .as = { .object = { 0x0000, -82, -44 } } },
+    { .header = 0x42000100, .as = { .object = { 0x0002, 24, -22 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -88, -14 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 13, -61 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -96, -99 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 41, -74 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -111, -62 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -50, -89 } } },
+    { .header = 0x60000000, .as = { .object = { 0x0006, 46, -39 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, 0, -39 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0006, -112, -25 } } },
+    { .header = 0x44000100, .as = { .object = { 0x0002, -96, -72 } } },
+    { .header = 0x46000100, .as = { .object = { 0x0000, 16, -112 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -38, -57 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -52, -41 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, 19, -38 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -69, -90 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 4, -84 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 34, -53 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -97, -39 } } },
+    ANIM_SPRITE_END,
+};
+struct AnimSpriteData AnimSprite_FimbulvetrOBJ_18[] __attribute__((section(".rodata.dat_data_banim_p81"))) =
+{
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFFD3, 0xFF04, 0x00FC, 0xFFD3 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x0057, 0x00F0, 0xFF10, 0x0057 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00C3, 0xFF5B, 0x00A5, 0x00C3 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF23, 0x0080, 0xFF80, 0xFF23 } } },
+    { .header = 0x40000100, .as = { .object = { 0x0000, -83, -42 } } },
+    { .header = 0x42000100, .as = { .object = { 0x0002, 25, -20 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -89, -12 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 14, -59 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -97, -98 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 42, -72 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -112, -60 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -51, -88 } } },
+    { .header = 0x60000000, .as = { .object = { 0x0006, 47, -37 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, 1, -37 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0006, -113, -23 } } },
+    { .header = 0x44000100, .as = { .object = { 0x0002, -97, -70 } } },
+    { .header = 0x46000100, .as = { .object = { 0x0000, 17, -111 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -39, -56 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -53, -39 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, 20, -36 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -70, -89 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 5, -83 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 35, -51 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -98, -37 } } },
+    ANIM_SPRITE_END,
+};
+struct AnimSpriteData AnimSprite_FimbulvetrOBJ_19[] __attribute__((section(".rodata.dat_data_banim_p81"))) =
+{
+    { .header = 0xFFFF0004, .as = { .object = { 0x0000, -255, 255 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x002C, 0x00FC, 0xFF04, 0x002C } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x00A4, 0xFF3C, 0x00C4, 0x00A4 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF10, 0x0057, 0xFFA9, 0xFF10 } } },
+    { .header = 0x40000100, .as = { .object = { 0x0000, -84, -40 } } },
+    { .header = 0x42000100, .as = { .object = { 0x0002, 26, -18 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -90, -10 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 15, -57 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -98, -97 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 43, -70 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -113, -58 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -52, -87 } } },
+    { .header = 0x60000000, .as = { .object = { 0x0006, 48, -35 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, 2, -35 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0006, -114, -21 } } },
+    { .header = 0x44000100, .as = { .object = { 0x0002, -98, -68 } } },
+    { .header = 0x46000100, .as = { .object = { 0x0000, 18, -110 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -40, -55 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -54, -37 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, 20, -36 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -71, -88 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 6, -82 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 36, -49 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -99, -35 } } },
+    ANIM_SPRITE_END,
+};
+struct AnimSpriteData AnimSprite_FimbulvetrOBJ_20[] __attribute__((section(".rodata.dat_data_banim_p81"))) =
+{
+    { .header = 0xFFFF0004, .as = { .affine = { 0x002B, 0xFF04, 0x00FC, 0x002B } } },
+    { .header = 0xFFFF0004, .as = { .object = { 0x0000, 255, -255 } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0x007F, 0xFF22, 0x00DE, 0x007F } } },
+    { .header = 0xFFFF0004, .as = { .affine = { 0xFF04, 0x002C, 0xFFD4, 0xFF04 } } },
+    { .header = 0x40000100, .as = { .object = { 0x0000, -85, -38 } } },
+    { .header = 0x42000100, .as = { .object = { 0x0002, 27, -16 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -91, -8 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 16, -55 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -99, -95 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 44, -68 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -114, -56 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, -53, -85 } } },
+    { .header = 0x60000000, .as = { .object = { 0x0006, 49, -33 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0006, 3, -33 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0006, -115, -19 } } },
+    { .header = 0x44000100, .as = { .object = { 0x0002, -99, -66 } } },
+    { .header = 0x46000100, .as = { .object = { 0x0000, 19, -109 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -41, -54 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -55, -35 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, 21, -34 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0004, -72, -86 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 7, -81 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, 37, -47 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0005, -100, -33 } } },
+    ANIM_SPRITE_END,
+};
 SECTION(".rodata.dat_data_banim_p81") u8 AnimSprite_FimbulvetrOBJ_21[] = INCBIN_U8("graphics/reuse/AnimSprite_FimbulvetrOBJ_21.4bpp");
 SECTION(".rodata.dat_data_banim_p81") u8 AnimSprite_FimbulvetrOBJ_22[] = INCBIN_U8("graphics/reuse/AnimSprite_FimbulvetrOBJ_22.4bpp");
 SECTION(".rodata.dat_data_banim_p81") u8 AnimSprite_FimbulvetrOBJ_23[] = INCBIN_U8("graphics/reuse/AnimSprite_FimbulvetrOBJ_23.4bpp");

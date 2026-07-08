@@ -1,121 +1,114 @@
 #include "global.h"
+#include "anime.h"
 
 /* Migrated from asm/dat_data_banim_p137.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
 SECTION(".rodata.dat_data_banim_p137") u8 AnimSprite_EfxRestOBJ_8[] = INCBIN_U8("graphics/reuse/AnimSprite_EfxRestOBJ_8.4bpp");
-__asm__(
-"	.section .rodata.dat_data_banim_p137, \"a\", %progbits\n"
-"	.global AnimSprite_EfxRestOBJ_9\n"
-"AnimSprite_EfxRestOBJ_9:\n"
-"	.short 0x0000, 0x0000, 0x0019, 8, -46, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 0, -88, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, -3, -83, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -7, -56, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -10, -61, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -14, -67, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -17, -72, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -19, -78, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -20, -84, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -21, -90, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 11, -51, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 14, -56, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 17, -62, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 19, -68, 0\n"
-"	.short 0x0000, 0x0000, 0x001A, 18, -87, 0\n"
-"	.short 0x0000, 0x0000, 0x001A, 19, -80, 0\n"
-"	.short 0x0000, 0x0000, 0x001A, 20, -74, 0\n"
-"	.short 0x0000, 0x0000, 0x001C, 5, -41, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
-__asm__(
-"	.section .rodata.dat_data_banim_p137, \"a\", %progbits\n"
-"	.global AnimSprite_EfxRestOBJ_10\n"
-"AnimSprite_EfxRestOBJ_10:\n"
-"	.short 0x0000, 0x0000, 0x0019, 8, -46, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 5, -41, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 0, -88, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, -3, -83, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, -5, -78, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -4, -51, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -7, -56, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -10, -61, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -14, -67, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -17, -72, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -19, -78, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -20, -84, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -21, -90, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 11, -51, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 14, -56, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 17, -62, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 19, -68, 0\n"
-"	.short 0x0000, 0x0000, 0x001A, 19, -80, 0\n"
-"	.short 0x0000, 0x0000, 0x001A, 20, -74, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, 18, -87, 0\n"
-"	.short 0x0000, 0x0000, 0x001C, 1, -36, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
-__asm__(
-"	.section .rodata.dat_data_banim_p137, \"a\", %progbits\n"
-"	.global AnimSprite_EfxRestOBJ_11\n"
-"AnimSprite_EfxRestOBJ_11:\n"
-"	.short 0x0000, 0x0000, 0x0019, 8, -46, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 5, -41, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 1, -36, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 0, -88, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, -3, -83, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, -5, -78, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, -8, -73, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -4, -51, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -7, -56, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -10, -61, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -14, -67, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -17, -72, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -19, -78, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -20, -84, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -21, -90, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 11, -51, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 14, -56, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 17, -62, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 19, -68, 0\n"
-"	.short 0x0000, 0x0000, 0x001A, -1, -46, 0\n"
-"	.short 0x0000, 0x0000, 0x001A, 20, -74, 0\n"
-"	.short 0x0000, 0x0000, 0x001A, -32, -90, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, 19, -80, 0\n"
-"	.short 0x0000, 0x0000, 0x001C, -3, -31, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
-__asm__(
-"	.section .rodata.dat_data_banim_p137, \"a\", %progbits\n"
-"	.global AnimSprite_EfxRestOBJ_12\n"
-"AnimSprite_EfxRestOBJ_12:\n"
-"	.short 0x0000, 0x0000, 0x0019, 8, -46, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 5, -41, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 1, -36, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, -3, -31, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 0, -88, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, -3, -83, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, -5, -78, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, -8, -73, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, -10, -68, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -4, -51, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -7, -56, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -10, -61, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -14, -67, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -17, -72, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -19, -78, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -20, -84, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, -21, -90, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 11, -51, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 14, -56, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 17, -62, 0\n"
-"	.short 0x0000, 0x0000, 0x0019, 19, -68, 0\n"
-"	.short 0x0000, 0x0000, 0x001A, -1, -46, 0\n"
-"	.short 0x0000, 0x0000, 0x001A, 2, -41, 0\n"
-"	.short 0x0000, 0x0000, 0x001A, -32, -90, 0\n"
-"	.short 0x0000, 0x0000, 0x001A, -33, -85, 0\n"
-"	.short 0x0000, 0x0000, 0x001B, 20, -74, 0\n"
-"	.short 0x0000, 0x0000, 0x001C, -7, -26, 0\n"
-"	.short 0x0001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000\n"
-);
+struct AnimSpriteData AnimSprite_EfxRestOBJ_9[] __attribute__((section(".rodata.dat_data_banim_p137"))) =
+{
+    { .header = 0x00000000, .as = { .object = { 0x0019, 8, -46 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 0, -88 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, -3, -83 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -7, -56 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -10, -61 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -14, -67 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -17, -72 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -19, -78 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -20, -84 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -21, -90 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 11, -51 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 14, -56 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 17, -62 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 19, -68 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001A, 18, -87 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001A, 19, -80 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001A, 20, -74 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001C, 5, -41 } } },
+    ANIM_SPRITE_END,
+};
+struct AnimSpriteData AnimSprite_EfxRestOBJ_10[] __attribute__((section(".rodata.dat_data_banim_p137"))) =
+{
+    { .header = 0x00000000, .as = { .object = { 0x0019, 8, -46 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 5, -41 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 0, -88 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, -3, -83 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, -5, -78 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -4, -51 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -7, -56 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -10, -61 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -14, -67 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -17, -72 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -19, -78 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -20, -84 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -21, -90 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 11, -51 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 14, -56 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 17, -62 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 19, -68 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001A, 19, -80 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001A, 20, -74 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, 18, -87 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001C, 1, -36 } } },
+    ANIM_SPRITE_END,
+};
+struct AnimSpriteData AnimSprite_EfxRestOBJ_11[] __attribute__((section(".rodata.dat_data_banim_p137"))) =
+{
+    { .header = 0x00000000, .as = { .object = { 0x0019, 8, -46 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 5, -41 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 1, -36 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 0, -88 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, -3, -83 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, -5, -78 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, -8, -73 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -4, -51 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -7, -56 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -10, -61 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -14, -67 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -17, -72 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -19, -78 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -20, -84 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -21, -90 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 11, -51 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 14, -56 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 17, -62 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 19, -68 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001A, -1, -46 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001A, 20, -74 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001A, -32, -90 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, 19, -80 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001C, -3, -31 } } },
+    ANIM_SPRITE_END,
+};
+struct AnimSpriteData AnimSprite_EfxRestOBJ_12[] __attribute__((section(".rodata.dat_data_banim_p137"))) =
+{
+    { .header = 0x00000000, .as = { .object = { 0x0019, 8, -46 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 5, -41 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 1, -36 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, -3, -31 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 0, -88 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, -3, -83 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, -5, -78 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, -8, -73 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, -10, -68 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -4, -51 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -7, -56 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -10, -61 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -14, -67 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -17, -72 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -19, -78 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -20, -84 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, -21, -90 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 11, -51 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 14, -56 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 17, -62 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0019, 19, -68 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001A, -1, -46 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001A, 2, -41 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001A, -32, -90 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001A, -33, -85 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001B, 20, -74 } } },
+    { .header = 0x00000000, .as = { .object = { 0x001C, -7, -26 } } },
+    ANIM_SPRITE_END,
+};
