@@ -11,7 +11,7 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 UnitDef_Ch15AAlly_1[];
-extern const u8 data_08A60354[];
+extern const u8 Event_TextWithBG[];
 
 SECTION(".rodata.dat_EventScr_Ch15A_0_ref") EventListScr EventScr_Ch15A_0[] = {
     MUSC(0x25)
@@ -24,7 +24,7 @@ SECTION(".rodata.dat_EventScr_Ch15A_0_ref") EventListScr EventScr_Ch15A_0[] = {
     CURE
     SVAL(EVT_SLOT_2, 0x49)
     SVAL(EVT_SLOT_3, 0xADC)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     REVEAL(0xF)
     EVBIT_T(7)
     ENDA

@@ -15,7 +15,7 @@ data_08A6846C:
 	.4byte 0x00020540
 	.4byte 0x00000049
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xCC
+	.4byte EventScr_SetBackground
 	.4byte 0x0AD81B20
 	.4byte 0x00001D20
 	.4byte 0x00041721
@@ -40,7 +40,7 @@ data_08A6846C:
 	.4byte 0x00020540
 	.4byte 0x00000049
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xCC
+	.4byte EventScr_SetBackground
 	.4byte 0x0AD91B20
 	.4byte 0x00001D20
 	.4byte 0x00101721

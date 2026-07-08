@@ -7,7 +7,7 @@ EventScr_Ch5_6:
 	.4byte 0x00020540
 	.4byte frontier_df4_banim_b_074_909DE8 + 0x3C
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 	.section .data.residue.08A64438, "aw", %progbits
@@ -16,6 +16,6 @@ EventScr_Ch5_7:
 	.4byte 0x00020540
 	.4byte frontier_df4_banim_b_074_909DE8 + 0x78
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120

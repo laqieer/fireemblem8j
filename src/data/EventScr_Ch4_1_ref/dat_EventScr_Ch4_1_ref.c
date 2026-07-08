@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 extern const u8 UnitDef_Ch4Ally_2[];
 extern const u8 UnitDef_Ch4Ally_3[]; /* was UnitDef_Ch4Ally_3 (D312 rename) */
 extern const u8 UnitDef_Ch4NPC_1[];
@@ -20,7 +20,7 @@ SECTION(".rodata.dat_EventScr_Ch4_1_ref") EventListScr EventScr_Ch4_1[] = {
     CHECK_EXISTS(0xC)
     BNE(0xA, 0xC, 0)
     SVAL(EVT_SLOT_2, 2)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     CHECK_ALIVE(0x13)
     BEQ(0, 0xC, 0)
     SVAL(EVT_SLOT_2, 0x96D)
@@ -37,7 +37,7 @@ SECTION(".rodata.dat_EventScr_Ch4_1_ref") EventListScr EventScr_Ch4_1[] = {
     LABEL(0xA)
     MUSC(0x32)
     SVAL(EVT_SLOT_2, 0x1E)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     CHECK_ALIVE(0x13)
     BEQ(0xB, 0xC, 0)
     CHECK_ALIVE(0xC)
@@ -67,7 +67,7 @@ SECTION(".rodata.dat_EventScr_Ch4_1_ref") EventListScr EventScr_Ch4_1[] = {
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x1E)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x971)
     TEXTEND
     REMA

@@ -12,7 +12,9 @@
 
 extern const u8 EventScr_Ch8_10[];
 extern const u8 frontier_df4_banim_b_074_909DE8[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_TextShowWithFadeIn[];
+extern const u8 EventScr_SetBackground[];
+extern const u8 Event_TextWithBG[];
 extern const u8 UnitDef_Ch5Enemy_0[];
 extern const u8 UnitDef_Ch5Enemy_1[];
 extern const u8 UnitDef_Event_Ch4Ally[];
@@ -32,7 +34,7 @@ SECTION(".rodata.dat_EventScr_Ch5_BeginningScene_ref") EventListScr EventScr_Ch5
     ENUN
     SVAL(EVT_SLOT_2, 0xA)
     SVAL(EVT_SLOT_3, 0x97A)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     DISA(0x20)
     LOAD2(1, frontier_df4_banim_b_074_909DE8 + 0xDC)
     ENUN
@@ -40,7 +42,7 @@ SECTION(".rodata.dat_EventScr_Ch5_BeginningScene_ref") EventListScr EventScr_Ch5
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0xA)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x97B)
     TEXTEND
     REMA
@@ -58,7 +60,7 @@ SECTION(".rodata.dat_EventScr_Ch5_BeginningScene_ref") EventListScr EventScr_Ch5
     CURE
     SVAL(EVT_SLOT_2, 0xA)
     SVAL(EVT_SLOT_3, 0x97C)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MOVE(0, 0x4A, 9, 4)
     ENUN
     MOVE_1STEP(0x10, 0xE, 3)
@@ -68,7 +70,7 @@ SECTION(".rodata.dat_EventScr_Ch5_BeginningScene_ref") EventListScr EventScr_Ch5
     CURE
     SVAL(EVT_SLOT_2, 0xA)
     SVAL(EVT_SLOT_3, 0x97D)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     SVAL(EVT_SLOT_D, 0)
     SVAL(EVT_SLOT_1, 0x1C9)
     SENQUEUE1
@@ -105,7 +107,7 @@ SECTION(".rodata.dat_EventScr_Ch5_BeginningScene_ref") EventListScr EventScr_Ch5
     CLEE
     CLEN
     SVAL(EVT_SLOT_2, 0x2F)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     MUSC(0x24)
     TEXTSHOW(0x97E)
     TEXTEND
@@ -121,7 +123,7 @@ SECTION(".rodata.dat_EventScr_Ch5_BeginningScene_ref") EventListScr EventScr_Ch5
     TEXTCONT
     TEXTEND
     REMA
-    CALL(data_08A60354 + 0xA8)
+    CALL(EventScr_TextShowWithFadeIn)
     LOAD1(1, frontier_df4_banim_b_074_909DE8 + 0x168)
     ENUN
     LOAD1(1, UnitDef_Ch5Enemy_0)

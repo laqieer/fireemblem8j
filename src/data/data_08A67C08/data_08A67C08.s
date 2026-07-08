@@ -7,7 +7,7 @@ EventScr_Ch13A_5:
 	.4byte 0x00020540
 	.4byte data_0890F2E0 + 0xC8
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 /* de-pointered slice EventScr_Ch13A_5: ptr=2 data=4 skip=0 */
@@ -17,7 +17,7 @@ EventScr_Ch13A_6:
 	.4byte 0x00020540
 	.4byte data_0890F2E0 + 0x104
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 /* de-pointered slice EventScr_Ch13A_6: ptr=2 data=4 skip=0 */
@@ -28,7 +28,7 @@ EventScr_Ch13A_7:
 	.4byte 0x00020540
 	.4byte UnitDef_Ch13AEnemy_9
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x000E3B21
 	.4byte 0x003C0E20
 	.4byte 0x00003B22
@@ -72,7 +72,7 @@ EventScr_Ch14a_BeginningScene:
 	.4byte 0x00020540
 	.4byte 0x00000049
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xCC
+	.4byte EventScr_SetBackground
 	.4byte 0x0A431B20
 	.4byte 0x00001D20
 	.4byte 0x00251220
@@ -80,7 +80,7 @@ EventScr_Ch14a_BeginningScene:
 	.4byte 0x00001D20
 	.4byte 0x00001B22
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xA8
+	.4byte EventScr_TextShowWithFadeIn
 	.4byte 0x00102F40
 	.4byte 0x04090001
 	.4byte 0x00102F40
@@ -135,7 +135,7 @@ EventScr_Ch14a_BeginningScene:
 	.4byte 0x00030540
 	.4byte 0x00000A45
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x000C0229
 	.4byte 0x000E0229
 	.4byte 0x00070228

@@ -11,7 +11,7 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 HandleCh5xUnits_End[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 extern const u8 UnitDef_Ch5xAlly_0[];
 extern const u8 UnitDef_Ch5xEnemy_2[];
 extern const u8 UnitDef_Ch5xAlly_3[];
@@ -22,7 +22,7 @@ SECTION(".rodata.dat_EventScr_Ch5x_EndingScene_ref") EventListScr EventScr_Ch5x_
     ASMC(HandleCh5xUnits_End + 0x1)
     MUSC(0x31)
     SVAL(EVT_SLOT_2, 0x15)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9A1)
     TEXTEND
     REMA
@@ -68,7 +68,7 @@ SECTION(".rodata.dat_EventScr_Ch5x_EndingScene_ref") EventListScr EventScr_Ch5x_
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x2C)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9A3)
     TEXTEND
     REMA

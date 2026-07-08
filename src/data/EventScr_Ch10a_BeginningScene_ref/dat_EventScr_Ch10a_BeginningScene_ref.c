@@ -12,7 +12,9 @@
 
 extern const u8 EventScr_9EEA58[];
 extern const u8 frontier_df4_banim_b_077_90DB94[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_LoadUnitForTutorial[];
+extern const u8 EventScr_SetBackground[];
+extern const u8 Event_TextWithBG[];
 extern const u8 UnitDef_Ch10ANPC[];
 extern const u8 UnitDef_Ch10AEnemy_0[];
 extern const u8 UnitDef_Ch10AEnemy_1[];
@@ -59,7 +61,7 @@ SECTION(".rodata.dat_EventScr_Ch10a_BeginningScene_ref") EventListScr EventScr_C
     CURE
     SVAL(EVT_SLOT_2, 0x11)
     SVAL(EVT_SLOT_3, 0x9ED)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     LOAD2(1, frontier_df4_banim_b_077_90DB94 + 0x138)
     ENUN
     MUSI
@@ -67,7 +69,7 @@ SECTION(".rodata.dat_EventScr_Ch10a_BeginningScene_ref") EventListScr EventScr_C
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x11)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9EE)
     TEXTEND
     REMA
@@ -84,7 +86,7 @@ SECTION(".rodata.dat_EventScr_Ch10a_BeginningScene_ref") EventListScr EventScr_C
     ENUN
     SVAL(EVT_SLOT_2, UnitDef_Ch10AEnemy_1)
     SVAL(EVT_SLOT_3, 1)
-    CALL(data_08A60354 + 0x2C)
+    CALL(EventScr_LoadUnitForTutorial)
     FADU(0x10)
     CURSOR_CHAR(0xB)
     STAL(0x3C)
@@ -92,7 +94,7 @@ SECTION(".rodata.dat_EventScr_Ch10a_BeginningScene_ref") EventListScr EventScr_C
     MUSC(0x26)
     SVAL(EVT_SLOT_2, 0x39)
     SVAL(EVT_SLOT_3, 0x9EF)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     CAMERA(0, 0)
     LOAD2(1, UnitDef_Ch10AAlly_0)
     STAL2(0x20)
@@ -110,7 +112,7 @@ SECTION(".rodata.dat_EventScr_Ch10a_BeginningScene_ref") EventListScr EventScr_C
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x25)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9F0)
     TEXTEND
     REMA

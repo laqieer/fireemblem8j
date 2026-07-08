@@ -19,7 +19,7 @@ EventScr_Ch6_4:
 	.4byte 0x00020540
 	.4byte UnitDef_Ch6Enemy_0
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x80
+	.4byte EventScr_LoadReinforceHardMode
 	.4byte 0x00070228
 	.4byte 0x00000120
 /* de-pointered slice data_08A64C88: ptr=2 data=12 skip=0 */

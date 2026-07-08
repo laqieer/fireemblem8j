@@ -11,7 +11,7 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 frontier_df3_unitdef_b_033_9191E0[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 
 SECTION(".rodata.dat_EventScr_Ch13b_EndingScene_ref") EventListScr EventScr_Ch13b_EndingScene[] = {
     EvtBgmFadeIn(0x7FFF, 4)
@@ -31,7 +31,7 @@ SECTION(".rodata.dat_EventScr_Ch13b_EndingScene_ref") EventListScr EventScr_Ch13
     CURE
     MUSC(0x32)
     SVAL(EVT_SLOT_2, 0x2C)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xAB3)
     TEXTEND
     REMA

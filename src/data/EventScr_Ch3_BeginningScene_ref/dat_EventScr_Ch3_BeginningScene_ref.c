@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 extern const u8 UnitDef_Ch3Enemy_0[];
 extern const u8 UnitDef_Event_Ch3Ally[];
 extern const u8 EventScr_Ch3_0[];
@@ -23,12 +23,12 @@ extern const u8 EventScr_Ch3_4[];
 SECTION(".rodata.dat_EventScr_Ch3_BeginningScene_ref") EventListScr EventScr_Ch3_BeginningScene[] = {
     MUSC(0x25)
     SVAL(EVT_SLOT_2, 0x1E)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x94B)
     TEXTEND
     REMA
     SVAL(EVT_SLOT_2, 0x25)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x94C)
     TEXTEND
     REMA

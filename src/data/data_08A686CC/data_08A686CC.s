@@ -8,7 +8,7 @@ data_08A686CC:
 	.4byte 0x00030540
 	.4byte 0x00000AF6
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00000A40
 	.4byte data_085B9BBC + 0x168
@@ -23,7 +23,7 @@ data_08A686CC:
 	.4byte 0x00030540
 	.4byte 0x00000AF7
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00070228
 	.4byte 0x00000120
@@ -33,7 +33,7 @@ data_08A686CC:
 	.4byte 0x00030540
 	.4byte 0x00000AF8
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00070228
 	.4byte 0x00000120
@@ -89,31 +89,31 @@ data_08A686CC:
 	.4byte 0x00020540
 	.4byte frontier_df3_unitdef_b_006_911070
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 	.4byte 0x00020540
 	.4byte 0x089110AC
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 	.4byte 0x00020540
 	.4byte 0x089110E8
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 	.4byte 0x00020540
 	.4byte UnitDef_Ch15AEnemy_6
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 	.4byte 0x00020540
 	.4byte frontier_df3_unitdef_b_007_911200 + 0x3C
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 	.4byte 0x00020540

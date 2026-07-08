@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 Event_TextWithBG[];
 extern const u8 data_085B9BBC[];
 
 SECTION(".rodata.dat_EventScr_Ch2_Village1_ref") EventListScr EventScr_Ch2_Village1[] = {
@@ -21,14 +21,14 @@ SECTION(".rodata.dat_EventScr_Ch2_Village1_ref") EventListScr EventScr_Ch2_Villa
     MUSI
     SVAL(EVT_SLOT_2, 2)
     SVAL(EVT_SLOT_3, 0x929)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MUNO
     GOTO(1)
     LABEL(0)
     MUSI
     SVAL(EVT_SLOT_2, 2)
     SVAL(EVT_SLOT_3, 0x92A)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MUNO
     LABEL(1)
     CALL(data_085B9BBC + 0x168)

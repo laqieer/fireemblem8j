@@ -10,7 +10,9 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_TextShowWithFadeIn[];
+extern const u8 EventScr_SetBackground[];
+extern const u8 Event_TextWithBG[];
 extern const u8 UnitDef_Ch6Ally_0[];
 extern const u8 UnitDef_Ch6Mixed[];
 extern const u8 EventScr_UnitWarpIN[];
@@ -22,12 +24,12 @@ extern const u8 data_085B9BBC[];
 SECTION(".rodata.dat_EventScr_Ch6_BeginningScene_ref") EventListScr EventScr_Ch6_BeginningScene[] = {
     MUSC(0x2E)
     SVAL(EVT_SLOT_2, 0x22)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9A4)
     TEXTEND
     REMA
     EvtBgmFadeIn(0x7FFF, 6)
-    CALL(data_08A60354 + 0xA8)
+    CALL(EventScr_TextShowWithFadeIn)
     EVBIT_T(9)
     LOAD2(1, UnitDef_Ch6Ally_0)
     ENUN
@@ -48,7 +50,7 @@ SECTION(".rodata.dat_EventScr_Ch6_BeginningScene_ref") EventListScr EventScr_Ch6
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x22)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9A5)
     TEXTEND
     MUSC(0x26)
@@ -56,16 +58,16 @@ SECTION(".rodata.dat_EventScr_Ch6_BeginningScene_ref") EventListScr EventScr_Ch6
     TEXTEND
     REMA
     SVAL(EVT_SLOT_2, 0x22)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9A6)
     TEXTEND
     REMA
     SVAL(EVT_SLOT_2, 0x22)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9A7)
     TEXTEND
     REMA
-    CALL(data_08A60354 + 0xA8)
+    CALL(EventScr_TextShowWithFadeIn)
     MOVE(0xFFFF, 0xFB, 0x14, 5)
     SVAL(EVT_SLOT_2, 0x4B)
     CALL(EventScr_UnitWarpOUT)
@@ -83,7 +85,7 @@ SECTION(".rodata.dat_EventScr_Ch6_BeginningScene_ref") EventListScr EventScr_Ch6
     CURE
     SVAL(EVT_SLOT_2, 0x27)
     SVAL(EVT_SLOT_3, 0x9A8)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     STAL(0x3C)
     SVAL(EVT_SLOT_2, 0xF9)
     CALL(EventScr_UnitWarpOUT)
@@ -100,7 +102,7 @@ SECTION(".rodata.dat_EventScr_Ch6_BeginningScene_ref") EventListScr EventScr_Ch6
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x27)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9A9)
     TEXTEND
     REMA

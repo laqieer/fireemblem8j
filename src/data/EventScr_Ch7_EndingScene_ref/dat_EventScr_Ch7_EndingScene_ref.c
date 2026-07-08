@@ -11,7 +11,7 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 frontier_df4_banim_b_076_90B4DC[];
-extern const u8 data_08A60354[];
+extern const u8 Event_TextWithBG[];
 
 SECTION(".rodata.dat_EventScr_Ch7_EndingScene_ref") EventListScr EventScr_Ch7_EndingScene[] = {
     FADI(0x10)
@@ -42,7 +42,7 @@ SECTION(".rodata.dat_EventScr_Ch7_EndingScene_ref") EventListScr EventScr_Ch7_En
     MUSI
     SVAL(EVT_SLOT_2, 0x15)
     SVAL(EVT_SLOT_3, 0x9C6)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MUNO
     MOVE_1STEP(0, 0x42, 0)
     ENUN

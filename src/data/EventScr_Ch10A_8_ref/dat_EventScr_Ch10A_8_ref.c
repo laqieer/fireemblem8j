@@ -11,7 +11,8 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 UnitDef_Ch10AEnemy_5[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_LoadReinforce[];
+extern const u8 EventScr_LoadReinforceHardMode[];
 extern const u8 UnitDef_Ch10AEnemy_3[];
 extern const u8 UnitDef_Ch10AEnemy_4[];
 
@@ -22,12 +23,12 @@ SECTION(".rodata.dat_EventScr_Ch10A_8_ref") EventListScr EventScr_Ch10A_8[] = {
     BEQ(0, 0xC, 0)
     CAMERA(0, 0xA)
     SVAL(EVT_SLOT_2, UnitDef_Ch10AEnemy_5)
-    CALL(data_08A60354 + 0x80)
+    CALL(EventScr_LoadReinforceHardMode)
     LABEL(0)
     SVAL(EVT_SLOT_2, UnitDef_Ch10AEnemy_3)
-    CALL(data_08A60354 + 0x58)
+    CALL(EventScr_LoadReinforce)
     SVAL(EVT_SLOT_2, UnitDef_Ch10AEnemy_4)
-    CALL(data_08A60354 + 0x58)
+    CALL(EventScr_LoadReinforce)
     EVBIT_T(7)
     ENDA
 };

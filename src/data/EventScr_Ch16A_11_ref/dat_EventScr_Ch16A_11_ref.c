@@ -11,7 +11,8 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 UnitDef_Ch16AAlly_5[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
+extern const u8 Event_TextWithBG[];
 extern const u8 frontier_df3_unitdef_b_012_911C34[];
 extern const u8 UnitDef_Ch16AAlly_8[];
 extern const u8 EventScr_UnitWarpIN[];
@@ -29,7 +30,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_11_ref") EventListScr EventScr_Ch16A_11[] = 
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x25)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xAF9)
     TEXTEND
     MUSC(0x25)
@@ -42,7 +43,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_11_ref") EventListScr EventScr_Ch16A_11[] = 
     MOVE_1STEP(0x10, 0x1E, 3)
     ENUN
     SVAL(EVT_SLOT_2, 0x25)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xAFA)
     TEXTEND
     REMA
@@ -74,7 +75,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_11_ref") EventListScr EventScr_Ch16A_11[] = 
     SVAL(EVT_SLOT_1, 2)
     BNE(1, 0xC, 1)
     SVAL(EVT_SLOT_2, 0x13)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xAFB)
     TEXTEND
     REMA
@@ -104,7 +105,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_11_ref") EventListScr EventScr_Ch16A_11[] = 
     CURE
     SVAL(EVT_SLOT_2, 0x15)
     SVAL(EVT_SLOT_3, 0xAFC)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MOVE_1STEP(0x10, 0x80, 0)
     MOVE_1STEP(0x10, 0x81, 1)
     ENUN
@@ -138,7 +139,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_11_ref") EventListScr EventScr_Ch16A_11[] = 
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x15)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     CHECK_MODE
     SVAL(EVT_SLOT_1, 2)
     BNE(4, 0xC, 1)
@@ -156,7 +157,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_11_ref") EventListScr EventScr_Ch16A_11[] = 
     CLEE
     CLEN
     SVAL(EVT_SLOT_2, 0x13)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     CHECK_MODE
     SVAL(EVT_SLOT_1, 2)
     BNE(6, 0xC, 1)
@@ -184,7 +185,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_11_ref") EventListScr EventScr_Ch16A_11[] = 
     CURE
     SVAL(EVT_SLOT_2, 0x13)
     SVAL(EVT_SLOT_3, 0xB01)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     SVAL(EVT_SLOT_2, 0x40)
     CALL(EventScr_UnitWarpOUT)
     SVAL(EVT_SLOT_2, 0x57)

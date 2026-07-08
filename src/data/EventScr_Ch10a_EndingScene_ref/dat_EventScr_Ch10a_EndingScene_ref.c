@@ -13,7 +13,8 @@
 extern const u8 EventScr_LoadUniqueAlly[];
 extern const u8 EventScr_StrictLoadUniqueAlly[];
 extern const u8 UnitDef_Ch10AEnemy_6[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
+extern const u8 Event_TextWithBG[];
 
 SECTION(".rodata.dat_EventScr_Ch10a_EndingScene_ref") EventListScr EventScr_Ch10a_EndingScene[] = {
     FADI(0x10)
@@ -65,7 +66,7 @@ SECTION(".rodata.dat_EventScr_Ch10a_EndingScene_ref") EventListScr EventScr_Ch10
     CURE
     SVAL(EVT_SLOT_2, 0x25)
     SVAL(EVT_SLOT_3, 0x9F7)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MOVE(0x10, 0x43, 3, 0x1E)
     SVAL(EVT_SLOT_B, 0x1B0002)
     STAL2(0x20)
@@ -84,20 +85,20 @@ SECTION(".rodata.dat_EventScr_Ch10a_EndingScene_ref") EventListScr EventScr_Ch10
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x13)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     MUSC(0x31)
     TEXTSHOW(0x9F8)
     TEXTEND
     REMA
     BNE(3, 7, 0)
     SVAL(EVT_SLOT_2, 0x15)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9F9)
     TEXTEND
     REMA
     LABEL(3)
     SVAL(EVT_SLOT_2, 2)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     CHECK_ALIVE(0x15)
     BEQ(0xA, 0xC, 0)
     MUSI
@@ -105,7 +106,7 @@ SECTION(".rodata.dat_EventScr_Ch10a_EndingScene_ref") EventListScr EventScr_Ch10
     TEXTEND
     REMA
     SVAL(EVT_SLOT_2, 0x25)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9FB)
     TEXTEND
     REMA

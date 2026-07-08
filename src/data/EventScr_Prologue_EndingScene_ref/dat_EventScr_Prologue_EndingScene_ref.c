@@ -10,12 +10,12 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 
 SECTION(".rodata.dat_EventScr_Prologue_EndingScene_ref") EventListScr EventScr_Prologue_EndingScene[] = {
     MUSC(0x31)
     SVAL(EVT_SLOT_2, 0x25)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x8D8)
     TEXTEND
     FADI(0x10)

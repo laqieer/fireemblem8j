@@ -12,7 +12,7 @@
 
 extern const u8 frontier_df4_banim_b_076_90B4DC[];
 extern const u8 UnitDef_Event_Ch7Ally[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 extern const u8 data_085B9BBC[];
 extern const u8 EventScr_Ch7_3[];
 extern const u8 EventScr_CallOnTutorialMode[];
@@ -34,7 +34,7 @@ SECTION(".rodata.dat_EventScr_Ch7_BeginningScene_ref") EventListScr EventScr_Ch7
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x2C)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9B7)
     TEXTEND
     CHECK_ALIVE(4)

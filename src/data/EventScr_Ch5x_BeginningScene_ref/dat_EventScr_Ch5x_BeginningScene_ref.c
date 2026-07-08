@@ -13,7 +13,8 @@
 extern const u8 HandleCh5xUnits_Start[];
 extern const u8 UnitDef_Ch5xEnemy_1[];
 extern const u8 UnitDef_Ch5xAlly_1[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
+extern const u8 Event_TextWithBG[];
 extern const u8 UnitDef_Ch5xAlly_2[];
 extern const u8 frontier_df4_banim_b_075_90A050[];
 extern const u8 UnitDef_Event_Ch5xAlly[];
@@ -64,7 +65,7 @@ SECTION(".rodata.dat_EventScr_Ch5x_BeginningScene_ref") EventListScr EventScr_Ch
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x2D)
-    CALL((u8 *)data_08A60354 + 0xCC)
+    CALL((u8 *)EventScr_SetBackground)
     MUSC(0x25)
     TEXTSHOW(0x998)
     TEXTEND
@@ -83,7 +84,7 @@ SECTION(".rodata.dat_EventScr_Ch5x_BeginningScene_ref") EventListScr EventScr_Ch
     CURE
     SVAL(EVT_SLOT_2, 0x2C)
     SVAL(EVT_SLOT_3, 0x999)
-    CALL((u8 *)data_08A60354 + 0xF4)
+    CALL((u8 *)Event_TextWithBG)
     MOVE(0, 0xF, 9, 4)
     STAL2(8)
     MOVE(0, 0x10, 9, 5)
@@ -113,7 +114,7 @@ SECTION(".rodata.dat_EventScr_Ch5x_BeginningScene_ref") EventListScr EventScr_Ch
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x15)
-    CALL((u8 *)data_08A60354 + 0xCC)
+    CALL((u8 *)EventScr_SetBackground)
     TEXTSHOW(0x99B)
     TEXTEND
     REMA

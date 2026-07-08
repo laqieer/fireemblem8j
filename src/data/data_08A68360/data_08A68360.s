@@ -7,7 +7,7 @@ EventScr_Ch14A_2:
 	.4byte 0x00020540
 	.4byte frontier_df3_unitdef_b_001_91020C + 0x35C
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 /* de-pointered slice EventScr_Ch14A_2: ptr=2 data=4 skip=0 */
@@ -17,7 +17,7 @@ EventScr_Ch14A_3:
 	.4byte 0x00020540
 	.4byte UnitDef_Ch14AEnemy_4
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 /* de-pointered slice EventScr_Ch14A_3: ptr=2 data=4 skip=0 */
@@ -38,7 +38,7 @@ EventScr_Ch14A_5:
 	.4byte 0x00020540
 	.4byte UnitDef_Ch14AEnemy_2
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 /* de-pointered slice EventScr_Ch14A_5: ptr=2 data=4 skip=0 */
@@ -60,7 +60,7 @@ EventScr_Ch14A_7:
 	.4byte 0x00020540
 	.4byte frontier_df3_unitdef_b_002_9105E0
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00000F23
 	.4byte 0x000E0221
 	.4byte 0x00000F20

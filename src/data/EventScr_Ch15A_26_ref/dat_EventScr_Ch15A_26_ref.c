@@ -10,13 +10,13 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 extern const u8 data_085B9BBC[];
 
 SECTION(".rodata.dat_EventScr_Ch15A_26_ref") EventListScr EventScr_Ch15A_26[] = {
     MUSC(0x31)
     SVAL(EVT_SLOT_2, 0x49)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     CHECK_MODE
     SVAL(EVT_SLOT_1, 2)
     BNE(0, 0xC, 1)
@@ -52,7 +52,7 @@ SECTION(".rodata.dat_EventScr_Ch15A_26_ref") EventListScr EventScr_Ch15A_26[] = 
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x3B)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xAEA)
     TEXTEND
     MUSS(0x2D)
@@ -68,7 +68,7 @@ SECTION(".rodata.dat_EventScr_Ch15A_26_ref") EventListScr EventScr_Ch15A_26[] = 
     CHECK_ALIVE(0x17)
     BEQ(0x63, 0xC, 0)
     SVAL(EVT_SLOT_2, 0x3B)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     MUSC(0x2B)
     TEXTSHOW(0xAEB)
     TEXTEND

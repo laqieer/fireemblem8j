@@ -14,7 +14,7 @@ EventScr_Ch11a_BeginningScene:
 	.4byte 0x00020540
 	.4byte 0x00000027
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xCC
+	.4byte EventScr_SetBackground
 	.4byte 0x0A071B20
 	.4byte 0x00001D20
 	.4byte 0x7FFF1324
@@ -25,7 +25,7 @@ EventScr_Ch11a_BeginningScene:
 	.4byte 0x00001D20
 	.4byte 0x00001B22
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xA8
+	.4byte EventScr_TextShowWithFadeIn
 	.4byte 0x00153322
 	.4byte 0x00000C40
 	.4byte 0x0000000C
@@ -37,7 +37,7 @@ EventScr_Ch11a_BeginningScene:
 	.4byte 0x00030540
 	.4byte 0x00000A08
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00010920
 	.4byte 0x00000820
 	.4byte 0x00002F42
@@ -51,7 +51,7 @@ EventScr_Ch11a_BeginningScene:
 	.4byte 0x00030540
 	.4byte 0x00000A09
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00010820
 	.4byte 0x000D0540
 	.4byte 0x00000000
@@ -90,7 +90,7 @@ EventScr_Ch11a_BeginningScene:
 	.4byte 0x00020540
 	.4byte 0x0000003B
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xCC
+	.4byte EventScr_SetBackground
 	.4byte 0x0A0A1B20
 	.4byte 0x00001D20
 	.4byte 0x00001B22

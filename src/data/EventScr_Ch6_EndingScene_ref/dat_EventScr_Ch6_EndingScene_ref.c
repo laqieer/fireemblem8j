@@ -10,13 +10,13 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 extern const u8 data_085B9BBC[];
 
 SECTION(".rodata.dat_EventScr_Ch6_EndingScene_ref") EventListScr EventScr_Ch6_EndingScene[] = {
     EvtBgmFadeIn(0x7FFF, 2)
     SVAL(EVT_SLOT_2, 0x22)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     CHECK_ALIVE(0xFA)
     BEQ(0, 0xC, 0)
     CHECK_ALIVE(0xFB)

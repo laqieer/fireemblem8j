@@ -11,7 +11,7 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 frontier_df3_unitdef_b_027_917600[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 extern const u8 frontier_df3_unitdef_b_026_916D14[];
 
 SECTION(".rodata.dat_EventScr_Ch10B_0_ref") EventListScr EventScr_Ch10B_0[] = {
@@ -26,7 +26,7 @@ SECTION(".rodata.dat_EventScr_Ch10B_0_ref") EventListScr EventScr_Ch10B_0[] = {
     CURE
     MUSI
     SVAL(EVT_SLOT_2, 0x17)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xA7A)
     TEXTEND
     REMA

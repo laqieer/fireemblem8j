@@ -13,7 +13,9 @@
 extern const u8 EventScr_Ch8_11[];
 extern const u8 UnitDef_Ch9AAlly_2[];
 extern const u8 data_0890C9BC[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_LoadUnitForTutorial[];
+extern const u8 EventScr_SetBackground[];
+extern const u8 Event_TextWithBG[];
 extern const u8 UnitDef_Ch9AAlly_0[];
 extern const u8 UnitDef_Ch9AMixed_0[];
 extern const u8 UnitDef_Ch9AEnemy_10[];
@@ -50,7 +52,7 @@ SECTION(".rodata.dat_EventScr_Ch9a_BeginningScene_ref") EventListScr EventScr_Ch
     CURE
     MUSC(0x24)
     SVAL(EVT_SLOT_2, 0x24)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9DA)
     TEXTEND
     REMA
@@ -67,7 +69,7 @@ SECTION(".rodata.dat_EventScr_Ch9a_BeginningScene_ref") EventListScr EventScr_Ch
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0xC)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9DB)
     TEXTEND
     MUSI
@@ -85,7 +87,7 @@ SECTION(".rodata.dat_EventScr_Ch9a_BeginningScene_ref") EventListScr EventScr_Ch
     MUSS(0x2A)
     STAL(0x21)
     SVAL(EVT_SLOT_2, 0xC)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9DC)
     TEXTEND
     MURE(4)
@@ -140,12 +142,12 @@ SECTION(".rodata.dat_EventScr_Ch9a_BeginningScene_ref") EventListScr EventScr_Ch
     MUSC(0x26)
     SVAL(EVT_SLOT_2, 0xC)
     SVAL(EVT_SLOT_3, 0x9DE)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     LOAD1(1, UnitDef_Ch9AEnemy_0)
     ENUN
     SVAL(EVT_SLOT_2, UnitDef_Ch9AEnemy_1)
     SVAL(EVT_SLOT_3, 1)
-    CALL(data_08A60354 + 0x2C)
+    CALL(EventScr_LoadUnitForTutorial)
     FADI(0x10)
     DISA(0xC5)
     CLEA

@@ -10,7 +10,7 @@ EventScr_Ch9A_3:
 	.4byte 0x00030540
 	.4byte 0x000009EB
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00000A40
 	.4byte data_085B9BBC + 0x168

@@ -10,7 +10,7 @@ EventScr_Ch5_1:
 	.4byte 0x00030540
 	.4byte 0x0000098E
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00000A40
 	.4byte data_085B9BBC + 0x168
@@ -28,7 +28,7 @@ EventScr_Ch5_2:
 	.4byte 0x00030540
 	.4byte 0x0000098F
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00000A40
 	.4byte data_085B9BBC + 0x168
@@ -46,7 +46,7 @@ EventScr_Ch5_3:
 	.4byte 0x00030540
 	.4byte 0x00000990
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00000A40
 	.4byte data_085B9BBC + 0x168
 	.4byte 0x00030540

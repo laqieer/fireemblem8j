@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 extern const u8 EventScr_LoadUniqueAlly[];
 extern const u8 EventScr_StrictLoadUniqueAlly[];
 
@@ -21,7 +21,7 @@ SECTION(".rodata.dat_EventScr_Ch2_EndingScene_ref") EventListScr EventScr_Ch2_En
     CHECK_ALIVE(7)
     BEQ(0, 0xC, 0)
     SVAL(EVT_SLOT_2, 0x25)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x922)
     TEXTEND
     REMA
@@ -32,7 +32,7 @@ SECTION(".rodata.dat_EventScr_Ch2_EndingScene_ref") EventListScr EventScr_Ch2_En
     CALL(EventScr_LoadUniqueAlly)
     LABEL(0)
     SVAL(EVT_SLOT_2, 6)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x923)
     TEXTEND
     FADI(4)

@@ -15,7 +15,7 @@ extern const u8 data_08908354[];
 extern const u8 UnitDef_Event_PrologueGradoShamans[];
 extern const u8 UnitDef_Event_PrologueGradoCavalry[];
 extern const u8 UnitDef_Event_PrologueEscapees[];
-extern const u8 data_08A60354[];
+extern const u8 Event_TextWithBG[];
 extern const u8 UnitDef_Event_PrologueValterGroup[];
 
 SECTION(".rodata.dat_EventScr_Prologue_RenaisThroneCutscene_ref") EventListScr EventScr_Prologue_RenaisThroneCutscene[] = {
@@ -106,7 +106,7 @@ SECTION(".rodata.dat_EventScr_Prologue_RenaisThroneCutscene_ref") EventListScr E
     CURE
     SVAL(EVT_SLOT_2, 0x25)
     SVAL(EVT_SLOT_3, 0x8C7)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     SVAL(EVT_SLOT_D, 0)
     SVAL(EVT_SLOT_1, 0x104)
     SENQUEUE1
@@ -128,7 +128,7 @@ SECTION(".rodata.dat_EventScr_Prologue_RenaisThroneCutscene_ref") EventListScr E
     CURE
     SVAL(EVT_SLOT_2, 0x25)
     SVAL(EVT_SLOT_3, 0x8C8)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     LOAD1(1, UnitDef_Event_PrologueValterGroup)
     ENUN
     MOVE_1STEP(0, 2, 1)
@@ -140,7 +140,7 @@ SECTION(".rodata.dat_EventScr_Prologue_RenaisThroneCutscene_ref") EventListScr E
     CURE
     SVAL(EVT_SLOT_2, 0x25)
     SVAL(EVT_SLOT_3, 0x8C9)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MOVE_1STEP(0, 0x45, 0)
     ENUN
     SVAL(EVT_SLOT_D, 0)

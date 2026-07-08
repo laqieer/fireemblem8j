@@ -8,7 +8,7 @@ data_08A652C0:
 	.4byte 0x00020540
 	.4byte 0x00000015
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xCC
+	.4byte EventScr_SetBackground
 	.4byte 0x09D11B20
 	.4byte 0x00001D20
 	.4byte 0x00001B22
@@ -56,13 +56,13 @@ data_08A652C0:
 	.4byte 0x00020540
 	.4byte UnitDef_Ch8Enemy_1
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 	.4byte 0x00020540
 	.4byte UnitDef_Ch8Enemy_2
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 /* de-pointered slice data_08A652C0: ptr=6 data=55 skip=0 */

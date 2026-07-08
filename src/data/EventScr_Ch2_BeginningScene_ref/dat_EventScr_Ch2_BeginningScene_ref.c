@@ -10,7 +10,8 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
+extern const u8 Event_TextWithBG[];
 extern const u8 data_08908958[];
 extern const u8 UnitDef_Ch2Enemy_0[];
 extern const u8 EventScr_Ch2_Village2[];
@@ -20,7 +21,7 @@ extern const u8 UnitDef_Event_Ch2Ally[];
 SECTION(".rodata.dat_EventScr_Ch2_BeginningScene_ref") EventListScr EventScr_Ch2_BeginningScene[] = {
     MUSC(0x24)
     SVAL(EVT_SLOT_2, 0x1E)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x914)
     TEXTEND
     REMA
@@ -52,7 +53,7 @@ SECTION(".rodata.dat_EventScr_Ch2_BeginningScene_ref") EventListScr EventScr_Ch2
     MUSC(0x25)
     SVAL(EVT_SLOT_2, 2)
     SVAL(EVT_SLOT_3, 0x916)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     CURSOR_CHAR(0x47)
     STAL(0x3C)
     CURE
@@ -79,7 +80,7 @@ SECTION(".rodata.dat_EventScr_Ch2_BeginningScene_ref") EventListScr EventScr_Ch2
     CURE
     SVAL(EVT_SLOT_2, 0x25)
     SVAL(EVT_SLOT_3, 0x918)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     SVAL(EVT_SLOT_2, EventScr_Ch2_Village2 + 0xC0)
     CALL(EventScr_CallOnTutorialMode)
     LOAD1(0, UnitDef_Event_Ch2Ally)

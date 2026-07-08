@@ -10,7 +10,8 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
+extern const u8 Event_TextWithBG[];
 extern const u8 EventScr_UnitWarpIN[];
 extern const u8 EventScr_UnitWarpOUT[];
 extern const u8 data_085B9BBC[];
@@ -40,7 +41,7 @@ SECTION(".rodata.dat_EventScr_Ch14b_BeginningScene_ref") EventListScr EventScr_C
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x49)
-    CALL((u8 *)data_08A60354 + 0xCC)
+    CALL((u8 *)EventScr_SetBackground)
     TEXTSHOW(0xADA)
     TEXTEND
     REMA
@@ -59,7 +60,7 @@ SECTION(".rodata.dat_EventScr_Ch14b_BeginningScene_ref") EventListScr EventScr_C
     MUSC(0x2E)
     SVAL(EVT_SLOT_2, 0x49)
     SVAL(EVT_SLOT_3, 0xADB)
-    CALL((u8 *)data_08A60354 + 0xF4)
+    CALL((u8 *)Event_TextWithBG)
     SVAL(EVT_SLOT_2, 0x40)
     CALL(EventScr_UnitWarpOUT)
     DISA(0x40)
@@ -85,7 +86,7 @@ SECTION(".rodata.dat_EventScr_Ch14b_BeginningScene_ref") EventListScr EventScr_C
     CURE
     SVAL(EVT_SLOT_2, 0x49)
     SVAL(EVT_SLOT_3, 0xADD)
-    CALL((u8 *)data_08A60354 + 0xF4)
+    CALL((u8 *)Event_TextWithBG)
     EVBIT_T(7)
     ENDA
 };

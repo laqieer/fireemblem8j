@@ -11,14 +11,14 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 UnitDef_Ch14BEnemy_8[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_LoadReinforceHardMode[];
 extern const u8 UnitDef_Ch14BEnemy_9[];
 
 SECTION(".rodata.dat_EventScr_Ch14B_12_ref") EventListScr EventScr_Ch14B_12[] = {
     SVAL(EVT_SLOT_2, UnitDef_Ch14BEnemy_8)
-    CALL(data_08A60354 + 0x80)
+    CALL(EventScr_LoadReinforceHardMode)
     SVAL(EVT_SLOT_2, UnitDef_Ch14BEnemy_9)
-    CALL(data_08A60354 + 0x80)
+    CALL(EventScr_LoadReinforceHardMode)
     COUNTER_DEC(1)
     ENUF(0x10)
     COUNTER_CHECK(1)

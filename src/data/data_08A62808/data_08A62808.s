@@ -10,7 +10,7 @@ EventScr_Ch2_Village2:
 	.4byte 0x00030540
 	.4byte 0x0000092B
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00000A40
 	.4byte data_085B9BBC + 0x168
@@ -25,7 +25,7 @@ EventScr_Ch2_Village2:
 	.4byte 0x00030540
 	.4byte 0x0000092C
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00000A40
 	.4byte data_085B9BBC + 0x168
@@ -37,7 +37,7 @@ EventScr_Ch2_Village2:
 	.4byte 0x00020540
 	.4byte data_08908958 + 0xA0
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00020540
 	.4byte EventScr_Ch2_8
 	.4byte 0x00000A40

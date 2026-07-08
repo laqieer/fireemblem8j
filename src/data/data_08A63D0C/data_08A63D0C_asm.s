@@ -10,7 +10,7 @@ EventScr_Ch4_3:
 	.4byte 0x00030540
 	.4byte 0x00000975
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00000A40
 	.4byte data_085B9BBC + 0x168
@@ -25,7 +25,7 @@ EventScr_Ch4_4:
 	.4byte 0x00020540
 	.4byte UnitDef_Ch4Enemy_2
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 	.section .data.residue.08A63D60, "aw", %progbits
@@ -44,6 +44,6 @@ EventScr_Ch4_6:
 	.4byte 0x00020540
 	.4byte UnitDef_Ch4Enemy_1
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120

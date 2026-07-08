@@ -20,7 +20,7 @@ EventScr_Ch16a_BeginningScene:
 	.4byte 0x00030540
 	.4byte 0x00000001
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x2C
+	.4byte EventScr_LoadUnitForTutorial
 	.4byte 0x0000342A
 	.4byte 0x00000A40
 	.4byte data_085B9BBC + 0x200

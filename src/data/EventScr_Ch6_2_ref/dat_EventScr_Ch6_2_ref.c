@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 
 SECTION(".rodata.dat_EventScr_Ch6_2_ref") EventListScr EventScr_Ch6_2[] = {
     CLEAN
@@ -21,7 +21,7 @@ SECTION(".rodata.dat_EventScr_Ch6_2_ref") EventListScr EventScr_Ch6_2[] = {
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x22)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x9AA)
     TEXTEND
     CHECK_ALIVE(9)

@@ -12,7 +12,7 @@
 
 extern const u8 UnitDef_Ch8Ally_2[];
 extern const u8 UnitDef_Ch8Ally_3[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 
 SECTION(".rodata.dat_EventScr_Ch8_10_ref") EventListScr EventScr_Ch8_10[] = {
     CAMERA(0xE, 0x14)
@@ -24,7 +24,7 @@ SECTION(".rodata.dat_EventScr_Ch8_10_ref") EventListScr EventScr_Ch8_10[] = {
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0xA)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xBC2)
     TEXTEND
     EvtBgmFadeIn(0x7FFF, 8)
@@ -80,7 +80,7 @@ SECTION(".rodata.dat_EventScr_Ch8_10_ref") EventListScr EventScr_Ch8_10[] = {
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0xA)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xBC5)
     TEXTEND
     REMA

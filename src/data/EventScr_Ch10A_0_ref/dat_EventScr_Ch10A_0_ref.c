@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 Event_TextWithBG[];
 
 SECTION(".rodata.dat_EventScr_Ch10A_0_ref") EventListScr EventScr_Ch10A_0[] = {
     CAMERA_CAHR(0x4F)
@@ -28,7 +28,7 @@ SECTION(".rodata.dat_EventScr_Ch10A_0_ref") EventListScr EventScr_Ch10A_0[] = {
     MUSI
     SVAL(EVT_SLOT_2, 0x13)
     SVAL(EVT_SLOT_3, 0x9F2)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MUNO
     EVBIT_T(7)
     ENDA

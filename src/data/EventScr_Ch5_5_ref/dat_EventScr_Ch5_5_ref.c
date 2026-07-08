@@ -13,14 +13,14 @@
 extern const u8 EventScr_Ch5_10[];
 extern const u8 EventScr_CallOnTutorialMode[];
 extern const u8 frontier_df4_banim_b_074_909DE8[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_LoadReinforce[];
 
 SECTION(".rodata.dat_EventScr_Ch5_5_ref") EventListScr EventScr_Ch5_5[] = {
     SVAL(EVT_SLOT_2, EventScr_Ch5_10)
     CALL(EventScr_CallOnTutorialMode)
     MUSC(0x13)
     SVAL(EVT_SLOT_2, frontier_df4_banim_b_074_909DE8)
-    CALL(data_08A60354 + 0x58)
+    CALL(EventScr_LoadReinforce)
     CURSOR_AT(0xE, 0x10)
     STAL(0x3C)
     CURE

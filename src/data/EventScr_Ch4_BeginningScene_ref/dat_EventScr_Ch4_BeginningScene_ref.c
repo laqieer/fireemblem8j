@@ -11,7 +11,7 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 UnitDef_Ch4Ally_0[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 extern const u8 UnitDef_Ch4Enemy_0[];
 extern const u8 EventScr_Ch4_7[];
 extern const u8 EventScr_CallOnTutorialMode[];
@@ -29,7 +29,7 @@ SECTION(".rodata.dat_EventScr_Ch4_BeginningScene_ref") EventListScr EventScr_Ch4
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x2E)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x963)
     TEXTEND
     REMA
@@ -54,7 +54,7 @@ SECTION(".rodata.dat_EventScr_Ch4_BeginningScene_ref") EventListScr EventScr_Ch4
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 2)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0x965)
     TEXTEND
     REMA

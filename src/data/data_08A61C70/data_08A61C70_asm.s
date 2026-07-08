@@ -11,7 +11,7 @@ EventScr_Ch1_Loca_Visit1:
 	.4byte 0x00030540
 	.4byte 0x000008FB
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00070228
 	.4byte 0x00000120
@@ -24,7 +24,7 @@ EventScr_Ch1_Loca_Visit2:
 	.4byte 0x00030540
 	.4byte 0x000008FC
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00070228
 	.4byte 0x00000120
@@ -45,7 +45,7 @@ EventScr_Ch1_Turn_EnemyReinforceArrive:
 	.4byte 0x00020540
 	.4byte UnitDef_Event_Ch1EnemyReinforce
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00833B21
 	.4byte 0x003C0E20
 	.4byte 0x00003B22

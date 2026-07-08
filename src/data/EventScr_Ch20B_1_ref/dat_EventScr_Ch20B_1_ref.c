@@ -11,12 +11,12 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 frontier_df3_unitdef_b_052_91F89C[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_LoadReinforce[];
 extern const u8 UnitDef_Ch14BAlly_7[];
 
 SECTION(".rodata.dat_EventScr_Ch20B_1_ref") EventListScr EventScr_Ch20B_1[] = {
     SVAL(EVT_SLOT_2, frontier_df3_unitdef_b_052_91F89C)
-    CALL(data_08A60354 + 0x58)
+    CALL(EventScr_LoadReinforce)
     COUNTER_DEC(0)
     ENUF(0xB)
     COUNTER_CHECK(0)

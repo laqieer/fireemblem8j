@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 extern const u8 frontier_df3_unitdef_b_013_911E38[];
 extern const u8 frontier_df3_unitdef_b_013_911E38_tail[];
 extern const u8 UnitDef_Ch16AMixed_1[];
@@ -35,7 +35,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_12_ref") EventListScr EventScr_Ch16A_12[] = 
     CLEN
     MUSC(0x32)
     SVAL(EVT_SLOT_2, 0xF)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xB09)
     TEXTEND
     REMA
@@ -54,7 +54,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_12_ref") EventListScr EventScr_Ch16A_12[] = 
     CURE
     EvtBgmFadeIn(0x7FFF, 4)
     SVAL(EVT_SLOT_2, 0x13)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xB0A)
     TEXTEND
     FADI(4)
@@ -118,7 +118,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_12_ref") EventListScr EventScr_Ch16A_12[] = 
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0xF)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xB10)
     TEXTEND
     REMA
@@ -165,7 +165,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_12_ref") EventListScr EventScr_Ch16A_12[] = 
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x45)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     EvtBgmFadeIn(0x2B, 6)
     TEXTSHOW(0xB12)
     TEXTEND
@@ -178,7 +178,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_12_ref") EventListScr EventScr_Ch16A_12[] = 
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x45)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xB13)
     TEXTEND
     SOUN(0x2EB)
@@ -208,7 +208,7 @@ SECTION(".rodata.dat_EventScr_Ch16A_12_ref") EventListScr EventScr_Ch16A_12[] = 
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x45)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xB15)
     TEXTEND
     REMA

@@ -13,7 +13,7 @@
 extern const u8 EventScr_UnitWarpIN[];
 extern const u8 EventScr_UnitWarpOUT[];
 extern const u8 UnitDef_Ch12BEnemy_1[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_LoadReinforce[];
 extern const u8 UnitDef_Ch12BEnemy_2[];
 extern const u8 frontier_df3_unitdef_b_032_91908C[];
 extern const u8 UnitDef_Ch12BEnemy_4[];
@@ -43,16 +43,16 @@ SECTION(".rodata.dat_EventScr_Ch12B_1_ref") EventListScr EventScr_Ch12B_1[] = {
     DISA(0x81)
     DISA(0x82)
     SVAL(EVT_SLOT_2, UnitDef_Ch12BEnemy_1)
-    CALL((u8 *)data_08A60354 + 0x58)
+    CALL((u8 *)EventScr_LoadReinforce)
     STAL2(0x1E)
     SVAL(EVT_SLOT_2, UnitDef_Ch12BEnemy_2)
-    CALL((u8 *)data_08A60354 + 0x58)
+    CALL((u8 *)EventScr_LoadReinforce)
     STAL2(0x1E)
     SVAL(EVT_SLOT_2, frontier_df3_unitdef_b_032_91908C)
-    CALL((u8 *)data_08A60354 + 0x58)
+    CALL((u8 *)EventScr_LoadReinforce)
     STAL2(0x1E)
     SVAL(EVT_SLOT_2, UnitDef_Ch12BEnemy_4)
-    CALL((u8 *)data_08A60354 + 0x58)
+    CALL((u8 *)EventScr_LoadReinforce)
     STAL2(0x1E)
     CAMERA_CAHR(0xF)
     CURSOR_CHAR(0xF)

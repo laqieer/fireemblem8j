@@ -10,7 +10,8 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_TextShowWithFadeIn[];
+extern const u8 EventScr_SetBackground[];
 extern const u8 UnitDef_Ch13ANPC[];
 extern const u8 data_085B9BBC[];
 extern const u8 frontier_df3_unitdef_b_000_90F678[];
@@ -23,13 +24,13 @@ SECTION(".rodata.dat_EventScr_Ch13a_EndingScene_ref") EventListScr EventScr_Ch13
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x23)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xA36)
     TEXTEND
     GOTO(1)
     LABEL(0)
     SVAL(EVT_SLOT_2, 0x23)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xA37)
     TEXTEND
     LABEL(1)
@@ -54,13 +55,13 @@ SECTION(".rodata.dat_EventScr_Ch13a_EndingScene_ref") EventListScr EventScr_Ch13
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x23)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xA39)
     TEXTEND
     REMA
     FADI(0x10)
     SVAL(EVT_SLOT_2, 0x23)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     MUSS(0x31)
     STAL(0x21)
     CHECK_ALIVE(0x1A)
@@ -116,12 +117,12 @@ SECTION(".rodata.dat_EventScr_Ch13a_EndingScene_ref") EventListScr EventScr_Ch13
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x49)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     MUSC(0x2E)
     TEXTSHOW(0xA3E)
     TEXTEND
     REMA
-    CALL(data_08A60354 + 0xA8)
+    CALL(EventScr_TextShowWithFadeIn)
     SVAL(EVT_SLOT_D, 0)
     SVAL(EVT_SLOT_1, 0x10000)
     SENQUEUE1

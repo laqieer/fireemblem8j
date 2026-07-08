@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 Event_TextWithBG[];
 extern const u8 UnitDef_Ch4Ally_2[];
 
 SECTION(".rodata.dat_EventScr_Ch4_2_ref") EventListScr EventScr_Ch4_2[] = {
@@ -23,17 +23,17 @@ SECTION(".rodata.dat_EventScr_Ch4_2_ref") EventListScr EventScr_Ch4_2[] = {
     BEQ(1, 0xC, 7)
     SVAL(EVT_SLOT_2, 2)
     SVAL(EVT_SLOT_3, 0x974)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     GOTO(2)
     LABEL(0)
     SVAL(EVT_SLOT_2, 2)
     SVAL(EVT_SLOT_3, 0x972)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     GOTO(2)
     LABEL(1)
     SVAL(EVT_SLOT_2, 2)
     SVAL(EVT_SLOT_3, 0x973)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     LABEL(2)
     MURE(4)
     LOAD1(1, UnitDef_Ch4Ally_2)

@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 EventScr_SetBackground[];
 extern const u8 frontier_df3_unitdef_b_022_915038[];
 extern const u8 frontier_df3_unitdef_b_022_915038_tail_p1[];
 extern const u8 UnitDef_Ch19AAlly_5[];
@@ -24,7 +24,7 @@ SECTION(".rodata.dat_EventScr_Ch19A_11_ref") EventListScr EventScr_Ch19A_11[] = 
     SADD(EVT_SLOT_7, EVT_SLOT_C, EVT_SLOT_0)
     MUSC(0x31)
     SVAL(EVT_SLOT_2, 0xF)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     CHECK_MODE
     SVAL(EVT_SLOT_1, 2)
     BNE(0, 0xC, 1)
@@ -69,7 +69,7 @@ SECTION(".rodata.dat_EventScr_Ch19A_11_ref") EventListScr EventScr_Ch19A_11[] = 
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x46)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     MUSC(0x2B)
     TEXTSHOW(0xB60)
     TEXTEND
@@ -98,7 +98,7 @@ SECTION(".rodata.dat_EventScr_Ch19A_11_ref") EventListScr EventScr_Ch19A_11[] = 
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x17)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     MUSC(0x31)
     TEXTSHOW(0xB61)
     TEXTEND
@@ -138,7 +138,7 @@ SECTION(".rodata.dat_EventScr_Ch19A_11_ref") EventListScr EventScr_Ch19A_11[] = 
     SVAL(EVT_SLOT_8, 6)
     BLT(0x2A, 7, 8)
     SVAL(EVT_SLOT_2, 0x17)
-    CALL(data_08A60354 + 0xCC)
+    CALL(EventScr_SetBackground)
     CHECK_MODE
     SVAL(EVT_SLOT_1, 2)
     BNE(0x28, 0xC, 1)

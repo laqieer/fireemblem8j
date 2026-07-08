@@ -10,7 +10,7 @@ EventScr_Ch10A_9:
 	.4byte 0x00030540
 	.4byte 0x00000A04
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00070228
 	.4byte 0x00000120
@@ -24,7 +24,7 @@ EventScr_Ch10A_10:
 	.4byte 0x00030540
 	.4byte 0x00000A05
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00070228
 	.4byte 0x00000120
@@ -38,7 +38,7 @@ EventScr_Ch10A_11:
 	.4byte 0x00030540
 	.4byte 0x00000A06
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0xF4
+	.4byte Event_TextWithBG
 	.4byte 0x00001521
 	.4byte 0x00070228
 	.4byte 0x00000120
@@ -49,7 +49,7 @@ EventScr_Ch10A_12:
 	.4byte 0x00020540
 	.4byte UnitDef_Ch10AEnemy_2
 	.4byte 0x00000A40
-	.4byte data_08A60354 + 0x58
+	.4byte EventScr_LoadReinforce
 	.4byte 0x00070228
 	.4byte 0x00000120
 /* de-pointered slice EventScr_Ch10A_12: ptr=2 data=4 skip=0 */

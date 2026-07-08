@@ -16,7 +16,7 @@ extern const u8 EventScr_Prologue_ExecTut[];
 extern const u8 EventScr_CallOnTutorialMode[];
 extern const u8 BmGuideTextSetAllGreen[];
 extern const u8 frontier_df4_banim_b_073_907F78[];
-extern const u8 data_08A60354[];
+extern const u8 Event_TextWithBG[];
 extern const u8 EventScr_Prologue_GiveRapier[];
 extern const u8 EventScr_Prologue_ONeillSpawn[];
 
@@ -39,7 +39,7 @@ SECTION(".rodata.dat_EventScr_Prologue_BeginningScene_ref") EventListScr EventSc
     MUSI
     SVAL(EVT_SLOT_2, 0x25)
     SVAL(EVT_SLOT_3, 0x8CD)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MUNO
     MOVE(0x18, 2, 4, 4)
     ENUN

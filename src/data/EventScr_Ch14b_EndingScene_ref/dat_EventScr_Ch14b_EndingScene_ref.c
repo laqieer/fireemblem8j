@@ -11,7 +11,8 @@
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
 extern const u8 EventScr_Ch15A_26[];
-extern const u8 data_08A60354[];
+extern const u8 EventScr_LoadReinforce[];
+extern const u8 Event_TextWithBG[];
 extern const u8 data_085B9BBC[];
 extern const u8 UnitDef_Ch15BEnemy_4[];
 extern const u8 UnitDef_Ch15BEnemy_5[];
@@ -26,7 +27,7 @@ SECTION(".rodata.dat_EventScr_Ch14b_EndingScene_ref") EventListScr EventScr_Ch14
     MUSI
     SVAL(EVT_SLOT_2, 0)
     SVAL(EVT_SLOT_3, 0xAF6)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MUNO
     CALL(data_085B9BBC + 0x168)
     SVAL(EVT_SLOT_3, 0x88)
@@ -36,14 +37,14 @@ SECTION(".rodata.dat_EventScr_Ch14b_EndingScene_ref") EventListScr EventScr_Ch14
     MUSI
     SVAL(EVT_SLOT_2, 0)
     SVAL(EVT_SLOT_3, 0xAF7)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MUNO
     EVBIT_T(7)
     ENDA
     MUSI
     SVAL(EVT_SLOT_2, 0)
     SVAL(EVT_SLOT_3, 0xAF8)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MUNO
     EVBIT_T(7)
     ENDA
@@ -89,23 +90,23 @@ SECTION(".rodata.dat_EventScr_Ch14b_EndingScene_ref") EventListScr EventScr_Ch14
     EVBIT_T(7)
     ENDA
     SVAL(EVT_SLOT_2, 0x891B7B8)
-    CALL(data_08A60354 + 0x58)
+    CALL(EventScr_LoadReinforce)
     EVBIT_T(7)
     ENDA
     SVAL(EVT_SLOT_2, 0x891B7F4)
-    CALL(data_08A60354 + 0x58)
+    CALL(EventScr_LoadReinforce)
     EVBIT_T(7)
     ENDA
     SVAL(EVT_SLOT_2, UnitDef_Ch15BEnemy_4)
-    CALL(data_08A60354 + 0x58)
+    CALL(EventScr_LoadReinforce)
     EVBIT_T(7)
     ENDA
     SVAL(EVT_SLOT_2, UnitDef_Ch15BEnemy_5)
-    CALL(data_08A60354 + 0x58)
+    CALL(EventScr_LoadReinforce)
     EVBIT_T(7)
     ENDA
     SVAL(EVT_SLOT_2, frontier_df3_unitdef_b_038_91B948)
-    CALL(data_08A60354 + 0x58)
+    CALL(EventScr_LoadReinforce)
     EVBIT_T(7)
     ENDA
     SVAL(EVT_SLOT_2, 0)

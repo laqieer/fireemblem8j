@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08A60354[];
+extern const u8 Event_TextWithBG[];
 extern const u8 data_085B9BBC[];
 
 SECTION(".rodata.dat_EventScr_Ch9A_2_ref") EventListScr EventScr_Ch9A_2[] = {
@@ -18,7 +18,7 @@ SECTION(".rodata.dat_EventScr_Ch9A_2_ref") EventListScr EventScr_Ch9A_2[] = {
     STAL(0x21)
     SVAL(EVT_SLOT_2, 0)
     SVAL(EVT_SLOT_3, 0x9EA)
-    CALL(data_08A60354 + 0xF4)
+    CALL(Event_TextWithBG)
     MURE(2)
     CALL(data_085B9BBC + 0x168)
     SVAL(EVT_SLOT_3, 0x60)
