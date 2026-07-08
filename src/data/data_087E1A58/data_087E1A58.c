@@ -62,44 +62,5 @@ struct ProcCmd ProcScr_ekrPopup2[] __attribute__((section(".rodata.dat_ProcScr_e
 };
 
 /* residue [087E1A58,087E1A78) (32 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.087E1A58, \"aw\", %progbits\n"
-"\t.global data_087E1A58\n"
-"data_087E1A58:\n"
-"\t.4byte 0x40000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte data_087E1A58 + 0x1\n"
-"\t.4byte 0x80000000\n"
-);
 
 /* residue [087E1B48,087E1BA0) (88 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.087E1B48, \"aw\", %progbits\n"
-"data_087E1B48:\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte data_080ED67C + 0x18\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte EkrHenseiInit_Init + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte EkrHenseiInit_SetupFade + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte EkrHenseiInit_FadeInLoop + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte EkrHenseiInit_End + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte data_080ED67C + 0x2C\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte EkrHenseiEnd_Init + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte EkrHenseiEnd_FadeOutLoop + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte EkrHenseiEnd_End + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);

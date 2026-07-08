@@ -26,18 +26,3 @@ struct ProcCmd gProcScr_CpPhase[] __attribute__((section(".rodata.dat_gProcScr_C
 };
 
 /* residue [085D1E38,085D1E60) (40 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.085D1E38, \"aw\", %progbits\n"
-"\t.global data_085D1E38\n"
-"data_085D1E38:\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte gBmdifficulty_6 + 0x78\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte AiPhaseBerserkInit + 0x1\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte AiPhaseCleanup + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);

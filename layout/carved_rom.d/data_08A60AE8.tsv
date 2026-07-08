@@ -1,4 +1,4 @@
 # #148 proc-script carve: data_08A60AE8 -> 1 typed struct ProcCmd[] + residue (parallel-safe fragment)
-A60AE8	A60B18	src/data/data_08A60AE8/data_08A60AE8.o(.data.residue.08A60AE8)	#148 residue (48 B)
+A60AE8	A60B18	src/data/data_08A60AE8/data_08A60AE8_asm.o(.data.residue.08A60AE8)	#148 residue (48 B)
 A60B18	A60B60	src/data/data_08A60AE8/data_08A60AE8.o(.rodata.dat_ProcScr_EventMapAnim_ref)	#148 ProcScr_EventMapAnim (9 ProcCmd)
-A60B60	A60B90	src/data/data_08A60AE8/data_08A60AE8.o(.data.residue.08A60B60)	#148 residue (48 B)
+A60B60	A60B90	src/data/data_08A60AE8/data_08A60AE8_asm.o(.data.residue.08A60B60)	#148 residue (48 B)

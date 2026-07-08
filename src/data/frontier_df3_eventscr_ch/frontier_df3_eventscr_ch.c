@@ -4202,21 +4202,6 @@ EventListScr frontier_df3_eventscr_ch_017_A6F47C[] __attribute__((section(".data
  * Inlined rather than .incbin-split because the source .gbapal is a *generated* file and
  * a .incbin inside __asm__ is invisible to scaninc's C-mode dep scan (would drop the
  * build-order dependency); inlining keeps the object self-sufficient. Byte-exact 0x20. */
-__asm__(
-"\t.section .data.frontier_df3_eventscr_ch.gap18, \"aw\", %progbits\n"
-"\t.global frontier_df3_eventscr_ch_018_A6FAE4\n"
-"\t.type frontier_df3_eventscr_ch_018_A6FAE4, %object\n"
-"frontier_df3_eventscr_ch_018_A6FAE4:\n"
-"\t.4byte 0x00020540\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000A40\n"
-"\t.4byte UnitDef_Ch14BAlly_7\n"   /* 0xA6FAF0: was raw 0x08A602F0 */
-"\t.4byte 0x000B0221\n"
-"\t.4byte 0x01000F21\n"
-"\t.4byte 0x00070228\n"
-"\t.4byte 0x00000120\n"
-"\t.size frontier_df3_eventscr_ch_018_A6FAE4, 0x20\n"
-);
 EventListScr frontier_df3_eventscr_ch_019_A6FB48[] __attribute__((section(".data.frontier_df3_eventscr_ch.gap19"))) = {
     ENUF(0xC)
     COUNTER_SET(1, 1)

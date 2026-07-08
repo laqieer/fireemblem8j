@@ -989,3 +989,11 @@ sound/songs/midi/*.s
 !src/data/data_08A5A6AD/data_08A5A6AD.s
 !src/data/data_08A63D0C/data_08A63D0C_asm.s
 !src/data/anim_mine_fx/dat_anim_mine_fx.s
+!src/data/data_085D1E10/data_085D1E10_asm.s
+!src/data/data_08A61B60/data_08A61B60_asm.s
+!src/data/data_08A61F60/data_08A61F60_asm.s
+!src/data/data_08A66A00/data_08A66A00_asm.s
+!src/data/frontier_df3_eventscr_ch/frontier_df3_eventscr_ch_asm.s
+!src/data/frontier_df3_titlescreen/frontier_df3_titlescreen_asm.s
+!src/data/data_087E1A58/data_087E1A58_asm.s
+!src/data/data_08A60AE8/data_08A60AE8_asm.s

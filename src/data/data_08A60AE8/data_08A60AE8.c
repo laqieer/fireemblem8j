@@ -32,38 +32,5 @@ struct ProcCmd ProcScr_EventMapAnim[] __attribute__((section(".rodata.dat_ProcSc
 };
 
 /* residue [08A60AE8,08A60B18) (48 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.08A60AE8, \"aw\", %progbits\n"
-"\t.global data_08A60AE8\n"
-"data_08A60AE8:\n"
-"\t.4byte Img_UnkData_0\n"
-"\t.4byte Img_99E1A4\n"
-"\t.4byte Img_99ED44\n"
-"\t.4byte Img_99F7D4\n"
-"\t.4byte Img_9A0154\n"
-"\t.4byte Img_9A0864\n"
-"\t.4byte TileSet_9A0E84\n"
-"\t.4byte TileSet_9A1050\n"
-"\t.4byte TileSet_9A1228\n"
-"\t.4byte TileSet_9A13EC\n"
-"\t.4byte TileSet_9A15B4\n"
-"\t.4byte TileSet_9A174C\n"
-);
 
 /* residue [08A60B60,08A60B90) (48 B): byte-identical. */
-__asm__(
-"\t.section .data.residue.08A60B60, \"aw\", %progbits\n"
-"data_08A60B60:\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte EventMapAnimBanner_Init + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte EventMapAnimBanner_SlideInLoop + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte EventMapAnimBanner_FlashInLoop + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte EventMapAnimBanner_FlashOutLoop + 0x1\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte EventMapAnimBanner_HoldLoop + 0x1\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);

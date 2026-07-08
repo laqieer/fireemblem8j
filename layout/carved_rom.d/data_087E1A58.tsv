@@ -1,5 +1,5 @@
 # #148 proc-script carve: data_087E1A58 -> 2 typed struct ProcCmd[] + residue (parallel-safe fragment)
-7E1A58	7E1A78	src/data/data_087E1A58/data_087E1A58.o(.data.residue.087E1A58)	#148 residue (32 B)
+7E1A58	7E1A78	src/data/data_087E1A58/data_087E1A58_asm.o(.data.residue.087E1A58)	#148 residue (32 B)
 7E1A78	7E1AE0	src/data/data_087E1A58/data_087E1A58.o(.rodata.dat_ProcScr_ekrPopup_ref)	#148 ProcScr_ekrPopup (13 ProcCmd)
 7E1AE0	7E1B48	src/data/data_087E1A58/data_087E1A58.o(.rodata.dat_ProcScr_ekrPopup2_ref)	#148 ProcScr_ekrPopup2 (13 ProcCmd)
-7E1B48	7E1BA0	src/data/data_087E1A58/data_087E1A58.o(.data.residue.087E1B48)	#148 residue (88 B)
+7E1B48	7E1BA0	src/data/data_087E1A58/data_087E1A58_asm.o(.data.residue.087E1B48)	#148 residue (88 B)
