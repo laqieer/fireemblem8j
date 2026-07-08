@@ -1005,3 +1005,4 @@ sound/songs/midi/*.s
 !src/data/data_08A61C70/data_08A61C70_asm.s
 !src/data/anim_worldmap_highlight/dat_anim_worldmap_highlight.s
 !src/data/anim_worldmap_sprite/dat_anim_worldmap_sprite.s
+!src/data/data_085775C9/data_085775C9.s
