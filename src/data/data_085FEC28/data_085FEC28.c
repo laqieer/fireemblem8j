@@ -1,7 +1,23 @@
 #include "global.h"
 
-/* Migrated from asm/data_085FEC28.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* Typed C extraction of residual raw-incbin slices from data_085FEC28.c. */
 
-u8 data_085FEC28[] __attribute__((section(".data.residue.085FEC28"))) = INCBIN_U8("data/residual/data_085FEC28.bin");
+u32 data_085FEC28[] __attribute__((section(".data.residue.085FEC28"))) = {
+    0x40000000, 0xFFF80000, 0x00000004, 0x40000000,
+    0xFFF80000, 0x0000FFF4, 0x00008000, 0x0008000A,
+    0x0000FFF4, 0x00008000, 0x0008000A, 0x00000004,
+    0x10008000, 0xFFF0000A, 0x0000FFF4, 0x10008000,
+    0xFFF0000A, 0x00000004, 0x00004000, 0xFFF80000,
+    0x0000FFEC, 0x00000000, 0x0008002A, 0x0000FFEC,
+    0x10000000, 0xFFF0002A, 0x0000FFEC, 0x00000001,
+    0x00000000, 0x00000000, 0x10000000, 0xFFEC0068,
+    0x0000FFFC, 0x50000000, 0x00040049, 0x0000FFE4,
+    0x90004000, 0xFFF40044, 0x0000FFF4, 0x10000000,
+    0xFFFC0047, 0x0000FFEC, 0x10000000, 0x0014004B,
+    0x0000FFF4, 0x10000000, 0x00140048, 0x0000FFEC,
+    0x10008000, 0xFFEC004D, 0x00000004, 0x10008000,
+    0xFFEC004E, 0x00000014, 0x50000000, 0xFFFC0043,
+    0x00000004, 0x10008000, 0xFFF40045, 0x00000004,
+    0x10000000, 0xFFF40043, 0x00000014, 0x00000001,
+    0x00000000, 0x00000000,
+};

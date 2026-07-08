@@ -1,8 +1,28 @@
 #include "global.h"
 
-/* Migrated from asm/data_08A70F34.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* Typed C extraction of residual raw-incbin slices from data_08A70F34.c. */
 
-u8 EventScr_Ruin_43[] __attribute__((section(".data.residue.08A70F34"))) = INCBIN_U8("data/residual/data_08A70F34.bin", 0, 152);
-u8 EventScr_Ruin_44[] __attribute__((section(".data.residue.08A70FCC"))) = INCBIN_U8("data/residual/data_08A70F34.bin", 152, 132);
+u32 EventScr_Ruin_43[] __attribute__((section(".data.residue.08A70F34"))) = {
+    0x00001923, 0x00010540, 0x00000003, 0x00000C40,
+    0x0001000C, 0x00001923, 0x00010540, 0x00000007,
+    0x00000C40, 0x0001000C, 0x00001923, 0x00010540,
+    0x0000000B, 0x00000C40, 0x0001000C, 0x00001923,
+    0x00010540, 0x0000000F, 0x00000C40, 0x0001000C,
+    0x00001923, 0x00010540, 0x00000013, 0x00000C40,
+    0x0001000C, 0x00010920, 0x00000820, 0x14002620,
+    0x000F0E20, 0x00BE1620, 0x00032720, 0x050A2628,
+    0x000F0E20, 0x00BE1620, 0x00062720, 0x00010820,
+    0x00070228, 0x00000120,
+};
+
+u32 EventScr_Ruin_44[] __attribute__((section(".data.residue.08A70FCC"))) = {
+    0x00001923, 0x00010540, 0x00000005, 0x00000C40,
+    0x0001000C, 0x00001923, 0x00010540, 0x00000009,
+    0x00000C40, 0x0001000C, 0x00001923, 0x00010540,
+    0x0000000D, 0x00000C40, 0x0001000C, 0x00001923,
+    0x00010540, 0x00000011, 0x00000C40, 0x0001000C,
+    0x00010920, 0x00000820, 0x14002620, 0x000F0E20,
+    0x00BD1620, 0x00032721, 0x050A2628, 0x000F0E20,
+    0x00BD1620, 0x00062721, 0x00010820, 0x00070228,
+    0x00000120,
+};

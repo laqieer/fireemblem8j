@@ -338,7 +338,6 @@ src/data/data/data_08594374.o: data/residual/data_08594374.bin
 src/data/data/data_08595474.o: data/residual/data_08595474.bin
 src/data/data/data_08595594.o: data/residual/data_08595594.bin
 src/data/data/data_08595864.o: data/residual/data_08595864.bin
-src/data/data/data_08612134.o: data/residual/data_08612134.bin
 src/data/data/data_08616558.o: data/residual/data_08616558_0.map.bin.lz
 src/data/data/data_08636008.o: data/residual/data_08636008_0.map.bin.lz
 src/data/data/data_08636294.o: data/residual/data_08636294.bin
@@ -382,18 +381,14 @@ src/data/data_085CBE64/data_085CBE64.o: graphics/misc_gfx2/Pal_PikeTrap.gbapal
 src/data/data_085CBFA4/data_085CBFA4.o: graphics/reuse/data_085CBFA4.4bpp.lz
 src/data/data_085D30F8/data_085D30F8.o: data/residual/data_085D30F8.bin
 src/data/data_085E3724/data_085E3724.o: data/residual/data_085E3724.bin
-src/data/data_085F1568/data_085F1568.o: data/residual/data_085F1568.bin
 src/data/data_085F3338/data_085F3338.o: data/residual/data_085F3338.bin
 src/data/data_085FC068/data_085FC068.o: data/residual/data_085FC068.bin
-src/data/data_085FC638/data_085FC638.o: data/residual/data_085FC638.bin
 src/data/data_085FDDAC/data_085FDDAC.o: data/residual/data_085FDDAC.bin
 src/data/data_085FE358/data_085FE358.o: data/residual/data_085FE358.bin
 src/data/data_085FE490/data_085FE490.o: data/residual/data_085FE490.bin
-src/data/data_085FEC28/data_085FEC28.o: data/residual/data_085FEC28.bin
 src/data/data_085FEDD8/data_085FEDD8.o: data/residual/data_085FEDD8.bin
 src/data/data_0860E028/data_0860E028.o: data/residual/data_0860E028.bin
 src/data/data_0860E394/data_0860E394.o: data/residual/data_0860E394.bin
-src/data/data_086114F8/data_086114F8.o: data/residual/data_086114F8.bin
 src/data/data_08613A6C/data_08613A6C.o: data/residual/data_08613A6C_0.map.bin.lz data/residual/data_08613A6C_1.map.bin.lz
 src/data/data_0861CCC0/data_0861CCC0.o: data/residual/data_0861CCC0_0.map.bin.lz
 src/data/data_0861F7FC/data_0861F7FC.o: data/residual/data_0861F7FC.bin
@@ -410,20 +405,15 @@ src/data/data_086724CC/data_086724CC.o: data/residual/data_086724CC_0.map.bin.lz
 src/data/data_0867B54C/data_0867B54C.o: data/residual/data_0867B54C_0.map.bin.lz data/residual/data_0867B54C_1.map.bin.lz
 src/data/data_086834CC/data_086834CC.o: graphics/banim/Pal_FenrirBg.gbapal
 src/data/data_0869BFF0/data_0869BFF0.o: data/residual/data_0869BFF0.bin
-src/data/data_086A01E0/data_086A01E0.o: data/residual/data_086A01E0.bin
 src/data/data_086A0C24/data_086A0C24.o: data/residual/data_086A0C24.bin
 src/data/data_086A25CC/data_086A25CC.o: data/residual/data_086A25CC.bin
 src/data/data_086A2890/data_086A2890.o: data/residual/data_086A2890.bin
-src/data/data_086A2D64/data_086A2D64.o: data/residual/data_086A2D64.bin
 src/data/data_086A3BCC/data_086A3BCC.o: data/residual/data_086A3BCC.bin
 src/data/data_086A3E90/data_086A3E90.o: data/residual/data_086A3E90.bin
 src/data/data_086A4364/data_086A4364.o: data/residual/data_086A4364.bin
 src/data/data_086A8F70/data_086A8F70.o: data/residual/data_086A8F70.bin
-src/data/data_086AAE60/data_086AAE60.o: data/residual/data_086AAE60.bin
 src/data/data_086AC554/data_086AC554.o: data/residual/data_086AC554_0.map.bin.lz data/residual/data_086AC554_1.map.bin.lz
 src/data/data_086AEA74/data_086AEA74.o: data/residual/data_086AEA74.bin
-src/data/data_086B0964/data_086B0964.o: data/residual/data_086B0964.bin
-src/data/data_086B730C/data_086B730C.o: data/residual/data_086B730C.bin
 src/data/data_086B7E10/data_086B7E10.o: data/residual/data_086B7E10.bin
 src/data/data_086B8608/data_086B8608.o: data/residual/data_086B8608.bin
 src/data/data_086B87AC/data_086B87AC.o: data/residual/data_086B87AC.bin
@@ -431,21 +421,17 @@ src/data/data_086BA1E4/data_086BA1E4.o: data/residual/data_086BA1E4.bin
 src/data/data_086BAB74/data_086BAB74.o: data/residual/data_086BAB74_0.map.bin.lz data/residual/data_086BAB74_1.map.bin.lz
 src/data/data_086BB064/data_086BB064.o: data/residual/data_086BB064.bin
 src/data/data_086BB154/data_086BB154.o: data/residual/data_086BB154.bin
-src/data/data_086BC90C/data_086BC90C.o: data/residual/data_086BC90C.bin
 src/data/data_086BCCD8/data_086BCCD8.o: data/residual/data_086BCCD8.bin
-src/data/data_086BDDDC/data_086BDDDC.o: data/residual/data_086BDDDC.bin
 src/data/data_086BFC18/data_086BFC18.o: data/residual/data_086BFC18.bin
 src/data/data_086C0290/data_086C0290.o: data/residual/data_086C0290.bin
 src/data/data_086CF94C/data_086CF94C.o: data/residual/data_086CF94C.bin
 src/data/data_086DF490/data_086DF490.o: graphics/misc/data_086DF490.gbapal
-src/data/data_086E24B4/data_086E24B4.o: data/residual/data_086E24B4.bin
 src/data/data_086E2A84/data_086E2A84.o: data/residual/data_086E2A84.bin
 src/data/data_086E93DC/data_086E93DC.o: graphics/reuse/data_086E93DC.gbapal
 src/data/data_08715D90/data_08715D90.o: graphics/reuse/data_08715D90.gbapal
 src/data/data_0872C080/data_0872C080.o: data/residual/data_0872C080.bin
 src/data/data_0872C194/data_0872C194.o: data/residual/data_0872C194.bin
 src/data/data_0872C934/data_0872C934.o: data/residual/data_0872C934.bin
-src/data/data_0872CA78/data_0872CA78.o: data/residual/data_0872CA78.bin
 src/data/data_0872CC70/data_0872CC70.o: data/residual/data_0872CC70.bin
 src/data/data_0872CDCC/data_0872CDCC.o: data/residual/data_0872CDCC.bin
 src/data/data_087644A8/data_087644A8.o: data/residual/data_087644A8_0.map.bin.lz
@@ -456,13 +442,11 @@ src/data/data_087AEA64/data_087AEA64.o: data/residual/data_087AEA64_0.gbapal.lz
 src/data/data_087E1718/data_087E1718.o: data/residual/data_087E1718_0.gbapal.lz
 src/data/data_0885612C/data_0885612C.o: data/residual/data_0885612C.bin
 src/data/data_0890375C/data_0890375C.o: data/residual/data_0890375C.bin
-src/data/data_089038BC/data_089038BC.o: data/residual/data_089038BC.bin
 src/data/data_089084A8/data_089084A8.o: data/residual/data_089084A8.bin
 src/data/data_08908CA0/data_08908CA0.o: data/residual/data_08908CA0.bin
 src/data/data_08908DBC/data_08908DBC.o: data/residual/data_08908DBC.bin
 src/data/data_0890933C/data_0890933C.o: data/residual/data_0890933C.bin
 src/data/data_089095A8/data_089095A8.o: data/residual/data_089095A8.bin
-src/data/data_08909A80/data_08909A80.o: data/residual/data_08909A80.bin
 src/data/data_0890A320/data_0890A320.o: data/residual/data_0890A320.bin
 src/data/data_0890A3D4/data_0890A3D4.o: data/residual/data_0890A3D4.bin
 src/data/data_0890A480/data_0890A480.o: data/residual/data_0890A480.bin
@@ -477,10 +461,8 @@ src/data/data_0890C914/data_0890C914.o: data/residual/data_0890C914.bin
 src/data/data_0890D234/data_0890D234.o: data/residual/data_0890D234.bin
 src/data/data_0890D554/data_0890D554.o: data/residual/data_0890D554.bin
 src/data/data_0890D874/data_0890D874.o: data/residual/data_0890D874.bin
-src/data/data_0890F2E0/data_0890F2E0.o: data/residual/data_0890F2E0.bin
 src/data/data_08925BF8/data_08925BF8.o: data/residual/data_08925BF8.bin
 src/data/data_08925CD4/data_08925CD4.o: data/residual/data_08925CD4.bin
-src/data/data_089263A8/data_089263A8.o: data/residual/data_089263A8.bin
 src/data/data_08A5A6AD/data_08A5A6AD.o: data/residual/data_08A5A6AD.bin
 src/data/data_08A5CEDC/data_08A5CEDC.o: data/residual/data_08A5CEDC.bin
 src/data/data_08A5D0E4/data_08A5D0E4.o: data/residual/data_08A5D0E4.bin
@@ -500,10 +482,8 @@ src/data/data_08A64420/data_08A64420.o: data/residual/data_08A64420.bin
 src/data/data_08A64E30/data_08A64E30.o: data/residual/data_08A64E30.bin
 src/data/data_08A64FA0/data_08A64FA0.o: data/residual/data_08A64FA0.bin
 src/data/data_08A66080/data_08A66080.o: data/residual/data_08A66080.bin
-src/data/data_08A66768/data_08A66768.o: data/residual/data_08A66768.bin
 src/data/data_08A66A00/data_08A66A00.o: data/residual/data_08A66A00.bin
 src/data/data_08A67B00/data_08A67B00.o: data/residual/data_08A67B00.bin
-src/data/data_08A70F34/data_08A70F34.o: data/residual/data_08A70F34.bin
 src/data/data_08A710FC/data_08A710FC.o: data/residual/data_08A710FC.bin
 src/data/data_08A71BF0/data_08A71BF0.o: data/residual/data_08A71BF0.bin
 src/data/data_08A71C60/data_08A71C60.o: data/residual/data_08A71C60.bin

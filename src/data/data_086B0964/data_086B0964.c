@@ -1,9 +1,25 @@
 #include "global.h"
 
-/* Migrated from asm/data_086B0964.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* Typed C extraction of residual raw-incbin slices from data_086B0964.c. */
 
-/* D312 ID: byte-identical (300 B, whole symbol; unique single occurrence in the
- * fe8u ROM) to fe8u AnimSprite_EfxHammarneOBJ_28. Byte-neutral rename; section unchanged => same ROM bytes. */
-u8 AnimSprite_EfxHammarneOBJ_28[] __attribute__((section(".data.residue.086B0964"))) = INCBIN_U8("data/residual/data_086B0964.bin");
+u32 AnimSprite_EfxHammarneOBJ_28[] __attribute__((section(".data.residue.086B0964"))) = {
+    0x10000000, 0xFFF10019, 0x00000004, 0x10000000,
+    0xFFF40019, 0x00000009, 0x10000000, 0xFFF80019,
+    0x0000000D, 0x10000000, 0x0011001A, 0x0000FFE7,
+    0x10000000, 0x0011001A, 0x0000FFEC, 0x10000000,
+    0x0010001A, 0x0000FFF1, 0x10000000, 0x000E001A,
+    0x0000FFF6, 0x10000000, 0x000A001A, 0x0000FFFB,
+    0x10000000, 0x0000001B, 0x00000007, 0x10000000,
+    0x0004001B, 0x00000003, 0x10000000, 0x0007001B,
+    0x0000FFFF, 0x10000000, 0x000B001B, 0x0000FFD4,
+    0x10000000, 0x0007001B, 0x0000FFD9, 0x10000000,
+    0xFFF5001B, 0x0000FFEA, 0x10000000, 0xFFF1001B,
+    0x0000FFEE, 0x10000000, 0xFFED001B, 0x0000FFF2,
+    0x10000000, 0xFFE9001B, 0x0000FFF6, 0x10000000,
+    0xFFFC001B, 0x00000011, 0x10000000, 0x000E001B,
+    0x0000000C, 0x10000000, 0xFFEF001B, 0x0000FFFE,
+    0x10000000, 0x0011001B, 0x0000FFE2, 0x10000000,
+    0xFFF9001B, 0x0000FFE7, 0x10000000, 0x0003001B,
+    0x0000FFDE, 0x10000000, 0xFFFE001B, 0x0000FFE3,
+    0x00000001, 0x00000000, 0x00000000,
+};
