@@ -13,7 +13,8 @@ extern const u8 EventScr_Ch16b_BeginningScene[];
 extern const u8 UnitDef_Ch17BAlly_0[];
 extern const u8 EventListScr_Ch16b_Turn[];
 extern const u8 EventListScr_Ch16b_Character[];
-extern const u8 data_08A5D0E4[];
+extern const u8 EventListScr_Ch16b_UnitMove[];
+extern const u8 EventListScr_Ch16b_Tutorial[];
 extern const u8 frontier_df3_unitdef_b_042_91C230[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
@@ -25,8 +26,8 @@ SECTION(".rodata.dat_Ch16EphraimEventData_ref") static const u32 Ch16EphraimEven
     (u32)&EventListScr_Ch16b_Location + 0x1C,
     (u32)&EventListScr_Ch16b_Location + 0x5C,
     (u32)&EventListScr_Ch16b_Location + 0x60,
-    (u32)&data_08A5D0E4,
-    (u32)&data_08A5D0E4 + 0x4,
+    (u32)&EventListScr_Ch16b_UnitMove,
+    (u32)&EventListScr_Ch16b_Tutorial,
     (u32)&gUidebug_2 + 0x4E4,
     (u32)&frontier_df4_menu_005_A5FFAD + 0x66,
     (u32)&UnitDef_Ch17BAlly_0,
