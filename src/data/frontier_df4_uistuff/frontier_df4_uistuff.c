@@ -446,7 +446,8 @@ extern const u8 bmxfade_loop[];
 extern const u8 data_0857DCB4[];
 extern const u8 data_0859A0AC[];
 extern const u8 data_085C4518[];
-extern const u8 data_085C4830[];
+extern const u8 gConvoyMenuItems[];
+extern const u8 gSendToConvoyMenuItems[];
 extern const u8 data_085D1E38[];
 extern const u8 frontier_df3_fontgrp_se_000_57E884[];
 extern const u8 frontier_df3_fontgrp_se_001_57F604[];
@@ -11438,7 +11439,7 @@ u32 data_085C5544[] __attribute__((section(".data.frontier_df4_uistuff.gap30")))
     (u32)&ItemMenu_HelpBox,
     0x000E0101,
     0x00000000,
-    (u32)&data_085C4830,
+    (u32)&gConvoyMenuItems,
     0x00000000,
     0x00000000,
     0x00000000,
@@ -11447,7 +11448,7 @@ u32 data_085C5544[] __attribute__((section(".data.frontier_df4_uistuff.gap30")))
     (u32)&ConvoyMenu_HelpBox,
     0x000E0101,
     0x00000000,
-    (u32)&data_085C4830 + 0xfc,
+    (u32)&gSendToConvoyMenuItems,
     0x00000000,
     0x00000000,
     0x00000000,

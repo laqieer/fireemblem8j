@@ -1,9 +1,10 @@
-/* Migrated from asm/data_085F13A8.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral SPLIT of data_085F13A8 into 2 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.085F13A8, "aw", %progbits
-	.global data_085F13A8
-data_085F13A8:
+	.global AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_15
+AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_15:
 	.4byte 0x40004000
 	.4byte 0xFF880004
 	.4byte 0x0000FFDC
@@ -31,6 +32,9 @@ data_085F13A8:
 	.4byte 0x00000001
 	.4byte 0x00000000
 	.4byte 0x00000000
+	.section .data.residue.085F1414, "aw", %progbits
+	.global AnimScr_EfxLvupOBJ2
+AnimScr_EfxLvupOBJ2:
 	.4byte AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_0 + 0x1
 	.4byte AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_1 + 0x1
 	.4byte AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_2 + 0x1

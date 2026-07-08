@@ -1,9 +1,10 @@
-/* Migrated from asm/data_085C4830.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral SPLIT of data_085C4830 into 2 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.085C4830, "aw", %progbits
-	.global data_085C4830
-data_085C4830:
+	.global gConvoyMenuItems
+gConvoyMenuItems:
 	.4byte frontier_df4_misc_lo_001_0DC974 + 0x78
 	.4byte 0x00000000
 	.4byte 0x00002400
@@ -67,6 +68,9 @@ data_085C4830:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
+	.section .data.residue.085C492C, "aw", %progbits
+	.global gSendToConvoyMenuItems
+gSendToConvoyMenuItems:
 	.4byte frontier_df4_misc_lo_001_0DC974 + 0x78
 	.4byte 0x00000000
 	.4byte 0x00002A00
