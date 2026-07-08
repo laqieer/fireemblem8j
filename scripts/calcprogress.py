@@ -511,11 +511,18 @@ out.append("")
 # code -- the prior `code_src + code_asm` numerator reported the disasm ratio (~99.5%)
 # and inflated decomp.dev's matched_code_percent far above the true matching-C level.
 jp_code_total = CODE_REGION[1] - CODE_REGION[0]
-# "in asm" = still hand-disassembly to decompile; EXCLUDE library code linked
-# from libc.a/libgcc.a (that is real-source, like fe8u -- reported separately).
-code_not_src = max(0, jp_code_total - code_src - code_lib)
+# "in asm" = genuinely still-hand-asm code = the `asm/*.o` `.text` objects (the
+# un-decompiled functions), summed DIRECTLY (code_asm) -- NOT a region residual.
+# The code region [0x08000000, 0x080DC134) also contains ~3.7 KB of committed-SOURCE
+# non-.text bytes: `src/data` `.rodata.gap_*` literal-pool objects + the crt0
+# `.data.residue.080000C0` stub. A residual `total - code_src - code_lib` wrongly
+# lumped those source bytes into "asm" and understated "from source" by ~0.4%;
+# counting code_asm directly keeps the metric honest. (code_lib = libc.a/libgcc.a
+# real-source library code, like fe8u -- reported separately as a sub-line.)
+code_not_src = code_asm
+code_from_source = jp_code_total - code_not_src
 out.append(f"{jp_code_total} total bytes of code")
-out.append(f"{code_src + code_lib} bytes of code from source ({pct(code_src + code_lib, jp_code_total):.4f}%)")
+out.append(f"{code_from_source} bytes of code from source ({pct(code_from_source, jp_code_total):.4f}%)")
 if code_lib:
     out.append(f"{code_lib} bytes of code in libc/libgcc archives ({pct(code_lib, jp_code_total):.4f}%, linked like fe8u)")
 out.append(f"{code_not_src} bytes of code in asm ({pct(code_not_src, jp_code_total):.4f}%)")
