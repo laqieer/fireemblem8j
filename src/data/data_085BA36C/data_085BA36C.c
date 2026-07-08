@@ -37,65 +37,60 @@ struct ProcCmd gProcScr_StoneShatterEvent[] __attribute__((section(".rodata.dat_
 };
 
 /* Byte-neutral external alias: data_085BA36C == ProcScr_EventEarthQuake. */
-__asm__(
-"\t.global data_085BA36C\n"
-"\t.set data_085BA36C, ProcScr_EventEarthQuake\n"
-);
+extern const u32 data_085BA36C __attribute__((alias("ProcScr_EventEarthQuake")));
 
 /* Tail [0x085BA3A4,0x085BA470) (204 B): StoneShatter gfx descriptor (pal/img/tsa
  * OBJECT pointers), byte-identical raw residue. */
-__asm__(
-"\t.section .data.residue.085BA3A4, \"aw\", %progbits\n"
-"data_085BA3A4:\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte gPal_StoneShatterAnim\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte gImg_StoneShatterAnim\n"
-"\t.4byte 0x00011000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_0\n"
-"\t.4byte 0x00010000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_1\n"
-"\t.4byte 0x00010000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_2\n"
-"\t.4byte 0x00010000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_3\n"
-"\t.4byte 0x00020000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_4\n"
-"\t.4byte 0x00030000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_5\n"
-"\t.4byte 0x00030000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_6\n"
-"\t.4byte 0x00040000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_7\n"
-"\t.4byte 0x00040000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_8\n"
-"\t.4byte 0x00040000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_9\n"
-"\t.4byte 0x00040000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_10\n"
-"\t.4byte 0x00040000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_11\n"
-"\t.4byte 0x00040000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_12\n"
-"\t.4byte 0x00020000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte gTsa_StoneShatter_13\n"
-"\t.4byte 0x00020000\n"
-"\t.4byte 0x0000000A\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
+u32 data_085BA3A4[] __attribute__((section(".data.residue.085BA3A4"))) = {
+    0x00000003,
+    (u32)&gPal_StoneShatterAnim,
+    0x00000001,
+    0x00000001,
+    (u32)&gImg_StoneShatterAnim,
+    0x00011000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_0,
+    0x00010000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_1,
+    0x00010000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_2,
+    0x00010000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_3,
+    0x00020000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_4,
+    0x00030000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_5,
+    0x00030000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_6,
+    0x00040000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_7,
+    0x00040000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_8,
+    0x00040000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_9,
+    0x00040000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_10,
+    0x00040000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_11,
+    0x00040000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_12,
+    0x00020000,
+    0x00000002,
+    (u32)&gTsa_StoneShatter_13,
+    0x00020000,
+    0x0000000A,
+    0x00000000,
+    0x00000000,
+};
