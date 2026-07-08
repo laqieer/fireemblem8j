@@ -2,6 +2,540 @@
 #include "proc.h"
 #include "bmio.h"
 
+extern const u8 AnyLinkArenaTeamExists[];
+extern const u8 ApplyTrapDamageAnim[];
+extern const u8 ApplyTrapDamageReal[];
+extern const u8 Arena_KeepTargetAlive[];
+extern const u8 AttackMapSelect_Cancel[];
+extern const u8 AttackMapSelect_End[];
+extern const u8 AttackMapSelect_Select[];
+extern const u8 AttackMapSelect_SwitchIn[];
+extern const u8 AttackStaffMapSelect_Init[];
+extern const u8 AttackStaffMapSelect_SwitchIn[];
+extern const u8 BATTLE_DeleteLinkedMOVEUNIT[];
+extern const u8 BATTLE_HandleArenaDeathsMaybe[];
+extern const u8 BATTLE_PostCombatDeathFades[];
+extern const u8 BallistaRangeMenuHelpBox[];
+extern const u8 BallistaRangeMenu_BallistaUsability[];
+extern const u8 BallistaRangeMenu_Draw[];
+extern const u8 BallistaRangeMenu_Select[];
+extern const u8 BallistaRangeMenu_SwitchOut[];
+extern const u8 BarrierMapSelect_SwitchIn[];
+extern const u8 BmMain_BeginNextChapter[];
+extern const u8 BmMain_ChangePhase[];
+extern const u8 BmMain_CheckBeginPhaseEvent[];
+extern const u8 BmMain_ResumePlayerPhase[];
+extern const u8 BmMain_StartIntroFx[];
+extern const u8 BmMain_StartPhase[];
+extern const u8 BmMain_SuspendBeforePhase[];
+extern const u8 BmMain_UpdateTraps[];
+extern const u8 CallBeginningEvents[];
+extern const u8 CallDelayedArg_OnLoop[];
+extern const u8 CallEraseSaveEvent[];
+extern const u8 CallGameEndingEvent[];
+extern const u8 CallTradeTutEventStart[];
+extern const u8 CanBuildNewLinkArenaTeam[];
+extern const u8 ClearBg0Bg1[];
+extern const u8 ClearTemporaryUnits[];
+extern const u8 Clear_UnkData_0[];
+extern const u8 CommandEffectEndPlayerPhase[];
+extern const u8 ConvoBackgroundFade_CopyBg2ToBg3[];
+extern const u8 ConvoBackgroundFade_CopyBg3ToBg2[];
+extern const u8 ConvoBackgroundFade_End[];
+extern const u8 ConvoBackgroundFade_Init[];
+extern const u8 ConvoBackgroundFade_LoadBg2[];
+extern const u8 ConvoBackgroundFade_LoadBg3[];
+extern const u8 ConvoBackgroundFade_Loop[];
+extern const u8 ConvoBackgroundFade_RestoreMap[];
+extern const u8 ConvoyMenu_HelpBox[];
+extern const u8 DeathDropSpriteAnim_End[];
+extern const u8 DeathDropSpriteAnim_ExecAnyTrap[];
+extern const u8 DeathDropSpriteAnim_Loop[];
+extern const u8 DebugContinueMenuEnd[];
+extern const u8 DebugContinueMenuInit[];
+extern const u8 DebugMenuInit[];
+extern const u8 DebugPrintWithProc[];
+extern const u8 Destruct6CBMXFADE[];
+extern const u8 DropSelection_OnConstruction[];
+extern const u8 DropSelection_OnSelect[];
+extern const u8 DungeonRecordUi_KeyListener[];
+extern const u8 DungeonRecordUi_KeyListenerUpdatesTime[];
+extern const u8 DungeonRecordUi_StartBgm[];
+extern const u8 DungeonRecordUi_UpdateValueAnim_Init[];
+extern const u8 DungeonRecordUi_UpdateValueAnim_Loop[];
+extern const u8 EndDungeonRecordUi[];
+extern const u8 EndMenuAndClear[];
+extern const u8 Event01_End[];
+extern const u8 Event02_EvBitAndIdMod[];
+extern const u8 Event03_CheckEvBitOrId[];
+extern const u8 Event04_CheckRandom[];
+extern const u8 Event05_SetSlot[];
+extern const u8 Event06_SlotOperation[];
+extern const u8 Event07_SlotQueueOperations[];
+extern const u8 Event09_Goto[];
+extern const u8 Event0A_Call[];
+extern const u8 Event0B_EnqueueCall[];
+extern const u8 Event0C_Branch[];
+extern const u8 Event0D_AsmCall[];
+extern const u8 Event0E_STAL[];
+extern const u8 Event0F_CounterOps[];
+extern const u8 Event10_ModifyEvBit[];
+extern const u8 Event11_SetIgnoredKeys[];
+extern const u8 Event12_StartBGM[];
+extern const u8 Event13_BgmFadeIn[];
+extern const u8 Event14_BgmOverideRestore[];
+extern const u8 Event15_BgmVolume[];
+extern const u8 Event17_Fade[];
+extern const u8 Event18_ColorFade[];
+extern const u8 Event19_Checks[];
+extern const u8 Event1A_TEXTSTART[];
+extern const u8 Event1B_TEXTSHOW[];
+extern const u8 Event1D_TalkContinue[];
+extern const u8 Event1D_WaitForLockTalk[];
+extern const u8 Event1E_[];
+extern const u8 Event1F_[];
+extern const u8 Event20_[];
+extern const u8 Event21_TextBg[];
+extern const u8 Event22_ClearScreen[];
+extern const u8 Event23_DisaleMapDisp[];
+extern const u8 Event24_EnableMapDisp[];
+extern const u8 Event25_ChangeMap[];
+extern const u8 Event26_CameraControl[];
+extern const u8 Event27_MapChange[];
+extern const u8 Event28_ChangeWeather[];
+extern const u8 Event29_SetFogVision[];
+extern const u8 Event2A_MoveToChapter[];
+extern const u8 Event2B_ConfigLoadUnit[];
+extern const u8 Event2C_LoadUnits[];
+extern const u8 Event2D_ChangeSpritePal[];
+extern const u8 Event2E_CheckAt[];
+extern const u8 Event30_ENUN[];
+extern const u8 Event31_DisplayEffectRange[];
+extern const u8 Event32_SpawnSingleUnit[];
+extern const u8 Event33_CheckUnitVarious[];
+extern const u8 Event34_MessWithUnitState[];
+extern const u8 Event35_UnitClassChanging[];
+extern const u8 Event37_GiveItem[];
+extern const u8 Event38_ChangeActiveUnit[];
+extern const u8 Event39_ChangeAiScript[];
+extern const u8 Event3A_DisplayPopup[];
+extern const u8 Event3B_DisplayCursor[];
+extern const u8 Event3C_MoveCursor[];
+extern const u8 Event3D_MenuOverride[];
+extern const u8 Event3E_PrepScreenCall[];
+extern const u8 Event3F_ScriptBattle[];
+extern const u8 Event41_Warp[];
+extern const u8 Event42_EarthQuake[];
+extern const u8 Event43_SummonUnit[];
+extern const u8 Event44_BreakingSacredStone[];
+extern const u8 Event45_GlowingCross[];
+extern const u8 Event80_WmSkip_Unsure[];
+extern const u8 Event81_WmFadeOut[];
+extern const u8 Event82_WmEnd[];
+extern const u8 Event84_WmSetCameraOntoNode[];
+extern const u8 Event85_WmSetCameraOntoUnit[];
+extern const u8 Event86_WmScrollCamera[];
+extern const u8 Event88_WmScrollCameraOntoUnit[];
+extern const u8 Event89_WmScrollWait[];
+extern const u8 Event8A_WmShowCursor_Unsure[];
+extern const u8 Event8B_WmHideCursor_Unsure[];
+extern const u8 Event8D_WmNop[];
+extern const u8 Event8E_WmNop[];
+extern const u8 Event8F_WmNop[];
+extern const u8 Event90_WmAddPathDisplayed[];
+extern const u8 Event91_WmAddPath[];
+extern const u8 Event92_WmRemovePath[];
+extern const u8 Event93_WmEnableNode[];
+extern const u8 Event94_WmDisableNode[];
+extern const u8 Event95_WmEnableNodeDisplayed[];
+extern const u8 Event96_WmEnablePathTargetDisplayed[];
+extern const u8 Event97_WmInitNextStoryNode[];
+extern const u8 Event98_WmSetNextStoryNodePath[];
+extern const u8 Event99_GmNodeDisplayWait[];
+extern const u8 Event9A_WmSetStoryNodeSilent[];
+extern const u8 Event9B_WmSetNextStoryNodeSilentNoFlag[];
+extern const u8 Event9C_[];
+extern const u8 Event9D_[];
+extern const u8 Event9E_WmSetClassUnit[];
+extern const u8 Event9F_WmSetCharUnit[];
+extern const u8 EventA0_WmRemoveUnit[];
+extern const u8 EventA1_WmShowUnit[];
+extern const u8 EventA2_WmHideUnit[];
+extern const u8 EventA3_WmShowUnitFaded[];
+extern const u8 EventA4_WmHideUnitFaded[];
+extern const u8 EventA5_WmUnitFadeWait[];
+extern const u8 EventA6_WmUnitSetOnNode[];
+extern const u8 EventA7_WmUnitSetPosition[];
+extern const u8 EventA8_WmUnitMoveFree[];
+extern const u8 EventA9_WmUnitMovePaths[];
+extern const u8 EventAA_WmUnitPauseMove[];
+extern const u8 EventAB_WmUnitResumeMove[];
+extern const u8 EventAC_WmUnitMoveWait[];
+extern const u8 EventAD_WmFadeToDarker[];
+extern const u8 EventAE_WmFadeToDarkerWait[];
+extern const u8 EventAF_WmShowTextBox[];
+extern const u8 EventB0_WmHideTextBox_Bugged[];
+extern const u8 EventB1_WmTextBoxWait[];
+extern const u8 EventB2_WmFancyFade[];
+extern const u8 EventB3_WmFancyFadeWait[];
+extern const u8 EventB4_WmDisplayBigMap[];
+extern const u8 EventB5_WmHideBigMap[];
+extern const u8 EventB6_WmMoveBigMap[];
+extern const u8 EventB7_WmBigMapWait[];
+extern const u8 EventB8_WmShowBigMapHighlight[];
+extern const u8 EventB9_WmRemoveHighlightNationPart1[];
+extern const u8 EventBA_WmRemoveHighlightNationPart2[];
+extern const u8 EventBB_[];
+extern const u8 EventBC_MarkPoint[];
+extern const u8 EventBD_[];
+extern const u8 EventBE_[];
+extern const u8 EventBF_[];
+extern const u8 EventC0_[];
+extern const u8 EventC1_SKIPWM[];
+extern const u8 EventC2_WmNoFade[];
+extern const u8 EventC3_SpawnLord[];
+extern const u8 EventC4_WmShowPortrait[];
+extern const u8 EventC5_WmClearPortrait[];
+extern const u8 EventC6_WmDisplayText[];
+extern const u8 EventC7_[];
+extern const u8 EventC8_[];
+extern const u8 EventC9_RemoveWmText[];
+extern const u8 EventCA_[];
+extern const u8 EventCB_[];
+extern const u8 EventCC_[];
+extern const u8 EventCD_[];
+extern const u8 EventCE_[];
+extern const u8 EventCF_[];
+extern const u8 EventEngine_OnEnd[];
+extern const u8 EventEngine_OnUpdate[];
+extern const u8 EventFaceDeamonDelete[];
+extern const u8 ExecFireTileTrapAnim1[];
+extern const u8 ExecFireTileTrapAnim2[];
+extern const u8 FadeInBlackSpeed20[];
+extern const u8 FadeInExists[];
+extern const u8 FadeOutBlackSpeed20Locking[];
+extern const u8 FadeOutExists[];
+extern const u8 FillBallistaRange[];
+extern const u8 FreezeMenu[];
+extern const u8 GamceControl_StartClassReel[];
+extern const u8 GameControl_0[];
+extern const u8 GameControl_CallEraseMural[];
+extern const u8 GameControl_CallEraseSaveEventWithKeyCombo[];
+extern const u8 GameControl_CallPostChapterSaveMenu[];
+extern const u8 GameControl_ChapterSwitch[];
+extern const u8 GameControl_ClearPaletteAndReset[];
+extern const u8 GameControl_EnableSoundEffects[];
+extern const u8 GameControl_InvalidateSuspendSave[];
+extern const u8 GameControl_PostChapterSwitch[];
+extern const u8 GameControl_PostClassReel[];
+extern const u8 GameControl_PostIntro[];
+extern const u8 GameControl_RememberChapterId[];
+extern const u8 GameControl_RestoreChapterId[];
+extern const u8 GameControl_StartMainTheme[];
+extern const u8 GameCtrlStartExtraMap[];
+extern const u8 GameCtrlStartIntroMonologue[];
+extern const u8 GameCtrl_CheckGameCompleteAndBranch[];
+extern const u8 GameCtrl_CheckNewGameAndBranch[];
+extern const u8 GenericSelection_BackToUM[];
+extern const u8 GenericSelection_BackToUM_CamWait[];
+extern const u8 GiveSelection_OnChange[];
+extern const u8 GiveSelection_OnSelect[];
+extern const u8 HealMapSelect_Init[];
+extern const u8 HealMapSelect_SwitchIn[];
+extern const u8 ItemMenuHelpBox[];
+extern const u8 ItemMenu_AreOtherCommandsAvailable[];
+extern const u8 ItemMenu_ButtonBPressed[];
+extern const u8 ItemMenu_Draw1stCommand[];
+extern const u8 ItemMenu_DrawOtherCommands[];
+extern const u8 ItemMenu_HelpBox[];
+extern const u8 ItemMenu_Is1stCommandAvailable[];
+extern const u8 ItemMenu_Select1stCommand[];
+extern const u8 ItemMenu_SelectOtherCommands[];
+extern const u8 ItemMenu_SwitchIn[];
+extern const u8 ItemMenu_SwitchOut_DoNothing[];
+extern const u8 ItemSelectMenu_Effect[];
+extern const u8 ItemSelectMenu_TextDraw[];
+extern const u8 ItemSelectMenu_Usability[];
+extern const u8 ItemSubMenuEnd[];
+extern const u8 ItemSubMenu_DiscardItem[];
+extern const u8 ItemSubMenu_EquipItem[];
+extern const u8 ItemSubMenu_IsDiscardAvailable[];
+extern const u8 ItemSubMenu_IsEquipAvailable[];
+extern const u8 ItemSubMenu_IsTradeAvailable[];
+extern const u8 ItemSubMenu_IsUseAvailable[];
+extern const u8 ItemSubMenu_TradeItem[];
+extern const u8 ItemSubMenu_UseItem[];
+extern const u8 LockGame[];
+extern const u8 Loop6C_KOIDO[];
+extern const u8 Loop6C_WaitForSelectPress[];
+extern const u8 Make6C_SaveMenuPostChapter[];
+extern const u8 MakeMoveunitForActiveUnit[];
+extern const u8 MapMenu_GuideCommand[];
+extern const u8 MapMenu_GuideCommandDraw[];
+extern const u8 MapMenu_IsGuideCommandAvailable[];
+extern const u8 MapMenu_IsRecordsCommandAvailable[];
+extern const u8 MapMenu_IsRetreatCommandAvailable[];
+extern const u8 MapMenu_IsSuspendCommandAvailable[];
+extern const u8 MapMenu_OptionsCommand[];
+extern const u8 MapMenu_RecordsCommand[];
+extern const u8 MapMenu_RetreatCommand[];
+extern const u8 MapMenu_StatusCommand[];
+extern const u8 MapMenu_SuspendCommand[];
+extern const u8 MapMenu_UnitCommand[];
+extern const u8 MenuAlwaysEnabled[];
+extern const u8 MenuCancelSelect[];
+extern const u8 MenuCommand_SelectNo[];
+extern const u8 MenuStdHelpBox[];
+extern const u8 Menu_SwitchIn[];
+extern const u8 Menu_SwitchOut_DoNothing[];
+extern const u8 MoveLimitViewChange_OnInit[];
+extern const u8 MoveLimitViewChange_OnLoop[];
+extern const u8 MoveLimitView_OnEnd[];
+extern const u8 MoveLimitView_OnInit[];
+extern const u8 MoveLimitView_OnLoop[];
+extern const u8 MuExistsActive[];
+extern const u8 NewBattleForecast[];
+extern const u8 NewFadeIn[];
+extern const u8 NewFadeOut[];
+extern const u8 Nop_EventscrGmap_0[];
+extern const u8 PartialGameLock_OnLoop[];
+extern const u8 PickSelection_OnInit[];
+extern const u8 PickSelection_OnSelect[];
+extern const u8 PopGlobalTimer[];
+extern const u8 ProcFun_ResetCursorPosition[];
+extern const u8 ProcScr_PhaseIntro[];
+extern const u8 ProcScr_WorldMapWrapper[];
+extern const u8 ProcScr_WorldmapMain_1[];
+extern const u8 PushGlobalTimer[];
+extern const u8 PutUnitSpritesOam[];
+extern const u8 RefreshMapSelect_Init[];
+extern const u8 RefreshMapSelect_Select[];
+extern const u8 RefreshMapSelect_SwitchIn[];
+extern const u8 RegisterTrapDeathBWL[];
+extern const u8 RepairSelectOnChange[];
+extern const u8 RepairSelectOnSelect[];
+extern const u8 RescueSelection_OnChange[];
+extern const u8 RescueSelection_OnConstruction[];
+extern const u8 RescueSelection_OnHelp[];
+extern const u8 RescueSelection_OnSelect[];
+extern const u8 RestoreMapSelect_Init[];
+extern const u8 RestoreMapSelect_SwitchIn[];
+extern const u8 ResumeMenu[];
+extern const u8 SetEventId_0x84[];
+extern const u8 SetNewKeyStatusWith16[];
+extern const u8 SetTradeMenuTutStatus2[];
+extern const u8 SetTradeMenuTutStatus3[];
+extern const u8 SetTradeMenuTutStatus5[];
+extern const u8 SetTradeMenuTutStatus7[];
+extern const u8 SetTradeMenuTutStatus8[];
+extern const u8 Set_UnkData_0[];
+extern const u8 SetupDungeonRecordUi[];
+extern const u8 SioPostBattleSprites_Init[];
+extern const u8 SioPostBattleSprites_Loop_DrawSlideIn[];
+extern const u8 SioPostBattleSprites_Loop_DrawStatic[];
+extern const u8 SioTeamList_0[];
+extern const u8 SioTeamList_1[];
+extern const u8 SioTeamList_2[];
+extern const u8 SioTeamList_EraseTeam_KeyHandler[];
+extern const u8 SioTeamList_Init[];
+extern const u8 SioTeamList_LoadTeam_Dummy[];
+extern const u8 SioTeamList_Loop_MainKeyHandler[];
+extern const u8 SioTeamList_SetupGfx[];
+extern const u8 SioTeamList_StartEraseTeamSubMenu[];
+extern const u8 SioTeamList_StartUnitList[];
+extern const u8 SioTeamList_WaitForUnitListScreen[];
+extern const u8 StaffItemSelect_Effect[];
+extern const u8 StaffItemSelect_OnHover[];
+extern const u8 StaffItemSelect_SwitchOut[];
+extern const u8 StaffItemSelect_TextDraw[];
+extern const u8 StaffItemSelect_Usability[];
+extern const u8 StaffSelectOnSelect[];
+extern const u8 StartBattleForecastHelpBox[];
+extern const u8 StartCharacterEndings[];
+extern const u8 StartFinScreen[];
+extern const u8 StartLinkArenaMainMenu[];
+extern const u8 StartMapSongBgm[];
+extern const u8 StartSaveMenu[];
+extern const u8 StartTradeMenuTutorialHandCursor[];
+extern const u8 StealMapSelect_Init[];
+extern const u8 StealMapSelect_Select[];
+extern const u8 StealMapSelect_SwitchIn[];
+extern const u8 Str_DebugRedArmy[];
+extern const u8 SubtitleMapSelect_End[];
+extern const u8 SummonSelection_OnChange[];
+extern const u8 SummonSelection_OnInit[];
+extern const u8 SummonSelection_OnSelect[];
+extern const u8 SupportSelection_OnSelect[];
+extern const u8 TakeSelection_OnChange[];
+extern const u8 TakeSelection_OnInit[];
+extern const u8 TakeSelection_OnSelect[];
+extern const u8 TalkBubbleOpen_OnIdle[];
+extern const u8 TalkChoice_OnBuy[];
+extern const u8 TalkChoice_OnIdle[];
+extern const u8 TalkChoice_OnSell[];
+extern const u8 TalkSelection_OnSelect[];
+extern const u8 TalkShiftClearAll_OnIdle[];
+extern const u8 TalkShiftClearAll_OnInit[];
+extern const u8 TalkShiftClear_OnIdle[];
+extern const u8 TalkShiftClear_OnInit[];
+extern const u8 TalkSpriteShiftClear_ClearLine[];
+extern const u8 TalkSpriteShiftClear_OnInit[];
+extern const u8 TalkSupportSelection_OnChange[];
+extern const u8 TalkSupportSelection_OnInit[];
+extern const u8 TalkWaitForInput_OnIdle[];
+extern const u8 TickActiveFactionTurn[];
+extern const u8 TorchSelect_OnIdle[];
+extern const u8 TorchSelect_OnInit[];
+extern const u8 TradeMenuHandSTAL[];
+extern const u8 TradeMenu_ClearDisplay[];
+extern const u8 TradeMenu_DoubleTutorialHandCursor_Update[];
+extern const u8 TradeMenu_HelpBox_OnEnd[];
+extern const u8 TradeMenu_HelpBox_OnInit[];
+extern const u8 TradeMenu_HelpBox_OnLoop[];
+extern const u8 TradeMenu_HighlightUpdater_OnInit[];
+extern const u8 TradeMenu_HighlightUpdater_OnLoop[];
+extern const u8 TradeMenu_InitItemDisplay[];
+extern const u8 TradeMenu_InitUnitNameDisplay[];
+extern const u8 TradeMenu_LoadForcedInitialHover[];
+extern const u8 TradeMenu_OnEndSelected[];
+extern const u8 TradeMenu_OnInitSelected[];
+extern const u8 TradeMenu_OnInitUnselected[];
+extern const u8 TradeMenu_OnLoopSelected[];
+extern const u8 TradeMenu_OnLoopUnselected[];
+extern const u8 TradeMenu_TutorialHandCursor_Update[];
+extern const u8 TradeSelection_OnChange[];
+extern const u8 TradeSelection_OnSelect[];
+extern const u8 TradeTargetSelection_OnInit[];
+extern const u8 TryCallSelectEvents[];
+extern const u8 UndeployEveryone[];
+extern const u8 UnlockGame[];
+extern const u8 UnsetEventId_0x84[];
+extern const u8 UpdateActorFromBattle[];
+extern const u8 UpdateBmMapDisplay[];
+extern const u8 UpdatePrevDeployStates[];
+extern const u8 WarpSelect_OnCancel[];
+extern const u8 WarpSelect_OnConfirm[];
+extern const u8 WarpSelect_OnEnd[];
+extern const u8 WarpSelect_OnIdle[];
+extern const u8 WarpSelect_OnInit[];
+extern const u8 WarpUnitMapSelect_Init[];
+extern const u8 WarpUnitMapSelect_SwitchIn[];
+extern const u8 WeaponSelectMenu_Draw[];
+extern const u8 WeaponSelectMenu_IsAvailable[];
+extern const u8 WeaponSelectMenu_Selected[];
+extern const u8 WeaponSelectMenu_SwitchIn[];
+extern const u8 WfxUpdate[];
+extern const u8 _FreezeMenu[];
+extern const u8 _SetGameEndFlag[];
+extern const u8 _WhileFace6CExists[];
+extern const u8 bmxfade_init[];
+extern const u8 bmxfade_loop[];
+extern const u8 data_0857DCB4[];
+extern const u8 data_0859A0AC[];
+extern const u8 data_085C4518[];
+extern const u8 data_085C4830[];
+extern const u8 data_085D1E38[];
+extern const u8 frontier_df3_fontgrp_se_000_57E884[];
+extern const u8 frontier_df3_fontgrp_se_001_57F604[];
+extern const u8 frontier_df3_fontgrp_se_002_57FACC[];
+extern const u8 frontier_df3_fontgrp_se_003_57FD0C[];
+extern const u8 frontier_df3_fontgrp_se_004_57FF94[];
+extern const u8 frontier_df3_fontgrp_se_005_580B1C[];
+extern const u8 frontier_df3_fontgrp_se_007_581A04[];
+extern const u8 frontier_df3_fontgrp_se_008_582A54[];
+extern const u8 frontier_df3_fontgrp_se_009_582F1C[];
+extern const u8 frontier_df4_ending_018_B3F7BC[];
+extern const u8 frontier_df4_misc_lo_000b2t_0DC5F4[];
+extern const u8 frontier_df4_misc_lo_000bm_0DC548[];
+extern u32 frontier_df4_uistuff_005_57DFCC[];
+extern u32 frontier_df4_uistuff_006_57E4DC[];
+extern u32 frontier_df4_uistuff_012_596F74[];
+extern u32 frontier_df4_uistuff_013_5987EC[];
+extern u32 frontier_df4_uistuff_014_598E64[];
+extern u32 frontier_df4_uistuff_015_599BE4[];
+extern u32 frontier_df4_uistuff_016_59A2EC[];
+extern u32 frontier_df4_uistuff_017_59A574[];
+extern u32 frontier_df4_uistuff_018_59B0FC[];
+extern u32 frontier_df4_uistuff_019_59BA8C[];
+extern u32 frontier_df4_uistuff_020_59BFE4[];
+extern u32 frontier_df4_uistuff_021_59D034[];
+extern const u8 frontier_fontgrp_ui_000_59D4FC[];
+extern const u8 gDebugChuudanMenuItems[];
+extern const u8 gDebugClearMenuItems[];
+extern const u8 gDebugContinueMenuItems[];
+extern const u8 gFontgrp_323[];
+extern const u8 gFontgrp_324[];
+extern const u8 gFontgrp_325[];
+extern const u8 gFontgrp_326[];
+extern const u8 gFontgrp_327[];
+extern const u8 gFontgrp_328[];
+extern const u8 gFontgrp_329[];
+extern const u8 gFontgrp_330[];
+extern const u8 gFontgrp_331[];
+extern const u8 gFontgrp_332[];
+extern const u8 gFontgrp_333[];
+extern const u8 gFontgrp_335[];
+extern const u8 gFontgrp_337[];
+extern const u8 gFontgrp_339[];
+extern const u8 gFontgrp_341[];
+extern const u8 gFontgrp_343[];
+extern const u8 gFontgrp_345[];
+extern const u8 gItemUseMenuItems[];
+extern const u8 gMenuStr_060[];
+extern const u8 gMenuStr_134[];
+extern const u8 gMenuStr_13C[];
+extern const u8 gMenuStr_144[];
+extern const u8 gMenuStr_14C[];
+extern const u8 gMenuStr_264[];
+extern const u8 gMenuStr_26C[];
+extern const u8 gMenuStr_274[];
+extern const u8 gMenuStr_27C[];
+extern const u8 gMenuStr_284[];
+extern const u8 gMenuStr_28C[];
+extern const u8 gMenuStr_294[];
+extern const u8 gMenuStr_29C[];
+extern const u8 gOpenLimitViewImgLut[];
+extern const u8 gProcScr_85B9D0C[];
+extern const u8 gProcScr_ChapterIntroTitleOnly[];
+extern const u8 gProcScr_GorgonEggHatchDisplay[];
+extern const u8 gProcScr_PoisonDamageDisplay[];
+extern const u8 gProcScr_StatusDecayDisplay[];
+extern const u8 gProcScr_TalkWaitForInput[];
+extern const u8 gProcScr_TerrainHealDisplay[];
+extern const u8 gSioMain2_1[];
+extern const u8 gSioTeamListConfig_1[];
+extern const u8 gSioTeamListConfig_2[];
+extern const u8 gStealItemMenuItems[];
+extern const u8 gTradeItemDisplayTileLocation[];
+extern const u8 gUnitActionMenuItems[];
+extern const u8 gYesNoSelectionMenuItems[];
+extern const u8 nullsub_17[];
+extern const u8 nullsub_19[];
+extern const u8 nullsub_20[];
+extern const u8 sBerserkIconSprites[];
+extern const u8 sProcScr_BMXFADE[];
+extern const u8 sProcScr_DungeonRecord_UpdateNewRecordValues[];
+extern const u8 sSilenceIconSprites[];
+extern const u8 sSleepIconSprites[];
+extern const u8 sub_8009950[];
+extern const u8 sub_8009AD8[];
+extern const u8 sub_8009CCC[];
+extern const u8 sub_800C124[];
+extern const u8 sub_800C224[];
+extern const u8 sub_800C3AC[];
+extern const u8 sub_800D85C[];
+extern const u8 sub_800DC04[];
+extern const u8 sub_800E11C[];
+extern const u8 sub_800FF08[];
+extern const u8 sub_80106A0[];
+extern const u8 sub_8010CB4[];
+extern const u8 sub_8010E1C[];
+extern const u8 sub_80241D4[];
+extern const u8 sub_80299B8[];
+extern const u8 sub_8029BFC[];
+extern const u8 sub_8049664[];
+extern const u8 sub_8050294[];
+
 extern void AfterItemUse_SetTargetStatus();
 extern void AreKeysHeld();
 extern void BMapDispResume();
@@ -108,8273 +642,8296 @@ extern void GameOverScreen_RandomScroll_Loop();
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap0, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_000_57A504\n"
-    "frontier_df4_uistuff_000_57A504:\n"
-    ".4byte frontier_df3_fontgrp_se_004_57FF94 + 0x48\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000003f0\n"
-    ".4byte 0x00000eac\n"
-    ".4byte 0x00003ef0\n"
-    ".4byte 0x0000eec0\n"
-    ".4byte 0x0000eef0\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x0003adbb\n"
-    ".4byte 0x0000efbb\n"
-    ".4byte 0x0000efbb\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x00000c30\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_004_57FF94 + 0xd8\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x00000fb0\n"
-    ".4byte 0x00003aac\n"
-    ".4byte 0x0000cfb0\n"
-    ".4byte 0x0003b3ac\n"
-    ".4byte 0x0003b3bb\n"
-    ".4byte 0x0000c3bb\n"
-    ".4byte 0x0000c3bb\n"
-    ".4byte 0x0003b3ac\n"
-    ".4byte 0x00039fb0\n"
-    ".4byte 0x0000eab0\n"
-    ".4byte 0x00003fc0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_004_57FF94 + 0x2d0\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000c00\n"
-    ".4byte 0x00003b30\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x00003a6c\n"
-    ".4byte 0x0000ebac\n"
-    ".4byte 0x00039bec\n"
-    ".4byte 0x0003bb6b\n"
-    ".4byte 0x0003b6bb\n"
-    ".4byte 0x0003befb\n"
-    ".4byte 0x0003b3bb\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x00003030\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_004_57FF94 + 0xa20\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x00000fbc\n"
-    ".4byte 0x00003aab\n"
-    ".4byte 0x00000fbc\n"
-    ".4byte 0x00000fbb\n"
-    ".4byte 0x00003aa7\n"
-    ".4byte 0x0000cfbc\n"
-    ".4byte 0x0003b3b0\n"
-    ".4byte 0x00039fb0\n"
-    ".4byte 0x0000eac0\n"
-    ".4byte 0x00003f00\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_008_582A54 + 0x288\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000c30\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x0000eaec\n"
-    ".4byte 0x00039fac\n"
-    ".4byte 0x0003b36b\n"
-    ".4byte 0x0003bfbc\n"
-    ".4byte 0x0000ebb0\n"
-    ".4byte 0x00003db0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_009_582F1C + 0x10e0\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000c00\n"
-    ".4byte 0x00003b0c\n"
-    ".4byte 0x00003b3b\n"
-    ".4byte 0x0000eafb\n"
-    ".4byte 0x0003bbbb\n"
-    ".4byte 0x0003bb6b\n"
-    ".4byte 0x0003bbeb\n"
-    ".4byte 0x00039b3b\n"
-    ".4byte 0x0000eafb\n"
-    ".4byte 0x00003b0c\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_007_581A04 + 0xab0\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x0000fec0\n"
-    ".4byte 0x0003aac0\n"
-    ".4byte 0x0000fec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ef0\n"
-    ".4byte 0x00003aac\n"
-    ".4byte 0x0000eefb\n"
-    ".4byte 0x0003befb\n"
-    ".4byte 0x0003c3ac\n"
-    ".4byte 0x000000f0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0x288\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000f0\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x00000e7c\n"
-    ".4byte 0x000003fb\n"
-    ".4byte 0x00000ffb\n"
-    ".4byte 0x00003abb\n"
-    ".4byte 0x0000e7eb\n"
-    ".4byte 0x0000ec3b\n"
-    ".4byte 0x0000ec0c\n"
-    ".4byte 0x00003bc0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x000003c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_004_57FF94 + 0x630\n"
-    ".4byte 0x00000682\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000ecc\n"
-    ".4byte 0x00003b3b\n"
-    ".4byte 0x00003b3b\n"
-    ".4byte 0x00003b3b\n"
-    ".4byte 0x00003b3b\n"
-    ".4byte 0x00003be7\n"
-    ".4byte 0x00003b3c\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00000ef0\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000000f0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_006_57E4DC + 0x2d0\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000ff0\n"
-    ".4byte 0x00003aac\n"
-    ".4byte 0x00000ef0\n"
-    ".4byte 0x00000fb0\n"
-    ".4byte 0x00003a9c\n"
-    ".4byte 0x0000e7ec\n"
-    ".4byte 0x0000effb\n"
-    ".4byte 0x0000eebf\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x000003c0\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap1, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_001_57B23C\n"
-    "frontier_df4_uistuff_001_57B23C:\n"
-    ".4byte frontier_df3_fontgrp_se_005_580B1C + 0x510\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000ecc\n"
-    ".4byte 0x00003abb\n"
-    ".4byte 0x0000eeeb\n"
-    ".4byte 0x0000eefb\n"
-    ".4byte 0x00003abc\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_006_57E4DC + 0x90\n"
-    ".4byte 0x00000682\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x00000fb0\n"
-    ".4byte 0x00003ab0\n"
-    ".4byte 0x00000fb0\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x00000ebb\n"
-    ".4byte 0x00003b67\n"
-    ".4byte 0x00003cfc\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_335\n"
-    ".4byte 0x00000783\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003ffc\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x0000effc\n"
-    ".4byte 0x0000ecc0\n"
-    ".4byte 0x00003bb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x00000030\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_337\n"
-    ".4byte 0x00000783\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003000\n"
-    ".4byte 0x0000ec00\n"
-    ".4byte 0x0000e700\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eec\n"
-    ".4byte 0x00000efb\n"
-    ".4byte 0x00000ecf\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_339\n"
-    ".4byte 0x00000783\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x00003fbc\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x0000effb\n"
-    ".4byte 0x0000ec3b\n"
-    ".4byte 0x0000ec3b\n"
-    ".4byte 0x0000ec0c\n"
-    ".4byte 0x0000db00\n"
-    ".4byte 0x000039c0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x000003c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_341\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003ff0\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x00003ef0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x0000fefc\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0000fffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_333\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000c00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x0000fbfc\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0000fafc\n"
-    ".4byte 0x00003ac0\n"
-    ".4byte 0x000039b0\n"
-    ".4byte 0x00003bb0\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x00003b3b\n"
-    ".4byte 0x00003b0f\n"
-    ".4byte 0x00000c00\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_005_580B1C + 0x1f8\n"
-    ".4byte 0x00000783\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x00003fbc\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x0000efbc\n"
-    ".4byte 0x0000efb0\n"
-    ".4byte 0x0000ef9c\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x0000effb\n"
-    ".4byte 0x00003afb\n"
-    ".4byte 0x00000f0c\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_007_581A04 + 0x828\n"
-    ".4byte 0x00000783\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x00000fbc\n"
-    ".4byte 0x00003aab\n"
-    ".4byte 0x00000fbc\n"
-    ".4byte 0x00003dbc\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x00003efc\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_003_57FD0C + 0x1f8\n"
-    ".4byte 0x00000783\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x0000ffb0\n"
-    ".4byte 0x0000ea9c\n"
-    ".4byte 0x0000ef6c\n"
-    ".4byte 0x0000ecdb\n"
-    ".4byte 0x0000ec3b\n"
-    ".4byte 0x00003b0f\n"
-    ".4byte 0x000039c0\n"
-    ".4byte 0x00000e70\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000000f0\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_324\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000030\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x0000ffec\n"
-    ".4byte 0x0003aaac\n"
-    ".4byte 0x0000fbdb\n"
-    ".4byte 0x00003b3b\n"
-    ".4byte 0x00003b3b\n"
-    ".4byte 0x00003b0c\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_326\n"
-    ".4byte 0x00000683\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000ffc\n"
-    ".4byte 0x00003aab\n"
-    ".4byte 0x00003bfc\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003bfc\n"
-    ".4byte 0x00003aab\n"
-    ".4byte 0x00000ffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_328\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000c30\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x0000fbec\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0000fbec\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x00003b30\n"
-    ".4byte 0x000039c0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_330\n"
-    ".4byte 0x00000783\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000f\n"
-    ".4byte 0x0000003b\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x0000303f\n"
-    ".4byte 0x0000ec3b\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x00003b30\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000003bc\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x0000003f\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_332\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003ff0\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x0000eff0\n"
-    ".4byte 0x0000ec00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000036c0\n"
-    ".4byte 0x00003bb0\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x0003b03b\n"
-    ".4byte 0x0003c00f\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0x480\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x0000ffb0\n"
-    ".4byte 0x0003aabc\n"
-    ".4byte 0x0003bfab\n"
-    ".4byte 0x0000efbc\n"
-    ".4byte 0x00003bb0\n"
-    ".4byte 0x00000fb0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x0000ffb0\n"
-    ".4byte 0x0003aac0\n"
-    ".4byte 0x0000ff00\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_009_582F1C + 0x1dd0\n"
-    ".4byte 0x00000783\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003000\n"
-    ".4byte 0x0000ec0f\n"
-    ".4byte 0x0000ec3b\n"
-    ".4byte 0x0000ece7\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x0000ec30\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_345\n"
-    ".4byte 0x00000783\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x00003fb0\n"
-    ".4byte 0x0000eab0\n"
-    ".4byte 0x0000efb0\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x0000efbb\n"
-    ".4byte 0x0000eecf\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00000ef0\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000000f0\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap2, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_002_57BF74\n"
-    "frontier_df4_uistuff_002_57BF74:\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0x558\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000cc00\n"
-    ".4byte 0x0003bbc0\n"
-    ".4byte 0x0003bbb0\n"
-    ".4byte 0x0000ffbc\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x0000efbc\n"
-    ".4byte 0x0000efb0\n"
-    ".4byte 0x0000ef9c\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x0000effb\n"
-    ".4byte 0x00003afb\n"
-    ".4byte 0x00000f0c\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_007_581A04 + 0x5a0\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000cc00\n"
-    ".4byte 0x0003bbc0\n"
-    ".4byte 0x0003bbb0\n"
-    ".4byte 0x0000cfbc\n"
-    ".4byte 0x00003aab\n"
-    ".4byte 0x00000fbc\n"
-    ".4byte 0x00003dbc\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x00003efc\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_323\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000cc00\n"
-    ".4byte 0x0003bbc0\n"
-    ".4byte 0x0003bbb0\n"
-    ".4byte 0x0000ffb0\n"
-    ".4byte 0x0000ea9c\n"
-    ".4byte 0x0000ef6c\n"
-    ".4byte 0x0000ecdb\n"
-    ".4byte 0x0000ec3b\n"
-    ".4byte 0x00003b0f\n"
-    ".4byte 0x000039c0\n"
-    ".4byte 0x00000e70\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000000f0\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_325\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000cc00\n"
-    ".4byte 0x0003bb30\n"
-    ".4byte 0x0003bbec\n"
-    ".4byte 0x0000ffec\n"
-    ".4byte 0x0003aaac\n"
-    ".4byte 0x0000fbdb\n"
-    ".4byte 0x00003b3b\n"
-    ".4byte 0x00003b3b\n"
-    ".4byte 0x00003b0c\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_327\n"
-    ".4byte 0x00000783\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003300\n"
-    ".4byte 0x0000eec0\n"
-    ".4byte 0x0000eefc\n"
-    ".4byte 0x00003bab\n"
-    ".4byte 0x00003bfc\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003bfc\n"
-    ".4byte 0x00003aab\n"
-    ".4byte 0x00000ffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_329\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000cc00\n"
-    ".4byte 0x0003bb30\n"
-    ".4byte 0x0003bbec\n"
-    ".4byte 0x0000fbec\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0000fbec\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x00003b30\n"
-    ".4byte 0x000039c0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_331\n"
-    ".4byte 0x00000783\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003300\n"
-    ".4byte 0x0000eecc\n"
-    ".4byte 0x0000eefb\n"
-    ".4byte 0x000033ec\n"
-    ".4byte 0x0000303c\n"
-    ".4byte 0x0000ec3b\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x00003b30\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000003bc\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x0000003f\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_007_581A04 + 0xcf0\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000cc00\n"
-    ".4byte 0x0003bb00\n"
-    ".4byte 0x0003bbf0\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x0000e7f0\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000036c0\n"
-    ".4byte 0x00003bb0\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x0003b03b\n"
-    ".4byte 0x0003c00f\n"
-    ".4byte 0x00000000\n"
-    ".4byte gFontgrp_343\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000cc00\n"
-    ".4byte 0x0003bbc0\n"
-    ".4byte 0x0003bbb0\n"
-    ".4byte 0x0000ffb0\n"
-    ".4byte 0x0003aabc\n"
-    ".4byte 0x0003bfab\n"
-    ".4byte 0x0000efbc\n"
-    ".4byte 0x00003bb0\n"
-    ".4byte 0x00000fb0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x0000ffb0\n"
-    ".4byte 0x0003aac0\n"
-    ".4byte 0x0000ff00\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_007_581A04 + 0xf30\n"
-    ".4byte 0x00000883\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000cc00\n"
-    ".4byte 0x0003bb00\n"
-    ".4byte 0x0003bb0c\n"
-    ".4byte 0x0000fc3b\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x0000ec30\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap3, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_003_57CC64\n"
-    "frontier_df4_uistuff_003_57CC64:\n"
-    ".4byte frontier_df3_fontgrp_se_007_581A04 + 0x5e8\n"
-    ".4byte 0x00000681\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000030\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_005_580B1C + 0x438\n"
-    ".4byte 0x00000781\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000003f0\n"
-    ".4byte 0x00000d9c\n"
-    ".4byte 0x00000eec\n"
-    ".4byte 0x00000d9c\n"
-    ".4byte 0x000003f0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_005_580B1C + 0x828\n"
-    ".4byte 0x00000681\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000f0\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x00000030\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x00000030\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_005_580B1C + 0x120\n"
-    ".4byte 0x00000781\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000003c0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x0000ec3b\n"
-    ".4byte 0x0000ec3b\n"
-    ".4byte 0x00003b0c\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0x48\n"
-    ".4byte 0x00000781\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_005_57DFCC + 0x90\n"
-    ".4byte 0x00000681\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000ff0\n"
-    ".4byte 0x00000eac\n"
-    ".4byte 0x000003ec\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_005_57DFCC + 0xd8\n"
-    ".4byte 0x00000681\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000f00\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ef0\n"
-    ".4byte 0x00000eac\n"
-    ".4byte 0x000003fc\n"
-    ".4byte 0x00000000\n"
-    ".4byte data_0857DCB4 + 0x48\n"
-    ".4byte 0x00000781\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000c00\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00000c00\n"
-    ".4byte 0x00000000\n"
-    ".4byte data_0857DCB4 + 0x90\n"
-    ".4byte 0x00000681\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000030\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x00000030\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap4, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_004_57CF7C\n"
-    "frontier_df4_uistuff_004_57CF7C:\n"
-    ".4byte frontier_df3_fontgrp_se_009_582F1C + 0x5970\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000ffc\n"
-    ".4byte 0x00003aab\n"
-    ".4byte 0x00003afb\n"
-    ".4byte 0x00003afc\n"
-    ".4byte 0x00003aab\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x0000eeab\n"
-    ".4byte 0x0000f3fc\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0x1f8\n"
-    ".4byte 0x00000682\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000003eb\n"
-    ".4byte 0x00000eab\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00000eab\n"
-    ".4byte 0x000003ff\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_005_57DFCC + 0x1f8\n"
-    ".4byte 0x00000682\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000003f0\n"
-    ".4byte 0x00000eac\n"
-    ".4byte 0x00003beb\n"
-    ".4byte 0x00003ceb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x00003ceb\n"
-    ".4byte 0x00003beb\n"
-    ".4byte 0x00000eac\n"
-    ".4byte 0x000003f0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_005_57DFCC + 0x240\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000f00\n"
-    ".4byte 0x00003ac0\n"
-    ".4byte 0x00003ac0\n"
-    ".4byte 0x00003ac0\n"
-    ".4byte 0x00003af0\n"
-    ".4byte 0x00003aac\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x0000eeac\n"
-    ".4byte 0x0000f3f0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_007_581A04 + 0x870\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003fc0\n"
-    ".4byte 0x0000eab0\n"
-    ".4byte 0x0000ebac\n"
-    ".4byte 0x0000ebac\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x00003fac\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x0000ffac\n"
-    ".4byte 0x0000eab0\n"
-    ".4byte 0x00003fc0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_005_580B1C + 0x90\n"
-    ".4byte 0x00000682\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000fc0\n"
-    ".4byte 0x00003ab0\n"
-    ".4byte 0x00000fac\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x00000eab\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000000f0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_002_57FACC + 0xd8\n"
-    ".4byte 0x00000682\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003c00\n"
-    ".4byte 0x00003bf0\n"
-    ".4byte 0x000036ac\n"
-    ".4byte 0x00000eeb\n"
-    ".4byte 0x00000eeb\n"
-    ".4byte 0x00000eab\n"
-    ".4byte 0x00000fec\n"
-    ".4byte 0x00003aab\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00000eab\n"
-    ".4byte 0x000003fc\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0x168\n"
-    ".4byte 0x00000682\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000003eb\n"
-    ".4byte 0x00000eab\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x00000f3c\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_009_582F1C + 0xe10\n"
-    ".4byte 0x00000682\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_009_582F1C + 0x90\n"
-    ".4byte 0x00000682\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000003c0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x000003c0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000ebf\n"
-    ".4byte 0x00000ebb\n"
-    ".4byte 0x000003ab\n"
-    ".4byte 0x000000fc\n"
-    ".4byte frontier_df3_fontgrp_se_009_582F1C + 0x3888\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x00003ceb\n"
-    ".4byte 0x00003beb\n"
-    ".4byte 0x00000eeb\n"
-    ".4byte 0x000003ab\n"
-    ".4byte 0x00000eab\n"
-    ".4byte 0x00003aeb\n"
-    ".4byte 0x0000dbeb\n"
-    ".4byte 0x0000eceb\n"
-    ".4byte 0x0000303c\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_001_57F604 + 0x438\n"
-    ".4byte 0x00000682\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x000000eb\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_009_582F1C + 0x3cc0\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000fcfc\n"
-    ".4byte 0x0003abab\n"
-    ".4byte 0x0003aaac\n"
-    ".4byte 0x0003bbac\n"
-    ".4byte 0x0003bbac\n"
-    ".4byte 0x0003bbac\n"
-    ".4byte 0x0003bbac\n"
-    ".4byte 0x0003bbac\n"
-    ".4byte 0x000ebbac\n"
-    ".4byte 0x0003ccf0\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap5, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_005_57DFCC\n"
-    "frontier_df4_uistuff_005_57DFCC:\n"
-    ".4byte frontier_df3_fontgrp_se_001_57F604 + 0x120\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003ffc\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x0000eebb\n"
-    ".4byte 0x00003ebc\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00003aac\n"
-    ".4byte 0x00000ff0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_009_582F1C + 0x4c38\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000fcfc\n"
-    ".4byte 0x0003abab\n"
-    ".4byte 0x0000efac\n"
-    ".4byte 0x0000efac\n"
-    ".4byte 0x0000efac\n"
-    ".4byte 0x0000efac\n"
-    ".4byte 0x0000efac\n"
-    ".4byte 0x0000efac\n"
-    ".4byte 0x0000efac\n"
-    ".4byte 0x0000eeac\n"
-    ".4byte 0x00003ab0\n"
-    ".4byte 0x00000fc0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_009_582F1C + 0x28c8\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000f3fc\n"
-    ".4byte 0x0003aeab\n"
-    ".4byte 0x0003b3ac\n"
-    ".4byte 0x0003b3ac\n"
-    ".4byte 0x0003b3ac\n"
-    ".4byte 0x0003b3ac\n"
-    ".4byte 0x0003b3ac\n"
-    ".4byte 0x0000eeac\n"
-    ".4byte 0x0000eeb0\n"
-    ".4byte 0x00003ab0\n"
-    ".4byte 0x00003ab0\n"
-    ".4byte 0x00000fc0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_005_580B1C + 0x8b8\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000cf3c\n"
-    ".4byte 0x0003baeb\n"
-    ".4byte 0x0003baeb\n"
-    ".4byte 0x0003baeb\n"
-    ".4byte 0x0003baeb\n"
-    ".4byte 0x0003baeb\n"
-    ".4byte 0x0003baeb\n"
-    ".4byte 0x0003baeb\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0000ebac\n"
-    ".4byte 0x0000efb0\n"
-    ".4byte 0x000030c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_005_580B1C + 0x3a8\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000fcff\n"
-    ".4byte 0x0003abaa\n"
-    ".4byte 0x0000ecef\n"
-    ".4byte 0x00003bac\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00003aec\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x0000eb3b\n"
-    ".4byte 0x0003aaea\n"
-    ".4byte 0x0000ff3f\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_005_580B1C + 0x5e8\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0003f3fc\n"
-    ".4byte 0x000eaeab\n"
-    ".4byte 0x0003b3ac\n"
-    ".4byte 0x0003b3ac\n"
-    ".4byte 0x0000efb0\n"
-    ".4byte 0x0000eeb0\n"
-    ".4byte 0x00003ac0\n"
-    ".4byte 0x00003ac0\n"
-    ".4byte 0x00003ac0\n"
-    ".4byte 0x00003ac0\n"
-    ".4byte 0x0000eab0\n"
-    ".4byte 0x00003fc0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_004_57FF94 + 0x5e8\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003ffc\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x0000ebfb\n"
-    ".4byte 0x00003acc\n"
-    ".4byte 0x00003ac0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x000003ac\n"
-    ".4byte 0x000033ac\n"
-    ".4byte 0x0000efeb\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x00003ffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_001_57F604 + 0xd8\n"
-    ".4byte 0x00000d81\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x03f3f03c\n"
-    ".4byte 0x02aeaceb\n"
-    ".4byte 0x02b3acec\n"
-    ".4byte 0x02b3abac\n"
-    ".4byte 0x02b3abac\n"
-    ".4byte 0x02b3aaac\n"
-    ".4byte 0x02b3aeec\n"
-    ".4byte 0x02b3afec\n"
-    ".4byte 0x02b3acec\n"
-    ".4byte 0x02b3acec\n"
-    ".4byte 0x02aeabab\n"
-    ".4byte 0x03f3fcfc\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_009_582F1C + 0xa68\n"
-    ".4byte 0x00000b81\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x003ffcfc\n"
-    ".4byte 0x00daabab\n"
-    ".4byte 0x00efaceb\n"
-    ".4byte 0x00efaceb\n"
-    ".4byte 0x00efaceb\n"
-    ".4byte 0x00efacea\n"
-    ".4byte 0x00daaceb\n"
-    ".4byte 0x003faceb\n"
-    ".4byte 0x0003aceb\n"
-    ".4byte 0x0003aceb\n"
-    ".4byte 0x000eabab\n"
-    ".4byte 0x0003fcfc\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_007_581A04 + 0x4c8\n"
-    ".4byte 0x00000881\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003030\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x0003abab\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x00003ab0\n"
-    ".4byte 0x00003ab0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0x9d8\n"
-    ".4byte 0x00000783\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003ffc\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x0000efff\n"
-    ".4byte 0x0000effc\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x00003bfc\n"
-    ".4byte 0x00003b00\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000000ec\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap6, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_006_57E4DC\n"
-    "frontier_df4_uistuff_006_57E4DC:\n"
-    ".4byte frontier_df3_fontgrp_se_009_582F1C\n"
-    ".4byte 0x00000889\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000039b0\n"
-    ".4byte 0x0000efec\n"
-    ".4byte 0x0003bffb\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x0000fffc\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0000fdbc\n"
-    ".4byte 0x0000ef9c\n"
-    ".4byte 0x00036fec\n"
-    ".4byte 0x0003baab\n"
-    ".4byte 0x0003cfff\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0x708\n"
-    ".4byte 0x00000991\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000ccfc\n"
-    ".4byte 0x0003bbab\n"
-    ".4byte 0x000e7bbb\n"
-    ".4byte 0x0003fbbb\n"
-    ".4byte 0x000eaaab\n"
-    ".4byte 0x0003e7bb\n"
-    ".4byte 0x000eefab\n"
-    ".4byte 0x000dbbbb\n"
-    ".4byte 0x0003aabb\n"
-    ".4byte 0x0003bbab\n"
-    ".4byte 0x000e6bec\n"
-    ".4byte 0x000efbbb\n"
-    ".4byte 0x000f0ccf\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_004_57FF94 + 0x900\n"
-    ".4byte 0x00000891\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x0000fefc\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0000fefc\n"
-    ".4byte 0x00003670\n"
-    ".4byte 0x000039b0\n"
-    ".4byte 0x00003bb0\n"
-    ".4byte 0x0000e76c\n"
-    ".4byte 0x0000ecec\n"
-    ".4byte 0x0003b03b\n"
-    ".4byte 0x0003c00f\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_004_57FF94 + 0x948\n"
-    ".4byte 0x00000792\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003ffc\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x0000efbb\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x0000efbb\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x00003fbc\n"
-    ".4byte 0x0000eaab\n"
-    ".4byte 0x0000efbc\n"
-    ".4byte 0x0000efb0\n"
-    ".4byte 0x0000ef6c\n"
-    ".4byte 0x0000dbdb\n"
-    ".4byte 0x00003c3f\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0x360\n"
-    ".4byte 0x0000088c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003ff0\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x00003ff0\n"
-    ".4byte 0x0000fffc\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0000fbbc\n"
-    ".4byte 0x00003bb0\n"
-    ".4byte 0x00003bb0\n"
-    ".4byte 0x00003b6c\n"
-    ".4byte 0x0003fbec\n"
-    ".4byte 0x0003ac3b\n"
-    ".4byte 0x0000f00f\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0xc18\n"
-    ".4byte 0x0000088b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000003c\n"
-    ".4byte 0x00003fec\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x00003fec\n"
-    ".4byte 0x00003abb\n"
-    ".4byte 0x00003fff\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x0000eff0\n"
-    ".4byte 0x0000eeec\n"
-    ".4byte 0x0000efb0\n"
-    ".4byte 0x0000ee6c\n"
-    ".4byte 0x00039efb\n"
-    ".4byte 0x0003f30f\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_003_57FD0C + 0x90\n"
-    ".4byte 0x0000088f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x0000cecc\n"
-    ".4byte 0x0003befb\n"
-    ".4byte 0x0003befb\n"
-    ".4byte 0x0003befb\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0003feff\n"
-    ".4byte 0x0000cecc\n"
-    ".4byte 0x0003befb\n"
-    ".4byte 0x0003befb\n"
-    ".4byte 0x0003befb\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0003ffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_004_57FF94 + 0xab0\n"
-    ".4byte 0x0000088f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000cc30\n"
-    ".4byte 0x0003bbec\n"
-    ".4byte 0x0003bbef\n"
-    ".4byte 0x0000fbeb\n"
-    ".4byte 0x0003aaac\n"
-    ".4byte 0x0000fbec\n"
-    ".4byte 0x00003bec\n"
-    ".4byte 0x0000d9e7\n"
-    ".4byte 0x0000e6eb\n"
-    ".4byte 0x00036e6b\n"
-    ".4byte 0x00039dac\n"
-    ".4byte 0x0003b3ac\n"
-    ".4byte 0x0000c0f0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_005_580B1C + 0x750\n"
-    ".4byte 0x0000088d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x000039b0\n"
-    ".4byte 0x0000efec\n"
-    ".4byte 0x0003bffb\n"
-    ".4byte 0x0003eaaf\n"
-    ".4byte 0x0000fffc\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0003bffc\n"
-    ".4byte 0x0000ec00\n"
-    ".4byte 0x00003bc0\n"
-    ".4byte 0x00000eb0\n"
-    ".4byte 0x000003c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0x3f0\n"
-    ".4byte 0x0000088d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000f00\n"
-    ".4byte 0x00003ef0\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x0000efec\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x0000efec\n"
-    ".4byte 0x0000d55c\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x00003ef0\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x0000fefc\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0003ffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0xbd0\n"
-    ".4byte 0x00000892\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x0000fefc\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0003fbbf\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0003befb\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0003aeeb\n"
-    ".4byte 0x0003eeef\n"
-    ".4byte 0x0000eeec\n"
-    ".4byte 0x0000daec\n"
-    ".4byte 0x00003ef0\n"
-    ".4byte 0x00000300\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df3_fontgrp_se_000_57E884 + 0x5e8\n"
-    ".4byte 0x00000890\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000003ff\n"
-    ".4byte 0x0003ffab\n"
-    ".4byte 0x0003abbb\n"
-    ".4byte 0x0003bbab\n"
-    ".4byte 0x0003bbbb\n"
-    ".4byte 0x0003abab\n"
-    ".4byte 0x0000ffbc\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0000fefc\n"
-    ".4byte 0x0000eaac\n"
-    ".4byte 0x0000fefc\n"
-    ".4byte 0x0003aaab\n"
-    ".4byte 0x0003ffff\n"
-    ".4byte 0x00000000\n"
-);
+u32 frontier_df4_uistuff_000_57A504[] __attribute__((section(".data.frontier_df4_uistuff.gap0"))) = {
+    (u32)&frontier_df3_fontgrp_se_004_57FF94 + 0x48,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000003F0,
+    0x00000EAC,
+    0x00003EF0,
+    0x0000EEC0,
+    0x0000EEF0,
+    0x0000EAAC,
+    0x0003ADBB,
+    0x0000EFBB,
+    0x0000EFBB,
+    0x00003BEC,
+    0x00000C30,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_004_57FF94 + 0xd8,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000C0,
+    0x00000FB0,
+    0x00003AAC,
+    0x0000CFB0,
+    0x0003B3AC,
+    0x0003B3BB,
+    0x0000C3BB,
+    0x0000C3BB,
+    0x0003B3AC,
+    0x00039FB0,
+    0x0000EAB0,
+    0x00003FC0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_004_57FF94 + 0x2d0,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000C00,
+    0x00003B30,
+    0x00003BEC,
+    0x00003A6C,
+    0x0000EBAC,
+    0x00039BEC,
+    0x0003BB6B,
+    0x0003B6BB,
+    0x0003BEFB,
+    0x0003B3BB,
+    0x0000ECEC,
+    0x00003030,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_004_57FF94 + 0xa20,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000C0,
+    0x000003B0,
+    0x00000FBC,
+    0x00003AAB,
+    0x00000FBC,
+    0x00000FBB,
+    0x00003AA7,
+    0x0000CFBC,
+    0x0003B3B0,
+    0x00039FB0,
+    0x0000EAC0,
+    0x00003F00,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_008_582A54 + 0x288,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000C30,
+    0x00003BEC,
+    0x00003BEC,
+    0x0000EAEC,
+    0x00039FAC,
+    0x0003B36B,
+    0x0003BFBC,
+    0x0000EBB0,
+    0x00003DB0,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000300,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_009_582F1C + 0x10e0,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000C00,
+    0x00003B0C,
+    0x00003B3B,
+    0x0000EAFB,
+    0x0003BBBB,
+    0x0003BB6B,
+    0x0003BBEB,
+    0x00039B3B,
+    0x0000EAFB,
+    0x00003B0C,
+    0x00000EC0,
+    0x00000300,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_007_581A04 + 0xab0,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000300,
+    0x00000EC0,
+    0x0000FEC0,
+    0x0003AAC0,
+    0x0000FEC0,
+    0x00000EC0,
+    0x00000EF0,
+    0x00003AAC,
+    0x0000EEFB,
+    0x0003BEFB,
+    0x0003C3AC,
+    0x000000F0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0x288,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000F0,
+    0x000003AC,
+    0x00000E7C,
+    0x000003FB,
+    0x00000FFB,
+    0x00003ABB,
+    0x0000E7EB,
+    0x0000EC3B,
+    0x0000EC0C,
+    0x00003BC0,
+    0x00000EB0,
+    0x000003C0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_004_57FF94 + 0x630,
+    0x00000682,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000300,
+    0x00000ECC,
+    0x00003B3B,
+    0x00003B3B,
+    0x00003B3B,
+    0x00003B3B,
+    0x00003BE7,
+    0x00003B3C,
+    0x00003B00,
+    0x00000EF0,
+    0x000003AC,
+    0x000000F0,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_006_57E4DC + 0x2d0,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000FF0,
+    0x00003AAC,
+    0x00000EF0,
+    0x00000FB0,
+    0x00003A9C,
+    0x0000E7EC,
+    0x0000EFFB,
+    0x0000EEBF,
+    0x00003BEC,
+    0x00000EB0,
+    0x000003C0,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_001_57B23C[] __attribute__((section(".data.frontier_df4_uistuff.gap1"))) = {
+    (u32)&frontier_df3_fontgrp_se_005_580B1C + 0x510,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000300,
+    0x00000ECC,
+    0x00003ABB,
+    0x0000EEEB,
+    0x0000EEFB,
+    0x00003ABC,
+    0x00000EC0,
+    0x00000300,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_006_57E4DC + 0x90,
+    0x00000682,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000C0,
+    0x00000FB0,
+    0x00003AB0,
+    0x00000FB0,
+    0x000003AC,
+    0x00000EBB,
+    0x00003B67,
+    0x00003CFC,
+    0x00000000,
+    (u32)&gFontgrp_335,
+    0x00000783,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00003FFC,
+    0x0000EAAB,
+    0x0000EFFC,
+    0x0000ECC0,
+    0x00003BB0,
+    0x00000EB0,
+    0x000003B0,
+    0x000003B0,
+    0x000003B0,
+    0x000003B0,
+    0x000000EC,
+    0x00000030,
+    0x00000000,
+    (u32)&gFontgrp_337,
+    0x00000783,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00003000,
+    0x0000EC00,
+    0x0000E700,
+    0x00003B00,
+    0x00000EC0,
+    0x00000EB0,
+    0x00000EEC,
+    0x00000EFB,
+    0x00000ECF,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000300,
+    0x00000000,
+    (u32)&gFontgrp_339,
+    0x00000783,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000C0,
+    0x000003B0,
+    0x00003FBC,
+    0x0000EAAB,
+    0x0000EFFB,
+    0x0000EC3B,
+    0x0000EC3B,
+    0x0000EC0C,
+    0x0000DB00,
+    0x000039C0,
+    0x00000EB0,
+    0x000003C0,
+    0x00000000,
+    (u32)&gFontgrp_341,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00003FF0,
+    0x0000EAAC,
+    0x00003EF0,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000EC0,
+    0x0000FEFC,
+    0x0003AAAB,
+    0x0000FFFC,
+    0x00000000,
+    (u32)&gFontgrp_333,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000C00,
+    0x00003B00,
+    0x0000FBFC,
+    0x0003AAAB,
+    0x0000FAFC,
+    0x00003AC0,
+    0x000039B0,
+    0x00003BB0,
+    0x00003BEC,
+    0x00003B3B,
+    0x00003B0F,
+    0x00000C00,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_005_580B1C + 0x1f8,
+    0x00000783,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000C0,
+    0x000003B0,
+    0x00003FBC,
+    0x0000EAAB,
+    0x0000EFBC,
+    0x0000EFB0,
+    0x0000EF9C,
+    0x0000ECEC,
+    0x0000ECEC,
+    0x0000EFFB,
+    0x00003AFB,
+    0x00000F0C,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_007_581A04 + 0x828,
+    0x00000783,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000C0,
+    0x000003B0,
+    0x00000FBC,
+    0x00003AAB,
+    0x00000FBC,
+    0x00003DBC,
+    0x0000EAAB,
+    0x00003EFC,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000300,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_003_57FD0C + 0x1f8,
+    0x00000783,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000C0,
+    0x000003B0,
+    0x0000FFB0,
+    0x0000EA9C,
+    0x0000EF6C,
+    0x0000ECDB,
+    0x0000EC3B,
+    0x00003B0F,
+    0x000039C0,
+    0x00000E70,
+    0x000003AC,
+    0x000000F0,
+    0x00000000,
+    (u32)&gFontgrp_324,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000030,
+    0x000000EC,
+    0x0000FFEC,
+    0x0003AAAC,
+    0x0000FBDB,
+    0x00003B3B,
+    0x00003B3B,
+    0x00003B0C,
+    0x00000EC0,
+    0x00000EC0,
+    0x000003B0,
+    0x000000C0,
+    0x00000000,
+    (u32)&gFontgrp_326,
+    0x00000683,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000FFC,
+    0x00003AAB,
+    0x00003BFC,
+    0x00003B00,
+    0x00003B00,
+    0x00003B00,
+    0x00003B00,
+    0x00003B00,
+    0x00003BFC,
+    0x00003AAB,
+    0x00000FFC,
+    0x00000000,
+    (u32)&gFontgrp_328,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000C30,
+    0x00003BEC,
+    0x0000FBEC,
+    0x0003AAAB,
+    0x0000FBEC,
+    0x00003BEC,
+    0x00003BEC,
+    0x00003B30,
+    0x000039C0,
+    0x00000EC0,
+    0x000003B0,
+    0x000000C0,
+    0x00000000,
+    (u32)&gFontgrp_330,
+    0x00000783,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000000F,
+    0x0000003B,
+    0x000000EC,
+    0x0000303F,
+    0x0000EC3B,
+    0x0000ECEC,
+    0x00003B30,
+    0x00003B00,
+    0x00000EC0,
+    0x000003BC,
+    0x000000EB,
+    0x0000003F,
+    0x00000000,
+    (u32)&gFontgrp_332,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00003FF0,
+    0x0000EAAC,
+    0x0000EFF0,
+    0x0000EC00,
+    0x00003B00,
+    0x00003B00,
+    0x00000EC0,
+    0x000036C0,
+    0x00003BB0,
+    0x0000ECEC,
+    0x0003B03B,
+    0x0003C00F,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0x480,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000C0,
+    0x000003B0,
+    0x0000FFB0,
+    0x0003AABC,
+    0x0003BFAB,
+    0x0000EFBC,
+    0x00003BB0,
+    0x00000FB0,
+    0x000003B0,
+    0x0000FFB0,
+    0x0003AAC0,
+    0x0000FF00,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_009_582F1C + 0x1dd0,
+    0x00000783,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00003000,
+    0x0000EC0F,
+    0x0000EC3B,
+    0x0000ECE7,
+    0x0000ECEC,
+    0x0000EC30,
+    0x00003B00,
+    0x00003B00,
+    0x00000EC0,
+    0x000003B0,
+    0x000000EC,
+    0x0000003C,
+    0x00000000,
+    (u32)&gFontgrp_345,
+    0x00000783,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000C0,
+    0x00003FB0,
+    0x0000EAB0,
+    0x0000EFB0,
+    0x0000ECEC,
+    0x0000EFBB,
+    0x0000EECF,
+    0x00003B00,
+    0x00003B00,
+    0x00000EF0,
+    0x000003AC,
+    0x000000F0,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_002_57BF74[] __attribute__((section(".data.frontier_df4_uistuff.gap2"))) = {
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0x558,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x0000CC00,
+    0x0003BBC0,
+    0x0003BBB0,
+    0x0000FFBC,
+    0x0000EAAB,
+    0x0000EFBC,
+    0x0000EFB0,
+    0x0000EF9C,
+    0x0000ECEC,
+    0x0000ECEC,
+    0x0000EFFB,
+    0x00003AFB,
+    0x00000F0C,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_007_581A04 + 0x5a0,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x0000CC00,
+    0x0003BBC0,
+    0x0003BBB0,
+    0x0000CFBC,
+    0x00003AAB,
+    0x00000FBC,
+    0x00003DBC,
+    0x0000EAAB,
+    0x00003EFC,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000300,
+    0x00000000,
+    (u32)&gFontgrp_323,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x0000CC00,
+    0x0003BBC0,
+    0x0003BBB0,
+    0x0000FFB0,
+    0x0000EA9C,
+    0x0000EF6C,
+    0x0000ECDB,
+    0x0000EC3B,
+    0x00003B0F,
+    0x000039C0,
+    0x00000E70,
+    0x000003AC,
+    0x000000F0,
+    0x00000000,
+    (u32)&gFontgrp_325,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x0000CC00,
+    0x0003BB30,
+    0x0003BBEC,
+    0x0000FFEC,
+    0x0003AAAC,
+    0x0000FBDB,
+    0x00003B3B,
+    0x00003B3B,
+    0x00003B0C,
+    0x00000EC0,
+    0x00000EC0,
+    0x000003B0,
+    0x000000C0,
+    0x00000000,
+    (u32)&gFontgrp_327,
+    0x00000783,
+    0x00000000,
+    0x00000000,
+    0x00003300,
+    0x0000EEC0,
+    0x0000EEFC,
+    0x00003BAB,
+    0x00003BFC,
+    0x00003B00,
+    0x00003B00,
+    0x00003B00,
+    0x00003B00,
+    0x00003B00,
+    0x00003BFC,
+    0x00003AAB,
+    0x00000FFC,
+    0x00000000,
+    (u32)&gFontgrp_329,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x0000CC00,
+    0x0003BB30,
+    0x0003BBEC,
+    0x0000FBEC,
+    0x0003AAAB,
+    0x0000FBEC,
+    0x00003BEC,
+    0x00003BEC,
+    0x00003B30,
+    0x000039C0,
+    0x00000EC0,
+    0x000003B0,
+    0x000000C0,
+    0x00000000,
+    (u32)&gFontgrp_331,
+    0x00000783,
+    0x00000000,
+    0x00000000,
+    0x00003300,
+    0x0000EECC,
+    0x0000EEFB,
+    0x000033EC,
+    0x0000303C,
+    0x0000EC3B,
+    0x0000ECEC,
+    0x00003B30,
+    0x00003B00,
+    0x00000EC0,
+    0x000003BC,
+    0x000000EB,
+    0x0000003F,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_007_581A04 + 0xcf0,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x0000CC00,
+    0x0003BB00,
+    0x0003BBF0,
+    0x0000EAAC,
+    0x0000E7F0,
+    0x00003B00,
+    0x00003B00,
+    0x00000EC0,
+    0x000036C0,
+    0x00003BB0,
+    0x0000ECEC,
+    0x0003B03B,
+    0x0003C00F,
+    0x00000000,
+    (u32)&gFontgrp_343,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x0000CC00,
+    0x0003BBC0,
+    0x0003BBB0,
+    0x0000FFB0,
+    0x0003AABC,
+    0x0003BFAB,
+    0x0000EFBC,
+    0x00003BB0,
+    0x00000FB0,
+    0x000003B0,
+    0x0000FFB0,
+    0x0003AAC0,
+    0x0000FF00,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_007_581A04 + 0xf30,
+    0x00000883,
+    0x00000000,
+    0x00000000,
+    0x0000CC00,
+    0x0003BB00,
+    0x0003BB0C,
+    0x0000FC3B,
+    0x0000ECEC,
+    0x0000ECEC,
+    0x0000EC30,
+    0x00003B00,
+    0x00003B00,
+    0x00000EC0,
+    0x000003B0,
+    0x000000EC,
+    0x0000003C,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_003_57CC64[] __attribute__((section(".data.frontier_df4_uistuff.gap3"))) = {
+    (u32)&frontier_df3_fontgrp_se_007_581A04 + 0x5e8,
+    0x00000681,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000030,
+    0x000000EC,
+    0x000003B0,
+    0x000000C0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_005_580B1C + 0x438,
+    0x00000781,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000003F0,
+    0x00000D9C,
+    0x00000EEC,
+    0x00000D9C,
+    0x000003F0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_005_580B1C + 0x828,
+    0x00000681,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000F0,
+    0x000003AC,
+    0x000003AC,
+    0x000003AC,
+    0x000000EC,
+    0x000000EC,
+    0x000000EC,
+    0x000000EC,
+    0x00000030,
+    0x000000EC,
+    0x000000EC,
+    0x00000030,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_005_580B1C + 0x120,
+    0x00000781,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000003C0,
+    0x00000EB0,
+    0x00003BEC,
+    0x0000EC3B,
+    0x0000EC3B,
+    0x00003B0C,
+    0x00000EC0,
+    0x000003B0,
+    0x000000C0,
+    0x000003B0,
+    0x000003B0,
+    0x000000C0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0x48,
+    0x00000781,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000C0,
+    0x000003B0,
+    0x000000C0,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_005_57DFCC + 0x90,
+    0x00000681,
+    0x00000000,
+    0x00000000,
+    0x00000FF0,
+    0x00000EAC,
+    0x000003EC,
+    0x000000EC,
+    0x000000EC,
+    0x0000003C,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_005_57DFCC + 0xd8,
+    0x00000681,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000F00,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000EF0,
+    0x00000EAC,
+    0x000003FC,
+    0x00000000,
+    (u32)&data_0857DCB4 + 0x48,
+    0x00000781,
+    0x00000000,
+    0x00000000,
+    0x00000C00,
+    0x00003B00,
+    0x00000EC0,
+    0x00000EC0,
+    0x000003B0,
+    0x000003B0,
+    0x000003B0,
+    0x000003B0,
+    0x000003B0,
+    0x00000EC0,
+    0x00000EC0,
+    0x00003B00,
+    0x00000C00,
+    0x00000000,
+    (u32)&data_0857DCB4 + 0x90,
+    0x00000681,
+    0x00000000,
+    0x00000000,
+    0x00000030,
+    0x000000EC,
+    0x000003B0,
+    0x000003B0,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000EC0,
+    0x00000EC0,
+    0x000003B0,
+    0x000003B0,
+    0x000000EC,
+    0x00000030,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_004_57CF7C[] __attribute__((section(".data.frontier_df4_uistuff.gap4"))) = {
+    (u32)&frontier_df3_fontgrp_se_009_582F1C + 0x5970,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000FFC,
+    0x00003AAB,
+    0x00003AFB,
+    0x00003AFC,
+    0x00003AAB,
+    0x00003AEB,
+    0x00003AEB,
+    0x00003AEB,
+    0x0000EEAB,
+    0x0000F3FC,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0x1f8,
+    0x00000682,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000003C,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000003EB,
+    0x00000EAB,
+    0x00003AEB,
+    0x00003AEB,
+    0x00003AEB,
+    0x00003AEB,
+    0x00000EAB,
+    0x000003FF,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_005_57DFCC + 0x1f8,
+    0x00000682,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000003F0,
+    0x00000EAC,
+    0x00003BEB,
+    0x00003CEB,
+    0x000000EB,
+    0x000000EB,
+    0x00003CEB,
+    0x00003BEB,
+    0x00000EAC,
+    0x000003F0,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_005_57DFCC + 0x240,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000F00,
+    0x00003AC0,
+    0x00003AC0,
+    0x00003AC0,
+    0x00003AF0,
+    0x00003AAC,
+    0x00003AEB,
+    0x00003AEB,
+    0x00003AEB,
+    0x00003AEB,
+    0x0000EEAC,
+    0x0000F3F0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_007_581A04 + 0x870,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00003FC0,
+    0x0000EAB0,
+    0x0000EBAC,
+    0x0000EBAC,
+    0x0000EAAC,
+    0x00003FAC,
+    0x000003AC,
+    0x0000FFAC,
+    0x0000EAB0,
+    0x00003FC0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_005_580B1C + 0x90,
+    0x00000682,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000FC0,
+    0x00003AB0,
+    0x00000FAC,
+    0x000003AC,
+    0x000003AC,
+    0x00000EAB,
+    0x000003AC,
+    0x000003AC,
+    0x000003AC,
+    0x000003AC,
+    0x000003AC,
+    0x000000F0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_002_57FACC + 0xd8,
+    0x00000682,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00003C00,
+    0x00003BF0,
+    0x000036AC,
+    0x00000EEB,
+    0x00000EEB,
+    0x00000EAB,
+    0x00000FEC,
+    0x00003AAB,
+    0x00003AEB,
+    0x00003AEB,
+    0x00000EAB,
+    0x000003FC,
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0x168,
+    0x00000682,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000003C,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000003EB,
+    0x00000EAB,
+    0x00003AEB,
+    0x00003AEB,
+    0x00003AEB,
+    0x00003AEB,
+    0x00003AEB,
+    0x00000F3C,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_009_582F1C + 0xe10,
+    0x00000682,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000003C,
+    0x000000EB,
+    0x000000EB,
+    0x0000003C,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x0000003C,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_009_582F1C + 0x90,
+    0x00000682,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000003C0,
+    0x00000EB0,
+    0x00000EB0,
+    0x000003C0,
+    0x00000EB0,
+    0x00000EB0,
+    0x00000EB0,
+    0x00000EB0,
+    0x00000EB0,
+    0x00000EBF,
+    0x00000EBB,
+    0x000003AB,
+    0x000000FC,
+    (u32)&frontier_df3_fontgrp_se_009_582F1C + 0x3888,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000003C,
+    0x000000EB,
+    0x000000EB,
+    0x00003CEB,
+    0x00003BEB,
+    0x00000EEB,
+    0x000003AB,
+    0x00000EAB,
+    0x00003AEB,
+    0x0000DBEB,
+    0x0000ECEB,
+    0x0000303C,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_001_57F604 + 0x438,
+    0x00000682,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000003C,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x000000EB,
+    0x0000003C,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_009_582F1C + 0x3cc0,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000FCFC,
+    0x0003ABAB,
+    0x0003AAAC,
+    0x0003BBAC,
+    0x0003BBAC,
+    0x0003BBAC,
+    0x0003BBAC,
+    0x0003BBAC,
+    0x000EBBAC,
+    0x0003CCF0,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_005_57DFCC[] __attribute__((section(".data.frontier_df4_uistuff.gap5"))) = {
+    (u32)&frontier_df3_fontgrp_se_001_57F604 + 0x120,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00003FFC,
+    0x0000EAAB,
+    0x0000EEBB,
+    0x00003EBC,
+    0x00000EB0,
+    0x00000EB0,
+    0x00000EB0,
+    0x00000EB0,
+    0x00000EB0,
+    0x00000EB0,
+    0x00003AAC,
+    0x00000FF0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_009_582F1C + 0x4c38,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000FCFC,
+    0x0003ABAB,
+    0x0000EFAC,
+    0x0000EFAC,
+    0x0000EFAC,
+    0x0000EFAC,
+    0x0000EFAC,
+    0x0000EFAC,
+    0x0000EFAC,
+    0x0000EEAC,
+    0x00003AB0,
+    0x00000FC0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_009_582F1C + 0x28c8,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000F3FC,
+    0x0003AEAB,
+    0x0003B3AC,
+    0x0003B3AC,
+    0x0003B3AC,
+    0x0003B3AC,
+    0x0003B3AC,
+    0x0000EEAC,
+    0x0000EEB0,
+    0x00003AB0,
+    0x00003AB0,
+    0x00000FC0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_005_580B1C + 0x8b8,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000CF3C,
+    0x0003BAEB,
+    0x0003BAEB,
+    0x0003BAEB,
+    0x0003BAEB,
+    0x0003BAEB,
+    0x0003BAEB,
+    0x0003BAEB,
+    0x0003AAAB,
+    0x0000EBAC,
+    0x0000EFB0,
+    0x000030C0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_005_580B1C + 0x3a8,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000FCFF,
+    0x0003ABAA,
+    0x0000ECEF,
+    0x00003BAC,
+    0x00000EB0,
+    0x00000EB0,
+    0x00000EB0,
+    0x00003AEC,
+    0x00003BEC,
+    0x0000EB3B,
+    0x0003AAEA,
+    0x0000FF3F,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_005_580B1C + 0x5e8,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0003F3FC,
+    0x000EAEAB,
+    0x0003B3AC,
+    0x0003B3AC,
+    0x0000EFB0,
+    0x0000EEB0,
+    0x00003AC0,
+    0x00003AC0,
+    0x00003AC0,
+    0x00003AC0,
+    0x0000EAB0,
+    0x00003FC0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_004_57FF94 + 0x5e8,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00003FFC,
+    0x0000EAAB,
+    0x0000EBFB,
+    0x00003ACC,
+    0x00003AC0,
+    0x00000EB0,
+    0x00000EB0,
+    0x000003AC,
+    0x000033AC,
+    0x0000EFEB,
+    0x0000EAAB,
+    0x00003FFC,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_001_57F604 + 0xd8,
+    0x00000D81,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x03F3F03C,
+    0x02AEACEB,
+    0x02B3ACEC,
+    0x02B3ABAC,
+    0x02B3ABAC,
+    0x02B3AAAC,
+    0x02B3AEEC,
+    0x02B3AFEC,
+    0x02B3ACEC,
+    0x02B3ACEC,
+    0x02AEABAB,
+    0x03F3FCFC,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_009_582F1C + 0xa68,
+    0x00000B81,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x003FFCFC,
+    0x00DAABAB,
+    0x00EFACEB,
+    0x00EFACEB,
+    0x00EFACEB,
+    0x00EFACEA,
+    0x00DAACEB,
+    0x003FACEB,
+    0x0003ACEB,
+    0x0003ACEB,
+    0x000EABAB,
+    0x0003FCFC,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_007_581A04 + 0x4c8,
+    0x00000881,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00003030,
+    0x0000ECEC,
+    0x0003ABAB,
+    0x0003AAAB,
+    0x0003AAAB,
+    0x0000EAAC,
+    0x0000EAAC,
+    0x00003AB0,
+    0x00003AB0,
+    0x00000EC0,
+    0x00000300,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0x9d8,
+    0x00000783,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00003FFC,
+    0x0000EAAB,
+    0x0000EFFF,
+    0x0000EFFC,
+    0x0000EAAB,
+    0x00003BFC,
+    0x00003B00,
+    0x00000EC0,
+    0x000003B0,
+    0x000000EC,
+    0x0000003C,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_006_57E4DC[] __attribute__((section(".data.frontier_df4_uistuff.gap6"))) = {
+    (u32)&frontier_df3_fontgrp_se_009_582F1C,
+    0x00000889,
+    0x00000000,
+    0x00000000,
+    0x00000300,
+    0x00000EC0,
+    0x000039B0,
+    0x0000EFEC,
+    0x0003BFFB,
+    0x0000EAAC,
+    0x0000FFFC,
+    0x0003AAAB,
+    0x0000FDBC,
+    0x0000EF9C,
+    0x00036FEC,
+    0x0003BAAB,
+    0x0003CFFF,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0x708,
+    0x00000991,
+    0x00000000,
+    0x00000000,
+    0x0000CCFC,
+    0x0003BBAB,
+    0x000E7BBB,
+    0x0003FBBB,
+    0x000EAAAB,
+    0x0003E7BB,
+    0x000EEFAB,
+    0x000DBBBB,
+    0x0003AABB,
+    0x0003BBAB,
+    0x000E6BEC,
+    0x000EFBBB,
+    0x000F0CCF,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_004_57FF94 + 0x900,
+    0x00000891,
+    0x00000000,
+    0x00000000,
+    0x00000300,
+    0x00000EC0,
+    0x00000EC0,
+    0x0000FEFC,
+    0x0003AAAB,
+    0x0000FEFC,
+    0x00003670,
+    0x000039B0,
+    0x00003BB0,
+    0x0000E76C,
+    0x0000ECEC,
+    0x0003B03B,
+    0x0003C00F,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_004_57FF94 + 0x948,
+    0x00000792,
+    0x00000000,
+    0x00000000,
+    0x00003FFC,
+    0x0000EAAB,
+    0x0000EFBB,
+    0x0000EAAB,
+    0x0000EFBB,
+    0x0000EAAB,
+    0x00003FBC,
+    0x0000EAAB,
+    0x0000EFBC,
+    0x0000EFB0,
+    0x0000EF6C,
+    0x0000DBDB,
+    0x00003C3F,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0x360,
+    0x0000088C,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00003FF0,
+    0x0000EAAC,
+    0x00003FF0,
+    0x0000FFFC,
+    0x0003AAAB,
+    0x0000FBBC,
+    0x00003BB0,
+    0x00003BB0,
+    0x00003B6C,
+    0x0003FBEC,
+    0x0003AC3B,
+    0x0000F00F,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0xc18,
+    0x0000088B,
+    0x00000000,
+    0x00000000,
+    0x0000003C,
+    0x00003FEC,
+    0x0000EAAC,
+    0x00003FEC,
+    0x00003ABB,
+    0x00003FFF,
+    0x0000EAAC,
+    0x0000EFF0,
+    0x0000EEEC,
+    0x0000EFB0,
+    0x0000EE6C,
+    0x00039EFB,
+    0x0003F30F,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_003_57FD0C + 0x90,
+    0x0000088F,
+    0x00000000,
+    0x00000000,
+    0x00000300,
+    0x0000CECC,
+    0x0003BEFB,
+    0x0003BEFB,
+    0x0003BEFB,
+    0x0003AAAB,
+    0x0003FEFF,
+    0x0000CECC,
+    0x0003BEFB,
+    0x0003BEFB,
+    0x0003BEFB,
+    0x0003AAAB,
+    0x0003FFFF,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_004_57FF94 + 0xab0,
+    0x0000088F,
+    0x00000000,
+    0x00000000,
+    0x0000CC30,
+    0x0003BBEC,
+    0x0003BBEF,
+    0x0000FBEB,
+    0x0003AAAC,
+    0x0000FBEC,
+    0x00003BEC,
+    0x0000D9E7,
+    0x0000E6EB,
+    0x00036E6B,
+    0x00039DAC,
+    0x0003B3AC,
+    0x0000C0F0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_005_580B1C + 0x750,
+    0x0000088D,
+    0x00000000,
+    0x00000000,
+    0x00000300,
+    0x00000EC0,
+    0x000039B0,
+    0x0000EFEC,
+    0x0003BFFB,
+    0x0003EAAF,
+    0x0000FFFC,
+    0x0003AAAB,
+    0x0003BFFC,
+    0x0000EC00,
+    0x00003BC0,
+    0x00000EB0,
+    0x000003C0,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0x3f0,
+    0x0000088D,
+    0x00000000,
+    0x00000000,
+    0x00000F00,
+    0x00003EF0,
+    0x0000EAAC,
+    0x0000EFEC,
+    0x0000EAAC,
+    0x0000EFEC,
+    0x0000D55C,
+    0x0000EAAC,
+    0x00003EF0,
+    0x0000EAAC,
+    0x0000FEFC,
+    0x0003AAAB,
+    0x0003FFFF,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0xbd0,
+    0x00000892,
+    0x00000000,
+    0x00000000,
+    0x00000300,
+    0x0000FEFC,
+    0x0003AAAB,
+    0x0003FBBF,
+    0x0003AAAB,
+    0x0003BEFB,
+    0x0003AAAB,
+    0x0003AEEB,
+    0x0003EEEF,
+    0x0000EEEC,
+    0x0000DAEC,
+    0x00003EF0,
+    0x00000300,
+    0x00000000,
+    (u32)&frontier_df3_fontgrp_se_000_57E884 + 0x5e8,
+    0x00000890,
+    0x00000000,
+    0x00000000,
+    0x000003FF,
+    0x0003FFAB,
+    0x0003ABBB,
+    0x0003BBAB,
+    0x0003BBBB,
+    0x0003ABAB,
+    0x0000FFBC,
+    0x0003AAAB,
+    0x0000FEFC,
+    0x0000EAAC,
+    0x0000FEFC,
+    0x0003AAAB,
+    0x0003FFFF,
+    0x00000000,
+};
 /* #143 shiftability: frontier_df4_uistuff_007_59140C is a struct Glyph[152] whose 43 interior
  * Glyph.sjisNext fields were raw absolute words that emitted no relocation, so
  * they did NOT shift under the +0x40000 shifted-ROM build (kanji glyph-chain
  * corruption). Carve every sjisNext to a relocatable .4byte self-ref; all other
  * bytes stay .incbin. Byte-exact: base 0x0859140C + each delta == the vanilla
- * word (verified by make compare). */
-__asm__(
-"	.section .data.frontier_df4_uistuff.gap7, \"aw\", %progbits\n"
-"	.global frontier_df4_uistuff_007_59140C\n"
-"frontier_df4_uistuff_007_59140C:\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1A70\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x4, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0xAB0\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x4C, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x2958\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0xDC, 0xD4\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x630\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x1B4, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x19E0\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x1FC, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1D40\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x28C, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x2130\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x31C, 0xD4\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0xE58\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x3F4, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x828\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x43C, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x5A0\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x484, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1368\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x4CC, 0xD4\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0xF30\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x5A4, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0xF78\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x634, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1008\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x6C4, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1EF0\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x70C, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1128\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x754, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x2208\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x7E4, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x27A8\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x874, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0xCA8\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x904, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1320\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x994, 0xD4\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1FC8\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0xA6C, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0xEE8\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0xAB4, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x2490\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0xB44, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x29E8\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0xB8C, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x17E8\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0xC1C, 0x23C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x20E8\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0xE5C, 0x11C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1098\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0xF7C, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1D88\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x100C, 0xD4\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1440\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x10E4, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x11B8\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x112C, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1F38\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x11BC, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1B90\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x1204, 0x11C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x28C8\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x1324, 0x284\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x29A0\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x15AC, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x1950\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x15F4, 0x44\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x16C8\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x163C, 0x2CC\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x2328\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x190C, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x2760\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x199C, 0x284\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x2298\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x1C24, 0xD4\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x2688\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x1CFC, 0x2CC\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x2568\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x1FCC, 0x59C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x2A30\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x256C, 0x8C\n"
-"	.4byte frontier_df4_uistuff_007_59140C + 0x2A78\n"
-"	.incbin \"graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin\", 0x25FC, 0x4C4\n"
-);
+ * word (verified by make compare).
+ * KEPT AS INLINE ASM (#152): this interleaves 43 relocatable self-pointers with 43
+ * sliced .incbin blobs. preproc INCBIN_U8 cannot take an (offset,len) slice, and
+ * collapsing to a whole-file INCBIN would reintroduce hardcoded self-pointers and
+ * fail shiftcheck. Typed C would require inlining ~10.7KB of blob bytes, dropping
+ * the editable .bin asset. So the .incbin form is retained deliberately. */
+u32 frontier_df4_uistuff_007_59140C[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1A70,
+};
+u8 frontier_df4_uistuff_007_59140C_1[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x4, 0x44);
+u32 frontier_df4_uistuff_007_59140C_2[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0xAB0,
+};
+u8 frontier_df4_uistuff_007_59140C_3[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x4C, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_4[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x2958,
+};
+u8 frontier_df4_uistuff_007_59140C_5[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xDC, 0xD4);
+u32 frontier_df4_uistuff_007_59140C_6[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x630,
+};
+u8 frontier_df4_uistuff_007_59140C_7[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1B4, 0x44);
+u32 frontier_df4_uistuff_007_59140C_8[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x19E0,
+};
+u8 frontier_df4_uistuff_007_59140C_9[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1FC, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_10[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1D40,
+};
+u8 frontier_df4_uistuff_007_59140C_11[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x28C, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_12[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x2130,
+};
+u8 frontier_df4_uistuff_007_59140C_13[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x31C, 0xD4);
+u32 frontier_df4_uistuff_007_59140C_14[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0xE58,
+};
+u8 frontier_df4_uistuff_007_59140C_15[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x3F4, 0x44);
+u32 frontier_df4_uistuff_007_59140C_16[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x828,
+};
+u8 frontier_df4_uistuff_007_59140C_17[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x43C, 0x44);
+u32 frontier_df4_uistuff_007_59140C_18[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x5A0,
+};
+u8 frontier_df4_uistuff_007_59140C_19[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x484, 0x44);
+u32 frontier_df4_uistuff_007_59140C_20[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1368,
+};
+u8 frontier_df4_uistuff_007_59140C_21[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x4CC, 0xD4);
+u32 frontier_df4_uistuff_007_59140C_22[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0xF30,
+};
+u8 frontier_df4_uistuff_007_59140C_23[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x5A4, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_24[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0xF78,
+};
+u8 frontier_df4_uistuff_007_59140C_25[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x634, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_26[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1008,
+};
+u8 frontier_df4_uistuff_007_59140C_27[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x6C4, 0x44);
+u32 frontier_df4_uistuff_007_59140C_28[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1EF0,
+};
+u8 frontier_df4_uistuff_007_59140C_29[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x70C, 0x44);
+u32 frontier_df4_uistuff_007_59140C_30[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1128,
+};
+u8 frontier_df4_uistuff_007_59140C_31[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x754, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_32[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x2208,
+};
+u8 frontier_df4_uistuff_007_59140C_33[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x7E4, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_34[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x27A8,
+};
+u8 frontier_df4_uistuff_007_59140C_35[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x874, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_36[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0xCA8,
+};
+u8 frontier_df4_uistuff_007_59140C_37[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x904, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_38[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1320,
+};
+u8 frontier_df4_uistuff_007_59140C_39[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x994, 0xD4);
+u32 frontier_df4_uistuff_007_59140C_40[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1FC8,
+};
+u8 frontier_df4_uistuff_007_59140C_41[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xA6C, 0x44);
+u32 frontier_df4_uistuff_007_59140C_42[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0xEE8,
+};
+u8 frontier_df4_uistuff_007_59140C_43[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xAB4, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_44[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x2490,
+};
+u8 frontier_df4_uistuff_007_59140C_45[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xB44, 0x44);
+u32 frontier_df4_uistuff_007_59140C_46[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x29E8,
+};
+u8 frontier_df4_uistuff_007_59140C_47[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xB8C, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_48[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x17E8,
+};
+u8 frontier_df4_uistuff_007_59140C_49[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xC1C, 0x23C);
+u32 frontier_df4_uistuff_007_59140C_50[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x20E8,
+};
+u8 frontier_df4_uistuff_007_59140C_51[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xE5C, 0x11C);
+u32 frontier_df4_uistuff_007_59140C_52[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1098,
+};
+u8 frontier_df4_uistuff_007_59140C_53[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0xF7C, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_54[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1D88,
+};
+u8 frontier_df4_uistuff_007_59140C_55[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x100C, 0xD4);
+u32 frontier_df4_uistuff_007_59140C_56[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1440,
+};
+u8 frontier_df4_uistuff_007_59140C_57[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x10E4, 0x44);
+u32 frontier_df4_uistuff_007_59140C_58[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x11B8,
+};
+u8 frontier_df4_uistuff_007_59140C_59[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x112C, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_60[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1F38,
+};
+u8 frontier_df4_uistuff_007_59140C_61[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x11BC, 0x44);
+u32 frontier_df4_uistuff_007_59140C_62[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1B90,
+};
+u8 frontier_df4_uistuff_007_59140C_63[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1204, 0x11C);
+u32 frontier_df4_uistuff_007_59140C_64[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x28C8,
+};
+u8 frontier_df4_uistuff_007_59140C_65[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1324, 0x284);
+u32 frontier_df4_uistuff_007_59140C_66[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x29A0,
+};
+u8 frontier_df4_uistuff_007_59140C_67[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x15AC, 0x44);
+u32 frontier_df4_uistuff_007_59140C_68[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x1950,
+};
+u8 frontier_df4_uistuff_007_59140C_69[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x15F4, 0x44);
+u32 frontier_df4_uistuff_007_59140C_70[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x16C8,
+};
+u8 frontier_df4_uistuff_007_59140C_71[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x163C, 0x2CC);
+u32 frontier_df4_uistuff_007_59140C_72[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x2328,
+};
+u8 frontier_df4_uistuff_007_59140C_73[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x190C, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_74[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x2760,
+};
+u8 frontier_df4_uistuff_007_59140C_75[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x199C, 0x284);
+u32 frontier_df4_uistuff_007_59140C_76[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x2298,
+};
+u8 frontier_df4_uistuff_007_59140C_77[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1C24, 0xD4);
+u32 frontier_df4_uistuff_007_59140C_78[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x2688,
+};
+u8 frontier_df4_uistuff_007_59140C_79[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1CFC, 0x2CC);
+u32 frontier_df4_uistuff_007_59140C_80[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x2568,
+};
+u8 frontier_df4_uistuff_007_59140C_81[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x1FCC, 0x59C);
+u32 frontier_df4_uistuff_007_59140C_82[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x2A30,
+};
+u8 frontier_df4_uistuff_007_59140C_83[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x256C, 0x8C);
+u32 frontier_df4_uistuff_007_59140C_84[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = {
+    (u32)&frontier_df4_uistuff_007_59140C + 0x2A78,
+};
+u8 frontier_df4_uistuff_007_59140C_85[] __attribute__((section(".data.frontier_df4_uistuff.gap7"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin", 0x25FC, 0x4C4);
 
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap8, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_008_5946F4\n"
-    "frontier_df4_uistuff_008_5946F4:\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x9d8\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte 0x000002bf\n"
-    ".4byte 0x0000002e\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x00002fec\n"
-    ".4byte 0x0000babc\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b008\n"
-    ".4byte 0x0000b800\n"
-    ".4byte 0x00002ea8\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x4728\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bc0\n"
-    ".4byte 0x00002ebc\n"
-    ".4byte 0x0000b82b\n"
-    ".4byte 0x0000b002\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b800\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002e00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002f0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1908\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bc00\n"
-    ".4byte 0x00002bfc\n"
-    ".4byte 0x00000bab\n"
-    ".4byte 0x000002c2\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x00002e00\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x240\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte 0x000002b0\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00002aab\n"
-    ".4byte 0x00003ffe\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x558\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x00002efc\n"
-    ".4byte 0x0000b8b8\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002fcb\n"
-    ".4byte 0x0000bebb\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x00000be0\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x750\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00002feb\n"
-    ".4byte 0x00002a8b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x00003feb\n"
-    ".4byte 0x00002a8b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xb88\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002cb\n"
-    ".4byte 0x000002cb\n"
-    ".4byte 0x00000bfe\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x0000baec\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000beef\n"
-    ".4byte 0x0000beee\n"
-    ".4byte 0x00002b88\n"
-    ".4byte frontier_df4_uistuff_016_59A2EC + 0x120\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x00002fbf\n"
-    ".4byte 0x0000baee\n"
-    ".4byte 0x0000b0bc\n"
-    ".4byte 0x0000b0ac\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02e\n"
-    ".4byte 0x0000bb2f\n"
-    ".4byte 0x0000beee\n"
-    ".4byte 0x0000beec\n"
-    ".4byte 0x00002bac\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap9, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_009_594B2C\n"
-    "frontier_df4_uistuff_009_594B2C:\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x48\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002fc\n"
-    ".4byte 0x000002e8\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ffc\n"
-    ".4byte 0x00002ebb\n"
-    ".4byte 0x0000bcbb\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x00000b2f\n"
-    ".4byte 0x00000b0a\n"
-    ".4byte 0x000002c0\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0xd8\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x00002eff\n"
-    ".4byte 0x0000b8ba\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000a0bc\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x00002c2e\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002e2c\n"
-    ".4byte 0x00000bf8\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x2d0\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00002ffc\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x0000baee\n"
-    ".4byte 0x0000b2ef\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x00002c3b\n"
-    ".4byte 0x00002e2c\n"
-    ".4byte 0x00000bc8\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0xa20\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x00000bb0\n"
-    ".4byte 0x000002ff\n"
-    ".4byte 0x000000ba\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002eff\n"
-    ".4byte 0x0000b8ba\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000bab0\n"
-    ".4byte 0x00002fe0\n"
-    ".4byte frontier_df4_uistuff_021_59D034 + 0x288\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00002f2c\n"
-    ".4byte 0x0000bafc\n"
-    ".4byte 0x0000b0bc\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000b0b2\n"
-    ".4byte 0x00002fb0\n"
-    ".4byte 0x00000ab0\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x10e0\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00002fcb\n"
-    ".4byte 0x00002fbb\n"
-    ".4byte 0x0000bb2f\n"
-    ".4byte 0x0000bb2f\n"
-    ".4byte 0x0000bb0b\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x00002feb\n"
-    ".4byte 0x00000b82\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xab0\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x00000ac0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002fc\n"
-    ".4byte 0x00002feb\n"
-    ".4byte 0x00003acb\n"
-    ".4byte 0x000020be\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x288\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000002f8\n"
-    ".4byte 0x00000ba0\n"
-    ".4byte 0x00000a00\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00002fcb\n"
-    ".4byte 0x0000babb\n"
-    ".4byte 0x0000b02f\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b002\n"
-    ".4byte 0x00002ea8\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x630\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002e0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c2f\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00000b02\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002e8\n"
-    ".4byte 0x000000bc\n"
-    ".4byte frontier_df4_uistuff_013_5987EC + 0x5a0\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x00000bbc\n"
-    ".4byte 0x00000b28\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x00002ff0\n"
-    ".4byte 0x0000baac\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b2f2\n"
-    ".4byte 0x0000bbac\n"
-    ".4byte 0x00002f2c\n"
-    ".4byte 0x00000af8\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap10, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_010_595B34\n"
-    "frontier_df4_uistuff_010_595B34:\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0xe10\n"
-    ".4byte 0x00000983\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x00002bb8\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2e\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000b8\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0xea0\n"
-    ".4byte 0x00000983\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x0000baaa\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x0000baaa\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0xf30\n"
-    ".4byte 0x00000983\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x00002bae\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000380\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0xfc0\n"
-    ".4byte 0x00000983\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000000b8\n"
-    ".4byte 0x000000a0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b02e\n"
-    ".4byte 0x0000b028\n"
-    ".4byte 0x0000b800\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000e00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000bc\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0x1050\n"
-    ".4byte 0x00000983\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002ffc\n"
-    ".4byte 0x00002ea8\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x0000b8b8\n"
-    ".4byte 0x0000b02e\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x480\n"
-    ".4byte 0x00000983\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x0000babf\n"
-    ".4byte 0x0000b0ba\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x00002ab0\n"
-    ".4byte 0x00003fc0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1dd0\n"
-    ".4byte 0x00000983\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b02e\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b800\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002e00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000bc\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0x5e8\n"
-    ".4byte 0x00000983\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0000bfc0\n"
-    ".4byte 0x0000bab0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0bc\n"
-    ".4byte 0x0000bbec\n"
-    ".4byte 0x00002e0b\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000bc\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap11, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_011_59662C\n"
-    "frontier_df4_uistuff_011_59662C:\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0xdc8\n"
-    ".4byte 0x00000b83\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bb2c0\n"
-    ".4byte 0x000bb2c0\n"
-    ".4byte 0x000bbfc0\n"
-    ".4byte 0x0000bab0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b00c\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002e00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000bc\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0xe58\n"
-    ".4byte 0x00000b83\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x0000bff8\n"
-    ".4byte 0x00002bac\n"
-    ".4byte 0x00000b2e\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0xee8\n"
-    ".4byte 0x00000b83\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bb000\n"
-    ".4byte 0x000bb000\n"
-    ".4byte 0x000bbfff\n"
-    ".4byte 0x0000baaa\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x0000baaa\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0xf78\n"
-    ".4byte 0x00000b83\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x00002bae\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0x1008\n"
-    ".4byte 0x00000b83\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bb0b8\n"
-    ".4byte 0x000bb0a0\n"
-    ".4byte 0x000bb000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000b02e\n"
-    ".4byte 0x0000b828\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002e00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000b8\n"
-    ".4byte 0x0000002c\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0x48\n"
-    ".4byte 0x00000b83\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bb000\n"
-    ".4byte 0x000bbffc\n"
-    ".4byte 0x000bbea8\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002e00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x00000ee0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb8\n"
-    ".4byte 0x0000b02e\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte frontier_df4_uistuff_012_596F74\n"
-    ".4byte 0x00000b83\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x0000babf\n"
-    ".4byte 0x0000b0ba\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x00002ab0\n"
-    ".4byte 0x00003fc0\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xf30\n"
-    ".4byte 0x00000b83\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bb000\n"
-    ".4byte 0x000bb00b\n"
-    ".4byte 0x000bbc0b\n"
-    ".4byte 0x00002c2e\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c28\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002e00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000b8\n"
-    ".4byte 0x0000002c\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap12, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_012_596F74\n"
-    "frontier_df4_uistuff_012_596F74:\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x8f28\n"
-    ".4byte 0x00000881\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002fff\n"
-    ".4byte 0x00002aaa\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xcf0\n"
-    ".4byte 0x000008e0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_013_5987EC + 0x1b0\n"
-    ".4byte 0x00000987\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte 0x00000ba0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0x318\n"
-    ".4byte 0x00000887\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b8\n"
-    ".4byte 0x0000002e\n"
-    ".4byte 0x00002aab\n"
-    ".4byte 0x00002fff\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0x360\n"
-    ".4byte 0x00000887\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002ea8\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0x10e0\n"
-    ".4byte 0x00000987\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002f00\n"
-    ".4byte 0x00002f00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x0000ffff\n"
-    ".4byte 0x0000aeaa\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0xd80\n"
-    ".4byte 0x00000887\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000fff\n"
-    ".4byte 0x00000aab\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000bff\n"
-    ".4byte 0x00002eaa\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0x438\n"
-    ".4byte 0x00000887\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000bff\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x4bf0\n"
-    ".4byte 0x00000887\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002fff\n"
-    ".4byte 0x00002eaa\n"
-    ".4byte 0x00002e00\n"
-    ".4byte 0x00000e00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x00000380\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000e0\n"
-    ".4byte 0x000000e0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0xaf8\n"
-    ".4byte 0x00000887\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0x3f0\n"
-    ".4byte 0x00000887\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002ffe\n"
-    ".4byte 0x00002ea8\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x5e8\n"
-    ".4byte 0x00000581\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000002e\n"
-    ".4byte 0x000000b8\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x438\n"
-    ".4byte 0x00000581\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x0000002c\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x828\n"
-    ".4byte 0x00000681\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x120\n"
-    ".4byte 0x00000881\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002f0\n"
-    ".4byte 0x00000bac\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000ac0\n"
-    ".4byte 0x000002b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x48\n"
-    ".4byte 0x00000781\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002f0\n"
-    ".4byte 0x000002f0\n"
-    ".4byte 0x000002a0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0xc18\n"
-    ".4byte 0x00000981\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x00002ac0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0xc60\n"
-    ".4byte 0x00000981\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000ba0\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0x8b8\n"
-    ".4byte 0x00000981\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0x900\n"
-    ".4byte 0x00000981\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte frontier_df4_uistuff_012_596F74 + 0x630\n"
-    ".4byte 0x00000981\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000fc\n"
-    ".4byte 0x0000ebab\n"
-    ".4byte 0x0000be02\n"
-    ".4byte 0x00002800\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x8b8\n"
-    ".4byte 0x00000981\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000000b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x318\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x000003b0\n"
-    ".4byte 0x00000bb0\n"
-    ".4byte 0x00000bb8\n"
-    ".4byte 0x00000e2c\n"
-    ".4byte 0x00002e2c\n"
-    ".4byte 0x00002ffc\n"
-    ".4byte 0x00002eae\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xbd0\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bff\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x00002e0b\n"
-    ".4byte 0x00000bff\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bff\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x750\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bc0\n"
-    ".4byte 0x00002eb0\n"
-    ".4byte 0x0000b82c\n"
-    ".4byte 0x0000b02e\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000b02e\n"
-    ".4byte 0x0000b82c\n"
-    ".4byte 0x00002eb0\n"
-    ".4byte 0x00000bc0\n"
-    ".4byte frontier_df4_uistuff_013_5987EC + 0x558\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002ff\n"
-    ".4byte 0x00000bab\n"
-    ".4byte 0x00002e0b\n"
-    ".4byte 0x0000380b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000380b\n"
-    ".4byte 0x00002e0b\n"
-    ".4byte 0x00000bab\n"
-    ".4byte 0x000002ff\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1ab8\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x0000aaab\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00002fff\n"
-    ".4byte 0x00002aab\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000aaab\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte data_0859A0AC + 0x1b0\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x0000aaab\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00002fff\n"
-    ".4byte 0x00002aab\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1320\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte 0x00002eac\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000bf0b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000beac\n"
-    ".4byte 0x0000bbf0\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x828\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x0000baab\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0x3f0\n"
-    ".4byte 0x00000582\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0xb88\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b82b\n"
-    ".4byte 0x00002eac\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte frontier_df4_uistuff_013_5987EC + 0x3a8\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x00002e0b\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x000002eb\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x0000002f\n"
-    ".4byte 0x0000002f\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000002cb\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000c00b\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x240\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000aaab\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0xc60\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x0000bc0f\n"
-    ".4byte 0x0000bc0f\n"
-    ".4byte 0x0000be2f\n"
-    ".4byte 0x0000bb3b\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000b2eb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x7e0\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00f\n"
-    ".4byte 0x0000b02f\n"
-    ".4byte 0x0000b02f\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000b2eb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000bb8b\n"
-    ".4byte 0x0000bb0b\n"
-    ".4byte 0x0000be0b\n"
-    ".4byte 0x0000bc0b\n"
-    ".4byte 0x0000bc0b\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x6c0\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte 0x00002eac\n"
-    ".4byte 0x0000380b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000380b\n"
-    ".4byte 0x00002eac\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte frontier_df4_uistuff_013_5987EC + 0x480\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002fff\n"
-    ".4byte 0x0000baab\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x00002fff\n"
-    ".4byte 0x00000aab\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x870\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte 0x00002eac\n"
-    ".4byte 0x0000380b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b2fb\n"
-    ".4byte 0x0000bb2f\n"
-    ".4byte 0x00002eac\n"
-    ".4byte 0x00002ff0\n"
-    ".4byte 0x0000b000\n"
-    ".4byte frontier_df4_uistuff_015_599BE4\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bff\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x00002e0b\n"
-    ".4byte 0x00000bff\n"
-    ".4byte 0x000002eb\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00002e0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x948\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bf8\n"
-    ".4byte 0x00002eae\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x0000002b\n"
-    ".4byte 0x000000bc\n"
-    ".4byte 0x00000be0\n"
-    ".4byte 0x00002e00\n"
-    ".4byte 0x0000b800\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x00002eae\n"
-    ".4byte 0x00000bf8\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0x120\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x0000aaea\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte frontier_df4_uistuff_013_5987EC + 0x1f8\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x00002eac\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x28c8\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x00002c2e\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00000bb8\n"
-    ".4byte 0x00000bb0\n"
-    ".4byte 0x00000bb0\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x8b8\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x00002e2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x3a8\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002e2c\n"
-    ".4byte 0x00000bb0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x00000bb0\n"
-    ".4byte 0x00000bb8\n"
-    ".4byte 0x00002e2c\n"
-    ".4byte 0x00002c2e\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x5e8\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b80b\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002e2c\n"
-    ".4byte 0x00000bb0\n"
-    ".4byte 0x00000bb0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x5e8\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002fff\n"
-    ".4byte 0x00002eaa\n"
-    ".4byte 0x00002e00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b8\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002e\n"
-    ".4byte 0x00002aab\n"
-    ".4byte 0x00003fff\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x798\n"
-    ".4byte 0x00000581\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000bc\n"
-    ".4byte 0x000000bc\n"
-    ".4byte 0x000000a8\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x8b8\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_016_59A2EC + 0xd8\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte 0x00000ba0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x17a0\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b8\n"
-    ".4byte 0x0000002e\n"
-    ".4byte 0x00002aab\n"
-    ".4byte 0x00002fff\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x990\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002ea8\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x9d8\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002f00\n"
-    ".4byte 0x00002f00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x0000ffff\n"
-    ".4byte 0x0000aeaa\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x6c0\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000fff\n"
-    ".4byte 0x00000aab\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000bff\n"
-    ".4byte 0x00002eaa\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x1b0\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000bff\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0x3f0\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002fff\n"
-    ".4byte 0x00002eaa\n"
-    ".4byte 0x00002e00\n"
-    ".4byte 0x00000e00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x00000380\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000e0\n"
-    ".4byte 0x000000e0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0x288\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x510\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002ffe\n"
-    ".4byte 0x00002ea8\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0xaf8\n"
-    ".4byte 0x00000983\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x0000aaab\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00002fff\n"
-    ".4byte 0x00002aab\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000aaab\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte frontier_df4_uistuff_013_5987EC + 0x438\n"
-    ".4byte 0x00000581\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000bc\n"
-    ".4byte 0x000000bc\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x0000002c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x5970\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002f0\n"
-    ".4byte 0x00000bac\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte 0x00000bac\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000beb\n"
-    ".4byte 0x00002ebc\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x1f8\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x000002ff\n"
-    ".4byte 0x00000bab\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000bab\n"
-    ".4byte 0x000002ff\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_013_5987EC\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002fc\n"
-    ".4byte 0x00000bab\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000bab\n"
-    ".4byte 0x000002fc\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_013_5987EC + 0x48\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00000bab\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000bab\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x870\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002fc\n"
-    ".4byte 0x00000bab\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000bff\n"
-    ".4byte 0x000002ab\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000bab\n"
-    ".4byte 0x000002fc\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x90\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002f0\n"
-    ".4byte 0x000002ac\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x00000bff\n"
-    ".4byte 0x00000aae\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x00000000\n"
-    ".4byte data_0859A0AC + 0xd8\n"
-    ".4byte 0x00000882\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002f0\n"
-    ".4byte 0x00000bac\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000bac\n"
-    ".4byte 0x000002fc\n"
-    ".4byte 0x000000ac\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00002eab\n"
-    ".4byte 0x00002e0b\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x168\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x000002fb\n"
-    ".4byte 0x00000baf\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xe10\n"
-    ".4byte 0x00000482\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x90\n"
-    ".4byte 0x00000582\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000ba\n"
-    ".4byte 0x0000002f\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3888\n"
-    ".4byte 0x00000782\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x000002eb\n"
-    ".4byte 0x000000bf\n"
-    ".4byte 0x0000002f\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000002eb\n"
-    ".4byte 0x000002cb\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0x438\n"
-    ".4byte 0x00000482\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3cc0\n"
-    ".4byte 0x00000982\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002fbb\n"
-    ".4byte 0x0000baef\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap13, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_013_5987EC\n"
-    "frontier_df4_uistuff_013_5987EC:\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0xd8\n"
-    ".4byte 0x00000181\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xa68\n"
-    ".4byte 0x00000181\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x4c8\n"
-    ".4byte 0x00000b81\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000b8b8b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b800b\n"
-    ".4byte 0x000bc00b\n"
-    ".4byte 0x0002e02c\n"
-    ".4byte 0x0002e02c\n"
-    ".4byte 0x0000b8b0\n"
-    ".4byte 0x0000b8b0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x9d8\n"
-    ".4byte 0x00000983\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x0000baaa\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x0000baaa\n"
-    ".4byte 0x0000b800\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002e00\n"
-    ".4byte 0x00000b80\n"
-    ".4byte 0x000002e0\n"
-    ".4byte 0x000000bc\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x630\n"
-    ".4byte 0x00000981\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x9d8\n"
-    ".4byte 0x00000981\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x948\n"
-    ".4byte 0x00000781\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x4c38\n"
-    ".4byte 0x00000184\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x5340\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000bbbc0\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x000bbbbc\n"
-    ".4byte 0x000bbbef\n"
-    ".4byte 0x000bbb2f\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x120\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000fffec\n"
-    ".4byte 0x000b002c\n"
-    ".4byte 0x000b002f\n"
-    ".4byte 0x000bbfef\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bbfec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000b002c\n"
-    ".4byte 0x000b002c\n"
-    ".4byte 0x000bc02c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002cbfc\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x708\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bb0bf\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x000bfffb\n"
-    ".4byte 0x0000b0bf\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbbf\n"
-    ".4byte 0x0002fffb\n"
-    ".4byte 0x0002fbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbf\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x000b0bbb\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x900\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000b000b\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x948\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b0b00\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x0002f02f\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x360\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x000b2cb0\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000bf00b\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0xc18\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000bffb\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c000\n"
-    ".4byte 0x0002ec00\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cbb0\n"
-    ".4byte 0x0002c2c0\n"
-    ".4byte 0x0002cbb0\n"
-    ".4byte 0x000b2c2f\n"
-    ".4byte frontier_df4_uistuff_016_59A2EC + 0x90\n"
-    ".4byte 0x00000a8f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0xab0\n"
-    ".4byte 0x00000b8f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000cb0b0\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x000bffbc\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002ecbc\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x000b0bb0\n"
-    ".4byte 0x000b0bb0\n"
-    ".4byte 0x000c02f0\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x750\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b8b0\n"
-    ".4byte 0x0002e02c\n"
-    ".4byte 0x000b800b\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c000\n"
-    ".4byte 0x0002e000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b800\n"
-    ".4byte 0x00002e00\n"
-    ".4byte 0x00000bc0\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x3f0\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0xbd0\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x5e8\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000003ff\n"
-    ".4byte 0x000bfeec\n"
-    ".4byte 0x000b2efc\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000b2efc\n"
-    ".4byte 0x000b2fec\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap14, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_014_598E64\n"
-    "frontier_df4_uistuff_014_598E64:\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3f0\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002f0bc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bb0\n"
-    ".4byte 0x0002cbb0\n"
-    ".4byte 0x000b00bb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x0000bfcb\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x5a0\n"
-    ".4byte 0x00000a97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00000bc0\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0000bc0b\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0x360\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000efffc\n"
-    ".4byte 0x000b0b00\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002f00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c0bb\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002fff0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002fff0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x4c8\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1488\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000bf0b0\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x000bfbb0\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x000002cb\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0x1b0\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0000bfc0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0002fffb\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000bc0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x120\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002eff\n"
-    ".4byte 0x000bfc2c\n"
-    ".4byte 0x0002cc2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0000b0bc\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0002ec00\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x318\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fcb0\n"
-    ".4byte 0x0002efff\n"
-    ".4byte 0x000becb0\n"
-    ".4byte 0x000003ff\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x000b2fff\n"
-    ".4byte 0x0002f8b0\n"
-    ".4byte 0x000b2eff\n"
-    ".4byte 0x0000bfb0\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x48\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b0b00\n"
-    ".4byte 0x000b0b00\n"
-    ".4byte 0x000b0b00\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000b002c\n"
-    ".4byte 0x0002f00b\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x48\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bb00b\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000bc00\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xb88\n"
-    ".4byte 0x00000b94\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte 0x0000bbac\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x000002ef\n"
-    ".4byte 0x000bffef\n"
-    ".4byte 0x000bbbec\n"
-    ".4byte 0x000bbbbc\n"
-    ".4byte 0x000bffbc\n"
-    ".4byte 0x000bbbbc\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte frontier_df4_uistuff_021_59D034 + 0x1f8\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0002fefb\n"
-    ".4byte 0x000bbbbf\n"
-    ".4byte 0x0002fffb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002fffb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0000bffb\n"
-    ".4byte 0x0002eecb\n"
-    ".4byte 0x0002fecb\n"
-    ".4byte 0x000b2cbb\n"
-    ".4byte 0x0002f02f\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x288\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000b0b00\n"
-    ".4byte 0x000bfc00\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0xa20\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x0002fff0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c0bc\n"
-    ".4byte 0x0002c0bc\n"
-    ".4byte 0x0002c0bb\n"
-    ".4byte 0x0002c0bb\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002fff0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0x3a8\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b2c0b\n"
-    ".4byte 0x000b2c0b\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000b2c0b\n"
-    ".4byte 0x000b2c0b\n"
-    ".4byte 0x000b2cbb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2c0b\n"
-    ".4byte 0x000b2f0b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0x900\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bbbfb\n"
-    ".4byte 0x000bfc0b\n"
-    ".4byte 0x000bbbfb\n"
-    ".4byte 0x000bbfbb\n"
-    ".4byte 0x000bbbfb\n"
-    ".4byte 0x000bb2cb\n"
-    ".4byte 0x000bbbcb\n"
-    ".4byte 0x000bbcbb\n"
-    ".4byte 0x000bc00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xc60\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x0000b03f\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x000b002c\n"
-    ".4byte 0x000b0b3c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x0002ec2f\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002cc2c\n"
-    ".4byte 0x000b032c\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0x1f8\n"
-    ".4byte 0x00000b8f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000bffbf\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000fffec\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x000bfeec\n"
-    ".4byte 0x000bbcbc\n"
-    ".4byte 0x000bbb0b\n"
-    ".4byte 0x000bb2c0\n"
-    ".4byte 0x000b2c00\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte frontier_df4_uistuff_016_59A2EC + 0x168\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bfc2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x000bffcb\n"
-    ".4byte 0x000b02cb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3138\n"
-    ".4byte 0x00000b95\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0000bb00\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b0bcb\n"
-    ".4byte 0x000b0bcb\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0002c2f0\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0000bf0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x750\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002f2c0\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002ec0b\n"
-    ".4byte 0x000bcbb0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002eefc\n"
-    ".4byte 0x0000bbbc\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x000b0bb0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x25f8\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002c2c0\n"
-    ".4byte 0x0000bb0b\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002ffc0\n"
-    ".4byte 0x0002c2ef\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000bffcb\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0x318\n"
-    ".4byte 0x00000b8f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1998\n"
-    ".4byte 0x00000b8f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002ecbc\n"
-    ".4byte 0x0002eefc\n"
-    ".4byte 0x0002eefc\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x000b0bb0\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0xab0\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fc00\n"
-    ".4byte 0x00000bff\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000030b0\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00000b30\n"
-    ".4byte 0x0002c2c0\n"
-    ".4byte 0x000bbcb0\n"
-    ".4byte 0x000b0bff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x990\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0002fffb\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x870\n"
-    ".4byte 0x00000c98\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000b00bf\n"
-    ".4byte 0x0002ff00\n"
-    ".4byte 0x0000b2ff\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b0bf\n"
-    ".4byte 0x002fffc0\n"
-    ".4byte 0x0000b0bf\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x000bffbf\n"
-    ".4byte 0x000b0bbb\n"
-    ".4byte 0x000b0bbb\n"
-    ".4byte 0x000b0bbb\n"
-    ".4byte 0x000bffbf\n"
-    ".4byte 0x000b0bbb\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x318\n"
-    ".4byte 0x00000b95\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002f000\n"
-    ".4byte 0x00002ff0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x000b002c\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x3f0\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte frontier_df4_uistuff_016_59A2EC\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000b2eef\n"
-    ".4byte 0x000b2eef\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x00002f2c\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x000bc0bc\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xca8\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000bcb0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xd38\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfffb\n"
-    ".4byte 0x000b2cbc\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x000b2cb0\n"
-    ".4byte 0x0002ffc0\n"
-    ".4byte 0x0002eeef\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000bffcb\n"
-    ".4byte data_0859A0AC + 0x90\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x0003ffec\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0003ffc0\n"
-    ".4byte 0x00032eef\n"
-    ".4byte 0x00032eec\n"
-    ".4byte 0x0003ffec\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0000bf2c\n"
-    ".4byte 0x0002ef2c\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000bffcb\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0xcf0\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bffc0\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x000bbecb\n"
-    ".4byte 0x000b0bcb\n"
-    ".4byte frontier_df4_uistuff_014_598E64 + 0xca8\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x4d10\n"
-    ".4byte 0x00000a94\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte frontier_df4_uistuff_017_59A574\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000b000b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x12d8\n"
-    ".4byte 0x00000b94\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bffc\n"
-    ".4byte 0x0002fb00\n"
-    ".4byte 0x0000bbc0\n"
-    ".4byte 0x0002fbbc\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x0002cbb0\n"
-    ".4byte 0x0000bffc\n"
-    ".4byte 0x0002fbb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0002fb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bcb0b\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x4c8\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bfb2c\n"
-    ".4byte 0x000bbfbf\n"
-    ".4byte 0x000bbbec\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x00000bbc\n"
-    ".4byte 0x00000b03\n"
-    ".4byte 0x000b0b00\n"
-    ".4byte 0x000bfc00\n"
-    ".4byte frontier_df4_uistuff_021_59D034 + 0x1b0\n"
-    ".4byte 0x00000b88\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b0bf\n"
-    ".4byte 0x000bfffb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x000b0bbb\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x000b0bbf\n"
-    ".4byte 0x000b0bbb\n"
-    ".4byte 0x000bff00\n"
-    ".4byte 0x000b0b00\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0x2d0\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbb0b\n"
-    ".4byte frontier_df4_uistuff_021_59D034 + 0x360\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x0002cb0b\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x0000b2f0\n"
-    ".4byte 0x0000b2ff\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000bffcb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x798\n"
-    ".4byte 0x00000b8f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bb000\n"
-    ".4byte 0x000bb02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x0000b2ff\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x000bbfec\n"
-    ".4byte 0x000bbeec\n"
-    ".4byte 0x000bbeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eefc\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002cbcb\n"
-    ".4byte 0x000bb2c0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3c30\n"
-    ".4byte 0x00000b8a\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002cb\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x0002ffcb\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eec0\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0x90\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000b000b\n"
-    ".4byte frontier_df4_uistuff_015_599BE4 + 0x240\n"
-    ".4byte 0x00000c8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b2ff\n"
-    ".4byte 0x002fffbb\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0002ecff\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x000b0bff\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x002fffbb\n"
-    ".4byte 0x000b0bff\n"
-    ".4byte 0x000bbf00\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbf0b\n"
-    ".4byte 0x000b0b00\n"
-    ".4byte 0x000bc2c0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3eb8\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cbf\n"
-    ".4byte 0x000bfffb\n"
-    ".4byte 0x000b00bb\n"
-    ".4byte 0x000b00bb\n"
-    ".4byte 0x0002ffef\n"
-    ".4byte 0x0000002f\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000bfffb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbf\n"
-    ".4byte 0x0000bb0b\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x000bb2cb\n"
-    ".4byte 0x000bc0bb\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap15, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_015_599BE4\n"
-    "frontier_df4_uistuff_015_599BE4:\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x5538\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x5a48\n"
-    ".4byte 0x00000b8f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c2f\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02f\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x9e58\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x000fffec\n"
-    ".4byte 0x0000b03f\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bffbc\n"
-    ".4byte 0x0000b0bf\n"
-    ".4byte 0x000cbb2f\n"
-    ".4byte 0x000bbb2f\n"
-    ".4byte 0x0002fc2c\n"
-    ".4byte 0x0002f02c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000cb2ec\n"
-    ".4byte frontier_df4_uistuff_021_59D034 + 0x318\n"
-    ".4byte 0x00000b95\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bc02f\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x1b0\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000bfcb0\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x0002c02f\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002f02c\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x750\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bb2c0\n"
-    ".4byte 0x0000bbff\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002cbff\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000c2cb0\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0x168\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1560\n"
-    ".4byte 0x00000b95\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002cb0b\n"
-    ".4byte 0x0002cb0b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1ef0\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x7398\n"
-    ".4byte 0x00000b8f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte data_0859A0AC + 0x120\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bbb0b\n"
-    ".4byte 0x000bb000\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x000b0b0c\n"
-    ".4byte 0x000bc00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x9360\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b3ffb\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000bbb0b\n"
-    ".4byte 0x000bcb0b\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte frontier_df4_uistuff_021_59D034 + 0x90\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x0000b030\n"
-    ".4byte 0x000fffec\n"
-    ".4byte 0x0002c02f\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000fff2c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002f02c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x168\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002ff2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cbbf\n"
-    ".4byte 0x0002cbb0\n"
-    ".4byte 0x0002ffb0\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cbbc\n"
-    ".4byte 0x0002cbef\n"
-    ".4byte 0x0002ff2f\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x15a8\n"
-    ".4byte 0x00000b98\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000b0b00\n"
-    ".4byte 0x000bbffc\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x0000bb00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0002c2f0\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x00002fcb\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000bff00\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x510\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000b0b0b\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap16, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_016_59A2EC\n"
-    "frontier_df4_uistuff_016_59A2EC:\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x17e8\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0000bffc\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000bffc\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bbffc\n"
-    ".4byte 0x000bb02c\n"
-    ".4byte 0x0002f02c\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000bc00\n"
-    ".4byte 0x0000bb00\n"
-    ".4byte 0x0000b2f0\n"
-    ".4byte 0x0000bc2f\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x438\n"
-    ".4byte 0x00000b88\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002f000\n"
-    ".4byte 0x00002fff\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x00002ecc\n"
-    ".4byte 0x0002c2cc\n"
-    ".4byte 0x0003bf0b\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x0002fff0\n"
-    ".4byte 0x0002e0bc\n"
-    ".4byte 0x0000befb\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x000bf0bf\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3f48\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x0000b0bf\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bffbc\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbb2f\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x0002fbbb\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x9900\n"
-    ".4byte 0x00000b95\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bbbf\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x000bffbc\n"
-    ".4byte 0x000b0bbb\n"
-    ".4byte 0x000b0bbb\n"
-    ".4byte 0x000b0bbb\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bb2f\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x000bff0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xd8\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x0002ec00\n"
-    ".4byte 0x0000bc00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002f00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002f00\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x90\n"
-    ".4byte 0x00000a81\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0002ffc0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0x1f8\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bffc0\n"
-    ".4byte 0x000b2ec0\n"
-    ".4byte 0x000b2ec0\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0000bc00\n"
-    ".4byte 0x0000bc00\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2cb\n"
-    ".4byte 0x000bc0bb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2208\n"
-    ".4byte 0x00000b94\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x0002fffb\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap17, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_017_59A574\n"
-    "frontier_df4_uistuff_017_59A574:\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x8b8\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002cbff\n"
-    ".4byte 0x000bfec0\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002ecec\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002c2cc\n"
-    ".4byte 0x0002f00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1200\n"
-    ".4byte 0x00000b8a\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xca8\n"
-    ".4byte 0x00000b8a\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x000bfb2c\n"
-    ".4byte 0x00002fcb\n"
-    ".4byte 0x00000bb0\n"
-    ".4byte 0x00000bb0\n"
-    ".4byte 0x000bfb2c\n"
-    ".4byte 0x0002efef\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002efec\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002ef2c\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002f02c\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x558\n"
-    ".4byte 0x00000b94\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bffcb\n"
-    ".4byte 0x000bb2fb\n"
-    ".4byte 0x000bb2f0\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000b02ef\n"
-    ".4byte 0x000b02ef\n"
-    ".4byte 0x0002ceec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0002ecbc\n"
-    ".4byte 0x000b0bbc\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2a30\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfefc\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2cb\n"
-    ".4byte 0x000b2cb0\n"
-    ".4byte 0x000b2fff\n"
-    ".4byte 0x000befbb\n"
-    ".4byte 0x00000bbb\n"
-    ".4byte 0x0002efff\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x0002efbb\n"
-    ".4byte 0x0002cbff\n"
-    ".4byte 0x000bff0b\n"
-    ".4byte 0x0002cb0b\n"
-    ".4byte 0x0002cb0b\n"
-    ".4byte 0x0002cbcb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x5148\n"
-    ".4byte 0x00000b95\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002eefc\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eecb\n"
-    ".4byte 0x000b0bbb\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x2d0\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000bb2cb\n"
-    ".4byte 0x000bbfff\n"
-    ".4byte 0x000bc000\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x900\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000bc00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3de0\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000b2ec0\n"
-    ".4byte 0x0002eeff\n"
-    ".4byte 0x0000bec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ef0\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ec0\n"
-    ".4byte 0x000bf2c0\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x5a0\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2cbb\n"
-    ".4byte 0x000b2cbb\n"
-    ".4byte 0x000bf02f\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0x90\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x0002ff2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bff00\n"
-    ".4byte 0x0002cb2f\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000bffcb\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x168\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000bffbf\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c0bc\n"
-    ".4byte 0x0002cbbf\n"
-    ".4byte 0x0002ecbf\n"
-    ".4byte 0x0002ec2f\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002f02c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3648\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x00002f2c\n"
-    ".4byte 0x0000befc\n"
-    ".4byte 0x000bbeec\n"
-    ".4byte 0x000bbeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eecc\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2cbb\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x360\n"
-    ".4byte 0x00000b88\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x0002c0bc\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x000b2fcb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x5e38\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bfefc\n"
-    ".4byte 0x000b2cbc\n"
-    ".4byte 0x000b2cbb\n"
-    ".4byte 0x000b2cbb\n"
-    ".4byte 0x000b2cb0\n"
-    ".4byte 0x000b2fff\n"
-    ".4byte 0x000b2cb0\n"
-    ".4byte 0x000b2cb0\n"
-    ".4byte 0x000b2cb0\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000bfeec\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x0000000b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1cb0\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cbf\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x0002fffb\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x000bffef\n"
-    ".4byte 0x0000bb2f\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bf2fb\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x0002ffef\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x000bfffb\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x438\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c0bc\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c0bc\n"
-    ".4byte 0x0002c0bc\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000b2cbb\n"
-    ".4byte 0x000b2cbb\n"
-    ".4byte 0x00002f0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x6e40\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c2f\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002ffcb\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x0002ffef\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x00002c2f\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000002fb\n"
-    ".4byte 0x000bff0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x6030\n"
-    ".4byte 0x00000b88\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002f03c\n"
-    ".4byte 0x000b2c0b\n"
-    ".4byte 0x000b0bc0\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x708\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002feef\n"
-    ".4byte 0x0002efef\n"
-    ".4byte 0x0002eefc\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002feec\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x0002ff2c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3f00\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000bffc0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x6c0\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfcb0\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x000bfecb\n"
-    ".4byte 0x000b2c00\n"
-    ".4byte 0x000b2efc\n"
-    ".4byte 0x000bfc00\n"
-    ".4byte 0x000b2eff\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000bfeec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000bfcbc\n"
-    ".4byte 0x0002f02c\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x48d8\n"
-    ".4byte 0x00000b98\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b03b\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x000b0bbb\n"
-    ".4byte 0x000bffb0\n"
-    ".4byte 0x000b0bb0\n"
-    ".4byte 0x000b0bb0\n"
-    ".4byte 0x000bffbc\n"
-    ".4byte 0x0000bbbc\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x0002fbb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002ef2c\n"
-    ".4byte 0x000b02cb\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0x798\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0002ffc0\n"
-    ".4byte 0x0002c2c0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0000b0ec\n"
-    ".4byte 0x0000bb0b\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffc0\n"
-    ".4byte 0x000b02f0\n"
-    ".4byte 0x000b02ef\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000bffc0\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x3f0\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b0bc0\n"
-    ".4byte 0x000b0bb0\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x0002fb0b\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x66f0\n"
-    ".4byte 0x00000b94\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cbb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x3f0\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002cbf0\n"
-    ".4byte 0x000b002f\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xa20\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002fbb\n"
-    ".4byte 0x000ffefc\n"
-    ".4byte 0x000b2fff\n"
-    ".4byte 0x000b2ef0\n"
-    ".4byte 0x000bbbbc\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000bbfff\n"
-    ".4byte 0x0002eb30\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bb2f0\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x000c2c2c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1758\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000b00b0\n"
-    ".4byte 0x000b002c\n"
-    ".4byte 0x000b002c\n"
-    ".4byte 0x000bc00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x44e8\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000b02ff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2eff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2eff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b02cb\n"
-    ".4byte 0x000b02cb\n"
-    ".4byte 0x000bc2fb\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x480\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xc18\n"
-    ".4byte 0x00000b94\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b0bf\n"
-    ".4byte 0x000fff2c\n"
-    ".4byte 0x000cbb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x0000bb0b\n"
-    ".4byte 0x000bffbf\n"
-    ".4byte 0x000b2bbb\n"
-    ".4byte 0x000b2fbb\n"
-    ".4byte 0x000b2fbb\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002c2ff\n"
-    ".4byte 0x000bb2c0\n"
-    ".4byte 0x000c2cb0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xb40\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bc00b\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0x48\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000bfecb\n"
-    ".4byte 0x000b2eff\n"
-    ".4byte 0x000bfecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2eff\n"
-    ".4byte 0x000bcb00\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_df4_uistuff_017_59A574 + 0xa68\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x000bc02f\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bc00b\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x6c0\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002c2ff\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x000bffcb\n"
-    ".4byte 0x0002f2ff\n"
-    ".4byte 0x0002f2cb\n"
-    ".4byte 0x0002f2cb\n"
-    ".4byte 0x0002eeff\n"
-    ".4byte 0x0002eecb\n"
-    ".4byte 0x0002eecb\n"
-    ".4byte 0x0002eecb\n"
-    ".4byte 0x0002cbff\n"
-    ".4byte 0x0002cbbc\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002f00b\n"
-    ".4byte frontier_df4_uistuff_021_59D034 + 0x48\n"
-    ".4byte 0x00000b95\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0000bb00\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x6420\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000ffbff\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000b2fbb\n"
-    ".4byte 0x000bbfff\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x0002cbff\n"
-    ".4byte 0x0002cbef\n"
-    ".4byte 0x0002cbef\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bbb0b\n"
-    ".4byte 0x000c2ecb\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap18, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_018_59B0FC\n"
-    "frontier_df4_uistuff_018_59B0FC:\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x25b0\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0002c2ef\n"
-    ".4byte 0x000b2cbf\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000bf02c\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x240\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x000b002c\n"
-    ".4byte 0x000b2cff\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b2cbc\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x5f10\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x124c8\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000b000b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xd848\n"
-    ".4byte 0x00000b98\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cbf\n"
-    ".4byte 0x0003fcbb\n"
-    ".4byte 0x00032cbb\n"
-    ".4byte 0x00030bbb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002ecbf\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x000f0bbc\n"
-    ".4byte 0x0000002f\n"
-    ".4byte 0x000bff2f\n"
-    ".4byte 0x000b0b2f\n"
-    ".4byte 0x000b0b3f\n"
-    ".4byte 0x000b0b2f\n"
-    ".4byte 0x000bff0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3ac8\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002f00\n"
-    ".4byte 0x0000bb00\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x1f8\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000bfcb0\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x0003b2f0\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000bb02c\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bbb2f\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbbfc\n"
-    ".4byte 0x0002fb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bbfc\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xe58\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x000b002c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002f00\n"
-    ".4byte 0x0000bac0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x000f002f\n"
-    ".4byte 0x0002fff0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0002fff0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x6c0\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bfefc\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x000bfc00\n"
-    ".4byte 0x000b2eff\n"
-    ".4byte 0x000bbcb0\n"
-    ".4byte 0x000beef0\n"
-    ".4byte 0x000b0c2f\n"
-    ".4byte 0x000c0b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xd80\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x0002eeef\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2cb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2568\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x000b2cb0\n"
-    ".4byte 0x0002fefb\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x000b2efb\n"
-    ".4byte 0x000bf02f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x0002fff0\n"
-    ".4byte 0x0002c0bc\n"
-    ".4byte 0x0002c0bc\n"
-    ".4byte 0x0002fffb\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte frontier_df4_uistuff_018_59B0FC + 0x678\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x000bfbfc\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000bbbfc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cbec\n"
-    ".4byte 0x000bbbbc\n"
-    ".4byte 0x000c2f0b\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0x288\n"
-    ".4byte 0x00000b8f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002f02c\n"
-    ".4byte 0x00002fec\n"
-    ".4byte 0x0003002c\n"
-    ".4byte 0x00032eef\n"
-    ".4byte 0x0003bb2f\n"
-    ".4byte 0x0003bb2c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x0002c02f\n"
-    ".4byte 0x0002cb2f\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002f02c\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xd80\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0000bf2c\n"
-    ".4byte 0x00000bbf\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000bfc2c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bffbc\n"
-    ".4byte 0x000b0b2f\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3b58\n"
-    ".4byte 0x00000b8a\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x000bb2ef\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02f\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x168\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000b2c00\n"
-    ".4byte 0x000b2c00\n"
-    ".4byte 0x0002cbbf\n"
-    ".4byte 0x000bfffb\n"
-    ".4byte 0x0000bbfb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x0000bbbf\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000bb00\n"
-    ".4byte 0x000bff00\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x7c98\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bc00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3d98\n"
-    ".4byte 0x00000a8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002cbf\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cbbc\n"
-    ".4byte 0x0003bfbb\n"
-    ".4byte 0x000300bb\n"
-    ".4byte 0x0002ffbb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002cb2f\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002ff0b\n"
-    ".4byte 0x0002cb0b\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0x360\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0000bb0b\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000bb2ef\n"
-    ".4byte 0x000b2fec\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0002fc2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x000b0bec\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x55c8\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002ffc0\n"
-    ".4byte 0x0002c2c0\n"
-    ".4byte 0x0002c2ef\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x00030bec\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000bffcb\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x7e0\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bf0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000b000b\n"
-    ".4byte frontier_df4_uistuff_021_59D034 + 0x240\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x00002c2f\n"
-    ".4byte 0x0000bf2f\n"
-    ".4byte 0x0000bf2c\n"
-    ".4byte 0x0000bf2c\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000b2cbc\n"
-    ".4byte 0x000b2cbc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x90\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bbff0\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x000bc2fc\n"
-    ".4byte frontier_df4_uistuff_021_59D034 + 0x120\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002cbb0\n"
-    ".4byte 0x0002cb2f\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000b0bbf\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000bffbc\n"
-    ".4byte 0x0002ecbf\n"
-    ".4byte 0x0002ec2f\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000ecb2c\n"
-    ".4byte 0x000f82ec\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xa68\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000b3ffb\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cbb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0x1b0\n"
-    ".4byte 0x00000a8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2ac0\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000bf2cb\n"
-    ".4byte 0x000b2fec\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffc0\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x000bffcb\n"
-    ".4byte 0x000b02cb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1950\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002ff2c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c0bf\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b0bc\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x9b40\n"
-    ".4byte 0x00000b88\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x000bbf0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1b0\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bfc0b\n"
-    ".4byte 0x000b2eff\n"
-    ".4byte 0x000b0bcb\n"
-    ".4byte 0x000b0bcb\n"
-    ".4byte 0x000b02cb\n"
-    ".4byte 0x000b2eff\n"
-    ".4byte 0x000bb2cb\n"
-    ".4byte 0x000bb2cb\n"
-    ".4byte 0x000b02cb\n"
-    ".4byte 0x000b02cb\n"
-    ".4byte 0x0002c2ff\n"
-    ".4byte 0x0002c000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xea0\n"
-    ".4byte 0x00000c97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte 0x0000b2f0\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x002fffef\n"
-    ".4byte 0x000bb2ef\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000bbbec\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000bbbec\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000bbbbc\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0xd8\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0000bfc0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002f00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000b000b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x7e0\n"
-    ".4byte 0x00000b8a\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap19, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_019_59BA8C\n"
-    "frontier_df4_uistuff_019_59BA8C:\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x708\n"
-    ".4byte 0x00000b8a\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfbfc\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0000b0bc\n"
-    ".4byte 0x000bfbfc\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbbfc\n"
-    ".4byte 0x000bfb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbbfc\n"
-    ".4byte 0x000bf2ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bbbec\n"
-    ".4byte 0x000bfbfc\n"
-    ".4byte 0x0002c2fb\n"
-    ".4byte 0x000b32cb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x5d18\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fefc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002cbcb\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0x3a8\n"
-    ".4byte 0x00000b95\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x00002cbf\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000b2efc\n"
-    ".4byte 0x000bffef\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x0002eeef\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0x318\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002f00\n"
-    ".4byte 0x0002f2fc\n"
-    ".4byte frontier_df4_uistuff_021_59D034 + 0x438\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_df4_uistuff_021_59D034\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x0002ffc0\n"
-    ".4byte 0x0002ec0b\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002ec00\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x000b00bb\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0x240\n"
-    ".4byte 0x00000be3\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bc0bf\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x510\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x0000b030\n"
-    ".4byte 0x0000b030\n"
-    ".4byte 0x0000b030\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x0000b030\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2838\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bffc\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000bffc\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000bffc\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000bffc\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x000b2cb0\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x0002f00b\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xb40\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x000bffbc\n"
-    ".4byte 0x0000bbbf\n"
-    ".4byte 0x0000b2ef\n"
-    ".4byte 0x0000b02f\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0002ff2c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xea0\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002ff00\n"
-    ".4byte 0x0002cbff\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002ef2c\n"
-    ".4byte 0x0002fbbc\n"
-    ".4byte 0x000bc30b\n"
-    ".4byte 0x000bc2c0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002c0bc\n"
-    ".4byte 0x000b00bb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3210\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002c0bc\n"
-    ".4byte 0x000b00bb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte frontier_df4_uistuff_019_59BA8C + 0x480\n"
-    ".4byte 0x00000b8f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002ff00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xaf8\n"
-    ".4byte 0x00000b94\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0002fefc\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ef0\n"
-    ".4byte 0x000bfeef\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00008bb0\n"
-    ".4byte 0x0002ecbc\n"
-    ".4byte 0x000b00bb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2688\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x16c8\n"
-    ".4byte 0x00000b95\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000bb2cb\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000bc2c\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xfc0\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bffef\n"
-    ".4byte 0x00002c2f\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bb02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xc60\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x000bfbff\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002eefc\n"
-    ".4byte 0x0002eef0\n"
-    ".4byte 0x0000b2f0\n"
-    ".4byte 0x0000bbbc\n"
-    ".4byte 0x0000bbbc\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x000b0b2c\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap20, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_020_59BFE4\n"
-    "frontier_df4_uistuff_020_59BFE4:\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x318\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xf30\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fc00\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3018\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1290\n"
-    ".4byte 0x00000b95\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002ec\n"
-    ".4byte 0x000002ec\n"
-    ".4byte 0x000bffef\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bbbef\n"
-    ".4byte 0x000bbbbf\n"
-    ".4byte 0x000bbbaf\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbb3c\n"
-    ".4byte 0x000bbaec\n"
-    ".4byte 0x000b2eef\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1f8\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x0000bfc0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x00000bc0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x000bfcb0\n"
-    ".4byte 0x000b0b2f\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x0002cbbc\n"
-    ".4byte 0x0000bc00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000bc0\n"
-    ".4byte 0x000000bf\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xa2d8\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte 0x0002c2c0\n"
-    ".4byte 0x0000bb2f\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000002fb\n"
-    ".4byte 0x000bff0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x480\n"
-    ".4byte 0x00000a96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0002ffff\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x798\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x630\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b3ffb\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x00000bb0\n"
-    ".4byte 0x0002cb2f\n"
-    ".4byte 0x0002cec0\n"
-    ".4byte 0x0000bcb0\n"
-    ".4byte 0x0000bf2f\n"
-    ".4byte 0x0002eec0\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x000b0b2f\n"
-    ".4byte 0x000002c0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3180\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bff0b\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002cb0b\n"
-    ".4byte 0x000bbfbb\n"
-    ".4byte 0x000bbcbf\n"
-    ".4byte 0x0000bc2c\n"
-    ".4byte 0x0000bcbc\n"
-    ".4byte 0x0000bcbf\n"
-    ".4byte 0x000bbb2f\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bc2ec\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3918\n"
-    ".4byte 0x00000a8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0003bffb\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2f88\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000bc0\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xe10\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002ff2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1f38\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bbff\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x0000bbff\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002eeff\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002cef0\n"
-    ".4byte 0x000b0b2f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x480\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x0000bfef\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x00002cbf\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002eeff\n"
-    ".4byte 0x0002ffef\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2d0\n"
-    ".4byte 0x00000b95\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x000bbbfc\n"
-    ".4byte 0x000bb000\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0000bfec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002cbec\n"
-    ".4byte 0x000b00bf\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x5028\n"
-    ".4byte 0x00000b8a\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fefc\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002fefc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002fefc\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x678\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x000bbbbf\n"
-    ".4byte 0x0002fbec\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bbbc\n"
-    ".4byte 0x0000bb2f\n"
-    ".4byte 0x0002fbec\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x0002f0bb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xfc0\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0xee8\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bfefc\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b2fc\n"
-    ".4byte 0x000bfeec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2fc\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2fc\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x0002cbcb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xcf0\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1710\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cbf\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0002c2fb\n"
-    ".4byte 0x0002c2fb\n"
-    ".4byte 0x000bbfbb\n"
-    ".4byte 0x0000002f\n"
-    ".4byte 0x0002ffbb\n"
-    ".4byte 0x0002c0bb\n"
-    ".4byte 0x0000bcbb\n"
-    ".4byte 0x0002ffbb\n"
-    ".4byte 0x000000bb\n"
-    ".4byte 0x000bffef\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x0002cb0b\n"
-    ".4byte 0x000bbfcb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x6930\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000b2efb\n"
-    ".4byte 0x000b2ef0\n"
-    ".4byte 0x000b2ef0\n"
-    ".4byte 0x000b2ef0\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x00002cbc\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x000bbc2c\n"
-    ".4byte 0x000b0bcb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1b00\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002c000\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2760\n"
-    ".4byte 0x00000b88\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x0002fff0\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000002f\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x5c40\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002c000\n"
-    ".4byte 0x0000bc00\n"
-    ".4byte 0x00000bfc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000bc0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x9bd0\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002c02f\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000b2eef\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000beecb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x26d0\n"
-    ".4byte 0x00000b94\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002eff\n"
-    ".4byte 0x00002ecb\n"
-    ".4byte 0x000bfecb\n"
-    ".4byte 0x0002cbcb\n"
-    ".4byte 0x0002cbff\n"
-    ".4byte 0x0002eecb\n"
-    ".4byte 0x0002eecb\n"
-    ".4byte 0x0002eeff\n"
-    ".4byte 0x0002eecb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0000b2cb\n"
-    ".4byte 0x0002eeff\n"
-    ".4byte 0x0002ecbc\n"
-    ".4byte 0x000b0bcb\n"
-    ".4byte frontier_df4_uistuff_020_59BFE4 + 0x900\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000002c0\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bc00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1368\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c00c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3a8\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x0002cbbf\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x00002fb0\n"
-    ".4byte 0x00002fb0\n"
-    ".4byte 0x00002fb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000bc0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xbb50\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002ff2c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002ff0b\n"
-    ".4byte 0x0002c0bb\n"
-    ".4byte 0x0002c0bf\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x0000b00b\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x000bbfbf\n"
-    ".4byte 0x0002f02c\n"
-    ".4byte 0x0002fcbc\n"
-    ".4byte 0x000bbcbf\n"
-    ".4byte 0x000bbb2f\n"
-    ".4byte 0x000cb2ec\n"
-    ".4byte 0x0000bc2c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3c78\n"
-    ".4byte 0x00000b94\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002cc0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bc02f\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x27a8\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0002fff0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2fd0\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x000bf2ec\n"
-    ".4byte 0x000bb2c0\n"
-    ".4byte 0x000bb2c0\n"
-    ".4byte 0x000bb2ef\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bbbec\n"
-    ".4byte 0x0000f0bc\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000b0bc\n"
-    ".4byte 0x000002cb\n"
-    ".4byte 0x000bff0b\n"
-    ".4byte frontier_df4_uistuff_021_59D034 + 0x168\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x5b20\n"
-    ".4byte 0x00000b95\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000000b0\n"
-    ".4byte 0x000bf0b0\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x0002f2ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bb000\n"
-    ".4byte 0x000bb2fc\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x0002f2ec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0000b2fc\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x288\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002cbbf\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x000bfffb\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x00002c2f\n"
-    ".4byte 0x0000bb2f\n"
-    ".4byte 0x000bb2fb\n"
-    ".4byte 0x0002fcbb\n"
-    ".4byte 0x0000bbbb\n"
-    ".4byte 0x0000b2fb\n"
-    ".4byte 0x0002fcbb\n"
-    ".4byte 0x0002fb2f\n"
-    ".4byte 0x000bb2cb\n"
-    ".4byte 0x000b2c0b\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x870\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000bff\n"
-    ".4byte 0x000bfeec\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x000b02ec\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x0002eefc\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0000b2fc\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eefc\n"
-    ".4byte 0x0002eec3\n"
-    ".4byte 0x000b0bc0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2b50\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x438\n"
-    ".4byte 0x00000a8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002feff\n"
-    ".4byte 0x0002c0bb\n"
-    ".4byte 0x0002eeff\n"
-    ".4byte 0x0000b2eb\n"
-    ".4byte 0x0000b0ff\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x0000bfff\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000bffc\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000bffc\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x0000bffc\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x0002f02f\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x3ba0\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x000b2cb0\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000bf00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x630\n"
-    ".4byte 0x00000c93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfbfc\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbbfc\n"
-    ".4byte 0x002f2c2c\n"
-    ".4byte 0x00000bbc\n"
-    ".4byte 0x000bfbbc\n"
-    ".4byte 0x000b2ffc\n"
-    ".4byte 0x000bbbbc\n"
-    ".4byte 0x000bbbbc\n"
-    ".4byte 0x0002effc\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x000bbbcb\n"
-    ".4byte 0x002cbbbb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x69c0\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002ffbf\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002cb2f\n"
-    ".4byte 0x0002ff2f\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002ffbb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002cb2f\n"
-    ".4byte 0x0002cb0b\n"
-    ".4byte 0x0002cb0b\n"
-    ".4byte 0x000bffcb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x6df8\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0002ff2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x000bffff\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x5730\n"
-    ".4byte 0x00000b89\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b3b0\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0002b0b0\n"
-    ".4byte 0x000bc02f\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x37f8\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bb02c\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x0002eeff\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x000bfeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x000bfcbb\n"
-    ".4byte 0x0002ecbb\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002efbf\n"
-    ".4byte 0x000bfc00\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x29e8\n"
-    ".4byte 0x00000b8b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002cbf\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x0002cbb0\n"
-    ".4byte 0x000bbff0\n"
-    ".4byte 0x00002cbf\n"
-    ".4byte 0x000bffcb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2eff\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x0002ecb0\n"
-    ".4byte 0x0002ec2c\n"
-    ".4byte 0x000bbc2c\n"
-    ".4byte 0x000b0bcb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x4e78\n"
-    ".4byte 0x00000b94\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x000b2ef0\n"
-    ".4byte 0x000bf02f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002f02c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2c28\n"
-    ".4byte 0x00000b97\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002eeff\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x000bfffb\n"
-    ".4byte 0x00003fbb\n"
-    ".4byte 0x0002eeef\n"
-    ".4byte 0x0002eeef\n"
-    ".4byte 0x00002cbb\n"
-    ".4byte 0x0002cbfb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x0002efbb\n"
-    ".4byte 0x0002cbef\n"
-    ".4byte 0x000bff0b\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002c0bb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x6300\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0000bbb0\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x00000b00\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xa0e0\n"
-    ".4byte 0x00000b8a\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b2cbb\n"
-    ".4byte 0x000b2cbb\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x4ec0\n"
-    ".4byte 0x00000b91\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x00002eff\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x000bfc2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000b0bc\n"
-    ".4byte 0x000bffec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eeec\n"
-    ".4byte 0x0002eecb\n"
-    ".4byte 0x000b0bb0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x4458\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b2eec\n"
-    ".4byte 0x000b2c3f\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b2ef0\n"
-    ".4byte 0x000b2c00\n"
-    ".4byte 0x000b0b00\n"
-    ".4byte 0x000b0b00\n"
-    ".4byte 0x0002c2c0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x558\n"
-    ".4byte 0x00000a8f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0000b0bb\n"
-    ".4byte 0x00002cb0\n"
-    ".4byte 0x0003ffec\n"
-    ".4byte 0x00002c2f\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0002feec\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x00002eec\n"
-    ".4byte 0x00002fbc\n"
-    ".4byte 0x0003f0bc\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2e20\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002ff00\n"
-    ".4byte 0x0002cbbf\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002ff2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cbbf\n"
-    ".4byte 0x0002ff2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002ff2c\n"
-    ".4byte 0x0000bcbc\n"
-    ".4byte 0x0000bc0b\n"
-    ".4byte 0x000bbb00\n"
-    ".4byte 0x0002c2c0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xab00\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x000bfeff\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000bc2f0\n"
-    ".4byte 0x000bb2ec\n"
-    ".4byte 0x000b2ecb\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x0002c0b0\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap21, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_021_59D034\n"
-    "frontier_df4_uistuff_021_59D034:\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x45c0\n"
-    ".4byte 0x00000b8a\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x00002fc0\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x000bfffb\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x00002c00\n"
-    ".4byte 0x0002ffc0\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002ffcb\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x15f0\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002ff00\n"
-    ".4byte 0x000002fc\n"
-    ".4byte 0x0002cb00\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x0000b000\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002f00\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x000bc0bc\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1a70\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002ff3b\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0000b02c\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000bcbc\n"
-    ".4byte 0x000000bc\n"
-    ".4byte 0x000bffbb\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x000bbbb0\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000bbb2c\n"
-    ".4byte 0x000fffcb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x948\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c2f\n"
-    ".4byte 0x000bffc0\n"
-    ".4byte 0x00002cbf\n"
-    ".4byte 0x0000bb00\n"
-    ".4byte 0x0002cbbf\n"
-    ".4byte 0x000b02c0\n"
-    ".4byte 0x0002ffbf\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffc0\n"
-    ".4byte 0x00002cbf\n"
-    ".4byte 0x0002fcbb\n"
-    ".4byte 0x0002cbbb\n"
-    ".4byte 0x0002c0bb\n"
-    ".4byte 0x0002c0bb\n"
-    ".4byte 0x0000b0bf\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x990\n"
-    ".4byte 0x00000c96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002c00b\n"
-    ".4byte 0x000ec02c\n"
-    ".4byte 0x000fffc0\n"
-    ".4byte 0x0002c2c0\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002eec0\n"
-    ".4byte 0x002eeec0\n"
-    ".4byte 0x002effc0\n"
-    ".4byte 0x000befec\n"
-    ".4byte 0x000beeec\n"
-    ".4byte 0x0002ecec\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x002c2c2f\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x360\n"
-    ".4byte 0x00000b96\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bfff0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x4698\n"
-    ".4byte 0x00000b8c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x24d8\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000bff0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000bb0bb\n"
-    ".4byte 0x000bbffb\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x000bc00b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x678\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x0000b2ec\n"
-    ".4byte 0x0000bfec\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x000bc2fb\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2370\n"
-    ".4byte 0x00000b90\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x0002fc2c\n"
-    ".4byte 0x0002ec0b\n"
-    ".4byte 0x0002ebbb\n"
-    ".4byte 0x0000b02f\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x000bbb0b\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbbf\n"
-    ".4byte 0x000bff2c\n"
-    ".4byte 0x00000bbc\n"
-    ".4byte 0x00000bbf\n"
-    ".4byte 0x00000b2f\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x000bfc2c\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x23b8\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bbc0\n"
-    ".4byte 0x0000b0bf\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000bbff\n"
-    ".4byte 0x000bfcb0\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bbbff\n"
-    ".4byte 0x000bbbbb\n"
-    ".4byte 0x000bb3ff\n"
-    ".4byte 0x000bb0b0\n"
-    ".4byte 0x000b2efc\n"
-    ".4byte 0x000b2cb0\n"
-    ".4byte 0x000b2ef0\n"
-    ".4byte 0x0002cb2f\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x240\n"
-    ".4byte 0x00000b93\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x00002c2c\n"
-    ".4byte 0x00003bbf\n"
-    ".4byte 0x0000bb2c\n"
-    ".4byte 0x0000c2ec\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x000b00bc\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002c2fc\n"
-    ".4byte 0x0002c2cb\n"
-    ".4byte 0x0002ffc0\n"
-    ".4byte 0x0002c2c0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x1170\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x000b0000\n"
-    ".4byte 0x000b2ffc\n"
-    ".4byte 0x000b0000\n"
-    ".4byte 0x000b0000\n"
-    ".4byte 0x000b2ffc\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b2ffc\n"
-    ".4byte 0x000b2c2c\n"
-    ".4byte 0x000b0000\n"
-    ".4byte 0x000b0000\n"
-    ".4byte 0x000bc000\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0xa368\n"
-    ".4byte 0x00000b8d\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000bfffc\n"
-    ".4byte 0x000b0b2c\n"
-    ".4byte 0x0002efbb\n"
-    ".4byte 0x0000b2c0\n"
-    ".4byte 0x0002c0b0\n"
-    ".4byte 0x000b002f\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x0002cb2c\n"
-    ".4byte 0x000b0b0b\n"
-    ".4byte 0x00000bc0\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x2b98\n"
-    ".4byte 0x00000b8e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0002fffc\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x00000b0b\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x000bffff\n"
-    ".4byte 0x00000b00\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x00002ec0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0000b0b0\n"
-    ".4byte 0x0002c02c\n"
-    ".4byte 0x000b000b\n"
-    ".4byte frontier_fontgrp_ui_000_59D4FC + 0x59b8\n"
-    ".4byte 0x00000b92\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00002c0b\n"
-    ".4byte 0x00000b2c\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002c2c0\n"
-    ".4byte 0x0002c2c0\n"
-    ".4byte 0x0002ffef\n"
-    ".4byte 0x000002ec\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002c2ec\n"
-    ".4byte 0x0002ffec\n"
-    ".4byte 0x0000002c\n"
-    ".4byte 0x000002fb\n"
-    ".4byte 0x000bff0b\n"
-);
+u32 frontier_df4_uistuff_008_5946F4[] __attribute__((section(".data.frontier_df4_uistuff.gap8"))) = {
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x9d8,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000B0,
+    0x00002CB0,
+    0x00000BF0,
+    0x000002BF,
+    0x0000002E,
+    0x0000002C,
+    0x00002FEC,
+    0x0000BABC,
+    0x0000B02C,
+    0x0000B008,
+    0x0000B800,
+    0x00002EA8,
+    0x00000BFC,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x4728,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BC0,
+    0x00002EBC,
+    0x0000B82B,
+    0x0000B002,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B800,
+    0x00002C00,
+    0x00002E00,
+    0x00000B80,
+    0x000002F0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1908,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000BC00,
+    0x00002BFC,
+    0x00000BAB,
+    0x000002C2,
+    0x000002C0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000002E0,
+    0x000002C0,
+    0x00000B80,
+    0x00002E00,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x240,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x00002CB0,
+    0x00000BF0,
+    0x000002B0,
+    0x0000002C,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x00002AAB,
+    0x00003FFE,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x558,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000B0,
+    0x000000B0,
+    0x00002EFC,
+    0x0000B8B8,
+    0x0000B0B0,
+    0x00002C2C,
+    0x00002C2C,
+    0x00002C2C,
+    0x00002C0B,
+    0x00002FCB,
+    0x0000BEBB,
+    0x00002CBB,
+    0x00000BE0,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x750,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000000B,
+    0x00002FEB,
+    0x00002A8B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x000000BB,
+    0x000000BB,
+    0x000000BB,
+    0x00003FEB,
+    0x00002A8B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xb88,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002C0,
+    0x000002CB,
+    0x000002CB,
+    0x00000BFE,
+    0x00002EEC,
+    0x0000BAEC,
+    0x0000B0BB,
+    0x0000B0BB,
+    0x0000B0BB,
+    0x0000BBBB,
+    0x0000BEEF,
+    0x0000BEEE,
+    0x00002B88,
+    (u32)&frontier_df4_uistuff_016_59A2EC + 0x120,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x00002FBF,
+    0x0000BAEE,
+    0x0000B0BC,
+    0x0000B0AC,
+    0x0000B02C,
+    0x0000B02E,
+    0x0000BB2F,
+    0x0000BEEE,
+    0x0000BEEC,
+    0x00002BAC,
+};
+u32 frontier_df4_uistuff_009_594B2C[] __attribute__((section(".data.frontier_df4_uistuff.gap9"))) = {
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x48,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002C0,
+    0x000002FC,
+    0x000002E8,
+    0x000002C0,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002FFC,
+    0x00002EBB,
+    0x0000BCBB,
+    0x00002CBB,
+    0x00000B2F,
+    0x00000B0A,
+    0x000002C0,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0xd8,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000B0,
+    0x000000B0,
+    0x00002EFF,
+    0x0000B8BA,
+    0x0000B0B0,
+    0x0000A0BC,
+    0x000000BB,
+    0x00002CBB,
+    0x00002C2E,
+    0x00002C2C,
+    0x00002C2C,
+    0x00002E2C,
+    0x00000BF8,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x2d0,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000B00,
+    0x00000B2C,
+    0x00000B2C,
+    0x00002FFC,
+    0x00002EEC,
+    0x0000BAEE,
+    0x0000B2EF,
+    0x0000B0BB,
+    0x0000B0BB,
+    0x0000B0BB,
+    0x00002C3B,
+    0x00002E2C,
+    0x00000BC8,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0xa20,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000B0,
+    0x000000B0,
+    0x00000BB0,
+    0x000002FF,
+    0x000000BA,
+    0x00002CB0,
+    0x00002EFF,
+    0x0000B8BA,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000BAB0,
+    0x00002FE0,
+    (u32)&frontier_df4_uistuff_021_59D034 + 0x288,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000B2C,
+    0x00000B2C,
+    0x00002F2C,
+    0x0000BAFC,
+    0x0000B0BC,
+    0x0000B0BB,
+    0x0000B0B2,
+    0x00002FB0,
+    0x00000AB0,
+    0x000002E0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x10e0,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000B00,
+    0x00000B0B,
+    0x00002FCB,
+    0x00002FBB,
+    0x0000BB2F,
+    0x0000BB2F,
+    0x0000BB0B,
+    0x0000BBBB,
+    0x0000BBBB,
+    0x00002FEB,
+    0x00000B82,
+    0x000002C0,
+    0x000000B0,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xab0,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x0000B2C0,
+    0x00002FC0,
+    0x00000AC0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002FC,
+    0x00002FEB,
+    0x00003ACB,
+    0x000020BE,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x288,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000002C,
+    0x000002F8,
+    0x00000BA0,
+    0x00000A00,
+    0x0000000B,
+    0x0000000B,
+    0x00002FCB,
+    0x0000BABB,
+    0x0000B02F,
+    0x0000B00B,
+    0x0000B002,
+    0x00002EA8,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x630,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00002E0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C2F,
+    0x00002C0B,
+    0x00000B02,
+    0x00000B00,
+    0x000002E8,
+    0x000000BC,
+    (u32)&frontier_df4_uistuff_013_5987EC + 0x5a0,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00002FC0,
+    0x00000BBC,
+    0x00000B28,
+    0x000002C0,
+    0x000002C0,
+    0x00002FF0,
+    0x0000BAAC,
+    0x0000B02C,
+    0x0000B00B,
+    0x0000B2F2,
+    0x0000BBAC,
+    0x00002F2C,
+    0x00000AF8,
+};
+u32 frontier_df4_uistuff_010_595B34[] __attribute__((section(".data.frontier_df4_uistuff.gap10"))) = {
+    (u32)&frontier_df4_uistuff_012_596F74 + 0xe10,
+    0x00000983,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000B0,
+    0x000000B0,
+    0x0000BFF0,
+    0x00002BB8,
+    0x00000B2C,
+    0x00000B2E,
+    0x00000B0B,
+    0x00000B00,
+    0x00000B00,
+    0x00000B80,
+    0x000002C0,
+    0x000002E0,
+    0x000000B8,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0xea0,
+    0x00000983,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000BFFF,
+    0x0000BAAA,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000BFFF,
+    0x0000BAAA,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0xf30,
+    0x00000983,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000B2C,
+    0x00000B2C,
+    0x00000B2C,
+    0x0000BFFF,
+    0x00002BAE,
+    0x00000B2C,
+    0x00000B2C,
+    0x00000B2C,
+    0x00000B00,
+    0x00000B00,
+    0x00000380,
+    0x000002E0,
+    0x000000B0,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0xfc0,
+    0x00000983,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000002C,
+    0x000000B8,
+    0x000000A0,
+    0x00000000,
+    0x0000B00B,
+    0x0000B02E,
+    0x0000B028,
+    0x0000B800,
+    0x00002C00,
+    0x00000E00,
+    0x00000B80,
+    0x000002E0,
+    0x000000BC,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0x1050,
+    0x00000983,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00002FFC,
+    0x00002EA8,
+    0x00002C00,
+    0x00002C00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B80,
+    0x00002EC0,
+    0x00002CB0,
+    0x0000B8B8,
+    0x0000B02E,
+    0x0000B00B,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x480,
+    0x00000983,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x0000B0B0,
+    0x0000BFF0,
+    0x0000BABF,
+    0x0000B0BA,
+    0x00002CB0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x00002AB0,
+    0x00003FC0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1dd0,
+    0x00000983,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000B00B,
+    0x0000B02E,
+    0x0000B02C,
+    0x0000B02C,
+    0x0000B000,
+    0x0000B000,
+    0x0000B800,
+    0x00002C00,
+    0x00002E00,
+    0x00000B80,
+    0x000002E0,
+    0x000000BC,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0x5e8,
+    0x00000983,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002C0,
+    0x000002C0,
+    0x0000BFC0,
+    0x0000BAB0,
+    0x0000B0B0,
+    0x0000B0BC,
+    0x0000BBEC,
+    0x00002E0B,
+    0x00002C00,
+    0x00000B00,
+    0x00000B80,
+    0x000002E0,
+    0x000000BC,
+};
+u32 frontier_df4_uistuff_011_59662C[] __attribute__((section(".data.frontier_df4_uistuff.gap11"))) = {
+    (u32)&frontier_df4_uistuff_012_596F74 + 0xdc8,
+    0x00000B83,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000BB2C0,
+    0x000BB2C0,
+    0x000BBFC0,
+    0x0000BAB0,
+    0x0000B0B0,
+    0x0000B02C,
+    0x0000B00C,
+    0x0000B80B,
+    0x00002C00,
+    0x00002E00,
+    0x00000B80,
+    0x000002E0,
+    0x000000BC,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0xe58,
+    0x00000B83,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000BB0B0,
+    0x000BB0B0,
+    0x000BB0B0,
+    0x0000BFF8,
+    0x00002BAC,
+    0x00000B2E,
+    0x00000B0B,
+    0x00000B00,
+    0x00000B00,
+    0x00000B80,
+    0x000002C0,
+    0x000002E0,
+    0x000000B0,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0xee8,
+    0x00000B83,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000BB000,
+    0x000BB000,
+    0x000BBFFF,
+    0x0000BAAA,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000BFFF,
+    0x0000BAAA,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0xf78,
+    0x00000B83,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000BBB2C,
+    0x000BBB2C,
+    0x000BBB2C,
+    0x0000BFFF,
+    0x00002BAE,
+    0x00000B2C,
+    0x00000B2C,
+    0x00000B2C,
+    0x00000B00,
+    0x00000B00,
+    0x00000B80,
+    0x000002E0,
+    0x000000B0,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0x1008,
+    0x00000B83,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000002C,
+    0x000BB0B8,
+    0x000BB0A0,
+    0x000BB000,
+    0x0000000B,
+    0x0000B02E,
+    0x0000B828,
+    0x00002C00,
+    0x00002E00,
+    0x00000B80,
+    0x000002E0,
+    0x000000B8,
+    0x0000002C,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0x48,
+    0x00000B83,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000BB000,
+    0x000BBFFC,
+    0x000BBEA8,
+    0x00002C00,
+    0x00002C00,
+    0x00002E00,
+    0x00000B00,
+    0x00000B80,
+    0x00000EE0,
+    0x00002CB0,
+    0x00002CB8,
+    0x0000B02E,
+    0x0000B00B,
+    (u32)&frontier_df4_uistuff_012_596F74,
+    0x00000B83,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000BB0B0,
+    0x000BB0B0,
+    0x000BB0B0,
+    0x000000B0,
+    0x0000BFF0,
+    0x0000BABF,
+    0x0000B0BA,
+    0x00002CB0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x00002AB0,
+    0x00003FC0,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xf30,
+    0x00000B83,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000BB000,
+    0x000BB00B,
+    0x000BBC0B,
+    0x00002C2E,
+    0x00002C2C,
+    0x00002C28,
+    0x00002C00,
+    0x00002E00,
+    0x00000B00,
+    0x00000B80,
+    0x000002E0,
+    0x000000B8,
+    0x0000002C,
+};
+u32 frontier_df4_uistuff_012_596F74[] __attribute__((section(".data.frontier_df4_uistuff.gap12"))) = {
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x8f28,
+    0x00000881,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00002FFF,
+    0x00002AAA,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xcf0,
+    0x000008E0,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002EAB,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_013_5987EC + 0x1b0,
+    0x00000987,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000B00,
+    0x00000BF0,
+    0x00000BA0,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0x318,
+    0x00000887,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C00,
+    0x00000B00,
+    0x00000B00,
+    0x000002C0,
+    0x000000B0,
+    0x000000B8,
+    0x0000002E,
+    0x00002AAB,
+    0x00002FFF,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0x360,
+    0x00000887,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C00,
+    0x00002C00,
+    0x00000BFC,
+    0x00002EA8,
+    0x00002C00,
+    0x00002C00,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002EAB,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0x10e0,
+    0x00000987,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00002F00,
+    0x00002F00,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002CB0,
+    0x00002CB0,
+    0x00002C2C,
+    0x00002C2C,
+    0x00002C0B,
+    0x0000FFFF,
+    0x0000AEAA,
+    0x00002C00,
+    0x00002C00,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0xd80,
+    0x00000887,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000FFF,
+    0x00000AAB,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x00000BFF,
+    0x00002EAA,
+    0x00002C00,
+    0x00002C00,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002EAB,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0x438,
+    0x00000887,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x0000000B,
+    0x0000000B,
+    0x00000BFF,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002EAB,
+    0x00000BFC,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x4bf0,
+    0x00000887,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00002FFF,
+    0x00002EAA,
+    0x00002E00,
+    0x00000E00,
+    0x00000B80,
+    0x00000380,
+    0x000002C0,
+    0x000000E0,
+    0x000000E0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0xaf8,
+    0x00000887,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002EAB,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0x3f0,
+    0x00000887,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002FFE,
+    0x00002EA8,
+    0x00002C00,
+    0x00002C00,
+    0x00002C0B,
+    0x00002EAB,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x5e8,
+    0x00000581,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000000B,
+    0x0000002E,
+    0x000000B8,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x438,
+    0x00000581,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000002C,
+    0x000000BB,
+    0x000000BB,
+    0x0000002C,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x828,
+    0x00000681,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x00000000,
+    0x0000002C,
+    0x0000002C,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x120,
+    0x00000881,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002F0,
+    0x00000BAC,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C00,
+    0x00000B00,
+    0x00000AC0,
+    0x000002B0,
+    0x000000B0,
+    0x000000B0,
+    0x00000000,
+    0x000000B0,
+    0x000000B0,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x48,
+    0x00000781,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002F0,
+    0x000002F0,
+    0x000002A0,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0xc18,
+    0x00000981,
+    0x00000000,
+    0x00002FC0,
+    0x00002AC0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0xc60,
+    0x00000981,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000BA0,
+    0x00000BF0,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0x8b8,
+    0x00000981,
+    0x00000000,
+    0x00002C00,
+    0x00000B00,
+    0x00000B80,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x00000B80,
+    0x00000B00,
+    0x00002C00,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0x900,
+    0x00000981,
+    0x00000000,
+    0x000000B0,
+    0x000002E0,
+    0x000002C0,
+    0x00000B80,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B80,
+    0x000002C0,
+    0x000002E0,
+    0x000000B0,
+    (u32)&frontier_df4_uistuff_012_596F74 + 0x630,
+    0x00000981,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000FC,
+    0x0000EBAB,
+    0x0000BE02,
+    0x00002800,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x8b8,
+    0x00000981,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000B000,
+    0x0000B000,
+    0x00002C00,
+    0x00002C00,
+    0x00000B00,
+    0x00000B00,
+    0x000002C0,
+    0x000002C0,
+    0x000000B0,
+    0x000000B0,
+    0x0000002C,
+    0x0000002C,
+    0x0000000B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x318,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002C0,
+    0x000002E0,
+    0x000003B0,
+    0x000003B0,
+    0x00000BB0,
+    0x00000BB8,
+    0x00000E2C,
+    0x00002E2C,
+    0x00002FFC,
+    0x00002EAE,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xbd0,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFF,
+    0x00002EAB,
+    0x0000B80B,
+    0x0000B80B,
+    0x00002E0B,
+    0x00000BFF,
+    0x00002EAB,
+    0x0000B80B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B80B,
+    0x00002EAB,
+    0x00000BFF,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x750,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BC0,
+    0x00002EB0,
+    0x0000B82C,
+    0x0000B02E,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000B02E,
+    0x0000B82C,
+    0x00002EB0,
+    0x00000BC0,
+    (u32)&frontier_df4_uistuff_013_5987EC + 0x558,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002FF,
+    0x00000BAB,
+    0x00002E0B,
+    0x0000380B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000380B,
+    0x00002E0B,
+    0x00000BAB,
+    0x000002FF,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1ab8,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000BFFF,
+    0x0000AAAB,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x00002FFF,
+    0x00002AAB,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000AAAB,
+    0x0000BFFF,
+    (u32)&data_0859A0AC + 0x1b0,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000BFFF,
+    0x0000AAAB,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x00002FFF,
+    0x00002AAB,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1320,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BF0,
+    0x00002EAC,
+    0x0000B80B,
+    0x0000B00B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000BF0B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000BEAC,
+    0x0000BBF0,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x828,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000BFFF,
+    0x0000BAAB,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0x3f0,
+    0x00000582,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0xb88,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B82B,
+    0x00002EAC,
+    0x00000BF0,
+    (u32)&frontier_df4_uistuff_013_5987EC + 0x3a8,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000B80B,
+    0x00002E0B,
+    0x00000B8B,
+    0x000002EB,
+    0x000000BB,
+    0x0000002F,
+    0x0000002F,
+    0x000000BB,
+    0x000002CB,
+    0x00000B0B,
+    0x00002C0B,
+    0x0000B00B,
+    0x0000C00B,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x240,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000AAAB,
+    0x0000BFFF,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0xc60,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000B00B,
+    0x0000B80B,
+    0x0000BC0F,
+    0x0000BC0F,
+    0x0000BE2F,
+    0x0000BB3B,
+    0x0000BBBB,
+    0x0000BBBB,
+    0x0000BBBB,
+    0x0000BBBB,
+    0x0000B2EB,
+    0x0000B2CB,
+    0x0000B2CB,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x7e0,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000B00B,
+    0x0000B00F,
+    0x0000B02F,
+    0x0000B02F,
+    0x0000B0BB,
+    0x0000B0BB,
+    0x0000B2EB,
+    0x0000B2CB,
+    0x0000BB8B,
+    0x0000BB0B,
+    0x0000BE0B,
+    0x0000BC0B,
+    0x0000BC0B,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x6c0,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BF0,
+    0x00002EAC,
+    0x0000380B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000380B,
+    0x00002EAC,
+    0x00000BF0,
+    (u32)&frontier_df4_uistuff_013_5987EC + 0x480,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00002FFF,
+    0x0000BAAB,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B80B,
+    0x00002FFF,
+    0x00000AAB,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x870,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BF0,
+    0x00002EAC,
+    0x0000380B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B2FB,
+    0x0000BB2F,
+    0x00002EAC,
+    0x00002FF0,
+    0x0000B000,
+    (u32)&frontier_df4_uistuff_015_599BE4,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFF,
+    0x00002EAB,
+    0x0000B80B,
+    0x0000B00B,
+    0x0000B80B,
+    0x00002E0B,
+    0x00000BFF,
+    0x000002EB,
+    0x00000B8B,
+    0x00000B0B,
+    0x00002E0B,
+    0x00002C0B,
+    0x0000B80B,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x948,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BF8,
+    0x00002EAE,
+    0x0000B80B,
+    0x0000B80B,
+    0x0000002B,
+    0x000000BC,
+    0x00000BE0,
+    0x00002E00,
+    0x0000B800,
+    0x0000B00B,
+    0x0000B80B,
+    0x00002EAE,
+    0x00000BF8,
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0x120,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000BFFF,
+    0x0000AAEA,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    (u32)&frontier_df4_uistuff_013_5987EC + 0x1f8,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B80B,
+    0x00002EAC,
+    0x00000BF0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x28c8,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000B00B,
+    0x0000B00B,
+    0x0000B00B,
+    0x00002C2E,
+    0x00002C2C,
+    0x00002C2C,
+    0x00002C2C,
+    0x00000BB8,
+    0x00000BB0,
+    0x00000BB0,
+    0x000002E0,
+    0x000002C0,
+    0x000002C0,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x8b8,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000B2CB,
+    0x0000B2CB,
+    0x0000B2CB,
+    0x0000B2CB,
+    0x0000BBBB,
+    0x0000BBBB,
+    0x0000BBBB,
+    0x0000BBBB,
+    0x0000BBBB,
+    0x0000BBBB,
+    0x00002E2C,
+    0x00002C2C,
+    0x00002C2C,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x3a8,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000B00B,
+    0x0000B80B,
+    0x00002C2C,
+    0x00002E2C,
+    0x00000BB0,
+    0x000002C0,
+    0x000002C0,
+    0x00000BB0,
+    0x00000BB8,
+    0x00002E2C,
+    0x00002C2E,
+    0x0000B80B,
+    0x0000B00B,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x5e8,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000B00B,
+    0x0000B80B,
+    0x00002C2C,
+    0x00002E2C,
+    0x00000BB0,
+    0x00000BB0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x5e8,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00002FFF,
+    0x00002EAA,
+    0x00002E00,
+    0x00000B00,
+    0x00000B80,
+    0x000002C0,
+    0x000002E0,
+    0x000000B0,
+    0x000000B8,
+    0x0000002C,
+    0x0000002E,
+    0x00002AAB,
+    0x00003FFF,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x798,
+    0x00000581,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000BC,
+    0x000000BC,
+    0x000000A8,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x8b8,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002EAB,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_016_59A2EC + 0xd8,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000B00,
+    0x00000BF0,
+    0x00000BA0,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x17a0,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C00,
+    0x00000B00,
+    0x00000B00,
+    0x000002C0,
+    0x000000B0,
+    0x000000B8,
+    0x0000002E,
+    0x00002AAB,
+    0x00002FFF,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x990,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C00,
+    0x00002C00,
+    0x00000BFC,
+    0x00002EA8,
+    0x00002C00,
+    0x00002C00,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002EAB,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x9d8,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00002F00,
+    0x00002F00,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002CB0,
+    0x00002CB0,
+    0x00002C2C,
+    0x00002C2C,
+    0x00002C0B,
+    0x0000FFFF,
+    0x0000AEAA,
+    0x00002C00,
+    0x00002C00,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x6c0,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000FFF,
+    0x00000AAB,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x00000BFF,
+    0x00002EAA,
+    0x00002C00,
+    0x00002C00,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002EAB,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x1b0,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x0000000B,
+    0x0000000B,
+    0x00000BFF,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002EAB,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0x3f0,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00002FFF,
+    0x00002EAA,
+    0x00002E00,
+    0x00000E00,
+    0x00000B80,
+    0x00000380,
+    0x000002C0,
+    0x000000E0,
+    0x000000E0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0x288,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002EAB,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x510,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002C0B,
+    0x00002FFE,
+    0x00002EA8,
+    0x00002C00,
+    0x00002C00,
+    0x00002C0B,
+    0x00002EAB,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0xaf8,
+    0x00000983,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000BFFF,
+    0x0000AAAB,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x00002FFF,
+    0x00002AAB,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000AAAB,
+    0x0000BFFF,
+    (u32)&frontier_df4_uistuff_013_5987EC + 0x438,
+    0x00000581,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000000BC,
+    0x000000BC,
+    0x000000B0,
+    0x0000002C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x5970,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002F0,
+    0x00000BAC,
+    0x00000B0B,
+    0x00000BF0,
+    0x00000BAC,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000BEB,
+    0x00002EBC,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x1f8,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x000002FF,
+    0x00000BAB,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000BAB,
+    0x000002FF,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_013_5987EC,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002FC,
+    0x00000BAB,
+    0x00000B0B,
+    0x00000B0B,
+    0x0000000B,
+    0x0000000B,
+    0x00000B0B,
+    0x00000BAB,
+    0x000002FC,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_013_5987EC + 0x48,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000BFC,
+    0x00000BAB,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000BAB,
+    0x00000BFC,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x870,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002FC,
+    0x00000BAB,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000BFF,
+    0x000002AB,
+    0x00000B0B,
+    0x00000BAB,
+    0x000002FC,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x90,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x000002F0,
+    0x000002AC,
+    0x0000002C,
+    0x0000002C,
+    0x00000BFF,
+    0x00000AAE,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x00000000,
+    (u32)&data_0859A0AC + 0xd8,
+    0x00000882,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000002F0,
+    0x00000BAC,
+    0x00000B2C,
+    0x00000B2C,
+    0x00000BAC,
+    0x000002FC,
+    0x000000AC,
+    0x00000BFC,
+    0x00002EAB,
+    0x00002E0B,
+    0x00000BFC,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x168,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x000002FB,
+    0x00000BAF,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000B0B,
+    0x00000000,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xe10,
+    0x00000482,
+    0x00000000,
+    0x00000000,
+    0x0000002C,
+    0x0000002C,
+    0x00000000,
+    0x00000000,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x00000000,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x90,
+    0x00000582,
+    0x00000000,
+    0x00000000,
+    0x000000B0,
+    0x000000B0,
+    0x00000000,
+    0x00000000,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000B0,
+    0x000000BA,
+    0x0000002F,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3888,
+    0x00000782,
+    0x00000000,
+    0x00000000,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x0000000B,
+    0x00000B8B,
+    0x000002EB,
+    0x000000BF,
+    0x0000002F,
+    0x000000BB,
+    0x000000BB,
+    0x000002EB,
+    0x000002CB,
+    0x00000B8B,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0x438,
+    0x00000482,
+    0x00000000,
+    0x00000000,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x00000000,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3cc0,
+    0x00000982,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00002FBB,
+    0x0000BAEF,
+    0x0000B2CB,
+    0x0000B2CB,
+    0x0000B2CB,
+    0x0000B2CB,
+    0x0000B2CB,
+    0x0000B2CB,
+    0x0000B2CB,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_013_5987EC[] __attribute__((section(".data.frontier_df4_uistuff.gap13"))) = {
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0xd8,
+    0x00000181,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xa68,
+    0x00000181,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x4c8,
+    0x00000B81,
+    0x00000000,
+    0x00000000,
+    0x0000B0B0,
+    0x0002EEEC,
+    0x000B8B8B,
+    0x000B0B0B,
+    0x000B000B,
+    0x000B800B,
+    0x000BC00B,
+    0x0002E02C,
+    0x0002E02C,
+    0x0000B8B0,
+    0x0000B8B0,
+    0x00002EC0,
+    0x00002EC0,
+    0x00000B00,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x9d8,
+    0x00000983,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000BFFF,
+    0x0000BAAA,
+    0x0000B000,
+    0x0000B000,
+    0x0000B000,
+    0x0000BFFF,
+    0x0000BAAA,
+    0x0000B800,
+    0x00002C00,
+    0x00002E00,
+    0x00000B80,
+    0x000002E0,
+    0x000000BC,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x630,
+    0x00000981,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x0000BFFF,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x9d8,
+    0x00000981,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000BFFF,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x948,
+    0x00000781,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x4c38,
+    0x00000184,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x5340,
+    0x00000B90,
+    0x00000000,
+    0x0000B02C,
+    0x0000B02C,
+    0x000BFFFF,
+    0x000BBBC0,
+    0x000BBBB0,
+    0x000BBBB0,
+    0x000BFF2C,
+    0x000BBBBC,
+    0x000BBBEF,
+    0x000BBB2F,
+    0x000BFF2C,
+    0x0000B02C,
+    0x0000B02C,
+    0x0000B02C,
+    0x0000B02C,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x120,
+    0x00000B89,
+    0x00000000,
+    0x000000B0,
+    0x000000B0,
+    0x000FFFEC,
+    0x000B002C,
+    0x000B002F,
+    0x000BBFEF,
+    0x000BB2EC,
+    0x000BB2EC,
+    0x000BB2EC,
+    0x000BB2EC,
+    0x000BBFEC,
+    0x000BB2EC,
+    0x000B002C,
+    0x000B002C,
+    0x000BC02C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC,
+    0x00000B89,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x000B000B,
+    0x0000BFF0,
+    0x00000000,
+    0x00000000,
+    0x000BFFFF,
+    0x000002C0,
+    0x0000B2C0,
+    0x0000B0B0,
+    0x0002ECB0,
+    0x0002CBFC,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x708,
+    0x00000B91,
+    0x00000000,
+    0x000BB0BF,
+    0x000BB0BB,
+    0x0000B0BB,
+    0x000BFFFB,
+    0x0000B0BF,
+    0x0000B0BB,
+    0x000BBBBB,
+    0x000BBBBF,
+    0x0002FFFB,
+    0x0002FBBB,
+    0x0000BBBB,
+    0x0000BBBF,
+    0x0002EC2C,
+    0x0002ECBB,
+    0x000B0BBB,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x900,
+    0x00000B91,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00002EC0,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x0002C02C,
+    0x000B000B,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x948,
+    0x00000B92,
+    0x00000000,
+    0x00000000,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x00000B00,
+    0x000BFFFF,
+    0x000B0B00,
+    0x000B02C0,
+    0x000B02C0,
+    0x000B00B0,
+    0x0002F02F,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x360,
+    0x00000B8C,
+    0x00000000,
+    0x00000000,
+    0x0002FFFC,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000BFFFF,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002CB0,
+    0x000B2CB0,
+    0x000B2C2C,
+    0x000BF00B,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0xc18,
+    0x00000B8B,
+    0x00000000,
+    0x0000002C,
+    0x0000002C,
+    0x0002FFFC,
+    0x0000002C,
+    0x0000BFFB,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C000,
+    0x0002EC00,
+    0x0002EC2C,
+    0x0002CB2C,
+    0x0002CBB0,
+    0x0002C2C0,
+    0x0002CBB0,
+    0x000B2C2F,
+    (u32)&frontier_df4_uistuff_016_59A2EC + 0x90,
+    0x00000A8F,
+    0x00000000,
+    0x000002C0,
+    0x000002C0,
+    0x0002C2CB,
+    0x0002C2CB,
+    0x0002C2CB,
+    0x0002C2CB,
+    0x0002FFFF,
+    0x000002C0,
+    0x000002C0,
+    0x0002C2CB,
+    0x0002C2CB,
+    0x0002C2CB,
+    0x0002C2CB,
+    0x0002FFFF,
+    0x0002C00B,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0xab0,
+    0x00000B8F,
+    0x00000000,
+    0x0000B0B0,
+    0x000BB0B0,
+    0x000CB0B0,
+    0x0000B0BB,
+    0x000BFFBC,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002ECB0,
+    0x0002ECBC,
+    0x0002ECBB,
+    0x000B0BB0,
+    0x000B0BB0,
+    0x000C02F0,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x750,
+    0x00000B8D,
+    0x00000000,
+    0x00000B00,
+    0x00002EC0,
+    0x0000B8B0,
+    0x0002E02C,
+    0x000B800B,
+    0x0000BFF0,
+    0x00000000,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C000,
+    0x0002E000,
+    0x0000B000,
+    0x0000B800,
+    0x00002E00,
+    0x00000BC0,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x3f0,
+    0x00000B8D,
+    0x00000000,
+    0x00000B00,
+    0x000002C0,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x00000000,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0xbd0,
+    0x00000B92,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x0000B0B0,
+    0x00002EC0,
+    0x000BFFFF,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0000BB2C,
+    0x00000B00,
+    0x00000B00,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x5e8,
+    0x00000B90,
+    0x00000000,
+    0x00000000,
+    0x000003FF,
+    0x000BFEEC,
+    0x000B2EFC,
+    0x000B2EEC,
+    0x000B2EFC,
+    0x000B2FEC,
+    0x000BFEFF,
+    0x000002C0,
+    0x000BFFFF,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+};
+u32 frontier_df4_uistuff_014_598E64[] __attribute__((section(".data.frontier_df4_uistuff.gap14"))) = {
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3f0,
+    0x00000B89,
+    0x00000000,
+    0x00000000,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002EEEC,
+    0x0002F0BC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x00000000,
+    0x00000BB0,
+    0x0002CBB0,
+    0x000B00BB,
+    0x000BB0BB,
+    0x0000BFCB,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x5a0,
+    0x00000A97,
+    0x00000000,
+    0x0000BFFF,
+    0x0000B000,
+    0x00002CB0,
+    0x00000BC0,
+    0x0002FFFF,
+    0x0002C2CB,
+    0x0002FFFF,
+    0x0002C2CB,
+    0x0002FFFF,
+    0x000002C0,
+    0x0002FFFF,
+    0x0002C0B0,
+    0x0002C0B0,
+    0x0002C02C,
+    0x0000BC0B,
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0x360,
+    0x00000B8E,
+    0x00000000,
+    0x00000B00,
+    0x000EFFFC,
+    0x000B0B00,
+    0x0002CB00,
+    0x000BFFFF,
+    0x00002F00,
+    0x000002C0,
+    0x0002FFFC,
+    0x0002C0BB,
+    0x0002C0B0,
+    0x0002FFF0,
+    0x0002C0B0,
+    0x0002C0B0,
+    0x0002FFF0,
+    0x0002C0B0,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x4c8,
+    0x00000B8B,
+    0x00000000,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x000BFFFF,
+    0x0000B0B0,
+    0x0000BBB0,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1488,
+    0x00000B89,
+    0x00000000,
+    0x000000B0,
+    0x000000B0,
+    0x000BF0B0,
+    0x000BBBFF,
+    0x000BBBB0,
+    0x000BBBB0,
+    0x000BBBB0,
+    0x000BBBB0,
+    0x000BBBB0,
+    0x000BBBB0,
+    0x000BBBB0,
+    0x000BFBB0,
+    0x000BBB2C,
+    0x00000B2C,
+    0x000002CB,
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0x1b0,
+    0x00000B91,
+    0x00000000,
+    0x000002C0,
+    0x0000BFC0,
+    0x0000B0B0,
+    0x00002C2C,
+    0x0002FFFB,
+    0x0002CB00,
+    0x0002CB00,
+    0x000BFFFF,
+    0x0002CB00,
+    0x0002CB00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000BC0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x120,
+    0x00000B8D,
+    0x00000000,
+    0x00002C00,
+    0x00002C00,
+    0x00002EFF,
+    0x000BFC2C,
+    0x0002CC2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002EEEC,
+    0x0002EC2C,
+    0x0002EC2C,
+    0x0000B0BC,
+    0x0000B00B,
+    0x0002EC00,
+    0x0002CB00,
+    0x000B02C0,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x318,
+    0x00000B8C,
+    0x00000000,
+    0x0002FCB0,
+    0x0002EFFF,
+    0x000BECB0,
+    0x000003FF,
+    0x000BFFBB,
+    0x000B2FFF,
+    0x0002F8B0,
+    0x000B2EFF,
+    0x0000BFB0,
+    0x00000BF0,
+    0x0002FFFC,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x000002C0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x48,
+    0x00000B97,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x000B0B00,
+    0x000B0B00,
+    0x000B0B00,
+    0x000B02C0,
+    0x000B02C0,
+    0x000B02C0,
+    0x000B00B0,
+    0x000B00B0,
+    0x000B002C,
+    0x0002F00B,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x48,
+    0x00000B8E,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x000B000B,
+    0x000BB00B,
+    0x0000B000,
+    0x0000B000,
+    0x000BFFFF,
+    0x0000B000,
+    0x0000B02C,
+    0x0000B0B0,
+    0x0000B2C0,
+    0x0000B000,
+    0x0000B000,
+    0x0000BC00,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xb88,
+    0x00000B94,
+    0x00000000,
+    0x0000BBB0,
+    0x0000BBB0,
+    0x000BFFF0,
+    0x0000BBAC,
+    0x000BFFFC,
+    0x000002EF,
+    0x000BFFEF,
+    0x000BBBEC,
+    0x000BBBBC,
+    0x000BFFBC,
+    0x000BBBBC,
+    0x000BBB2C,
+    0x000BFF2C,
+    0x000BBB2C,
+    0x000BBB2C,
+    (u32)&frontier_df4_uistuff_021_59D034 + 0x1f8,
+    0x00000B96,
+    0x00000000,
+    0x00000B00,
+    0x000BFFFF,
+    0x0000B0BB,
+    0x000BFFFF,
+    0x0002FEFB,
+    0x000BBBBF,
+    0x0002FFFB,
+    0x0002CBBB,
+    0x0002FFFB,
+    0x0002CBBB,
+    0x0000BFFB,
+    0x0002EECB,
+    0x0002FECB,
+    0x000B2CBB,
+    0x0002F02F,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x288,
+    0x00000B97,
+    0x00000000,
+    0x00000B00,
+    0x000BFFFF,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x000BFFFF,
+    0x00000000,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x00000B00,
+    0x000B0B00,
+    0x000BFC00,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0xa20,
+    0x00000B90,
+    0x00000000,
+    0x00000000,
+    0x000BFFFF,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000000B0,
+    0x0002FFF0,
+    0x0002C0B0,
+    0x0002C0BC,
+    0x0002C0BC,
+    0x0002C0BB,
+    0x0002C0BB,
+    0x0002C0B0,
+    0x0002FFF0,
+    0x0002C0B0,
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0x3a8,
+    0x00000B92,
+    0x00000000,
+    0x000BFFFF,
+    0x000B000B,
+    0x000B2C0B,
+    0x000B2C0B,
+    0x000BBFFB,
+    0x000B2C0B,
+    0x000B2C0B,
+    0x000B2CBB,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000B2C0B,
+    0x000B2F0B,
+    0x000B000B,
+    0x000BFFFF,
+    0x000B000B,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0x900,
+    0x00000B93,
+    0x00000000,
+    0x000BFEFF,
+    0x000B2ECB,
+    0x000BFEFF,
+    0x000B2ECB,
+    0x000BFEFF,
+    0x000B000B,
+    0x000BBBFB,
+    0x000BFC0B,
+    0x000BBBFB,
+    0x000BBFBB,
+    0x000BBBFB,
+    0x000BB2CB,
+    0x000BBBCB,
+    0x000BBCBB,
+    0x000BC00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xc60,
+    0x00000B8B,
+    0x00000000,
+    0x0000B02C,
+    0x0000B02C,
+    0x000BFF2C,
+    0x0000B03F,
+    0x0000B02C,
+    0x000BFF2C,
+    0x000B002C,
+    0x000B0B3C,
+    0x000B0B2C,
+    0x0002EC2F,
+    0x0002EC2C,
+    0x0000B02C,
+    0x0002EC2C,
+    0x0002CC2C,
+    0x000B032C,
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0x1f8,
+    0x00000B8F,
+    0x00000000,
+    0x00000000,
+    0x000BFF2C,
+    0x000B0B2C,
+    0x000BFF2C,
+    0x000B0B2C,
+    0x000BFFBF,
+    0x0000002C,
+    0x000FFFEC,
+    0x00000B2C,
+    0x000BFEEC,
+    0x000BBCBC,
+    0x000BBB0B,
+    0x000BB2C0,
+    0x000B2C00,
+    0x0002CB00,
+    (u32)&frontier_df4_uistuff_016_59A2EC + 0x168,
+    0x00000B93,
+    0x00000000,
+    0x00002C00,
+    0x00002C00,
+    0x000BFFFC,
+    0x00002C2C,
+    0x00002C2C,
+    0x00002C2C,
+    0x000BFC2C,
+    0x00002C2C,
+    0x00002C2C,
+    0x000BFFEC,
+    0x000B02EC,
+    0x000B02EC,
+    0x000B02EC,
+    0x000BFFCB,
+    0x000B02CB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3138,
+    0x00000B95,
+    0x00000000,
+    0x000002C0,
+    0x00000B00,
+    0x0000BB00,
+    0x0000B2C0,
+    0x0000B2C0,
+    0x0000B2EC,
+    0x00002EEC,
+    0x0002EEEC,
+    0x000B2ECB,
+    0x000B0BCB,
+    0x000B0BCB,
+    0x000002C0,
+    0x0002C2F0,
+    0x0002C2EC,
+    0x0000BF0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x750,
+    0x00000B8E,
+    0x00000000,
+    0x0002F2C0,
+    0x0002EEEC,
+    0x0002ECB0,
+    0x0002EEEC,
+    0x0002EC0B,
+    0x000BCBB0,
+    0x000000B0,
+    0x000BFEFF,
+    0x000B00B0,
+    0x0002ECB0,
+    0x0002EEFC,
+    0x0000BBBC,
+    0x0000B0BB,
+    0x0002ECBB,
+    0x000B0BB0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x25f8,
+    0x00000B93,
+    0x00000000,
+    0x0002C2C0,
+    0x0000BB0B,
+    0x000BFFFC,
+    0x00002C2C,
+    0x00000B00,
+    0x0002FFC0,
+    0x0002C2EF,
+    0x0002FFEC,
+    0x0002C2EC,
+    0x0002FFEC,
+    0x0002C2EC,
+    0x0002C2EC,
+    0x0002FFEC,
+    0x000000BB,
+    0x000BFFCB,
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0x318,
+    0x00000B8F,
+    0x00000000,
+    0x00000B00,
+    0x0002FFFC,
+    0x0002CB00,
+    0x000BFFFF,
+    0x0002CB00,
+    0x0002FFFC,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x000BFFFF,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002FFFC,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1998,
+    0x00000B8F,
+    0x00000000,
+    0x0002C0B0,
+    0x0002C0B0,
+    0x0002C0B0,
+    0x000BFEFF,
+    0x0002C0B0,
+    0x0002C0B0,
+    0x0002ECBC,
+    0x0002EEFC,
+    0x0002EEFC,
+    0x0002ECBB,
+    0x0000B0BB,
+    0x0000B0B0,
+    0x0002ECB0,
+    0x0002ECB0,
+    0x000B0BB0,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0xab0,
+    0x00000B8C,
+    0x00000000,
+    0x0002FC00,
+    0x00000BFF,
+    0x000002C0,
+    0x000030B0,
+    0x00002C2C,
+    0x00000B30,
+    0x0002C2C0,
+    0x000BBCB0,
+    0x000B0BFF,
+    0x00000B00,
+    0x00000B00,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x000B0B2C,
+    0x000B0B0B,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x990,
+    0x00000B90,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B2C,
+    0x0002FFFC,
+    0x00000B2C,
+    0x00000B2C,
+    0x0002FFFB,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x870,
+    0x00000C98,
+    0x00000000,
+    0x000B00BF,
+    0x0002FF00,
+    0x0000B2FF,
+    0x0000B000,
+    0x0000B0BF,
+    0x002FFFC0,
+    0x0000B0BF,
+    0x0000B000,
+    0x0000B000,
+    0x000BFFBF,
+    0x000B0BBB,
+    0x000B0BBB,
+    0x000B0BBB,
+    0x000BFFBF,
+    0x000B0BBB,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x318,
+    0x00000B95,
+    0x00000000,
+    0x0002F000,
+    0x00002FF0,
+    0x000000B0,
+    0x000000B0,
+    0x000BFFF0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x000BFFFF,
+    0x00000000,
+    0x0002C0B0,
+    0x0002C0B0,
+    0x000B002C,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x3f0,
+    0x00000B8E,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    (u32)&frontier_df4_uistuff_016_59A2EC,
+    0x00000B8E,
+    0x00000000,
+    0x00002CB0,
+    0x00002CB0,
+    0x000BFFF0,
+    0x00002C2C,
+    0x000BFFEC,
+    0x000B2EEF,
+    0x000B2EEF,
+    0x000B2EEC,
+    0x000BFFEC,
+    0x00002C2C,
+    0x00002EEC,
+    0x00002EEC,
+    0x00002F2C,
+    0x0000B2EC,
+    0x000BC0BC,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xca8,
+    0x00000B97,
+    0x00000000,
+    0x00000000,
+    0x000BFFFC,
+    0x000B0B2C,
+    0x000B0B2C,
+    0x000B0B2C,
+    0x000BFFFC,
+    0x000B0B2C,
+    0x000B0B2C,
+    0x000B0B2C,
+    0x000BFFFC,
+    0x000B0B2C,
+    0x000B0B2C,
+    0x000B0B2C,
+    0x000B0B2C,
+    0x000BCB0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xd38,
+    0x00000B89,
+    0x00000000,
+    0x000BFFFB,
+    0x000B2CBC,
+    0x000BFFFC,
+    0x000B2CB0,
+    0x0002FFC0,
+    0x0002EEEF,
+    0x0002FFEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002FFEC,
+    0x00002C2C,
+    0x000BFFFC,
+    0x00002C2C,
+    0x000000BB,
+    0x000BFFCB,
+    (u32)&data_0859A0AC + 0x90,
+    0x00000B91,
+    0x00000000,
+    0x00002C00,
+    0x00002C0B,
+    0x0003FFEC,
+    0x00002C2C,
+    0x0003FFC0,
+    0x00032EEF,
+    0x00032EEC,
+    0x0003FFEC,
+    0x00002C2C,
+    0x0000BF2C,
+    0x0002EF2C,
+    0x0002EEEC,
+    0x000B2EEC,
+    0x000000BB,
+    0x000BFFCB,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0xcf0,
+    0x00000B96,
+    0x00000000,
+    0x00002C00,
+    0x00002C0B,
+    0x00002C2C,
+    0x000BFFC0,
+    0x00002C0B,
+    0x00002C2C,
+    0x00002C00,
+    0x000BFFF0,
+    0x00002C00,
+    0x00002C2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002C2EC,
+    0x000BBECB,
+    0x000B0BCB,
+    (u32)&frontier_df4_uistuff_014_598E64 + 0xca8,
+    0x00000B8C,
+    0x00000000,
+    0x000BFFFF,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000BFFFF,
+    0x00000B00,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x4d10,
+    0x00000A94,
+    0x00000000,
+    0x00000B00,
+    0x000002C0,
+    0x000000B0,
+    0x0002FFFF,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002FFFF,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002FFFF,
+    0x0002C00B,
+    (u32)&frontier_df4_uistuff_017_59A574,
+    0x00000B89,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B0B2C,
+    0x0002CB2C,
+    0x00000B00,
+    0x00000B00,
+    0x00002EC0,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x000B000B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x12d8,
+    0x00000B94,
+    0x00000000,
+    0x0000BFFC,
+    0x0002FB00,
+    0x0000BBC0,
+    0x0002FBBC,
+    0x0000BBB0,
+    0x000BBBB0,
+    0x0002CBB0,
+    0x0000BFFC,
+    0x0002FBB0,
+    0x0000BBB0,
+    0x0000BBB0,
+    0x0002FB2C,
+    0x0000BB2C,
+    0x000BBB2C,
+    0x000BCB0B,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x4c8,
+    0x00000B92,
+    0x00000000,
+    0x0000B000,
+    0x0000BB2C,
+    0x0000BB2C,
+    0x000BBB2C,
+    0x000BFB2C,
+    0x000BBFBF,
+    0x000BBBEC,
+    0x000BBB2C,
+    0x000BBB2C,
+    0x000BBB2C,
+    0x0000BB2C,
+    0x00000BBC,
+    0x00000B03,
+    0x000B0B00,
+    0x000BFC00,
+    (u32)&frontier_df4_uistuff_021_59D034 + 0x1b0,
+    0x00000B88,
+    0x00000000,
+    0x0000B000,
+    0x0000B0BF,
+    0x000BFFFB,
+    0x0002CBBB,
+    0x0002CBBB,
+    0x0002CBBB,
+    0x000BFFFF,
+    0x000000BB,
+    0x000BFFBB,
+    0x000B0BBB,
+    0x000BFFBB,
+    0x000B0BBF,
+    0x000B0BBB,
+    0x000BFF00,
+    0x000B0B00,
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0x2d0,
+    0x00000B8D,
+    0x00000000,
+    0x00000000,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000000,
+    0x0002EEEC,
+    0x000BBB2C,
+    0x000BBB0B,
+    (u32)&frontier_df4_uistuff_021_59D034 + 0x360,
+    0x00000B90,
+    0x00000000,
+    0x0002CB00,
+    0x0002CB0B,
+    0x0000B2EC,
+    0x000BFFEC,
+    0x0000B2F0,
+    0x0000B2FF,
+    0x0002FFEC,
+    0x0000B2EC,
+    0x0000B2EC,
+    0x0002FFEC,
+    0x0000B2EC,
+    0x0000B2EC,
+    0x000BFFEC,
+    0x000000BB,
+    0x000BFFCB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x798,
+    0x00000B8F,
+    0x00000000,
+    0x000BB000,
+    0x000BB02C,
+    0x0000B02C,
+    0x000BFFEC,
+    0x0000B2FF,
+    0x0000B2EC,
+    0x000BBFEC,
+    0x000BBEEC,
+    0x000BBEEC,
+    0x0002EEEC,
+    0x0002EEFC,
+    0x0002EEEC,
+    0x0002CBCB,
+    0x000BB2C0,
+    0x000B00B0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3c30,
+    0x00000B8A,
+    0x00000000,
+    0x000002CB,
+    0x000BFFEC,
+    0x000002C0,
+    0x000000B0,
+    0x0002FFCB,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEC0,
+    0x000BFFF0,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x000BFFEC,
+    0x0002C00B,
+    0x0000B00B,
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0x90,
+    0x00000B90,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x0002C02C,
+    0x000B000B,
+    (u32)&frontier_df4_uistuff_015_599BE4 + 0x240,
+    0x00000C8B,
+    0x00000000,
+    0x0000B2FF,
+    0x002FFFBB,
+    0x0000B0BB,
+    0x0002ECFF,
+    0x0002ECBB,
+    0x000B0BFF,
+    0x000000BB,
+    0x002FFFBB,
+    0x000B0BFF,
+    0x000BBF00,
+    0x000BBBBB,
+    0x000BBBBB,
+    0x000BBF0B,
+    0x000B0B00,
+    0x000BC2C0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3eb8,
+    0x00000B89,
+    0x00000000,
+    0x00002CBF,
+    0x000BFFFB,
+    0x000B00BB,
+    0x000B00BB,
+    0x0002FFEF,
+    0x0000002F,
+    0x000000BB,
+    0x000BFFFB,
+    0x0000BBBB,
+    0x0000BBBB,
+    0x0000BBBF,
+    0x0000BB0B,
+    0x0000B2CB,
+    0x000BB2CB,
+    0x000BC0BB,
+};
+u32 frontier_df4_uistuff_015_599BE4[] __attribute__((section(".data.frontier_df4_uistuff.gap15"))) = {
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x5538,
+    0x00000B8E,
+    0x00000000,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C000,
+    0x0000B000,
+    0x00002C00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000002C0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x5a48,
+    0x00000B8F,
+    0x00000000,
+    0x00000000,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000BFFFF,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B02C,
+    0x0000B02C,
+    0x00002C0B,
+    0x00002C2F,
+    0x00000BF0,
+    0x00002FC0,
+    0x0000B0B0,
+    0x0002C02F,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x9e58,
+    0x00000B97,
+    0x00000000,
+    0x000B0B2C,
+    0x0002EC2C,
+    0x000FFFEC,
+    0x0000B03F,
+    0x000BFF2C,
+    0x0000B02C,
+    0x0000B02C,
+    0x000BFFBC,
+    0x0000B0BF,
+    0x000CBB2F,
+    0x000BBB2F,
+    0x0002FC2C,
+    0x0002F02C,
+    0x000BBB2C,
+    0x000CB2EC,
+    (u32)&frontier_df4_uistuff_021_59D034 + 0x318,
+    0x00000B95,
+    0x00000000,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x0002C02C,
+    0x000BB0BB,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x00002EC0,
+    0x00002EC0,
+    0x00000B00,
+    0x00002EC0,
+    0x00002EC0,
+    0x0000B0B0,
+    0x000BC02F,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x1b0,
+    0x00000B8D,
+    0x00000000,
+    0x000000B0,
+    0x000BFCB0,
+    0x0000002C,
+    0x0000000B,
+    0x000000B0,
+    0x000000B0,
+    0x000BFF2C,
+    0x0002C02F,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002F02C,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x750,
+    0x00000B90,
+    0x00000000,
+    0x0000BBBB,
+    0x000BBBBB,
+    0x000BB2C0,
+    0x0000BBFF,
+    0x000BFFBB,
+    0x0000BBBB,
+    0x000BBBFF,
+    0x000BBBBB,
+    0x000BBBBB,
+    0x000BBBFF,
+    0x0002C0B0,
+    0x0002CBFF,
+    0x000BB0B0,
+    0x000BB0B0,
+    0x000C2CB0,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0x168,
+    0x00000B97,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0000BBB0,
+    0x000BFFFF,
+    0x00002FC0,
+    0x00002FC0,
+    0x0000BBB0,
+    0x0000BBB0,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x000B0B0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1560,
+    0x00000B95,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002C2EC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002C02C,
+    0x000BFFFF,
+    0x0002C02C,
+    0x0002C2EC,
+    0x0002CB0B,
+    0x0002CB0B,
+    0x0002C00B,
+    0x000BFFFF,
+    0x0000B000,
+    0x00002C00,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1ef0,
+    0x00000B8E,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000BFFFF,
+    0x000B000B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x7398,
+    0x00000B8F,
+    0x00000000,
+    0x00002CB0,
+    0x00000B2C,
+    0x0002FFFF,
+    0x00000B2C,
+    0x0002FFFC,
+    0x00000B2C,
+    0x0002FFFC,
+    0x00000B2C,
+    0x0002FFFC,
+    0x00000B00,
+    0x000BFFFF,
+    0x00002FC0,
+    0x0000BBB0,
+    0x0002CB2C,
+    0x000B0B0B,
+    (u32)&data_0859A0AC + 0x120,
+    0x00000B8C,
+    0x00000000,
+    0x000B00B0,
+    0x000BB2EC,
+    0x000BBB0B,
+    0x000BB000,
+    0x000BBBFF,
+    0x000BB0B0,
+    0x000BBBFF,
+    0x000BBBBB,
+    0x000BBBBB,
+    0x000BBBFF,
+    0x000BB0B0,
+    0x000B00B0,
+    0x000B02EC,
+    0x000B0B0C,
+    0x000BC00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x9360,
+    0x00000B8D,
+    0x00000000,
+    0x000BFFFF,
+    0x000B000B,
+    0x000B000B,
+    0x000B3FFB,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000BBFFB,
+    0x000B0B0B,
+    0x000BBB0B,
+    0x000BCB0B,
+    0x000BBFFB,
+    0x000B000B,
+    0x000B000B,
+    0x000BFFFF,
+    0x000B000B,
+    (u32)&frontier_df4_uistuff_021_59D034 + 0x90,
+    0x00000B91,
+    0x00000000,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x000BFF2C,
+    0x0000B00B,
+    0x0000B030,
+    0x000FFFEC,
+    0x0002C02F,
+    0x0002C02C,
+    0x000FFF2C,
+    0x0002C02C,
+    0x0002CB2C,
+    0x0002EC2C,
+    0x0002EC2C,
+    0x0002C02C,
+    0x0002F02C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x168,
+    0x00000B91,
+    0x00000000,
+    0x0002FF2C,
+    0x0002CB2C,
+    0x0002CBBF,
+    0x0002CBB0,
+    0x0002FFB0,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CBBC,
+    0x0002CBEF,
+    0x0002FF2F,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x000BFFEC,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x15a8,
+    0x00000B98,
+    0x00000000,
+    0x00000B00,
+    0x000B0B00,
+    0x000BBFFC,
+    0x0002CB00,
+    0x0000BB00,
+    0x000BFFFF,
+    0x00000B00,
+    0x000002C0,
+    0x0002C2F0,
+    0x0000B2EC,
+    0x00002FCB,
+    0x000002C0,
+    0x000B02C0,
+    0x000B02C0,
+    0x000BFF00,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x510,
+    0x00000B93,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x00002FC0,
+    0x00002FC0,
+    0x0000BBB0,
+    0x0002CB2C,
+    0x000B0B0B,
+};
+u32 frontier_df4_uistuff_016_59A2EC[] __attribute__((section(".data.frontier_df4_uistuff.gap16"))) = {
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x17e8,
+    0x00000B90,
+    0x00000000,
+    0x00000B00,
+    0x000002C0,
+    0x0000BFFC,
+    0x0000B02C,
+    0x0000B02C,
+    0x0000BFFC,
+    0x0000B02C,
+    0x000BBFFC,
+    0x000BB02C,
+    0x0002F02C,
+    0x000BFFFF,
+    0x0000BC00,
+    0x0000BB00,
+    0x0000B2F0,
+    0x0000BC2F,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x438,
+    0x00000B88,
+    0x00000000,
+    0x0002F000,
+    0x00002FFF,
+    0x0002C2EC,
+    0x0000BBB0,
+    0x000BFFFF,
+    0x000B0B0B,
+    0x00002ECC,
+    0x0002C2CC,
+    0x0003BF0B,
+    0x000000B0,
+    0x0002FFF0,
+    0x0002E0BC,
+    0x0000BEFB,
+    0x00002FC0,
+    0x000BF0BF,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3f48,
+    0x00000B8E,
+    0x00000000,
+    0x0000B02C,
+    0x0000B02C,
+    0x000BFF2C,
+    0x0000B0BF,
+    0x0000B02C,
+    0x000BFFBC,
+    0x000BBBBB,
+    0x000BBBBB,
+    0x000BBBBB,
+    0x000BBBBB,
+    0x000BBBBB,
+    0x000BBB2F,
+    0x000BBB2C,
+    0x0002FBBB,
+    0x0000B00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x9900,
+    0x00000B95,
+    0x00000000,
+    0x0000002C,
+    0x000BFF2C,
+    0x0000BB2C,
+    0x0000BBBF,
+    0x0000BB2C,
+    0x000BFFBC,
+    0x000B0BBB,
+    0x000B0BBB,
+    0x000B0BBB,
+    0x000BFFBB,
+    0x0000BBBB,
+    0x0000BB2F,
+    0x0000BB2C,
+    0x0000BBBB,
+    0x000BFF0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xd8,
+    0x00000B8D,
+    0x00000000,
+    0x00002C00,
+    0x00002C00,
+    0x00002C00,
+    0x000BFFFF,
+    0x00002C00,
+    0x0002EC00,
+    0x0000BC00,
+    0x00002C00,
+    0x00002F00,
+    0x00002EC0,
+    0x00002CB0,
+    0x00002C2C,
+    0x00002C0B,
+    0x00002C00,
+    0x00002F00,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x90,
+    0x00000A81,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x0002FFC0,
+    0x0002C0B0,
+    0x0000B0B0,
+    0x0000B02C,
+    0x00002EEC,
+    0x00000B0B,
+    0x00002C00,
+    0x0000B000,
+    0x00000000,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0x1f8,
+    0x00000B92,
+    0x00000000,
+    0x00002C0B,
+    0x00002C2C,
+    0x000BFFC0,
+    0x000B2EC0,
+    0x000B2EC0,
+    0x000B2ECB,
+    0x00002C2C,
+    0x0000BC00,
+    0x0000BC00,
+    0x0000BB2C,
+    0x0000BB2C,
+    0x0000BB2C,
+    0x000BB2EC,
+    0x000BB2CB,
+    0x000BC0BB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2208,
+    0x00000B94,
+    0x00000000,
+    0x0000002C,
+    0x000BFFFC,
+    0x00002C2C,
+    0x00002C2C,
+    0x00002C0B,
+    0x0002FFFB,
+    0x00002CB0,
+    0x00002CB0,
+    0x00002CB0,
+    0x00002CB0,
+    0x000BFFFF,
+    0x00002C00,
+    0x00002C00,
+    0x00002C00,
+    0x00002C00,
+};
+u32 frontier_df4_uistuff_017_59A574[] __attribute__((section(".data.frontier_df4_uistuff.gap17"))) = {
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x8b8,
+    0x00000B91,
+    0x00000000,
+    0x0002C0B0,
+    0x0002C0B0,
+    0x0002CBFF,
+    0x000BFEC0,
+    0x0002C2EC,
+    0x0002C2EC,
+    0x0002C2EC,
+    0x0002EEEC,
+    0x0002ECEC,
+    0x0002ECB0,
+    0x0002C0B0,
+    0x0002C0B0,
+    0x0002C2EC,
+    0x0002C2CC,
+    0x0002F00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1200,
+    0x00000B8A,
+    0x00000000,
+    0x00000B00,
+    0x000B0B2C,
+    0x000B0B2C,
+    0x000BFFFC,
+    0x00000000,
+    0x000BFFFC,
+    0x0000002C,
+    0x0002FFEC,
+    0x00002C2C,
+    0x00002C2C,
+    0x000BFFFC,
+    0x00002C2C,
+    0x00002C2C,
+    0x00002C0B,
+    0x00002C0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xca8,
+    0x00000B8A,
+    0x00000000,
+    0x00000B2C,
+    0x000BFB2C,
+    0x00002FCB,
+    0x00000BB0,
+    0x00000BB0,
+    0x000BFB2C,
+    0x0002EFEF,
+    0x0002C02C,
+    0x0002CB2C,
+    0x0002EFEC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002EF2C,
+    0x0002C2EC,
+    0x0002F02C,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x558,
+    0x00000B94,
+    0x00000000,
+    0x0000B02C,
+    0x0000B02C,
+    0x000BFFCB,
+    0x000BB2FB,
+    0x000BB2F0,
+    0x0000B2EC,
+    0x000BFFEC,
+    0x000B02EF,
+    0x000B02EF,
+    0x0002CEEC,
+    0x0002EEEC,
+    0x0000B2EC,
+    0x0000B2EC,
+    0x0002ECBC,
+    0x000B0BBC,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2a30,
+    0x00000B89,
+    0x00000000,
+    0x000BFEFC,
+    0x000BB2EC,
+    0x000BB2CB,
+    0x000B2CB0,
+    0x000B2FFF,
+    0x000BEFBB,
+    0x00000BBB,
+    0x0002EFFF,
+    0x000BFFBB,
+    0x0002EFBB,
+    0x0002CBFF,
+    0x000BFF0B,
+    0x0002CB0B,
+    0x0002CB0B,
+    0x0002CBCB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x5148,
+    0x00000B95,
+    0x00000000,
+    0x00002C2C,
+    0x00002C2C,
+    0x000BFEFF,
+    0x0002EC2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002EEFC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0000B2EC,
+    0x0000B2EC,
+    0x0002EEEC,
+    0x0002EECB,
+    0x000B0BBB,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x2d0,
+    0x00000B93,
+    0x00000000,
+    0x00000B00,
+    0x000002C0,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0000002C,
+    0x000BFFFC,
+    0x0000002C,
+    0x000BFFFC,
+    0x000B02C0,
+    0x000BB2CB,
+    0x000BBFFF,
+    0x000BC000,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x900,
+    0x00000B93,
+    0x00000000,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x000BB0BB,
+    0x000B2ECB,
+    0x000B0B0B,
+    0x000BBFFB,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000BBFFB,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000BC00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3de0,
+    0x00000B96,
+    0x00000000,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x000B2EC0,
+    0x0002EEFF,
+    0x0000BEC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002EF0,
+    0x00002EEC,
+    0x000B2ECB,
+    0x000B2EC0,
+    0x000BF2C0,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x5a0,
+    0x00000B90,
+    0x00000000,
+    0x00000000,
+    0x000BFFFF,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x000BFFFF,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000B2CBB,
+    0x000B2CBB,
+    0x000BF02F,
+    0x000B000B,
+    0x000B000B,
+    0x000BFFFF,
+    0x000B000B,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0x90,
+    0x00000B8B,
+    0x00000000,
+    0x000B000B,
+    0x0002FF2C,
+    0x00000B2C,
+    0x00000B00,
+    0x000BFF00,
+    0x0002CB2F,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002C2EC,
+    0x0002C02C,
+    0x000000BB,
+    0x000BFFCB,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x168,
+    0x00000B91,
+    0x00000000,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x000BFFBF,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C0BC,
+    0x0002CBBF,
+    0x0002ECBF,
+    0x0002EC2F,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002F02C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3648,
+    0x00000B97,
+    0x00000000,
+    0x00002CB0,
+    0x00002CB0,
+    0x000BFEFF,
+    0x00000B2C,
+    0x0002CB2C,
+    0x0000B2EC,
+    0x00002F2C,
+    0x0000BEFC,
+    0x000BBEEC,
+    0x000BBEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EECC,
+    0x000B2ECB,
+    0x000B2CBB,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x360,
+    0x00000B88,
+    0x00000000,
+    0x00000000,
+    0x000BFFFF,
+    0x00002EC0,
+    0x00002EC0,
+    0x000BFFFF,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000BFFFF,
+    0x00002EC0,
+    0x000BFFFF,
+    0x00000B00,
+    0x00002CB0,
+    0x0002C0BC,
+    0x000BB0BB,
+    0x000B2FCB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x5e38,
+    0x00000B92,
+    0x00000000,
+    0x0000002C,
+    0x0000002C,
+    0x000BFEFC,
+    0x000B2CBC,
+    0x000B2CBB,
+    0x000B2CBB,
+    0x000B2CB0,
+    0x000B2FFF,
+    0x000B2CB0,
+    0x000B2CB0,
+    0x000B2CB0,
+    0x000B2EEC,
+    0x000BFEEC,
+    0x000B2C2C,
+    0x0000000B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1cb0,
+    0x00000B97,
+    0x00000000,
+    0x00002CBF,
+    0x00002CBB,
+    0x0002FFFB,
+    0x00002CBB,
+    0x000BFFEF,
+    0x0000BB2F,
+    0x000BBBBB,
+    0x000BBBBB,
+    0x000BF2FB,
+    0x00002CBB,
+    0x00002CBB,
+    0x0002FFEF,
+    0x00002C0B,
+    0x00002C0B,
+    0x000BFFFB,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x438,
+    0x00000B91,
+    0x00000000,
+    0x0000B0B0,
+    0x000BFFFF,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    (u32)&frontier_df4_uistuff_018_59B0FC,
+    0x00000B8C,
+    0x00000000,
+    0x000BFFFC,
+    0x00002C2C,
+    0x00000B2C,
+    0x0002FFFC,
+    0x0002C0BC,
+    0x0002FFFC,
+    0x0002C0BC,
+    0x0002C0BC,
+    0x0002FFFC,
+    0x00002C2C,
+    0x00002EEC,
+    0x0002EEEC,
+    0x000B2CBB,
+    0x000B2CBB,
+    0x00002F0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x6e40,
+    0x00000B8C,
+    0x00000000,
+    0x00002C00,
+    0x00002C2F,
+    0x0002FFEC,
+    0x0002EC2C,
+    0x000BFFFC,
+    0x0002EC2C,
+    0x0002FFCB,
+    0x00002C0B,
+    0x0002FFEF,
+    0x00002C2C,
+    0x000BFFFC,
+    0x00002C2F,
+    0x00002C2C,
+    0x000002FB,
+    0x000BFF0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x6030,
+    0x00000B88,
+    0x00000000,
+    0x00000000,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C2EC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002CB2C,
+    0x0002C2EC,
+    0x0002F03C,
+    0x000B2C0B,
+    0x000B0BC0,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x708,
+    0x00000B91,
+    0x00000000,
+    0x00002CB0,
+    0x00002CB0,
+    0x00002EEC,
+    0x0002EEEC,
+    0x0002FEEF,
+    0x0002EFEF,
+    0x0002EEFC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002FEEC,
+    0x00002EEC,
+    0x00002EEC,
+    0x000B02EC,
+    0x000B02EC,
+    0x0002FF2C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3f00,
+    0x00000B93,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    (u32)&frontier_df4_uistuff_019_59BA8C,
+    0x00000B90,
+    0x00000000,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x000BFFC0,
+    0x000002C0,
+    0x000002C0,
+    0x000002C0,
+    0x0002FFFF,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002FFFF,
+    0x0002C00B,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x6c0,
+    0x00000B97,
+    0x00000000,
+    0x000BFCB0,
+    0x0002C2EC,
+    0x0000B2EC,
+    0x000BFECB,
+    0x000B2C00,
+    0x000B2EFC,
+    0x000BFC00,
+    0x000B2EFF,
+    0x000B2EEC,
+    0x000BFEEC,
+    0x000B2EEC,
+    0x000B2EEC,
+    0x000BFCBC,
+    0x0002F02C,
+    0x000B2C2C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x48d8,
+    0x00000B98,
+    0x00000000,
+    0x0000B03B,
+    0x0000B02C,
+    0x000BFF2C,
+    0x000B0BBB,
+    0x000BFFB0,
+    0x000B0BB0,
+    0x000B0BB0,
+    0x000BFFBC,
+    0x0000BBBC,
+    0x000BBBBB,
+    0x0002FBB0,
+    0x0000BBB0,
+    0x0002CB2C,
+    0x0002EF2C,
+    0x000B02CB,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0x798,
+    0x00000B96,
+    0x00000000,
+    0x000002C0,
+    0x0002FFC0,
+    0x0002C2C0,
+    0x0002C0B0,
+    0x0000B0EC,
+    0x0000BB0B,
+    0x00002C00,
+    0x00000B00,
+    0x000BFFC0,
+    0x000B02F0,
+    0x000B02EF,
+    0x000B02C0,
+    0x000B02C0,
+    0x000BFFC0,
+    0x000B02C0,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x3f0,
+    0x00000B92,
+    0x00000000,
+    0x0000B0B0,
+    0x00002EC0,
+    0x0002FFFC,
+    0x0002CB00,
+    0x0002CB00,
+    0x0002FFFC,
+    0x00000B2C,
+    0x00000B0B,
+    0x00000B0B,
+    0x000BFFFF,
+    0x000B0BC0,
+    0x000B0BB0,
+    0x000B0B2C,
+    0x0002FB0B,
+    0x00000B00,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x66f0,
+    0x00000B94,
+    0x00000000,
+    0x00000B00,
+    0x0002CB2C,
+    0x0002CBB0,
+    0x0000BBB0,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x3f0,
+    0x00000B8C,
+    0x00000000,
+    0x00002EC0,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x0002CB2C,
+    0x000B0B0B,
+    0x000002C0,
+    0x0000B2C0,
+    0x0000B2C0,
+    0x0000B0B0,
+    0x0002ECB0,
+    0x0002CBF0,
+    0x000B002F,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xa20,
+    0x00000B90,
+    0x00000000,
+    0x00002CB0,
+    0x00002FBB,
+    0x000FFEFC,
+    0x000B2FFF,
+    0x000B2EF0,
+    0x000BBBBC,
+    0x000BBBBB,
+    0x000BB0B0,
+    0x000BBFFF,
+    0x0002EB30,
+    0x0002CB2C,
+    0x000BBB2C,
+    0x000BB2F0,
+    0x000BBBB0,
+    0x000C2C2C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1758,
+    0x00000B8C,
+    0x00000000,
+    0x000BFFF0,
+    0x000B00B0,
+    0x000B00B0,
+    0x000B00B0,
+    0x000BFFF0,
+    0x000B00B0,
+    0x000B00B0,
+    0x000B00B0,
+    0x000BFFF0,
+    0x000B00B0,
+    0x000B00B0,
+    0x000B00B0,
+    0x000B002C,
+    0x000B002C,
+    0x000BC00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x44e8,
+    0x00000B91,
+    0x00000000,
+    0x0000B0B0,
+    0x00002EC0,
+    0x000BFFFF,
+    0x00000000,
+    0x000B02FF,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000B2EFF,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000B2EFF,
+    0x000B2ECB,
+    0x000B02CB,
+    0x000B02CB,
+    0x000BC2FB,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x480,
+    0x00000B8E,
+    0x00000000,
+    0x000002C0,
+    0x00000B00,
+    0x00000000,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xc18,
+    0x00000B94,
+    0x00000000,
+    0x0000B000,
+    0x0000B0BF,
+    0x000FFF2C,
+    0x000CBB2C,
+    0x000BBB2C,
+    0x0000BB0B,
+    0x000BFFBF,
+    0x000B2BBB,
+    0x000B2FBB,
+    0x000B2FBB,
+    0x000BBBBB,
+    0x0002CBBB,
+    0x0002C2FF,
+    0x000BB2C0,
+    0x000C2CB0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xb40,
+    0x00000B93,
+    0x00000000,
+    0x00000000,
+    0x000BFFFF,
+    0x000B000B,
+    0x000B000B,
+    0x000BBFFB,
+    0x000B000B,
+    0x000B000B,
+    0x000BBFFB,
+    0x000BB0BB,
+    0x000BB0BB,
+    0x000BBFFB,
+    0x000BB0BB,
+    0x000B000B,
+    0x000B000B,
+    0x000BC00B,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0x48,
+    0x00000B96,
+    0x00000000,
+    0x00000000,
+    0x000BFEFF,
+    0x000B2ECB,
+    0x000BFECB,
+    0x000B2EFF,
+    0x000BFECB,
+    0x000B2ECB,
+    0x000B2EFF,
+    0x000BCB00,
+    0x00000000,
+    0x0002FFFC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x000BFFFF,
+    (u32)&frontier_df4_uistuff_017_59A574 + 0xa68,
+    0x00000B93,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000BB0BB,
+    0x000BC02F,
+    0x000B000B,
+    0x000B000B,
+    0x000B000B,
+    0x000BC00B,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x6c0,
+    0x00000B8D,
+    0x00000000,
+    0x0002C2FF,
+    0x0002C2CB,
+    0x0002C2CB,
+    0x000BFFCB,
+    0x0002F2FF,
+    0x0002F2CB,
+    0x0002F2CB,
+    0x0002EEFF,
+    0x0002EECB,
+    0x0002EECB,
+    0x0002EECB,
+    0x0002CBFF,
+    0x0002CBBC,
+    0x0002C2EC,
+    0x0002F00B,
+    (u32)&frontier_df4_uistuff_021_59D034 + 0x48,
+    0x00000B95,
+    0x00000000,
+    0x00000B00,
+    0x000BFFFF,
+    0x000B000B,
+    0x000B000B,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x0000BFF0,
+    0x00000B00,
+    0x0000BB00,
+    0x0002CB00,
+    0x0002CB00,
+    0x00000B00,
+    0x000BFFFF,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x6420,
+    0x00000B93,
+    0x00000000,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x000FFBFF,
+    0x000BB2EC,
+    0x000BB2EC,
+    0x000BBBFF,
+    0x000B2FBB,
+    0x000BBFFF,
+    0x000BBBBB,
+    0x0002CBFF,
+    0x0002CBEF,
+    0x0002CBEF,
+    0x000BBBFF,
+    0x000BBB0B,
+    0x000C2ECB,
+};
+u32 frontier_df4_uistuff_018_59B0FC[] __attribute__((section(".data.frontier_df4_uistuff.gap18"))) = {
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x25b0,
+    0x00000B89,
+    0x00000000,
+    0x00002CB0,
+    0x00002CB0,
+    0x000BFFEC,
+    0x0000BB2C,
+    0x0002C2EF,
+    0x000B2CBF,
+    0x0002FFEC,
+    0x0002EEEC,
+    0x0002FFEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002FFEC,
+    0x00002C2C,
+    0x000B2C2C,
+    0x000BF02C,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x240,
+    0x00000B93,
+    0x00000000,
+    0x0000002C,
+    0x000BFF2C,
+    0x000B002C,
+    0x000B2CFF,
+    0x000B2C2C,
+    0x000B2CBC,
+    0x0002ECBB,
+    0x0002ECBB,
+    0x0002ECBB,
+    0x0000B0BB,
+    0x0000B02C,
+    0x0000B02C,
+    0x0002ECBB,
+    0x0002ECBB,
+    0x000B0B0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x5f10,
+    0x00000B92,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000B0B0B,
+    0x000BFFFF,
+    0x000B0B0B,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x124c8,
+    0x00000B89,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x000BFFFF,
+    0x00000B00,
+    0x00002EC0,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x000B000B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xd848,
+    0x00000B98,
+    0x00000000,
+    0x00002CBF,
+    0x0003FCBB,
+    0x00032CBB,
+    0x00030BBB,
+    0x0002CBBB,
+    0x0002ECBF,
+    0x0000B02C,
+    0x0002EC2C,
+    0x000F0BBC,
+    0x0000002F,
+    0x000BFF2F,
+    0x000B0B2F,
+    0x000B0B3F,
+    0x000B0B2F,
+    0x000BFF0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3ac8,
+    0x00000B89,
+    0x00000000,
+    0x00000000,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00002F00,
+    0x0000BB00,
+    0x0002CB00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x1f8,
+    0x00000B93,
+    0x00000000,
+    0x000000B0,
+    0x000BFCB0,
+    0x000BBBFF,
+    0x000BBBB0,
+    0x0003B2F0,
+    0x0002FFFF,
+    0x000BB0B0,
+    0x000BB02C,
+    0x000BBBFF,
+    0x000BBB2F,
+    0x000BBB2C,
+    0x000BBBFC,
+    0x0002FB2C,
+    0x0000BB2C,
+    0x0000BBFC,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xe58,
+    0x00000B92,
+    0x00000000,
+    0x0000B2C0,
+    0x0002C0B0,
+    0x000B002C,
+    0x00000000,
+    0x00002F00,
+    0x0000BAC0,
+    0x0002C0B0,
+    0x000F002F,
+    0x0002FFF0,
+    0x0002C0B0,
+    0x0002C0B0,
+    0x0002C0B0,
+    0x0002C0B0,
+    0x0002FFF0,
+    0x0002C0B0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x6c0,
+    0x00000B92,
+    0x00000000,
+    0x00002C2C,
+    0x000BFEFC,
+    0x0000B0BB,
+    0x000BFC00,
+    0x000B2EFF,
+    0x000BBCB0,
+    0x000BEEF0,
+    0x000B0C2F,
+    0x000C0B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00002FC0,
+    0x0000BBB0,
+    0x0002CB2C,
+    0x000B0B0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xd80,
+    0x00000B96,
+    0x00000000,
+    0x0000002C,
+    0x0000002C,
+    0x000BFFFC,
+    0x0002EEEF,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x000BFFFF,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x000BFFFF,
+    0x00000000,
+    0x0002EEEC,
+    0x000BB2EC,
+    0x000BB2CB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2568,
+    0x00000B8D,
+    0x00000000,
+    0x00002CB0,
+    0x000B2CB0,
+    0x0002FEFB,
+    0x00002CBB,
+    0x00002CBB,
+    0x000B2EFB,
+    0x000BF02F,
+    0x00000000,
+    0x000BFFFF,
+    0x000000B0,
+    0x0002FFF0,
+    0x0002C0BC,
+    0x0002C0BC,
+    0x0002FFFB,
+    0x0002C0B0,
+    (u32)&frontier_df4_uistuff_018_59B0FC + 0x678,
+    0x00000B8D,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x00000000,
+    0x000BFFFF,
+    0x00000B2C,
+    0x000BFBFC,
+    0x000B0B2C,
+    0x000BBBFC,
+    0x0002CB2C,
+    0x0002CBEC,
+    0x000BBBBC,
+    0x000C2F0B,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0x288,
+    0x00000B8F,
+    0x00000000,
+    0x0002F02C,
+    0x00002FEC,
+    0x0003002C,
+    0x00032EEF,
+    0x0003BB2F,
+    0x0003BB2C,
+    0x0002C02C,
+    0x0002C02C,
+    0x000BFFEC,
+    0x0002C02F,
+    0x0002CB2F,
+    0x0002EC2C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002F02C,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xd80,
+    0x00000B8E,
+    0x00000000,
+    0x00000B2C,
+    0x0002CB2C,
+    0x0000BF2C,
+    0x00000BBF,
+    0x000B0B2C,
+    0x000BFC2C,
+    0x0000002C,
+    0x000BFFBC,
+    0x000B0B2F,
+    0x000B0B2C,
+    0x000BFF2C,
+    0x000B0B2C,
+    0x000B0B2C,
+    0x000BFF2C,
+    0x000B0B2C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3b58,
+    0x00000B8A,
+    0x00000000,
+    0x000BFFEC,
+    0x000B02EC,
+    0x000BB2EC,
+    0x000BFFFF,
+    0x0000B02C,
+    0x000BFFEC,
+    0x000BB2EC,
+    0x000BFFFC,
+    0x000BB2EF,
+    0x000BB2EC,
+    0x000BFFEC,
+    0x0000B02C,
+    0x000BFFEC,
+    0x0000B02C,
+    0x0000B02F,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x168,
+    0x00000B97,
+    0x00000000,
+    0x000B2C00,
+    0x000B2C00,
+    0x0002CBBF,
+    0x000BFFFB,
+    0x0000BBFB,
+    0x0000BBBB,
+    0x0000BBBB,
+    0x000BFFBB,
+    0x0000BBBB,
+    0x0000BBBB,
+    0x000BFFBB,
+    0x0000BBBF,
+    0x0000BBBB,
+    0x0000BB00,
+    0x000BFF00,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x7c98,
+    0x00000B96,
+    0x00000000,
+    0x000BFEFF,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000BFEFF,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000BFEFF,
+    0x000B000B,
+    0x000B000B,
+    0x000B000B,
+    0x000B000B,
+    0x000B000B,
+    0x000B000B,
+    0x000B000B,
+    0x000BC00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3d98,
+    0x00000A8E,
+    0x00000000,
+    0x0000B02C,
+    0x0000B02C,
+    0x00002C2C,
+    0x00002CBF,
+    0x0002CB2C,
+    0x0002CBBC,
+    0x0003BFBB,
+    0x000300BB,
+    0x0002FFBB,
+    0x0002CBBB,
+    0x0002CB2F,
+    0x0002CB2C,
+    0x0002CBBB,
+    0x0002FF0B,
+    0x0002CB0B,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0x360,
+    0x00000B8C,
+    0x00000000,
+    0x0000B0B0,
+    0x00002CB0,
+    0x0002CB2C,
+    0x0000BB0B,
+    0x00002CB0,
+    0x0002CB2C,
+    0x000BB2EF,
+    0x000B2FEC,
+    0x00002C2C,
+    0x0002FC2C,
+    0x0002CB2C,
+    0x0002EEEC,
+    0x0000B02C,
+    0x0002EC2C,
+    0x000B0BEC,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x55c8,
+    0x00000B91,
+    0x00000000,
+    0x0000000B,
+    0x0002FFEC,
+    0x0002C2EC,
+    0x0002FFC0,
+    0x0002C2C0,
+    0x0002C2EF,
+    0x000BFFEC,
+    0x000B02EC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0000B2EC,
+    0x0002EEEC,
+    0x00030BEC,
+    0x000000BB,
+    0x000BFFCB,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x7e0,
+    0x00000B93,
+    0x00000000,
+    0x00000BF0,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00002FC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x0002C02C,
+    0x000B000B,
+    (u32)&frontier_df4_uistuff_021_59D034 + 0x240,
+    0x00000B8B,
+    0x00000000,
+    0x00002CB0,
+    0x00002CB0,
+    0x00002CB0,
+    0x00002C2C,
+    0x000BFFEC,
+    0x00002C2F,
+    0x0000BF2F,
+    0x0000BF2C,
+    0x0000BF2C,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x000B2CBC,
+    0x000B2CBC,
+    0x00002C2C,
+    0x00002C2C,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x90,
+    0x00000B97,
+    0x00000000,
+    0x00002EC0,
+    0x000BFFFF,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x000BFFFF,
+    0x0000BBB0,
+    0x0002FFFC,
+    0x000BB0BB,
+    0x0000BFF0,
+    0x0000B0B0,
+    0x000BBFF0,
+    0x0002ECB0,
+    0x0000BBB0,
+    0x000BC2FC,
+    (u32)&frontier_df4_uistuff_021_59D034 + 0x120,
+    0x00000B90,
+    0x00000000,
+    0x0002CBB0,
+    0x0002CB2F,
+    0x00002C2C,
+    0x000BFF2C,
+    0x000B0B2C,
+    0x000B0BBF,
+    0x000B0B2C,
+    0x000B0B2C,
+    0x000BFFBC,
+    0x0002ECBF,
+    0x0002EC2F,
+    0x0002EC2C,
+    0x0002CB2C,
+    0x000ECB2C,
+    0x000F82EC,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xa68,
+    0x00000B8B,
+    0x00000000,
+    0x00000B00,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x0002C02C,
+    0x000B3FFB,
+    0x000B0B0B,
+    0x00000B00,
+    0x0000BFF0,
+    0x00000B00,
+    0x0002CB2C,
+    0x0002CBB0,
+    0x0000BBB0,
+    0x000BFFFF,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0x1b0,
+    0x00000A8E,
+    0x00000000,
+    0x000002C0,
+    0x000000B0,
+    0x0002FFFF,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002FFFF,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002FFFF,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002FFFF,
+    0x0002C00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2ac0,
+    0x00000B8E,
+    0x00000000,
+    0x00002C00,
+    0x00002C0B,
+    0x0002CB2C,
+    0x0002CB00,
+    0x000B02C0,
+    0x000BF2CB,
+    0x000B2FEC,
+    0x00000000,
+    0x000BFFC0,
+    0x000B02C0,
+    0x000B02EC,
+    0x000B02EC,
+    0x000B02EC,
+    0x000BFFCB,
+    0x000B02CB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1950,
+    0x00000B8D,
+    0x00000000,
+    0x00000000,
+    0x0002FF2C,
+    0x0002C02C,
+    0x0002C0BF,
+    0x0000B02C,
+    0x0000B0BC,
+    0x0000B0BB,
+    0x0000B0BB,
+    0x000BFFBB,
+    0x0000B0BB,
+    0x0000B0BB,
+    0x0000B02C,
+    0x0000B02C,
+    0x0000B0BB,
+    0x00002C0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x9b40,
+    0x00000B88,
+    0x00000000,
+    0x00000B00,
+    0x000BFFFF,
+    0x0000B0B0,
+    0x00002EC0,
+    0x000BFFFF,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x00000B00,
+    0x0002EEEC,
+    0x000B02EC,
+    0x000BBF0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1b0,
+    0x00000B93,
+    0x00000000,
+    0x00002CB0,
+    0x00002C2C,
+    0x000BFC0B,
+    0x000B2EFF,
+    0x000B0BCB,
+    0x000B0BCB,
+    0x000B02CB,
+    0x000B2EFF,
+    0x000BB2CB,
+    0x000BB2CB,
+    0x000B02CB,
+    0x000B02CB,
+    0x0002C2FF,
+    0x0002C000,
+    0x0000B000,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xea0,
+    0x00000C97,
+    0x00000000,
+    0x00002CB0,
+    0x000BFFF0,
+    0x0000B2F0,
+    0x000BFFEC,
+    0x000BB2EC,
+    0x002FFFEF,
+    0x000BB2EF,
+    0x000BFFEC,
+    0x0000B2EC,
+    0x000BFFEC,
+    0x000BBBEC,
+    0x000BFFEC,
+    0x000BBBEC,
+    0x000BFFEC,
+    0x000BBBBC,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0xd8,
+    0x00000B8B,
+    0x00000000,
+    0x000002C0,
+    0x000002C0,
+    0x0000BFC0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x00002C2C,
+    0x00002C2C,
+    0x00002C00,
+    0x00000B00,
+    0x00002F00,
+    0x00002EC0,
+    0x0000B2C0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x000B000B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x7e0,
+    0x00000B8A,
+    0x00000000,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0000B0B0,
+    0x000BFFFF,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002FFFC,
+};
+u32 frontier_df4_uistuff_019_59BA8C[] __attribute__((section(".data.frontier_df4_uistuff.gap19"))) = {
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x708,
+    0x00000B8A,
+    0x00000000,
+    0x000BFBFC,
+    0x0002C2EC,
+    0x0000B0BC,
+    0x000BFBFC,
+    0x000BBB2C,
+    0x000BBBFC,
+    0x000BFB2C,
+    0x000BBB2C,
+    0x000BBBFC,
+    0x000BF2EC,
+    0x000BB2EC,
+    0x000BBBEC,
+    0x000BFBFC,
+    0x0002C2FB,
+    0x000B32CB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x5d18,
+    0x00000B8E,
+    0x00000000,
+    0x0002FEFC,
+    0x00002C2C,
+    0x000BFFFC,
+    0x0002EEEC,
+    0x0002CBCB,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0000B0B0,
+    0x0002C02C,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0x3a8,
+    0x00000B95,
+    0x00000000,
+    0x00002C2C,
+    0x0002EC2C,
+    0x0002EC2C,
+    0x000BFFEC,
+    0x00002CBF,
+    0x000BFFEC,
+    0x000B2EEC,
+    0x000B2EFC,
+    0x000BFFEF,
+    0x000B2EEC,
+    0x000BFFEC,
+    0x000B2EEC,
+    0x000B2EEC,
+    0x000B2EEC,
+    0x0002EEEF,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0x318,
+    0x00000B97,
+    0x00000000,
+    0x00000000,
+    0x000BFFFC,
+    0x0000B2C0,
+    0x0000B2C0,
+    0x000BFFFC,
+    0x000BB2EC,
+    0x000BB2EC,
+    0x000BFFFC,
+    0x000002C0,
+    0x000BFFFF,
+    0x0000B2C0,
+    0x0000B0B0,
+    0x00002EC0,
+    0x00002F00,
+    0x0002F2FC,
+    (u32)&frontier_df4_uistuff_021_59D034 + 0x438,
+    0x00000B8D,
+    0x00000000,
+    0x00000B00,
+    0x000BFFFF,
+    0x000B000B,
+    0x000B2ECB,
+    0x0002FFFC,
+    0x00002EC0,
+    0x0000BFF0,
+    0x00002EC0,
+    0x000BFFFF,
+    0x0000B0B0,
+    0x0002CB2C,
+    0x000BBFFB,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    (u32)&frontier_df4_uistuff_021_59D034,
+    0x00000B8C,
+    0x00000000,
+    0x00002C0B,
+    0x00002C2C,
+    0x00002C00,
+    0x0002FFC0,
+    0x0002EC0B,
+    0x0002EC2C,
+    0x0002EC00,
+    0x000BFFF0,
+    0x00002C00,
+    0x00002C2C,
+    0x0000BB2C,
+    0x0000BB2C,
+    0x0002C2EC,
+    0x0002C2CB,
+    0x000B00BB,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0x240,
+    0x00000BE3,
+    0x00000000,
+    0x000BFFFF,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000BFFFF,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002FFFC,
+    0x00002C2C,
+    0x000BFFFC,
+    0x00002C2C,
+    0x0000B02C,
+    0x000BB2EC,
+    0x000BC0BF,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x510,
+    0x00000B8C,
+    0x00000000,
+    0x0000BFF0,
+    0x00000000,
+    0x000BFFFF,
+    0x00000000,
+    0x0000BFF0,
+    0x00000000,
+    0x0000BFF0,
+    0x00000000,
+    0x00000000,
+    0x0000BFF0,
+    0x0000B030,
+    0x0000B030,
+    0x0000B030,
+    0x0000BFF0,
+    0x0000B030,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2838,
+    0x00000B8C,
+    0x00000000,
+    0x0000BFFC,
+    0x0000B02C,
+    0x0000B02C,
+    0x0000BFFC,
+    0x0000B02C,
+    0x0000B02C,
+    0x0000BFFC,
+    0x0000B02C,
+    0x0000B02C,
+    0x0000B02C,
+    0x0000BFFC,
+    0x00002CB0,
+    0x000B2CB0,
+    0x000B2C2C,
+    0x0002F00B,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xb40,
+    0x00000B90,
+    0x00000000,
+    0x0000BB2C,
+    0x0000BB2C,
+    0x0000BB2C,
+    0x000BFFBC,
+    0x0000BBBF,
+    0x0000B2EF,
+    0x0000B02F,
+    0x0000B02C,
+    0x0002FF2C,
+    0x0000B02C,
+    0x0000B02C,
+    0x0000B02C,
+    0x0000B02C,
+    0x0000B02C,
+    0x000BFFEC,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xea0,
+    0x00000B8B,
+    0x00000000,
+    0x0002FF00,
+    0x0002CBFF,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002EF2C,
+    0x0002FBBC,
+    0x000BC30B,
+    0x000BC2C0,
+    0x00000000,
+    0x00000B00,
+    0x0002ECB0,
+    0x0002C0BC,
+    0x000B00BB,
+    0x000BB0BB,
+    0x00002FC0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3210,
+    0x00000B8E,
+    0x00000000,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x00000000,
+    0x00000B00,
+    0x0002ECB0,
+    0x0002C0BC,
+    0x000B00BB,
+    0x000BB0BB,
+    0x00002FC0,
+    (u32)&frontier_df4_uistuff_019_59BA8C + 0x480,
+    0x00000B8F,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x0002FF00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xaf8,
+    0x00000B94,
+    0x00000000,
+    0x00002EC0,
+    0x000BFEFF,
+    0x00002EC0,
+    0x0002FEFC,
+    0x00002EC0,
+    0x00002EF0,
+    0x000BFEEF,
+    0x00002CB0,
+    0x00002C2C,
+    0x00000000,
+    0x00008BB0,
+    0x0002ECBC,
+    0x000B00BB,
+    0x000BB0BB,
+    0x00002FC0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2688,
+    0x00000B90,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x16c8,
+    0x00000B95,
+    0x00000000,
+    0x00002EC0,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x0002C02C,
+    0x000BBFFB,
+    0x000BB2CB,
+    0x0000B2C0,
+    0x0000B2C0,
+    0x0000B2C0,
+    0x0000B2C0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000BC2C,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xfc0,
+    0x00000B91,
+    0x00000000,
+    0x00002CB0,
+    0x0002ECB0,
+    0x0002ECB0,
+    0x000B2C2C,
+    0x00002C2C,
+    0x000BFFEF,
+    0x00002C2F,
+    0x00002C2C,
+    0x00002C2C,
+    0x00002C2C,
+    0x00002C2C,
+    0x0000B02C,
+    0x0000B02C,
+    0x000BB02C,
+    0x0002C02C,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xc60,
+    0x00000B8B,
+    0x00000000,
+    0x0000B0B0,
+    0x0000BBB0,
+    0x0000BBB0,
+    0x000BFBFF,
+    0x0002ECB0,
+    0x0002ECB0,
+    0x0002CBBB,
+    0x0002EEFC,
+    0x0002EEF0,
+    0x0000B2F0,
+    0x0000BBBC,
+    0x0000BBBC,
+    0x0002ECBB,
+    0x0002ECB0,
+    0x000B0B2C,
+};
+u32 frontier_df4_uistuff_020_59BFE4[] __attribute__((section(".data.frontier_df4_uistuff.gap20"))) = {
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x318,
+    0x00000B96,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00002FC0,
+    0x00002FC0,
+    0x0000BBB0,
+    0x0000BBB0,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x000B0B0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xf30,
+    0x00000B90,
+    0x00000000,
+    0x00000000,
+    0x0002FC00,
+    0x00000BFC,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3018,
+    0x00000B8B,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x000B000B,
+    0x000BBFFB,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000BFF0,
+    0x00000B00,
+    0x000002C0,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1290,
+    0x00000B95,
+    0x00000000,
+    0x000002EC,
+    0x000002EC,
+    0x000BFFEF,
+    0x000BBBFF,
+    0x000BBBEF,
+    0x000BBBBF,
+    0x000BBBAF,
+    0x000BBB2C,
+    0x000BBB3C,
+    0x000BBAEC,
+    0x000B2EEF,
+    0x000B2C2C,
+    0x000B2C2C,
+    0x000B0B2C,
+    0x0002C02C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1f8,
+    0x00000B91,
+    0x00000000,
+    0x000002C0,
+    0x0000BFC0,
+    0x0000B0B0,
+    0x0000B02C,
+    0x00002CBB,
+    0x00000BC0,
+    0x0000B2C0,
+    0x000BFCB0,
+    0x000B0B2F,
+    0x000B02C0,
+    0x0002CBBC,
+    0x0000BC00,
+    0x00002C00,
+    0x00000BC0,
+    0x000000BF,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xa2d8,
+    0x00000B92,
+    0x00000000,
+    0x00002C0B,
+    0x0002FFEC,
+    0x00002C00,
+    0x000BFFF0,
+    0x0002C2C0,
+    0x0000BB2F,
+    0x0002FFFC,
+    0x00002C2C,
+    0x0002FFEC,
+    0x00002C2C,
+    0x000BFFFC,
+    0x00002C2C,
+    0x00002C2C,
+    0x000002FB,
+    0x000BFF0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x480,
+    0x00000A96,
+    0x00000000,
+    0x00000000,
+    0x0002FFFF,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002FFFF,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002FFFF,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002C00B,
+    0x0002FFFF,
+    0x0002C00B,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x798,
+    0x00000B8E,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0000BB2C,
+    0x00000B00,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x630,
+    0x00000B89,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x000B000B,
+    0x000B3FFB,
+    0x000002C0,
+    0x00000BB0,
+    0x0002CB2F,
+    0x0002CEC0,
+    0x0000BCB0,
+    0x0000BF2F,
+    0x0002EEC0,
+    0x0002ECB0,
+    0x000B0B2F,
+    0x000002C0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3180,
+    0x00000B93,
+    0x00000000,
+    0x0000B02C,
+    0x0000B02C,
+    0x000BFF0B,
+    0x00002CBB,
+    0x00002CBB,
+    0x0002EC2C,
+    0x0002CB0B,
+    0x000BBFBB,
+    0x000BBCBF,
+    0x0000BC2C,
+    0x0000BCBC,
+    0x0000BCBF,
+    0x000BBB2F,
+    0x000BBB2C,
+    0x000BC2EC,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3918,
+    0x00000A8D,
+    0x00000000,
+    0x00000B00,
+    0x00002EC0,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x0003BFFB,
+    0x00000000,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2f88,
+    0x00000B8E,
+    0x00000000,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x00000B00,
+    0x0002FFFC,
+    0x0002CB00,
+    0x000BFFFF,
+    0x0002CB00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x00000BC0,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xe10,
+    0x00000B90,
+    0x00000000,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x000BFFFF,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002FF2C,
+    0x0002CB2C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x000BFFFC,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1f38,
+    0x00000B96,
+    0x00000000,
+    0x0000BBFF,
+    0x000BBBBB,
+    0x000BBBFF,
+    0x0000BBBB,
+    0x000BFFBB,
+    0x0000BBFF,
+    0x0000B0B0,
+    0x0002EEFF,
+    0x0002ECB0,
+    0x0002CEF0,
+    0x000B0B2F,
+    0x00000000,
+    0x0002EEEC,
+    0x000B2EEC,
+    0x000B2ECB,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x480,
+    0x00000B8E,
+    0x00000000,
+    0x0002C0B0,
+    0x0000BFEF,
+    0x00002C2C,
+    0x000BFFEC,
+    0x00002CBF,
+    0x0002FFEC,
+    0x0002EEEC,
+    0x0002FFFC,
+    0x0002EEFF,
+    0x0002FFEF,
+    0x00002C2C,
+    0x0002FFEC,
+    0x00002C2C,
+    0x00002C2C,
+    0x000BFFFC,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2d0,
+    0x00000B95,
+    0x00000000,
+    0x0000B000,
+    0x000BBBFC,
+    0x000BB000,
+    0x0000B000,
+    0x000BFFFF,
+    0x0000B2C0,
+    0x0000B2C0,
+    0x0000B2EC,
+    0x0000BFEC,
+    0x0000B2EC,
+    0x0000B2EC,
+    0x0002C2EC,
+    0x0002EEEC,
+    0x0002CBEC,
+    0x000B00BF,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x5028,
+    0x00000B8A,
+    0x00000000,
+    0x0002FEFC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002FEFC,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x000BFEFF,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002FEFC,
+    0x0002EEEC,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x678,
+    0x00000B92,
+    0x00000000,
+    0x0000BB2C,
+    0x0000BB2C,
+    0x0000BB2C,
+    0x000BBBBF,
+    0x0002FBEC,
+    0x0000BB2C,
+    0x0000BB2C,
+    0x0000BBBC,
+    0x0000BB2F,
+    0x0002FBEC,
+    0x000BBB2C,
+    0x0000BB2C,
+    0x0000B2EC,
+    0x000BB2EC,
+    0x0002F0BB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xfc0,
+    0x00000B8C,
+    0x00000000,
+    0x00000B00,
+    0x000002C0,
+    0x000000B0,
+    0x0002FFFC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x000BFFFF,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0xee8,
+    0x00000B8B,
+    0x00000000,
+    0x00002C2C,
+    0x00002C2C,
+    0x000BFEFC,
+    0x0002CBBB,
+    0x0000B000,
+    0x0000B2FC,
+    0x000BFEEC,
+    0x000BB2EC,
+    0x000BB2FC,
+    0x000BB2EC,
+    0x000BB2FC,
+    0x000BB2EC,
+    0x000B2EEC,
+    0x000B2EEC,
+    0x0002CBCB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xcf0,
+    0x00000B8B,
+    0x00000000,
+    0x00000B00,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002FFFC,
+    0x00000B00,
+    0x000BFFFF,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0000B0B0,
+    0x0002C02C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1710,
+    0x00000B89,
+    0x00000000,
+    0x00002CBF,
+    0x0000BBBB,
+    0x0002C2FB,
+    0x0002C2FB,
+    0x000BBFBB,
+    0x0000002F,
+    0x0002FFBB,
+    0x0002C0BB,
+    0x0000BCBB,
+    0x0002FFBB,
+    0x000000BB,
+    0x000BFFEF,
+    0x00000B0B,
+    0x0002CB0B,
+    0x000BBFCB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x6930,
+    0x00000B93,
+    0x00000000,
+    0x00002CB0,
+    0x00002CBB,
+    0x00002C2C,
+    0x000BFFEC,
+    0x000B2EFB,
+    0x000B2EF0,
+    0x000B2EF0,
+    0x000B2EF0,
+    0x000BFFFC,
+    0x00002CBC,
+    0x0002ECBB,
+    0x0002ECB0,
+    0x0002EC2C,
+    0x000BBC2C,
+    0x000B0BCB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1b00,
+    0x00000B97,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000000,
+    0x0002C000,
+    0x0002C02C,
+    0x0002C02C,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x00002CB0,
+    0x00002C00,
+    0x00000B00,
+    0x000BFFFF,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2760,
+    0x00000B88,
+    0x00000000,
+    0x00002CB0,
+    0x0002FFF0,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x000BFFFF,
+    0x0000002F,
+    0x0002FFEC,
+    0x0002C2EC,
+    0x0002FFEC,
+    0x0000B02C,
+    0x0002FFEC,
+    0x0000BB2C,
+    0x000BFFFC,
+    0x0000B02C,
+    0x0000B02C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x5c40,
+    0x00000B8E,
+    0x00000000,
+    0x0002C000,
+    0x0000BC00,
+    0x00000BFC,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000BC0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x9bd0,
+    0x00000B92,
+    0x00000000,
+    0x00002C00,
+    0x000BFFFC,
+    0x0000002C,
+    0x0002FFEC,
+    0x0002C02F,
+    0x0000BB2C,
+    0x00002C2C,
+    0x000BFFEC,
+    0x000B2EEF,
+    0x000BFFEC,
+    0x000B2EEC,
+    0x000BFFEC,
+    0x000B2EEC,
+    0x000B2EEC,
+    0x000BEECB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x26d0,
+    0x00000B94,
+    0x00000000,
+    0x00002C00,
+    0x00002EFF,
+    0x00002ECB,
+    0x000BFECB,
+    0x0002CBCB,
+    0x0002CBFF,
+    0x0002EECB,
+    0x0002EECB,
+    0x0002EEFF,
+    0x0002EECB,
+    0x0000B2CB,
+    0x0000B2CB,
+    0x0002EEFF,
+    0x0002ECBC,
+    0x000B0BCB,
+    (u32)&frontier_df4_uistuff_020_59BFE4 + 0x900,
+    0x00000B8C,
+    0x00000000,
+    0x00000B00,
+    0x000002C0,
+    0x000000B0,
+    0x000BFFFF,
+    0x000B000B,
+    0x000B000B,
+    0x000BBFFB,
+    0x000BB0BB,
+    0x000BB0BB,
+    0x000BB0BB,
+    0x000BBFFB,
+    0x000BB0BB,
+    0x000B000B,
+    0x000B000B,
+    0x000BC00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1368,
+    0x00000B96,
+    0x00000000,
+    0x00002EC0,
+    0x0002FFFC,
+    0x0002EEEC,
+    0x0002FFFC,
+    0x0002EEEC,
+    0x0002FFFC,
+    0x00000000,
+    0x000BFFFF,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C00C,
+    0x0002FFFC,
+    0x0000B0B0,
+    0x00002EC0,
+    0x000BFFFF,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3a8,
+    0x00000B90,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x0002CB00,
+    0x0002CBBF,
+    0x0000BBB0,
+    0x00002FB0,
+    0x00002FB0,
+    0x00002FB0,
+    0x0000BBB0,
+    0x0000BB2C,
+    0x0002CB2C,
+    0x000B0B0B,
+    0x00000B00,
+    0x00000BC0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xbb50,
+    0x00000B97,
+    0x00000000,
+    0x0002FF2C,
+    0x0002C02C,
+    0x0002FF0B,
+    0x0002C0BB,
+    0x0002C0BF,
+    0x000BFFEC,
+    0x0000B00B,
+    0x000BB0BB,
+    0x000BBFBF,
+    0x0002F02C,
+    0x0002FCBC,
+    0x000BBCBF,
+    0x000BBB2F,
+    0x000CB2EC,
+    0x0000BC2C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3c78,
+    0x00000B94,
+    0x00000000,
+    0x0000B0B0,
+    0x00002CC0,
+    0x000BFFFF,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00002EC0,
+    0x0000B0B0,
+    0x000BC02F,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x27a8,
+    0x00000B8D,
+    0x00000000,
+    0x0000B0B0,
+    0x000BFFFF,
+    0x0000B0B0,
+    0x00000B00,
+    0x000BFFFF,
+    0x0000002C,
+    0x0000002C,
+    0x0002FFF0,
+    0x00000000,
+    0x0000BBB0,
+    0x0000BBB0,
+    0x0000BBB0,
+    0x0000BB2C,
+    0x000BBB2C,
+    0x0002C00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2fd0,
+    0x00000B8C,
+    0x00000000,
+    0x00000B0B,
+    0x00000B2C,
+    0x000BF2EC,
+    0x000BB2C0,
+    0x000BB2C0,
+    0x000BB2EF,
+    0x000BB2EC,
+    0x000BB2EC,
+    0x000BB2EC,
+    0x000BBBEC,
+    0x0000F0BC,
+    0x0000B02C,
+    0x0000B0BC,
+    0x000002CB,
+    0x000BFF0B,
+    (u32)&frontier_df4_uistuff_021_59D034 + 0x168,
+    0x00000B91,
+    0x00000000,
+    0x00000B00,
+    0x00000EC0,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x0002FFFC,
+    0x000B0B0B,
+    0x00000B00,
+    0x00000B00,
+    0x0000BFF0,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x5b20,
+    0x00000B95,
+    0x00000000,
+    0x000000B0,
+    0x000BF0B0,
+    0x000BBBFF,
+    0x000BB2EC,
+    0x000BB2EC,
+    0x0002F2EC,
+    0x000BB2EC,
+    0x000BBBFF,
+    0x000BB000,
+    0x000BB2FC,
+    0x000BB2EC,
+    0x000BB2EC,
+    0x0002F2EC,
+    0x0000B2EC,
+    0x0000B2FC,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x288,
+    0x00000B91,
+    0x00000000,
+    0x0002CBBF,
+    0x0000BBBB,
+    0x000BFFFB,
+    0x00002CBB,
+    0x00002C2F,
+    0x0000BB2F,
+    0x000BB2FB,
+    0x0002FCBB,
+    0x0000BBBB,
+    0x0000B2FB,
+    0x0002FCBB,
+    0x0002FB2F,
+    0x000BB2CB,
+    0x000B2C0B,
+    0x00000B0B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x870,
+    0x00000B8E,
+    0x00000000,
+    0x00000BFF,
+    0x000BFEEC,
+    0x000B02EC,
+    0x000B02EC,
+    0x000B2EEC,
+    0x0002EEFC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0000B2FC,
+    0x0000B2EC,
+    0x0000B2EC,
+    0x0002EEEC,
+    0x0002EEFC,
+    0x0002EEC3,
+    0x000B0BC0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2b50,
+    0x00000B8D,
+    0x00000000,
+    0x000BFFFF,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000BFFFF,
+    0x00002EC0,
+    0x000BFEFF,
+    0x00002EC0,
+    0x00002EC0,
+    0x000BFEFF,
+    0x00002EC0,
+    0x00002EC0,
+    0x000BFEFF,
+    0x00002CB0,
+    0x00002CB0,
+    0x00002C2C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x438,
+    0x00000A8C,
+    0x00000000,
+    0x0002FEFF,
+    0x0002C0BB,
+    0x0002EEFF,
+    0x0000B2EB,
+    0x0000B0FF,
+    0x0002ECBB,
+    0x0000BFFF,
+    0x0000B02C,
+    0x0000BFFC,
+    0x0000B02C,
+    0x0000BFFC,
+    0x0000B02C,
+    0x0000BFFC,
+    0x00002CB0,
+    0x0002F02F,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x3ba0,
+    0x00000B8C,
+    0x00000000,
+    0x00000B00,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0000BB2C,
+    0x0000BBB0,
+    0x00000B00,
+    0x000BFFFF,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002EC0,
+    0x00002CB0,
+    0x000B2CB0,
+    0x000B2C2C,
+    0x000BF00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x630,
+    0x00000C93,
+    0x00000000,
+    0x000BFBFC,
+    0x000BBB2C,
+    0x000BBB2C,
+    0x000BBB2C,
+    0x000BBBFC,
+    0x002F2C2C,
+    0x00000BBC,
+    0x000BFBBC,
+    0x000B2FFC,
+    0x000BBBBC,
+    0x000BBBBC,
+    0x0002EFFC,
+    0x0002C2EC,
+    0x000BBBCB,
+    0x002CBBBB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x69c0,
+    0x00000B91,
+    0x00000000,
+    0x0002FFBF,
+    0x0002CBBB,
+    0x0002CBBB,
+    0x0002CBBB,
+    0x0002CB2F,
+    0x0002FF2F,
+    0x0002CBBB,
+    0x0002CBBB,
+    0x0002CBBB,
+    0x0002FFBB,
+    0x0002CBBB,
+    0x0002CB2F,
+    0x0002CB0B,
+    0x0002CB0B,
+    0x000BFFCB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x6df8,
+    0x00000B8E,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x00000B2C,
+    0x00000B2C,
+    0x0002FF2C,
+    0x00000B2C,
+    0x00000B2C,
+    0x00000B2C,
+    0x00000B2C,
+    0x00000B2C,
+    0x00000B2C,
+    0x00000B2C,
+    0x000BFFFF,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x5730,
+    0x00000B89,
+    0x00000000,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x000BFFFF,
+    0x0000B0B0,
+    0x0000B3B0,
+    0x00000B00,
+    0x0002FFFC,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x000BFFFF,
+    0x00000B00,
+    0x00002EC0,
+    0x0002B0B0,
+    0x000BC02F,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x37f8,
+    0x00000B97,
+    0x00000000,
+    0x000BB02C,
+    0x0002EC2C,
+    0x000BFF2C,
+    0x0002EEFF,
+    0x0002EC2C,
+    0x0002EC2C,
+    0x000BFEEC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x000BFCBB,
+    0x0002ECBB,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EFBF,
+    0x000BFC00,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x29e8,
+    0x00000B8B,
+    0x00000000,
+    0x00002CBF,
+    0x00002CB0,
+    0x0002CBB0,
+    0x000BBFF0,
+    0x00002CBF,
+    0x000BFFCB,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000B2EFF,
+    0x000BFFF0,
+    0x00002CB0,
+    0x0002ECB0,
+    0x0002EC2C,
+    0x000BBC2C,
+    0x000B0BCB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x4e78,
+    0x00000B94,
+    0x00000000,
+    0x00002EC0,
+    0x00002EC0,
+    0x000BFEFF,
+    0x00002EC0,
+    0x00002EC0,
+    0x000B2EF0,
+    0x000BF02F,
+    0x00000000,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002F02C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2c28,
+    0x00000B97,
+    0x00000000,
+    0x0002EEFF,
+    0x00002CBB,
+    0x000BFFFB,
+    0x00003FBB,
+    0x0002EEEF,
+    0x0002EEEF,
+    0x00002CBB,
+    0x0002CBFB,
+    0x0002CBBB,
+    0x000BFFBB,
+    0x0002EFBB,
+    0x0002CBEF,
+    0x000BFF0B,
+    0x0002C2CB,
+    0x0002C0BB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x6300,
+    0x00000B96,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00002FC0,
+    0x00002FC0,
+    0x0000BBB0,
+    0x0000BBB0,
+    0x0002CB2C,
+    0x000B0B0B,
+    0x00000B00,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xa0e0,
+    0x00000B8A,
+    0x00000000,
+    0x000BFEFF,
+    0x000B2ECB,
+    0x000BFEFF,
+    0x000B2ECB,
+    0x000BFEFF,
+    0x000B000B,
+    0x000BBFFB,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000BBFFB,
+    0x000B2ECB,
+    0x000B2ECB,
+    0x000B2CBB,
+    0x000B2CBB,
+    0x0002C00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x4ec0,
+    0x00000B91,
+    0x00000000,
+    0x00000B2C,
+    0x00000B2C,
+    0x000BFF2C,
+    0x00002EFF,
+    0x00002EEC,
+    0x000BFC2C,
+    0x0000BB2C,
+    0x0000B0BC,
+    0x000BFFEC,
+    0x0000B2EC,
+    0x0000B2EC,
+    0x0002EEEC,
+    0x0002EEEC,
+    0x0002EECB,
+    0x000B0BB0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x4458,
+    0x00000B90,
+    0x00000000,
+    0x0000002C,
+    0x000BFF2C,
+    0x000B2C2C,
+    0x000B2C2C,
+    0x000B2EEC,
+    0x000B2C3F,
+    0x000B2C2C,
+    0x000B2C2C,
+    0x000B2C2C,
+    0x000B2C2C,
+    0x000B2EF0,
+    0x000B2C00,
+    0x000B0B00,
+    0x000B0B00,
+    0x0002C2C0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x558,
+    0x00000A8F,
+    0x00000000,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0000B0BB,
+    0x00002CB0,
+    0x0003FFEC,
+    0x00002C2F,
+    0x00002C2C,
+    0x00002C2C,
+    0x0002FEEC,
+    0x00002EEC,
+    0x00002EEC,
+    0x00002EEC,
+    0x00002EEC,
+    0x00002FBC,
+    0x0003F0BC,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2e20,
+    0x00000B8C,
+    0x00000000,
+    0x0002FF00,
+    0x0002CBBF,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002FF2C,
+    0x0002CB2C,
+    0x0002CBBF,
+    0x0002FF2C,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x0002FF2C,
+    0x0000BCBC,
+    0x0000BC0B,
+    0x000BBB00,
+    0x0002C2C0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xab00,
+    0x00000B8E,
+    0x00000000,
+    0x00000000,
+    0x000BFEFF,
+    0x000B02C0,
+    0x000B02C0,
+    0x000BFEFF,
+    0x00002C0B,
+    0x00002C0B,
+    0x000BFEFF,
+    0x000B02C0,
+    0x000BB2EC,
+    0x000BC2F0,
+    0x000BB2EC,
+    0x000B2ECB,
+    0x000B02C0,
+    0x0002C0B0,
+};
+u32 frontier_df4_uistuff_021_59D034[] __attribute__((section(".data.frontier_df4_uistuff.gap21"))) = {
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x45c0,
+    0x00000B8A,
+    0x00000000,
+    0x0002C00B,
+    0x0000B02C,
+    0x00002FC0,
+    0x00002C00,
+    0x00002C00,
+    0x000BFFFB,
+    0x00002C2C,
+    0x00002C00,
+    0x00002C00,
+    0x0002FFC0,
+    0x0002C2EC,
+    0x0002C2EC,
+    0x0002C2EC,
+    0x0002FFCB,
+    0x0002C2CB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x15f0,
+    0x00000B8E,
+    0x00000000,
+    0x0002FF00,
+    0x000002FC,
+    0x0002CB00,
+    0x0002CB2C,
+    0x0000B0B0,
+    0x000BFFFF,
+    0x000B000B,
+    0x000BBFFB,
+    0x0000B000,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x00002EC0,
+    0x00002F00,
+    0x0000B2C0,
+    0x000BC0BC,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1a70,
+    0x00000B96,
+    0x00000000,
+    0x0002FF3B,
+    0x0002C02C,
+    0x0000B02C,
+    0x000BFFBB,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0000BCBC,
+    0x000000BC,
+    0x000BFFBB,
+    0x000BBBB0,
+    0x000BBBB0,
+    0x000BBB2C,
+    0x000BBB2C,
+    0x000BBB2C,
+    0x000FFFCB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x948,
+    0x00000B8C,
+    0x00000000,
+    0x00002C2F,
+    0x000BFFC0,
+    0x00002CBF,
+    0x0000BB00,
+    0x0002CBBF,
+    0x000B02C0,
+    0x0002FFBF,
+    0x00000000,
+    0x000BFFC0,
+    0x00002CBF,
+    0x0002FCBB,
+    0x0002CBBB,
+    0x0002C0BB,
+    0x0002C0BB,
+    0x0000B0BF,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x990,
+    0x00000C96,
+    0x00000000,
+    0x0002C00B,
+    0x000EC02C,
+    0x000FFFC0,
+    0x0002C2C0,
+    0x0002C2CB,
+    0x0002FFEC,
+    0x0002EEC0,
+    0x002EEEC0,
+    0x002EFFC0,
+    0x000BEFEC,
+    0x000BEEEC,
+    0x0002ECEC,
+    0x000BBBBB,
+    0x000BB0BB,
+    0x002C2C2F,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x360,
+    0x00000B96,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x0000002C,
+    0x000BFFF0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x4698,
+    0x00000B8C,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00000B00,
+    0x00000B00,
+    0x0002FFFC,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002C02C,
+    0x0002FFFC,
+    0x0002C02C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x24d8,
+    0x00000B8D,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000000,
+    0x0000BFF0,
+    0x0000B0B0,
+    0x0000BFF0,
+    0x00000000,
+    0x000BFFFF,
+    0x000B000B,
+    0x000BBFFB,
+    0x000BB0BB,
+    0x000BBFFB,
+    0x000B000B,
+    0x000BC00B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x678,
+    0x00000B93,
+    0x00000000,
+    0x00000B00,
+    0x00000B00,
+    0x000BFFFC,
+    0x0000002C,
+    0x0000B2EC,
+    0x000BFFFC,
+    0x0000B2EC,
+    0x0000BFEC,
+    0x0000002C,
+    0x0002FFEC,
+    0x0002C02C,
+    0x0000BB2C,
+    0x00002C2C,
+    0x0000BB2C,
+    0x000BC2FB,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2370,
+    0x00000B90,
+    0x00000000,
+    0x00002C2C,
+    0x0002FC2C,
+    0x0002EC0B,
+    0x0002EBBB,
+    0x0000B02F,
+    0x000BFF2C,
+    0x000BBB0B,
+    0x000BBBBB,
+    0x000BBBBF,
+    0x000BFF2C,
+    0x00000BBC,
+    0x00000BBF,
+    0x00000B2F,
+    0x000B0B2C,
+    0x000BFC2C,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x23b8,
+    0x00000B93,
+    0x00000000,
+    0x0000BBC0,
+    0x0000B0BF,
+    0x0000B0B0,
+    0x0000BBFF,
+    0x000BFCB0,
+    0x000BBBFF,
+    0x000BBBBB,
+    0x000BBBFF,
+    0x000BBBBB,
+    0x000BB3FF,
+    0x000BB0B0,
+    0x000B2EFC,
+    0x000B2CB0,
+    0x000B2EF0,
+    0x0002CB2F,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x240,
+    0x00000B93,
+    0x00000000,
+    0x0000BB2C,
+    0x000BFFFC,
+    0x0000BB2C,
+    0x00002C2C,
+    0x00003BBF,
+    0x0000BB2C,
+    0x0000C2EC,
+    0x0002FFEC,
+    0x000B00BC,
+    0x0002FFEC,
+    0x0002C2EC,
+    0x0002C2FC,
+    0x0002C2CB,
+    0x0002FFC0,
+    0x0002C2C0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x1170,
+    0x00000B8E,
+    0x00000000,
+    0x00000000,
+    0x000BFFFF,
+    0x000B0000,
+    0x000B2FFC,
+    0x000B0000,
+    0x000B0000,
+    0x000B2FFC,
+    0x000B2C2C,
+    0x000B2C2C,
+    0x000B2C2C,
+    0x000B2FFC,
+    0x000B2C2C,
+    0x000B0000,
+    0x000B0000,
+    0x000BC000,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0xa368,
+    0x00000B8D,
+    0x00000000,
+    0x0000002C,
+    0x000BFFFC,
+    0x000B0B2C,
+    0x0002EFBB,
+    0x0000B2C0,
+    0x0002C0B0,
+    0x000B002F,
+    0x0002FFFC,
+    0x00000000,
+    0x000BFFFF,
+    0x00000B00,
+    0x0002CB2C,
+    0x0002CB2C,
+    0x000B0B0B,
+    0x00000BC0,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x2b98,
+    0x00000B8E,
+    0x00000000,
+    0x00000B00,
+    0x00000B2C,
+    0x00000B2C,
+    0x0002FFFC,
+    0x00000B2C,
+    0x00000B0B,
+    0x00000B00,
+    0x000BFFFF,
+    0x00000B00,
+    0x00002EC0,
+    0x00002EC0,
+    0x0000B0B0,
+    0x0000B0B0,
+    0x0002C02C,
+    0x000B000B,
+    (u32)&frontier_fontgrp_ui_000_59D4FC + 0x59b8,
+    0x00000B92,
+    0x00000000,
+    0x00002C0B,
+    0x00000B2C,
+    0x0002FFEC,
+    0x0002C2C0,
+    0x0002C2C0,
+    0x0002FFEF,
+    0x000002EC,
+    0x0002FFEC,
+    0x0002C2EC,
+    0x0002C2EC,
+    0x0002C2EC,
+    0x0002FFEC,
+    0x0000002C,
+    0x000002FB,
+    0x000BFF0B,
+};
 struct ProcCmd frontier_df4_uistuff_022_5B90D8[] SECTION(".data.frontier_df4_uistuff.gap22") = {
     PROC_MARK(5),
     PROC_REPEAT(TalkSkipListener_OnIdle),
@@ -8390,19 +8947,18 @@ struct ProcCmd ProcScr_Talk_OnEnd_5B90D8_0[] SECTION(".data.frontier_df4_uistuff
     PROC_END,
 };
 
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap22, \"aw\", %progbits\n"
-    ".4byte 0x00000010\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000800\n"
-    ".4byte 0x00000003\n"
-    ".4byte 0x00000800\n"
-    ".4byte 0x00000003\n"
-    ".4byte 0x00000800\n"
-    ".4byte 0x00000003\n"
-    ".4byte 0x00000800\n"
-    ".4byte 0x00000003\n"
-);
+u32 frontier_df4_uistuff_gap22[] __attribute__((section(".data.frontier_df4_uistuff.gap22"))) = {
+    0x00000010,
+    0x00000000,
+    0x00000800,
+    0x00000003,
+    0x00000800,
+    0x00000003,
+    0x00000800,
+    0x00000003,
+    0x00000800,
+    0x00000003,
+};
 
 struct ProcCmd ProcScr_TalkFaceMove_OnInit_5B90D8_1[] SECTION(".data.frontier_df4_uistuff.gap22") = {
     PROC_SLEEP(1),
@@ -8411,1165 +8967,1152 @@ struct ProcCmd ProcScr_TalkFaceMove_OnInit_5B90D8_1[] SECTION(".data.frontier_df
     PROC_END,
 };
 
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap22b, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_022b_5B9188\n"
-    "frontier_df4_uistuff_022b_5B9188:\n"
-    ".4byte 0x0005000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0008000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte TalkWaitForInput_OnIdle\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00010001\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00020001\n"
-    ".4byte 0x00000000\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x28\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x28\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x28\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x28\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x28\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x28\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x28\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x28\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x28\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x28\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x30\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x38\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x38\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x38\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x38\n"
-    ".4byte gProcScr_TalkWaitForInput + 0x30\n"
-    ".4byte 0x0005000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte TalkShiftClearAll_OnInit\n"
-    ".4byte 0x00000003\n"
-    ".4byte TalkShiftClearAll_OnIdle\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000007bb\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000007bc\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000007bd\n"
-    ".4byte TalkChoice_OnBuy\n"
-    ".4byte 0x000007be\n"
-    ".4byte TalkChoice_OnSell\n"
-    ".4byte 0x0008000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte TalkChoice_OnIdle\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0005000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte TalkShiftClear_OnInit\n"
-    ".4byte 0x00000003\n"
-    ".4byte TalkShiftClear_OnIdle\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0005000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte TalkSpriteShiftClear_OnInit\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte TalkSpriteShiftClear_ClearLine\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000008\n"
-    ".4byte 0x00000010\n"
-    ".4byte 0x00000020\n"
-    ".4byte 0x00000040\n"
-    ".4byte 0x00000003\n"
-    ".4byte TalkBubbleOpen_OnIdle\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap23, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_023_5B9454\n"
-    "frontier_df4_uistuff_023_5B9454:\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_0\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_8009950\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000001\n"
-    ".4byte frontier_df4_misc_lo_000bm_0DC548 + 0x8\n"
-    ".4byte 0x000b000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000015\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_CallEraseSaveEventWithKeyCombo\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_0\n"
-    ".4byte 0x00000003\n"
-    ".4byte sub_8009950\n"
-    ".4byte 0x00010006\n"
-    ".4byte frontier_df4_ending_018_B3F7BC + 0x4b8\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_EnableSoundEffects\n"
-    ".4byte 0x00010006\n"
-    ".4byte frontier_df4_ending_018_B3F7BC\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_PostIntro\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0003000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000016\n"
-    ".4byte GamceControl_StartClassReel\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_PostClassReel\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0002000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_ClearPaletteAndReset\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_PostClassReel\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0003000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_EnableSoundEffects\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartTitleScreen_WithMusic\n"
-    ".4byte 0x0019000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0017000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_EnableSoundEffects\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartTitleScreen_FlagTrue\n"
-    ".4byte 0x0019000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0018000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_EnableSoundEffects\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartTitleScreen_FlagFalse\n"
-    ".4byte 0x0019000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0019000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_PostIntro\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0004000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_EnableSoundEffects\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartSaveMenu\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte sub_8009AD8\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0006000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0005000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_RememberChapterId\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartBattleMap\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0008000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0006000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameCtrl_CheckNewGameAndBranch\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameCtrl_CheckGameCompleteAndBranch\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_RememberChapterId\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameCtrlStartIntroMonologue\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00010006\n"
-    ".4byte ProcScr_WorldmapMain_1 + 0x18\n"
-    ".4byte 0x00000002\n"
-    ".4byte ProcScr_WorldMapWrapper\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartBattleMap\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0008000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_PostChapterSwitch\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_RestoreChapterId\n"
-    ".4byte 0x0012000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_ChapterSwitch\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_CallPostChapterSaveMenu\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0006000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0007000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ProcScr_WorldMapWrapper\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameCtrl_StartResumedGame\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_RememberChapterId\n"
-    ".4byte 0x00000002\n"
-    ".4byte sub_8009CCC\n"
-    ".4byte 0x0008000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000d000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameCtrlStartExtraMap\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartBattleMap\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0009000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_PostChapterSwitch\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_InvalidateSuspendSave\n"
-    ".4byte 0x001e000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartFinScreen\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0003000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000e000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0006000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000b000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartLinkArenaMainMenu\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_StartMainTheme\n"
-    ".4byte 0x0004000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000c000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte sub_8049664\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_StartMainTheme\n"
-    ".4byte 0x0004000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000f000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ClearTemporaryUnits\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameCtrl_DeclareCompletedChapter\n"
-    ".4byte 0x00000002\n"
-    ".4byte Make6C_SaveMenuPostChapter\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0010000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameCtrl_SavePlayThroughData\n"
-    ".4byte 0x00000002\n"
-    ".4byte CallGameEndingEvent\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000014\n"
-    ".4byte EventEngineExists\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartCharacterEndings\n"
-    ".4byte 0x00000002\n"
-    ".4byte _SetGameEndFlag\n"
-    ".4byte 0x001e000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0003000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0011000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte GameControl_CallEraseMural\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartMidFadeFromBlack\n"
-    ".4byte 0x00000003\n"
-    ".4byte WaitForFade\n"
-    ".4byte 0x00000002\n"
-    ".4byte CallEraseSaveEvent\n"
-    ".4byte 0x00000014\n"
-    ".4byte EventEngineExists\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartMidFadeToBlack\n"
-    ".4byte 0x00000003\n"
-    ".4byte WaitForFade\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndMuralBackground\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0006000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000004\n"
-    ".4byte EventEngine_OnEnd\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte _FreezeMenu\n"
-    ".4byte 0x00000003\n"
-    ".4byte EventEngine_OnUpdate\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0006000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000004\n"
-    ".4byte EventEngine_OnEnd\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte EventEngine_OnUpdate\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte sub_800D85C\n"
-    ".4byte Event01_End\n"
-    ".4byte Event02_EvBitAndIdMod\n"
-    ".4byte Event03_CheckEvBitOrId\n"
-    ".4byte Event04_CheckRandom\n"
-    ".4byte Event05_SetSlot\n"
-    ".4byte Event06_SlotOperation\n"
-    ".4byte Event07_SlotQueueOperations\n"
-    ".4byte sub_800DC04\n"
-    ".4byte Event09_Goto\n"
-    ".4byte Event0A_Call\n"
-    ".4byte Event0B_EnqueueCall\n"
-    ".4byte Event0C_Branch\n"
-    ".4byte Event0D_AsmCall\n"
-    ".4byte Event0E_STAL\n"
-    ".4byte Event0F_CounterOps\n"
-    ".4byte Event10_ModifyEvBit\n"
-    ".4byte Event11_SetIgnoredKeys\n"
-    ".4byte Event12_StartBGM\n"
-    ".4byte Event13_BgmFadeIn\n"
-    ".4byte Event14_BgmOverideRestore\n"
-    ".4byte Event15_BgmVolume\n"
-    ".4byte sub_800E11C\n"
-    ".4byte Event17_Fade\n"
-    ".4byte Event18_ColorFade\n"
-    ".4byte Event19_Checks\n"
-    ".4byte Event1A_TEXTSTART\n"
-    ".4byte Event1B_TEXTSHOW\n"
-    ".4byte Event1D_TalkContinue\n"
-    ".4byte Event1D_WaitForLockTalk\n"
-    ".4byte Event1E_\n"
-    ".4byte Event1F_\n"
-    ".4byte Event20_\n"
-    ".4byte Event21_TextBg\n"
-    ".4byte Event22_ClearScreen\n"
-    ".4byte Event23_DisaleMapDisp\n"
-    ".4byte Event24_EnableMapDisp\n"
-    ".4byte Event25_ChangeMap\n"
-    ".4byte Event26_CameraControl\n"
-    ".4byte Event27_MapChange\n"
-    ".4byte Event28_ChangeWeather\n"
-    ".4byte Event29_SetFogVision\n"
-    ".4byte Event2A_MoveToChapter\n"
-    ".4byte Event2B_ConfigLoadUnit\n"
-    ".4byte Event2C_LoadUnits\n"
-    ".4byte Event2D_ChangeSpritePal\n"
-    ".4byte Event2E_CheckAt\n"
-    ".4byte sub_800FF08\n"
-    ".4byte Event30_ENUN\n"
-    ".4byte Event31_DisplayEffectRange\n"
-    ".4byte Event32_SpawnSingleUnit\n"
-    ".4byte Event33_CheckUnitVarious\n"
-    ".4byte Event34_MessWithUnitState\n"
-    ".4byte Event35_UnitClassChanging\n"
-    ".4byte sub_80106A0\n"
-    ".4byte Event37_GiveItem\n"
-    ".4byte Event38_ChangeActiveUnit\n"
-    ".4byte Event39_ChangeAiScript\n"
-    ".4byte Event3A_DisplayPopup\n"
-    ".4byte Event3B_DisplayCursor\n"
-    ".4byte Event3C_MoveCursor\n"
-    ".4byte Event3D_MenuOverride\n"
-    ".4byte Event3E_PrepScreenCall\n"
-    ".4byte Event3F_ScriptBattle\n"
-    ".4byte sub_8010CB4\n"
-    ".4byte Event41_Warp\n"
-    ".4byte Event42_EarthQuake\n"
-    ".4byte sub_8010E1C\n"
-    ".4byte Event43_SummonUnit\n"
-    ".4byte Event44_BreakingSacredStone\n"
-    ".4byte Event45_GlowingCross\n"
-    ".4byte 0x0008000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte nullsub_17\n"
-    ".4byte 0x00000003\n"
-    ".4byte Nop_EventscrGmap_0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0008000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000004\n"
-    ".4byte EventFaceDeamonDelete\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte nullsub_19\n"
-    ".4byte 0x00000003\n"
-    ".4byte nullsub_20\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte Event80_WmSkip_Unsure\n"
-    ".4byte Event81_WmFadeOut\n"
-    ".4byte Event82_WmEnd\n"
-    ".4byte sub_800C124\n"
-    ".4byte Event84_WmSetCameraOntoNode\n"
-    ".4byte Event85_WmSetCameraOntoUnit\n"
-    ".4byte Event86_WmScrollCamera\n"
-    ".4byte sub_800C224\n"
-    ".4byte Event88_WmScrollCameraOntoUnit\n"
-    ".4byte Event89_WmScrollWait\n"
-    ".4byte Event8A_WmShowCursor_Unsure\n"
-    ".4byte Event8B_WmHideCursor_Unsure\n"
-    ".4byte sub_800C3AC\n"
-    ".4byte Event8D_WmNop\n"
-    ".4byte Event8E_WmNop\n"
-    ".4byte Event8F_WmNop\n"
-    ".4byte Event90_WmAddPathDisplayed\n"
-    ".4byte Event91_WmAddPath\n"
-    ".4byte Event92_WmRemovePath\n"
-    ".4byte Event93_WmEnableNode\n"
-    ".4byte Event94_WmDisableNode\n"
-    ".4byte Event95_WmEnableNodeDisplayed\n"
-    ".4byte Event96_WmEnablePathTargetDisplayed\n"
-    ".4byte Event97_WmInitNextStoryNode\n"
-    ".4byte Event98_WmSetNextStoryNodePath\n"
-    ".4byte Event99_GmNodeDisplayWait\n"
-    ".4byte Event9A_WmSetStoryNodeSilent\n"
-    ".4byte Event9B_WmSetNextStoryNodeSilentNoFlag\n"
-    ".4byte Event9C_\n"
-    ".4byte Event9D_\n"
-    ".4byte Event9E_WmSetClassUnit\n"
-    ".4byte Event9F_WmSetCharUnit\n"
-    ".4byte EventA0_WmRemoveUnit\n"
-    ".4byte EventA1_WmShowUnit\n"
-    ".4byte EventA2_WmHideUnit\n"
-    ".4byte EventA3_WmShowUnitFaded\n"
-    ".4byte EventA4_WmHideUnitFaded\n"
-    ".4byte EventA5_WmUnitFadeWait\n"
-    ".4byte EventA6_WmUnitSetOnNode\n"
-    ".4byte EventA7_WmUnitSetPosition\n"
-    ".4byte EventA8_WmUnitMoveFree\n"
-    ".4byte EventA9_WmUnitMovePaths\n"
-    ".4byte EventAA_WmUnitPauseMove\n"
-    ".4byte EventAB_WmUnitResumeMove\n"
-    ".4byte EventAC_WmUnitMoveWait\n"
-    ".4byte EventAD_WmFadeToDarker\n"
-    ".4byte EventAE_WmFadeToDarkerWait\n"
-    ".4byte EventAF_WmShowTextBox\n"
-    ".4byte EventB0_WmHideTextBox_Bugged\n"
-    ".4byte EventB1_WmTextBoxWait\n"
-    ".4byte EventB2_WmFancyFade\n"
-    ".4byte EventB3_WmFancyFadeWait\n"
-    ".4byte EventB4_WmDisplayBigMap\n"
-    ".4byte EventB5_WmHideBigMap\n"
-    ".4byte EventB6_WmMoveBigMap\n"
-    ".4byte EventB7_WmBigMapWait\n"
-    ".4byte EventB8_WmShowBigMapHighlight\n"
-    ".4byte EventB9_WmRemoveHighlightNationPart1\n"
-    ".4byte EventBA_WmRemoveHighlightNationPart2\n"
-    ".4byte EventBB_\n"
-    ".4byte EventBC_MarkPoint\n"
-    ".4byte EventBD_\n"
-    ".4byte EventBE_\n"
-    ".4byte EventBF_\n"
-    ".4byte EventC0_\n"
-    ".4byte EventC1_SKIPWM\n"
-    ".4byte EventC2_WmNoFade\n"
-    ".4byte EventC3_SpawnLord\n"
-    ".4byte EventC4_WmShowPortrait\n"
-    ".4byte EventC5_WmClearPortrait\n"
-    ".4byte EventC6_WmDisplayText\n"
-    ".4byte EventC7_\n"
-    ".4byte EventC8_\n"
-    ".4byte EventC9_RemoveWmText\n"
-    ".4byte EventCA_\n"
-    ".4byte EventCB_\n"
-    ".4byte EventCC_\n"
-    ".4byte EventCD_\n"
-    ".4byte EventCE_\n"
-    ".4byte EventCF_\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap23b, \"aw\", %progbits\n"
-    ".global data_085B9BBC\n"
-    "data_085B9BBC:\n"
-    ".4byte 0x00000014\n"
-    ".4byte EventEngineExists\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte _WhileFace6CExists\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoBackgroundFade_Init\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoBackgroundFade_CopyBg3ToBg2\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoBackgroundFade_LoadBg3\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte ConvoBackgroundFade_Loop\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoBackgroundFade_End\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoBackgroundFade_Init\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoBackgroundFade_LoadBg2\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte ConvoBackgroundFade_Loop\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoBackgroundFade_CopyBg2ToBg3\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoBackgroundFade_End\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoBackgroundFade_Init\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoBackgroundFade_CopyBg3ToBg2\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoBackgroundFade_RestoreMap\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte ConvoBackgroundFade_Loop\n"
-    ".4byte 0x00000002\n"
-    ".4byte ConvoBackgroundFade_End\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
+u32 frontier_df4_uistuff_022b_5B9188[] __attribute__((section(".data.frontier_df4_uistuff.gap22b"))) = {
+    0x0005000F,
+    0x00000000,
+    0x0008000E,
+    0x00000000,
+    0x00000003,
+    (u32)&TalkWaitForInput_OnIdle,
+    0x0001000E,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000001,
+    0x00000000,
+    0x00010001,
+    0x00000000,
+    0x00020001,
+    0x00000000,
+    (u32)&gProcScr_TalkWaitForInput + 0x28,
+    (u32)&gProcScr_TalkWaitForInput + 0x28,
+    (u32)&gProcScr_TalkWaitForInput + 0x28,
+    (u32)&gProcScr_TalkWaitForInput + 0x28,
+    (u32)&gProcScr_TalkWaitForInput + 0x28,
+    (u32)&gProcScr_TalkWaitForInput + 0x28,
+    (u32)&gProcScr_TalkWaitForInput + 0x28,
+    (u32)&gProcScr_TalkWaitForInput + 0x28,
+    (u32)&gProcScr_TalkWaitForInput + 0x28,
+    (u32)&gProcScr_TalkWaitForInput + 0x28,
+    (u32)&gProcScr_TalkWaitForInput + 0x30,
+    (u32)&gProcScr_TalkWaitForInput + 0x38,
+    (u32)&gProcScr_TalkWaitForInput + 0x38,
+    (u32)&gProcScr_TalkWaitForInput + 0x38,
+    (u32)&gProcScr_TalkWaitForInput + 0x38,
+    (u32)&gProcScr_TalkWaitForInput + 0x30,
+    0x0005000F,
+    0x00000000,
+    0x00000002,
+    (u32)&TalkShiftClearAll_OnInit,
+    0x00000003,
+    (u32)&TalkShiftClearAll_OnIdle,
+    0x00000000,
+    0x00000000,
+    0x000007BB,
+    0x00000000,
+    0x000007BC,
+    0x00000000,
+    0x000007BD,
+    (u32)&TalkChoice_OnBuy,
+    0x000007BE,
+    (u32)&TalkChoice_OnSell,
+    0x0008000E,
+    0x00000000,
+    0x00000003,
+    (u32)&TalkChoice_OnIdle,
+    0x00000000,
+    0x00000000,
+    0x0005000F,
+    0x00000000,
+    0x00000002,
+    (u32)&TalkShiftClear_OnInit,
+    0x00000003,
+    (u32)&TalkShiftClear_OnIdle,
+    0x0001000E,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0005000F,
+    0x00000000,
+    0x00000002,
+    (u32)&TalkSpriteShiftClear_OnInit,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&TalkSpriteShiftClear_ClearLine,
+    0x0001000E,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000008,
+    0x00000010,
+    0x00000020,
+    0x00000040,
+    0x00000003,
+    (u32)&TalkBubbleOpen_OnIdle,
+    0x00000000,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_023_5B9454[] __attribute__((section(".data.frontier_df4_uistuff.gap23"))) = {
+    0x00000002,
+    (u32)&GameControl_0,
+    0x00000003,
+    (u32)&sub_8009950,
+    0x00000000,
+    0x00000000,
+    0x00000001,
+    (u32)&frontier_df4_misc_lo_000bm_0DC548 + 0x8,
+    0x000B000F,
+    0x00000000,
+    0x00000015,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_CallEraseSaveEventWithKeyCombo,
+    0x00000002,
+    (u32)&GameControl_0,
+    0x00000003,
+    (u32)&sub_8009950,
+    0x00010006,
+    (u32)&frontier_df4_ending_018_B3F7BC + 0x4b8,
+    0x0000000B,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_EnableSoundEffects,
+    0x00010006,
+    (u32)&frontier_df4_ending_018_B3F7BC,
+    0x00000002,
+    (u32)&GameControl_PostIntro,
+    0x0000000E,
+    0x00000000,
+    0x0003000C,
+    0x00000000,
+    0x0001000B,
+    0x00000000,
+    0x00000016,
+    (u32)&GamceControl_StartClassReel,
+    0x00000002,
+    (u32)&GameControl_PostClassReel,
+    0x0000000E,
+    0x00000000,
+    0x0000000C,
+    0x00000000,
+    0x0002000B,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_ClearPaletteAndReset,
+    0x00000002,
+    (u32)&GameControl_PostClassReel,
+    0x0000000E,
+    0x00000000,
+    0x0000000C,
+    0x00000000,
+    0x0003000B,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_EnableSoundEffects,
+    0x00000002,
+    (u32)&StartTitleScreen_WithMusic,
+    0x0019000C,
+    0x00000000,
+    0x0017000B,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_EnableSoundEffects,
+    0x00000002,
+    (u32)&StartTitleScreen_FlagTrue,
+    0x0019000C,
+    0x00000000,
+    0x0018000B,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_EnableSoundEffects,
+    0x00000002,
+    (u32)&StartTitleScreen_FlagFalse,
+    0x0019000C,
+    0x00000000,
+    0x0019000B,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_PostIntro,
+    0x0000000E,
+    0x00000000,
+    0x0000000C,
+    0x00000000,
+    0x0004000B,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_EnableSoundEffects,
+    0x00000002,
+    (u32)&StartSaveMenu,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&sub_8009AD8,
+    0x0000000E,
+    0x00000000,
+    0x0006000C,
+    0x00000000,
+    0x0005000B,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_RememberChapterId,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&StartBattleMap,
+    0x0000000E,
+    0x00000000,
+    0x0008000C,
+    0x00000000,
+    0x0006000B,
+    0x00000000,
+    0x00000002,
+    (u32)&GameCtrl_CheckNewGameAndBranch,
+    0x00000002,
+    (u32)&GameCtrl_CheckGameCompleteAndBranch,
+    0x00000002,
+    (u32)&GameControl_RememberChapterId,
+    0x00000002,
+    (u32)&GameCtrlStartIntroMonologue,
+    0x0000000E,
+    0x00000000,
+    0x00010006,
+    (u32)&ProcScr_WorldmapMain_1 + 0x18,
+    0x00000002,
+    (u32)&ProcScr_WorldMapWrapper,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&StartBattleMap,
+    0x0000000E,
+    0x00000000,
+    0x0008000B,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_PostChapterSwitch,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_RestoreChapterId,
+    0x0012000B,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_ChapterSwitch,
+    0x00000002,
+    (u32)&GameControl_CallPostChapterSaveMenu,
+    0x0000000E,
+    0x00000000,
+    0x0006000C,
+    0x00000000,
+    0x0007000B,
+    0x00000000,
+    0x00000002,
+    (u32)&ProcScr_WorldMapWrapper,
+    0x00000002,
+    (u32)&GameCtrl_StartResumedGame,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_RememberChapterId,
+    0x00000002,
+    (u32)&sub_8009CCC,
+    0x0008000C,
+    0x00000000,
+    0x000D000B,
+    0x00000000,
+    0x00000002,
+    (u32)&GameCtrlStartExtraMap,
+    0x00000002,
+    (u32)&StartBattleMap,
+    0x0000000E,
+    0x00000000,
+    0x0009000B,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_PostChapterSwitch,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_InvalidateSuspendSave,
+    0x001E000E,
+    0x00000000,
+    0x00000002,
+    (u32)&StartFinScreen,
+    0x0000000E,
+    0x00000000,
+    0x0003000C,
+    0x00000000,
+    0x000E000B,
+    0x00000000,
+    0x0006000C,
+    0x00000000,
+    0x000B000B,
+    0x00000000,
+    0x00000002,
+    (u32)&StartLinkArenaMainMenu,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_StartMainTheme,
+    0x0004000C,
+    0x00000000,
+    0x000C000B,
+    0x00000000,
+    0x00000002,
+    (u32)&sub_8049664,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_StartMainTheme,
+    0x0004000C,
+    0x00000000,
+    0x000F000B,
+    0x00000000,
+    0x00000002,
+    (u32)&ClearTemporaryUnits,
+    0x00000002,
+    (u32)&GameCtrl_DeclareCompletedChapter,
+    0x00000002,
+    (u32)&Make6C_SaveMenuPostChapter,
+    0x0000000E,
+    0x00000000,
+    0x0010000B,
+    0x00000000,
+    0x00000002,
+    (u32)&GameCtrl_SavePlayThroughData,
+    0x00000002,
+    (u32)&CallGameEndingEvent,
+    0x0000000E,
+    0x00000000,
+    0x00000014,
+    (u32)&EventEngineExists,
+    0x00000002,
+    (u32)&StartCharacterEndings,
+    0x00000002,
+    (u32)&_SetGameEndFlag,
+    0x001E000E,
+    0x00000000,
+    0x0003000C,
+    0x00000000,
+    0x0011000B,
+    0x00000000,
+    0x00000002,
+    (u32)&GameControl_CallEraseMural,
+    0x00000002,
+    (u32)&StartMidFadeFromBlack,
+    0x00000003,
+    (u32)&WaitForFade,
+    0x00000002,
+    (u32)&CallEraseSaveEvent,
+    0x00000014,
+    (u32)&EventEngineExists,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&StartMidFadeToBlack,
+    0x00000003,
+    (u32)&WaitForFade,
+    0x00000002,
+    (u32)&EndMuralBackground,
+    0x0000000C,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0006000F,
+    0x00000000,
+    0x00000004,
+    (u32)&EventEngine_OnEnd,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&_FreezeMenu,
+    0x00000003,
+    (u32)&EventEngine_OnUpdate,
+    0x0000000E,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0006000F,
+    0x00000000,
+    0x00000004,
+    (u32)&EventEngine_OnEnd,
+    0x0000000E,
+    0x00000000,
+    0x00000003,
+    (u32)&EventEngine_OnUpdate,
+    0x0000000E,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&sub_800D85C,
+    (u32)&Event01_End,
+    (u32)&Event02_EvBitAndIdMod,
+    (u32)&Event03_CheckEvBitOrId,
+    (u32)&Event04_CheckRandom,
+    (u32)&Event05_SetSlot,
+    (u32)&Event06_SlotOperation,
+    (u32)&Event07_SlotQueueOperations,
+    (u32)&sub_800DC04,
+    (u32)&Event09_Goto,
+    (u32)&Event0A_Call,
+    (u32)&Event0B_EnqueueCall,
+    (u32)&Event0C_Branch,
+    (u32)&Event0D_AsmCall,
+    (u32)&Event0E_STAL,
+    (u32)&Event0F_CounterOps,
+    (u32)&Event10_ModifyEvBit,
+    (u32)&Event11_SetIgnoredKeys,
+    (u32)&Event12_StartBGM,
+    (u32)&Event13_BgmFadeIn,
+    (u32)&Event14_BgmOverideRestore,
+    (u32)&Event15_BgmVolume,
+    (u32)&sub_800E11C,
+    (u32)&Event17_Fade,
+    (u32)&Event18_ColorFade,
+    (u32)&Event19_Checks,
+    (u32)&Event1A_TEXTSTART,
+    (u32)&Event1B_TEXTSHOW,
+    (u32)&Event1D_TalkContinue,
+    (u32)&Event1D_WaitForLockTalk,
+    (u32)&Event1E_,
+    (u32)&Event1F_,
+    (u32)&Event20_,
+    (u32)&Event21_TextBg,
+    (u32)&Event22_ClearScreen,
+    (u32)&Event23_DisaleMapDisp,
+    (u32)&Event24_EnableMapDisp,
+    (u32)&Event25_ChangeMap,
+    (u32)&Event26_CameraControl,
+    (u32)&Event27_MapChange,
+    (u32)&Event28_ChangeWeather,
+    (u32)&Event29_SetFogVision,
+    (u32)&Event2A_MoveToChapter,
+    (u32)&Event2B_ConfigLoadUnit,
+    (u32)&Event2C_LoadUnits,
+    (u32)&Event2D_ChangeSpritePal,
+    (u32)&Event2E_CheckAt,
+    (u32)&sub_800FF08,
+    (u32)&Event30_ENUN,
+    (u32)&Event31_DisplayEffectRange,
+    (u32)&Event32_SpawnSingleUnit,
+    (u32)&Event33_CheckUnitVarious,
+    (u32)&Event34_MessWithUnitState,
+    (u32)&Event35_UnitClassChanging,
+    (u32)&sub_80106A0,
+    (u32)&Event37_GiveItem,
+    (u32)&Event38_ChangeActiveUnit,
+    (u32)&Event39_ChangeAiScript,
+    (u32)&Event3A_DisplayPopup,
+    (u32)&Event3B_DisplayCursor,
+    (u32)&Event3C_MoveCursor,
+    (u32)&Event3D_MenuOverride,
+    (u32)&Event3E_PrepScreenCall,
+    (u32)&Event3F_ScriptBattle,
+    (u32)&sub_8010CB4,
+    (u32)&Event41_Warp,
+    (u32)&Event42_EarthQuake,
+    (u32)&sub_8010E1C,
+    (u32)&Event43_SummonUnit,
+    (u32)&Event44_BreakingSacredStone,
+    (u32)&Event45_GlowingCross,
+    0x0008000F,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&nullsub_17,
+    0x00000003,
+    (u32)&Nop_EventscrGmap_0,
+    0x00000000,
+    0x00000000,
+    0x0008000F,
+    0x00000000,
+    0x00000004,
+    (u32)&EventFaceDeamonDelete,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&nullsub_19,
+    0x00000003,
+    (u32)&nullsub_20,
+    0x00000000,
+    0x00000000,
+    (u32)&Event80_WmSkip_Unsure,
+    (u32)&Event81_WmFadeOut,
+    (u32)&Event82_WmEnd,
+    (u32)&sub_800C124,
+    (u32)&Event84_WmSetCameraOntoNode,
+    (u32)&Event85_WmSetCameraOntoUnit,
+    (u32)&Event86_WmScrollCamera,
+    (u32)&sub_800C224,
+    (u32)&Event88_WmScrollCameraOntoUnit,
+    (u32)&Event89_WmScrollWait,
+    (u32)&Event8A_WmShowCursor_Unsure,
+    (u32)&Event8B_WmHideCursor_Unsure,
+    (u32)&sub_800C3AC,
+    (u32)&Event8D_WmNop,
+    (u32)&Event8E_WmNop,
+    (u32)&Event8F_WmNop,
+    (u32)&Event90_WmAddPathDisplayed,
+    (u32)&Event91_WmAddPath,
+    (u32)&Event92_WmRemovePath,
+    (u32)&Event93_WmEnableNode,
+    (u32)&Event94_WmDisableNode,
+    (u32)&Event95_WmEnableNodeDisplayed,
+    (u32)&Event96_WmEnablePathTargetDisplayed,
+    (u32)&Event97_WmInitNextStoryNode,
+    (u32)&Event98_WmSetNextStoryNodePath,
+    (u32)&Event99_GmNodeDisplayWait,
+    (u32)&Event9A_WmSetStoryNodeSilent,
+    (u32)&Event9B_WmSetNextStoryNodeSilentNoFlag,
+    (u32)&Event9C_,
+    (u32)&Event9D_,
+    (u32)&Event9E_WmSetClassUnit,
+    (u32)&Event9F_WmSetCharUnit,
+    (u32)&EventA0_WmRemoveUnit,
+    (u32)&EventA1_WmShowUnit,
+    (u32)&EventA2_WmHideUnit,
+    (u32)&EventA3_WmShowUnitFaded,
+    (u32)&EventA4_WmHideUnitFaded,
+    (u32)&EventA5_WmUnitFadeWait,
+    (u32)&EventA6_WmUnitSetOnNode,
+    (u32)&EventA7_WmUnitSetPosition,
+    (u32)&EventA8_WmUnitMoveFree,
+    (u32)&EventA9_WmUnitMovePaths,
+    (u32)&EventAA_WmUnitPauseMove,
+    (u32)&EventAB_WmUnitResumeMove,
+    (u32)&EventAC_WmUnitMoveWait,
+    (u32)&EventAD_WmFadeToDarker,
+    (u32)&EventAE_WmFadeToDarkerWait,
+    (u32)&EventAF_WmShowTextBox,
+    (u32)&EventB0_WmHideTextBox_Bugged,
+    (u32)&EventB1_WmTextBoxWait,
+    (u32)&EventB2_WmFancyFade,
+    (u32)&EventB3_WmFancyFadeWait,
+    (u32)&EventB4_WmDisplayBigMap,
+    (u32)&EventB5_WmHideBigMap,
+    (u32)&EventB6_WmMoveBigMap,
+    (u32)&EventB7_WmBigMapWait,
+    (u32)&EventB8_WmShowBigMapHighlight,
+    (u32)&EventB9_WmRemoveHighlightNationPart1,
+    (u32)&EventBA_WmRemoveHighlightNationPart2,
+    (u32)&EventBB_,
+    (u32)&EventBC_MarkPoint,
+    (u32)&EventBD_,
+    (u32)&EventBE_,
+    (u32)&EventBF_,
+    (u32)&EventC0_,
+    (u32)&EventC1_SKIPWM,
+    (u32)&EventC2_WmNoFade,
+    (u32)&EventC3_SpawnLord,
+    (u32)&EventC4_WmShowPortrait,
+    (u32)&EventC5_WmClearPortrait,
+    (u32)&EventC6_WmDisplayText,
+    (u32)&EventC7_,
+    (u32)&EventC8_,
+    (u32)&EventC9_RemoveWmText,
+    (u32)&EventCA_,
+    (u32)&EventCB_,
+    (u32)&EventCC_,
+    (u32)&EventCD_,
+    (u32)&EventCE_,
+    (u32)&EventCF_,
+};
+u32 data_085B9BBC[] __attribute__((section(".data.frontier_df4_uistuff.gap23b"))) = {
+    0x00000014,
+    (u32)&EventEngineExists,
+    0x00000000,
+    0x00000000,
+    0x00000003,
+    (u32)&_WhileFace6CExists,
+    0x0000000E,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ConvoBackgroundFade_Init,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ConvoBackgroundFade_CopyBg3ToBg2,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ConvoBackgroundFade_LoadBg3,
+    0x0000000E,
+    0x00000000,
+    0x00000003,
+    (u32)&ConvoBackgroundFade_Loop,
+    0x00000002,
+    (u32)&ConvoBackgroundFade_End,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ConvoBackgroundFade_Init,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ConvoBackgroundFade_LoadBg2,
+    0x0000000E,
+    0x00000000,
+    0x00000003,
+    (u32)&ConvoBackgroundFade_Loop,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ConvoBackgroundFade_CopyBg2ToBg3,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ConvoBackgroundFade_End,
+    0x00000000,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ConvoBackgroundFade_Init,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ConvoBackgroundFade_CopyBg3ToBg2,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ConvoBackgroundFade_RestoreMap,
+    0x0000000E,
+    0x00000000,
+    0x00000003,
+    (u32)&ConvoBackgroundFade_Loop,
+    0x00000002,
+    (u32)&ConvoBackgroundFade_End,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+};
 struct ProcCmd datac_5B9D0C[] SECTION(".data.frontier_df4_uistuff.gap23c") = {
     PROC_REPEAT(WaitEventPromoteDone),
     PROC_END,
 };
 
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap23c, \"aw\", %progbits\n"
-    ".4byte 0x00070228\n"
-    ".4byte 0x00000120\n"
-    ".4byte 0x00011020\n"
-    ".4byte 0x00020220\n"
-    ".4byte 0x00080320\n"
-    ".4byte 0x00000c40\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00101720\n"
-    ".4byte 0x00000820\n"
-    ".4byte 0x00001020\n"
-    ".4byte 0x00000120\n"
-    ".4byte 0x00011020\n"
-    ".4byte 0x00020220\n"
-    ".4byte 0x00080320\n"
-    ".4byte 0x00000c41\n"
-    ".4byte 0x0000000c\n"
-    ".4byte 0x00101721\n"
-    ".4byte 0x00000820\n"
-    ".4byte 0x00001020\n"
-    ".4byte 0x00000120\n"
-    ".4byte 0x00031020\n"
-    ".4byte 0xffff1b20\n"
-    ".4byte 0x00001d20\n"
-    ".4byte 0x00001b22\n"
-    ".4byte 0x00000120\n"
-    ".4byte 0x00011020\n"
-    ".4byte 0xfffd2720\n"
-    ".4byte 0x00000120\n"
-    ".4byte 0x00011020\n"
-    ".4byte 0xfffd2720\n"
-    ".4byte 0x00070540\n"
-    ".4byte 0x000000ff\n"
-    ".4byte 0x00000c43\n"
-    ".4byte 0x00070003\n"
-    ".4byte 0xffff3720\n"
-    ".4byte 0x00010920\n"
-    ".4byte 0x00000820\n"
-    ".4byte 0xffff3721\n"
-    ".4byte 0x00010820\n"
-    ".4byte 0x00000120\n"
-    ".4byte 0x00000a40\n"
-    ".4byte gProcScr_85B9D0C + 0x3c\n"
-    ".4byte 0x00002220\n"
-    ".4byte 0x00003e20\n"
-    ".4byte 0x00002220\n"
-    ".4byte 0x00000120\n"
-);
+u32 frontier_df4_uistuff_gap23c[] __attribute__((section(".data.frontier_df4_uistuff.gap23c"))) = {
+    0x00070228,
+    0x00000120,
+    0x00011020,
+    0x00020220,
+    0x00080320,
+    0x00000C40,
+    0x0000000C,
+    0x00101720,
+    0x00000820,
+    0x00001020,
+    0x00000120,
+    0x00011020,
+    0x00020220,
+    0x00080320,
+    0x00000C41,
+    0x0000000C,
+    0x00101721,
+    0x00000820,
+    0x00001020,
+    0x00000120,
+    0x00031020,
+    0xFFFF1B20,
+    0x00001D20,
+    0x00001B22,
+    0x00000120,
+    0x00011020,
+    0xFFFD2720,
+    0x00000120,
+    0x00011020,
+    0xFFFD2720,
+    0x00070540,
+    0x000000FF,
+    0x00000C43,
+    0x00070003,
+    0xFFFF3720,
+    0x00010920,
+    0x00000820,
+    0xFFFF3721,
+    0x00010820,
+    0x00000120,
+    0x00000A40,
+    (u32)&gProcScr_85B9D0C + 0x3c,
+    0x00002220,
+    0x00003E20,
+    0x00002220,
+    0x00000120,
+};
 
-__asm__(
-"\t.section .data.frontier_df4_uistuff.gap24, \"aw\", %progbits\n"
-"\t.global frontier_df4_uistuff_024_5C1D30\n"
-"frontier_df4_uistuff_024_5C1D30:\n"
-"\t.4byte 0x00100010\n"
-"\t.4byte 0x70000020\n"
-"\t.4byte 0x03002001\n"
-"\t.4byte 0x02402000\n"
-"\t.4byte 0x33220300\n"
-"\t.4byte 0x32120000\n"
-"\t.4byte 0x3110009D\n"
-"\t.4byte 0xF01F9003\n"
-"\t.4byte 0x3001F001\n"
-"\t.4byte 0x00910310\n"
-"\t.4byte 0x0033003E\n"
-"\t.4byte 0x4323303F\n"
-"\t.4byte 0x408121F0\n"
-"\t.4byte 0x00330024\n"
-"\t.4byte 0xF0320004\n"
-"\t.4byte 0x0190F25F\n"
-"\t.4byte 0x01F01DF0\n"
-"\t.4byte 0x300001F0\n"
-"\t.4byte 0x7E333710\n"
-"\t.4byte 0xF0080004\n"
-"\t.4byte 0x1001A07E\n"
-"\t.4byte 0x00BCE0E7\n"
-"\t.4byte 0x43202033\n"
-"\t.4byte 0x34030004\n"
-"\t.4byte 0x44320000\n"
-"\t.4byte 0x7034F0CC\n"
-"\t.4byte 0xC032233A\n"
-"\t.4byte 0x43FB203F\n"
-"\t.4byte 0x1C008F44\n"
-"\t.4byte 0x00200043\n"
-"\t.4byte 0x2048211C\n"
-"\t.4byte 0x024B0055\n"
-"\t.4byte 0x44003440\n"
-"\t.4byte 0x02003344\n"
-"\t.4byte 0x33440003\n"
-"\t.4byte 0x33330333\n"
-"\t.4byte 0x233F0033\n"
-"\t.4byte 0xF1E0F022\n"
-"\t.4byte 0xF001F029\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0x0150C101\n"
-"\t.4byte 0x33309F00\n"
-"\t.4byte 0x00330044\n"
-"\t.4byte 0x21113CA3\n"
-"\t.4byte 0xA200A300\n"
-"\t.4byte 0x8B010320\n"
-"\t.4byte 0x33002224\n"
-"\t.4byte 0x32123444\n"
-"\t.4byte 0x00223444\n"
-"\t.4byte 0x32234421\n"
-"\t.4byte 0x32233312\n"
-"\t.4byte 0x22002304\n"
-"\t.4byte 0x03001222\n"
-"\t.4byte 0x32000013\n"
-"\t.4byte 0x33331133\n"
-"\t.4byte 0x00332123\n"
-"\t.4byte 0x33021233\n"
-"\t.4byte 0x11022223\n"
-"\t.4byte 0x0022220D\n"
-"\t.4byte 0x10BEF122\n"
-"\t.4byte 0x12F05001\n"
-"\t.4byte 0x55017081\n"
-"\t.4byte 0x45004445\n"
-"\t.4byte 0xFA0E0144\n"
-"\t.4byte 0x2832FF00\n"
-"\t.4byte 0x2E9001F0\n"
-"\t.4byte 0x01400DA0\n"
-"\t.4byte 0x4400448E\n"
-"\t.4byte 0x34445034\n"
-"\t.4byte 0x34344533\n"
-"\t.4byte 0x02004333\n"
-"\t.4byte 0x00409F91\n"
-"\t.4byte 0x5C43441F\n"
-"\t.4byte 0x34032044\n"
-"\t.4byte 0x6201C800\n"
-"\t.4byte 0x4400E300\n"
-"\t.4byte 0x111600C0\n"
-"\t.4byte 0x4400037A\n"
-"\t.4byte 0x40000334\n"
-"\t.4byte 0x33720034\n"
-"\t.4byte 0x43555533\n"
-"\t.4byte 0x55550343\n"
-"\t.4byte 0x45544334\n"
-"\t.4byte 0x740072F0\n"
-"\t.4byte 0x026610F9\n"
-"\t.4byte 0xF02E003E\n"
-"\t.4byte 0x4401E01C\n"
-"\t.4byte 0xB6941054\n"
-"\t.4byte 0x00247E00\n"
-"\t.4byte 0x2303100C\n"
-"\t.4byte 0x83021E12\n"
-"\t.4byte 0x01207F22\n"
-"\t.4byte 0x602FF02C\n"
-"\t.4byte 0x10FC2001\n"
-"\t.4byte 0x00D620D2\n"
-"\t.4byte 0xCC10FE6F\n"
-"\t.4byte 0x0A000310\n"
-"\t.4byte 0x5F30AFB1\n"
-"\t.4byte 0x03101E50\n"
-"\t.4byte 0x4F71FB40\n"
-"\t.4byte 0x34000340\n"
-"\t.4byte 0x03102C11\n"
-"\t.4byte 0x71038005\n"
-"\t.4byte 0x05550094\n"
-"\t.4byte 0x00555550\n"
-"\t.4byte 0x057D5550\n"
-"\t.4byte 0x27000300\n"
-"\t.4byte 0x20200310\n"
-"\t.4byte 0x0330A312\n"
-"\t.4byte 0x8F20FFAC\n"
-"\t.4byte 0x01D05760\n"
-"\t.4byte 0x78209310\n"
-"\t.4byte 0xEE109CB0\n"
-"\t.4byte 0x2258E813\n"
-"\t.4byte 0x24130800\n"
-"\t.4byte 0x021DD142\n"
-"\t.4byte 0x43003320\n"
-"\t.4byte 0x32311222\n"
-"\t.4byte 0x4F112223\n"
-"\t.4byte 0x20530211\n"
-"\t.4byte 0x33530211\n"
-"\t.4byte 0x01FC3117\n"
-"\t.4byte 0x02336028\n"
-"\t.4byte 0x336B027F\n"
-"\t.4byte 0x43123321\n"
-"\t.4byte 0x23321200\n"
-"\t.4byte 0x32222331\n"
-"\t.4byte 0x6302BD22\n"
-"\t.4byte 0xA2A80122\n"
-"\t.4byte 0x21350220\n"
-"\t.4byte 0x04003209\n"
-"\t.4byte 0xE401226F\n"
-"\t.4byte 0x0200DE21\n"
-"\t.4byte 0x53E833CB\n"
-"\t.4byte 0x009DB06B\n"
-"\t.4byte 0x23443222\n"
-"\t.4byte 0x34432221\n"
-"\t.4byte 0x31232100\n"
-"\t.4byte 0x12231233\n"
-"\t.4byte 0x32131E30\n"
-"\t.4byte 0x11EB0222\n"
-"\t.4byte 0x125B40A3\n"
-"\t.4byte 0x220622F3\n"
-"\t.4byte 0x22233444\n"
-"\t.4byte 0x2400DF02\n"
-"\t.4byte 0x12331122\n"
-"\t.4byte 0x11800021\n"
-"\t.4byte 0xE0023222\n"
-"\t.4byte 0x07032262\n"
-"\t.4byte 0x33238500\n"
-"\t.4byte 0x12060022\n"
-"\t.4byte 0x33221110\n"
-"\t.4byte 0x2311C500\n"
-"\t.4byte 0x11381222\n"
-"\t.4byte 0x02580044\n"
-"\t.4byte 0x211A0380\n"
-"\t.4byte 0x110C2333\n"
-"\t.4byte 0x00332321\n"
-"\t.4byte 0x21201017\n"
-"\t.4byte 0x02220622\n"
-"\t.4byte 0x50023332\n"
-"\t.4byte 0x001F005C\n"
-"\t.4byte 0x0221001F\n"
-"\t.4byte 0x0B000700\n"
-"\t.4byte 0x01F00600\n"
-"\t.4byte 0xF1C101B0\n"
-"\t.4byte 0x2083B17F\n"
-"\t.4byte 0x23334440\n"
-"\t.4byte 0x71E54A04\n"
-"\t.4byte 0x0065313F\n"
-"\t.4byte 0x004444F9\n"
-"\t.4byte 0x8E004491\n"
-"\t.4byte 0x11224308\n"
-"\t.4byte 0x22931032\n"
-"\t.4byte 0x11021200\n"
-"\t.4byte 0x21111011\n"
-"\t.4byte 0x21AE0032\n"
-"\t.4byte 0x114E01A9\n"
-"\t.4byte 0x33231603\n"
-"\t.4byte 0x03222216\n"
-"\t.4byte 0xAA00C4D6\n"
-"\t.4byte 0x32236201\n"
-"\t.4byte 0x43C30044\n"
-"\t.4byte 0x12231422\n"
-"\t.4byte 0x22C90021\n"
-"\t.4byte 0x3203EE00\n"
-"\t.4byte 0x109704FF\n"
-"\t.4byte 0x42A422AF\n"
-"\t.4byte 0xF060119B\n"
-"\t.4byte 0xA001F0BF\n"
-"\t.4byte 0x0D22EF01\n"
-"\t.4byte 0x41204B05\n"
-"\t.4byte 0x104D1340\n"
-"\t.4byte 0x006B1203\n"
-"\t.4byte 0x2006F603\n"
-"\t.4byte 0x99028800\n"
-"\t.4byte 0x2034BD12\n"
-"\t.4byte 0x0039F406\n"
-"\t.4byte 0x20E203FF\n"
-"\t.4byte 0x4001F0EC\n"
-"\t.4byte 0xF503341F\n"
-"\t.4byte 0x443352A7\n"
-"\t.4byte 0x4B32EE08\n"
-"\t.4byte 0x63A17024\n"
-"\t.4byte 0x20910033\n"
-"\t.4byte 0x33172403\n"
-"\t.4byte 0x445F0285\n"
-"\t.4byte 0x03544455\n"
-"\t.4byte 0x0300441D\n"
-"\t.4byte 0xB4444039\n"
-"\t.4byte 0x1599A67F\n"
-"\t.4byte 0x05321034\n"
-"\t.4byte 0x101222E6\n"
-"\t.4byte 0x21203202\n"
-"\t.4byte 0x22DB0222\n"
-"\t.4byte 0x77012140\n"
-"\t.4byte 0x22112302\n"
-"\t.4byte 0x11083302\n"
-"\t.4byte 0x11230022\n"
-"\t.4byte 0x211000F8\n"
-"\t.4byte 0x110300BF\n"
-"\t.4byte 0x87202733\n"
-"\t.4byte 0x0200F002\n"
-"\t.4byte 0x06161F82\n"
-"\t.4byte 0xF40F10FF\n"
-"\t.4byte 0x5177336E\n"
-"\t.4byte 0x20031038\n"
-"\t.4byte 0x268C63EC\n"
-"\t.4byte 0x0330FF55\n"
-"\t.4byte 0xA6533FC4\n"
-"\t.4byte 0x1BF413F4\n"
-"\t.4byte 0x7D6001F0\n"
-"\t.4byte 0x10F74F93\n"
-"\t.4byte 0x058B346D\n"
-"\t.4byte 0x34020067\n"
-"\t.4byte 0x1BC08213\n"
-"\t.4byte 0x336F9215\n"
-"\t.4byte 0x06107211\n"
-"\t.4byte 0x90090043\n"
-"\t.4byte 0x01B371C3\n"
-"\t.4byte 0x0320EA65\n"
-"\t.4byte 0x31C41F30\n"
-"\t.4byte 0x03190004\n"
-"\t.4byte 0xFE035E00\n"
-"\t.4byte 0x12F14600\n"
-"\t.4byte 0x01F001F0\n"
-"\t.4byte 0x60D64E31\n"
-"\t.4byte 0x88502935\n"
-"\t.4byte 0x55550300\n"
-"\t.4byte 0x44060044\n"
-"\t.4byte 0x44225553\n"
-"\t.4byte 0x440C1233\n"
-"\t.4byte 0x27023033\n"
-"\t.4byte 0x0350A733\n"
-"\t.4byte 0x55B90054\n"
-"\t.4byte 0x03DD0033\n"
-"\t.4byte 0x273F80DF\n"
-"\t.4byte 0x3F055555\n"
-"\t.4byte 0x3B005545\n"
-"\t.4byte 0xBC203A00\n"
-"\t.4byte 0x905722FF\n"
-"\t.4byte 0x926F12B9\n"
-"\t.4byte 0xF0BB024F\n"
-"\t.4byte 0x1023679A\n"
-"\t.4byte 0x5FA2EB03\n"
-"\t.4byte 0x03301050\n"
-"\t.4byte 0x54270754\n"
-"\t.4byte 0xA7967FF2\n"
-"\t.4byte 0x131D90C1\n"
-"\t.4byte 0x0002126B\n"
-"\t.4byte 0x6E021120\n"
-"\t.4byte 0xF50700FB\n"
-"\t.4byte 0xF0237089\n"
-"\t.4byte 0x1001801B\n"
-"\t.4byte 0x01F012F0\n"
-"\t.4byte 0xF001F0FF\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0x01F0FF01\n"
-"\t.4byte 0x01F001F0\n"
-"\t.4byte 0x01F001F0\n"
-"\t.4byte 0x01F001F0\n"
-"\t.4byte 0xF0FF01F0\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0xF701F001\n"
-"\t.4byte 0xB58201F0\n"
-"\t.4byte 0x0320A302\n"
-"\t.4byte 0x30C20333\n"
-"\t.4byte 0xBF721503\n"
-"\t.4byte 0x08041220\n"
-"\t.4byte 0x3204037D\n"
-"\t.4byte 0xD3D722EB\n"
-"\t.4byte 0xFFCB1390\n"
-"\t.4byte 0x7F959FF5\n"
-"\t.4byte 0x22F02323\n"
-"\t.4byte 0x26143F60\n"
-"\t.4byte 0xCC27C807\n"
-"\t.4byte 0xE7C727DF\n"
-"\t.4byte 0x870044C3\n"
-"\t.4byte 0x37150320\n"
-"\t.4byte 0xAC250320\n"
-"\t.4byte 0xC72A047D\n"
-"\t.4byte 0x8A04E313\n"
-"\t.4byte 0x0340E309\n"
-"\t.4byte 0x079B0433\n"
-"\t.4byte 0x34404443\n"
-"\t.4byte 0x00170543\n"
-"\t.4byte 0xFF074A2B\n"
-"\t.4byte 0xBC00DB23\n"
-"\t.4byte 0xDE20BED8\n"
-"\t.4byte 0x9F9096F0\n"
-"\t.4byte 0x9FB6BFF0\n"
-"\t.4byte 0x1BC614FB\n"
-"\t.4byte 0x355FF64F\n"
-"\t.4byte 0x4574091A\n"
-"\t.4byte 0xFC1A0330\n"
-"\t.4byte 0x5003008D\n"
-"\t.4byte 0x03104455\n"
-"\t.4byte 0x03041200\n"
-"\t.4byte 0x4E24DBE3\n"
-"\t.4byte 0x25541100\n"
-"\t.4byte 0x559FD0D7\n"
-"\t.4byte 0x04F4A409\n"
-"\t.4byte 0xF001F0FF\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0x01F0FF01\n"
-"\t.4byte 0x01F001F0\n"
-"\t.4byte 0x01F001F0\n"
-"\t.4byte 0x01F001F0\n"
-"\t.4byte 0xF0FF01F0\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0xF001F001\n"
-"\t.4byte 0xFF01F001\n"
-"\t.4byte 0x01F001F0\n"
-"\t.4byte 0x01F001F0\n"
-"\t.4byte 0x01F001F0\n"
-"\t.4byte 0x01F001F0\n"
-"\t.4byte 0x00017080\n"
-"\t.4byte 0x4BFF4290\n"
-"\t.4byte 0x263F2F7F\n"
-"\t.4byte 0x0C9914DF\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00200004\n"
-"\t.4byte 0x002C0024\n"
-"\t.4byte 0x00480034\n"
-"\t.4byte 0x00820062\n"
-"\t.4byte 0x00A4008A\n"
-"\t.4byte 0x00D200BE\n"
-"\t.4byte 0x00EE00DA\n"
-"\t.4byte 0x00FE00F6\n"
-"\t.4byte 0x013A00EA\n"
-"\t.4byte 0x015A014E\n"
-"\t.4byte 0x00060001\n"
-"\t.4byte 0x000041E8\n"
-"\t.4byte 0x40060001\n"
-"\t.4byte 0x000281E8\n"
-"\t.4byte 0x40060003\n"
-"\t.4byte 0x000681E8\n"
-"\t.4byte 0x40080006\n"
-"\t.4byte 0x00FE000A\n"
-"\t.4byte 0x000C0010\n"
-"\t.4byte 0x40060004\n"
-"\t.4byte 0x000D81F0\n"
-"\t.4byte 0x00108006\n"
-"\t.4byte 0x000E0011\n"
-"\t.4byte 0x002C01E8\n"
-"\t.4byte 0x400800F6\n"
-"\t.4byte 0x00050012\n"
-"\t.4byte 0x81F040EE\n"
-"\t.4byte 0x80EE0014\n"
-"\t.4byte 0x00180010\n"
-"\t.4byte 0x400800FE\n"
-"\t.4byte 0x400E0019\n"
-"\t.4byte 0x003B0008\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x0001001B\n"
-"\t.4byte 0x01FC00FC\n"
-"\t.4byte 0x00040051\n"
-"\t.4byte 0x81E840EE\n"
-"\t.4byte 0x00EE0040\n"
-"\t.4byte 0x00444008\n"
-"\t.4byte 0x01E800FE\n"
-"\t.4byte 0x00FE001C\n"
-"\t.4byte 0x001D0010\n"
-"\t.4byte 0x40EE0004\n"
-"\t.4byte 0x004681E8\n"
-"\t.4byte 0x000880EE\n"
-"\t.4byte 0x00F6004A\n"
-"\t.4byte 0x003D0010\n"
-"\t.4byte 0x01E800FE\n"
-"\t.4byte 0x0003003E\n"
-"\t.4byte 0x41E800EE\n"
-"\t.4byte 0x80EE004B\n"
-"\t.4byte 0x004D01F8\n"
-"\t.4byte 0x01E800FE\n"
-"\t.4byte 0x0001001E\n"
-"\t.4byte 0x01E880F9\n"
-"\t.4byte 0x0003001F\n"
-"\t.4byte 0x01E880F9\n"
-"\t.4byte 0x0006001F\n"
-"\t.4byte 0x000041E8\n"
-"\t.4byte 0x41E80006\n"
-"\t.4byte 0x00010000\n"
-"\t.4byte 0x01FC00FC\n"
-"\t.4byte 0x0001004E\n"
-"\t.4byte 0x01FC00FC\n"
-"\t.4byte 0x0001004F\n"
-"\t.4byte 0x01FC00FC\n"
-"\t.4byte 0x00020050\n"
-"\t.4byte 0x00020000\n"
-"\t.4byte 0x00020001\n"
-"\t.4byte 0x00020001\n"
-"\t.4byte 0x00020002\n"
-"\t.4byte 0x00020003\n"
-"\t.4byte 0x00020004\n"
-"\t.4byte 0x00020006\n"
-"\t.4byte 0x00020007\n"
-"\t.4byte 0x00020008\n"
-"\t.4byte 0x0002000A\n"
-"\t.4byte 0x00020001\n"
-"\t.4byte 0x00020002\n"
-"\t.4byte 0x00020003\n"
-"\t.4byte 0x00020004\n"
-"\t.4byte 0x00020006\n"
-"\t.4byte 0x00020007\n"
-"\t.4byte 0x00020008\n"
-"\t.4byte 0x00000009\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x0002FFFF\n"
-"\t.4byte 0x0002000B\n"
-"\t.4byte 0x0002000C\n"
-"\t.4byte 0x0002000D\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x0001FFFF\n"
-"\t.4byte 0x0002000C\n"
-"\t.4byte 0x00000005\n"
-"\t.4byte 0x0001FFFF\n"
-"\t.4byte 0x0002000D\n"
-"\t.4byte 0x00000005\n"
-"\t.4byte 0x0000FFFF\n"
-);
+u32 frontier_df4_uistuff_024_5C1D30[] __attribute__((section(".data.frontier_df4_uistuff.gap24"))) = {
+    0x00100010,
+    0x70000020,
+    0x03002001,
+    0x02402000,
+    0x33220300,
+    0x32120000,
+    0x3110009D,
+    0xF01F9003,
+    0x3001F001,
+    0x00910310,
+    0x0033003E,
+    0x4323303F,
+    0x408121F0,
+    0x00330024,
+    0xF0320004,
+    0x0190F25F,
+    0x01F01DF0,
+    0x300001F0,
+    0x7E333710,
+    0xF0080004,
+    0x1001A07E,
+    0x00BCE0E7,
+    0x43202033,
+    0x34030004,
+    0x44320000,
+    0x7034F0CC,
+    0xC032233A,
+    0x43FB203F,
+    0x1C008F44,
+    0x00200043,
+    0x2048211C,
+    0x024B0055,
+    0x44003440,
+    0x02003344,
+    0x33440003,
+    0x33330333,
+    0x233F0033,
+    0xF1E0F022,
+    0xF001F029,
+    0xF001F001,
+    0x0150C101,
+    0x33309F00,
+    0x00330044,
+    0x21113CA3,
+    0xA200A300,
+    0x8B010320,
+    0x33002224,
+    0x32123444,
+    0x00223444,
+    0x32234421,
+    0x32233312,
+    0x22002304,
+    0x03001222,
+    0x32000013,
+    0x33331133,
+    0x00332123,
+    0x33021233,
+    0x11022223,
+    0x0022220D,
+    0x10BEF122,
+    0x12F05001,
+    0x55017081,
+    0x45004445,
+    0xFA0E0144,
+    0x2832FF00,
+    0x2E9001F0,
+    0x01400DA0,
+    0x4400448E,
+    0x34445034,
+    0x34344533,
+    0x02004333,
+    0x00409F91,
+    0x5C43441F,
+    0x34032044,
+    0x6201C800,
+    0x4400E300,
+    0x111600C0,
+    0x4400037A,
+    0x40000334,
+    0x33720034,
+    0x43555533,
+    0x55550343,
+    0x45544334,
+    0x740072F0,
+    0x026610F9,
+    0xF02E003E,
+    0x4401E01C,
+    0xB6941054,
+    0x00247E00,
+    0x2303100C,
+    0x83021E12,
+    0x01207F22,
+    0x602FF02C,
+    0x10FC2001,
+    0x00D620D2,
+    0xCC10FE6F,
+    0x0A000310,
+    0x5F30AFB1,
+    0x03101E50,
+    0x4F71FB40,
+    0x34000340,
+    0x03102C11,
+    0x71038005,
+    0x05550094,
+    0x00555550,
+    0x057D5550,
+    0x27000300,
+    0x20200310,
+    0x0330A312,
+    0x8F20FFAC,
+    0x01D05760,
+    0x78209310,
+    0xEE109CB0,
+    0x2258E813,
+    0x24130800,
+    0x021DD142,
+    0x43003320,
+    0x32311222,
+    0x4F112223,
+    0x20530211,
+    0x33530211,
+    0x01FC3117,
+    0x02336028,
+    0x336B027F,
+    0x43123321,
+    0x23321200,
+    0x32222331,
+    0x6302BD22,
+    0xA2A80122,
+    0x21350220,
+    0x04003209,
+    0xE401226F,
+    0x0200DE21,
+    0x53E833CB,
+    0x009DB06B,
+    0x23443222,
+    0x34432221,
+    0x31232100,
+    0x12231233,
+    0x32131E30,
+    0x11EB0222,
+    0x125B40A3,
+    0x220622F3,
+    0x22233444,
+    0x2400DF02,
+    0x12331122,
+    0x11800021,
+    0xE0023222,
+    0x07032262,
+    0x33238500,
+    0x12060022,
+    0x33221110,
+    0x2311C500,
+    0x11381222,
+    0x02580044,
+    0x211A0380,
+    0x110C2333,
+    0x00332321,
+    0x21201017,
+    0x02220622,
+    0x50023332,
+    0x001F005C,
+    0x0221001F,
+    0x0B000700,
+    0x01F00600,
+    0xF1C101B0,
+    0x2083B17F,
+    0x23334440,
+    0x71E54A04,
+    0x0065313F,
+    0x004444F9,
+    0x8E004491,
+    0x11224308,
+    0x22931032,
+    0x11021200,
+    0x21111011,
+    0x21AE0032,
+    0x114E01A9,
+    0x33231603,
+    0x03222216,
+    0xAA00C4D6,
+    0x32236201,
+    0x43C30044,
+    0x12231422,
+    0x22C90021,
+    0x3203EE00,
+    0x109704FF,
+    0x42A422AF,
+    0xF060119B,
+    0xA001F0BF,
+    0x0D22EF01,
+    0x41204B05,
+    0x104D1340,
+    0x006B1203,
+    0x2006F603,
+    0x99028800,
+    0x2034BD12,
+    0x0039F406,
+    0x20E203FF,
+    0x4001F0EC,
+    0xF503341F,
+    0x443352A7,
+    0x4B32EE08,
+    0x63A17024,
+    0x20910033,
+    0x33172403,
+    0x445F0285,
+    0x03544455,
+    0x0300441D,
+    0xB4444039,
+    0x1599A67F,
+    0x05321034,
+    0x101222E6,
+    0x21203202,
+    0x22DB0222,
+    0x77012140,
+    0x22112302,
+    0x11083302,
+    0x11230022,
+    0x211000F8,
+    0x110300BF,
+    0x87202733,
+    0x0200F002,
+    0x06161F82,
+    0xF40F10FF,
+    0x5177336E,
+    0x20031038,
+    0x268C63EC,
+    0x0330FF55,
+    0xA6533FC4,
+    0x1BF413F4,
+    0x7D6001F0,
+    0x10F74F93,
+    0x058B346D,
+    0x34020067,
+    0x1BC08213,
+    0x336F9215,
+    0x06107211,
+    0x90090043,
+    0x01B371C3,
+    0x0320EA65,
+    0x31C41F30,
+    0x03190004,
+    0xFE035E00,
+    0x12F14600,
+    0x01F001F0,
+    0x60D64E31,
+    0x88502935,
+    0x55550300,
+    0x44060044,
+    0x44225553,
+    0x440C1233,
+    0x27023033,
+    0x0350A733,
+    0x55B90054,
+    0x03DD0033,
+    0x273F80DF,
+    0x3F055555,
+    0x3B005545,
+    0xBC203A00,
+    0x905722FF,
+    0x926F12B9,
+    0xF0BB024F,
+    0x1023679A,
+    0x5FA2EB03,
+    0x03301050,
+    0x54270754,
+    0xA7967FF2,
+    0x131D90C1,
+    0x0002126B,
+    0x6E021120,
+    0xF50700FB,
+    0xF0237089,
+    0x1001801B,
+    0x01F012F0,
+    0xF001F0FF,
+    0xF001F001,
+    0xF001F001,
+    0xF001F001,
+    0x01F0FF01,
+    0x01F001F0,
+    0x01F001F0,
+    0x01F001F0,
+    0xF0FF01F0,
+    0xF001F001,
+    0xF001F001,
+    0xF001F001,
+    0xF701F001,
+    0xB58201F0,
+    0x0320A302,
+    0x30C20333,
+    0xBF721503,
+    0x08041220,
+    0x3204037D,
+    0xD3D722EB,
+    0xFFCB1390,
+    0x7F959FF5,
+    0x22F02323,
+    0x26143F60,
+    0xCC27C807,
+    0xE7C727DF,
+    0x870044C3,
+    0x37150320,
+    0xAC250320,
+    0xC72A047D,
+    0x8A04E313,
+    0x0340E309,
+    0x079B0433,
+    0x34404443,
+    0x00170543,
+    0xFF074A2B,
+    0xBC00DB23,
+    0xDE20BED8,
+    0x9F9096F0,
+    0x9FB6BFF0,
+    0x1BC614FB,
+    0x355FF64F,
+    0x4574091A,
+    0xFC1A0330,
+    0x5003008D,
+    0x03104455,
+    0x03041200,
+    0x4E24DBE3,
+    0x25541100,
+    0x559FD0D7,
+    0x04F4A409,
+    0xF001F0FF,
+    0xF001F001,
+    0xF001F001,
+    0xF001F001,
+    0x01F0FF01,
+    0x01F001F0,
+    0x01F001F0,
+    0x01F001F0,
+    0xF0FF01F0,
+    0xF001F001,
+    0xF001F001,
+    0xF001F001,
+    0xFF01F001,
+    0x01F001F0,
+    0x01F001F0,
+    0x01F001F0,
+    0x01F001F0,
+    0x00017080,
+    0x4BFF4290,
+    0x263F2F7F,
+    0x0C9914DF,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00200004,
+    0x002C0024,
+    0x00480034,
+    0x00820062,
+    0x00A4008A,
+    0x00D200BE,
+    0x00EE00DA,
+    0x00FE00F6,
+    0x013A00EA,
+    0x015A014E,
+    0x00060001,
+    0x000041E8,
+    0x40060001,
+    0x000281E8,
+    0x40060003,
+    0x000681E8,
+    0x40080006,
+    0x00FE000A,
+    0x000C0010,
+    0x40060004,
+    0x000D81F0,
+    0x00108006,
+    0x000E0011,
+    0x002C01E8,
+    0x400800F6,
+    0x00050012,
+    0x81F040EE,
+    0x80EE0014,
+    0x00180010,
+    0x400800FE,
+    0x400E0019,
+    0x003B0008,
+    0x0000000E,
+    0x0001001B,
+    0x01FC00FC,
+    0x00040051,
+    0x81E840EE,
+    0x00EE0040,
+    0x00444008,
+    0x01E800FE,
+    0x00FE001C,
+    0x001D0010,
+    0x40EE0004,
+    0x004681E8,
+    0x000880EE,
+    0x00F6004A,
+    0x003D0010,
+    0x01E800FE,
+    0x0003003E,
+    0x41E800EE,
+    0x80EE004B,
+    0x004D01F8,
+    0x01E800FE,
+    0x0001001E,
+    0x01E880F9,
+    0x0003001F,
+    0x01E880F9,
+    0x0006001F,
+    0x000041E8,
+    0x41E80006,
+    0x00010000,
+    0x01FC00FC,
+    0x0001004E,
+    0x01FC00FC,
+    0x0001004F,
+    0x01FC00FC,
+    0x00020050,
+    0x00020000,
+    0x00020001,
+    0x00020001,
+    0x00020002,
+    0x00020003,
+    0x00020004,
+    0x00020006,
+    0x00020007,
+    0x00020008,
+    0x0002000A,
+    0x00020001,
+    0x00020002,
+    0x00020003,
+    0x00020004,
+    0x00020006,
+    0x00020007,
+    0x00020008,
+    0x00000009,
+    0x00000001,
+    0x0002FFFF,
+    0x0002000B,
+    0x0002000C,
+    0x0002000D,
+    0x0000000C,
+    0x0001FFFF,
+    0x0002000C,
+    0x00000005,
+    0x0001FFFF,
+    0x0002000D,
+    0x00000005,
+    0x0000FFFF,
+};
 struct ProcCmd frontier_df4_uistuff_024b_5C2458[] SECTION(".data.frontier_df4_uistuff.gap24b") = {
     PROC_SLEEP(0),
     PROC_CALL(sub_8013844),
@@ -9577,374 +10120,356 @@ struct ProcCmd frontier_df4_uistuff_024b_5C2458[] SECTION(".data.frontier_df4_ui
     PROC_END,
 };
 
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap24bb, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_024bb_5C2570\n"
-    "frontier_df4_uistuff_024bb_5C2570:\n"
-"\t.4byte 0x00004F82\n"
-"\t.4byte 0x00005B81\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap24bc, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_024bc_5C2590\n"
-    "frontier_df4_uistuff_024bc_5C2590:\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte CallDelayedArg_OnLoop\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x7FFF7FFF\n"
-"\t.4byte 0x7FFF7FFF\n"
-"\t.4byte 0x7FFF7FFF\n"
-"\t.4byte 0x7FFF7FFF\n"
-"\t.4byte 0x7FFF7FFF\n"
-"\t.4byte 0x7FFF7FFF\n"
-"\t.4byte 0x7FFF7FFF\n"
-"\t.4byte 0x7FFF7FFF\n"
-"\t.4byte 0x001F001F\n"
-"\t.4byte 0x001F001F\n"
-"\t.4byte 0x001F001F\n"
-"\t.4byte 0x001F001F\n"
-"\t.4byte 0x001F001F\n"
-"\t.4byte 0x001F001F\n"
-"\t.4byte 0x001F001F\n"
-"\t.4byte 0x001F001F\n"
-"\t.4byte 0x03E003E0\n"
-"\t.4byte 0x03E003E0\n"
-"\t.4byte 0x03E003E0\n"
-"\t.4byte 0x03E003E0\n"
-"\t.4byte 0x03E003E0\n"
-"\t.4byte 0x03E003E0\n"
-"\t.4byte 0x03E003E0\n"
-"\t.4byte 0x03E003E0\n"
-"\t.4byte 0x7C007C00\n"
-"\t.4byte 0x7C007C00\n"
-"\t.4byte 0x7C007C00\n"
-"\t.4byte 0x7C007C00\n"
-"\t.4byte 0x7C007C00\n"
-"\t.4byte 0x7C007C00\n"
-"\t.4byte 0x7C007C00\n"
-"\t.4byte 0x7C007C00\n"
-"\t.4byte 0x07FE07FE\n"
-"\t.4byte 0x07FE07FE\n"
-"\t.4byte 0x07FE07FE\n"
-"\t.4byte 0x07FE07FE\n"
-"\t.4byte 0x07FE07FE\n"
-"\t.4byte 0x07FE07FE\n"
-"\t.4byte 0x07FE07FE\n"
-"\t.4byte 0x07FE07FE\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte PartialGameLock_OnLoop\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte frontier_df4_misc_lo_000b2t_0DC5F4\n"
-"\t.4byte 0x00000015\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0002000F\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BmMain_StartIntroFx\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0001000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte SetEventId_0x84\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte UpdatePrevDeployStates\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte CallBeginningEvents\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte UndeployEveryone\n"
-"\t.4byte 0x000B000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte UnsetEventId_0x84\n"
-"\t.4byte 0x0003000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte BmMain_ChangePhase\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BmMain_SuspendBeforePhase\n"
-"\t.4byte 0x0009000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000005\n"
-"\t.4byte sProcScr_BMXFADE + 0x38\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte ProcScr_PhaseIntro\n"
-"\t.4byte 0x00000008\n"
-"\t.4byte ProcScr_CamMove\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte TickActiveFactionTurn\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte gProcScr_StatusDecayDisplay\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte gProcScr_TerrainHealDisplay\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte gProcScr_PoisonDamageDisplay\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte gProcScr_GorgonEggHatchDisplay\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte sProcScr_BMXFADE + 0x38\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte BmMain_CheckBeginPhaseEvent\n"
-"\t.4byte 0x0005000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte BmMain_StartPhase\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte data_085D1E38\n"
-"\t.4byte 0x00000016\n"
-"\t.4byte BmMain_UpdateTraps\n"
-"\t.4byte 0x0003000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0002000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BmMain_BeginNextChapter\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte gProcScr_ChapterIntroTitleOnly\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0001000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0004000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RenderBmMap\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMapSongBgm\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMidFadeFromBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x0005000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0006000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RenderBmMap\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMapSongBgm\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMidFadeFromBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte BmMain_ResumePlayerPhase\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte data_085D1E38\n"
-"\t.4byte 0x0003000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x000A000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte BmMain_ResumePlayerPhase\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte data_085D1E38\n"
-"\t.4byte 0x0003000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0008000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RenderBmMap\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMapSongBgm\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMidFadeFromBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x0009000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0007000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte RenderBmMap\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMapSongBgm\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte StartMidFadeFromBlack\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte WaitForFade\n"
-"\t.4byte 0x00010006\n"
-"\t.4byte data_085D1E38\n"
-"\t.4byte 0x0003000C\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap25, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_025_5C2E50\n"
-    "frontier_df4_uistuff_025_5C2E50:\n"
-    ".4byte 0x02032b88\n"
-    ".4byte 0x02032f88\n"
-    ".4byte 0x00080000\n"
-    ".4byte 0x0040000a\n"
-    ".4byte 0x00000014\n"
-    ".4byte 0x00300015\n"
-    ".4byte 0x00800000\n"
-    ".4byte 0x00000003\n"
-    ".4byte Loop6C_WaitForSelectPress\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SetNewKeyStatusWith16\n"
-    ".4byte 0x000c000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SetNewKeyStatusWith16\n"
-    ".4byte 0x000c000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SetNewKeyStatusWith16\n"
-    ".4byte 0x000c000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SetNewKeyStatusWith16\n"
-    ".4byte 0x000c000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SetNewKeyStatusWith16\n"
-    ".4byte 0x000c000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap25b, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_025b_5C2EE4\n"
-    "frontier_df4_uistuff_025b_5C2EE4:\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte DebugPrintWithProc\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000007c4\n"
-    ".4byte 0x000007c5\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap25c, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_025c_5C2F1C\n"
-    "frontier_df4_uistuff_025c_5C2F1C:\n"
-    ".4byte 0x03020100\n"
-    ".4byte 0x07050604\n"
-    ".4byte 0x0b0a0908\n"
-    ".4byte 0x0e0d0c3d\n"
-    ".4byte 0x1211100f\n"
-    ".4byte 0x16151413\n"
-    ".4byte 0x193e1817\n"
-    ".4byte 0x1d1c1b1a\n"
-    ".4byte 0x21201f1e\n"
-    ".4byte 0x25242322\n"
-    ".4byte 0x29282726\n"
-    ".4byte 0x2f2e2b2a\n"
-    ".4byte 0x33323130\n"
-    ".4byte 0x37363534\n"
-    ".4byte 0x3c3b3938\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap25d, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_025d_5C3168\n"
-    "frontier_df4_uistuff_025d_5C3168:\n"
-    ".4byte 0x00000002\n"
-    ".4byte MakeMoveunitForActiveUnit\n"
-    ".4byte 0x00000002\n"
-    ".4byte TryCallSelectEvents\n"
-    ".4byte 0x00000014\n"
-    ".4byte EventEngineExists\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte Img_LimitViewSquares\n"
-    ".4byte Img_LimitViewSquares + 0x80\n"
-    ".4byte Img_LimitViewSquares + 0x100\n"
-    ".4byte Img_LimitViewSquares + 0x180\n"
-    ".4byte Img_LimitViewSquares + 0x200\n"
-    ".4byte Img_LimitViewSquares + 0x280\n"
-    ".4byte 0x00000001\n"
-    ".4byte Str_DebugRedArmy + 0x60\n"
-    ".4byte 0x0001000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte MoveLimitViewChange_OnInit\n"
-    ".4byte 0x00000003\n"
-    ".4byte MoveLimitViewChange_OnLoop\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000001\n"
-    ".4byte Str_DebugRedArmy + 0x68\n"
-    ".4byte 0x0001000f\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000004\n"
-    ".4byte MoveLimitView_OnEnd\n"
-    ".4byte 0x00000005\n"
-    ".4byte gOpenLimitViewImgLut + 0x20\n"
-    ".4byte 0x00000002\n"
-    ".4byte MoveLimitView_OnInit\n"
-    ".4byte 0x00000003\n"
-    ".4byte MoveLimitView_OnLoop\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000001\n"
-    ".4byte Str_DebugRedArmy + 0x78\n"
-    ".4byte 0x00000003\n"
-    ".4byte Loop6C_KOIDO\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000001\n"
-    ".4byte Str_DebugRedArmy + 0x80\n"
-    ".4byte 0x00000002\n"
-    ".4byte LockGame\n"
-    ".4byte 0x00000003\n"
-    ".4byte Loop6C_KOIDO\n"
-    ".4byte 0x00000002\n"
-    ".4byte UnlockGame\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000001\n"
-    ".4byte Str_DebugRedArmy + 0x8c\n"
-    ".4byte 0x00000011\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000004\n"
-    ".4byte Destruct6CBMXFADE\n"
-    ".4byte 0x00000002\n"
-    ".4byte bmxfade_init\n"
-    ".4byte 0x00000002\n"
-    ".4byte bmxfade_loop\n"
-    ".4byte 0x00000003\n"
-    ".4byte bmxfade_loop\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ProcFun_ResetCursorPosition\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
+u32 frontier_df4_uistuff_024bb_5C2570[] __attribute__((section(".data.frontier_df4_uistuff.gap24bb"))) = {
+    0x00004F82,
+    0x00005B81,
+};
+u32 frontier_df4_uistuff_024bc_5C2590[] __attribute__((section(".data.frontier_df4_uistuff.gap24bc"))) = {
+    0x00000003,
+    (u32)&CallDelayedArg_OnLoop,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x7FFF7FFF,
+    0x7FFF7FFF,
+    0x7FFF7FFF,
+    0x7FFF7FFF,
+    0x7FFF7FFF,
+    0x7FFF7FFF,
+    0x7FFF7FFF,
+    0x7FFF7FFF,
+    0x001F001F,
+    0x001F001F,
+    0x001F001F,
+    0x001F001F,
+    0x001F001F,
+    0x001F001F,
+    0x001F001F,
+    0x001F001F,
+    0x03E003E0,
+    0x03E003E0,
+    0x03E003E0,
+    0x03E003E0,
+    0x03E003E0,
+    0x03E003E0,
+    0x03E003E0,
+    0x03E003E0,
+    0x7C007C00,
+    0x7C007C00,
+    0x7C007C00,
+    0x7C007C00,
+    0x7C007C00,
+    0x7C007C00,
+    0x7C007C00,
+    0x7C007C00,
+    0x07FE07FE,
+    0x07FE07FE,
+    0x07FE07FE,
+    0x07FE07FE,
+    0x07FE07FE,
+    0x07FE07FE,
+    0x07FE07FE,
+    0x07FE07FE,
+    0x00000003,
+    (u32)&PartialGameLock_OnLoop,
+    0x00000000,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x00000001,
+    (u32)&frontier_df4_misc_lo_000b2t_0DC5F4,
+    0x00000015,
+    0x00000000,
+    0x0002000F,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x0000000B,
+    0x00000000,
+    0x00000002,
+    (u32)&BmMain_StartIntroFx,
+    0x0000000E,
+    0x00000000,
+    0x0001000B,
+    0x00000000,
+    0x00000002,
+    (u32)&SetEventId_0x84,
+    0x00000002,
+    (u32)&UpdatePrevDeployStates,
+    0x00000016,
+    (u32)&CallBeginningEvents,
+    0x00000002,
+    (u32)&UndeployEveryone,
+    0x000B000B,
+    0x00000000,
+    0x00000002,
+    (u32)&UnsetEventId_0x84,
+    0x0003000B,
+    0x00000000,
+    0x00000016,
+    (u32)&BmMain_ChangePhase,
+    0x00000002,
+    (u32)&BmMain_SuspendBeforePhase,
+    0x0009000B,
+    0x00000000,
+    0x00000005,
+    (u32)&sProcScr_BMXFADE + 0x38,
+    0x00010006,
+    (u32)&ProcScr_PhaseIntro,
+    0x00000008,
+    (u32)&ProcScr_CamMove,
+    0x00000002,
+    (u32)&TickActiveFactionTurn,
+    0x00010006,
+    (u32)&gProcScr_StatusDecayDisplay,
+    0x00010006,
+    (u32)&gProcScr_TerrainHealDisplay,
+    0x00010006,
+    (u32)&gProcScr_PoisonDamageDisplay,
+    0x00010006,
+    (u32)&gProcScr_GorgonEggHatchDisplay,
+    0x00010006,
+    (u32)&sProcScr_BMXFADE + 0x38,
+    0x00000016,
+    (u32)&BmMain_CheckBeginPhaseEvent,
+    0x0005000B,
+    0x00000000,
+    0x00000003,
+    (u32)&BmMain_StartPhase,
+    0x00010006,
+    (u32)&data_085D1E38,
+    0x00000016,
+    (u32)&BmMain_UpdateTraps,
+    0x0003000C,
+    0x00000000,
+    0x0002000B,
+    0x00000000,
+    0x00000002,
+    (u32)&BmMain_BeginNextChapter,
+    0x0000000E,
+    0x00000000,
+    0x00010006,
+    (u32)&gProcScr_ChapterIntroTitleOnly,
+    0x0000000E,
+    0x00000000,
+    0x0001000C,
+    0x00000000,
+    0x0004000B,
+    0x00000000,
+    0x00000002,
+    (u32)&RenderBmMap,
+    0x00000002,
+    (u32)&StartMapSongBgm,
+    0x00000002,
+    (u32)&StartMidFadeFromBlack,
+    0x00000003,
+    (u32)&WaitForFade,
+    0x0005000C,
+    0x00000000,
+    0x0006000B,
+    0x00000000,
+    0x00000002,
+    (u32)&RenderBmMap,
+    0x00000002,
+    (u32)&StartMapSongBgm,
+    0x00000002,
+    (u32)&StartMidFadeFromBlack,
+    0x00000003,
+    (u32)&WaitForFade,
+    0x00000003,
+    (u32)&BmMain_ResumePlayerPhase,
+    0x00010006,
+    (u32)&data_085D1E38,
+    0x0003000C,
+    0x00000000,
+    0x000A000B,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x00000003,
+    (u32)&BmMain_ResumePlayerPhase,
+    0x00010006,
+    (u32)&data_085D1E38,
+    0x0003000C,
+    0x00000000,
+    0x0008000B,
+    0x00000000,
+    0x00000002,
+    (u32)&RenderBmMap,
+    0x00000002,
+    (u32)&StartMapSongBgm,
+    0x00000002,
+    (u32)&StartMidFadeFromBlack,
+    0x00000003,
+    (u32)&WaitForFade,
+    0x0009000C,
+    0x00000000,
+    0x0007000B,
+    0x00000000,
+    0x00000002,
+    (u32)&RenderBmMap,
+    0x00000002,
+    (u32)&StartMapSongBgm,
+    0x00000002,
+    (u32)&StartMidFadeFromBlack,
+    0x00000003,
+    (u32)&WaitForFade,
+    0x00010006,
+    (u32)&data_085D1E38,
+    0x0003000C,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_025_5C2E50[] __attribute__((section(".data.frontier_df4_uistuff.gap25"))) = {
+    0x02032B88,
+    0x02032F88,
+    0x00080000,
+    0x0040000A,
+    0x00000014,
+    0x00300015,
+    0x00800000,
+    0x00000003,
+    (u32)&Loop6C_WaitForSelectPress,
+    0x0001000B,
+    0x00000000,
+    0x00000002,
+    (u32)&SetNewKeyStatusWith16,
+    0x000C000E,
+    0x00000000,
+    0x00000002,
+    (u32)&SetNewKeyStatusWith16,
+    0x000C000E,
+    0x00000000,
+    0x00000002,
+    (u32)&SetNewKeyStatusWith16,
+    0x000C000E,
+    0x00000000,
+    0x00000002,
+    (u32)&SetNewKeyStatusWith16,
+    0x000C000E,
+    0x00000000,
+    0x00000002,
+    (u32)&SetNewKeyStatusWith16,
+    0x000C000E,
+    0x00000000,
+    0x0001000C,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_025b_5C2EE4[] __attribute__((section(".data.frontier_df4_uistuff.gap25b"))) = {
+    0x0001000E,
+    0x00000000,
+    0x00000002,
+    (u32)&DebugPrintWithProc,
+    0x00000000,
+    0x00000000,
+    0x000007C4,
+    0x000007C5,
+};
+u32 frontier_df4_uistuff_025c_5C2F1C[] __attribute__((section(".data.frontier_df4_uistuff.gap25c"))) = {
+    0x03020100,
+    0x07050604,
+    0x0B0A0908,
+    0x0E0D0C3D,
+    0x1211100F,
+    0x16151413,
+    0x193E1817,
+    0x1D1C1B1A,
+    0x21201F1E,
+    0x25242322,
+    0x29282726,
+    0x2F2E2B2A,
+    0x33323130,
+    0x37363534,
+    0x3C3B3938,
+};
+u32 frontier_df4_uistuff_025d_5C3168[] __attribute__((section(".data.frontier_df4_uistuff.gap25d"))) = {
+    0x00000002,
+    (u32)&MakeMoveunitForActiveUnit,
+    0x00000002,
+    (u32)&TryCallSelectEvents,
+    0x00000014,
+    (u32)&EventEngineExists,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&Img_LimitViewSquares,
+    (u32)&Img_LimitViewSquares + 0x80,
+    (u32)&Img_LimitViewSquares + 0x100,
+    (u32)&Img_LimitViewSquares + 0x180,
+    (u32)&Img_LimitViewSquares + 0x200,
+    (u32)&Img_LimitViewSquares + 0x280,
+    0x00000001,
+    (u32)&Str_DebugRedArmy + 0x60,
+    0x0001000F,
+    0x00000000,
+    0x00000002,
+    (u32)&MoveLimitViewChange_OnInit,
+    0x00000003,
+    (u32)&MoveLimitViewChange_OnLoop,
+    0x00000000,
+    0x00000000,
+    0x00000001,
+    (u32)&Str_DebugRedArmy + 0x68,
+    0x0001000F,
+    0x00000000,
+    0x00000004,
+    (u32)&MoveLimitView_OnEnd,
+    0x00000005,
+    (u32)&gOpenLimitViewImgLut + 0x20,
+    0x00000002,
+    (u32)&MoveLimitView_OnInit,
+    0x00000003,
+    (u32)&MoveLimitView_OnLoop,
+    0x00000000,
+    0x00000000,
+    0x00000001,
+    (u32)&Str_DebugRedArmy + 0x78,
+    0x00000003,
+    (u32)&Loop6C_KOIDO,
+    0x00000000,
+    0x00000000,
+    0x00000001,
+    (u32)&Str_DebugRedArmy + 0x80,
+    0x00000002,
+    (u32)&LockGame,
+    0x00000003,
+    (u32)&Loop6C_KOIDO,
+    0x00000002,
+    (u32)&UnlockGame,
+    0x00000000,
+    0x00000000,
+    0x00000001,
+    (u32)&Str_DebugRedArmy + 0x8c,
+    0x00000011,
+    0x00000000,
+    0x00000004,
+    (u32)&Destruct6CBMXFADE,
+    0x00000002,
+    (u32)&bmxfade_init,
+    0x00000002,
+    (u32)&bmxfade_loop,
+    0x00000003,
+    (u32)&bmxfade_loop,
+    0x00000000,
+    0x00000000,
+    0x00000002,
+    (u32)&ProcFun_ResetCursorPosition,
+    0x0000000E,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+};
 struct ProcCmd frontier_df4_uistuff_025e_5C32B8[] SECTION(".data.frontier_df4_uistuff.gap25e") = {
     PROC_CALL_2(ConvoyMenuProc_StarMenu),
     PROC_CALL_2(ConvoyMenuProc_MenuEnd),
@@ -10068,58 +10593,290 @@ struct ProcCmd data_085C37D8[] __attribute__((section(".data.frontier_df4_uistuf
 };
 /* frontier_df4_uistuff_027_5C3C9C: atomic relocation carve (was INCBIN); every embedded ROM
    pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
-__asm__(
-"	.section .data.frontier_df4_uistuff.gap27, \"aw\", %progbits\n"
-"	.global frontier_df4_uistuff_027_5C3C9C\n"
-"frontier_df4_uistuff_027_5C3C9C:\n"
-"	.4byte 0x00000001, 0x18640000, 0x00FF0001, 0x18640000, 0x00FE0001, 0x186401FF\n"
-"	.4byte 0x00FD0001, 0x184A41FF, 0x00FC0001, 0x184A41FE, 0x00FB0001, 0x184A41FE\n"
-"	.4byte 0x00FA0001, 0x184A41FD, frontier_df4_uistuff_027_5C3C9C, frontier_df4_uistuff_027_5C3C9C + 0x8, frontier_df4_uistuff_027_5C3C9C + 0x10, frontier_df4_uistuff_027_5C3C9C + 0x18\n"
-"	.4byte frontier_df4_uistuff_027_5C3C9C + 0x20, frontier_df4_uistuff_027_5C3C9C + 0x28, frontier_df4_uistuff_027_5C3C9C + 0x30, 0x40000001, 0x18420000, 0x40010001\n"
-"	.4byte 0x18620001, 0x40010001, 0x18440000, 0x40000001, 0x18420001, 0x40000001\n"
-"	.4byte 0x18620002, 0x40010001, 0x18440000, 0x40000001, 0x184201FF, 0x40010001\n"
-"	.4byte 0x18620001, 0x40010001, 0x18440002, sSleepIconSprites + 0x1C, sSleepIconSprites + 0x24, sSleepIconSprites + 0x2C\n"
-"	.4byte sSleepIconSprites + 0x34, sSleepIconSprites + 0x3C, sSleepIconSprites + 0x44, sSleepIconSprites + 0x4C, sSleepIconSprites + 0x54, sSleepIconSprites + 0x5C\n"
-"	.4byte 0x00010000, 0x00004000, 0x00011866, 0x000040FF, 0x00011846, 0x400000FE\n"
-"	.4byte 0x00001848, sBerserkIconSprites + 0x26, sBerserkIconSprites + 0x2E, sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36\n"
-"	.4byte sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36, sBerserkIconSprites + 0x36\n"
-"	.4byte sBerserkIconSprites + 0x2E, sBerserkIconSprites + 0x26, sBerserkIconSprites + 0x24, sBerserkIconSprites + 0x24, sBerserkIconSprites + 0x24, sBerserkIconSprites + 0x24\n"
-"	.4byte sBerserkIconSprites + 0x24, 0x80000002, 0x18400002, 0x000A8003, 0x00021841, 0x100280FF\n"
-"	.4byte 0x80021840, 0x18411008, 0x80FE0002, 0x18400002, 0x000A8001, 0x00021841\n"
-"	.4byte 0x100280FD, 0x80001840, 0x18411008, 0x80FC0001, 0x18400004, 0x80FB0001\n"
-"	.4byte 0x18410004, 0x80FA0001, 0x18400004, 0x80F90001, 0x18411004, sSilenceIconSprites + 0x48\n"
-"	.4byte sSilenceIconSprites + 0x56, sSilenceIconSprites + 0x64, sSilenceIconSprites + 0x72, sSilenceIconSprites + 0x80, sSilenceIconSprites + 0x88, sSilenceIconSprites + 0x90\n"
-"	.4byte sSilenceIconSprites + 0x98, sSilenceIconSprites + 0x98, sBerserkIconSprites + 0x24, sBerserkIconSprites + 0x24, sBerserkIconSprites + 0x24, 0x40000002\n"
-"	.4byte 0x18300000, 0x00000008, 0x00011850, 0x40000400, 0x00010000, 0x80008400\n"
-"	.4byte 0x00010000, 0x80000400, 0x00010000, 0x40000800, 0x00010000, 0x80008800\n"
-"	.4byte 0x00010000, 0x80000800, 0x00000000, 0x00000050, 0x000000A0, 0x000000F0\n"
-"	.4byte 0x000000F1, 0x00000004, WarpSelect_OnEnd + 0x1, 0x00000002, LockGame + 0x1, 0x00000008\n"
-"	.4byte ProcScr_CamMove, 0x00000002, WarpSelect_OnInit + 0x1, 0x00000008, ProcScr_CamMove, 0x00000003\n"
-"	.4byte WarpSelect_OnIdle + 0x1, 0x00000002, WarpSelect_OnConfirm + 0x1, 0x0000000E, 0x00000000, 0x00000002\n"
-"	.4byte UnlockGame + 0x1, 0x0064000C, 0x00000000, 0x0063000B, 0x00000000, 0x00000002\n"
-"	.4byte WarpSelect_OnCancel + 0x1, 0x0000000E, 0x00000000, 0x00000002, UnlockGame + 0x1, 0x0064000B\n"
-"	.4byte 0x00000000, 0x00000000, 0x00000000, 0x00000002, LockGame + 0x1, 0x00000002\n"
-"	.4byte TorchSelect_OnInit + 0x1, 0x00000008, ProcScr_CamMove, 0x00000003, TorchSelect_OnIdle + 0x1, 0x00000002\n"
-"	.4byte WarpSelect_OnConfirm + 0x1, 0x0064000C, 0x00000000, 0x0063000B, 0x00000000, 0x00000002\n"
-"	.4byte WarpSelect_OnCancel + 0x1, 0x0064000B, 0x00000000, 0x00000002, UnlockGame + 0x1, 0x00000000\n"
-"	.4byte 0x00000000, 0xFFF10100, 0x010F0200, 0xFFF10201, 0x010F0001, 0xFFF10002\n"
-"	.4byte 0x010F0102, 0xFFF10705, 0x010F0605, 0xFFF10506, 0x010F0706, 0xFFF10607\n"
-"	.4byte 0x010F0507, 0x000000FF, 0x0001000E, 0x00000000, 0x00000002, UpdateActorFromBattle + 0x1\n"
-"	.4byte 0x00000000, 0x00000000, 0x00090002, 0x000B0002, 0x000D0002, 0x000F0002\n"
-"	.4byte 0x00110002, 0x00090010, 0x000B0010, 0x000D0010, 0x000F0010, 0x00110010\n"
-"	.4byte 0x00000002, TradeMenu_HighlightUpdater_OnInit + 0x1, 0x00000003, TradeMenu_HighlightUpdater_OnLoop + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000002, LockGame + 0x1, 0x0000000E, 0x00000000, 0x00000008, ProcScr_CamMove\n"
-"	.4byte 0x00000002, TradeMenu_InitItemDisplay + 0x1, 0x00000002, TradeMenu_InitUnitNameDisplay + 0x1, 0x00000005, gTradeItemDisplayTileLocation + 0x28\n"
-"	.4byte 0x0065000B, 0x00000000, 0x00000002, CallTradeTutEventStart + 0x1, 0x00000016, TradeMenu_LoadForcedInitialHover + 0x1\n"
-"	.4byte 0x0000000E, 0x00000000, 0x0000000B, 0x00000000, 0x00000002, TradeMenu_OnInitUnselected + 0x1\n"
-"	.4byte 0x00000003, TradeMenu_OnLoopUnselected + 0x1, 0x0001000B, 0x00000000, 0x00000002, TradeMenu_OnInitSelected + 0x1\n"
-"	.4byte 0x00000003, TradeMenu_OnLoopSelected + 0x1, 0x00000002, TradeMenu_OnEndSelected + 0x1, 0x0000000C, 0x00000000\n"
-"	.4byte 0x0002000B, 0x00000000, 0x00000002, TradeMenu_ClearDisplay + 0x1, 0x00000002, ClearBg0Bg1 + 0x1\n"
-"	.4byte 0x00000002, UnlockGame + 0x1, 0x00000000, 0x00000000, 0x00000002, TradeMenu_HelpBox_OnInit + 0x1\n"
-"	.4byte 0x00000003, TradeMenu_HelpBox_OnLoop + 0x1, 0x00000002, TradeMenu_HelpBox_OnEnd + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000004, TradeMenu_TutorialHandCursor_Update + 0x1, 0x00000003, TradeMenu_TutorialHandCursor_Update + 0x1, 0x00000000, 0x00000000\n"
-"	.4byte 0x00000004, TradeMenu_DoubleTutorialHandCursor_Update + 0x1, 0x00000003, TradeMenu_DoubleTutorialHandCursor_Update + 0x1, 0x00000000, 0x00000000\n"
-);
+u32 frontier_df4_uistuff_027_5C3C9C[] __attribute__((section(".data.frontier_df4_uistuff.gap27"))) = {
+    0x00000001,
+    0x18640000,
+    0x00FF0001,
+    0x18640000,
+    0x00FE0001,
+    0x186401FF,
+    0x00FD0001,
+    0x184A41FF,
+    0x00FC0001,
+    0x184A41FE,
+    0x00FB0001,
+    0x184A41FE,
+    0x00FA0001,
+    0x184A41FD,
+    (u32)&frontier_df4_uistuff_027_5C3C9C,
+    (u32)&frontier_df4_uistuff_027_5C3C9C + 0x8,
+    (u32)&frontier_df4_uistuff_027_5C3C9C + 0x10,
+    (u32)&frontier_df4_uistuff_027_5C3C9C + 0x18,
+    (u32)&frontier_df4_uistuff_027_5C3C9C + 0x20,
+    (u32)&frontier_df4_uistuff_027_5C3C9C + 0x28,
+    (u32)&frontier_df4_uistuff_027_5C3C9C + 0x30,
+    0x40000001,
+    0x18420000,
+    0x40010001,
+    0x18620001,
+    0x40010001,
+    0x18440000,
+    0x40000001,
+    0x18420001,
+    0x40000001,
+    0x18620002,
+    0x40010001,
+    0x18440000,
+    0x40000001,
+    0x184201FF,
+    0x40010001,
+    0x18620001,
+    0x40010001,
+    0x18440002,
+    (u32)&sSleepIconSprites + 0x1C,
+    (u32)&sSleepIconSprites + 0x24,
+    (u32)&sSleepIconSprites + 0x2C,
+    (u32)&sSleepIconSprites + 0x34,
+    (u32)&sSleepIconSprites + 0x3C,
+    (u32)&sSleepIconSprites + 0x44,
+    (u32)&sSleepIconSprites + 0x4C,
+    (u32)&sSleepIconSprites + 0x54,
+    (u32)&sSleepIconSprites + 0x5C,
+    0x00010000,
+    0x00004000,
+    0x00011866,
+    0x000040FF,
+    0x00011846,
+    0x400000FE,
+    0x00001848,
+    (u32)&sBerserkIconSprites + 0x26,
+    (u32)&sBerserkIconSprites + 0x2E,
+    (u32)&sBerserkIconSprites + 0x36,
+    (u32)&sBerserkIconSprites + 0x36,
+    (u32)&sBerserkIconSprites + 0x36,
+    (u32)&sBerserkIconSprites + 0x36,
+    (u32)&sBerserkIconSprites + 0x36,
+    (u32)&sBerserkIconSprites + 0x36,
+    (u32)&sBerserkIconSprites + 0x36,
+    (u32)&sBerserkIconSprites + 0x36,
+    (u32)&sBerserkIconSprites + 0x36,
+    (u32)&sBerserkIconSprites + 0x2E,
+    (u32)&sBerserkIconSprites + 0x26,
+    (u32)&sBerserkIconSprites + 0x24,
+    (u32)&sBerserkIconSprites + 0x24,
+    (u32)&sBerserkIconSprites + 0x24,
+    (u32)&sBerserkIconSprites + 0x24,
+    (u32)&sBerserkIconSprites + 0x24,
+    0x80000002,
+    0x18400002,
+    0x000A8003,
+    0x00021841,
+    0x100280FF,
+    0x80021840,
+    0x18411008,
+    0x80FE0002,
+    0x18400002,
+    0x000A8001,
+    0x00021841,
+    0x100280FD,
+    0x80001840,
+    0x18411008,
+    0x80FC0001,
+    0x18400004,
+    0x80FB0001,
+    0x18410004,
+    0x80FA0001,
+    0x18400004,
+    0x80F90001,
+    0x18411004,
+    (u32)&sSilenceIconSprites + 0x48,
+    (u32)&sSilenceIconSprites + 0x56,
+    (u32)&sSilenceIconSprites + 0x64,
+    (u32)&sSilenceIconSprites + 0x72,
+    (u32)&sSilenceIconSprites + 0x80,
+    (u32)&sSilenceIconSprites + 0x88,
+    (u32)&sSilenceIconSprites + 0x90,
+    (u32)&sSilenceIconSprites + 0x98,
+    (u32)&sSilenceIconSprites + 0x98,
+    (u32)&sBerserkIconSprites + 0x24,
+    (u32)&sBerserkIconSprites + 0x24,
+    (u32)&sBerserkIconSprites + 0x24,
+    0x40000002,
+    0x18300000,
+    0x00000008,
+    0x00011850,
+    0x40000400,
+    0x00010000,
+    0x80008400,
+    0x00010000,
+    0x80000400,
+    0x00010000,
+    0x40000800,
+    0x00010000,
+    0x80008800,
+    0x00010000,
+    0x80000800,
+    0x00000000,
+    0x00000050,
+    0x000000A0,
+    0x000000F0,
+    0x000000F1,
+    0x00000004,
+    (u32)&WarpSelect_OnEnd + 0x1,
+    0x00000002,
+    (u32)&LockGame + 0x1,
+    0x00000008,
+    (u32)&ProcScr_CamMove,
+    0x00000002,
+    (u32)&WarpSelect_OnInit + 0x1,
+    0x00000008,
+    (u32)&ProcScr_CamMove,
+    0x00000003,
+    (u32)&WarpSelect_OnIdle + 0x1,
+    0x00000002,
+    (u32)&WarpSelect_OnConfirm + 0x1,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&UnlockGame + 0x1,
+    0x0064000C,
+    0x00000000,
+    0x0063000B,
+    0x00000000,
+    0x00000002,
+    (u32)&WarpSelect_OnCancel + 0x1,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&UnlockGame + 0x1,
+    0x0064000B,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000002,
+    (u32)&LockGame + 0x1,
+    0x00000002,
+    (u32)&TorchSelect_OnInit + 0x1,
+    0x00000008,
+    (u32)&ProcScr_CamMove,
+    0x00000003,
+    (u32)&TorchSelect_OnIdle + 0x1,
+    0x00000002,
+    (u32)&WarpSelect_OnConfirm + 0x1,
+    0x0064000C,
+    0x00000000,
+    0x0063000B,
+    0x00000000,
+    0x00000002,
+    (u32)&WarpSelect_OnCancel + 0x1,
+    0x0064000B,
+    0x00000000,
+    0x00000002,
+    (u32)&UnlockGame + 0x1,
+    0x00000000,
+    0x00000000,
+    0xFFF10100,
+    0x010F0200,
+    0xFFF10201,
+    0x010F0001,
+    0xFFF10002,
+    0x010F0102,
+    0xFFF10705,
+    0x010F0605,
+    0xFFF10506,
+    0x010F0706,
+    0xFFF10607,
+    0x010F0507,
+    0x000000FF,
+    0x0001000E,
+    0x00000000,
+    0x00000002,
+    (u32)&UpdateActorFromBattle + 0x1,
+    0x00000000,
+    0x00000000,
+    0x00090002,
+    0x000B0002,
+    0x000D0002,
+    0x000F0002,
+    0x00110002,
+    0x00090010,
+    0x000B0010,
+    0x000D0010,
+    0x000F0010,
+    0x00110010,
+    0x00000002,
+    (u32)&TradeMenu_HighlightUpdater_OnInit + 0x1,
+    0x00000003,
+    (u32)&TradeMenu_HighlightUpdater_OnLoop + 0x1,
+    0x00000000,
+    0x00000000,
+    0x00000002,
+    (u32)&LockGame + 0x1,
+    0x0000000E,
+    0x00000000,
+    0x00000008,
+    (u32)&ProcScr_CamMove,
+    0x00000002,
+    (u32)&TradeMenu_InitItemDisplay + 0x1,
+    0x00000002,
+    (u32)&TradeMenu_InitUnitNameDisplay + 0x1,
+    0x00000005,
+    (u32)&gTradeItemDisplayTileLocation + 0x28,
+    0x0065000B,
+    0x00000000,
+    0x00000002,
+    (u32)&CallTradeTutEventStart + 0x1,
+    0x00000016,
+    (u32)&TradeMenu_LoadForcedInitialHover + 0x1,
+    0x0000000E,
+    0x00000000,
+    0x0000000B,
+    0x00000000,
+    0x00000002,
+    (u32)&TradeMenu_OnInitUnselected + 0x1,
+    0x00000003,
+    (u32)&TradeMenu_OnLoopUnselected + 0x1,
+    0x0001000B,
+    0x00000000,
+    0x00000002,
+    (u32)&TradeMenu_OnInitSelected + 0x1,
+    0x00000003,
+    (u32)&TradeMenu_OnLoopSelected + 0x1,
+    0x00000002,
+    (u32)&TradeMenu_OnEndSelected + 0x1,
+    0x0000000C,
+    0x00000000,
+    0x0002000B,
+    0x00000000,
+    0x00000002,
+    (u32)&TradeMenu_ClearDisplay + 0x1,
+    0x00000002,
+    (u32)&ClearBg0Bg1 + 0x1,
+    0x00000002,
+    (u32)&UnlockGame + 0x1,
+    0x00000000,
+    0x00000000,
+    0x00000002,
+    (u32)&TradeMenu_HelpBox_OnInit + 0x1,
+    0x00000003,
+    (u32)&TradeMenu_HelpBox_OnLoop + 0x1,
+    0x00000002,
+    (u32)&TradeMenu_HelpBox_OnEnd + 0x1,
+    0x00000000,
+    0x00000000,
+    0x00000004,
+    (u32)&TradeMenu_TutorialHandCursor_Update + 0x1,
+    0x00000003,
+    (u32)&TradeMenu_TutorialHandCursor_Update + 0x1,
+    0x00000000,
+    0x00000000,
+    0x00000004,
+    (u32)&TradeMenu_DoubleTutorialHandCursor_Update + 0x1,
+    0x00000003,
+    (u32)&TradeMenu_DoubleTutorialHandCursor_Update + 0x1,
+    0x00000000,
+    0x00000000,
+};
 struct ProcCmd frontier_df4_uistuff_028_5C411C[] SECTION(".data.frontier_df4_uistuff.gap28") = {
     PROC_WHILE(EventEngineExists),
     PROC_WHILE(AreKeysHeld),
@@ -10128,88 +10885,87 @@ struct ProcCmd frontier_df4_uistuff_028_5C411C[] SECTION(".data.frontier_df4_uis
     PROC_END,
 };
 
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap28, \"aw\", %progbits\n"
-    ".4byte 0x00031020\n"
-    ".4byte 0x00070228\n"
-    ".4byte 0x00001120\n"
-    ".4byte 0x00000d40\n"
-    ".4byte FreezeMenu\n"
-    ".4byte 0x00080e20\n"
-    ".4byte 0x00001a25\n"
-    ".4byte 0x000b0540\n"
-    ".4byte 0xffffffff\n"
-    ".4byte 0x09091b20\n"
-    ".4byte 0x00001d20\n"
-    ".4byte 0x00000d40\n"
-    ".4byte ResumeMenu\n"
-    ".4byte 0x01ca1120\n"
-    ".4byte 0x00000d40\n"
-    ".4byte SetTradeMenuTutStatus2\n"
-    ".4byte 0x00000120\n"
-    ".4byte 0x00031020\n"
-    ".4byte 0x00070228\n"
-    ".4byte 0x00000d40\n"
-    ".4byte TradeMenuHandSTAL\n"
-    ".4byte 0x00001120\n"
-    ".4byte 0x00000d40\n"
-    ".4byte FreezeMenu\n"
-    ".4byte 0x00080e20\n"
-    ".4byte 0x00001a25\n"
-    ".4byte 0x000b0540\n"
-    ".4byte 0xffffffff\n"
-    ".4byte 0x090a1b20\n"
-    ".4byte 0x00001d20\n"
-    ".4byte 0x00000d40\n"
-    ".4byte ResumeMenu\n"
-    ".4byte 0x00081120\n"
-    ".4byte 0x00000d40\n"
-    ".4byte SetTradeMenuTutStatus3\n"
-    ".4byte 0x00000120\n"
-    ".4byte 0x00031020\n"
-    ".4byte 0x00070228\n"
-    ".4byte 0x00000d40\n"
-    ".4byte TradeMenuHandSTAL\n"
-    ".4byte 0x00001120\n"
-    ".4byte 0x00000d40\n"
-    ".4byte FreezeMenu\n"
-    ".4byte 0x00080e20\n"
-    ".4byte 0x00001a25\n"
-    ".4byte 0x000b0540\n"
-    ".4byte 0xffffffff\n"
-    ".4byte 0x090b1b20\n"
-    ".4byte 0x00001d20\n"
-    ".4byte 0x00000d40\n"
-    ".4byte ResumeMenu\n"
-    ".4byte 0x00081120\n"
-    ".4byte 0x00000d40\n"
-    ".4byte SetTradeMenuTutStatus5\n"
-    ".4byte 0x00000120\n"
-    ".4byte 0x00031020\n"
-    ".4byte 0x00070228\n"
-    ".4byte 0x00000d40\n"
-    ".4byte SetTradeMenuTutStatus7\n"
-    ".4byte 0x00000d40\n"
-    ".4byte StartTradeMenuTutorialHandCursor\n"
-    ".4byte 0x00000d40\n"
-    ".4byte TradeMenuHandSTAL\n"
-    ".4byte 0x00001120\n"
-    ".4byte 0x00000d40\n"
-    ".4byte FreezeMenu\n"
-    ".4byte 0x00080e20\n"
-    ".4byte 0x00001a25\n"
-    ".4byte 0x000b0540\n"
-    ".4byte 0xffffffff\n"
-    ".4byte 0x090c1b20\n"
-    ".4byte 0x00001d20\n"
-    ".4byte 0x00000d40\n"
-    ".4byte ResumeMenu\n"
-    ".4byte 0x00091120\n"
-    ".4byte 0xff7f3d20\n"
-    ".4byte 0x00000d40\n"
-    ".4byte SetTradeMenuTutStatus8\n"
-    ".4byte 0x00000120\n"
-);
+u32 frontier_df4_uistuff_gap28[] __attribute__((section(".data.frontier_df4_uistuff.gap28"))) = {
+    0x00031020,
+    0x00070228,
+    0x00001120,
+    0x00000D40,
+    (u32)&FreezeMenu,
+    0x00080E20,
+    0x00001A25,
+    0x000B0540,
+    0xFFFFFFFF,
+    0x09091B20,
+    0x00001D20,
+    0x00000D40,
+    (u32)&ResumeMenu,
+    0x01CA1120,
+    0x00000D40,
+    (u32)&SetTradeMenuTutStatus2,
+    0x00000120,
+    0x00031020,
+    0x00070228,
+    0x00000D40,
+    (u32)&TradeMenuHandSTAL,
+    0x00001120,
+    0x00000D40,
+    (u32)&FreezeMenu,
+    0x00080E20,
+    0x00001A25,
+    0x000B0540,
+    0xFFFFFFFF,
+    0x090A1B20,
+    0x00001D20,
+    0x00000D40,
+    (u32)&ResumeMenu,
+    0x00081120,
+    0x00000D40,
+    (u32)&SetTradeMenuTutStatus3,
+    0x00000120,
+    0x00031020,
+    0x00070228,
+    0x00000D40,
+    (u32)&TradeMenuHandSTAL,
+    0x00001120,
+    0x00000D40,
+    (u32)&FreezeMenu,
+    0x00080E20,
+    0x00001A25,
+    0x000B0540,
+    0xFFFFFFFF,
+    0x090B1B20,
+    0x00001D20,
+    0x00000D40,
+    (u32)&ResumeMenu,
+    0x00081120,
+    0x00000D40,
+    (u32)&SetTradeMenuTutStatus5,
+    0x00000120,
+    0x00031020,
+    0x00070228,
+    0x00000D40,
+    (u32)&SetTradeMenuTutStatus7,
+    0x00000D40,
+    (u32)&StartTradeMenuTutorialHandCursor,
+    0x00000D40,
+    (u32)&TradeMenuHandSTAL,
+    0x00001120,
+    0x00000D40,
+    (u32)&FreezeMenu,
+    0x00080E20,
+    0x00001A25,
+    0x000B0540,
+    0xFFFFFFFF,
+    0x090C1B20,
+    0x00001D20,
+    0x00000D40,
+    (u32)&ResumeMenu,
+    0x00091120,
+    0xFF7F3D20,
+    0x00000D40,
+    (u32)&SetTradeMenuTutStatus8,
+    0x00000120,
+};
 
 struct ProcCmd frontier_df4_uistuff_028b_5C42D0[] SECTION(".data.frontier_df4_uistuff.gap28b") = {
     PROC_SLEEP(0),
@@ -10230,853 +10986,835 @@ struct ProcCmd ProcScr_ExecNightmareStaffEffect_5C42D0_1[] SECTION(".data.fronti
     PROC_END,
 };
 
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap29, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_029_5C4A94\n"
-    "frontier_df4_uistuff_029_5C4A94:\n"
-    ".4byte gMenuStr_14C\n"
-    ".4byte 0x065d0623\n"
-    ".4byte 0x00003400\n"
-    ".4byte ItemSubMenu_IsUseAvailable\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemSubMenu_UseItem\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_144\n"
-    ".4byte 0x065c0624\n"
-    ".4byte 0x00003504\n"
-    ".4byte ItemSubMenu_IsEquipAvailable\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemSubMenu_EquipItem\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_13C\n"
-    ".4byte 0x06560625\n"
-    ".4byte 0x00003604\n"
-    ".4byte ItemSubMenu_IsTradeAvailable\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemSubMenu_TradeItem\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_134\n"
-    ".4byte 0x065e0626\n"
-    ".4byte 0x00003704\n"
-    ".4byte ItemSubMenu_IsDiscardAvailable\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemSubMenu_DiscardItem\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003800\n"
-    ".4byte ItemMenu_Is1stCommandAvailable\n"
-    ".4byte ItemMenu_Draw1stCommand\n"
-    ".4byte ItemMenu_Select1stCommand\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_SwitchIn\n"
-    ".4byte ItemMenu_SwitchOut_DoNothing\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003900\n"
-    ".4byte ItemMenu_AreOtherCommandsAvailable\n"
-    ".4byte ItemMenu_DrawOtherCommands\n"
-    ".4byte ItemMenu_SelectOtherCommands\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_SwitchIn\n"
-    ".4byte ItemMenu_SwitchOut_DoNothing\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003a00\n"
-    ".4byte ItemMenu_AreOtherCommandsAvailable\n"
-    ".4byte ItemMenu_DrawOtherCommands\n"
-    ".4byte ItemMenu_SelectOtherCommands\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_SwitchIn\n"
-    ".4byte ItemMenu_SwitchOut_DoNothing\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003b00\n"
-    ".4byte ItemMenu_AreOtherCommandsAvailable\n"
-    ".4byte ItemMenu_DrawOtherCommands\n"
-    ".4byte ItemMenu_SelectOtherCommands\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_SwitchIn\n"
-    ".4byte ItemMenu_SwitchOut_DoNothing\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003c00\n"
-    ".4byte ItemMenu_AreOtherCommandsAvailable\n"
-    ".4byte ItemMenu_DrawOtherCommands\n"
-    ".4byte ItemMenu_SelectOtherCommands\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_SwitchIn\n"
-    ".4byte ItemMenu_SwitchOut_DoNothing\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003d00\n"
-    ".4byte ItemMenu_AreOtherCommandsAvailable\n"
-    ".4byte ItemMenu_DrawOtherCommands\n"
-    ".4byte ItemMenu_SelectOtherCommands\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_SwitchIn\n"
-    ".4byte ItemMenu_SwitchOut_DoNothing\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003e00\n"
-    ".4byte StaffItemSelect_Usability\n"
-    ".4byte StaffItemSelect_TextDraw\n"
-    ".4byte StaffItemSelect_Effect\n"
-    ".4byte 0x00000000\n"
-    ".4byte StaffItemSelect_OnHover\n"
-    ".4byte StaffItemSelect_SwitchOut\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00003f00\n"
-    ".4byte StaffItemSelect_Usability\n"
-    ".4byte StaffItemSelect_TextDraw\n"
-    ".4byte StaffItemSelect_Effect\n"
-    ".4byte 0x00000000\n"
-    ".4byte StaffItemSelect_OnHover\n"
-    ".4byte StaffItemSelect_SwitchOut\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004000\n"
-    ".4byte StaffItemSelect_Usability\n"
-    ".4byte StaffItemSelect_TextDraw\n"
-    ".4byte StaffItemSelect_Effect\n"
-    ".4byte 0x00000000\n"
-    ".4byte StaffItemSelect_OnHover\n"
-    ".4byte StaffItemSelect_SwitchOut\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004100\n"
-    ".4byte StaffItemSelect_Usability\n"
-    ".4byte StaffItemSelect_TextDraw\n"
-    ".4byte StaffItemSelect_Effect\n"
-    ".4byte 0x00000000\n"
-    ".4byte StaffItemSelect_OnHover\n"
-    ".4byte StaffItemSelect_SwitchOut\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004200\n"
-    ".4byte StaffItemSelect_Usability\n"
-    ".4byte StaffItemSelect_TextDraw\n"
-    ".4byte StaffItemSelect_Effect\n"
-    ".4byte 0x00000000\n"
-    ".4byte StaffItemSelect_OnHover\n"
-    ".4byte StaffItemSelect_SwitchOut\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004300\n"
-    ".4byte ItemSelectMenu_Usability\n"
-    ".4byte ItemSelectMenu_TextDraw\n"
-    ".4byte ItemSelectMenu_Effect\n"
-    ".4byte 0x00000000\n"
-    ".4byte Menu_SwitchIn\n"
-    ".4byte Menu_SwitchOut_DoNothing\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004400\n"
-    ".4byte ItemSelectMenu_Usability\n"
-    ".4byte ItemSelectMenu_TextDraw\n"
-    ".4byte ItemSelectMenu_Effect\n"
-    ".4byte 0x00000000\n"
-    ".4byte Menu_SwitchIn\n"
-    ".4byte Menu_SwitchOut_DoNothing\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004500\n"
-    ".4byte ItemSelectMenu_Usability\n"
-    ".4byte ItemSelectMenu_TextDraw\n"
-    ".4byte ItemSelectMenu_Effect\n"
-    ".4byte 0x00000000\n"
-    ".4byte Menu_SwitchIn\n"
-    ".4byte Menu_SwitchOut_DoNothing\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004600\n"
-    ".4byte ItemSelectMenu_Usability\n"
-    ".4byte ItemSelectMenu_TextDraw\n"
-    ".4byte ItemSelectMenu_Effect\n"
-    ".4byte 0x00000000\n"
-    ".4byte Menu_SwitchIn\n"
-    ".4byte Menu_SwitchOut_DoNothing\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004700\n"
-    ".4byte ItemSelectMenu_Usability\n"
-    ".4byte ItemSelectMenu_TextDraw\n"
-    ".4byte ItemSelectMenu_Effect\n"
-    ".4byte 0x00000000\n"
-    ".4byte Menu_SwitchIn\n"
-    ".4byte Menu_SwitchOut_DoNothing\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004800\n"
-    ".4byte BallistaRangeMenu_BallistaUsability\n"
-    ".4byte BallistaRangeMenu_Draw\n"
-    ".4byte BallistaRangeMenu_Select\n"
-    ".4byte 0x00000000\n"
-    ".4byte FillBallistaRange\n"
-    ".4byte BallistaRangeMenu_SwitchOut\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004900\n"
-    ".4byte WeaponSelectMenu_IsAvailable\n"
-    ".4byte WeaponSelectMenu_Draw\n"
-    ".4byte WeaponSelectMenu_Selected\n"
-    ".4byte 0x00000000\n"
-    ".4byte WeaponSelectMenu_SwitchIn\n"
-    ".4byte BallistaRangeMenu_SwitchOut\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004a00\n"
-    ".4byte WeaponSelectMenu_IsAvailable\n"
-    ".4byte WeaponSelectMenu_Draw\n"
-    ".4byte WeaponSelectMenu_Selected\n"
-    ".4byte 0x00000000\n"
-    ".4byte WeaponSelectMenu_SwitchIn\n"
-    ".4byte BallistaRangeMenu_SwitchOut\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004b00\n"
-    ".4byte WeaponSelectMenu_IsAvailable\n"
-    ".4byte WeaponSelectMenu_Draw\n"
-    ".4byte WeaponSelectMenu_Selected\n"
-    ".4byte 0x00000000\n"
-    ".4byte WeaponSelectMenu_SwitchIn\n"
-    ".4byte BallistaRangeMenu_SwitchOut\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004c00\n"
-    ".4byte WeaponSelectMenu_IsAvailable\n"
-    ".4byte WeaponSelectMenu_Draw\n"
-    ".4byte WeaponSelectMenu_Selected\n"
-    ".4byte 0x00000000\n"
-    ".4byte WeaponSelectMenu_SwitchIn\n"
-    ".4byte BallistaRangeMenu_SwitchOut\n"
-    ".4byte gMenuStr_060 + 0x18\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00004d00\n"
-    ".4byte WeaponSelectMenu_IsAvailable\n"
-    ".4byte WeaponSelectMenu_Draw\n"
-    ".4byte WeaponSelectMenu_Selected\n"
-    ".4byte 0x00000000\n"
-    ".4byte WeaponSelectMenu_SwitchIn\n"
-    ".4byte BallistaRangeMenu_SwitchOut\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap30, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_030_5C534C\n"
-    "frontier_df4_uistuff_030_5C534C:\n"
-    ".4byte gMenuStr_29C\n"
-    ".4byte 0x06620627\n"
-    ".4byte 0x00006e00\n"
-    ".4byte MenuAlwaysEnabled\n"
-    ".4byte 0x00000000\n"
-    ".4byte MapMenu_UnitCommand\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_294\n"
-    ".4byte 0x06630621\n"
-    ".4byte 0x00006f00\n"
-    ".4byte MenuAlwaysEnabled\n"
-    ".4byte 0x00000000\n"
-    ".4byte MapMenu_StatusCommand\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_28C\n"
-    ".4byte 0x06680629\n"
-    ".4byte 0x00007404\n"
-    ".4byte MapMenu_IsGuideCommandAvailable\n"
-    ".4byte MapMenu_GuideCommandDraw\n"
-    ".4byte MapMenu_GuideCommand\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_284\n"
-    ".4byte 0x0666062b\n"
-    ".4byte 0x00007000\n"
-    ".4byte MapMenu_IsRecordsCommandAvailable\n"
-    ".4byte 0x00000000\n"
-    ".4byte MapMenu_RecordsCommand\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_27C\n"
-    ".4byte 0x06640628\n"
-    ".4byte 0x00007100\n"
-    ".4byte MenuAlwaysEnabled\n"
-    ".4byte 0x00000000\n"
-    ".4byte MapMenu_OptionsCommand\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_274\n"
-    ".4byte 0x0665062a\n"
-    ".4byte 0x00007200\n"
-    ".4byte MapMenu_IsRetreatCommandAvailable\n"
-    ".4byte 0x00000000\n"
-    ".4byte MapMenu_RetreatCommand\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_26C\n"
-    ".4byte 0x0667062c\n"
-    ".4byte 0x00007300\n"
-    ".4byte MapMenu_IsSuspendCommandAvailable\n"
-    ".4byte 0x00000000\n"
-    ".4byte MapMenu_SuspendCommand\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gMenuStr_264\n"
-    ".4byte 0x0669062d\n"
-    ".4byte 0x00007800\n"
-    ".4byte MenuAlwaysEnabled\n"
-    ".4byte 0x00000000\n"
-    ".4byte CommandEffectEndPlayerPhase\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000d0601\n"
-    ".4byte 0x00000000\n"
-    ".4byte gDebugClearMenuItems\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte EndMenuAndClear\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000a0101\n"
-    ".4byte 0x00000000\n"
-    ".4byte gDebugChuudanMenuItems\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte EndMenuAndClear\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000c0409\n"
-    ".4byte 0x00000000\n"
-    ".4byte gDebugContinueMenuItems\n"
-    ".4byte DebugContinueMenuInit\n"
-    ".4byte DebugContinueMenuEnd\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00080101\n"
-    ".4byte 0x00000000\n"
-    ".4byte data_085C4518\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte EndMenuAndClear\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x000e0101\n"
-    ".4byte 0x00000000\n"
-    ".4byte data_085C4518 + 0x48\n"
-    ".4byte DebugMenuInit\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte EndMenuAndClear\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap30, \"aw\", %progbits\n"
-    ".global data_085C5544\n"
-    "data_085C5544:\n"
-    ".4byte 0x00100100\n"
-    ".4byte 0x00000000\n"
-    ".4byte gItemUseMenuItems\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_ButtonBPressed\n"
-    ".4byte sub_8050294\n"
-    ".4byte ItemMenu_HelpBox\n"
-    ".4byte 0x000e040e\n"
-    ".4byte 0x00000000\n"
-    ".4byte gStealItemMenuItems\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_ButtonBPressed\n"
-    ".4byte sub_8050294\n"
-    ".4byte ItemMenu_HelpBox\n"
-    ".4byte 0x000e0101\n"
-    ".4byte 0x00000000\n"
-    ".4byte data_085C4830\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte sub_8050294\n"
-    ".4byte ConvoyMenu_HelpBox\n"
-    ".4byte 0x000e0101\n"
-    ".4byte 0x00000000\n"
-    ".4byte data_085C4830 + 0xfc\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte sub_8050294\n"
-    ".4byte ConvoyMenu_HelpBox\n"
-    ".4byte 0x00050000\n"
-    ".4byte 0x00000001\n"
-    ".4byte gYesNoSelectionMenuItems\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte MenuCommand_SelectNo\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00050000\n"
-    ".4byte 0x00000001\n"
-    ".4byte frontier_df4_uistuff_029_5C4A94\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemSubMenuEnd\n"
-    ".4byte 0x00000000\n"
-    ".4byte MenuCommand_SelectNo\n"
-    ".4byte sub_8050294\n"
-    ".4byte MenuStdHelpBox\n"
-    ".4byte 0x000e0101\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_029_5C4A94 + 0xb4\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_ButtonBPressed\n"
-    ".4byte sub_8050294\n"
-    ".4byte ItemMenuHelpBox\n"
-    ".4byte 0x000e0101\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_029_5C4A94 + 0x1b0\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_ButtonBPressed\n"
-    ".4byte sub_8050294\n"
-    ".4byte ConvoyMenu_HelpBox\n"
-    ".4byte 0x000e0101\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_029_5C4A94 + 0x288\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_ButtonBPressed\n"
-    ".4byte sub_8050294\n"
-    ".4byte ConvoyMenu_HelpBox\n"
-    ".4byte 0x000e0101\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_029_5C4A94 + 0x360\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_ButtonBPressed\n"
-    ".4byte sub_8050294\n"
-    ".4byte BallistaRangeMenuHelpBox\n"
-    ".4byte 0x000e0101\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_029_5C4A94 + 0x3a8\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte ItemMenu_ButtonBPressed\n"
-    ".4byte sub_8050294\n"
-    ".4byte ConvoyMenu_HelpBox\n"
-    ".4byte 0x00070301\n"
-    ".4byte 0x00000000\n"
-    ".4byte gUnitActionMenuItems\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte MenuCancelSelect\n"
-    ".4byte sub_8050294\n"
-    ".4byte MenuStdHelpBox\n"
-    ".4byte 0x00060201\n"
-    ".4byte 0x00000000\n"
-    ".4byte frontier_df4_uistuff_030_5C534C\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte MenuCancelSelect\n"
-    ".4byte sub_8050294\n"
-    ".4byte MenuStdHelpBox\n"
-    ".4byte AttackStaffMapSelect_Init\n"
-    ".4byte ClearBg0Bg1\n"
-    ".4byte 0x00000000\n"
-    ".4byte AttackStaffMapSelect_SwitchIn\n"
-    ".4byte 0x00000000\n"
-    ".4byte StaffSelectOnSelect\n"
-    ".4byte GenericSelection_BackToUM_CamWait\n"
-    ".4byte 0x00000000\n"
-    ".4byte sub_8029BFC\n"
-    ".4byte ClearBg0Bg1\n"
-    ".4byte 0x00000000\n"
-    ".4byte BarrierMapSelect_SwitchIn\n"
-    ".4byte 0x00000000\n"
-    ".4byte StaffSelectOnSelect\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte RestoreMapSelect_Init\n"
-    ".4byte ClearBg0Bg1\n"
-    ".4byte 0x00000000\n"
-    ".4byte RestoreMapSelect_SwitchIn\n"
-    ".4byte 0x00000000\n"
-    ".4byte StaffSelectOnSelect\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte HealMapSelect_Init\n"
-    ".4byte ClearBg0Bg1\n"
-    ".4byte 0x00000000\n"
-    ".4byte WarpUnitMapSelect_SwitchIn\n"
-    ".4byte 0x00000000\n"
-    ".4byte StaffSelectOnSelect\n"
-    ".4byte GenericSelection_BackToUM_CamWait\n"
-    ".4byte 0x00000000\n"
-    ".4byte RefreshMapSelect_Init\n"
-    ".4byte ClearBg0Bg1\n"
-    ".4byte 0x00000000\n"
-    ".4byte RefreshMapSelect_SwitchIn\n"
-    ".4byte 0x00000000\n"
-    ".4byte RefreshMapSelect_Select\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte SubtitleMapSelect_End\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte WarpUnitMapSelect_Init\n"
-    ".4byte SubtitleMapSelect_End\n"
-    ".4byte 0x00000000\n"
-    ".4byte HealMapSelect_SwitchIn\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte GenericSelection_BackToUM_CamWait\n"
-    ".4byte 0x00000000\n"
-    ".4byte sub_80241D4\n"
-    ".4byte ClearBg0Bg1\n"
-    ".4byte 0x00000000\n"
-    ".4byte StealMapSelect_SwitchIn\n"
-    ".4byte 0x00000000\n"
-    ".4byte StealMapSelect_Select\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte SummonSelection_OnInit\n"
-    ".4byte ClearBg0Bg1\n"
-    ".4byte 0x00000000\n"
-    ".4byte SummonSelection_OnChange\n"
-    ".4byte 0x00000000\n"
-    ".4byte SummonSelection_OnSelect\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte PickSelection_OnInit\n"
-    ".4byte ClearBg0Bg1\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte PickSelection_OnSelect\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte TalkSupportSelection_OnInit\n"
-    ".4byte ClearBg0Bg1\n"
-    ".4byte 0x00000000\n"
-    ".4byte TalkSupportSelection_OnChange\n"
-    ".4byte 0x00000000\n"
-    ".4byte SupportSelection_OnSelect\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte TalkSupportSelection_OnInit\n"
-    ".4byte ClearBg0Bg1\n"
-    ".4byte 0x00000000\n"
-    ".4byte TalkSupportSelection_OnChange\n"
-    ".4byte 0x00000000\n"
-    ".4byte TalkSelection_OnSelect\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte sub_80299B8\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte RepairSelectOnChange\n"
-    ".4byte 0x00000000\n"
-    ".4byte RepairSelectOnSelect\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte TradeTargetSelection_OnInit\n"
-    ".4byte ClearBg0Bg1\n"
-    ".4byte 0x00000000\n"
-    ".4byte TradeSelection_OnChange\n"
-    ".4byte 0x00000000\n"
-    ".4byte TradeSelection_OnSelect\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte NewBattleForecast\n"
-    ".4byte AttackMapSelect_End\n"
-    ".4byte 0x00000000\n"
-    ".4byte AttackMapSelect_SwitchIn\n"
-    ".4byte 0x00000000\n"
-    ".4byte AttackMapSelect_Select\n"
-    ".4byte AttackMapSelect_Cancel\n"
-    ".4byte StartBattleForecastHelpBox\n"
-    ".4byte StealMapSelect_Init\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte GiveSelection_OnChange\n"
-    ".4byte 0x00000000\n"
-    ".4byte GiveSelection_OnSelect\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte TakeSelection_OnInit\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte TakeSelection_OnChange\n"
-    ".4byte 0x00000000\n"
-    ".4byte TakeSelection_OnSelect\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte DropSelection_OnConstruction\n"
-    ".4byte ClearBg0Bg1\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte DropSelection_OnSelect\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte 0x00000000\n"
-    ".4byte RescueSelection_OnConstruction\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte RescueSelection_OnChange\n"
-    ".4byte 0x00000000\n"
-    ".4byte RescueSelection_OnSelect\n"
-    ".4byte GenericSelection_BackToUM\n"
-    ".4byte RescueSelection_OnHelp\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap31, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_031_5C5DE8\n"
-    "frontier_df4_uistuff_031_5C5DE8:\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte gMenuStr_29C + 0x8\n"
-"\t.4byte 0x00000017\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0001000F\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte PutUnitSpritesOam\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte WfxUpdate\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte UpdateBmMapDisplay\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000C\n"
-"\t.4byte 0x00000000\n"
-"\t.global frontier_df4_uistuff_031_obj_5C5E38\n"
-"frontier_df4_uistuff_031_obj_5C5E38:\n"
-"\t.4byte 0x00000001\n"
-"\t.4byte 0x102A0000\n"
-"\t.global frontier_df4_uistuff_031_obj_5C5E40\n"
-"frontier_df4_uistuff_031_obj_5C5E40:\n"
-"\t.4byte 0x80000001\n"
-"\t.4byte 0x100A0000\n"
-"\t.4byte frontier_df4_uistuff_031_obj_5C5E38\n"
-"\t.4byte frontier_df4_uistuff_031_obj_5C5E40\n"
-"\t.4byte frontier_df4_uistuff_031_obj_5C5E40\n"
-"\t.4byte 0x40000012\n"
-"\t.4byte 0x0000C000\n"
-"\t.4byte 0xC0304000\n"
-"\t.4byte 0x40000006\n"
-"\t.4byte 0x0000C070\n"
-"\t.4byte 0xC0A04000\n"
-"\t.4byte 0x80000006\n"
-"\t.4byte 0x000080E0\n"
-"\t.4byte 0x80000020\n"
-"\t.4byte 0x4020000A\n"
-"\t.4byte 0x0000C020\n"
-"\t.4byte 0xC0504020\n"
-"\t.4byte 0x40200006\n"
-"\t.4byte 0x0000C090\n"
-"\t.4byte 0xC0C04020\n"
-"\t.4byte 0x40400006\n"
-"\t.4byte 0x0000C000\n"
-"\t.4byte 0xC0B04040\n"
-"\t.4byte 0x40600000\n"
-"\t.4byte 0x0004C000\n"
-"\t.4byte 0xC0B04060\n"
-"\t.4byte 0x40800004\n"
-"\t.4byte 0x0000C000\n"
-"\t.4byte 0xC0B04080\n"
-"\t.4byte 0x40A00000\n"
-"\t.4byte 0x0000C000\n"
-"\t.4byte 0xC0B040A0\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BMapDispResume\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x1513110F\n"
-"\t.4byte 0x0B09403F\n"
-"\t.4byte 0x2D27252B\n"
-"\t.4byte 0x4C07052F\n"
-"\t.4byte 0x211F4948\n"
-"\t.4byte 0x4342414E\n"
-"\t.4byte 0x093F130F\n"
-"\t.4byte 0x48052D25\n"
-"\t.4byte 0x4E42411F\n"
-"\t.4byte 0x110F004E\n"
-"\t.4byte 0x403F1513\n"
-"\t.4byte 0x1B190B09\n"
-"\t.4byte 0x2D27252B\n"
-"\t.4byte 0x4C07052F\n"
-"\t.4byte 0x211F4948\n"
-"\t.4byte 0x4342414E\n"
-"\t.4byte 0x3F130F0D\n"
-"\t.4byte 0x2D251909\n"
-"\t.4byte 0x4E1F4805\n"
-"\t.4byte 0x1B19004E\n"
-"\t.4byte 0x2D27252B\n"
-"\t.4byte 0x0F004C2F\n"
-"\t.4byte 0x403F1513\n"
-"\t.4byte 0x2D27252B\n"
-"\t.4byte 0x484C052F\n"
-"\t.4byte 0x42414E1F\n"
-"\t.4byte 0x3F3F0D43\n"
-"\t.4byte 0x0000000D\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap31b, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_031b_5C5F74\n"
-    "frontier_df4_uistuff_031b_5C5F74:\n"
-"\t.4byte 0x00000003\n"
-"\t.4byte DeathDropSpriteAnim_Loop\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte DeathDropSpriteAnim_ExecAnyTrap\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte DeathDropSpriteAnim_End\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap31c, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_031c_5C6004\n"
-    "frontier_df4_uistuff_031c_5C6004:\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte Arena_KeepTargetAlive\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BATTLE_PostCombatDeathFades\n"
-"\t.4byte 0x0020000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BATTLE_DeleteLinkedMOVEUNIT\n"
-"\t.4byte 0x0001000B\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000002\n"
-"\t.4byte BATTLE_HandleArenaDeathsMaybe\n"
-"\t.4byte 0x0000000E\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x00000000\n"
-"\t.4byte 0x3B043AF0\n"
-"\t.4byte 0x3B003B06\n"
-"\t.4byte 0x3AF03B02\n"
-"\t.4byte 0x3AF83AF0\n"
-"\t.4byte 0x3AFC3B0C\n"
-"\t.4byte 0x3AF83AF2\n"
-"\t.4byte 0x3AFA3AF2\n"
-"\t.4byte 0x3AF43B08\n"
-"\t.4byte 0x3AFA3B0E\n"
-"\t.4byte 0x3AFE3AF4\n"
-"\t.4byte 0x3AFC3AF6\n"
-"\t.4byte 0x3AFE3B0A\n"
-"\t.4byte 0x00003AF6\n"
-);
+u32 frontier_df4_uistuff_029_5C4A94[] __attribute__((section(".data.frontier_df4_uistuff.gap29"))) = {
+    (u32)&gMenuStr_14C,
+    0x065D0623,
+    0x00003400,
+    (u32)&ItemSubMenu_IsUseAvailable,
+    0x00000000,
+    (u32)&ItemSubMenu_UseItem,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_144,
+    0x065C0624,
+    0x00003504,
+    (u32)&ItemSubMenu_IsEquipAvailable,
+    0x00000000,
+    (u32)&ItemSubMenu_EquipItem,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_13C,
+    0x06560625,
+    0x00003604,
+    (u32)&ItemSubMenu_IsTradeAvailable,
+    0x00000000,
+    (u32)&ItemSubMenu_TradeItem,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_134,
+    0x065E0626,
+    0x00003704,
+    (u32)&ItemSubMenu_IsDiscardAvailable,
+    0x00000000,
+    (u32)&ItemSubMenu_DiscardItem,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00003800,
+    (u32)&ItemMenu_Is1stCommandAvailable,
+    (u32)&ItemMenu_Draw1stCommand,
+    (u32)&ItemMenu_Select1stCommand,
+    0x00000000,
+    (u32)&ItemMenu_SwitchIn,
+    (u32)&ItemMenu_SwitchOut_DoNothing,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00003900,
+    (u32)&ItemMenu_AreOtherCommandsAvailable,
+    (u32)&ItemMenu_DrawOtherCommands,
+    (u32)&ItemMenu_SelectOtherCommands,
+    0x00000000,
+    (u32)&ItemMenu_SwitchIn,
+    (u32)&ItemMenu_SwitchOut_DoNothing,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00003A00,
+    (u32)&ItemMenu_AreOtherCommandsAvailable,
+    (u32)&ItemMenu_DrawOtherCommands,
+    (u32)&ItemMenu_SelectOtherCommands,
+    0x00000000,
+    (u32)&ItemMenu_SwitchIn,
+    (u32)&ItemMenu_SwitchOut_DoNothing,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00003B00,
+    (u32)&ItemMenu_AreOtherCommandsAvailable,
+    (u32)&ItemMenu_DrawOtherCommands,
+    (u32)&ItemMenu_SelectOtherCommands,
+    0x00000000,
+    (u32)&ItemMenu_SwitchIn,
+    (u32)&ItemMenu_SwitchOut_DoNothing,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00003C00,
+    (u32)&ItemMenu_AreOtherCommandsAvailable,
+    (u32)&ItemMenu_DrawOtherCommands,
+    (u32)&ItemMenu_SelectOtherCommands,
+    0x00000000,
+    (u32)&ItemMenu_SwitchIn,
+    (u32)&ItemMenu_SwitchOut_DoNothing,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00003D00,
+    (u32)&ItemMenu_AreOtherCommandsAvailable,
+    (u32)&ItemMenu_DrawOtherCommands,
+    (u32)&ItemMenu_SelectOtherCommands,
+    0x00000000,
+    (u32)&ItemMenu_SwitchIn,
+    (u32)&ItemMenu_SwitchOut_DoNothing,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00003E00,
+    (u32)&StaffItemSelect_Usability,
+    (u32)&StaffItemSelect_TextDraw,
+    (u32)&StaffItemSelect_Effect,
+    0x00000000,
+    (u32)&StaffItemSelect_OnHover,
+    (u32)&StaffItemSelect_SwitchOut,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00003F00,
+    (u32)&StaffItemSelect_Usability,
+    (u32)&StaffItemSelect_TextDraw,
+    (u32)&StaffItemSelect_Effect,
+    0x00000000,
+    (u32)&StaffItemSelect_OnHover,
+    (u32)&StaffItemSelect_SwitchOut,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004000,
+    (u32)&StaffItemSelect_Usability,
+    (u32)&StaffItemSelect_TextDraw,
+    (u32)&StaffItemSelect_Effect,
+    0x00000000,
+    (u32)&StaffItemSelect_OnHover,
+    (u32)&StaffItemSelect_SwitchOut,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004100,
+    (u32)&StaffItemSelect_Usability,
+    (u32)&StaffItemSelect_TextDraw,
+    (u32)&StaffItemSelect_Effect,
+    0x00000000,
+    (u32)&StaffItemSelect_OnHover,
+    (u32)&StaffItemSelect_SwitchOut,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004200,
+    (u32)&StaffItemSelect_Usability,
+    (u32)&StaffItemSelect_TextDraw,
+    (u32)&StaffItemSelect_Effect,
+    0x00000000,
+    (u32)&StaffItemSelect_OnHover,
+    (u32)&StaffItemSelect_SwitchOut,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004300,
+    (u32)&ItemSelectMenu_Usability,
+    (u32)&ItemSelectMenu_TextDraw,
+    (u32)&ItemSelectMenu_Effect,
+    0x00000000,
+    (u32)&Menu_SwitchIn,
+    (u32)&Menu_SwitchOut_DoNothing,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004400,
+    (u32)&ItemSelectMenu_Usability,
+    (u32)&ItemSelectMenu_TextDraw,
+    (u32)&ItemSelectMenu_Effect,
+    0x00000000,
+    (u32)&Menu_SwitchIn,
+    (u32)&Menu_SwitchOut_DoNothing,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004500,
+    (u32)&ItemSelectMenu_Usability,
+    (u32)&ItemSelectMenu_TextDraw,
+    (u32)&ItemSelectMenu_Effect,
+    0x00000000,
+    (u32)&Menu_SwitchIn,
+    (u32)&Menu_SwitchOut_DoNothing,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004600,
+    (u32)&ItemSelectMenu_Usability,
+    (u32)&ItemSelectMenu_TextDraw,
+    (u32)&ItemSelectMenu_Effect,
+    0x00000000,
+    (u32)&Menu_SwitchIn,
+    (u32)&Menu_SwitchOut_DoNothing,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004700,
+    (u32)&ItemSelectMenu_Usability,
+    (u32)&ItemSelectMenu_TextDraw,
+    (u32)&ItemSelectMenu_Effect,
+    0x00000000,
+    (u32)&Menu_SwitchIn,
+    (u32)&Menu_SwitchOut_DoNothing,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004800,
+    (u32)&BallistaRangeMenu_BallistaUsability,
+    (u32)&BallistaRangeMenu_Draw,
+    (u32)&BallistaRangeMenu_Select,
+    0x00000000,
+    (u32)&FillBallistaRange,
+    (u32)&BallistaRangeMenu_SwitchOut,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004900,
+    (u32)&WeaponSelectMenu_IsAvailable,
+    (u32)&WeaponSelectMenu_Draw,
+    (u32)&WeaponSelectMenu_Selected,
+    0x00000000,
+    (u32)&WeaponSelectMenu_SwitchIn,
+    (u32)&BallistaRangeMenu_SwitchOut,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004A00,
+    (u32)&WeaponSelectMenu_IsAvailable,
+    (u32)&WeaponSelectMenu_Draw,
+    (u32)&WeaponSelectMenu_Selected,
+    0x00000000,
+    (u32)&WeaponSelectMenu_SwitchIn,
+    (u32)&BallistaRangeMenu_SwitchOut,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004B00,
+    (u32)&WeaponSelectMenu_IsAvailable,
+    (u32)&WeaponSelectMenu_Draw,
+    (u32)&WeaponSelectMenu_Selected,
+    0x00000000,
+    (u32)&WeaponSelectMenu_SwitchIn,
+    (u32)&BallistaRangeMenu_SwitchOut,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004C00,
+    (u32)&WeaponSelectMenu_IsAvailable,
+    (u32)&WeaponSelectMenu_Draw,
+    (u32)&WeaponSelectMenu_Selected,
+    0x00000000,
+    (u32)&WeaponSelectMenu_SwitchIn,
+    (u32)&BallistaRangeMenu_SwitchOut,
+    (u32)&gMenuStr_060 + 0x18,
+    0x00000000,
+    0x00004D00,
+    (u32)&WeaponSelectMenu_IsAvailable,
+    (u32)&WeaponSelectMenu_Draw,
+    (u32)&WeaponSelectMenu_Selected,
+    0x00000000,
+    (u32)&WeaponSelectMenu_SwitchIn,
+    (u32)&BallistaRangeMenu_SwitchOut,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_030_5C534C[] __attribute__((section(".data.frontier_df4_uistuff.gap30"))) = {
+    (u32)&gMenuStr_29C,
+    0x06620627,
+    0x00006E00,
+    (u32)&MenuAlwaysEnabled,
+    0x00000000,
+    (u32)&MapMenu_UnitCommand,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_294,
+    0x06630621,
+    0x00006F00,
+    (u32)&MenuAlwaysEnabled,
+    0x00000000,
+    (u32)&MapMenu_StatusCommand,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_28C,
+    0x06680629,
+    0x00007404,
+    (u32)&MapMenu_IsGuideCommandAvailable,
+    (u32)&MapMenu_GuideCommandDraw,
+    (u32)&MapMenu_GuideCommand,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_284,
+    0x0666062B,
+    0x00007000,
+    (u32)&MapMenu_IsRecordsCommandAvailable,
+    0x00000000,
+    (u32)&MapMenu_RecordsCommand,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_27C,
+    0x06640628,
+    0x00007100,
+    (u32)&MenuAlwaysEnabled,
+    0x00000000,
+    (u32)&MapMenu_OptionsCommand,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_274,
+    0x0665062A,
+    0x00007200,
+    (u32)&MapMenu_IsRetreatCommandAvailable,
+    0x00000000,
+    (u32)&MapMenu_RetreatCommand,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_26C,
+    0x0667062C,
+    0x00007300,
+    (u32)&MapMenu_IsSuspendCommandAvailable,
+    0x00000000,
+    (u32)&MapMenu_SuspendCommand,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&gMenuStr_264,
+    0x0669062D,
+    0x00007800,
+    (u32)&MenuAlwaysEnabled,
+    0x00000000,
+    (u32)&CommandEffectEndPlayerPhase,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x000D0601,
+    0x00000000,
+    (u32)&gDebugClearMenuItems,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&EndMenuAndClear,
+    0x00000000,
+    0x00000000,
+    0x000A0101,
+    0x00000000,
+    (u32)&gDebugChuudanMenuItems,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&EndMenuAndClear,
+    0x00000000,
+    0x00000000,
+    0x000C0409,
+    0x00000000,
+    (u32)&gDebugContinueMenuItems,
+    (u32)&DebugContinueMenuInit,
+    (u32)&DebugContinueMenuEnd,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00080101,
+    0x00000000,
+    (u32)&data_085C4518,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&EndMenuAndClear,
+    0x00000000,
+    0x00000000,
+    0x000E0101,
+    0x00000000,
+    (u32)&data_085C4518 + 0x48,
+    (u32)&DebugMenuInit,
+    0x00000000,
+    0x00000000,
+    (u32)&EndMenuAndClear,
+    0x00000000,
+    0x00000000,
+};
+u32 data_085C5544[] __attribute__((section(".data.frontier_df4_uistuff.gap30"))) = {
+    0x00100100,
+    0x00000000,
+    (u32)&gItemUseMenuItems,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&ItemMenu_ButtonBPressed,
+    (u32)&sub_8050294,
+    (u32)&ItemMenu_HelpBox,
+    0x000E040E,
+    0x00000000,
+    (u32)&gStealItemMenuItems,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&ItemMenu_ButtonBPressed,
+    (u32)&sub_8050294,
+    (u32)&ItemMenu_HelpBox,
+    0x000E0101,
+    0x00000000,
+    (u32)&data_085C4830,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&sub_8050294,
+    (u32)&ConvoyMenu_HelpBox,
+    0x000E0101,
+    0x00000000,
+    (u32)&data_085C4830 + 0xfc,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&sub_8050294,
+    (u32)&ConvoyMenu_HelpBox,
+    0x00050000,
+    0x00000001,
+    (u32)&gYesNoSelectionMenuItems,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&MenuCommand_SelectNo,
+    0x00000000,
+    0x00000000,
+    0x00050000,
+    0x00000001,
+    (u32)&frontier_df4_uistuff_029_5C4A94,
+    0x00000000,
+    (u32)&ItemSubMenuEnd,
+    0x00000000,
+    (u32)&MenuCommand_SelectNo,
+    (u32)&sub_8050294,
+    (u32)&MenuStdHelpBox,
+    0x000E0101,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_029_5C4A94 + 0xb4,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&ItemMenu_ButtonBPressed,
+    (u32)&sub_8050294,
+    (u32)&ItemMenuHelpBox,
+    0x000E0101,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_029_5C4A94 + 0x1b0,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&ItemMenu_ButtonBPressed,
+    (u32)&sub_8050294,
+    (u32)&ConvoyMenu_HelpBox,
+    0x000E0101,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_029_5C4A94 + 0x288,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&ItemMenu_ButtonBPressed,
+    (u32)&sub_8050294,
+    (u32)&ConvoyMenu_HelpBox,
+    0x000E0101,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_029_5C4A94 + 0x360,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&ItemMenu_ButtonBPressed,
+    (u32)&sub_8050294,
+    (u32)&BallistaRangeMenuHelpBox,
+    0x000E0101,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_029_5C4A94 + 0x3a8,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&ItemMenu_ButtonBPressed,
+    (u32)&sub_8050294,
+    (u32)&ConvoyMenu_HelpBox,
+    0x00070301,
+    0x00000000,
+    (u32)&gUnitActionMenuItems,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&MenuCancelSelect,
+    (u32)&sub_8050294,
+    (u32)&MenuStdHelpBox,
+    0x00060201,
+    0x00000000,
+    (u32)&frontier_df4_uistuff_030_5C534C,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&MenuCancelSelect,
+    (u32)&sub_8050294,
+    (u32)&MenuStdHelpBox,
+    (u32)&AttackStaffMapSelect_Init,
+    (u32)&ClearBg0Bg1,
+    0x00000000,
+    (u32)&AttackStaffMapSelect_SwitchIn,
+    0x00000000,
+    (u32)&StaffSelectOnSelect,
+    (u32)&GenericSelection_BackToUM_CamWait,
+    0x00000000,
+    (u32)&sub_8029BFC,
+    (u32)&ClearBg0Bg1,
+    0x00000000,
+    (u32)&BarrierMapSelect_SwitchIn,
+    0x00000000,
+    (u32)&StaffSelectOnSelect,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&RestoreMapSelect_Init,
+    (u32)&ClearBg0Bg1,
+    0x00000000,
+    (u32)&RestoreMapSelect_SwitchIn,
+    0x00000000,
+    (u32)&StaffSelectOnSelect,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&HealMapSelect_Init,
+    (u32)&ClearBg0Bg1,
+    0x00000000,
+    (u32)&WarpUnitMapSelect_SwitchIn,
+    0x00000000,
+    (u32)&StaffSelectOnSelect,
+    (u32)&GenericSelection_BackToUM_CamWait,
+    0x00000000,
+    (u32)&RefreshMapSelect_Init,
+    (u32)&ClearBg0Bg1,
+    0x00000000,
+    (u32)&RefreshMapSelect_SwitchIn,
+    0x00000000,
+    (u32)&RefreshMapSelect_Select,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    0x00000000,
+    (u32)&SubtitleMapSelect_End,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&WarpUnitMapSelect_Init,
+    (u32)&SubtitleMapSelect_End,
+    0x00000000,
+    (u32)&HealMapSelect_SwitchIn,
+    0x00000000,
+    0x00000000,
+    (u32)&GenericSelection_BackToUM_CamWait,
+    0x00000000,
+    (u32)&sub_80241D4,
+    (u32)&ClearBg0Bg1,
+    0x00000000,
+    (u32)&StealMapSelect_SwitchIn,
+    0x00000000,
+    (u32)&StealMapSelect_Select,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&SummonSelection_OnInit,
+    (u32)&ClearBg0Bg1,
+    0x00000000,
+    (u32)&SummonSelection_OnChange,
+    0x00000000,
+    (u32)&SummonSelection_OnSelect,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&PickSelection_OnInit,
+    (u32)&ClearBg0Bg1,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&PickSelection_OnSelect,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&TalkSupportSelection_OnInit,
+    (u32)&ClearBg0Bg1,
+    0x00000000,
+    (u32)&TalkSupportSelection_OnChange,
+    0x00000000,
+    (u32)&SupportSelection_OnSelect,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&TalkSupportSelection_OnInit,
+    (u32)&ClearBg0Bg1,
+    0x00000000,
+    (u32)&TalkSupportSelection_OnChange,
+    0x00000000,
+    (u32)&TalkSelection_OnSelect,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&sub_80299B8,
+    0x00000000,
+    0x00000000,
+    (u32)&RepairSelectOnChange,
+    0x00000000,
+    (u32)&RepairSelectOnSelect,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&TradeTargetSelection_OnInit,
+    (u32)&ClearBg0Bg1,
+    0x00000000,
+    (u32)&TradeSelection_OnChange,
+    0x00000000,
+    (u32)&TradeSelection_OnSelect,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&NewBattleForecast,
+    (u32)&AttackMapSelect_End,
+    0x00000000,
+    (u32)&AttackMapSelect_SwitchIn,
+    0x00000000,
+    (u32)&AttackMapSelect_Select,
+    (u32)&AttackMapSelect_Cancel,
+    (u32)&StartBattleForecastHelpBox,
+    (u32)&StealMapSelect_Init,
+    0x00000000,
+    0x00000000,
+    (u32)&GiveSelection_OnChange,
+    0x00000000,
+    (u32)&GiveSelection_OnSelect,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&TakeSelection_OnInit,
+    0x00000000,
+    0x00000000,
+    (u32)&TakeSelection_OnChange,
+    0x00000000,
+    (u32)&TakeSelection_OnSelect,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&DropSelection_OnConstruction,
+    (u32)&ClearBg0Bg1,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    (u32)&DropSelection_OnSelect,
+    (u32)&GenericSelection_BackToUM,
+    0x00000000,
+    (u32)&RescueSelection_OnConstruction,
+    0x00000000,
+    0x00000000,
+    (u32)&RescueSelection_OnChange,
+    0x00000000,
+    (u32)&RescueSelection_OnSelect,
+    (u32)&GenericSelection_BackToUM,
+    (u32)&RescueSelection_OnHelp,
+};
+u32 frontier_df4_uistuff_031_5C5DE8[] __attribute__((section(".data.frontier_df4_uistuff.gap31"))) = {
+    0x00000001,
+    (u32)&gMenuStr_29C + 0x8,
+    0x00000017,
+    0x00000000,
+    0x0001000F,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x0000000B,
+    0x00000000,
+    0x00000002,
+    (u32)&PutUnitSpritesOam,
+    0x00000002,
+    (u32)&WfxUpdate,
+    0x00000002,
+    (u32)&UpdateBmMapDisplay,
+    0x0000000E,
+    0x00000000,
+    0x0000000C,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_031_obj_5C5E38[] __attribute__((section(".data.frontier_df4_uistuff.gap31"))) = {
+    0x00000001,
+    0x102A0000,
+};
+u32 frontier_df4_uistuff_031_obj_5C5E40[] __attribute__((section(".data.frontier_df4_uistuff.gap31"))) = {
+    0x80000001,
+    0x100A0000,
+    (u32)&frontier_df4_uistuff_031_obj_5C5E38,
+    (u32)&frontier_df4_uistuff_031_obj_5C5E40,
+    (u32)&frontier_df4_uistuff_031_obj_5C5E40,
+    0x40000012,
+    0x0000C000,
+    0xC0304000,
+    0x40000006,
+    0x0000C070,
+    0xC0A04000,
+    0x80000006,
+    0x000080E0,
+    0x80000020,
+    0x4020000A,
+    0x0000C020,
+    0xC0504020,
+    0x40200006,
+    0x0000C090,
+    0xC0C04020,
+    0x40400006,
+    0x0000C000,
+    0xC0B04040,
+    0x40600000,
+    0x0004C000,
+    0xC0B04060,
+    0x40800004,
+    0x0000C000,
+    0xC0B04080,
+    0x40A00000,
+    0x0000C000,
+    0xC0B040A0,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&BMapDispResume,
+    0x00000000,
+    0x00000000,
+    0x1513110F,
+    0x0B09403F,
+    0x2D27252B,
+    0x4C07052F,
+    0x211F4948,
+    0x4342414E,
+    0x093F130F,
+    0x48052D25,
+    0x4E42411F,
+    0x110F004E,
+    0x403F1513,
+    0x1B190B09,
+    0x2D27252B,
+    0x4C07052F,
+    0x211F4948,
+    0x4342414E,
+    0x3F130F0D,
+    0x2D251909,
+    0x4E1F4805,
+    0x1B19004E,
+    0x2D27252B,
+    0x0F004C2F,
+    0x403F1513,
+    0x2D27252B,
+    0x484C052F,
+    0x42414E1F,
+    0x3F3F0D43,
+    0x0000000D,
+};
+u32 frontier_df4_uistuff_031b_5C5F74[] __attribute__((section(".data.frontier_df4_uistuff.gap31b"))) = {
+    0x00000003,
+    (u32)&DeathDropSpriteAnim_Loop,
+    0x00000002,
+    (u32)&DeathDropSpriteAnim_ExecAnyTrap,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&DeathDropSpriteAnim_End,
+    0x00000000,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_031c_5C6004[] __attribute__((section(".data.frontier_df4_uistuff.gap31c"))) = {
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&Arena_KeepTargetAlive,
+    0x00000002,
+    (u32)&BATTLE_PostCombatDeathFades,
+    0x0020000E,
+    0x00000000,
+    0x00000002,
+    (u32)&BATTLE_DeleteLinkedMOVEUNIT,
+    0x0001000B,
+    0x00000000,
+    0x00000002,
+    (u32)&BATTLE_HandleArenaDeathsMaybe,
+    0x0000000E,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x3B043AF0,
+    0x3B003B06,
+    0x3AF03B02,
+    0x3AF83AF0,
+    0x3AFC3B0C,
+    0x3AF83AF2,
+    0x3AFA3AF2,
+    0x3AF43B08,
+    0x3AFA3B0E,
+    0x3AFE3AF4,
+    0x3AFC3AF6,
+    0x3AFE3B0A,
+    0x00003AF6,
+};
 struct ProcCmd frontier_df4_uistuff_032_5C6084[] SECTION(".data.frontier_df4_uistuff.gap32") = {
     PROC_CALL(PrepHelpPrompt_Init),
     PROC_REPEAT(PrepHelpPrompt_Loop),
@@ -11267,374 +12005,356 @@ struct ProcCmd ProcScr_UnitInfoWindow_OnLoop_5C6084_1[] SECTION(".data.frontier_
     PROC_END,
 };
 
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap32, \"aw\", %progbits\n"
-    "	.4byte 0x00040000\n"
-    "	.4byte 0x000C0008\n"
-    "	.4byte 0x00140010\n"
-    "	.4byte 0x00440018\n"
-    "	.4byte 0x004C0048\n"
-    "	.4byte 0x00540050\n"
-    "	.byte 0x58\n"
-    "	.byte 0x00\n"
-);
+u8 frontier_df4_uistuff_gap32[] __attribute__((section(".data.frontier_df4_uistuff.gap32"))) = {
+    0x00, 0x00, 0x04, 0x00, 0x08, 0x00, 0x0C, 0x00, 0x10, 0x00, 0x14, 0x00,
+    0x18, 0x00, 0x44, 0x00, 0x48, 0x00, 0x4C, 0x00, 0x50, 0x00, 0x54, 0x00,
+    0x58, 0x00,
+};
 
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap33, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_033_5C6AD4\n"
-    "frontier_df4_uistuff_033_5C6AD4:\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000014\n"
-    ".4byte MuExistsActive\n"
-    ".4byte 0x00000002\n"
-    ".4byte RegisterTrapDeathBWL\n"
-    ".4byte 0x00000002\n"
-    ".4byte ExecFireTileTrapAnim1\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ApplyTrapDamageAnim\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ApplyTrapDamageReal\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000014\n"
-    ".4byte MuExistsActive\n"
-    ".4byte 0x00000002\n"
-    ".4byte RegisterTrapDeathBWL\n"
-    ".4byte 0x00000002\n"
-    ".4byte ExecFireTileTrapAnim2\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ApplyTrapDamageAnim\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte ApplyTrapDamageReal\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte PushGlobalTimer\n"
-    ".4byte 0x00000002\n"
-    ".4byte LockGame\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartFastFadeToBlack\n"
-    ".4byte 0x00000003\n"
-    ".4byte WaitForFade\n"
-    ".4byte 0x00000002\n"
-    ".4byte BMapDispSuspend\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SetupDungeonRecordUi\n"
-    ".4byte 0x00100018\n"
-    ".4byte NewFadeIn\n"
-    ".4byte 0x00000014\n"
-    ".4byte FadeInExists\n"
-    ".4byte 0x00000003\n"
-    ".4byte DungeonRecordUi_KeyListenerUpdatesTime\n"
-    ".4byte 0x00100018\n"
-    ".4byte NewFadeOut\n"
-    ".4byte 0x00000014\n"
-    ".4byte FadeOutExists\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndDungeonRecordUi\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte BMapDispResume\n"
-    ".4byte 0x00000002\n"
-    ".4byte RefreshBMapGraphics\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartFastFadeFromBlack\n"
-    ".4byte 0x00000003\n"
-    ".4byte WaitForFade\n"
-    ".4byte 0x00000002\n"
-    ".4byte UnlockGame\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap33, \"aw\", %progbits\n"
-    ".global data_085C6C14\n"
-    "data_085C6C14:\n"
-    ".4byte 0x00000002\n"
-    ".4byte PushGlobalTimer\n"
-    ".4byte 0x00000002\n"
-    ".4byte LockGame\n"
-    ".4byte 0x00000002\n"
-    ".4byte StartMidFadeToBlack\n"
-    ".4byte 0x00000003\n"
-    ".4byte WaitForFade\n"
-    ".4byte 0x00000002\n"
-    ".4byte BMapDispSuspend\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndAllMus\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte DungeonRecordUi_StartBgm\n"
-    ".4byte 0x00000002\n"
-    ".4byte SetupDungeonRecordUi\n"
-    ".4byte 0x00040018\n"
-    ".4byte NewFadeIn\n"
-    ".4byte 0x00000014\n"
-    ".4byte FadeInExists\n"
-    ".4byte 0x001e000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00010006\n"
-    ".4byte sProcScr_DungeonRecord_UpdateNewRecordValues\n"
-    ".4byte 0x00000003\n"
-    ".4byte DungeonRecordUi_KeyListener\n"
-    ".4byte 0x00080018\n"
-    ".4byte NewFadeOut\n"
-    ".4byte 0x00000014\n"
-    ".4byte FadeOutExists\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndDungeonRecordUi\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte BMapDispResume\n"
-    ".4byte 0x00000002\n"
-    ".4byte UnlockGame\n"
-    ".4byte 0x00000002\n"
-    ".4byte PopGlobalTimer\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x40000002\n"
-    ".4byte 0x01008000\n"
-    ".4byte 0x80204000\n"
-    ".4byte 0x00000104\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x08001000\n"
-    ".4byte 0x00001000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x02140000\n"
-    ".4byte 0x0c000400\n"
-    ".4byte 0x10000deb\n"
-    ".4byte 0xffffffc8\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0xffffffba\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0xffffffb6\n"
-    ".4byte 0x00000006\n"
-    ".4byte 0x00000026\n"
-    ".4byte 0xfffffff2\n"
-    ".4byte 0x0000002a\n"
-    ".4byte 0xfffffffa\n"
-    ".4byte 0x00000018\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte DungeonRecordUi_UpdateValueAnim_Init\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte DungeonRecordUi_UpdateValueAnim_Loop\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00070000\n"
-    ".4byte 0x0016000f\n"
-    ".4byte 0x0000001e\n"
-    ".4byte 0x00000980\n"
-    ".4byte 0x00000380\n"
-    ".4byte 0x000008d0\n"
-    ".4byte 0x00000430\n"
-    ".4byte 0x00000960\n"
-    ".4byte 0x00000320\n"
-    ".4byte 0x00000a30\n"
-    ".4byte 0x000002d0\n"
-    ".4byte 0x00000980\n"
-    ".4byte 0x00000380\n"
-);
+u32 frontier_df4_uistuff_033_5C6AD4[] __attribute__((section(".data.frontier_df4_uistuff.gap33"))) = {
+    0x0001000E,
+    0x00000000,
+    0x00000014,
+    (u32)&MuExistsActive,
+    0x00000002,
+    (u32)&RegisterTrapDeathBWL,
+    0x00000002,
+    (u32)&ExecFireTileTrapAnim1,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ApplyTrapDamageAnim,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ApplyTrapDamageReal,
+    0x0000000E,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x0001000E,
+    0x00000000,
+    0x00000014,
+    (u32)&MuExistsActive,
+    0x00000002,
+    (u32)&RegisterTrapDeathBWL,
+    0x00000002,
+    (u32)&ExecFireTileTrapAnim2,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ApplyTrapDamageAnim,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&ApplyTrapDamageReal,
+    0x0000000E,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000002,
+    (u32)&PushGlobalTimer,
+    0x00000002,
+    (u32)&LockGame,
+    0x00000002,
+    (u32)&StartFastFadeToBlack,
+    0x00000003,
+    (u32)&WaitForFade,
+    0x00000002,
+    (u32)&BMapDispSuspend,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&SetupDungeonRecordUi,
+    0x00100018,
+    (u32)&NewFadeIn,
+    0x00000014,
+    (u32)&FadeInExists,
+    0x00000003,
+    (u32)&DungeonRecordUi_KeyListenerUpdatesTime,
+    0x00100018,
+    (u32)&NewFadeOut,
+    0x00000014,
+    (u32)&FadeOutExists,
+    0x00000002,
+    (u32)&EndDungeonRecordUi,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&BMapDispResume,
+    0x00000002,
+    (u32)&RefreshBMapGraphics,
+    0x00000002,
+    (u32)&StartFastFadeFromBlack,
+    0x00000003,
+    (u32)&WaitForFade,
+    0x00000002,
+    (u32)&UnlockGame,
+    0x00000000,
+    0x00000000,
+};
+u32 data_085C6C14[] __attribute__((section(".data.frontier_df4_uistuff.gap33"))) = {
+    0x00000002,
+    (u32)&PushGlobalTimer,
+    0x00000002,
+    (u32)&LockGame,
+    0x00000002,
+    (u32)&StartMidFadeToBlack,
+    0x00000003,
+    (u32)&WaitForFade,
+    0x00000002,
+    (u32)&BMapDispSuspend,
+    0x00000002,
+    (u32)&EndAllMus,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&DungeonRecordUi_StartBgm,
+    0x00000002,
+    (u32)&SetupDungeonRecordUi,
+    0x00040018,
+    (u32)&NewFadeIn,
+    0x00000014,
+    (u32)&FadeInExists,
+    0x001E000E,
+    0x00000000,
+    0x00010006,
+    (u32)&sProcScr_DungeonRecord_UpdateNewRecordValues,
+    0x00000003,
+    (u32)&DungeonRecordUi_KeyListener,
+    0x00080018,
+    (u32)&NewFadeOut,
+    0x00000014,
+    (u32)&FadeOutExists,
+    0x00000002,
+    (u32)&EndDungeonRecordUi,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&BMapDispResume,
+    0x00000002,
+    (u32)&UnlockGame,
+    0x00000002,
+    (u32)&PopGlobalTimer,
+    0x00000000,
+    0x00000000,
+    0x40000002,
+    0x01008000,
+    0x80204000,
+    0x00000104,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x08001000,
+    0x00001000,
+    0x00000000,
+    0x02140000,
+    0x0C000400,
+    0x10000DEB,
+    0xFFFFFFC8,
+    0x00000000,
+    0xFFFFFFBA,
+    0x0000000E,
+    0xFFFFFFB6,
+    0x00000006,
+    0x00000026,
+    0xFFFFFFF2,
+    0x0000002A,
+    0xFFFFFFFA,
+    0x00000018,
+    0x00000000,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&DungeonRecordUi_UpdateValueAnim_Init,
+    0x0000000B,
+    0x00000000,
+    0x00000003,
+    (u32)&DungeonRecordUi_UpdateValueAnim_Loop,
+    0x00000000,
+    0x00000000,
+    0x00070000,
+    0x0016000F,
+    0x0000001E,
+    0x00000980,
+    0x00000380,
+    0x000008D0,
+    0x00000430,
+    0x00000960,
+    0x00000320,
+    0x00000A30,
+    0x000002D0,
+    0x00000980,
+    0x00000380,
+};
 u8 frontier_df4_uistuff_034_5C6E08[] __attribute__((section(".data.frontier_df4_uistuff.gap34"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_034_5C6E08.bin.lz");
 u8 frontier_df4_uistuff_035_5CDF84[] __attribute__((section(".data.frontier_df4_uistuff.gap35"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_035_5CDF84.bin");
 u8 frontier_df4_uistuff_036_5D14D4[] __attribute__((section(".data.frontier_df4_uistuff.gap36"))) = INCBIN_U8("graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.bin");
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap38, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_038_5D32D8\n"
-    "frontier_df4_uistuff_038_5D32D8:\n"
-    ".4byte 0x00200020\n"
-    ".4byte 0x00100010\n"
-    ".4byte 0x02000200\n"
-    ".4byte 0xffff0008\n"
-    ".4byte 0x00200020\n"
-    ".4byte 0x00100010\n"
-    ".4byte 0x02000200\n"
-    ".4byte 0xffff0008\n"
-    ".4byte 0x00200020\n"
-    ".4byte 0x00100010\n"
-    ".4byte 0x02000200\n"
-    ".4byte 0xffff0008\n"
-    ".4byte 0x06c70001\n"
-    ".4byte 0x00000001\n"
-    ".4byte 0x00000052\n"
-    ".4byte CanBuildNewLinkArenaTeam\n"
-    ".4byte 0x06c80003\n"
-    ".4byte 0x00000100\n"
-    ".4byte 0x00000054\n"
-    ".4byte AnyLinkArenaTeamExists\n"
-    ".4byte 0x06c90004\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000055\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x06ca0006\n"
-    ".4byte 0x00000100\n"
-    ".4byte 0x00000056\n"
-    ".4byte AnyLinkArenaTeamExists\n"
-    ".4byte 0x06cb0007\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000057\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x06cc0002\n"
-    ".4byte 0x00000100\n"
-    ".4byte 0x00000053\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x06c80003\n"
-    ".4byte 0x00000100\n"
-    ".4byte 0x00000054\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x06cb0007\n"
-    ".4byte 0x00000100\n"
-    ".4byte 0x00000057\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000100\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte gSioTeamListConfig_1\n"
-    ".4byte gSioTeamListConfig_2\n"
-    ".4byte gSioTeamListConfig_2\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0000000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioTeamList_Init\n"
-    ".4byte 0x0001000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioTeamList_SetupGfx\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeInBlackSpeed20\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Clear_UnkData_0\n"
-    ".4byte 0x0002000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioTeamList_Loop_MainKeyHandler\n"
-    ".4byte 0x0003000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioTeamList_0\n"
-    ".4byte 0x0009000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0004000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Set_UnkData_0\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeOutBlackSpeed20Locking\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioTeamList_StartUnitList\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioTeamList_WaitForUnitListScreen\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioTeamList_SetupGfx\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeInBlackSpeed20\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Clear_UnkData_0\n"
-    ".4byte 0x0002000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0005000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioTeamList_1\n"
-    ".4byte 0x0006000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioTeamList_2\n"
-    ".4byte 0x0007000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioTeamList_StartEraseTeamSubMenu\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioTeamList_EraseTeam_KeyHandler\n"
-    ".4byte 0x0003000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0008000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte Set_UnkData_0\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeOutBlackSpeed20Locking\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioTeamList_LoadTeam_Dummy\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0001000c\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x0009000b\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte EndMuralBackground\n"
-    ".4byte 0x00000002\n"
-    ".4byte Set_UnkData_0\n"
-    ".4byte 0x00000002\n"
-    ".4byte FadeOutBlackSpeed20Locking\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
-__asm__(
-    ".section .data.frontier_df4_uistuff.gap38b, \"aw\", %progbits\n"
-    ".global frontier_df4_uistuff_038b_5D35DC\n"
-    "frontier_df4_uistuff_038b_5D35DC:\n"
-    ".4byte gSioMain2_1 + 0xd\n"
-    ".4byte gSioMain2_1 + 0x15\n"
-    ".4byte gSioMain2_1 + 0x1d\n"
-    ".4byte gSioMain2_1 + 0x25\n"
-    ".4byte gSioMain2_1 + 0x2d\n"
-    ".4byte gSioMain2_1 + 0x41\n"
-    ".4byte gSioMain2_1 + 0x61\n"
-    ".4byte gSioMain2_1 + 0x75\n"
-    ".4byte 0x0000000e\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000002\n"
-    ".4byte SioPostBattleSprites_Init\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioPostBattleSprites_Loop_DrawSlideIn\n"
-    ".4byte 0x00000003\n"
-    ".4byte SioPostBattleSprites_Loop_DrawStatic\n"
-    ".4byte 0x00000000\n"
-    ".4byte 0x00000000\n"
-);
+u32 frontier_df4_uistuff_038_5D32D8[] __attribute__((section(".data.frontier_df4_uistuff.gap38"))) = {
+    0x00200020,
+    0x00100010,
+    0x02000200,
+    0xFFFF0008,
+    0x00200020,
+    0x00100010,
+    0x02000200,
+    0xFFFF0008,
+    0x00200020,
+    0x00100010,
+    0x02000200,
+    0xFFFF0008,
+    0x06C70001,
+    0x00000001,
+    0x00000052,
+    (u32)&CanBuildNewLinkArenaTeam,
+    0x06C80003,
+    0x00000100,
+    0x00000054,
+    (u32)&AnyLinkArenaTeamExists,
+    0x06C90004,
+    0x00000000,
+    0x00000055,
+    0x00000000,
+    0x06CA0006,
+    0x00000100,
+    0x00000056,
+    (u32)&AnyLinkArenaTeamExists,
+    0x06CB0007,
+    0x00000000,
+    0x00000057,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+    0x06CC0002,
+    0x00000100,
+    0x00000053,
+    0x00000000,
+    0x06C80003,
+    0x00000100,
+    0x00000054,
+    0x00000000,
+    0x06CB0007,
+    0x00000100,
+    0x00000057,
+    0x00000000,
+    0x00000000,
+    0x00000100,
+    0x00000000,
+    0x00000000,
+    (u32)&gSioTeamListConfig_1,
+    (u32)&gSioTeamListConfig_2,
+    (u32)&gSioTeamListConfig_2,
+    0x0000000E,
+    0x00000000,
+    0x0000000B,
+    0x00000000,
+    0x00000002,
+    (u32)&SioTeamList_Init,
+    0x0001000B,
+    0x00000000,
+    0x00000002,
+    (u32)&SioTeamList_SetupGfx,
+    0x00000002,
+    (u32)&FadeInBlackSpeed20,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&Clear_UnkData_0,
+    0x0002000B,
+    0x00000000,
+    0x00000003,
+    (u32)&SioTeamList_Loop_MainKeyHandler,
+    0x0003000B,
+    0x00000000,
+    0x00000003,
+    (u32)&SioTeamList_0,
+    0x0009000C,
+    0x00000000,
+    0x0004000B,
+    0x00000000,
+    0x00000002,
+    (u32)&Set_UnkData_0,
+    0x00000002,
+    (u32)&FadeOutBlackSpeed20Locking,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&SioTeamList_StartUnitList,
+    0x00000003,
+    (u32)&SioTeamList_WaitForUnitListScreen,
+    0x00000002,
+    (u32)&SioTeamList_SetupGfx,
+    0x00000002,
+    (u32)&FadeInBlackSpeed20,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&Clear_UnkData_0,
+    0x0002000C,
+    0x00000000,
+    0x0005000B,
+    0x00000000,
+    0x00000003,
+    (u32)&SioTeamList_1,
+    0x0006000B,
+    0x00000000,
+    0x00000003,
+    (u32)&SioTeamList_2,
+    0x0007000B,
+    0x00000000,
+    0x00000002,
+    (u32)&SioTeamList_StartEraseTeamSubMenu,
+    0x00000003,
+    (u32)&SioTeamList_EraseTeam_KeyHandler,
+    0x0003000C,
+    0x00000000,
+    0x0008000B,
+    0x00000000,
+    0x00000002,
+    (u32)&Set_UnkData_0,
+    0x00000002,
+    (u32)&FadeOutBlackSpeed20Locking,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&SioTeamList_LoadTeam_Dummy,
+    0x0000000E,
+    0x00000000,
+    0x0001000C,
+    0x00000000,
+    0x0009000B,
+    0x00000000,
+    0x00000002,
+    (u32)&EndMuralBackground,
+    0x00000002,
+    (u32)&Set_UnkData_0,
+    0x00000002,
+    (u32)&FadeOutBlackSpeed20Locking,
+    0x0000000E,
+    0x00000000,
+    0x00000000,
+    0x00000000,
+};
+u32 frontier_df4_uistuff_038b_5D35DC[] __attribute__((section(".data.frontier_df4_uistuff.gap38b"))) = {
+    (u32)&gSioMain2_1 + 0xd,
+    (u32)&gSioMain2_1 + 0x15,
+    (u32)&gSioMain2_1 + 0x1d,
+    (u32)&gSioMain2_1 + 0x25,
+    (u32)&gSioMain2_1 + 0x2d,
+    (u32)&gSioMain2_1 + 0x41,
+    (u32)&gSioMain2_1 + 0x61,
+    (u32)&gSioMain2_1 + 0x75,
+    0x0000000E,
+    0x00000000,
+    0x00000002,
+    (u32)&SioPostBattleSprites_Init,
+    0x00000003,
+    (u32)&SioPostBattleSprites_Loop_DrawSlideIn,
+    0x00000003,
+    (u32)&SioPostBattleSprites_Loop_DrawStatic,
+    0x00000000,
+    0x00000000,
+};
