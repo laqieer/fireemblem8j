@@ -17,19 +17,26 @@ extern const u8 UnitDef_Event_Ch4Ally[];
 extern const u8 UnitDef_Ch4Ally_4[];
 extern const u8 UnitDef_Ch4SkirmishAlly2[];
 extern const u8 UnitDef_Ch4Ally_5[];
-extern const u8 data_08A5ABAC[];
+extern const u8 EventListScr_Ch4_Turn[];
+extern const u8 EventListScr_Ch4_Character[];
+extern const u8 EventListScr_Ch4_Location[];
+extern const u8 EventListScr_Ch4_Misc[];
+extern const u8 EventListScr_Ch4_SelectUnit[];
+extern const u8 EventListScr_Ch4_SelectDestination[];
+extern const u8 EventListScr_Ch4_UnitMove[];
+extern const u8 EventListScr_Ch4_Tutorial[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
 SECTION(".rodata.dat_Ch4Events_ref") static const u32 Ch4Events__shift[] = {
-    (u32)&data_08A5ABAC,
-    (u32)&data_08A5ABAC + 0x28,
-    (u32)&data_08A5ABAC + 0x2C,
-    (u32)&data_08A5ABAC + 0x60,
-    (u32)&data_08A5ABAC + 0x88,
-    (u32)&data_08A5ABAC + 0x8C,
-    (u32)&data_08A5ABAC + 0x90,
-    (u32)&data_08A5ABAC + 0x94,
+    (u32)&EventListScr_Ch4_Turn,
+    (u32)&EventListScr_Ch4_Character,
+    (u32)&EventListScr_Ch4_Location,
+    (u32)&EventListScr_Ch4_Misc,
+    (u32)&EventListScr_Ch4_SelectUnit,
+    (u32)&EventListScr_Ch4_SelectDestination,
+    (u32)&EventListScr_Ch4_UnitMove,
+    (u32)&EventListScr_Ch4_Tutorial,
     (u32)&gUidebug_2 + 0x317,
     (u32)&frontier_df4_menu_005_A5FFAD + 0x2B,
     (u32)&UnitDef_Event_Ch4Ally,
