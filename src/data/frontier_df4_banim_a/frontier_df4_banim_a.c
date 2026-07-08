@@ -1072,9 +1072,19 @@ extern const u8 Tsa_Stone_7[];
 extern const u8 Tsa_Stone_8[];
 extern const u8 Tsa_Stone_9[];
 extern const u8 data_080E0008[];
-extern const u8 data_085FC458[];
-extern const u8 data_085FD0E8[];
-extern const u8 data_085FD998[];
+extern const u8 AnimScr_EkrBaseKaiten1[];
+extern const u8 AnimScr_EkrBaseKaiten2[];
+extern const u8 AnimScr_EkrBaseKaiten3[];
+extern const u8 AnimScr_EkrBaseKaiten4[];
+extern const u8 AnimScr_EkrBaseKaiten5[];
+extern const u8 AnimScr_EkrBaseKaiten6[];
+extern const u8 AnimScr_EkrBaseKaiten7[];
+extern const u8 AnimScr_EkrBaseKaiten8[];
+extern const u8 AnimScr_EkrBaseKaiten9[];
+extern const u8 AnimScr_EkrBaseKaiten10[];
+extern const u8 AnimScr_EkrBaseKaiten11[];
+extern const u8 AnimScr_EkrBaseKaiten12[];
+extern const u8 AnimSprite_EkrBaseKaiten_48[];
 extern const u8 AnimSprite_EkrBaseKaiten_58[];
 extern const u8 AnimSprite_EkrBaseKaiten_70[];
 extern const u8 AnimSprite_EkrBaseKaiten_72[];
@@ -2094,14 +2104,14 @@ struct ProcCmd ProcScr_EkrBaseKaiten[] __attribute__((section(".data.frontier_df
 u32 frontier_df4_banim_a_res5[] __attribute__((section(".data.frontier_df4_banim_a.gap2"))) = {
     (u32)&Img_ConstDataDB034_1, 0x00000000, (u32)&Img_ConstDataDB034_1, 0x00000000, (u32)&Img_ConstDataDB034_0, 0x00000000,
     (u32)&Img_ConstDataDB034_1, 0x00000000, (u32)&Img_ConstDataDB034_2, (u32)&Img_ConstDataDB034_3, (u32)&Img_ConstDataDB034_3, (u32)&Img_ConstDataDB034_3,
-    (u32)&Img_ConstDataDB034_4, (u32)&Img_ConstDataDB034_3, (u32)&Img_ConstDataDB034_3, (u32)&Img_ConstDataDB034_3, (u32)&data_085FD0E8, 0x00000000,
-    (u32)&data_085FD0E8 + 0x20, 0x00000000, (u32)&data_085FC458, 0x00000000, (u32)&data_085FD0E8 + 0x44, 0x00000000,
-    (u32)&data_085FD998 + 0x24, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x48, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x48, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x48, (u32)&frontier_df4_banim_a_009_5FF000 + 0x24, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x6C,
-    (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x6C, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x6C, (u32)&data_085FD998, (u32)&frontier_df4_banim_a_008_5FE7D8, (u32)&frontier_df4_banim_a_008_5FE7D8, (u32)&frontier_df4_banim_a_008_5FE7D8,
-    (u32)&frontier_df4_banim_a_009_5FF000, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x24, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x24, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x24, (u32)&data_085FD0E8 + 0x68, 0x00000000,
-    (u32)&data_085FD0E8 + 0x88, 0x00000000, (u32)&data_085FC458 + 0x24, 0x00000000, (u32)&data_085FD0E8 + 0xAC, 0x00000000,
-    (u32)&data_085FD998 + 0x6C, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xD8, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xD8, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xD8, (u32)&frontier_df4_banim_a_009_5FF000 + 0x6C, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xFC,
-    (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xFC, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xFC, (u32)&data_085FD998 + 0x48, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x90, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x90, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x90,
+    (u32)&Img_ConstDataDB034_4, (u32)&Img_ConstDataDB034_3, (u32)&Img_ConstDataDB034_3, (u32)&Img_ConstDataDB034_3, (u32)&AnimScr_EkrBaseKaiten3, 0x00000000,
+    (u32)&AnimScr_EkrBaseKaiten4, 0x00000000, (u32)&AnimScr_EkrBaseKaiten1, 0x00000000, (u32)&AnimScr_EkrBaseKaiten5, 0x00000000,
+    (u32)&AnimScr_EkrBaseKaiten10, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x48, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x48, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x48, (u32)&frontier_df4_banim_a_009_5FF000 + 0x24, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x6C,
+    (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x6C, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x6C, (u32)&AnimScr_EkrBaseKaiten9, (u32)&frontier_df4_banim_a_008_5FE7D8, (u32)&frontier_df4_banim_a_008_5FE7D8, (u32)&frontier_df4_banim_a_008_5FE7D8,
+    (u32)&frontier_df4_banim_a_009_5FF000, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x24, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x24, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x24, (u32)&AnimScr_EkrBaseKaiten6, 0x00000000,
+    (u32)&AnimScr_EkrBaseKaiten7, 0x00000000, (u32)&AnimScr_EkrBaseKaiten2, 0x00000000, (u32)&AnimScr_EkrBaseKaiten8, 0x00000000,
+    (u32)&AnimScr_EkrBaseKaiten12, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xD8, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xD8, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xD8, (u32)&frontier_df4_banim_a_009_5FF000 + 0x6C, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xFC,
+    (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xFC, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xFC, (u32)&AnimScr_EkrBaseKaiten11, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x90, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x90, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x90,
     (u32)&frontier_df4_banim_a_009_5FF000 + 0x48, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xB4, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xB4, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0xB4, (u32)&gUnk_080DFD46 + 0x60, 0x00000000,
     (u32)&gUnk_080DFD46 + 0x70, 0x00000000, (u32)&gUnk_080DFD46 + 0x50, 0x00000000, (u32)&gUnk_080DFD46 + 0x80, 0x00000000,
     (u32)&gUnk_080DFD46 + 0xA0, (u32)&gUnk_080DFD46 + 0xD0, (u32)&gUnk_080DFD46 + 0xD0, (u32)&gUnk_080DFD46 + 0xD0, (u32)&gUnk_080DFD46 + 0x100, (u32)&gUnk_080DFD46 + 0xE0,
@@ -2214,18 +2224,18 @@ struct AnimSpriteData frontier_df4_banim_a_007_5F1C3C[] __attribute__((section("
 /* frontier_df4_banim_a_008_5FE7D8: atomic relocation carve (was INCBIN); every embedded ROM
    pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
 u32 frontier_df4_banim_a_008_5FE7D8[] __attribute__((section(".data.frontier_df4_banim_a.gap8"))) = {
-    (u32)&data_085FD998 + 0x92, (u32)&AnimSprite_EkrBaseKaiten_49 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_73 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_50 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_51 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_52 + 0x1,
-    (u32)&AnimSprite_EkrBaseKaiten_53 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_54 + 0x1, 0x80000000, (u32)&data_085FD998 + 0x92, (u32)&AnimSprite_EkrBaseKaiten_55 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_74 + 0x2,
+    (u32)&AnimSprite_EkrBaseKaiten_48 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_49 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_73 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_50 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_51 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_52 + 0x1,
+    (u32)&AnimSprite_EkrBaseKaiten_53 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_54 + 0x1, 0x80000000, (u32)&AnimSprite_EkrBaseKaiten_48 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_55 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_74 + 0x2,
     (u32)&AnimSprite_EkrBaseKaiten_56 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_57 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_58 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_59 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_60 + 0x1, 0x80000000,
-    (u32)&data_085FD998 + 0x92, (u32)&AnimSprite_EkrBaseKaiten_61 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_75 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_62 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_63 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_64 + 0x1,
-    (u32)&AnimSprite_EkrBaseKaiten_65 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_66 + 0x1, 0x80000000, (u32)&data_085FD998 + 0x92, (u32)&AnimSprite_EkrBaseKaiten_67 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_76 + 0x2,
+    (u32)&AnimSprite_EkrBaseKaiten_48 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_61 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_75 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_62 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_63 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_64 + 0x1,
+    (u32)&AnimSprite_EkrBaseKaiten_65 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_66 + 0x1, 0x80000000, (u32)&AnimSprite_EkrBaseKaiten_48 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_67 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_76 + 0x2,
     (u32)&AnimSprite_EkrBaseKaiten_68 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_69 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_70 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_71 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_72 + 0x1, 0x80000000,
     (u32)&AnimSprite_EkrBaseKaiten_54 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_53 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_52 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_51 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_50 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_73 + 0x2,
-    (u32)&AnimSprite_EkrBaseKaiten_49 + 0x2, (u32)&data_085FD998 + 0x92, 0x80000000, (u32)&AnimSprite_EkrBaseKaiten_60 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_59 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_58 + 0x1,
-    (u32)&AnimSprite_EkrBaseKaiten_57 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_56 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_74 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_55 + 0x2, (u32)&data_085FD998 + 0x92, 0x80000000,
+    (u32)&AnimSprite_EkrBaseKaiten_49 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_48 + 0x2, 0x80000000, (u32)&AnimSprite_EkrBaseKaiten_60 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_59 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_58 + 0x1,
+    (u32)&AnimSprite_EkrBaseKaiten_57 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_56 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_74 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_55 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_48 + 0x2, 0x80000000,
     (u32)&AnimSprite_EkrBaseKaiten_66 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_65 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_64 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_63 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_62 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_75 + 0x2,
-    (u32)&AnimSprite_EkrBaseKaiten_61 + 0x2, (u32)&data_085FD998 + 0x92, 0x80000000, (u32)&AnimSprite_EkrBaseKaiten_72 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_71 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_70 + 0x1,
-    (u32)&AnimSprite_EkrBaseKaiten_69 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_68 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_76 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_67 + 0x2, (u32)&data_085FD998 + 0x92, 0x80000000,
+    (u32)&AnimSprite_EkrBaseKaiten_61 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_48 + 0x2, 0x80000000, (u32)&AnimSprite_EkrBaseKaiten_72 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_71 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_70 + 0x1,
+    (u32)&AnimSprite_EkrBaseKaiten_69 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_68 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_76 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_67 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_48 + 0x2, 0x80000000,
     0x40000000, 0xFFF80000, 0x0000FFF8, 0x00000001, 0x00000000, 0x00000000,
     0x70000000, 0x00000002, 0x00000000, 0x70000000, 0xFFF00004, 0x0000FFF0,
     0x70000000, 0x00000006, 0x0000FFF0, 0x70000000, 0xFFF00008, 0x00000000,

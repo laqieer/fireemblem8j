@@ -1,9 +1,10 @@
-/* Migrated from asm/data_085FC458.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral SPLIT of data_085FC458 into 3 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.085FC458, "aw", %progbits
-	.global data_085FC458
-data_085FC458:
+	.global AnimScr_EkrBaseKaiten1
+AnimScr_EkrBaseKaiten1:
 	.4byte data_085FC068 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_2 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_3 + 0x1
@@ -13,6 +14,9 @@ data_085FC458:
 	.4byte AnimSprite_EkrBaseKaiten_7 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_8 + 0x1
 	.4byte 0x80000000
+	.section .data.residue.085FC47C, "aw", %progbits
+	.global AnimScr_EkrBaseKaiten2
+AnimScr_EkrBaseKaiten2:
 	.4byte AnimSprite_EkrBaseKaiten_8 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_7 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_6 + 0x1
@@ -22,6 +26,9 @@ data_085FC458:
 	.4byte AnimSprite_EkrBaseKaiten_2 + 0x1
 	.4byte data_085FC068 + 0x1
 	.4byte 0x80000000
+	.section .data.residue.085FC4A0, "aw", %progbits
+	.global AnimSprite_EkrBaseKaiten_10
+AnimSprite_EkrBaseKaiten_10:
 	.4byte 0x40000000
 	.4byte 0xFFF00000
 	.4byte 0x0000FFF8

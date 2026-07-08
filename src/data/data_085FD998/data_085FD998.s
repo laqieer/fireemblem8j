@@ -1,10 +1,11 @@
-/* Migrated from asm/data_085FD998.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral SPLIT of data_085FD998 into 5 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.085FD998, "aw", %progbits
-	.global data_085FD998
-data_085FD998:
-	.4byte data_085FD0E8 + 0xD2
+	.global AnimScr_EkrBaseKaiten9
+AnimScr_EkrBaseKaiten9:
+	.4byte AnimSprite_EkrBaseKaiten_33 + 0x2
 	.4byte AnimSprite_EkrBaseKaiten_34 + 0x2
 	.4byte AnimSprite_EkrBaseKaiten_46 + 0x2
 	.4byte AnimSprite_EkrBaseKaiten_35 + 0x1
@@ -13,7 +14,10 @@ data_085FD998:
 	.4byte AnimSprite_EkrBaseKaiten_39 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_38 + 0x1
 	.4byte 0x80000000
-	.4byte data_085FD0E8 + 0xD2
+	.section .data.residue.085FD9BC, "aw", %progbits
+	.global AnimScr_EkrBaseKaiten10
+AnimScr_EkrBaseKaiten10:
+	.4byte AnimSprite_EkrBaseKaiten_33 + 0x2
 	.4byte AnimSprite_EkrBaseKaiten_40 + 0x2
 	.4byte AnimSprite_EkrBaseKaiten_47 + 0x2
 	.4byte AnimSprite_EkrBaseKaiten_41 + 0x1
@@ -22,6 +26,9 @@ data_085FD998:
 	.4byte AnimSprite_EkrBaseKaiten_45 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_44 + 0x1
 	.4byte 0x80000000
+	.section .data.residue.085FD9E0, "aw", %progbits
+	.global AnimScr_EkrBaseKaiten11
+AnimScr_EkrBaseKaiten11:
 	.4byte AnimSprite_EkrBaseKaiten_38 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_39 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_37 + 0x1
@@ -29,8 +36,11 @@ data_085FD998:
 	.4byte AnimSprite_EkrBaseKaiten_35 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_46 + 0x2
 	.4byte AnimSprite_EkrBaseKaiten_34 + 0x2
-	.4byte data_085FD0E8 + 0xD2
+	.4byte AnimSprite_EkrBaseKaiten_33 + 0x2
 	.4byte 0x80000000
+	.section .data.residue.085FDA04, "aw", %progbits
+	.global AnimScr_EkrBaseKaiten12
+AnimScr_EkrBaseKaiten12:
 	.4byte AnimSprite_EkrBaseKaiten_44 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_45 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_43 + 0x1
@@ -38,8 +48,11 @@ data_085FD998:
 	.4byte AnimSprite_EkrBaseKaiten_41 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_47 + 0x2
 	.4byte AnimSprite_EkrBaseKaiten_40 + 0x2
-	.4byte data_085FD0E8 + 0xD2
+	.4byte AnimSprite_EkrBaseKaiten_33 + 0x2
 	.4byte 0x80000000
+	.section .data.residue.085FDA28, "aw", %progbits
+	.global AnimSprite_EkrBaseKaiten_48
+AnimSprite_EkrBaseKaiten_48:
 	.4byte 0x40000000
 	.4byte 0xFFF80000
 	.4byte 0x0000FFF8

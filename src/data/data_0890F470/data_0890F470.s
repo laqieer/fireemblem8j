@@ -1,9 +1,10 @@
-/* Migrated from asm/data_0890F470.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral SPLIT of data_0890F470 into 4 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.0890F470, "aw", %progbits
-	.global data_0890F470
-data_0890F470:
+	.global UnitDef_Ch13AEnemy_10
+UnitDef_Ch13AEnemy_10:
 	.4byte 0x2D004712
 	.4byte 0x00000311
 	.4byte 0x00000000
@@ -14,6 +15,9 @@ data_0890F470:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
+	.section .data.residue.0890F498, "aw", %progbits
+	.global UnitDef_Ch13AEnemy_11
+UnitDef_Ch13AEnemy_11:
 	.4byte 0x4D001153
 	.4byte 0x010022D7
 	.4byte REDA_Ch13AEnemy_11_CAELLACH
@@ -24,6 +28,9 @@ data_0890F470:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
+	.section .data.residue.0890F4C0, "aw", %progbits
+	.global UnitDef_Ch13AAlly_0
+UnitDef_Ch13AAlly_0:
 	.4byte 0x50000201
 	.4byte 0x01000205
 	.4byte REDA_Ch13AAlly_0_EIRIKA
@@ -49,6 +56,9 @@ data_0890F470:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
+	.section .data.residue.0890F524, "aw", %progbits
+	.global UnitDef_Ch13AAlly_1
+UnitDef_Ch13AAlly_1:
 	.4byte 0x50000702
 	.4byte 0x01000185
 	.4byte REDA_Ch13AAlly_1_0

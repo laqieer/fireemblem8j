@@ -530,7 +530,7 @@ extern const u8 YesNoChoice_Loop_KeyHandler[];
 extern const u8 _DisplayShopUiArrows[];
 extern const u8 _ExecSaveMenuMiscOption[];
 extern const u8 data_085B9EE8[];
-extern const u8 data_08925F90[];
+extern const u8 UnitDef_UnusedAlly_18[];
 extern const u8 data_08926134[];
 extern u32 data_08A9548C[];
 extern u32 data_08A95AD8[];
@@ -946,7 +946,10 @@ extern const u8 UnitDef_Ch12AAlly_0[];
 extern const u8 UnitDef_Ch12AAlly_1[];
 extern const u8 UnitDef_Ch12AMixed[];
 extern const u8 UnitDef_Ch12AEnemy_4[];
-extern const u8 data_0890F470[];
+extern const u8 UnitDef_Ch13AEnemy_10[];
+extern const u8 UnitDef_Ch13AEnemy_11[];
+extern const u8 UnitDef_Ch13AAlly_0[];
+extern const u8 UnitDef_Ch13AAlly_1[];
 extern const u8 data_08A60354[];
 extern const u8 EventScr_CallBreakStone[];
 extern const u8 frontier_df3_unitdef_b_000_90F678_residue_p1[];
@@ -3183,7 +3186,7 @@ EventListScr frontier_df4_menu_009_A67660[] __attribute__((section(".data.fronti
     BNE(0, 0xC, 0)
     CHECK_EXISTS(0x12)
     BNE(0, 0xC, 0)
-    LOAD1(1, data_0890F470)
+    LOAD1(1, UnitDef_Ch13AEnemy_10)
     ENUN
     GOTO(1)
     LABEL(0)
@@ -3198,13 +3201,13 @@ EventListScr frontier_df4_menu_009_A67660[] __attribute__((section(".data.fronti
     SVAL(EVT_SLOT_2, 0x39)
     SVAL(EVT_SLOT_3, 0xA2D)
     CALL((u8 *)data_08A60354 + 0xF4)
-    LOAD1(1, (u8 *)data_0890F470 + 0x28)
+    LOAD1(1, (u8 *)UnitDef_Ch13AEnemy_11)
     ENUN
     LOAD1(1, frontier_df4_banim_b_079_90EFAC)
     ENUN
     DISA(0x53)
     CAMERA2(0xD, 9)
-    LOAD2(1, (u8 *)data_0890F470 + 0x50)
+    LOAD2(1, (u8 *)UnitDef_Ch13AAlly_0)
     ENUN
     SVAL(EVT_SLOT_1, 0)
     SET_STATE(1)
@@ -3214,7 +3217,7 @@ EventListScr frontier_df4_menu_009_A67660[] __attribute__((section(".data.fronti
     SET_STATE(0xB)
     SVAL(EVT_SLOT_1, 0)
     SET_STATE(2)
-    LOAD3(0, (u8 *)data_0890F470 + 0xB4)
+    LOAD3(0, (u8 *)UnitDef_Ch13AAlly_1)
     ENUN
     SVAL(EVT_SLOT_1, 0xFFFFFFFF)
     SET_STATE(1)
@@ -3864,7 +3867,7 @@ u32 frontier_df4_menu_013_A72408[] __attribute__((section(".data.frontier_df4_me
     0x00000120,
     0x00002B22,
     0x00012C41,
-    (u32)&data_08925F90 + 0x64,
+    (u32)&UnitDef_UnusedAlly_18,
     0x00003020,
     0x00012C41,
     0xFFFFFFFF,
@@ -3884,7 +3887,7 @@ u32 frontier_df4_menu_013_A72408[] __attribute__((section(".data.frontier_df4_me
     0x00001D20,
     0x00001B22,
     0x00012C41,
-    (u32)&data_08925F90 + 0x64,
+    (u32)&UnitDef_UnusedAlly_18,
     0x00200E22,
     0x00041721,
     0x00003020,
