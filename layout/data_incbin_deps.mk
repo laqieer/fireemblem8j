@@ -336,7 +336,7 @@ src/data/data/data_08616558.o: data/residual/data_08616558_0.map.bin.lz
 src/data/data/data_08636008.o: data/residual/data_08636008_0.map.bin.lz
 src/data/data/data_08663218.o: graphics/reuse/data_08663218.gbapal
 src/data/data/data_08713018.o: graphics/reuse/data_08713018.gbapal
-src/data/data_0819EADC/data_0819EADC.o: data/residual/data_0819EADC.bin
+src/data/data_0819EADC/data_0819EADC.o: graphics/map/data_0819EADC.bin.lz
 src/data/data_081A00C8/data_081A00C8.o: data/residual/data_081A00C8.bin
 src/data/data_081A6774/data_081A6774.o: data/residual/data_081A6774.bin
 src/data/data_085C4440/data_085C4440.o: data/residual/data_085C4440.bin
