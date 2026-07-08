@@ -1,9 +1,10 @@
-/* Migrated from asm/data_08A5CFA0.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* byte-neutral SPLIT of data_08A5CFA0 into 2 named sub-objects.
+ * Directive stream preserved verbatim; only per-part section headers
+ * inserted at byte boundaries (NO .align). make compare is the oracle. */
+
 	.section .data.residue.08A5CFA0, "aw", %progbits
-	.global data_08A5CFA0
-data_08A5CFA0:
+	.global EventListScr_Ch16b_Turn
+EventListScr_Ch16b_Turn:
 	.4byte 0x000E0002
 	.4byte frontier_df3_eventscr_ch_016_A6EFD8 + 0x74
 	.4byte 0x0000FF01
@@ -47,6 +48,9 @@ data_08A5CFA0:
 	.4byte frontier_df3_eventscr_ch_016_A6EFD8 + 0xC
 	.4byte 0x0000000B
 	.4byte 0x00000000
+	.section .data.residue.08A5D04C, "aw", %progbits
+	.global EventListScr_Ch16b_Character
+EventListScr_Ch16b_Character:
 	.4byte 0x00090003
 	.4byte EventScr_Ch16b_BeginningScene + 0x34
 	.4byte 0x00002122
