@@ -8,12 +8,15 @@
  * stays SHIFTABLE. Byte-identical to baserom (gated by `make compare`).
  */
 
-extern const u8 data_0890A3D4[];
+extern const u8 REDA_Ch5xAlly_2_EPHRAIM[];
+extern const u8 REDA_Ch5xAlly_2_FORDE[];
+extern const u8 REDA_Ch5xAlly_2_KYLE[];
+extern const u8 REDA_Ch5xAlly_2_ORSON_CH5X[];
 SECTION(".rodata.dat_UnitDef_Ch5xAlly_2_ref") struct UnitDefinition UnitDef_Ch5xAlly_2[] =
 {
-    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0x9, .yPosition=0xC, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890A3D4 + 0x28) },
-    { .charIndex=0x10, .classIndex=0x5, .level=0x1, .xPosition=0x9, .yPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890A3D4 + 0x30) },
-    { .charIndex=0x11, .classIndex=0x5, .level=0x1, .xPosition=0x8, .yPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890A3D4 + 0x38) },
-    { .charIndex=0x42, .classIndex=0x7, .level=0x1, .xPosition=0x8, .yPosition=0xE, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)data_0890A3D4 + 0x40) },
+    { .charIndex=0xF, .classIndex=0x1, .level=0x1, .xPosition=0x9, .yPosition=0xC, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_Ch5xAlly_2_EPHRAIM) },
+    { .charIndex=0x10, .classIndex=0x5, .level=0x1, .xPosition=0x9, .yPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_Ch5xAlly_2_FORDE) },
+    { .charIndex=0x11, .classIndex=0x5, .level=0x1, .xPosition=0x8, .yPosition=0xD, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_Ch5xAlly_2_KYLE) },
+    { .charIndex=0x42, .classIndex=0x7, .level=0x1, .xPosition=0x8, .yPosition=0xE, .redaCount=0x1, .redas=(const struct REDA *)((const u8 *)REDA_Ch5xAlly_2_ORSON_CH5X) },
     {0},
 };

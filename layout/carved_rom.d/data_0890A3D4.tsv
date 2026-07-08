@@ -1,2 +1,6 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-90A3D4	90A41C	src/data/data_0890A3D4/data_0890A3D4.o(.data.residue.0890A3D4)	descriptive raw ROM data (72 B, byte-completeness D29)
+# byte-neutral SPLIT of data_0890A3D4 (72 B) into 5 sub-objects.
+90A3D4	90A3FC	src/data/data_0890A3D4/data_0890A3D4.o(.data.residue.0890A3D4)	data_0890A3D4 (40 B)
+90A3FC	90A404	src/data/data_0890A3D4/data_0890A3D4.o(.data.residue.0890A3FC)	REDA_Ch5xAlly_2_EPHRAIM (8 B)
+90A404	90A40C	src/data/data_0890A3D4/data_0890A3D4.o(.data.residue.0890A404)	REDA_Ch5xAlly_2_FORDE (8 B)
+90A40C	90A414	src/data/data_0890A3D4/data_0890A3D4.o(.data.residue.0890A40C)	REDA_Ch5xAlly_2_KYLE (8 B)
+90A414	90A41C	src/data/data_0890A3D4/data_0890A3D4.o(.data.residue.0890A414)	REDA_Ch5xAlly_2_ORSON_CH5X (8 B)
