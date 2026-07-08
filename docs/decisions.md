@@ -9835,3 +9835,39 @@ The gate discipline held throughout: two would-be "proofs" (FAD0 v1 count≤1, 8
 return-only+number=1) were caught and rejected as degenerate/unsound rather than banked. All
 CBMC work is isolated; `make compare` OK throughout. Verdicts recorded in the nm_proof table
 and `full16/FINDINGS_full16.md`.
+
+## DATA-residue named-symbols SPLIT waves (axis 4: 96.90% → 96.96%)
+
+Byte-neutral SPLIT of SRC-built catch-all `data_<addr>` residue blobs into their
+fe8u-validated constituent sub-objects, gating every batch with a cold `make compare`
+(`fireemblem8.gba: OK`). Each split rewrites four things — the built `src/data/<res>/<res>.{c,s}`
+(per-part `.section .data.residue.<PARTADDR>`/`.global`/label at each byte offset), the
+`layout/carved_rom.d/<res>.tsv` manifest (one row per part), the excluded metric-mirror
+`asm/<res>.s`, and every cross-tree ref (`&data_<res> + 0xK` → `&<subname>`). Landed residues:
+data_08A5ABAC (8 `EventListScr_Ch4_*`) + the batch-3 Group-B set (AnimScr/AnimSprite/REDA/
+UnitDefinition/EventScr). Fragment-kept-as-placeholder technique: a leading LEAVE fragment is
+kept named `data_<res>` at offset 0 so every `data_<res> + k` ref resolves identically after the
+split — byte-neutral **without** repointing (used where fragment-interior refs make repointing
+unsafe).
+
+**KEY METRIC FINDING — jp_syms.s already-counted trap.** `calcprogress.py` axis-4 counts the
+deduplicated SET of `.global` labels across `asm/**/*.{s,inc}`, which INCLUDES the generated
+`asm/jp_syms.s` baseline-symbol shim (US-inherited names for still-incbin'd regions). So a name
+already emitted `.global` in `jp_syms.s` is ALREADY counted as named — splitting a residue to
+re-name it yields ZERO axis-4 gain. Verify a target sub-name is NOT already `.global` anywhere
+under `asm/` before carving it.
+
+**Group C partials SKIPPED (integrity, not RED-only):**
+- `data_080ED67C` — all 6 `BnaimFrames_Dk*` are already `.global` in `asm/jp_syms.s` → zero gain;
+  additionally the recipe's contiguous-6-frame model is contradicted by the JP bytes (frame data
+  is only [0x7E,0x10C), followed by unrelated proc-name strings [0x10C,0x178)), so the offsets do
+  not land on real object boundaries. SKIP.
+- `data_080DCCB2` — `gUnitinfowindow_0` already counted via `jp_syms.s`; the only genuinely-new
+  name `gBmdifficulty_6` (clean boundary at +0x52) **already has a real C definition**
+  (`src/bmdifficulty_08038574.c:30`) — the residue's 0x080DCD04 slice is a byte-identical COPY at
+  a different address, so naming it collides (multiple-definition, RED). Reverted, SKIP.
+
+Reusable rule: `make compare` proves BYTES only, not name-correctness; before banking a residue
+split, confirm each sub-name (a) is not already `.global` under `asm/` (already-counted trap) and
+(b) has no pre-existing real definition elsewhere (`src/*.c` collision). The split's job is purely
+byte-neutral application of PRE-VALIDATED names.
