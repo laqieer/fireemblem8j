@@ -3,7 +3,7 @@
 
 /* Typed C extraction of residual raw-incbin slices from data_085FE358.c. */
 
-struct AnimSpriteData data_085FE358[] __attribute__((section(".data.residue.085FE358"))) =
+struct AnimSpriteData AnimSprite_EkrBaseKaiten_70[] __attribute__((section(".data.residue.085FE358"))) =
 {
     { .header = 0x10000000, .as = { .object = { 0x0068, -20, -4 } } },
     { .header = 0x50000000, .as = { .object = { 0x0049, 4, -28 } } },

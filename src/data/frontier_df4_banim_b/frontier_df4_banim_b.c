@@ -1587,7 +1587,7 @@ extern const u8 btl_bg_7_tiles[];
 extern const u8 btl_bg_8_map[];
 extern const u8 btl_bg_8_palette[];
 extern const u8 data_08616558[];
-extern const u8 data_0865A694[];
+extern const u8 AnimSprite_EfxMistyRainObj4_12[];
 extern const u8 data_086DF490[];
 extern const u8 data_08713018[];
 extern const u8 data_0874687C[];
@@ -3704,12 +3704,12 @@ u8 frontier_df4_banim_b_019b_64C71C[] __attribute__((section(".data.frontier_df4
 u32 frontier_df4_banim_b_020_65A7FC[] __attribute__((section(".data.frontier_df4_banim_b.gap20"))) = {
     (u32)&AnimSprite_EfxMistyRainObj4_1 + 1, (u32)&AnimSprite_EfxMistyRainObj4_2 + 1, (u32)&AnimSprite_EfxMistyRainObj4_3 + 1, (u32)&AnimSprite_EfxMistyRainObj4_4 + 1, (u32)&AnimSprite_EfxMistyRainObj4_5 + 1, (u32)&AnimSprite_EfxMistyRainObj4_6 + 1,
     (u32)&AnimSprite_EfxMistyRainObj4_7 + 1, (u32)&AnimSprite_EfxMistyRainObj4_8 + 1, (u32)&AnimSprite_EfxMistyRainObj4_9 + 1, (u32)&AnimSprite_EfxMistyRainObj4_10 + 1, 0x7865A673, 0x84000045,
-    0x80000000, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1,
-    (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1,
-    (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1,
-    (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1,
-    (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&data_0865A694 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&data_0865A694 + 0x2, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1,
-    (u32)&data_0865A694 + 0x3, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, 0x1865A694, (u32)&AnimSprite_EfxMistyRainObj4_11 + 1, 0x80000000, (u32)&AnimSprite_EfxMistyRainObj4_13 + 0x3,
+    0x80000000, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1,
+    (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1,
+    (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1,
+    (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1,
+    (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x2, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1,
+    (u32)&AnimSprite_EfxMistyRainObj4_12 + 0x3, (u32)&AnimSprite_EfxMistyRainObj4_11 + 0x1, 0x1865A694, (u32)&AnimSprite_EfxMistyRainObj4_11 + 1, 0x80000000, (u32)&AnimSprite_EfxMistyRainObj4_13 + 0x3,
     (u32)&AnimSprite_EfxMistyRainObj4_14 + 0x3, (u32)&AnimSprite_EfxMistyRainObj4_15 + 0x3, (u32)&AnimSprite_EfxMistyRainObj4_16 + 0x2, (u32)&AnimSprite_EfxMistyRainObj4_17 + 0x2, (u32)&AnimSprite_EfxMistyRainObj4_18 + 0x2, (u32)&AnimSprite_EfxMistyRainObj4_19 + 0x2,
     (u32)&AnimSprite_EfxMistyRainObj4_20 + 0x2, (u32)&AnimSprite_EfxMistyRainObj4_21 + 0x2, (u32)&AnimSprite_EfxMistyRainObj4_22 + 0x2, 0x80000000, 0x00180010, 0xF0000035,
     0x50014001, 0x80450300, 0x0055500F, 0x02004402, 0x23445533, 0x33442200,

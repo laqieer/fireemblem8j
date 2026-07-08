@@ -1075,11 +1075,11 @@ extern const u8 data_080E0008[];
 extern const u8 data_085FC458[];
 extern const u8 data_085FD0E8[];
 extern const u8 data_085FD998[];
-extern const u8 data_085FDDAC[];
-extern const u8 data_085FE358[];
-extern const u8 data_085FE490[];
+extern const u8 AnimSprite_EkrBaseKaiten_58[];
+extern const u8 AnimSprite_EkrBaseKaiten_70[];
+extern const u8 AnimSprite_EkrBaseKaiten_72[];
 extern const u8 data_085FEC28[];
-extern const u8 data_085FEDD8[];
+extern const u8 AnimSprite_EkrBaseKaiten_87[];
 extern const u8 data_08613A6C[];
 extern const u8 data_08636008[];
 extern const u8 data_086724CC[];
@@ -2209,15 +2209,15 @@ struct AnimSpriteData frontier_df4_banim_a_007_5F1C3C[] __attribute__((section("
 u32 frontier_df4_banim_a_008_5FE7D8[] __attribute__((section(".data.frontier_df4_banim_a.gap8"))) = {
     (u32)&data_085FD998 + 0x92, (u32)&AnimSprite_EkrBaseKaiten_49 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_73 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_50 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_51 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_52 + 0x1,
     (u32)&AnimSprite_EkrBaseKaiten_53 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_54 + 0x1, 0x80000000, (u32)&data_085FD998 + 0x92, (u32)&AnimSprite_EkrBaseKaiten_55 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_74 + 0x2,
-    (u32)&AnimSprite_EkrBaseKaiten_56 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_57 + 0x1, (u32)&data_085FDDAC + 0x1, (u32)&AnimSprite_EkrBaseKaiten_59 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_60 + 0x1, 0x80000000,
+    (u32)&AnimSprite_EkrBaseKaiten_56 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_57 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_58 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_59 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_60 + 0x1, 0x80000000,
     (u32)&data_085FD998 + 0x92, (u32)&AnimSprite_EkrBaseKaiten_61 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_75 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_62 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_63 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_64 + 0x1,
     (u32)&AnimSprite_EkrBaseKaiten_65 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_66 + 0x1, 0x80000000, (u32)&data_085FD998 + 0x92, (u32)&AnimSprite_EkrBaseKaiten_67 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_76 + 0x2,
-    (u32)&AnimSprite_EkrBaseKaiten_68 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_69 + 0x1, (u32)&data_085FE358 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_71 + 0x1, (u32)&data_085FE490 + 0x1, 0x80000000,
+    (u32)&AnimSprite_EkrBaseKaiten_68 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_69 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_70 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_71 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_72 + 0x1, 0x80000000,
     (u32)&AnimSprite_EkrBaseKaiten_54 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_53 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_52 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_51 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_50 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_73 + 0x2,
-    (u32)&AnimSprite_EkrBaseKaiten_49 + 0x2, (u32)&data_085FD998 + 0x92, 0x80000000, (u32)&AnimSprite_EkrBaseKaiten_60 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_59 + 0x1, (u32)&data_085FDDAC + 0x1,
+    (u32)&AnimSprite_EkrBaseKaiten_49 + 0x2, (u32)&data_085FD998 + 0x92, 0x80000000, (u32)&AnimSprite_EkrBaseKaiten_60 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_59 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_58 + 0x1,
     (u32)&AnimSprite_EkrBaseKaiten_57 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_56 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_74 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_55 + 0x2, (u32)&data_085FD998 + 0x92, 0x80000000,
     (u32)&AnimSprite_EkrBaseKaiten_66 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_65 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_64 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_63 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_62 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_75 + 0x2,
-    (u32)&AnimSprite_EkrBaseKaiten_61 + 0x2, (u32)&data_085FD998 + 0x92, 0x80000000, (u32)&data_085FE490 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_71 + 0x1, (u32)&data_085FE358 + 0x1,
+    (u32)&AnimSprite_EkrBaseKaiten_61 + 0x2, (u32)&data_085FD998 + 0x92, 0x80000000, (u32)&AnimSprite_EkrBaseKaiten_72 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_71 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_70 + 0x1,
     (u32)&AnimSprite_EkrBaseKaiten_69 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_68 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_76 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_67 + 0x2, (u32)&data_085FD998 + 0x92, 0x80000000,
     0x40000000, 0xFFF80000, 0x0000FFF8, 0x00000001, 0x00000000, 0x00000000,
     0x70000000, 0x00000002, 0x00000000, 0x70000000, 0xFFF00004, 0x0000FFF0,
@@ -2241,9 +2241,9 @@ u32 frontier_df4_banim_a_008_5FE7D8[] __attribute__((section(".data.frontier_df4
 u32 frontier_df4_banim_a_009_5FF000[] __attribute__((section(".data.frontier_df4_banim_a.gap9"))) = {
     (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x122, (u32)&AnimSprite_EkrBaseKaiten_88 + 0x2, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x13A, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x175, (u32)&AnimSprite_EkrBaseKaiten_89 + 0x1, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x1ED,
     (u32)&AnimSprite_EkrBaseKaiten_81 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_82 + 0x1, 0x80000000, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x122, (u32)&AnimSprite_EkrBaseKaiten_88 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_83 + 0x2,
-    (u32)&data_085FEC28 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_90 + 0x1, (u32)&data_085FEC28 + 0x79, (u32)&AnimSprite_EkrBaseKaiten_86 + 0x1, (u32)&data_085FEDD8 + 0x1, 0x80000000,
+    (u32)&data_085FEC28 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_90 + 0x1, (u32)&data_085FEC28 + 0x79, (u32)&AnimSprite_EkrBaseKaiten_86 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_87 + 0x1, 0x80000000,
     (u32)&AnimSprite_EkrBaseKaiten_82 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_81 + 0x1, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x1ED, (u32)&AnimSprite_EkrBaseKaiten_89 + 0x1, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x175, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x13A,
-    (u32)&AnimSprite_EkrBaseKaiten_88 + 0x2, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x122, 0x80000000, (u32)&data_085FEDD8 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_86 + 0x1, (u32)&data_085FEC28 + 0x79,
+    (u32)&AnimSprite_EkrBaseKaiten_88 + 0x2, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x122, 0x80000000, (u32)&AnimSprite_EkrBaseKaiten_87 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_86 + 0x1, (u32)&data_085FEC28 + 0x79,
     (u32)&AnimSprite_EkrBaseKaiten_90 + 0x1, (u32)&data_085FEC28 + 0x1, (u32)&AnimSprite_EkrBaseKaiten_83 + 0x2, (u32)&AnimSprite_EkrBaseKaiten_88 + 0x2, (u32)&frontier_df4_banim_a_008_5FE7D8 + 0x122, 0x80000000,
     (u32)&StartSpellAnimDummy, (u32)&StartSpellAnimHandAxe, (u32)&StartSpellAnimBindingBlade, (u32)&StartSpellAnimJavelin, (u32)&StartSpellAnimJavelinCavalier, (u32)&StartSpellAnimJavelinSoldier,
     (u32)&StartSpellAnimJavelinPaladin, (u32)&StartSpellAnimJavelinPegasusKnight, (u32)&StartSpellAnimJavelinFalcon, (u32)&StartSpellAnimJavelinWyvernRider, (u32)&StartSpellAnimJavelinWyvernLord, (u32)&StartSpellAnimJavelinGenerial,
