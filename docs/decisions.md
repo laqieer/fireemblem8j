@@ -10193,3 +10193,65 @@ the build-date/collision case (`080DC104`), and the region-diff MapChanges/Event
 names collide with US-layout symbols (to be re-typed with JP-distinct names by the user, separately).
 This is the structural limit for byte-neutral residue relabels; further axis-4 gains require real object
 splitting / decompilation, not renames.
+
+## D356 — Residue-typing wave 6 (FINAL FLOOR): 39 `data_<hex>` placeholders → structural-documentation names + 1 stale-mirror delete (99.67% → 99.98%); 2 integrity skips + 1 delete reverted by the self-contained gate (2026-07-09)
+
+**Context.** Owner override of D355's "structural floor is un-nameable" framing: EVERY remaining placeholder
+gets a *content-accurate* name (address-tagged structural tags — `gPadding_<addr>`, `Lz77*_<addr>`,
+`MultiBootImage_<addr>`, `dat_*_<addr>_ref` — are legitimate documentation, the fe8u "partial" convention).
+A read-only floor-namer pre-derived + collision-checked (0 hits) names for all 41 remaining placeholders.
+Same mechanic + gating as D351–D355, **plus** the no-baserom self-contained build as a hard gate.
+
+**Applied (39 relabels + 1 stale-mirror delete; commits `c10c882b6` / `20d60a270` / `f4c184333`; each
+`make compare` OK + `make shiftcheck` 0 HIGH + `check_selfcontained.py` = YES, pushed CI-green):**
+- Batch A (13): `gDebugBuildDateTimeStrings_080DC104`, `dat_080DC144_ref`, `sDebugMenuStrings_080DC68C`,
+  `dat_gConfig_080DC8B0_ref`, `sGmapFadeRampAndStrings_081F5BF4`, `gLibcRodataPadding_0857742E`,
+  `sSbrkCollisionMsg_085775A4`, `dat_gFontgrp_{08579D4C,08594374,08595474,08595594,08595864}_ref`,
+  `ProcScr_085C3A08`.
+- Batch B (13): `gPadding_{085C4440,08A5A6AD,08A5DA90}`, `dat_AnimSprite_{08612134,08636294}_ref`,
+  `Lz77Gfx_08616558`, `Lz77Tsa_BoltingBg_08636008`, `dat_AnimScr_08647830_ref`, `Pal_08713018`,
+  `dat_efxGorgonBanim_08718440_ref`, `dat_MapChanges_08A5B56C_ref`, `dat_EventListScr_08A5CEDC_ref`,
+  `dat_gChDAsset_08A5DAE8_ref`.
+- Batch C (13 + delete): `dat_gChDAsset_{08A5DE70,08A5E3B8}_ref`, `dat_MapChanges_08A5DF98_ref`,
+  `gZeroPadding_08C01928`, `BattleTerrainTable_NullTail_08EE0AD0`, `gPadding_08EF86C8`,
+  `MultiBootImage_08FE0000`, `gRomTailPadding_08FFF000`, `InitGUnk_02000C04` (a Thumb FUNCTION that inits
+  `gUnk_02000C04` — relabel-only for now, full `.text` decomp deferred), `dat_EventListScr_08A5CC68_ref`,
+  `dat_Ch17EphraimEventData_ref`, `dat_Ch18EphraimEventData_ref`, `dat_REDA_08926134_ref`; **+ delete
+  `asm/data_085BA09C.s`** stale excluded mirror (the real `ProcScr_GotItem` @0x85ba094 covers it — a
+  `.global` label removed, so denom 12,724 → 12,723).
+
+**Skipped (2 integrity) — the D311 straddled-song aliases:**
+- `data_08576124` (proposed `SongTrackData_08576150`) and `data_085772B4` (proposed `SongTrackData_08577378`):
+  these are **absolute-address baseline aliases** (`nm` type `A`, defined via generated `asm/jp_syms.s` from
+  `layout/baseline_syms.d/d311-music.tsv`, NOT a tracked `asm/data_<hex>.s` mirror — so the rename tool can't
+  even reach them). Each coexists with a real song header (`song959_btl_mon_call1`@…124, `song981_btl_mon_magic1`
+  @…2B4) and is already split into `data_<hex>_<hex>` remnants; `…2B4`'s remnant is **SRAM library code**
+  (`ReadSramFast_Core`), referenced by `impure_data_ref.s`. The proposed `SongTrackData_*` names **mismatch the
+  alias address** (…124 vs …150, …2B4 vs …378) **AND mis-describe the content** → a wrong name is worse than the
+  placeholder. These are the **2 residual placeholders** = the honest axis-4 ceiling; a correct fix is a proper
+  D311-anchor refactor (out of scope for byte-neutral relabels).
+
+**Delete attempted then REVERTED — the false-OK lesson (`data_085C6A20`):** D355 had characterized this as a
+"redundant mirror" of the decompiled `palAnimLut.3` + `offsetLut.3` bksel statics, and the floor-namer flagged
+it DELETE-MIRROR. I deleted it and "proved" byte-neutrality with a clean rebuild → `fireemblem8.gba: OK`
+(commit `2497ee003`). **That proof was fooled by the false-OK trap:** `baserom.gba` was present, so
+`close_baserom_gaps` back-filled the now-uncovered 36 bytes (0x085C6A20..0x085C6A44) via
+`asm/baserom.s .incbin "baserom.gba"` — matching the ROM but breaking **self-containment**. The **no-baserom
+CI gate** (`make compare`, no baserom) caught it: `asm/baserom.s:6: Error: file not found: baserom.gba`
+(CI `29031550894` FAILED). The residue is in fact the **self-contained provider** of those bytes; the aliased
+statics share the *address* but do not independently emit bytes there. Reverted `2497ee003` → `67fd92256`;
+verified `mv baserom.gba /tmp && make compare` → OK and `check_selfcontained.py` → **YES (0 incbins)**;
+CI `29032378666` green. **Lessons:** (1) `make compare` with `baserom.gba` present is NOT a self-containment
+proof — always run the no-baserom build / `check_selfcontained.py` text line for residue *deletions*;
+(2) `check_selfcontained.py` **exits 0 regardless** — parse its `YES`/`NOT YET` text, not the exit code.
+
+**Impact.** Axis-4 NAMED SYMBOLS **99.67% (12,682/12,724, 42 placeholders) → 99.98% (12,721/12,723,
+2 placeholders)** (`python3 scripts/calcprogress.py`). `make compare` unaffected (relabel + self-contained
+mirror-delete only).
+
+**Program end-state (6 waves).** wave 1 +32 (5 skip), wave 2/Batch C +27 (0), wave 3 +26 (3), wave 4 +17 (0),
+wave 5 +3 (5), wave 6 +39 relabels + 1 mirror-delete (2 skip, 1 delete reverted) = **144 `data_<hex>`
+placeholders typed, 98.84% → 99.98%**, with **15 integrity skips** (collision / already-split / off-by-table
+mis-ID / address+content mismatch) and **zero wrong names committed**. The residual **2** placeholders are the
+D311 straddled-song `SongTrackData` absolute-address aliases, integrity-blocked pending a correct D311-anchor
+refactor — the honest ceiling for byte-neutral residue relabels.
