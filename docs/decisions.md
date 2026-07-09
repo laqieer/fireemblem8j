@@ -10335,3 +10335,46 @@ next. Merge 3 (file moves) and merge 4 (hand-resolved `.mk`) additionally valida
   (15 asm), named 100%, shiftability gate at floor.
 
 Tracked on project board **#14**. Single-owner serial integration held throughout; `main` green at every push.
+
+## D359 — data-extraction wave FINALE: the 43,824 B big blob `data_08BB8ED0` → inline `gUnkData_108[0xAB30]`; axis-3 EXTRACTED DATA reaches 100.00%, axis-6 ASSET EDITABILITY reaches 0 opaque bytes (2026-07-09)
+
+**Context.** The 5th and final data-extraction branch, merged serially through the single integrator onto
+`main` under the same protocol as the D358 wave (`--no-ff`, full `make compare` + `make shiftcheck` gate,
+push, CI-green). It clears the **lone residual remainder** left after D358 — the 43,824 B opaque orphan
+`data_08BB8ED0` (59% of the whole residual frontier by byte count) — taking axis-3 and axis-6 to their
+targets. No ROM bytes change (`fireemblem8.gba: OK`).
+
+**Merge (`d953beb77` — feat/extract-big-blob, worktree `64b1a4aec`).** Inlines the 43,824-byte
+(`0xAB30`) region-**different** opaque orphan `data_08BB8ED0` — a newlib malloc-region heap image (NOT
+graphics/sound/compressed; JP-divergent, so fe8u's `gUnkData_108` bytes are NOT borrowed) — from
+`data/residual/data_08BB8ED0.bin` into a flat `u8 gUnkData_108[0xAB30] = { ... }` source literal in
+`src/data/data_08BB8E94/data_08BB8E94.c` (same `.data.residue.08BB8E94` section; symbol renamed to fe8u
+parity `gUnkData_108`; +3652 hex lines replacing the `INCBIN_U8`). This is the **honest raw-bytes-as-source**
+extraction for region-different opaque data — a struct/palette/tiles typing was tried and reverted at D309;
+a flat `u8[]` is the correct form. Change set: deletes the 43.8 KB `.bin`, rewrites the `.c`, surgical −1
+`.mk` line. CI **`29046557386`** (+ secret-scan `29046557456`).
+
+**`layout/data_incbin_deps.mk` conflict (union-of-deletions, as designed).** The branch (based on
+`c65a2bd33`, pre-wave) deletes `src/data/data_08BB8E94/data_08BB8E94.o: data/residual/data_08BB8ED0.bin`.
+Main had meanwhile deleted the four *following* stale-drift lines (`data_08C01928/08EE0AD0/08EF86C8/08FFF000`
+— migrated to typed-C in earlier waves), so the same `.mk` region carried deletions on **both** sides →
+conflict. Resolved by **union-of-deletions**: drop the whole conflict block (both sides' removals kept).
+Verified the **net** diff vs `HEAD` is exactly `1 deletion` (only the `data_08BB8E94` dep line) — the four
+drift lines were already absent on `main`, so nothing else moved. No `gen_data_incbin_deps.py` regen.
+
+**Gate discipline.** Forced a fresh rebuild of `data_08BB8E94.o` (`rm` the stale object) so the literal is
+actually recompiled, then `make compare` → `fireemblem8.gba: OK` (real exit 0, `pipefail`; object rebuilt) +
+`make shiftcheck` exit 0 (SUMMARY 0/0/0), push, CI green. Pre-commit correctly skipped its build gate during
+the merge-commit (MERGE_HEAD present); the explicit compare/shiftcheck above is the real gate.
+
+**Impact — axis targets REACHED (`classify_residual_assets.py` + `calcprogress.py`):**
+- Residual-asset worklist (D306): **1 region / 42.8 KB → 0 regions / 0.0 KB** (0 `data/residual/*.bin` on disk).
+- **Axis 3 EXTRACTED DATA: 99.69% → 100.00%** (13,937,336 / 13,937,336; **0 residual opaque bytes** — target reached).
+- **Axis 6 ASSET EDITABILITY: 43,824 → 0 B** opaque raw-incbin (target 0 reached).
+- Axes 1/2/4/5 unchanged (pure data): self-containment 100%, matching-C 99.83% (15 asm), named 100%,
+  shiftability gate at floor.
+
+Cumulative D358+D359 data-extraction wave: **residual worklist 31 → 0 regions; opaque frontier 74,311 → 0 B;
+axis-3 → 100.00%, axis-6 → 0.** Tracked on project board **#14**. Single-owner serial integration held
+throughout; `main` green at every push. (Lingering `data/residual/*.map.bin.lz` are gitignored build-artifact
+orphans from the D358 maps-tsa18 move; the 2 tracked `.pal` palette residuals are typed, not in the worklist.)
