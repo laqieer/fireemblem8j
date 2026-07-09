@@ -9943,3 +9943,53 @@ by data-residue typing (addr_map JP→US + referencing-code + structural decode)
 unaffected (metric-only change). Note: `sGenericChibiImgLut`-style function-LOCAL names improve
 documentation quality but are in *neither* metric's denominator (auto locals emit no symbol; fe8j
 counts only `.global` labels).
+
+## D351 — Residue-typing wave: 32 `data_<hex>` placeholders → fe8u-validated typed names (98.84% → 99.10%); 5 skipped for integrity (2026-07-09)
+
+**Context.** D350 credited descriptive asset labels as NAMED and framed the remaining
+placeholders as "the genuinely-cryptic `data_<hex>`/`sub_<hex>`/`nullsub_` residues — the real
+'confirm the type, then name' frontier (D29 raw-incbin residue tail), being driven by data-residue
+typing." This wave executes exactly that on a carve-researcher-vetted batch of 37 candidate renames
+(reference-ELF `arm-none-eabi-nm -n` neighbor-ordering).
+
+**Mechanic (proven byte-neutral, per residue).** (1) rename the residue symbol in
+`src/data/data_<hex>/data_<hex>.{c,s}` (the tracked `.global`/`label:`/C-array/`.type`); the
+`.section .data.residue.<addr>` and `carved_rom.d` manifest are unchanged (they key on the `.o` +
+section, not the symbol). (2) rename **every** tree-wide reference (`git grep -l` tracked-only, then
+`perl -i -pe 's/\bdata_<hex>\b(?![.\w])/NewName/g'`; the `(?![.\w])` guard protects
+`data_<hex>.bin`/`.gbapal` INCBIN paths and `.data.residue.<hex>` section names). (3) rename the
+excluded mirror `asm/data_<hex>.s` `.global`+label but **keep** its `.incbin` path. The 21 untracked
+gcc-generated `src/data/data_*/data_*.s` agbcc intermediates are never edited/committed (they escape
+`.gitignore` line 136 but are regenerated). Renames are pure relabels → `make compare` byte-identical.
+
+**Applied (32, 4 commits, each `make compare` OK + `make shiftcheck` clean, pushed CI-green):**
+- `63eb1a341` pilot (5): `gProcScr_SALLYCURSOR_pool`, `sCpProcData`, `sBanimEkrPopupProcNames`,
+  `sGmapRouteMenuText`, `sCcramifyProcData`.
+- `cf41a56b2` + `0165110b6` AnimSprite frame residues (23): `AnimSprite_*` (LvupStatup / EkrBaseKaiten /
+  HurtmutEff / Icebreath / EfxThunder / EfxElfire / Fimbulvetr / EfxPurge / EfxLive / EfxReblow_{L,R} /
+  EfxSleepOBJ2 / EfxMshield), suffixed by their sym_jp.txt frame index.
+- `4ae977687` specials (4): `ProcScr_TalkPutSpriteText`, `PopupScr_GoldWasStole_body`,
+  `gEfxlvupfx_0_script`, `Pal_EfxCrimsonEyeBGFinishIntro`.
+
+**Skipped (5) — a wrong name is worse than the placeholder (D27/D29 integrity):**
+- `data_080DC104 → gUninitializedMemory`: name already at 0x080D41D4 (`sym_jp.txt:1599`) — collision;
+  content is a build-date string, not uninitialized memory.
+- `data_080DC684 → sCanUnitMoveAdjLookup`: residue already split (`data_080DC68C` debug-menu block +
+  carved strings); the symbol is gone and the name contradicts the content.
+- `data_081F5BF0 → sSurvivalRankTemplate`: already D121-split; first 4 bytes are a
+  GetChapterSurvivalRank-local template, remainder is a Gmap ramp+strings blob — not a rank template.
+- `data_085C3348 → obj_Phasechangefx_0`: name is a REAL existing global
+  (`src/phasechangefx_0801EB00.c:27`) → duplicate-symbol link error.
+- `data_085C3A08 → ProcScr_EmitStars`: name is a REAL existing global at 0x085c39d0
+  (`src/emitstarfx.c:62`) → collision + wrong address.
+
+**Impact.** Axis-4 NAMED SYMBOLS **98.84% (12,577/12,724, 147 placeholders) → 99.10%
+(12,609/12,724, 115 placeholders)** (`python3 scripts/calcprogress.py`). `make compare` unaffected
+(relabel-only). The frontier.md/README headline was refreshed from its D350 snapshot
+(98.19%/12,809/232), whose denominator also absorbs the interim −85 stale-mirror removal
+(`f6e4053a9`, "98.20%→98.84%") that predates this wave and had not been doc-refreshed.
+
+**Lesson.** Verify each candidate name against `nm -n` neighbor context **and** a collision scan
+(`nm` + `sym_jp.txt` + `src/` definitions) **before** applying; multi-part residues that were already
+split (D121-style) have no whole-blob symbol left to rename — skip rather than force. Batching is safe
+precisely because every rename is byte-neutral, but the gate is still full `make compare` per batch.
