@@ -10094,3 +10094,48 @@ check catching a researcher **off-by-one-table mis-ID** — the residue is *adja
 the named table, not equal to it. Remaining ~62 placeholders are dominated by the **Group-4 mixed
 AnimSprite+AnimScr SPLITs** (need real object splitting, not a single relabel) + the genuine floor
 (the 0x08FE0000 ARM multiboot image, 0x08A5A6AD padding, zero-pad tails).
+
+## D354 — Residue-typing wave 4 (Group-4 mixed AnimSprite+AnimScr): 17 `data_<hex>` placeholders → AnimSprite frame names (99.51% → 99.65%); 0 skipped (2026-07-09)
+
+**Context.** Final big wave of the residue-typing program (continuation of D351/D352/D353). Wave 4 =
+the 17 **"Group-4" mixed AnimSprite+AnimScr residues** (0x085F–0x086E) that D353 flagged as needing
+"real object splitting." Each residue START is an **AnimSprite frame (OAM)**; the AnimScr scripts that
+follow inside the same byte range are **already ABSOLUTE (`A`) aliases** in `sym_jp.txt`/`data_banim.s`.
+
+**3-way triage (the key judgment call), per the strategy.** For each residue: (a) if the first-frame
+name is **not** already defined → rename the START (single byte-neutral relabel); (b) if it **collides**
+(name already aliased at that address) → the residue is a redundant excluded mirror → delete
+`asm/data_<hex>.s`; (c) if neither is clean → split or skip. **All 17 resolved to branch (a) RENAME:**
+- Every proposed first-frame name is **collision-free** (absent from `nm`, undefined in `src/`+`asm/`).
+- **Mirror-delete N/A** — the `src/data/data_<hex>/data_<hex>.s` object is the *linked byte-provider*
+  (shows `T` in `nm`), not a redundant mirror of an already-aliased range; deleting it would drop bytes
+  and fail `make compare`.
+- **Split N/A** — the inner AnimScr script sub-parts are **already named** (absolute aliases), so there
+  is nothing left to split out; only the START placeholder needed a name. This *refines* D353's
+  pessimistic "need splitting" prediction: the mixed blobs are single-relabel cases after all.
+
+**Structure evidence (nm neighbors).** `data_085F22B4` (500 B) START → `AnimSprite_Miss_11`, inner
+`A AnimScr_NoDamage` @+0x120 / `A AnimScr_Miss` @+0x194. `data_086A328C` → `AnimSprite_EfxReblowOBJ_R_86`,
+inner `A AnimScr_EfxReblowOBJ_Right1/2`. Every proposed AnimSprite name **thematically matches** the
+following AnimScr script (Miss→Miss, Reblow_R→Reblow_Right, Teyari/Ivald/Berserk/Stone/… all consistent).
+
+**Applied (17, 2 commits, each `make compare` OK + `make shiftcheck` 0 HIGH, pushed CI-green):**
+- `f0d9291ae` W4-1 (9): `AnimSprite_{Miss_11, EfxTeyariObjType0Right_8, EfxTeyariObjType0Left_8,
+  EfxTeyariObjType1Right_9, EfxTeyariObjType1Left_9, EfxSongObj2_10, IcebreathOBJ_Right25,
+  EfxMantBatabata6_R_7, EfxMantBatabata6_L_7}`.
+- `0a8ac11ea` W4-2 (8): `AnimSprite_{EfxMistyRainObj1_14, EfxReblowOBJ_R_86, EfxReblowOBJ_L_86,
+  EfxBerserk2_15, EfxIvald1_55, EfxIvald2_57, EfxDarkGradoOBJ02piece_R_4, EfxStone_12}`.
+
+**Skipped: 0.** The hard-skip floor (`08FE0000` multiboot, `08A5A6AD` padding, zero-pad tails) is not in
+Wave 4.
+
+**Impact.** Axis-4 NAMED SYMBOLS **99.51% (12,662/12,724, 62 placeholders) → 99.65% (12,679/12,724,
+45 placeholders)** (`python3 scripts/calcprogress.py`). `make compare` unaffected (relabel-only).
+
+**Lesson / program end-state.** Across the 4-wave residue-typing program: **wave 1 +32, wave 2/Batch C
++27, wave 3 +26, wave 4 +17 = 102 `data_<hex>` placeholders typed, 98.84% → 99.65%**, with **8 integrity
+skips** (collision / already-split / off-by-table mis-ID) — **zero wrong names committed**. The remaining
+**45** placeholders are now essentially the **structural floor**: the 0x08FE0000 ARM multiboot image,
+the 0x08A5A6AD 3-byte padding, the zero-padding tails, spurious labels, and a handful of region-diff
+MapChanges/EventList tables whose real names collide with US-layout symbols (to be re-typed with
+JP-distinct names separately). This is at or near the structural limit for byte-neutral relabels.
