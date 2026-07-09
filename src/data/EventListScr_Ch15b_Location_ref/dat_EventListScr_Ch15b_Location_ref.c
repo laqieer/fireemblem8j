@@ -8,7 +8,7 @@
  * byte-identical to the former INCBIN of EventListScr_Ch15b_Location.bin.
  *
  * The symbol is exactly 64 bytes and ends mid-record: the final word is the
- * header of a DOOR entry whose body continues in the adjacent data_08A5CEDC
+ * header of a DOOR entry whose body continues in the adjacent dat_EventListScr_08A5CEDC_ref
  * residue, so it is emitted here as a raw EVT_LIST_CMD_DOOR header word to keep
  * the byte layout intact without absorbing the neighbouring symbol. */
 
@@ -19,6 +19,6 @@ SECTION(".rodata.dat_EventListScr_Ch15b_Location_ref") EventListScr EventListScr
     EvtListCHES(ITEM_KNIGHTCREST, 20, 3)
     EvtListDOOR(1, 4, 0)
 
-    /* DOOR header for the entry continued in data_08A5CEDC */
+    /* DOOR header for the entry continued in dat_EventListScr_08A5CEDC_ref */
     _EvtParams2(EVT_LIST_CMD_DOOR, 0),
 };

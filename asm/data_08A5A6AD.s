@@ -1,12 +1,12 @@
-@ byte-neutral SPLIT_PARTIAL of data_08A5A6AD (115B) into a 3B LEAVE +
+@ byte-neutral SPLIT_PARTIAL of gPadding_08A5A6AD (115B) into a 3B LEAVE +
 @ 7 named Prologue event lists. This mirror is in DATA_INCBIN_ASM_EXCLUDE
 @ (NOT linked); scanned only by the named-symbols metric. Real bytes come
 @ from the src object; make compare is the oracle. (.bin is absent, as for
 @ the other excluded residue mirrors -- never assembled.)
 
 	.section .data.residue.08A5A6AD, "a", %progbits
-	.global data_08A5A6AD
-data_08A5A6AD:
+	.global gPadding_08A5A6AD
+gPadding_08A5A6AD:
 	.incbin "data/residual/data_08A5A6AD.bin", 0x0, 0x3
 	.section .data.residue.08A5A6B0, "a", %progbits
 	.global EventListScr_Prologue_Turn

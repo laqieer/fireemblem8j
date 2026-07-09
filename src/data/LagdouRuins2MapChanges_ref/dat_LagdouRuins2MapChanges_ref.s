@@ -5,14 +5,14 @@
 	.section .rodata.dat_LagdouRuins2MapChanges_ref, "a", %progbits
 	.global LagdouRuins2MapChanges
 LagdouRuins2MapChanges:
-	.4byte data_08A5DAE8 + 0x16C
-	.4byte data_08A5DAE8 + 0x170
-	.4byte data_08A5DAE8 + 0x174
-	.4byte data_08A5DAE8 + 0x178
-	.4byte data_08A5DAE8 + 0x1AC
-	.4byte data_08A5DAE8 + 0x1B0
-	.4byte data_08A5DAE8 + 0x1B4
-	.4byte data_08A5DAE8 + 0x1B8
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x16C
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x170
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x174
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x178
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x1AC
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x1B0
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x1B4
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x1B8
 	.4byte gUidebug_2 + 0x661
 	.4byte frontier_df4_menu_005_A5FFAD + 0x75
 	.4byte UnitDef_Ruin2Ally

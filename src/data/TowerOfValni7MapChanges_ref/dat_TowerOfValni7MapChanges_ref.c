@@ -10,7 +10,7 @@
 
 extern const u8 TowerOfValni6MapChanges[];
 extern const u8 UnitDef_Tower7Ally[];
-extern const u8 data_08A5DA90[];
+extern const u8 gPadding_08A5DA90[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
@@ -19,10 +19,10 @@ SECTION(".rodata.dat_TowerOfValni7MapChanges_ref") static const u32 TowerOfValni
     (u32)&TowerOfValni6MapChanges + 0x78,
     (u32)&TowerOfValni6MapChanges + 0x7C,
     (u32)&TowerOfValni6MapChanges + 0x80,
-    (u32)&data_08A5DA90,
-    (u32)&data_08A5DA90 + 0x4,
-    (u32)&data_08A5DA90 + 0x8,
-    (u32)&data_08A5DA90 + 0xC,
+    (u32)&gPadding_08A5DA90,
+    (u32)&gPadding_08A5DA90 + 0x4,
+    (u32)&gPadding_08A5DA90 + 0x8,
+    (u32)&gPadding_08A5DA90 + 0xC,
     (u32)&gUidebug_2 + 0x652,
     (u32)&frontier_df4_menu_005_A5FFAD + 0x72,
     (u32)&UnitDef_Tower7Ally,

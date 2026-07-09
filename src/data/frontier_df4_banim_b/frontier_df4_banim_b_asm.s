@@ -531,8 +531,8 @@ frontier_df4_banim_b_006_6123D4:
 .4byte AnimSprite_DarkBreathOBJ_Close12 + 2
 .4byte AnimSprite_DarkBreathOBJ_Close13 + 2
 .4byte AnimSprite_DarkBreathOBJ_Close14 + 2
-.4byte data_08612134 + 2
-.4byte data_08612134 + 230
+.4byte dat_AnimSprite_08612134_ref + 2
+.4byte dat_AnimSprite_08612134_ref + 230
 .4byte AnimSprite_DarkBreathOBJ_Close17 + 2
 .4byte AnimSprite_DarkBreathOBJ_Close18 + 2
 .4byte frontier_df4_banim_b_006_6123D4 + 2

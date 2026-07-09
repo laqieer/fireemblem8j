@@ -1093,7 +1093,7 @@ extern const u8 AnimSprite_EkrBaseKaiten_85[];
 extern const u8 AnimSprite_EkrBaseKaiten_87[];
 extern const u8 Tsa_DarkBreathBg_10[];
 extern const u8 Tsa_DarkBreathBg_11[];
-extern const u8 data_08636008[];
+extern const u8 Lz77Tsa_BoltingBg_08636008[];
 extern const u8 Tsa_DivineBg_16[];
 extern const u8 Tsa_DivineBg_17[];
 extern const u8 Tsa_DivineBg_18[];
@@ -2467,7 +2467,7 @@ u32 frontier_df4_banim_a_res14[] __attribute__((section(".data.frontier_df4_bani
     (u32)&Img_BoltingBg_A, (u32)&Img_BoltingBg_A, (u32)&Img_BoltingBg_A, (u32)&Img_BoltingBg_A, (u32)&Img_BoltingBg_B, (u32)&Img_BoltingBg_B,
     (u32)&Img_BoltingBg_B, (u32)&Img_BoltingBg_B, (u32)&Img_BoltingBg_B, (u32)&Img_BoltingBg_B, (u32)&Img_BoltingBg_C, (u32)&Tsa_BoltingBg_A,
     (u32)&Tsa_BoltingBg_B, (u32)&Tsa_BoltingBg_C, (u32)&Tsa_BoltingBg_D, (u32)&Tsa_BoltingBg_E, (u32)&Tsa_BoltingBg_F, (u32)&Tsa_BoltingBg_G,
-    (u32)&Tsa_BoltingBg_H, (u32)&Tsa_BoltingBg_I, (u32)&data_08636008, (u32)&Tsa_BoltingBg_K, 0x00000001, (u32)&Frames_efxThunderstormBG + 0x46,
+    (u32)&Tsa_BoltingBg_H, (u32)&Tsa_BoltingBg_I, (u32)&Lz77Tsa_BoltingBg_08636008, (u32)&Tsa_BoltingBg_K, 0x00000001, (u32)&Frames_efxThunderstormBG + 0x46,
     0x00000003, (u32)&efxThunderstormOBJ_Loop, 0x0064000E, 0x00000000, 0x00000003, (u32)&efxThunderstormOBJ_End,
     0x00000000, 0x00000000, 0x00000001, (u32)&Frames_efxThunderstormBG + 0x5A, 0x005E000E, 0x00000000,
     0x00000003, (u32)&efxThunderstormColor_Loop_A, 0x0003000E, 0x00000000, 0x00000003, (u32)&efxThunderstormColor_Loop_B,

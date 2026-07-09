@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.08A5DAE8, "aw", %progbits
-	.global data_08A5DAE8
-data_08A5DAE8:
+	.global dat_gChDAsset_08A5DAE8_ref
+dat_gChDAsset_08A5DAE8_ref:
 	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x458
 	.4byte frontier_df3_eventscr_ch_021_A6FC48 + 0x4D8
 	.4byte 0x00000000
@@ -23,14 +23,14 @@ data_08A5DAE8:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte data_08A5DAE8 + 0x8
-	.4byte data_08A5DAE8 + 0xC
-	.4byte data_08A5DAE8 + 0x10
-	.4byte data_08A5DAE8 + 0x20
-	.4byte data_08A5DAE8 + 0x3C
-	.4byte data_08A5DAE8 + 0x40
-	.4byte data_08A5DAE8 + 0x44
-	.4byte data_08A5DAE8 + 0x48
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x8
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0xC
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x10
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x20
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x3C
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x40
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x44
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x48
 	.4byte gUidebug_2 + 0x653
 	.4byte frontier_df4_menu_005_A5FFAD + 0x73
 	.4byte UnitDef_Tower8Ally
@@ -75,14 +75,14 @@ data_08A5DAE8:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte data_08A5DAE8 + 0x9C
-	.4byte data_08A5DAE8 + 0xD0
-	.4byte data_08A5DAE8 + 0xD4
-	.4byte data_08A5DAE8 + 0xD8
-	.4byte data_08A5DAE8 + 0x10C
-	.4byte data_08A5DAE8 + 0x110
-	.4byte data_08A5DAE8 + 0x114
-	.4byte data_08A5DAE8 + 0x118
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x9C
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0xD0
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0xD4
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0xD8
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x10C
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x110
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x114
+	.4byte dat_gChDAsset_08A5DAE8_ref + 0x118
 	.4byte gUidebug_2 + 0x660
 	.4byte frontier_df4_menu_005_A5FFAD + 0x74
 	.4byte UnitDef_Ruin1Ally
@@ -115,4 +115,4 @@ data_08A5DAE8:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-/* de-pointered slice data_08A5DAE8: ptr=44 data=67 skip=0 */
+/* de-pointered slice dat_gChDAsset_08A5DAE8_ref: ptr=44 data=67 skip=0 */

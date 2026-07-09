@@ -2,7 +2,7 @@
 
 /* Typed C extraction of residual raw-incbin slices from data_08612134.c. */
 
-u32 data_08612134[] __attribute__((section(".data.residue.08612134"))) = {
+u32 dat_AnimSprite_08612134_ref[] __attribute__((section(".data.residue.08612134"))) = {
     0xFFFF0002, 0x0000FE92, 0x016E0000, 0xFFFF0002,
     0x0000FE00, 0x02000000, 0x50000000, 0x003A0002,
     0x0000FFEE, 0x10008000, 0x00320004, 0x0000FFEE,

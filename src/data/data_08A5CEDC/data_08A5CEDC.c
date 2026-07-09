@@ -5,7 +5,7 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-struct AnimSpriteData data_08A5CEDC[] __attribute__((section(".data.residue.08A5CEDC"))) =
+struct AnimSpriteData dat_EventListScr_08A5CEDC_ref[] __attribute__((section(".data.residue.08A5CEDC"))) =
 {
     { .header = 0x00000001, .as = { .object = { 0x0A03, 18, 8 } } },
     { .header = 0x00000001, .as = { .object = { 0x0304, 18, 7 } } },

@@ -7,7 +7,7 @@
 	.section .data.residue.086371AC, "aw", %progbits
 	.global data_086371AC
 data_086371AC:
-	.4byte data_08636294 + 0x1, AnimSprite_EfxThunderstormOBJ_19 + 0x1, data_08636294 + 0x19, AnimSprite_EfxThunderstormOBJ_19 + 0x1, AnimSprite_EfxThunderstormOBJ_3 + 0x1, AnimSprite_EfxThunderstormOBJ_19 + 0x1
+	.4byte dat_AnimSprite_08636294_ref + 0x1, AnimSprite_EfxThunderstormOBJ_19 + 0x1, dat_AnimSprite_08636294_ref + 0x19, AnimSprite_EfxThunderstormOBJ_19 + 0x1, AnimSprite_EfxThunderstormOBJ_3 + 0x1, AnimSprite_EfxThunderstormOBJ_19 + 0x1
 	.4byte AnimSprite_EfxThunderstormOBJ_4 + 0x1, AnimSprite_EfxThunderstormOBJ_19 + 0x1, AnimSprite_EfxThunderstormOBJ_5 + 0x1, AnimSprite_EfxThunderstormOBJ_19 + 0x1, AnimSprite_EfxThunderstormOBJ_6 + 0x1, AnimSprite_EfxThunderstormOBJ_19 + 0x1
 	.4byte AnimSprite_EfxThunderstormOBJ_3 + 0x1, AnimSprite_EfxThunderstormOBJ_7 + 0x1, AnimSprite_EfxThunderstormOBJ_19 + 0x1, AnimSprite_EfxThunderstormOBJ_4 + 0x1, AnimSprite_EfxThunderstormOBJ_8 + 0x1, AnimSprite_EfxThunderstormOBJ_19 + 0x1
 	.4byte AnimSprite_EfxThunderstormOBJ_5 + 0x1, AnimSprite_EfxThunderstormOBJ_9 + 0x1, AnimSprite_EfxThunderstormOBJ_19 + 0x1, AnimSprite_EfxThunderstormOBJ_6 + 0x1, AnimSprite_EfxThunderstormOBJ_10 + 0x1, AnimSprite_EfxThunderstormOBJ_19 + 0x1

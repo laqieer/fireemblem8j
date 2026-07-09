@@ -1,12 +1,12 @@
 @ Descriptive assembly extracted from inline __asm__ in data_08A5A6AD.c (#152).
-@ Byte-neutral SPLIT_PARTIAL: 3B LEAVE (data_08A5A6AD, byte-completeness) + 7
+@ Byte-neutral SPLIT_PARTIAL: 3B LEAVE (gPadding_08A5A6AD, byte-completeness) + 7
 @ named Prologue event lists. Directive stream preserved verbatim; the three
 @ raw .byte runs that straddle a part boundary are broken at that byte (NO
 @ .align, NO reordering). make compare is the oracle.
 
 	.section .data.residue.08A5A6AD, "aw", %progbits
-	.global data_08A5A6AD
-data_08A5A6AD:
+	.global gPadding_08A5A6AD
+gPadding_08A5A6AD:
 	.byte 0x00, 0x00, 0x00
 	.section .data.residue.08A5A6B0, "aw", %progbits
 	.global EventListScr_Prologue_Turn

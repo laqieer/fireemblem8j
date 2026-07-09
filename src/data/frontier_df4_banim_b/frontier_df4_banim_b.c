@@ -1586,14 +1586,14 @@ extern const u8 btl_bg_7_palette[];
 extern const u8 btl_bg_7_tiles[];
 extern const u8 btl_bg_8_map[];
 extern const u8 btl_bg_8_palette[];
-extern const u8 data_08616558[];
+extern const u8 Lz77Gfx_08616558[];
 extern const u8 AnimSprite_EfxMistyRainObj4_12[];
 extern const u8 Pal_GleipnirBg_Nebula_2[];
 extern const u8 Pal_GleipnirBg_Nebula_3[];
 extern const u8 Pal_GleipnirBg_Nebula_4[];
 extern const u8 Pal_GleipnirBg_Nebula_5[];
 extern const u8 Pal_GleipnirBg_Nebula_6[];
-extern const u8 data_08713018[];
+extern const u8 Pal_08713018[];
 extern const u8 data_0874687C[];
 extern const u8 data_08746D0C[];
 extern const u8 data_087471A8[];
@@ -2747,8 +2747,8 @@ u32 frontier_df4_banim_b_001_602FB0[] __attribute__((section(".data.frontier_df4
     (u32)&Tsa_efxDarkLongMonsBG01_14, (u32)&Tsa_efxDarkLongMonsBG01_15, (u32)&Img_efxDarkLongMonsBG01_0, (u32)&Img_efxDarkLongMonsBG01_1, (u32)&Img_efxDarkLongMonsBG01_2, (u32)&Img_efxDarkLongMonsBG01_3,
     (u32)&Img_efxDarkLongMonsBG01_4, (u32)&Img_efxDarkLongMonsBG01_5, (u32)&Img_efxDarkLongMonsBG01_6, (u32)&Img_efxDarkLongMonsBG01_7, (u32)&Img_efxDarkLongMonsBG01_8, (u32)&Img_efxDarkLongMonsBG01_9,
     (u32)&Img_efxDarkLongMonsBG01_10, (u32)&Img_efxDarkLongMonsBG01_11, (u32)&Img_efxDarkLongMonsBG01_12, (u32)&Img_efxDarkLongMonsBG01_13, (u32)&Img_efxDarkLongMonsBG01_14, (u32)&Img_efxDarkLongMonsBG01_15,
-    (u32)&data_08713018, (u32)&data_08713018, (u32)&data_08713018, (u32)&data_08713018, (u32)&data_08713018, (u32)&data_08713018,
-    (u32)&data_08713018, (u32)&data_08713018, (u32)&data_08713018, (u32)&data_08713018, (u32)&data_08713018, (u32)&Pal_efxDarkLongMonsBG01_1,
+    (u32)&Pal_08713018, (u32)&Pal_08713018, (u32)&Pal_08713018, (u32)&Pal_08713018, (u32)&Pal_08713018, (u32)&Pal_08713018,
+    (u32)&Pal_08713018, (u32)&Pal_08713018, (u32)&Pal_08713018, (u32)&Pal_08713018, (u32)&Pal_08713018, (u32)&Pal_efxDarkLongMonsBG01_1,
     (u32)&Pal_efxDarkLongMonsBG01_1, (u32)&Pal_efxDarkLongMonsBG01_2, (u32)&Pal_efxDarkLongMonsBG01_3, (u32)&Pal_efxDarkLongMonsBG01_4, 0x00000001, (u32)&gFrameConfig_efxDarkLongMonsBG01 + 0x44,
     0x00000003, (u32)&efxDarkLongMonsBG01_Loop_A + 0x1, 0x00000003, (u32)&efxDarkLongMonsBG01_Loop_B + 0x1, 0x00000000, 0x00000000,
     (u32)&Tsa_efxDarkLongMonsBG02_0, (u32)&Tsa_efxDarkLongMonsBG02_1, (u32)&Tsa_efxDarkLongMonsBG02_2, (u32)&Tsa_efxDarkLongMonsBG02_3, (u32)&Tsa_efxDarkLongMonsBG02_4, (u32)&Tsa_efxDarkLongMonsBG02_5,
@@ -2806,7 +2806,7 @@ struct ProcCmd ProcScr_efxNormalEffectBG[] __attribute__((section(".data.frontie
 };
 u32 frontier_df4_banim_b_res1[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
     (u32)&Tsa1_EfxNormalEffectBG, (u32)&Tsa2_EfxNormalEffectBG, (u32)&Tsa3_EfxNormalEffectBG, (u32)&Tsa4_EfxNormalEffectBG, (u32)&Tsa5_EfxNormalEffectBG, (u32)&Tsa6_EfxNormalEffectBG,
-    (u32)&Tsa7_EfxNormalEffectBG, (u32)&Tsa8_EfxNormalEffectBG, (u32)&Tsa9_EfxNormalEffectBG, (u32)&data_08616558,
+    (u32)&Tsa7_EfxNormalEffectBG, (u32)&Tsa8_EfxNormalEffectBG, (u32)&Tsa9_EfxNormalEffectBG, (u32)&Lz77Gfx_08616558,
 };
 struct ProcCmd ProcScr_efxPierceCriticalEffect[] __attribute__((section(".data.frontier_df4_banim_b.gap1"))) = {
     PROC_NAME((void*)((u8*)frontier_df4_misc_lo_010c_0E3F3C + 0x5D8)), PROC_REPEAT((void*)((u8*)efxPierceCriticalEffectMain + 0x1)), PROC_END,

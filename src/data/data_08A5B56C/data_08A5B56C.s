@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.08A5B56C, "aw", %progbits
-	.global data_08A5B56C
-data_08A5B56C:
+	.global dat_MapChanges_08A5B56C_ref
+dat_MapChanges_08A5B56C_ref:
 	.4byte EventScr_Ch11a_BeginningScene
 	.4byte EventScr_Ch11a_EndingScene
 	.4byte 0x00070002
@@ -44,4 +44,4 @@ data_08A5B56C:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-/* de-pointered slice data_08A5B56C: ptr=12 data=28 skip=0 */
+/* de-pointered slice dat_MapChanges_08A5B56C_ref: ptr=12 data=28 skip=0 */
