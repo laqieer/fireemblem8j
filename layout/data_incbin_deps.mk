@@ -359,11 +359,6 @@ src/data/data_087644A8/data_087644A8.o: data/residual/data_087644A8_0.map.bin.lz
 src/data/data_08764BF4/data_08764BF4.o: data/residual/data_08764BF4_0.map.bin.lz
 src/data/data_087AEA64/data_087AEA64.o: data/residual/data_087AEA64_0.gbapal.lz
 src/data/data_087E1718/data_087E1718.o: data/residual/data_087E1718_0.gbapal.lz
-src/data/data_0890A320/data_0890A320.o: data/residual/data_0890A320.bin
-src/data/data_0890BC70/data_0890BC70.o: data/residual/data_0890BC70.bin
-src/data/data_0890BD24/data_0890BD24.o: data/residual/data_0890BD24.bin
-src/data/data_08925BF8/data_08925BF8.o: data/residual/data_08925BF8.bin
-src/data/data_08925CD4/data_08925CD4.o: data/residual/data_08925CD4.bin
 src/data/data_08A5D0E4/data_08A5D0E4.o: data/residual/data_08A5D0E4.bin
 src/data/data_08A5DA90/data_08A5DA90.o: data/residual/data_08A5DA90.bin
 src/data/data_08A964FC/data_08A964FC.o: graphics/misc/data_08A964FC.gbapal
