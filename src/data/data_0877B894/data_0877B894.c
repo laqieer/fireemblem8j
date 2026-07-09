@@ -3,7 +3,7 @@
 
 /* Typed C extraction of residual raw-incbin slices from data_0877B894.c. */
 
-struct AnimSpriteData data_0877B894[] __attribute__((section(".data.residue.0877B894"))) =
+struct AnimSpriteData AnimSprite_EfxChill_R_2[] __attribute__((section(".data.residue.0877B894"))) =
 {
     { .header = 0x80008000, .as = { .object = { 0x0020, -4, -16 } } },
     { .header = 0x40008000, .as = { .object = { 0x0022, 12, -16 } } },

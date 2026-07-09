@@ -2,15 +2,15 @@
 @ Byte-identical to the compiled inline-asm form; make compare is the oracle.
 
 	.section .data.residue.087E1A58, "aw", %progbits
-	.global data_087E1A58
-data_087E1A58:
+	.global AnimSprite_EkrPopup
+AnimSprite_EkrPopup:
 	.4byte 0x40000000
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000001
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte data_087E1A58 + 0x1
+	.4byte AnimSprite_EkrPopup + 0x1
 	.4byte 0x80000000
 	.section .data.residue.087E1B48, "aw", %progbits
 data_087E1B48:

@@ -10,7 +10,7 @@ data_087A2554:
 	.4byte AnimSprite_efxSuperdruidOBJ_1 + 0x2
 	.4byte 0x187A2495
 	.4byte AnimSprite_efxSuperdruidOBJ_2 + 0x2
-	.4byte data_087A2494 + 0x2
+	.4byte AnimSprite_efxSuperdruidOBJ_3 + 0x2
 	.4byte 0x81000000
 	.global data_087A256C
 data_087A256C:

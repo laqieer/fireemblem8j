@@ -7,8 +7,8 @@ extern const u8 Pal_PrepWindowA[];
 extern const u8 Pal_PrepWindowB[];
 extern const u8 Pal_PrepWindowC[];
 extern const u8 Pal_PrepWindowD[];
-extern const u8 data_0872C080[];
-extern const u8 data_0872C194[];
+extern const u8 AnimScr_efxNaglfarOBJ[];
+extern const u8 AnimScr_efxNaglfarOBJ_6[];
 
 /* Migrated from asm/frontier_df4_misc_lo.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
@@ -1244,18 +1244,18 @@ u8 frontier_df4_misc_lo_010b_0E3D78[] __attribute__((section(".data.frontier_df4
     0x61, 0x72, 0x4F, 0x42, 0x4A, 0x00, 0x00, 0x00,
 };
 u32 frontier_df4_misc_lo_010b_0E3D78_1[] __attribute__((section(".data.frontier_df4_misc_lo.gap10b"))) = {
-    (u32)&data_0872C080,
-    (u32)&data_0872C194,
-    (u32)&data_0872C080 + 8,
-    (u32)&data_0872C194 + 8,
-    (u32)&data_0872C080 + 16,
-    (u32)&data_0872C194 + 16,
-    (u32)&data_0872C080 + 24,
-    (u32)&data_0872C194 + 24,
-    (u32)&data_0872C080 + 32,
-    (u32)&data_0872C194 + 32,
-    (u32)&data_0872C080 + 40,
-    (u32)&data_0872C194 + 40,
+    (u32)&AnimScr_efxNaglfarOBJ,
+    (u32)&AnimScr_efxNaglfarOBJ_6,
+    (u32)&AnimScr_efxNaglfarOBJ + 8,
+    (u32)&AnimScr_efxNaglfarOBJ_6 + 8,
+    (u32)&AnimScr_efxNaglfarOBJ + 16,
+    (u32)&AnimScr_efxNaglfarOBJ_6 + 16,
+    (u32)&AnimScr_efxNaglfarOBJ + 24,
+    (u32)&AnimScr_efxNaglfarOBJ_6 + 24,
+    (u32)&AnimScr_efxNaglfarOBJ + 32,
+    (u32)&AnimScr_efxNaglfarOBJ_6 + 32,
+    (u32)&AnimScr_efxNaglfarOBJ + 40,
+    (u32)&AnimScr_efxNaglfarOBJ_6 + 40,
 };
 u8 frontier_df4_misc_lo_010b_0E3D78_2[] __attribute__((section(".data.frontier_df4_misc_lo.gap10b"))) = {
     0x40, 0x00, 0x80, 0x00, 0x20, 0x00, 0x48, 0x00, 0x48, 0x00, 0x18, 0x00,

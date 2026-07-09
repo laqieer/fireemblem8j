@@ -2,8 +2,8 @@
 @ Byte-identical to the compiled inline-asm form; make compare is the oracle.
 
 	.section .data.residue.08855D58, "aw", %progbits
-	.global data_08855D58
-data_08855D58:
+	.global ProcScr_EkrdragonDemonkingobj_0
+ProcScr_EkrdragonDemonkingobj_0:
 	.4byte 0x00000002
 	.4byte sub_807A154 + 0x1
 	.4byte 0x00000003
