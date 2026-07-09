@@ -1,7 +1,7 @@
 #include "global.h"
 
-/* Migrated from asm/data_08EE0AD0.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* All-zero NULL tail of battle_terrain_table at 0x08EE0AD0 (304 B = 76 u32
+ * words). Byte-neutral migration from the raw INCBIN of
+ * data/residual/data_08EE0AD0.bin to a typed zero array. make compare is the oracle. */
 
-u8 BattleTerrainTable_NullTail_08EE0AD0[] __attribute__((section(".data.residue.08EE0AD0"))) = INCBIN_U8("data/residual/data_08EE0AD0.bin");
+const u32 BattleTerrainTable_NullTail_08EE0AD0[76] __attribute__((section(".data.residue.08EE0AD0"))) = {0};

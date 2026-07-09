@@ -1,7 +1,7 @@
 #include "global.h"
 
-/* Migrated from asm/data_08A5DA90.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+/* All-zero padding at 0x08A5DA90 (16 B = 4 u32 words). Byte-neutral migration
+ * from the raw INCBIN of data/residual/data_08A5DA90.bin to a typed zero array
+ * (fe8u padding form). make compare is the oracle. */
 
-u8 gPadding_08A5DA90[] __attribute__((section(".data.residue.08A5DA90"))) = INCBIN_U8("data/residual/data_08A5DA90.bin");
+const u32 gPadding_08A5DA90[4] __attribute__((section(".data.residue.08A5DA90"))) = {0};
