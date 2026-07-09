@@ -1885,7 +1885,6 @@ DATA_INCBIN_ASM_EXCLUDE := asm/dat_worldmap_gmap_p0.s \
                            asm/data_085D1E10.s \
                            asm/data_085CBFA4.s \
                            asm/data_085CBE64.s \
-                           asm/data_085C6A20.s \
                            asm/data_085C5A00.s \
                            asm/data_085C4440.s \
                            asm/data_085C3B10.s \
