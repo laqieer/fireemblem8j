@@ -380,7 +380,6 @@ src/data/data_08B755D4/data_08B755D4.o: graphics/reuse/data_08B755D4.4bpp.lz
 src/data/data_08B8A7B0/data_08B8A7B0.o: graphics/reuse/data_08B8A7B0.gbapal
 src/data/data_08B8B490/data_08B8B490.o: graphics/reuse/data_08B8B490.gbapal
 src/data/data_08BAB2DC/data_08BAB2DC.o: graphics/misc_gfx2/Tsa_GameIntroNintendo.bin.lz
-src/data/data_08BB8E94/data_08BB8E94.o: data/residual/data_08BB8ED0.bin
 src/data/data_08C01928/data_08C01928.o: data/residual/data_08C01928.bin
 src/data/data_08EE0AD0/data_08EE0AD0.o: data/residual/data_08EE0AD0.bin
 src/data/data_08EF86C8/data_08EF86C8.o: data/residual/data_08EF86C8.bin
