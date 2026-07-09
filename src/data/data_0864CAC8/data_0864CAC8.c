@@ -7,4 +7,4 @@
 /* D312 ID: byte-identical (220 B, whole symbol) to fe8u Tsa_Light_7
  * (declared extern u16 Tsa_Light_7[] in include/efxbattle.h). Byte-neutral rename;
  * section unchanged => same ROM bytes. */
-u8 Tsa_Light_7[] __attribute__((section(".data.residue.0864CAC8"))) = INCBIN_U8("data/residual/data_0864CAC8_0.map.bin.lz");
+u8 Tsa_Light_7[] __attribute__((section(".data.residue.0864CAC8"))) = INCBIN_U8("graphics/banim_efx_bg/data_0864CAC8_0.map.bin.lz");
