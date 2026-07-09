@@ -25,7 +25,11 @@ non-inflated numbers:
      SOURCE-FORM DATA is surfaced separately: data already built from committed
      editable source even when the object root is banim/, sound/, or asm/fe6sio.o.
   4. NAMED SYMBOLS           = named labels / total labels, with NO overflow.
-     `sub_/data_/nullsub_/banim_/gfx_` auto-placeholders count as UNNAMED.  ~59%.
+     Only semantically-empty labels count as UNNAMED: `sub_<hex>`, `data_<hex>`,
+     `nullsub_<n>`, and cryptic address-form asset labels `(banim|gfx|snd)_<hex>`.
+     Descriptive asset names like `banim_pal_mer` / `gfx_data_bg_NN_<name>` are
+     REAL names (they correctly identify the ROM asset) and count as NAMED --
+     matching fe8u's calcrom.pl, which treats the identical labels as documented.
 
 Prior bugs this fixes (per the audit, docs/decomp-completion-standard.md front d):
   * "data in src 100%": denominator was data_bytes itself (tautology). FIXED:
@@ -60,10 +64,23 @@ US_FUNCTIONS = 8528
 # JP code region [0x08000000, 0x080DC134): used only for the portal `code` byte metric.
 CODE_REGION = (0x08000000, 0x080DC134)
 
-# Auto-generated placeholder label prefixes -- these are UNNAMED for the symbol axis.
-# `sub_<hex>` (gbadisasm functions), `data_<hex>`, `nullsub_<n>`, and the auto
-# asset-sheet labels `banim_`/`gfx_`/`snd_`. Everything else is a real name.
-PLACEHOLDER_RE = re.compile(r"^(sub_[0-9A-Fa-f]+|data_|nullsub_|banim_|gfx_|snd_)")
+# Placeholder label prefixes -- these carry NO semantic content, so they are
+# UNNAMED for the symbol axis: `sub_<hex>` (gbadisasm functions), `data_<hex>`
+# (raw ROM residue at an address), `nullsub_<n>` (empty function). Everything
+# else is a real name.
+#
+# NOTE: the asset labels `banim_pal_<key>` / `gfx_data_bg_<n>_<name>` / `snd_...`
+# are NOT placeholders: they are descriptive names that correctly identify the
+# ROM asset (e.g. `banim_pal_mer` = battle-anim palette for anim key "mer";
+# `gfx_data_bg_062_bg_Black_Temple_Inside_palette` = that BG's palette). A correct
+# meaningful name IS documentation regardless of prefix, so they count as named --
+# matching fe8u, whose calcrom.pl documented-symbol metric likewise flags only
+# Unknown_/sub_/address-suffixed names and treats these identical `banim_pal_*`
+# labels as documented. (Verified: 0 of the 136 banim_/gfx_/snd_ labels are the
+# cryptic address-suffixed form; a future `banim_<hex>`-style cryptic label would
+# be caught by the trailing all-hex alternative below.)
+PLACEHOLDER_RE = re.compile(
+    r"^(sub_[0-9A-Fa-f]+|data_|nullsub_|(?:banim|gfx|snd)_[0-9A-Fa-f]+$)")
 
 
 def read_rows(path):
@@ -453,7 +470,7 @@ if source_form_data_residual:
     out.append(f"      {source_form_data_residual} bytes  residual opaque/non-source bytes")
 out.append(f"4. NAMED SYMBOLS          : {named_pct:6.2f}%  "
            f"({sym_named}/{sym_total} labels named; "
-           f"{sym_placeholder} sub_/data_/nullsub_/sheet placeholders)  -> target 100%")
+           f"{sym_placeholder} sub_/data_/nullsub_ placeholders)  -> target 100%")
 
 # === Axes 5-6: shiftability + asset editability (the "real decomp" axes) =====
 # A byte-perfect ROM is necessary but NOT sufficient: a decomp must also be

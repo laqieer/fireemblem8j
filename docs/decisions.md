@@ -9907,3 +9907,39 @@ read). **SKIPPED** the MERGE (data_08A5CEDC) and all Group-4 LEAVE per recipe.
 `eventcall.h` declares them `struct REDA <name>[]`; verified the consumer `.c` files' include chain
 (`global.h`/`bmunit.h`/`muctrl.h`) does NOT reach `eventcall.h`, so the added `extern const u8
 <name>[]` decls cannot collide in-TU (cross-TU the linker matches by name only — byte-neutral).
+
+## D350 — Axis-4 metric calibration: descriptive asset labels (`banim_pal_*`, `gfx_data_bg_*`) count as NAMED (2026-07-09)
+
+**Context (owner directive).** Owner: *"`banim_pal_mer` is a meaningful name: battle animation
+palette for mercenary, it should be calculated as well documented symbol if it is really what the
+name means; `sGenericChibiImgLut` is also a documented symbol if the name is correct."* The principle:
+**"documented" = the symbol has a correct meaningful name**, independent of prefix or whether it emits
+an ELF symbol.
+
+**Finding.** `scripts/calcprogress.py`'s axis-4 `PLACEHOLDER_RE` flagged the bare prefixes
+`banim_`/`gfx_`/`snd_` as UNNAMED. But **all 136** such labels are descriptive, byte-accurate asset
+names that correctly identify the ROM asset:
+- `banim_pal_<key>` (e.g. `banim_pal_mer`) = the battle-anim palette for ROM anim-key `"key"` (the
+  `{"mer", banim_pal_mer}` pointer table in `src/banim_pal_chara.c` maps the ROM's own 3-char key to
+  the palette). Identical labels exist in fe8u.
+- `gfx_data_bg_<n>_<Name>_<tiles|map|palette>` = fully self-describing BG graphics.
+- **0** of the 136 are the cryptic address-suffixed form; `snd_` has 0 labels.
+
+Cross-check: **fe8u is 100.0000% documented** (`calcrom.pl`, 41849/41849) while using the *same*
+`banim_pal_mer` labels — because `calcrom.pl` flags only `[Uu]nknown_<hex>`/`sub_<hex>` +
+address-suffixed partials, never the `banim_`/`gfx_` prefix. fe8j's stricter regex was the sole
+reason these documented symbols were mis-counted as placeholders.
+
+**Decision.** Correct `PLACEHOLDER_RE` to flag only semantically-empty labels:
+`^(sub_[0-9A-Fa-f]+|data_|nullsub_|(?:banim|gfx|snd)_[0-9A-Fa-f]+$)` — i.e. keep flagging
+`sub_<hex>`/`data_<hex>`/`nullsub_<n>` and any *future* cryptic address-form asset label
+`(banim|gfx|snd)_<hex>`, but credit descriptive asset names as NAMED. This is a **calibration
+correction, not metric-gaming**: the names are verified correct, byte-accurate, and fe8u-parity.
+
+**Impact.** Axis-4 NAMED SYMBOLS: **97.13% (12441/12809) → 98.19% (12577/12809)**; placeholders
+368 → 232. The remaining 232 are the genuinely-cryptic `data_<hex>`/`sub_<hex>`/`nullsub_` residues —
+the real "confirm the type, then name" frontier (D29 raw-incbin residue tail), which is being driven
+by data-residue typing (addr_map JP→US + referencing-code + structural decode). `make compare`
+unaffected (metric-only change). Note: `sGenericChibiImgLut`-style function-LOCAL names improve
+documentation quality but are in *neither* metric's denominator (auto locals emit no symbol; fe8j
+counts only `.global` labels).
