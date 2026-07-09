@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.085F22B4, "aw", %progbits
-	.global data_085F22B4
-data_085F22B4:
+	.global AnimSprite_Miss_11
+AnimSprite_Miss_11:
 	.4byte 0x00008000
 	.4byte 0xFFEC0008
 	.4byte 0x0000FFF0
@@ -121,12 +121,12 @@ data_085F22B4:
 	.4byte AnimSprite_MissE + 0x1
 	.4byte AnimSprite_MissF + 0x1
 	.4byte AnimSprite_Miss10 + 0x1
-	.4byte data_085F22B4 + 0x1
-	.4byte data_085F22B4 + 0x49
-	.4byte data_085F22B4 + 0x91
-	.4byte data_085F22B4 + 0x700000DB
+	.4byte AnimSprite_Miss_11 + 0x1
+	.4byte AnimSprite_Miss_11 + 0x49
+	.4byte AnimSprite_Miss_11 + 0x91
+	.4byte AnimSprite_Miss_11 + 0x700000DB
 	.4byte 0x84000013
 	.4byte AnimSprite_NoDamage1A + 0x70000003
 	.4byte 0x84000013
 	.4byte 0x80000000
-/* de-pointered slice data_085F22B4: ptr=43 data=82 skip=0 */
+/* de-pointered slice AnimSprite_Miss_11: ptr=43 data=82 skip=0 */

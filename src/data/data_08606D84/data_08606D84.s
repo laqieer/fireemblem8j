@@ -4,8 +4,8 @@
  * identical to the original blob, and relocation-complete so the object stays
  * shiftcheck-clean (0 HIGH) if the pointee resources move. */
 	.section .data.residue.08606D84, "aw", %progbits
-	.global data_08606D84
-data_08606D84:
+	.global AnimSprite_EfxTeyariObjType1Right_9
+AnimSprite_EfxTeyariObjType1Right_9:
 	.4byte 0xFFFF0001
 	.4byte 0x001F00FE
 	.4byte 0x00FEFFE1
@@ -54,26 +54,26 @@ data_08606D84:
 	.4byte AnimSprite_EfxTeyariObjType1Right_6 + 0x1
 	.4byte AnimSprite_EfxTeyariObjType1Right_7 + 0x2
 	.4byte AnimSprite_EfxTeyariObjType1Right_8 + 0x1
-	.4byte data_08606D84 + 0x2
-	.4byte data_08606D84 + 0x26
-	.4byte data_08606D84 + 0x4A
-	.4byte data_08606D84 + 0x6F
-	.4byte data_08606D84 + 0x86
-	.4byte data_08606D84 + 0x6E
-	.4byte data_08606D84 + 0x86
-	.4byte data_08606D84 + 0x6E
-	.4byte data_08606D84 + 0x86
-	.4byte data_08606D84 + 0x6E
-	.4byte data_08606D84 + 0x86
-	.4byte data_08606D84 + 0x6D
-	.4byte data_08606D84 + 0x86
-	.4byte data_08606D84 + 0x6D
-	.4byte data_08606D84 + 0x86
-	.4byte data_08606D84 + 0x6D
-	.4byte data_08606D84 + 0x86
-	.4byte data_08606D84 + 0x6D
-	.4byte data_08606D84 + 0x86
-	.4byte data_08606D84 + 0x6D
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x2
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x26
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x4A
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x6F
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x86
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x6E
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x86
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x6E
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x86
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x6E
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x86
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x6D
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x86
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x6D
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x86
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x6D
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x86
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x6D
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x86
+	.4byte AnimSprite_EfxTeyariObjType1Right_9 + 0x6D
 	.4byte 0x78606E0B
 	.4byte 0x84000013
 	.4byte 0x80000000

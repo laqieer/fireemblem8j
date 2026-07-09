@@ -4,7 +4,7 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u32 data_0861F7FC[] __attribute__((section(".data.residue.0861F7FC"))) = {
+u32 AnimSprite_EfxMantBatabata6_L_7[] __attribute__((section(".data.residue.0861F7FC"))) = {
     0x10000000, 0xFFF8001F, 0x0000FFF8, 0x00000001,
     0x00000000, 0x00000000, 0x0861F64E, 0x0861F696,
     0x0861F6DE, 0x0861F696, 0x82000000, 0x0861F7FE,

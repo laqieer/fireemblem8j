@@ -4,8 +4,8 @@
  * identical to the original blob, and relocation-complete so the object stays
  * shiftcheck-clean (0 HIGH) if the pointee resources move. */
 	.section .data.residue.08607B7C, "aw", %progbits
-	.global data_08607B7C
-data_08607B7C:
+	.global AnimSprite_EfxSongObj2_10
+AnimSprite_EfxSongObj2_10:
 	.4byte 0x00000000
 	.4byte 0xFFE00003
 	.4byte 0x0000FFF0
@@ -40,8 +40,8 @@ data_08607B7C:
 	.4byte AnimSprite_EfxSongObj2_7 + 0x2
 	.4byte AnimSprite_EfxSongObj2_8 + 0x2
 	.4byte AnimSprite_EfxSongObj2_9 + 0x2
-	.4byte data_08607B7C + 0x2
-	.4byte data_08607B7C + 0x1A
+	.4byte AnimSprite_EfxSongObj2_10 + 0x2
+	.4byte AnimSprite_EfxSongObj2_10 + 0x1A
 	.4byte AnimSprite_EfxSongObj2_0 + 0x2
 	.4byte AnimSprite_EfxSongObj2_1 + 0x2
 	.4byte AnimSprite_EfxSongObj2_2 + 0x2
@@ -52,6 +52,6 @@ data_08607B7C:
 	.4byte AnimSprite_EfxSongObj2_7 + 0x2
 	.4byte AnimSprite_EfxSongObj2_8 + 0x2
 	.4byte AnimSprite_EfxSongObj2_9 + 0x2
-	.4byte data_08607B7C + 0x2
-	.4byte data_08607B7C + 0x1A
+	.4byte AnimSprite_EfxSongObj2_10 + 0x2
+	.4byte AnimSprite_EfxSongObj2_10 + 0x1A
 	.4byte 0x80000000
