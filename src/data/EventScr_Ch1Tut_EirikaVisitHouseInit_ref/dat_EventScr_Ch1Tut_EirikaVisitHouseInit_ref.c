@@ -10,7 +10,7 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
-extern const u8 data_08FE0000[];
+extern const u8 MultiBootImage_08FE0000[];
 extern const u8 EventScr_Ch1Tut_EirikaVisitHouseIdle1[];
 
 SECTION(".rodata.dat_EventScr_Ch1Tut_EirikaVisitHouseInit_ref") EventListScr EventScr_Ch1Tut_EirikaVisitHouseInit[] = {
@@ -24,7 +24,7 @@ SECTION(".rodata.dat_EventScr_Ch1Tut_EirikaVisitHouseInit_ref") EventListScr Eve
     CURE
     TUTORIALTEXTBOXSTART
     SVAL(EVT_SLOT_B, 0xFFFFFFFF)
-    EVENT_WORD_SYM(data_08FE0000 + 0x1B20)
+    EVENT_WORD_SYM(MultiBootImage_08FE0000 + 0x1B20)
     TEXTEND
     REMA
     CURSOR_FLASHING_CHAR(1)

@@ -1605,7 +1605,7 @@ extern const u8 data_0874C5B4[];
 extern const u8 data_087B9C50[];
 extern const u8 data_087B9CDC[];
 extern const u8 REDA_Ch11AAlly_1_EWAN[];
-extern const u8 data_08FFF000[];
+extern const u8 gRomTailPadding_08FFF000[];
 extern const u8 efxCrimsonEyeOBJ_Loop_A[];
 extern const u8 efxCrimsonEyeOBJ_Loop_B[];
 extern const u8 efxCrimsonEyeOBJ_Loop_C[];
@@ -3887,7 +3887,7 @@ u32 frontier_df4_banim_b_024_67E9B8[] __attribute__((section(".data.frontier_df4
     0xF0000221, 0x9E000851, 0xE0D212A2, 0x76601101, 0x70F00280, 0x70F002B7,
     0x96524824, 0x10883132, 0x07013064, 0x88000AA0, 0x03AD0109, 0xFF9A0227,
     0x36001E03, 0xE801C230, 0xDCF0B010, 0xE9021F12, 0x20E422E7, 0x50311001,
-    0x14310265, 0x513A02B1, 0xB03A0233, 0xA998DF30, 0x54D601BA, (u32)&data_08FFF000 + 0xd6110a,
+    0x14310265, 0x513A02B1, 0xB03A0233, 0xA998DF30, 0x54D601BA, (u32)&gRomTailPadding_08FFF000 + 0xd6110a,
     0x0099D601, 0x18559824, 0x70800006, 0xCC5D0149, 0xB05FEEDD, 0x320C1625,
     0x14DF010D, 0x00D62028, 0xC422FFD2, 0xAA033622, 0x5215E811, 0x0310B733,
     0xC0B35B15, 0x2C140B9D, 0x3300BF00, 0xF100C300, 0x82011075, 0x5110C810,

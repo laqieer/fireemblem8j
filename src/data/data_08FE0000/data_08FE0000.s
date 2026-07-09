@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.08FE0000, "aw", %progbits
-	.global data_08FE0000
-data_08FE0000:
+	.global MultiBootImage_08FE0000
+MultiBootImage_08FE0000:
 	.4byte 0xEA00000E
 	.4byte 0xEA00000D
 	.4byte 0xEA00000C
@@ -4100,4 +4100,4 @@ data_08FE0000:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-/* de-pointered slice data_08FE0000: ptr=4 data=4085 skip=7 */
+/* de-pointered slice MultiBootImage_08FE0000: ptr=4 data=4085 skip=7 */

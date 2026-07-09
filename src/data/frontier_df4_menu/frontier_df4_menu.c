@@ -531,7 +531,7 @@ extern const u8 _DisplayShopUiArrows[];
 extern const u8 _ExecSaveMenuMiscOption[];
 extern const u8 data_085B9EE8[];
 extern const u8 UnitDef_UnusedAlly_18[];
-extern const u8 data_08926134[];
+extern const u8 dat_REDA_08926134_ref[];
 extern u32 data_08A9548C[];
 extern u32 data_08A95AD8[];
 extern const u8 sSprite_ClassDisplay_A[];
@@ -3787,7 +3787,7 @@ u32 frontier_df4_menu_013_A72408[] __attribute__((section(".data.frontier_df4_me
     0x00000A40,
     (u32)&EventScr_EphraimModeGameEnd + 0x128,
     0x00020540,
-    (u32)&data_08926134 + 0x58,
+    (u32)&dat_REDA_08926134_ref + 0x58,
     0x00030540,
     0x00000BDD,
     0x00000A40,
@@ -3833,7 +3833,7 @@ u32 frontier_df4_menu_013_A72408[] __attribute__((section(".data.frontier_df4_me
     0x00000A40,
     (u32)&EventScr_EphraimModeGameEnd + 0x128,
     0x00020540,
-    (u32)&data_08926134 + 0x94,
+    (u32)&dat_REDA_08926134_ref + 0x94,
     0x00030540,
     0x00000BE1,
     0x00000A40,

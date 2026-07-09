@@ -4,4 +4,4 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u8 data_08EE0AD0[] __attribute__((section(".data.residue.08EE0AD0"))) = INCBIN_U8("data/residual/data_08EE0AD0.bin");
+u8 BattleTerrainTable_NullTail_08EE0AD0[] __attribute__((section(".data.residue.08EE0AD0"))) = INCBIN_U8("data/residual/data_08EE0AD0.bin");

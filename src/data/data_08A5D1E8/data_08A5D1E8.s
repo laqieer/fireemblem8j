@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.08A5D1E8, "aw", %progbits
-	.global data_08A5D1E8
-data_08A5D1E8:
+	.global dat_Ch17EphraimEventData_ref
+dat_Ch17EphraimEventData_ref:
 	.4byte EventListScr_Ch17b_Turn + 0x44
 	.4byte EventListScr_Ch17b_Turn + 0x48
 	.4byte EventListScr_Ch17b_Turn + 0x94
@@ -22,4 +22,4 @@ data_08A5D1E8:
 	.4byte UnitDef_Ch17BEnemy_8
 	.4byte frontier_df3_eventscr_ch_016_A6EFD8 + 0x10C
 	.4byte frontier_df3_eventscr_ch_016_A6EFD8 + 0x14C
-/* de-pointered slice data_08A5D1E8: ptr=18 data=0 skip=0 */
+/* de-pointered slice dat_Ch17EphraimEventData_ref: ptr=18 data=0 skip=0 */

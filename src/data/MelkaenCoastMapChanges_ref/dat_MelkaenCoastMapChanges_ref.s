@@ -5,14 +5,14 @@
 	.section .rodata.dat_MelkaenCoastMapChanges_ref, "a", %progbits
 	.global MelkaenCoastMapChanges
 MelkaenCoastMapChanges:
-	.4byte data_08A5E3B8 + 0x170
-	.4byte data_08A5E3B8 + 0x174
-	.4byte data_08A5E3B8 + 0x178
-	.4byte data_08A5E3B8 + 0x17C
-	.4byte data_08A5E3B8 + 0x198
-	.4byte data_08A5E3B8 + 0x19C
-	.4byte data_08A5E3B8 + 0x1A0
-	.4byte data_08A5E3B8 + 0x1A4
+	.4byte dat_gChDAsset_08A5E3B8_ref + 0x170
+	.4byte dat_gChDAsset_08A5E3B8_ref + 0x174
+	.4byte dat_gChDAsset_08A5E3B8_ref + 0x178
+	.4byte dat_gChDAsset_08A5E3B8_ref + 0x17C
+	.4byte dat_gChDAsset_08A5E3B8_ref + 0x198
+	.4byte dat_gChDAsset_08A5E3B8_ref + 0x19C
+	.4byte dat_gChDAsset_08A5E3B8_ref + 0x1A0
+	.4byte dat_gChDAsset_08A5E3B8_ref + 0x1A4
 	.4byte frontier_df4_menu_005_A5FFAD + 0x2
 	.4byte frontier_df4_menu_005_A5FFAD + 0xF7
 	.4byte frontier_df3_unitdef_b_073_923F38 + 0x118

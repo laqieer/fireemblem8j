@@ -66,7 +66,7 @@ EventListScr_Ch14b_Location:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte Ch14EphraimMapChanges + 0x50
-	.4byte data_08A5CC68 + 0x18
+	.4byte dat_EventListScr_08A5CC68_ref + 0x18
 	.4byte EventListScr_Ch14b_Location
 	.4byte EventListScr_Ch14b_Location + 0x40
 	.4byte EventListScr_Ch14b_Location + 0xE0

@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.08A5DE70, "aw", %progbits
-	.global data_08A5DE70
-data_08A5DE70:
+	.global dat_gChDAsset_08A5DE70_ref
+dat_gChDAsset_08A5DE70_ref:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -12,10 +12,10 @@ data_08A5DE70:
 	.4byte LagdouRuins3MapChanges + 0x6C
 	.4byte LagdouRuins3MapChanges + 0x70
 	.4byte LagdouRuins3MapChanges + 0x8C
-	.4byte data_08A5DE70
-	.4byte data_08A5DE70 + 0x4
-	.4byte data_08A5DE70 + 0x8
-	.4byte data_08A5DE70 + 0xC
+	.4byte dat_gChDAsset_08A5DE70_ref
+	.4byte dat_gChDAsset_08A5DE70_ref + 0x4
+	.4byte dat_gChDAsset_08A5DE70_ref + 0x8
+	.4byte dat_gChDAsset_08A5DE70_ref + 0xC
 	.4byte gUidebug_2 + 0x663
 	.4byte frontier_df4_menu_005_A5FFAD + 0x77
 	.4byte UnitDef_Ruin4Ally
@@ -60,4 +60,4 @@ data_08A5DE70:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-/* de-pointered slice data_08A5DE70: ptr=22 data=34 skip=0 */
+/* de-pointered slice dat_gChDAsset_08A5DE70_ref: ptr=22 data=34 skip=0 */

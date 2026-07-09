@@ -9,19 +9,19 @@
  * conflict -- the data bytes (.word relocations) are byte-identical. */
 
 extern const u8 UnitDef_Ruin5Ally[];
-extern const u8 data_08A5DE70[];
+extern const u8 dat_gChDAsset_08A5DE70_ref[];
 extern const u8 frontier_df4_menu_005_A5FFAD[];
 extern const u8 gUidebug_2[];
 
 SECTION(".rodata.dat_LagdouRuins5MapChanges_ref") static const u32 LagdouRuins5MapChanges__shift[] = {
-    (u32)&data_08A5DE70 + 0x60,
-    (u32)&data_08A5DE70 + 0x88,
-    (u32)&data_08A5DE70 + 0x8C,
-    (u32)&data_08A5DE70 + 0xB4,
-    (u32)&data_08A5DE70 + 0xD0,
-    (u32)&data_08A5DE70 + 0xD4,
-    (u32)&data_08A5DE70 + 0xD8,
-    (u32)&data_08A5DE70 + 0xDC,
+    (u32)&dat_gChDAsset_08A5DE70_ref + 0x60,
+    (u32)&dat_gChDAsset_08A5DE70_ref + 0x88,
+    (u32)&dat_gChDAsset_08A5DE70_ref + 0x8C,
+    (u32)&dat_gChDAsset_08A5DE70_ref + 0xB4,
+    (u32)&dat_gChDAsset_08A5DE70_ref + 0xD0,
+    (u32)&dat_gChDAsset_08A5DE70_ref + 0xD4,
+    (u32)&dat_gChDAsset_08A5DE70_ref + 0xD8,
+    (u32)&dat_gChDAsset_08A5DE70_ref + 0xDC,
     (u32)&gUidebug_2 + 0x664,
     (u32)&frontier_df4_menu_005_A5FFAD + 0x78,
     (u32)&UnitDef_Ruin5Ally,
