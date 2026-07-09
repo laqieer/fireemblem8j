@@ -102,7 +102,7 @@ data_086B8D40:
 	.4byte AnimSprite_EfxSleepOBJ2_86 + 0x2
 	.4byte AnimSprite_EfxSleepOBJ2_87 + 0x2
 	.4byte 0x81000000
-	.4byte data_086B7E10 + 0x3
+	.4byte AnimSprite_EfxSleepOBJ2_88 + 0x3
 	.4byte AnimSprite_EfxSleepOBJ2_115 + 0x2
 	.4byte AnimSprite_EfxSleepOBJ2_116 + 0x2
 	.4byte AnimSprite_EfxSleepOBJ2_117 + 0x2

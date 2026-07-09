@@ -36,7 +36,7 @@ data_086A328C:
 	.4byte AnimSprite_EfxReblowOBJ_R_37 + 0x2
 	.4byte AnimSprite_EfxReblowOBJ_R_38 + 0x2
 	.4byte AnimSprite_EfxReblowOBJ_R_39 + 0x2
-	.4byte data_086A25CC + 0x1
+	.4byte AnimSprite_EfxReblowOBJ_R_27 + 0x1
 	.4byte 0x80000000
 	.4byte AnimSprite_EfxReblowOBJ_R_41 + 0x2
 	.4byte AnimSprite_EfxReblowOBJ_R_42 + 0x2

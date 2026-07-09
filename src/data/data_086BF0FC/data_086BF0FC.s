@@ -6,13 +6,13 @@
 	.section .data.residue.086BF0FC, "aw", %progbits
 	.global data_086BF0FC
 data_086BF0FC:
-	.4byte data_086BB064 + 0x3
-	.4byte data_086BB064 + 0x1B
+	.4byte AnimSprite_EfxMshield_1 + 0x3
+	.4byte AnimSprite_EfxMshield_1 + 0x1B
 	.4byte AnimSprite_EfxMshield_3 + 0x3
 	.4byte AnimSprite_EfxMshield_4 + 0x3
 	.4byte AnimSprite_EfxMshield_5 + 0x3
-	.4byte data_086BB154 + 0x3
-	.4byte data_086BB154 + 0x57
+	.4byte AnimSprite_EfxMshield_6 + 0x3
+	.4byte AnimSprite_EfxMshield_6 + 0x57
 	.4byte AnimSprite_EfxMshield_8 + 0x3
 	.4byte AnimSprite_EfxMshield_9 + 0x3
 	.4byte frontier_df4_banim_b_045_6BB2EC + 0x3

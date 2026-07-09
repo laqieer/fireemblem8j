@@ -2,7 +2,7 @@
 
 /* Typed C extraction of residual raw-incbin slices from data_086A2D64.c. */
 
-u32 data_086A2D64[] __attribute__((section(".data.residue.086A2D64"))) = {
+u32 AnimSprite_EfxReblowOBJ_R_61[] __attribute__((section(".data.residue.086A2D64"))) = {
     0x00000001, 0x00000000, 0x00000000, 0x00000001,
     0x00000000, 0x00000000, 0x00000001, 0x00000000,
     0x00000000, 0x00000001, 0x00000000, 0x00000000,
