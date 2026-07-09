@@ -2,7 +2,7 @@
 
 /* Typed C extraction of residual raw-incbin slices from data_086A01E0.c. */
 
-u32 data_086A01E0[] __attribute__((section(".data.residue.086A01E0"))) = {
+u32 AnimSprite_EfxLiveOBJ_56[] __attribute__((section(".data.residue.086A01E0"))) = {
     0x20000000, 0x00220047, 0x0000FFE6, 0x30000000,
     0xFFD60047, 0x0000FFE6, 0x00000001, 0x00000000,
     0x00000000, 0x20000000, 0x00230047, 0x0000FFE8,

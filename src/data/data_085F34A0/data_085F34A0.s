@@ -35,7 +35,7 @@ data_085F34A0:
 	.4byte 0x385F333B
 	.4byte AnimSprite_LvupStatup_25 + 0x1
 	.4byte 0x80000000
-	.4byte data_085F3338 + 0x1
+	.4byte AnimSprite_LvupStatup_36 + 0x1
 	.4byte AnimSprite_LvupStatup_25 + 0x10000000
 	.4byte 0x80000000
 	.4byte AnimSprite_LvupStatup_26 + 0x1
@@ -60,7 +60,7 @@ data_085F34A0:
 	.4byte AnimSprite_LvupStatup_44 + 0x1
 	.4byte AnimSprite_LvupStatup_45 + 0x1
 	.4byte AnimSprite_LvupStatup_46 + 0x1
-	.4byte data_085F3338 + 0x1
+	.4byte AnimSprite_LvupStatup_36 + 0x1
 	.4byte AnimSprite_LvupStatup_25 + 0x10000000
 	.4byte 0x80000000
 /* de-pointered slice data_085F34A0: ptr=42 data=17 skip=0 */

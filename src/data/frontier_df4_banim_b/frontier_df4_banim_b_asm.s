@@ -460,8 +460,8 @@ frontier_df4_banim_b_005_611798:
 .4byte AnimSprite_IcebreathOBJ_Left12 + 2
 .4byte AnimSprite_IcebreathOBJ_Left13 + 2
 .4byte AnimSprite_IcebreathOBJ_Left14 + 2
-.4byte data_086114F8 + 2
-.4byte data_086114F8 + 230
+.4byte AnimSprite_IcebreathOBJ_Left15 + 2
+.4byte AnimSprite_IcebreathOBJ_Left15 + 230
 .4byte AnimSprite_IcebreathOBJ_Left17 + 2
 .4byte AnimSprite_IcebreathOBJ_Left18 + 2
 .4byte frontier_df4_banim_b_005_611798 + 2

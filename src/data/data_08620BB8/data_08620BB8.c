@@ -5,7 +5,7 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-struct AnimSpriteData data_08620BB8[] __attribute__((section(".data.residue.08620BB8"))) =
+struct AnimSpriteData AnimSprite_EfxThunderOBJ_R_1[] __attribute__((section(".data.residue.08620BB8"))) =
 {
     { .header = 0x00004000, .as = { .object = { 0x0000, -8, 8 } } },
     ANIM_SPRITE_END,

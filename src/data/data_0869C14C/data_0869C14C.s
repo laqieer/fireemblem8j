@@ -9,6 +9,6 @@
 data_0869C14C:
 	.4byte 0x00000000, 0x0000001F, 0x0000FFF8, 0x00000001, 0x00000000, 0x00000000
 	.4byte AnimSprite_EfxPurge_1 + 0x1, AnimSprite_EfxPurge_2 + 0x1, AnimSprite_EfxPurge_3 + 0x1, AnimSprite_EfxPurge_4 + 0x1, AnimSprite_EfxPurge_5 + 0x1, AnimSprite_EfxPurge_6 + 0x1
-	.4byte AnimSprite_EfxPurge_7 + 0x1, AnimSprite_EfxPurge_8 + 0x1, AnimSprite_EfxPurge_9 + 0x1, data_0869BFF0 + 0x1, AnimSprite_EfxPurge_11 + 0x1, AnimSprite_EfxPurge_12 + 0x1
+	.4byte AnimSprite_EfxPurge_7 + 0x1, AnimSprite_EfxPurge_8 + 0x1, AnimSprite_EfxPurge_9 + 0x1, AnimSprite_EfxPurge_10 + 0x1, AnimSprite_EfxPurge_11 + 0x1, AnimSprite_EfxPurge_12 + 0x1
 	.4byte AnimSprite_EfxPurge_13 + 0x1, AnimSprite_EfxPurge_14 + 0x1, AnimSprite_EfxPurge_15 + 0x1, AnimSprite_EfxPurge_16 + 0x1, AnimSprite_EfxPurge_17 + 0x1, AnimSprite_EfxPurge_18 + 0x1
 	.4byte AnimSprite_EfxPurge_19 + 0x1, 0x7869C14F, 0x84000013, 0x80000000

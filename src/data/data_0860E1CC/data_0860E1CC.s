@@ -33,17 +33,17 @@ data_0860E1CC:
 	.4byte AnimSprite_HurtmutEff00OBJ1_7 + 0x3
 	.4byte AnimSprite_HurtmutEff00OBJ1_8 + 0x3
 	.4byte AnimSprite_HurtmutEff00OBJ1_9 + 0x3
-	.4byte data_0860E028 + 0x3
-	.4byte data_0860E028 + 0x1B
+	.4byte AnimSprite_HurtmutEff00OBJ1_10 + 0x3
+	.4byte AnimSprite_HurtmutEff00OBJ1_10 + 0x1B
 	.4byte AnimSprite_HurtmutEff00OBJ1_6 + 0x2
 	.4byte AnimSprite_HurtmutEff00OBJ1_7 + 0x3
 	.4byte AnimSprite_HurtmutEff00OBJ1_8 + 0x3
 	.4byte AnimSprite_HurtmutEff00OBJ1_9 + 0x3
-	.4byte data_0860E028 + 0x3
-	.4byte data_0860E028 + 0x1B
+	.4byte AnimSprite_HurtmutEff00OBJ1_10 + 0x3
+	.4byte AnimSprite_HurtmutEff00OBJ1_10 + 0x1B
 	.4byte AnimSprite_HurtmutEff00OBJ1_9 + 0x3
-	.4byte data_0860E028 + 0x3
-	.4byte data_0860E028 + 0x1B
+	.4byte AnimSprite_HurtmutEff00OBJ1_10 + 0x3
+	.4byte AnimSprite_HurtmutEff00OBJ1_10 + 0x1B
 	.4byte AnimSprite_HurtmutEff00OBJ1_6 + 0x2
 	.4byte AnimSprite_HurtmutEff00OBJ1_12 + 0x1
 	.4byte AnimSprite_HurtmutEff00OBJ1_13 + 0x1

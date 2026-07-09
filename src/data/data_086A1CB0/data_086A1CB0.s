@@ -15,7 +15,7 @@ data_086A1CB0:
 	.4byte AnimSprite_EfxLiveOBJ_16 + 0x1, AnimSprite_EfxLiveOBJ_17 + 0x1, AnimSprite_EfxLiveOBJ_18 + 0x1, AnimSprite_EfxLiveOBJ_19 + 0x1, AnimSprite_EfxLiveOBJ_20 + 0x1, AnimSprite_EfxLiveOBJ_21 + 0x1
 	.4byte AnimSprite_EfxLiveOBJ_22 + 0x1, AnimSprite_EfxLiveOBJ_23 + 0x1, AnimSprite_EfxLiveOBJ_24 + 0x1, AnimSprite_EfxLiveOBJ_25 + 0x1, AnimSprite_EfxLiveOBJ_26 + 0x2, AnimSprite_EfxLiveOBJ_27 + 0x2
 	.4byte AnimSprite_EfxLiveOBJ_28 + 0x2, AnimSprite_EfxLiveOBJ_29 + 0x2, AnimSprite_EfxLiveOBJ_30 + 0x2, AnimSprite_EfxLiveOBJ_31 + 0x2, AnimSprite_EfxLiveOBJ_32 + 0x2, AnimSprite_EfxLiveOBJ_33 + 0x2
-	.4byte AnimSprite_EfxLiveOBJ_34 + 0x2, AnimSprite_EfxLiveOBJ_35 + 0x2, 0x80000000, AnimSprite_EfxLiveOBJ_78 + 0x1, data_086A0C24 + 0x1, AnimSprite_EfxLiveOBJ_80 + 0x1
+	.4byte AnimSprite_EfxLiveOBJ_34 + 0x2, AnimSprite_EfxLiveOBJ_35 + 0x2, 0x80000000, AnimSprite_EfxLiveOBJ_78 + 0x1, AnimSprite_EfxLiveOBJ_79 + 0x1, AnimSprite_EfxLiveOBJ_80 + 0x1
 	.4byte AnimSprite_EfxLiveOBJ_81 + 0x1, AnimSprite_EfxLiveOBJ_82 + 0x1, AnimSprite_EfxLiveOBJ_83 + 0x1, AnimSprite_EfxLiveOBJ_84 + 0x1, AnimSprite_EfxLiveOBJ_85 + 0x1, AnimSprite_EfxLiveOBJ_86 + 0x1
 	.4byte AnimSprite_EfxLiveOBJ_87 + 0x1, AnimSprite_EfxLiveOBJ_88 + 0x1, AnimSprite_EfxLiveOBJ_89 + 0x1, AnimSprite_EfxLiveOBJ_90 + 0x1, AnimSprite_EfxLiveOBJ_91 + 0x1, AnimSprite_EfxLiveOBJ_92 + 0x1
 	.4byte AnimSprite_EfxLiveOBJ_93 + 0x1, AnimSprite_EfxLiveOBJ_94 + 0x1, AnimSprite_EfxLiveOBJ_95 + 0x1, AnimSprite_EfxLiveOBJ_96 + 0x1, AnimSprite_EfxLiveOBJ_97 + 0x1, AnimSprite_EfxLiveOBJ_98 + 0x1

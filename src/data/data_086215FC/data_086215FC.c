@@ -9,7 +9,7 @@
  */
 
 extern struct AnimSpriteData AnimSprite_EfxThunderOBJ_R_18[];
-extern u8 data_08620BB8[];
+extern u8 AnimSprite_EfxThunderOBJ_R_1[];
 extern struct AnimSpriteData AnimSprite_EfxThunderOBJ_R_3[];
 extern struct AnimSpriteData AnimSprite_EfxThunderOBJ_R_4[];
 extern struct AnimSpriteData AnimSprite_EfxThunderOBJ_R_5[];
@@ -41,7 +41,7 @@ extern struct AnimSpriteData AnimSprite_EfxThunderOBJ_R_30[];
 u32 data_086215FC[] __attribute__((section(".data.residue.086215FC"))) =
 {
     ANIMSCR_FORCE_SPRITE(AnimSprite_EfxThunderOBJ_R_18, 14),
-    ANIMSCR_FORCE_SPRITE(data_08620BB8, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxThunderOBJ_R_1, 2),
     ANIMSCR_FORCE_SPRITE(AnimSprite_EfxThunderOBJ_R_18, 1),
     ANIMSCR_FORCE_SPRITE(AnimSprite_EfxThunderOBJ_R_3, 1),
     ANIMSCR_FORCE_SPRITE(AnimSprite_EfxThunderOBJ_R_18, 1),

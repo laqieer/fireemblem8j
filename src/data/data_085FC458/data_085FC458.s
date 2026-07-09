@@ -5,7 +5,7 @@
 	.section .data.residue.085FC458, "aw", %progbits
 	.global AnimScr_EkrBaseKaiten1
 AnimScr_EkrBaseKaiten1:
-	.4byte data_085FC068 + 0x1
+	.4byte AnimSprite_EkrBaseKaiten_1 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_2 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_3 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_4 + 0x1
@@ -24,7 +24,7 @@ AnimScr_EkrBaseKaiten2:
 	.4byte AnimSprite_EkrBaseKaiten_4 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_3 + 0x1
 	.4byte AnimSprite_EkrBaseKaiten_2 + 0x1
-	.4byte data_085FC068 + 0x1
+	.4byte AnimSprite_EkrBaseKaiten_1 + 0x1
 	.4byte 0x80000000
 	.section .data.residue.085FC4A0, "aw", %progbits
 	.global AnimSprite_EkrBaseKaiten_10

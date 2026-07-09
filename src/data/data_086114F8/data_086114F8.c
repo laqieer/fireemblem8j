@@ -2,7 +2,7 @@
 
 /* Typed C extraction of residual raw-incbin slices from data_086114F8.c. */
 
-u32 data_086114F8[] __attribute__((section(".data.residue.086114F8"))) = {
+u32 AnimSprite_IcebreathOBJ_Left15[] __attribute__((section(".data.residue.086114F8"))) = {
     0xFFFF0002, 0x0000FE92, 0x016E0000, 0xFFFF0002,
     0x0000FE00, 0x02000000, 0x50000000, 0x003A0002,
     0x0000FFEE, 0x10008000, 0x00320004, 0x0000FFEE,

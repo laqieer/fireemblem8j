@@ -25,7 +25,7 @@ extern struct AnimSpriteData AnimSprite_EfxElfireOBJ_14[];
 extern struct AnimSpriteData AnimSprite_EfxElfireOBJ_15[];
 extern struct AnimSpriteData AnimSprite_EfxElfireOBJ_16[];
 extern struct AnimSpriteData AnimSprite_EfxElfireOBJ_17[];
-extern u8 data_086314EC[];
+extern u8 AnimSprite_EfxElfireOBJ_18[];
 extern struct AnimSpriteData AnimSprite_EfxElfireOBJ_19[];
 extern struct AnimSpriteData AnimSprite_EfxElfireOBJ_20[];
 extern struct AnimSpriteData AnimSprite_EfxElfireOBJ_21[];
@@ -58,7 +58,7 @@ u32 data_08631BAC[] __attribute__((section(".data.residue.08631BAC"))) =
     ANIMSCR_FORCE_SPRITE(AnimSprite_EfxElfireOBJ_15, 1),
     ANIMSCR_FORCE_SPRITE(AnimSprite_EfxElfireOBJ_16, 1),
     ANIMSCR_FORCE_SPRITE(AnimSprite_EfxElfireOBJ_17, 1),
-    ANIMSCR_FORCE_SPRITE(data_086314EC, 1),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxElfireOBJ_18, 1),
     ANIMSCR_FORCE_SPRITE(AnimSprite_EfxElfireOBJ_19, 1),
     ANIMSCR_FORCE_SPRITE(AnimSprite_EfxElfireOBJ_20, 1),
     ANIMSCR_FORCE_SPRITE(AnimSprite_EfxElfireOBJ_21, 1),
