@@ -1,7 +1,11 @@
 #include "global.h"
+#include "bmunit.h"
 
-/* Migrated from asm/data_08925CD4.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
+/* Typed from data/residual/data_08925CD4.bin (fe8u events_udefs.c parity:
+ * UnitDef_UnusedUnits_1 is a 1-entry {0} UnitDefinition terminator array).
+ * sizeof(struct UnitDefinition) == 20, so the all-zero terminator is
+ * byte-identical to the former residual INCBIN. Kept in section
+ * .data.residue.08925CD4 for identical placement; gated by `make compare`.
  */
 
-u8 UnitDef_UnusedUnits_1[] __attribute__((section(".data.residue.08925CD4"))) = INCBIN_U8("data/residual/data_08925CD4.bin");
+struct UnitDefinition UnitDef_UnusedUnits_1[] __attribute__((section(".data.residue.08925CD4"))) = {{0}};
