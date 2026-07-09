@@ -9993,3 +9993,57 @@ gcc-generated `src/data/data_*/data_*.s` agbcc intermediates are never edited/co
 (`nm` + `sym_jp.txt` + `src/` definitions) **before** applying; multi-part residues that were already
 split (D121-style) have no whole-blob symbol left to rename — skip rather than force. Batching is safe
 precisely because every rename is byte-neutral, but the gate is still full `make compare` per batch.
+
+## D352 — Residue-typing wave 2 (Batch C): 27 more `data_<hex>` placeholders → typed names (99.10% → 99.31%); 0 skipped (2026-07-09)
+
+**Context.** Continuation of D351. The carve-researchers produced a **Batch C of 27 HIGH-confidence
+single-renames** (reference-ELF `arm-none-eabi-nm -n` neighbor-ordering) spanning three families:
+efx battle-animation script/sprite tables (AnimScr/AnimSprite), `ProcScr`/proc-array residues, chapter
+`UnitDef` tables, and the **region-different JP** EventScr/EventList/Tsa area (0x08A5–0x08A9).
+
+**Mechanic.** Identical byte-neutral relabel to D351 (rename tracked `.global`/`label:`/C-array/`.type`
+in `src/data/data_<hex>/*` + every tree-wide reference via `perl … s/\bdata_<hex>\b(?![.\w])/Name/g`
+with the `(?![.\w])` INCBIN/section guard + the excluded mirror `asm/data_<hex>.s` `.global`+label,
+keeping its `.incbin` path; `.section .data.residue.<hex>` and `carved_rom.d` unchanged). Pure relabel
+→ `make compare` byte-identical.
+
+**Pre-apply verification (per the D351 skip lessons — 3-point triage before each rename).**
+(1) **Collision** — `grep -rn "\bName\b" src/ asm/` + word-boundary `nm` count → **all 27 = 0
+collisions**. (2) **Already-split** — `data_08855D58` (ProcScr; first sub-object of a split blob: +0
+label / +0x10 ABSOLUTE alias / +0x40 typed `.c` series — renamed the +0 label to complete the
+`_0/_1/_2` series) and `data_08A60354` (EventScr; `.s` already split into 11 named sub-objects, this
+residue is the FIRST) → renamed only the first sub-object's label, sibling labels untouched.
+(3) **Content-sanity** per family (AnimScr = script pointer pairs `{ptr|0x10000000, 0x81000000}` vs
+AnimSprite = OAM `struct AnimSpriteData[]`; UnitDef = 0x14-byte records / `{0}` terminators;
+EventScr = event bytecode; EventList = Turn/[Character]/Misc/SelectUnit slots — residues sit in the
+Character slot).
+
+**AnimScr-vs-AnimSprite gotcha.** `data_0872C080` is named `AnimScr_efxNaglfarOBJ` (a **script** of
+`{ptr|0x10000000, 0x81000000}` pairs) even though it sits among `AnimSprite_efxNaglfarOBJ_*` OAM
+neighbors — content discrimination (script pointers, not OAM tiles) confirmed the SCRIPT name.
+
+**Region note.** 0x08A5–0x08A6 is region-different JP data; the EventScr/EventList names come from the
+JP reference and `make compare` is the byte-neutrality gate — all three batches passed.
+
+**Applied (27, 3 commits, each `make compare` OK + `make shiftcheck` 0 HIGH, pushed CI-green):**
+- `35b95910c` C1 (9): `AnimScr_efxNaglfarOBJ`, `AnimScr_efxNaglfarOBJ_6`, `AnimSprite_EfxChill_R_2`,
+  `AnimSprite_efxSuperdruidOBJ_3`, `AnimSprite_Tri_15`, `AnimSprite_TriGenerial_8`,
+  `AnimSprite_EkrPopup`, `ProcScr_EkrdragonDemonkingobj_0`, `gEkrdragonDemonkingobj_array5`.
+- `33e75a27b` C2 (10 UnitDef): `UnitDef_Ch5xUnits{,_1,_3}`, `UnitDef_Ch8Units{,_1,_4}`,
+  `UnitDef_Ch9AEnemy_9`, `UnitDef_Ch9AAlly_1`, `UnitDef_UnusedUnits{,_1}`.
+- `1c7d165a7` C3 (8): `EventListScr_Ch18b_Character`, `EventListScr_Ch19b_Character`,
+  `EventListScr_Ch20b_Character`, `EventScr_LoadUnitForDifferentMode`, `EventScr_Ch9A_5`,
+  `EventScr_Ch15a_BeginningScene`, `EventScr_Ch15A_2`, `Tsa_SupportScreenWindow`.
+
+**Skipped: 0** — all 27 pre-verified valid (the triage cleared every one). The user-flagged
+do-not-rename set — `data_08FE0000` (executable ARM multiboot image), `data_08A5A6AD` (3-byte spurious
+padding), and the zero-pad tails `data_08FFF000`/`08C01928`/`08EE0AD0`/`08EF86C8` — was **not** part of
+Batch C and was left untouched.
+
+**Impact.** Axis-4 NAMED SYMBOLS **99.10% (12,609/12,724, 115 placeholders) → 99.31%
+(12,636/12,724, 88 placeholders)** (`python3 scripts/calcprogress.py`). `make compare` unaffected
+(relabel-only).
+
+**Lesson.** Reinforces D351: the collision + already-split + content-sanity triage IS the integrity
+gate. When all three are clean the byte-neutral batching scales cleanly — 27/27 landed across 3 batches
+with zero bisects and zero rejects.
