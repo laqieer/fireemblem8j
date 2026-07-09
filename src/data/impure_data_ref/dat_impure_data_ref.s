@@ -18,7 +18,7 @@ impure_data:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte data_085772B4 + 0xFC
+	.4byte dat_StraddledSramData_085772B4_ref + 0xFC
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000

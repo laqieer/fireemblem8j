@@ -58,5 +58,5 @@ voicegroup088	08213AF4	data	D311 voicegroup -G088
 voicegroup089	08213B24	data	D311 voicegroup -G089
 voicegroup090	08213B3C	data	D311 voicegroup -G090
 voicegroup091	08213B60	data	D311 voicegroup -G091
-data_08576124	08576124	data	D311 residue-base alias (straddled song)
-data_085772B4	085772B4	data	D311 residue-base alias (straddled song)
+dat_StraddledSongData_08576124_ref	08576124	data	D311 residue-base alias (straddled song)
+dat_StraddledSramData_085772B4_ref	085772B4	data	D311 residue-base alias (straddled song)
