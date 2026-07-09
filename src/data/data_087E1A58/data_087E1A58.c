@@ -27,10 +27,10 @@ extern void ekrPopup_WaitWpnBroke();
 extern void ekrPopup_WaitWpnBroke2();
 extern void ekrPopup_WaitWpnUsable();
 extern void nullsub_62();
-extern u8 data_080ED67C[];
+extern u8 sBanimEkrPopupProcNames[];
 
 struct ProcCmd ProcScr_ekrPopup[] __attribute__((section(".rodata.dat_ProcScr_ekrPopup_ref"))) = {
-    PROC_NAME(data_080ED67C),
+    PROC_NAME(sBanimEkrPopupProcNames),
     PROC_REPEAT(BattlePopup_Wait16Frames),
     PROC_REPEAT(ekrPopup_DrawWRankUp),
     PROC_REPEAT(ekrPopup_WaitWpnBroke),
@@ -46,7 +46,7 @@ struct ProcCmd ProcScr_ekrPopup[] __attribute__((section(".rodata.dat_ProcScr_ek
 };
 
 struct ProcCmd ProcScr_ekrPopup2[] __attribute__((section(".rodata.dat_ProcScr_ekrPopup2_ref"))) = {
-    PROC_NAME((void *)((u8 *)data_080ED67C + 0xC)),
+    PROC_NAME((void *)((u8 *)sBanimEkrPopupProcNames + 0xC)),
     PROC_REPEAT(BattlePopup_Wait16Frames),
     PROC_LABEL(0),
     PROC_REPEAT(ekrPopup_DrawWpnUsable),

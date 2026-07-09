@@ -20,7 +20,7 @@ EventListScr_Ch16b_Location:
 	.4byte 0x09160011
 	.4byte 0x000F000B
 	.4byte frontier_df3_eventscr_ch_016_A6EFD8 + 0xA8
-	.4byte data_080ED67C + 0x1298D
+	.4byte sBanimEkrPopupProcNames + 0x1298D
 	.4byte 0x000F000B
 	.4byte frontier_df3_eventscr_ch_016_A6EFD8 + 0xA8
 	.4byte 0x10130A0F

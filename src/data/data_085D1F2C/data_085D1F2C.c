@@ -23,10 +23,10 @@ extern void CpPerform_WaitAction();
 extern void HandlePostActionTraps();
 extern void MuExistsActive();
 extern void RunPotentialWaitEvents();
-extern u8 data_080DCDAC[];
+extern u8 sCpProcData[];
 
 struct ProcCmd gProcScr_CpPerform[] __attribute__((section(".rodata.dat_gProcScr_CpPerform_ref"))) = {
-    PROC_NAME((void *)((u8 *)data_080DCDAC + 0xC)),
+    PROC_NAME((void *)((u8 *)sCpProcData + 0xC)),
     PROC_CALL(CpPerform_UpdateMapMusic),
     PROC_CALL(CpPerform_MoveCameraOntoUnit),
     PROC_YIELD,

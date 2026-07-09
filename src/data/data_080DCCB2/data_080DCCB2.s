@@ -1,10 +1,10 @@
 /* Migrated from asm/data_080DCCB2.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
-/* carved from data_080DCCB2 [0x0..0xd6) -> data_080DCCB2 */
+/* carved from gProcScr_SALLYCURSOR_pool [0x0..0xd6) -> gProcScr_SALLYCURSOR_pool */
 	.section .data.residue.080DCCB2, "aw", %progbits
-	.global data_080DCCB2
-data_080DCCB2:
+	.global gProcScr_SALLYCURSOR_pool
+gProcScr_SALLYCURSOR_pool:
 	.byte 0x00, 0x00
 	.asciz "SALLYCURSOR"
 	.byte 0x0c, 0x00, 0x0e, 0x00, 0x0d, 0x00, 0x03, 0x10, 0x03, 0x10, 0x04, 0x10

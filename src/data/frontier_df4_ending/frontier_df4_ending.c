@@ -180,8 +180,8 @@ extern const u8 WorldMap_FadeMapSpritePalIn_Loop[];
 extern const u8 WorldMap_FadeMapSpritePalOut_Loop[];
 extern const u8 WorldMap_MergeFace_Loop[];
 extern const u8 data_081F5BF4[];
-extern const u8 data_081F64C0[];
-extern const u8 data_081F6D00[];
+extern const u8 sGmapRouteMenuText[];
+extern const u8 sCcramifyProcData[];
 extern const u8 data_081F6D5C[];
 extern const u8 gUnkData_98[];
 extern const u8 gUnkData_99[];
@@ -624,7 +624,7 @@ struct ProcCmd ProcScr_GmNodeIconDisplay[] __attribute__((section(".data.frontie
 u32 frontier_df4_ending_gap2_r2[] __attribute__((section(".data.frontier_df4_ending.gap2"))) = {
     0x00000001, (u32)&gWorldmapCursor_0 + 0x18, 0x0008000F, 0x00000000, 0x00000004, (u32)&nullsub_96,
     0x00000002, (u32)&GmapCursor_Init, 0x00000003, (u32)&GmapCursor_Loop, 0x00000000, 0x00000000,
-    0x00000001, (u32)&data_081F64C0, 0x0008000F, 0x00000000, 0x00000004, (u32)&nullsub_97,
+    0x00000001, (u32)&sGmapRouteMenuText, 0x0008000F, 0x00000000, 0x00000004, (u32)&nullsub_97,
     0x0000000E, 0x00000000, 0x00000002, (u32)&MapRoute_Init, 0x0000000B, 0x00000000,
     0x00000003, (u32)&MapRoute_Loop, 0x0002000C, 0x00000000, 0x0001000B, 0x00000000,
     0x00000016, (u32)&MapRoute_StartTransition, 0x00000016, (u32)&MapRoute_PrepareTransition, 0x00000016, (u32)&MapRoute_EnableBGSyncs,
@@ -921,7 +921,7 @@ u8 frontier_df4_ending_019_B8B998[] __attribute__((section(".data.frontier_df4_e
 u8 frontier_df4_ending_020_BAA2E0[] __attribute__((section(".data.frontier_df4_ending.gap20"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_020_BAA2E0.4bpp.lz");
 u32 frontier_df4_ending_021_BAB754[] __attribute__((section(".data.frontier_df4_ending.gap21"))) = {
     0x00011E05, 0x28050008, 0x50050003, 0x00080001, 0x00032805, 0x00000000,
-    0x00000002, (u32)&StartMidFadeToBlack, 0x00000003, (u32)&WaitForFade, 0x00000001, (u32)&data_081F6D00,
+    0x00000002, (u32)&StartMidFadeToBlack, 0x00000003, (u32)&WaitForFade, 0x00000001, (u32)&sCcramifyProcData,
     0x0000000B, 0x00000000, 0x00000002, (u32)&Make6C_PromotionMenuSelect, 0x0006000E, 0x00000000,
     0x00000002, (u32)&ClassChgSel_InitDescAndBg, 0x0001000B, 0x00000000, 0x00000002, (u32)&StartMidFadeFromBlack,
     0x00000003, (u32)&WaitForFade, 0x00000003, (u32)&LoadBattleSpritesForBranchScreen, 0x0003000C, 0x00000000,
@@ -929,9 +929,9 @@ u32 frontier_df4_ending_021_BAB754[] __attribute__((section(".data.frontier_df4_
     0x00000003, (u32)&WaitForFade, 0x0004000B, 0x00000000, 0x00000002, (u32)&ClassChgSel_OnEndCleanupBm,
     0x00000002, (u32)&ClassChgSel_RouteOnEndByType, 0x00000004, (u32)&sub_80D2308, 0x00000002, (u32)&StartMidFadeToBlack,
     0x00000003, (u32)&WaitForFade, 0x00000002, (u32)&PrepClassChgOnCancel, 0x0005000B, 0x00000000,
-    0x0003000B, 0x00000000, 0x00000000, 0x00000000, 0x00000001, (u32)&data_081F6D00 + 0xc,
+    0x0003000B, 0x00000000, 0x00000000, 0x00000000, 0x00000001, (u32)&sCcramifyProcData + 0xc,
     0x00000002, (u32)&StartMidFadeFromBlack, 0x00000003, (u32)&WaitForFade, 0x00000000, 0x00000000,
-    0x0008000E, 0x00000000, 0x00000001, (u32)&data_081F6D00 + 0x1c, 0x0000000B, 0x00000000,
+    0x0008000E, 0x00000000, 0x00000001, (u32)&sCcramifyProcData + 0x1c, 0x0000000B, 0x00000000,
     0x00000002, (u32)&PromoTrainee_InitScreen, 0x0001000B, 0x00000000, 0x00000002, (u32)&StartMidFadeFromBlack,
     0x00000003, (u32)&WaitForFade, 0x00000002, (u32)&PromoTrainee_Talk1, 0x00000014, (u32)&CgTextExists,
     0x00000002, (u32)&PromoTrainee_Talk2, 0x00000014, (u32)&CgTextExists, 0x00000002, (u32)&PromoTrainee_Talk3,

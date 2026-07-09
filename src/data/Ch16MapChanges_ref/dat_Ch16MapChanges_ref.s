@@ -96,7 +96,7 @@ Ch16MapChanges:
 	.4byte 0x09160011
 	.4byte 0x000F000B
 	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x7E8
-	.4byte data_080ED67C + 0x1298D
+	.4byte sBanimEkrPopupProcNames + 0x1298D
 	.4byte 0x000F000B
 	.4byte frontier_df3_eventscr_ch_001_A696D4 + 0x7E8
 	.4byte 0x10130A0F

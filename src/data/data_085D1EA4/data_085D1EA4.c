@@ -19,10 +19,10 @@ extern const u8 DecideSpecialItems[];
 
 extern void CpDecide_Main();
 extern void CpDecide_Suspend();
-extern struct ProcCmd data_080DCDAC[];
+extern struct ProcCmd sCpProcData[];
 
 struct ProcCmd gProcScr_CpDecide[] __attribute__((section(".rodata.dat_gProcScr_CpDecide_ref"))) = {
-    PROC_NAME(data_080DCDAC),
+    PROC_NAME(sCpProcData),
     PROC_LABEL(0),
     PROC_CALL(CpDecide_Main),
     PROC_YIELD,

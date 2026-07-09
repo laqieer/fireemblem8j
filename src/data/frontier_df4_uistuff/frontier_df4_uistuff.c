@@ -627,7 +627,7 @@ extern void Talk_OnInit();
 extern void UnitInfoWindow_OnLoop();
 extern void WaitEventPromoteDone();
 extern void WaitForFade();
-extern u8 data_080DCCB2[];
+extern u8 gProcScr_SALLYCURSOR_pool[];
 extern void sub_8013844();
 
 #define PROC_WORDS(op, pa, p) { (op), (pa), (void *)(p) }
@@ -11836,7 +11836,7 @@ struct ProcCmd frontier_df4_uistuff_032_5C6084[] SECTION(".data.frontier_df4_uis
 };
 
 struct ProcCmd ProcScr_PrepScreenProc_LockGame_5C6084_0[] SECTION(".data.frontier_df4_uistuff.gap32") = {
-    PROC_NAME((void *)((u8 *)data_080DCCB2 + 0x2)),
+    PROC_NAME((void *)((u8 *)gProcScr_SALLYCURSOR_pool + 0x2)),
     PROC_SLEEP(0x10),
     PROC_CALL(PrepScreenProc_LockGame),
     PROC_CALL(PrepScreenProc_AddPostgameUnits),

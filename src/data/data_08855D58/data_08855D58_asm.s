@@ -29,7 +29,7 @@ data_08855DB0:
 	.section .data.residue.08855DD8, "aw", %progbits
 data_08855DD8:
 	.4byte 0x00000001
-	.4byte data_080ED67C + 0x164
+	.4byte sBanimEkrPopupProcNames + 0x164
 	.4byte 0x00000002
 	.4byte EfxSelfThunderBGOnInit + 0x1
 	.4byte 0x00000003

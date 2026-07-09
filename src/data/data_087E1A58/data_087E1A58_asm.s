@@ -15,7 +15,7 @@ data_087E1A58:
 	.section .data.residue.087E1B48, "aw", %progbits
 data_087E1B48:
 	.4byte 0x00000001
-	.4byte data_080ED67C + 0x18
+	.4byte sBanimEkrPopupProcNames + 0x18
 	.4byte 0x00000003
 	.4byte EkrHenseiInit_Init + 0x1
 	.4byte 0x00000003
@@ -27,7 +27,7 @@ data_087E1B48:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000001
-	.4byte data_080ED67C + 0x2C
+	.4byte sBanimEkrPopupProcNames + 0x2C
 	.4byte 0x00000003
 	.4byte EkrHenseiEnd_Init + 0x1
 	.4byte 0x00000003

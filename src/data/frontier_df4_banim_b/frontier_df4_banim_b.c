@@ -2619,7 +2619,7 @@ extern void UnlockGame();
 extern void WallBreakAnim_Init();
 extern void WarpFlashy_Init();
 extern void WarpFlashy_Loop();
-extern u8 data_080ED67C[];
+extern u8 sBanimEkrPopupProcNames[];
 extern const u8 ProcScr_PoisonDmgMapEffect[];
 extern void efxCriricalEffectBGCOLMain();
 extern void efxCriricalEffectBGMain();
@@ -6547,13 +6547,13 @@ u32 frontier_df4_banim_b_067_84886C[] __attribute__((section(".data.frontier_df4
     0x00000000, 0x00000000,
 };
 struct ProcCmd ProcScr_ekrDragonBaseHide[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
-    PROC_NAME((void*)((u8*)data_080ED67C + 0x40)), PROC_REPEAT((void*)((u8*)EkrDragonBaseHideMain + 0x1)), PROC_REPEAT((void*)((u8*)EkrDragonBaseHide_Nop + 0x1)), PROC_END,
+    PROC_NAME((void*)((u8*)sBanimEkrPopupProcNames + 0x40)), PROC_REPEAT((void*)((u8*)EkrDragonBaseHideMain + 0x1)), PROC_REPEAT((void*)((u8*)EkrDragonBaseHide_Nop + 0x1)), PROC_END,
 };
 struct ProcCmd ProcScr_ekrDragonBaseAppear[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
-    PROC_NAME((void*)((u8*)data_080ED67C + 0x54)), PROC_REPEAT((void*)((u8*)EkrDragonBaseAppearMain + 0x1)), PROC_REPEAT((void*)((u8*)EkrDragonBaseAppear_Nop + 0x1)), PROC_END,
+    PROC_NAME((void*)((u8*)sBanimEkrPopupProcNames + 0x54)), PROC_REPEAT((void*)((u8*)EkrDragonBaseAppearMain + 0x1)), PROC_REPEAT((void*)((u8*)EkrDragonBaseAppear_Nop + 0x1)), PROC_END,
 };
 struct ProcCmd ProcScr_ekrDragonBodyAnime[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
-    PROC_NAME((void*)((u8*)data_080ED67C + 0x68)), PROC_REPEAT((void*)((u8*)EkrDragonBodyAnimeMain + 0x1)), PROC_END,
+    PROC_NAME((void*)((u8*)sBanimEkrPopupProcNames + 0x68)), PROC_REPEAT((void*)((u8*)EkrDragonBodyAnimeMain + 0x1)), PROC_END,
 };
 u32 frontier_df4_banim_b_res17[] __attribute__((section(".data.frontier_df4_banim_b.gap67"))) = {
     (u32)&Tsa_DemonKingBG1, (u32)&Tsa_DemonKingBG3, (u32)&Tsa_DemonKingBG2,

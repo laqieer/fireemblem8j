@@ -1,7 +1,7 @@
 #include "global.h"
 #include "proc.h"
 
-extern u8 data_080DCCB2[];
+extern u8 gProcScr_SALLYCURSOR_pool[];
 extern void BattleForecast_OnEnd(ProcPtr proc);
 extern void ClearBg0Bg1(ProcPtr proc);
 extern void BattleForecast_Init(ProcPtr proc);
@@ -13,7 +13,7 @@ extern void BattleForecast_LoopDisplay(ProcPtr proc);
 extern void BattleForecast_LoopSlideOut(ProcPtr proc);
 
 struct ProcCmd gProcScr_BKSEL[] __attribute__((section(".rodata.dat_gProcScr_BKSEL_ref"))) = {
-    PROC_NAME((const char*)(data_080DCCB2 + 0x4A)),
+    PROC_NAME((const char*)(gProcScr_SALLYCURSOR_pool + 0x4A)),
 
     PROC_SET_END_CB(BattleForecast_OnEnd),
 

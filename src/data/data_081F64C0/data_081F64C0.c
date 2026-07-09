@@ -2,7 +2,7 @@
 
 /* Typed C extraction of residual raw-incbin slices from data_081F64C0.c. */
 
-u32 data_081F64C0[] __attribute__((section(".data.residue.081F64C0"))) = {
+u32 sGmapRouteMenuText[] __attribute__((section(".data.residue.081F64C0"))) = {
     0x70616D47, 0x74756F52, 0x00000065, 0x4C8B4081,
     0x00005E98, 0xDD904081, 0x0000E892, 0xAB8E4081,
     0x0000918F, 0xF38F4081, 0x0000B58B, 0x94954081,

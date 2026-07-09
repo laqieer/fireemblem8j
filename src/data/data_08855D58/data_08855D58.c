@@ -16,7 +16,7 @@
 extern void EkrDemonkingObj_DissolveInit();
 extern void EkrDemonkingObj_DissolveLoop();
 extern void EkrSelfThunderMain();
-extern u8 data_080ED67C[];
+extern u8 sBanimEkrPopupProcNames[];
 
 struct ProcCmd ProcScr_EkrdragonDemonkingobj_2[] __attribute__((section(".rodata.dat_ProcScr_EkrdragonDemonkingobj_2_ref"))) = {
     PROC_CALL(EkrDemonkingObj_DissolveInit),
@@ -25,7 +25,7 @@ struct ProcCmd ProcScr_EkrdragonDemonkingobj_2[] __attribute__((section(".rodata
 };
 
 struct ProcCmd ProcScr_ekrSelfThunder[] __attribute__((section(".rodata.dat_ProcScr_ekrSelfThunder_ref"))) = {
-    PROC_NAME((void *)((u8 *)data_080ED67C + 0x154)),
+    PROC_NAME((void *)((u8 *)sBanimEkrPopupProcNames + 0x154)),
     PROC_REPEAT(EkrSelfThunderMain),
     PROC_END,
 };

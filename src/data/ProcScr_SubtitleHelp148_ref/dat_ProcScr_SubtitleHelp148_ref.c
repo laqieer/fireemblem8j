@@ -12,13 +12,13 @@
  * SubtitleHelp_Init / SubtitleHelp_OnEnd / SubtitleHelp_Loop are Thumb functions
  * (declared in bb.h), so bare PROC_*() gets the Thumb bit from the R_ARM_ABS32
  * reloc. The PROC_NAME "BB" string lives at 0x080DCCE0, which is interior to the
- * carved data_080DCCB2 resource ([0x080DCCB2,0x080DCD88)), so it is referenced as
- * data_080DCCB2 + 0x2E -- matching the pre-split de-pointered reference exactly. */
+ * carved gProcScr_SALLYCURSOR_pool resource ([0x080DCCB2,0x080DCD88)), so it is referenced as
+ * gProcScr_SALLYCURSOR_pool + 0x2E -- matching the pre-split de-pointered reference exactly. */
 
-extern const u8 data_080DCCB2[];
+extern const u8 gProcScr_SALLYCURSOR_pool[];
 
 struct ProcCmd gProcScr_SubtitleHelp[] __attribute__((section(".rodata.dat_ProcScr_SubtitleHelp148_ref"))) = {
-    PROC_NAME((void *)((u8 *)data_080DCCB2 + 0x2E)),
+    PROC_NAME((void *)((u8 *)gProcScr_SALLYCURSOR_pool + 0x2E)),
     PROC_15,
     PROC_SET_END_CB(SubtitleHelp_OnEnd),
     PROC_SLEEP(0),

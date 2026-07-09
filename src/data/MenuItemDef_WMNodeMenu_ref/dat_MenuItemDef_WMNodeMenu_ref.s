@@ -5,7 +5,7 @@
 	.section .rodata.dat_MenuItemDef_WMNodeMenu_ref, "a", %progbits
 	.global MenuItemDef_WMNodeMenu
 MenuItemDef_WMNodeMenu:
-	.4byte data_081F64C0 + 0x64
+	.4byte sGmapRouteMenuText + 0x64
 	.4byte 0x06510600
 	.4byte 0x00000000
 	.4byte WMMenu_IsArmoryAvailable + 0x1
@@ -14,7 +14,7 @@ MenuItemDef_WMNodeMenu:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte data_081F64C0 + 0x54
+	.4byte sGmapRouteMenuText + 0x54
 	.4byte 0x06520601
 	.4byte 0x00000100
 	.4byte WMMenu_IsVendorAvailable + 0x1
@@ -23,7 +23,7 @@ MenuItemDef_WMNodeMenu:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte data_081F64C0 + 0x44
+	.4byte sGmapRouteMenuText + 0x44
 	.4byte 0x06530602
 	.4byte 0x00000200
 	.4byte WMMenu_IsSecretShopAvailable + 0x1
@@ -32,7 +32,7 @@ MenuItemDef_WMNodeMenu:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte data_081F64C0 + 0x34
+	.4byte sGmapRouteMenuText + 0x34
 	.4byte 0x060A0603
 	.4byte 0x00000300
 	.4byte MenuAlwaysEnabled + 0x1

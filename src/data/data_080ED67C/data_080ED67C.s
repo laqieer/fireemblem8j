@@ -1,10 +1,10 @@
 /* Migrated from asm/data_080ED67C.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
-/* carved from data_080ED67C [0x0..0x178) -> data_080ED67C */
+/* carved from sBanimEkrPopupProcNames [0x0..0x178) -> sBanimEkrPopupProcNames */
 	.section .data.residue.080ED67C, "aw", %progbits
-	.global data_080ED67C
-data_080ED67C:
+	.global sBanimEkrPopupProcNames
+sBanimEkrPopupProcNames:
 	.asciz "ekrPopup"
 	.byte 0x00, 0x00, 0x00
 	.asciz "ekrPopup2"
