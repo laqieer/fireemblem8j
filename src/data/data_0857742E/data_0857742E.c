@@ -2,7 +2,7 @@
 
 /* Typed C extraction of residual raw-incbin slices from data_0857742E.c. */
 
-u16 data_0857742E[] __attribute__((section(".data.residue.0857742E"))) = {
+u16 gLibcRodataPadding_0857742E[] __attribute__((section(".data.residue.0857742E"))) = {
     0x0000,
 };
 

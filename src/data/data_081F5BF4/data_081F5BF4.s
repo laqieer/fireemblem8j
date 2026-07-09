@@ -1,4 +1,4 @@
-/* D121 split of data_081F5BF0: first 4 B ({4,3,2,1}) are GetChapterSurvivalRank's
+/* D121 split of sGmapFadeRampAndStrings_081F5BF4: first 4 B ({4,3,2,1}) are GetChapterSurvivalRank's
  * local-array .rodata template (now @0x081F5BF0); this is the remaining 120 B. */
 /* carved from data_081F5BF4 [0x0..0x78) -> data_081F5BF4 */
 	.section .data.residue.081F5BF4, "aw", %progbits

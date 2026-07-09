@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.085C3A08, "aw", %progbits
-	.global data_085C3A08
-data_085C3A08:
+	.global ProcScr_085C3A08
+ProcScr_085C3A08:
 	.4byte 0x00000002
 	.4byte sub_8022140 + 0x1
 	.4byte 0x0006000E
@@ -18,4 +18,4 @@ data_085C3A08:
 	.4byte sub_80221D8 + 0x1
 	.4byte 0x00000000
 	.4byte 0x00000000
-/* de-pointered slice data_085C3A08: ptr=3 data=9 skip=2 */
+/* de-pointered slice ProcScr_085C3A08: ptr=3 data=9 skip=2 */

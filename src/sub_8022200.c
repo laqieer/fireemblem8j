@@ -10,7 +10,7 @@
 extern const u8 Img_Sub8022200[];   /* 0x085D14D4 */
 extern const u8 Pal_Sub8022200[];   /* 0x085D188C */
 extern const u8 Tsa_Sub8022200[];   /* 0x085D1A8C */
-extern const struct ProcCmd data_085C3A08[]; /* ProcScr @ 0x085C3A08 */
+extern const struct ProcCmd ProcScr_085C3A08[]; /* ProcScr @ 0x085C3A08 */
 
 void sub_8022200(ProcPtr parent)
 {
@@ -28,5 +28,5 @@ void sub_8022200(ProcPtr parent)
     SetBlendTargetA(0, 0, 0, 0, 0);
     SetBlendTargetB(0, 0, 0, 0, 0);
 
-    Proc_StartBlocking(data_085C3A08, parent);
+    Proc_StartBlocking(ProcScr_085C3A08, parent);
 }

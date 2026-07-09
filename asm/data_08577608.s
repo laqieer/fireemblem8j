@@ -4,7 +4,7 @@
 @ carried as committed source so the final-goal metric (every catch-all incbin
 @ byte -> real source) reaches zero. NO .align (would grow the ROM); the bytes
 @ stay byte-identical to the gap they replace and `make compare` is the oracle.
-@ Split off from data_085775A4 to make room for the typed sBGControlStructPtrs.
+@ Split off from sSbrkCollisionMsg_085775A4 to make room for the typed sBGControlStructPtrs.
 
 	.section .data.residue.08577608, "a", %progbits
 	.global sMusicProc1Script

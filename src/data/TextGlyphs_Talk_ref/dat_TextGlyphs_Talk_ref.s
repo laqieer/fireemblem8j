@@ -148,19 +148,19 @@ TextGlyphs_Talk:
 	.4byte gFontgrp_266
 	.4byte dat_gFontgrp_0859497C_ref
 	.4byte dat_gFontgrp_0859527C_ref + 0x120
-	.4byte data_08595474 + 0x90
+	.4byte dat_gFontgrp_08595474_ref + 0x90
 	.4byte dat_gFontgrp_0859497C_ref + 0x48
 	.4byte gFontgrp_267
 	.4byte gFontgrp_268
 	.4byte gFontgrp_269
 	.4byte gFontgrp_270
-	.4byte data_08595594
+	.4byte dat_gFontgrp_08595594_ref
 	.4byte dat_gFontgrp_08594A54_ref
-	.4byte data_08595474
-	.4byte data_08595594 + 0x48
+	.4byte dat_gFontgrp_08595474_ref
+	.4byte dat_gFontgrp_08595594_ref + 0x48
 	.4byte dat_gFontgrp_08594A54_ref + 0x48
-	.4byte data_08595474 + 0x48
-	.4byte data_08595594 + 0x90
+	.4byte dat_gFontgrp_08595474_ref + 0x48
+	.4byte dat_gFontgrp_08595594_ref + 0x90
 	.4byte gFontgrp_271
 	.4byte frontier_df4_uistuff_009_594B2C
 	.4byte frontier_df4_uistuff_009_594B2C + 0x48
@@ -168,9 +168,9 @@ TextGlyphs_Talk:
 	.4byte frontier_df4_uistuff_009_594B2C + 0xD8
 	.4byte gFontgrp_272
 	.4byte frontier_df4_uistuff_009_594B2C + 0x120
-	.4byte data_08595864
+	.4byte dat_gFontgrp_08595864_ref
 	.4byte frontier_df4_uistuff_009_594B2C + 0x168
-	.4byte data_08595864 + 0x48
+	.4byte dat_gFontgrp_08595864_ref + 0x48
 	.4byte frontier_df4_uistuff_009_594B2C + 0x1B0
 	.4byte frontier_df4_uistuff_009_594B2C + 0x1F8
 	.4byte frontier_df4_uistuff_009_594B2C + 0x240

@@ -2,7 +2,7 @@
 
 /* Typed C extraction of residual raw-incbin slices from data_080DC8B0.c. */
 
-u32 data_080DC8B0[] __attribute__((section(".data.residue.080DC8B0"))) = {
+u32 dat_gConfig_080DC8B0_ref[] __attribute__((section(".data.residue.080DC8B0"))) = {
     0x00000000, 0x00000006, 0x0000000C, 0x00000012,
     0x00000018, 0x00000800, 0x00000806, 0x0000080C,
     0x00000812, 0x00000818, 0x00001000, 0x00001006,

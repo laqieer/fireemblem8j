@@ -1,6 +1,6 @@
 #include "global.h"
 
-/* data_080DC684 (debug-menu data block, object base ROM 0x080DC68C; the first 8
+/* sDebugMenuStrings_080DC68C (debug-menu data block, object base ROM 0x080DC68C; the first 8
  * bytes 0x080DC684..0x080DC68C are CanUnitMove local lut, a separate object).
  * The data_080DC68C and data_080DC70C slices each hold a real internal pointer
  * array (clear/fog-draw + debug-string tables) pointing into this same block;
@@ -20,19 +20,19 @@ struct {
     { 0x93, 0x56, 0x8B, 0x43, 0x00, 0x00, 0x00, 0x00 },
 };
 
-/* carved from data_080DC684 [0x64..0x6c) -> Str_DebugPlaythroughCount - 周回数 (0x080DC6E8) */
+/* carved from sDebugMenuStrings_080DC68C [0x64..0x6c) -> Str_DebugPlaythroughCount - 周回数 (0x080DC6E8) */
 u8 Str_DebugPlaythroughCount[] __attribute__((section(".data.residue.080DC684"))) = {
     0x8E, 0xFC, 0x89, 0xF1, 0x90, 0x94, 0x00, 0x00,
 };
-/* carved from data_080DC684 [0x6c..0x74) -> Str_DebugPlaythroughTh - 周目  (0x080DC6F0) */
+/* carved from sDebugMenuStrings_080DC68C [0x6c..0x74) -> Str_DebugPlaythroughTh - 周目  (0x080DC6F0) */
 u8 Str_DebugPlaythroughTh[] __attribute__((section(".data.residue.080DC684"))) = {
     0x8E, 0xFC, 0x96, 0xDA, 0x00, 0x00, 0x00, 0x00,
 };
-/* carved from data_080DC684 [0x74..0x80) -> data_080DC6F8 */
+/* carved from sDebugMenuStrings_080DC68C [0x74..0x80) -> data_080DC6F8 */
 u8 data_080DC6F8[] __attribute__((section(".data.residue.080DC684"))) = {
     0x82, 0xE0, 0x82, 0xA4, 0x82, 0xBE, 0x82, 0xDF, 0x82, 0xDB, 0x00, 0x00,
 };
-/* carved from data_080DC684 [0x80..0x88) -> Str_DebugFogState - さく敵 (0x080DC704) */
+/* carved from sDebugMenuStrings_080DC68C [0x80..0x88) -> Str_DebugFogState - さく敵 (0x080DC704) */
 u8 Str_DebugFogState[] __attribute__((section(".data.residue.080DC684"))) = {
     0x82, 0xB3, 0x82, 0xAD, 0x93, 0x47, 0x00, 0x00,
 };
