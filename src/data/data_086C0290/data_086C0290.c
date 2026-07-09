@@ -7,7 +7,7 @@
  * refs; anim-command words (0x186C.../0x386C...) are not pointers and stay raw.
  * Byte-exact via `make compare`. */
 
-u32 data_086C0290[] __attribute__((section(".data.residue.086C0290"))) = {
+u32 AnimSprite_EfxIvald2_57[] __attribute__((section(".data.residue.086C0290"))) = {
     0x00000001,
     0x00000000,
     0x00000000,
@@ -72,9 +72,9 @@ u32 AnimScr_EfxIvald_L4[] __attribute__((section(".data.residue.086C0290"))) = {
     0x186C0230,
     0x80000000,
     0x386C0260,
-    (u32)&data_086C0290 + 0x1,
+    (u32)&AnimSprite_EfxIvald2_57 + 0x1,
     0x80000000,
     0x386C0278,
-    (u32)&data_086C0290 + 0x1,
+    (u32)&AnimSprite_EfxIvald2_57 + 0x1,
     0x80000000,
 };
