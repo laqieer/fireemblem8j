@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.087F9E98, "aw", %progbits
-	.global data_087F9E98
-data_087F9E98:
+	.global AnimScr_EfxMaohFlashEyeROBJ2
+AnimScr_EfxMaohFlashEyeROBJ2:
 	.4byte AnimSprite_EfxMaohFlashEye_1 + 0x2
 	.4byte AnimSprite_EfxMaohFlashEye_2 + 0x2
 	.4byte AnimSprite_EfxMaohFlashEye_1 + 0x2
@@ -22,4 +22,4 @@ data_087F9E98:
 	.4byte AnimSprite_EfxMaohFlashEye_13 + 0x2
 	.4byte AnimSprite_EfxMaohFlashEye_7 + 0x2
 	.4byte 0x81000000
-/* de-pointered slice data_087F9E98: ptr=15 data=3 skip=0 */
+/* de-pointered slice AnimScr_EfxMaohFlashEyeROBJ2: ptr=15 data=3 skip=0 */

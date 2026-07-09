@@ -131,7 +131,7 @@ gap_000695C4:
 	.4byte 0x4700BC01
 	.4byte 0x0201774C
 	.4byte 0x08602458
-	.4byte data_087FA0B4
+	.4byte AnimScr_EfxMaohFlashThunderObjROBJ2
 	.4byte 0x0000F3FF
 	.4byte Pal_DemonLightSprites
 	.4byte Img_DemonLightSprites
