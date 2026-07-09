@@ -59,7 +59,7 @@ data_08A661E0:
 	.4byte 0x00070228
 	.4byte 0x00000120
 	.4byte 0x00020540
-	.4byte data_0890C6A8
+	.4byte UnitDef_Ch9AEnemy_9
 	.4byte 0x00000A40
 	.4byte EventScr_LoadReinforceHardMode
 	.4byte 0x00070228

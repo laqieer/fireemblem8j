@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.0890C824, "aw", %progbits
-	.global data_0890C824
-data_0890C824:
+	.global UnitDef_Ch9AAlly_1
+UnitDef_Ch9AAlly_1:
 	.4byte 0x080148CC
 	.4byte 0x0200010C
 	.4byte REDA_Ch9AAlly_1_MESSENGER
@@ -19,4 +19,4 @@ data_0890C824:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-/* de-pointered slice data_0890C824: ptr=1 data=13 skip=1 */
+/* de-pointered slice UnitDef_Ch9AAlly_1: ptr=1 data=13 skip=1 */

@@ -1,11 +1,11 @@
 #include "global.h"
 
-/* Byte-neutral SPLIT of the former data_0890C0A4 residue (240 B) into
+/* Byte-neutral SPLIT of the former UnitDef_Ch8Units_4 residue (240 B) into
  * 26 named sub-objects. Each keeps its exact word stream and its own
  * .data.residue.<ADDR> section for contiguous address-order placement
- * (make compare is the oracle). Consumers repoint from data_0890C0A4+0xNN. */
+ * (make compare is the oracle). Consumers repoint from UnitDef_Ch8Units_4+0xNN. */
 
-u32 data_0890C0A4[] __attribute__((section(".data.residue.0890C0A4"))) = {
+u32 UnitDef_Ch8Units_4[] __attribute__((section(".data.residue.0890C0A4"))) = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };

@@ -13,7 +13,7 @@
 extern const u8 EventScr_SetBackground[];
 extern const u8 Event_TextWithBG[];
 extern const u8 UnitDef_Ch9AMixed_1[];
-extern const u8 data_0890C824[];
+extern const u8 UnitDef_Ch9AAlly_1[];
 extern const u8 data_085B9BBC[];
 
 SECTION(".rodata.dat_EventScr_Ch9a_EndingScene_ref") EventListScr EventScr_Ch9a_EndingScene[] = {
@@ -64,7 +64,7 @@ SECTION(".rodata.dat_EventScr_Ch9a_EndingScene_ref") EventListScr EventScr_Ch9a_
     SVAL(EVT_SLOT_2, 0xC)
     SVAL(EVT_SLOT_3, 0x9E5)
     CALL(Event_TextWithBG)
-    LOAD2(1, data_0890C824)
+    LOAD2(1, UnitDef_Ch9AAlly_1)
     ENUN
     CURSOR_CHAR(0xCC)
     STAL(0x3C)

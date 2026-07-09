@@ -1,11 +1,11 @@
-@ byte-neutral SPLIT of data_0890A480 (132 B) into 10 named sub-objects.
+@ byte-neutral SPLIT of UnitDef_Ch5xUnits_3 (132 B) into 10 named sub-objects.
 @ Excluded mirror (DATA_INCBIN_ASM_EXCLUDE): NOT linked, only text-scanned
 @ by the named-symbols metric. Real bytes come from the src .c object;
 @ make compare is the oracle.
 
 	.section .data.residue.0890A480, "a", %progbits
-	.global data_0890A480
-data_0890A480:
+	.global UnitDef_Ch5xUnits_3
+UnitDef_Ch5xUnits_3:
 	.incbin "data/residual/data_0890A480.bin", 0x0, 0x14
 	.section .data.residue.0890A494, "a", %progbits
 	.global REDA_Ch5xAlly_3_EPHRAIM

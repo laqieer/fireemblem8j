@@ -1,11 +1,11 @@
 #include "global.h"
 
-/* Byte-neutral SPLIT of the former data_0890A480 residue (132 B) into
+/* Byte-neutral SPLIT of the former UnitDef_Ch5xUnits_3 residue (132 B) into
  * 10 named sub-objects. Each keeps its exact word stream and its own
  * .data.residue.<ADDR> section for contiguous address-order placement
- * (make compare is the oracle). Consumers repoint from data_0890A480+0xNN. */
+ * (make compare is the oracle). Consumers repoint from UnitDef_Ch5xUnits_3+0xNN. */
 
-u32 data_0890A480[] __attribute__((section(".data.residue.0890A480"))) = {
+u32 UnitDef_Ch5xUnits_3[] __attribute__((section(".data.residue.0890A480"))) = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
 };
 u32 REDA_Ch5xAlly_3_EPHRAIM[] __attribute__((section(".data.residue.0890A494"))) = {
