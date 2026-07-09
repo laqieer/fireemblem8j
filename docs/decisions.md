@@ -10047,3 +10047,50 @@ Batch C and was left untouched.
 **Lesson.** Reinforces D351: the collision + already-split + content-sanity triage IS the integrity
 gate. When all three are clean the byte-neutral batching scales cleanly — 27/27 landed across 3 batches
 with zero bisects and zero rejects.
+
+## D353 — Residue-typing wave 3 (structural / region-diff): 26 `data_<hex>` placeholders → typed names (99.31% → 99.51%); 3 MapChanges skipped for collision (2026-07-09)
+
+**Context.** Continuation of D351/D352. Wave 3 = 29 carve-researcher candidate rows targeting the
+**SJIS font-glyph / gFontgrp struct region** (0x0857–0x0859), a debug-menu table, and 3 region-diff
+MapChanges. Two fe8u **"partial" (type-known, index-pending) structural conventions** are used:
+`SjisGlyphs_<addr>` for a run of `struct Glyph`, and `dat_gFontgrp_<addr>_ref` for a de-pointered
+gFontgrp reference table. Both are address-suffixed *type tags* that legitimately un-flag the
+`data_<hex>` placeholder (the residue's type is proven even if the exact table index is not yet
+assigned).
+
+**Mechanic.** Identical byte-neutral relabel to D351/D352. `sizeof(struct Glyph)` = 72 (`sjisNext`
+pointer 4 + `sjisByte1` 1 + `width` 1 + 2 pad + `bitmap[16]` 64) — the content oracle for this wave.
+
+**Verification (3-point triage).** (1) **Collision** — all 26 applied names `COLL_nm=0` + no `src/`
+definition. (2) **Existence** — the SjisGlyphs/gFontgrp residues are defined in the excluded mirror
+`asm/data_<hex>.s` (+ a `src/data/data_<hex>/` tracked object) and already typed `extern struct Glyph`
+by sibling `gFontgrp_*_ref` files, so the apply tool's `git grep -l` rewires the mirror + all refs.
+(3) **Content-sanity** — **every** SjisGlyphs and gFontgrp residue's `nm -n` span is an exact ×72
+multiple (leading `sjisNext` pointer word); `gDebugMenuItems` sits among
+`gItemUseMenuItems`/`gStealItemMenuItems` nm neighbors.
+
+**Applied (26, 2 commits, each `make compare` OK + `make shiftcheck` 0 HIGH, pushed CI-green):**
+- `0965df88f` W3-1 (15 SjisGlyphs): `SjisGlyphs_0857{A114,A354,A42C,A864,AC54,AE4C,AF6C,B1AC,C6C4,
+  D36C,D48C,DA2C,DBDC,DCB4,DEF4}`.
+- `8966ef9a5` W3-2 (10 gFontgrp_ref + 1 debug): `dat_gFontgrp_{0857E32C,0859137C,0859497C,08594A54,
+  08594E8C,0859527C,085957D4,0859848C,085985AC,0859A0AC}_ref`; `data_085C4518 → gDebugMenuItems`.
+
+**Skipped (3) — target name is already a defined symbol at a DIFFERENT address (collision + mis-ID,
+D27/D29):**
+- `data_08A5DA90 → TowerOfValni7MapChanges`: name is already a **global alias at 0x08a5daa0** — the
+  residue is 0x10 bytes *before* it (the preceding table, not this one).
+- `data_08A5DF98 → LagdouRuins6MapChanges`: name already a **global at 0x08a5e038** — residue 0xA0
+  before it.
+- `data_08A5DE70 → LagdouRuins4MapChanges`: name already defined (static) at **0x08a9c4ec**, a
+  different cluster (0x08a9c "real names" block); the residue at 0x08a5de70 is a different region-diff
+  table.
+
+**Impact.** Axis-4 NAMED SYMBOLS **99.31% (12,636/12,724, 88 placeholders) → 99.51% (12,662/12,724,
+62 placeholders)** (`python3 scripts/calcprogress.py`). `make compare` unaffected (relabel-only).
+
+**Lesson.** The SJIS-glyph / gFontgrp region is cleanly typeable via the ×72 `struct Glyph` stride
+oracle (span %72==0 is a strong positive-evidence type check). The MapChanges skip shows the collision
+check catching a researcher **off-by-one-table mis-ID** — the residue is *adjacent to* (just before)
+the named table, not equal to it. Remaining ~62 placeholders are dominated by the **Group-4 mixed
+AnimSprite+AnimScr SPLITs** (need real object splitting, not a single relabel) + the genuine floor
+(the 0x08FE0000 ARM multiboot image, 0x08A5A6AD padding, zero-pad tails).
