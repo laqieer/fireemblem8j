@@ -23,7 +23,7 @@ Ch15MapChanges:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-	.4byte data_08A6846C
+	.4byte EventScr_Ch15a_BeginningScene
 	.4byte EventScr_Ch15A_1
 	.4byte 0x00000002
 	.4byte frontier_df3_eventscr_ch_000_A69464 + 0x1D8

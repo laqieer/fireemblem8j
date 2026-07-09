@@ -26,70 +26,70 @@ Ch14EirikaMapChanges:
 	.4byte EventScr_Ch14a_BeginningScene
 	.4byte frontier_df4_menu_010_A67EEC
 	.4byte 0x00000002
-	.4byte data_08A686CC + 0x148
+	.4byte EventScr_Ch15A_2 + 0x148
 	.4byte 0x00000503
 	.4byte 0x00000002
-	.4byte data_08A686CC + 0x160
+	.4byte EventScr_Ch15A_2 + 0x160
 	.4byte 0x00000504
 	.4byte 0x00000002
-	.4byte data_08A686CC + 0x178
+	.4byte EventScr_Ch15A_2 + 0x178
 	.4byte 0x00000908
 	.4byte 0x00000002
 	.4byte EventScr_Ch15A_0
 	.4byte 0x00800002
 	.4byte 0x00000002
-	.4byte data_08A686CC + 0x190
+	.4byte EventScr_Ch15A_2 + 0x190
 	.4byte 0x00000008
 	.4byte 0x00000002
-	.4byte data_08A686CC + 0x1A8
+	.4byte EventScr_Ch15A_2 + 0x1A8
 	.4byte 0x00000604
 	.4byte 0x00000000
 	.4byte 0x000D0003
-	.4byte data_08A686CC + 0x84
+	.4byte EventScr_Ch15A_2 + 0x84
 	.4byte 0x00000F01
 	.4byte 0x00000000
 	.4byte 0x000D0003
-	.4byte data_08A686CC + 0x84
+	.4byte EventScr_Ch15A_2 + 0x84
 	.4byte 0x0000010F
 	.4byte 0x00000000
 	.4byte 0x000E0003
-	.4byte data_08A686CC + 0xA8
+	.4byte EventScr_Ch15A_2 + 0xA8
 	.4byte 0x0000020F
 	.4byte 0x00000000
 	.4byte 0x000E0003
-	.4byte data_08A686CC + 0xA8
+	.4byte EventScr_Ch15A_2 + 0xA8
 	.4byte 0x00000F02
 	.4byte 0x00000000
 	.4byte 0x000F0003
-	.4byte data_08A686CC + 0xC8
+	.4byte EventScr_Ch15A_2 + 0xC8
 	.4byte 0x0000100F
 	.4byte 0x00000000
 	.4byte 0x000F0003
-	.4byte data_08A686CC + 0xC8
+	.4byte EventScr_Ch15A_2 + 0xC8
 	.4byte 0x00000F10
 	.4byte 0x00000000
 	.4byte 0x00100003
-	.4byte data_08A686CC + 0xE8
+	.4byte EventScr_Ch15A_2 + 0xE8
 	.4byte 0x0000110F
 	.4byte 0x00000000
 	.4byte 0x00100003
-	.4byte data_08A686CC + 0xE8
+	.4byte EventScr_Ch15A_2 + 0xE8
 	.4byte 0x00000F11
 	.4byte 0x00000000
 	.4byte 0x00110003
-	.4byte data_08A686CC + 0x108
+	.4byte EventScr_Ch15A_2 + 0x108
 	.4byte 0x00000B0F
 	.4byte 0x00000000
 	.4byte 0x00110003
-	.4byte data_08A686CC + 0x108
+	.4byte EventScr_Ch15A_2 + 0x108
 	.4byte 0x00000F0B
 	.4byte 0x00000000
 	.4byte 0x00120003
-	.4byte data_08A686CC + 0x128
+	.4byte EventScr_Ch15A_2 + 0x128
 	.4byte 0x00000E1D
 	.4byte 0x00000000
 	.4byte 0x00120003
-	.4byte data_08A686CC + 0x128
+	.4byte EventScr_Ch15A_2 + 0x128
 	.4byte 0x00001D0E
 	.4byte 0x00000000
 	.4byte 0x00000000
@@ -103,10 +103,10 @@ Ch14EirikaMapChanges:
 	.4byte gUidebug_2 + 0x1B6
 	.4byte 0x00170408
 	.4byte 0x00000005
-	.4byte data_08A686CC + 0x34
+	.4byte EventScr_Ch15A_2 + 0x34
 	.4byte 0x00100611
 	.4byte 0x00000005
-	.4byte data_08A686CC + 0x5C
+	.4byte EventScr_Ch15A_2 + 0x5C
 	.4byte 0x00100D05
 	.4byte 0x00000000
 	.4byte 0x00030001
@@ -137,10 +137,10 @@ Ch14EirikaMapChanges:
 	.4byte EventScr_Ch15A_21
 	.4byte 0x15170F16
 	.4byte 0x001A000B
-	.4byte data_08A686CC + 0x1C0
+	.4byte EventScr_Ch15A_2 + 0x1C0
 	.4byte 0x150E110B
 	.4byte 0x001A000B
-	.4byte data_08A686CC + 0x1C0
+	.4byte EventScr_Ch15A_2 + 0x1C0
 	.4byte 0x15150E0F
 	.4byte 0x001C000B
 	.4byte EventScr_Ch15A_25

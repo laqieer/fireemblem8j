@@ -17,8 +17,8 @@ EventListScr_Ch18b_Misc:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte EventListScr_Ch18b_Turn
-	.4byte data_08A5D270 + 0x3C
-	.4byte data_08A5D270 + 0x40
+	.4byte EventListScr_Ch18b_Character + 0x3C
+	.4byte EventListScr_Ch18b_Character + 0x40
 	.4byte EventListScr_Ch18b_Misc
 	.4byte EventListScr_Ch18b_Misc + 0x1C
 	.4byte EventListScr_Ch18b_Misc + 0x20

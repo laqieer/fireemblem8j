@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.08A6846C, "aw", %progbits
-	.global data_08A6846C
-data_08A6846C:
+	.global EventScr_Ch15a_BeginningScene
+EventScr_Ch15a_BeginningScene:
 	.4byte 0x00261220
 	.4byte 0x00012C41
 	.4byte frontier_df3_unitdef_b_005_9109A8_residue_p5
@@ -52,4 +52,4 @@ data_08A6846C:
 	.4byte 0x00000A40
 	.4byte data_085B9BBC + 0x200
 	.4byte 0x00000120
-/* de-pointered slice data_08A6846C: ptr=7 data=41 skip=0 */
+/* de-pointered slice EventScr_Ch15a_BeginningScene: ptr=7 data=41 skip=0 */

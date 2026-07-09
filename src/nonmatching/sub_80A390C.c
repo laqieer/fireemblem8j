@@ -12,7 +12,7 @@
  *      record for this (chapter_mode, difficulty) slot.
  *   3. Bit-unpacks the record into the AuguryProc fields (see field map below).
  *   4. Computes the composite letter grade via GetOverallRank(5 category ranks).
- *   5. Decompresses the panel gfx from data_08A9A8D4 -> gGenericBuffer and applies the
+ *   5. Decompresses the panel gfx from Tsa_SupportScreenWindow -> gGenericBuffer and applies the
  *      TSA to gBG1TilemapBuffer (Decompress = Decompress, j_TmApplyTsa).
  *   6. Draws the two sub-panels (DrawAuguryResultPanel text/values, sub_80A33E0), then, when the
  *      record is valid and carries a portrait, starts the tactician face (sub_80063F8)
@@ -77,7 +77,7 @@ struct AuguryEntry
 };
 
 extern struct AuguryEntry gUnk_088582BC[];
-extern const u8 data_08A9A8D4[]; /* carved panel gfx (region-same) */
+extern const u8 Tsa_SupportScreenWindow[]; /* carved panel gfx (region-same) */
 
 /* Kept as their existing project sub_ spellings so `make nonmatching` sees no
  * duplicate/renamed symbols; annotated with their role for readers. */
@@ -157,7 +157,7 @@ void Augury_InitResultScreen(struct AuguryProc *proc)
     }
 
     /* --- draw --- */
-    Decompress(data_08A9A8D4, gGenericBuffer);
+    Decompress(Tsa_SupportScreenWindow, gGenericBuffer);
     j_TmApplyTsa(gBG1TilemapBuffer, gGenericBuffer, 0xA5 << 7);
     DrawAuguryResultPanel(proc);
     sub_80A33E0(proc);

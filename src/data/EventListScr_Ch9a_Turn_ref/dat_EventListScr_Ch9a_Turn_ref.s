@@ -6,28 +6,28 @@
 	.global EventListScr_Ch9a_Turn
 EventListScr_Ch9a_Turn:
 	.4byte 0x00000002
-	.4byte data_08A661E0 + 0xD8
+	.4byte EventScr_Ch9A_5 + 0xD8
 	.4byte 0x00000005
 	.4byte 0x00000002
-	.4byte data_08A661E0 + 0x24
+	.4byte EventScr_Ch9A_5 + 0x24
 	.4byte 0x00000003
 	.4byte 0x00000002
-	.4byte data_08A661E0 + 0x3C
+	.4byte EventScr_Ch9A_5 + 0x3C
 	.4byte 0x00000004
 	.4byte 0x00000002
-	.4byte data_08A661E0 + 0xC
+	.4byte EventScr_Ch9A_5 + 0xC
 	.4byte 0x00000002
 	.4byte 0x00000002
-	.4byte data_08A661E0 + 0x6C
+	.4byte EventScr_Ch9A_5 + 0x6C
 	.4byte 0x00000003
 	.4byte 0x00000002
-	.4byte data_08A661E0 + 0x54
+	.4byte EventScr_Ch9A_5 + 0x54
 	.4byte 0x00000004
 	.4byte 0x00000002
-	.4byte data_08A661E0 + 0x84
+	.4byte EventScr_Ch9A_5 + 0x84
 	.4byte 0x00000005
 	.4byte 0x00000002
-	.4byte data_08A661E0 + 0x9C
+	.4byte EventScr_Ch9A_5 + 0x9C
 	.4byte 0x00000005
 	.4byte 0x00000002
 	.4byte EventScr_Ch9A_4

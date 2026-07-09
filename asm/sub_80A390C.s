@@ -182,7 +182,7 @@ _080A3A5C:
 	b _080A3AB6
 	.align 2, 0
 _080A3A74: .4byte 0x000001F1
-_080A3A78: .4byte data_08A9A8D4
+_080A3A78: .4byte Tsa_SupportScreenWindow
 _080A3A7C: .4byte 0x02020188
 _080A3A80:
 	movs r0, #0
@@ -194,7 +194,7 @@ _080A3A80:
 	ldr r7, _080A3A94 @ =0x02020188
 	b _080A3AB6
 	.align 2, 0
-_080A3A90: .4byte data_08A9A8D4
+_080A3A90: .4byte Tsa_SupportScreenWindow
 _080A3A94: .4byte 0x02020188
 _080A3A98:
 	movs r2, #0
@@ -285,7 +285,7 @@ _080A3B4A:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080A3B58: .4byte data_08A9A8D4
+_080A3B58: .4byte Tsa_SupportScreenWindow
 _080A3B5C: .4byte 0x02020188
 _080A3B60: .4byte 0x020234A8
 _080A3B64: .4byte gCharacterData

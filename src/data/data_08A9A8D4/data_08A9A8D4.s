@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.08A9A8D4, "aw", %progbits
-	.global data_08A9A8D4
-data_08A9A8D4:
+	.global Tsa_SupportScreenWindow
+Tsa_SupportScreenWindow:
 	.4byte 0x0004B210
 	.4byte 0x00131D0F
 	.4byte 0xF001F000

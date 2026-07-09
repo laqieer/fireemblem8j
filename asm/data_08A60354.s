@@ -1,10 +1,10 @@
-@ byte-neutral SPLIT of data_08A60354 into 11 named sub-objects.
+@ byte-neutral SPLIT of EventScr_LoadUnitForDifferentMode into 11 named sub-objects.
 @ This mirror is in DATA_INCBIN_ASM_EXCLUDE (NOT linked); scanned only by the
 @ named-symbols metric. Real bytes come from the src object; make compare is the oracle.
 
 	.section .data.residue.08A60354, "a", %progbits
-	.global data_08A60354
-data_08A60354:
+	.global EventScr_LoadUnitForDifferentMode
+EventScr_LoadUnitForDifferentMode:
 	.incbin "data/residual/data_08A60354.bin", 0x0, 0x2C
 	.section .data.residue.08A60380, "a", %progbits
 	.global EventScr_LoadUnitForTutorial

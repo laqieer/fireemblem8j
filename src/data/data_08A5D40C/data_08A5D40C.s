@@ -1,10 +1,10 @@
-/* byte-neutral partial SPLIT of data_08A5D40C: LEAVE prefix + 5 named sub-objects.
+/* byte-neutral partial SPLIT of EventListScr_Ch19b_Character: LEAVE prefix + 5 named sub-objects.
  * Directive stream preserved verbatim; only per-part section headers
  * inserted at byte boundaries (NO .align). make compare is the oracle. */
 
 	.section .data.residue.08A5D40C, "aw", %progbits
-	.global data_08A5D40C
-data_08A5D40C:
+	.global EventListScr_Ch19b_Character
+EventListScr_Ch19b_Character:
 	.4byte 0x00110B0B
 	.4byte 0x00000000
 	.section .data.residue.08A5D414, "aw", %progbits
@@ -42,4 +42,4 @@ EventListScr_Ch19b_UnitMove:
 	.global EventListScr_Ch19b_Tutorial
 EventListScr_Ch19b_Tutorial:
 	.4byte 0x00000000
-/* de-pointered slice data_08A5D40C: ptr=1 data=17 skip=4 */
+/* de-pointered slice EventListScr_Ch19b_Character: ptr=1 data=17 skip=4 */

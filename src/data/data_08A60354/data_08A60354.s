@@ -1,10 +1,10 @@
-/* byte-neutral SPLIT of data_08A60354 into 11 named sub-objects.
+/* byte-neutral SPLIT of EventScr_LoadUnitForDifferentMode into 11 named sub-objects.
  * Directive stream preserved verbatim; only per-part section headers
  * inserted at byte boundaries (NO .align). make compare is the oracle. */
 
 	.section .data.residue.08A60354, "aw", %progbits
-	.global data_08A60354
-data_08A60354:
+	.global EventScr_LoadUnitForDifferentMode
+EventScr_LoadUnitForDifferentMode:
 	.4byte 0x00000C41
 	.4byte 0x0000000C
 	.4byte 0x00001922
@@ -123,4 +123,4 @@ EventScr_ApplyTileChangeForFactionIfNPC:
 	.4byte 0x00000A40
 	.4byte EventScr_ApplyTileChangeForFaction
 	.4byte 0x00000120
-/* de-pointered slice data_08A60354: ptr=9 data=79 skip=0 */
+/* de-pointered slice EventScr_LoadUnitForDifferentMode: ptr=9 data=79 skip=0 */

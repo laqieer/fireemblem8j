@@ -1,10 +1,10 @@
-@ byte-neutral partial SPLIT of data_08A5D524: LEAVE prefix + 4 named sub-objects.
+@ byte-neutral partial SPLIT of EventListScr_Ch20b_Character: LEAVE prefix + 4 named sub-objects.
 @ This mirror is in DATA_INCBIN_ASM_EXCLUDE (NOT linked); scanned only by the
 @ named-symbols metric. Real bytes come from the src object; make compare is the oracle.
 
 	.section .data.residue.08A5D524, "a", %progbits
-	.global data_08A5D524
-data_08A5D524:
+	.global EventListScr_Ch20b_Character
+EventListScr_Ch20b_Character:
 	.incbin "data/residual/data_08A5D524.bin", 0x0, 0x3C
 	.section .data.residue.08A5D560, "a", %progbits
 	.global EventListScr_Ch20b_SelectUnit
