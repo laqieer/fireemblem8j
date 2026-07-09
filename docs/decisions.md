@@ -10139,3 +10139,57 @@ skips** (collision / already-split / off-by-table mis-ID) — **zero wrong names
 the 0x08A5A6AD 3-byte padding, the zero-padding tails, spurious labels, and a handful of region-diff
 MapChanges/EventList tables whose real names collide with US-layout symbols (to be re-typed with
 JP-distinct names separately). This is at or near the structural limit for byte-neutral relabels.
+
+## D355 — Residue-typing wave 5 (FINAL, region-diff / anim): 3 `data_<hex>` placeholders → typed names (99.65% → 99.67%); 5 rigorous integrity skips; structural floor reached (2026-07-09)
+
+**Context.** Final wave of the residue-typing program (continuation of D351–D354). Wave 5 = 8 candidate
+rows flagged as **LOWER confidence** — the last re-typeable region-diff / anim residues, in exactly the
+0x08A5 EventList region where D353's 3 MapChanges names had already proven to be off-by-table mis-IDs.
+Strategy: verify **each** rigorously on 3 axes (nm neighbor-ordering vs the name's US counterpart /
+collision / content-sanity); apply only clean passes; a skip here is a *win* (protects integrity D27/D29).
+
+**Applied (3, commit `e4a3d0a8d`, `make compare` OK + `make shiftcheck` 0 HIGH, pushed CI-green):**
+- `data_087F9E98` → **`AnimScr_EfxMaohFlashEyeROBJ2`**. Content is a valid AnimScr (pointer cells +
+  `0x81000000` terminator, byte-identical format to the adjacent `A AnimScr_MaohFlashEyeROBJ2_1` alias);
+  its pointers resolve to `AnimSprite_EfxMaohFlashEye_1/_2/_7` (087f9cc4/9d0c/9db4 + 2). Distinct script
+  from the existing `_0`/`_1` sub-parts (different frame pointers). Collision-free.
+- `data_087FA0B4` → **`AnimScr_EfxMaohFlashThunderObjROBJ2`**. Valid AnimScr; pointers resolve to
+  `AnimSprite_EfxMaohFlashThunderObj_1/_2` (087F9EE0/087F9F28 per `sym_jp.txt` + 2) — **content confirms
+  "ThunderObj"** despite physical adjacency to the "MaohFlashEye" aliases (layout ≠ identity). Collision-free.
+- `data_08630AD8` → **`Tsa_EkrElfireBG_map2`**. LZ77 header `10 b0 04 00` (decompressed size 0x4b0),
+  identical to `Tsa_EkrElfireBG`'s header; sits inside the `Img_/Pal_/Tsa_EkrElfireBG` asset group → a
+  second tilemap for the animated Elfire background. Collision-free.
+
+**Skipped (5) — with reasons (the integrity payoff of this wave):**
+- `data_08A5CC68` (proposed `EventListScr_Ch14b_Misc`): sits **before** `Ch14b_Location`, but Ch15b proves
+  `Location` precedes `Misc` in the layout → a residue before Location cannot be Misc; content is
+  coordinate/location-style records. **Off-by-table mis-ID.**
+- `data_08A5D1E8` (proposed `EventListScr_Ch17b_Character`): content is a **pure pointer table** (sub-list
+  ptrs → `08a5fcxx`/`08a600xx` → `0891xxxx` scene ptrs → `08a6fxxx`) — the **EphraimEventData chapter-header
+  format** (matches `Ch16EphraimEventData` exactly), sitting at the END of Ch17's block where the header
+  lives — i.e. this is `Ch17EphraimEventData`, NOT a 12-byte-record Character event list. **Mis-ID.**
+- `data_08A5D360` (proposed `EventListScr_Ch18b_SelectUnit`): likewise a header pointer-table at the END of
+  Ch18's block (= `Ch18EphraimEventData`); a real SelectUnit list is 12-byte records or empty
+  (`Ch19b_SelectUnit` is 4 bytes). **Mis-ID.**
+- `data_08926134` (proposed `REDA_UnusedAlly_6_EIRIKA`): the START **is** valid REDA format
+  (`{u32 val, u32 0xffff}` records, matching known `REDA_Prologue*`), but the residue is a **mixed blob** —
+  `frontier_df4_menu.c` references embedded UnitDefinition records at `+0x58`/`+0x94` that point back to the
+  REDA. The specific `_6_EIRIKA` index/route is unverifiable against fe8u. **Split candidate, not a clean
+  single rename.**
+- `data_085C6A20` (proposed `palAnimLut_3`): content is a textbook monotone palette LUT, but the residue is
+  a **redundant mirror** spanning TWO **already-decompiled** static locals — `palAnimLut.3` (the
+  `static u8 palAnimLut[]` in `bksel_080370E8.c:27`) + `offsetLut.3` (`bksel_0803720C.c`). The single name
+  `palAnimLut_3` mis-describes the offsetLut tail; the correct disposition is mirror-cleanup, not a rename.
+
+**Impact.** Axis-4 NAMED SYMBOLS **99.65% (12,679/12,724, 45 placeholders) → 99.67% (12,682/12,724,
+42 placeholders)** (`python3 scripts/calcprogress.py`). `make compare` unaffected (relabel-only).
+
+**Program end-state (5 waves).** wave 1 +32 (5 skip), wave 2/Batch C +27 (0), wave 3 +26 (3), wave 4 +17
+(0), wave 5 +3 (5) = **105 `data_<hex>` placeholders typed, 98.84% → 99.67%**, with **13 integrity skips**
+(collision / already-split / off-by-table mis-ID) and **zero wrong names committed**. The remaining **42**
+are the **structural floor**: the 0x08FE0000 ARM multiboot image, the 0x08A5A6AD 3-byte padding, the
+zero-padding tails (`08C01928`/`08EE0AD0`/`08EF86C8`/`08FFF000`), already-split blobs (`080DC684`/`081F5BF0`),
+the build-date/collision case (`080DC104`), and the region-diff MapChanges/EventList tables whose real
+names collide with US-layout symbols (to be re-typed with JP-distinct names by the user, separately).
+This is the structural limit for byte-neutral residue relabels; further axis-4 gains require real object
+splitting / decompilation, not renames.
