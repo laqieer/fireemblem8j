@@ -1071,7 +1071,7 @@ extern const u8 Tsa_Stone_6[];
 extern const u8 Tsa_Stone_7[];
 extern const u8 Tsa_Stone_8[];
 extern const u8 Tsa_Stone_9[];
-extern const u8 data_080E0008[];
+extern const u8 BanimEkrTogiProcNames[];
 extern const u8 AnimScr_EkrBaseKaiten1[];
 extern const u8 AnimScr_EkrBaseKaiten2[];
 extern const u8 AnimScr_EkrBaseKaiten3[];
@@ -2137,11 +2137,11 @@ u32 frontier_df4_banim_a_res6[] __attribute__((section(".data.frontier_df4_banim
     (u32)&TsaConf_BanimTmA1, (u32)&TsaConf_BanimTmA2, 0x00000001, (u32)&BanimLeftDefaultPos + 0xC, 0x00000003, (u32)&EkrChienCHRMain,
     0x00000000, 0x00000000, 0x00000001, (u32)&BanimLeftDefaultPos + 0x18, 0x00000003, (u32)&ExecAllAIS,
     0x00000000, 0x00000000, 0x00000001, (u32)&BanimLeftDefaultPos + 0x28, 0x00000003, (u32)&EkrUnitMainMiniMain,
-    0x00000000, 0x00000000, 0x00000001, (u32)&data_080E0008, 0x00000003, (u32)&ekrTogiInit_Init,
+    0x00000000, 0x00000000, 0x00000001, (u32)&BanimEkrTogiProcNames, 0x00000003, (u32)&ekrTogiInit_Init,
     0x00000003, (u32)&ekrTogiInit_LoadGfx, 0x00000003, (u32)&ekrTogiInit_Loop, 0x00000003, (u32)&ekrTogiInit_End,
-    0x00000000, 0x00000000, 0x00000001, (u32)&data_080E0008 + 0x10, 0x00000003, (u32)&ekrTogiEnd_Init,
+    0x00000000, 0x00000000, 0x00000001, (u32)&BanimEkrTogiProcNames + 0x10, 0x00000003, (u32)&ekrTogiEnd_Init,
     0x00000003, (u32)&ekrTogiEnd_Loop, 0x00000003, (u32)&ekrTogiEnd_End, 0x00000000, 0x00000000,
-    0x00000001, (u32)&data_080E0008 + 0x20, 0x00000003, (u32)&ekrTogiColor_Loop, 0x00000000, 0x00000000,
+    0x00000001, (u32)&BanimEkrTogiProcNames + 0x20, 0x00000003, (u32)&ekrTogiColor_Loop, 0x00000000, 0x00000000,
     (u32)&Pal_ArenaBattleBg_A, (u32)&Pal_ArenaBattleBg_B, (u32)&Pal_ArenaBattleBg_C,
 };
 u8 frontier_df4_banim_a_003_5E4570[] __attribute__((section(".data.frontier_df4_banim_a.gap3"))) = INCBIN_U8("graphics/frontier_df4_banim_a/frontier_df4_banim_a_003_5E4570.4bpp.lz");
