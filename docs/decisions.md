@@ -10255,3 +10255,38 @@ placeholders typed, 98.84% → 99.98%**, with **15 integrity skips** (collision 
 mis-ID / address+content mismatch) and **zero wrong names committed**. The residual **2** placeholders are the
 D311 straddled-song `SongTrackData` absolute-address aliases, integrity-blocked pending a correct D311-anchor
 refactor — the honest ceiling for byte-neutral residue relabels.
+
+## D357 — FINAL-2: the last 2 `data_<hex>` placeholders (D311 straddled-song residue-base aliases) → byte-neutral alias renames; axis-4 NAMED SYMBOLS reaches 100.00% (2026-07-09)
+
+**Context / correction of D356.** D356 reported the 2 residual placeholders (`data_08576124`, `data_085772B4`)
+as an integrity-blocked ceiling, on the reasoning that (a) the floor-namer's `SongTrackData_*` names were
+address-mismatched + content-inaccurate, and (b) fixing them needed a non-byte-neutral split refactor. Half (a)
+stands — those specific names were correctly rejected. Half (b) was **wrong**: these are baseline `.set name, addr`
+**ALIASES** (zero bytes emitted), defined via generated `asm/jp_syms.s` from `layout/baseline_syms.d/d311-music.tsv:61-62`.
+Renaming an absolute alias moves no byte — the address is unchanged and no byte-providing object is removed — so a
+rename to any honest neutral name is byte-identical *and* self-containment-preserving (unlike the D356
+`data_085C6A20` residue *deletion*, which removed a byte provider and broke the no-baserom build). No split needed.
+
+**Applied (commit `9260f78d9`, byte-neutral):**
+- `data_08576124` → **`dat_StraddledSongData_08576124_ref`** — residue-base alias for the region where the
+  song961-tail / song962 (`song962_mon_bgl_attack3`) boundary straddles; the real bytes live in the
+  `data_08576124_576150` remnant (unchanged).
+- `data_085772B4` → **`dat_StraddledSramData_085772B4_ref`** — residue-base alias for the song981 / `AgbLibSram`
+  / impure-data straddle; the `data_085772B4_577378` remnant (SRAM lib bytes) is unchanged.
+- Mechanic: edited ONLY col 1 (name) of `d311-music.tsv:61-62` (addr/type/comment preserved) + the single real
+  reference `src/data/impure_data_ref/dat_impure_data_ref.s:21` (`.4byte <alias> + 0xFC`). The `.global`/`.set` in
+  generated `asm/jp_syms.s` regenerate via `make layout`; the `data_<hex>_<hex>` remnants, `carved_rom.d`
+  `.o`/section paths, and `data_incbin_deps.mk` `.bin` paths are NOT the alias symbol and were left untouched. The
+  `dat_*_ref` prefix (not `data_`) clears the placeholder regex.
+
+**Gate (all green).** `make layout` + `make compare` → `fireemblem8.gba: OK`; **no-baserom clean rebuild**
+(`mv baserom.gba /tmp && make clean && make compare`) → OK; `check_selfcontained.py` → **YES (0 incbins,
+100.00% self-containment)** — parsing the text line, not the exit code (the D356 lesson); `make shiftcheck` 0 HIGH;
+committed through the pre-commit hook; CI `29034593418` green (incl. the no-baserom byte-match job).
+
+**Impact.** Axis-4 NAMED SYMBOLS **99.98% (12,721/12,723, 2 placeholders) → 100.00% (12,723/12,723,
+0 placeholders)** (`python3 scripts/calcprogress.py`). **The residue-naming program is complete:** across
+6 waves + FINAL-2, **146 `data_<hex>` placeholders** were typed/relabeled (98.84% → 100.00%) with **15 integrity
+skips** and **zero wrong names committed**. Every ROM label now carries a meaningful name; the remaining structural
+artifacts (multiboot image, padding tails, straddle aliases) are documented via address-tagged names
+(`MultiBootImage_<addr>`, `gPadding_<addr>`, `dat_*_<addr>_ref`) per the fe8u "partial" convention.
