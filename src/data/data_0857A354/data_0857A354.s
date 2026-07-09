@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.0857A354, "aw", %progbits
-	.global data_0857A354
-data_0857A354:
+	.global SjisGlyphs_0857A354
+SjisGlyphs_0857A354:
 	.4byte frontier_df3_fontgrp_se_000_57E884 + 0x240
 	.4byte 0x00000882
 	.4byte 0x00000000

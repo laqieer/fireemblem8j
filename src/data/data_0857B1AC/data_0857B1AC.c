@@ -4,7 +4,7 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
-u32 data_0857B1AC[] __attribute__((section(".data.residue.0857B1AC"))) = {
+u32 SjisGlyphs_0857B1AC[] __attribute__((section(".data.residue.0857B1AC"))) = {
     0x0857E9A4, 0x00000682, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x000003FC, 0x00000EAB,

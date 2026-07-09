@@ -5,7 +5,7 @@
 	.section .rodata.dat_gFontgrp_34_ref, "a", %progbits
 	.global gFontgrp_34
 gFontgrp_34:
-	.4byte data_0857DEF4 + 0x48
+	.4byte SjisGlyphs_0857DEF4 + 0x48
 	.4byte 0x00000683
 	.4byte 0x00000000
 	.4byte 0x00000000

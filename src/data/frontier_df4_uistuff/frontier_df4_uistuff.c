@@ -443,7 +443,7 @@ extern const u8 _SetGameEndFlag[];
 extern const u8 _WhileFace6CExists[];
 extern const u8 bmxfade_init[];
 extern const u8 bmxfade_loop[];
-extern const u8 data_0857DCB4[];
+extern const u8 SjisGlyphs_0857DCB4[];
 extern const u8 data_0859A0AC[];
 extern const u8 data_085C4518[];
 extern const u8 gConvoyMenuItems[];
@@ -1473,7 +1473,7 @@ u32 frontier_df4_uistuff_003_57CC64[] __attribute__((section(".data.frontier_df4
     0x00000EAC,
     0x000003FC,
     0x00000000,
-    (u32)&data_0857DCB4 + 0x48,
+    (u32)&SjisGlyphs_0857DCB4 + 0x48,
     0x00000781,
     0x00000000,
     0x00000000,
@@ -1491,7 +1491,7 @@ u32 frontier_df4_uistuff_003_57CC64[] __attribute__((section(".data.frontier_df4
     0x00003B00,
     0x00000C00,
     0x00000000,
-    (u32)&data_0857DCB4 + 0x90,
+    (u32)&SjisGlyphs_0857DCB4 + 0x90,
     0x00000681,
     0x00000000,
     0x00000000,

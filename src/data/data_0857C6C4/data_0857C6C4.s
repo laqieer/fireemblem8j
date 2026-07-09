@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.0857C6C4, "aw", %progbits
-	.global data_0857C6C4
-data_0857C6C4:
+	.global SjisGlyphs_0857C6C4
+SjisGlyphs_0857C6C4:
 	.4byte gFontgrp_334
 	.4byte 0x00000683
 	.4byte 0x00000000
@@ -94,4 +94,4 @@ data_0857C6C4:
 	.4byte 0x00000ECC
 	.4byte 0x00000300
 	.4byte 0x00000000
-/* de-pointered slice data_0857C6C4: ptr=5 data=85 skip=0 */
+/* de-pointered slice SjisGlyphs_0857C6C4: ptr=5 data=85 skip=0 */

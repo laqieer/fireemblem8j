@@ -5,7 +5,7 @@
 	.section .rodata.dat_gFontgrp_28_ref, "a", %progbits
 	.global gFontgrp_28
 gFontgrp_28:
-	.4byte data_0857DCB4 + 0xD8
+	.4byte SjisGlyphs_0857DCB4 + 0xD8
 	.4byte 0x00000683
 	.4byte 0x00000000
 	.4byte 0x00000000
