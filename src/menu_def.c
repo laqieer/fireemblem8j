@@ -89,7 +89,7 @@ extern const char gMenuStr_29C[];
  * literals (UTF-8 in source; the cpp->iconv UTF-8->CP932->agbcc pipeline
  * encodes them). The 12-byte header and the 0x78-byte MAPTASK tail are
  * non-string binary kept as raw bytes. Pinned at 0x080DC974 in the layout
- * manifest so the bytes match; other tables (data_085C4518/data_085C4830)
+ * manifest so the bytes match; other tables (gDebugMenuItems/data_085C4830)
  * still reference frontier_df4_misc_lo_001_0DC974 + offset. */
 /* String pool (frontier_df4_misc_lo_001_0DC974, ROM 0x080DC974) -- converted from
  * inline asm to typed C in place (#152). Japanese labels are editable Shift-JIS

@@ -7,10 +7,10 @@
  * u32[] blob. sjisNext is a relocatable symbol reference (SHIFTABLE);
  * byte-identical to baserom (gated by `make compare`). */
 
-extern struct Glyph data_0859848C;
+extern struct Glyph dat_gFontgrp_0859848C_ref;
 
 SECTION(".rodata.dat_gFontgrp_218_ref") struct Glyph gFontgrp_218 = {
-    .sjisNext = (struct Glyph *)&data_0859848C,
+    .sjisNext = (struct Glyph *)&dat_gFontgrp_0859848C_ref,
     .sjisByte1 = 0x83,
     .width = 0x09,
     .bitmap =

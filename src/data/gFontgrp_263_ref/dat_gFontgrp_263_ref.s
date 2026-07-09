@@ -5,7 +5,7 @@
 	.section .rodata.dat_gFontgrp_263_ref, "a", %progbits
 	.global gFontgrp_263
 gFontgrp_263:
-	.4byte data_0859A0AC + 0x168
+	.4byte dat_gFontgrp_0859A0AC_ref + 0x168
 	.4byte 0x00000B82
 	.4byte 0x00000000
 	.4byte 0x00000000

@@ -48,7 +48,7 @@ extern struct Glyph frontier_df3_fontgrp_se_006_5814AC[];
 extern struct Glyph frontier_df3_fontgrp_se_007_581A04[];
 extern struct Glyph frontier_df3_fontgrp_se_008_582A54[];
 extern struct Glyph frontier_df3_fontgrp_se_009_582F1C[];
-extern u8 data_0859137C[];
+extern u8 dat_gFontgrp_0859137C_ref[];
 extern u8 frontier_df4_uistuff_007_59140C[];
 extern u8 gFontgrp_362[];
 extern u8 gFontgrp_363[];
@@ -7047,7 +7047,7 @@ struct Glyph frontier_df3_fontgrp_se_009_582F1C[] SECTION(".data.frontier_df3_fo
         0x003AABAB, 0x003BBBAB, 0x003BBBAB, 0x003AABEC,
         0x003BBBAB, 0x003BBBEC, 0x000CCC30, 0x00000000,
     } },
-    { .sjisNext = (struct Glyph *)data_0859137C, .sjisByte1 = 0x8D, .width = 0x08,
+    { .sjisNext = (struct Glyph *)dat_gFontgrp_0859137C_ref, .sjisByte1 = 0x8D, .width = 0x08,
       .bitmap = {
         0x00000000, 0x00000000, 0x0003C3CF, 0x0003BFBB,
         0x0003BBEC, 0x0003BBAB, 0x0003BBBB, 0x0003BBAB,

@@ -5,7 +5,7 @@
 	.section .rodata.dat_gFontgrp_334_ref, "a", %progbits
 	.global gFontgrp_334
 gFontgrp_334:
-	.4byte data_0857E32C + 0x48
+	.4byte dat_gFontgrp_0857E32C_ref + 0x48
 	.4byte 0x000007FA
 	.4byte 0x00000000
 	.4byte 0x00000000

@@ -444,8 +444,8 @@ extern const u8 _WhileFace6CExists[];
 extern const u8 bmxfade_init[];
 extern const u8 bmxfade_loop[];
 extern const u8 SjisGlyphs_0857DCB4[];
-extern const u8 data_0859A0AC[];
-extern const u8 data_085C4518[];
+extern const u8 dat_gFontgrp_0859A0AC_ref[];
+extern const u8 gDebugMenuItems[];
 extern const u8 gConvoyMenuItems[];
 extern const u8 gSendToConvoyMenuItems[];
 extern const u8 data_085D1E38[];
@@ -3455,7 +3455,7 @@ u32 frontier_df4_uistuff_012_596F74[] __attribute__((section(".data.frontier_df4
     0x0000000B,
     0x0000AAAB,
     0x0000BFFF,
-    (u32)&data_0859A0AC + 0x1b0,
+    (u32)&dat_gFontgrp_0859A0AC_ref + 0x1b0,
     0x00000982,
     0x00000000,
     0x00000000,
@@ -4175,7 +4175,7 @@ u32 frontier_df4_uistuff_012_596F74[] __attribute__((section(".data.frontier_df4
     0x0000002C,
     0x0000002C,
     0x00000000,
-    (u32)&data_0859A0AC + 0xd8,
+    (u32)&dat_gFontgrp_0859A0AC_ref + 0xd8,
     0x00000882,
     0x00000000,
     0x00000000,
@@ -5277,7 +5277,7 @@ u32 frontier_df4_uistuff_014_598E64[] __attribute__((section(".data.frontier_df4
     0x00002C2C,
     0x000000BB,
     0x000BFFCB,
-    (u32)&data_0859A0AC + 0x90,
+    (u32)&dat_gFontgrp_0859A0AC_ref + 0x90,
     0x00000B91,
     0x00000000,
     0x00002C00,
@@ -5729,7 +5729,7 @@ u32 frontier_df4_uistuff_015_599BE4[] __attribute__((section(".data.frontier_df4
     0x0000BBB0,
     0x0002CB2C,
     0x000B0B0B,
-    (u32)&data_0859A0AC + 0x120,
+    (u32)&dat_gFontgrp_0859A0AC_ref + 0x120,
     0x00000B8C,
     0x00000000,
     0x000B00B0,
@@ -11401,7 +11401,7 @@ u32 frontier_df4_uistuff_030_5C534C[] __attribute__((section(".data.frontier_df4
     0x00000000,
     0x00080101,
     0x00000000,
-    (u32)&data_085C4518,
+    (u32)&gDebugMenuItems,
     0x00000000,
     0x00000000,
     0x00000000,
@@ -11410,7 +11410,7 @@ u32 frontier_df4_uistuff_030_5C534C[] __attribute__((section(".data.frontier_df4
     0x00000000,
     0x000E0101,
     0x00000000,
-    (u32)&data_085C4518 + 0x48,
+    (u32)&gDebugMenuItems + 0x48,
     (u32)&DebugMenuInit,
     0x00000000,
     0x00000000,

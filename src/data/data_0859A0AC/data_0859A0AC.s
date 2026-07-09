@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 .section .data.residue.0859A0AC, "aw", %progbits
-.global data_0859A0AC
-data_0859A0AC:
+.global dat_gFontgrp_0859A0AC_ref
+dat_gFontgrp_0859A0AC_ref:
 .4byte frontier_df4_uistuff_018_59B0FC + 0x7e0
 .4byte 0x00000a95
 .4byte 0x00000000

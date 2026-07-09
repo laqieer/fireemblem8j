@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.085C4518, "aw", %progbits
-	.global data_085C4518
-data_085C4518:
+	.global gDebugMenuItems
+gDebugMenuItems:
 	.4byte gMenuStr_0C0
 	.4byte 0x00000004
 	.4byte 0x00001000
@@ -94,4 +94,4 @@ data_085C4518:
 	.4byte 0x00000000
 	.4byte 0x00000000
 	.4byte 0x00000000
-/* de-pointered slice data_085C4518: ptr=33 data=57 skip=0 */
+/* de-pointered slice gDebugMenuItems: ptr=33 data=57 skip=0 */
