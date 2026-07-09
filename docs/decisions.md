@@ -10290,3 +10290,48 @@ committed through the pre-commit hook; CI `29034593418` green (incl. the no-base
 skips** and **zero wrong names committed**. Every ROM label now carries a meaningful name; the remaining structural
 artifacts (multiboot image, padding tails, straddle aliases) are documented via address-tagged names
 (`MultiBootImage_<addr>`, `gPadding_<addr>`, `dat_*_<addr>_ref`) per the fe8u "partial" convention.
+
+## D358 — data-extraction wave: 30 opaque residual regions extracted/relocated to fe8u source form (residual regions 31→1); axis-3 99.47%→99.69%, axis-6 74,311→43,824 B (2026-07-09)
+
+**Context.** Four pushed data-extraction feature branches (each verified byte-neutral in its own worktree)
+merged **serially through the single integrator** onto `main`, one at a time, each gated by the full
+`make compare` + `make shiftcheck` oracle and CI-green before the next. These extract opaque
+`data/residual/*.bin` raw-INCBIN residues into fe8u-expected editable/relocatable source forms — driving
+axis-3 (EXTRACTED-DATA source-form) and axis-6 (ASSET-EDITABILITY) toward 100%. No ROM bytes change
+(`fireemblem8.gba: OK` held on every merge).
+
+**Merges (in order; `--no-ff`, each `make compare` OK + `make shiftcheck` 0 HIGH + CI green):**
+- **`bfec4f203` — feat/extract-unitdefs** (worktree `f33ebb0d1`): 5 `UnitDefinition {0}`-terminator arrays →
+  typed C; removes `data/residual/data_{0890A320,0890BC70,0890BD24,08925BF8,08925CD4}.bin`. CI `29042824955`.
+- **`49c44161d` — feat/extract-padding** (`9b1f8bf77`): 6 padding/null-tail regions → typed C
+  (`const u32[N]={0}` / `u8[]` range-init); removes `data_{085C4440,08A5DA90,08C01928,08EE0AD0,08EF86C8,08FFF000}.bin`.
+  CI `29043385490`.
+- **`aeec8a86d` — feat/extract-maps-tsa18** (`98062f14c`): 18 banim-efx-bg tilemaps `git mv`
+  `data/residual/*.map.bin` → `graphics/banim_efx_bg/*.map.bin` + INCBIN/`.mk` repoint (0 left in
+  `data/residual`, 18 in `graphics/banim_efx_bg`). CI `29043916832`.
+- **`54272be9c` — feat/extract-small-misc** (`3cc61351d`): 3 `pilot_*` 0xFF ROM-padding → `.fill`, 1 gap →
+  `u8[3]`, 1 redundant `.bin` removed; removes `data_08A5D0E4.bin` + `gap_001F70E5.bin` + 3 `pilot_*.bin`.
+  CI `29044672203`.
+
+**`layout/data_incbin_deps.mk` conflict resolution (as designed).** All 4 branches surgically edit the `.mk`
+(each removing/repointing only its own object's dep lines). Merges 1–3 auto-merged (`ort`); **merge 4 conflicted**
+on the one region where unitdefs+padding had already deleted the context lines around `data_08A5D0E4` — resolved
+by **union-of-deletions** (every listed `.bin` dep line removed; the whole conflict block collapses since all 7
+lines are to-be-deleted). No `gen_data_incbin_deps.py` regen was run mid-merge (the committed `.mk` carries
+pre-existing generator drift — a regen would sweep in ~9 unrelated objects). Post-wave sweep: **zero** `.mk`
+references to any deleted/moved `.bin`, every remaining dep path resolves on disk.
+
+**Gate discipline.** Per merge: `make compare` → `fireemblem8.gba: OK` (real exit 0, `pipefail`) +
+`make shiftcheck` exit 0 (SUMMARY inconsistent=0/false-neg=0/false-pos=0), then push + CI green before the
+next. Merge 3 (file moves) and merge 4 (hand-resolved `.mk`) additionally validated by CI's cold clean build.
+
+**Impact (`python3 scripts/classify_residual_assets.py` + `scripts/calcprogress.py`):**
+- Residual-asset worklist (D306): **31 regions (18 MAP + 13 UNKNOWN), 72.4 KB → 1 region, 42.8 KB.** The lone
+  remainder is `data_08BB8ED0` (43,824 B) — the 43 KB inline-`u8[]` big blob handled by the still-building 5th
+  branch `feat/extract-big-blob` (not part of this wave).
+- **Axis 3 EXTRACTED DATA: 99.47% → 99.69%** (13,893,512 / 13,937,336; opaque residual 74,311 → **43,824 B**).
+- **Axis 6 ASSET EDITABILITY: 74,311 → 43,824 B** opaque raw-incbin.
+- Axes 1/2/4/5 unchanged (pure data, no code/pointer movement): self-containment 100%, matching-C 99.83%
+  (15 asm), named 100%, shiftability gate at floor.
+
+Tracked on project board **#14**. Single-owner serial integration held throughout; `main` green at every push.
