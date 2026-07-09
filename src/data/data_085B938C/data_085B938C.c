@@ -46,7 +46,7 @@ struct ProcCmd ProcScr_ScreenFlashing[] __attribute__((section(".rodata.dat_Proc
 };
 
 /* residue [085B938C,085B93A4) (24 B): byte-identical. */
-struct ProcCmd data_085B938C[] SECTION(".data.residue.085B938C") = {
+struct ProcCmd ProcScr_TalkPutSpriteText[] SECTION(".data.residue.085B938C") = {
     PROC_SET_END_CB(TalkPutSpriteText_OnEnd + 0x1),
     PROC_REPEAT(TalkPutSpriteText_OnIdle + 0x1),
     PROC_END,

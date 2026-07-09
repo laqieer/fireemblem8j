@@ -2,8 +2,8 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 	.section .data.residue.085E62D0, "aw", %progbits
-	.global data_085E62D0
-data_085E62D0:
+	.global gEfxlvupfx_0_script
+gEfxlvupfx_0_script:
 	.4byte gEfxlvupfx_0 + 0x1
 	.4byte gEfxlvupfx_0 + 0x25
 	.4byte gEfxlvupfx_0 + 0x49
@@ -62,4 +62,4 @@ data_085E62D0:
 	.4byte 0x685E6270
 	.4byte 0x285E62A0
 	.4byte 0x80000000
-/* de-pointered slice data_085E62D0: ptr=48 data=10 skip=0 */
+/* de-pointered slice gEfxlvupfx_0_script: ptr=48 data=10 skip=0 */

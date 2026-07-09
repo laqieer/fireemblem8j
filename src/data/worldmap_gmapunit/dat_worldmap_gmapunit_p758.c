@@ -4,7 +4,7 @@
 /* Migrated from asm/dat_worldmap_gmapunit_p758.s (region-same graphics, single section).
  * Img/Pal kept byte-identical via INCBIN_U*; gEfxlvupfx_0 carved to typed
  * struct AnimSpriteData[] (region-same with fe8u src/data/banim-efxlvupfx.c,
- * 291 entries = 3492 bytes). The data_085E62D0 pointer table indexes it by byte offset.
+ * 291 entries = 3492 bytes). The gEfxlvupfx_0_script pointer table indexes it by byte offset.
  */
 
 SECTION(".rodata.dat_worldmap_gmapunit_p758") u16 Img_LvupApfx[] = INCBIN_U16("graphics/gmapunit/Img_LvupApfx.4bpp.lz");

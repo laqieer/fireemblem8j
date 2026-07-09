@@ -10,7 +10,7 @@
  * (the first two records of PopupScr_GoldWasStole). To stay byte-identical to that
  * blob without disturbing the surrounding layout, those two records are emitted
  * here after the POPUP_END; the rest of PopupScr_GoldWasStole continues in the
- * adjacent data_085BA10C residue. Total: 9 records = 72 bytes. */
+ * adjacent PopupScr_GoldWasStole_body residue. Total: 9 records = 72 bytes. */
 
 SECTION(".rodata.dat_PopupScr_GotGold_ref") struct PopupInstruction PopupScr_GotGold[] = {
     POPUP_SOUND(0x5A),
@@ -21,7 +21,7 @@ SECTION(".rodata.dat_PopupScr_GotGold_ref") struct PopupInstruction PopupScr_Got
     POPUP_MSG(0x804),
     POPUP_END,
 
-    /* --- PopupScr_GoldWasStole begins here (continues in data_085BA10C) --- */
+    /* --- PopupScr_GoldWasStole begins here (continues in PopupScr_GoldWasStole_body) --- */
     POPUP_SOUND(0x5C),
     POPUP_COLOR(TEXT_COLOR_SYSTEM_BLUE),
 };
