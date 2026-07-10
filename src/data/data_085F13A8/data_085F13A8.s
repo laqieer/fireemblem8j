@@ -2,8 +2,11 @@
  * Directive stream preserved verbatim; only per-part section headers
  * inserted at byte boundaries (NO .align). make compare is the oracle. */
 
+	.include "animscr.inc"
+
 	.section .data.residue.085F13A8, "aw", %progbits
 	.global AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_15
+	.type AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_15, %object
 AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_15:
 	.4byte 0x40004000
 	.4byte 0xFF880004
@@ -34,6 +37,7 @@ AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_15:
 	.4byte 0x00000000
 	.section .data.residue.085F1414, "aw", %progbits
 	.global AnimScr_EfxLvupOBJ2
+	.type AnimScr_EfxLvupOBJ2, %object
 AnimScr_EfxLvupOBJ2:
 	.4byte AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_0 + 0x1
 	.4byte AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_1 + 0x1
@@ -50,6 +54,6 @@ AnimScr_EfxLvupOBJ2:
 	.4byte AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_12 + 0x1
 	.4byte AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_13 + 0x1
 	.4byte AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_14 + 0x1
-	.4byte 0x285F13AA
+	ANIMSCR_FORCE_SPRITE AnimSprite_EfxLvupOBJ2_EfxLvupOBJ_15, 10
 	.4byte 0x80000000
 /* de-pointered slice data_085F13A8: ptr=15 data=29 skip=0 */

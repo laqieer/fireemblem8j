@@ -3,8 +3,11 @@
  * whose range owns the target address); non-pointer words stay literals. Byte-
  * identical to the original blob, and relocation-complete so the object stays
  * shiftcheck-clean (0 HIGH) if the pointee resources move. */
+	.include "animscr.inc"
+
 	.section .data.residue.08606B24, "aw", %progbits
 	.global AnimSprite_EfxTeyariObjType0Left_8
+	.type AnimSprite_EfxTeyariObjType0Left_8, %object
 AnimSprite_EfxTeyariObjType0Left_8:
 	.4byte 0xFFFF0001
 	.4byte 0x001FFF02
@@ -45,6 +48,9 @@ AnimSprite_EfxTeyariObjType0Left_8:
 	.4byte 0x00000001
 	.4byte 0x00000000
 	.4byte 0x00000000
+	.global AnimScr_EfxTeyariObjType0Left
+	.type AnimScr_EfxTeyariObjType0Left, %object
+AnimScr_EfxTeyariObjType0Left:
 	.4byte AnimSprite_EfxTeyariObjType_0 + 0x1
 	.4byte AnimSprite_EfxTeyariObjType0Left_0 + 0x1
 	.4byte AnimSprite_EfxTeyariObjType0Left_1 + 0x1
@@ -74,6 +80,6 @@ AnimSprite_EfxTeyariObjType0Left_8:
 	.4byte AnimSprite_EfxTeyariObjType0Left_8 + 0x6D
 	.4byte AnimSprite_EfxTeyariObjType0Left_8 + 0x86
 	.4byte AnimSprite_EfxTeyariObjType0Left_8 + 0x6D
-	.4byte 0x78606BAB
+	ANIMSCR_FORCE_SPRITE AnimSprite_EfxTeyariObjType0Left_8 + 0x84, 31
 	.4byte 0x84000013
 	.4byte 0x80000000
