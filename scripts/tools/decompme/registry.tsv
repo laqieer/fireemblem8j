@@ -5,27 +5,16 @@ sub_800E1FC	nlJVc	Event18_ColorFade
 sub_807C8DC	taZrH	AdjustNewUnitPosition
 sub_80A2E64	qksQG	sub_80A2E64
 sub_80A3528	MaiDT	sub_80A3528
-sub_80CAEF4	bPL8f	sub_80CAEF4
 sub_8001570	ABitG	AddAttr2dBitMap
 sub_80A3300	ENay1	sub_80A3300
 sub_80A6E4C	g7FXU	sub_80A6E4C
-sub_80A730C	0P3Mz	sub_80A730C
-sub_80BB240	KqnUn	sub_80BB240
-sub_80BCD74	aL39G	sub_80BCD74
 # DONE (carved in-repo as src/LoadClassReelFontPalette.c, D307; scratch marked SOLVED to avoid wasted community effort):
 # sub_80D17C8	VAkhM	sub_80D17C8
-sub_800DE3C	Wqzj7	Event0F_CounterOps
-sub_8056890	Iz2Wd	EfxAdvanceFrameLut
-sub_8084CE4	TDzRM	sub_8084CE4
-sub_800663C	xKNQn	PutFaceOnBackGround
-sub_80D19DC	VMhPB	RegisterTsaWithOffset
 sub_800FAD0	eZzgG	sub_800FAD0
 sub_800A594	Sp10a	sub_800A594
-sub_800E5CC	OqAJ4	Event1B_TEXTSHOW
 sub_80A6D34	9myLi	sub_80A6D34
 sub_80A390C	xYHce	sub_80A390C
 sub_807D3BC	J1ka1	SelectSummonPos
-sub_800FF08	jeBp5	sub_800FF08
 sub_80A6F1C	h2W8F	sub_80A6F1C
 sub_80C05C8	R7AaX	GmapScreen2_Loop
 # DONE (carved in-repo + decomp.me scratch marked SOLVED @ score 0 — Bravo decomp.me-sync 2026-07-03):
