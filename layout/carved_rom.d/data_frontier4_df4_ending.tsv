@@ -1,5 +1,5 @@
 # carve_frontier.py data_gaps long-tail data (parallel-safe fragment)
-AC059C	AC09E8	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap0)	df4_ending region-diff data (1100 B, long-tail gap)
+AC059C	AC09E8	src/data/frontier_df4_ending/frontier_df4_ending_asm.o(.data.frontier_df4_ending.gap0)	df4_ending region-diff data (1100 B, long-tail gap; self-ptr struct in asm for shift-safe relocs, #152)
 AC0B90	AC1108	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap1)	df4_ending region-diff data (1400 B, long-tail gap)
 AC16C8	AC1A0C	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap2)	df4_ending region-diff data (836 B, long-tail gap)
 AC718C	AC7408	src/data/frontier_df4_ending/frontier_df4_ending.o(.data.frontier_df4_ending.gap3)	df4_ending region-diff data (636 B, long-tail gap)
