@@ -9,4 +9,7 @@
 	.section .data.residue.087A2554, "a", %progbits
 	.global AnimScr_efxSuperdruidOBJ
 AnimScr_efxSuperdruidOBJ:
-	.incbin "data/residual/AnimScr_efxSuperdruidOBJ.bin"
+@ Live FORCE_SPRITE word at +0x8 is relocatable; surrounding bytes stay verbatim.
+	.incbin "data/residual/AnimScr_efxSuperdruidOBJ.bin", 0, 0x8
+	.4byte AnimSprite_efxSuperdruidOBJ_3 + 0x10000001
+	.incbin "data/residual/AnimScr_efxSuperdruidOBJ.bin", 0xC, 0x18

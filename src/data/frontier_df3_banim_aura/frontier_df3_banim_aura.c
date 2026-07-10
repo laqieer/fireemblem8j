@@ -606,7 +606,7 @@ u32 frontier_df3_banim_aura_004_7557C4[] __attribute__((section(".data.frontier_
     (u32)&Pal_ShineSprites + 0x21, (u32)&Pal_ShineSprites + 0x45, (u32)&Pal_ShineSprites + 0x69, (u32)&Pal_ShineSprites + 0x8D, (u32)&AnimSprite_EfxShine_5 + 0x1, (u32)&AnimSprite_EfxShine_6 + 0x1,
     (u32)&AnimSprite_EfxShine_7 + 0x1, (u32)&AnimSprite_EfxShine_8 + 0x1, (u32)&AnimSprite_EfxShine_9 + 0x1, (u32)&AnimSprite_EfxShine_10 + 0x1, (u32)&AnimSprite_EfxShine_11 + 0x1, (u32)&AnimSprite_EfxShine_12 + 0x1,
     (u32)&AnimSprite_EfxShine_13 + 0x1, (u32)&AnimSprite_EfxShine_14 + 0x1, (u32)&AnimSprite_EfxShine_15 + 0x1, (u32)&AnimSprite_EfxShine_16 + 0x1, (u32)&AnimSprite_EfxShine_17 + 0x1, (u32)&AnimSprite_EfxShine_18 + 0x1,
-    (u32)&AnimSprite_EfxShine_19 + 0x1, 0x787557C7, 0x84000013, 0x81000000, 0x00180010, 0xF0000035,
+    (u32)&AnimSprite_EfxShine_19 + 0x1, (u32)&frontier_df3_banim_aura_004_7557C4 + 0x70000003, 0x84000013, 0x81000000, 0x00180010, 0xF0000035,
     0x50014001, 0x80450300, 0x0055500F, 0x02004402, 0x23445533, 0x33442200,
     0x22232112, 0x10225421, 0x03000518, 0x43030054, 0x50000055, 0x45554432,
     0x44003321, 0x33221134, 0x20122223, 0x4D701222, 0x45500005, 0x45050054,

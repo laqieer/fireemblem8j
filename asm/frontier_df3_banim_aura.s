@@ -33,7 +33,10 @@ frontier_df3_banim_aura_003_754840:
 @ df3_banim_aura region-different data, JP 0x087557c4..0x08756324 (2912 B); table-pinned (not code-named), byte-perfect incbin.
 	.global frontier_df3_banim_aura_004_7557C4
 frontier_df3_banim_aura_004_7557C4:
-	.incbin "graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_004_7557C4.bin"
+@ Live Shine FORCE_SPRITE self-reference at +0x64 is relocatable; other bytes stay verbatim.
+	.incbin "graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_004_7557C4.bin", 0, 0x64
+	.4byte frontier_df3_banim_aura_004_7557C4 + 0x70000003
+	.incbin "graphics/frontier_df3_banim_aura/frontier_df3_banim_aura_004_7557C4.bin", 0x68, 0xAF8
 
 	.section .data.frontier_df3_banim_aura.gap5, "a", %progbits
 @ df3_banim_aura region-different data, JP 0x08756454..0x08756d94 (2368 B); table-pinned (not code-named), byte-perfect incbin.
