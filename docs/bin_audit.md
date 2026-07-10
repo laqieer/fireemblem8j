@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 0 | 0.0% |
-| **FLOOR** | 1407 | 97.7% |
+| **FLOOR** | 1415 | 97.7% |
 | **UNCERTAIN** | 33 | 2.3% |
-| **TOTAL** | 1440 | 100.0% |
+| **TOTAL** | 1448 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -49,7 +49,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 0 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | lz-compressed-tsa | MISS | 0 | fe8u decompressed *.tsa.bin/*.map.bin source; JP ships the LZ77-compressed derivative (extractable) |
-| TSA/.map.bin | FLOOR | 1258 | fe8u keeps TSA/tilemaps binary too |
+| TSA/.map.bin | FLOOR | 1266 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
@@ -100,9 +100,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## FLOOR (1407) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (1415) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>1407 entries</summary>
+<details><summary>1415 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -917,6 +917,11 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_009l_65920C.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df3_banim_mid/frontier_df3_banim_mid_009m_659308.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df3_btl_bg/data_087B9CDC.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
+| `graphics/frontier_df3_ending/Tsa_DfEnding001_0.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/frontier_df3_ending/Tsa_DfEnding001_1.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/frontier_df3_ending/Tsa_DfEnding001_2.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/frontier_df3_ending/Tsa_DfEnding001_3.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
+| `graphics/frontier_df3_ending/Tsa_DfEnding002.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/frontier_df4_banim_b/data_08705B7C.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df4_banim_b/data_08705D48.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df4_banim_b/data_08705F2C.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
@@ -1082,6 +1087,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_ending/Tsa_WmHightLightMap8.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin` | TSA/.map.bin | decompressed source of a committed LZ77 stream (`.lz` sibling), binary tile-attr map — fe8u keeps compressed gfx/TSA binary |
 | `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin` | TSA/.map.bin | decompressed source of a committed LZ77 stream (`.lz` sibling), binary tile-attr map — fe8u keeps compressed gfx/TSA binary |
+| `graphics/frontier_ending_cg/frontier_ending_cg_map0.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_ending_cg/frontier_ending_cg_map1.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
+| `graphics/frontier_ending_cg/frontier_ending_cg_map2.tsa.bin` | TSA/.map.bin | fe8u keeps .tsa.bin binary (TSA/tilemap) |
 | `graphics/gfx_data_bg/bg_Cell_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/gfx_data_bg/bg_Fort_Sunset_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/gfx_data_bg/bg_Grass_Plains_2_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
@@ -1522,8 +1530,7 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
-| `graphics/frontier_df3_ending/frontier_df3_ending_001_AC3AA8.bin` | ApConf/opaque | RE-complete: NOT compressed (header 0x131d = TSA width/height) — raw TSA tilemap; a clean 4-way TSA split is available, DEFERRED (JP-only, no fe8u names) (D362) |
-| `graphics/frontier_df3_ending/frontier_df3_ending_002_AC50A4.bin` | ApConf/opaque | RE-complete: NOT compressed (header 0x131d = TSA width/height) — raw TSA tilemap + a non-palette data block (its 'palette' is 39% bit15-set, not a clean palette); DEFERRED (JP-only) (D362) |
+| `graphics/frontier_df3_ending/dat_DfEnding002_PalGfx.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_000_AC059C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_003_AC718C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
@@ -1551,7 +1558,8 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_035_5CDF84.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_ending_cg/frontier_ending_cg_tail_B2F9F0.bin` | ApConf/opaque | RE-complete, PARTIALLY EXTRACTED: uncompressed CG — palette + 1024-tile PNG split out editable (~40%); this 47,588 B interspersed tiles+tilemap tail has no clean tile-aligned cut → genuine verbatim floor (D362) |
+| `graphics/frontier_ending_cg/frontier_ending_cg_pad_B352D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_ending_cg/frontier_ending_cg_tail_B3AFF4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/map/data_0819EADC.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/map/data_081A00C8.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/map/data_081A6774.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |

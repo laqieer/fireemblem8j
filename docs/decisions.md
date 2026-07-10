@@ -10667,3 +10667,35 @@ integration; `main` green (103e10856). Next frontier: type the banim frame-point
 `AnimSprite_*` (and their cross-ref-only siblings) relocate — the last real shiftability residual.
 
 Tracked on project board **#14**.
+
+## D364 — asset-editability: the `frontier_ending_cg_000` "47 KB verbatim tail" ceiling REFUTED — re-derived into 3 named tilemaps + 2 tile-sheet PNGs (~88% structured, ~44% editable) + ~1 KB honest verbatim (2026-07-10)
+
+Third floor/ceiling verdict overturned this session by empirical re-derivation (the user's
+standing lesson). D362 recorded `frontier_ending_cg_000`'s tail `[ROM 0x08B2F9F0..0x08B3B3D4]`
+(47588 B) as an "interspersed, non-tile-aligned, kept-verbatim" ceiling. That was a **measurement
+artifact**: the prior worker measured pixel-run lengths *including the trailing tilemap*, so the
+runs came out non-`%32` and looked unsplittable. Locating each TSA map FIRST makes the pixel runs
+fall on whole-tile boundaries. Re-derived, byte-exact (sizes sum to 47588):
+
+| blob off | size | decode | form |
+|---|---|---|---|
+| 0x08080 | 2052 | TSA 32×32 (hdr 0x1F1F, idx 0..1023) | `map0.tsa.bin` (named floor) |
+| 0x08884 | 20704 | 647 4bpp tiles | `sheet1.png` (editable) |
+| 0x0D964 | 24 | 0x01F0/0xF001 partial-tile filler | `pad_B352D4.bin` (verbatim) |
+| 0x0D97C | 1204 | TSA 30×20 (hdr 0x131D) | `map1.tsa.bin` (named floor) |
+| 0x0DE30 | 21408 | **exactly 669 tiles** = 21408/32 | `sheet2.png` (editable — the clean cut the "floor" missed) |
+| 0x131D0 | 1204 | TSA 30×20 (hdr 0x131D) | `map2.tsa.bin` (named floor) |
+| 0x13684 | 992 | pixel tiles interleaved w/ sparse `00 06 xx` records, no tilemap, no palette | `tail_B3AFF4.bin` (honest verbatim — 31×32 whole tiles but NOT a clean sheet, so not PNG-faked) |
+
+Result: ~88% of the "unsplittable" tail (42112/47588 B) is now structurally labeled (3 tilemaps +
+2 sheets); ~44% (both sheets, 1316 tiles) is editable PNG; only **~1 KB** (24 B filler + 992 B
+genuinely-mixed) is truly verbatim — and that residue is kept binary on *positive* evidence
+(no valid tilemap / no palette block), not assumption. TSA maps stay `.tsa.bin` (fe8u keeps its
+`cg_N.tsa.bin` binary too — a real floor). Gate: `make clean && make compare` → `OK`
+(build-generated `.4bpp` == ROM slices, PNG round-trips byte-exact), `make shiftcheck` 0 HIGH,
+pre-commit passed, CI green. `docs/bin_audit.md` regenerated: MISS **0**, FLOOR 1407→**1415**
+(new named `.tsa.bin`/pad/tail leaves are fe8u-parity floor), UNCERTAIN 33. `calcprogress`
+axis-3/6 already 100%/0-opaque (these bytes always built from committed source; this is a
+*source-form editability* upgrade + ceiling correction, not a metric move).
+
+Tracked on project board **#14**. Single-owner serial integration; `main` green (44473f929).
