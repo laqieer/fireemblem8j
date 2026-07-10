@@ -367,5 +367,32 @@ u32 frontier_df3_ending_gap0_r2[] __attribute__((section(".data.frontier_df3_end
     0x00230086, 0x003C0032, 0x004E0043, 0x005C005B, 0x005E005D, 0x0060005F,
     0x00650064, 0x00670066, 0x00970068, 0x00000000, 0x00000000, 0x00000000,
 };
-u8 frontier_df3_ending_001_AC3AA8[] __attribute__((section(".data.frontier_df3_ending.gap1"))) = INCBIN_U8("graphics/frontier_df3_ending/frontier_df3_ending_001_AC3AA8.bin");
-u8 frontier_df3_ending_002_AC50A4[] __attribute__((section(".data.frontier_df3_ending.gap2"))) = INCBIN_U8("graphics/frontier_df3_ending/frontier_df3_ending_002_AC50A4.bin");
+/* frontier_df3_ending_001 (JP 0x08AC3AA8..0x08AC4C88, 4576 B) is NOT compressed --
+ * the 0x131D/0x111D leading u16 is a TSA width/height header, not an LZ77 0x10 tag.
+ * It is four clean raw TSA tilemaps concatenated. Split byte-exact into descriptively
+ * named JP-only sub-assets (each still a verbatim TSA binary -- fe8u-parity floor,
+ * just NAMED), keeping the table-pinned base symbol at offset 0 so any external
+ * base+offset references still resolve:
+ *   Tsa_DfEnding001_0  [0x000,0x4B4)  1204 B  hdr 0x131D
+ *   Tsa_DfEnding001_1  [0x4B4,0x8F0)  1084 B  hdr 0x111D
+ *   Tsa_DfEnding001_2  [0x8F0,0xDA4)  1204 B  hdr 0x131D
+ *   Tsa_DfEnding001_3  [0xDA4,0x11E0) 1084 B  hdr 0x111D
+ */
+u8 frontier_df3_ending_001_AC3AA8[] __attribute__((section(".data.frontier_df3_ending.gap1"))) = INCBIN_U8(
+    "graphics/frontier_df3_ending/Tsa_DfEnding001_0.bin",
+    "graphics/frontier_df3_ending/Tsa_DfEnding001_1.bin",
+    "graphics/frontier_df3_ending/Tsa_DfEnding001_2.bin",
+    "graphics/frontier_df3_ending/Tsa_DfEnding001_3.bin");
+/* frontier_df3_ending_002 (JP 0x08AC50A4..0x08AC6C98, 7156 B) is also NOT compressed
+ * (0x131D TSA header). Split byte-exact into two named JP-only sub-assets, keeping the
+ * base symbol at offset 0:
+ *   Tsa_DfEnding002         [0x000,0x4B4)  1204 B  raw TSA tilemap (hdr 0x131D)
+ *   dat_DfEnding002_PalGfx  [0x4B4,0x1BF4) 5952 B  an opaque data block that is NOT a
+ *     clean BGR555 palette (39% of its u16 have bit15 set, so it must not be typed as
+ *     a .gbapal/Pal_). It leads with a 32-colour BGR555 palette (64 B, two gradient
+ *     banks) followed by 4bpp-format graphics data (5888 B, 184 tiles). Kept as one
+ *     verbatim byte-exact blob (named, not further decoded).
+ */
+u8 frontier_df3_ending_002_AC50A4[] __attribute__((section(".data.frontier_df3_ending.gap2"))) = INCBIN_U8(
+    "graphics/frontier_df3_ending/Tsa_DfEnding002.bin",
+    "graphics/frontier_df3_ending/dat_DfEnding002_PalGfx.bin");
