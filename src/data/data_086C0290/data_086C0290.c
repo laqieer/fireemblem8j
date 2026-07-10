@@ -1,87 +1,140 @@
 #include "global.h"
+#include "anime.h"
 
-/* #145 B1 shiftability carve (pure typed C, no inline asm -- issue #152):
- * EfxIvald battle-anim slice (JP 0x086C0290), split at its interior symbol boundary
- * so AnimScr_EfxIvald_L4 (word 42, 0x086C0338) becomes a real relocatable T symbol.
- * The two interior command pointers back into this blob (0x086C0291) are relocatable
- * refs; anim-command words (0x186C.../0x386C...) are not pointers and stay raw.
- * Byte-exact via `make compare`. */
+extern struct AnimSpriteData AnimSprite_EfxIvald2_1[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_2[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_3[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_4[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_5[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_6[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_7[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_8[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_9[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_10[];
 
-/* Stays raw u32[] (NOT struct AnimSpriteData): this symbol is animation SCRIPT
- * data, not OAM sprite data. Only entry 0 is an ANIM_SPRITE_END terminator; every
- * following word is an AnimScr command/pointer (0x086BFD52.. ROM ptrs, 0x186B..
- * delay-cmds) whose high bytes are non-zero -- i.e. they would land in the
- * AnimSpriteData 12-byte `pad` field (bytes 10..11), which C zero-fills -- so the
- * blob cannot be represented byte-identically as struct AnimSpriteData. It is
- * consumed as a script via `&AnimSprite_EfxIvald2_57 + 1` below. */
-u32 AnimSprite_EfxIvald2_57[] __attribute__((section(".data.residue.086C0290"))) = {
-    0x00000001,
-    0x00000000,
-    0x00000000,
-    0x086BFD52,
-    0x086BFD6A,
-    0x086BFD82,
-    0x086BFD9A,
-    0x086BFDB2,
-    0x086BFDCA,
-    0x086BFDE3,
-    0x186BFDF8,
-    0x086BFE13,
-    0x086BFE2A,
-    0x80000000,
-    0x086BFE42,
-    0x086BFE5A,
-    0x086BFE72,
-    0x086BFE8A,
-    0x086BFEA2,
-    0x086BFEBA,
-    0x086BFED3,
-    0x186BFEE8,
-    0x086BFF03,
-    0x086BFF1A,
-    0x80000000,
-    0x186BFF30,
-    0x186BFF48,
-    0x186BFF60,
-    0x186BFF78,
-    0x186BFF90,
-    0x186BFFA8,
-    0x186BFFC0,
-    0x186BFFD8,
-    0x186BFFF0,
-    0x086C000B,
-    0x186C0020,
-    0x186C0038,
-    0x186C0050,
-    0x186C0068,
-    0x186C0080,
-    0x186C0098,
-    0x80000000,
+extern struct AnimSpriteData AnimSprite_EfxIvald2_11[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_12[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_13[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_14[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_15[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_16[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_17[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_18[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_19[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_20[];
+
+extern struct AnimSpriteData AnimSprite_EfxIvald2_21[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_22[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_23[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_24[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_25[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_26[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_27[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_28[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_29[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_30[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_31[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_32[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_33[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_34[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_35[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_36[];
+
+extern struct AnimSpriteData AnimSprite_EfxIvald2_37[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_38[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_39[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_40[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_41[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_42[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_43[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_44[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_45[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_46[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_47[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_48[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_49[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_50[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_51[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_52[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_53[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_55[];
+extern struct AnimSpriteData AnimSprite_EfxIvald2_56[];
+
+struct AnimSpriteData AnimSprite_EfxIvald2_57[] __attribute__((section(".data.residue.086C0290"))) = {
+    ANIM_SPRITE_END,
+};
+
+u32 AnimScr_EfxIvald_L1[] __attribute__((section(".data.residue.086C0290"))) = {
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_1, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_2, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_3, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_4, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_5, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_6, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_7, 3),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_8, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_9, 3),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_10, 2),
+    ANIMSCR_BLOCKED,
+};
+
+u32 AnimScr_EfxIvald_L2[] __attribute__((section(".data.residue.086C0290"))) = {
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_11, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_12, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_13, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_14, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_15, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_16, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_17, 3),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_18, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_19, 3),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_20, 2),
+    ANIMSCR_BLOCKED,
+};
+
+u32 AnimScr_EfxIvald_L3[] __attribute__((section(".data.residue.086C0290"))) = {
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_21, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_22, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_23, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_24, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_25, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_26, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_27, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_28, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_29, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_30, 3),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_31, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_32, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_33, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_34, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_35, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_36, 4),
+    ANIMSCR_BLOCKED,
 };
 
 u32 AnimScr_EfxIvald_L4[] __attribute__((section(".data.residue.086C0290"))) = {
-    0x186C00B0,
-    0x186C00C8,
-    0x186C00E0,
-    0x186C00F8,
-    0x186C0110,
-    0x186C0128,
-    0x186C0140,
-    0x186C0158,
-    0x186C0170,
-    0x186C0188,
-    0x186C01A0,
-    0x186C01B8,
-    0x186C01D0,
-    0x186C01E8,
-    0x186C0200,
-    0x186C0218,
-    0x186C0230,
-    0x80000000,
-    0x386C0260,
-    (u32)&AnimSprite_EfxIvald2_57 + 0x1,
-    0x80000000,
-    0x386C0278,
-    (u32)&AnimSprite_EfxIvald2_57 + 0x1,
-    0x80000000,
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_37, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_38, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_39, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_40, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_41, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_42, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_43, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_44, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_45, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_46, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_47, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_48, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_49, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_50, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_51, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_52, 4),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_53, 4),
+    ANIMSCR_BLOCKED,
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_55, 12),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_57, 1),
+    ANIMSCR_BLOCKED,
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_56, 12),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxIvald2_57, 1),
+    ANIMSCR_BLOCKED,
 };
