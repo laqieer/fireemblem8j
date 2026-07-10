@@ -637,7 +637,9 @@ u8 frontier_df4_ending_005_ACEB54[] __attribute__((section(".data.frontier_df4_e
 u8 frontier_df4_ending_006_AD02D4[] __attribute__((section(".data.frontier_df4_ending.gap6"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin.lz", "graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin.lz");
 u8 frontier_df4_ending_007_AD0CFC[] __attribute__((section(".data.frontier_df4_ending.gap7"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_007_AD0CFC.bin");
 u8 frontier_df4_ending_008_AD1444[] __attribute__((section(".data.frontier_df4_ending.gap8"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444.bin");
-u8 frontier_df4_ending_009_B1D954[] __attribute__((section(".data.frontier_df4_ending.gap9"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.bin");
+/* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x490] 96t 4bpp sheet ->
+ * editable PNG (png -> .4bpp -> .4bpp.lz); [0x490:0xB48] trailing raw kept verbatim. */
+u8 frontier_df4_ending_009_B1D954[] __attribute__((section(".data.frontier_df4_ending.gap9"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.4bpp.lz", "graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.bin", 0x490, 0x6B8);
 u8 frontier_df4_ending_010_B1E5FC[] __attribute__((section(".data.frontier_df4_ending.gap10"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_010_B1E5FC.bin");
 u8 frontier_df4_ending_011_B24D0C[] __attribute__((section(".data.frontier_df4_ending.gap11"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_011_B24D0C.4bpp.lz");
 /* Worldmap-highlight reel blobs, split per the frontier_df4_voice_001_1F67BC
@@ -649,7 +651,9 @@ u8 frontier_df4_ending_011_B24D0C[] __attribute__((section(".data.frontier_df4_e
 u8 frontier_df4_ending_012_B25A78[] __attribute__((section(".data.frontier_df4_ending.gap12"))) = INCBIN_U8("graphics/frontier_df4_ending/Tsa_WmHightLightMap5.bin", "graphics/frontier_df4_ending/Img_WmHightLightMap6.4bpp.lz");
 /*   013: Tsa_WmHightLightMap7 [0x00:0x38] + Img_WmHightLightMap8 [0x38:0x55c] + Tsa_WmHightLightMap8 [0x55c:end] */
 u8 frontier_df4_ending_013_B26374[] __attribute__((section(".data.frontier_df4_ending.gap13"))) = INCBIN_U8("graphics/frontier_df4_ending/Tsa_WmHightLightMap7.bin", "graphics/frontier_df4_ending/Img_WmHightLightMap8.4bpp.lz", "graphics/frontier_df4_ending/Tsa_WmHightLightMap8.bin");
-u8 frontier_df4_ending_014_B26A6C[] __attribute__((section(".data.frontier_df4_ending.gap14"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.bin");
+/* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x6F0] 64t 4bpp sheet ->
+ * editable PNG (png -> .4bpp -> .4bpp.lz); [0x6F0:0xB30] trailing raw kept verbatim. */
+u8 frontier_df4_ending_014_B26A6C[] __attribute__((section(".data.frontier_df4_ending.gap14"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.4bpp.lz", "graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.bin", 0x6F0, 0x440);
 struct ProcCmd frontier_df4_ending_015_B3B3D4[] SECTION(".data.frontier_df4_ending.gap15") = {
     PROC_SLEEP(0),
     PROC_CALL(CreditsBlendCG_Init),
