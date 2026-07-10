@@ -1,12 +1,22 @@
 #include "global.h"
+#include "anime.h"
 
 /* Migrated from asm/data_0872CC70.s (region-same graphics, single section).
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
+extern struct AnimSpriteData AnimSprite_NaglfarSprites_B[];
+extern struct AnimSpriteData AnimSprite_Banim_50[];
+extern struct AnimSpriteData AnimSprite_efxNaglfarOBJ2_0[];
+extern struct AnimSpriteData AnimSprite_efxNaglfarOBJ2_1[];
+
 u32 AnimScr_efxNaglfarOBJ2_0[] __attribute__((section(".data.residue.0872CC70"))) = {
-    0x0872C937, 0x0872C9F6, 0x81000000, 0x0872CA7A,
-    0x0872CB76, 0x81000000, 0x50008000, 0x00280012,
+    ANIMSCR_FORCE_SPRITE(AnimSprite_NaglfarSprites_B, 3),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_Banim_50, 2),
+    0x81000000,
+    ANIMSCR_FORCE_SPRITE(AnimSprite_efxNaglfarOBJ2_0, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_efxNaglfarOBJ2_1, 2),
+    0x81000000, 0x50008000, 0x00280012,
     0x0000FF88, 0x90008000, 0x00200013, 0x0000FFA8,
     0x90008000, 0x00180016, 0x0000FFC8, 0x90008000,
     0x00180018, 0x0000FFE8, 0x50008000, 0x00180015,
