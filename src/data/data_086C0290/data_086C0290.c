@@ -7,6 +7,13 @@
  * refs; anim-command words (0x186C.../0x386C...) are not pointers and stay raw.
  * Byte-exact via `make compare`. */
 
+/* Stays raw u32[] (NOT struct AnimSpriteData): this symbol is animation SCRIPT
+ * data, not OAM sprite data. Only entry 0 is an ANIM_SPRITE_END terminator; every
+ * following word is an AnimScr command/pointer (0x086BFD52.. ROM ptrs, 0x186B..
+ * delay-cmds) whose high bytes are non-zero -- i.e. they would land in the
+ * AnimSpriteData 12-byte `pad` field (bytes 10..11), which C zero-fills -- so the
+ * blob cannot be represented byte-identically as struct AnimSpriteData. It is
+ * consumed as a script via `&AnimSprite_EfxIvald2_57 + 1` below. */
 u32 AnimSprite_EfxIvald2_57[] __attribute__((section(".data.residue.086C0290"))) = {
     0x00000001,
     0x00000000,

@@ -4,6 +4,11 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
+/* Stays raw u32[] (NOT struct AnimSpriteData): OAM/AnimScr hybrid whose size
+ * (196 B) is not a multiple of the 12-byte AnimSpriteData stride. Entries 0..8 are
+ * a valid OAM prefix (108 B), then 88 B of AnimScr words (0x086B9EF2.. ROM ptrs,
+ * 0x80000000 blocked-markers) with non-zero `pad`, ending on a stray 4-byte word.
+ * Not byte-identically typeable as struct AnimSpriteData[]; kept raw (floor). */
 u32 AnimSprite_EfxBerserk2_15[] __attribute__((section(".data.residue.086BA1E4"))) = {
     0x00000000, 0x0000001F, 0x0000FFF8, 0x00000001,
     0x00000000, 0x00000000, 0x40000000, 0xFFF80040,

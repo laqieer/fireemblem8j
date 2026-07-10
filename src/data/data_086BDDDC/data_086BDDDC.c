@@ -1,25 +1,33 @@
 #include "global.h"
+#include "anime.h"
 
 /* Typed C extraction of residual raw-incbin slices from data_086BDDDC.c. */
 
-u32 AnimSprite_EfxMshield_65[] __attribute__((section(".data.residue.086BDDDC"))) = {
-    0x10000000, 0xFFCC000E, 0x0000FFFA, 0x10000000,
-    0xFFD6000E, 0x0000FFF3, 0x10000000, 0xFFE4000E,
-    0x0000FFF0, 0x10000000, 0xFFCE000E, 0x0000FFFF,
-    0x10000000, 0xFFD0000E, 0x0000FFF6, 0x10000000,
-    0xFFDD000E, 0x0000FFF1, 0x30000000, 0x0026000B,
-    0x00000012, 0x10000000, 0x0020000C, 0x00000011,
-    0x30000000, 0x0019000C, 0x00000012, 0x10000000,
-    0x0012000C, 0x00000015, 0x10000000, 0x0009000B,
-    0x00000015, 0x20000000, 0x0001000B, 0x00000012,
-    0x10000000, 0xFFF8000C, 0x00000013, 0x30000000,
-    0xFFEF000C, 0x0000000F, 0x10000000, 0xFFE7000C,
-    0x0000000F, 0x10000000, 0xFFDE000B, 0x0000000D,
-    0x30000000, 0xFFD6000B, 0x00000009, 0x00000000,
-    0xFFCE000B, 0x00000005, 0x10000000, 0xFFD4000C,
-    0x0000FFF9, 0x10000000, 0xFFDB000C, 0x0000FFF7,
-    0x10000000, 0xFFE3000B, 0x0000FFF6, 0x10000000,
-    0x00260003, 0x00000009, 0x10000000, 0x002B0001,
-    0x0000000E, 0x00000000, 0xFFEA0012, 0x0000FFF0,
-    0x00000001, 0x00000000, 0x00000000,
+struct AnimSpriteData AnimSprite_EfxMshield_65[] __attribute__((section(".data.residue.086BDDDC"))) =
+{
+    { .header = 0x10000000, .as = { .object = { 0x000E, -52, -6 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000E, -42, -13 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000E, -28, -16 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000E, -50, -1 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000E, -48, -10 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000E, -35, -15 } } },
+    { .header = 0x30000000, .as = { .object = { 0x000B, 38, 18 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000C, 32, 17 } } },
+    { .header = 0x30000000, .as = { .object = { 0x000C, 25, 18 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000C, 18, 21 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000B, 9, 21 } } },
+    { .header = 0x20000000, .as = { .object = { 0x000B, 1, 18 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000C, -8, 19 } } },
+    { .header = 0x30000000, .as = { .object = { 0x000C, -17, 15 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000C, -25, 15 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000B, -34, 13 } } },
+    { .header = 0x30000000, .as = { .object = { 0x000B, -42, 9 } } },
+    { .header = 0x00000000, .as = { .object = { 0x000B, -50, 5 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000C, -44, -7 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000C, -37, -9 } } },
+    { .header = 0x10000000, .as = { .object = { 0x000B, -29, -10 } } },
+    { .header = 0x10000000, .as = { .object = { 0x0003, 38, 9 } } },
+    { .header = 0x10000000, .as = { .object = { 0x0001, 43, 14 } } },
+    { .header = 0x00000000, .as = { .object = { 0x0012, -22, -16 } } },
+    ANIM_SPRITE_END,
 };

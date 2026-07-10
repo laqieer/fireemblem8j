@@ -1,24 +1,32 @@
 #include "global.h"
+#include "anime.h"
 
 /* Typed C extraction of residual raw-incbin slices from data_086A01E0.c. */
 
-u32 AnimSprite_EfxLiveOBJ_56[] __attribute__((section(".data.residue.086A01E0"))) = {
-    0x20000000, 0x00220047, 0x0000FFE6, 0x30000000,
-    0xFFD60047, 0x0000FFE6, 0x00000001, 0x00000000,
-    0x00000000, 0x20000000, 0x00230047, 0x0000FFE8,
-    0x30000000, 0xFFD50047, 0x0000FFE8, 0x00000001,
-    0x00000000, 0x00000000, 0x20000000, 0x00230047,
-    0x0000FFE9, 0x30000000, 0xFFD50047, 0x0000FFE9,
-    0x00000001, 0x00000000, 0x00000000, 0x20000000,
-    0x00220046, 0x0000FFEA, 0x30000000, 0xFFD60046,
-    0x0000FFEA, 0x20000000, 0x00220047, 0x0000FFE6,
-    0x30000000, 0xFFD60047, 0x0000FFE6, 0x00000001,
-    0x00000000, 0x00000000, 0x20000000, 0x00210046,
-    0x0000FFEA, 0x30000000, 0xFFD70046, 0x0000FFEA,
-    0x20000000, 0x00230047, 0x0000FFE8, 0x30000000,
-    0xFFD50047, 0x0000FFE8, 0x00000001, 0x00000000,
-    0x00000000, 0x20000000, 0x001F0046, 0x0000FFEA,
-    0x30000000, 0xFFD90046, 0x0000FFEA, 0x20000000,
-    0x00230047, 0x0000FFE9, 0x30000000, 0xFFD50047,
-    0x0000FFE9, 0x00000001, 0x00000000, 0x00000000,
+struct AnimSpriteData AnimSprite_EfxLiveOBJ_56[] __attribute__((section(".data.residue.086A01E0"))) =
+{
+    { .header = 0x20000000, .as = { .object = { 0x0047, 34, -26 } } },
+    { .header = 0x30000000, .as = { .object = { 0x0047, -42, -26 } } },
+    ANIM_SPRITE_END,
+    { .header = 0x20000000, .as = { .object = { 0x0047, 35, -24 } } },
+    { .header = 0x30000000, .as = { .object = { 0x0047, -43, -24 } } },
+    ANIM_SPRITE_END,
+    { .header = 0x20000000, .as = { .object = { 0x0047, 35, -23 } } },
+    { .header = 0x30000000, .as = { .object = { 0x0047, -43, -23 } } },
+    ANIM_SPRITE_END,
+    { .header = 0x20000000, .as = { .object = { 0x0046, 34, -22 } } },
+    { .header = 0x30000000, .as = { .object = { 0x0046, -42, -22 } } },
+    { .header = 0x20000000, .as = { .object = { 0x0047, 34, -26 } } },
+    { .header = 0x30000000, .as = { .object = { 0x0047, -42, -26 } } },
+    ANIM_SPRITE_END,
+    { .header = 0x20000000, .as = { .object = { 0x0046, 33, -22 } } },
+    { .header = 0x30000000, .as = { .object = { 0x0046, -41, -22 } } },
+    { .header = 0x20000000, .as = { .object = { 0x0047, 35, -24 } } },
+    { .header = 0x30000000, .as = { .object = { 0x0047, -43, -24 } } },
+    ANIM_SPRITE_END,
+    { .header = 0x20000000, .as = { .object = { 0x0046, 31, -22 } } },
+    { .header = 0x30000000, .as = { .object = { 0x0046, -39, -22 } } },
+    { .header = 0x20000000, .as = { .object = { 0x0047, 35, -23 } } },
+    { .header = 0x30000000, .as = { .object = { 0x0047, -43, -23 } } },
+    ANIM_SPRITE_END,
 };

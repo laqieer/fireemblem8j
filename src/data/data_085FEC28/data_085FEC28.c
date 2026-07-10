@@ -1,28 +1,34 @@
 #include "global.h"
+#include "anime.h"
 
 /* Typed C extraction of residual raw-incbin slices from data_085FEC28.c. */
 
-u32 AnimSprite_EkrBaseKaiten_84[] __attribute__((section(".data.residue.085FEC28"))) =
+struct AnimSpriteData AnimSprite_EkrBaseKaiten_84[] __attribute__((section(".data.residue.085FEC28"))) =
 {
-    0x40000000, 0xFFF80000, 0x00000004, 0x40000000,
-    0xFFF80000, 0x0000FFF4, 0x00008000, 0x0008000A,
-    0x0000FFF4, 0x00008000, 0x0008000A, 0x00000004,
-    0x10008000, 0xFFF0000A, 0x0000FFF4, 0x10008000,
-    0xFFF0000A, 0x00000004, 0x00004000, 0xFFF80000,
-    0x0000FFEC, 0x00000000, 0x0008002A, 0x0000FFEC,
-    0x10000000, 0xFFF0002A, 0x0000FFEC, 0x00000001,
-    0x00000000, 0x00000000,
+    { .header = 0x40000000, .as = { .object = { 0x0000, -8, 4 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0000, -8, -12 } } },
+    { .header = 0x00008000, .as = { .object = { 0x000A, 8, -12 } } },
+    { .header = 0x00008000, .as = { .object = { 0x000A, 8, 4 } } },
+    { .header = 0x10008000, .as = { .object = { 0x000A, -16, -12 } } },
+    { .header = 0x10008000, .as = { .object = { 0x000A, -16, 4 } } },
+    { .header = 0x00004000, .as = { .object = { 0x0000, -8, -20 } } },
+    { .header = 0x00000000, .as = { .object = { 0x002A, 8, -20 } } },
+    { .header = 0x10000000, .as = { .object = { 0x002A, -16, -20 } } },
+    ANIM_SPRITE_END,
 };
 
-u32 AnimSprite_EkrBaseKaiten_85[] __attribute__((section(".data.residue.085FECA0"))) =
+struct AnimSpriteData AnimSprite_EkrBaseKaiten_85[] __attribute__((section(".data.residue.085FECA0"))) =
 {
-    0x10000000, 0xFFEC0068, 0x0000FFFC, 0x50000000,
-    0x00040049, 0x0000FFE4, 0x90004000, 0xFFF40044,
-    0x0000FFF4, 0x10000000, 0xFFFC0047, 0x0000FFEC,
-    0x10000000, 0x0014004B, 0x0000FFF4, 0x10000000,
-    0x00140048, 0x0000FFEC, 0x10008000, 0xFFEC004D,
-    0x00000004, 0x10008000, 0xFFEC004E, 0x00000014,
-    0x50000000, 0xFFFC0043, 0x00000004, 0x10008000,
-    0xFFF40045, 0x00000004, 0x10000000, 0xFFF40043,
-    0x00000014, 0x00000001, 0x00000000, 0x00000000,
+    { .header = 0x10000000, .as = { .object = { 0x0068, -20, -4 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0049, 4, -28 } } },
+    { .header = 0x90004000, .as = { .object = { 0x0044, -12, -12 } } },
+    { .header = 0x10000000, .as = { .object = { 0x0047, -4, -20 } } },
+    { .header = 0x10000000, .as = { .object = { 0x004B, 20, -12 } } },
+    { .header = 0x10000000, .as = { .object = { 0x0048, 20, -20 } } },
+    { .header = 0x10008000, .as = { .object = { 0x004D, -20, 4 } } },
+    { .header = 0x10008000, .as = { .object = { 0x004E, -20, 20 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0043, -4, 4 } } },
+    { .header = 0x10008000, .as = { .object = { 0x0045, -12, 4 } } },
+    { .header = 0x10000000, .as = { .object = { 0x0043, -12, 20 } } },
+    ANIM_SPRITE_END,
 };

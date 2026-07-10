@@ -4,6 +4,12 @@
  * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
  */
 
+/* Stays raw u32[] (NOT struct AnimSpriteData): OAM/AnimScr hybrid. Entries 0..4
+ * are a valid AnimSpriteData OAM prefix (60 B: 2 objects + 3 terminators), but the
+ * remaining 252 B are AnimScr command/pointer words (0x086BF70A.. ROM ptrs,
+ * 0x186B.. delay-cmds, 0x386B.. loop-cmds) whose non-zero high bytes fall in the
+ * AnimSpriteData `pad` field, so the symbol as a whole is not byte-identically
+ * typeable as struct AnimSpriteData[]. Kept raw (correct floor). */
 u32 AnimSprite_EfxIvald1_55[] __attribute__((section(".data.residue.086BFC18"))) = {
     0x40000000, 0xFFF80000, 0x0000FFF8, 0x00000001,
     0x00000000, 0x00000000, 0x40000000, 0xFFF80002,

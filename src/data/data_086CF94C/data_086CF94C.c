@@ -1,4 +1,5 @@
 #include "global.h"
+#include "anime.h"
 
 /* #145 B1 shiftability carve (pure typed C, no inline asm -- issue #152):
  * DarkGradoOBJ02piece battle-anim slice (JP 0x086CF94C). The blob is split at its
@@ -11,25 +12,14 @@ extern const u8 AnimSprite_EfxDarkGradoOBJ02piece_R_1[];
 extern const u8 AnimSprite_EfxDarkGradoOBJ02piece_R_2[];
 extern const u8 AnimSprite_EfxDarkGradoOBJ02piece_R_3[];
 
-u32 AnimSprite_EfxDarkGradoOBJ02piece_R_4[] __attribute__((section(".data.residue.086CF94C"))) = {
-    0x80000000,
-    0xFFF0000C,
-    0x0000FFF0,
-    0x00000001,
-    0x00000000,
-    0x00000000,
-    0x80000000,
-    0xFFF00010,
-    0x0000FFF0,
-    0x00000001,
-    0x00000000,
-    0x00000000,
-    0x80000000,
-    0xFFF00014,
-    0x0000FFF0,
-    0x00000001,
-    0x00000000,
-    0x00000000,
+struct AnimSpriteData AnimSprite_EfxDarkGradoOBJ02piece_R_4[] __attribute__((section(".data.residue.086CF94C"))) =
+{
+    { .header = 0x80000000, .as = { .object = { 0x000C, -16, -16 } } },
+    ANIM_SPRITE_END,
+    { .header = 0x80000000, .as = { .object = { 0x0010, -16, -16 } } },
+    ANIM_SPRITE_END,
+    { .header = 0x80000000, .as = { .object = { 0x0014, -16, -16 } } },
+    ANIM_SPRITE_END,
 };
 
 u32 AnimScr_EfxDarkGradoOBJ02piece1_R[] __attribute__((section(".data.residue.086CF94C"))) = {
