@@ -19,6 +19,8 @@ extern const u8 UnitDef_Ch15BEnemy_5[];
 extern const u8 frontier_df3_unitdef_b_038_91B948[];
 extern const u8 UnitDef_Ch14BAlly_7[];
 
+extern const u8 frontier_df3_unitdef_b_037_91AC38_tail_p1[];
+
 SECTION(".rodata.dat_EventScr_Ch14b_EndingScene_ref") EventListScr EventScr_Ch14b_EndingScene[] = {
     CALL(EventScr_Ch15A_26)
     ENUT(0x77)
@@ -89,11 +91,11 @@ SECTION(".rodata.dat_EventScr_Ch14b_EndingScene_ref") EventListScr EventScr_Ch14
     MUNO
     EVBIT_T(7)
     ENDA
-    SVAL(EVT_SLOT_2, 0x891B7B8)
+    SVAL(EVT_SLOT_2, frontier_df3_unitdef_b_037_91AC38_tail_p1 + 0x4EC)
     CALL(EventScr_LoadReinforce)
     EVBIT_T(7)
     ENDA
-    SVAL(EVT_SLOT_2, 0x891B7F4)
+    SVAL(EVT_SLOT_2, frontier_df3_unitdef_b_037_91AC38_tail_p1 + 0x528)
     CALL(EventScr_LoadReinforce)
     EVBIT_T(7)
     ENDA

@@ -248,6 +248,91 @@ def structureless_opaque_syms():
     _OPAQUE_SYMS = opaque
     return opaque
 
+
+def _strip_c_comments_strings(txt):
+    """Blank out /* */ block comments, // line comments and "..." string literals so a
+    ROM address that appears only in a comment or an INCBIN path string is NOT mistaken
+    for a live macro operand (e.g. frontier_df3_eventscr_ch's `STT_OBJECT(0x08A602F0)`
+    mention lives in a comment, not code)."""
+    txt = re.sub(r"/\*.*?\*/", " ", txt, flags=re.S)
+    txt = re.sub(r"//[^\n]*", " ", txt)
+    txt = re.sub(r'"(?:\\.|[^"\\])*"', '""', txt)
+    return txt
+
+
+_MACRO_ADDR_RE = re.compile(r"0x0?[89A-Fa-f][0-9A-Fa-f]{6}\b")
+_MACRO_CALL_RE = re.compile(r"\b([A-Z][A-Z0-9_]{2,})\s*\(([^;{}]*?)\)")
+_MACRO_SKIP = {"INCBIN_U8", "INCBIN_U16", "INCBIN_U32", "SECTION", "ASSERT",
+               "STRUCT_PAD", "SHOULD_BE_CONST", "STATIC_ASSERT"}
+
+
+def scan_macro_raw_ptr_debt(addrs, a2n, a2s):
+    """Scan typed .c carves (event scripts / unit tables) for MACRO-form raw ROM-address
+    operands -- CALL(0x08xxxxxx), LOAD1/2/3(n, 0x08xxxxxx), SVAL(slot, 0x08xxxxxx), etc.
+    A macro operand that is a bare 0x08xxxxxx literal resolving to a linked data symbol is
+    a BAKED pointer that escapes BOTH the .bin auditor (this is typed C, no .bin) AND the
+    `.4byte`-literal scanner (it is an EA macro, not a `.4byte`). It must be rewritten to
+    the symbolic form `SYM + off` so ld relocates it (byte-identical, shiftable).
+
+    This is exactly the class that hid frontier_df3_ending_000's peers (D363): 8
+    EventScr_*/UnitDef_*_ref carves baked CALL/LOAD/SVAL pointers into unit-def data and
+    sibling event scripts. Comments, // lines and INCBIN path strings are stripped first.
+    Returns a list of (relpath, macro, value, sym, off) for each still-raw pointer."""
+    real = []
+    for cf in glob.glob(os.path.join(ROOT, "src", "data", "**", "*.c"), recursive=True):
+        try:
+            txt = _strip_c_comments_strings(open(cf, errors="replace").read())
+        except Exception:
+            continue
+        for m in _MACRO_CALL_RE.finditer(txt):
+            macro, args = m.group(1), m.group(2)
+            if macro in _MACRO_SKIP:
+                continue
+            for vm in _MACRO_ADDR_RE.finditer(args):
+                v = int(vm.group(0), 16)
+                if not (ROM_LO <= v < ROM_HI):
+                    continue
+                kind, sym, off = classify(v, addrs, a2n, a2s)
+                if kind == "DANGLING":
+                    continue   # no covering linked symbol -> not a provable pointer
+                real.append((os.path.relpath(cf, ROOT), macro, v, sym, off))
+    return real
+
+
+def scan_opaque_selfref_suspects(addrs, a2n, a2s, opaque_syms, rom):
+    """Read the built-ROM bytes of every STRUCTURELESS opaque symbol and flag aligned words
+    that point INSIDE the symbol's own [addr, addr+size) range (SELF-REFERENTIAL). A random
+    pixel/sample/OAM word landing exactly in its own blob is astronomically unlikely, so a
+    self-ref inside a raw-INCBIN blob is a candidate BAKED self-pointer -- the frontier_df4_
+    ending_000 failure (D362): 2 baked self-pointers in a graphics/ .bin that carried no
+    reloc and sat outside the data/residual glob, invisible to the word-level auditor.
+
+    Reported as REVIEW SUSPECTS, not auto-counted in the hard gate: genuine embedded-data
+    self-refs exist (compressed .4bpp.lz graphics, sound samples, AnimSprite OAM), so each
+    hit needs a de-pointer round-trip check (does symbolizing it keep `make compare` OK?).
+    A blob that carries a REAL relocated pointer array emits an R_ARM_ABS32 -> it is not
+    opaque -> excluded here. Returns [(sym, addr, size, nrefs), ...] sorted by nrefs."""
+    saddrs = sorted(addrs)
+    out = []
+    for ad in saddrs:
+        nm = a2n[ad]
+        if nm not in opaque_syms:
+            continue
+        size = a2s.get(ad, 0)
+        if not size:
+            i = bisect.bisect_right(saddrs, ad)
+            size = (saddrs[i] - ad) if i < len(saddrs) else 0
+        fo = ad - ROM_LO
+        if size < 8 or fo < 0 or fo + size > len(rom):
+            continue
+        refs = sum(1 for o in range(0, size - 3, 4)
+                   if ad <= struct.unpack_from("<I", rom, fo + o)[0] < ad + size)
+        if refs:
+            out.append((nm, ad, size, refs))
+    out.sort(key=lambda t: t[3])
+    return out
+
+
 def main():
     if not os.path.exists(ELF):
         sys.exit(f"ELF not found: {ELF} (run `make` first)")
@@ -600,8 +685,23 @@ def emit_true_debt():
     stuck_real, stuck_coinc = _scan_stuck_asm_literals(elfaddrs, _a2n, _a2s, _fn, asset_re,
                                                        romhdr_re, opaque_syms)
     struct_coinc += stuck_coinc
+    # BLIND SPOT (found 2026-07-10, D363): baked pointers in MACRO-form operands of typed
+    # event/unit carves -- CALL/LOAD/SVAL(0x08xxxxxx) -- are invisible to BOTH the .bin
+    # word loop (typed C, no .bin) AND the .4byte-literal scan (an EA macro, not `.4byte`).
+    # Scan them directly; each resolving to a linked symbol is REAL relocatable debt.
+    macro_real = scan_macro_raw_ptr_debt(elfaddrs, _a2n, _a2s)
+    # BLIND SPOT (found 2026-07-10, D362 follow-up): a raw-INCBIN blob (any dir, incl.
+    # graphics/, outside the data/residual glob) can BAKE self-pointers in its own .bin
+    # interior with no reloc. Decode every opaque symbol's ROM bytes for self-referential
+    # words; report as review-suspects (embedded-data self-refs exist, so not hard-gated).
+    _rom = None
+    for _rp in (os.path.join(ROOT, "fireemblem8.gba"), os.path.join(ROOT, "baserom.gba")):
+        if os.path.exists(_rp):
+            _rom = open(_rp, "rb").read(); break
+    selfref_suspects = (scan_opaque_selfref_suspects(elfaddrs, _a2n, _a2s, opaque_syms, _rom)
+                        if _rom else [])
     # completion gate: confirmed-real + unclassified DATA-pointer debt (code-axis excluded)
-    gate = real + blind_data + blind_exact + blind_unres + len(stuck_real)
+    gate = real + blind_data + blind_exact + blind_unres + len(stuck_real) + len(macro_real)
     print("== SHIFTABILITY true debt (fe8u oracle + structural classification) ==")
     print(f"  raw 0x08xxxxxx words classified                      : {len(blindhits)+coinc+real}")
     print(f"  coincidental constants (never relocatable)           : {struct_coinc}")
@@ -613,7 +713,11 @@ def emit_true_debt():
     print(f"  unclassified DATA-interior / EXACT / dangling        : {blind_data + blind_exact + blind_unres}")
     print(f"  stuck .4byte literals in __asm__ blocks, REAL         : {len(stuck_real)}  "
           f"(auditor-blind until 2026-06-27)")
+    print(f"  MACRO-form raw ptr in typed carves, REAL             : {len(macro_real)}  "
+          f"(auditor-blind until 2026-07-10, D363)")
     print(f"  => COMPLETION GATE (confirmed-real + unclassified)    : {gate}")
+    print(f"  opaque-blob SELF-REF suspects (verify embedded-data)  : {len(selfref_suspects)}  "
+          f"(D362; not gated -- de-pointer round-trip to confirm)")
     print(f"  NOTE: this gate still cannot count pointers inside COMPRESSED data (Huffman")
     print(f"  text, LZ77 banim/gfx) -- those need typed-asset extraction (D306), not .4byte.")
     if "--gate" in sys.argv:
@@ -624,6 +728,12 @@ def emit_true_debt():
         from collections import Counter as _C2
         for f, c in _C2(f for (f, v, s, o, k) in stuck_real).most_common(20):
             print(f"     {c:4d}  {f}")
+        print("  -- MACRO-form raw ROM-addr pointers still not symbolized --")
+        for (rp, macro, v, sym, off) in macro_real:
+            print(f"     {rp}: {macro}(0x{v:08X}) -> {sym}+0x{off:X}")
+        print("  -- opaque-blob self-ref suspects (verify each is embedded data) --")
+        for (sym, ad, size, nrefs) in selfref_suspects:
+            print(f"     {sym} @0x{ad:08X} size=0x{size:X} self-ref-words={nrefs}")
 
 
 def _scan_stuck_asm_literals(addrs, a2n, a2s, fn, asset_re, romhdr_re, opaque_syms=None):

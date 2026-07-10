@@ -16,7 +16,7 @@ extern const u8 frontier_df3_eventscr_ch_001_A696D4[];
 
 SECTION(".rodata.dat_EventScr_Ch16b_BeginningScene_ref") EventListScr EventScr_Ch16b_BeginningScene[] = {
     SVAL(EVT_SLOT_2, frontier_df3_unitdef_b_042_91C230)
-    CALL(0x8A69704)
+    CALL(frontier_df3_eventscr_ch_001_A696D4 + 0x30)
     ENUT(0xE)
     ENDA
     CALL(frontier_df3_eventscr_ch_001_A696D4 + 0x3E4)

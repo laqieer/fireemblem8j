@@ -14,10 +14,13 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
+extern const u8 EventScr_SetBackground[];
+extern const u8 frontier_df3_unitdef_b_023_91512C_p34[];
+
 SECTION(".rodata.dat_UnitDef_Ch18BAlly_2_ref") EventListScr UnitDef_Ch18BAlly_2[] = {
     EvtBgmFadeIn(0x7FFF, 2)
     SVAL(EVT_SLOT_2, 0x4D)
-    CALL(0x8A60420)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xB73)
     TEXTEND
     REMA
@@ -26,7 +29,7 @@ SECTION(".rodata.dat_UnitDef_Ch18BAlly_2_ref") EventListScr UnitDef_Ch18BAlly_2[
     CLEE
     CLEN
     CLEAN
-    LOAD2(1, 0x8915BD0)
+    LOAD2(1, frontier_df3_unitdef_b_023_91512C_p34 + 0x974)
     ENUN
     CAMERA2_CAHR(0x1E)
     EvtBgmFadeIn(0x29, 8)
@@ -35,7 +38,7 @@ SECTION(".rodata.dat_UnitDef_Ch18BAlly_2_ref") EventListScr UnitDef_Ch18BAlly_2[
     STAL(0x3C)
     CURE
     SVAL(EVT_SLOT_2, 0x4B)
-    CALL(0x8A60420)
+    CALL(EventScr_SetBackground)
     CHECK_MODE
     SVAL(EVT_SLOT_1, 2)
     EVENT_WORD(0x00000C41)

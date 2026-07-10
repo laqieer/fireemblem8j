@@ -17,7 +17,7 @@
 SECTION(".rodata.dat_UnitDef_Ch14BAlly_7_ref") EventListScr UnitDef_Ch14BAlly_7[] = {
     CHECK_ALLEGIANCE(0xFFFF)
     BEQ(0, 0xC, 2)
-    CALL(0x8A6030C)
+    CALL((const u8 *)UnitDef_Ch14BAlly_7 + 0x1C)
     LABEL(0)
     ENDA
     CHECK_TRIG_EVENTID

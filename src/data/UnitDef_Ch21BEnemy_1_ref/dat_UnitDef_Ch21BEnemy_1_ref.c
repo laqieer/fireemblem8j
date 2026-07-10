@@ -14,10 +14,12 @@
 #define EVENT_WORD(w)      (EventListScr)(w),
 #define EVENT_WORD_SYM(s)  (EventListScr)(s),
 
+extern const u8 EventScr_SetBackground[];
+
 SECTION(".rodata.dat_UnitDef_Ch21BEnemy_1_ref") EventListScr UnitDef_Ch21BEnemy_1[] = {
     MUSC(0x41)
     SVAL(EVT_SLOT_2, 0x4E)
-    CALL(0x8A60420)
+    CALL(EventScr_SetBackground)
     TEXTSHOW(0xBB5)
     TEXTEND
     REMA

@@ -13,11 +13,13 @@
 extern const u8 frontier_df3_unitdef_b_047_91E280[];
 extern const u8 UnitDef_Ch19BNPC_1[];
 
+extern const u8 frontier_df3_eventscr_ch_002_A6A06C[];
+
 SECTION(".rodata.dat_EventScr_Ch18b_BeginningScene_ref") EventListScr EventScr_Ch18b_BeginningScene[] = {
     SVAL(EVT_SLOT_2, frontier_df3_unitdef_b_047_91E280 + 0x3E8)
     SVAL(EVT_SLOT_3, UnitDef_Ch19BNPC_1)
     SVAL(EVT_SLOT_4, frontier_df3_unitdef_b_047_91E280)
-    CALL(0x8A6A3E0)
+    CALL(frontier_df3_eventscr_ch_002_A6A06C + 0x374)
     EVBIT_T(7)
     ENDA
     CAMERA_CAHR(0xF)

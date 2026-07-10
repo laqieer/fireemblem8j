@@ -16,22 +16,25 @@ extern const u8 EventScr_UnitWarpIN[];
 extern const u8 EventScr_UnitWarpOUT[];
 extern const u8 data_085B9BBC[];
 
+extern const u8 frontier_df3_unitdef_b_037_91AC38_tail_p1[];
+extern const u8 frontier_df3_unitdef_b_038_91B948_residue[];
+
 SECTION(".rodata.dat_EventScr_Ch14b_BeginningScene_ref") EventListScr EventScr_Ch14b_BeginningScene[] = {
-    LOAD1(1, 0x891B3BC)
+    LOAD1(1, frontier_df3_unitdef_b_037_91AC38_tail_p1 + 0xF0)
     ENUN
     REMU(0x53)
-    LOAD1(1, 0x891BA74)
+    LOAD1(1, frontier_df3_unitdef_b_038_91B948_residue + 0xF0)
     ENUN
     CAMERA(0, 0x15)
     CLEAN
     MUSC(0x25)
     FADU(0x10)
-    LOAD2(1, 0x891B984)
+    LOAD2(1, frontier_df3_unitdef_b_038_91B948_residue)
     SVAL(EVT_SLOT_1, 0)
     SET_STATE(0xF)
     SVAL(EVT_SLOT_1, 0)
     SET_STATE(2)
-    LOAD3(0, 0x891B9C0)
+    LOAD3(0, frontier_df3_unitdef_b_038_91B948_residue + 0x3C)
     ENUN
     SVAL(EVT_SLOT_1, 0xFFFFFFFF)
     SET_STATE(0xF)
@@ -68,7 +71,7 @@ SECTION(".rodata.dat_EventScr_Ch14b_BeginningScene_ref") EventListScr EventScr_C
     ENUN
     MOVEONTO(0, 0x66, 0x53)
     ENUN
-    LOAD1(1, 0x891B718)
+    LOAD1(1, frontier_df3_unitdef_b_037_91AC38_tail_p1 + 0x44C)
     ENUN
     ENUN
     REVEAL(0x53)
@@ -78,7 +81,7 @@ SECTION(".rodata.dat_EventScr_Ch14b_BeginningScene_ref") EventListScr EventScr_C
     CAMERA2(0xC, 7)
     FADU(0x10)
     MUSC(0x26)
-    LOAD1(1, 0x891B768)
+    LOAD1(1, frontier_df3_unitdef_b_037_91AC38_tail_p1 + 0x49C)
     ENUN
     REVEAL(1)
     CURSOR_CHAR(1)

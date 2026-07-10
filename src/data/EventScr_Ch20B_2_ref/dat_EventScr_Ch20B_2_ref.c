@@ -13,8 +13,10 @@
 extern const u8 EventScr_LoadReinforce[];
 extern const u8 UnitDef_Ch14BAlly_7[];
 
+extern const u8 frontier_df3_unitdef_b_052_91F89C[];
+
 SECTION(".rodata.dat_EventScr_Ch20B_2_ref") EventListScr EventScr_Ch20B_2[] = {
-    SVAL(EVT_SLOT_2, 0x891F914)
+    SVAL(EVT_SLOT_2, frontier_df3_unitdef_b_052_91F89C + 0x78)
     CALL(EventScr_LoadReinforce)
     COUNTER_DEC(1)
     ENUF(0xC)
