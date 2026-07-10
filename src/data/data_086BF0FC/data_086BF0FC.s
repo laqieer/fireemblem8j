@@ -87,7 +87,7 @@ data_086BF0FC:
 	.4byte AnimSprite_EfxMshield_81 + 0x3
 	.4byte AnimSprite_EfxMshield_82 + 0x3
 	.4byte AnimSprite_EfxMshield_83 + 0x3
-	.4byte 0x786BCCDB
+	.4byte AnimSprite_EfxMshield_49 + 0x70000003
 	.4byte 0x84000013
 	.4byte 0x80000000
 	.4byte AnimSprite_EfxMshield_84 + 0x2
@@ -114,6 +114,6 @@ data_086BF0FC:
 	.4byte AnimSprite_EfxMshield_105 + 0x2
 	.4byte AnimSprite_EfxMshield_106 + 0x2
 	.4byte AnimSprite_EfxMshield_107 + 0x2
-	.4byte 0x786BCCDB
+	.4byte AnimSprite_EfxMshield_49 + 0x70000003
 	.4byte 0x84000013
 	.4byte 0x80000000
