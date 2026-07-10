@@ -10611,7 +10611,7 @@ for the whole wave (singleton oracle invariant); `main` green at every push; fin
 
 Tracked on project board **#14**. Single-owner serial integration held throughout; `main` green at every push.
 
-## D363 — SHIFTABILITY hardening: de-pointer a whole hidden class of MACRO-form baked pointers (15 in 8 event/unit carves) + `audit_pointers.py` gains 2 blind-spot scanners; corrects "shiftability 0-debt" — real banim frame-pointer debt now SURFACED, not masked (2026-07-10)
+## D363 — SHIFTABILITY hardening: de-pointer a whole hidden class of MACRO-form baked pointers (15 in 8 event/unit carves) + `audit_pointers.py` gains 2 blind-spot scanners; a self-ref "banim frame-pointer" suspicion was raised then EMPIRICALLY REFUTED (AnimSprite = OAM data) — shiftability stays at floor (2026-07-10)
 
 Generalizes the `ending_000` fix (D362) after the user's standing lesson: **never trust a
 "0-debt / floor" verdict — empirically re-derive it.** Auditing *how* the auditor could still
@@ -10642,14 +10642,21 @@ classified (not trusted):
   samples), `sBanimEkrPopupProcNames` (6 self-refs in 375 KB = 0.006% density, mixed parity,
   scattered — coincidental). A self-ref inside an LZ stream / PCM sample / raw-u8 blob is not a
   relocatable pointer.
-- **REAL baked frame-pointers (3, DEFERRED to the banim-typing frontier):** `AnimSprite_EfxMant­
-  Batabata6_L_7` / `_EfxBerserk2_15` / `_EfxIvald1_55` are raw `u32[]` battle-anim frame tables
-  full of coherent, aligned pointers (`0x0861F64E`, `0x0861F696` …) with flag-tagged self-pointers
-  (`0x1861F7FC` = base `0x0861F7FC` | control-bit `0x10000000`). These are genuine un-relocated
-  pointer tables — the known **D345/D346 opaque-banim-table frontier** (a separate typed-C decomp
-  axis). The hardened audit now **surfaces** them instead of silently folding them into
-  "0-debt" — the honest position: shiftability's real residual is this banim frame-pointer class,
-  not zero.
+- **Initially mis-called "REAL baked frame-pointers" (3) — CORRECTED same-session to OAM data,
+  SAFE:** `AnimSprite_EfxMantBatabata6_L_7` / `_EfxBerserk2_15` / `_EfxIvald1_55` are raw `u32[]`
+  battle-anim sprite tables whose in-range / self-ref words (`0x0861F64E`, `0x1861F7FC` = base |
+  `0x10000000`, …) *look* like a coherent flag-tagged pointer table. The de-pointer round-trip does
+  NOT distinguish (a data word survives `Sym+off` byte-identically), so the deref path is the only
+  proof — and it is decisive: these feed `AnimSpriteData` (`include/anime.h`, 12-byte OAM record =
+  `u32 header` + affine/object union), which `src/animedrv.c:182-236` **copies into the OAM buffer**
+  (`*gOamHiPutIt++ = (it->header + i) | (x<<16) | y`) and **never dereferences as a pointer**. So the
+  words are OAM header/coord data, coincidentally in ROM range — relocating them would CORRUPT a
+  shifted game. This corrects the first draft of this very entry: a self-ref alone is a *candidate*,
+  never proof; only the consumer's use settles it (the user's standing lesson — empirically
+  re-derive, do not trust a heuristic). Net: **all 12 self-ref suspects are embedded data; the
+  self-ref scan surfaced 0 new real pointer debt.** Shiftability's real residual is unchanged — the
+  already-empirically-bounded **D346 gba-kit A/B result** (11 tables truly block a shift; 73 remain
+  for typed-C decomp completeness, a separate axis), not a new "banim frame-pointer" class.
 
 **Auditor changes (`scripts/audit_pointers.py`, script-only, byte-neutral):**
 - `scan_macro_raw_ptr_debt()` — the Finding-1 scanner; its count is **added to the completion
@@ -10663,8 +10670,10 @@ Metrics: `audit_pointers.py --true-debt --gate` = **0** (macro-form debt cleared
 counted the banim self-refs, and still doesn't — they're surfaced separately). No 4-axis number
 moves (`calcprogress` unaffected); this is a shiftability-correctness + auditor-coverage win.
 `make compare` OK, `make shiftcheck` 0 HIGH, pre-commit gate passed. Single-owner serial
-integration; `main` green (103e10856). Next frontier: type the banim frame-pointer tables so the
-`AnimSprite_*` (and their cross-ref-only siblings) relocate — the last real shiftability residual.
+integration; `main` green (103e10856). The Finding-1 macro de-pointer (15 words) is the real,
+verified win; `scan_opaque_selfref_suspects()` is retained as a *detector* (it found ending_000's
+class), but a self-ref is only a candidate — every current suspect resolves to OAM/gfx/sound/raw
+embedded data, so shiftability stays at its established D344/D346 floor.
 
 Tracked on project board **#14**.
 
