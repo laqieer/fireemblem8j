@@ -6,9 +6,18 @@
 
 asm/frontier_df4_ending.o: \
   graphics/frontier_df4_ending/frontier_df4_ending_004_ACC378.4bpp.lz \
+  graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.4bpp.lz \
   graphics/frontier_df4_ending/frontier_df4_ending_011_B24D0C.4bpp.lz \
+  graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.4bpp.lz \
   graphics/frontier_df4_ending/frontier_df4_ending_019_B8B998.4bpp.lz \
   graphics/frontier_df4_ending/frontier_df4_ending_020_BAA2E0.4bpp.lz
+
+# wave-reopened: 009/014 were mis-classified as non-reproducible LZ floors (an
+# off-by-4-padding measurement error). Each is a GBA-BIOS-LZ77 sheet -> editable PNG
+# whose png->.4bpp->.4bpp.lz at -mindist 2 reproduces the JP compressed bytes exactly;
+# the trailing raw block stays verbatim. Sheet boundaries: 009 -> 0x490, 014 -> 0x6F0.
+graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.4bpp.lz: LZ_FLAGS := -mindist 2
+graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.4bpp.lz: LZ_FLAGS := -mindist 2
 
 # wave49: frontier_df4_ending_006's two LZ sheets build from decompressed .bin
 # sources; truncate gbagfx output to the exact JP lengths (508B; 548B incl. 3B pad).

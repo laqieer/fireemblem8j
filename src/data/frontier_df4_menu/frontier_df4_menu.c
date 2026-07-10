@@ -5153,7 +5153,9 @@ u32 frontier_df4_menu_gap15_3192[] __attribute__((section(".data.frontier_df4_me
     0x00000000,
 };
 u8 frontier_df4_menu_016_A74CEC[] __attribute__((section(".data.frontier_df4_menu.gap16"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_016_A74CEC.4bpp");
-u8 frontier_df4_menu_017_A79E90[] __attribute__((section(".data.frontier_df4_menu.gap17"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90.bin");
+/* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0xFC0] 212t 4bpp sheet ->
+ * editable PNG; [0xFC0:0x1208] trailing raw kept verbatim. */
+u8 frontier_df4_menu_017_A79E90[] __attribute__((section(".data.frontier_df4_menu.gap17"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90.bin", 0xFC0, 0x248);
 u8 frontier_df4_menu_018_A92B38[] __attribute__((section(".data.frontier_df4_menu.gap18"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_018_A92B38.4bpp");
 u32 frontier_df4_menu_019_A934EC[] __attribute__((section(".data.frontier_df4_menu.gap19"))) = {
     0x00000001,
@@ -6820,7 +6822,9 @@ u32 frontier_df4_menu_021c_A95DDC_13[] __attribute__((section(".data.frontier_df
 u8 frontier_df4_menu_021c_A95DDC_14[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x31A, 0x5F4);
 u8 frontier_df4_menu_022_A96D18[] __attribute__((section(".data.frontier_df4_menu.gap22"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18_0.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18_1.4bpp.lz");
 u8 frontier_df4_menu_023_A99FA8[] __attribute__((section(".data.frontier_df4_menu.gap23"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin");
-u8 frontier_df4_menu_024_A9AC28[] __attribute__((section(".data.frontier_df4_menu.gap24"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin", 0, 1020);
+/* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x3DC] 61t 4bpp sheet ->
+ * editable PNG; [0x3DC:0x3FC] trailing raw kept verbatim (symbol size 1020). */
+u8 frontier_df4_menu_024_A9AC28[] __attribute__((section(".data.frontier_df4_menu.gap24"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin", 0x3DC, 0x20);
 u32 frontier_df4_menu_026_A9CF7C[] __attribute__((section(".data.frontier_df4_menu.gap26"))) = {
     0x60000000,
     0x00000000,
@@ -7340,9 +7344,14 @@ u8 frontier_df4_menu_030_AA71D4[] __attribute__((section(".data.frontier_df4_men
 /* Wave47: LZ-hybrid decomposed — 1044B JP-LZ 4bpp sheet (128 tiles, byte-exact
  * via gbagfx default) + 32B raw 16-color palette tail. */
 u8 frontier_df4_menu_031_AA9F98[] __attribute__((section(".data.frontier_df4_menu.gap31"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_031_AA9F98.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_031_AA9F98_pal.gbapal");
-u8 frontier_df4_menu_032_AAAC4C[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_032_AAAC4C.bin", 0x0, 0x7F4);
+/* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x7F4] is a self-contained
+ * 122t 4bpp LZ sheet -> editable PNG. The [0x7F4:0x300C] trailing raw block is a
+ * separate symbol (data_08AAB440) still sliced verbatim from the original .bin. */
+u8 frontier_df4_menu_032_AAAC4C[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_032_AAAC4C.4bpp.lz");
 u8 data_08AAB440[] __attribute__((section(".data.frontier_df4_menu.gap32"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_032_AAAC4C.bin", 0x7F4, 0x2818);
-u8 frontier_df4_menu_033_AAEB40[] __attribute__((section(".data.frontier_df4_menu.gap33"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_033_AAEB40.bin");
+/* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x33C] 52t 4bpp sheet ->
+ * editable PNG; [0x33C:0x810] trailing raw kept verbatim. */
+u8 frontier_df4_menu_033_AAEB40[] __attribute__((section(".data.frontier_df4_menu.gap33"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_033_AAEB40.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_033_AAEB40.bin", 0x33C, 0x4D4);
 struct ProcCmd gProcScr_RedrawConfigHelpText[] __attribute__((section(".data.frontier_df4_menu.gap34"))) = { /* @0x08AAF9EC 32B */
     PROC_NAME(&frontier_df4_voice_000a2_1F5840[0x28]), /* 0x081F5868 "E_CfExplReWrite" */
     PROC_SLEEP(1),
