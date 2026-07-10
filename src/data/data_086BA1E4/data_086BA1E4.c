@@ -1,26 +1,68 @@
 #include "global.h"
+#include "anime.h"
 
-/* Migrated from asm/data_086BA1E4.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_1[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_2[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_3[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_4[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_5[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_6[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_7[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_8[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_9[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_10[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_11[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_12[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_13[];
+extern struct AnimSpriteData AnimSprite_EfxBerserk2_14[];
 
-/* Stays raw u32[] (NOT struct AnimSpriteData): OAM/AnimScr hybrid whose size
- * (196 B) is not a multiple of the 12-byte AnimSpriteData stride. Entries 0..8 are
- * a valid OAM prefix (108 B), then 88 B of AnimScr words (0x086B9EF2.. ROM ptrs,
- * 0x80000000 blocked-markers) with non-zero `pad`, ending on a stray 4-byte word.
- * Not byte-identically typeable as struct AnimSpriteData[]; kept raw (floor). */
-u32 AnimSprite_EfxBerserk2_15[] __attribute__((section(".data.residue.086BA1E4"))) = {
-    0x00000000, 0x0000001F, 0x0000FFF8, 0x00000001,
-    0x00000000, 0x00000000, 0x40000000, 0xFFF80040,
-    0x0000FFB8, 0x00000001, 0x00000000, 0x00000000,
-    0x80000000, 0x00000015, 0x0000FFA0, 0x90000000,
-    0xFFE00015, 0x0000FFA0, 0xA0000000, 0x00000015,
-    0x0000FFC0, 0xB0000000, 0xFFE00015, 0x0000FFC0,
-    0x00000001, 0x00000000, 0x00000000, 0x086B9EF2,
-    0x086B9F46, 0x80000000, 0x086B9F6A, 0x086B9FBE,
-    0x80000000, 0x086B9FE2, 0x086BA036, 0x80000000,
-    0x086BA05A, 0x086BA0AE, 0x80000000, 0x086BA0D2,
-    0x086BA126, 0x086BA14A, 0x086BA186, 0x086BA1AA,
-    0x086BA1CE, 0x086BA1E6, 0x086BA1FE, 0x086BA216,
-    0x80000000,
+struct AnimSpriteData AnimSprite_EfxBerserk2_15[] __attribute__((section(".data.residue.086BA1E4"))) =
+{
+    { .header = 0x00000000, .as = { .object = { 0x001F, 0, -8 } } },
+    ANIM_SPRITE_END,
+};
+
+struct AnimSpriteData AnimSprite_EfxBerserk2_15b[] __attribute__((section(".data.residue.086BA1FC"))) =
+{
+    { .header = 0x40000000, .as = { .object = { 0x0040, -8, -72 } } },
+    ANIM_SPRITE_END,
+};
+
+struct AnimSpriteData AnimSprite_EfxBerserk2_15c[] __attribute__((section(".data.residue.086BA214"))) =
+{
+    { .header = 0x80000000, .as = { .object = { 0x0015, 0, -96 } } },
+    { .header = 0x90000000, .as = { .object = { 0x0015, -32, -96 } } },
+    { .header = 0xA0000000, .as = { .object = { 0x0015, 0, -64 } } },
+    { .header = 0xB0000000, .as = { .object = { 0x0015, -32, -64 } } },
+    ANIM_SPRITE_END,
+};
+
+u32 AnimScr_EfxBerserk6[] __attribute__((section(".data.residue.086BA250"))) =
+{
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_1, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_2, 2),
+    ANIMSCR_BLOCKED,
+
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_3, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_4, 2),
+    ANIMSCR_BLOCKED,
+
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_5, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_6, 2),
+    ANIMSCR_BLOCKED,
+
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_7, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_8, 2),
+    ANIMSCR_BLOCKED,
+
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_9, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_10, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_11, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_12, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_13, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_14, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_15, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_15b, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxBerserk2_15c, 2),
+    ANIMSCR_BLOCKED,
 };
