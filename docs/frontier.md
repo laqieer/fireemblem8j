@@ -759,6 +759,11 @@ The .bin count held (these carve real code/pointers out of source-form data, not
 ## CURRENT STATE (authoritative, 2026-07-03, main 1897e694f — main CI GREEN)
 - **`.bin` frontier: MISS=3 / FLOOR=1401 / UNCERTAIN=226** (`FE8U=../fireemblem8u python3 scripts/audit_bin_forms.py`).
   The 3 MISS are documented TSA-tilemap/string-pool floor (audit basename false-positives).
+  **[refreshed 2026-07-10, D360: live `docs/bin_audit.md` now reads MISS=0 / FLOOR=1407 / UNCERTAIN=34. The 3
+  false-MISS (`frontier_chap_title_115b`, `frontier_df4_misc_lo_015`/`_016`) are now correctly FLOOR via audit
+  rules 0c/0d (MISS 3→0); the ~7 PNG asset-editability extractions (WmHightLightMap6/8, menu 016/018/035/036/001)
+  removed their raw `.bin`; `frontier_ending_cg_000_B27970` is RE-complete → resolved verbatim-`.bin` ceiling
+  (stays UNCERTAIN — JP-exclusive, no fe8u twin). `bin_audit.md` is the live miss-tracker.]**
 - **Pointer-debt COMPLETION GATE = 1** (`audit_pointers.py --true-debt --gate`) — the floor; the single residual is
   the fe8u-confirmed coincidental constant above. No real code remains stored as binary data; no function pointers missed. Both the CODE and DATA sides are confirmed at floor (genuine dereferenceable pointer debt = 0) — see decisions.md **D344**. **[CORRECTED by D345, 2026-07-03: this gate is a FALSE FLOOR for shiftability — `audit_pointers.py`/`shiftcheck` cannot see raw un-relocatable fn-pointers *inside* opaque `.incbin` proc-script/bmlib tables. #143 proved `gProcScr_TitleScreen` (27 ptrs) + `gBmlib_0` (16 ptrs) blocked the shifted title→menu path; both now typed to relocations. gba-kit A/B (D346) finds only **11 opaque `.data.residue` tables** truly block a shifted ROM (75/86 already relocate; 73 remain for typed-C decomp completeness, a separate axis).]**
 

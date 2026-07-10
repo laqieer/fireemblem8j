@@ -182,6 +182,16 @@ NAME_CLASS_RULES = [
     # frontier event-script blobs (MISS) -> EVENT_* macros in C.
     (re.compile(r"(^|/)graphics/frontier_[^/]*eventscr"),
      "MISS", "fe8u src/events/*.c (EVENT_* macros; frontier event script)"),
+    # frontier_ending_cg_000 (the sole frontier_ending_cg blob): RE is COMPLETE
+    # (re-ending-cg). It is an uncompressed (no 0x10 LZ header) JP-exclusive
+    # worldmap-style CG with 0 functional xrefs (only the nofuncmap symbol-table
+    # self-entry) and NO fe8u counterpart (fe8u ships US src/data/ending/ending_cg.c,
+    # not the JP link-arena "frontier" ending CG). No provable sub-boundaries were
+    # found, so the verbatim .bin is the ceiling -- stays UNCERTAIN (no fe8u
+    # editable twin) but is resolved, NOT deferred. Must precede the generic
+    # frontier catch-all below. (D360)
+    (re.compile(r"(^|/)graphics/frontier_ending_cg/frontier_ending_cg_000_B27970\.bin$"),
+     "UNCERTAIN", "RE-complete: uncompressed JP-exclusive worldmap-style CG, 0 xrefs (unreferenced), no fe8u counterpart, no provable sub-boundaries → verbatim .bin ceiling"),
     # frontier JP-divergent UI / font-group / ending / CG tables (UNCERTAIN): they
     # reached the name-class step precisely because NO fe8u editable twin exists
     # (JP-only multiplayer/menu/font/CG assets). The prior loose catch-all

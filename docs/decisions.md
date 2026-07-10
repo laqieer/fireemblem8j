@@ -10378,3 +10378,73 @@ Cumulative D358+D359 data-extraction wave: **residual worklist 31 → 0 regions;
 axis-3 → 100.00%, axis-6 → 0.** Tracked on project board **#14**. Single-owner serial integration held
 throughout; `main` green at every push. (Lingering `data/residual/*.map.bin.lz` are gitignored build-artifact
 orphans from the D358 maps-tsa18 move; the 2 tracked `.pal` palette residuals are typed, not in the worklist.)
+
+## D360 — asset-editability FINALE: 2 PNG-extraction merges (~7 frontier gfx sheets → editable PNG) + audit false-MISS→FLOOR corrections landed + `frontier_ending_cg_000` RE-complete ceiling; MISS stays 0, FLOOR 1404→1407, UNCERTAIN 39→34 (2026-07-10)
+
+**Context.** Two pushed PNG-extraction feature branches (each verified byte-neutral in its own worktree)
+merged **serially through the single integrator** onto `main`, one at a time, each gated by a **cold
+`make clean && make compare`** (the clean build deliberately exercises the PNG→`.4bpp`→`.lz` asset-ordering
+pipeline that an incremental build hides) + `make shiftcheck` and **CI-green before the next**. These convert
+compressed/uncompressed `frontier_df4` gfx blobs into editable PNGs (asset-editability, fe8u-parity) with
+byte-neutral results — `fireemblem8.gba: OK` held on every merge. This closes the asset-editability epic's
+PNG-extraction lane and records two already-landed audit corrections + one completed RE ceiling.
+
+**Merges (in order; `--no-ff`, each cold `make compare` OK + `make shiftcheck` 0 suspects + CI green):**
+- **`afbb12633` — extract-png-menu** (branch tip `3ad94e7f9`): 5 `frontier_df4` menu/uistuff sheets →
+  editable PNG. `frontier_df4_menu_016_A74CEC` + `_018_A92B38` are uncompressed 4bpp (`INCBIN_U8(... .4bpp)`);
+  `uistuff_035_5CDF84` + `_036_5D14D4` + `menu_001_A588C0` are partial-LZ splits — the reproducible tile sheet
+  → PNG (`png → .4bpp → .4bpp.lz` at pinned `gbagfx -mindist 2`, byte-exact), the palette/raw tail stays a
+  verbatim `INCBIN_U8` slice of the original `.bin`. Deletes 2 `.bin`, adds 5 `.png`, rewires 2 `.c` + 2
+  graphics `.mk` (`LZ_FLAGS := -mindist 2`) + `layout/data_incbin_deps.mk`. CI `29062662985` (secret-scan
+  `29062662964`).
+- **`d783ad922` — extract-png-ending** (branch tip `9c43eb91d`): `frontier_df4_ending_012_B25A78` +
+  `_013_B26374` split per the `frontier_df4_voice_001` semantic table (Img / Tsa / dims) — the
+  `Img_WmHightLightMap6` + `Img_WmHightLightMap8` LZ tile sheets → editable PNG, the
+  `Tsa_WmHightLightMap5/7/8` arrangement parts stay verbatim `.bin` (fe8u-parity floor). Base symbols kept so
+  the table's `frontier_df4_ending_01X_* + off` refs resolve unchanged. Also drops the dead orphan
+  `graphics/data/data_08576124_576150.bin` (0 xrefs). Edits 1 `.c` + `layout/data_incbin_deps.mk`. CI
+  `29063206524` (secret-scan `29063206522`).
+
+**`layout/data_incbin_deps.mk` conflict (union, as designed).** Both branches surgically edit the `.mk` for
+their **own** objects. Merge 1 (menu) auto-merged clean. Merge 2 (ending) conflicted on the one 2-line block
+where `ending.o` and `menu.o` sit adjacent — resolved by **object-union**: the `ending.o` dep line from the
+ending branch (WmHightLightMap sheets) + the `menu.o` dep line from main's earlier menu merge (`.4bpp.lz`),
+`data_08576124.o` dep line removed. Verified the resolved `.mk` differs from pre-merge `main` by **exactly**
+those two ending edits (no unrelated churn). **No `gen_data_incbin_deps.py` regen mid-merge** (a regen reads
+build-artifact `.s` files and corrupts unrelated lines in a dirty tree — the known gotcha).
+
+**Audit refresh (`python3 scripts/audit_bin_forms.py`; SAFE — classifies `.bin`, not `.s`).** The extracted
+`.bin` are gone and the 3 new `Tsa_WmHightLightMap5/7/8.bin` are FLOOR (TSA-prefix rule 0), so the live
+miss-tracker `docs/bin_audit.md` moves **FLOOR 1404 → 1407 / UNCERTAIN 39 → 34 / TOTAL 1443 → 1441**; **MISS
+stays 0** (self-tests pass). Two prior audit-correction commits are folded into this finale narrative:
+- **3 false-MISS → FLOOR corrections (MISS 3 → 0)** — `frontier_chap_title_115b_A92410` (BG-overlay string
+  TSA `gChapterTitleStrTsa_jp`, `Decompress`→`CallARM_FillTileRect`, not pixel gfx) via content-gated rule
+  **0c** (`81264c366`/`3da3f1203`, MISS 3→2); `frontier_df4_misc_lo_015`/`_016` (LZ77 u16 tile-attr maps with
+  a `.lz` sibling, 13-17% printable / iconv-CP932 fails — not SJIS string pools) via rule **0d** (`76a1e98ed`,
+  MISS →0). The genuine raw string pools (`misc_lo _004-012`, `_017`) have no `.lz` sibling and stay MISS-free
+  only because they were already extracted.
+- **`frontier_ending_cg_000_B27970` ceiling (UNCERTAIN, resolved)** — RE complete: an **uncompressed** (no
+  `0x10` LZ header) JP-exclusive worldmap-style CG, 80,484 B, **0 functional xrefs** (only the nofuncmap
+  symbol-table self-entry), **no fe8u counterpart** (fe8u ships the US `src/data/ending/ending_cg.c`, not the
+  JP link-arena "frontier" ending CG), and **no provable sub-boundaries** → the verbatim `.bin` is the
+  ceiling. Encoded as a specific `classify()` name-class rule **before** the generic frontier catch-all so the
+  regen is idempotent (the doc header says "do not edit by hand"); proof text goes `DEFERRED; needs RE` →
+  `RE-complete: … verbatim .bin ceiling`. It stays **UNCERTAIN** (not FLOOR) on purpose — FLOOR is *defined*
+  as "fe8u also keeps this binary", which is false for a JP-exclusive blob; it is a resolved-UNCERTAIN, no
+  longer deferred.
+
+**Gate discipline.** Per merge: `make clean && make compare` → `fireemblem8.gba: OK` (exactly 1 OK / 0 FAILED,
+grep-verified against a stale false-OK) + `make shiftcheck` → 0 high-confidence suspects (Layer-0/coupled-const
+/Layer-1b all PASS), then push + CI green before the next. The exclusive integrator flock was held for the
+whole wave (singleton oracle invariant).
+
+**Impact.**
+- **~7 PNG asset-editability extractions** land: `Img_WmHightLightMap6`/`8` + `frontier_df4_menu_016`/`018`/
+  `035`/`036`/`001` now editable PNG (round-trips byte-exact through `gbagfx`).
+- Live miss-tracker `docs/bin_audit.md`: **MISS=0 / FLOOR=1407 / UNCERTAIN=34** (was 0 / 1404 / 39).
+- **Axis 6 ASSET EDITABILITY unchanged at 0 opaque bytes** (`calcprogress.py`: "graphics `.bin` exempt") — the
+  PNG lane improves *editability form*, not the opaque-structured-data byte metric, which D359 already zeroed.
+- Axes 1-5 unchanged (pure asset re-form, no code/pointer movement): self-containment 100%, matching-C 99.83%,
+  named 100%, shiftability at floor.
+
+Tracked on project board **#14**. Single-owner serial integration held throughout; `main` green at every push.
