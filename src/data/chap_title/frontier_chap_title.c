@@ -354,13 +354,15 @@ u8 frontier_chap_title_114_A91F08[] = INCBIN_U8("graphics/frontier_chap_title/fr
 
 /* frontier_chap_title_115 was a single 932B raw .bin = a JP-LZ GFX+TSA pair.
    Decomposed (wave45): sheet0 (672B lz -> 1152B, 36 4bpp tiles) -> committed .png ->
-   .4bpp.lz; sheet1 (260B lz -> 1202B = 601 u16 TSA screen tilemap: all entries are
-   valid tile-attrs [tile<1024, pal 0-1, flip], 91% background fill) -> committed
+   .4bpp.lz; sheet1 (260B lz -> 1202B = 601 u16 TSA tilemap: all entries are
+   valid tile-attrs [tile<1024, pal 0-1, flip], 91% blank-tile fill) -> committed
    decompressed .bin -> .bin.lz. Both recompress byte-exact via gbagfx default. Same
    gap115 section (mirrors the _063a/_063b split); _115_A92170 keeps its external ref
-   (frontier_df4_menu). NOTE: the audit lists _115b as MISS "pixel-gfx" (path-class),
-   but it is a TSA tilemap already in editable-source form (fe8u keeps tilemaps
-   binary) -> an audit-false-MISS, no further extraction possible. */
+   (frontier_df4_menu). _115b is the chapter-title string TSA gChapterTitleStrTsa_jp
+   (@0x08A92410) that DrawChapterTitleStrEx_jp Decompress()es into
+   CallARM_FillTileRect(gBG0TilemapBuffer, ..., TILEREF(0x280, pal)) -- a BG
+   tile-arrangement, NOT pixel gfx. fe8u keeps such TSA tilemaps binary, so it is a
+   legitimate FLOOR (audit rule 0c: sparse BG-overlay TSA by content), not a MISS. */
 __attribute__((section(".data.frontier_chap_title.gap115")))
 u8 frontier_chap_title_115_A92170[] = INCBIN_U8("graphics/frontier_chap_title/frontier_chap_title_115_A92170.4bpp.lz");
 __attribute__((section(".data.frontier_chap_title.gap115")))
