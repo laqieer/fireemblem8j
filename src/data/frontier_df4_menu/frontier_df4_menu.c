@@ -6821,7 +6821,17 @@ u32 frontier_df4_menu_021c_A95DDC_13[] __attribute__((section(".data.frontier_df
 };
 u8 frontier_df4_menu_021c_A95DDC_14[] __attribute__((section(".data.frontier_df4_menu.gap21c"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin", 0x31A, 0x5F4);
 u8 frontier_df4_menu_022_A96D18[] __attribute__((section(".data.frontier_df4_menu.gap22"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18_0.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_022_A96D18_1.4bpp.lz");
-u8 frontier_df4_menu_023_A99FA8[] __attribute__((section(".data.frontier_df4_menu.gap23"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin");
+/* multi-stream container split (A99FA8, 1660 B): [0x0,0x40) = 2 verbatim palettes,
+   then 3 self-delimiting LZ77 4bpp sub-streams -> editable PNG (png->4bpp->.4bpp.lz,
+   -mindist 2 reproduces each ROM block byte-for-byte incl. %4 padding): _0 64t menu
+   text, _1 14t UI bar, _2 64t icon sheet; [0x53C,end) = 0x140 trailing raw verbatim.
+   Reassembled at the exact ROM offsets; make compare is the oracle. */
+u8 frontier_df4_menu_023_A99FA8[] __attribute__((section(".data.frontier_df4_menu.gap23"))) = INCBIN_U8(
+    "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin", 0x0, 0x40,
+    "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8_0.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8_1.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8_2.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin", 0x53C, 0x140);
 /* PNG-extracted LZ sheet (byte-exact at -mindist 2): [0:0x3DC] 61t 4bpp sheet ->
  * editable PNG; [0x3DC:0x3FC] trailing raw kept verbatim (symbol size 1020). */
 u8 frontier_df4_menu_024_A9AC28[] __attribute__((section(".data.frontier_df4_menu.gap24"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_024_A9AC28.bin", 0x3DC, 0x20);
@@ -8187,11 +8197,111 @@ u32 frontier_df4_menu_036_AB0D18[] __attribute__((section(".data.frontier_df4_me
     0x00000801,
 };
 /* multi-slice atomic relocation carve of frontier_df4_menu_037_AB7144 (embedded ProcScr @ 0x5650):
-   the graphics prefix [0,0x5650) stays .incbin; the shop/menu ProcScr's 50 func pointers + 2
-   self-ref child-ProcScr pointers (blob+0x5984) become .4byte Sym(+addend). The 11 coincidental
-   ROM-range words in the prefix are NOT pointers (mid-func / mid-data offsets) and stay raw.
-   byte-exact; make compare is the oracle. */
-u8 frontier_df4_menu_037_AB7144[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin", 0x0, 0x5650);
+   the graphics prefix [0,0x5650) is a DECORATIVE FONT container -- fully split into editable PNGs:
+   [0,0x20) 1 palette verbatim, then a 320t Latin-alphabet sheet (_00), [0xF00,0xF60) 3 palettes
+   verbatim, then 92 self-delimiting 16t class-name glyph sheets (_01.._92, e.g. Lord/Mercenary/
+   Hero/Myrmidon kanji), [0x5624,0x5650) 0x2C pre-ProcScr raw verbatim. Each LZ sub-stream is
+   png->4bpp->.4bpp.lz at -mindist 2 (reproduces the ROM block byte-for-byte incl. %4 padding).
+   The shop/menu ProcScr tail [0x5650,end) keeps its 50 func pointers + 2 self-ref child-ProcScr
+   pointers (blob+0x5984) as .4byte Sym(+addend); the 11 coincidental ROM-range words there are NOT
+   pointers (mid-func / mid-data offsets) and stay raw. byte-exact; make compare is the oracle. */
+u8 frontier_df4_menu_037_AB7144[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = INCBIN_U8(
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin", 0x0, 0x20,
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_00.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin", 0xF00, 0x60,
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_01.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_02.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_03.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_04.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_05.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_06.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_07.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_08.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_09.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_10.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_11.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_12.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_13.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_14.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_15.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_16.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_17.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_18.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_19.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_20.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_21.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_22.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_23.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_24.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_25.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_26.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_27.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_28.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_29.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_30.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_31.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_32.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_33.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_34.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_35.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_36.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_37.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_38.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_39.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_40.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_41.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_42.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_43.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_44.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_45.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_46.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_47.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_48.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_49.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_50.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_51.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_52.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_53.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_54.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_55.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_56.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_57.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_58.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_59.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_60.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_61.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_62.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_63.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_64.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_65.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_66.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_67.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_68.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_69.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_70.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_71.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_72.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_73.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_74.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_75.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_76.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_77.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_78.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_79.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_80.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_81.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_82.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_83.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_84.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_85.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_86.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_87.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_88.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_89.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_90.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_91.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144_92.4bpp.lz",
+    "graphics/frontier_df4_menu/frontier_df4_menu_037_AB7144.bin", 0x5624, 0x2C);
 u32 frontier_df4_menu_037_AB7144_1[] __attribute__((section(".data.frontier_df4_menu.gap37"))) = {
     (u32)&LockGame + 0x1,
     0x0001000E,
