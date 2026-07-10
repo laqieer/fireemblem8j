@@ -15,8 +15,12 @@ The still-asm frontier = `src/nonmatching/*.c` (each is a readable reconstructio
 whose bytes still come from `asm/`). Their decomp.me scratches are tracked in
 `scripts/tools/decompme/registry.tsv`.
 
-Run the FIVE steps in order. Do **1** first (it may find free wins); always do
-**3** and **4** after any new match — **4 is the one people skip: it means
+Run the FIVE steps in order. **Step 1 is a sequencing gate: harvest every
+registered decomp.me family before any local tweak, lever, permuter, or other
+matching attempt.** This delays local matching only until the family harvest is
+complete; a `NONE` result is not a stop condition — continue to the bounded
+local matching attempts in **4**. Do **1** first (it may find free wins); always
+do **3** and **4** after any new match — **4 is the one people skip: it means
 actually ATTEMPTING to match other functions with the learned lever, not just
 re-polling decomp.me.**
 
@@ -34,8 +38,9 @@ browser UA + `Referer` — the script sets them) and classifies each still-asm f
 - **IMPROVED** — a fork scores lower than our base (but > 0) → *candidate* to
   adopt as a better `src/nonmatching/<fn>.c` (step 2B), only if proven-equivalent.
 - **STALE** — already carved but the scratch is still open → mark solved (step 5).
-- **NONE** — no member beats base → this fn is a target for step 4 (apply a lever)
-  or the permuter.
+- **NONE** — no member beats base → after the whole family harvest confirms
+  there is no match or integrable improvement, proceed to the bounded local
+  matching in step 4 (apply a lever or the permuter); do not stop.
 
 "still-asm" = `src/nonmatching/<fn>.c` exists (authoritative — not any cache).
 
@@ -57,6 +62,15 @@ python3 scripts/tools/decompme/harvest.py --pull <matched_slug>   # -> /tmp/deco
    pre-existing `layout/baseline_syms_drop.d/*<fn>*.tsv` stays valid — no baseline
    edit (the asm object already exported the name; the src object exports the same).
 3. `make layout && make compare` → OK, then `make shiftcheck` → 0 HIGH.
+4. **Immediately after both gates pass**, update the owned registry
+   scratch/family with the score-0 solution, then remove its registry row:
+   ```sh
+   scripts/tools/decompme/mark_solved.sh <registry_slug> --from-scratch <matched_slug>
+   # after that succeeds, remove <fn>'s row from scripts/tools/decompme/registry.tsv
+   ```
+   `<matched_slug>` may be the base scratch or any score-0 fork in its family;
+   the same upstream update is mandatory in both cases. Pulling and integrating
+   locally without this decomp.me update is **not complete**.
 
 **⚠️ The symbol-mapping gotcha (WILL bite):** a score-0 scratch can match on
 decomp.me via a symbol its *context* maps to the wrong address, so integrating it
@@ -107,6 +121,9 @@ their target register; `=r`/`+m` inline-asm barriers.
 **This is NOT re-polling decomp.me. It is actively trying to byte-match OTHER
 still-asm functions using the lever just learned.**
 
+A `NONE` harvest still enters this step. If this run produced no new lever, use
+the most applicable existing cookbook lever or a bounded permuter attempt.
+
 1. **Find same-pattern candidates.** Read each `NONE` fn's `src/nonmatching/<fn>.c`
    header "BLOCKING DIFF / residual" note. Group by residual class; pick the ones
    whose class matches the lever you just learned. E.g. after a *register-pin* win
@@ -154,5 +171,8 @@ Refresh the axis-2 figures (`python3 scripts/calcprogress.py`) into
   `src/nonmatching/` (built by `make nonmatching` only).
 - Commit each match atomically; keep `make compare` OK + `make shiftcheck` 0 HIGH
   on every commit. Push (CI re-runs both with `baserom.gba` absent).
+- A pulled MATCHED base scratch or family fork is incomplete until its owned
+  registry scratch is marked solved with that score-0 solution and its registry
+  row is removed.
 - Don't grind low-ROI reg-coloring walls by hand; one or two precise lever variants,
   then hand off to permuter/community and record the residual.
