@@ -10610,3 +10610,60 @@ for the whole wave (singleton oracle invariant); `main` green at every push; fin
   graphics `.bin`, `calcprogress` exempt).
 
 Tracked on project board **#14**. Single-owner serial integration held throughout; `main` green at every push.
+
+## D363 — SHIFTABILITY hardening: de-pointer a whole hidden class of MACRO-form baked pointers (15 in 8 event/unit carves) + `audit_pointers.py` gains 2 blind-spot scanners; corrects "shiftability 0-debt" — real banim frame-pointer debt now SURFACED, not masked (2026-07-10)
+
+Generalizes the `ending_000` fix (D362) after the user's standing lesson: **never trust a
+"0-debt / floor" verdict — empirically re-derive it.** Auditing *how* the auditor could still
+be blind revealed two escape hatches, one of which hid a real, byte-neutral, fixable class.
+
+**Finding 1 — MACRO-form baked pointers (FIXED, 15 words across 8 files).** Typed event/unit
+carves (`EventScr_*_ref`, `UnitDef_*_ref` that are actually mislabeled event scripts) baked raw
+`CALL(0x08xxxxxx)` / `LOAD1|2|3(n, 0x08xxxxxx)` / `SVAL(slot, 0x08xxxxxx)` operands. These are
+invisible to BOTH existing checks: the `.bin` word auditor never sees them (typed C, no `.bin`)
+and the `.4byte`-literal scanner never sees them (an EA macro, not a literal `.4byte`). Every one
+resolves exactly to a linked data symbol (unit-def data, sibling event scripts, or
+`EventScr_SetBackground`), i.e. a real pointer. Symbolized all 15 to `SYM + off` so `ld` emits an
+`R_ARM_ABS32` (shiftable), byte-identical (`make compare` OK, `make shiftcheck` 0 HIGH). Files:
+`EventScr_Ch14b_BeginningScene_ref` (6 LOAD), `EventScr_Ch14b_EndingScene_ref` (2 SVAL),
+`EventScr_Ch16b_/Ch18b_BeginningScene_ref` (1 CALL each), `EventScr_Ch20B_2_ref` (1 SVAL),
+`UnitDef_Ch14BAlly_7_ref` (1 self-CALL), `UnitDef_Ch18BAlly_2_ref` (2 CALL + 1 LOAD),
+`UnitDef_Ch21BEnemy_1_ref` (1 CALL). Gotcha: `UnitDef_Ch14BAlly_7[]` is a 4-byte `EventListScr`
+array, so its self-reference is cast `(const u8 *)` to keep byte-offset (not element) arithmetic —
+caught immediately by a 1-byte `make compare` FAIL (element math gave base+0x70, want base+0x1C).
+
+**Finding 2 — raw-INCBIN / opaque-blob self-pointers (SURFACED as review-suspects).** The D362
+follow-up: decode every *structureless-opaque* symbol's built-ROM bytes for self-referential words
+(covers `graphics/` and any dir, not just the old `data/residual/` glob). 12 suspects. Empirically
+classified (not trusted):
+- **Embedded data / fe8u-parity floors (9, SAFE):** `gUnkData_108` (region-different opaque orphan
+  whose fe8u analog is raw `u8[]`), `ObjectType4` + `TowerOfValniObjectType` (`.4bpp.lz` compressed
+  gfx), `Img_FenrirBg_1`, `bg_Village_Clear_tiles` (tile gfx), `DirectSoundData_*` ×3 (sound
+  samples), `sBanimEkrPopupProcNames` (6 self-refs in 375 KB = 0.006% density, mixed parity,
+  scattered — coincidental). A self-ref inside an LZ stream / PCM sample / raw-u8 blob is not a
+  relocatable pointer.
+- **REAL baked frame-pointers (3, DEFERRED to the banim-typing frontier):** `AnimSprite_EfxMant­
+  Batabata6_L_7` / `_EfxBerserk2_15` / `_EfxIvald1_55` are raw `u32[]` battle-anim frame tables
+  full of coherent, aligned pointers (`0x0861F64E`, `0x0861F696` …) with flag-tagged self-pointers
+  (`0x1861F7FC` = base `0x0861F7FC` | control-bit `0x10000000`). These are genuine un-relocated
+  pointer tables — the known **D345/D346 opaque-banim-table frontier** (a separate typed-C decomp
+  axis). The hardened audit now **surfaces** them instead of silently folding them into
+  "0-debt" — the honest position: shiftability's real residual is this banim frame-pointer class,
+  not zero.
+
+**Auditor changes (`scripts/audit_pointers.py`, script-only, byte-neutral):**
+- `scan_macro_raw_ptr_debt()` — the Finding-1 scanner; its count is **added to the completion
+  gate** (now 0; it was silently missing 15). Comments / `//` / string-literals stripped first
+  (the `frontier_df3_eventscr_ch` `STT_OBJECT(0x08A602F0)` mention is in a comment).
+- `scan_opaque_selfref_suspects()` — the Finding-2 scanner; reported as **review-suspects, not
+  hard-gated** (genuine embedded-data self-refs exist, so each needs a de-pointer round-trip check).
+- `--true-debt --gate` now prints "MACRO-form raw ptr … REAL: 0" and the 12-item suspect list.
+
+Metrics: `audit_pointers.py --true-debt --gate` = **0** (macro-form debt cleared; the gate never
+counted the banim self-refs, and still doesn't — they're surfaced separately). No 4-axis number
+moves (`calcprogress` unaffected); this is a shiftability-correctness + auditor-coverage win.
+`make compare` OK, `make shiftcheck` 0 HIGH, pre-commit gate passed. Single-owner serial
+integration; `main` green (103e10856). Next frontier: type the banim frame-pointer tables so the
+`AnimSprite_*` (and their cross-ref-only siblings) relocate — the last real shiftability residual.
+
+Tracked on project board **#14**.
