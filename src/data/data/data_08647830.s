@@ -3,8 +3,11 @@
  * whose range owns the target address); non-pointer words stay literals. Byte-
  * identical to the original blob, and relocation-complete so the object stays
  * shiftcheck-clean (0 HIGH) if the pointee resources move. */
+	.include "animscr.inc"
+
 	.section .data.residue.08647830, "aw", %progbits
 	.global dat_AnimScr_08647830_ref
+	.type dat_AnimScr_08647830_ref, %object
 dat_AnimScr_08647830_ref:
 	.4byte 0x80000000
 	.4byte 0xFFF00014
@@ -83,5 +86,8 @@ dat_AnimScr_08647830_ref:
 	.4byte 0x00000000
 	.4byte AnimScr_FimbulvetrOBJ2 + 0x31
 	.4byte 0x82000000
-	.4byte 0x18647944
+	.global AnimScr_FimbulvetrOBJ2Fall_TypeB
+	.type AnimScr_FimbulvetrOBJ2Fall_TypeB, %object
+AnimScr_FimbulvetrOBJ2Fall_TypeB:
+	ANIMSCR_FORCE_SPRITE dat_AnimScr_08647830_ref + 0x114, 4
 	.4byte 0x82000000
