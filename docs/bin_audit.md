@@ -1522,20 +1522,20 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
-| `graphics/frontier_df3_ending/frontier_df3_ending_001_AC3AA8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df3_ending/frontier_df3_ending_002_AC50A4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df3_ending/frontier_df3_ending_001_AC3AA8.bin` | ApConf/opaque | RE-complete: NOT compressed (header 0x131d = TSA width/height) — raw TSA tilemap; a clean 4-way TSA split is available, DEFERRED (JP-only, no fe8u names) (D362) |
+| `graphics/frontier_df3_ending/frontier_df3_ending_002_AC50A4.bin` | ApConf/opaque | RE-complete: NOT compressed (header 0x131d = TSA width/height) — raw TSA tilemap + a non-palette data block (its 'palette' is 39% bit15-set, not a clean palette); DEFERRED (JP-only) (D362) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_000_AC059C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_003_AC718C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_006_AD02D4_1.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_007_AD0CFC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444.bin` | ApConf/opaque | RE-complete: pointer-free OAM data (shift-safe); JP-divergent, no fe8u twin, DEFERRED (D362) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_010_B1E5FC.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_ending/frontier_df4_ending_016_B3EC33.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
+| `graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD.bin` | ApConf/opaque | RE-complete: proc-script leaf (the earlier 'MapChanges' label was refuted); JP-divergent, no fe8u twin, DEFERRED (D362) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_021_A95B4E.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_023_A99FA8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
@@ -1551,7 +1551,7 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_035_5CDF84.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_ending_cg/frontier_ending_cg_000_B27970.bin` | ApConf/opaque | RE-complete: uncompressed JP-exclusive worldmap-style CG, 0 xrefs (unreferenced), no fe8u counterpart, no provable sub-boundaries → verbatim .bin ceiling |
+| `graphics/frontier_ending_cg/frontier_ending_cg_tail_B2F9F0.bin` | ApConf/opaque | RE-complete, PARTIALLY EXTRACTED: uncompressed CG — palette + 1024-tile PNG split out editable (~40%); this 47,588 B interspersed tiles+tilemap tail has no clean tile-aligned cut → genuine verbatim floor (D362) |
 | `graphics/map/data_0819EADC.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/map/data_081A00C8.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |
 | `graphics/map/data_081A6774.bin` | ApConf/opaque | no fe8u basename/type match — needs RE |

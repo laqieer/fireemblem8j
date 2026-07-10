@@ -182,16 +182,34 @@ NAME_CLASS_RULES = [
     # frontier event-script blobs (MISS) -> EVENT_* macros in C.
     (re.compile(r"(^|/)graphics/frontier_[^/]*eventscr"),
      "MISS", "fe8u src/events/*.c (EVENT_* macros; frontier event script)"),
-    # frontier_ending_cg_000 (the sole frontier_ending_cg blob): RE is COMPLETE
-    # (re-ending-cg). It is an uncompressed (no 0x10 LZ header) JP-exclusive
-    # worldmap-style CG with 0 functional xrefs (only the nofuncmap symbol-table
-    # self-entry) and NO fe8u counterpart (fe8u ships US src/data/ending/ending_cg.c,
-    # not the JP link-arena "frontier" ending CG). No provable sub-boundaries were
-    # found, so the verbatim .bin is the ceiling -- stays UNCERTAIN (no fe8u
-    # editable twin) but is resolved, NOT deferred. Must precede the generic
-    # frontier catch-all below. (D360)
-    (re.compile(r"(^|/)graphics/frontier_ending_cg/frontier_ending_cg_000_B27970\.bin$"),
-     "UNCERTAIN", "RE-complete: uncompressed JP-exclusive worldmap-style CG, 0 xrefs (unreferenced), no fe8u counterpart, no provable sub-boundaries → verbatim .bin ceiling"),
+    # frontier_ending_cg_000 (uncompressed JP-exclusive worldmap-style CG, 0 xrefs,
+    # NO fe8u counterpart). D360 called it "no provable sub-boundaries -> verbatim
+    # .bin ceiling". D362 CORRECTS that: because it is UNCOMPRESSED, any tile-aligned
+    # cut is byte-exact, so the palette [0x00:0x80] (-> .gbapal) and the 1024 clean
+    # tiles [0x80:0x8080] (-> .png), ~40%, were split OUT editable; only the
+    # interspersed tiles+tilemap tail [0x8080:end] (47,588 B, no clean tile-aligned
+    # cut) stays a verbatim .bin (renamed frontier_ending_cg_tail_B2F9F0.bin). Still
+    # UNCERTAIN (JP-exclusive, no fe8u editable twin), resolved NOT deferred. Must
+    # precede the generic frontier catch-all below. (D360; corrected D362)
+    (re.compile(r"(^|/)graphics/frontier_ending_cg/frontier_ending_cg_tail_B2F9F0\.bin$"),
+     "UNCERTAIN", "RE-complete, PARTIALLY EXTRACTED: uncompressed CG — palette + 1024-tile PNG split out editable (~40%); this 47,588 B interspersed tiles+tilemap tail has no clean tile-aligned cut → genuine verbatim floor (D362)"),
+    # frontier_df3_ending_001/002 (JP-exclusive): D362 re-derivation — these are NOT
+    # compressed (both start with 0x131d = a TSA width/height header, not a 0x10 LZ
+    # header); they are raw TSA data. 001 has a clean 4-way TSA split available but
+    # DEFERRED (JP-only, no fe8u names). 002 is a raw TSA + a non-palette data block
+    # (its "palette" is 39% bit15-set, NOT a clean palette). Off "needs RE".
+    (re.compile(r"(^|/)graphics/frontier_df3_ending/frontier_df3_ending_001_AC3AA8\.bin$"),
+     "UNCERTAIN", "RE-complete: NOT compressed (header 0x131d = TSA width/height) — raw TSA tilemap; a clean 4-way TSA split is available, DEFERRED (JP-only, no fe8u names) (D362)"),
+    (re.compile(r"(^|/)graphics/frontier_df3_ending/frontier_df3_ending_002_AC50A4\.bin$"),
+     "UNCERTAIN", "RE-complete: NOT compressed (header 0x131d = TSA width/height) — raw TSA tilemap + a non-palette data block (its 'palette' is 39% bit15-set, not a clean palette); DEFERRED (JP-only) (D362)"),
+    # frontier_df4_ending_008 (JP-exclusive): D362 — pointer-free OAM data (so it is
+    # shift-safe); no fe8u editable twin -> UNCERTAIN, but resolved, not "needs RE".
+    (re.compile(r"(^|/)graphics/frontier_df4_ending/frontier_df4_ending_008_AD1444\.bin$"),
+     "UNCERTAIN", "RE-complete: pointer-free OAM data (shift-safe); JP-divergent, no fe8u twin, DEFERRED (D362)"),
+    # frontier_df4_menu_005 (JP-exclusive): D362 — a proc-script leaf; the earlier
+    # "MapChanges" label was REFUTED. JP-divergent -> UNCERTAIN, not "needs RE".
+    (re.compile(r"(^|/)graphics/frontier_df4_menu/frontier_df4_menu_005_A5FFAD\.bin$"),
+     "UNCERTAIN", "RE-complete: proc-script leaf (the earlier 'MapChanges' label was refuted); JP-divergent, no fe8u twin, DEFERRED (D362)"),
     # frontier JP-divergent UI / font-group / ending / CG tables (UNCERTAIN): they
     # reached the name-class step precisely because NO fe8u editable twin exists
     # (JP-only multiplayer/menu/font/CG assets). The prior loose catch-all

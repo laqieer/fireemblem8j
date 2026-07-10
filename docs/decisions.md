@@ -10522,3 +10522,91 @@ whole wave (singleton oracle invariant); `main` green at every push.
 
 Tracked on project board **#14**. Single-owner serial integration held throughout; `main` green at
 every push.
+
+## D362 — record-correction wave: 2 serial merges de-mythologize prior "structural floor/ceiling" claims — `frontier_ending_cg_000` is ~40% editable (uncompressed, tile-aligned), `frontier_df4_ending_000` baked 2 self-pointers now relocated; MISS/FLOOR/UNCERTAIN unchanged 0 / 1407 / 33 (2026-07-10)
+
+**Context.** A skeptical re-derivation of two earlier "structural floor/ceiling" claims turned out **partly
+wrong**, and two feature branches (each byte-verified in its own worktree) were merged **serially through the
+single integrator** onto `main`, one at a time, each gated by a **cold `make clean && make compare`** +
+`make shiftcheck` + the no-baserom self-contained gate, **CI-green before the next**. Both are byte-neutral
+(`fireemblem8.gba: OK` held on every merge); together they correct the *record*, not the ROM.
+
+**Merges (in order; `--no-ff`, each cold `make compare` OK + `make shiftcheck` 0 suspects + CI green):**
+- **`3fdc5939a` — extract-ending-cg** (branch tip `46ef5594e`, CI `29076614725` / secret-scan `29076614721`):
+  splits the 80,484 B **UNCOMPRESSED** `frontier_ending_cg_000_B27970` into three concatenating pieces —
+  palette `[0x00:0x80]` → editable `frontier_ending_cg.gbapal` (`.pal`), 1024 clean 4bpp tiles `[0x80:0x8080]`
+  → editable `frontier_ending_cg.png` (256×256), and the interspersed tiles+tilemap tail `[0x8080:0x13a64]`
+  (**47,588 B**, no clean tile-aligned cut) kept verbatim as `frontier_ending_cg_tail_B2F9F0.bin`. The `.c`
+  `INCBIN_U8` becomes a 3-file concat; `layout/data_incbin_deps.mk` regenerated (also absorbed a pre-existing
+  stale-committed drift: `+frontier_df4_menu_asm.o`, `−frontier_df3_eventscr_ch` — harmless, `-include`d for
+  clean-build **ordering** only, a cold build rebuilds every object regardless). 128 + 32,768 + 47,588 = 80,484
+  (exact).
+- **`11b320ae5` — extract-ending-structs** (branch tip `58bc88b90`, CI `29077298388` / secret-scan
+  `29077298374`): de-pointers `frontier_df4_ending_000_AC059C` (gap0, 0x44C=1100 B). The blob is a
+  self-referential struct — a RAM pointer, two 0x220 B tables, then **two ABSOLUTE self-pointers** to those
+  tables. As a raw `INCBIN_U8` those two words were **BAKED hex** (no relocation), a shiftability hazard the
+  pointer audit could not see. Now emitted in a new `frontier_df4_ending_asm.s` as `.4byte 0x020007A0`
+  (RAM ptr, stays baked) + `.incbin[0x004,0x220]` (tableA) + `.incbin[0x224,0x220]` (tableB) +
+  `.4byte tableA` + `.4byte tableB` — the two self-pointers now **`R_ARM_ABS32` relocations**, byte-identical
+  at JP layout (values `0x08AC05A0` / `0x08AC07C0`). `carved_rom.d` gap0 row repointed **in place** to
+  `frontier_df4_ending_asm.o`; `.c` `INCBIN` replaced by a comment; `.gitignore` un-ignores the new `_asm.s`
+  (the `frontier_df4_menu_asm.s` #152 pattern).
+  - **Relocation proof** — `readelf -r src/data/frontier_df4_ending/frontier_df4_ending_asm.o`:
+    `.rel.data.frontier_df4_ending.gap0` contains **2 entries**, both **`R_ARM_ABS32`**, at offsets
+    `0x00000444` / `0x00000448` (the two trailing self-pointer words). The RAM pointer at offset 0 is correctly
+    **not** relocated. Proof the two pointers are now *relocated, not baked*.
+
+**Correcting the record (honestly).**
+- **"Structural ceiling: `ending_cg_000` is unsplittable → verbatim-`.bin` ceiling" (D360) was PARTLY WRONG.**
+  Because the CG is **uncompressed**, any tile-aligned cut is byte-exact; the palette + a 1024-tile sheet
+  (**~40%** of the blob) are now editable source. Only the interspersed **47 KB** tiles+tilemap tail (which has
+  no honest tile-aligned boundary — the pixel runs span 20,574 B and 21,258 B, neither a multiple of 32) is a
+  genuine verbatim floor. It stays **UNCERTAIN** (JP-exclusive, no fe8u editable twin), now labeled
+  *partially-extracted*, not *unsplittable*.
+- **"Shiftability 0-debt" was INCOMPLETE.** The pointer audit / `shiftcheck` only see relocatable words and
+  opaque *typed* tables; they do **not** decode the interior of a raw `INCBIN_U8(".bin")`. `ending_000` baked
+  2 absolute self-pointers in exactly such a `.bin`, so the "0 baked pointers" claim was an artifact of the
+  auditor's blind spot, not a fact. Now de-pointered (2× `R_ARM_ABS32`, proven above). **A broad sweep
+  confirmed `ending_000` was the ONLY raw-INCBIN baked-self-pointer case** in the tree.
+
+**`docs/bin_audit.md` reclassifications (regenerated via `python3 scripts/audit_bin_forms.py`; classifies
+`.bin`, changes no ROM bytes).** Both merges **re-form** `.bin` (rename / incbin-from-asm), they do not remove
+any, so the summary is **UNCHANGED: MISS=0 / FLOOR=1407 / UNCERTAIN=33 / TOTAL=1440**. Five UNCERTAIN notes were
+corrected off the generic "fe8u form unknown — DEFERRED; needs RE" catch-all, via specific `classify()` rules
+placed before the frontier catch-all:
+- `frontier_ending_cg_tail_B2F9F0.bin` — "RE-complete, PARTIALLY EXTRACTED: … ~40% split out editable; 47,588 B
+  interspersed tail → genuine verbatim floor" (replaces the D360 `…_000_B27970.bin` "no provable sub-boundaries"
+  rule, whose file no longer exists).
+- `frontier_df3_ending_001_AC3AA8.bin` — **NOT compressed** (header `0x131d` = TSA width/height, not a `0x10` LZ
+  header); raw TSA tilemap; a **clean 4-way TSA split is available**, DEFERRED (JP-only, no fe8u names).
+- `frontier_df3_ending_002_AC50A4.bin` — **NOT compressed** (`0x131d` TSA header); raw TSA + a **non-palette
+  data block** (its "palette" is **39% bit15-set**, not a clean palette); DEFERRED (JP-only).
+- `frontier_df4_ending_008_AD1444.bin` — **pointer-free OAM** data (shift-safe); JP-divergent, no fe8u twin.
+- `frontier_df4_menu_005_A5FFAD.bin` — a **proc-script leaf** (the earlier "MapChanges" label was **refuted**);
+  JP-divergent, no fe8u twin.
+
+**Follow-up hardening (deferred, filed here).** `scripts/audit_pointers.py` should ideally **decode raw-INCBIN
+`.bin` interiors** for baked absolute pointers — it currently does not, which is exactly why `ending_000`
+slipped through the shiftability audit. Until then, raw-`.bin` blobs remain an auditor blind spot; the
+`ending_000` sweep is the evidence that the blind spot was, in practice, a single case.
+
+**Gate discipline.** Baseline `make clean && make compare` → `OK` re-established on `main` before merging (so a
+red is attributable to the merge, not the local tree). Per merge: cold `make clean && make compare` →
+`fireemblem8.gba: OK` (grep-verified against a stale false-OK — the objcopy relink + `sha1sum -c` ran on a
+freshly-cleaned tree) + `make shiftcheck` → 0 high-confidence suspects + `check_selfcontained.py` **YES**
+(0 baserom incbins), then push + CI green (`ci` job) before the next. The exclusive integrator flock was held
+for the whole wave (singleton oracle invariant); `main` green at every push; finished worktrees reaped.
+
+**Impact.**
+- **1 asset-editability win** (`frontier_ending_cg`: palette + 1024-tile sheet now editable; ~40% of an
+  80 KB blob previously mislabeled "unsplittable ceiling").
+- **1 shiftability debt eliminated** (`frontier_df4_ending_000`: 2 baked self-pointers → 2 `R_ARM_ABS32`
+  relocations) and the "0-debt" claim made *honest*; the raw-INCBIN baked-pointer class swept to a confirmed
+  single case.
+- Live miss-tracker `docs/bin_audit.md` **unchanged in counts** (0 / 1407 / 33 / 1440), **5 notes corrected**.
+- Six-axis scorecard **numerically unchanged** (`calcprogress.py`): self-containment 100%, matching-C 99.83%,
+  extracted-data source-form 100%, named 100%, shiftability gate 0, asset-editability 0 opaque bytes. These are
+  *record/wording* corrections + one relocation-safety fix, not metric movement (the ending_cg tail is a
+  graphics `.bin`, `calcprogress` exempt).
+
+Tracked on project board **#14**. Single-owner serial integration held throughout; `main` green at every push.
