@@ -1197,7 +1197,7 @@ struct ProcCmd ProcScr_GlowCrossExit[] __attribute__((section(".data.frontier_df
     PROC_SLEEP(0x1), PROC_CALL((void*)((u8*)GlowCrossExit_Init + 0x1)), PROC_REPEAT((void*)((u8*)GlowCrossExit_Loop + 0x1)), PROC_CALL((void*)((u8*)gap_0008359C + 0x1)),
     PROC_CALL((void*)((u8*)MapSpellAnim_CommonEnd + 0x1)), PROC_END,
 };
-u8 frontier_df4_menu_001_A588C0[] __attribute__((section(".data.frontier_df4_menu.gap1"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin");
+u8 frontier_df4_menu_001_A588C0[] __attribute__((section(".data.frontier_df4_menu.gap1"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin", 0x0, 0x1218, "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.4bpp.lz", "graphics/frontier_df4_menu/frontier_df4_menu_001_A588C0.bin", 0x15C8, 0x4D4);
 /* frontier_df4_menu_002_A5D648: atomic relocation carve (was INCBIN); every embedded ROM
    pointer expressed as .4byte Sym(+addend), byte-exact. make compare is the oracle. */
 u32 frontier_df4_menu_002_A5D648[] __attribute__((section(".data.frontier_df4_menu.gap2"))) = {
@@ -5152,9 +5152,9 @@ u32 frontier_df4_menu_gap15_3192[] __attribute__((section(".data.frontier_df4_me
     0x00000000,
     0x00000000,
 };
-u8 frontier_df4_menu_016_A74CEC[] __attribute__((section(".data.frontier_df4_menu.gap16"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_016_A74CEC.bin");
+u8 frontier_df4_menu_016_A74CEC[] __attribute__((section(".data.frontier_df4_menu.gap16"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_016_A74CEC.4bpp");
 u8 frontier_df4_menu_017_A79E90[] __attribute__((section(".data.frontier_df4_menu.gap17"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_017_A79E90.bin");
-u8 frontier_df4_menu_018_A92B38[] __attribute__((section(".data.frontier_df4_menu.gap18"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_018_A92B38.bin");
+u8 frontier_df4_menu_018_A92B38[] __attribute__((section(".data.frontier_df4_menu.gap18"))) = INCBIN_U8("graphics/frontier_df4_menu/frontier_df4_menu_018_A92B38.4bpp");
 u32 frontier_df4_menu_019_A934EC[] __attribute__((section(".data.frontier_df4_menu.gap19"))) = {
     0x00000001,
     (u32)&data_081F5548 + 0x4,
