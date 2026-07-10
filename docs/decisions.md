@@ -10708,3 +10708,37 @@ axis-3/6 already 100%/0-opaque (these bytes always built from committed source; 
 *source-form editability* upgrade + ceiling correction, not a metric move).
 
 Tracked on project board **#14**. Single-owner serial integration; `main` green (44473f929).
+
+## D365 — editability: type 17 raw `u32[]` AnimSprite OAM tables → `struct AnimSpriteData[]` (149→166); the typing wave EMPIRICALLY settles the D363 AnimSprite question — 4 are OAM/AnimScr *hybrids* whose AnimScr tails carry REAL frame pointers (banim frontier), not "coincidental OAM" (2026-07-10)
+
+Prompted by the user's question — "are the OAM tables disasm/decomp, or still bin?" The 21
+`AnimSprite_*` still stored as raw `u32[]` hex (byte-exact C, but not the editable typed form the
+other 149 use) were the honest answer's gap. A carve-worker typed them against `include/anime.h`
+(`struct AnimSpriteData` = u32 header + affine/object union) and `scripts/decode_animspr.py`:
+
+- **17 TYPED** (`u32[]` → `struct AnimSpriteData[]`, named `.header`/`.as.object|affine` fields,
+  byte-identical, same `section(".data.residue.<addr>")`). fe8j now **166** typed AnimSprite tables.
+- **4 KEPT RAW, documented** (`EfxIvald2_57`, `EfxIvald1_55`, `EfxBerserk2_15`,
+  `EfxMantBatabata6_L_7`): they are **OAM/AnimScr hybrids** — a short AnimSpriteData OAM prefix
+  followed by an **AnimScr** tail of frame-pointer-list commands (runs of `0x086Bxxxx`/`0x0861xxxx`
+  ROM pointers + `0x82000000` terminators, `0x186B..`/`0x386B..` delay/loop cmds) whose non-zero
+  high bytes land in the OAM 12-byte `pad` field, so the symbol cannot be byte-identically typed as
+  `struct AnimSpriteData[]`. A correct raw floor beats a wrong type. The worker also re-derived that
+  2 tables the dispatch a-priori bucketed "clean (size%12==0)" (`EfxIvald1_55`/`_57`) are actually
+  hybrids — the same prior-verdict-error class this project keeps catching.
+
+**This SETTLES the D363 AnimSprite thread** (which flip-flopped: "real frame-pointers" → self-
+corrected to "pure OAM, coincidental"). The typing wave is the definitive empirical test — *can the
+bytes be re-encoded as OAM byte-identically?* For the pure-OAM tables (now 166): **yes** → they are
+OAM data, no pointer debt (D363's self-correction holds for these). For the 4 hybrids: **no** →
+their tails are AnimScr with **real frame pointers**, so the 3 that also self-reference
+(`EfxIvald1_55`, `EfxBerserk2_15`, `EfxMantBatabata6_L_7`, still shown by
+`scan_opaque_selfref_suspects`) are **NOT "coincidental OAM"** — they are genuine baked AnimScr
+pointers belonging to the known **D345/D346 banim/AnimScr typing frontier** (a deferred axis, not a
+regression). So shiftability's honest residual is that banim/AnimScr frame-pointer frontier — the
+`audit_pointers.py` completion GATE stays **0** (it never counted these; they need typed-asset
+extraction, not `.4byte`), but the self-ref suspect list correctly keeps surfacing the 3 hybrids.
+
+Gate: `make clean && make compare` → `OK`, `make shiftcheck` 0 HIGH, CI green. 19 files changed
+(the 21 symbols), no shared headers / `_ref` files touched. Single-owner serial integration; `main`
+green (a2e0b1f51). Tracked on project board **#14**.

@@ -307,11 +307,14 @@ def scan_opaque_selfref_suspects(addrs, a2n, a2s, opaque_syms, rom):
     ending_000 failure (D362): 2 baked self-pointers in a graphics/ .bin that carried no
     reloc and sat outside the data/residual glob, invisible to the word-level auditor.
 
-    Reported as REVIEW SUSPECTS, not auto-counted in the hard gate: genuine embedded-data
-    self-refs exist (compressed .4bpp.lz graphics, sound samples, AnimSprite OAM), so each
-    hit needs a de-pointer round-trip check (does symbolizing it keep `make compare` OK?).
-    A blob that carries a REAL relocated pointer array emits an R_ARM_ABS32 -> it is not
-    opaque -> excluded here. Returns [(sym, addr, size, nrefs), ...] sorted by nrefs."""
+    Reported as REVIEW SUSPECTS, not auto-counted in the hard gate: BOTH genuine embedded-data
+    self-refs (compressed .4bpp.lz graphics, sound PCM, pure-OAM AnimSpriteData) AND real baked
+    pointers (the AnimScr *tails* of OAM/AnimScr hybrid tables, e.g. AnimSprite_EfxMantBatabata6_L_7
+    -- the D345/D346 banim frontier) can appear here, so a self-ref is only a CANDIDATE: the
+    consumer's use settles it (OAM = copied to OAM buffer, never derefed; AnimScr = frame pointers
+    followed). Do a de-pointer round-trip + deref check per hit (D363/D365). A blob that carries a
+    REAL *relocated* pointer array emits an R_ARM_ABS32 -> it is not opaque -> excluded here.
+    Returns [(sym, addr, size, nrefs), ...] sorted by nrefs."""
     saddrs = sorted(addrs)
     out = []
     for ad in saddrs:
