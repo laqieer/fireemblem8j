@@ -46,7 +46,9 @@ verifies with a clean, no-baserom, parallel build.
 - **FLOOR (~1,829, keep binary — fe8u does too):** TSA `.tsa.bin` (572) + `.map.bin`, `.aif`
   PCM (439), `op_anim`/`opanim` tilemaps (116), `graphics/banim/efx*` effect bins (105),
   compressed region-diff `frontier_*` gfx. ⚠️ The audit over-flagged `frontier_*` as floor —
-  `frontier_chap_title` images + `frontier_df4_misc_lo` strings ARE misses (handled in G4/C1).
+  `frontier_chap_title` images + `frontier_df4_misc_lo` strings ARE misses (handled in G4/C1). Also
+  (D325/D361): "compressed" ≠ non-reproducible — the `frontier_df4` LZ gfx round-trip byte-exact via
+  `gbagfx -mindist 2` (no recompressor) and were extracted to editable PNG.
 - **FE6 (corrected per user):** canonical fe8u builds the payload **from the `mgfembp` git
   submodule** (StanHash/mgfembp), NOT a committed `.bin`. Local fe8u only *fell back* to a
   prebuilt blob for Docker/Alpine (commits `bbe919f4`/`0578c6b8`); from-source wiring is in
@@ -163,7 +165,10 @@ Leave non-tile-aligned / no-round-trip as documented floor. Gate per file on `ma
 ### Deferred (documented, not units this batch)
 **ApConf/gUnkData/opaque (~180)** — needs RE to find fe8u's form; record in `docs/bin_audit.md`
 as DEFERRED. **Verified FLOOR** (TSA/`.map.bin`/`.aif`/`efx*`/compressed region-diff gfx) — do
-NOT touch / fake-extract.
+NOT touch / fake-extract. ⚠️ **D325/D361 correction:** "compressed gfx" is NOT itself a floor
+criterion — the `frontier_df4` LZ blobs round-trip byte-exact via `gbagfx -mindist 2` (no
+recompressor) and are now editable PNG (103 extracted this epic). Only compressed gfx that BOTH
+fail a `gbagfx` round-trip AND have no fe8u editable twin are true floor.
 
 ---
 

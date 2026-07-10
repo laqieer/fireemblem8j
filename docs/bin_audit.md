@@ -33,9 +33,9 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | Category | Count | % of .bin |
 |---|---:|---:|
 | **MISS** | 0 | 0.0% |
-| **FLOOR** | 1407 | 97.6% |
-| **UNCERTAIN** | 34 | 2.4% |
-| **TOTAL** | 1441 | 100.0% |
+| **FLOOR** | 1407 | 97.7% |
+| **UNCERTAIN** | 33 | 2.3% |
+| **TOTAL** | 1440 | 100.0% |
 
 ## Category breakdown (epic plan's audit findings vs. this run)
 
@@ -53,7 +53,7 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
-| ApConf/opaque | UNCERTAIN | 34 | fe8u form unclear — DEFERRED, needs RE |
+| ApConf/opaque | UNCERTAIN | 33 | fe8u form unclear — DEFERRED, needs RE |
 
 ## Spot checks (hand-verified)
 
@@ -1516,9 +1516,9 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 </details>
 
-## UNCERTAIN (34) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
+## UNCERTAIN (33) — fe8u form unknown — DEFERRED, needs RE; document, don't fake.
 
-<details><summary>34 entries</summary>
+<details><summary>33 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1549,7 +1549,6 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_menu/frontier_df4_menu_038_ABCD24.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_menu/frontier_df4_menu_039_AC00A8.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_007_59140C.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
-| `graphics/frontier_df4_uistuff/frontier_df4_uistuff_034_5C6E08.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_035_5CDF84.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_df4_uistuff/frontier_df4_uistuff_036_5D14D4.bin` | ApConf/opaque | fe8u form unknown — JP-divergent UI/font/ending/CG/data table (DEFERRED; needs RE) |
 | `graphics/frontier_ending_cg/frontier_ending_cg_000_B27970.bin` | ApConf/opaque | RE-complete: uncompressed JP-exclusive worldmap-style CG, 0 xrefs (unreferenced), no fe8u counterpart, no provable sub-boundaries → verbatim .bin ceiling |

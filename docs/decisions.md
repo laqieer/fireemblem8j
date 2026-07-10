@@ -10448,3 +10448,77 @@ whole wave (singleton oracle invariant).
   named 100%, shiftability at floor.
 
 Tracked on project board **#14**. Single-owner serial integration held throughout; `main` green at every push.
+
+## D361 — asset-editability: 2 more PNG-extraction merges REOPEN blobs mis-parked as a "non-reproducible LZ floor" (padding measurement artifact — NO recompressor needed); 103 PNGs (7 sheets + 96 container sub-streams incl. 92 JP class-name kanji); MISS stays 0, UNCERTAIN 34→33, TOTAL 1441→1440 (2026-07-10)
+
+**Context.** Two more pushed PNG-extraction branches (each byte-neutral in its own worktree) merged
+**serially through the single integrator** onto `main`, one at a time, each gated by a **cold
+`make clean && make compare`** (the clean build exercises the `png → .4bpp → .4bpp.lz` asset-regen an
+incremental build hides) + `make shiftcheck`, with **CI-green before the next**. They convert
+`frontier_df4` gfx blobs a prior RE had **mis-classified as a non-reproducible LZ "floor"** into
+editable PNGs — byte-neutral (`fireemblem8.gba: OK` on both merges).
+
+**Record CORRECTION — there is NO JP-LZ "recompressor ceiling" (the D323/D324 myth, closed for these blobs).**
+D323/D324 first claimed a class of `frontier_df4` LZ blobs was gbagfx-irreducible and needed a
+research-grade bit-exact JP LZ recompressor; **D325 already dissolved that** (user's prefix-match
+insight: the round-trip "mismatch" was a **full-file `cmp` measurement artifact** — trailing padding
+the decompressor ignores, not a real byte diff). This wave confirms the **same artifact** — an
+**off-by-4-byte-padding measurement error** in the per-blob reproducibility check — had left a residual
+set of blobs still parked as FLOOR/UNCERTAIN in the audit. An empirical `gbagfx -mindist 1..N` sweep
+across the reopened candidates returned **10/10 single-stream 4bpp blobs + both multi-stream containers
+byte-exact** at the pinned `-mindist 2` (identical to fe8u's per-asset `LZ_FLAGS` pins). **No custom
+recompressor exists or is needed** — the vendored `gbagfx` reproduces every one of these JP blobs
+bit-for-bit through the normal `png → .4bpp → .4bpp.lz` pipeline.
+
+**Merges (in order; `--no-ff`, each cold `make compare` OK + `make shiftcheck` 0 suspects + CI green):**
+- **`083ce50a0` — extract-png-reopened-7sheets** (branch tip `0b9c2ccf7`): 7 blobs → PNG —
+  `frontier_df4_ending_009`/`_014`, `_menu_017`/`_024`/`_032`/`_033`, `_uistuff_034`. Mostly partial
+  splits (the reproducible tile-sheet → PNG at `gbagfx -mindist 2`; the palette/raw tail stays a
+  verbatim `INCBIN_U8` slice of the original `.bin`), except `_uistuff_034` which fully leaves the
+  `.bin` frontier. Edits 3 `.c` + 3 graphics `.mk` (`LZ_FLAGS := -mindist 2`) +
+  `layout/data_incbin_deps.mk`; **+7 `.png`, −1 `.bin`** (`uistuff_034`). CI `29070685228`.
+- **`9a57fc208` — extract-png-multistream-b26ebb217** (branch tip `bb06b8708`): the two **multi-stream
+  containers** — `frontier_df4_menu_023` (3 concatenated LZ sub-streams → 3 PNGs) + `_menu_037`
+  (**93 sub-streams**: the Latin alphabet sheet + **92 JP class-name kanji glyph** sheets → 93 PNGs).
+  Each sub-stream is an independent `-mindist 2` LZ tile-sheet; the container `.bin` stays as the
+  verbatim assembly. Edits `frontier_df4_menu.c` + `frontier_df4_menu.mk` + `layout/data_incbin_deps.mk`;
+  **+96 `.png`**. CI `29071345797` (secret-scan `29071345768`).
+
+**Merge-2 conflicts (union, as designed).** Both branches surgically edit the same three menu files for
+**different** blobs, so each resolved by **keeping BOTH sets of repoints**:
+- `src/data/frontier_df4_menu/frontier_df4_menu.c` — `_023` (branch-2 multi-stream split) + `_024`
+  (this wave's merge-1 PNG) sit adjacent; kept both, verified all six touched repoints present.
+- `graphics/frontier_df4_menu/frontier_df4_menu.mk` — union of both `LZ_FLAGS` pin blocks (8 pins:
+  001/017/024/032/033 + 023×3; the `_037` sub-streams need no extra pin).
+- `layout/data_incbin_deps.mk` — object-union of the `menu.o` dep line (ours ∪ theirs = **121 tokens**,
+  verified no token dropped) + the `_023`/`_037` sub-stream deps inserted after their `.bin` anchors;
+  kept ours `ending.o` line. **No `gen_data_incbin_deps.py` regen mid-merge** (regen reads
+  build-artifact `.s` and corrupts a dirty tree — the known gotcha).
+
+**Audit refresh (`python3 scripts/audit_bin_forms.py`; classifies `.bin`, safe on a clean tree).** Only
+`uistuff_034` fully leaves the `.bin` set (the other extractions keep a verbatim tail/container `.bin`),
+so the live miss-tracker `docs/bin_audit.md` moves **UNCERTAIN 34 → 33 / TOTAL 1441 → 1440**; **MISS
+stays 0**, **FLOOR unchanged 1407**. The 103 new PNGs are editable source added alongside — they change
+the *editability form*, not the `.bin` classification of the blobs that keep a tail.
+
+**Gate discipline.** Per merge: `make clean && make compare` → `fireemblem8.gba: OK` (grep-verified vs a
+stale false-OK) + `make shiftcheck` → 0 high-confidence suspects + `check_selfcontained.py` 100% / 0
+baserom incbins, then push + CI green before the next. The exclusive integrator flock was held for the
+whole wave (singleton oracle invariant); `main` green at every push.
+
+**Impact.**
+- **103 PNG asset-editability extractions** land (7 tile-sheets + 96 container sub-streams, incl. **92
+  JP class-name kanji glyphs** now editable PNG), all round-tripping byte-exact through `gbagfx`.
+- The **"non-reproducible JP-LZ floor / research-grade recompressor"** framing is **retired** for these
+  blobs — a padding-measurement artifact, not a real ceiling (empirical: 10/10 single-stream + 2
+  multi-stream containers byte-exact at `-mindist 2`). `docs/frontier.md` + the epic doc's
+  "Verified FLOOR" note updated to match.
+- Live miss-tracker `docs/bin_audit.md`: **MISS=0 / FLOOR=1407 / UNCERTAIN=33 / TOTAL=1440** (was
+  0 / 1407 / 34 / 1441).
+- **Axis 6 ASSET EDITABILITY unchanged at 0 opaque bytes** (`calcprogress.py`: graphics `.bin` exempt) —
+  the PNG lane improves editability form, not the opaque-byte metric. Axes 1–5 unchanged (pure asset
+  re-form, no code/pointer movement): self-containment 100%, matching-C 99.83%, named 100%, shiftability
+  at floor.
+
+Tracked on project board **#14**. Single-owner serial integration held throughout; `main` green at
+every push.
