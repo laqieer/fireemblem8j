@@ -428,6 +428,31 @@ def _is_sparse_overlay_tilemap(path):
     return _is_overlay_tsa_bytes(d)
 
 
+def _is_lz_derivative_bin(path):
+    """True if a frontier `.bin` is the DECOMPRESSED source of a committed
+    build-time LZ77 stream -- it has a `<stem>.lz` or `<path>.lz` sibling on disk
+    AND its content is a binary tile-attr map (not SJIS text). Such a `.bin` is a
+    compressed-TSA/gfx derivative that fe8u keeps in binary form -> FLOOR, NOT an
+    editable-source string-pool MISS. Fixes the frontier_df4_misc_lo false-MISS:
+    `_015`/`_016` are LZ77-compressed in ROM and decode to u16 tile-attr maps
+    (13-17%% printable, iconv CP932 fails); the genuine string pools
+    (`_004-012`, `_017`) are raw text with no `.lz` sibling -> stay MISS. The LZ
+    pixel-gfx in the same dir are `.4bpp(.lz)`, not `.bin`, so they never match.
+    Path-gated to frontier gfx dirs; fails closed."""
+    if not path.endswith(".bin") or "/graphics/frontier_df4_misc_lo/" not in "/" + path:
+        return False
+    if not (os.path.exists(path[:-4] + ".lz") or os.path.exists(path + ".lz")):
+        return False
+    try:
+        d = open(path, "rb").read()
+    except OSError:
+        return False
+    if not d:
+        return False
+    printable = sum(1 for b in d if 32 <= b < 127) / len(d)
+    return printable < 0.5      # binary tile-attr map, not an SJIS string pool
+
+
 # --------------------------------------------------------------------------- #
 # LZ77 compressed-vs-decompressed detection (Rule 3b — D337 floor-count fix).  #
 #                                                                              #
@@ -558,6 +583,18 @@ def classify(path, fe8u_idx):
                 "`assets/tsa/*.map.bin`) — sparse tile-arrangement (blank-tile "
                 "fill), not pixel gfx",
                 "TSA/.map.bin")
+    # 0d. A frontier `.bin` that is the DECOMPRESSED source of a committed LZ77
+    #     stream (has a `.lz`/`.bin.lz` sibling) and decodes to a binary tile-attr
+    #     map -> FLOOR, BEFORE any path-class MISS rule. Fixes the
+    #     frontier_df4_misc_lo false-MISS: `_015`/`_016` are LZ77-compressed TSA in
+    #     ROM (13-17% printable, iconv CP932 fails), not SJIS string pools. The
+    #     genuine string pools (`_004-012`, `_017`) are raw (no `.lz` sibling) and
+    #     stay MISS; LZ pixel-gfx here are `.4bpp(.lz)`, not `.bin`.
+    if _is_lz_derivative_bin(path):
+        return ("FLOOR",
+                "decompressed source of a committed LZ77 stream (`.lz` sibling), "
+                "binary tile-attr map — fe8u keeps compressed gfx/TSA binary",
+                _floor_label(path))
     # 1. FLOOR by suffix (fe8u keeps TSA/tilemaps binary). Label is directory-aware
     #    so the plan's efx / opanim sub-buckets stay visible even though those
     #    files happen to carry the .map.bin suffix.
@@ -973,7 +1010,13 @@ def run_self_tests(by_path):
             failures.append("expected %s for %r, got %s (e.g. %s)"
                             % (want_cat, substr, by_path[bad[0]][1], bad[0]))
 
-    expect("graphics/frontier_df4_misc_lo/", "MISS")
+    # frontier_df4_misc_lo genuine SJIS string pools -> MISS (fe8u C literals).
+    # But _015/_016 are LZ77-compressed TSA derivatives (`.lz` sibling, binary
+    # tile-attr map, not text): a former false-MISS now correctly FLOOR via
+    # rule 0d (`_is_lz_derivative_bin`). The raw string pools have no `.lz`.
+    expect("frontier_df4_misc_lo_004", "MISS")
+    expect("frontier_df4_misc_lo_015", "FLOOR")
+    expect("frontier_df4_misc_lo_016", "FLOOR")
     # frontier_chap_title PIXEL sheets are MISS (-> fe8u .png) and are all already
     # extracted to .png, so the ONE remaining chap_title `.bin` is the sparse
     # BG-overlay string TSA (`gChapterTitleStrTsa_jp`, 115b), a genuine FLOOR

@@ -32,8 +32,8 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 
 | Category | Count | % of .bin |
 |---|---:|---:|
-| **MISS** | 2 | 0.1% |
-| **FLOOR** | 1402 | 97.2% |
+| **MISS** | 0 | 0.0% |
+| **FLOOR** | 1404 | 97.3% |
 | **UNCERTAIN** | 39 | 2.7% |
 | **TOTAL** | 1443 | 100.0% |
 
@@ -45,11 +45,11 @@ whose fe8u form is known by *type* even when the basename differs (e.g.
 | pixel-gfx | MISS | 0 | fe8u graphics/**/*.png |
 | sound-m4a-tables | MISS | 0 | fe8u sound/music_player_table.s etc. |
 | voicegroup-tail | MISS | 0 | fe8u sound/voicegroups/*.s (documented ceiling) |
-| menu-strings | MISS | 2 | fe8u C literals (src/menu_def.c) |
+| menu-strings | MISS | 0 | fe8u C literals (src/menu_def.c) |
 | unitdef-residuals | MISS | 0 | fe8u src/events_udefs.c typed C |
 | map-tilemaps | MISS | 0 | fe8u graphics/map/*.S / *.png (MARTOMAP) |
 | lz-compressed-tsa | MISS | 0 | fe8u decompressed *.tsa.bin/*.map.bin source; JP ships the LZ77-compressed derivative (extractable) |
-| TSA/.map.bin | FLOOR | 1253 | fe8u keeps TSA/tilemaps binary too |
+| TSA/.map.bin | FLOOR | 1255 | fe8u keeps TSA/tilemaps binary too |
 | PCM/.aif | FLOOR | 0 | fe8u direct_sound PCM binary (floor here) |
 | opanim-tilemaps | FLOOR | 116 | fe8u op_anim/opanim tilemaps binary |
 | efx-effect-bins | FLOOR | 33 | fe8u graphics/banim/efx* binary |
@@ -66,8 +66,6 @@ genuine FLOOR — all asserted by the self-test guards below).
 
 **MISS spot checks** (fe8u ships an editable source):
 
-- `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin` → **MISS** (menu-strings) — proof: fe8u C string literals (src/menu_def.c parity) — string pools
-- `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin` → **MISS** (menu-strings) — proof: fe8u C string literals (src/menu_def.c parity) — string pools
 
 **FLOOR spot checks** (fe8u also keeps binary):
 
@@ -93,20 +91,18 @@ genuine FLOOR — all asserted by the self-test guards below).
 - **D337-correction (Rule 3b):** a JP `.bin` that is the LZ77-compressed derivative of fe8u's DECOMPRESSED binary source (`0x10` header, decoded size == twin size, full stdlib decode == twin bytes) is classified **MISS** (extractable), not FLOOR. The historical mis-floored LZ class (`gWorldmapMinimap_1`, `gUnkData_{15,67,68,70,71,72,73,80,89,92}`) has since been EXTRACTED to `graphics/**/*.tsa.bin` (issue #140) and is now fe8u-form-parity **FLOOR**; the rule remains as a fail-closed regression guard (helper-unit-tested below).
 - Raw-parity twins (JP already decompressed; no `0x10` header — e.g. the extracted `gUnkData_15`, `gMenuSoundroom_*`, `gBattleForecast_*`, `gEndingDetails_0`) are GENUINE **FLOOR** and are NOT over-reclassified (the rule fails closed on any absent / non-`0x10` / size- or byte-mismatch).
 
-## MISS (2) — fe8u builds these from editable source — fix (extract to the fe8u form).
+## MISS (0) — fe8u builds these from editable source — fix (extract to the fe8u form).
 
-<details><summary>2 entries</summary>
+<details><summary>0 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
-| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin` | menu-strings | fe8u C string literals (src/menu_def.c parity) — string pools |
 
 </details>
 
-## FLOOR (1402) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
+## FLOOR (1404) — fe8u also keeps these binary — legitimate; do NOT fake-extract.
 
-<details><summary>1402 entries</summary>
+<details><summary>1404 entries</summary>
 
 | `.bin` (fe8j) | category | fe8u-source proof |
 |---|---|---|
@@ -1081,6 +1077,8 @@ genuine FLOOR — all asserted by the self-test guards below).
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_059a_79FCB0.map.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_064c_7CF5D8.map.bin` | TSA/.map.bin | fe8u keeps .map.bin binary (TSA/tilemap) |
 | `graphics/frontier_df4_banim_b/frontier_df4_banim_b_065_7D3984.bin` | TSA/.map.bin | fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary (`assets/tsa/*.map.bin`) |
+| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_015_19E6EC.bin` | TSA/.map.bin | decompressed source of a committed LZ77 stream (`.lz` sibling), binary tile-attr map — fe8u keeps compressed gfx/TSA binary |
+| `graphics/frontier_df4_misc_lo/frontier_df4_misc_lo_016_1A4C88.bin` | TSA/.map.bin | decompressed source of a committed LZ77 stream (`.lz` sibling), binary tile-attr map — fe8u keeps compressed gfx/TSA binary |
 | `graphics/gfx_data_bg/bg_Cell_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/gfx_data_bg/bg_Fort_Sunset_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
 | `graphics/gfx_data_bg/bg_Grass_Plains_2_map.bin` | TSA/.map.bin | fe8u keeps this TSA/tilemap binary (`*.tsa.bin` / `*.map.bin`) |
