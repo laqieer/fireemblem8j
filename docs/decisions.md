@@ -9258,10 +9258,21 @@ are team-proven **agbcc register-coloring / spill walls** = **permuter-bound (no
 closes them. The sandbox **SIGTERMs long permuter runs**, so their path is **community-fork / permuter-compute**, not
 another in-session lever pass. Do not re-file them as "fixable in `src/`".
 
+> **SUPERSEDED in part by D366 (2026-07-10):** `AddAttr2dBitMap` and
+> `Augury_InitResultScreen` both yielded to clean, deterministic source levers.
+> The measured failed variants remain evidence; “no source lever closes them” and
+> “true boundary” were not proofs and must not be repeated as permanent claims.
+
 **decomp.me rule (record it).** This session **SOLVED 6 scratches @0**. A **`-mjp-promote`** match can **NEVER** reach
 decomp.me **SOLVED@0** — stock agbcc rejects the flag (it is patched in only by `scripts/build_jp_agbcc.sh`), so a
 promote-only function's terminal decomp.me state is the descriptive **CARVED-IN-REPO** scratch name, not SOLVED.
 Treat CARVED-IN-REPO as the success terminal for promote-only matches.
+
+> **SUPERSEDED by D366:** “NEVER SOLVED@0” is true only of decomp.me's **raw stock-
+> compiler score**. The platform has a supported `match_override` / “matched
+> elsewhere” state for a locally proven exact solution; family consumers must
+> interpret `score == 0 || match_override` as effective score 0. Use that state,
+> publish/link the local solution, verify the family, then retire the registry row.
 
 **Infra (folded).** `scripts/parallel/worktree_setup.sh` now provisions the **mgfembp** submodule (copies the source +
 symlinks the warm agbcc build) so gfx/data worktrees build without re-fetching the FE6-SIO payload toolchain; the
@@ -10742,3 +10753,57 @@ extraction, not `.4byte`), but the self-ref suspect list correctly keeps surfaci
 Gate: `make clean && make compare` → `OK`, `make shiftcheck` 0 HIGH, CI green. 19 files changed
 (the 21 symbols), no shared headers / `_ref` files touched. Single-owner serial integration; `main`
 green (a2e0b1f51). Tracked on project board **#14**.
+
+## D366 — combined axis-2 release candidate: AddAttr2dBitMap + Augury_InitResultScreen break two more wall claims; matching-C 99.85% (8679/8692), 13 remain; decomp.me local-oracle closure uses effective score 0 (2026-07-10)
+
+**Scope/status.** Branch `release/axis2-8001570-80a390c` was created from current
+`origin/main` (`f06ab3dec`) and carries the two existing match commits as separate
+cherry-picks (no amend/squash): `519ba430…` (`sub_8001570` →
+`AddAttr2dBitMap`) and `98af68d0…` (`sub_80A390C` →
+`Augury_InitResultScreen`). This is a **release candidate only**; integrator/main CI
+remains the publication gate.
+
+**Win 1 — AddAttr2dBitMap (`sub_8001570`, 224 B).** Under `-mjp-promote`,
+declaration order had reduced the residual to the two independent callee-save copies
+`mov ip,r6` / `mov r8,r2` in the wrong order. The successful lever is a
+zero-instruction `do { } while (0);` basic-block separator between
+`_width = width;` and `_height = height;`. It emits no instruction and changes no
+value, but steers agbcc's local-allocation/basic-block decision so the saves appear
+in JP order. Therefore every prior “irreducible/permanent/source-invariant save-order
+ceiling” statement for this function is **retracted**. The long permuter plateau proved
+only that its mutation vocabulary did not include this block separator.
+
+**Win 2 — Augury_InitResultScreen (`sub_80A390C`, 612 B).** Reading
+`GetOverallRank` arguments from the just-stored destination
+`proc->rowCounts[0..4]`, rather than re-reading the source bitfields, keeps the
+destination-field addresses live and makes agbcc hoist/reuse them in JP's high-register
+pattern. The remaining layout gap closed by expressing the duplicate-arm condition as
+the equivalent `index == 0`, reproducing JP branch polarity and downstream branch/pool
+offsets. No register pins or inline asm were needed.
+
+**decomp.me lifecycle correction.** Harvest-first checks confirmed owned base families
+`ABitG` and `xYHce` had no raw score-0 member before these local wins. After the local
+ROM oracle and shiftcheck passed, each owned scratch was updated with the local solution
+and decomp.me's supported `match_override` (“matched elsewhere”) state. The API keeps
+the stock-compiler raw scores (`6816` / `7542`) read-only, but both families expose
+**effective score 0** by the platform rule `score == 0 || match_override`. This
+supersedes D341's “promote-only can NEVER be solved upstream” wording: it cannot get
+raw stock-compiler zero, but it can and must be closed as an externally matched family.
+Only after both family checks succeeded were the exact `ABitG` / `xYHce` registry rows
+removed.
+
+**Measured result.** `python3 scripts/calcprogress.py` reports matching-C
+**99.85% (8679/8692)** = 8552 functions compiled from `src/*.c` + 127 from
+libc/libgcc, with **13 still descriptive asm**. `find src/nonmatching -maxdepth 1
+-name '*.c'` also returns **13**; source-form data and build self-containment remain
+100%, named symbols remain 100% (12721/12721).
+
+**Release-candidate gates (all green):**
+- `make layout && make compare` → `fireemblem8.gba: OK`
+- `make shiftcheck` → no high-confidence shiftable-region suspects
+- `make check-nonmatching` → all 13 staged C files have `asm/<fn>.s` byte sources
+- `make clean && make compare` → `fireemblem8.gba: OK`
+
+**Rule going forward.** A plateau is evidence about the attempted lever set, not proof
+of permanence. Record exact residuals and failed variants, then keep wall labels
+provisional unless positive instruction/compiler evidence proves C cannot emit the target.

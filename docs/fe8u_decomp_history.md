@@ -112,7 +112,7 @@ FE8J should mirror it.
 - **2026 — declared code-complete.** Remaining work is *data extraction and full
   shiftability* (resolving every pointer so `baserom.gba` leaves the build graph) —
   the frontier FE8J faced at the time of writing; FE8J has since reached 100%
-  extracted-data and 99.82% matching-C. (For the current FE8J frontier, see
+  extracted-data and 99.85% matching-C. (For the current FE8J frontier, see
   `docs/frontier.md`.)
 
 ---

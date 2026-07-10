@@ -254,7 +254,7 @@ as the asm-differ target (survey §4.3) so a literal-pool-only delta is visibly
 | 3 | **`tst rX,rX` vs `cmp rX,#0`** | A single compare-against-zero instruction differs | §3: NO flag fix available (stock agbcc rejects `-ftst`). Try a source restructure; else treat as a scheduler artifact (row 6). |
 | 4 | **`bl` to a local `_08…`/`.L` label** | A `bl` where you expected a branch | §4: it's a widened long branch, **not** a near-miss. Verify the target is in-function and move on — do not restructure. |
 | 5 | **`lsr` where ROM has `asr` (or vice-versa) on an s16** | `lsl;lsr` vs `lsl;asr` at an s16 narrowing | §5a: widen the s16 to `int` before first use; add an explicit `(s16)` cast; for params, change the prototype to `s16`. If store-only, decompile the JP's real (signed) logic. |
-| 6 | **Only instruction ORDERING differs, no source change flips it** | Same instructions, permuted order (arg-load order, batched vs inline) | §5b: scheduler artifact. Hand-permute the C structure deterministically; if that fails, it's a real permuter target — park as `src/nonmatching/`, permute out-of-sandbox. |
+| 6 | **Only instruction ORDERING differs** | Same instructions, permuted order (arg-load order, save order, batched vs inline) | §5b + cookbook P9/P12: first try a zero-instruction `do { } while (0);` basic-block separator, destination-field readback, and equivalent branch polarity. These can change allocation/block order without changing behavior or emitting helper code (`AddAttr2dBitMap`, `Augury_InitResultScreen`). Only then park it as a permuter target. |
 
 **After any candidate fix:** rebuild and run `make compare` (incremental, ~0.3 s
 — D7). `OK` graduates the function: move the C up to `src/<owner>.c`, delete
@@ -290,6 +290,21 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
    `layout/baseline_syms_drop.d/*<fn>*.tsv` (already dropped because the asm object exported
    the name) stays valid for the src object — no baseline edit. `make layout && make compare`
    → OK, then `make shiftcheck` → 0 HIGH.
+4. **Close the owned registry family before deleting its row.**
+   - If a decomp.me family member has raw `score == 0`, use
+     `scripts/tools/decompme/mark_solved.sh <owned-base> --from-scratch <matched-member>`.
+   - If the byte-exact source is a **local oracle match** that decomp.me's stock compiler or
+     isolated context cannot reproduce (notably the project-local `-mjp-promote` flag), publish
+     the local solution text/link on the owned scratch and set decomp.me's supported
+     `match_override=true` (“matched elsewhere”) field. Do **not** forge the read-only raw score;
+     verify the family exposes an effective match with
+     `member.score == 0 || member.match_override`.
+   - Only after that upstream check succeeds, remove the exact row from
+     `scripts/tools/decompme/registry.tsv`.
+
+   `ABitG` (`AddAttr2dBitMap`) and `xYHce` (`Augury_InitResultScreen`) are the
+   2026-07-10 worked examples: local `make compare`/`make shiftcheck` passed first,
+   then both owned families exposed effective score 0, then the registry rows were retired.
 
 ### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol
 

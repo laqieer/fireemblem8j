@@ -1,6 +1,14 @@
-# Axis #2 (matching-C) — 31 still-asm functions, ranked recipe queue (D307/W3)
+# Axis #2 (matching-C) — 13 still-asm functions, ranked recipe queue (D307/W3)
 
-> **[UPDATE 2026-07-07 — axis-2 is now 15 still-asm (matching-C 99.83%, 8677/8692).]**
+> **[UPDATE 2026-07-10 — axis-2 is now 13 still-asm (matching-C 99.85%, 8679/8692).]**
+> `AddAttr2dBitMap (sub_8001570)` and `Augury_InitResultScreen (sub_80A390C)`
+> MATCHED byte-exact locally and are release candidates (D366). The former uses a
+> zero-instruction `do { } while (0);` BB separator; the latter uses destination-field
+> readback + equivalent branch polarity. Owned decomp.me families `ABitG` / `xYHce`
+> expose effective score 0 via supported `match_override`, and their registry rows were
+> removed only after upstream verification.
+>
+> **[UPDATE 2026-07-07 — axis-2 was 15 still-asm (matching-C 99.83%, 8677/8692).]**
 > `PrepareBattleGraphicsMaybe (sub_8057F80)` MATCHED byte-exact via community decomp.me fork
 > **rtMN6** (TsilaAllaoui) and banked — see `docs/agbcc_codegen_levers.md` fork table (row 9) +
 > the "pull & integrate / symbol-mapping gotcha" section in `docs/agbcc-matching-playbook.md §7`.
@@ -11,8 +19,8 @@
 > remaining fork scores (lower = closer): **sub_80A6E4C 300** (fork XOT5k — a `_call_via_rN`
 > veneer-register wall per its `src/nonmatching` header), sub_80C05C8 1410, sub_80A2E64 1945,
 > sub_80A6F1C 2665, sub_80A6D34 3290, sub_80A3528 4070, sub_800E1FC 5281, sub_807C8DC 5841,
-> sub_800A594 7613, sub_807D3BC 8821, sub_80A3300 10700, sub_8001570 11200, sub_800FAD0 11920,
-> sub_800A34C 12152, sub_80A390C 27300. Next free win = re-poll this queue (a new community fork
+> sub_800A594 7613, sub_807D3BC 8821, sub_80A3300 10700, sub_800FAD0 11920,
+> sub_800A34C 12152. Next free win = re-poll this queue (a new community fork
 > appearing at score 0 is a zero-effort integrate); creating a new match is the compute/permuter
 > path (`register asm("rN")` pins + §5a widen recipe), low-ROI per `docs/unmatched_functions_report.md`.
 >
@@ -60,9 +68,10 @@ Tractability order (full per-recipe detail in the D307/W3 triage report):
 
 ## DEFERRED (plateaued reg-alloc walls / large reconstructs, lowest priority)
 - Event18_ColorFade, RegisterTsaWithOffset, GmapScreen2_Loop, PutFaceOnBackGround,
-  AdjustNewUnitPosition, AddAttr2dBitMap, sub_800A34C (spline 534/584), PrepareBattleGraphicsMaybe
-  (2936B +266B JP), the augury cluster (sub_80A2E64/3528/390C/3300/6D34/6E4C/6F1C/730C/800A594).
-  — [SUPERSEDED 2026-07-03: the augury `730C` (sub_80A730C) has since MATCHED byte-exact in-repo, banked.]
+  AdjustNewUnitPosition, sub_800A34C (spline 534/584), and the remaining augury cluster
+  (sub_80A2E64/3528/3300/6D34/6E4C/6F1C/800A594).
+  — [`AddAttr2dBitMap`, `PrepareBattleGraphicsMaybe`, `sub_80A390C`, and `sub_80A730C`
+  have matched and are no longer queue entries.]
 
 WIRING: carved fns drop their baseline alias from layout/baseline_syms.d/ (else multiple-def);
 add NEEDS_ALIAS data entries (gClassReelNameTable etc.); fix cfbind garbage StartGmapAutoMu_Type1

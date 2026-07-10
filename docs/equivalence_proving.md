@@ -22,6 +22,12 @@ stays `make compare` (SHA-1). Equivalence proving is a **new upper tier of the
 existing NON_MATCHING C ladder** (`docs/nonmatching.md`), not a change to the
 oracle.
 
+> **Cohort status (2026-07-10):** this document records the original
+> 16-function proof cohort. Three members have since graduated to byte-matching C:
+> `PrepareBattleGraphicsMaybe`, `AddAttr2dBitMap`, and
+> `Augury_InitResultScreen`. The live `src/nonmatching/` frontier is now **13**;
+> the 16-based proof ratios below remain historical results for that fixed cohort.
+
 ## The exact proposition posed to Z3 (the proof obligation)
 
 For a function under test, let **T** = the JP ROM's ARM/THUMB bytes (the
@@ -150,8 +156,8 @@ equivalence **under this model**, not unconditionally "for all inputs".
 
 ## Applying it to the real FE8J non-matching functions (`prove_nonmatching.py`)
 
-The 16 functions in `src/nonmatching/sub_*.c` are the project's genuinely
-*unmatched* code: readable C reconstructions whose byte source is `asm/sub_*.s`
+The original 16 functions in `src/nonmatching/sub_*.c` were the project's
+then-current *unmatched* code: readable C reconstructions whose byte source was `asm/sub_*.s`
 (region-different — a whole-function agbcc register-coloring/spill wall), built
 only by `make nonmatching`, never in the oracle. This is exactly Discussion
 #149's target: prove each reconstruction equivalent to the JP ROM function.
@@ -174,10 +180,10 @@ function; the highest loop-unroll depth that proves is reported):
 
 | function | status | note |
 |---|---|---|
-| `sub_8001570` (AddAttr2dBitMap) | **PROVEN-BOUNDED(3)** | only byte diff = two independent `mov`s in opposite order |
+| `sub_8001570` (AddAttr2dBitMap) | **PROVEN-BOUNDED(3); MATCHED 2026-07-10** | zero-instruction BB separator closed the two-`mov` order |
 | `sub_80A3300` | **PROVEN-BOUNDED(3)** | 2 calls (`PutSpriteExt`), 2 loops |
 | `sub_80A3528` | **PROVEN-BOUNDED(3)** | 48 calls |
-| `sub_80A390C` | **PROVEN-BOUNDED(3)** | 20 calls; proven once `Decompress`'s args are shown to be {r0,r1} |
+| `sub_80A390C` | **PROVEN-BOUNDED(3); MATCHED 2026-07-10** | destination readback + branch polarity closed the codegen gap |
 | `sub_80A6D34` | **PROVEN-BOUNDED(3)** | link-arena header codec |
 | `sub_80A6E4C` | **PROVEN-BOUNDED(3)** | link-arena encode mirror |
 | `sub_800E1FC` | **PROVEN-BOUNDED(3)** | proven once `EventStartFade` is shown (interprocedurally) to consume 0 args |
@@ -347,7 +353,7 @@ bounded-proven or stronger; 1 (`sub_8057F80`) remains at the dynamic tier.**
 
 | tier | how | which of the 16 |
 | --- | --- | --- |
-| byte-matching | in `make compare` (SHA-1) | — (these are the non-matching set by definition) |
+| byte-matching | in `make compare` (SHA-1) | `sub_8057F80`, `sub_8001570`, and `sub_80A390C` have since graduated; 13 remain |
 | **unbounded-proven** (cut-point / loop-invariant) | CBMC loop contracts, ∀-iterations | `sub_80A6F1C` (de-obf loop, full u16 domain) — first at this tier |
 | **bounded-proven** (BMC) | `PROVEN-BOUNDED(N)` (ARM-vs-ARM, compiler-free) + `PROVEN-BOUNDED-CBMC-CVC` (CBMC C-vs-C, trusts m2c+agbcc) | **14**: 12 ARM-vs-ARM + `sub_800A34C` + `sub_800FAD0` (CBMC C-vs-C); (`sub_80A6F1C` also has a bounded proof but sits above at unbounded) |
 | differential / dynamic | mGBA live-state | `sub_8057F80` (115/115 writes+ret; a *sound* bounded CBMC proof is a solver-sink — full write-set observable + 204-call anti-masking blows up, narrower closes are degenerate; documented in `focused/sub_8057F80/README.md`) |

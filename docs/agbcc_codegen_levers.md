@@ -181,7 +181,7 @@ show a ~2-instr delta since stock decomp.me agbcc lacks the fork flag):
 
 ## 11. decomp.me scratches — round 2 (the next-tier reg-coloring NEARs)
 8 more posted (14 total). Note: decomp.me's STOCK agbcc rejects -mjp-promote (the repo's fork flag), so the
-7 -mjp-promote ones are reference-only there (target+near-match C, ~1-3 instr residual documented in each desc);
+7 -mjp-promote ones cannot produce the same raw compiler score there (target+near-match C, ~1-3 instr residual documented in each desc);
 only sub_80BCD74 (PERMUTER_FLAGS=none) compiles + diffs live (1855/11300, a genuine community-iterable near).
   AddAttr2dBitMap https://decomp.me/scratch/az2Co   sub_80A3300 https://decomp.me/scratch/UbRNK
   sub_80A6E4C https://decomp.me/scratch/fFDjv        sub_80A730C https://decomp.me/scratch/34H33
@@ -190,10 +190,12 @@ only sub_80BCD74 (PERMUTER_FLAGS=none) compiles + diffs live (1855/11300, a genu
 > [SUPERSEDED 2026-07-03: sub_80A730C (DrawArenaRosterNames) and sub_80A73D4 (ArenaScoreboard_DrawRecord)
 > in this list have since MATCHED byte-exact in-repo (banked, removed from `src/nonmatching/`); their
 > scratches are reference-only now.]
-LIMITATION for community help: decomp.me stock agbcc has no -mjp-promote; to let outsiders match the
--mjp-promote functions, the fork flag would need upstreaming to decomp.me's agbcc, OR re-derive those functions
-without needing -mjp-promote (harder). The genuine reg-coloring floor (~38 fns) is being ground by the local
-permuter fleet (16-fn) + these scratches; remaining path = compute-time + community, deterministic levers done.
+LIMITATION for community iteration: decomp.me stock agbcc has no -mjp-promote; to reproduce the
+same raw score there, the fork flag would need upstreaming OR the function must be re-derived without it.
+**Closure is still supported:** after the local source passes `make compare`, publish/link that source on the
+owned scratch and set decomp.me's official `match_override` (“matched elsewhere”) field. The family then exposes
+an effective score 0 without pretending the stock compiler produced raw score 0. `ABitG` is the worked example
+(2026-07-10); see `docs/agbcc-matching-playbook.md §7`.
 
 ### decomp.me scratches posted 2026-06-26 (this session's reconstructed/permuter-base NEARs; checked: NO community-fork match yet)
   Event0F_CounterOps   https://decomp.me/scratch/aNjcw   (decomp.me score 620)
@@ -205,7 +207,7 @@ permuter fleet (16-fn) + these scratches; remaining path = compute-time + commun
   `GET decomp.me/api/scratch/<slug>/family` for a score-0 fork (a community match) and integrate it
   instead of re-deriving. As of this posting, all 19 FE8J scratches' families have NO score-0 member.
 
-## 12. decomp.me match patterns — from TsilaAllaoui's 8 fork matches (D292)
+## 12. Match patterns — community forks plus local oracle wins (D292/D366)
 
 Nine FE8J reg-coloring NEARs (8 by TsilaAllaoui + sub_8057F80) (all labelled "agbcc reg-coloring NEAR") were driven to
 **score 0** on decomp.me forks by community matcher **TsilaAllaoui**, then integrated to
@@ -216,9 +218,10 @@ primary evidence) against its matched fork yields a reusable lever set. These ex
 §1–§9 with a new, more surgical family: **inline-asm constraint scripting** — directly
 commanding agbcc's register allocator / instruction selector without changing behaviour.
 They crack exactly the spill-decision + high-pressure reg-coloring NEARs §7 said flag
-sweeps could not.
+sweeps could not. Two later local-oracle matches add clean source-only levers:
+`AddAttr2dBitMap` (P9) and `Augury_InitResultScreen` (P12).
 
-The 9 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
+The 11 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
 
 | fork (fn) | pins | `=r`/`0` reg-barrier | `+m` mem-barrier | inline-asm | headline lever |
 |---|---|---|---|---|---|
@@ -231,6 +234,8 @@ The 9 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scrip
 | 39OxE `RegisterTsaWithOffset` | 6  | 0 | 0 | 6  | P4 high-reg (r8) + **P6** shifted-domain loop |
 | Qua5T `sub_80CAEF4`           | 34 | 6 | 2 | 34 | **P2** mem-barrier + P1/P4 swarm + goto |
 | rtMN6 `PrepareBattleGraphicsMaybe` (sub_8057F80, 2936 B) | 2 | 0 | 0 | 0 | **P4** pins (`char_cnt`→r6, `banim_pos`→r4) + **§5a** s16→int widen (+`(s16)` casts) + inline the ally-position helper + decl-order. **Cracked a verdict recorded as "genuinely region-different, byte-match out of scope"** — see the LESSON below. |
+| local `AddAttr2dBitMap` (sub_8001570, 224 B) | 0 | 0 | 0 | 0 | **P9** zero-instruction `do { } while (0);` BB separator flips callee-save copy order |
+| local `Augury_InitResultScreen` (sub_80A390C, 612 B) | 0 | 0 | 0 | 0 | **P12** destination-field readback + equivalent branch polarity |
 
 **LESSON from rtMN6 (`sub_8057F80`, 2026-07-07): "region-different" ≠ unmatchable — measure it.**
 The function was parked as "genuinely region-different (2936 vs US 3250 B), byte match out of
@@ -335,15 +340,22 @@ asm("add %0,%1,#0"  : "=r"(out)      : "r"(d));               /* cTKJG/mbcFD: mo
 *mbcFD, cTKJG, 9rbYd.*
 
 **P9 — block-structure wrappers (`do{...}while(0)`, dead assigns).** Empty or trivial
-blocks create basic-block boundaries that steer cross-jumping / branch polarity — e.g. to
-stop agbcc merging duplicate sentinel `return`s, or to fix which side of a compare falls
-through:
+blocks create basic-block boundaries that steer cross-jumping, branch polarity, and
+local-allocation scheduling — even when the wrapper emits **zero instructions**. Use them
+to stop agbcc merging duplicate sentinel `return`s, fix which side of a compare falls
+through, or separate two independent save/copy decisions:
 ```c
 if (iframe == -1) { do { return -1; } while (0); }   /* separate BB: no cross-jump merge */
 ... do {} while (0); ...                             /* scheduling/branch fence */
 new_var2 = &v; d = d*v; new_var = new_var2;           /* dead copies = live-range boundary */
+
+_width = width;
+do {} while (0);                                     /* emits nothing */
+_height = height;                                    /* flips save order to JP */
 ```
-*9rbYd, mbcFD.*
+The last form is the `AddAttr2dBitMap` (`sub_8001570`) win: it flips agbcc's
+`mov ip,r6` / `mov r8,r2` callee-save copy order without changing runtime behavior
+or adding code. *9rbYd, mbcFD, AddAttr2dBitMap.*
 
 **P10 — `&x` addressable-forcing (force a local to the stack).** Taking a local's address
 forces agbcc to give it a stack home instead of a register — a portable alternative to P2
@@ -366,6 +378,24 @@ if (gBmMapTerrain[(s8)pos->y][new_var]) AiGetClosest(unit, new_var, (s8)pos->y, 
 74→27 bytes and fixed the `.text` length; the last 27 B were an irreducible register-cycle
 (see the field note below). Use this whenever a NEAR's size differs by exactly the width of a
 repeated cast/sub-expression that is both indexed and passed.*
+
+**P12 — destination-field readback + equivalent branch polarity.** If a value is
+stored into a destination struct and then immediately consumed again, reading the
+**destination field** instead of the original source expression can deliberately keep
+`&dst->field` live across the intervening stores. That changes address materialization
+and register pressure while preserving values:
+```c
+dst->rank[0] = src.tacticsRank;
+...
+overall = GetOverallRank(dst->rank[0], dst->rank[1], dst->rank[2],
+                         dst->rank[3], dst->rank[4]); /* not src.* again */
+```
+On `Augury_InitResultScreen` (`sub_80A390C`) this made agbcc hoist and reuse the
+`proc->rowCounts[1..4]` addresses in the same high registers as JP. The final residual
+was an **equivalent branch-polarity** choice: both arms cleared `portraitId`, but writing
+`if (index == 0)` rather than `if (index != 0)` reproduced JP's `beq`/`bne` block order
+and downstream branch/pool offsets. Use destination readback when JP reuses field
+addresses; use polarity only when the two formulations are demonstrably equivalent.
 
 ### How to run this on a NEAR (escalation order)
 1. **Confirm it's a coloring/spill NEAR** (same instruction *count/opcodes*, regs or spill
@@ -398,15 +428,23 @@ permuter/permute.sh bg … --stop-on-zero`):
   The permuter plateaued there ~50 k iters; §9 decl-order/int-widen are no-ops or regress;
   P4 pins and P1 barriers **regress** (agbcc materialises `register asm("rN")` locals with
   shuffle `mov`s rather than allocating there). Left as asm (strong NEAR).
-- **sub_8001570 `AddAttr2dBitMap`** (224 B, fe8u `hardware.c` verbatim, clean leaf): the
-  **closest** — `-mjp-promote` gave 8 B; swapping the inner-loop declaration order
+- **sub_8001570 `AddAttr2dBitMap`** (224 B, fe8u `hardware.c` verbatim, clean leaf):
+  `-mjp-promote` gave 8 B; swapping the inner-loop declaration order
   `u16 *dst2 = dst;` **before** `const u16 *src = _src + _ix;` matched the loop-setup schedule
-  → **8→2 B**. The last **2 B are an irreducible prologue mov-pair emission order**
+  → **8→2 B**. The last **2 B looked like an irreducible prologue mov-pair emission order**
   (`mov ip,r6` [width→_width] vs `mov r8,r2` [height→_height]) — a scheduler tie-break that
   resisted ~20 source forms (save/decl/compute/multiply order, chained/indirect assigns,
   dependency tricks), P1/scheduling barriers, 8 `-fno-*`/`-O1` flags (agbcc has **no**
-  `-fno-schedule-insns`), and the permuter (130 k iters, plateaued at 2 B). Left as asm — a
-  clean 2-byte NEAR not worth an asm hack.
+  `-fno-schedule-insns`), and the permuter (130 k iters, plateaued at 2 B).
+  **MATCHED 2026-07-10:** P9's zero-instruction `do { } while (0);` separator between
+  `_width = width;` and `_height = height;` flips that exact save order. This retracts
+  the “irreducible/permanent” label: a permuter plateau proves only that its mutation
+  vocabulary missed the relevant basic-block boundary.
+- **sub_80A390C `Augury_InitResultScreen`** (612 B, JP-only reconstruction):
+  **MATCHED 2026-07-10** with P12. Read `GetOverallRank` arguments back from the
+  just-stored `proc->rowCounts[]` destination so their addresses remain live and are
+  hoisted/reused like JP; then invert the equivalent duplicate-arm test to `index == 0`
+  to match branch polarity and block layout. No register pins or inline asm.
 - **sub_800E1FC `Event18_ColorFade`** (204 B, fe8u `eventscr.c` verbatim): 204/204
   mnemonic-identical, ~95 B pure register permutation; permuter plateaued ~965. Left as asm.
 - **sub_80D1844 `LoadClassNameInClassReelFont`** (140 B): needs moving-pointer + separate
@@ -415,9 +453,10 @@ permuter/permute.sh bg … --stop-on-zero`):
   Best clean form 25/140. Left as asm (permuter target). — [SUPERSEDED 2026-07-03: MATCHED
   byte-exact in-repo (banked), removed from `src/nonmatching/`.]
 
-**Lesson:** the productive levers on this floor were **source-shape** — **P11** (permuter-found)
-on sub_807C8DC and **declaration-order scheduling** (§9) on sub_8001570 each cleared most of the
-residual. What remains is the true floor: **pure register cycles** (no nameable temp to re-seat)
-and **prologue/epilogue mov-pair emission order** — agbcc scheduler tie-breaks that don't
-respond to source, and hard **P4/P1 register pins regress** rather than help. These are best
-left NEAR (or handed to a long permuter run) rather than force-matched with asm constraints.
+**Lesson:** source-shape remains the highest-value layer: P11 temp reuse, declaration order,
+P9 zero-instruction basic-block separation, and P12 destination readback/polarity can all
+change allocation or scheduling without emitting helper code. Do not promote a long plateau
+to a permanent compiler ceiling: record exactly which lever vocabulary was exhausted, then
+keep the classification provisional. Pure register cycles may still remain permuter-bound,
+and hard P4/P1 pins can regress, but `AddAttr2dBitMap` proves that mov-pair order itself is
+source-steerable through basic-block structure.

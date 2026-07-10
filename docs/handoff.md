@@ -3,6 +3,19 @@
 **Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
+> **[REFRESH 2026-07-10 — combined axis-2 release candidate; not main.]**
+> Ground truth from `python3 scripts/calcprogress.py`: self-containment **100%**,
+> matching-C **99.85% (8679/8692, 13 still-asm)**, source-form data **100%**
+> (strict C/PNG subset 79.91%), named **100% (12721/12721)**.
+> `AddAttr2dBitMap` (`sub_8001570`) and `Augury_InitResultScreen` (`sub_80A390C`)
+> are byte-exact candidates. Their reusable levers are respectively (1) a
+> zero-instruction `do { } while (0);` BB separator that flips callee-save copy
+> order, and (2) destination-field readback plus equivalent branch polarity.
+> This **retracts the prior AddAttr “permanent/irreducible save-order ceiling”**
+> wording. decomp.me families `ABitG` / `xYHce` were closed upstream with the
+> supported matched-elsewhere override (effective score 0) before registry-row
+> deletion. Integrator/main CI remains the final publication gate; see D366.
+
 > **[REFRESH 2026-07-04 — live roadmap now tracked as GitHub issues; SSoT for numbers = `calcprogress.py`.]**
 > **HEAD `474a72c6f`, main GREEN** (`make compare` OK + `make shiftcheck` 0 HIGH). This session's work is
 > banked; the remaining frontier is now tracked as durable GitHub issues (read these first next session):
@@ -30,7 +43,7 @@
 >
 > See **D345/D346** (false-floor + the 11-blocker family) and **D347** (this session's roadmap + CI decision).
 
-> **[REFRESH 2026-07-03 — axis snapshot superseded; SSoT = [`frontier.md`](frontier.md).]** Current
+> **[SUPERSEDED 2026-07-03 axis snapshot; SSoT = [`frontier.md`](frontier.md).]** Then-current
 > ground-truth (calcprogress): self-containment **100%**, matching-C **99.82% (8676/8692, 16 still-asm)**,
 > source-form data **99.31%** (strict C/PNG subset 79.91%), named **95.53%**. Since this 2026-06-24
 > handoff, **6 of the NEAR/wall fns named below MATCHED byte-exact in-repo (banked, removed from
@@ -43,7 +56,7 @@
 - BUILD SELF-CONTAINMENT **100%** · **MATCHING-C 98.15% (8370/8528, ~158 left)** 🎉 crossed 98% · EXTRACTED-DATA 100% · NAMED 85.36% (capped ~96%).
 - This session banked **+33 net matching-C** (8337→8370) — full per-carve list in `docs/frontier.md` (the SSoT). Highlights: the agbcc-ceiling closure (knobs/levers/transmuter all empirically 0), 4 productive reconstruct veins (SJIS text / proc-name-self-ID efx / msgid-shift link-arena-sio / JP-only leaf clusters), and **+8 recovered from stranded worktree branches**.
 - 🚨 **INTEGRATOR LOOP (critical, cost +8 nearly-missed): re-scan ALL `worktree-*` branches for committed-but-unpushed carves, not just `origin/feat/*`.** Workers commit incrementally to their own branch. Loop: `git worktree list` → `git log origin/main..<br>` → filter REAL (the branch's dropped asm/sub_*.s is STILL on main) vs DUP (already deleted = already carved) → merge real + forced-clean gate + push. Run it every few minutes as the fleet carves.
-- 🏁 **STRATEGIC MILESTONE: matching-C is at its FLOOR for ports + ALL batch/lever approaches** (free-carve, int-widen, cast, both agbcc knobs, unnamed-sub fingerprint, AND the TRANSMUTER [objdiff register-blind] — every one empirically =0). **The ONLY path to 100% is RECONSTRUCT (JP-only leaves + JP-divergent ports) + the genuine reg-coloring RESIDUAL** (~8-20 ports with a 1-2 register/slot tiebreak no C-source or tool fixes — the likely permanent asymptote; leave as descriptive-asm NEARs). Do NOT re-run lever/knob/transmuter sweeps (all proven 0).
+- 🏁 **HISTORICAL MILESTONE (superseded in part):** the 2026-06-24 batch/lever set was exhausted, but its “ONLY path / likely permanent asymptote” conclusion was too strong. `AddAttr2dBitMap` later matched through a zero-instruction BB separator and `Augury_InitResultScreen` through destination readback + branch polarity (D366). Preserve measured negative results, but do not promote them to proof that no materially new source-shape lever exists.
 - ⚙️ **NOW (ultracode): a 14-agent triage Workflow (`fe8j-remaining-triage`) is classifying all 207 still-asm fns into carveable-vs-residual + recipes** → feeds the warm-worktree fleet to carve every carveable one to exhaustion.
 - 🔑 **TWO PRODUCTIVE RECONSTRUCT VEINS opened this session:** (1) **SJIS/text** — JP copies 2-byte Shift-JIS chars where fe8u copies 1 byte; the natural `*dst++=*src++` idiom matches JP reg-alloc (StrInsertTact; recon-worker mining more). (2) **proc-name-string self-ID** — JP-only ProcScr procs identified by their embedded name string in ROM (efxLuce/efxDrsmmoya proved it; archaeologist scouting link-arena/name-entry/augury).
 - 🟧 **SPILL-SLOT/REG-ROTATION NEAR backlog** (structurally-correct reconstructs blocked by an agbcc frame-layout tiebreak the DEFAULT permuter plateaus on): ClassStatsDisplay_Loop (/home/laqieer/fe8j-wt-class), AdjustNewUnitPosition (/home/laqieer/fe8j-wt-anup), Event18_ColorFade. **UNLOCK = the transmuter** (reg-alloc-aware permuter, task #15, queued) — deploy as a BATCH when N accumulate; do NOT keep throwing 15k default runs. — [SUPERSEDED 2026-07-03: ClassStatsDisplay_Loop MATCHED byte-exact in-repo (banked); AdjustNewUnitPosition/Event18_ColorFade still open.]
@@ -57,8 +70,10 @@ Check `nonmatchings/<Fn>/output-0-*` for a zero-score solution before deferring 
 **Tactician_InitScreen** (1-instr, base 320→125), **SelectSummonPos**, **ClassIntro_Init**, **AdjustNewUnitPosition**. If `output-0-*` exists, extract the mutation (diff `source.c` vs the near-match), apply to a clean `#include` version, carve.
 
 ## THE FRONTIER — clean-recipe vein EXHAUSTED, ~193 remain — 3 BUCKETS
-Even the 'self-cert leaves' (EfxAdvanceFrameLut + AddAttr2dBitMap) match the fe8u ELF but NOT JP
-(compiler-config PROMOTE/CSE/reg-pressure divergence). The remaining ~193 fall into 3 buckets:
+Even the 'self-cert leaves' (EfxAdvanceFrameLut + AddAttr2dBitMap) matched the fe8u ELF but not JP
+under the then-tested shapes (compiler-config PROMOTE/CSE/reg-pressure divergence).
+**[SUPERSEDED for AddAttr2dBitMap 2026-07-10: now byte-exact via a zero-instruction BB separator.]**
+The historical remaining ~193 fell into 3 buckets:
 
 ### (a) agbcc config-ceiling NEARs — HIGHEST-LEVERAGE UNLOCK (do this first)
 Functions that match the **fe8u ELF but not the JP ROM** via **register-save-ORDER** / **cross-jump-MERGE** /
@@ -74,8 +89,9 @@ Functions that match the **fe8u ELF but not the JP ROM** via **register-save-ORD
   reconstruct (single signed `int` frame, return it directly) reaches 136B vs JP 132B but 2 residual diffs
   (load-order reg-alloc tiebreak 0B + cross-jump tail-merge +4B) are unreachable by any lever. Leave as the
   stub (best reconstruct saved /tmp/efxadvance_best_reconstruct.c).
-- 🟥 **register-PRESSURE-r7 (SioBat_SetupLoop +48B, AddAttr2dBitMap 2-halfword): ALGORITHMIC** — agbcc
-  allocator qsort/find_reg, NOT a clean thumb.h flag (archaeologist Class-3 verdict). Leave to reconstruction.
+- 🟥 **register-PRESSURE-r7 (SioBat_SetupLoop +48B; AddAttr2dBitMap was 2 halfwords):** the allocator
+  diagnosis described the symptom, but AddAttr's “algorithmic/permanent” conclusion is **SUPERSEDED** —
+  a zero-code BB separator changed the save order and matched it. SioBat status is unchanged.
 **Do NOT keep throwing multi-hour permuter runs at this class** (one run burned ~7h for 0).
 **REFUTED:** the "extend the patch → unlocks a WHOLE class" thesis held for PROMOTE (s8/s16-hold + arg-order)
 but NOT for cross-jump (one-off) or reg-pressure (algorithmic). The genuine-ceiling tail is **SMALL and

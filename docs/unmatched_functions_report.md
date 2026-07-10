@@ -1,27 +1,22 @@
-# The 16 remaining unmatched functions — understanding report
+# The 13 remaining unmatched functions — understanding report
 
-> **UPDATE 2026-07-07 — now 15.** `#6 PrepareBattleGraphicsMaybe (sub_8057F80)` was
-> **MATCHED byte-exact** (community decomp.me fork
-> [rtMN6](https://decomp.me/scratch/rtMN6)) and graduated to `src/`; `make compare`
-> stays OK, axis-2 → **99.83% (8677/8692), 15 still-asm**. This directly bears out this
-> report's ROI call: sub_8057F80 was rated *"≈NONE ROI / don't attempt (Stretch-only,
-> community/compute)"* — and it was the **community decomp.me path**, not agent effort,
-> that landed it. Integrating it also uncovered a **funcmap misID bug**: the JP guard
-> reads `GetBanimLinkArenaFlag` (0x08050AC8), not `GetSelectTargetCount` — the two are
-> byte-identical `return *global` getters, so `us_jp_funcmap.tsv` had mislabeled
-> 0x08050AC8. There was therefore **no [R1]/[R2] region difference**; the only JP↔US
-> delta is the US-only Manakete/Demon-King tail. The sections below are otherwise
-> as-written (they say "16"); treat #6 as ✅ MATCHED.
-
-> **Purpose of this document.** Understand (not match) the 16 functions whose bytes
-> still come from `asm/*.s` (the `src/nonmatching/*.c` set — axis-2 = 99.82% matching-C,
-> 16 unmatched). For each: does it exist in fe8u? what is it for? what does it do? is
-> it live or dead code? plus its call tree (callers ↑ and callees ↓) and references.
+> **UPDATE 2026-07-10.** `AddAttr2dBitMap` (`sub_8001570`) and
+> `Augury_InitResultScreen` (`sub_80A390C`) now compile byte-exact from `src/`.
+> Together with the earlier `PrepareBattleGraphicsMaybe` match, the original
+> 16-function study cohort now has **13 active members**; axis-2 is **99.85%
+> (8679/8692), 13 still-asm**. AddAttr's zero-instruction `do { } while (0);`
+> separator disproves this report's prior “source-invariant/permanent” save-order
+> framing. Augury matched through destination-field readback plus equivalent branch
+> polarity. Their detailed reports remain below as resolved historical analysis.
 >
-> This is an **analysis/documentation** deliverable, orthogonal to matching. It does not
-> touch `make compare`. Byte-matching status is summarized only as the "why-unmatched"
-> class; the authoritative matching frontier stays in
-> [`frontier.md`](frontier.md) → *Code frontier — the 16 permuter-bound functions*.
+> **Purpose of this document.** Understand (not merely classify) the 13 functions
+> whose bytes still come from `asm/*.s` (the authoritative `src/nonmatching/*.c`
+> set). For each: correspondence, purpose, behavior, reachability, callers/callees,
+> and current blocking-diff class. The authoritative work list remains
+> [`frontier.md`](frontier.md) → *Code frontier — the 13 remaining functions*.
+>
+> Detailed section numbers below retain the original 16-function study IDs so old
+> cross-references remain readable; resolved #1, #6, and #12 are clearly marked.
 
 ## Method
 
@@ -43,45 +38,37 @@
 
 ## Summary
 
-| # | JP addr | Name | Subsystem | fe8u twin? | Live / Dead | Callers | Why still asm |
+| # | JP addr | Name | Subsystem | fe8u twin? | Live / Dead | Callers | Current blocker |
 |---|---|---|---|---|---|---|---|
-| 1 | 0x08001570 | AddAttr2dBitMap | mapanim blit primitive | **yes** (hardware.c:468, region-diff codegen) | **LIVE** (heavy) | 12 map/summon-fx TUs | reg save-order tie-break (2 halfwords) |
-| 2 | 0x0800A34C | SplineEvalCatmullRom | JP-only Catmull-Rom eval | no | **DEAD** (transitive) | 1 (SplineSampleAtTime) | whole-fn reg-coloring/spill |
-| 3 | 0x0800A594 | SplineSampleAtTime | JP-only spline driver | no | **DEAD (root)** | **0** | spill/reg-coloring |
-| 4 | 0x0800E1FC | Event18_ColorFade | event opcode handler | **yes** (eventscr.c:747) | **LIVE** | `gEventLoCmdTable` | ~95 B spill residual |
-| 5 | 0x0800FAD0 | GetUnitDefinitionFormEventScr | event unit loader | **yes** (eventscr.c:2376, NM in fe8u too) | **LIVE** | Event2C_LoadUnits | reg-permutation NEAR |
-| 6 | 0x08057F80 | PrepareBattleGraphicsMaybe | EKR battle-anim gate | **yes** analog (banim-ekrbattleintro.c) | **LIVE** | 2 EkrBattleStarting fns | ✅ **MATCHED 2026-07-07** (decomp.me rtMN6); was region-diff-only in the US-only tail |
-| 7 | 0x0807C8DC | AdjustNewUnitPosition | unit placement | **yes** (muctrl.c:475) | **LIVE** | 3 (Move/MuCtr/GenUnit) | if/else branch reg coloring |
-| 8 | 0x0807D3BC | SelectSummonPos | summon positioning | analog only (diff algorithm) | **LIVE** | SelSumPosAndMoveCamera | reg-alloc micro-decision |
-| 9 | 0x080A2E64 | DivinationRankSpriteUpdate | augury result screen | no | **LIVE** | augury proc sub_80A3074 | reg-coloring tie-break |
-| 10 | 0x080A3300 | (augury rank-sprite emit) | augury result screen | no | **LIVE** | augury proc sub_80A3458 | inner-loop reg swap |
-| 11 | 0x080A3528 | DrawAuguryResultPanel | augury result screen | no | **LIVE** | Augury_InitResultScreen | invariant-scheduling + coloring |
-| 12 | 0x080A390C | Augury_InitResultScreen | augury result screen | no | **LIVE** | ProcScr data_08A95548 (OnInit) | reg-pressure field-ptr materialization |
-| 13 | 0x080A6D34 | (link-arena hdr decode) | link-arena record codec | no (US=bmsave-xmap here) | **DEAD** (transitive) | 1 (DecodeAndVerify…) | pure reg-coloring |
-| 14 | 0x080A6E4C | (link-arena record encode) | link-arena record codec | no | **LIVE** | sub_80A74D4 (ProcScr) | spill / callback-veneer reg |
-| 15 | 0x080A6F1C | DecodeAndVerifyArenaRecord | link-arena record codec | no | **DEAD (root)** | **0** | callback-in-high-reg veneer |
-| 16 | 0x080C05C8 | GmapScreen2_Loop | worldmap node icons | **yes** (worldmap_screen2.c) | **LIVE** | ProcScr_GmNodeIconDisplay | clean JP-vs-US coloring divergence |
+| 1 | 0x0800A34C | SplineEvalCatmullRom | JP-only Catmull-Rom eval | no | **DEAD** (transitive) | 1 (SplineSampleAtTime) | whole-fn reg-coloring/spill |
+| 2 | 0x0800A594 | SplineSampleAtTime | JP-only spline driver | no | **DEAD (root)** | **0** | spill/reg-coloring |
+| 3 | 0x0800E1FC | Event18_ColorFade | event opcode handler | **yes** (eventscr.c:747) | **LIVE** | `gEventLoCmdTable` | spill residual |
+| 4 | 0x0800FAD0 | GetUnitDefinitionFormEventScr | event unit loader | **yes** (eventscr.c:2376, NM in fe8u too) | **LIVE** | Event2C_LoadUnits | register permutation |
+| 5 | 0x0807C8DC | AdjustNewUnitPosition | unit placement | **yes** (muctrl.c:475) | **LIVE** | 3 (Move/MuCtr/GenUnit) | branch/loop coloring |
+| 6 | 0x0807D3BC | SelectSummonPos | summon positioning | analog only | **LIVE** | SelSumPosAndMoveCamera | spill/frame decision |
+| 7 | 0x080A2E64 | DivinationRankSpriteUpdate | augury result screen | no | **LIVE** | augury proc sub_80A3074 | reg-coloring tie-break |
+| 8 | 0x080A3300 | augury rank-sprite emit | augury result screen | no | **LIVE** | augury proc sub_80A3458 | inner-loop reg swap |
+| 9 | 0x080A3528 | DrawAuguryResultPanel | augury result screen | no | **LIVE** | Augury_InitResultScreen | invariant scheduling + coloring |
+| 10 | 0x080A6D34 | link-arena header decode | link-arena record codec | no | **DEAD** (transitive) | 1 (DecodeAndVerify…) | pure reg-coloring |
+| 11 | 0x080A6E4C | link-arena record encode | link-arena record codec | no | **LIVE** | sub_80A74D4 (ProcScr) | spill / callback-veneer reg |
+| 12 | 0x080A6F1C | DecodeAndVerifyArenaRecord | link-arena record codec | no | **DEAD (root)** | **0** | callback-in-high-reg veneer |
+| 13 | 0x080C05C8 | GmapScreen2_Loop | worldmap node icons | **yes** (worldmap_screen2.c) | **LIVE** | ProcScr_GmNodeIconDisplay | clean JP-vs-US coloring divergence |
 
-**Headline results (12 live / 4 dead)**
-- **12 of 16 are live, actively-reachable game code.** They remain asm purely because of
-  agbcc-2.95 register-allocation / spill tie-breaks (permuter-bound), *except* #6
-  `PrepareBattleGraphicsMaybe`, which is a **true region difference** (the US localisation
-  added a Manakete/Demon-King block + link-arena flag swaps), so a byte match is out of scope.
-- **4 of 16 are unreachable dead code**, forming **two dead islands** — in each, a *root
-  driver* has zero references anywhere in the ROM, and its callees are reachable only through
-  it (so they are dead-by-transitivity). Two of the four island members are themselves in the
-  16-function set; the spline island also drags in `sub_800A194`, which is not one of the 16:
-  - **Spline island** — `SplineSampleAtTime (0x0800A594)` [root, #3] →
-    `SplineEvalCatmullRom (0x0800A34C)` [#2] → `sub_800A194`. A JP-only Catmull-Rom 2-D spline
-    with **zero external references**. It is *not* the spline system the game uses (that is
-    fe8u's `spline.c`: `Spline_Ease` ← `GetEasedProgress` ← bmlib timers, all live).
-  - **Link-arena decode island** — `DecodeAndVerifyArenaRecord (0x080A6F1C)` [root, #15] →
-    `sub_80A6D34 (header decode)` [#13]. The **receive/verify half** of the link-arena
-    "通信闘技場" record codec. Its **encode/commit half is live** (`sub_80A6E4C` [#14] ←
-    `sub_80A74D4`, reachable from a menu ProcScr), but nothing in the ROM ever invokes the
-    decoder.
-- **Every one of the 16 exists in the ROM as a real, non-stub function body.** "Dead" here
-  means *statically unreferenced*, not empty.
+
+**Headline results (9 live / 4 dead)**
+- **9 of 13 are live, actively reachable game code.** Their remaining asm status is
+  a byte-generation problem, not an understanding gap.
+- **4 of 13 are unreachable dead code**, forming the same two islands found by the
+  original study:
+  - **Spline island** — `SplineSampleAtTime` [current #2] →
+    `SplineEvalCatmullRom` [current #1] → `sub_800A194`.
+  - **Link-arena decode island** — `DecodeAndVerifyArenaRecord` [current #12] →
+    `sub_80A6D34` [current #10].
+- **Every one of the 13 has a real, non-stub ROM body.** “Dead” means statically
+  unreferenced, not empty.
+- The 2026-07-10 wins are a methodology correction: measured plateaus remain useful,
+  but “permanent/source-invariant” claims require stronger evidence than failed source
+  sweeps. `make compare` is the only completion oracle.
 
 ---
 
@@ -89,46 +76,43 @@
 
 ```
 mapanim / summon fx ─────────────────────────────────────────────
-  12 *_Loop / *_PlayAnim TUs ──► AddAttr2dBitMap [1]  (leaf, live)
+  12 *_Loop / *_PlayAnim TUs ──► AddAttr2dBitMap [MATCHED 2026-07-10]
 
 event engine ────────────────────────────────────────────────────
-  gEventLoCmdTable[COLORFADE] ──► Event18_ColorFade [4] ──► EventStartFade/EndFade/NewEventFadefx
-  Event2C_LoadUnits ──► GetUnitDefinitionFormEventScr [5] ──► NextRN_N, Div, BuildDeployedUnitDefinitionList
+  gEventLoCmdTable[COLORFADE] ──► Event18_ColorFade [3]
+  Event2C_LoadUnits ──► GetUnitDefinitionFormEventScr [4]
 
-battle-anim intro ───────────────────────────────────────────────
-  EkrBattleStarting_Is/CheckBattleAnimEnabled ──► PrepareBattleGraphicsMaybe [6] ──► 57 setters/getters
+battle-anim intro ────────────────────────────────────────────────
+  EkrBattleStarting_* ──► PrepareBattleGraphicsMaybe [MATCHED 2026-07-07]
 
 unit placement / summon ─────────────────────────────────────────
   MoveUnitExt / MuCtr_InitDefinedMove / GenUnitDefinitionFinalPosition
-                             ──► AdjustNewUnitPosition [7] ──► AiGetUnitClosestValidPosition …
-  SelSumPosAndMoveCamera ──► SelectSummonPos [8] ──► DivRem, CanUnitCrossTerrain
+                             ──► AdjustNewUnitPosition [5]
+  SelSumPosAndMoveCamera ──► SelectSummonPos [6]
 
 worldmap ─────────────────────────────────────────────────────────
-  ProcScr_GmNodeIconDisplay (PROC_REPEAT) ──► GmapScreen2_Loop [16] ──► GmapScreen2_GetNodeScreenPos, PutSpriteExt, AP_Update
+  ProcScr_GmNodeIconDisplay ──► GmapScreen2_Loop [13]
 
-augury / divination result screen  (占い)  — LIVE, reachable from Save menu
-  ProcScr_SaveMenu[+0x22C] ──► sub_80AEBAC ──► StartProc( ProcScr data_08A95548 )
-        ├─ OnInit  ──► Augury_InitResultScreen [12] ──► GetSavedRankData, GetOverallRank,
-        │                         Decompress+TSA, sub_80A3528 [11], sub_80A33E0, face/CG
-        ├─ child   ──► sub_80A3458 (proc-starter) ──► sub_80A3300 [10]  (rank-sprite emit)
-        └─ child   ──► sub_80A2E4C ──► StartProc( ProcScr data_08A9548C )
-                             └─ PROC_CALL ──► sub_80A3074 (proc-starter) ──► DivinationRankSpriteUpdate [9]
+augury / divination result screen  (占い)  — LIVE
+  ProcScr_SaveMenu ──► data_08A95548
+        ├─ OnInit ──► Augury_InitResultScreen [MATCHED 2026-07-10]
+        │              └─► DrawAuguryResultPanel [9]
+        ├─ sub_80A3458 ──► sub_80A3300 [8]
+        └─ sub_80A3074 ──► DivinationRankSpriteUpdate [7]
 
 link-arena record codec  (通信闘技場)  — ENCODE live, DECODE dead
-  … menu ProcScr … ──► sub_80A4088 ──► sub_80A7650 ──► StartProc( ProcScr gUnknown_08A95E20 )
-        └─ PROC_CALL ──► sub_80A74D4 ──► sub_80A6E4C [14]  (ENCODE/commit)
-                                          └─ sub_80A6A7C, sub_80A6AA8(LCG), sub_80A6C20(cksum), sub_80A6C60(interleave)
-  (no caller anywhere) ✗   DecodeAndVerifyArenaRecord [15] ──► sub_80A6D34 [13] (hdr decode), sub_80A6C20, sub_80A6AA8
+  menu ProcScr ──► sub_80A74D4 ──► sub_80A6E4C [11]
+  (no caller) ✗ DecodeAndVerifyArenaRecord [12] ──► sub_80A6D34 [10]
 
-JP-only DEAD spline island  — no reference anywhere
-  (no caller anywhere) ✗   SplineSampleAtTime [3] ──► SplineEvalCatmullRom [2] ──► sub_800A194 (tridiagonal), sub_80D6378/84 (BIOS DivArm)
+JP-only DEAD spline island
+  (no caller) ✗ SplineSampleAtTime [2] ──► SplineEvalCatmullRom [1]
 ```
 
 ---
 
 # Per-function reports
 
-## 1. AddAttr2dBitMap — `0x08001570`  (LIVE, heavily used)
+## Resolved study #1. AddAttr2dBitMap — `0x08001570`  ✅ MATCHED 2026-07-10
 
 - **fe8u twin:** yes — `fireemblem8u/src/hardware.c:468`. The US TU compiles byte-identical
   to fe8u's own `hardware.o`; the **JP is region-different codegen** (different agbcc shape),
@@ -147,9 +131,11 @@ JP-only DEAD spline island  — no reference anywhere
   `MapanimEventcall_SummonLoadFrameAndPal`, `MapanimEventcall_SummonLoadFrame`,
   `SummonGfxAnim_Loop`, `SummonUnitGfx_Loop`, `GlowingCross_Loop`.
 - **Verdict:** **LIVE** — a fundamental primitive of the whole map-animation / summon-fx layer.
-- **Why still asm:** one reg-allocator save-order tie-break — the two "save original
-  width/height into callee-saved regs" copies (`mov ip,r6` / `mov r8,r2`) are emitted in the
-  opposite order (2 halfwords). Source-invariant; needs `-mjp-promote`.
+- **Matching lever:** under `-mjp-promote`, place a zero-instruction
+  `do { } while (0);` separator between `_width = width;` and `_height = height;`.
+  It emits no code but changes agbcc's basic-block/local-allocation decision so the
+  `mov ip,r6` / `mov r8,r2` saves appear in JP order. The prior “source-invariant”
+  verdict is retracted.
 
 ## 2. SplineEvalCatmullRom — `0x0800A34C`  (DEAD by transitivity)
 
@@ -343,14 +329,14 @@ JP-only DEAD spline island  — no reference anywhere
 - **Callees:** `ResetText`, `BG_Fill`, `SetTextFontGlyphs`, `SetTextFont`, `PutDrawText`,
   `GetStringFromIndex`, `PutNumber`, `PutNumber2Digit`, `PutSpecialChar`, `sub_80A34F0`,
   `BG_EnableSyncByMask`; reads `gPrepItemTextMsgIds`, `gUnknown_08A9553C`, `gUnknown_08A95524`.
-- **Callers:** 1 direct `BL` — `Augury_InitResultScreen` (#12), internal site `_080A3AB6`.
+- **Callers:** 1 direct `BL` — matched `Augury_InitResultScreen`, internal site `_080A3AB6`.
 - **Verdict:** **LIVE** — drawn by the augury OnInit.
 - **Why still asm:** agbcc invariant-scheduling + register-coloring (the JP build hoists six
   loop-invariant field/base addresses into the loop preheader and rematerialises the tilemap
   base into a low reg; agbcc emits each at point-of-use and keeps the base in a hi callee-saved
   reg). `-Os`/`-O2` identical.
 
-## 12. Augury_InitResultScreen — `0x080A390C`  (LIVE — augury screen OnInit)
+## Resolved study #12. Augury_InitResultScreen — `0x080A390C`  ✅ MATCHED 2026-07-10
 
 - **fe8u twin:** **none** (JP-only augury result-screen ProcScr OnInit).
 - **Purpose:** initialise the 占い result screen — load the saved ranking record, unpack it into
@@ -370,9 +356,11 @@ JP-only DEAD spline island  — no reference anywhere
 - **Callers:** the augury result-screen ProcScr **`data_08A95548`** (OnInit entry `+0x1C`),
   which is started by `sub_80AEBAC` and reached from **`ProcScr_SaveMenu`** (`+0x22C`).
 - **Verdict:** **LIVE** — the augury result screen, reachable from the save/extras menu.
-- **Why still asm:** register-coloring + field-pointer materialization under reg-pressure
-  (`proc` in `r6` vs `r7`; JP hoists several `proc+0x3X` byte-pointers into hi regs for the
-  `GetOverallRank` argument gather). 13-insn whole-function allocation-shape gap.
+- **Matching levers:** read the five `GetOverallRank` arguments back from the
+  just-stored `proc->rowCounts[]` destination instead of the source bitfields, keeping
+  the destination-field addresses live so agbcc hoists/reuses them like JP. Then write
+  the behaviorally equivalent duplicate-arm test as `index == 0` to match JP branch
+  polarity and downstream block/pool layout. No register pins or inline asm.
 
 ## 13. sub_80A6D34 — `0x080A6D34`  (DEAD by transitivity — link-arena decode leaf)
 
@@ -535,81 +523,47 @@ but unmatchable), and **3 are genuinely FE8J-/FE8-specific** (the two dead splin
 
 ---
 
-## ROI — effort vs value to byte-match the remaining 16
+## ROI — effort vs value to byte-match the remaining 13
 
-**Framing (why this is enhancement, not obligation).** The project's stated final goal is
-*"every byte of the ROM produced from real source (`src/` C **+ descriptive asm/data**),
-`make compare` → OK"* (CLAUDE.md). Descriptive asm **already counts as real source**, and
-`make compare` is OK with self-containment **100%**. Every one of these 16 also already has a
-**readable, documented `src/nonmatching/*.c` body**. So byte-matching them:
-- does **not** advance the final goal (already met),
-- does **not** add readability/understanding (the C already exists and is committed),
-- only moves the *byte-source* from `asm/` → `src/` and bumps the cosmetic **matching-C axis
-  from 99.82 % → toward 100 %** (each function ≈ **+0.012 %**; all 16 ≈ **+0.18 %**).
+The 13 already have readable `src/nonmatching/*.c` reconstructions and a green,
+self-contained checksum build. Matching them moves **5,236 bytes** from descriptive asm
+to compiled C and advances axis-2 from **99.85% toward 100%** (about **+0.012% per
+function; +0.15% total**). It is valuable decomp polish, not a functional bug fix.
 
-**Effort model.** Every one is an **agbcc-2.95 whole-function register-coloring / spill
-tie-break** with the deterministic lever kit **exhausted** (the headers record the full flag
-matrix + register-pin + source-shape attempts). The frontier is explicit: *"Path to 100 % =
-permuter compute-time + community, NOT more deterministic levers."* So the effort is **not
-reasoning-solvable** — it is decomp-permuter compute (millions of iterations / the original IS
-agbcc) or a decomp.me community hit (scratches already posted for all 16). **The sandbox
-SIGTERMs long permuter runs**, so an autonomous agent here is structurally ill-suited to move
-them. Effort tiers below use the documented permuter best-score / residual size.
+The 2026-07-10 results correct the old effort model: deterministic levers are **not
+proven exhausted merely because a permuter plateaus**. AddAttr yielded to a zero-code BB
+separator; Augury yielded to lvalue/address-lifetime and branch-layout choices. For the
+remaining set, preserve exact residual evidence, try materially new source-shape levers,
+then stop repeated variants of the same idea and hand off to community/permuter compute.
 
-**Value model.** Uniform **+1 function** on axis-2 for each, weighted by (a) code bytes moved to
-`src/` and (b) whether the function is **live** (dead code has ~0 functional value — matching it
-is pure metric vanity). Sizes are from the carve manifests.
+| # | function (size) | live? | residual class | relative ROI |
+|---|---|---|---|---|
+| 1 | SplineEvalCatmullRom (584 B) | dead | whole-fn coloring/spill | VERY LOW |
+| 2 | SplineSampleAtTime (500 B) | dead | spill/coloring | VERY LOW |
+| 3 | Event18_ColorFade (204 B) | live | spill/register permutation | LOW-MED |
+| 4 | GetUnitDefinitionFormEventScr (464 B) | live | clean register permutation | MED-HIGH |
+| 5 | AdjustNewUnitPosition (308 B) | live | branch coloring / loop rotation | MED |
+| 6 | SelectSummonPos (392 B) | live | spill-slot/frame decision | LOW |
+| 7 | DivinationRankSpriteUpdate (436 B) | live | coloring / IV scheduling | MED-HIGH |
+| 8 | sub_80A3300 (224 B) | live | inner-loop coloring | MED |
+| 9 | DrawAuguryResultPanel (880 B) | live | invariant scheduling + coloring | LOW |
+| 10 | sub_80A6D34 (280 B) | dead | pure coloring | LOW |
+| 11 | sub_80A6E4C (208 B) | live | spill / callback veneer | LOW-MED |
+| 12 | DecodeAndVerifyArenaRecord (212 B) | dead | callback-in-high-reg veneer | LOW |
+| 13 | GmapScreen2_Loop (544 B) | live | clean JP-vs-US coloring divergence | HIGH |
 
-| # | function (size) | live? | residual / permuter best | effort | value | **ROI** |
-|---|---|---|---|---|---|---|
-| 1 | AddAttr2dBitMap (224 B) | live (12 callers, core) | **2 halfwords**; permuter false-green | **Low*** | med | **HIGH** |
-| 16 | GmapScreen2_Loop (544 B) | live | clean coloring; proved-EQUIV; same C matches US | Low–Med | med | **HIGH** |
-| 5 | GetUnitDefinitionFormEventScr (464 B) | live | permuter 480→330 | Med | med | **MED-HIGH** |
-| 9 | DivinationRankSpriteUpdate (436 B) | live | reg-coloring; false-green score-0 | Low–Med* | low–med | **MED-HIGH** |
-| 10 | sub_80A3300 (224 B) | live | canon-diff 27/106; permuter 285 | Med | low–med | MED |
-| 7 | AdjustNewUnitPosition (308 B) | live | 92/308 B; permuter 185 | Med | med | MED |
-| 12 | Augury_InitResultScreen (612 B) | live | 13-insn gap | Med–High | med | MED |
-| 4 | Event18_ColorFade (204 B) | live | ~95 B; permuter 2030→965 | High | low–med | LOW-MED |
-| 14 | sub_80A6E4C password-encode (208 B) | live | 152 B; permuter 2215→1170 | High | low–med | LOW-MED |
-| 8 | SelectSummonPos (392 B) | live | 331/392 B; permuter 1695→875 | High | low–med | LOW |
-| 11 | sub_80A3528 draw-panel (880 B) | live | permuter 8135→2645 | High | med (biggest live) | LOW |
-| 13 | sub_80A6D34 password-decode (280 B) | **dead** | 24 lines; permuter 1320 | High | ~0 (dead) | LOW |
-| 15 | DecodeAndVerifyArenaRecord (212 B) | **dead** | veneer-reg; never marathoned | High | ~0 (dead) | LOW |
-| 2 | SplineEvalCatmullRom (584 B) | **dead** | 515/600 B; permuter 12025→9115 | **Very High** | ~0 (dead) | **VERY LOW** |
-| 3 | SplineSampleAtTime (500 B) | **dead** | 421/500 B; permuter 7215→5795 | **Very High** | ~0 (dead) | **VERY LOW** |
-| 6 | PrepareBattleGraphicsMaybe (2936 B) | live | ✅ **MATCHED** (decomp.me rtMN6, 2026-07-07) | done | +1 (biggest) | **realised via community** |
+### Recommendation
+1. Harvest registered decomp.me families before any local attempt.
+2. Try the now-proven clean levers first: P9 zero-instruction BB separation and P12
+   destination readback/equivalent branch polarity, then existing widen/decl-order/pin levers.
+3. Require `make compare` for every claimed match; a decomp.me score or permuter zero is not
+   the ROM oracle.
+4. Avoid broad “permanent ceiling” language. State the tested variants and exact residual;
+   reserve “handwritten/wrong compiler” for positive instruction-level evidence.
 
-`*` The two "false-green" NEARs (#1, #9) are blocked by a **permuter tooling bug** (agbcc's
-"invalid zero-score" reports a spurious match), *not* by the function — see below.
-
-### The single highest-leverage action
-Fix the **decomp-permuter "invalid agbcc zero-score" detection** once (the `#1`/`#9` headers
-both note the permuter reports score-0 candidates that don't actually reproduce the bytes). That
-one-time tooling investment could cheaply validate the **≈2–4 closest NEARs** (#1 AddAttr2dBitMap
-is only *2 halfwords* off; #9, and plausibly #4/#5/#10 which are "clean permutations"). This is
-the only place where bounded agent effort plausibly converts to matches.
-
-### Recommendation (tiered)
-1. **Treat axis-2 as effectively DONE for engineering purposes.** The goal is met; the 16 are a
-   cosmetic tier. Do **not** open a general "match the 16" campaign — it is compute/luck-bound
-   and the sandbox can't run the marathons.
-2. **Only worthwhile targeted work:** the one-time permuter zero-score fix + a short batch over
-   the **~5 close, live NEARs** (#1, #16, #5, #9, #10). Best ROI by far.
-3. **Leave the medium NEARs** (#4, #7, #8, #11, #12, #14) to opportunistic decomp.me community /
-   idle compute — scratches are already posted; agent effort adds little.
-4. **Do NOT spend on:** the **4 dead-code functions** (#2, #3, #13, #15 — matching unreachable
-   code is pure metric vanity, and the spline pair is also the *farthest* from a match), or
-   **#6 PrepareBattleGraphicsMaybe** (region-different 2936 B — a byte match needs a 2936-byte
-   coloring lottery on top of the JP≠US source difference; STRETCH-only).
-
-**Bottom line.** Total prize = **+0.18 % matching-C** (≈ 9 KB of `.text` re-sourced), with **no
-functional or readability gain** (readable C already committed; `make compare` already OK).
-~1.6 KB of that prize is **dead code** and ~2.9 KB is **effectively unmatchable**. The effort is
-**compute-time / community**, which this environment is poorly suited to supply. **Overall ROI is
-LOW**; the rational course is to bank the current state, make the one cheap permuter-tooling fix,
-opportunistically pick off the handful of close live NEARs, and otherwise stop — spending agent
-time on the strict `.bin`/asset frontier (or nothing) beats grinding these.
-
+**Bottom line:** the remaining prize is **13 functions / 5,236 bytes / ~0.15% axis-2**.
+The new wins improve the expected value of *targeted, structurally different* attempts,
+not endless re-runs of an unchanged permuter search space.
 ---
 
 ## Appendix — tool

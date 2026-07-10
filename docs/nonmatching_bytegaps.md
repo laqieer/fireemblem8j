@@ -1,5 +1,13 @@
 # Reconstruction-base byte-gaps (ground truth)
 
+> **UPDATE 2026-07-10:** axis-2 is now **99.85% (8679/8692), 13 still-asm**.
+> `AddAttr2dBitMap` and `Augury_InitResultScreen` matched byte-exact. AddAttr is
+> the important correction to this document's prior ceiling framing: a
+> zero-instruction `do { } while (0);` basic-block separator flipped the final
+> callee-save copy order. A long permuter plateau did **not** prove the order was
+> source-invariant; it proved only that the explored mutation vocabulary missed
+> this block-structure lever.
+
 Complete measurement of every `src/nonmatching/*.c` reconstruction base against the
 ROM, taken 2026-06-26. **Purpose: kill the unreliable `// FLAGS: ... EXACT / N-byte`
 header annotations** — those conflate structural closeness with byte-closeness and have
@@ -9,9 +17,9 @@ repeatedly sent sessions down dead carves (sub_800A34C's "EXACT" was 536/584 dif
 Method: `agbcc -O2 -fhex-asm <FLAGS-hint>` standalone, `objcopy --only-section=.text`,
 byte-diff vs `baserom.gba[start:end]`. Standalone is an **upper bound** (it lacks the
 full per-TU build context — real `-mjp-promote`/struct-layout/surrounding-pressure — so
-the in-build gap can be smaller), but it definitively shows **none is exact** and all are
-pervasive register-coloring NEARs. The in-build permuter fleet (running 5–9 h on these)
-has cracked none, corroborating.
+the in-build gap can be smaller). At the time of measurement, none was exact under
+that setup and the in-build permuter fleet had cracked none. Later source-shape wins
+show why this table is a historical baseline, not an impossibility proof.
 
 | base | JP range | size | differ / total | header claim (UNRELIABLE) |
 |---|---|---|---|---|
@@ -26,12 +34,14 @@ has cracked none, corroborating.
 | sub_80D1844 (LoadClassNameInClassReelFont) | D1844..D18D0 | 140 | 84/140 | "35-byte" — optimistic; **[MATCHED 2026-07-03 in-repo, banked]** |
 | RegisterTsaWithOffset (sub_80D19DC) | D19DC..D1A3C | 96 | 91/96 | "6-byte" — FALSE; r8+ip pressure |
 
-**Conclusion:** zero deterministic carves remain among reconstruction bases; the path to
-100% on these is permuter compute-time (machine currently CPU-saturated, load 17.9/16) +
-decomp.me community. The **16** still-asm without a base are big region-different
+**Historical conclusion (superseded in part):** no deterministic carve was then known
+among these reconstruction bases, so the recommended path was permuter compute +
+decomp.me community. AddAttr and other later wins show that conclusion described the
+known lever set, not the full source-shape space. The historical **16** still-asm without a base were big region-different
 reconstructions (e.g. `sub_8057F80`/PrepareBattleGraphicsMaybe = 2936 B) or have a live
 permuter. — [SUPERSEDED 2026-07-03: was "22" at this doc's 2026-06-26 measurement; 6 have since
-matched byte-exact in-repo (banked), axis-2 22→16.] See [`frontier.md`](frontier.md).
+matched byte-exact in-repo (banked), axis-2 22→16. Further wins now put the live set at 13.]
+See [`frontier.md`](frontier.md).
 
 ## Live permuter best-score state (2026-06-26, from `nonmatchings/<fn>/output-<score>-*`)
 
@@ -44,7 +54,7 @@ PutWMFaceOnBg) are already carved to `src/`.
 |---|---|---|
 | Event0F_CounterOps | **75** | closest; plateaued 75 over 753K+ iters = cross-jump ceiling (the score-75 best already applied the drop-`do/while(0)`+split-`+1` mining mutations — source-mutation-invariant residual) |
 | PutFaceOnBackGround | 105 | "tried 60+ forms" ceiling |
-| AddAttr2dBitMap | 120 | |
+| AddAttr2dBitMap | 120 | **[MATCHED 2026-07-10 via zero-instruction BB separator]** |
 | AdjustNewUnitPosition | 185 | reg-coloring ceiling (iy/ix/yCur rotation, source-reorder-invariant) |
 | sub_80D17C8 | 255 | |
 | sub_80A3300 | 315 | |
@@ -60,9 +70,10 @@ PutWMFaceOnBg) are already carved to `src/`.
 | sub_80A73D4 | 4835 | **[MATCHED 2026-07-03, banked]** |
 | sub_800A34C | 10155 | far (matches the 536/584 byte measurement) |
 
-**Takeaway:** even the closest (Event0F_CounterOps=75) is a plateaued ceiling after
-hundreds of thousands of permuter iterations — the remainder is genuine agbcc codegen
-ceilings, not unexplored levers. Progress is wall-clock permuter time + community.
+**Takeaway (corrected):** a plateau is evidence about the tested mutation set, not a
+proof of a permanent agbcc ceiling. Some remaining functions are still compute/community
+targets, but AddAttr demonstrates that a zero-code basic-block shape can cross an apparent
+save-order wall after hundreds of thousands of unsuccessful permutations.
 
 ## Authoritative `-mjp-promote` byte-gaps (2026-06-26) — the closest functions are SMALL scheduling NEARs
 
@@ -73,7 +84,7 @@ several are much closer than the "ceiling" framing implied — and the residuals
 
 | fn | `-mjp-promote` gap | residual character |
 |---|---|---|
-| **AddAttr2dBitMap** | **10/224** (size-exact) | pure instruction ORDERING — 3 sites: two `mov` swapped (0x26), an `adds r2,r1,#0` scheduled late (0xa4), a nop placement (0xde) |
+| **AddAttr2dBitMap** | **MATCHED: 0/224 in project** (historical standalone measurement: 10/224) | P9 zero-instruction BB separator flips the final `mov ip,r6` / `mov r8,r2` save order; declaration order had already removed the other scheduling residuals |
 | **PutFaceOnBackGround** | **22/176** (size-exact) | small, mostly ordering |
 | Event0F_CounterOps | 48/180 (size-exact) | reg-coloring + cross-jump |
 | sub_80D17C8 | 114/124 | |
@@ -84,18 +95,15 @@ several are much closer than the "ceiling" framing implied — and the residuals
 Tested and ruled out on these: the two built-but-unwired custom agbcc flags
 **`-mjp-nocrossjump`** and **`-mjp-regorder`** — both same-or-WORSE than `-mjp-promote`
 alone on every function (nocrossjump notably hurt PutFaceOnBackGround 22→67 and
-sub_80BB240 +44 tail). And **manual source reordering** of AddAttr2dBitMap (swap
-`_src`/`dst` init, hoist `++_src`, split the `i` loop init) does NOT close the 10.
+sub_80BB240 +44 tail). The tested **manual statement reorderings** of AddAttr2dBitMap
+(swap `_src`/`dst` init, hoist `++_src`, split the `i` loop init) did not close it;
+the later successful lever was different in kind: an empty basic-block separator.
 
-**DECISIVE (permuter has PLATEAUED — these are NOT "converging"):** the permute.log
-score history proves the permuter is stuck. AddAttr2dBitMap hit its best (obj 120 = the
-10 bytes) in the FIRST half of **839,821 iterations** and never beat it again over the
-second ~420K; sub_8084CE4 identically plateaued at 795 over 787,880 samples. So
-decomp-permuter **cannot reach** these residuals via source mutation — the 10 bytes are
-codegen-order (the prologue `mov ip,r6`/`mov r8,r2` save-order is agbcc register-save
-codegen, not source-controlled; site 2/3 are scheduler). **Implication 1:** more permuter
-wall-clock will NOT crack the plateaued ones — they are at the permuter ceiling, needing a
-new agbcc-internals lever (none found: all stock + 3 custom flags tested) or community.
-**Implication 2:** reallocating fleet compute between plateaued targets is zero-EV — do
-NOT churn the fleet for it. The honest path for these is decomp.me community (all posted
-owned) or a future agbcc codegen patch, NOT compute-time.
+**PLATEAU EVIDENCE, NOT A PERMANENCE PROOF:** AddAttr2dBitMap hit obj 120 in the
+first half of **839,821 iterations** and never improved over the second ~420K;
+sub_8084CE4 likewise plateaued at 795 over 787,880 samples. This remains strong
+evidence against spending more wall-clock on the *same* mutation vocabulary.
+It does **not** establish that the source cannot steer the compiler: AddAttr later
+matched via a zero-instruction BB separator that the campaign had not explored.
+Operational rule: stop identical permuter grinding, preserve the exact residual,
+and revisit only with a materially new source-shape/compiler lever.

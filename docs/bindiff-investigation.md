@@ -51,7 +51,7 @@ error rate plus stale names, so every entry must pass `make compare` before comm
   also carry a (possibly stale) name. This roughly covers the **entire remaining
   region-different code front** (~5,942 functions remain to map at the time of
   this investigation; ~350 already carved as gbadisasm anchors). (Historical
-  snapshot — matching-C is now at 99.82%; see `docs/frontier.md` for current counts.) 97.6% of all library FE8J entries also have an
+  snapshot — matching-C is now at 99.85%; see `docs/frontier.md` for current counts.) 97.6% of all library FE8J entries also have an
   FE8U address, so almost every hint is directly portable from the US decomp.
 
 - **Spot-check accuracy: 10/10 addresses correct.** A spot-check of 10 NEW
