@@ -1,2 +1,6 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-61F7FC	61F998	src/data/data_0861F7FC/data_0861F7FC.o(.data.residue.0861F7FC)	descriptive raw ROM data (412 B, byte-completeness D29)
+61F7FC	61F814	src/data/data_0861F7FC/data_0861F7FC.o(.data.residue.0861F7FC)	AnimSprite_EfxMantBatabata6_L_7
+61F814	61F8C8	src/data/data_0861F7FC/data_0861F7FC.o(.data.residue.0861F814)	AnimScr_EfxMantBatabata6_L
+61F8C8	61F91C	src/data/data_0861F7FC/data_0861F7FC.o(.data.residue.0861F8C8)	AnimSprite_EfxMantBatabata7_R
+61F91C	61F930	src/data/data_0861F7FC/data_0861F7FC.o(.data.residue.0861F91C)	AnimScr_EfxMantBatabata7_R
+61F930	61F984	src/data/data_0861F7FC/data_0861F7FC.o(.data.residue.0861F930)	AnimSprite_EfxMantBatabata7_L
+61F984	61F998	src/data/data_0861F7FC/data_0861F7FC.o(.data.residue.0861F984)	AnimScr_EfxMantBatabata7_L

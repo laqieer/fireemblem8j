@@ -1,39 +1,111 @@
 #include "global.h"
+#include "anime.h"
 
-/* Migrated from asm/data_0861F7FC.s (region-same graphics, single section).
- * Each symbol kept in the original section/order; byte-identical via INCBIN_U*.
- */
+extern struct AnimSpriteData AnimSprite_EfxMantBatabata6_L_1[];
+extern struct AnimSpriteData AnimSprite_EfxMantBatabata6_L_2[];
+extern struct AnimSpriteData AnimSprite_EfxMantBatabata6_L_3[];
+extern struct AnimSpriteData AnimSprite_EfxMantBatabata6_L_4[];
+extern struct AnimSpriteData AnimSprite_EfxMantBatabata6_L_5[];
+extern struct AnimSpriteData AnimSprite_EfxMantBatabata6_L_6[];
 
-/* Stays raw u32[] (NOT struct AnimSpriteData): OAM/AnimScr hybrid whose size
- * (412 B) is not a multiple of the 12-byte AnimSpriteData stride, with OAM
- * sub-arrays and AnimScr pointer blocks (0x0861F64E.. ROM ptrs, 0x82000000
- * end-markers) interleaved from entry 2 on. Non-zero `pad` bytes in the script
- * words prevent a byte-identical struct AnimSpriteData typing; kept raw (floor). */
-u32 AnimSprite_EfxMantBatabata6_L_7[] __attribute__((section(".data.residue.0861F7FC"))) = {
-    0x10000000, 0xFFF8001F, 0x0000FFF8, 0x00000001,
-    0x00000000, 0x00000000, 0x0861F64E, 0x0861F696,
-    0x0861F6DE, 0x0861F696, 0x82000000, 0x0861F7FE,
-    0x0861F7FE, 0x0861F7FE, 0x0861F7FE, 0x82000000,
-    0x0861F726, 0x0861F76E, 0x0861F7B6, 0x0861F76E,
-    0x82000000, 0x0861F7FE, 0x0861F7FE, 0x0861F7FE,
-    0x0861F7FE, 0x82000000, 0x0861F64E, 0x0861F696,
-    0x0861F6DE, 0x0861F696, 0x82000000, 0x0861F726,
-    0x0861F76E, 0x0861F7B6, 0x0861F76E, 0x82000000,
-    0x1861F7FC, 0x82000000, 0x1861F7FC, 0x82000000,
-    0x1861F7FC, 0x82000000, 0x1861F7FC, 0x82000000,
-    0x1861F7FC, 0x82000000, 0x0861F64E, 0x0861F696,
-    0x0861F6DE, 0x0861F696, 0x82000000, 0x80000000,
-    0xFFF8000C, 0x0000FFD8, 0x80004000, 0xFFF8008C,
-    0x0000FFF8, 0x40004000, 0xFFF800CC, 0x00000008,
-    0x40008000, 0x00180010, 0x0000FFF0, 0x00008000,
-    0xFFF000D0, 0x0000FFE8, 0x40000000, 0xFFE00090,
-    0x0000FFE8, 0x00000001, 0x00000000, 0x00000000,
-    0x0861F8CA, 0x0861F8CB, 0x0861F8CA, 0x0861F8CA,
-    0x82000000, 0x90000000, 0xFFE8000C, 0x0000FFD8,
-    0x90004000, 0xFFE8008C, 0x0000FFF8, 0x50004000,
-    0xFFE800CC, 0x00000008, 0x50008000, 0xFFE00010,
-    0x0000FFF0, 0x10008000, 0x000800D0, 0x0000FFE8,
-    0x50000000, 0x00100090, 0x0000FFE8, 0x00000001,
-    0x00000000, 0x00000000, 0x0861F932, 0x0861F933,
-    0x0861F932, 0x0861F932, 0x82000000,
+struct AnimSpriteData AnimSprite_EfxMantBatabata6_L_7[] __attribute__((section(".data.residue.0861F7FC"))) =
+{
+    { .header = 0x10000000, .as = { .object = { 0x001F, -8, -8 } } },
+    ANIM_SPRITE_END,
+};
+
+u32 AnimScr_EfxMantBatabata6_L[] __attribute__((section(".data.residue.0861F814"))) =
+{
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_1, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_2, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_3, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_2, 2),
+    ANIMSCR_LOOP,
+
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 2),
+    ANIMSCR_LOOP,
+
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_4, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_5, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_6, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_5, 2),
+    ANIMSCR_LOOP,
+
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 2),
+    ANIMSCR_LOOP,
+
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_1, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_2, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_3, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_2, 2),
+    ANIMSCR_LOOP,
+
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_4, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_5, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_6, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_5, 2),
+    ANIMSCR_LOOP,
+
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 4),
+    ANIMSCR_LOOP,
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 4),
+    ANIMSCR_LOOP,
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 4),
+    ANIMSCR_LOOP,
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 4),
+    ANIMSCR_LOOP,
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_7, 4),
+    ANIMSCR_LOOP,
+
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_1, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_2, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_3, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata6_L_2, 2),
+    ANIMSCR_LOOP,
+};
+
+struct AnimSpriteData AnimSprite_EfxMantBatabata7_R[] __attribute__((section(".data.residue.0861F8C8"))) =
+{
+    { .header = 0x80000000, .as = { .object = { 0x000C, -8, -40 } } },
+    { .header = 0x80004000, .as = { .object = { 0x008C, -8, -8 } } },
+    { .header = 0x40004000, .as = { .object = { 0x00CC, -8, 8 } } },
+    { .header = 0x40008000, .as = { .object = { 0x0010, 24, -16 } } },
+    { .header = 0x00008000, .as = { .object = { 0x00D0, -16, -24 } } },
+    { .header = 0x40000000, .as = { .object = { 0x0090, -32, -24 } } },
+    ANIM_SPRITE_END,
+};
+
+u32 AnimScr_EfxMantBatabata7_R[] __attribute__((section(".data.residue.0861F91C"))) =
+{
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata7_R, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata7_R, 3),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata7_R, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata7_R, 2),
+    ANIMSCR_LOOP,
+};
+
+struct AnimSpriteData AnimSprite_EfxMantBatabata7_L[] __attribute__((section(".data.residue.0861F930"))) =
+{
+    { .header = 0x90000000, .as = { .object = { 0x000C, -24, -40 } } },
+    { .header = 0x90004000, .as = { .object = { 0x008C, -24, -8 } } },
+    { .header = 0x50004000, .as = { .object = { 0x00CC, -24, 8 } } },
+    { .header = 0x50008000, .as = { .object = { 0x0010, -32, -16 } } },
+    { .header = 0x10008000, .as = { .object = { 0x00D0, 8, -24 } } },
+    { .header = 0x50000000, .as = { .object = { 0x0090, 16, -24 } } },
+    ANIM_SPRITE_END,
+};
+
+u32 AnimScr_EfxMantBatabata7_L[] __attribute__((section(".data.residue.0861F984"))) =
+{
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata7_L, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata7_L, 3),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata7_L, 2),
+    ANIMSCR_FORCE_SPRITE(AnimSprite_EfxMantBatabata7_L, 2),
+    ANIMSCR_LOOP,
 };
