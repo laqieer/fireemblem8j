@@ -640,8 +640,15 @@ u8 frontier_df4_ending_008_AD1444[] __attribute__((section(".data.frontier_df4_e
 u8 frontier_df4_ending_009_B1D954[] __attribute__((section(".data.frontier_df4_ending.gap9"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_009_B1D954.bin");
 u8 frontier_df4_ending_010_B1E5FC[] __attribute__((section(".data.frontier_df4_ending.gap10"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_010_B1E5FC.bin");
 u8 frontier_df4_ending_011_B24D0C[] __attribute__((section(".data.frontier_df4_ending.gap11"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_011_B24D0C.4bpp.lz");
-u8 frontier_df4_ending_012_B25A78[] __attribute__((section(".data.frontier_df4_ending.gap12"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_012_B25A78.bin");
-u8 frontier_df4_ending_013_B26374[] __attribute__((section(".data.frontier_df4_ending.gap13"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_013_B26374.bin");
+/* Worldmap-highlight reel blobs, split per the frontier_df4_voice_001_1F67BC
+ * semantic table (Img, Tsa/Ap, dims). Base symbols kept so the table's
+ * `frontier_df4_ending_01X_* + off` references resolve unchanged; the LZ tile
+ * sheets are now editable PNGs (PNG -> .4bpp -> .4bpp.lz rebuilds the ROM bytes
+ * byte-exact). Tsa/arrangement parts stay verbatim binary (fe8u-parity floor).
+ *   012: Tsa_WmHightLightMap5 [0x00:0x34] + Img_WmHightLightMap6 [0x34:end] */
+u8 frontier_df4_ending_012_B25A78[] __attribute__((section(".data.frontier_df4_ending.gap12"))) = INCBIN_U8("graphics/frontier_df4_ending/Tsa_WmHightLightMap5.bin", "graphics/frontier_df4_ending/Img_WmHightLightMap6.4bpp.lz");
+/*   013: Tsa_WmHightLightMap7 [0x00:0x38] + Img_WmHightLightMap8 [0x38:0x55c] + Tsa_WmHightLightMap8 [0x55c:end] */
+u8 frontier_df4_ending_013_B26374[] __attribute__((section(".data.frontier_df4_ending.gap13"))) = INCBIN_U8("graphics/frontier_df4_ending/Tsa_WmHightLightMap7.bin", "graphics/frontier_df4_ending/Img_WmHightLightMap8.4bpp.lz", "graphics/frontier_df4_ending/Tsa_WmHightLightMap8.bin");
 u8 frontier_df4_ending_014_B26A6C[] __attribute__((section(".data.frontier_df4_ending.gap14"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_014_B26A6C.bin");
 struct ProcCmd frontier_df4_ending_015_B3B3D4[] SECTION(".data.frontier_df4_ending.gap15") = {
     PROC_SLEEP(0),
