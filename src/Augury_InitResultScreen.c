@@ -1,21 +1,18 @@
-/* NON_MATCHING: byte source is asm/sub_80A390C.s @ JP 0x080A390C (region-different,
- * JP-only augury/divination subsystem; gbadisasm descriptive asm, D23). carved_rom
- * places those bytes; this C DOCUMENTS the reconstruction and is NOT in make-compare:
- * it is compiled only by `make nonmatching` (never linked, never checksummed).
- *
- * Proposed name: Augury_InitResultScreen  (占い result-screen ProcScr OnInit).
+/* Augury_InitResultScreen @ JP 0x080A390C (region-different, JP-only
+ * augury/divination result-screen ProcScr OnInit; no fe8u twin -- hand
+ * decompiled from the gbadisasm asm + the carved augury siblings, D23).
  *
  * WHAT IT DOES
- *   1. Zero-fills a 0x18-byte `struct GameRankSaveData` scratch (sub_80D6370 = CpuSet,
+ *   1. Zero-fills a 0x18-byte `struct GameRankSaveData` scratch (CpuSet,
  *      control 0x0100000C = fixed-source fill, 0xC halfwords = 0x18 bytes).
  *   2. GetSavedRankData(&rank, proc->index, proc->unlocked) loads the saved ranking
  *      record for this (chapter_mode, difficulty) slot.
  *   3. Bit-unpacks the record into the AuguryProc fields (see field map below).
  *   4. Computes the composite letter grade via GetOverallRank(5 category ranks).
  *   5. Decompresses the panel gfx from Tsa_SupportScreenWindow -> gGenericBuffer and applies the
- *      TSA to gBG1TilemapBuffer (Decompress = Decompress, j_TmApplyTsa).
+ *      TSA to gBG1TilemapBuffer (Decompress, j_TmApplyTsa).
  *   6. Draws the two sub-panels (DrawAuguryResultPanel text/values, sub_80A33E0), then, when the
- *      record is valid and carries a portrait, starts the tactician face (sub_80063F8)
+ *      record is valid and carries a portrait, starts the tactician face (StartFace2)
  *      and the rank-badge CG (StartCgText / SetCgTextFlags).
  *
  * AuguryProc field map CONFIRMED by this unpack (consumed by carved sibling
@@ -39,14 +36,23 @@
  * `gold` at struct bit 61 -- the header widths in ../fireemblem8u/include/bmsave.h are
  * exact; do NOT re-derive them from the raw shift amounts.
  *
- * STATUS: NONMATCHING-DOCUMENTED. There is no fe8u twin (JP-only), so this is a
- * ground-up reconstruction from the gbadisasm asm + the carved augury siblings. See
- * the trailing BLOCKING-DIFF banner for the exact residual class.
+ * Matching notes (axis2/issue165):
+ *   - GetOverallRank's 5 args are read back from `proc->rowCounts[i]` (the
+ *     just-stored destination), NOT from the `rank` bitfield locals again --
+ *     this is what makes agbcc hoist/keep the `proc->rowCounts[1..4]` field
+ *     addresses live in r8/ip/r7/r4 for reuse at the call, matching JP.
+ *   - The index-conditional block (both arms clear portraitId) tests
+ *     `index == 0` as the primary condition (branch-polarity) to match JP's
+ *     beq/bne order and per-arm code layout.
  */
 #include "global.h"
 #include "bmsave.h"
 #include "hardware.h"
 #include "functions.h"
+#include "bmlib.h"
+#include "face.h"
+#include "cgtext.h"
+#include "scene.h"
 
 struct AuguryProc
 {
@@ -79,20 +85,12 @@ struct AuguryEntry
 extern struct AuguryEntry gUnk_088582BC[];
 extern const u8 Tsa_SupportScreenWindow[]; /* carved panel gfx (region-same) */
 
-/* Kept as their existing project sub_ spellings so `make nonmatching` sees no
- * duplicate/renamed symbols; annotated with their role for readers. */
-void sub_80D6370(const void *src, void *dst, u32 control);        /* CpuSet          */
-void Decompress(const void *src, void *dst);                     /* Decompress      */
+/* CpuSet, Decompress, GetStringFromIndex, SetTacticianName, StartFace2, InitTalk,
+ * StartCgText, EndCgText, EndFaceById, SetCgTextFlags come from the headers above
+ * (gba/syscall.h, bmlib.h, functions.h, face.h, scene.h, cgtext.h). Only the
+ * unnamed/sibling carve-local externs need a prototype here. */
 void j_TmApplyTsa(void *dst, const void *tsa, int base);
-int  sub_80A40A0(int portraitId, int overallRank);                /* validate/select */
-char *GetStringFromIndex(int msgId);                                     /* GetStringFromIndex-like */
-void sub_8031438(char *str);                                      /* store tactician name    */
-void sub_80063F8(int a, int msgid, int x, int y, int e);          /* start face      */
-void InitTalk(int a, int b, int c);
-void StartCgText(int a, int b, int c, int d, int e, void *vram, int g, int h);
-void sub_8091544(void);
-void EndFaceById(int faceSlot);
-void SetCgTextFlags(int flags);
+int  sub_80A40A0(int portraitId, int overallRank); /* validate/select */
 void DrawAuguryResultPanel(struct AuguryProc *proc);
 void sub_80A33E0(struct AuguryProc *proc);
 
@@ -105,7 +103,7 @@ void Augury_InitResultScreen(struct AuguryProc *proc)
 
     zero = 0;
     /* CpuSet fixed-source fill: zero the 0x18-byte record (0xC halfwords). */
-    sub_80D6370(&zero, &rank, 0x0100000C);
+    CpuSet(&zero, &rank, 0x0100000C);
 
     GetSavedRankData(&rank, proc->index, proc->unlocked);
 
@@ -123,19 +121,19 @@ void Augury_InitResultScreen(struct AuguryProc *proc)
         proc->turnsC = rank.seconds;
         proc->score  = rank.gold;
         proc->portraitId = rank.luckydog;
-        proc->overallRank = GetOverallRank(rank.tacticsRank, rank.survivalRank,
-                                           rank.fundsRank, rank.expRank, rank.combatRank);
+        proc->overallRank = GetOverallRank(proc->rowCounts[0], proc->rowCounts[1],
+                                           proc->rowCounts[2], proc->rowCounts[3], proc->rowCounts[4]);
         proc->winCount = rank.unk08_15;
         proc->unk3A = rank.unk00_17;
 
         if (proc->hasCustomName)
         {
             strcpy(proc->tacticianName, rank.tactician_name);
-            sub_8031438(proc->tacticianName);
+            SetTacticianName(proc->tacticianName);
         }
         else
         {
-            sub_8031438(GetStringFromIndex(0x1F1));
+            SetTacticianName(GetStringFromIndex(0x1F1));
         }
 
         if (proc->portraitId != 0 && sub_80A40A0(proc->portraitId, proc->overallRank) == 0)
@@ -143,8 +141,9 @@ void Augury_InitResultScreen(struct AuguryProc *proc)
 
         if (proc->portraitId == 0)
         {
-            /* JP: index-conditional block whose arms both clear portraitId. */
-            if (proc->index != 0)
+            /* JP: index-conditional block whose arms both clear portraitId
+             * (branch-polarity: JP tests index==0 as the primary condition). */
+            if (proc->index == 0)
                 proc->portraitId = 0;
             else
                 proc->portraitId = 0;
@@ -163,40 +162,14 @@ void Augury_InitResultScreen(struct AuguryProc *proc)
     sub_80A33E0(proc);
     BG_EnableSyncByMask(7);
     EndFaceById(0);
-    sub_8091544();
+    EndCgText();
 
     if (proc->valid && proc->portraitId != 0)
     {
-        sub_80063F8(0, gUnk_088582BC[proc->portraitId - 1].msgid, 0xD8, 0x58, 0x182);
+        StartFace2(0, gUnk_088582BC[proc->portraitId - 1].msgid, 0xD8, 0x58, 0x182);
         r5 = sub_80A40A0(proc->portraitId, proc->overallRank);
         InitTalk(0x28, 0, 1);
         StartCgText(0x16, 0x13, 0x12, 4, r5, (void *)0x06011000 /* VRAM */, 0xA, 0);
         SetCgTextFlags(0x000809FE);
     }
 }
-
-/* ============================ BLOCKING DIFF ==================================
- * CLASS: agbcc register-coloring + field-pointer materialization (reg-pressure).
- *        NOT a logic diff -- every bitfield extraction matches the JP asm
- *        bit-for-bit (identical lsls/lsrs shift amounts, identical loads/stores).
- *
- * Verified with: arm-none-eabi-as asm/sub_80A390C.s -> objdump vs this .o objdump
- *   (normalized, address/reloc-masked).  GT = JP asm, MINE = this reconstruction.
- *   GT = 272 insns, MINE = 259 insns (MINE 13 fewer).
- *
- * ROOT DIFFERENCE:
- *   - `proc` lives in r6 in the JP build; agbcc puts it in r7 here.
- *   - The JP build HOISTS several `proc+0x3X` byte-pointers into the high regs
- *     r8 / ip / sb up front (e.g. `movs r1,#0x35; adds r1,r1,r6; mov r8,r1`),
- *     because rowCounts[1..4] pointers are kept live and REUSED at the
- *     GetOverallRank(...) argument gather.  This codegen re-forms those field
- *     pointers incrementally at the call site instead (`adds rN,#off`/`subs
- *     r1,#7`), yielding fewer, differently-allocated instructions.
- *   - Everything downstream (score 24-bit assemble, name branch, portrait/CG
- *     block) is structurally identical modulo the r6<->r7 base-register swap.
- *
- * WHY NOT CHASED: this is the documented agbcc reg-pressure plateau for this
- * cluster; the gap is a whole-function allocation shape (13 insns), not a
- * <10-byte tail -- outside the single-short-pass permuter budget.  Left as
- * NONMATCHING-DOCUMENTED; the JP bytes remain in asm/sub_80A390C.s.
- * ========================================================================== */
