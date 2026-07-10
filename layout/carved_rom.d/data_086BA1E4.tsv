@@ -1,2 +1,5 @@
-# carve_incbin_residue.py descriptive residue incbin (parallel-safe fragment)
-6BA1E4	6BA2A8	src/data/data_086BA1E4/data_086BA1E4.o(.data.residue.086BA1E4)	descriptive raw ROM data (196 B, byte-completeness D29)
+# Typed Berserk OAM/AnimScr hybrid (parallel-safe fragment)
+6BA1E4	6BA1FC	src/data/data_086BA1E4/data_086BA1E4.o(.data.residue.086BA1E4)	AnimSprite_EfxBerserk2_15
+6BA1FC	6BA214	src/data/data_086BA1E4/data_086BA1E4.o(.data.residue.086BA1FC)	AnimSprite_EfxBerserk2_15b
+6BA214	6BA250	src/data/data_086BA1E4/data_086BA1E4.o(.data.residue.086BA214)	AnimSprite_EfxBerserk2_15c
+6BA250	6BA2A8	src/data/data_086BA1E4/data_086BA1E4.o(.data.residue.086BA250)	AnimScr_EfxBerserk6
