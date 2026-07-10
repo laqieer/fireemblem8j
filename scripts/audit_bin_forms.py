@@ -381,6 +381,54 @@ def _is_screen_tilemap(path):
 
 
 # --------------------------------------------------------------------------- #
+# Sparse BG-overlay TSA tilemap by CONTENT (companion to _is_screen_tilemap).   #
+#                                                                              #
+# _is_screen_tilemap only accepts the exact 30x20 == 600 u16 GBA screen. Some  #
+# frontier TSA tilemaps have a DIFFERENT length -- e.g. the chapter-title      #
+# string TSA `gChapterTitleStrTsa_jp` @ 0x08A92410                             #
+# (`frontier_chap_title_115b_A92410.bin`, 601 u16 == 1202 B): the game         #
+# `Decompress()`es it and feeds it to                                          #
+# `CallARM_FillTileRect(gBG0TilemapBuffer, ..., TILEREF(0x280, pal))` in       #
+# DrawChapterTitleStrEx_jp -- it is a BG tile-arrangement, NOT pixel gfx. fe8u #
+# keeps every such TSA/tilemap binary (`*.tsa.bin`, `assets/tsa/*.map.bin`),   #
+# so it is fe8u-FORM-parity FLOOR even though the fe8j extractor named it       #
+# generically (`_NNN_ADDR.bin`) under a pixel-gfx dir. Detect by CONTENT,      #
+# tuned so DENSE 4bpp pixel sheets can NEVER qualify (they are a multiple of   #
+# 32 bytes and are not blank-tile-dominated).                                  #
+# --------------------------------------------------------------------------- #
+def _is_overlay_tsa_bytes(d):
+    """Core content test (on raw bytes) for a SPARSE BG-overlay TSA tilemap: a
+    u16 tile-attr array that is NOT a whole number of 4bpp tiles (`len % 32`),
+    dominated (>= 85%) by the BLANK tile 0 (a mostly-empty overlay BG), and
+    referencing <= 2 palette banks. A raw 4bpp tile sheet is always a multiple
+    of 32 bytes and is dense/varied, so it fails both the `% 32` and the
+    blank-fill guards -> it can never be a false FLOOR."""
+    n = len(d)
+    if n < 64 or n % 2 or n % 32 == 0:        # u16 array, NOT a raw 4bpp tile sheet
+        return False
+    v = struct.unpack("<%dH" % (n // 2), d)
+    top_val, top_cnt = Counter(v).most_common(1)[0]
+    if top_val != 0:                          # dominant fill must be the blank tile 0
+        return False
+    pals = len({(x >> 12) & 0xF for x in v})
+    return top_cnt / len(v) >= 0.85 and pals <= 2
+
+
+def _is_sparse_overlay_tilemap(path):
+    """True if a frontier/banim `.bin` is a sparse BG-overlay TSA tilemap (see
+    `_is_overlay_tsa_bytes`). Path-gated to the frontier/banim gfx dirs (same as
+    `_is_screen_tilemap`); reads content and fails closed on any read error."""
+    p = "/" + path
+    if "/graphics/frontier_" not in p and "/data/banim/" not in p:
+        return False
+    try:
+        d = open(path, "rb").read()
+    except OSError:
+        return False
+    return _is_overlay_tsa_bytes(d)
+
+
+# --------------------------------------------------------------------------- #
 # LZ77 compressed-vs-decompressed detection (Rule 3b — D337 floor-count fix).  #
 #                                                                              #
 # A JP `.bin` that is GBA BIOS LZ77 (type 0x10) compressed AND decodes byte-   #
@@ -495,6 +543,20 @@ def classify(path, fe8u_idx):
         return ("FLOOR",
                 "fe8u keeps banim/bg screen tilemaps (30x20 u16 TSA) binary "
                 "(`assets/tsa/*.map.bin`)",
+                "TSA/.map.bin")
+    # 0c. Sparse BG-overlay TSA tilemap by CONTENT (non-screen length) -> FLOOR.
+    #     Companion to 0b for frontier TSA tilemaps whose length is NOT the exact
+    #     30x20 screen -- e.g. the chapter-title string TSA `gChapterTitleStrTsa_jp`
+    #     @ 0x08A92410 (`frontier_chap_title_115b_A92410.bin`, 601 u16): the game
+    #     `Decompress()`es it into `CallARM_FillTileRect(gBG0TilemapBuffer, ...)`
+    #     (DrawChapterTitleStrEx_jp), so it is a BG tile-arrangement, not pixel
+    #     gfx. fe8u keeps such TSA tilemaps binary -> FLOOR (was a pixel-gfx
+    #     name-class false-MISS). Content-gated so dense 4bpp sheets can't match.
+    if _is_sparse_overlay_tilemap(path):
+        return ("FLOOR",
+                "fe8u keeps BG-overlay TSA tilemaps binary (`*.tsa.bin` / "
+                "`assets/tsa/*.map.bin`) — sparse tile-arrangement (blank-tile "
+                "fill), not pixel gfx",
                 "TSA/.map.bin")
     # 1. FLOOR by suffix (fe8u keeps TSA/tilemaps binary). Label is directory-aware
     #    so the plan's efx / opanim sub-buckets stay visible even though those
@@ -758,8 +820,10 @@ def emit(results, fe8u_bin_count, fe8j_bin_count):
     A("")
     A("Five+ MISS and five+ FLOOR entries verified by hand so the classification is")
     A("trustworthy (the prior research over-flagged `frontier_chap_title` images and")
-    A("`frontier_df4_misc_lo` strings as floor — both are MISSES; this audit lists them")
-    A("under MISS, asserted by the self-test guards below).")
+    A("`frontier_df4_misc_lo` strings as floor — the chapter-title **images** and the")
+    A("string pools are MISSES, listed under MISS; the chapter-title **string TSA**")
+    A("companion (`gChapterTitleStrTsa_jp`, `frontier_chap_title_115b_A92410.bin`) is a")
+    A("genuine FLOOR — all asserted by the self-test guards below).")
     A("")
     A("**MISS spot checks** (fe8u ships an editable source):")
     A("")
@@ -808,7 +872,7 @@ def emit(results, fe8u_bin_count, fe8j_bin_count):
 # Self-tests: assertions the classifier must satisfy.                          #
 # --------------------------------------------------------------------------- #
 SELF_TEST_NOTES = [
-    "`frontier_chap_title_*` is classified **MISS** (chapter-title gfx → fe8u `.png`), not FLOOR.",
+    "`frontier_chap_title_*` **images** are classified **MISS** (chapter-title gfx → fe8u `.png`), not FLOOR; the chapter-title **string TSA** companion (`gChapterTitleStrTsa_jp` @ `0x08A92410`, `frontier_chap_title_115b_A92410.bin`) is a genuine **FLOOR** — a sparse BG-overlay tile-arrangement (fed to `CallARM_FillTileRect`), not pixel gfx, and fe8u keeps such TSA tilemaps binary (the pixel-gfx name-class MISS rule stays intact for real images).",
     "`frontier_df4_misc_lo_*` is classified **MISS** (string pools → fe8u C literals), not FLOOR.",
     "`*.tsa.bin` and `*.map.bin` are classified **FLOOR** (fe8u keeps them binary).",
     "`Tsa_`/`gTsa_`-named and `*_map.bin` blobs are classified **FLOOR** (TSA/tilemaps; fe8u keeps them binary even when the fe8j extractor dropped the `.tsa.bin` suffix — bug #1).",
@@ -817,6 +881,7 @@ SELF_TEST_NOTES = [
     "`graphics/banim/efx*` effect bins are classified **FLOOR**.",
     "`data/sound/gMPlayTable.bin` is classified **MISS** (→ fe8u `sound/music_player_table.s`).",
     "30x20 u16 banim/bg **screen tilemaps** (600 entries, valid tile idx, dominant fill) are classified **FLOOR** by content — fe8u keeps banim/bg tilemaps binary (`assets/tsa/*.map.bin`); the fe8j extractor named them generically without the `.tsa.bin` suffix (D326).",
+    "Non-screen-length frontier BG-overlay **TSA tilemaps** (a u16 tile-attr array that is NOT a multiple of 32 B, dominated by the blank tile 0, ≤ 2 palettes — e.g. `gChapterTitleStrTsa_jp` / `frontier_chap_title_115b_A92410.bin`) are classified **FLOOR** by content (rule 0c), the companion to the 30×20 screen-tilemap rule (0b). Dense 4bpp pixel sheets (multiple of 32 B) can never match.",
     "**D337-correction (Rule 3b):** a JP `.bin` that is the LZ77-compressed derivative of fe8u's DECOMPRESSED binary source (`0x10` header, decoded size == twin size, full stdlib decode == twin bytes) is classified **MISS** (extractable), not FLOOR. The historical mis-floored LZ class (`gWorldmapMinimap_1`, `gUnkData_{15,67,68,70,71,72,73,80,89,92}`) has since been EXTRACTED to `graphics/**/*.tsa.bin` (issue #140) and is now fe8u-form-parity **FLOOR**; the rule remains as a fail-closed regression guard (helper-unit-tested below).",
     "Raw-parity twins (JP already decompressed; no `0x10` header — e.g. the extracted `gUnkData_15`, `gMenuSoundroom_*`, `gBattleForecast_*`, `gEndingDetails_0`) are GENUINE **FLOOR** and are NOT over-reclassified (the rule fails closed on any absent / non-`0x10` / size- or byte-mismatch).",
 ]
@@ -864,6 +929,38 @@ def _self_test_lz77_helpers():
     return fails
 
 
+def _self_test_overlay_tsa_helpers():
+    """Regression guards for the sparse BG-overlay TSA FLOOR rule (rule 0c).
+    File-independent unit tests on `_is_overlay_tsa_bytes` (one positive + three
+    isolated negatives that each trip a single guard) plus a guarded real-file
+    check on the chapter-title string TSA (`gChapterTitleStrTsa_jp`, 115b)."""
+    fails = []
+    # POSITIVE: 601 u16 = 1 non-blank (pal 1) + 600 blank tile-0 -> 1202 B
+    # (1202 % 32 != 0), 99.8% blank fill, 2 palette banks -> overlay TSA.
+    pos = struct.pack("<601H", 0x131d, *([0] * 600))
+    if not _is_overlay_tsa_bytes(pos):
+        fails.append("_is_overlay_tsa_bytes(sparse blank-fill TSA) must be True")
+    # NEGATIVE 1: a whole number of 4bpp tiles (multiple of 32 B) is a raw tile
+    # sheet, never a tilemap -- even when entirely blank.
+    if _is_overlay_tsa_bytes(bytes(1024)):        # 1024 % 32 == 0
+        fails.append("_is_overlay_tsa_bytes(multiple-of-32 tile sheet) must be False")
+    # NEGATIVE 2: dominant fill is a NON-blank tile (not an empty-BG overlay).
+    if _is_overlay_tsa_bytes(struct.pack("<601H", 0x131d, *([129] * 600))):
+        fails.append("_is_overlay_tsa_bytes(non-blank dominant fill) must be False")
+    # NEGATIVE 3: > 2 palette banks referenced (dense pixel-like high nibbles),
+    #             even with a blank-tile-dominated, non-multiple-of-32 array.
+    if _is_overlay_tsa_bytes(struct.pack("<601H", 0x1000, 0x2000, 0x3000,
+                                         *([0] * 598))):
+        fails.append("_is_overlay_tsa_bytes(>2 palette banks) must be False")
+    # Real-file (guarded): the actual 115b TSA must qualify.
+    tp = os.path.join(
+        FE8J, "graphics/frontier_chap_title/frontier_chap_title_115b_A92410.bin")
+    if os.path.exists(tp) and not _is_overlay_tsa_bytes(open(tp, "rb").read()):
+        fails.append("_is_overlay_tsa_bytes must be True for the real 115b TSA "
+                     "(gChapterTitleStrTsa_jp)")
+    return fails
+
+
 def run_self_tests(by_path):
     failures = []
 
@@ -876,8 +973,18 @@ def run_self_tests(by_path):
             failures.append("expected %s for %r, got %s (e.g. %s)"
                             % (want_cat, substr, by_path[bad[0]][1], bad[0]))
 
-    expect("graphics/frontier_chap_title/", "MISS")
     expect("graphics/frontier_df4_misc_lo/", "MISS")
+    # frontier_chap_title PIXEL sheets are MISS (-> fe8u .png) and are all already
+    # extracted to .png, so the ONE remaining chap_title `.bin` is the sparse
+    # BG-overlay string TSA (`gChapterTitleStrTsa_jp`, 115b), a genuine FLOOR
+    # (rule 0c). Assert the TSA is FLOOR AND that the pixel-gfx name-class MISS
+    # rule is still present (so any real chapter-title image `.bin` stays MISS).
+    expect("frontier_chap_title_115b_A92410.bin", "FLOOR")
+    if not any(cat == "MISS" and "chap_title" in pf
+               and rx.search("graphics/frontier_chap_title/x.bin")
+               for rx, cat, pf in NAME_CLASS_RULES):
+        failures.append("frontier_chap_title pixel-gfx MISS name-class rule "
+                        "regressed (real chapter-title images must stay MISS)")
     expect(".tsa.bin", "FLOOR")
     expect(".map.bin", "FLOOR")
     expect("/Tsa_", "FLOOR")            # bug #1: TSA by name -> FLOOR
@@ -900,6 +1007,7 @@ def run_self_tests(by_path):
     # stays covered even with 0 live reclassifications here.
     expect("graphics/misc/gUnkData_15.tsa.bin", "FLOOR")
     failures.extend(_self_test_lz77_helpers())
+    failures.extend(_self_test_overlay_tsa_helpers())
     return failures
 
 
