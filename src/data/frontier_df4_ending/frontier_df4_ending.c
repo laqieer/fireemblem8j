@@ -482,7 +482,9 @@ extern void sub_80CBD20();
 extern u8 data_081F611C[];
 extern u8 data_081F6D7C[];
 
-u8 frontier_df4_ending_000_AC059C[] __attribute__((section(".data.frontier_df4_ending.gap0"))) = INCBIN_U8("graphics/frontier_df4_ending/frontier_df4_ending_000_AC059C.bin");
+/* frontier_df4_ending_000_AC059C (gap0): self-referential struct moved to
+ * frontier_df4_ending_asm.s so its two trailing self-pointers are RELOCATABLE
+ * (R_ARM_ABS32) rather than baked hex — shift-safe, byte-identical (#152 pattern). */
 u32 frontier_df4_ending_001_AC0B90[] __attribute__((section(".data.frontier_df4_ending.gap1"))) = {
     0x020027A0, 0x0000000E, 0x00000000, 0x00000002, (u32)&CharacterEnding_Init, 0x00000002,
     (u32)&LoadNextCharacterEnding, 0x0000000B, 0x00000000, 0x00000002, (u32)&CharacterEnding_0, 0x00040018,
