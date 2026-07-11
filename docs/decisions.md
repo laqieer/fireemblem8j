@@ -10871,3 +10871,68 @@ class), then `sub_800A34C` (table/scratch-pointer pressure under
 - `make check-nonmatching` → all 12 staged C files have asm byte sources
 - `make clean && make compare` → `fireemblem8.gba: OK`
 - clean-built SHA-1 → `7da0456035366aa18414faa79d8fe7649f03c1ed`
+
+## D368 — Issue #166 final evidence: `+0x40000` A/B closes the opaque banim/AnimScr pointer residual (257/257 tagged words, zero stale) (2026-07-11)
+
+**Decision/status.** The implementation is fully integrated on `origin/main` at
+`2a49c9b8dcfefd8bec51cb66f425ebdee564fce5`. Remove the banim/AnimScr
+beyond-gate residual from the live frontier: a fresh strongest A/B validates the
+four known OAM/AnimScr hybrids and the empirically rescoped live sections. This
+documentation is still a release candidate until its exact SHA passes main CI;
+issue #166 is intentionally not closed or commented from this branch.
+
+**Empirical scope and result.** The A/B used `@gba-kit/gba-node` **0.3.0** with a
+baseline ROM and a linker-relocated ROM shifted by **`0x00040000`**. The
+one-frame dynamic boot PC moved by the same delta
+(`0x080D644A -> 0x0811644A`).
+
+- Four hybrids: `AnimSprite_EfxMantBatabata6_L_7` **41** words,
+  `AnimSprite_EfxIvald1_55` **57**, `AnimSprite_EfxIvald2_57` **57**,
+  `AnimSprite_EfxBerserk2_15` **17** — **172/172**, stale **0**.
+- Empirical rescope: **27 sections / 85 words** — early standalone **8/10**,
+  frontier-10 **10/52**, Purge/Reblow/CrimsonEye **4/10**, Mshield **1/2**,
+  live Naglfar **2/9**, Shine/Superdruid **2/2** — **85/85**, stale **0**.
+- Total: **172 + 85 = 257 tagged words**. A direct raw-ROM cross-check also
+  reports **257 PASS**.
+- Static verification: **28/28** battle-animation consumer checks and **6/6**
+  static not-debt checks passed.
+- Exclusions are unchanged: **14/14** intentionally stable checks passed
+  (Naglfar dead slots/OAM payload, compressed Fenrir/Flux payload hits,
+  popup-name masked-ASCII hits, and the raw SongObj 4bpp payload). No unrelated
+  music, ending-CG, graphics, sound, or fe8u-parity floor was reopened.
+
+**Provenance and hashes.** The requested commit, fetched `origin/main`, and
+detached validation worktree all resolved to `2a49c9b8d...`.
+
+| Artifact | SHA-1 | SHA-256 |
+|---|---|---|
+| baseline `fireemblem8.gba` | `7da0456035366aa18414faa79d8fe7649f03c1ed` | `44fd343625ab9e6b90f63a80758c15066d526e6873fae91474006314a5ead464` |
+| shifted `fireemblem8_shifted_0x40000.gba` | `12c1e5bf9e8c02d1dfced28ebfe68f7c7982bc1d` | `01911f2e08c9063836bee27d20f72b2593121fa25650f1411d65fcbfec2ebc2f` |
+
+The local evidence archive is
+`/home/laqieer/fe8j-validation-166-evidence-20260711-032756`;
+`evidence_manifest.sha256` hashes to
+`241b8bb170d489a4eced3da419009f1ab8585891e609194df4a4ab3e50902031`
+and `sha256sum -c evidence_manifest.sha256` passes every listed artifact.
+The concise result files are `banim_ab_summary.txt`,
+`banim_ab_detail_summary.txt`, `rescope_section_evidence.tsv`,
+`hybrid_script_evidence.tsv`, and `direct_rom_crosscheck.txt`; the verifier is
+archived as `verify_banim_ab.mjs`.
+
+**Reproduction/gates.**
+
+```sh
+python3 scripts/calcprogress.py
+make compare
+make shiftcheck
+python3 scripts/audit_pointers.py --true-debt --gate
+scripts/shiftcheck/build_shifted_rom.sh --shift 0x40000 \
+  --out <evidence>/fireemblem8_shifted_0x40000.gba \
+  --work <evidence>/shift-work
+(cd <evidence> && sha256sum -c evidence_manifest.sha256)
+```
+
+The standard pointer gate remains **0** and the current opaque self-ref report
+contains only the nine documented non-gated embedded-data suspects. Therefore
+this completion changes no numbered scorecard axis and does not require a README
+scorecard edit; its value is closing the empirically proven blind residual.
