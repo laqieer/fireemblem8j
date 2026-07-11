@@ -10,31 +10,40 @@
  *                      with -mjp-promote (declaration-order incoming-param
  *                      extension). Signature below reproduces that prologue EXACTLY.
  *
- * STATUS = clean register-permutation NEAR (agbcc-2.95 spill/coloring wall, §7 of
- * docs/agbcc-matching-playbook.md). With `-mjp-promote` the body is byte-identical
- * to the JP ROM in EVERY opcode and immediate; the ONLY residual is a whole-function
- * register renaming driven by ONE coloring decision:
+ * STATUS = improved register-permutation NEAR. Under the actual
+ * `-O2 -mjp-promote` pipeline, the source below scores 85 (down from the trusted
+ * 480 seed and the prior semantically-invalid 330 permuter result). Instruction
+ * count and opcodes now match; the residual is:
  *
- *   TARGET (JP)                    CURRENT (agbcc)          root cause
- *   fae8: lsrs r7, r2, #0x18       lsrs r2, r2, #0x18       arg2 -> r7 (callee-saved) vs stays r2
- *   fafa: movs r3, #0              movs r7, #0              i    -> r3 (caller-saved) vs r7
- *   fb0a: ldr  r2, [sp,#0x48]      ldr  r3, [sp,#0x48]      itSource reload temp -> r2 vs r3
- *   fb38: muls r0, r7             muls r0, r2               (cascades from arg2's home)
- *   ...  (i in r3, "1" const in r7, zero via r5) — same instructions, permuted regs
+ *   TARGET (JP)                    CURRENT (agbcc)
+ *   fae8: lsrs r7, r2, #0x18       same instruction after arg3/arg4 extension
+ *   faee: str  r3, [sp,#0x40]       str  r3, [sp,#0x44]      arg3 slot
+ *   fb54: str  r3, [sp,#0x44]       str  r3, [sp,#0x40]      selection-count slot
+ *   fb64: ldr  r3, [sp,#0x44]       ldr  r3, [sp,#0x40]
+ *   fc84: ldr  r5, [sp,#0x40]       ldr  r5, [sp,#0x44]
  *
- * JP holds the loop induction `i` in CALLER-saved r3 and SPILLS it to [sp,#0x44]
- * around the NextRN_N call, keeping arg2 alive in CALLEE-saved r7. agbcc instead
- * colors `i` in callee-saved r7 (no spill needed) and leaves arg2 in caller-saved
- * r2 (the counting loop's pointer temp lands in r3, so r2 stays free). Both are
- * valid; agbcc's is actually fewer spills. This is the spill-decision NEAR class
- * the playbook records as NOT crackable by the flag matrix.
+ * The decisive improvement is a long-lived `int chance`, a scoped word-sized
+ * memory pseudo for `i` around `NextRN_N`, an explicit r0 call argument, and a
+ * tied empty-asm reload that preserves the known-u16 value without adding a
+ * narrowing pair. This reproduces JP's r7 chance / r3 selection count and its
+ * spill/reload sequence; only the two stack homes and one extension schedule
+ * remain swapped.
  *
- * LEVERS TRIED (single-TU objdiff vs baserom 0xFAD0..0xFCA0; 91 diff-lines = base):
+ * CAMPAIGN 2026-07-11:
+ *   - eZzgG family harvest: NONE (base/best 11920 upstream).
+ *   - four independent, bounded 15,000-iteration lanes (60,000 total), with
+ *     failed compiles fail-closed and chain/removal/remote-CFG mutations disabled:
+ *     no generated candidate beat the prior valid threshold of 330.
+ *   - deterministic source review produced this score-85 candidate.
+ *   - semantics: CBMC `0 of 374 failed` / VERIFICATION SUCCESSFUL at COUNTMAX=4;
+ *     differential Unicorn test EQUIV over 200 in-domain trials.
+ *
+ * HISTORICAL LEVERS:
  *   - `register u16 i asm("r3")`               -> WORSE (105)
  *   - `register u8 a2 asm("r7") = arg2`        -> WORSE (113, adds a move)
  *   - declaration reorder (itSource first; i<->r) -> NO EFFECT (91, stack-homed)
  *   - int-local-widen on `i`                   -> N/A (JP re-narrows i each iter, so i must stay u16)
- * PERMUTER: scripts/permuter (8 workers, ~9,930 iters, -mjp-promote-patched
+ *   - scripts/permuter (8 workers, ~9,930 iters, -mjp-promote-patched
  *   compile.sh, --stop-on-zero) — base score 480, best 330 but that 330 mutation
  *   is SEMANTICALLY INVALID (`r = (i = NextRN_N(...))`); NO valid score-0 found.
  *
@@ -59,10 +68,11 @@ struct UnitDefinition * GetUnitDefinitionFormEventScr(struct UnitDefinition * so
     {
         unsigned loBits, hiBits;
     } mask;
+    int chance = arg2;
 
     arraySize = 0;
     i = 0;
-    if (arg2)
+    if (chance)
     {
         itSource = source;
         ++i; --i;
@@ -77,7 +87,7 @@ struct UnitDefinition * GetUnitDefinitionFormEventScr(struct UnitDefinition * so
             itSource++;
         }
 
-        i = Div((arraySize * arg2) + 50, 100);
+        i = Div((arraySize * chance) + 50, 100);
     }
 
 #define MASK_BIT_GET(i) (((i) < 0x20) ? (mask.loBits & (1 << (i))) : (mask.hiBits & (1 << ((i)-0x20))))
@@ -88,8 +98,16 @@ struct UnitDefinition * GetUnitDefinitionFormEventScr(struct UnitDefinition * so
 
     while (i)
     {
-        r = NextRN_N(arraySize);
-        r = array[r];
+        {
+            register int callN asm("r0") = arraySize;
+            int iSpill = i;
+
+            asm("" : "+r"(callN));
+            asm("" : "+m"(iSpill));
+            r = NextRN_N(callN);
+            r = array[r];
+            asm("" : "=r"(i) : "0"(iSpill));
+        }
 
         if (!MASK_BIT_GET(r))
         {
