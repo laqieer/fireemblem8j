@@ -236,6 +236,31 @@ function by IDA xref-from-a-ported-neighbor before assuming which US function it
 is. ROM-pool literal addresses are ground truth when IDA's `.data` VMAs are
 stale.
 
+### 5d. Pointer-role readback and live-range preservation [verified-in-repo, D367]
+
+**Symptom.** The instruction sequence and size are already right, but JP keeps a
+table/base pointer in one high register across calls while the reconstruction
+re-materialises equivalent global/absolute reads and rotates the proc/table registers.
+
+**Lever.** Reuse one pointer local and read through it at the later sites instead of
+re-spelling the same value. Pair that source shape with explicit IV/argument temps and,
+only where disassembly shows a call result must stay live, an empty `+r` constraint:
+```c
+data = (const u16 * const *)gSinLookup;
+sa = Div(COS(0) << 4, r);
+asm("" : "+r"(sa));           /* no opcode; live-range fence */
+sb = Div(-(*(const s16 *)data) << 4, scale);
+```
+This is **P13** in `docs/agbcc_codegen_levers.md`. It is related to destination-field
+readback (P12), but preserves the role/lifetime of a pointer local rather than a
+destination lvalue.
+
+**Worked match.** `DivinationRankSpriteUpdate` (`sub_80A2E64`) score-0 fork `l4bts`
+uses this pointer readback, `next = i + 1`, explicit `xArg`, six precise register
+declarations, and two empty `+r` fences under `-fno-gcse`. The project adaptation
+strips the scratch-only `.set gUnk_08A95478,...`; it contains no raw opcode asm.
+Full linked `make compare`, not the standalone object or decomp.me score, proved it.
+
 ---
 
 ## 6. Workflow: the checklist to run when a function is 1–2 instructions off
@@ -254,7 +279,7 @@ as the asm-differ target (survey §4.3) so a literal-pool-only delta is visibly
 | 3 | **`tst rX,rX` vs `cmp rX,#0`** | A single compare-against-zero instruction differs | §3: NO flag fix available (stock agbcc rejects `-ftst`). Try a source restructure; else treat as a scheduler artifact (row 6). |
 | 4 | **`bl` to a local `_08…`/`.L` label** | A `bl` where you expected a branch | §4: it's a widened long branch, **not** a near-miss. Verify the target is in-function and move on — do not restructure. |
 | 5 | **`lsr` where ROM has `asr` (or vice-versa) on an s16** | `lsl;lsr` vs `lsl;asr` at an s16 narrowing | §5a: widen the s16 to `int` before first use; add an explicit `(s16)` cast; for params, change the prototype to `s16`. If store-only, decompile the JP's real (signed) logic. |
-| 6 | **Only instruction ORDERING differs** | Same instructions, permuted order (arg-load order, save order, batched vs inline) | §5b + cookbook P9/P12: first try a zero-instruction `do { } while (0);` basic-block separator, destination-field readback, and equivalent branch polarity. These can change allocation/block order without changing behavior or emitting helper code (`AddAttr2dBitMap`, `Augury_InitResultScreen`). Only then park it as a permuter target. |
+| 6 | **Only instruction ORDERING differs** | Same instructions, permuted order (arg-load order, save order, batched vs inline) | §5b/§5d + cookbook P9/P12/P13: first try a zero-instruction `do { } while (0);` separator, destination-field or pointer-role readback, explicit next-IV/argument temps, and equivalent branch polarity. Add an empty `+r` fence only when disassembly proves a call result must remain live. These can change allocation/block order without changing behavior or emitting opcodes (`AddAttr2dBitMap`, `Augury_InitResultScreen`, `DivinationRankSpriteUpdate`). Only then park it as a permuter target. |
 
 **After any candidate fix:** rebuild and run `make compare` (incremental, ~0.3 s
 — D7). `OK` graduates the function: move the C up to `src/<owner>.c`, delete
@@ -303,8 +328,17 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
      `scripts/tools/decompme/registry.tsv`.
 
    `ABitG` (`AddAttr2dBitMap`) and `xYHce` (`Augury_InitResultScreen`) are the
-   2026-07-10 worked examples: local `make compare`/`make shiftcheck` passed first,
-   then both owned families exposed effective score 0, then the registry rows were retired.
+   2026-07-10 local-oracle worked examples. `qksQG` / score-0 fork `l4bts`
+   (`DivinationRankSpriteUpdate`) is the 2026-07-11 raw-score worked example:
+   local `make compare`/`make shiftcheck` passed, the owned base was updated from
+   `l4bts` and re-verified at raw score 0, then the exact registry row was retired.
+
+   **Do not simplify a harvested source before measuring it.** In `l4bts`, reading
+   the sine value through the reused `data` pointer looked equivalent to replacing
+   it with a direct `gSinLookup`/absolute expression, but that simplification
+   shortened the pointer lifetime and rotated `proc`/table high registers. Preserve
+   subtle readback/IV/temp shapes until the project build proves which are codegen
+   levers; strip only remote scaffolding (`.set`, fake alignment, context headers).
 
 ### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol
 

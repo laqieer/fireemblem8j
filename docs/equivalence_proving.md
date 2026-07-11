@@ -191,7 +191,7 @@ function; the highest loop-unroll depth that proves is reported):
 | `sub_80C05C8` | **PROVEN-BOUNDED(2)** | |
 | `sub_800A594` | **PROVEN-BOUNDED(1)** | spline evaluator; deeper unroll hits a modular limit |
 | `sub_807D3BC` | **PROVEN-BOUNDED(1)** | |
-| `sub_80A2E64` | **PROVEN-BOUNDED(1)** | |
+| `sub_80A2E64` | **PROVEN-BOUNDED(1); MATCHED 2026-07-11** | score-0 `l4bts`; P13 pointer-role readback/live-range preservation |
 | `sub_800A34C` | **DIFF-EQUIV** (differential; SMT `DIVERGENCE`) | stack-frame buffers at different spill offsets → intractable for modular SMT; concrete execution matches all memory effects over 145 trials (dead return, see below) |
 | `sub_800FAD0` | **DIFF-EQUIV** (differential; SMT `UNKNOWN`) | 5 loops → SMT path-explosion; concrete execution matches full observable (return + writes) over 200 trials |
 | `sub_80A6F1C` | ~DIFF (INCONCLUSIVE-CB) | link-arena codec w/ callback; **118/120 in-domain trials identical**, 2 codec-edge/callback residuals — strong corroboration, not a clean sweep |

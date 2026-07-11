@@ -1,4 +1,23 @@
-# Axis #2 (matching-C) — 13 still-asm functions, ranked recipe queue (D307/W3)
+# Axis #2 (matching-C) — 12 still-asm functions, ranked recipe queue (D307/W3)
+
+> **[UPDATE 2026-07-11 — axis-2 is now 12 still-asm (matching-C 99.86%, 8680/8692).]**
+> `DivinationRankSpriteUpdate (sub_80A2E64)` MATCHED byte-exact from community
+> score-0 fork **l4bts** (TsilaAllaoui). The substantive source lever is **P13
+> pointer-role readback/lifetime preservation**: reuse one `data` pointer for the
+> sine-table reads instead of re-spelling the same absolute/global expression,
+> commit `next = i + 1` before the branch split, keep affine outputs in r6/r5/r4,
+> and add two empty `+r` fences after `Div`. With `-fno-gcse` this reproduces JP's
+> proc/data/output live ranges without raw opcode asm. Owned `qksQG` was updated
+> from `l4bts`, verified raw score 0, then its exact registry row was removed.
+>
+> **Harvest-first next sprint.** The same 2026-07-11 family poll exposes five more
+> score-0 candidates that must be integrated before local experimentation:
+> `sub_800E1FC/uVVvN`, `sub_807C8DC/gdTId`, `sub_80A3300/Br4VJ`,
+> `sub_80A3528/vdXu7`, and `sub_80A6E4C/XOT5k`. For transferring P13 specifically,
+> prioritize `sub_80A3300` (same `gUnk_08A95478` pointer lifetime),
+> `sub_80A3528` (same Play-Ranking address-hoist class), then `sub_800A34C`
+> (table/scratch-pointer pressure under `-fno-gcse`). Full linked `make compare`
+> remains the gate even for score-0 forks.
 
 > **[UPDATE 2026-07-10 — axis-2 is now 13 still-asm (matching-C 99.85%, 8679/8692).]**
 > `AddAttr2dBitMap (sub_8001570)` and `Augury_InitResultScreen (sub_80A390C)`
@@ -69,8 +88,9 @@ Tractability order (full per-recipe detail in the D307/W3 triage report):
 ## DEFERRED (plateaued reg-alloc walls / large reconstructs, lowest priority)
 - Event18_ColorFade, RegisterTsaWithOffset, GmapScreen2_Loop, PutFaceOnBackGround,
   AdjustNewUnitPosition, sub_800A34C (spline 534/584), and the remaining augury cluster
-  (sub_80A2E64/3528/3300/6D34/6E4C/6F1C/800A594).
-  — [`AddAttr2dBitMap`, `PrepareBattleGraphicsMaybe`, `sub_80A390C`, and `sub_80A730C`
+  (sub_80A3528/sub_80A3300/sub_80A6D34/sub_80A6E4C/sub_80A6F1C/sub_800A594).
+  — [`AddAttr2dBitMap`, `PrepareBattleGraphicsMaybe`, `sub_80A2E64`,
+  `sub_80A390C`, and `sub_80A730C`
   have matched and are no longer queue entries.]
 
 WIRING: carved fns drop their baseline alias from layout/baseline_syms.d/ (else multiple-def);

@@ -5,7 +5,7 @@
 > state" figures throughout (25.6% matching-C, ~0.12% data, ~17% build
 > self-containment, ~59% named) are **historical snapshots from early in the
 > project**. Current ground-truth figures (from `scripts/calcprogress.py`):
-> matching-C **99.85% (8679 / 8692)**, build self-containment **100%**, strict
+> matching-C **99.86% (8680 / 8692)**, build self-containment **100%**, strict
 > C/PNG extracted data **79.91%**, source-form data **100.00%**, named symbols
 > **100.00%**. For what remains, see `docs/frontier.md`.
 
@@ -375,7 +375,7 @@ met.
 | Axis | Definition (denominator) | FE8J today | Target |
 |---|---|---|---|
 | **Build self-containment** | bytes producible from source ÷ 16,777,216 | ~~**~17%**~~ → **100%** (current) | 100% (self-contained build passes) |
-| **Matching-C functions** | matching-C funcs ÷ 8,692 | ~~**25.6%** (2,187)~~ → **99.85% (8679 / 8692)** (current) | 100% (FE8U: 99.777%) |
+| **Matching-C functions** | matching-C funcs ÷ 8,692 | ~~**25.6%** (2,187)~~ → **99.86% (8680 / 8692)** (current) | 100% (FE8U: 99.777%) |
 | **Extracted data** | extracted-asset bytes ÷ data bytes (real `dataTotal`, **not** `data_bytes`) | ~~**~0.12%**~~ → **100% of measured set** (current) | 100% |
 | **Named symbols** | named ÷ total labels (no overflow) | ~~**~59%**~~ → **100.00%** (current) | 100% (FE8U: 0 `sub_`/`nullsub`) |
 | **Shiftability** (D296/D304/**D306**) | relocated data pointers vs. **real-pointer debt** (fe8u oracle + structural classification) | ~~43.79%~~ → ~~"complete/gate=0" (D305, RETRACTED)~~ → **14,383 relocated; honest gate = 364 + unmeasured compressed** (current) | **0 real un-relocated pointers, achieved via fe8u-style typed asset extraction (D306)** — NOT inline-asm `.4byte`. The D305 "gate=0/complete" was retracted (D306): the auditor was blind to (a) 364 real pointers stuck in `__asm__` `.4byte` literals, and (b) pointers inside COMPRESSED data (Huffman text, LZ77 banim/gfx) that no `0x08`-word scan can see. True completion = extract every region to its proper fe8u asset type (text/gfx/anim-script/map/music), where pointers are symbolic by construction. |

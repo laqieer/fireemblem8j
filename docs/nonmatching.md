@@ -26,7 +26,7 @@ NON_MATCHING C **unblocks documentation and readability of the remaining
 hard functions WITHOUT ever touching `make compare`**. (For the current count
 of genuinely unmatched functions, see `docs/frontier.md` — the single source of
 truth. The ~5942 figure above is a historical snapshot from when this document
-was written; matching-C is now at 99.85%.) It is an *enhancement*,
+was written; matching-C is now at 99.86%.) It is an *enhancement*,
 not a goal change: CLAUDE.md already accepts descriptive asm as "real source"
 for the final goal. NON_MATCHING C is a staging area for future matching plus
 living documentation of intent — never a byte-match claim.
@@ -243,14 +243,16 @@ asm/<fn>.s           base.c          src/nonmatching/      nonmatchings/    src/
 
 ---
 
-## Help wanted — decomp.me scratches (start here to match the remaining 13)
+## Help wanted — decomp.me scratches (start here to match the remaining 12)
 
 These scratches are **work-in-progress starting points**, not byte-match claims. The
 owned `ABitG` (`AddAttr2dBitMap`) and `xYHce` (`Augury_InitResultScreen`) families were
 closed upstream on 2026-07-10 with decomp.me's supported `match_override` (“matched
 elsewhere”) semantics after their local sources passed the ROM oracle; their registry
 rows are no longer active. `PrepareBattleGraphicsMaybe` was likewise retired after its
-2026-07-07 community match. Stock decomp.me may still show NEAR progress that cannot
+2026-07-07 community match. `DivinationRankSpriteUpdate` (`sub_80A2E64`) was retired
+on 2026-07-11 after owned family `qksQG` and community fork `l4bts` both verified
+raw score 0 and the project source passed the ROM oracle. Stock decomp.me may still show NEAR progress that cannot
 reproduce project-local compiler context, so `make compare` remains the final oracle.
 
 | # | function | name | decomp.me scratch |
@@ -261,13 +263,12 @@ reproduce project-local compiler context, so `make compare` remains the final or
 | 4 | `sub_800FAD0` | GetUnitDefinitionFormEventScr | https://decomp.me/scratch/eZzgG |
 | 5 | `sub_807C8DC` | AdjustNewUnitPosition | https://decomp.me/scratch/taZrH |
 | 6 | `sub_807D3BC` | SelectSummonPos | https://decomp.me/scratch/J1ka1 |
-| 7 | `sub_80A2E64` | Augury/Link-Arena | https://decomp.me/scratch/qksQG |
-| 8 | `sub_80A3300` | Augury | https://decomp.me/scratch/ENay1 |
-| 9 | `sub_80A3528` | Augury | https://decomp.me/scratch/MaiDT |
-| 10 | `sub_80A6D34` | Augury/Link-Arena | https://decomp.me/scratch/9myLi |
-| 11 | `sub_80A6E4C` | Augury/Link-Arena | https://decomp.me/scratch/g7FXU |
-| 12 | `sub_80A6F1C` | Augury/Link-Arena | https://decomp.me/scratch/h2W8F |
-| 13 | `sub_80C05C8` | GmapScreen2_Loop | https://decomp.me/scratch/R7AaX |
+| 7 | `sub_80A3300` | Augury | https://decomp.me/scratch/ENay1 |
+| 8 | `sub_80A3528` | Augury | https://decomp.me/scratch/MaiDT |
+| 9 | `sub_80A6D34` | Augury/Link-Arena | https://decomp.me/scratch/9myLi |
+| 10 | `sub_80A6E4C` | Augury/Link-Arena | https://decomp.me/scratch/g7FXU |
+| 11 | `sub_80A6F1C` | Augury/Link-Arena | https://decomp.me/scratch/h2W8F |
+| 12 | `sub_80C05C8` | GmapScreen2_Loop | https://decomp.me/scratch/R7AaX |
 
 
 ## Metrics

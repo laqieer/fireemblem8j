@@ -1,22 +1,28 @@
-# The 13 remaining unmatched functions — understanding report
+# The 12 remaining unmatched functions — understanding report
 
-> **UPDATE 2026-07-10.** `AddAttr2dBitMap` (`sub_8001570`) and
-> `Augury_InitResultScreen` (`sub_80A390C`) now compile byte-exact from `src/`.
+> **UPDATE 2026-07-11.** `DivinationRankSpriteUpdate` (`sub_80A2E64`) now
+> compiles byte-exact from community score-0 fork `l4bts`. The decisive P13 shape
+> reuses one pointer local for the sine-table reads, commits the next IV before
+> the branch split, pins affine outputs to r6/r5/r4, and uses two empty `+r`
+> fences after `Div` under `-fno-gcse`. Owned `qksQG` was verified at raw score 0
+> before its registry row was removed. The 2026-07-10
+> `AddAttr2dBitMap` (`sub_8001570`) and
+> `Augury_InitResultScreen` (`sub_80A390C`) are also byte-exact in `src/`.
 > Together with the earlier `PrepareBattleGraphicsMaybe` match, the original
-> 16-function study cohort now has **13 active members**; axis-2 is **99.85%
-> (8679/8692), 13 still-asm**. AddAttr's zero-instruction `do { } while (0);`
+> 16-function study cohort now has **12 active members**; axis-2 is **99.86%
+> (8680/8692), 12 still-asm**. AddAttr's zero-instruction `do { } while (0);`
 > separator disproves this report's prior “source-invariant/permanent” save-order
 > framing. Augury matched through destination-field readback plus equivalent branch
 > polarity. Their detailed reports remain below as resolved historical analysis.
 >
-> **Purpose of this document.** Understand (not merely classify) the 13 functions
+> **Purpose of this document.** Understand (not merely classify) the 12 functions
 > whose bytes still come from `asm/*.s` (the authoritative `src/nonmatching/*.c`
 > set). For each: correspondence, purpose, behavior, reachability, callers/callees,
 > and current blocking-diff class. The authoritative work list remains
-> [`frontier.md`](frontier.md) → *Code frontier — the 13 remaining functions*.
+> [`frontier.md`](frontier.md) → *Code frontier — the 12 remaining functions*.
 >
 > Detailed section numbers below retain the original 16-function study IDs so old
-> cross-references remain readable; resolved #1, #6, and #12 are clearly marked.
+> cross-references remain readable; resolved #1, #6, #9, and #12 are clearly marked.
 
 ## Method
 
@@ -46,7 +52,6 @@
 | 4 | 0x0800FAD0 | GetUnitDefinitionFormEventScr | event unit loader | **yes** (eventscr.c:2376, NM in fe8u too) | **LIVE** | Event2C_LoadUnits | register permutation |
 | 5 | 0x0807C8DC | AdjustNewUnitPosition | unit placement | **yes** (muctrl.c:475) | **LIVE** | 3 (Move/MuCtr/GenUnit) | branch/loop coloring |
 | 6 | 0x0807D3BC | SelectSummonPos | summon positioning | analog only | **LIVE** | SelSumPosAndMoveCamera | spill/frame decision |
-| 7 | 0x080A2E64 | DivinationRankSpriteUpdate | augury result screen | no | **LIVE** | augury proc sub_80A3074 | reg-coloring tie-break |
 | 8 | 0x080A3300 | augury rank-sprite emit | augury result screen | no | **LIVE** | augury proc sub_80A3458 | inner-loop reg swap |
 | 9 | 0x080A3528 | DrawAuguryResultPanel | augury result screen | no | **LIVE** | Augury_InitResultScreen | invariant scheduling + coloring |
 | 10 | 0x080A6D34 | link-arena header decode | link-arena record codec | no | **DEAD** (transitive) | 1 (DecodeAndVerify…) | pure reg-coloring |
@@ -55,8 +60,8 @@
 | 13 | 0x080C05C8 | GmapScreen2_Loop | worldmap node icons | **yes** (worldmap_screen2.c) | **LIVE** | ProcScr_GmNodeIconDisplay | clean JP-vs-US coloring divergence |
 
 
-**Headline results (9 live / 4 dead)**
-- **9 of 13 are live, actively reachable game code.** Their remaining asm status is
+**Headline results (8 live / 4 dead)**
+- **8 of 12 are live, actively reachable game code.** Their remaining asm status is
   a byte-generation problem, not an understanding gap.
 - **4 of 13 are unreachable dead code**, forming the same two islands found by the
   original study:
@@ -64,7 +69,7 @@
     `SplineEvalCatmullRom` [current #1] → `sub_800A194`.
   - **Link-arena decode island** — `DecodeAndVerifyArenaRecord` [current #12] →
     `sub_80A6D34` [current #10].
-- **Every one of the 13 has a real, non-stub ROM body.** “Dead” means statically
+- **Every one of the 12 has a real, non-stub ROM body.** “Dead” means statically
   unreferenced, not empty.
 - The 2026-07-10 wins are a methodology correction: measured plateaus remain useful,
   but “permanent/source-invariant” claims require stronger evidence than failed source
@@ -98,7 +103,7 @@ augury / divination result screen  (占い)  — LIVE
         ├─ OnInit ──► Augury_InitResultScreen [MATCHED 2026-07-10]
         │              └─► DrawAuguryResultPanel [9]
         ├─ sub_80A3458 ──► sub_80A3300 [8]
-        └─ sub_80A3074 ──► DivinationRankSpriteUpdate [7]
+        └─ sub_80A3074 ──► DivinationRankSpriteUpdate [MATCHED 2026-07-11]
 
 link-arena record codec  (通信闘技場)  — ENCODE live, DECODE dead
   menu ProcScr ──► sub_80A74D4 ──► sub_80A6E4C [11]
@@ -281,7 +286,7 @@ JP-only DEAD spline island
   forces an extra `iy` spill → frame 140 vs 144, cascading the register renumber).
   `-mjp-promote`; JP-specific reimplementation.
 
-## 9. DivinationRankSpriteUpdate — `0x080A2E64`  (LIVE — augury screen)
+## Resolved study #9. DivinationRankSpriteUpdate — `0x080A2E64`  ✅ MATCHED 2026-07-11
 
 - **fe8u twin:** **none** (JP-only 占い/augury/divination subsystem).
 - **Purpose:** per-frame update proc of the divination rank-sprite animator — advances a frame
@@ -291,15 +296,20 @@ JP-only DEAD spline island
   `rowCounts[]` and the counter; then a 5-slot loop computing affine params via `sub_80D6374`
   (fixed-point multiply) from `DIVINATION_SIN/COS` constants and installing them with
   `sub_8002100`.
-- **Callees:** `sub_80A2E4C`, `sub_80D6374`, `sub_8002100`, `PutSpriteExt`; reads
+- **Callees:** `sub_80A2E4C`, `Div`, `SetObjAffine`, `PutSpriteExt`; reads
   `gUnk_08A95478`.
 - **Callers:** the address is loaded from the literal pool of the proc-starter routine
   `sub_80A3074` (`+0xA0`), which starts it as a proc; `sub_80A3074` is `PROC_CALL`-ed by the
   ProcScr `data_08A9548C`, itself spawned by `sub_80A2E4C` (which this function also calls —
   a mutually-recursive augury animation family).
 - **Verdict:** **LIVE** — animation proc of the augury result screen.
-- **Why still asm:** register-coloring tie-break (a 67 k-iter permuter reported "score 0" but
-  that scorer is register-blind — false-green). `-fno-gcse` community fork shape.
+- **Match lever:** harvest-first found score-0 community fork `l4bts`. Relative to
+  the proved nonmatching parent, the matching source reuses one `data` pointer for
+  the sine-table reads, explicitly materialises `xArg` and `next = i + 1`, pins
+  `pRow/x/sa/sb/sc` to the JP registers, and places two empty `+r` fences after
+  the first two `Div` results. Under `-fno-gcse`, this preserves JP's
+  proc/table/output live ranges. The project adaptation removed decomp.me `.set`
+  scaffolding and contains no raw opcode asm. `make compare` is the match proof.
 
 ## 10. sub_80A3300 — `0x080A3300`  (LIVE — augury screen)
 
@@ -523,12 +533,12 @@ but unmatchable), and **3 are genuinely FE8J-/FE8-specific** (the two dead splin
 
 ---
 
-## ROI — effort vs value to byte-match the remaining 13
+## ROI — effort vs value to byte-match the remaining 12
 
-The 13 already have readable `src/nonmatching/*.c` reconstructions and a green,
-self-contained checksum build. Matching them moves **5,236 bytes** from descriptive asm
-to compiled C and advances axis-2 from **99.85% toward 100%** (about **+0.012% per
-function; +0.15% total**). It is valuable decomp polish, not a functional bug fix.
+The 12 already have readable `src/nonmatching/*.c` reconstructions and a green,
+self-contained checksum build. Matching them moves **4,800 bytes** from descriptive asm
+to compiled C and advances axis-2 from **99.86% toward 100%** (about **+0.012% per
+function; +0.14% total**). It is valuable decomp polish, not a functional bug fix.
 
 The 2026-07-10 results correct the old effort model: deterministic levers are **not
 proven exhausted merely because a permuter plateaus**. AddAttr yielded to a zero-code BB
@@ -544,7 +554,6 @@ then stop repeated variants of the same idea and hand off to community/permuter 
 | 4 | GetUnitDefinitionFormEventScr (464 B) | live | clean register permutation | MED-HIGH |
 | 5 | AdjustNewUnitPosition (308 B) | live | branch coloring / loop rotation | MED |
 | 6 | SelectSummonPos (392 B) | live | spill-slot/frame decision | LOW |
-| 7 | DivinationRankSpriteUpdate (436 B) | live | coloring / IV scheduling | MED-HIGH |
 | 8 | sub_80A3300 (224 B) | live | inner-loop coloring | MED |
 | 9 | DrawAuguryResultPanel (880 B) | live | invariant scheduling + coloring | LOW |
 | 10 | sub_80A6D34 (280 B) | dead | pure coloring | LOW |
@@ -554,14 +563,15 @@ then stop repeated variants of the same idea and hand off to community/permuter 
 
 ### Recommendation
 1. Harvest registered decomp.me families before any local attempt.
-2. Try the now-proven clean levers first: P9 zero-instruction BB separation and P12
-   destination readback/equivalent branch polarity, then existing widen/decl-order/pin levers.
+2. Try the now-proven clean levers first: P9 zero-instruction BB separation, P12
+   destination readback/equivalent branch polarity, and P13 pointer-role readback +
+   explicit IV/argument temps. Add empty `+r` fences only with disassembly evidence.
 3. Require `make compare` for every claimed match; a decomp.me score or permuter zero is not
    the ROM oracle.
 4. Avoid broad “permanent ceiling” language. State the tested variants and exact residual;
    reserve “handwritten/wrong compiler” for positive instruction-level evidence.
 
-**Bottom line:** the remaining prize is **13 functions / 5,236 bytes / ~0.15% axis-2**.
+**Bottom line:** the remaining prize is **12 functions / 4,800 bytes / ~0.14% axis-2**.
 The new wins improve the expected value of *targeted, structurally different* attempts,
 not endless re-runs of an unchanged permuter search space.
 ---

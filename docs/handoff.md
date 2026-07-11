@@ -3,6 +3,20 @@
 **Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
+> **[REFRESH 2026-07-11 — `DivinationRankSpriteUpdate` release candidate; not main.]**
+> Branch `feat/sub_80A2E64` harvests score-0 community fork `l4bts` from owned
+> family `qksQG`. Ground truth from `python3 scripts/calcprogress.py` is
+> matching-C **99.86% (8680/8692, 12 still-asm)**, source-form data **100%**,
+> and named symbols **100% (12692/12692)**. The reusable lever is **pointer-role
+> readback/lifetime preservation**: reuse one `data` pointer for the sine-table
+> reads, commit the next IV before the branch split, pin the affine results to
+> r6/r5/r4, and use two zero-instruction `+r` fences after `Div` so agbcc keeps
+> the JP live ranges under `-fno-gcse`. The real project source contains no
+> decomp.me `.set` scaffolding or raw opcode asm. `qksQG` and `l4bts` both expose
+> raw score 0; only then was the exact registry row retired. Candidate gates:
+> layout+compare, shiftcheck, check-nonmatching, and clean compare; main CI is
+> still the publication gate. See D367.
+
 > **[REFRESH 2026-07-10 — combined axis-2 release candidate; not main.]**
 > Ground truth from `python3 scripts/calcprogress.py`: self-containment **100%**,
 > matching-C **99.85% (8679/8692, 13 still-asm)**, source-form data **100%**

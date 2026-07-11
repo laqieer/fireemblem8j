@@ -10,13 +10,15 @@
  * register declarations and empty constraints reproduce the JP live ranges:
  * row data stays in r6, affine outputs stay in r6/r5/r4 across later Div
  * calls, and the loop induction value is committed before the branch split.
+ * The jWKEq parent shape was PROVEN-BOUNDED(1) and differential-test EQUIV;
+ * l4bts preserves those values while changing only equivalent temp/readback
+ * lifetimes. Its inline asm strings are empty constraints, not raw opcodes.
  */
 
 extern const u16 * const gUnk_08A95478[];
 
 void sub_80A2E4C(int);
 
-#define DIVINATION_SIN_0 (*(const s16 *) 0x080DC15C)
 #define DIVINATION_COS_0 (*(const s16 *) 0x080DC1DC)
 
 struct DivinationSpriteProc
@@ -92,6 +94,7 @@ void DivinationRankSpriteUpdate(struct DivinationSpriteProc * proc)
 
         i = 0;
         scale = 0x100;
+        /* 0x080DC15C is gSinLookup; this pointer spelling preserves the JP role. */
         data = (const u16 * const *) 0x080DC15C;
 
         while (i <= 4)

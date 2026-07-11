@@ -209,8 +209,8 @@ an effective score 0 without pretending the stock compiler produced raw score 0.
 
 ## 12. Match patterns — community forks plus local oracle wins (D292/D366)
 
-Nine FE8J reg-coloring NEARs (8 by TsilaAllaoui + sub_8057F80) (all labelled "agbcc reg-coloring NEAR") were driven to
-**score 0** on decomp.me forks by community matcher **TsilaAllaoui**, then integrated to
+Ten FE8J reg-coloring NEARs were driven to **score 0** on decomp.me forks by
+community matcher **TsilaAllaoui**, then integrated to
 `src/` byte-exact here. Diffing each non-matching parent (proxied from the in-repo
 `src/nonmatching/*` stubs, git history, and the fe8u natural form — the decomp.me parents
 were later overwritten by mark-solved, so the *fork's own explicit constructs* are the
@@ -218,12 +218,12 @@ primary evidence) against its matched fork yields a reusable lever set. These ex
 §1–§9 with a new, more surgical family: **inline-asm constraint scripting** — directly
 commanding agbcc's register allocator / instruction selector without changing behaviour.
 They crack exactly the spill-decision + high-pressure reg-coloring NEARs §7 said flag
-sweeps could not. Two later local-oracle matches add clean source-only levers:
+sweeps could not. Two local-oracle matches add clean source-only levers:
 `AddAttr2dBitMap` (P9) and `Augury_InitResultScreen` (P12).
 
-The 11 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
+The 12 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
 
-| fork (fn) | pins | `=r`/`0` reg-barrier | `+m` mem-barrier | inline-asm | headline lever |
+| fork (fn) | pins | `=r`/`+r` reg-barrier | `+m` mem-barrier | inline-asm | headline lever |
 |---|---|---|---|---|---|
 | jmNW8 `PutFaceOnBackGround`   | 0  | 0 | 0 | 0  | **P8** pure source-shape (hoist+IV+widen) |
 | 9rbYd `EfxAdvanceFrameLut`    | 1  | 0 | 0 | 3  | P7 return-widen + P3 `sub;strh` + P9 blocks |
@@ -234,6 +234,7 @@ The 11 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scri
 | 39OxE `RegisterTsaWithOffset` | 6  | 0 | 0 | 6  | P4 high-reg (r8) + **P6** shifted-domain loop |
 | Qua5T `sub_80CAEF4`           | 34 | 6 | 2 | 34 | **P2** mem-barrier + P1/P4 swarm + goto |
 | rtMN6 `PrepareBattleGraphicsMaybe` (sub_8057F80, 2936 B) | 2 | 0 | 0 | 0 | **P4** pins (`char_cnt`→r6, `banim_pos`→r4) + **§5a** s16→int widen (+`(s16)` casts) + inline the ally-position helper + decl-order. **Cracked a verdict recorded as "genuinely region-different, byte-match out of scope"** — see the LESSON below. |
+| l4bts `DivinationRankSpriteUpdate` (sub_80A2E64, 436 B) | 6 | 2 | 0 | 2 | **P13** pointer-role readback/reuse + explicit IV/arg temps + P4 pins + empty `+r` live-range fences |
 | local `AddAttr2dBitMap` (sub_8001570, 224 B) | 0 | 0 | 0 | 0 | **P9** zero-instruction `do { } while (0);` BB separator flips callee-save copy order |
 | local `Augury_InitResultScreen` (sub_80A390C, 612 B) | 0 | 0 | 0 | 0 | **P12** destination-field readback + equivalent branch polarity |
 
@@ -397,11 +398,42 @@ was an **equivalent branch-polarity** choice: both arms cleared `portraitId`, bu
 and downstream branch/pool offsets. Use destination readback when JP reuses field
 addresses; use polarity only when the two formulations are demonstrably equivalent.
 
+**P13 — pointer-role readback/reuse across phases + post-call live-range fences.**
+When JP keeps one table/base pointer in a high register across a loop, do not re-spell
+equivalent reads as independent globals or absolute expressions. Assign the pointer once
+and read back through that same local so agbcc sees one long-lived pseudo with the same
+role as JP:
+```c
+data = (const u16 * const *)gSinLookup;
+sa = Div(COS(0) << 4, r);
+asm("" : "+r"(sa));                 /* emits no opcode; preserve result lifetime */
+sa = (s16)sa;
+sb = Div(-(*(const s16 *)data) << 4, scale);
+asm("" : "+r"(sb));
+sc = Div((*(const s16 *)data) << 4, r);
+```
+On `DivinationRankSpriteUpdate` (`sub_80A2E64`), the old staging source re-read
+the sine value through a separate raw/global expression. The score-0 `l4bts` shape
+instead reuses `data`, explicitly materialises `xArg` and `next = i + 1`, pins
+`pRow/x/sa/sb/sc` to the JP registers, and places two empty `+r` fences after the
+first `Div` results. Under per-TU `-fno-gcse`, this keeps `proc` in r9, the shared
+table pointer in sl, affine outputs in r6/r5/r4, and the next IV in its JP stack
+slot. The project adaptation strips decomp.me's `.set` scaffolding; the remaining
+asm forms are register declarations and empty constraints only, with no raw opcode.
+
+P13 is the pointer-local analogue of P12: P12 reads a just-written destination
+field to preserve its address; P13 reads through an equivalent pointer local to
+preserve the pointer's role and lifetime. Highest-transfer remaining targets are
+`sub_80A3300` (same `gUnk_08A95478` table), `sub_80A3528` (same Play-Ranking
+address-hoist class), and `sub_800A34C` (table/scratch-pointer pressure with
+`-fno-gcse`). Harvest any score-0 family member before applying the lever locally.
+
 ### How to run this on a NEAR (escalation order)
 1. **Confirm it's a coloring/spill NEAR** (same instruction *count/opcodes*, regs or spill
    slots differ) — objdiff / the region `cmp`. If opcodes differ, it's a §1–§9 shape issue.
 2. **P8 + §2 + P7 first** (source-shape only — keeps the decomp clean & portable). If the
    `.text` *size* differs by the width of a repeated `(T)cast`, apply **P11** (materialize-once).
+   If JP holds one table/destination address across phases, try **P12/P13 readback** before pins.
 3. **P5/P6** if the diff is a signed sub-field / re-extended loop counter (shift-domain).
 4. **§9 declaration/first-use order**, then **P4 pins**, for a clean register permutation.
 5. **P1 reg-barrier** to fence a live range; **P3 instruction scripting** to force one exact
@@ -413,8 +445,9 @@ addresses; use polarity only when the two formulations are demonstrably equivale
 decomp — they encode the answer rather than discovering the source shape, and are non-portable
 across compilers. Prefer P8/P7/P5/P6 (real source levers) and escalate to asm-constraints only
 for reg-coloring/spill NEARs that resist everything else (Qua5T's extreme pressure is the
-justified end of the spectrum; jmNW8's zero-asm form is the ideal). All eight patterns above
-are credited to **TsilaAllaoui** (decomp.me), whose forks supplied the worked examples.
+justified end of the spectrum; jmNW8's zero-asm form is the ideal). The community-fork
+patterns above are credited to **TsilaAllaoui** (decomp.me), whose forks supplied the worked examples,
+including `l4bts`/P13.
 
 ### Field application to the still-unmatched registry (D292 Phase 4)
 Applying the above to the ~21 `DECOMP_THEN_UPDATE` registry functions confirmed they are the

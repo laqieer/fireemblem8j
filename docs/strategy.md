@@ -82,7 +82,7 @@ Early bootstrap (now historical):
 
 **Current progress (ground truth from `scripts/calcprogress.py`):**
 
-* **Matching-C functions**: 99.85% (8679 / 8692)
+* **Matching-C functions**: 99.86% (8680 / 8692)
 * **Build self-containment**: 100%
 * **Extracted data**: 100% of the measured set
 * **Named symbols**: 100.00%

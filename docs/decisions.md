@@ -10807,3 +10807,67 @@ libc/libgcc, with **13 still descriptive asm**. `find src/nonmatching -maxdepth 
 **Rule going forward.** A plateau is evidence about the attempted lever set, not proof
 of permanence. Record exact residuals and failed variants, then keep wall labels
 provisional unless positive instruction/compiler evidence proves C cannot emit the target.
+
+## D367 — `DivinationRankSpriteUpdate` score-0 harvest closes the full lifecycle; P13 pointer-role readback preserves JP live ranges; matching-C 99.86% (8680/8692), 12 remain (2026-07-11)
+
+**Scope/status.** Existing candidate branch `feat/sub_80A2E64` contains the
+byte-exact carve commit `41d015967…` and this separate lifecycle follow-up
+(no amend, no force-push). It remains a **candidate only** until main CI and the
+serial integrator accept it.
+
+**Commit/source audit.** The carve commit changes the per-target `-fno-gcse`
+Makefile rule, replaces `asm/sub_80A2E64.s` + its nonmatching C/manifest with
+`src/DivinationRankSpriteUpdate.c`, and adds task-unique ROM/data-alias fragments
+for `[0x080A2E64,0x080A3018)` and `gUnk_08A95478 @ 0x08A95478`. The local source
+uses real project headers and real symbols (`Div`, `SetObjAffine`, `PutSpriteExt`).
+It contains no decomp.me `.set`/fake-alignment scaffolding, no downloaded context,
+and no raw opcode asm. Its only asm forms are hard-register declarations and
+empty constraints. The fixed addresses `0x080DC15C/0x080DC1DC` are the real
+`gSinLookup` sine/cosine entries confirmed by the linked ELF, not remote aliases.
+
+**Semantics.** The staged jWKEq parent was already `PROVEN-BOUNDED(1)` and
+differential-test `EQUIV`. Diffing it against score-0 `l4bts` shows no behavior
+change: `r > 0x100 ? r = 0x100` is written as the equivalent two-step
+`r = 0x80; r <<= 1`; helper names become the real project `Div` /
+`SetObjAffine`; and all additional constructs only materialise equivalent temps,
+read through an equivalent pointer, pin registers, or add zero-instruction
+constraints.
+
+**Learned lever — P13 pointer-role readback/reuse + live-range fences.** The old
+source re-spelled sine-table reads as independent global/absolute expressions.
+`l4bts` reassigns the existing `data` pointer to `gSinLookup` and reads the sine
+value through that same local, explicitly materialises `xArg` and `next = i + 1`,
+pins `pRow/x/sa/sb/sc`, and puts two empty `+r` fences after `Div` results.
+Under `-fno-gcse`, that keeps `proc` in r9, the table pointer in sl, affine
+outputs in r6/r5/r4, and the next IV in the JP spill slot. P13 is the
+pointer-local analogue of P12 destination-field readback: preserve the *role and
+lifetime* of the address-bearing lvalue instead of recomputing an equal value.
+
+**decomp.me lifecycle.** Harvest-first found community fork `l4bts`
+(TsilaAllaoui) at raw score 0. Owned base `qksQG` was updated from that fork and
+re-queried as `SOLVED`, raw score 0; `l4bts` also remained raw score 0. Only
+after those checks succeeded was the exact
+`sub_80A2E64<TAB>qksQG<TAB>sub_80A2E64` registry row removed.
+
+**Measured result.** `python3 scripts/calcprogress.py` reports matching-C
+**99.86% (8680/8692)** = 8553 functions compiled from `src/*.c` + 127 from
+libc/libgcc, with **12 still descriptive asm**. Source-form code is
+**896,628 / 901,428 bytes (99.47%)**; **4,800 bytes** remain asm.
+`find src/nonmatching -maxdepth 1 -name '*.c'` and `make check-nonmatching`
+both report **12**.
+
+**Next sprint.** The same family poll exposes five score-0 candidates to harvest
+before any local experiments: `sub_800E1FC/uVVvN`,
+`sub_807C8DC/gdTId`, `sub_80A3300/Br4VJ`,
+`sub_80A3528/vdXu7`, and `sub_80A6E4C/XOT5k`.
+For P13 transfer specifically, prioritize `sub_80A3300` (same
+`gUnk_08A95478` pointer role), `sub_80A3528` (same Play-Ranking address-hoist
+class), then `sub_800A34C` (table/scratch-pointer pressure under
+`-fno-gcse`).
+
+**Release-candidate gates (all green):**
+- `make layout && make compare` → `fireemblem8.gba: OK`
+- `make shiftcheck` → 0 HIGH / no high-confidence shiftable-region suspects
+- `make check-nonmatching` → all 12 staged C files have asm byte sources
+- `make clean && make compare` → `fireemblem8.gba: OK`
+- clean-built SHA-1 → `7da0456035366aa18414faa79d8fe7649f03c1ed`
