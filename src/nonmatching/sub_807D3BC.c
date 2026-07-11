@@ -22,55 +22,48 @@
  *   Callees: DivRem=DivRem, CanUnitCrossTerrain=sub_8019174.
  * ============================================================================
  *
- * MATCH STATUS (this reconstruction, v7):  NOT byte-exact.
- *   Register-blind (mnemonic LCS, instruction-for-instruction) = 93.5% (173/185);
- *   192 JP insns vs 193 mine; raw byte-diff 331/392. The raw byte figure is
- *   INFLATED by a register-renumber cascade seeded by ONE frame-size divergence
- *   (see #1) — the *instructions* are ~99% aligned; only their register operands
- *   differ. (Prior hand-recon without -mjp-promote: register-blind 82.2%, byte
- *   232/392 — this reconstruction is structurally CLOSER, same algorithm.)
+ * MATCH STATUS (2026-07-11 reject-lifetime pass): NOT byte-exact, but the best
+ *   proven staging source is now 109/392 differing linked bytes, exact size 392
+ *   and exact `sub sp,#144` frame. Progression from the committed v7 baseline:
+ *     331 -> 210  destination readback + scoped empty-register barrier
+ *     210 -> 201  scope `reject` inside the outer loop
+ *     201 -> 138  signed-pointer zero-fill
+ *     138 -> 109  do-while signed-pointer zero-fill (removes the pre-test)
+ *   Semantics of this 109-byte candidate:
+ *     prove_nonmatching.py = PROVEN-BOUNDED(1)
+ *     differential_test.py --trials 60 = EQUIV (60/60)
  *
- * EXACT BLOCKING DIFFS (agbcc register-allocation decisions, not source-forceable):
+ * EXACT REMAINING ROOT:
  *
- *   1. FRAME SIZE — mine `sub sp,#140`, JP `sub sp,#144` (0x90). JP reserves ONE
- *      extra 4-byte spill slot [sp,#0x84] into which it spills the outer-loop var
- *      iy, reloading it (`ldr [sp,#0x84]`) at the outer-loop back-edge. Mine keeps
- *      iy in a register (no spill) → smaller frame. This one divergence renumbers
- *      every sp-relative slot below it and cascades the raw byte-diff.
+ *   1. `reject` is still LICM-hoisted to the loop preheader:
+ *        mine +0x20 `movs r2,#0xff; str r2,[sp,#0x80]`
+ *        JP   +0x20 `ldr r2,[sp,#0x78]; adds r2,#2; mov sl,r2`
+ *      JP instead materializes `reject` per outer iteration at +0x3A:
+ *        `ldr r3,=gBmMapSize; movs r2,#0xff`.
+ *      Mine therefore keeps x+2 in r3, nextIy in sl, gBmMapSize in r2, and
+ *      reloads reject into r1 at +0xB4. JP keeps x+2 in sl, spills nextIy at
+ *      [sp,#0x84], keeps gBmMapSize in r3, and carries reject in r2 through the
+ *      inner loop/call spill. This causes the remaining r4/r5 and r2/r3 rotation:
+ *        mine +0xB2 `ldrb r0,[r5,#2]; ldr r1,[sp,#0x80]; orrs r0,r1`
+ *        JP   +0xB2 `ldrb r0,[r4,#2];                 orrs r0,r2`.
  *
- *   2. REJECT-CONSTANT: LICM-hoist vs rematerialize (the ROOT of #1).
- *      JP hoists 0xff into r2 once per OUTER iteration (`movs r2,#0xff`) and uses
- *      the held register in the fail path (`ldrb r0,[r4,#2]; orrs r0,r2; strb`).
- *      Mine rematerializes the constant at the fail site (`ldrb r1,[r5,#2];
- *      movs r0,#255; orrs r0,r1; strb`). Holding 0xff in a register costs JP one
- *      register → forces the iy spill in #1. From provably-constant C, agbcc
- *      always chooses rematerialize (movs #255 is a cheap 2-byte immediate); a
- *      mask local (`int reject=0xff; |= reject`) DOES fix the loop-pointer
- *      induction (getting `orrs`, r-maintained address) but agbcc still peephole-
- *      rematerializes the immediate rather than hoisting it.
+ *   2. ZERO-FILL SHAPE IS NOW CORRECT, but setup ordering/coloring still follows
+ *      the reject-driven allocation. Both emit the exact decrementing
+ *      `strb; subs; cmp; bge` loop at +0x114. Mine computes the end pointer before
+ *      count+1 and colors base/zero as r1/r2; JP computes count+1 first and colors
+ *      base/zero as r2/r1. The following compaction loop is consequently a clean
+ *      register rotation (mine r1/r3/r4/r5 vs JP r5/r2/r3/r4).
  *
- *   3. ZERO-FILL STRENGTH REDUCTION: JP strength-reduces
- *      `for (n=8; n>=0; n--) indices[n]=0` into a decrementing pointer walk
- *      (`add r0,sp,#116` base; `strb`,`subs`; SIGNED `cmp`/`bge`). Mine keeps the
- *      index form (`adds`; `cmp n,#0`; `bge`). An explicit `s8* p` pointer walk
- *      yields an UNSIGNED pointer compare (`bcs/bcc`) — wrong direction — so no
- *      source form reproduces JP's signed-compare pointer induction here.
+ * BOUNDED VARIANTS THIS PASS (stop after four as requested):
+ *   (1) scoped reject + proven readback/barrier: 201;
+ *   (2) a pre-init zero-instruction BB separator: no change (201);
+ *   (3) signed-pointer zero-fill: 138;
+ *   (4) do-while signed-pointer zero-fill: 109.
+ * No long permuter, raw opcode asm, register pin, or global compiler flag used.
  *
- * LEVERS TRIED (none reached 0; -mjp-promote is the only net-positive one):
- *   +mjp-promote (KEY, 43->72% on .o), De-Morgan `||` fail-inline inversion (+8pt),
- *   int zero-fill vs s8/reuse-i (int best), mask-local reject (induction fix),
- *   reject=-1 vs 0xff, reject reassigned per-outer-iteration (agbcc re-hoists it
- *   out), `register int reject` (ignored), decl reordering, register asm() pins
- *   (HURT allocation). decomp-permuter: base score 1695, plateau ~875 after
- *   60k+ iterations across two seeds (v7 and reject=-1) — the residual is pure
- *   agbcc register coloring the randomizer cannot cross from this structure.
- *
- * VERDICT: MATCHABLE-in-principle JP-specific reimplementation (confirmed NOT the
- *   US algorithm, needs -mjp-promote), currently walled by an agbcc register-
- *   allocation micro-decision (reject hoist -> iy spill -> frame 140 vs 144).
- *   Graduate via a longer permuter search or the exact hoist trick; then move to
- *   src/, flip the carved_rom row asm->src, drop the SelectSummonPos baseline
- *   alias (layout/baseline_syms_drop.d/), delete the .s; make compare must stay OK.
+ * VERDICT: UNSOLVED, objectively improved and proven-equivalent. The next useful
+ * lever must make the compiler define 0xff inside the outer loop without giving
+ * it a preheader stack home; do not regress to the old 331-byte experiments.
  */
 
 #include "global.h"
@@ -94,10 +87,13 @@ s8 sub_807D3BC(int x, int y, struct SumThing* result)
     s8 i, j;
     s8 ix, iy;
     s8 pick;
-    int n;
-    int reject = 0xff;
+    s8* zero;
 
     for (iy = y - 1; iy < y + 2; iy++) {
+        int reject = 0xff;
+
+        asm("" : "=r"(reject) : "0"(reject));
+
         for (ix = x - 1; ix < x + 2; ix++) {
             array[count].x = ix;
             array[count].y = iy;
@@ -106,7 +102,10 @@ s8 sub_807D3BC(int x, int y, struct SumThing* result)
                 gBmMapUnit[iy][ix] != 0 ||
                 (gPlaySt.chapterVisionRange && gBmMapFog[iy][ix] == 0) ||
                 !CanUnitCrossTerrain(&gBattleActor.unit, gBmMapTerrain[iy][ix])) {
-                array[count].boolAvailable |= reject;
+                u8 available = array[count].boolAvailable;
+
+                available |= reject;
+                array[count].boolAvailable = available;
             } else {
                 array[count].boolAvailable = 1;
                 count++;
@@ -117,8 +116,11 @@ s8 sub_807D3BC(int x, int y, struct SumThing* result)
     if (!count)
         return -1;
 
-    for (n = 8; n >= 0; n--)
-        indices[n] = 0;
+    zero = &indices[8];
+
+    do {
+        *zero-- = 0;
+    } while ((int) zero >= (int) indices);
 
     for (j = 0, i = 0; i < count; i++) {
         if (array[i].boolAvailable == 1) {
