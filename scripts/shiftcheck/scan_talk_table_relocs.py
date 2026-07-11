@@ -15,6 +15,10 @@ import subprocess
 import sys
 
 ROM_BASE = 0x08000000
+ROM_OUTPUT_SECTION = ".rom"
+
+RELOC_SECTION_RE = re.compile(r"^RELOCATION RECORDS FOR \[(.+)\]:$")
+ABS32_RELOC_RE = re.compile(r"\s*([0-9A-Fa-f]{8})\s+R_ARM_ABS32\s+(.+)$")
 
 
 def load_symbols(elf):
@@ -30,18 +34,54 @@ def load_symbols(elf):
     return syms
 
 
-def load_relocs(elf):
-    out = subprocess.check_output(["arm-none-eabi-objdump", "-r", elf], text=True)
-    relocs = []
+def parse_relocs(out):
+    """Yield ROM-located ABS32 relocations from objdump -r output.
+
+    The source relocation section is part of the address. In particular,
+    .debug_info can grow past 0x08000000 and then contain section-relative
+    relocation offsets that numerically overlap the GBA ROM window. Treating
+    every such offset as a ROM location makes shiftcheck depend on the absolute
+    build-path length. Talk tables live in the linked .rom output section, so
+    only relocation records sourced from .rom are relevant here.
+    """
+    source_section = None
     for line in out.splitlines():
-        m = re.match(r"\s*([0-9A-Fa-f]{8})\s+R_ARM_ABS32\s+(.+)$", line)
+        section_match = RELOC_SECTION_RE.match(line)
+        if section_match:
+            source_section = section_match.group(1)
+            continue
+
+        if source_section != ROM_OUTPUT_SECTION:
+            continue
+
+        m = ABS32_RELOC_RE.match(line)
         if not m:
             continue
+
         loc = int(m.group(1), 16)
         if loc < ROM_BASE:
             loc += ROM_BASE
-        relocs.append((loc, m.group(2).strip()))
-    return relocs
+        yield loc, m.group(2).strip()
+
+
+def load_relocs(elf):
+    out = subprocess.check_output(
+        ["arm-none-eabi-objdump", "-r", "--section=" + ROM_OUTPUT_SECTION, elf],
+        text=True,
+    )
+    return list(parse_relocs(out))
+
+
+def find_bad_relocs(relocs, ranges):
+    bad = []
+    for loc, target in relocs:
+        for name, start, end, entsz, allowed in ranges:
+            if start <= loc < end:
+                rel = loc - start
+                if rel % entsz != allowed:
+                    bad.append((name, loc, rel // entsz, rel % entsz, target))
+                break
+    return bad
 
 
 def main():
@@ -63,14 +103,7 @@ def main():
         ("gDefeatTalkList", syms["gDefeatTalkList"], syms["gSupportTalkList"], 12, 8),
     ]
 
-    bad = []
-    for loc, target in load_relocs(args.elf):
-        for name, start, end, entsz, allowed in ranges:
-            if start <= loc < end:
-                rel = loc - start
-                if rel % entsz != allowed:
-                    bad.append((name, loc, rel // entsz, rel % entsz, target))
-                break
+    bad = find_bad_relocs(load_relocs(args.elf), ranges)
 
     for name, loc, ent, off, target in bad:
         print(f"BAD {name}[{ent}]+0x{off:X} loc=0x{loc:08X} reloc={target}")

@@ -2214,6 +2214,11 @@ shiftcheck-talk: $(RELOCS_ELF) $(ELF)
 shiftcheck-ptraudit: $(ELF)
 	$(PYTHON) $(SHIFTCHECK)/audit_pointer_classification.py --elf $(ELF) --fail-on-suspects
 
+# Focused unit tests for the relocation scanners. Keep these in the normal gate:
+# path-sensitive debug-section layouts must not change shiftcheck's ROM verdict.
+shiftcheck-tests:
+	$(PYTHON) -m unittest discover -s $(SHIFTCHECK) -p 'test_*.py'
+
 # Layer 2: differential two-shift build (NON-gating; not applicable to fe8j's packed
 # ROM -- exits with a clear "no slack" message). Kept for documentation parity.
 shiftcheck-diff: $(ROM) $(MAP) $(OBJECTS_LST)
@@ -2224,9 +2229,9 @@ shiftcheck-diff: $(ROM) $(MAP) $(OBJECTS_LST)
 
 # The CI gate (no emulator): build-system audit + reloc scan + cross-resource offsets
 # + packed talk-table false-relocation scan + pointer-classification audit.
-shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit
+shiftcheck: shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests
 
-.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-diff
+.PHONY: shiftcheck shiftcheck-build shiftcheck-static shiftcheck-offsets shiftcheck-talk shiftcheck-ptraudit shiftcheck-tests shiftcheck-diff
 
 # The carve glue (ldscript.txt + asm/baserom.s + asm/jp_syms.s) is GENERATED from
 # the layout/ manifests and is gitignored, so the build regenerates it whenever a
