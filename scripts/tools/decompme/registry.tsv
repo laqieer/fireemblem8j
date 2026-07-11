@@ -4,7 +4,6 @@ sub_800A34C	ABtKz	sub_800A34C
 sub_800E1FC	nlJVc	Event18_ColorFade
 sub_807C8DC	taZrH	AdjustNewUnitPosition
 sub_80A3528	MaiDT	sub_80A3528
-sub_80A3300	ENay1	sub_80A3300
 sub_80A6E4C	g7FXU	sub_80A6E4C
 # DONE (carved in-repo as src/LoadClassReelFontPalette.c, D307; scratch marked SOLVED to avoid wasted community effort):
 # sub_80D17C8	VAkhM	sub_80D17C8
