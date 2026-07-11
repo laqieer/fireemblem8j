@@ -7,7 +7,7 @@
 > `sub_80A3528/vdXu7`, and `sub_80A6E4C/XOT5k`.
 > ENay1/nlJVc/taZrH/MaiDT/g7FXU and those five community forks all expose raw
 > score 0 upstream, and the exact registry rows are retired. The release also
-> carries the `.rom`-section guard for shiftcheck debug relocations. See D368.
+> carries the `.rom`-section guard for shiftcheck debug relocations. See D369.
 >
 > **Current ranked queue (authoritative `src/nonmatching/*.c` set):**
 > 1. `sub_80C05C8` — clean JP-vs-US coloring divergence; re-poll R7AaX before

@@ -21,10 +21,12 @@
 > records only from the linked `.rom` relocation section, excluding path-dependent
 > `.debug_*` offsets without weakening genuine talk-table checks. The remaining
 > seven are `sub_800A34C`, `sub_800A594`, `sub_800FAD0`, `sub_807D3BC`,
-> `sub_80A6D34`, `sub_80A6F1C`, and `sub_80C05C8`. See D368.
+> `sub_80A6D34`, `sub_80A6F1C`, and `sub_80C05C8`. The candidate also includes
+> issue #166 final-docs commit `2946f61e492b26ec047c4d272aebe047b0d063eb`
+> with its full `+0x40000` evidence. See D369 for the combined release.
 
 > **[REFRESH 2026-07-11 — issue #166 implementation complete on `origin/main`;
-> final docs candidate pending main CI.]**
+> final docs included in this release candidate.]**
 > Integrated commit `2a49c9b8dcfefd8bec51cb66f425ebdee564fce5` passed a fresh
 > `+0x40000` ROM-shift A/B: all four known OAM/AnimScr hybrids (**172
 > frame-pointer words**) plus the empirical **27-section / 85-word** rescope

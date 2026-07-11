@@ -207,7 +207,7 @@ an effective score 0 without pretending the stock compiler produced raw score 0.
   `GET decomp.me/api/scratch/<slug>/family` for a score-0 fork (a community match) and integrate it
   instead of re-deriving. As of this posting, all 19 FE8J scratches' families have NO score-0 member.
 
-## 12. Match patterns — community forks plus local oracle wins (D292/D366/D368)
+## 12. Match patterns — community forks plus local oracle wins (D292/D366/D369)
 
 Fifteen FE8J reg-coloring NEARs were driven to **score 0** on decomp.me forks by
 community matcher **TsilaAllaoui**, then integrated to

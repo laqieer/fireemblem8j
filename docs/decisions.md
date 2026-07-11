@@ -10947,6 +10947,15 @@ uVVvN/`sub_800E1FC`, gdTId/`sub_807C8DC`, XOT5k/`sub_80A6E4C`, and
 vdXu7/`sub_80A3528`, plus the separate shiftcheck fix carried after the
 `sub_800E1FC` match.
 
+After the first candidate publication, the branch also cherry-picks the rebased
+issue #166 final-docs commit
+`2946f61e492b26ec047c4d272aebe047b0d063eb` as distinct release commit
+`c906f0b6ef5531ac68f05af9f687fc9239bc6d0f`.
+D368 remains the authoritative issue #166 closure and preserves the full
+`+0x40000` A/B evidence: **257/257 tagged words**, **27 sections / 85 rescope
+words**, zero stale targets, and **28/28** consumer checks. D369 owns only the
+combined axis-2 release reconciliation.
+
 **Conflict resolution.** Each candidate deleted one exact
 `scripts/tools/decompme/registry.tsv` row from a different historical base. The
 cherry-pick conflicts were resolved as “current main minus this candidate's
