@@ -21,46 +21,50 @@
  *                 (Its neighbour sub_80D6378 `svc 7; bx lr` is the DivArm *quotient* == v/m
  *                 == the >>12 the sibling documents. Both are baseline-incbin BIOS stubs.)
  *
- * ---- MATCH STATUS: NONMATCHING-C-DOCUMENTED (agbcc spill-decision / reg-coloring wall) ----
- * The reconstruction is STRUCTURALLY exact: same control-flow graph, same instruction
- * sequence/opcodes as the JP ROM. The residual is a pure register-allocation / stack-spill
- * coloring divergence (docs/agbcc_codegen_levers.md §7/§9: "the spill-decision residual is
- * NOT a forceable per-TU flag" -- a compute-time / community-match class). agbcc-here colors
- * differently than the JP build:
+ * ---- MATCH STATUS: IMPROVED NONMATCHING SEED (2026-07-11; still not byte-exact) ----
+ * A compiler-researched spill seed now reproduces the JP allocation anchors that the old
+ * 0x1DC-byte staging body missed. It uses hard registers only for roles directly observed
+ * in the ROM (`i`=r9, `dtime`=sl, `ltimesp`=r8), an empty `+r` lifetime fence, and
+ * GCC-2.95-compatible `+m` barriers for `count`, `t`, `out`, and `outp`. The Makefile
+ * applies `-fno-rerun-cse-after-loop` to this staging object only.
  *
- *   what          JP ROM build (target)                 this reconstruction (agbcc-here)
- *   ------------  ------------------------------------  ---------------------------------
- *   frame         sub sp,#0x3c (60)                     sub sp,#0x34 (52)  [8B smaller]
- *   `pts`         r7  (adds r7,r0,#0)                   r6  (adds r6,r0,#0)
- *   `count`       SPILLED to [sp,#0x2c], reloaded       kept in callee-saved sl (no reload)
- *                 each use (ldr; subs #1 / subs #2)
- *   `i`           r9  (mov r9,r0)                       r8  (mov r8,r0)
- *   `&lout`       SPILLED to [sp,#0x38]                 kept in r9
- *   `t`/`out`     [sp,#0x30]/[sp,#0x34]                 [sp,#0x2c]/[sp,#0x30]
+ *   anchor                    JP ROM target              retained seed
+ *   ------------------------  -------------------------  -------------------------
+ *   .text extent / frame      0x1F4 / sub sp,#0x3C      0x1F4 / sub sp,#0x3C
+ *   stack arrays              lout@24                   lout@24
+ *   forced homes              count@2C,t@30,out@34      count@2C,t@30,out@34
+ *   `outp == &lout` home      [sp,#0x38]                [sp,#0x38]
+ *   high-register roles       i=r9,ltimesp=r8,dtime=sl  i=r9,ltimesp=r8,dtime=sl
+ *   remaining root residual   pts=r7                    pts=r5
  *
- * Exact blocking hunk (prologue), JP ROM (baserom.gba @0x0800A594) vs this .c:
- *   JP:   b08f sub sp,#0x3c | 1c07 adds r7,r0,#0 | 910b str r1,[sp,#0x2c] (count->stack)
- *         920c str r2,[sp,#0x30] | 930d str r3,[sp,#0x34] | ... | 4681 mov r9,r0 (i)
- *         9a0b ldr r2,[sp,#0x2c]; 3a02 subs r2,#2  (reload count-2)
- *   here: b08d sub sp,#0x34 | 1c06 adds r6,r0,#0 | 468a mov sl,r1 (count->reg)
- *         920b str r2,[sp,#0x2c] | 930c str r3,[sp,#0x30] | ... | 4680 mov r8,r0 (i)
- *         4650 mov r0,sl;        3802 subs r0,#2  (count-2 from reg, no reload)
+ * The unresolved `pts` r5->r7 choice cascades through the low-register coloring and setup
+ * schedule. In particular, JP reloads `count-2` before materialising ltimesp/outp and emits
+ * a direct `beq` to the open-spline arm; this seed materialises ltimesp/outp first and needs
+ * the expanded `bne; b` form. Do NOT hard-pin `pts`: that form is already known to miscompile
+ * this reconstruction. Only declaration/barrier ordering was varied.
  *
- * agbcc-wall hypothesis: agbcc's CALLER_SAVE_PROFITABLE = (4*CALLS < REFS) (regs.h:201) keeps
- * `count` in a callee-saved reg here (2 calls, ~6 refs), whereas the JP build spilled it and
- * kept `pts` in r7 -- a whole-function coloring shift that renumbers nearly every register
- * (=> 421/500 bytes differ, all encoding-level, none semantic).
+ * Objective improvement over the trusted prior C (target comparison includes size delta):
+ *   prior:  extent 0x1DC, frame 0x34, 441/500 positional byte mismatches,
+ *           234/250 positional halfword mismatches.
+ *   seed:   extent 0x1F4, frame 0x3C, 422/500 positional byte mismatches,
+ *           221/250 positional halfword mismatches, plus every stack/high-reg anchor above.
  *
- * Levers tried (all reverted; none reached 0):
- *   - plain agbcc -O2                : 476B, 421/500 differ
- *   - -mjp-promote                   : identical (476B, 421) -- no sub-word promotion here
- *   - volatile `count` (§9e reload)  : WORSE (520B, 460 differ)
- *   - register pin `pts asm("r7")`   : shadows-param warning, no improvement
- *   - decomp-permuter -j4, 3471 iter : base score 7215 -> best 5795 (never approached 0)
+ * Bounded follow-up variants (maximum four, none reached score 0):
+ *   1. declare `ti` before i/j/slot                         -> identical (422 bytes)
+ *   2. swap j/slot declaration order                       -> identical (422 bytes)
+ *   3. split/reorder parameter-vs-outp `+m` barriers       -> worse (424 bytes)
+ *   4. move the ltimesp `+r` fence before outp assignment  -> identical (422 bytes)
  *
- * CONCLUSION: deep agbcc spill/reg-coloring residual, same class as the sibling sub_800A34C.
- * Graduate via a lucky permuter/community (decomp.me) hit -> move to src/, flip the carved_rom
- * row, drop asm. Until then the bytes come from asm/sub_800A594.s and `make compare` stays OK. */
+ * Semantic evidence for the retained seed:
+ *   prove_nonmatching.py sub_800A594              -> PROVEN-BOUNDED(1)
+ *   differential_test.py sub_800A594 --trials 60 -> EQUIV
+ *      (signature kept on one line so the harness models all five args:
+ *       ptr,val,val,ptr,val).
+ *
+ * Historical attempts retained for provenance: plain -O2 was 0x1DC; -mjp-promote was
+ * identical; volatile count was worse (0x208); the old 3471-iteration permuter run
+ * plateaued at 5795. Until a score-0 source is found, bytes still come from
+ * asm/sub_800A594.s and `make compare` remains unchanged. */
 #include "global.h"
 
 struct SplineCtrlPoint
@@ -80,16 +84,17 @@ struct Vec2s16
 extern int sub_800A34C(int *pts, int *out, u16 *times, unsigned int t, int count);
 extern int sub_80D6384(int m, int v); /* BIOS DivArm remainder: v % m */
 
-int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t,
-                       struct Vec2s16 *out, u8 loop)
+int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t, struct Vec2s16 *out, u8 loop)
 {
     int lpts[6];
     u16 ltimes[3];
     int lout[2];
-    int i;
+    register int i asm("r9");
     int j;
     int slot;
-    int dtime;
+    register int dtime asm("sl");
+    register u16 *ltimesp asm("r8");
+    int *outp;
     unsigned int ti;
 
     if (loop)
@@ -97,6 +102,11 @@ int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t,
         t = sub_80D6384(pts[count - 1].time << 12, t);
         ti = t >> 12;
         i = 0;
+        ltimesp = ltimes;
+        outp = lout;
+        asm("" : "+r"(ltimesp));
+        asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
+
         if (count - 2 > 0 && (ti < pts[0].time || ti >= pts[1].time))
         {
             do
@@ -113,13 +123,13 @@ int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t,
             dtime = pts[count - 1].time - pts[count - 2].time;
             lpts[0] = pts[count - 2].x;
             lpts[1] = pts[count - 2].y;
-            ltimes[0] = i;
+            ltimesp[0] = i;
             j = 0;
             for (slot = 1; slot <= 2; slot++)
             {
                 lpts[2 * slot] = pts[j].x;
                 lpts[2 * slot + 1] = pts[j].y;
-                ltimes[slot] = pts[j].time + dtime;
+                ltimesp[slot] = pts[j].time + dtime;
                 if (j < count - 1)
                     j++;
             }
@@ -132,7 +142,7 @@ int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t,
             {
                 lpts[2 * slot] = pts[j].x;
                 lpts[2 * slot + 1] = pts[j].y;
-                ltimes[slot] = pts[j].time;
+                ltimesp[slot] = pts[j].time;
                 j++;
             }
         }
@@ -141,12 +151,18 @@ int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t,
     {
         ti = t >> 12;
         i = 0;
-        if (count - 1 > 0 && (ti < pts[0].time || ti >= pts[1].time))
+        ltimesp = ltimes;
+        outp = lout;
+        asm("" : "+r"(ltimesp));
+        asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
+        dtime = count - 1;
+
+        if (dtime > 0 && (ti < pts[0].time || ti >= pts[1].time))
         {
             do
             {
                 i++;
-                if (i >= count - 1)
+                if (i >= dtime)
                     break;
             }
             while (ti < pts[i].time || ti >= pts[i + 1].time);
@@ -159,8 +175,8 @@ int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t,
             {
                 lpts[2 * slot] = pts[j].x;
                 lpts[2 * slot + 1] = pts[j].y;
-                ltimes[slot] = pts[j].time;
-                if (slot < count - 1)
+                ltimesp[slot] = pts[j].time;
+                if (slot < dtime)
                     j++;
             }
         }
@@ -171,15 +187,15 @@ int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t,
             {
                 lpts[2 * slot] = pts[j].x;
                 lpts[2 * slot + 1] = pts[j].y;
-                ltimes[slot] = pts[j].time;
-                if (j < count - 1)
+                ltimesp[slot] = pts[j].time;
+                if (j < dtime)
                     j++;
             }
         }
     }
 
-    sub_800A34C(lpts, lout, ltimes, t, 3);
-    out->x = lout[0];
-    out->y = lout[1];
+    sub_800A34C(lpts, outp, ltimesp, t, 3);
+    out->x = outp[0];
+    out->y = outp[1];
     return i;
 }
