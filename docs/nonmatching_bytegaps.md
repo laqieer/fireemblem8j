@@ -1,11 +1,10 @@
 # Reconstruction-base byte-gaps (ground truth)
 
-> **UPDATE 2026-07-11:** axis-2 is now **99.86% (8680/8692), 12 still-asm**.
-> `DivinationRankSpriteUpdate` matched via score-0 community fork `l4bts`.
-> Reusing the sine-table pointer local across the affine phase, plus explicit
-> result live-range fences and IV materialization, closed the historical
-> 301/436 reconstruction-base gap. This is another reminder that the table below
-> records old seed quality, not an impossibility bound.
+> **UPDATE 2026-07-11:** axis-2 is now **99.92% (8685/8692), 7 still-asm**.
+> The score-0 Br4VJ/uVVvN/gdTId/vdXu7/XOT5k harvest closes the historical
+> `sub_80A3300`, `sub_800E1FC`, `sub_807C8DC`, `sub_80A3528`, and
+> `sub_80A6E4C` gaps. Together with `DivinationRankSpriteUpdate`, these wins
+> reinforce that the table below records old seed quality, not an impossibility bound.
 >
 > **UPDATE 2026-07-10:** axis-2 was **99.85% (8679/8692), 13 still-asm**.
 > `AddAttr2dBitMap` and `Augury_InitResultScreen` matched byte-exact. AddAttr is
@@ -31,12 +30,12 @@ show why this table is a historical baseline, not an impossibility proof.
 | base | JP range | size | differ / total | header claim (UNRELIABLE) |
 |---|---|---|---|---|
 | sub_800A34C | 0A34C..0A594 | 584 | **536/584** | "-fno-gcse EXACT" — FALSE |
-| sub_800E1FC (Event18_ColorFade) | 0E1FC..0E2C8 | 204 | 107/204 | -mjp-promote |
+| sub_800E1FC (Event18_ColorFade) | 0E1FC..0E2C8 | 204 | 107/204 | **[MATCHED 2026-07-11 via uVVvN]** |
 | sub_8056890 (EfxAdvanceFrameLut) | 56890..56914 | 132 | 87/132 (+4) | "2-insn" |
-| sub_807C8DC (AdjustNewUnitPosition) | 7C8DC..7CA10 | 308 | 92/308 (+4) | -mjp-promote; reg-coloring ceiling (plateau 485) |
+| sub_807C8DC (AdjustNewUnitPosition) | 7C8DC..7CA10 | 308 | 92/308 (+4) | **[MATCHED 2026-07-11 via gdTId]** |
 | sub_8084CE4 | 84CE4..84D5C | 120 | 109/120 (+32) | "8-byte" — optimistic |
 | sub_80A2E64 | A2E64..A3018 | 436 | 301/436 | -fno-gcse; **[MATCHED 2026-07-11 via l4bts/P13]** |
-| sub_80A3528 | A3528..A3898 | 880 | 645/880 | plain -O2 |
+| sub_80A3528 | A3528..A3898 | 880 | 645/880 | **[MATCHED 2026-07-11 via vdXu7]** |
 | sub_80CAEF4 | CAEF4..CB014 | 288 | 158/288 | plain agbcc |
 | sub_80D1844 (LoadClassNameInClassReelFont) | D1844..D18D0 | 140 | 84/140 | "35-byte" — optimistic; **[MATCHED 2026-07-03 in-repo, banked]** |
 | RegisterTsaWithOffset (sub_80D19DC) | D19DC..D1A3C | 96 | 91/96 | "6-byte" — FALSE; r8+ip pressure |
@@ -47,7 +46,7 @@ decomp.me community. AddAttr and other later wins show that conclusion described
 known lever set, not the full source-shape space. The historical **16** still-asm without a base were big region-different
 reconstructions (e.g. `sub_8057F80`/PrepareBattleGraphicsMaybe = 2936 B) or have a live
 permuter. — [SUPERSEDED 2026-07-03: was "22" at this doc's 2026-06-26 measurement; 6 have since
-matched byte-exact in-repo (banked), axis-2 22→16. Further wins now put the live set at 12.]
+matched byte-exact in-repo (banked), axis-2 22→16. Further wins now put the live set at 7.]
 See [`frontier.md`](frontier.md).
 
 ## Live permuter best-score state (2026-06-26, from `nonmatchings/<fn>/output-<score>-*`)
@@ -62,17 +61,17 @@ PutWMFaceOnBg) are already carved to `src/`.
 | Event0F_CounterOps | **75** | closest; plateaued 75 over 753K+ iters = cross-jump ceiling (the score-75 best already applied the drop-`do/while(0)`+split-`+1` mining mutations — source-mutation-invariant residual) |
 | PutFaceOnBackGround | 105 | "tried 60+ forms" ceiling |
 | AddAttr2dBitMap | 120 | **[MATCHED 2026-07-10 via zero-instruction BB separator]** |
-| AdjustNewUnitPosition | 185 | reg-coloring ceiling (iy/ix/yCur rotation, source-reorder-invariant) |
+| AdjustNewUnitPosition | 185 | **[MATCHED 2026-07-11 via gdTId]** |
 | sub_80D17C8 | 255 | |
-| sub_80A3300 | 315 | |
+| sub_80A3300 | 315 | **[MATCHED 2026-07-11 via Br4VJ]** |
 | sub_80A730C | 360 | **[MATCHED 2026-07-03, banked]** |
 | sub_80BB240 | 540 | |
-| Event18_ColorFade | 780 | |
+| Event18_ColorFade | 780 | **[MATCHED 2026-07-11 via uVVvN]** |
 | sub_8084CE4 | 795 | (the "8-byte" header claim is wrong) |
 | sub_80BCD74 | 990 | |
-| sub_80A6E4C | 1440 | |
+| sub_80A6E4C | 1440 | **[MATCHED 2026-07-11 via XOT5k]** |
 | sub_80CAEF4 | 2555 | |
-| sub_80A3528 | 2590 | |
+| sub_80A3528 | 2590 | **[MATCHED 2026-07-11 via vdXu7]** |
 | sub_80A2E64 | 4045 | **[MATCHED 2026-07-11 via l4bts/P13]** |
 | sub_80A73D4 | 4835 | **[MATCHED 2026-07-03, banked]** |
 | sub_800A34C | 10155 | far (matches the 536/584 byte measurement) |
@@ -96,7 +95,7 @@ several are much closer than the "ceiling" framing implied — and the residuals
 | Event0F_CounterOps | 48/180 (size-exact) | reg-coloring + cross-jump |
 | sub_80D17C8 | 114/124 | |
 | sub_80BB240 | 123/232 | |
-| sub_80A3300 | 160/224 | |
+| sub_80A3300 | **MATCHED: 0/224 in project** (historical standalone measurement: 160/224) | Br4VJ signed-load live-range split + exact pins/barrier |
 | sub_80A730C | 164/200 | **[MATCHED 2026-07-03, banked]** |
 
 Tested and ruled out on these: the two built-but-unwired custom agbcc flags

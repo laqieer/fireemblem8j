@@ -10871,3 +10871,81 @@ class), then `sub_800A34C` (table/scratch-pointer pressure under
 - `make check-nonmatching` → all 12 staged C files have asm byte sources
 - `make clean && make compare` → `fireemblem8.gba: OK`
 - clean-built SHA-1 → `7da0456035366aa18414faa79d8fe7649f03c1ed`
+
+## D368 — combine five raw-score harvests without semantic or shiftcheck regressions; matching-C 99.92% (8685/8692), 7 remain (2026-07-11)
+
+**Scope/status.** Release branch `release/axis2-harvest-five` starts at current
+`origin/main` (`3a3dc27fc`, which already contains D367) and remains a candidate
+until the serial main integrator accepts it. The branch cherry-picks, without
+squash/amend/force, the finalized histories for Br4VJ/`sub_80A3300`,
+uVVvN/`sub_800E1FC`, gdTId/`sub_807C8DC`, XOT5k/`sub_80A6E4C`, and
+vdXu7/`sub_80A3528`, plus the separate shiftcheck fix carried after the
+`sub_800E1FC` match.
+
+**Conflict resolution.** Each candidate deleted one exact
+`scripts/tools/decompme/registry.tsv` row from a different historical base. The
+cherry-pick conflicts were resolved as “current main minus this candidate's
+row”: no already-retired `sub_8001570`, `sub_80A2E64`, or prior harvested row
+was reintroduced. ENay1/nlJVc/taZrH/MaiDT/g7FXU are all absent. The
+`gUnk_08A95478 @ 0x08A95478` alias remains defined exactly once by main's
+`layout/baseline_syms.d/sub_80A2E64-2cbd7547.tsv`; both
+`DivinationRankSpriteUpdate` and `PutDivinationRankSprite` reuse it.
+
+**Semantic safety.** The XOT5k source keeps the caller-supplied encoder callback,
+pins that function pointer to r3, and calls it normally. The linked function
+contains `bl _call_via_r3`; the C has no raw opcode asm, only hard-register
+declarations and an empty loop-base fence. This rejects the tempting but invalid
+alternatives of replacing the callback with a fixed target or scripting a raw
+branch merely to match bytes.
+
+**Shiftcheck root fix.** `scan_talk_table_relocs.py` previously treated every
+objdump relocation offset numerically inside the GBA range as a ROM address.
+Long absolute checkout paths can enlarge `.debug_info` until its section-relative
+offsets overlap that range, creating false packed-talk failures. The scanner now
+tracks `RELOCATION RECORDS FOR [...]` and admits only ABS32 records sourced from
+`.rom`. Genuine `.rom` packed-field relocations remain strict. Focused tests cover
+debug collisions, a real bad packed field, and an absolute `.rom` offset.
+
+**Learned matching levers.**
+- Br4VJ: split signed x/y loads into short ROM-derived lifetimes before the pinned
+  r2 loop origin; preserve the per-iteration table rematerialization.
+- uVVvN: bind an ABI-wide declaration to the real `NewEventFadefx` symbol, combine
+  exact high-register spill placement with one scripted `and`, and fence only the
+  final argument lifetimes.
+- gdTId: express nested scans as exact goto-shaped IVs, pin map/counter roles from
+  disassembly, script the packed `strh`, and use one input-only call-order fence.
+- vdXu7: hoist proc-field addresses, deliberately rematerialize the tilemap base,
+  and preserve the post-increment table walk.
+- XOT5k: steer a real indirect call by pinning its function pointer, never by
+  changing the callee semantics.
+
+**decomp.me lifecycle.** A fresh family query reported:
+`ENay1=0` + `Br4VJ=0`, `nlJVc=0` + `uVVvN=0`,
+`taZrH=0` + `gdTId=0`, `MaiDT=0` + `vdXu7=0`, and
+`g7FXU=0` + `XOT5k=0`. Thus all five owned bases and all five community matches
+expose raw score 0 upstream before release.
+
+**Measured result.** `python3 scripts/calcprogress.py` reports matching-C
+**99.92% (8685/8692)** = 8558 functions compiled from `src/*.c` + 127 from
+libc/libgcc, with **7 still descriptive asm**. Source-form code is
+**898,452 / 901,428 bytes (99.67%)**; **2,976 bytes** remain asm.
+`find src/nonmatching -maxdepth 1 -name '*.c'` and
+`make check-nonmatching` both report the authoritative seven:
+`sub_800A34C`, `sub_800A594`, `sub_800FAD0`, `sub_807D3BC`,
+`sub_80A6D34`, `sub_80A6F1C`, and `sub_80C05C8`.
+
+**Release-candidate gates (all green):**
+- `make layout && make compare` → `fireemblem8.gba: OK`
+- `make clean && make compare` → `fireemblem8.gba: OK`
+- clean-built SHA-1 → `7da0456035366aa18414faa79d8fe7649f03c1ed`
+- `make shiftcheck` from
+  `/home/laqieer/fireemblem8j/worktrees/release-axis2-harvest-five` → 0 HIGH
+- `make shiftcheck` from
+  `/home/laqieer/fireemblem8j/worktrees/release-axis2-harvest-five-absolute-path-guard-validation-long`
+  → 0 HIGH
+- `make shiftcheck-tests` and the direct talk-scanner unittest → 3/3 pass
+- `make check-nonmatching` → all 7 staged C files have asm byte sources
+
+**Decision.** Publish this branch as one release candidate with preserved
+per-function/fix commits plus one focused integration/docs follow-up. Do not
+merge to main, close issues, or weaken shiftcheck as part of this preparation.

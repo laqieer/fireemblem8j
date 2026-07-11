@@ -261,6 +261,12 @@ declarations, and two empty `+r` fences under `-fno-gcse`. The project adaptatio
 strips the scratch-only `.set gUnk_08A95478,...`; it contains no raw opcode asm.
 Full linked `make compare`, not the standalone object or decomp.me score, proved it.
 
+The 2026-07-11 follow-up harvest adds three complementary address/lifetime forms:
+Br4VJ splits signed x/y loads before a pinned loop origin, vdXu7 explicitly hoists
+proc-field addresses while rematerializing the tilemap base at use sites, and XOT5k
+keeps a caller-supplied callback in r3 so the compiler selects `_call_via_r3`.
+These are allocation levers, not permission to replace real calls or pointers.
+
 ---
 
 ## 6. Workflow: the checklist to run when a function is 1–2 instructions off
@@ -279,7 +285,7 @@ as the asm-differ target (survey §4.3) so a literal-pool-only delta is visibly
 | 3 | **`tst rX,rX` vs `cmp rX,#0`** | A single compare-against-zero instruction differs | §3: NO flag fix available (stock agbcc rejects `-ftst`). Try a source restructure; else treat as a scheduler artifact (row 6). |
 | 4 | **`bl` to a local `_08…`/`.L` label** | A `bl` where you expected a branch | §4: it's a widened long branch, **not** a near-miss. Verify the target is in-function and move on — do not restructure. |
 | 5 | **`lsr` where ROM has `asr` (or vice-versa) on an s16** | `lsl;lsr` vs `lsl;asr` at an s16 narrowing | §5a: widen the s16 to `int` before first use; add an explicit `(s16)` cast; for params, change the prototype to `s16`. If store-only, decompile the JP's real (signed) logic. |
-| 6 | **Only instruction ORDERING differs** | Same instructions, permuted order (arg-load order, save order, batched vs inline) | §5b/§5d + cookbook P9/P12/P13: first try a zero-instruction `do { } while (0);` separator, destination-field or pointer-role readback, explicit next-IV/argument temps, and equivalent branch polarity. Add an empty `+r` fence only when disassembly proves a call result must remain live. These can change allocation/block order without changing behavior or emitting opcodes (`AddAttr2dBitMap`, `Augury_InitResultScreen`, `DivinationRankSpriteUpdate`). Only then park it as a permuter target. |
+| 6 | **Only instruction ORDERING differs** | Same instructions, permuted order (arg-load order, save order, batched vs inline) | §5b/§5d + cookbook P9/P12/P13: first try a zero-instruction `do { } while (0);` separator, destination-field or pointer-role readback, explicit next-IV/argument temps, signed-load live-range splits, and deliberate address hoist/rematerialization. Add an empty fence only when disassembly proves a value must remain live. These can change allocation/block order without changing behavior (`AddAttr2dBitMap`, `Augury_InitResultScreen`, `DivinationRankSpriteUpdate`, `PutDivinationRankSprite`, `DrawAuguryResultPanel`). Only then park it as a permuter target. |
 
 **After any candidate fix:** rebuild and run `make compare` (incremental, ~0.3 s
 — D7). `OK` graduates the function: move the C up to `src/<owner>.c`, delete
@@ -332,6 +338,12 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
    (`DivinationRankSpriteUpdate`) is the 2026-07-11 raw-score worked example:
    local `make compare`/`make shiftcheck` passed, the owned base was updated from
    `l4bts` and re-verified at raw score 0, then the exact registry row was retired.
+   The same lifecycle was then completed for ENay1/Br4VJ
+   (`PutDivinationRankSprite`), nlJVc/uVVvN (`Event18_ColorFade`),
+   taZrH/gdTId (`AdjustNewUnitPosition`), MaiDT/vdXu7
+   (`DrawAuguryResultPanel`), and g7FXU/XOT5k (`EncodeLinkArenaRecord`):
+   all ten owned/community scratches report raw score 0, and exactly the five
+   owned registry rows were removed.
 
    **Do not simplify a harvested source before measuring it.** In `l4bts`, reading
    the sine value through the reused `data` pointer looked equivalent to replacing
@@ -339,6 +351,13 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
    shortened the pointer lifetime and rotated `proc`/table high registers. Preserve
    subtle readback/IV/temp shapes until the project build proves which are codegen
    levers; strip only remote scaffolding (`.set`, fake alignment, context headers).
+
+   **Callback-veneer safety.** If a match depends on `_call_via_rN`, keep the
+   caller-supplied function pointer, pin it only to the ROM-proven register, and
+   invoke it normally in C. Let agbcc emit the veneer. XOT5k's real-project
+   adaptation pins `callback` to r3 and compiles to `_call_via_r3`; it does not
+   substitute a fixed callee and contains no raw branch opcode. A fixed target or
+   scripted `bl` may match bytes while changing semantics and must be rejected.
 
 ### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol
 

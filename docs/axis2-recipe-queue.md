@@ -1,25 +1,37 @@
-# Axis #2 (matching-C) — 12 still-asm functions, ranked recipe queue (D307/W3)
+# Axis #2 (matching-C) — 7 still-asm functions, ranked recipe queue
 
-> **[UPDATE 2026-07-11 — axis-2 is now 12 still-asm (matching-C 99.86%, 8680/8692).]**
-> `DivinationRankSpriteUpdate (sub_80A2E64)` MATCHED byte-exact from community
-> score-0 fork **l4bts** (TsilaAllaoui). The substantive source lever is **P13
-> pointer-role readback/lifetime preservation**: reuse one `data` pointer for the
-> sine-table reads instead of re-spelling the same absolute/global expression,
-> commit `next = i + 1` before the branch split, keep affine outputs in r6/r5/r4,
-> and add two empty `+r` fences after `Div`. With `-fno-gcse` this reproduces JP's
-> proc/data/output live ranges without raw opcode asm. Owned `qksQG` was updated
-> from `l4bts`, verified raw score 0, then its exact registry row was removed.
+> **[UPDATE 2026-07-11 — axis-2 is now 7 still-asm (matching-C 99.92%, 8685/8692).]**
+> The five harvest-first candidates are integrated on
+> `release/axis2-harvest-five`: `sub_800E1FC/uVVvN`,
+> `sub_807C8DC/gdTId`, `sub_80A3300/Br4VJ`,
+> `sub_80A3528/vdXu7`, and `sub_80A6E4C/XOT5k`.
+> ENay1/nlJVc/taZrH/MaiDT/g7FXU and those five community forks all expose raw
+> score 0 upstream, and the exact registry rows are retired. The release also
+> carries the `.rom`-section guard for shiftcheck debug relocations. See D368.
 >
-> **Harvest-first next sprint.** The same 2026-07-11 family poll exposes five more
-> score-0 candidates that must be integrated before local experimentation:
-> `sub_800E1FC/uVVvN`, `sub_807C8DC/gdTId`, `sub_80A3300/Br4VJ`,
-> `sub_80A3528/vdXu7`, and `sub_80A6E4C/XOT5k`. For transferring P13 specifically,
-> prioritize `sub_80A3300` (same `gUnk_08A95478` pointer lifetime),
-> `sub_80A3528` (same Play-Ranking address-hoist class), then `sub_800A34C`
-> (table/scratch-pointer pressure under `-fno-gcse`). Full linked `make compare`
-> remains the gate even for score-0 forks.
+> **Current ranked queue (authoritative `src/nonmatching/*.c` set):**
+> 1. `sub_80C05C8` — clean JP-vs-US coloring divergence; re-poll R7AaX before
+>    trying exact pins (the prior blind r7/r6 pin attempt regressed).
+> 2. `sub_800FAD0` — clean `-mjp-promote` register permutation; re-poll eZzgG,
+>    then try scoped arg materialization/barriers learned from uVVvN/gdTId.
+> 3. `sub_807D3BC` — spill/frame decision; test only exact ROM-derived pins or
+>    basic-block boundaries, not broad pin swarms.
+> 4. `sub_80A6D34` — pure password-codec coloring; try XOT5k's scoped
+>    base/count lifetimes without copying the encoder's callback machinery.
+> 5. `sub_80A6F1C` — callback-in-high-register veneer; preserve the real callback
+>    and invoke it normally, as XOT5k did, so agbcc selects the veneer.
+> 6. `sub_800A34C` — large whole-function coloring wall; try address-role reuse
+>    and explicit phase boundaries before more permuter compute.
+> 7. `sub_800A594` — sibling spline spill wall; lowest runtime ROI (dead root).
+>
+> Full linked `make compare` remains the gate. Re-poll every active registry
+> family before local experimentation.
 
-> **[UPDATE 2026-07-10 — axis-2 is now 13 still-asm (matching-C 99.85%, 8679/8692).]**
+> **[HISTORICAL UPDATE 2026-07-11 — axis-2 was 12 still-asm.]**
+> `DivinationRankSpriteUpdate (sub_80A2E64)` matched from score-0 `l4bts` via
+> P13 pointer-role readback and was banked on current main.
+
+> **[HISTORICAL UPDATE 2026-07-10 — axis-2 was 13 still-asm (matching-C 99.85%, 8679/8692).]**
 > `AddAttr2dBitMap (sub_8001570)` and `Augury_InitResultScreen (sub_80A390C)`
 > MATCHED byte-exact locally and are release candidates (D366). The former uses a
 > zero-instruction `do { } while (0);` BB separator; the latter uses destination-field
@@ -27,7 +39,7 @@
 > expose effective score 0 via supported `match_override`, and their registry rows were
 > removed only after upstream verification.
 >
-> **[UPDATE 2026-07-07 — axis-2 was 15 still-asm (matching-C 99.83%, 8677/8692).]**
+> **[HISTORICAL UPDATE 2026-07-07 — axis-2 was 15 still-asm (matching-C 99.83%, 8677/8692).]**
 > `PrepareBattleGraphicsMaybe (sub_8057F80)` MATCHED byte-exact via community decomp.me fork
 > **rtMN6** (TsilaAllaoui) and banked — see `docs/agbcc_codegen_levers.md` fork table (row 9) +
 > the "pull & integrate / symbol-mapping gotcha" section in `docs/agbcc-matching-playbook.md §7`.
@@ -61,7 +73,9 @@
 > `[SUPERSEDED]` inline / in the block at the bottom. The remaining **16** are the team-proven
 > agbcc reg-coloring/spill walls (`src/nonmatching/*.c`), permuter-bound.
 
-Tractability order (full per-recipe detail in the D307/W3 triage report):
+## Historical D307/W3 triage
+
+Retained for provenance; the seven-entry queue above is the current work list.
 
 ## HIGH-CONFIDENCE RECONSTRUCTS (clear asm body, do first)
 - **#3 sub_80D17C8** (124B, classchg-sel): JP reads precomputed `gClassReelNameTable @0x089CF318`
@@ -86,11 +100,11 @@ Tractability order (full per-recipe detail in the D307/W3 triage report):
   MATCHED byte-exact in-repo (banked, removed from `src/nonmatching/`); #2/#6/#7 still open.]
 
 ## DEFERRED (plateaued reg-alloc walls / large reconstructs, lowest priority)
-- Event18_ColorFade, RegisterTsaWithOffset, GmapScreen2_Loop, PutFaceOnBackGround,
-  AdjustNewUnitPosition, sub_800A34C (spline 534/584), and the remaining augury cluster
-  (sub_80A3528/sub_80A3300/sub_80A6D34/sub_80A6E4C/sub_80A6F1C/sub_800A594).
-  — [`AddAttr2dBitMap`, `PrepareBattleGraphicsMaybe`, `sub_80A2E64`,
-  `sub_80A390C`, and `sub_80A730C`
+- RegisterTsaWithOffset, GmapScreen2_Loop, PutFaceOnBackGround,
+  sub_800A34C (spline 534/584), sub_80A6D34, sub_80A6F1C, and sub_800A594.
+  — [`Event18_ColorFade`, `AdjustNewUnitPosition`, `sub_80A3300`,
+  `sub_80A3528`, `sub_80A6E4C`, `AddAttr2dBitMap`,
+  `PrepareBattleGraphicsMaybe`, `sub_80A2E64`, `sub_80A390C`, and `sub_80A730C`
   have matched and are no longer queue entries.]
 
 WIRING: carved fns drop their baseline alias from layout/baseline_syms.d/ (else multiple-def);

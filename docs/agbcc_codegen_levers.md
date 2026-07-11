@@ -207,9 +207,9 @@ an effective score 0 without pretending the stock compiler produced raw score 0.
   `GET decomp.me/api/scratch/<slug>/family` for a score-0 fork (a community match) and integrate it
   instead of re-deriving. As of this posting, all 19 FE8J scratches' families have NO score-0 member.
 
-## 12. Match patterns — community forks plus local oracle wins (D292/D366)
+## 12. Match patterns — community forks plus local oracle wins (D292/D366/D368)
 
-Ten FE8J reg-coloring NEARs were driven to **score 0** on decomp.me forks by
+Fifteen FE8J reg-coloring NEARs were driven to **score 0** on decomp.me forks by
 community matcher **TsilaAllaoui**, then integrated to
 `src/` byte-exact here. Diffing each non-matching parent (proxied from the in-repo
 `src/nonmatching/*` stubs, git history, and the fe8u natural form — the decomp.me parents
@@ -221,7 +221,7 @@ They crack exactly the spill-decision + high-pressure reg-coloring NEARs §7 sai
 sweeps could not. Two local-oracle matches add clean source-only levers:
 `AddAttr2dBitMap` (P9) and `Augury_InitResultScreen` (P12).
 
-The 12 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
+The 17 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
 
 | fork (fn) | pins | `=r`/`+r` reg-barrier | `+m` mem-barrier | inline-asm | headline lever |
 |---|---|---|---|---|---|
@@ -235,6 +235,11 @@ The 12 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scri
 | Qua5T `sub_80CAEF4`           | 34 | 6 | 2 | 34 | **P2** mem-barrier + P1/P4 swarm + goto |
 | rtMN6 `PrepareBattleGraphicsMaybe` (sub_8057F80, 2936 B) | 2 | 0 | 0 | 0 | **P4** pins (`char_cnt`→r6, `banim_pos`→r4) + **§5a** s16→int widen (+`(s16)` casts) + inline the ally-position helper + decl-order. **Cracked a verdict recorded as "genuinely region-different, byte-match out of scope"** — see the LESSON below. |
 | l4bts `DivinationRankSpriteUpdate` (sub_80A2E64, 436 B) | 6 | 2 | 0 | 2 | **P13** pointer-role readback/reuse + explicit IV/arg temps + P4 pins + empty `+r` live-range fences |
+| Br4VJ `PutDivinationRankSprite` (sub_80A3300, 224 B) | 4 | 1 | 0 | 0 | P4/P1 signed-load live-range split before pinned r2 x-origin + continue/do-while loop shape; preserve per-iteration table rematerialization |
+| uVVvN `Event18_ColorFade` (sub_800E1FC, 204 B) | 10 | 4 | 0 | 1 | P7 ABI-wide real-symbol alias + P4 high-reg spill placement + one P3 scripted `and` + scoped argument fences |
+| gdTId `AdjustNewUnitPosition` (sub_807C8DC, 308 B) | 21 | 1 | 0 | 1 | P4 exact loop/map coloring + goto-shaped IVs + P3 packed `strh`; input-only call-order fence |
+| vdXu7 `DrawAuguryResultPanel` (sub_80A3528, 880 B) | 16 | 6 | 0 | 1 | P12/P13-style field-address hoist + deliberate tilemap rematerialization + P3 post-increment `ldmia` |
+| XOT5k `EncodeLinkArenaRecord` (sub_80A6E4C, 208 B) | 8 | 1 | 0 | 0 | Pin the **real callback** to r3 and call it normally so agbcc emits `_call_via_r3`; scoped base/count lifetimes + one fence |
 | local `AddAttr2dBitMap` (sub_8001570, 224 B) | 0 | 0 | 0 | 0 | **P9** zero-instruction `do { } while (0);` BB separator flips callee-save copy order |
 | local `Augury_InitResultScreen` (sub_80A390C, 612 B) | 0 | 0 | 0 | 0 | **P12** destination-field readback + equivalent branch polarity |
 
@@ -248,6 +253,17 @@ the call graph matches except for a localized added/removed block, carve the JP 
 and treat the residual as a normal coloring NEAR — the pins recipe applies.** (`sub_8057F80`
 was also the function this repo's ROI note rated "≈NONE / don't attempt"; the community
 decomp.me path landed it, exactly as that note predicted was its only viable route.)
+
+**LESSON from the five-function harvest (2026-07-11): preserve semantic calls while
+steering lifetimes.** The matches use increasingly explicit allocation controls, but
+the project adaptation must retain real program semantics. In particular, XOT5k's
+encoder pins the caller-supplied function pointer to r3 and invokes that pointer in C;
+agbcc then selects `_call_via_r3`. Replacing it with a fixed callee or scripting a raw
+`bl` would be a false match. uVVvN similarly gives `NewEventFadefx` an ABI-wide local
+declaration bound to the real symbol, avoiding unwanted halfword normalization without
+changing the target. Br4VJ/gdTId/vdXu7 show the same rule for dataflow: split signed-load
+lifetimes, hoist or rematerialize addresses exactly where the ROM does, and add only the
+smallest barrier/opcode script proven by disassembly.
 
 ### The levers (checklist — try cleanest first, escalate only if it resists)
 
@@ -424,9 +440,9 @@ asm forms are register declarations and empty constraints only, with no raw opco
 P13 is the pointer-local analogue of P12: P12 reads a just-written destination
 field to preserve its address; P13 reads through an equivalent pointer local to
 preserve the pointer's role and lifetime. Highest-transfer remaining targets are
-`sub_80A3300` (same `gUnk_08A95478` table), `sub_80A3528` (same Play-Ranking
-address-hoist class), and `sub_800A34C` (table/scratch-pointer pressure with
-`-fno-gcse`). Harvest any score-0 family member before applying the lever locally.
+`sub_800A34C` (table/scratch-pointer pressure with `-fno-gcse`),
+`sub_80A6D34` (phase-local codec bases), and `sub_80C05C8` (node/table address
+roles). Harvest any score-0 family member before applying the lever locally.
 
 ### How to run this on a NEAR (escalation order)
 1. **Confirm it's a coloring/spill NEAR** (same instruction *count/opcodes*, regs or spill
@@ -447,20 +463,20 @@ across compilers. Prefer P8/P7/P5/P6 (real source levers) and escalate to asm-co
 for reg-coloring/spill NEARs that resist everything else (Qua5T's extreme pressure is the
 justified end of the spectrum; jmNW8's zero-asm form is the ideal). The community-fork
 patterns above are credited to **TsilaAllaoui** (decomp.me), whose forks supplied the worked examples,
-including `l4bts`/P13.
+including `l4bts`/P13 and the Br4VJ/uVVvN/gdTId/vdXu7/XOT5k harvest.
 
-### Field application to the still-unmatched registry (D292 Phase 4)
+### Field application and later harvested outcomes (D292 Phase 4)
 Applying the above to the ~21 `DECOMP_THEN_UPDATE` registry functions confirmed they are the
 **reg-coloring / spill permuter-floor** — the residue left after the community already ground
 them down. Worked outcomes (decomp-permuter with the FE8J `-mjp-promote` config, `scripts/
 permuter/permute.sh bg … --stop-on-zero`):
-- **sub_807C8DC `AdjustNewUnitPosition`** (308 B, fe8u `muctrl.c` verbatim): `-mjp-promote`
-  gave a 74 B NEAR; the permuter found the **P11** temp-reuse of `(s8)pos->x` → **74→27 B**
-  and fixed `.text` size. The last **27 B are an irreducible `{r2 r3 r4 r5}` register cycle**
-  (outer/inner loop counters `iy`/`ix` want caller-saved r2/r4; agbcc colours them r5/r3).
-  The permuter plateaued there ~50 k iters; §9 decl-order/int-widen are no-ops or regress;
-  P4 pins and P1 barriers **regress** (agbcc materialises `register asm("rN")` locals with
-  shuffle `mov`s rather than allocating there). Left as asm (strong NEAR).
+- **sub_807C8DC `AdjustNewUnitPosition`** (308 B, fe8u `muctrl.c` verbatim):
+  **MATCHED 2026-07-11 via gdTId.** The earlier P11 temp-reuse reduced the residual
+  but did not expose the winning shape. gdTId rewrites the nested scan as exact
+  goto-shaped IVs, pins the ROM-derived loop/base/map registers, scripts the packed
+  `strh`, and uses one input-only call-order fence. This retracts the prior
+  “irreducible register cycle” label: broad pins regressed, but exact pins in the
+  correct control-flow shape succeed.
 - **sub_8001570 `AddAttr2dBitMap`** (224 B, fe8u `hardware.c` verbatim, clean leaf):
   `-mjp-promote` gave 8 B; swapping the inner-loop declaration order
   `u16 *dst2 = dst;` **before** `const u16 *src = _src + _ix;` matched the loop-setup schedule
@@ -478,8 +494,11 @@ permuter/permute.sh bg … --stop-on-zero`):
   just-stored `proc->rowCounts[]` destination so their addresses remain live and are
   hoisted/reused like JP; then invert the equivalent duplicate-arm test to `index == 0`
   to match branch polarity and block layout. No register pins or inline asm.
-- **sub_800E1FC `Event18_ColorFade`** (204 B, fe8u `eventscr.c` verbatim): 204/204
-  mnemonic-identical, ~95 B pure register permutation; permuter plateaued ~965. Left as asm.
+- **sub_800E1FC `Event18_ColorFade`** (204 B, fe8u `eventscr.c` verbatim):
+  **MATCHED 2026-07-11 via uVVvN.** The fork pins the JP high-register/spill
+  allocation, binds an ABI-wide declaration to the real `NewEventFadefx` symbol,
+  scripts one `and`, and fences only the final argument lifetimes. The plateau
+  measured the old mutation vocabulary, not a compiler ceiling.
 - **sub_80D1844 `LoadClassNameInClassReelFont`** (140 B): needs moving-pointer + separate
   live counter + top-peel simultaneously; no source phrasing forces all three (do-while gets
   the allocation but agbcc dumps the literal pool inline at the rotated loop entry → 144 B).

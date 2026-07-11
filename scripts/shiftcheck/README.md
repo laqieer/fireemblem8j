@@ -16,9 +16,10 @@ This harness was ported from fe8u (PR #745). fe8j's build differs structurally, 
 two things changed (see `docs/decisions.md` D313):
 
 1. **The CI gate is the STATIC layers only: `make shiftcheck = shiftcheck-build +
-   shiftcheck-static + shiftcheck-offsets` (Layers 0 + 1 + 1b).** These read the
-   linked ROM + the `--emit-relocs` ELF + the `.map`, so they are layout-agnostic
-   and work unchanged.
+   shiftcheck-static + shiftcheck-offsets + shiftcheck-talk +
+   shiftcheck-ptraudit + shiftcheck-tests`.** These read the linked ROM + the
+   `--emit-relocs` ELF + the `.map`, audit packed talk metadata and source pointer
+   classifications, and run focused scanner tests.
 
 2. **Layer 2 (`shiftcheck-diff`) and Layer 3 (`shiftcheck-run`) are NON-gating and,
    for Layer 2, NOT APPLICABLE to fe8j as-is.** fe8u's differential shift injects
@@ -47,8 +48,11 @@ result is recorded in the V1 PR.
 | `make shiftcheck-build` | 0 | Audits hardcoded GBA addresses in the **build system** (Makefile, ldscripts). Cross-checks coupled constants — e.g. the banim link base `-b 0x8c02000` must equal the ldscript pin `0xC02000` — and fails on a mismatch. |
 | `make shiftcheck-static` | 1 | Relinks with `ld --emit-relocs`, then flags every ROM-pointer-looking word that carries **no relocation**. Ranked by signal (see below). |
 | `make shiftcheck-offsets` | 1b | Of the words that *do* relocate, flags any relocated against the **wrong base symbol** — `ResourceA + hardcoded offset` that lands at the start of a different resource B (`scan_offsets.py`). |
+| `make shiftcheck-talk` | 1c | Rejects ABS32 relocations in packed battle/defeat-talk fields other than the real event-pointer member. It parses only relocations **sourced from `.rom`**; `.debug_*` offsets that merely overlap the GBA numeric range are excluded. |
+| `make shiftcheck-ptraudit` | 1d | Rejects source-level pointer-classification mistakes that the relocated ELF alone cannot distinguish. |
+| `make shiftcheck-tests` | test | Runs the focused scanner unit tests, including debug-section collisions and genuine `.rom` packed-field failures. |
 | `make shiftcheck-diff` | 2 | Builds the ROM **shifted** by two amounts and diffs: a real pointer's value tracks the shift; a hardcoded literal stays put. **fe8j: NON-gating, not applicable** (packed/no-slack ROM — see the fe8j note above). |
-| `make shiftcheck` | 0+1+1b | The static gate (no emulator). fe8j: Layers 0 + 1 + 1b only. |
+| `make shiftcheck` | static + tests | The complete non-emulator gate above. |
 
 (fe8u's Layer 3 — `make shiftcheck-run`, a headless mGBA runtime comparison of the
 matching vs a shifted ROM — is omitted on fe8j: it depends on a shifted build that
@@ -216,7 +220,12 @@ coherence heuristic misses; `scan_raw_casts.sh` catches it directly.
   the +shift instead of staying stale.
 - `scan_talk_table_relocs.py` — rejects false relocations in packed
   BattleTalk/DefeatTalk metadata words (e.g. flag+msg `0x08D70002`) where adding
-  +shift would mutate message ids instead of relocating a pointer.
+  +shift would mutate message ids instead of relocating a pointer. Relocation
+  offsets are section-relative, so only records under
+  `RELOCATION RECORDS FOR [.rom]` are eligible; this preserves genuine `.rom`
+  ABS32 checks while making the verdict independent of absolute build-path length.
+- `test_scan_talk_table_relocs.py` — focused tests for `.debug_*` offset collisions,
+  genuine packed-field failures, and absolute `.rom` offsets.
 - `gen_shifted_ldscript.py`, `diff_shift.py` — Layer 2 (non-gating; not applicable
   to fe8j's packed/no-slack ROM — kept for documentation and a future shiftable layout).
 - `_classify.py` — shared classifier (Layers 1 and 2 feed it different "relocated"

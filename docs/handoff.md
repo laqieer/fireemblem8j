@@ -3,7 +3,27 @@
 **Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
-> **[REFRESH 2026-07-11 — `DivinationRankSpriteUpdate` release candidate; not main.]**
+> **[REFRESH 2026-07-11 — combined five-function axis-2 candidate; not main.]**
+> Branch `release/axis2-harvest-five` starts at current `origin/main` (which already
+> includes `DivinationRankSpriteUpdate`) and preserves the six transplanted commits:
+> five score-0 matches plus the section-aware shiftcheck fix from `feat/sub_800E1FC`.
+> Ground truth is matching-C **99.92% (8685/8692, 7 still-asm)**, source-form code
+> **898,452/901,428 bytes (99.67%)**, source-form data **100%**, and named symbols
+> **100% (12691/12691)**.
+>
+> The harvested functions are `PutDivinationRankSprite`, `Event18_ColorFade`,
+> `AdjustNewUnitPosition`, `DrawAuguryResultPanel`, and `EncodeLinkArenaRecord`.
+> Owned ENay1/nlJVc/taZrH/MaiDT/g7FXU and community
+> Br4VJ/uVVvN/gdTId/vdXu7/XOT5k all report raw score 0 upstream; the exact five
+> registry rows are absent. Main's `gUnk_08A95478` alias is the only linked
+> definition. `EncodeLinkArenaRecord` retains the caller callback and compiles to
+> `_call_via_r3`; it contains no raw opcode asm. Shiftcheck now accepts ABS32
+> records only from the linked `.rom` relocation section, excluding path-dependent
+> `.debug_*` offsets without weakening genuine talk-table checks. The remaining
+> seven are `sub_800A34C`, `sub_800A594`, `sub_800FAD0`, `sub_807D3BC`,
+> `sub_80A6D34`, `sub_80A6F1C`, and `sub_80C05C8`. See D368.
+
+> **[SUPERSEDED STATUS — `DivinationRankSpriteUpdate` is now on current main.]**
 > Branch `feat/sub_80A2E64` harvests score-0 community fork `l4bts` from owned
 > family `qksQG`. Ground truth from `python3 scripts/calcprogress.py` is
 > matching-C **99.86% (8680/8692, 12 still-asm)**, source-form data **100%**,
@@ -13,11 +33,10 @@
 > r6/r5/r4, and use two zero-instruction `+r` fences after `Div` so agbcc keeps
 > the JP live ranges under `-fno-gcse`. The real project source contains no
 > decomp.me `.set` scaffolding or raw opcode asm. `qksQG` and `l4bts` both expose
-> raw score 0; only then was the exact registry row retired. Candidate gates:
-> layout+compare, shiftcheck, check-nonmatching, and clean compare; main CI is
-> still the publication gate. See D367.
+> raw score 0; only then was the exact registry row retired. Its candidate gates
+> passed and the work is now banked on current main. See D367.
 
-> **[REFRESH 2026-07-10 — combined axis-2 release candidate; not main.]**
+> **[SUPERSEDED STATUS — 2026-07-10 13-function snapshot; later banked.]**
 > Ground truth from `python3 scripts/calcprogress.py`: self-containment **100%**,
 > matching-C **99.85% (8679/8692, 13 still-asm)**, source-form data **100%**
 > (strict C/PNG subset 79.91%), named **100% (12721/12721)**.
