@@ -23,6 +23,19 @@
 > seven are `sub_800A34C`, `sub_800A594`, `sub_800FAD0`, `sub_807D3BC`,
 > `sub_80A6D34`, `sub_80A6F1C`, and `sub_80C05C8`. See D368.
 
+> **[REFRESH 2026-07-11 — issue #166 implementation complete on `origin/main`;
+> final docs candidate pending main CI.]**
+> Integrated commit `2a49c9b8dcfefd8bec51cb66f425ebdee564fce5` passed a fresh
+> `+0x40000` ROM-shift A/B: all four known OAM/AnimScr hybrids (**172
+> frame-pointer words**) plus the empirical **27-section / 85-word** rescope
+> moved exactly once, for **257 tagged words total** and **zero stale targets**.
+> All **28/28** battle-animation consumer checks passed; the 14 intentionally
+> unchanged non-pointer checks and unrelated floors are unchanged. The normal
+> `make compare`, `make shiftcheck`, and true-debt audit gates are green.
+> The banim/AnimScr residual is closed in the frontier (D368); do not redispatch
+> it. Issue #166 remains open only until this documentation candidate lands and
+> exact-SHA main CI passes.
+
 > **[SUPERSEDED STATUS — `DivinationRankSpriteUpdate` is now on current main.]**
 > Branch `feat/sub_80A2E64` harvests score-0 community fork `l4bts` from owned
 > family `qksQG`. Ground truth from `python3 scripts/calcprogress.py` is
@@ -62,6 +75,10 @@
 >   gba-kit harness, residual→0). Critical path: carve those 11 + other non-family residual `ProcScr_*`,
 >   then re-run boot/play smoke. Reusable shift harness: `/home/laqieer/fe8j-wt-143/`
 >   (`build_shifted_rom.sh`, `boot_smoke.sh`, `play_smoke.sh`) + `build/issue143-proof/gbakit-harness/`.
+>   **Current correction (D368/#166):** that historical estimate is not the live
+>   banim/AnimScr work list. The empirically rescoped banim residual is now
+>   complete (257/257 tagged words shifted, zero stale); only
+>   [`docs/frontier.md`](frontier.md) defines remaining work.
 > - **#145 [epic] fe8u→fe8j asset-form alignment (the meta-lever).** Reframe: **A (playable shifted ROM) ⊆
 >   B1 (ALL pointer-bearing degraded assets)** — the proc-script family is only ONE slice of B1. B1 =
 >   shiftability-critical (bin/incbin/hex holding un-relocatable jump/callback/anim/OAM/event/menu/AI
