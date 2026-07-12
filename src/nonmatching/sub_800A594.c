@@ -22,44 +22,59 @@
  *                 == the >>12 the sibling documents. Both are baseline-incbin BIOS stubs.)
  *
  * ---- MATCH STATUS: IMPROVED NONMATCHING SEED (2026-07-11; still not byte-exact) ----
- * A compiler-researched spill seed now reproduces the JP allocation anchors that the old
- * 0x1DC-byte staging body missed. It uses hard registers only for roles directly observed
- * in the ROM (`i`=r9, `dtime`=sl, `ltimesp`=r8), an empty `+r` lifetime fence, and
- * GCC-2.95-compatible `+m` barriers for `count`, `t`, `out`, and `outp`. The Makefile
- * applies `-fno-rerun-cse-after-loop` to this staging object only.
+ * The retained follow-up applies the matched DecodeAndVerifyArenaRecord lifetime lever
+ * without pinning the formal `pts` parameter. A pre-call lexical scope gives only the
+ * wrap/search phase the exact local alias
+ * `register struct SplineCtrlPoint *pts_r7 asm("r7") = pts;`; empty `+r` fences keep
+ * that alias valid at the two search backedges, and the copy arms deliberately return to
+ * ordinary `pts` before r7 is reused. The loop arm also materialises
+ * `i = 0; limit = count - 2;` before ltimesp/outp, which restores the target's direct
+ * conditional branch. Existing hard-register roles and the per-object
+ * `-fno-rerun-cse-after-loop` flag remain unchanged.
  *
- *   anchor                    JP ROM target              retained seed
+ *   anchor                    JP ROM target              retained candidate
  *   ------------------------  -------------------------  -------------------------
  *   .text extent / frame      0x1F4 / sub sp,#0x3C      0x1F4 / sub sp,#0x3C
- *   stack arrays              lout@24                   lout@24
  *   forced homes              count@2C,t@30,out@34      count@2C,t@30,out@34
  *   `outp == &lout` home      [sp,#0x38]                [sp,#0x38]
  *   high-register roles       i=r9,ltimesp=r8,dtime=sl  i=r9,ltimesp=r8,dtime=sl
- *   remaining root residual   pts=r7                    pts=r5
+ *   entry / search pts        r7 at +0x0C               formal r6 at +0x0C;
+ *                                                          search alias r7 at +0x18
+ *   loop setup                ti=r3,limit=r2,ip live     ti=r1,limit=r3,no ip
+ *   loop/open selector        direct beq                 direct beq
  *
- * The unresolved `pts` r5->r7 choice cascades through the low-register coloring and setup
- * schedule. In particular, JP reloads `count-2` before materialising ltimesp/outp and emits
- * a direct `beq` to the open-spline arm; this seed materialises ltimesp/outp first and needs
- * the expanded `bne; b` form. Do NOT hard-pin `pts`: that form is already known to miscompile
- * this reconstruction. Only declaration/barrier ordering was varied.
+ * Remaining blocker: the target has one continuous pts-in-r7 lifetime from entry through
+ * each search and only then reuses r7 as the signed-load scratch. Here the formal survives
+ * in r6, the scoped alias is copied into r7 after the parameter homes, and the copy arms use
+ * r6 before r7 becomes `outp`. Broadening the local-register scope is not valid GCC 2.95 C:
+ * it can self-clobber r7 while still using it as the pts base, or omit r7 from the save mask.
+ * The formal parameter itself is therefore still never hard-pinned.
  *
- * Objective improvement over the trusted prior C (target comparison includes size delta):
- *   prior:  extent 0x1DC, frame 0x34, 441/500 positional byte mismatches,
- *           234/250 positional halfword mismatches.
- *   seed:   extent 0x1F4, frame 0x3C, 422/500 positional byte mismatches,
- *           221/250 positional halfword mismatches, plus every stack/high-reg anchor above.
+ * Objective target comparison (size delta included):
+ *   trusted seed:       0x1F4, 422/500 byte mismatches, 221/250 halfword mismatches
+ *   retained follow-up: 0x1F4, 405/500 byte mismatches, 223/250 halfword mismatches
+ * The byte residual improves by 17 while preserving every frame/home/high-register anchor.
  *
- * Bounded follow-up variants (maximum four, none reached score 0):
- *   1. declare `ti` before i/j/slot                         -> identical (422 bytes)
- *   2. swap j/slot declaration order                       -> identical (422 bytes)
- *   3. split/reorder parameter-vs-outp `+m` barriers       -> worse (424 bytes)
- *   4. move the ltimesp `+r` fence before outp assignment  -> identical (422 bytes)
+ * Deterministic scoped-alias campaign (12-variant cap; no ordering permuter lanes):
+ *   V1  outer alias, all accesses                 0x200 481/512 INVALID self-clobber
+ *   V2  V1 + start fence                          0x200 481/512 INVALID self-clobber
+ *   V3  V2 + ordered limit                        0x1F4 415/500 INVALID self-clobber
+ *   V4  search fences + branch-local bases        0x1F0 453/500 INVALID handoff
+ *   V5  V4 + last-use fences                      0x1E8 466/500 INVALID save mask
+ *   V6  per-arm aliases + ordered limit           0x1F8 404/504 INVALID self-clobber
+ *   V7  tiny alias copied back to formal          0x1F0 431/500 INVALID address
+ *   V8  fully fenced per-arm aliases              0x1F0 436/500 INVALID save mask
+ *   V9  search-only per-arm aliases               0x1F8 440/504 VALID, worse
+ *   V10 alias copied to ordinary pointer          0x1E8 447/500 INVALID address
+ *   V11 ordered limit only                        0x1E4 435/500 VALID, worse
+ *   V12 outer alias, search-only accesses         0x1F4 405/500 VALID, RETAINED
  *
- * Semantic evidence for the retained seed:
- *   prove_nonmatching.py sub_800A594              -> PROVEN-BOUNDED(1)
- *   differential_test.py sub_800A594 --trials 60 -> EQUIV
- *      (signature kept on one line so the harness models all five args:
- *       ptr,val,val,ptr,val).
+ * Semantic evidence for V12:
+ *   $HOME/z3-venv/bin/python scripts/tools/thumb_equiv/prove_nonmatching.py
+ *       sub_800A594                                -> PROVEN-BOUNDED(1)
+ *   $HOME/z3-venv/bin/python scripts/tools/thumb_equiv/differential_test.py
+ *       sub_800A594 --trials 60                   -> EQUIV 60/60
+ *       ret4B args=['ptr','val','val','ptr','val'] (all five arguments modeled).
  *
  * Historical attempts retained for provenance: plain -O2 was 0x1DC; -mjp-promote was
  * identical; volatile count was worse (0x208); the old 3471-iteration permuter run
@@ -96,100 +111,112 @@ int SplineSampleAtTime(struct SplineCtrlPoint *pts, int count, unsigned int t, s
     register u16 *ltimesp asm("r8");
     int *outp;
     unsigned int ti;
+    int limit;
 
-    if (loop)
     {
-        t = sub_80D6384(pts[count - 1].time << 12, t);
-        ti = t >> 12;
-        i = 0;
-        ltimesp = ltimes;
-        outp = lout;
-        asm("" : "+r"(ltimesp));
-        asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
+        register struct SplineCtrlPoint *pts_r7 asm("r7") = pts;
 
-        if (count - 2 > 0 && (ti < pts[0].time || ti >= pts[1].time))
+        asm("" : "+r"(pts_r7));
+
+        if (loop)
         {
-            do
+            t = sub_80D6384(pts_r7[count - 1].time << 12, t);
+            ti = t >> 12;
+            i = 0;
+            limit = count - 2;
+            ltimesp = ltimes;
+            outp = lout;
+            asm("" : "+r"(ltimesp));
+            asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
+            asm("" : "+r"(pts_r7));
+
+            if (limit > 0 && (ti < pts_r7[0].time || ti >= pts_r7[1].time))
             {
-                i++;
-                if (i >= count - 2)
-                    break;
+                do
+                {
+                    i++;
+                    if (i >= limit)
+                        break;
+                    asm("" : "+r"(pts_r7));
+                }
+                while (ti < pts_r7[i].time || ti >= pts_r7[i + 1].time);
             }
-            while (ti < pts[i].time || ti >= pts[i + 1].time);
-        }
 
-        if (i == 0)
-        {
-            dtime = pts[count - 1].time - pts[count - 2].time;
-            lpts[0] = pts[count - 2].x;
-            lpts[1] = pts[count - 2].y;
-            ltimesp[0] = i;
-            j = 0;
-            for (slot = 1; slot <= 2; slot++)
+            if (i == 0)
             {
-                lpts[2 * slot] = pts[j].x;
-                lpts[2 * slot + 1] = pts[j].y;
-                ltimesp[slot] = pts[j].time + dtime;
-                if (j < count - 1)
+                dtime = pts[count - 1].time - pts[limit].time;
+                lpts[0] = pts[limit].x;
+                lpts[1] = pts[limit].y;
+                ltimesp[0] = i;
+                j = 0;
+                for (slot = 1; slot <= 2; slot++)
+                {
+                    lpts[2 * slot] = pts[j].x;
+                    lpts[2 * slot + 1] = pts[j].y;
+                    ltimesp[slot] = pts[j].time + dtime;
+                    if (j < count - 1)
+                        j++;
+                }
+                t += dtime << 12;
+            }
+            else
+            {
+                j = i - 1;
+                for (slot = 0; slot <= 2; slot++)
+                {
+                    lpts[2 * slot] = pts[j].x;
+                    lpts[2 * slot + 1] = pts[j].y;
+                    ltimesp[slot] = pts[j].time;
                     j++;
-            }
-            t += dtime << 12;
-        }
-        else
-        {
-            j = i - 1;
-            for (slot = 0; slot <= 2; slot++)
-            {
-                lpts[2 * slot] = pts[j].x;
-                lpts[2 * slot + 1] = pts[j].y;
-                ltimesp[slot] = pts[j].time;
-                j++;
-            }
-        }
-    }
-    else
-    {
-        ti = t >> 12;
-        i = 0;
-        ltimesp = ltimes;
-        outp = lout;
-        asm("" : "+r"(ltimesp));
-        asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
-        dtime = count - 1;
-
-        if (dtime > 0 && (ti < pts[0].time || ti >= pts[1].time))
-        {
-            do
-            {
-                i++;
-                if (i >= dtime)
-                    break;
-            }
-            while (ti < pts[i].time || ti >= pts[i + 1].time);
-        }
-
-        if (i == 0)
-        {
-            j = 0;
-            for (slot = 0; slot <= 2; slot++)
-            {
-                lpts[2 * slot] = pts[j].x;
-                lpts[2 * slot + 1] = pts[j].y;
-                ltimesp[slot] = pts[j].time;
-                if (slot < dtime)
-                    j++;
+                }
             }
         }
         else
         {
-            j = i - 1;
-            for (slot = 0; slot <= 2; slot++)
+            ti = t >> 12;
+            i = 0;
+            ltimesp = ltimes;
+            outp = lout;
+            asm("" : "+r"(ltimesp));
+            asm("" : "+m"(count), "+m"(t), "+m"(out), "+m"(outp));
+            dtime = count - 1;
+            asm("" : "+r"(pts_r7));
+
+            if (dtime > 0 && (ti < pts_r7[0].time || ti >= pts_r7[1].time))
             {
-                lpts[2 * slot] = pts[j].x;
-                lpts[2 * slot + 1] = pts[j].y;
-                ltimesp[slot] = pts[j].time;
-                if (j < dtime)
-                    j++;
+                do
+                {
+                    i++;
+                    if (i >= dtime)
+                        break;
+                    asm("" : "+r"(pts_r7));
+                }
+                while (ti < pts_r7[i].time || ti >= pts_r7[i + 1].time);
+            }
+
+            if (i == 0)
+            {
+                j = 0;
+                for (slot = 0; slot <= 2; slot++)
+                {
+                    lpts[2 * slot] = pts[j].x;
+                    lpts[2 * slot + 1] = pts[j].y;
+                    ltimesp[slot] = pts[j].time;
+                    if (slot < dtime)
+                        j++;
+                }
+            }
+            else
+            {
+                j = i - 1;
+                for (slot = 0; slot <= 2; slot++)
+                {
+                    lpts[2 * slot] = pts[j].x;
+                    lpts[2 * slot + 1] = pts[j].y;
+                    ltimesp[slot] = pts[j].time;
+                    if (j < dtime)
+                        j++;
+                }
             }
         }
     }
