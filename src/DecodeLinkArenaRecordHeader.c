@@ -1,18 +1,15 @@
-/* NON_MATCHING: byte source remains asm/sub_80A6D34.s @ JP 0x080A6D34.
- * Bounded 2026-07-11 campaign: four independent local -O2 lanes x 15,000
- * candidates. This phase-local/P13 shape scores 495, improving the prior 1320
- * floor. It uses the FE6/JP register roles (zero=sl, i=r7, cursor=r6,
- * header=r8, bit-width pointer=r9, bucket=r5, bits=r4), named project globals,
- * hard-register declarations, and empty lifetime constraints only (no raw opcode).
+/*
+ * Password-header decoder shared with FE6J func_fe6_08083180 and FE7J
+ * sub_809E4D0. FE8J uses a full-width mask and 30 packed bits.
  *
- * Semantics: PROVEN-BOUNDED(3), plus 60/60 EQUIV concrete trials using the
- * existing link-codec domain clamp (small header length/count and valid mask).
- * Lower raw permuter scores 305/359 were rejected because they hoisted the
- * bucket or changed the loop condition. Remaining code residual: two commutative
- * operand-order differences, seven low-register swaps in the subtract/mask loop,
- * and the checksum_a/checksum_b field tails use pointer adds + a shared tail
- * instead of JP's immediate-offset duplicated tails (19 register penalties,
- * 2 insertions, 2 deletions). Promotion to src/ still requires score 0.
+ * Matching levers: preserve the FE6/JP value roles with phase-local register
+ * declarations; materialize checksum_addr in r0 before loading call_buf; build
+ * the byte address from j in r2 before adding the r1 base; keep delta/mask in
+ * r1/r0; and read/write each header field through a struct pointer held in r1.
+ * Empty constraints preserve lifetimes but emit no opcodes.
+ *
+ * The pre-promotion source was PROVEN-BOUNDED(3) and EQUIV across 60/60
+ * codec-domain trials. The linked ROM is byte-exact at [0x080A6D34,0x080A6E4C).
  */
 #include "global.h"
 
@@ -50,13 +47,17 @@ void DecodeLinkArenaRecordHeader(void)
         register int * count asm("r4");
         register int checksum asm("r5");
         register u8 * call_buf asm("r6");
+        register int checksum_addr asm("r0");
         int count_value;
 
         count = &gUnk_02014EF4;
         count_value = *count;
+        checksum_addr = count_value;
+        asm("" : "+r"(checksum_addr));
         call_buf = gBuf_2014F28;
+        checksum_addr += (int)call_buf;
         checksum =
-            sub_80A6C20(call_buf + count_value,
+            sub_80A6C20((u8 *)checksum_addr,
                          gUnk_02014FC8.block_count);
         asm("" : "+r"(checksum));
         j = 0;
@@ -65,7 +66,7 @@ void DecodeLinkArenaRecordHeader(void)
         {
             register u8 * loop_base asm("r8");
             register int * mask asm("r6");
-            register u8 * at asm("r2");
+            register int at_addr asm("r2");
 
             loop_base = call_buf;
             mask = &gUnk_02014EF0;
@@ -77,8 +78,18 @@ void DecodeLinkArenaRecordHeader(void)
 
                 base_read = loop_base;
                 asm("" : "+r"(base_read));
-                at = base_read + j;
-                *at = (*at - checksum) & *mask;
+                at_addr = j;
+                at_addr += (int)base_read;
+
+                {
+                    register int delta asm("r1");
+                    register int masked asm("r0");
+
+                    delta = *(u8 *)at_addr - checksum;
+                    masked = *mask;
+                    masked &= delta;
+                    *(u8 *)at_addr = masked;
+                }
                 j++;
             } while (j < *count);
         }
@@ -121,46 +132,49 @@ void DecodeLinkArenaRecordHeader(void)
             if (bucket == zero_value)
             {
                 register int * width_read asm("r2");
-                register u16 * field asm("r1");
+                register struct LinkArenaRecordHeader * header_low asm("r1");
 
                 bits = *cursor;
                 width_read = bit_width;
                 bits >>= (i % *width_read);
                 bits &= 1;
                 bits <<= (i / 3);
-                field = &header->seed;
-                bits |= *field;
-                *field = bits;
+                header_low = header;
+                asm("" : "+r"(header_low));
+                bits |= header_low->seed;
+                header_low->seed = bits;
                 asm("" : "+r"(header));
             }
             else if (bucket == 1)
             {
                 register int * width_read asm("r2");
-                register volatile u16 * field asm("r1");
+                register struct LinkArenaRecordHeader * header_low asm("r1");
 
                 bits = *cursor;
                 width_read = bit_width;
                 bits >>= (i % *width_read);
                 bits &= bucket;
                 bits <<= (i / 3);
-                field = &header->checksum_a;
-                bits |= *field;
-                *field = bits;
+                header_low = header;
+                asm("" : "+r"(header_low));
+                bits |= header_low->checksum_a;
+                header_low->checksum_a = bits;
                 asm("" : "+r"(bucket));
             }
             else
             {
                 register int * width_read asm("r2");
-                register u16 * field asm("r1");
+                register struct LinkArenaRecordHeader * header_low asm("r1");
 
                 bits = *cursor;
                 width_read = bit_width;
                 bits >>= (i % *width_read);
                 bits &= 1;
                 bits <<= (i / 3);
-                field = &header->checksum_b;
-                bits |= *field;
-                *field = bits;
+                header_low = header;
+                asm("" : "+r"(header_low));
+                bits |= header_low->checksum_b;
+                header_low->checksum_b = bits;
             }
 
             i++;

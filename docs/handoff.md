@@ -3,6 +3,26 @@
 **Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
+> **[REFRESH 2026-07-11 — deterministic password-decoder match candidate.]**
+> Branch `feat/axis2-compute-80a6d34-copilot` adds a follow-up commit on top of
+> pushed score-495 seed `00b86b22d`: `DecodeLinkArenaRecordHeader`
+> (`sub_80A6D34`, 280 B) now compiles byte-exact. Ground truth is matching-C
+> **99.93% (8686/8692, 6 still-asm)** and source-form code
+> **898,732/901,428 bytes (99.70%)**.
+>
+> The decisive method was cross-version semantic reconstruction, not more
+> stochastic search. FE6J `func_fe6_08083180`, FE7J `sub_809E4D0`, and FE7U
+> `sub_809DAB8` share the same 13-block password decoder. Phase-local value roles
+> plus P14 two-address accumulators force the final `adds r0,r0,r6` /
+> `adds r2,r3,r1` choices; r1 delta/mask locals and an r1 struct alias reproduce
+> the subtract loop and immediate-offset header tails. No helper, callback, or
+> semantic phase was changed. The pre-promotion source was
+> `PROVEN-BOUNDED(3)` and EQUIV in 60/60 codec-domain trials.
+>
+> Owned scratch `9myLi` is SOLVED at raw score 0 and its registry row is removed.
+> The remaining six are `sub_800A34C`, `sub_800A594`, `sub_800FAD0`,
+> `sub_807D3BC`, `sub_80A6F1C`, and `sub_80C05C8`.
+
 > **[REFRESH 2026-07-11 — combined five-function axis-2 candidate; not main.]**
 > Branch `release/axis2-harvest-five` starts at current `origin/main` (which already
 > includes `DivinationRankSpriteUpdate`) and preserves the six transplanted commits:
