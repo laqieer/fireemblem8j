@@ -10,6 +10,15 @@
  * into disableReda. Callers pass the original s8 value promoted to a word; this
  * source shape schedules that narrowing after buildFlag receives its stack
  * home, matching the JP prologue exactly.
+ *
+ * Provenance: the exact flattened scorer source synchronized to owned decomp.me
+ * scratch eZzgG has SHA-256
+ * c61cc59ccb68d2ea306a3be2503f956ab9f37c8021590b070f5cf1bb1623b732.
+ * Stock decomp.me agbcc reports raw score 2843 because it lacks the project-local
+ * -mjp-promote flag; local linked-ROM byte identity justifies the supported
+ * match_override=true effective score 0, after which the registry row was
+ * removed. This project-form source intentionally is not text-identical to the
+ * flattened upload.
  */
 struct UnitDefinition * GetUnitDefinitionFormEventScr(
     struct UnitDefinition * source,
