@@ -1,6 +1,12 @@
-# The 5 remaining unmatched functions — understanding report
+# The 4 remaining unmatched functions — understanding report
 
-> **UPDATE 2026-07-13.** The combined harvest graduates five more study members:
+> **UPDATE 2026-07-13 (`sub_800FAD0` resolved).**
+> `GetUnitDefinitionFormEventScr` now compiles byte-exact from C. The P14 match
+> uses an ABI-wide fifth argument with a delayed `(s8)` local re-narrow, direct
+> `arg2` lifetime, explicit `[sp,#0x40]/[sp,#0x44]` stack homes, and an r5 tail
+> readback. Axis-2 is **99.95% (8688/8692), 4 still-asm**.
+>
+> **HISTORICAL UPDATE 2026-07-13.** The combined harvest graduates five more study members:
 > `Event18_ColorFade`, `AdjustNewUnitPosition`, `PutDivinationRankSprite`,
 > `DrawAuguryResultPanel`, and `EncodeLinkArenaRecord`. Their
 > uVVvN/gdTId/Br4VJ/vdXu7/XOT5k forks and owned
@@ -11,15 +17,15 @@
 > `DecodeLinkArenaRecordHeader` (`sub_80A6D34`): FE6J/FE7J/FE7U align to the
 > same password decoder, and P14 two-address accumulators plus an r1 struct alias
 > close the final codegen residual. The original 16-function cohort now has
-> **5 active members**; axis-2 is **99.94% (8687/8692), 5 still-asm**. Resolved
+> **4 active members**; axis-2 is **99.95% (8688/8692), 4 still-asm**. Resolved
 > reports remain below as historical analysis because their live/dead and
 > cross-game findings are still useful.
 >
-> **Purpose of this document.** Understand (not merely classify) the 5 functions
+> **Purpose of this document.** Understand (not merely classify) the 4 functions
 > whose bytes still come from `asm/*.s` (the authoritative `src/nonmatching/*.c`
 > set). For each: correspondence, purpose, behavior, reachability, callers/callees,
 > and current blocking-diff class. The authoritative work list remains
-> [`frontier.md`](frontier.md) → *Code frontier — the 5 remaining functions*.
+> [`frontier.md`](frontier.md) → *Code frontier — the 4 remaining functions*.
 >
 > Detailed section numbers below retain the original 16-function study IDs so old
 > cross-references remain readable; resolved studies are clearly marked.
@@ -48,13 +54,12 @@
 |---|---|---|---|---|---|---|---|
 | 2 | 0x0800A34C | SplineEvalCatmullRom | JP-only Catmull-Rom eval | no | **DEAD** (transitive) | 1 (SplineSampleAtTime) | whole-fn reg-coloring/spill |
 | 3 | 0x0800A594 | SplineSampleAtTime | JP-only spline driver | no | **DEAD (root)** | **0** | spill/reg-coloring |
-| 5 | 0x0800FAD0 | GetUnitDefinitionFormEventScr | event unit loader | **yes** (eventscr.c:2376, NM in fe8u too) | **LIVE** | Event2C_LoadUnits | register permutation |
 | 8 | 0x0807D3BC | SelectSummonPos | summon positioning | analog only | **LIVE** | SelSumPosAndMoveCamera | spill/frame decision |
 | 16 | 0x080C05C8 | GmapScreen2_Loop | worldmap node icons | **yes** (worldmap_screen2.c) | **LIVE** | ProcScr_GmNodeIconDisplay | clean JP-vs-US coloring divergence |
 
 
-**Headline results (3 live / 2 dead)**
-- **3 of 5 are live, actively reachable game code.** Their remaining asm status is
+**Headline results (2 live / 2 dead)**
+- **2 of 4 are live, actively reachable game code.** Their remaining asm status is
   a byte-generation problem, not an understanding gap.
 - **2 of 5 are unreachable dead code**, forming the spline island found by the
   original study:
@@ -63,7 +68,7 @@
 - **Password decode island — resolved:** `DecodeAndVerifyArenaRecord`
   [resolved study #15] and its `DecodeLinkArenaRecordHeader` callee
   [resolved study #13] are both matching C.
-- **Every one of the 5 has a real, non-stub ROM body.** “Dead” means statically
+- **Every one of the 4 has a real, non-stub ROM body.** “Dead” means statically
   unreferenced, not empty.
 - The 2026-07-10/11 wins are a methodology correction: measured plateaus remain useful,
   but “permanent/source-invariant” claims require stronger evidence than failed source
@@ -79,7 +84,7 @@ mapanim / summon fx ────────────────────
 
 event engine ────────────────────────────────────────────────────
   gEventLoCmdTable[COLORFADE] ──► Event18_ColorFade [MATCHED 2026-07-11]
-  Event2C_LoadUnits ──► GetUnitDefinitionFormEventScr [5]
+  Event2C_LoadUnits ──► GetUnitDefinitionFormEventScr [MATCHED 2026-07-13]
 
 battle-anim intro ────────────────────────────────────────────────
   EkrBattleStarting_* ──► PrepareBattleGraphicsMaybe [MATCHED 2026-07-07]
@@ -199,7 +204,7 @@ JP-only DEAD spline island
   normalizations, scripts the target `and`, and uses scoped empty barriers for the final
   argument/spill order. The project source retains the real `NewEventFadefx` symbol.
 
-## 5. GetUnitDefinitionFormEventScr — `0x0800FAD0`  (LIVE)
+## Resolved study #5. GetUnitDefinitionFormEventScr — `0x0800FAD0`  ✅ MATCHED 2026-07-13
 
 - **fe8u twin:** yes — `fireemblem8u/src/eventscr.c:2376` (also NON_MATCHING in fe8u itself).
 - **Purpose:** event-script helper that **builds a randomised unit-load list** from a
@@ -215,10 +220,10 @@ JP-only DEAD spline island
   "load units" command).
 - **Verdict:** **LIVE** — used whenever an event loads/generates units (e.g. reinforcements,
   summons defined in-script).
-- **Why still asm:** clean register-permutation NEAR (JP holds the loop induction `i` in
-  caller-saved `r3` and spills it around `NextRN_N`, keeping `arg2` in callee-saved `r7`; agbcc
-  colours `i` into `r7` with no spill). `-mjp-promote`; JP prologue has region-different arg
-  signedness.
+- **Resolution:** P14 declares the stacked fifth argument ABI-wide and narrows it
+  locally only after `arg3` receives its target stack home. Direct `arg2`, scoped
+  word-sized RNG spill/reload constraints, and an r5 tail readback reproduce the
+  four formerly differing clusters. Linked range and whole-ROM comparisons are exact.
 
 ## 6. PrepareBattleGraphicsMaybe — `0x08057F80`  (LIVE, **genuinely region-different**)
 
@@ -550,11 +555,11 @@ but unmatchable), and **3 are genuinely FE8J-/FE8-specific** (the two dead splin
 
 ---
 
-## ROI — effort vs value to byte-match the remaining 5
+## ROI — effort vs value to byte-match the remaining 4
 
-The 5 already have readable `src/nonmatching/*.c` reconstructions and a green,
-self-contained checksum build. Matching them moves **2,484 bytes** from descriptive asm
-to compiled C and advances axis-2 from **99.94% toward 100%**. It is valuable
+The 4 already have readable `src/nonmatching/*.c` reconstructions and a green,
+self-contained checksum build. Matching them moves **2,020 bytes** from descriptive asm
+to compiled C and advances axis-2 from **99.95% toward 100%**. It is valuable
 decomp polish, not a functional bug fix.
 
 The 2026-07-10 results correct the old effort model: deterministic levers are **not
@@ -567,7 +572,6 @@ then stop repeated variants of the same idea and hand off to community/permuter 
 |---|---|---|---|---|
 | 2 | SplineEvalCatmullRom (584 B) | dead | whole-fn coloring/spill | VERY LOW |
 | 3 | SplineSampleAtTime (500 B) | dead | spill/coloring | VERY LOW |
-| 5 | GetUnitDefinitionFormEventScr (464 B) | live | clean register permutation | MED-HIGH |
 | 8 | SelectSummonPos (392 B) | live | spill-slot/frame decision | LOW |
 | 16 | GmapScreen2_Loop (544 B) | live | clean JP-vs-US coloring divergence | HIGH |
 

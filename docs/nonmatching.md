@@ -243,7 +243,7 @@ asm/<fn>.s           base.c          src/nonmatching/      nonmatchings/    src/
 
 ---
 
-## Help wanted — decomp.me scratches (start here to match the remaining 5)
+## Help wanted — decomp.me scratches (start here to match the remaining 4)
 
 These scratches are **work-in-progress starting points**, not byte-match claims. The
 owned `ABitG` (`AddAttr2dBitMap`) and `xYHce` (`Augury_InitResultScreen`) families were
@@ -265,14 +265,16 @@ upstream score check and the full project oracle/shiftcheck gates passed.
 block alignment and P14 two-address accumulator steering. Owned 9myLi compiles
 at raw score 0 with `match_override=false`; its canonical function payload is
 identical to the promoted project source, and its registry row is retired.
+`GetUnitDefinitionFormEventScr` (`sub_800FAD0`) was then retired after its local
+P14 source passed the linked ROM oracle and owned family `eZzgG` exposed
+effective score 0 through the supported `match_override` state.
 
 | # | function | name | decomp.me scratch |
 |---:|---|---|---|
 | 1 | `sub_800A34C` | worldmap coeff/segment-search | https://decomp.me/scratch/ABtKz |
 | 2 | `sub_800A594` | worldmap coeff/segment-search sibling | https://decomp.me/scratch/Sp10a |
-| 3 | `sub_800FAD0` | GetUnitDefinitionFormEventScr | https://decomp.me/scratch/eZzgG |
-| 4 | `sub_807D3BC` | SelectSummonPos | https://decomp.me/scratch/J1ka1 |
-| 5 | `sub_80C05C8` | GmapScreen2_Loop | https://decomp.me/scratch/R7AaX |
+| 3 | `sub_807D3BC` | SelectSummonPos | https://decomp.me/scratch/J1ka1 |
+| 4 | `sub_80C05C8` | GmapScreen2_Loop | https://decomp.me/scratch/R7AaX |
 
 
 ## Metrics

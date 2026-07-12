@@ -117,6 +117,7 @@ src/StartSubSpell_efxMaohFlashEyeFire1OBJ1.o: CC1FLAGS += -mjp-promote
 src/StartSubSpell_efxMaohFlashEyeFire2OBJ1.o: CC1FLAGS += -mjp-promote
 src/efxDarkGradoBG02_Loop_A.o: CC1FLAGS += -mjp-promote
 src/AiGetUnitClosestValidPosition.o: CC1FLAGS += -mjp-promote
+src/sub_800FAD0.o: CC1FLAGS += -mjp-promote
 src/nonmatching/sub_807C8DC.o: CC1FLAGS += -mjp-promote
 src/nonmatching/sub_807D3BC.o: CC1FLAGS += -mjp-promote
 src/nonmatching/sub_8057F80.o: CC1FLAGS += -mjp-promote

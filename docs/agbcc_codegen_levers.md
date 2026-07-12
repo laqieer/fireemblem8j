@@ -246,6 +246,7 @@ The 19 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scri
 | local `DecodeLinkArenaRecordHeader` (sub_80A6D34, 280 B) | 26 | 12 | 0 | 12 empty | **P14** two-address accumulator steering + phase-local struct alias; cross-version FE6J/FE7J block alignment |
 | local `AddAttr2dBitMap` (sub_8001570, 224 B) | 0 | 0 | 0 | 0 | **P9** zero-instruction `do { } while (0);` BB separator flips callee-save copy order |
 | local `Augury_InitResultScreen` (sub_80A390C, 612 B) | 0 | 0 | 0 | 0 | **P12** destination-field readback + equivalent branch polarity |
+| local `GetUnitDefinitionFormEventScr` (sub_800FAD0, 464 B) | 2 | 3 | 2 | 0 | **P14** ABI-wide stacked arg + delayed local re-narrow; direct arg2 lifetime; paired stack homes; r5 tail readback |
 
 **LESSON from rtMN6 (`sub_8057F80`, 2026-07-07): "region-different" ≠ unmatchable — measure it.**
 The function was parked as "genuinely region-different (2936 vs US 3250 B), byte match out of
@@ -497,6 +498,26 @@ and phase boundaries were identical except for FE8J's full-width mask and
 no raw opcode asm is used. The decisive lesson: **cross-version alignment can
 reduce a “global coloring wall” to isolated two-address DAG choices; synthesize
 those exact DAGs before running another broad search.**
+
+**P14 — widen a stacked narrow ABI arg, then re-narrow it after the required
+stack-home write.** A fifth `s8` argument is already passed as a promoted word.
+When JP loads that word early but delays its `lsl#24;asr#24` until after another
+parameter has been spilled, declare the callee-side parameter as `int` and make
+the narrow value explicit at the source point whose schedule JP uses:
+```c
+/* caller prototype remains s8; the ABI word is unchanged */
+int buildFlag = arg3;
+int disableReda;
+asm("" : "+m"(buildFlag));
+disableReda = (s8)arg4;
+```
+On `GetUnitDefinitionFormEventScr`, using `arg2` directly completes its r7
+extension first; `buildFlag` owns `[sp,#0x40]`; a scoped word-sized `iSpill`
+owns `[sp,#0x44]` around `NextRN_N`; and a tied empty-asm reload preserves the
+known-u16 value without adding a narrowing pair. A final r5 readback of
+`buildFlag` reproduces the callback test. The stock decomp.me compiler cannot
+raw-score this project-local `-mjp-promote` match, so owned family `eZzgG` is
+closed with the supported `match_override` state.
 
 ### How to run this on a NEAR (escalation order)
 1. **Confirm it's a coloring/spill NEAR** (same instruction *count/opcodes*, regs or spill

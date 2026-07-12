@@ -3,7 +3,23 @@
 **Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
-> **[REFRESH 2026-07-13 — DecodeLinkArenaRecordHeader serial promotion.]**
+> **[REFRESH 2026-07-13 — `sub_800FAD0` serial promotion.]**
+> The repaired release history after the already-landed score-85 seed promotes
+> `GetUnitDefinitionFormEventScr` from descriptive asm to matching C. P14 keeps
+> arg2 direct, widens the fifth ABI argument to `int`, delays its `(s8)` local
+> re-narrow, preserves the `[sp,#0x40]/[sp,#0x44]` stack homes, and steers the
+> tail build-flag readback through r5. Linked range, normal/cold `make compare`,
+> shiftcheck, check-nonmatching, CBMC (0/374), and 200-trial differential gates
+> pass. Owned `eZzgG` exposes effective score 0 via `match_override`, and its
+> registry row is retired. Ground truth becomes matching-C **99.95%
+> (8688/8692, 4 still-asm)** and source-form code **899,408/901,428 bytes
+> (99.78%)**.
+>
+> The remaining four are `sub_800A34C`, `sub_800A594`, `sub_807D3BC`, and
+> `sub_80C05C8`. Do not redispatch `sub_800FAD0`, `sub_80A6D34`, or
+> `sub_80A6F1C`.
+
+> **[PRIOR REFRESH 2026-07-13 — DecodeLinkArenaRecordHeader serial promotion.]**
 > The score-zero follow-up from `feat/axis2-compute-80a6d34-copilot`
 > (`00b86b22d57e210ad59e9ac08f3052b57344c4a1` →
 > `58fd4cf528a57b53f9889143fdfd6708b4cd96e7`) was transplanted onto the

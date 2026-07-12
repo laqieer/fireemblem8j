@@ -1,6 +1,14 @@
-# Axis #2 (matching-C) — 5 still-asm functions, ranked recipe queue
+# Axis #2 (matching-C) — 4 still-asm functions, ranked recipe queue
 
-> **[UPDATE 2026-07-13 — axis-2 is now 5 still-asm (matching-C 99.94%, 8687/8692).]**
+> **[UPDATE 2026-07-13 — `sub_800FAD0` MATCHED; axis-2 is now 4 still-asm
+> (matching-C 99.95%, 8688/8692).]**
+> `GetUnitDefinitionFormEventScr` is a byte-exact P14 local-oracle match:
+> ABI-wide fifth arg + delayed `(s8)` re-narrow, direct arg2 lifetime, paired
+> `[sp,#0x40]/[sp,#0x44]` stack homes, and r5 tail readback. Normal/cold compare,
+> shiftcheck, CBMC, and differential gates pass; `eZzgG` exposes effective score
+> 0 via `match_override`.
+>
+> **[PRIOR UPDATE 2026-07-13 — axis-2 was 5 still-asm (matching-C 99.94%, 8687/8692).]**
 > `DecodeLinkArenaRecordHeader` (`sub_80A6D34`) landed after the serialized
 > `DecodeAndVerifyArenaRecord` (`sub_80A6F1C`) promotion. The header decoder
 > matched through FE6J/FE7J/FE7U cross-version block alignment plus P14
@@ -25,13 +33,11 @@
 > **Current ranked queue (authoritative `src/nonmatching/*.c` set):**
 > 1. `sub_80C05C8` — clean JP-vs-US coloring divergence; re-poll R7AaX before
 >    trying exact pins (the prior blind r7/r6 pin attempt regressed).
-> 2. `sub_800FAD0` — clean `-mjp-promote` register permutation; re-poll eZzgG,
->    then try scoped arg materialization/barriers learned from uVVvN/gdTId.
-> 3. `sub_807D3BC` — spill/frame decision; test only exact ROM-derived pins or
+> 2. `sub_807D3BC` — spill/frame decision; test only exact ROM-derived pins or
 >    basic-block boundaries, not broad pin swarms.
-> 4. `sub_800A34C` — large whole-function coloring wall; try address-role reuse
+> 3. `sub_800A34C` — large whole-function coloring wall; try address-role reuse
 >    and explicit phase boundaries before more permuter compute.
-> 5. `sub_800A594` — sibling spline spill wall; lowest runtime ROI (dead root).
+> 4. `sub_800A594` — sibling spline spill wall; lowest runtime ROI (dead root).
 >
 > Full linked `make compare` remains the gate. Re-poll every active registry
 > family before local experimentation.
