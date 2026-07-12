@@ -1,6 +1,12 @@
-# The 7 remaining unmatched functions — understanding report
+# The 6 remaining unmatched functions — understanding report
 
-> **UPDATE 2026-07-11.** The combined harvest graduates five more study members:
+> **UPDATE 2026-07-11 (`sub_800FAD0` resolved).**
+> `GetUnitDefinitionFormEventScr` now compiles byte-exact from C. The P14 match
+> uses an ABI-wide fifth argument with a delayed `(s8)` local re-narrow, direct
+> `arg2` lifetime, explicit `[sp,#0x40]/[sp,#0x44]` stack homes, and an r5 tail
+> readback. Axis-2 is **99.93% (8686/8692), 6 still-asm**.
+
+> **HISTORICAL UPDATE 2026-07-11.** The combined harvest graduated five more study members:
 > `Event18_ColorFade`, `AdjustNewUnitPosition`, `PutDivinationRankSprite`,
 > `DrawAuguryResultPanel`, and `EncodeLinkArenaRecord`. Their
 > uVVvN/gdTId/Br4VJ/vdXu7/XOT5k forks and owned
@@ -9,11 +15,11 @@
 > **99.92% (8685/8692), 7 still-asm**. The five reports remain below as resolved
 > historical analysis because their live/dead and cross-game findings are still useful.
 >
-> **Purpose of this document.** Understand (not merely classify) the 7 functions
+> **Purpose of this document.** Understand (not merely classify) the 6 functions
 > whose bytes still come from `asm/*.s` (the authoritative `src/nonmatching/*.c`
 > set). For each: correspondence, purpose, behavior, reachability, callers/callees,
 > and current blocking-diff class. The authoritative work list remains
-> [`frontier.md`](frontier.md) → *Code frontier — the 7 remaining functions*.
+> [`frontier.md`](frontier.md) → *Code frontier — the 6 remaining functions*.
 >
 > Detailed section numbers below retain the original 16-function study IDs so old
 > cross-references remain readable; resolved studies are clearly marked.
@@ -42,15 +48,14 @@
 |---|---|---|---|---|---|---|---|
 | 2 | 0x0800A34C | SplineEvalCatmullRom | JP-only Catmull-Rom eval | no | **DEAD** (transitive) | 1 (SplineSampleAtTime) | whole-fn reg-coloring/spill |
 | 3 | 0x0800A594 | SplineSampleAtTime | JP-only spline driver | no | **DEAD (root)** | **0** | spill/reg-coloring |
-| 5 | 0x0800FAD0 | GetUnitDefinitionFormEventScr | event unit loader | **yes** (eventscr.c:2376, NM in fe8u too) | **LIVE** | Event2C_LoadUnits | register permutation |
 | 8 | 0x0807D3BC | SelectSummonPos | summon positioning | analog only | **LIVE** | SelSumPosAndMoveCamera | spill/frame decision |
 | 13 | 0x080A6D34 | password/header decode | password record codec | no | **DEAD** (transitive) | 1 (DecodeAndVerify…) | pure reg-coloring |
 | 15 | 0x080A6F1C | DecodeAndVerifyArenaRecord | password record codec | no | **DEAD (root)** | **0** | callback-in-high-reg veneer |
 | 16 | 0x080C05C8 | GmapScreen2_Loop | worldmap node icons | **yes** (worldmap_screen2.c) | **LIVE** | ProcScr_GmNodeIconDisplay | clean JP-vs-US coloring divergence |
 
 
-**Headline results (3 live / 4 dead)**
-- **3 of 7 are live, actively reachable game code.** Their remaining asm status is
+**Headline results (2 live / 4 dead)**
+- **2 of 6 are live, actively reachable game code.** Their remaining asm status is
   a byte-generation problem, not an understanding gap.
 - **4 of 7 are unreachable dead code**, forming the same two islands found by the
   original study:
@@ -193,7 +198,7 @@ JP-only DEAD spline island
   normalizations, scripts the target `and`, and uses scoped empty barriers for the final
   argument/spill order. The project source retains the real `NewEventFadefx` symbol.
 
-## 5. GetUnitDefinitionFormEventScr — `0x0800FAD0`  (LIVE)
+## Resolved study #5. GetUnitDefinitionFormEventScr — `0x0800FAD0`  ✅ MATCHED 2026-07-11
 
 - **fe8u twin:** yes — `fireemblem8u/src/eventscr.c:2376` (also NON_MATCHING in fe8u itself).
 - **Purpose:** event-script helper that **builds a randomised unit-load list** from a
@@ -209,10 +214,10 @@ JP-only DEAD spline island
   "load units" command).
 - **Verdict:** **LIVE** — used whenever an event loads/generates units (e.g. reinforcements,
   summons defined in-script).
-- **Why still asm:** clean register-permutation NEAR (JP holds the loop induction `i` in
-  caller-saved `r3` and spills it around `NextRN_N`, keeping `arg2` in callee-saved `r7`; agbcc
-  colours `i` into `r7` with no spill). `-mjp-promote`; JP prologue has region-different arg
-  signedness.
+- **Resolution:** P14 declares the stacked fifth argument ABI-wide and narrows it
+  locally only after `arg3` receives its target stack home. Direct `arg2`, scoped
+  word-sized RNG spill/reload constraints, and an r5 tail readback reproduce the
+  four formerly differing clusters. Linked range and whole-ROM comparisons are exact.
 
 ## 6. PrepareBattleGraphicsMaybe — `0x08057F80`  (LIVE, **genuinely region-different**)
 
@@ -528,7 +533,7 @@ but unmatchable), and **3 are genuinely FE8J-/FE8-specific** (the two dead splin
 
 ---
 
-## ROI — effort vs value to byte-match the remaining 7
+## ROI — effort vs value to byte-match the remaining 6
 
 The 7 already have readable `src/nonmatching/*.c` reconstructions and a green,
 self-contained checksum build. Matching them moves **2,976 bytes** from descriptive asm

@@ -1,6 +1,13 @@
-# Axis #2 (matching-C) — 7 still-asm functions, ranked recipe queue
+# Axis #2 (matching-C) — 6 still-asm functions, ranked recipe queue
 
-> **[UPDATE 2026-07-11 — axis-2 is now 7 still-asm (matching-C 99.92%, 8685/8692).]**
+> **[UPDATE 2026-07-11 — `sub_800FAD0` MATCHED.]**
+> `GetUnitDefinitionFormEventScr` is a byte-exact P14 local-oracle match:
+> ABI-wide fifth arg + delayed `(s8)` re-narrow, direct arg2 lifetime, paired
+> `[sp,#0x40]/[sp,#0x44]` stack homes, and r5 tail readback. Normal/cold compare,
+> shiftcheck, CBMC, and differential gates pass; `eZzgG` exposes effective score
+> 0 via `match_override`. Axis-2 is **99.93% (8686/8692), 6 still-asm**.
+
+> **[HISTORICAL UPDATE 2026-07-11 — axis-2 was 7 still-asm (matching-C 99.92%, 8685/8692).]**
 > The five harvest-first candidates are integrated on
 > `release/axis2-harvest-five`: `sub_800E1FC/uVVvN`,
 > `sub_807C8DC/gdTId`, `sub_80A3300/Br4VJ`,
@@ -12,17 +19,15 @@
 > **Current ranked queue (authoritative `src/nonmatching/*.c` set):**
 > 1. `sub_80C05C8` — clean JP-vs-US coloring divergence; re-poll R7AaX before
 >    trying exact pins (the prior blind r7/r6 pin attempt regressed).
-> 2. `sub_800FAD0` — clean `-mjp-promote` register permutation; re-poll eZzgG,
->    then try scoped arg materialization/barriers learned from uVVvN/gdTId.
-> 3. `sub_807D3BC` — spill/frame decision; test only exact ROM-derived pins or
+> 2. `sub_807D3BC` — spill/frame decision; test only exact ROM-derived pins or
 >    basic-block boundaries, not broad pin swarms.
-> 4. `sub_80A6D34` — pure password-codec coloring; try XOT5k's scoped
+> 3. `sub_80A6D34` — pure password-codec coloring; try XOT5k's scoped
 >    base/count lifetimes without copying the encoder's callback machinery.
-> 5. `sub_80A6F1C` — callback-in-high-register veneer; preserve the real callback
+> 4. `sub_80A6F1C` — callback-in-high-register veneer; preserve the real callback
 >    and invoke it normally, as XOT5k did, so agbcc selects the veneer.
-> 6. `sub_800A34C` — large whole-function coloring wall; try address-role reuse
+> 5. `sub_800A34C` — large whole-function coloring wall; try address-role reuse
 >    and explicit phase boundaries before more permuter compute.
-> 7. `sub_800A594` — sibling spline spill wall; lowest runtime ROI (dead root).
+> 6. `sub_800A594` — sibling spline spill wall; lowest runtime ROI (dead root).
 >
 > Full linked `make compare` remains the gate. Re-poll every active registry
 > family before local experimentation.
@@ -83,11 +88,11 @@ Retained for provenance; the seven-entry queue above is the current work list.
   data alias. JP precomputed-class-name-table pattern (shared w/ sub_80D1844).
 - **#8/#30 sub_80A73D4** (256B, divination): sequential PutNumber/PutNumberOrBlank, NO control
   flow — reconstruct directly from asm. EASIEST augury fn. — [SUPERSEDED 2026-07-03: MATCHED byte-exact in-repo, banked.]
-- **#26 sub_800FAD0** (464B): fe8u eventscr.c NONMATCHING GetUnitDefinitionFormEventScr body +
+- **#26 sub_800FAD0** (464B) — **[RESOLVED 2026-07-11, P14 score-0]**: fe8u eventscr.c NONMATCHING GetUnitDefinitionFormEventScr body +
   JP arg-sign (arg2 u8/lsrs, arg3/4 s8/asrs) + -mjp-promote.
   WIRING: sub_800FAD0 already HAS the `GetUnitDefinitionFormEventScr` baseline alias
   (0800FAD0, layout/baseline_syms.d/Event2C_LoadUnits-0e52685b.tsv) — carving must DROP that
-  baseline alias (else multiple-def), not add a new one. (Consistent with src/nonmatching/sub_800FAD0.c line ~44.)
+  baseline alias (else multiple-def), not add a new one.
 - **#9 sub_80BB240** (232B): ending_details defeat-text builder, msgids US-0x88, JP callees.
 - **#10 sub_80BCD74** (244B): worldmap path-follow proc, 0x100/0x200 floor-quantize.
 - **#11 sub_800FF08** (384B): Event2F_MoveUnit analog + -mjp-promote (watch subcmd dir order). — [SUPERSEDED 2026-07-03: MATCHED byte-exact in-repo, banked.]

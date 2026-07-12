@@ -3,7 +3,19 @@
 **Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
-> **[REFRESH 2026-07-11 — combined five-function axis-2 candidate; not main.]**
+> **[REFRESH 2026-07-11 — `sub_800FAD0` score-0 follow-up candidate.]**
+> Branch `feat/sub_800FAD0-q7r9` now promotes
+> `GetUnitDefinitionFormEventScr` from descriptive asm to matching C. P14 widens
+> the fifth ABI argument to `int`, re-narrows it as `s8` after the build flag's
+> `[sp,#0x40]` stack-home write, and preserves the RNG selection count at
+> `[sp,#0x44]`; the tail reload is steered through r5. Linked range, normal and
+> cold `make compare`, shiftcheck (0 HIGH), check-nonmatching, CBMC (0/374), and
+> 200-trial differential gates pass. Owned `eZzgG` is published with
+> `match_override=true`, and its registry row is retired. Ground truth becomes
+> matching-C **99.93% (8686/8692, 6 still-asm)** and source-form code
+> **898,916/901,428 bytes (99.72%)**.
+
+> **[HISTORICAL REFRESH 2026-07-11 — combined five-function axis-2 candidate.]**
 > Branch `release/axis2-harvest-five` starts at current `origin/main` (which already
 > includes `DivinationRankSpriteUpdate`) and preserves the six transplanted commits:
 > five score-0 matches plus the section-aware shiftcheck fix from `feat/sub_800E1FC`.
