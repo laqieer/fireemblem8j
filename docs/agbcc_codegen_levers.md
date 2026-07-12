@@ -517,7 +517,12 @@ owns `[sp,#0x44]` around `NextRN_N`; and a tied empty-asm reload preserves the
 known-u16 value without adding a narrowing pair. A final r5 readback of
 `buildFlag` reproduces the callback test. The stock decomp.me compiler cannot
 raw-score this project-local `-mjp-promote` match, so owned family `eZzgG` is
-closed with the supported `match_override` state.
+closed with the supported `match_override` state. The synchronized flattened
+scorer source has SHA-256
+`c61cc59ccb68d2ea306a3be2503f956ab9f37c8021590b070f5cf1bb1623b732`;
+its hosted raw score is 2843 and `match_override=true` is the valid effective
+score 0 after local linked-ROM byte identity. The flattened upload and the
+project-form source are deliberately not text-identical.
 
 ### How to run this on a NEAR (escalation order)
 1. **Confirm it's a coloring/spill NEAR** (same instruction *count/opcodes*, regs or spill
