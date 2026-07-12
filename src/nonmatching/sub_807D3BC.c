@@ -60,6 +60,19 @@
  *     countdown zero-fill: score 1700 -> 820, linked residual 176.
  *   No score 0. No unbounded run, remote execution, or raw-opcode asm.
  *
+ * P14 FOLLOW-UP (2026-07-12, deterministic cap of two):
+ *   The residual is not the sub_80A6D34 class. Current code already strength-
+ *   reduces array[count] to one advancing struct pointer, keeps immediate
+ *   x/y/boolAvailable offsets +0/+1/+2, and shares the same fail tail as JP;
+ *   the remaining differences are register-role and setup-order rotations.
+ *     (1) phase-local slot alias pinned to target r4: score 1670, size 388,
+ *         frame 0x90, linked residual 332; PROVEN-BOUNDED(1), EQUIV 60/60.
+ *     (2) compaction-phase struct scan alias pinned to target r1: score 725,
+ *         size 392, frame 0x90, linked residual 94; PROVEN-BOUNDED(1),
+ *         EQUIV 60/60.
+ *   Both regress the score/residual from 655/82, so neither alias nor an address
+ *   accumulator was adopted; no additional hard-register pin was added.
+ *
  * VERDICT: UNSOLVED, objectively improved and proven-equivalent. The next useful
  * lever must delay the r2 materialization to JP's +0x3A while preserving the
  * 0x90 frame and exact fail path; do not regress to the old 331-byte experiments.
