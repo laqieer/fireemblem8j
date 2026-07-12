@@ -368,7 +368,7 @@ seconds of work versus a permuter run that may be SIGTERM'd here (D20).
 
 ---
 
-## 7. Pulling & integrating a community (decomp.me) match — and the symbol-mapping gotcha
+## 7. Harvesting decomp.me results — lifecycle and the symbol-mapping gotcha
 
 When a still-asm function reaches **score 0** on decomp.me (our scratch or a community
 fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN6, D…):
@@ -427,6 +427,60 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
    its real callback alias to r9 and likewise compiles to `_call_via_r9`. Neither
    substitutes a fixed callee or contains a raw branch opcode. A fixed target or
    scripted `bl` may match bytes while changing semantics and must be rejected.
+
+### Proven nonzero improvements: synchronize before committing
+
+A score>0 family member is only an **adoption candidate**, never a match. Review
+and install it in `src/nonmatching/<fn>.c` with real project includes, then run
+`make nonmatching`, require `prove_nonmatching.py` to report
+`PROVEN-BOUNDED(n)`, and require `differential_test.py --trials 60` to report
+`EQUIV` on that exact file. Treat local replacement, upstream update, and the
+local commit as one transaction. Because decomp.me has flattened context but
+not this repository's header files, keep one byte-neutral include guard in the
+exact adopted file:
+
+```c
+#ifndef FE8J_DECOMPME_CONTEXT
+#include "global.h"
+/* other project headers */
+#endif
+```
+
+`sync_improvement.py` regenerates the flattened remote context from the trusted
+project headers referenced by the exact file, using the Makefile's CPP flags,
+and prepends that macro; normal project compilation still follows the real
+includes.
+
+```sh
+# Read-only preflight: compile and score the exact adopted local file upstream.
+scripts/tools/decompme/sync_improvement.py <owned-base> \
+  --source src/nonmatching/<fn>.c \
+  --compiler-settings-from <improved-fork> --dry-run
+
+# Authenticated PATCH + source/settings/score verification.
+scripts/tools/decompme/sync_improvement.py <owned-base> \
+  --source src/nonmatching/<fn>.c \
+  --compiler-settings-from <improved-fork> \
+  --expected-score <dry-run-score>
+```
+
+The helper never executes downloaded source locally. It uses the established
+browser-UA/Referer and `setup_auth.sh` credential file, verifies ownership,
+preflight-compiles the exact local text, and rolls the remote scratch back if
+the PATCH response or fresh GET does not preserve the expected source/settings/
+nonzero score. Commit the local adoption only after this succeeds. Keep the
+registry row active and do **not** set SOLVED or `match_override` while score>0.
+
+For a locally discovered improvement, omit `--compiler-settings-from` to retain
+the owned base's compiler settings, or pass `--compiler-flags "..."` when the
+staging object uses an additional decomp.me-supported flag. The context is always
+regenerated from the current local project headers; remote fork source is never
+executed. Older adopted seeds must add the guard and be backfilled with the same
+dry-run/update sequence. `--allow-same-score` is only for an exact-text migration
+whose owned scratch already reports the same nonzero score; it is not permission
+to adopt a non-improvement. A local-only flag that stock decomp.me rejects cannot
+be uploaded; use the supported base flags, record the verified upstream score,
+and do not claim that the remote score measures the custom local compiler.
 
 ### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol
 

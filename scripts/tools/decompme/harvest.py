@@ -12,7 +12,9 @@ Classifications (per still-asm function that has a registry scratch):
                          scratch (but > 0) -> candidate to ADOPT as the updated
                          `src/nonmatching/<fn>.c` *iff* it is proven-equivalent
                          (run scripts/prove_nonmatching.py / differential_test.py
-                         before adopting; decomp.me score alone is not proof).
+                         before adopting; decomp.me score alone is not proof),
+                         then sync the exact adopted file back to the owned base
+                         with sync_improvement.py and keep its registry row.
   * NONE              -- no member beats our base; keep grinding / permute.
   * STALE             -- function is no longer still-asm (already carved) but a
                          scratch is still open -> MARK-SOLVED on decomp.me so
@@ -151,7 +153,7 @@ def classify(fn, slug):
                 "best": best[1], "matched_slug": best[0], "matched_by": best[2],
                 "rejected_matches": rejected,
                 "detail": f"fork {best[0]} ({best[2]}) score {best[1]} < base {base}"
-                          f" -> ADOPT if prove_nonmatching/differential_test pass"}
+                          f" -> ADOPT+SYNC if prove_nonmatching/differential_test pass"}
     if rejected:
         rejected_text = "; ".join(
             f"{item['slug']} score {item['score']}: {item['reason']}"
@@ -234,7 +236,8 @@ def main():
               "pattern NONE functions, then mark the scratch solved on decomp.me.")
     elif counts.get("IMPROVED"):
         print("\n  ACTIONABLE: review IMPROVED fork(s); prove-equivalent -> adopt as "
-              "src/nonmatching/<fn>.c (better staging, not the oracle).")
+              "src/nonmatching/<fn>.c, sync the exact file to the owned base with "
+              "sync_improvement.py, and keep the registry row active.")
     elif counts.get("INVALID_MATCH"):
         print("\n  Known-invalid family score(s) were rejected by local provenance; "
               "keep the registry active and continue bounded matching.")
