@@ -3,7 +3,29 @@
 **Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
-> **[REFRESH 2026-07-11 — combined five-function axis-2 candidate; not main.]**
+> **[REFRESH 2026-07-11 — DecodeAndVerify follow-up candidate; not main.]**
+> Branch `feat/axis2-compute-80a6f1c-copilot` appends score-zero commit
+> `6aa5f35faddd8b05df9d376ed91e93cf7956bd99` to the combined axis-2 release
+> history. Ground truth from `python3 scripts/calcprogress.py` is matching-C
+> **99.93% (8686/8692, 6 still-asm)**, source-form code
+> **898,664/901,428 bytes (99.69%)**, source-form data **100%**, and named
+> symbols **100% (12690/12690)**.
+>
+> `DecodeAndVerifyArenaRecord` now reproduces the JP frame-8 stack layout and
+> compiler-selected `_call_via_r9` while retaining the real caller callback.
+> The reusable source lever is paired `u16 tags[2]` halfword homes plus
+> phase-local r6/r9/r8/r4 aliases, `int` helpers with only the first checksum
+> narrowed, and a fenced r1-to-r2 copy for `0x3FF`. Full `make compare` and
+> `make shiftcheck` (0 HIGH) passed. ARM SMT reports `PROVEN-BOUNDED(3)`,
+> differential testing is EQUIV for 60/60 trials, and bounded shared-oracle
+> CBMC reports 0/409 failures with both adversarial mutations refuted. Owned
+> h2W8F reports raw score 0 and its registry row is absent.
+>
+> The remaining six are `sub_800A34C`, `sub_800A594`, `sub_800FAD0`,
+> `sub_807D3BC`, `sub_80A6D34`, and `sub_80C05C8`. Do not redispatch
+> `sub_80A6F1C`; this branch is awaiting serial integration only.
+
+> **[PRIOR REFRESH 2026-07-11 — combined five-function axis-2 candidate; not main.]**
 > Branch `release/axis2-harvest-five` starts at current `origin/main` (which already
 > includes `DivinationRankSpriteUpdate`) and preserves the six transplanted commits:
 > five score-0 matches plus the section-aware shiftcheck fix from `feat/sub_800E1FC`.

@@ -218,10 +218,11 @@ primary evidence) against its matched fork yields a reusable lever set. These ex
 §1–§9 with a new, more surgical family: **inline-asm constraint scripting** — directly
 commanding agbcc's register allocator / instruction selector without changing behaviour.
 They crack exactly the spill-decision + high-pressure reg-coloring NEARs §7 said flag
-sweeps could not. Two local-oracle matches add clean source-only levers:
-`AddAttr2dBitMap` (P9) and `Augury_InitResultScreen` (P12).
+sweeps could not. Three local-oracle matches add clean/scoped source levers:
+`AddAttr2dBitMap` (P9), `Augury_InitResultScreen` (P12), and
+`DecodeAndVerifyArenaRecord` (P1/P4/P13).
 
-The 17 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
+The 18 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
 
 | fork (fn) | pins | `=r`/`+r` reg-barrier | `+m` mem-barrier | inline-asm | headline lever |
 |---|---|---|---|---|---|
@@ -240,6 +241,7 @@ The 17 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scri
 | gdTId `AdjustNewUnitPosition` (sub_807C8DC, 308 B) | 21 | 1 | 0 | 1 | P4 exact loop/map coloring + goto-shaped IVs + P3 packed `strh`; input-only call-order fence |
 | vdXu7 `DrawAuguryResultPanel` (sub_80A3528, 880 B) | 16 | 6 | 0 | 1 | P12/P13-style field-address hoist + deliberate tilemap rematerialization + P3 post-increment `ldmia` |
 | XOT5k `EncodeLinkArenaRecord` (sub_80A6E4C, 208 B) | 8 | 1 | 0 | 0 | Pin the **real callback** to r3 and call it normally so agbcc emits `_call_via_r3`; scoped base/count lifetimes + one fence |
+| h2W8F `DecodeAndVerifyArenaRecord` (sub_80A6F1C, 212 B) | 6 | 1 | 0 | 0 | Paired `u16 tags[2]` stack shaping + phase-local pins (`chk`=r6, callback=r9, `&cbarg`=r8, loop base=r4) + int helpers/one explicit narrow + fenced r1-to-r2 mask copy |
 | local `AddAttr2dBitMap` (sub_8001570, 224 B) | 0 | 0 | 0 | 0 | **P9** zero-instruction `do { } while (0);` BB separator flips callee-save copy order |
 | local `Augury_InitResultScreen` (sub_80A390C, 612 B) | 0 | 0 | 0 | 0 | **P12** destination-field readback + equivalent branch polarity |
 
@@ -264,6 +266,19 @@ declaration bound to the real symbol, avoiding unwanted halfword normalization w
 changing the target. Br4VJ/gdTId/vdXu7 show the same rule for dataflow: split signed-load
 lifetimes, hoist or rematerialize addresses exactly where the ROM does, and add only the
 smallest barrier/opcode script proven by disassembly.
+
+**LESSON from h2W8F (`sub_80A6F1C`, 2026-07-11): stack shape and explicit
+register-to-register copies are allocator levers.** `u16 tags[2]` plus `int cbarg`
+creates the JP frame-8 layout with clean `strh [sp]` / `[sp,#2]` homes, while
+short-lived aliases pin only the phase that needs them (`chk`→r6, real callback→r9,
+`&cbarg`→r8, loop base→r4). Declaring the helpers `int` and narrowing only the first
+checksum preserves the ROM's single `lsl;lsr`. The final one-instruction residual
+required `raw_mask`→r1, an empty `+r` fence, then `mask`→r2, producing the observed
+`ldr r1,=0x3FF; adds r2,r1,#0` without a raw opcode. Use this only when the ROM proves
+both registers and end each alias at the target reuse point. The project ROM oracle,
+shiftcheck, ARM SMT (`PROVEN-BOUNDED(3)`), 60-trial differential test, and bounded
+shared-oracle CBMC (0/409; both mutations refuted) all passed; h2W8F reports raw score
+0 and its registry row is retired.
 
 ### The levers (checklist — try cleanest first, escalate only if it resists)
 

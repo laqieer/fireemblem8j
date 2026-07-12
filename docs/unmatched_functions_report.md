@@ -1,19 +1,21 @@
-# The 7 remaining unmatched functions — understanding report
+# The 6 remaining unmatched functions — understanding report
 
 > **UPDATE 2026-07-11.** The combined harvest graduates five more study members:
 > `Event18_ColorFade`, `AdjustNewUnitPosition`, `PutDivinationRankSprite`,
 > `DrawAuguryResultPanel`, and `EncodeLinkArenaRecord`. Their
 > uVVvN/gdTId/Br4VJ/vdXu7/XOT5k forks and owned
 > nlJVc/taZrH/ENay1/MaiDT/g7FXU families all expose raw score 0 upstream.
-> The original 16-function cohort now has **7 active members**; axis-2 is
-> **99.92% (8685/8692), 7 still-asm**. The five reports remain below as resolved
+> A follow-up local match then graduates `DecodeAndVerifyArenaRecord`
+> (`sub_80A6F1C`): owned h2W8F reports raw score 0 and its registry row is
+> retired. The original 16-function cohort now has **6 active members**; axis-2 is
+> **99.93% (8686/8692), 6 still-asm**. The resolved reports remain below as
 > historical analysis because their live/dead and cross-game findings are still useful.
 >
-> **Purpose of this document.** Understand (not merely classify) the 7 functions
+> **Purpose of this document.** Understand (not merely classify) the 6 functions
 > whose bytes still come from `asm/*.s` (the authoritative `src/nonmatching/*.c`
 > set). For each: correspondence, purpose, behavior, reachability, callers/callees,
 > and current blocking-diff class. The authoritative work list remains
-> [`frontier.md`](frontier.md) → *Code frontier — the 7 remaining functions*.
+> [`frontier.md`](frontier.md) → *Code frontier — the 6 remaining functions*.
 >
 > Detailed section numbers below retain the original 16-function study IDs so old
 > cross-references remain readable; resolved studies are clearly marked.
@@ -45,20 +47,19 @@
 | 5 | 0x0800FAD0 | GetUnitDefinitionFormEventScr | event unit loader | **yes** (eventscr.c:2376, NM in fe8u too) | **LIVE** | Event2C_LoadUnits | register permutation |
 | 8 | 0x0807D3BC | SelectSummonPos | summon positioning | analog only | **LIVE** | SelSumPosAndMoveCamera | spill/frame decision |
 | 13 | 0x080A6D34 | password/header decode | password record codec | no | **DEAD** (transitive) | 1 (DecodeAndVerify…) | pure reg-coloring |
-| 15 | 0x080A6F1C | DecodeAndVerifyArenaRecord | password record codec | no | **DEAD (root)** | **0** | callback-in-high-reg veneer |
 | 16 | 0x080C05C8 | GmapScreen2_Loop | worldmap node icons | **yes** (worldmap_screen2.c) | **LIVE** | ProcScr_GmNodeIconDisplay | clean JP-vs-US coloring divergence |
 
 
-**Headline results (3 live / 4 dead)**
-- **3 of 7 are live, actively reachable game code.** Their remaining asm status is
+**Headline results (3 live / 3 dead)**
+- **3 of 6 are live, actively reachable game code.** Their remaining asm status is
   a byte-generation problem, not an understanding gap.
-- **4 of 7 are unreachable dead code**, forming the same two islands found by the
+- **3 of 6 are unreachable dead code**, forming the same two islands found by the
   original study:
   - **Spline island** — `SplineSampleAtTime` [study #3] →
     `SplineEvalCatmullRom` [study #2] → `sub_800A194`.
-  - **Password decode island** — `DecodeAndVerifyArenaRecord` [study #15] →
-    `sub_80A6D34` [study #13].
-- **Every one of the 7 has a real, non-stub ROM body.** “Dead” means statically
+  - **Password decode island** — matched dead root `DecodeAndVerifyArenaRecord`
+    [resolved study #15] → still-asm `sub_80A6D34` [study #13].
+- **Every one of the 6 has a real, non-stub ROM body.** “Dead” means statically
   unreferenced, not empty.
 - The 2026-07-10/11 wins are a methodology correction: measured plateaus remain useful,
   but “permanent/source-invariant” claims require stronger evidence than failed source
@@ -96,7 +97,7 @@ augury / divination result screen  (占い)  — LIVE
 
 password record codec  — ENCODE live, DECODE dead
   menu ProcScr ──► sub_80A74D4 ──► EncodeLinkArenaRecord [MATCHED 2026-07-11]
-  (no caller) ✗ DecodeAndVerifyArenaRecord [15] ──► sub_80A6D34 [13]
+  (no caller) ✗ DecodeAndVerifyArenaRecord [MATCHED 2026-07-11] ──► sub_80A6D34 [13]
 
 JP-only DEAD spline island
   (no caller) ✗ SplineSampleAtTime [3] ──► SplineEvalCatmullRom [2]
@@ -409,7 +410,7 @@ JP-only DEAD spline island
   buffer/bound/offset/count pins plus one empty loop-base fence reproduce the remaining
   lifetime and spill choices.
 
-## 15. DecodeAndVerifyArenaRecord — `0x080A6F1C`  (DEAD — unreferenced root)
+## Resolved study #15. DecodeAndVerifyArenaRecord — `0x080A6F1C`  ✅ MATCHED 2026-07-11
 
 - **fe8u twin:** **none** (JP-only link-arena record DECODE + VERIFY; US region = `bmsave-xmap`).
 - **Purpose:** the decode/verify counterpart of #14 — unpacks a received/stored record and
@@ -428,10 +429,21 @@ JP-only DEAD spline island
   nothing in the JP ROM ever decodes/verifies a record. The receive side of the feature is
   either handled by other code or was never wired up. Its only distinct callee (`sub_80A6D34`)
   is dead-by-transitivity. *Understanding value only — no runtime behaviour.*
-- **Why still asm:** the callback pointer must stay live across the `sub_80A6D34` call, so agbcc
-  parks it in a callee-saved hi reg and calls through a `_call_via_rN` veneer; the JP build
-  picks `r9` (`_call_via_r9`) while agbcc from portable C picks a different reg → a different
-  veneer symbol. A global allocation decision. `-O2`.
+- **Matching levers:** paired `u16 tags[2]` plus `int cbarg` produce the target
+  frame-8 layout and clean halfword homes. Phase-local aliases pin `chk` to r6,
+  the real callback to r9, `&cbarg` to r8, and the loop base to r4; the callback
+  is still invoked normally, so agbcc selects the existing `_call_via_r9`
+  veneer. `int` helper declarations with only the first checksum explicitly
+  narrowed reproduce the target extension points. The decisive final residual
+  was the target's explicit constant copy: `raw_mask` pinned to r1, an empty
+  `+r` fence, then `mask` pinned to r2 emits
+  `ldr r1,=0x3FF; adds r2,r1,#0` without a raw opcode.
+- **Lifecycle / evidence:** commit `6aa5f35fa` passed full linked `make compare`
+  and `make shiftcheck` (0 HIGH). ARM-vs-ARM SMT reports
+  `PROVEN-BOUNDED(3)`; differential testing is EQUIV for 60/60 trials; bounded
+  shared-oracle CBMC is successful at 0/409 assertions, while the loop and mask
+  mutations each refute at the intended assertion. Owned scratch h2W8F reports
+  raw score 0 and its registry row is removed.
 
 ## 16. GmapScreen2_Loop — `0x080C05C8`  (LIVE — worldmap)
 
@@ -528,12 +540,12 @@ but unmatchable), and **3 are genuinely FE8J-/FE8-specific** (the two dead splin
 
 ---
 
-## ROI — effort vs value to byte-match the remaining 7
+## ROI — effort vs value to byte-match the remaining 6
 
-The 7 already have readable `src/nonmatching/*.c` reconstructions and a green,
-self-contained checksum build. Matching them moves **2,976 bytes** from descriptive asm
-to compiled C and advances axis-2 from **99.92% toward 100%** (about **+0.012% per
-function; +0.08% total**). It is valuable decomp polish, not a functional bug fix.
+The 6 already have readable `src/nonmatching/*.c` reconstructions and a green,
+self-contained checksum build. Matching them moves **2,764 bytes** from descriptive asm
+to compiled C and advances axis-2 from **99.93% toward 100%** (about **+0.012% per
+function; +0.07% total**). It is valuable decomp polish, not a functional bug fix.
 
 The 2026-07-10 results correct the old effort model: deterministic levers are **not
 proven exhausted merely because a permuter plateaus**. AddAttr yielded to a zero-code BB
@@ -548,7 +560,6 @@ then stop repeated variants of the same idea and hand off to community/permuter 
 | 5 | GetUnitDefinitionFormEventScr (464 B) | live | clean register permutation | MED-HIGH |
 | 8 | SelectSummonPos (392 B) | live | spill-slot/frame decision | LOW |
 | 13 | sub_80A6D34 (280 B) | dead | pure coloring | LOW |
-| 15 | DecodeAndVerifyArenaRecord (212 B) | dead | callback-in-high-reg veneer | LOW |
 | 16 | GmapScreen2_Loop (544 B) | live | clean JP-vs-US coloring divergence | HIGH |
 
 ### Recommendation

@@ -1,6 +1,12 @@
 # Reconstruction-base byte-gaps (ground truth)
 
-> **UPDATE 2026-07-11:** axis-2 is now **99.92% (8685/8692), 7 still-asm**.
+> **UPDATE 2026-07-11:** axis-2 is now **99.93% (8686/8692), 6 still-asm**.
+> `DecodeAndVerifyArenaRecord` (`sub_80A6F1C`) matched byte-exact after the
+> paired-halfword stack shape, phase-local register aliases, and explicit
+> fenced r1-to-r2 mask copy reproduced the final allocator decisions. h2W8F
+> reports raw score 0 and the registry row is retired.
+>
+> **PRIOR UPDATE 2026-07-11:** axis-2 was **99.92% (8685/8692), 7 still-asm**.
 > The score-0 Br4VJ/uVVvN/gdTId/vdXu7/XOT5k harvest closes the historical
 > `sub_80A3300`, `sub_800E1FC`, `sub_807C8DC`, `sub_80A3528`, and
 > `sub_80A6E4C` gaps. Together with `DivinationRankSpriteUpdate`, these wins
