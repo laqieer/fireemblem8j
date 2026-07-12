@@ -1,8 +1,8 @@
 # Axis #2 (matching-C) — 6 still-asm functions, ranked recipe queue
 
 > **[UPDATE 2026-07-11 — axis-2 is now 6 still-asm (matching-C 99.93%, 8686/8692).]**
-> `DecodeAndVerifyArenaRecord` (`sub_80A6F1C`) matched locally on
-> `feat/axis2-compute-80a6f1c-copilot` using paired halfword stack homes,
+> `DecodeAndVerifyArenaRecord` (`sub_80A6F1C`) landed through D370 from the
+> preserved `feat/axis2-compute-80a6f1c-copilot` history using paired halfword stack homes,
 > phase-local r6/r9/r8/r4 aliases, and the fenced r1-to-r2 mask copy. h2W8F
 > reports raw score 0 and its registry row is retired.
 >

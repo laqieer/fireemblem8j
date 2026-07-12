@@ -11023,3 +11023,59 @@ libc/libgcc, with **7 still descriptive asm**. Source-form code is
 **Decision.** Publish this branch as one release candidate with preserved
 per-function/fix commits plus one focused integration/docs follow-up. Do not
 merge to main, close issues, or weaken shiftcheck as part of this preparation.
+
+## D370 — promote `DecodeAndVerifyArenaRecord` from h2W8F score zero; matching-C 99.93% (8686/8692), 6 remain (2026-07-12)
+
+**Provenance and integration method.** The owned `sub_80A6F1C` scratch h2W8F
+reports live raw score **0**. The finalized feature branch is a linear two-commit
+history: match commit `6aa5f35faddd8b05df9d376ed91e93cf7956bd99`, followed only by
+the lifecycle/docs closure `132c175371c1646c9ef9e8b9c3f6c339fcfbd90d`.
+The serial integrator merged that listed branch, without squash/amend/rebase or
+history rewriting, onto green seed-v2 main
+`f7a8e41a89c181d3ef5df3f80088b15cb40b8127`. The unrelated staged
+`scripts/tools/decompme/registry.tsv` work in the shared checkout remained
+untouched; all oracle work ran in an isolated non-main integration worktree.
+
+**Source and semantic safety.** `src/DecodeAndVerifyArenaRecord.c` preserves the
+real caller-supplied callback. Phase-local hard-register aliases reproduce the
+ROM allocation (`chk` r6, callback r9, `&cbarg` r8, loop base r4), while paired
+`u16 tags[2]` homes reproduce the frame-8 halfword stores. The only inline asm is
+an empty `+r` lifetime fence used to induce the observed r1→r2 copy; there is no
+`.hword`, `.word`, byte injection, scripted branch, or fixed-callee substitute.
+The object carries a real `R_ARM_THM_CALL _call_via_r9` relocation, and linked
+disassembly at `0x080A6F94` is `bl 0x080D65E0 <_call_via_r9>` with the callback
+loaded from argument r0 into r9 and `&cbarg`/payload passed in r0/r1.
+
+**Lifecycle closure.** The carve now comes from
+`src/DecodeAndVerifyArenaRecord.o(.text)` over `0x080A6F1C..0x080A6FF0`.
+`asm/sub_80A6F1C.s`, its gbadisasm layout fragment, and
+`src/nonmatching/sub_80A6F1C.c` are removed. No baseline alias/drop is needed:
+the old asm and new C object both own the same friendly symbol, the final ELF
+contains one `DecodeAndVerifyArenaRecord` definition, and no `sub_80A6F1C`
+alias remains. The h2W8F registry row is absent after the upstream score check.
+The pulled h2W8F function body normalizes exactly to the project source after
+removing scratch-only `.set` scaffolding and applying project names/types.
+
+**Independent evidence.**
+- full linked and cold `make compare` → `fireemblem8.gba: OK`; the exact
+  `0xD4`-byte promoted range is identical to `baserom.gba`
+- ARM-vs-ARM SMT → `PROVEN-BOUNDED(3)`; Unicorn differential → `EQUIV
+  (60 trials)` / `EQUIV: 1/1`
+- bounded shared-oracle CBMC → **0 of 409 failed**, `VERIFICATION SUCCESSFUL`;
+  loop mutation refutes `same buffer arg bytes`, mask mutation refutes
+  `return value equal`
+- cut-point upgrade rechecked → **0 of 94 failed** over the full u16 length
+  domain; `-`→`+` mutation refuted
+- `make shiftcheck` → 0 HIGH/high-confidence suspects;
+  `make check-nonmatching` → all remaining 6 staging files valid;
+  `check_selfcontained.py` → 0 baserom incbins / 100%; post-wave baseline-dedup
+  and gap-closure scripts leave no tracked changes
+
+**Measured result and decision.** `scripts/calcprogress.py` reports matching-C
+**99.93% (8686/8692)**, source-form code **898,664/901,428 bytes (99.69%)**,
+and exactly six still-asm/nonmatching targets: `sub_800A34C`, `sub_800A594`,
+`sub_800FAD0`, `sub_807D3BC`, `sub_80A6D34`, and `sub_80C05C8`.
+Accept the complete feature history and publish it to `main` only with
+fast-forward landing plus exact-pushed-SHA `CI` (including deploy where present)
+and `Secret scan` success. Mirror the final public SHA/evidence on the existing
+issue #14 project item without reopening or closing it.
