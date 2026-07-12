@@ -22,11 +22,18 @@ stays `make compare` (SHA-1). Equivalence proving is a **new upper tier of the
 existing NON_MATCHING C ladder** (`docs/nonmatching.md`), not a change to the
 oracle.
 
-> **Cohort status (2026-07-10):** this document records the original
-> 16-function proof cohort. Three members have since graduated to byte-matching C:
-> `PrepareBattleGraphicsMaybe`, `AddAttr2dBitMap`, and
-> `Augury_InitResultScreen`. The live `src/nonmatching/` frontier is now **13**;
+> **Cohort status (2026-07-11):** this document records the original
+> 16-function proof cohort. Ten members have since graduated to byte-matching C:
+> `PrepareBattleGraphicsMaybe`, `AddAttr2dBitMap`, `Augury_InitResultScreen`,
+> `DivinationRankSpriteUpdate`, `PutDivinationRankSprite`, `Event18_ColorFade`,
+> `AdjustNewUnitPosition`, `DrawAuguryResultPanel`, `EncodeLinkArenaRecord`, and
+> `DecodeAndVerifyArenaRecord`. The live `src/nonmatching/` frontier is now **6**;
 > the 16-based proof ratios below remain historical results for that fixed cohort.
+> For the final decoder source, the current compiled-vs-ROM tools now report
+> `PROVEN-BOUNDED(3)` and differential EQUIV for 60/60 trials; the existing
+> bounded shared-oracle CBMC harness remains successful at 0/409 assertions, with
+> both adversarial mutations refuting as intended. Commit `6aa5f35fa` also passes
+> the stronger full-ROM `make compare` oracle.
 
 ## The exact proposition posed to Z3 (the proof obligation)
 
@@ -194,7 +201,7 @@ function; the highest loop-unroll depth that proves is reported):
 | `sub_80A2E64` | **PROVEN-BOUNDED(1); MATCHED 2026-07-11** | score-0 `l4bts`; P13 pointer-role readback/live-range preservation |
 | `sub_800A34C` | **DIFF-EQUIV** (differential; SMT `DIVERGENCE`) | stack-frame buffers at different spill offsets → intractable for modular SMT; concrete execution matches all memory effects over 145 trials (dead return, see below) |
 | `sub_800FAD0` | **DIFF-EQUIV** (differential; SMT `UNKNOWN`) | 5 loops → SMT path-explosion; concrete execution matches full observable (return + writes) over 200 trials |
-| `sub_80A6F1C` | ~DIFF (INCONCLUSIVE-CB) | link-arena codec w/ callback; **118/120 in-domain trials identical**, 2 codec-edge/callback residuals — strong corroboration, not a clean sweep |
+| `sub_80A6F1C` | **PROVEN-BOUNDED(3); MATCHED 2026-07-11** | exact compiled bytes now prove under ARM SMT and differential is EQUIV 60/60; the historical pre-match callback run was 118/120, while shared-oracle CBMC remains 0/409 |
 | `sub_8057F80` | research-grade | 1248-insn monster reading ~30 live battle-anim globals — faults black-box (needs a live battle frame); equivalence rests on its header's block-by-block objdump |
 
 **Coverage: 12/16 formally SMT-proven + 2 differential-only (`sub_800A34C`,
@@ -353,7 +360,7 @@ bounded-proven or stronger; 1 (`sub_8057F80`) remains at the dynamic tier.**
 
 | tier | how | which of the 16 |
 | --- | --- | --- |
-| byte-matching | in `make compare` (SHA-1) | `sub_8057F80`, `sub_8001570`, and `sub_80A390C` have since graduated; 13 remain |
+| byte-matching | in `make compare` (SHA-1) | 10 of the original 16 have graduated, including `sub_80A6F1C`; 6 remain |
 | **unbounded-proven** (cut-point / loop-invariant) | CBMC loop contracts, ∀-iterations | `sub_80A6F1C` (de-obf loop, full u16 domain) — first at this tier |
 | **bounded-proven** (BMC) | `PROVEN-BOUNDED(N)` (ARM-vs-ARM, compiler-free) + `PROVEN-BOUNDED-CBMC-CVC` (CBMC C-vs-C, trusts m2c+agbcc) | **14**: 12 ARM-vs-ARM + `sub_800A34C` + `sub_800FAD0` (CBMC C-vs-C); (`sub_80A6F1C` also has a bounded proof but sits above at unbounded) |
 | differential / dynamic | mGBA live-state | `sub_8057F80` (115/115 writes+ret; a *sound* bounded CBMC proof is a solver-sink — full write-set observable + 204-call anti-masking blows up, narrower closes are degenerate; documented in `focused/sub_8057F80/README.md`) |

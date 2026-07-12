@@ -261,11 +261,14 @@ declarations, and two empty `+r` fences under `-fno-gcse`. The project adaptatio
 strips the scratch-only `.set gUnk_08A95478,...`; it contains no raw opcode asm.
 Full linked `make compare`, not the standalone object or decomp.me score, proved it.
 
-The 2026-07-11 follow-up harvest adds three complementary address/lifetime forms:
+The 2026-07-11 follow-up harvest adds four complementary address/lifetime forms:
 Br4VJ splits signed x/y loads before a pinned loop origin, vdXu7 explicitly hoists
-proc-field addresses while rematerializing the tilemap base at use sites, and XOT5k
-keeps a caller-supplied callback in r3 so the compiler selects `_call_via_r3`.
-These are allocation levers, not permission to replace real calls or pointers.
+proc-field addresses while rematerializing the tilemap base at use sites, XOT5k
+keeps a caller-supplied callback in r3 so the compiler selects `_call_via_r3`, and
+h2W8F shapes two halfword stack homes with `u16 tags[2]`, scopes the real callback
+and address aliases to r9/r8/r4, and uses an empty `+r` fence to preserve the observed
+r1→r2 constant copy. These are allocation levers, not permission to replace real
+calls or pointers; the fence emits no opcode.
 
 ---
 
@@ -341,9 +344,10 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
    The same lifecycle was then completed for ENay1/Br4VJ
    (`PutDivinationRankSprite`), nlJVc/uVVvN (`Event18_ColorFade`),
    taZrH/gdTId (`AdjustNewUnitPosition`), MaiDT/vdXu7
-   (`DrawAuguryResultPanel`), and g7FXU/XOT5k (`EncodeLinkArenaRecord`):
-   all ten owned/community scratches report raw score 0, and exactly the five
-   owned registry rows were removed.
+   (`DrawAuguryResultPanel`), g7FXU/XOT5k (`EncodeLinkArenaRecord`), and the
+   locally matched owned h2W8F (`DecodeAndVerifyArenaRecord`): all eleven
+   owned/community scratch pages report raw score 0, and exactly the six owned
+   registry rows were removed.
 
    **Do not simplify a harvested source before measuring it.** In `l4bts`, reading
    the sine value through the reused `data` pointer looked equivalent to replacing
@@ -355,8 +359,9 @@ fork), harvest it instead of re-deriving. Workflow (proven on `sub_8057F80`/rtMN
    **Callback-veneer safety.** If a match depends on `_call_via_rN`, keep the
    caller-supplied function pointer, pin it only to the ROM-proven register, and
    invoke it normally in C. Let agbcc emit the veneer. XOT5k's real-project
-   adaptation pins `callback` to r3 and compiles to `_call_via_r3`; it does not
-   substitute a fixed callee and contains no raw branch opcode. A fixed target or
+   adaptation pins `callback` to r3 and compiles to `_call_via_r3`; h2W8F pins
+   its real callback alias to r9 and likewise compiles to `_call_via_r9`. Neither
+   substitutes a fixed callee or contains a raw branch opcode. A fixed target or
    scripted `bl` may match bytes while changing semantics and must be rejected.
 
 ### ⚠️ The gotcha: a score-0 scratch can match via a MISLABELED symbol

@@ -26,7 +26,7 @@ NON_MATCHING C **unblocks documentation and readability of the remaining
 hard functions WITHOUT ever touching `make compare`**. (For the current count
 of genuinely unmatched functions, see `docs/frontier.md` — the single source of
 truth. The ~5942 figure above is a historical snapshot from when this document
-was written; matching-C is now at 99.92% with 7 staged functions.) It is an *enhancement*,
+was written; matching-C is now at 99.93% with 6 staged functions.) It is an *enhancement*,
 not a goal change: CLAUDE.md already accepts descriptive asm as "real source"
 for the final goal. NON_MATCHING C is a staging area for future matching plus
 living documentation of intent — never a byte-match claim.
@@ -243,7 +243,7 @@ asm/<fn>.s           base.c          src/nonmatching/      nonmatchings/    src/
 
 ---
 
-## Help wanted — decomp.me scratches (start here to match the remaining 7)
+## Help wanted — decomp.me scratches (start here to match the remaining 6)
 
 These scratches are **work-in-progress starting points**, not byte-match claims. The
 owned `ABitG` (`AddAttr2dBitMap`) and `xYHce` (`Augury_InitResultScreen`) families were
@@ -258,6 +258,10 @@ Br4VJ/uVVvN/gdTId/vdXu7/XOT5k fork verified raw score 0. Stock decomp.me may sti
 show NEAR progress that cannot reproduce project-local compiler context, so
 `make compare` remains the final oracle.
 
+`DecodeAndVerifyArenaRecord` (`sub_80A6F1C`) was then matched locally and published
+back to owned h2W8F at raw score 0. Its registry row was removed only after the
+upstream score check and the full project oracle/shiftcheck gates passed.
+
 | # | function | name | decomp.me scratch |
 |---:|---|---|---|
 | 1 | `sub_800A34C` | worldmap coeff/segment-search | https://decomp.me/scratch/ABtKz |
@@ -265,8 +269,7 @@ show NEAR progress that cannot reproduce project-local compiler context, so
 | 3 | `sub_800FAD0` | GetUnitDefinitionFormEventScr | https://decomp.me/scratch/eZzgG |
 | 4 | `sub_807D3BC` | SelectSummonPos | https://decomp.me/scratch/J1ka1 |
 | 5 | `sub_80A6D34` | password/header decode | https://decomp.me/scratch/9myLi |
-| 6 | `sub_80A6F1C` | password decode/verify | https://decomp.me/scratch/h2W8F |
-| 7 | `sub_80C05C8` | GmapScreen2_Loop | https://decomp.me/scratch/R7AaX |
+| 6 | `sub_80C05C8` | GmapScreen2_Loop | https://decomp.me/scratch/R7AaX |
 
 
 ## Metrics
