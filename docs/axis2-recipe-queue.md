@@ -1,6 +1,13 @@
-# Axis #2 (matching-C) — 6 still-asm functions, ranked recipe queue
+# Axis #2 (matching-C) — 5 still-asm functions, ranked recipe queue
 
-> **[UPDATE 2026-07-11 — axis-2 is now 6 still-asm (matching-C 99.93%, 8686/8692).]**
+> **[UPDATE 2026-07-13 — axis-2 is now 5 still-asm (matching-C 99.94%, 8687/8692).]**
+> `DecodeLinkArenaRecordHeader` (`sub_80A6D34`) landed after the serialized
+> `DecodeAndVerifyArenaRecord` (`sub_80A6F1C`) promotion. The header decoder
+> matched through FE6J/FE7J/FE7U cross-version block alignment plus P14
+> two-address accumulator steering; owned scratch `9myLi` reports raw score 0
+> with no match override and its registry row is retired.
+>
+> **[PRIOR UPDATE 2026-07-12 — axis-2 was 6 still-asm.]**
 > `DecodeAndVerifyArenaRecord` (`sub_80A6F1C`) landed through D370 from the
 > preserved `feat/axis2-compute-80a6f1c-copilot` history using paired halfword stack homes,
 > phase-local r6/r9/r8/r4 aliases, and the fenced r1-to-r2 mask copy. h2W8F
@@ -22,11 +29,9 @@
 >    then try scoped arg materialization/barriers learned from uVVvN/gdTId.
 > 3. `sub_807D3BC` — spill/frame decision; test only exact ROM-derived pins or
 >    basic-block boundaries, not broad pin swarms.
-> 4. `sub_80A6D34` — pure password-codec coloring; try XOT5k's scoped
->    base/count lifetimes without copying the encoder's callback machinery.
-> 5. `sub_800A34C` — large whole-function coloring wall; try address-role reuse
+> 4. `sub_800A34C` — large whole-function coloring wall; try address-role reuse
 >    and explicit phase boundaries before more permuter compute.
-> 6. `sub_800A594` — sibling spline spill wall; lowest runtime ROI (dead root).
+> 5. `sub_800A594` — sibling spline spill wall; lowest runtime ROI (dead root).
 >
 > Full linked `make compare` remains the gate. Re-poll every active registry
 > family before local experimentation.
@@ -79,7 +84,7 @@
 
 ## Historical D307/W3 triage
 
-Retained for provenance; the seven-entry queue above is the current work list.
+Retained for provenance; the five-entry queue above is the current work list.
 
 ## HIGH-CONFIDENCE RECONSTRUCTS (clear asm body, do first)
 - **#3 sub_80D17C8** (124B, classchg-sel): JP reads precomputed `gClassReelNameTable @0x089CF318`
@@ -105,10 +110,11 @@ Retained for provenance; the seven-entry queue above is the current work list.
 
 ## DEFERRED (plateaued reg-alloc walls / large reconstructs, lowest priority)
 - RegisterTsaWithOffset, GmapScreen2_Loop, PutFaceOnBackGround,
-  sub_800A34C (spline 534/584), sub_80A6D34, and sub_800A594.
+  sub_800A34C (spline 534/584) and sub_800A594.
   — [`Event18_ColorFade`, `AdjustNewUnitPosition`, `sub_80A3300`,
   `sub_80A3528`, `sub_80A6E4C`, `AddAttr2dBitMap`,
   `PrepareBattleGraphicsMaybe`, `sub_80A2E64`, `sub_80A390C`, `sub_80A6F1C`,
+  `sub_80A6D34`,
   and `sub_80A730C`
   have matched and are no longer queue entries.]
 

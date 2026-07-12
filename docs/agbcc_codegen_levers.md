@@ -218,11 +218,12 @@ primary evidence) against its matched fork yields a reusable lever set. These ex
 §1–§9 with a new, more surgical family: **inline-asm constraint scripting** — directly
 commanding agbcc's register allocator / instruction selector without changing behaviour.
 They crack exactly the spill-decision + high-pressure reg-coloring NEARs §7 said flag
-sweeps could not. Three local-oracle matches add clean/scoped source levers:
+sweeps could not. Four local-oracle matches add clean/scoped source levers:
 `AddAttr2dBitMap` (P9), `Augury_InitResultScreen` (P12), and
-`DecodeAndVerifyArenaRecord` (P1/P4/P13).
+`DecodeAndVerifyArenaRecord` (P1/P4/P13), and
+`DecodeLinkArenaRecordHeader` (P14).
 
-The 18 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
+The 19 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scripting*:
 
 | fork (fn) | pins | `=r`/`+r` reg-barrier | `+m` mem-barrier | inline-asm | headline lever |
 |---|---|---|---|---|---|
@@ -242,6 +243,7 @@ The 18 span a spectrum from *pure clean source-shape* (0 asm) to *total asm scri
 | vdXu7 `DrawAuguryResultPanel` (sub_80A3528, 880 B) | 16 | 6 | 0 | 1 | P12/P13-style field-address hoist + deliberate tilemap rematerialization + P3 post-increment `ldmia` |
 | XOT5k `EncodeLinkArenaRecord` (sub_80A6E4C, 208 B) | 8 | 1 | 0 | 0 | Pin the **real callback** to r3 and call it normally so agbcc emits `_call_via_r3`; scoped base/count lifetimes + one fence |
 | h2W8F `DecodeAndVerifyArenaRecord` (sub_80A6F1C, 212 B) | 6 | 1 | 0 | 0 | Paired `u16 tags[2]` stack shaping + phase-local pins (`chk`=r6, callback=r9, `&cbarg`=r8, loop base=r4) + int helpers/one explicit narrow + fenced r1-to-r2 mask copy |
+| local `DecodeLinkArenaRecordHeader` (sub_80A6D34, 280 B) | 26 | 12 | 0 | 12 empty | **P14** two-address accumulator steering + phase-local struct alias; cross-version FE6J/FE7J block alignment |
 | local `AddAttr2dBitMap` (sub_8001570, 224 B) | 0 | 0 | 0 | 0 | **P9** zero-instruction `do { } while (0);` BB separator flips callee-save copy order |
 | local `Augury_InitResultScreen` (sub_80A390C, 612 B) | 0 | 0 | 0 | 0 | **P12** destination-field readback + equivalent branch polarity |
 
@@ -456,8 +458,45 @@ P13 is the pointer-local analogue of P12: P12 reads a just-written destination
 field to preserve its address; P13 reads through an equivalent pointer local to
 preserve the pointer's role and lifetime. Highest-transfer remaining targets are
 `sub_800A34C` (table/scratch-pointer pressure with `-fno-gcse`),
-`sub_80A6D34` (phase-local codec bases), and `sub_80C05C8` (node/table address
-roles). Harvest any score-0 family member before applying the lever locally.
+and `sub_80C05C8` (node/table address roles). `sub_80A6D34` is now the matched
+worked example that extends P13 into P14. Harvest any score-0 family member
+before applying the lever locally.
+
+**P14 — two-address accumulator steering + phase-local struct alias.**
+When only a commutative operand order or field-address materialization remains,
+write the source as the target's two-address data flow instead of relying on
+`a + b` spelling (agbcc canonicalizes that spelling). Materialize the value in
+its destination register, fence it only where a later load would otherwise move
+ahead, then update it in place:
+```c
+register int checksum_addr asm("r0");
+checksum_addr = count_value;
+asm("" : "+r"(checksum_addr));  /* keep count load before buffer literal */
+call_buf = gBuf;
+checksum_addr += (int)call_buf; /* adds r0,r0,r6 */
+
+register int at_addr asm("r2");
+at_addr = j;
+at_addr += (int)base_read;      /* adds r2,r3,r1 */
+```
+For repeated field read/write tails, keep the struct base—not a `u16 *field`
+interior pointer—in the low register. The struct type preserves immediate field
+offsets and prevents agbcc from converting offsets 2/4 into pointer adds plus a
+shared tail:
+```c
+register struct Header *header_low asm("r1");
+header_low = header;
+asm("" : "+r"(header_low));
+bits |= header_low->checksum_a;
+header_low->checksum_a = bits;
+```
+`DecodeLinkArenaRecordHeader` (`sub_80A6D34`) matched this way after FE6J
+`func_fe6_08083180` and FE7J `sub_809E4D0` proved the CFG, call order, widths,
+and phase boundaries were identical except for FE8J's full-width mask and
+30-round bound. No helper was inlined, no callback exists in this function, and
+no raw opcode asm is used. The decisive lesson: **cross-version alignment can
+reduce a “global coloring wall” to isolated two-address DAG choices; synthesize
+those exact DAGs before running another broad search.**
 
 ### How to run this on a NEAR (escalation order)
 1. **Confirm it's a coloring/spill NEAR** (same instruction *count/opcodes*, regs or spill

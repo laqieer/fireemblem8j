@@ -3,7 +3,29 @@
 **Read this first, then [`docs/frontier.md`](frontier.md) (the SSoT for what remains) and
 [`docs/maintenance.md`](maintenance.md).** Updated mid-session 2026-06-24.
 
-> **[REFRESH 2026-07-12 — DecodeAndVerify serial landing (D370).]**
+> **[REFRESH 2026-07-13 — DecodeLinkArenaRecordHeader serial promotion.]**
+> The score-zero follow-up from `feat/axis2-compute-80a6d34-copilot`
+> (`00b86b22d57e210ad59e9ac08f3052b57344c4a1` →
+> `58fd4cf528a57b53f9889143fdfd6708b4cd96e7`) was transplanted onto the
+> serialized mainline without duplicating the already-landed score-495 seed.
+> Ground truth from `python3 scripts/calcprogress.py` is matching-C
+> **99.94% (8687/8692, 5 still-asm)**, source-form code
+> **898,944/901,428 bytes (99.72%)**, source-form data **100%**, and named
+> symbols **100% (12713/12713)**.
+>
+> `DecodeLinkArenaRecordHeader` now matches through FE6J `func_fe6_08083180`,
+> FE7J `sub_809E4D0`, and FE7U `sub_809DAB8` block alignment plus P14
+> two-address r0/r2 accumulators, r1 delta/mask roles, and an r1 struct alias.
+> The source retains the real calls and contains only empty lifetime
+> constraints—no raw opcode or fake-call workaround. Owned scratch `9myLi`
+> compiles at raw score 0 with no match override; its canonical function-payload
+> SHA-256 matches the project source and its registry row is absent.
+>
+> The remaining five are `sub_800A34C`, `sub_800A594`, `sub_800FAD0`,
+> `sub_807D3BC`, and `sub_80C05C8`. Do not redispatch `sub_80A6D34` or
+> `sub_80A6F1C`.
+
+> **[PRIOR REFRESH 2026-07-12 — DecodeAndVerify serial landing (D370).]**
 > The complete linear history from `feat/axis2-compute-80a6f1c-copilot`
 > (`6aa5f35faddd8b05df9d376ed91e93cf7956bd99` →
 > `132c175371c1646c9ef9e8b9c3f6c339fcfbd90d`) was accepted on top of the green

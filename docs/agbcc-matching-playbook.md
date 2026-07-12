@@ -270,6 +270,21 @@ and address aliases to r9/r8/r4, and uses an empty `+r` fence to preserve the ob
 r1→r2 constant copy. These are allocation levers, not permission to replace real
 calls or pointers; the fence emits no opcode.
 
+### 5e. Cross-version two-address synthesis [verified-in-repo, sub_80A6D34]
+
+When a function is present in FE6J/FE7J/FE7U but absent from FE8U, align the
+regional assembly before assuming a JP-only rewrite. `DecodeLinkArenaRecordHeader`
+has the same 13-block CFG and call sequence in FE6J/FE7J/FE7U; that proof reduced
+its score-495 residual to two commutative `adds` operand orders plus field-address
+materialization.
+
+Do not keep respelling `a+b`: agbcc canonicalizes it. Reproduce the target's
+two-address data flow with an in-place accumulator (`x=a; fence; x+=b`) and use a
+phase-local struct pointer for immediate field offsets. This is cookbook **P14**.
+It matched the linked ROM without helper inlining, fake calls/symbols, raw opcode
+asm, callback changes, or semantic weakening. Use this workflow before Path-B
+microprobes when a cross-version twin exists.
+
 ---
 
 ## 6. Workflow: the checklist to run when a function is 1–2 instructions off
