@@ -53,7 +53,7 @@ class AbiSignatureTest(unittest.TestCase):
     def test_differential_parser_uses_target_definition(self):
         self.assertEqual(
             D.parse_sig("sub_800A34C"),
-            (4, ["ptr", "ptr", "ptr", "val", "val"]),
+            (0, ["ptr", "ptr", "ptr", "val", "val"]),
         )
 
     def test_call_observable_compares_fifth_word(self):

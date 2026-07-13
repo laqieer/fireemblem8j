@@ -45,7 +45,7 @@ def signature_for_target(target):
     return None
 
 
-def _strip_comments_and_literals(source):
+def strip_comments_and_literals(source):
     """Remove comments and literals while preserving punctuation/line shape."""
     out = []
     i = 0
@@ -108,7 +108,7 @@ def _strip_comments_and_literals(source):
 
 def _argument_counts(source, callee):
     """Return top-level argument counts for every callee(...) occurrence."""
-    clean = _strip_comments_and_literals(source)
+    clean = strip_comments_and_literals(source)
     counts = []
     for match in re.finditer(r"\b" + re.escape(callee) + r"\s*\(", clean):
         start = clean.find("(", match.start())

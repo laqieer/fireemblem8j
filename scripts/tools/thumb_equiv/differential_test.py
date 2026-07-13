@@ -89,15 +89,11 @@ def parse_sig(fn):
     signature. arg_kind: 'ptr' | 'fnptr' | 'val'."""
     c = os.path.join(P.NMDIR, fn + ".c")
     with open(c, encoding="utf-8", errors="replace") as source_file:
-        txt = source_file.read().splitlines()
-    inb = False
+        txt = P.ABI.strip_comments_and_literals(source_file.read()).splitlines()
     line = None
     target = re.compile(r"\b" + re.escape(fn) + r"\s*\(")
     for l in txt:
-        if "*/" in l:
-            inb = True
-            continue
-        if inb and target.search(l) and ";" not in l:
+        if target.search(l) and ";" not in l:
             line = l
             break
     if line is None:
